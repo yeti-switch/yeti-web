@@ -1,28 +1,28 @@
 country_id: &wf 234
 networks:
 # Mobile Networks
-- id: &manuia_mobile 3865
-  name: WF Manuia mobile
-  uuid: e1e54d9a-3685-430f-b8dd-7ac33e632777
+- id: &wf_manuia_mobile 4391
+  name: WF Manuia Mobile
+  uuid: 72407c28-16b9-4d52-abe2-677818c8c802
   type_id: 3
 # Country code Networks
-- id: 3012
-  name: WF Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &wf_fixed_cc 4842
+  name: WF Fixed Cc
+  uuid: 1d194afe-3ea2-48a5-b5d0-4015f47287f7
   type_id: 17
 # Supplementary services Networks
-- id: &special_services 3075
-  name: WF Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &wf_special_services 5058
+  name: WF Special Services
+  uuid: d2676405-ec32-472c-9997-ae67670904b8
   type_id: 14
-- id: &grand_danger_service 4630
-  name: WF Grand danger service
-  uuid: caf0ddf4-c645-4432-ac51-e1065476d114
+- id: &wf_grand_danger_service 6270
+  name: WF Grand Danger Service
+  uuid: f57bd70e-ab05-4b70-9532-72ca4cc98500
   type_id: 14
 # Fixed Networks
-- id: &fixed 3012
+- id: &wf_fixed 5304
   name: WF Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: d7dffe6a-51aa-4615-9035-b09979d07dce
   type_id: 12
 network_prefixes:
 # Mobile Prefixes
@@ -30,79 +30,79 @@ network_prefixes:
   prefix: '68140'
   number_min_length: 11
   number_max_length: 11
-  uuid: 5e5af349-cebd-4795-92c5-ccc4a3a3c248
+  uuid: 5fa09c35-d9a0-4c2e-9bf4-99e4d48403c3
   country_id: *wf
-  network_id: *manuia_mobile
+  network_id: *wf_manuia_mobile
 - id: 249292
   prefix: '681499'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1455399b-1d23-4288-8dc1-bb9e7b9eff49
+  uuid: 2bed09f7-7344-4905-8c27-f7f600e1c060
   country_id: *wf
-  network_id: *manuia_mobile
+  network_id: *wf_manuia_mobile
 - id: 259991
   prefix: '68180'
   number_min_length: 11
   number_max_length: 11
-  uuid: 3cd1a4ba-c9c1-4505-b7a0-f050faf2ba4a
+  uuid: 491058ee-064a-4137-bba7-14cc46b76197
   country_id: *wf
-  network_id: *manuia_mobile
+  network_id: *wf_manuia_mobile
 - id: 260301
   prefix: '68182'
   number_min_length: 11
   number_max_length: 11
-  uuid: 3f0aa154-ec24-4f86-a0d7-879a23a63f78
+  uuid: d997a2c3-0e8d-4ef8-895b-48bf12c0f741
   country_id: *wf
-  network_id: *manuia_mobile
+  network_id: *wf_manuia_mobile
 - id: 260417
   prefix: '68183'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8c6e0b15-5f2d-4a0b-81df-264c24e464c1
+  uuid: 90ba9d02-77fa-49f4-a4a1-5accebb218a8
   country_id: *wf
-  network_id: *manuia_mobile
+  network_id: *wf_manuia_mobile
 # Country code Prefixes
 - id: 248004
   prefix: '681'
   number_min_length: 5
   number_max_length: 9
-  uuid: 073d4f7e-af1f-46c2-af57-c134e6cb25d8
+  uuid: 44ca22c5-4d7c-4bc0-9c8f-1c0d9fd2b361
   country_id: *wf
-  network_id: *fixed
+  network_id: *wf_fixed_cc
 # Supplementary services Prefixes
 - id: 248399
   prefix: '6811'
   number_min_length: 6
   number_max_length: 8
-  uuid: 8915b017-18d3-4f4c-b903-559e0fbbfd1a
+  uuid: a42e054f-916d-44cd-9e70-435bc3e01ffa
   country_id: *wf
-  network_id: *special_services
+  network_id: *wf_special_services
 - id: 262255
   prefix: '6819860'
   number_min_length: 11
   number_max_length: 11
-  uuid: f1ab3192-d351-440a-9f4d-4e948322bd25
+  uuid: 96d58c28-e538-4c49-af04-0bfdd2f16652
   country_id: *wf
-  network_id: *grand_danger_service
+  network_id: *wf_grand_danger_service
 # Fixed Prefixes
 - id: 249366
   prefix: '68150'
   number_min_length: 11
   number_max_length: 11
-  uuid: c5f2a0df-7700-4e90-9421-b294aa26532d
+  uuid: 98f0f907-2d15-4323-8464-0aeb766aa0e0
   country_id: *wf
-  network_id: *fixed
+  network_id: *wf_fixed
 - id: 251552
   prefix: '68172'
   number_min_length: 11
   number_max_length: 11
-  uuid: 19d6cdf4-1ed1-419b-8d83-a8c08229c876
+  uuid: 57ecd87f-809a-46ec-880e-6840b717cab4
   country_id: *wf
-  network_id: *fixed
+  network_id: *wf_fixed
 - id: 258036
   prefix: '68168'
   number_min_length: 11
   number_max_length: 11
-  uuid: f4b0c795-3209-427c-bd6d-b14cc8f707ec
+  uuid: 2a3a917c-c9b6-4909-a479-aeac79555098
   country_id: *wf
-  network_id: *fixed
+  network_id: *wf_fixed

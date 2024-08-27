@@ -1,36 +1,36 @@
 country_id: &ci 53
 networks:
 # Fixed Networks
-- id: 3012
+- id: &ci_fixed 4183
   name: CI Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 9642b200-fd48-4812-a228-05446311203e
   type_id: 12
 # Mobile Networks
-- id: &moov_africa_mobile 3860
-  name: CI Moov africa mobile
-  uuid: 44654d4d-a1c6-4a84-9ab9-7135fae6f2a9
+- id: &ci_moov_africa_mobile 4382
+  name: CI Moov Africa Mobile
+  uuid: 5200b235-31ee-4b59-af97-2d0da1195893
   type_id: 3
-- id: &mtn_mobile 3090
-  name: CI Mtn mobile
-  uuid: 9254fa34-b4e4-4885-b7b6-0fa059bb3a8a
+- id: &ci_mtn_mobile 4424
+  name: CI Mtn Mobile
+  uuid: 8713c9d4-10ee-46be-b0a8-9213dfb9a783
   type_id: 3
-- id: &orange_mobile 3219
-  name: CI Orange mobile
-  uuid: a3fa5aa9-21c4-4621-ab4b-2ae703353a78
+- id: &ci_orange_mobile 4451
+  name: CI Orange Mobile
+  uuid: 40079810-7b0c-43e7-9feb-d248721a377f
   type_id: 3
 # Country code Networks
-- id: &fixed 3012
-  name: CI Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &ci_fixed_cc 4675
+  name: CI Fixed Cc
+  uuid: ea33bd27-2323-4454-bdd1-c3da6e9b09ba
   type_id: 17
 # Supplementary services Networks
-- id: &special_services 3075
-  name: CI Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &ci_special_services 4950
+  name: CI Special Services
+  uuid: 68466143-d4b5-4086-9b27-9024e57d1db1
   type_id: 14
-- id: &value_added_services 3139
-  name: CI Value added services
-  uuid: 2f8928d8-c0de-4c79-ac82-a5e8c0c0a327
+- id: &ci_value_added_services 5651
+  name: CI Value Added Services
+  uuid: a31a3c67-901b-4453-a0d1-d55115de90e3
   type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -38,1157 +38,1157 @@ network_prefixes:
   prefix: '22520'
   number_min_length: 13
   number_max_length: 13
-  uuid: d3debfb8-a331-4bbf-b329-10507dd4e8e2
+  uuid: fc5867d4-4415-4790-bc62-261d68cdf823
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243182
   prefix: '22521'
   number_min_length: 13
   number_max_length: 13
-  uuid: 12adaeab-7816-4f05-bc7c-6d22ac815c1f
+  uuid: 295ccb31-9682-4ab4-90e7-6d95dcb62682
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243210
   prefix: '22521208'
   number_min_length: 18
   number_max_length: 18
-  uuid: 6e40b6e3-b0db-4ee0-b131-3cd64754697a
+  uuid: 9dcbd54d-5a9b-47fe-b6f6-bde7e8856367
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243211
   prefix: '22521218'
   number_min_length: 18
   number_max_length: 18
-  uuid: 5497e478-6a27-44b2-a16f-3768b55d0682
+  uuid: d9c2a38f-f98f-4d28-a424-418802271ebd
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243212
   prefix: '22521228'
   number_min_length: 18
   number_max_length: 18
-  uuid: c15b5e03-1994-4a3b-b29d-6dcd939783e5
+  uuid: 0486e4ae-ff44-47c2-8287-8f91aeb7528d
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243213
   prefix: '22521238'
   number_min_length: 18
   number_max_length: 18
-  uuid: b492e577-dc04-401f-8de3-bd9400d57f57
+  uuid: 515cef52-f22d-4084-bcc0-c07a2beb82ec
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243279
   prefix: '22522'
   number_min_length: 13
   number_max_length: 13
-  uuid: 07dd33af-28b2-4b85-9a85-1996851223c4
+  uuid: 1e2fd2f6-19ca-4a97-9e36-28bb690b184d
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243473
   prefix: '22523'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1e47122e-0efc-403b-8e95-c05d24889909
+  uuid: 3ca9fe92-1dfd-47b4-a51e-7d2304e23c03
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243667
   prefix: '22524'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4d41070a-2d7c-4ca1-b84d-eb2378381632
+  uuid: 17b9727d-9ea4-4d26-ab9e-21eff42ef4e2
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243888
   prefix: '22525200'
   number_min_length: 18
   number_max_length: 18
-  uuid: c397e207-a124-4017-9721-1f6490226d2a
+  uuid: 25647f6b-7d7c-420c-992a-974e29d88a57
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243889
   prefix: '22525210'
   number_min_length: 18
   number_max_length: 18
-  uuid: 5570e557-1127-4419-8a08-64a3b0a91b50
+  uuid: 820c3d45-1ac0-404c-9132-b0013036bf2c
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243890
   prefix: '22525220'
   number_min_length: 18
   number_max_length: 18
-  uuid: 1677f7bc-0b4f-4158-80ff-49f57d002bdc
+  uuid: 616b2935-d314-4089-9e5c-026f33b54eaf
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243892
   prefix: '22525230'
   number_min_length: 18
   number_max_length: 18
-  uuid: 49dfacd0-ba26-45f7-8685-9bb478c1579f
+  uuid: 40ea5e88-630b-4b74-b4a6-a4549de784a3
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243893
   prefix: '22525240'
   number_min_length: 18
   number_max_length: 18
-  uuid: 67e589f0-3a17-464c-af7e-cfafbabac170
+  uuid: 13449c4b-3219-4437-8c02-fd94d7718e08
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243903
   prefix: '22525300'
   number_min_length: 18
   number_max_length: 18
-  uuid: 95142fb7-0066-4094-97dd-8dcf53686a96
+  uuid: 3116bb3c-38d4-48f3-a59d-cb98f308f356
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243904
   prefix: '22525310'
   number_min_length: 18
   number_max_length: 18
-  uuid: bc2837ca-0529-4c9b-a2a9-0167dd286fbc
+  uuid: d8be3e97-dbae-47b6-8df9-d83ff225de27
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243906
   prefix: '22525320'
   number_min_length: 18
   number_max_length: 18
-  uuid: 1962bf19-a3c3-444e-8802-0bedd9f969b9
+  uuid: 9198bdd0-8e79-47d5-ae3a-dec016bbc066
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243907
   prefix: '22525330'
   number_min_length: 18
   number_max_length: 18
-  uuid: 91d98707-af12-4cee-827c-353087c2e6ac
+  uuid: 1789867f-e636-4979-92ed-465fd6a5e3c5
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243909
   prefix: '22525340'
   number_min_length: 18
   number_max_length: 18
-  uuid: f15f95d6-38ca-4d80-8e48-8ea0d4763486
+  uuid: abdcb432-a86e-4477-a00a-4d5a8cd04e91
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243911
   prefix: '22525350'
   number_min_length: 18
   number_max_length: 18
-  uuid: aa50bb32-1f1f-4779-91cd-66b05da405b6
+  uuid: 67545426-367f-4c0b-9ae2-06c68f6df77f
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 243912
   prefix: '22525360'
   number_min_length: 18
   number_max_length: 18
-  uuid: 4747c1be-55cc-4187-b475-3fc91df6c2af
+  uuid: 7d6b9fea-989f-4dde-9c8b-55effe767788
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244207
   prefix: '22527202'
   number_min_length: 18
   number_max_length: 18
-  uuid: 11d4a679-8dc5-4295-a281-b1154b73af9d
+  uuid: 1bfae9b6-54ad-461a-9d40-01cbb4d408b0
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244208
   prefix: '22527203'
   number_min_length: 18
   number_max_length: 18
-  uuid: d560df7c-9b26-40ff-bca2-4add53864042
+  uuid: aaa42d61-af18-446e-9e86-31a4818b31b3
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244210
   prefix: '22527212'
   number_min_length: 18
   number_max_length: 18
-  uuid: 67d5daf1-a96b-4a8e-a807-bbf621766719
+  uuid: c2f0e326-e017-464d-9c74-bedbefc577a5
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244211
   prefix: '22527213'
   number_min_length: 18
   number_max_length: 18
-  uuid: 2c7aaa24-1c10-47b2-966e-cb875c95c1e4
+  uuid: 050959af-2bdc-476e-93b8-962828208788
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244212
   prefix: '22527215'
   number_min_length: 18
   number_max_length: 18
-  uuid: 3af15679-8f12-440a-a074-4672696276b1
+  uuid: 53b2a2b5-92a1-4ef3-b3a4-ea7704f54572
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244213
   prefix: '22527217'
   number_min_length: 18
   number_max_length: 18
-  uuid: 2cdccaf2-50af-466d-bb18-af9003b80f97
+  uuid: 9a9d2411-e00e-4d6a-9fbb-4ec70760f8f8
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244215
   prefix: '22527224'
   number_min_length: 18
   number_max_length: 18
-  uuid: 7a053bd1-7826-42ae-9c33-07d5a9100d9c
+  uuid: f45b7d1b-cee4-4ca2-87e8-62529e0f4413
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244216
   prefix: '22527225'
   number_min_length: 18
   number_max_length: 18
-  uuid: 69ab9fa7-abe3-4edf-abac-34ff7ff87fef
+  uuid: 589e242e-feaa-4fc7-ab78-500d92a94833
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244218
   prefix: '22527234'
   number_min_length: 18
   number_max_length: 18
-  uuid: 8b2190b3-7544-4723-a4dd-34239cddcf0d
+  uuid: 01e697b1-37b2-4fab-a55e-858eb3f5dcbd
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244219
   prefix: '22527235'
   number_min_length: 18
   number_max_length: 18
-  uuid: 7fc198be-9a81-411b-a327-b57dd80eac7a
+  uuid: 6ba339ee-8d5a-4bb9-aa38-c9379374eddd
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244221
   prefix: '22527243'
   number_min_length: 18
   number_max_length: 18
-  uuid: 27a7d2d7-4cb0-4805-985c-88869190c92c
+  uuid: d63d6787-d492-4c40-9c2c-0a15d5ba10d7
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244222
   prefix: '22527244'
   number_min_length: 18
   number_max_length: 18
-  uuid: f7102f8c-6973-4f8c-b929-809e305fef8e
+  uuid: 26da0359-2436-45e0-9aa1-5e5dc4683ddf
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244223
   prefix: '22527245'
   number_min_length: 18
   number_max_length: 18
-  uuid: 50e46444-f9bc-4dc6-80a7-864a11109bb5
+  uuid: 334a2506-7b43-436e-806b-832980e8be55
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244232
   prefix: '22527306'
   number_min_length: 18
   number_max_length: 18
-  uuid: 4213b24e-ac87-445c-998a-4e8857948c28
+  uuid: 3406572b-3172-47e8-996c-538a4ec0736e
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244233
   prefix: '22527316'
   number_min_length: 18
   number_max_length: 18
-  uuid: 2b99c204-d7fe-4f55-9a8d-fa9947f35604
+  uuid: 3705c97e-4c0d-4600-ab37-fe016f483569
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244234
   prefix: '22527319'
   number_min_length: 18
   number_max_length: 18
-  uuid: 35a6f580-ff78-48f6-8752-bf2bab4e9699
+  uuid: f9dd3fa4-15de-4d50-8709-2dc307a479d9
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244235
   prefix: '22527327'
   number_min_length: 18
   number_max_length: 18
-  uuid: 628231d3-713e-4f17-af0d-62ba47974e53
+  uuid: 3d16fec4-3474-40f9-b093-5a33c84df44d
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244236
   prefix: '22527337'
   number_min_length: 18
   number_max_length: 18
-  uuid: 7aa3862e-09b4-4aec-9e3c-c7b3cd15b4d0
+  uuid: 4d872673-342c-47ff-ba66-814eaf619c30
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244237
   prefix: '22527347'
   number_min_length: 18
   number_max_length: 18
-  uuid: ea238a6f-4dcd-46e2-a7f7-cae34a9f1999
+  uuid: 58cb4eda-9a73-4de0-8818-e3c0f0376273
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244238
   prefix: '22527357'
   number_min_length: 18
   number_max_length: 18
-  uuid: b9642966-c71b-47e6-bd19-9131ea57cb26
+  uuid: 2a65cf30-ab46-4535-bd82-292b5f90a8a5
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244239
   prefix: '22527367'
   number_min_length: 18
   number_max_length: 18
-  uuid: 26d873d5-cb67-4337-8c37-60995db41c79
+  uuid: 587eb5c4-8be8-4e61-81f3-c083c6a5a174
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244493
   prefix: '22530'
   number_min_length: 13
   number_max_length: 13
-  uuid: c57050f5-5111-4407-a569-419d4495aafa
+  uuid: af4667f7-23b0-4bc5-84d1-58b2827b4813
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244607
   prefix: '22531'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5face406-e08f-492f-8149-432ee5e07766
+  uuid: 153548d6-707a-4e44-9261-b1697ab62325
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244678
   prefix: '22532'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6f1daa87-7df0-4dd5-8fe6-3ca5a2766573
+  uuid: e02eed7f-3488-4d7d-a5e3-33c5febf4454
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244720
   prefix: '22533'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2449fc4f-a7e2-4827-b869-351f90bf64d9
+  uuid: d1ce7616-e367-40f0-8c72-dd767118584d
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244796
   prefix: '22534'
   number_min_length: 13
   number_max_length: 13
-  uuid: f94d6e78-6e68-4c89-8101-010a6ef3ff2a
+  uuid: 51308943-0a1d-4ec7-937d-34187693626b
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244890
   prefix: '22535'
   number_min_length: 13
   number_max_length: 13
-  uuid: e8e6e233-9d48-4a8a-9c3c-ea1f95640ac1
+  uuid: 60c808ba-de12-4415-91c9-92507ea36d44
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 - id: 244968
   prefix: '22536'
   number_min_length: 13
   number_max_length: 13
-  uuid: b0e75bd7-30d9-46f8-b960-d91a698ff9e3
+  uuid: e7bf3aaa-64a9-41ae-80d1-2c4ec94b4671
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed
 # Mobile Prefixes
 - id: 245275
   prefix: '22540'
   number_min_length: 13
   number_max_length: 13
-  uuid: 70006d12-53ca-4869-8210-1d2703362ae8
+  uuid: b15c777c-73c4-41fa-bb39-eaa5d70bd956
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 245427
   prefix: '22541'
   number_min_length: 13
   number_max_length: 13
-  uuid: d43dd415-1c54-411c-908b-ee1004c731b1
+  uuid: 3f453bb8-e63e-4524-bd5c-3d653a7493b4
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 245528
   prefix: '22542'
   number_min_length: 13
   number_max_length: 13
-  uuid: 75e37d4f-2d04-43b4-9fe6-8fcf3673c7c8
+  uuid: 77cc3649-3d17-44a1-8bac-5f5c11385865
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 245628
   prefix: '22543'
   number_min_length: 13
   number_max_length: 13
-  uuid: e93d1e47-e37d-4810-93df-751dac6175da
+  uuid: f92fc99a-592c-4bfe-a24e-50f98013d820
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 245781
   prefix: '22544'
   number_min_length: 13
   number_max_length: 13
-  uuid: 018d912a-a7b3-4af9-8467-9bbbb34e7fd7
+  uuid: c5e283a0-eea6-4692-bf1f-3503411d22af
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 245926
   prefix: '22545'
   number_min_length: 13
   number_max_length: 13
-  uuid: d85a6066-0398-4e6a-a2d5-8fb5977fcce2
+  uuid: 7a2a7a74-2a88-49c2-b52e-02c7d57ac9a2
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 246448
   prefix: '22558'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0b0eca13-d450-40ab-a43b-b7cce41a3c37
+  uuid: 7cb3e156-70ee-4c44-ae56-53bcabaec785
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 246550
   prefix: '22559'
   number_min_length: 13
   number_max_length: 13
-  uuid: 23f36b99-8e7f-4832-9023-4545f973b7c6
+  uuid: c8a77ead-2372-4e4c-9749-a62d82d41445
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248038
   prefix: '2251'
   number_min_length: 12
   number_max_length: 12
-  uuid: 620decf3-a622-412f-8314-b374ac4ee5a3
+  uuid: fa61b7db-f154-487b-8e99-d3e3bc3bf6b3
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248047
   prefix: '225101'
   number_min_length: 16
   number_max_length: 16
-  uuid: 533aa296-b562-48a9-b831-2215e3c8fc0b
+  uuid: 18f7c29c-a028-4cda-939f-bfa31d109e8a
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248048
   prefix: '225102'
   number_min_length: 16
   number_max_length: 16
-  uuid: 3d38a47a-f625-4e4a-904c-04f1053b3376
+  uuid: f31cbda8-ac55-420c-bf9d-8c6020a67b23
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248049
   prefix: '225103'
   number_min_length: 16
   number_max_length: 16
-  uuid: e9981ed7-b6ff-4199-8c3c-3f24c8a59620
+  uuid: 2f30060a-80f1-4027-8ba7-4036556584d8
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248060
   prefix: '225140'
   number_min_length: 14
   number_max_length: 14
-  uuid: 97757920-53ea-4b07-9bff-5b9b0edfcbfb
+  uuid: 4a62002c-d5e5-43bb-9de8-65f91a3cbfb5
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248062
   prefix: '225141'
   number_min_length: 14
   number_max_length: 14
-  uuid: 703fd377-145b-40fa-91b7-5f424b8c427b
+  uuid: d26c2b65-42c7-4ed4-ad2f-7c162ca218d4
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248064
   prefix: '225142'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9de284b9-f207-47d1-adce-84d0804757b9
+  uuid: 2c476500-adc1-4a9d-b64f-dd2f21a2c232
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248066
   prefix: '225143'
   number_min_length: 14
   number_max_length: 14
-  uuid: a748d5f0-ffcb-47a1-852c-4019de0b4675
+  uuid: 87ff6fd9-af91-4964-9b56-850dfc95f332
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248073
   prefix: '225150'
   number_min_length: 16
   number_max_length: 16
-  uuid: ec511810-1688-47dd-88dc-378351308fe8
+  uuid: 89020b0e-5220-4dba-9c3c-b5b462004469
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248075
   prefix: '225151'
   number_min_length: 16
   number_max_length: 16
-  uuid: de30bab9-3785-467f-90a5-f31d7458652a
+  uuid: 8191dc67-a4c6-4be5-9c35-0e99397a7595
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248077
   prefix: '225152'
   number_min_length: 16
   number_max_length: 16
-  uuid: 0fc73c72-48a7-411e-9b9f-cc7f7cb7e584
+  uuid: b7706856-29bd-41cc-9e11-396887fb8339
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248079
   prefix: '225153'
   number_min_length: 16
   number_max_length: 16
-  uuid: 13be56ee-a709-4594-85cf-1e0b7c6bfe96
+  uuid: 8b475a92-d359-4368-acb4-6ccb387ec190
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248096
   prefix: '225170'
   number_min_length: 16
   number_max_length: 16
-  uuid: b27df3fa-053d-4d59-8a14-6ac89fa67b24
+  uuid: 10179cea-90be-42cd-a1b0-81cf52cc678f
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248097
   prefix: '225171'
   number_min_length: 16
   number_max_length: 16
-  uuid: f19a51ee-9002-417d-8488-7036ff746b87
+  uuid: 7051cdef-4314-480a-9cc1-d62891db5c1a
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248098
   prefix: '225172'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1c42feec-2c06-4814-9773-7e1037470fc4
+  uuid: a2cf5fdb-a599-418c-b518-64f02948cd54
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248099
   prefix: '225173'
   number_min_length: 16
   number_max_length: 16
-  uuid: 071c688f-d7d3-488c-a358-637a00effdf1
+  uuid: 526e26b0-a461-49ce-a5d0-6779da921f97
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248110
   prefix: '2252'
   number_min_length: 12
   number_max_length: 12
-  uuid: d797281f-8563-48dc-adc1-b97365bef315
+  uuid: 6ed9e33f-7ba2-4fea-8af3-1d1e7361b6d2
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248115
   prefix: '2253'
   number_min_length: 12
   number_max_length: 12
-  uuid: f7d10379-3ed5-4d9a-975d-316b09c87f1b
+  uuid: 273849b0-3a3f-480a-a36f-e8977137742d
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 248120
   prefix: '2254'
   number_min_length: 12
   number_max_length: 12
-  uuid: f9f80581-13ea-4e4a-ad7c-7993e99e88c6
+  uuid: 7c66d550-edf0-4006-ac03-78d803543a42
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248126
   prefix: '2255'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0e55f3f1-65a4-41cc-9367-4e951ec64bff
+  uuid: 09ae4182-15d0-46a9-902f-c3b9feface94
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248134
   prefix: '225504'
   number_min_length: 16
   number_max_length: 16
-  uuid: c07a8828-7883-4080-8625-62a2f2b86377
+  uuid: 4b550bc1-b815-4749-81f4-7ffe7fffe262
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248135
   prefix: '225505'
   number_min_length: 16
   number_max_length: 16
-  uuid: dc50c1fe-6195-4670-b044-72fa7435ec57
+  uuid: a10d6516-3fe8-403c-974c-96e2f02a22db
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248136
   prefix: '225506'
   number_min_length: 16
   number_max_length: 16
-  uuid: 9e914435-aadb-4680-b11e-a9a72a46e6a7
+  uuid: f40fa4ff-6c9b-45b2-ad32-4791619a7da8
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248137
   prefix: '225544'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1da464c3-a9ed-4b2f-be67-a1dca89fdeeb
+  uuid: 5c018059-42c1-4ffb-b077-16074c8915e1
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248138
   prefix: '225545'
   number_min_length: 16
   number_max_length: 16
-  uuid: 69f6a516-89f6-445d-b407-bb128fc071e0
+  uuid: 258fb287-5dc9-4ca3-9fa0-9938d9b0ff23
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248139
   prefix: '225546'
   number_min_length: 16
   number_max_length: 16
-  uuid: 956c1739-9a3e-4747-a185-2e009b844269
+  uuid: 95bb0ddf-10d8-4a2b-986c-6283ea551fe0
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248140
   prefix: '225554'
   number_min_length: 16
   number_max_length: 16
-  uuid: b90f4afd-dee2-429c-9f31-2894e09f51b7
+  uuid: 4166c16f-063c-4dc1-8456-d5599e13c086
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248141
   prefix: '225555'
   number_min_length: 16
   number_max_length: 16
-  uuid: 4fb47be0-f238-4625-a43c-625b03ea2d48
+  uuid: afefb85e-10e7-43c3-abfe-94277acb3663
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248142
   prefix: '225556'
   number_min_length: 16
   number_max_length: 16
-  uuid: 5d37589e-6a0d-42ca-ab6d-a4ee7383c2cd
+  uuid: 96195443-2801-4133-959e-ea4a2e59df27
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248143
   prefix: '225564'
   number_min_length: 16
   number_max_length: 16
-  uuid: 46d48ca1-927b-4a92-a01d-26c39defc318
+  uuid: d5a630fd-8a06-4bb0-8302-a1b3630dd2ba
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248144
   prefix: '225565'
   number_min_length: 16
   number_max_length: 16
-  uuid: bab709dc-aa13-4f34-afaf-4d04ce02c150
+  uuid: 5e747627-335a-4904-a56a-7e8f2b5f6863
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248145
   prefix: '225566'
   number_min_length: 16
   number_max_length: 16
-  uuid: a8821b8b-9101-4233-9d52-454c22a02ba1
+  uuid: 7ce8cbd7-4da6-4d80-af04-a1399a7bc2af
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248146
   prefix: '225574'
   number_min_length: 16
   number_max_length: 16
-  uuid: 801169f4-acb6-4a4d-8a79-12a5507fa601
+  uuid: 4e3bbb83-af62-4d2c-9f3b-465a2c920f1d
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248147
   prefix: '225575'
   number_min_length: 16
   number_max_length: 16
-  uuid: e4fa5c5b-7819-4fdd-97a6-bba5f1b6b321
+  uuid: 9942d0f3-afde-4f64-a5f4-a4d43944a319
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248148
   prefix: '225576'
   number_min_length: 16
   number_max_length: 16
-  uuid: f31b70ba-24c0-4f71-941b-ab5170c776eb
+  uuid: abdd5e5c-67fe-47ac-a0a3-b06007c1798c
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248149
   prefix: '225584'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1a97ecef-99bc-4ec6-9db4-7fd46061a21f
+  uuid: 1bec9110-070c-4173-b010-0a4757f616f7
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248150
   prefix: '225585'
   number_min_length: 16
   number_max_length: 16
-  uuid: b0c38632-99b9-4f9f-9ac6-a6466d0e7cf4
+  uuid: 29b044e2-1c99-4e98-b734-edc46559e762
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248151
   prefix: '225586'
   number_min_length: 16
   number_max_length: 16
-  uuid: c14b8d48-e23e-41f6-a57e-84f8400fda88
+  uuid: 5d2ce0e9-3c37-47d8-829e-783e97cfd9b6
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248152
   prefix: '225594'
   number_min_length: 16
   number_max_length: 16
-  uuid: bb6122bf-9d9b-4970-b9ea-9af297eb3652
+  uuid: 1e8214c1-eb32-451c-ab9e-e5a0cc91a2bf
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248153
   prefix: '225595'
   number_min_length: 16
   number_max_length: 16
-  uuid: 97072fb6-dddc-409a-92b7-52a2448e1415
+  uuid: 29d09f62-a31a-4e2c-acc1-d92f81951ed5
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248154
   prefix: '225596'
   number_min_length: 16
   number_max_length: 16
-  uuid: 47456e01-1f3f-4e2d-ba94-e1fb9ac8b3d2
+  uuid: bb4b9847-1081-4bf6-a38a-492c4cf79e32
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248157
   prefix: '2256'
   number_min_length: 12
   number_max_length: 12
-  uuid: 33497ba1-8f70-44c4-a11f-ec67aecabe07
+  uuid: 4a575c8b-6441-41b8-835e-f898e4d4dbbb
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 248163
   prefix: '2257'
   number_min_length: 12
   number_max_length: 12
-  uuid: 10057d59-506b-4826-bbfe-23cc337f9013
+  uuid: 1bf64365-b74b-4e77-9435-0ee687783926
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248167
   prefix: '225707'
   number_min_length: 16
   number_max_length: 16
-  uuid: 418290e5-2b30-4cb2-85c4-4344592d2cb9
+  uuid: 4ba7e052-f9f1-48f2-a81e-595ffce0a312
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248169
   prefix: '225708'
   number_min_length: 16
   number_max_length: 16
-  uuid: 09d6767c-d43c-44c5-a64b-281b105b665d
+  uuid: 7a0cb036-a0cd-4aeb-b543-c7dd06cf4923
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248170
   prefix: '225709'
   number_min_length: 16
   number_max_length: 16
-  uuid: a75a15fb-1d9c-4832-ab05-0bf261439ce8
+  uuid: adb5ac68-6472-4ba9-8f5f-0cd3544c4f41
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248171
   prefix: '225747'
   number_min_length: 16
   number_max_length: 16
-  uuid: 503b4b4c-91d9-4f04-add8-81b416e30585
+  uuid: 878acae8-083c-4705-b231-dfd9087c306d
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248172
   prefix: '225748'
   number_min_length: 16
   number_max_length: 16
-  uuid: adca19e2-268f-4d2f-8f8f-9fc0518bc643
+  uuid: 48f5d71a-cf48-4e5c-87ab-964d4b1e4458
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248173
   prefix: '225749'
   number_min_length: 16
   number_max_length: 16
-  uuid: 2f440eaf-a5cc-47ff-8c2a-81bc7d42a681
+  uuid: ede9d06d-fa7c-40db-bb4c-b3de7846aef9
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248174
   prefix: '225757'
   number_min_length: 16
   number_max_length: 16
-  uuid: 32509a63-e982-4b0d-bce5-36f8a438f08b
+  uuid: 2a1b975e-f29a-4954-b73a-20bdade883c0
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248175
   prefix: '225758'
   number_min_length: 16
   number_max_length: 16
-  uuid: 03cbd1a9-e91d-4cb4-9449-8c81d1900b5a
+  uuid: 116d27cf-18e3-47b5-a1b6-b9d7809050a4
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248176
   prefix: '225759'
   number_min_length: 16
   number_max_length: 16
-  uuid: 63c697bb-907d-4fe8-9589-fe1af555fd62
+  uuid: f211b76a-3ea7-454e-b8e1-9e03f1061fe1
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248177
   prefix: '225767'
   number_min_length: 16
   number_max_length: 16
-  uuid: 77711f1a-c8b3-42d6-b8ec-435abe124398
+  uuid: 690b0364-cf3e-4670-ad77-9cd588b86944
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248179
   prefix: '225768'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1ce960be-c23d-47f1-aabf-42aa4d0efea2
+  uuid: 23b6e7a8-a4ed-449c-b014-297b5f82daf5
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248180
   prefix: '225769'
   number_min_length: 16
   number_max_length: 16
-  uuid: 81b47ed6-461f-47f6-a791-846588dbe7b9
+  uuid: d685a013-71d3-48ab-9998-5f08b8b88f8d
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248181
   prefix: '225777'
   number_min_length: 16
   number_max_length: 16
-  uuid: ee34dc1c-ad5a-43b1-8d1b-feb0616d55cc
+  uuid: 4e47edcc-3bc5-4a7f-ad67-f7cc84d97cf6
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248183
   prefix: '225778'
   number_min_length: 16
   number_max_length: 16
-  uuid: e8037ad8-d406-4957-a63f-6464ae472b76
+  uuid: f3526296-47d1-471d-83a3-8b4d7f03d858
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248184
   prefix: '225779'
   number_min_length: 16
   number_max_length: 16
-  uuid: e48162c9-76e3-4ed1-9867-f0fd67e734ce
+  uuid: 0a872f8a-9cdd-4a24-9e4b-a6d68c2590bd
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248185
   prefix: '225787'
   number_min_length: 16
   number_max_length: 16
-  uuid: 7762d379-64ce-45ad-9561-c6317120c34d
+  uuid: 816f5ec4-489a-4ecb-8fb8-442fd97fb45a
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248186
   prefix: '225788'
   number_min_length: 16
   number_max_length: 16
-  uuid: 8f5c1b52-73f7-4419-9a4c-ca8fdad7a176
+  uuid: 8e2ecb17-01de-46f2-a93c-ab040243b50f
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248187
   prefix: '225789'
   number_min_length: 16
   number_max_length: 16
-  uuid: 5fbf219b-7205-4312-9374-0707f8df79b7
+  uuid: 4d779ebd-7897-49d9-b1cb-b13a14f01c48
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248189
   prefix: '225797'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1cb63f96-6cd9-4a0a-8af1-259111bf594c
+  uuid: 44198998-d266-4d71-8b4a-fe4c277541a4
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248190
   prefix: '225798'
   number_min_length: 16
   number_max_length: 16
-  uuid: 69fb2c0d-b586-42c3-9c3d-5efe4192aa84
+  uuid: 3a99eea4-db96-4871-9849-3f422a3cf6fb
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248192
   prefix: '2258'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9c972af5-1c62-4d26-9fdd-010f3ea21579
+  uuid: 3910e2cc-0ed9-4734-88f8-f746626e247f
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248217
   prefix: '2259'
   number_min_length: 12
   number_max_length: 12
-  uuid: 06cb0fd2-0bac-4d67-9124-c4ef6bd4698d
+  uuid: 46620553-21d6-4bec-9321-ea28bb1aef98
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 248817
   prefix: '22546'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4e86c817-6fbc-4b84-bea5-32868dfefb37
+  uuid: e5c0a91c-2c51-4b22-9856-55d53976f6cd
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 249035
   prefix: '22547'
   number_min_length: 13
   number_max_length: 13
-  uuid: a3005738-1eaf-44e8-a85a-14c49a75a767
+  uuid: 2386a5b5-8607-46b2-9a2e-c16bc5629a6e
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 249158
   prefix: '22548'
   number_min_length: 13
   number_max_length: 13
-  uuid: ce94293a-35e8-454d-b6a0-58098929d59c
+  uuid: 240dfec5-038a-41ce-8c1e-424eb28ac1de
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 249242
   prefix: '22549'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9c49c193-e991-4b8f-991d-c1f5e6034c15
+  uuid: 46086519-b583-4450-ab2b-f7e1d4fde798
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 249351
   prefix: '22550'
   number_min_length: 13
   number_max_length: 13
-  uuid: 879d3cdf-5265-474e-94e2-40bf922dfa4d
+  uuid: 773e9a7f-9d5c-4539-a5d7-263d817d08db
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 249429
   prefix: '22551'
   number_min_length: 13
   number_max_length: 13
-  uuid: ace7224e-dc21-4eef-831a-184079fca466
+  uuid: 684a5c08-70a8-4f57-a5a0-f43f067eaeed
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 249499
   prefix: '22552'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3b7fbb82-3cff-43bf-8504-b7b652e0dbb7
+  uuid: 14eacfed-01b4-4ccb-9477-02c0824b7ce7
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 249657
   prefix: '22553'
   number_min_length: 13
   number_max_length: 13
-  uuid: 564facf9-9d93-4121-b45c-7b14c687bcbe
+  uuid: a73ce269-e9de-4806-a5f6-e0ee8a7fd937
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 249749
   prefix: '22554'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8403acbb-d139-4202-979e-1095650105b0
+  uuid: 23575d56-29e7-40e2-9a3c-a6a58b5829d4
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 249845
   prefix: '22555'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6f0c8d2d-9e7d-4029-9073-e41521a0ef1b
+  uuid: 6cfea82f-b5b5-49fb-97b5-a1e7da272a2b
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 249931
   prefix: '22556'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0eb88e95-337f-4475-95b4-8f5bad13c222
+  uuid: 06f7dcb9-a606-4b66-bbdd-1dd4f362dcf4
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 249973
   prefix: '22557'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3d3608b7-77cf-4a07-980b-cc861101a821
+  uuid: f1e26dd4-53c9-4ce3-a602-be2146d5e929
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 250745
   prefix: '22564'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9e3011a3-557b-4a58-bc3c-e907764674a0
+  uuid: f947e3d3-8d21-4ee7-a04e-89de1ee26c58
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 250962
   prefix: '22565'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9959ee92-0774-45b0-9c13-593f9510f9b5
+  uuid: f01dba75-105c-4e2f-abe7-74af2d85144e
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 251310
   prefix: '22566'
   number_min_length: 13
   number_max_length: 13
-  uuid: bc1f523d-a7a4-4cfd-b693-325ce0c8938a
+  uuid: 835845a2-92e1-497f-8436-b45f9b4e80fe
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 251446
   prefix: '22571'
   number_min_length: 13
   number_max_length: 13
-  uuid: b2a0ec66-5470-4179-9f63-0e9e73fd81bd
+  uuid: 45dac898-4960-478e-b3c6-94f34724a458
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 251532
   prefix: '22572'
   number_min_length: 13
   number_max_length: 13
-  uuid: 392a88f3-9a7e-48dc-a1d4-ebc733825c98
+  uuid: 935c8c57-df53-49aa-92b5-c25185a21eb2
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 251585
   prefix: '22573'
   number_min_length: 13
   number_max_length: 13
-  uuid: f357f800-6e0c-42f2-a27d-fa7b7cdcfc47
+  uuid: 2dc92295-51a5-4066-9d68-7042b7c66921
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 251768
   prefix: '22574'
   number_min_length: 13
   number_max_length: 13
-  uuid: d563d399-623b-4fc3-b00e-e89073d7dfed
+  uuid: 206e5e54-dc2a-4b3f-b4aa-16756b2d82f9
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 252169
   prefix: '22575'
   number_min_length: 13
   number_max_length: 13
-  uuid: b5e108fe-408c-4ef5-bfc9-dd7d45f06276
+  uuid: 63836043-4599-466c-8769-2635e965cd34
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 252695
   prefix: '22576'
   number_min_length: 13
   number_max_length: 13
-  uuid: 87aa355e-d60f-40cb-a7c7-2602a2825476
+  uuid: c37857ba-0cf1-420d-9c3f-d786e1e2f4da
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 252831
   prefix: '22588'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7361b385-461b-4600-a6e2-916bd6af7cd3
+  uuid: a88498a8-34c8-41cc-9434-777c2b46534c
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 252986
   prefix: '22589'
   number_min_length: 13
   number_max_length: 13
-  uuid: f4da7509-608d-43f7-88d6-820dac583da2
+  uuid: c227f023-fe85-4968-ad1b-91345a9cd3a4
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 254080
   prefix: '22594'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5791da0d-4794-4e9d-9274-1540df587fc9
+  uuid: 07c02431-62eb-4313-8141-31415eeb4810
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 257953
   prefix: '22567'
   number_min_length: 13
   number_max_length: 13
-  uuid: d8c574a2-1c95-4cf2-bc91-a3e63fd73923
+  uuid: 1b7587fa-fd41-4b6b-8482-f34bb78dd90c
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 258027
   prefix: '22568'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2ec09252-32a9-4662-9281-95fd65d5c9dc
+  uuid: d754ac6b-1cdb-4a88-a43d-e0c73069e21f
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 258215
   prefix: '22569'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7e751c37-1049-4263-9d7f-5b01a3ccd888
+  uuid: ce8126c2-a60f-4cd9-84a8-e014e454f8ea
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 258642
   prefix: '22570'
   number_min_length: 13
   number_max_length: 13
-  uuid: e4084df0-1bfc-4a8f-a551-ce9544eb80c2
+  uuid: 57e20332-64f4-4c3f-8536-75a6e7a9f0ec
   country_id: *ci
-  network_id: *moov_africa_mobile
+  network_id: *ci_moov_africa_mobile
 - id: 258876
   prefix: '22577'
   number_min_length: 13
   number_max_length: 13
-  uuid: 06a6e972-fa5d-484a-b5a3-778ed4b45af9
+  uuid: 90f7da14-0cc0-48de-9260-c78019706f1f
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 259331
   prefix: '22578'
   number_min_length: 13
   number_max_length: 13
-  uuid: a1075333-a162-472c-a34c-c2597279d90f
+  uuid: e2ea3380-6167-4d6b-b61c-a6f59db36b94
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 259630
   prefix: '22579'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6e6bddbe-00bf-47ee-8951-bc1e5cf7f8f1
+  uuid: 83c26a0c-a43b-42c4-85b4-26698ab6072a
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 260519
   prefix: '22584'
   number_min_length: 13
   number_max_length: 13
-  uuid: ede86088-c1ae-48b1-af21-e20db2fe10ee
+  uuid: 97fd35b3-230b-48c7-a7a1-5d6be3807dca
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 260650
   prefix: '22585'
   number_min_length: 13
   number_max_length: 13
-  uuid: 20572931-e1a2-465d-a179-ba40e1e8bd26
+  uuid: 9628ae06-419f-4a20-9726-7925e77f7399
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 260796
   prefix: '22586'
   number_min_length: 13
   number_max_length: 13
-  uuid: 125736cf-3869-4bbf-99b1-0158187f57c4
+  uuid: 1a0143a6-739d-4559-be6e-74c036049267
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 260941
   prefix: '22587'
   number_min_length: 13
   number_max_length: 13
-  uuid: db244dcc-f370-4d96-bb5d-0f642d172822
+  uuid: 6442fdcf-7458-4697-b5f9-82fdfbd3b5bd
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 261250
   prefix: '22595'
   number_min_length: 13
   number_max_length: 13
-  uuid: b017de38-dc89-4718-888a-8607b5a1e40b
+  uuid: 55d0a77e-2d2a-4d2c-8502-a6dbfe387407
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 261529
   prefix: '22596'
   number_min_length: 13
   number_max_length: 13
-  uuid: ec2f9590-c280-4160-b297-abf07e9f6f29
+  uuid: d84e6662-ac41-42b7-947b-ed5f62f82999
   country_id: *ci
-  network_id: *mtn_mobile
+  network_id: *ci_mtn_mobile
 - id: 261811
   prefix: '22597'
   number_min_length: 13
   number_max_length: 13
-  uuid: 48fe4d19-b47f-4b64-8bf3-2156c74c5bfc
+  uuid: e4bce771-a630-43e7-8e61-5fcb2d71021d
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 - id: 262080
   prefix: '22598'
   number_min_length: 13
   number_max_length: 13
-  uuid: 40c58a1b-6097-4971-9d8d-33bfd7b7ad61
+  uuid: 899ad6b4-b8b7-4ccd-b128-b56aa5ee393c
   country_id: *ci
-  network_id: *orange_mobile
+  network_id: *ci_orange_mobile
 # Country code Prefixes
 - id: 247838
   prefix: '225'
   number_min_length: 6
   number_max_length: 13
-  uuid: c14dd321-573e-45d9-b8d6-9b962014b8dd
+  uuid: 6ccb417c-4ae0-4497-bbef-a3f79ffb831d
   country_id: *ci
-  network_id: *fixed
+  network_id: *ci_fixed_cc
 # Supplementary services Prefixes
 - id: 248253
   prefix: '2251'
   number_min_length: 7
   number_max_length: 8
-  uuid: b40e5e01-c8fa-4d43-a69e-635b41b9d1f5
+  uuid: 23206e60-0298-4335-9594-f17bcbe66087
   country_id: *ci
-  network_id: *special_services
+  network_id: *ci_special_services
 - id: 253081
   prefix: '2259'
   number_min_length: 8
   number_max_length: 12
-  uuid: c35406cc-1986-400e-adf0-1c71cc8331a3
+  uuid: 66319106-8e44-4110-83f6-b0b7b5baf2a6
   country_id: *ci
-  network_id: *value_added_services
+  network_id: *ci_value_added_services
 - id: 259917
   prefix: '2258'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7298b841-27e8-4f75-bc61-4aca008f804f
+  uuid: 19dc4c0b-df3d-4c8a-a3ce-48b570c14342
   country_id: *ci
-  network_id: *value_added_services
+  network_id: *ci_value_added_services

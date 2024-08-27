@@ -1,72 +1,72 @@
 country_id: &tw 207
 networks:
 # Fixed Networks
-- id: 3012
+- id: &tw_fixed 3228
   name: TW Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 28c9edaa-8bcf-4b7a-b596-fe6e494f9fb5
   type_id: 12
 # Supplementary services Networks
-- id: &credit_telephone_services 3136
-  name: TW Credit telephone services
-  uuid: 1f7d9a5f-c66a-4a20-b724-d7e5216a48f7
+- id: &tw_credit_telephone_services 3241
+  name: TW Credit Telephone Services
+  uuid: 6e03e9f6-7a16-4eb2-9fa1-eabaacbe059e
   type_id: 14
-- id: &machine_to_machine_(m2m)_services 3131
-  name: TW Machine to machine (m2m) services
-  uuid: 99239e22-826d-4447-8981-39539f3caf62
+- id: &tw_machine_to_machine_(m2m)_services 3432
+  name: TW Machine To Machine (M2M) Services
+  uuid: fa5d2fa0-f68e-46cf-936e-2cdbbeb545f6
   type_id: 14
-- id: &normal_rate_services 3412
-  name: TW Normal rate services
-  uuid: f0f4dc22-9b06-4ce0-a659-c4ab22bd4435
+- id: &tw_normal_rate_services 3611
+  name: TW Normal Rate Services
+  uuid: 499955fb-b18e-4e90-b4a1-d2a32c042b39
   type_id: 14
-- id: &personal_number_services 3280
-  name: TW Personal number services
-  uuid: 5046ac1e-0315-4299-80a1-0ebe7ea88d71
+- id: &tw_personal_number_services 3928
+  name: TW Personal Number Services
+  uuid: 97005908-e42e-46ed-a37d-a48d8b13d84d
   type_id: 14
-- id: &special_services 3075
-  name: TW Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &tw_special_services 5051
+  name: TW Special Services
+  uuid: b5cf173f-eebc-4b12-9805-e47913344586
   type_id: 14
-- id: &virtual_private_network 3426
-  name: TW Virtual private network
-  uuid: 4b16a437-d669-4316-820b-8919da3af9be
+- id: &tw_virtual_private_network 5829
+  name: TW Virtual Private Network
+  uuid: 19fda463-773d-49c6-a2f8-7a90376806ac
   type_id: 14
-- id: &premium_rate_services 3232
-  name: TW Premium rate services
-  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+- id: &tw_premium_rate_services 5928
+  name: TW Premium Rate Services
+  uuid: e8b2d1ff-75f4-4165-a1bd-2f029add7671
   type_id: 14
-- id: &freephone_services 3382
-  name: TW Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &tw_freephone_services 6807
+  name: TW Freephone Services
+  uuid: bdc41d1b-ecd5-45f4-b43e-c85db7b2ab66
   type_id: 14
 # Mobile Networks
-- id: &chunghwa_telecom_mobile 3282
-  name: TW Chunghwa telecom mobile
-  uuid: cf0c15bb-a5da-4fa9-8161-16e0b9e83d13
+- id: &tw_chunghwa_telecom_mobile 3433
+  name: TW Chunghwa Telecom Mobile
+  uuid: 835cd6ac-20f9-4fba-bc8d-65eae3016955
   type_id: 3
-- id: &taiwan_mobile_mobile 3494
-  name: TW Taiwan mobile mobile
-  uuid: 3c221722-e1c9-4a6a-ae06-9e207a8e42fc
+- id: &tw_taiwan_mobile_mobile 3702
+  name: TW Taiwan Mobile Mobile
+  uuid: bc8911c5-957d-4f31-9544-0f3e88c30d03
   type_id: 3
-- id: &far_eastone_mobile 3520
-  name: TW Far eastone mobile
-  uuid: 9fe5cefe-be32-4a49-8638-fc91666a67d3
+- id: &tw_far_eastone_mobile 3738
+  name: TW Far Eastone Mobile
+  uuid: 06e1be06-0530-41ae-982e-bc6611375221
   type_id: 3
-- id: &apt_mobile 3624
-  name: TW Apt mobile
-  uuid: f1c146c0-7490-4ea9-adf7-526bab407240
+- id: &tw_apt_mobile 3904
+  name: TW Apt Mobile
+  uuid: 1c940ed3-11a3-49d5-8e3c-bb4f77e8f2cb
   type_id: 3
-- id: &t_star_mobile 3625
-  name: TW T star mobile
-  uuid: 77534a5e-5e3f-4c0d-ae6b-ceb2593d213d
+- id: &tw_t_star_mobile 3905
+  name: TW T Star Mobile
+  uuid: 595f4927-a9a4-4e0e-9d9d-c177b618889e
   type_id: 3
-- id: &mobile 3013
+- id: &tw_mobile 4642
   name: TW Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: 98992cde-8ed8-443f-b34b-0a319f483c6f
   type_id: 3
 # Country code Networks
-- id: &fixed 3012
-  name: TW Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &tw_fixed_cc 4832
+  name: TW Fixed Cc
+  uuid: e00588b7-802c-4116-b247-e95665440a17
   type_id: 17
 network_prefixes:
 # Fixed Prefixes
@@ -74,2480 +74,2480 @@ network_prefixes:
   prefix: '88632'
   number_min_length: 12
   number_max_length: 12
-  uuid: fb22d071-3fa4-456d-8fe1-cde745e5a466
+  uuid: 399a2194-8862-45a4-b554-f0d6816d5c48
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 41130
   prefix: '88633'
   number_min_length: 12
   number_max_length: 12
-  uuid: 598c2326-2875-44e2-afb6-0cbcd7b0c788
+  uuid: 9fc65cd0-ae42-4b64-862e-66a13ce700f8
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 41231
   prefix: '88634'
   number_min_length: 12
   number_max_length: 12
-  uuid: 38e71f42-67dd-43db-9eee-5f325101ccb7
+  uuid: bf7f9949-b85b-4ad2-99f5-ac8bd1b6a102
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 41388
   prefix: '88635'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6572ec1b-2075-4ad9-a082-cd7e060c63bb
+  uuid: 56064e9e-b196-4bc2-8f67-a38af82a17da
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 41590
   prefix: '88636'
   number_min_length: 12
   number_max_length: 12
-  uuid: 02e23064-dbaf-4539-8527-aed6ed9fed06
+  uuid: dd26defd-2d55-4430-8b0c-484b23938a5e
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 41892
   prefix: '88638'
   number_min_length: 12
   number_max_length: 12
-  uuid: 98eaa91a-1d1e-401e-9e4e-e341ff1b1ef8
+  uuid: bff0fc60-1b3d-4151-99ab-995e8b43076c
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 41912
   prefix: '88639'
   number_min_length: 12
   number_max_length: 12
-  uuid: 364485c1-ab6c-438c-943d-e54b2d90521d
+  uuid: 2167bc78-e88e-4944-9505-c9891cef867e
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 82015
   prefix: '88637'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2b339ffb-54c8-4eed-8035-8ac5a9bb98e9
+  uuid: b3414b18-4b37-4de1-bd65-9eaddc784efe
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 86569
   prefix: '88642'
   number_min_length: 13
   number_max_length: 13
-  uuid: b6620adf-68e8-4d19-bbdb-56c5cd593b2f
+  uuid: 5f373a79-3393-4881-8d33-fd96badf4715
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 86641
   prefix: '88643'
   number_min_length: 13
   number_max_length: 13
-  uuid: ebe324bd-0d29-4932-b013-6f3228ddbe43
+  uuid: c82a029b-6a75-4997-9537-761beee4a166
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 86804
   prefix: '88647'
   number_min_length: 12
   number_max_length: 12
-  uuid: d227261f-7490-4ab4-9d54-ef88a1b0c786
+  uuid: 5d1ff4ee-6a69-4a89-ab4a-54203ec5ad28
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 86843
   prefix: '88648'
   number_min_length: 12
   number_max_length: 12
-  uuid: 55f0bb98-35fd-4e1b-bf45-318e37be6215
+  uuid: 29a67630-bb17-4958-8f75-8ba35354789e
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 135181
   prefix: '88649'
   number_min_length: 12
   number_max_length: 12
-  uuid: bfe2d8cc-8b58-4ae4-bfc9-c13411eee13b
+  uuid: e6c3c750-fd4a-4a9c-b772-dbd124740aa4
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 145872
   prefix: '8865'
   number_min_length: 11
   number_max_length: 11
-  uuid: 27ecd2d6-a12e-4156-99da-0651bb3ed41a
+  uuid: e681785a-e2f7-498d-8c99-efb3cfbda4e9
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 145896
   prefix: '88652'
   number_min_length: 12
   number_max_length: 12
-  uuid: 348f424c-51c2-408b-ac0c-f3b5a6a14424
+  uuid: df181d0c-96ed-47ca-b46e-f36830b50ac2
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 145965
   prefix: '88653'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1a627fa0-5512-4bdb-82a4-cccf8aad8566
+  uuid: 87c54194-0e40-459b-9518-f1e49943074b
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 146023
   prefix: '88654'
   number_min_length: 12
   number_max_length: 12
-  uuid: ecfab64d-955e-448c-91eb-24995cbc81f5
+  uuid: 787d57fd-5fee-4819-87ad-69b607d276f9
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 257272
   prefix: '8862'
   number_min_length: 12
   number_max_length: 12
-  uuid: fd7dac62-f368-418b-a5f9-3338d729b138
+  uuid: a46b992f-c1bf-4802-a4ae-afcdf2a93af4
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 276619
   prefix: '8866'
   number_min_length: 11
   number_max_length: 11
-  uuid: e3c88011-62a3-4441-82db-79e6b3e06c0b
+  uuid: 792de73d-6e1d-491f-aac7-beb219200b9d
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 277579
   prefix: '88669'
   number_min_length: 12
   number_max_length: 12
-  uuid: 74d2102a-5dd6-4936-9c60-60fd05e5e018
+  uuid: fc573188-1adf-441e-ac34-4fde68441f4e
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 339496
   prefix: '8867'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9a97e3e5-dd7c-4385-b278-775064a8a33f
+  uuid: f7445ebb-2d0e-42c8-aff5-f4781084d8cb
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 - id: 340401
   prefix: '88670'
   number_min_length: 13
   number_max_length: 13
-  uuid: c2bf7d30-7a2a-4b38-8443-3cb151c065f1
+  uuid: ce358319-d08f-422f-aff2-65601bde37a8
   country_id: *tw
-  network_id: *fixed
-- id: 392330
+  network_id: *tw_fixed
+- id: 392331
   prefix: '88684'
   number_min_length: 12
   number_max_length: 12
-  uuid: 495238c9-e062-402a-970e-74de294818b2
+  uuid: 418346ec-b52f-40f9-a506-05495cf41bc2
   country_id: *tw
-  network_id: *fixed
-- id: 392399
+  network_id: *tw_fixed
+- id: 392400
   prefix: '88687'
   number_min_length: 12
   number_max_length: 12
-  uuid: 55a5d4c1-9275-43d2-ba06-d275108b4114
+  uuid: 5f9d69d4-07cb-47fe-92aa-60b5ffacd514
   country_id: *tw
-  network_id: *fixed
-- id: 392461
+  network_id: *tw_fixed
+- id: 392462
   prefix: '88688'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6d36dc23-f5c2-44e4-b580-9ac6cd5d3f05
+  uuid: 42cfd395-7bcb-4833-8a2b-8e22da7f7efd
   country_id: *tw
-  network_id: *fixed
-- id: 414209
+  network_id: *tw_fixed
+- id: 414210
   prefix: '886836'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7e94c370-7193-47ac-a084-66b0720dbfee
+  uuid: d3132eab-ecca-4ae7-b900-78bd8d7f3f97
   country_id: *tw
-  network_id: *fixed
-- id: 418954
+  network_id: *tw_fixed
+- id: 418955
   prefix: '88682'
   number_min_length: 11
   number_max_length: 11
-  uuid: b7045fe6-a7a9-4314-8b89-c8f34574ca21
+  uuid: a59f80eb-8e84-422b-9168-d7d5f4b253fe
   country_id: *tw
-  network_id: *fixed
-- id: 420142
+  network_id: *tw_fixed
+- id: 420143
   prefix: '886826'
   number_min_length: 11
   number_max_length: 11
-  uuid: 246add56-a172-41ce-906d-0f0b96b2533a
+  uuid: 618d2789-01b3-4550-86bf-1d86d6a99fde
   country_id: *tw
-  network_id: *fixed
-- id: 420712
+  network_id: *tw_fixed
+- id: 420713
   prefix: '886827'
   number_min_length: 11
   number_max_length: 11
-  uuid: f67c0601-112b-40f9-97d0-e2f807e3a10c
+  uuid: ba0757b3-c6f6-4d61-9a61-a09cfac940fd
   country_id: *tw
-  network_id: *fixed
-- id: 445150
+  network_id: *tw_fixed
+- id: 445151
   prefix: '88689'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4719eea8-b065-46aa-a5f3-0216b2d2c1fd
+  uuid: b67979eb-aac4-4427-ae23-4d0833cb0c06
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed
 # Supplementary services Prefixes
 - id: 42255
   prefix: '88630'
   number_min_length: 12
   number_max_length: 13
-  uuid: 2f1f15e9-a658-49dc-bb30-ff93b4d43698
+  uuid: f6a47bba-e4ee-4d28-b313-dcc7a3e142e1
   country_id: *tw
-  network_id: *credit_telephone_services
+  network_id: *tw_credit_telephone_services
 - id: 87107
   prefix: '8864000'
   number_min_length: 15
   number_max_length: 15
-  uuid: 09a1daf7-485d-4048-b7e3-117e8af4e01f
+  uuid: 78780812-fa0b-43a7-8310-855dbd86ecd2
   country_id: *tw
-  network_id: *machine_to_machine_(m2m)_services
+  network_id: *tw_machine_to_machine_(m2m)_services
 - id: 146220
   prefix: '88650'
   number_min_length: 12
   number_max_length: 12
-  uuid: ac2823d2-e627-46b9-81b1-077ee8442af9
+  uuid: 08c412a3-5c21-4b87-8854-64f391f14353
   country_id: *tw
-  network_id: *normal_rate_services
+  network_id: *tw_normal_rate_services
 - id: 238726
   prefix: '88699'
   number_min_length: 12
   number_max_length: 12
-  uuid: c6f81197-254c-47eb-9fff-0962560fde4b
+  uuid: 913be5ec-4d9a-4966-90c4-f653bb88649f
   country_id: *tw
-  network_id: *personal_number_services
+  network_id: *tw_personal_number_services
 - id: 248391
   prefix: '8861'
   number_min_length: 7
   number_max_length: 9
-  uuid: 57fc7460-5c86-48b4-81a0-ee2e569a0892
+  uuid: 76569ac2-a500-4adf-b4c1-48b669ff0ff8
   country_id: *tw
-  network_id: *special_services
+  network_id: *tw_special_services
 - id: 254604
   prefix: '88610'
   number_min_length: 12
   number_max_length: 13
-  uuid: 0c6cca04-7698-4e30-ae57-c704174d7fd3
+  uuid: 46f2ffb8-d5cb-4360-b7fc-39a6a90e321d
   country_id: *tw
-  network_id: *virtual_private_network
+  network_id: *tw_virtual_private_network
 - id: 257687
   prefix: '88620'
   number_min_length: 11
   number_max_length: 12
-  uuid: a7263bab-26c9-4840-a26f-11690087d294
+  uuid: 29ff4094-e9de-4f67-8429-0a09831cd939
   country_id: *tw
-  network_id: *premium_rate_services
-- id: 392580
+  network_id: *tw_premium_rate_services
+- id: 392581
   prefix: '88680'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5c992567-386f-4152-bc89-3d91d2cf0203
+  uuid: 92b11648-e70b-4d55-b6af-4adfff0d0aae
   country_id: *tw
-  network_id: *freephone_services
+  network_id: *tw_freephone_services
 # Mobile Prefixes
 - id: 87108
   prefix: '886400010'
   number_min_length: 17
   number_max_length: 17
-  uuid: cf49af7f-3a7f-4e2e-98bb-3b9e527bdb30
+  uuid: ed7b2fcb-ef7c-46e6-b9a9-38dcf0078d46
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 87109
   prefix: '886400011'
   number_min_length: 17
   number_max_length: 17
-  uuid: 560a0cf9-4436-4c9b-84c1-358f50f7bb95
+  uuid: 38967bc2-447d-43af-a508-a523fc295404
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 87110
   prefix: '886400012'
   number_min_length: 17
   number_max_length: 17
-  uuid: 5cb3f328-146e-4927-81ee-2ba91abe156c
+  uuid: 08232829-e07b-4429-8657-404850c68f92
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 164398
   prefix: '886909'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5ccae5fd-0171-47c0-a178-1095c93911c8
+  uuid: 9b48de95-b1e3-4586-958c-ac16baad804a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 165741
   prefix: '886910'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7efd1281-6628-4a70-84fd-d712d528b527
+  uuid: f19b486b-9ea4-4ef6-bcb8-b562dfd9d1a7
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 166574
   prefix: '886911'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5f29dce9-3526-4ce8-9b77-58f80ce310e3
+  uuid: 7f3f56ec-b0bf-46d3-95e7-bee794681bfd
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 166575
   prefix: '8869110'
   number_min_length: 13
   number_max_length: 13
-  uuid: 00264552-308f-446c-ba4d-aeceeb09262b
+  uuid: 7ad14aed-1aef-49d8-aeb6-776f5816df36
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 167849
   prefix: '886913'
   number_min_length: 12
   number_max_length: 12
-  uuid: c09b3f83-9bce-423d-935d-4be2519ab158
+  uuid: a80c6824-7014-4fc2-877f-5dd4837f0f46
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 168454
   prefix: '8869140'
   number_min_length: 13
   number_max_length: 13
-  uuid: 58999578-f276-4462-aeee-d1a6d4d0a10e
+  uuid: c1182793-1a4a-4dd9-8406-ca31a1051ec9
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 168455
   prefix: '8869141'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3c556aa7-d69f-4f80-94ab-115d2af827ed
+  uuid: c3147467-539a-45d3-bd44-aaedec7b7ff0
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 168557
   prefix: '8869142'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5a16132e-0094-49bb-a873-fc99a6891b4f
+  uuid: f59fa64c-8a0a-4698-8391-13280df7671c
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 168608
   prefix: '886914252'
   number_min_length: 15
   number_max_length: 15
-  uuid: f81f7ad2-4432-4ca5-99ac-1777787b1736
+  uuid: c197dbfc-399e-4550-8bc9-0a1777202b18
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 168610
   prefix: '886914253'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4a9b4640-f59f-4c53-b680-20d4320094cf
+  uuid: 0fd5e5dc-bd0b-4a29-aa96-acc11ec7ad65
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 169277
   prefix: '886915'
   number_min_length: 12
   number_max_length: 12
-  uuid: eb5bfb15-2c86-4f5f-bb0d-06825ffed292
+  uuid: e0e8bfc5-d901-469a-ad61-b79a131a83b3
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 169644
   prefix: '886916'
   number_min_length: 12
   number_max_length: 12
-  uuid: c6196805-d7a6-45c7-b5d9-ab64e9251451
+  uuid: 8a4a9d54-c194-4b17-b897-da04bc73510d
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 170761
   prefix: '886917'
   number_min_length: 12
   number_max_length: 12
-  uuid: b438dc3a-119c-4443-bee9-d5c33bb9a27d
+  uuid: eabd49a4-3ade-46be-a235-7945e06cbd18
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 172753
   prefix: '886912'
   number_min_length: 12
   number_max_length: 12
-  uuid: f1936384-4f4b-474e-a923-2f13d7350b30
+  uuid: d9676138-d98f-4b31-9af3-0ea9f28ed072
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 172859
   prefix: '886918'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8b772a95-d3e7-462d-a2c7-2dba977a604c
+  uuid: 2cb8583e-b394-4a6e-8d82-8388cbbcd398
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173003
   prefix: '886918145'
   number_min_length: 15
   number_max_length: 15
-  uuid: c1046412-f132-4392-9c00-9b0a8b9921e7
+  uuid: 5356d5ad-1287-4aea-a4a2-f63fa58afe10
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173203
   prefix: '886918245'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2f8907b6-cffc-4542-ad3e-3975faa5742c
+  uuid: 85b76831-f526-4b49-baf2-a30f274c25dc
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173402
   prefix: '8869184440'
   number_min_length: 16
   number_max_length: 16
-  uuid: f87cf43d-e2df-4b91-be88-4990937a19f1
+  uuid: a6038c91-f882-476b-b755-084a57eb9911
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173403
   prefix: '8869184441'
   number_min_length: 16
   number_max_length: 16
-  uuid: 5ae4619b-242f-4203-8c31-af01bab6d8c0
+  uuid: d8865244-2d07-422a-b89b-1c5245206d18
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173404
   prefix: '8869184442'
   number_min_length: 16
   number_max_length: 16
-  uuid: 0de4dffd-72aa-4d4d-b019-e40cb144a232
+  uuid: 3243fa53-5154-40e4-8a04-67006a1dda51
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173405
   prefix: '8869184443'
   number_min_length: 16
   number_max_length: 16
-  uuid: a985675c-9c2e-4712-a15d-02099703dba0
+  uuid: bb9c01cd-52c5-42a6-a6f2-465ba1ff8dae
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173406
   prefix: '8869184444'
   number_min_length: 16
   number_max_length: 16
-  uuid: 5cb7c14e-fc0f-4f75-95a8-7108465387e2
+  uuid: 2e591231-a06a-48be-993f-e39091bf7fec
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173407
   prefix: '886918445'
   number_min_length: 15
   number_max_length: 15
-  uuid: c59337f0-1e2e-4d58-a440-a01f961eb703
+  uuid: 32c5ce86-e021-4bd2-9ae3-fa543c4f1861
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173507
   prefix: '8869185440'
   number_min_length: 16
   number_max_length: 16
-  uuid: e8c19ef9-6fa8-4361-9a9d-772ab5742b77
+  uuid: 212695ed-1281-4154-80c2-c4c79ef9b5ab
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173508
   prefix: '8869185441'
   number_min_length: 16
   number_max_length: 16
-  uuid: ea1959b8-8dee-42e6-ac41-9bbb87fd4f97
+  uuid: d26f6ed2-6639-4abe-88bb-5109de7f283a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173509
   prefix: '8869185442'
   number_min_length: 16
   number_max_length: 16
-  uuid: f266d14d-9afa-468a-af62-42d313d7c7f3
+  uuid: de021785-2b78-43a6-a4b8-d11640785acf
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173510
   prefix: '8869185443'
   number_min_length: 16
   number_max_length: 16
-  uuid: 6b4c447e-8208-4ffa-a075-113fac18dbc1
+  uuid: d88ccd89-334e-4070-a3b2-8fc81a04d316
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173511
   prefix: '8869185444'
   number_min_length: 16
   number_max_length: 16
-  uuid: a7f1552b-067f-4b17-8fc5-00f5ee7101f1
+  uuid: 1611e4f0-8d5e-449d-bc46-7dc5b2bd36dc
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173512
   prefix: '886918545'
   number_min_length: 15
   number_max_length: 15
-  uuid: 7d2d98da-c312-44e2-a4f7-2d80b4414bc3
+  uuid: 1a82c229-8271-4dd1-924f-f7c46de71084
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173618
   prefix: '886918645'
   number_min_length: 15
   number_max_length: 15
-  uuid: 54a03a21-b5d7-482a-9156-cc1e01bc0cf6
+  uuid: 6951c6b0-f8b1-453b-b571-b3e7144e2ebb
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173737
   prefix: '886918745'
   number_min_length: 15
   number_max_length: 15
-  uuid: 34ab3ecf-0663-4e06-9245-084a732f2132
+  uuid: 590f371b-40a1-4424-af2c-ab39e664c1c6
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 173837
   prefix: '886918845'
   number_min_length: 15
   number_max_length: 15
-  uuid: f1019975-f5e5-4dcf-a3ff-b1ca32066352
+  uuid: e4f407ae-a271-45af-9075-afbab9e26723
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 175207
   prefix: '886922'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5111ed39-d792-4940-9eb8-9d887eae2b4b
+  uuid: 9738c501-4cfd-4755-ae27-ffafc6e9c708
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 175208
   prefix: '88692244'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7013f82f-3b7d-4d42-84e5-fa717ebd470a
+  uuid: 404f2d10-2ad6-445d-921b-6fce58d54e98
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 176594
   prefix: '886923'
   number_min_length: 12
   number_max_length: 12
-  uuid: dfb496f3-5486-444f-8b9c-903cc647bf2f
+  uuid: e8ae8a15-747d-4dfc-8028-5f4afc00002d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 179077
   prefix: '886918945'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6a3b7049-1295-4091-8ba8-7f7fed12984b
+  uuid: ce272da0-c07b-40fa-9622-abb28c7e7eb9
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 179079
   prefix: '8869189458'
   number_min_length: 16
   number_max_length: 16
-  uuid: 0c8fde6c-dcee-40b1-94e3-16fe27a635b2
+  uuid: 40de5cd8-467a-4aaf-92b2-0358f5248ff4
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 179080
   prefix: '8869189459'
   number_min_length: 16
   number_max_length: 16
-  uuid: ebf706d5-a223-4e1d-be0e-2749a9c39b74
+  uuid: 879fddeb-7965-4316-8789-dc6bee4e0842
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 179144
   prefix: '886919'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1c0c83bc-3b33-4cf8-8dd1-a0ec7085a78f
+  uuid: 45c84a59-736f-42cc-ab71-bee9a9694168
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 180037
   prefix: '886920'
   number_min_length: 12
   number_max_length: 12
-  uuid: d997e8d2-9535-44b5-82e4-37e7e76d0abf
+  uuid: 9c39ca43-f100-40a4-9978-87eadd7c7126
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 180280
   prefix: '886920444'
   number_min_length: 15
   number_max_length: 15
-  uuid: be51c40b-2904-4133-b619-8e23233f39b3
+  uuid: f034bf3e-27cc-4c8a-b0d4-992a004dbb52
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 180479
   prefix: '886920644'
   number_min_length: 15
   number_max_length: 15
-  uuid: bf672b79-e0a1-4354-b3dc-b782202d5976
+  uuid: adb309d4-dc5b-40a4-91bb-188c144acc99
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 180836
   prefix: '886921'
   number_min_length: 12
   number_max_length: 12
-  uuid: f2eab7cb-33d1-4c04-97d5-27031af26e63
+  uuid: 78febf16-7803-4739-97d2-012c4709d23a
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 180966
   prefix: '886922474'
   number_min_length: 15
   number_max_length: 15
-  uuid: db56a853-dfa7-4ac9-82b6-b34628ff05f9
+  uuid: 78528b1c-8d16-40d4-895e-90fde7d9ee40
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 183933
   prefix: '8869240'
   number_min_length: 13
   number_max_length: 13
-  uuid: f3559d92-0486-4899-9f49-714aea735ff5
+  uuid: 18a1f436-a40e-4e69-a21b-e079b2cd4359
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 183934
   prefix: '8869241'
   number_min_length: 13
   number_max_length: 13
-  uuid: f3244260-74fd-4805-8239-e4c52db95a38
+  uuid: e25a50d3-ab44-45cd-b903-7add836304a9
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 184213
   prefix: '886925'
   number_min_length: 12
   number_max_length: 12
-  uuid: 811c567e-b903-46b7-96d0-c0915775cff0
+  uuid: 403e8bb5-c25d-4fe5-92f6-dcc56c059262
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 184841
   prefix: '886926'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1683aa3b-91b1-418e-9177-9bc6292ca490
+  uuid: 528061cd-563b-4eee-b1ae-c8c0e3733691
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 186672
   prefix: '886927'
   number_min_length: 12
   number_max_length: 12
-  uuid: 21374ca2-3b56-44de-b442-5c5457304328
+  uuid: 0726cccc-7a1a-4f34-896e-83d817969ff9
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 186687
   prefix: '886928'
   number_min_length: 12
   number_max_length: 12
-  uuid: c5a2a25f-9d5b-482e-b464-860e05304ac2
+  uuid: c4ef5cb0-967f-4cf9-adaa-4308add7a33b
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 187042
   prefix: '886929'
   number_min_length: 12
   number_max_length: 12
-  uuid: eff5b1f5-ce50-4129-8215-f9e9c0661dd8
+  uuid: ba6d6672-d785-4b80-bed4-599d06879424
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 188983
   prefix: '8869318'
   number_min_length: 13
   number_max_length: 13
-  uuid: f21b963d-448e-4798-b6f2-b52df077d851
+  uuid: 5cf8ac2d-7f0e-4c71-ba5b-7b9466d0f61a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 189024
   prefix: '8869319'
   number_min_length: 13
   number_max_length: 13
-  uuid: ffa4e7dd-7251-4c56-8654-35e00826fd36
+  uuid: d08683a8-e56e-481b-8557-19d97b583076
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 189076
   prefix: '886932'
   number_min_length: 12
   number_max_length: 12
-  uuid: bfa6242e-bb34-45a1-b710-3edf3bd8e59e
+  uuid: a065709e-4bec-4f9a-a8bd-ab41b9ed11f3
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 189440
   prefix: '8869324'
   number_min_length: 13
   number_max_length: 13
-  uuid: 27868732-7f8b-47e4-b380-2e505574d4fc
+  uuid: 32ade6cf-5f27-4301-b91d-f4ab615b5cfd
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 189465
   prefix: '886933'
   number_min_length: 12
   number_max_length: 12
-  uuid: c92f3ef3-3ae2-44a9-8539-78072ababb46
+  uuid: 58882578-a053-4405-8126-c0f11212cff5
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 195423
   prefix: '886930'
   number_min_length: 12
   number_max_length: 12
-  uuid: f4a68e7a-73e1-4097-bbf2-cdf93b9c6ff2
+  uuid: 9b89df8f-eda8-4b18-95fc-1040f2152e4a
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 195573
   prefix: '8869310'
   number_min_length: 13
   number_max_length: 13
-  uuid: e6fc9691-683e-424d-8288-d3d649d6ab63
+  uuid: dd60eb4b-e0e6-435b-a9a8-ccd2cd7bca8a
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 195574
   prefix: '8869311'
   number_min_length: 13
   number_max_length: 13
-  uuid: 02ed1dce-ae5b-4122-b0c7-a6ae7bb9f468
+  uuid: 278408ee-ad1d-431b-a6d5-d2d2ebdab537
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 195575
   prefix: '8869312'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2a118d81-ef4b-4a7a-b047-26e3e8c64d60
+  uuid: 5ca4c140-e0f5-4b49-971b-225be4075624
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 195674
   prefix: '8869313'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3052d4a3-41c4-4309-bd32-7d508b94c33b
+  uuid: 2f861b07-7ea4-4377-8321-2721ec172ba0
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 195774
   prefix: '8869314'
   number_min_length: 13
   number_max_length: 13
-  uuid: 07926f52-f2f9-4eaf-99ab-5a92b3558b63
+  uuid: c6b17c53-c006-424f-9e6d-345e0394da78
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 195848
   prefix: '8869315'
   number_min_length: 13
   number_max_length: 13
-  uuid: be355939-e2f0-4566-b48f-f7740b226b22
+  uuid: 16847368-89ab-4071-9f68-0f3899c60ff4
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 195908
   prefix: '8869316'
   number_min_length: 13
   number_max_length: 13
-  uuid: 40f976e8-0e29-4349-8d07-327e5a3eaac5
+  uuid: 589e89ef-e9d7-4916-8a29-bfe2dfa1f4cd
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 195969
   prefix: '8869317'
   number_min_length: 13
   number_max_length: 13
-  uuid: 02164063-bc1e-48cc-a3dd-2e63f42dc51b
+  uuid: 85f1eb0b-6afa-4b5b-b3f3-40aa3f462e45
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 196707
   prefix: '886934'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6a2a6396-387b-4256-965e-eceb0266799f
+  uuid: cee13628-b578-4789-a044-cfcf2ceb68bb
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 199182
   prefix: '886935'
   number_min_length: 12
   number_max_length: 12
-  uuid: ec6017f1-7b6b-4c1d-bf47-ec722cbea1f1
+  uuid: cea482c4-d3f0-4172-9c43-0bba70b62c00
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 199183
   prefix: '88693544'
   number_min_length: 14
   number_max_length: 14
-  uuid: d6975c04-cf0c-42e4-a3f8-1d84ea8a5585
+  uuid: b71cdcab-908b-4c9b-8d0c-166509f2370b
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 199184
   prefix: '886935344'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4ff7a8ed-505c-4e5a-9487-c1be576f8fc4
+  uuid: 4898b94a-a7ce-45a2-a016-cdd8d4db2f0c
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 199185
   prefix: '886935444'
   number_min_length: 15
   number_max_length: 15
-  uuid: dccc3588-bd13-4b2a-8fb2-9a80ea23efff
+  uuid: eac842a5-f051-48f5-b670-511e33b20857
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 199186
   prefix: '886935644'
   number_min_length: 15
   number_max_length: 15
-  uuid: d590f3b7-32ce-4cae-a886-67cacdb41827
+  uuid: 0f22cd90-8e1b-4d9a-89d9-fa4aef79b6a4
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 199187
   prefix: '886935844'
   number_min_length: 15
   number_max_length: 15
-  uuid: 449b0f26-00b1-4694-a22b-6ea40fb21a83
+  uuid: 82a56074-4ac8-407b-8af8-d7ffde8f98ef
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 201128
   prefix: '8869364'
   number_min_length: 13
   number_max_length: 13
-  uuid: 01eb98c5-2045-49d3-ab0e-871b4b4c70e3
+  uuid: 5e11bcc3-81f3-4d27-8e87-19bf2468abd0
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 204649
   prefix: '886936'
   number_min_length: 12
   number_max_length: 12
-  uuid: c031bd9f-6fa0-4d75-a931-8fe6d28280ca
+  uuid: 8cdb1fec-25fa-4fb9-bfc7-995aef4b4201
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 204651
   prefix: '8869360'
   number_min_length: 13
   number_max_length: 13
-  uuid: 30873287-d3fe-4e9f-9063-b927b0a98385
+  uuid: 67dd3c71-b9a1-4594-a9a3-333403fa0c92
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 205136
   prefix: '886937'
   number_min_length: 12
   number_max_length: 12
-  uuid: ca8bc993-d82c-4fcc-b04a-3dab40908ee1
+  uuid: dbd2f6b4-3ab9-43c9-9f32-add951e164bc
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 206147
   prefix: '886938'
   number_min_length: 12
   number_max_length: 12
-  uuid: a51318e0-698c-460e-bf09-04afa427ee32
+  uuid: ce9570b5-0851-4a52-a8a5-fcca3a938f32
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 206307
   prefix: '8869374'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8224954a-fa0e-4e97-b9e1-825ea172947d
+  uuid: 7b713e00-c752-4398-b57b-ca857212615c
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 211955
   prefix: '886939'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0f518116-3dd1-4347-be94-e1bdf4564752
+  uuid: ff7f7fd3-80c3-4a1d-b8b4-ed789519fecb
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 211956
   prefix: '886939144'
   number_min_length: 15
   number_max_length: 15
-  uuid: 362288e5-ebeb-4064-a626-e5d9b465a7bd
+  uuid: 598f7bef-d8fc-4429-9ce1-c076d11e157c
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 212073
   prefix: '886939344'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1aad5cdf-8112-4e67-ad33-834c89ab177f
+  uuid: 08354edd-9406-4854-a4b0-544587da1e89
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 212157
   prefix: '886939444'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9171d59b-d51d-4e5c-bf4e-f1eb25ff6245
+  uuid: 385a239e-3914-417f-82a7-d95dfecbb06c
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 212191
   prefix: '886939544'
   number_min_length: 15
   number_max_length: 15
-  uuid: 854cb444-a279-43ec-936c-7d1f9c2cf15a
+  uuid: d0ed6549-f915-4335-ba13-9c9e7fb54f3d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215639
   prefix: '886952'
   number_min_length: 12
   number_max_length: 12
-  uuid: a82ab0b8-e23b-4d76-8956-2e0d8f1afeee
+  uuid: 4bbf981f-aa36-4be7-83f6-5e6ac5480594
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215641
   prefix: '886952145'
   number_min_length: 15
   number_max_length: 15
-  uuid: f350a92a-40df-4299-9f30-0acfc73499e3
+  uuid: 218d8ead-ff57-4fe9-921d-d6008dcbca17
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215685
   prefix: '8869522445'
   number_min_length: 16
   number_max_length: 16
-  uuid: a02a7df4-658a-4917-bbcf-63bcdc64f9bd
+  uuid: b4c964fe-47f8-4196-9548-4f131066cebc
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215686
   prefix: '8869522446'
   number_min_length: 16
   number_max_length: 16
-  uuid: 8e674b07-096c-4b5b-a41e-538fae407059
+  uuid: c9fd0286-3da2-414a-a03d-f26aa3cee40e
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215687
   prefix: '8869522447'
   number_min_length: 16
   number_max_length: 16
-  uuid: d7498fc6-eedc-43ae-811a-90ea0ea5edfe
+  uuid: 081fc191-7ad8-4943-9b2e-38f08e25af0a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215688
   prefix: '8869522448'
   number_min_length: 16
   number_max_length: 16
-  uuid: bf6b8c30-d62a-4e17-a538-d92aff77d9d3
+  uuid: 7d557a5e-d2d4-45bc-837b-fe1b407aa4ac
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215689
   prefix: '8869522449'
   number_min_length: 16
   number_max_length: 16
-  uuid: e91c15a0-7bb3-4975-929b-ded67062c953
+  uuid: 9c418c38-8278-4a26-8cfd-0be9ae87a92c
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215690
   prefix: '886952245'
   number_min_length: 15
   number_max_length: 15
-  uuid: 7c79f0d9-34af-4e2f-a96a-3aa8d3cd75d8
+  uuid: 676e4956-41b2-44eb-be3a-a90b5bd1948d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215693
   prefix: '8869522460'
   number_min_length: 16
   number_max_length: 16
-  uuid: e9a61c65-5eb2-432d-8079-95196ee3b60a
+  uuid: a24b5b18-314f-4215-9550-d3f707f83f9d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215694
   prefix: '8869522461'
   number_min_length: 16
   number_max_length: 16
-  uuid: 968a33f2-e53f-4035-88df-abbb6176f187
+  uuid: e9edd088-57f8-4c00-a144-00552d2c26af
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215695
   prefix: '8869522462'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1f52e122-e44b-4d5f-a4ea-a6158748c558
+  uuid: 0c0dabd1-c141-4908-b19b-b8b51b61eac6
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215696
   prefix: '8869522463'
   number_min_length: 16
   number_max_length: 16
-  uuid: b3e1e690-dae5-4a2a-ac72-3bcdd45f9206
+  uuid: 8fbf6ec6-86f7-4471-ad07-f9b4fe5aa73f
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215697
   prefix: '8869522464'
   number_min_length: 16
   number_max_length: 16
-  uuid: d6cc29fa-ef5f-43fc-88ed-11ef31cbbec4
+  uuid: cb00d687-da00-40d5-bad6-8f6047f3ec9f
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215869
   prefix: '8869527445'
   number_min_length: 16
   number_max_length: 16
-  uuid: 27f9c76d-b80e-48a7-818c-fbbb6c931a4e
+  uuid: 821aed90-fd12-4abe-b973-cfe362ed9aae
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215870
   prefix: '8869527446'
   number_min_length: 16
   number_max_length: 16
-  uuid: c37915b3-b490-47b6-b1d0-d096d5601cf9
+  uuid: 0e28285d-93e9-499d-852d-c4e3ff46c53a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215871
   prefix: '8869527447'
   number_min_length: 16
   number_max_length: 16
-  uuid: d32c71b6-7314-42f0-a107-764ea1acc17f
+  uuid: f880e659-dbdd-4843-92b4-936bb9c4ef2d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215872
   prefix: '8869527448'
   number_min_length: 16
   number_max_length: 16
-  uuid: a298febd-be89-4474-aa91-af2ec085587b
+  uuid: 4e8bf7b6-eec7-4f55-a74b-7eb0799c9eea
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215873
   prefix: '8869527449'
   number_min_length: 16
   number_max_length: 16
-  uuid: 749341e4-acf7-4357-8ae6-30cdfb7488dd
+  uuid: 66cefc42-b394-4ec8-b337-78c11797611f
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215876
   prefix: '8869527460'
   number_min_length: 16
   number_max_length: 16
-  uuid: a9c3934b-0146-4b94-b4a5-13134e0fbdb5
+  uuid: b2a0e2d2-5db3-4c7f-b214-dbfce645fea8
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215877
   prefix: '8869527461'
   number_min_length: 16
   number_max_length: 16
-  uuid: 9e04e951-5c83-44ee-b22c-18f264897011
+  uuid: a620e826-86e8-4a05-af76-dbe4a053a5be
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215878
   prefix: '8869527462'
   number_min_length: 16
   number_max_length: 16
-  uuid: ad1502ca-a13d-48aa-b286-2fd7c646318b
+  uuid: e80f250c-561b-42db-af27-12f00d3f5d63
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215879
   prefix: '8869527463'
   number_min_length: 16
   number_max_length: 16
-  uuid: 4b5645d3-6d6d-4256-9439-5ae88395d39d
+  uuid: 7a263ae1-02bc-407d-8008-a1396c15c49e
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215880
   prefix: '8869527464'
   number_min_length: 16
   number_max_length: 16
-  uuid: 2eaf7c91-30f0-4f3b-874f-5105f47c6044
+  uuid: 49a2497d-bc56-4bff-8f07-ef9f0ce08233
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215909
   prefix: '8869528445'
   number_min_length: 16
   number_max_length: 16
-  uuid: a8bd6064-24bf-4d8a-9010-7e90b420bc85
+  uuid: e2e06894-4e04-4202-9ac9-5a0011ee0561
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215910
   prefix: '8869528446'
   number_min_length: 16
   number_max_length: 16
-  uuid: 7bc23e82-9ab4-402c-8202-029d6a721458
+  uuid: 2f635149-6280-447e-b351-e14679c210f3
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215911
   prefix: '8869528447'
   number_min_length: 16
   number_max_length: 16
-  uuid: 6bbf7d6f-08b1-41c6-9509-93be5e1a3510
+  uuid: 83025a96-2307-4613-a0fa-070ac6b16c9a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215912
   prefix: '8869528448'
   number_min_length: 16
   number_max_length: 16
-  uuid: b018dda3-c5c2-49bd-a602-dd62becfed94
+  uuid: e788eb06-0909-4862-8639-87ab8a1d1a85
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215913
   prefix: '8869528449'
   number_min_length: 16
   number_max_length: 16
-  uuid: 0cf877ba-5cf5-40f6-9837-30ea40f20e37
+  uuid: c85e6a94-38cb-4c6a-a1b1-cb193c605f1d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215915
   prefix: '8869528460'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1e4c2034-45ba-4dd7-9a30-6782e990374e
+  uuid: 99326492-9906-473d-9f5e-b8db0cee98f2
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215916
   prefix: '8869528461'
   number_min_length: 16
   number_max_length: 16
-  uuid: e114a76f-679c-461f-9b4e-b15e5f34ed92
+  uuid: 39171090-e335-441f-8e17-56ce8ce7c65c
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215917
   prefix: '8869528462'
   number_min_length: 16
   number_max_length: 16
-  uuid: ec0b02c5-2f8f-489d-a968-050bd9c0e668
+  uuid: 9beba675-3104-439a-835e-15326da1f067
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215918
   prefix: '8869528463'
   number_min_length: 16
   number_max_length: 16
-  uuid: 91a6b32b-94c7-4946-a600-d3060d409ada
+  uuid: 7747790a-7bb4-4c91-a754-e296efd047ff
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 215919
   prefix: '8869528464'
   number_min_length: 16
   number_max_length: 16
-  uuid: a6f0df38-ecfe-4e5d-af6f-fdf719bbbfa3
+  uuid: cad82853-ba27-48a4-bb69-d83c16d9a68d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 216017
   prefix: '886953'
   number_min_length: 12
   number_max_length: 12
-  uuid: a5b3c3f4-b1b2-4f2c-b3aa-eaabdf36de72
+  uuid: 5e6974ce-d6d5-4e33-8641-5cebb5b9f4fb
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 216991
   prefix: '886955'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9c9b4f07-fa2f-4ccc-8f5e-0ef98ce3cfcb
+  uuid: 3739b49f-4cdd-4181-ab8e-fe94e578712d
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 217005
   prefix: '886956'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5f7724bb-bf43-4f62-b830-2e1a7cfbb278
+  uuid: d7f04037-7071-4a73-a159-3c2d88348ea3
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 217467
   prefix: '886939644'
   number_min_length: 15
   number_max_length: 15
-  uuid: fd1fef15-3bb9-422e-a623-6895dca13709
+  uuid: af0092b6-6a11-418e-b222-3b6b2c92fae1
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 217501
   prefix: '886939844'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5377ca75-2f3e-4029-b9d3-cafef2915173
+  uuid: 1ced272e-9043-459b-8d22-92928fc28be4
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 220159
   prefix: '8869540'
   number_min_length: 13
   number_max_length: 13
-  uuid: 500603f0-6176-4b3d-806c-373fce1c1185
+  uuid: 18cc4d1f-7e5a-45dc-b786-126e337bb16b
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 220160
   prefix: '8869541'
   number_min_length: 13
   number_max_length: 13
-  uuid: 92dbbc87-f6e4-45e5-9dec-c66572ec8e06
+  uuid: 15726e14-9fc9-40d4-8aa9-df35114bb636
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 220949
   prefix: '886958'
   number_min_length: 12
   number_max_length: 12
-  uuid: ebb7c8c6-d7cf-4422-b99f-20ffb7750bcc
+  uuid: 3386df4a-0c24-410c-8378-32d0f3f3580d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221527
   prefix: '8869600'
   number_min_length: 13
   number_max_length: 13
-  uuid: a206e000-fcee-49c4-a584-d6841feb3b60
+  uuid: 17218c18-5fc6-4311-a9d4-0351ce9d590a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221528
   prefix: '8869601'
   number_min_length: 13
   number_max_length: 13
-  uuid: c644a4db-0c90-4060-8543-d307afa6cb2b
+  uuid: fc66a4a1-d00d-42f2-a016-94f8baf909d7
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221529
   prefix: '8869602'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6d55b809-239a-40e7-95c8-1175312f84aa
+  uuid: 578ab15c-555b-4ad2-bcca-ff6334b7ebf1
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221530
   prefix: '8869603'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1c0e1953-bd32-4faf-81c0-b01bfa55a7fa
+  uuid: 27816add-f168-41ec-929c-5abfa988adfe
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221531
   prefix: '8869604'
   number_min_length: 13
   number_max_length: 13
-  uuid: ebcc6513-9f96-493a-8ca6-e29c419e92eb
+  uuid: cddf0b15-80ac-453d-bdcd-830613830d8f
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221532
   prefix: '8869605'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3c72e99e-bdbe-459d-b18f-df42d9394a9f
+  uuid: 1599d77c-dd53-4fac-896a-7673a5972b8c
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 221533
   prefix: '8869606'
   number_min_length: 13
   number_max_length: 13
-  uuid: d33839c5-7ab0-457b-8c9e-36a3431b0ffd
+  uuid: 021de382-54bb-49eb-891a-1ccb10ac086d
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 221534
   prefix: '8869607'
   number_min_length: 13
   number_max_length: 13
-  uuid: be6beb82-8fda-4e18-8ac6-b24c897bcf80
+  uuid: 35461f33-6a8b-4df9-8409-d9e3a5065199
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 221535
   prefix: '8869608'
   number_min_length: 13
   number_max_length: 13
-  uuid: 95337220-fc90-4301-ad9d-b0d69a195272
+  uuid: ef8a195a-e1ea-4b17-a5a6-5068663a3fa5
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 221536
   prefix: '8869609'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6e2607d9-bbc2-472e-8922-bb6583dd7d57
+  uuid: 23d9579b-a1ec-45dd-8e09-560d0e65737d
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 221549
   prefix: '8869610'
   number_min_length: 13
   number_max_length: 13
-  uuid: e7a31280-abac-4688-803c-9ee9aed3692c
+  uuid: 7540290f-5b7f-458c-9ad5-504cd6aaa3dc
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221550
   prefix: '8869611'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7759a47c-bcb1-49e7-8e04-b81b7af605eb
+  uuid: 217f5719-379d-4ba0-b136-9ca9159dd625
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221656
   prefix: '8869612'
   number_min_length: 13
   number_max_length: 13
-  uuid: c67c65ed-8dad-4757-8d5f-07ddfd183eb1
+  uuid: f3f6e674-2239-4d08-8f90-2b451d67da8d
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221662
   prefix: '886961204'
   number_min_length: 15
   number_max_length: 15
-  uuid: b9631093-8581-450f-bb5f-206d8bfa6dc8
+  uuid: 837cc501-c64c-4f16-bcbe-faf603c5028a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221759
   prefix: '8869613'
   number_min_length: 13
   number_max_length: 13
-  uuid: a0654a99-c687-487a-8b2b-e6db82b47ad4
+  uuid: 967c37e8-99ee-42e1-af60-8d60b254ca45
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221837
   prefix: '886961344'
   number_min_length: 15
   number_max_length: 15
-  uuid: cc1b3af6-b504-4e7a-8664-ca9c48bb280e
+  uuid: 38a922c2-4d2b-48fc-bfe6-ab8eb37be83f
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221840
   prefix: '886961347'
   number_min_length: 15
   number_max_length: 15
-  uuid: a1949480-0299-40f4-bae6-cdd15ff7d7bf
+  uuid: adb9f5d1-d4ef-49c9-8d03-492dfcf2a284
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 221897
   prefix: '8869614'
   number_min_length: 13
   number_max_length: 13
-  uuid: 858f924e-dc4b-4166-9f4b-d5a99778f638
+  uuid: 1fe99671-78ea-4f5b-a5d7-52a54aa07599
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 222065
   prefix: '8869615'
   number_min_length: 13
   number_max_length: 13
-  uuid: b5d54cca-affa-484b-a63d-5946d522beb6
+  uuid: afb4c18f-527f-41e1-83ee-5ad4b7b0cb62
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 222653
   prefix: '886963'
   number_min_length: 12
   number_max_length: 12
-  uuid: a30695c1-5234-4c6f-96c2-83ddfb859415
+  uuid: e8dbfd5f-4bf6-4e53-a993-80f91c864975
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 222938
   prefix: '8869650'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7170c141-bc6e-40d8-9f99-2a3ad4a2e3e7
+  uuid: 1477b560-c31d-4add-944f-70ed6ee54a1a
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 222939
   prefix: '8869651'
   number_min_length: 13
   number_max_length: 13
-  uuid: d3e535bb-607a-47c9-a79e-caefb41f0c60
+  uuid: 7cb7d7dc-6d73-4ab7-bc77-206841722341
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 223252
   prefix: '8869672'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8581159a-4596-484d-b33d-be6ec3add05a
+  uuid: 6f5f2dac-5259-4c30-8849-bca1277c3e23
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 223374
   prefix: '8869673'
   number_min_length: 13
   number_max_length: 13
-  uuid: 13e2e2c8-c4cb-4ff9-96aa-acc2075a6206
+  uuid: ea2f3d71-90ed-440a-b3af-8a1214582712
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 223533
   prefix: '8869680'
   number_min_length: 13
   number_max_length: 13
-  uuid: b9081898-360d-4498-8970-847b9fb98599
+  uuid: 7a1ce4ce-1ab3-4f90-8689-19e4edcf1846
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 223534
   prefix: '8869681'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6665d736-af4f-44f7-ac7b-fef8f3f9a215
+  uuid: fb34b9c7-7668-4dcb-a08d-4e088fe12a1f
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 224633
   prefix: '886970'
   number_min_length: 12
   number_max_length: 12
-  uuid: 97745fb2-c274-4170-8112-291c8727d5e4
+  uuid: 917859a8-9183-4005-a902-a0e0eed52e9b
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 224978
   prefix: '886970447'
   number_min_length: 15
   number_max_length: 15
-  uuid: 024a2a1d-f0bb-4af3-966b-7d14cc514e01
+  uuid: e96f4984-9cdd-45ec-bc31-60899d3fd38c
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 225020
   prefix: '886970484'
   number_min_length: 15
   number_max_length: 15
-  uuid: 47d78e66-f72c-472d-a38c-5526ed240956
+  uuid: 42e9e7ba-3dad-45fe-8c6e-f96bd8110da0
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 225513
   prefix: '8869710'
   number_min_length: 13
   number_max_length: 13
-  uuid: c12d67f5-0462-412d-b08d-146c30c68449
+  uuid: 9d6a79a3-f4c3-4c36-b79e-d42a340ec9aa
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 225514
   prefix: '8869711'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9c6bf56c-766c-48e3-8d31-b43b02101c61
+  uuid: ad5b05aa-6da0-4f55-8ab6-4d8d162e3b32
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 226246
   prefix: '8869620'
   number_min_length: 13
   number_max_length: 13
-  uuid: 226b6464-dbc5-46f5-964c-d28b83a3cd5e
+  uuid: 0205677b-6079-4348-b0b5-5c72a4c53d5c
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 227194
   prefix: '8869652'
   number_min_length: 13
   number_max_length: 13
-  uuid: fb55a71a-158e-4f01-b453-4f868273c2cb
+  uuid: fe87995b-582f-4e15-8ced-6426d17b35c5
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227254
   prefix: '8869653'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3e62a8b1-c5a2-4a77-b533-fbea7bf5e86d
+  uuid: dd47fcd2-b3c2-4599-80ec-335e780fa5a2
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227255
   prefix: '8869654'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7eafd662-d797-4138-8c73-59f0c864ff49
+  uuid: 51c65ee0-e41c-47d3-89bd-017f0b3ec53a
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227256
   prefix: '8869655'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3d497b52-37da-4010-b1fe-e82fbfd15364
+  uuid: 03e1f815-09ac-453e-96e4-f53caee083ba
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227257
   prefix: '8869656'
   number_min_length: 13
   number_max_length: 13
-  uuid: c66aa6d3-2132-4f05-afc0-048a6dcee069
+  uuid: e107cd64-3bdb-4a2d-90a6-b121f64048d8
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227278
   prefix: '8869657'
   number_min_length: 13
   number_max_length: 13
-  uuid: 547055a3-d352-4a61-8684-aaee1a4fcaf5
+  uuid: bbba8054-54cb-486d-8497-0b092fab2d23
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227279
   prefix: '8869658'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8e99df5a-1791-41fd-9067-8ad9c3e6e078
+  uuid: 358165a4-7e11-43ed-8d8f-dff7120957bc
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227294
   prefix: '8869660'
   number_min_length: 13
   number_max_length: 13
-  uuid: 44dc7879-c322-42e2-8356-b964d6855329
+  uuid: 0e8068a0-4baa-434b-bb89-80641417dd8f
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 227295
   prefix: '8869661'
   number_min_length: 13
   number_max_length: 13
-  uuid: bc381234-739d-4988-9de5-559fe13f172a
+  uuid: 47773951-c8b0-493d-a945-e53ec6f641ef
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 227509
   prefix: '8869662'
   number_min_length: 13
   number_max_length: 13
-  uuid: 428719c8-c6f6-4f02-9b6e-7d530d4a1780
+  uuid: a0c5251c-a996-49d6-a183-a54e063f8fcb
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 227609
   prefix: '8869663'
   number_min_length: 13
   number_max_length: 13
-  uuid: 58d6ef48-3ee7-4fa3-adc4-bd13f2ebcfc1
+  uuid: 214328de-357c-4dc9-8726-7147b76062ed
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 227610
   prefix: '8869664'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3d785823-36c7-4b85-be7e-b22c8502a072
+  uuid: 3a3bcb2c-ba16-42ff-a299-3136cf8118d5
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227611
   prefix: '8869665'
   number_min_length: 13
   number_max_length: 13
-  uuid: c73aaffa-ca04-4529-933d-93a2d80b2d60
+  uuid: 787b1c24-868c-4c6d-af82-8c27bc63aecc
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227623
   prefix: '8869666'
   number_min_length: 13
   number_max_length: 13
-  uuid: 13366095-6bf7-4a0d-8afc-17607c61f734
+  uuid: f66a8d6e-2200-491b-a8b4-d04634310db9
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227646
   prefix: '8869667'
   number_min_length: 13
   number_max_length: 13
-  uuid: 40bc2afd-5471-45e6-8797-c6fa89506ae8
+  uuid: 77d78cc9-2093-4195-8420-fc767d09ef7a
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 227658
   prefix: '8869668'
   number_min_length: 13
   number_max_length: 13
-  uuid: ac77a06c-e7d1-450d-9b43-d718f8c5ff5b
+  uuid: 686ff044-5c87-4b9e-aa8a-3419c2458d96
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 227659
   prefix: '8869669'
   number_min_length: 13
   number_max_length: 13
-  uuid: 34f4c767-e556-49b2-98f5-3a322a2ada0e
+  uuid: 6502d318-cf17-4251-8401-d4a7c9dac4bf
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 227670
   prefix: '8869670'
   number_min_length: 13
   number_max_length: 13
-  uuid: f6509bd7-6ac4-4d91-99fd-24f07a66d643
+  uuid: f8ada5ea-714a-40e9-abd5-f2efbf0e4804
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 227671
   prefix: '8869671'
   number_min_length: 13
   number_max_length: 13
-  uuid: e50d7e75-663f-469c-95a4-39e52aaf4f91
+  uuid: ca981543-867b-4576-bdc4-76e314698029
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 227989
   prefix: '8869682'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4f50785e-08bf-4999-9202-0f506bfb2833
+  uuid: 77828aa3-67ef-4868-af9f-91d40e72322c
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 228195
   prefix: '8869683'
   number_min_length: 13
   number_max_length: 13
-  uuid: c44ca953-9862-4ca1-ba65-276321f8f3ed
+  uuid: 03d6e963-1996-4b49-bbc7-e943f88e44a5
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 228218
   prefix: '8869684'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3b04196a-e19c-4204-a352-6728abbc0c3b
+  uuid: 6bf80685-e8f9-4652-8cef-0d6f8bf14e39
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 228220
   prefix: '8869685'
   number_min_length: 13
   number_max_length: 13
-  uuid: ed437ee1-e2d2-4aff-bffa-cc2ca78abf9f
+  uuid: 128ae6c3-ea51-4d2b-9284-1cf24bb97032
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 228222
   prefix: '8869686'
   number_min_length: 13
   number_max_length: 13
-  uuid: 57753b46-a202-4164-81e8-8d86517d1f40
+  uuid: 5065f64a-991b-41e2-a4a5-6a7864bc3b73
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 228252
   prefix: '8869687'
   number_min_length: 13
   number_max_length: 13
-  uuid: 765b90e9-bae9-4baf-a224-941ca4df4688
+  uuid: 8bf400af-4d52-4fcc-8bf1-74f91e3d49e8
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 228257
   prefix: '8869688'
   number_min_length: 13
   number_max_length: 13
-  uuid: c5c56a34-50c0-4e02-bf0d-1aa74e7b77a7
+  uuid: 4a5731e0-a5a6-473e-9f90-25d115882095
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 228258
   prefix: '8869689'
   number_min_length: 13
   number_max_length: 13
-  uuid: 632b0dbc-243b-4e19-9f91-2b247fc74c2d
+  uuid: c296e36f-65bc-403f-a9fb-9ea35f9d8274
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 228331
   prefix: '8869712'
   number_min_length: 13
   number_max_length: 13
-  uuid: 99143e4c-389d-45ac-801c-0dd95901a505
+  uuid: 2e7e795f-93ba-4e3d-bd20-b64e93674a40
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 228736
   prefix: '8869713'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0c977d2e-e35e-4fee-8ad7-5427b8a6e537
+  uuid: be0fb360-5916-4201-90ba-0d80bf849aff
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229003
   prefix: '8869714'
   number_min_length: 13
   number_max_length: 13
-  uuid: 97cd32d3-ea1d-4c2e-b455-b7363236d568
+  uuid: 48477e72-481a-4437-afdb-eec9a7864365
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229197
   prefix: '8869715'
   number_min_length: 13
   number_max_length: 13
-  uuid: 160877f1-353a-423e-9d92-2b0a55179939
+  uuid: ca9473ab-d7d9-47d7-b161-e97f5916171a
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229680
   prefix: '886973840'
   number_min_length: 15
   number_max_length: 15
-  uuid: c8c447a2-d01a-43d3-97f9-86a5a71e65e0
+  uuid: b65f1a6c-89c0-4325-bbce-7cf744c038b0
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229682
   prefix: '886973841'
   number_min_length: 15
   number_max_length: 15
-  uuid: b101ec24-e798-42cd-b05d-026cce3d39a3
+  uuid: 1920754e-97a8-4235-a627-5aee796cb947
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229684
   prefix: '886973842'
   number_min_length: 15
   number_max_length: 15
-  uuid: a78447ed-96d5-4c9b-ae65-ba34ace773d8
+  uuid: 168f6235-b6e0-4c13-8aeb-70ab6f16a7c1
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229686
   prefix: '886973843'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4b5facdc-b650-4cab-b510-85244b17e852
+  uuid: 8002dc00-86a1-4792-9866-3ba18d0643b0
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229688
   prefix: '886973844'
   number_min_length: 15
   number_max_length: 15
-  uuid: 8ebfd41d-f605-4e83-8c2d-6fa78451c82d
+  uuid: 1b5c6d74-0b3f-4cb8-b989-af18dd650a4d
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229690
   prefix: '886973845'
   number_min_length: 15
   number_max_length: 15
-  uuid: d7f53d98-7a62-4070-9522-152e8414cf2d
+  uuid: 6a0702a8-19ba-49eb-8dda-0556d06ec275
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229692
   prefix: '886973846'
   number_min_length: 15
   number_max_length: 15
-  uuid: 56dafb8e-b435-4505-a033-805ce664d8b5
+  uuid: b8749814-2ebc-428a-a9c1-c90796cf57c3
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229694
   prefix: '886973847'
   number_min_length: 15
   number_max_length: 15
-  uuid: 860f68bf-44af-4b0c-a903-45e3c28b7157
+  uuid: d33a3fe9-d0de-442d-a6fe-4875d0b08012
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 229851
   prefix: '8869740'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6565ae0c-ac23-4b21-9cef-27d2dc0ffe7f
+  uuid: 9721e630-638d-4030-8b29-9193776a21d2
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 229852
   prefix: '8869741'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0489d750-a710-43af-9360-2bc24633e452
+  uuid: f334943a-bd23-469c-a564-37a22f948a64
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 229853
   prefix: '8869742'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3df09f28-93ed-48d1-9ba8-4f1baabfc69c
+  uuid: 1f815803-f7f7-47f2-a375-e16c826e9fdf
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 229854
   prefix: '8869743'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2961cc21-82c7-4a4c-bea5-52c1737237ef
+  uuid: 09c484b0-365e-4b73-99b9-8d415ede0eb9
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 229855
   prefix: '8869744'
   number_min_length: 13
   number_max_length: 13
-  uuid: edf208d1-a75f-46b4-9e18-7804c98ab64c
+  uuid: 434cf9b4-ac71-4467-8ed8-74e81f0a32da
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 229856
   prefix: '8869745'
   number_min_length: 13
   number_max_length: 13
-  uuid: 515d1b3e-bac7-41c1-b3ac-34ffc79dafbd
+  uuid: f3dd95e6-8d8b-4c98-926f-a96468f89be9
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 229872
   prefix: '886975'
   number_min_length: 12
   number_max_length: 12
-  uuid: 43e4d520-d4af-406d-b087-48478c349df1
+  uuid: 289c3439-d226-43fa-9f7d-75bf12561545
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 229874
   prefix: '8869754'
   number_min_length: 13
   number_max_length: 13
-  uuid: 554c0ecb-e18e-442a-b234-34869e9995d8
+  uuid: 02bfc6f9-6627-4612-af51-e425eb363e1f
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 229875
   prefix: '8869755'
   number_min_length: 13
   number_max_length: 13
-  uuid: f66ad1ec-7dc7-4be3-b9ef-66fb632f62c8
+  uuid: cdb3a32a-f167-4a6d-8219-928f8e0c5314
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 229882
   prefix: '886976'
   number_min_length: 12
   number_max_length: 12
-  uuid: b90fb71d-1391-4797-aae0-3577e38c2f6b
+  uuid: 6b2f4722-d550-43cf-98ff-e36f431c7ba5
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 229895
   prefix: '8869770'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3703ed86-b2b0-40e4-9353-7e5a3757ec05
+  uuid: 83d486ed-8947-4e90-9bd8-a5c314a7b8c8
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 229896
   prefix: '8869771'
   number_min_length: 13
   number_max_length: 13
-  uuid: f85136a4-ce38-4952-ab68-d4e09df9cb3c
+  uuid: 5f3f4a02-036a-4cc8-9e63-c782b3abc48a
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 229897
   prefix: '8869772'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8e932fc9-6706-4173-af73-ba650d4c408d
+  uuid: 5894e77d-4cb0-47f3-b671-458e40301879
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 229898
   prefix: '8869773'
   number_min_length: 13
   number_max_length: 13
-  uuid: dc466698-9e41-4bf4-81e3-49028875bd09
+  uuid: 75c2eb69-8ba8-4a10-be95-beaca4e9dc52
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 229899
   prefix: '8869774'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5c71b9c2-379d-474a-a2cf-60a7bf2a84fd
+  uuid: b729e6b1-663b-4957-af5b-8711816bf7a6
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 229900
   prefix: '8869775'
   number_min_length: 13
   number_max_length: 13
-  uuid: 60855a60-c7f1-46b4-82d9-3c49a9af4ed1
+  uuid: c5d4c31a-7cf1-4d72-ba03-c12400fe129c
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 229901
   prefix: '8869776'
   number_min_length: 13
   number_max_length: 13
-  uuid: b0c5c342-4e31-4e31-ba7b-d6774156fa35
+  uuid: 400be8a5-d633-4147-9376-f23ed47a2937
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 229902
   prefix: '8869777'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9f9f7098-afa6-4bd9-a45b-8c7dfccdf2e6
+  uuid: 25d5b80c-764e-4b31-9937-4dcc4865f3e0
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 229916
   prefix: '886978'
   number_min_length: 12
   number_max_length: 12
-  uuid: fa495faf-576c-4ed2-8e39-c5487c0162e4
+  uuid: 9d9d0ee4-2fdc-49bc-a6bf-d489880fc43c
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 230740
   prefix: '886981'
   number_min_length: 12
   number_max_length: 12
-  uuid: b2e6c964-0f9a-4032-9f00-bc3f7becf033
+  uuid: 2c292561-0bf3-4957-b9c7-f13dae0551e3
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 231047
   prefix: '8869842'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5400195f-557d-4f98-972d-707a30467183
+  uuid: 13856415-09e2-4025-9865-5eba67019d78
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 231282
   prefix: '8869843'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1e0b465b-1d7a-4148-a9cc-7d4df32f7899
+  uuid: ae58faef-1594-4d31-983a-f7bb4e1fbe7d
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 231457
   prefix: '8869844'
   number_min_length: 13
   number_max_length: 13
-  uuid: bc7a0421-7014-4209-95f4-2ec4c0b93bcb
+  uuid: de565608-2ce5-4e5c-a4e9-9dbe64f1863a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 231565
   prefix: '8869845'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9514465c-d82a-46f0-ad86-66073f7cf821
+  uuid: b0a5734b-f585-4cdd-829c-23072e04cb83
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 231600
   prefix: '8869846'
   number_min_length: 13
   number_max_length: 13
-  uuid: 74dcfff4-3e1f-43f9-8346-68bb7d8404c1
+  uuid: 023cdefe-39b3-455f-a37f-5c514c057143
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 231611
   prefix: '8869847'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9484f090-40b2-4bb5-ae38-ec82836bca03
+  uuid: 577aa776-8065-4998-b6db-247ad8738cb5
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 231692
   prefix: '886985'
   number_min_length: 12
   number_max_length: 12
-  uuid: b0b9c404-8827-4002-9b18-293a47bc40b7
+  uuid: b051c799-80d9-4093-b13e-c55060a62355
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 231924
   prefix: '8869716'
   number_min_length: 13
   number_max_length: 13
-  uuid: 442df879-d95e-4a07-b715-39108daebc0b
+  uuid: 42233186-3c69-4f27-8007-1d7dbc9efa5a
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 231941
   prefix: '8869717'
   number_min_length: 13
   number_max_length: 13
-  uuid: d71566c0-ed99-4e82-8ea2-2301c422c82a
+  uuid: 1b2af773-a5db-4e15-9740-833c62bbd602
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 232042
   prefix: '8869718'
   number_min_length: 13
   number_max_length: 13
-  uuid: f4a877a5-5d6b-4498-983d-121c0e55e834
+  uuid: 3326e802-12c2-467e-b786-16a2594c81c5
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 232090
   prefix: '886972'
   number_min_length: 12
   number_max_length: 12
-  uuid: 373dd882-9f4f-45cf-8877-409b89cadefe
+  uuid: 5cec0a81-3edf-4d1f-a95b-88e030df03a0
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 232985
   prefix: '886973'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7844bcb3-b27a-492b-b23d-ada039b49c0f
+  uuid: 7c1a9e06-cba4-46fa-b20c-1ef4699b5433
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 233649
   prefix: '886979'
   number_min_length: 12
   number_max_length: 12
-  uuid: 096ae722-330d-4761-a370-8efb160ffa63
+  uuid: 9fac8e58-be98-4c41-b1a9-59ab397060b7
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 234368
   prefix: '886980'
   number_min_length: 12
   number_max_length: 12
-  uuid: d512031a-7c00-4b41-b572-5d6dbfd59973
+  uuid: de2d9366-eac4-499f-a328-c043e9d100b1
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 234634
   prefix: '886982'
   number_min_length: 12
   number_max_length: 12
-  uuid: b0ff7502-34b9-4e84-9a01-deab6d5c641c
+  uuid: 373f4b00-dbbf-4818-968d-14b0d8460a88
   country_id: *tw
-  network_id: *apt_mobile
+  network_id: *tw_apt_mobile
 - id: 235290
   prefix: '886983'
   number_min_length: 12
   number_max_length: 12
-  uuid: 74bf2316-e437-4d0d-91ab-6a77b3f1aaac
+  uuid: 02911c8b-e47d-4923-aa0e-142ef624d164
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 235703
   prefix: '886983414'
   number_min_length: 15
   number_max_length: 15
-  uuid: c2fbb29f-a77b-4e08-9803-f898e79cc514
+  uuid: 60259db8-e5da-447e-8ea7-a655b556f551
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 235704
   prefix: '886983434'
   number_min_length: 15
   number_max_length: 15
-  uuid: ac71949d-1562-47f2-8c5a-70a580670f9a
+  uuid: 80b2072d-95ad-4a3c-923c-0ceea74344dc
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 235705
   prefix: '886983444'
   number_min_length: 15
   number_max_length: 15
-  uuid: 26c5a017-568a-4f11-bdf3-43ff26c1a516
+  uuid: ea1a5e15-9024-4d49-83c4-0a9ed3d41bff
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 235707
   prefix: '886983544'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0cc4dcc2-083b-447b-90ae-5d5b1c5aa167
+  uuid: bf5855f4-21b9-436b-acb9-e9431767ca59
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 235722
   prefix: '886983744'
   number_min_length: 15
   number_max_length: 15
-  uuid: 573dd883-5829-4d39-9250-c78178e5e044
+  uuid: 2d8893bf-2a41-4628-8f43-41ccc24dc295
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 235792
   prefix: '8869840'
   number_min_length: 13
   number_max_length: 13
-  uuid: 151ab4ca-aa21-46fe-ad3d-d0126dc43447
+  uuid: 7b83dc87-e814-433c-a15f-52057ae144d1
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 235793
   prefix: '8869841'
   number_min_length: 13
   number_max_length: 13
-  uuid: 813e3274-ca39-4c0a-bc76-fe2acd1ce788
+  uuid: 8960749f-c656-4f74-91aa-dfbb628e5566
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236375
   prefix: '886986'
   number_min_length: 12
   number_max_length: 12
-  uuid: b1aa03b6-39b3-4eeb-a1b4-8a55eaf0d27b
+  uuid: f9ade88b-4de3-4185-aecf-3fa15fdb00ce
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 - id: 236786
   prefix: '886989'
   number_min_length: 12
   number_max_length: 12
-  uuid: 57cdc02d-2ddc-4fbc-b5c1-3b78b93e681f
+  uuid: 9a558305-e064-48ac-90e4-b4cab368326e
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236987
   prefix: '8869894002'
   number_min_length: 16
   number_max_length: 16
-  uuid: 08a63492-f969-4f47-8764-1b500e6ca0e7
+  uuid: dca2a574-96b8-48b9-9a6f-8da0ef73511a
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236988
   prefix: '8869894003'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1093a645-c3bc-4bc4-993d-1bda49f7dc3c
+  uuid: 94b444bf-0d15-45ab-9a95-e3d0b99061eb
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236989
   prefix: '8869894004'
   number_min_length: 16
   number_max_length: 16
-  uuid: 5aab4480-fcba-4213-98eb-b4b6e60053cc
+  uuid: 543b6c25-282f-45f0-91c9-26e2d47b2e2d
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236990
   prefix: '8869894005'
   number_min_length: 16
   number_max_length: 16
-  uuid: 2b49aeae-79e4-46a8-a55f-8afc5eae10c8
+  uuid: 5e94d3ee-13b8-489e-9548-1e3412fa8b55
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236991
   prefix: '8869894006'
   number_min_length: 16
   number_max_length: 16
-  uuid: f55de2d4-3e5a-4e82-8361-397de9d9bdca
+  uuid: 7243ae3e-2efc-49b3-91c0-d4aaf413d556
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236992
   prefix: '8869894007'
   number_min_length: 16
   number_max_length: 16
-  uuid: d48c6424-c98a-463a-b7b8-9e67d25fe9e7
+  uuid: 01e6f68e-e65b-42d7-97b9-c7650e75af08
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236993
   prefix: '8869894008'
   number_min_length: 16
   number_max_length: 16
-  uuid: f209f652-31ab-4a23-aaa3-ca8eea51aefc
+  uuid: 73ef9293-154e-4344-8e34-0ed22c10e913
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236994
   prefix: '8869894009'
   number_min_length: 16
   number_max_length: 16
-  uuid: 4e516cf9-ea3f-4085-af83-f3392409070a
+  uuid: 44ffe13d-7a25-42c8-b38f-ef1198f2ecf6
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236995
   prefix: '886989401'
   number_min_length: 15
   number_max_length: 15
-  uuid: 12641274-21f7-4f09-933c-2b9196e42e09
+  uuid: 9722c325-84c8-419b-bb57-7b689e2b1b33
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236997
   prefix: '886989402'
   number_min_length: 15
   number_max_length: 15
-  uuid: da860352-d4bc-4030-a1bf-97cfacb18484
+  uuid: e43b0ffd-6c43-47d3-a972-f8e5a1c8a4a9
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 236999
   prefix: '886989403'
   number_min_length: 15
   number_max_length: 15
-  uuid: 80521a8b-119f-4acc-b149-aeb60a6887e7
+  uuid: efd69e1c-1f23-4e10-853f-86def7d41c5a
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237001
   prefix: '886989404'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3aede8e3-1cb8-4bef-8f2b-0f7a0e2e0e2f
+  uuid: bdb73ad2-6b6a-4d80-bbf5-ccfd1adea054
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237003
   prefix: '886989405'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2581f595-a492-4a73-9e86-c728586c3b52
+  uuid: 97c86cd0-4811-4b40-be40-3859f9243622
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237005
   prefix: '886989406'
   number_min_length: 15
   number_max_length: 15
-  uuid: ca100e34-bbdc-435c-b761-9c9f6ea54506
+  uuid: 7407543c-6c9a-48dc-8d26-c09aeaffb472
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237007
   prefix: '886989407'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5a82d676-7e84-464f-992e-d4dc683108f0
+  uuid: 0aa496e4-a5d8-48b8-9776-e71fb6dacded
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237009
   prefix: '886989408'
   number_min_length: 15
   number_max_length: 15
-  uuid: b3b16024-95ce-4b5c-b8c7-6b949c1db9b0
+  uuid: 4c6fa56e-276c-4be7-99b8-c3d0747a961c
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237011
   prefix: '886989409'
   number_min_length: 15
   number_max_length: 15
-  uuid: 56cc1de9-bc86-49f2-af42-7dc25f8f68ce
+  uuid: 45366645-43b9-4165-9628-2f6e3a415b75
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237013
   prefix: '88698941'
   number_min_length: 14
   number_max_length: 14
-  uuid: c84e21c7-51d9-43af-9efc-a46fd6349437
+  uuid: 5bbcf496-a00a-4ec9-8e35-813bee2037f0
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237023
   prefix: '88698942'
   number_min_length: 14
   number_max_length: 14
-  uuid: 86a399e1-11f9-40e7-a7c7-5e26ffd609c5
+  uuid: 79898727-33d0-4251-baac-2703fd516984
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237034
   prefix: '88698943'
   number_min_length: 14
   number_max_length: 14
-  uuid: b8dba3fd-3fa9-40db-9e64-b4c074661f42
+  uuid: 0a9a7cd1-588a-42de-a82e-b49603b1ea9f
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237045
   prefix: '88698944'
   number_min_length: 14
   number_max_length: 14
-  uuid: 24b7a609-5ec7-4c40-afac-b628147b9f0f
+  uuid: b526317d-0d74-4bad-a351-fb2b54b1e06a
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237056
   prefix: '88698945'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4c295bf9-7118-4638-95c3-1ead4cbb3678
+  uuid: cffe5f8a-79c9-427f-8572-67f3dcaffbab
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237067
   prefix: '88698946'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2be101c9-5ac9-4293-a8a4-776df9a34011
+  uuid: 70d0862f-fb8e-405b-ac2e-f7dd84ba4fb5
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237078
   prefix: '88698947'
   number_min_length: 14
   number_max_length: 14
-  uuid: fcf5e899-e0b6-4717-a7a8-d5f11a8eb2e8
+  uuid: 0a49deca-c9ce-4572-9d98-9d5b9d815e2f
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237089
   prefix: '88698948'
   number_min_length: 14
   number_max_length: 14
-  uuid: 42a938cf-906a-4e7e-8b67-2b644011af80
+  uuid: e360ebd2-0910-4c5f-a4e8-2ca99a6fdd81
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237100
   prefix: '88698949'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1b0d8824-ce19-44c9-af06-015c0f44c34a
+  uuid: 19e93a60-8d6b-46fc-bdc5-690b0ac7f1fb
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 237463
   prefix: '8869899'
   number_min_length: 13
   number_max_length: 13
-  uuid: 17151f36-7433-4668-a24b-5f2d8395e54c
+  uuid: 63160d89-862f-4576-9ae7-0a21d20f685c
   country_id: *tw
-  network_id: *far_eastone_mobile
+  network_id: *tw_far_eastone_mobile
 - id: 238132
   prefix: '886987'
   number_min_length: 12
   number_max_length: 12
-  uuid: 87c17f5e-0320-4f1b-a8cd-e1818d99d9d3
+  uuid: 0638c69e-bd55-4308-ba1d-0fd332db03a1
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 238449
   prefix: '886987884'
   number_min_length: 15
   number_max_length: 15
-  uuid: 120f915a-ba5c-4fe4-95fa-13b3bd39570c
+  uuid: 7496a607-8acf-429e-940b-7e6491d79318
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 238450
   prefix: '886987984'
   number_min_length: 15
   number_max_length: 15
-  uuid: be0b116c-8141-48a6-9e70-a1215e48efed
+  uuid: 23574f87-a70b-48fa-8c50-3e954e2edb3f
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
+  network_id: *tw_taiwan_mobile_mobile
 - id: 238460
   prefix: '886988'
   number_min_length: 12
   number_max_length: 12
-  uuid: a1e20fdd-04d2-4b29-8a16-42a09efc1b58
+  uuid: 6e23f806-136a-4b6e-b2ec-90a1e61a6844
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 238651
   prefix: '8869884'
   number_min_length: 13
   number_max_length: 13
-  uuid: 108ff7e3-b377-45cf-b5de-6adef4db5453
+  uuid: afe9ea21-8468-443c-a12e-a07f921b309e
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
+  network_id: *tw_chunghwa_telecom_mobile
 - id: 247791
   prefix: '886'
   number_min_length: 9
   number_max_length: 9
-  uuid: 031f52ed-a36c-49d7-bab6-e6eef7fdd3ba
+  uuid: 57e06322-7412-446a-8dfb-31f09c4f64c9
   country_id: *tw
-  network_id: *mobile
-- id: 447659
+  network_id: *tw_mobile
+- id: 447660
   prefix: '8869007'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8d27b07c-c025-4435-b304-7558f301a86a
+  uuid: cd6208ba-f128-467a-8a9d-d050a856f70a
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
-- id: 447671
+  network_id: *tw_chunghwa_telecom_mobile
+- id: 447672
   prefix: '8869008'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1c2db5ce-bf51-4a91-b6a9-6686ee9e459b
+  uuid: d5145fdc-dca7-4352-9f44-094f1d9edeb1
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
-- id: 447687
+  network_id: *tw_chunghwa_telecom_mobile
+- id: 447688
   prefix: '8869009'
   number_min_length: 13
   number_max_length: 13
-  uuid: 15947857-d7a7-45fc-9adc-8a6d9d82c9b0
+  uuid: 16c31184-1d95-41e0-9e88-965833e81748
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
-- id: 447723
+  network_id: *tw_chunghwa_telecom_mobile
+- id: 447724
   prefix: '8869010'
   number_min_length: 13
   number_max_length: 13
-  uuid: ceb04d89-647b-4a13-bac5-f2e809abd75f
+  uuid: ff660167-b6ad-44b2-a72b-6237e4fa0415
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
-- id: 447724
+  network_id: *tw_taiwan_mobile_mobile
+- id: 447725
   prefix: '8869011'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2ab9db01-a762-4c87-95b1-54214363058c
+  uuid: 773289a1-ce26-4617-9189-966ea01c6c96
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
-- id: 447725
+  network_id: *tw_taiwan_mobile_mobile
+- id: 447726
   prefix: '8869012'
   number_min_length: 13
   number_max_length: 13
-  uuid: c552829e-b136-47c8-8a3a-3aefd3139f26
+  uuid: d6b5cb19-07cd-4b56-965a-9e1011474430
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
-- id: 447907
+  network_id: *tw_taiwan_mobile_mobile
+- id: 447908
   prefix: '8869023'
   number_min_length: 13
   number_max_length: 13
-  uuid: b21a5b23-aaf4-4f5d-848d-3fdc78a75f29
+  uuid: bede1424-8dd3-4b54-9f5f-b1cbf9944b4d
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448007
+  network_id: *tw_t_star_mobile
+- id: 448008
   prefix: '8869024'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5865b91b-12e9-4d13-8c02-264d9e951ea7
+  uuid: d948c737-b92d-4469-8e5b-8b8a62bf0846
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448098
+  network_id: *tw_t_star_mobile
+- id: 448099
   prefix: '8869025'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1ee8fc99-6336-4b65-916a-bed85e579fdd
+  uuid: d1998136-bce6-4946-9b63-3ab94159f3a7
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448139
+  network_id: *tw_t_star_mobile
+- id: 448140
   prefix: '886902540'
   number_min_length: 15
   number_max_length: 15
-  uuid: 377d18d1-5e66-4b3b-a678-ea0c21727179
+  uuid: 2c0b2bfd-9c84-4654-a6ad-b261edc19554
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448141
+  network_id: *tw_t_star_mobile
+- id: 448142
   prefix: '886902541'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1f1eea3d-4185-4469-93e9-15378b00bb13
+  uuid: 01c88ecf-3f0f-4a3a-8291-f6a94a9b7fd7
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448143
+  network_id: *tw_t_star_mobile
+- id: 448144
   prefix: '886902542'
   number_min_length: 15
   number_max_length: 15
-  uuid: 928ad288-5cb9-4996-9743-4c56359604f0
+  uuid: 98074b52-6595-418e-b839-6253d7cd9664
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448145
+  network_id: *tw_t_star_mobile
+- id: 448146
   prefix: '886902543'
   number_min_length: 15
   number_max_length: 15
-  uuid: a60995d7-e1c1-4c71-b23c-7276fb9f7d01
+  uuid: 1d33f93c-c6f0-496f-89c2-f0e78eb569f6
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448147
+  network_id: *tw_t_star_mobile
+- id: 448148
   prefix: '886902544'
   number_min_length: 15
   number_max_length: 15
-  uuid: 23a59f81-563a-4e9f-a12c-b4ab20f8200f
+  uuid: ad1025f0-2b59-4c26-8249-2c54354b4a3e
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448149
+  network_id: *tw_t_star_mobile
+- id: 448150
   prefix: '886902545'
   number_min_length: 15
   number_max_length: 15
-  uuid: ccc45b7a-854d-4f04-83af-c62857f29e60
+  uuid: 41b77aa7-a01b-4b7c-8c11-e574e291d413
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448151
+  network_id: *tw_t_star_mobile
+- id: 448152
   prefix: '886902546'
   number_min_length: 15
   number_max_length: 15
-  uuid: 60aa73e8-74af-42e9-a76b-caa3293ecf35
+  uuid: e1609d68-1a45-4618-a5c5-c232e68909a8
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448153
+  network_id: *tw_t_star_mobile
+- id: 448154
   prefix: '886902547'
   number_min_length: 15
   number_max_length: 15
-  uuid: 49d1e7d5-66e8-4bad-9502-3a255efd9097
+  uuid: 50ece95c-6220-4197-a76a-7e8504c8c43b
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 448205
+  network_id: *tw_t_star_mobile
+- id: 448206
   prefix: '8869026'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7ac7f566-1316-4ddb-813f-614f72cdc295
+  uuid: 5667046a-73cb-458b-93c1-278fcc27f2b2
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 449721
+  network_id: *tw_t_star_mobile
+- id: 449722
   prefix: '886906'
   number_min_length: 12
   number_max_length: 12
-  uuid: 35e830ee-b05d-4648-9566-13bb7a343b87
+  uuid: babc6546-ec19-414f-9de8-e0f65107ce88
   country_id: *tw
-  network_id: *apt_mobile
-- id: 453107
+  network_id: *tw_apt_mobile
+- id: 453108
   prefix: '8869000'
   number_min_length: 13
   number_max_length: 13
-  uuid: caf262ff-3627-4e8c-aec2-f4a794cd8274
+  uuid: 664f800c-ac5d-4ff3-898c-ac2deb129c7d
   country_id: *tw
-  network_id: *far_eastone_mobile
-- id: 453109
+  network_id: *tw_far_eastone_mobile
+- id: 453110
   prefix: '8869001'
   number_min_length: 13
   number_max_length: 13
-  uuid: d61efaa8-9322-42a4-85fb-dcc9bc9ab856
+  uuid: bb53ad1b-1c17-4d74-9a73-14b6f8bd4923
   country_id: *tw
-  network_id: *far_eastone_mobile
-- id: 453112
+  network_id: *tw_far_eastone_mobile
+- id: 453113
   prefix: '8869002'
   number_min_length: 13
   number_max_length: 13
-  uuid: 48c59ac7-33f2-4f7d-b855-907c60975854
+  uuid: ddaebb2d-9853-4f15-abb1-5070793dd4f0
   country_id: *tw
-  network_id: *far_eastone_mobile
-- id: 453119
+  network_id: *tw_far_eastone_mobile
+- id: 453120
   prefix: '8869003'
   number_min_length: 13
   number_max_length: 13
-  uuid: 94a5eb58-66f7-48f1-a31f-c7ad251394bc
+  uuid: ff03b313-1e99-4341-a80e-4de3c8dbb3b6
   country_id: *tw
-  network_id: *far_eastone_mobile
-- id: 453129
+  network_id: *tw_far_eastone_mobile
+- id: 453130
   prefix: '8869004'
   number_min_length: 13
   number_max_length: 13
-  uuid: ce629dc2-3aa6-44c0-a3fa-26811a5ec1bd
+  uuid: d468b8c8-eb4d-4576-913f-d67a396ff694
   country_id: *tw
-  network_id: *far_eastone_mobile
-- id: 453137
+  network_id: *tw_far_eastone_mobile
+- id: 453138
   prefix: '8869005'
   number_min_length: 13
   number_max_length: 13
-  uuid: a258fa24-1aef-4548-9ab1-9d9265329793
+  uuid: 79e56ff9-43e5-4290-9116-84d5f33064cc
   country_id: *tw
-  network_id: *far_eastone_mobile
-- id: 453147
+  network_id: *tw_far_eastone_mobile
+- id: 453148
   prefix: '8869006'
   number_min_length: 13
   number_max_length: 13
-  uuid: 703d7629-06c3-48de-8b11-75d68f0cdcab
+  uuid: be36c915-ea95-408a-b62e-39b8eaa2d663
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
-- id: 453154
+  network_id: *tw_chunghwa_telecom_mobile
+- id: 453155
   prefix: '8869013'
   number_min_length: 13
   number_max_length: 13
-  uuid: 69168b91-1fd5-4cdf-9fb3-ce44ea885c53
+  uuid: 838189f2-16a0-42f0-b47c-41160e50315a
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
-- id: 453250
+  network_id: *tw_taiwan_mobile_mobile
+- id: 453251
   prefix: '8869014'
   number_min_length: 13
   number_max_length: 13
-  uuid: c4552205-d707-4432-8b99-79103295ee3b
+  uuid: 50778c08-d73c-4643-82da-7a655c044b1f
   country_id: *tw
-  network_id: *taiwan_mobile_mobile
-- id: 453671
+  network_id: *tw_taiwan_mobile_mobile
+- id: 453672
   prefix: '8869020'
   number_min_length: 13
   number_max_length: 13
-  uuid: 185377bd-73a3-4b48-a95f-d02e163cc7b3
+  uuid: ff7844a7-0335-488a-ab7b-0c0a1d323709
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 453672
+  network_id: *tw_t_star_mobile
+- id: 453673
   prefix: '8869021'
   number_min_length: 13
   number_max_length: 13
-  uuid: 73ff1bdd-e91d-4d9f-9f01-3d0f883fbfac
+  uuid: 2fbc1692-b423-4ccf-99b2-649e0e96348d
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 453673
+  network_id: *tw_t_star_mobile
+- id: 453674
   prefix: '8869022'
   number_min_length: 13
   number_max_length: 13
-  uuid: ae53eac0-1df5-4fb1-87a9-1c0c4f6712ef
+  uuid: 99fa85d0-24ab-4d78-9580-56869e74e78d
   country_id: *tw
-  network_id: *t_star_mobile
-- id: 453718
+  network_id: *tw_t_star_mobile
+- id: 453719
   prefix: '886903'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9927261e-5e6c-446b-b5f5-c97bb01792b6
+  uuid: 6e9c9d72-70d4-4413-a6a5-c9a0d2e29203
   country_id: *tw
-  network_id: *far_eastone_mobile
-- id: 454582
+  network_id: *tw_far_eastone_mobile
+- id: 454583
   prefix: '886905'
   number_min_length: 12
   number_max_length: 12
-  uuid: 07fbbd60-4c98-49b7-bcf8-166f18983d61
+  uuid: ceb598b6-f2ba-4cb3-a868-8fa650129252
   country_id: *tw
-  network_id: *chunghwa_telecom_mobile
-- id: 455015
+  network_id: *tw_chunghwa_telecom_mobile
+- id: 455016
   prefix: '886907'
   number_min_length: 12
   number_max_length: 12
-  uuid: bfad1afb-7e07-40fb-b351-31502291901e
+  uuid: bb726049-265c-4ee2-a227-e42443e5a6c3
   country_id: *tw
-  network_id: *apt_mobile
-- id: 455018
+  network_id: *tw_apt_mobile
+- id: 455019
   prefix: '886907142'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3c006626-f1e3-4fba-b8c1-9d7ea4afbaab
+  uuid: bd83223f-bacf-4e3c-8a24-0e52b3cf38a8
   country_id: *tw
-  network_id: *apt_mobile
-- id: 455019
+  network_id: *tw_apt_mobile
+- id: 455020
   prefix: '886907143'
   number_min_length: 15
   number_max_length: 15
-  uuid: dcfb6b04-f29f-413e-86eb-9c852a593995
+  uuid: e3181ea5-3703-4eec-97a4-40071c675be9
   country_id: *tw
-  network_id: *apt_mobile
-- id: 455020
+  network_id: *tw_apt_mobile
+- id: 455021
   prefix: '886907144'
   number_min_length: 15
   number_max_length: 15
-  uuid: f63625b4-a1c5-4046-8112-1f1add667e6a
+  uuid: 8f718fc1-c1ac-4116-a361-a223b9fef87c
   country_id: *tw
-  network_id: *apt_mobile
-- id: 455021
+  network_id: *tw_apt_mobile
+- id: 455022
   prefix: '886907145'
   number_min_length: 15
   number_max_length: 15
-  uuid: f1fc1913-81cf-4de9-97a2-3384ea06358d
+  uuid: b0d6a334-b0dd-4ab6-aa93-c727ea468428
   country_id: *tw
-  network_id: *apt_mobile
-- id: 455677
+  network_id: *tw_apt_mobile
+- id: 455678
   prefix: '886908'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9849aa69-5078-458f-9dfd-62c3b76888d8
+  uuid: 78fc5b72-578c-4a88-8577-c8bca5cf5f2c
   country_id: *tw
-  network_id: *t_star_mobile
+  network_id: *tw_t_star_mobile
 # Country code Prefixes
 - id: 247994
   prefix: '886'
   number_min_length: 6
   number_max_length: 11
-  uuid: c2219760-9760-4301-a4dc-db6b5c4ba491
+  uuid: 8f3cd551-253b-4cba-aff4-3a201cd4f8be
   country_id: *tw
-  network_id: *fixed
+  network_id: *tw_fixed_cc

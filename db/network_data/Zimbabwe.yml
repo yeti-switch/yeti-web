@@ -1,44 +1,44 @@
 country_id: &zw 239
 networks:
 # Fixed Networks
-- id: 3012
+- id: &zw_fixed 3134
   name: ZW Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 46e2614b-4d90-4fed-b822-a3276e7e474e
   type_id: 12
 # Supplementary services Networks
-- id: &premium_rate_services 3232
-  name: ZW Premium rate services
-  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+- id: &zw_premium_rate_services 4298
+  name: ZW Premium Rate Services
+  uuid: ca5387b0-7edd-4393-9cdc-cec5d3b196fc
   type_id: 14
-- id: &freephone_services 3382
-  name: ZW Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &zw_freephone_services 4911
+  name: ZW Freephone Services
+  uuid: c3cdab0c-9104-4e1b-9e2c-be09aac4ca52
   type_id: 14
-- id: &special_services 3075
-  name: ZW Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &zw_special_services 5061
+  name: ZW Special Services
+  uuid: 520d3246-c1d2-4c37-88a8-53cb8e2e7a9f
   type_id: 14
 # Country code Networks
-- id: &fixed 3012
-  name: ZW Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &zw_fixed_cc 4848
+  name: ZW Fixed Cc
+  uuid: 3486343c-ca22-4c48-9eb9-9e2322295e9b
   type_id: 17
 # Mobile Networks
-- id: &netone_mobile 4842
-  name: ZW Netone mobile
-  uuid: 6266c046-539e-4310-bbb7-5de461ee1e49
+- id: &zw_netone_mobile 6640
+  name: ZW Netone Mobile
+  uuid: 2eea11b6-897d-4fe3-aaec-67dbb8ffc4ae
   type_id: 3
-- id: &telecel_mobile 3897
-  name: ZW Telecel mobile
-  uuid: 914e45ca-8670-4775-a10e-10bf617d6e55
+- id: &zw_telecel_mobile 6715
+  name: ZW Telecel Mobile
+  uuid: 9278b20d-02f2-40cd-b905-424c609717ee
   type_id: 3
-- id: &econet_mobile 4925
-  name: ZW Econet mobile
-  uuid: 2c92b769-7e2a-43f9-a16a-233263784d56
+- id: &zw_econet_mobile 6785
+  name: ZW Econet Mobile
+  uuid: 94fc036f-48a4-42fa-9626-0f1613794251
   type_id: 3
-- id: &mobile 3013
+- id: &zw_mobile 6796
   name: ZW Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: 37945017-c092-4d93-ac5e-5091f5bd8b3e
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -46,212 +46,212 @@ network_prefixes:
   prefix: '26326'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6b81c906-b621-47a9-8a91-0e68b96b3f6b
+  uuid: f9a25266-e89a-4af3-8650-8e595346db94
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 24926
   prefix: '26327'
   number_min_length: 12
   number_max_length: 12
-  uuid: 697f30b5-06db-438f-8ea0-050219f1d233
+  uuid: 64cfd194-d214-4012-ab54-94205a3c1314
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 28301
   prefix: '26324'
   number_min_length: 12
   number_max_length: 12
-  uuid: e5aadb38-304f-46d7-b852-7b3782ad5455
+  uuid: 3b855ba2-f1ba-44bb-bb68-118581a2e8f6
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 31992
   prefix: '26325'
   number_min_length: 12
   number_max_length: 12
-  uuid: b5ce3dcc-3b2b-4168-8b62-ea1de4fa28f4
+  uuid: 4a60c90a-551b-4561-b73b-1ab04dca9c56
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 49493
   prefix: '26329'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8626e748-ae92-4b85-90cb-87a3dab44dce
+  uuid: 64a574d7-c2d0-4e2e-8c11-24fa9fcec40d
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 53127
   prefix: '26331'
   number_min_length: 12
   number_max_length: 12
-  uuid: 26c68e0a-c462-4249-9e05-2e14ec6f2e36
+  uuid: 731eec9a-8afe-4345-88d5-517e316a8ad8
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 84950
   prefix: '26339'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4b01f6a6-7f2d-4f0d-919b-2e6d64db1c19
+  uuid: 733997d3-6b30-4518-bfe8-4a6dac6a37b0
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 155694
   prefix: '26354'
   number_min_length: 12
   number_max_length: 12
-  uuid: 813c8a13-c10b-4d9e-83ef-6c8255d0cfe5
+  uuid: 3b2b5d19-f7fa-451d-aaf5-85005d5a5bba
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 161665
   prefix: '26355'
   number_min_length: 12
   number_max_length: 12
-  uuid: c8f1a22a-637b-498e-bd87-75bac77d333f
+  uuid: 71b178d5-9147-491d-b7a5-157bb5defbe1
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 257689
   prefix: '26320'
   number_min_length: 12
   number_max_length: 12
-  uuid: 86938912-a680-4e21-a357-1eba99142576
+  uuid: 3aea5e6f-098b-477f-aa8f-2d924e2a933a
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 293502
   prefix: '26361'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1adf93d0-9e72-41c2-84ca-20342a119f8a
+  uuid: e6e6d63a-faed-450c-b1ee-1794ddaa1917
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 319396
   prefix: '26365'
   number_min_length: 12
   number_max_length: 12
-  uuid: b05712ce-6832-4210-a06e-8118810ee324
+  uuid: bc702c89-f8c0-4d7e-a7e2-2b05b13eae26
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 321939
   prefix: '26366'
   number_min_length: 12
   number_max_length: 12
-  uuid: 52058641-c17a-4836-9f9c-a65a92d0995e
+  uuid: 40cf840d-9d31-4b57-bb94-e92cf0e10b14
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 - id: 336822
   prefix: '26368'
   number_min_length: 12
   number_max_length: 12
-  uuid: ab7d105c-7128-44e5-adf7-85ff38143412
+  uuid: 07985a76-74e7-479f-9e0b-bf16d7f918b3
   country_id: *zw
-  network_id: *fixed
-- id: 404252
+  network_id: *zw_fixed
+- id: 404253
   prefix: '26381'
   number_min_length: 12
   number_max_length: 12
-  uuid: bac22578-a230-4895-8195-8dbd256962c4
+  uuid: c901669a-8faf-4993-b038-632da0825e60
   country_id: *zw
-  network_id: *fixed
-- id: 412243
+  network_id: *zw_fixed
+- id: 412244
   prefix: '26383'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1630dab6-be40-41df-8f37-5624c34ef3be
+  uuid: 56b434ca-0371-40a0-a8c0-c9e0a7e0e89d
   country_id: *zw
-  network_id: *fixed
-- id: 414713
+  network_id: *zw_fixed
+- id: 414714
   prefix: '26384'
   number_min_length: 12
   number_max_length: 12
-  uuid: 33446fa6-6088-4ff2-95b8-7b993802e4a6
+  uuid: 91a1f675-9dae-4707-9972-b61272cca65c
   country_id: *zw
-  network_id: *fixed
-- id: 432270
+  network_id: *zw_fixed
+- id: 432271
   prefix: '263'
   number_min_length: 9
   number_max_length: 9
-  uuid: 301225f7-8385-4df5-8802-44c15fd4ca50
+  uuid: a7384bae-7b50-4b6b-977b-47a05f75a4aa
   country_id: *zw
-  network_id: *fixed
-- id: 436514
+  network_id: *zw_fixed
+- id: 436515
   prefix: '26385'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8cd46ae2-41ed-430d-8a2d-a96ca3d851f3
+  uuid: 6d41a2ae-40a8-443f-a574-3358d91175f1
   country_id: *zw
-  network_id: *fixed
-- id: 445152
+  network_id: *zw_fixed
+- id: 445153
   prefix: '26389'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9e6074e5-07c0-48bc-a6b4-93cfec394645
+  uuid: f868fa52-644e-4431-97bd-ba6f17a59e9a
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed
 # Supplementary services Prefixes
 - id: 244492
   prefix: '2633'
   number_min_length: 9
   number_max_length: 9
-  uuid: 70e97b38-39a2-4690-b6d7-c052e57566cf
+  uuid: 7468ec79-b035-43d7-a51a-bc16df4c6c81
   country_id: *zw
-  network_id: *premium_rate_services
+  network_id: *zw_premium_rate_services
 - id: 248196
   prefix: '26380'
   number_min_length: 13
   number_max_length: 16
-  uuid: 7f9b1e98-6317-4bcb-b994-c78c5cfc62f0
+  uuid: d49ec984-e6f3-4613-8285-077caeb060ff
   country_id: *zw
-  network_id: *freephone_services
+  network_id: *zw_freephone_services
 - id: 248404
   prefix: '2631'
   number_min_length: 7
   number_max_length: 7
-  uuid: e7ec4ed3-046d-4596-b4cb-327bcdccb582
+  uuid: 1606c873-771d-4153-bc56-0a21dabe0703
   country_id: *zw
-  network_id: *special_services
+  network_id: *zw_special_services
 - id: 253147
   prefix: '2639'
   number_min_length: 7
   number_max_length: 7
-  uuid: 8d2ff677-a965-4165-8671-60cc440b79a0
+  uuid: fb713112-6861-4670-9647-f2c3c142fcd0
   country_id: *zw
-  network_id: *special_services
+  network_id: *zw_special_services
 # Country code Prefixes
 - id: 248010
   prefix: '263'
   number_min_length: 6
   number_max_length: 14
-  uuid: aa3d2438-01d4-4ebc-a45c-6e8cf8aeef4a
+  uuid: 92a09401-e776-4661-a3ed-73a93f603040
   country_id: *zw
-  network_id: *fixed
+  network_id: *zw_fixed_cc
 # Mobile Prefixes
 - id: 352953
   prefix: '26371'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2f36a1f9-14fa-47e6-8b31-ad32527f1e0b
+  uuid: 0f07ff69-5ebf-4716-a997-c8565fa7a7e8
   country_id: *zw
-  network_id: *netone_mobile
-- id: 361418
+  network_id: *zw_netone_mobile
+- id: 361419
   prefix: '26373'
   number_min_length: 12
   number_max_length: 12
-  uuid: a252602c-43bb-49cd-a701-1de4c5f1c74c
+  uuid: ac15947b-2281-4736-8370-fb403aaedb69
   country_id: *zw
-  network_id: *telecel_mobile
-- id: 385909
+  network_id: *zw_telecel_mobile
+- id: 385910
   prefix: '26377'
   number_min_length: 12
   number_max_length: 12
-  uuid: 819cf38c-ccba-4dc6-a91a-07dad18425e9
+  uuid: 109c1675-76e3-45e9-b637-48136e584d24
   country_id: *zw
-  network_id: *econet_mobile
-- id: 392293
+  network_id: *zw_econet_mobile
+- id: 392294
   prefix: '263'
   number_min_length: 10
   number_max_length: 10
-  uuid: 90352ce2-2b92-49ec-8786-c87b1a8eaba7
+  uuid: ba075d0d-fcd5-4308-8809-c137c0ccf95b
   country_id: *zw
-  network_id: *mobile
-- id: 395773
+  network_id: *zw_mobile
+- id: 395774
   prefix: '26378'
   number_min_length: 12
   number_max_length: 12
-  uuid: c4810d40-bb1d-4aba-9f73-da61bb9a3882
+  uuid: ebeef5d5-b4d7-4353-a549-9d5e276dda62
   country_id: *zw
-  network_id: *econet_mobile
+  network_id: *zw_econet_mobile

@@ -1,61 +1,61 @@
 country_id: &jo 108
 networks:
 # Fixed Networks
-- id: 3012
+- id: &jo_fixed 3221
   name: JO Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 8cb67a87-10b5-45b2-b4ec-1421fa3274b6
   type_id: 12
 # Country code Networks
-- id: &fixed 3012
-  name: JO Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &jo_fixed_cc 4732
+  name: JO Fixed Cc
+  uuid: 6a6f0275-5bff-4e82-925c-344f2f543956
   type_id: 17
 # Supplementary services Networks
-- id: &special_services 3075
-  name: JO Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &jo_special_services 4988
+  name: JO Special Services
+  uuid: 6d161881-2270-4c1b-8a89-f84a6fc3601b
   type_id: 14
-- id: &emergency_services 3662
-  name: JO Emergency services
-  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+- id: &jo_emergency_services 5757
+  name: JO Emergency Services
+  uuid: 6be59160-5cad-4072-9cc1-03401acfcc57
   type_id: 14
-- id: &freephone_services 3382
-  name: JO Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &jo_freephone_services 6797
+  name: JO Freephone Services
+  uuid: 04104bc6-ef76-4b00-bfc9-ea635c2ba597
   type_id: 14
-- id: &fixed_cost_services 4608
-  name: JO Fixed cost services
-  uuid: 2b9ade8d-d95a-4eca-a81a-ddf57de9717a
+- id: &jo_fixed_cost_services 6798
+  name: JO Fixed Cost Services
+  uuid: 98cf36a0-bb36-42f3-94d1-e2b5096e441a
   type_id: 14
-- id: &shared_cost_services 3141
-  name: JO Shared cost services
-  uuid: fcb0a143-e4dd-46b3-a904-2da86f75c2f4
+- id: &jo_shared_cost_services 6799
+  name: JO Shared Cost Services
+  uuid: 362d6863-7e39-4c6b-b562-f4498bb78b24
   type_id: 14
-- id: &premium_rate_services 3232
-  name: JO Premium rate services
-  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+- id: &jo_premium_rate_services 7093
+  name: JO Premium Rate Services
+  uuid: fb3168b0-a221-479c-9247-b48a0374c479
   type_id: 14
 # Mobile Networks
-- id: &mobile 3013
+- id: &jo_mobile 6552
   name: JO Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: f3e645f1-a18c-4448-a0fb-79731950af11
   type_id: 3
-- id: &orange_mobile 3219
-  name: JO Orange mobile
-  uuid: a3fa5aa9-21c4-4621-ab4b-2ae703353a78
+- id: &jo_orange_mobile 6554
+  name: JO Orange Mobile
+  uuid: 0a2522a7-6f61-4b08-ae1c-59011517e166
   type_id: 3
-- id: &umniah_mobile 4800
-  name: JO Umniah mobile
-  uuid: f4985625-2b77-44af-8b64-26617658d146
+- id: &jo_umniah_mobile 6555
+  name: JO Umniah Mobile
+  uuid: 27fdad4a-396d-4106-8484-a026afe8db3d
   type_id: 3
-- id: &zain_mobile 3299
-  name: JO Zain mobile
-  uuid: 273c26d5-ef3b-4fa0-ad83-edeb1cc38058
+- id: &jo_zain_mobile 6556
+  name: JO Zain Mobile
+  uuid: 01d89204-55c1-4732-b2d4-e7d41f4f9a3c
   type_id: 3
 # Paging Networks
-- id: &mirsal_paging 4799
-  name: JO Mirsal paging
-  uuid: 7cdc2252-a31f-44eb-b7b9-5c5e912c5855
+- id: &jo_mirsal_paging 6553
+  name: JO Mirsal Paging
+  uuid: c68c4ced-707a-47c2-8f11-b011e9daf96a
   type_id: 13
 network_prefixes:
 # Fixed Prefixes
@@ -63,703 +63,703 @@ network_prefixes:
   prefix: '9623'
   number_min_length: 11
   number_max_length: 11
-  uuid: e5544ba8-d1bd-4bb2-9cd9-546027db7dfe
+  uuid: ec4f8110-b726-47df-8a1a-6615e36ab97d
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40833
   prefix: '962320'
   number_min_length: 13
   number_max_length: 13
-  uuid: b5d23516-717a-48e2-88fe-809b5ce98851
+  uuid: 8f649042-f3d9-49fb-a31a-bab872af8140
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40844
   prefix: '962321'
   number_min_length: 13
   number_max_length: 13
-  uuid: f42c5526-35d9-421a-a69c-6f3ab1480c60
+  uuid: 82c9fccf-5c1b-485a-b86a-d250c8ce246c
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40855
   prefix: '962322'
   number_min_length: 13
   number_max_length: 13
-  uuid: a217f4e1-451e-4adc-a0d9-2d7ed84dc49e
+  uuid: ccd2ac9e-37f6-4272-a365-1b32e9aabc04
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40912
   prefix: '962323'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9bde6cd5-575d-4251-b05e-322f9655b715
+  uuid: 185f9aef-c4f0-4be5-8e71-48b6cda1c095
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40923
   prefix: '9623240'
   number_min_length: 14
   number_max_length: 14
-  uuid: cde87061-0fee-4fe0-9dbf-7182b226cf3a
+  uuid: 711332e4-b066-4d8b-84fa-b5a0a581bf57
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40924
   prefix: '9623241'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1c220d07-f722-442f-9246-8da9b86fd829
+  uuid: 06921155-b18f-4b34-83cb-e80635e47ce7
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40925
   prefix: '9623242'
   number_min_length: 14
   number_max_length: 14
-  uuid: 931cfb86-7efc-4076-b0ee-e72993709734
+  uuid: 57e9c82a-7ff2-4f0e-b776-0e82a195abe1
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40936
   prefix: '9623243'
   number_min_length: 14
   number_max_length: 14
-  uuid: 78747368-2823-44c7-b734-64bc0e1e8e5a
+  uuid: d625fdcd-e05a-4601-a427-58590506fbf5
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40960
   prefix: '9623250'
   number_min_length: 14
   number_max_length: 14
-  uuid: 788bd824-d2f8-4800-8090-df9b93ee93b7
+  uuid: 5055f695-b3d6-4571-98db-97ebd90dc116
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40962
   prefix: '9623252'
   number_min_length: 14
   number_max_length: 14
-  uuid: 363b0308-4a27-419d-b9b6-24b5e43e8741
+  uuid: c0bda5ad-9aa7-4827-961f-c14a4ea6c11c
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40963
   prefix: '9623253'
   number_min_length: 14
   number_max_length: 14
-  uuid: 098e180b-2957-4849-a32c-3b236057745b
+  uuid: de0c924d-663c-4673-895b-38bd8970dadf
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40964
   prefix: '9623260'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5d4e176c-31d6-4780-aa3f-2d05a900d616
+  uuid: 3a5de17e-44bf-4810-a705-563a378fa872
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40985
   prefix: '9623262'
   number_min_length: 14
   number_max_length: 14
-  uuid: fbbd4c53-206d-4bc0-bcd1-7a1c2682bc9a
+  uuid: f2a077b8-24a5-4923-8ae3-f6e82e4bfff3
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 40996
   prefix: '9623263'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9be257ab-c759-4b48-b884-fe4a9b5b445e
+  uuid: 43aa26a3-e1d3-4035-82b6-33bd6a08d267
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 41034
   prefix: '9623270'
   number_min_length: 14
   number_max_length: 14
-  uuid: e052c30a-0c81-4cbb-89fa-380135ca9fed
+  uuid: 80d03d5a-91d6-4e0b-b651-9868f6135d66
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 41046
   prefix: '9623272'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6bc48b3d-bbe9-4d04-8291-d41060d40434
+  uuid: 0c46111c-ad30-479f-a601-afe48e798066
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 41057
   prefix: '9623273'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6915ea97-e555-43cc-8533-af697c4bbadc
+  uuid: 86015c13-e9f5-4e21-95af-e97b1fc364bf
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145868
   prefix: '9625'
   number_min_length: 11
   number_max_length: 11
-  uuid: d302164b-0230-4ec5-8f84-676b3b85f3f5
+  uuid: a7523cba-d8e2-46e9-b0e8-bbf0ce0b4559
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145968
   prefix: '9625300'
   number_min_length: 14
   number_max_length: 14
-  uuid: e94d1aad-a01e-4a1f-bf39-cde1ae13b366
+  uuid: 07a1d2d2-5187-4e0c-b9d8-d2ee570a7955
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145969
   prefix: '9625301'
   number_min_length: 14
   number_max_length: 14
-  uuid: 079d5d01-36fe-4362-a068-00c39bf91f65
+  uuid: 01b0e446-007a-451c-9047-f41fcce76ee5
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145970
   prefix: '9625302'
   number_min_length: 14
   number_max_length: 14
-  uuid: fc975b63-df43-4b40-8c1e-a038e5b92bec
+  uuid: 5bb2658c-e73a-4261-8f87-5d226774b2e4
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145971
   prefix: '9625303'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3565f35b-9518-45b9-a9bf-7fe30ad132cc
+  uuid: 20707fc4-ae45-4f68-bcad-790c222a5c38
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145973
   prefix: '9625310'
   number_min_length: 14
   number_max_length: 14
-  uuid: c59f1e31-eff1-4271-b1e5-0d2a37c8391a
+  uuid: 776d0078-623f-4bf4-aff7-0a9b1d70d98b
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145976
   prefix: '9625312'
   number_min_length: 14
   number_max_length: 14
-  uuid: 701b67ef-9950-43dd-915b-6bc9767d1d8d
+  uuid: 60b3ba02-2087-42ce-af0d-31581f9ba28c
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145978
   prefix: '9625313'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7267b4f4-6607-4d60-b89b-90b0e55fd0dd
+  uuid: 981ee16d-3fde-4bda-80c6-93f81ded8c82
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145986
   prefix: '962532'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2604adfa-2a0f-42cc-a4e3-2358ec46528d
+  uuid: 0683c6ed-a57f-443e-9938-ed84335d4116
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145988
   prefix: '9625330'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2a3bcc20-c9a9-46a2-be5b-3cf3372ab8db
+  uuid: cdf5aa38-1264-44b6-8754-43d24d1f49eb
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145989
   prefix: '9625332'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0026f1d0-310a-4746-8436-26032824d49d
+  uuid: 07a275ba-b4f8-4f61-9bb8-62978dd26e4d
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145990
   prefix: '9625333'
   number_min_length: 14
   number_max_length: 14
-  uuid: 425d30a9-b063-4c32-b8d3-442e0ed945e0
+  uuid: c55bcf0c-6819-40d1-bcba-2cfcd1f4c214
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145992
   prefix: '962534'
   number_min_length: 13
   number_max_length: 13
-  uuid: d59f884e-2a9d-4583-bf21-6d16bdc1b22b
+  uuid: 98c6ba2f-a91c-4fd8-89ec-c632ff9f6e5b
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145994
   prefix: '962535'
   number_min_length: 13
   number_max_length: 13
-  uuid: f76ee725-69df-4367-89cf-35b02dacea0a
+  uuid: 009bc834-e30a-45d6-86d0-db2ad05e7433
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 145996
   prefix: '962536'
   number_min_length: 13
   number_max_length: 13
-  uuid: 55a7ebf5-4c59-4766-b617-f548b5e0400c
+  uuid: 3f1e4b94-ca9f-4e99-a6f1-15128be5251e
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 146000
   prefix: '962537'
   number_min_length: 13
   number_max_length: 13
-  uuid: e672eac3-3b7d-4858-8263-292e4a968419
+  uuid: bcb9df6b-4d1a-4a72-9368-25ddf7171e8f
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 146006
   prefix: '962538'
   number_min_length: 13
   number_max_length: 13
-  uuid: 241d3cc2-a1e3-4eed-ba05-083b3addc7ed
+  uuid: 3affbb3a-73ae-47c4-a03d-7f55cdc810df
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 146011
   prefix: '962539'
   number_min_length: 13
   number_max_length: 13
-  uuid: 73a86ed7-a0d2-4605-af60-cd5ea7d4df74
+  uuid: 037ca6ca-add3-4382-b557-a84f7701c1e0
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257264
   prefix: '9622'
   number_min_length: 11
   number_max_length: 11
-  uuid: efec3d68-7080-47e1-948d-fbb680e16dc1
+  uuid: ba1d07cd-6d54-45c6-b784-c2b373eab9a5
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257471
   prefix: '962262'
   number_min_length: 13
   number_max_length: 13
-  uuid: ce575722-59a3-45f1-988f-8c818af07956
+  uuid: c971998a-381b-40ad-a9a9-2c28bd7af075
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257474
   prefix: '962263'
   number_min_length: 13
   number_max_length: 13
-  uuid: e91cbf9f-6940-4d8c-beb7-c617ecb01feb
+  uuid: 9da4e4a4-66c8-43a7-bfbd-4169fd3f0973
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257478
   prefix: '962264'
   number_min_length: 13
   number_max_length: 13
-  uuid: f6d5a8e9-d6bf-4f62-8f0d-f3fdb9136ab6
+  uuid: 183583d7-dbf8-41ab-b28a-dcfcd09987f0
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257487
   prefix: '962265'
   number_min_length: 13
   number_max_length: 13
-  uuid: ed3d0704-aff7-4307-bac6-9561e0a146d8
+  uuid: 2488ef05-dfb8-4706-8ea9-69e8664749ac
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257501
   prefix: '9622660'
   number_min_length: 14
   number_max_length: 14
-  uuid: 629c9998-21d7-4861-91dc-79783f48fce0
+  uuid: f96faf19-19ba-4cc2-99e5-595f072729ce
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257504
   prefix: '9622662'
   number_min_length: 14
   number_max_length: 14
-  uuid: fba9e87b-2740-43e2-9ce6-4fff67abfe40
+  uuid: 5f124826-ce3c-4905-88c6-88d1bababa3b
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257506
   prefix: '9622663'
   number_min_length: 14
   number_max_length: 14
-  uuid: 11d9f86e-68bd-451e-b2af-1164068e20be
+  uuid: d21b0f94-fa87-4633-8cab-87d15cbc465a
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257515
   prefix: '9622670'
   number_min_length: 14
   number_max_length: 14
-  uuid: bb383d4d-7c0e-47a3-841c-0eff439674c0
+  uuid: b87fcc55-a050-4589-aab6-2c7d57681e28
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257518
   prefix: '9622672'
   number_min_length: 14
   number_max_length: 14
-  uuid: 605dacec-8380-44ac-89ba-716af85d2166
+  uuid: edb76427-6678-4f36-ae89-cf405c371175
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257520
   prefix: '9622673'
   number_min_length: 14
   number_max_length: 14
-  uuid: 30b39b4f-0e63-4dec-934c-89ef5d48f7ee
+  uuid: dca046f9-a722-4f44-acd7-0eedbf50f8ae
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257527
   prefix: '9622680'
   number_min_length: 14
   number_max_length: 14
-  uuid: 09a1ea89-95ed-45f1-bbe5-4713018444cb
+  uuid: b7566e34-ccc6-4424-a319-8a491f11cb4b
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257531
   prefix: '9622682'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0bc81f84-b8a5-44f1-b1ce-eff487c7a8ba
+  uuid: 097f0d57-b05b-44c2-90ce-02bbed6a4ecb
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257534
   prefix: '9622683'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3dff3996-8791-4715-b8c8-443108053cb2
+  uuid: badabff2-131f-4cff-9b74-98b2dd587d52
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257545
   prefix: '9622690'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4afef332-4c7d-48ae-b399-354c759de5fe
+  uuid: d7c77bac-932c-4004-9d17-3e17d63b97bb
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257547
   prefix: '9622691'
   number_min_length: 14
   number_max_length: 14
-  uuid: e86258f2-47ef-4bfc-99c6-2348da466ae3
+  uuid: 3717e436-c3a2-4309-8c97-8f9fcef75b10
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257548
   prefix: '9622692'
   number_min_length: 14
   number_max_length: 14
-  uuid: a662b0d2-a647-495c-a2ac-f0d79e64cec2
+  uuid: cc130f9e-f5a1-4c38-b714-2b65c860db7d
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257550
   prefix: '9622693'
   number_min_length: 14
   number_max_length: 14
-  uuid: 269d5f79-dd63-4bf9-9528-1f15b88b6b66
+  uuid: 1a05aa75-85bd-4e06-963c-686adc7ec794
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257554
   prefix: '962270'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6187c992-166d-44a5-b823-1e55f4c5d998
+  uuid: 89f2d6f4-269a-425b-ba4d-4132b0496f37
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257560
   prefix: '962271'
   number_min_length: 13
   number_max_length: 13
-  uuid: d43d6659-e32b-4c0d-93fb-6ad15dda61a0
+  uuid: 605e400d-71ad-49db-820a-cbcf819f41d9
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257562
   prefix: '962272'
   number_min_length: 13
   number_max_length: 13
-  uuid: 288015b2-f0dd-49ed-98e9-9a1429ac9221
+  uuid: 97abd3a3-3516-4381-a3ea-21a29e70a56c
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257564
   prefix: '962273'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3f2a342a-6e95-4c4d-a195-bba4594c724a
+  uuid: 703ed6c2-584f-4b73-a84b-2adf7bf8de05
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257566
   prefix: '962274'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7b535969-7e5a-4daf-a238-d06f5114536e
+  uuid: 76e7f29f-1222-47f5-959d-ae95832547f9
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 257568
   prefix: '962275'
   number_min_length: 13
   number_max_length: 13
-  uuid: fda24a2e-9db6-47be-833a-8dee9cee5d27
+  uuid: a8bf2ae4-7a8f-42e4-a486-8f32c7da31db
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 276615
   prefix: '9626'
   number_min_length: 11
   number_max_length: 11
-  uuid: d0e56017-fa48-482c-aaad-f6c96bcd5b78
+  uuid: fd5aea7c-b571-45b1-9479-1de700fd55b8
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 276624
   prefix: '96262'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4967f736-6e4a-4954-ba82-5f812453ff31
+  uuid: 5041f3e2-834c-4945-aae2-9bc4e31c86c0
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 276983
   prefix: '96263'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4e2f8bc2-1bca-47ce-b45a-f0424e677c10
+  uuid: 5c465573-f572-4cad-a6bd-733bf2921bc1
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 277077
   prefix: '96264'
   number_min_length: 12
   number_max_length: 12
-  uuid: ca567aed-87ce-4be1-956c-6e5b0b387e79
+  uuid: 6f0b9d22-d4ed-489a-ac8b-6360c53836fd
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 - id: 277087
   prefix: '96265'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3c36a03a-03ab-4406-b329-6d654a879a81
+  uuid: 3d3d6615-a5bf-4812-9d96-935ffe73921a
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed
 # Country code Prefixes
 - id: 247896
   prefix: '962'
   number_min_length: 6
   number_max_length: 11
-  uuid: 5601444f-4137-4916-ad82-27397cc64ea2
+  uuid: 406b4c70-63c6-4537-8247-43c9edea22de
   country_id: *jo
-  network_id: *fixed
+  network_id: *jo_fixed_cc
 # Supplementary services Prefixes
 - id: 248303
   prefix: '9621'
   number_min_length: 7
   number_max_length: 7
-  uuid: 47ec2b62-d46d-4944-9e3b-3c423dfe74a4
+  uuid: 530285ef-8c41-45ef-b1b7-d158453c50ee
   country_id: *jo
-  network_id: *special_services
+  network_id: *jo_special_services
 - id: 253358
   prefix: '962911'
   number_min_length: 9
   number_max_length: 9
-  uuid: 3404b30e-96b1-4642-ba79-ce185f555127
+  uuid: 454474a3-5f08-4188-b8da-0d1e2f754ec4
   country_id: *jo
-  network_id: *emergency_services
-- id: 392302
+  network_id: *jo_emergency_services
+- id: 392303
   prefix: '96280'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5026f4a1-cf64-4ffe-9f55-7764352fe85b
+  uuid: 26a672b2-8587-42d1-bf6a-67371fac6f9a
   country_id: *jo
-  network_id: *freephone_services
-- id: 392303
+  network_id: *jo_freephone_services
+- id: 392304
   prefix: '962810'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9aa7c2ba-7cf7-4466-bf79-ae4e6f740a6d
+  uuid: 90b50c84-55ec-466b-a3a0-c5634bfc65bb
   country_id: *jo
-  network_id: *fixed_cost_services
-- id: 392335
+  network_id: *jo_fixed_cost_services
+- id: 392336
   prefix: '96285'
   number_min_length: 12
   number_max_length: 12
-  uuid: 59f074e0-0fc8-4696-a9a9-808e83030b3a
+  uuid: 71b988ca-bd88-4a55-8bb5-88e70994ba03
   country_id: *jo
-  network_id: *shared_cost_services
-- id: 392398
+  network_id: *jo_shared_cost_services
+- id: 392399
   prefix: '96287'
   number_min_length: 12
   number_max_length: 12
-  uuid: 79caa29c-32a8-4060-ba14-dc8b118b9873
+  uuid: 49bc2576-4a0a-4b12-b1d4-043b80887178
   country_id: *jo
-  network_id: *fixed_cost_services
-- id: 446486
+  network_id: *jo_fixed_cost_services
+- id: 446487
   prefix: '9629'
   number_min_length: 11
   number_max_length: 11
-  uuid: 92f9f5ac-041e-4c44-9220-146a4d2c42f9
+  uuid: 4e99c4b3-f512-4466-af51-d34d563df246
   country_id: *jo
-  network_id: *premium_rate_services
+  network_id: *jo_premium_rate_services
 # Mobile Prefixes
 - id: 339492
   prefix: '9627'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4c65d386-f4bc-4bef-abec-6491c06446eb
+  uuid: f896ae8e-879f-477f-9a0d-afc9d942f8ff
   country_id: *jo
-  network_id: *mobile
+  network_id: *jo_mobile
 - id: 340002
   prefix: '962770'
   number_min_length: 14
   number_max_length: 14
-  uuid: d520530b-561a-4cb7-b6f2-3fe4172f9f08
+  uuid: 640d43fc-a01f-41a0-a4d4-2e6963ef12b3
   country_id: *jo
-  network_id: *orange_mobile
+  network_id: *jo_orange_mobile
 - id: 340003
   prefix: '962771'
   number_min_length: 14
   number_max_length: 14
-  uuid: 194278a3-e6d1-424c-8940-04a8156bb660
+  uuid: 37c6e18d-d3aa-4b64-a8ba-5a0ba1aaf3fe
   country_id: *jo
-  network_id: *orange_mobile
+  network_id: *jo_orange_mobile
 - id: 340004
   prefix: '962772'
   number_min_length: 14
   number_max_length: 14
-  uuid: e8551594-aac4-4c62-940f-6e198695512f
+  uuid: 42a57633-10a2-4f7e-9b33-50858e7364a6
   country_id: *jo
-  network_id: *orange_mobile
+  network_id: *jo_orange_mobile
 - id: 340007
   prefix: '962775'
   number_min_length: 14
   number_max_length: 14
-  uuid: ae6a0a20-e4be-4488-b5ba-0b648dc079c1
+  uuid: 57783d83-7ebc-4a0e-96e0-b6dc676c310f
   country_id: *jo
-  network_id: *orange_mobile
+  network_id: *jo_orange_mobile
 - id: 340009
   prefix: '962776'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1f3ae8d6-ae72-4aad-b575-03546cf4d35f
+  uuid: 2ce63479-e59d-40a1-b928-22f162dba7a2
   country_id: *jo
-  network_id: *orange_mobile
+  network_id: *jo_orange_mobile
 - id: 340011
   prefix: '962777'
   number_min_length: 14
   number_max_length: 14
-  uuid: 240b603a-b390-43e3-8aad-f95c2b418876
+  uuid: 16fe72e3-0c91-4a99-a529-0fd3b1968982
   country_id: *jo
-  network_id: *orange_mobile
+  network_id: *jo_orange_mobile
 - id: 340022
   prefix: '962778'
   number_min_length: 14
   number_max_length: 14
-  uuid: 54966e32-fb26-4c90-9e41-596fc3fda8ed
+  uuid: 4080e80f-8dbd-4e06-8536-196862dd2cf1
   country_id: *jo
-  network_id: *orange_mobile
+  network_id: *jo_orange_mobile
 - id: 340034
   prefix: '962779'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7e6bc604-0940-4123-856b-73aa3f425527
+  uuid: 224df786-00d0-4aae-871a-cf9895befe78
   country_id: *jo
-  network_id: *orange_mobile
+  network_id: *jo_orange_mobile
 - id: 340036
   prefix: '962780'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7933eb4a-2004-4f18-9978-14a2cb0f1d20
+  uuid: 609a741c-5844-4479-838d-4cb5726658ee
   country_id: *jo
-  network_id: *umniah_mobile
+  network_id: *jo_umniah_mobile
 - id: 340077
   prefix: '962781'
   number_min_length: 14
   number_max_length: 14
-  uuid: 09faa58c-acf2-48a4-83f3-31a103f8abd2
+  uuid: 0e492d2d-b869-4c2c-a87b-356b8046e90c
   country_id: *jo
-  network_id: *umniah_mobile
+  network_id: *jo_umniah_mobile
 - id: 340112
   prefix: '962782'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2dddd603-16cc-469f-854f-db75e1503abb
+  uuid: eeb20d67-e159-4c87-9d0f-7d82724d350d
   country_id: *jo
-  network_id: *umniah_mobile
+  network_id: *jo_umniah_mobile
 - id: 340135
   prefix: '962785'
   number_min_length: 14
   number_max_length: 14
-  uuid: aa66ec84-e042-423a-8b68-5876bdf9c667
+  uuid: 2e611193-6f12-4a02-98f6-aeae536b8fac
   country_id: *jo
-  network_id: *umniah_mobile
+  network_id: *jo_umniah_mobile
 - id: 340155
   prefix: '962786'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8aebb249-94b2-45ea-8d74-a85f19adb05b
+  uuid: 83885255-32f4-4fa5-9897-3b81991d1e83
   country_id: *jo
-  network_id: *umniah_mobile
+  network_id: *jo_umniah_mobile
 - id: 340173
   prefix: '962787'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6b6f0b2e-26c8-4f1f-9231-17a42c025454
+  uuid: 60188fb7-f466-45db-8ea0-1b0cda7f80ce
   country_id: *jo
-  network_id: *umniah_mobile
+  network_id: *jo_umniah_mobile
 - id: 340191
   prefix: '962788'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1bd450d1-7c1a-4d0a-a10e-bdc23776fed3
+  uuid: 7184d68f-e4a6-400e-893a-6413ca4a26b5
   country_id: *jo
-  network_id: *umniah_mobile
+  network_id: *jo_umniah_mobile
 - id: 340202
   prefix: '962789'
   number_min_length: 14
   number_max_length: 14
-  uuid: 715b5370-9783-4e81-a0dd-e613e5fb826d
+  uuid: 7f0d69c7-8828-494b-a988-aa77a6eb9b3c
   country_id: *jo
-  network_id: *umniah_mobile
+  network_id: *jo_umniah_mobile
 - id: 340222
   prefix: '962790'
   number_min_length: 14
   number_max_length: 14
-  uuid: 232ab096-3ec7-40b3-9704-bf2739c39294
+  uuid: f86f91be-1447-4453-829d-e4c7bdb4ddeb
   country_id: *jo
-  network_id: *zain_mobile
+  network_id: *jo_zain_mobile
 - id: 340252
   prefix: '962791'
   number_min_length: 14
   number_max_length: 14
-  uuid: 50ab1015-0366-4145-a420-dabc92702ed0
+  uuid: 52c20992-8b6d-4d75-b56d-cdacae762c99
   country_id: *jo
-  network_id: *zain_mobile
+  network_id: *jo_zain_mobile
 - id: 340259
   prefix: '962792'
   number_min_length: 14
   number_max_length: 14
-  uuid: 561a3a64-15b2-4345-bb65-564ee82dacf7
+  uuid: 8f6f4cb0-af2c-4057-93f1-e446d615cea5
   country_id: *jo
-  network_id: *zain_mobile
+  network_id: *jo_zain_mobile
 - id: 340308
   prefix: '962795'
   number_min_length: 14
   number_max_length: 14
-  uuid: f4a4ca49-98ae-460f-974c-8f7cadbfc49c
+  uuid: a4c944cf-592b-4763-8dc7-f20b96274d45
   country_id: *jo
-  network_id: *zain_mobile
+  network_id: *jo_zain_mobile
 - id: 340314
   prefix: '962796'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0e9ce183-4d09-41a6-8808-3a18426ccbf3
+  uuid: dcd498ee-2aef-4494-8e35-bcc364f4558a
   country_id: *jo
-  network_id: *zain_mobile
+  network_id: *jo_zain_mobile
 - id: 340318
   prefix: '962797'
   number_min_length: 14
   number_max_length: 14
-  uuid: b003d650-5d03-4bf0-be13-788d117045f4
+  uuid: 5c3ea629-1a66-4cbb-8c10-5e96b3329383
   country_id: *jo
-  network_id: *zain_mobile
+  network_id: *jo_zain_mobile
 - id: 340354
   prefix: '962798'
   number_min_length: 14
   number_max_length: 14
-  uuid: e7cc2833-948d-4a5f-afe3-f4cffb5b926b
+  uuid: bb40c73d-72d0-4906-9cf5-6c31795dfeae
   country_id: *jo
-  network_id: *zain_mobile
+  network_id: *jo_zain_mobile
 - id: 340382
   prefix: '962799'
   number_min_length: 14
   number_max_length: 14
-  uuid: 80c0f8c9-39cd-4e0a-bc00-bd5452170e2e
+  uuid: a286801f-c655-4279-96cf-486e92973221
   country_id: *jo
-  network_id: *zain_mobile
+  network_id: *jo_zain_mobile
 # Paging Prefixes
 - id: 339882
   prefix: '9627466'
   number_min_length: 15
   number_max_length: 15
-  uuid: accdcc0f-42d6-4f74-81f4-2559fcc20ba6
+  uuid: cfdd96a3-f055-4561-9fcc-ad8767774ab2
   country_id: *jo
-  network_id: *mirsal_paging
+  network_id: *jo_mirsal_paging
 - id: 339898
   prefix: '9627477'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0cd8eb38-ce1a-4f60-b0d8-297f693c0516
+  uuid: 55871dd3-b274-47f0-9413-e41fceb36abd
   country_id: *jo
-  network_id: *mirsal_paging
+  network_id: *jo_mirsal_paging

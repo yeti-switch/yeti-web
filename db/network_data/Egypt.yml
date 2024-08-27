@@ -1,52 +1,52 @@
 country_id: &eg 63
 networks:
 # Fixed Networks
-- id: 3012
+- id: &eg_fixed 3216
   name: EG Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 8da5176e-5f5b-4807-b130-7d79b58ad29d
   type_id: 12
 # Supplementary services Networks
-- id: &special_services 3075
-  name: EG Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &eg_special_services 3984
+  name: EG Special Services
+  uuid: 2a5a072c-3be8-47c6-9e89-a012f581e76d
   type_id: 14
-- id: &free_internet_access 4020
-  name: EG Free internet access
-  uuid: 54a863e9-5125-4181-9ec4-ba6f48ec833a
+- id: &eg_free_internet_access 4907
+  name: EG Free Internet Access
+  uuid: 836d6dae-0c27-4868-9b69-de8b0465377a
   type_id: 14
-- id: &freephone_services 3382
-  name: EG Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &eg_freephone_services 4914
+  name: EG Freephone Services
+  uuid: 92675deb-e059-49ca-b28a-15dd10f9284a
   type_id: 14
-- id: &premium_rate_services 3232
-  name: EG Premium rate services
-  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+- id: &eg_premium_rate_services 4924
+  name: EG Premium Rate Services
+  uuid: c93a3b22-4790-4381-b440-a437c61d9055
   type_id: 14
-- id: &emergency_services 3662
-  name: EG Emergency services
-  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+- id: &eg_emergency_services 4964
+  name: EG Emergency Services
+  uuid: 0334adfd-5460-4417-806a-ebe8456ac745
   type_id: 14
 # Country code Networks
-- id: &fixed 3012
-  name: EG Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &eg_fixed_cc 4693
+  name: EG Fixed Cc
+  uuid: 0c454310-abbd-4b5c-99a8-f62116fb4404
   type_id: 17
 # Mobile Networks
-- id: &vodafone_mobile 3192
-  name: EG Vodafone mobile
-  uuid: bdd41d8f-c19c-42c7-82a9-2c77119284e2
+- id: &eg_vodafone_mobile 5826
+  name: EG Vodafone Mobile
+  uuid: c6f67aeb-a60f-4fe4-a294-49cc547dd924
   type_id: 3
-- id: &etisalat_mobile 4423
-  name: EG Etisalat mobile
-  uuid: b6ce4f9f-251b-42ea-91c8-9cba8bd812fb
+- id: &eg_etisalat_mobile 5843
+  name: EG Etisalat Mobile
+  uuid: c7f6d6e4-d412-40a6-87e9-a297b90a2701
   type_id: 3
-- id: &we_mobile 4445
-  name: EG We mobile
-  uuid: f0b4e606-2fe1-416d-b361-a624a5fddb39
+- id: &eg_we_mobile 5876
+  name: EG We Mobile
+  uuid: e19d9f0e-cd19-41a9-80fd-1ba62a27563f
   type_id: 3
-- id: &orange_mobile 3219
-  name: EG Orange mobile
-  uuid: a3fa5aa9-21c4-4621-ab4b-2ae703353a78
+- id: &eg_orange_mobile 6274
+  name: EG Orange Mobile
+  uuid: d6b2b01b-52a5-413a-9b81-7f37279b3351
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -54,268 +54,268 @@ network_prefixes:
   prefix: '203'
   number_min_length: 10
   number_max_length: 10
-  uuid: 7c9797e2-57d3-4ec8-b866-54a68939961c
+  uuid: 0d24d824-25ce-467a-91a5-6960cf39f0b0
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 87002
   prefix: '2040'
   number_min_length: 11
   number_max_length: 11
-  uuid: ec890950-a31c-4328-9421-cf7e5f57530e
+  uuid: 6ff6504c-3844-4bb9-8b3e-497dec71d700
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 124289
   prefix: '2045'
   number_min_length: 11
   number_max_length: 11
-  uuid: b33bf6d5-1504-4be6-a2fd-7c00ede5669e
+  uuid: 03cdfe5b-5123-46d4-b394-b81c22791099
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 126365
   prefix: '2046'
   number_min_length: 11
   number_max_length: 11
-  uuid: cf8190e9-fdf0-4373-8efa-86d2621dc6d2
+  uuid: 76a5dbd7-3c8a-490e-85d8-393feaeca888
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 128294
   prefix: '2047'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7e6f9261-d827-4814-9243-d0a63807e64f
+  uuid: da16773f-d1cb-4d45-b75d-b21910cd11e2
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 131719
   prefix: '2048'
   number_min_length: 11
   number_max_length: 11
-  uuid: 1136d151-991b-4760-b459-dfdf04bce6ba
+  uuid: 9061d399-7bd0-4777-8d0b-0a181f83e7ff
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 146203
   prefix: '2050'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2fd90d05-efb1-44fd-9c8f-1922729bf2cb
+  uuid: b364a386-8bb3-48d9-b74e-f323eb854d0e
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 161642
   prefix: '2055'
   number_min_length: 11
   number_max_length: 11
-  uuid: ac909cd3-ffee-47c5-93c1-189ab0018b20
+  uuid: bd432394-a2ce-4c1c-82cb-227e26103f6e
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 174185
   prefix: '2092'
   number_min_length: 11
   number_max_length: 11
-  uuid: d6c4549c-5bd5-4366-8da7-889af8f47822
+  uuid: 1faa702b-605f-4598-9e8b-bd6a26d8860a
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 195143
   prefix: '2093'
   number_min_length: 11
   number_max_length: 11
-  uuid: 23fd6115-8dd3-4cea-82b8-e081b0bf1caf
+  uuid: 2f4c45dc-a872-4396-b8af-59f4220fb60f
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 218087
   prefix: '2095'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2dc16420-1c05-4861-882d-51e24a7df52b
+  uuid: c19d62f1-2cfd-49d1-be1b-fcdbf6bc52a5
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 223574
   prefix: '2097'
   number_min_length: 11
   number_max_length: 11
-  uuid: cac0f657-2647-44e3-b113-8b39cecb39b6
+  uuid: dd7ab38c-89fa-4b58-8901-01919f26f1b0
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 225786
   prefix: '2096'
   number_min_length: 11
   number_max_length: 11
-  uuid: 26dfdf57-c8ed-43af-adb5-f23b37ca7440
+  uuid: 04d92db8-c2f8-4cc5-bbf1-b273d54922ff
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 255460
   prefix: '2013'
   number_min_length: 11
   number_max_length: 11
-  uuid: d1027d55-7270-46da-a6cd-0f9b637eeb0a
+  uuid: 146a604e-390c-4189-b756-44c6d33eb546
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 257259
   prefix: '202'
   number_min_length: 11
   number_max_length: 11
-  uuid: 438dbfe2-2d1a-4774-a73f-68ca4264ec04
+  uuid: 4b3096cf-2cbc-4a2e-b26d-5ee59f0d14c0
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 280103
   prefix: '2057'
   number_min_length: 10
   number_max_length: 11
-  uuid: 3f4683a6-da64-45f0-853b-e7d801eb1b35
+  uuid: 0e263f6b-8ff3-46a5-8a14-5c3742464c2f
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 299727
   prefix: '2062'
   number_min_length: 11
   number_max_length: 11
-  uuid: b88028d8-b4d8-4c8f-a661-01ac8a77ba55
+  uuid: bc30efb4-98c9-4196-947d-44d372fb31d9
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 307879
   prefix: '2064'
   number_min_length: 11
   number_max_length: 11
-  uuid: b7649ef0-b9c3-41c2-9305-903494b759e3
+  uuid: bd7648f5-221c-4d54-b2db-006aa92a26ca
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 319375
   prefix: '2065'
   number_min_length: 11
   number_max_length: 11
-  uuid: e097072c-8beb-4f10-aba4-8ef9e3c44334
+  uuid: 64e5457d-7ed8-4b47-bada-85d8ce8a5a9d
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 321914
   prefix: '2066'
   number_min_length: 11
   number_max_length: 11
-  uuid: 95974953-9ef5-48f8-b61c-d8e5b16322b7
+  uuid: 9dbfd83a-e593-465c-8aaa-bb7d95a4bf8f
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 336805
   prefix: '2068'
   number_min_length: 11
   number_max_length: 11
-  uuid: 5cea0be7-6e05-49f9-8bbb-fc6ace6c1507
+  uuid: 9b7a743a-dd79-46b3-a099-9c1e3cafe585
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 - id: 338751
   prefix: '2069'
   number_min_length: 11
   number_max_length: 11
-  uuid: 996295a5-aa6b-4e16-8094-e02552a615c8
+  uuid: 383bdbfe-23b4-4dd4-bf8a-ceec26458169
   country_id: *eg
-  network_id: *fixed
-- id: 414696
+  network_id: *eg_fixed
+- id: 414697
   prefix: '2084'
   number_min_length: 11
   number_max_length: 11
-  uuid: 661a0b22-3e15-4aaa-9d67-0e71b2792e2c
+  uuid: 5888557a-2676-46f3-9a79-738c9ed3e1e2
   country_id: *eg
-  network_id: *fixed
-- id: 418942
+  network_id: *eg_fixed
+- id: 418943
   prefix: '2082'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8317dcbc-6152-457b-95ef-90864fce261b
+  uuid: 98e5b2f6-d40c-4011-9058-b2675034475b
   country_id: *eg
-  network_id: *fixed
-- id: 429064
+  network_id: *eg_fixed
+- id: 429065
   prefix: '2086'
   number_min_length: 11
   number_max_length: 11
-  uuid: 530ddc39-fd33-49f5-bf87-cf59a2a39f5c
+  uuid: 15c5390b-92e1-4e6a-af90-9d3bd2c346b3
   country_id: *eg
-  network_id: *fixed
-- id: 444475
+  network_id: *eg_fixed
+- id: 444476
   prefix: '2088'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4eab3e0c-a83c-4a3e-9d10-8726c29c30dc
+  uuid: 860d701e-9760-45cb-8e92-6d4598067076
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed
 # Supplementary services Prefixes
 - id: 242733
   prefix: '2016'
   number_min_length: 9
   number_max_length: 9
-  uuid: e1db266d-29f9-4c20-9112-a31af95d94a6
+  uuid: 8512d68b-2850-4c80-b65e-d1f3b2e7380d
   country_id: *eg
-  network_id: *special_services
+  network_id: *eg_special_services
 - id: 242894
   prefix: '2019'
   number_min_length: 9
   number_max_length: 9
-  uuid: e5979e29-b6d8-48d2-941b-dca2dad6c7c8
+  uuid: d3591954-f41c-49aa-be4a-1d13ec3168a4
   country_id: *eg
-  network_id: *special_services
+  network_id: *eg_special_services
 - id: 248168
   prefix: '20707'
   number_min_length: 13
   number_max_length: 13
-  uuid: fcd98054-833b-4477-89cb-de360b26d56d
+  uuid: 1bc64938-1f1a-4c7b-b7ab-1cf4a0d79db1
   country_id: *eg
-  network_id: *free_internet_access
+  network_id: *eg_free_internet_access
 - id: 248182
   prefix: '20777'
   number_min_length: 13
   number_max_length: 13
-  uuid: 920960eb-f25f-4405-a2a3-a301ca8213c7
+  uuid: 1bcbedc5-1f42-42c5-86ff-d69e571b0e5c
   country_id: *eg
-  network_id: *free_internet_access
+  network_id: *eg_free_internet_access
 - id: 248199
   prefix: '20800'
   number_min_length: 16
   number_max_length: 16
-  uuid: 90ddeb7a-8afa-4c51-91f5-14cd6ef951bc
+  uuid: aa948d7f-c2b5-4412-82ff-39ad572f5db9
   country_id: *eg
-  network_id: *freephone_services
+  network_id: *eg_freephone_services
 - id: 248220
   prefix: '20900'
   number_min_length: 14
   number_max_length: 14
-  uuid: a91fbbff-5504-48f1-8fec-d4496492def6
+  uuid: 66079c8f-5f44-4c76-a6c0-a51f54de91fb
   country_id: *eg
-  network_id: *premium_rate_services
+  network_id: *eg_premium_rate_services
 - id: 248271
   prefix: '201'
   number_min_length: 6
   number_max_length: 6
-  uuid: 1cd3492d-2bae-467b-9ec1-07345cb8ad9d
+  uuid: 27fec162-380b-4915-b49c-f83eb4cb039b
   country_id: *eg
-  network_id: *emergency_services
+  network_id: *eg_emergency_services
 # Country code Prefixes
 - id: 247856
   prefix: '20'
   number_min_length: 5
   number_max_length: 13
-  uuid: c7ae9fd8-2209-4269-9398-2463772c7a7e
+  uuid: 6b4687e1-8196-4d19-991c-c6919dd5419d
   country_id: *eg
-  network_id: *fixed
+  network_id: *eg_fixed_cc
 # Mobile Prefixes
 - id: 254596
   prefix: '2010'
   number_min_length: 12
   number_max_length: 12
-  uuid: 235d5fea-4113-4674-bb2e-7fa50aa18c24
+  uuid: 89f03c8f-4729-4f8d-8cd7-2dc1c332229d
   country_id: *eg
-  network_id: *vodafone_mobile
+  network_id: *eg_vodafone_mobile
 - id: 254781
   prefix: '2011'
   number_min_length: 12
   number_max_length: 12
-  uuid: df011586-585c-4662-b88e-720315931a35
+  uuid: ed79c064-f8d9-49a4-b11f-99fc54298c84
   country_id: *eg
-  network_id: *etisalat_mobile
+  network_id: *eg_etisalat_mobile
 - id: 256365
   prefix: '2015'
   number_min_length: 12
   number_max_length: 12
-  uuid: e4d3c9f8-1650-4f42-8260-7b07da46fa80
+  uuid: a5481e6c-997a-4510-8a6c-5c594283f65f
   country_id: *eg
-  network_id: *we_mobile
+  network_id: *eg_we_mobile
 - id: 262899
   prefix: '2012'
   number_min_length: 12
   number_max_length: 12
-  uuid: e4598b37-08a9-427f-b5ba-f1022e78c6d5
+  uuid: e89de2d3-631e-4b4d-bcb0-9de7576e0eda
   country_id: *eg
-  network_id: *orange_mobile
+  network_id: *eg_orange_mobile

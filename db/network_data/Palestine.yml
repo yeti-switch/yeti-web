@@ -1,40 +1,40 @@
 country_id: &ps 164
 networks:
 # Fixed Networks
-- id: 3012
+- id: &ps_fixed 3421
   name: PS Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 37d6b675-a3f9-409f-a07e-75282b8932c2
   type_id: 12
 # Supplementary services Networks
-- id: &audiotext 3119
+- id: &ps_audiotext 4091
   name: PS Audiotext
-  uuid: 97b5ce3d-e3ac-4266-814d-eab2066675ce
+  uuid: 83a3014b-012d-481f-bc67-f74dec55c303
   type_id: 14
-- id: &special_services 3075
-  name: PS Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &ps_special_services 5026
+  name: PS Special Services
+  uuid: 20d30063-cb68-4b42-a750-8494b50c7ced
   type_id: 14
-- id: &freephone_services 3382
-  name: PS Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &ps_freephone_services 5902
+  name: PS Freephone Services
+  uuid: ea7a57b3-d878-4306-a356-8a5d96b2a6cd
   type_id: 14
-- id: &business_value_added_services 4645
-  name: PS Business value added services
-  uuid: c136930b-3ea0-465e-b938-927e93eb78ff
+- id: &ps_business_value_added_services 6292
+  name: PS Business Value Added Services
+  uuid: dd77563c-d927-413d-893a-94b950cf967e
   type_id: 14
 # Country code Networks
-- id: &fixed 3012
-  name: PS Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &ps_fixed_cc 4793
+  name: PS Fixed Cc
+  uuid: d68e2dac-e1be-4c31-82e5-76363f894a6c
   type_id: 17
 # Mobile Networks
-- id: &ooredoo_mobile 3763
-  name: PS Ooredoo mobile
-  uuid: bf9079cc-c309-4f15-a421-d289bde6bb96
+- id: &ps_ooredoo_mobile 6314
+  name: PS Ooredoo Mobile
+  uuid: 3c7cdacc-cb27-4903-86e7-aa24e0c9adf8
   type_id: 3
-- id: &jawwal_mobile 4693
-  name: PS Jawwal mobile
-  uuid: f9da4360-2532-4edf-ac98-366af8e9d294
+- id: &ps_jawwal_mobile 6375
+  name: PS Jawwal Mobile
+  uuid: 51081403-9ad3-4087-b6f8-0c4c53c714d5
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -42,184 +42,184 @@ network_prefixes:
   prefix: '970424'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8d2706a6-3e4d-48da-b793-dd35ffcd46a0
+  uuid: 43628db9-e4ba-4d07-9792-c9c7ff5d27bc
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 - id: 86615
   prefix: '970425'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5f521f50-5ae1-4195-abe9-bb167b4bebc3
+  uuid: 2b80abdf-95f1-42d4-a275-ea68702da49c
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 - id: 257294
   prefix: '970222'
   number_min_length: 13
   number_max_length: 13
-  uuid: b3201b5c-3f4c-4f59-b21b-dd3b8f5e04a3
+  uuid: fca84083-f76b-4bb3-a8f0-2d385b4c4947
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 - id: 257306
   prefix: '970223'
   number_min_length: 13
   number_max_length: 13
-  uuid: ef5d105e-c904-47ea-8331-8dd4a13a7e11
+  uuid: 3d44569a-0428-4fd7-9ccf-6f00b896f1ae
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 - id: 257318
   prefix: '970224'
   number_min_length: 13
   number_max_length: 13
-  uuid: 52e5c80f-74fe-4cf5-bf9c-6b3401b8b923
+  uuid: fc009790-f869-46d9-9478-0029a6a7c629
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 - id: 257326
   prefix: '970227'
   number_min_length: 13
   number_max_length: 13
-  uuid: 43bc29c4-bae2-465e-a3bd-485cbdab2ed2
+  uuid: 50bb796a-9718-45ae-94ff-089e737d5369
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 - id: 257329
   prefix: '970229'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5e5903c9-33a2-4404-b15f-1d03e9d45f25
+  uuid: d8a0df96-7fce-4ebf-a9d1-5859318cb455
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 - id: 257423
   prefix: '97025'
   number_min_length: 12
   number_max_length: 12
-  uuid: b52ea2a9-5e2d-4c9f-a6ef-ea78f8f88c7e
+  uuid: 734efd55-def3-43b6-8ff4-04b5565455b9
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 - id: 257464
   prefix: '97026'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3f6abbc8-005c-4509-892a-6a0e8498af71
+  uuid: 60276a0b-9a16-4820-87e5-08013c7a8a26
   country_id: *ps
-  network_id: *fixed
-- id: 392304
+  network_id: *ps_fixed
+- id: 392305
   prefix: '970820'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7722d293-9f8d-4fad-8238-1f88e28a1821
+  uuid: d571ab15-46ad-41aa-a055-58347a06028b
   country_id: *ps
-  network_id: *fixed
-- id: 392305
+  network_id: *ps_fixed
+- id: 392306
   prefix: '970821'
   number_min_length: 13
   number_max_length: 13
-  uuid: 79082aa2-2cb0-43a5-bda3-e1befd0b727a
+  uuid: 93361af6-aef3-45a0-a59b-d14c45a273b8
   country_id: *ps
-  network_id: *fixed
-- id: 392306
+  network_id: *ps_fixed
+- id: 392307
   prefix: '970824'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3e6dc9f8-d042-41b9-8a5d-b76617bbd411
+  uuid: a28a9c4f-c2cd-4d01-9260-afb29c7e01b8
   country_id: *ps
-  network_id: *fixed
-- id: 392309
+  network_id: *ps_fixed
+- id: 392310
   prefix: '970825'
   number_min_length: 13
   number_max_length: 13
-  uuid: 20b16617-36cc-4211-8df4-8ab0e8746089
+  uuid: e30153b1-663b-4ebb-930c-7088f2215eb1
   country_id: *ps
-  network_id: *fixed
-- id: 392311
+  network_id: *ps_fixed
+- id: 392312
   prefix: '970826'
   number_min_length: 13
   number_max_length: 13
-  uuid: 26f09c38-d40e-4c94-8d90-2d304fd54a14
+  uuid: b0388638-48d6-4ef3-9dc7-818de6db3505
   country_id: *ps
-  network_id: *fixed
-- id: 392314
+  network_id: *ps_fixed
+- id: 392315
   prefix: '970828'
   number_min_length: 13
   number_max_length: 13
-  uuid: 070b5da6-7d9d-4ba2-93ff-ccfa6e00d98b
+  uuid: 18625066-3c91-47c7-9b3c-79047aca6be7
   country_id: *ps
-  network_id: *fixed
-- id: 446554
+  network_id: *ps_fixed
+- id: 446555
   prefix: '970923'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8cbabe5c-24da-4cc2-8458-f196de99356c
+  uuid: 34e8898b-6f0e-44ab-a7b0-2b8ffd76f047
   country_id: *ps
-  network_id: *fixed
-- id: 446597
+  network_id: *ps_fixed
+- id: 446598
   prefix: '970925'
   number_min_length: 13
   number_max_length: 13
-  uuid: c76b1e22-1f49-4643-8f03-36058331820e
+  uuid: 940a0553-0759-4f7f-a1e2-2ec2c7863272
   country_id: *ps
-  network_id: *fixed
-- id: 446601
+  network_id: *ps_fixed
+- id: 446602
   prefix: '970926'
   number_min_length: 13
   number_max_length: 13
-  uuid: a60850ca-972e-4acd-896e-7134d644f05c
+  uuid: 1af7ea8c-be0e-4454-bc34-3e6d50e22d65
   country_id: *ps
-  network_id: *fixed
-- id: 446649
+  network_id: *ps_fixed
+- id: 446650
   prefix: '970929'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7ae3e4c7-fed1-476d-94ea-8e702e36e98b
+  uuid: 041d87a6-bac4-4c2f-9517-0fb06bacc44b
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed
 # Supplementary services Prefixes
 - id: 242901
   prefix: '97019'
   number_min_length: 10
   number_max_length: 10
-  uuid: cb45d7cc-1588-47ec-97ce-f389d64cdbd6
+  uuid: c821165b-6f57-4196-86f0-c7a7810d5256
   country_id: *ps
-  network_id: *audiotext
+  network_id: *ps_audiotext
 - id: 248356
   prefix: '9701'
   number_min_length: 7
   number_max_length: 8
-  uuid: 22786617-6f49-421e-94d9-1237734ff549
+  uuid: b02be7bf-ff40-45fe-b17e-33f3cb1b8efc
   country_id: *ps
-  network_id: *special_services
+  network_id: *ps_special_services
 - id: 256733
   prefix: '9701800'
   number_min_length: 13
   number_max_length: 13
-  uuid: ac581c3f-b4cf-484f-b0af-4780241fe137
+  uuid: 3686f2fc-c153-42b0-96ca-e5427fe6ea3e
   country_id: *ps
-  network_id: *freephone_services
+  network_id: *ps_freephone_services
 - id: 263926
   prefix: '9701700'
   number_min_length: 13
   number_max_length: 13
-  uuid: c28ee572-2445-413e-ac17-6c7dc7a4fad5
+  uuid: 0fa90450-6120-4cdf-a84e-1c60dea1a92c
   country_id: *ps
-  network_id: *business_value_added_services
+  network_id: *ps_business_value_added_services
 # Country code Prefixes
 - id: 247956
   prefix: '970'
   number_min_length: 6
   number_max_length: 10
-  uuid: 01c3d0d2-4c42-4d89-b0b4-d8c16d779694
+  uuid: 348f00ba-be6b-4336-837f-7a9cf5b0b0ad
   country_id: *ps
-  network_id: *fixed
+  network_id: *ps_fixed_cc
 # Mobile Prefixes
 - id: 275304
   prefix: '97056'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4ad77658-2fc6-4a3a-b65c-557d639264ff
+  uuid: 343c1400-50a1-445a-ac25-5e72361a12cb
   country_id: *ps
-  network_id: *ooredoo_mobile
+  network_id: *ps_ooredoo_mobile
 - id: 289424
   prefix: '97059'
   number_min_length: 12
   number_max_length: 12
-  uuid: 666cf600-df92-4c1b-be0c-0c0260dcf2c7
+  uuid: cd5d0134-e2e2-4d26-8a69-9421b82853b5
   country_id: *ps
-  network_id: *jawwal_mobile
+  network_id: *ps_jawwal_mobile

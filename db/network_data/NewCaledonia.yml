@@ -1,40 +1,40 @@
 country_id: &nc 152
 networks:
 # Fixed Networks
-- id: 3012
+- id: &nc_fixed 4189
   name: NC Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 797002d8-a3a8-438f-896a-1d60931ef1e2
   type_id: 12
 # Supplementary services Networks
-- id: &audiotext_internet_and_voice_services 3841
-  name: NC Audiotext internet and voice services
-  uuid: f7c898d5-8608-45d2-88af-874c94462a28
+- id: &nc_audiotext_internet_and_voice_services 4344
+  name: NC Audiotext Internet And Voice Services
+  uuid: c2b3351f-8d99-4f67-86de-5eb98b753336
   type_id: 14
-- id: &special_services 3075
-  name: NC Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &nc_special_services 4458
+  name: NC Special Services
+  uuid: c6f039a1-917f-4755-b0c3-7ceedc5a80a2
   type_id: 14
-- id: &marine_vhf 3989
-  name: NC Marine vhf
-  uuid: 2b272bc4-ac41-4cd4-bc02-38e957fb05b8
+- id: &nc_marine_vhf 4619
+  name: NC Marine Vhf
+  uuid: e878e193-9c79-45fd-b600-eb46fcdb1d39
   type_id: 14
-- id: &freephone_services 3382
-  name: NC Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &nc_freephone_services 4900
+  name: NC Freephone Services
+  uuid: 5c205f08-3c17-461e-b498-0c5fef7ab080
   type_id: 14
-- id: &emergency_services 3662
-  name: NC Emergency services
-  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+- id: &nc_emergency_services 5018
+  name: NC Emergency Services
+  uuid: fbc5f021-a7b0-4f16-90ee-87c927ad9317
   type_id: 14
 # Country code Networks
-- id: &fixed 3012
-  name: NC Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &nc_fixed_cc 4772
+  name: NC Fixed Cc
+  uuid: 2ded0cec-6b2f-4891-ac54-ce5f5928235c
   type_id: 17
 # Mobile Networks
-- id: &mobilis_mobile 4110
-  name: NC Mobilis mobile
-  uuid: b5aeaae4-879c-49c0-8513-4658cce5244e
+- id: &nc_mobilis_mobile 5303
+  name: NC Mobilis Mobile
+  uuid: be7ab14d-bacd-4e74-9f99-2f23139873c0
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -42,338 +42,338 @@ network_prefixes:
   prefix: '68720'
   number_min_length: 11
   number_max_length: 11
-  uuid: f2ef6ecf-15b4-47de-a033-ac16c1bfcf5b
+  uuid: 63018c87-8bda-4fdc-a103-8d0a2b2814ba
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 243483
   prefix: '68723'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9da7e6da-f9e4-499e-9dc9-99ad7a859d7e
+  uuid: 8dc698b6-b661-441e-99b6-75a50e80ed22
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 243675
   prefix: '68724'
   number_min_length: 11
   number_max_length: 11
-  uuid: 5fe18ad3-276e-4368-ae4d-df90bbab88e7
+  uuid: f6d1064a-531d-41da-ae17-ce00259684b7
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 243825
   prefix: '68725'
   number_min_length: 11
   number_max_length: 11
-  uuid: f515b329-02b3-4d9b-8d55-49d949427473
+  uuid: 0b9643cf-0709-46c4-b92a-8e94ed709128
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244035
   prefix: '68726'
   number_min_length: 11
   number_max_length: 11
-  uuid: 939e42cc-acac-495d-9a88-16c34ec0cf00
+  uuid: 3a19a6c6-e7dc-4291-aea4-d7bb6c9a353f
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244179
   prefix: '68727'
   number_min_length: 11
   number_max_length: 11
-  uuid: 62c3db39-3138-4ac8-91ab-75de1a717654
+  uuid: e8eeb813-f8af-4ebc-b14b-c635afd04e1d
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244315
   prefix: '68728'
   number_min_length: 11
   number_max_length: 11
-  uuid: 302ff4a8-4722-4629-a4c4-bdc0a86ea54d
+  uuid: d65badeb-aa66-458a-8c49-dea167826474
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244395
   prefix: '68729'
   number_min_length: 11
   number_max_length: 11
-  uuid: 109a7f56-930b-4b1e-b03a-ac94bf903a85
+  uuid: df6ce5a0-4193-4a4c-918c-e14f23c6098f
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244501
   prefix: '68730'
   number_min_length: 11
   number_max_length: 11
-  uuid: 3a129b55-3084-4f11-812f-1fbaacb7b642
+  uuid: 88f3f447-e96e-4c92-a218-9c625bbae148
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244619
   prefix: '68731'
   number_min_length: 11
   number_max_length: 11
-  uuid: f3d7199b-4194-4633-a04f-c6eeb740eb91
+  uuid: 67668f89-3417-4825-90c9-d7c51784be90
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244690
   prefix: '68732'
   number_min_length: 11
   number_max_length: 11
-  uuid: 38c010c1-3679-42ac-a49b-d23295e6ee3e
+  uuid: 5c5bd23a-c191-494e-84c2-1c2d51fac5fd
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244732
   prefix: '68733'
   number_min_length: 11
   number_max_length: 11
-  uuid: 18c014b4-1f66-47a0-b879-89847945b19d
+  uuid: 37295af7-4d9c-4a8b-9123-6c51e16fd671
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244805
   prefix: '68734'
   number_min_length: 11
   number_max_length: 11
-  uuid: a9fefdd8-c220-482e-a44b-c3565242d537
+  uuid: 19f0a4de-167e-4257-9897-67206e6f1898
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 244903
   prefix: '68735'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2aa0dbc9-7c4b-4e64-9a97-bca10a1dd4b1
+  uuid: face1e45-1f8c-4821-9bae-f5551ed7af77
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 245439
   prefix: '68741'
   number_min_length: 11
   number_max_length: 11
-  uuid: 08496cf5-41d5-4d92-b01c-fb2a77d15649
+  uuid: 152343c2-38c0-41b7-b525-e006365ca51e
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 245540
   prefix: '68742'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7e5443bb-0bed-4c1f-b49b-5e78cd0a3f53
+  uuid: 2b5caa48-55db-4a4f-9a7d-01d8a6d46b14
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 245638
   prefix: '68743'
   number_min_length: 11
   number_max_length: 11
-  uuid: fd30c5e6-e7d3-4deb-a3f6-b4d695920a3a
+  uuid: e6412b24-275c-4a7f-813c-fd69ba2fb9ca
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 245793
   prefix: '68744'
   number_min_length: 11
   number_max_length: 11
-  uuid: b03c1610-50f6-4e49-9c98-dd714c3a2f9c
+  uuid: b1e92bff-74fe-433b-80e5-1e4f79dd1a1f
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 245936
   prefix: '68745'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8d3b97f1-a0b6-4700-9830-6fbddbc5b8f5
+  uuid: e4d71428-050f-4903-96fc-72e69670e030
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 248828
   prefix: '68746'
   number_min_length: 11
   number_max_length: 11
-  uuid: 78f4e7d5-1799-48fd-b883-2a30700841a1
+  uuid: 9ca3c1c0-f454-4c28-bf8b-f5faef555944
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 249045
   prefix: '68747'
   number_min_length: 11
   number_max_length: 11
-  uuid: fb233361-12c5-4ae2-88e1-c3ef854f61a4
+  uuid: e03794dd-f8e1-4a68-903c-c5848d48a831
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 - id: 252842
   prefix: '68788'
   number_min_length: 11
   number_max_length: 11
-  uuid: 60097820-1019-4cfd-920e-b5d3737e17b9
+  uuid: 70ae48f2-dd46-4b23-8304-2679f105e8c5
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed
 # Supplementary services Prefixes
 - id: 244977
   prefix: '68736'
   number_min_length: 11
   number_max_length: 11
-  uuid: bc669db0-572b-467f-8755-2c862c621e33
+  uuid: b9351fff-c2e8-42ec-a68d-bde5fd7421e6
   country_id: *nc
-  network_id: *audiotext_internet_and_voice_services
+  network_id: *nc_audiotext_internet_and_voice_services
 - id: 246462
   prefix: '68758'
   number_min_length: 8
   number_max_length: 8
-  uuid: 692495b5-2524-4877-8065-e1d8638c15f9
+  uuid: dff5fa0e-1558-40bd-9241-d0d7dfc42d1f
   country_id: *nc
-  network_id: *special_services
+  network_id: *nc_special_services
 - id: 247354
   prefix: '68766'
   number_min_length: 11
   number_max_length: 11
-  uuid: 11055bf1-2c6b-49b6-8929-06c33ba58a62
+  uuid: 26a844ad-c4e0-4375-bcd4-50de2ca314c3
   country_id: *nc
-  network_id: *marine_vhf
+  network_id: *nc_marine_vhf
 - id: 248130
   prefix: '6875'
   number_min_length: 10
   number_max_length: 10
-  uuid: 83ab3cb2-3b40-4cbc-96f2-a5bf22efa8f4
+  uuid: e839772f-3a95-4e1e-876a-28a8665d83ff
   country_id: *nc
-  network_id: *freephone_services
+  network_id: *nc_freephone_services
 - id: 248340
   prefix: '6871'
   number_min_length: 6
   number_max_length: 6
-  uuid: 39e95f43-09f4-41e9-a859-9b44a32bf2d1
+  uuid: d4de8f46-918a-4b76-a9ce-78c137570f73
   country_id: *nc
-  network_id: *emergency_services
+  network_id: *nc_emergency_services
 - id: 248417
   prefix: '68710'
   number_min_length: 9
   number_max_length: 9
-  uuid: bdf87987-f0d5-4a23-b4e8-b35473bcb65c
+  uuid: f5ce3043-f113-46ef-8cd9-649aef3a1f01
   country_id: *nc
-  network_id: *special_services
+  network_id: *nc_special_services
 - id: 249858
   prefix: '68755'
   number_min_length: 13
   number_max_length: 13
-  uuid: d1ecbbb5-ae61-4a22-bbbb-29f88ea1f4f7
+  uuid: 0d9798f9-65e8-44e4-a41f-0796aac94d6d
   country_id: *nc
-  network_id: *special_services
+  network_id: *nc_special_services
 - id: 249943
   prefix: '68756'
   number_min_length: 8
   number_max_length: 8
-  uuid: 61ecd69b-d7c5-42fc-af42-1c2c5869f4de
+  uuid: c9c3d16e-641a-4200-9f65-f60e21dd723b
   country_id: *nc
-  network_id: *special_services
+  network_id: *nc_special_services
 - id: 249986
   prefix: '68757'
   number_min_length: 8
   number_max_length: 8
-  uuid: a267d3ca-6b0d-468a-8b57-55b37a96eb9c
+  uuid: 1d29ce71-9b3a-4d41-b647-370ad99d2d6b
   country_id: *nc
-  network_id: *special_services
+  network_id: *nc_special_services
 # Country code Prefixes
 - id: 247935
   prefix: '687'
   number_min_length: 5
   number_max_length: 9
-  uuid: 13c6059e-8a6f-4951-a9a1-7fa0af5d6072
+  uuid: 75e2fadb-f2e8-4824-bc73-498c3f8c0a76
   country_id: *nc
-  network_id: *fixed
+  network_id: *nc_fixed_cc
 # Mobile Prefixes
 - id: 249362
   prefix: '68750'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9d5e268e-69f1-4987-82dd-df9ed3387415
+  uuid: d8e2ebdd-c0b7-4efa-bf30-1ec90cb5f5b2
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 249441
   prefix: '68751'
   number_min_length: 11
   number_max_length: 11
-  uuid: fc76404a-a5c1-4eba-b429-f799857e995f
+  uuid: 265f5a49-9e82-4762-b5a8-05c9caa11b14
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 249509
   prefix: '68752'
   number_min_length: 11
   number_max_length: 11
-  uuid: 924e35f4-2d0f-4f5a-997b-65b420d4e4f1
+  uuid: bfceb80f-e99e-4cda-9a6b-1bc44d1b2502
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 249667
   prefix: '68753'
   number_min_length: 11
   number_max_length: 11
-  uuid: 33c9a299-45a6-4e80-9dc7-247003cd267b
+  uuid: 9d15d075-b4b4-452f-ad37-8a49b761be5c
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 249760
   prefix: '68754'
   number_min_length: 11
   number_max_length: 11
-  uuid: 83ce30e2-ff77-4c1b-9deb-8291e3deb53c
+  uuid: 1a89ccf5-6638-44fe-965a-7c53b9d08fa3
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 253004
   prefix: '68789'
   number_min_length: 11
   number_max_length: 11
-  uuid: dae4016c-5976-46af-b73a-9a26d5588ace
+  uuid: 103eabc2-e123-4ac8-9bb6-54c920102f00
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 253117
   prefix: '6879'
   number_min_length: 10
   number_max_length: 10
-  uuid: c4469f11-f953-4667-9ae9-30d5ee9ca311
+  uuid: 02cec700-926f-4594-b8f0-4a12b3c41b04
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 258616
   prefix: '6877'
   number_min_length: 10
   number_max_length: 10
-  uuid: d0a1db87-9d2c-4539-915e-f64ffd655ddc
+  uuid: e72ffe7d-caf2-41cd-b378-f23ea4718394
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 259985
   prefix: '68780'
   number_min_length: 11
   number_max_length: 11
-  uuid: c06a51d7-d9b8-44f4-be46-b01c78abca35
+  uuid: 88b6c3d5-ab15-403d-b60e-b963e9ae3a93
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 260141
   prefix: '68781'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4d257a35-aadb-465a-b68d-c32a20c2ef93
+  uuid: b68927e5-73a8-4bc6-b4cd-d9f7b3dbc5b2
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 260296
   prefix: '68782'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8dc467ac-bb74-42e0-9226-80d5a3132132
+  uuid: 233610c4-0ea3-447f-8d0b-f4c067fd8d47
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 260411
   prefix: '68783'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2836bc85-ac41-45ff-b91a-20d4792a2f3b
+  uuid: 9bb70bbb-6bcb-4f49-80d6-d573ad64972f
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 260532
   prefix: '68784'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8272771b-ce18-405b-a0dd-db589d6595dd
+  uuid: a899a654-7113-4380-914e-f41f7e083e00
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 260662
   prefix: '68785'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7444deb6-d84e-4269-9bba-d0cbea2afa2f
+  uuid: bf5e5e15-303d-4cec-afdb-83b8e9187dfa
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 260808
   prefix: '68786'
   number_min_length: 11
   number_max_length: 11
-  uuid: f65ad75c-9eee-4f4d-aaf2-984c3a9775b7
+  uuid: de0d61f0-0411-4e20-bfde-4a8d1f2ee7cd
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile
 - id: 260954
   prefix: '68787'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8c49b8d1-9e4f-45dc-89f0-bb1379e90528
+  uuid: 1843c58b-64f4-49f9-8ee7-6938f76ac5fd
   country_id: *nc
-  network_id: *mobilis_mobile
+  network_id: *nc_mobilis_mobile

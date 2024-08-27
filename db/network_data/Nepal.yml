@@ -1,60 +1,60 @@
 country_id: &np 149
 networks:
 # Fixed Networks
-- id: 3012
+- id: &np_fixed 3079
   name: NP Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 59cf268d-8ee7-4a04-93bd-b0cb33519a08
   type_id: 12
 # Mobile Networks
-- id: &cg_telecom_mobile 3585
-  name: NP Cg telecom mobile
-  uuid: 7328ef96-153d-4bd5-9879-d736105587bb
+- id: &np_cg_telecom_mobile 3846
+  name: NP Cg Telecom Mobile
+  uuid: ca36217e-adda-4d9e-a99d-1d0b7d2f2587
   type_id: 3
-- id: &smart_mobile 3492
-  name: NP Smart mobile
-  uuid: 9002f3f5-a912-4cd9-aca4-f951553b0d17
+- id: &np_smart_mobile 3848
+  name: NP Smart Mobile
+  uuid: f45c4f39-b413-4787-8ba9-e9d6d6947e39
   type_id: 3
-- id: &hello_nepal_mobile 3587
-  name: NP Hello nepal mobile
-  uuid: e44230ea-0abb-45d1-88d0-8c587dd0ad59
+- id: &np_hello_nepal_mobile 3849
+  name: NP Hello Nepal Mobile
+  uuid: 5cd6deff-e138-4735-a26a-10db7814a9d0
   type_id: 3
-- id: &sky_phone_nepal_telecom_mobile_mobile 3627
-  name: NP Sky phone nepal telecom mobile mobile
-  uuid: 5255c235-2e48-411b-9913-918fe0a03fb2
+- id: &np_sky_phone_nepal_telecom_mobile_mobile 3907
+  name: NP Sky Phone Nepal Telecom Mobile Mobile
+  uuid: f0145f5b-334f-47f6-b351-a342d67c9227
   type_id: 3
-- id: &ncell_mobile 3629
-  name: NP Ncell mobile
-  uuid: ef193eea-360c-4dc4-aa66-c239c83cd39c
+- id: &np_ncell_mobile 3909
+  name: NP Ncell Mobile
+  uuid: e4a7359a-4f48-441b-9dba-eaf19e7f39a9
   type_id: 3
-- id: &utl_mobile 3630
-  name: NP Utl mobile
-  uuid: 0ce49870-242b-4554-98f0-1f4de20efb71
+- id: &np_utl_mobile 3910
+  name: NP Utl Mobile
+  uuid: 5488414f-4641-433c-aada-e4e421001c7e
   type_id: 3
-- id: &mobile 3013
+- id: &np_mobile 3925
   name: NP Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: 333be7c0-e2c2-476f-875b-94d24b4de6c5
   type_id: 3
 # Supplementary services Networks
-- id: &audio_notice_board_recording_services 3692
-  name: NP Audio notice board recording services
-  uuid: 420ab66a-8566-43bf-97e8-e87470743efb
+- id: &np_audio_notice_board_recording_services 3998
+  name: NP Audio Notice Board Recording Services
+  uuid: 7072ce2d-27da-4fb4-8617-278e7a033199
   type_id: 14
-- id: &audio_notice_board_listening_services 3693
-  name: NP Audio notice board listening services
-  uuid: ddc54174-f3f8-40f8-a2d1-0fef6cfb0cc1
+- id: &np_audio_notice_board_listening_services 3999
+  name: NP Audio Notice Board Listening Services
+  uuid: f36a3a67-92a1-4ff0-8be0-2bff69967a6f
   type_id: 14
-- id: &freephone_services 3382
-  name: NP Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &np_freephone_services 4000
+  name: NP Freephone Services
+  uuid: dcbee1d5-0b66-4ec9-8528-2062eafc0ffb
   type_id: 14
-- id: &special_services 3075
-  name: NP Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &np_special_services 4162
+  name: NP Special Services
+  uuid: e4f3a007-c3e4-403e-be72-c9ee7ac01721
   type_id: 14
 # Country code Networks
-- id: &fixed 3012
-  name: NP Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &np_fixed_cc 4779
+  name: NP Fixed Cc
+  uuid: 4496827b-d25d-4c50-bd01-609ba9742344
   type_id: 17
 network_prefixes:
 # Fixed Prefixes
@@ -62,604 +62,604 @@ network_prefixes:
   prefix: '97723'
   number_min_length: 11
   number_max_length: 11
-  uuid: 93bde7a7-b2b6-4e87-ad6f-a71c12c56d79
+  uuid: f8aa5848-65c4-4288-bb45-f354f603b2a3
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 9305
   prefix: '97721'
   number_min_length: 11
   number_max_length: 11
-  uuid: 27766b28-2fe0-433b-b367-fb7ed70328fe
+  uuid: 01f01d60-5a61-45c9-85f2-4aec0c1728e9
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 23234
   prefix: '97726'
   number_min_length: 11
   number_max_length: 11
-  uuid: 86564b39-2120-47a3-ab01-473e295f7cef
+  uuid: 811e0970-4cfe-468e-b553-613721eec46f
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 24920
   prefix: '97727'
   number_min_length: 11
   number_max_length: 11
-  uuid: 051cf016-3d84-4ed6-b9e2-032e5048a8e2
+  uuid: a1fbab9a-6e4f-4366-863f-720761cf0bba
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 28295
   prefix: '97724'
   number_min_length: 11
   number_max_length: 11
-  uuid: ec2c063c-463c-40a1-8c53-bf0cec24bae5
+  uuid: be6b642e-1d64-416c-baaf-37186803d6bd
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 31985
   prefix: '97725'
   number_min_length: 11
   number_max_length: 11
-  uuid: df07c336-a2dc-4d3a-9de8-12211e0c049e
+  uuid: df4ca8ee-565d-4924-b7a2-cde1bcf7c041
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 49487
   prefix: '97729'
   number_min_length: 11
   number_max_length: 11
-  uuid: d04cf081-ff20-4f1a-aef1-923896200065
+  uuid: aac0c005-8639-4b8f-8f3a-79ec574fee5e
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 53113
   prefix: '97731'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4b6c7082-183a-4d35-8921-2704e86d8e1f
+  uuid: f893e837-5b78-42fe-9f9d-cc85c04036bd
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 68017
   prefix: '97733'
   number_min_length: 11
   number_max_length: 11
-  uuid: d24f5453-6891-4152-8d5b-93b5a34c4ee6
+  uuid: 5a3405e1-a966-4de5-913c-965c37872778
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 78861
   prefix: '97735'
   number_min_length: 11
   number_max_length: 11
-  uuid: b7c46364-ce7b-4537-ac1e-dd08143e6775
+  uuid: 98947f17-cb91-4a6c-8058-362461ad10d7
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 80962
   prefix: '97736'
   number_min_length: 11
   number_max_length: 11
-  uuid: 0eee3fe7-b6e3-4ab5-81c8-f6cd2372de97
+  uuid: 5005690a-9df6-4209-afe4-00f14047735e
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 82010
   prefix: '97737'
   number_min_length: 11
   number_max_length: 11
-  uuid: 817cbfba-7b79-45aa-b5d4-939597adc373
+  uuid: def00ac0-638f-4426-a722-d47f2d5c46ed
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 83714
   prefix: '97738'
   number_min_length: 11
   number_max_length: 11
-  uuid: e876ac0d-0683-4c57-8e28-19d0b4900bc5
+  uuid: 82fba9f8-68e8-4dcc-9eb3-c6e9f5c93f1d
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 91024
   prefix: '97741'
   number_min_length: 11
   number_max_length: 11
-  uuid: f139f3f9-b764-4be5-af6d-bae90c012652
+  uuid: 335c8cf2-7a6f-455b-88c9-a89892df34b7
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 110851
   prefix: '97744'
   number_min_length: 11
   number_max_length: 11
-  uuid: a481d09f-40e2-496a-8d30-a4fb5860df93
+  uuid: 64f07a9d-4582-494c-bd82-12c0f3cd676c
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 126374
   prefix: '97746'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7782cf97-068d-4dbb-9b86-dcd5e05604c4
+  uuid: f119de5d-e9d9-42c4-bd50-b921483abe37
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 128304
   prefix: '97747'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4f714ee9-24dd-4fae-a0bb-d917d89658fc
+  uuid: 85bd593f-5268-4899-be6d-82dfc28c93ef
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 131725
   prefix: '97748'
   number_min_length: 11
   number_max_length: 11
-  uuid: 65482528-fa4e-450c-bae4-00922e0cca6b
+  uuid: 9bd2029b-8f9e-46fa-ba90-86a781bd4494
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 135176
   prefix: '97749'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2d5a9559-418f-402a-bf5c-be52a5c08db7
+  uuid: 6ae6e714-2a11-4722-8065-2d869259ccc9
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 141517
   prefix: '97753'
   number_min_length: 11
   number_max_length: 11
-  uuid: f59fffd7-f466-4ae7-a7aa-06bec5d3ca05
+  uuid: 0a6ab6b7-e66b-412b-aab6-180d8dc0c584
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 150004
   prefix: '97751'
   number_min_length: 11
   number_max_length: 11
-  uuid: 0401fc1b-f467-4371-8122-a5300fd3609c
+  uuid: e40d4d17-f125-42f4-af94-3a1feb7d03ca
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 161655
   prefix: '97755'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2f0efbf5-189e-4917-a3eb-e2add903add9
+  uuid: c24e5410-f89e-441c-8b8a-477b1c9ab9f0
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 171718
   prefix: '97791'
   number_min_length: 11
   number_max_length: 11
-  uuid: e3914e38-7bfc-4dd3-be32-868b8520c54c
+  uuid: 4caf8b53-c72e-4401-ac73-9d45032d9d42
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 174192
   prefix: '97792'
   number_min_length: 11
   number_max_length: 11
-  uuid: 29d79dea-390a-4320-be51-ca647602c369
+  uuid: b6e1d6e2-4a0a-4765-9077-5192d4d18d54
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 195149
   prefix: '97793'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4c4fc5bf-45a1-437c-a80a-8a6536e911a3
+  uuid: 862aef40-fffb-4136-8ae9-ceda329fa574
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 212569
   prefix: '97794'
   number_min_length: 11
   number_max_length: 11
-  uuid: 789f9b5c-f16e-44db-9837-59a600f7bae0
+  uuid: 16aaa7a4-38b2-40cb-8845-e37f40903265
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 218098
   prefix: '97795'
   number_min_length: 11
   number_max_length: 11
-  uuid: 3daf07ff-d6f3-4560-b1b4-dfabdb01293b
+  uuid: 21d5255e-0eb9-4c77-b1af-4fd9c2544313
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 223579
   prefix: '97797'
   number_min_length: 11
   number_max_length: 11
-  uuid: 6e7aae82-adcf-4461-a06d-5f02b737ab29
+  uuid: ade7a6d6-c70a-489b-be3d-c7ad065e3df6
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 225793
   prefix: '97796'
   number_min_length: 11
   number_max_length: 11
-  uuid: 819c960b-5797-47d6-8f30-218a11061f82
+  uuid: 2801bc68-9ff7-43f1-8af7-e657f687ca59
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 238721
   prefix: '97799'
   number_min_length: 11
   number_max_length: 11
-  uuid: 90523005-6dc1-4e3c-bdf5-a14e275feb5e
+  uuid: 276af8c6-e823-402b-a962-100268b93dec
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 239231
   prefix: '977990'
   number_min_length: 12
   number_max_length: 12
-  uuid: 25ec993d-02c7-42e4-bc5a-8f88d8d21d55
+  uuid: 96f02380-c504-41d5-901f-b0e747c9f93c
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 240837
   prefix: '977993'
   number_min_length: 12
   number_max_length: 12
-  uuid: 658f4940-27e7-4613-b92b-7fbc03a62ca4
+  uuid: 0bc40def-b5e0-4d23-a01d-fd04a3b24a85
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 254543
   prefix: '9771'
   number_min_length: 11
   number_max_length: 11
-  uuid: 3a6ddfd3-aebe-4258-8387-18f9e3444091
+  uuid: 2bc553f1-b36d-406e-ba11-1c3234b61450
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 254600
   prefix: '97710'
   number_min_length: 11
   number_max_length: 11
-  uuid: 97dd349c-e77e-4dea-b8a3-a3cc3ee59176
+  uuid: 50785bfe-b2af-4eda-a300-f539a33ca14b
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 254791
   prefix: '97711'
   number_min_length: 11
   number_max_length: 11
-  uuid: 125f35dd-376f-44f0-bcda-d8805cb83308
+  uuid: 123174f0-a621-4ec8-9f33-e79af361ff50
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 275299
   prefix: '97756'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8e854e34-2428-4530-ada7-3d79183b342c
+  uuid: 5346cd68-667c-4667-bdc2-bfa5934ecbc0
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 280278
   prefix: '97757'
   number_min_length: 11
   number_max_length: 11
-  uuid: fe0ca12a-28a6-4682-a612-403e1a983c24
+  uuid: 9f93c766-fe3e-45f8-bc44-ac9a165018d1
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 293489
   prefix: '97761'
   number_min_length: 11
   number_max_length: 11
-  uuid: 46f0dc6a-56b0-4b7f-bcb6-a5f02f8be58c
+  uuid: 834c510f-4dcf-4753-adea-0ddce569b8d2
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 305418
   prefix: '97763'
   number_min_length: 11
   number_max_length: 11
-  uuid: 6f376aec-62a6-4a2e-a3a9-2406578cdfeb
+  uuid: 0ec980c9-9c56-42d5-b299-6b00a8047ed2
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 307889
   prefix: '97764'
   number_min_length: 11
   number_max_length: 11
-  uuid: 752e6540-c384-4ff7-98d1-9f9559b81ee4
+  uuid: facc7f6d-6afb-4e8c-94f2-5017042f1ccc
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 319383
   prefix: '97765'
   number_min_length: 11
   number_max_length: 11
-  uuid: bafb8997-917e-44d7-8ced-6376567efd03
+  uuid: ccb282c6-f2e5-491f-80dd-ac36e810e534
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 321926
   prefix: '97766'
   number_min_length: 11
   number_max_length: 11
-  uuid: 98c1b2cb-7eb1-4251-a32f-3b6995e175dc
+  uuid: 0d7d5f3a-1dd6-4dec-a355-60019308f6d1
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 334709
   prefix: '97767'
   number_min_length: 11
   number_max_length: 11
-  uuid: c1ebe9ac-9e54-4da7-9122-f67120e70285
+  uuid: 2523a946-70f1-4cfb-934e-eb263b81e06c
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 336813
   prefix: '97768'
   number_min_length: 11
   number_max_length: 11
-  uuid: 78173f6c-e896-411a-980e-ca13fa2d98fe
+  uuid: 75759f5a-2949-44e4-91f3-30cb7be68ebe
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 338761
   prefix: '97769'
   number_min_length: 11
   number_max_length: 11
-  uuid: 421b8aee-671c-4fb1-87bd-ba834cb68440
+  uuid: b6bc7868-bfeb-4c0b-a191-f988ce558785
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 - id: 352941
   prefix: '97771'
   number_min_length: 11
   number_max_length: 11
-  uuid: e1dd07b6-fe6a-4901-b66f-1f24d0f9e8e3
+  uuid: c6d73297-073d-4ea6-8531-ce8d6cecca41
   country_id: *np
-  network_id: *fixed
-- id: 376990
+  network_id: *np_fixed
+- id: 376991
   prefix: '97775'
   number_min_length: 11
   number_max_length: 11
-  uuid: 99f90360-2d48-4877-a2e6-50f2658483e7
+  uuid: d8934d73-50ce-4c5e-b971-0fd315309f41
   country_id: *np
-  network_id: *fixed
-- id: 379090
+  network_id: *np_fixed
+- id: 379091
   prefix: '97776'
   number_min_length: 11
   number_max_length: 11
-  uuid: dddfd56b-931e-4805-aa0e-9e7b6cc41613
+  uuid: 7aee90d1-449d-4552-b687-45bebe5ea039
   country_id: *np
-  network_id: *fixed
-- id: 385897
+  network_id: *np_fixed
+- id: 385898
   prefix: '97777'
   number_min_length: 11
   number_max_length: 11
-  uuid: 20e7ae52-b4c8-479e-9a49-9fb0f942b671
+  uuid: 43f60dba-406a-4389-a29b-139c86f44b91
   country_id: *np
-  network_id: *fixed
-- id: 392576
+  network_id: *np_fixed
+- id: 392577
   prefix: '97780'
   number_min_length: 13
   number_max_length: 13
-  uuid: 93f124c2-de57-4a73-bfd8-54a50c90f748
+  uuid: ea5b3c4c-c1dc-49a2-81a7-91cc725030de
   country_id: *np
-  network_id: *fixed
-- id: 395765
+  network_id: *np_fixed
+- id: 395766
   prefix: '97778'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9e134e55-eaa1-416c-9b64-579c7a20afa0
+  uuid: e643edb5-0eb2-4a67-bb98-bedf696cdee5
   country_id: *np
-  network_id: *fixed
-- id: 399713
+  network_id: *np_fixed
+- id: 399714
   prefix: '97779'
   number_min_length: 11
   number_max_length: 11
-  uuid: 6603462d-0b9e-4731-a2d1-eba7f1c74c41
+  uuid: e19c7636-7bc0-4813-a951-5fae82b3bf2b
   country_id: *np
-  network_id: *fixed
-- id: 404246
+  network_id: *np_fixed
+- id: 404247
   prefix: '97781'
   number_min_length: 11
   number_max_length: 11
-  uuid: ffd559a2-eed6-433c-9ee0-dd83e47bff1f
+  uuid: 9ab00701-538b-4344-8147-02bba8091be7
   country_id: *np
-  network_id: *fixed
-- id: 412235
+  network_id: *np_fixed
+- id: 412236
   prefix: '97783'
   number_min_length: 11
   number_max_length: 11
-  uuid: fa184a75-4708-473c-94f6-e90c5914f87e
+  uuid: 6ef64130-687e-4c53-9286-26ec6d7db469
   country_id: *np
-  network_id: *fixed
-- id: 414707
+  network_id: *np_fixed
+- id: 414708
   prefix: '97784'
   number_min_length: 11
   number_max_length: 11
-  uuid: 230aeadd-d534-46e8-8a2f-54987973d986
+  uuid: 1f5cb7f7-8af4-4797-adef-d8033292be7b
   country_id: *np
-  network_id: *fixed
-- id: 418950
+  network_id: *np_fixed
+- id: 418951
   prefix: '97782'
   number_min_length: 11
   number_max_length: 11
-  uuid: d278b162-203b-4e65-bf64-8055aa1375be
+  uuid: 80a09dda-c1bb-477d-bd16-17149a22e710
   country_id: *np
-  network_id: *fixed
-- id: 429074
+  network_id: *np_fixed
+- id: 429075
   prefix: '97786'
   number_min_length: 11
   number_max_length: 11
-  uuid: d87802e7-b86e-4cca-a0df-04d6616718e3
+  uuid: 70034034-9afe-49b0-b3b7-69d0604c48f7
   country_id: *np
-  network_id: *fixed
-- id: 432284
+  network_id: *np_fixed
+- id: 432285
   prefix: '97787'
   number_min_length: 11
   number_max_length: 11
-  uuid: ea4e0bb3-f3f9-47c8-99aa-4cdfe4009281
+  uuid: 77c772cb-1507-4aff-8426-7f83b7c4ff21
   country_id: *np
-  network_id: *fixed
-- id: 444486
+  network_id: *np_fixed
+- id: 444487
   prefix: '97788'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9f3e23ea-17cf-4200-96ce-135fab318271
+  uuid: 0aef9d24-e4fb-42c9-872f-6905a6fe593f
   country_id: *np
-  network_id: *fixed
-- id: 445148
+  network_id: *np_fixed
+- id: 445149
   prefix: '97789'
   number_min_length: 11
   number_max_length: 11
-  uuid: 14514e10-dd91-4a34-9787-a69222a3df88
+  uuid: f7f9b5b6-3290-4822-98fb-bba091fe419e
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed
 # Mobile Prefixes
 - id: 221523
   prefix: '977960'
   number_min_length: 13
   number_max_length: 13
-  uuid: 07ccd4dd-e859-41fd-ac30-c32a233ea333
+  uuid: ea9d4d18-4283-4671-a123-cea230ec13e1
   country_id: *np
-  network_id: *cg_telecom_mobile
+  network_id: *np_cg_telecom_mobile
 - id: 221546
   prefix: '977961'
   number_min_length: 13
   number_max_length: 13
-  uuid: 84287edb-b558-48b4-9103-b1b87fd5993b
+  uuid: 9de6f977-0c22-4e9e-8fd7-06790cf77bee
   country_id: *np
-  network_id: *smart_mobile
+  network_id: *np_smart_mobile
 - id: 222651
   prefix: '977963'
   number_min_length: 13
   number_max_length: 13
-  uuid: 195cb0db-b900-409e-9d46-376f6a1d0b78
+  uuid: 50872a34-c107-4440-a119-670795c7b535
   country_id: *np
-  network_id: *hello_nepal_mobile
+  network_id: *np_hello_nepal_mobile
 - id: 229850
   prefix: '977974'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0f82f7da-5541-41fe-b0b0-31cc5e56c932
+  uuid: 5d5d5648-bf2f-4cb8-a08e-2c53376b7076
   country_id: *np
-  network_id: *sky_phone_nepal_telecom_mobile_mobile
+  network_id: *np_sky_phone_nepal_telecom_mobile_mobile
 - id: 229869
   prefix: '977975'
   number_min_length: 13
   number_max_length: 13
-  uuid: ee44daf8-4e25-4bee-b61a-94a0b96f361c
+  uuid: a21012a4-a8ac-472a-aa68-22152cb0e6f7
   country_id: *np
-  network_id: *sky_phone_nepal_telecom_mobile_mobile
+  network_id: *np_sky_phone_nepal_telecom_mobile_mobile
 - id: 230737
   prefix: '977981'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8c2f4716-c1a9-4969-a729-dcb34f5c47e9
+  uuid: 15de61f9-885e-43f2-a799-6fa8129e8dc7
   country_id: *np
-  network_id: *ncell_mobile
+  network_id: *np_ncell_mobile
 - id: 231691
   prefix: '977985'
   number_min_length: 13
   number_max_length: 13
-  uuid: 15d87bca-729d-4524-8697-ad7c7ea109a6
+  uuid: 917cbf4c-d6a7-4bcf-b263-29ad9da0ca76
   country_id: *np
-  network_id: *sky_phone_nepal_telecom_mobile_mobile
+  network_id: *np_sky_phone_nepal_telecom_mobile_mobile
 - id: 232088
   prefix: '977972'
   number_min_length: 13
   number_max_length: 13
-  uuid: aee957e3-70f2-4f14-a46d-3c93f1116b45
+  uuid: 2a922523-f964-4347-8b81-7275bf0f96e0
   country_id: *np
-  network_id: *utl_mobile
+  network_id: *np_utl_mobile
 - id: 234366
   prefix: '977980'
   number_min_length: 13
   number_max_length: 13
-  uuid: d3fcb173-84e9-4507-8d4c-fe8e28630cdd
+  uuid: 80bbd2fe-15c3-4897-9fdb-48b00aee2aad
   country_id: *np
-  network_id: *ncell_mobile
+  network_id: *np_ncell_mobile
 - id: 234632
   prefix: '977982'
   number_min_length: 13
   number_max_length: 13
-  uuid: d416d6a1-47e1-4f5a-b984-eb11f40def7e
+  uuid: f323184b-2d2b-420b-baaf-6f7d7e26c844
   country_id: *np
-  network_id: *ncell_mobile
+  network_id: *np_ncell_mobile
 - id: 235790
   prefix: '977984'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7a11729b-c99e-4e3b-9935-23b5c73ff703
+  uuid: 40aad953-f37a-4198-b8ab-0ed3f0e453c4
   country_id: *np
-  network_id: *sky_phone_nepal_telecom_mobile_mobile
+  network_id: *np_sky_phone_nepal_telecom_mobile_mobile
 - id: 236374
   prefix: '977986'
   number_min_length: 13
   number_max_length: 13
-  uuid: 63dd6fa1-791a-450c-94e0-f098f1915c03
+  uuid: 0dd5d6d2-208c-4216-9f88-4b4276525450
   country_id: *np
-  network_id: *sky_phone_nepal_telecom_mobile_mobile
+  network_id: *np_sky_phone_nepal_telecom_mobile_mobile
 - id: 238705
   prefix: '977'
   number_min_length: 10
   number_max_length: 10
-  uuid: cdad76f0-27b4-4488-aaf9-fa4f68b91b5f
+  uuid: 29561b76-9ada-4387-9b45-c20994aa730b
   country_id: *np
-  network_id: *mobile
+  network_id: *np_mobile
 # Supplementary services Prefixes
 - id: 242757
   prefix: '9771610'
   number_min_length: 19
   number_max_length: 19
-  uuid: 795e3194-126c-47d6-8c83-9981ed7f93fa
+  uuid: bc83f94e-c475-4abb-8656-4fddfdba4ad3
   country_id: *np
-  network_id: *audio_notice_board_recording_services
+  network_id: *np_audio_notice_board_recording_services
 - id: 242758
   prefix: '9771618'
   number_min_length: 19
   number_max_length: 19
-  uuid: daacd81a-1bcc-4484-8f7f-89962c7ed807
+  uuid: 9af18215-36ba-41a4-85ac-4c8f31458aa4
   country_id: *np
-  network_id: *audio_notice_board_listening_services
+  network_id: *np_audio_notice_board_listening_services
 - id: 242763
   prefix: '977166001'
   number_min_length: 20
   number_max_length: 20
-  uuid: 742d6819-7bf0-4f42-9917-6922e05d9ac2
+  uuid: b80ace9f-ce92-43dc-9aaa-5ee3018b527e
   country_id: *np
-  network_id: *freephone_services
+  network_id: *np_freephone_services
 - id: 242988
   prefix: '9772'
   number_min_length: 7
   number_max_length: 10
-  uuid: 13cc4107-a166-454c-8f6e-3178620a5238
+  uuid: 6d26c1d5-0701-448f-9b1e-0a86f292099c
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 - id: 244476
   prefix: '9773'
   number_min_length: 7
   number_max_length: 10
-  uuid: 34bd865c-da87-4b9e-8a2c-f35602d570a0
+  uuid: c0ec2f1a-a688-4cd9-869f-d7012e0ef784
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 - id: 245254
   prefix: '9774'
   number_min_length: 7
   number_max_length: 10
-  uuid: 38630f6f-3fa4-4d3a-a356-78258120a04b
+  uuid: a848880c-d97a-4a68-844a-0b2e199fb865
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 - id: 246717
   prefix: '9776'
   number_min_length: 7
   number_max_length: 10
-  uuid: 2f79ef26-f1d1-4020-b3a1-89a56ff6e450
+  uuid: 2e5ad429-43da-4e63-9570-02077630c1b0
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 - id: 248346
   prefix: '9771'
   number_min_length: 7
   number_max_length: 9
-  uuid: 4a0b8919-2e6a-4ed9-87c5-d5231f9cc4d8
+  uuid: eeed2f6a-4534-4ae6-b2b6-c37a99628b81
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 - id: 249333
   prefix: '9775'
   number_min_length: 7
   number_max_length: 10
-  uuid: 188c08a1-9e79-43b2-8541-7dfc964dbbfd
+  uuid: 554fbc53-597f-4575-9dc6-eac923d28cee
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 - id: 253119
   prefix: '9779'
   number_min_length: 7
   number_max_length: 10
-  uuid: 1503d433-64c4-45b3-a1d1-c5cfd8f8f307
+  uuid: b0a531db-ce7d-49f6-9e8b-8aa2bad2ec34
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 - id: 258619
   prefix: '9777'
   number_min_length: 7
   number_max_length: 10
-  uuid: c1f02309-55d2-4bb6-a42b-6c74ee878023
+  uuid: bbccdab2-c5f6-43be-aacb-9044b21f9b61
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 - id: 259953
   prefix: '9778'
   number_min_length: 7
   number_max_length: 10
-  uuid: 56ba709b-49c2-41f9-a200-0e66fa476f75
+  uuid: b477658c-e409-49de-a5be-a925ea352356
   country_id: *np
-  network_id: *special_services
+  network_id: *np_special_services
 # Country code Prefixes
 - id: 247942
   prefix: '977'
   number_min_length: 6
   number_max_length: 15
-  uuid: b4591e45-cfce-4bc7-9a8b-0ab61e3bb82f
+  uuid: 16f4d447-2e54-492b-9d28-15136db83fbc
   country_id: *np
-  network_id: *fixed
+  network_id: *np_fixed_cc

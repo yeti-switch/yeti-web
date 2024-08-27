@@ -1,65 +1,65 @@
 country_id: &vn 231
 networks:
 # Fixed Networks
-- id: 3012
+- id: &vn_fixed 3046
   name: VN Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 4223dcae-eb3e-44bf-9f6a-275bbe323760
   type_id: 12
 # Mobile Networks
-- id: &viettel_mobile_mobile 3189
-  name: VN Viettel mobile mobile
-  uuid: 70c44554-4664-447d-923a-14e69392cf58
+- id: &vn_viettel_mobile_mobile 3308
+  name: VN Viettel Mobile Mobile
+  uuid: 5354d6c2-4662-4536-aecf-3c5ac57c2788
   type_id: 3
-- id: &vietnamobile_mobile 3462
-  name: VN Vietnamobile mobile
-  uuid: 80d0b2dc-353f-4844-be3d-03e8d9987235
+- id: &vn_vietnamobile_mobile 3665
+  name: VN Vietnamobile Mobile
+  uuid: ce4ec970-90b7-4537-9f9d-fa1400c0be2c
   type_id: 3
-- id: &reddi_mobile 3480
-  name: VN Reddi mobile
-  uuid: 0ae8dc8d-a0db-403b-8e8e-0a0a6e6bdb9b
+- id: &vn_reddi_mobile 3684
+  name: VN Reddi Mobile
+  uuid: 70262a57-17c7-4c2d-8fbe-a5371258c47f
   type_id: 3
-- id: &vinaphone_mobile 3534
-  name: VN Vinaphone mobile
-  uuid: 7c1c4156-4ff0-4700-8771-ac58d945bf28
+- id: &vn_vinaphone_mobile 3764
+  name: VN Vinaphone Mobile
+  uuid: f35abdcf-00b1-4d8b-bb71-7ed377961e06
   type_id: 3
-- id: &mobifone_mobile 3564
-  name: VN Mobifone mobile
-  uuid: b120d148-1697-4f06-b819-ca13b5671a51
+- id: &vn_mobifone_mobile 3804
+  name: VN Mobifone Mobile
+  uuid: 44708bf6-4b58-4c14-8993-abbf41d91b37
   type_id: 3
-- id: &gmobile_mobile 3582
-  name: VN Gmobile mobile
-  uuid: 4e3cf978-8848-47ee-a975-455641c72ddc
+- id: &vn_gmobile_mobile 3843
+  name: VN Gmobile Mobile
+  uuid: 16880a55-4070-4dc4-9a49-4a122b2e1a56
   type_id: 3
-- id: &itelecom_mobile 5031
-  name: VN Itelecom mobile
-  uuid: 925097d2-5863-4e7f-99c0-a39f50f8e8d6
+- id: &vn_itelecom_mobile 7052
+  name: VN Itelecom Mobile
+  uuid: f79e2495-5dee-49b3-959a-8ecd54941f7d
   type_id: 3
 # Country code Networks
-- id: &fixed 3012
-  name: VN Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &vn_fixed_cc 4840
+  name: VN Fixed Cc
+  uuid: 81a7c9b2-daba-4bac-b1e8-68a2a71b9de9
   type_id: 17
 # Supplementary services Networks
-- id: &special_services 3075
-  name: VN Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &vn_special_services 5057
+  name: VN Special Services
+  uuid: 72d214a3-8672-4311-80b7-5308659b65bd
   type_id: 14
-- id: &freephone_services 3382
-  name: VN Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &vn_freephone_services 5903
+  name: VN Freephone Services
+  uuid: f122ee5d-1b21-46b5-984e-94a4a8ab180d
   type_id: 14
-- id: &premium_rate_services 3232
-  name: VN Premium rate services
-  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+- id: &vn_premium_rate_services 5913
+  name: VN Premium Rate Services
+  uuid: 3bb2c0a6-1175-4e01-8ddb-2161d568afe2
   type_id: 14
-- id: &voip 3484
+- id: &vn_voip 6444
   name: VN Voip
-  uuid: 8b47c4ce-3dab-4b8c-b32e-f98ab93afc59
+  uuid: 0211ff05-5472-4475-a59c-5de88f40f5fa
   type_id: 14
 # Satellite Networks
-- id: &vnpt_satellite 4758
-  name: VN Vnpt satellite
-  uuid: 1fcc6e08-c08d-4a0c-a6c9-275f298629b3
+- id: &vn_vnpt_satellite 6483
+  name: VN Vnpt Satellite
+  uuid: e9f427d0-9df1-4c45-ba01-f4fd0912ed42
   type_id: 16
 network_prefixes:
 # Fixed Prefixes
@@ -67,1564 +67,1564 @@ network_prefixes:
   prefix: '84226'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1d2fd1e6-647b-4943-815a-d5ed6f1a5015
+  uuid: 1a4dddec-5aa6-48c6-9410-1109687e6240
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 7180
   prefix: '84229'
   number_min_length: 12
   number_max_length: 12
-  uuid: c60ea33f-b4d5-426a-8126-0304c1e2c7bc
+  uuid: c54a64d7-901f-449d-8880-b7ace98d3077
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 8246
   prefix: '84207'
   number_min_length: 12
   number_max_length: 12
-  uuid: d3688c19-21dc-4d2b-a115-18c9fb0a4d5b
+  uuid: 660f10f7-438f-475a-8a3d-253775d88cf1
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 8511
   prefix: '84209'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4869e4d3-e7a4-40ad-923c-12d477a92010
+  uuid: 8398ee20-b1c6-4966-92bb-b3b41cff94ba
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 9990
   prefix: '84214'
   number_min_length: 12
   number_max_length: 12
-  uuid: d5611ae2-12ba-4b4f-bbfb-32aa41a6f27f
+  uuid: 1ec72123-5423-442b-b052-361a71832ce5
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 11736
   prefix: '84218'
   number_min_length: 12
   number_max_length: 12
-  uuid: 116454f7-4fb3-4e31-ab90-ae62448ecc6c
+  uuid: 5ebe13c5-3f82-4446-b10f-a1db5e935d3b
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 11960
   prefix: '84220'
   number_min_length: 12
   number_max_length: 12
-  uuid: 13fd3405-88ab-4fe7-b7fc-fa85e69a2ca3
+  uuid: cafa51b5-3b84-4468-879b-c14ca43e51e6
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 12198
   prefix: '84221'
   number_min_length: 12
   number_max_length: 12
-  uuid: f2b50745-1408-41d2-b4be-e6c9b55f483d
+  uuid: 2ba08836-506b-4a66-b4fd-2f8ee9c1513f
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 12743
   prefix: '84222'
   number_min_length: 12
   number_max_length: 12
-  uuid: 23b6befe-2fd6-4684-929a-14a4035ec641
+  uuid: a1c5b55e-9d0f-4753-adbe-5d054312b7a6
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 13974
   prefix: '84225'
   number_min_length: 12
   number_max_length: 12
-  uuid: e368f333-abac-4153-93c3-cf48f710b74d
+  uuid: 662340d5-281b-4dcf-8a43-226c9285346f
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 14903
   prefix: '84227'
   number_min_length: 12
   number_max_length: 12
-  uuid: e7be0084-8828-49d1-8365-a214d6c9547b
+  uuid: af1c88f9-a764-4c39-b961-e933db4293b0
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 15334
   prefix: '84228'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4abf5e67-3621-4ed7-80c7-69b3f6869ce4
+  uuid: 6c308e02-6a02-4e41-977a-6ad9d13109aa
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 16603
   prefix: '84232'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0333aa09-8ddc-49d9-b894-492087e87b4c
+  uuid: 587d6b71-31c3-4b83-a0b4-fa68f8908fb8
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 17053
   prefix: '84233'
   number_min_length: 12
   number_max_length: 12
-  uuid: 72c2af7f-a046-424d-acb4-21fe6734866c
+  uuid: acf71ca0-7ac2-489c-bb8b-df3c9a659435
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 17232
   prefix: '84234'
   number_min_length: 12
   number_max_length: 12
-  uuid: 404f1976-ab23-4e89-b280-77d1f6841d9c
+  uuid: ce72a6c8-e20f-4e67-9f37-ce25c715e67a
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 18183
   prefix: '84236'
   number_min_length: 12
   number_max_length: 12
-  uuid: 40e85b2c-aabd-472f-9926-d67fffe2831f
+  uuid: abb3ff3e-6aa4-4fd1-8c29-459189f46c7f
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 18982
   prefix: '84237'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3dde969a-0dce-488d-b1f2-5c9b065619e6
+  uuid: a107a1bd-3c75-46f8-b928-741c66051014
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 19098
   prefix: '84238'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4f2e76f1-63b7-4472-b067-776387a7a44a
+  uuid: 17a17c09-b760-4885-a64a-de45eeb676cd
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 22264
   prefix: '84251'
   number_min_length: 12
   number_max_length: 12
-  uuid: 30476629-b19a-4d12-a095-ce1455d7cb72
+  uuid: b785147d-7072-405b-a177-852f74e7dae4
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 22783
   prefix: '84252'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9b298c2c-5039-4352-a1aa-9208124cd4fa
+  uuid: 50f7037b-a85b-4e92-bf1a-6ef759a84185
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 23114
   prefix: '84257'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7f2813b6-1d05-4a77-a990-e50103ac1994
+  uuid: 65621c37-4208-46ba-87da-5d025adc892b
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 23136
   prefix: '84258'
   number_min_length: 12
   number_max_length: 12
-  uuid: 855504ee-d640-48f1-b3be-0a5178ffd0be
+  uuid: 45ee6feb-8844-45a7-af61-0e451cc356c9
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 23177
   prefix: '84259'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9cd204ab-fc20-4f29-8e51-7f0895dd0392
+  uuid: 08b19765-679b-4e2c-bbbe-09af10b86fc4
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 23268
   prefix: '84260'
   number_min_length: 12
   number_max_length: 12
-  uuid: 22b4e778-de54-44d2-b7cd-c6693fe6a650
+  uuid: 40c4d8d9-b89f-40e5-abd0-9ece189c3fa5
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 23716
   prefix: '84261'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3c3ceacc-11f5-4814-9bb8-723f9fb704b5
+  uuid: 4bc5ad16-d66c-474b-bb1e-5734ea2fa4b2
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 23743
   prefix: '84262'
   number_min_length: 12
   number_max_length: 12
-  uuid: a548d7b0-5742-439c-8a23-69996816b416
+  uuid: 94f28735-a5b6-4876-9493-3c947c39ecfd
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 24398
   prefix: '84263'
   number_min_length: 12
   number_max_length: 12
-  uuid: 050ff1c3-4298-4798-bb92-b50490541000
+  uuid: 6ee847fa-5afb-4208-92d0-b328660a4cbc
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 25113
   prefix: '84270'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9701c74a-0cab-46a6-a5e0-722d3f977799
+  uuid: e8e72fff-eadf-441f-ad42-767bb758f447
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 26071
   prefix: '84273'
   number_min_length: 12
   number_max_length: 12
-  uuid: ac7d0610-d45c-4b02-8a6c-9268a9f43b8c
+  uuid: ca4508e9-a936-45ac-9f2c-f0d4d8e93b49
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 26339
   prefix: '84274'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9d2511e5-9124-4291-9a42-b6fc163f3e8c
+  uuid: ee52476a-9233-4b99-a8a8-b2233ee701d6
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 26672
   prefix: '84275'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2f651410-593b-42a0-99f2-90f505394edf
+  uuid: 064f4948-d422-4fe5-ae38-a841440d6eb1
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 27498
   prefix: '84235'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9c54c7ef-5292-4cea-9acd-0d3df931044c
+  uuid: 274385cf-99ff-41e6-8b0b-98788c1636c1
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 27775
   prefix: '84239'
   number_min_length: 12
   number_max_length: 12
-  uuid: fffbd6e9-9caa-447a-a16a-654e35a37f55
+  uuid: ee7c10ad-41e1-458f-ba5b-50fb4f34e9ff
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 28300
   prefix: '8424'
   number_min_length: 12
   number_max_length: 12
-  uuid: de6834a2-ac09-4b64-b16c-8aa2585984e0
+  uuid: 99b232bb-2625-4417-be0f-3c7a9094b401
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 33283
   prefix: '84254'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0c6456d8-6a0a-414b-b15c-82676d0d24cd
+  uuid: 0eb6caf6-4d49-439c-be03-4702cfc0f433
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 33949
   prefix: '84255'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6445dc4d-5636-4279-92ec-504b4f44d092
+  uuid: 775a6d41-c47e-4064-ae94-b8c0d58f6268
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 33989
   prefix: '84256'
   number_min_length: 12
   number_max_length: 12
-  uuid: ad089457-a70b-4656-a9db-b306627f94fb
+  uuid: 0b4fa2c7-9879-4c3d-af27-117da6b5815a
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 35873
   prefix: '84269'
   number_min_length: 12
   number_max_length: 12
-  uuid: 83b0cf4e-c5d9-4e79-8587-e32f5cdb00b2
+  uuid: 2ce17db0-3ac4-4fe2-a363-4ce44569ba03
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 36371
   prefix: '84271'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8b401898-c56b-4786-9204-d0b93435583d
+  uuid: ff03aa7b-a73a-4ee7-a9c6-24dc4022f1eb
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 36872
   prefix: '84272'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0e48d320-d3e7-45bf-bd72-c966f3f057ad
+  uuid: 8f0a3d96-3377-4273-a727-d41b5c2283d7
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 37263
   prefix: '84276'
   number_min_length: 12
   number_max_length: 12
-  uuid: 187affd3-6c8e-4ca1-ac58-7e69c4904165
+  uuid: fbe09c60-538c-4c9c-8f8b-38b88ce097b2
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 37809
   prefix: '84277'
   number_min_length: 12
   number_max_length: 12
-  uuid: bafafea3-e17a-4a85-84f7-01535b325895
+  uuid: cd79b701-b65d-4de6-ac1c-3aa0b73f68ec
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 38357
   prefix: '8428'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1f8ee4cd-d58e-4fbb-91a7-94b826cd4767
+  uuid: 58193906-59a4-4579-af8d-2889598e3678
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 39605
   prefix: '84291'
   number_min_length: 12
   number_max_length: 12
-  uuid: bf52e763-3a32-43a5-9b85-ebe744e1334d
+  uuid: 8a66b1ed-1315-4f83-9195-6415916ce4ec
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 39618
   prefix: '84292'
   number_min_length: 12
   number_max_length: 12
-  uuid: b6aabe3b-5861-4d75-b6b1-9d72c5f7e6ab
+  uuid: 66d5f2cd-9878-4db5-acdd-27d58f954ece
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 39662
   prefix: '84293'
   number_min_length: 12
   number_max_length: 12
-  uuid: 34636216-4825-4f98-99c3-cc7467ebe7d1
+  uuid: ce6c2fb3-6e56-46b0-b27a-2ca0b21cc0b5
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 39706
   prefix: '84294'
   number_min_length: 12
   number_max_length: 12
-  uuid: a2258d0c-6062-416f-b0c3-857b9ae59f60
+  uuid: 41779790-7d50-4fcd-9854-e9e6677d9ff8
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 40190
   prefix: '84296'
   number_min_length: 12
   number_max_length: 12
-  uuid: 50e8132f-b0c3-4487-bed8-247fcf1e0f7e
+  uuid: bb3420e5-4e17-4606-bfd1-4018b6c6c6d1
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 40504
   prefix: '84297'
   number_min_length: 12
   number_max_length: 12
-  uuid: a9583360-f4c1-4440-b09f-64c6a0eb6a79
+  uuid: 914a4bcc-a39c-41ca-8d56-a343c2e3efaf
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 40784
   prefix: '84299'
   number_min_length: 12
   number_max_length: 12
-  uuid: 789f953d-3d75-4a9e-8b31-410a43acb6d0
+  uuid: d4d8a981-44a9-4d7f-9bb7-f5ffdbfd0ae9
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 49499
   prefix: '84290'
   number_min_length: 12
   number_max_length: 12
-  uuid: a7eef5cd-7592-45f2-b9ba-1dd9e9d3d3b2
+  uuid: 48eaf04b-258c-4358-a677-bc948af03652
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 257232
   prefix: '84199'
   number_min_length: 9
   number_max_length: 9
-  uuid: 277363a5-1524-4faf-99fc-ea098d00c115
+  uuid: 96e0d56d-2db1-46ef-8479-50615ec86fd5
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 265628
   prefix: '84203'
   number_min_length: 12
   number_max_length: 12
-  uuid: 32c2d8f3-2043-47d8-9317-4313616f26fd
+  uuid: 50224977-1e65-4bc7-a4a0-440ad6a9a636
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 266414
   prefix: '84204'
   number_min_length: 12
   number_max_length: 12
-  uuid: 16813df4-aa09-442b-a802-f8279bedff29
+  uuid: bdeb3622-98f5-46f6-aa61-34d7ad0b5a34
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 266702
   prefix: '84206'
   number_min_length: 12
   number_max_length: 12
-  uuid: 24a0c90e-de76-46df-bcac-aa74eb4b6ec9
+  uuid: a9a82789-ee9b-4fee-a2c2-5b41294b5133
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 267623
   prefix: '84205'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3e989aac-aef8-4b4b-85fa-d8fe5f0cc328
+  uuid: f7e2e496-ee05-417c-87dc-95422a87be93
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 268700
   prefix: '84208'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6bf2fd32-ec19-4f73-97c2-9c9f9cadb0b5
+  uuid: d47424a0-a18c-4286-b728-807904fb9d2c
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 269442
   prefix: '84210'
   number_min_length: 12
   number_max_length: 12
-  uuid: d04c88f3-f061-4a7e-b7c3-447ed3dc96e8
+  uuid: aecb279b-7995-4098-93b2-ee0ca401880b
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 270178
   prefix: '84211'
   number_min_length: 12
   number_max_length: 12
-  uuid: 72003a49-9090-452c-89f2-d5378974b735
+  uuid: facb019b-ffe6-4138-934f-d986bf0e7cc3
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 270206
   prefix: '84212'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5865a46b-6178-4cee-a14f-94e034c65180
+  uuid: 731fa21b-dff4-4866-9f4b-512b3dec6dda
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 270416
   prefix: '84213'
   number_min_length: 12
   number_max_length: 12
-  uuid: 62133217-204c-4bb0-b537-d3e9e21abaf0
+  uuid: 19dc8d1a-baaf-457c-9e02-289af3b97faf
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 270771
   prefix: '84215'
   number_min_length: 12
   number_max_length: 12
-  uuid: 547bb847-26c4-43f3-9ec6-f4a093a4f080
+  uuid: 955a605b-4fca-4007-bd1a-e34d21a9cc53
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 271580
   prefix: '84216'
   number_min_length: 12
   number_max_length: 12
-  uuid: c226d0e2-1f45-4776-9090-580345b16abd
+  uuid: 0ea16888-535c-47a8-8692-7a84be3c6fbc
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 272408
   prefix: '84219'
   number_min_length: 12
   number_max_length: 12
-  uuid: e8d6cee0-88ad-4101-b5e8-b612376c1f19
+  uuid: a824d0df-1da5-4a69-a083-6f0d6c6b0384
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 321937
   prefix: '8466'
   number_min_length: 9
   number_max_length: 11
-  uuid: fb7564e7-5b4c-4d20-9237-932852bf9c12
+  uuid: 4210860f-20d8-4f06-9370-563d926ef4cb
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 347744
   prefix: '84692'
   number_min_length: 10
   number_max_length: 12
-  uuid: 8e5e0cbb-ec63-4825-9d9c-54383cf6ad4e
+  uuid: df77cfaa-8a88-4ff1-8e3e-2950df2cc02f
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 347749
   prefix: '84693'
   number_min_length: 10
   number_max_length: 12
-  uuid: b9f559a4-b3ab-46ba-a4ab-d5f57e217247
+  uuid: d099438a-3e5d-47ee-8f29-8462d4b581d9
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 347751
   prefix: '84694'
   number_min_length: 10
   number_max_length: 12
-  uuid: 6de1eaa0-6115-451f-9f7e-1c8fcfd783a7
+  uuid: 01fc5e20-c898-4ece-9355-6260110511e7
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 347762
   prefix: '84695'
   number_min_length: 11
   number_max_length: 12
-  uuid: ba1697a2-83e4-4abf-9ab1-0435e41135bc
+  uuid: 3944847a-cbac-46f1-8679-b851f07622e2
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 347765
   prefix: '84696'
   number_min_length: 11
   number_max_length: 12
-  uuid: 32589c74-77e7-4897-8f91-bda444228b70
+  uuid: 72ab4568-bce0-4402-8efb-f4f5a79fbad8
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 347770
   prefix: '84697'
   number_min_length: 11
   number_max_length: 12
-  uuid: 4a1502ea-15cc-495c-8e7e-fd1ceb2c68db
+  uuid: 392b5844-17c3-443a-afb7-5c1c6331fab2
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 347772
   prefix: '84698'
   number_min_length: 11
   number_max_length: 12
-  uuid: dde4167d-cd8d-45cf-bddb-8055245b8e62
+  uuid: b2905ece-918a-4392-a188-fdb9527b968f
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 - id: 347775
   prefix: '84699'
   number_min_length: 11
   number_max_length: 12
-  uuid: 258d4616-dddf-4209-9679-1d5ab7e0ba1d
+  uuid: 9acdca60-00f9-4f0d-9e47-09d80fbd4551
   country_id: *vn
-  network_id: *fixed
-- id: 392581
+  network_id: *vn_fixed
+- id: 392582
   prefix: '8480'
   number_min_length: 9
   number_max_length: 11
-  uuid: 348e64ac-a03a-43bb-a3eb-b25ec496763d
+  uuid: b122d685-95e7-46e2-804a-b7a9119449e7
   country_id: *vn
-  network_id: *fixed
-- id: 400521
+  network_id: *vn_fixed
+- id: 400522
   prefix: '84799'
   number_min_length: 9
   number_max_length: 9
-  uuid: 96019011-9ef3-4194-ab36-1823bca19cde
+  uuid: e41f0e34-ac31-44f1-ac96-b6f49653cb0f
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed
 # Mobile Prefixes
 - id: 53125
   prefix: '8431'
   number_min_length: 11
   number_max_length: 11
-  uuid: 159d1ced-5892-47ce-b9a0-ae388684fde7
+  uuid: 9e8c7cbe-f8f4-44a6-9d6e-d98a34cfb287
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 67166
   prefix: '8432'
   number_min_length: 11
   number_max_length: 11
-  uuid: 781b8f1c-eb90-41b0-bb04-c5ce35902432
+  uuid: dd31e65c-ba8a-4d2a-9a73-1681ce2f689b
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 68030
   prefix: '8433'
   number_min_length: 11
   number_max_length: 11
-  uuid: 91612b5d-62c0-486b-a8cb-b64f719a7269
+  uuid: fa1c2d93-f7d3-4496-bd4d-9a17c7c9ce79
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 76932
   prefix: '8434'
   number_min_length: 11
   number_max_length: 11
-  uuid: b65c365a-f955-44c2-83dc-74555dbd5c27
+  uuid: d6b76cec-6277-48c1-8ae1-ec38be26653e
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 78872
   prefix: '8435'
   number_min_length: 11
   number_max_length: 11
-  uuid: f3bd43fc-7179-4c27-aba5-3f4959de9413
+  uuid: d7f5bddb-6648-4dc3-bb50-8c4f3b092ba0
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 80971
   prefix: '8436'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2a852f45-0c6a-4b7f-b607-0f950e2b5a5b
+  uuid: 469dbd6d-4dbb-43b3-b618-99736cf404fc
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 82018
   prefix: '8437'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7514694c-70d4-4321-90cf-2abfad99aca8
+  uuid: bd0035e6-ced1-4769-9c85-78b941db767f
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 83723
   prefix: '8438'
   number_min_length: 11
   number_max_length: 11
-  uuid: 262e88dd-5935-417d-a6ed-ac100f8d6c5e
+  uuid: 71974dfc-cd5c-4839-ae62-590f1b28a5ee
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 84947
   prefix: '8439'
   number_min_length: 11
   number_max_length: 11
-  uuid: 004f7527-e197-4950-b831-fdd3653d3e7d
+  uuid: 3ebc1336-0a87-4994-aaba-e5eadddb1a04
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 154225
   prefix: '84522'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5e9e1a24-6096-4713-b7e3-2c88e40ff0a1
+  uuid: 773a64a9-a197-499a-bcfe-971ddddda83a
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 154246
   prefix: '84523'
   number_min_length: 12
   number_max_length: 12
-  uuid: e6bc9fef-de9b-4da5-9988-a6bba47b0a01
+  uuid: 5810e246-900c-44e6-8bb5-c04c1685e984
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 154269
   prefix: '84528'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4eb03f2a-e9b6-42a1-898d-d1cb40272096
+  uuid: fa37104f-1116-400a-8121-279ddf105f82
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 161068
   prefix: '84559'
   number_min_length: 12
   number_max_length: 12
-  uuid: d9499405-6bee-41a1-a519-e0ef2139d1b1
+  uuid: 03a7f0b6-d7ea-444d-a2a2-43fbea05ebd7
   country_id: *vn
-  network_id: *reddi_mobile
+  network_id: *vn_reddi_mobile
 - id: 171729
   prefix: '8491'
   number_min_length: 11
   number_max_length: 11
-  uuid: de6b5e41-4c48-47fb-9f0b-61eb37e60562
+  uuid: b46c97b3-cedc-43fe-b774-d6306cbb8995
   country_id: *vn
-  network_id: *vinaphone_mobile
+  network_id: *vn_vinaphone_mobile
 - id: 174203
   prefix: '849211'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0292b19a-f8a1-4b8a-a09b-a0552ec0f880
+  uuid: 4d8923c6-e3b0-433b-9888-ac16c9329d45
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174204
   prefix: '849212'
   number_min_length: 13
   number_max_length: 13
-  uuid: 40a73031-2cdd-481c-a42e-66efd22161aa
+  uuid: 8cc3381e-1ce8-41bd-87dd-b73184580675
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174205
   prefix: '849213'
   number_min_length: 13
   number_max_length: 13
-  uuid: 379b409e-44d1-4325-abe7-75b145c0c45f
+  uuid: e665d9da-b38a-44a8-abbb-629631bf8000
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174206
   prefix: '849216'
   number_min_length: 13
   number_max_length: 13
-  uuid: a301b4f1-6347-4ee5-9739-f1b27d778f19
+  uuid: 83ed4f0e-8b52-4d3e-91a5-c759957c41b7
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174207
   prefix: '849217'
   number_min_length: 13
   number_max_length: 13
-  uuid: 48137404-45f9-44ba-80ff-acf4d8b3a4cb
+  uuid: b00da1be-b3b1-4c6f-8130-53b845e3b2ad
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174208
   prefix: '849218'
   number_min_length: 13
   number_max_length: 13
-  uuid: 53e453b7-4146-4464-be68-5b3e8e2256cb
+  uuid: 0da04187-b946-4cd0-b214-c78d3607ba59
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174209
   prefix: '849219'
   number_min_length: 13
   number_max_length: 13
-  uuid: ce429a78-f158-4b98-8f59-00bbdf310960
+  uuid: c9718725-cd84-4b9d-bf19-bfd12610d8cf
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174211
   prefix: '849221'
   number_min_length: 13
   number_max_length: 13
-  uuid: 33bcbfd9-8399-47dc-92b8-dbadce71eae9
+  uuid: 0c1d295e-28d0-4502-b856-faf7bc6a5600
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174212
   prefix: '849222'
   number_min_length: 13
   number_max_length: 13
-  uuid: aedeacf9-13f6-449d-a230-92fbef566c53
+  uuid: 2c73ed38-e347-4ac5-9e5a-0a2bc814aad4
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174213
   prefix: '849223'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2ccd0d28-5247-446c-82aa-10e01d983ed2
+  uuid: 6338b500-5875-4fc2-927b-2af8d087cd92
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174214
   prefix: '849224'
   number_min_length: 13
   number_max_length: 13
-  uuid: c5d8d85f-bfbc-49a2-873e-d6b900ea5364
+  uuid: 971e11b4-b19b-4296-b1e2-31534eb135e3
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174215
   prefix: '849225'
   number_min_length: 13
   number_max_length: 13
-  uuid: 31f96f9d-2d0d-4b80-a9d4-c5e1d499d3bf
+  uuid: b8744c13-0ca4-4033-b381-e34bf8ce515b
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174216
   prefix: '849226'
   number_min_length: 13
   number_max_length: 13
-  uuid: a2513cc1-9429-4a60-9337-92655db25a1d
+  uuid: 91da9b2b-3a45-49e8-a0dd-f6a89db7cbd4
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174218
   prefix: '849231'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8e5dc3c0-8ded-4a54-ad71-544767a2cae5
+  uuid: 678a0c35-7751-4715-8510-0649c4726488
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174219
   prefix: '849232'
   number_min_length: 13
   number_max_length: 13
-  uuid: fadda86d-6ed6-4c39-a17f-d003aea76305
+  uuid: ffe558f1-707d-48d5-9cf2-5f0b4ef0188e
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174326
   prefix: '84921'
   number_min_length: 12
   number_max_length: 12
-  uuid: 156b4abd-5c9b-40af-a683-c3a3f22a4b2f
+  uuid: 465511e4-9002-489c-8dcc-664e99bc91c4
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174438
   prefix: '84922'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3f3244b5-48a0-4544-a4f5-f2a0ec750820
+  uuid: e4beba04-13a1-48a9-a7f1-afd5accfbfe4
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174514
   prefix: '84923'
   number_min_length: 12
   number_max_length: 12
-  uuid: b2371ad3-047a-432a-9dcb-89b6f1fff2a7
+  uuid: bf583444-f4d0-4e25-8fe1-5f86c8a9294a
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174528
   prefix: '84924'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3093658c-76d7-4b85-ad29-71ca773bd2fc
+  uuid: dd433958-0939-4898-abec-1c13ce0a0ffc
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174549
   prefix: '84925'
   number_min_length: 12
   number_max_length: 12
-  uuid: e6bda559-b4ee-43e6-983b-5b4d496856e5
+  uuid: 37577316-7bfc-4066-b985-6d4435a1aa08
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174562
   prefix: '84926'
   number_min_length: 12
   number_max_length: 12
-  uuid: c4521d26-0230-4b6f-8b00-dae72b1bf366
+  uuid: eb10d526-aeb2-4d28-8816-b038838440b4
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174590
   prefix: '84927'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2e01fb54-c30b-48a9-8a76-e18b488ebadd
+  uuid: d23f9762-4cbd-45b9-9f5d-779d7b067325
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174603
   prefix: '84928'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6b167b3a-7dff-47ea-8f72-6424d1e9d3b2
+  uuid: 56d0abd6-56bb-4cb6-b6a4-917870dd39c8
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 174623
   prefix: '84929'
   number_min_length: 12
   number_max_length: 12
-  uuid: 34c4a220-d743-41b4-8de7-55a3c111bc4c
+  uuid: cf427071-72f6-4e2c-8103-ded4617d0886
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 195177
   prefix: '84931'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0170c652-c79a-47d9-827e-2f692f0d9c7f
+  uuid: 14fe27d0-ad95-4b4f-a817-8d8a7fbbbbcf
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 195192
   prefix: '84932'
   number_min_length: 12
   number_max_length: 12
-  uuid: 747b96ff-2792-4fa5-a0f3-74363ba41707
+  uuid: 2020c730-3a6b-4265-a196-cfb1b1f6ca8f
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 195205
   prefix: '84933'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3f129131-c2f7-4035-8384-289f366a2abf
+  uuid: 543e83b6-0a53-48e0-b5ae-77279a0dfe2d
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 195218
   prefix: '84934'
   number_min_length: 12
   number_max_length: 12
-  uuid: d0e9a4f7-9592-4283-82c1-996955601748
+  uuid: a3216994-1d40-404f-b013-fdef6035b659
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 195230
   prefix: '84935'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3dc6eca1-39aa-4d9f-b891-24fc336cec37
+  uuid: 62c2b7d9-e30e-4271-aa94-1b77f57a2644
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 195243
   prefix: '84936'
   number_min_length: 12
   number_max_length: 12
-  uuid: ce2556f3-a443-4851-b66f-fbca845ef346
+  uuid: 9c92f98a-e09f-4850-bee0-4049b963cbad
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 195255
   prefix: '84937'
   number_min_length: 12
   number_max_length: 12
-  uuid: c778bfa7-70eb-43e9-a698-4d89a4772644
+  uuid: 4428508a-6602-42ca-b7b6-502bb13fbab5
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 195290
   prefix: '84938'
   number_min_length: 12
   number_max_length: 12
-  uuid: c1ea01c9-7373-4c3d-bdcc-d972fbe467a3
+  uuid: 562f8114-1e2f-4379-98f5-f40d86b6285d
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 195334
   prefix: '84939'
   number_min_length: 12
   number_max_length: 12
-  uuid: 09c226d1-272e-41e3-a14b-e5af55c67f26
+  uuid: 54b3be16-9b34-4b7c-b752-d07fb1f4957e
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 212575
   prefix: '8494'
   number_min_length: 11
   number_max_length: 11
-  uuid: aa2fd603-b137-4f33-ae3b-2a6e59919120
+  uuid: 853552df-d0f8-49eb-a0dc-0428956767e2
   country_id: *vn
-  network_id: *vinaphone_mobile
+  network_id: *vn_vinaphone_mobile
 - id: 218104
   prefix: '8495'
   number_min_length: 11
   number_max_length: 11
-  uuid: 0186a9cb-3a9d-4992-92c3-053d9842bbc6
+  uuid: 67638a93-fa3e-40de-b2dc-a6a33f44e313
   country_id: *vn
-  network_id: *gmobile_mobile
+  network_id: *vn_gmobile_mobile
 - id: 221115
   prefix: '84967'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2d62b2ca-9a6b-4ad1-a892-83abde1a000a
+  uuid: ac1b7f35-030e-4d03-b1a2-4aa27f7400c0
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 221217
   prefix: '84968'
   number_min_length: 12
   number_max_length: 12
-  uuid: d9da73e2-3e46-45ad-bba7-ab4e2215bdad
+  uuid: e54f4b9c-0bd5-47a5-8275-517e7b49c0c9
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 221329
   prefix: '84969'
   number_min_length: 12
   number_max_length: 12
-  uuid: c7ee2eaa-bb85-4797-880c-7c8236d68440
+  uuid: 3d2ead2c-6f81-4040-a662-ad45aff704e7
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 223583
   prefix: '8497'
   number_min_length: 11
   number_max_length: 11
-  uuid: 84ae7b29-348b-47a8-9561-87afd9f0e843
+  uuid: de470d0e-682b-45ef-aea7-1b2749ce403e
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 223588
   prefix: '84970'
   number_min_length: 12
   number_max_length: 12
-  uuid: dc61f14e-a7ef-420d-9eef-2110731ab552
+  uuid: 4ca0abd4-baa1-487a-b72c-0b7bf3d6d68f
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 223588
   prefix: '84970'
   number_min_length: 16
   number_max_length: 16
-  uuid: dc61f14e-a7ef-420d-9eef-2110731ab552
+  uuid: 4ca0abd4-baa1-487a-b72c-0b7bf3d6d68f
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 225823
   prefix: '84961'
   number_min_length: 12
   number_max_length: 12
-  uuid: 034fdccd-6470-443d-af08-069ea166e56a
+  uuid: 821e23b5-6a1d-4a00-87bc-ba385d401526
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 225846
   prefix: '84962'
   number_min_length: 12
   number_max_length: 12
-  uuid: ec0127cb-bcaa-4352-8cb2-8f1e734b9505
+  uuid: 23aea8fe-56f7-4108-a528-5c60176c62f2
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 225878
   prefix: '84963'
   number_min_length: 12
   number_max_length: 12
-  uuid: a8db1316-aff9-4a90-8231-2f95805b497a
+  uuid: 7fd9751d-081c-4556-aa30-954ae12d303d
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 225899
   prefix: '84964'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1a96abc9-bb18-41f3-9ff0-a9a9aeeaaf20
+  uuid: eb970e5d-2c1c-4328-b098-ce5b5d3ce87b
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 225930
   prefix: '84965'
   number_min_length: 12
   number_max_length: 12
-  uuid: d0045f71-8c68-4ecf-8704-970306b26f48
+  uuid: a7c8f945-6c38-491f-812d-af1e2dbb32ca
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 225942
   prefix: '84966'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2311bc1e-e529-4fa2-a0f9-ef0bbf72c844
+  uuid: f4d28f65-7fec-4881-a409-5f07a5f581ec
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 234070
   prefix: '8498'
   number_min_length: 11
   number_max_length: 11
-  uuid: d45114bd-3a06-4cb1-956d-f5d76708fa50
+  uuid: ab0524c1-84b2-4c98-aff4-947d998d764b
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 234075
   prefix: '84980'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4280a1b9-07c8-49b9-af5d-754e2648b249
+  uuid: 31e316df-deb2-4279-9146-c7dbca4b30c3
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 238793
   prefix: '84993'
   number_min_length: 12
   number_max_length: 12
-  uuid: b9c6aea6-7e97-4661-a1c3-12da0a423266
+  uuid: 9651e831-b522-43a8-83e6-fb5d46dde954
   country_id: *vn
-  network_id: *gmobile_mobile
+  network_id: *vn_gmobile_mobile
 - id: 238806
   prefix: '84994'
   number_min_length: 12
   number_max_length: 12
-  uuid: dba9d7ee-2ea1-4a6b-9990-90fbed5bd1b6
+  uuid: a64257b6-f46b-4c02-896d-d7c3d03f5ead
   country_id: *vn
-  network_id: *gmobile_mobile
+  network_id: *vn_gmobile_mobile
 - id: 238818
   prefix: '84995'
   number_min_length: 12
   number_max_length: 12
-  uuid: f8fd21b7-b84a-4d44-a121-9989a2e89e20
+  uuid: b1c5bd69-6700-4f2e-a531-3d8ff12bdc76
   country_id: *vn
-  network_id: *gmobile_mobile
+  network_id: *vn_gmobile_mobile
 - id: 238850
   prefix: '84996'
   number_min_length: 12
   number_max_length: 12
-  uuid: 641ecfbf-c809-4de0-a395-b2087d75892d
+  uuid: 090fc04d-5c5f-4599-9909-57b8ede3ce1f
   country_id: *vn
-  network_id: *gmobile_mobile
+  network_id: *vn_gmobile_mobile
 - id: 238902
   prefix: '84997'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1f25107a-fcbe-4c41-8abc-b4555bc0ac0c
+  uuid: e962a95c-4695-4c8c-bace-73e2e1c97978
   country_id: *vn
-  network_id: *gmobile_mobile
+  network_id: *vn_gmobile_mobile
 - id: 256583
   prefix: '84180'
   number_min_length: 7
   number_max_length: 7
-  uuid: fb250b05-7f9d-46f2-ab3a-e1aed916a0ee
+  uuid: d73b4a1c-75d0-4e0a-b53b-1b133e79fd1f
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 256904
   prefix: '84190'
   number_min_length: 7
   number_max_length: 7
-  uuid: 4729f060-ac71-4b53-9907-8647162710e6
+  uuid: fa0fe2f8-ba7e-4db9-bf28-69d80ff9e246
   country_id: *vn
-  network_id: *viettel_mobile_mobile
+  network_id: *vn_viettel_mobile_mobile
 - id: 275309
   prefix: '8456'
   number_min_length: 11
   number_max_length: 11
-  uuid: 1ca48786-4fc3-4c98-9f13-1b50651df6bf
+  uuid: 504e2d97-8ff5-4d8e-875b-31d55df7a0af
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 285721
   prefix: '8458'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2d3b0a75-0067-4692-a09b-f2144e1a3ad9
+  uuid: 69f03729-417c-46be-9a96-739733d84c69
   country_id: *vn
-  network_id: *vietnamobile_mobile
+  network_id: *vn_vietnamobile_mobile
 - id: 289425
   prefix: '8459'
   number_min_length: 11
   number_max_length: 11
-  uuid: 95a8d810-d774-4570-b6ee-24cb29f45008
+  uuid: a386b916-92cf-4f3b-bbdd-5ee3d95dc8b8
   country_id: *vn
-  network_id: *gmobile_mobile
+  network_id: *vn_gmobile_mobile
 - id: 341101
   prefix: '84702'
   number_min_length: 12
   number_max_length: 12
-  uuid: 585403f0-ef52-453d-9bb8-6626a44cb249
+  uuid: a7a55455-e392-4124-b72e-c2fa183c2ff1
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 341130
   prefix: '84703'
   number_min_length: 12
   number_max_length: 12
-  uuid: d6e54250-a84c-44fd-81d1-a9ccc3b018d4
+  uuid: 50014adc-cb13-4fe6-9b25-cb8f96d6f0e0
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 341172
   prefix: '84704'
   number_min_length: 12
   number_max_length: 12
-  uuid: 996d82f4-b074-4698-8b5a-d6eb6da8428f
+  uuid: 97ecd542-c646-4740-b944-9e9a6c4177e9
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 341197
   prefix: '84705'
   number_min_length: 12
   number_max_length: 12
-  uuid: b0d9ec30-aff1-45c5-90d0-1e74ef5f456f
+  uuid: d699cb44-0588-42b2-bab4-a539086d43bf
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 341243
   prefix: '84706'
   number_min_length: 12
   number_max_length: 12
-  uuid: 36d76a9f-6f48-4448-9215-edbbddd316cb
+  uuid: 3df0bcb9-d815-4107-8436-55a35a6f052d
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 341279
   prefix: '84707'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5ac3ec8e-43fb-44d4-aa88-79c3a415930c
+  uuid: d47b3d72-d155-458e-b6b6-561d113fbfb1
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 341311
   prefix: '84708'
   number_min_length: 12
   number_max_length: 12
-  uuid: 62c2c259-dcfe-4c8e-85d4-b6100c8d5c4a
+  uuid: a409f25d-c4d7-4edb-ae86-31c7e8817469
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 - id: 341367
   prefix: '84709'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2d22156e-7497-4853-9396-a507b6c9440e
+  uuid: 33bc3d2f-31b4-4ff0-bef8-3b74058f137d
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 379207
+  network_id: *vn_mobifone_mobile
+- id: 379208
   prefix: '84762'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8e15671a-358b-4907-94a0-9bb7f9e5cb8b
+  uuid: f603c08d-19c0-454e-a1d2-a5c990a3306d
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 379233
+  network_id: *vn_mobifone_mobile
+- id: 379234
   prefix: '84763'
   number_min_length: 12
   number_max_length: 12
-  uuid: 77aa8ea1-74f0-4579-9880-c74a2f21ea33
+  uuid: f36a6cc2-c9c4-4f09-9df1-2d9b2bf95bde
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 379258
+  network_id: *vn_mobifone_mobile
+- id: 379259
   prefix: '84764'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5f3b04e5-bec7-43aa-a315-00d6c49ffd79
+  uuid: 19ba0d37-72e7-49ad-9267-062bc50e8cd9
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 379405
+  network_id: *vn_mobifone_mobile
+- id: 379406
   prefix: '84765'
   number_min_length: 12
   number_max_length: 12
-  uuid: bd0ca7b0-5f97-4b34-ae64-ab259e5d4617
+  uuid: cf2a97ed-1c90-413c-a915-08332cb2ab4b
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 379435
+  network_id: *vn_mobifone_mobile
+- id: 379436
   prefix: '84766'
   number_min_length: 12
   number_max_length: 12
-  uuid: bb47e561-e218-491a-aa89-7864beb24e04
+  uuid: 87cd16a0-f468-4e61-b916-b6c65e64d69e
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 379616
+  network_id: *vn_mobifone_mobile
+- id: 379617
   prefix: '84767'
   number_min_length: 12
   number_max_length: 12
-  uuid: 87ad6c2f-bf75-41a3-a9cb-11dd5e9e85af
+  uuid: 3f3b3c63-0078-44c1-9234-f4138fabe3c3
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 379709
+  network_id: *vn_mobifone_mobile
+- id: 379710
   prefix: '84768'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0220e579-379d-4978-902d-f68d11398a7a
+  uuid: 9501cb24-b2b9-47ea-bbc9-785730bbee96
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 379761
+  network_id: *vn_mobifone_mobile
+- id: 379762
   prefix: '84769'
   number_min_length: 12
   number_max_length: 12
-  uuid: 98f69e53-e58e-44e4-b43c-cd0560c43f49
+  uuid: 9dec3264-159d-4edd-a44f-82980f1a7055
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 386013
+  network_id: *vn_mobifone_mobile
+- id: 386014
   prefix: '84772'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4c78354d-f546-4373-9795-cc05d59f0186
+  uuid: 17e27227-07af-43e9-9743-821f771504f8
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 386044
+  network_id: *vn_mobifone_mobile
+- id: 386045
   prefix: '84773'
   number_min_length: 12
   number_max_length: 12
-  uuid: 240be813-eac6-4385-85d0-e8a52dd957fd
+  uuid: e6a709d1-e56d-4c1f-9aa0-73cec1f41232
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 386067
+  network_id: *vn_mobifone_mobile
+- id: 386068
   prefix: '84774'
   number_min_length: 12
   number_max_length: 12
-  uuid: c8691afa-ee30-4fe9-9075-8c96229ca265
+  uuid: fea5af76-c455-499b-9764-6be973871fa7
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 386096
+  network_id: *vn_mobifone_mobile
+- id: 386097
   prefix: '84775'
   number_min_length: 12
   number_max_length: 12
-  uuid: e802c55b-40f1-42dd-90ed-c528a51098fd
+  uuid: 4d683055-99fb-4efe-b41f-591c3d78654b
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 386132
+  network_id: *vn_mobifone_mobile
+- id: 386133
   prefix: '84776'
   number_min_length: 12
   number_max_length: 12
-  uuid: 098d3eb3-6099-41f1-9a9c-06875f2feec5
+  uuid: 0a6e4189-0b8a-44b5-9ef1-01a220e233a9
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 386161
+  network_id: *vn_mobifone_mobile
+- id: 386162
   prefix: '84777'
   number_min_length: 12
   number_max_length: 12
-  uuid: c0235a3a-30da-4b70-aaca-7308b97f71c6
+  uuid: ae2ae62b-bbc5-4e72-90b4-977f07bf0c5c
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 386192
+  network_id: *vn_mobifone_mobile
+- id: 386193
   prefix: '84778'
   number_min_length: 12
   number_max_length: 12
-  uuid: ad6d4275-3338-4fb6-9a3a-e7b49ba15cf0
+  uuid: 0d973247-d1b9-4c48-b25d-b7baac2c594c
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 386236
+  network_id: *vn_mobifone_mobile
+- id: 386237
   prefix: '84779'
   number_min_length: 12
   number_max_length: 12
-  uuid: a542b931-4614-4843-8713-e4a575586da6
+  uuid: 8e3fa54b-1591-4fa0-b194-d295c2f0154b
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 395825
+  network_id: *vn_mobifone_mobile
+- id: 395826
   prefix: '84782'
   number_min_length: 12
   number_max_length: 12
-  uuid: 240ea93f-db54-4cae-96a4-a92ffe7c20bb
+  uuid: 8c4d6db4-e102-4f7e-86cc-6be7cb22af6d
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 395858
+  network_id: *vn_mobifone_mobile
+- id: 395859
   prefix: '84783'
   number_min_length: 12
   number_max_length: 12
-  uuid: e7e96f3d-a65d-4f95-b23e-3fb70a8f2831
+  uuid: f0becf0a-d297-4bb0-b818-81878aea10f0
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 395892
+  network_id: *vn_mobifone_mobile
+- id: 395893
   prefix: '84784'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3563cc2a-4ce3-4d90-95e4-1ee135e8ae76
+  uuid: da15bbb9-3400-4b40-9834-d29ce5b735e9
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 395932
+  network_id: *vn_mobifone_mobile
+- id: 395933
   prefix: '84785'
   number_min_length: 12
   number_max_length: 12
-  uuid: ef94c31b-2027-42ff-a2d1-f1f8cd31150e
+  uuid: ff57adff-f52f-4338-82e5-c4a5a61cb40e
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 395964
+  network_id: *vn_mobifone_mobile
+- id: 395965
   prefix: '84786'
   number_min_length: 12
   number_max_length: 12
-  uuid: 52db2321-e2eb-42f1-ac30-9b1308a646e1
+  uuid: 2ff43f9f-7360-4b90-9e08-6bfece995c81
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 395992
+  network_id: *vn_mobifone_mobile
+- id: 395993
   prefix: '84787'
   number_min_length: 12
   number_max_length: 12
-  uuid: 07e927fd-545e-4ee0-b21c-572fb878104f
+  uuid: dcf99f49-bc8c-4aa9-9c7e-59248b5ee301
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 396004
+  network_id: *vn_mobifone_mobile
+- id: 396005
   prefix: '84788'
   number_min_length: 12
   number_max_length: 12
-  uuid: f3df31b0-ffdc-4848-b35d-c65a08eff7c8
+  uuid: eeae6423-1cdd-4c2f-b35f-9f11bc1fc98b
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 396045
+  network_id: *vn_mobifone_mobile
+- id: 396046
   prefix: '84789'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4bedc51d-7759-4a75-9b8b-917f02381ac4
+  uuid: 15202a18-f14d-42e8-9e21-5ef0076ebff8
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 399810
+  network_id: *vn_mobifone_mobile
+- id: 399811
   prefix: '84792'
   number_min_length: 12
   number_max_length: 12
-  uuid: e5a2cb02-00c3-41ce-a53d-6379f4c5428e
+  uuid: c401248d-b674-409b-908f-4f5f31bd5937
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 399814
+  network_id: *vn_mobifone_mobile
+- id: 399815
   prefix: '84793'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3ab2aa61-5908-4df9-b256-b02e6c6a59f3
+  uuid: f79d0e02-92e9-444d-a1fc-6deb444325f5
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 399822
+  network_id: *vn_mobifone_mobile
+- id: 399823
   prefix: '84794'
   number_min_length: 12
   number_max_length: 12
-  uuid: 984e4324-671d-4657-826e-30f5b836c67c
+  uuid: e2a3f931-e5e8-4526-a1cc-5e20b90d4a51
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 399829
+  network_id: *vn_mobifone_mobile
+- id: 399830
   prefix: '84795'
   number_min_length: 12
   number_max_length: 12
-  uuid: 748c998e-7e64-4a3c-9499-3ff9e60b7aed
+  uuid: 3880bccc-8147-49fd-b24a-0b707ebfac2d
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 399861
+  network_id: *vn_mobifone_mobile
+- id: 399862
   prefix: '84796'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7c9bb0b4-9548-4062-b840-9b3e0f65f9fc
+  uuid: 9b96c5d9-2d85-44da-8be1-142286daf547
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 399866
+  network_id: *vn_mobifone_mobile
+- id: 399867
   prefix: '84797'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8cf9bf24-f6bf-4785-a1b1-8f1f7fcdd1a0
+  uuid: 9681895b-daf1-4053-8adf-bff95a1f6a5d
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 399889
+  network_id: *vn_mobifone_mobile
+- id: 399890
   prefix: '84798'
   number_min_length: 12
   number_max_length: 12
-  uuid: a477408d-6566-476f-8048-705cd8dd2fc4
+  uuid: 9e853852-ae3b-4128-bf41-89c8575d0e57
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 399901
+  network_id: *vn_mobifone_mobile
+- id: 399902
   prefix: '84799'
   number_min_length: 12
   number_max_length: 12
-  uuid: 32b2ebfb-8e35-4466-913c-7b1febc54ba5
+  uuid: 4330c00e-8d15-4b1e-9a44-f4530d656be0
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 404250
+  network_id: *vn_mobifone_mobile
+- id: 404251
   prefix: '8481'
   number_min_length: 11
   number_max_length: 11
-  uuid: 0959a7e7-7c39-4fcc-8bb0-71eca98d2f84
+  uuid: 19326b22-3d14-4ccf-8b53-165983f51485
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 412241
+  network_id: *vn_vinaphone_mobile
+- id: 412242
   prefix: '8483'
   number_min_length: 11
   number_max_length: 11
-  uuid: e69c8710-913e-4eb6-874a-aef6d117afd7
+  uuid: 4467bd5c-ce30-4968-a390-930fb1167be4
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 414711
+  network_id: *vn_vinaphone_mobile
+- id: 414712
   prefix: '8484'
   number_min_length: 11
   number_max_length: 11
-  uuid: 37b742bb-ab04-4bc7-8112-78904f7bc7b5
+  uuid: ccbf60ce-5a1b-4726-8c4d-8a067dd3b9f7
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 418955
+  network_id: *vn_vinaphone_mobile
+- id: 418956
   prefix: '8482'
   number_min_length: 11
   number_max_length: 11
-  uuid: ca2f67f3-128b-40ab-9248-05be9d1d4889
+  uuid: db04a344-e411-40f5-88b8-203cb0f87fab
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 429105
+  network_id: *vn_vinaphone_mobile
+- id: 429106
   prefix: '84862'
   number_min_length: 12
   number_max_length: 12
-  uuid: 37b3fc15-4bfa-4ddd-b4db-65224f670f05
+  uuid: 1db86043-039c-4d2f-8db8-a3babd32c3df
   country_id: *vn
-  network_id: *viettel_mobile_mobile
-- id: 429195
+  network_id: *vn_viettel_mobile_mobile
+- id: 429196
   prefix: '84865'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0ff0b453-1cc0-49f4-80b2-4e97d2711394
+  uuid: 7c76adc0-935b-41bb-876d-3465ec23594f
   country_id: *vn
-  network_id: *viettel_mobile_mobile
-- id: 429207
+  network_id: *vn_viettel_mobile_mobile
+- id: 429208
   prefix: '84866'
   number_min_length: 12
   number_max_length: 12
-  uuid: 46971c95-42d7-498f-9530-a59c4c14a328
+  uuid: fa2ddf4b-4b13-4d9d-8cc5-d0529e0c4522
   country_id: *vn
-  network_id: *viettel_mobile_mobile
-- id: 429241
+  network_id: *vn_viettel_mobile_mobile
+- id: 429242
   prefix: '84867'
   number_min_length: 12
   number_max_length: 12
-  uuid: 66e33a04-35a0-434e-a0c7-f521f9b04a81
+  uuid: a98af433-8662-4f39-a22b-240d707bed0d
   country_id: *vn
-  network_id: *viettel_mobile_mobile
-- id: 429261
+  network_id: *vn_viettel_mobile_mobile
+- id: 429262
   prefix: '84868'
   number_min_length: 12
   number_max_length: 12
-  uuid: 806e7ebf-5c4f-4a18-b7c6-129ec34f3fe7
+  uuid: 667f15c1-914b-4536-b5ea-e1ea1fa2890b
   country_id: *vn
-  network_id: *viettel_mobile_mobile
-- id: 429288
+  network_id: *vn_viettel_mobile_mobile
+- id: 429289
   prefix: '84869'
   number_min_length: 12
   number_max_length: 12
-  uuid: 77ecc4a8-d748-45cc-836d-9d13766feca0
+  uuid: 335e383e-620a-40e1-b43d-70241a4fb6a2
   country_id: *vn
-  network_id: *viettel_mobile_mobile
-- id: 432288
+  network_id: *vn_viettel_mobile_mobile
+- id: 432289
   prefix: '8487'
   number_min_length: 11
   number_max_length: 11
-  uuid: c45ba476-e61c-47a8-a45c-1ba9b6b98256
+  uuid: 2a44f934-9198-435e-8078-824a44d0597a
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 432485
+  network_id: *vn_vinaphone_mobile
+- id: 432486
   prefix: '84879'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2d9038e0-abe2-4c9a-8297-074ab79a5c0f
+  uuid: 1ce6ebff-abb1-4fcf-92c2-7750851da2c6
   country_id: *vn
-  network_id: *itelecom_mobile
-- id: 436513
+  network_id: *vn_itelecom_mobile
+- id: 436514
   prefix: '8485'
   number_min_length: 11
   number_max_length: 11
-  uuid: 0a3ec380-97ac-47e8-901b-46051615a6e0
+  uuid: 20e04876-4520-4703-92ab-24af177dfbbf
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 444677
+  network_id: *vn_vinaphone_mobile
+- id: 444678
   prefix: '84886'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4556f42f-680b-4955-bfb6-37fe5a1954f3
+  uuid: cb898bba-0af9-424c-8443-490da1168456
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 444740
+  network_id: *vn_vinaphone_mobile
+- id: 444741
   prefix: '84888'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8b6a71d8-96eb-406f-a385-b7ec9dff3a52
+  uuid: 18314fbf-9a2b-4204-a9fb-f202e02f2bbd
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 444859
+  network_id: *vn_vinaphone_mobile
+- id: 444860
   prefix: '84889'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9d334c8c-6af4-4d09-97f8-11f488954495
+  uuid: 9c44de9a-680e-4976-ad99-12451a092a83
   country_id: *vn
-  network_id: *vinaphone_mobile
-- id: 445339
+  network_id: *vn_vinaphone_mobile
+- id: 445340
   prefix: '84896'
   number_min_length: 12
   number_max_length: 12
-  uuid: 994c8083-0ed1-46dc-b52a-4600c4f5c5e8
+  uuid: 1cac1c15-e1f5-402b-8ba1-4850e255cf99
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 445375
+  network_id: *vn_mobifone_mobile
+- id: 445376
   prefix: '84898'
   number_min_length: 12
   number_max_length: 12
-  uuid: be4b83dd-5e14-43be-8663-775b05c19a59
+  uuid: f040a783-bb28-4658-a506-820cf4499db6
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 445388
+  network_id: *vn_mobifone_mobile
+- id: 445389
   prefix: '84899'
   number_min_length: 12
   number_max_length: 12
-  uuid: ab31ef2c-9517-48e2-ab5d-7b994be420bd
+  uuid: 2c4fda8c-f10e-42a2-baf0-e34e103b69f6
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 446717
+  network_id: *vn_mobifone_mobile
+- id: 446718
   prefix: '84900'
   number_min_length: 11
   number_max_length: 13
-  uuid: 2062bd3a-5c5a-4235-96f5-657221bc8e1b
+  uuid: b67a541e-3a5d-457d-a7e2-13f1c07ac10a
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 446830
+  network_id: *vn_mobifone_mobile
+- id: 446831
   prefix: '84901'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9502bf77-957c-42e7-8084-3ac8a07efc50
+  uuid: e70f7741-3a1f-4676-a411-1e25c5f029b1
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 446980
+  network_id: *vn_mobifone_mobile
+- id: 446981
   prefix: '84902'
   number_min_length: 12
   number_max_length: 12
-  uuid: d65b8e09-ee70-4bf2-bcfc-248444d3033d
+  uuid: 76558d71-6fed-44b7-b2ac-9e035d07673a
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 447103
+  network_id: *vn_mobifone_mobile
+- id: 447104
   prefix: '84903'
   number_min_length: 12
   number_max_length: 12
-  uuid: e280f678-aba3-471a-96a4-98ba05e79a00
+  uuid: 021b01b9-197e-4a87-8311-a5c9d14aaf37
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 447251
+  network_id: *vn_mobifone_mobile
+- id: 447252
   prefix: '84904'
   number_min_length: 12
   number_max_length: 12
-  uuid: b24acbea-e7af-4010-8653-b6e93451eb08
+  uuid: d450027b-87ef-4838-97c3-1df516ce5a48
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 447401
+  network_id: *vn_mobifone_mobile
+- id: 447402
   prefix: '84905'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2615828a-1013-40cd-a703-bd9d879fa03d
+  uuid: ce3a67ef-939d-4856-a04b-13ddbf66beec
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 447494
+  network_id: *vn_mobifone_mobile
+- id: 447495
   prefix: '84906'
   number_min_length: 12
   number_max_length: 12
-  uuid: 865a1cdc-5d4a-4e77-a923-79ed1f954388
+  uuid: 8027a509-4c15-4b61-be92-33db1d4df841
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 447643
+  network_id: *vn_mobifone_mobile
+- id: 447644
   prefix: '84907'
   number_min_length: 12
   number_max_length: 12
-  uuid: 139c762e-cb80-4482-a7b6-879874cd9d40
+  uuid: e2b854ac-7e95-4dff-a80e-f44779007e58
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 452774
+  network_id: *vn_mobifone_mobile
+- id: 452775
   prefix: '84908'
   number_min_length: 12
   number_max_length: 12
-  uuid: 385b5f8d-dd92-4b7c-b126-9140c73a9ac8
+  uuid: 34c231be-0eda-4088-8026-6d7ebb7fd6a2
   country_id: *vn
-  network_id: *mobifone_mobile
-- id: 452948
+  network_id: *vn_mobifone_mobile
+- id: 452949
   prefix: '84909'
   number_min_length: 12
   number_max_length: 12
-  uuid: 45f064ab-b268-4257-b425-b90ec52f1e55
+  uuid: 228d9ee5-8f75-4f38-9458-8405f5e01fa7
   country_id: *vn
-  network_id: *mobifone_mobile
+  network_id: *vn_mobifone_mobile
 # Country code Prefixes
 - id: 248002
   prefix: '84'
   number_min_length: 4
   number_max_length: 13
-  uuid: 0d00f85b-f2d9-4eef-ae79-a9343866260f
+  uuid: cf3afb53-eb02-4598-93cd-df73b7423f63
   country_id: *vn
-  network_id: *fixed
+  network_id: *vn_fixed_cc
 # Supplementary services Prefixes
 - id: 248397
   prefix: '841'
   number_min_length: 6
   number_max_length: 9
-  uuid: edfdd422-850d-4021-a0b2-1d23e2ba2b19
+  uuid: ea66522b-7264-4b06-8e4d-15fa2851d4e6
   country_id: *vn
-  network_id: *special_services
+  network_id: *vn_special_services
 - id: 256734
   prefix: '841800'
   number_min_length: 10
   number_max_length: 12
-  uuid: 1bd07540-8373-48ef-8907-f8047125964f
+  uuid: 0cd214dc-f7be-4ab2-8103-428e438e76e5
   country_id: *vn
-  network_id: *freephone_services
+  network_id: *vn_freephone_services
 - id: 257066
   prefix: '841900'
   number_min_length: 10
   number_max_length: 12
-  uuid: b9a3d807-49a3-451c-adc9-0eed32ad6561
+  uuid: f493f77b-edc7-47f8-ad3f-7d70f7ebc26d
   country_id: *vn
-  network_id: *premium_rate_services
+  network_id: *vn_premium_rate_services
 - id: 319394
   prefix: '8465'
   number_min_length: 12
   number_max_length: 12
-  uuid: 64d8b564-53e4-446a-8747-95938b7085ef
+  uuid: 904fc9df-0ceb-4b57-99f3-84f37c5628c2
   country_id: *vn
-  network_id: *voip
+  network_id: *vn_voip
 # Satellite Prefixes
 - id: 334727
   prefix: '84672'
   number_min_length: 12
   number_max_length: 12
-  uuid: ff6efb52-d7d9-4d52-9cdb-877f303cf822
+  uuid: a621c621-5afe-4659-8eb7-d5a7a1a7780c
   country_id: *vn
-  network_id: *vnpt_satellite
+  network_id: *vn_vnpt_satellite

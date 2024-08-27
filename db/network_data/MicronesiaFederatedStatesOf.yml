@@ -1,23 +1,23 @@
 country_id: &fm 139
 networks:
 # Fixed Networks
-- id: 3012
+- id: &fm_fixed 3322
   name: FM Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 47a3a6d4-15ba-4fd0-b503-f9c23a7028de
   type_id: 12
 # Supplementary services Networks
-- id: &emergency_services 3662
-  name: FM Emergency services
-  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+- id: &fm_emergency_services 4321
+  name: FM Emergency Services
+  uuid: 148f6871-4b9c-4fa7-802e-2f406d1f5aeb
   type_id: 14
-- id: &special_services 3075
-  name: FM Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &fm_special_services 4367
+  name: FM Special Services
+  uuid: f68febbf-c703-4fbd-b5fa-be656a75f1da
   type_id: 14
 # Country code Networks
-- id: &fixed 3012
-  name: FM Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &fm_fixed_cc 4703
+  name: FM Fixed Cc
+  uuid: 3cc01a0e-4a1d-4f0b-8ef7-d024a00a5c8f
   type_id: 17
 network_prefixes:
 # Fixed Prefixes
@@ -25,57 +25,57 @@ network_prefixes:
   prefix: '691320'
   number_min_length: 10
   number_max_length: 10
-  uuid: bd883198-43f3-4c27-8dca-3fe7ebcda03e
+  uuid: ff9ad348-0784-4c35-ba3f-64d20d340602
   country_id: *fm
-  network_id: *fixed
+  network_id: *fm_fixed
 - id: 64417
   prefix: '691330'
   number_min_length: 10
   number_max_length: 10
-  uuid: 8ccb3564-e333-4624-8bdf-9a6fed4f0b8f
+  uuid: ca0df39e-24b4-4b08-b4a0-22331f96d5f3
   country_id: *fm
-  network_id: *fixed
+  network_id: *fm_fixed
 - id: 79105
   prefix: '691350'
   number_min_length: 10
   number_max_length: 10
-  uuid: 4cd8e20a-3c92-4166-b7be-d84eb2e63227
+  uuid: 113788c8-9a6b-46ef-8f34-aa3980f10613
   country_id: *fm
-  network_id: *fixed
+  network_id: *fm_fixed
 - id: 82220
   prefix: '691370'
   number_min_length: 10
   number_max_length: 10
-  uuid: fd5bae96-f6d7-4022-8f63-5afcbb66be88
+  uuid: 85d254e3-8ee4-4ee0-a030-c59dceb261e1
   country_id: *fm
-  network_id: *fixed
+  network_id: *fm_fixed
 # Supplementary services Prefixes
 - id: 244631
   prefix: '691311'
   number_min_length: 9
   number_max_length: 9
-  uuid: 601d8c1a-2a33-43c4-9b99-bfbbcad2877e
+  uuid: 91ab12e1-0703-4c9d-8bc4-b5dc85a74064
   country_id: *fm
-  network_id: *emergency_services
+  network_id: *fm_emergency_services
 - id: 245235
   prefix: '6914'
   number_min_length: 7
   number_max_length: 8
-  uuid: e0dcbf79-6bde-4987-bfa5-a6540c1fc352
+  uuid: f6e58f1c-e2d5-4750-acd6-ee9b3f309d3a
   country_id: *fm
-  network_id: *special_services
+  network_id: *fm_special_services
 - id: 253355
   prefix: '691911'
   number_min_length: 9
   number_max_length: 9
-  uuid: 957dd484-eb26-45b6-9b8c-834388571c46
+  uuid: d192f41e-1f63-4fe5-9b97-21ca308c062a
   country_id: *fm
-  network_id: *emergency_services
+  network_id: *fm_emergency_services
 # Country code Prefixes
 - id: 247866
   prefix: '691'
   number_min_length: 6
   number_max_length: 7
-  uuid: b54f487e-8e95-46a1-a897-65a85f012df0
+  uuid: 4a0a347f-22f4-4703-afd8-88004d1facef
   country_id: *fm
-  network_id: *fixed
+  network_id: *fm_fixed_cc

@@ -1,24 +1,24 @@
 country_id: &mh 133
 networks:
 # Mobile Networks
-- id: &minta_mobile 3789
-  name: MH Minta mobile
-  uuid: 33754c28-8c82-4d23-83f7-bdcd1b071899
+- id: &mh_minta_mobile 4241
+  name: MH Minta Mobile
+  uuid: 98fbf4b2-16a6-4527-b212-dc74ad635c45
   type_id: 3
 # Fixed Networks
-- id: 3012
+- id: &mh_fixed 4246
   name: MH Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 7b1e155c-0fd2-4958-98a2-5e080916e38c
   type_id: 12
 # Country code Networks
-- id: &fixed 3012
-  name: MH Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &mh_fixed_cc 4758
+  name: MH Fixed Cc
+  uuid: a2795a34-4a4c-44fc-b36f-104743348b83
   type_id: 17
 # Satellite Networks
-- id: &minta_satellite 4139
-  name: MH Minta satellite
-  uuid: 855a642c-2fd6-4c95-a1c1-fa31e65710e9
+- id: &mh_minta_satellite 5347
+  name: MH Minta Satellite
+  uuid: 377a3f31-c4ff-400c-8f5a-f58ef52b6c2d
   type_id: 16
 network_prefixes:
 # Mobile Prefixes
@@ -26,107 +26,107 @@ network_prefixes:
   prefix: '692235'
   number_min_length: 13
   number_max_length: 13
-  uuid: ead95172-5000-4d2b-8cb5-53c9a6403d10
+  uuid: 1e303938-3bbc-4457-b21d-96e81a66ea91
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 244716
   prefix: '692329'
   number_min_length: 13
   number_max_length: 13
-  uuid: c5afddf9-a5bf-4560-8556-84ee313c4208
+  uuid: c878556c-983b-4aaa-99cd-3f30ca982a1e
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 246039
   prefix: '692455'
   number_min_length: 13
   number_max_length: 13
-  uuid: d5bcf656-50c3-4ecc-ad19-e88b3261cde2
+  uuid: 3f262731-53d3-402e-882f-538af1f91e00
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 246076
   prefix: '692456'
   number_min_length: 13
   number_max_length: 13
-  uuid: 041db7a7-68fb-4e31-8de4-625d7b2efff6
+  uuid: 445d5059-82bd-41f4-876c-a759f485e18a
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 249795
   prefix: '6925451'
   number_min_length: 14
   number_max_length: 14
-  uuid: e730622b-a247-4b56-a6c7-67bce71f62cc
+  uuid: 32ef2601-61ce-4e9a-860d-0744dd8aee3a
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 249797
   prefix: '6925452'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1b3d3e0d-9334-4ed6-8f4c-cf65447caa5c
+  uuid: de7323df-4b2f-44ab-8033-d1084123282a
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 249799
   prefix: '6925453'
   number_min_length: 14
   number_max_length: 14
-  uuid: e29a407f-8ff8-423b-b2ed-afdeab3e77ed
+  uuid: 1606de06-b9f0-428f-acae-66d28508cfce
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 249801
   prefix: '6925454'
   number_min_length: 14
   number_max_length: 14
-  uuid: c50eab48-ac6b-45fe-bbbe-0fdef011c59e
+  uuid: b55cf54b-05b1-4538-83e2-6d48e1f75cf6
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 254283
   prefix: '6929997'
   number_min_length: 11
   number_max_length: 11
-  uuid: 0858eef0-eade-4fbf-86b1-6709f307f203
+  uuid: eaf6d41c-2a09-4b24-9200-cfb15e86e01d
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 - id: 254284
   prefix: '6929998'
   number_min_length: 11
   number_max_length: 11
-  uuid: f5096b39-2bb0-4d3e-a0e3-1c93d9438f90
+  uuid: 66bd5f7f-6e00-4529-9b6b-ce66ed300a73
   country_id: *mh
-  network_id: *minta_mobile
+  network_id: *mh_minta_mobile
 # Fixed Prefixes
 - id: 243764
   prefix: '692247'
   number_min_length: 13
   number_max_length: 13
-  uuid: bbeb2b04-8a7f-432d-bbc8-fc8b4983c2b8
+  uuid: 772792aa-7968-4384-878b-fb1e06d082a3
   country_id: *mh
-  network_id: *fixed
+  network_id: *mh_fixed
 - id: 247298
   prefix: '692625'
   number_min_length: 13
   number_max_length: 13
-  uuid: e4b903ba-839f-470d-9a97-b7fc175fce2c
+  uuid: fcc89cbf-11c4-4aa1-b905-2c3d2d5d02e9
   country_id: *mh
-  network_id: *fixed
+  network_id: *mh_fixed
 - id: 249619
   prefix: '692528'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5b6cc0bd-633d-4507-8d97-f3a9c2762589
+  uuid: 8e9c0e16-0342-4692-89f5-bc24b0c53d1d
   country_id: *mh
-  network_id: *fixed
+  network_id: *mh_fixed
 # Country code Prefixes
 - id: 247921
   prefix: '692'
   number_min_length: 7
   number_max_length: 10
-  uuid: 9671f12e-1c84-4224-9422-0c46a272d005
+  uuid: a41a8c0d-be13-4d0a-93f7-70fc3c789c0a
   country_id: *mh
-  network_id: *fixed
+  network_id: *mh_fixed_cc
 # Satellite Prefixes
 - id: 250528
   prefix: '692635'
   number_min_length: 13
   number_max_length: 13
-  uuid: 38b45abf-2283-4115-8bc1-1884782ab45b
+  uuid: ff32bdba-16d4-40b3-92f3-ce51f0f93a0e
   country_id: *mh
-  network_id: *minta_satellite
+  network_id: *mh_minta_satellite

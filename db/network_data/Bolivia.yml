@@ -1,56 +1,56 @@
 country_id: &bo 26
 networks:
 # Fixed Networks
-- id: 3012
+- id: &bo_fixed 3212
   name: BO Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 09a25e83-a1b3-4537-899b-5a0b8759cbc4
   type_id: 12
 # Country code Networks
-- id: &fixed 3012
-  name: BO Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &bo_fixed_cc 4666
+  name: BO Fixed Cc
+  uuid: 674e9eaa-58c0-409a-b65d-af8a97bd875d
   type_id: 17
 # Supplementary services Networks
-- id: &special_services 3075
-  name: BO Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &bo_special_services 4944
+  name: BO Special Services
+  uuid: e2b121af-c4f7-413b-ac19-f8290c82d5fe
   type_id: 14
-- id: &voip 3484
+- id: &bo_voip 5298
   name: BO Voip
-  uuid: 8b47c4ce-3dab-4b8c-b32e-f98ab93afc59
+  uuid: 915911ba-d923-4b75-b46b-0408858fc960
   type_id: 14
-- id: &audiotext_services 4361
-  name: BO Audiotext services
-  uuid: 03361a79-fc8a-49f5-bb72-e2e8cbe440aa
+- id: &bo_audiotext_services 5698
+  name: BO Audiotext Services
+  uuid: 042bbc74-96d6-4280-8dad-bc3e3b9f164f
   type_id: 14
-- id: &shared_cost_services 3141
-  name: BO Shared cost services
-  uuid: fcb0a143-e4dd-46b3-a904-2da86f75c2f4
+- id: &bo_shared_cost_services 5719
+  name: BO Shared Cost Services
+  uuid: 0cd80c17-f876-49af-8be9-790efeb0cc0e
   type_id: 14
-- id: &emergency_services 3662
-  name: BO Emergency services
-  uuid: f1e463c5-00c7-4149-b1f6-37311fba1e4e
+- id: &bo_emergency_services 5754
+  name: BO Emergency Services
+  uuid: 468f7761-78f4-4af8-8cb3-0ad05957e189
   type_id: 14
-- id: &freephone_services 3382
-  name: BO Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &bo_freephone_services 6099
+  name: BO Freephone Services
+  uuid: 4da788a6-9075-49b7-bd55-4ae0e868982b
   type_id: 14
 # Mobile Networks
-- id: &mobile 3013
+- id: &bo_mobile 6320
   name: BO Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: a6870ab8-fd1c-4d12-abe7-a6b506f2a2c8
   type_id: 3
-- id: &viva_mobile 4664
-  name: BO Viva mobile
-  uuid: 43d76497-327e-4bbc-a96e-c7282b5ddd0f
+- id: &bo_viva_mobile 6322
+  name: BO Viva Mobile
+  uuid: 8a9cdfff-86f9-4bc4-8b46-b2bcdbdd7f04
   type_id: 3
-- id: &entel_movil_mobile 4665
-  name: BO Entel movil mobile
-  uuid: 6b6d420f-c8e5-4028-b047-1ac57121ce53
+- id: &bo_entel_movil_mobile 6324
+  name: BO Entel Movil Mobile
+  uuid: 0e0cd24e-1e87-4b1d-abf5-c56a7200da04
   type_id: 3
-- id: &tigo_mobile 3129
-  name: BO Tigo mobile
-  uuid: c8e102d2-82a0-4d92-ba77-d35b7d74c6d1
+- id: &bo_tigo_mobile 6326
+  name: BO Tigo Mobile
+  uuid: 92e40995-210e-45a3-bac9-4ad144dd2197
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -58,1059 +58,1059 @@ network_prefixes:
   prefix: '5913'
   number_min_length: 11
   number_max_length: 11
-  uuid: 55185c7a-11a0-48fd-9dc3-9e5ba6ff42d3
+  uuid: c32668a9-a2a6-43d6-ba47-c871f86d8cca
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41128
   prefix: '59133'
   number_min_length: 12
   number_max_length: 12
-  uuid: 56f809ac-ac91-4478-9229-6b0d32262985
+  uuid: 04cc60ae-1262-4ac4-a121-e2917f888472
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41353
   prefix: '591346'
   number_min_length: 13
   number_max_length: 13
-  uuid: b77433d5-a3f5-492e-a93d-1975dfd80345
+  uuid: ccf7d6c6-c7d2-480b-8c1c-b51ebbcdf20c
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41362
   prefix: '591347'
   number_min_length: 13
   number_max_length: 13
-  uuid: f34e3662-dc6d-417b-b3da-acdb14106f31
+  uuid: 02f54663-2893-4c4a-9838-5e940acca8de
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41366
   prefix: '5913482'
   number_min_length: 14
   number_max_length: 14
-  uuid: c987e99a-48c2-4f0c-a876-a1ba39425e7a
+  uuid: 7689ec10-8fda-4532-a7ad-6a940d4b65b7
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41368
   prefix: '5913484'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0d5f981a-adaf-4a69-ac66-8e270408e069
+  uuid: 664befed-05a4-4ac2-92c4-3c9999197819
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41376
   prefix: '591349'
   number_min_length: 13
   number_max_length: 13
-  uuid: adf50cfb-c683-4c1b-b81c-025dfcdfe7b0
+  uuid: 5cb3d623-c0f6-4e64-a46d-81edc059e120
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41896
   prefix: '5913825'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1bc18d63-0466-4a9b-817d-b1ee0c19a4d3
+  uuid: a9a798ce-05b3-4827-ab32-1d11ee8d7ad8
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41898
   prefix: '591383'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1a38b6e0-f3cf-4fe8-8dd9-fff0e87a06ac
+  uuid: d99318ae-9420-49d1-8ec7-0e06d2e35758
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41900
   prefix: '5913842'
   number_min_length: 14
   number_max_length: 14
-  uuid: 46f0cedd-5f28-43d3-80f0-08320810e6cb
+  uuid: 253027da-f9eb-4f59-9e16-b5a18a21b146
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41902
   prefix: '5913852'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3a6ad316-74c1-43e5-aab3-58894475c0c4
+  uuid: ae4c9dec-d60c-43fc-a231-fcab4c096c64
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41903
   prefix: '5913855'
   number_min_length: 14
   number_max_length: 14
-  uuid: bcf2e7a4-b919-4a3f-8cd1-e85ce1da291e
+  uuid: f8d7e064-d9b3-458f-9269-3293c4c6d0ae
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41905
   prefix: '591386'
   number_min_length: 13
   number_max_length: 13
-  uuid: c0222afc-8b0c-4ef9-bb42-78122d3a8a6e
+  uuid: 9d5b145a-b88d-44bf-b65d-406d1639e39a
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41908
   prefix: '5913886'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5850eaa9-1899-4dcc-9d9e-ed42069556ca
+  uuid: a107f6ca-109b-46d3-9768-75e70a01577b
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41910
   prefix: '5913892'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8e371dfb-2c44-4d65-885e-cd4b9660d485
+  uuid: 23498e84-1759-429c-bc4f-bd7a3a921589
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 41911
   prefix: '5913895'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8285fbf9-ff5b-447a-b30d-6327a1ccf5f6
+  uuid: 3462b1ee-615e-4d05-a951-3696c8749cf6
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 42085
   prefix: '5913952'
   number_min_length: 14
   number_max_length: 14
-  uuid: 200f6b3f-580f-4a39-bf25-795e9d20e782
+  uuid: e5ef80b0-72f5-490e-9c5b-6501551b0b19
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 42103
   prefix: '5913954'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2ff8618a-87ef-47e2-940d-4464a992828c
+  uuid: ed5105fb-01da-4907-89e8-ad86bc1c7850
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 42138
   prefix: '5913972'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2811e365-ee4f-4c19-947e-54c0f0a68c06
+  uuid: e0f2dfc4-11b1-4e81-9b8c-8bf1af8f716b
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 42159
   prefix: '5913974'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7efe614a-d8f6-4dee-affc-bfcb7b9836a8
+  uuid: 3920ee16-e6fe-40dd-b1a5-20433772d15e
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 42180
   prefix: '5913976'
   number_min_length: 14
   number_max_length: 14
-  uuid: 45524f58-d01b-4b3d-aaa7-7998c5075141
+  uuid: 7b994b5a-0346-4218-9f9c-b6df125fa2ad
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 42193
   prefix: '5913979'
   number_min_length: 14
   number_max_length: 14
-  uuid: 92b0b94f-1e8a-4d48-8db8-76147b03d725
+  uuid: a13f21cd-348f-4efe-9449-ae52e5fa50ce
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 42196
   prefix: '591398'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0848f2a8-28ad-4b83-8041-e8e934f69fe2
+  uuid: 558ad130-2941-4f1b-adc4-98398a36c555
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 42235
   prefix: '591399'
   number_min_length: 13
   number_max_length: 13
-  uuid: c757662f-255a-464c-9dcf-4713e4797241
+  uuid: 7515854e-407b-4c40-b89c-47bc32f1948d
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86554
   prefix: '5914'
   number_min_length: 11
   number_max_length: 11
-  uuid: 0163939a-e470-4e55-b491-a30a42caa229
+  uuid: 22e78df8-6a5a-4cf2-bbfc-8ac47f2eddaa
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86673
   prefix: '59144'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0c5784bd-83d7-410a-856d-2223e7cc4b2e
+  uuid: fb88747c-2984-4953-a48f-52088e76a056
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86681
   prefix: '5914438'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6a71810e-52fb-4bfe-b844-29135c91e68d
+  uuid: fea7df7b-3e3f-4696-8647-2f9252ab24a9
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86716
   prefix: '591449'
   number_min_length: 13
   number_max_length: 13
-  uuid: abdc5f7c-72c3-4206-a85c-719bcf76ad3f
+  uuid: a848bb26-0ad5-41e9-97e7-9bc33a59a014
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86727
   prefix: '591450'
   number_min_length: 13
   number_max_length: 13
-  uuid: b74ac68c-929f-466b-8ac4-e6c0930bc87a
+  uuid: 2d4fea69-ea1f-411b-bfcb-101995542332
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86728
   prefix: '591451'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6a4b9a41-5323-441a-9496-28718f5d4f45
+  uuid: 33e55fea-a758-43a4-bc15-36bc61b9ef1e
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86729
   prefix: '591452'
   number_min_length: 13
   number_max_length: 13
-  uuid: a9b5aefc-df1f-4111-8ed9-31518aeab3f9
+  uuid: 31e61537-c4a3-40f2-a4a5-f09877cb76c8
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86781
   prefix: '5914629'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5ed97233-eef7-429b-8383-48bc175fce7c
+  uuid: 2bd2c90d-7231-4b14-a6f3-69a032621b21
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86782
   prefix: '591463'
   number_min_length: 13
   number_max_length: 13
-  uuid: 94419ffb-3b61-4cde-8d8b-6b652da7b179
+  uuid: e2b36b44-ba6a-4a14-b820-14a8220f75dc
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86783
   prefix: '591464'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5d8758fc-5463-4387-895d-7426afafea37
+  uuid: 602bc972-a460-4a14-83be-438c8d2a5786
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86786
   prefix: '5914647'
   number_min_length: 14
   number_max_length: 14
-  uuid: b592a980-d4b3-4aef-af99-8bedd21513bf
+  uuid: af376b17-4f6e-453b-9fa0-b35c311606a4
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86787
   prefix: '591465'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9cbfda6c-fc6e-41c4-92f4-9fc0ffb857b1
+  uuid: 714b2499-fd08-45f1-8a36-2373214786ea
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86799
   prefix: '591466'
   number_min_length: 13
   number_max_length: 13
-  uuid: 946d8814-8c4a-431d-9047-76418be32964
+  uuid: 223d592c-4c78-4ff8-997e-0be6fe33eff3
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86801
   prefix: '5914672'
   number_min_length: 14
   number_max_length: 14
-  uuid: c92e6c9f-4cf5-49ad-84e9-46f1dd959a61
+  uuid: f941a90a-f5c6-41bc-a7e5-481b980f0836
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86802
   prefix: '591468'
   number_min_length: 13
   number_max_length: 13
-  uuid: e03c9b1e-38e5-41c4-b06e-b0922fa2f84d
+  uuid: 47b081e0-4e01-485e-84f0-e683d5d99799
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 86803
   prefix: '591469'
   number_min_length: 13
   number_max_length: 13
-  uuid: d0fea7ed-c248-4f11-a33c-a6c339294fbe
+  uuid: 00587b35-c44d-4d95-977b-04d517b3da09
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257254
   prefix: '5912'
   number_min_length: 11
   number_max_length: 11
-  uuid: 087128b4-da71-47e7-a514-ccf22f128113
+  uuid: 19f21229-8a13-4062-8ac8-1a5dff0fef37
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257281
   prefix: '59122'
   number_min_length: 12
   number_max_length: 12
-  uuid: 40366409-6cc1-4176-a5ef-7226e0ba7176
+  uuid: e1edf224-f9ad-4275-b781-6410d52e571c
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257428
   prefix: '591252'
   number_min_length: 13
   number_max_length: 13
-  uuid: 462e60ec-732b-43cc-976a-176c7fbab7a2
+  uuid: 7de39a51-ed25-4916-8300-b03ef1321202
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257431
   prefix: '591253'
   number_min_length: 13
   number_max_length: 13
-  uuid: b74a2164-eaae-412f-a048-e9f436920c15
+  uuid: ef7424c4-07d8-4f1d-8d1c-4081f0dacdaa
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257439
   prefix: '591255'
   number_min_length: 13
   number_max_length: 13
-  uuid: b8e47e48-8346-4c25-8bd4-2686c56346ac
+  uuid: 46517277-8e7a-4e87-8ec7-39a3970f5003
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257447
   prefix: '5912557'
   number_min_length: 14
   number_max_length: 14
-  uuid: 68e31727-a3a1-4354-bc29-c71e9b715470
+  uuid: e76ee693-edb4-4ecb-8ea5-95a85cc1ea4a
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257452
   prefix: '591256'
   number_min_length: 13
   number_max_length: 13
-  uuid: 129ef707-12e5-4109-9f71-f1f2f3e95b71
+  uuid: 6b07a8a6-4e7b-47a0-9b80-7ffe7b0b26a8
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257458
   prefix: '591258'
   number_min_length: 13
   number_max_length: 13
-  uuid: f9a32eae-1f9c-4f7d-b3c8-93129c7f025c
+  uuid: 50601b98-5069-4738-9d14-3a93b99d9b5b
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257461
   prefix: '5912596'
   number_min_length: 14
   number_max_length: 14
-  uuid: 489baed0-8232-43ec-ba1c-7faad154216b
+  uuid: 72395037-3125-4f08-b887-3b8adbe141c6
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257470
   prefix: '591262'
   number_min_length: 13
   number_max_length: 13
-  uuid: 55f21d1a-ff43-49a1-a750-8334decca814
+  uuid: 9501bca0-eae0-4fa5-a02b-c39572fc2d66
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257473
   prefix: '591263'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9926c876-02a5-4657-9024-f9810d00e7a4
+  uuid: d6c55d4d-b671-4304-9496-647dd78cdde3
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257476
   prefix: '591264'
   number_min_length: 13
   number_max_length: 13
-  uuid: b5422025-f7bd-4f37-bf95-817edbbd8454
+  uuid: 0d1126a2-da98-4d57-95d3-758489dc995c
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257549
   prefix: '5912693'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7c925215-0ba4-45b3-a5dd-0e1398ec60b4
+  uuid: 3ab4c0aa-b0de-45a1-8bc2-5c14666d4438
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257551
   prefix: '5912694'
   number_min_length: 14
   number_max_length: 14
-  uuid: 23ccf9b1-74aa-4401-b205-c0b61d8867e8
+  uuid: 830653b3-fd6f-4f82-aefa-1c567024fbcc
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257616
   prefix: '5912823'
   number_min_length: 14
   number_max_length: 14
-  uuid: d0a6a062-3b0b-41ed-91e7-5fc4d35026e0
+  uuid: af5ee05b-8256-4b8a-8f26-95360a39f267
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257618
   prefix: '5912839'
   number_min_length: 14
   number_max_length: 14
-  uuid: b9d56a72-3fe3-4135-b730-fe86d0f06d1f
+  uuid: 0b886ab9-58ac-471d-b03f-9363289c6fba
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257627
   prefix: '5912862'
   number_min_length: 14
   number_max_length: 14
-  uuid: 569355b3-660c-45e7-8a2f-eeb5280022e3
+  uuid: 2e8819af-5b9b-403d-aa10-6ded406ddabb
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257629
   prefix: '591287'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1f2aae86-ddd4-4269-986c-feb5682c0c1d
+  uuid: e8420939-bafb-4a7f-ad85-faf5ee9f5326
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 - id: 257634
   prefix: '591288'
   number_min_length: 13
   number_max_length: 13
-  uuid: 065a89d2-3c05-4209-9d11-d4234b0755c3
+  uuid: 0055c564-994a-4fda-98ae-904b931aed8b
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed
 # Country code Prefixes
 - id: 247829
   prefix: '591'
   number_min_length: 6
   number_max_length: 12
-  uuid: e9864fbd-cb8e-49be-ad01-f4ea651da676
+  uuid: d51e70ff-6338-4f67-8211-ef030964ee0d
   country_id: *bo
-  network_id: *fixed
+  network_id: *bo_fixed_cc
 # Supplementary services Prefixes
 - id: 248244
   prefix: '5911'
   number_min_length: 7
   number_max_length: 7
-  uuid: f328e636-1616-42d3-a23d-6bf684aa1d23
+  uuid: 7f9b5f48-a00b-4f4a-afd6-36f7588a7693
   country_id: *bo
-  network_id: *special_services
+  network_id: *bo_special_services
 - id: 249350
   prefix: '59150'
   number_min_length: 13
   number_max_length: 13
-  uuid: f06343e4-3213-419a-91e4-bad82ba9ffbd
+  uuid: 76928fda-9a3e-4184-a27e-61d1b7651789
   country_id: *bo
-  network_id: *voip
+  network_id: *bo_voip
 - id: 253170
   prefix: '591900'
   number_min_length: 15
   number_max_length: 15
-  uuid: 46dd525a-639a-4d6b-a404-1cc551f0c98d
+  uuid: a3b6a519-7729-4961-ae42-00b035da75d8
   country_id: *bo
-  network_id: *audiotext_services
+  network_id: *bo_audiotext_services
 - id: 253206
   prefix: '591901'
   number_min_length: 15
   number_max_length: 15
-  uuid: 42cbbb64-3081-4750-b1f3-5838aeee2493
+  uuid: 4eaa1114-4d69-4634-bd33-a66fa77ab287
   country_id: *bo
-  network_id: *shared_cost_services
+  network_id: *bo_shared_cost_services
 - id: 253352
   prefix: '591911'
   number_min_length: 9
   number_max_length: 9
-  uuid: f6ee5fcf-2794-4e0a-a856-6e9ea8b6a6a8
+  uuid: 416cd0c2-3be3-44dd-9530-7ec619292ac8
   country_id: *bo
-  network_id: *emergency_services
+  network_id: *bo_emergency_services
 - id: 259993
   prefix: '591800'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6b17fb3e-3ac3-4744-ac0c-6e05eb2309d6
+  uuid: 961425ef-e6d9-40e1-b588-7b303cf0c391
   country_id: *bo
-  network_id: *freephone_services
+  network_id: *bo_freephone_services
 # Mobile Prefixes
 - id: 276610
   prefix: '5916'
   number_min_length: 11
   number_max_length: 11
-  uuid: f93ac9f0-f502-4b36-9d66-2792c2605a15
+  uuid: 38d053c8-32ea-4a74-89a1-f51bc5cc6d05
   country_id: *bo
-  network_id: *mobile
+  network_id: *bo_mobile
 - id: 276621
   prefix: '59160'
   number_min_length: 12
   number_max_length: 12
-  uuid: b7d8fcba-e0ab-413b-ad6c-f30fe7e5b58b
+  uuid: c8637068-ac23-4ce0-8c81-785a2a425ff3
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 276623
   prefix: '59161'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8901a7ea-479c-42c4-a0c7-68b019778547
+  uuid: 0de06384-59e5-4ca6-90c5-8d4478676c83
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 277086
   prefix: '59165'
   number_min_length: 12
   number_max_length: 12
-  uuid: c2cb48de-1ddf-405b-a43b-144c12e84b77
+  uuid: 68d79940-fbbe-4040-9e5c-dc03ac15a857
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 277374
   prefix: '59167'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5d1dfd86-69c8-4ba2-a304-a785b8fdcc96
+  uuid: b442f15f-91cd-4470-9edf-8ea69eb3e84b
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 277434
   prefix: '59168'
   number_min_length: 12
   number_max_length: 12
-  uuid: cbfd30cf-e548-4415-8f7b-5f43e9cc59ca
+  uuid: 473078c5-574b-46c6-b74a-59fdff78d146
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 277578
   prefix: '59169'
   number_min_length: 12
   number_max_length: 12
-  uuid: c5e4563d-9941-4af5-82fc-baffc378d019
+  uuid: fc9990d9-a657-4ec6-81f3-a29f382d3294
   country_id: *bo
-  network_id: *tigo_mobile
+  network_id: *bo_tigo_mobile
 - id: 339497
   prefix: '59170'
   number_min_length: 12
   number_max_length: 12
-  uuid: fd28008b-bfb1-418d-8de0-ddad05447124
+  uuid: b7c972f4-8915-45b2-bfaa-86d90f0e7bfa
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339498
   prefix: '59171'
   number_min_length: 12
   number_max_length: 12
-  uuid: baed21d8-5f55-4481-a70b-2e3f5cb489f4
+  uuid: a111018f-2901-4134-9244-ad8773ca0f5b
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339499
   prefix: '59172'
   number_min_length: 12
   number_max_length: 12
-  uuid: ae66c3a9-fb8a-4c19-a26b-b52676080af5
+  uuid: 4374e19b-e335-43ad-8361-ef0d7d5209b9
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339680
   prefix: '59173'
   number_min_length: 12
   number_max_length: 12
-  uuid: 39ff4cdb-88af-4fbc-b7d8-4f69b1e8c695
+  uuid: 7d0aef49-fc12-4def-ad65-1f3d9d2ef69c
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339791
   prefix: '59174'
   number_min_length: 12
   number_max_length: 12
-  uuid: 879ff9d7-904e-4e8f-94a8-4090b56e205b
+  uuid: e5201424-46c4-4807-967f-cba128a0ca17
   country_id: *bo
-  network_id: *mobile
+  network_id: *bo_mobile
 - id: 339794
   prefix: '591740'
   number_min_length: 13
   number_max_length: 13
-  uuid: 256a9940-f68b-4dc8-aa1c-3de8eb48b16d
+  uuid: 08cace54-3419-441b-b62a-54ba037e4eaf
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339796
   prefix: '5917410'
   number_min_length: 14
   number_max_length: 14
-  uuid: 86bd12df-fe5d-4d5c-81df-f1193f01cfe7
+  uuid: a5c33c9c-8905-4eca-8fa2-5cfc8c8f7caf
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339797
   prefix: '5917411'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8e824360-7f3f-4a6a-aafc-674656631516
+  uuid: 528bf726-b526-41bb-a353-e8c61e8bee7e
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339798
   prefix: '5917412'
   number_min_length: 14
   number_max_length: 14
-  uuid: 561104cd-43eb-4716-b03e-3253352caea7
+  uuid: 09e2f6d5-d3fd-4484-bfcd-8adaf141cad8
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339799
   prefix: '5917413'
   number_min_length: 14
   number_max_length: 14
-  uuid: 031a190e-a17f-4f08-a1e5-2d6832f52442
+  uuid: b0e0b81e-a2ca-439b-aab4-e387e627f783
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339800
   prefix: '5917414'
   number_min_length: 14
   number_max_length: 14
-  uuid: f323110d-28dd-48d8-8eac-6e8146114354
+  uuid: 6b60fe2b-61c1-483e-aebe-c80cbb4097ef
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339801
   prefix: '5917415'
   number_min_length: 14
   number_max_length: 14
-  uuid: ef445900-d988-4fae-970a-e014ae9c29f2
+  uuid: 324d289c-f742-4235-a90c-18a4eab299b5
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339802
   prefix: '5917419'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2639a046-690c-42ab-bc8b-fed6f96dccc4
+  uuid: baf88bb1-258c-4ab5-8eb2-a4fc67cbcc2f
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339804
   prefix: '5917420'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9bdcdb80-7a4f-41ca-a00f-a3cfc1132188
+  uuid: edfb88b9-792b-4254-bcdd-3b7052756e87
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339805
   prefix: '5917421'
   number_min_length: 14
   number_max_length: 14
-  uuid: 25e971bf-3fef-43ad-977c-57a56f50b882
+  uuid: 7fbe08f6-efd4-43ef-bb48-6187fa0e4d55
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339806
   prefix: '5917422'
   number_min_length: 14
   number_max_length: 14
-  uuid: c4a51a83-926d-491e-b6e9-24475851cc4f
+  uuid: 1c631879-36b2-4722-9dca-e0c4243008b6
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339807
   prefix: '5917423'
   number_min_length: 14
   number_max_length: 14
-  uuid: 491729ce-8880-4843-96e4-da9f9f4a64a9
+  uuid: 954d88a5-0427-49a8-85d9-a69d0d47bbd4
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339808
   prefix: '5917424'
   number_min_length: 14
   number_max_length: 14
-  uuid: 33773c18-2464-4d4a-a88a-0a06fcd63a55
+  uuid: 6a530880-f166-43a2-ba8c-a2ab9627f855
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339809
   prefix: '5917425'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5cfc97d8-e902-4fd8-a2be-5d942af6b470
+  uuid: 63354499-aa63-466a-8c5e-c356bcdb6e52
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339810
   prefix: '5917429'
   number_min_length: 14
   number_max_length: 14
-  uuid: a5d37aee-927a-40ec-a27f-36a733296cee
+  uuid: 4a9a0c6c-7a84-4c0f-9c9d-3c03f76fb4c3
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339812
   prefix: '5917430'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8abae48a-bad7-4d8a-9204-317652c100ab
+  uuid: 2ce0e3cf-9aed-432d-b030-d8238914aadc
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339813
   prefix: '5917431'
   number_min_length: 14
   number_max_length: 14
-  uuid: 93a2ee64-e41b-45d8-994a-8202426745d8
+  uuid: 9d578d35-96f7-42bc-90a6-d75ce97c310d
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339814
   prefix: '5917432'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8138f0e5-372f-4bec-bdb1-ba3b3939b2ec
+  uuid: 77286bb3-3278-4312-a2f6-520d27fa8f15
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339815
   prefix: '5917433'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3bf86a8b-6c1d-42b2-a7bc-309633df937b
+  uuid: 90ece2a7-cf3a-48a7-8bf6-59e43aa1b070
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339816
   prefix: '5917434'
   number_min_length: 14
   number_max_length: 14
-  uuid: 515b6929-503a-413f-9e3c-32dbb193a667
+  uuid: 6c75b0e5-cdc5-433d-aff1-69c868bee6af
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339817
   prefix: '5917435'
   number_min_length: 14
   number_max_length: 14
-  uuid: ce59a467-c417-4800-bcad-e55a3fe451fa
+  uuid: ac213f5d-66dd-4a64-a79e-6ce8686021fd
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339818
   prefix: '5917436'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8c36855a-96d7-445b-82f9-9964e5014cc9
+  uuid: 0c2f7b90-ea5a-42e7-b4be-e6513bb61026
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339819
   prefix: '5917437'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9d909d26-a9e7-4772-b308-0a72136cd232
+  uuid: f5ad6c15-445a-4558-9fd3-db35cb5c1fee
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339820
   prefix: '5917438'
   number_min_length: 14
   number_max_length: 14
-  uuid: 171295e8-b7d2-4d53-8619-5c599c1e9ce4
+  uuid: 8f4f3ed8-edb4-4aa8-bd76-24c339440351
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339821
   prefix: '5917439'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8de5afc2-58ef-4207-8d9c-b1752187e9cf
+  uuid: 981f42ba-456c-4387-aafb-90c2b11df5dc
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339823
   prefix: '5917440'
   number_min_length: 14
   number_max_length: 14
-  uuid: bb51fae7-eebe-4247-ac0c-2e5297d27847
+  uuid: a599304b-3c41-4f22-a61d-9b04c170187f
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339824
   prefix: '5917441'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9dbfbd83-caf0-423a-b559-482e1267369d
+  uuid: 729a7503-b4e2-45a9-9e6d-ac28e42a6545
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339825
   prefix: '5917442'
   number_min_length: 14
   number_max_length: 14
-  uuid: f26614b6-2026-4675-b81b-60905f48bf00
+  uuid: 63668aa8-99d6-4a37-a4f5-b43b9813cbc2
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339826
   prefix: '5917443'
   number_min_length: 14
   number_max_length: 14
-  uuid: ca11daf0-086d-4ed6-aba6-bc8fc37321d3
+  uuid: 1e3d3267-6a5c-4672-bab5-eff86af9251d
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339827
   prefix: '5917444'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9f9e17c3-74d7-46e5-9f0c-9c96a1957d31
+  uuid: 09610859-a8b5-4c6a-9f1d-14e98f3d8caf
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339838
   prefix: '5917445'
   number_min_length: 14
   number_max_length: 14
-  uuid: a9bc51f4-d169-4584-86f4-cbe86c77892e
+  uuid: 8bbdfc0f-f208-4dc8-a65b-49cf8ea3656a
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339839
   prefix: '5917449'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8812c854-7079-4f53-819e-4c815149fb62
+  uuid: 772116e2-e199-47b9-9b89-7ea3cea39aa3
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339841
   prefix: '5917450'
   number_min_length: 14
   number_max_length: 14
-  uuid: 654f3080-e7d7-46d2-9167-5b5e338245df
+  uuid: 4e40c667-b432-43fb-aadc-6beea403a3d8
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339842
   prefix: '5917451'
   number_min_length: 14
   number_max_length: 14
-  uuid: e1a33c76-fe7c-43cd-a311-453c02038d61
+  uuid: d0de42a2-e5bd-4857-9004-3408662ee199
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339843
   prefix: '5917452'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1cc03bc6-0ce8-466c-8e2c-440681a3c414
+  uuid: fc4d14d7-562b-463d-8837-f3a2b396c368
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339844
   prefix: '5917453'
   number_min_length: 14
   number_max_length: 14
-  uuid: 933f00c7-b97f-46eb-b525-c92591441a72
+  uuid: 7c033d69-63ed-49aa-8eac-be9d179bb0dd
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339845
   prefix: '5917454'
   number_min_length: 14
   number_max_length: 14
-  uuid: a6d56fc0-faf0-4501-bab7-52b9a5c1f80b
+  uuid: 4be748d7-9927-4a01-a473-a36b84486ea8
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339846
   prefix: '5917455'
   number_min_length: 14
   number_max_length: 14
-  uuid: 18c344cd-3c2b-44ec-883a-9b063c45176a
+  uuid: 0182be0c-cf83-4d9e-9649-186bf4b299d0
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339847
   prefix: '5917459'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0204a53c-c72e-49d0-b695-9acb35687598
+  uuid: cd3ddb5a-0198-423e-96b1-418dae5bd244
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339849
   prefix: '591746'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4541d46f-a5a0-49e3-a053-9c0fbf177121
+  uuid: f04a1d1b-2541-4485-981a-a62fe295acb6
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339885
   prefix: '5917470'
   number_min_length: 14
   number_max_length: 14
-  uuid: c0cbfe38-df17-4356-8b1c-91950b5709b9
+  uuid: 6b6aafda-0740-4114-ac02-2c9f7e592651
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339887
   prefix: '5917471'
   number_min_length: 14
   number_max_length: 14
-  uuid: c9184243-1b5f-4d59-a89a-2ddc9f4de4fd
+  uuid: 823183a9-2c70-4649-b09a-f940f3e53bbc
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339889
   prefix: '5917472'
   number_min_length: 14
   number_max_length: 14
-  uuid: b36f8fe9-e06b-4daf-80c4-8dd700c4f6da
+  uuid: 4d6a72e9-2a36-423a-893d-09a160901bd3
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339892
   prefix: '5917474'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2d211236-08df-4b84-a372-e046a15586d3
+  uuid: 3fc59fb8-ef37-41d3-8b5e-9eef924cb888
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339894
   prefix: '5917475'
   number_min_length: 14
   number_max_length: 14
-  uuid: 517ad6db-9421-4711-9901-b8f5cebe79e4
+  uuid: e5e87de5-1c29-4d44-9323-491a2efb1958
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339896
   prefix: '5917476'
   number_min_length: 14
   number_max_length: 14
-  uuid: 26d31306-184c-46df-95df-94121f1895d4
+  uuid: 7c62ed9d-3ccf-41fb-8cb3-c8ae130eacab
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339897
   prefix: '5917477'
   number_min_length: 14
   number_max_length: 14
-  uuid: be2dec90-07a6-46bc-a439-2100c9cb153c
+  uuid: f343b114-f4f7-4cb9-a4f4-0390fb6a34d2
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339899
   prefix: '5917479'
   number_min_length: 14
   number_max_length: 14
-  uuid: b4d1d849-d246-425c-9d06-d0af289e5060
+  uuid: 9d488501-7f66-4db8-83e1-ebe594ad1836
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339901
   prefix: '5917480'
   number_min_length: 14
   number_max_length: 14
-  uuid: eab6261b-074a-4c21-9b47-06834ccbd898
+  uuid: 13dd014b-2a0c-4ce1-bfa1-0995f1c9ebe1
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339914
   prefix: '5917481'
   number_min_length: 14
   number_max_length: 14
-  uuid: 78b29bbe-66d6-459d-b9c2-60dad8283e74
+  uuid: 37cbd8bb-bfbe-41e4-ac2e-2e5274ce8ef7
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339921
   prefix: '5917482'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5e5d2ac9-4b7d-4dfe-89a1-eeefcec34466
+  uuid: 45c89622-8309-4810-a5b8-02d888339363
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339922
   prefix: '5917483'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3205e6e2-94ed-4869-8b5b-234c3c0d7416
+  uuid: c7cb84e8-f126-4d46-8c62-e1ad2b7eec98
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339923
   prefix: '5917484'
   number_min_length: 14
   number_max_length: 14
-  uuid: 80a33f90-eed2-4365-9ffb-0d53a7a767a0
+  uuid: 57f7fefd-1f4c-4b1e-8894-04bc538c97dc
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339924
   prefix: '5917485'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9c6afd1b-a6cd-49ec-b840-b4cac1ab059c
+  uuid: 347e5150-0037-45e0-b664-fb498e67a696
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339925
   prefix: '5917486'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6e580d58-10c3-4648-bd05-48b6d13e955f
+  uuid: 2ab8deb0-56f9-4982-83eb-e3a2eb7f7c0b
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339926
   prefix: '5917487'
   number_min_length: 14
   number_max_length: 14
-  uuid: 34817fe5-7dcc-4557-8aac-65c76e3cee09
+  uuid: 7be14bc6-1896-44f7-aa78-3b5e85df41a6
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339927
   prefix: '5917488'
   number_min_length: 14
   number_max_length: 14
-  uuid: e6c7ece6-d005-4ca6-a121-dfbc6e078a1b
+  uuid: 57c366cb-69f3-465c-86c1-e0326ae04406
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339928
   prefix: '5917489'
   number_min_length: 14
   number_max_length: 14
-  uuid: 266e10c4-fdaa-4847-8ca8-5013e449164b
+  uuid: 94aba4a1-38b0-4add-a8ee-5fb3db48cbc5
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339930
   prefix: '5917490'
   number_min_length: 14
   number_max_length: 14
-  uuid: a844f791-dbc6-44ba-9f7d-dae147efecc5
+  uuid: 650c604f-fa35-495b-891f-a4f50533b913
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339931
   prefix: '5917491'
   number_min_length: 14
   number_max_length: 14
-  uuid: a6ed1cbe-372a-44b2-86f9-1055fb4f8926
+  uuid: 7815c4cd-cd4d-40d4-8414-0660cb1bd700
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339932
   prefix: '5917492'
   number_min_length: 14
   number_max_length: 14
-  uuid: 17011d0c-8e64-4751-88d2-6bc5ff95bfda
+  uuid: d430ba3f-aded-4a34-9dec-296946000194
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339933
   prefix: '5917493'
   number_min_length: 14
   number_max_length: 14
-  uuid: 66aa355e-6a31-4529-b5e6-c8a5536062ba
+  uuid: ba7bf0bf-4da0-4059-b11a-e36ad80ffb30
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339934
   prefix: '5917494'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8379b910-89ed-4593-88a3-51475816508d
+  uuid: e81aadf2-de2b-4b48-8ca4-9777d80a28c4
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339935
   prefix: '5917495'
   number_min_length: 14
   number_max_length: 14
-  uuid: 13712a11-0237-433d-890a-49fcac11a45a
+  uuid: c6a92be4-2e1e-48df-af66-b9c59f1ecad4
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339936
   prefix: '5917496'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3c3260e5-1440-4b14-abfb-62e2257c90dc
+  uuid: 1e63e515-b5dc-4ba7-bc81-865cfce659f4
   country_id: *bo
-  network_id: *entel_movil_mobile
+  network_id: *bo_entel_movil_mobile
 - id: 339937
   prefix: '5917497'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5a6cb325-3b62-4b0e-9c68-7ed2897b71f0
+  uuid: 5f064d51-a844-41f9-abed-6d1dd449991c
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339938
   prefix: '5917498'
   number_min_length: 14
   number_max_length: 14
-  uuid: d2b28849-fb21-45ba-8232-c308cf875525
+  uuid: e6723f0f-08dc-4a8d-a142-c53ab90064a2
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339939
   prefix: '5917499'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0419a534-9f2a-4f74-ac61-c8d0e5b031d7
+  uuid: 83a0f00f-bd86-4de8-b992-6df348438b37
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile
 - id: 339940
   prefix: '59175'
   number_min_length: 12
   number_max_length: 12
-  uuid: d90ea605-6d47-45cb-83d8-85411ce24244
+  uuid: 9796dd48-763f-43fb-af40-e630d95d8efa
   country_id: *bo
-  network_id: *tigo_mobile
+  network_id: *bo_tigo_mobile
 - id: 339998
   prefix: '59176'
   number_min_length: 12
   number_max_length: 12
-  uuid: 04a17a3f-dae3-43d7-b307-03fff6eb7a17
+  uuid: 2abd3e6f-f525-42ed-a6ca-c5d5f1d9f168
   country_id: *bo
-  network_id: *tigo_mobile
+  network_id: *bo_tigo_mobile
 - id: 340000
   prefix: '59177'
   number_min_length: 12
   number_max_length: 12
-  uuid: b33a6d76-7d9d-42d5-9442-3b72779692f5
+  uuid: 4b6e080e-9274-4404-92d7-c72b637d6b93
   country_id: *bo
-  network_id: *tigo_mobile
+  network_id: *bo_tigo_mobile
 - id: 340035
   prefix: '59178'
   number_min_length: 12
   number_max_length: 12
-  uuid: 859e9548-f546-4cbd-bb04-ccbcd4958a1d
+  uuid: 56b2872d-6437-41a8-9446-5dee9c8b137a
   country_id: *bo
-  network_id: *tigo_mobile
+  network_id: *bo_tigo_mobile
 - id: 340221
   prefix: '59179'
   number_min_length: 12
   number_max_length: 12
-  uuid: 761844e6-1eab-41a4-84af-550b2b64c33d
+  uuid: bc5328d0-41b8-4234-88a1-21ef6bae8120
   country_id: *bo
-  network_id: *viva_mobile
+  network_id: *bo_viva_mobile

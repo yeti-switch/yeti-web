@@ -1,44 +1,44 @@
 country_id: &mq 134
 networks:
 # Fixed Networks
-- id: 3012
+- id: &mq_fixed 4490
   name: MQ Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 9f6c111b-c967-4714-99cb-314c9400d914
   type_id: 12
 # Country code Networks
-- id: &fixed 3012
-  name: MQ Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &mq_fixed_cc 4767
+  name: MQ Fixed Cc
+  uuid: 01287c07-a0ec-4cd6-bb28-9a341165c4ad
   type_id: 17
 # Mobile Networks
-- id: &mobile 3013
+- id: &mq_mobile 5391
   name: MQ Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: 014b4eac-24d2-4217-bc4f-97f4c9b951e2
   type_id: 3
-- id: &sfr_mobile 3939
-  name: MQ Sfr mobile
-  uuid: 6e50926c-3ea0-4746-a849-bfcd611e096a
+- id: &mq_sfr_mobile 5966
+  name: MQ Sfr Mobile
+  uuid: 1f2ada36-4732-4461-94b2-67d50566e36f
   type_id: 3
-- id: &digicel_mobile 3097
-  name: MQ Digicel mobile
-  uuid: a497ee4a-0894-4491-a6e9-4e6c07ec03b7
+- id: &mq_digicel_mobile 5967
+  name: MQ Digicel Mobile
+  uuid: 361f098f-fbea-4c40-8b34-66eec7c7dc2b
   type_id: 3
-- id: &orange_mobile 3219
-  name: MQ Orange mobile
-  uuid: a3fa5aa9-21c4-4621-ab4b-2ae703353a78
+- id: &mq_orange_mobile 5968
+  name: MQ Orange Mobile
+  uuid: fbec54a6-2e3d-4664-ac63-16cf7f12a4f0
   type_id: 3
-- id: &free_mobile 4308
-  name: MQ Free mobile
-  uuid: a36173cb-7fe7-4328-8af5-de024ed66b89
+- id: &mq_free_mobile 5969
+  name: MQ Free Mobile
+  uuid: c0f71481-0891-4353-a8c1-5b5d6e7e65e7
   type_id: 3
 # Supplementary services Networks
-- id: &machine_to_machine_(m2m)_services 3131
-  name: MQ Machine to machine (m2m) services
-  uuid: 99239e22-826d-4447-8981-39539f3caf62
+- id: &mq_machine_to_machine_(m2m)_services 5728
+  name: MQ Machine To Machine (M2M) Services
+  uuid: 72c05a81-42dd-4917-97c5-6880075fdab6
   type_id: 14
-- id: &exchange_with_a_platform_services 4399
-  name: MQ Exchange with a platform services
-  uuid: 64cef30e-386a-4b07-b0ae-f7b9bec5e6ac
+- id: &mq_exchange_with_a_platform_services 5791
+  name: MQ Exchange With A Platform Services
+  uuid: 5b95ec21-f0fc-4ff4-9699-f69a1ed178f3
   type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -46,429 +46,429 @@ network_prefixes:
   prefix: '596596'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6dfd8f9e-4846-43f5-8421-52260af091d2
+  uuid: 3ecfa064-2d26-4a7c-9c1e-4a0d3e5b3ccb
   country_id: *mq
-  network_id: *fixed
+  network_id: *mq_fixed
 - id: 261993
   prefix: '5969766'
   number_min_length: 16
   number_max_length: 16
-  uuid: 7a96e5bc-f0d8-4567-99cb-37791698ce19
+  uuid: 4fc6c415-7cb6-4a4f-a40c-5ad0ab26560f
   country_id: *mq
-  network_id: *fixed
+  network_id: *mq_fixed
 - id: 261996
   prefix: '5969767'
   number_min_length: 16
   number_max_length: 16
-  uuid: 0c12836a-0845-4919-b2de-c3e37f6a98cf
+  uuid: 9c71d21f-9fc6-4a04-97ed-58166a9cc729
   country_id: *mq
-  network_id: *fixed
+  network_id: *mq_fixed
 # Country code Prefixes
 - id: 247930
   prefix: '596'
   number_min_length: 12
   number_max_length: 15
-  uuid: d3087d3a-d5f3-4c96-9472-9da4668abf23
+  uuid: 82a60e3e-a9ab-477f-aa66-9630a00eabaa
   country_id: *mq
-  network_id: *fixed
+  network_id: *mq_fixed_cc
 # Mobile Prefixes
 - id: 251428
   prefix: '5967091'
   number_min_length: 16
   number_max_length: 16
-  uuid: 7f1ce878-5db7-4af5-a5d1-281a41a603c2
+  uuid: 6f4dbee2-222b-44bb-add3-a7feda91669e
   country_id: *mq
-  network_id: *mobile
+  network_id: *mq_mobile
 - id: 258498
   prefix: '596696'
   number_min_length: 15
   number_max_length: 15
-  uuid: cded1b04-5575-4027-970b-5986032a357f
+  uuid: 7ed86e3a-db93-4fa5-b76b-4d5c27faa625
   country_id: *mq
-  network_id: *mobile
+  network_id: *mq_mobile
 - id: 258501
   prefix: '5966960'
   number_min_length: 16
   number_max_length: 16
-  uuid: 46eda9da-9fcc-4b41-9851-d5b23279c539
+  uuid: fc82d96a-91eb-4cd0-8f24-4446c3f1ef06
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258502
   prefix: '59669610'
   number_min_length: 17
   number_max_length: 17
-  uuid: 2cf1cbff-a85e-4f33-937d-f5ff6a1b1c76
+  uuid: d7248c3a-7b29-4b14-bd39-3861bb8db606
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258503
   prefix: '59669611'
   number_min_length: 17
   number_max_length: 17
-  uuid: c43ae2e8-8685-4faf-9436-dccd74b86bbf
+  uuid: b80378bc-7af9-4534-b8e2-5c3ee7d64f73
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258504
   prefix: '59669616'
   number_min_length: 17
   number_max_length: 17
-  uuid: 4a87eac7-be10-4b3f-8218-14e2d3740d32
+  uuid: da0dd786-217a-47a9-849c-78b37dada76a
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258505
   prefix: '59669617'
   number_min_length: 17
   number_max_length: 17
-  uuid: dd5b672f-8b56-4098-ad58-a36cbea1e36c
+  uuid: c1e4f213-b0c8-4a66-bc19-f69b17e4f80b
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258506
   prefix: '59669618'
   number_min_length: 17
   number_max_length: 17
-  uuid: 2873a41f-db1c-4418-9d2f-c187f5ccb09b
+  uuid: ce850a7d-3a88-494e-97a0-8cd019bc38c4
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258507
   prefix: '59669619'
   number_min_length: 17
   number_max_length: 17
-  uuid: e0107ca7-2e19-4e04-86de-0bd18884768b
+  uuid: 5b6d72aa-7286-4a37-877d-cc97a42f22ef
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258508
   prefix: '5966962'
   number_min_length: 16
   number_max_length: 16
-  uuid: 0302c5da-8d65-4314-8da3-d4001cc95178
+  uuid: 564f7dc1-494f-4dcc-9518-35aecbfe8b20
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258509
   prefix: '5966963'
   number_min_length: 16
   number_max_length: 16
-  uuid: 95c45487-e87c-45ee-aff7-931cb479e707
+  uuid: 4b6d3896-2acf-4a0d-a410-185bb3b36f3c
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258510
   prefix: '5966964'
   number_min_length: 16
   number_max_length: 16
-  uuid: afbb59f7-d9ee-461c-810e-99c8465cd4fa
+  uuid: 818d49ce-871f-459f-8486-398a224c3eb6
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258511
   prefix: '59669650'
   number_min_length: 17
   number_max_length: 17
-  uuid: 576528ef-bbc9-4ca0-ac11-76c0e033eda6
+  uuid: b6c9ed14-1b28-4dd3-85f1-013a0d66da72
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258512
   prefix: '59669651'
   number_min_length: 17
   number_max_length: 17
-  uuid: 34fb83eb-ed84-49a5-90a3-62d9eaa33aa3
+  uuid: 35ce1e32-829f-4358-8b2d-6d28f559588c
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258513
   prefix: '59669652'
   number_min_length: 17
   number_max_length: 17
-  uuid: d4c6fbf1-0d8a-403e-a056-080fc3a60004
+  uuid: 414822be-fc59-4b9d-9a16-38e85ac562b3
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258514
   prefix: '59669653'
   number_min_length: 17
   number_max_length: 17
-  uuid: 1e81d444-5586-4d88-8159-2bccd61be06c
+  uuid: efc5bf0a-7139-4dd1-beb7-4d4dd7ff6ceb
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258515
   prefix: '59669654'
   number_min_length: 17
   number_max_length: 17
-  uuid: f8103e7c-4560-4670-a411-f1442a2cae9f
+  uuid: b0cc4047-2caf-4da2-ab19-2d34ee9d27fe
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258516
   prefix: '59669655'
   number_min_length: 17
   number_max_length: 17
-  uuid: b30118b0-e62b-4dab-8654-56af3234908e
+  uuid: ca53025a-c667-4286-9d34-f21f7d1395a6
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258517
   prefix: '59669656'
   number_min_length: 17
   number_max_length: 17
-  uuid: 63a73207-91f0-41a2-84ed-d30c14b7b33a
+  uuid: eb8d51ad-be58-47cf-ae3b-f4a04c20ad5b
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258519
   prefix: '59669660'
   number_min_length: 17
   number_max_length: 17
-  uuid: 98f27317-b95b-4eea-aaa3-9bb532519b93
+  uuid: 667f5b74-2dda-46ba-bae2-62c665d52571
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258520
   prefix: '59669661'
   number_min_length: 17
   number_max_length: 17
-  uuid: a6dc4add-cfb5-4df4-ac0f-45d63849a3be
+  uuid: 75d27ee9-89a4-48df-9d14-e779b64aa2e2
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258521
   prefix: '59669662'
   number_min_length: 17
   number_max_length: 17
-  uuid: 4f90ab7c-45c0-4e40-a5cd-54293ca2afc4
+  uuid: dede0085-bd02-4274-9b47-8d578a58d6d7
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258522
   prefix: '59669663'
   number_min_length: 17
   number_max_length: 17
-  uuid: 26948245-576b-4786-ab8d-4ab50ed540fc
+  uuid: f140160c-1a9c-4b28-a73d-eb2a1dc86f4a
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258523
   prefix: '59669664'
   number_min_length: 17
   number_max_length: 17
-  uuid: 4de1e847-b475-4b28-a8c4-831e92447c19
+  uuid: b854abae-4615-48db-84eb-765439d88fff
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258524
   prefix: '59669665'
   number_min_length: 17
   number_max_length: 17
-  uuid: 29296409-529b-46d5-b25d-2e7570fb8bbd
+  uuid: d876ffc8-152d-4355-a7fd-be67ee9441e8
   country_id: *mq
-  network_id: *free_mobile
+  network_id: *mq_free_mobile
 - id: 258525
   prefix: '59669666'
   number_min_length: 17
   number_max_length: 17
-  uuid: d82e73d7-3919-4c20-b145-09ffc19cbd34
+  uuid: 5b3c1880-2c0b-40ab-b4f9-97066c242194
   country_id: *mq
-  network_id: *free_mobile
+  network_id: *mq_free_mobile
 - id: 258526
   prefix: '59669667'
   number_min_length: 17
   number_max_length: 17
-  uuid: 557503c8-445b-4c5e-8060-bd645137f7ed
+  uuid: afff09d7-be36-43e6-bf45-a6e2927b51fe
   country_id: *mq
-  network_id: *free_mobile
+  network_id: *mq_free_mobile
 - id: 258527
   prefix: '59669668'
   number_min_length: 17
   number_max_length: 17
-  uuid: 0d27bb79-4f15-4441-8ac8-def7b20aadfd
+  uuid: c744e0b2-8639-4520-8abe-08540926c9b7
   country_id: *mq
-  network_id: *free_mobile
+  network_id: *mq_free_mobile
 - id: 258528
   prefix: '59669669'
   number_min_length: 17
   number_max_length: 17
-  uuid: 404cdb5f-3fe1-4f4f-ba83-1a71983e69d2
+  uuid: 51cd0aa5-b472-4249-b016-d1dc5753c3a9
   country_id: *mq
-  network_id: *free_mobile
+  network_id: *mq_free_mobile
 - id: 258529
   prefix: '5966967'
   number_min_length: 16
   number_max_length: 16
-  uuid: ce0ef4e7-1776-457c-b522-a4394b170f60
+  uuid: d9a811c6-3184-4078-a1d4-43fc9f406f5e
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258530
   prefix: '59669680'
   number_min_length: 17
   number_max_length: 17
-  uuid: e94a4975-3dbd-4b94-bb4f-df6db7acfa72
+  uuid: 53eba9d6-e0c6-4735-9951-65e85bdc2295
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258531
   prefix: '59669681'
   number_min_length: 17
   number_max_length: 17
-  uuid: 2e4a9311-ec69-47a3-98de-3b1935aa3875
+  uuid: c2383cc4-571f-42f4-a7ea-92fdd66baff0
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258532
   prefix: '59669682'
   number_min_length: 17
   number_max_length: 17
-  uuid: 62016e72-925a-4d2b-9a2b-a57c6eb5295f
+  uuid: 5c78c96a-8cd2-429a-8509-282dc5e66e0e
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258533
   prefix: '59669683'
   number_min_length: 17
   number_max_length: 17
-  uuid: d459131f-ddca-4870-8c07-36304dbc8d4b
+  uuid: 51115da5-4d21-41fb-a251-e0e881f3e8cc
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258534
   prefix: '59669684'
   number_min_length: 17
   number_max_length: 17
-  uuid: 556ff80c-7536-43e0-ae25-a827dae86b6c
+  uuid: d7bab011-3c2e-42dd-86c5-201ebbcfd1e7
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258535
   prefix: '59669685'
   number_min_length: 17
   number_max_length: 17
-  uuid: cf980939-4998-44e3-aa82-ba1a085ddef0
+  uuid: 5ddfaf83-20e5-4c57-825b-b4589f562248
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258536
   prefix: '59669686'
   number_min_length: 17
   number_max_length: 17
-  uuid: 4323bd5c-ed85-4e26-b0c1-5518c5576fe0
+  uuid: 4b2719d7-0ec5-4399-9c0d-73fd992139e2
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258537
   prefix: '59669687'
   number_min_length: 17
   number_max_length: 17
-  uuid: 71f3bf82-6ca6-4d07-b87a-382b71d545ac
+  uuid: 45371677-d1dd-4120-b658-816d4befdd2b
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258538
   prefix: '59669688'
   number_min_length: 17
   number_max_length: 17
-  uuid: 00804df0-ae5d-4cfb-82c0-4fe6f399cbec
+  uuid: 28cc3c3e-568b-4186-a00d-602776cd63e1
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258539
   prefix: '59669689'
   number_min_length: 17
   number_max_length: 17
-  uuid: f7903c19-7d3c-4826-a851-6bdbee055d7a
+  uuid: 7c1ee417-bbfa-4f28-a077-35e7ef5cb9fb
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258541
   prefix: '59669690'
   number_min_length: 17
   number_max_length: 17
-  uuid: 674a710e-67d0-4d06-baf4-5c2a959739c9
+  uuid: 5cbe97dd-d905-4710-b6bd-36946eeee38c
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258542
   prefix: '59669691'
   number_min_length: 17
   number_max_length: 17
-  uuid: 0a01c351-74e6-4c8c-a18a-41c0cd2fa6e6
+  uuid: 35ab1dea-72e2-4c24-8999-0567ac3c2fa0
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258543
   prefix: '59669692'
   number_min_length: 17
   number_max_length: 17
-  uuid: 55ac7173-cdc6-4ea2-a4e5-11814a5fcf0c
+  uuid: 1bcc875e-c5b6-4cc2-8d29-190e31fef5c0
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258544
   prefix: '59669693'
   number_min_length: 17
   number_max_length: 17
-  uuid: 3a26d013-9696-41c8-81b8-98cbcbbe39de
+  uuid: f6952693-4abe-45ad-81df-5915f9346c41
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258545
   prefix: '59669694'
   number_min_length: 17
   number_max_length: 17
-  uuid: 29c41036-e0c8-4a9f-a08b-9ccc6ebd2343
+  uuid: 3185a3f5-3d93-44e7-9dc4-c83db34c53f4
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258546
   prefix: '59669695'
   number_min_length: 17
   number_max_length: 17
-  uuid: 2f43977a-b8fc-4d83-8ad1-d2e04b3e38e4
+  uuid: 011cfc81-0cce-4d06-ad2a-cb76ff506f5d
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258547
   prefix: '59669696'
   number_min_length: 17
   number_max_length: 17
-  uuid: 42199385-d552-4791-8a10-2562c5bc910a
+  uuid: d37ae26b-bd9e-4556-a94c-6d2cd441a1d2
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258548
   prefix: '59669697'
   number_min_length: 17
   number_max_length: 17
-  uuid: 83fad8d8-eb24-4cbc-9a69-e4b6be024cae
+  uuid: 8f443a31-775d-48ba-929f-9a2aea570d6c
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258549
   prefix: '59669698'
   number_min_length: 17
   number_max_length: 17
-  uuid: 4435b425-e6cf-49bf-a41c-71997b465cb4
+  uuid: 40b59d80-91bb-43f9-baea-18e3d61407d9
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258550
   prefix: '59669699'
   number_min_length: 17
   number_max_length: 17
-  uuid: d9b58142-48f3-4759-9ce7-7b98c5b7a533
+  uuid: 082a5191-6e87-4bbf-abb1-8f840cf5391e
   country_id: *mq
-  network_id: *orange_mobile
+  network_id: *mq_orange_mobile
 - id: 258553
   prefix: '596697'
   number_min_length: 15
   number_max_length: 15
-  uuid: fbae8e51-6afc-498a-879f-1af5d81bf4ad
+  uuid: fe8ab848-e69b-4717-8853-a7de01cf4f45
   country_id: *mq
-  network_id: *mobile
+  network_id: *mq_mobile
 - id: 258556
   prefix: '59669727'
   number_min_length: 17
   number_max_length: 17
-  uuid: 8713a007-fc49-4d1f-ab33-f4fde0b87bd2
+  uuid: ebeb9845-24c8-44ee-82aa-665a473516d9
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 - id: 258722
   prefix: '596700700'
   number_min_length: 21
   number_max_length: 21
-  uuid: 28cac4d5-fb69-49e0-9417-ba85799cb00b
+  uuid: 1cd40f2a-b808-4edf-bbee-ce2b0a6ad150
   country_id: *mq
-  network_id: *sfr_mobile
+  network_id: *mq_sfr_mobile
 - id: 258723
   prefix: '596700701'
   number_min_length: 18
   number_max_length: 18
-  uuid: e0b60467-2633-441c-91ba-ed6bf970d0a0
+  uuid: 1ce0e9d9-8c5c-45f5-8ccb-c5b92c58030d
   country_id: *mq
-  network_id: *digicel_mobile
+  network_id: *mq_digicel_mobile
 # Supplementary services Prefixes
 - id: 253225
   prefix: '5969017'
   number_min_length: 19
   number_max_length: 19
-  uuid: 57a87497-c983-4979-af44-5056f19961da
+  uuid: 745607e3-8f10-41ec-8347-2d67090d8fbc
   country_id: *mq
-  network_id: *machine_to_machine_(m2m)_services
+  network_id: *mq_machine_to_machine_(m2m)_services
 - id: 254072
   prefix: '5969397'
   number_min_length: 16
   number_max_length: 16
-  uuid: aac64912-7180-47f5-941a-87f34e76eea9
+  uuid: 2b7e35e6-d186-4d04-b3f8-2af58e9d7c5c
   country_id: *mq
-  network_id: *exchange_with_a_platform_services
+  network_id: *mq_exchange_with_a_platform_services
 - id: 258721
   prefix: '5967007'
   number_min_length: 19
   number_max_length: 19
-  uuid: de317ac0-3321-452f-af49-ee7493ab8764
+  uuid: 1dde4ed8-7a70-46db-af99-1e8bf943ab06
   country_id: *mq
-  network_id: *machine_to_machine_(m2m)_services
+  network_id: *mq_machine_to_machine_(m2m)_services

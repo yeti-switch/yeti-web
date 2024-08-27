@@ -1,40 +1,40 @@
 country_id: &lr 120
 networks:
 # Fixed Networks
-- id: 3012
+- id: &lr_fixed 4218
   name: LR Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: c07c3d86-2785-4066-8084-af2bd269b925
   type_id: 12
 # Mobile Networks
-- id: &ltc_mobile_mobile 3785
-  name: LR Ltc mobile mobile
-  uuid: 51f1d1c3-14a8-4352-97a2-0737e316ee5a
+- id: &lr_ltc_mobile_mobile 4236
+  name: LR Ltc Mobile Mobile
+  uuid: 8c708733-7088-48cb-885b-72a4cafe66b0
   type_id: 3
-- id: &mtn_mobile 3090
-  name: LR Mtn mobile
-  uuid: 9254fa34-b4e4-4885-b7b6-0fa059bb3a8a
+- id: &lr_mtn_mobile 5335
+  name: LR Mtn Mobile
+  uuid: 610a420f-6fe5-4a7e-b2ee-1fc79382ef4d
   type_id: 3
-- id: &orange_mobile 3219
-  name: LR Orange mobile
-  uuid: a3fa5aa9-21c4-4621-ab4b-2ae703353a78
+- id: &lr_orange_mobile 6029
+  name: LR Orange Mobile
+  uuid: a500cb03-4b47-4fea-aca2-01485769c78a
   type_id: 3
 # Supplementary services Networks
-- id: &premium_rate_services 3232
-  name: LR Premium rate services
-  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+- id: &lr_premium_rate_services 4333
+  name: LR Premium Rate Services
+  uuid: 2b29c425-d768-44bb-8fb0-29a61818b34b
   type_id: 14
-- id: &special_services 3075
-  name: LR Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &lr_special_services 4996
+  name: LR Special Services
+  uuid: 381a2824-5923-4fe2-ac65-821611e59529
   type_id: 14
-- id: &telemedia_services 4359
-  name: LR Telemedia services
-  uuid: 44946356-f09b-4acd-b440-942cd41e75da
+- id: &lr_telemedia_services 5688
+  name: LR Telemedia Services
+  uuid: 0d6cf185-542b-4235-b45d-982d32740a48
   type_id: 14
 # Country code Networks
-- id: &fixed 3012
-  name: LR Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &lr_fixed_cc 4743
+  name: LR Fixed Cc
+  uuid: bbb8a8f3-b277-405c-8aa4-5665ab6a77ac
   type_id: 17
 network_prefixes:
 # Fixed Prefixes
@@ -42,191 +42,191 @@ network_prefixes:
   prefix: '23121'
   number_min_length: 13
   number_max_length: 13
-  uuid: 81412973-0503-47f3-8a9e-a01d423ac173
+  uuid: c688072f-7500-4ddc-8a9c-54b308e79943
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed
 - id: 243285
   prefix: '23122'
   number_min_length: 13
   number_max_length: 13
-  uuid: b94c398e-cd44-4cf4-84ea-84aedab623c0
+  uuid: 878ce688-520c-4623-8cee-862874f87405
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed
 - id: 243480
   prefix: '23123'
   number_min_length: 13
   number_max_length: 13
-  uuid: e4c88dc1-35db-4994-9950-2741dfe3d729
+  uuid: 58775528-ff11-40dd-9122-e400ea930152
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed
 - id: 243821
   prefix: '23125'
   number_min_length: 13
   number_max_length: 13
-  uuid: a932569d-e879-456f-8874-17a9dc35e3a1
+  uuid: 6984b39f-666d-4d33-9d62-b6d4fee1b173
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed
 - id: 244176
   prefix: '23127'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5db61165-e701-4935-9448-386eac3b8e8b
+  uuid: 3918a0f5-3075-478e-b9a8-b05fa70a674d
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed
 - id: 244312
   prefix: '23128'
   number_min_length: 13
   number_max_length: 13
-  uuid: fd28fca4-b6d7-4818-a9a0-57a0b5789ee1
+  uuid: b8ac6db8-dafe-4435-b5f9-1c8fde5ca997
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed
 - id: 244393
   prefix: '23129'
   number_min_length: 13
   number_max_length: 13
-  uuid: 606eb0fb-07cd-4411-8478-b795d521a450
+  uuid: 873d7670-5fed-4b0f-a46a-ffe234e12541
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed
 - id: 245562
   prefix: '231424'
   number_min_length: 15
   number_max_length: 15
-  uuid: 61048fc1-565c-4578-ba5c-52a47c9fb924
+  uuid: 15069eb6-0273-4d9f-9c28-a7f15cdd7c35
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed
 # Mobile Prefixes
 - id: 243303
   prefix: '231220'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9f8c6aef-11d6-4afe-acf9-f737620d88f5
+  uuid: 34f12d16-2daa-4dc5-9e09-34e8b4ed91b4
   country_id: *lr
-  network_id: *ltc_mobile_mobile
+  network_id: *lr_ltc_mobile_mobile
 - id: 249905
   prefix: '231555'
   number_min_length: 15
   number_max_length: 15
-  uuid: 15bd77f2-7388-4a31-b4fb-052b5ae924ec
+  uuid: 16ba7611-119a-4566-8401-e95e32e4a9b2
   country_id: *lr
-  network_id: *mtn_mobile
+  network_id: *lr_mtn_mobile
 - id: 252856
   prefix: '231880'
   number_min_length: 15
   number_max_length: 15
-  uuid: f963f052-abb0-4889-8074-b4355be19447
+  uuid: f7a7885f-6939-4c82-b54e-ceedbc2c421a
   country_id: *lr
-  network_id: *mtn_mobile
+  network_id: *lr_mtn_mobile
 - id: 252872
   prefix: '231881'
   number_min_length: 15
   number_max_length: 15
-  uuid: ff95199a-72a8-45ea-bb2d-c41dd1f0de36
+  uuid: 21fca3db-db55-4c6f-9488-3cbd0af11573
   country_id: *lr
-  network_id: *mtn_mobile
+  network_id: *lr_mtn_mobile
 - id: 252950
   prefix: '231886'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3ff38988-8665-4d53-a04f-18cb8aebb023
+  uuid: a349acf9-f5ca-47de-b5ac-1956e4abac88
   country_id: *lr
-  network_id: *mtn_mobile
+  network_id: *lr_mtn_mobile
 - id: 252961
   prefix: '231887'
   number_min_length: 15
   number_max_length: 15
-  uuid: d7b6dac6-50e7-41fe-b5b6-767edb92c8a6
+  uuid: 64fac209-5d97-4532-b7a9-9a4922a082b6
   country_id: *lr
-  network_id: *mtn_mobile
+  network_id: *lr_mtn_mobile
 - id: 252969
   prefix: '231888'
   number_min_length: 15
   number_max_length: 15
-  uuid: 15cc7313-7c28-4035-a0d9-a1305c412c88
+  uuid: ba191034-23f6-48e4-86f9-0f752e1ae546
   country_id: *lr
-  network_id: *mtn_mobile
+  network_id: *lr_mtn_mobile
 - id: 258906
   prefix: '231770'
   number_min_length: 15
   number_max_length: 15
-  uuid: 7f18316e-73db-4892-ae7a-07f607cac6b6
+  uuid: 698b14c1-5a8a-4629-b5db-937d127c2049
   country_id: *lr
-  network_id: *orange_mobile
+  network_id: *lr_orange_mobile
 - id: 259058
   prefix: '231772'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1218cc44-e3e1-47e0-9f6b-267942642cec
+  uuid: 2cabb89e-6c98-4152-ae4d-aa2ff7b3252f
   country_id: *lr
-  network_id: *orange_mobile
+  network_id: *lr_orange_mobile
 - id: 259156
   prefix: '231775'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9e39a65e-15a6-475a-9de8-a040f848c7cd
+  uuid: 74eb38db-1c09-41c5-b6d4-6381e98bd602
   country_id: *lr
-  network_id: *orange_mobile
+  network_id: *lr_orange_mobile
 - id: 259196
   prefix: '231776'
   number_min_length: 15
   number_max_length: 15
-  uuid: e8f5bf5b-7ae9-4f60-9445-4a7326489b49
+  uuid: 3fcb6299-e857-4dc1-bb02-4b9a62ef2fd9
   country_id: *lr
-  network_id: *orange_mobile
+  network_id: *lr_orange_mobile
 - id: 259213
   prefix: '231777'
   number_min_length: 15
   number_max_length: 15
-  uuid: b0c10a64-0ff7-447d-95c0-fbb73047e17f
+  uuid: ba10c486-ddc2-4e4a-9328-23a2ddbfdc44
   country_id: *lr
-  network_id: *orange_mobile
+  network_id: *lr_orange_mobile
 - id: 259249
   prefix: '231778'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0065956b-34a0-457d-9057-83d4f9858986
+  uuid: 90e41c04-bd18-41c5-ba28-66ebeca2e344
   country_id: *lr
-  network_id: *orange_mobile
+  network_id: *lr_orange_mobile
 - id: 259300
   prefix: '231779'
   number_min_length: 15
   number_max_length: 15
-  uuid: 75ef63b5-f802-454f-9e3d-9fc2e7311a33
+  uuid: b403c1de-6f81-4423-9e5c-df4625c1ac34
   country_id: *lr
-  network_id: *orange_mobile
+  network_id: *lr_orange_mobile
 # Supplementary services Prefixes
 - id: 244751
   prefix: '23133202'
   number_min_length: 17
   number_max_length: 17
-  uuid: c5b27506-d51e-41c3-b142-b2adc8c7e1d4
+  uuid: 5df25d8c-c820-4383-9c2d-d49833275f46
   country_id: *lr
-  network_id: *premium_rate_services
+  network_id: *lr_premium_rate_services
 - id: 248312
   prefix: '2311'
   number_min_length: 7
   number_max_length: 7
-  uuid: 1ac7051a-3e99-4c37-953e-5a88565f6b7b
+  uuid: b5f2f4bf-e275-4868-b95a-7bd12cee9aa8
   country_id: *lr
-  network_id: *special_services
+  network_id: *lr_special_services
 - id: 253157
   prefix: '23190'
   number_min_length: 14
   number_max_length: 14
-  uuid: 42704335-d974-44d3-8df8-110db86ec5da
+  uuid: 708b14ca-fe16-4851-9a16-85415865bd2b
   country_id: *lr
-  network_id: *telemedia_services
+  network_id: *lr_telemedia_services
 - id: 259943
   prefix: '2318'
   number_min_length: 7
   number_max_length: 7
-  uuid: 8a10e8cc-96ab-4a84-b5c4-e09253b5434f
+  uuid: 7be5b066-90e1-408e-92ea-d0948481584c
   country_id: *lr
-  network_id: *special_services
+  network_id: *lr_special_services
 # Country code Prefixes
 - id: 247906
   prefix: '231'
   number_min_length: 6
   number_max_length: 12
-  uuid: 624b7500-5ef2-42dd-b391-59096d58c367
+  uuid: b1498cfe-3261-41ee-8c7f-7c8bdef59a83
   country_id: *lr
-  network_id: *fixed
+  network_id: *lr_fixed_cc

@@ -1,40 +1,40 @@
 country_id: &la 116
 networks:
 # Fixed Networks
-- id: 3012
+- id: &la_fixed 3075
   name: LA Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: c30a9ecf-eae1-4ed8-bcdf-c60fd0ef5360
   type_id: 12
 # Country code Networks
-- id: &fixed 3012
-  name: LA Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &la_fixed_cc 4741
+  name: LA Fixed Cc
+  uuid: 4ead317f-0295-461c-8ce9-50c2760a6e6b
   type_id: 17
 # Supplementary services Networks
-- id: &special_services 3075
-  name: LA Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &la_special_services 4994
+  name: LA Special Services
+  uuid: 674faad6-02d0-4a9d-bc8c-35a96abb8f46
   type_id: 14
 # Mobile Networks
-- id: &etl_mobile 4470
-  name: LA Etl mobile
-  uuid: 0b43d4a7-fcd8-4709-9099-773e74770acd
+- id: &la_etl_mobile 5933
+  name: LA Etl Mobile
+  uuid: bf80c5be-2062-40dd-ac31-fa6ec979622f
   type_id: 3
-- id: &lao_telecom_mobile 4474
-  name: LA Lao telecom mobile
-  uuid: 34796066-ccad-434c-936c-aba9c7245d4d
+- id: &la_lao_telecom_mobile 5938
+  name: LA Lao Telecom Mobile
+  uuid: f5a65cab-3498-416c-9f2f-fe958514c694
   type_id: 3
-- id: &tplus_mobile 4646
-  name: LA Tplus mobile
-  uuid: 6a7dfe80-db05-4178-a565-60f217e09905
+- id: &la_tplus_mobile 6293
+  name: LA Tplus Mobile
+  uuid: 75a91939-9b1f-4ee6-92ce-b4b937d0fcc7
   type_id: 3
-- id: &best_mobile 4647
-  name: LA Best mobile
-  uuid: 3c63996d-b145-4a4e-854c-7d5b5e62c5c7
+- id: &la_best_mobile 6294
+  name: LA Best Mobile
+  uuid: 77b2f451-e790-46f6-9b3c-5dfd5f10d41a
   type_id: 3
-- id: &unitel_mobile 3542
-  name: LA Unitel mobile
-  uuid: a401c0c8-fc4e-41bd-9ad7-8ba986c695a7
+- id: &la_unitel_mobile 6297
+  name: LA Unitel Mobile
+  uuid: 80ae1de0-9ebd-4d38-bec7-ed712467ace4
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -42,170 +42,170 @@ network_prefixes:
   prefix: '85623'
   number_min_length: 11
   number_max_length: 11
-  uuid: de6e0e7f-41fb-40f4-97d6-77cc414f97a6
+  uuid: d83d6b9e-5b94-4c92-80a5-3abef890db4c
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 9300
   prefix: '85621'
   number_min_length: 11
   number_max_length: 11
-  uuid: cafd47b5-33c3-4d1d-b604-689ea97fd63c
+  uuid: b205da5d-e8c6-461d-8fcd-0de5a567686f
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 53107
   prefix: '85631'
   number_min_length: 11
   number_max_length: 11
-  uuid: fdd5a1bc-450d-4379-9997-e28799e873d9
+  uuid: c6ebdffa-e531-49fa-bf15-c0582f5cda62
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 76918
   prefix: '85634'
   number_min_length: 11
   number_max_length: 11
-  uuid: 94ace788-e09c-445d-870e-70dfd8c1a9f5
+  uuid: a6202b54-aa04-482a-9d42-858799883c4b
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 80958
   prefix: '85636'
   number_min_length: 11
   number_max_length: 11
-  uuid: 50a85828-e4b9-4fea-b9e3-589fd1f8fb29
+  uuid: ee4f660e-db2b-48ec-a788-3895e00f3896
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 83709
   prefix: '85638'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2ca8e558-004a-4a93-ac71-1de0f30c1e9f
+  uuid: 964d8953-24c5-4f05-8041-c25c33c85e9c
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 91018
   prefix: '85641'
   number_min_length: 11
   number_max_length: 11
-  uuid: eb91a915-2cbe-48b8-9eea-9f5e9940fcdc
+  uuid: 18c46fd9-a224-4e16-8e78-661be7b1bc29
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 149999
   prefix: '85651'
   number_min_length: 11
   number_max_length: 11
-  uuid: 2149cc70-1aad-4461-a905-6d8403a42fb9
+  uuid: 166bad75-5caf-4de7-aad6-52d52dcbfc2f
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 155680
   prefix: '85654'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8ec4de41-d48b-4377-ad79-cff489bffbb0
+  uuid: 1fcfff99-7b87-432b-9423-27bc40a3689b
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 293486
   prefix: '85661'
   number_min_length: 11
   number_max_length: 11
-  uuid: f3af3fa7-c14c-4ef2-b543-1209c5ba6d22
+  uuid: b3cb7eaa-6b98-4313-ba6b-91f002d32761
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 307885
   prefix: '85664'
   number_min_length: 11
   number_max_length: 11
-  uuid: 218cb946-4eea-44ee-b02e-819abc589b3f
+  uuid: cf887be3-9cc6-4ab0-944b-697d74a66ae8
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 - id: 352931
   prefix: '85671'
   number_min_length: 11
   number_max_length: 11
-  uuid: e14bfdf5-b763-4684-bc7e-b69438f30eb7
+  uuid: fced9133-7462-4e41-8146-18f347e95614
   country_id: *la
-  network_id: *fixed
-- id: 371658
+  network_id: *la_fixed
+- id: 371659
   prefix: '85674'
   number_min_length: 11
   number_max_length: 11
-  uuid: f58bdb2a-e2a6-48c8-ac2a-7e53c0085bdd
+  uuid: 5d970d48-3174-42b4-8e51-1561eb093706
   country_id: *la
-  network_id: *fixed
-- id: 404241
+  network_id: *la_fixed
+- id: 404242
   prefix: '85681'
   number_min_length: 11
   number_max_length: 11
-  uuid: cd945136-7943-4e12-8b45-7484150acd22
+  uuid: ddaddec8-e142-48d2-b250-7d24008b2731
   country_id: *la
-  network_id: *fixed
-- id: 414701
+  network_id: *la_fixed
+- id: 414702
   prefix: '85684'
   number_min_length: 11
   number_max_length: 11
-  uuid: b8c58c9f-7bae-4df7-b848-ed38cb338255
+  uuid: 0338be82-495a-40c8-9c59-e4ea4d82e31f
   country_id: *la
-  network_id: *fixed
-- id: 429069
+  network_id: *la_fixed
+- id: 429070
   prefix: '85686'
   number_min_length: 11
   number_max_length: 11
-  uuid: aada8de3-2195-4af9-a6c5-490ef634a651
+  uuid: 1e5d6523-3f42-4317-96fd-738ab0be5b4c
   country_id: *la
-  network_id: *fixed
-- id: 444480
+  network_id: *la_fixed
+- id: 444481
   prefix: '85688'
   number_min_length: 11
   number_max_length: 11
-  uuid: dd5882cc-4531-417e-ae9f-98219ac63f55
+  uuid: 65260f67-4822-4d16-93cc-e05b0281207e
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed
 # Country code Prefixes
 - id: 247904
   prefix: '856'
   number_min_length: 9
   number_max_length: 11
-  uuid: e516e2b6-f731-409e-a064-3dfecd840df5
+  uuid: 30235d15-aa1f-4542-9220-b66ec0e5de37
   country_id: *la
-  network_id: *fixed
+  network_id: *la_fixed_cc
 # Supplementary services Prefixes
 - id: 248309
   prefix: '8561'
   number_min_length: 7
   number_max_length: 7
-  uuid: fc95f68c-8825-40cb-94bc-5b4d24318d44
+  uuid: 8971f4a8-6dea-4c84-8056-92b6dc6a4a5e
   country_id: *la
-  network_id: *special_services
+  network_id: *la_special_services
 # Mobile Prefixes
 - id: 257705
   prefix: '856202'
   number_min_length: 14
   number_max_length: 14
-  uuid: f27bbd17-a1a2-4220-b689-e6df899d168c
+  uuid: fe635cb3-76b4-4615-a037-3677f12ac52e
   country_id: *la
-  network_id: *etl_mobile
+  network_id: *la_etl_mobile
 - id: 257772
   prefix: '856205'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0845b3ab-a95a-438c-9190-3217fb85cff0
+  uuid: df57d31b-d5f0-47b7-8f02-25011eb9908a
   country_id: *la
-  network_id: *lao_telecom_mobile
+  network_id: *la_lao_telecom_mobile
 - id: 263991
   prefix: '856207'
   number_min_length: 14
   number_max_length: 14
-  uuid: a25fed85-95be-4fe2-be8a-82303f12cf7b
+  uuid: 6b2d9a6e-490d-4287-9f5e-06e2cb1dc54c
   country_id: *la
-  network_id: *tplus_mobile
+  network_id: *la_tplus_mobile
 - id: 264013
   prefix: '856208'
   number_min_length: 14
   number_max_length: 14
-  uuid: 39dd94a1-350e-47bc-b8fa-89434e4a3583
+  uuid: ff4d1032-1270-4b58-873e-e4c0ebb9674d
   country_id: *la
-  network_id: *best_mobile
+  network_id: *la_best_mobile
 - id: 264037
   prefix: '856209'
   number_min_length: 14
   number_max_length: 14
-  uuid: 28001aa6-bc9a-4965-81cf-155761c6cf39
+  uuid: f8b09c37-c805-444f-87e4-0af88e146262
   country_id: *la
-  network_id: *unitel_mobile
+  network_id: *la_unitel_mobile

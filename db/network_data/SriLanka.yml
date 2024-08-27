@@ -1,44 +1,44 @@
 country_id: &lk 199
 networks:
 # Fixed Networks
-- id: 3012
+- id: &lk_fixed 3077
   name: LK Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 6cd7c35d-a9c0-4f59-970d-77ede6a4a6ba
   type_id: 12
 # Country code Networks
-- id: &fixed 3012
-  name: LK Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &lk_fixed_cc 4746
+  name: LK Fixed Cc
+  uuid: 81da51e0-ef60-4bfc-abca-6d4b77a2959e
   type_id: 17
 # Supplementary services Networks
-- id: &special_services 3075
-  name: LK Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &lk_special_services 4998
+  name: LK Special Services
+  uuid: a82fa392-23f0-4b17-a16a-1e539c9005fc
   type_id: 14
-- id: &virtual_private_network 3426
-  name: LK Virtual private network
-  uuid: 4b16a437-d669-4316-820b-8919da3af9be
+- id: &lk_virtual_private_network 5910
+  name: LK Virtual Private Network
+  uuid: 70eab1eb-8a1d-49aa-9fa8-097b4dd7363f
   type_id: 14
 # Mobile Networks
-- id: &slt-mobitel_mobile 4803
-  name: LK Slt-mobitel mobile
-  uuid: f66e7d59-7009-4ed3-a394-d2912f570a66
+- id: &lk_slt-mobitel_mobile 6559
+  name: LK Slt-Mobitel Mobile
+  uuid: 3178fa58-15af-48fe-924c-fa1f2d9c3c99
   type_id: 3
-- id: &hutch_mobile 4862
-  name: LK Hutch mobile
-  uuid: ce75cae9-6f4e-47b8-98c0-869c0f22169f
+- id: &lk_hutch_mobile 6669
+  name: LK Hutch Mobile
+  uuid: bc1904fe-a719-481c-a6b0-c23c101a13df
   type_id: 3
-- id: &dialog_mobile 4769
-  name: LK Dialog mobile
-  uuid: 0c307638-239a-4f44-a02d-55e8937bf67b
+- id: &lk_dialog_mobile 6737
+  name: LK Dialog Mobile
+  uuid: f85f2e4b-0493-429d-aba6-e615322c8dd7
   type_id: 3
-- id: &airtel_mobile 3142
-  name: LK Airtel mobile
-  uuid: 08f04e1d-14e6-4fcf-82bb-fd812972b861
+- id: &lk_airtel_mobile 6756
+  name: LK Airtel Mobile
+  uuid: e8156378-11c1-4c64-ab2a-03ea3f5bac95
   type_id: 3
-- id: &mobile 3013
+- id: &lk_mobile 6868
   name: LK Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: 28b2d4ad-a42d-432b-bf4b-f6975e008d51
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -46,289 +46,289 @@ network_prefixes:
   prefix: '9423'
   number_min_length: 11
   number_max_length: 11
-  uuid: cbf58b30-a3aa-4c1c-a76a-dff6e38517f8
+  uuid: 0feeb680-f85b-4ac6-8689-016fd64d3080
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 9302
   prefix: '9421'
   number_min_length: 11
   number_max_length: 11
-  uuid: 15405829-122e-4b4c-bcd6-7b5613120a9f
+  uuid: 50b77ffd-f5e1-44f3-8a68-6eb554a3ad09
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 23231
   prefix: '9426'
   number_min_length: 11
   number_max_length: 11
-  uuid: 355f27c7-4bc6-422d-9fb3-e28871aa77d2
+  uuid: d04e1917-9651-4f20-ae5b-feabf5e4b9df
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 24919
   prefix: '9427'
   number_min_length: 11
   number_max_length: 11
-  uuid: b9229504-d0e2-4ad5-b933-d6bd7d07cad9
+  uuid: 9b937949-90a3-4129-8ec5-31d2f8cfb331
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 28292
   prefix: '9424'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4140350f-091d-4fe2-bd28-6dbf870da8cc
+  uuid: 95940c88-daec-4eeb-9a32-e126c1a550c5
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 31984
   prefix: '9425'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7e9a40d1-ccae-43e4-ae26-cee775d631f1
+  uuid: a80918cf-6cee-4164-a7ab-3bb20be016d0
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 53109
   prefix: '9431'
   number_min_length: 11
   number_max_length: 11
-  uuid: e57dc38b-b3f1-49d4-96a7-15c20ee5189e
+  uuid: 1d36cf85-5b23-4ae8-89e6-a2831f3085ba
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 67151
   prefix: '9432'
   number_min_length: 11
   number_max_length: 11
-  uuid: acbacc96-93cc-419a-9e7e-511481a9170b
+  uuid: 7fa59d9e-9427-4355-8136-aac948ed5515
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 68010
   prefix: '9433'
   number_min_length: 11
   number_max_length: 11
-  uuid: 51b43b33-72ca-4103-9add-3dc97ed08a45
+  uuid: 420650fc-d20e-49ac-86b8-65557c1e4261
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 76919
   prefix: '9434'
   number_min_length: 11
   number_max_length: 11
-  uuid: d621776a-a277-4e2e-9f03-942704a2079d
+  uuid: 30ebd932-fa0f-4860-bc24-8a250f7d3d73
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 78858
   prefix: '9435'
   number_min_length: 11
   number_max_length: 11
-  uuid: 23d8af2a-5cdc-4f60-a0a5-eaf64e1cdb57
+  uuid: c483608c-d747-4b55-bfeb-9bd26ee2598d
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 80959
   prefix: '9436'
   number_min_length: 11
   number_max_length: 11
-  uuid: 84f0cde4-863e-4f9c-b92d-ae6639ada529
+  uuid: e9d1074c-3db9-4a1b-bc1c-c80f642c2fac
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 82006
   prefix: '9437'
   number_min_length: 11
   number_max_length: 11
-  uuid: d6bc6a9e-b9fe-4ce7-9f84-c71179bcb35c
+  uuid: 93e45f10-51a8-40ca-b570-ef015435fe4f
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 83710
   prefix: '9438'
   number_min_length: 11
   number_max_length: 11
-  uuid: 284be067-b7d6-4359-a879-12f1489f63c1
+  uuid: 0016935e-6765-4776-af9e-c226e5b1e9e6
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 91020
   prefix: '9441'
   number_min_length: 11
   number_max_length: 11
-  uuid: 85b4812a-4de0-4c1d-9597-9b05d9813be4
+  uuid: e1788a4c-85fe-452d-aeaa-b11846359543
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 124295
   prefix: '9445'
   number_min_length: 11
   number_max_length: 11
-  uuid: 1291279a-0a96-4f5f-8b34-7be0adffd1bf
+  uuid: 5d6dddc5-7262-4da2-820e-0bc63c5ec5a7
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 128301
   prefix: '9447'
   number_min_length: 11
   number_max_length: 11
-  uuid: bea81e9c-7310-40c1-8c32-be45249780a5
+  uuid: 37854b8b-7880-4f84-b5b9-c88461f9a883
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 150001
   prefix: '9451'
   number_min_length: 11
   number_max_length: 11
-  uuid: c110999d-740c-4eba-ac30-5272a524bbd9
+  uuid: 6a3f0bc2-a5df-452f-8dd9-f84ce73b87e1
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 154207
   prefix: '9452'
   number_min_length: 11
   number_max_length: 11
-  uuid: d20afc28-9ad4-4d51-a8de-b4c0d48de708
+  uuid: 5f3e8a79-663d-47cf-bff2-0963f4804637
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 155682
   prefix: '9454'
   number_min_length: 11
   number_max_length: 11
-  uuid: f9a4171b-4713-4bfe-ac59-6724d7d2f081
+  uuid: 4c5221ec-5c23-49a4-a21f-118102a900e7
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 161650
   prefix: '9455'
   number_min_length: 11
   number_max_length: 11
-  uuid: 33135858-bdfc-4fa3-8826-61bd2b674407
+  uuid: 956bcdbf-f921-4efd-84ee-9bac031b2e34
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 171715
   prefix: '9491'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9924b69a-9cc4-49f8-859a-0b68f7c7284c
+  uuid: 94b153ea-4ba2-48fd-9675-31644f94f278
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 254788
   prefix: '9411'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9ee31fee-04ad-493a-973f-858e85ff95dd
+  uuid: 49374995-3b96-481b-a624-814f561da941
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 280110
   prefix: '9457'
   number_min_length: 11
   number_max_length: 11
-  uuid: d5b5203c-3bd4-40cf-9d02-ac0946905725
+  uuid: deac9fae-8910-4435-8fb0-58b21775e3e0
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 305415
   prefix: '9463'
   number_min_length: 11
   number_max_length: 11
-  uuid: ed3ffd5d-4002-4bec-b3ba-a3cd384135f1
+  uuid: f5e3b1a4-2db6-4b35-8896-708416d619d3
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 319380
   prefix: '9465'
   number_min_length: 11
   number_max_length: 11
-  uuid: 6d98ee82-f26f-490b-80dc-bce3e6bf0a7b
+  uuid: 8b2e4b33-ae6d-4355-bf0b-7950f648177d
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 321921
   prefix: '9466'
   number_min_length: 11
   number_max_length: 11
-  uuid: 3bd4c866-b09c-43f5-922b-fef85bad16d7
+  uuid: 32f0c0ee-6c86-416c-8b8e-b9d8e8009cb7
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 - id: 334705
   prefix: '9467'
   number_min_length: 11
   number_max_length: 11
-  uuid: 579fbbb4-2fd3-4905-9cfb-3347df4659eb
+  uuid: d8851b1c-0faf-42d4-8be9-480a833e1691
   country_id: *lk
-  network_id: *fixed
-- id: 404243
+  network_id: *lk_fixed
+- id: 404244
   prefix: '9481'
   number_min_length: 11
   number_max_length: 11
-  uuid: d4b1a153-5608-46ef-9efc-50d6e2d74f36
+  uuid: c6835e92-de93-4f11-a8b3-8650e3bad1f7
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed
 # Country code Prefixes
 - id: 247909
   prefix: '94'
   number_min_length: 5
   number_max_length: 9
-  uuid: 300dcd22-4d88-4162-8105-3b2c970e0fcf
+  uuid: 9b3c62a7-44c2-41cb-bdf0-76674fb428e1
   country_id: *lk
-  network_id: *fixed
+  network_id: *lk_fixed_cc
 # Supplementary services Prefixes
 - id: 248314
   prefix: '941'
   number_min_length: 6
   number_max_length: 7
-  uuid: 144a7564-8dda-49ab-b97e-0721b9d00ed2
+  uuid: ba800277-be13-48fe-86ea-179aecb58bba
   country_id: *lk
-  network_id: *special_services
+  network_id: *lk_special_services
 - id: 256898
   prefix: '9419'
   number_min_length: 11
   number_max_length: 11
-  uuid: cc8403b5-d978-482b-9e3b-7bcf01ebc5b5
+  uuid: 4d3cc6ef-a418-4e44-95eb-d32b7b92ec71
   country_id: *lk
-  network_id: *virtual_private_network
+  network_id: *lk_virtual_private_network
 # Mobile Prefixes
 - id: 340391
   prefix: '9470'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9fc7f9dc-4625-4bd7-ac90-29f7d33a59bc
+  uuid: b073fed0-d1ee-4c11-ac70-a630b7e37e2e
   country_id: *lk
-  network_id: *slt-mobitel_mobile
+  network_id: *lk_slt-mobitel_mobile
 - id: 352933
   prefix: '9471'
   number_min_length: 11
   number_max_length: 11
-  uuid: 1f9b94d0-22ee-4c1d-9cf3-4ec34db22d14
+  uuid: dec886dd-6180-45b2-9864-5aaf0362b615
   country_id: *lk
-  network_id: *slt-mobitel_mobile
-- id: 357663
+  network_id: *lk_slt-mobitel_mobile
+- id: 357664
   prefix: '9472'
   number_min_length: 11
   number_max_length: 11
-  uuid: 43a862f3-88c4-4575-8cbd-e0f551a083ba
+  uuid: 92117ea3-b460-43c3-ac9a-113f36f890c5
   country_id: *lk
-  network_id: *hutch_mobile
-- id: 371659
+  network_id: *lk_hutch_mobile
+- id: 371660
   prefix: '9474'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4a8ddd46-98cf-4922-a2b4-c1689b2bc70a
+  uuid: bbe72a47-f392-462d-8207-0fa1c5662588
   country_id: *lk
-  network_id: *dialog_mobile
-- id: 376986
+  network_id: *lk_dialog_mobile
+- id: 376987
   prefix: '9475'
   number_min_length: 11
   number_max_length: 11
-  uuid: d0a1367c-c33f-46c8-aa64-0f995ce50921
+  uuid: 94633fc6-11ee-4472-8d6c-b25a1723baec
   country_id: *lk
-  network_id: *airtel_mobile
-- id: 379085
+  network_id: *lk_airtel_mobile
+- id: 379086
   prefix: '9476'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7ca183a2-4b98-4f7d-ad47-70df3327ae15
+  uuid: 3ec7c909-aa14-4cfc-a717-113824e87ce3
   country_id: *lk
-  network_id: *dialog_mobile
-- id: 385890
+  network_id: *lk_dialog_mobile
+- id: 385891
   prefix: '9477'
   number_min_length: 11
   number_max_length: 11
-  uuid: c1098dfd-e8f0-4801-82d0-5ac3736b59a5
+  uuid: 96045ed8-5e17-4997-a110-2f223090fc5b
   country_id: *lk
-  network_id: *dialog_mobile
-- id: 395760
+  network_id: *lk_dialog_mobile
+- id: 395761
   prefix: '9478'
   number_min_length: 11
   number_max_length: 11
-  uuid: 76e68609-7dd9-455d-8206-4b9d07792411
+  uuid: 1caaf593-2a88-4c37-9786-831447845692
   country_id: *lk
-  network_id: *hutch_mobile
-- id: 400547
+  network_id: *lk_hutch_mobile
+- id: 400548
   prefix: '94'
   number_min_length: 9
   number_max_length: 9
-  uuid: 5fdfbef5-fc38-4331-a6c3-ee5c7a2bc6f3
+  uuid: 01ee4122-58d2-4fe2-aa66-c4b3cfa0c286
   country_id: *lk
-  network_id: *mobile
+  network_id: *lk_mobile

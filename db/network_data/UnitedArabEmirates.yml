@@ -1,72 +1,72 @@
 country_id: &ae 223
 networks:
 # Fixed Networks
-- id: 3012
+- id: &ae_fixed 3210
   name: AE Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: eb891150-cdd2-4c56-8df0-e4da99176407
   type_id: 12
 # Supplementary services Networks
-- id: &value_added_services 3139
-  name: AE Value added services
-  uuid: 2f8928d8-c0de-4c79-ac82-a5e8c0c0a327
+- id: &ae_value_added_services 3244
+  name: AE Value Added Services
+  uuid: 680922b6-1c2d-4ec8-ac34-579c19f20bd7
   type_id: 14
-- id: &free_access_services 3279
-  name: AE Free access services
-  uuid: 3aa7d09c-1e12-4b12-8dbf-9550081de2fe
+- id: &ae_free_access_services 3429
+  name: AE Free Access Services
+  uuid: 1a3eec0b-efd9-4fcf-b332-aab8fd4cebc2
   type_id: 14
-- id: &free_access_data_services 3281
-  name: AE Free access data services
-  uuid: 4065e7f0-3623-4d06-8721-ccb751b5a07f
+- id: &ae_free_access_data_services 3431
+  name: AE Free Access Data Services
+  uuid: 67060b18-aad2-447c-b504-ecdeeb792998
   type_id: 14
-- id: &fixed_cost_services 4608
-  name: AE Fixed cost services
-  uuid: 2b9ade8d-d95a-4eca-a81a-ddf57de9717a
+- id: &ae_fixed_cost_services 6342
+  name: AE Fixed Cost Services
+  uuid: d69a231d-64c7-4bd1-9268-8980721ace6e
   type_id: 14
-- id: &fixed_cost_data_services 4674
-  name: AE Fixed cost data services
-  uuid: 8a7aa0c5-25dc-43f6-a35e-dfd06d4b8849
+- id: &ae_fixed_cost_data_services 6349
+  name: AE Fixed Cost Data Services
+  uuid: 43043614-6a5f-4824-b8fc-14b062ac8d29
   type_id: 14
-- id: &shared_cost_services 3141
-  name: AE Shared cost services
-  uuid: fcb0a143-e4dd-46b3-a904-2da86f75c2f4
+- id: &ae_shared_cost_services 6592
+  name: AE Shared Cost Services
+  uuid: f2914fed-10da-469e-89d7-747dddaee36c
   type_id: 14
-- id: &special_shared_cost_services 4822
-  name: AE Special shared cost services
-  uuid: ac6ecddd-7776-46a2-9bc0-1c09c1607d13
+- id: &ae_special_shared_cost_services 6603
+  name: AE Special Shared Cost Services
+  uuid: ad6f5361-e69b-453c-a402-4da8b7019cdc
   type_id: 14
-- id: &freephone_services 3382
-  name: AE Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &ae_freephone_services 6876
+  name: AE Freephone Services
+  uuid: 008d6ae1-6d0b-4e68-93da-6304222f9c0c
   type_id: 14
-- id: &international_toll_free_services_(itfs) 4966
-  name: AE International toll free services (itfs)
-  uuid: a50d863d-6d11-4164-982f-38986031ccb4
+- id: &ae_international_toll_free_services_(itfs) 6918
+  name: AE International Toll Free Services (Itfs)
+  uuid: 0c0b2b99-64b2-46ac-9a84-2309a5362558
   type_id: 14
-- id: &premium_rate_services_shared_revenue_services 5101
-  name: AE Premium rate services shared revenue services
-  uuid: e0f39738-ef55-4fc6-a232-4369c09a9f83
+- id: &ae_premium_rate_services_shared_revenue_services 7192
+  name: AE Premium Rate Services Shared Revenue Services
+  uuid: ce1545aa-1cf5-4aae-946c-20c69d6ff100
   type_id: 14
-- id: &premium_rate_data_services_shared_revenue_data_services 5108
-  name: AE Premium rate data services shared revenue data services
-  uuid: 083219f9-c85e-4b00-a78d-0a4cfca5ea4a
+- id: &ae_premium_rate_data_services_shared_revenue_data_services 7213
+  name: AE Premium Rate Data Services Shared Revenue Data Services
+  uuid: ab4aca82-5dce-4a92-ae85-a72f1acf88f2
   type_id: 14
 # Mobile Networks
-- id: &e&_etisalat_and_mobile 3407
-  name: AE E& etisalat and mobile
-  uuid: 270b78bf-c247-457d-ad01-e67502729e81
+- id: &ae_e&_etisalat_and_mobile 3603
+  name: AE E& Etisalat And Mobile
+  uuid: 3b9515f0-40ee-44e8-857e-106fc9c33ed0
   type_id: 3
-- id: &du_mobile 3460
-  name: AE Du mobile
-  uuid: 82c24589-5b71-4658-9758-f9850fdd366e
+- id: &ae_du_mobile 3663
+  name: AE Du Mobile
+  uuid: 3828e9c3-4703-4b23-8bb5-30c84427f60f
   type_id: 3
-- id: &mobile 3013
+- id: &ae_mobile 6317
   name: AE Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: e0bdf70f-b952-45d9-9509-d55561bebf01
   type_id: 3
 # Country code Networks
-- id: &fixed 3012
-  name: AE Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &ae_fixed_cc 4649
+  name: AE Fixed Cc
+  uuid: 74d0e71e-aeb8-4f3d-afd6-61398dd61c0e
   type_id: 17
 network_prefixes:
 # Fixed Prefixes
@@ -74,177 +74,177 @@ network_prefixes:
   prefix: '9713'
   number_min_length: 11
   number_max_length: 11
-  uuid: 46b141a2-04b7-4cda-a7fe-6fe90d9a1d97
+  uuid: 6609e5a6-5fd9-471e-8e4d-74f54d448a1d
   country_id: *ae
-  network_id: *fixed
+  network_id: *ae_fixed
 - id: 86553
   prefix: '9714'
   number_min_length: 11
   number_max_length: 11
-  uuid: 5d01eb8b-23e4-4b35-bca0-4b99f47e753f
+  uuid: ed28ff9b-72f1-4f52-ade2-a3b6103da86e
   country_id: *ae
-  network_id: *fixed
+  network_id: *ae_fixed
 - id: 257250
   prefix: '9712'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7864a954-e7d1-41be-8ae5-a4a4bf99a328
+  uuid: 8949020b-b9a4-4e0d-8c72-3836cc3cdf2e
   country_id: *ae
-  network_id: *fixed
+  network_id: *ae_fixed
 - id: 276608
   prefix: '9716'
   number_min_length: 11
   number_max_length: 11
-  uuid: 7f211a6f-ad1b-4b9a-a6e1-a3770cad7c0f
+  uuid: d95d622b-dcf3-46b4-aff5-75ac4d0537b3
   country_id: *ae
-  network_id: *fixed
+  network_id: *ae_fixed
 - id: 339485
   prefix: '9717'
   number_min_length: 11
   number_max_length: 11
-  uuid: f2fc27cc-3ccf-4693-9b1f-be987526c662
+  uuid: 2fc4dc7e-6b1b-4993-94e3-2227ab7c1d8c
   country_id: *ae
-  network_id: *fixed
-- id: 446480
+  network_id: *ae_fixed
+- id: 446481
   prefix: '9719'
   number_min_length: 11
   number_max_length: 11
-  uuid: fdca50af-abf9-4a39-a380-904089d39e96
+  uuid: 3daa0535-e4ee-4f0d-88c3-bbdcf70921b0
   country_id: *ae
-  network_id: *fixed
+  network_id: *ae_fixed
 # Supplementary services Prefixes
 - id: 42349
   prefix: '971300'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2abd2bcd-59fe-41c5-bf04-2f7b3d929e00
+  uuid: 2156403e-db04-4b31-b82f-1cf65f6b15fd
   country_id: *ae
-  network_id: *value_added_services
+  network_id: *ae_value_added_services
 - id: 87104
   prefix: '971400'
   number_min_length: 12
   number_max_length: 12
-  uuid: f55d1fb3-5b2d-442c-a3db-e98b40383b55
+  uuid: 24a897d5-ab2a-4739-8f94-1617fa3e7498
   country_id: *ae
-  network_id: *free_access_services
+  network_id: *ae_free_access_services
 - id: 87106
   prefix: '9714002'
   number_min_length: 13
   number_max_length: 13
-  uuid: 24d471dc-98ef-44d4-9380-bcb28b3d4b24
+  uuid: cb3a873f-5ac0-4c80-8499-21e9342c8c91
   country_id: *ae
-  network_id: *free_access_data_services
+  network_id: *ae_free_access_data_services
 - id: 146229
   prefix: '971500'
   number_min_length: 12
   number_max_length: 12
-  uuid: 784c24d4-14e6-4784-b1e2-99717582915a
+  uuid: ff39e5f6-0105-4b50-abe8-ec52719a8a38
   country_id: *ae
-  network_id: *value_added_services
+  network_id: *ae_value_added_services
 - id: 264053
   prefix: '971200'
   number_min_length: 12
   number_max_length: 12
-  uuid: 55698a1e-4054-4e35-84f6-c812b4b9643e
+  uuid: 94afefe6-e047-4584-baca-936a7223e685
   country_id: *ae
-  network_id: *value_added_services
+  network_id: *ae_value_added_services
 - id: 277905
   prefix: '971600'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4507a5a8-3ecf-49b9-a2e6-49c88bd7fa44
+  uuid: 1dd81aa1-536e-420a-aeb5-8e1d59b6adf9
   country_id: *ae
-  network_id: *fixed_cost_services
+  network_id: *ae_fixed_cost_services
 - id: 277914
   prefix: '9716002'
   number_min_length: 13
   number_max_length: 13
-  uuid: e6c4e970-c819-476e-b5f2-1e2b1e7a5e5d
+  uuid: 2d7c002b-8e26-438e-b204-8cb63429c0b5
   country_id: *ae
-  network_id: *fixed_cost_data_services
+  network_id: *ae_fixed_cost_data_services
 - id: 341396
   prefix: '971700'
   number_min_length: 12
   number_max_length: 12
-  uuid: 23ec4f7c-d6d2-4576-9dad-8fc8de5dd213
+  uuid: 714058b8-6e2c-4466-abdf-d09b23bbd428
   country_id: *ae
-  network_id: *shared_cost_services
+  network_id: *ae_shared_cost_services
 - id: 341408
   prefix: '9717000'
   number_min_length: 13
   number_max_length: 13
-  uuid: bdbf03cd-0a9e-49c7-8528-ff03612d18e8
+  uuid: c172d7cf-7397-49e8-9d96-868784704f69
   country_id: *ae
-  network_id: *special_shared_cost_services
-- id: 400646
+  network_id: *ae_special_shared_cost_services
+- id: 400647
   prefix: '971800'
   number_min_length: 8
   number_max_length: 15
-  uuid: 023b8a3c-bb66-4546-8527-5509cd605f2d
+  uuid: 2871f7d0-5409-4488-86d8-36a6be0051c8
   country_id: *ae
-  network_id: *freephone_services
-- id: 400689
+  network_id: *ae_freephone_services
+- id: 400690
   prefix: '9718000'
   number_min_length: 9
   number_max_length: 16
-  uuid: ac66a063-8271-4e8f-acae-79385c20ccb8
+  uuid: 4f4da740-b006-4ba2-9c66-c8eb1d613c44
   country_id: *ae
-  network_id: *international_toll_free_services_(itfs)
-- id: 453079
+  network_id: *ae_international_toll_free_services_(itfs)
+- id: 453080
   prefix: '971900'
   number_min_length: 12
   number_max_length: 12
-  uuid: b5fdebea-f4c0-464c-b0e5-3619c6d26385
+  uuid: 1732634c-dfbb-4555-95f7-43d04a20da87
   country_id: *ae
-  network_id: *premium_rate_services_shared_revenue_services
-- id: 453110
+  network_id: *ae_premium_rate_services_shared_revenue_services
+- id: 453111
   prefix: '9719002'
   number_min_length: 13
   number_max_length: 13
-  uuid: 99697063-038f-4869-a80c-6554bd8bff7e
+  uuid: 90658442-86da-4ed7-ba90-e1a5e8fba087
   country_id: *ae
-  network_id: *premium_rate_data_services_shared_revenue_data_services
+  network_id: *ae_premium_rate_data_services_shared_revenue_data_services
 # Mobile Prefixes
 - id: 146199
   prefix: '97150'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3244ee48-ebde-4e85-9bae-80a31d0470d8
+  uuid: ea1615f3-3214-44e3-8e81-8926089ff0d5
   country_id: *ae
-  network_id: *e&_etisalat_and_mobile
+  network_id: *ae_e&_etisalat_and_mobile
 - id: 154193
   prefix: '97152'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4e08ac71-0634-4a0a-aa2b-4404c96e953e
+  uuid: 79b57a39-3339-429d-86c8-32de8a9766f8
   country_id: *ae
-  network_id: *du_mobile
+  network_id: *ae_du_mobile
 - id: 161632
   prefix: '97155'
   number_min_length: 12
   number_max_length: 12
-  uuid: f74b6544-1f62-47c1-9316-e06662c27a4d
+  uuid: 198a9eaf-0eb7-4858-8fec-5ea69f44b0d3
   country_id: *ae
-  network_id: *du_mobile
+  network_id: *ae_du_mobile
 - id: 275284
   prefix: '97156'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3844f61c-7fb1-44c3-b3bb-7b549a1f9f5a
+  uuid: 19b5592d-459f-4ce7-86e4-3c96344e14b4
   country_id: *ae
-  network_id: *e&_etisalat_and_mobile
+  network_id: *ae_e&_etisalat_and_mobile
 - id: 276603
   prefix: '971'
   number_min_length: 10
   number_max_length: 10
-  uuid: 7bd07c02-78fe-4ab7-be8e-529a10183c9e
+  uuid: f9d411ec-4410-4c29-aff8-c9c69d1eac67
   country_id: *ae
-  network_id: *mobile
+  network_id: *ae_mobile
 # Country code Prefixes
 - id: 247812
   prefix: '971'
   number_min_length: 5
   number_max_length: 12
-  uuid: 4b184aab-e7ad-4718-b1d0-e924fb0298c0
+  uuid: dd121bf7-496b-43b0-89c2-4213bb6c82a9
   country_id: *ae
-  network_id: *fixed
+  network_id: *ae_fixed_cc

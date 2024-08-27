@@ -1,64 +1,64 @@
 country_id: &ug 221
 networks:
 # Fixed Networks
-- id: 3012
+- id: &ug_fixed 3306
   name: UG Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: dc2fd3d6-4c46-4e52-b5ed-4889ed015ba0
   type_id: 12
 # Supplementary services Networks
-- id: &sms/mms_services 3740
-  name: UG Sms/mms services
-  uuid: 5cd79a08-7466-4e6f-bd77-63390d753421
+- id: &ug_sms/mms_services 4521
+  name: UG Sms/Mms Services
+  uuid: ede0e2fa-bd82-4f98-8c57-cc1bb7e3643c
   type_id: 14
-- id: &special_services 3075
-  name: UG Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &ug_special_services 5052
+  name: UG Special Services
+  uuid: d0b2b077-48d4-48a9-b3b9-74256c2b0a87
   type_id: 14
-- id: &freephone_services 3382
-  name: UG Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &ug_freephone_services 6913
+  name: UG Freephone Services
+  uuid: f1636874-a569-434a-81f6-f420eb2d3337
   type_id: 14
-- id: &special_services_(local_rate) 5005
-  name: UG Special services (local rate)
-  uuid: c0e70096-9ad3-4603-bd56-8f69592bc9fb
+- id: &ug_special_services_(local_rate) 7001
+  name: UG Special Services (Local Rate)
+  uuid: 96a54bf8-04a9-44b0-9420-6024c6eb88a5
   type_id: 14
-- id: &special_services_(single_charge) 5009
-  name: UG Special services (single charge)
-  uuid: 39609f6d-ac82-46ec-b67e-5737e018e210
+- id: &ug_special_services_(single_charge) 7008
+  name: UG Special Services (Single Charge)
+  uuid: 7ecfef15-2883-4f58-96a5-7f129614b25f
   type_id: 14
-- id: &premium_rate_services 3232
-  name: UG Premium rate services
-  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+- id: &ug_premium_rate_services 7128
+  name: UG Premium Rate Services
+  uuid: c1bfcebf-c821-4b07-baa5-17616db0ea96
   type_id: 14
 # Country code Networks
-- id: &fixed 3012
-  name: UG Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &ug_fixed_cc 4834
+  name: UG Fixed Cc
+  uuid: 2e704b80-e4a8-47cf-9a15-9e96741b36c3
   type_id: 17
 # Mobile Networks
-- id: &airtel_mobile 3142
-  name: UG Airtel mobile
-  uuid: 08f04e1d-14e6-4fcf-82bb-fd812972b861
+- id: &ug_airtel_mobile 6565
+  name: UG Airtel Mobile
+  uuid: 39e0926c-1094-43ee-af8b-55e064187943
   type_id: 3
-- id: &utel_mobile 4839
-  name: UG Utel mobile
-  uuid: d2ff9b49-c97c-4bac-9898-377ce2b6a892
+- id: &ug_utel_mobile 6637
+  name: UG Utel Mobile
+  uuid: bf15dcd9-f3da-4156-9926-129440db121f
   type_id: 3
-- id: &smile_mobile 4170
-  name: UG Smile mobile
-  uuid: 4a2a305f-4ce7-46b0-8291-1653f78f59b6
+- id: &ug_smile_mobile 6673
+  name: UG Smile Mobile
+  uuid: a04f85fb-6a0a-4669-95cb-4f6728881255
   type_id: 3
-- id: &hamilton_telecom_mobile 4874
-  name: UG Hamilton telecom mobile
-  uuid: 7b286f12-5b68-4ce3-a2dc-b32abcb0f8da
+- id: &ug_hamilton_telecom_mobile 6691
+  name: UG Hamilton Telecom Mobile
+  uuid: 34be22db-08a6-496a-ad78-b4c3bd39f5b6
   type_id: 3
-- id: &lycamobile_mobile 3237
-  name: UG Lycamobile mobile
-  uuid: a31d02bb-bc45-4180-8c45-05781c742438
+- id: &ug_lycamobile_mobile 6693
+  name: UG Lycamobile Mobile
+  uuid: 8ce816d1-bc14-4d82-a0e9-bd64c827cbc1
   type_id: 3
-- id: &mtn_mobile 3090
-  name: UG Mtn mobile
-  uuid: 9254fa34-b4e4-4885-b7b6-0fa059bb3a8a
+- id: &ug_mtn_mobile 6769
+  name: UG Mtn Mobile
+  uuid: 467901f2-10b7-4dc0-a882-fe13b386fd6d
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -66,415 +66,415 @@ network_prefixes:
   prefix: '25631'
   number_min_length: 12
   number_max_length: 12
-  uuid: c77a312a-e916-4a2a-9fad-c60c9addd3ce
+  uuid: c114dda4-9d0e-4592-a618-52af6901bc71
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 68027
   prefix: '25633'
   number_min_length: 12
   number_max_length: 12
-  uuid: 49ff2201-ff10-4b1b-aa78-b8ffd377022e
+  uuid: 6a18bea2-3c15-4c75-bac2-3c0a8714361e
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 78870
   prefix: '25635'
   number_min_length: 12
   number_max_length: 12
-  uuid: 58a6a418-2814-4333-bc6c-74a4b1b03813
+  uuid: e3559aeb-8769-4585-a7b0-977520c0800b
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 80969
   prefix: '25636'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0c9fae92-40ec-4fbd-9f4a-dac41efac1fa
+  uuid: b062d9e8-0399-4944-b53b-ff284072c997
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 82016
   prefix: '25637'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2452a6c1-50b4-4331-ab77-c33ef6267562
+  uuid: 531ef33c-590f-4c1a-a020-5c4c50886c32
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 83721
   prefix: '25638'
   number_min_length: 12
   number_max_length: 12
-  uuid: 485dcb46-c1f1-4abf-839c-7c85132ef57a
+  uuid: 1f53e4da-7fa6-416b-afec-0b570c9b3bac
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 86551
   prefix: '256'
   number_min_length: 10
   number_max_length: 10
-  uuid: e3137858-b726-4374-b780-9de69d059c18
+  uuid: e65d144e-6b46-435e-9344-70d896635a5d
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 91035
   prefix: '25641'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8f369c26-6f03-402a-9d8d-a198f4bde999
+  uuid: dcf395b8-8feb-48b1-a2d5-c0e9eb13a20c
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 106141
   prefix: '25642'
   number_min_length: 12
   number_max_length: 12
-  uuid: db8cda70-3385-42bf-a95c-ea746741b652
+  uuid: 423fec25-e513-4e24-95c6-be500c2117e9
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 107553
   prefix: '25643'
   number_min_length: 12
   number_max_length: 12
-  uuid: 49b12480-0417-4f0d-a458-c96c251b9ead
+  uuid: 295f789c-8d23-4d8f-89eb-c2e48f8771d7
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 122453
   prefix: '256473'
   number_min_length: 12
   number_max_length: 12
-  uuid: c0463a0d-6c3a-4614-97bd-097c2cbf9c12
+  uuid: 70c036df-656c-4c02-9ad6-57094a867395
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 124303
   prefix: '25645'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5a9e8932-2f49-4cef-8fc7-8f1f76fda12a
+  uuid: 93c45c22-9c97-4cbc-8100-8797bf608fee
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 126381
   prefix: '25646'
   number_min_length: 12
   number_max_length: 12
-  uuid: d198de68-90a7-4a4a-9657-2618edd0c286
+  uuid: 4589d491-407a-4090-934b-c80ac498a00a
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 126850
   prefix: '256464'
   number_min_length: 12
   number_max_length: 12
-  uuid: d786489e-da7e-4173-a1b5-084a357fa1a5
+  uuid: eba38c2b-23c8-46a2-a241-0d1e387fc46c
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 127349
   prefix: '256465'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3e47afce-d518-4deb-87c1-6f9ad1ecd546
+  uuid: 4cb57d1c-02b4-4b30-ba6a-51a4f5690e2b
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 129241
   prefix: '256471'
   number_min_length: 12
   number_max_length: 12
-  uuid: 51c0c2ff-1df9-4490-b014-2b816c59eab5
+  uuid: 482dc3bc-e7b0-43c9-928e-6d586f17eb12
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 130072
   prefix: '256476'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1aaec335-a5a9-4783-acd1-38403672efdf
+  uuid: 98b2b177-aea3-4670-953f-012ec332c1ef
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 132621
   prefix: '256481'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9cc77594-c31a-4a23-ac76-b25f7a19fb37
+  uuid: bcc6c1e7-98f9-4f20-ba56-9d32375939f2
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 133939
   prefix: '256483'
   number_min_length: 12
   number_max_length: 12
-  uuid: 995a5f33-56cd-4336-94f6-7413929ddc8a
+  uuid: 5c2dde75-8f85-43d8-8ed8-9e4414670503
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 143178
   prefix: '256485'
   number_min_length: 12
   number_max_length: 12
-  uuid: bca5ff8f-a5c0-4dd6-bb44-2eec32731769
+  uuid: c6ba7ef9-02b5-486e-a499-7c77c5edfcde
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 143349
   prefix: '256486'
   number_min_length: 12
   number_max_length: 12
-  uuid: 786e3516-0c76-4adc-91fa-4428b9ef3ca6
+  uuid: e415a45a-afda-4273-81e6-0a651dfd9446
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 145194
   prefix: '256496'
   number_min_length: 12
   number_max_length: 12
-  uuid: ad6fb53e-ea50-4a61-aa61-4b8e255e9a22
+  uuid: 7a49a5a4-8ab6-412a-bae0-ec175c420c72
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 - id: 257688
   prefix: '25620'
   number_min_length: 12
   number_max_length: 12
-  uuid: 689e1374-2c71-4371-8e83-397eee6e0bda
+  uuid: 9acc93fe-14a6-4294-8a85-24212c6fb7ab
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed
 # Supplementary services Prefixes
 - id: 246731
   prefix: '2566'
   number_min_length: 8
   number_max_length: 8
-  uuid: ca839986-8525-4d71-a462-2e03a829534a
+  uuid: cfce7254-65b4-44ff-a743-82da4dce3952
   country_id: *ug
-  network_id: *sms/mms_services
+  network_id: *ug_sms/mms_services
 - id: 248392
   prefix: '2561'
   number_min_length: 7
   number_max_length: 7
-  uuid: c4974664-445c-49bd-8b73-b29e4d28ce98
+  uuid: d3a6b221-2327-4cbf-ad0f-03228e94032d
   country_id: *ug
-  network_id: *special_services
+  network_id: *ug_special_services
 - id: 253144
   prefix: '2569'
   number_min_length: 7
   number_max_length: 7
-  uuid: 29ba7b37-dc8e-4c21-90f5-81f26a7ce395
+  uuid: a2969e28-b19b-4798-ad22-80a30795fc0c
   country_id: *ug
-  network_id: *special_services
+  network_id: *ug_special_services
 - id: 258637
   prefix: '2567'
   number_min_length: 8
   number_max_length: 8
-  uuid: 8fe4be11-c1c8-4d9f-8111-58bf360cedd9
+  uuid: a54bd561-feeb-4057-bb11-ca8e85d11567
   country_id: *ug
-  network_id: *sms/mms_services
+  network_id: *ug_sms/mms_services
 - id: 259971
   prefix: '2568'
   number_min_length: 8
   number_max_length: 8
-  uuid: 755f293d-9613-4b39-823d-d1eef3bd4fb2
+  uuid: 7857cdae-1bec-4747-92c2-2b63e57c8467
   country_id: *ug
-  network_id: *sms/mms_services
-- id: 400684
+  network_id: *ug_sms/mms_services
+- id: 400685
   prefix: '256800'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9b72abd8-ddc7-486b-bb77-86571f06387c
+  uuid: 8b4e7ce1-6851-4396-9669-c98c1ca227d9
   country_id: *ug
-  network_id: *freephone_services
-- id: 415784
+  network_id: *ug_freephone_services
+- id: 415785
   prefix: '256810'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2a203c58-61d2-4581-861f-c02409363171
+  uuid: 0b59973b-f669-4f97-86a9-b918411ab057
   country_id: *ug
-  network_id: *special_services_(local_rate)
-- id: 419758
+  network_id: *ug_special_services_(local_rate)
+- id: 419759
   prefix: '256820'
   number_min_length: 12
   number_max_length: 12
-  uuid: eae66810-62ea-41b9-a155-c6b498bd6748
+  uuid: a7caa0a5-2fbe-46b3-9dc3-12afd11fa786
   country_id: *ug
-  network_id: *special_services_(single_charge)
-- id: 447719
+  network_id: *ug_special_services_(single_charge)
+- id: 447720
   prefix: '256901'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8e273eeb-ab7b-48a7-9904-5b39f8e30a9d
+  uuid: e88a4d40-5804-4482-909c-730a4c6df8ab
   country_id: *ug
-  network_id: *premium_rate_services
-- id: 453669
+  network_id: *ug_premium_rate_services
+- id: 453670
   prefix: '256902'
   number_min_length: 12
   number_max_length: 12
-  uuid: cc31cc74-8af2-4e17-8c91-7a651623e437
+  uuid: dd18a2a7-c7a4-4e1d-a132-6fbb3c35e929
   country_id: *ug
-  network_id: *premium_rate_services
-- id: 453719
+  network_id: *ug_premium_rate_services
+- id: 453720
   prefix: '256903'
   number_min_length: 12
   number_max_length: 12
-  uuid: 48e2c503-61f9-4fdb-910c-5f1fbe8f990e
+  uuid: 2cc27206-1a34-4d61-a9e9-24c12469b263
   country_id: *ug
-  network_id: *premium_rate_services
+  network_id: *ug_premium_rate_services
 # Country code Prefixes
 - id: 247996
   prefix: '256'
   number_min_length: 6
   number_max_length: 10
-  uuid: a70196f5-b6a0-44df-b48e-c0eccf5bbe85
+  uuid: f73f72ca-2e85-4f36-a709-0f459ebd23ff
   country_id: *ug
-  network_id: *fixed
+  network_id: *ug_fixed_cc
 # Mobile Prefixes
 - id: 340402
   prefix: '25670'
   number_min_length: 12
   number_max_length: 12
-  uuid: 66eccb55-7960-4996-ae1e-0ab13dee86ae
+  uuid: 559ff4e3-6288-41dc-8755-84450f0057a2
   country_id: *ug
-  network_id: *airtel_mobile
+  network_id: *ug_airtel_mobile
 - id: 352949
   prefix: '25671'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8b544593-a89a-4cf0-ba37-b9f174e0b343
+  uuid: 928d0db1-9fc4-4b2a-87eb-c53e56302df9
   country_id: *ug
-  network_id: *utel_mobile
-- id: 357679
+  network_id: *ug_utel_mobile
+- id: 357680
   prefix: '256720'
   number_min_length: 13
   number_max_length: 13
-  uuid: 968ebbb5-d800-4f93-8e22-90d649547f64
+  uuid: 964887c9-5ffd-4f5c-9e61-a068baf97190
   country_id: *ug
-  network_id: *smile_mobile
-- id: 358076
+  network_id: *ug_smile_mobile
+- id: 358077
   prefix: '2567240'
   number_min_length: 14
   number_max_length: 14
-  uuid: 579b9cff-5eb4-4cd6-91d8-c80702a92f4a
+  uuid: 4e7d1164-fa1d-41b3-b1ad-08df6d8ddcb4
   country_id: *ug
-  network_id: *hamilton_telecom_mobile
-- id: 358180
+  network_id: *ug_hamilton_telecom_mobile
+- id: 358181
   prefix: '2567260'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0366ee16-3cdc-44d7-969d-c6a664506ed4
+  uuid: 2893892f-63ae-496e-9f73-c2e0a6c9a10e
   country_id: *ug
-  network_id: *lycamobile_mobile
-- id: 371673
+  network_id: *ug_lycamobile_mobile
+- id: 371674
   prefix: '256740'
   number_min_length: 13
   number_max_length: 13
-  uuid: bfa378c0-dd46-4b4d-9b03-fa74eb262bd7
+  uuid: 3d97c2f4-a22a-43df-8885-e002689d4ac0
   country_id: *ug
-  network_id: *airtel_mobile
-- id: 371722
+  network_id: *ug_airtel_mobile
+- id: 371723
   prefix: '256741'
   number_min_length: 13
   number_max_length: 13
-  uuid: 52331367-107b-43fd-8b4a-a53c52201b1d
+  uuid: 307f78cb-c094-4080-9b36-fc6606d7388a
   country_id: *ug
-  network_id: *airtel_mobile
-- id: 371749
+  network_id: *ug_airtel_mobile
+- id: 371750
   prefix: '256742'
   number_min_length: 13
   number_max_length: 13
-  uuid: 43abf2f7-fdf4-4166-9ee8-d0efb35f35e2
+  uuid: 6c51cee8-4ad5-4725-94a8-d5b62a426a45
   country_id: *ug
-  network_id: *airtel_mobile
-- id: 371798
+  network_id: *ug_airtel_mobile
+- id: 371799
   prefix: '256743'
   number_min_length: 13
   number_max_length: 13
-  uuid: a7905d80-d823-45d1-8094-032e74b49cae
+  uuid: e60eea50-6e93-4fc3-8aa9-228fdb0ed8d3
   country_id: *ug
-  network_id: *airtel_mobile
-- id: 371835
+  network_id: *ug_airtel_mobile
+- id: 371836
   prefix: '256744'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9da9ef28-ea37-4e2d-8d18-b756c810e0fa
+  uuid: f3c12735-e71b-4a94-a111-a1773175a54f
   country_id: *ug
-  network_id: *airtel_mobile
-- id: 376998
+  network_id: *ug_airtel_mobile
+- id: 376999
   prefix: '25675'
   number_min_length: 12
   number_max_length: 12
-  uuid: 339c7e3e-ccf2-4adc-bb4d-0b43723fa3e0
+  uuid: 6900b884-1f15-4dde-b2be-47e50d873901
   country_id: *ug
-  network_id: *airtel_mobile
-- id: 379103
+  network_id: *ug_airtel_mobile
+- id: 379104
   prefix: '256760'
   number_min_length: 13
   number_max_length: 13
-  uuid: d07ecb8e-c5cd-4c74-9300-2b069d8efd05
+  uuid: ae643087-aade-45ed-bb18-5b10721e1a9b
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379147
+  network_id: *ug_mtn_mobile
+- id: 379148
   prefix: '256761'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4ca83758-1440-4193-b163-4c0377fc42a0
+  uuid: ad8aa6ef-999d-42d2-b222-61021de0d167
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379206
+  network_id: *ug_mtn_mobile
+- id: 379207
   prefix: '256762'
   number_min_length: 13
   number_max_length: 13
-  uuid: b2abbb9b-bb47-49be-a942-ebb19b8cd553
+  uuid: e58daa82-d7ca-40b2-bf33-c419d9d14966
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379232
+  network_id: *ug_mtn_mobile
+- id: 379233
   prefix: '256763'
   number_min_length: 13
   number_max_length: 13
-  uuid: 796e46bd-7a1f-41b9-8361-f93f4bf5f8a6
+  uuid: 25d95fbb-7fd3-4a56-bc9f-d9a0ff90fdda
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379257
+  network_id: *ug_mtn_mobile
+- id: 379258
   prefix: '256764'
   number_min_length: 13
   number_max_length: 13
-  uuid: f516a87c-2df4-41f2-bc0a-aec32fe00a96
+  uuid: de7088ff-4cb8-4ea6-aaf9-2fd075fac0ff
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379404
+  network_id: *ug_mtn_mobile
+- id: 379405
   prefix: '256765'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1967a845-d58a-403b-9c01-49a33d3156e6
+  uuid: 621e28f2-dcc8-4e37-a1ad-9e7553cd4e4d
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379437
+  network_id: *ug_mtn_mobile
+- id: 379438
   prefix: '2567660'
   number_min_length: 14
   number_max_length: 14
-  uuid: 86c408ce-c9ee-4fe3-bfe7-6178e42f9f52
+  uuid: b7057f59-3b0f-4707-83ef-d665b8119a74
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379442
+  network_id: *ug_mtn_mobile
+- id: 379443
   prefix: '2567661'
   number_min_length: 14
   number_max_length: 14
-  uuid: 17095819-b7e9-4e6e-8751-b155e26427dc
+  uuid: 5a8c8851-81a8-4aa7-9388-2b28340a1316
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379447
+  network_id: *ug_mtn_mobile
+- id: 379448
   prefix: '2567662'
   number_min_length: 14
   number_max_length: 14
-  uuid: 492ce0c9-f4e6-44ef-8490-1bbf8c447aef
+  uuid: 30045324-d4a3-491b-b52a-f570bec6cb9c
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379452
+  network_id: *ug_mtn_mobile
+- id: 379453
   prefix: '2567663'
   number_min_length: 14
   number_max_length: 14
-  uuid: 669e471b-54ea-4e24-b3df-5bbb2bd15e78
+  uuid: 835664ce-3109-434f-938c-46cf26efb466
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 379457
+  network_id: *ug_mtn_mobile
+- id: 379458
   prefix: '2567664'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2bd5c15f-6fb5-432b-88ae-b35fb6b12e7b
+  uuid: 2581577b-c724-43a2-8ff2-b3f811269d00
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 385904
+  network_id: *ug_mtn_mobile
+- id: 385905
   prefix: '25677'
   number_min_length: 12
   number_max_length: 12
-  uuid: c9d5794a-8820-4f61-94ef-e5877011fd40
+  uuid: 2ffd228e-8542-47ff-b746-b306ba14b06b
   country_id: *ug
-  network_id: *mtn_mobile
-- id: 395770
+  network_id: *ug_mtn_mobile
+- id: 395771
   prefix: '25678'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0333eb53-4f1f-4c2d-9876-4ab98e8c7082
+  uuid: 6b2502b7-f3cf-45b3-98c1-3a47afb05b7b
   country_id: *ug
-  network_id: *mtn_mobile
+  network_id: *ug_mtn_mobile

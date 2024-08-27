@@ -1,69 +1,69 @@
 country_id: &ve 230
 networks:
 # Fixed Networks
-- id: 3012
+- id: &ve_fixed 3125
   name: VE Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+  uuid: 208b9e69-c362-45c7-b101-e3fde998d550
   type_id: 12
 # Supplementary services Networks
-- id: &personal_number_services 3280
-  name: VE Personal number services
-  uuid: 5046ac1e-0315-4299-80a1-0ebe7ea88d71
+- id: &ve_personal_number_services 3430
+  name: VE Personal Number Services
+  uuid: 1d9b9376-0ad3-41e6-8b5e-479d5266272b
   type_id: 14
-- id: &national_access_number_services 3416
-  name: VE National access number services
-  uuid: 37d6126b-a41a-4299-9360-6ad34eb5d61b
+- id: &ve_national_access_number_services 3617
+  name: VE National Access Number Services
+  uuid: a9d03190-1cc8-4c3b-96e8-144f38f32048
   type_id: 14
-- id: &special_services 3075
-  name: VE Special services
-  uuid: 2301e5c7-71b4-4149-b000-b70b0559244e
+- id: &ve_special_services 5056
+  name: VE Special Services
+  uuid: f02f5565-1ab2-41e7-bec5-62257538d4f2
   type_id: 14
-- id: &virtual_private_network 3426
-  name: VE Virtual private network
-  uuid: 4b16a437-d669-4316-820b-8919da3af9be
+- id: &ve_virtual_private_network 6348
+  name: VE Virtual Private Network
+  uuid: 617bcfce-da20-4ee3-aca6-3526700d98cd
   type_id: 14
-- id: &freephone_services 3382
-  name: VE Freephone services
-  uuid: 769da202-8247-4b0e-b2ec-94a9ddf89540
+- id: &ve_freephone_services 6916
+  name: VE Freephone Services
+  uuid: d9cacfe4-8abe-4c10-9011-ad43c69e6bab
   type_id: 14
-- id: &adults_entertainment_services 3415
-  name: VE Adults entertainment services
-  uuid: f17af3e1-f450-4332-a75e-4c848ec21565
+- id: &ve_adults_entertainment_services 7130
+  name: VE Adults Entertainment Services
+  uuid: d25cea15-41d2-4799-bc73-fcf54bd2c778
   type_id: 14
-- id: &internet_access_services 3707
-  name: VE Internet access services
-  uuid: 2eb4f8e0-cee6-4709-be31-4d1f6fe90e42
+- id: &ve_internet_access_services 7134
+  name: VE Internet Access Services
+  uuid: 1494ab94-9444-4cbb-9aff-059ce31ad85a
   type_id: 14
-- id: &premium_rate_services 3232
-  name: VE Premium rate services
-  uuid: bb28e3f0-2121-4b5d-aa00-73490d576269
+- id: &ve_premium_rate_services 7209
+  name: VE Premium Rate Services
+  uuid: 09278819-ca63-4dcb-aebb-3989d44612b7
   type_id: 14
 # Mobile Networks
-- id: &movistar_mobile 3005
-  name: VE Movistar mobile
-  uuid: 9729ba2a-6e85-4046-9d02-9cc0ee4767f9
+- id: &ve_movistar_mobile 3445
+  name: VE Movistar Mobile
+  uuid: 473ae603-3303-4d07-b2c1-40c8f7ac4f99
   type_id: 3
-- id: &digitel_mobile 3296
-  name: VE Digitel mobile
-  uuid: cab07c08-6c29-4d83-b3b3-aad5a4cc8086
+- id: &ve_digitel_mobile 3451
+  name: VE Digitel Mobile
+  uuid: 07d856de-cdae-401a-8f19-e1647e96cc7d
   type_id: 3
-- id: &movilnet_mobile 3297
-  name: VE Movilnet mobile
-  uuid: 979ec3f4-6d3d-4bb5-8cf4-9de264cead2e
+- id: &ve_movilnet_mobile 3452
+  name: VE Movilnet Mobile
+  uuid: a63f6653-1dd7-4cb2-8b19-b7d3b872fc30
   type_id: 3
-- id: &mobile 3013
+- id: &ve_mobile 3476
   name: VE Mobile
-  uuid: 42254588-714d-4be8-b9ae-85798d8d634f
+  uuid: 960cabac-8f87-4f69-aabd-cdd3af33d3dd
   type_id: 3
 # Satellite Networks
-- id: &globalstar_satellite 3110
-  name: VE Globalstar satellite
-  uuid: b2b0c951-d342-41c1-a650-760ec0a121df
+- id: &ve_globalstar_satellite 3446
+  name: VE Globalstar Satellite
+  uuid: 305239ac-5265-41e3-9ffb-2fde11a8d825
   type_id: 16
 # Country code Networks
-- id: &fixed 3012
-  name: VE Fixed
-  uuid: 25d85339-1dee-4beb-b1db-526b64690e17
+- id: &ve_fixed_cc 4839
+  name: VE Fixed Cc
+  uuid: d849c782-6033-4ed0-b4b7-fa8fbb6ccd87
   type_id: 17
 network_prefixes:
 # Fixed Prefixes
@@ -71,528 +71,528 @@ network_prefixes:
   prefix: '58234'
   number_min_length: 12
   number_max_length: 12
-  uuid: fb4aacb3-7f0b-4486-82ce-1c985a84403a
+  uuid: 0d3c0d73-9c8e-4d77-af60-088793147558
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 18981
   prefix: '58237'
   number_min_length: 12
   number_max_length: 12
-  uuid: cc2da3cb-1017-4b58-ae47-c1b5119ae8db
+  uuid: e36a36db-c004-45c3-8021-05e38d900887
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 19097
   prefix: '58238'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8d74851e-f518-4677-aa67-7b859221e923
+  uuid: edabac4a-d82a-4e2a-a02a-796c88e20497
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 19605
   prefix: '58243'
   number_min_length: 12
   number_max_length: 12
-  uuid: b49471f8-9173-4c8b-ae5e-d7b47f191bb4
+  uuid: 738cbe53-06a0-4167-a04b-e553ddad235e
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 19912
   prefix: '58244'
   number_min_length: 12
   number_max_length: 12
-  uuid: d6a2476c-2661-44e7-b81a-cb63bc73fbdb
+  uuid: 0b6fc47a-b1cb-4279-a719-6fa514930619
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 20375
   prefix: '58245'
   number_min_length: 12
   number_max_length: 12
-  uuid: 77ff8448-8145-4a74-bd3a-cd881f5bf6a6
+  uuid: aef7c368-23ac-441d-8ee5-e12c9fcd7aa9
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 20663
   prefix: '58248'
   number_min_length: 12
   number_max_length: 12
-  uuid: ba25dad7-246e-4919-84e6-6ae7087a5ed2
+  uuid: f126471c-3668-4374-89b8-8d36c18bd58b
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 22263
   prefix: '58251'
   number_min_length: 12
   number_max_length: 12
-  uuid: cac7dcfa-ebf9-457e-b739-e68196d053aa
+  uuid: aacc26f1-cfbe-4502-847b-aca708141ed4
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 22782
   prefix: '58252'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1b675d40-cca7-4afe-9d96-f84b23fd2ccc
+  uuid: 49afb475-6be1-49cc-b07c-2c111a7d461b
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 23113
   prefix: '58257'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4c9da5aa-e96b-4edf-93b3-2df9fa2bf08d
+  uuid: 62c2b947-7073-46c8-ad85-132ae5c6c6b5
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 23135
   prefix: '58258'
   number_min_length: 12
   number_max_length: 12
-  uuid: 14c04de9-cdf5-4706-90d9-74ace0a40ffa
+  uuid: dda68d4b-67fd-49f0-b26f-8be95f00395a
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 23176
   prefix: '58259'
   number_min_length: 12
   number_max_length: 12
-  uuid: af328878-3d85-4368-adf1-e280963cfab0
+  uuid: adb749e9-b60d-4d13-832e-826345f43a4d
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 23715
   prefix: '58261'
   number_min_length: 12
   number_max_length: 12
-  uuid: f5cfb375-913a-4864-a7c4-1661793e2f80
+  uuid: 77f7bf43-c928-4ff2-b3b1-ee507a4231f9
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 23742
   prefix: '58262'
   number_min_length: 12
   number_max_length: 12
-  uuid: 243956bb-876f-436a-803c-6fcb155e590d
+  uuid: 2f6080f5-6fbe-4c7e-879c-26d40288a9c1
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 24397
   prefix: '58263'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7ec2018c-5087-453a-9154-59ff45ce226d
+  uuid: 8d255baf-a2f3-4002-b957-44a931b838ca
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 26070
   prefix: '58273'
   number_min_length: 12
   number_max_length: 12
-  uuid: e5c785a1-2e68-4d41-9c53-dc1d858a3cc6
+  uuid: b9d7ab3e-3ab4-45ca-b6c9-383912c312d2
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 26338
   prefix: '58274'
   number_min_length: 12
   number_max_length: 12
-  uuid: 091c6f6c-3dfb-4805-9a98-3e53362afb40
+  uuid: 0279f5db-6393-489f-8e09-27d1b46d6ada
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 26671
   prefix: '58275'
   number_min_length: 12
   number_max_length: 12
-  uuid: 70a99fd3-c300-4ebf-a321-e9d1b41df098
+  uuid: d5138ad2-c552-4d8d-a475-1031a65e72c2
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 26824
   prefix: '58281'
   number_min_length: 12
   number_max_length: 12
-  uuid: 38056001-ecfa-435b-9f45-8f1e9cd88f36
+  uuid: 9a7506dc-1fb0-4d7d-813c-ec4fa13dac28
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 27497
   prefix: '58235'
   number_min_length: 12
   number_max_length: 12
-  uuid: b0400196-61c2-4a44-b2f4-c2e33a275f1e
+  uuid: 34d81988-489f-44c1-bff8-ed651989bac4
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 27774
   prefix: '58239'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9c3dcbf3-6ba6-4061-aa50-eb66661a8d36
+  uuid: 4eb8e975-6543-4571-bb3e-af9b444f71fe
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 28457
   prefix: '58240'
   number_min_length: 12
   number_max_length: 12
-  uuid: 302313df-ed15-4547-bf94-e1cb37675da5
+  uuid: 0af6f872-c663-4534-a0ae-03b833548ecc
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 29261
   prefix: '58241'
   number_min_length: 12
   number_max_length: 12
-  uuid: 06e4b14d-eb39-452a-ad21-4c3671ed6a57
+  uuid: 6bf2924d-b571-4254-b814-772c740e65d3
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 29706
   prefix: '58242'
   number_min_length: 12
   number_max_length: 12
-  uuid: a032370c-b2e4-4a2d-b97e-99b375db6282
+  uuid: 5e4d8afe-8e9c-47d6-91bf-14a29c2c35f3
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 29906
   prefix: '58246'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1ad4a06c-340d-444f-bacd-a69ace074ffa
+  uuid: 42967d7b-3372-453a-91cb-bde2b3279d09
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 30647
   prefix: '58247'
   number_min_length: 12
   number_max_length: 12
-  uuid: 45407b17-c5cf-462a-8373-3627860c038f
+  uuid: 1e21b071-f1ce-42b0-aed3-f4b77d94b718
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 31075
   prefix: '58249'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2255c8a3-fcdc-4d91-b5df-1944a975be52
+  uuid: 4fe904e9-72fa-4ef1-8177-f75e58811b5f
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 32746
   prefix: '58253'
   number_min_length: 12
   number_max_length: 12
-  uuid: 72d347cd-2e5c-4699-a192-3f0cdf1ce402
+  uuid: f1b3710d-1523-4380-b832-2bead282108e
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 33282
   prefix: '58254'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1edd5f9c-d129-4ec4-80ac-55e3bf247d72
+  uuid: 683307cf-e1f7-4bcd-b786-b746a045de78
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 33948
   prefix: '58255'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8d4012ee-7179-4c99-8fba-c247e66c194c
+  uuid: 6c419f34-36e5-4071-bd11-9caa96e4fe83
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 33988
   prefix: '58256'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0aeec3d3-faae-47eb-977d-f57616874e4b
+  uuid: 121a063c-8c30-40b2-aa74-56a7b39655fd
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 34806
   prefix: '58264'
   number_min_length: 12
   number_max_length: 12
-  uuid: dcd3339e-1259-44ed-b958-3f5d47c523ac
+  uuid: 652727b6-811d-4c04-9101-14b60b56ccd0
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 34873
   prefix: '58265'
   number_min_length: 12
   number_max_length: 12
-  uuid: 514fde41-858d-4ba2-9889-85bbf60e696e
+  uuid: 4bd4c6ac-040e-4a41-8bec-72623e4be29a
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 34922
   prefix: '58266'
   number_min_length: 12
   number_max_length: 12
-  uuid: dec75724-0331-4934-b0fc-2f45661b54c5
+  uuid: 0f270023-31ef-406e-80ee-732dbb4d2d47
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 34962
   prefix: '58267'
   number_min_length: 12
   number_max_length: 12
-  uuid: 96550574-aab0-4aaa-90a6-2c7d5a3ce41c
+  uuid: e694b0ce-1e90-4937-86f9-dfe7d0963a52
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 35789
   prefix: '58268'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6df2a986-addb-4ac4-957e-dd8aaa203cdf
+  uuid: 701f0996-b458-4e69-b9dc-561c492f6c1b
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 35872
   prefix: '58269'
   number_min_length: 12
   number_max_length: 12
-  uuid: a8840213-8cf4-4eb4-8ba3-d364e80fc577
+  uuid: 4e65b537-d510-4f87-963a-b44ae55352b5
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 36370
   prefix: '58271'
   number_min_length: 12
   number_max_length: 12
-  uuid: 43570775-9ea2-4046-8483-e995798af25e
+  uuid: b8df70a6-dbd9-4a7c-a928-01983f971d38
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 36871
   prefix: '58272'
   number_min_length: 12
   number_max_length: 12
-  uuid: ba0a5d83-3f8f-4a56-ac10-332e7f8267d0
+  uuid: 0ca9f7cb-f782-41ad-b494-3eeeb2f0e1d5
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 37262
   prefix: '58276'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4001be12-c446-4be2-8032-40e176367d3f
+  uuid: ddc08209-f3f8-4cd2-bcf4-d53dfe3a2ee9
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 37808
   prefix: '58277'
   number_min_length: 12
   number_max_length: 12
-  uuid: 464c93f3-026e-4886-bdf7-bf8494b3fe44
+  uuid: be080686-7cf3-496d-8649-f68b9ba90618
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 37841
   prefix: '58278'
   number_min_length: 12
   number_max_length: 12
-  uuid: 58787716-3408-4cd6-ad20-32e2e0cfa21d
+  uuid: 08c426e2-d560-42a4-a9ba-d11781eeacd4
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 38079
   prefix: '58279'
   number_min_length: 12
   number_max_length: 12
-  uuid: 08cd1f66-f42e-4f57-acd2-dda68fcb05da
+  uuid: a30fcff0-bba8-4697-9159-d856ff2187cf
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 38655
   prefix: '58283'
   number_min_length: 12
   number_max_length: 12
-  uuid: 883eba4e-06e1-45ca-b9a1-b60986596c4f
+  uuid: e138597c-264b-4116-8abf-a6f6b37dd78d
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 38861
   prefix: '58284'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8a4d536f-2c8e-465f-ad5d-b48975a127bf
+  uuid: 71934a7e-8669-47a2-bd3c-797842b933a8
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 39034
   prefix: '58285'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5ae3b86e-d751-4d6d-929d-5dc8c454e80a
+  uuid: be721b7e-dd7f-46b2-b593-fcda43a30c57
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 39273
   prefix: '58286'
   number_min_length: 12
   number_max_length: 12
-  uuid: 69d7c846-d346-4f50-a01c-4b12192c2ec2
+  uuid: c7beecd3-ad99-4a77-9e11-4ca6adff56fc
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 39290
   prefix: '58287'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9138bc65-14c6-4d85-a8b6-059e2899b0f5
+  uuid: 7d23ca54-d17a-43db-bf16-c555801a70e1
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 39604
   prefix: '58291'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3ce1ef95-a760-415a-b1ef-522adff93b61
+  uuid: 629db089-35aa-43c0-8eaf-aab3b94b37c2
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 39617
   prefix: '58292'
   number_min_length: 12
   number_max_length: 12
-  uuid: 046f6ce9-3c36-4212-b9b6-13386a02c2e8
+  uuid: 08d99c28-9f00-40bc-be3c-c28caa937759
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 39661
   prefix: '58293'
   number_min_length: 12
   number_max_length: 12
-  uuid: ea27fdc3-4a42-4270-a555-9126c47f3dcf
+  uuid: eef7d00c-dcce-418f-bbba-29f29eec175e
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 39705
   prefix: '58294'
   number_min_length: 12
   number_max_length: 12
-  uuid: 991c1d39-8fa5-4179-9638-16ce0799647d
+  uuid: ea0e7171-8bf1-4988-8a88-91d418f1fcde
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 40151
   prefix: '58295'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8bc13753-6b38-4f11-9ea2-4ba07834cf66
+  uuid: 5980bc99-6bbd-4fb9-87b7-8376930f53e1
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 40189
   prefix: '58296'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0feb876b-e1f1-4619-9534-b6d1cefced9c
+  uuid: 61d35e6d-ae35-4a04-8add-1d585346757f
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 48171
   prefix: '58282'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0cc1e211-9896-4094-864e-fc4853ceccf1
+  uuid: 2a3be0ec-d0e3-40d9-a6b4-b75288811380
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 48329
   prefix: '58288'
   number_min_length: 12
   number_max_length: 12
-  uuid: 02d75ee8-e244-46a6-aaf7-d4b2b3d05d0d
+  uuid: 0ca11c20-5a91-499f-9134-f343aa86533d
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 48687
   prefix: '58289'
   number_min_length: 12
   number_max_length: 12
-  uuid: 45e9469a-b4bb-4787-938c-3436bd4bcc53
+  uuid: 744a3ebd-5308-4c44-802e-851e99a9c384
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 - id: 270205
   prefix: '58212'
   number_min_length: 12
   number_max_length: 12
-  uuid: fa264740-37e0-4c30-ab82-c0c5bc31679d
+  uuid: 589e05d4-6453-40cf-9e58-68ba0f04abdc
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed
 # Supplementary services Prefixes
 - id: 87105
   prefix: '58400'
   number_min_length: 12
   number_max_length: 12
-  uuid: 59e62142-2457-4716-bc40-55739018be4f
+  uuid: a4123983-193a-46dd-bd40-7117ca56fe0b
   country_id: *ve
-  network_id: *personal_number_services
+  network_id: *ve_personal_number_services
 - id: 146236
   prefix: '58500'
   number_min_length: 12
   number_max_length: 12
-  uuid: a7de2493-2781-4391-8d01-0d7d5e6ee416
+  uuid: a2fff760-894b-4f79-baf2-d1383b7518bd
   country_id: *ve
-  network_id: *national_access_number_services
+  network_id: *ve_national_access_number_services
 - id: 146293
   prefix: '58501'
   number_min_length: 12
   number_max_length: 12
-  uuid: 19e3d3f0-5a2f-49e8-98e9-18bfef38087f
+  uuid: 6d675c4e-641e-4535-99fd-09977ef8af5e
   country_id: *ve
-  network_id: *national_access_number_services
+  network_id: *ve_national_access_number_services
 - id: 248396
   prefix: '581'
   number_min_length: 6
   number_max_length: 6
-  uuid: c198ecda-c6f9-4e98-ad1f-0baae8bd45bc
+  uuid: fc981c9f-40d2-4bf4-b39d-ea198c3b4084
   country_id: *ve
-  network_id: *special_services
+  network_id: *ve_special_services
 - id: 277913
   prefix: '58600'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9763f927-934e-49d3-a2dd-e24daf3383ae
+  uuid: ae9697d1-b3a4-46df-a617-1534935e1f78
   country_id: *ve
-  network_id: *virtual_private_network
-- id: 400687
+  network_id: *ve_virtual_private_network
+- id: 400688
   prefix: '58800'
   number_min_length: 12
   number_max_length: 12
-  uuid: 64a8c14b-3327-4ba6-ae7e-38b6d71af7c6
+  uuid: c82d047d-997d-4175-9dc8-2843bedbd545
   country_id: *ve
-  network_id: *freephone_services
-- id: 447722
+  network_id: *ve_freephone_services
+- id: 447723
   prefix: '58901'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5f970384-0986-4745-b225-8007e59e83af
+  uuid: 94238e95-ec68-4bf1-a566-efc9c83fc122
   country_id: *ve
-  network_id: *adults_entertainment_services
-- id: 448751
+  network_id: *ve_adults_entertainment_services
+- id: 448752
   prefix: '58904'
   number_min_length: 12
   number_max_length: 12
-  uuid: eaeb908c-09cc-4e45-8378-e4f113ad5323
+  uuid: 3fc06217-3617-472f-b0a2-03468bbc5392
   country_id: *ve
-  network_id: *internet_access_services
-- id: 453104
+  network_id: *ve_internet_access_services
+- id: 453105
   prefix: '58900'
   number_min_length: 12
   number_max_length: 12
-  uuid: 50ca41a6-ad50-460b-8c68-8891540adb5e
+  uuid: c1ffb2c8-d36e-495a-873d-517bce6ada1e
   country_id: *ve
-  network_id: *premium_rate_services
+  network_id: *ve_premium_rate_services
 # Mobile Prefixes
 - id: 92821
   prefix: '58414'
   number_min_length: 12
   number_max_length: 12
-  uuid: 306b8512-eaf3-46dd-91c3-bc2c2b20ff1d
+  uuid: 5bac28fe-2121-4d38-9700-e30a82e87bac
   country_id: *ve
-  network_id: *movistar_mobile
+  network_id: *ve_movistar_mobile
 - id: 99089
   prefix: '58412'
   number_min_length: 12
   number_max_length: 12
-  uuid: a9948ac2-15ab-4c70-b57d-27b7e0be6f85
+  uuid: 300400eb-c6de-4b05-aa94-265a140200bd
   country_id: *ve
-  network_id: *digitel_mobile
+  network_id: *ve_digitel_mobile
 - id: 100435
   prefix: '58416'
   number_min_length: 12
   number_max_length: 12
-  uuid: d7c8b61c-a507-4ea8-a7e3-618e6b1cb92d
+  uuid: 5e51e23a-394d-4dee-8849-32067e37c5e4
   country_id: *ve
-  network_id: *movilnet_mobile
+  network_id: *ve_movilnet_mobile
 - id: 103471
   prefix: '58426'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3c68ce2a-e1b3-4c3d-8c76-5d2f946b9d7e
+  uuid: 015de952-5d46-459e-8100-2893e03d8877
   country_id: *ve
-  network_id: *movilnet_mobile
+  network_id: *ve_movilnet_mobile
 - id: 106295
   prefix: '58424'
   number_min_length: 12
   number_max_length: 12
-  uuid: f484f797-948b-4614-94a3-7a0a18159800
+  uuid: be33d1a9-711f-48ac-91e0-dc029982c1f5
   country_id: *ve
-  network_id: *movistar_mobile
+  network_id: *ve_movistar_mobile
 - id: 110211
   prefix: '58438'
   number_min_length: 12
   number_max_length: 12
-  uuid: 071652a7-28de-4341-816e-15843aa46ae4
+  uuid: 9257bbc8-c8c2-49c0-a8d4-9cad59d90f14
   country_id: *ve
-  network_id: *mobile
+  network_id: *ve_mobile
 # Satellite Prefixes
 - id: 93631
   prefix: '58415'
   number_min_length: 12
   number_max_length: 12
-  uuid: 94816a62-8da3-47a1-908f-a867ebf4626a
+  uuid: 9a7b3112-3b82-427c-a3e8-0302c3ca5fe1
   country_id: *ve
-  network_id: *globalstar_satellite
+  network_id: *ve_globalstar_satellite
 # Country code Prefixes
 - id: 248001
   prefix: '58'
   number_min_length: 5
   number_max_length: 9
-  uuid: 77b5a55e-10ba-4eff-ab00-b40ac8a3b715
+  uuid: ea8e3679-a268-4a35-9945-5b0a06c543f0
   country_id: *ve
-  network_id: *fixed
+  network_id: *ve_fixed_cc
