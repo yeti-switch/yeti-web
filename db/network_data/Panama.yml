@@ -1,53 +1,53 @@
 country_id: &pa 165
 networks:
 # Mobile Networks
-- id: 3982
-  name: PA Movil
-  uuid: 3c7e55b7-723d-43b1-acb5-69d208a61ffc
+- id: &pa_movil_mobile 3997
+  name: PA Movil Mobile
+  uuid: cdfba210-a620-48c4-b4ee-440f1e3791b8
   type_id: 3
-- id: &pa_movistar 4214
-  name: PA Movistar
-  uuid: 25a2d451-77f1-49fd-8ec5-6eff9954fb84
+- id: &pa_movistar_mobile 4230
+  name: PA Movistar Mobile
+  uuid: da20c8ec-244c-4d96-9220-6e677f3b0a82
   type_id: 3
-- id: &pa_mobile 4498
+- id: &pa_mobile 4515
   name: PA Mobile
-  uuid: a453c1db-9fec-4cc2-ac0c-0c6b7963cb3b
+  uuid: 9610a541-b4e3-4967-88ec-cf557f83633f
   type_id: 3
-- id: &pa_digicel 4509
-  name: PA Digicel
-  uuid: 1a06030d-24fd-4760-ae5a-3fda6a748df6
+- id: &pa_digicel_mobile 4526
+  name: PA Digicel Mobile
+  uuid: 758cc99a-b901-471f-a6ce-81a6c0a39be7
   type_id: 3
-- id: &pa_claro 4581
-  name: PA Claro
-  uuid: 97dbda8b-9192-4b22-a199-e43c4bfee65f
+- id: &pa_claro_mobile 4598
+  name: PA Claro Mobile
+  uuid: 3e432dc4-e7ec-4864-a485-a105adc72c7b
   type_id: 3
 # Fixed Networks
-- id: &pa_fixed 4149
+- id: &pa_fixed 4164
   name: PA Fixed
-  uuid: 5f82208f-b0a3-4f92-9af7-f3a3449dc0cf
+  uuid: 3f4810bc-7fa4-48e8-870d-990f91cfb40d
   type_id: 12
 # Country code Networks
-- id: &pa_fixed_cc 4766
+- id: &pa_fixed_cc 4784
   name: PA Fixed Cc
-  uuid: aa158a8e-604d-40af-9922-b22ad81fe7cf
+  uuid: 572877ee-57c7-42bb-ba61-738c0af42723
   type_id: 17
 # Supplementary services Networks
-- id: &pa_value_added_services 5577
+- id: &pa_value_added_services 5606
   name: PA Value Added Services
-  uuid: 58306fdb-dbcd-4c0b-a72c-54c1e68475aa
+  uuid: 0786dcf8-57da-4fa9-bf82-e109b35d0b5f
   type_id: 14
-- id: &pa_freephone_services 6091
+- id: &pa_freephone_services 6125
   name: PA Freephone Services
-  uuid: 37bb318c-45c9-4919-980c-3f5526b31472
+  uuid: eff9c09a-b5c5-4334-8223-40fa36ba66ba
   type_id: 14
 # Paging Networks
-- id: &pa_mobilphone 6159
-  name: PA Mobilphone
-  uuid: e6232f30-a074-49d4-ac64-1f5246dea871
+- id: &pa_mobilphone_paging 6193
+  name: PA Mobilphone Paging
+  uuid: 3d528884-885c-4e88-835f-d0196ab582f8
   type_id: 13
-- id: &pa_movil 3982
-  name: PA Movil
-  uuid: 3c7e55b7-723d-43b1-acb5-69d208a61ffc
+- id: &pa_movil_paging 6246
+  name: PA Movil Paging
+  uuid: 107d2f6a-cb50-463e-af03-d2d74b69efd4
   type_id: 13
 network_prefixes:
 # Mobile Prefixes
@@ -55,1002 +55,1002 @@ network_prefixes:
   prefix: '507161'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5e7f660b-5734-4374-bab2-3d4d0b2a88ed
+  uuid: 9e68713c-4b83-4f74-9ebc-7cb3d96814fa
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 243329
   prefix: '507218'
   number_min_length: 13
   number_max_length: 13
-  uuid: d8c2f403-d9e2-4565-af3d-b92973f4371d
+  uuid: 4c06ff47-7ce2-4dd7-a105-1818917e520c
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 243336
   prefix: '507219'
   number_min_length: 13
   number_max_length: 13
-  uuid: 44165f1b-d020-4562-ad3b-1b467691f74b
+  uuid: aceb5936-e71b-4524-9f30-1783b0f82357
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 246781
   prefix: '5076'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9a58c1b5-0b85-4b4a-b0ac-5be76c7378e4
+  uuid: 1354412e-c660-43a0-9cd9-6c87938ae777
   country_id: *pa
   network_id: *pa_mobile
 - id: 246803
   prefix: '50760'
   number_min_length: 13
   number_max_length: 13
-  uuid: 559a3e7e-a866-4a21-a55f-67ceb5749b9c
+  uuid: 500c73e2-4bf5-40bb-99db-47bdda501888
   country_id: *pa
-  network_id: *pa_digicel
+  network_id: *pa_digicel_mobile
 - id: 247124
   prefix: '507610'
   number_min_length: 14
   number_max_length: 14
-  uuid: 97d21020-1e1f-4b04-850b-f7cc21e24bf1
+  uuid: fc44be49-1ada-4fa2-bf7b-5ffea58e66ce
   country_id: *pa
-  network_id: *pa_digicel
+  network_id: *pa_digicel_mobile
 - id: 247130
   prefix: '507611'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9ff6da1c-7e1b-491f-bf74-5e280b59baae
+  uuid: 0dafc51e-11b5-433e-889a-5399f0645112
   country_id: *pa
-  network_id: *pa_digicel
+  network_id: *pa_digicel_mobile
 - id: 247146
   prefix: '507612'
   number_min_length: 14
   number_max_length: 14
-  uuid: 29d1fb27-8797-4f1d-bca5-7607b4ab90bc
+  uuid: 3dbde64f-19fe-4bd8-9fd4-3d93ce48e786
   country_id: *pa
-  network_id: *pa_digicel
+  network_id: *pa_digicel_mobile
 - id: 247159
   prefix: '507613'
   number_min_length: 14
   number_max_length: 14
-  uuid: e19d8a62-fba8-4f61-8498-a93b1660ceca
+  uuid: 58acfd80-64f2-45bc-b721-87a588edac21
   country_id: *pa
-  network_id: *pa_digicel
+  network_id: *pa_digicel_mobile
 - id: 247173
   prefix: '507614'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2e2c241b-3875-4ff7-b3a1-a71d5875fab5
+  uuid: b5ccb44c-b7ac-477c-9142-8ec5eb9d39d1
   country_id: *pa
-  network_id: *pa_digicel
+  network_id: *pa_digicel_mobile
 - id: 247198
   prefix: '507615'
   number_min_length: 14
   number_max_length: 14
-  uuid: 680ab366-0e0f-4138-92ca-d6788a369261
+  uuid: 9b459c30-7944-4e60-913b-84d3075777f5
   country_id: *pa
-  network_id: *pa_digicel
+  network_id: *pa_digicel_mobile
 - id: 247249
   prefix: '50762'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2f1da440-ebb8-4e30-a08e-e2de5336b78d
+  uuid: 809e6a95-3d44-4da1-9224-9425f72af89e
   country_id: *pa
-  network_id: *pa_claro
+  network_id: *pa_claro_mobile
 - id: 247432
   prefix: '507660'
   number_min_length: 14
   number_max_length: 14
-  uuid: 91de5a18-bba0-46c1-b064-7c18c7e6aa2d
+  uuid: 8f546baa-4de4-4d1f-8b72-8b278d24c29f
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 247458
   prefix: '507661'
   number_min_length: 14
   number_max_length: 14
-  uuid: 287ee9fa-36af-4f63-8a09-c6e613c7dd42
+  uuid: 9c82a83f-3529-4053-8d13-e445d4825b3e
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 247479
   prefix: '507662'
   number_min_length: 14
   number_max_length: 14
-  uuid: 719c7bde-4605-4020-88e8-6612348a9f48
+  uuid: 5b15cd02-d72b-4974-9787-29f3410d758d
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 247501
   prefix: '507663'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3a2a0bda-8e9f-4b2f-99c7-c2f85135aa6b
+  uuid: 70ae4910-4bbd-4768-be0f-4a8c3a3b0a7d
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 247532
   prefix: '507664'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9dc6addd-229a-423e-8385-afd3abf54cf0
+  uuid: 3df3ab1d-5d2e-4d45-b74a-8ed0fd83a501
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 247556
   prefix: '507665'
   number_min_length: 14
   number_max_length: 14
-  uuid: a499dabb-8938-4946-92a8-c796431a50d8
+  uuid: 79e1f893-4fe3-4a60-820d-b4da3a1ab4c7
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 247582
   prefix: '507666'
   number_min_length: 14
   number_max_length: 14
-  uuid: 26e9e561-3960-47d3-b62e-d159d6e85a58
+  uuid: 77f4ea82-e93d-4e95-ba87-6426e215da6e
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 247591
   prefix: '507667'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1a0ce435-fd69-4b01-9512-061fcd9db01a
+  uuid: ea97d9ab-57e3-4ee4-a278-6b41704d0945
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 250466
   prefix: '507630'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9e1829a9-332f-4a7f-bbb3-3575364ec037
+  uuid: 3c8c2dfe-f73a-4242-a679-d26055d55364
   country_id: *pa
-  network_id: *pa_claro
+  network_id: *pa_claro_mobile
 - id: 250487
   prefix: '507631'
   number_min_length: 14
   number_max_length: 14
-  uuid: eb6bf57c-4947-4755-b87e-7aa23016a217
+  uuid: 2f57e35e-dea4-4bdc-989e-13e79f66f178
   country_id: *pa
-  network_id: *pa_claro
+  network_id: *pa_claro_mobile
 - id: 250515
   prefix: '507632'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9340f305-66a1-49da-a78c-6eee3e1e0913
+  uuid: e61c2d53-ee54-47df-859f-59fe2124e162
   country_id: *pa
-  network_id: *pa_claro
+  network_id: *pa_claro_mobile
 - id: 250531
   prefix: '507633'
   number_min_length: 14
   number_max_length: 14
-  uuid: ea62cf9d-dd49-403e-b381-34e690c004cd
+  uuid: 55143d96-6542-409b-9dde-48f95d1d3691
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 250550
   prefix: '507634'
   number_min_length: 14
   number_max_length: 14
-  uuid: b76590a9-62fe-4278-a446-4d1aea48c2dd
+  uuid: 6b64683b-2f69-4fbf-bcb5-a90c5dc8cc73
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 250594
   prefix: '507635'
   number_min_length: 14
   number_max_length: 14
-  uuid: ec60987d-6dda-4c05-bdfc-13bf4c225177
+  uuid: 5538cb5e-2acb-4c5b-afe4-03a582802545
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 250620
   prefix: '507636'
   number_min_length: 14
   number_max_length: 14
-  uuid: de9fcd2c-dbe1-49c9-b063-c858cf7c01c7
+  uuid: 79217de6-1b5d-4821-ae02-453b2eb0989a
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 250642
   prefix: '507637'
   number_min_length: 14
   number_max_length: 14
-  uuid: 701b4d0f-6a24-4d4f-a772-214c09b45c00
+  uuid: 5fdaea25-4908-48b0-b963-bb6497b4066e
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 250663
   prefix: '507638'
   number_min_length: 14
   number_max_length: 14
-  uuid: c4c82b67-acfd-41aa-aabd-7b204e374b5c
+  uuid: 097f8ca4-4550-4a36-bf40-16af3a413265
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 250697
   prefix: '507639'
   number_min_length: 14
   number_max_length: 14
-  uuid: 09bd9316-3765-4bc8-a179-eda34f96af41
+  uuid: c398f3c0-374d-4338-868c-5621e72e1af2
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 250819
   prefix: '50764'
   number_min_length: 13
   number_max_length: 13
-  uuid: 510a752e-c879-432d-ac1f-087fd8959f91
+  uuid: 01bab682-b355-40ad-a188-ed2768927edd
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 251044
   prefix: '507650'
   number_min_length: 14
   number_max_length: 14
-  uuid: 036265a0-80d7-448e-9d55-5c9aec3e3a53
+  uuid: 1f679287-55bd-49dc-9cd5-66c5fe8dbd4a
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 251071
   prefix: '507651'
   number_min_length: 14
   number_max_length: 14
-  uuid: a64f95d6-7ea6-43ac-ac83-07ba190551e4
+  uuid: f5bd7f1b-6020-47da-8c22-a28f9256709e
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 251090
   prefix: '507652'
   number_min_length: 14
   number_max_length: 14
-  uuid: ff2855a4-4a7c-4a1e-812a-a9f173fa03bb
+  uuid: 56c3f319-8d96-4158-b26a-0955ab70fcea
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 251112
   prefix: '507653'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6a9bb4e0-9a86-4de5-8cf3-c7be561fad9b
+  uuid: ab8e2cf5-e166-4627-b791-c5196de31500
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 251143
   prefix: '507654'
   number_min_length: 14
   number_max_length: 14
-  uuid: 14523705-bf48-4f87-b746-5a67e1257b8c
+  uuid: 9fbe88cc-e4cf-4515-86c3-ca9c54530687
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 251183
   prefix: '507655'
   number_min_length: 14
   number_max_length: 14
-  uuid: b166a2ba-71d2-41ef-a0a2-17b082251de2
+  uuid: bce855c9-5286-453c-a001-1c34d28bdf10
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 251205
   prefix: '507656'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1f6bbda5-33d1-4477-a09d-e0026bd6faf2
+  uuid: 2fc3d804-01d4-4be1-89fc-1a8272a6f25f
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 251229
   prefix: '507657'
   number_min_length: 14
   number_max_length: 14
-  uuid: 58e04166-77b9-4996-a8fe-c6103733a96e
+  uuid: d19a1801-4ffa-4357-8a2a-92dc380b8dcc
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 251301
   prefix: '507658'
   number_min_length: 14
   number_max_length: 14
-  uuid: 40fd61d2-fd8d-4d86-860b-8a6c6b519acf
+  uuid: 92d4f6e4-bad0-460a-b0ca-19f426f89b3d
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 251319
   prefix: '507659'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3a2d36eb-8357-477c-b76d-cd3b6d657a83
+  uuid: 746d4be3-0814-4bf5-a298-771838ba1861
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 257934
   prefix: '507668'
   number_min_length: 14
   number_max_length: 14
-  uuid: f6ab8415-be44-4b59-a753-c9fb3ab0af09
+  uuid: 19e832aa-8ce9-40cf-af2d-9639c2635083
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 257949
   prefix: '507669'
   number_min_length: 14
   number_max_length: 14
-  uuid: dd68dbb6-c3f1-4ea4-9455-9cfa569f2a02
+  uuid: 89c3cea4-e35d-4e5b-8bfb-e3c4750dc945
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258027
   prefix: '50767'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0eb757e5-1eba-4469-86ea-66c34e6d2b2e
+  uuid: 66150304-f102-4884-ad4a-aff008390da3
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258110
   prefix: '507680'
   number_min_length: 14
   number_max_length: 14
-  uuid: 161a8bb0-cf1b-4123-8ef0-3eb8f030cb65
+  uuid: d076d96b-91c1-4e5d-9783-14359c44a6a1
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258132
   prefix: '507681'
   number_min_length: 14
   number_max_length: 14
-  uuid: 61a50f7b-dd97-4074-b63b-eb55ae897abc
+  uuid: 423fdb30-83bc-493c-a6d2-76c925db40e2
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258157
   prefix: '507682'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6c4a61bf-f6a8-4103-a174-5cd18bcdde53
+  uuid: d5cc652d-a07f-486e-b1d5-b0b6837688ff
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258166
   prefix: '507683'
   number_min_length: 14
   number_max_length: 14
-  uuid: 019c178e-a9d0-4a0d-b8bc-530c49abc1db
+  uuid: e716639c-ff69-4353-84d9-8897200565bf
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258177
   prefix: '507684'
   number_min_length: 14
   number_max_length: 14
-  uuid: dab9384c-01f0-414d-a594-4836bf971f05
+  uuid: 47a4e890-9208-4b8e-8d03-e01376156224
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258206
   prefix: '507685'
   number_min_length: 14
   number_max_length: 14
-  uuid: 90e131ef-ecef-4688-8f4e-2ae06e5d674d
+  uuid: d8d32814-d499-4fc8-9981-3c1078e23a79
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258223
   prefix: '507686'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8e00c30c-f015-4d53-be3d-bc0063228777
+  uuid: 3c6b1b87-94cf-4d2e-8655-6a9f4a2dd7fe
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258228
   prefix: '507687'
   number_min_length: 14
   number_max_length: 14
-  uuid: 690d79c9-50ba-4331-aebb-a5e4e8c1aa33
+  uuid: 7d0588be-eada-4320-882c-6bc75312d717
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258244
   prefix: '507688'
   number_min_length: 14
   number_max_length: 14
-  uuid: 78e041c1-f59e-4258-8f9b-7f5f29f2c4ed
+  uuid: 86ec0b0b-c958-49ca-bc16-81e7684b694c
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258272
   prefix: '507689'
   number_min_length: 14
   number_max_length: 14
-  uuid: 95b2ce14-94a1-4372-96ed-6434bcba273a
+  uuid: dbd4b106-6995-4c47-bc31-bb75e9505a35
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258302
   prefix: '507690'
   number_min_length: 14
   number_max_length: 14
-  uuid: ecd13f59-acbf-446e-a9b6-16e4e0620702
+  uuid: d3a9921a-8c10-4291-8c35-10c48b73aac3
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258385
   prefix: '507691'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6b649a5d-e12f-44f3-a52f-7e76d1238b37
+  uuid: 6fe02cbc-a36b-451d-8f29-af710ef8221c
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258404
   prefix: '507692'
   number_min_length: 14
   number_max_length: 14
-  uuid: a9654104-8b37-4703-8219-c43366463beb
+  uuid: 71d5d5a7-970f-46ab-aae6-c0a538350c86
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258447
   prefix: '507693'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8d884086-fccd-4eee-ae1b-332c9ba20186
+  uuid: 32a70c9d-add2-4d5f-a8ef-0d344e323c5d
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258513
   prefix: '507694'
   number_min_length: 14
   number_max_length: 14
-  uuid: 54f5e7c5-8462-4cd4-9b16-8fad166f9241
+  uuid: f5477732-32c7-4c2b-8498-9a86b577a762
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258561
   prefix: '507695'
   number_min_length: 14
   number_max_length: 14
-  uuid: 241731f8-6302-4cc8-9ec9-b18e839162eb
+  uuid: c2cbadf9-b772-4191-af81-362a441f230e
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258567
   prefix: '507696'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5c3a4521-1056-4c05-ae29-67536c70a92a
+  uuid: 94051dfa-d114-4d32-a21d-3d525053a09d
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258622
   prefix: '507697'
   number_min_length: 14
   number_max_length: 14
-  uuid: 14fd50ee-aab5-4f03-aa4c-f6eeb49a7e7f
+  uuid: a899c531-6041-4766-a641-f63190c067d5
   country_id: *pa
-  network_id: *pa_movistar
+  network_id: *pa_movistar_mobile
 - id: 258629
   prefix: '507698'
   number_min_length: 14
   number_max_length: 14
-  uuid: 19d29f5d-d583-4e27-bf43-fc491f4a88f0
+  uuid: 1d3700a6-5c06-4532-88af-bee60e88ef5b
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 - id: 258645
   prefix: '507699'
   number_min_length: 14
   number_max_length: 14
-  uuid: aa281a6c-a5fc-4c89-aaeb-5e7588887787
+  uuid: 3e5aca81-21b1-4867-85be-a21d76c63501
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_mobile
 # Fixed Prefixes
 - id: 243053
   prefix: '5072'
   number_min_length: 11
   number_max_length: 11
-  uuid: 358784f5-d0a1-4608-bdd9-8bf3f1b5d3c8
+  uuid: 90c8e9c8-fa02-4629-92af-71b603362ea6
   country_id: *pa
   network_id: *pa_fixed
 - id: 243741
   prefix: '50724'
   number_min_length: 12
   number_max_length: 12
-  uuid: 159b405d-f17d-4f82-b4ef-f8caaf3995d4
+  uuid: 485dcf12-34bc-40fd-b34a-84d1d75c1e47
   country_id: *pa
   network_id: *pa_fixed
 - id: 243772
   prefix: '507242'
   number_min_length: 13
   number_max_length: 13
-  uuid: a1a7a910-93b5-42d7-b0ef-4582ac37f89d
+  uuid: 95965f4e-3801-4efd-9cbf-c3c235be3d5e
   country_id: *pa
   network_id: *pa_fixed
 - id: 243891
   prefix: '50725'
   number_min_length: 12
   number_max_length: 12
-  uuid: cee75e57-d013-4b73-839b-c0034b31f12a
+  uuid: 44cc4f01-10a0-43f4-b5f0-3182e8cbb705
   country_id: *pa
   network_id: *pa_fixed
 - id: 244425
   prefix: '507286'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0ede309b-bd8c-415c-a5fb-669e74c0ff77
+  uuid: c915369c-e25a-4864-9484-f3f07ff9744a
   country_id: *pa
   network_id: *pa_fixed
 - id: 244430
   prefix: '507287'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5d0b8534-bd10-42cf-8c61-0b9c5a1beb85
+  uuid: 0039b5f2-376f-4de4-a47b-f1c708b64052
   country_id: *pa
   network_id: *pa_fixed
 - id: 244439
   prefix: '507289'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7ea86a7f-abe4-41d5-87a6-0ddfab4e05dd
+  uuid: dccf176e-ea3c-449d-8d41-b8b602ebe6c6
   country_id: *pa
   network_id: *pa_fixed
 - id: 244496
   prefix: '507299'
   number_min_length: 13
   number_max_length: 13
-  uuid: a30b3f50-d156-4f16-b596-a65bf6fcd571
+  uuid: fdca6ff7-947a-49a0-9f9b-ed9eb1d08687
   country_id: *pa
   network_id: *pa_fixed
 - id: 244540
   prefix: '5073'
   number_min_length: 11
   number_max_length: 11
-  uuid: 45a6d112-2699-49f2-9d1e-9c5eb82262c3
+  uuid: 75799114-950d-4042-834a-87ff1727aae4
   country_id: *pa
   network_id: *pa_fixed
 - id: 244879
   prefix: '507341'
   number_min_length: 13
   number_max_length: 13
-  uuid: b600617d-41e8-47c0-9047-35f0f4272aa7
+  uuid: dec580a2-a43d-4f21-9968-419a0cd3f60a
   country_id: *pa
   network_id: *pa_fixed
 - id: 244890
   prefix: '507342'
   number_min_length: 13
   number_max_length: 13
-  uuid: 841779c9-e903-45ab-965f-333754e4af4a
+  uuid: 56647367-534e-4468-b332-ddf922c891e4
   country_id: *pa
   network_id: *pa_fixed
 - id: 244896
   prefix: '507343'
   number_min_length: 13
   number_max_length: 13
-  uuid: eef12794-1ddb-46bc-bbeb-e9750aa994ea
+  uuid: ce391a02-dff9-4768-9d13-c3503f28248d
   country_id: *pa
   network_id: *pa_fixed
 - id: 244905
   prefix: '507344'
   number_min_length: 13
   number_max_length: 13
-  uuid: 041c6ebc-64ce-45ab-bfbb-e48329237d52
+  uuid: f5807c32-1d30-444c-aa5e-c7a35d012968
   country_id: *pa
   network_id: *pa_fixed
 - id: 244912
   prefix: '507345'
   number_min_length: 13
   number_max_length: 13
-  uuid: 200247ac-9d85-4699-80a5-41a48d39fc98
+  uuid: d4bb354b-f1e0-483e-9aeb-e5c77518866a
   country_id: *pa
   network_id: *pa_fixed
 - id: 244923
   prefix: '507346'
   number_min_length: 13
   number_max_length: 13
-  uuid: ce866fcd-5b21-4996-b362-3edf05772f02
+  uuid: 4cf2f33b-b47f-47ee-a681-21c50126643d
   country_id: *pa
   network_id: *pa_fixed
 - id: 244929
   prefix: '507347'
   number_min_length: 13
   number_max_length: 13
-  uuid: 39ab2c7e-3228-4949-8f8a-7aff1cb3841e
+  uuid: 52acce50-6017-46fc-a78b-35e394a7c4e0
   country_id: *pa
   network_id: *pa_fixed
 - id: 244941
   prefix: '507348'
   number_min_length: 13
   number_max_length: 13
-  uuid: 18d89b89-13a9-4d74-a7e4-abe5e0c54298
+  uuid: 5428678f-b2c7-4458-a1a5-d181e1c96d95
   country_id: *pa
   network_id: *pa_fixed
 - id: 244946
   prefix: '507349'
   number_min_length: 13
   number_max_length: 13
-  uuid: df765f77-e011-4c45-9c5c-9df38a53bfe2
+  uuid: cb7907c1-fbcb-4fc3-91b6-fc276f37b3ed
   country_id: *pa
   network_id: *pa_fixed
 - id: 245320
   prefix: '5074'
   number_min_length: 11
   number_max_length: 11
-  uuid: 1ee201ac-b672-4f7a-9ddf-e01c687ec3cd
+  uuid: 118833d2-ecaa-4504-acae-bdf1a980a07d
   country_id: *pa
   network_id: *pa_fixed
 - id: 245703
   prefix: '50743'
   number_min_length: 12
   number_max_length: 12
-  uuid: e7d486d6-6e98-4b72-897b-417da24aab68
+  uuid: 06b55239-ca7f-4c03-9205-d81230e7b728
   country_id: *pa
   network_id: *pa_fixed
 - id: 245858
   prefix: '50744'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3155d1ed-028c-40d6-b8bb-cc4195c04a7b
+  uuid: fd5d63eb-b3b1-479c-8871-349fef811fdb
   country_id: *pa
   network_id: *pa_fixed
 - id: 248415
   prefix: '5071'
   number_min_length: 11
   number_max_length: 11
-  uuid: c2d86859-8bdd-4efe-b4d5-eb3579b34a22
+  uuid: f1e09a19-60aa-4e37-97bb-8124cd23ccf6
   country_id: *pa
   network_id: *pa_fixed
 - id: 249111
   prefix: '50747'
   number_min_length: 12
   number_max_length: 12
-  uuid: d5d0ca5e-9abe-4c01-8994-9c7483e72239
+  uuid: 62ac5d77-9d12-40da-bf4d-2fffcb4c5cc7
   country_id: *pa
   network_id: *pa_fixed
 - id: 249400
   prefix: '5075'
   number_min_length: 11
   number_max_length: 11
-  uuid: bad4c553-b422-41ed-88cf-cca257773c1b
+  uuid: bde7a420-acb2-4c70-b4d9-4bedcf2078fc
   country_id: *pa
   network_id: *pa_fixed
 - id: 251644
   prefix: '507728'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5ba0e16d-3c09-4607-85f7-bbf9f7af7a21
+  uuid: 6a7af777-251f-4a30-8af5-a5bc1156bc19
   country_id: *pa
   network_id: *pa_fixed
 - id: 252249
   prefix: '50775'
   number_min_length: 12
   number_max_length: 12
-  uuid: 50688f88-156c-4ca3-a69e-361bace6b1b9
+  uuid: 0b448ec2-c6d2-4022-a6e2-63c730aa237f
   country_id: *pa
   network_id: *pa_fixed
 - id: 252773
   prefix: '50776'
   number_min_length: 12
   number_max_length: 12
-  uuid: 99244c6b-a273-40f7-9952-50214077b99f
+  uuid: fb234736-c009-4552-8881-0ca57fb49d6b
   country_id: *pa
   network_id: *pa_fixed
 - id: 253187
   prefix: '5079'
   number_min_length: 11
   number_max_length: 11
-  uuid: 8367af0d-0a5f-4431-9346-d3773e3d169d
+  uuid: ded76f23-70e0-42b4-b28b-aa959f945035
   country_id: *pa
   network_id: *pa_fixed
 - id: 253327
   prefix: '507905'
   number_min_length: 13
   number_max_length: 13
-  uuid: 536aa89f-3336-47d6-8ecc-805f6f1a6eed
+  uuid: d95acc75-77f8-4fcd-93d3-cab553d14a7b
   country_id: *pa
   network_id: *pa_fixed
 - id: 253341
   prefix: '507906'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4db58085-02b4-436c-95e1-33899d630355
+  uuid: 546304e7-9b0e-4e29-a8de-6d829bdf081c
   country_id: *pa
   network_id: *pa_fixed
 - id: 253348
   prefix: '507907'
   number_min_length: 13
   number_max_length: 13
-  uuid: 258da821-4691-4491-9b3d-b83a3ae249b9
+  uuid: dd656ba0-6fec-4b4f-884f-634eeccf6204
   country_id: *pa
   network_id: *pa_fixed
 - id: 253361
   prefix: '507908'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7930688a-abc8-4bb9-838b-c6ae95a87a98
+  uuid: d78b63db-88b8-404e-b06d-1b4c53346b39
   country_id: *pa
   network_id: *pa_fixed
 - id: 253382
   prefix: '507909'
   number_min_length: 13
   number_max_length: 13
-  uuid: 091a3e4e-e75f-4ce0-aab7-c7b7f86f4420
+  uuid: 8944d051-2d3b-4a74-b6bc-77cfd37108f5
   country_id: *pa
   network_id: *pa_fixed
 - id: 253401
   prefix: '50791'
   number_min_length: 12
   number_max_length: 12
-  uuid: 76b14960-7fcc-4109-91c8-3a0a410a9feb
+  uuid: aa882f10-ced2-45b3-a84d-b3135f090118
   country_id: *pa
   network_id: *pa_fixed
 - id: 253614
   prefix: '50792'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6e547f7a-718b-4b83-b3a6-4250cf4405a4
+  uuid: d373931f-ad17-4ee3-b847-06ba90ca9046
   country_id: *pa
   network_id: *pa_fixed
 - id: 253622
   prefix: '507920'
   number_min_length: 13
   number_max_length: 13
-  uuid: c54ccf29-6442-4cfa-bfa8-372b1ed323f2
+  uuid: 713935f4-5385-4b7e-9dfd-65d1a2dd84d9
   country_id: *pa
   network_id: *pa_fixed
 - id: 253640
   prefix: '507921'
   number_min_length: 13
   number_max_length: 13
-  uuid: 784f0d19-ecd1-474a-a0e1-7fe8ea739634
+  uuid: e845adf2-7dba-405a-8f36-ca573e90eaf9
   country_id: *pa
   network_id: *pa_fixed
 - id: 253896
   prefix: '507931'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0efddd49-ded7-40a0-9a96-ecd33f709e58
+  uuid: c7d2a9e7-8df8-440f-bc35-34f7f0c351cd
   country_id: *pa
   network_id: *pa_fixed
 - id: 253954
   prefix: '507933'
   number_min_length: 13
   number_max_length: 13
-  uuid: b679206a-3053-4bea-a5e0-519222313f89
+  uuid: b1d9ad8d-9eb1-4dbd-90f9-366f5d1a0903
   country_id: *pa
   network_id: *pa_fixed
 - id: 253996
   prefix: '507934'
   number_min_length: 13
   number_max_length: 13
-  uuid: 631f5fda-8697-4f4d-a230-a75c92909044
+  uuid: bed66c66-1acf-4c4d-b905-e93d1043722d
   country_id: *pa
   network_id: *pa_fixed
 - id: 254011
   prefix: '507935'
   number_min_length: 13
   number_max_length: 13
-  uuid: 07fb8c07-96c0-4fec-b884-f32f00699d5a
+  uuid: cdc71b3e-3baa-4b65-95ee-cdf5265bd497
   country_id: *pa
   network_id: *pa_fixed
 - id: 254026
   prefix: '507936'
   number_min_length: 13
   number_max_length: 13
-  uuid: 99320565-43c8-42ea-97bb-19947d1359a5
+  uuid: e6613cd1-ac5a-4dfd-91c7-943654a77a22
   country_id: *pa
   network_id: *pa_fixed
 - id: 254041
   prefix: '507937'
   number_min_length: 13
   number_max_length: 13
-  uuid: 088c73a4-1eac-4d4c-8449-3a17b3efb268
+  uuid: 2fbe88b7-cbd1-4bc7-8965-3315de73837c
   country_id: *pa
   network_id: *pa_fixed
 - id: 254094
   prefix: '507938'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9478a94c-390e-4038-9f7e-17708ba8679a
+  uuid: 9d78fbfb-b193-4cd2-bf48-8ce23c12de2c
   country_id: *pa
   network_id: *pa_fixed
 - id: 254117
   prefix: '507939'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9d30a017-c440-40c0-ad02-a82ddfef3a1e
+  uuid: 30db5719-6be1-4d93-8deb-f0865951ac14
   country_id: *pa
   network_id: *pa_fixed
 - id: 254154
   prefix: '50794'
   number_min_length: 12
   number_max_length: 12
-  uuid: 12e54f70-12f2-4f8d-b0b8-166ef5e7721a
+  uuid: 681d71e2-66c8-4227-9dc5-05354cd52f72
   country_id: *pa
   network_id: *pa_fixed
 - id: 254242
   prefix: '507990'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4fe2b983-9d58-4751-ba70-7db6f93e4013
+  uuid: 64b9b574-3087-44c8-9888-d47480b92c40
   country_id: *pa
   network_id: *pa_fixed
 - id: 254256
   prefix: '507991'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9075f839-f08e-4a6e-b746-6f15b248ad61
+  uuid: 4ed50ef3-b03c-4ecb-b8b8-fb2c77cbcf36
   country_id: *pa
   network_id: *pa_fixed
 - id: 254260
   prefix: '507992'
   number_min_length: 13
   number_max_length: 13
-  uuid: c56cac14-ff0f-427c-85a9-971b8f6e9023
+  uuid: 8e54d6b1-7e05-464f-8f6f-ae280b06fa99
   country_id: *pa
   network_id: *pa_fixed
 - id: 254264
   prefix: '507993'
   number_min_length: 13
   number_max_length: 13
-  uuid: c7e90902-9e1a-40cd-a567-af9315cd31c6
+  uuid: b36aa1d3-3281-456b-b37d-ea9a2f755bd3
   country_id: *pa
   network_id: *pa_fixed
 - id: 254268
   prefix: '507994'
   number_min_length: 13
   number_max_length: 13
-  uuid: 24d39ed4-dd10-4f65-91ae-50a219bfa1f9
+  uuid: 056a17af-1af8-4f2c-8e6b-dd0ba574642d
   country_id: *pa
   network_id: *pa_fixed
 - id: 254282
   prefix: '507995'
   number_min_length: 13
   number_max_length: 13
-  uuid: 71ace573-cd7b-4688-9796-ebd5db27c647
+  uuid: d15b69ac-e136-4ecf-90fa-e22af413e86a
   country_id: *pa
   network_id: *pa_fixed
 - id: 254285
   prefix: '507996'
   number_min_length: 13
   number_max_length: 13
-  uuid: e8f29729-1f4b-480d-a4a9-b21e98320f77
+  uuid: 87f6ede9-9b90-4afe-8a76-eeaf066ed26f
   country_id: *pa
   network_id: *pa_fixed
 - id: 254300
   prefix: '507997'
   number_min_length: 13
   number_max_length: 13
-  uuid: fcc3419b-63cf-490d-9d99-f6c4db4f9c12
+  uuid: 673caaad-3685-4430-b674-2f0f07545142
   country_id: *pa
   network_id: *pa_fixed
 - id: 254305
   prefix: '507998'
   number_min_length: 13
   number_max_length: 13
-  uuid: 61ec835e-15f4-47d7-852b-6e6d7a48c42c
+  uuid: 28c0bb1b-b6ac-41f4-82ce-f974c215d453
   country_id: *pa
   network_id: *pa_fixed
 - id: 254345
   prefix: '507999'
   number_min_length: 13
   number_max_length: 13
-  uuid: faa620a7-b786-4620-99fe-ff4dcffca199
+  uuid: 9ae65840-8fb5-426c-b462-a7eaa4433b22
   country_id: *pa
   network_id: *pa_fixed
 - id: 258688
   prefix: '5077'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9ef42bf7-a4e1-4fd8-a0a8-ac86de756d74
+  uuid: ce02eda8-ff28-480f-b9d4-b16a624a4296
   country_id: *pa
   network_id: *pa_fixed
 - id: 259368
   prefix: '507779'
   number_min_length: 13
   number_max_length: 13
-  uuid: ca1efe73-b74f-4eea-b3d4-dbdb8d9fae6d
+  uuid: 31cd22ff-7112-4eb9-89ea-a49bc50dd8ee
   country_id: *pa
   network_id: *pa_fixed
 - id: 259709
   prefix: '50779'
   number_min_length: 12
   number_max_length: 12
-  uuid: 66da05e9-4e80-4eeb-a8fe-260ecd38fcff
+  uuid: 6e966a1b-26e2-4418-bafc-718212002dc2
   country_id: *pa
   network_id: *pa_fixed
 - id: 260024
   prefix: '5078'
   number_min_length: 11
   number_max_length: 11
-  uuid: 5c66d288-c419-44d4-9d05-8cc92feb2354
+  uuid: 481b4efe-1993-4578-9bbb-7d155abe749e
   country_id: *pa
   network_id: *pa_fixed
 - id: 260429
   prefix: '507827'
   number_min_length: 13
   number_max_length: 13
-  uuid: b53f4d47-abcd-4e77-8108-c992171a88c6
+  uuid: 69ccba2d-6f4a-4d94-a5a6-4c7701b107f5
   country_id: *pa
   network_id: *pa_fixed
 - id: 260440
   prefix: '507828'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6b7ba93a-04be-4681-ab54-55aff4d2c32e
+  uuid: 14b754e9-5220-4b73-9a7c-7cb475145099
   country_id: *pa
   network_id: *pa_fixed
 - id: 260453
   prefix: '507829'
   number_min_length: 13
   number_max_length: 13
-  uuid: a5c8c9ff-36ad-42d9-a022-f98b57f088fe
+  uuid: b5178917-37bf-4a16-89dd-0fd239ecb275
   country_id: *pa
   network_id: *pa_fixed
 - id: 260481
   prefix: '50783'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5427c85f-78f6-4f19-82c8-abecead4e6a9
+  uuid: 5762668f-dfd6-4b2b-afbd-bbd6a29334a3
   country_id: *pa
   network_id: *pa_fixed
 - id: 260602
   prefix: '50784'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1c295127-ce46-4279-b08e-79ad2cf4089f
+  uuid: 4d8964b7-114f-4481-b1db-de1b4fca4362
   country_id: *pa
   network_id: *pa_fixed
 - id: 260609
   prefix: '507840'
   number_min_length: 13
   number_max_length: 13
-  uuid: ce3098e9-4d7f-4618-81d0-7769ea1d8a50
+  uuid: 42c63af3-9436-49a9-8570-a6fbf006fc95
   country_id: *pa
   network_id: *pa_fixed
 - id: 260624
   prefix: '507841'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7a2bcd98-aedd-4f6b-8730-d884c3269bf0
+  uuid: 915f5d15-14dc-485e-ada7-35b18ba447ad
   country_id: *pa
   network_id: *pa_fixed
 - id: 260639
   prefix: '507842'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4133950c-7396-493c-ab0e-95e5562645af
+  uuid: 0e19ea00-ea9d-475b-9c19-8e9d1066d6e8
   country_id: *pa
   network_id: *pa_fixed
 - id: 260645
   prefix: '507843'
   number_min_length: 13
   number_max_length: 13
-  uuid: 79ed3713-4ba4-4ba8-9774-6a01db0a9109
+  uuid: 1763ed81-ab05-4cd7-9de9-7e6c703f1b61
   country_id: *pa
   network_id: *pa_fixed
 - id: 260651
   prefix: '507844'
   number_min_length: 13
   number_max_length: 13
-  uuid: ef375aff-fd3a-46bd-b4c9-7627ad6270eb
+  uuid: 292b9d5c-dab3-4bf1-a019-322259df56c7
   country_id: *pa
   network_id: *pa_fixed
 - id: 260740
   prefix: '507850'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9fab4f33-6652-43e0-b980-423cfc72efe4
+  uuid: cdb7a493-9125-4770-8390-9c2583c19ba2
   country_id: *pa
   network_id: *pa_fixed
 - id: 260755
   prefix: '507851'
   number_min_length: 13
   number_max_length: 13
-  uuid: a6630019-7a03-4b31-b5e8-b5e4800993bf
+  uuid: f5a56919-c381-4773-a5a5-824f5ed5759f
   country_id: *pa
   network_id: *pa_fixed
 - id: 260774
   prefix: '507852'
   number_min_length: 13
   number_max_length: 13
-  uuid: 80af9d86-b00a-436d-b70b-0236f9b16a0a
+  uuid: aa3d2718-f0eb-416b-9e84-d2da6a144e08
   country_id: *pa
   network_id: *pa_fixed
 - id: 260789
   prefix: '507853'
   number_min_length: 13
   number_max_length: 13
-  uuid: 43e57d9b-4bcb-4b90-a785-5f247945ca82
+  uuid: 07887cd3-c69b-40fe-83a9-3fb95c30f706
   country_id: *pa
   network_id: *pa_fixed
 - id: 260803
   prefix: '507854'
   number_min_length: 13
   number_max_length: 13
-  uuid: ab507b16-4b1a-4cc6-b8d8-c401f68244c9
+  uuid: 90f81b02-25d9-40d7-b8e0-cab87c09293f
   country_id: *pa
   network_id: *pa_fixed
 - id: 261333
   prefix: '50795'
   number_min_length: 12
   number_max_length: 12
-  uuid: a2b24430-b985-44fc-9814-4e4323266b24
+  uuid: 4b5eda07-4e7b-4928-bb7f-871697efacb1
   country_id: *pa
   network_id: *pa_fixed
 - id: 261611
   prefix: '50796'
   number_min_length: 12
   number_max_length: 12
-  uuid: c8d7a671-c07f-4ade-be9d-e09da49a5dd0
+  uuid: fb661c77-1bbf-4ad3-8083-d17aa15e4b36
   country_id: *pa
   network_id: *pa_fixed
 - id: 261892
   prefix: '50797'
   number_min_length: 12
   number_max_length: 12
-  uuid: f220435f-4ff7-4f12-8f83-4a534c7dbf85
+  uuid: fd9466dc-e1aa-4376-8f6f-c01cc73d08b2
   country_id: *pa
   network_id: *pa_fixed
 - id: 262162
   prefix: '50798'
   number_min_length: 12
   number_max_length: 12
-  uuid: 95867110-e4a4-469b-a32a-ee9fcd0bfe84
+  uuid: d49cf327-0c44-4b5f-9950-b4398ebcce74
   country_id: *pa
   network_id: *pa_fixed
 # Country code Prefixes
@@ -1058,7 +1058,7 @@ network_prefixes:
   prefix: '507'
   number_min_length: 10
   number_max_length: 11
-  uuid: b4abfb9f-dabd-4390-89ef-7c083da5b8e6
+  uuid: 80b15fac-6856-4abf-aa68-8e54333e5b14
   country_id: *pa
   network_id: *pa_fixed_cc
 # Supplementary services Prefixes
@@ -1066,161 +1066,161 @@ network_prefixes:
   prefix: '507878'
   number_min_length: 13
   number_max_length: 13
-  uuid: 823ee775-7ae0-4403-83f9-fce81bccb1a5
+  uuid: bcd4d71a-2f21-41bc-a3e7-2276c31a4b8d
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 252882
   prefix: '507879'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7a7f7ed0-d995-4585-a3f0-ab88348d2394
+  uuid: 1827b982-b7de-4a37-b1d7-e59252a4e298
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253017
   prefix: '507886'
   number_min_length: 13
   number_max_length: 13
-  uuid: d35b6fde-a415-4c26-b5bb-549b23c988df
+  uuid: a3e64299-5c99-4a1f-8fd0-8cf06203662e
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253028
   prefix: '507887'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4bd99091-2d43-4b39-870f-886dad640e69
+  uuid: 4035a1aa-00a3-4688-a08b-2c97539618e1
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253042
   prefix: '507889'
   number_min_length: 13
   number_max_length: 13
-  uuid: 57c9ea90-4cf7-4fea-b3ec-ccd781234ed5
+  uuid: 73785142-e420-4206-aedd-b1e569b94720
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253125
   prefix: '507895'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5d2a4dcb-128c-4094-9231-bf6c48ec1002
+  uuid: 9e27cf58-6333-44bf-b795-592a41954660
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253248
   prefix: '507900'
   number_min_length: 13
   number_max_length: 13
-  uuid: 68c7492d-d00d-4b81-bb74-5ca19c752161
+  uuid: d5fb8453-250c-41a9-bcbe-589383e3785b
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253279
   prefix: '507901'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8635bb98-0c63-4804-a999-ef8c342a25b3
+  uuid: eaffcfef-6de2-4b6b-ade1-975dcc1756bb
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253297
   prefix: '507902'
   number_min_length: 13
   number_max_length: 13
-  uuid: 49f0dc72-09be-461f-8739-f97139c6dcdf
+  uuid: 9bb71cb2-61ef-41b1-8bfd-faf61174777d
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253303
   prefix: '507903'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2db34c43-6540-46c6-ac89-b3811e004575
+  uuid: 15cff6a9-51c8-4944-a691-be6746e4f67f
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 253309
   prefix: '507904'
   number_min_length: 13
   number_max_length: 13
-  uuid: ca1aaf4a-b207-43b0-8e23-44c9db9e5d9f
+  uuid: 74411d4d-59fc-4ef4-8d05-f1030c97b697
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 260091
   prefix: '507800'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3ab74120-bf31-415b-adf4-cf7cba952692
+  uuid: c813646c-5e3b-4187-999d-29a8f07e6ba8
   country_id: *pa
   network_id: *pa_freephone_services
 - id: 260186
   prefix: '507809'
   number_min_length: 13
   number_max_length: 13
-  uuid: c8c214fd-faa1-40fb-8cc8-8025a6eb5c2d
+  uuid: 8a365afd-70af-429a-91f6-1dcda6c4a475
   country_id: *pa
   network_id: *pa_freephone_services
 - id: 260366
   prefix: '50782'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2fb4d6c0-923e-47a0-8e4d-ab444691a732
+  uuid: 24950e7e-acb5-49e5-b773-6d366bb3f6e2
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 260809
   prefix: '507855'
   number_min_length: 13
   number_max_length: 13
-  uuid: a8d1e2ac-fda2-4c2f-aaa1-7d631f6a0427
+  uuid: 42e41a29-86d7-4918-b25f-898235df389c
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 260883
   prefix: '507860'
   number_min_length: 13
   number_max_length: 13
-  uuid: d2a33b01-18cd-47ab-81e3-ede314481e5c
+  uuid: 899bf343-f651-481e-979d-8976c0982293
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 261032
   prefix: '507870'
   number_min_length: 13
   number_max_length: 13
-  uuid: 066a7b23-232f-48e9-aa67-6b5e0a73f827
+  uuid: ae9c006f-b1ee-4d34-972a-5b2172bbd710
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 261048
   prefix: '507871'
   number_min_length: 13
   number_max_length: 13
-  uuid: e172327e-178a-41e7-a9c4-db30ee0e8fee
+  uuid: 9a065b53-aed0-40bd-a528-2702b0559814
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 261097
   prefix: '507874'
   number_min_length: 13
   number_max_length: 13
-  uuid: 161ecca4-e8de-4568-b3f8-72f8f3f84651
+  uuid: 4ccd3b3d-aed6-4b2e-a5e0-77f5519ed5fc
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 261112
   prefix: '507875'
   number_min_length: 13
   number_max_length: 13
-  uuid: 25bc35bd-0df1-4c7a-8477-1de0b0f8c81a
+  uuid: 6c2a89af-7863-4940-a32f-f7840829f0b8
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 261126
   prefix: '507876'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8ff43618-7271-40da-913f-e10021ea2123
+  uuid: f842e869-ccc1-4e25-b6c8-54c3fa9224d5
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 261142
   prefix: '507877'
   number_min_length: 13
   number_max_length: 13
-  uuid: 22f41685-8e3a-4109-857f-bfcfb0fbd7b6
+  uuid: cd8b37ac-66e3-496b-8e1c-3b55963e5fff
   country_id: *pa
   network_id: *pa_value_added_services
 - id: 262205
   prefix: '507981'
   number_min_length: 13
   number_max_length: 13
-  uuid: 51fcf0ac-2658-40d3-b462-33f79dd3e86c
+  uuid: d349eac2-000d-4a60-8025-aaaddf1660ef
   country_id: *pa
   network_id: *pa_value_added_services
 # Paging Prefixes
@@ -1228,27 +1228,27 @@ network_prefixes:
   prefix: '507810'
   number_min_length: 13
   number_max_length: 13
-  uuid: 237a344f-6d31-48c1-9fef-392709db18cf
+  uuid: ddcec84d-e7d6-4c85-af31-87654b80244e
   country_id: *pa
-  network_id: *pa_mobilphone
+  network_id: *pa_mobilphone_paging
 - id: 260226
   prefix: '507811'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3945e6a5-6a94-4e6e-b608-ca25da3b58d0
+  uuid: bacb6736-380b-4f03-b4e4-49571b5401db
   country_id: *pa
-  network_id: *pa_mobilphone
+  network_id: *pa_mobilphone_paging
 - id: 261066
   prefix: '507872'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7b3ef6ab-2608-4f45-88b5-328d98285267
+  uuid: ab581dcd-8a27-4da0-a3af-747c733873ef
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_paging
 - id: 261082
   prefix: '507873'
   number_min_length: 13
   number_max_length: 13
-  uuid: bf1b18e9-20ba-41c2-95cc-f18604ccd73d
+  uuid: a7d92184-fdec-4396-bdca-bcff2d01a18a
   country_id: *pa
-  network_id: *pa_movil
+  network_id: *pa_movil_paging

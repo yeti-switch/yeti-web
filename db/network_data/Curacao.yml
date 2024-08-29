@@ -1,23 +1,23 @@
 country_id: &cw 276
 networks:
 # Supplementary services Networks
-- id: &cw_value_added_services 4543
+- id: &cw_value_added_services 4560
   name: CW Value Added Services
-  uuid: bff5ecab-72bb-43c5-b07c-3630f6447c76
+  uuid: fa01caf5-a8ae-44dc-9a3c-64bcfc553320
   type_id: 14
 # Fixed Networks
-- id: &cw_fixed 7103
+- id: &cw_fixed 7150
   name: CW Fixed
-  uuid: ca3d8a57-026a-4d1e-b681-a87ba133bba9
+  uuid: fea76b33-549c-4134-b17f-2bcffe8732d7
   type_id: 12
 # Mobile Networks
-- id: &cw_chippie 7110
-  name: CW Chippie
-  uuid: 2598b92b-554d-495f-ad2b-24d2ee3e1fec
+- id: &cw_chippie_mobile 7157
+  name: CW Chippie Mobile
+  uuid: d2170a14-7281-443d-bf59-88aef14f3c62
   type_id: 3
-- id: &cw_digicel 7118
-  name: CW Digicel
-  uuid: 0c41c2ae-c387-4233-9590-babe7c44c4b8
+- id: &cw_digicel_mobile 7165
+  name: CW Digicel Mobile
+  uuid: fa20984b-2f9d-4d38-869b-b197726ae877
   type_id: 3
 network_prefixes:
 # Supplementary services Prefixes
@@ -25,21 +25,21 @@ network_prefixes:
   prefix: '599603'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6ffea696-97c7-44f4-9de8-70bcf0f0f007
+  uuid: 578160f9-d176-4830-aa14-ec87b054e5dc
   country_id: *cw
   network_id: *cw_value_added_services
 - id: 246958
   prefix: '599604'
   number_min_length: 13
   number_max_length: 13
-  uuid: cee951e1-c7d1-458e-ae5d-d1a4aff4477d
+  uuid: e107039b-2bda-4e1d-a604-3073fa8d1da4
   country_id: *cw
   network_id: *cw_value_added_services
 - id: 246989
   prefix: '599605'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1248e6fa-a793-4b36-90a5-2ec5ade51b28
+  uuid: c9806410-1d22-4de7-966f-b9271eac0222
   country_id: *cw
   network_id: *cw_value_added_services
 # Fixed Prefixes
@@ -47,49 +47,49 @@ network_prefixes:
   prefix: '59994'
   number_min_length: 12
   number_max_length: 12
-  uuid: b059654b-e0ea-431d-98eb-a2d497f81729
+  uuid: d1d3dc1c-23a8-4fcc-a536-88d9cb93fdae
   country_id: *cw
   network_id: *cw_fixed
 - id: 451775
   prefix: '599950'
   number_min_length: 13
   number_max_length: 13
-  uuid: 296d612c-dc83-402e-9979-eb1a250f9153
+  uuid: 08f757ce-00c1-4b2a-b4d5-20e290eb24b5
   country_id: *cw
   network_id: *cw_fixed
 - id: 452069
   prefix: '59997'
   number_min_length: 12
   number_max_length: 12
-  uuid: 961e8228-3524-4b8f-910e-d0da6918eb7f
+  uuid: 346e28b2-148c-464e-a041-d9751bd15f39
   country_id: *cw
   network_id: *cw_fixed
 - id: 452083
   prefix: '5999720'
   number_min_length: 14
   number_max_length: 14
-  uuid: d4e1ed87-93c2-4f40-92a4-a1436e4f5c3f
+  uuid: f96c28d1-90a6-4f81-85f8-f7e45d2a2895
   country_id: *cw
   network_id: *cw_fixed
 - id: 452084
   prefix: '5999721'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4dcea90a-eced-4065-8227-df199bcf86ca
+  uuid: 7bdfc9a2-2238-47f0-aefc-fdb1b567fc6a
   country_id: *cw
   network_id: *cw_fixed
 - id: 452085
   prefix: '5999724'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9129367f-782b-4c1e-8833-40dff0239fc2
+  uuid: fe1125df-6103-4844-a60c-cd350ab2ce8c
   country_id: *cw
   network_id: *cw_fixed
 - id: 452176
   prefix: '59998'
   number_min_length: 12
   number_max_length: 12
-  uuid: 42a7729d-cd90-410d-94fa-379e17c2f1c9
+  uuid: e4f8813b-cdc8-4d5a-ba17-673d581ed1d4
   country_id: *cw
   network_id: *cw_fixed
 # Mobile Prefixes
@@ -97,83 +97,83 @@ network_prefixes:
   prefix: '599951'
   number_min_length: 13
   number_max_length: 13
-  uuid: a98bb948-9adb-4c01-bb27-1ccbdf1ea7f3
+  uuid: 0d102941-e153-4273-a655-998cf12277b1
   country_id: *cw
-  network_id: *cw_chippie
+  network_id: *cw_chippie_mobile
 - id: 451787
   prefix: '599952'
   number_min_length: 13
   number_max_length: 13
-  uuid: 268fd107-1a7d-4516-b54c-a567e9f848cd
+  uuid: 5ec5f804-6f27-48b6-b609-283b88c85dd6
   country_id: *cw
-  network_id: *cw_chippie
+  network_id: *cw_chippie_mobile
 - id: 451801
   prefix: '5999530'
   number_min_length: 14
   number_max_length: 14
-  uuid: 630305f6-b6ec-48d4-b54a-de4d4a6ae00c
+  uuid: ee562f06-9973-45cb-9d18-888c580aac23
   country_id: *cw
-  network_id: *cw_chippie
+  network_id: *cw_chippie_mobile
 - id: 451802
   prefix: '5999531'
   number_min_length: 14
   number_max_length: 14
-  uuid: df43032a-5bb2-41fe-9385-f3375dd67156
+  uuid: eb7a023f-cbfe-4e3c-abec-78a8a9bd90e1
   country_id: *cw
-  network_id: *cw_chippie
+  network_id: *cw_chippie_mobile
 - id: 451804
   prefix: '599954'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0fca566b-26ac-4633-aad8-908aa469f7d5
+  uuid: dde5a1da-a5fa-435a-a167-8d049d7c7e44
   country_id: *cw
-  network_id: *cw_chippie
+  network_id: *cw_chippie_mobile
 - id: 451865
   prefix: '599956'
   number_min_length: 13
   number_max_length: 13
-  uuid: e461b75d-4054-4786-bc2c-c1660bb91f2f
+  uuid: 9d5e8872-889a-4a34-9593-dacb9b379e4b
   country_id: *cw
-  network_id: *cw_chippie
+  network_id: *cw_chippie_mobile
 - id: 451867
   prefix: '599957'
   number_min_length: 13
   number_max_length: 13
-  uuid: dacda5e5-0b5f-4cd2-8ff2-21526adff342
+  uuid: d7b31c96-777c-4148-8311-43879f93668a
   country_id: *cw
-  network_id: *cw_chippie
+  network_id: *cw_chippie_mobile
 - id: 451945
   prefix: '599965'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6ac235e3-b5cd-4d48-9477-ed22f165fce7
+  uuid: 489fea35-14f0-4825-b489-e1b8bef056cc
   country_id: *cw
-  network_id: *cw_digicel
+  network_id: *cw_digicel_mobile
 - id: 451982
   prefix: '599966'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4cccbfab-dfa3-43eb-a833-e102912ebd2f
+  uuid: 3ff113ac-ca56-499f-852b-3896a5b77571
   country_id: *cw
-  network_id: *cw_digicel
+  network_id: *cw_digicel_mobile
 - id: 451985
   prefix: '599967'
   number_min_length: 13
   number_max_length: 13
-  uuid: 58b3f7b0-85bf-4c51-8f83-daeba3678a7c
+  uuid: 178fed15-fe9b-419a-b66d-c448eb15f01e
   country_id: *cw
-  network_id: *cw_digicel
+  network_id: *cw_digicel_mobile
 - id: 452021
   prefix: '599968'
   number_min_length: 13
   number_max_length: 13
-  uuid: d90c78bf-f3d2-497c-803d-7fe484fc6372
+  uuid: 48138924-0dd1-4dc5-87e2-529c24dad615
   country_id: *cw
-  network_id: *cw_digicel
+  network_id: *cw_digicel_mobile
 - id: 452043
   prefix: '599969'
   number_min_length: 13
   number_max_length: 13
-  uuid: 75cb70f6-1676-48d2-90f1-ad866c3fba8e
+  uuid: 9f12c0eb-6db3-4954-ae34-944328ee42db
   country_id: *cw
-  network_id: *cw_digicel
+  network_id: *cw_digicel_mobile

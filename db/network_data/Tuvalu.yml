@@ -1,24 +1,24 @@
 country_id: &tv 220
 networks:
 # Fixed Networks
-- id: &tv_fixed 4179
+- id: &tv_fixed 4194
   name: TV Fixed
-  uuid: 8b8f47d9-e1dc-469f-8554-f3b65768263d
+  uuid: c9383da6-e0e7-45f9-8c71-4eff8b72ac66
   type_id: 12
 # Country code Networks
-- id: &tv_fixed_cc 4813
+- id: &tv_fixed_cc 4831
   name: TV Fixed Cc
-  uuid: 27a02d60-58f5-4afe-ae2c-3ce8471025e8
+  uuid: 446e0ddd-a88c-4c54-84a3-1a89751e4790
   type_id: 17
 # Supplementary services Networks
-- id: &tv_special_services 5032
+- id: &tv_special_services 5050
   name: TV Special Services
-  uuid: 0f0eff3f-afe8-48e0-8406-84b0da8e09fd
+  uuid: c6c3367c-8732-4446-92e7-34ea37d15f5d
   type_id: 14
 # Mobile Networks
-- id: &tv_tuvalu_telecom 5386
-  name: TV Tuvalu Telecom
-  uuid: f92ec89b-674b-4f75-a115-de6993d69263
+- id: &tv_tuvalu_telecom_mobile 5406
+  name: TV Tuvalu Telecom Mobile
+  uuid: 9d0925d2-d156-4611-bc90-6f926161a255
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -26,63 +26,63 @@ network_prefixes:
   prefix: '68820'
   number_min_length: 10
   number_max_length: 10
-  uuid: 346ee3e1-a149-465c-9a93-1e6598ff71b1
+  uuid: 5d7f4f32-4e4a-4ada-875f-7e18540b1b35
   country_id: *tv
   network_id: *tv_fixed
 - id: 243364
   prefix: '68822'
   number_min_length: 10
   number_max_length: 10
-  uuid: 63f00c89-18ef-43c3-b5c2-787a1d8544c3
+  uuid: 53ed9bdc-cc2a-49eb-87e3-3fa75523c1ef
   country_id: *tv
   network_id: *tv_fixed
 - id: 243558
   prefix: '68823'
   number_min_length: 10
   number_max_length: 10
-  uuid: caf4f707-445c-4182-b272-327ff5ae5cde
+  uuid: 68effd87-b12a-445f-8499-120322b77726
   country_id: *tv
   network_id: *tv_fixed
 - id: 243749
   prefix: '68824'
   number_min_length: 10
   number_max_length: 10
-  uuid: 3b21ac25-66c4-4cf1-98f1-c57794c42d3b
+  uuid: b9c12749-199c-4e4b-8c5d-77d94ef071a4
   country_id: *tv
   network_id: *tv_fixed
 - id: 243898
   prefix: '68825'
   number_min_length: 10
   number_max_length: 10
-  uuid: dcfe7aeb-daa1-42cf-b298-b35852dc66e6
+  uuid: e5b649e4-7a51-4ef0-a876-8efb0bcfdf9e
   country_id: *tv
   network_id: *tv_fixed
 - id: 244106
   prefix: '68826'
   number_min_length: 10
   number_max_length: 10
-  uuid: 526978a6-9040-4a62-b877-676c9b221551
+  uuid: 36bdd1f5-9d86-4758-978d-b678802aaa03
   country_id: *tv
   network_id: *tv_fixed
 - id: 244249
   prefix: '68827'
   number_min_length: 10
   number_max_length: 10
-  uuid: 12ab04bf-9559-4a96-9f14-511aa4d75701
+  uuid: 89ec0210-bd48-484e-b549-8d159b8a354f
   country_id: *tv
   network_id: *tv_fixed
 - id: 244384
   prefix: '68828'
   number_min_length: 10
   number_max_length: 10
-  uuid: a2c78283-9741-4d1d-90f5-03d1f74da78e
+  uuid: f1af0272-3b1b-4f16-9ba7-b4a5e8c836ff
   country_id: *tv
   network_id: *tv_fixed
 - id: 244463
   prefix: '68829'
   number_min_length: 10
   number_max_length: 10
-  uuid: e23d987f-3549-443e-b3f9-26ae0052add7
+  uuid: 6d087e08-d537-4dd2-8ced-37332cbe5a4a
   country_id: *tv
   network_id: *tv_fixed
 # Country code Prefixes
@@ -90,7 +90,7 @@ network_prefixes:
   prefix: '688'
   number_min_length: 6
   number_max_length: 10
-  uuid: cb7e45af-6b83-4071-b126-121a283fc91d
+  uuid: ed94a45f-af72-4b06-8d3e-5d5f6b62ff6f
   country_id: *tv
   network_id: *tv_fixed_cc
 # Supplementary services Prefixes
@@ -98,7 +98,7 @@ network_prefixes:
   prefix: '6881'
   number_min_length: 7
   number_max_length: 7
-  uuid: 3ed88df3-a2f1-477e-b584-79114f16370b
+  uuid: 544f0571-3bb5-4efb-8a0a-95d74ca6e865
   country_id: *tv
   network_id: *tv_special_services
 # Mobile Prefixes
@@ -106,20 +106,20 @@ network_prefixes:
   prefix: '68871'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4528ce86-f6e3-48c9-ac88-64337f718aad
+  uuid: 14a3fbfa-98a2-4fd2-8f9b-1aee1477e673
   country_id: *tv
-  network_id: *tv_tuvalu_telecom
+  network_id: *tv_tuvalu_telecom_mobile
 - id: 253232
   prefix: '68890'
   number_min_length: 11
   number_max_length: 11
-  uuid: b04697ba-6763-4d87-9604-a3140e2d556c
+  uuid: 375866c7-da67-44d5-a541-8c1d8994f496
   country_id: *tv
-  network_id: *tv_tuvalu_telecom
+  network_id: *tv_tuvalu_telecom_mobile
 - id: 258726
   prefix: '68870'
   number_min_length: 12
   number_max_length: 12
-  uuid: 493d8e7e-bde6-4d94-a42a-76e81953dec1
+  uuid: 385eb4d4-7d3a-4e9f-9529-db4175b655b6
   country_id: *tv
-  network_id: *tv_tuvalu_telecom
+  network_id: *tv_tuvalu_telecom_mobile

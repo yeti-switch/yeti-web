@@ -3,75 +3,75 @@ networks:
 # Fixed Networks
 - id: &ir_fixed 3072
   name: IR Fixed
-  uuid: 55435cc9-36d2-4bac-9119-114c6a2dc053
+  uuid: 2543146d-62cb-4bd2-be0d-449bb6be55a1
   type_id: 12
 # Mobile Networks
-- id: &ir_mci 3759
-  name: IR Mci
-  uuid: ffd1764f-4032-4387-95e5-60774207852f
+- id: &ir_mci_mobile 3773
+  name: IR Mci Mobile
+  uuid: 064b6b0b-6c8a-497c-b94e-49a63fe5a715
   type_id: 3
-- id: &ir_rightel 3769
-  name: IR Rightel
-  uuid: 18906663-acbc-416b-b472-826afee02083
+- id: &ir_rightel_mobile 3783
+  name: IR Rightel Mobile
+  uuid: 80a70c2d-8378-447c-864d-5e83198efa1b
   type_id: 3
-- id: &ir_mobile 3771
+- id: &ir_mobile 3785
   name: IR Mobile
-  uuid: 4e6cf299-0e40-4f0e-a1e8-110e8a4edd73
+  uuid: 34ccb176-74aa-4acc-939a-07736b9546eb
   type_id: 3
-- id: &ir_taliya 3783
-  name: IR Taliya
-  uuid: 80641364-7647-48a5-89f2-be5ad7a796e0
+- id: &ir_taliya_mobile 3797
+  name: IR Taliya Mobile
+  uuid: 50f90325-dd26-4733-8830-c2c81e8c3464
   type_id: 3
-- id: &ir_mtn_irancell 3784
-  name: IR Mtn Irancell
-  uuid: d78c9b52-7388-4b1a-aa3b-325dc26ec308
+- id: &ir_mtn_irancell_mobile 3798
+  name: IR Mtn Irancell Mobile
+  uuid: 807f913f-bca2-4ca7-b919-584e93636ea5
   type_id: 3
-- id: &ir_telekish 3796
-  name: IR Telekish
-  uuid: 9d7c2b7a-77e4-42ea-be6b-f09d784d214b
+- id: &ir_telekish_mobile 3810
+  name: IR Telekish Mobile
+  uuid: 7075e652-941d-4cbd-ae6b-5d36208342a4
   type_id: 3
-- id: &ir_anarestan 3917
-  name: IR Anarestan
-  uuid: c4e56d16-f161-4883-810c-677bcadf675c
+- id: &ir_anarestan_mobile 3932
+  name: IR Anarestan Mobile
+  uuid: ffde45d6-b505-4880-a0d1-102d798e7895
   type_id: 3
-- id: &ir_lotustel 3919
-  name: IR Lotustel
-  uuid: dd67108a-60a6-46ad-89a2-ea1fa574642b
+- id: &ir_lotustel_mobile 3934
+  name: IR Lotustel Mobile
+  uuid: a4ad6792-db88-40c1-914b-9289d6e91fa9
   type_id: 3
-- id: &ir_aptel 3920
-  name: IR Aptel
-  uuid: af22e952-164d-4d6f-85ae-33f56a3ef46a
+- id: &ir_aptel_mobile 3935
+  name: IR Aptel Mobile
+  uuid: 7613d88d-b8b2-406d-9133-b15667d990ec
   type_id: 3
-- id: &ir_hiweb 3921
-  name: IR Hiweb
-  uuid: 41275afb-b723-40f2-8187-bcdf8991d8d0
+- id: &ir_hiweb_mobile 3936
+  name: IR Hiweb Mobile
+  uuid: 23abaef8-d87b-45e8-ba7d-a75841e42522
   type_id: 3
-- id: &ir_shatel_mobile 3923
-  name: IR Shatel Mobile
-  uuid: 3d067775-d9ce-4401-b825-0d8c5bd4dd2e
+- id: &ir_shatel_mobile_mobile 3938
+  name: IR Shatel Mobile Mobile
+  uuid: 04dd50d3-3527-40d1-a92f-67f4771185dc
   type_id: 3
-- id: &ir_arian_tel 4615
-  name: IR Arian Tel
-  uuid: 64902a1d-c577-4191-aebf-96a1a289f0cd
+- id: &ir_arian_tel_mobile 4632
+  name: IR Arian Tel Mobile
+  uuid: c182a0f8-853c-4743-b107-e709771d3ecb
   type_id: 3
-- id: &ir_samantel 4616
-  name: IR Samantel
-  uuid: f3e6cb78-624e-412e-84b2-31021740ac28
+- id: &ir_samantel_mobile 4633
+  name: IR Samantel Mobile
+  uuid: 9880a641-248d-42c6-b5ad-6839c3fcbdba
   type_id: 3
 # Satellite Networks
-- id: &ir_satellite 3922
+- id: &ir_satellite 3937
   name: IR Satellite
-  uuid: 1cf19602-6556-4099-bd9e-c5ace770b891
+  uuid: 4b9d657a-d40d-45c6-b8b6-150c77b10c24
   type_id: 16
 # Country code Networks
-- id: &ir_fixed_cc 4709
+- id: &ir_fixed_cc 4727
   name: IR Fixed Cc
-  uuid: d1cfb1bb-8f58-4619-af22-dc9981b900a1
+  uuid: 0b7ff448-2cbb-4c78-83da-b06ec66d2395
   type_id: 17
 # Supplementary services Networks
-- id: &ir_special_services 4966
+- id: &ir_special_services 4984
   name: IR Special Services
-  uuid: aec3a821-c33e-44ec-9f38-5b6e68c2f471
+  uuid: c86fd5a9-5a36-48db-a57c-598a26738ec5
   type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -79,301 +79,301 @@ network_prefixes:
   prefix: '9823'
   number_min_length: 7
   number_max_length: 12
-  uuid: 5e61aaa4-a3f8-4001-9696-489b97847d4f
+  uuid: a057b70b-e588-4894-8c59-7356ee7fa794
   country_id: *ir
   network_id: *ir_fixed
 - id: 9298
   prefix: '9821'
   number_min_length: 7
   number_max_length: 12
-  uuid: c967dc99-b715-48d1-81d2-3044bfc4550d
+  uuid: 82e26f34-5bf1-4d73-b2bf-96611db70b06
   country_id: *ir
   network_id: *ir_fixed
 - id: 23227
   prefix: '9826'
   number_min_length: 7
   number_max_length: 12
-  uuid: 44c491ad-2973-4b62-9ebe-7cacd5b16c43
+  uuid: 90f0c08d-9fc9-4d39-949f-56e2956df43f
   country_id: *ir
   network_id: *ir_fixed
 - id: 28288
   prefix: '9824'
   number_min_length: 7
   number_max_length: 12
-  uuid: 6665092b-4bc0-449a-8812-53b94b06edc9
+  uuid: 03a0edb0-8a0f-4efe-89ee-67b31df940b6
   country_id: *ir
   network_id: *ir_fixed
 - id: 31979
   prefix: '9825'
   number_min_length: 7
   number_max_length: 12
-  uuid: f9cfdde8-7958-4aca-8ee9-22fa9a250c6a
+  uuid: 3cdbe4ca-5fc3-4be7-a159-221031e771e2
   country_id: *ir
   network_id: *ir_fixed
 - id: 38351
   prefix: '9828'
   number_min_length: 7
   number_max_length: 12
-  uuid: c016de43-59ea-4f43-afda-9f7df3d40825
+  uuid: 91eea477-681f-4341-9d4d-00fc2b5eb476
   country_id: *ir
   network_id: *ir_fixed
 - id: 42243
   prefix: '9830'
   number_min_length: 12
   number_max_length: 12
-  uuid: bd241f1a-f713-48a0-b2f2-26d9221f1d84
+  uuid: 90570184-d650-4625-bf47-b4654a8f70d0
   country_id: *ir
   network_id: *ir_fixed
 - id: 53104
   prefix: '9831'
   number_min_length: 7
   number_max_length: 12
-  uuid: 599ac5a5-1ac6-4786-b309-d2dbdcabf78b
+  uuid: c8460eab-349d-446e-812b-048b8f154fe9
   country_id: *ir
   network_id: *ir_fixed
 - id: 76916
   prefix: '9834'
   number_min_length: 7
   number_max_length: 12
-  uuid: a94b216a-16fa-4038-a491-e34f3d94f9f4
+  uuid: 6788c423-515b-4b5b-9f25-27b10228c642
   country_id: *ir
   network_id: *ir_fixed
 - id: 78856
   prefix: '9835'
   number_min_length: 7
   number_max_length: 12
-  uuid: 392b5adc-934d-4e22-8dc3-d4b085db2a18
+  uuid: ee8211cd-e51c-40c4-85f3-e0bc20591e5f
   country_id: *ir
   network_id: *ir_fixed
 - id: 83707
   prefix: '9838'
   number_min_length: 7
   number_max_length: 12
-  uuid: 7c6335c2-abf6-4612-a246-02ffd7b48531
+  uuid: 93a64a55-4e68-4483-9661-3ab3ad1aaadd
   country_id: *ir
   network_id: *ir_fixed
 - id: 87006
   prefix: '9840'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1bcaad57-5205-407d-b863-7dedb73aab9d
+  uuid: f49c4480-5840-4451-a4ca-050e514946b1
   country_id: *ir
   network_id: *ir_fixed
 - id: 91016
   prefix: '9841'
   number_min_length: 7
   number_max_length: 12
-  uuid: d2e20011-618d-4d44-ad13-87db34bff779
+  uuid: a0837c17-34d2-455c-b2f4-f8df095d8e4b
   country_id: *ir
   network_id: *ir_fixed
 - id: 110847
   prefix: '9844'
   number_min_length: 7
   number_max_length: 12
-  uuid: ed855ff0-6800-4ed2-b751-b03921d305ec
+  uuid: 970c31de-4973-4ff6-b579-005b79ce7476
   country_id: *ir
   network_id: *ir_fixed
 - id: 124296
   prefix: '9845'
   number_min_length: 7
   number_max_length: 12
-  uuid: 02159956-112b-43ae-bdb5-885004703030
+  uuid: f27fe6b3-1842-4ec5-b4f5-563482fafe37
   country_id: *ir
   network_id: *ir_fixed
 - id: 146218
   prefix: '9850'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6fb86371-50b6-4581-8f7c-b120c1bd0c49
+  uuid: d85e9ec4-373b-46cc-b559-92829b39f481
   country_id: *ir
   network_id: *ir_fixed
 - id: 150006
   prefix: '9851'
   number_min_length: 7
   number_max_length: 12
-  uuid: 22a7aa58-c295-4748-b78b-fbb9fe4f9f7e
+  uuid: 068640f6-f944-4eb6-9f55-41733417c4ac
   country_id: *ir
   network_id: *ir_fixed
 - id: 155687
   prefix: '9854'
   number_min_length: 7
   number_max_length: 12
-  uuid: ffa743bb-ee35-4ee5-b73f-4c0bb0f7c83b
+  uuid: 8dd9a423-0716-405e-bfa5-7cc33f22348a
   country_id: *ir
   network_id: *ir_fixed
 - id: 212985
   prefix: '9894000'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2179faf2-76f1-4741-9e5a-21d18b75ad1e
+  uuid: fc889d43-8b93-4c39-a96d-d1c0d9d7a970
   country_id: *ir
   network_id: *ir_fixed
 - id: 213483
   prefix: '989412'
   number_min_length: 13
   number_max_length: 13
-  uuid: 88745556-5928-4bd3-b4bb-39211afeccd4
+  uuid: 3c5aead5-3715-489f-99f4-49b51122ea2f
   country_id: *ir
   network_id: *ir_fixed
 - id: 213939
   prefix: '98942'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3174e276-264e-4b3e-a8c4-357a80e09a07
+  uuid: e2263756-0069-4630-87c9-cf896c6ab092
   country_id: *ir
   network_id: *ir_fixed
 - id: 213944
   prefix: '9894260'
   number_min_length: 10
   number_max_length: 14
-  uuid: ec90e7d9-7e4a-4215-9bcc-60b4903ea00f
+  uuid: e0ed4b11-442c-472b-a3f8-8bd5003df3d3
   country_id: *ir
   network_id: *ir_fixed
 - id: 213963
   prefix: '98943'
   number_min_length: 12
   number_max_length: 12
-  uuid: 723483f2-1919-402b-a1d7-79fbb21fce23
+  uuid: a58fc1d2-6d28-4c96-bb43-d1ec7d8f2f2c
   country_id: *ir
   network_id: *ir_fixed
 - id: 214056
   prefix: '98944'
   number_min_length: 12
   number_max_length: 12
-  uuid: e2c4f9e1-147f-4661-b475-3fda2ade38f6
+  uuid: bcce1dd2-7704-4d41-96b2-08b603f75bb6
   country_id: *ir
   network_id: *ir_fixed
 - id: 239800
   prefix: '989950'
   number_min_length: 8
   number_max_length: 13
-  uuid: e60af46d-62a4-4d37-8a4f-7ee59f27f1d4
+  uuid: 11330dcb-536e-46fb-bbe5-b9ad39edb31b
   country_id: *ir
   network_id: *ir_fixed
 - id: 254850
   prefix: '9811'
   number_min_length: 7
   number_max_length: 12
-  uuid: 37131149-59a8-48cc-bbe0-bac0adabf3a9
+  uuid: edc81276-0ad6-4547-9859-2a8d14749980
   country_id: *ir
   network_id: *ir_fixed
 - id: 255529
   prefix: '9813'
   number_min_length: 7
   number_max_length: 12
-  uuid: a45be6c8-e6d2-41a9-9868-05895e8a11bc
+  uuid: 050391a9-4b6f-4b76-9a21-dfbdf1ab4569
   country_id: *ir
   network_id: *ir_fixed
 - id: 257744
   prefix: '9820'
   number_min_length: 12
   number_max_length: 12
-  uuid: 89cb2ae7-03af-4205-a2fd-d18f4a4b8a16
+  uuid: c1dea8dc-55c2-4588-8a88-7273689887af
   country_id: *ir
   network_id: *ir_fixed
 - id: 263787
   prefix: '9817'
   number_min_length: 7
   number_max_length: 12
-  uuid: 64d97f55-3aeb-4a57-980f-20e1194a976c
+  uuid: 955da5e1-78a7-4a1f-aea8-20c976b76f37
   country_id: *ir
   network_id: *ir_fixed
 - id: 275363
   prefix: '9856'
   number_min_length: 7
   number_max_length: 12
-  uuid: 1b1da896-aa19-4c58-b842-160e2c4bd8d1
+  uuid: 076beb36-35d0-432c-b654-9efa46493877
   country_id: *ir
   network_id: *ir_fixed
 - id: 277927
   prefix: '9860'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4a269692-028a-488c-a8b9-fa8493d7962d
+  uuid: 19d52d88-d28a-4374-bf3e-00d5e18a9ef1
   country_id: *ir
   network_id: *ir_fixed
 - id: 285784
   prefix: '9858'
   number_min_length: 7
   number_max_length: 12
-  uuid: 234abb4b-51b0-4fd8-9d1c-4ffe74b99194
+  uuid: 4b8bc033-970a-4aaa-a472-eb1ce3817572
   country_id: *ir
   network_id: *ir_fixed
 - id: 293556
   prefix: '9861'
   number_min_length: 7
   number_max_length: 12
-  uuid: 97b107a3-f26b-42a9-8613-41c7ba5de0ca
+  uuid: 526f27de-0faf-4da6-9af6-0b00273bf1ba
   country_id: *ir
   network_id: *ir_fixed
 - id: 322000
   prefix: '9866'
   number_min_length: 7
   number_max_length: 12
-  uuid: ffc0bb91-625c-47f1-9886-4c8ec5e363b0
+  uuid: e439bdc7-cef1-47da-bfbd-adcac7ac9c71
   country_id: *ir
   network_id: *ir_fixed
 - id: 353056
   prefix: '9871'
   number_min_length: 7
   number_max_length: 12
-  uuid: b2bd3878-c509-4758-9451-3c2334589ad3
+  uuid: 14e590fc-04ac-4670-b4c1-5f30ca3b6324
   country_id: *ir
   network_id: *ir_fixed
 - id: 371801
   prefix: '9874'
   number_min_length: 7
   number_max_length: 12
-  uuid: da6ca29c-182a-4915-b66b-d32d54bfa748
+  uuid: a58ea6ae-1b68-4a98-b309-8c1dfa89713c
   country_id: *ir
   network_id: *ir_fixed
 - id: 379227
   prefix: '9876'
   number_min_length: 7
   number_max_length: 12
-  uuid: a5cd8a05-4060-4d18-a134-5cb9c6f94234
+  uuid: 2a4bad27-ded2-4d22-b5cc-fbb4dbc60429
   country_id: *ir
   network_id: *ir_fixed
 - id: 386034
   prefix: '9877'
   number_min_length: 7
   number_max_length: 12
-  uuid: 83bfbda8-84e9-4d36-8413-fe10907ba697
+  uuid: 1d7a0b97-21dd-4f46-bea6-78351d4666a6
   country_id: *ir
   network_id: *ir_fixed
 - id: 404408
   prefix: '9881'
   number_min_length: 7
   number_max_length: 12
-  uuid: 7c608b35-b8ac-4c41-bc30-f59dba7183dd
+  uuid: d82ee963-ec83-40e5-9f4b-7e182d088c48
   country_id: *ir
   network_id: *ir_fixed
 - id: 412400
   prefix: '9883'
   number_min_length: 7
   number_max_length: 12
-  uuid: 80f6fdab-d939-420b-a2d6-8022f197babf
+  uuid: 4e38c440-552f-425a-9848-f65ab03154eb
   country_id: *ir
   network_id: *ir_fixed
 - id: 414871
   prefix: '9884'
   number_min_length: 7
   number_max_length: 12
-  uuid: 8e20d6a1-f2d3-4c0b-9c8e-0a01d9e46ff0
+  uuid: 921aadfd-ac64-427c-9b97-6a7ccc6c71ac
   country_id: *ir
   network_id: *ir_fixed
 - id: 429241
   prefix: '9886'
   number_min_length: 7
   number_max_length: 12
-  uuid: 911dc398-f5b6-4594-916e-8a79d31b301a
+  uuid: 4715aa54-b6ff-4e78-98af-cef403053560
   country_id: *ir
   network_id: *ir_fixed
 - id: 432453
   prefix: '9887'
   number_min_length: 7
   number_max_length: 12
-  uuid: af3ddcb4-e0a0-4d5a-8c51-7c628185fa21
+  uuid: 5d9f7ff6-1097-4e6d-b019-4a50a8243790
   country_id: *ir
   network_id: *ir_fixed
 # Mobile Prefixes
@@ -381,393 +381,393 @@ network_prefixes:
   prefix: '9891'
   number_min_length: 12
   number_max_length: 12
-  uuid: d2cf1d46-5ffc-4ce8-89dc-269cc3695330
+  uuid: 7ec6f991-7f18-44ef-a23d-4c8e22786e8c
   country_id: *ir
-  network_id: *ir_mci
+  network_id: *ir_mci_mobile
 - id: 175252
   prefix: '98922'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5f74ea1c-1138-4c94-9225-1f7ba41fad38
+  uuid: dc149f87-fe5a-44c2-8f8c-fada8864a28b
   country_id: *ir
-  network_id: *ir_rightel
+  network_id: *ir_rightel_mobile
 - id: 176639
   prefix: '98923'
   number_min_length: 12
   number_max_length: 12
-  uuid: 54c639c1-e766-40b7-970d-e4742fc44b4f
+  uuid: a83d64be-fe6c-4ab0-a473-7fe3dd79b4cc
   country_id: *ir
   network_id: *ir_mobile
 - id: 180082
   prefix: '98920'
   number_min_length: 12
   number_max_length: 12
-  uuid: 18bfffb5-bbe6-4c87-94fc-22b33d42742a
+  uuid: 2bc695d6-1261-4d90-88fa-eec6e6f03f11
   country_id: *ir
-  network_id: *ir_rightel
+  network_id: *ir_rightel_mobile
 - id: 180882
   prefix: '98921'
   number_min_length: 12
   number_max_length: 12
-  uuid: d16fd538-afdd-4978-9685-2b64cb8a7a10
+  uuid: 08236451-7c24-4b15-8e8c-06f68983521b
   country_id: *ir
-  network_id: *ir_rightel
+  network_id: *ir_rightel_mobile
 - id: 189121
   prefix: '98932'
   number_min_length: 12
   number_max_length: 12
-  uuid: 33ada04d-3c89-4e41-bf67-2f368760232a
+  uuid: 0228ded7-94b1-4c17-8c74-e0637e0e2f6b
   country_id: *ir
-  network_id: *ir_taliya
+  network_id: *ir_taliya_mobile
 - id: 189511
   prefix: '98933'
   number_min_length: 12
   number_max_length: 12
-  uuid: c2cc5ef1-18c0-4f97-9751-6932ed1332c5
+  uuid: 2f91e167-4769-461c-895d-3d3570344633
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 195474
   prefix: '98930'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7b4a88cb-3a4f-4995-9c45-a95d51850821
+  uuid: fb80156a-24bb-42cb-a74a-6285a40ea371
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 196759
   prefix: '98934'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8dfe5dc9-e2a4-4ac9-916c-f07577dcc0c5
+  uuid: 9050860f-1cfc-434a-b89d-1a407f875f70
   country_id: *ir
-  network_id: *ir_telekish
+  network_id: *ir_telekish_mobile
 - id: 199234
   prefix: '98935'
   number_min_length: 12
   number_max_length: 12
-  uuid: c9b6be54-2e76-4e31-8953-7e68edf28b6b
+  uuid: 9620e26b-7982-4d05-a426-cd79b30605c8
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 204701
   prefix: '98936'
   number_min_length: 12
   number_max_length: 12
-  uuid: 818108b6-c55a-4f1f-b439-0f537ad1d012
+  uuid: 9eb5887b-7de6-42ea-9f13-70376d55212e
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 205187
   prefix: '98937'
   number_min_length: 12
   number_max_length: 12
-  uuid: 57a9138e-58e6-40f1-bf3b-52bb4288dbc1
+  uuid: a2fdab73-9d7f-4255-bcff-4afcf60b7be0
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 206198
   prefix: '98938'
   number_min_length: 12
   number_max_length: 12
-  uuid: a004b865-7e31-4d98-820e-78b263257228
+  uuid: e44a4595-2c36-4113-ae72-d896ac53ed82
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 212005
   prefix: '98939'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0991b74d-5c25-4327-a950-a8b0a8497ee0
+  uuid: 71ef4a1b-8b98-4c61-a49c-9991b5622c9e
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 237753
   prefix: '98992'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4e5ca616-3c01-4145-a075-e69374e6e863
+  uuid: ca8f87f0-70c4-4888-94a8-de8c09eb335e
   country_id: *ir
-  network_id: *ir_mci
+  network_id: *ir_mci_mobile
 - id: 239290
   prefix: '98990'
   number_min_length: 12
   number_max_length: 12
-  uuid: e3cac7ab-f50a-41f6-b9f5-167c9886942c
+  uuid: 22d36214-9660-4b34-8b75-323485c5438a
   country_id: *ir
-  network_id: *ir_mci
+  network_id: *ir_mci_mobile
 - id: 239457
   prefix: '98991'
   number_min_length: 12
   number_max_length: 12
-  uuid: 047895bb-1658-44bf-bd86-5d58f2f5e18d
+  uuid: a499945d-8336-4eed-b5fc-1ef7cdaae201
   country_id: *ir
-  network_id: *ir_mci
+  network_id: *ir_mci_mobile
 - id: 239708
   prefix: '989940'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5ec2403a-6f1d-4b8d-98ae-135d165fe032
+  uuid: b1510df1-4c52-43bd-94a1-87a52036ada2
   country_id: *ir
-  network_id: *ir_anarestan
+  network_id: *ir_anarestan_mobile
 - id: 239709
   prefix: '989941'
   number_min_length: 13
   number_max_length: 13
-  uuid: 48ac1308-8f8f-4453-9aed-a254302d531c
+  uuid: 90be35ea-2c59-40b1-bd98-87e1d832216c
   country_id: *ir
-  network_id: *ir_anarestan
+  network_id: *ir_anarestan_mobile
 - id: 239767
   prefix: '989942'
   number_min_length: 13
   number_max_length: 13
-  uuid: a390aded-5a5d-413e-812a-aec9c157ecaa
+  uuid: a581d85e-68f7-488c-a4b0-2875ad8b3970
   country_id: *ir
-  network_id: *ir_anarestan
+  network_id: *ir_anarestan_mobile
 - id: 239780
   prefix: '989944'
   number_min_length: 13
   number_max_length: 13
-  uuid: fb876daf-52ee-493e-8741-95d439855e96
+  uuid: 62fa5b7c-cf0c-47bd-bef1-6fccffc7e8c6
   country_id: *ir
-  network_id: *ir_anarestan
+  network_id: *ir_anarestan_mobile
 - id: 239782
   prefix: '989945'
   number_min_length: 13
   number_max_length: 13
-  uuid: fd0ca4fb-d4e8-4e54-a369-cfaed02a3398
+  uuid: a5414980-e63c-4f6d-8578-ccfabc4a678c
   country_id: *ir
-  network_id: *ir_anarestan
+  network_id: *ir_anarestan_mobile
 - id: 239801
   prefix: '9899510'
   number_min_length: 14
   number_max_length: 14
-  uuid: ed175ea4-2058-4bdc-84e8-ddafa9536d3e
+  uuid: e7f70d22-7f89-435d-aab9-38c28064b9aa
   country_id: *ir
   network_id: *ir_mobile
 - id: 239851
   prefix: '98996'
   number_min_length: 12
   number_max_length: 12
-  uuid: 14d69392-8e31-4e42-95ce-3ead8c361ccb
+  uuid: 4275ec88-f365-4f8c-891d-4f88294c3c82
   country_id: *ir
   network_id: *ir_mobile
 - id: 240557
   prefix: '9899888'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1d361e48-d0ab-4c10-8d01-0f7db03e7320
+  uuid: 45c3f826-2c98-4c2f-ac69-30c5529c15f7
   country_id: *ir
   network_id: *ir_mobile
 - id: 240580
   prefix: '989990'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1d3d4f78-9351-426a-898a-106708e72ddc
+  uuid: 6d127484-124f-4144-8e47-e193cf281c79
   country_id: *ir
-  network_id: *ir_lotustel
+  network_id: *ir_lotustel_mobile
 - id: 240581
   prefix: '989991'
   number_min_length: 13
   number_max_length: 13
-  uuid: 410d0daf-90f2-4259-86c5-0f19aeacad1b
+  uuid: 0693471f-8fa0-4714-a1c8-dd798707ec2a
   country_id: *ir
-  network_id: *ir_aptel
+  network_id: *ir_aptel_mobile
 - id: 240619
   prefix: '9899914'
   number_min_length: 14
   number_max_length: 14
-  uuid: c470f2eb-1441-430a-b237-af65b3c76ee4
+  uuid: 678d8969-3726-4c66-8a03-96273306eba5
   country_id: *ir
-  network_id: *ir_hiweb
+  network_id: *ir_hiweb_mobile
 - id: 241476
   prefix: '9899550'
   number_min_length: 14
   number_max_length: 14
-  uuid: eda7b667-f005-45bc-b768-99c3d53958ed
+  uuid: dabfb4b7-25da-484b-908d-f52804b33d5b
   country_id: *ir
   network_id: *ir_mobile
 - id: 241830
   prefix: '9899810'
   number_min_length: 14
   number_max_length: 14
-  uuid: b406550e-bb10-4ebe-b340-c55cf9b873e9
+  uuid: a2dac23b-d381-4b3b-b356-9fadcad2363a
   country_id: *ir
-  network_id: *ir_shatel_mobile
+  network_id: *ir_shatel_mobile_mobile
 - id: 241850
   prefix: '9899811'
   number_min_length: 14
   number_max_length: 14
-  uuid: 08a89b95-e7f7-40e1-9e5c-447938b98b82
+  uuid: 3da486d0-c935-4884-83fd-eefaae900a24
   country_id: *ir
-  network_id: *ir_shatel_mobile
+  network_id: *ir_shatel_mobile_mobile
 - id: 241869
   prefix: '9899812'
   number_min_length: 14
   number_max_length: 14
-  uuid: bebc7b2a-ff35-4a48-91e3-f8494e827314
+  uuid: 20a380c3-32d8-43eb-af09-844c0eeeb7a4
   country_id: *ir
-  network_id: *ir_shatel_mobile
+  network_id: *ir_shatel_mobile_mobile
 - id: 241897
   prefix: '9899813'
   number_min_length: 14
   number_max_length: 14
-  uuid: 953a188d-a6f0-4226-81db-6cf8af204f68
+  uuid: 50ebd3dd-5c63-4a18-a4cd-9cc44a288206
   country_id: *ir
   network_id: *ir_mobile
 - id: 241906
   prefix: '9899814'
   number_min_length: 14
   number_max_length: 14
-  uuid: 77540d26-c7f4-4536-9d3a-31d8a15083a0
+  uuid: 5260b4cd-1282-4d64-9d4a-ae6772d29a99
   country_id: *ir
-  network_id: *ir_shatel_mobile
+  network_id: *ir_shatel_mobile_mobile
 - id: 241920
   prefix: '9899815'
   number_min_length: 14
   number_max_length: 14
-  uuid: dbf59e22-5bdc-471b-93e4-11bf8663cea5
+  uuid: 77dfbd17-f777-4e14-b4f1-ba7270803834
   country_id: *ir
   network_id: *ir_mobile
 - id: 241940
   prefix: '9899816'
   number_min_length: 14
   number_max_length: 14
-  uuid: bb5c5855-1a4d-42b8-9b14-24030d982572
+  uuid: 277c9474-92a6-4231-8887-26823c1c871e
   country_id: *ir
   network_id: *ir_mobile
 - id: 241951
   prefix: '9899817'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3b874f11-5950-4b45-983a-cd2a5fefee06
+  uuid: bb2c3148-5ce8-4f7a-9dd2-857df7964055
   country_id: *ir
   network_id: *ir_mobile
 - id: 241957
   prefix: '9899818'
   number_min_length: 14
   number_max_length: 14
-  uuid: 026decac-20fb-4163-a3f1-c1c912100697
+  uuid: 5b7fd82c-77f8-47bf-bada-b3a1959b4082
   country_id: *ir
   network_id: *ir_mobile
 - id: 241977
   prefix: '9899819'
   number_min_length: 14
   number_max_length: 14
-  uuid: 323ee1a9-3946-495c-b4d6-b38a4d7bb44c
+  uuid: 7e8cc5bb-6ebe-4e73-9812-e6e67c14e6b6
   country_id: *ir
   network_id: *ir_mobile
 - id: 241986
   prefix: '989982'
   number_min_length: 13
   number_max_length: 13
-  uuid: ca8626eb-f43e-4a91-9953-452ff70cf7bd
+  uuid: 7c83252c-e36c-44f6-8a8a-47eb1d33d513
   country_id: *ir
   network_id: *ir_mobile
 - id: 242260
   prefix: '9899921'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0ed45fd6-c34e-4810-b73f-67f7b997ce9e
+  uuid: 827babc5-7baf-41cd-afc4-a45565ed9f43
   country_id: *ir
   network_id: *ir_mobile
 - id: 242663
   prefix: '9899969'
   number_min_length: 14
   number_max_length: 14
-  uuid: dfb8d0b1-164e-42f3-a0f5-9e12b274712d
+  uuid: 8e839671-5794-486c-8a09-29db4ead0e40
   country_id: *ir
   network_id: *ir_mobile
 - id: 247659
   prefix: '9899977'
   number_min_length: 14
   number_max_length: 14
-  uuid: 736bd671-a59c-4264-8a0a-c7545dd0e6b2
+  uuid: 81abc965-09b1-4d61-9c4e-8e620428a036
   country_id: *ir
   network_id: *ir_mobile
 - id: 247737
   prefix: '9899987'
   number_min_length: 14
   number_max_length: 14
-  uuid: 494e580f-5323-45e7-95ed-7059679304d8
+  uuid: c94afd25-21fd-4b0b-8970-fb6d8eb8eb24
   country_id: *ir
-  network_id: *ir_arian_tel
+  network_id: *ir_arian_tel_mobile
 - id: 247738
   prefix: '9899988'
   number_min_length: 14
   number_max_length: 14
-  uuid: f101f497-8808-4d37-9a18-36724add73a3
+  uuid: b4683945-cd72-402e-833e-0aa6c96085f9
   country_id: *ir
-  network_id: *ir_arian_tel
+  network_id: *ir_arian_tel_mobile
 - id: 247739
   prefix: '9899989'
   number_min_length: 14
   number_max_length: 14
-  uuid: e40ef065-387b-46ad-8058-76332d9bba83
+  uuid: 6e0d72ab-ee4f-4656-9009-594ed42359d8
   country_id: *ir
-  network_id: *ir_arian_tel
+  network_id: *ir_arian_tel_mobile
 - id: 247750
   prefix: '989999'
   number_min_length: 13
   number_max_length: 13
-  uuid: 57ff4051-ac24-4a63-acbe-c9bdb13728b7
+  uuid: 6ba71761-52ec-4d90-a5aa-7dbe7640bdf6
   country_id: *ir
-  network_id: *ir_samantel
+  network_id: *ir_samantel_mobile
 - id: 447899
   prefix: '98901'
   number_min_length: 12
   number_max_length: 12
-  uuid: d8c4dbdc-0447-4cd3-a8f6-5e60ace06af0
+  uuid: 2bb8bc4a-8811-45d3-88df-a2a949546d1d
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 449134
   prefix: '989044'
   number_min_length: 13
   number_max_length: 13
-  uuid: d78c6d08-1120-4038-a985-d31fadc117fa
+  uuid: 245fd230-4813-4bd0-b386-586659e94288
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 449234
   prefix: '989045'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5c0f65ff-80ed-4605-9ad4-3d82d56ef038
+  uuid: 226e8d99-18d0-40ff-a8f6-b8a6dacd80de
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 449334
   prefix: '989046'
   number_min_length: 13
   number_max_length: 13
-  uuid: 76085efd-b780-40e1-aca9-421534fe251d
+  uuid: 4fda276c-a0f5-443e-aaa3-ec7547975a70
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 453277
   prefix: '98900'
   number_min_length: 12
   number_max_length: 12
-  uuid: a6702331-3533-4d6f-aa8f-2b830c53c1e8
+  uuid: 9b8c5583-00aa-4d59-bbba-d925a84962cb
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 453854
   prefix: '98902'
   number_min_length: 12
   number_max_length: 12
-  uuid: 35af7232-fb7a-4885-87a6-d0996348bf31
+  uuid: fd8ce37a-fd16-4ae5-a283-e4ff9b8cc6bd
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 453904
   prefix: '98903'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6b1338f4-ba4f-4ba7-89ce-8711eb1e4f1c
+  uuid: d31df7d5-0770-4094-b715-aba74e74fd90
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 - id: 454766
   prefix: '98905'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2a5e474f-49f3-4dad-83c4-8256023178fc
+  uuid: b9341c3b-b4a6-431d-9e5b-6bb01547280e
   country_id: *ir
-  network_id: *ir_mtn_irancell
+  network_id: *ir_mtn_irancell_mobile
 # Satellite Prefixes
 - id: 240898
   prefix: '98993'
   number_min_length: 12
   number_max_length: 12
-  uuid: 27893c66-04a3-47d4-a800-1145ef1f3421
+  uuid: 5f4de799-bb64-44d1-8dba-d2492c3bfbc8
   country_id: *ir
   network_id: *ir_satellite
 # Country code Prefixes
@@ -775,7 +775,7 @@ network_prefixes:
   prefix: '98'
   number_min_length: 4
   number_max_length: 12
-  uuid: fe17abca-c0ea-493f-a07f-ef0dc0c291dd
+  uuid: 963fb182-651a-49bf-9356-6f3e784c26da
   country_id: *ir
   network_id: *ir_fixed_cc
 # Supplementary services Prefixes
@@ -783,13 +783,13 @@ network_prefixes:
   prefix: '981'
   number_min_length: 6
   number_max_length: 6
-  uuid: 2398d534-99d8-407b-bdbc-a4ec57172008
+  uuid: e2cbdbf2-4f8e-499c-bae6-6a5817af966d
   country_id: *ir
   network_id: *ir_special_services
 - id: 261605
   prefix: '9896'
   number_min_length: 8
   number_max_length: 14
-  uuid: b387b2f3-aed4-4946-acfe-b1cc65795037
+  uuid: 8b1803b4-cc1d-4774-800e-5906bdaabc83
   country_id: *ir
   network_id: *ir_special_services

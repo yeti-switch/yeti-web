@@ -1,32 +1,32 @@
 country_id: &pm 182
 networks:
 # Mobile Networks
-- id: &pm_globaltel 4372
-  name: PM Globaltel
-  uuid: db478c63-85d8-446c-805b-43deb939b657
+- id: &pm_globaltel_mobile 4389
+  name: PM Globaltel Mobile
+  uuid: 5e395fec-1fb9-4de4-baf4-366c009d2ca0
   type_id: 3
-- id: &pm_ameris 5313
-  name: PM Ameris
-  uuid: bcc942bc-038f-4df3-bd46-1863ba1ec7a8
+- id: &pm_ameris_mobile 5332
+  name: PM Ameris Mobile
+  uuid: 05bf8d5c-49eb-4024-902b-0d0e4ae57cd7
   type_id: 3
-- id: &pm_mobile 5369
+- id: &pm_mobile 5389
   name: PM Mobile
-  uuid: f9d468a6-af43-4762-8e9d-df24fc6369f6
+  uuid: a918b75f-8bd0-4463-9625-c20e30e7c6a3
   type_id: 3
 # Fixed Networks
-- id: &pm_fixed 4389
+- id: &pm_fixed 4406
   name: PM Fixed
-  uuid: 6b592b64-8123-481a-8005-50e1c9c3ac4c
+  uuid: 329cbc5c-eac5-453a-bf08-27f065a6b300
   type_id: 12
 # Country code Networks
-- id: &pm_fixed_cc 4792
+- id: &pm_fixed_cc 4810
   name: PM Fixed Cc
-  uuid: 1daa2931-0b29-45a3-8c6c-2e677a1fd6d8
+  uuid: bce19193-ec84-48bb-b281-92527f04b04f
   type_id: 17
 # Supplementary services Networks
-- id: &pm_special_services 5018
+- id: &pm_special_services 5036
   name: PM Special Services
-  uuid: 1e5d17a5-484b-4355-8d1d-f6e8294d4c16
+  uuid: b1c5e3a1-9333-4efb-8089-a83c5d2321a8
   type_id: 14
 network_prefixes:
 # Mobile Prefixes
@@ -34,133 +34,133 @@ network_prefixes:
   prefix: '50840'
   number_min_length: 11
   number_max_length: 11
-  uuid: e96c4020-be2a-4e98-9ac3-4143dc8c8a7a
+  uuid: 0ccd774d-bbde-4cbc-b55f-e507ef02fadf
   country_id: *pm
-  network_id: *pm_globaltel
+  network_id: *pm_globaltel_mobile
 - id: 245860
   prefix: '50844'
   number_min_length: 11
   number_max_length: 11
-  uuid: 6584aa6e-110c-4ac6-82ce-b7e063958cb5
+  uuid: 543d5fc8-f679-43a2-82ce-f2896531424f
   country_id: *pm
-  network_id: *pm_globaltel
+  network_id: *pm_globaltel_mobile
 - id: 249926
   prefix: '50855'
   number_min_length: 11
   number_max_length: 11
-  uuid: 91d095da-f137-41ab-9403-0ad666f0f7ac
+  uuid: 59bc3df5-3ae8-46bb-98c7-9c972fdc990c
   country_id: *pm
-  network_id: *pm_ameris
+  network_id: *pm_ameris_mobile
 - id: 251471
   prefix: '50870840'
   number_min_length: 17
   number_max_length: 17
-  uuid: fffebfe3-ecf5-4b70-a3c2-8e0e74f88da4
+  uuid: 43f35bc3-175e-429d-9990-bfe15ba4fed6
   country_id: *pm
   network_id: *pm_mobile
 - id: 251472
   prefix: '50870841'
   number_min_length: 17
   number_max_length: 17
-  uuid: 5cb36a4a-6430-41a5-8d42-bb780f9df88e
+  uuid: b619bb47-6da3-46b5-9db2-386162ee0e24
   country_id: *pm
   network_id: *pm_mobile
 - id: 251473
   prefix: '50870842'
   number_min_length: 17
   number_max_length: 17
-  uuid: 188ea341-529e-4882-8a83-7140bbc4d635
+  uuid: d0153867-e1df-4f2b-b082-5a515b9dfa1d
   country_id: *pm
   network_id: *pm_mobile
 - id: 251474
   prefix: '50870843'
   number_min_length: 17
   number_max_length: 17
-  uuid: 35dffa29-d44e-4548-8509-32e5afdf7e9d
+  uuid: 35662243-2ce4-4f4e-9c62-77b833027190
   country_id: *pm
   network_id: *pm_mobile
 - id: 251475
   prefix: '50870844'
   number_min_length: 17
   number_max_length: 17
-  uuid: 9887565b-0f94-4b7a-a2e5-1fb780fd5c38
+  uuid: f98f7997-5aec-46a0-afdd-d6e16cbe99b9
   country_id: *pm
   network_id: *pm_mobile
 - id: 251476
   prefix: '50870845'
   number_min_length: 17
   number_max_length: 17
-  uuid: 14cd191d-6225-4cef-ba40-365c6b8b1e31
+  uuid: 317ba99a-1ccd-4af7-a89a-c2d61b48e3aa
   country_id: *pm
   network_id: *pm_mobile
 - id: 251477
   prefix: '50870850'
   number_min_length: 17
   number_max_length: 17
-  uuid: 3f1aee9a-faf7-415c-b050-0d4f3c45c95c
+  uuid: 6efcd068-8614-4d43-ab70-01f885473714
   country_id: *pm
   network_id: *pm_mobile
 - id: 251478
   prefix: '50870851'
   number_min_length: 17
   number_max_length: 17
-  uuid: 9298b9f0-0589-454b-93de-32d3a1f15dc2
+  uuid: 0dc38f18-b1b4-4bfb-b62a-946d82bf54d9
   country_id: *pm
   network_id: *pm_mobile
 - id: 251479
   prefix: '50870852'
   number_min_length: 17
   number_max_length: 17
-  uuid: a3297273-6acd-45cb-be64-35a8743fe1d0
+  uuid: e4dd9dfa-6d02-4a83-8ded-54793fb57715
   country_id: *pm
   network_id: *pm_mobile
 - id: 251480
   prefix: '50870853'
   number_min_length: 17
   number_max_length: 17
-  uuid: 782e91b0-239e-493b-a8a2-0eee215a85f8
+  uuid: 21dbede4-ad1f-4d06-ad37-e4ab30806705
   country_id: *pm
   network_id: *pm_mobile
 - id: 251481
   prefix: '50870854'
   number_min_length: 17
   number_max_length: 17
-  uuid: 111448b2-797f-4d8f-be39-cb34ce9f9b64
+  uuid: 370e6d3b-1055-48d5-bad1-bed4cc5e88a2
   country_id: *pm
   network_id: *pm_mobile
 - id: 251482
   prefix: '50870855'
   number_min_length: 17
   number_max_length: 17
-  uuid: b47c849f-8c11-4fb7-84f5-2170f33d9219
+  uuid: e2c11ca9-5c4a-4ccc-828e-296a2d3f5993
   country_id: *pm
   network_id: *pm_mobile
 - id: 251483
   prefix: '50870856'
   number_min_length: 17
   number_max_length: 17
-  uuid: 32795d7f-ac0e-452b-9431-799f5e423b4c
+  uuid: 490cd7eb-123d-4a63-a65b-6a5f65bcc824
   country_id: *pm
   network_id: *pm_mobile
 - id: 251484
   prefix: '50870857'
   number_min_length: 17
   number_max_length: 17
-  uuid: bfc547dc-07aa-472f-b6c1-5a7930b64f18
+  uuid: ed885363-1f6c-451d-83ef-cab250452401
   country_id: *pm
   network_id: *pm_mobile
 - id: 251485
   prefix: '50870858'
   number_min_length: 17
   number_max_length: 17
-  uuid: 482f021b-c61b-4d98-baa8-fc1955afe867
+  uuid: 0eeda3a0-a946-4890-80b1-7e05f326e355
   country_id: *pm
   network_id: *pm_mobile
 - id: 251486
   prefix: '50870859'
   number_min_length: 17
   number_max_length: 17
-  uuid: 1b2078ae-0040-4332-b086-6e2b401e6dfc
+  uuid: 57aa5e54-4723-4f55-8bab-a6f89854c43f
   country_id: *pm
   network_id: *pm_mobile
 # Fixed Prefixes
@@ -168,21 +168,21 @@ network_prefixes:
   prefix: '50841'
   number_min_length: 11
   number_max_length: 11
-  uuid: 0a1f3041-fad0-4ecf-8021-f8cb7921476b
+  uuid: 8ecf6957-8a3a-4267-a450-7122c3057111
   country_id: *pm
   network_id: *pm_fixed
 - id: 245606
   prefix: '50842'
   number_min_length: 11
   number_max_length: 11
-  uuid: 1df47ea6-25d9-41f1-b041-d84211765c5d
+  uuid: 94a10b64-4141-4d10-b25a-1e9eb0322881
   country_id: *pm
   network_id: *pm_fixed
 - id: 249429
   prefix: '50850'
   number_min_length: 11
   number_max_length: 11
-  uuid: bc7358da-fa0d-4bf6-862d-a25077e801f0
+  uuid: 654fb7f3-985a-44ae-be68-be9ca067dfd5
   country_id: *pm
   network_id: *pm_fixed
 # Country code Prefixes
@@ -190,7 +190,7 @@ network_prefixes:
   prefix: '508'
   number_min_length: 5
   number_max_length: 12
-  uuid: 217c7492-92f3-4250-a9b3-16fd1e469d24
+  uuid: cfb251d5-6614-4f6e-a500-a7b4b6228f28
   country_id: *pm
   network_id: *pm_fixed_cc
 # Supplementary services Prefixes
@@ -198,6 +198,6 @@ network_prefixes:
   prefix: '5081'
   number_min_length: 6
   number_max_length: 8
-  uuid: b85c6e58-aa0f-4fd3-9c0b-4cbed40270e4
+  uuid: 98a40208-e031-4cf0-93fd-a2ae9aa48c06
   country_id: *pm
   network_id: *pm_special_services

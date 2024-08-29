@@ -1,65 +1,65 @@
 country_id: &bn 32
 networks:
 # Fixed Networks
-- id: &bn_fixed 3208
+- id: &bn_fixed 3213
   name: BN Fixed
-  uuid: 1251824d-6190-4d74-9456-fbd8d429a4a4
+  uuid: 9cbf40c2-d6cf-4d62-93cd-37a89928c55c
   type_id: 12
 # Supplementary services Networks
-- id: &bn_special_services 3965
+- id: &bn_special_services 3980
   name: BN Special Services
-  uuid: c0005a92-b74d-4050-8e3f-3012b1df8f7a
+  uuid: bbad449d-fc38-42f4-b53d-1da310c26d0e
   type_id: 14
-- id: &bn_freephone_services 4039
+- id: &bn_freephone_services 4054
   name: BN Freephone Services
-  uuid: 584f2599-89ba-4a0b-bfc9-2e0be30a8afe
+  uuid: c9a08248-edc2-4f39-b0bf-9a0a7c96c3c3
   type_id: 14
-- id: &bn_premium_rate_services 4087
+- id: &bn_premium_rate_services 4102
   name: BN Premium Rate Services
-  uuid: d931681c-9232-4677-ab34-70c484c75206
+  uuid: ea4fc37f-1e52-4b12-b60b-708b7d72f8e3
   type_id: 14
-- id: &bn_sms_services 4339
+- id: &bn_sms_services 4356
   name: BN Sms Services
-  uuid: cb26f053-57d1-4d6c-a89c-c64027cbf23a
+  uuid: 9195d818-ca89-4107-b138-5bdef3316250
   type_id: 14
-- id: &bn_voip 5305
+- id: &bn_voip 5324
   name: BN Voip
-  uuid: 40679786-1d05-477e-a904-c494090dbba6
+  uuid: d25a2cf9-1170-4c54-a861-8b16ba7c28ed
   type_id: 14
-- id: &bn_emergency_services 5621
+- id: &bn_emergency_services 5650
   name: BN Emergency Services
-  uuid: 85804823-3a1a-43d6-b47f-bc5589ad0255
+  uuid: c15773da-a9ea-4f28-a8d7-5f6c32877f96
   type_id: 14
-- id: &bn_home_country_direct_services 6066
+- id: &bn_home_country_direct_services 6100
   name: BN Home Country Direct Services
-  uuid: 39b8eb50-138d-4eab-bb2b-132a1b7da6f5
+  uuid: 5de0198d-69ae-404f-850a-387eeaad7ca6
   type_id: 14
-- id: &bn_international_freephone_services 6120
+- id: &bn_international_freephone_services 6154
   name: BN International Freephone Services
-  uuid: e78a68ce-b80b-4a8d-83e9-1debb0551325
+  uuid: 0a2606d9-8b9d-43d0-b349-262962c8536b
   type_id: 14
 # Country code Networks
-- id: &bn_fixed_cc 4650
+- id: &bn_fixed_cc 4668
   name: BN Fixed Cc
-  uuid: 423e3f35-5c94-4fb9-b448-e9a9c5e6910e
+  uuid: 71e229b5-f2b6-4ded-9bb2-e588b554fc67
   type_id: 17
 # Mobile Networks
-- id: &bn_dst 5375
-  name: BN Dst
-  uuid: 13c66f77-8883-4a24-98f1-e05d559da0c0
+- id: &bn_dst_mobile 5395
+  name: BN Dst Mobile
+  uuid: f5428850-cb41-4d6e-8eb1-3fc78613a42f
   type_id: 3
-- id: &bn_mobile 5942
+- id: &bn_mobile 5974
   name: BN Mobile
-  uuid: 5e68eca1-f287-4764-a243-c98359c9efde
+  uuid: 03641c37-f771-4c71-895b-e6b22e160ac5
   type_id: 3
-- id: &bn_progresif 6150
-  name: BN Progresif
-  uuid: e6aa3810-0d7a-4c61-a9be-4afe115c4e47
+- id: &bn_progresif_mobile 6184
+  name: BN Progresif Mobile
+  uuid: 601fb9ab-34d8-4677-a4cf-95be4f298aeb
   type_id: 3
 # Paging Networks
-- id: &bn_imagine 6199
-  name: BN Imagine
-  uuid: a6fd5298-09f6-4119-a86f-1c328244c0bf
+- id: &bn_imagine_paging 6233
+  name: BN Imagine Paging
+  uuid: ab5a5583-e3d6-4962-a502-6b11a2ebf75c
   type_id: 13
 network_prefixes:
 # Fixed Prefixes
@@ -67,469 +67,469 @@ network_prefixes:
   prefix: '6733'
   number_min_length: 10
   number_max_length: 10
-  uuid: 9e42fc9b-5a6c-49b3-9fb6-3d39187b05ac
+  uuid: 341a462f-0297-43da-b380-875c0062fd55
   country_id: *bn
   network_id: *bn_fixed
 - id: 40854
   prefix: '673322'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5a1e2721-8931-4c7e-ad4b-bdee37c70bbc
+  uuid: 02932679-ff6b-4ff0-a4ab-1884bbbfc814
   country_id: *bn
   network_id: *bn_fixed
 - id: 40913
   prefix: '6733230'
   number_min_length: 13
   number_max_length: 13
-  uuid: cd7460de-1fb2-40e2-97e3-ed9f84c52a81
+  uuid: 973905a0-ad0a-49df-8b1f-9c1b3691e5dd
   country_id: *bn
   network_id: *bn_fixed
 - id: 40916
   prefix: '6733233'
   number_min_length: 13
   number_max_length: 13
-  uuid: e2920d4f-43a1-446c-86c9-806f91940218
+  uuid: 2eed81a2-7497-4389-bcb0-0907ffc6f949
   country_id: *bn
   network_id: *bn_fixed
 - id: 40919
   prefix: '6733236'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7067dd15-7df5-4d54-81b2-5a65255cc39f
+  uuid: 828358b6-09e0-4d91-a7fa-21c7671d7779
   country_id: *bn
   network_id: *bn_fixed
 - id: 40922
   prefix: '673324'
   number_min_length: 12
   number_max_length: 12
-  uuid: b85bf5c0-de1d-4e57-9cc2-b9dc599df2de
+  uuid: 6b07f1ea-a8f1-4e07-9b00-10bdcce0cef2
   country_id: *bn
   network_id: *bn_fixed
 - id: 41159
   prefix: '673333'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6599b38f-6640-4097-9777-dff9b3e5700e
+  uuid: d6429ba8-191f-4c8f-8bb6-da31422468a0
   country_id: *bn
   network_id: *bn_fixed
 - id: 41169
   prefix: '673334'
   number_min_length: 12
   number_max_length: 12
-  uuid: 969d4a19-b4e8-4e5b-82bf-5be7235427ae
+  uuid: c2facaab-bd8b-4bff-bbc4-3641a1af72c1
   country_id: *bn
   network_id: *bn_fixed
 - id: 41173
   prefix: '6733364'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4b870bbc-7e79-40fd-af7f-43246ad72ced
+  uuid: c3e18b5b-66f5-4075-b730-792bac7eb27a
   country_id: *bn
   network_id: *bn_fixed
 - id: 41174
   prefix: '673337'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5e9922c3-fb49-4cd5-9cdb-540d14093c32
+  uuid: ff28d955-4534-4387-8284-996b84a30fa7
   country_id: *bn
   network_id: *bn_fixed
 - id: 41176
   prefix: '673338'
   number_min_length: 12
   number_max_length: 12
-  uuid: bee07fab-88a5-49d5-8ef4-f3b9fc418159
+  uuid: 34cb50d5-9dc2-4e57-af96-258d22496589
   country_id: *bn
   network_id: *bn_fixed
 - id: 41416
   prefix: '673353'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3a422592-566e-47d1-b978-c3d3e53169e3
+  uuid: 28238eed-3fbd-4ab0-9bfb-f49481ad6642
   country_id: *bn
   network_id: *bn_fixed
 - id: 86556
   prefix: '6734'
   number_min_length: 10
   number_max_length: 10
-  uuid: c7a048df-abc5-49b1-bf49-4241a9b4de40
+  uuid: e24134d1-977a-47b0-8112-840a66009bfb
   country_id: *bn
   network_id: *bn_fixed
 - id: 86600
   prefix: '673422'
   number_min_length: 12
   number_max_length: 12
-  uuid: ae74ce24-e43b-4a65-bce5-1ce984dc1a5a
+  uuid: 5b7b0c1c-90c0-4932-af73-6ba2158e6ae4
   country_id: *bn
   network_id: *bn_fixed
 - id: 86602
   prefix: '6734230'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8732ef06-84c9-4384-8b88-e359639339fa
+  uuid: f977ad02-dd5c-43b0-9813-d8e68d23478f
   country_id: *bn
   network_id: *bn_fixed
 - id: 86603
   prefix: '6734233'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1fd5dd95-53cd-436d-a0fb-fc37abfd43d2
+  uuid: 575233de-7585-4b5f-a394-beb966758e03
   country_id: *bn
   network_id: *bn_fixed
 - id: 86604
   prefix: '6734237'
   number_min_length: 13
   number_max_length: 13
-  uuid: cf974478-afc9-4bf6-8451-4992d5a3e021
+  uuid: 3f79e55f-e1bd-407d-aabe-c371ba802bd2
   country_id: *bn
   network_id: *bn_fixed
 - id: 86606
   prefix: '6734240'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0b11c98f-e5bb-4808-94d5-e27d8db823a9
+  uuid: d9f9b782-022a-478f-bc25-dfb297b52e1b
   country_id: *bn
   network_id: *bn_fixed
 - id: 86608
   prefix: '6734242'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0e4651e7-f63c-47aa-8f65-ee7356751ec0
+  uuid: b8e8980a-c93d-49d0-999f-10cd4a593f4d
   country_id: *bn
   network_id: *bn_fixed
 - id: 86613
   prefix: '6734244'
   number_min_length: 13
   number_max_length: 13
-  uuid: f1eb21ff-17d9-4fb3-991e-f941bc679c3e
+  uuid: 92b7adb3-44b6-4f7d-834f-fbb0cb928daf
   country_id: *bn
   network_id: *bn_fixed
 - id: 86615
   prefix: '6734247'
   number_min_length: 13
   number_max_length: 13
-  uuid: ef4a0feb-b471-4c9e-8f12-807bd9f39460
+  uuid: 7ead6009-19e1-4b67-8307-1b3737141f0c
   country_id: *bn
   network_id: *bn_fixed
 - id: 86618
   prefix: '673426'
   number_min_length: 12
   number_max_length: 12
-  uuid: 706d4e3f-a32b-413e-9287-4c56e67acdfc
+  uuid: 5adac3ca-4be3-4dbd-be6e-730958a31791
   country_id: *bn
   network_id: *bn_fixed
 - id: 145874
   prefix: '6735'
   number_min_length: 10
   number_max_length: 10
-  uuid: 1c613bb7-8b31-40c7-9563-ed359731d558
+  uuid: 7b5e8308-eba3-46e9-b4dc-7450ab673097
   country_id: *bn
   network_id: *bn_fixed
 - id: 145913
   prefix: '673522'
   number_min_length: 12
   number_max_length: 12
-  uuid: d5cbb0c0-882f-40c0-9fb8-713c8d71b1e3
+  uuid: 3d0b8e30-8849-4ed8-af91-3f6c150614da
   country_id: *bn
   network_id: *bn_fixed
 - id: 145916
   prefix: '673523'
   number_min_length: 12
   number_max_length: 12
-  uuid: 85d9e204-4790-4b9d-b74a-aa8ccb23fbe1
+  uuid: 49b06046-f640-4e48-8962-6df1a9bcecba
   country_id: *bn
   network_id: *bn_fixed
 - id: 145919
   prefix: '673524'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3497fb7c-23c7-4141-bf10-fc9cb8cfa54b
+  uuid: a3c241e4-4d3c-4842-a5e1-93813eb82622
   country_id: *bn
   network_id: *bn_fixed
 - id: 145941
   prefix: '673525'
   number_min_length: 12
   number_max_length: 12
-  uuid: 83cd7446-e910-41c7-9638-94683ac18cfc
+  uuid: bb9aa89e-338a-4f9e-9173-e299a56ef560
   country_id: *bn
   network_id: *bn_fixed
 - id: 145951
   prefix: '673526'
   number_min_length: 12
   number_max_length: 12
-  uuid: f7ddb4ea-d99c-42bc-b68e-0c8eece1b559
+  uuid: 6f86f443-52f4-4a05-a271-c90a67bf91b8
   country_id: *bn
   network_id: *bn_fixed
 - id: 145959
   prefix: '673527'
   number_min_length: 12
   number_max_length: 12
-  uuid: 34ab3324-e6e4-41eb-a81b-ba9ab3b2943f
+  uuid: d5c71fe1-6982-4ad6-9634-4874bfa56758
   country_id: *bn
   network_id: *bn_fixed
 - id: 257322
   prefix: '6732'
   number_min_length: 10
   number_max_length: 10
-  uuid: a216786b-1e80-46b5-ad21-b8be014cf133
+  uuid: e4869a06-ba15-4e0a-9be0-20266f266709
   country_id: *bn
   network_id: *bn_fixed
 - id: 257351
   prefix: '673220'
   number_min_length: 12
   number_max_length: 12
-  uuid: 701a6fb4-8d68-4bc9-8d5c-7612f63cbf82
+  uuid: 2f17e897-d0ae-436d-a9fb-6543f0d2a111
   country_id: *bn
   network_id: *bn_fixed
 - id: 257355
   prefix: '673221'
   number_min_length: 12
   number_max_length: 12
-  uuid: d1dfcca2-ced8-425f-b220-1304b0a66185
+  uuid: d7d1cecd-8586-470b-85d1-04ec361e02b3
   country_id: *bn
   network_id: *bn_fixed
 - id: 257360
   prefix: '673222'
   number_min_length: 12
   number_max_length: 12
-  uuid: d4433004-3ba5-428e-9450-ac09521fab11
+  uuid: 3b554508-2f7f-4c07-b7bf-a8c420afc159
   country_id: *bn
   network_id: *bn_fixed
 - id: 257372
   prefix: '673223'
   number_min_length: 12
   number_max_length: 12
-  uuid: b86ea8aa-6577-4755-9e6f-66cf7b4f1ef3
+  uuid: 90cc873e-6789-407b-ae18-77c4e7c27461
   country_id: *bn
   network_id: *bn_fixed
 - id: 257384
   prefix: '673224'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2c2b9b76-fcce-445a-8009-44476a78c494
+  uuid: 99060748-9795-4e63-999f-a0c398970ab5
   country_id: *bn
   network_id: *bn_fixed
 - id: 257389
   prefix: '673225'
   number_min_length: 12
   number_max_length: 12
-  uuid: f1466f2e-4c90-41f0-af9e-c1e7d30b031d
+  uuid: 84ed811e-5990-42b4-8f82-3ef7916d62fd
   country_id: *bn
   network_id: *bn_fixed
 - id: 257392
   prefix: '673226'
   number_min_length: 12
   number_max_length: 12
-  uuid: deafd28b-7fef-406f-b7ac-fee994bd8de2
+  uuid: 241a3201-4df7-40eb-94c6-dfdf18416793
   country_id: *bn
   network_id: *bn_fixed
 - id: 257402
   prefix: '673231'
   number_min_length: 12
   number_max_length: 12
-  uuid: e98cbe9b-3e1a-49e8-a7d3-8de80d70f13f
+  uuid: 5a98b716-24bb-4f1d-92ae-58baca03b9f5
   country_id: *bn
   network_id: *bn_fixed
 - id: 257403
   prefix: '673232'
   number_min_length: 12
   number_max_length: 12
-  uuid: ba57c68b-bb65-4ab1-9bde-780841726a02
+  uuid: 86c5f3bf-13a0-4c3f-8fb6-1e7904d2b3e6
   country_id: *bn
   network_id: *bn_fixed
 - id: 257406
   prefix: '673233'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1c8e98ee-1861-4522-a073-befef1b4b0ec
+  uuid: 4e3284bd-470f-42de-9c6a-ac8343de009a
   country_id: *bn
   network_id: *bn_fixed
 - id: 257408
   prefix: '673234'
   number_min_length: 12
   number_max_length: 12
-  uuid: d893e800-a527-44f9-8f80-f9fc19256875
+  uuid: 3db3b49b-5a77-48d2-9a79-ec851ee8060c
   country_id: *bn
   network_id: *bn_fixed
 - id: 257413
   prefix: '673236'
   number_min_length: 12
   number_max_length: 12
-  uuid: ed27fcd9-5bb2-4d4e-a804-176157806e79
+  uuid: bfaa05dd-a037-4dd5-ace5-da9397d10ead
   country_id: *bn
   network_id: *bn_fixed
 - id: 257432
   prefix: '673238'
   number_min_length: 12
   number_max_length: 12
-  uuid: e1beeb46-fc9e-4771-84c7-54416a3ede27
+  uuid: 018fd8ad-9a1e-471a-9da5-b2231bfd89aa
   country_id: *bn
   network_id: *bn_fixed
 - id: 257435
   prefix: '673239'
   number_min_length: 12
   number_max_length: 12
-  uuid: dfcb912c-e104-4529-8dd5-0615c6296c71
+  uuid: 472f33c9-53f2-49ed-b615-0d070e070803
   country_id: *bn
   network_id: *bn_fixed
 - id: 257441
   prefix: '673241'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0a51f0e3-8d01-4e70-af7a-32bc1b337b63
+  uuid: 26151504-eec7-4efe-b706-e62042d75d61
   country_id: *bn
   network_id: *bn_fixed
 - id: 257443
   prefix: '673242'
   number_min_length: 12
   number_max_length: 12
-  uuid: ffb75390-86e5-4cb4-95e7-74e4fc469b67
+  uuid: 46a07a14-cbcf-492e-814c-f4feaf82db41
   country_id: *bn
   network_id: *bn_fixed
 - id: 257449
   prefix: '673243'
   number_min_length: 12
   number_max_length: 12
-  uuid: 81becbe0-20a1-4942-be25-47f549632c26
+  uuid: 23d64196-3ead-4764-8812-aeb36ab4f033
   country_id: *bn
   network_id: *bn_fixed
 - id: 257458
   prefix: '673244'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9853671a-4fdb-484f-8607-8567aa2adce3
+  uuid: 4648a2c6-3843-4625-bb9b-5c6c56d090c1
   country_id: *bn
   network_id: *bn_fixed
 - id: 257468
   prefix: '673245'
   number_min_length: 12
   number_max_length: 12
-  uuid: 115112b8-316d-4a30-afcb-e047f9e366e4
+  uuid: 841a15ff-81d9-4fcf-a7af-28d978eef697
   country_id: *bn
   network_id: *bn_fixed
 - id: 257474
   prefix: '673246'
   number_min_length: 12
   number_max_length: 12
-  uuid: 015c6413-bf6f-4371-98f9-6c76c96de251
+  uuid: 83acb7b1-c6d5-4f29-a4e6-07c958205c13
   country_id: *bn
   network_id: *bn_fixed
 - id: 257476
   prefix: '673247'
   number_min_length: 12
   number_max_length: 12
-  uuid: 18be9555-53dc-43e4-bb53-454f9e7741db
+  uuid: 0e166dcd-4492-4b20-8f1e-41d211c85c21
   country_id: *bn
   network_id: *bn_fixed
 - id: 257496
   prefix: '673252'
   number_min_length: 12
   number_max_length: 12
-  uuid: 54ffc19c-4bb0-4346-bb55-bedfab4c6462
+  uuid: 830d95b3-8aec-4e79-b04f-fe6eb84be6a3
   country_id: *bn
   network_id: *bn_fixed
 - id: 257499
   prefix: '673253'
   number_min_length: 12
   number_max_length: 12
-  uuid: 95c151e4-a8c5-410b-98c2-44e0b8dbbc28
+  uuid: 45828790-cd86-4143-be6c-32917dc37944
   country_id: *bn
   network_id: *bn_fixed
 - id: 257501
   prefix: '673254'
   number_min_length: 12
   number_max_length: 12
-  uuid: 54d2f5db-90ae-42d8-832a-4839833c08e1
+  uuid: 62c72a6e-1723-4f13-b0e8-3a32a24448d8
   country_id: *bn
   network_id: *bn_fixed
 - id: 257535
   prefix: '673261'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9b023e26-3a23-4704-b29b-b66d60dfc118
+  uuid: 6c27e772-ef14-4411-ae60-6be203685bce
   country_id: *bn
   network_id: *bn_fixed
 - id: 257544
   prefix: '673264'
   number_min_length: 12
   number_max_length: 12
-  uuid: 750c0021-4d24-4403-8c4d-8e2f1829c1f6
+  uuid: 63728519-5d37-43f7-8f80-056f304fa4e0
   country_id: *bn
   network_id: *bn_fixed
 - id: 257553
   prefix: '673265'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8cf6f80c-a036-4112-a2d6-9e304b7e23a4
+  uuid: 84abbbe5-29b7-45db-b329-a1792d79cb87
   country_id: *bn
   network_id: *bn_fixed
 - id: 257566
   prefix: '673266'
   number_min_length: 12
   number_max_length: 12
-  uuid: ce2176dd-264e-474d-826f-325772933335
+  uuid: c6c98de1-843a-4c5a-ada4-801d3cae9e2a
   country_id: *bn
   network_id: *bn_fixed
 - id: 257580
   prefix: '673267'
   number_min_length: 12
   number_max_length: 12
-  uuid: b8dde749-231a-4d0b-977a-b268c4ff3815
+  uuid: b615e9fb-1058-40d5-a184-9c25c7a269e8
   country_id: *bn
   network_id: *bn_fixed
 - id: 257592
   prefix: '6732680'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7cb8033c-5bf6-459b-a142-0a63c904d469
+  uuid: 2b2c5ae5-b3dc-49a5-ac2e-8020d0d14322
   country_id: *bn
   network_id: *bn_fixed
 - id: 257595
   prefix: '6732681'
   number_min_length: 13
   number_max_length: 13
-  uuid: f56c3e73-8340-4960-8527-b7ae01d6d984
+  uuid: 43a0bdd8-fc4a-44ad-a49c-12784ff088ee
   country_id: *bn
   network_id: *bn_fixed
 - id: 257599
   prefix: '6732683'
   number_min_length: 13
   number_max_length: 13
-  uuid: d121f865-d417-44a2-8451-87663d99037e
+  uuid: f7ef44bc-0cd6-47d4-ac4a-9c66a8daf573
   country_id: *bn
   network_id: *bn_fixed
 - id: 257603
   prefix: '6732685'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4e44563f-1d91-4396-a978-e7b09534fdef
+  uuid: 146dd400-30db-4bca-969e-82131b3c5415
   country_id: *bn
   network_id: *bn_fixed
 - id: 257610
   prefix: '673269'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3cc57da2-8529-4598-b3de-d065803e01f8
+  uuid: db172606-32ae-4b9c-8b3d-70bc94da5c3b
   country_id: *bn
   network_id: *bn_fixed
 - id: 257643
   prefix: '673277'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1436793e-b3f1-41de-b7b7-513a0c37fb55
+  uuid: 58b5efcf-b163-4de1-97d4-47b74ccdc7a8
   country_id: *bn
   network_id: *bn_fixed
 - id: 257656
   prefix: '673278'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8e54c345-fb52-4311-b1d4-7f2460437664
+  uuid: ff2dadc0-77c8-4aa8-b13d-c05aa23135dc
   country_id: *bn
   network_id: *bn_fixed
 - id: 257660
   prefix: '673279'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9bd32f63-75f8-49ff-8a31-5c7f8f84b0cd
+  uuid: 23591925-9eaf-4041-a4e6-426d92d0d64f
   country_id: *bn
   network_id: *bn_fixed
 # Supplementary services Prefixes
@@ -537,84 +537,84 @@ network_prefixes:
   prefix: '67316'
   number_min_length: 10
   number_max_length: 10
-  uuid: fcdb1aeb-92f1-4032-adc2-80f62775d1ae
+  uuid: e5944550-4f22-4f9f-a5fb-13be97f29beb
   country_id: *bn
   network_id: *bn_special_services
 - id: 242918
   prefix: '6731800'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4a489a3f-58fe-44ec-8694-98da01444c5c
+  uuid: 18e41822-2a83-4846-be9b-7a0f798a0bf8
   country_id: *bn
   network_id: *bn_freephone_services
 - id: 242976
   prefix: '6731900'
   number_min_length: 15
   number_max_length: 15
-  uuid: bb5ac945-ebb8-462b-a991-ffd334f16355
+  uuid: 64863c7e-d983-4bfb-87c1-6870dc943c70
   country_id: *bn
   network_id: *bn_premium_rate_services
 - id: 245223
   prefix: '67338'
   number_min_length: 10
   number_max_length: 10
-  uuid: 4f61bef0-01a9-4eda-9b26-6fad85f7904e
+  uuid: 43437fdc-fa1d-42d7-94c6-9e60f6ad0c30
   country_id: *bn
   network_id: *bn_sms_services
 - id: 245261
   prefix: '67339'
   number_min_length: 10
   number_max_length: 10
-  uuid: 7a0bd9a8-dc99-4b55-b0fe-667a11564072
+  uuid: b3a7b612-ca19-4945-ba4d-de7b588c2dd0
   country_id: *bn
   network_id: *bn_sms_services
 - id: 248310
   prefix: '6731'
   number_min_length: 7
   number_max_length: 7
-  uuid: 6a9fa712-6dc4-426b-bc19-97587750a833
+  uuid: db739326-c805-4e62-95be-530d2298199b
   country_id: *bn
   network_id: *bn_special_services
 - id: 248602
   prefix: '673116'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9934661b-82bc-4e7c-af02-b58144b8f87a
+  uuid: 3ab621ca-b2d3-4658-b0da-3d80c0a5393e
   country_id: *bn
   network_id: *bn_special_services
 - id: 249720
   prefix: '67353'
   number_min_length: 12
   number_max_length: 12
-  uuid: f0589780-b277-43a4-b0ba-ddc9c2015324
+  uuid: 68a6d30a-be9f-41fa-aabf-aeaa5df4df95
   country_id: *bn
   network_id: *bn_voip
 - id: 249812
   prefix: '67354'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8cc80eef-2638-4eeb-ba5e-69ebbe5d5a04
+  uuid: cff96a31-209c-409c-bf43-dad181dd25c0
   country_id: *bn
   network_id: *bn_voip
 - id: 253142
   prefix: '6739'
   number_min_length: 7
   number_max_length: 7
-  uuid: 34e5e868-c151-4a59-94e4-671ad787cdcf
+  uuid: 2350b208-21d2-4de5-8067-6addcfc03c5b
   country_id: *bn
   network_id: *bn_emergency_services
 - id: 260062
   prefix: '673800'
   number_min_length: 12
   number_max_length: 13
-  uuid: 28b014be-1adf-4287-a1af-2baa95b1761a
+  uuid: d19e1412-719b-47e0-9552-ced1231fc68c
   country_id: *bn
   network_id: *bn_home_country_direct_services
 - id: 260128
   prefix: '673801'
   number_min_length: 13
   number_max_length: 13
-  uuid: 9cc34677-6c40-430d-805f-3c994dff3a79
+  uuid: 98746116-d8ad-4d7b-8fc6-e6080e4008c5
   country_id: *bn
   network_id: *bn_international_freephone_services
 # Country code Prefixes
@@ -622,7 +622,7 @@ network_prefixes:
   prefix: '673'
   number_min_length: 6
   number_max_length: 11
-  uuid: f78518d6-c033-4b9f-bd9f-2b615530148d
+  uuid: 9d0d27a6-b5e3-4f15-8ef3-6e4b8648ec68
   country_id: *bn
   network_id: *bn_fixed_cc
 # Mobile Prefixes
@@ -630,133 +630,133 @@ network_prefixes:
   prefix: '67371'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0341c03c-b3c7-42c5-a831-6d80c801b11b
+  uuid: 73201b0f-79f9-4b15-817c-d02596182885
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 251619
   prefix: '673720'
   number_min_length: 13
   number_max_length: 13
-  uuid: 12abbfbf-ff3a-44ff-82e8-80fdd7c0f0f4
+  uuid: 635483b5-19bd-42e2-8a00-ea0638203268
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 251622
   prefix: '673721'
   number_min_length: 13
   number_max_length: 13
-  uuid: 94ef5afa-11fb-4022-b431-27864aa43dd1
+  uuid: 82dd13ee-c177-4804-801e-79680144e68a
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 251626
   prefix: '673722'
   number_min_length: 13
   number_max_length: 13
-  uuid: fcaa923d-37fb-4c23-a053-e45eff4027f0
+  uuid: a5ba3d5e-20e1-4c8c-a248-c085c16e0752
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 252895
   prefix: '67388'
   number_min_length: 12
   number_max_length: 12
-  uuid: 12efb8ce-730a-4523-8fce-6025709ef7c6
+  uuid: 4c74d74d-15ac-4fda-b173-23030b954f90
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 253050
   prefix: '67389'
   number_min_length: 12
   number_max_length: 12
-  uuid: 69cdcb17-9b7d-4df7-98c8-843ffe34ba73
+  uuid: 473386b1-9709-4509-ba7e-e8054391ab5a
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 257394
   prefix: '673228'
   number_min_length: 12
   number_max_length: 12
-  uuid: 90fd0477-a68d-438e-9d9c-f4016986e35a
+  uuid: 08798df9-1d9b-4a29-83ae-0bf7da7c97f9
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 257395
   prefix: '673229'
   number_min_length: 12
   number_max_length: 12
-  uuid: 65f505e4-cdd1-48ee-839b-89927e17fc7a
+  uuid: 0aa69cc6-b60a-4865-9cf7-69dc7c571152
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 258653
   prefix: '6737'
   number_min_length: 11
   number_max_length: 11
-  uuid: 91963f76-6eb5-4064-b3d2-2f1659e32971
+  uuid: dd11c69b-98b4-4e99-bfd9-aec3cf728e5a
   country_id: *bn
   network_id: *bn_mobile
 - id: 259980
   prefix: '6738'
   number_min_length: 11
   number_max_length: 11
-  uuid: b2dc616f-8a0f-457c-8cbd-015fd97a96bb
+  uuid: 06d577b8-d4f9-4ab4-be51-8aa10b403257
   country_id: *bn
   network_id: *bn_mobile
 - id: 260196
   prefix: '67381'
   number_min_length: 12
   number_max_length: 12
-  uuid: e018cabd-493f-4110-8443-3c572ddd46f9
+  uuid: 3bab88d9-aa0c-4490-9261-efc0f60fb670
   country_id: *bn
-  network_id: *bn_progresif
+  network_id: *bn_progresif_mobile
 - id: 260353
   prefix: '67382'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2136de5f-afc1-4ef1-8dc5-e8e866f237ba
+  uuid: cb123bc0-44b6-4963-91ea-a80561c262e3
   country_id: *bn
-  network_id: *bn_progresif
+  network_id: *bn_progresif_mobile
 - id: 260465
   prefix: '67383'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6803eab2-ac37-408a-a72e-8bd96105d3df
+  uuid: 0072b611-fbce-4dc0-86d7-4949f391d173
   country_id: *bn
-  network_id: *bn_progresif
+  network_id: *bn_progresif_mobile
 - id: 260863
   prefix: '67386'
   number_min_length: 12
   number_max_length: 12
-  uuid: a62b2f7b-fb82-499e-ae3b-8b425c221374
+  uuid: 295f57e2-54e6-4733-9e12-2afb70f73719
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 - id: 261008
   prefix: '67387'
   number_min_length: 12
   number_max_length: 12
-  uuid: ef0bc365-f976-4fcf-a1a9-5b9dd8d23f4b
+  uuid: 8f6eb184-c05e-427e-889e-146d15eeee31
   country_id: *bn
-  network_id: *bn_dst
+  network_id: *bn_dst_mobile
 # Paging Prefixes
 - id: 260737
   prefix: '673850'
   number_min_length: 13
   number_max_length: 13
-  uuid: 048bf8a2-b2f9-40b4-aa2f-d6a40a5b04f8
+  uuid: 367de064-580c-4b33-a3a7-ab165c8e9dc8
   country_id: *bn
-  network_id: *bn_imagine
+  network_id: *bn_imagine_paging
 - id: 260752
   prefix: '673851'
   number_min_length: 13
   number_max_length: 13
-  uuid: f3685fc9-c821-45b1-af97-1cb08d403033
+  uuid: 4af997dc-a047-4568-a7c7-05ad6c2fb3f4
   country_id: *bn
-  network_id: *bn_imagine
+  network_id: *bn_imagine_paging
 - id: 260771
   prefix: '673852'
   number_min_length: 13
   number_max_length: 13
-  uuid: 321a011e-d075-4efb-b1bb-899ca5ccf298
+  uuid: 4312886e-5b05-44f1-ab68-6510aa8efd7c
   country_id: *bn
-  network_id: *bn_imagine
+  network_id: *bn_imagine_paging
 - id: 260786
   prefix: '673853'
   number_min_length: 13
   number_max_length: 13
-  uuid: de9dbdc2-f7c1-42e8-ba8a-8be71c141683
+  uuid: 88c3cc40-ddbf-4757-ad0e-0bf0bb51cced
   country_id: *bn
-  network_id: *bn_imagine
+  network_id: *bn_imagine_paging
