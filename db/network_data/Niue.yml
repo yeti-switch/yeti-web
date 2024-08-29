@@ -3,107 +3,107 @@ networks:
 # Fixed Networks
 - id: &nu_fixed 4373
   name: NU Fixed
-  uuid: ed57bb7b-5cfa-464c-86f1-6741a0d9450c
+  uuid: de5f7965-b04f-43b2-ba14-84bb8bc09e5b
   type_id: 12
 # Mobile Networks
 - id: &nu_telecom_niue_mobile 4514
   name: NU Telecom Niue Mobile
-  uuid: d8bef52b-c601-40d6-88ac-021bf9fedc2b
+  uuid: 132a6f59-aec3-4ccf-b983-3649d39e6af4
   type_id: 3
 # Country code Networks
 - id: &nu_fixed_cc 4776
   name: NU Fixed Cc
-  uuid: 20459ae6-d0e3-4b18-a84a-3b5e44037e9c
+  uuid: 39b7edaf-f926-4086-a503-0aaf2c794bcb
   type_id: 17
 # Supplementary services Networks
 - id: &nu_operator_assistance 4881
   name: NU Operator Assistance
-  uuid: be7aae74-dc6f-45af-a88d-6a06485934fd
+  uuid: 2b25f540-de6b-4eef-9f6f-a342eb2a286f
   type_id: 14
 - id: &nu_faults_and_directory_service 4886
   name: NU Faults And Directory Service
-  uuid: ec4e1631-8f49-444b-ac58-225e317331bf
+  uuid: 802be114-d271-4a64-9c1d-866227de564f
   type_id: 14
 - id: &nu_weather_and_tidal_information 5078
   name: NU Weather And Tidal Information
-  uuid: dc9ad61c-15ac-4376-839f-908f696d9d67
+  uuid: da3bd4ce-9d92-4ccc-97fb-ade04b36a756
   type_id: 14
 - id: &nu_emergency_service 5811
   name: NU Emergency Service
-  uuid: 99ec9c74-85a8-4b23-bd5b-8e1d14312772
+  uuid: 4111b1c8-b089-4551-a4cc-c507a405113e
   type_id: 14
 network_prefixes:
 # Fixed Prefixes
-- id: 245252
+- id: 245263
   prefix: '6834'
   number_min_length: 8
   number_max_length: 8
-  uuid: 7310ea04-4138-4a51-a051-59a1061c54d8
+  uuid: 903ca8f9-9d3d-48ac-a97f-cd64dd63e627
   country_id: *nu
   network_id: *nu_fixed
-- id: 258618
+- id: 258631
   prefix: '6837'
   number_min_length: 8
   number_max_length: 8
-  uuid: dfbedd67-5295-41ee-b6a6-d3fd0fa02379
+  uuid: b38792b8-1d17-47c8-88cb-e9dcfad8d404
   country_id: *nu
   network_id: *nu_fixed
 # Mobile Prefixes
-- id: 246716
+- id: 246727
   prefix: '6836'
   number_min_length: 8
   number_max_length: 8
-  uuid: 7727e008-c350-487e-99eb-c8c036d614aa
+  uuid: e2293c42-975c-435b-a7fd-119445ad33d0
   country_id: *nu
   network_id: *nu_telecom_niue_mobile
-- id: 249332
+- id: 249344
   prefix: '6835'
   number_min_length: 8
   number_max_length: 8
-  uuid: 75d60f1e-4d51-4326-a57b-5ec6617df782
+  uuid: 052bcb34-4b2a-4660-9c73-7533d6ec91e5
   country_id: *nu
   network_id: *nu_telecom_niue_mobile
-- id: 252971
+- id: 252983
   prefix: '683888'
   number_min_length: 13
   number_max_length: 13
-  uuid: 52204219-c0b7-4464-9a23-ea12d4cfce3c
+  uuid: 8bbb2de0-da6c-42e6-9a47-e548fe0bd828
   country_id: *nu
   network_id: *nu_telecom_niue_mobile
 # Country code Prefixes
-- id: 247939
+- id: 247951
   prefix: '683'
   number_min_length: 6
   number_max_length: 7
-  uuid: b05fe8ac-2ca3-4796-98c1-75a95f6fb576
+  uuid: d5221b45-3c61-422c-982a-39ead322be93
   country_id: *nu
   network_id: *nu_fixed_cc
 # Supplementary services Prefixes
-- id: 248046
+- id: 248058
   prefix: '68310'
   number_min_length: 8
   number_max_length: 8
-  uuid: cf8e7abe-98c7-452a-b388-7839beed9143
+  uuid: 1d827b24-89ce-4141-861a-1d8760df4645
   country_id: *nu
   network_id: *nu_operator_assistance
-- id: 248071
+- id: 248083
   prefix: '68315'
   number_min_length: 8
   number_max_length: 8
-  uuid: fccadf21-89ce-447a-a7f7-6d6b44bfc57e
+  uuid: e3982bcd-e7ea-4af6-868e-f781515fb7be
   country_id: *nu
   network_id: *nu_faults_and_directory_service
-- id: 248430
+- id: 248442
   prefix: '683101'
   number_min_length: 9
   number_max_length: 9
-  uuid: 808eee15-f252-412b-b76e-66dcb57b1ed4
+  uuid: 4b9a8aa1-01a5-4ad9-a239-b338bbb83843
   country_id: *nu
   network_id: *nu_weather_and_tidal_information
-- id: 254279
+- id: 254291
   prefix: '683999'
   number_min_length: 9
   number_max_length: 9
-  uuid: 2b6f532c-7dfa-467a-bb7b-f5f929880238
+  uuid: 6d983f81-f4dc-4b4c-bd74-3948117cd5fc
   country_id: *nu
   network_id: *nu_emergency_service

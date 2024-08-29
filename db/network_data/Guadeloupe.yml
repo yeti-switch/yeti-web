@@ -3,770 +3,770 @@ networks:
 # Fixed Networks
 - id: &gp_fixed 4477
   name: GP Fixed
-  uuid: daf005dc-325b-4a25-b26f-6ab8b1eaca3a
+  uuid: 0db7f873-4fb4-448a-a468-7f5dc624671c
   type_id: 12
 # Country code Networks
 - id: &gp_fixed_cc 4710
   name: GP Fixed Cc
-  uuid: 2148d02f-9317-4f91-b18b-8cd725dd4a99
+  uuid: c8529a75-6e3e-4e6b-9709-c2413ee49843
   type_id: 17
 # Mobile Networks
 - id: &gp_mobile 5390
   name: GP Mobile
-  uuid: 9de54c34-efca-4aed-9474-270c5194318a
+  uuid: bebcd181-fa9d-47c5-8352-7615bd779fc4
   type_id: 3
 - id: &gp_sfr_mobile 5953
   name: GP Sfr Mobile
-  uuid: c849a22d-570d-4925-836a-d478a1251ff5
+  uuid: 5e4bb3c5-17d3-4008-b295-fa8f28c5572d
   type_id: 3
 - id: &gp_digicel_mobile 5954
   name: GP Digicel Mobile
-  uuid: dc6bd2a5-9ee4-4048-9d6d-251157ac91f9
+  uuid: d5a6019c-da54-4624-8857-a8e76035c5a5
   type_id: 3
 - id: &gp_amigo_mobile 5955
   name: GP Amigo Mobile
-  uuid: 06573eaf-d3c8-4323-8eb1-aa32460bf77d
+  uuid: 5c5ed837-6aea-4fc4-a8cc-24fbc001a6bc
   type_id: 3
 - id: &gp_orange_mobile 5956
   name: GP Orange Mobile
-  uuid: 5b1f3d81-1cc8-49a8-818d-55999ca9a8de
+  uuid: 08720cbb-7bbd-47b4-a28b-85c625639042
   type_id: 3
 - id: &gp_free_mobile 5957
   name: GP Free Mobile
-  uuid: 68bedb53-bcdc-490f-8baa-4efd6ed5ab2a
+  uuid: a4e6c325-c124-4562-a813-45e9b53ef9c5
   type_id: 3
 # Supplementary services Networks
 - id: &gp_machine_to_machine_m2m_services 5726
   name: GP Machine To Machine M2M Services
-  uuid: 7bb01dd5-89c3-4eec-b54e-75f2005d5d08
+  uuid: e79c1b22-cae7-40d8-95f2-0bfcedabcacd
   type_id: 14
 - id: &gp_exchange_with_a_platform_services 5789
   name: GP Exchange With A Platform Services
-  uuid: efd749db-6188-461e-a839-763f5c63d827
+  uuid: 95651bb0-cafa-401d-8113-862753579ed4
   type_id: 14
 network_prefixes:
 # Fixed Prefixes
-- id: 246567
+- id: 246578
   prefix: '590590'
   number_min_length: 15
   number_max_length: 15
-  uuid: 32aced6d-021f-4132-988c-b008f22bac9f
+  uuid: c1e3bff3-9b6a-4eb8-8d7b-8a1b6e0ce1fa
   country_id: *gp
   network_id: *gp_fixed
-- id: 261975
+- id: 261988
   prefix: '5909760'
   number_min_length: 16
   number_max_length: 16
-  uuid: 39b7bdb3-a06f-4ce7-aa68-9e09bda38e64
+  uuid: a9edd9a9-c318-48da-9f25-0502ddf1f6bb
   country_id: *gp
   network_id: *gp_fixed
-- id: 261978
+- id: 261991
   prefix: '5909761'
   number_min_length: 16
   number_max_length: 16
-  uuid: f726de59-f9ae-4c2a-ae38-631dcb4bbacd
+  uuid: bd0d36c7-f7c0-49d0-b908-9fa467a86066
   country_id: *gp
   network_id: *gp_fixed
-- id: 261999
+- id: 262012
   prefix: '5909768'
   number_min_length: 16
   number_max_length: 16
-  uuid: fd65b8aa-f69b-4ac4-a4f9-88c158e9374a
+  uuid: 17c8209e-7d4a-400a-b113-47df0e40cdb8
   country_id: *gp
   network_id: *gp_fixed
 # Country code Prefixes
-- id: 247873
+- id: 247885
   prefix: '590'
   number_min_length: 12
   number_max_length: 15
-  uuid: f77a08d8-f18f-48cd-9327-f963e66f78e1
+  uuid: 5d09e202-bdad-4582-b479-7d7b1cc2794e
   country_id: *gp
   network_id: *gp_fixed_cc
 # Mobile Prefixes
-- id: 251427
+- id: 251439
   prefix: '5907090'
   number_min_length: 16
   number_max_length: 16
-  uuid: 4fe7dde2-4f44-4ced-87e8-41750887b6ec
+  uuid: 685686f5-7e92-4554-95cc-ae8d70e0b734
   country_id: *gp
   network_id: *gp_mobile
-- id: 258233
+- id: 258246
   prefix: '590690'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3e18c3bb-6b95-4b34-820f-798e94f39bf0
+  uuid: 25a79cdd-e1f0-4cb5-bb51-a14f435d7cf7
   country_id: *gp
   network_id: *gp_mobile
-- id: 258236
+- id: 258249
   prefix: '59069000'
   number_min_length: 17
   number_max_length: 17
-  uuid: 944e466d-536a-4584-b8c7-3d17f71f6126
+  uuid: 96e2657c-785f-4040-a500-c048f5c8cb95
   country_id: *gp
   network_id: *gp_sfr_mobile
-- id: 258237
+- id: 258250
   prefix: '59069005'
   number_min_length: 17
   number_max_length: 17
-  uuid: 7a49d235-7d74-4dea-b922-1607cdf72405
+  uuid: 041d0215-4d31-42c2-8eb2-6c31f29262dc
   country_id: *gp
   network_id: *gp_sfr_mobile
-- id: 258238
+- id: 258251
   prefix: '59069006'
   number_min_length: 17
   number_max_length: 17
-  uuid: 3b1b1add-85c3-4700-b4ca-b81c59c61e12
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258239
-  prefix: '59069007'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 58a94338-daa8-40b7-b70f-d1e4a39ee64f
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258240
-  prefix: '59069008'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: fc226285-7134-4b4d-a4fa-067dd807c89f
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258241
-  prefix: '59069009'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 22328aea-56b4-428e-a01f-71c9be9e7274
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258242
-  prefix: '59069011'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 4822de16-282e-4e53-90f5-485a133ccb53
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258243
-  prefix: '59069012'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: e097a4d4-7527-4057-9008-e5b748eb1da6
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258244
-  prefix: '59069013'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 84db6447-6f83-4ff1-828c-81d92ad164ac
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258245
-  prefix: '59069014'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 2c2b6d2c-fafc-42de-a2cc-e78205e5dbe8
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258246
-  prefix: '59069015'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 43373175-c6d5-4c0e-b3b4-c569b9c29fa1
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258247
-  prefix: '59069016'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 3a30672f-226d-471e-a802-ac31eeb4e208
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258248
-  prefix: '59069017'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: fec30585-62fb-41d7-8427-6947d0b99478
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258249
-  prefix: '59069018'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 96de2083-1d55-4a5e-b312-13e2da6346a7
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258250
-  prefix: '59069019'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: ab7a2fa6-9b46-4e1b-8e4a-d294cb465fe7
-  country_id: *gp
-  network_id: *gp_digicel_mobile
-- id: 258251
-  prefix: '59069020'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 9524b43b-502b-4ef3-afa6-d34c34d12c59
+  uuid: 2682c18c-5844-4020-bc50-a8bb16ba96cc
   country_id: *gp
   network_id: *gp_digicel_mobile
 - id: 258252
-  prefix: '59069021'
+  prefix: '59069007'
   number_min_length: 17
   number_max_length: 17
-  uuid: ef28bb79-3e9e-472b-bc17-b29dd9b17c0c
+  uuid: 6166a1b6-e016-4520-988a-55591b2dc16d
   country_id: *gp
   network_id: *gp_digicel_mobile
 - id: 258253
-  prefix: '59069022'
+  prefix: '59069008'
   number_min_length: 17
   number_max_length: 17
-  uuid: aa5d7c24-7ece-4a7f-ba65-2a9bc6f6113e
+  uuid: 3213654e-cb4b-4e09-9d13-a44b93f7558d
   country_id: *gp
-  network_id: *gp_amigo_mobile
+  network_id: *gp_digicel_mobile
 - id: 258254
-  prefix: '59069023'
+  prefix: '59069009'
   number_min_length: 17
   number_max_length: 17
-  uuid: 02b33cbb-da92-4a44-b8f4-f8b38843c463
+  uuid: edc61c61-fcd3-4b91-9250-4153c8cd7cdb
   country_id: *gp
   network_id: *gp_digicel_mobile
 - id: 258255
-  prefix: '59069024'
+  prefix: '59069011'
   number_min_length: 17
   number_max_length: 17
-  uuid: ac0663da-e179-4fe9-bd31-b540e1a5cc8a
+  uuid: 2275ddd3-163d-41ea-bf0f-2b9ce99ef364
   country_id: *gp
   network_id: *gp_digicel_mobile
 - id: 258256
-  prefix: '59069025'
+  prefix: '59069012'
   number_min_length: 17
   number_max_length: 17
-  uuid: 1b8af6e3-c268-4999-b613-5a731cdce5d9
+  uuid: f7e9f302-3459-4756-984a-ab3e30c61501
   country_id: *gp
   network_id: *gp_digicel_mobile
 - id: 258257
-  prefix: '59069026'
+  prefix: '59069013'
   number_min_length: 17
   number_max_length: 17
-  uuid: 12b9182c-094f-4180-b486-bbf7ce55ba17
+  uuid: 8b5fc975-594c-4b84-a39b-7f72a3bceefe
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258258
-  prefix: '59069027'
+  prefix: '59069014'
   number_min_length: 17
   number_max_length: 17
-  uuid: 7a7e9718-b28a-499d-bf22-8c0a0bc9ede4
+  uuid: c4e36594-84b2-4728-baf1-17a3239ae05e
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258259
-  prefix: '59069028'
+  prefix: '59069015'
   number_min_length: 17
   number_max_length: 17
-  uuid: 50ebdea7-269a-474a-85ad-0f174629f2e4
+  uuid: b3db3baf-8969-4a6f-a212-0de24b899671
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258260
-  prefix: '59069029'
+  prefix: '59069016'
   number_min_length: 17
   number_max_length: 17
-  uuid: 8e15f855-16e1-46cc-8fd2-5a1f4950f21b
+  uuid: e543a5b6-bef7-46a5-9626-5e1acf64fba5
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258261
-  prefix: '59069030'
+  prefix: '59069017'
   number_min_length: 17
   number_max_length: 17
-  uuid: 7f92092a-4a34-4acb-becc-d24736016256
+  uuid: 9c16964c-63ac-43f8-989e-572df5cfd136
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258262
-  prefix: '59069031'
+  prefix: '59069018'
   number_min_length: 17
   number_max_length: 17
-  uuid: 0c2f5009-0ce7-467b-b9f9-b484b3c621bd
+  uuid: 672985ee-3fc3-4c2c-b8e6-52d0b671ff5c
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258263
-  prefix: '59069032'
+  prefix: '59069019'
   number_min_length: 17
   number_max_length: 17
-  uuid: 5fd799ca-14bb-4bcb-9c5b-be8780fd7ca6
+  uuid: e8e92269-0ec7-49c0-a185-5366197c65d8
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258264
-  prefix: '59069033'
+  prefix: '59069020'
   number_min_length: 17
   number_max_length: 17
-  uuid: fcb4aa94-0921-4974-a49d-91e2c0d94c67
+  uuid: 99f3c9eb-1703-4026-8ffe-2470347f4c8e
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258265
-  prefix: '59069034'
+  prefix: '59069021'
   number_min_length: 17
   number_max_length: 17
-  uuid: 0127edb0-4891-4212-ae97-d67817115080
+  uuid: 18bb8692-a652-4258-99af-ef2abfb373f0
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258266
-  prefix: '59069035'
+  prefix: '59069022'
   number_min_length: 17
   number_max_length: 17
-  uuid: 804a7053-2625-40ea-94ae-852a3b1f8f1e
+  uuid: 08328f22-a043-4f23-9eb1-05ec76632985
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_amigo_mobile
 - id: 258267
-  prefix: '59069036'
+  prefix: '59069023'
   number_min_length: 17
   number_max_length: 17
-  uuid: 8c82ad72-fff8-4438-9abe-42c4ec33fd26
+  uuid: ff595d4f-f9c5-44eb-bbaa-30c504c42136
   country_id: *gp
   network_id: *gp_digicel_mobile
 - id: 258268
-  prefix: '59069037'
+  prefix: '59069024'
   number_min_length: 17
   number_max_length: 17
-  uuid: 2acc9c9f-da3b-49d7-843d-ee73aa6ef6dd
+  uuid: 50639e46-307e-4437-a7c0-fee26041501f
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258269
-  prefix: '59069038'
+  prefix: '59069025'
   number_min_length: 17
   number_max_length: 17
-  uuid: 665722d1-6c45-461c-948d-dd7efda15d65
+  uuid: 53af1c10-5c77-40e6-a3ec-37af1eb06695
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258270
-  prefix: '59069039'
+  prefix: '59069026'
   number_min_length: 17
   number_max_length: 17
-  uuid: fe28b7f8-9546-417b-914d-785d5be2bd9e
+  uuid: 1e0f0d20-efc9-47c5-b627-9dc91371b7a0
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258271
-  prefix: '59069040'
+  prefix: '59069027'
   number_min_length: 17
   number_max_length: 17
-  uuid: 1b7cc3a9-dfa6-462b-bf94-2ac3bfdfc7c4
+  uuid: 4e7a5eae-4f6e-4c61-b4a1-f281d900be79
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258272
-  prefix: '59069041'
+  prefix: '59069028'
   number_min_length: 17
   number_max_length: 17
-  uuid: c7a87138-8f38-4884-9b37-3ac161520b06
+  uuid: e977f222-aaba-4439-9cd2-e27f56c08eb5
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258273
-  prefix: '59069042'
+  prefix: '59069029'
   number_min_length: 17
   number_max_length: 17
-  uuid: 64dfc20c-e07a-4045-a113-c8e4524fcb8c
+  uuid: 29333092-b957-48ee-b488-c9db8769a7b1
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258274
-  prefix: '59069043'
+  prefix: '59069030'
   number_min_length: 17
   number_max_length: 17
-  uuid: 6f5ee56b-3947-45a4-8474-9200bcaa8b2e
+  uuid: f7d00547-21a5-4b89-8e2c-0fa821f319df
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258275
-  prefix: '59069044'
+  prefix: '59069031'
   number_min_length: 17
   number_max_length: 17
-  uuid: 9caa5145-3bf8-4bbc-a383-492dbaf34c75
+  uuid: ffb31f56-f6da-4dc8-9eeb-a75b0a2cf055
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258276
-  prefix: '59069045'
+  prefix: '59069032'
   number_min_length: 17
   number_max_length: 17
-  uuid: 90c21dc5-4671-4623-92eb-0589f2987c61
+  uuid: 1119c47f-f8ef-4527-94dc-0c8739089f25
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258277
-  prefix: '59069046'
+  prefix: '59069033'
   number_min_length: 17
   number_max_length: 17
-  uuid: 087c4b6b-b3f2-4f1b-9d0b-3008a4242097
+  uuid: 098a9a06-a567-4967-9ef5-6068dac9abf0
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258278
-  prefix: '59069047'
+  prefix: '59069034'
   number_min_length: 17
   number_max_length: 17
-  uuid: 597a6f8a-5575-4d11-80ee-82fa9f1bd115
+  uuid: 0b0e502c-aa81-4305-bb62-1906cacee15a
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258279
-  prefix: '59069048'
+  prefix: '59069035'
   number_min_length: 17
   number_max_length: 17
-  uuid: d3c4effd-d5ab-4fce-9176-9790aee983db
+  uuid: f03855df-8874-41c0-8a72-940d4902ec3c
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258280
-  prefix: '59069049'
+  prefix: '59069036'
   number_min_length: 17
   number_max_length: 17
-  uuid: 94313ae2-add4-45e3-a131-be528d27a39e
+  uuid: 3d7455b2-d063-4022-ac03-929179cac78b
   country_id: *gp
-  network_id: *gp_orange_mobile
+  network_id: *gp_digicel_mobile
 - id: 258281
-  prefix: '5906905'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 4090fbf8-9cd9-4482-b8b5-434738c4531c
+  prefix: '59069037'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: d49be74c-1a80-40f7-bb06-d7103d874c11
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258282
-  prefix: '59069060'
+  prefix: '59069038'
   number_min_length: 17
   number_max_length: 17
-  uuid: 892b86d7-5c5b-4b61-8ab6-5b0a0451e7c5
+  uuid: a12c42e5-6df7-425c-97bc-7fe801b0c588
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258283
-  prefix: '59069061'
+  prefix: '59069039'
   number_min_length: 17
   number_max_length: 17
-  uuid: a1e3d9f2-d94a-4fdf-a308-3819e7a67efe
+  uuid: 0eb591e0-c6d9-4511-83f5-0fd314f26d2c
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258284
-  prefix: '59069062'
+  prefix: '59069040'
   number_min_length: 17
   number_max_length: 17
-  uuid: d7ca011c-9d2f-442c-87d8-33df9fc0d38c
+  uuid: 11d21528-ed68-41d0-a640-1b7bf0502d97
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258285
-  prefix: '59069063'
+  prefix: '59069041'
   number_min_length: 17
   number_max_length: 17
-  uuid: b82f5cdd-9c70-4e3e-a539-2dc2587e439a
+  uuid: 85299c00-d534-44ae-bb8c-71862e68f067
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258286
-  prefix: '59069064'
+  prefix: '59069042'
   number_min_length: 17
   number_max_length: 17
-  uuid: 08295e39-c977-4d89-8fee-6f13fceeb9c9
-  country_id: *gp
-  network_id: *gp_orange_mobile
-- id: 258287
-  prefix: '59069065'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 0ca32ebc-e280-4206-96ea-89e579298dc6
-  country_id: *gp
-  network_id: *gp_orange_mobile
-- id: 258288
-  prefix: '59069066'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 2352590b-6a55-4e35-8db8-bb6450cab24d
-  country_id: *gp
-  network_id: *gp_amigo_mobile
-- id: 258289
-  prefix: '59069067'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 8f12ac47-617d-4fcb-b10d-da4ca22b6833
-  country_id: *gp
-  network_id: *gp_orange_mobile
-- id: 258290
-  prefix: '59069068'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 1e9a1d73-47f0-46d4-9e74-ac7284465fe1
-  country_id: *gp
-  network_id: *gp_orange_mobile
-- id: 258291
-  prefix: '59069069'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: ad6948fb-ba73-4af6-9a21-7a1d739c11f1
+  uuid: f6aaddd5-2ef9-4135-9a06-6d3719ffebdd
   country_id: *gp
   network_id: *gp_digicel_mobile
-- id: 258292
-  prefix: '59069070'
+- id: 258287
+  prefix: '59069043'
   number_min_length: 17
   number_max_length: 17
-  uuid: 635280f9-e087-43b6-9848-0fb0fbe9c311
+  uuid: 735c1fe9-4ee4-48c8-9540-ac6d7d23db38
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258288
+  prefix: '59069044'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 2433d58f-d424-4a38-9185-e2692e6c0439
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258289
+  prefix: '59069045'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 0c84ef68-9d15-49b2-8eed-9fc1a7535243
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258290
+  prefix: '59069046'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: d3c1aca2-a9f6-433e-ac54-8c8cca020765
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258291
+  prefix: '59069047'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 5e0decf8-ca06-4f54-8d52-00599decb622
+  country_id: *gp
+  network_id: *gp_orange_mobile
+- id: 258292
+  prefix: '59069048'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: e6d96eb1-6f1f-407f-989a-65ca399c989c
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258293
-  prefix: '59069071'
+  prefix: '59069049'
   number_min_length: 17
   number_max_length: 17
-  uuid: 4780c525-e37c-4ecb-a0c2-731ed802f93a
+  uuid: 10feab8a-f40a-4168-adea-38badb939f54
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258294
-  prefix: '59069072'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: eae0a866-eb2a-4e3f-8fbc-28569e28707a
+  prefix: '5906905'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: b75cf34a-d4e4-4667-ab37-9654ba89cf19
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258295
-  prefix: '59069073'
+  prefix: '59069060'
   number_min_length: 17
   number_max_length: 17
-  uuid: 229eb364-1a17-4580-b8ad-ff8b90fd12ff
+  uuid: c6ad014d-2183-4a03-bbff-3c77df62c00b
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258296
-  prefix: '59069074'
+  prefix: '59069061'
   number_min_length: 17
   number_max_length: 17
-  uuid: 60ecfa29-9291-4db4-85db-a9bad4bccee1
+  uuid: d67efd66-895a-4fd0-8dfb-b693f48ae712
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258297
-  prefix: '59069075'
+  prefix: '59069062'
   number_min_length: 17
   number_max_length: 17
-  uuid: 69045337-7c2d-4e5a-8c1c-935da300e1fb
+  uuid: 92b2dc47-dbfe-47bc-ac04-5d7baf18ff51
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258298
-  prefix: '59069076'
+  prefix: '59069063'
   number_min_length: 17
   number_max_length: 17
-  uuid: 06b4e760-67ce-454f-a30e-f233af9aa081
+  uuid: 6c619b36-f425-4b27-8419-26f627a2f5ac
   country_id: *gp
   network_id: *gp_orange_mobile
 - id: 258299
-  prefix: '59069077'
+  prefix: '59069064'
   number_min_length: 17
   number_max_length: 17
-  uuid: 0be77993-6e75-4fed-bcc3-9ec382d2406c
+  uuid: d6f182f5-bc59-48c6-a61a-2500183b3d73
+  country_id: *gp
+  network_id: *gp_orange_mobile
+- id: 258300
+  prefix: '59069065'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 7ef24450-867a-4d30-8c8c-6980c9880feb
+  country_id: *gp
+  network_id: *gp_orange_mobile
+- id: 258301
+  prefix: '59069066'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 53ecb8ec-bd5c-4091-a2dc-e0dfa2262721
   country_id: *gp
   network_id: *gp_amigo_mobile
-- id: 258300
-  prefix: '59069078'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 304ce1ae-8d74-4712-9b14-42757a8185ff
-  country_id: *gp
-  network_id: *gp_sfr_mobile
-- id: 258301
-  prefix: '59069079'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: da045907-56b2-42e0-99ac-ecabba12e978
-  country_id: *gp
-  network_id: *gp_sfr_mobile
 - id: 258302
-  prefix: '59069080'
+  prefix: '59069067'
   number_min_length: 17
   number_max_length: 17
-  uuid: d35e457b-3c97-4c2d-bc36-1efcb86601a1
+  uuid: 721dde42-3887-4606-adb4-3da2f8ef688f
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258303
-  prefix: '59069081'
+  prefix: '59069068'
   number_min_length: 17
   number_max_length: 17
-  uuid: ac851e96-e0d7-4d90-a71c-a5567790e8e8
+  uuid: 396bb5ff-e7fb-4c13-9dc8-912f31ec82ac
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258304
-  prefix: '59069082'
+  prefix: '59069069'
   number_min_length: 17
   number_max_length: 17
-  uuid: 04f9ef90-b3d8-4c76-a01b-848b7a1db2b1
+  uuid: d1684e9f-56c3-4083-a068-5b163ffa62a3
   country_id: *gp
   network_id: *gp_digicel_mobile
 - id: 258305
-  prefix: '59069083'
+  prefix: '59069070'
   number_min_length: 17
   number_max_length: 17
-  uuid: 1cabd225-029d-446f-aee3-3ed93ec5da24
+  uuid: 415f75f8-3120-45ce-9bec-67557ac801f0
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258306
-  prefix: '59069084'
+  prefix: '59069071'
   number_min_length: 17
   number_max_length: 17
-  uuid: 6ddf4a33-6c14-4050-94db-ad4d3abbb899
+  uuid: ff0fce7f-9737-42f4-b09f-ba5f2a426700
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258307
-  prefix: '59069085'
+  prefix: '59069072'
   number_min_length: 17
   number_max_length: 17
-  uuid: 50fbd52e-f223-43a5-94c9-1261d82d70c5
+  uuid: fd2125fb-00e1-4816-8201-292f06ec2fc8
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258308
-  prefix: '59069086'
+  prefix: '59069073'
   number_min_length: 17
   number_max_length: 17
-  uuid: c7447847-f6fc-49b0-baa0-68ec37fde9cc
+  uuid: 503e1e9f-4e65-41b4-a5f1-d44594806a1e
   country_id: *gp
-  network_id: *gp_digicel_mobile
+  network_id: *gp_orange_mobile
 - id: 258309
-  prefix: '59069088'
+  prefix: '59069074'
   number_min_length: 17
   number_max_length: 17
-  uuid: fd1f7c34-de60-40ec-90a0-1fc149ed77e8
+  uuid: 568632bf-429f-4f91-b1c0-c5528768614b
+  country_id: *gp
+  network_id: *gp_orange_mobile
+- id: 258310
+  prefix: '59069075'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: aa086921-dcc7-484b-8cdc-4a7b5b885e1d
+  country_id: *gp
+  network_id: *gp_orange_mobile
+- id: 258311
+  prefix: '59069076'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 9f9ebf4b-ba14-47c0-9d69-a0df9c382040
+  country_id: *gp
+  network_id: *gp_orange_mobile
+- id: 258312
+  prefix: '59069077'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 2b8e648a-b917-403e-8cd3-a4d3060cf431
   country_id: *gp
   network_id: *gp_amigo_mobile
-- id: 258310
-  prefix: '59069089'
+- id: 258313
+  prefix: '59069078'
   number_min_length: 17
   number_max_length: 17
-  uuid: 036d8484-50ba-4d70-b2da-c7382c9863f4
+  uuid: 65e0087a-0d1e-423e-8dc1-1b47f682e336
   country_id: *gp
   network_id: *gp_sfr_mobile
-- id: 258311
-  prefix: '5906909'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: b29a6470-4fbc-4b1a-b405-6d237f661b08
+- id: 258314
+  prefix: '59069079'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 0fcd8c89-e765-4a46-9cef-ec212dfb2f7d
   country_id: *gp
   network_id: *gp_sfr_mobile
 - id: 258315
+  prefix: '59069080'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 2612b0f0-a9a9-476e-a385-0b0ae0121013
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258316
+  prefix: '59069081'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 49e0e88d-c2b5-4431-8cb4-b04060b7f0eb
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258317
+  prefix: '59069082'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: a4003034-2db2-4f65-86e2-9d74a72a1ee0
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258318
+  prefix: '59069083'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 9980a0d3-1ad3-4d2a-8499-0095c0f8ee1c
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258319
+  prefix: '59069084'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 0ae6100a-7d51-4062-9fa9-9fcefb1dd864
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258320
+  prefix: '59069085'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: b2a15d56-6aba-4027-b696-65c8b2f6062a
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258321
+  prefix: '59069086'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 43a58a7a-6192-457d-a14a-636c3209884f
+  country_id: *gp
+  network_id: *gp_digicel_mobile
+- id: 258322
+  prefix: '59069088'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: a5e4c8c1-2ef0-46eb-aec2-8bb80ab063bf
+  country_id: *gp
+  network_id: *gp_amigo_mobile
+- id: 258323
+  prefix: '59069089'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: ae391cfb-a254-4927-ba3f-f009b46940ba
+  country_id: *gp
+  network_id: *gp_sfr_mobile
+- id: 258324
+  prefix: '5906909'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: f611b89e-fc3f-4358-8767-8891c1efde44
+  country_id: *gp
+  network_id: *gp_sfr_mobile
+- id: 258328
   prefix: '590691'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1deba96e-7329-407d-87c2-b8dafaab8060
+  uuid: b3a3e226-14a7-43be-a9c5-dd3df4a99b80
   country_id: *gp
   network_id: *gp_mobile
-- id: 258319
+- id: 258332
   prefix: '59069122'
   number_min_length: 17
   number_max_length: 17
-  uuid: 19f849e8-c977-4d8d-a269-02b2cf225f8f
+  uuid: 90183111-ef99-4335-ad80-0a34e517610f
   country_id: *gp
   network_id: *gp_amigo_mobile
-- id: 258320
+- id: 258333
   prefix: '59069123'
   number_min_length: 17
   number_max_length: 17
-  uuid: 8449dcf6-cf99-4e78-bc12-b5babdcfbce8
+  uuid: 9faf21e5-ddae-4591-844d-07287c39c152
   country_id: *gp
   network_id: *gp_free_mobile
-- id: 258321
+- id: 258334
   prefix: '59069124'
   number_min_length: 17
   number_max_length: 17
-  uuid: 1637583d-80b9-4394-a866-a949dbed4d77
+  uuid: 2768ae4a-08bf-4e82-9f90-e3f664d3ac73
   country_id: *gp
   network_id: *gp_free_mobile
-- id: 258322
+- id: 258335
   prefix: '59069125'
   number_min_length: 17
   number_max_length: 17
-  uuid: da6104a5-55bc-49a1-b88a-fbe71748a41a
+  uuid: 7cbb69fa-cf8c-482f-85a3-c8ae13a24a5f
   country_id: *gp
   network_id: *gp_free_mobile
-- id: 258323
+- id: 258336
   prefix: '59069126'
   number_min_length: 17
   number_max_length: 17
-  uuid: f6c10371-a1dc-43f6-b5b2-4ee0fa662610
+  uuid: d7f72a7f-750e-4e77-b77f-c98c4d7ff179
   country_id: *gp
   network_id: *gp_free_mobile
-- id: 258324
+- id: 258337
   prefix: '59069127'
   number_min_length: 17
   number_max_length: 17
-  uuid: 43d50488-8e67-4551-9e1d-514f0262653d
+  uuid: 6ec82d04-701b-4d5b-8813-7252f51fcf7f
   country_id: *gp
   network_id: *gp_free_mobile
-- id: 258325
+- id: 258338
   prefix: '59069128'
   number_min_length: 17
   number_max_length: 17
-  uuid: 325779c9-201b-4097-8c32-519d36210725
+  uuid: 2cda4293-3685-4e50-884a-6472ef1b19de
   country_id: *gp
   network_id: *gp_free_mobile
-- id: 258326
+- id: 258339
   prefix: '59069129'
   number_min_length: 17
   number_max_length: 17
-  uuid: 350fd173-1f90-4717-9285-b61a005fa662
+  uuid: 33d86121-ba77-4488-9615-7d4fc4bf6b54
   country_id: *gp
   network_id: *gp_digicel_mobile
-- id: 258327
+- id: 258340
   prefix: '59069130'
   number_min_length: 17
   number_max_length: 17
-  uuid: bccf0be8-242d-4076-9ed5-6bb9be2176a6
+  uuid: 2716a7c2-7d73-434b-aba9-8c7a3540ca6c
   country_id: *gp
   network_id: *gp_digicel_mobile
-- id: 258328
+- id: 258341
   prefix: '59069131'
   number_min_length: 17
   number_max_length: 17
-  uuid: 7c00ad10-c766-446a-bde9-fcd233528e9f
+  uuid: e951a51e-76a0-4397-8f57-3a59b414a878
   country_id: *gp
   network_id: *gp_orange_mobile
-- id: 258329
+- id: 258342
   prefix: '59069132'
   number_min_length: 17
   number_max_length: 17
-  uuid: 5569b15d-6b78-4261-8dfa-5db1b2d991a4
+  uuid: 566f46a0-ff6b-441f-b40f-fcc9c23416a0
   country_id: *gp
   network_id: *gp_orange_mobile
-- id: 258330
+- id: 258343
   prefix: '59069133'
   number_min_length: 17
   number_max_length: 17
-  uuid: 8e1ef78a-2f77-4e10-9a38-af27055bb975
+  uuid: a9c461f6-2afc-47ce-b222-f1eb9041a5cc
   country_id: *gp
   network_id: *gp_orange_mobile
-- id: 258331
+- id: 258344
   prefix: '59069134'
   number_min_length: 17
   number_max_length: 17
-  uuid: c1a0ea12-54f5-4a9a-aa7f-e3a47ce17935
+  uuid: 2fb7746c-412f-4b2f-b503-c2a2f1166e09
   country_id: *gp
   network_id: *gp_orange_mobile
-- id: 258332
+- id: 258345
   prefix: '59069135'
   number_min_length: 17
   number_max_length: 17
-  uuid: f4e40cdc-020e-452e-aff7-186998a15156
+  uuid: 27e91511-0a8f-424f-90e3-27b33b098b2c
   country_id: *gp
   network_id: *gp_orange_mobile
-- id: 258712
+- id: 258725
   prefix: '590700500'
   number_min_length: 21
   number_max_length: 21
-  uuid: 6281c1b4-5fa4-4112-a10e-c0ce326e8744
+  uuid: e78da456-3030-4b96-a62c-54f0a462b636
   country_id: *gp
   network_id: *gp_sfr_mobile
-- id: 258713
+- id: 258726
   prefix: '590700501'
   number_min_length: 21
   number_max_length: 21
-  uuid: 97e280f6-9cc6-49aa-a6ec-774fddadcc98
+  uuid: c6d29dbc-3ca1-47c7-9f27-b99153aa1a80
   country_id: *gp
   network_id: *gp_digicel_mobile
 # Supplementary services Prefixes
-- id: 253223
+- id: 253235
   prefix: '5909015'
   number_min_length: 19
   number_max_length: 19
-  uuid: ace501c7-75a9-428b-a854-e00e7ac2f6bd
+  uuid: 2317dd74-f7ac-4197-a86f-9663797e24e0
   country_id: *gp
   network_id: *gp_machine_to_machine_m2m_services
-- id: 254068
+- id: 254080
   prefix: '5909395'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1d8f5230-b9c2-4f7c-bde5-e50dd4ae2795
+  uuid: c1004aee-c1ff-4456-b80d-0138ff79f910
   country_id: *gp
   network_id: *gp_exchange_with_a_platform_services
-- id: 258711
+- id: 258724
   prefix: '5907005'
   number_min_length: 19
   number_max_length: 19
-  uuid: cc6cd0f0-689d-4625-80e0-1b1b67978566
+  uuid: c69c4c33-49ba-4585-a57f-940bae391e9c
   country_id: *gp
   network_id: *gp_machine_to_machine_m2m_services

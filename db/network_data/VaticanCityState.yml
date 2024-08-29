@@ -3,27 +3,27 @@ networks:
 # Country code Networks
 - id: &va_fixed_cc 4838
   name: VA Fixed Cc
-  uuid: c621f6c6-89d0-45b4-b8f1-8e385967db89
+  uuid: eae9f043-7d1f-42a8-81d8-6308938fd462
   type_id: 17
 # Fixed Networks
 - id: &va_fixed 5817
   name: VA Fixed
-  uuid: d6ca3fb2-7ced-402a-b18e-6835f04ea4a2
+  uuid: 1350a16a-41ec-4bdb-bb95-bcae1630b5f6
   type_id: 12
 network_prefixes:
 # Country code Prefixes
-- id: 248000
+- id: 248012
   prefix: '379'
   number_min_length: 3
   number_max_length: 3
-  uuid: bc2e7d84-897c-4848-9566-56e623af61e4
+  uuid: 193d271a-a074-4036-acfd-cabd8f5be6a7
   country_id: *va
   network_id: *va_fixed_cc
 # Fixed Prefixes
-- id: 254432
+- id: 254444
   prefix: '396698'
   number_min_length: 6
   number_max_length: 6
-  uuid: 577627f4-47ff-4a20-9b33-18a17d6b7e5a
+  uuid: e39fe835-6f75-41f3-8fb9-1898b1c612e0
   country_id: *va
   network_id: *va_fixed
