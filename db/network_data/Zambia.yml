@@ -3,38 +3,38 @@ networks:
 # Fixed Networks
 - id: &zm_fixed 3113
   name: ZM Fixed
-  uuid: a40d017d-d09b-4259-9551-b60c1625b4ec
+  uuid: b721e565-fe65-4fec-b9a1-8da2a6279f1a
   type_id: 12
 # Mobile Networks
-- id: &zm_zamtel_mobile 3844
-  name: ZM Zamtel Mobile
-  uuid: 7a2f4bcd-6939-4010-bb9d-f58f43bcbd02
+- id: &zm_zamtel 3830
+  name: ZM Zamtel
+  uuid: 03ece57d-6dfc-4a10-b008-77d601546270
   type_id: 3
-- id: &zm_airtel_mobile 3857
-  name: ZM Airtel Mobile
-  uuid: d11d9902-0680-4436-9f1e-593820377278
+- id: &zm_airtel 3843
+  name: ZM Airtel
+  uuid: 659826dc-6cd6-41ec-84cf-063ec39abc7b
   type_id: 3
-- id: &zm_mtn_mobile 3900
-  name: ZM Mtn Mobile
-  uuid: 608bded0-b3a5-4016-9ab9-c327809f6399
+- id: &zm_mtn 3886
+  name: ZM Mtn
+  uuid: c67c27ef-544f-4943-9116-985db26ad0ed
   type_id: 3
-- id: &zm_beeline_mobile 3919
-  name: ZM Beeline Mobile
-  uuid: 407581e5-e976-49d7-b565-24bdf8782782
+- id: &zm_beeline 3904
+  name: ZM Beeline
+  uuid: 45c0e3e4-2686-4cd4-ae6a-f0c90172cbac
   type_id: 3
 # Supplementary services Networks
-- id: &zm_special_services 4297
+- id: &zm_special_services 4280
   name: ZM Special Services
-  uuid: f4ab04b3-51f9-4cdf-a52f-68397ece3f49
+  uuid: 5a83cf8e-19ab-4b7e-b638-e20ed5525677
   type_id: 14
-- id: &zm_emergency_services 5128
+- id: &zm_emergency_services 5110
   name: ZM Emergency Services
-  uuid: 783f10fc-19d4-4bd7-8dcd-20b6c46e3e1b
+  uuid: 09e1a503-a184-41cc-a823-e127e5f48ea8
   type_id: 14
 # Country code Networks
-- id: &zm_fixed_cc 4847
+- id: &zm_fixed_cc 4829
   name: ZM Fixed Cc
-  uuid: e6292114-2df7-468c-9cbf-f5b046d75a2d
+  uuid: bf27d51d-d341-4a4e-a76f-af3f1edbd3c6
   type_id: 17
 network_prefixes:
 # Fixed Prefixes
@@ -42,56 +42,56 @@ network_prefixes:
   prefix: '260214'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5dee75f1-de85-4e4a-b938-99e334d94dd8
+  uuid: aeda6c2f-2946-4dc0-b526-c6eaf18cb19c
   country_id: *zm
   network_id: *zm_fixed
 - id: 10934
   prefix: '260217'
   number_min_length: 12
   number_max_length: 12
-  uuid: f9d25d5f-1ff5-4d00-99d8-c60cd0f1cd33
+  uuid: 4313087c-192f-4f90-86a3-f6eac96f8126
   country_id: *zm
   network_id: *zm_fixed
 - id: 11737
   prefix: '260218'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2a90fee1-f589-4e8b-96af-29e16a8422df
+  uuid: b5b1554d-2835-466f-9f17-5a28bfa68bf5
   country_id: *zm
   network_id: *zm_fixed
 - id: 270248
   prefix: '260211'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9d25a038-0875-41a6-952a-7f6bd39b2813
+  uuid: 56bf28c3-8aa9-4db4-a2d1-1c6077fe141b
   country_id: *zm
   network_id: *zm_fixed
 - id: 270276
   prefix: '260212'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6b2e7ee5-3657-4cfa-ae1b-c235b74fabb4
+  uuid: 5639130f-5a45-4cb3-8dfe-abbacbb4ca93
   country_id: *zm
   network_id: *zm_fixed
 - id: 270486
   prefix: '260213'
   number_min_length: 12
   number_max_length: 12
-  uuid: bbad256b-6e80-48e4-ae23-fe061d01f544
+  uuid: d08af284-985d-4c57-9a47-b0e0c5061afc
   country_id: *zm
   network_id: *zm_fixed
 - id: 270841
   prefix: '260215'
   number_min_length: 12
   number_max_length: 12
-  uuid: 833e1687-5565-4bbc-8bf5-32e0d0bfb0e2
+  uuid: 31e62100-f822-4f20-a130-beb10cbd16f0
   country_id: *zm
   network_id: *zm_fixed
 - id: 271650
   prefix: '260216'
   number_min_length: 12
   number_max_length: 12
-  uuid: f57473c5-d489-4bf6-a281-3a3a4fdcb816
+  uuid: 5b627e46-3d0b-43d4-8477-cc725dfd3831
   country_id: *zm
   network_id: *zm_fixed
 # Mobile Prefixes
@@ -99,85 +99,85 @@ network_prefixes:
   prefix: '26095'
   number_min_length: 12
   number_max_length: 12
-  uuid: e0303d99-f3d5-433e-a4b1-19da1ea92582
+  uuid: fd625ac1-3c3f-4e11-9b60-7765e8771db2
   country_id: *zm
-  network_id: *zm_zamtel_mobile
+  network_id: *zm_zamtel
 - id: 223640
   prefix: '26097'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5cbca1c1-b3e1-48ac-9bc3-c98047e12221
+  uuid: 7aba4075-e829-4806-ae2a-924600918dd1
   country_id: *zm
-  network_id: *zm_airtel_mobile
+  network_id: *zm_airtel
 - id: 225856
   prefix: '26096'
   number_min_length: 12
   number_max_length: 12
-  uuid: a8df1506-4af7-42a3-9929-df55ddc24cc8
+  uuid: 7d090582-c57c-46e8-9af4-721ae4508ba1
   country_id: *zm
-  network_id: *zm_mtn_mobile
+  network_id: *zm_mtn
 - id: 234129
   prefix: '26098'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6c310d84-8108-4e44-8d3d-73f5de57e8db
+  uuid: 3024c41e-ca4d-4d7d-922a-66b9208998fc
   country_id: *zm
-  network_id: *zm_beeline_mobile
+  network_id: *zm_beeline
 - id: 377146
   prefix: '26075'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1c79b2c4-7ce0-4dff-af01-af72b1967f6c
+  uuid: bdef412c-a8e7-478d-853c-2f3b9671af73
   country_id: *zm
-  network_id: *zm_zamtel_mobile
+  network_id: *zm_zamtel
 - id: 379247
   prefix: '26076'
   number_min_length: 12
   number_max_length: 12
-  uuid: 26e706aa-be0a-4f41-ab93-89d08af77784
+  uuid: 11a60804-13bd-49e6-a700-be4dfaab87da
   country_id: *zm
-  network_id: *zm_mtn_mobile
+  network_id: *zm_mtn
 - id: 386056
   prefix: '26077'
   number_min_length: 12
   number_max_length: 12
-  uuid: da6ce744-e448-466e-beec-2b8e0add9149
+  uuid: 4dc704bd-8d69-4799-8370-091abcd4da56
   country_id: *zm
-  network_id: *zm_airtel_mobile
+  network_id: *zm_airtel
 # Supplementary services Prefixes
 - id: 244554
   prefix: '2603'
   number_min_length: 8
   number_max_length: 8
-  uuid: 69c86912-075b-4572-97d6-ec70f5ead9a4
+  uuid: 0f632753-bbab-4464-98c1-82602d237de4
   country_id: *zm
   network_id: *zm_special_services
 - id: 245336
   prefix: '2604'
   number_min_length: 8
   number_max_length: 8
-  uuid: 1f7dccc4-1268-40a3-8a6a-153092b37182
+  uuid: e2753137-07f8-40c4-a29f-7aeed6e9d679
   country_id: *zm
   network_id: *zm_special_services
 - id: 248468
   prefix: '2601'
   number_min_length: 7
   number_max_length: 7
-  uuid: ea646463-d6ff-4fa9-b827-ce372d0b5562
+  uuid: 4d71db45-b778-4b24-a3e7-1ae3942c5d43
   country_id: *zm
   network_id: *zm_special_services
 - id: 248575
   prefix: '260112'
   number_min_length: 9
   number_max_length: 9
-  uuid: 55ea87ac-092e-44e6-82e2-1afe90e18a16
+  uuid: 4ac1d2ee-7954-4ef8-8133-f44ceb07e659
   country_id: *zm
   network_id: *zm_emergency_services
 - id: 253211
   prefix: '2609'
   number_min_length: 7
   number_max_length: 7
-  uuid: ad1cec87-6983-4a73-9dc8-857c77fa8ef4
+  uuid: 3f386528-80e2-4d2f-b38b-9c0b6d9d8cd1
   country_id: *zm
   network_id: *zm_emergency_services
 # Country code Prefixes
@@ -185,6 +185,6 @@ network_prefixes:
   prefix: '260'
   number_min_length: 6
   number_max_length: 10
-  uuid: 81d8cb7f-ca36-4a92-8137-f586805bd5a7
+  uuid: 9a81378e-7b8c-4074-a4a9-d3d261946e09
   country_id: *zm
   network_id: *zm_fixed_cc

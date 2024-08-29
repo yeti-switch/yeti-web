@@ -1,53 +1,53 @@
 country_id: &bb 19
 networks:
 # Country code Networks
-- id: &bb_fixed_cc 3156
+- id: &bb_fixed_cc 3153
   name: BB Fixed Cc
-  uuid: c75edd14-4536-45a6-9eed-9f224de5bbf7
+  uuid: 3c977d99-e226-4330-ae8d-2ba29f0f3cb4
   type_id: 17
 # Supplementary services Networks
-- id: &bb_international_telephony_services 3157
+- id: &bb_international_telephony_services 3154
   name: BB International Telephony Services
-  uuid: 53523e47-07d6-4480-aad6-e9c5935bd05f
+  uuid: cf08feb6-001d-45a6-b72c-8dd9bb5f66c3
   type_id: 14
-- id: &bb_directory_enquiry_services 3163
+- id: &bb_directory_enquiry_services 3159
   name: BB Directory Enquiry Services
-  uuid: e4d8298e-2972-47aa-822a-797162d82825
+  uuid: 36071d41-3774-4d89-85f3-35f0042a6fef
   type_id: 14
-- id: &bb_station_ringer_services 3165
+- id: &bb_station_ringer_services 3161
   name: BB Station Ringer Services
-  uuid: 62c59c7d-f150-4548-899a-95f0356618a2
+  uuid: a25447f7-464f-4134-bce7-5574dd4160bc
   type_id: 14
-- id: &bb_pay-per-call_services 3166
-  name: BB Pay-Per-Call Services
-  uuid: 3a35afbe-11de-42d5-a3ad-ec8b8de271e3
+- id: &bb_pay_per_call_services 3162
+  name: BB Pay_Per_Call Services
+  uuid: 0a1fdee3-bb19-4de0-9b44-d4a5458001b9
   type_id: 14
 # Fixed Networks
-- id: &bb_fixed 3158
+- id: &bb_fixed 3155
   name: BB Fixed
-  uuid: eb58ba79-660f-4b4d-b0c1-dd30b48c72f8
+  uuid: 696f23da-31cd-4980-8138-e532a582079d
   type_id: 12
 # Mobile Networks
-- id: &bb_flow_mobile 3159
-  name: BB Flow Mobile
-  uuid: c6685060-ee21-4156-a6c6-40bcaa3dfae2
+- id: &bb_flow 3156
+  name: BB Flow
+  uuid: 7e0ca3a1-3f52-419c-8fa2-51c0d8a8a9e7
   type_id: 3
-- id: &bb_digicel_mobile 3160
-  name: BB Digicel Mobile
-  uuid: c8928a6d-4ce4-44ba-8b20-1f6d0ab7c6fb
+- id: &bb_digicel 3157
+  name: BB Digicel
+  uuid: c620fa43-52ec-4c79-8d2e-1fb502de16e0
   type_id: 3
-- id: &bb_neptune_mobile 3161
-  name: BB Neptune Mobile
-  uuid: 373638c0-a510-40e4-8546-2db7747985f4
+- id: 3158
+  name: BB Neptune
+  uuid: b07e6e06-9727-4a1a-9bbc-1f867429e1f6
   type_id: 3
-- id: &bb_kw_telecommunications_mobile 3164
-  name: BB Kw Telecommunications Mobile
-  uuid: 50af9a30-eb43-4a93-a976-b07c8122dd1d
+- id: &bb_kw_telecommunications 3160
+  name: BB Kw Telecommunications
+  uuid: a644e8a8-a150-47ab-915f-4432ba688d5a
   type_id: 3
 # Satellite Networks
-- id: &bb_neptune_satellite 3162
-  name: BB Neptune Satellite
-  uuid: ab7996f2-9db9-4c5c-b4d5-4c9bd7e7ff78
+- id: &bb_neptune 3158
+  name: BB Neptune
+  uuid: b07e6e06-9727-4a1a-9bbc-1f867429e1f6
   type_id: 16
 network_prefixes:
 # Country code Prefixes
@@ -55,7 +55,7 @@ network_prefixes:
   prefix: '1246'
   number_min_length: 11
   number_max_length: 11
-  uuid: be46437a-f941-478a-af27-09b285486aff
+  uuid: 0e0fef37-e07e-492e-9fea-9aa3fd5d6aa0
   country_id: *bb
   network_id: *bb_fixed_cc
 # Supplementary services Prefixes
@@ -63,547 +63,547 @@ network_prefixes:
   prefix: '1246223'
   number_min_length: 14
   number_max_length: 14
-  uuid: a180faa7-41dd-4254-b71f-99e5acc38d9e
+  uuid: 0ea58284-52f3-4d63-93d8-b6b7ed8f173f
   country_id: *bb
   network_id: *bb_international_telephony_services
 - id: 30554
   prefix: '1246555'
   number_min_length: 14
   number_max_length: 14
-  uuid: e687e86a-043e-44fe-914d-9bc6d8a7c4ff
+  uuid: 7b9773e9-7d99-4908-9b4a-f3f911784d83
   country_id: *bb
   network_id: *bb_directory_enquiry_services
 - id: 30586
   prefix: '1246776'
   number_min_length: 14
   number_max_length: 14
-  uuid: 03c3ffa1-2b16-4a3f-aa3a-984be8619caf
+  uuid: 4b8e9787-162b-4013-988e-9b704cccc87c
   country_id: *bb
   network_id: *bb_international_telephony_services
 - id: 30587
   prefix: '1246777'
   number_min_length: 14
   number_max_length: 14
-  uuid: 41beba0e-7285-4573-ba24-ab7bbd2610db
+  uuid: dc1118b5-b228-4bdf-9f80-d04544d5b2d7
   country_id: *bb
   network_id: *bb_international_telephony_services
 - id: 30588
   prefix: '1246778'
   number_min_length: 14
   number_max_length: 14
-  uuid: 06b57d58-e18f-4bb3-8d9e-02893f0fb203
+  uuid: 4e78680d-cf76-4902-b190-910600f92419
   country_id: *bb
   network_id: *bb_international_telephony_services
 - id: 30594
   prefix: '1246958'
   number_min_length: 14
   number_max_length: 14
-  uuid: ddc6844b-cc8e-467b-951a-70fe41d18ad6
+  uuid: c12e1ed7-86d4-40d0-a616-ea046e135591
   country_id: *bb
   network_id: *bb_station_ringer_services
 - id: 30596
   prefix: '1246976'
   number_min_length: 14
   number_max_length: 14
-  uuid: 364ec49d-a09b-42d9-8a92-6aceaf249f9a
+  uuid: 454444ef-23dd-4b86-9dbf-c27453ff5e11
   country_id: *bb
-  network_id: *bb_pay-per-call_services
+  network_id: *bb_pay_per_call_services
 # Fixed Prefixes
 - id: 30070
   prefix: '1246227'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6447d969-b881-479a-8f3b-c2034bbe38f5
+  uuid: 419fc9e8-5e53-4a58-be48-c4d98dafc6f8
   country_id: *bb
   network_id: *bb_fixed
 - id: 30072
   prefix: '1246228'
   number_min_length: 14
   number_max_length: 14
-  uuid: b66732b6-1102-4f39-b240-62973eb5b785
+  uuid: 6531753b-584a-4462-bd00-17f6f190f07a
   country_id: *bb
   network_id: *bb_fixed
 - id: 30073
   prefix: '1246229'
   number_min_length: 14
   number_max_length: 14
-  uuid: bae45c8c-d019-4e71-9af4-df6024969167
+  uuid: e1c24e6e-5e50-41b8-a5fd-df7763722cd5
   country_id: *bb
   network_id: *bb_fixed
 - id: 30165
   prefix: '1246270'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5df0baee-82bf-4215-ab92-a70d6bbf2429
+  uuid: bb1733ce-2dee-4992-82c9-4523e286b7f2
   country_id: *bb
   network_id: *bb_fixed
 - id: 30167
   prefix: '1246271'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1b59f285-af29-405d-a1ec-8d3e20da378a
+  uuid: d8dc8839-9f31-4149-a1f2-25a647ad583e
   country_id: *bb
   network_id: *bb_fixed
 - id: 30169
   prefix: '1246272'
   number_min_length: 14
   number_max_length: 14
-  uuid: 684a6401-4516-4beb-be75-6aa5a142e28e
+  uuid: 84e14c56-ce3e-4714-aeca-c285288e711f
   country_id: *bb
   network_id: *bb_fixed
 - id: 30171
   prefix: '1246273'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1e854ada-7a89-4d98-8b39-8932c427a6d6
+  uuid: 47e7a970-1d66-4f61-9b30-409188c29ffd
   country_id: *bb
   network_id: *bb_fixed
 - id: 30173
   prefix: '1246274'
   number_min_length: 14
   number_max_length: 14
-  uuid: 07e947bc-7e9d-404d-a55b-3b6d48b874ba
+  uuid: 49ec304e-7946-4e71-9cc9-623270e08dd4
   country_id: *bb
   network_id: *bb_fixed
 - id: 30210
   prefix: '1246292'
   number_min_length: 14
   number_max_length: 14
-  uuid: d0e6cf19-4d26-46e5-aa6d-b45602e66ec1
+  uuid: f19faeff-6c67-4d1f-b878-f2a85de44cce
   country_id: *bb
   network_id: *bb_fixed
 - id: 30254
   prefix: '1246310'
   number_min_length: 14
   number_max_length: 14
-  uuid: a1d867ce-a19e-49d1-b975-3a364cb3c24f
+  uuid: b61d33d0-b604-4770-9454-8b0f9fff317b
   country_id: *bb
   network_id: *bb_fixed
 - id: 30257
   prefix: '1246312'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0313082e-9739-489e-a82e-f7b13fce32ee
+  uuid: b026ecf4-f759-4be1-8151-b4579a06734b
   country_id: *bb
   network_id: *bb_fixed
 - id: 30258
   prefix: '1246313'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5a11f272-35eb-497f-b1b9-6b2178a8db40
+  uuid: f6c80816-d113-45d7-b027-3d54fb76496d
   country_id: *bb
   network_id: *bb_fixed
 - id: 30259
   prefix: '1246314'
   number_min_length: 14
   number_max_length: 14
-  uuid: 26bbd686-a5e1-480d-9800-1e11607c1d4e
+  uuid: b1b1ba9e-216c-413f-a433-b9870a8fd8dd
   country_id: *bb
   network_id: *bb_fixed
 - id: 30260
   prefix: '1246315'
   number_min_length: 14
   number_max_length: 14
-  uuid: 02727a65-c484-41be-9c75-d7c9b82afe04
+  uuid: 62cecfd5-ead8-414c-9071-284afac041a2
   country_id: *bb
   network_id: *bb_fixed
 - id: 30262
   prefix: '1246316'
   number_min_length: 14
   number_max_length: 14
-  uuid: 263625ab-997f-4bd9-9593-3fb86ac21e6a
+  uuid: 25a83cce-e798-4fe5-a0ef-65b0ca115d50
   country_id: *bb
   network_id: *bb_fixed
 - id: 30264
   prefix: '1246317'
   number_min_length: 14
   number_max_length: 14
-  uuid: c7623cf1-592a-4b42-9ce6-358078b858dc
+  uuid: bffc53d4-ee81-4aba-9921-ec74875e5ff9
   country_id: *bb
   network_id: *bb_fixed
 - id: 30266
   prefix: '1246318'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1eb23971-c714-4627-b068-d02b8ba5a296
+  uuid: e0e411be-2506-4965-9cf1-9f247229920b
   country_id: *bb
   network_id: *bb_fixed
 - id: 30268
   prefix: '1246319'
   number_min_length: 14
   number_max_length: 14
-  uuid: 692de8fa-38f3-4332-b329-a22bf50ee007
+  uuid: 295465f3-1c95-4a09-b17f-75d1ae20c093
   country_id: *bb
   network_id: *bb_fixed
 - id: 30333
   prefix: '1246367'
   number_min_length: 14
   number_max_length: 14
-  uuid: e7c2013e-0e96-4c98-a94b-9ab77e55ddf7
+  uuid: ffcd4516-55c1-4c2a-99ba-54dc12d4a690
   country_id: *bb
   network_id: *bb_fixed
 - id: 30406
   prefix: '1246410'
   number_min_length: 14
   number_max_length: 14
-  uuid: c2c4f04f-ac25-421c-b248-13ea886470b5
+  uuid: f470bfbc-9c92-40c7-b761-ceb6c7c8670c
   country_id: *bb
   network_id: *bb_fixed
 - id: 30409
   prefix: '1246412'
   number_min_length: 14
   number_max_length: 14
-  uuid: 886aa84d-5e99-4934-a536-cf5e5a33e5e1
+  uuid: 5f12282f-884d-47b3-bc29-89416c983a3d
   country_id: *bb
   network_id: *bb_fixed
 - id: 30412
   prefix: '1246414'
   number_min_length: 14
   number_max_length: 14
-  uuid: 68db0635-13b1-4f90-a2bc-281fdc59d987
+  uuid: 2ccb9887-91f9-448f-8bb5-ec6fe629b993
   country_id: *bb
   network_id: *bb_fixed
 - id: 30414
   prefix: '1246415'
   number_min_length: 14
   number_max_length: 14
-  uuid: f276219d-f526-4043-8c9c-d3b0a264fa6b
+  uuid: 77eae164-edd2-4fce-8992-75b4a4cd5b8f
   country_id: *bb
   network_id: *bb_fixed
 - id: 30415
   prefix: '1246416'
   number_min_length: 14
   number_max_length: 14
-  uuid: 55d3d76c-1de9-44dd-9271-39d2df88aed1
+  uuid: 4d5e8a3b-8603-4352-9195-6afd409c722b
   country_id: *bb
   network_id: *bb_fixed
 - id: 30416
   prefix: '1246417'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4ea69ddc-b03b-44c7-bade-b0e7e4716286
+  uuid: c3468b83-b50a-40a6-8c7a-1c803afe873a
   country_id: *bb
   network_id: *bb_fixed
 - id: 30418
   prefix: '1246418'
   number_min_length: 14
   number_max_length: 14
-  uuid: e1541343-a19d-41d5-88c9-e660c3f3355f
+  uuid: bbe770b6-0735-4420-bb21-62e711711a2b
   country_id: *bb
   network_id: *bb_fixed
 - id: 30420
   prefix: '1246419'
   number_min_length: 14
   number_max_length: 14
-  uuid: 11069de3-f6e5-45f8-b31a-32e9278ac98a
+  uuid: 5fbb3d14-061d-43f6-8caf-803ace2e79e7
   country_id: *bb
   network_id: *bb_fixed
 - id: 30422
   prefix: '1246420'
   number_min_length: 14
   number_max_length: 14
-  uuid: ba2a07ea-00ff-4d42-98d0-dbe1e4f10a71
+  uuid: 57a7e26a-6a2d-4b05-81a2-462d3a9d58bc
   country_id: *bb
   network_id: *bb_fixed
 - id: 30423
   prefix: '1246421'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7cbfdd54-651d-4b28-842b-eb995d37851b
+  uuid: b883d698-4d83-4d84-b871-0de0f05e978d
   country_id: *bb
   network_id: *bb_fixed
 - id: 30424
   prefix: '1246422'
   number_min_length: 14
   number_max_length: 14
-  uuid: f6f65c40-ba0e-4bcf-aee6-82265a585280
+  uuid: f22a5f9f-68c3-47d7-a1a7-45c271583c37
   country_id: *bb
   network_id: *bb_fixed
 - id: 30425
   prefix: '1246423'
   number_min_length: 14
   number_max_length: 14
-  uuid: 591022d1-3ecb-416d-b64f-84dddb0d4e7c
+  uuid: e38cfe94-20f8-404a-861d-fbfddba9cfa3
   country_id: *bb
   network_id: *bb_fixed
 - id: 30426
   prefix: '1246424'
   number_min_length: 14
   number_max_length: 14
-  uuid: fd39b08e-d2a1-4e02-8f15-0c485cb0f352
+  uuid: c0ba8e4b-2c5e-4ab9-b65b-c78a2f3861ed
   country_id: *bb
   network_id: *bb_fixed
 - id: 30428
   prefix: '1246425'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1e644eac-cff6-411d-94b8-78117db17440
+  uuid: f463d69c-2d7c-4d36-b969-dd42b37dc754
   country_id: *bb
   network_id: *bb_fixed
 - id: 30430
   prefix: '1246426'
   number_min_length: 14
   number_max_length: 14
-  uuid: 57f1a5d5-b161-4e62-a18b-61c853696d3f
+  uuid: e9b6771a-caf2-409a-8364-a685cf05ea43
   country_id: *bb
   network_id: *bb_fixed
 - id: 30432
   prefix: '1246427'
   number_min_length: 14
   number_max_length: 14
-  uuid: bf6d3a13-be8d-4df7-91a4-c8e6e5156760
+  uuid: 7cbd3bcd-59e5-4d02-b53e-524d85850430
   country_id: *bb
   network_id: *bb_fixed
 - id: 30435
   prefix: '1246428'
   number_min_length: 14
   number_max_length: 14
-  uuid: efd23e9a-d28a-4a0e-9f7d-8ccd36b0cb83
+  uuid: e7933c3c-6c43-413b-97af-e9ddc20c1845
   country_id: *bb
   network_id: *bb_fixed
 - id: 30436
   prefix: '1246429'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4aa0287b-0759-4616-8ee1-bd830f2f42e9
+  uuid: 3fb5d775-56ff-4f12-ad32-602ba4f288d1
   country_id: *bb
   network_id: *bb_fixed
 - id: 30437
   prefix: '1246430'
   number_min_length: 14
   number_max_length: 14
-  uuid: ae22ffe1-1064-45da-82a2-ebaf25b5949e
+  uuid: 7e762811-b6e1-4bb2-a380-ea25c3513fc6
   country_id: *bb
   network_id: *bb_fixed
 - id: 30438
   prefix: '1246431'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3eca1de5-1a18-4d35-bf87-4e4da88fcee7
+  uuid: e8819e01-c41b-4a83-98f6-8d6bdad42889
   country_id: *bb
   network_id: *bb_fixed
 - id: 30440
   prefix: '1246432'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9fc5976a-879e-4bb8-8490-b91fe5e1ff49
+  uuid: fdc97851-12e4-42f0-b550-11be4db3716a
   country_id: *bb
   network_id: *bb_fixed
 - id: 30442
   prefix: '1246433'
   number_min_length: 14
   number_max_length: 14
-  uuid: c03e00dc-f644-4925-8a39-d5046d3108d6
+  uuid: 56d7c71f-c307-4665-87b3-acc83ea2b10e
   country_id: *bb
   network_id: *bb_fixed
 - id: 30444
   prefix: '1246434'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7d50e366-ff55-4f28-9554-478fee45f303
+  uuid: f19aa759-84ec-46e0-a2f0-b79e035e5a05
   country_id: *bb
   network_id: *bb_fixed
 - id: 30446
   prefix: '1246435'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8450a8fa-7aba-4066-ba62-545a9018cd3a
+  uuid: 9e629207-018f-4f17-84f5-55af89291afb
   country_id: *bb
   network_id: *bb_fixed
 - id: 30448
   prefix: '1246436'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7dfc9512-1966-4d10-ba54-46dff1ae870e
+  uuid: e4adc154-3b48-4add-a246-b573c16a1ee8
   country_id: *bb
   network_id: *bb_fixed
 - id: 30450
   prefix: '1246437'
   number_min_length: 14
   number_max_length: 14
-  uuid: c62111c4-fd8f-4ee2-b349-98315867836a
+  uuid: 56706459-7287-4333-bbab-3c648949634b
   country_id: *bb
   network_id: *bb_fixed
 - id: 30452
   prefix: '1246438'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9d4a01d6-9541-4256-acaa-bb4675a7ae81
+  uuid: d4bcc010-e48b-4405-81ad-dbb2f3cfca81
   country_id: *bb
   network_id: *bb_fixed
 - id: 30454
   prefix: '1246439'
   number_min_length: 14
   number_max_length: 14
-  uuid: e599240d-938b-4d08-aa44-217142b787bd
+  uuid: 4078b906-b9db-40be-98ba-eb2128216a68
   country_id: *bb
   network_id: *bb_fixed
 - id: 30458
   prefix: '1246444'
   number_min_length: 14
   number_max_length: 14
-  uuid: db5976f8-1101-446a-ba0b-d5b37ee2270c
+  uuid: 085bfde6-d771-473a-aa15-c66f408517fe
   country_id: *bb
   network_id: *bb_fixed
 - id: 30481
   prefix: '1246467'
   number_min_length: 14
   number_max_length: 14
-  uuid: dd3a89ab-d3da-49d2-89f7-e6c38bf9f6f8
+  uuid: 00632179-3142-4778-9255-bb9984e06e44
   country_id: *bb
   network_id: *bb_fixed
 - id: 30542
   prefix: '1246530'
   number_min_length: 14
   number_max_length: 14
-  uuid: 14dad973-0c00-47c9-ab1d-1e4fd8d2872e
+  uuid: b0678974-0b8e-42ee-a003-b3668ec0c54c
   country_id: *bb
   network_id: *bb_fixed
 - id: 30543
   prefix: '1246531'
   number_min_length: 14
   number_max_length: 14
-  uuid: 659c8749-442c-4099-b8cd-3de238545de9
+  uuid: 3b2ca8e6-4a6e-459b-9693-1213a8b3f13f
   country_id: *bb
   network_id: *bb_fixed
 - id: 30544
   prefix: '1246535'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3d8fe90e-d035-46e3-8019-83ca460782c5
+  uuid: 6efd0325-86ea-4413-a056-469be3d19205
   country_id: *bb
   network_id: *bb_fixed
 - id: 30545
   prefix: '1246536'
   number_min_length: 14
   number_max_length: 14
-  uuid: 74e14b8b-f907-4d37-8063-7efd32b92a0e
+  uuid: 1444fcfc-8b90-41c7-b496-738f02f6cb1f
   country_id: *bb
   network_id: *bb_fixed
 - id: 30546
   prefix: '1246537'
   number_min_length: 14
   number_max_length: 14
-  uuid: 348550a7-6bde-44e1-9c00-0fcdc438f558
+  uuid: c2f30b1f-1ff4-4e13-9a39-9e35a7ad28ec
   country_id: *bb
   network_id: *bb_fixed
 - id: 30547
   prefix: '1246538'
   number_min_length: 14
   number_max_length: 14
-  uuid: 22cbcc68-8893-4f69-8eb5-9d9457a98520
+  uuid: a510afdd-d45e-49b1-be38-b08d2cc722f1
   country_id: *bb
   network_id: *bb_fixed
 - id: 30548
   prefix: '1246539'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5aa88a90-66f2-4ee9-8dfa-cf6a7b9038ee
+  uuid: 30d6e11c-346e-4587-be37-c4b2fa0268cd
   country_id: *bb
   network_id: *bb_fixed
 - id: 30549
   prefix: '1246546'
   number_min_length: 14
   number_max_length: 14
-  uuid: f0042f1f-8d8b-4ab7-9669-d0e2e5a2cdcf
+  uuid: 7be047de-fd22-4e62-bdae-142271e78cad
   country_id: *bb
   network_id: *bb_fixed
 - id: 30550
   prefix: '1246547'
   number_min_length: 14
   number_max_length: 14
-  uuid: e5188a12-8243-4c57-bb7e-72e719bb0337
+  uuid: 5fcf7354-7fda-44e7-a00c-64be1ac6cc89
   country_id: *bb
   network_id: *bb_fixed
 - id: 30551
   prefix: '1246548'
   number_min_length: 14
   number_max_length: 14
-  uuid: f5d338f7-67b3-445b-aa88-44e88d56e2a8
+  uuid: 8e23a82d-0d81-4d2e-befa-1f111f480450
   country_id: *bb
   network_id: *bb_fixed
 - id: 30552
   prefix: '1246549'
   number_min_length: 14
   number_max_length: 14
-  uuid: 55568bc0-6e23-4256-87bb-b4d07c6653a9
+  uuid: 67efc798-ba7f-4849-9cc8-8f4fb4556bc3
   country_id: *bb
   network_id: *bb_fixed
 - id: 30553
   prefix: '1246554'
   number_min_length: 14
   number_max_length: 14
-  uuid: 35219e00-5aac-4bb2-99d9-f5a82401839e
+  uuid: c92e61e5-3ebb-480f-8e7e-ad48de717ddf
   country_id: *bb
   network_id: *bb_fixed
 - id: 30555
   prefix: '1246571'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5046bd38-7764-496d-bb79-417acb8800be
+  uuid: 1601f7c3-4bd4-4b25-ad46-f29645454bfb
   country_id: *bb
   network_id: *bb_fixed
 - id: 30556
   prefix: '1246572'
   number_min_length: 14
   number_max_length: 14
-  uuid: e21dc9b2-74bd-4b02-af3e-f8bdabbb8fb4
+  uuid: 1c9682fa-f557-45d2-8269-027db79c6a8e
   country_id: *bb
   network_id: *bb_fixed
 - id: 30557
   prefix: '1246573'
   number_min_length: 14
   number_max_length: 14
-  uuid: f49881db-45d5-4729-b14e-860a39a68c09
+  uuid: 318c205e-67b4-4060-85e4-d4f99dd513e8
   country_id: *bb
   network_id: *bb_fixed
 - id: 30568
   prefix: '124662'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0d8d3c6a-121c-43fc-987a-e4b9802e1c61
+  uuid: 4d45f6b9-acea-4ea4-97a6-0989b96b44b9
   country_id: *bb
   network_id: *bb_fixed
 - id: 30569
   prefix: '1246638'
   number_min_length: 14
   number_max_length: 14
-  uuid: 96fb69d2-ff68-4c46-b8df-e94f079fe46e
+  uuid: 97e4efea-1026-4c75-bd38-9e899c9076c1
   country_id: *bb
   network_id: *bb_fixed
 - id: 30581
   prefix: '1246736'
   number_min_length: 14
   number_max_length: 14
-  uuid: 52cf49e8-9567-4db4-bcac-f7055c096ee9
+  uuid: 02191896-1e25-4767-903e-214bc8052876
   country_id: *bb
   network_id: *bb_fixed
 - id: 30582
   prefix: '1246737'
   number_min_length: 14
   number_max_length: 14
-  uuid: 97bb55ad-e8ee-476e-a202-ef5d23217620
+  uuid: bdd8ba56-2ba5-4103-af25-8d11ba8c5d8a
   country_id: *bb
   network_id: *bb_fixed
 - id: 30583
   prefix: '1246753'
   number_min_length: 14
   number_max_length: 14
-  uuid: 59130a9f-c28c-4125-bec1-8e155f010753
+  uuid: 8681fbc6-8f96-4473-a992-4eed025fb844
   country_id: *bb
   network_id: *bb_fixed
 - id: 30584
   prefix: '1246757'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4623242a-0df7-482f-886e-51f341562092
+  uuid: c634058b-cdca-4c37-b7d5-ee2f40290b27
   country_id: *bb
   network_id: *bb_fixed
 - id: 30595
   prefix: '1246963'
   number_min_length: 14
   number_max_length: 14
-  uuid: e3357281-d633-4136-b2a4-e84e22c54ba6
+  uuid: 1cb3639f-9fdf-4c55-8e06-0e268a3d0693
   country_id: *bb
   network_id: *bb_fixed
 # Mobile Prefixes
@@ -611,455 +611,455 @@ network_prefixes:
   prefix: '124623'
   number_min_length: 13
   number_max_length: 13
-  uuid: b551d246-2164-4df9-9a4d-3e02495333e6
+  uuid: a07a8788-c22d-4214-b6d9-18f053ff914c
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30092
   prefix: '1246240'
   number_min_length: 14
   number_max_length: 14
-  uuid: 430375aa-b1f9-469e-899b-ff05e106d2bc
+  uuid: a78989a6-dd51-4451-a674-00605f035c52
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30094
   prefix: '1246241'
   number_min_length: 14
   number_max_length: 14
-  uuid: ae405af7-26eb-4502-a47a-963bb1f1f70d
+  uuid: 30807f47-c8ef-4c48-8bea-b6e4edbfaa7c
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30096
   prefix: '1246242'
   number_min_length: 14
   number_max_length: 14
-  uuid: dc6af3eb-dd13-4f1e-8095-e0f2d53f7494
+  uuid: 1662a038-a74f-47f0-a7e4-020c043cba3b
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30098
   prefix: '1246243'
   number_min_length: 14
   number_max_length: 14
-  uuid: 92ebe904-ead8-41fe-acc0-46724ea0e6d5
+  uuid: dce7d2b1-6fae-4641-81cf-1ccc007fd5b9
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30100
   prefix: '1246244'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1f6494dc-d59e-4e0f-8291-7064f52cef36
+  uuid: 75281c7c-f865-4cdf-9e88-75313a74899c
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30102
   prefix: '1246245'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4ca49eef-bf93-4545-bac3-8bfa79e9cecf
+  uuid: c10f41a0-3027-498b-95f0-29a543adf9c0
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30104
   prefix: '1246247'
   number_min_length: 14
   number_max_length: 14
-  uuid: 31556e58-9951-4638-84ab-c399bb79ce37
+  uuid: afd74bce-7f3e-41ec-b47b-babb2115fd93
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30106
   prefix: '1246248'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6c6a3b64-e1e3-40b2-a312-8c6d40e2ddae
+  uuid: caf81f9c-8043-4f55-a139-20c4cf5a95c9
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30108
   prefix: '1246249'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3d0f3a13-020b-40b7-bf51-1463bdbf1b19
+  uuid: ea0ff0bb-f176-4d20-ac88-a3a1e74f65fa
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30109
   prefix: '1246250'
   number_min_length: 14
   number_max_length: 14
-  uuid: 45d64af9-d2a1-4921-970f-06c1ea0bfe34
+  uuid: 8e410661-0cb6-4198-89f8-17803e89d5fa
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30111
   prefix: '1246251'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4d9c69f5-a186-4231-bb90-fea8df442d3d
+  uuid: 427efdb6-2960-42c9-bc29-d6be42ac7b02
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30122
   prefix: '1246252'
   number_min_length: 14
   number_max_length: 14
-  uuid: d7d7ad2c-9c19-4a63-9328-b69143091261
+  uuid: f769be1d-b4fc-4f28-927e-f8fd5e0f85af
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30124
   prefix: '1246253'
   number_min_length: 14
   number_max_length: 14
-  uuid: 209baff9-d64e-4739-9302-7e6b191097bb
+  uuid: 8de78ee6-1082-4732-b5ec-b791aefe6356
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30126
   prefix: '1246254'
   number_min_length: 14
   number_max_length: 14
-  uuid: 405aae6d-863e-4d85-8bb0-3b09254666bb
+  uuid: 5a821094-300a-4b65-9915-5b93087e136d
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30137
   prefix: '1246255'
   number_min_length: 14
   number_max_length: 14
-  uuid: baa5b58b-3f05-4d3a-b631-8e013a0cbd12
+  uuid: 2d337c11-6354-44e3-9785-b335c09ce764
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30139
   prefix: '1246256'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9cb7e876-e554-400e-9f71-b5ae3594ccd5
+  uuid: b8e2679e-2e1b-449a-aa6b-b86ea32d3eb3
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30141
   prefix: '1246257'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7ba32c35-6be0-402a-9b72-0a89e8dea85b
+  uuid: cda482d6-3f10-4ea1-811b-8306cb72eb45
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30143
   prefix: '1246258'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3f9c76bc-0bf4-4ce5-9b44-16cbf241e6c6
+  uuid: c81fec1f-cb91-44c5-b865-ba7c6c614282
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30145
   prefix: '1246259'
   number_min_length: 14
   number_max_length: 14
-  uuid: 923fba97-8772-4527-a857-b6e455b0433a
+  uuid: 21c334a5-4f89-4348-a91b-3b76eaa91762
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30147
   prefix: '124626'
   number_min_length: 13
   number_max_length: 13
-  uuid: baa1948d-e623-45e8-8417-886360f5f8e3
+  uuid: 85ad060d-0aac-4af5-bd37-273ae0592d09
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30180
   prefix: '1246280'
   number_min_length: 14
   number_max_length: 14
-  uuid: 97eb1815-24fa-4702-8ecd-0a9f3a2ea705
+  uuid: d00a421a-e60b-41e8-8ae3-f1f7f310266f
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30182
   prefix: '1246281'
   number_min_length: 14
   number_max_length: 14
-  uuid: ca784fce-9445-42fd-a393-96290dc73f19
+  uuid: c0f4e315-544d-4e16-86bd-ff12c5545228
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30184
   prefix: '1246282'
   number_min_length: 14
   number_max_length: 14
-  uuid: 81866c94-9625-45e2-b5a7-2119a58c0501
+  uuid: 9e6c6606-92ef-4e5b-a9ee-5a49b8830d15
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30186
   prefix: '1246283'
   number_min_length: 14
   number_max_length: 14
-  uuid: ce7ba1ac-b6e6-47a5-a9e2-7b4f6ec46748
+  uuid: 083a94ed-c6d4-4f51-8393-4ee0892cfdf3
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30188
   prefix: '1246284'
   number_min_length: 14
   number_max_length: 14
-  uuid: add5c2c2-1fad-4a11-ac73-690d76916fe2
+  uuid: 4339845a-c5b5-4b7f-a7b7-a345fa811745
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30190
   prefix: '1246285'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2bf6cbe3-54cb-468e-9325-5fb637fbb461
+  uuid: cdd6be84-cac1-4cbc-b781-63a6acae3541
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30192
   prefix: '1246286'
   number_min_length: 14
   number_max_length: 14
-  uuid: aa76bfdf-89b5-4412-a52c-119e41051430
+  uuid: 3fc0f1a1-56eb-4777-8654-b34bf2a0da3f
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30194
   prefix: '1246287'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7f80f83c-572a-4c77-b30b-e81f46d69bdc
+  uuid: 762e6dd2-affb-458a-89e4-b9d188b57d38
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30206
   prefix: '1246289'
   number_min_length: 14
   number_max_length: 14
-  uuid: 31d85276-4f13-4b4c-bb02-71ef779a1276
+  uuid: 3c4d3f8a-498f-4764-83ff-00a0344f2316
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30305
   prefix: '1246352'
   number_min_length: 14
   number_max_length: 14
-  uuid: b9904160-18fb-455d-9462-6514b1f60d24
+  uuid: 065f232f-e3a7-4bbf-aae6-9f32864deb24
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30307
   prefix: '1246353'
   number_min_length: 14
   number_max_length: 14
-  uuid: af5f5d28-563a-428c-aabe-b88448df799b
+  uuid: b39b134b-9635-42d8-a895-e9ca53d81b61
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30309
   prefix: '1246354'
   number_min_length: 14
   number_max_length: 14
-  uuid: b75c5450-6b3b-47af-bbf5-edbab5fd4e38
+  uuid: 6f597e1d-99ec-4ed7-a146-49f96d09086d
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30311
   prefix: '1246355'
   number_min_length: 14
   number_max_length: 14
-  uuid: 66ec7fa8-4f1b-401e-a685-655aa02c518d
+  uuid: 5a79e75d-7193-4e11-839c-ffea52bf45b6
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30313
   prefix: '1246356'
   number_min_length: 14
   number_max_length: 14
-  uuid: 498ef003-6914-4c35-a5c9-3ef9aa898232
+  uuid: bf7ed307-b67e-4a0e-bead-09d4873138db
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30314
   prefix: '1246357'
   number_min_length: 14
   number_max_length: 14
-  uuid: b0eda41e-8094-4997-9d2c-291939f71c18
+  uuid: 82e59868-bc05-4c10-9ba8-66df64078f84
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30315
   prefix: '1246358'
   number_min_length: 14
   number_max_length: 14
-  uuid: 43f1c772-ead0-4c09-a78a-06864684a35b
+  uuid: 8bae21ce-03b9-4222-8f99-8928a82a5059
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30316
   prefix: '1246359'
   number_min_length: 14
   number_max_length: 14
-  uuid: fd074ccf-2381-4b9d-86bd-27ca757c4e8f
+  uuid: 5d8c61de-700e-4838-b1ac-de883a8788c7
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30318
   prefix: '1246360'
   number_min_length: 14
   number_max_length: 14
-  uuid: f96d3765-7dea-4459-906c-bb6e27d7055c
+  uuid: 5c7d4239-7e7f-4900-975a-260ff58568e0
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30320
   prefix: '1246361'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0677a702-ed27-4bb8-b489-745a4f23b4e9
+  uuid: 3129dac6-bc98-4724-9e06-d74c1c24f702
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30322
   prefix: '1246362'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6b9c146a-6801-4d99-9999-dfa4c46440fd
+  uuid: a03e33b6-a24d-4a6b-834a-e4041200606e
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30324
   prefix: '1246363'
   number_min_length: 14
   number_max_length: 14
-  uuid: 75ed054a-2fd7-438c-9132-6094fc5a7b28
+  uuid: 1597e2ad-6aac-4480-b695-b9500a64d223
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30326
   prefix: '1246364'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1ab5eb1e-def0-45f1-a38b-5d544300f46f
+  uuid: 831d4006-0a89-4b36-9bc3-c7170f78cc7c
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30329
   prefix: '1246365'
   number_min_length: 14
   number_max_length: 14
-  uuid: 37886d4d-0939-4b01-9cc0-495390f7d7be
+  uuid: d24ff8f0-4941-4364-ad46-597d52a87b3e
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30331
   prefix: '1246366'
   number_min_length: 14
   number_max_length: 14
-  uuid: ddf8d8c4-0e47-4b00-9204-19053082d6cd
+  uuid: 2d8126b5-e157-4a7e-81d1-49e773deb78e
   country_id: *bb
-  network_id: *bb_flow_mobile
+  network_id: *bb_flow
 - id: 30459
   prefix: '1246446'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9857ac34-058f-46ec-9283-aa69a5cb62f6
+  uuid: 667c6c9e-2c51-43fc-bb0d-5f5e28beac46
   country_id: *bb
-  network_id: *bb_neptune_mobile
+  network_id: *bb_neptune
 - id: 30570
   prefix: '1246712'
   number_min_length: 14
   number_max_length: 14
-  uuid: eb45281b-5121-4b1d-b53e-209b3fbba3eb
+  uuid: 087f04c1-548b-4b43-92f5-1133df21a99a
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30571
   prefix: '1246713'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6ee63708-2f4a-4efe-9423-23b09a097c09
+  uuid: fa0b3834-ecad-4583-b558-883e944b52e4
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30572
   prefix: '1246714'
   number_min_length: 14
   number_max_length: 14
-  uuid: 365c4823-602e-4bbb-b8fc-ad9b35182479
+  uuid: 3705330a-30bb-402d-999e-b1329138fc0a
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30573
   prefix: '1246715'
   number_min_length: 14
   number_max_length: 14
-  uuid: d5f8b2b5-319b-44f3-913f-76b6cc10443c
+  uuid: 92ad1154-49ab-4618-be59-4bb8d1ffb420
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30574
   prefix: '1246716'
   number_min_length: 14
   number_max_length: 14
-  uuid: a8246c49-6892-4c83-82db-0306f37b617e
+  uuid: 84b98e7f-b50a-4deb-b7a2-bf9f7801ee81
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30575
   prefix: '1246717'
   number_min_length: 14
   number_max_length: 14
-  uuid: c56f5e27-3261-4c9a-ba84-27c2a3fcbbb4
+  uuid: daeb84b2-6bc9-478d-a4c7-66f6aaff4d99
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30576
   prefix: '1246718'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5525477c-f2af-4750-8d41-66973ac84f3d
+  uuid: 438f93a4-8fb2-4ad2-9032-5b352b38ff7d
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30577
   prefix: '1246719'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3d76e519-0e10-48b9-8d90-3475589ac5e4
+  uuid: 8b0e1d82-d941-4f34-9a57-46b0f1ae3f17
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30578
   prefix: '124672'
   number_min_length: 13
   number_max_length: 13
-  uuid: e5504dfe-aa9f-4199-a38b-0e935382bff1
+  uuid: 2b191e22-0eab-4156-b9bc-2640305ecf8c
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30579
   prefix: '1246730'
   number_min_length: 14
   number_max_length: 14
-  uuid: d2a4392b-ee22-4d0c-bdd0-526869adebfb
+  uuid: c090f818-4e18-4f24-8633-ce71c3a1613d
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30580
   prefix: '1246731'
   number_min_length: 14
   number_max_length: 14
-  uuid: f4e468f2-2ddf-4b5a-b506-0f46ab31d3ae
+  uuid: 91e52f52-e39d-4ae1-9fc9-7bfe120559e1
   country_id: *bb
-  network_id: *bb_kw_telecommunications_mobile
+  network_id: *bb_kw_telecommunications
 - id: 30589
   prefix: '124682'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8a27596c-dc0d-4c73-9a84-db6a1589a44d
+  uuid: f7b3ed9c-b461-488c-9f75-6244a3db8594
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30590
   prefix: '124683'
   number_min_length: 13
   number_max_length: 13
-  uuid: 88da6e61-e762-4b60-9694-93bb321a8208
+  uuid: c9c89cb9-d608-493d-82db-0602c0812512
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30591
   prefix: '124684'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2d401aad-1570-4a99-b405-16e47838a26e
+  uuid: 3c342673-5ed4-4c47-a05c-bcad6a645fbd
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30592
   prefix: '124685'
   number_min_length: 13
   number_max_length: 13
-  uuid: 4cf4ac73-587b-4abe-b6e2-62d4fc0a464c
+  uuid: 5bdc5cf8-7cb6-48ff-822a-7a83bd72bdc6
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 - id: 30593
   prefix: '1246883'
   number_min_length: 14
   number_max_length: 14
-  uuid: d511cad3-ea43-4e55-9ef4-2ebdf46e75eb
+  uuid: 30bbe9b6-61ec-4ed7-9e8a-d4d4fdf2623e
   country_id: *bb
-  network_id: *bb_digicel_mobile
+  network_id: *bb_digicel
 # Satellite Prefixes
 - id: 30461
   prefix: '1246447'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1daa92d9-bc59-44fd-86ad-6f4613e35361
+  uuid: 95255204-b198-4e1d-aca4-d77fd6c199dc
   country_id: *bb
-  network_id: *bb_neptune_satellite
+  network_id: *bb_neptune
 - id: 30463
   prefix: '1246448'
   number_min_length: 14
   number_max_length: 14
-  uuid: d6092bbf-9da2-4cd9-8086-659e34b4abb1
+  uuid: 9e256b80-9b3e-4344-af24-1b967d739d69
   country_id: *bb
-  network_id: *bb_neptune_satellite
+  network_id: *bb_neptune
 - id: 30464
   prefix: '1246449'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7157dc93-bf96-45eb-ad4c-991b1ac9336f
+  uuid: 9942b8b6-8e4b-480a-b0e5-985729ef44ef
   country_id: *bb
-  network_id: *bb_neptune_satellite
+  network_id: *bb_neptune

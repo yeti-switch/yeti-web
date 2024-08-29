@@ -1,44 +1,44 @@
 country_id: &ni 154
 networks:
 # Supplementary services Networks
-- id: &ni_freephone_services 4060
+- id: &ni_freephone_services 4045
   name: NI Freephone Services
-  uuid: f333a293-8033-459d-9554-c2e6786c21ab
+  uuid: 4791c2e4-5e34-41e0-9525-a751422f261a
   type_id: 14
-- id: &ni_value_added_services 4106
+- id: &ni_value_added_services 4091
   name: NI Value Added Services
-  uuid: 149a12df-9717-4fe4-9bb0-c9885a8c3d6d
+  uuid: f5218fb0-7428-488c-b3ed-e692b7b0820e
   type_id: 14
-- id: &ni_special_services 5020
+- id: &ni_special_services 5002
   name: NI Special Services
-  uuid: d33affab-b178-45d7-8489-1b872435be18
+  uuid: b38a229e-a14a-4909-8698-e760c6439090
   type_id: 14
 # Fixed Networks
-- id: &ni_fixed 4111
+- id: &ni_fixed 4096
   name: NI Fixed
-  uuid: 146fba80-2d26-4562-b101-96d118e35e45
+  uuid: 43052fd9-1e13-4acb-a19b-931ef7c33109
   type_id: 12
 # Mobile Networks
-- id: &ni_claro_mobile 4448
-  name: NI Claro Mobile
-  uuid: e93865bb-76b5-436e-ac57-e3960ba0527d
+- id: &ni_claro 4431
+  name: NI Claro
+  uuid: 790c0281-37c5-46ac-a7e1-e20914728036
   type_id: 3
-- id: &ni_mobile 4513
+- id: &ni_mobile 4496
   name: NI Mobile
-  uuid: 6f12f5b6-830d-4835-bcbf-b2c837e01adb
+  uuid: a4cd1b08-3530-4ab5-a526-228c18acaf89
   type_id: 3
-- id: &ni_tigo_mobile 5625
-  name: NI Tigo Mobile
-  uuid: f37218dc-1470-4242-891e-47b8acf6bb0f
+- id: &ni_tigo 5596
+  name: NI Tigo
+  uuid: 8836f56b-dc2a-41d1-8d42-3b9d3460abfe
   type_id: 3
-- id: &ni_cootel_mobile 5948
-  name: NI Cootel Mobile
-  uuid: 01538fc6-a9ba-4140-baba-d54f32408213
+- id: &ni_cootel 5916
+  name: NI Cootel
+  uuid: 0a400743-993e-4ab4-a42d-a79864f98741
   type_id: 3
 # Country code Networks
-- id: &ni_fixed_cc 4775
+- id: &ni_fixed_cc 4757
   name: NI Fixed Cc
-  uuid: 735983a1-e8b3-4cde-94d5-ce831e935394
+  uuid: c45be26d-9fd6-4eb1-825b-f66838605ad0
   type_id: 17
 network_prefixes:
 # Supplementary services Prefixes
@@ -46,21 +46,21 @@ network_prefixes:
   prefix: '5051800'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0c825a2d-b898-46f1-b3bf-23d7df56e170
+  uuid: 2aa8373c-cf64-48ef-87f4-ee6494adbb10
   country_id: *ni
   network_id: *ni_freephone_services
 - id: 242980
   prefix: '5051900'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2dd9d0e9-5d83-4dbe-90f4-f694dda3a035
+  uuid: 2b11cb55-907e-4020-ac07-c09dc4dc8f8e
   country_id: *ni
   network_id: *ni_value_added_services
 - id: 248407
   prefix: '5051'
   number_min_length: 7
   number_max_length: 8
-  uuid: 275828c9-8be9-481f-b716-abcac080de3c
+  uuid: 6eb2b2fa-bec8-40b0-a508-4e86b582774b
   country_id: *ni
   network_id: *ni_special_services
 # Fixed Prefixes
@@ -68,336 +68,336 @@ network_prefixes:
   prefix: '5051906'
   number_min_length: 18
   number_max_length: 18
-  uuid: f53ef2f1-7165-47f0-82f7-f016f142534f
+  uuid: 54d332b9-ce92-4351-a25a-9bd466006085
   country_id: *ni
   network_id: *ni_fixed
 - id: 243050
   prefix: '5052'
   number_min_length: 12
   number_max_length: 12
-  uuid: 05fd8362-91ba-40fb-a3c5-46c6f354af34
+  uuid: 2cddc3ab-1c28-41fc-a77d-43faa303f88d
   country_id: *ni
   network_id: *ni_fixed
 - id: 243352
   prefix: '50522'
   number_min_length: 13
   number_max_length: 13
-  uuid: 701fc73a-aeb3-4ccf-ac0c-200d0398643d
+  uuid: e4293703-1f9e-4972-aea4-088d7adc3481
   country_id: *ni
   network_id: *ni_fixed
 - id: 243548
   prefix: '50523'
   number_min_length: 13
   number_max_length: 13
-  uuid: f4f64227-1d88-4f10-87dd-7d1639ad18a6
+  uuid: 2290a58f-66bb-40ec-b1db-e66b5a969fd7
   country_id: *ni
   network_id: *ni_fixed
 - id: 243575
   prefix: '50523160'
   number_min_length: 16
   number_max_length: 16
-  uuid: b212af2f-44c2-49fc-b36b-614943ed1b5d
+  uuid: 6167ad20-dfd4-4f8b-9392-5434b8327d78
   country_id: *ni
   network_id: *ni_fixed
 - id: 243577
   prefix: '50523170'
   number_min_length: 16
   number_max_length: 16
-  uuid: 6aa17d19-7bcd-4e1b-a85c-0e1fe0c50d24
+  uuid: 1191328a-30f2-4422-ba20-ed7018368969
   country_id: *ni
   network_id: *ni_fixed
 - id: 243889
   prefix: '50525'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5abf5f71-ad51-4b98-89cd-7f05145c1e02
+  uuid: 2a097cda-8163-4ae5-828e-f04cda52450a
   country_id: *ni
   network_id: *ni_fixed
 - id: 243933
   prefix: '5052512'
   number_min_length: 15
   number_max_length: 15
-  uuid: 085fae31-7b10-46c5-9e82-bc2b06df0443
+  uuid: 9763e510-1fa5-4c03-b336-a449e2c23e5c
   country_id: *ni
   network_id: *ni_fixed
 - id: 243934
   prefix: '50525140'
   number_min_length: 16
   number_max_length: 16
-  uuid: ca883797-ec72-4540-b464-0348a47b64a6
+  uuid: 6823b1f9-9f12-488f-b51a-9fa618830bcb
   country_id: *ni
   network_id: *ni_fixed
 - id: 243935
   prefix: '50525150'
   number_min_length: 16
   number_max_length: 16
-  uuid: e0758350-80c8-4014-b4f7-85ba3069dd5a
+  uuid: e9757de1-e7ce-467a-96a2-6206cb1b853b
   country_id: *ni
   network_id: *ni_fixed
 - id: 243937
   prefix: '50525160'
   number_min_length: 16
   number_max_length: 16
-  uuid: b25f626e-b512-4815-8d0b-cc791c9d2717
+  uuid: 22af0988-7d89-4d1a-b63b-85fe448db5ba
   country_id: *ni
   network_id: *ni_fixed
 - id: 243939
   prefix: '50525170'
   number_min_length: 16
   number_max_length: 16
-  uuid: 176b7eff-8953-48ec-8f4e-597fbddbf4a1
+  uuid: 3eb4cdb8-a4f4-4ce0-b7ff-39229254b125
   country_id: *ni
   network_id: *ni_fixed
 - id: 243941
   prefix: '50525180'
   number_min_length: 16
   number_max_length: 16
-  uuid: 0554dd46-f310-476e-b396-bb6a60e4ba9a
+  uuid: 2d323ba9-ce97-4f4c-a961-e4a9332c7621
   country_id: *ni
   network_id: *ni_fixed
 - id: 243944
   prefix: '50525190'
   number_min_length: 16
   number_max_length: 16
-  uuid: 33161bf3-5f47-468d-8d4b-ef60bcace7aa
+  uuid: 4f3815c4-358a-43bc-95e1-ad1002427897
   country_id: *ni
   network_id: *ni_fixed
 - id: 243954
   prefix: '5052523'
   number_min_length: 15
   number_max_length: 15
-  uuid: 8ad5dc3a-20cb-4b59-9dcf-6cdff674691b
+  uuid: fc927b02-f356-4f7b-a8e1-66624cb1f133
   country_id: *ni
   network_id: *ni_fixed
 - id: 243968
   prefix: '5052532'
   number_min_length: 15
   number_max_length: 15
-  uuid: 61cbaf79-d2c2-455f-a727-701d44ae4597
+  uuid: 7135f25f-1b2b-4bb8-a685-e7ec6b4fc68b
   country_id: *ni
   network_id: *ni_fixed
 - id: 243971
   prefix: '5052534'
   number_min_length: 15
   number_max_length: 15
-  uuid: 106cd189-b498-48e0-a732-d5a77d1af6c4
+  uuid: 5f788a8e-3c5f-4524-9a21-7d92bd5513a9
   country_id: *ni
   network_id: *ni_fixed
 - id: 243973
   prefix: '5052535'
   number_min_length: 15
   number_max_length: 15
-  uuid: fb7620cd-f412-4cb7-8f1b-5e6c119d90b7
+  uuid: 7e12f139-cb3e-4039-8e93-0d4f62ff1b37
   country_id: *ni
   network_id: *ni_fixed
 - id: 243996
   prefix: '5052542'
   number_min_length: 15
   number_max_length: 15
-  uuid: 70a424f9-c9ca-48c1-ad9f-80a5ac510886
+  uuid: 3742927c-26b6-4424-884d-3f527a9072ba
   country_id: *ni
   network_id: *ni_fixed
 - id: 244006
   prefix: '50525492'
   number_min_length: 16
   number_max_length: 16
-  uuid: 4a8084e5-ef12-488d-8afa-ec2fe1202f5e
+  uuid: 49ffa1f7-adcf-4ca1-bc88-8f1acea15798
   country_id: *ni
   network_id: *ni_fixed
 - id: 244037
   prefix: '5052561'
   number_min_length: 15
   number_max_length: 15
-  uuid: f2cd6741-c9e0-4c5a-b7be-7667c45f37b6
+  uuid: 7ef76dc7-3bfd-4b06-9b2a-c68ab2801d2d
   country_id: *ni
   network_id: *ni_fixed
 - id: 244038
   prefix: '5052563'
   number_min_length: 15
   number_max_length: 15
-  uuid: b97e071e-137d-4d2c-9e31-24bfe7e7f6be
+  uuid: 21ae2ae3-7dcb-4c86-a500-fdeb777707c9
   country_id: *ni
   network_id: *ni_fixed
 - id: 244039
   prefix: '5052565'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9abbdb4b-e7db-42c5-94e4-b0b3a360fa68
+  uuid: 082dcdfe-5931-4c14-b194-5dcf52f2ad7f
   country_id: *ni
   network_id: *ni_fixed
 - id: 244040
   prefix: '5052568'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5792ea37-b849-4891-a779-4df437951481
+  uuid: 91e458b3-b39c-4f65-9e44-a2baf6771121
   country_id: *ni
   network_id: *ni_fixed
 - id: 244041
   prefix: '5052569'
   number_min_length: 15
   number_max_length: 15
-  uuid: e64a6f8e-0023-4aca-b093-059754f045b2
+  uuid: 157ac572-a7b9-4c45-84dc-df355437d078
   country_id: *ni
   network_id: *ni_fixed
 - id: 244047
   prefix: '5052572'
   number_min_length: 15
   number_max_length: 15
-  uuid: 97a2cd63-693b-4768-b4c7-e294330b7071
+  uuid: 1f06d65b-5d1e-40a8-8bad-75687e630db3
   country_id: *ni
   network_id: *ni_fixed
 - id: 244048
   prefix: '50525750'
   number_min_length: 16
   number_max_length: 16
-  uuid: 55c14083-67d1-4565-86ce-5470a1ace080
+  uuid: 7bea7778-bb7c-45b5-9c65-4d2af43f9426
   country_id: *ni
   network_id: *ni_fixed
 - id: 244049
   prefix: '50525755'
   number_min_length: 16
   number_max_length: 16
-  uuid: 7e308017-1d42-490c-8bf4-10030e38f6bb
+  uuid: 8ba17fec-2264-447a-833f-dfadcd575dfc
   country_id: *ni
   network_id: *ni_fixed
 - id: 244050
   prefix: '5052577'
   number_min_length: 15
   number_max_length: 15
-  uuid: b733158e-8285-4335-b21f-87e0b28d9e81
+  uuid: 71b1aae8-5f14-4a8d-ae0c-8631a40ac770
   country_id: *ni
   network_id: *ni_fixed
 - id: 244059
   prefix: '50525830'
   number_min_length: 16
   number_max_length: 16
-  uuid: 8b4e6c89-1268-4e26-8b55-dfc69b55f35a
+  uuid: 5d5546d4-5c4a-4125-babd-0a5dd4c6e0e6
   country_id: *ni
   network_id: *ni_fixed
 - id: 244243
   prefix: '50527'
   number_min_length: 13
   number_max_length: 13
-  uuid: 860ce790-e069-4a25-852f-26d914ec99a2
+  uuid: 7aa50e54-8612-42df-a79d-55c4da6ac044
   country_id: *ni
   network_id: *ni_fixed
 - id: 244263
   prefix: '50527152'
   number_min_length: 16
   number_max_length: 16
-  uuid: 099b0ce6-fdb6-42af-aaec-79cbe5760e44
+  uuid: 89b201cd-c75e-4b93-8eaa-5feaadc53995
   country_id: *ni
   network_id: *ni_fixed
 - id: 244265
   prefix: '50527162'
   number_min_length: 16
   number_max_length: 16
-  uuid: 971810a6-5be2-4fa6-baae-cad8cfa9ed32
+  uuid: b8796c66-3225-4519-900b-865454d6da08
   country_id: *ni
   network_id: *ni_fixed
 - id: 244337
   prefix: '5052772'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0950bab2-f056-42af-9637-3e3b2bf14b7b
+  uuid: fdbb4389-1953-4fef-bd24-a59cf0e4d16c
   country_id: *ni
   network_id: *ni_fixed
 - id: 244340
   prefix: '5052774'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3feca33a-596b-448d-9bde-86f17ee3dc45
+  uuid: b6fd54aa-8038-482d-aad3-b9f42862683d
   country_id: *ni
   network_id: *ni_fixed
 - id: 244342
   prefix: '50527752'
   number_min_length: 16
   number_max_length: 16
-  uuid: 4c0c32bb-30c0-46ee-8755-52657cb4a316
+  uuid: b5bac789-cdc7-4471-9334-13af44649981
   country_id: *ni
   network_id: *ni_fixed
 - id: 244344
   prefix: '50527762'
   number_min_length: 16
   number_max_length: 16
-  uuid: 3ef5a8a5-b341-4360-a086-7bae4ed9f05c
+  uuid: b6af1a63-ca8f-4ebf-b576-d5740bf3ea8e
   country_id: *ni
   network_id: *ni_fixed
 - id: 244346
   prefix: '50527772'
   number_min_length: 16
   number_max_length: 16
-  uuid: a0160cff-b6cc-4b28-8f4e-bfff1ad089ed
+  uuid: 4c3cf809-3086-4f7f-9b97-829431185728
   country_id: *ni
   network_id: *ni_fixed
 - id: 244348
   prefix: '50527780'
   number_min_length: 16
   number_max_length: 16
-  uuid: af93e195-7cf9-48e3-b76f-df69d3b419e0
+  uuid: 8c5ed07e-c468-4a48-9a92-a1fb298fe27a
   country_id: *ni
   network_id: *ni_fixed
 - id: 244349
   prefix: '50527781'
   number_min_length: 16
   number_max_length: 16
-  uuid: e2e4ff70-a9a2-4a07-a6f7-a88af2547405
+  uuid: 2e4a0a07-9846-4760-b5fb-63085d66e5bd
   country_id: *ni
   network_id: *ni_fixed
 - id: 244351
   prefix: '50527790'
   number_min_length: 16
   number_max_length: 16
-  uuid: 069308c9-94d6-4022-ac8c-9d809c046b51
+  uuid: 46703344-1188-4899-9c9a-ec354d408152
   country_id: *ni
   network_id: *ni_fixed
 - id: 244358
   prefix: '5052782'
   number_min_length: 15
   number_max_length: 15
-  uuid: eece2807-f3a4-4ca9-8ab3-81dc5b050d82
+  uuid: cde903e8-6b53-496c-8359-d2f01b57ddf5
   country_id: *ni
   network_id: *ni_fixed
 - id: 244360
   prefix: '50527842'
   number_min_length: 16
   number_max_length: 16
-  uuid: 124c1989-5414-48d1-b67f-3206c9f7563a
+  uuid: 6ee587a5-1c99-4ebe-bdf2-099eb766e13f
   country_id: *ni
   network_id: *ni_fixed
 - id: 244361
   prefix: '50527853'
   number_min_length: 16
   number_max_length: 16
-  uuid: 475c8ad5-4136-448e-a36e-6e3978aedcb1
+  uuid: a02c2e75-07ab-407b-bf5a-b06ad6c432dc
   country_id: *ni
   network_id: *ni_fixed
 - id: 244366
   prefix: '50527922'
   number_min_length: 16
   number_max_length: 16
-  uuid: 877c250d-c574-43cf-abcb-a9cb15a6c435
+  uuid: cd0b7638-6cbc-4eda-bcb6-370bdfdb9f37
   country_id: *ni
   network_id: *ni_fixed
 - id: 244367
   prefix: '50527940'
   number_min_length: 16
   number_max_length: 16
-  uuid: 8cba8a8e-8aa5-4c2a-99b3-91aef9a3e718
+  uuid: 31883999-1f3d-4df0-b5f8-0348e47896ba
   country_id: *ni
   network_id: *ni_fixed
 - id: 244368
   prefix: '50527941'
   number_min_length: 16
   number_max_length: 16
-  uuid: 1c62fbf9-9c52-406a-b14e-dfbf426d3331
+  uuid: 84df5671-46cd-4449-aa15-f4adf1656e67
   country_id: *ni
   network_id: *ni_fixed
 - id: 244369
   prefix: '50527942'
   number_min_length: 16
   number_max_length: 16
-  uuid: 374cb090-b90b-445a-a7ed-40bc050faaf3
+  uuid: de3fc6da-6611-4811-891e-e7eb10e93922
   country_id: *ni
   network_id: *ni_fixed
 # Mobile Prefixes
@@ -405,553 +405,553 @@ network_prefixes:
   prefix: '505578'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0bcba6ea-d2d7-4b67-9f78-c5a42d78a961
+  uuid: e6ecd152-83aa-4337-b5fe-82e745626e48
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 246531
   prefix: '505580'
   number_min_length: 14
   number_max_length: 14
-  uuid: 298773b2-6775-4be3-9af0-bb6c06b90db2
+  uuid: 7ec54a06-4352-4f63-a8ae-2e93a2b57a03
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 246587
   prefix: '505581'
   number_min_length: 14
   number_max_length: 14
-  uuid: 47c83b0f-7e07-48cf-b96c-294c40e57a18
+  uuid: e876685a-60a1-4a1c-9385-725860d992f0
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 246589
   prefix: '505582'
   number_min_length: 14
   number_max_length: 14
-  uuid: f900df48-23b0-4cbc-8376-1c45fff51357
+  uuid: cd1a07f3-d469-4f67-a500-94fcea94b9e6
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 246591
   prefix: '505583'
   number_min_length: 14
   number_max_length: 14
-  uuid: b60dace2-f586-423e-85b6-8962da88067c
+  uuid: dda3b427-bd7d-4284-95ca-462add93803e
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 246593
   prefix: '505584'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3ea552a6-928d-47e9-b893-c7adb1fa38c1
+  uuid: d3dadbdd-543f-4c19-b515-8cf87abe8fb5
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 246778
   prefix: '5056'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4bb4ebaa-02d8-4029-bcd8-4c40f137b01e
+  uuid: 29ddb6d6-726c-4fc9-b6db-a70c8b1c4738
   country_id: *ni
   network_id: *ni_mobile
 - id: 249396
   prefix: '5055'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6637bfcc-7655-468e-85bc-a38173ba80d5
+  uuid: 1297cd51-0b3f-45e1-9048-9c7d83aa1aae
   country_id: *ni
   network_id: *ni_mobile
 - id: 250103
   prefix: '505574'
   number_min_length: 14
   number_max_length: 14
-  uuid: b0f691c2-a5bb-421d-a965-973ca1d7b057
+  uuid: 914748d0-fdf3-4044-84b2-dc2eefe85fe1
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 252922
   prefix: '505880'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6fba87ff-84ec-45a0-8779-89854835f84f
+  uuid: a49639ff-3fa1-4c91-998f-9827635f4e1f
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 252938
   prefix: '505881'
   number_min_length: 14
   number_max_length: 14
-  uuid: 615051bc-76e0-4d02-a008-71046f3c87dd
+  uuid: 5d53b034-30d2-4912-b4cc-fd3784a7d79c
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 252962
   prefix: '505882'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5a0fe795-99af-4a1c-85e9-a8f037e8301c
+  uuid: 2a1e0f47-65f0-49c9-a1d0-1d71f2515863
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 252979
   prefix: '505883'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1e30f1af-158e-4959-b550-e92db7356707
+  uuid: de40a04a-534f-40c8-a367-b235bcbdc9fe
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 252995
   prefix: '505884'
   number_min_length: 14
   number_max_length: 14
-  uuid: be66b993-8a2b-4e57-9b4d-50e1f435b23a
+  uuid: 20246288-bcac-4c19-92e1-93d4fe971281
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 253007
   prefix: '505885'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7ba5cb8b-47b6-43ef-a306-5d257bcda944
+  uuid: c6ac4157-1de4-41fd-9b89-6bfb92541ab3
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 253016
   prefix: '505886'
   number_min_length: 14
   number_max_length: 14
-  uuid: 141e5757-5751-4eb4-9717-fe1d5286343b
+  uuid: 0b145cc7-91ec-40a0-8421-ea642cc7391a
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 253027
   prefix: '505887'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8fefbce4-dbda-40fb-9642-6ed66670f9ec
+  uuid: c24ea043-2aad-4d0d-80b8-154bf1301fa0
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 253035
   prefix: '505888'
   number_min_length: 14
   number_max_length: 14
-  uuid: ca02a624-894f-43c6-ba01-d9f10c5881ce
+  uuid: b0b54e1d-299e-4107-976e-f4eef74220eb
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 253041
   prefix: '505889'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4ab9b4b8-8f77-4a92-8c12-3a8a406dca5b
+  uuid: 5aea0304-f1ec-4c9f-93e1-a976f8b1f8e8
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 253074
   prefix: '505890'
   number_min_length: 14
   number_max_length: 14
-  uuid: 481b8cf5-f901-492c-88d9-c03f171645b5
+  uuid: 9f847c6a-1cb3-453e-afc4-17e92f980ed4
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 253107
   prefix: '505891'
   number_min_length: 14
   number_max_length: 14
-  uuid: 624daa2a-f0d2-4226-9567-5b29ffc8ba71
+  uuid: 2f33f166-00a4-4d82-972b-edc5afa252f9
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 253110
   prefix: '505892'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8e861d30-d7f1-4b83-bd07-7d2da5cbde5d
+  uuid: 809663f4-f675-436c-8cfb-dbf9c3f2d451
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 253111
   prefix: '505893'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7db80826-0cbd-40bb-97cc-bcdf162a1e29
+  uuid: 87674622-a5e2-4add-827c-6bcf54079e08
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 253116
   prefix: '505894'
   number_min_length: 14
   number_max_length: 14
-  uuid: 369eac3d-4b31-499b-b25c-8afe923e6258
+  uuid: 8a444edb-37b0-4c99-b056-43f72dfbd7f9
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 253124
   prefix: '505895'
   number_min_length: 14
   number_max_length: 14
-  uuid: 64b73017-0d5d-4b6f-aa3a-bb1a53afd1b8
+  uuid: 7ec87b3f-54b5-41e5-a946-afa919dbff2c
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 253131
   prefix: '505896'
   number_min_length: 14
   number_max_length: 14
-  uuid: 63aa333c-0a93-4c21-a978-16ee5eac0622
+  uuid: 20af0d42-5653-42d2-bdb4-decc7d2cdc08
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 253132
   prefix: '505897'
   number_min_length: 14
   number_max_length: 14
-  uuid: 63d6063d-29e2-4abf-bb8c-132a10a617b3
+  uuid: 393e71ce-7a79-4ed3-983d-48c419b641af
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 253134
   prefix: '505899'
   number_min_length: 14
   number_max_length: 14
-  uuid: 40b09f70-4fea-4e91-9ebc-3c6fb23f646a
+  uuid: f955bdb0-d1b2-4144-913e-f2ba7cdfeeaa
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 258243
   prefix: '505688'
   number_min_length: 14
   number_max_length: 14
-  uuid: ada551e9-95ad-4ace-8bb1-b58649ffa110
+  uuid: 6c55cf61-a15b-429a-97d6-5666b2874eaf
   country_id: *ni
-  network_id: *ni_cootel_mobile
+  network_id: *ni_cootel
 - id: 258684
   prefix: '5057'
   number_min_length: 12
   number_max_length: 12
-  uuid: 3b667a54-ca5b-4ff6-b305-e8d891315325
+  uuid: 4798c8e8-5bea-4e7c-8ab4-e54f1013c210
   country_id: *ni
   network_id: *ni_mobile
 - id: 259043
   prefix: '505771'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9fad11e7-d2d9-4959-9da2-d541f8344f1a
+  uuid: ad31fb3f-53a6-4619-b560-592a2f9b201e
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 259224
   prefix: '505775'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2780f910-820b-4819-971c-296962dd8b00
+  uuid: 25680e69-b926-420a-ad68-671246a04495
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 259598
   prefix: '505787'
   number_min_length: 14
   number_max_length: 14
-  uuid: 22682c7f-2be8-4076-96e8-1ca5405ebde5
+  uuid: ccf865bb-1d22-40dd-9e64-dd6499ac8441
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260020
   prefix: '5058'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0bb26d31-650b-4007-92e5-502ccb8e2c14
+  uuid: 567bd45c-3776-4381-9163-0340d592747d
   country_id: *ni
   network_id: *ni_mobile
 - id: 260280
   prefix: '505815'
   number_min_length: 14
   number_max_length: 14
-  uuid: a4059f8b-ca53-4c61-9c63-8c732c0e181b
+  uuid: 1ee2dc78-8bfb-4194-a147-a374189b961b
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260416
   prefix: '505826'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9bdf08e4-93d2-47bc-96c6-42f96f7faa39
+  uuid: 9547ebf1-685d-410f-8596-b0758d9ff897
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260495
   prefix: '505832'
   number_min_length: 14
   number_max_length: 14
-  uuid: c50fb4a2-4c56-4264-a55d-854e395fa411
+  uuid: a872c433-8103-4eed-a31d-c7a78a36c9c4
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260509
   prefix: '505833'
   number_min_length: 14
   number_max_length: 14
-  uuid: f1faf0ac-1dfa-4cf2-9dbd-e756ad6ee990
+  uuid: a9671bd3-2cd3-47d0-bbe3-ece5306e3a7a
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260523
   prefix: '505835'
   number_min_length: 14
   number_max_length: 14
-  uuid: 752ef932-f8f5-4974-953d-0283f5079de5
+  uuid: 737a047f-e8a7-443d-943a-f7181052c7bf
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260537
   prefix: '505836'
   number_min_length: 14
   number_max_length: 14
-  uuid: 70ded78b-c33e-4fee-8b95-2d1fdb78a17e
+  uuid: f235dd57-6fa9-44e0-b9d3-73537dd68a65
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260549
   prefix: '505837'
   number_min_length: 14
   number_max_length: 14
-  uuid: fa1fe222-0b12-4563-8ca8-2fada1fb96d3
+  uuid: fda5611f-ef47-4cfa-b40f-f3372da36c31
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260560
   prefix: '505838'
   number_min_length: 14
   number_max_length: 14
-  uuid: c7e09aca-7356-4068-b070-0dfb45bddacb
+  uuid: 68a7831b-a00a-48a3-8c29-f4fcf2c1938c
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260573
   prefix: '505839'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4e07a6b9-a971-4406-81d6-388e7498104b
+  uuid: 67b8641f-f129-46e0-9859-636cde5246e7
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260608
   prefix: '505840'
   number_min_length: 14
   number_max_length: 14
-  uuid: 58ec6643-71a3-4182-94b9-26a83d5e558d
+  uuid: 9c9257b3-c9f5-45fa-a5ab-419743ca21b5
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260623
   prefix: '505841'
   number_min_length: 14
   number_max_length: 14
-  uuid: b9b78827-f5fd-4419-b13a-fbd332d85fa5
+  uuid: a81f5053-00e6-4f60-ac61-e9d33d427f60
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260638
   prefix: '505842'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9775e513-a924-4280-a8dd-0975587d6b84
+  uuid: daede1cd-cc93-43be-be49-0f8709241839
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260644
   prefix: '505843'
   number_min_length: 14
   number_max_length: 14
-  uuid: 12a204df-e3b6-4e2a-9695-d7f64b5ace26
+  uuid: 8a46f51c-8366-4ca9-a2c5-fcdf31a45ecf
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260650
   prefix: '505844'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5af52de1-83fb-4431-825d-ccb17f2eb064
+  uuid: 5d7b3c3a-65f6-4ab3-a85d-851bbcc553e0
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260655
   prefix: '505845'
   number_min_length: 14
   number_max_length: 14
-  uuid: e898c7c6-2542-4446-99b8-a5d28fbc7678
+  uuid: 6f7f21a6-3bef-49dc-834f-4bdb7de959d5
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260668
   prefix: '505846'
   number_min_length: 14
   number_max_length: 14
-  uuid: 560ac358-8b8e-4aa9-a2d1-0802ca046ce8
+  uuid: 6eac2f63-ffdf-46b4-ac07-07f1b7055911
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260683
   prefix: '505847'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9ad553ea-704f-459b-bcf0-cf5522216ade
+  uuid: 077183f7-c3b0-4a0d-a9d9-a4f0e9b659bd
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260688
   prefix: '505848'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3155bd82-10ff-4569-9c1a-af88eca8fdc4
+  uuid: 181c85fa-c94a-455d-bc9d-f0c3032e90c8
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260702
   prefix: '505849'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7719c055-c360-44db-b94c-96e840b31735
+  uuid: d316401b-8528-4125-b3a1-42d75db9fdb5
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260739
   prefix: '505850'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5caaab94-c189-4eef-bfa6-7c582deb3cb2
+  uuid: 22241f9d-cae5-49a5-931d-9f1ddb20dbfe
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260754
   prefix: '505851'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1ea70954-7363-48f6-86bd-246796f6efb3
+  uuid: 700e4c26-8c3c-4de0-b827-8660c6642d54
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260773
   prefix: '505852'
   number_min_length: 14
   number_max_length: 14
-  uuid: 85b4946b-4bee-4c3a-a71a-2170952a60ff
+  uuid: 62d8723d-6fe9-4d0b-8594-6d2a609408ef
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260788
   prefix: '505853'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5f2679b5-e207-4ad0-9c06-54379b868ac3
+  uuid: dcfbb831-5e3f-4fb7-b508-f818113a7353
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260802
   prefix: '505854'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4e11d410-3ba0-4814-afdf-e3335903670f
+  uuid: d82f6edb-58db-499c-8d01-1fd718329b92
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260808
   prefix: '505855'
   number_min_length: 14
   number_max_length: 14
-  uuid: 439818f1-54f6-4f11-9c2a-abd173e1d62c
+  uuid: 9d3d5b70-563b-444f-ac4f-70730fffab96
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260850
   prefix: '505859'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1659811c-b0e8-4c28-a358-9972c827f3cd
+  uuid: c3ab40cf-77e6-466e-800e-ad615c44f4c8
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260882
   prefix: '505860'
   number_min_length: 14
   number_max_length: 14
-  uuid: f6a30dad-6148-43cb-a756-78649c2ddab8
+  uuid: b4c8a587-85a5-4264-86dd-ddc331e7a27f
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260898
   prefix: '505861'
   number_min_length: 14
   number_max_length: 14
-  uuid: ead24376-be13-4791-bf43-5ad9fbcf5c05
+  uuid: fae9f8e5-e429-4a96-ad3f-a2a52865c08f
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260911
   prefix: '505862'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2d993926-64f3-4dea-84ba-12eb6829f5e6
+  uuid: bab53f80-5d41-4ebb-8de3-330567bf1403
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260923
   prefix: '505863'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4c1d6219-53f4-47bb-8812-be3afb4508b2
+  uuid: 604e551e-517f-48a9-b03c-81343b4fb3b3
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260935
   prefix: '505864'
   number_min_length: 14
   number_max_length: 14
-  uuid: af20b9ad-a1bc-479e-b02c-455451a2f5dc
+  uuid: 08f8ccd8-58d1-41a8-8605-a242593abc7f
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260948
   prefix: '505865'
   number_min_length: 14
   number_max_length: 14
-  uuid: b3248457-2355-4743-8e41-7d478d5b8663
+  uuid: ae33c46e-becd-475b-b66e-7b217e8aca63
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260962
   prefix: '505866'
   number_min_length: 14
   number_max_length: 14
-  uuid: 643a4b5d-f825-445e-8baa-5e5c2bb969e9
+  uuid: 4ad92e54-3f1e-4666-8e7b-f7a432d1eb24
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 260974
   prefix: '505867'
   number_min_length: 14
   number_max_length: 14
-  uuid: ffcc78d9-8f34-45f8-a14a-19426d2049c5
+  uuid: 040ab803-ac3d-4c68-acae-8816d6a1265d
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260979
   prefix: '505868'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7fc1c804-0fa1-4325-ab2a-eb47d20bcbd4
+  uuid: 13feff69-0857-42c9-8046-01c5be442f8a
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 260992
   prefix: '505869'
   number_min_length: 14
   number_max_length: 14
-  uuid: 231b1fca-8f29-4b53-802a-efe724421660
+  uuid: edd2e337-8d46-481b-843c-463640f73c91
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 261031
   prefix: '505870'
   number_min_length: 14
   number_max_length: 14
-  uuid: 04970650-4c5c-4549-b22e-14841ee43fa8
+  uuid: 5906d7af-8aff-4946-8720-ff526c26c3b3
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 261047
   prefix: '505871'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7d0f8340-9a5d-4f25-abb5-312c3380459a
+  uuid: 273c1420-bd62-40f9-834c-7d4325a9cde3
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 261065
   prefix: '505872'
   number_min_length: 14
   number_max_length: 14
-  uuid: a63fb2e4-a72f-4716-a8f3-4e8b9b07a0f5
+  uuid: e3760346-c04e-4ad0-979b-daa7ac4ccf32
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 261081
   prefix: '505873'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2eb32b44-15b0-4430-8799-badb6a17df26
+  uuid: 15ee8778-df81-4b67-bf0f-88ba8f527c2a
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 261096
   prefix: '505874'
   number_min_length: 14
   number_max_length: 14
-  uuid: bfd4ac20-4b15-489c-8a9a-7c67e8386f00
+  uuid: ee0f2e30-d06f-4870-97b2-8f05d8a1fed5
   country_id: *ni
-  network_id: *ni_claro_mobile
+  network_id: *ni_claro
 - id: 261111
   prefix: '505875'
   number_min_length: 14
   number_max_length: 14
-  uuid: da60dc1f-286b-4fff-855e-7922145a68a9
+  uuid: ed89d759-d7f0-448e-a16c-cd9b68d00fc1
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 261125
   prefix: '505876'
   number_min_length: 14
   number_max_length: 14
-  uuid: ccd44b99-2e3c-422f-98bf-aca3743f45ec
+  uuid: 68e2860e-4b88-4004-b172-a1e350e5f284
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 - id: 261141
   prefix: '505877'
   number_min_length: 14
   number_max_length: 14
-  uuid: fe563c27-053b-4f84-bb20-94744db3943b
+  uuid: 02b32f71-f3da-4a08-bd16-2e96b52e6d08
   country_id: *ni
-  network_id: *ni_tigo_mobile
+  network_id: *ni_tigo
 # Country code Prefixes
 - id: 248002
   prefix: '505'
   number_min_length: 6
   number_max_length: 14
-  uuid: ff65b6d3-e0ca-4f20-81b6-2cfe0734ecf7
+  uuid: dbd755a8-7438-469c-9a75-99b7964662ce
   country_id: *ni
   network_id: *ni_fixed_cc

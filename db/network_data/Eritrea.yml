@@ -1,19 +1,19 @@
 country_id: &er 66
 networks:
 # Country code Networks
-- id: &er_fixed_cc 4694
+- id: &er_fixed_cc 4676
   name: ER Fixed Cc
-  uuid: 5b0bf047-efce-4417-a00c-a628e3d1239e
+  uuid: 3fdb0754-b882-4e87-8ca0-0b913b5f41f8
   type_id: 17
 # Fixed Networks
-- id: &er_fixed 5821
+- id: &er_fixed 5792
   name: ER Fixed
-  uuid: c958e523-cafd-4a67-beb3-89dea7cab8e8
+  uuid: e7a94210-98f4-42cb-9fc3-8f74fc09e04b
   type_id: 12
 # Mobile Networks
-- id: &er_eritel_mobile 5824
-  name: ER Eritel Mobile
-  uuid: 3fbac0b9-472c-439b-b322-c5287cea2536
+- id: &er_eritel 5794
+  name: ER Eritel
+  uuid: 4ceb10e0-4684-4eba-beb7-d69a8f80552e
   type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -21,7 +21,7 @@ network_prefixes:
   prefix: '291'
   number_min_length: 9
   number_max_length: 9
-  uuid: ea2fe689-3dbf-4e2d-ab47-e0f4a8b88538
+  uuid: 5dcfad30-ded1-4a38-8241-61f769f675f8
   country_id: *er
   network_id: *er_fixed_cc
 # Fixed Prefixes
@@ -29,14 +29,14 @@ network_prefixes:
   prefix: '2911'
   number_min_length: 10
   number_max_length: 10
-  uuid: 1a1c0aeb-b7ed-4f25-b6bf-f9dfbf249828
+  uuid: 072d4e52-1d59-4d7f-a2e8-f427cf0679fb
   country_id: *er
   network_id: *er_fixed
 - id: 392447
   prefix: '2918'
   number_min_length: 10
   number_max_length: 10
-  uuid: d4ad0b8a-655d-4d3c-9a11-1fafc5b5e3d2
+  uuid: 70f59901-5ef6-4866-bcf3-c83f10895e1a
   country_id: *er
   network_id: *er_fixed
 # Mobile Prefixes
@@ -44,27 +44,27 @@ network_prefixes:
   prefix: '291171'
   number_min_length: 12
   number_max_length: 12
-  uuid: c91bea94-3768-4d2e-9b92-31bf55fceed4
+  uuid: 31593c4d-0707-4893-b649-41472cf9ea93
   country_id: *er
-  network_id: *er_eritel_mobile
+  network_id: *er_eritel
 - id: 254617
   prefix: '291172'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2c5a87d2-29a0-48dd-89e5-057ccbcfdbae
+  uuid: db492b29-a455-4652-8d8a-979922d2fc0a
   country_id: *er
-  network_id: *er_eritel_mobile
+  network_id: *er_eritel
 - id: 254618
   prefix: '291173'
   number_min_length: 12
   number_max_length: 12
-  uuid: 91889a4e-61b4-49af-976e-b5a0e718fef0
+  uuid: 88506a3b-6783-427b-829f-e57bf338992b
   country_id: *er
-  network_id: *er_eritel_mobile
+  network_id: *er_eritel
 - id: 339616
   prefix: '2917'
   number_min_length: 10
   number_max_length: 10
-  uuid: 93aae91d-2d6b-43c3-8d78-36dfe6ba1ec9
+  uuid: 322d11c7-a443-428f-acc1-d7a3958a93f5
   country_id: *er
-  network_id: *er_eritel_mobile
+  network_id: *er_eritel

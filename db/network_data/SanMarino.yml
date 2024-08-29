@@ -1,36 +1,36 @@
 country_id: &sm 185
 networks:
 # Mobile Networks
-- id: &sm_tms_mobile 3342
-  name: SM Tms Mobile
-  uuid: 87e2e269-5d96-4f2d-a994-b05b0c78b65b
+- id: &sm_tms 3336
+  name: SM Tms
+  uuid: fd67c0d2-bd46-43d6-bd57-15c9bab3c211
   type_id: 3
-- id: &sm_telenet_mobile 6399
-  name: SM Telenet Mobile
-  uuid: 0c698e98-b701-47eb-9845-bf7f695b4b1d
+- id: &sm_telenet 6361
+  name: SM Telenet
+  uuid: 817a0b73-d975-4761-a86e-c599687c3204
   type_id: 3
-- id: &sm_prima_mobile 3341
-  name: SM Prima Mobile
-  uuid: fa1867ab-2dc3-4c17-9762-acbaa4005acb
+- id: &sm_prima 3335
+  name: SM Prima
+  uuid: 0714708f-6755-4c2c-a579-2a7cf025fa22
   type_id: 3
-- id: &sm_mobile 6547
+- id: &sm_mobile 6506
   name: SM Mobile
-  uuid: d76975d4-3bbd-4d17-8406-39fc89c6bbe8
+  uuid: 2d0f081b-1827-480c-822b-48f862f248a2
   type_id: 3
 # Country code Networks
-- id: &sm_fixed_cc 4808
+- id: &sm_fixed_cc 4790
   name: SM Fixed Cc
-  uuid: ab6f24a4-f56f-422f-93b6-db54fb8d0c08
+  uuid: 405eb68e-30ef-4a2c-ab96-99d0f4817c43
   type_id: 17
 # Fixed Networks
-- id: &sm_fixed 4864
+- id: &sm_fixed 4846
   name: SM Fixed
-  uuid: 3d388098-b8a1-4388-b540-b656e0a062bc
+  uuid: da0096fc-4992-4aef-936e-4a906eb5b215
   type_id: 12
 # Supplementary services Networks
-- id: &sm_premium_rate_and_video_call_services 5985
+- id: &sm_premium_rate_and_video_call_services 5953
   name: SM Premium Rate And Video Call Services
-  uuid: 35fe2e3e-8eb9-4dab-87ed-6900aadc55c0
+  uuid: b49bdbcb-826d-473b-8c3c-6914be71ca4a
   type_id: 14
 network_prefixes:
 # Mobile Prefixes
@@ -38,35 +38,35 @@ network_prefixes:
   prefix: '39335773'
   number_min_length: 14
   number_max_length: 15
-  uuid: bd561350-78b3-40f6-9065-0cc3c79b0493
+  uuid: ab915e82-a3bd-4946-9763-16ac600b95a8
   country_id: *sm
-  network_id: *sm_tms_mobile
+  network_id: *sm_tms
 - id: 66534
   prefix: '39335774'
   number_min_length: 14
   number_max_length: 15
-  uuid: 6b70733e-f3c1-4419-8671-4382f732dc64
+  uuid: b0f6d4f1-5d17-4864-96fe-0b521071f941
   country_id: *sm
-  network_id: *sm_tms_mobile
+  network_id: *sm_tms
 - id: 293569
   prefix: '37861'
   number_min_length: 11
   number_max_length: 13
-  uuid: 027ec5d9-061f-4c8a-8a8a-3ace77133288
+  uuid: fff0d75e-d03f-417b-804d-789601f8245e
   country_id: *sm
-  network_id: *sm_telenet_mobile
+  network_id: *sm_telenet
 - id: 322013
   prefix: '37866'
   number_min_length: 11
   number_max_length: 13
-  uuid: 369ff84e-1fd7-4ea4-9d95-444be633ebf7
+  uuid: 0a3ab162-f98b-4b89-a636-c05bc4d41ae8
   country_id: *sm
-  network_id: *sm_prima_mobile
+  network_id: *sm_prima
 - id: 339607
   prefix: '378'
   number_min_length: 11
   number_max_length: 13
-  uuid: 323c6157-2199-413f-9df7-3c4cdb1cadff
+  uuid: 8604a660-9182-487a-9921-1a869803b95c
   country_id: *sm
   network_id: *sm_mobile
 # Country code Prefixes
@@ -74,7 +74,7 @@ network_prefixes:
   prefix: '378'
   number_min_length: 9
   number_max_length: 13
-  uuid: d176432c-afc7-4426-88d9-2f8a5afbbca0
+  uuid: d895b030-ac31-488a-b1fc-4535aac7ba1a
   country_id: *sm
   network_id: *sm_fixed_cc
 # Fixed Prefixes
@@ -82,42 +82,42 @@ network_prefixes:
   prefix: '3780'
   number_min_length: 10
   number_max_length: 14
-  uuid: 68097f27-e3a5-4a75-9b01-c113efc2897e
+  uuid: 88d47f04-6c9a-4468-9d86-b3748aefa6e1
   country_id: *sm
   network_id: *sm_fixed
 - id: 249407
   prefix: '3785'
   number_min_length: 10
   number_max_length: 14
-  uuid: 9d6c3d00-7475-4fe6-8b87-15f62fef02fc
+  uuid: 887bc73b-93d5-40d8-9295-13954080dba2
   country_id: *sm
   network_id: *sm_fixed
 - id: 253202
   prefix: '3789'
   number_min_length: 10
   number_max_length: 14
-  uuid: dd9044d8-f635-468f-b407-2644e4162fbc
+  uuid: 3362315b-2c9d-4efb-9a8f-5f69ab84c1d0
   country_id: *sm
   network_id: *sm_fixed
 - id: 254476
   prefix: '37805498'
   number_min_length: 13
   number_max_length: 13
-  uuid: 175954c5-15d5-4b86-b2c3-a9d63082e3bd
+  uuid: 65a11cb3-ace0-4c1e-ae0a-38afb0b13d42
   country_id: *sm
   network_id: *sm_fixed
 - id: 254477
   prefix: '37805499'
   number_min_length: 13
   number_max_length: 13
-  uuid: 32a88c40-026e-424f-b52f-92761c54f576
+  uuid: ce85f9be-a910-4569-aaa7-a92929a6aeb5
   country_id: *sm
   network_id: *sm_fixed
 - id: 260033
   prefix: '3788'
   number_min_length: 10
   number_max_length: 14
-  uuid: d5f7c5a6-4c74-4173-be37-5adfe4c224fb
+  uuid: 8adabba2-31dc-4f4f-b1d8-eee7b647e07b
   country_id: *sm
   network_id: *sm_fixed
 # Supplementary services Prefixes
@@ -125,6 +125,6 @@ network_prefixes:
   prefix: '3787'
   number_min_length: 10
   number_max_length: 14
-  uuid: 18d4325d-02f5-4ca8-81a5-9f8e06d3a550
+  uuid: 56bd744b-6a37-4106-b89d-5c2c4846a1d2
   country_id: *sm
   network_id: *sm_premium_rate_and_video_call_services
