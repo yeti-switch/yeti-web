@@ -3,558 +3,558 @@ networks:
 # Fixed Networks
 - id: &ee_fixed 4329
   name: EE Fixed
-  uuid: 9f484861-4690-4f98-b385-c3b56e24f5b7
+  uuid: 85b2042a-842f-443d-9a29-2bad92e0eeda
   type_id: 12
 # Supplementary services Networks
 - id: &ee_e-fax_services 4383
   name: EE E-Fax Services
-  uuid: df571615-58a9-4ea1-8400-c3c73cde322f
+  uuid: 2f0aa199-12b9-4b43-8227-de4605ef050e
   type_id: 14
 - id: &ee_special_services 4966
   name: EE Special Services
-  uuid: 0a41e4e1-a8c2-4289-a52a-70afc107c671
+  uuid: ab0e7707-9020-48e6-b073-1947d289009a
   type_id: 14
 - id: &ee_social_value_services 5144
   name: EE Social Value Services
-  uuid: 1b95c3c0-749b-4634-b54e-9756594827ee
+  uuid: db0986f2-990a-4ca3-9ff2-836225b88efa
   type_id: 14
 - id: &ee_directory_enquiry_services 5178
   name: EE Directory Enquiry Services
-  uuid: 9e88b9cf-5e59-47ae-af8c-7ae6d2982e7e
+  uuid: 52302567-f815-4bda-9ea0-bf6a2b901216
   type_id: 14
 - id: &ee_premium_rate_services 5702
   name: EE Premium Rate Services
-  uuid: 4a227669-d6ab-4ad7-b9c6-35f2e6c1c723
+  uuid: a22d1a9a-798d-4168-aa72-d5c5dd3a931b
   type_id: 14
 - id: &ee_internet_access_services 5721
   name: EE Internet Access Services
-  uuid: 9101872e-32de-46a8-9153-d0f93f49ba64
+  uuid: 731d1d04-30e9-418e-999a-291162f723c6
   type_id: 14
 - id: &ee_user_group_special_services 5750
   name: EE User Group Special Services
-  uuid: 7188486d-b21b-4a67-8497-dea2dc8e9152
+  uuid: ef8d503b-4683-419b-9a73-23d07cac397b
   type_id: 14
 - id: &ee_electronic_communication_services 5952
   name: EE Electronic Communication Services
-  uuid: 283ba4b8-c529-49f5-a13b-ec895a165e88
+  uuid: 8198b26b-3f71-410e-8a26-9d054fcb0817
   type_id: 14
 - id: &ee_personal_number_services 6005
   name: EE Personal Number Services
-  uuid: 27596a66-c7c8-45ac-84ab-10e845d2f8a4
+  uuid: 9ced1cd4-0166-44e2-b467-da26dcefd6cb
   type_id: 14
 - id: &ee_freephone_services 6107
   name: EE Freephone Services
-  uuid: a0a4e55d-ae69-44df-8c5c-634d5172c573
+  uuid: 58057573-d9ec-4c65-97a2-0c04a442df77
   type_id: 14
 - id: &ee_international_freephone_services 6137
   name: EE International Freephone Services
-  uuid: 3af43dfe-c79e-401f-8982-81fd09397c1a
+  uuid: 4b9ed740-c9a5-4350-9b52-7efdccb55d98
   type_id: 14
 - id: &ee_on-net_special_services 6251
   name: EE On-Net Special Services
-  uuid: 38ea538c-c288-4638-b9e8-e509b75d010d
+  uuid: da758b7d-cbeb-4862-936e-fca5dc23eebc
   type_id: 14
 - id: &ee_routing 6267
   name: EE Routing
-  uuid: 6ca3d9da-443c-4f6e-ac0b-881e5b296595
+  uuid: 8a1e2e5e-cdea-49e4-bb0e-41f7fb9a35be
   type_id: 14
 # Mobile Networks
 - id: &ee_tele2_mobile 4455
   name: EE Tele2 Mobile
-  uuid: 21ee5d0c-3f9f-4843-892e-d357b8559cc5
+  uuid: acf9d241-cdc8-489d-a2bc-6f7ca3b89a77
   type_id: 3
 - id: &ee_telia_mobile 4472
   name: EE Telia Mobile
-  uuid: abcc8cc2-fe6c-4ebf-a471-c8ce4935428f
+  uuid: 916b9ecb-06e1-4034-a584-499e893881cc
   type_id: 3
 - id: &ee_elisa_mobile 5328
   name: EE Elisa Mobile
-  uuid: a78b8fbd-dbff-45d1-9a0b-56572be01809
+  uuid: eb8d826a-2690-45df-81c3-25380b0577b6
   type_id: 3
 - id: &ee_travelsim_mobile 5340
   name: EE Travelsim Mobile
-  uuid: 355f68f4-4a74-45ec-afd6-4573ff5fee3b
+  uuid: 1c1b9306-e05b-4859-8f89-19f582a23817
   type_id: 3
 - id: &ee_mobile 5632
   name: EE Mobile
-  uuid: 9e47ebe3-aca8-4881-9777-99a57967ed29
+  uuid: 52f8dda3-9ee9-4bc5-8ceb-c97db53b9251
   type_id: 3
 # Country code Networks
 - id: &ee_fixed_cc 4696
   name: EE Fixed Cc
-  uuid: 8613f22f-20c3-4321-bd90-c0992b444f21
+  uuid: 16ad4ecf-e097-4e0d-ba95-0a9e0d1f3f02
   type_id: 17
 network_prefixes:
 # Fixed Prefixes
-- id: 244694
+- id: 244746
   prefix: '37232'
   number_min_length: 12
   number_max_length: 12
-  uuid: 14809f87-bd00-4794-bc52-c169fce62b13
+  uuid: 20bda25f-4393-4403-89e1-456cce1deca2
   country_id: *ee
   network_id: *ee_fixed
-- id: 244736
+- id: 244788
   prefix: '37233'
   number_min_length: 12
   number_max_length: 12
-  uuid: 54f069a1-b96c-4740-b645-c755012b5291
+  uuid: a28a8633-66b1-43b9-89f2-dfcf90be8cb6
   country_id: *ee
   network_id: *ee_fixed
-- id: 244907
+- id: 244959
   prefix: '37235'
   number_min_length: 12
   number_max_length: 12
-  uuid: 44a24047-2ef0-498b-8571-75fe6e222cec
+  uuid: 8d662a14-fb33-49b4-8677-4e8487bcb21f
   country_id: *ee
   network_id: *ee_fixed
-- id: 245176
+- id: 245228
   prefix: '37238'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2e9537d7-dc5c-4183-9d3d-dc7f8c77f0ef
+  uuid: 2ce8c41e-2f88-48c8-8094-1a5016a2bbe0
   country_id: *ee
   network_id: *ee_fixed
-- id: 245213
+- id: 245265
   prefix: '37239'
   number_min_length: 12
   number_max_length: 12
-  uuid: c87ed149-90a2-45a0-b791-a64dd673e28c
+  uuid: 85b4bc8e-ec13-486c-a7ca-e56f87cacb99
   country_id: *ee
   network_id: *ee_fixed
-- id: 245643
+- id: 245695
   prefix: '37243'
   number_min_length: 12
   number_max_length: 12
-  uuid: 698cfd39-6055-4d51-8369-2dada682ef79
+  uuid: 513fd1d6-6efe-415b-956b-8d40221dbec6
   country_id: *ee
   network_id: *ee_fixed
-- id: 245795
+- id: 245847
   prefix: '37244'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6bae315d-808b-4300-8eca-75bdc843412c
+  uuid: 1f05174f-e5d0-492a-b019-a977b8294154
   country_id: *ee
   network_id: *ee_fixed
-- id: 245941
+- id: 245993
   prefix: '37245'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8f391cb2-aa45-4da0-87b2-7d09bd8476a0
+  uuid: a621e1fd-7721-49af-bde5-da78ab661e3d
   country_id: *ee
   network_id: *ee_fixed
-- id: 246697
+- id: 246749
   prefix: '3726'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4af71d24-afd7-43f9-8dfc-03bd0b8a8620
+  uuid: 1b8ca969-6072-47b1-8266-514f4c4b3468
   country_id: *ee
   network_id: *ee_fixed
-- id: 248833
+- id: 248886
   prefix: '37246'
   number_min_length: 12
   number_max_length: 12
-  uuid: 765ee93d-7ba4-4815-9ec5-4925f5c88339
+  uuid: a76486e8-f90c-4894-85d3-611f553065f2
   country_id: *ee
   network_id: *ee_fixed
-- id: 249051
+- id: 249104
   prefix: '37247'
   number_min_length: 12
   number_max_length: 12
-  uuid: ca25d366-8ccb-439c-8238-bcf355bef86b
+  uuid: 6f425140-2384-4df8-bac4-08a98b3f4268
   country_id: *ee
   network_id: *ee_fixed
-- id: 249174
+- id: 249227
   prefix: '37248'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6261c86e-9ee8-464e-9f87-f242e5e11f3e
+  uuid: c0555de6-53a7-44f7-a286-86a283719b3b
   country_id: *ee
   network_id: *ee_fixed
-- id: 251464
+- id: 251517
   prefix: '37271'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7f1ae940-b0d5-4cfe-b8a0-14ea3229c12e
+  uuid: 6f3b4d10-c534-4914-82f7-8fd125b60f33
   country_id: *ee
   network_id: *ee_fixed
-- id: 251551
+- id: 251604
   prefix: '37272'
   number_min_length: 12
   number_max_length: 12
-  uuid: b72be20a-6833-44d4-9fb2-543f8eebbcf5
+  uuid: ac9811b4-1555-40f3-928e-0c499cda77df
   country_id: *ee
   network_id: *ee_fixed
-- id: 251602
+- id: 251655
   prefix: '37273'
   number_min_length: 12
   number_max_length: 12
-  uuid: a0c4e1b1-815d-46da-bc4a-013f52759ca2
+  uuid: 0aa6a4a4-774c-4210-bee0-6b9f90e27769
   country_id: *ee
   network_id: *ee_fixed
-- id: 251785
+- id: 251838
   prefix: '37274'
   number_min_length: 12
   number_max_length: 12
-  uuid: a45b02db-d6cb-4904-8b29-d82c08ad6fe2
+  uuid: 2bfddd53-c8c0-4f81-b0ac-62ff343b1ee3
   country_id: *ee
   network_id: *ee_fixed
-- id: 252185
+- id: 252238
   prefix: '37275'
   number_min_length: 12
   number_max_length: 12
-  uuid: d994d68f-6c22-4e57-a47f-ee374522821a
+  uuid: 6b38a73e-9b18-4e85-a01a-afdd03b90363
   country_id: *ee
   network_id: *ee_fixed
-- id: 252711
+- id: 252764
   prefix: '37276'
   number_min_length: 12
   number_max_length: 12
-  uuid: 34758a96-20e8-41f5-847f-e9467bf2705e
+  uuid: e420db7c-0c23-4fa7-90c0-76a31338af0b
   country_id: *ee
   network_id: *ee_fixed
-- id: 252847
+- id: 252900
   prefix: '37288'
   number_min_length: 12
   number_max_length: 12
-  uuid: 9a6cb744-c325-4565-9f8f-e43c3a275bc3
+  uuid: 29651f37-f90b-406b-90c4-c16973028aad
   country_id: *ee
   network_id: *ee_fixed
-- id: 258894
+- id: 258948
   prefix: '37277'
   number_min_length: 12
   number_max_length: 12
-  uuid: e939d2ae-e2cf-42be-846b-ff41134cc4a8
+  uuid: 201d99ea-6b73-4b79-8d30-02b9373b9096
   country_id: *ee
   network_id: *ee_fixed
-- id: 259347
+- id: 259401
   prefix: '37278'
   number_min_length: 12
   number_max_length: 12
-  uuid: 29ae42ab-1e0d-499d-bda5-fcff5a264512
+  uuid: 2e5fa261-e67a-4cf6-bc39-b9292b2fd9c2
   country_id: *ee
   network_id: *ee_fixed
-- id: 259646
+- id: 259700
   prefix: '37279'
   number_min_length: 12
   number_max_length: 12
-  uuid: bb0fa132-87ab-4162-84a6-80ac0263b8ef
+  uuid: aeb33e20-f8bb-444a-8cf6-d44678627b6b
   country_id: *ee
   network_id: *ee_fixed
 # Supplementary services Prefixes
-- id: 245288
+- id: 245340
   prefix: '37240'
   number_min_length: 13
   number_max_length: 13
-  uuid: bdb981b7-d0cd-446c-96a9-3b43f6547c10
+  uuid: 543243a5-d551-43eb-9204-37833b35659f
   country_id: *ee
   network_id: *ee_e-fax_services
-- id: 248285
+- id: 248337
   prefix: '3721'
   number_min_length: 7
   number_max_length: 9
-  uuid: 542f4933-9283-40e8-b27b-e802216b92f2
+  uuid: 3c89e548-fde5-4731-998e-fe5d38578a52
   country_id: *ee
   network_id: *ee_special_services
-- id: 248557
+- id: 248610
   prefix: '372116'
   number_min_length: 10
   number_max_length: 12
-  uuid: 5c78ea6c-8b1d-4bda-9abd-f685bbd555a0
+  uuid: a41ec9f2-25ba-40f7-8665-1be8b164f93b
   country_id: *ee
   network_id: *ee_social_value_services
-- id: 248609
+- id: 248662
   prefix: '372118'
   number_min_length: 10
   number_max_length: 11
-  uuid: 97e9ef5b-5589-4e84-a92a-3bab844a569d
+  uuid: 1338051e-6118-4ef7-835c-39e51f776b35
   country_id: *ee
   network_id: *ee_directory_enquiry_services
-- id: 253186
+- id: 253239
   prefix: '372900'
   number_min_length: 13
   number_max_length: 13
-  uuid: 03a254d0-82b8-4fb9-bff0-5301e66ff8ac
+  uuid: 94f7760c-3655-4554-83b6-987d163499e4
   country_id: *ee
   network_id: *ee_premium_rate_services
-- id: 253220
+- id: 253273
   prefix: '372901'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2654c6f1-974a-4c73-8c79-1bcd4ff4fc15
+  uuid: b75d464f-cb4a-465f-b74b-25902b8a4530
   country_id: *ee
   network_id: *ee_internet_access_services
-- id: 253339
+- id: 253392
   prefix: '37291'
   number_min_length: 7
   number_max_length: 9
-  uuid: fabfb3b0-5c48-4cf0-a270-26345cd07d97
+  uuid: 122cd735-f6c0-4aba-b2e7-bf873e2ae7b9
   country_id: *ee
   network_id: *ee_user_group_special_services
-- id: 253552
+- id: 253605
   prefix: '37292'
   number_min_length: 7
   number_max_length: 9
-  uuid: f62e22c7-dd1f-447e-99f3-6d94d6c771db
+  uuid: 9d04230d-e367-46c5-84f1-dde74ddb75d0
   country_id: *ee
   network_id: *ee_special_services
-- id: 258244
+- id: 258298
   prefix: '372690'
   number_min_length: 13
   number_max_length: 13
-  uuid: 36e02963-b4db-4d41-b3f2-812d9a9bc0d9
+  uuid: 5c01e107-109b-46f3-9014-eaba57006ec6
   country_id: *ee
   network_id: *ee_electronic_communication_services
-- id: 258326
+- id: 258380
   prefix: '372691'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5a588c3f-38a9-420c-ade9-ae241557a8ab
+  uuid: 6e84822e-9da4-4d2d-b212-ec1a81866820
   country_id: *ee
   network_id: *ee_electronic_communication_services
-- id: 258347
+- id: 258401
   prefix: '372692'
   number_min_length: 13
   number_max_length: 13
-  uuid: 11603c08-eb58-41db-87d4-09108be62e3d
+  uuid: 1c0b1d7b-9d2c-4446-b54f-6fe0f6ed2851
   country_id: *ee
   network_id: *ee_electronic_communication_services
-- id: 258390
+- id: 258444
   prefix: '372693'
   number_min_length: 13
   number_max_length: 13
-  uuid: d6b916a3-a499-467f-a0e5-9d1ee81f0c70
-  country_id: *ee
-  network_id: *ee_electronic_communication_services
-- id: 258455
-  prefix: '372694'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 163517ac-76d4-4f1e-a6ed-b6ac62e66608
-  country_id: *ee
-  network_id: *ee_electronic_communication_services
-- id: 258504
-  prefix: '372695'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: c4fcfcc2-51b6-418d-96d7-f150aff4477c
+  uuid: 8166bfa3-d8a0-49b1-ac0b-a41348b7943e
   country_id: *ee
   network_id: *ee_electronic_communication_services
 - id: 258509
+  prefix: '372694'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 1ff9c85c-4087-4b56-a087-f057cece822a
+  country_id: *ee
+  network_id: *ee_electronic_communication_services
+- id: 258558
+  prefix: '372695'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 8dd4405b-cafe-49a9-919e-e8e79f994244
+  country_id: *ee
+  network_id: *ee_electronic_communication_services
+- id: 258563
   prefix: '372696'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6bcfd1bd-39a6-4c1f-b4f8-634a7df725ce
+  uuid: 1025ea7c-8cfc-4379-999e-5e53f51ed801
   country_id: *ee
   network_id: *ee_electronic_communication_services
-- id: 258680
+- id: 258734
   prefix: '372700'
   number_min_length: 13
   number_max_length: 14
-  uuid: 74d3c1d3-15bb-48a0-b364-4e3e385b65ea
+  uuid: 0c416814-fe8c-4a30-b14c-0be773068812
   country_id: *ee
   network_id: *ee_personal_number_services
-- id: 258748
+- id: 258802
   prefix: '372701'
   number_min_length: 13
   number_max_length: 14
-  uuid: cfe18dee-ff57-4a5e-aaa0-8a0e8810e0d0
+  uuid: f6b06192-2ebd-4c99-a95c-eefae1d08a62
   country_id: *ee
   network_id: *ee_personal_number_services
-- id: 258759
+- id: 258813
   prefix: '372702'
   number_min_length: 13
   number_max_length: 14
-  uuid: 1be9e7b0-29ff-41ec-8967-b51de0ba5918
+  uuid: 14e68eb2-df6c-4da8-91f6-59820d576295
   country_id: *ee
   network_id: *ee_personal_number_services
-- id: 260017
+- id: 260071
   prefix: '372800'
   number_min_length: 13
   number_max_length: 13
-  uuid: e4d782e1-2f39-48c7-b707-0c1510467a30
+  uuid: 6adfec46-a363-466c-b959-bfcb357c218a
   country_id: *ee
   network_id: *ee_freephone_services
-- id: 260049
+- id: 260103
   prefix: '3728000'
   number_min_length: 17
   number_max_length: 17
-  uuid: 625d1459-0957-4eaa-89d2-19dfbb852e11
+  uuid: 8428eb0a-2065-4a1c-a490-2d3540ec4d64
   country_id: *ee
   network_id: *ee_international_freephone_services
-- id: 260055
+- id: 260109
   prefix: '3728001'
   number_min_length: 15
   number_max_length: 15
-  uuid: 15f35fd8-c0f5-4f49-8cba-cf6608df54ff
+  uuid: da12eafe-2790-4de7-8a62-991b0a02ccb3
   country_id: *ee
   network_id: *ee_international_freephone_services
-- id: 261269
+- id: 261323
   prefix: '37295'
   number_min_length: 8
   number_max_length: 10
-  uuid: cebefee7-e39e-4132-bf3a-effe9c538663
+  uuid: 7b841cdd-6cdb-4e53-bb34-a60190615e0c
   country_id: *ee
   network_id: *ee_on-net_special_services
-- id: 262097
+- id: 262151
   prefix: '37298'
   number_min_length: 8
   number_max_length: 8
-  uuid: a8e95216-3229-4d85-aa8a-f0550f72fe62
+  uuid: df4f43d5-f3b6-42fd-858a-7b46dabecfec
   country_id: *ee
   network_id: *ee_routing
 # Mobile Prefixes
-- id: 246465
+- id: 246517
   prefix: '37258'
   number_min_length: 13
   number_max_length: 13
-  uuid: ca6a8458-5628-4da4-ac78-7d38bb29f0d0
+  uuid: 6aafcd3e-e20f-41dd-9899-65a280879b4d
   country_id: *ee
   network_id: *ee_tele2_mobile
-- id: 246568
+- id: 246620
   prefix: '37259'
   number_min_length: 13
   number_max_length: 13
-  uuid: cb2efab3-1653-42dc-baf3-7f07f836b9dc
+  uuid: 2ccdc1ad-4905-4d58-8224-8e7427822b91
   country_id: *ee
   network_id: *ee_telia_mobile
-- id: 249369
+- id: 249422
   prefix: '37250'
   number_min_length: 13
   number_max_length: 13
-  uuid: 41670fc3-c870-459f-833f-44d3f77be67b
+  uuid: af664181-7511-4dba-bfca-2b0cf73c5178
   country_id: *ee
   network_id: *ee_telia_mobile
-- id: 249448
+- id: 249501
   prefix: '37251'
   number_min_length: 13
   number_max_length: 13
-  uuid: e43ce65c-3abd-4506-bd06-f1a43bcb66dd
+  uuid: 5ac72a1e-0f44-4f14-83bc-35c432fe9d9d
   country_id: *ee
   network_id: *ee_telia_mobile
-- id: 249516
+- id: 249569
   prefix: '37252'
   number_min_length: 13
   number_max_length: 13
-  uuid: 908021d0-6408-4c18-a830-2f97f2ebb739
+  uuid: f7b328a7-9e98-43ca-81bc-67d3b3016b13
   country_id: *ee
   network_id: *ee_telia_mobile
-- id: 249675
+- id: 249728
   prefix: '37253'
   number_min_length: 13
   number_max_length: 13
-  uuid: 15447bd4-4ea2-4abc-9ea7-6e23b58338d6
+  uuid: 5c744fd7-a81e-41d7-b4b0-f1a10c4cb3b4
   country_id: *ee
   network_id: *ee_telia_mobile
-- id: 249766
+- id: 249819
   prefix: '37254'
   number_min_length: 13
   number_max_length: 13
-  uuid: 69acfa1d-79b5-4f81-b690-b4bc733bbd9f
+  uuid: 055ddd2b-f64c-408e-be22-903c53f3bfc1
   country_id: *ee
   network_id: *ee_elisa_mobile
-- id: 249863
+- id: 249916
   prefix: '37255'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5865e91b-731c-414d-85a8-506075361ca4
+  uuid: 18070116-da1b-4b38-a889-2f8ece6613f5
   country_id: *ee
   network_id: *ee_tele2_mobile
-- id: 249948
+- id: 250001
   prefix: '37256'
   number_min_length: 13
   number_max_length: 13
-  uuid: ae18b362-c99a-4e4a-bc21-0a167bd33076
+  uuid: 664de669-d04e-41d3-beb4-26d1e8ecc533
   country_id: *ee
   network_id: *ee_elisa_mobile
-- id: 249991
+- id: 250044
   prefix: '37257'
   number_min_length: 13
   number_max_length: 13
-  uuid: e900e9c7-4eb1-4187-8e31-c9a0deb757e9
+  uuid: 3f2cbc99-af1c-4cb4-895f-71197cf7cc0e
   country_id: *ee
   network_id: *ee_travelsim_mobile
-- id: 253002
+- id: 253055
   prefix: '37289'
   number_min_length: 13
   number_max_length: 13
-  uuid: f18f555d-de25-4af5-be96-5034ac5bb862
+  uuid: 7ff9b2e5-ac9a-42d2-b8c6-fcf1ba036ec3
   country_id: *ee
   network_id: *ee_mobile
-- id: 260147
+- id: 260201
   prefix: '37281'
   number_min_length: 13
   number_max_length: 13
-  uuid: f43888ab-f4cc-419f-b297-5b14d8dd0b85
+  uuid: af036d3f-6c0c-4359-8cc3-7ac862a912ee
   country_id: *ee
   network_id: *ee_mobile
-- id: 260302
+- id: 260356
   prefix: '37282'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5cb37a7d-9465-494c-8a46-9417fe18834c
+  uuid: 42404fec-0fb1-46be-a829-c2816b4525b1
   country_id: *ee
   network_id: *ee_mobile
-- id: 260415
+- id: 260469
   prefix: '37283'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6fda9b52-9a9a-40ba-938e-a77add8152a1
+  uuid: 6a76101b-4020-4c33-a9a2-3dedf349d8db
   country_id: *ee
   network_id: *ee_mobile
-- id: 260536
+- id: 260590
   prefix: '37284'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6781b974-fc6c-4065-a616-d36aeba88b05
+  uuid: 0acbd0e2-e345-4164-88e1-8e47abb2b468
   country_id: *ee
   network_id: *ee_mobile
-- id: 260667
+- id: 260721
   prefix: '37285'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1b67d9d2-62c8-4d91-834c-85377288393a
+  uuid: c3aab0cb-4500-4fda-8754-eb1ed41a9425
   country_id: *ee
   network_id: *ee_mobile
-- id: 260813
+- id: 260867
   prefix: '37286'
   number_min_length: 13
   number_max_length: 13
-  uuid: 6a3812fb-9279-4b03-b450-9947a98d4566
+  uuid: c8019c29-7411-41f6-92a1-e98270c25f25
   country_id: *ee
   network_id: *ee_mobile
-- id: 260959
+- id: 261013
   prefix: '37287'
   number_min_length: 17
   number_max_length: 17
-  uuid: 54534d57-c749-4bbd-b2d9-9a1f321bceac
+  uuid: 7beb29e2-c8c2-4f58-8fd9-8374ce2ac7e2
   country_id: *ee
   network_id: *ee_mobile
-- id: 261008
+- id: 261062
   prefix: '372872'
   number_min_length: 16
   number_max_length: 16
-  uuid: a94cbd4e-7d8c-452b-ab85-171f6559260f
+  uuid: 23c7befa-31fa-4dd2-a92d-875629407923
   country_id: *ee
   network_id: *ee_mobile
-- id: 261025
+- id: 261079
   prefix: '372873'
   number_min_length: 16
   number_max_length: 16
-  uuid: 59e922ac-c5cd-4901-b130-80cf8d799236
+  uuid: 2a7f562d-5b93-4519-93b9-4c3d353c34c5
   country_id: *ee
   network_id: *ee_mobile
-- id: 261041
+- id: 261095
   prefix: '372874'
   number_min_length: 16
   number_max_length: 16
-  uuid: 3abb4d1d-72e0-43f4-910d-f4a31edad6a6
+  uuid: 5cf53d9b-a77c-4e71-a10c-cdd13656c08f
   country_id: *ee
   network_id: *ee_mobile
 # Country code Prefixes
-- id: 247871
+- id: 247923
   prefix: '372'
   number_min_length: 6
   number_max_length: 15
-  uuid: ec5937b3-5c55-4374-8673-72c95298ed3b
+  uuid: e8050684-e77e-4019-a547-fc0921f0966a
   country_id: *ee
   network_id: *ee_fixed_cc
