@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 div 'data-servertime' => Time.current.strftime('%Y %m %d %H %M %S %Z'), 'id' => 'servertime' do
-  "Copyright #{Date.today.year} Yeti Switch #{Rails.application.config.app_build_info.fetch('version', 'unknown')}. Routing #{ApplicationRecord::DB_VER}. CDR #{Cdr::Base::DB_VER}."
+  "Copyright #{Date.today.year} Yeti Switch #{Rails.application.config.app_build_info.fetch('version', 'unknown')}. Routing #{ApplicationRecord::DB_VER}. CDR #{Cdr::Base::DB_VER}. Зроблено в Україні."
 end
