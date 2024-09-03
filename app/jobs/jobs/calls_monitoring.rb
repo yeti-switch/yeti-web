@@ -165,8 +165,12 @@ module Jobs
         detect_vendors_calls_to_reject
       end
 
-      log_time('detect_gateway_calls_to_reject') do
-        detect_gateway_calls_to_reject
+      log_time('detect_orig_gateway_calls_to_reject') do
+        detect_orig_gateway_calls_to_reject
+      end
+
+      log_time('detect_term_gateway_calls_to_reject') do
+        detect_term_gateway_calls_to_reject
       end
 
       log_time('detect_random_calls_to_reject') do
@@ -187,8 +191,6 @@ module Jobs
         terminate_calls!
       end
     end
-
-    private
 
     # random_disconnect_enable        | f
     # random_disconnect_length        | 7000
@@ -273,9 +275,18 @@ module Jobs
       end
     end
 
+    def teardown_enabled?(config_key)
+      value = YetiConfig.calls_monitoring.send(config_key)
+      return true if value.nil? # Default behavior
+
+      value
+    end
+
     # drop calls where `customer_auth_id`
     # is linked to `CustomersAuth#reject_calls = true`
     def detect_customers_auth_calls_to_reject
+      return unless teardown_enabled?(:teardown_on_disabled_customer_auth)
+
       flatten_calls.each do |call|
         customers_auth_id = call[:customer_auth_id]
         customers_auth = active_customers_auths_reject_calls[customers_auth_id]
@@ -286,14 +297,22 @@ module Jobs
       end
     end
 
-    # detect gateway is disabled by orig_gw_id and term_gw_id
-    def detect_gateway_calls_to_reject
-      flatten_calls.each do |call|
-        if disabled_orig_gw_active_calls.key?(call[:orig_gw_id]) || disabled_term_gw_active_calls.key?(call[:term_gw_id])
-          local_tag = call[:local_tag]
-          @terminate_calls[local_tag] = call
-        end
+    def detect_orig_gateway_calls_to_reject
+      return unless teardown_enabled?(:teardown_on_disabled_orig_gw)
+
+      calls_to_terminate = flatten_calls.select do |call|
+        disabled_orig_gw_active_calls.key?(call[:orig_gw_id])
       end
+      terminate_calls(calls_to_terminate)
+    end
+
+    def detect_term_gateway_calls_to_reject
+      return unless teardown_enabled?(:teardown_on_disabled_term_gw)
+
+      calls_to_terminate = flatten_calls.select do |call|
+        disabled_term_gw_active_calls.key?(call[:term_gw_id])
+      end
+      terminate_calls(calls_to_terminate)
     end
 
     # @see ActiveCallsCollector#collect
@@ -414,6 +433,10 @@ module Jobs
           logger.error "#{e.class} #{e.message}"
         end
       end
+    end
+
+    def terminate_calls(calls)
+      @terminate_calls.merge!(calls.index_by { |call| call[:local_tag] })
     end
 
     def flatten_calls
