@@ -1,0 +1,250 @@
+country_id: &ae 223
+networks:
+# Fixed Networks
+- id: &ae_fixed 3210
+  name: AE Fixed
+  uuid: 6e6d8c05-952f-47c5-aff4-92251c41b46a
+  type_id: 12
+# Supplementary services Networks
+- id: &ae_value_added_services 3244
+  name: AE Value Added Services
+  uuid: cef5300f-7f34-41c2-b290-6b5147ca1b2a
+  type_id: 14
+- id: &ae_free_access_services 3429
+  name: AE Free Access Services
+  uuid: ead6311e-aec3-447d-956d-c29d23fd4069
+  type_id: 14
+- id: &ae_free_access_data_services 3431
+  name: AE Free Access Data Services
+  uuid: 5e2b1524-f632-445a-b297-892165b6c363
+  type_id: 14
+- id: &ae_fixed_cost_services 6342
+  name: AE Fixed Cost Services
+  uuid: 46f2c2d2-6b29-4085-a7b3-70b52e1f2a3a
+  type_id: 14
+- id: &ae_fixed_cost_data_services 6349
+  name: AE Fixed Cost Data Services
+  uuid: 3b373265-8d02-49d5-80d3-2a342ad7ab6f
+  type_id: 14
+- id: &ae_shared_cost_services 6592
+  name: AE Shared Cost Services
+  uuid: 52753546-2996-45d5-9cd6-6a03f60a8cb1
+  type_id: 14
+- id: &ae_special_shared_cost_services 6603
+  name: AE Special Shared Cost Services
+  uuid: 7c38e33a-bb3c-495c-a6a5-d29e589952a4
+  type_id: 14
+- id: &ae_freephone_services 6876
+  name: AE Freephone Services
+  uuid: 6a602d94-a27f-448d-ade8-39c03815f35f
+  type_id: 14
+- id: &ae_international_toll_free_services_itfs 6918
+  name: AE International Toll Free Services Itfs
+  uuid: da0c328e-5b11-4eed-b920-d36178b0f0c4
+  type_id: 14
+- id: &ae_premium_rate_services_shared_revenue_services 7192
+  name: AE Premium Rate Services Shared Revenue Services
+  uuid: 745ff77a-1942-43cb-b6f3-76c1b25dd83a
+  type_id: 14
+- id: &ae_premium_rate_data_services_shared_revenue_data_services 7213
+  name: AE Premium Rate Data Services Shared Revenue Data Services
+  uuid: 8c7d8cd2-5190-4971-9f02-d3de5c835e36
+  type_id: 14
+# Mobile Networks
+- id: &ae_e_etisalat_and_mobile 3603
+  name: AE E Etisalat And Mobile
+  uuid: efb1f818-478a-494d-9d9e-e46a1a8e0bf4
+  type_id: 3
+- id: &ae_du_mobile 3663
+  name: AE Du Mobile
+  uuid: 651cae0e-d8ea-44d5-b772-efa468297e1b
+  type_id: 3
+- id: &ae_mobile 6317
+  name: AE Mobile
+  uuid: 521f3950-22fa-4a7c-9f02-8a21eef76120
+  type_id: 3
+# Country code Networks
+- id: &ae_fixed_cc 4649
+  name: AE Fixed Cc
+  uuid: c087a42e-8882-4d23-a5e6-b47766144cb3
+  type_id: 17
+network_prefixes:
+# Fixed Prefixes
+- id: 40811
+  prefix: '9713'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 1a1782a1-1fbf-426c-970c-5628d8f7fc19
+  country_id: *ae
+  network_id: *ae_fixed
+- id: 86554
+  prefix: '9714'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: b15ca317-f621-44b3-bad6-31424667e887
+  country_id: *ae
+  network_id: *ae_fixed
+- id: 257317
+  prefix: '9712'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 37047003-1455-4f95-8b6d-ba80c0342957
+  country_id: *ae
+  network_id: *ae_fixed
+- id: 276679
+  prefix: '9716'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 2cd1bf6d-a446-4aea-9bbf-2f240a33f093
+  country_id: *ae
+  network_id: *ae_fixed
+- id: 339612
+  prefix: '9717'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 406e28ae-cec1-4847-84e6-358052b595a6
+  country_id: *ae
+  network_id: *ae_fixed
+- id: 446665
+  prefix: '9719'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 40ce496a-ea64-4675-95d7-636022a216fd
+  country_id: *ae
+  network_id: *ae_fixed
+# Supplementary services Prefixes
+- id: 42349
+  prefix: '971300'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 8001c045-e37b-4428-9e7a-4023f6f765a2
+  country_id: *ae
+  network_id: *ae_value_added_services
+- id: 87105
+  prefix: '971400'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: c0362934-77d9-4dc9-8b31-d8e93aa237f4
+  country_id: *ae
+  network_id: *ae_free_access_services
+- id: 87107
+  prefix: '9714002'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 1cb3cfcf-a45e-414a-9f07-82a312b49984
+  country_id: *ae
+  network_id: *ae_free_access_data_services
+- id: 146240
+  prefix: '971500'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 3f9277f5-6cdb-4c5c-ace8-4a7f93306377
+  country_id: *ae
+  network_id: *ae_value_added_services
+- id: 264122
+  prefix: '971200'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 7cc23a4b-6327-4593-98a4-4f7c88ead34d
+  country_id: *ae
+  network_id: *ae_value_added_services
+- id: 277976
+  prefix: '971600'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 9e0d2157-50e3-4806-8ef7-12c1e6530850
+  country_id: *ae
+  network_id: *ae_fixed_cost_services
+- id: 277985
+  prefix: '9716002'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 6be841d7-6922-47e8-bce3-dc747522f434
+  country_id: *ae
+  network_id: *ae_fixed_cost_data_services
+- id: 341523
+  prefix: '971700'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 0ee2b6ea-52e7-446e-bd9b-83266f179936
+  country_id: *ae
+  network_id: *ae_shared_cost_services
+- id: 341535
+  prefix: '9717000'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 513133ff-0701-4c70-b54b-7b7fe5f80dfe
+  country_id: *ae
+  network_id: *ae_special_shared_cost_services
+- id: 400815
+  prefix: '971800'
+  number_min_length: 8
+  number_max_length: 15
+  uuid: af27ab58-dcfd-4fb7-b91a-75f9d3050617
+  country_id: *ae
+  network_id: *ae_freephone_services
+- id: 400858
+  prefix: '9718000'
+  number_min_length: 9
+  number_max_length: 16
+  uuid: e14e70f0-d5a7-4cb6-b718-3263d1921db3
+  country_id: *ae
+  network_id: *ae_international_toll_free_services_itfs
+- id: 453268
+  prefix: '971900'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: c6a6b296-39ba-4141-b52f-4adf3788e735
+  country_id: *ae
+  network_id: *ae_premium_rate_services_shared_revenue_services
+- id: 453299
+  prefix: '9719002'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 7c9f5c8e-97ed-4778-b328-dde91b6b27c7
+  country_id: *ae
+  network_id: *ae_premium_rate_data_services_shared_revenue_data_services
+# Mobile Prefixes
+- id: 146210
+  prefix: '97150'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: e859fe37-596e-466d-9f0f-92a96de96e17
+  country_id: *ae
+  network_id: *ae_e_etisalat_and_mobile
+- id: 154205
+  prefix: '97152'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 0a32e3b4-158a-4a52-800d-49cae749fd44
+  country_id: *ae
+  network_id: *ae_du_mobile
+- id: 161646
+  prefix: '97155'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 2958c8d2-79d3-483c-9361-bb1b6cb8440f
+  country_id: *ae
+  network_id: *ae_du_mobile
+- id: 275354
+  prefix: '97156'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: bd23f074-8918-4d0d-8020-8406ad1fc6eb
+  country_id: *ae
+  network_id: *ae_e_etisalat_and_mobile
+- id: 276673
+  prefix: '9715'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 08e4d77a-ade9-4eb3-b00b-e76c6b378047
+  country_id: *ae
+  network_id: *ae_mobile
+# Country code Prefixes
+- id: 247876
+  prefix: '971'
+  number_min_length: 5
+  number_max_length: 12
+  uuid: 8044d877-1c89-442e-9ea2-6a3e19332248
+  country_id: *ae
+  network_id: *ae_fixed_cc

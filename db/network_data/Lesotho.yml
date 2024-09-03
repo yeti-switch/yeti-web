@@ -1,0 +1,99 @@
+country_id: &ls 119
+networks:
+# Fixed Networks
+- id: &ls_fixed 4151
+  name: LS Fixed
+  uuid: aea1a68a-62b2-4ae3-a86c-37c4b3e2ebe4
+  type_id: 12
+# Supplementary services Networks
+- id: &ls_premium_rate_messaging_services 4288
+  name: LS Premium Rate Messaging Services
+  uuid: 57d913f7-5051-435d-ab30-8f76c3e719af
+  type_id: 14
+- id: &ls_special_services 4999
+  name: LS Special Services
+  uuid: ca3eb038-775e-42d9-9c54-e3d33a66901f
+  type_id: 14
+- id: &ls_premium_rate_services 5663
+  name: LS Premium Rate Services
+  uuid: 3a51fb8b-7a05-4948-9978-4f471d53d125
+  type_id: 14
+- id: &ls_freephone_and_shared_revenue_services 6078
+  name: LS Freephone And Shared Revenue Services
+  uuid: e60fe8f9-88be-462c-9f97-8c8175df364d
+  type_id: 14
+# Mobile Networks
+- id: &ls_econet_ezi_cel_mobile 4508
+  name: LS Econet Ezi_Cel Mobile
+  uuid: 006528bb-09e3-4afa-bd75-54625730a30f
+  type_id: 3
+- id: &ls_vodacom_mobile 5293
+  name: LS Vodacom Mobile
+  uuid: 44de5b94-676f-4ab0-96b7-af4171dda082
+  type_id: 3
+# Country code Networks
+- id: &ls_fixed_cc 4747
+  name: LS Fixed Cc
+  uuid: 6848e505-6cf1-4f89-a53f-abc2fafc23f2
+  type_id: 17
+network_prefixes:
+# Fixed Prefixes
+- id: 243039
+  prefix: '2662'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a7516334-8b57-4e84-acf7-9763acdf8f78
+  country_id: *ls
+  network_id: *ls_fixed
+# Supplementary services Prefixes
+- id: 244533
+  prefix: '2663'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: da0635cb-e82b-4c0d-8580-9a42b39253c0
+  country_id: *ls
+  network_id: *ls_premium_rate_messaging_services
+- id: 248379
+  prefix: '2661'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: e8ff92b6-ae49-49bb-9402-4d0ed8fc4b1d
+  country_id: *ls
+  network_id: *ls_special_services
+- id: 253173
+  prefix: '2669'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: aab6df29-48f7-4c34-bf21-9ea3e326b6de
+  country_id: *ls
+  network_id: *ls_premium_rate_services
+- id: 260012
+  prefix: '2668'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: cc79daee-f121-494a-b4f7-a157905ea76a
+  country_id: *ls
+  network_id: *ls_freephone_and_shared_revenue_services
+# Mobile Prefixes
+- id: 246768
+  prefix: '2666'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 7c17098c-7d50-4de3-81a2-9edcb47c2dda
+  country_id: *ls
+  network_id: *ls_econet_ezi_cel_mobile
+- id: 249388
+  prefix: '2665'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 0dfd3537-4010-417c-ac49-d8579d12b31f
+  country_id: *ls
+  network_id: *ls_vodacom_mobile
+# Country code Prefixes
+- id: 247974
+  prefix: '266'
+  number_min_length: 6
+  number_max_length: 11
+  uuid: adead64c-bca9-4f5c-8e4a-3c785cc97e4f
+  country_id: *ls
+  network_id: *ls_fixed_cc
