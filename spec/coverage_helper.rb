@@ -10,10 +10,14 @@ module CoverageHelper
     # Prevents generation result after test completed.
     # Use CoverageHelper.report to generate results.
     if parallel_number
-      SimpleCov.at_exit { SimpleCov.result }
+      SimpleCov.at_exit {
+        puts 'SimpleCov gathering results'
+        SimpleCov.result
+      }
       SimpleCov.command_name "spec-#{parallel_number}"
     end
 
+    puts "Starting SimpleCov (parallel_number=#{parallel_number})"
     SimpleCov.start 'rails'
   end
 
@@ -27,6 +31,54 @@ module CoverageHelper
   def configure
     require 'simplecov'
     require 'simplecov-cobertura'
+
+    SimpleCov.singleton_class.prepend(Module.new do
+      def final_result_process?
+        # if PARALLEL_TEST_GROUPS=1, we are running tests in parallel but only one group,
+        # in this case the result is final and we can process it.
+        res = super || ENV['PARALLEL_TEST_GROUPS'] == '1'
+        puts "SimpleCov.final_result_process? => #{res}"
+        res
+      end
+
+      def wait_for_other_processes
+        # if PARALLEL_TEST_GROUPS=1, we are running tests in parallel but only one group,
+        # in this case we don't need to wait for other processes.
+        return if ENV['PARALLEL_TEST_GROUPS'] == '1'
+
+        res = super
+        puts "SimpleCov.wait_for_other_processes => #{res}"
+        res
+      end
+
+      def ready_to_process_results?
+        res = super
+        puts "SimpleCov.ready_to_process_results? => #{res}"
+        res
+      end
+
+      def process_results_and_report_error
+        res = super
+        puts "SimpleCov.process_results_and_report_error => #{res}"
+        res
+      end
+
+      def process_result(result)
+        res = super
+        puts "SimpleCov.process_result(result) => #{res}"
+        res
+      end
+    end)
+
+    SimpleCov::ResultMerger.singleton_class.prepend(Module.new do
+      def store_result(result)
+        res = super
+        puts "SimpleCov::ResultMerger.store_result(result) => #{res}"
+        puts "SimpleCov::ResultMerger.resultset_path => #{resultset_path}"
+        puts "File.exists?(resultset_path) => #{File.exist?(resultset_path)}"
+        res
+      end
+    end)
 
     SimpleCov.configure do
       enable_coverage :branch

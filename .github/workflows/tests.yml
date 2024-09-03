@@ -187,6 +187,11 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
 
+      - name: Check coverage files
+        run: |
+          ls -lAh coverage/ || true
+          ls -lAh tmp/capybara/ || true
+
       - name: Save artifacts
         if: always()
         uses: actions/upload-artifact@v4

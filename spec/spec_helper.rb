@@ -3,6 +3,12 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 if ENV['CI'] == 'true'
+  puts "ENV['PARALLEL_TEST_PROCESSORS'] => #{ENV['PARALLEL_TEST_PROCESSORS'].inspect}"
+  puts "ENV['TEST_GROUP'] => #{ENV['TEST_GROUP'].inspect}"
+  puts "ENV['TEST_ENV_NUMBER'] => #{ENV['TEST_ENV_NUMBER'].inspect}"
+  puts "ENV['PARALLEL_TEST_GROUPS'] => #{ENV['PARALLEL_TEST_GROUPS'].inspect}"
+  puts "ENV['PARALLEL_PID_FILE'] => #{ENV['PARALLEL_PID_FILE'].inspect}"
+  puts "defined?(ParallelTests) => #{defined?(ParallelTests)}"
   require_relative 'coverage_helper'
   CoverageHelper.start parallel_number: ENV['TEST_GROUP']
 end
