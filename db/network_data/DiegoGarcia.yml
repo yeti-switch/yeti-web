@@ -3,73 +3,73 @@ networks:
 # Fixed Networks
 - id: &dg_fixed 4346
   name: DG Fixed
-  uuid: cadc3218-85fa-455f-8e63-370686225df7
+  uuid: 0ff9f8fe-d0c8-4023-a78d-0fa0d4cf904a
   type_id: 12
 # Paging Networks
 - id: &dg_paging 4349
   name: DG Paging
-  uuid: 09c4430c-d2c8-4e4b-ac9f-73545c9124eb
+  uuid: fd2af2f9-ed35-4bf0-88fc-f42bf0bf4d25
   type_id: 13
 # Mobile Networks
 - id: &dg_foneplus_cellular_sure_mobile 4357
   name: DG Foneplus Cellular Sure Mobile
-  uuid: 6b353073-5821-4008-862a-27226c2bb125
+  uuid: 831be9ca-25fb-4b04-9da6-9e3b6b0f9a33
   type_id: 3
 # Country code Networks
 - id: &dg_fixed_cc 4688
   name: DG Fixed Cc
-  uuid: 74906189-cb80-45c3-9306-6c03f719a4e4
+  uuid: fbb49839-b06f-4bb9-850c-376bc4c13f6b
   type_id: 17
 # Supplementary services Networks
 - id: &dg_special_services 4960
   name: DG Special Services
-  uuid: 8f357025-3cb1-4544-8553-f21e83edf679
+  uuid: 72a8daea-92fc-422a-8222-926b9021d0cd
   type_id: 14
 network_prefixes:
 # Fixed Prefixes
-- id: 245088
+- id: 245094
   prefix: '24637'
   number_min_length: 12
   number_max_length: 12
-  uuid: 61c7c2d9-b853-424f-9129-ab918071fb71
+  uuid: 1ea386fd-d1b5-414f-9d23-e358f5fc529a
   country_id: *dg
   network_id: *dg_fixed
 # Paging Prefixes
-- id: 245104
+- id: 245110
   prefix: '2463709300'
   number_min_length: 17
   number_max_length: 17
-  uuid: aed557e2-40b5-4f87-8f6a-daaaae848932
+  uuid: 9bceab59-8d23-4a5a-94b6-f306c74edd94
   country_id: *dg
   network_id: *dg_paging
 # Mobile Prefixes
-- id: 245238
+- id: 245244
   prefix: '24638'
   number_min_length: 12
   number_max_length: 12
-  uuid: 7aceb8e5-d28e-41b8-8255-cd9201c5fb4d
+  uuid: 1992a7ba-0b6f-4c29-9afc-0553c1fec9fa
   country_id: *dg
   network_id: *dg_foneplus_cellular_sure_mobile
 # Country code Prefixes
-- id: 247927
+- id: 247933
   prefix: '246'
   number_min_length: 6
   number_max_length: 10
-  uuid: 17b57906-db40-4903-a189-ea87760e1892
+  uuid: 850dfe40-f6c6-4f72-a3f0-0d6fbecfc236
   country_id: *dg
   network_id: *dg_fixed_cc
 # Supplementary services Prefixes
-- id: 248341
+- id: 248347
   prefix: '2461'
   number_min_length: 7
   number_max_length: 7
-  uuid: 72caa232-a502-4374-9abe-793f65eb7e9a
+  uuid: b5e68842-8c49-4ae1-9b06-7a9b3986002a
   country_id: *dg
   network_id: *dg_special_services
-- id: 253163
+- id: 253169
   prefix: '2469'
   number_min_length: 8
   number_max_length: 8
-  uuid: 2d971523-9666-4682-8325-f8dc18c30b04
+  uuid: 4c0dc7dd-bda0-4bbf-9ec4-40304618993a
   country_id: *dg
   network_id: *dg_special_services

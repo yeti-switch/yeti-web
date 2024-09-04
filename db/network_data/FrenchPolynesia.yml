@@ -3,195 +3,195 @@ networks:
 # Supplementary services Networks
 - id: &pf_special_services 4377
   name: PF Special Services
-  uuid: 205aa8da-ad7b-4e87-935b-e8a60d03eec3
+  uuid: a6cef0be-a504-4aff-b1a6-565a2472d9af
   type_id: 14
 - id: &pf_audiotext 4426
   name: PF Audiotext
-  uuid: 9a171062-4179-4ca4-b6f3-caca01ff88f7
+  uuid: 0e500f85-c42d-4623-be21-30f78590fe5d
   type_id: 14
 - id: &pf_emergency_services 5027
   name: PF Emergency Services
-  uuid: 76e25533-2ab1-4ecd-8965-b71a44c51357
+  uuid: e2d6c8b5-b5a5-44eb-970a-4ad6e071fd1d
   type_id: 14
 # Fixed Networks
 - id: &pf_fixed 4387
   name: PF Fixed
-  uuid: 57569bd4-e79d-4aef-b78c-8129d81d38ff
+  uuid: 3cfe1c53-09d6-4ae8-8c78-bfb647c6f065
   type_id: 12
 # Country code Networks
 - id: &pf_fixed_cc 4794
   name: PF Fixed Cc
-  uuid: b0786136-245a-40c5-bc0d-d1acfc9e2c60
+  uuid: 407f2db0-94f1-4968-8351-a189da7a7de9
   type_id: 17
 # Mobile Networks
 - id: &pf_ora_mobile 5619
   name: PF Ora Mobile
-  uuid: 99f27536-4bcc-4f46-b389-fe2db15fc5f6
+  uuid: b04a7706-dd4f-4832-8f86-e09fbf36c42e
   type_id: 3
 - id: &pf_vodafone_mobile 5637
   name: PF Vodafone Mobile
-  uuid: 78606edd-8e15-4178-87fa-d1393d2a2044
+  uuid: 9eefa569-5e78-4d5d-a2a8-5a68d4a9bb5f
   type_id: 3
 - id: &pf_vini_mobile 6242
   name: PF Vini Mobile
-  uuid: a5902e6e-f3c4-4294-adde-f806814ead3f
+  uuid: 9a62d794-97d3-49c5-8ae1-b2cc6b602fac
   type_id: 3
 network_prefixes:
 # Supplementary services Prefixes
-- id: 245336
+- id: 245342
   prefix: '6894'
   number_min_length: 8
   number_max_length: 10
-  uuid: 1d8fd217-a4ff-4f40-82d1-21bd8f23ac2e
+  uuid: 8b6eda27-8e2b-4624-8c88-1f9831a5dc7c
   country_id: *pf
   network_id: *pf_special_services
-- id: 245871
+- id: 245877
   prefix: '68944'
   number_min_length: 11
   number_max_length: 11
-  uuid: b42ac958-62fc-431a-9a32-a72c400a0f24
+  uuid: b9fa7c56-c7ea-4c56-b31d-633c895cfb31
   country_id: *pf
   network_id: *pf_audiotext
-- id: 248434
+- id: 248440
   prefix: '6891'
   number_min_length: 6
   number_max_length: 6
-  uuid: 2e9620b9-352b-42a3-a55a-3d08e77653e9
+  uuid: f216c05f-f378-4ab3-bde0-eaf0f4eef743
   country_id: *pf
   network_id: *pf_emergency_services
 # Fixed Prefixes
-- id: 245358
+- id: 245364
   prefix: '68940'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8c2129c4-dccd-4d7e-b42c-e92dd0eb9780
+  uuid: 84a3757a-e7ae-465c-a8de-191ed65a5388
   country_id: *pf
   network_id: *pf_fixed
-- id: 245441
+- id: 245447
   prefix: '689404'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2de939ca-48e5-4cbe-843e-fb6f70e7c9aa
+  uuid: a2a324ef-3918-485d-bcf1-e647528afc87
   country_id: *pf
   network_id: *pf_fixed
-- id: 245444
+- id: 245450
   prefix: '689405'
   number_min_length: 14
   number_max_length: 14
-  uuid: cab13b0c-6e22-48f5-9393-dd37f50fade9
+  uuid: 3e5f9a7b-fa4b-4510-b188-7cd82c87077a
   country_id: *pf
   network_id: *pf_fixed
-- id: 245446
+- id: 245452
   prefix: '689406'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5262c03d-ba8c-48dc-8e1e-7cc7b17192ad
+  uuid: ead69750-55df-4fd8-9cf3-0bbdd4f6553e
   country_id: *pf
   network_id: *pf_fixed
-- id: 245459
+- id: 245465
   prefix: '689408'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3046ef68-4848-497f-b599-439508714892
+  uuid: b8c2b49e-89ca-47de-a2a6-cc590cb2fc6c
   country_id: *pf
   network_id: *pf_fixed
-- id: 245478
+- id: 245484
   prefix: '6894088'
   number_min_length: 15
   number_max_length: 15
-  uuid: 79016b91-09f0-4631-9cb3-b17034954696
+  uuid: eed03eb8-e46d-44a3-a21d-2944b73bb4b3
   country_id: *pf
   network_id: *pf_fixed
-- id: 245481
+- id: 245487
   prefix: '689409'
   number_min_length: 14
   number_max_length: 14
-  uuid: 65e0cd8a-c05e-4d26-80de-20b912840519
+  uuid: 42494998-20c2-4dd4-94d5-b1a5d1964caa
   country_id: *pf
   network_id: *pf_fixed
-- id: 249332
+- id: 249338
   prefix: '689494'
   number_min_length: 14
   number_max_length: 14
-  uuid: df32a663-fc9f-40b0-854c-615d3566f77c
+  uuid: 5fb3da27-b5e3-4341-966c-4b43a03b9901
   country_id: *pf
   network_id: *pf_fixed
-- id: 249347
+- id: 249353
   prefix: '689495'
   number_min_length: 14
   number_max_length: 14
-  uuid: e431cce7-ff65-422e-8270-3255f3233b1c
+  uuid: 3e0131ee-1f64-43ff-93f6-a1e7e3fcdc00
   country_id: *pf
   network_id: *pf_fixed
-- id: 249355
+- id: 249361
   prefix: '689496'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8fd8d72d-d950-42f4-aa99-a8a1a3762767
+  uuid: 3144b633-5e63-4684-8fea-bc5f520162e7
   country_id: *pf
   network_id: *pf_fixed
-- id: 249356
+- id: 249362
   prefix: '689498'
   number_min_length: 14
   number_max_length: 14
-  uuid: f3116bb0-3305-4eb2-af59-d7516b2985c4
+  uuid: 1acdabef-dc35-44ae-a94c-cfdd95cfea30
   country_id: *pf
   network_id: *pf_fixed
-- id: 249368
+- id: 249374
   prefix: '689499'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2b855920-6d54-4ca6-823d-aac3d62f8201
+  uuid: 84d9e23a-8709-4d24-a890-5788f17ab89a
   country_id: *pf
   network_id: *pf_fixed
 # Country code Prefixes
-- id: 248033
+- id: 248039
   prefix: '689'
   number_min_length: 5
   number_max_length: 11
-  uuid: 3c4a67ab-c314-43f8-bb2d-9f368e3cd698
+  uuid: 26b681c6-8af8-400f-a21f-52aea406a65a
   country_id: *pf
   network_id: *pf_fixed_cc
 # Mobile Prefixes
-- id: 252923
+- id: 252929
   prefix: '68988'
   number_min_length: 13
   number_max_length: 13
-  uuid: 54f9e75d-e043-420b-bd0e-2030873cc4b8
+  uuid: 599ea7be-5ebb-409c-99ce-84dcd9135b8c
   country_id: *pf
   network_id: *pf_ora_mobile
-- id: 253013
+- id: 253019
   prefix: '68988411'
   number_min_length: 16
   number_max_length: 16
-  uuid: 29ac8980-05a5-4fae-970f-5a23605e24f5
+  uuid: f809c3e4-94e8-4554-85b0-21fc4791b9b5
   country_id: *pf
   network_id: *pf_ora_mobile
-- id: 253083
+- id: 253089
   prefix: '68989'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8fae4a50-7c85-435d-b988-ed611771230a
+  uuid: 558ac6aa-8b59-4e77-9b70-cb716813186e
   country_id: *pf
   network_id: *pf_vodafone_mobile
-- id: 253129
+- id: 253135
   prefix: '68989411'
   number_min_length: 16
   number_max_length: 16
-  uuid: e2d65c70-e80f-4532-aedb-75826561eb38
+  uuid: a10e3c7e-3fe2-4bf7-aea2-9854c8d94d03
   country_id: *pf
   network_id: *pf_vodafone_mobile
-- id: 261036
+- id: 261045
   prefix: '68987'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3ca85dcf-cfc8-445c-bc59-d5310f370a22
+  uuid: c2252e84-b6bf-4112-a385-ba1e08dada0a
   country_id: *pf
   network_id: *pf_vini_mobile
-- id: 261113
+- id: 261122
   prefix: '68987411'
   number_min_length: 16
   number_max_length: 16
-  uuid: 200d237c-a375-4f34-a978-5453d7f06d46
+  uuid: 8735a0a4-f8b6-41aa-b67c-e5a36f9fbcf5
   country_id: *pf
   network_id: *pf_vini_mobile
