@@ -1,0 +1,130 @@
+country_id: &sm 185
+networks:
+# Mobile Networks
+- id: &sm_tms_mobile 3342
+  name: SM Tms Mobile
+  uuid: 1cc1f11a-9c0f-4e35-855b-ed02e5417e10
+  type_id: 3
+- id: &sm_telenet_mobile 6399
+  name: SM Telenet Mobile
+  uuid: 31869d58-48f1-494c-9add-bcb63922d2ea
+  type_id: 3
+- id: &sm_prima_mobile 3341
+  name: SM Prima Mobile
+  uuid: 3164da8b-b549-4cd9-b29c-0bf82bbc9673
+  type_id: 3
+- id: &sm_mobile 6547
+  name: SM Mobile
+  uuid: 97185a9d-ce3a-46fb-930f-192adeb9947d
+  type_id: 3
+# Country code Networks
+- id: &sm_fixed_cc 4808
+  name: SM Fixed Cc
+  uuid: 0c8b4130-f639-4617-95f5-908ead19a314
+  type_id: 17
+# Fixed Networks
+- id: &sm_fixed 4864
+  name: SM Fixed
+  uuid: b52c64d5-2c66-419d-9d29-697304648a7f
+  type_id: 12
+# Supplementary services Networks
+- id: &sm_premium_rate_and_video_call_services 5985
+  name: SM Premium Rate And Video Call Services
+  uuid: 8ee59fa9-e33d-47ed-9226-f9e2d43e3e11
+  type_id: 14
+network_prefixes:
+# Mobile Prefixes
+- id: 66533
+  prefix: '39335773'
+  number_min_length: 14
+  number_max_length: 15
+  uuid: eff1e5f0-4fdb-43c9-8494-2fae869e944c
+  country_id: *sm
+  network_id: *sm_tms_mobile
+- id: 66534
+  prefix: '39335774'
+  number_min_length: 14
+  number_max_length: 15
+  uuid: daf3ad97-ab65-4dad-82e0-eed66a6108e6
+  country_id: *sm
+  network_id: *sm_tms_mobile
+- id: 293569
+  prefix: '37861'
+  number_min_length: 11
+  number_max_length: 13
+  uuid: 8cd68f32-77b0-4bbc-96df-3db7f358798f
+  country_id: *sm
+  network_id: *sm_telenet_mobile
+- id: 322013
+  prefix: '37866'
+  number_min_length: 11
+  number_max_length: 13
+  uuid: df762dd7-cead-4d89-96dc-53d87b4589e5
+  country_id: *sm
+  network_id: *sm_prima_mobile
+- id: 339607
+  prefix: '378'
+  number_min_length: 11
+  number_max_length: 13
+  uuid: 72bde12a-611f-4701-834f-1fecfefd3dce
+  country_id: *sm
+  network_id: *sm_mobile
+# Country code Prefixes
+- id: 248034
+  prefix: '378'
+  number_min_length: 9
+  number_max_length: 13
+  uuid: 1a59a489-7e7a-43d0-a5ae-2e8f46e32d7a
+  country_id: *sm
+  network_id: *sm_fixed_cc
+# Fixed Prefixes
+- id: 248090
+  prefix: '3780'
+  number_min_length: 10
+  number_max_length: 14
+  uuid: 51a947ac-19b7-4806-a149-1b63c76415d7
+  country_id: *sm
+  network_id: *sm_fixed
+- id: 249407
+  prefix: '3785'
+  number_min_length: 10
+  number_max_length: 14
+  uuid: e1bac5e1-138c-431e-b502-672b70d2f7d8
+  country_id: *sm
+  network_id: *sm_fixed
+- id: 253202
+  prefix: '3789'
+  number_min_length: 10
+  number_max_length: 14
+  uuid: 5aba4370-023b-442a-8d14-514ef123f0fb
+  country_id: *sm
+  network_id: *sm_fixed
+- id: 254476
+  prefix: '37805498'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 6f2ba3ec-ba0d-4e63-a704-51cab9700366
+  country_id: *sm
+  network_id: *sm_fixed
+- id: 254477
+  prefix: '37805499'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 1897e885-a3f8-4ab4-9f5c-cde2097ea4b0
+  country_id: *sm
+  network_id: *sm_fixed
+- id: 260033
+  prefix: '3788'
+  number_min_length: 10
+  number_max_length: 14
+  uuid: 090d580d-6752-40f0-90c4-c1fa43dc0f88
+  country_id: *sm
+  network_id: *sm_fixed
+# Supplementary services Prefixes
+- id: 258697
+  prefix: '3787'
+  number_min_length: 10
+  number_max_length: 14
+  uuid: c9954bb9-0096-4e47-a7d5-7fd64a93f657
+  country_id: *sm
+  network_id: *sm_premium_rate_and_video_call_services

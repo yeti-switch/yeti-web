@@ -1,0 +1,378 @@
+country_id: &ao 6
+networks:
+# Fixed Networks
+- id: &ao_fixed 3091
+  name: AO Fixed
+  uuid: 5230df14-7aca-4428-a7f6-a1511fe9918d
+  type_id: 12
+# Mobile Networks
+- id: &ao_movicel_mobile 3746
+  name: AO Movicel Mobile
+  uuid: 29006b82-2a29-4d83-834e-18f03cd29b3d
+  type_id: 3
+- id: &ao_unitel_mobile 3774
+  name: AO Unitel Mobile
+  uuid: ba261794-91f4-4640-8756-9a3dd1dc0df5
+  type_id: 3
+- id: &ao_africell_mobile 3838
+  name: AO Africell Mobile
+  uuid: 1447c25e-53a5-4bdd-942d-93ed841d2737
+  type_id: 3
+# Supplementary services Networks
+- id: &ao_value_added_services_sms 4362
+  name: AO Value Added Services Sms
+  uuid: 489af8ab-a22c-4b3e-a37b-48e2d75185f0
+  type_id: 14
+- id: &ao_value_added_services_voice 4493
+  name: AO Value Added Services Voice
+  uuid: d6b45e46-ccef-4ca6-8479-354d552e0fd9
+  type_id: 14
+- id: &ao_special_services 4929
+  name: AO Special Services
+  uuid: 4028a1be-99ca-4f86-9756-67fcac37c970
+  type_id: 14
+- id: &ao_emergency_services 5111
+  name: AO Emergency Services
+  uuid: 327f2b01-f981-4654-8646-3c9ee26b390b
+  type_id: 14
+- id: &ao_private_networks 6606
+  name: AO Private Networks
+  uuid: aa1c475d-4413-4dc6-b2a0-734668e75436
+  type_id: 14
+- id: &ao_business_networks 6759
+  name: AO Business Networks
+  uuid: 47d79bee-a588-48b7-ae57-ae08121743f9
+  type_id: 14
+- id: &ao_freephone_services 6875
+  name: AO Freephone Services
+  uuid: 98612e64-4b1e-434c-84a2-87c288508b0b
+  type_id: 14
+- id: &ao_shared_cost_services 6940
+  name: AO Shared Cost Services
+  uuid: bad577dc-47a8-4488-ba64-e9f7afbe61b3
+  type_id: 14
+- id: &ao_country_direct_services 6964
+  name: AO Country Direct Services
+  uuid: 17364985-5570-4055-aa66-f5038e5383ac
+  type_id: 14
+- id: &ao_personal_number_services 7013
+  name: AO Personal Number Services
+  uuid: 4804cbeb-1975-451d-958b-051085208c0c
+  type_id: 14
+- id: &ao_automatic_reply_services 7024
+  name: AO Automatic Reply Services
+  uuid: 9f4798c6-7335-4bab-8bf6-91d57a638187
+  type_id: 14
+- id: &ao_value_added_services_entertainment_and_games 7120
+  name: AO Value Added Services Entertainment And Games
+  uuid: ad4d5a74-23ac-4a12-b029-161c8b478579
+  type_id: 14
+- id: &ao_maritime_radio 7135
+  name: AO Maritime Radio
+  uuid: 110e1b99-3518-468e-8ffe-699b9428dba8
+  type_id: 14
+- id: &ao_value_added_services_business_and_marketing 7191
+  name: AO Value Added Services Business And Marketing
+  uuid: e89d8d9f-96f1-4e2c-8012-dd38809cfeb7
+  type_id: 14
+- id: &ao_value_added_services_radio_and_television_competitions 7223
+  name: AO Value Added Services Radio And Television Competitions
+  uuid: 0e488662-40b5-4a94-a493-15355701f804
+  type_id: 14
+# Country code Networks
+- id: &ao_fixed_cc 4646
+  name: AO Fixed Cc
+  uuid: a6afc15f-aecf-4e44-9f64-cfe81fe41655
+  type_id: 17
+network_prefixes:
+# Fixed Prefixes
+- id: 7625
+  prefix: '244231'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 621ce1fa-bb4c-47a8-ac4b-ee5c79f1727a
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 17045
+  prefix: '244233'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 11d2cedf-96a3-4baf-829d-ac09109935b6
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 17225
+  prefix: '244234'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: b2093fdd-0a61-4f30-b21a-7bb18211aa0e
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 18137
+  prefix: '244232'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 06b1154c-e35f-4b91-a62a-2bd6008ae884
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 18174
+  prefix: '244236'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 7a4f2e84-a91f-4716-9891-ea6c952c0bae
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 20656
+  prefix: '244248'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: c4cb62aa-368c-485b-b298-08d8407e99a0
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 22253
+  prefix: '244251'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 18801b6c-0993-49c1-8722-0a8d48567faa
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 22772
+  prefix: '244252'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a634225e-5331-4957-b7d5-f67872b09580
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 23706
+  prefix: '244261'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 323efdcb-f833-4eb3-9742-faf75c121858
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 24451
+  prefix: '244264'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 4274d1cb-e126-439d-ab4a-d44d0b3df3d4
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 27490
+  prefix: '244235'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: ebe0a328-4b3e-49eb-92e2-1ee5fe782249
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 29253
+  prefix: '244241'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 3b9ca0ee-c462-4710-8eda-ffeae803f68f
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 31067
+  prefix: '244249'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: c257af75-4772-4e28-9398-cb56b71b23f2
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 32739
+  prefix: '244253'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: c06816f7-28cc-494e-a6b0-2aab1e87da46
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 33276
+  prefix: '244254'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 60f8404d-fc52-417f-ba8e-703f7945c7cc
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 34867
+  prefix: '244265'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 628a86de-65ed-40f5-9bd4-6c99ced665c8
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 36862
+  prefix: '244272'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 17ed61e6-5c1f-46b6-bb7f-d10e2eddf014
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 244503
+  prefix: '2443'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: fdbcc652-41e0-4071-b328-bb8e51180173
+  country_id: *ao
+  network_id: *ao_fixed
+- id: 272954
+  prefix: '24422'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 081e68d5-885e-42cd-bf0b-398511287fad
+  country_id: *ao
+  network_id: *ao_fixed
+# Mobile Prefixes
+- id: 171751
+  prefix: '24491'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: ea93c00c-8a94-44fe-b343-92d0c9a3b1a5
+  country_id: *ao
+  network_id: *ao_movicel_mobile
+- id: 174230
+  prefix: '24492'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 142e9d70-35fb-4380-bff9-7947c469086f
+  country_id: *ao
+  network_id: *ao_unitel_mobile
+- id: 195188
+  prefix: '24493'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 617dac28-5caa-48a8-9546-63ed65ffec48
+  country_id: *ao
+  network_id: *ao_unitel_mobile
+- id: 212611
+  prefix: '24494'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: f5d51f33-d9a9-4999-b624-b17953cbc4a4
+  country_id: *ao
+  network_id: *ao_unitel_mobile
+- id: 218137
+  prefix: '24495'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 2f2908a3-7be2-47b7-831b-7d2689e1922d
+  country_id: *ao
+  network_id: *ao_africell_mobile
+- id: 238767
+  prefix: '24499'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: bd62f6fe-b788-450e-a47b-94f437755727
+  country_id: *ao
+  network_id: *ao_movicel_mobile
+# Supplementary services Prefixes
+- id: 245281
+  prefix: '2444'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: 77343f85-bb83-4225-bad7-ce521d4243ca
+  country_id: *ao
+  network_id: *ao_value_added_services_sms
+- id: 246735
+  prefix: '2446'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: a78a60e5-06ac-43a6-a89b-73ae755482ac
+  country_id: *ao
+  network_id: *ao_value_added_services_voice
+- id: 248290
+  prefix: '2441'
+  number_min_length: 7
+  number_max_length: 9
+  uuid: 717cb869-9f56-4f3f-8356-b82aefb565ef
+  country_id: *ao
+  network_id: *ao_special_services
+- id: 248553
+  prefix: '244112'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: daf4a09f-644a-4bf5-ae4a-a5d8d93640dd
+  country_id: *ao
+  network_id: *ao_emergency_services
+- id: 342104
+  prefix: '244705'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: c4d56a7e-cb40-4557-a329-0b852a14a64a
+  country_id: *ao
+  network_id: *ao_private_networks
+- id: 377579
+  prefix: '244750'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 0d7d8c55-a0cb-438a-a246-1f223d88b283
+  country_id: *ao
+  network_id: *ao_business_networks
+- id: 400814
+  prefix: '244800'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 46a71fda-98dd-4422-b12c-bfc69e2e5f53
+  country_id: *ao
+  network_id: *ao_freephone_services
+- id: 402588
+  prefix: '244805'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d5a0c50c-5a38-4398-95f6-0cd74d626833
+  country_id: *ao
+  network_id: *ao_shared_cost_services
+- id: 405694
+  prefix: '244808'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 769c34bd-0c09-4483-841c-555a976897e3
+  country_id: *ao
+  network_id: *ao_country_direct_services
+- id: 424558
+  prefix: '244840'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: e37ce3d3-127d-4674-8d2f-0f77e266bab1
+  country_id: *ao
+  network_id: *ao_personal_number_services
+- id: 429587
+  prefix: '244860'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 28189f57-58f3-412b-a6f2-fac1b7b4a7f2
+  country_id: *ao
+  network_id: *ao_automatic_reply_services
+- id: 447889
+  prefix: '244901'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 25698bb1-5b7a-4504-b930-0879de940905
+  country_id: *ao
+  network_id: *ao_value_added_services_entertainment_and_games
+- id: 449895
+  prefix: '244906'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: b9671530-b887-4d07-b8e9-045cba873cf1
+  country_id: *ao
+  network_id: *ao_maritime_radio
+- id: 453267
+  prefix: '244900'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: ef87c3ed-bd20-478d-a995-1c454b08b3e4
+  country_id: *ao
+  network_id: *ao_value_added_services_business_and_marketing
+- id: 454762
+  prefix: '244905'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a9063890-1689-4b98-8a8a-aef4ff51a1c5
+  country_id: *ao
+  network_id: *ao_value_added_services_radio_and_television_competitions
+# Country code Prefixes
+- id: 247873
+  prefix: '244'
+  number_min_length: 6
+  number_max_length: 12
+  uuid: 32d2f0d0-1a26-4d99-85b8-89d08e0ba9df
+  country_id: *ao
+  network_id: *ao_fixed_cc

@@ -1,0 +1,81 @@
+country_id: &fm 139
+networks:
+# Fixed Networks
+- id: &fm_fixed 3322
+  name: FM Fixed
+  uuid: 28d0a155-b507-49e9-b30d-83a912e751df
+  type_id: 12
+# Supplementary services Networks
+- id: &fm_emergency_services 4321
+  name: FM Emergency Services
+  uuid: a5ede2d4-2bf9-44e5-92fe-a74e6948b489
+  type_id: 14
+- id: &fm_special_services 4367
+  name: FM Special Services
+  uuid: c1679a9b-86a6-4a0e-941d-a27f0c8de26a
+  type_id: 14
+# Country code Networks
+- id: &fm_fixed_cc 4703
+  name: FM Fixed Cc
+  uuid: 8ff8612d-e613-4612-b0bf-9167a87b77c1
+  type_id: 17
+network_prefixes:
+# Fixed Prefixes
+- id: 59960
+  prefix: '691320'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: e649b54c-b3de-4cb0-ad72-a329e269adb4
+  country_id: *fm
+  network_id: *fm_fixed
+- id: 64417
+  prefix: '691330'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: a2a80078-51a6-4536-8ef8-406ac9e6f742
+  country_id: *fm
+  network_id: *fm_fixed
+- id: 79105
+  prefix: '691350'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: e39029f5-e507-4ca2-a27c-c87773bf8d44
+  country_id: *fm
+  network_id: *fm_fixed
+- id: 82220
+  prefix: '691370'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: ff005fc5-c075-4cc6-8101-f4fa3b2656d1
+  country_id: *fm
+  network_id: *fm_fixed
+# Supplementary services Prefixes
+- id: 244694
+  prefix: '691311'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: c4e32f42-68f0-4623-a783-acc71a61b73f
+  country_id: *fm
+  network_id: *fm_emergency_services
+- id: 245298
+  prefix: '6914'
+  number_min_length: 7
+  number_max_length: 8
+  uuid: d26cc9c7-4731-41be-ab26-f6645463a2b2
+  country_id: *fm
+  network_id: *fm_special_services
+- id: 253420
+  prefix: '691911'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: 786130c9-8a05-4eb7-a1ac-b09f562f8a09
+  country_id: *fm
+  network_id: *fm_emergency_services
+# Country code Prefixes
+- id: 247930
+  prefix: '691'
+  number_min_length: 6
+  number_max_length: 7
+  uuid: ad8685e5-7ea7-443c-b4d1-573f0891617b
+  country_id: *fm
+  network_id: *fm_fixed_cc
