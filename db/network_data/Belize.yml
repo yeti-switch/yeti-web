@@ -3,188 +3,188 @@ networks:
 # Fixed Networks
 - id: &bz_fixed 3209
   name: BZ Fixed
-  uuid: de32140f-0790-444b-8bbc-8efd36802401
+  uuid: 0fe13a15-7f29-4ecb-b1d9-216d3a55190a
   type_id: 12
 # Country code Networks
 - id: &bz_fixed_cc 4665
   name: BZ Fixed Cc
-  uuid: c91ba405-fa9f-4a7a-9ed1-a6809d2a6aa4
+  uuid: 820dff7c-8a0d-4b5c-a509-e4a7e15d3428
   type_id: 17
 # Supplementary services Networks
 - id: &bz_special_services 4943
   name: BZ Special Services
-  uuid: 3fc5adbb-097a-440e-a799-d841054ed251
+  uuid: 32a8ce24-dd3b-45c1-a1b8-a43c08e85ec0
   type_id: 14
 - id: &bz_emergency_services 5649
   name: BZ Emergency Services
-  uuid: 58c3e77f-7e00-4b22-9bcc-3b92645429d6
+  uuid: 4533164c-3417-4123-a198-8063fc3c2426
   type_id: 14
 - id: &bz_freephone_services 5818
   name: BZ Freephone Services
-  uuid: 68168594-6cde-462a-8ef6-91ac091c76cf
+  uuid: 88561a44-371d-4b41-854a-cf5a462cf886
   type_id: 14
 # Mobile Networks
 - id: &bz_mobile 6319
   name: BZ Mobile
-  uuid: 5d15badd-fe9f-4e22-b21d-408dcaa4511f
+  uuid: ba408587-4196-4bdb-8d89-67c35bca6cc3
   type_id: 3
 - id: &bz_digicell_mobile 6321
   name: BZ Digicell Mobile
-  uuid: 15b84ebc-3f90-404a-a545-b93e77c8daea
+  uuid: 59c618d4-d791-4f58-a9b4-b11dbc9d6187
   type_id: 3
 - id: &bz_smart_mobile 6323
   name: BZ Smart Mobile
-  uuid: 06c219d4-91d2-4d6b-a4f2-d22c1e302266
+  uuid: 6477558c-95b2-4fa8-ac2d-8621b755cf79
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
-- id: 40809
+- id: 40810
   prefix: '5012'
   number_min_length: 10
   number_max_length: 10
-  uuid: 181796c3-83b0-4d27-acf1-cde500f2a5a3
+  uuid: 16ad249a-1c58-489f-b330-f368f428ba39
   country_id: *bz
   network_id: *bz_fixed
-- id: 86560
+- id: 86566
   prefix: '5013'
   number_min_length: 10
   number_max_length: 10
-  uuid: 7681d27e-d2d3-4b1e-9d3c-d404aa69ad05
+  uuid: 18618384-0ec5-447b-b73b-51e283c515f9
   country_id: *bz
   network_id: *bz_fixed
-- id: 145882
+- id: 145888
   prefix: '5014'
   number_min_length: 10
   number_max_length: 10
-  uuid: 7864ebde-5ce0-4cb5-8981-f4d7e7a23f16
+  uuid: 5fed7418-2fd3-4f47-ba41-2bf96bec39c4
   country_id: *bz
   network_id: *bz_fixed
-- id: 276690
+- id: 276699
   prefix: '5015'
   number_min_length: 10
   number_max_length: 10
-  uuid: a9e557f8-71ed-457f-bdb1-73798a59af51
+  uuid: 9e75b0e3-63f7-4eb2-a233-de636e4836f3
   country_id: *bz
   network_id: *bz_fixed
-- id: 392462
+- id: 392471
   prefix: '5017'
   number_min_length: 10
   number_max_length: 10
-  uuid: a680b21d-5aef-47ef-90b2-88691985ae8c
+  uuid: 9e8eea55-01ba-47e9-9989-541208ca181d
   country_id: *bz
   network_id: *bz_fixed
-- id: 446681
+- id: 446690
   prefix: '5018'
   number_min_length: 10
   number_max_length: 10
-  uuid: 220ec665-d27f-45f5-a4bf-0493df58e1bc
+  uuid: b1362198-7dfb-4311-8870-0efefeb81adf
   country_id: *bz
   network_id: *bz_fixed
 # Country code Prefixes
-- id: 247904
+- id: 247910
   prefix: '501'
   number_min_length: 6
   number_max_length: 10
-  uuid: 8353bcbd-a92b-4b5a-bd80-1413eb6d4539
+  uuid: 7ee3a6f3-afe5-4d18-8107-b24ac4490784
   country_id: *bz
   network_id: *bz_fixed_cc
 # Supplementary services Prefixes
-- id: 248319
+- id: 248325
   prefix: '5011'
   number_min_length: 7
   number_max_length: 8
-  uuid: a5ebd7c0-e2b7-482a-842d-16b5f11d8581
+  uuid: 099988a8-0697-4d23-be51-bf878023d791
   country_id: *bz
   network_id: *bz_special_services
-- id: 253153
+- id: 253159
   prefix: '5019'
   number_min_length: 7
   number_max_length: 7
-  uuid: 685cb11a-7ecd-4443-af8e-7ac17a4f0f0d
+  uuid: 8b5772f1-bdc8-45ec-a747-1dada3225cb9
   country_id: *bz
   network_id: *bz_emergency_services
-- id: 254544
+- id: 254552
   prefix: '5010800'
   number_min_length: 13
   number_max_length: 13
-  uuid: a23dbae7-0ce7-4413-b7f5-a49a200752d9
+  uuid: 31c05a79-9c0c-4b19-a2a5-29f839083926
   country_id: *bz
   network_id: *bz_freephone_services
 # Mobile Prefixes
-- id: 276693
+- id: 276702
   prefix: '5016'
   number_min_length: 10
   number_max_length: 10
-  uuid: d88f1023-11c8-4b4f-9e7f-1041950afb90
+  uuid: d8587a2b-af3c-4d55-84b7-735eda2cd817
   country_id: *bz
   network_id: *bz_mobile
-- id: 276704
+- id: 276713
   prefix: '50160'
   number_min_length: 11
   number_max_length: 11
-  uuid: 3d43510f-3286-4dd5-99df-8f541164f688
+  uuid: d2f87409-6d9f-44de-856b-9968877f04ab
   country_id: *bz
   network_id: *bz_digicell_mobile
-- id: 276706
+- id: 276715
   prefix: '50161'
   number_min_length: 11
   number_max_length: 11
-  uuid: c584375a-2c40-4e3c-a9d6-b5f0802aca2f
+  uuid: 02222b5b-be3f-4109-8ed7-4daa6a8d7d93
   country_id: *bz
   network_id: *bz_digicell_mobile
-- id: 276709
+- id: 276718
   prefix: '501620'
   number_min_length: 12
   number_max_length: 12
-  uuid: 80b4cd91-33f3-491d-af05-a0aac6e0e757
+  uuid: 6a94567f-3a91-47c9-bbe8-f61da6fa5feb
   country_id: *bz
   network_id: *bz_digicell_mobile
-- id: 276710
+- id: 276719
   prefix: '501621'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5a873988-cafa-472e-acc5-ad4d23a9860f
+  uuid: 26b2f1c7-414e-471d-af2a-62e7a3a975e3
   country_id: *bz
   network_id: *bz_digicell_mobile
-- id: 276781
+- id: 276790
   prefix: '501622'
   number_min_length: 12
   number_max_length: 12
-  uuid: 10aa023e-c977-4733-a2be-fe3847033398
+  uuid: c292e3be-da8a-4b54-867a-cdd2d0d493c4
   country_id: *bz
   network_id: *bz_smart_mobile
-- id: 276804
+- id: 276813
   prefix: '501623'
   number_min_length: 12
   number_max_length: 12
-  uuid: d3135ca2-07e8-4cbb-860c-cf502141bbcd
+  uuid: abebee2a-0c5a-4122-8cf5-efa2ed744dee
   country_id: *bz
   network_id: *bz_smart_mobile
-- id: 276805
+- id: 276814
   prefix: '501624'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1905f84a-346e-49dc-bcc1-a1b1d50d158a
+  uuid: 43b645c2-6a95-4794-8a36-d546c1a3cda5
   country_id: *bz
   network_id: *bz_digicell_mobile
-- id: 276836
+- id: 276845
   prefix: '501625'
   number_min_length: 12
   number_max_length: 12
-  uuid: d670df9b-4044-4387-ab9c-ba5099aa0a72
+  uuid: 017d8086-244d-4ec2-ae7d-398e9abd93e6
   country_id: *bz
   network_id: *bz_digicell_mobile
-- id: 277210
+- id: 277219
   prefix: '50166'
   number_min_length: 11
   number_max_length: 11
-  uuid: 5689f389-a2d1-4f5e-8fbd-035f486b603b
+  uuid: ca8ba81d-a247-4117-afd1-0fd405b4c4fe
   country_id: *bz
   network_id: *bz_smart_mobile
-- id: 277457
+- id: 277466
   prefix: '50167'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9a7fadf6-ed70-4445-ba96-b200910d34b5
+  uuid: 29096e01-5ac8-4a82-91de-1ad63602e77e
   country_id: *bz
   network_id: *bz_smart_mobile

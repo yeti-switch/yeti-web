@@ -3,2833 +3,2833 @@ networks:
 # Fixed Networks
 - id: &mo_fixed 4153
   name: MO Fixed
-  uuid: 66b9bc8b-0f57-4483-84e1-dc2d0d4469f8
+  uuid: 6aa8e7a3-b0e9-4eb5-bf09-d6cde97dbea3
   type_id: 12
 # Mobile Networks
 - id: &mo_mobile 4510
   name: MO Mobile
-  uuid: ba1f9638-19f1-435c-ba1a-0f50242b65ea
+  uuid: 3f30fa16-0b3e-42a5-ac42-0fb5002d6657
   type_id: 3
 - id: &mo_smartone_mobile 4603
   name: MO Smartone Mobile
-  uuid: afdce40e-d10e-46f3-b103-a314c13aaec6
+  uuid: 3c6daa86-ec10-45ea-9ce5-adbc7fc14e34
   type_id: 3
 - id: &mo_ctm_mobile 4605
   name: MO Ctm Mobile
-  uuid: 5b3c2387-5fd6-4ca3-9d0a-583f5b25dcf5
+  uuid: b2da1730-562b-42b2-b4aa-4036eaffac7b
   type_id: 3
 - id: &mo_china_telecom_mobile 4606
   name: MO China Telecom Mobile
-  uuid: 4b44e513-0c1c-472c-a177-3672cb109163
+  uuid: 54f446b2-04c7-4ce8-b703-2c1c003add3b
   type_id: 3
 - id: &mo_3_mobile 4614
   name: MO 3 Mobile
-  uuid: 1c601f78-eefa-4e99-81ee-c796775a49d9
+  uuid: 2efb7eac-9ccf-40bb-8b1e-d43e4b81c728
   type_id: 3
 # Country code Networks
 - id: &mo_fixed_cc 4751
   name: MO Fixed Cc
-  uuid: 6f850cb0-c065-4e63-9c0d-35b65aef5c25
+  uuid: f098a6e3-b655-4c02-b3e9-eabffe04a7e3
   type_id: 17
 # Supplementary services Networks
 - id: &mo_special_services 5003
   name: MO Special Services
-  uuid: 465f22f4-f296-4d67-bbfb-e71204abf16b
+  uuid: b51d6e20-3dc5-4a56-9f69-336f353478ea
   type_id: 14
 # Paging Networks
 - id: &mo_kongseng_paging 5940
   name: MO Kongseng Paging
-  uuid: b781ee9d-58ed-44ff-8843-249d9e0a3caa
+  uuid: 47630501-5d34-4de2-8119-f0ffca81d89b
   type_id: 13
 network_prefixes:
 # Fixed Prefixes
-- id: 243053
+- id: 243059
   prefix: '8532'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4b832530-158e-44b2-a0bd-177bf1deb146
+  uuid: 60d1df9d-696e-4520-a93d-2ca0e6302137
   country_id: *mo
   network_id: *mo_fixed
-- id: 244389
+- id: 244395
   prefix: '85328'
   number_min_length: 13
   number_max_length: 13
-  uuid: bbef0f08-94d3-496e-b5fd-3340815a0a93
+  uuid: 7925c6c2-e9da-4596-a4e7-4a4f48e75e02
   country_id: *mo
   network_id: *mo_fixed
-- id: 260025
+- id: 260034
   prefix: '8538'
   number_min_length: 12
   number_max_length: 12
-  uuid: 32b14234-856a-4368-8d2b-ced1612e1f55
+  uuid: 9be4d4b0-9ea8-4d0c-bcd8-a6bddca36b58
   country_id: *mo
   network_id: *mo_fixed
 # Mobile Prefixes
-- id: 246782
+- id: 246788
   prefix: '8536'
   number_min_length: 12
   number_max_length: 12
-  uuid: b4e8b0d8-dea1-44cc-9f10-29c4a24ed342
+  uuid: 3e72083e-1ae1-40c0-bb33-6487da430c61
   country_id: *mo
   network_id: *mo_mobile
-- id: 247273
+- id: 247279
   prefix: '8536200'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1c134909-7353-473e-baed-940a3f002d0d
+  uuid: 6aaa3709-40c2-4bba-8e51-9071a66a9673
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 247276
+- id: 247282
   prefix: '8536201'
   number_min_length: 15
   number_max_length: 15
-  uuid: 10011b1c-0ba3-4da5-bd76-f58646475241
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247277
-  prefix: '8536202'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 3e4ba9cc-7b1a-4b5e-a6d6-31bd59eace74
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247278
-  prefix: '8536203'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 4452dacf-6e85-4b39-b5ae-70f479a4893d
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247279
-  prefix: '8536204'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 7869c531-16cf-481f-a096-93e276c748b9
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247280
-  prefix: '8536205'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: fadc071d-3fa7-4674-85a2-c229ff0f3f2a
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247282
-  prefix: '8536206'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: a64da2cc-3e79-4c79-ae86-69706685330b
+  uuid: 5333e495-abd9-42ca-b047-3bd8da898d32
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247283
-  prefix: '8536207'
+  prefix: '8536202'
   number_min_length: 15
   number_max_length: 15
-  uuid: df5ff2c2-245b-4689-a564-e7df8f9fbdb3
+  uuid: 927a9349-4d95-427c-b2b8-e4691258cc1b
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247284
-  prefix: '8536208'
+  prefix: '8536203'
   number_min_length: 15
   number_max_length: 15
-  uuid: 53e64c21-a4fd-4278-8947-e22900007643
+  uuid: 6a62b84b-4090-4a75-a903-4dddb70baf51
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247285
-  prefix: '8536209'
+  prefix: '8536204'
   number_min_length: 15
   number_max_length: 15
-  uuid: 584d3b1f-c80c-4142-9321-e74bd85bb989
+  uuid: fcbe4a7e-8827-46ab-985d-dd733a7f962f
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247286
+  prefix: '8536205'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 8551ca13-8ea8-44ff-ba96-c7fa1044c0c6
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247288
+  prefix: '8536206'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 9cfff943-fdd9-4f3d-b09b-9431ce0ee0aa
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247289
+  prefix: '8536207'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: f9851efa-bf4d-46ee-b281-96ebb843c29c
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247290
+  prefix: '8536208'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: f2257956-dbc0-4759-bc37-9153e2f3c7dc
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247291
+  prefix: '8536209'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: ef74b1d8-c078-4ad3-9b82-e281c66f300a
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247297
   prefix: '853621'
   number_min_length: 14
   number_max_length: 14
-  uuid: e23969bd-c091-4a7b-b055-5f3b9c6a99d8
+  uuid: 9b6c9745-edd5-4943-81ca-75f60f47fd1b
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 247313
+- id: 247319
   prefix: '853622'
   number_min_length: 14
   number_max_length: 14
-  uuid: c2c6b8f5-63de-47f1-a576-0e2693eb1333
+  uuid: b3c336d1-b1e0-4a04-9253-dfed62c6b46a
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 247324
+- id: 247330
   prefix: '853623'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6f2abcdc-5cea-48ab-a5f3-c8acb2516e0a
+  uuid: d74ca27f-2c14-4f20-8fe6-4829133527ba
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247358
+- id: 247364
   prefix: '8536240'
   number_min_length: 15
   number_max_length: 15
-  uuid: a60e812f-209b-4ade-b98c-6a23b822d4d2
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 247359
-  prefix: '8536241'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: c02d25a1-0825-4ce5-9a60-587918a64bc2
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 247360
-  prefix: '8536242'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 9ad73eae-24bc-4f61-aadb-edfbb9d40167
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247361
-  prefix: '8536243'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 1f405f42-5d1f-4e8b-8058-9b5a2863f31f
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247362
-  prefix: '8536244'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 52abd597-7a39-40e2-9de4-4836671158e0
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247363
-  prefix: '8536245'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 961607f4-e5a6-44ba-b63f-2baab16e5920
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247364
-  prefix: '8536246'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 33a85a42-532c-40df-b7b3-539a758af567
+  uuid: dc2750c4-cd4e-4402-8fc4-877e5e8e3284
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 247365
-  prefix: '8536247'
+  prefix: '8536241'
   number_min_length: 15
   number_max_length: 15
-  uuid: 7e6818c5-d0d5-4a84-a9e1-f3a7476d667a
+  uuid: be82d40e-00d2-4e46-b881-793e31852ef5
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 247366
+  prefix: '8536242'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: e9a5d577-d981-4152-9884-5ccc9278f50d
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247367
+  prefix: '8536243'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 5093bfa5-7c67-42ab-ba60-e5fdb4a9321b
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247368
+  prefix: '8536244'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 2effd5af-5da3-43b2-81f7-748c2f58c5cc
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247369
+  prefix: '8536245'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 81c3c572-ec2d-432f-8aa0-e78bc1f5c996
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247370
+  prefix: '8536246'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: d1be8a6a-600c-4b49-ad12-107bcc71eb2d
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247371
+  prefix: '8536247'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: c7916aec-c959-4df9-82db-d017747220e7
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247372
   prefix: '8536248'
   number_min_length: 15
   number_max_length: 15
-  uuid: f48948fa-5a55-42e1-879d-929ce1b82064
+  uuid: 386a9f28-306c-44c8-b3ad-ff794f7474fd
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 247367
+- id: 247373
   prefix: '8536249'
   number_min_length: 15
   number_max_length: 15
-  uuid: 73aaa300-4859-425b-ab52-4f52ae4dc33b
+  uuid: 3ae3a396-c587-4211-88bd-c1a085066858
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 247375
+- id: 247381
   prefix: '8536250'
   number_min_length: 15
   number_max_length: 15
-  uuid: 70b8151f-b792-4d9c-b0ef-f0d5fdf1a373
+  uuid: 7f0c90d2-eb52-4378-b83e-a1c2fa7324e9
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247376
+- id: 247382
   prefix: '8536251'
   number_min_length: 15
   number_max_length: 15
-  uuid: af9f9d2c-9a66-4912-885f-04cf202fe494
+  uuid: 6a333054-5b9e-49df-b889-72023ab57a5b
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247377
+- id: 247383
   prefix: '8536252'
   number_min_length: 15
   number_max_length: 15
-  uuid: acba52bb-f84e-4ea3-ab50-4f9fe0a9da49
+  uuid: 8cfe481a-6802-486f-ab47-446e3b988e56
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247378
+- id: 247384
   prefix: '8536253'
   number_min_length: 15
   number_max_length: 15
-  uuid: f12020d7-084d-4ca7-907a-6397d21e90b5
+  uuid: 00fff39e-764c-45b2-a300-9b9887826782
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247379
+- id: 247385
   prefix: '8536254'
   number_min_length: 15
   number_max_length: 15
-  uuid: 57b2f5f5-516c-49e4-8ccb-305b0252742d
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247381
-  prefix: '8536255'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 3542fe6f-0304-446b-a81d-13398f94c529
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247383
-  prefix: '8536256'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: bc09755b-4a15-44fe-b237-e44711ac9049
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247385
-  prefix: '8536257'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: d054b48a-599c-4003-ac7a-0545524e93ae
+  uuid: 8a97e5f8-0148-4df2-b553-fb528c2fa5f8
   country_id: *mo
   network_id: *mo_smartone_mobile
 - id: 247387
-  prefix: '8536258'
+  prefix: '8536255'
   number_min_length: 15
   number_max_length: 15
-  uuid: bef44298-3b31-4ce9-bc1f-3c7b321031a3
+  uuid: 99923876-a338-488e-9765-87c72b0cf3db
   country_id: *mo
   network_id: *mo_smartone_mobile
 - id: 247389
-  prefix: '8536259'
+  prefix: '8536256'
   number_min_length: 15
   number_max_length: 15
-  uuid: e6ca1c71-046e-4ebf-8507-568c3cab888d
+  uuid: b2c6cda5-17bf-4946-8035-1533f64374fa
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247391
+  prefix: '8536257'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 4ef57e01-b1ad-4857-9fdc-536d885dddd4
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247393
+  prefix: '8536258'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 812f6498-d9e6-410a-985f-9c59f3757d07
   country_id: *mo
   network_id: *mo_smartone_mobile
 - id: 247395
+  prefix: '8536259'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 8fe44f9c-f93e-4a65-9d91-614496bf48d9
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247401
   prefix: '8536260'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0b13c073-e452-4b96-aa8b-b2f484472f50
+  uuid: 71c39825-bdb2-47eb-a07f-6af071a72267
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 247397
+- id: 247403
   prefix: '8536261'
   number_min_length: 15
   number_max_length: 15
-  uuid: ec10d145-d2bd-4780-812c-71d82cdd7091
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247399
-  prefix: '8536262'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 59cac025-16ef-41e4-85b9-ca945dc1a826
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247402
-  prefix: '8536263'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 7161ee37-3bcf-479b-8d1d-79daa1cbd230
+  uuid: 7e7199e4-b6a9-402c-87e4-7f356e372ab6
   country_id: *mo
   network_id: *mo_smartone_mobile
 - id: 247405
+  prefix: '8536262'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 61f27d88-3c84-4c50-91a8-e1480cb94f97
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247408
+  prefix: '8536263'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 78d80dce-0bea-45fb-8993-024e910600a0
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247411
   prefix: '8536264'
   number_min_length: 15
   number_max_length: 15
-  uuid: 7b4ff38f-e338-4fe5-8819-7488ad941f2b
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247408
-  prefix: '8536265'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 0509fd98-15e4-4277-97c7-0d998784cdd2
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247411
-  prefix: '8536266'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: bdb88183-cd45-4fa9-81b9-ba9cb46a9f87
+  uuid: e67c95b1-e85f-4d20-a8be-5deaa4e8665f
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247414
+  prefix: '8536265'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 96f726e0-292e-4b5f-aad0-a22c792bf47e
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247417
+  prefix: '8536266'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 84376c04-51df-4c1e-bab8-5b11853407dd
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247420
   prefix: '8536267'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1483d6a6-e9d7-4e76-938e-f9ebf6b3a7c5
+  uuid: df0561cd-9d34-4390-9225-0b458037327c
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247416
+- id: 247422
   prefix: '8536268'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9e329546-f754-4cbc-97bd-c8b57e7d185b
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247417
-  prefix: '8536269'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 00d3908a-800f-456f-a820-c7dec636ca0d
+  uuid: 0f7916b5-b9e4-41a0-a519-f24f0b622f41
   country_id: *mo
   network_id: *mo_smartone_mobile
 - id: 247423
+  prefix: '8536269'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 1734e7e9-0b71-49e6-a3ef-35e054bfa4fd
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247429
   prefix: '8536270'
   number_min_length: 15
   number_max_length: 15
-  uuid: b1c05965-407d-415b-abe0-b798d3ab1efc
+  uuid: 5da8cf48-38da-482b-9c9f-c856fb9ded13
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 247425
+- id: 247431
   prefix: '8536271'
   number_min_length: 15
   number_max_length: 15
-  uuid: 590d8513-07dc-4834-9fe5-a078c11d6b05
+  uuid: b0902f1a-102c-4d29-b15d-a6e6f6d66404
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 247427
+- id: 247433
   prefix: '8536272'
   number_min_length: 15
   number_max_length: 15
-  uuid: 75503d57-c0a8-479e-a7be-c384e5cb79b5
+  uuid: c21b34b9-bdf9-4474-b532-11c64771bfca
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247442
+- id: 247448
   prefix: '853660'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8f7a0bb4-27f5-4404-85d5-edef24452750
+  uuid: 0d5a3a53-1c33-450a-a8ca-0494a6518e1e
   country_id: *mo
   network_id: *mo_mobile
-- id: 247447
+- id: 247453
   prefix: '85366001'
   number_min_length: 16
   number_max_length: 16
-  uuid: 5fb5c70c-c919-4b98-a416-5c866472f340
+  uuid: 2aba8b60-f9ab-4ccc-9adf-b63e60781978
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247453
+- id: 247459
   prefix: '8536601'
   number_min_length: 15
   number_max_length: 15
-  uuid: 569e2198-56f0-42ef-806e-963d99e74653
+  uuid: 8da4ca12-e12e-4f7a-bccf-34b04aa247be
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247454
+- id: 247460
   prefix: '8536602'
   number_min_length: 15
   number_max_length: 15
-  uuid: 62efe0d6-bc94-496e-9c5a-b0ccac9d2e64
+  uuid: b8bd43d7-16fc-46e7-a59e-fcc049fce622
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 247455
+- id: 247461
   prefix: '8536603'
   number_min_length: 15
   number_max_length: 15
-  uuid: e87b73c0-fce4-43f9-945a-ec514891b901
+  uuid: 08f9f0bb-d31f-4a8e-98f9-acba338f6347
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 247456
+- id: 247462
   prefix: '85366046'
   number_min_length: 16
   number_max_length: 16
-  uuid: d257620c-92cb-407d-a0ba-92cc3abd1fa3
+  uuid: a4b401fb-6080-491d-bcb1-cabf6a5b7488
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 247457
+- id: 247463
   prefix: '85366050000'
   number_min_length: 19
   number_max_length: 19
-  uuid: e2cf8b55-5f21-4bc6-9411-c69113b9553b
+  uuid: 59da92a4-6b5e-47fc-a849-3d144109d361
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 247458
+- id: 247464
   prefix: '85366050001'
   number_min_length: 19
   number_max_length: 19
-  uuid: cd8fa298-e117-4863-a39f-2fa5e7eac9ae
+  uuid: 06a6c5ee-7930-4828-b216-8360bb31f02e
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 247459
+- id: 247465
   prefix: '85366050002'
   number_min_length: 19
   number_max_length: 19
-  uuid: d91d5122-294c-4e9b-8127-9c2fa92f180a
+  uuid: 432e8c7a-b92e-4360-9598-3b2205785549
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 247460
+- id: 247466
   prefix: '85366050003'
   number_min_length: 19
   number_max_length: 19
-  uuid: 2137fb72-a696-45ca-8910-548cabd44554
+  uuid: 5fca6852-d365-48c5-87f2-59e5b52dd446
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 247461
+- id: 247467
   prefix: '85366050004'
   number_min_length: 19
   number_max_length: 19
-  uuid: da27a375-34c8-4256-9eef-d62f76dccef3
+  uuid: 78b5e0d4-8ce6-4cd5-a8a2-94bb6f66f6a8
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 247472
+- id: 247478
   prefix: '8536610'
   number_min_length: 15
   number_max_length: 15
-  uuid: 79219feb-adb8-4bde-a541-ffa1fb604f0d
+  uuid: 374f1f3c-bb95-405d-90a6-8cda93471f12
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 247473
+- id: 247479
   prefix: '8536611'
   number_min_length: 15
   number_max_length: 15
-  uuid: 77688687-949b-4b3f-9990-0398ea33eda8
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 247475
-  prefix: '8536612'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 375df449-7872-46d2-995e-b1415226d567
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247476
-  prefix: '8536613'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 0c00b0fe-0741-4214-b005-9db151724ec3
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247477
-  prefix: '8536614'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: fe871ad5-4cdb-429a-8425-33759e815312
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247478
-  prefix: '8536615'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: b404e8d7-c82c-4756-8b6d-d48092b8e0b8
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247479
-  prefix: '8536616'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 525d64b6-6b82-4f36-90e9-9d40b46f8aa0
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 247480
-  prefix: '8536617'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 32953f4e-26c0-4a26-b83a-52beead54db2
+  uuid: be9cf99e-3ad0-4047-be48-fbfbc73fddf4
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 247481
-  prefix: '8536618'
+  prefix: '8536612'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1a58edd1-e46d-4999-a4d7-07324290f8cf
+  uuid: cdefe8dd-cca2-4930-810d-8b4f53ddda80
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247482
+  prefix: '8536613'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: c0094bad-cfd6-4bb8-b134-f758f2e2ce29
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247483
+  prefix: '8536614'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 4996547f-6ef8-40e0-923e-35c48cfcc102
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247484
+  prefix: '8536615'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 2c8b36aa-27b8-4db7-a50d-465aaca66a69
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247485
+  prefix: '8536616'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 203359eb-741b-4d31-985d-949c1cbbc764
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247486
+  prefix: '8536617'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 45f86552-80ff-4b66-9ae0-a305b45010b5
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247487
+  prefix: '8536618'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: d195b3c2-d07a-42a4-ad21-dd9f1519a1bb
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247488
   prefix: '8536619'
   number_min_length: 15
   number_max_length: 15
-  uuid: 380ca4d5-f5fa-49a2-a603-447acf1581ce
+  uuid: 95eb5f14-e221-41f5-9820-0e103a242206
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247489
+- id: 247495
   prefix: '853662'
   number_min_length: 14
   number_max_length: 14
-  uuid: c470e7df-c707-4d66-91d8-9890e441f5e9
+  uuid: 42606d06-7244-4e6b-a07c-9ab15c36e71b
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 247512
+- id: 247518
   prefix: '853663'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0f383e79-e685-4561-855f-41fbac1f0899
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 247547
-  prefix: '8536640'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 64bf2836-f456-415f-8f55-09438a93044c
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247549
-  prefix: '8536641'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 2c1db5c3-65fe-4456-bb12-117afafd6e9a
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 247550
-  prefix: '8536642'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: cb7e326d-96e3-40db-8033-261cb57ab1d3
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 247551
-  prefix: '8536643'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 02b2ed0b-61f1-447e-9c94-c29b406297ad
+  uuid: 437c81fa-126b-48b1-bcfe-44724d632b36
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 247553
-  prefix: '8536644'
+  prefix: '8536640'
   number_min_length: 15
   number_max_length: 15
-  uuid: dfc60ff8-ee68-430b-b3ae-0fe0ddd776a5
+  uuid: ee3319b3-d2f7-453e-a1c6-07c103b40293
   country_id: *mo
-  network_id: *mo_3_mobile
+  network_id: *mo_smartone_mobile
 - id: 247555
-  prefix: '8536645'
+  prefix: '8536641'
   number_min_length: 15
   number_max_length: 15
-  uuid: da3fcf21-f34a-4beb-b9b1-f64052926a35
+  uuid: 4e1a5bc9-aaa3-40bd-92f5-695db088e4d1
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247556
+  prefix: '8536642'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 605f4bd3-7c6a-4a7b-8938-9f7514c2ba32
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 247557
+  prefix: '8536643'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: c9843143-9fc9-492f-9b80-b91989810c0e
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247559
+  prefix: '8536644'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: b67fd270-b19a-4b3c-a646-02cf7d8e4aef
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247561
+  prefix: '8536645'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: fc5d163f-db94-4a09-a208-98c0d774dc24
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247563
   prefix: '8536646'
   number_min_length: 15
   number_max_length: 15
-  uuid: 243e62f1-eee5-4b92-bb6c-74b27b3162ca
+  uuid: 7aa6937e-ae3b-47fa-8895-39aa9a6754b6
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 247558
+- id: 247564
   prefix: '8536647'
   number_min_length: 15
   number_max_length: 15
-  uuid: 83fd3c7f-b383-45cc-a5b9-8817963ec898
+  uuid: 4babf766-8f3d-4f2d-9db8-3f8bd9551d76
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247559
+- id: 247565
   prefix: '8536648'
   number_min_length: 15
   number_max_length: 15
-  uuid: 864aadd2-c34c-4aa0-810d-d9ee4c5d99e6
+  uuid: 9015dffc-2cd5-4dc8-88e2-6bab493a9992
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 247560
+- id: 247566
   prefix: '8536649'
   number_min_length: 15
   number_max_length: 15
-  uuid: d2567985-0e62-4303-87c0-5c7da79eb482
+  uuid: f1765f4e-c585-4b7c-bd5a-286d788cfefb
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 247571
+- id: 247577
   prefix: '8536650'
   number_min_length: 15
   number_max_length: 15
-  uuid: cb06303d-7108-4e96-bda2-a74a83e23fb1
+  uuid: b8715ca7-3463-46b2-a5f5-0c6d8c881a20
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247573
+- id: 247579
   prefix: '8536651'
   number_min_length: 15
   number_max_length: 15
-  uuid: c34c1426-fad4-4ae1-9d24-22631457174c
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247574
-  prefix: '8536652'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 0c3e3518-5680-4085-a3ad-511cd346fc75
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247575
-  prefix: '8536653'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: e8441e7b-ee03-4de6-92fa-fc6ba47ff83b
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247576
-  prefix: '8536654'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: a71ff3e0-2649-4b0c-bf5d-189cf66eaa59
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247577
-  prefix: '8536655'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 44afb684-ac55-481d-8a55-6b023bdf5d0a
+  uuid: 25f4ceeb-66bc-400b-8eb6-e09e183fcb64
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247580
-  prefix: '8536656'
+  prefix: '8536652'
   number_min_length: 15
   number_max_length: 15
-  uuid: 615227bd-3b91-4366-8da8-340aadcf16f6
+  uuid: f0c8cd7f-38a0-4e04-ae92-a403379b93d0
   country_id: *mo
-  network_id: *mo_3_mobile
+  network_id: *mo_ctm_mobile
 - id: 247581
-  prefix: '8536657'
+  prefix: '8536653'
   number_min_length: 15
   number_max_length: 15
-  uuid: 8b4e9b1d-83a9-4172-85b7-e965fee308bb
+  uuid: db7a1bfa-2b97-4067-a6b1-8f2540797bd7
   country_id: *mo
-  network_id: *mo_3_mobile
+  network_id: *mo_ctm_mobile
 - id: 247582
-  prefix: '8536658'
+  prefix: '8536654'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1e10347f-7f32-4c8b-bb4a-752780b9bd0d
+  uuid: 8195261f-cd86-4e22-9e35-321e5ef2dd0d
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247583
+  prefix: '8536655'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 185799a9-83c3-4d1e-9b57-b4d6a7ad3426
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247586
+  prefix: '8536656'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 759a2fa4-90f1-454d-afb7-62d975032611
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247587
+  prefix: '8536657'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: a577d9a2-9cdd-448a-a1ea-aad276e6fb14
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247588
+  prefix: '8536658'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 7a2a4311-a089-46e9-b50b-55c585471d34
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247589
   prefix: '8536659'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6d6f4ee5-c267-4d76-af9c-51b218477911
+  uuid: 120cc41e-d9aa-424b-8996-acb08ddd7cf7
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247592
+- id: 247598
   prefix: '853666'
   number_min_length: 14
   number_max_length: 14
-  uuid: b64ecda6-b6c1-46ad-b26e-d47da7a8be8f
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 247606
-  prefix: '8536670'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 8a9e532e-fb9a-4856-8201-4d150f1ede13
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 247608
-  prefix: '8536671'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: d76156cf-4ab4-417e-81e8-fbe39d4988e7
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 247610
-  prefix: '8536672'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: d8469a2c-f3df-4ef6-8725-3d7a2914d9e9
+  uuid: 4fd79ab9-4214-441c-b808-7f0321c078a1
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247612
-  prefix: '8536673'
+  prefix: '8536670'
   number_min_length: 15
   number_max_length: 15
-  uuid: cc060c2b-dee3-45e7-8bb7-0ea07e272713
+  uuid: 7e0afb4e-0235-44b5-8495-2d1fd594f8d5
   country_id: *mo
-  network_id: *mo_smartone_mobile
+  network_id: *mo_china_telecom_mobile
 - id: 247614
-  prefix: '8536674'
+  prefix: '8536671'
   number_min_length: 15
   number_max_length: 15
-  uuid: e515a910-7663-4895-af25-67fbddd9aeb0
+  uuid: 2c9aafa2-b456-4511-8042-92778a1a8eca
   country_id: *mo
-  network_id: *mo_3_mobile
+  network_id: *mo_china_telecom_mobile
 - id: 247616
-  prefix: '8536675'
+  prefix: '8536672'
   number_min_length: 15
   number_max_length: 15
-  uuid: 32a35079-d435-453f-a3da-100ff70c79df
+  uuid: 624fc1be-81cb-4440-8141-ce761355429b
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 247618
+  prefix: '8536673'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 5d05a27f-c5d7-4d1a-98b8-1ed62fb52101
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 247620
+  prefix: '8536674'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: b141f5ac-b36b-424c-a66a-d8ca15f1713c
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 247622
+  prefix: '8536675'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: a8b03631-27d6-4137-83bc-7d2a9b2f3f03
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 247624
   prefix: '8536676'
   number_min_length: 15
   number_max_length: 15
-  uuid: ba1e30e5-0f76-4907-b59e-75c53027b139
+  uuid: b6e4d37c-d6b9-4da8-bcd1-2a4ce03fff4c
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 247621
+- id: 247627
   prefix: '8536677'
   number_min_length: 15
   number_max_length: 15
-  uuid: e11cd030-1e0b-4fef-bbd2-950ffc912153
+  uuid: d3af2344-11a0-4c9c-bc70-dd758b374882
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 247622
+- id: 247628
   prefix: '8536678'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5eaaea01-8132-47bb-a719-96efbd3e9480
+  uuid: af9460b5-e251-4e94-9082-b20073a943e3
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 247633
+- id: 247639
   prefix: '8536679'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3aa41868-caa2-4b15-a92c-300b94c3cf1f
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250363
-  prefix: '8536273'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 40f11791-02c3-423f-a48e-f04016b1db48
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250365
-  prefix: '8536274'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 868f1d35-01b1-4179-bc13-5ccc2ae77491
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250367
-  prefix: '8536275'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 4d6ce555-d098-40df-9317-f6c0a17af357
+  uuid: 1b54e8ac-9dc5-4735-b82d-011d0b2bfdff
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 250369
+  prefix: '8536273'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 955c0760-d5f6-4c93-b7c3-86b4fc102b72
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250371
+  prefix: '8536274'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: bd3b1bc8-4f46-4378-b0a4-101db2b1b536
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250373
+  prefix: '8536275'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 4d21eec4-e36e-40ed-b53a-1509cafbf00a
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250375
   prefix: '8536276'
   number_min_length: 15
   number_max_length: 15
-  uuid: b86eb900-5e8c-4bc8-ac6c-ee1883d9f961
+  uuid: 4f205d22-51e0-4289-9e3f-b7803f6d27e1
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250371
+- id: 250377
   prefix: '8536277'
   number_min_length: 15
   number_max_length: 15
-  uuid: ef84159b-8bae-4971-90e9-a27580604146
+  uuid: 0d9da1cb-4d9c-4f50-8cd3-4d5b5207d4ef
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250373
+- id: 250379
   prefix: '8536278'
   number_min_length: 15
   number_max_length: 15
-  uuid: dcafc14a-15f6-4441-8b4a-511629c9fd50
+  uuid: c2bc556e-0c84-4290-919c-6c9c869f7023
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250375
+- id: 250381
   prefix: '8536279'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2db136d8-c501-4c56-a359-3c7cb6840ab0
+  uuid: c0bac9d7-cfa2-4100-b1fe-09b685132694
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250380
+- id: 250386
   prefix: '853628'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1e3536bf-0509-44d6-83a3-3509adac7d71
+  uuid: ced0bf58-717b-4b4b-9166-fd74eaf9b939
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250432
+- id: 250438
   prefix: '8536290'
   number_min_length: 15
   number_max_length: 15
-  uuid: a0c94bf3-57d7-4898-9345-eae3f7c01e11
+  uuid: 213dd8c6-bb5d-4b29-8c5e-9beeab204e99
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250444
+- id: 250450
   prefix: '8536291'
   number_min_length: 15
   number_max_length: 15
-  uuid: 31146bf9-ddd6-4e8b-9bf4-aa68f768aa80
+  uuid: c7d75610-6f9d-497e-a686-5fe54a152075
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250446
+- id: 250452
   prefix: '8536292'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9992f79a-a805-4c4e-b971-ffcb995c93c2
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 250448
-  prefix: '8536293'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 4519a79d-ccc7-4923-99fc-2b6a83defa4c
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 250450
-  prefix: '8536294'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 6a7d0491-24db-4e16-a3db-a85e602b178b
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 250452
-  prefix: '8536295'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 444dea9d-989a-498a-a063-9f05ebec0722
+  uuid: 21833f38-163f-42c4-88bb-4ff051b7bc6b
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 250454
+  prefix: '8536293'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 4fd3a7fd-9b86-4a22-8b74-6ae7a3e00417
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 250456
+  prefix: '8536294'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: c6ada747-9c6b-4ed0-9ec0-fec34ff97be8
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 250458
+  prefix: '8536295'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 8cddfb71-d60a-499c-9b91-f6ef7c6e7be0
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 250460
   prefix: '8536296'
   number_min_length: 15
   number_max_length: 15
-  uuid: a77b9eeb-e3db-4269-a79a-6ae21663746d
+  uuid: a6021bd3-1bfa-4498-99e9-39bef8d9a759
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250456
+- id: 250462
   prefix: '8536297'
   number_min_length: 15
   number_max_length: 15
-  uuid: acf7e8b6-66dd-4226-9f61-cdbdc0eaed43
+  uuid: 32b0dca0-7c55-47ab-8fcc-e3ce566dd548
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250458
+- id: 250464
   prefix: '8536298'
   number_min_length: 15
   number_max_length: 15
-  uuid: d55e0a49-01f2-4ff8-b45b-cbf5dddf0c12
+  uuid: 0eca5a65-cbd7-4585-b889-ca5208d24e9d
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250460
+- id: 250466
   prefix: '8536299'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6ebc900c-77ef-4f7b-b5d4-4313c4ba1793
+  uuid: e83db328-0d7b-4a54-8175-aa0b167d5cf0
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250482
+- id: 250488
   prefix: '8536300'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0ff121be-11e3-4e4d-a62a-44ccc3260694
+  uuid: 2c73ff6b-6837-4402-8db2-8db189e806c5
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250485
+- id: 250491
   prefix: '8536301'
   number_min_length: 15
   number_max_length: 15
-  uuid: af544494-32fe-4f5e-a6be-db87b7b108b0
+  uuid: 35296f1b-cc69-45ac-af93-cbf763d1a19a
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250486
+- id: 250492
   prefix: '8536302'
   number_min_length: 15
   number_max_length: 15
-  uuid: 632b36be-fa8f-41ed-a67f-e4856823e417
+  uuid: 4c0cc722-ba8b-4534-a35d-8b2cecb84bc7
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250487
+- id: 250493
   prefix: '8536303'
   number_min_length: 15
   number_max_length: 15
-  uuid: a46714c7-82d1-4e06-8276-7a552d4da342
+  uuid: 5a2c7aa4-8371-4b4d-a73e-cb0417cc4017
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250488
+- id: 250494
   prefix: '8536304'
   number_min_length: 15
   number_max_length: 15
-  uuid: 412885e1-00f3-4a55-af71-cb6006eb2021
+  uuid: b664d513-483e-4b1d-a227-505524a46fe4
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250489
+- id: 250495
   prefix: '8536305'
   number_min_length: 15
   number_max_length: 15
-  uuid: a2702299-731e-4c3d-96d2-aeb2a464e707
+  uuid: aa840bb1-ccb1-4d02-bc31-ab0bf2dee967
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250490
+- id: 250496
   prefix: '8536306'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5036ed3a-2112-4269-9d45-8a58b2d6f98c
+  uuid: 3d61fdfd-ca96-4d1b-a2b7-75c83f4cc9d5
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250491
+- id: 250497
   prefix: '8536307'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0d682275-0f5c-401b-bb00-f107be9daaba
+  uuid: 110b1616-2046-4626-877f-ebe509cc7ab1
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250492
+- id: 250498
   prefix: '8536308'
   number_min_length: 15
   number_max_length: 15
-  uuid: 57722966-2c35-40d6-bf00-b829583c80f2
+  uuid: cd5239fa-fce3-46a4-ac0f-d69a01d3388c
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250493
+- id: 250499
   prefix: '8536309'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1d6be674-07a0-4e51-a2b9-86879db3aee0
+  uuid: d7778a01-a36f-4a9e-8a23-f1dc87da2525
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250498
+- id: 250504
   prefix: '853631'
   number_min_length: 14
   number_max_length: 14
-  uuid: 510fa0f0-7675-4a44-8cab-afd7d03e30c2
+  uuid: 583a3623-d06a-4abd-910d-c06c056628a9
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250529
+- id: 250535
   prefix: '8536320'
   number_min_length: 15
   number_max_length: 15
-  uuid: cf830921-cede-4d38-8a10-9bf550715614
+  uuid: b864e4d9-9e6b-45ef-ab23-af5da14e8495
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250530
+- id: 250536
   prefix: '8536321'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3e5b907a-0830-435d-acd2-ef2f26674a17
+  uuid: fab5522c-4898-4896-b50a-530eb27eceb3
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250531
+- id: 250537
   prefix: '8536322'
   number_min_length: 15
   number_max_length: 15
-  uuid: f18303a7-7a01-4d02-af97-db040744da25
+  uuid: fa235a03-3deb-4109-aeaf-ad06f6b7cf64
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250532
+- id: 250538
   prefix: '8536323'
   number_min_length: 15
   number_max_length: 15
-  uuid: 734df824-507c-4f59-9a33-87ba8fdf9428
+  uuid: a95a5902-1a37-4e26-bcca-f9ae7ae9bcf4
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250533
+- id: 250539
   prefix: '8536324'
   number_min_length: 15
   number_max_length: 15
-  uuid: 29a49a76-0096-4cfe-a4d2-bc6bc8432a02
+  uuid: 6dfa1b06-a060-441c-9926-1f515dc38a70
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250534
+- id: 250540
   prefix: '8536325'
   number_min_length: 15
   number_max_length: 15
-  uuid: 686112d3-0dfb-48c5-9a59-27dfc317c2ee
+  uuid: 4d9916eb-65d9-44d0-9d41-31bcbee710b2
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250535
+- id: 250541
   prefix: '8536326'
   number_min_length: 15
   number_max_length: 15
-  uuid: d62c515f-0ecc-4816-ad77-661d9d3df1a3
+  uuid: 62db4821-7e94-4528-a27d-3221808afca3
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250536
+- id: 250542
   prefix: '8536327'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9b80c936-478f-48c2-80ec-5581e882a29d
+  uuid: 09810bb1-8250-45ea-9bf2-142d02fce282
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250537
+- id: 250543
   prefix: '8536328'
   number_min_length: 15
   number_max_length: 15
-  uuid: f46c9aef-e816-4513-baf0-482b3b5b0e7e
+  uuid: c16c49c7-86bd-45af-93d2-32f94124cef6
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250538
+- id: 250544
   prefix: '8536329'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2ebc3420-0ed0-45cb-a148-5cdf56593a09
+  uuid: a9d3d794-8335-45c5-8b00-217d2bccdb12
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250545
+- id: 250551
   prefix: '8536330'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3482bcd7-3696-4907-9702-c08e26b11dbc
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250546
-  prefix: '8536331'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 94266a32-0709-40f5-b1b1-b4f414e376d1
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250547
-  prefix: '8536332'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 1bdcc1ef-60f9-43b7-96bf-acd619c25844
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250549
-  prefix: '8536333'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: b4db8a9f-e499-4da8-928c-c4109f048fdf
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250550
-  prefix: '8536334'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 8033a06c-94da-4367-9db4-1cd76604c63f
+  uuid: 187b8d2c-fc4c-466b-b163-4dd27047d0b3
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 250552
+  prefix: '8536331'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 7780aa8c-b0e7-463e-a5fb-77a804eacebb
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250553
+  prefix: '8536332'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 84e9839c-4be3-47d3-a091-bec01b03fafb
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250555
+  prefix: '8536333'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 953d77bb-93da-430e-99a8-8f6a1a644df6
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250556
+  prefix: '8536334'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 8f46ea8d-3ead-46a7-ad12-1d16e02288ab
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250558
   prefix: '8536335'
   number_min_length: 15
   number_max_length: 15
-  uuid: cb7f95ee-79ce-4791-80b8-96d31bc4eb33
+  uuid: 8682a958-9388-41c2-b231-1501159abfbb
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250554
+- id: 250560
   prefix: '8536336'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2fd82a51-7012-4c87-bd44-5b0ec36cf326
+  uuid: 6ffb8e9c-e434-4fd8-afd0-b3f8c56c6aaf
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250556
+- id: 250562
   prefix: '8536337'
   number_min_length: 15
   number_max_length: 15
-  uuid: d2ee1492-b248-4af8-aca1-6367ee910845
+  uuid: d597bf98-2389-40ed-803e-95c6ccfe49b2
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250557
+- id: 250563
   prefix: '8536338'
   number_min_length: 15
   number_max_length: 15
-  uuid: 317e63dd-bac7-4c6c-b5a5-a2dd6e6d3f0f
+  uuid: 30b47e49-2377-4094-a94e-ab31d7fc0ae2
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250558
+- id: 250564
   prefix: '8536339'
   number_min_length: 15
   number_max_length: 15
-  uuid: 780b8f9c-9ede-42ee-ae70-ca6229d8591f
+  uuid: 754f4c10-f43c-4c71-b340-6113bed37dd8
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250566
+- id: 250572
   prefix: '8536340'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3ef6df49-ba67-4dca-952e-14786f9a0575
+  uuid: 23a7ed17-5f5b-4524-ba7d-fb0f741c93df
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250570
+- id: 250576
   prefix: '8536341'
   number_min_length: 15
   number_max_length: 15
-  uuid: ddac2724-c9e6-408c-93ec-f4f3596d0255
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 250572
-  prefix: '8536342'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: c8de8eda-eac4-4b3a-a08d-a7d183982c12
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 250575
-  prefix: '8536343'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 1c959afd-1aa1-415f-8c83-b1910f72024c
+  uuid: c3edd22a-733c-47a9-a33f-d6ff9e09eb4e
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 - id: 250578
+  prefix: '8536342'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 25440215-af99-4f29-8376-3ee770e1aa4f
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 250581
+  prefix: '8536343'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: aefdd2e0-f084-4bc7-b079-25fe5b319cf1
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 250584
   prefix: '8536344'
   number_min_length: 15
   number_max_length: 15
-  uuid: 7d23c89c-1632-434e-b89d-fd25293a5a5f
+  uuid: 899ac148-8578-4f1b-bca5-09435adb385e
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250582
+- id: 250588
   prefix: '8536345'
   number_min_length: 15
   number_max_length: 15
-  uuid: cef5b981-06c7-4f7e-a351-7d0278f1f6d1
+  uuid: 69e9b65c-58f6-45a4-8d4f-a38a3ba751fc
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250585
+- id: 250591
   prefix: '8536346'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3720cb9b-58b3-457b-beff-bf0f3850c6d4
+  uuid: 77ad9c7a-4de7-40db-9514-78b5b2098743
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250587
+- id: 250593
   prefix: '8536347'
   number_min_length: 15
   number_max_length: 15
-  uuid: a85ccc44-84d8-43b8-9490-835fed0f8395
+  uuid: a704cc12-22fe-4b2f-83ee-382a8714bdea
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250589
+- id: 250595
   prefix: '8536348'
   number_min_length: 15
   number_max_length: 15
-  uuid: 98346a44-f2cd-4c7c-bae4-609dcdbf023d
+  uuid: b698c7ff-747d-4e21-b559-c6b54734a6df
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250590
+- id: 250596
   prefix: '8536349'
   number_min_length: 15
   number_max_length: 15
-  uuid: da2a8048-ddcb-4d54-b04f-3ca95cb0735a
+  uuid: 2572b2d9-45f6-488d-ab15-6a3570daf0f2
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250604
+- id: 250610
   prefix: '853635'
   number_min_length: 14
   number_max_length: 14
-  uuid: d28e2773-3424-4f2a-9a0f-4125a7e47c60
+  uuid: df914b51-b322-4309-9fa0-c302f7cda9f7
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250631
+- id: 250637
   prefix: '853636'
   number_min_length: 14
   number_max_length: 14
-  uuid: 065618d7-fe5e-431f-acb5-88a9a1961e94
+  uuid: b8224db7-6e96-44eb-a23d-5ff13b2eb664
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 250655
+- id: 250661
   prefix: '8536370'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0080534f-dcd9-432b-b427-0c04d138063b
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 250656
-  prefix: '8536371'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 52ed8c79-9cc6-451d-8449-463bd25e4f06
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 250657
-  prefix: '8536372'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: c2803a0a-c709-4e19-bfef-cdf480c49c56
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 250658
-  prefix: '8536373'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 47a4e9ac-d96e-4262-97e2-6efb7cce53e0
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 250660
-  prefix: '8536374'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: b9678885-8696-47a3-9650-e4fe92f08737
+  uuid: 05522328-4229-44c3-b13e-398ec35c1a0e
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 - id: 250662
-  prefix: '8536375'
+  prefix: '8536371'
   number_min_length: 15
   number_max_length: 15
-  uuid: 20fc5f0f-0c35-4ef4-b3af-308e211282ca
+  uuid: a416ecb2-e45e-4e5b-92e4-5270e5c2fa6f
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 250663
+  prefix: '8536372'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 9531b26a-c2ca-4ae7-8c26-02f1f9ac83fd
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 - id: 250664
-  prefix: '8536376'
+  prefix: '8536373'
   number_min_length: 15
   number_max_length: 15
-  uuid: d6bcb2e0-e029-4591-8549-7c3494d55bcd
+  uuid: 5ba2fec6-183f-432a-8b5c-3bc831eaea8f
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 - id: 250666
+  prefix: '8536374'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 230a30cc-b434-48b1-8f26-26db12916301
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 250668
+  prefix: '8536375'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: eb9f5f44-9d36-4fb9-ae06-6897fe6e4c9c
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 250670
+  prefix: '8536376'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 66ca0a9a-6734-45d8-aa47-6b8b9d637e67
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 250672
   prefix: '8536377'
   number_min_length: 15
   number_max_length: 15
-  uuid: 68374e07-5018-47b5-8d27-4e1017ddf605
+  uuid: 3c40a0e1-ede5-492c-9031-2bd5538266bc
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250667
+- id: 250673
   prefix: '8536378'
   number_min_length: 15
   number_max_length: 15
-  uuid: 61bc3ea6-6768-4763-891c-6ee68c735f89
+  uuid: 2d5774e1-1d65-4015-8014-701fff47b671
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250669
+- id: 250675
   prefix: '8536379'
   number_min_length: 15
   number_max_length: 15
-  uuid: a80a7b3d-b1c8-4bc0-8b82-2f4117581862
+  uuid: db48d9b3-a71c-453a-a2b4-457f7b0f7a81
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250676
+- id: 250682
   prefix: '8536380'
   number_min_length: 15
   number_max_length: 15
-  uuid: 77a186c6-12d5-42e9-9971-11ad5ba1e71d
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 250686
-  prefix: '8536381'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 18c9b019-7306-4f19-b041-cc5c348b7ef0
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 250688
-  prefix: '8536382'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 4b8e9160-cf05-4c47-8d3d-114505969f2c
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 250690
-  prefix: '8536383'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 04e93b87-984d-4dfd-907c-54041bb13b8b
+  uuid: 09ca52d5-c38b-4921-8410-dd39ff62e173
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 250692
-  prefix: '8536384'
+  prefix: '8536381'
   number_min_length: 15
   number_max_length: 15
-  uuid: 95192d50-b819-46fb-b168-0f3b106e64c6
+  uuid: 498899ed-1072-4a60-b909-843ce82d43e8
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 250694
-  prefix: '8536385'
+  prefix: '8536382'
   number_min_length: 15
   number_max_length: 15
-  uuid: 689b6eba-3fcb-42d0-9df8-e82df26d3ce9
+  uuid: e1010d82-9abf-46a7-9656-123d85b3b2d5
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 250696
+  prefix: '8536383'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 938b804d-fffc-407b-b2b3-d4aab5b1c7b1
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 250698
+  prefix: '8536384'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: ce6c4089-ef7b-4e47-930f-743a876aa798
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 250700
+  prefix: '8536385'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 6039baca-b68d-444a-978b-6be40297eb63
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 250702
   prefix: '8536386'
   number_min_length: 15
   number_max_length: 15
-  uuid: 56d93916-d8d9-4725-b850-691df0428ed7
+  uuid: 0696c8dd-d3ad-42fc-8631-77bd1c8edc04
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250698
+- id: 250704
   prefix: '8536387'
   number_min_length: 15
   number_max_length: 15
-  uuid: aaeefe5c-df0d-4429-8b19-b47a05e96617
+  uuid: eae2d706-442b-42c1-b9c7-0fd29297168e
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250700
+- id: 250706
   prefix: '8536388'
   number_min_length: 15
   number_max_length: 15
-  uuid: feb9fa06-fe72-450d-8ff1-0be640c83178
+  uuid: 4960f578-8231-46ae-b67c-a6198239fe20
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250702
+- id: 250708
   prefix: '8536389'
   number_min_length: 15
   number_max_length: 15
-  uuid: 23d6daf0-b4ef-4e5c-bdcc-590f84f0590e
+  uuid: 87f5edb0-2b25-4547-bed2-5125baf044d6
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250711
+- id: 250717
   prefix: '8536390'
   number_min_length: 15
   number_max_length: 15
-  uuid: 34dddbe3-1eda-4f89-baa2-263afd36896d
+  uuid: 358caf49-a4e0-4215-b628-3bd101e4c1bb
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250721
+- id: 250727
   prefix: '8536391'
   number_min_length: 15
   number_max_length: 15
-  uuid: a45beef8-d0f2-4b6d-b4a4-02d24f1fbac5
+  uuid: 23fa914f-bbdb-4ce3-8ae1-c3cd3d1435ee
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 250726
+- id: 250732
   prefix: '8536392'
   number_min_length: 15
   number_max_length: 15
-  uuid: ae2afa8a-c5a5-4e0c-a622-a9e9e2bf04c2
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250776
-  prefix: '8536393'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 970ca600-4fce-47e2-baa6-dfbb1de1702f
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 250780
-  prefix: '8536394'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 80c5b418-4609-4c3f-8aaf-d6a6aeb0c365
+  uuid: 3d652b62-3f1a-4844-8de2-1437b1f5e513
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 250782
+  prefix: '8536393'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: bda767b9-84c9-4f9b-b47a-0ac6894bc1fc
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250786
+  prefix: '8536394'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 5db6c002-7e82-42c9-bfc5-f4014ade875a
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 250788
   prefix: '8536395'
   number_min_length: 15
   number_max_length: 15
-  uuid: dbcc4f70-38c7-4957-a1d7-36001f8912c6
+  uuid: 6ce48483-fd42-4f04-9eea-d5078f5b7687
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250789
+- id: 250795
   prefix: '8536396'
   number_min_length: 15
   number_max_length: 15
-  uuid: b5e12c87-2ba9-42ef-9e16-2b45e63d4be5
+  uuid: 7efe8414-1980-4719-96fd-a66518ffc84b
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250801
+- id: 250807
   prefix: '8536397'
   number_min_length: 15
   number_max_length: 15
-  uuid: ea517931-96b5-4164-a76b-ecec6ccba87d
+  uuid: 2f6d22a6-9fb2-466d-8831-fef7fe2a70f7
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 250812
+- id: 250818
   prefix: '8536398'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2fd6b4fd-c0de-4f57-b2e5-c5997068d416
+  uuid: 4eb781a1-1d23-4d6b-a432-a835ca0836ed
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 250813
+- id: 250819
   prefix: '8536399'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6554050d-ae5d-496a-95d9-63ce0eac877a
+  uuid: 3dd80e6b-bb85-421e-ae86-c02a221d35c6
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 251059
+- id: 251065
   prefix: '8536500'
   number_min_length: 15
   number_max_length: 15
-  uuid: dca6df7b-56e8-4403-8fe8-7508207b415f
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251063
-  prefix: '8536501'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 1e20a885-0e6b-48dd-b859-408d7e1da366
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251064
-  prefix: '8536502'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: c70d104e-7bcf-438b-94f0-707930e1d7f8
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251067
-  prefix: '8536503'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: fd958379-d96d-4953-81c2-965926ec037c
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251068
-  prefix: '8536504'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: cb878fe4-0231-4481-aac4-8b4e1ddf8466
+  uuid: 54a330d8-c81e-4416-a0a9-82ecbb7be905
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 251069
+  prefix: '8536501'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: ac25a45d-34af-4630-8baa-45e2f5d7f7fc
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251070
+  prefix: '8536502'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 54f96b64-fd72-4e6b-9f1f-ab6fce5fdcf7
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251073
+  prefix: '8536503'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 97d79d90-0e5f-4654-bead-e80a4b68316d
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251074
+  prefix: '8536504'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 58fd17f6-5602-49aa-a9e0-71d623391bc9
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251075
   prefix: '8536505'
   number_min_length: 15
   number_max_length: 15
-  uuid: 147dad7e-54f2-448c-9a21-3665558c3ee8
+  uuid: d7911960-5032-4704-937b-b8a275ccbef2
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251070
+- id: 251076
   prefix: '8536506'
   number_min_length: 15
   number_max_length: 15
-  uuid: 35d8af00-4d46-4da6-9098-09eaa8ce9176
+  uuid: 74b93525-8216-41b3-9679-b2fc7c06792e
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251071
+- id: 251077
   prefix: '8536507'
   number_min_length: 15
   number_max_length: 15
-  uuid: b9c42e04-d42d-4d4d-8b49-2ebf5cf6f858
+  uuid: 9a7d4482-5252-4bd9-af10-2ac52ce6ef25
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251072
+- id: 251078
   prefix: '8536508'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5676e250-15e7-4443-9342-f00780f9b055
+  uuid: d70f7716-2348-43d0-96ad-51b4bdcba557
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251074
+- id: 251080
   prefix: '8536509'
   number_min_length: 15
   number_max_length: 15
-  uuid: 313485e6-e605-4b6b-9f75-ec85d80595d7
+  uuid: e4d9b89b-5b6d-48c1-a850-7c593bb2b61f
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251090
+- id: 251096
   prefix: '8536515'
   number_min_length: 15
   number_max_length: 15
-  uuid: 10abf40b-5d2f-4b6e-9261-d7922864953b
+  uuid: edb6f8e9-a77b-49db-a42b-659d35a27d3b
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251091
+- id: 251097
   prefix: '8536516'
   number_min_length: 15
   number_max_length: 15
-  uuid: cde2ee69-d829-4358-8e6c-bfdb15d51a9e
+  uuid: 21241cff-caeb-41d0-9bde-be884c2cdc5f
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251092
+- id: 251098
   prefix: '8536517'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5a1fb0a2-e2dc-4acf-b7ac-d29c30cef5e0
+  uuid: 95000b99-02fb-4ec7-b0d5-e3f48044bd2b
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251093
+- id: 251099
   prefix: '8536518'
   number_min_length: 15
   number_max_length: 15
-  uuid: 382fbc01-7ce0-48ab-9af2-d1f3d122f353
+  uuid: 64728685-7f82-43e0-b784-a610e66750ca
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251094
+- id: 251100
   prefix: '8536519'
   number_min_length: 15
   number_max_length: 15
-  uuid: a51481d2-f905-4b11-ab19-c39d00520a88
+  uuid: fefddbdc-557c-44ef-9280-d4a3e6eb5395
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251104
+- id: 251110
   prefix: '8536520'
   number_min_length: 15
   number_max_length: 15
-  uuid: df66a205-e62c-4142-8ea5-fade19fd37b9
+  uuid: 0fc9e880-acb4-4665-902d-b7d2fa1ba94c
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251106
+- id: 251112
   prefix: '8536521'
   number_min_length: 15
   number_max_length: 15
-  uuid: f76b751c-72c6-4a20-aa8f-603e3ed1d5cc
+  uuid: b82dfcd4-a2a3-4bc4-be4b-3cb3cd983ade
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251107
+- id: 251113
   prefix: '8536522'
   number_min_length: 15
   number_max_length: 15
-  uuid: a7a73d74-47fe-4b06-9051-facdde1c1f0d
+  uuid: 40361cb4-b03d-49a3-8b17-034014ae388a
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251110
+- id: 251116
   prefix: '8536523'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9172ba92-00f2-40f2-949e-9f17586f4cb4
+  uuid: 99335c16-d956-4e5a-b57d-5e0f99fead26
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251111
+- id: 251117
   prefix: '8536524'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1392a367-4bc2-468b-a80c-661775d2e78e
+  uuid: 579711ff-e5ea-4886-8c16-69069fb614d8
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251112
+- id: 251118
   prefix: '8536525'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4d19f4f5-739a-49af-b27a-b856861072a6
+  uuid: 1d456d80-1c91-4ae1-b4ab-e0b70e98826f
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251113
+- id: 251119
   prefix: '8536526'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4dc222c9-113c-4d78-9b21-683b5056b0e8
+  uuid: 0f26c89b-0854-47f4-8c63-5e13ff9327cd
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251114
+- id: 251120
   prefix: '8536527'
   number_min_length: 15
   number_max_length: 15
-  uuid: dc5140d0-c1ef-469e-a75e-9eeb03930cd7
+  uuid: 8acbfde0-90ce-4f67-a01c-8dfae3c82189
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251116
+- id: 251122
   prefix: '8536528'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3162260a-d9c0-48de-adb1-a656ccd3827f
+  uuid: 7b2d1cb0-db0d-48d0-a332-bd290130473a
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251117
+- id: 251123
   prefix: '8536529'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4b7e2a8d-4a4a-4f12-8fc5-d214ec21843b
+  uuid: a5e7553b-8e66-4818-9075-e868a7e449ee
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251127
+- id: 251133
   prefix: '8536530'
   number_min_length: 15
   number_max_length: 15
-  uuid: 81a730f9-c66e-4fac-9b39-20170e718719
+  uuid: ce5c0a8f-2917-4448-9b06-461afc39a373
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251130
+- id: 251136
   prefix: '8536531'
   number_min_length: 15
   number_max_length: 15
-  uuid: 71c4f955-f5fd-412c-b635-b2402b1b86ad
+  uuid: 9f073249-26bd-402b-be8b-601246ed7b4f
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251132
+- id: 251138
   prefix: '8536532'
   number_min_length: 15
   number_max_length: 15
-  uuid: 500fc9fd-6365-4ef9-8c6f-3962622ec135
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251134
-  prefix: '8536533'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 43628fde-b225-4dd6-9a34-cf261525e208
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251136
-  prefix: '8536534'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 0c54090b-97e2-438b-a8a8-d42f508582bd
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251138
-  prefix: '8536535'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 35fba126-8d82-4f68-a547-8a9516ec7834
+  uuid: 4cbc8d44-a32d-490e-9c98-2173e9105f4c
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 251140
+  prefix: '8536533'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: eb9591bf-1759-4419-b6a3-871e90cd234c
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251142
+  prefix: '8536534'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: a01e3f26-be6d-43b0-af2f-1603020f73eb
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251144
+  prefix: '8536535'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: f7e6f111-428c-4977-add1-a7d451a0e37e
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251146
   prefix: '8536536'
   number_min_length: 15
   number_max_length: 15
-  uuid: c6e6c8c9-e28f-4af6-905c-21785bfbf2c9
+  uuid: 7f0e7daa-657f-42fa-bbc3-55dbf9a87615
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251142
+- id: 251148
   prefix: '8536537'
   number_min_length: 15
   number_max_length: 15
-  uuid: 500488a1-d14f-4171-9c78-2e5c2a8487aa
+  uuid: c09bff19-a4a3-4338-923e-57eb56fe0fec
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251144
+- id: 251150
   prefix: '8536538'
   number_min_length: 15
   number_max_length: 15
-  uuid: a7565a27-831b-4dc7-be02-11cd06799f66
+  uuid: 34c39815-e7ed-4760-8afd-293d496fae5c
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251146
+- id: 251152
   prefix: '8536539'
   number_min_length: 15
   number_max_length: 15
-  uuid: 915e0687-1a93-4eca-ab68-564bccdb627d
+  uuid: efe2065b-f5af-40bf-bf51-98cb09fee31e
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251157
+- id: 251163
   prefix: '8536540'
   number_min_length: 15
   number_max_length: 15
-  uuid: c16b4f9b-5ee6-4192-975f-21e1151adaed
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251159
-  prefix: '8536541'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 5aab5aa3-5042-4d4c-9be4-0277a4e26670
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251160
-  prefix: '85365420'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 45232027-05b1-4034-9717-4aaec7ad0e81
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251161
-  prefix: '85365421'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 8c017201-5a00-4287-9da8-8d0963478fbf
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251162
-  prefix: '85365422'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 93235a90-56b1-47f2-ae31-9037dae86ede
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251163
-  prefix: '85365423'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 28713b2d-4e20-48cf-adce-4d4872400ac4
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251164
-  prefix: '85365424'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 4f5bc69b-e666-4700-b6a6-41747861e050
+  uuid: 519302a6-4416-44dd-a95d-128a4e8d48e0
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 251165
+  prefix: '8536541'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 71ecc231-83eb-4d9f-9a5e-9c1ef712ec21
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251166
+  prefix: '85365420'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 69690301-2d7f-42c6-b647-c74787eac2c1
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251167
+  prefix: '85365421'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 4df23d90-0303-4615-bacb-35e61b11fff7
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251168
+  prefix: '85365422'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: d427f26e-b887-4f6d-8ff5-0c37f1611bbe
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251169
+  prefix: '85365423'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 4c220f23-cb08-4c83-b499-dd87524f485d
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251170
+  prefix: '85365424'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 366e4b63-69f3-4729-ac27-9646dadea093
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251171
   prefix: '85365425'
   number_min_length: 16
   number_max_length: 16
-  uuid: f6abe510-1ca3-4886-8613-e28b5191ad46
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 251166
-  prefix: '85365426'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 8a471b6f-f7cd-4be1-8036-09b135b55c55
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 251167
-  prefix: '85365427'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 830b2a6f-95cb-4474-92ff-48885cd0fa0b
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 251168
-  prefix: '85365428'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: ba0feccd-8029-4a86-b4c7-642a74fc3ff0
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 251169
-  prefix: '85365429'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: ee37287e-5d40-4a72-be10-c88577dacc20
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 251170
-  prefix: '8536543'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 6b451814-aeb2-4521-99e7-45c03d915951
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 251171
-  prefix: '8536544'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: e7d46475-9972-403a-95de-6a953be914fb
+  uuid: 888f2e7b-8cdb-4e37-b1fc-e0394a7d851b
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 - id: 251172
+  prefix: '85365426'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 95d39b4d-51af-40ee-85f6-c25a0417a491
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 251173
+  prefix: '85365427'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 81c1ea14-d419-4e11-b390-48310be8177c
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 251174
+  prefix: '85365428'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 0b1fc5b9-a01a-41af-b1eb-4fb263e0d0c0
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 251175
+  prefix: '85365429'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 4445dfe8-7f8b-4bf5-8bab-820fd1a1feb2
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 251176
+  prefix: '8536543'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: fbdc09ce-f831-47b9-86a7-8f1e7f946ca0
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 251177
+  prefix: '8536544'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: fc24b8a1-9b1d-489d-b468-172821241ee5
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 251178
   prefix: '8536545'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5eef2e0e-d215-47f9-937f-09a80bb21376
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251173
-  prefix: '8536546'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 862b8d2e-7c2b-4aeb-99cc-d560a9ea8094
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251174
-  prefix: '85365470'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: f02cae4c-d18d-4b88-8132-2c6b27d7ec4e
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251175
-  prefix: '85365471'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 86001e7e-1280-4a8f-a2cd-3d088bacc7d7
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251176
-  prefix: '85365472'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 4cc7956f-5166-4a7a-bba7-ee6815e79299
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251177
-  prefix: '85365473'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: f37b521e-3cc0-47ba-b552-4940cf41bd1a
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251178
-  prefix: '85365474'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 71a6afbc-1ece-4e4a-abde-79d0b9d29ba5
+  uuid: bbb4b09d-1c52-496e-8939-fd455e50cbb2
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 251179
+  prefix: '8536546'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 6fe9c2f6-c4a4-4a12-b126-ac3794bbc518
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251180
+  prefix: '85365470'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 6732f596-6760-4760-8df7-be614ab17946
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251181
+  prefix: '85365471'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: a1a0b70e-f543-48b6-aa46-a4dc776122b1
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251182
+  prefix: '85365472'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 080b86a0-ae9d-4f02-9b93-de0c616a7a7f
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251183
+  prefix: '85365473'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 033ee0a3-b50c-44c0-b077-f64333f716ba
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251184
+  prefix: '85365474'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 48696510-e240-40bb-a955-749efeb3debf
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251185
   prefix: '85365475'
   number_min_length: 16
   number_max_length: 16
-  uuid: 4a9c9e1c-009d-4cd0-96bd-66ad52609375
+  uuid: c023297a-294b-4e4d-9bc3-4f44a4a3acf7
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 251180
+- id: 251186
   prefix: '85365476'
   number_min_length: 16
   number_max_length: 16
-  uuid: d50bb2ae-4f52-4206-aa4f-5442140ff905
+  uuid: ddfae8be-5b53-4b8e-a103-4e0116193800
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 251181
+- id: 251187
   prefix: '85365477'
   number_min_length: 16
   number_max_length: 16
-  uuid: 7ccffa53-d228-471d-88a0-5f3f0507b304
+  uuid: b21ede49-6ce7-4b1d-98ec-17f7ad9ca5bb
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 251182
+- id: 251188
   prefix: '85365478'
   number_min_length: 16
   number_max_length: 16
-  uuid: 915f549b-4c7b-42b9-8545-501857ee8e71
+  uuid: 0be48dd3-9eac-4405-804e-6316095e9b61
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 251183
+- id: 251189
   prefix: '85365479'
   number_min_length: 16
   number_max_length: 16
-  uuid: c06260a0-4635-4b2e-8d61-367b144338a0
+  uuid: d6f9590f-a572-4509-b1f6-3dd05aff5eb0
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 251184
+- id: 251190
   prefix: '8536548'
   number_min_length: 15
   number_max_length: 15
-  uuid: 55b716e9-c097-429e-ad86-89bf7bcb272c
+  uuid: 06e304d2-5812-470b-b822-8d73c331c3ab
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 251185
+- id: 251191
   prefix: '8536549'
   number_min_length: 15
   number_max_length: 15
-  uuid: 044acfaf-78f5-449f-be86-acb1af3117dc
+  uuid: db61c6d9-8366-419c-b0ae-bab7e42a2a64
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 251197
+- id: 251203
   prefix: '8536550'
   number_min_length: 15
   number_max_length: 15
-  uuid: e6c4f14f-2727-420e-94f5-919dd5cf244f
+  uuid: dfcfe560-4080-41f4-a970-5f0a5d380b9e
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251199
+- id: 251205
   prefix: '8536551'
   number_min_length: 15
   number_max_length: 15
-  uuid: 921fa652-0de7-44db-a47a-db58027e71fb
+  uuid: 9eb6c4e2-bb37-4698-b86d-e0c4159073f3
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251200
+- id: 251206
   prefix: '8536552'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1b03eb40-bb3c-4c2c-98da-4752438b6313
+  uuid: 9ed4b729-3043-4ff3-87f3-93fcf20c1840
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251201
+- id: 251207
   prefix: '8536553'
   number_min_length: 15
   number_max_length: 15
-  uuid: 41f339a5-acfb-488b-9cd9-1a86c49fc447
+  uuid: b5459682-25cf-42e2-b6a9-30acbeb7344f
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251202
+- id: 251208
   prefix: '8536554'
   number_min_length: 15
   number_max_length: 15
-  uuid: f2541deb-9107-4992-a48c-092009fb2da4
+  uuid: 3b733379-450f-445e-95cb-ce974c032119
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251203
+- id: 251209
   prefix: '8536555'
   number_min_length: 15
   number_max_length: 15
-  uuid: b8d7abd6-b3ea-454a-8fdb-477f43d751d1
+  uuid: 560fa36c-2a21-43f9-95eb-bd57b2019db0
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251204
+- id: 251210
   prefix: '8536556'
   number_min_length: 15
   number_max_length: 15
-  uuid: f2bfb46b-3ce1-4f96-ab75-0435c2bd9c9a
+  uuid: 04542781-2130-4e47-b126-9664affc0501
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251205
+- id: 251211
   prefix: '8536557'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4806d79c-92d3-4f32-848e-5d13ca7b9f10
+  uuid: 9cc8335b-c598-4cbd-b2b7-a8dff4aae22d
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251206
+- id: 251212
   prefix: '8536558'
   number_min_length: 15
   number_max_length: 15
-  uuid: 58635802-3fdb-4b23-8916-6adf903f6c3c
+  uuid: d5b65a23-fcc4-4602-b2ed-6cc6ffc718c2
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251207
+- id: 251213
   prefix: '8536559'
   number_min_length: 15
   number_max_length: 15
-  uuid: d3e326e4-9aa7-4219-b10e-9c7947601a10
+  uuid: 3749aca3-c1c6-4e73-b102-1ce2ec5fc578
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251215
+- id: 251221
   prefix: '853656'
   number_min_length: 14
   number_max_length: 14
-  uuid: 420a05dc-6115-418b-a6a0-f4e30ca2e23b
+  uuid: 8d9e038c-b365-4a29-81a6-ab1a7a8f24de
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251242
+- id: 251248
   prefix: '8536570'
   number_min_length: 15
   number_max_length: 15
-  uuid: e694e01f-306d-4bd3-a145-e1aeb3ea8b25
+  uuid: cdcecf64-c927-4236-a7fe-a624a6954bb5
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251271
+- id: 251277
   prefix: '8536571'
   number_min_length: 15
   number_max_length: 15
-  uuid: 61738744-613d-4762-893e-feac2e69e1c5
+  uuid: 97f8f010-dc4f-488f-b1a4-88c5fabb8efd
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251284
+- id: 251290
   prefix: '8536572'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2d821976-4cd2-405e-b7c5-d5d6e927ec13
+  uuid: 35c8ac00-20b4-435b-877e-4b99ea6842ff
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251286
+- id: 251292
   prefix: '8536573'
   number_min_length: 15
   number_max_length: 15
-  uuid: 41456ffe-161b-4146-843f-7f4ad69c8cfa
+  uuid: b9a4d995-b725-4b10-b412-275d70106cc1
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251288
+- id: 251294
   prefix: '8536574'
   number_min_length: 15
   number_max_length: 15
-  uuid: cf22a6fb-c208-479e-a8d3-b24ff5cf31c9
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251290
-  prefix: '8536575'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 1f028bc8-94f7-4a63-8d14-dc05c68a7f11
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251292
-  prefix: '8536576'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: fa68bcea-2832-4927-9638-cc96344f4fc9
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 251294
-  prefix: '8536577'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: c3fb85fb-3db2-4ef8-873e-68479478408e
+  uuid: 6639bdd2-4ab3-46ee-9839-577d36809b78
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 251296
+  prefix: '8536575'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 668a2ec7-356a-4276-9682-e62b75ba2346
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251298
+  prefix: '8536576'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: dc0b5cd1-e642-4ae8-bd49-11a407bf509c
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251300
+  prefix: '8536577'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: b3b4e296-1919-487d-9ccd-c76ec53ede33
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 251302
   prefix: '8536578'
   number_min_length: 15
   number_max_length: 15
-  uuid: e3c34903-d790-4f42-a4a3-744a7b5df894
+  uuid: 721e5f08-765a-400f-a019-704f2fe725ca
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 251297
+- id: 251303
   prefix: '8536579'
   number_min_length: 15
   number_max_length: 15
-  uuid: f8782cf0-691e-45ec-9906-95b7dda2e7e0
+  uuid: 8a63c7f0-6191-4691-b3e3-9fd0fb98c953
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 251314
+- id: 251320
   prefix: '8536580'
   number_min_length: 15
   number_max_length: 15
-  uuid: 65e187bb-2a16-4f82-a19a-48f48c10a4dd
+  uuid: 8e337921-61f9-4e1c-aeca-db12945945e9
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251315
+- id: 251321
   prefix: '8536581'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2b69bbe9-f5ca-48f1-909a-817ab75bbcc4
+  uuid: 2eda32f3-aedf-41f8-b6ae-e5c9a8d386ae
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251316
+- id: 251322
   prefix: '8536582'
   number_min_length: 15
   number_max_length: 15
-  uuid: b7084574-4963-47ed-b8c8-c1359abf1172
+  uuid: 03961f9d-df3c-495a-98e8-6e615da3a4de
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251317
+- id: 251323
   prefix: '8536583'
   number_min_length: 15
   number_max_length: 15
-  uuid: 74ff61c4-8b7c-41fd-9eaa-af3251894a70
+  uuid: fa1f24a9-ed54-45d4-a62c-f118753c16ae
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251318
+- id: 251324
   prefix: '8536584'
   number_min_length: 15
   number_max_length: 15
-  uuid: 047826b6-72b7-4c12-8ac7-c62d8b45b7ac
+  uuid: 05658086-d586-4616-86e2-3e03e49e6c6d
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251319
+- id: 251325
   prefix: '8536585'
   number_min_length: 15
   number_max_length: 15
-  uuid: c3377f2f-695f-43c6-909a-8d1242f3be76
+  uuid: 16939b85-156c-4819-b1fb-3cd320c637f6
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251320
+- id: 251326
   prefix: '8536586'
   number_min_length: 15
   number_max_length: 15
-  uuid: fb2ddeb4-fe20-4348-815d-6a5926cb9512
+  uuid: 516f33f4-831f-4242-8407-d4b7c784dc07
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251321
+- id: 251327
   prefix: '8536587'
   number_min_length: 15
   number_max_length: 15
-  uuid: 889dedc7-6406-4620-af42-a6ea795ff6f5
+  uuid: c3ef6b9c-1a1c-4ac8-8a15-00738f1c3d8a
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251322
+- id: 251328
   prefix: '8536588'
   number_min_length: 15
   number_max_length: 15
-  uuid: d259e4ec-226e-49c7-92a4-1f9c21778546
+  uuid: e90ea762-9eb3-4ce1-98e3-2ea944173877
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251323
+- id: 251329
   prefix: '8536589'
   number_min_length: 15
   number_max_length: 15
-  uuid: 806f116c-07d2-4db8-bd47-00a06aecadd3
+  uuid: 2a772309-2474-4528-a1e8-c77eadfab856
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251333
+- id: 251339
   prefix: '8536590'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0fcb729c-1913-4e74-9c8b-d464b7349238
+  uuid: 6f0bc03e-e985-4c50-8486-246cfad20e1d
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251334
+- id: 251340
   prefix: '8536591'
   number_min_length: 15
   number_max_length: 15
-  uuid: ac28e744-658b-4cec-a619-77f5a4683e44
+  uuid: 7c5c3f71-9d18-4c56-8d01-4a88b0f25252
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251336
+- id: 251342
   prefix: '8536592'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3e8e2e33-9f65-49fc-a0f6-6516e7ab6665
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251376
-  prefix: '8536593'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: e9ebff51-e900-4123-b9b8-53786628bcf5
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251378
-  prefix: '8536594'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: ceb30d9a-ce7a-41f5-a702-e46a4c9f3871
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251379
-  prefix: '8536595'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 6364dc07-a401-4c67-8e03-084c9afc20ed
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 251380
-  prefix: '8536596'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 0d3f7728-9ae2-497e-9a5b-49ee80645130
+  uuid: a36c0e1e-9e4e-458c-8722-997e4cf2b18e
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 251382
+  prefix: '8536593'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 42717a5f-25f5-489b-8d45-23f214231870
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251384
+  prefix: '8536594'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: d6578428-a1fb-461d-8c78-c22e2ebd1684
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251385
+  prefix: '8536595'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 19f33762-b84a-4442-970a-6ac7a52c8fa7
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251386
+  prefix: '8536596'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 2c149423-e1c4-4cc3-9b68-344632fe560c
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 251388
   prefix: '8536597'
   number_min_length: 15
   number_max_length: 15
-  uuid: 200714d1-229a-4561-b5dd-5cb09cc5d540
+  uuid: 43c13254-3aed-45ca-a5a6-7c85649fa43f
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 251383
+- id: 251389
   prefix: '8536598'
   number_min_length: 15
   number_max_length: 15
-  uuid: aed2d0cd-add5-41f2-bad5-e44dc26706a9
+  uuid: 02aed1ce-12dc-4916-ab24-6abbc6ec2027
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251384
+- id: 251390
   prefix: '8536599'
   number_min_length: 15
   number_max_length: 15
-  uuid: c5917ba4-83a4-441e-b3a0-d058c6a5e299
+  uuid: 05e192b4-c50f-41e9-be06-8e6068397fbd
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 251396
+- id: 251402
   prefix: '85366'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7af35aff-2eab-44de-8bb7-00d77bc0635f
+  uuid: cc1ddd1d-09a5-467f-9c54-ca2fe8c3d1e3
   country_id: *mo
   network_id: *mo_mobile
-- id: 257944
+- id: 257953
   prefix: '853668'
   number_min_length: 14
   number_max_length: 14
-  uuid: 859b7ba9-ce25-49c3-9a83-33bb45b987b4
+  uuid: 29d90fd8-f68f-4660-a5ab-ce9cb0503542
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 257969
+- id: 257978
   prefix: '8536692'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5d5e4d53-149f-45ca-9477-9e61c0d2cdc3
+  uuid: eb398316-9265-4cec-9dde-a126e8b31203
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258011
+- id: 258020
   prefix: '8536693'
   number_min_length: 15
   number_max_length: 15
-  uuid: ca7401e1-09a2-461e-8000-7c60d09a3fc2
+  uuid: 6a7faf92-6799-416e-910d-9d75bca55060
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258015
+- id: 258024
   prefix: '8536694'
   number_min_length: 15
   number_max_length: 15
-  uuid: 62ece77c-8444-4c06-ac2d-d986e72a38ab
+  uuid: d6369f87-6d12-4f05-97d5-cd9d1f2c8b93
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258018
+- id: 258027
   prefix: '8536695'
   number_min_length: 15
   number_max_length: 15
-  uuid: f166303c-1d17-48d3-93b8-250bb3d131bd
+  uuid: 6f19822b-dd2b-4b55-ba88-3e196381c055
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258020
+- id: 258029
   prefix: '8536696'
   number_min_length: 15
   number_max_length: 15
-  uuid: de53e8a8-79e3-4396-b927-89e7ea177884
+  uuid: a10e3191-9c1e-4a6a-9cb4-e6938ca9a518
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258023
+- id: 258032
   prefix: '8536697'
   number_min_length: 15
   number_max_length: 15
-  uuid: bd0b7cad-002b-4eaf-96fa-7fb8022f81a7
+  uuid: dc987ab5-7b16-49a5-9794-ea1c9cca06e0
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258025
+- id: 258034
   prefix: '8536698'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9f480c92-dfc0-4976-b2cb-8f5d3f3dcdff
+  uuid: 8ce1a02d-f555-4994-98b1-7dc411b2c48a
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258027
+- id: 258036
   prefix: '8536699'
   number_min_length: 15
   number_max_length: 15
-  uuid: e3dfd6cb-d205-4c30-b2ec-52619530185a
+  uuid: ce921dc4-2a38-4fd3-a64b-4290ed00576e
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258124
+- id: 258133
   prefix: '85368000'
   number_min_length: 16
   number_max_length: 16
-  uuid: e936900c-606e-4159-815e-72346878d487
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258125
-  prefix: '85368001'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 754106a3-30a4-4d17-a036-01c0d6c3ab07
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258126
-  prefix: '85368002'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 4070920c-4d14-4ac3-b6c0-a0642fd0c7b4
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258127
-  prefix: '85368003'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 4950eaee-67c4-4547-bfb6-696b128971ff
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258128
-  prefix: '85368004'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: 3cddab48-b00f-4d82-a0ed-8a5cdba90da3
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258129
-  prefix: '85368005'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: d98eccd4-a33a-409f-a614-05f7e532f9a3
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258130
-  prefix: '85368006'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: dc4ea3bb-586b-4402-940f-49dedc3c6e77
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258131
-  prefix: '85368007'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: c7f8d99e-bb16-41f1-9c63-d52ee5bbe86b
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258132
-  prefix: '85368009'
-  number_min_length: 16
-  number_max_length: 16
-  uuid: a9c0912c-5ee3-439c-80aa-3312f6d7c607
-  country_id: *mo
-  network_id: *mo_ctm_mobile
-- id: 258133
-  prefix: '8536801'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 3a523f66-31ad-4e5e-ad37-25034f3011f4
+  uuid: d7760e70-e046-4ce6-87d3-2e2fe10dba5b
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 258134
-  prefix: '8536802'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 9bc69f43-c1b0-45b1-affa-cdf733fdf5ef
+  prefix: '85368001'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 49c95806-fa3f-4866-8576-43c218d02b06
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 258135
-  prefix: '8536803'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 25069f95-648a-4438-ae9d-9d9df001c135
+  prefix: '85368002'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 752d0516-29dc-4457-8a8f-6100b9f0f387
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 258136
-  prefix: '8536804'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 894b1b27-2a00-437e-b5d4-55365550a3ee
+  prefix: '85368003'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 7d13bae2-d7c7-4583-8335-29959371cf1c
   country_id: *mo
   network_id: *mo_ctm_mobile
 - id: 258137
+  prefix: '85368004'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: fbb529a0-78f7-4363-8eea-407504066edc
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258138
+  prefix: '85368005'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 8242e00b-cb8c-4a69-9e18-3ef424e44ebb
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258139
+  prefix: '85368006'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: f951a742-e6b3-4add-8336-318d2248f7f2
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258140
+  prefix: '85368007'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 0393096b-eb0d-4436-9b96-8529a3e9de6c
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258141
+  prefix: '85368009'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 036e208c-b7b5-457d-8a47-d25b42a29cb0
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258142
+  prefix: '8536801'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 7d4dd033-b6c2-499e-b2b3-66378efb0eb5
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258143
+  prefix: '8536802'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: d77e8a2d-fc80-4a6c-927e-e67a713c2673
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258144
+  prefix: '8536803'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 4ee786db-97a2-4180-9bea-be0b81180a9a
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258145
+  prefix: '8536804'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 4f6ba0f4-5452-470a-a0a1-ceb00c46ddf9
+  country_id: *mo
+  network_id: *mo_ctm_mobile
+- id: 258146
   prefix: '8536805'
   number_min_length: 15
   number_max_length: 15
-  uuid: 60418714-399b-42ef-a0ee-a93f3f4b00b8
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 258138
-  prefix: '8536806'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: e135fa31-1131-417e-abb3-cf85a5fa4f9a
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 258139
-  prefix: '8536807'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: e42dc4a8-eb24-43ea-812c-eb0e824e3431
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 258140
-  prefix: '8536808'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 2f4d64c3-7e48-4990-9238-a9e07b709d84
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 258141
-  prefix: '8536809'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 18eabec6-ae8e-4f26-bd54-de89e394a628
+  uuid: 334b8bcb-092c-473f-a0bc-ef21f60ec058
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 258147
+  prefix: '8536806'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: a5a5a625-fa3c-42a7-ba0e-ae74f8763183
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 258148
+  prefix: '8536807'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: f3758c7b-e2d6-4fd1-91b7-dc30a864742b
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 258149
+  prefix: '8536808'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: e2287164-ea77-4126-8424-6dd079d57d5d
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 258150
+  prefix: '8536809'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 1cb086f6-11bb-4ece-bc09-1af64ae18ef2
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 258156
   prefix: '8536810'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6cfe4832-80b4-4817-977c-8bb2f3a07cb9
+  uuid: e070e91b-b023-4f36-a151-3c340cb7881e
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258149
+- id: 258158
   prefix: '8536811'
   number_min_length: 15
   number_max_length: 15
-  uuid: 5740f5a3-9a17-455d-9f22-cb153a1636b8
+  uuid: 18bb9bb6-432f-493f-827c-b2c5f625ae02
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258151
+- id: 258160
   prefix: '8536812'
   number_min_length: 15
   number_max_length: 15
-  uuid: b11f48c2-ec5a-45fd-84d2-5c6b56326ba8
+  uuid: df036375-3909-4ce6-a211-722b64b4adea
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258153
+- id: 258162
   prefix: '8536813'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1f3ac8bd-4a73-4a75-8ad7-984c7e8aa97b
+  uuid: 37766b72-591c-4b86-8f1b-f5b9b9bae958
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258155
+- id: 258164
   prefix: '8536814'
   number_min_length: 15
   number_max_length: 15
-  uuid: eb7fedda-ff02-430d-9787-b3825c6a466e
+  uuid: 9ee3728c-a3b6-4816-8bde-53ebcd887bee
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258157
+- id: 258166
   prefix: '8536815'
   number_min_length: 15
   number_max_length: 15
-  uuid: 297d5356-938b-4fb1-809b-9a88e06ca16d
+  uuid: e958e458-4df4-404a-a8b4-9e945fcf1452
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258159
+- id: 258168
   prefix: '8536816'
   number_min_length: 15
   number_max_length: 15
-  uuid: b13b25eb-40d1-48fc-b8ba-056222d57fc2
+  uuid: 4c436a56-af95-4bda-8ecc-49788c14deab
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258160
+- id: 258169
   prefix: '8536817'
   number_min_length: 15
   number_max_length: 15
-  uuid: ba6dfb87-f033-4bce-9036-184e61a2081b
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 258162
-  prefix: '8536818'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 3b71ff2c-54e9-44d7-a0ad-8569e4c33f03
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 258164
-  prefix: '8536819'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 47310144-dc55-4347-9060-59452e1a907d
+  uuid: 6120808e-4ce9-496a-bbc4-b740c07a2c10
   country_id: *mo
   network_id: *mo_smartone_mobile
 - id: 258171
+  prefix: '8536818'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: ed888b2f-d66c-47dd-9492-804b2e826a3e
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 258173
+  prefix: '8536819'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 9265aad4-cd40-48ff-ad5b-dec012788334
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 258180
   prefix: '8536825'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6e9e5a38-5409-465a-973b-7189f1d1845c
+  uuid: 5c9b2cce-d328-46cb-9c2d-af4644ef2ef9
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258172
+- id: 258181
   prefix: '8536826'
   number_min_length: 15
   number_max_length: 15
-  uuid: d4b5dbea-5781-42ef-a380-72c3f0271e7b
+  uuid: cd2d43c1-e4f5-4ccd-8cc0-5b6260dfa2f6
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258173
+- id: 258182
   prefix: '8536827'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3228dc02-b05d-4ed4-8723-c6a28b7a7d4e
+  uuid: b48b248f-b56e-4b4c-baf0-92ff166515e5
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258174
+- id: 258183
   prefix: '8536828'
   number_min_length: 15
   number_max_length: 15
-  uuid: 11235d0e-fd8c-4101-ac45-6ff18cea9b32
+  uuid: 2b178b56-3e4f-42db-a1ca-4e08600b30c1
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258175
+- id: 258184
   prefix: '8536829'
   number_min_length: 15
   number_max_length: 15
-  uuid: 186d7f54-96e5-40f2-8f1f-1d5cd5669235
+  uuid: d5bd7f01-5b29-42cb-9e2c-82936c793c2e
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258180
+- id: 258189
   prefix: '8536830'
   number_min_length: 15
   number_max_length: 15
-  uuid: 55a354e3-c75f-496e-ae55-db079acef144
+  uuid: d899a303-7ea4-4b52-9c16-479a797735a3
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258181
+- id: 258190
   prefix: '8536831'
   number_min_length: 15
   number_max_length: 15
-  uuid: 06d6b76f-e93f-41e6-8510-6daf63b0f667
+  uuid: 8e0f0e8d-6166-475c-b3b9-57b5375aedb0
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258182
+- id: 258191
   prefix: '8536832'
   number_min_length: 15
   number_max_length: 15
-  uuid: b6e7b49d-5bd0-42a4-ab22-6d8bf5a92c0c
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 258183
-  prefix: '8536833'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: e8875b14-5e54-433e-b99a-13a5448759bc
-  country_id: *mo
-  network_id: *mo_smartone_mobile
-- id: 258184
-  prefix: '8536834'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 03c73e70-f489-4366-bee5-85ced43dbba2
+  uuid: 8acf26fb-b812-467f-9572-1516dc0f4dc2
   country_id: *mo
   network_id: *mo_smartone_mobile
 - id: 258192
+  prefix: '8536833'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 72fc7f34-908e-4f23-bff2-b9b37b82be60
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 258193
+  prefix: '8536834'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 8c80f9db-58af-4cf2-a1b9-a181caa75b2f
+  country_id: *mo
+  network_id: *mo_smartone_mobile
+- id: 258201
   prefix: '8536840'
   number_min_length: 15
   number_max_length: 15
-  uuid: 704efe4b-d467-45c0-9b69-f55908629cf9
+  uuid: bd6e8a8b-d968-44f6-bb9f-548e5709cc78
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258194
+- id: 258203
   prefix: '8536841'
   number_min_length: 15
   number_max_length: 15
-  uuid: cfcb6089-012a-4627-b4f3-1e7efb79c921
+  uuid: dfb4183a-cfe2-4331-a4ea-bae8ff8650c7
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258196
+- id: 258205
   prefix: '8536842'
   number_min_length: 15
   number_max_length: 15
-  uuid: f2210418-081f-4a6f-9743-4caa60e77870
+  uuid: 20803e3f-158a-4853-8657-a04883600e62
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258198
+- id: 258207
   prefix: '8536843'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9aa58772-2d71-4efc-91c8-cbf6feda2d24
+  uuid: 0d226a4a-d477-46ac-9b66-488a349e617f
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258200
+- id: 258209
   prefix: '8536844'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2e0361a7-bb0e-4915-aeab-f91fc95ae8b3
+  uuid: c86fd7d9-024e-4293-9a3c-6d6313234287
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258210
+- id: 258219
   prefix: '8536845'
   number_min_length: 15
   number_max_length: 15
-  uuid: f63b90c7-a557-42d9-a51b-e252e4eaa987
+  uuid: e2d1693b-1371-46b7-af8a-e6d4fc693560
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258212
+- id: 258221
   prefix: '8536846'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4d61b593-5ad1-46b0-aca2-8513ccba9b0a
+  uuid: a8ce3fcf-5c12-4945-971f-fdff80ad5237
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258213
+- id: 258222
   prefix: '8536847'
   number_min_length: 15
   number_max_length: 15
-  uuid: 19859dd3-ce7e-4cc3-a3ce-6dafc957915a
+  uuid: 51d0bde1-974f-4a56-b1d4-27b61a0bfbfa
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258214
+- id: 258223
   prefix: '8536848'
   number_min_length: 15
   number_max_length: 15
-  uuid: 85c338a2-80c5-418e-ae35-50b9dfce6ff5
+  uuid: a54e1a55-eb40-4f1f-a9eb-0df6c42c9818
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258215
+- id: 258224
   prefix: '8536849'
   number_min_length: 15
   number_max_length: 15
-  uuid: cf90d8f3-5924-43bd-acd3-60c12247fc5c
+  uuid: 7b46687d-304b-4711-8ce6-1368b6288262
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258219
+- id: 258228
   prefix: '8536850'
   number_min_length: 15
   number_max_length: 15
-  uuid: a9894ce1-2f11-4898-a8e6-ad2df21a799b
+  uuid: 98b92680-5888-4c0e-a9e4-dd4008ca6960
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258220
+- id: 258229
   prefix: '8536851'
   number_min_length: 15
   number_max_length: 15
-  uuid: 8dee054c-2aa8-4292-8af2-5999d4deeb1c
+  uuid: 0af93787-6af8-4db5-b6a3-08090ffba77f
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258221
+- id: 258230
   prefix: '8536852'
   number_min_length: 15
   number_max_length: 15
-  uuid: 14bc3825-c988-4524-895c-be02e5d2d451
+  uuid: 1bd4ae8b-a1ff-45aa-a15e-8f73aaa0ba91
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258222
+- id: 258231
   prefix: '8536853'
   number_min_length: 15
   number_max_length: 15
-  uuid: c0c7f750-74b1-4c6d-96b7-fce2f085205b
+  uuid: 9f12c6b2-4845-4d6e-b9be-c60b97e80623
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258223
+- id: 258232
   prefix: '8536854'
   number_min_length: 15
   number_max_length: 15
-  uuid: 90c7ee01-3ff1-4f97-b7af-c1d508a34d75
+  uuid: fda1b053-d33c-42f6-af37-4e3b01d977ba
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258224
+- id: 258233
   prefix: '8536855'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2b211ef3-0db1-448c-b0b1-44de3a99dd0c
+  uuid: cd61080b-b260-4578-8308-30dae3820d33
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258225
+- id: 258234
   prefix: '8536856'
   number_min_length: 15
   number_max_length: 15
-  uuid: ff0dd2bc-6af3-4d1f-9755-c7837530424a
+  uuid: 792aff36-9322-4865-86e0-45ba7535a916
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258226
+- id: 258235
   prefix: '8536857'
   number_min_length: 15
   number_max_length: 15
-  uuid: 02115c54-42f2-433b-ac8c-ce84a327d24b
+  uuid: 5c9f0e41-8792-4a2e-8f5b-073327a76d06
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258227
+- id: 258236
   prefix: '8536858'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3ee94c79-58c9-4f11-bf6b-eb55e889a19c
+  uuid: a8bec0f9-0cd4-4aa2-ab83-ea18f8bf2b3a
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258228
+- id: 258237
   prefix: '8536859'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9b76ca91-c621-431c-a2e0-31ac4ad86475
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 258232
-  prefix: '853686'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 129f48e9-43a3-478d-b065-6ac5d0e7a8e7
+  uuid: 75fdda0c-0f47-4a7b-a097-caba94f63e23
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 - id: 258241
+  prefix: '853686'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 420ca97c-5fb1-4927-a853-17ca7124ed79
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 258250
   prefix: '8536870'
   number_min_length: 15
   number_max_length: 15
-  uuid: 67989a1f-1275-4217-ad7f-9f15b5279240
+  uuid: 226f1a21-f725-43e6-a6a6-282d929b4083
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258242
+- id: 258251
   prefix: '8536871'
   number_min_length: 15
   number_max_length: 15
-  uuid: 4dddac83-0c7d-4557-bdec-cf022bba422b
+  uuid: 81c0d6b8-e8c2-430f-a117-18f5b4d84d9b
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258243
+- id: 258252
   prefix: '8536872'
   number_min_length: 15
   number_max_length: 15
-  uuid: 3ad6c39e-de07-4af8-85e3-2a4dd1b3a453
+  uuid: b32557a6-b172-4d10-8f20-0374b1f10ab1
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258244
+- id: 258253
   prefix: '8536873'
   number_min_length: 15
   number_max_length: 15
-  uuid: aee9b93d-29cc-4350-be52-4a6b6b6ba86e
+  uuid: 5642c584-22e7-4799-97b8-454d79916066
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258245
+- id: 258254
   prefix: '8536874'
   number_min_length: 15
   number_max_length: 15
-  uuid: ef6ddd44-c46c-4880-ae8a-db8fe9a5737b
+  uuid: ffff4fff-53c6-4f62-8031-b07043148389
   country_id: *mo
   network_id: *mo_smartone_mobile
-- id: 258246
+- id: 258255
   prefix: '8536875'
   number_min_length: 15
   number_max_length: 15
-  uuid: ee67658c-e31f-4a5a-b103-c8ade36d7c48
+  uuid: 1ba00d36-1e4b-4747-a4e9-d90f6fc83e35
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258247
+- id: 258256
   prefix: '8536876'
   number_min_length: 15
   number_max_length: 15
-  uuid: a7d56f4e-3bd3-4a31-b65b-9d23ebd46f48
+  uuid: 39dd7f5f-a656-4c16-8efd-69898dc6cd8d
   country_id: *mo
   network_id: *mo_3_mobile
-- id: 258248
+- id: 258257
   prefix: '8536877'
   number_min_length: 15
   number_max_length: 15
-  uuid: 0db33d1a-b4f8-40f8-9089-d0ceb3bf632b
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 258249
-  prefix: '8536878'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: f0d60fa4-8168-464c-93bb-aa915b09f89f
-  country_id: *mo
-  network_id: *mo_3_mobile
-- id: 258250
-  prefix: '8536879'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 12538f5a-420f-4f09-bce6-4e517003f2c8
+  uuid: cf64b237-36e5-4185-a206-d26b90464dc1
   country_id: *mo
   network_id: *mo_3_mobile
 - id: 258258
+  prefix: '8536878'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 859f65a0-e991-48a7-93d4-ca0ba89f08c3
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 258259
+  prefix: '8536879'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 9184b2ef-9526-4b29-943f-4b2ad8441a25
+  country_id: *mo
+  network_id: *mo_3_mobile
+- id: 258267
   prefix: '8536880'
   number_min_length: 15
   number_max_length: 15
-  uuid: b2d9bdd4-e3a4-4c13-870a-2da83914cbd7
+  uuid: db6aa0ff-18d2-4f05-89c4-90a16892a614
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258260
+- id: 258269
   prefix: '8536881'
   number_min_length: 15
   number_max_length: 15
-  uuid: 1ab02b8d-30ea-4b66-87b3-8cc498708344
+  uuid: 7b4bf013-baee-4c43-b949-3c8e18525e66
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258262
+- id: 258271
   prefix: '8536882'
   number_min_length: 15
   number_max_length: 15
-  uuid: 869935ef-303b-48ea-a283-369ce900fbf0
+  uuid: 081041f9-ff8b-42eb-b18c-b5a53b00912d
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258264
+- id: 258273
   prefix: '8536883'
   number_min_length: 15
   number_max_length: 15
-  uuid: 35d6ac51-6676-4dd3-99e0-4fd096b0f634
+  uuid: 06fc659d-e47a-43bc-a553-4b21ace7bac3
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258266
+- id: 258275
   prefix: '8536884'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2462022b-68c4-4aa6-ac09-eab9207d7039
+  uuid: e9b72150-c75a-4bfa-9e19-c3e006a9acee
   country_id: *mo
   network_id: *mo_ctm_mobile
-- id: 258268
+- id: 258277
   prefix: '8536885'
   number_min_length: 15
   number_max_length: 15
-  uuid: 9f215144-3ae2-4348-8409-658f4e5c02d2
+  uuid: e1556126-507e-4361-8f42-96ca2e42203c
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258270
+- id: 258279
   prefix: '8536886'
   number_min_length: 15
   number_max_length: 15
-  uuid: d5c2b55b-b162-41c8-a5be-985b3c783d5e
+  uuid: 6032b640-5bde-4118-934c-818e62f0441a
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258272
+- id: 258281
   prefix: '8536887'
   number_min_length: 15
   number_max_length: 15
-  uuid: a3834261-b1b6-4b36-a40f-92dc29255270
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 258276
-  prefix: '8536888'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: adda33ab-d6d1-4c5e-b275-cf4aa01ee00b
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 258278
-  prefix: '8536889'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: bab105af-158b-4094-96a5-d7d13002599a
+  uuid: 779212e5-3a23-461f-a31d-28fff6577346
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 - id: 258285
-  prefix: '8536890'
+  prefix: '8536888'
   number_min_length: 15
   number_max_length: 15
-  uuid: 6199f856-6f87-4ae8-83c3-fdcf61ed1e5b
-  country_id: *mo
-  network_id: *mo_china_telecom_mobile
-- id: 258286
-  prefix: '8536891'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 56ad2607-98f3-4daf-a3b6-dd08171fbfe7
+  uuid: c5e7596e-621e-48be-8caf-4968745019d5
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 - id: 258287
+  prefix: '8536889'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: f70f3949-42f6-4689-b570-bfaae9c723b1
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 258294
+  prefix: '8536890'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 9bc43952-7eb2-4717-8951-73b0f09b8b6f
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 258295
+  prefix: '8536891'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: b6e2d681-2822-4486-90c4-ead8c512f57d
+  country_id: *mo
+  network_id: *mo_china_telecom_mobile
+- id: 258296
   prefix: '8536892'
   number_min_length: 15
   number_max_length: 15
-  uuid: 2f37cccc-d2b3-4cf9-9d8c-2566f1f235fc
+  uuid: ba4cbec9-e09d-4a95-93ed-108a3d13a244
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258288
+- id: 258297
   prefix: '8536893'
   number_min_length: 15
   number_max_length: 15
-  uuid: ca8445f1-c9f9-4d86-b59c-b6c6c87f02ed
+  uuid: 18c3e293-5f84-4fc3-8e12-67c3bc3a74c3
   country_id: *mo
   network_id: *mo_china_telecom_mobile
-- id: 258289
+- id: 258298
   prefix: '8536894'
   number_min_length: 15
   number_max_length: 15
-  uuid: 76fd6222-6f5d-407a-87d8-db62cce330b7
+  uuid: 50e2283a-e878-4cc6-b7ee-06f30337f03e
   country_id: *mo
   network_id: *mo_china_telecom_mobile
 # Country code Prefixes
-- id: 247990
+- id: 247996
   prefix: '853'
   number_min_length: 6
   number_max_length: 11
-  uuid: 83ed541b-8f0e-4ede-a471-188dbedfdedb
+  uuid: 96897dc5-b143-44b8-bae1-2153844c9e6b
   country_id: *mo
   network_id: *mo_fixed_cc
 # Supplementary services Prefixes
-- id: 248395
+- id: 248401
   prefix: '8531'
   number_min_length: 7
   number_max_length: 9
-  uuid: 9e235eb0-8d54-450a-b9d3-8ab7035591a8
+  uuid: b4b5fa79-12ab-40d2-be2b-fa24e7455e7e
   country_id: *mo
   network_id: *mo_special_services
-- id: 253186
+- id: 253192
   prefix: '8539'
   number_min_length: 7
   number_max_length: 12
-  uuid: 5d5ba92c-6f47-4a11-95ce-66d0af2b9b1d
+  uuid: 08d4a408-3393-4e86-868f-d96201d0b2da
   country_id: *mo
   network_id: *mo_special_services
 # Paging Prefixes
-- id: 257964
+- id: 257973
   prefix: '8536690'
   number_min_length: 15
   number_max_length: 15
-  uuid: d4c92124-5604-4809-aab6-1b99ba8a1343
+  uuid: 8ea40c2b-768c-40e8-807d-38c8bff4af4e
   country_id: *mo
   network_id: *mo_kongseng_paging
-- id: 257966
+- id: 257975
   prefix: '8536691'
   number_min_length: 15
   number_max_length: 15
-  uuid: ab93a637-63e9-4a7d-a295-7611b705e2c2
+  uuid: 08da7905-d6b0-47b1-a23e-949bc7ad7e28
   country_id: *mo
   network_id: *mo_kongseng_paging
