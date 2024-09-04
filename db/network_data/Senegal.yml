@@ -1,0 +1,609 @@
+country_id: &sn 188
+networks:
+# Supplementary services Networks
+- id: &sn_police 4011
+  name: SN Police
+  uuid: 32f2f033-5c8c-44b8-be5c-0d6d80aa48da
+  type_id: 14
+- id: &sn_fire_service 4046
+  name: SN Fire Service
+  uuid: d926ff8e-21b1-4e55-9420-7f5cfc69030a
+  type_id: 14
+- id: &sn_value_added_services 4169
+  name: SN Value Added Services
+  uuid: 0bfcf737-9486-49ca-b715-c71e81a776e3
+  type_id: 14
+- id: &sn_value_added_services_vocal 4192
+  name: SN Value Added Services Vocal
+  uuid: 30a79efa-6d94-4782-b7c0-7f8b0b0b54c2
+  type_id: 14
+- id: &sn_value_added_services_vocal_free 4199
+  name: SN Value Added Services Vocal Free
+  uuid: 00b9f5db-130f-4122-84b8-d31c88fbf805
+  type_id: 14
+- id: &sn_value_added_services_free 4222
+  name: SN Value Added Services Free
+  uuid: ac4e0222-aea8-4a28-9922-533552d9bd8d
+  type_id: 14
+- id: &sn_sms_mms_services 4234
+  name: SN Sms_Mms Services
+  uuid: 4f4d31d5-01df-4d2a-a1ed-7b08390e9bb1
+  type_id: 14
+- id: &sn_special_services 5031
+  name: SN Special Services
+  uuid: 9b3a1057-a5e0-4ee3-95b5-1cc65ce22d84
+  type_id: 14
+- id: &sn_shared_revenue_services 5621
+  name: SN Shared Revenue Services
+  uuid: 6b8ae962-0365-4de4-9fc7-57f66b86b575
+  type_id: 14
+- id: &sn_voip_and_convergent_services 5673
+  name: SN Voip And Convergent Services
+  uuid: 3217d0d8-13c6-4689-bb09-d51f5dbfdfea
+  type_id: 14
+- id: &sn_freephone_services 6130
+  name: SN Freephone Services
+  uuid: fefb6de6-2c52-487b-80ca-709c42c9be6f
+  type_id: 14
+- id: &sn_personal_number_services 6165
+  name: SN Personal Number Services
+  uuid: d88b0254-7d07-45c7-98c8-798e9aa99a21
+  type_id: 14
+- id: &sn_virtual_private_network 6167
+  name: SN Virtual Private Network
+  uuid: 1a982ede-4bde-4b96-9fbd-9e1030bc8a3b
+  type_id: 14
+- id: &sn_prepaid_cards 6180
+  name: SN Prepaid Cards
+  uuid: aa4539bb-2624-47a9-92a9-2fc81b8ec850
+  type_id: 14
+- id: &sn_shared_cost_services 6190
+  name: SN Shared Cost Services
+  uuid: 68652e78-ccba-4900-8b75-aaec06870876
+  type_id: 14
+- id: &sn_internet_access_services 6213
+  name: SN Internet Access Services
+  uuid: 74b69f8c-cd71-4e44-9c8f-44f5e56e82db
+  type_id: 14
+- id: &sn_wap 6219
+  name: SN Wap
+  uuid: c4157f1a-a19d-48b6-a81a-b5fb7a73f12a
+  type_id: 14
+- id: &sn_internet_access_in_dakar 6220
+  name: SN Internet Access In Dakar
+  uuid: 9e995188-c31d-4586-933b-ad2ddd186a60
+  type_id: 14
+- id: &sn_internet_access_outside_dakar 6221
+  name: SN Internet Access Outside Dakar
+  uuid: b16a5b62-2151-46de-b408-8e5b786055e3
+  type_id: 14
+# Fixed Networks
+- id: &sn_fixed 4293
+  name: SN Fixed
+  uuid: 55a8de88-0d49-4598-817f-c2043ca5e8d8
+  type_id: 12
+# Satellite Networks
+- id: &sn_orange_satellite 4334
+  name: SN Orange Satellite
+  uuid: c2ba1822-25c7-44bf-80f2-68e43f735b8e
+  type_id: 16
+# Country code Networks
+- id: &sn_fixed_cc 4802
+  name: SN Fixed Cc
+  uuid: 7b019946-e8d2-40fc-b4aa-f47538588bd7
+  type_id: 17
+# Mobile Networks
+- id: &sn_hayo_mobile 5422
+  name: SN Hayo Mobile
+  uuid: 97637d13-9dc0-418e-b0f9-18a26d5357bd
+  type_id: 3
+- id: &sn_promobile_mobile 5531
+  name: SN Promobile Mobile
+  uuid: 6be42248-800d-4695-ba58-ecac9a81c2c8
+  type_id: 3
+- id: &sn_2s_mobile_mobile 5573
+  name: SN 2S Mobile Mobile
+  uuid: 97cf9246-75b8-4650-80b4-ed5f0bf7b293
+  type_id: 3
+- id: &sn_free_mobile 5584
+  name: SN Free Mobile
+  uuid: b635c8be-27bf-4099-b540-7d715a27d756
+  type_id: 3
+- id: &sn_mobile 5983
+  name: SN Mobile
+  uuid: aeda1c39-42cc-4bbc-b940-c01ac8f2e1b9
+  type_id: 3
+- id: &sn_expresso_mobile 5996
+  name: SN Expresso Mobile
+  uuid: 782806e7-e440-461e-9bbe-58ae299a5f3e
+  type_id: 3
+- id: &sn_orange_mobile 6026
+  name: SN Orange Mobile
+  uuid: 6f0053db-02f0-4c2a-9a06-91f4c3370ff6
+  type_id: 3
+- id: &sn_adie_mobile 6061
+  name: SN Adie Mobile
+  uuid: d88cb1c1-270a-4213-98cd-b73a0325cb25
+  type_id: 3
+network_prefixes:
+# Supplementary services Prefixes
+- id: 242846
+  prefix: '22117'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: 73787fa2-bcf2-4592-ba8d-a00367f93263
+  country_id: *sn
+  network_id: *sn_police
+- id: 242908
+  prefix: '22118'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: 60bbd091-7041-48e7-8e65-f85c1d81abca
+  country_id: *sn
+  network_id: *sn_fire_service
+- id: 243058
+  prefix: '2212'
+  number_min_length: 9
+  number_max_length: 10
+  uuid: 0f54c765-4059-45b8-8f62-bd8d076cd21a
+  country_id: *sn
+  network_id: *sn_value_added_services
+- id: 243083
+  prefix: '22120'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 58d195eb-634d-4e54-851f-e37a1312af8f
+  country_id: *sn
+  network_id: *sn_value_added_services_vocal
+- id: 243090
+  prefix: '221200'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: abfd36b2-7484-4dd2-9549-44ccad383e05
+  country_id: *sn
+  network_id: *sn_value_added_services_vocal_free
+- id: 243260
+  prefix: '22121'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: e15b3031-4874-40e3-974a-19bed0e94024
+  country_id: *sn
+  network_id: *sn_value_added_services_free
+- id: 243356
+  prefix: '22122'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 51ccda69-3d25-497f-ae7d-5a8dee3866f3
+  country_id: *sn
+  network_id: *sn_sms_mms_services
+- id: 243742
+  prefix: '22124'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 17427324-0cb9-4641-8ae2-4a56613ba04a
+  country_id: *sn
+  network_id: *sn_sms_mms_services
+- id: 244101
+  prefix: '22126'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: 84db7776-3330-4b11-a629-39cb2c307e8e
+  country_id: *sn
+  network_id: *sn_sms_mms_services
+- id: 244380
+  prefix: '22128'
+  number_min_length: 10
+  number_max_length: 10
+  uuid: c0739600-cc75-453c-9b06-1d7fbdc80202
+  country_id: *sn
+  network_id: *sn_sms_mms_services
+- id: 248429
+  prefix: '2211'
+  number_min_length: 6
+  number_max_length: 8
+  uuid: d1859a47-f4ef-4bdd-b811-8bd18e595385
+  country_id: *sn
+  network_id: *sn_special_services
+- id: 252913
+  prefix: '22188'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 3f743d29-c25e-4f76-9f1b-e4e5b5e8d1da
+  country_id: *sn
+  network_id: *sn_shared_revenue_services
+- id: 253196
+  prefix: '2219'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: d89868d1-f2c1-46df-983f-4e6a9c1857b1
+  country_id: *sn
+  network_id: *sn_voip_and_convergent_services
+- id: 260029
+  prefix: '2218'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: a30c6758-2865-410e-98e3-3fe0ed547d89
+  country_id: *sn
+  network_id: *sn_value_added_services
+- id: 260096
+  prefix: '221800'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 34d92e85-143a-45c3-b9a6-2b46c0906ea6
+  country_id: *sn
+  network_id: *sn_freephone_services
+- id: 260146
+  prefix: '221802'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 92e8db0b-dc02-4892-8735-9ea1e077f4c2
+  country_id: *sn
+  network_id: *sn_personal_number_services
+- id: 260153
+  prefix: '221803'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 081e97eb-1a44-42ce-ba74-b62dbda6b613
+  country_id: *sn
+  network_id: *sn_virtual_private_network
+- id: 260181
+  prefix: '221808'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 7872b14a-e1e3-4808-99ef-5a423eef7ceb
+  country_id: *sn
+  network_id: *sn_prepaid_cards
+- id: 260212
+  prefix: '22181'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 11949dc4-e215-4d54-a2ab-3e2302bd36ed
+  country_id: *sn
+  network_id: *sn_shared_cost_services
+- id: 260483
+  prefix: '22183'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 6ed01082-0b95-4525-ad04-4e7748378aa9
+  country_id: *sn
+  network_id: *sn_internet_access_services
+- id: 260538
+  prefix: '221836'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 71655964-d114-4bf8-864d-77588da19929
+  country_id: *sn
+  network_id: *sn_wap
+- id: 260561
+  prefix: '221838'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 097a2a08-322d-4944-a795-364ff1af3025
+  country_id: *sn
+  network_id: *sn_internet_access_in_dakar
+- id: 260574
+  prefix: '221839'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: e49b1bdd-c189-4631-bba6-d7cb302c7582
+  country_id: *sn
+  network_id: *sn_internet_access_outside_dakar
+# Fixed Prefixes
+- id: 244546
+  prefix: '2213'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: b52b35b0-790a-4cd2-af87-f71a4ef88757
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244567
+  prefix: '22130'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 30dde33c-e5db-40c4-8d8e-3376096341a5
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244756
+  prefix: '22132'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: dd4236d2-d933-470d-b46c-09bff65eb6ae
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244809
+  prefix: '221331'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 49111b34-08b5-4518-a14e-0e54e833baea
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244837
+  prefix: '2213381'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 7eb39a81-14ed-4873-9fac-06b929a84a15
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244838
+  prefix: '2213382'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 6be529e5-80f4-4673-b28f-c44d4ee11b07
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244839
+  prefix: '2213383'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 24ab3bb9-90bd-49e2-a195-b95d0d7a10c2
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244840
+  prefix: '2213384'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 78349d53-c04f-41e2-bd9b-3d942f946408
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244841
+  prefix: '2213385'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 3cac856a-1ba4-43f0-bf49-014106b85649
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244842
+  prefix: '2213386'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: d968c85b-e1f3-46e5-b449-8a6b7bceec0c
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244843
+  prefix: '2213387'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 097d3147-4119-4f3e-b938-b7df3efed11e
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244844
+  prefix: '2213388'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 5d427795-ac2d-4457-9ef6-d38e26d9043f
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244846
+  prefix: '2213389'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 61f95c40-3e76-494d-a098-4bc23c0a2aef
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244850
+  prefix: '2213393'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 38276ba9-8f0a-460e-9601-879dbcecb139
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244851
+  prefix: '2213394'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 4f57a617-dd9f-4585-8a4d-b2f8c47d6cfd
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244852
+  prefix: '2213395'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: a55dcf10-ccf3-49e9-a0b5-1acd557b7475
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244853
+  prefix: '2213396'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: a8aaec00-45e3-442e-b675-cf7dc3469977
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244854
+  prefix: '2213397'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 59c2503b-3215-4293-a07c-631c416ad07a
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244855
+  prefix: '2213398'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: c879d6b8-4cc4-45aa-a2ea-71128dcf375e
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 244857
+  prefix: '2213399'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 9d961cb2-e3b2-429c-b8b5-eb4c5f6b29c7
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 245049
+  prefix: '2213611'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 70ce60b7-e969-4074-9cf3-4a58a76940a4
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 245279
+  prefix: '221390'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 8d982531-d081-4042-a914-14e4e2435539
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 245280
+  prefix: '221391'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 73b6f4a9-fa4f-4fa5-bb2d-82cc089296a8
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 253962
+  prefix: '22193310'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: c3485a56-dea3-4020-9c01-c2b1ad375303
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 253975
+  prefix: '22193330'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: f012b680-1c13-49da-ae50-0302b17000ef
+  country_id: *sn
+  network_id: *sn_fixed
+- id: 254128
+  prefix: '22193929'
+  number_min_length: 17
+  number_max_length: 17
+  uuid: 4a2fe0ac-ecc0-4fca-8fb7-37c145002f1d
+  country_id: *sn
+  network_id: *sn_fixed
+# Satellite Prefixes
+- id: 244849
+  prefix: '2213392'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: e94d1598-4b7b-4205-9de1-f4ff441729f3
+  country_id: *sn
+  network_id: *sn_orange_satellite
+# Country code Prefixes
+- id: 248027
+  prefix: '221'
+  number_min_length: 5
+  number_max_length: 12
+  uuid: c6721930-d41c-47c3-9dc0-0175aa2c9757
+  country_id: *sn
+  network_id: *sn_fixed_cc
+# Mobile Prefixes
+- id: 251625
+  prefix: '2217211'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: e776b175-84a8-4d8c-bb9d-ff8864b5f928
+  country_id: *sn
+  network_id: *sn_hayo_mobile
+- id: 252264
+  prefix: '2217501'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 196a3eaa-7881-4129-8c9a-a4d4338c270d
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252320
+  prefix: '2217510'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: f3b7f46f-b959-4f05-9527-9b28c84034a3
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252390
+  prefix: '2217533'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: b92ea4a5-2301-4427-8a9a-7a037d35f792
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252422
+  prefix: '2217544'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: ef212cd8-9fbc-486b-a427-ee57970a475d
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252435
+  prefix: '2217552'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 23e21e50-b1d2-4950-b972-65ad13d8cc45
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252576
+  prefix: '2217563'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 802066e5-5ba3-4804-8060-92aabca4c493
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252596
+  prefix: '2217565'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 01ffc5ef-9aa8-465d-8c88-743fb9c7a85d
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252604
+  prefix: '2217570'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: 0a0a670d-be69-4bd2-aff1-73cbb64be9de
+  country_id: *sn
+  network_id: *sn_2s_mobile_mobile
+- id: 252629
+  prefix: '2217574'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: e1bce736-f05a-4beb-b003-ac8efcb955da
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252734
+  prefix: '2217583'
+  number_min_length: 16
+  number_max_length: 16
+  uuid: b83c5758-fd30-4115-b353-f5de72a04960
+  country_id: *sn
+  network_id: *sn_promobile_mobile
+- id: 252776
+  prefix: '22176'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 17e0ea69-5e30-4f7c-a395-0108a552de3b
+  country_id: *sn
+  network_id: *sn_free_mobile
+- id: 258694
+  prefix: '2217'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 8ef84794-54cc-4ec4-832e-68ec0d458281
+  country_id: *sn
+  network_id: *sn_mobile
+- id: 258722
+  prefix: '22170'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 14cc9aea-8cb8-4622-8545-5367d6ba09fe
+  country_id: *sn
+  network_id: *sn_expresso_mobile
+- id: 258964
+  prefix: '22177'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 4cbec015-9c4a-4f64-89e5-f6cd30ec3359
+  country_id: *sn
+  network_id: *sn_orange_mobile
+- id: 259414
+  prefix: '22178'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 776439c4-999a-4bdb-919a-694ad3ecb32a
+  country_id: *sn
+  network_id: *sn_orange_mobile
+- id: 259718
+  prefix: '221790'
+  number_min_length: 15
+  number_max_length: 15
+  uuid: 3877e8d3-cd2f-4637-b431-3b62e400deee
+  country_id: *sn
+  network_id: *sn_adie_mobile

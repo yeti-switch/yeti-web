@@ -1,0 +1,282 @@
+country_id: &aw 12
+networks:
+# Fixed Networks
+- id: &aw_fixed 4123
+  name: AW Fixed
+  uuid: b82c89f1-bb18-4072-af87-3246fd39907b
+  type_id: 12
+# Mobile Networks
+- id: &aw_setar_mobile 4471
+  name: AW Setar Mobile
+  uuid: 89e460c0-b2e5-41cd-9b3a-89a047d6af48
+  type_id: 3
+- id: &aw_mio_mobile 4528
+  name: AW Mio Mobile
+  uuid: 048cb09d-1943-49d5-87fe-75a7b0f5d075
+  type_id: 3
+- id: &aw_digicel_mobile 5344
+  name: AW Digicel Mobile
+  uuid: c94247d0-d10b-4cd3-8c97-fb352299ebe9
+  type_id: 3
+# Country code Networks
+- id: &aw_fixed_cc 4644
+  name: AW Fixed Cc
+  uuid: 16230245-fa6d-4ee0-945e-3625143832ba
+  type_id: 17
+# Supplementary services Networks
+- id: &aw_special_services 4849
+  name: AW Special Services
+  uuid: b8d3317d-0dc2-4597-b463-a253033cb0b0
+  type_id: 14
+- id: &aw_internet_access 4873
+  name: AW Internet Access
+  uuid: 7d95e776-0a98-4047-8aaa-90fa45bb6471
+  type_id: 14
+- id: &aw_personal_assistant_services 5611
+  name: AW Personal Assistant Services
+  uuid: eb106711-7310-4856-a52a-cfc9b1e148ee
+  type_id: 14
+- id: &aw_electronic_messaging_services 5631
+  name: AW Electronic Messaging Services
+  uuid: a8f412b2-3d2c-4238-8942-2171dcbbadfb
+  type_id: 14
+- id: &aw_value_added_services 5681
+  name: AW Value Added Services
+  uuid: f44543ce-9845-45f6-bdd8-4c106f4df11f
+  type_id: 14
+- id: &aw_freephone_services 6084
+  name: AW Freephone Services
+  uuid: 0ea97331-ae24-4a55-bdd0-5ec57f778458
+  type_id: 14
+- id: &aw_virtual_private_network 6239
+  name: AW Virtual Private Network
+  uuid: 7b9bad56-eebb-4184-854b-6e5d6bd37506
+  type_id: 14
+# Paging Networks
+- id: &aw_paging 6206
+  name: AW Paging
+  uuid: 46ef68e1-7dee-4ad0-8481-d2cd503e7d9e
+  type_id: 13
+network_prefixes:
+# Fixed Prefixes
+- id: 243010
+  prefix: '2972'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 4f9b164d-9c19-4ef7-915b-bbaf14d18f7c
+  country_id: *aw
+  network_id: *aw_fixed
+- id: 249361
+  prefix: '2975'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 235bb292-523c-4e4a-892a-4c4bf6b408bf
+  country_id: *aw
+  network_id: *aw_fixed
+- id: 249442
+  prefix: '297501'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 53e48073-47ac-4e24-be5f-d066b20f719a
+  country_id: *aw
+  network_id: *aw_fixed
+# Mobile Prefixes
+- id: 246609
+  prefix: '29759'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 2ec04270-e6af-46a5-b04f-cff97af2a05b
+  country_id: *aw
+  network_id: *aw_setar_mobile
+- id: 246807
+  prefix: '297600'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 31f4bc1b-4699-4cad-bd33-4a7e358f9221
+  country_id: *aw
+  network_id: *aw_mio_mobile
+- id: 247295
+  prefix: '297622'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 4f97cdfa-1975-4196-874e-20ebf080ff64
+  country_id: *aw
+  network_id: *aw_mio_mobile
+- id: 247422
+  prefix: '297660'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 545fb336-b213-4598-9769-6b9eb087e9fd
+  country_id: *aw
+  network_id: *aw_setar_mobile
+- id: 247450
+  prefix: '297661'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 8b859fae-3e47-4fd4-a1c9-2d6708d7718b
+  country_id: *aw
+  network_id: *aw_setar_mobile
+- id: 249992
+  prefix: '29756'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 62861fa1-767b-4030-8615-05787c820b50
+  country_id: *aw
+  network_id: *aw_setar_mobile
+- id: 250460
+  prefix: '297630'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: f33b7279-cca0-4523-ad89-4fe732c5ed2a
+  country_id: *aw
+  network_id: *aw_digicel_mobile
+- id: 250824
+  prefix: '297640'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: f8c0be5d-2218-4d5b-991a-afa44037d98d
+  country_id: *aw
+  network_id: *aw_digicel_mobile
+- id: 250874
+  prefix: '297641'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 2a4ef207-78ca-4cc8-b9cd-d7aba62c4d49
+  country_id: *aw
+  network_id: *aw_digicel_mobile
+- id: 251646
+  prefix: '29773'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 23a38997-026c-49aa-9e8d-194fc5cb00db
+  country_id: *aw
+  network_id: *aw_digicel_mobile
+- id: 251830
+  prefix: '29774'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 45ad05db-5f21-43d6-b0f1-a3213aa7d8c5
+  country_id: *aw
+  network_id: *aw_digicel_mobile
+- id: 254209
+  prefix: '29799'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 63aa204f-3c4a-4484-9280-5ce87b73ae97
+  country_id: *aw
+  network_id: *aw_setar_mobile
+- id: 258295
+  prefix: '297690'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: d6b55645-b6f1-4070-a5c3-faa6dc8c3d98
+  country_id: *aw
+  network_id: *aw_setar_mobile
+# Country code Prefixes
+- id: 247871
+  prefix: '297'
+  number_min_length: 6
+  number_max_length: 10
+  uuid: 71683c6b-db1c-47ac-a511-550c8761bf9f
+  country_id: *aw
+  network_id: *aw_fixed_cc
+# Supplementary services Prefixes
+- id: 248075
+  prefix: '2970'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: b7919608-cf48-4efc-b7b4-842b46f1b147
+  country_id: *aw
+  network_id: *aw_special_services
+- id: 248099
+  prefix: '29701'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: 4abea9ca-f7e3-4fd6-9334-20ab23c0d768
+  country_id: *aw
+  network_id: *aw_internet_access
+- id: 248289
+  prefix: '2971'
+  number_min_length: 7
+  number_max_length: 7
+  uuid: 9ec5945a-6b13-4669-945c-ea4c4301a261
+  country_id: *aw
+  network_id: *aw_special_services
+- id: 252892
+  prefix: '29788'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 95566bd1-2ffc-438c-bb49-46efcc136c39
+  country_id: *aw
+  network_id: *aw_personal_assistant_services
+- id: 253048
+  prefix: '29789'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a8ef57d2-f70a-43a2-92d8-39012f642aba
+  country_id: *aw
+  network_id: *aw_electronic_messaging_services
+- id: 253213
+  prefix: '29790'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 9b44b391-6d98-4cd9-b96e-3d09a61bad33
+  country_id: *aw
+  network_id: *aw_value_added_services
+- id: 253335
+  prefix: '297906'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 1f391164-cc1a-4edd-a394-ba01de65e1b0
+  country_id: *aw
+  network_id: *aw_value_added_services
+- id: 253385
+  prefix: '29791'
+  number_min_length: 8
+  number_max_length: 8
+  uuid: 3c0e8ab4-cd8d-494f-ac62-fbd961a0a388
+  country_id: *aw
+  network_id: *aw_special_services
+- id: 260041
+  prefix: '29780'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 45848b00-b67d-41c8-8f34-cc8066e6bd13
+  country_id: *aw
+  network_id: *aw_freephone_services
+- id: 260182
+  prefix: '297809'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 60a50667-7ebc-4ca6-b69a-4167715fbe61
+  country_id: *aw
+  network_id: *aw_freephone_services
+- id: 260192
+  prefix: '29781'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d67c469b-7d44-457d-b427-d149e425eaab
+  country_id: *aw
+  network_id: *aw_freephone_services
+- id: 260328
+  prefix: '297819'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 73af0082-d8d4-4766-9b74-9ba4a400558b
+  country_id: *aw
+  network_id: *aw_freephone_services
+- id: 261005
+  prefix: '29787'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d49f7815-223a-4c46-a826-5b51ac3b0191
+  country_id: *aw
+  network_id: *aw_virtual_private_network
+# Paging Prefixes
+- id: 260351
+  prefix: '29782'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 6306bc50-c38a-4c62-93b6-8b1e8829e623
+  country_id: *aw
+  network_id: *aw_paging

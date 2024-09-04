@@ -1,0 +1,136 @@
+country_id: &ai 7
+networks:
+# Country code Networks
+- id: &ai_fixed_cc 3140
+  name: AI Fixed Cc
+  uuid: 10aeb773-e843-487b-9c3a-39d6f4182671
+  type_id: 17
+# Mobile Networks
+- id: &ai_flow_mobile 3179
+  name: AI Flow Mobile
+  uuid: 5f76166e-7ef7-41e6-af95-ba541f30123d
+  type_id: 3
+- id: &ai_digicel_mobile 3182
+  name: AI Digicel Mobile
+  uuid: b58ded97-ff19-4523-90cb-13a9c21a70c0
+  type_id: 3
+# Supplementary services Networks
+- id: &ai_dial_up_internet_access 3180
+  name: AI Dial_Up Internet Access
+  uuid: ef14ea4d-d28d-4a0f-882c-345cc6829349
+  type_id: 14
+# Fixed Networks
+- id: &ai_fixed 3181
+  name: AI Fixed
+  uuid: d695ffa5-d626-4ada-9d7c-9192e303ec2f
+  type_id: 12
+network_prefixes:
+# Country code Prefixes
+- id: 24452
+  prefix: '1264'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 6f80eb2d-1fdd-43ac-bb65-4cadbfad809b
+  country_id: *ai
+  network_id: *ai_fixed_cc
+# Mobile Prefixes
+- id: 34811
+  prefix: '1264222'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 2c0fe23b-f14f-41b3-900f-f79ec6dc250d
+  country_id: *ai
+  network_id: *ai_flow_mobile
+- id: 34812
+  prefix: '1264235'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: d20c27ad-13ff-4610-91b0-de820ba11017
+  country_id: *ai
+  network_id: *ai_flow_mobile
+- id: 34820
+  prefix: '1264476'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 2a78f1f2-f12d-4660-ac1b-a954641ecedc
+  country_id: *ai
+  network_id: *ai_flow_mobile
+- id: 34824
+  prefix: '1264581'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 05534f68-6b2f-4e84-ba6b-8a9d6b0205dc
+  country_id: *ai
+  network_id: *ai_digicel_mobile
+- id: 34825
+  prefix: '1264582'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 2a645671-2a7e-4892-8f86-80b153520422
+  country_id: *ai
+  network_id: *ai_digicel_mobile
+- id: 34826
+  prefix: '1264583'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 7fe49357-587a-4aa6-811a-7cd8c596ecd7
+  country_id: *ai
+  network_id: *ai_digicel_mobile
+- id: 34827
+  prefix: '1264584'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 3c51899f-fc41-40aa-aa24-8181996f73ee
+  country_id: *ai
+  network_id: *ai_digicel_mobile
+- id: 34828
+  prefix: '1264729'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: adcf4fe0-2797-4181-b123-6ba003a61125
+  country_id: *ai
+  network_id: *ai_flow_mobile
+- id: 34829
+  prefix: '1264772'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 7e359a75-f96d-4f43-af0b-09d5c5e054f6
+  country_id: *ai
+  network_id: *ai_flow_mobile
+# Supplementary services Prefixes
+- id: 34813
+  prefix: '1264292'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 5e6e14c4-c066-4896-a9fe-2c3384a6a739
+  country_id: *ai
+  network_id: *ai_dial_up_internet_access
+# Fixed Prefixes
+- id: 34818
+  prefix: '1264461'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: a8f5355b-8bdc-42f7-bc12-2ac095878831
+  country_id: *ai
+  network_id: *ai_fixed
+- id: 34819
+  prefix: '1264462'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 6d85c89c-e6cf-4d2d-b4b9-3d25c56d4405
+  country_id: *ai
+  network_id: *ai_fixed
+- id: 34821
+  prefix: '1264497'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: da5f8fe8-2570-4d9c-b40a-a9a610d70892
+  country_id: *ai
+  network_id: *ai_fixed
+- id: 34822
+  prefix: '1264498'
+  number_min_length: 14
+  number_max_length: 14
+  uuid: 8bcdc26c-b9cf-42d9-abb4-ca22c6bd7146
+  country_id: *ai
+  network_id: *ai_fixed

@@ -1,0 +1,70 @@
+country_id: &er 66
+networks:
+# Country code Networks
+- id: &er_fixed_cc 4694
+  name: ER Fixed Cc
+  uuid: abc4b809-6c8a-4741-83a2-e3ca03da7eae
+  type_id: 17
+# Fixed Networks
+- id: &er_fixed 5821
+  name: ER Fixed
+  uuid: ce277498-d6f7-4d08-a678-af009ddf8408
+  type_id: 12
+# Mobile Networks
+- id: &er_eritel_mobile 5824
+  name: ER Eritel Mobile
+  uuid: 045f67da-5760-4c14-83a6-5d1512389d9b
+  type_id: 3
+network_prefixes:
+# Country code Prefixes
+- id: 247921
+  prefix: '291'
+  number_min_length: 9
+  number_max_length: 9
+  uuid: 2e1ca670-d212-4f07-ae48-985fb9691afe
+  country_id: *er
+  network_id: *er_fixed_cc
+# Fixed Prefixes
+- id: 254601
+  prefix: '2911'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: b0e17c56-4524-40d5-8f95-bb5d50c91d11
+  country_id: *er
+  network_id: *er_fixed
+- id: 392447
+  prefix: '2918'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 41b525b3-5520-4d6d-8111-c669abf200cd
+  country_id: *er
+  network_id: *er_fixed
+# Mobile Prefixes
+- id: 254615
+  prefix: '291171'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: f10ee6c1-2ea9-431f-b90c-bc1f9c9e59b8
+  country_id: *er
+  network_id: *er_eritel_mobile
+- id: 254617
+  prefix: '291172'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: 03daec7a-329f-4763-b239-65fc9183a4a1
+  country_id: *er
+  network_id: *er_eritel_mobile
+- id: 254618
+  prefix: '291173'
+  number_min_length: 13
+  number_max_length: 13
+  uuid: c95cb375-6513-4818-80a3-a9b7e4fb10b3
+  country_id: *er
+  network_id: *er_eritel_mobile
+- id: 339616
+  prefix: '2917'
+  number_min_length: 11
+  number_max_length: 11
+  uuid: 3d5b6533-004c-494d-a47b-cdce6988f8c2
+  country_id: *er
+  network_id: *er_eritel_mobile
