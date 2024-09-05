@@ -5,8 +5,8 @@ require 'rspec_api_documentation/dsl'
 RSpec.resource 'Routing NumberlistItems' do
   include_context :acceptance_admin_user
 
-  let(:collection) { create_list(:numberlist_item, 2) }
   let(:record) { create(:numberlist_item) }
+  let(:type) { 'numberlist-items' }
 
   required_params = %i[key]
 
@@ -23,7 +23,24 @@ RSpec.resource 'Routing NumberlistItems' do
     tag-action
   ]
 
-  include_context :acceptance_index_show, namespace: 'routing', type: 'numberlist-items'
+  get '/api/rest/admin/routing/numberlist-items' do
+    jsonapi_filters Api::Rest::Admin::Routing::NumberlistItemResource._allowed_filters
+
+    let(:collection) { create_list(:numberlist_item, 2) }
+
+    example_request 'get listing' do
+      expect(status).to eq(200)
+    end
+  end
+
+  get '/api/rest/admin/routing/numberlist-items/:id' do
+    let(:id) { record.id }
+
+    example_request 'get specific entry' do
+      expect(status).to eq(200)
+    end
+  end
+
   include_context :acceptance_delete, namespace: 'routing', type: 'numberlist-items'
 
   post '/api/rest/admin/routing/numberlist-items' do
