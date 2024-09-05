@@ -3,27 +3,27 @@ networks:
 # Fixed Networks
 - id: &dg_fixed 4346
   name: DG Fixed
-  uuid: 0ff9f8fe-d0c8-4023-a78d-0fa0d4cf904a
+  uuid: 885de640-2a50-4b3f-a2d5-b706a2285a3f
   type_id: 12
 # Paging Networks
 - id: &dg_paging 4349
   name: DG Paging
-  uuid: fd2af2f9-ed35-4bf0-88fc-f42bf0bf4d25
+  uuid: 84cc5013-079f-48be-827f-bbace787c1df
   type_id: 13
 # Mobile Networks
 - id: &dg_foneplus_cellular_sure_mobile 4357
   name: DG Foneplus Cellular Sure Mobile
-  uuid: 831be9ca-25fb-4b04-9da6-9e3b6b0f9a33
+  uuid: 0918c4fc-04b5-4199-83f3-acc9f4a0736a
   type_id: 3
 # Country code Networks
 - id: &dg_fixed_cc 4688
   name: DG Fixed Cc
-  uuid: fbb49839-b06f-4bb9-850c-376bc4c13f6b
+  uuid: 0e3c3b29-addd-4ea1-b613-d6197eadf392
   type_id: 17
 # Supplementary services Networks
 - id: &dg_special_services 4960
   name: DG Special Services
-  uuid: 72a8daea-92fc-422a-8222-926b9021d0cd
+  uuid: ce9bdbb2-ccb6-4237-b8ba-ee1468b33f72
   type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -31,7 +31,7 @@ network_prefixes:
   prefix: '24637'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1ea386fd-d1b5-414f-9d23-e358f5fc529a
+  uuid: 614f17dd-87cc-4d49-9c6b-932c999b4a44
   country_id: *dg
   network_id: *dg_fixed
 # Paging Prefixes
@@ -39,7 +39,7 @@ network_prefixes:
   prefix: '2463709300'
   number_min_length: 17
   number_max_length: 17
-  uuid: 9bceab59-8d23-4a5a-94b6-f306c74edd94
+  uuid: 28a31eff-a2ea-4dad-b584-a68052e08086
   country_id: *dg
   network_id: *dg_paging
 # Mobile Prefixes
@@ -47,7 +47,7 @@ network_prefixes:
   prefix: '24638'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1992a7ba-0b6f-4c29-9afc-0553c1fec9fa
+  uuid: bcc11ec4-5760-4829-9c90-3363407250a1
   country_id: *dg
   network_id: *dg_foneplus_cellular_sure_mobile
 # Country code Prefixes
@@ -55,7 +55,7 @@ network_prefixes:
   prefix: '246'
   number_min_length: 6
   number_max_length: 10
-  uuid: 850dfe40-f6c6-4f72-a3f0-0d6fbecfc236
+  uuid: a81d9107-12e3-4472-a166-b0a612293b84
   country_id: *dg
   network_id: *dg_fixed_cc
 # Supplementary services Prefixes
@@ -63,13 +63,13 @@ network_prefixes:
   prefix: '2461'
   number_min_length: 7
   number_max_length: 7
-  uuid: b5e68842-8c49-4ae1-9b06-7a9b3986002a
+  uuid: 3017f1e9-f314-4399-bfff-30637e5c75dc
   country_id: *dg
   network_id: *dg_special_services
 - id: 253169
   prefix: '2469'
   number_min_length: 8
   number_max_length: 8
-  uuid: 4c0dc7dd-bda0-4bbf-9ec4-40304618993a
+  uuid: 15f0d8ef-1eb4-42ea-8693-c3024c02d1ca
   country_id: *dg
   network_id: *dg_special_services
