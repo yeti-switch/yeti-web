@@ -3,8 +3,14 @@
 RSpec.describe Api::Rest::Customer::V1::ServicesController, type: :request do
   include_context :json_api_customer_v1_helpers, type: :services
 
-  let!(:service) { FactoryBot.create(:service, uuid: SecureRandom.uuid) }
+  let(:account) { create(:account, contractor: customer) }
+  let!(:service) { FactoryBot.create(:service, uuid: SecureRandom.uuid, account:) }
   let(:json_api_request_query) { { include: :transactions } }
+
+  before do
+    # other customer's service
+    FactoryBot.create(:service)
+  end
 
   describe 'GET /api/rest/customer/v1/services?include=transactions' do
     subject { get json_api_request_path, params: json_api_request_query, headers: json_api_request_headers }
