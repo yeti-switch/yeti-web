@@ -20,4 +20,13 @@ class Api::Rest::Customer::V1::TransactionResource < Api::Rest::Customer::V1::Ba
   def self.sortable_fields(_ctx = nil)
     %i[id created_at service_id amount]
   end
+
+  def self.apply_allowed_accounts(records, options)
+    context = options[:context]
+    if context[:allowed_account_ids].present?
+      records.where(account_id: context[:allowed_account_ids])
+    else
+      records.joins(:account).where(accounts: { contractor_id: context[:customer_id] })
+    end
+  end
 end
