@@ -25,9 +25,9 @@ Config.setup do |setup_config|
     required(:calls_monitoring).schema do
       required(:write_account_stats).value(:bool?)
       required(:write_gateway_stats).value(:bool?)
-      required(:teardown_on_disabled_customer_auth).value(:bool?)
-      required(:teardown_on_disabled_term_gw).value(:bool?)
-      required(:teardown_on_disabled_orig_gw).value(:bool?)
+      optional(:teardown_on_disabled_customer_auth).value(:bool?)
+      optional(:teardown_on_disabled_term_gw).value(:bool?)
+      optional(:teardown_on_disabled_orig_gw).value(:bool?)
     end
 
     required(:api).schema do
