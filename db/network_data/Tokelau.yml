@@ -1,28 +1,23 @@
 country_id: &tk 213
 networks:
 # Fixed Networks
-- id: &tk_fixed 4177
+- id: &tk_fixed 4165
   name: TK Fixed
-  uuid: f3d29760-9f1b-409e-8267-f8578e908aee
+  uuid: 1c518e9b-d62b-434f-bb3b-f860d1982e6a
   type_id: 12
 # Supplementary services Networks
-- id: &tk_supplementary_services 4520
+- id: &tk_supplementary_services 4508
   name: TK Supplementary Services
-  uuid: 64a8ef6a-8809-4b77-9b02-c139475fcafe
+  uuid: 00763e64-e9a9-4d98-90fa-a410dde0dfef
   type_id: 14
-- id: &tk_international_operator 4877
+- id: &tk_international_operator 4659
   name: TK International Operator
-  uuid: 0f19c431-bff7-4eae-8393-4a0fba64cdcc
+  uuid: 120eaa9f-6242-4f63-9a45-d36627204aa4
   type_id: 14
-# Country code Networks
-- id: &tk_fixed_cc 4825
-  name: TK Fixed Cc
-  uuid: 6d7c4344-1832-4a5c-a6ac-3093d2ceecdc
-  type_id: 17
 # Mobile Networks
-- id: &tk_teletok_mobile_mobile 5988
+- id: &tk_teletok_mobile_mobile 5770
   name: TK Teletok Mobile Mobile
-  uuid: e95e9255-255e-4d31-a907-12e167b67983
+  uuid: 15f80ed5-d23e-4e97-9b0c-8712d6b29526
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -30,21 +25,21 @@ network_prefixes:
   prefix: '6902'
   number_min_length: 8
   number_max_length: 11
-  uuid: 308ce6a1-83df-47a3-b0be-0fa406e6e775
+  uuid: daed90f3-8ff4-4bb2-a543-2e165c254998
   country_id: *tk
   network_id: *tk_fixed
 - id: 244568
   prefix: '6903'
   number_min_length: 8
   number_max_length: 11
-  uuid: 8b1b7cd3-b6a2-4975-9966-2da78acfe05a
+  uuid: 366c5e13-cbaa-420d-b71c-f03fec27f990
   country_id: *tk
   network_id: *tk_fixed
 - id: 245349
   prefix: '6904'
   number_min_length: 8
   number_max_length: 11
-  uuid: f9652bde-25a2-4ddd-b483-cd43f0c4ffc2
+  uuid: 86f492f7-5acb-4843-9947-48bb06ae652f
   country_id: *tk
   network_id: *tk_fixed
 # Supplementary services Prefixes
@@ -52,35 +47,35 @@ network_prefixes:
   prefix: '6906'
   number_min_length: 8
   number_max_length: 11
-  uuid: 345419f0-12c1-42ce-bc0d-2564e0e3e4ce
+  uuid: b068ebac-dadd-40a6-a421-8415c5ff6cc6
   country_id: *tk
   network_id: *tk_supplementary_services
 - id: 248124
   prefix: '69001'
   number_min_length: 7
   number_max_length: 7
-  uuid: 523b3d14-86a5-4dd4-bcf7-3f301dda4f39
+  uuid: fa4b23ea-e148-4b9c-a014-6ebbb92e5b41
   country_id: *tk
   network_id: *tk_international_operator
 - id: 249426
   prefix: '6905'
   number_min_length: 8
   number_max_length: 11
-  uuid: e9d233a5-a608-43a2-a044-7abeb3584747
+  uuid: 5997e3e6-cbf6-46b8-adcc-454d2898be7e
   country_id: *tk
   network_id: *tk_supplementary_services
 - id: 253224
   prefix: '6909'
   number_min_length: 8
   number_max_length: 11
-  uuid: 315c90f4-30f3-4186-952a-7fbd68a42eca
+  uuid: e4193370-206c-4d4e-b72f-0d3dff80c7a4
   country_id: *tk
   network_id: *tk_supplementary_services
 - id: 260058
   prefix: '6908'
   number_min_length: 8
   number_max_length: 11
-  uuid: 78f4d157-9827-4972-9159-560a2fed9ce9
+  uuid: 526dd3b8-dd7d-4c11-94a0-99f0df44b899
   country_id: *tk
   network_id: *tk_supplementary_services
 # Country code Prefixes
@@ -88,14 +83,14 @@ network_prefixes:
   prefix: '690'
   number_min_length: 6
   number_max_length: 10
-  uuid: b699afbe-a543-47ff-8864-5df9667e9a51
+  uuid: d8f5ee61-693e-4e15-b577-1d7e5114532c
   country_id: *tk
-  network_id: *tk_fixed_cc
+  network_id:
 # Mobile Prefixes
 - id: 258722
   prefix: '6907'
   number_min_length: 8
   number_max_length: 11
-  uuid: 0b52e6b0-8426-4769-82e7-c8502789adf0
+  uuid: bf502991-7389-4e38-9e5a-a02636d2fb54
   country_id: *tk
   network_id: *tk_teletok_mobile_mobile

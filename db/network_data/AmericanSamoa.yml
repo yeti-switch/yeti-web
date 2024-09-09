@@ -1,28 +1,23 @@
 country_id: &as 4
 networks:
-# Country code Networks
-- id: &as_fixed_cc 6615
-  name: AS Fixed Cc
-  uuid: 88b75125-7162-44d7-b218-efe253757d23
-  type_id: 17
 # Mobile Networks
-- id: &as_bluesky_mobile 6616
+- id: &as_bluesky_mobile 6392
   name: AS Bluesky Mobile
-  uuid: 0ce96986-f214-4769-9f0f-46c7c20317c9
+  uuid: 41afd500-92f0-480c-ad2b-5b7edb6ed32f
   type_id: 3
-- id: &as_astca_mobile_mobile 6619
+- id: &as_astca_mobile_mobile 6395
   name: AS Astca Mobile Mobile
-  uuid: 96f4d760-6a2b-4c96-8d02-b8c1209e24e2
+  uuid: 409fe14b-191f-44ca-94e6-c73fe5c36fb2
   type_id: 3
 # Supplementary services Networks
-- id: &as_information_services 6617
+- id: &as_information_services 6393
   name: AS Information Services
-  uuid: 18e3de76-ccb1-4585-9ffd-861f262fbee8
+  uuid: d045456a-2295-4973-a7a2-b053b4b393c7
   type_id: 14
 # Fixed Networks
-- id: &as_fixed 6618
+- id: &as_fixed 6394
   name: AS Fixed
-  uuid: f8a72008-491c-409b-ac82-fb9ac6f54e0c
+  uuid: 2870a81d-2871-465c-85c6-88e12ae3f158
   type_id: 12
 network_prefixes:
 # Country code Prefixes
@@ -30,99 +25,99 @@ network_prefixes:
   prefix: '1684'
   number_min_length: 11
   number_max_length: 11
-  uuid: 036f9e0f-1aff-439a-a6ad-d98374c39211
+  uuid: 2c40be21-3a0b-4de6-9242-b904d7b5e4dd
   country_id: *as
-  network_id: *as_fixed_cc
+  network_id:
 # Mobile Prefixes
 - id: 347255
   prefix: '1684248'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9111e4cf-b1af-4e99-a4b7-487a2f7f8c59
+  uuid: 714bbf7d-8ccc-4eec-98c6-6bdc0a50e136
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347256
   prefix: '1684252'
   number_min_length: 14
   number_max_length: 14
-  uuid: a7716631-8a1a-4bb3-8572-20b2e9d29094
+  uuid: ba0b46f9-08b9-47c3-adbe-7f9bef7ac031
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347257
   prefix: '1684254'
   number_min_length: 14
   number_max_length: 14
-  uuid: ae3c4882-002a-463a-bdf9-fc68031c173e
+  uuid: 0957e795-4bb5-46d6-a08c-971051f21026
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347258
   prefix: '1684256'
   number_min_length: 14
   number_max_length: 14
-  uuid: ee9a41cd-b9b4-49dc-be7e-a2de2d9d1982
+  uuid: 8ed2ce62-3687-413a-b7c6-e5e870add13c
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347259
   prefix: '1684258'
   number_min_length: 14
   number_max_length: 14
-  uuid: e52fa09b-8e06-43c5-98ac-38e4ea963bab
+  uuid: 61ded495-6ad9-46ae-b952-a296231d82a4
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347260
   prefix: '1684272'
   number_min_length: 14
   number_max_length: 14
-  uuid: 043efba8-ad5e-430e-acfd-1b7485c23619
+  uuid: 9d360922-9ff1-40fb-876b-95316bf70712
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347261
   prefix: '1684274'
   number_min_length: 14
   number_max_length: 14
-  uuid: a25b5a34-f8d0-4d1e-b759-76f9b78204d0
+  uuid: 75a695b4-574e-454f-8b71-ed20d1da64b9
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347262
   prefix: '1684276'
   number_min_length: 14
   number_max_length: 14
-  uuid: f42a32b1-0d62-473c-baf8-5e6eac4d64b6
+  uuid: 9a200713-4ed6-4641-a385-3f1aeb51cb5d
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347263
   prefix: '1684299'
   number_min_length: 14
   number_max_length: 14
-  uuid: 059e7363-2642-4099-82b3-0f2c06fe4055
+  uuid: e151d592-eaec-4ad9-80e4-cec8a4b4c407
   country_id: *as
   network_id: *as_bluesky_mobile
 - id: 347273
   prefix: '1684731'
   number_min_length: 14
   number_max_length: 14
-  uuid: ef3f2a5d-f0f2-4b7d-b658-a24667792f67
+  uuid: c856ddf1-bc1f-43ac-ace5-44ccd8094bb0
   country_id: *as
   network_id: *as_astca_mobile_mobile
 - id: 347274
   prefix: '1684733'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2040bc72-ec44-4a32-abf9-4e90501247e1
+  uuid: fdbb23b1-3e9f-4444-aeca-2c3c69a8884c
   country_id: *as
   network_id: *as_astca_mobile_mobile
 - id: 347275
   prefix: '1684770'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4d53a98a-25a5-4655-a147-fe42bfcef9cf
+  uuid: 6d0050f4-d700-4190-9420-1d3d4fa39686
   country_id: *as
   network_id: *as_astca_mobile_mobile
 - id: 347276
   prefix: '1684782'
   number_min_length: 14
   number_max_length: 14
-  uuid: 685ad96c-16e8-46c5-ac88-9361e21b6667
+  uuid: 6c87f6f4-ee72-4238-8253-7800a82f940b
   country_id: *as
   network_id: *as_astca_mobile_mobile
 # Supplementary services Prefixes
@@ -130,7 +125,7 @@ network_prefixes:
   prefix: '1684555'
   number_min_length: 14
   number_max_length: 14
-  uuid: bfd94e32-4763-4e6f-8e66-7cc6cd66de3f
+  uuid: 0c7a226f-f4ff-48c8-94b7-db2cc27c1597
   country_id: *as
   network_id: *as_information_services
 # Fixed Prefixes
@@ -138,55 +133,55 @@ network_prefixes:
   prefix: '1684622'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5d96162a-6cdb-455d-85b3-0258852cdeb4
+  uuid: 2907b500-7b6a-43fc-8da3-4a2473107ef5
   country_id: *as
   network_id: *as_fixed
 - id: 347266
   prefix: '1684633'
   number_min_length: 14
   number_max_length: 14
-  uuid: a5ffa108-45a3-4655-9041-00839d7d2cd1
+  uuid: 3fa86f9b-2e18-4d0f-a5b1-d3bcbe624cec
   country_id: *as
   network_id: *as_fixed
 - id: 347267
   prefix: '1684644'
   number_min_length: 14
   number_max_length: 14
-  uuid: 37a0eecb-e3ad-4732-bd3e-8f75281fe460
+  uuid: 1c2c0bdc-d248-48e4-8d45-85729b77e626
   country_id: *as
   network_id: *as_fixed
 - id: 347268
   prefix: '1684655'
   number_min_length: 14
   number_max_length: 14
-  uuid: bfb367f9-7473-42ae-b947-a16b19028c16
+  uuid: 00369dab-c39e-4d89-9e52-fa66e3e1ffec
   country_id: *as
   network_id: *as_fixed
 - id: 347269
   prefix: '1684677'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5d597377-3997-441d-84ee-59a852c3675f
+  uuid: 83ccd337-5675-45e2-921b-d6aeda1c9796
   country_id: *as
   network_id: *as_fixed
 - id: 347270
   prefix: '1684688'
   number_min_length: 14
   number_max_length: 14
-  uuid: 77137abf-02e5-4955-bbdf-2bee7dfed614
+  uuid: 0e2a12d8-9256-49ae-98fe-74bc300b1954
   country_id: *as
   network_id: *as_fixed
 - id: 347271
   prefix: '1684691'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6cf95330-8695-4947-8cec-b15f6c607edd
+  uuid: db5b8921-7d1a-4a12-9e9f-1d619c30e078
   country_id: *as
   network_id: *as_fixed
 - id: 347272
   prefix: '1684699'
   number_min_length: 14
   number_max_length: 14
-  uuid: 82d261e6-fd7d-41b6-90fa-1f6370c5ebed
+  uuid: a448e715-3853-4a12-a6a2-edb4d3aff349
   country_id: *as
   network_id: *as_fixed

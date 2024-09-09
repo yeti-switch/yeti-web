@@ -1,115 +1,110 @@
 country_id: &ec 62
 networks:
 # Fixed Networks
-- id: &ec_fixed 3215
+- id: &ec_fixed 3208
   name: EC Fixed
-  uuid: 543ac554-6ce2-453d-bf16-f9e757cef936
+  uuid: 8462acc3-7594-4215-9402-57f3f8513566
   type_id: 12
 # Mobile Networks
-- id: &ec_mobile 3776
+- id: &ec_mobile 3765
   name: EC Mobile
-  uuid: 4363bf39-c25e-4316-97fa-7e8b9169e13e
+  uuid: 05be9447-8568-410d-842d-110ed5eb0515
   type_id: 3
-- id: &ec_claro_mobile 3807
+- id: &ec_claro_mobile 3796
   name: EC Claro Mobile
-  uuid: 88b2d9a0-2250-4cc0-a490-909b15a8bff5
+  uuid: 76cd4ad5-5533-45d4-b4d3-29887aa356fa
   type_id: 3
-- id: &ec_movistar_mobile 3835
+- id: &ec_movistar_mobile 3823
   name: EC Movistar Mobile
-  uuid: 54935b30-8c9e-4b7e-8852-89841140f59f
+  uuid: 318f3c10-0cd7-44fc-a115-27b2a7cd4b22
   type_id: 3
-- id: &ec_cnt_movil_mobile 3901
+- id: &ec_cnt_movil_mobile 3889
   name: EC Cnt Movil Mobile
-  uuid: de83fc51-9f01-4f5b-9dcc-30d9d3b3059a
+  uuid: f16ce209-c768-4ce6-aa21-24e5dc8ba0e9
   type_id: 3
 # Supplementary services Networks
-- id: &ec_voice_mail_services 3929
+- id: &ec_voice_mail_services 3917
   name: EC Voice Mail Services
-  uuid: ba679d5b-10de-45ba-bbd3-31432202d7be
+  uuid: 6e5f85b3-c337-474d-8c29-707d92056109
   type_id: 14
-- id: &ec_country_direct_services 3933
+- id: &ec_country_direct_services 3921
   name: EC Country Direct Services
-  uuid: ad22210d-7696-4b80-a855-de22f86c07b5
+  uuid: 679379a0-dbc3-40f2-8e72-fe1589ea7618
   type_id: 14
-- id: &ec_special_services 4138
+- id: &ec_special_services 4126
   name: EC Special Services
-  uuid: d964965f-308f-437a-aea4-b08ee71498ab
+  uuid: 91017d29-7707-4bcd-a4f0-ca4fc72f221b
   type_id: 14
-- id: &ec_universal_access_services 6595
+- id: &ec_universal_access_services 6372
   name: EC Universal Access Services
-  uuid: 0895a8a5-620a-4936-9bdc-c73a82e82319
+  uuid: ecd09cdd-fd24-40b0-ade7-24d3e151de77
   type_id: 14
-- id: &ec_virtual_private_network 6610
+- id: &ec_virtual_private_network 6387
   name: EC Virtual Private Network
-  uuid: 10e9ffbb-2d8f-4949-9437-e85f3f3457b3
+  uuid: 07f2e8c5-55e0-4d02-9eb8-1a6d9d3b50c8
   type_id: 14
-- id: &ec_universal_personal_number 6628
+- id: &ec_universal_personal_number 6404
   name: EC Universal Personal Number
-  uuid: 60f19d63-a8ce-4cdc-b22f-3e9b86c4d06a
+  uuid: a017820d-a72a-40c9-a387-d8ac49e6b10d
   type_id: 14
-- id: &ec_shared_cost_services 6821
+- id: &ec_shared_cost_services 6594
   name: EC Shared Cost Services
-  uuid: 769239c5-2611-4fbd-91c9-52c358b37a78
+  uuid: 1802892c-717f-4c0a-b1b7-ad2b81dd0f19
   type_id: 14
-- id: &ec_freephone_services 6888
+- id: &ec_freephone_services 6660
   name: EC Freephone Services
-  uuid: 7d22e865-5437-4ee3-b83e-370c2ff57e0a
+  uuid: 99bd081a-369c-47b0-be96-0ddf7c44134b
   type_id: 14
-- id: &ec_televoting_services 6942
+- id: &ec_televoting_services 6714
   name: EC Televoting Services
-  uuid: da9dfde4-746e-4811-8a44-0af942cee860
+  uuid: d37dddbc-feff-4e40-a2be-63078b4c8e89
   type_id: 14
-- id: &ec_information_services 7195
+- id: &ec_information_services 6963
   name: EC Information Services
-  uuid: d307043b-8105-42d0-bf0a-166dd5c6b559
+  uuid: 367ab59a-ba6b-4e40-8e4f-e089913d2fb5
   type_id: 14
-# Country code Networks
-- id: &ec_fixed_cc 4692
-  name: EC Fixed Cc
-  uuid: 8ca62954-ea27-4185-a4d7-e1a7fc954cbe
-  type_id: 17
 network_prefixes:
 # Fixed Prefixes
 - id: 40817
   prefix: '5933'
   number_min_length: 11
   number_max_length: 11
-  uuid: 1a7505ba-03ad-4e34-8ba3-df90bf1b2f9a
+  uuid: 36069e02-1a30-49e3-ad8a-dd5e878ca3ea
   country_id: *ec
   network_id: *ec_fixed
 - id: 86575
   prefix: '5934'
   number_min_length: 11
   number_max_length: 11
-  uuid: eca7efd1-abfb-44b5-9333-b85b82c22372
+  uuid: 92809920-c04c-46a3-a14b-2800eb00d5bd
   country_id: *ec
   network_id: *ec_fixed
 - id: 145893
   prefix: '5935'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9d4fd9fc-1c14-44ab-9327-b0e970b6a11f
+  uuid: 9ce98c2b-54be-4fc6-89ad-6b90a6a48213
   country_id: *ec
   network_id: *ec_fixed
 - id: 257346
   prefix: '5932'
   number_min_length: 11
   number_max_length: 11
-  uuid: 64d9d1cf-2e01-4cde-bf50-aa136cb291a4
+  uuid: 8552eb40-16fd-48e9-b493-205bf7361816
   country_id: *ec
   network_id: *ec_fixed
 - id: 276705
   prefix: '5936'
   number_min_length: 11
   number_max_length: 11
-  uuid: d2a8c3af-ae8f-4136-8a1d-88b68d0ac25b
+  uuid: ea292158-f890-4932-b66c-abfbe428b24c
   country_id: *ec
   network_id: *ec_fixed
 - id: 339642
   prefix: '5937'
   number_min_length: 11
   number_max_length: 11
-  uuid: 6a19e859-aee2-4037-a5c1-633ec504f552
+  uuid: a76843ea-3444-4aa7-8522-b8b4a78cd2b2
   country_id: *ec
   network_id: *ec_fixed
 # Mobile Prefixes
@@ -117,784 +112,784 @@ network_prefixes:
   prefix: '59392'
   number_min_length: 12
   number_max_length: 12
-  uuid: b126eba4-427b-4e91-80d2-ff7c069bf121
+  uuid: 151e74af-bc13-4c95-9849-742a3beff0ee
   country_id: *ec
   network_id: *ec_mobile
 - id: 195210
   prefix: '59393'
   number_min_length: 12
   number_max_length: 12
-  uuid: 305fe00a-56e8-45b6-a0cc-ba70d27d609f
+  uuid: 41bceb14-22cb-4222-8728-bd94dbc01664
   country_id: *ec
   network_id: *ec_mobile
 - id: 195398
   prefix: '593939'
   number_min_length: 13
   number_max_length: 13
-  uuid: b1ae7293-0c68-499a-8615-797adbeb12fe
+  uuid: 35354874-7bf9-408a-ae7f-53a2f2e43ad0
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 212634
   prefix: '59394'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5c54587e-c93d-46bd-b712-13f42829c650
+  uuid: 0485199b-6e68-44f6-a666-0c974b6ba56e
   country_id: *ec
   network_id: *ec_mobile
 - id: 214867
   prefix: '5939586'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6742ac2d-c078-4b4f-8cb5-6c33956aa41c
+  uuid: e5cbadb2-508f-4422-8579-c97edcd39257
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 214878
   prefix: '5939587'
   number_min_length: 14
   number_max_length: 14
-  uuid: c08d7015-c025-4252-b619-405678f4f057
+  uuid: 8fca30f4-7050-45af-a54b-50a2e54bc01a
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 214889
   prefix: '5939588'
   number_min_length: 14
   number_max_length: 14
-  uuid: 434f5e3b-7bf6-406b-805b-d1d6c43b6e6c
+  uuid: ba4e3f37-62be-477e-a7ca-df8c26031802
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 214909
   prefix: '5939589'
   number_min_length: 14
   number_max_length: 14
-  uuid: 30237f0a-be51-4ce3-90bf-525fe60a9298
+  uuid: 803d7e21-40eb-4835-8bb2-9f9222c76e9b
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 214921
   prefix: '593959'
   number_min_length: 13
   number_max_length: 13
-  uuid: 019fac73-d863-4045-b040-5c33ed3106a4
+  uuid: a43c2af5-bb6e-4324-9621-5aaf0d208c70
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 218159
   prefix: '59395'
   number_min_length: 12
   number_max_length: 12
-  uuid: 2aa37efe-81a6-4fb6-a51f-e9ea41374565
+  uuid: 6477d3f2-def1-4281-b663-6e511847f541
   country_id: *ec
   network_id: *ec_mobile
 - id: 221187
   prefix: '593967'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8fe48bd1-5698-4389-aa46-aa2ef1bff137
+  uuid: 98ca45e2-7d67-48af-a1b1-92228029f542
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221289
   prefix: '593968'
   number_min_length: 13
   number_max_length: 13
-  uuid: cfcdfb41-bef9-4978-854c-b4abde10e8d0
+  uuid: 647d8fe0-7b8f-48b9-9fee-76ee2376abda
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221403
   prefix: '5939690'
   number_min_length: 14
   number_max_length: 14
-  uuid: e4404b5b-a731-4775-b766-56d32cd43caa
+  uuid: 2ea03adb-5f3c-4fe3-a365-f9e7159fecc8
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 221414
   prefix: '5939691'
   number_min_length: 14
   number_max_length: 14
-  uuid: fcada6b5-a909-4d36-b565-7e697dacd0c1
+  uuid: 286a4ecf-7629-4e9e-b17d-692f9d453d5e
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221425
   prefix: '5939692'
   number_min_length: 14
   number_max_length: 14
-  uuid: 721d48d2-ed36-4697-83f1-477dcbdad1bf
+  uuid: 3b6954f2-7ef6-4031-9e13-f62f3db2c487
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221438
   prefix: '5939693'
   number_min_length: 14
   number_max_length: 14
-  uuid: cf6ef1cf-b053-4831-addb-7388ce3198b7
+  uuid: f3ef9a8e-0835-4684-adf4-bbc01ba991d7
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221451
   prefix: '5939694'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1b3da93c-2adf-4dd0-bbda-8ec8bc7835ae
+  uuid: e1193abe-593f-4032-9766-1bda867cb3c7
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221462
   prefix: '5939695'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8f27b7e4-8987-425c-81cc-57b8255978dd
+  uuid: e6ba76ad-9c02-4a9a-9f22-df8b91f9ce1a
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221473
   prefix: '5939696'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0821bc88-7063-4122-9e4a-8895cd338cbd
+  uuid: 1e548306-433a-472f-88e1-bd4584d3aa7a
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221484
   prefix: '5939697'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9b11b722-0498-4098-a160-4e22315245b3
+  uuid: b68cc175-6160-42da-98cb-151747bdf9b5
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221499
   prefix: '5939698'
   number_min_length: 14
   number_max_length: 14
-  uuid: fe7c16b0-597c-40e5-80af-19e5892f1bb1
+  uuid: 95370453-433d-4751-9af8-87c6a913384a
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 221545
   prefix: '5939699'
   number_min_length: 14
   number_max_length: 14
-  uuid: 56beff05-c226-4396-b046-e32920275bd8
+  uuid: b61fab9a-4d05-4b28-b3a6-64b9a6bfe868
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 223646
   prefix: '59397'
   number_min_length: 12
   number_max_length: 12
-  uuid: 52ae2045-a978-4c25-936d-36a3823cd8be
+  uuid: 91baf11d-8c03-41eb-b55b-9c82dcc33f39
   country_id: *ec
   network_id: *ec_mobile
 - id: 224527
   prefix: '5939786'
   number_min_length: 14
   number_max_length: 14
-  uuid: f9afe55c-90de-4b6b-8148-9c1cb97b2225
+  uuid: be3ee085-40cd-4e12-bfb4-59344ee0c2ad
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 224538
   prefix: '5939787'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9143b65e-e320-4c08-858b-2a53d4ce6c0a
+  uuid: 33ee3e7a-4868-47ce-94f5-18bc9e8952ac
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 224549
   prefix: '5939788'
   number_min_length: 14
   number_max_length: 14
-  uuid: a3c60db5-e651-429a-8222-7e2965330f82
+  uuid: 2dbc92ad-ebf6-463a-a44e-f6ddc2a7c8da
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 224560
   prefix: '5939789'
   number_min_length: 14
   number_max_length: 14
-  uuid: 02cd51fe-47f7-4ed7-a092-7fcd4881a023
+  uuid: abc35dfc-1dfc-485d-b33d-3bc9a47b66d6
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 224572
   prefix: '5939790'
   number_min_length: 14
   number_max_length: 14
-  uuid: be8cae8e-b436-4dc2-85f6-62891bcb98fd
+  uuid: aac9d107-5e4b-4e0a-8f21-df3b39b12aa4
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 224583
   prefix: '5939791'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7fb662f3-6619-456f-85ec-01de7f447b5b
+  uuid: 7e473a57-e5fb-4f5f-87d3-0a7b19788a6d
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 224594
   prefix: '5939792'
   number_min_length: 14
   number_max_length: 14
-  uuid: 903eacd1-f238-408e-9b63-5fd4479ed551
+  uuid: 72809f87-9c06-4960-b0cf-a733d60ae8e2
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 224598
   prefix: '5939793'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6dae2d74-9873-401a-a147-b32bd350656e
+  uuid: 930ddb5b-631c-471f-bbcd-21961471b4d4
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 224604
   prefix: '5939794'
   number_min_length: 14
   number_max_length: 14
-  uuid: c078b582-4eec-4f64-8c9f-34d2637b8a70
+  uuid: 8d38a7f9-635c-4ddc-b569-2c01d62e4df2
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 224608
   prefix: '5939795'
   number_min_length: 14
   number_max_length: 14
-  uuid: dc1ea207-389d-4295-b01f-4229a9fd1bb7
+  uuid: 34fc1011-c010-4dd7-a83e-1ff15d15dae9
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 224611
   prefix: '5939796'
   number_min_length: 14
   number_max_length: 14
-  uuid: 70ca09dc-cbc9-4272-8ceb-7460e322bcc3
+  uuid: bf59dee6-3459-4e59-86f4-51d2d52e0980
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 224614
   prefix: '5939797'
   number_min_length: 14
   number_max_length: 14
-  uuid: ff5157ab-2421-4d38-aac1-86e9b32aa3aa
+  uuid: bc64756f-ecec-489d-b949-77658312d6e2
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 224629
   prefix: '5939798'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7aeabed0-8323-4617-832d-cdcb2cf30aa9
+  uuid: 11a1acb3-26a8-45a6-b03e-c21c5a681f90
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 224657
   prefix: '5939799'
   number_min_length: 14
   number_max_length: 14
-  uuid: a0ecebf2-987b-49dc-a202-2275acf54b68
+  uuid: 78a58867-711e-47d1-9fce-2fb20b619eb0
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 225859
   prefix: '59396'
   number_min_length: 12
   number_max_length: 12
-  uuid: b1a2853e-cd1b-4dcb-b291-125ae67c6cb2
+  uuid: 89a6e149-506f-40a6-b42a-040af423e9e8
   country_id: *ec
   network_id: *ec_mobile
 - id: 225875
   prefix: '593960'
   number_min_length: 13
   number_max_length: 13
-  uuid: 070225a7-f3a4-4622-995c-b7f84392df11
+  uuid: a24d877c-88d4-4314-acdf-f7998036ed89
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 225896
   prefix: '593961'
   number_min_length: 13
   number_max_length: 13
-  uuid: fe33aec3-ba0c-4bf1-9b80-99b3a83c3819
+  uuid: ecf3868f-a828-4ef8-aa49-4c9d26d40f48
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 225921
   prefix: '5939620'
   number_min_length: 14
   number_max_length: 14
-  uuid: 95a0370f-4dc8-42cd-89f9-a5b86d95b4a7
+  uuid: 76787c2a-13ac-44f4-8d30-14aa0cc0e057
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 225924
   prefix: '5939621'
   number_min_length: 14
   number_max_length: 14
-  uuid: f42ba4e2-fdc8-4a52-9535-1ef56677ee14
+  uuid: 6f4801f9-d822-40c0-b11a-8320812db980
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 225927
   prefix: '5939622'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4e6b0830-2de9-430c-8ea7-ad8536a593ce
+  uuid: e24a8a10-4a66-4fcf-b335-3769f8b27783
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 225930
   prefix: '5939623'
   number_min_length: 14
   number_max_length: 14
-  uuid: e86a8235-4010-4b8e-85e4-3874d45af7ee
+  uuid: 680de3f8-7b25-4fe3-b786-e6870b005eb1
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 225933
   prefix: '5939624'
   number_min_length: 14
   number_max_length: 14
-  uuid: db66d88d-9ac9-4cbf-807f-6d2e99314da6
+  uuid: 5f6bc023-39ea-4701-8dc9-10d7c7815029
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 225936
   prefix: '5939625'
   number_min_length: 14
   number_max_length: 14
-  uuid: 12260272-4757-4df2-9b5f-5f45f3dcbac3
+  uuid: 8a218ccb-f259-4534-a5fe-6a23e5fe6787
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 225939
   prefix: '5939626'
   number_min_length: 14
   number_max_length: 14
-  uuid: 030ec10b-b374-4e38-9df2-09f35a267e15
+  uuid: 1ab05750-4aab-452b-a89c-13509f9b2aaa
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 225942
   prefix: '5939627'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3a18f314-b250-49c1-b64f-d23633ddea0c
+  uuid: 9762094b-c6cc-4c67-b25c-085f2e1c515b
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 225945
   prefix: '5939628'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8acc6c3b-25f1-486d-bd53-1ebbb7c9be47
+  uuid: 7315422e-205b-4faf-820d-c06d5f7ce79c
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 225948
   prefix: '5939629'
   number_min_length: 14
   number_max_length: 14
-  uuid: ee5d1262-3f41-4889-8852-715fab1598d9
+  uuid: 8ce4fa83-b645-477c-bb29-00326b9e2f83
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 225951
   prefix: '593963'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5f554ac7-fbb8-43fa-8988-4af6ee479260
+  uuid: 4e19757e-247d-4193-b650-dab79552a11c
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 225974
   prefix: '5939640'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5ca1eb62-cbdf-466e-8ad9-8299c0ad9237
+  uuid: 26e28b7d-2644-41ad-ac85-3f0653550b31
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 225977
   prefix: '5939641'
   number_min_length: 14
   number_max_length: 14
-  uuid: ebba9d1d-c28c-4ae5-afb2-735e83069e93
+  uuid: 8ee7bb0e-8dd9-43f0-ae06-9a1d2fa7c690
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 225980
   prefix: '5939642'
   number_min_length: 14
   number_max_length: 14
-  uuid: eb554ef5-295d-4e0c-a9af-8a403993753d
+  uuid: b7b582aa-3803-4f8b-9741-4d17d0b9e18e
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234130
   prefix: '59398'
   number_min_length: 12
   number_max_length: 12
-  uuid: 1aadd738-5597-49bc-9558-5120bcff1494
+  uuid: bc77a1be-c315-4150-8ffe-5bc2a901b35b
   country_id: *ec
   network_id: *ec_mobile
 - id: 234149
   prefix: '593980'
   number_min_length: 13
   number_max_length: 13
-  uuid: aa20c844-0c88-4bbb-80c3-4729a6f082d1
+  uuid: 60381625-7c61-4d8b-a9a3-65f4abdd2534
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234158
   prefix: '593981'
   number_min_length: 13
   number_max_length: 13
-  uuid: 787a043d-0fb5-45f5-b153-46fc4013a3cf
+  uuid: 67943657-abad-431e-a939-fe685cc5c93b
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234171
   prefix: '5939820'
   number_min_length: 14
   number_max_length: 14
-  uuid: 51cc9255-c7de-4656-b86b-f2df842a5078
+  uuid: 79cda409-3b17-4c07-9609-8b03577392ce
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 234173
   prefix: '5939821'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5e26eb91-baff-4c03-831c-7ccd11a30b70
+  uuid: 201cfac5-5d89-4d49-a62a-7669219e9a43
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 234175
   prefix: '5939822'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7d88bed7-833d-44d4-a166-bad0a03453fb
+  uuid: 91794996-4a1f-481d-a9d7-14fba6ce4f07
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 234178
   prefix: '5939823'
   number_min_length: 14
   number_max_length: 14
-  uuid: c78ac21e-2d66-48e5-86af-d5c82b10d610
+  uuid: 21a8de1f-7cf1-4a7e-9366-b041b4fb08db
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 234180
   prefix: '5939824'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7540f470-85ea-42fa-8f8b-708194050aa1
+  uuid: b985442d-dd49-4bc2-8684-4edad6aa5bec
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 234182
   prefix: '5939825'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3a8ab633-ba03-44a6-98f9-b5e32a2d24e9
+  uuid: 8d40284b-0eec-4118-82e5-0ba1879344a0
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234184
   prefix: '5939826'
   number_min_length: 14
   number_max_length: 14
-  uuid: 16033ce3-1b01-4667-b5d8-cc48c0cad7c0
+  uuid: 1fed5305-9467-40a7-bb79-aff5d52e56d6
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234186
   prefix: '5939827'
   number_min_length: 14
   number_max_length: 14
-  uuid: be8e8a7d-9a90-4234-9be5-91fcbd89f209
+  uuid: 5b163ccf-d474-4c68-b7e9-234235e639db
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234188
   prefix: '5939828'
   number_min_length: 14
   number_max_length: 14
-  uuid: 26f5bbfc-32f7-4c5d-b661-a7f038396cd9
+  uuid: 164ce5fc-ca62-4093-afb4-fe878e13e7f9
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234190
   prefix: '5939829'
   number_min_length: 14
   number_max_length: 14
-  uuid: c07f4dac-6901-47a9-bd48-1e373c387e1e
+  uuid: 52ce1c76-f5b3-439c-afda-95647926e5ab
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234193
   prefix: '5939830'
   number_min_length: 14
   number_max_length: 14
-  uuid: b13850a7-21d8-4829-a1c7-f825b2477e88
+  uuid: 662a2e66-fa5f-4366-a466-a6e95e15c433
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234195
   prefix: '5939831'
   number_min_length: 14
   number_max_length: 14
-  uuid: b03e0329-5adf-4e5e-b147-e2f9848aefb6
+  uuid: 4f73fc39-d9de-4ab0-a417-5a0faa8c1c66
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234198
   prefix: '5939832'
   number_min_length: 14
   number_max_length: 14
-  uuid: a8d19756-63df-4d2e-ae8a-e4077783c3fc
+  uuid: d8f7b860-6dfa-400b-aa7a-adb5bfeeab28
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234200
   prefix: '5939833'
   number_min_length: 14
   number_max_length: 14
-  uuid: 373bb8ba-7911-4bd3-b4e5-055e5415e791
+  uuid: 12fb3935-33a2-433f-9809-22acd75f732d
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234202
   prefix: '5939834'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4aabfa7a-01ba-4c01-bcd1-235faa531c0d
+  uuid: 701c179a-6bda-472b-8594-47b35e61b587
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234204
   prefix: '5939835'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0689781e-612e-43fb-af0f-d81e857d1d60
+  uuid: eea1d981-8e25-4cbb-a414-ea7320f7cb78
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234206
   prefix: '5939836'
   number_min_length: 14
   number_max_length: 14
-  uuid: 88edb68e-b53d-4e0e-96ba-0ab55acf68fe
+  uuid: ff046601-8af9-492d-ab50-1fc6f7e96ab7
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234208
   prefix: '5939837'
   number_min_length: 14
   number_max_length: 14
-  uuid: 401b1285-60fa-4e40-bcba-b75f1a775946
+  uuid: 4abcf094-3b65-43e2-a1c5-441a3af7e582
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234210
   prefix: '5939838'
   number_min_length: 14
   number_max_length: 14
-  uuid: 54b00af9-04ed-4e1e-a724-f9cc38066934
+  uuid: 04cfda60-b054-4614-8a55-eca8da11ace2
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234212
   prefix: '5939839'
   number_min_length: 14
   number_max_length: 14
-  uuid: d29598d4-88c3-49d3-89ea-8c9a26320970
+  uuid: 97b581b3-8107-4e76-b924-afb095f17c9f
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234214
   prefix: '593984'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5bedde02-e953-4306-973e-df437a019948
+  uuid: 83dd0a6b-9648-4cb5-be6b-58e775c17306
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234225
   prefix: '593985'
   number_min_length: 13
   number_max_length: 13
-  uuid: d1a0d15e-b4c8-45e4-a943-6a2b58c5e04d
+  uuid: 7c3000e6-2b2b-4af8-8151-b92b544a659d
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234236
   prefix: '593986'
   number_min_length: 13
   number_max_length: 13
-  uuid: d4df1bd1-11a7-4c0e-be18-af489cc3d053
+  uuid: ed5875b0-712c-4422-a57f-739045b34432
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234247
   prefix: '593987'
   number_min_length: 13
   number_max_length: 13
-  uuid: 46f9467a-355b-47a2-888f-3af79f420af7
+  uuid: eb89e162-4894-4980-8ef9-d6522ef12dff
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 234273
   prefix: '593988'
   number_min_length: 13
   number_max_length: 13
-  uuid: 7706a65d-da40-42dd-9efe-4f14569dd535
+  uuid: b4ecc410-c864-4b26-93db-ff60e0965c75
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 234285
   prefix: '593989'
   number_min_length: 13
   number_max_length: 13
-  uuid: 95bc9619-af91-4e65-bf31-15d00dadc8d2
+  uuid: d9ecff1f-ce43-4363-8762-ed8ac2175aa7
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238791
   prefix: '59399'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5f091511-28f7-4402-9400-2c2d066baca3
+  uuid: 6bf04b8f-70e2-4887-aa62-ce8317af10a4
   country_id: *ec
   network_id: *ec_mobile
 - id: 238808
   prefix: '593990'
   number_min_length: 13
   number_max_length: 13
-  uuid: 488fc0ff-8bca-4e59-a563-4b44bd693287
+  uuid: b5da7553-7976-4842-9864-25dd03461858
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238838
   prefix: '593991'
   number_min_length: 13
   number_max_length: 13
-  uuid: 95cc9bf2-5040-497b-aa99-d7cdfadc76b6
+  uuid: 7835d4aa-e5de-4e40-8610-6b29d0ecb4bd
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238851
   prefix: '5939920'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7f4e0983-0b13-4b77-a05c-35d81f5a6be9
+  uuid: d2583654-e3d5-4707-84f2-ef29742e75d7
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238853
   prefix: '5939921'
   number_min_length: 14
   number_max_length: 14
-  uuid: a8ce23b0-33b3-4b6d-a11a-7efb70255fdb
+  uuid: f13d4745-f6be-49fd-ade5-6bdfaaaadca7
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238855
   prefix: '5939922'
   number_min_length: 14
   number_max_length: 14
-  uuid: bf3fcc78-3062-45ad-bf9f-3a0170c6bfc6
+  uuid: c8ca96b0-0af8-4046-8173-eff8036fe7cf
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238857
   prefix: '5939923'
   number_min_length: 14
   number_max_length: 14
-  uuid: d2dc4876-5736-4a09-8e4d-70eca0dee695
+  uuid: a9b239f6-c197-4e3b-957e-283c10d5078e
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238859
   prefix: '5939924'
   number_min_length: 14
   number_max_length: 14
-  uuid: d15bfd19-ef18-41b5-b677-e74472cd52b2
+  uuid: ffc2d2b4-c192-4e45-b170-57b28ec6b234
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238861
   prefix: '5939925'
   number_min_length: 14
   number_max_length: 14
-  uuid: 98366782-6e7e-4eb6-b967-0ca456c23196
+  uuid: e807b9e7-d955-49b7-82f7-b534a59fbf57
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 238863
   prefix: '5939926'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8899f1b8-f197-474c-9308-75507823605f
+  uuid: cae387bc-29c4-4f3e-843a-d20a95e0a58c
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 238865
   prefix: '5939927'
   number_min_length: 14
   number_max_length: 14
-  uuid: 320b2380-195c-4312-9022-7cb214ad987f
+  uuid: 6c75a85c-e9f6-497a-84e6-652076c822b6
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 238867
   prefix: '5939928'
   number_min_length: 14
   number_max_length: 14
-  uuid: c367bb63-11f1-41e8-8287-0eb1fb7f9688
+  uuid: 03b6aedd-42e7-41e6-8185-d90b844c42fc
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 238869
   prefix: '5939929'
   number_min_length: 14
   number_max_length: 14
-  uuid: 54ae6f23-5cda-4406-bf1a-8798f54405e8
+  uuid: 0713c83f-d671-464f-9a8a-f57f1a0192f9
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 238871
   prefix: '593993'
   number_min_length: 13
   number_max_length: 13
-  uuid: e385e39d-60bf-4358-9796-ce4c476eef24
+  uuid: 0d5007ab-bdf6-4867-9fd6-1699513350d8
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238884
   prefix: '593994'
   number_min_length: 13
   number_max_length: 13
-  uuid: 09479293-2a81-4727-8ea8-88ea12770ba3
+  uuid: 93f376a1-5945-40f5-be42-9cb741f784ba
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 238898
   prefix: '593995'
   number_min_length: 13
   number_max_length: 13
-  uuid: bf487b14-3bbd-4af2-b2b9-35886c647e9b
+  uuid: d5b0365c-da82-492e-811e-4a3c38813a9e
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 238930
   prefix: '593996'
   number_min_length: 13
   number_max_length: 13
-  uuid: d77c863b-b71c-4405-9704-0ecb44a4ff5a
+  uuid: 176d15bd-de2d-4f14-bf86-a7433a2633c4
   country_id: *ec
   network_id: *ec_cnt_movil_mobile
 - id: 238982
   prefix: '593997'
   number_min_length: 13
   number_max_length: 13
-  uuid: 95b59b77-3836-4a46-b178-3f3d56fe7c40
+  uuid: 11afce33-f4cb-4717-b97b-af8f34c8457f
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 239068
   prefix: '593998'
   number_min_length: 13
   number_max_length: 13
-  uuid: 26ba00a4-b479-4613-a3b9-7913b4f80b67
+  uuid: 02a242a0-02c8-45f1-bfee-77d71c54f42e
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 239163
   prefix: '5939990'
   number_min_length: 14
   number_max_length: 14
-  uuid: eae7aa60-2c01-49be-81bc-2353d50c96ca
+  uuid: d9dada46-ce80-4ea9-96a9-bf48b27a3a3d
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 239165
   prefix: '5939991'
   number_min_length: 14
   number_max_length: 14
-  uuid: 79660e25-2ae4-4876-8e9f-20355ca78901
+  uuid: ec4aec53-92ad-4339-921d-6e3285ba7eaa
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 239167
   prefix: '5939992'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8c072ffa-a2c4-4163-88a3-5d688d300f1c
+  uuid: 5d0386fb-3689-42a3-9420-b11297b4b913
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 239171
   prefix: '5939993'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8bd381af-c15b-49f8-8b44-96cc2d121c60
+  uuid: 9304507b-4df3-4786-b5d1-4ab2c663525e
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 239177
   prefix: '5939994'
   number_min_length: 14
   number_max_length: 14
-  uuid: 31aadbea-ea76-4830-be1e-ffdef4dc04c5
+  uuid: afd94fec-865d-4519-a96a-c4dcf9eb062e
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 239180
   prefix: '5939995'
   number_min_length: 14
   number_max_length: 14
-  uuid: f9c36794-4894-491f-8334-c262ab585a2f
+  uuid: 41284bca-1dfe-4ff1-b5c0-9f42933e7bd9
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 239182
   prefix: '5939996'
   number_min_length: 14
   number_max_length: 14
-  uuid: 88dc5871-55e1-4b71-ad8a-6f18e0b81b71
+  uuid: 59d2ad47-aaf3-4b67-bec3-bdeeb66bbf65
   country_id: *ec
   network_id: *ec_claro_mobile
 - id: 239184
   prefix: '5939997'
   number_min_length: 14
   number_max_length: 14
-  uuid: f9dfccfd-7763-4997-9c3d-5ff981d1615c
+  uuid: a868d6a4-beeb-41c4-b4bd-0e2d34b6f2db
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 239191
   prefix: '5939998'
   number_min_length: 14
   number_max_length: 14
-  uuid: 565781c5-8bfb-4078-bfd2-964afb44f99b
+  uuid: 690412af-ffa0-4177-869e-01747169089a
   country_id: *ec
   network_id: *ec_movistar_mobile
 - id: 239246
   prefix: '5939999'
   number_min_length: 14
   number_max_length: 14
-  uuid: 947ed3e5-291e-4c50-8cfc-462b763e071e
+  uuid: 27d43a18-983f-4b44-9eb5-f50569132f9d
   country_id: *ec
   network_id: *ec_movistar_mobile
 # Supplementary services Prefixes
@@ -902,126 +897,126 @@ network_prefixes:
   prefix: '593990'
   number_min_length: 12
   number_max_length: 12
-  uuid: ec61db99-7faa-4e00-9e66-52fb9bad82e3
+  uuid: c58e1c1a-e92c-4594-98ff-0dd166abaafe
   country_id: *ec
   network_id: *ec_voice_mail_services
 - id: 240594
   prefix: '593999'
   number_min_length: 12
   number_max_length: 12
-  uuid: a5ce895d-3131-488e-8f4c-97d286d0aef8
+  uuid: 90b758c0-8aed-4a23-a80b-a05207332b67
   country_id: *ec
   network_id: *ec_country_direct_services
 - id: 243044
   prefix: '5932'
   number_min_length: 6
   number_max_length: 10
-  uuid: bd2fd922-2648-49d5-ba1f-b202d7c62ba7
+  uuid: cbce6382-582a-4bd2-8365-2c8c534ec9ee
   country_id: *ec
   network_id: *ec_special_services
 - id: 244536
   prefix: '5933'
   number_min_length: 6
   number_max_length: 10
-  uuid: 091a37e0-98c2-4087-8a76-9f6a87c58d00
+  uuid: 7c646277-d840-47c2-a4cf-7e6af5e93359
   country_id: *ec
   network_id: *ec_special_services
 - id: 245312
   prefix: '5934'
   number_min_length: 7
   number_max_length: 9
-  uuid: 3771b009-852b-41d8-90b6-ba972c7b3446
+  uuid: 12831ddc-6ca0-40e7-9b4a-71ead7427771
   country_id: *ec
   network_id: *ec_special_services
 - id: 246765
   prefix: '5936'
   number_min_length: 7
   number_max_length: 9
-  uuid: 77bcd1b2-14c9-47f8-9128-29b74fdd4f4c
+  uuid: a473ffd9-169b-4af6-8827-7328120c103a
   country_id: *ec
   network_id: *ec_special_services
 - id: 248352
   prefix: '5931'
   number_min_length: 7
   number_max_length: 10
-  uuid: 160a4e9e-5f39-44e8-ba70-ad9607bdf28b
+  uuid: 10bcc5af-b479-4e8a-a5c6-a3e9957aa09d
   country_id: *ec
   network_id: *ec_special_services
 - id: 249390
   prefix: '5935'
   number_min_length: 7
   number_max_length: 9
-  uuid: fbd24449-0d8e-4e13-8620-b92d27d4b9c5
+  uuid: 55a001eb-b26e-4101-a046-225619950656
   country_id: *ec
   network_id: *ec_special_services
 - id: 253171
   prefix: '5939'
   number_min_length: 6
   number_max_length: 10
-  uuid: 66d910ef-0ec3-4a2b-a51e-55965c2f21ae
+  uuid: 61e043f4-acd4-4e0e-b15b-fa88dae606c9
   country_id: *ec
   network_id: *ec_special_services
 - id: 258685
   prefix: '5937'
   number_min_length: 6
   number_max_length: 11
-  uuid: f4262fcb-b99d-4941-9547-3efb089e0a53
+  uuid: fbe9285c-dc6a-4a7c-99a4-672fef71861a
   country_id: *ec
   network_id: *ec_special_services
 - id: 260013
   prefix: '5938'
   number_min_length: 7
   number_max_length: 9
-  uuid: c7949b73-edf5-4918-9854-7b6ff9df15f1
+  uuid: 626d855e-2e14-444d-acdd-218518a7bd3a
   country_id: *ec
   network_id: *ec_special_services
 - id: 341553
   prefix: '593700'
   number_min_length: 12
   number_max_length: 12
-  uuid: 235f3a6e-b7ed-481b-8acf-1a92f76f25ff
+  uuid: 2c5531dc-c10b-42c3-85b4-b066f1ed5073
   country_id: *ec
   network_id: *ec_universal_access_services
 - id: 342916
   prefix: '593706'
   number_min_length: 6
   number_max_length: 6
-  uuid: 6d885695-880e-481c-b82f-ae2af379e9b0
+  uuid: e8b99a99-528b-4998-a93f-d42f94196a89
   country_id: *ec
   network_id: *ec_virtual_private_network
 - id: 349507
   prefix: '593702'
   number_min_length: 11
   number_max_length: 11
-  uuid: efa573ef-6c43-48a7-8a1b-ac16447d5525
+  uuid: c78f0fe4-648a-42c1-8626-12d744d061b3
   country_id: *ec
   network_id: *ec_universal_personal_number
 - id: 393659
   prefix: '593803'
   number_min_length: 12
   number_max_length: 12
-  uuid: 54c10b82-b52d-4e10-971f-b478273a7930
+  uuid: 11c19af3-8f9a-4b7c-8e9b-fc74a2c1c1da
   country_id: *ec
   network_id: *ec_shared_cost_services
 - id: 400855
   prefix: '593800'
   number_min_length: 12
   number_max_length: 12
-  uuid: 80b32bbe-2718-4aa5-b5c7-e8fc74e5d479
+  uuid: 4cfff5ca-8c81-47f4-83f7-b856602fd543
   country_id: *ec
   network_id: *ec_freephone_services
 - id: 402618
   prefix: '593805'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9df195af-dd85-48cb-90c7-db2f7e71c79e
+  uuid: 95911201-67e1-446d-b01f-d2aba3202e57
   country_id: *ec
   network_id: *ec_televoting_services
 - id: 453305
   prefix: '593900'
   number_min_length: 12
   number_max_length: 12
-  uuid: 6ac0e801-0ed1-42cb-b3a7-741de718a48a
+  uuid: 9272a82a-ab4b-4767-ae84-ae82a1ee5f29
   country_id: *ec
   network_id: *ec_information_services
 # Country code Prefixes
@@ -1029,6 +1024,6 @@ network_prefixes:
   prefix: '593'
   number_min_length: 5
   number_max_length: 10
-  uuid: 2726766a-bc97-41c6-88b1-1e1e5024cba3
+  uuid: 074dc0c0-5f25-48d9-85f9-01753ed14e89
   country_id: *ec
-  network_id: *ec_fixed_cc
+  network_id:

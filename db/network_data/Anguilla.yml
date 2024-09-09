@@ -1,28 +1,23 @@
 country_id: &ai 7
 networks:
-# Country code Networks
-- id: &ai_fixed_cc 3140
-  name: AI Fixed Cc
-  uuid: 76dd46c2-4834-464b-a349-daf699153891
-  type_id: 17
 # Mobile Networks
-- id: &ai_flow_mobile 3179
+- id: &ai_flow_mobile 3174
   name: AI Flow Mobile
-  uuid: 2eaa8a6d-3a30-47a5-b9e9-eaf7d8f0559c
+  uuid: 37fd8851-c373-40fb-b05b-a0d5f30b6f4e
   type_id: 3
-- id: &ai_digicel_mobile 3182
+- id: &ai_digicel_mobile 3177
   name: AI Digicel Mobile
-  uuid: 0c78cdeb-cf11-4dd4-abfb-195e64b03d29
+  uuid: 92367947-80cd-4891-8978-e6cadab73c3a
   type_id: 3
 # Supplementary services Networks
-- id: &ai_dial_up_internet_access 3180
+- id: &ai_dial_up_internet_access 3175
   name: AI Dial_Up Internet Access
-  uuid: 03d8d7d5-eaf3-41a2-97f2-d465f3ab458e
+  uuid: 1ce3a354-dd54-45f8-8fa7-c7ee78f5e508
   type_id: 14
 # Fixed Networks
-- id: &ai_fixed 3181
+- id: &ai_fixed 3176
   name: AI Fixed
-  uuid: 974d9e93-77ba-4227-ba5d-999cfc1bb04c
+  uuid: ef127b1b-9d33-4fd1-a8df-0d1f3dd34a66
   type_id: 12
 network_prefixes:
 # Country code Prefixes
@@ -30,71 +25,71 @@ network_prefixes:
   prefix: '1264'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9bdd09af-3598-4e7f-9df1-1ec7dd82b1a7
+  uuid: 1f7b2daa-6ac8-434e-a6e4-cc2ebfb7c77a
   country_id: *ai
-  network_id: *ai_fixed_cc
+  network_id:
 # Mobile Prefixes
 - id: 34812
   prefix: '1264222'
   number_min_length: 14
   number_max_length: 14
-  uuid: e439dc8e-774f-45c1-b041-1834ec09f72c
+  uuid: 16aebb2f-2ab5-4213-b798-db55f9ab0ca9
   country_id: *ai
   network_id: *ai_flow_mobile
 - id: 34813
   prefix: '1264235'
   number_min_length: 14
   number_max_length: 14
-  uuid: d3deddf2-18c2-4c81-ba0e-d8e5ac123204
+  uuid: ff87eb73-32a3-4e2c-b26b-4d43d0dc9a34
   country_id: *ai
   network_id: *ai_flow_mobile
 - id: 34821
   prefix: '1264476'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2ca22590-f041-4aba-b0a0-9ddb6e0fe51f
+  uuid: 59816839-d2ff-46fc-bc66-04cc8222c253
   country_id: *ai
   network_id: *ai_flow_mobile
 - id: 34825
   prefix: '1264581'
   number_min_length: 14
   number_max_length: 14
-  uuid: b7112c81-c715-47b2-99b5-3996fab0f933
+  uuid: 6ce088df-e89f-4f13-b366-97e737d7ad1f
   country_id: *ai
   network_id: *ai_digicel_mobile
 - id: 34826
   prefix: '1264582'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2ee753f6-9261-46b3-926c-6e70cd1cbb18
+  uuid: 981ec0de-1b89-427d-a078-c98b8d4e5719
   country_id: *ai
   network_id: *ai_digicel_mobile
 - id: 34827
   prefix: '1264583'
   number_min_length: 14
   number_max_length: 14
-  uuid: 94da86c4-dadf-4663-84ab-6f58fa6fe37b
+  uuid: 82913efc-022c-4aa4-afa3-d914d7693a8e
   country_id: *ai
   network_id: *ai_digicel_mobile
 - id: 34828
   prefix: '1264584'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7d36bdc8-df2d-4982-a6f1-969ea28743e4
+  uuid: e4f0caa4-1e92-41d3-9b3c-ed51973095c2
   country_id: *ai
   network_id: *ai_digicel_mobile
 - id: 34829
   prefix: '1264729'
   number_min_length: 14
   number_max_length: 14
-  uuid: ed7cf239-5d8d-4c64-a1e9-ea5db3fb75ae
+  uuid: 29a3f9c5-a7b3-4322-a999-ade39a63ff9b
   country_id: *ai
   network_id: *ai_flow_mobile
 - id: 34830
   prefix: '1264772'
   number_min_length: 14
   number_max_length: 14
-  uuid: cc289480-fcbc-4403-863f-22398b6c2d0c
+  uuid: 0e0f3c91-588d-435a-a1d0-0972b1ed9e9e
   country_id: *ai
   network_id: *ai_flow_mobile
 # Supplementary services Prefixes
@@ -102,7 +97,7 @@ network_prefixes:
   prefix: '1264292'
   number_min_length: 14
   number_max_length: 14
-  uuid: 754ba2c5-1f8c-4da5-b07b-932b0bd3551d
+  uuid: d57c9924-db25-408f-9dc4-b0ea1a0f847e
   country_id: *ai
   network_id: *ai_dial_up_internet_access
 # Fixed Prefixes
@@ -110,27 +105,27 @@ network_prefixes:
   prefix: '1264461'
   number_min_length: 14
   number_max_length: 14
-  uuid: d3fe037f-8c2b-433f-b158-fafb37c6d692
+  uuid: 8ee34b72-dbbd-476e-8536-c8fb971775c3
   country_id: *ai
   network_id: *ai_fixed
 - id: 34820
   prefix: '1264462'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1e607eaa-8667-4eb5-a970-3c70bf0501e2
+  uuid: 7d7a0f70-6bef-4890-b23d-aa640a938f09
   country_id: *ai
   network_id: *ai_fixed
 - id: 34822
   prefix: '1264497'
   number_min_length: 14
   number_max_length: 14
-  uuid: 18915e5c-5243-450d-bb95-be9743462318
+  uuid: a8a23acf-6e12-4951-9e4d-eff0de221ff3
   country_id: *ai
   network_id: *ai_fixed
 - id: 34823
   prefix: '1264498'
   number_min_length: 14
   number_max_length: 14
-  uuid: efe29725-e1e4-44f6-9206-c3e45adeda01
+  uuid: 68fa3570-1db8-4baa-be79-84ee20f7ddad
   country_id: *ai
   network_id: *ai_fixed
