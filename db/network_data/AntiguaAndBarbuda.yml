@@ -1,53 +1,48 @@
 country_id: &ag 9
 networks:
-# Country code Networks
-- id: &ag_fixed_cc 3184
-  name: AG Fixed Cc
-  uuid: 9cef4bb7-4e53-4c5f-858d-cecb0af5320a
-  type_id: 17
 # Supplementary services Networks
-- id: &ag_special_services 3185
+- id: &ag_special_services 3179
   name: AG Special Services
-  uuid: a75f54c9-2ed8-412d-a698-f331af43e43f
+  uuid: 7372f862-0fa2-426f-81aa-478cfa38ee2f
   type_id: 14
-- id: &ag_card_and_coin_telephones 3186
+- id: &ag_card_and_coin_telephones 3180
   name: AG Card And Coin Telephones
-  uuid: e0e39532-8af2-4f86-b601-0c6a5c63699f
+  uuid: ac03cff4-8b50-4514-bad1-dc36ceb1f974
   type_id: 14
-- id: &ag_credit_card_icvs 3187
+- id: &ag_credit_card_icvs 3181
   name: AG Credit Card Icvs
-  uuid: 88b0d0bf-53ca-4bd5-ae45-a9c85082332a
+  uuid: 0669dcef-3868-4f09-80df-8aed0c0e0d98
   type_id: 14
-- id: &ag_audiotext 3194
+- id: &ag_audiotext 3188
   name: AG Audiotext
-  uuid: 79cbf58f-4676-4f36-9ab3-e99f6c816b3c
+  uuid: aa8ad561-28d5-4238-a4d8-5d8665e5ad9e
   type_id: 14
 # Paging Networks
-- id: &ag_flow_paging 3188
+- id: &ag_flow_paging 3182
   name: AG Flow Paging
-  uuid: a6c52c02-306f-4e8c-94e1-a0c33c76f366
+  uuid: 911866a0-a3c8-44f5-8540-32339ccb8efa
   type_id: 13
-- id: &ag_paging 3189
+- id: &ag_paging 3183
   name: AG Paging
-  uuid: 68938f67-afa3-42bd-a875-27a6cc8af790
+  uuid: 40811b23-4781-410c-850a-755d10f36611
   type_id: 13
 # Fixed Networks
-- id: &ag_fixed 3190
+- id: &ag_fixed 3184
   name: AG Fixed
-  uuid: 654ccd19-fa82-4078-8a48-9e962a2ce34a
+  uuid: 3eaf6090-2c71-4fae-97ed-6e29361b3002
   type_id: 12
 # Mobile Networks
-- id: &ag_flow_mobile 3191
+- id: &ag_flow_mobile 3185
   name: AG Flow Mobile
-  uuid: 43b10d83-4727-4bfb-a2ad-651c6e53808e
+  uuid: 5ed02f4b-8b9a-4ae9-8d4b-6b4a874f3b41
   type_id: 3
-- id: &ag_digicel_mobile 3192
+- id: &ag_digicel_mobile 3186
   name: AG Digicel Mobile
-  uuid: 3555a16c-b8fd-445f-8d7e-671478a3f07c
+  uuid: 96b926a9-522e-43f6-abb0-de2ef25e0065
   type_id: 3
-- id: &ag_imobile_mobile 3193
+- id: &ag_imobile_mobile 3187
   name: AG Imobile Mobile
-  uuid: 54b358a2-8292-4e3f-b055-d00f9a7648cf
+  uuid: 3c5216a4-2ced-4b74-b29e-93ffdc13d918
   type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -55,64 +50,64 @@ network_prefixes:
   prefix: '1268'
   number_min_length: 11
   number_max_length: 11
-  uuid: 6a0e107b-effb-4e49-9eab-473f26076596
+  uuid: d3959a10-9a91-4416-a8d8-b04055263ba4
   country_id: *ag
-  network_id: *ag_fixed_cc
+  network_id:
 # Supplementary services Prefixes
 - id: 35792
   prefix: '1268092'
   number_min_length: 13
   number_max_length: 13
-  uuid: d54f952f-cb77-46d0-a6b0-0f83b4703647
+  uuid: 33f1f359-b685-4854-abd9-1a4811bffd8d
   country_id: *ag
   network_id: *ag_special_services
 - id: 35795
   prefix: '1268222'
   number_min_length: 14
   number_max_length: 14
-  uuid: ceef36dd-249a-40a5-bf63-33ecef0dea70
+  uuid: 073018c1-ff60-4934-868e-057150b97f5a
   country_id: *ag
   network_id: *ag_card_and_coin_telephones
 - id: 35796
   prefix: '1268268'
   number_min_length: 14
   number_max_length: 14
-  uuid: 23acc623-6b6f-4d75-9203-a72d4ed370e5
+  uuid: ae25ccdb-8673-4660-a98d-1389acb36689
   country_id: *ag
   network_id: *ag_special_services
 - id: 35798
   prefix: '1268333'
   number_min_length: 14
   number_max_length: 14
-  uuid: 02ed1d75-7bef-45bc-afa4-d1d66103a651
+  uuid: 0bad0ec0-3fa5-4704-939c-d4a26678f0ce
   country_id: *ag
   network_id: *ag_credit_card_icvs
 - id: 35812
   prefix: '1268555'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3e0429fa-111d-4f25-8a66-71fff0ff2c8f
+  uuid: 0e1d5bc1-ec48-4c04-a8a1-63529f7d79a6
   country_id: *ag
   network_id: *ag_special_services
 - id: 35826
   prefix: '1268739'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5aea61c6-f34d-44b9-a616-1f6d445e8ffd
+  uuid: 3f7cc8f1-c6c8-4a93-b978-cb1484672445
   country_id: *ag
   network_id: *ag_audiotext
 - id: 35828
   prefix: '1268765'
   number_min_length: 14
   number_max_length: 14
-  uuid: bcc866f4-8fae-4eb5-b88b-0266c2eb031a
+  uuid: 6a1cf9c9-58c9-4f71-98fc-1b5355492cec
   country_id: *ag
   network_id: *ag_special_services
 - id: 35845
   prefix: '1268938'
   number_min_length: 14
   number_max_length: 14
-  uuid: 667d4a97-6390-42f1-833a-bf3089abe0e1
+  uuid: 35778327-3ed8-4bca-9b84-4d23a2648664
   country_id: *ag
   network_id: *ag_audiotext
 # Paging Prefixes
@@ -120,21 +115,21 @@ network_prefixes:
   prefix: '1268404'
   number_min_length: 14
   number_max_length: 14
-  uuid: b9410348-56e1-4735-9dc5-bdefde2e11fc
+  uuid: 59feb027-ed19-4f88-a7ff-dae663eb888c
   country_id: *ag
   network_id: *ag_flow_paging
 - id: 35801
   prefix: '1268406'
   number_min_length: 14
   number_max_length: 14
-  uuid: a277b849-312e-4b84-84a5-417d8d9c9639
+  uuid: e009844a-2683-4488-b233-7a5ab7150e70
   country_id: *ag
   network_id: *ag_paging
 - id: 35802
   prefix: '1268409'
   number_min_length: 14
   number_max_length: 14
-  uuid: 058ad530-facf-4791-aa7a-6e0f9fd05450
+  uuid: 969093bb-1030-41d0-897f-397cb996623e
   country_id: *ag
   network_id: *ag_flow_paging
 # Fixed Prefixes
@@ -142,70 +137,70 @@ network_prefixes:
   prefix: '1268460'
   number_min_length: 14
   number_max_length: 14
-  uuid: a62c9622-9568-4595-be6d-3ab638aec45b
+  uuid: f38b5423-37aa-44c4-85db-72ab32687105
   country_id: *ag
   network_id: *ag_fixed
 - id: 35804
   prefix: '1268461'
   number_min_length: 14
   number_max_length: 14
-  uuid: c31249e4-f0d9-4666-bfe8-b02911fb7d4d
+  uuid: 68b7cdd4-842c-4b21-b904-e6f200a012b3
   country_id: *ag
   network_id: *ag_fixed
 - id: 35805
   prefix: '1268462'
   number_min_length: 14
   number_max_length: 14
-  uuid: c2843307-2539-451f-b252-ba01d178a7f4
+  uuid: 355e1d16-91c6-49d2-bccc-aa8d3075d5a1
   country_id: *ag
   network_id: *ag_fixed
 - id: 35806
   prefix: '1268463'
   number_min_length: 14
   number_max_length: 14
-  uuid: d14efcd6-1fb7-4083-8403-267ff39c039f
+  uuid: 9389d0a3-8b9e-4398-984a-e45014555063
   country_id: *ag
   network_id: *ag_fixed
 - id: 35808
   prefix: '1268480'
   number_min_length: 14
   number_max_length: 14
-  uuid: d739ff4c-f897-47e6-9be6-664d3f8ebd17
+  uuid: 5c8ccdcf-6573-4fb3-b7c7-856ad245eec0
   country_id: *ag
   network_id: *ag_fixed
 - id: 35809
   prefix: '1268481'
   number_min_length: 14
   number_max_length: 14
-  uuid: 299c9757-0106-4c17-b873-d7a5b399c713
+  uuid: f0581d1b-5fbd-43dc-a89e-68f0f2c18fe3
   country_id: *ag
   network_id: *ag_fixed
 - id: 35810
   prefix: '1268484'
   number_min_length: 14
   number_max_length: 14
-  uuid: b4722afd-cc6f-4cbb-8ffb-f5ef72266d2a
+  uuid: aec1cfc2-d160-487b-a2d7-598660bd9d25
   country_id: *ag
   network_id: *ag_fixed
 - id: 35813
   prefix: '1268560'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6caf45a0-7923-4386-946d-9058ef14bb24
+  uuid: 797768e4-ff33-48dd-95fd-0e1bc3cb38c6
   country_id: *ag
   network_id: *ag_fixed
 - id: 35814
   prefix: '1268561'
   number_min_length: 14
   number_max_length: 14
-  uuid: a11aface-0769-4f07-b5bc-af876bfbb6a7
+  uuid: 2ab7f1f2-2a9b-4d58-aa43-9dadf627cf1e
   country_id: *ag
   network_id: *ag_fixed
 - id: 35815
   prefix: '1268562'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4e6bfece-92a6-4b90-982a-581f2f978d8e
+  uuid: 89de8b18-afee-48f7-946c-8009f7e7fdc2
   country_id: *ag
   network_id: *ag_fixed
 # Mobile Prefixes
@@ -213,195 +208,195 @@ network_prefixes:
   prefix: '1268464'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6a097044-a8dc-40eb-a958-43e0a04cc605
+  uuid: 79bef4ff-2730-4c71-a04a-025f315ac6c0
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35816
   prefix: '1268720'
   number_min_length: 14
   number_max_length: 14
-  uuid: 76925078-c190-4423-bcfc-ac222fed1b7a
+  uuid: fa47aa69-595d-43cd-b601-4276f5719857
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35817
   prefix: '1268721'
   number_min_length: 14
   number_max_length: 14
-  uuid: 45e578ed-c501-46d9-a725-65552b1be47d
+  uuid: f2f7e79f-5b3a-458e-aaf5-ca812b7a60e3
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35818
   prefix: '1268722'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3346dd1e-268a-4c32-8562-029f18212656
+  uuid: e71ab3c9-bda3-45c2-a9ac-c2afd67edadc
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35819
   prefix: '1268723'
   number_min_length: 14
   number_max_length: 14
-  uuid: 657c2d77-8b2b-4868-8039-c82e4324440b
+  uuid: 2faf0959-9467-407c-8566-0e8278fa2ace
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35820
   prefix: '1268724'
   number_min_length: 14
   number_max_length: 14
-  uuid: aa284408-9bc8-4731-ba83-612c9a00f771
+  uuid: e99cbb96-1691-400b-8c6c-a9c4451016f0
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35821
   prefix: '1268725'
   number_min_length: 14
   number_max_length: 14
-  uuid: 28fd6a5d-de2a-447a-9a25-5496ecba8ca7
+  uuid: 23a5b1ed-c14b-4fc5-9733-61cbe8f1df26
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35822
   prefix: '1268726'
   number_min_length: 14
   number_max_length: 14
-  uuid: 50ba8fd4-b7d3-4b19-99a7-40e3f835510a
+  uuid: cffa45d0-b7fe-4a9a-98b8-e4dab79c437e
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35823
   prefix: '1268727'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0e55961e-9b49-40b7-b96b-6cab84260d86
+  uuid: a5b4b398-f618-4df7-b7bb-707e5c7f0923
   country_id: *ag
   network_id: *ag_imobile_mobile
 - id: 35824
   prefix: '1268728'
   number_min_length: 14
   number_max_length: 14
-  uuid: 01b83f31-2000-465a-90b0-1d23a03b51f5
+  uuid: d1d1f6b1-6e0a-47f5-86e3-da817f0575e6
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35825
   prefix: '1268729'
   number_min_length: 14
   number_max_length: 14
-  uuid: cbb3a2a4-ef59-4ac5-9f1f-68610079acc8
+  uuid: dbefd9c7-d492-49cc-8b4b-bfcb468372cd
   country_id: *ag
   network_id: *ag_imobile_mobile
 - id: 35827
   prefix: '1268764'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2a4fec6e-ae02-4b67-aaed-acba08ccaab0
+  uuid: 55ffaf54-18a8-41f2-acca-7512ce532ba2
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35829
   prefix: '1268770'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6b36b3e8-72f9-4983-97c3-42a425905d23
+  uuid: aaf562b5-359c-4d41-9b2f-2ca897040abb
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35830
   prefix: '1268771'
   number_min_length: 14
   number_max_length: 14
-  uuid: 383827b9-5b6f-4e62-a07d-3bf45100a896
+  uuid: 3856bfb6-66da-4c47-8501-d0f7f4d00069
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35831
   prefix: '1268772'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2f8d2477-5c73-45e1-88ea-96431a486af3
+  uuid: 1cd064f0-a007-4707-b5e5-ff0ac37819cd
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35832
   prefix: '1268773'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1cba492e-3c4d-4517-8757-390e3e2b3ac7
+  uuid: 24c2bd04-3ae6-4559-b617-5389627e9d51
   country_id: *ag
   network_id: *ag_imobile_mobile
 - id: 35833
   prefix: '1268774'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5233662b-5b9d-4476-a62b-74666f392725
+  uuid: f8815d7f-a21f-4774-90e2-9e538d43893d
   country_id: *ag
   network_id: *ag_imobile_mobile
 - id: 35834
   prefix: '1268775'
   number_min_length: 14
   number_max_length: 14
-  uuid: b38cb1fa-199d-498b-8e0d-c6babcfe1e57
+  uuid: aea12bfe-eb74-4b51-b933-f6bfffa9679b
   country_id: *ag
   network_id: *ag_imobile_mobile
 - id: 35835
   prefix: '1268776'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9258b783-6f27-4846-897f-2f24eff80630
+  uuid: 26c28644-6fd7-4e90-a172-1b87a6199a76
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35836
   prefix: '1268778'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0102d3cb-f61f-4d99-9838-6e31dd73593f
+  uuid: c2f9bdf0-dd73-45fa-831c-14755565247d
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35837
   prefix: '1268779'
   number_min_length: 14
   number_max_length: 14
-  uuid: c72f6e1e-3e54-4e0f-a22c-930aaf2b1914
+  uuid: 165b5576-fee8-4020-b137-0c5e4934ed73
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35838
   prefix: '1268782'
   number_min_length: 14
   number_max_length: 14
-  uuid: 967ca8d5-ecae-4f23-b53e-063059a06014
+  uuid: a10a2952-1250-4f7e-b1c8-72d3c2208252
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35839
   prefix: '1268783'
   number_min_length: 14
   number_max_length: 14
-  uuid: 64596838-9c1a-40ef-8915-d0f12d30f2f7
+  uuid: 1ecb4cf9-4ff1-4f83-9ed2-54340ec5c725
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35840
   prefix: '1268784'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8d9862a3-bde8-4314-a76d-89a4adf015e2
+  uuid: c4367fa7-7a57-40b9-b007-a7d51cb29587
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35841
   prefix: '1268785'
   number_min_length: 14
   number_max_length: 14
-  uuid: c010a822-b001-43b3-926c-8bc52a5f27de
+  uuid: a3ab5fb3-3f82-4469-b42b-facde1de7c33
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35842
   prefix: '1268786'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0d8b10a3-69be-462a-888d-061927b77da9
+  uuid: a3e970d3-170c-4ec4-9846-c9f0a8c9b51d
   country_id: *ag
   network_id: *ag_flow_mobile
 - id: 35843
   prefix: '1268788'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6c792156-3f92-46e3-af0e-6b7438b81cce
+  uuid: 7254c61b-23ed-41e3-9eab-bf74f8d12c97
   country_id: *ag
   network_id: *ag_digicel_mobile
 - id: 35844
   prefix: '1268789'
   number_min_length: 14
   number_max_length: 14
-  uuid: 82624a18-e7c1-44be-a3f8-672cebcbae2c
+  uuid: ad47796b-2a3e-49b5-83e2-0c2572374a83
   country_id: *ag
   network_id: *ag_flow_mobile

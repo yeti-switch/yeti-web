@@ -1,28 +1,23 @@
 country_id: &lc 181
 networks:
-# Country code Networks
-- id: &lc_fixed_cc 6760
-  name: LC Fixed Cc
-  uuid: 443b6e17-132e-4a82-ada7-77bfb14cee1d
-  type_id: 17
 # Supplementary services Networks
-- id: &lc_special_services 6761
+- id: &lc_special_services 6534
   name: LC Special Services
-  uuid: 2ac1ac7b-b00f-4721-ab62-01f138d7b76a
+  uuid: 9f57de3c-18f6-44b2-b648-34ca69f4cfb1
   type_id: 14
 # Mobile Networks
-- id: &lc_flow_mobile 6762
+- id: &lc_flow_mobile 6535
   name: LC Flow Mobile
-  uuid: ea85fbaf-7d59-4513-9a04-12eff315cda7
+  uuid: 7f2290b1-ec16-4459-a7ff-ac025506c460
   type_id: 3
-- id: &lc_digicel_mobile 6764
+- id: &lc_digicel_mobile 6537
   name: LC Digicel Mobile
-  uuid: 310e84aa-1f6a-49cb-bcfe-ec4d9ab21678
+  uuid: a59354e1-8b14-480d-802d-bdd1151f7217
   type_id: 3
 # Fixed Networks
-- id: &lc_fixed 6763
+- id: &lc_fixed 6536
   name: LC Fixed
-  uuid: 209f9e96-46c2-467e-ad2b-2e0122e21382
+  uuid: 9c7f6d4e-7d32-4117-b45c-5b5e1e707c68
   type_id: 12
 network_prefixes:
 # Country code Prefixes
@@ -30,85 +25,85 @@ network_prefixes:
   prefix: '1758'
   number_min_length: 6
   number_max_length: 14
-  uuid: 86862470-a739-404a-b900-fd7e4fd6d3d1
+  uuid: 9596a249-1783-4aa5-9760-efd8ea3b9157
   country_id: *lc
-  network_id: *lc_fixed_cc
+  network_id:
 # Supplementary services Prefixes
 - id: 379028
   prefix: '17581'
   number_min_length: 8
   number_max_length: 10
-  uuid: 337290d1-6d0e-4318-9bd3-d230283b3512
+  uuid: ce1a5c48-9007-4b03-9b4d-ffecb369c028
   country_id: *lc
   network_id: *lc_special_services
 - id: 379086
   prefix: '17582'
   number_min_length: 7
   number_max_length: 11
-  uuid: fcee4884-a567-4f06-b930-47c7f6a5e756
+  uuid: 1294cccf-d8a7-4073-be54-3a318adba9ab
   country_id: *lc
   network_id: *lc_special_services
 - id: 379091
   prefix: '17583'
   number_min_length: 8
   number_max_length: 10
-  uuid: 5c186aed-8379-4cbb-8a2c-defd3cfcd78e
+  uuid: fc67988c-e510-42f5-ba09-76c5feace7c1
   country_id: *lc
   network_id: *lc_special_services
 - id: 379092
   prefix: '1758345949827'
   number_min_length: 23
   number_max_length: 23
-  uuid: 58fb56c4-7b31-4638-8659-b65122338e9e
+  uuid: cb527822-8d95-47e8-b550-827ca02a74d7
   country_id: *lc
   network_id: *lc_special_services
 - id: 379094
   prefix: '17584'
   number_min_length: 8
   number_max_length: 10
-  uuid: ad1e1b1a-7144-485b-99cb-41b340c1f8b4
+  uuid: 17ba4419-f11d-4b4f-998c-0eff1a4907cd
   country_id: *lc
   network_id: *lc_special_services
 - id: 379108
   prefix: '17585'
   number_min_length: 8
   number_max_length: 10
-  uuid: d3eddb7e-4036-4707-ab76-8c7f1fa891e1
+  uuid: 2327a241-dc66-41bf-8c78-3cdb4c7b7cde
   country_id: *lc
   network_id: *lc_special_services
 - id: 379116
   prefix: '17586'
   number_min_length: 8
   number_max_length: 9
-  uuid: aaeef49b-f8a6-4a8f-a0d4-1b296af076b4
+  uuid: 326a29fd-293c-4961-9934-deb2187d8dbe
   country_id: *lc
   network_id: *lc_special_services
 - id: 379117
   prefix: '17587'
   number_min_length: 8
   number_max_length: 11
-  uuid: 1c1a4b23-c25f-4b0e-be9e-a531a86bc1ba
+  uuid: b871d6b6-c055-4862-8826-a79152995483
   country_id: *lc
   network_id: *lc_special_services
 - id: 379130
   prefix: '17588'
   number_min_length: 7
   number_max_length: 9
-  uuid: c644f556-f16e-4550-97ef-d2b0c45ac736
+  uuid: 75776941-53eb-42de-a568-5ae008de0fe5
   country_id: *lc
   network_id: *lc_special_services
 - id: 379131
   prefix: '1758888845583'
   number_min_length: 23
   number_max_length: 23
-  uuid: ea54a630-18af-4d5c-84ea-741111a649e8
+  uuid: bc486b4f-6d26-4f65-898e-c2b86024861c
   country_id: *lc
   network_id: *lc_special_services
 - id: 379132
   prefix: '17589'
   number_min_length: 7
   number_max_length: 10
-  uuid: e58f07d2-9764-4dfe-a1b5-ee100b0d3c44
+  uuid: beafe400-7ce8-424c-879e-73fd1d87595b
   country_id: *lc
   network_id: *lc_special_services
 # Mobile Prefixes
@@ -116,196 +111,196 @@ network_prefixes:
   prefix: '1758284'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7335b8c4-3e78-47d3-9a2e-344883c14ea9
+  uuid: 71d4a534-fd2c-4caf-8ec3-0d395dc1edd3
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379088
   prefix: '1758285'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6b291848-c634-465d-9c0d-b9bb81c8dda1
+  uuid: 95851876-6a6e-477b-99e7-3bfe07b26885
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379089
   prefix: '1758286'
   number_min_length: 14
   number_max_length: 14
-  uuid: 20d45e17-9628-4102-80ac-22da67d319b0
+  uuid: 1d6d809d-6411-41c5-a469-08c8ddb30978
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379090
   prefix: '1758287'
   number_min_length: 14
   number_max_length: 14
-  uuid: fd3cacd7-2657-4271-aa62-62086816ef7e
+  uuid: fd9e574c-2f5a-440c-a04b-dae683362a2a
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379093
   prefix: '1758384'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8c2f5322-b84f-482f-a8a1-c2795b640fc8
+  uuid: 779048ec-006f-45aa-b633-fc0e34c1f383
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379096
   prefix: '1758460'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6e168ad8-6991-42fb-8037-58d88cb73039
+  uuid: 8f0d0c72-cffa-4339-93bf-da2667a5c977
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379097
   prefix: '1758461'
   number_min_length: 14
   number_max_length: 14
-  uuid: d5a085aa-df84-4221-bbf8-c914147adbef
+  uuid: c41d5aa3-7ae1-4b90-8229-bbc108008022
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379102
   prefix: '1758484'
   number_min_length: 14
   number_max_length: 14
-  uuid: 70d4dcb3-a0d6-4ad9-8424-17a716b2e546
+  uuid: 1b9660df-e0be-40e3-af1c-6752bdad26e6
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379103
   prefix: '1758485'
   number_min_length: 14
   number_max_length: 14
-  uuid: 421bebdb-3212-46d5-ac66-6cc5cc6fb7c6
+  uuid: 2587a8ab-ee6c-4056-848b-d19474654ecb
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379104
   prefix: '1758486'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7b66d8c2-d9c9-4559-9c8b-255cb2103cd1
+  uuid: 162b5e26-43e6-4608-8e81-e130a68a0696
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379105
   prefix: '1758487'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0bac704c-ee76-44bd-ac39-2bd2014e3276
+  uuid: de1f1b50-cb40-4f5b-b39e-ce9832c84ef8
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379106
   prefix: '1758488'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8e0a7a66-abfe-48ba-8419-5b43535b7924
+  uuid: 6285e077-c29f-4a1f-9d19-73cf20562975
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379107
   prefix: '1758489'
   number_min_length: 14
   number_max_length: 14
-  uuid: 19ddb709-bfd0-4fe3-9abf-622a712d0a6c
+  uuid: 1a004b4e-ba30-4df4-aaf8-ce92546b4480
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379109
   prefix: '1758518'
   number_min_length: 14
   number_max_length: 14
-  uuid: c8e17946-a5da-466c-bed2-38f486a7e54b
+  uuid: 1c1a904b-7c0a-4b14-83b9-9f48a6c6a159
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379110
   prefix: '1758519'
   number_min_length: 14
   number_max_length: 14
-  uuid: c0b0dccf-df1b-4f40-bc21-ecb6b39591b9
+  uuid: dbeec0ab-4b5e-4888-a782-7abe6c6d495b
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379111
   prefix: '1758520'
   number_min_length: 14
   number_max_length: 14
-  uuid: e9b87bcb-1f3a-4d73-a082-067421423dc6
+  uuid: 492826df-c003-494e-b479-0938f7ebab27
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379115
   prefix: '1758584'
   number_min_length: 14
   number_max_length: 14
-  uuid: 58011632-3949-48db-9398-c26607c7d79b
+  uuid: 368fdc39-9ad4-4327-b01f-39bcdb970668
   country_id: *lc
   network_id: *lc_flow_mobile
 - id: 379118
   prefix: '1758712'
   number_min_length: 14
   number_max_length: 14
-  uuid: 9f8e11fa-a8dd-4a95-a704-cfee423bae4d
+  uuid: 0d2f3215-0b37-4ed9-a0a2-25b43c6f4766
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379119
   prefix: '1758713'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5a569fe7-6feb-47cf-b24c-6587061bde3a
+  uuid: bfb38cb9-1803-4115-be68-2633f57f678f
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379120
   prefix: '1758714'
   number_min_length: 14
   number_max_length: 14
-  uuid: f2827046-9c8e-457b-9a89-53ebf758d4dc
+  uuid: 328a5fc8-6656-4140-9658-8f70e5cbd279
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379121
   prefix: '1758715'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5bf16da9-8b4f-4e75-ac24-0c3dcce7029d
+  uuid: 25ee5c84-f60c-4240-984d-38cc4f03b01e
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379122
   prefix: '1758716'
   number_min_length: 14
   number_max_length: 14
-  uuid: 162959cd-ceaf-4a97-bc67-be4689831fb9
+  uuid: 418729a5-c613-4a0e-9519-0da333f5e9c8
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379123
   prefix: '1758717'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5f68912a-dffc-43b0-8fb0-9b1cca1a84f9
+  uuid: da6fc268-355d-4169-81a4-b8c2a27a58d6
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379124
   prefix: '1758718'
   number_min_length: 14
   number_max_length: 14
-  uuid: ccab24f2-00f0-4031-8330-35bb3e0b702c
+  uuid: d09f3e64-a99d-4558-bca2-e838eed6c972
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379125
   prefix: '1758719'
   number_min_length: 14
   number_max_length: 14
-  uuid: d823bc19-0c98-4ecb-9998-988088411375
+  uuid: 618abe54-7a43-4076-b63e-1eed6ba0a7d9
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379126
   prefix: '175872'
   number_min_length: 13
   number_max_length: 13
-  uuid: c289901c-38b1-4158-aac3-4acb2a5e923a
+  uuid: 39e4c999-caed-4c8b-b5e4-8e685aeb8f1a
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379127
   prefix: '1758730'
   number_min_length: 14
   number_max_length: 14
-  uuid: 388afee6-5283-451e-96d9-270fc795b896
+  uuid: c1ddb1bd-e3c8-401f-97b6-3f79d20628f8
   country_id: *lc
   network_id: *lc_digicel_mobile
 - id: 379128
   prefix: '1758731'
   number_min_length: 14
   number_max_length: 14
-  uuid: b775f11c-d856-4b26-859f-2571a23ad7bf
+  uuid: 315475a6-29fa-42bf-a8e1-33ef4988e966
   country_id: *lc
   network_id: *lc_digicel_mobile
 # Fixed Prefixes
@@ -313,69 +308,69 @@ network_prefixes:
   prefix: '175845'
   number_min_length: 13
   number_max_length: 13
-  uuid: 65d43b1d-2313-441f-84ad-45e79ac9004e
+  uuid: 5a3068c4-d919-4b81-bb4c-72244c00dbcf
   country_id: *lc
   network_id: *lc_fixed
 - id: 379098
   prefix: '1758462'
   number_min_length: 14
   number_max_length: 14
-  uuid: fcbb8a0b-709e-4314-8275-076759837f2a
+  uuid: 05c9422d-e606-43af-b059-fe89dae249cf
   country_id: *lc
   network_id: *lc_fixed
 - id: 379099
   prefix: '1758467'
   number_min_length: 14
   number_max_length: 14
-  uuid: 37aca194-5523-434b-847e-5b0595ab5c93
+  uuid: 22a7a3a9-b54a-40f9-a3b3-e2c4d1bf3f84
   country_id: *lc
   network_id: *lc_fixed
 - id: 379100
   prefix: '1758468'
   number_min_length: 14
   number_max_length: 14
-  uuid: 603839ab-3fd0-40c1-94d0-0e3ca62e0ff8
+  uuid: 50a12bdc-349e-4a4c-9d3c-5439d67dfbf1
   country_id: *lc
   network_id: *lc_fixed
 - id: 379101
   prefix: '1758481'
   number_min_length: 14
   number_max_length: 14
-  uuid: 583f0ab8-f890-4388-bcd5-4ed1da1864ae
+  uuid: a56fe33b-0ba7-41f3-a410-5502f4ee0627
   country_id: *lc
   network_id: *lc_fixed
 - id: 379112
   prefix: '1758570'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5b32d565-0725-47ee-be31-0b16f034bc00
+  uuid: 3bce1e20-86b3-4790-8367-88d20c3a07e1
   country_id: *lc
   network_id: *lc_fixed
 - id: 379113
   prefix: '1758571'
   number_min_length: 14
   number_max_length: 14
-  uuid: de229f77-2e73-432f-ba5f-92e5b7c9c3ad
+  uuid: db385e84-45eb-4409-b8e7-892d9682433a
   country_id: *lc
   network_id: *lc_fixed
 - id: 379114
   prefix: '1758572'
   number_min_length: 14
   number_max_length: 14
-  uuid: d632fdc5-2b67-4f33-8886-a8cae37b418e
+  uuid: e3397dee-bd9f-4029-8574-3fec0582c204
   country_id: *lc
   network_id: *lc_fixed
 - id: 379129
   prefix: '1758758'
   number_min_length: 14
   number_max_length: 14
-  uuid: d1a20b9d-b734-47e0-bc19-6f3129cb86ea
+  uuid: 543e5093-6474-43de-9b80-2a8d69abc815
   country_id: *lc
   network_id: *lc_fixed
 - id: 379133
   prefix: '1758932'
   number_min_length: 14
   number_max_length: 14
-  uuid: 91a0e125-96d8-46a6-b493-ba844c85fa62
+  uuid: c14a31a7-ec87-45d4-b971-247518e3e227
   country_id: *lc
   network_id: *lc_fixed

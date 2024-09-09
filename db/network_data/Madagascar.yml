@@ -1,41 +1,36 @@
 country_id: &mg 127
 networks:
 # Mobile Networks
-- id: &mg_orange_mobile 3347
+- id: &mg_orange_mobile 3340
   name: MG Orange Mobile
-  uuid: c835c7e0-89e4-4bb8-b6f6-b44df13ca095
+  uuid: 67489f00-ba3d-4bf6-931d-c62b7c099cb1
   type_id: 3
-- id: &mg_airtel_mobile 3352
+- id: &mg_airtel_mobile 3345
   name: MG Airtel Mobile
-  uuid: 8c1310d8-9e3f-46c8-9456-b593ff640c82
+  uuid: 6d7a7715-ab03-478c-8b42-5ec26e4c0e30
   type_id: 3
-- id: &mg_telma_mobile 3374
+- id: &mg_telma_mobile 3366
   name: MG Telma Mobile
-  uuid: 0d5d90ff-d9f6-417c-9c6e-d5a4c5f8adab
+  uuid: e76f1938-79e4-44d2-b0f9-0387ab0ff19e
   type_id: 3
-- id: &mg_blueline_mobile 3417
+- id: &mg_blueline_mobile 3408
   name: MG Blueline Mobile
-  uuid: a3592b32-1707-400a-8c0e-74bc5ac16cca
+  uuid: 60de4686-0dfb-4f44-89ea-5682a677525e
   type_id: 3
-# Country code Networks
-- id: &mg_fixed_cc 4755
-  name: MG Fixed Cc
-  uuid: 36eb1eef-fa30-451b-871e-74dc6cd9b57c
-  type_id: 17
 # Supplementary services Networks
-- id: &mg_special_services 5006
+- id: &mg_special_services 4788
   name: MG Special Services
-  uuid: 5482aee4-fb74-4b72-b47e-d4941c314fcc
+  uuid: 8dd72a9c-86d4-4fe9-af7c-08aeb71f8a58
   type_id: 14
 # Fixed Networks
-- id: &mg_fixed 5925
+- id: &mg_fixed 5707
   name: MG Fixed
-  uuid: 103a3301-c991-422d-aa4e-67663e044989
+  uuid: 82237292-223a-4b6e-958b-5d899c4676cf
   type_id: 12
 # Satellite Networks
-- id: &mg_blueline_satellite 6311
+- id: &mg_blueline_satellite 6093
   name: MG Blueline Satellite
-  uuid: 2ac07571-445c-459a-bec3-e078337776cf
+  uuid: 0167894f-cca7-4cc4-ae27-82c8f91ed2b2
   type_id: 16
 network_prefixes:
 # Mobile Prefixes
@@ -43,42 +38,42 @@ network_prefixes:
   prefix: '26132'
   number_min_length: 12
   number_max_length: 12
-  uuid: fb24a4bf-83d8-48db-90a4-05bdfd61921d
+  uuid: 4781c133-9a9d-4109-81c3-55989d3fe771
   country_id: *mg
   network_id: *mg_orange_mobile
 - id: 68018
   prefix: '26133'
   number_min_length: 12
   number_max_length: 12
-  uuid: 102d393e-9f2c-487b-904c-c926fa6910d0
+  uuid: 8f238785-c0c5-43ea-8632-0c19da053e6c
   country_id: *mg
   network_id: *mg_airtel_mobile
 - id: 76928
   prefix: '26134'
   number_min_length: 12
   number_max_length: 12
-  uuid: 53708ebb-246a-4ce8-9299-888e0e15081e
+  uuid: 0bb9ae26-1c63-48c8-98e4-38a52169a9fe
   country_id: *mg
   network_id: *mg_telma_mobile
 - id: 82019
   prefix: '26137'
   number_min_length: 12
   number_max_length: 12
-  uuid: a0f78f8a-62bf-4e45-9e78-d8c6913a052d
+  uuid: 26e8fa08-bd41-4ce0-a7a1-8739a891f5bb
   country_id: *mg
   network_id: *mg_orange_mobile
 - id: 83723
   prefix: '26138'
   number_min_length: 12
   number_max_length: 12
-  uuid: edc1d265-f5ce-4252-b733-7e9f986c3afd
+  uuid: e4fee87c-4a65-4530-81ca-780fc18f77a7
   country_id: *mg
   network_id: *mg_telma_mobile
 - id: 84953
   prefix: '26139'
   number_min_length: 12
   number_max_length: 12
-  uuid: a9ba617e-5c8b-4331-b651-addd98061ab8
+  uuid: 7e1ffa2d-2dec-4afd-bcc1-0a8d3ae0613d
   country_id: *mg
   network_id: *mg_blueline_mobile
 # Country code Prefixes
@@ -86,15 +81,15 @@ network_prefixes:
   prefix: '261'
   number_min_length: 5
   number_max_length: 10
-  uuid: e9eb9992-3531-4fea-a548-c84b5667ec74
+  uuid: 6888a2e2-3a69-4a13-adaa-29e1f4c17388
   country_id: *mg
-  network_id: *mg_fixed_cc
+  network_id:
 # Supplementary services Prefixes
 - id: 248405
   prefix: '2611'
   number_min_length: 6
   number_max_length: 7
-  uuid: f884cea9-9d50-46f0-b7f6-550e0ac32e80
+  uuid: 7d4bfe85-e827-4d9f-ac4b-bab8042fdbbf
   country_id: *mg
   network_id: *mg_special_services
 # Fixed Prefixes
@@ -102,133 +97,133 @@ network_prefixes:
   prefix: '26120'
   number_min_length: 12
   number_max_length: 12
-  uuid: b01063af-8b00-4f15-818f-583ce3e75506
+  uuid: 25113dc5-895d-429a-8b25-b7321225462e
   country_id: *mg
   network_id: *mg_fixed
 - id: 257794
   prefix: '261202'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5eab83d5-4df4-4e9d-92fc-5aada6f68f7d
+  uuid: b5bdfbf0-0c5e-499d-befb-599e4d66cd14
   country_id: *mg
   network_id: *mg_fixed
 - id: 257870
   prefix: '2612053'
   number_min_length: 14
   number_max_length: 14
-  uuid: 920dfe8d-7fd0-4c85-aa09-1ba8648dfe49
+  uuid: 02b7ff6e-fde2-4268-a2b1-bc2233c24166
   country_id: *mg
   network_id: *mg_fixed
 - id: 257873
   prefix: '2612054'
   number_min_length: 14
   number_max_length: 14
-  uuid: ab1605b2-08e8-4adb-9947-66181390b1a4
+  uuid: 1651dce0-71c7-49f6-ba40-3d11785dd18b
   country_id: *mg
   network_id: *mg_fixed
 - id: 257878
   prefix: '2612056'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2eaf72e5-66c8-4d08-a8f1-dbe6e8c4ecbf
+  uuid: 40555561-c2f8-4dda-b7ee-23d99fd2419a
   country_id: *mg
   network_id: *mg_fixed
 - id: 257881
   prefix: '2612057'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3cf9b02e-c555-4d76-be18-5e9a638d009a
+  uuid: ffb6c2c6-a73f-4d95-adb1-388645bef8f1
   country_id: *mg
   network_id: *mg_fixed
 - id: 257891
   prefix: '2612062'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0b56bbc5-2840-4efe-83c7-90448c803fb6
+  uuid: fe405d20-0e1d-40c6-83cf-c2eed89d8199
   country_id: *mg
   network_id: *mg_fixed
 - id: 257901
   prefix: '2612067'
   number_min_length: 14
   number_max_length: 14
-  uuid: acd4247f-7ebc-435c-9208-9ad3fbec575f
+  uuid: ba4194f4-d635-4f7a-ad89-afe1d9e59327
   country_id: *mg
   network_id: *mg_fixed
 - id: 264079
   prefix: '2612069'
   number_min_length: 14
   number_max_length: 14
-  uuid: c4a6fc25-de95-437f-a4d2-50973fe8e5ef
+  uuid: e579ec07-192a-4333-87cd-5329a09cfc2b
   country_id: *mg
   network_id: *mg_fixed
 - id: 264091
   prefix: '26120722'
   number_min_length: 15
   number_max_length: 15
-  uuid: 97abcc62-0dad-4126-9b25-6d06e823fc73
+  uuid: 53d67d42-37ad-479a-ac69-41c460f4e696
   country_id: *mg
   network_id: *mg_fixed
 - id: 264092
   prefix: '26120729'
   number_min_length: 15
   number_max_length: 15
-  uuid: c21dafa2-f31e-4ac5-9e00-c70bd1920dd3
+  uuid: 5bf945c1-5d13-4b54-865a-6508f30ae88a
   country_id: *mg
   network_id: *mg_fixed
 - id: 264094
   prefix: '2612073'
   number_min_length: 14
   number_max_length: 14
-  uuid: b802993f-3b65-49c9-a5d3-928ca6a8446e
+  uuid: edaf8e22-097d-431f-b309-d29870857823
   country_id: *mg
   network_id: *mg_fixed
 - id: 264097
   prefix: '2612075'
   number_min_length: 14
   number_max_length: 14
-  uuid: 72537d73-3386-46c0-bcc6-491b96321e1e
+  uuid: 065133f6-e392-4550-8913-b17b2f61677d
   country_id: *mg
   network_id: *mg_fixed
 - id: 264108
   prefix: '2612082'
   number_min_length: 14
   number_max_length: 14
-  uuid: 61c49081-9cab-4afb-975d-c9155df984e3
+  uuid: 52a5003f-940f-412f-805c-94be636c9c87
   country_id: *mg
   network_id: *mg_fixed
 - id: 264121
   prefix: '2612086'
   number_min_length: 14
   number_max_length: 14
-  uuid: b13b7ac5-6508-4895-b82a-c818f2d85565
+  uuid: 3ceb873c-694c-433b-b200-adc9e12039f9
   country_id: *mg
   network_id: *mg_fixed
 - id: 264124
   prefix: '2612088'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5a95f561-4da1-4b8f-adf7-97044de9f96a
+  uuid: 950e8aed-21fa-4e84-b0e5-d47ddee809af
   country_id: *mg
   network_id: *mg_fixed
 - id: 264133
   prefix: '2612092'
   number_min_length: 14
   number_max_length: 14
-  uuid: d563412e-476f-4c20-a33d-74a0717cfba8
+  uuid: 006a1e2b-abf9-436d-81db-0bb0751cd3e0
   country_id: *mg
   network_id: *mg_fixed
 - id: 264136
   prefix: '2612094'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2dcba6c4-a149-4752-8064-a0b0d07f69b1
+  uuid: 279c4d33-48e5-4cbc-ac05-255d1df59cab
   country_id: *mg
   network_id: *mg_fixed
 - id: 264138
   prefix: '2612095'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4b6715eb-a05c-48d7-b613-c3a56c48664d
+  uuid: 2ee53cc0-dffe-48ab-87b7-ed65647d44db
   country_id: *mg
   network_id: *mg_fixed
 # Satellite Prefixes
@@ -236,6 +231,6 @@ network_prefixes:
   prefix: '26122'
   number_min_length: 12
   number_max_length: 12
-  uuid: 59abf1bf-266d-4358-b888-f7ae08f7f5cd
+  uuid: ff7a72aa-80c8-4323-bcb2-096371c1e726
   country_id: *mg
   network_id: *mg_blueline_satellite

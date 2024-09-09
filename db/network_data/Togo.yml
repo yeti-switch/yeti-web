@@ -1,40 +1,35 @@
 country_id: &tg 212
 networks:
 # Fixed Networks
-- id: &tg_fixed 4235
+- id: &tg_fixed 4223
   name: TG Fixed
-  uuid: 116b9f04-c9b2-4dc4-a5f2-3a04a8f5be61
+  uuid: a545fa43-56dd-43ee-9188-6fe78c223dc8
   type_id: 12
-# Country code Networks
-- id: &tg_fixed_cc 4822
-  name: TG Fixed Cc
-  uuid: 1b8dc6db-06f1-4cac-b446-534897528162
-  type_id: 17
 # Supplementary services Networks
-- id: &tg_emergency_services 5045
+- id: &tg_emergency_services 4827
   name: TG Emergency Services
-  uuid: 951e2b76-895e-4813-8f7c-5f91e67c16b3
+  uuid: 0117ad12-a635-4bfc-94a4-83e6f92ef8bf
   type_id: 14
-- id: &tg_general_interest_services 5073
+- id: &tg_general_interest_services 4855
   name: TG General Interest Services
-  uuid: def29d54-b3ab-4c7e-b1b8-2df451da3bb6
+  uuid: 4fc7f19f-043e-4acc-b4b6-9200fd03e80d
   type_id: 14
-- id: &tg_freephone_services 6139
+- id: &tg_freephone_services 5921
   name: TG Freephone Services
-  uuid: 083df1a4-8efc-44ef-8ae4-29423fd7cfc8
+  uuid: 7c0dc10d-5f59-49a8-a106-353dd9b2640f
   type_id: 14
-- id: &tg_shared_cost_services 6194
+- id: &tg_shared_cost_services 5976
   name: TG Shared Cost Services
-  uuid: 00479d6c-acd8-40fe-a87a-7f0619a6e981
+  uuid: 4114a795-4275-48a8-8f9d-9102ed10ec6f
   type_id: 14
 # Mobile Networks
-- id: &tg_togocel_mobile 5385
+- id: &tg_togocel_mobile 5167
   name: TG Togocel Mobile
-  uuid: 8060ddc9-d0da-4aac-8afc-8b9193e224ae
+  uuid: df07fb8b-36c1-443a-9f47-fc8326aa8cb8
   type_id: 3
-- id: &tg_moov_africa_mobile 5806
+- id: &tg_moov_africa_mobile 5588
   name: TG Moov Africa Mobile
-  uuid: d1eb9203-d83f-4d80-988c-e479e10a2fb8
+  uuid: 363e6d95-fce1-4ce8-aa9a-5063530296fd
   type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -42,42 +37,42 @@ network_prefixes:
   prefix: '22822'
   number_min_length: 13
   number_max_length: 13
-  uuid: 707325f2-4781-4074-827d-c0ed09a88941
+  uuid: e636cae2-d2cb-457e-8c18-ba959398ada1
   country_id: *tg
   network_id: *tg_fixed
 - id: 243574
   prefix: '22823'
   number_min_length: 13
   number_max_length: 13
-  uuid: 1cdd396d-9030-4675-8784-d7f54f1ace97
+  uuid: d4a2ec56-50dc-4161-bc01-91fcb1047194
   country_id: *tg
   network_id: *tg_fixed
 - id: 243765
   prefix: '22824'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2a25e449-23ef-4951-82c8-db34e8e66d29
+  uuid: 9fb39811-db71-4716-b8a7-707947eff63b
   country_id: *tg
   network_id: *tg_fixed
 - id: 243914
   prefix: '22825'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5c13a307-021b-4aef-8639-06140cfce378
+  uuid: 2beb2a27-866a-416d-bddc-c77172028aca
   country_id: *tg
   network_id: *tg_fixed
 - id: 244123
   prefix: '22826'
   number_min_length: 13
   number_max_length: 13
-  uuid: 974bd88a-8b4d-43c3-a35f-9f8f661d12ee
+  uuid: b98e8571-42a7-4b1e-9fa8-47afa842ca5b
   country_id: *tg
   network_id: *tg_fixed
 - id: 244266
   prefix: '22827'
   number_min_length: 13
   number_max_length: 13
-  uuid: 324cb348-faeb-4efd-9d96-695846f8c297
+  uuid: dfd8a757-5f57-4f0a-b078-b22630a3912b
   country_id: *tg
   network_id: *tg_fixed
 # Country code Prefixes
@@ -85,36 +80,36 @@ network_prefixes:
   prefix: '228'
   number_min_length: 6
   number_max_length: 11
-  uuid: cce47e46-9e3f-4bc3-a54f-46d8b0641df3
+  uuid: b6565c8b-22b8-475f-92a7-5b034776e206
   country_id: *tg
-  network_id: *tg_fixed_cc
+  network_id:
 # Supplementary services Prefixes
 - id: 248467
   prefix: '2281'
   number_min_length: 7
   number_max_length: 8
-  uuid: 9bf4ddf8-9dfa-443d-a7ec-c103647195e2
+  uuid: 9d191f28-6f89-4768-8bea-11cd775ba269
   country_id: *tg
   network_id: *tg_emergency_services
 - id: 248505
   prefix: '22810'
   number_min_length: 9
   number_max_length: 9
-  uuid: 789cdacd-4c7d-4552-bb0f-1f6c3e1f9e4d
+  uuid: ae127e1a-600f-4cd7-bd73-0b4de8ccb5bd
   country_id: *tg
   network_id: *tg_general_interest_services
 - id: 260127
   prefix: '2288000'
   number_min_length: 15
   number_max_length: 15
-  uuid: 860dd4de-dfab-417b-93ff-087a456ce975
+  uuid: 61a15364-32a5-4543-a2e6-2b4d4e8c3e90
   country_id: *tg
   network_id: *tg_freephone_services
 - id: 260240
   prefix: '2288100'
   number_min_length: 15
   number_max_length: 15
-  uuid: 02dbb13e-e304-4062-b4da-2e6091e6eed1
+  uuid: 65dc1687-8a71-4dfe-96e1-226e56a641c1
   country_id: *tg
   network_id: *tg_shared_cost_services
 # Mobile Prefixes
@@ -122,146 +117,146 @@ network_prefixes:
   prefix: '228705'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6a38ef66-ded9-424e-86b9-66cd3466567e
+  uuid: 44c48630-2723-49ba-9d81-0ea5486bcc67
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 253248
   prefix: '22890'
   number_min_length: 13
   number_max_length: 13
-  uuid: 8709e757-a6cc-468c-8342-40490dc52cb0
+  uuid: 6bdaf526-6117-4691-a9da-49ccce376509
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 253424
   prefix: '22891'
   number_min_length: 13
   number_max_length: 13
-  uuid: 0996291f-8a48-4f67-9ebc-592d9477518c
+  uuid: e8044ec4-659a-4c05-9511-3e5962205ee7
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 253636
   prefix: '22892'
   number_min_length: 13
   number_max_length: 13
-  uuid: ec97d081-e636-4ba3-850f-29c46b274543
+  uuid: d78f4497-845f-4495-ad4d-fd43748a96d2
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 253909
   prefix: '22893'
   number_min_length: 13
   number_max_length: 13
-  uuid: fa40e544-7bac-4812-895f-f0da1edf4230
+  uuid: 1d867e29-dfdb-4051-bb10-f327e68777c1
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 254260
   prefix: '22899'
   number_min_length: 13
   number_max_length: 13
-  uuid: faebfd8a-b143-40a7-abeb-7e43609e980c
+  uuid: b0d3bfc9-72f1-4d06-b444-3f561f46e3fd
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 258761
   prefix: '228700'
   number_min_length: 14
   number_max_length: 14
-  uuid: 2923094f-6093-4cf0-817d-ccd59575eb66
+  uuid: 1e494a40-e52a-445c-967a-a448486f7bdd
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 258830
   prefix: '228701'
   number_min_length: 14
   number_max_length: 14
-  uuid: b2c17341-22e8-4a38-9c35-40f4452af7b1
+  uuid: d47954db-3d5d-43de-9125-43059c8bb772
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 258841
   prefix: '228702'
   number_min_length: 14
   number_max_length: 14
-  uuid: f2111fc2-18f2-4686-9d40-03ba2f6737c0
+  uuid: 3247f8b5-5075-4227-a1b8-1105c3939b90
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 258859
   prefix: '228703'
   number_min_length: 14
   number_max_length: 14
-  uuid: d5f8c4b2-d755-480b-8925-3314c7d58557
+  uuid: 58d1c3c6-bf29-4000-9f6d-ac47c02f980c
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 258879
   prefix: '228704'
   number_min_length: 14
   number_max_length: 14
-  uuid: 67325e1c-7185-4a9f-a043-479834d661b2
+  uuid: 2b936ce3-ed51-40b6-b4c5-adc34df1c664
   country_id: *tg
   network_id: *tg_togocel_mobile
 - id: 259880
   prefix: '228793'
   number_min_length: 14
   number_max_length: 14
-  uuid: 818f0055-d518-4714-b5a8-c201c8538643
+  uuid: 928269cd-186a-49f3-91eb-f9a731cf4f98
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 259896
   prefix: '228794'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7c7676df-88f0-47de-acfc-1a1ed11f3d4f
+  uuid: 72eb0d1e-7a83-4026-a17b-5433471ea7cd
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 259909
   prefix: '228795'
   number_min_length: 14
   number_max_length: 14
-  uuid: 81fafe48-bc00-4ef5-b653-7437d05a10f5
+  uuid: f9c0c5fe-7bb9-450e-9fe2-c447d22878c6
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 259925
   prefix: '228796'
   number_min_length: 14
   number_max_length: 14
-  uuid: 7bf39a96-8806-4183-a57b-4b2046bfdf18
+  uuid: 0f39a936-da16-4f8c-a33a-651c099e7a60
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 259928
   prefix: '228797'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0db7e7b2-174e-4a33-967f-1b259e99efdb
+  uuid: 78997bc2-8ca0-4a10-b1e1-7e36c05e6034
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 259955
   prefix: '228798'
   number_min_length: 14
   number_max_length: 14
-  uuid: cabf7aac-7443-49a8-9f91-50e0a15f8df2
+  uuid: 2ac6aeb4-b5d0-4ab5-b85f-2df0db89d647
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 259979
   prefix: '228799'
   number_min_length: 14
   number_max_length: 14
-  uuid: ad6eeec3-efca-49b2-8834-f6f67406483b
+  uuid: bf0e5747-abba-40a8-8436-a4b91ab84ffe
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 261639
   prefix: '22896'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3d179bcb-d3c5-4f5c-9a8b-365242810963
+  uuid: 452b0f75-2d83-4cd8-98b8-1c796f15bc35
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 261919
   prefix: '22897'
   number_min_length: 13
   number_max_length: 13
-  uuid: d22fa022-e851-44fd-b0f8-98a2540dbeb6
+  uuid: c2a74919-0945-4ee6-a963-4696995b1bd5
   country_id: *tg
   network_id: *tg_moov_africa_mobile
 - id: 262190
   prefix: '22898'
   number_min_length: 13
   number_max_length: 13
-  uuid: 2c03d98c-f2b8-4ebb-9996-6eca94e54438
+  uuid: 0183e10c-c6fa-4339-9e25-970f7048ed9b
   country_id: *tg
   network_id: *tg_moov_africa_mobile
