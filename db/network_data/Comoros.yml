@@ -1,300 +1,300 @@
 country_id: &km 48
 networks:
 # Mobile Networks
-- id: &km_huri_mobile 4269
+- id: &km_huri_mobile 4220
   name: KM Huri Mobile
-  uuid: 5286960c-a6cd-4cf7-b700-f7893c47ee49
+  uuid: 1aedde12-d6af-4b1a-9eca-c98280ebb375
   type_id: 3
-- id: &km_telma_mobile 4353
+- id: &km_telma_mobile 4304
   name: KM Telma Mobile
-  uuid: c196c178-0229-4507-937e-ef2513f48a67
+  uuid: 1d45e8f1-348d-45eb-98f0-256a22c5d3dc
   type_id: 3
 # Supplementary services Networks
-- id: &km_special_services 4736
+- id: &km_special_services 4679
   name: KM Special Services
-  uuid: 729f2ffc-05b9-4476-83dc-4ad1e92c64de
+  uuid: b1bf888f-4cd1-4312-adb6-cc07ab02a379
   type_id: 14
-- id: &km_emergency_services 4875
+- id: &km_emergency_services 4819
   name: KM Emergency Services
-  uuid: 54364e4c-b62a-4def-8b98-b95674a87425
+  uuid: 2e1d2108-56a1-4e3f-83be-3cb6c9ff2465
   type_id: 14
-- id: &km_value_added_services 5854
+- id: &km_value_added_services 5788
   name: KM Value Added Services
-  uuid: 5f2e2fc1-f753-41e4-a29e-8451e8b42c5b
+  uuid: b4762563-6ec3-4cc0-a249-51a099de1389
   type_id: 14
 # Fixed Networks
-- id: &km_fixed 5180
+- id: &km_fixed 5124
   name: KM Fixed
-  uuid: 33b89371-87aa-44f8-867d-85f3603a7d8e
+  uuid: 17029099-22cf-4b0c-a473-5d8c50f27002
   type_id: 12
 network_prefixes:
 # Mobile Prefixes
-- id: 244531
+- id: 244480
   prefix: '2693'
   number_min_length: 11
   number_max_length: 11
-  uuid: 4bd89ca5-bac9-4c42-ae58-65e374ff81ed
+  uuid: 6255d5ae-2560-4ea7-953f-230a2e11ceab
   country_id: *km
   network_id: *km_huri_mobile
-- id: 245306
+- id: 245255
   prefix: '2694'
   number_min_length: 11
   number_max_length: 11
-  uuid: 46c87241-494e-4e6b-8960-53b90ead77f5
+  uuid: b93fd6ce-f19c-4e40-9b4c-c5bca4b61731
   country_id: *km
   network_id: *km_telma_mobile
 # Country code Prefixes
-- id: 247926
+- id: 247862
   prefix: '269'
   number_min_length: 6
   number_max_length: 10
-  uuid: 426686f7-3e75-461f-bfa1-0bcd8d0cfe8d
+  uuid: a17d8d82-a5f9-4599-a237-b019c394169d
   country_id: *km
   network_id:
 # Supplementary services Prefixes
-- id: 248340
+- id: 248267
   prefix: '2691'
   number_min_length: 7
   number_max_length: 9
-  uuid: 0e1c6309-0320-43bb-9d70-a206853a70d2
+  uuid: 125a499d-8f76-42c1-a8a3-a253724bfd77
   country_id: *km
   network_id: *km_special_services
-- id: 248545
+- id: 248472
   prefix: '26911'
   number_min_length: 8
   number_max_length: 8
-  uuid: df0216f5-2427-4655-a878-8f0dc882f07d
+  uuid: 8c693222-c12f-40b2-9308-f357bea859a0
   country_id: *km
   network_id: *km_emergency_services
-- id: 249385
+- id: 249312
   prefix: '2695'
   number_min_length: 7
   number_max_length: 9
-  uuid: 46ab1d9d-99b9-4d92-8a4a-761eedb3c3f1
+  uuid: 9798fa22-30ce-4875-8ec9-d9071d62c487
   country_id: *km
   network_id: *km_special_services
-- id: 260008
+- id: 259921
   prefix: '2698'
   number_min_length: 11
   number_max_length: 11
-  uuid: 9f217fa8-ac6e-4d44-9a2d-45eb25af636a
+  uuid: f2e74979-b4f8-4187-aea4-caa155b064fb
   country_id: *km
   network_id: *km_value_added_services
 # Fixed Prefixes
-- id: 251530
+- id: 251457
   prefix: '26971'
   number_min_length: 12
   number_max_length: 12
-  uuid: 70e6d646-f7fa-4f8e-b8f1-6a46476b76c5
+  uuid: d95f8df7-8f56-42cf-be04-0a2e74f28249
   country_id: *km
   network_id: *km_fixed
-- id: 251616
+- id: 251543
   prefix: '26972'
   number_min_length: 12
   number_max_length: 12
-  uuid: 8989ef43-37df-4d1f-9b81-5419c3387d3b
+  uuid: d9ba3bac-91cf-419c-833a-6230b571cf31
   country_id: *km
   network_id: *km_fixed
-- id: 251669
+- id: 251596
   prefix: '26973'
   number_min_length: 12
   number_max_length: 12
-  uuid: 5d53d3e6-2bb7-4fee-b910-0552c9430fa5
+  uuid: 43410623-1e1c-44a6-9dee-e0eb52cb9037
   country_id: *km
   network_id: *km_fixed
-- id: 251852
+- id: 251779
   prefix: '26974'
   number_min_length: 12
   number_max_length: 12
-  uuid: a30e0d66-4afe-4830-b951-921b00f43361
+  uuid: f073a7eb-8be3-49cc-a9c9-016ff20a285b
   country_id: *km
   network_id: *km_fixed
-- id: 252253
+- id: 252180
   prefix: '26975'
   number_min_length: 12
   number_max_length: 12
-  uuid: 4eb293dd-01df-42d7-b0eb-1843d22898e0
+  uuid: 718f0273-bfd5-46b3-9fd9-1ac36bed79af
   country_id: *km
   network_id: *km_fixed
-- id: 252779
+- id: 252706
   prefix: '26976'
   number_min_length: 12
   number_max_length: 12
-  uuid: c2eeb740-01fe-45d2-afa0-74090183ee16
+  uuid: 748b9b3d-0952-4717-aea2-5e4670857b18
   country_id: *km
   network_id: *km_fixed
-- id: 258965
+- id: 258879
   prefix: '26977'
   number_min_length: 12
   number_max_length: 12
-  uuid: 0da43829-5828-43aa-a70c-22f30c78a37e
+  uuid: 3cac6203-5933-4dcc-ae48-fbe30fab75c0
   country_id: *km
   network_id: *km_fixed
-- id: 259058
+- id: 258972
   prefix: '2697709'
   number_min_length: 14
   number_max_length: 14
-  uuid: aff19159-7c70-4191-bc39-cc9ee3c82b5d
+  uuid: 6e59a600-cfe6-43fc-b41d-72b20a7b6139
   country_id: *km
   network_id: *km_fixed
-- id: 259063
+- id: 258977
   prefix: '269771'
   number_min_length: 13
   number_max_length: 13
-  uuid: 64e3a3d0-0d53-4e34-ba2e-678990dd910b
+  uuid: 29debd59-d306-4577-aa7f-51c4026a7749
   country_id: *km
   network_id: *km_fixed
-- id: 259068
+- id: 258982
   prefix: '2697710'
   number_min_length: 14
   number_max_length: 14
-  uuid: 62754779-2039-4efa-8e72-d61a97e6981e
+  uuid: d4d71302-70d2-41a9-8a91-b747a6d3518c
   country_id: *km
   network_id: *km_fixed
-- id: 259075
+- id: 258989
   prefix: '2697711'
   number_min_length: 14
   number_max_length: 14
-  uuid: 083ab1b4-8ca8-480a-8fb6-b25f81aba6cb
+  uuid: 75763b16-4645-4c53-8c26-195340fa738f
   country_id: *km
   network_id: *km_fixed
-- id: 259089
+- id: 259003
   prefix: '2697712'
   number_min_length: 14
   number_max_length: 14
-  uuid: df66cfbf-ca7a-418a-be97-2ab5453d4122
+  uuid: 5aa53c2d-f515-4662-aa10-58f126c06f87
   country_id: *km
   network_id: *km_fixed
-- id: 259093
+- id: 259007
   prefix: '2697713'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5f47071a-6818-44c1-b423-703853e717a5
+  uuid: 1ce6d99f-082f-4585-825e-957982a00c78
   country_id: *km
   network_id: *km_fixed
-- id: 259097
+- id: 259011
   prefix: '2697714'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4a6ee14b-7e19-47ea-8443-e06222d1f55b
+  uuid: 753ab069-7c1d-436a-95fa-39051af59a56
   country_id: *km
   network_id: *km_fixed
-- id: 259101
+- id: 259015
   prefix: '2697715'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3caaa204-7e6b-42dd-8bcc-76c6ee7b6231
+  uuid: 78dd2b67-bc5f-4cd8-9e19-29b66f399cbb
   country_id: *km
   network_id: *km_fixed
-- id: 259114
+- id: 259028
   prefix: '2697716'
   number_min_length: 14
   number_max_length: 14
-  uuid: a57a5584-a9ee-409e-9ab2-e0f157bac2a5
+  uuid: 4422004a-7f1e-4b83-8663-f8e1f43a1d54
   country_id: *km
   network_id: *km_fixed
-- id: 259129
+- id: 259043
   prefix: '2697718'
   number_min_length: 14
   number_max_length: 14
-  uuid: eab38f3c-d6a7-44a1-b284-670a941556c7
+  uuid: 84344c99-df38-4e00-9455-5480ba2796db
   country_id: *km
   network_id: *km_fixed
-- id: 259145
+- id: 259059
   prefix: '269772'
   number_min_length: 13
   number_max_length: 13
-  uuid: 80ae65e8-e013-4b86-a674-1259a8726e7d
+  uuid: 29f3b628-9424-4149-b44d-f54d6564576e
   country_id: *km
   network_id: *km_fixed
-- id: 259150
+- id: 259064
   prefix: '2697720'
   number_min_length: 14
   number_max_length: 14
-  uuid: f7487ee1-0e05-4890-b784-35de107e5764
+  uuid: b9c4f373-0b0f-4c91-bc32-c718baaf39f3
   country_id: *km
   network_id: *km_fixed
-- id: 259154
+- id: 259068
   prefix: '2697721'
   number_min_length: 14
   number_max_length: 14
-  uuid: fb085b09-cc84-445b-a025-5d3c177a95a4
+  uuid: 32235f9f-2a8d-4422-9027-bc40d3faa100
   country_id: *km
   network_id: *km_fixed
-- id: 259157
+- id: 259071
   prefix: '2697722'
   number_min_length: 14
   number_max_length: 14
-  uuid: 32311b1b-a1d8-460a-af2d-ee6431749e5f
+  uuid: 114e0fa0-b492-4d82-bd61-954e9c991748
   country_id: *km
   network_id: *km_fixed
-- id: 259162
+- id: 259076
   prefix: '2697723'
   number_min_length: 14
   number_max_length: 14
-  uuid: 0c8ee083-2a51-401e-b8c2-b876af2b8ac3
+  uuid: c17f6abd-643e-4418-ae86-8c1c110bfffe
   country_id: *km
   network_id: *km_fixed
-- id: 259165
+- id: 259079
   prefix: '2697724'
   number_min_length: 14
   number_max_length: 14
-  uuid: 88d5f7eb-994b-4ae6-9920-8dbc9ee7e6eb
+  uuid: ccad666c-762f-421b-bb90-7e09df480996
   country_id: *km
   network_id: *km_fixed
-- id: 259177
+- id: 259091
   prefix: '2697725'
   number_min_length: 14
   number_max_length: 14
-  uuid: fe7a165b-086e-42fa-8098-a0c0803afc40
+  uuid: 15dc0706-47e8-4769-b1b8-9ddbf63639cf
   country_id: *km
   network_id: *km_fixed
-- id: 259189
+- id: 259103
   prefix: '2697726'
   number_min_length: 14
   number_max_length: 14
-  uuid: 3d88e340-232e-4c34-accb-325904e9e4be
+  uuid: 8720b837-76b1-4185-8605-8f224346ed81
   country_id: *km
   network_id: *km_fixed
-- id: 259196
+- id: 259110
   prefix: '2697728'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4d838f06-d411-44da-b823-fa872f3e54cc
+  uuid: da082121-efeb-4602-a9f5-fdbd03709e3d
   country_id: *km
   network_id: *km_fixed
-- id: 259202
+- id: 259116
   prefix: '269773'
   number_min_length: 13
   number_max_length: 13
-  uuid: 5db46929-52ad-4b1e-983f-00855f623d08
+  uuid: a084b38c-3cd9-412b-98a9-0d2be5e00fdf
   country_id: *km
   network_id: *km_fixed
-- id: 259242
+- id: 259156
   prefix: '269775'
   number_min_length: 13
   number_max_length: 13
-  uuid: 83ac126d-d98a-447c-8a7b-dca57725b59a
+  uuid: ac05d0e9-9879-41e0-8074-7ea1e518e898
   country_id: *km
   network_id: *km_fixed
-- id: 259298
+- id: 259212
   prefix: '269777'
   number_min_length: 13
   number_max_length: 13
-  uuid: faa6f4a3-cf73-4c43-be81-acc9043c5719
+  uuid: 0f0a12a7-61cc-406c-969c-036eb3b8062b
   country_id: *km
   network_id: *km_fixed
-- id: 259335
+- id: 259249
   prefix: '269778'
   number_min_length: 13
   number_max_length: 13
-  uuid: 56363bec-9f42-423a-a065-2e23c73704ad
+  uuid: 3d76b422-ed23-49ae-83c5-0f7a383bf590
   country_id: *km
   network_id: *km_fixed
-- id: 259386
+- id: 259300
   prefix: '269779'
   number_min_length: 13
   number_max_length: 13
-  uuid: 3e0e0c20-daa5-482d-b5ea-60c5d814542d
+  uuid: 94d970c9-3cf1-436f-9003-10bc20681eae
   country_id: *km
   network_id: *km_fixed
