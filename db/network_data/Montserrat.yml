@@ -1,213 +1,213 @@
 country_id: &ms 143
 networks:
 # Supplementary services Networks
-- id: &ms_internal_dispatch 6240
+- id: &ms_internal_dispatch 6163
   name: MS Internal Dispatch
-  uuid: 82309423-6ee4-4bff-ac29-abdf27a09ec9
+  uuid: e71caabe-a5db-4f3f-ad3c-52d91b613efc
   type_id: 14
-- id: &ms_audiotext 6243
+- id: &ms_audiotext 6166
   name: MS Audiotext
-  uuid: 284169cf-470a-4fa2-b93b-c1140d086629
+  uuid: 7837fcd3-5094-455a-8756-d7d5a4a89586
   type_id: 14
-- id: &ms_audiotext_usa 6245
+- id: &ms_audiotext_usa 6168
   name: MS Audiotext Usa
-  uuid: 8e224afe-5219-4896-a4c5-e19a0bb2a97b
+  uuid: 761a78e7-e06e-435c-b22a-89b86b2b5ed5
   type_id: 14
-- id: &ms_emergency_services 6259
+- id: &ms_emergency_services 6182
   name: MS Emergency Services
-  uuid: 310588b7-8a69-4ae1-8706-7518e08f0ce7
+  uuid: 149ec60a-a2a4-4636-9ffe-7c7709a50909
   type_id: 14
 # Fixed Networks
-- id: &ms_fixed 6241
+- id: &ms_fixed 6164
   name: MS Fixed
-  uuid: ffbd8bab-ca44-409c-91e2-536f9bcaf09a
+  uuid: 68481748-4d7f-49b3-8551-d657943b3b83
   type_id: 12
 # Mobile Networks
-- id: &ms_digicel_mobile 6242
+- id: &ms_digicel_mobile 6165
   name: MS Digicel Mobile
-  uuid: dab1c2fc-5f3c-4d5a-b706-7240242c981b
+  uuid: 6e8f6a47-38ff-4284-ac9d-620e2847c8a9
   type_id: 3
-- id: &ms_flow_mobile 6244
+- id: &ms_flow_mobile 6167
   name: MS Flow Mobile
-  uuid: 052bebee-717b-4162-b1f0-4eb7391bd957
+  uuid: 8b06593c-23dd-4180-8c9a-2768f80bd156
   type_id: 3
 network_prefixes:
 # Country code Prefixes
-- id: 323749
+- id: 323649
   prefix: '1664'
   number_min_length: 7
   number_max_length: 11
-  uuid: 85cec2f3-c06b-41e4-9558-52e132acd59b
+  uuid: bdae8dde-694f-4fea-ad17-2e3f76659c89
   country_id: *ms
   network_id:
 # Supplementary services Prefixes
-- id: 323781
+- id: 323681
   prefix: '1664114'
   number_min_length: 10
   number_max_length: 10
-  uuid: 1a2f27b6-d392-46bc-bfad-ac8874a62b3f
+  uuid: cee04d54-393c-4d6c-b138-258e12c8f20a
   country_id: *ms
   network_id: *ms_internal_dispatch
-- id: 324227
+- id: 324127
   prefix: '1664410'
   number_min_length: 14
   number_max_length: 14
-  uuid: ad4ff1ba-23b1-4810-887d-8e77040a088c
+  uuid: a1e8561c-d0b5-4819-9d4d-f3cd2aea8769
   country_id: *ms
   network_id: *ms_audiotext
-- id: 324231
+- id: 324131
   prefix: '1664412'
   number_min_length: 14
   number_max_length: 14
-  uuid: 5583b4e6-50a6-4564-9a5e-617ebe6c9f1f
+  uuid: ab749ae8-fbf7-4d02-ab5b-9e9556d82706
   country_id: *ms
   network_id: *ms_audiotext
-- id: 324234
+- id: 324134
   prefix: '1664413'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8b7cd584-fa96-4c7f-8ec8-1ee962d63146
+  uuid: 09155725-5e52-4d77-9ec5-f23771f14e0e
   country_id: *ms
   network_id: *ms_audiotext
-- id: 324362
+- id: 324262
   prefix: '16644920000'
   number_min_length: 18
   number_max_length: 18
-  uuid: 4584c5b5-e061-4553-b2b6-07d5a71883df
+  uuid: 988230e8-d4d5-412e-a42d-47f0915591d6
   country_id: *ms
   network_id: *ms_audiotext_usa
-- id: 324363
+- id: 324263
   prefix: '16644920999'
   number_min_length: 18
   number_max_length: 18
-  uuid: a1450686-6916-4318-a42d-64a0d18ac26a
+  uuid: a577ff62-351d-471f-bc7d-7fcf0f09c0ee
   country_id: *ms
   network_id: *ms_audiotext_usa
-- id: 324364
+- id: 324264
   prefix: '16644923000'
   number_min_length: 18
   number_max_length: 18
-  uuid: 30312d4d-cc51-42c9-9197-4746d77e9aff
+  uuid: 7b72c749-2b35-4ee8-a1cb-d6cae7f16b8b
   country_id: *ms
   network_id: *ms_audiotext_usa
-- id: 324365
+- id: 324265
   prefix: '16644927999'
   number_min_length: 18
   number_max_length: 18
-  uuid: 4a4d734c-dd92-4462-91d3-f075c53c3efd
+  uuid: 998e549f-3ef5-482d-82e8-6c8465de8470
   country_id: *ms
   network_id: *ms_audiotext_usa
-- id: 332042
+- id: 331942
   prefix: '1664999'
   number_min_length: 10
   number_max_length: 10
-  uuid: d7de022c-75f6-4b8c-b283-f2b6abf2ddcc
+  uuid: 5d14ded3-5689-43ba-b21c-da9f7559e78a
   country_id: *ms
   network_id: *ms_emergency_services
 # Fixed Prefixes
-- id: 324100
+- id: 324000
   prefix: '1664349'
   number_min_length: 14
   number_max_length: 14
-  uuid: d5d9e4b7-b418-4525-a72f-96c3cf424260
+  uuid: 06046090-f795-4f1a-91a8-5a1316ecb9ae
   country_id: *ms
   network_id: *ms_fixed
-- id: 324168
+- id: 324068
   prefix: '1664391'
   number_min_length: 14
   number_max_length: 14
-  uuid: f4bfcfe9-f6e3-4f52-bf99-447bce5325a1
+  uuid: feef40f1-b889-4cd9-a4a0-e448f7a2af05
   country_id: *ms
   network_id: *ms_fixed
-- id: 324236
+- id: 324136
   prefix: '1664414'
   number_min_length: 14
   number_max_length: 14
-  uuid: 825f314c-a54b-4553-8c3f-c02aed643010
+  uuid: ab0e1d59-1f3c-4594-b5bd-596a7573b0bb
   country_id: *ms
   network_id: *ms_fixed
-- id: 324238
+- id: 324138
   prefix: '1664415'
   number_min_length: 14
   number_max_length: 14
-  uuid: 44294d8f-547e-4ec2-966e-34fd0819522c
+  uuid: 2219ea3e-8528-48be-929d-7942a2119320
   country_id: *ms
   network_id: *ms_fixed
-- id: 324359
+- id: 324259
   prefix: '1664491'
   number_min_length: 14
   number_max_length: 14
-  uuid: a2639236-77d3-42ce-8f01-32c10b693898
+  uuid: 78c531e5-b80d-44c7-811a-374af7a74b7d
   country_id: *ms
   network_id: *ms_fixed
 # Mobile Prefixes
-- id: 324170
+- id: 324070
   prefix: '1664392'
   number_min_length: 14
   number_max_length: 14
-  uuid: 854ad4f0-eeec-4081-abc9-5011d6673079
+  uuid: c75d52b0-9a8c-4225-bbe2-14f0b41e9c36
   country_id: *ms
   network_id: *ms_digicel_mobile
-- id: 324173
+- id: 324073
   prefix: '1664393'
   number_min_length: 14
   number_max_length: 14
-  uuid: 1d58b006-54ee-440d-8c53-92d3e5622a12
+  uuid: cc90b660-4c06-4577-85a9-05ebda1ad029
   country_id: *ms
   network_id: *ms_digicel_mobile
-- id: 324176
+- id: 324076
   prefix: '1664394'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8dd7059e-012c-49ec-9e12-0409a40dd28e
+  uuid: ba4b8d1d-ec14-43dd-9da6-208c776bce29
   country_id: *ms
   network_id: *ms_digicel_mobile
-- id: 324179
+- id: 324079
   prefix: '1664395'
   number_min_length: 14
   number_max_length: 14
-  uuid: 8072e9e0-1eb8-4493-9bf0-9f71842d2ed6
+  uuid: ce8e85e1-3454-41f7-bd8d-ee6a26baf54a
   country_id: *ms
   network_id: *ms_digicel_mobile
-- id: 324182
+- id: 324082
   prefix: '1664396'
   number_min_length: 14
   number_max_length: 14
-  uuid: bddaaacb-b7c3-45f3-a8f1-d770b17a2333
+  uuid: 7b8e9da4-b25a-435f-bf1f-e7d2649366b6
   country_id: *ms
   network_id: *ms_digicel_mobile
-- id: 324361
+- id: 324261
   prefix: '1664492'
   number_min_length: 14
   number_max_length: 14
-  uuid: 4a72d959-aac0-4eb4-a32c-ad26aa84456c
+  uuid: 43372d28-1873-4127-a101-92670d25c9b7
   country_id: *ms
   network_id: *ms_flow_mobile
-- id: 324367
+- id: 324267
   prefix: '1664493'
   number_min_length: 14
   number_max_length: 14
-  uuid: 46a6ab10-b4e5-4109-8ce7-99e3b22040c0
+  uuid: 0a040855-16d9-43a7-b989-70168e87c4c6
   country_id: *ms
   network_id: *ms_flow_mobile
-- id: 324369
+- id: 324269
   prefix: '1664494'
   number_min_length: 14
   number_max_length: 14
-  uuid: 92faf8ac-c820-4389-bf3d-9acb4186e277
+  uuid: d4aed32d-42eb-4457-9ab2-c9c8f5b3f821
   country_id: *ms
   network_id: *ms_flow_mobile
-- id: 324371
+- id: 324271
   prefix: '1664495'
   number_min_length: 14
   number_max_length: 14
-  uuid: a922dbba-b07f-42ea-9d31-461f16c4c9e1
+  uuid: 3e6986be-734b-4857-89f8-353fe3debee2
   country_id: *ms
   network_id: *ms_flow_mobile
-- id: 324373
+- id: 324273
   prefix: '1664496'
   number_min_length: 14
   number_max_length: 14
-  uuid: 6fd8cc41-f7f0-49ea-b1bd-9de26af03fab
+  uuid: bc451a26-e4da-4543-878e-303d8dd6cb1e
   country_id: *ms
   network_id: *ms_flow_mobile
