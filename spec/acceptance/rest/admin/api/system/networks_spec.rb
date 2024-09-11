@@ -30,8 +30,7 @@ RSpec.resource 'Networks' do
   end
 
   get '/api/rest/admin/system/networks/:id' do
-#     let(:id) { System::Network.find_by!(name: 'UNITED STATES').id }
-    let(:id) { System::Network.find_by!(name: 'US').id }
+    let(:id) { System::Network.find_by!(name: 'UNITED STATES').id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
@@ -61,8 +60,7 @@ RSpec.resource 'Networks' do
     jsonapi_attributes(required_params, [])
     jsonapi_relationships(required_relationships, [])
 
-#     let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
-    let!(:network) { System::Network.find_by!(name: 'US') }
+    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
     let!(:network_type) { create(:network_type) }
     let(:id) { network.id }
     let(:name) { 'name' }
