@@ -1,187 +1,187 @@
 country_id: &as 4
 networks:
 # Mobile Networks
-- id: &as_bluesky_mobile 6315
-  name: AS Bluesky Mobile
-  uuid: 92d12c6e-f5f8-43f9-bf59-b626b2e674e1
-  type_id: 3
-- id: &as_astca_mobile_mobile 6318
-  name: AS Astca Mobile Mobile
-  uuid: 0d651fa9-7c50-4320-8c1e-cf76f1307188
-  type_id: 3
+  - id: &as_bluesky_mobile 6315
+    name: AS Bluesky Mobile
+    uuid: f74b8add-76f9-43d3-9010-83cb889c3c90
+    type_id: 3
+  - id: &as_astca_mobile_mobile 6318
+    name: AS Astca Mobile Mobile
+    uuid: e7a3d6f2-b5b1-4c8b-903f-47b47e2737bc
+    type_id: 3
 # Supplementary services Networks
-- id: &as_information_services 6316
-  name: AS Information Services
-  uuid: 311e0554-cc63-4a17-8ad5-eaf519826ba1
-  type_id: 14
+  - id: &as_information_services 6316
+    name: AS Information Services
+    uuid: d02c6cc3-f005-42cf-b034-e9363e025f86
+    type_id: 14
 # Fixed Networks
-- id: &as_fixed 6317
-  name: AS Fixed
-  uuid: c3bf0cfa-bbae-42f1-b633-045e4b859cd0
-  type_id: 12
+  - id: &as_fixed 6317
+    name: AS Fixed
+    uuid: 1eae6d3b-6b08-4fd0-83f7-c9d145cb7c4f
+    type_id: 12
 network_prefixes:
 # Country code Prefixes
-- id: 347149
-  prefix: '1684'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: ede90b6f-690d-4e6c-a346-281f13d27329
-  country_id: *as
-  network_id:
+  - id: 347149
+    prefix: '1684'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e3a2a0e-1790-4825-b0a7-7493716eebed
+    country_id: *as
+    network_id: null
 # Mobile Prefixes
-- id: 347153
-  prefix: '1684248'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 073bcb94-ae48-444d-9a76-e2b99611f803
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347154
-  prefix: '1684252'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e38d7328-f616-4f5d-b633-f791cd4408ba
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347155
-  prefix: '1684254'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 1220a36d-6e61-4514-af03-1ea9475578b0
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347156
-  prefix: '1684256'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 14eead45-ad6e-4df1-98db-e59cb28f7c27
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347157
-  prefix: '1684258'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 90ddd1d2-6927-440a-b676-e3275274685d
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347158
-  prefix: '1684272'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: a7dd4ad0-0335-4c9a-bbd2-879f398b2132
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347159
-  prefix: '1684274'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e4d62578-cb48-45e0-aab3-c143f6e5e6ae
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347160
-  prefix: '1684276'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 05d859b1-2408-4197-99ea-1efc591e381e
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347161
-  prefix: '1684299'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: cb123a10-c8c6-4c47-a1e4-3ce3e0ac840a
-  country_id: *as
-  network_id: *as_bluesky_mobile
-- id: 347171
-  prefix: '1684731'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e85ba2bd-64a9-4c52-a60b-5463a24e02c2
-  country_id: *as
-  network_id: *as_astca_mobile_mobile
-- id: 347172
-  prefix: '1684733'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 3b2a2884-eb85-4a9e-ba70-cb1a6a784cfa
-  country_id: *as
-  network_id: *as_astca_mobile_mobile
-- id: 347173
-  prefix: '1684770'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 0cac6485-f55b-4194-aeab-ad79e73a5e83
-  country_id: *as
-  network_id: *as_astca_mobile_mobile
-- id: 347174
-  prefix: '1684782'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 38ce226d-0b9c-4b97-85d1-b1a36e956fe8
-  country_id: *as
-  network_id: *as_astca_mobile_mobile
+  - id: 347153
+    prefix: '1684248'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 1ed27b82-f091-43b6-843c-87d0344daf55
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347154
+    prefix: '1684252'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 82ca6d6b-dae4-49f8-99fa-b8945745ae8a
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347155
+    prefix: '1684254'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 80da7935-d06a-46dd-9fc9-d6bdb22e42a5
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347156
+    prefix: '1684256'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 9f6b4a8c-3ee0-4206-b74a-d6f787b8a3aa
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347157
+    prefix: '1684258'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e7ecf239-8b12-4647-a3e6-266abcd26b4e
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347158
+    prefix: '1684272'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 5534cfae-f40b-434a-aeb7-d25f45efee94
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347159
+    prefix: '1684274'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: bdc0342c-f4b2-4f70-8296-97caca445f47
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347160
+    prefix: '1684276'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 7e0138be-a2a1-4a08-88a2-a4fd3b4f16fb
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347161
+    prefix: '1684299'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a69b6c1e-ff18-40bc-98d6-18ad2741e2eb
+    country_id: *as
+    network_id: *as_bluesky_mobile
+  - id: 347171
+    prefix: '1684731'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e917c089-8e8d-4f26-b781-c557e70da933
+    country_id: *as
+    network_id: *as_astca_mobile_mobile
+  - id: 347172
+    prefix: '1684733'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: edcb1658-be91-4275-9bcc-b77f9657557c
+    country_id: *as
+    network_id: *as_astca_mobile_mobile
+  - id: 347173
+    prefix: '1684770'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a806e63b-c051-4e52-a174-49fa34967430
+    country_id: *as
+    network_id: *as_astca_mobile_mobile
+  - id: 347174
+    prefix: '1684782'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 397c014f-461d-43d8-b9b6-876b9e71e179
+    country_id: *as
+    network_id: *as_astca_mobile_mobile
 # Supplementary services Prefixes
-- id: 347162
-  prefix: '1684555'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 7e7ca898-c149-49bb-9b93-182ca966a9a3
-  country_id: *as
-  network_id: *as_information_services
+  - id: 347162
+    prefix: '1684555'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 941d3b0c-b4b6-4c97-8b23-6840f62eecca
+    country_id: *as
+    network_id: *as_information_services
 # Fixed Prefixes
-- id: 347163
-  prefix: '1684622'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 84d3ca9b-68c3-4e78-b3af-8625578196a3
-  country_id: *as
-  network_id: *as_fixed
-- id: 347164
-  prefix: '1684633'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 8df2e65e-3065-4754-8bbd-e6ab73d78cec
-  country_id: *as
-  network_id: *as_fixed
-- id: 347165
-  prefix: '1684644'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 2bfb4aa9-14ac-4395-9dc9-073a2529db8f
-  country_id: *as
-  network_id: *as_fixed
-- id: 347166
-  prefix: '1684655'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 79646fb2-7c2d-48f2-87fb-449de9b28c31
-  country_id: *as
-  network_id: *as_fixed
-- id: 347167
-  prefix: '1684677'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 2f391447-be2c-4c7d-b404-96b7bdeefee3
-  country_id: *as
-  network_id: *as_fixed
-- id: 347168
-  prefix: '1684688'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: a3e4eb9b-02ff-4003-bc51-5a640c50b261
-  country_id: *as
-  network_id: *as_fixed
-- id: 347169
-  prefix: '1684691'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 1149df37-15eb-4238-8970-73ceb4655c9d
-  country_id: *as
-  network_id: *as_fixed
-- id: 347170
-  prefix: '1684699'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 442c236e-a164-4e75-a794-b481b6c77643
-  country_id: *as
-  network_id: *as_fixed
+  - id: 347163
+    prefix: '1684622'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b5d287e5-61ef-49f0-965d-b0a2f16dbdbc
+    country_id: *as
+    network_id: *as_fixed
+  - id: 347164
+    prefix: '1684633'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 96a26b79-b2b5-4e00-8477-f4e4c7f4d800
+    country_id: *as
+    network_id: *as_fixed
+  - id: 347165
+    prefix: '1684644'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 0e439203-a689-4333-a1a4-e4c9ba3ad178
+    country_id: *as
+    network_id: *as_fixed
+  - id: 347166
+    prefix: '1684655'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: efb2b347-be48-49f1-b575-bb3c7b79db59
+    country_id: *as
+    network_id: *as_fixed
+  - id: 347167
+    prefix: '1684677'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a5c388e3-dbbd-490f-bcbd-61223236ecf8
+    country_id: *as
+    network_id: *as_fixed
+  - id: 347168
+    prefix: '1684688'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 8a751588-c8b9-4fa6-a80e-9436aef87f76
+    country_id: *as
+    network_id: *as_fixed
+  - id: 347169
+    prefix: '1684691'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 9a0f977e-900c-4071-9058-50c34dedc8b9
+    country_id: *as
+    network_id: *as_fixed
+  - id: 347170
+    prefix: '1684699'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: d5ba4d78-d458-4569-9701-6426e8608b8e
+    country_id: *as
+    network_id: *as_fixed

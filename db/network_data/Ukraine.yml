@@ -1,412 +1,412 @@
 country_id: &ua 222
 networks:
 # Fixed Networks
-- id: &ua_fixed 3293
-  name: UA Fixed
-  uuid: 91b7cd75-bee0-4715-88d0-7796beb17177
-  type_id: 12
+  - id: &ua_fixed 3293
+    name: UA Fixed
+    uuid: 3b9d021c-3ed2-49e0-9f7f-6d84fb4e2b8a
+    type_id: 12
 # Mobile Networks
-- id: &ua_vodafone_mobile 3563
-  name: UA Vodafone Mobile
-  uuid: a9fba84b-316c-49c8-a275-0ea29fbfaa12
-  type_id: 3
-- id: &ua_3mob_mobile 3707
-  name: UA 3Mob Mobile
-  uuid: a7f57eb4-67cb-4b6f-81dd-5bdd32c2ba0e
-  type_id: 3
-- id: &ua_peoplenet_mobile 3728
-  name: UA Peoplenet Mobile
-  uuid: 08513fb6-66f0-4820-b98a-068b6e58baa5
-  type_id: 3
-- id: &ua_lifecell_mobile 3748
-  name: UA Lifecell Mobile
-  uuid: 6d30e809-2c86-4c8b-9453-472695aa292a
-  type_id: 3
-- id: &ua_it_mobile 3770
-  name: UA It Mobile
-  uuid: 9187f27f-a9f4-4289-922f-4d292d9a7b85
-  type_id: 3
-- id: &ua_kyivstar_mobile 3797
-  name: UA Kyivstar Mobile
-  uuid: 572b957b-1b96-429f-99a8-14809da1d45a
-  type_id: 3
-- id: &ua_phoenix_mobile 6337
-  name: UA Phoenix Mobile
-  uuid: f4b1210c-11aa-411a-b8de-430752ed5b6d
-  type_id: 3
-- id: &ua_lugacom_mobile 6371
-  name: UA Lugacom Mobile
-  uuid: 92125598-34b3-487f-8353-aac8e40f73d2
-  type_id: 3
+  - id: &ua_vodafone_mobile 3563
+    name: UA Vodafone Mobile
+    uuid: b3567a3d-80f6-461d-b5a6-96094b4be237
+    type_id: 3
+  - id: &ua_3mob_mobile 3707
+    name: UA 3Mob Mobile
+    uuid: d5456dfa-5ac9-4078-8c44-6c130a8a07e1
+    type_id: 3
+  - id: &ua_peoplenet_mobile 3728
+    name: UA Peoplenet Mobile
+    uuid: 11f33e4f-f7e4-413e-8841-e3f54ef1f1a4
+    type_id: 3
+  - id: &ua_lifecell_mobile 3748
+    name: UA Lifecell Mobile
+    uuid: b9324d76-da93-4001-a395-e5ed42a64a59
+    type_id: 3
+  - id: &ua_it_mobile 3770
+    name: UA It Mobile
+    uuid: ba72cbd6-3625-43b2-8e98-30e1b5d50505
+    type_id: 3
+  - id: &ua_kyivstar_mobile 3797
+    name: UA Kyivstar Mobile
+    uuid: 4daf43a7-2cb7-439a-befc-6d25b1be0e96
+    type_id: 3
+  - id: &ua_phoenix_mobile 6337
+    name: UA Phoenix Mobile
+    uuid: 7bbb891d-0d9c-4734-93c6-eee967b4638b
+    type_id: 3
+  - id: &ua_lugacom_mobile 6371
+    name: UA Lugacom Mobile
+    uuid: c63cfff1-29b5-428d-9491-b9bde5bf3d8a
+    type_id: 3
 # Supplementary services Networks
-- id: &ua_special_services 4779
-  name: UA Special Services
-  uuid: 508770da-34d8-48e8-b6b0-72a3c48221b9
-  type_id: 14
-- id: &ua_personal_number_services 6303
-  name: UA Personal Number Services
-  uuid: ad9da825-14c8-445b-833c-df2af17c51e5
-  type_id: 14
-- id: &ua_freephone_services 6609
-  name: UA Freephone Services
-  uuid: 978e33bb-fc5b-42ef-9273-5b48125a5d5d
-  type_id: 14
-- id: &ua_premium_rate_services 6900
-  name: UA Premium Rate Services
-  uuid: 1ba6297b-6a75-4359-82c7-0bbbf0f6b16a
-  type_id: 14
+  - id: &ua_special_services 4779
+    name: UA Special Services
+    uuid: 6469dd1b-c4e8-4595-a21c-e4fcd8470884
+    type_id: 14
+  - id: &ua_personal_number_services 6303
+    name: UA Personal Number Services
+    uuid: 8bd350e1-bc56-4478-8898-2e4e1142db49
+    type_id: 14
+  - id: &ua_freephone_services 6609
+    name: UA Freephone Services
+    uuid: ca8803b5-21c2-4801-b977-a5fd0c8963d0
+    type_id: 14
+  - id: &ua_premium_rate_services 6900
+    name: UA Premium Rate Services
+    uuid: c923643d-f594-4a97-a7c0-235da7a051f2
+    type_id: 14
 network_prefixes:
 # Fixed Prefixes
-- id: 53118
-  prefix: '38031'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: ef202726-2960-486a-a015-93c7b4e19e8b
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 67158
-  prefix: '38032'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: ca95b41b-1043-4444-ab64-f6aa61878e68
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 68025
-  prefix: '38033'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 304fe011-95cb-4f29-9ee1-7d12f2cb8653
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 76929
-  prefix: '38034'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 6c382cc5-09e2-4cd9-bf03-c7219a0f3ac0
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 78868
-  prefix: '38035'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 0351ea3c-269d-48c6-8cf9-87ebabae74c3
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 80966
-  prefix: '38036'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 11c45d9e-f633-4ac1-b77e-a7e7cd16450d
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 82012
-  prefix: '38037'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: a7280df3-f6ec-43ea-bb1a-064bb7bbbe0f
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 83717
-  prefix: '38038'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 1a1f4cf7-0ad2-4928-8afe-96fd7afdca39
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 91031
-  prefix: '38041'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 35f935b6-c608-49cd-9e4b-55b26181d3e8
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 107550
-  prefix: '38043'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 767e125b-bcef-4d1c-9d90-4073358f041b
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 110855
-  prefix: '38044'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 6070c57b-385a-42ed-9739-72f5f1bc0569
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 124297
-  prefix: '38045'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 769fc0f6-f970-465b-8ee2-10f4e6305f31
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 126374
-  prefix: '38046'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: cbe23eac-d088-4ee6-8900-35a1408b00c5
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 128301
-  prefix: '38047'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 9c937e18-3602-45f1-ace5-dc9513ad9b04
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 131720
-  prefix: '38048'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: a2dc9352-9077-4e36-807c-f892bac236ed
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 141515
-  prefix: '38053'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 73214fff-8074-4109-92f0-a8e46d6ca5c7
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 150000
-  prefix: '38051'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 9d75c7fc-dc71-45d3-afbc-6401980a2078
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 154205
-  prefix: '38052'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 4261e87f-cb70-4b28-a3a5-619b6bedf31e
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 155679
-  prefix: '38054'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 7f00da4d-0dc0-420d-82a1-abdc86c227ef
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 161651
-  prefix: '38055'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 24139f07-f7ad-475b-a05e-26238592d1ba
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 275302
-  prefix: '38056'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 5f76f049-2ddc-4a13-86c3-b05b357a50f2
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 280280
-  prefix: '38057'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 513ce2ee-37f5-4479-976d-f439e70772cd
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 293499
-  prefix: '38061'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 7cfd3053-e759-4044-b3e0-6386359fe364
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 299744
-  prefix: '38062'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 6687b84b-050f-4df3-934d-9d6fc50930b6
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 307898
-  prefix: '38064'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 0e90e7af-e2d1-4a16-8b7f-68ac7d2b3ad6
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 319394
-  prefix: '38065'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: b8dd8743-d852-4133-bf90-52508b776ddf
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 338815
-  prefix: '38069'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 50f70ab6-0cce-476b-8c35-cca36591152e
-  country_id: *ua
-  network_id: *ua_fixed
-- id: 446583
-  prefix: '38089'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: bf4984d5-9015-4a08-9b64-41d3f56d3283
-  country_id: *ua
-  network_id: *ua_fixed
+  - id: 53118
+    prefix: '38031'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 323f17d1-9d26-44f8-bd77-c8e5721882d8
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 67158
+    prefix: '38032'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 939dfba3-b29b-49be-b44c-37f1f9066230
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 68025
+    prefix: '38033'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5cda8ca6-e448-49cf-83bf-c76de33b7da9
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 76929
+    prefix: '38034'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 29cafbce-1d21-4eb9-91fe-c3f7a6c2897b
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 78868
+    prefix: '38035'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c82e882c-df51-45e0-aebe-e1073bc1b9e5
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 80966
+    prefix: '38036'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 433a2eff-5a17-4fd4-904e-909028e21042
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 82012
+    prefix: '38037'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 11cda40d-ba08-49f2-963a-d756ad266bf0
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 83717
+    prefix: '38038'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 66567624-5f2e-4b85-9a29-1da3c4f080ad
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 91031
+    prefix: '38041'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9e036835-1c65-4b60-b564-be4fdad6a655
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 107550
+    prefix: '38043'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 20a21d44-4963-4a4d-aec1-a07fc2c791d7
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 110855
+    prefix: '38044'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c6710ae8-5ce8-4700-bd29-7f6e49da1e49
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 124297
+    prefix: '38045'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2bb08303-7987-4938-98ff-8176880f6ebf
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 126374
+    prefix: '38046'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 328e3001-fccc-4232-b7c1-fa4e91582fce
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 128301
+    prefix: '38047'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c3525b62-ddc1-476b-af8d-c8cc3db58e58
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 131720
+    prefix: '38048'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5f1052e9-ca23-460a-adb6-57c1ae4ba8cf
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 141515
+    prefix: '38053'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ac669c47-f856-4fdd-8c90-0e89c3dec818
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 150000
+    prefix: '38051'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c5bc3899-c0ca-4b61-a04a-27f3be930de7
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 154205
+    prefix: '38052'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1067284b-bcd3-459a-a70a-c8482dc08ec8
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 155679
+    prefix: '38054'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 524d185d-9a92-45e3-8a9e-1901c99f1fb6
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 161651
+    prefix: '38055'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3390dbe5-92f2-4969-8088-47d3f12e7a5e
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 275302
+    prefix: '38056'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 315f0646-61dd-4c56-b41c-581e03a8bb7f
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 280280
+    prefix: '38057'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0d820bc5-baf7-4ca4-9b26-64b0bcc0dfd0
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 293499
+    prefix: '38061'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 667aad53-4392-473a-9d8e-659012a81e31
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 299744
+    prefix: '38062'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c0717d91-1802-4e79-81fd-ca8f2fa0983f
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 307898
+    prefix: '38064'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f4d466a-c73c-44da-ac8e-59b883259ad3
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 319394
+    prefix: '38065'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9818b299-276d-4995-a62d-6b093fee280e
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 338815
+    prefix: '38069'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 513da13f-0ad5-49d8-a565-1d82a8feeedb
+    country_id: *ua
+    network_id: *ua_fixed
+  - id: 446583
+    prefix: '38089'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c87dfb37-c15f-42a9-a468-30b29514d1a5
+    country_id: *ua
+    network_id: *ua_fixed
 # Mobile Prefixes
-- id: 146210
-  prefix: '38050'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 2e7d4758-9bae-44b5-993a-830cff82dd8d
-  country_id: *ua
-  network_id: *ua_vodafone_mobile
-- id: 171750
-  prefix: '38091'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: f64307ad-8ee8-433a-aba1-26838e4e2870
-  country_id: *ua
-  network_id: *ua_3mob_mobile
-- id: 174221
-  prefix: '38092'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 49c53778-993f-4b3d-97d2-c8fea4030321
-  country_id: *ua
-  network_id: *ua_peoplenet_mobile
-- id: 195177
-  prefix: '38093'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 99140706-514b-4145-a23d-6dd4af7dd4a8
-  country_id: *ua
-  network_id: *ua_lifecell_mobile
-- id: 212601
-  prefix: '38094'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 07465f88-1e96-4c87-bc36-e9ed46add78b
-  country_id: *ua
-  network_id: *ua_it_mobile
-- id: 218130
-  prefix: '38095'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 0092b392-012c-45a9-913f-792826deb672
-  country_id: *ua
-  network_id: *ua_vodafone_mobile
-- id: 223608
-  prefix: '38097'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 9c8cd951-5d72-400b-8ef4-221afe40ab1b
-  country_id: *ua
-  network_id: *ua_kyivstar_mobile
-- id: 225825
-  prefix: '38096'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 216d306b-00b4-4d97-97ee-4cef5f6f6701
-  country_id: *ua
-  network_id: *ua_kyivstar_mobile
-- id: 234094
-  prefix: '38098'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 91639c81-a8dd-4479-9375-a2ecbd74c07a
-  country_id: *ua
-  network_id: *ua_kyivstar_mobile
-- id: 238755
-  prefix: '38099'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: fcd090af-246e-4076-bab9-d6b49a040ed3
-  country_id: *ua
-  network_id: *ua_vodafone_mobile
-- id: 305430
-  prefix: '38063'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: c1e77bbd-e9f4-46e8-adda-97f137c285d9
-  country_id: *ua
-  network_id: *ua_lifecell_mobile
-- id: 321942
-  prefix: '38066'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 823cd093-84db-4629-b1b9-1df2e173aece
-  country_id: *ua
-  network_id: *ua_vodafone_mobile
-- id: 334764
-  prefix: '38067'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 2e123bda-c882-47fc-b290-6ad5bd10a26f
-  country_id: *ua
-  network_id: *ua_kyivstar_mobile
-- id: 336870
-  prefix: '38068'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 71e344bc-c722-4407-974e-243cda77c203
-  country_id: *ua
-  network_id: *ua_kyivstar_mobile
-- id: 353002
-  prefix: '38071'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 61e43516-65de-49eb-8c85-440186ba25c4
-  country_id: *ua
-  network_id: *ua_phoenix_mobile
-- id: 357730
-  prefix: '38072'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 8d25a4c5-beeb-42c4-9318-f676d9c77a76
-  country_id: *ua
-  network_id: *ua_lugacom_mobile
-- id: 361474
-  prefix: '38073'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 488b5e91-70f0-46e8-89ad-4f89c916c0d5
-  country_id: *ua
-  network_id: *ua_lifecell_mobile
+  - id: 146210
+    prefix: '38050'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9d4c46a9-42a5-4bd6-87f3-8593492e51c6
+    country_id: *ua
+    network_id: *ua_vodafone_mobile
+  - id: 171750
+    prefix: '38091'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4e3c3603-5dfa-4cfb-9568-39f53622f239
+    country_id: *ua
+    network_id: *ua_3mob_mobile
+  - id: 174221
+    prefix: '38092'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: acdef7bf-3a3a-470c-93cc-d65ff1d83ba2
+    country_id: *ua
+    network_id: *ua_peoplenet_mobile
+  - id: 195177
+    prefix: '38093'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 59dbccfd-d374-4779-8278-8ed526ea1917
+    country_id: *ua
+    network_id: *ua_lifecell_mobile
+  - id: 212601
+    prefix: '38094'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 199c6078-9e4f-49b6-a688-53492ff3aa14
+    country_id: *ua
+    network_id: *ua_it_mobile
+  - id: 218130
+    prefix: '38095'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 24543151-2b1b-495d-86de-d94525ec2419
+    country_id: *ua
+    network_id: *ua_vodafone_mobile
+  - id: 223608
+    prefix: '38097'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 72f0a4eb-34d5-43fa-91fb-2824fd8e324c
+    country_id: *ua
+    network_id: *ua_kyivstar_mobile
+  - id: 225825
+    prefix: '38096'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7723dd5f-3b68-46fc-aac3-f57680b5904e
+    country_id: *ua
+    network_id: *ua_kyivstar_mobile
+  - id: 234094
+    prefix: '38098'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b8615aa1-0d5f-4e6e-81f7-79c70099d31f
+    country_id: *ua
+    network_id: *ua_kyivstar_mobile
+  - id: 238755
+    prefix: '38099'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 491edbf9-bd4b-4b41-a224-1e58deea3eae
+    country_id: *ua
+    network_id: *ua_vodafone_mobile
+  - id: 305430
+    prefix: '38063'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c9be8d63-9790-4f21-b8ff-b6005692a500
+    country_id: *ua
+    network_id: *ua_lifecell_mobile
+  - id: 321942
+    prefix: '38066'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8efbbdd6-a248-49fc-99b8-2e4eadf1e1db
+    country_id: *ua
+    network_id: *ua_vodafone_mobile
+  - id: 334764
+    prefix: '38067'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4763584a-85dc-43ee-845d-0c6f665aa720
+    country_id: *ua
+    network_id: *ua_kyivstar_mobile
+  - id: 336870
+    prefix: '38068'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 58958e20-9677-48e9-9d88-3e86598f87ee
+    country_id: *ua
+    network_id: *ua_kyivstar_mobile
+  - id: 353002
+    prefix: '38071'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 72bd7179-82a3-427c-abf3-4a7f07182ec6
+    country_id: *ua
+    network_id: *ua_phoenix_mobile
+  - id: 357730
+    prefix: '38072'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 65d9b046-7696-4060-b7a3-31a4ce333009
+    country_id: *ua
+    network_id: *ua_lugacom_mobile
+  - id: 361474
+    prefix: '38073'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 69c4828b-2e4b-4cbc-981d-0ac22054cb39
+    country_id: *ua
+    network_id: *ua_lifecell_mobile
 # Country code Prefixes
-- id: 248015
-  prefix: '380'
-  number_min_length: 6
-  number_max_length: 10
-  uuid: 1a257af6-28df-48c2-8ff7-b2e4269b4922
-  country_id: *ua
-  network_id:
+  - id: 248015
+    prefix: '380'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 83adfcab-792f-421a-bed6-43dc794b4da5
+    country_id: *ua
+    network_id: null
 # Supplementary services Prefixes
-- id: 248403
-  prefix: '38001'
-  number_min_length: 7
-  number_max_length: 11
-  uuid: 24faaef2-d451-42b6-989b-311c6defaae1
-  country_id: *ua
-  network_id: *ua_special_services
-- id: 341460
-  prefix: '380700'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 4317850d-576b-466d-a9ff-37b7a6b3291b
-  country_id: *ua
-  network_id: *ua_personal_number_services
-- id: 400777
-  prefix: '380800'
-  number_min_length: 12
-  number_max_length: 13
-  uuid: 4ed9f643-cd2d-4326-9bc1-c6669b37446f
-  country_id: *ua
-  network_id: *ua_freephone_services
-- id: 453216
-  prefix: '380900'
-  number_min_length: 12
-  number_max_length: 13
-  uuid: 3ca70dc1-973b-4724-b93f-86dcdf7fc99e
-  country_id: *ua
-  network_id: *ua_premium_rate_services
+  - id: 248403
+    prefix: '38001'
+    number_min_length: 7
+    number_max_length: 11
+    uuid: f3ef827b-8e9d-4c15-9cfd-b9bc90a222cd
+    country_id: *ua
+    network_id: *ua_special_services
+  - id: 341460
+    prefix: '380700'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c4f7a9ed-4e31-4eef-a8e7-cc74389000d9
+    country_id: *ua
+    network_id: *ua_personal_number_services
+  - id: 400777
+    prefix: '380800'
+    number_min_length: 12
+    number_max_length: 13
+    uuid: 3374b8c1-68f4-4fd6-8b1c-1e0e1d05d07b
+    country_id: *ua
+    network_id: *ua_freephone_services
+  - id: 453216
+    prefix: '380900'
+    number_min_length: 12
+    number_max_length: 13
+    uuid: 7870550f-302a-40a4-b527-f15c10b91874
+    country_id: *ua
+    network_id: *ua_premium_rate_services

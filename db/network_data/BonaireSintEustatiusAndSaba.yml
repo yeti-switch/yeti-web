@@ -1,257 +1,257 @@
 country_id: &bq 274
 networks:
 # Fixed Networks
-- id: &bq_fixed 4217
-  name: BQ Fixed
-  uuid: 503078e9-c4b8-4ae7-8688-7b9f68081c5e
-  type_id: 12
+  - id: &bq_fixed 4217
+    name: BQ Fixed
+    uuid: 697fe647-50ff-4406-bc6e-8a98cf0eafc0
+    type_id: 12
 # Mobile Networks
-- id: &bq_chippie_mobile 4265
-  name: BQ Chippie Mobile
-  uuid: 5b62de61-c0ea-4c5c-a594-5b6a416fe3d1
-  type_id: 3
-- id: &bq_digicel_mobile 5716
-  name: BQ Digicel Mobile
-  uuid: 7a829532-a403-4d7f-9d94-dcc6f7116d08
-  type_id: 3
+  - id: &bq_chippie_mobile 4265
+    name: BQ Chippie Mobile
+    uuid: 9c66a520-44e9-438c-ab0f-77fcc18cc901
+    type_id: 3
+  - id: &bq_digicel_mobile 5716
+    name: BQ Digicel Mobile
+    uuid: 67ce571d-ad96-4560-9c3d-e8edc7736c6c
+    type_id: 3
 # Supplementary services Networks
-- id: &bq_value_added_services 4434
-  name: BQ Value Added Services
-  uuid: b6832853-47bc-4c40-8663-b8337fa69df4
-  type_id: 14
+  - id: &bq_value_added_services 4434
+    name: BQ Value Added Services
+    uuid: adb26d0f-b8d7-4a19-99ba-aa27ba2356c2
+    type_id: 14
 network_prefixes:
 # Fixed Prefixes
-- id: 244474
-  prefix: '59903'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: c8133000-9ac3-4411-9e99-f5d06532da5c
-  country_id: *bq
-  network_id: *bq_fixed
-- id: 245251
-  prefix: '59904'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: a9fb479d-fc58-4f35-9dec-c31db9600ed7
-  country_id: *bq
-  network_id: *bq_fixed
-- id: 258588
-  prefix: '59907'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: d3587606-2002-4a8d-9293-bf788177f527
-  country_id: *bq
-  network_id: *bq_fixed
+  - id: 244474
+    prefix: '59903'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dd832282-5803-4911-af47-078d3161414b
+    country_id: *bq
+    network_id: *bq_fixed
+  - id: 245251
+    prefix: '59904'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 37fb0b58-0816-48c6-9003-590ffb9d92cb
+    country_id: *bq
+    network_id: *bq_fixed
+  - id: 258588
+    prefix: '59907'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce5fe4d5-2b97-401a-a844-b1dd68d57a12
+    country_id: *bq
+    network_id: *bq_fixed
 # Mobile Prefixes
-- id: 244692
-  prefix: '59903181'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 3b3a9bed-3063-433a-9817-8681d2ddfd2d
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244693
-  prefix: '59903184'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 48cdb58a-71d9-4f34-9c9f-a07e370a01c6
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244694
-  prefix: '59903185'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 4ddbdaed-a525-4f9c-8124-96d884dd11ba
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244695
-  prefix: '59903186'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 1d10f872-8407-4f2d-911f-9722390d49a0
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244696
-  prefix: '59903187'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: fff70480-1a8c-4793-8b01-a08dabc7ffb0
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244697
-  prefix: '59903188'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 92b754f0-7573-4bcf-8075-a2263978e08d
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244701
-  prefix: '59903191'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 7dc5c15d-540f-42bb-9f10-ee853415ff5f
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244702
-  prefix: '59903193'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: f642471d-c98f-4f9e-9383-e7ba47086fe7
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244703
-  prefix: '59903194'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 40ee89ad-bbac-460d-9131-0547a81a2352
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244704
-  prefix: '59903195'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: d731b52b-4e01-426b-9fd0-cd67e0d28703
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244705
-  prefix: '59903197'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: ecf3d8c1-b295-46d7-aa26-b479c92216d5
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 244706
-  prefix: '59903198'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 53f22e3f-6589-4c76-b41c-2e996c545815
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 245522
-  prefix: '59904161'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 37b42e5e-bafb-42de-ad47-d3bc3e24552c
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 245523
-  prefix: '59904164'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 193f6861-3e09-4256-b0dd-e69f0fb35079
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 245524
-  prefix: '59904165'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 8dd42fa3-7aea-46b0-8bfc-b5900658bf91
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 245526
-  prefix: '59904166'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 942c9731-f683-4656-935d-8b2b96fb6173
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 245528
-  prefix: '59904167'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 6eea500c-f7ec-46aa-8de3-83e1b0ddb403
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 245530
-  prefix: '59904168'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e62dd368-dfff-4718-a785-92c3b9553eb2
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 245532
-  prefix: '59904169'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 6e83033c-dee8-4d31-b277-0f6d6f3cf75a
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 258664
-  prefix: '5990700'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 613dced5-2b08-4a40-ba8b-8833b98c5204
-  country_id: *bq
-  network_id: *bq_digicel_mobile
-- id: 258734
-  prefix: '5990701'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 5acbd31f-3200-40fb-8285-02713daa2871
-  country_id: *bq
-  network_id: *bq_digicel_mobile
-- id: 258906
-  prefix: '5990770'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 2d9af5b1-9ba9-4108-8c99-8abe2fbd402e
-  country_id: *bq
-  network_id: *bq_digicel_mobile
-- id: 259210
-  prefix: '5990777'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 5f0a4a64-319b-412b-8d62-babc7b3b4203
-  country_id: *bq
-  network_id: *bq_digicel_mobile
-- id: 259331
-  prefix: '599078'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 589b3eb2-843e-4670-8428-18f6520aacc9
-  country_id: *bq
-  network_id: *bq_digicel_mobile
-- id: 259650
-  prefix: '5990790'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 2903308e-5f0a-43a8-a502-265bc8e7c097
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 259820
-  prefix: '5990795'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: da3c9dcb-1f4a-4e6e-8500-a5cac26573d2
-  country_id: *bq
-  network_id: *bq_chippie_mobile
-- id: 259836
-  prefix: '5990796'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: cfb6cfe4-525c-4a94-9564-f74ce37e5374
-  country_id: *bq
-  network_id: *bq_chippie_mobile
+  - id: 244692
+    prefix: '59903181'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e4cea780-4255-4894-825c-ef1f74394559
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244693
+    prefix: '59903184'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: de143552-5a14-4f84-97d1-d0b3b8fb76b8
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244694
+    prefix: '59903185'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: c73c94f4-964b-4f27-b700-58fb44cb4897
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244695
+    prefix: '59903186'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 44d823ea-c80a-417d-8762-a2b94297b560
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244696
+    prefix: '59903187'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 64c14712-60fd-4737-8384-7190dab6dd26
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244697
+    prefix: '59903188'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 663af97f-c793-42cd-a864-61128a9780f1
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244701
+    prefix: '59903191'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e0ec4063-f332-40dc-a691-ca278fe8d98a
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244702
+    prefix: '59903193'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 8b69e5d1-b955-4977-a3cf-789a084a8d88
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244703
+    prefix: '59903194'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: d1b0a9ee-58d6-4773-91f7-b7639606ec53
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244704
+    prefix: '59903195'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e53f5889-442c-444c-a65c-d403dde1c81f
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244705
+    prefix: '59903197'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: ec2c8006-6f10-407f-b1d2-c0e0f886d72f
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 244706
+    prefix: '59903198'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 943cc1ac-05c1-4a27-aa85-90467e645db6
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 245522
+    prefix: '59904161'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 10a307b5-1a04-4452-a9dd-96ce9b892072
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 245523
+    prefix: '59904164'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: f025b7ba-c225-4116-b4e9-6428d348932c
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 245524
+    prefix: '59904165'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: d35edcdf-3144-4875-9b00-bdd6ebcc11b8
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 245526
+    prefix: '59904166'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 5188b96c-96c7-44db-b4f5-4c617b663c4d
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 245528
+    prefix: '59904167'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: d38c71dd-ae50-485d-82dc-9da7a89222b5
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 245530
+    prefix: '59904168'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: cd239a6a-ef24-491d-96f9-e9a65897b680
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 245532
+    prefix: '59904169'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 95817c94-21b8-4288-b9ea-4aa885b94fcb
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 258664
+    prefix: '5990700'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7094bcb8-aa35-4716-8c0c-9138feb5359b
+    country_id: *bq
+    network_id: *bq_digicel_mobile
+  - id: 258734
+    prefix: '5990701'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 6a745d90-f59b-4409-9826-fb5e320f4ba1
+    country_id: *bq
+    network_id: *bq_digicel_mobile
+  - id: 258906
+    prefix: '5990770'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c2648bd5-4b30-4b00-8716-ba0058a7acb5
+    country_id: *bq
+    network_id: *bq_digicel_mobile
+  - id: 259210
+    prefix: '5990777'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b1e12bf8-13f9-4c45-b924-c2d255edbc3a
+    country_id: *bq
+    network_id: *bq_digicel_mobile
+  - id: 259331
+    prefix: '599078'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ef101632-85ba-405c-b888-a91e0796cc2e
+    country_id: *bq
+    network_id: *bq_digicel_mobile
+  - id: 259650
+    prefix: '5990790'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 0b4a71be-7f4b-4b84-8fe6-861218784efe
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 259820
+    prefix: '5990795'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5fc03260-cbd5-4bd7-aab8-a94b4d1a3b12
+    country_id: *bq
+    network_id: *bq_chippie_mobile
+  - id: 259836
+    prefix: '5990796'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b017ab4e-06f7-4bcb-90b3-fe5ebc586856
+    country_id: *bq
+    network_id: *bq_chippie_mobile
 # Supplementary services Prefixes
-- id: 246705
-  prefix: '5996'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: f7583470-a783-4ec3-86f6-451cddfdeb36
-  country_id: *bq
-  network_id: *bq_value_added_services
-- id: 248245
-  prefix: '5991'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: ad21fc99-e228-4a1a-98b0-cfe5363393b8
-  country_id: *bq
-  network_id: *bq_value_added_services
+  - id: 246705
+    prefix: '5996'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 44f6a4ec-2c29-4730-b9fd-897fe9309dc1
+    country_id: *bq
+    network_id: *bq_value_added_services
+  - id: 248245
+    prefix: '5991'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2816334-9025-4c57-bd95-81cf34da8f49
+    country_id: *bq
+    network_id: *bq_value_added_services
 # Country code Prefixes
-- id: 247839
-  prefix: '599'
-  number_min_length: 6
-  number_max_length: 10
-  uuid: a2b84232-ab82-4ae6-a660-963988aa03f8
-  country_id: *bq
-  network_id:
+  - id: 247839
+    prefix: '599'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: fca8cecf-e14b-40e3-bb91-10ad8ff67fc9
+    country_id: *bq
+    network_id: null

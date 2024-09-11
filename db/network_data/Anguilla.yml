@@ -1,131 +1,131 @@
 country_id: &ai 7
 networks:
 # Mobile Networks
-- id: &ai_flow_mobile 3170
-  name: AI Flow Mobile
-  uuid: f0834b38-6e02-4efe-955f-5ae915cc0b0b
-  type_id: 3
-- id: &ai_digicel_mobile 3173
-  name: AI Digicel Mobile
-  uuid: a88dcb95-e21c-4d1e-8d38-54372f218d9c
-  type_id: 3
+  - id: &ai_flow_mobile 3170
+    name: AI Flow Mobile
+    uuid: 08520406-e1d4-49a1-8dac-518369977f48
+    type_id: 3
+  - id: &ai_digicel_mobile 3173
+    name: AI Digicel Mobile
+    uuid: 994c9399-23fe-41ed-ab93-a32eacc63654
+    type_id: 3
 # Supplementary services Networks
-- id: &ai_dial_up_internet_access 3171
-  name: AI Dial_Up Internet Access
-  uuid: c73d7955-c174-4fef-8a26-5a5e1b62ea2c
-  type_id: 14
+  - id: &ai_dial_up_internet_access 3171
+    name: AI Dial_Up Internet Access
+    uuid: 016540b3-fe16-4283-b68d-826083c64726
+    type_id: 14
 # Fixed Networks
-- id: &ai_fixed 3172
-  name: AI Fixed
-  uuid: 069541b1-9940-45a9-a9aa-4326e3402458
-  type_id: 12
+  - id: &ai_fixed 3172
+    name: AI Fixed
+    uuid: 87ec79dc-b9fd-4164-9639-d2f28c3ccd14
+    type_id: 12
 network_prefixes:
 # Country code Prefixes
-- id: 24451
-  prefix: '1264'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: 111ead89-d2ad-4ab5-a491-f706d31eb546
-  country_id: *ai
-  network_id:
+  - id: 24451
+    prefix: '1264'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bedb55ef-cb37-452f-9d61-42ea7d5b785a
+    country_id: *ai
+    network_id: null
 # Mobile Prefixes
-- id: 34808
-  prefix: '1264222'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: a9e35f6e-ea15-4cdd-ac00-a0095f4f3370
-  country_id: *ai
-  network_id: *ai_flow_mobile
-- id: 34809
-  prefix: '1264235'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 64311103-3f71-4bdf-a7aa-465c0a5683a9
-  country_id: *ai
-  network_id: *ai_flow_mobile
-- id: 34817
-  prefix: '1264476'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 63c263b5-7b14-4ace-a565-53beecb0fb7b
-  country_id: *ai
-  network_id: *ai_flow_mobile
-- id: 34821
-  prefix: '1264581'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: b18c09ec-a365-486a-a9ac-ec6f59ecc886
-  country_id: *ai
-  network_id: *ai_digicel_mobile
-- id: 34822
-  prefix: '1264582'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: c15257ad-11a2-4383-a3a2-b4342e19b792
-  country_id: *ai
-  network_id: *ai_digicel_mobile
-- id: 34823
-  prefix: '1264583'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 3b2e5310-fe93-42a4-9130-dccf3b5461d7
-  country_id: *ai
-  network_id: *ai_digicel_mobile
-- id: 34824
-  prefix: '1264584'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: cfd8414f-5ed3-46ee-bcf4-eca65af71341
-  country_id: *ai
-  network_id: *ai_digicel_mobile
-- id: 34825
-  prefix: '1264729'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 446c4c98-14cb-4bf2-83f3-f1494f62dd3b
-  country_id: *ai
-  network_id: *ai_flow_mobile
-- id: 34826
-  prefix: '1264772'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: ee116dae-b8da-48d1-9581-25ff3d84edd6
-  country_id: *ai
-  network_id: *ai_flow_mobile
+  - id: 34808
+    prefix: '1264222'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 89225a2a-240e-4ed7-892a-93deb11bad16
+    country_id: *ai
+    network_id: *ai_flow_mobile
+  - id: 34809
+    prefix: '1264235'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: bc69b750-bf26-4a58-a8c4-b89bcf91ac05
+    country_id: *ai
+    network_id: *ai_flow_mobile
+  - id: 34817
+    prefix: '1264476'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 73e78f9f-20eb-4c0d-8087-ca3bf2fd4a49
+    country_id: *ai
+    network_id: *ai_flow_mobile
+  - id: 34821
+    prefix: '1264581'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 0fa2cd00-f5c8-486b-9181-b31becf0838e
+    country_id: *ai
+    network_id: *ai_digicel_mobile
+  - id: 34822
+    prefix: '1264582'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 24c89f8c-4ed5-4222-b4ef-ee6c6a7a5035
+    country_id: *ai
+    network_id: *ai_digicel_mobile
+  - id: 34823
+    prefix: '1264583'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 604db32f-4616-4a6d-a1b1-ae3a8f33153c
+    country_id: *ai
+    network_id: *ai_digicel_mobile
+  - id: 34824
+    prefix: '1264584'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: ec2419cc-c9ab-4a42-b95c-ba609d7178e6
+    country_id: *ai
+    network_id: *ai_digicel_mobile
+  - id: 34825
+    prefix: '1264729'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 3c3765a7-a511-4cd9-8a41-49c21ef0b169
+    country_id: *ai
+    network_id: *ai_flow_mobile
+  - id: 34826
+    prefix: '1264772'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 8b331f02-5dc6-4f74-802b-e32a9de43217
+    country_id: *ai
+    network_id: *ai_flow_mobile
 # Supplementary services Prefixes
-- id: 34810
-  prefix: '1264292'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 156c8898-99ba-4497-87c8-7d0735e0c210
-  country_id: *ai
-  network_id: *ai_dial_up_internet_access
+  - id: 34810
+    prefix: '1264292'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 7c821ae5-0dd7-4957-a149-04a032bb9012
+    country_id: *ai
+    network_id: *ai_dial_up_internet_access
 # Fixed Prefixes
-- id: 34815
-  prefix: '1264461'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: ae9603f0-aa8a-4fb6-ac43-3533aadd3570
-  country_id: *ai
-  network_id: *ai_fixed
-- id: 34816
-  prefix: '1264462'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: caf5c7ea-08da-4641-b0d6-ac02ecd14e1e
-  country_id: *ai
-  network_id: *ai_fixed
-- id: 34818
-  prefix: '1264497'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 7b176b59-3375-4f46-bdee-642e2a781e44
-  country_id: *ai
-  network_id: *ai_fixed
-- id: 34819
-  prefix: '1264498'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: ceb364c6-943e-4385-9c1e-5b8c77b535e5
-  country_id: *ai
-  network_id: *ai_fixed
+  - id: 34815
+    prefix: '1264461'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e2aa8c26-9fc9-41d3-84f5-d67ef363f1b1
+    country_id: *ai
+    network_id: *ai_fixed
+  - id: 34816
+    prefix: '1264462'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 56ecf304-03a7-4dbd-a6df-ea03f6b70cd4
+    country_id: *ai
+    network_id: *ai_fixed
+  - id: 34818
+    prefix: '1264497'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 667f8c4b-16b1-43b9-8557-fe1e7f0d503f
+    country_id: *ai
+    network_id: *ai_fixed
+  - id: 34819
+    prefix: '1264498'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 02dd1eaf-0cb5-483b-b00b-ab0e864e1a85
+    country_id: *ai
+    network_id: *ai_fixed

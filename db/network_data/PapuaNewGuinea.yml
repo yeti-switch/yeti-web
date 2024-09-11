@@ -1,742 +1,742 @@
 country_id: &pg 166
 networks:
 # Supplementary services Networks
-- id: &pg_customer_care_services 3890
-  name: PG Customer Care Services
-  uuid: e97b3d28-ad65-4d49-be8c-16832c03ef7d
-  type_id: 14
-- id: &pg_sms_services 3928
-  name: PG Sms Services
-  uuid: bf904894-2bc3-4ce0-bf91-358d34528059
-  type_id: 14
-- id: &pg_national_freephone_services 3991
-  name: PG National Freephone Services
-  uuid: 9856eac2-e4d0-4189-a62b-c6aff9f1c0ea
-  type_id: 14
-- id: &pg_international_freephone_services_ifs 4009
-  name: PG International Freephone Services Ifs
-  uuid: 82587e4d-c501-4777-a77b-6b437f3dcb47
-  type_id: 14
-- id: &pg_home_country_direct_hcd 4010
-  name: PG Home Country Direct Hcd
-  uuid: 6ad1a9ae-96a2-474b-ad5a-7d73ea24d36e
-  type_id: 14
-- id: &pg_premium_rate_services_prs 4040
-  name: PG Premium Rate Services Prs
-  uuid: 339f83b0-177e-4859-8ad2-7aedaac34c59
-  type_id: 14
-- id: &pg_voip 4137
-  name: PG Voip
-  uuid: 1733655b-6278-484e-aef5-4641afb53f92
-  type_id: 14
-- id: &pg_special_services 4592
-  name: PG Special Services
-  uuid: a07a1ed0-4f2c-4b07-9240-0824c72f342f
-  type_id: 14
-- id: &pg_testing_services 4797
-  name: PG Testing Services
-  uuid: 3b66c4d3-fa6f-4da8-b153-9b30138b1953
-  type_id: 14
-- id: &pg_emergency_services 4826
-  name: PG Emergency Services
-  uuid: 41ebac51-c849-4ebf-b1c6-154e5f2a85cc
-  type_id: 14
-- id: &pg_universal_access_number_uan 4857
-  name: PG Universal Access Number Uan
-  uuid: 4db24cba-ab21-46a1-ad38-c3cdac67bd50
-  type_id: 14
-- id: &pg_voice_mail_and_calling_card_services 4934
-  name: PG Voice Mail And Calling Card Services
-  uuid: d024ed7a-f8c1-49d0-bbfb-f32668b22640
-  type_id: 14
-- id: &pg_universal_access_codes 4958
-  name: PG Universal Access Codes
-  uuid: 4302e19e-5cf2-4674-8ded-3462d012f2fd
-  type_id: 14
+  - id: &pg_customer_care_services 3890
+    name: PG Customer Care Services
+    uuid: 7c1d5790-0a1e-4c1e-9f52-b681486087d7
+    type_id: 14
+  - id: &pg_sms_services 3928
+    name: PG Sms Services
+    uuid: feae9a03-62e3-4354-9f86-f67beaab0314
+    type_id: 14
+  - id: &pg_national_freephone_services 3991
+    name: PG National Freephone Services
+    uuid: c0301f00-817e-4ed9-8813-a632798559fe
+    type_id: 14
+  - id: &pg_international_freephone_services_ifs 4009
+    name: PG International Freephone Services Ifs
+    uuid: 3162afcf-f6e8-47ed-ba5b-f8de2cbbe668
+    type_id: 14
+  - id: &pg_home_country_direct_hcd 4010
+    name: PG Home Country Direct Hcd
+    uuid: e7ed2acb-0d52-40d1-bfa0-effec263186c
+    type_id: 14
+  - id: &pg_premium_rate_services_prs 4040
+    name: PG Premium Rate Services Prs
+    uuid: 705b542a-b0ec-444c-a181-c145669da575
+    type_id: 14
+  - id: &pg_voip 4137
+    name: PG Voip
+    uuid: ac9a14a7-f128-4dad-a82b-a0866c20a4ff
+    type_id: 14
+  - id: &pg_special_services 4592
+    name: PG Special Services
+    uuid: 5f1a3eab-4b43-4d98-a403-1f327b493e3c
+    type_id: 14
+  - id: &pg_testing_services 4797
+    name: PG Testing Services
+    uuid: aace9d99-8296-4828-9ace-606d054d611c
+    type_id: 14
+  - id: &pg_emergency_services 4826
+    name: PG Emergency Services
+    uuid: 0f0bdfb4-47f7-4cd4-aa96-b09e0811c589
+    type_id: 14
+  - id: &pg_universal_access_number_uan 4857
+    name: PG Universal Access Number Uan
+    uuid: 1cd537ca-bf20-4985-b7d5-1f911f6d2707
+    type_id: 14
+  - id: &pg_voice_mail_and_calling_card_services 4934
+    name: PG Voice Mail And Calling Card Services
+    uuid: 2a2e24ba-0d49-4e4d-a2ef-ee890077f795
+    type_id: 14
+  - id: &pg_universal_access_codes 4958
+    name: PG Universal Access Codes
+    uuid: 49e4a7d4-0a9b-4f60-898d-05eb62ad8b73
+    type_id: 14
 # Paging Networks
-- id: &pg_telikom_paging 4209
-  name: PG Telikom Paging
-  uuid: 4b94039a-03cc-4ecd-8bc1-5c3fff5a156e
-  type_id: 13
+  - id: &pg_telikom_paging 4209
+    name: PG Telikom Paging
+    uuid: 21375c03-4162-4276-9025-29922af258a1
+    type_id: 13
 # Satellite Networks
-- id: &pg_telikom_satellite 4210
-  name: PG Telikom Satellite
-  uuid: 709c3d72-ea41-4c9e-bbb8-89f71456f508
-  type_id: 16
-- id: &pg_satellite 5088
-  name: PG Satellite
-  uuid: e09aced7-0fab-4d37-9e8f-3ce279f7ec08
-  type_id: 16
+  - id: &pg_telikom_satellite 4210
+    name: PG Telikom Satellite
+    uuid: 5fcbacd0-f054-4ff2-93be-6525632aba18
+    type_id: 16
+  - id: &pg_satellite 5088
+    name: PG Satellite
+    uuid: 4e26f0d4-7033-46ee-8578-41ef83d818e9
+    type_id: 16
 # Fixed Networks
-- id: &pg_fixed 4230
-  name: PG Fixed
-  uuid: a56c86db-a3cb-4061-86a1-84ffab0f8f82
-  type_id: 12
+  - id: &pg_fixed 4230
+    name: PG Fixed
+    uuid: 51abfd8d-2a57-4371-a1a2-b845f795b311
+    type_id: 12
 # Mobile Networks
-- id: &pg_digicel_mobile 5130
-  name: PG Digicel Mobile
-  uuid: c09de754-8d39-4ccc-8a5d-e3d7fdc5a70e
-  type_id: 3
-- id: &pg_bemobile_vodafone_mobile 5254
-  name: PG Bemobile Vodafone Mobile
-  uuid: 7f748245-5e57-4644-8cd6-605132d36fb8
-  type_id: 3
-- id: &pg_citifon_mobile 5757
-  name: PG Citifon Mobile
-  uuid: 7e230e41-9a72-4ba8-b50d-abeb1a7a9085
-  type_id: 3
-- id: &pg_digivoip_mobile 5902
-  name: PG Digivoip Mobile
-  uuid: f2300d9e-de6c-4022-9674-be166e7393f0
-  type_id: 3
+  - id: &pg_digicel_mobile 5130
+    name: PG Digicel Mobile
+    uuid: 2c2d500f-b364-4324-a12d-77ccd3b469e5
+    type_id: 3
+  - id: &pg_bemobile_vodafone_mobile 5254
+    name: PG Bemobile Vodafone Mobile
+    uuid: 10165742-9d51-4f06-9072-8dd76d9f1bab
+    type_id: 3
+  - id: &pg_citifon_mobile 5757
+    name: PG Citifon Mobile
+    uuid: 226f6c09-f9a3-4063-b380-f2d5530d8fcb
+    type_id: 3
+  - id: &pg_digivoip_mobile 5902
+    name: PG Digivoip Mobile
+    uuid: e0c17b54-ed7d-4ee0-9b78-bac537031667
+    type_id: 3
 network_prefixes:
 # Supplementary services Prefixes
-- id: 242697
-  prefix: '67515'
-  number_min_length: 9
-  number_max_length: 9
-  uuid: d2ad205d-822e-4fba-9858-6ff3f17fa19d
-  country_id: *pg
-  network_id: *pg_customer_care_services
-- id: 242774
-  prefix: '67516'
-  number_min_length: 9
-  number_max_length: 12
-  uuid: ae9824e5-22fb-4ddf-bf43-c0288c47546c
-  country_id: *pg
-  network_id: *pg_sms_services
-- id: 242882
-  prefix: '675180'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: e9b3a614-13c2-4c35-afdc-1d8888abaf65
-  country_id: *pg
-  network_id: *pg_national_freephone_services
-- id: 242903
-  prefix: '6751808'
-  number_min_length: 17
-  number_max_length: 21
-  uuid: f03885b3-ab4c-4a05-8f88-d847c8048de8
-  country_id: *pg
-  network_id: *pg_international_freephone_services_ifs
-- id: 242904
-  prefix: '6751808'
-  number_min_length: 14
-  number_max_length: 17
-  uuid: 5c1fc2fe-ee1f-4321-8668-0d3b14c5b4e3
-  country_id: *pg
-  network_id: *pg_home_country_direct_hcd
-- id: 242942
-  prefix: '675190'
-  number_min_length: 13
-  number_max_length: 16
-  uuid: e0aa41b4-5e35-4ee5-af8e-8efed6aa3583
-  country_id: *pg
-  network_id: *pg_premium_rate_services_prs
-- id: 243056
-  prefix: '675200'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: fff37ba3-cb84-4590-a310-d6fe65ccf5e0
-  country_id: *pg
-  network_id: *pg_voip
-- id: 243063
-  prefix: '675201'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: f4754e68-0db4-452c-823c-8fd293868153
-  country_id: *pg
-  network_id: *pg_voip
-- id: 243082
-  prefix: '675202'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: f39dab47-65ec-48aa-908a-0f4a290e3a34
-  country_id: *pg
-  network_id: *pg_voip
-- id: 243104
-  prefix: '675203'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 163057cd-7140-4dd6-ba4e-a84883147aae
-  country_id: *pg
-  network_id: *pg_voip
-- id: 243127
-  prefix: '675204'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 40b2db44-67b6-49e2-a1c3-df5f4e4a71db
-  country_id: *pg
-  network_id: *pg_voip
-- id: 243136
-  prefix: '675205'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: a55fa016-f3be-4bc6-8dec-f9872edc9a7c
-  country_id: *pg
-  network_id: *pg_voip
-- id: 243156
-  prefix: '675207'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: d08c26b8-2c1a-4bab-8418-888452025a09
-  country_id: *pg
-  network_id: *pg_voip
-- id: 248040
-  prefix: '6750'
-  number_min_length: 7
-  number_max_length: 8
-  uuid: 9243f47e-b2d1-4ce2-8bdb-a84e372de150
-  country_id: *pg
-  network_id: *pg_special_services
-- id: 248362
-  prefix: '6751'
-  number_min_length: 7
-  number_max_length: 11
-  uuid: 58087b2e-7bd3-4f51-ba4e-7a5111767ae4
-  country_id: *pg
-  network_id: *pg_special_services
-- id: 248429
-  prefix: '67510'
-  number_min_length: 8
-  number_max_length: 8
-  uuid: c1b04c34-fd3b-4fa9-bbe7-5fedcc80e150
-  country_id: *pg
-  network_id: *pg_testing_services
-- id: 248485
-  prefix: '67511'
-  number_min_length: 8
-  number_max_length: 8
-  uuid: b7c65b63-3ccb-48f4-b80b-60a2e8f0588d
-  country_id: *pg
-  network_id: *pg_emergency_services
-- id: 248524
-  prefix: '675113'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: d8101261-6c63-4abb-bcfb-bb3502c2e438
-  country_id: *pg
-  network_id: *pg_universal_access_number_uan
-- id: 248660
-  prefix: '67512'
-  number_min_length: 8
-  number_max_length: 8
-  uuid: f5e3cfb8-24e6-4124-8d6e-c38208c333d7
-  country_id: *pg
-  network_id: *pg_voice_mail_and_calling_card_services
-- id: 248704
-  prefix: '67513'
-  number_min_length: 8
-  number_max_length: 8
-  uuid: 24bd9139-72ae-43f2-89e1-9b69ca722701
-  country_id: *pg
-  network_id: *pg_universal_access_codes
+  - id: 242697
+    prefix: '67515'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 0944f4d3-2fb3-4465-8f8c-9bde22aae473
+    country_id: *pg
+    network_id: *pg_customer_care_services
+  - id: 242774
+    prefix: '67516'
+    number_min_length: 9
+    number_max_length: 12
+    uuid: a364228f-ff1f-4f03-97bc-b7597381571d
+    country_id: *pg
+    network_id: *pg_sms_services
+  - id: 242882
+    prefix: '675180'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a9112f19-e4f5-4ed6-845a-3263822c9036
+    country_id: *pg
+    network_id: *pg_national_freephone_services
+  - id: 242903
+    prefix: '6751808'
+    number_min_length: 17
+    number_max_length: 21
+    uuid: f040b8a7-5b3c-4b21-9d82-043aa730142e
+    country_id: *pg
+    network_id: *pg_international_freephone_services_ifs
+  - id: 242904
+    prefix: '6751808'
+    number_min_length: 14
+    number_max_length: 17
+    uuid: e14d1551-e8a5-4f74-be81-088be1ce94c9
+    country_id: *pg
+    network_id: *pg_home_country_direct_hcd
+  - id: 242942
+    prefix: '675190'
+    number_min_length: 13
+    number_max_length: 16
+    uuid: b8a08c0f-f964-49c1-aa3c-6a12bad1c524
+    country_id: *pg
+    network_id: *pg_premium_rate_services_prs
+  - id: 243056
+    prefix: '675200'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 523657bc-e72f-4f8c-9adc-1c9239992c45
+    country_id: *pg
+    network_id: *pg_voip
+  - id: 243063
+    prefix: '675201'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3f611c91-8317-4201-a958-91f547301097
+    country_id: *pg
+    network_id: *pg_voip
+  - id: 243082
+    prefix: '675202'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 94e8506b-e6b8-4227-a130-65818e832a42
+    country_id: *pg
+    network_id: *pg_voip
+  - id: 243104
+    prefix: '675203'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: bdb21b55-2f7e-4d0a-963e-4c9f3da04200
+    country_id: *pg
+    network_id: *pg_voip
+  - id: 243127
+    prefix: '675204'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a381b553-0312-4363-b55f-3b90cdb65ee7
+    country_id: *pg
+    network_id: *pg_voip
+  - id: 243136
+    prefix: '675205'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 08530f94-da3d-4c9f-815c-f85f9bc0e3c2
+    country_id: *pg
+    network_id: *pg_voip
+  - id: 243156
+    prefix: '675207'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 639fbfa6-1c4c-4413-a481-ef5882db8cb6
+    country_id: *pg
+    network_id: *pg_voip
+  - id: 248040
+    prefix: '6750'
+    number_min_length: 7
+    number_max_length: 8
+    uuid: 7aa543e8-e7f1-482d-ac68-6f04082a1470
+    country_id: *pg
+    network_id: *pg_special_services
+  - id: 248362
+    prefix: '6751'
+    number_min_length: 7
+    number_max_length: 11
+    uuid: cf92c819-71ab-4274-a5cf-8eb7ee3c3540
+    country_id: *pg
+    network_id: *pg_special_services
+  - id: 248429
+    prefix: '67510'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f675015c-ebe1-4a66-931a-d58cb76a2959
+    country_id: *pg
+    network_id: *pg_testing_services
+  - id: 248485
+    prefix: '67511'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9be177da-390b-4df8-a47d-2bd53894eef8
+    country_id: *pg
+    network_id: *pg_emergency_services
+  - id: 248524
+    prefix: '675113'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 455346e7-7441-4f19-bee0-32e2ef9c6525
+    country_id: *pg
+    network_id: *pg_universal_access_number_uan
+  - id: 248660
+    prefix: '67512'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c5c9e7f3-dae5-4f5a-857b-cee33877995e
+    country_id: *pg
+    network_id: *pg_voice_mail_and_calling_card_services
+  - id: 248704
+    prefix: '67513'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 007845f2-10f4-4e24-a181-e728c503b618
+    country_id: *pg
+    network_id: *pg_universal_access_codes
 # Paging Prefixes
-- id: 244219
-  prefix: '675270'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 9afb7596-4f37-4885-91aa-d8b53474ab5b
-  country_id: *pg
-  network_id: *pg_telikom_paging
-- id: 244223
-  prefix: '675271'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 348d5633-96a2-4183-9587-9fa95349dbec
-  country_id: *pg
-  network_id: *pg_telikom_paging
+  - id: 244219
+    prefix: '675270'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 57d44398-41c1-4538-a057-e38ec86deccf
+    country_id: *pg
+    network_id: *pg_telikom_paging
+  - id: 244223
+    prefix: '675271'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1d47e28a-717f-4a8d-b545-b993fdba05e4
+    country_id: *pg
+    network_id: *pg_telikom_paging
 # Satellite Prefixes
-- id: 244280
-  prefix: '675275'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: c3327ad4-863d-405a-be95-1cd3eaf8812a
-  country_id: *pg
-  network_id: *pg_telikom_satellite
-- id: 244288
-  prefix: '675276'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: b84ab745-632b-419f-b40c-d6de5f7093ce
-  country_id: *pg
-  network_id: *pg_telikom_satellite
-- id: 244321
-  prefix: '675278'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 1bc3a12f-756f-47ec-958b-d45be4a5e5f7
-  country_id: *pg
-  network_id: *pg_telikom_satellite
-- id: 250868
-  prefix: '675644'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: c521cd43-58a7-49d8-9d4e-e8ed5590eeb2
-  country_id: *pg
-  network_id: *pg_satellite
+  - id: 244280
+    prefix: '675275'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: be49cb95-13f5-467c-987c-6c42ea246680
+    country_id: *pg
+    network_id: *pg_telikom_satellite
+  - id: 244288
+    prefix: '675276'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b92446e3-5d43-40bd-be73-56699df7b2b7
+    country_id: *pg
+    network_id: *pg_telikom_satellite
+  - id: 244321
+    prefix: '675278'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 26397bb6-efc8-431a-bf6b-1e61891b3361
+    country_id: *pg
+    network_id: *pg_telikom_satellite
+  - id: 250868
+    prefix: '675644'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5e015403-9d21-474d-a0e9-1b83c4e555ff
+    country_id: *pg
+    network_id: *pg_satellite
 # Fixed Prefixes
-- id: 244509
-  prefix: '6753'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: 0788d87c-99b2-4a47-812a-3c9dea2604c7
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 244532
-  prefix: '67530'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 07b4fc79-0792-4149-9948-a752ad9b76ad
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 244651
-  prefix: '67531'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 25fc0404-cd1d-401e-bbf2-79bdb78cf22d
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 244722
-  prefix: '67532'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 3778f9ef-b63a-4319-97c7-48fc6c976ec9
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 244747
-  prefix: '675329'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 096fec89-441e-4dfa-b228-34b6cc83c626
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 245289
-  prefix: '6754'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: 753af19f-b9cf-4af6-b014-40f10ea580ef
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 245578
-  prefix: '675422'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 910cc185-9964-4497-84de-da84d71dc0c9
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 245586
-  prefix: '675423'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 39f8de47-c655-4b39-9e2c-0d221362ede0
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 245594
-  prefix: '675424'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 670191cc-691f-4c1a-8023-77e2e9784891
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 245970
-  prefix: '675450'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 13854515-f291-48e6-9a71-45e673c29d3f
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 246108
-  prefix: '675456'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: c2f2b7ef-4c16-4bc5-8108-1fd4c9f9e4d5
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 246129
-  prefix: '675457'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 5b3d2fb4-dcbd-4b28-93c8-0099fc8b6d98
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 246749
-  prefix: '6756'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: e76e4789-9167-4d0c-ad20-94cfd9d17ee9
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 248799
-  prefix: '675458'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: e0a72c4e-c00d-47c5-bf9c-8a878c9a96fa
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 248813
-  prefix: '675459'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: c601f9a3-f6c5-439b-bcae-e6cd803029ba
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249347
-  prefix: '6755'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: fdee9063-0d36-4ba3-aef0-0cbadfab1bd5
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249684
-  prefix: '675530'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: ca330d51-dd77-48a7-a40a-bf5d7143a1ba
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249688
-  prefix: '675531'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: b28815f8-5af4-42e8-b9b8-6b828f881738
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249702
-  prefix: '675532'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 85038768-2c93-4508-a4ac-981efc2020ab
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249726
-  prefix: '675535'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 3ff548b7-942c-40b0-9718-41ec6165da54
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249735
-  prefix: '675537'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: e2959481-99fc-42ea-a0c3-cf96323fafec
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249775
-  prefix: '675540'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 212553c9-17f0-49d4-bd68-799aefaa361b
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249778
-  prefix: '675541'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 4caeec31-7c43-48bc-920d-739ed03f818b
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249781
-  prefix: '675542'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 42f8d506-9355-455f-9b70-b348d92d529b
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249801
-  prefix: '675545'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 77d7be31-a373-476f-a5ec-6bd7e2bae061
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249819
-  prefix: '675546'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 2669da40-cf56-4e40-8f5a-2c3c9049902e
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249822
-  prefix: '675547'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 396a78cb-aaf4-4a50-b347-2149c07a6a28
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 249837
-  prefix: '675549'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 2c7fcf48-2f19-4228-b9b1-d9a3d276a896
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 250824
-  prefix: '675641'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 80c50b6a-8847-434c-9f31-d8cc20cd46a7
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 250855
-  prefix: '675642'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 36d613b9-86f7-452c-beb3-07a3790d4aeb
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 250861
-  prefix: '675643'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 9c3b8d29-87b8-43c3-95bd-f64e7e62d42c
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 250894
-  prefix: '675645'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: d66add9b-346c-4c06-8f8a-6aea6482809c
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 250901
-  prefix: '675646'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 19384bcf-abdf-4fb6-bb53-c20fd7a9ead6
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 250914
-  prefix: '675648'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 398dd2ba-02bf-47ac-b1d3-8f69b0cf4f58
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 250921
-  prefix: '675649'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 7666b3be-f6fb-464e-ba7e-c156adc5d359
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 253133
-  prefix: '6759'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: 4082fc15-93f8-4da6-92ae-46e2caf4649c
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 258910
-  prefix: '675770'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 42cce2d5-769d-49de-9910-2aa4c2b4dd94
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 258980
-  prefix: '675771'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: b8af928a-3086-4bf1-9fa9-e43b5f77a759
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 259062
-  prefix: '675772'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 2d64cad7-ee50-4a37-ba05-9b08fba97f64
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 259122
-  prefix: '6757730'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 969ab41a-7e0c-4fc9-af3d-035875f2c101
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 259136
-  prefix: '675774'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 750ac560-4f6f-4307-a0d6-32185fe401d4
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 261834
-  prefix: '675970'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 1df1874f-1be6-49d4-ab4b-686ba243c5ef
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 261903
-  prefix: '675973'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: b189a87d-04db-4044-80af-b51a4aca403e
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 261964
-  prefix: '675975'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 9a32951f-c959-4346-b2a2-a809c408236f
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 261970
-  prefix: '675976'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: b38528a8-ce98-4b75-adf9-2853a35236c5
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 262104
-  prefix: '675980'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: a2d10b80-f05b-4272-b6e2-826eb74ea1d0
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 262136
-  prefix: '675981'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 4e018669-d0d6-48ff-ae7a-9f139402a2a4
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 262163
-  prefix: '675982'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 281ee90f-5a5f-4405-9d50-4fef68b80a30
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 262196
-  prefix: '675983'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 921d891e-0618-41fd-b8e9-f8cdf63cbef4
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 262221
-  prefix: '675984'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: cce24b45-73e7-4e4c-8756-8ba8479f1a1f
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 262236
-  prefix: '675985'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 4223eff4-ced9-4fed-9a79-76c0f57bc46f
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 262257
-  prefix: '675987'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 1cd53029-eb22-4214-8a55-6032397a2ebb
-  country_id: *pg
-  network_id: *pg_fixed
-- id: 262280
-  prefix: '675989'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 01328c1d-21ad-440d-9877-7aa58c50662d
-  country_id: *pg
-  network_id: *pg_fixed
+  - id: 244509
+    prefix: '6753'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b6605725-3c3f-46c0-8198-87ab3f5c4f37
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 244532
+    prefix: '67530'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 83e8460c-2062-4739-8fa1-1b539fb64a3d
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 244651
+    prefix: '67531'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ce5f18be-f2cd-4bdb-8ade-8c0124e45f36
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 244722
+    prefix: '67532'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 310d05c7-7097-4445-bf28-90e811973942
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 244747
+    prefix: '675329'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: afc341e7-9ad1-4d86-8bdb-52ddc6e8f3e5
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 245289
+    prefix: '6754'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a3dbfd2c-952a-4c87-948f-915102d12e05
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 245578
+    prefix: '675422'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2c5d96e5-91a9-4e2f-9f81-f35f5a94ca48
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 245586
+    prefix: '675423'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8336e554-73aa-47b1-aac1-104f7992f3c0
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 245594
+    prefix: '675424'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a0953460-0d33-42ba-a58b-a98b6e25f652
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 245970
+    prefix: '675450'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ef150542-e963-4aed-a2e1-b1bc82594c58
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 246108
+    prefix: '675456'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1558ff83-83b8-419b-a2e7-3d6adc9ab17e
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 246129
+    prefix: '675457'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 874c15f1-92de-4975-b8fe-486c425f034a
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 246749
+    prefix: '6756'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6e127de9-3b5e-421e-8d13-bc7cce4a482f
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 248799
+    prefix: '675458'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b1358a07-0329-49c5-b3f1-8eb0ec5a6bd8
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 248813
+    prefix: '675459'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5e7f32e9-0a77-4503-9661-4ad2bea1039a
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249347
+    prefix: '6755'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 584f279c-b904-4236-a806-2fd1b0703ba3
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249684
+    prefix: '675530'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 42ba759e-fa2d-408c-873e-39cf73d653e2
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249688
+    prefix: '675531'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c24293da-6945-460e-976e-384369641016
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249702
+    prefix: '675532'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3f5fad15-afc3-481c-98ab-d2e2258fbd10
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249726
+    prefix: '675535'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ddcb22cb-44e7-44d6-a7e3-93f4d2de20dd
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249735
+    prefix: '675537'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 34ab3958-1b03-42d6-a0f9-b590618dfcd2
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249775
+    prefix: '675540'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2bec3a26-cf46-4bc3-a3e9-fed622f3422f
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249778
+    prefix: '675541'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e18bc71f-107c-449e-9f6a-e650ef9e8b96
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249781
+    prefix: '675542'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 622fc037-c283-4716-8b9d-ca326a6d26a5
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249801
+    prefix: '675545'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: eb0f494c-df9c-49fc-928d-20cb726ce205
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249819
+    prefix: '675546'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ac434aa4-5155-4ede-a33f-d7bfa31926e0
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249822
+    prefix: '675547'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 249208fc-709b-44bf-9356-ed94a257faac
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 249837
+    prefix: '675549'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2d61b8b4-27ef-4b20-b5c7-76db03e1fbdc
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 250824
+    prefix: '675641'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 41d9af1b-43f0-417e-b1f4-938c7bd9e42f
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 250855
+    prefix: '675642'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 18d15bb7-a0bd-466c-9fa6-6d7c17347bde
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 250861
+    prefix: '675643'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d28f5519-a5d6-4110-9f22-85748811cca8
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 250894
+    prefix: '675645'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 71dd51c0-5620-4f21-9fcc-c6ad18821e7a
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 250901
+    prefix: '675646'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c787120a-e160-4c3e-ae81-ebe4a0cffd37
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 250914
+    prefix: '675648'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ed5d812f-8321-4a54-98db-45088facf999
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 250921
+    prefix: '675649'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 76a3209f-f202-4054-9808-3baef4cd362e
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 253133
+    prefix: '6759'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0efa26a5-afcd-438e-9cf3-36370018534e
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 258910
+    prefix: '675770'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 6704fd87-ca9d-4666-ab56-c4f8274fc5a6
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 258980
+    prefix: '675771'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b5b14f59-9bd3-4721-9f4a-f6386854cf74
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 259062
+    prefix: '675772'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 1c6a36e9-c04e-4e0f-a998-23f7292c6cc0
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 259122
+    prefix: '6757730'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: c32fa949-082e-4bd6-9a00-042869786f4c
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 259136
+    prefix: '675774'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b9c45ea2-82e7-4139-a556-8de875c9ae59
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 261834
+    prefix: '675970'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 0acf4388-c2c5-4507-b2c7-fce8dc340dd6
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 261903
+    prefix: '675973'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 803b38c5-7235-4955-89c2-437681de7993
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 261964
+    prefix: '675975'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 794b9239-af3a-4185-a489-209f8cbf2621
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 261970
+    prefix: '675976'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 25619294-a01d-4491-813c-f9c2f4ca81e9
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 262104
+    prefix: '675980'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c3782b6e-5af5-4a33-b524-f16981fbdcc3
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 262136
+    prefix: '675981'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 92e1b54b-63c5-44d8-8791-242adb93696d
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 262163
+    prefix: '675982'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f60da6b9-8c1a-43a1-8c9c-1f84a01441e5
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 262196
+    prefix: '675983'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2718ae6e-ada4-40b4-9566-56638a8b3e23
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 262221
+    prefix: '675984'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b0da24d2-4469-4e73-90d1-c9f0d4933067
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 262236
+    prefix: '675985'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2985bbf6-017c-471e-a091-e62b1584b468
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 262257
+    prefix: '675987'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: eb3671a5-fe9d-4a46-b282-78c87bebcfea
+    country_id: *pg
+    network_id: *pg_fixed
+  - id: 262280
+    prefix: '675989'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 697d953d-d62c-4b72-9dea-a2ab3382eb1b
+    country_id: *pg
+    network_id: *pg_fixed
 # Country code Prefixes
-- id: 247969
-  prefix: '675'
-  number_min_length: 6
-  number_max_length: 17
-  uuid: 8a6ea09e-781c-4f32-890f-3c841d6042cd
-  country_id: *pg
-  network_id:
+  - id: 247969
+    prefix: '675'
+    number_min_length: 6
+    number_max_length: 17
+    uuid: a964477c-901c-4f3f-aa50-aa66ec3217ff
+    country_id: *pg
+    network_id: null
 # Mobile Prefixes
-- id: 251470
-  prefix: '67571'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: c815d931-4ce5-43d9-a032-60e7a58af3f5
-  country_id: *pg
-  network_id: *pg_digicel_mobile
-- id: 251557
-  prefix: '67572'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: ff8b21fe-5319-4452-b036-51068191d0cf
-  country_id: *pg
-  network_id: *pg_digicel_mobile
-- id: 251608
-  prefix: '67573'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 4b0c8027-0167-4924-beab-56cbf318521d
-  country_id: *pg
-  network_id: *pg_digicel_mobile
-- id: 251795
-  prefix: '67574'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: ce595b22-fffb-4d8b-b290-3638009c471d
-  country_id: *pg
-  network_id: *pg_digicel_mobile
-- id: 252195
-  prefix: '67575'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 521cefc9-3fe1-43c8-90c4-158c8b51af07
-  country_id: *pg
-  network_id: *pg_bemobile_vodafone_mobile
-- id: 252719
-  prefix: '67576'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 8e8a1f04-abfc-47c6-b758-f10cdb10590b
-  country_id: *pg
-  network_id: *pg_bemobile_vodafone_mobile
-- id: 252855
-  prefix: '67588'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: ff706f24-11bb-4cce-bc94-e092887edd05
-  country_id: *pg
-  network_id: *pg_digicel_mobile
-- id: 258655
-  prefix: '67570'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: d2b647de-3c86-4beb-926d-ab31f56a37ae
-  country_id: *pg
-  network_id: *pg_digicel_mobile
-- id: 259161
-  prefix: '675775'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: f9a5c502-5ce0-47d0-8901-79194367e95e
-  country_id: *pg
-  network_id: *pg_citifon_mobile
-- id: 259347
-  prefix: '67578'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: e1ff7c23-56e0-4160-8346-14d294166883
-  country_id: *pg
-  network_id: *pg_citifon_mobile
-- id: 259645
-  prefix: '67579'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: b7f27c09-d064-4ac0-872c-8ab992d917b6
-  country_id: *pg
-  network_id: *pg_digicel_mobile
-- id: 260141
-  prefix: '67581'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 959e9c7e-a6cf-4c36-9233-7cf92ff992c7
-  country_id: *pg
-  network_id: *pg_digivoip_mobile
+  - id: 251470
+    prefix: '67571'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2bda7559-dd3d-4bab-91f0-798b81d3e379
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 251557
+    prefix: '67572'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a284ac12-ede6-427e-aa19-9d97ec483f36
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 251608
+    prefix: '67573'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1ec537cf-85fb-4099-ab7e-8d8c57ad74a2
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 251795
+    prefix: '67574'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8134b171-77d9-4223-ba25-1a762af1bfb3
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 252195
+    prefix: '67575'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 07b99e67-40cf-4763-abec-20548d474a7c
+    country_id: *pg
+    network_id: *pg_bemobile_vodafone_mobile
+  - id: 252719
+    prefix: '67576'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 20674f17-3f59-4f4f-a3ec-71868c002ef6
+    country_id: *pg
+    network_id: *pg_bemobile_vodafone_mobile
+  - id: 252855
+    prefix: '67588'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 6b949440-15f5-439f-8d1d-9decc3c42109
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 258655
+    prefix: '67570'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7ecc2802-59d3-4732-9458-49a45eee1d3b
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 259161
+    prefix: '675775'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: c7dde79d-c486-4062-a640-46f8c70d4bf2
+    country_id: *pg
+    network_id: *pg_citifon_mobile
+  - id: 259347
+    prefix: '67578'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 44c1ec8a-8c8a-4048-b0f9-57ef779113da
+    country_id: *pg
+    network_id: *pg_citifon_mobile
+  - id: 259645
+    prefix: '67579'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4f50ddfe-690d-4101-a546-53017201ef5d
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 260141
+    prefix: '67581'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: bebb12b7-8bb7-40f2-803d-00f4fe9f4290
+    country_id: *pg
+    network_id: *pg_digivoip_mobile

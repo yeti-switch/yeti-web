@@ -1,163 +1,163 @@
 country_id: &rw 178
 networks:
 # Fixed Networks
-- id: &rw_fixed 4107
-  name: RW Fixed
-  uuid: 44e85c86-52f9-4421-aceb-9a1e3ca08f46
-  type_id: 12
+  - id: &rw_fixed 4107
+    name: RW Fixed
+    uuid: b5980326-408f-41d4-a1b5-ed203ab8cc25
+    type_id: 12
 # Supplementary services Networks
-- id: &rw_special_services 4318
-  name: RW Special Services
-  uuid: 784494de-e43b-4c53-b528-0b4525ea23c2
-  type_id: 14
-- id: &rw_premium_rate_services 5437
-  name: RW Premium Rate Services
-  uuid: 563afdb1-06b0-4301-b389-84b00051107c
-  type_id: 14
-- id: &rw_freephone_services 5844
-  name: RW Freephone Services
-  uuid: 7fd057cc-90be-447c-9c21-00e848356c16
-  type_id: 14
+  - id: &rw_special_services 4318
+    name: RW Special Services
+    uuid: 8be2320b-e59d-4864-9380-9cac7a0273e9
+    type_id: 14
+  - id: &rw_premium_rate_services 5437
+    name: RW Premium Rate Services
+    uuid: f67b3bc6-e8b7-416b-9352-de1569fd8b48
+    type_id: 14
+  - id: &rw_freephone_services 5844
+    name: RW Freephone Services
+    uuid: c43d6ac7-86c9-4fa1-9f1b-dad7f89cb3f5
+    type_id: 14
 # Satellite Networks
-- id: &rw_satellite 4632
-  name: RW Satellite
-  uuid: 144f92ea-9394-468f-a123-14e79d5c1d76
-  type_id: 16
+  - id: &rw_satellite 4632
+    name: RW Satellite
+    uuid: 86aede48-d975-440b-8e3a-e50307b6f9e4
+    type_id: 16
 # Mobile Networks
-- id: &rw_airtel_mobile 5146
-  name: RW Airtel Mobile
-  uuid: 5763846d-49cf-465f-b743-ab6adf836eae
-  type_id: 3
-- id: &rw_mtn_mobile 5442
-  name: RW Mtn Mobile
-  uuid: 629ce41c-a728-431f-b335-17ee484cdb6a
-  type_id: 3
-- id: &rw_mobile 5698
-  name: RW Mobile
-  uuid: 2824ac17-3f38-4dab-8e10-8d8447409429
-  type_id: 3
+  - id: &rw_airtel_mobile 5146
+    name: RW Airtel Mobile
+    uuid: 6c330e68-ca28-44d4-966c-b9406c4c2d62
+    type_id: 3
+  - id: &rw_mtn_mobile 5442
+    name: RW Mtn Mobile
+    uuid: 1575fee8-3934-4bbe-8730-705a8ed90227
+    type_id: 3
+  - id: &rw_mobile 5698
+    name: RW Mobile
+    uuid: 3933080d-6b9b-489b-980a-bfdc1ae779cc
+    type_id: 3
 network_prefixes:
 # Fixed Prefixes
-- id: 243024
-  prefix: '2502'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 3cc68396-c27b-401c-a5ab-498978e5ddac
-  country_id: *rw
-  network_id: *rw_fixed
+  - id: 243024
+    prefix: '2502'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: fbffe35c-cd8a-46cc-a492-5919054e729e
+    country_id: *rw
+    network_id: *rw_fixed
 # Supplementary services Prefixes
-- id: 245293
-  prefix: '2504'
-  number_min_length: 7
-  number_max_length: 8
-  uuid: 3fb423da-bcdf-4a24-bf7c-41a459124473
-  country_id: *rw
-  network_id: *rw_special_services
-- id: 248371
-  prefix: '2501'
-  number_min_length: 7
-  number_max_length: 7
-  uuid: 876bf158-872a-4ff6-92da-6a13f78a5541
-  country_id: *rw
-  network_id: *rw_special_services
-- id: 253196
-  prefix: '2500900'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 916dc8d5-e937-4551-ad06-c4214934e716
-  country_id: *rw
-  network_id: *rw_premium_rate_services
-- id: 260027
-  prefix: '2500800'
-  number_min_length: 15
-  number_max_length: 15
-  uuid: 69bc2021-7b0d-4c09-81b7-967999ff9661
-  country_id: *rw
-  network_id: *rw_freephone_services
+  - id: 245293
+    prefix: '2504'
+    number_min_length: 7
+    number_max_length: 8
+    uuid: ec83ab3a-e294-4d82-a392-91e3a20a94e5
+    country_id: *rw
+    network_id: *rw_special_services
+  - id: 248371
+    prefix: '2501'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 874a483b-3cd4-44fd-9f8c-1518c3ad4bd3
+    country_id: *rw
+    network_id: *rw_special_services
+  - id: 253196
+    prefix: '2500900'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 6996674f-7a9f-4343-a47c-e85fc4584393
+    country_id: *rw
+    network_id: *rw_premium_rate_services
+  - id: 260027
+    prefix: '2500800'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: a4c639a2-e173-4b1b-8f6b-4f3535501ac5
+    country_id: *rw
+    network_id: *rw_freephone_services
 # Country code Prefixes
-- id: 247978
-  prefix: '250'
-  number_min_length: 6
-  number_max_length: 12
-  uuid: 3ba56ddc-9854-4836-a74f-c950201948a7
-  country_id: *rw
-  network_id:
+  - id: 247978
+    prefix: '250'
+    number_min_length: 6
+    number_max_length: 12
+    uuid: 9180de3f-4a7a-4918-8668-849e9d3bf6e5
+    country_id: *rw
+    network_id: null
 # Satellite Prefixes
-- id: 248173
-  prefix: '25006'
-  number_min_length: 12
-  number_max_length: 12
-  uuid: 468c47d9-b45c-464e-ad0c-ea0d8d21e3f8
-  country_id: *rw
-  network_id: *rw_satellite
+  - id: 248173
+    prefix: '25006'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e4481b66-8695-4fda-97a9-f4854805bb26
+    country_id: *rw
+    network_id: *rw_satellite
 # Mobile Prefixes
-- id: 251559
-  prefix: '250072'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 72e6762b-2ce0-4dc3-8673-0354c82b82dc
-  country_id: *rw
-  network_id: *rw_airtel_mobile
-- id: 251610
-  prefix: '250073'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: f69a7976-73fd-4484-a0e9-67f699159cb8
-  country_id: *rw
-  network_id: *rw_airtel_mobile
-- id: 253209
-  prefix: '250090072'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: ea33132f-351a-44d9-b282-bf08fa02c2e5
-  country_id: *rw
-  network_id: *rw_airtel_mobile
-- id: 253210
-  prefix: '250090073'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: a28800ec-b2a7-4edc-9453-56028ae77b7c
-  country_id: *rw
-  network_id: *rw_airtel_mobile
-- id: 253211
-  prefix: '250090078'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 94e81e69-65c5-472d-9d30-c916d132612e
-  country_id: *rw
-  network_id: *rw_mtn_mobile
-- id: 258628
-  prefix: '25007'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 0ab15f12-20f0-4836-8a81-4b5047fbb63f
-  country_id: *rw
-  network_id: *rw_mobile
-- id: 259348
-  prefix: '250078'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 1ca6ccf6-3609-4ad6-8a2d-1f8139807550
-  country_id: *rw
-  network_id: *rw_mtn_mobile
-- id: 260052
-  prefix: '250080072'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: c28d7d2e-cb25-4fc4-a3c6-3cd4be35ba1f
-  country_id: *rw
-  network_id: *rw_airtel_mobile
-- id: 260053
-  prefix: '250080073'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: 70eb0acb-eec3-4793-8759-f73c75f341e8
-  country_id: *rw
-  network_id: *rw_airtel_mobile
-- id: 260054
-  prefix: '250080078'
-  number_min_length: 17
-  number_max_length: 17
-  uuid: e63f5d43-ae6d-4a42-9b44-2edb9a32ca17
-  country_id: *rw
-  network_id: *rw_mtn_mobile
+  - id: 251559
+    prefix: '250072'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: fa334c79-7ab2-4a2a-888c-4b023e9c93aa
+    country_id: *rw
+    network_id: *rw_airtel_mobile
+  - id: 251610
+    prefix: '250073'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 3ec5ce11-1f58-44d6-9956-3d9ca38874a3
+    country_id: *rw
+    network_id: *rw_airtel_mobile
+  - id: 253209
+    prefix: '250090072'
+    number_min_length: 17
+    number_max_length: 17
+    uuid: d6c2c188-b49e-4eac-9c3c-6b119cff2e45
+    country_id: *rw
+    network_id: *rw_airtel_mobile
+  - id: 253210
+    prefix: '250090073'
+    number_min_length: 17
+    number_max_length: 17
+    uuid: fa09c458-0336-4062-befb-6fd83e4b79bd
+    country_id: *rw
+    network_id: *rw_airtel_mobile
+  - id: 253211
+    prefix: '250090078'
+    number_min_length: 17
+    number_max_length: 17
+    uuid: c6b96659-b0e1-4f43-87b9-d4f725f0d345
+    country_id: *rw
+    network_id: *rw_mtn_mobile
+  - id: 258628
+    prefix: '25007'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 99b68283-d9c3-470f-847a-dc48dc02e3f1
+    country_id: *rw
+    network_id: *rw_mobile
+  - id: 259348
+    prefix: '250078'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e1daae8c-2b75-4bea-a603-550bd8d9f87d
+    country_id: *rw
+    network_id: *rw_mtn_mobile
+  - id: 260052
+    prefix: '250080072'
+    number_min_length: 17
+    number_max_length: 17
+    uuid: 755f76c5-c5f7-489a-b707-4e9ba57c0d46
+    country_id: *rw
+    network_id: *rw_airtel_mobile
+  - id: 260053
+    prefix: '250080073'
+    number_min_length: 17
+    number_max_length: 17
+    uuid: 2bc25993-c050-45a3-af11-7cebe054a013
+    country_id: *rw
+    network_id: *rw_airtel_mobile
+  - id: 260054
+    prefix: '250080078'
+    number_min_length: 17
+    number_max_length: 17
+    uuid: db8ee50e-44e9-4b89-80d0-cceec9c4894c
+    country_id: *rw
+    network_id: *rw_mtn_mobile
