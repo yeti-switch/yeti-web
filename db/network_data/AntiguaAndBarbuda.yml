@@ -1,402 +1,402 @@
 country_id: &ag 9
 networks:
 # Supplementary services Networks
-- id: &ag_special_services 3175
-  name: AG Special Services
-  uuid: 4f2e6572-f8c3-4b47-8215-f77b4605795b
-  type_id: 14
-- id: &ag_card_and_coin_telephones 3176
-  name: AG Card And Coin Telephones
-  uuid: 9b36199e-af20-43d4-acf7-bb2e1696c72e
-  type_id: 14
-- id: &ag_credit_card_icvs 3177
-  name: AG Credit Card Icvs
-  uuid: f4e342f6-8448-468b-91dc-d595ae51801c
-  type_id: 14
-- id: &ag_audiotext 3184
-  name: AG Audiotext
-  uuid: 917aa53f-d482-43ab-a6c0-cc8af820fb2c
-  type_id: 14
+  - id: &ag_special_services 3175
+    name: AG Special Services
+    uuid: 205b2117-1cf8-4023-8317-585856e5032d
+    type_id: 14
+  - id: &ag_card_and_coin_telephones 3176
+    name: AG Card And Coin Telephones
+    uuid: 2d2959d1-04bb-47bd-9617-e01fe1d72240
+    type_id: 14
+  - id: &ag_credit_card_icvs 3177
+    name: AG Credit Card Icvs
+    uuid: b8635fb0-fd00-4595-bd94-630ff6bf610b
+    type_id: 14
+  - id: &ag_audiotext 3184
+    name: AG Audiotext
+    uuid: b21b8eab-14b0-465c-9733-6e4379f82d3e
+    type_id: 14
 # Paging Networks
-- id: &ag_flow_paging 3178
-  name: AG Flow Paging
-  uuid: d954f6c5-6057-49d4-b698-619ba0bb6993
-  type_id: 13
-- id: &ag_paging 3179
-  name: AG Paging
-  uuid: 89ba0357-afa7-440b-b0fa-15e7435e8417
-  type_id: 13
+  - id: &ag_flow_paging 3178
+    name: AG Flow Paging
+    uuid: e4fc4cee-b25f-49c0-9e93-921cdc2f1b9b
+    type_id: 13
+  - id: &ag_paging 3179
+    name: AG Paging
+    uuid: 07cb13ad-5310-4b06-88e3-9d984b721723
+    type_id: 13
 # Fixed Networks
-- id: &ag_fixed 3180
-  name: AG Fixed
-  uuid: 4ab1eab4-1b75-43e2-85b2-8fb4b5dd031b
-  type_id: 12
+  - id: &ag_fixed 3180
+    name: AG Fixed
+    uuid: b8a95df2-fe44-49fd-8223-651ca93f4188
+    type_id: 12
 # Mobile Networks
-- id: &ag_flow_mobile 3181
-  name: AG Flow Mobile
-  uuid: 8b1a08d9-f4f6-4343-8342-3a7b6a8eaea9
-  type_id: 3
-- id: &ag_digicel_mobile 3182
-  name: AG Digicel Mobile
-  uuid: ccb4764e-69cc-4e98-a167-d872dba87be4
-  type_id: 3
-- id: &ag_imobile_mobile 3183
-  name: AG Imobile Mobile
-  uuid: 166928dc-d2ef-4cdd-af66-13c6c4db4f53
-  type_id: 3
+  - id: &ag_flow_mobile 3181
+    name: AG Flow Mobile
+    uuid: b3d01c03-7441-4460-9345-bba2aff8d613
+    type_id: 3
+  - id: &ag_digicel_mobile 3182
+    name: AG Digicel Mobile
+    uuid: 5ec15523-7907-40eb-8408-f0d9ec22b26f
+    type_id: 3
+  - id: &ag_imobile_mobile 3183
+    name: AG Imobile Mobile
+    uuid: 37ca6c5c-8761-42da-ac43-a38262b85238
+    type_id: 3
 network_prefixes:
 # Country code Prefixes
-- id: 35782
-  prefix: '1268'
-  number_min_length: 11
-  number_max_length: 11
-  uuid: d7670d68-3972-496b-9203-a88c26c54aa8
-  country_id: *ag
-  network_id:
+  - id: 35782
+    prefix: '1268'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d44a8154-4b9c-43c7-9aa9-ce131c4562ac
+    country_id: *ag
+    network_id: null
 # Supplementary services Prefixes
-- id: 35788
-  prefix: '1268092'
-  number_min_length: 13
-  number_max_length: 13
-  uuid: 627c7f25-66c4-4e72-a3dd-936aff6fe0b0
-  country_id: *ag
-  network_id: *ag_special_services
-- id: 35791
-  prefix: '1268222'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e79b950b-4eb7-47ff-b2c9-d492989c9bcc
-  country_id: *ag
-  network_id: *ag_card_and_coin_telephones
-- id: 35792
-  prefix: '1268268'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: fa99c053-b538-4e8b-879b-0cc42f4e04f7
-  country_id: *ag
-  network_id: *ag_special_services
-- id: 35794
-  prefix: '1268333'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 23056945-9fb2-4546-bc3f-f81aa52f6d30
-  country_id: *ag
-  network_id: *ag_credit_card_icvs
-- id: 35808
-  prefix: '1268555'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e5df9457-0d68-4f2d-a868-08999bd1ccab
-  country_id: *ag
-  network_id: *ag_special_services
-- id: 35822
-  prefix: '1268739'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 4f62cf3a-317a-4942-bd9d-d9bcd7f2c842
-  country_id: *ag
-  network_id: *ag_audiotext
-- id: 35824
-  prefix: '1268765'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: d7925944-7fae-4762-b001-cdda560b5942
-  country_id: *ag
-  network_id: *ag_special_services
-- id: 35841
-  prefix: '1268938'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 2243c384-8d9c-42e1-b4f9-eb2a1fc611fa
-  country_id: *ag
-  network_id: *ag_audiotext
+  - id: 35788
+    prefix: '1268092'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 574afff4-7fd6-4699-ba02-3754df5ee065
+    country_id: *ag
+    network_id: *ag_special_services
+  - id: 35791
+    prefix: '1268222'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 16977834-7c74-4df3-a24c-5f651465a1c5
+    country_id: *ag
+    network_id: *ag_card_and_coin_telephones
+  - id: 35792
+    prefix: '1268268'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 8e51330c-b154-4a08-8b31-089d2a0b26a2
+    country_id: *ag
+    network_id: *ag_special_services
+  - id: 35794
+    prefix: '1268333'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 3c4576cf-9645-437f-bc65-a266954d3383
+    country_id: *ag
+    network_id: *ag_credit_card_icvs
+  - id: 35808
+    prefix: '1268555'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 07e5ee1c-cc2c-4651-941d-b3be46b6be67
+    country_id: *ag
+    network_id: *ag_special_services
+  - id: 35822
+    prefix: '1268739'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 2d21ee72-6adc-44e6-ab8a-91dc674afcf2
+    country_id: *ag
+    network_id: *ag_audiotext
+  - id: 35824
+    prefix: '1268765'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 283ef219-654e-4176-895d-3f606d9898f9
+    country_id: *ag
+    network_id: *ag_special_services
+  - id: 35841
+    prefix: '1268938'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 9377af95-9dc3-4606-9c5e-c8177b480345
+    country_id: *ag
+    network_id: *ag_audiotext
 # Paging Prefixes
-- id: 35796
-  prefix: '1268404'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: c36ce1e9-befa-4b1c-b184-64c1357b5c4b
-  country_id: *ag
-  network_id: *ag_flow_paging
-- id: 35797
-  prefix: '1268406'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 55a18108-61ca-40fe-8d6e-12e6f2756bfe
-  country_id: *ag
-  network_id: *ag_paging
-- id: 35798
-  prefix: '1268409'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 3620360a-2d89-496b-af6b-cfec47104464
-  country_id: *ag
-  network_id: *ag_flow_paging
+  - id: 35796
+    prefix: '1268404'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 6795588d-9cdd-426b-9c57-49000511664f
+    country_id: *ag
+    network_id: *ag_flow_paging
+  - id: 35797
+    prefix: '1268406'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: c2719c26-4cae-418a-8cc5-16f15069015d
+    country_id: *ag
+    network_id: *ag_paging
+  - id: 35798
+    prefix: '1268409'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 51a902d4-941a-4c18-95c2-f921a55655df
+    country_id: *ag
+    network_id: *ag_flow_paging
 # Fixed Prefixes
-- id: 35799
-  prefix: '1268460'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 334c15b1-a575-4454-948e-ff56685034bc
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35800
-  prefix: '1268461'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 6169c6c2-a5b3-4c7e-a342-398d45918242
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35801
-  prefix: '1268462'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e0125dd8-a8c1-4d48-8456-dca771ab3502
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35802
-  prefix: '1268463'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 96873e21-6757-4f56-85e9-524e57034dd0
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35804
-  prefix: '1268480'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e30167c9-9602-4cb6-8308-212d8fd995a3
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35805
-  prefix: '1268481'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 06109787-b9ed-4fbd-9646-fddd8f0c9d0c
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35806
-  prefix: '1268484'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 0faf4b98-84d1-4949-8b9b-f3da912daf45
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35809
-  prefix: '1268560'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 94af80b2-8afc-440a-9388-1ab373959ec5
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35810
-  prefix: '1268561'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: c995eafa-5e80-4518-b9ea-89287755e467
-  country_id: *ag
-  network_id: *ag_fixed
-- id: 35811
-  prefix: '1268562'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 31d38583-5ada-42bc-b1eb-9ff341e9e905
-  country_id: *ag
-  network_id: *ag_fixed
+  - id: 35799
+    prefix: '1268460'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 62dac9d2-a4bb-426f-8a64-da0b1252b1ff
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35800
+    prefix: '1268461'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 0aa9f865-8469-4a83-a7fd-fde1f9ebfb7a
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35801
+    prefix: '1268462'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: d813d874-bca5-4d74-bd05-bafb4d9e825a
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35802
+    prefix: '1268463'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 1f31e094-dc7e-4fd9-ab89-a5ac43452acb
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35804
+    prefix: '1268480'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: c748f88f-6985-47ed-8d85-7341aada533c
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35805
+    prefix: '1268481'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 9b1b8abe-378e-464a-846e-97c4910b377e
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35806
+    prefix: '1268484'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 66a48faf-f745-44b4-9eb6-011462cd1e33
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35809
+    prefix: '1268560'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: f2ee2b6e-c05f-47f0-8320-84987e6da191
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35810
+    prefix: '1268561'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 4cbb123e-31c7-4021-9204-a0d46f184e43
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 35811
+    prefix: '1268562'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 603c9448-26d6-4c56-893a-5a56473c7c8e
+    country_id: *ag
+    network_id: *ag_fixed
 # Mobile Prefixes
-- id: 35803
-  prefix: '1268464'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: aba7a04d-ead3-495f-84e5-cb3ba9905972
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35812
-  prefix: '1268720'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 9de3e9cd-5ffc-4bf7-96ac-7f3e8c307d7c
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35813
-  prefix: '1268721'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 7a6f4ed8-8a3e-4576-89fc-cb375a15e9b3
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35814
-  prefix: '1268722'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 7cf6b744-d2ad-4a15-93e4-2205ef7c17d2
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35815
-  prefix: '1268723'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: bcef03b8-5e7d-494b-b752-04ef043c8662
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35816
-  prefix: '1268724'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 054844de-081c-4d82-a05b-3b11dd7a27a2
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35817
-  prefix: '1268725'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 13d86268-b9a2-483a-a527-261a272aefb7
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35818
-  prefix: '1268726'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 8905a524-0882-4497-8ac2-e1f3e23f648a
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35819
-  prefix: '1268727'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: e86e954d-0697-4e4f-ad5c-292d2d3ab39e
-  country_id: *ag
-  network_id: *ag_imobile_mobile
-- id: 35820
-  prefix: '1268728'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: a2619cfa-832b-4994-b75b-9b5c2d7e9b38
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35821
-  prefix: '1268729'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: f8f3dda9-8a00-4adc-b0ac-132665402cfe
-  country_id: *ag
-  network_id: *ag_imobile_mobile
-- id: 35823
-  prefix: '1268764'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 96b7d72a-2fdb-4cf4-8f79-c9a084a689f6
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35825
-  prefix: '1268770'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 2b3b2c48-130e-4e7f-9768-c7a479ba914f
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35826
-  prefix: '1268771'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 92453961-3ab6-49ac-8f1e-ea01b64e2253
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35827
-  prefix: '1268772'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: fd59d018-694b-44d5-becf-76eec87c2e57
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35828
-  prefix: '1268773'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 21b9bb70-6e5f-4d2f-97c3-8dbb7e49457a
-  country_id: *ag
-  network_id: *ag_imobile_mobile
-- id: 35829
-  prefix: '1268774'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 2a5bb700-21f9-46bb-aca5-ffaa47e7bc71
-  country_id: *ag
-  network_id: *ag_imobile_mobile
-- id: 35830
-  prefix: '1268775'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: d0fefefb-745c-449d-a9b7-80370413293e
-  country_id: *ag
-  network_id: *ag_imobile_mobile
-- id: 35831
-  prefix: '1268776'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 980493ea-27b5-4af9-8373-f076eed4a943
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35832
-  prefix: '1268778'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 7f4ce01c-7552-410e-835d-1835732ae57e
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35833
-  prefix: '1268779'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 8f47017b-cf56-4da0-9e29-2bcd7194535c
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35834
-  prefix: '1268782'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 973b5ba3-addf-4297-8ad1-bd6ebc1f1736
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35835
-  prefix: '1268783'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: be318f0d-9051-4599-9e65-d8e2a208b0b3
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35836
-  prefix: '1268784'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: d03af126-e9f2-47c9-b13a-33f91d1267b9
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35837
-  prefix: '1268785'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 32e6c66f-786d-4d74-bd03-7589f26da225
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35838
-  prefix: '1268786'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: dac6b495-1d06-41c2-9231-66bffa184fe6
-  country_id: *ag
-  network_id: *ag_flow_mobile
-- id: 35839
-  prefix: '1268788'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: b94485d2-ae0d-476b-b011-a6e6533733d7
-  country_id: *ag
-  network_id: *ag_digicel_mobile
-- id: 35840
-  prefix: '1268789'
-  number_min_length: 14
-  number_max_length: 14
-  uuid: 816904ac-a092-4fc0-bab9-244987bc6652
-  country_id: *ag
-  network_id: *ag_flow_mobile
+  - id: 35803
+    prefix: '1268464'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 7225f9bf-90a5-4126-8a22-b5870c902f10
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35812
+    prefix: '1268720'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 783f614c-563b-4068-8874-b94acf749c37
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35813
+    prefix: '1268721'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 5b0dce1c-9bcd-42e6-b569-d74da891f2d1
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35814
+    prefix: '1268722'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: bcfb56a3-7146-4ebe-92a6-aeccc84ba0f6
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35815
+    prefix: '1268723'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 19835ebf-27b4-41fe-8271-8975e5c68364
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35816
+    prefix: '1268724'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e234cc56-4535-4292-83ec-e0ff0dd5dd0c
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35817
+    prefix: '1268725'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 6110b466-3a96-4ef7-b8d2-ee7f930ceb18
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35818
+    prefix: '1268726'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a87a5cd0-1303-4c5c-9273-6e598064500a
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35819
+    prefix: '1268727'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b9861295-4af8-47b7-914f-6a2df9334142
+    country_id: *ag
+    network_id: *ag_imobile_mobile
+  - id: 35820
+    prefix: '1268728'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 71570869-da76-4902-b15d-d3e8b5b7e4e3
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35821
+    prefix: '1268729'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b6960f53-6e43-47af-b607-e3424df3328b
+    country_id: *ag
+    network_id: *ag_imobile_mobile
+  - id: 35823
+    prefix: '1268764'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: fa2348f9-17f9-48f7-9fe2-14336d051999
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35825
+    prefix: '1268770'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 92f411d8-8124-4535-9062-d925a457db50
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35826
+    prefix: '1268771'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 897a2b1b-3c9c-489e-8824-77a786e4c2bd
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35827
+    prefix: '1268772'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e0ccf457-792f-4ee9-894b-8289c0bb7386
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35828
+    prefix: '1268773'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 0f0a011c-7c22-4eaa-928e-0a3d5573e2d4
+    country_id: *ag
+    network_id: *ag_imobile_mobile
+  - id: 35829
+    prefix: '1268774'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: c49b5345-82eb-4abc-b93a-156192ec9e4e
+    country_id: *ag
+    network_id: *ag_imobile_mobile
+  - id: 35830
+    prefix: '1268775'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 45b3357a-8203-49e0-b6e8-d68093d5f4e9
+    country_id: *ag
+    network_id: *ag_imobile_mobile
+  - id: 35831
+    prefix: '1268776'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 20de719a-1eb7-4fa4-9d09-03a7563c2972
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35832
+    prefix: '1268778'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a35aa022-983c-4fce-873e-14cae40f8e56
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35833
+    prefix: '1268779'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: d1315882-82f8-498c-adef-84be4e96d337
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35834
+    prefix: '1268782'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 847f22c9-8304-4951-840c-b41cbb16de63
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35835
+    prefix: '1268783'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: ecc59f8d-64f8-40ee-a4b3-d2beb4aa9a69
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35836
+    prefix: '1268784'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 38bda24b-455b-4c1f-a140-f8880267c02e
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35837
+    prefix: '1268785'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 2a688af3-bd2a-4fb5-92f5-5d0b9f5b5f20
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35838
+    prefix: '1268786'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 3de09234-8db2-489e-9439-30b00dc365b0
+    country_id: *ag
+    network_id: *ag_flow_mobile
+  - id: 35839
+    prefix: '1268788'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: bca111a3-76bf-4d54-a556-d764b8bfaee6
+    country_id: *ag
+    network_id: *ag_digicel_mobile
+  - id: 35840
+    prefix: '1268789'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: bd7a622e-c0b8-459f-bafd-43737387c8a8
+    country_id: *ag
+    network_id: *ag_flow_mobile
