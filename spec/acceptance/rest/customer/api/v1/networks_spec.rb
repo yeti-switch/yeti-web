@@ -13,7 +13,8 @@ RSpec.resource 'Networks', document: :customer_v1 do
   let(:auth_token) { build_customer_token(api_access.id, expiration: 1.minute.from_now) }
   let(:type) { 'networks' }
 
-  let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
+#   let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
+  let!(:network) { System::Network.find_by!(name: 'US') }
 
   get '/api/rest/customer/v1/networks' do
     jsonapi_filters Api::Rest::Customer::V1::NetworkResource._allowed_filters
