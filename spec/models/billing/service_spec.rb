@@ -88,6 +88,21 @@ RSpec.describe Billing::Service do
         let(:expected_record_attrs) { expected_attrs }
       end
 
+      context 'with variables { ignore_prefixes: null }' do
+        let(:create_params) do
+          super().merge(variables: { prefixes: [prefix: '123', duration: 60], ignore_prefixes: nil })
+        end
+        let(:expected_attrs) do
+          super().merge(
+            variables: { 'prefixes' => [{ 'prefix' => '123', 'duration' => 60 }], ignore_prefixes: [] }
+          )
+        end
+
+        include_examples :creates_record do
+          let(:expected_record_attrs) { expected_attrs }
+        end
+      end
+
       context 'with valid prefixes' do
         let(:create_params) do
           super().merge(

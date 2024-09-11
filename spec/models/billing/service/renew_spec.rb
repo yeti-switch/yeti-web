@@ -87,6 +87,26 @@ RSpec.describe Billing::Service::Renew do
       }
     end
 
+    context 'test' do
+      let(:service_type_attrs) do
+        super().merge provisioning_class: 'Billing::Provisioning::FreeMinutes',
+                      variables: { prefixes: [] }
+      end
+      let(:service_attrs) do
+        super().merge variables: {
+          "prefixes": [
+            {
+              "prefix": '380',
+              "exclude": false,
+              "duration": 3600
+            }
+          ]
+        }
+      end
+
+      include_examples :renews_service
+    end
+
     context 'when enough money' do
       include_examples :renews_service
 
