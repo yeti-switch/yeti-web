@@ -3,34 +3,34 @@ networks:
 # Mobile Networks
   - id: &gq_getesa_mobile 4082
     name: GQ Getesa Mobile
-    uuid: bbd6d661-f1b8-4533-9f95-fdad3b092f6c
+    uuid: d37ba568-564a-4d8f-960e-54549e3cef65
     type_id: 3
   - id: &gq_muni_mobile 5014
     name: GQ Muni Mobile
-    uuid: 809dbca4-4568-4df2-be3d-bd0adf139b9f
+    uuid: 724eb081-72c9-4761-ab9d-3a6d7e0e08cc
     type_id: 3
 # Fixed Networks
   - id: &gq_fixed 4225
     name: GQ Fixed
-    uuid: 2e1815fe-5679-49c9-b26a-37d61bd6bc28
+    uuid: 7f9fca60-0504-400a-8fff-6ce0f5c079e3
     type_id: 12
 # Satellite Networks
   - id: &gq_gecomsa_satellite 4444
     name: GQ Gecomsa Satellite
-    uuid: cb0e14c5-c4e3-40e4-b187-c82a224d1ea1
+    uuid: 1f8a68c1-73c2-4f8b-9ba1-31990648557c
     type_id: 16
 # Supplementary services Networks
   - id: &gq_emergency_services 4699
     name: GQ Emergency Services
-    uuid: e9224d83-de9c-419f-a0ec-2c55cd464dd1
+    uuid: 8e513aba-76c8-4699-91bb-14fdc4cf6b25
     type_id: 14
   - id: &gq_information_services 4700
     name: GQ Information Services
-    uuid: a67a753f-9fa6-481a-a649-210a143822c9
+    uuid: 516fdf40-eadb-483c-a9e8-388b042d1f2e
     type_id: 14
   - id: &gq_value_added_services 5384
     name: GQ Value Added Services
-    uuid: 01754862-998f-4659-a183-c4331588f411
+    uuid: 56efc796-7e5a-4bf7-ac84-853997b9a6b5
     type_id: 14
 network_prefixes:
 # Mobile Prefixes
@@ -38,14 +38,14 @@ network_prefixes:
     prefix: '2402'
     number_min_length: 12
     number_max_length: 12
-    uuid: 45fa9a16-a6d6-4e31-800f-4de1626fc3f0
+    uuid: ac619322-e2eb-4d33-aaf9-7cb612b1e7fc
     country_id: *gq
     network_id: *gq_getesa_mobile
   - id: 249322
     prefix: '2405'
     number_min_length: 12
     number_max_length: 12
-    uuid: c6e9a65c-5c58-4d4a-8da8-7f0ca9d89e58
+    uuid: 240c2419-4fdc-450c-91d3-d245eb1c80fe
     country_id: *gq
     network_id: *gq_muni_mobile
 # Fixed Prefixes
@@ -53,28 +53,28 @@ network_prefixes:
     prefix: '2403'
     number_min_length: 12
     number_max_length: 12
-    uuid: 989059f0-1693-4c77-927b-21059293a0c3
+    uuid: 15a35a3b-2f31-432d-a08b-451e5a32760e
     country_id: *gq
     network_id: *gq_fixed
   - id: 244785
     prefix: '24033307'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3fd59f5a-7268-443c-9312-943a0eadfca7
+    uuid: 14203efb-1eb5-49bf-b38e-228de2be38e9
     country_id: *gq
     network_id: *gq_fixed
   - id: 244786
     prefix: '24033308'
     number_min_length: 12
     number_max_length: 12
-    uuid: 63c15022-45d4-4f5f-9f3a-dd61a4f12e89
+    uuid: d0ad3baf-65c3-4877-99a4-569034c705e1
     country_id: *gq
     network_id: *gq_fixed
   - id: 244787
     prefix: '24033309'
     number_min_length: 12
     number_max_length: 12
-    uuid: d3eda88f-34a0-44a2-a6a3-faec6e9686fc
+    uuid: 1d4cda62-acd1-4dc8-8554-394ec6f4040c
     country_id: *gq
     network_id: *gq_fixed
 # Satellite Prefixes
@@ -82,15 +82,15 @@ network_prefixes:
     prefix: '2406'
     number_min_length: 12
     number_max_length: 12
-    uuid: 122c6d6e-df82-4c45-8b27-8f07c27a7fd5
+    uuid: ded12e73-d58e-4e4c-8cc0-2ae552114a87
     country_id: *gq
     network_id: *gq_gecomsa_satellite
 # Country code Prefixes
   - id: 247894
     prefix: '240'
-    number_min_length: 6
-    number_max_length: 12
-    uuid: b9f1d5cb-77c2-49a9-afe1-ad5e4b3c7735
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 53a415de-8dcc-4247-8d19-f1171f3347e1
     country_id: *gq
     network_id: null
 # Supplementary services Prefixes
@@ -98,27 +98,27 @@ network_prefixes:
     prefix: '2401'
     number_min_length: 6
     number_max_length: 6
-    uuid: 68178d10-acb3-4568-8a52-4a042736732c
+    uuid: 54aa8fdd-bce9-4a81-9b00-6caaf2acdb8a
     country_id: *gq
     network_id: *gq_emergency_services
   - id: 248295
     prefix: '2401'
     number_min_length: 7
     number_max_length: 7
-    uuid: 752f5454-293f-4b79-9963-2ff968efc5ca
+    uuid: d934c58d-8a1b-41e4-b76e-b0eca9b89719
     country_id: *gq
     network_id: *gq_information_services
   - id: 253106
     prefix: '2409'
     number_min_length: 12
     number_max_length: 12
-    uuid: cb64aaf2-5b52-4329-827b-7540f999a15d
+    uuid: dae34767-0a59-4f82-84b7-7cf2a3b631fe
     country_id: *gq
     network_id: *gq_value_added_services
   - id: 259937
     prefix: '2408'
     number_min_length: 12
     number_max_length: 12
-    uuid: f7f6e10f-7808-4601-9c45-1f0594f5cbac
+    uuid: 91ac3dd3-925c-4aeb-95ed-4367d92c6f96
     country_id: *gq
     network_id: *gq_value_added_services

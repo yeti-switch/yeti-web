@@ -3,22 +3,22 @@ networks:
 # Fixed Networks
   - id: &dg_fixed 4285
     name: DG Fixed
-    uuid: b58ca723-a0b5-4e40-9654-f9e0e3ff86c5
+    uuid: 77c217c8-f599-4b33-a0b5-2de8f0d61b59
     type_id: 12
 # Paging Networks
   - id: &dg_paging 4288
     name: DG Paging
-    uuid: a27b0bf2-7ac3-4a5f-b003-b94ae78b31ed
+    uuid: 9c86c7ad-40e8-4194-be7f-95fd239a9284
     type_id: 13
 # Mobile Networks
   - id: &dg_foneplus_cellular_sure_mobile 4296
     name: DG Foneplus Cellular Sure Mobile
-    uuid: 51f517ee-d016-4ed7-b571-7c436f207720
+    uuid: d01f3ade-a69b-4c32-b3c8-459673032216
     type_id: 3
 # Supplementary services Networks
   - id: &dg_special_services 4685
     name: DG Special Services
-    uuid: 17c2892a-89d8-4bb3-a348-2364d796ad0a
+    uuid: b40d8bf2-594b-491a-8f73-1dccc1d893e5
     type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -26,7 +26,7 @@ network_prefixes:
     prefix: '24637'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1377c63c-012e-4d5a-adb9-81f6ec736af4
+    uuid: 27be1bf9-906f-4a6d-ba19-47160257b25b
     country_id: *dg
     network_id: *dg_fixed
 # Paging Prefixes
@@ -34,7 +34,7 @@ network_prefixes:
     prefix: '2463709300'
     number_min_length: 10
     number_max_length: 10
-    uuid: acf48890-cab1-475d-9198-962a386fc51a
+    uuid: d76c8fe2-5c8f-410d-b116-25794ab4327d
     country_id: *dg
     network_id: *dg_paging
 # Mobile Prefixes
@@ -42,15 +42,15 @@ network_prefixes:
     prefix: '24638'
     number_min_length: 10
     number_max_length: 10
-    uuid: ecc3f05e-b805-4404-b8ed-c25d6059530f
+    uuid: 4f45284b-4f44-42de-a2b8-23e1b4d78274
     country_id: *dg
     network_id: *dg_foneplus_cellular_sure_mobile
 # Country code Prefixes
   - id: 247869
     prefix: '246'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 4c080ee1-cf89-4557-83ba-06c645214afd
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 927aab54-422b-4b94-a7e9-ef5e8a59e9c4
     country_id: *dg
     network_id: null
 # Supplementary services Prefixes
@@ -58,13 +58,13 @@ network_prefixes:
     prefix: '2461'
     number_min_length: 6
     number_max_length: 6
-    uuid: 3f6800ba-54e9-4df1-9f33-cb7ee4c84495
+    uuid: 7c02af7c-f8df-4ab7-8d13-3ee82720c109
     country_id: *dg
     network_id: *dg_special_services
   - id: 253095
     prefix: '2469'
     number_min_length: 7
     number_max_length: 7
-    uuid: c2795995-141e-4bf8-a533-1096d6b3f032
+    uuid: 2d34c378-cdac-4eda-ba1b-e7a1109874ea
     country_id: *dg
     network_id: *dg_special_services
