@@ -90,6 +90,10 @@ Config.setup do |setup_config|
     end
 
     optional(:customer_api_cdr_hide_fields).array(:string)
+
+    optional(:invoice).schema do
+      optional(:auto_approve).value(:bool)
+    end
   end
 end
 

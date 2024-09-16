@@ -4,6 +4,8 @@ module BillingInvoice
   class Fill < ApplicationService
     parameter :invoice, required: true
 
+    Error = Class.new(ApplicationService::Error)
+
     def call
       AdvisoryLock::Cdr.with_lock(:invoice, id: invoice.account_id) do
         invoice.reload

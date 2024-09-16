@@ -4,6 +4,8 @@ module BillingInvoice
   class Generate < ApplicationService
     parameter :account, required: true
 
+    Error = Class.new(ApplicationService::Error)
+
     # @return [Billing::Invoice]
     def call
       AdvisoryLock::Cdr.with_lock(:invoice, id: account.id) do
@@ -19,15 +21,18 @@ module BillingInvoice
           end_time: account.next_invoice_at,
           type_id: account.next_invoice_type_id
         )
-
+        BillingInvoice::Fill.call(invoice: invoice)
         schedule_next_invoice!(invoice_params)
+        approve_invoice!(invoice) if YetiConfig.invoice&.auto_approve
+
         invoice
       end
     rescue BillingInvoice::Create::Error => e
       raise Error, e.message
+    rescue BillingInvoice::Fill::Error => e
+      raise Error, e.message
     rescue ActiveRecord::RecordInvalid => e
-      message = e.record ? e.errors.full_messages.join(', ') : e.message
-      raise Error, message
+      raise Error, e.message
     end
 
     private
@@ -54,6 +59,12 @@ module BillingInvoice
         next_invoice_at: invoice_params[:next_end_time],
         next_invoice_type_id: invoice_params[:next_type_id]
       )
+    end
+
+    def approve_invoice!(invoice)
+      BillingInvoice::Approve.call(invoice:)
+    rescue ActiveRecord::RecordInvalid => e
+      raise Error, e
     end
   end
 end

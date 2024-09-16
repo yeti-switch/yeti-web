@@ -36,14 +36,12 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   member_action :approve, method: :post do
-    if resource.approvable?
-      resource.approve
-      flash[:notice] = 'Invoice approved'
-      redirect_back fallback_location: root_path
-    else
-      flash[:notice] = 'Invoice can' 't be approved'
-      redirect_back fallback_location: root_path
-    end
+    BillingInvoice::Approve.call(invoice: resource)
+    flash[:notice] = 'Invoice was successful approved'
+  rescue BillingInvoice::Approve::Error => e
+    flash[:error] = e.message
+  ensure
+    redirect_back fallback_location: root_path
   end
 
   member_action :regenerate_document, method: :post do

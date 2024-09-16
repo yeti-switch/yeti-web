@@ -85,7 +85,11 @@ class ManualInvoiceForm < ApplicationForm
         end_time: end_time,
         type_id: Billing::InvoiceType::MANUAL
       )
+    Worker::FillInvoiceJob.perform_later(@model.id)
+    @model
   rescue BillingInvoice::Create::Error => e
+    errors.add(:base, e.message)
+  rescue Worker::FillInvoiceJob => e
     errors.add(:base, e.message)
   end
 end

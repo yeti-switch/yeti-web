@@ -7,6 +7,8 @@ module BillingInvoice
     parameter :start_time, required: true
     parameter :end_time, required: true
 
+    Error = Class.new(ApplicationService::Error)
+
     delegate :contractor, to: :account
 
     def call
@@ -22,7 +24,6 @@ module BillingInvoice
             end_date: end_time
           )
         invoice.update! reference: build_reference(invoice)
-        Worker::FillInvoiceJob.perform_later(invoice.id)
         invoice
       end
     rescue ActiveRecord::RecordInvalid => e
