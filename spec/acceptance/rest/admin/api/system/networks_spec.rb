@@ -20,8 +20,8 @@ RSpec.resource 'Networks' do
     before do
       System::NetworkPrefix.delete_all
       System::Network.delete_all
-      FactoryBot.create(:network, name: '&af_fixed 3061')
-      FactoryBot.create(:network, name: '&al_special_services 4655')
+      FactoryBot.create(:network, name: 'zw_fixed')
+      FactoryBot.create(:network, name: 'es_sms_mms_services_free')
     end
 
     example_request 'get listing' do
