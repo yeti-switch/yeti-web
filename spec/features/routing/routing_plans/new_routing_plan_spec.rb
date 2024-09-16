@@ -22,8 +22,8 @@ RSpec.describe 'Create new Routing Plan', type: :feature, js: true do
     fill_in_chosen 'SRC Numberlist', with: src_numberlist.display_name, ajax: true
   end
 
-  let!(:src_numberlist) { FactoryBot.create(:numberlist) }
-  let!(:dst_numberlist) { FactoryBot.create(:numberlist) }
+  let!(:src_numberlist) { FactoryBot.create(:numberlist, '370614') }
+  let!(:dst_numberlist) { FactoryBot.create(:numberlist, '370614') }
 
   it 'creates new routing plan succesfully' do
     subject
