@@ -60,7 +60,7 @@ RSpec.resource 'Networks' do
     jsonapi_attributes(required_params, [])
     jsonapi_relationships(required_relationships, [])
 
-    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
+    let!(:network) { System::Network.take!}
     let!(:network_type) { create(:network_type) }
     let(:id) { network.id }
     let(:name) { 'name' }

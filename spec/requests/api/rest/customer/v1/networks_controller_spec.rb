@@ -36,7 +36,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network.uuid }
 
-    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
+    let!(:network) { System::Network.take! }
 
     it_behaves_like :json_api_customer_v1_check_authorization
 
@@ -70,7 +70,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
+    let!(:network) { System::Network.take! }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -85,7 +85,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_data) { super().merge(id: record_id) }
     let(:json_api_request_attributes) { { name: 'new name' } }
 
-    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
+    let!(:network) { System::Network.take! }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
@@ -98,7 +98,7 @@ RSpec.describe Api::Rest::Customer::V1::NetworksController, type: :request do
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
     let(:record_id) { network.uuid }
 
-    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
+    let!(:network) { System::Network.take! }
 
     include_examples :raises_exception, ActionController::RoutingError
   end
