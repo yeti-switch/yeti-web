@@ -21,7 +21,6 @@ RSpec.resource 'Networks' do
       System::NetworkPrefix.delete_all
       System::Network.delete_all
       FactoryBot.create(:network, id: 4147)
-      FactoryBot.create(:network, id: 3131)
     end
 
     example_request 'get listing' do
