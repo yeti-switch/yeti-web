@@ -29,7 +29,8 @@ RSpec.resource 'Networks' do
   end
 
   get '/api/rest/admin/system/networks/:id' do
-    let(:id) { System::Network.take! }
+    let!(:network) { create(:network) } # ensure a valid network is created
+    let(:id) { network.id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
