@@ -3,6 +3,15 @@
 ActiveAdmin.register Billing::Service, as: 'Services' do
   menu parent: 'Billing', label: 'Services', priority: 30
 
+  controller do
+    def create_resource(object)
+      object.save
+    rescue Billing::Provisioning::Errors::Error => e
+      flash[:warning] = e.message
+      false
+    end
+  end
+
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy

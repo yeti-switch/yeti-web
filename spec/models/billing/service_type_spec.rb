@@ -152,5 +152,45 @@ RSpec.describe Billing::ServiceType do
         end
       end
     end
+
+    context 'with provisioning_class=Billing::Provisioning::PhoneSystems' do
+      context 'when invalid data' do
+        let(:create_params) { super().merge(provisioning_class: 'Billing::Provisioning::PhoneSystems') }
+
+        include_examples :does_not_create_record, errors: {
+          variables: [
+            '.endpoint - is missing',
+            '.username - is missing',
+            '.password - is missing',
+            '.attributes - is missing'
+          ]
+        }
+      end
+
+      context 'when valid data' do
+        let(:create_params) do
+          {
+            name: 'test',
+            provisioning_class: 'Billing::Provisioning::PhoneSystems',
+            variables: {
+              'endpoint' => 'https://api.telecom.center',
+              'username' => 'test',
+              'password' => 'test',
+              'attributes' => {
+                'name' => 'John Johnson',
+                'language' => 'EN',
+                'trm_mode' => 'operator',
+                'capacity_limit' => 10,
+                'sip_account_limit' => 5
+              }
+            }
+          }
+        end
+
+        it_behaves_like :creates_record do
+          let(:expected_record_attrs) { expected_attrs }
+        end
+      end
+    end
   end
 end
