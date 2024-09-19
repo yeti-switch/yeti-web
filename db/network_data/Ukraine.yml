@@ -3,57 +3,57 @@ networks:
 # Fixed Networks
   - id: &ua_fixed 3293
     name: UA Fixed
-    uuid: bc005fe3-9f7d-45f6-8661-6ef2b69440e5
+    uuid: a66b3857-7815-4335-a45d-16397a99b60b
     type_id: 12
 # Mobile Networks
   - id: &ua_vodafone_mobile 3563
     name: UA Vodafone Mobile
-    uuid: cfeb8374-daa1-48e1-9f66-9f3a46171997
+    uuid: 708f40a8-b9f0-4674-b782-97d52787fb48
     type_id: 3
   - id: &ua_3mob_mobile 3707
     name: UA 3Mob Mobile
-    uuid: 8011cd5b-1ea0-48b4-9b1b-cf384f9ee3ea
+    uuid: 5fb63ce0-1370-46fe-b704-dd08670b25f4
     type_id: 3
   - id: &ua_peoplenet_mobile 3728
     name: UA Peoplenet Mobile
-    uuid: 3659f7ed-c9cc-4da4-96cf-da9c03465655
+    uuid: 25e4ec6e-8004-4044-b2fd-17091198a073
     type_id: 3
   - id: &ua_lifecell_mobile 3748
     name: UA Lifecell Mobile
-    uuid: d0f590cb-ecf8-47a8-a631-3acb93cb6580
+    uuid: 81eb9450-f5b6-4339-bd6d-fb72114140a5
     type_id: 3
   - id: &ua_it_mobile 3770
     name: UA It Mobile
-    uuid: 0a8cdb8d-1b3e-46d2-8f66-e120e028bf4b
+    uuid: b88f7c15-ffe3-4d93-9e96-87a81ccf19f1
     type_id: 3
   - id: &ua_kyivstar_mobile 3797
     name: UA Kyivstar Mobile
-    uuid: a8e5b2dd-7290-41b5-8047-3a9c9c105be3
+    uuid: e9363233-6d8a-4c39-bd80-74c40d1cb4a8
     type_id: 3
   - id: &ua_phoenix_mobile 6337
     name: UA Phoenix Mobile
-    uuid: bb15c247-e904-452b-8501-99994fe0de50
+    uuid: ab099088-d59b-4cc8-bc50-964d4e19113a
     type_id: 3
   - id: &ua_lugacom_mobile 6371
     name: UA Lugacom Mobile
-    uuid: efc2436d-df2b-4d6c-b2d4-c041788e4009
+    uuid: 01b770d9-6a94-49c7-94d6-58da7d53e614
     type_id: 3
 # Supplementary services Networks
   - id: &ua_special_services 4779
     name: UA Special Services
-    uuid: 69f48de3-cacc-4b25-99e4-2ecc7133dc7d
+    uuid: 57364c01-5494-4220-8b70-a188142a4d97
     type_id: 14
   - id: &ua_personal_number_services 6303
     name: UA Personal Number Services
-    uuid: dcf0ad21-42c9-4e4a-804d-6b99596e59c7
+    uuid: ba2312eb-aa75-49c1-a98d-4467999f8469
     type_id: 14
   - id: &ua_freephone_services 6609
     name: UA Freephone Services
-    uuid: 3f380f93-406c-477a-b940-de3a1081c74c
+    uuid: 4f93d828-5171-475d-90f3-86892b2ca8ff
     type_id: 14
   - id: &ua_premium_rate_services 6900
     name: UA Premium Rate Services
-    uuid: b6c3b001-9208-4c3d-8cf6-c27d9cde3700
+    uuid: 2c968553-c54d-443b-b21d-dd714b540b17
     type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -246,11 +246,11 @@ network_prefixes:
     uuid: d25df956-ba67-445b-851d-2dbd5d5ebe28
     country_id: *ua
     network_id: *ua_fixed
-  - id: 489880
+  - id: 489546
     prefix: '38089'
     number_min_length: 12
     number_max_length: 12
-    uuid: 78da0435-53a3-425a-9786-b103cc27d14e
+    uuid: 1bc89c86-9830-4fd1-b306-7c192a27b9a2
     country_id: *ua
     network_id: *ua_fixed
 # Mobile Prefixes
@@ -352,18 +352,18 @@ network_prefixes:
     uuid: d094e0a1-52f7-11ea-a7a7-525400429a0c
     country_id: *ua
     network_id: *ua_kyivstar_mobile
-  - id: 396300
+  - id: 395966
     prefix: '38071'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4e555e1f-5a42-4d50-94ac-992c04689454
+    uuid: 4f9a554e-c11f-4d4b-85f6-df7d45943822
     country_id: *ua
     network_id: *ua_phoenix_mobile
-  - id: 401028
+  - id: 400694
     prefix: '38072'
     number_min_length: 12
     number_max_length: 12
-    uuid: f9b3e906-a3b0-4df5-a787-f99be32aad50
+    uuid: eef526e9-445d-4649-bfea-fd82ce323512
     country_id: *ua
     network_id: *ua_lugacom_mobile
   - id: 35653
@@ -382,31 +382,31 @@ network_prefixes:
     country_id: *ua
     network_id: null
 # Supplementary services Prefixes
-  - id: 291665
+  - id: 291378
     prefix: '38001'
     number_min_length: 6
     number_max_length: 10
-    uuid: b3be6659-c432-4566-b1b1-28ed5e1ffcd6
+    uuid: c5c41594-8ad0-4567-b4f6-a03064538ca0
     country_id: *ua
     network_id: *ua_special_services
-  - id: 384758
+  - id: 384424
     prefix: '380700'
     number_min_length: 12
     number_max_length: 12
-    uuid: 448c060d-49b5-4a66-ad93-2d2f453275ad
+    uuid: 1e8c34f5-a949-4234-9ee4-e4d4afa793b1
     country_id: *ua
     network_id: *ua_personal_number_services
-  - id: 444074
+  - id: 443740
     prefix: '380800'
     number_min_length: 12
     number_max_length: 13
-    uuid: 8f86989c-6473-4bd1-ba6f-1a0a427adaa5
+    uuid: 5c4e8bb8-003a-494a-8c4a-87f37072ddca
     country_id: *ua
     network_id: *ua_freephone_services
-  - id: 496513
+  - id: 496179
     prefix: '380900'
     number_min_length: 12
     number_max_length: 13
-    uuid: 38ec98d6-23c6-4082-a64d-3ceb1d34ba31
+    uuid: d6d38385-a971-4739-b036-187afad16bd0
     country_id: *ua
     network_id: *ua_premium_rate_services

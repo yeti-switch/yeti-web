@@ -3,112 +3,112 @@ networks:
 # Fixed Networks
   - id: &mw_fixed 4098
     name: MW Fixed
-    uuid: fcc2108a-a03f-4999-bf7f-f72a2eac75c3
+    uuid: 543c39e8-da42-4ac0-961d-b893d69fafda
     type_id: 12
 # Supplementary services Networks
   - id: &mw_voip 4255
     name: MW Voip
-    uuid: a1c03f46-3f9b-42af-aab8-722706cd8473
+    uuid: 29865ae1-428a-469e-a77d-125bcb1e0928
     type_id: 14
   - id: &mw_special_services 4311
     name: MW Special Services
-    uuid: ba858662-b01e-471d-a858-f74e88bdc48d
+    uuid: 7a2ff684-5cb7-4eff-a6ca-3f26da983df1
     type_id: 14
 # Mobile Networks
   - id: &mw_airtel_mobile 5390
     name: MW Airtel Mobile
-    uuid: 7daf03dd-5c17-465a-8e57-9edfa88e290f
+    uuid: 909bafaa-f889-4fc8-87a1-f65eb0aee7a1
     type_id: 3
   - id: &mw_tnm_mobile 5797
     name: MW Tnm Mobile
-    uuid: 1ee2c1b2-c0f4-4432-bdc8-a186dd8807e4
+    uuid: 3648d8c2-61a7-4840-adaa-fdc7b12a1951
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
-  - id: 286277
+  - id: 285990
     prefix: '26502'
     number_min_length: 12
     number_max_length: 12
-    uuid: cb3e10cb-7370-42f2-93d4-57504c85ac91
+    uuid: 5921103f-8504-487c-b308-f8280a7b1574
     country_id: *mw
     network_id: *mw_fixed
-  - id: 291608
+  - id: 291321
     prefix: '26501'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5514a82c-a7fb-4e83-9a77-6866c3a3cda7
+    uuid: 6081f260-8955-460d-9315-1a3a88df90f7
     country_id: *mw
     network_id: *mw_fixed
-  - id: 291758
+  - id: 291471
     prefix: '2650111'
     number_min_length: 12
     number_max_length: 12
-    uuid: 91a8cc2a-4d42-4dda-b037-9f3aecc4f8cf
+    uuid: 2dcb2834-7f3d-4d52-9275-638e5c8e0050
     country_id: *mw
     network_id: *mw_fixed
 # Supplementary services Prefixes
-  - id: 287911
+  - id: 287624
     prefix: '265031'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ccdb984-ade5-46de-b750-64c5e0186376
+    uuid: b76425fd-32fe-4707-ada6-c06852d2511e
     country_id: *mw
     network_id: *mw_voip
-  - id: 288542
+  - id: 288255
     prefix: '2654'
     number_min_length: 6
     number_max_length: 6
-    uuid: 50923f63-6b25-4dbb-8b28-2f39d3bdfbb2
+    uuid: 86ce9039-96f9-4da0-936b-8166168dff20
     country_id: *mw
     network_id: *mw_special_services
-  - id: 291607
+  - id: 291320
     prefix: '2651'
     number_min_length: 6
     number_max_length: 6
-    uuid: b6d5fece-1ae1-4d84-a6e4-c7846c7783f1
+    uuid: 12ee1d20-3a0d-42d7-9f03-28fa3e5f79e3
     country_id: *mw
     network_id: *mw_special_services
-  - id: 292601
+  - id: 292314
     prefix: '2655'
     number_min_length: 6
     number_max_length: 6
-    uuid: 1771a26c-57c1-4163-9960-fb39ae545825
+    uuid: 845d668a-0d87-419a-baef-de9174691286
     country_id: *mw
     network_id: *mw_special_services
-  - id: 296383
+  - id: 296096
     prefix: '2659'
     number_min_length: 6
     number_max_length: 6
-    uuid: 91465a5a-0da5-4b7c-9382-b460e8c6a0d4
+    uuid: e5913167-81c4-4740-83df-41bb7241ef05
     country_id: *mw
     network_id: *mw_special_services
-  - id: 301879
+  - id: 301591
     prefix: '2657'
     number_min_length: 6
     number_max_length: 6
-    uuid: 438583f5-7b59-4352-a14a-c21bcbe53c00
+    uuid: 4659949f-bfe8-4f2d-9a52-bc5b1f6a4534
     country_id: *mw
     network_id: *mw_special_services
 # Country code Prefixes
-  - id: 291213
+  - id: 290926
     prefix: '265'
     number_min_length: 4
     number_max_length: 100
-    uuid: 6f8e4d7e-1bd6-499a-987c-5313195e2b4c
+    uuid: e4f14a1c-5f9a-4882-ab64-9bc06eaa4898
     country_id: *mw
     network_id: null
 # Mobile Prefixes
-  - id: 296384
+  - id: 296097
     prefix: '26509'
     number_min_length: 12
     number_max_length: 12
-    uuid: eeb942b4-cc68-4edc-8194-e0afe218c465
+    uuid: 86dec6b3-c07d-49fe-8dc2-8dd16295e7b0
     country_id: *mw
     network_id: *mw_airtel_mobile
-  - id: 303214
+  - id: 302926
     prefix: '26508'
     number_min_length: 12
     number_max_length: 12
-    uuid: b6df84d5-8a37-4f7a-b26b-fbdb114d8abd
+    uuid: b191a913-2770-4d49-8272-168817082243
     country_id: *mw
     network_id: *mw_tnm_mobile
