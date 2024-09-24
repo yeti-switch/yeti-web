@@ -1,125 +1,125 @@
 country_id: &ss 268
 networks:
 # Mobile Networks
-  - id: &ss_digitel_mobile 3687
+  - id: &ss_digitel_mobile 3690
     name: SS Digitel Mobile
-    uuid: 3c29a08c-cb29-42bc-b34c-c721de44bce2
+    uuid: e81caef0-1406-491a-b920-6ef910be1393
     type_id: 3
-  - id: &ss_mobile 3719
+  - id: &ss_mobile 3722
     name: SS Mobile
-    uuid: df6a3f3a-5505-433e-84cf-10f50a205cb8
+    uuid: d273a3cb-97b6-4ec4-9ec3-7536f229f907
     type_id: 3
-  - id: &ss_zain_mobile 6529
+  - id: &ss_zain_mobile 6532
     name: SS Zain Mobile
-    uuid: 1dfc7f0b-3e53-432e-a432-2c72e7cd11d6
+    uuid: 74980739-047e-4f4a-bb80-a203f63cf12f
     type_id: 3
-  - id: &ss_mtn_mobile 6573
+  - id: &ss_mtn_mobile 6576
     name: SS Mtn Mobile
-    uuid: ae17f626-30d0-4a19-8e37-397e9933085f
+    uuid: 98c3f5a3-eaf6-4a16-aafb-b39fe1b27695
     type_id: 3
 # Supplementary services Networks
-  - id: &ss_special_services 3948
+  - id: &ss_special_services 3951
     name: SS Special Services
-    uuid: 70c44cdf-b099-4bf5-a205-66ed0c323125
+    uuid: 627bec1e-7fc9-4072-a31d-a5b2c48d6d87
     type_id: 14
 # Fixed Networks
-  - id: &ss_fixed 5751
+  - id: &ss_fixed 5754
     name: SS Fixed
-    uuid: 75720ffc-4216-4d90-a064-6cc5eb5acf54
+    uuid: 72769b4e-4883-4b23-a47f-c32e24387af4
     type_id: 12
 network_prefixes:
 # Mobile Prefixes
-  - id: 228715
+  - id: 228744
     prefix: '21198'
     number_min_length: 12
     number_max_length: 12
-    uuid: 13869929-c66c-4a6a-9dfa-38d26d9cf65e
+    uuid: 138653a1-3f99-433e-a66f-379ea247ba9b
     country_id: *ss
     network_id: *ss_digitel_mobile
-  - id: 238901
+  - id: 238932
     prefix: '2119'
     number_min_length: 12
     number_max_length: 12
-    uuid: add937b5-8ab3-4601-83f2-122ba723fef8
+    uuid: 9fdd4b72-dee4-4929-9fd3-ee8b458756bc
     country_id: *ss
     network_id: *ss_mobile
-  - id: 454909
+  - id: 455042
     prefix: '21191'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3e1d0c35-7d6f-47a2-93ac-2dd2afdd4ede
+    uuid: 92b86aa1-7251-4606-b726-c691f5a8b37f
     country_id: *ss
     network_id: *ss_zain_mobile
-  - id: 465706
+  - id: 465839
     prefix: '21192'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0635cb8b-6232-4c0f-87b2-84de2ab2850f
+    uuid: 4b729295-24a6-4c11-9df0-e1a1928370e2
     country_id: *ss
     network_id: *ss_mtn_mobile
 # Country code Prefixes
-  - id: 239078
+  - id: 239110
     prefix: '211'
     number_min_length: 4
     number_max_length: 100
-    uuid: 6ea67ad6-ff35-4f7a-84cf-99c01cdb2d47
+    uuid: 2a91f767-52f9-416b-ad29-2b9017b9cb7b
     country_id: *ss
     network_id: null
 # Supplementary services Prefixes
-  - id: 255577
+  - id: 239499
     prefix: '2111'
     number_min_length: 6
     number_max_length: 6
-    uuid: 37a6338d-5048-4b96-8c9f-c750eb0ea998
+    uuid: 8c1ee98b-9aa7-4079-95df-c9bc64edb310
     country_id: *ss
     network_id: *ss_special_services
-  - id: 244338
+  - id: 244422
     prefix: '2112'
     number_min_length: 6
     number_max_length: 6
-    uuid: 218a5d2b-cc6b-4703-aa2a-9a5f0c4dce0e
+    uuid: 4a468e77-4d1b-4a11-98c4-9425b6b31f57
     country_id: *ss
     network_id: *ss_special_services
 # Fixed Prefixes
-  - id: 256037
+  - id: 256157
     prefix: '21112'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3f06ffcd-d8bb-4faf-84c6-a28d168843fb
+    uuid: 94b05e47-fb18-4ce7-ad38-d92f84308e8a
     country_id: *ss
     network_id: *ss_fixed
-  - id: 257306
+  - id: 257426
     prefix: '21118'
     number_min_length: 12
     number_max_length: 12
-    uuid: 863822f3-3a7c-4903-9143-0c0a79a4bd5e
+    uuid: 70e54ded-209b-452f-9c77-5d18f86b4887
     country_id: *ss
     network_id: *ss_fixed
-  - id: 257624
+  - id: 257747
     prefix: '21119'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5f3670d7-7dea-4320-b614-166c1238f7fe
+    uuid: 8e34176f-3a30-4200-80e3-25867920a109
     country_id: *ss
     network_id: *ss_fixed
-  - id: 257968
+  - id: 239499
     prefix: '2111'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2cec13f0-acea-43c9-9877-f55ae86b5b91
+    uuid: 8c1ee98b-9aa7-4079-95df-c9bc64edb310
     country_id: *ss
     network_id: *ss_fixed
-  - id: 239997
+  - id: 263462
     prefix: '21116'
     number_min_length: 12
     number_max_length: 12
-    uuid: a568ffbd-b118-440b-a634-3a1d88964919
+    uuid: 5568cfe8-86d0-4a31-bbf3-c85ce2cee1be
     country_id: *ss
     network_id: *ss_fixed
-  - id: 263729
+  - id: 263853
     prefix: '21117'
     number_min_length: 12
     number_max_length: 12
-    uuid: 88088a76-c02e-4f32-b377-6106fcbf99ff
+    uuid: 5f4a3846-355c-4668-a89d-185608e6c469
     country_id: *ss
     network_id: *ss_fixed
