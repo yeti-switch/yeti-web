@@ -1,269 +1,269 @@
 country_id: &tl 211
 networks:
 # Supplementary services Networks
-  - id: &tl_virtual_private_network 3781
+  - id: &tl_virtual_private_network 3784
     name: TL Virtual Private Network
-    uuid: ce54c411-d6cb-4eba-9c77-fea6d8f06ff6
+    uuid: 5100e4b0-1a43-43f7-9835-93cc8ff91f21
     type_id: 14
-  - id: &tl_special_services 3959
+  - id: &tl_special_services 3962
     name: TL Special Services
-    uuid: 6f286adb-e1b1-4563-b8ba-91ebad500d10
+    uuid: 197336c3-d865-40ff-bbc3-668ab2b2b37b
     type_id: 14
-  - id: &tl_freephone_services 5174
+  - id: &tl_freephone_services 5177
     name: TL Freephone Services
-    uuid: c3a95e7c-c084-4583-867b-2e36e64b2e35
+    uuid: 13ddf7b3-18c5-4731-8cc1-2c975f024718
     type_id: 14
-  - id: &tl_personal_number_services 5426
+  - id: &tl_personal_number_services 5429
     name: TL Personal Number Services
-    uuid: d4ff8c01-59cd-4aad-a9f4-e55ceb873ba7
+    uuid: 02224a01-e69b-4fd8-8524-9b4a6dd63835
     type_id: 14
-  - id: &tl_premium_rate_services 5607
+  - id: &tl_premium_rate_services 5610
     name: TL Premium Rate Services
-    uuid: 5d743cc2-f486-48f9-9bc1-f0c15f665ec2
+    uuid: 37569928-d66f-4cee-b0c7-8964bc25f6e4
     type_id: 14
 # Fixed Networks
-  - id: &tl_fixed 4310
+  - id: &tl_fixed 4313
     name: TL Fixed
-    uuid: 4a65ea28-6950-43a1-9082-e4516b420457
+    uuid: f2c24bdf-f8b8-48f1-83f5-0861fd154d01
     type_id: 12
 # Mobile Networks
-  - id: &tl_telkomcel_mobile 4970
+  - id: &tl_telkomcel_mobile 4973
     name: TL Telkomcel Mobile
-    uuid: 1b95e375-abab-4f94-8d36-23447bbe3882
+    uuid: 5d32b242-b4bc-4b76-8a28-b7656b40d5aa
     type_id: 3
-  - id: &tl_telemor_mobile 5106
+  - id: &tl_telemor_mobile 5109
     name: TL Telemor Mobile
-    uuid: 4d2c8c37-5af5-48aa-a88d-d4f358e8a956
+    uuid: ea2d2910-911e-4818-af1b-d67cf51e0520
     type_id: 3
-  - id: &tl_timor_telecom_mobile 5481
+  - id: &tl_timor_telecom_mobile 5484
     name: TL Timor Telecom Mobile
-    uuid: 12365cd0-aeca-4e55-8d85-9db4481ae935
+    uuid: 909abc70-8eeb-4d03-8d46-2f325c5ea266
     type_id: 3
 # Paging Networks
-  - id: &tl_paging 5513
+  - id: &tl_paging 5516
     name: TL Paging
-    uuid: 57a73082-3012-474c-870c-00a155811975
+    uuid: c70db123-ed74-472c-9947-b3b47b63d513
     type_id: 13
 network_prefixes:
 # Country code Prefixes
-  - id: 239093
+  - id: 239125
     prefix: '670'
     number_min_length: 4
     number_max_length: 100
-    uuid: c709ca3b-a823-449e-931b-ebb0ea1a445d
+    uuid: 90b90789-0b06-48cf-8dc7-be13b1ccca4b
     country_id: *tl
     network_id: null
 # Supplementary services Prefixes
-  - id: 239230
+  - id: 239262
     prefix: '67005'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7e449457-af64-4ce3-a051-e49cd13d0aff
+    uuid: 469fe6ec-1ab1-430d-a868-3ca687f80572
     country_id: *tl
     network_id: *tl_virtual_private_network
-  - id: 239465
+  - id: 239511
     prefix: '6701'
     number_min_length: 6
     number_max_length: 10
-    uuid: abb87f16-f971-463e-a401-be4460855a8b
+    uuid: 00ce11c0-6edc-491e-9cd0-6d0cbe137e38
     country_id: *tl
     network_id: *tl_special_services
-  - id: 249976
+  - id: 250087
     prefix: '67080'
     number_min_length: 8
     number_max_length: 10
-    uuid: dd779a7b-d9c8-449d-b246-5195fddc9946
+    uuid: 78b5381d-1283-4e1f-a68b-0bda5c0d1823
     country_id: *tl
     network_id: *tl_freephone_services
-  - id: 252145
+  - id: 252254
     prefix: '67070'
     number_min_length: 10
     number_max_length: 10
-    uuid: cbd1af2a-7434-481b-9616-f298709484a4
+    uuid: 44c600c3-2187-4e70-9c0c-f9f33215cc67
     country_id: *tl
     network_id: *tl_personal_number_services
-  - id: 254001
+  - id: 254114
     prefix: '67090'
     number_min_length: 8
     number_max_length: 10
-    uuid: 9cb8c65d-cb07-413a-afa5-aff7008dc988
+    uuid: 1fadf494-2896-4751-9f40-93b646d17c4c
     country_id: *tl
     network_id: *tl_premium_rate_services
 # Fixed Prefixes
-  - id: 240177
+  - id: 240246
     prefix: '67031'
     number_min_length: 10
     number_max_length: 10
-    uuid: c15ff811-68bf-4a86-98fc-8a05190fc9ae
+    uuid: baa99039-b3e7-45de-b21d-0daa2b2e9268
     country_id: *tl
     network_id: *tl_fixed
-  - id: 240316
+  - id: 240385
     prefix: '67032'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4011a7b8-0de5-4bab-8af0-7ab31d3daf0f
+    uuid: 274661c0-0414-4114-b46d-30cdcfbce8a9
     country_id: *tl
     network_id: *tl_fixed
-  - id: 240357
+  - id: 240426
     prefix: '67033'
     number_min_length: 10
     number_max_length: 10
-    uuid: 786c6519-7a33-49aa-adb0-472325bcfae5
+    uuid: 93c06bca-8f1d-4e2d-99fb-5a5da93918c5
     country_id: *tl
     network_id: *tl_fixed
-  - id: 240610
+  - id: 240679
     prefix: '67036'
     number_min_length: 10
     number_max_length: 10
-    uuid: 63eeebe4-94a4-421e-93de-0a5213294afc
+    uuid: 48951afb-1de0-448f-8588-3b2e60534305
     country_id: *tl
     network_id: *tl_fixed
-  - id: 240656
+  - id: 240725
     prefix: '67037'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9d467ce7-b9f0-42fe-9ad1-bc83279a33f6
+    uuid: c00c3274-fe09-4013-b2aa-222e5db68997
     country_id: *tl
     network_id: *tl_fixed
-  - id: 240805
+  - id: 240874
     prefix: '67038'
     number_min_length: 10
     number_max_length: 10
-    uuid: ae971c61-4084-4d54-ae05-f4914d67bd3b
+    uuid: 5adc0fb5-eb36-4cec-8d5e-947346ae03f8
     country_id: *tl
     network_id: *tl_fixed
-  - id: 240849
+  - id: 240918
     prefix: '67039'
     number_min_length: 10
     number_max_length: 10
-    uuid: 61134c50-c3c7-47b0-9d32-b4e7ad24e235
+    uuid: 48d0f16a-65a7-4042-aea1-43b389c0b3d3
     country_id: *tl
     network_id: *tl_fixed
-  - id: 241069
+  - id: 241143
     prefix: '67041'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0b5d0361-a781-44c2-ae3e-eef065a5dbae
+    uuid: ee01c012-a791-45ef-8778-ef1d2bc9c89f
     country_id: *tl
     network_id: *tl_fixed
-  - id: 241172
+  - id: 241246
     prefix: '67042'
     number_min_length: 10
     number_max_length: 10
-    uuid: aebc3cf4-82fe-45cc-86a9-c8e6a54ccd0c
+    uuid: 7a7d7a08-763b-4d5a-96fb-a7439a3d606f
     country_id: *tl
     network_id: *tl_fixed
-  - id: 241270
+  - id: 241344
     prefix: '67043'
     number_min_length: 10
     number_max_length: 10
-    uuid: 91d3a883-ed9c-4977-8811-83677a68299b
+    uuid: 24d97d41-cfcd-4ce7-946e-5a470567037a
     country_id: *tl
     network_id: *tl_fixed
-  - id: 241428
+  - id: 241502
     prefix: '67044'
     number_min_length: 10
     number_max_length: 10
-    uuid: d342c57f-377f-4b4b-95fa-de50f85ebd0c
+    uuid: 07e300d2-df2c-49b7-a899-1aaa75bcc908
     country_id: *tl
     network_id: *tl_fixed
-  - id: 244534
+  - id: 244625
     prefix: '67021'
     number_min_length: 10
     number_max_length: 10
-    uuid: 04950ea7-e97d-43be-a9a6-57f3eb0da005
+    uuid: 1f32a13d-d9a4-44e5-ba36-2f7dd285f516
     country_id: *tl
     network_id: *tl_fixed
-  - id: 244632
+  - id: 244723
     prefix: '67022'
     number_min_length: 10
     number_max_length: 10
-    uuid: e3a44818-427e-45ce-9fed-19e89417c827
+    uuid: 6ad5d94d-6021-4624-a11e-e099e17d3e78
     country_id: *tl
     network_id: *tl_fixed
-  - id: 244826
+  - id: 244917
     prefix: '67023'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6728d09c-ffd4-4376-9f27-ad01d3a34d94
+    uuid: 8448df3c-7177-42ec-b727-538e8106bfa1
     country_id: *tl
     network_id: *tl_fixed
-  - id: 245017
+  - id: 245108
     prefix: '67024'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7924d977-1cd1-418d-94cd-025726aa5a4e
+    uuid: f2b86895-6fab-4199-9a39-b29a7ff98319
     country_id: *tl
     network_id: *tl_fixed
-  - id: 245166
+  - id: 245257
     prefix: '67025'
     number_min_length: 10
     number_max_length: 10
-    uuid: 98e827d0-360d-4d4f-8bbe-79c9de7d4c3b
+    uuid: e25779cc-599e-479d-a87d-3ecf548dff54
     country_id: *tl
     network_id: *tl_fixed
-  - id: 245730
+  - id: 245821
     prefix: '67029'
     number_min_length: 10
     number_max_length: 10
-    uuid: 32ffa840-2c47-4084-9168-deb9c55e1686
+    uuid: 5ace46d7-0ad3-4775-9941-eaa72bf26197
     country_id: *tl
     network_id: *tl_fixed
-  - id: 246404
+  - id: 246499
     prefix: '67049'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6a731481-4627-498e-99d2-11bed14bdd4e
+    uuid: 7c6fe272-1970-4232-a311-b3b2b1a5c300
     country_id: *tl
     network_id: *tl_fixed
 # Mobile Prefixes
-  - id: 248729
+  - id: 248841
     prefix: '67073'
     number_min_length: 11
     number_max_length: 11
-    uuid: 831ed77f-f409-476d-81c6-301243e6814e
+    uuid: 78e2d5f1-e3dc-4004-ab4d-0e793cd3cc43
     country_id: *tl
     network_id: *tl_telkomcel_mobile
-  - id: 248915
+  - id: 249027
     prefix: '67074'
     number_min_length: 11
     number_max_length: 11
-    uuid: b2ee64f7-6ede-4198-88c6-904aa50eafae
+    uuid: 8a27efbc-aec9-42c8-b988-0847d7ad980f
     country_id: *tl
     network_id: *tl_telkomcel_mobile
-  - id: 249407
+  - id: 249519
     prefix: '67075'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2c00a8ec-08f2-47ce-bc6b-847fcf202302
+    uuid: d59a3f28-cf8a-4656-877f-f0f56bd12602
     country_id: *tl
     network_id: *tl_telemor_mobile
-  - id: 252295
+  - id: 252410
     prefix: '67076'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1ed4fc9f-64c3-4dc9-a9bf-74f959145c43
+    uuid: 8a94fa5b-a215-4651-a279-c07d2b756f32
     country_id: *tl
     network_id: *tl_telemor_mobile
-  - id: 252477
+  - id: 252592
     prefix: '67077'
     number_min_length: 11
     number_max_length: 11
-    uuid: 809aa1a2-0301-4445-9a7f-0c1c4cf26b37
+    uuid: 5831120e-b1a7-466b-966b-373545a2d963
     country_id: *tl
     network_id: *tl_timor_telecom_mobile
-  - id: 252933
+  - id: 253048
     prefix: '67078'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2147c1b8-b8dc-4e5b-b725-d240c8f2bb71
+    uuid: 56ee428a-8fec-4ee6-845d-50b6f0d0e127
     country_id: *tl
     network_id: *tl_timor_telecom_mobile
 # Paging Prefixes
-  - id: 253230
+  - id: 253345
     prefix: '67079'
     number_min_length: 10
     number_max_length: 10
-    uuid: e9106c77-9dc9-473e-95d1-2d52092030c8
+    uuid: e5cb2c84-b292-41c4-bcd4-0f79ec5178e4
     country_id: *tl
     network_id: *tl_paging
