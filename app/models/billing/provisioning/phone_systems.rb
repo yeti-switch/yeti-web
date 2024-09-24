@@ -12,11 +12,11 @@ module Billing
       end
 
       def after_create
-        CustomerService.create_customer(service)
+        Provisioning::PhoneSystems::Core.provision_services(service)
       end
 
       def before_destroy
-        CustomerService.delete_customer(service)
+        Provisioning::PhoneSystems::Core.rollback_provision_services(service)
       end
 
       def self.verify_service_type_variables!(service_type)
