@@ -256,4 +256,25 @@ RSpec.describe 'Filter Destination records', :js do
       end
     end
   end
+
+  context 'filter by Rateplan', js: false do
+    subject { click_button :Filter }
+
+    let!(:rate_group) { FactoryBot.create(:rate_group) }
+    let!(:rate_group_second) { FactoryBot.create(:rate_group) }
+    let!(:rateplan) { FactoryBot.create(:rateplan, rate_groups: [rate_group, rate_group_second]) }
+    let!(:record) { FactoryBot.create(:destination, rate_group:) }
+
+    before do
+      visit destinations_path
+      select rateplan.name, from: 'Rateplan'
+    end
+
+    it 'should render filtered records only' do
+      subject
+
+      expect(page).to have_table_row count: 1
+      expect(page).to have_table_cell column: 'Id', exact_text: record.id.to_s
+    end
+  end
 end
