@@ -1,231 +1,231 @@
 country_id: &ht 92
 networks:
-# Fixed Networks
-  - id: &ht_fixed 7638
-    name: HT Fixed
-    uuid: ca53ce13-75c2-40f7-9664-1f08a13956ba
-    type_id: 12
-# Mobile Networks
-  - id: &ht_digicel_mobile 7795
-    name: HT Digicel Mobile
-    uuid: d9f88d6f-487e-44a1-bdb7-91185d81db64
-    type_id: 3
-  - id: &ht_natcom_mobile 7823
-    name: HT Natcom Mobile
-    uuid: c308216f-d44e-4b92-a68a-b88f4da1f872
-    type_id: 3
-  - id: &ht_mobile 7863
-    name: HT Mobile
-    uuid: 3ae321dc-9af1-4844-874e-2b0f0265c848
-    type_id: 3
 # Supplementary services Networks
-  - id: &ht_special_services 8259
+  - id: &ht_special_services 3873
     name: HT Special Services
-    uuid: de9239be-04e8-44a3-a76e-23de88fb7bc1
+    uuid: f3f4ff6b-0994-4737-9bef-dcff6486ec45
     type_id: 14
-  - id: &ht_emergency_services 9033
-    name: HT Emergency Services
-    uuid: 8f7f168e-b992-4c1e-adb4-fc5290e8c730
-    type_id: 14
-  - id: &ht_value_added_services 9345
+  - id: &ht_value_added_services 5149
     name: HT Value Added Services
-    uuid: 984b0203-d0e4-4744-97fb-5cfff8549c5b
+    uuid: 5da65091-35b8-4c56-8cab-83e289ecfcbb
     type_id: 14
-  - id: &ht_freephone_services 9383
+  - id: &ht_freephone_services 5194
     name: HT Freephone Services
-    uuid: eb51a01e-0d26-4c53-b4cd-fee7b7d7a6d3
+    uuid: 436b4380-9238-4171-adee-f6a4c16c37e7
     type_id: 14
+  - id: &ht_emergency_services 5658
+    name: HT Emergency Services
+    uuid: 21cf5a55-29df-4973-9870-9270979c53d4
+    type_id: 14
+# Mobile Networks
+  - id: &ht_digicel_mobile 4303
+    name: HT Digicel Mobile
+    uuid: 1c651308-dcd6-46d3-aa08-2e17edf20522
+    type_id: 3
+  - id: &ht_natcom_mobile 4332
+    name: HT Natcom Mobile
+    uuid: 29805c46-5ec0-4057-bf1e-c0fe50901a12
+    type_id: 3
+  - id: &ht_mobile 4398
+    name: HT Mobile
+    uuid: e7c7c945-0d5d-42c6-87f0-1a71df74d2bd
+    type_id: 3
+# Fixed Networks
+  - id: &ht_fixed 4693
+    name: HT Fixed
+    uuid: 979263e8-5bd7-47c1-b0f2-c9b96e46d6e9
+    type_id: 12
 network_prefixes:
-# Fixed Prefixes
-  - id: 285937
-    prefix: '5092'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 12de5199-b7b8-4255-8346-ab2e9515edbe
-    country_id: *ht
-    network_id: *ht_fixed
-  - id: 295927
-    prefix: '5099'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6257380d-cbe3-446c-b0ff-31043ef5bae3
-    country_id: *ht
-    network_id: *ht_fixed
-# Mobile Prefixes
-  - id: 287456
-    prefix: '50930'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ae388f2-58b6-4d80-8a4d-3a99fe3c1377
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 287570
-    prefix: '50931'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8920d180-10e9-42fc-aa64-2de81e3d79d7
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 287642
-    prefix: '50932'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 855b6513-8101-421a-a9a6-b90a1f539351
-    country_id: *ht
-    network_id: *ht_natcom_mobile
-  - id: 287684
-    prefix: '50933'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0e8b8ad2-4ad9-40d7-9635-4f7ee2afc9c4
-    country_id: *ht
-    network_id: *ht_natcom_mobile
-  - id: 287693
-    prefix: '509330'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: fc265d0f-a106-4d2e-9257-e2a26e5bf273
-    country_id: *ht
-    network_id: *ht_natcom_mobile
-  - id: 287757
-    prefix: '50934'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 506f7534-0367-4c9e-b222-2ec059e0ba53
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 287853
-    prefix: '50935'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a21551df-7e17-4a17-a4fb-59b0586666e0
-    country_id: *ht
-    network_id: *ht_natcom_mobile
-  - id: 287928
-    prefix: '50936'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cf773d58-75cb-49a7-86ab-8118fe5bdeec
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 287973
-    prefix: '50937'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 19eb3b7a-96fc-4cea-80b2-b1c665ce94de
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 288122
-    prefix: '50938'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 96b09b3b-7073-4d47-a7ef-e2b21c2c5c25
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 288160
-    prefix: '50939'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 31498723-97f4-45ff-a5bc-e9be33373c20
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 288193
-    prefix: '5094'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 72e3830c-9643-4fc5-be69-471225336e2f
-    country_id: *ht
-    network_id: *ht_mobile
-  - id: 288233
-    prefix: '50940'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 11b07d27-3983-480e-8994-01537b4014eb
-    country_id: *ht
-    network_id: *ht_natcom_mobile
-  - id: 288381
-    prefix: '50941'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6ee17b3c-7597-4434-9871-0b1f2d1c7a39
-    country_id: *ht
-    network_id: *ht_natcom_mobile
-  - id: 288483
-    prefix: '50942'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18d9e4a5-f78b-4c14-aacc-5c9dfdfb11d5
-    country_id: *ht
-    network_id: *ht_natcom_mobile
-  - id: 288583
-    prefix: '50943'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1ff84085-5016-4d72-b242-13121236528d
-    country_id: *ht
-    network_id: *ht_natcom_mobile
-  - id: 288736
-    prefix: '50944'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ccfb0d05-32cb-46d2-9303-2ab01ad75c1b
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 291698
-    prefix: '50946'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 37a2de18-b20d-4eda-8450-5a595958651f
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 291913
-    prefix: '50947'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5318fc55-261d-4bba-a980-e62fd0242a5a
-    country_id: *ht
-    network_id: *ht_digicel_mobile
-  - id: 292120
-    prefix: '50949'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dffc5b77-dd9f-48d0-a551-2a5df8a01061
-    country_id: *ht
-    network_id: *ht_digicel_mobile
 # Country code Prefixes
-  - id: 290796
+  - id: 238989
     prefix: '509'
     number_min_length: 4
     number_max_length: 100
-    uuid: 25248331-1891-4edb-b498-6d17ed551cf4
+    uuid: fe3a650e-2837-4b60-be55-8cdab461de31
     country_id: *ht
     network_id: null
 # Supplementary services Prefixes
-  - id: 291194
+  - id: 239386
     prefix: '5091'
     number_min_length: 6
     number_max_length: 6
-    uuid: 6e678343-9dd0-45bb-bfa0-c1168e1db75b
+    uuid: 9eed6184-4318-4ce3-8b3b-551048cea1b4
     country_id: *ht
     network_id: *ht_special_services
-  - id: 296176
-    prefix: '509911'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 069c2765-8fc6-4a90-aea8-705d711891d4
-    country_id: *ht
-    network_id: *ht_emergency_services
-  - id: 302706
+  - id: 249926
     prefix: '5098'
     number_min_length: 7
     number_max_length: 7
-    uuid: 5a899fd4-b70e-465e-b955-8ac16dda99e9
+    uuid: 6965a3f6-c58c-401f-bd6b-117959c80325
     country_id: *ht
     network_id: *ht_value_added_services
-  - id: 302778
+  - id: 250000
     prefix: '509800'
     number_min_length: 11
     number_max_length: 11
-    uuid: 347416a6-71cd-456c-afac-8539221c2ed3
+    uuid: 0ec4c68f-99a3-44bd-9cc3-346e158185a5
     country_id: *ht
     network_id: *ht_freephone_services
+  - id: 254217
+    prefix: '509911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 12e912d4-b105-4f77-8f17-e6d3854b9652
+    country_id: *ht
+    network_id: *ht_emergency_services
+# Mobile Prefixes
+  - id: 240168
+    prefix: '50931'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db2f1716-29ed-4094-850b-7e68f53e4db2
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 240306
+    prefix: '50932'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0cdaa94b-01e0-4838-8c07-570ce1f04069
+    country_id: *ht
+    network_id: *ht_natcom_mobile
+  - id: 240350
+    prefix: '50933'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7cb89f05-17d3-437d-b006-7d75032f1117
+    country_id: *ht
+    network_id: *ht_natcom_mobile
+  - id: 240359
+    prefix: '509330'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 1ddf0cc4-2113-43f5-8554-72a92b93fba6
+    country_id: *ht
+    network_id: *ht_natcom_mobile
+  - id: 240426
+    prefix: '50934'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 20c6207e-5fac-4820-a381-1ac86328cab4
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 240524
+    prefix: '50935'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7485e7d8-32e3-4182-bc2f-cc51224c9164
+    country_id: *ht
+    network_id: *ht_natcom_mobile
+  - id: 240602
+    prefix: '50936'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e6aec409-3337-4e4a-a60b-49b88c3f4a18
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 240649
+    prefix: '50937'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 72399415-9be6-4c63-8d58-7502186c4ff9
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 240798
+    prefix: '50938'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cff4c45-4d90-4790-9664-3b9e06d1b901
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 240839
+    prefix: '50939'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f73993ca-5e96-488e-b053-9a8766f31301
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 240874
+    prefix: '5094'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 13dbc94f-7f37-48c4-920e-8a04c4cb7653
+    country_id: *ht
+    network_id: *ht_mobile
+  - id: 240915
+    prefix: '50940'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a317d373-f6f8-4973-a1b0-f14f8f4ff2a9
+    country_id: *ht
+    network_id: *ht_natcom_mobile
+  - id: 241062
+    prefix: '50941'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ee6c673-f27b-4451-b8ea-af83507afd6c
+    country_id: *ht
+    network_id: *ht_natcom_mobile
+  - id: 241164
+    prefix: '50942'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e23367c7-5191-4764-ad50-bf558c2fcf76
+    country_id: *ht
+    network_id: *ht_natcom_mobile
+  - id: 241264
+    prefix: '50943'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f7ed59c-5331-465e-b264-99bebcc7605f
+    country_id: *ht
+    network_id: *ht_natcom_mobile
+  - id: 241418
+    prefix: '50944'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5793fd97-5cce-424e-a5fc-34a39e1d8e12
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 245827
+    prefix: '50930'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96e17ec6-ac4d-428a-8974-8884219c6949
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 245976
+    prefix: '50946'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 130f34df-d2f5-4066-bb07-2b850e95aed0
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 246193
+    prefix: '50947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 93e024f9-440c-4706-84dc-b555b1c89694
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+  - id: 246400
+    prefix: '50949'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca1f5a02-71e8-4c13-819a-35391b32a75b
+    country_id: *ht
+    network_id: *ht_digicel_mobile
+# Fixed Prefixes
+  - id: 244312
+    prefix: '5092'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3ee076e-299a-4e1c-a692-079dcee12940
+    country_id: *ht
+    network_id: *ht_fixed
+  - id: 253937
+    prefix: '5099'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a0f3f1c-5cce-4f0c-86b3-9d4494505740
+    country_id: *ht
+    network_id: *ht_fixed

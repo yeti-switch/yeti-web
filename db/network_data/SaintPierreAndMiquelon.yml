@@ -1,198 +1,632 @@
 country_id: &pm 182
 networks:
+# Supplementary services Networks
+  - id: &pm_special_services 3946
+    name: PM Special Services
+    uuid: fec2b811-6e83-4a17-87c3-20c98eeef5a4
+    type_id: 14
+  - id: &pm_directory_enquiry_services 4127
+    name: PM Directory Enquiry Services
+    uuid: c3092ffa-df8b-452e-9c45-24244494257e
+    type_id: 14
+  - id: &pm_freephone_services 4282
+    name: PM Freephone Services
+    uuid: 78969792-4953-4a15-abec-3027ddd68f6d
+    type_id: 14
+  - id: &pm_premium_rate_services 4335
+    name: PM Premium Rate Services
+    uuid: 0cf08a15-5b6d-4e38-967f-d9383b6de343
+    type_id: 14
+  - id: &pm_standard_rate_services 5253
+    name: PM Standard Rate Services
+    uuid: 284410d8-6670-4ba8-ba49-1cb4f7d81ab4
+    type_id: 14
+  - id: &pm_data_services 5317
+    name: PM Data Services
+    uuid: 731759e2-afe6-4f5c-8d7a-a64041ab8a30
+    type_id: 14
+  - id: &pm_dial_up_internet_access 5810
+    name: PM Dial_Up Internet Access
+    uuid: 799f69c7-8077-4657-9edd-d8d2b007fd1e
+    type_id: 14
 # Mobile Networks
-  - id: &pm_globaltel_mobile 7882
+  - id: &pm_globaltel_mobile 4422
     name: PM Globaltel Mobile
-    uuid: 4ad2efd7-134f-48dd-bab2-d66cace604ed
+    uuid: 1cd6cec0-5861-490c-96e8-0dab6a5ffb22
     type_id: 3
-  - id: &pm_ameris_mobile 8612
+  - id: &pm_iovox_mobile 4828
+    name: PM Iovox Mobile
+    uuid: adeba47d-97e4-4135-946d-a940def24ac8
+    type_id: 3
+  - id: &pm_ameris_mobile 4842
     name: PM Ameris Mobile
-    uuid: 045cf06c-348c-482f-a71a-13778e2accfd
+    uuid: 6c47c601-b24f-4d91-b5e9-0701a263ae31
     type_id: 3
-  - id: &pm_mobile 8669
+  - id: &pm_mobile 4929
     name: PM Mobile
-    uuid: a3ef240c-2e03-4f99-bb7d-38ff56930408
+    uuid: 14804ab2-0d75-49dc-aa26-419e03e3b572
     type_id: 3
 # Fixed Networks
-  - id: &pm_fixed 7899
+  - id: &pm_fixed 4440
     name: PM Fixed
-    uuid: f3eeafd9-9b60-4e91-b3bb-f2397f34a8a6
+    uuid: f41bfe2a-7687-4b8b-a657-db84eac83f21
     type_id: 12
-# Supplementary services Networks
-  - id: &pm_special_services 8316
-    name: PM Special Services
-    uuid: 1bb2b813-1714-45dd-8828-25fe958133fb
-    type_id: 14
 network_prefixes:
-# Mobile Prefixes
-  - id: 129553
-    prefix: '50840'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 15726a71-4e07-4040-8409-adbd782b87ce
-    country_id: *pm
-    network_id: *pm_globaltel_mobile
-  - id: 288744
-    prefix: '50844'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 28458591-aca4-46dc-bb1f-0df82989b9a5
-    country_id: *pm
-    network_id: *pm_globaltel_mobile
-  - id: 292713
-    prefix: '50855'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 662cea0b-8cea-4c85-87af-f05c8bb00eb3
-    country_id: *pm
-    network_id: *pm_ameris_mobile
-  - id: 294233
-    prefix: '50870840'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d10b1857-3a08-4c7a-b437-11c011f97ffa
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294234
-    prefix: '50870841'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 87472816-1666-4a59-b327-40647dc4ebe6
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294235
-    prefix: '50870842'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 753651ff-cf25-4dc2-b46c-58c88fbfd079
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294236
-    prefix: '50870843'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 07ad74b2-65d1-437f-a81d-a04a4bd5068a
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294237
-    prefix: '50870844'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 72609e57-d2dd-4bc1-a35a-185478e4d5ab
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294238
-    prefix: '50870845'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ae688405-5bfe-44db-b96b-4535b32ce02a
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294239
-    prefix: '50870850'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6066c974-0b8f-46f1-a810-8e547dc139c6
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294240
-    prefix: '50870851'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1dd16e8b-18e2-40b1-8de1-751f2a7fa2f3
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294241
-    prefix: '50870852'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3de4c25a-64d6-45ff-ade0-eab2e9d4375e
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294242
-    prefix: '50870853'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 09ebce33-84ad-41a3-b853-aeeb62fb30df
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294243
-    prefix: '50870854'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 202ad927-f535-4948-987d-a1ae003ddebb
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294244
-    prefix: '50870855'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 018f4b55-423f-4e03-a92b-11d51c36c3ab
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294245
-    prefix: '50870856'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e70b17b8-bb0f-4eed-83b7-61edecffd2b3
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294246
-    prefix: '50870857'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6bc837eb-8f3d-4492-ba97-a012836a2ed6
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294247
-    prefix: '50870858'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8015ccbf-83ac-44fe-9f63-cbef232bfd6a
-    country_id: *pm
-    network_id: *pm_mobile
-  - id: 294248
-    prefix: '50870859'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a6e2a2a5-30b6-43a1-825b-5d37c648c264
-    country_id: *pm
-    network_id: *pm_mobile
-# Fixed Prefixes
-  - id: 288387
-    prefix: '50841'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 3bbb46c6-c9bb-41ae-9e37-a890e2ec93a0
-    country_id: *pm
-    network_id: *pm_fixed
-  - id: 288490
-    prefix: '50842'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 0bd88e9a-b8fc-42e9-9832-40ec4c2ceabf
-    country_id: *pm
-    network_id: *pm_fixed
-  - id: 292235
-    prefix: '50850'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: d4eca03f-76a0-48a9-a937-bfbaa5a8fb23
-    country_id: *pm
-    network_id: *pm_fixed
 # Country code Prefixes
-  - id: 499095
+  - id: 239076
     prefix: '508'
     number_min_length: 4
     number_max_length: 100
-    uuid: 159aea24-f40d-4fb1-97c5-71a372965a90
+    uuid: 42ffb0fb-9a43-4103-9e71-e6ea4a8764a8
     country_id: *pm
     network_id: null
 # Supplementary services Prefixes
-  - id: 291271
+  - id: 239458
     prefix: '5081'
     number_min_length: 5
     number_max_length: 7
-    uuid: 41ae3006-428b-4718-84ea-5d6be9e418c2
+    uuid: 2f058d32-64fe-4d88-8ecc-d376dd6d8380
     country_id: *pm
     network_id: *pm_special_services
+  - id: 239690
+    prefix: '5081180'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: f5b2cf9d-c7de-4fb8-acfe-da10d7239f72
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 239697
+    prefix: '5081182'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: f55a63ea-2f62-4139-aa1a-3a1163010b65
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 239703
+    prefix: '5081183'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: c7b0a902-4950-44ca-aff6-245daae19170
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 239709
+    prefix: '5081184'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 119535be-7707-4128-98b1-e796bafc11b5
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 239714
+    prefix: '5081185'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: ebef9231-4677-478f-9940-7f0551aa996a
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 239720
+    prefix: '5081186'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 975b058e-25a9-4623-ba32-313b209aec27
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 239725
+    prefix: '5081187'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: a04df97b-eb82-4b6a-8b8d-9ab4006224d2
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 239730
+    prefix: '5081188'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: d470f15b-b97f-43ec-b2fa-b3170159067d
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 239734
+    prefix: '5081189'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: d8bbaf94-bfe3-4e02-83b1-bd8688f73276
+    country_id: *pm
+    network_id: *pm_directory_enquiry_services
+  - id: 240031
+    prefix: '508301'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: c4790ac0-019c-4c7c-90d0-d858fb9c7dd6
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240050
+    prefix: '508302'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 6f4f1517-851d-4af2-accd-366e82127aa9
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240059
+    prefix: '508303'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: fbdde2a4-ff76-4247-9e38-42d3027c252f
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240086
+    prefix: '508304'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 15b772c5-6f6a-476b-9ce0-bba8eba03c1f
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240098
+    prefix: '508305'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 723b1dee-c6a7-4187-a1b7-b498107e3697
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240108
+    prefix: '508306'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 59a95d2d-8606-42ee-8acb-37bfdc62c3fd
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240121
+    prefix: '508307'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 22a92fc1-f23e-4461-a069-ac3483c69e28
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240130
+    prefix: '508308'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 0805c517-5ee9-48cb-8880-fd1d76706ed9
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240152
+    prefix: '508309'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: aedddedf-14ba-43d1-abc9-18906a4e0d20
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240186
+    prefix: '508310'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: f415cef3-f271-4fd6-a209-098b05d15862
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240197
+    prefix: '508311'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 3b58419f-56b0-4c1b-8b03-df55fe6cb784
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240207
+    prefix: '508312'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 23cc68bf-de0a-4a8f-9764-12c89c37d673
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240215
+    prefix: '508313'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: d16c8c5c-4b9d-49df-93fd-1caa63944184
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240242
+    prefix: '508314'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 7c3bfdb6-2359-4cf1-aa1f-2d2891e986b1
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240251
+    prefix: '508315'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 3f3c4ea7-f35b-4ec0-9f4f-bfe54a002589
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240259
+    prefix: '508316'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 8d8dc472-a601-4985-a351-4ab0c63f47b6
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240269
+    prefix: '508318'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 73e0411a-5d78-401e-be9a-30179a66a4c5
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240285
+    prefix: '508319'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 8c7208c1-f4bb-46ac-88e7-56e375722357
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 240313
+    prefix: '50832'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 3e0d65ca-21b2-45b2-8d7f-83672771bcfd
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 240430
+    prefix: '50834'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 8e9d0779-927c-4e95-9e9f-54f00f7925a7
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 240608
+    prefix: '50836'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 06a1e100-6f5e-46c5-898e-f5ba6db28e7c
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 240848
+    prefix: '50839'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 41a205b1-8d0e-4542-a1ba-fd43a04fae93
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 245848
+    prefix: '5083000'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: edb458ac-60ab-4246-b9c7-a7e6a3d017e1
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 245862
+    prefix: '5083001'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 6b95c394-7216-432f-9e3f-8b09939ad2a1
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 245870
+    prefix: '5083002'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 49f1c1fd-e0e2-4ea5-b1f2-2834da5eba54
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 245877
+    prefix: '5083003'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 7bf1e17b-214b-4c96-afb0-77644dbd5c0b
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 245884
+    prefix: '5083004'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: fa8259aa-5f55-4ea3-a8c6-a0b28a83e4b8
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 245891
+    prefix: '5083005'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e3785c36-3d8c-4f59-be95-a5d91bb9fdc1
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 245897
+    prefix: '5083006'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: af0e363a-9af9-4976-a698-eaef2133c511
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 312876
+    prefix: '5083007'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: f9e00f26-6cbc-4834-937b-277693cf3ebb
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 245910
+    prefix: '5083009'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 060fa3ed-888c-4c4a-b310-359aba13f515
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 250020
+    prefix: '508800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5864abd9-dccf-4cbb-89bf-c87cc9167a54
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 250062
+    prefix: '508801'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 318f781e-a81a-446a-9dbf-55d0c9991cee
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 250074
+    prefix: '508802'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c69b0c97-035b-49a7-a65c-cc861d9fe2a4
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 250085
+    prefix: '508803'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0d71b543-130a-41a6-8039-bce8a4eaa30a
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 250092
+    prefix: '508804'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a766a018-5296-42d3-b818-07260d594721
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 250101
+    prefix: '508805'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5762e4bf-206e-409b-8839-fa32c7ce486c
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 250109
+    prefix: '508806'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 324d1f2c-ce3f-4adb-831c-bb45d9fa93a0
+    country_id: *pm
+    network_id: *pm_standard_rate_services
+  - id: 250117
+    prefix: '508807'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3e2b52f2-c01e-4af8-b711-4cd7cd43b838
+    country_id: *pm
+    network_id: *pm_standard_rate_services
+  - id: 250131
+    prefix: '508808'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 72177b5e-b464-4a55-8ab8-83a2ddbcb62b
+    country_id: *pm
+    network_id: *pm_standard_rate_services
+  - id: 250141
+    prefix: '508809'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 383f833a-29d5-459e-94a8-80f4cba079a4
+    country_id: *pm
+    network_id: *pm_standard_rate_services
+  - id: 250170
+    prefix: '50881'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 74a21ad3-de4e-4bc9-a5f9-727965f2f7f9
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 250327
+    prefix: '50882'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bd17ddb1-0d23-4918-9520-d86826fab762
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 250502
+    prefix: '508836'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 04b11ed0-ff3f-4c99-a3eb-30304641862a
+    country_id: *pm
+    network_id: *pm_data_services
+  - id: 253844
+    prefix: '50889'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ce2c80ba-0cf4-4aec-9c90-078ece5bdfe8
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 260650
+    prefix: '508860'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b339f33e-3afa-496c-ab92-5c3d43d6aff4
+    country_id: *pm
+    network_id: *pm_dial_up_internet_access
+  - id: 260750
+    prefix: '508868'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fc4e6a8e-98c2-4354-849b-028abfe1e34d
+    country_id: *pm
+    network_id: *pm_dial_up_internet_access
+# Mobile Prefixes
+  - id: 240921
+    prefix: '50840'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: a1fe80a5-3207-4b8a-a90e-6dc94e721c86
+    country_id: *pm
+    network_id: *pm_globaltel_mobile
+  - id: 241426
+    prefix: '50844'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 40ff311b-c5f9-4044-967e-9217eeefc68f
+    country_id: *pm
+    network_id: *pm_globaltel_mobile
+  - id: 246593
+    prefix: '508510'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: ee26dd04-80c9-48ca-ba47-2b1a9248e0d7
+    country_id: *pm
+    network_id: *pm_iovox_mobile
+  - id: 246991
+    prefix: '50855'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 87f13bfc-17de-4dea-b104-84d3aa09d210
+    country_id: *pm
+    network_id: *pm_ameris_mobile
+  - id: 248533
+    prefix: '50870840'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 06e01432-0a81-4e92-ab33-f56f71e148b8
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248534
+    prefix: '50870841'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bc9f411c-5414-495b-9b08-cf849459ea17
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248535
+    prefix: '50870842'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 311a9a09-e3c8-4216-92a9-53c3734299a3
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248536
+    prefix: '50870843'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4ac33b0b-c8b8-491a-84ca-daf0428f682a
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248537
+    prefix: '50870844'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8bca754e-6a2c-418d-938f-004bf669a0dc
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248538
+    prefix: '50870845'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3f77faa8-419c-4111-b5ae-e532589524fe
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248539
+    prefix: '50870850'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2aa7b5f0-8470-4483-8a24-f9b095699d20
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248540
+    prefix: '50870851'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5c9b18da-7fa4-4cda-a1f6-6b226c9fa10c
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248541
+    prefix: '50870852'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c0bfbd6f-e0cf-4c02-9153-a852d2afa72d
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248542
+    prefix: '50870853'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f05107a2-6e66-4de0-aba0-8a2273a1faa5
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248543
+    prefix: '50870854'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 87e61144-505e-423b-b2bb-0aa44d590776
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248544
+    prefix: '50870855'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6179ae36-a269-4582-9b94-4f0b7271003f
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248545
+    prefix: '50870856'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 64887a99-a774-435d-87c7-1dbfdb1bb9e9
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248546
+    prefix: '50870857'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 39a35c6f-0e22-44fa-9767-7b5ff3450258
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248547
+    prefix: '50870858'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 03f8305b-ec6b-4a2c-b447-88ee0c57cb61
+    country_id: *pm
+    network_id: *pm_mobile
+  - id: 248548
+    prefix: '50870859'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3eab18fd-fb76-4b94-bbe0-f8aef457a3d1
+    country_id: *pm
+    network_id: *pm_mobile
+# Fixed Prefixes
+  - id: 241068
+    prefix: '50841'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 22dd2ffd-00e8-4540-b192-93515a879926
+    country_id: *pm
+    network_id: *pm_fixed
+  - id: 241171
+    prefix: '50842'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 1f0c004d-8522-4ceb-b946-5e08a58d1757
+    country_id: *pm
+    network_id: *pm_fixed
+  - id: 241269
+    prefix: '50843'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 17026e4e-9d0f-4010-bae1-a0df28d7b373
+    country_id: *pm
+    network_id: *pm_fixed
+  - id: 246515
+    prefix: '50850'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 1ad3b9b3-c28c-41bf-abad-8d4f259490fe
+    country_id: *pm
+    network_id: *pm_fixed

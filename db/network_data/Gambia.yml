@@ -1,540 +1,540 @@
 country_id: &gm 78
 networks:
 # Supplementary services Networks
-  - id: &gm_special_services_toll_free 7435
-    name: GM Special Services Toll Free
-    uuid: ea738d96-ce6b-4eed-b414-4b8ab46bdab0
-    type_id: 14
-  - id: &gm_special_services_standard_rate 7479
-    name: GM Special Services Standard Rate
-    uuid: ef96e8a8-c506-49c6-b7e0-887ff9b17736
-    type_id: 14
-  - id: &gm_special_services_shared_rate 7500
-    name: GM Special Services Shared Rate
-    uuid: 65fd66a7-5f23-41c9-90b6-aa13de14df17
-    type_id: 14
-  - id: &gm_special_services_premium_rate 7531
-    name: GM Special Services Premium Rate
-    uuid: 307f6ba5-1826-4253-96d3-3d1aaf21e9f1
-    type_id: 14
-  - id: &gm_special_services 8252
+  - id: &gm_special_services 3865
     name: GM Special Services
-    uuid: 94ef1a05-9add-4b9d-bb5c-1bd24a2bd666
+    uuid: 2feeef4d-b1d3-40e9-9b2a-e4b5f399a229
     type_id: 14
-# Mobile Networks
-  - id: &gm_africell_mobile 7635
-    name: GM Africell Mobile
-    uuid: b22b5bbf-4c55-48b0-aa8c-e6dcc5796a15
-    type_id: 3
-  - id: &gm_qcell_mobile 7778
-    name: GM Qcell Mobile
-    uuid: 3e67bc50-155a-4be6-ad43-91646c63ab80
-    type_id: 3
-  - id: &gm_comium_mobile 7997
-    name: GM Comium Mobile
-    uuid: f56f724d-9033-451c-b200-2732cfab53a2
-    type_id: 3
-  - id: &gm_gamcel_mobile 8935
-    name: GM Gamcel Mobile
-    uuid: 4e9fc21b-9013-48be-86c7-c7fce3e830bf
-    type_id: 3
+  - id: &gm_special_services_toll_free 3983
+    name: GM Special Services Toll Free
+    uuid: 7e0f0cdd-381b-4e36-993d-cf91976345ae
+    type_id: 14
+  - id: &gm_special_services_standard_rate 4242
+    name: GM Special Services Standard Rate
+    uuid: 9f412a52-3f1f-4514-88bc-51b10f770223
+    type_id: 14
+  - id: &gm_special_services_shared_rate 4261
+    name: GM Special Services Shared Rate
+    uuid: 7113a581-6617-450b-b24f-81005befae25
+    type_id: 14
+  - id: &gm_special_services_premium_rate 4604
+    name: GM Special Services Premium Rate
+    uuid: a158713d-9143-4954-aac7-962e2d7dce66
+    type_id: 14
 # Fixed Networks
-  - id: &gm_fixed 7905
+  - id: &gm_fixed 4445
     name: GM Fixed
-    uuid: f4527c6a-a2cf-4ec6-8762-1609275a8da1
+    uuid: 6a9bb3b1-8fd0-44c1-9d56-e5f571e6f55c
     type_id: 12
+# Mobile Networks
+  - id: &gm_qcell_mobile 4489
+    name: GM Qcell Mobile
+    uuid: 5d96202f-5250-431d-8c6e-ee5234de6191
+    type_id: 3
+  - id: &gm_comium_mobile 4536
+    name: GM Comium Mobile
+    uuid: 9efc0d7a-efce-4d9f-b4f2-1f7094db418b
+    type_id: 3
+  - id: &gm_africell_mobile 4691
+    name: GM Africell Mobile
+    uuid: 2b936e0b-8071-40d9-ab7e-bf46d05e5ee3
+    type_id: 3
+  - id: &gm_gamcel_mobile 5576
+    name: GM Gamcel Mobile
+    uuid: 6076b2ef-b558-4dce-be3b-d6093b8ad80d
+    type_id: 3
 network_prefixes:
-# Supplementary services Prefixes
-  - id: 285638
-    prefix: '22015'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 02922402-93d1-4fbf-bdc0-c19e8be54591
-    country_id: *gm
-    network_id: *gm_special_services_toll_free
-  - id: 285716
-    prefix: '22016'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: aba3d33f-92dc-4c45-b2a0-2cfc005ca750
-    country_id: *gm
-    network_id: *gm_special_services_standard_rate
-  - id: 285750
-    prefix: '22017'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: e2754ea6-20da-4c76-aeb0-1d9314e07eb4
-    country_id: *gm
-    network_id: *gm_special_services_shared_rate
-  - id: 285806
-    prefix: '22018'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 004cf867-aef6-45c5-afdc-011736626250
-    country_id: *gm
-    network_id: *gm_special_services_premium_rate
-  - id: 291185
-    prefix: '2201'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 3f19d121-b094-4a25-aa8c-b7e675885153
-    country_id: *gm
-    network_id: *gm_special_services
-  - id: 291306
-    prefix: '22010'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 2dec578e-6dd8-430c-909f-dc8fda91b267
-    country_id: *gm
-    network_id: *gm_special_services_toll_free
-  - id: 291351
-    prefix: '22011'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: abff05d9-6343-49d3-bbea-07748e901900
-    country_id: *gm
-    network_id: *gm_special_services_toll_free
-  - id: 291517
-    prefix: '22012'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 4b520fc2-c18b-4ea4-8f40-b3aa87f0d0bc
-    country_id: *gm
-    network_id: *gm_special_services_toll_free
-  - id: 291560
-    prefix: '22013'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: f00b05aa-1752-4430-95d5-c3a90b730c0d
-    country_id: *gm
-    network_id: *gm_special_services_toll_free
-  - id: 291607
-    prefix: '22014'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 56b3d4ff-bdfb-4f11-8f5c-6047a1c370ff
-    country_id: *gm
-    network_id: *gm_special_services_toll_free
-# Mobile Prefixes
-  - id: 285934
-    prefix: '2202'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dba5d185-3987-4dea-804e-984204832258
-    country_id: *gm
-    network_id: *gm_africell_mobile
-  - id: 287421
-    prefix: '2203'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 04246809-0b18-49ec-9bc0-efa77bfc8b41
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 289404
-    prefix: '22058'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 045d33c1-46a8-4f43-80e9-5f2eaa3b050e
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 289500
-    prefix: '22059'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9b27a2c9-f6f3-45ea-a1cc-8aefa5ed949e
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 289631
-    prefix: '2206'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 06b09482-20f8-4315-8986-7675018e6f39
-    country_id: *gm
-    network_id: *gm_comium_mobile
-  - id: 292229
-    prefix: '22050'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 702c44bc-24dd-437b-8515-43889edb9e8e
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 292305
-    prefix: '22051'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d1afed8e-afc9-464b-8d67-fdf03116ed39
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 292367
-    prefix: '22052'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e51f83a4-c7f7-473d-8d20-0cd577085185
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 292525
-    prefix: '22053'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3578b1c4-736e-4af1-b42c-1f1b7cc3b422
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 295921
-    prefix: '2209'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 88cf867e-9fc3-4059-bb57-3a858d32a33b
-    country_id: *gm
-    network_id: *gm_gamcel_mobile
-  - id: 301378
-    prefix: '2207'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e3b9432b-1096-447e-ad1b-38636e363d49
-    country_id: *gm
-    network_id: *gm_africell_mobile
-# Fixed Prefixes
-  - id: 288481
-    prefix: '22042'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d9aaa962-b881-4600-bc94-9cbf3dfe39e0
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288581
-    prefix: '22043'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2e602291-a486-4302-b0f2-84ee49ad83f5
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288734
-    prefix: '22044'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6b8a2529-8def-4e58-8a52-fcc86e18c699
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288753
-    prefix: '2204410'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 489e3b3c-74fe-4172-9ff2-60e707a2f87e
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288757
-    prefix: '2204412'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 77d6c0c7-b465-4333-9d96-b108d43ba6d4
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288760
-    prefix: '2204414'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 62e49f05-1185-4150-9531-1d430da386cb
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288763
-    prefix: '2204416'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 87883a0c-5ab9-4b89-b20f-d308ae1dcba6
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288765
-    prefix: '2204417'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a9071d49-3769-4c06-9eb5-fd5b194bd998
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288768
-    prefix: '2204419'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 678f0d60-5469-4053-825f-846913d0747b
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288769
-    prefix: '22044195'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 34417464-6ac6-49c6-96fd-0fe0e7ae37b0
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288830
-    prefix: '220446'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b45dabf8-0ff5-41c3-afb1-b529cf0e470a
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288841
-    prefix: '220447'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8c6bf45f-d980-4b52-bb77-a6cd9e0c3be4
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288856
-    prefix: '220448'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5ef44c8c-d7c4-4ac2-84f4-6326a22a3441
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288859
-    prefix: '2204480'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 349ca3e1-2733-4856-9238-d0edaebb54f8
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288861
-    prefix: '2204485'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1df8eee9-90dd-4200-8888-3aef8a65a773
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288862
-    prefix: '2204486'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6ff429b5-8958-4fb4-be94-db5fea272c2b
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288864
-    prefix: '2204487'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d5dc14c8-3c67-4d0a-9330-e7244c92e200
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288865
-    prefix: '2204488'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 39d45067-7407-4ce9-9e46-83557a952c7a
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288866
-    prefix: '2204489'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 38db1247-dc23-4739-92f3-9aac9f7759f0
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 288867
-    prefix: '220449'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6ac46aa4-d421-4539-b758-3b88398d2822
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292706
-    prefix: '22055'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c0165bd5-2c6f-4cdc-af64-b1098b10fe94
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292734
-    prefix: '220553'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4206b7c2-26ab-40ee-9c82-ebc4a0f27b72
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292739
-    prefix: '2205540'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e9b632dc-c20f-47f9-b22a-5a66467cd4c4
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292741
-    prefix: '2205541'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ffbde829-860b-427b-84da-3d9d8506e5b6
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292743
-    prefix: '2205542'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 41089727-6b69-48cc-9ca5-f1243805507b
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292745
-    prefix: '2205543'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a31bd7df-11e7-4b17-aac4-550463ffeab1
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292747
-    prefix: '2205544'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e949ee6a-8974-4a47-9002-27a010aaca04
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292749
-    prefix: '2205545'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 46027182-d850-4ada-a07b-f22f4b352c7d
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292751
-    prefix: '2205546'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 799badd7-04c8-4541-81b0-9bd88b942be9
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292753
-    prefix: '2205547'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f9eec985-3b26-4eb4-865b-e69e853e5a1e
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292788
-    prefix: '22056'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d66fd505-5887-4133-9821-b277073b7496
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292805
-    prefix: '220566'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fce1f59b-d0c3-423f-9bb0-81f251857c35
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292808
-    prefix: '2205665'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ad011dd6-3e45-4949-ae18-40d8875f1c70
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292809
-    prefix: '2205666'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f4cfa608-9f2b-4672-b837-c0bb139a9d50
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292810
-    prefix: '220567'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1f1b7408-97bb-4a6f-b134-b7e07055dc9e
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292811
-    prefix: '2205674'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1ddb0986-a436-4228-a978-b486ffc18458
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292810
-    prefix: '2205676'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1f1b7408-97bb-4a6f-b134-b7e07055dc9e
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292811
-    prefix: '2205678'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1ddb0986-a436-4228-a978-b486ffc18458
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292828
-    prefix: '22057'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 35509cc6-d29f-4d98-aa12-0eb7a459ffde
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292852
-    prefix: '2205710'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ac2339b5-73ce-4042-87da-fb4f06e072d7
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292856
-    prefix: '2205714'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: eb554b86-db4a-4856-af81-5a9d727f391a
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292863
-    prefix: '2205720'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7171ac4a-77c8-450c-a6d8-143292a75862
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292864
-    prefix: '2205723'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dd6bf8b1-3c7a-469c-8e1e-3efa4807ef01
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292865
-    prefix: '2205725'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 79491e78-45b8-404d-b3d8-20dcbce20af9
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292872
-    prefix: '2205735'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 15612887-6398-4a3d-891d-94e1c5fa9f59
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292875
-    prefix: '2205738'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 23affc94-c7fa-459b-ba78-ae97e89795fe
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 292887
-    prefix: '2205748'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5bd92219-20d8-4d85-b093-84e09255fff5
-    country_id: *gm
-    network_id: *gm_fixed
-  - id: 302702
-    prefix: '2208'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5c886621-43bb-49bd-b840-50743c65dbe8
-    country_id: *gm
-    network_id: *gm_fixed
 # Country code Prefixes
-  - id: 290786
+  - id: 238978
     prefix: '220'
     number_min_length: 4
     number_max_length: 100
-    uuid: cece7728-d3a6-4e42-9ae7-e983e36318f8
+    uuid: 082bd6bf-b5a8-44de-a705-1f0b6921b353
     country_id: *gm
     network_id: null
+# Supplementary services Prefixes
+  - id: 239377
+    prefix: '2201'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: c266e124-a4f7-4c7a-9d88-fc0617d428fc
+    country_id: *gm
+    network_id: *gm_special_services
+  - id: 239488
+    prefix: '22010'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 2d816335-719b-4adb-a4ee-e57bc8dfb438
+    country_id: *gm
+    network_id: *gm_special_services_toll_free
+  - id: 239543
+    prefix: '22011'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 24412dea-4e9f-42e5-85ba-c2dd739767d6
+    country_id: *gm
+    network_id: *gm_special_services_toll_free
+  - id: 239753
+    prefix: '22012'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 2bb76e8c-bcb0-407c-aa61-c8d108d259df
+    country_id: *gm
+    network_id: *gm_special_services_toll_free
+  - id: 239797
+    prefix: '22013'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 52274a33-7eaa-452a-9f2a-72152b92a885
+    country_id: *gm
+    network_id: *gm_special_services_toll_free
+  - id: 239844
+    prefix: '22014'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 02be3ada-ce7a-4879-82e6-c0e86ca0667e
+    country_id: *gm
+    network_id: *gm_special_services_toll_free
+  - id: 239882
+    prefix: '22015'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: bc325ef6-f3a2-48bc-b2b4-8efb9f0bac5a
+    country_id: *gm
+    network_id: *gm_special_services_toll_free
+  - id: 239961
+    prefix: '22016'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 7c7cff80-19c7-446a-9a77-f971d34c3e60
+    country_id: *gm
+    network_id: *gm_special_services_standard_rate
+  - id: 263342
+    prefix: '22017'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e548a17c-2c52-424d-928b-cc38e6ebf1b2
+    country_id: *gm
+    network_id: *gm_special_services_shared_rate
+  - id: 244178
+    prefix: '22018'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 1fa4771d-7cfa-434b-a8a8-15e899b28be8
+    country_id: *gm
+    network_id: *gm_special_services_premium_rate
+# Fixed Prefixes
+  - id: 241162
+    prefix: '22042'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 167bb02d-2d7a-4eeb-9405-8a6d35736ff6
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241262
+    prefix: '22043'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 780175c3-0050-4ea9-97d4-9424a81de567
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241416
+    prefix: '22044'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 315c55ba-b953-4a29-9902-fd9d1c5c6f4a
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241435
+    prefix: '2204410'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 872d61c5-b21a-4c6c-989b-96cde21e0700
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241439
+    prefix: '2204412'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1fe32729-c52d-45da-a83d-4fe612fd61e5
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241442
+    prefix: '2204414'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: af7ea60b-8f59-433d-aff1-7f59a9829ee1
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241445
+    prefix: '2204416'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9e0d60e1-e5dc-41e2-ba20-1229a57aa289
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241447
+    prefix: '2204417'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ed083e9f-6779-4304-8028-8620b52bc50a
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241450
+    prefix: '2204419'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 199df5b4-8b83-4613-863f-2df1c0e11a59
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241451
+    prefix: '22044195'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cd0b67c8-14b4-4ef7-b05d-77429b018c48
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241512
+    prefix: '220446'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 681ed4ec-6572-4c04-b368-11b19de8308d
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241523
+    prefix: '220447'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 15c47363-352b-464f-8f94-aa83715cb1d7
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241538
+    prefix: '220448'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ef28b004-765f-4b54-a396-241726bada3a
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241541
+    prefix: '2204480'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 525bed15-2feb-4191-b30e-2d07c36a1c3d
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241543
+    prefix: '2204485'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eb466e8b-0687-44df-97c7-bcaa7ea20ef7
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241544
+    prefix: '2204486'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c0fcec07-50dd-45a8-bd2f-407020a8cb32
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241546
+    prefix: '2204487'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8f328398-dfed-4d5f-bec0-6c04048b50a2
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241547
+    prefix: '2204488'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 32f1c738-7373-4bca-a516-7df3798c29ec
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241548
+    prefix: '2204489'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 472988f4-536b-49af-8791-cd1a17f3c8e2
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 241549
+    prefix: '220449'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1f4322b-b863-432c-9c96-cdfbd99e1c1a
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 246984
+    prefix: '22055'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c7805790-e348-47c5-9ed2-dada4cfd6c3c
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247012
+    prefix: '220553'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: faf0d357-6367-4aa7-9ac4-274193695698
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247017
+    prefix: '2205540'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e34fa3d4-c0c7-4e3a-b00e-59157f1761aa
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247019
+    prefix: '2205541'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 92702c33-79c1-4332-b621-36bf1efee9b9
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247021
+    prefix: '2205542'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b581d7da-2434-41d1-a093-3cb3cf3b7672
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247023
+    prefix: '2205543'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8bce82b0-37f2-4a4c-a31a-409b74a0d6ec
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247025
+    prefix: '2205544'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fa972a17-aa80-4cdd-bacd-d39c8fa62433
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247027
+    prefix: '2205545'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98fc4c84-77b9-4e93-983e-9f25b12588ad
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247029
+    prefix: '2205546'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 90edc938-c588-4933-a2e5-c95d1cec47d1
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247031
+    prefix: '2205547'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca0e4425-4688-4f58-b45b-17018d57f3fc
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247066
+    prefix: '22056'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6dcc4bd3-3595-44d4-9289-4679361c01c4
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247083
+    prefix: '220566'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fc26d703-0358-4b46-a3ef-fa18894f772a
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247086
+    prefix: '2205665'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1717299f-e912-4277-a121-c17627845384
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247087
+    prefix: '2205666'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 099d2d2c-7e05-4f51-ac2e-bc9b74003807
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247088
+    prefix: '220567'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 94759976-4900-442a-bf54-d22d358ce049
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247089
+    prefix: '2205674'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6001311f-1a83-41fa-b93b-c1f52b6bc4f7
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247090
+    prefix: '2205676'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bc62d477-9310-4e26-83da-05432749d78f
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247091
+    prefix: '2205678'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac7eff45-73a2-48e4-9e45-8c552f2546d9
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247106
+    prefix: '22057'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a71f0598-504b-49e7-ab6c-8c7cc9a782ce
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247130
+    prefix: '2205710'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 41b39372-82f3-4b79-9806-6a6ac03c2272
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247136
+    prefix: '2205714'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e58474f7-6de0-4439-a4bf-6acc7c1d0986
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247143
+    prefix: '2205720'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 76fc7baa-6c82-4396-8c02-02c68b3fe045
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247144
+    prefix: '2205723'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f7f26b61-7d2d-4daa-a2f9-ef901349b861
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247145
+    prefix: '2205725'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bbe6960f-5b5d-4c42-af81-8d66197eb907
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247152
+    prefix: '2205735'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8acdd3d5-99de-4b83-b4c4-10dbe52545b7
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247155
+    prefix: '2205738'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dd4f4305-ee09-494b-bb60-7be9640e11e8
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 247165
+    prefix: '2205748'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 75715132-c1f2-4fd2-905e-a9e7edb61cbe
+    country_id: *gm
+    network_id: *gm_fixed
+  - id: 249922
+    prefix: '2208'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: becc2f79-3583-4ac8-8e61-7202b3bb6b0c
+    country_id: *gm
+    network_id: *gm_fixed
+# Mobile Prefixes
+  - id: 242085
+    prefix: '22058'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f581bc31-2f70-4e01-9cbb-d4669f153d46
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 242181
+    prefix: '22059'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d3bdfd4f-e1ac-40bd-88a0-da741d19e8bb
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 242316
+    prefix: '2206'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8d3ea163-0432-43f9-baac-f9d372f41304
+    country_id: *gm
+    network_id: *gm_comium_mobile
+  - id: 244309
+    prefix: '2202'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 048dac3d-5f0c-4c93-b91f-434671bb92c0
+    country_id: *gm
+    network_id: *gm_africell_mobile
+  - id: 245792
+    prefix: '2203'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0d503e2b-df9c-4839-92f4-de17bcf60dac
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 246509
+    prefix: '22050'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0f7e1bb1-e904-4ec0-9318-39d54edada0b
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 246582
+    prefix: '22051'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6cb96624-7af9-467a-a8bb-04c405020239
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 246645
+    prefix: '22052'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f1c9c2f6-164f-46c7-a191-d74f9d6314a3
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 246803
+    prefix: '22053'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e1bc104-d5b6-47fd-9b4a-807b1c648f4e
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 252091
+    prefix: '2207'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f06c88ee-37e8-49f1-8112-46c3cd5b82b5
+    country_id: *gm
+    network_id: *gm_africell_mobile
+  - id: 253931
+    prefix: '2209'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 52a610e4-096a-4852-8f66-c46ae2057ab5
+    country_id: *gm
+    network_id: *gm_gamcel_mobile

@@ -1,545 +1,545 @@
 country_id: &ne 155
 networks:
 # Supplementary services Networks
-  - id: &ne_emergency_services_medical 7443
-    name: NE Emergency Services Medical
-    uuid: c5d5ba54-5ce4-40ad-a8df-fe8d3ce09500
-    type_id: 14
-  - id: &ne_emergency_services_police 7504
-    name: NE Emergency Services Police
-    uuid: ccec9e03-f814-4599-befc-7d2ddc1bc63d
-    type_id: 14
-  - id: &ne_emergency_services_fire 7535
-    name: NE Emergency Services Fire
-    uuid: 0d525060-9e94-4d2b-bf18-09b2754811b3
-    type_id: 14
-  - id: &ne_special_services 7654
-    name: NE Special Services
-    uuid: cde5837c-7548-417b-916e-334e44667535
-    type_id: 14
-  - id: &ne_routing 8159
+  - id: &ne_routing 3753
     name: NE Routing
-    uuid: 9487b22c-0bde-4bef-bbb5-ca388793ca3e
+    uuid: 53b89ce5-3047-45fd-afcd-4cc09d599925
     type_id: 14
-  - id: &ne_value_added_services 8202
+  - id: &ne_special_services 3792
+    name: NE Special Services
+    uuid: 1ac0c20d-c837-4e51-9536-dc77535eea77
+    type_id: 14
+  - id: &ne_value_added_services 3804
     name: NE Value Added Services
-    uuid: 49e7305c-571f-43de-8341-8818bdbacba0
+    uuid: dc2d7c84-630d-4892-b25e-14e6ddd54088
     type_id: 14
-  - id: &ne_mail_and_web_services 8205
+  - id: &ne_mail_and_web_services 3807
     name: NE Mail And Web Services
-    uuid: 0378aea8-55e0-4bb9-9b77-1a7f11426c40
+    uuid: bc29673d-1a21-4c50-b73c-b76fe25a6d2e
     type_id: 14
-  - id: &ne_voice_server 8206
+  - id: &ne_voice_server 3808
     name: NE Voice Server
-    uuid: 5af37418-968e-43b8-affc-3725abfb62fa
+    uuid: 094d2bba-64b2-4b5b-98a6-c0769c064362
+    type_id: 14
+  - id: &ne_emergency_services_fire 4117
+    name: NE Emergency Services Fire
+    uuid: 2dd90545-dfac-4ad8-a1ca-a0b020c924cb
+    type_id: 14
+  - id: &ne_emergency_services_medical 4214
+    name: NE Emergency Services Medical
+    uuid: 8e2db7d4-2169-43cb-b3a8-87f12dc25fdf
+    type_id: 14
+  - id: &ne_emergency_services_police 4264
+    name: NE Emergency Services Police
+    uuid: 553feb34-986a-4b43-ac81-4ed1ed453e06
     type_id: 14
 # Fixed Networks
-  - id: &ne_fixed 7683
+  - id: &ne_fixed 4712
     name: NE Fixed
-    uuid: 31a69c85-64c6-45d6-b588-55a250b84fa3
+    uuid: e88a62eb-1c83-403a-b95b-1027d071d2db
     type_id: 12
 # Mobile Networks
-  - id: &ne_moov_africa_mobile 8733
+  - id: &ne_moov_africa_mobile 4996
     name: NE Moov Africa Mobile
-    uuid: fc437bb5-5fe7-4fb9-824c-b6a6b116faf5
+    uuid: 96931fd5-b795-49b8-a4c2-f4c648bebc84
     type_id: 3
-  - id: &ne_airtel_mobile 8897
-    name: NE Airtel Mobile
-    uuid: 0d06a825-755f-4567-9bf5-6af355eb4f81
-    type_id: 3
-  - id: &ne_orange_mobile 8969
+  - id: &ne_orange_mobile 5172
     name: NE Orange Mobile
-    uuid: d23d23d2-6f7e-4e0f-8443-652470135661
+    uuid: 4e288ebd-dfd2-4ab0-a47c-9be906190b74
     type_id: 3
-  - id: &ne_niger_telecoms_mobile 9059
+  - id: &ne_niger_telecoms_mobile 5305
     name: NE Niger Telecoms Mobile
-    uuid: 6b538e7f-6c2e-4f62-968d-413a94d1702d
+    uuid: 2159dcbb-dfe7-4c19-a017-1b4997419e59
+    type_id: 3
+  - id: &ne_airtel_mobile 5548
+    name: NE Airtel Mobile
+    uuid: f43c9833-8857-42d2-876d-0decf17110b2
     type_id: 3
 network_prefixes:
-# Supplementary services Prefixes
-  - id: 285646
-    prefix: '22715'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: daa8c760-117b-40af-80a2-2760da30ad97
-    country_id: *ne
-    network_id: *ne_emergency_services_medical
-  - id: 285757
-    prefix: '22717'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 6796572f-e057-4356-a35b-0d04e4332977
-    country_id: *ne
-    network_id: *ne_emergency_services_police
-  - id: 285811
-    prefix: '22718'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 400fc939-e079-4c94-85ce-15f5bb894171
-    country_id: *ne
-    network_id: *ne_emergency_services_fire
-  - id: 285953
-    prefix: '2272'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: 19ab8f86-de9a-4738-a11c-a493398adf2d
-    country_id: *ne
-    network_id: *ne_special_services
-  - id: 288205
-    prefix: '2274'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: d799e2f0-31dd-4917-93fe-ccc85e57feb4
-    country_id: *ne
-    network_id: *ne_special_services
-  - id: 289648
-    prefix: '2276'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: f69fc4a9-7421-48c0-843e-516bd2d8611c
-    country_id: *ne
-    network_id: *ne_special_services
-  - id: 290949
-    prefix: '22701'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 8e9c51d2-102a-41ca-b0af-2fb5cb80ede5
-    country_id: *ne
-    network_id: *ne_routing
-  - id: 291020
-    prefix: '22702'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: c0dc6c20-d090-429a-912f-9f4540ab3491
-    country_id: *ne
-    network_id: *ne_routing
-  - id: 291025
-    prefix: '22703'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: aaa51fd9-fe57-4ba0-a2fc-a889ef4ce88d
-    country_id: *ne
-    network_id: *ne_routing
-  - id: 291030
-    prefix: '22704'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 890d18e2-82f5-4f40-9b04-83a4ba93ff74
-    country_id: *ne
-    network_id: *ne_routing
-  - id: 291036
-    prefix: '22705'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 57dec5d4-059e-42ee-954f-b1b9571a7cef
-    country_id: *ne
-    network_id: *ne_routing
-  - id: 291064
-    prefix: '22706'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 622557a7-a3f7-4bdb-b912-88745a0c4e54
-    country_id: *ne
-    network_id: *ne_routing
-  - id: 291070
-    prefix: '22707'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: b3640ce0-0324-4c13-9844-55fea3ddda4f
-    country_id: *ne
-    network_id: *ne_routing
-  - id: 291097
-    prefix: '22708'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 97a6b254-f04a-4c07-be71-f2b10f319f8f
-    country_id: *ne
-    network_id: *ne_special_services
-  - id: 291120
-    prefix: '22709'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8ff3f05c-3e3f-441c-84ff-3c791140da0b
-    country_id: *ne
-    network_id: *ne_value_added_services
-  - id: 291123
-    prefix: '227098612'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 456d0795-5f89-44d4-a2b5-e371c3e95f87
-    country_id: *ne
-    network_id: *ne_mail_and_web_services
-  - id: 291124
-    prefix: '227098620'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e2d3f39e-9225-4d69-b142-07aa6ebf51ae
-    country_id: *ne
-    network_id: *ne_voice_server
-  - id: 291241
-    prefix: '2271'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: 752cfdf4-0b33-4ba9-92a1-6ff5acb941e4
-    country_id: *ne
-    network_id: *ne_special_services
-  - id: 291488
-    prefix: '227118'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 039ddfdb-24cb-421a-8edc-76e96f7173d1
-    country_id: *ne
-    network_id: *ne_emergency_services_fire
-# Fixed Prefixes
-  - id: 285979
-    prefix: '22720'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 88f77082-4ac4-42d6-86be-909eab1f5717
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286013
-    prefix: '2272020'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c3c87df2-6c63-4809-a95f-25736147ca52
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286035
-    prefix: '2272031'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b7cc60bc-14b2-4ad8-9332-4a319ba42ae9
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286037
-    prefix: '2272032'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 798e9aab-dc28-499d-8fb3-958330fcba00
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286039
-    prefix: '2272033'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5278544b-949d-4333-9eb8-cbe4c3ff562a
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286041
-    prefix: '2272034'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: afae677c-82ac-46d0-8f7a-5cf4f507727d
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286042
-    prefix: '2272035'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e046cc6a-587a-4936-9b6a-a37e5b46b5fc
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286044
-    prefix: '2272036'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 450b2bc4-008b-40d7-9785-eb526058c504
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286046
-    prefix: '2272037'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ff6d5ea3-a82a-44b6-a316-7611cc15c2ab
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286057
-    prefix: '2272041'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8241480-fd71-456e-9582-8d44a013e573
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286058
-    prefix: '2272044'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d9d28663-fc5d-4f72-8e58-a7da75d3d88a
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286059
-    prefix: '2272045'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 93844347-f66b-4c42-86eb-1b4e6b732da9
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286069
-    prefix: '2272051'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d516a9df-7ebe-4276-a88b-0ddef27525a0
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286071
-    prefix: '2272054'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 002444e0-e66e-477b-b464-df6b1088677f
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286076
-    prefix: '2272061'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 64545e8d-bcca-435b-beca-2bb7255306ea
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286077
-    prefix: '2272064'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: aa633220-b1fd-4697-8357-147d3d737102
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286078
-    prefix: '2272065'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6a526366-7b7e-4039-afa5-96b7987de3b0
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286079
-    prefix: '2272068'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b78b6fbe-a6ce-40a8-ad98-4bd5f13b5595
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286088
-    prefix: '2272071'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3f003ae0-410e-4945-8da3-b8bb8d7b5fdc
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286090
-    prefix: '2272072'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 17ad755d-ad22-473b-8c1b-8ba2c1d9bc4a
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286092
-    prefix: '2272073'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ea245c11-a95d-4505-82d1-233176183f0b
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286094
-    prefix: '2272074'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 75247cfe-ee0b-4c5b-953f-417a8197d4fa
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286096
-    prefix: '2272075'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ce6719d-71ca-45ea-a0a9-13ae2418040b
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286099
-    prefix: '2272077'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52dea474-22cd-4679-a589-e9cb341587d4
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286101
-    prefix: '2272078'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c82fdbdd-a9e9-4395-9c92-83e83d1e7c42
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286151
-    prefix: '22721'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8732bd6e-3532-4058-a0b7-8314ef685ff8
-    country_id: *ne
-    network_id: *ne_fixed
-  - id: 286443
-    prefix: '22723'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 730b9fc6-4f41-42f3-ad55-73f6a6fc45b0
-    country_id: *ne
-    network_id: *ne_fixed
 # Country code Prefixes
-  - id: 290847
+  - id: 239040
     prefix: '227'
     number_min_length: 4
     number_max_length: 100
-    uuid: 4c6db332-f2ba-430b-9e60-2fa61deb9285
+    uuid: a71659c2-168d-4885-a316-7cdec52f3ecc
     country_id: *ne
     network_id: null
+# Supplementary services Prefixes
+  - id: 239141
+    prefix: '22701'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 919bc2c7-c541-453e-a7e7-cde58518e91c
+    country_id: *ne
+    network_id: *ne_routing
+  - id: 239213
+    prefix: '22702'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 5c2f7a26-4558-46e9-b5de-3ddd674441b5
+    country_id: *ne
+    network_id: *ne_routing
+  - id: 239218
+    prefix: '22703'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: deef3cb8-2e59-4227-a213-360a5437a986
+    country_id: *ne
+    network_id: *ne_routing
+  - id: 239223
+    prefix: '22704'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: d33622b5-8bfb-4562-a6c7-bfe302172529
+    country_id: *ne
+    network_id: *ne_routing
+  - id: 239229
+    prefix: '22705'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 74de4eec-ddf2-43bc-a415-1f4b50d1ebee
+    country_id: *ne
+    network_id: *ne_routing
+  - id: 239257
+    prefix: '22706'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 74ba1168-aac5-4bb4-8038-4cf01b32eb63
+    country_id: *ne
+    network_id: *ne_routing
+  - id: 239263
+    prefix: '22707'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 791a5de6-da59-4129-8189-723d63a892f3
+    country_id: *ne
+    network_id: *ne_routing
+  - id: 239290
+    prefix: '22708'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: d20967bf-c645-4f1f-9394-fb6c3bc8ddb7
+    country_id: *ne
+    network_id: *ne_special_services
+  - id: 239313
+    prefix: '22709'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e77288b-70de-4705-afd5-aaf8b1f6228f
+    country_id: *ne
+    network_id: *ne_value_added_services
+  - id: 239316
+    prefix: '227098612'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 500823a4-12e6-4c79-b8db-272d517ce904
+    country_id: *ne
+    network_id: *ne_mail_and_web_services
+  - id: 239317
+    prefix: '227098620'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 99384fda-5912-4d7b-a4c4-446d0fe2d921
+    country_id: *ne
+    network_id: *ne_voice_server
+  - id: 239428
+    prefix: '2271'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: f67e81f3-222d-41ad-b2ff-1129a0ad6034
+    country_id: *ne
+    network_id: *ne_special_services
+  - id: 256225
+    prefix: '227118'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: afd75cae-5901-48ca-981b-e8ae53acbaa3
+    country_id: *ne
+    network_id: *ne_emergency_services_fire
+  - id: 239890
+    prefix: '22715'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 1f3aa4a0-e3f4-4239-9257-d8755d671b39
+    country_id: *ne
+    network_id: *ne_emergency_services_medical
+  - id: 240004
+    prefix: '22717'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 8b3bc0c0-0471-4506-9cad-c732ced8bbcc
+    country_id: *ne
+    network_id: *ne_emergency_services_police
+  - id: 240886
+    prefix: '2274'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: ea3c6f03-cb3b-4c46-9095-f5810ad1981b
+    country_id: *ne
+    network_id: *ne_special_services
+  - id: 242333
+    prefix: '2276'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: 6797422f-2cc4-4448-ac6c-3555179cfdd6
+    country_id: *ne
+    network_id: *ne_special_services
+  - id: 244184
+    prefix: '22718'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 319a862d-2503-47bd-a19c-32aab271b492
+    country_id: *ne
+    network_id: *ne_emergency_services_fire
+  - id: 244326
+    prefix: '2272'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: 3d7956f5-a913-41ee-a54d-9e0a259120df
+    country_id: *ne
+    network_id: *ne_special_services
+# Fixed Prefixes
+  - id: 244358
+    prefix: '22720'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 172e035d-e5f2-47ff-b42d-3cbe32c80934
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244394
+    prefix: '2272020'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eff1e8d0-eb26-45ce-a044-d663e00fbf3b
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244411
+    prefix: '2272031'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dbc0a1c2-2373-431d-aaf8-2788bc83f1b7
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 258198
+    prefix: '2272032'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bde63f39-002f-405c-93c3-3e65a9f9fe9e
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244414
+    prefix: '2272033'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c0d174f-4de0-4d14-8b63-820d35c64bb1
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244416
+    prefix: '2272034'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f428bea-7694-4143-a5f5-b31f02ff3a67
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244417
+    prefix: '2272035'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bd784e86-af71-48cc-86a2-48a3496594df
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244419
+    prefix: '2272036'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6b0b6427-85dd-4eaf-bba7-4878a6e50343
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244421
+    prefix: '2272037'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: edd65f20-978c-45ea-9ed4-f38680f301da
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244432
+    prefix: '2272041'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d9909906-496e-48a6-acd8-21a5503a25ea
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244433
+    prefix: '2272044'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9229f08f-4003-4bcd-8916-aef5a3f1e8f7
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244434
+    prefix: '2272045'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ccde6de-71de-4065-8b9f-d5ebba885bc5
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244444
+    prefix: '2272051'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b2468f6-d5c3-4dd4-ba09-bce0a6643544
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244446
+    prefix: '2272054'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c02ccc8d-9906-4bdb-95c5-7b8cc69116de
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244451
+    prefix: '2272061'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e47c4a80-f1e2-4191-a89b-2b06a9496413
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244452
+    prefix: '2272064'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: d876d37b-3412-4700-932f-a2296dd0ad36
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244453
+    prefix: '2272065'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b8caf329-5132-4ed9-aff8-577959d05695
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244454
+    prefix: '2272068'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cfeac327-b718-4764-ac0e-1e6c86067526
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244461
+    prefix: '2272071'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e3140e69-7cd2-4611-9907-50ddad1af44e
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244463
+    prefix: '2272072'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 221506d5-7034-4fc9-bc15-68064fd8ddbb
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244465
+    prefix: '2272073'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1772fe31-b2fd-48ae-b2d9-7a042ad7f6d8
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244467
+    prefix: '2272074'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c07c317e-79a8-44e9-9082-4aed11cf87e9
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244469
+    prefix: '2272075'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dd49532e-5695-45c7-8880-ba9f7267a072
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244472
+    prefix: '2272077'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0bba0dfb-04c3-474a-99f9-491e9e20de77
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244474
+    prefix: '2272078'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f04b46d1-7c6c-4f65-a36e-6fe05bdfef0d
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244524
+    prefix: '22721'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9b74afdc-442e-4a9a-a48b-445eb54c8a88
+    country_id: *ne
+    network_id: *ne_fixed
+  - id: 244816
+    prefix: '22723'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa2cbf74-ddd8-4b49-9ee7-9e01b17fb23e
+    country_id: *ne
+    network_id: *ne_fixed
 # Mobile Prefixes
-  - id: 294610
+  - id: 248910
     prefix: '22774'
     number_min_length: 11
     number_max_length: 11
-    uuid: e764cade-f95b-4b6a-b33f-a3571b5f9441
+    uuid: 5b0f4867-f6a0-4ac2-a94e-1428acb217e9
     country_id: *ne
     network_id: *ne_moov_africa_mobile
-  - id: 295670
-    prefix: '22788'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d9a626b0-40a9-4a32-9138-be035d5779e8
-    country_id: *ne
-    network_id: *ne_airtel_mobile
-  - id: 295832
-    prefix: '22789'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8e61a55-3241-436f-9c99-edcbae634f8f
-    country_id: *ne
-    network_id: *ne_airtel_mobile
-  - id: 295986
-    prefix: '22790'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fa1131f4-5688-4019-af8b-345efd512fdf
-    country_id: *ne
-    network_id: *ne_orange_mobile
-  - id: 296153
-    prefix: '22791'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be2bdeb1-81a4-4f24-9ee7-28b07f52e888
-    country_id: *ne
-    network_id: *ne_orange_mobile
-  - id: 296366
-    prefix: '22792'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c4763a69-70f7-4ca6-94b1-7beafb876f25
-    country_id: *ne
-    network_id: *ne_orange_mobile
-  - id: 296638
-    prefix: '22793'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a908f4cb-baf2-4df8-9662-1c2d1ee58f35
-    country_id: *ne
-    network_id: *ne_niger_telecoms_mobile
-  - id: 296905
-    prefix: '22794'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 536f4027-d9aa-44e1-bedc-2eee7e9a8710
-    country_id: *ne
-    network_id: *ne_moov_africa_mobile
-  - id: 296983
-    prefix: '22799'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 82ecf052-eae5-4747-91f1-42d48d7bed28
-    country_id: *ne
-    network_id: *ne_airtel_mobile
-  - id: 301425
-    prefix: '22770'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3df8774a-9a40-44c1-8f48-dce11e7531e4
-    country_id: *ne
-    network_id: *ne_orange_mobile
-  - id: 302753
+  - id: 249973
     prefix: '22780'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1e5f2856-aab9-4b4b-8c84-5c0d0ff1cc84
+    uuid: 5c510c08-3b95-4d3d-a51b-486aead31d22
     country_id: *ne
     network_id: *ne_orange_mobile
-  - id: 302905
+  - id: 400483
     prefix: '22781'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0a1f0cf4-3d48-4bf8-8c87-0ecbcf9d2f03
+    uuid: 9f220f43-0444-472b-b325-745a24d46bbc
     country_id: *ne
     network_id: *ne_orange_mobile
-  - id: 303056
+  - id: 250324
     prefix: '22782'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9fa4ddf8-2b44-4d1e-9374-4f5164b5df83
+    uuid: 1c475b23-37f8-4f51-86c8-29d0cd3f5108
     country_id: *ne
     network_id: *ne_orange_mobile
-  - id: 303171
+  - id: 250440
     prefix: '22783'
     number_min_length: 11
     number_max_length: 11
-    uuid: 39c3a330-9496-4ae9-a80a-f3ff9b8754ff
+    uuid: 28ed9aaa-cea3-4ba1-8363-bbecfe9e85b0
     country_id: *ne
     network_id: *ne_niger_telecoms_mobile
-  - id: 303292
+  - id: 250565
     prefix: '22784'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7c00315a-727c-4e58-8b0b-d96db59769aa
+    uuid: b27d2238-e9e7-4657-b7e7-dcd890055635
     country_id: *ne
     network_id: *ne_moov_africa_mobile
-  - id: 303422
-    prefix: '22785'
+  - id: 252138
+    prefix: '22770'
     number_min_length: 11
     number_max_length: 11
-    uuid: 06184423-939a-48b5-8844-36ea117ff7a8
+    uuid: a6d97dcf-2dde-4c94-8cd9-f1c2e3876a72
     country_id: *ne
-    network_id: *ne_moov_africa_mobile
-  - id: 303568
-    prefix: '22786'
+    network_id: *ne_orange_mobile
+  - id: 253676
+    prefix: '22788'
     number_min_length: 11
     number_max_length: 11
-    uuid: 29552d2c-eb07-4800-afa4-08b9ea66260e
-    country_id: *ne
-    network_id: *ne_airtel_mobile
-  - id: 303714
-    prefix: '22787'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b344c5b8-4e0d-489f-aaba-5c6956f6927b
+    uuid: ae1c2b10-63bd-4643-85bd-897f6326fbe3
     country_id: *ne
     network_id: *ne_airtel_mobile
-  - id: 304022
-    prefix: '22795'
+  - id: 253841
+    prefix: '22789'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4c5efcb6-4b83-4efe-9b2e-6daadbac493a
-    country_id: *ne
-    network_id: *ne_moov_africa_mobile
-  - id: 304300
-    prefix: '22796'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4a503585-3acf-43a4-a51a-7ba06562d79f
+    uuid: 96d8326a-cb6f-4d36-bd43-091a6e7bb1c0
     country_id: *ne
     network_id: *ne_airtel_mobile
-  - id: 304581
-    prefix: '22797'
+  - id: 253996
+    prefix: '22790'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7b401805-5d42-4856-a977-2da58d096ed2
+    uuid: 79cd4e6b-446c-4e68-b31a-1966a2c4a4c4
     country_id: *ne
-    network_id: *ne_airtel_mobile
-  - id: 304851
+    network_id: *ne_orange_mobile
+  - id: 254194
+    prefix: '22791'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 193de017-94bb-4e42-822a-8e0a4187da74
+    country_id: *ne
+    network_id: *ne_orange_mobile
+  - id: 254419
+    prefix: '22792'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e77f2f90-031a-4a0b-b2c4-b8b80957ae64
+    country_id: *ne
+    network_id: *ne_orange_mobile
+  - id: 254692
+    prefix: '22793'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58845817-e02d-4072-bddf-5d97ba6ccf84
+    country_id: *ne
+    network_id: *ne_niger_telecoms_mobile
+  - id: 254791
     prefix: '22798'
     number_min_length: 11
     number_max_length: 11
-    uuid: 514a63eb-9fbe-43c6-a01c-c64b8ad33f94
+    uuid: 13cf271a-ba51-48c2-a08b-2845952a0d8b
+    country_id: *ne
+    network_id: *ne_airtel_mobile
+  - id: 255015
+    prefix: '22799'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 885fae9e-7012-4f1c-a69d-5afc591bbb3b
+    country_id: *ne
+    network_id: *ne_airtel_mobile
+  - id: 260493
+    prefix: '22785'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4cc8c5b1-2c43-430f-9982-c341f50bfb73
+    country_id: *ne
+    network_id: *ne_moov_africa_mobile
+  - id: 260640
+    prefix: '22786'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e183ec12-2ac6-4a71-9370-c4a84678844f
+    country_id: *ne
+    network_id: *ne_airtel_mobile
+  - id: 260794
+    prefix: '22787'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cc871aa-f5d8-4670-91ab-bc7c708ecc6d
+    country_id: *ne
+    network_id: *ne_airtel_mobile
+  - id: 260981
+    prefix: '22794'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d06b6926-4850-42a7-bd43-8d07cb786fe1
+    country_id: *ne
+    network_id: *ne_moov_africa_mobile
+  - id: 261227
+    prefix: '22795'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7e6a49c-135e-4bb2-bdbc-ee6ba0458bfe
+    country_id: *ne
+    network_id: *ne_moov_africa_mobile
+  - id: 261505
+    prefix: '22796'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3efe7276-e216-41dc-9255-80d5f8624134
+    country_id: *ne
+    network_id: *ne_airtel_mobile
+  - id: 261786
+    prefix: '22797'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9cecc57e-b4d1-41cc-8016-c096dc7ab551
     country_id: *ne
     network_id: *ne_airtel_mobile

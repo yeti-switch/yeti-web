@@ -1,517 +1,738 @@
 country_id: &yt 137
 networks:
+# Supplementary services Networks
+  - id: &yt_freephone_services 4280
+    name: YT Freephone Services
+    uuid: 8cc94e5e-f830-479c-bec1-7d882311ef9c
+    type_id: 14
+  - id: &yt_machine_to_machine_m2m_services 5445
+    name: YT Machine To Machine M2M Services
+    uuid: b057488e-0443-4f84-a538-f0250c2c3845
+    type_id: 14
+  - id: &yt_exchange_with_a_platform_services 5827
+    name: YT Exchange With A Platform Services
+    uuid: 94bd08e7-9e49-43a6-8bf5-75c5f4e8dbf4
+    type_id: 14
 # Fixed Networks
-  - id: &yt_fixed 7761
+  - id: &yt_fixed 4761
     name: YT Fixed
-    uuid: a0ca08d9-1eb1-4552-8fc6-252bcec83caf
+    uuid: 20b5f130-438c-400a-8d83-16394abfab4e
     type_id: 12
 # Mobile Networks
-  - id: &yt_mobile 8631
+  - id: &yt_mobile 4869
     name: YT Mobile
-    uuid: 8db231e3-fca4-4d2d-ac51-373ac71b0526
+    uuid: 0be960c9-5111-4107-be15-8ed725a7b3b5
     type_id: 3
-  - id: &yt_orange_mobile 8632
+  - id: &yt_orange_mobile 4871
     name: YT Orange Mobile
-    uuid: d0af46bf-e2fb-416a-9f1f-167ce526b189
+    uuid: 18d1246e-b62c-45aa-a321-f74b6d415aba
     type_id: 3
-  - id: &yt_only_mobile 8633
+  - id: &yt_only_mobile 4872
     name: YT Only Mobile
-    uuid: 5da9ee4b-b6e6-4f57-9db9-2519ef2a66cf
+    uuid: 0e871901-72ef-408b-980d-433ff8f19c3b
     type_id: 3
-  - id: &yt_sfr_mayotte_mobile 8634
+  - id: &yt_sfr_mayotte_mobile 4873
     name: YT Sfr Mayotte Mobile
-    uuid: b6a7a02c-ed82-4f1d-8910-4c88f3602bba
+    uuid: f79e8674-6543-4576-a5e9-625b5fae5a74
     type_id: 3
-  - id: &yt_maore_mobile_mobile 8635
+  - id: &yt_maore_mobile_mobile 4882
     name: YT Maore Mobile Mobile
-    uuid: df4a3679-398e-4160-83be-bf24cee16ebb
+    uuid: a2e956c3-ed63-482c-bdd3-fc370feed464
     type_id: 3
-# Supplementary services Networks
-  - id: &yt_machine_to_machine_m2m_services 9006
-    name: YT Machine To Machine M2M Services
-    uuid: ef8b47ee-8fb9-4e10-a78e-0506613c8daa
-    type_id: 14
-  - id: &yt_exchange_with_a_platform_services 9069
-    name: YT Exchange With A Platform Services
-    uuid: 7dd7cab7-a8bd-435b-a2a9-bf4540e15c65
-    type_id: 14
 network_prefixes:
-# Fixed Prefixes
-  - id: 287110
-    prefix: '2620269'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5f53f682-c004-4ac5-98a9-5c8e704ed081
-    country_id: *yt
-    network_id: *yt_fixed
-# Mobile Prefixes
-  - id: 293460
-    prefix: '2620639'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3f8422b0-4ca1-4cc2-b5c3-588ac56e8b55
-    country_id: *yt
-    network_id: *yt_mobile
-  - id: 293464
-    prefix: '262063900'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2d490cb3-51ef-4e3c-861f-5c8df97ed378
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293465
-    prefix: '262063901'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 35ef4040-31f3-47da-a60d-1f55a9468706
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293466
-    prefix: '262063902'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1dc8ecf6-f15f-4049-a398-d4b424606662
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293467
-    prefix: '262063903'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ab055a99-9f51-4e7f-88f6-55917a8a114c
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293468
-    prefix: '262063904'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 469a0314-fd1b-4efc-a076-3c8407fcc9f4
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293469
-    prefix: '262063905'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 318c16f8-cdc6-4ef4-a9d1-17e24cfd2db1
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293470
-    prefix: '262063906'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7f060b68-177f-4bbf-bff4-833d11d4c122
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293471
-    prefix: '262063907'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fe1e4e66-06d8-458e-9b75-58a88bcc301b
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293472
-    prefix: '262063909'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8f3ea29e-cd13-40fa-9473-791b69cc7218
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293475
-    prefix: '262063910'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f319acee-ffe7-4883-9b19-b04c7cd80be1
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293476
-    prefix: '262063911'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 11d83944-4c5c-409f-9553-09b2e4a9aa30
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293477
-    prefix: '262063919'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bccc21e9-7c20-4d6d-a7b2-42bf501899b3
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293479
-    prefix: '262063920'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 078ebe2a-2c98-489e-a4c5-c0418eeb22ec
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293493
-    prefix: '262063921'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ef01283b-c872-40ed-b3c0-90d780648e4d
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293495
-    prefix: '262063922'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 08b63224-ef9c-4eab-b1ae-dcde1f78bdd1
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293499
-    prefix: '262063923'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9abcd97d-0ded-4ffd-8112-b0bb59538f69
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293510
-    prefix: '262063924'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 737a29b4-2577-43c3-b942-bfcb455efb38
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293512
-    prefix: '262063925'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 50d17f71-82c7-4e64-af9f-37e95c5c0c5c
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293514
-    prefix: '262063926'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 88c23287-4dd9-4302-8c77-0975562ca31f
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293516
-    prefix: '262063927'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f37d2c5c-e281-4205-bad8-550637535f4c
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293518
-    prefix: '262063928'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d9c5117a-6b6c-4591-b87b-7cd87c1b548f
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293522
-    prefix: '262063929'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d07a872b-e887-446b-bb9b-f68246e84a81
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293530
-    prefix: '262063930'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bac3870e-2ae1-4fe5-abb7-2565c9d0e350
-    country_id: *yt
-    network_id: *yt_maore_mobile_mobile
-  - id: 293531
-    prefix: '262063939'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: badb125f-1ee5-4c6f-9d96-ff9c7b298b62
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293533
-    prefix: '262063940'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cb0fd3df-2232-4d2f-becf-6cbda78890ad
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293535
-    prefix: '262063950'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6f3de858-f83d-4452-9b86-b078fadf994b
-    country_id: *yt
-    network_id: *yt_maore_mobile_mobile
-  - id: 293536
-    prefix: '262063955'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5c731bf3-a424-42fa-baec-d660d20dcfa7
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293537
-    prefix: '262063956'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5b0b6af3-d0fc-489e-b313-a79cf40715bb
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293538
-    prefix: '262063957'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 64ff9695-14fa-47a6-8e63-e93f99b7de4a
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293539
-    prefix: '262063958'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c9bcbe36-16a3-4964-8ddd-e6791bf38938
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293540
-    prefix: '262063959'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b2924357-3421-4424-8ddc-2127b0e3023f
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293543
-    prefix: '262063960'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 07806af7-6fda-48a4-b4b7-9356c623ce32
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293544
-    prefix: '262063961'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2b0f5ad1-460c-423a-9a53-d2dd098b6942
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293545
-    prefix: '262063962'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e6d2917e-e394-47c6-ae7c-7072e58cae65
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293546
-    prefix: '262063963'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7e246930-a5cb-435e-b433-fc43c330077a
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293547
-    prefix: '262063964'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d65b8765-b066-4b55-bf59-0202693118bc
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293548
-    prefix: '262063965'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3d822175-6d9d-4a5f-b531-67501b88c584
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293549
-    prefix: '262063966'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d071730b-e04d-4082-ac48-01b263557e07
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293550
-    prefix: '262063967'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ac4c49e8-1c29-4e6a-bce0-3ed82b2684b5
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293551
-    prefix: '262063968'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a6b621f3-18d6-4abe-a365-7738b3e924de
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293552
-    prefix: '262063969'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 552d118f-4004-4255-afc1-8e8735ddf05f
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
-  - id: 293554
-    prefix: '262063970'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dd1ca16f-0258-46f6-9469-f8f10045a134
-    country_id: *yt
-    network_id: *yt_maore_mobile_mobile
-  - id: 293555
-    prefix: '262063971'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8d71dbed-dff2-47c3-87fc-9c784df97419
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293556
-    prefix: '262063972'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e025cc28-6eb3-42db-a10b-85687547699e
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293557
-    prefix: '262063973'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 856ea823-284d-40ac-bfdd-f5a7a212ec42
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293558
-    prefix: '262063974'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6a5936cc-3239-43a7-af80-8308eed42459
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293559
-    prefix: '262063975'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d6237a1b-0b0b-4fea-b8f2-3f8fc9ec46a8
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293560
-    prefix: '262063976'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6d75acd0-2ad7-4ec7-b79a-280027266648
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293561
-    prefix: '262063977'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 49db34f7-27f7-49fa-99e2-45f03439ab11
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293562
-    prefix: '262063978'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9f9109be-13f9-4d4b-bf7e-c2ec185d8784
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293563
-    prefix: '262063979'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 80651101-e067-44a7-85fe-d7611ac88cc4
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 293566
-    prefix: '262063990'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 29c9818e-b27e-4144-8373-54c3351080b0
-    country_id: *yt
-    network_id: *yt_maore_mobile_mobile
-  - id: 293567
-    prefix: '262063994'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2fd2db3a-3a0a-4b7d-86db-6d91e2597839
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293568
-    prefix: '262063995'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6c053171-009b-4d4f-aa9d-4d851d67c6f4
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293569
-    prefix: '262063996'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e26412f0-6df7-4107-b496-7f3231acf809
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293570
-    prefix: '262063997'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 61b4630f-7865-4bc8-9adc-0549d2420828
-    country_id: *yt
-    network_id: *yt_only_mobile
-  - id: 293571
-    prefix: '262063999'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fd1f92a5-af04-41a9-beb8-f254f39c76b6
-    country_id: *yt
-    network_id: *yt_orange_mobile
-  - id: 294262
-    prefix: '262070935'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 07a8b281-b212-4978-a99d-db96671799b4
-    country_id: *yt
-    network_id: *yt_mobile
-  - id: 294263
-    prefix: '262070936'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 82291c23-03ed-4425-9710-49d6b404ee8f
-    country_id: *yt
-    network_id: *yt_mobile
-  - id: 294264
-    prefix: '262070937'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f3cfca94-da59-4bb8-b539-6d5747dbc918
-    country_id: *yt
-    network_id: *yt_mobile
-  - id: 294265
-    prefix: '262070938'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 95bf0935-27a3-42a5-b8b6-941931811e66
-    country_id: *yt
-    network_id: *yt_mobile
-  - id: 294266
-    prefix: '262070939'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1be1f8dc-3b54-49aa-8c18-45a9188faf61
-    country_id: *yt
-    network_id: *yt_mobile
-  - id: 301501
-    prefix: '2620700800'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: d2ffbb6f-ff68-4dfe-ac21-95a35a952b88
-    country_id: *yt
-    network_id: *yt_sfr_mayotte_mobile
 # Supplementary services Prefixes
-  - id: 296051
-    prefix: '26209018'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 5a0d9773-6600-408c-854d-a0289dc42408
+  - id: 240030
+    prefix: '2620301'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 87e91a14-c885-4450-b8a6-bd9efdad33ec
     country_id: *yt
-    network_id: *yt_machine_to_machine_m2m_services
-  - id: 296892
-    prefix: '26209398'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1ead4f93-3365-45e1-ade9-f714c87db1e6
+    network_id: *yt_freephone_services
+  - id: 240048
+    prefix: '2620302'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e0e62875-7fef-40d4-89f0-634229e0a537
     country_id: *yt
-    network_id: *yt_exchange_with_a_platform_services
-  - id: 301500
+    network_id: *yt_freephone_services
+  - id: 240057
+    prefix: '2620303'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e9d165b1-6f22-4438-956b-c65b68f9429b
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240084
+    prefix: '2620304'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 6399e021-5958-44cc-a20c-f82a45b0a1ed
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240096
+    prefix: '2620305'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: eaafbe91-dec4-4a4b-a5ff-e8179207cf8e
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240106
+    prefix: '2620306'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: de37d5b7-e4fa-43c9-b390-81a18058d6be
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240119
+    prefix: '2620307'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 7dbf0929-acbe-404d-a4dc-b5b2ac085fa6
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240128
+    prefix: '2620308'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 051d20bf-dd0d-46d9-94aa-1050a1e8915c
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240150
+    prefix: '2620309'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 5fa3f8e9-5720-45e2-986d-341922bbfa8e
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240184
+    prefix: '2620310'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: eb16fdbe-5f63-4e1f-b2cc-2f1f19ae89d5
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240195
+    prefix: '2620311'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 141c7f2c-3067-40fd-af46-f345d8aab4ed
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240205
+    prefix: '2620312'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 652aeaa7-b5c4-4a61-9d46-1b16a8af52f1
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240213
+    prefix: '2620313'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 103ab32e-3782-4389-a8f0-6fa369555d56
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240240
+    prefix: '2620314'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 1df01850-5aec-451f-ab4f-49cfa8430a72
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240249
+    prefix: '2620315'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 26e0691b-c74f-4641-a2b8-84b2b8ec9281
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240257
+    prefix: '2620316'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: fba98ac8-5ba2-4c8a-a21b-c2cbe75ae903
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240267
+    prefix: '2620318'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 7760788e-78c8-4631-a2b5-4c33aa815511
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 240282
+    prefix: '2620319'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 64ed6e8d-cff1-46dc-80ab-1411aa6c439e
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245846
+    prefix: '26203000'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 9cdc2da1-27a9-4199-a844-267c11c81823
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245860
+    prefix: '26203001'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 329dca17-87b0-4ca4-aa07-8b767da41573
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245868
+    prefix: '26203002'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 898bd2e3-3b91-4fa1-ba86-38151f49bc7c
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245875
+    prefix: '26203003'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 9b4b9cbb-ec2e-4466-8e61-c378d99c4763
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245882
+    prefix: '26203004'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 1462b354-3fd4-4cf2-b08e-0ae7bfb23f58
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245889
+    prefix: '26203005'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: de5bb07f-56ae-4213-be38-073d8feb299f
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245895
+    prefix: '26203006'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 960268a5-1e18-4da0-ac20-73f23a7038b3
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245902
+    prefix: '26203007'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 938fffb2-a02d-4f71-837b-176393ec719b
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 245908
+    prefix: '26203009'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: f4a38278-c813-411d-9637-552214104433
+    country_id: *yt
+    network_id: *yt_freephone_services
+  - id: 252215
     prefix: '26207008'
     number_min_length: 15
     number_max_length: 15
-    uuid: e895d1bb-f894-4ef5-9c7d-0d7ff76fc049
+    uuid: 9dd0cfb4-68b4-4390-a101-e5f044373239
     country_id: *yt
     network_id: *yt_machine_to_machine_m2m_services
+  - id: 254061
+    prefix: '26209018'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b0fe04c2-58db-46e2-8fe5-8dca9aea4f10
+    country_id: *yt
+    network_id: *yt_machine_to_machine_m2m_services
+  - id: 260966
+    prefix: '26209398'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c4f04dcc-a096-4aed-8ca0-5bb99fb4ff95
+    country_id: *yt
+    network_id: *yt_exchange_with_a_platform_services
+# Fixed Prefixes
+  - id: 245482
+    prefix: '2620269'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8881184f-7b9f-483c-a99b-b2620532cfb4
+    country_id: *yt
+    network_id: *yt_fixed
+  - id: 261140
+    prefix: '26209478'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5b5ec2c6-2e8b-4b39-8914-16509d1bc382
+    country_id: *yt
+    network_id: *yt_fixed
+  - id: 261966
+    prefix: '26209769'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4ecd3d74-61a6-4e1b-8150-85bb5be95460
+    country_id: *yt
+    network_id: *yt_fixed
+# Mobile Prefixes
+  - id: 247751
+    prefix: '2620639'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3fa716fa-d859-49a2-8777-af6fee692295
+    country_id: *yt
+    network_id: *yt_mobile
+  - id: 247755
+    prefix: '262063900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 02c1e678-3083-44bd-a34e-4943d1371c6d
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247756
+    prefix: '262063901'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 941e0eac-d3aa-47de-aa9e-e05a8e39d071
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247757
+    prefix: '262063902'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 37ce19f2-5c03-4c95-a8cc-f3f36991d548
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247758
+    prefix: '262063903'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ab4a0ddc-e90c-4e22-a97b-b84a4a49c63f
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247759
+    prefix: '262063904'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f6080cf7-d67a-40f1-9c88-9614be230a78
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247760
+    prefix: '262063905'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 66b20e69-8aa8-4f72-8e44-58042f6ed001
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247761
+    prefix: '262063906'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 13ec36d9-a6a3-4d52-8eb7-44544fd8f804
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247762
+    prefix: '262063907'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a2a0bfcd-cb02-46e2-93fe-bc324a0e2f81
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247763
+    prefix: '262063909'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6bf143f3-e2c5-4ce2-be89-5b096647c2ea
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247766
+    prefix: '262063910'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 42ed8d6d-7dc2-42d0-aa09-69d068d0d32c
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247767
+    prefix: '262063911'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8f21ce88-b704-443c-a2d2-6da04d75a223
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247768
+    prefix: '262063919'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 032a87b5-3d29-4a04-9efc-00e766cb69cb
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247770
+    prefix: '262063920'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: df482f88-a94f-472c-8dee-7ebfa1d0f850
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247784
+    prefix: '262063921'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c324aaa4-17f4-476a-85d6-1fa24a7a1ce0
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247786
+    prefix: '262063922'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9a37095e-9a8a-4f81-88cb-6e4eacdb6146
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247790
+    prefix: '262063923'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b4c93442-e688-4e85-8ad7-926ba8e5ae6b
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247801
+    prefix: '262063924'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9ae80261-40ac-4c53-9a86-bdf7cb7aa39d
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247803
+    prefix: '262063925'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a2109f0-2a00-4617-b09d-258c231d9c2d
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247805
+    prefix: '262063926'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f99bf5c9-6cbf-4b1b-9e9d-39ae1cbf939b
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247807
+    prefix: '262063927'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4469c2ab-800d-4401-9065-46ab719c0839
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247809
+    prefix: '262063928'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9e8a275e-be3e-47b6-b322-36bb92ec4c00
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247813
+    prefix: '262063929'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b1c7e802-d779-4364-9fe7-e481b83caf8e
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247821
+    prefix: '262063930'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 503270e4-5d38-42e3-95b8-75e2113feb85
+    country_id: *yt
+    network_id: *yt_maore_mobile_mobile
+  - id: 247822
+    prefix: '262063939'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a67ead4c-bbf6-45de-acb2-79c06cbbb8c2
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247824
+    prefix: '262063940'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2c97137a-fbcd-43a8-be7c-eb86b73c90ec
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247826
+    prefix: '262063950'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d8ea8fe5-c40c-4eb8-be6f-2fe77691413e
+    country_id: *yt
+    network_id: *yt_maore_mobile_mobile
+  - id: 247827
+    prefix: '262063955'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 65401335-e685-4996-9383-bfcad3b62a98
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247828
+    prefix: '262063956'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2beab25b-5c3a-41c7-9c85-9912722ad592
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247829
+    prefix: '262063957'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 88d8da32-ad93-4a72-bdc5-2a02ee6df5d6
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247830
+    prefix: '262063958'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 94130296-6085-4e4f-883f-5d773aef3362
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247831
+    prefix: '262063959'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9618d1cf-2976-4b64-a3d9-d68da3ed6373
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247834
+    prefix: '262063960'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d8801b1a-bd61-46a0-93f1-6b542ddff3de
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247835
+    prefix: '262063961'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5255e650-109f-4392-a21d-8c469eceb69b
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247836
+    prefix: '262063962'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4a512577-1f81-47f1-8269-94e99d757edb
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247837
+    prefix: '262063963'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9677d8c6-78e5-4a0f-90c3-82977b13c2de
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247838
+    prefix: '262063964'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c5f29da0-cded-4b43-98e9-2d11e492529e
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247839
+    prefix: '262063965'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2c82c99f-72eb-4473-9636-fff6cd98e434
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247840
+    prefix: '262063966'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: da2d1bd9-0f45-49c1-b885-f09d9f975852
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247841
+    prefix: '262063967'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c78c9b19-3ea2-44fb-82b7-97e75f3447a9
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247842
+    prefix: '262063968'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0ff110e0-6b06-44f9-8e82-64a3fbb83ce5
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247843
+    prefix: '262063969'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1ff0437b-f061-4ec5-8c99-609d12cd3047
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 247845
+    prefix: '262063970'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ffdf0f6b-737d-490f-989e-52b57a066999
+    country_id: *yt
+    network_id: *yt_maore_mobile_mobile
+  - id: 247846
+    prefix: '262063971'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4be9c1c3-c806-402d-9a08-b8c6a3a6860c
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247847
+    prefix: '262063972'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6f64397b-9d78-4432-93d8-89dfde097cc5
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247848
+    prefix: '262063973'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f38afd9e-c06e-495c-84fe-7400016af440
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247849
+    prefix: '262063974'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1006311f-1ed5-4950-b9fc-51f8701f36b3
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247850
+    prefix: '262063975'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ae3d14e3-8730-47e4-ace7-08b967aac957
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247851
+    prefix: '262063976'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cd2ed873-b32f-4fb1-9d8b-287f6852abdb
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247852
+    prefix: '262063977'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 84ebb6ee-a94d-4f7c-a66d-a30bccb74372
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247853
+    prefix: '262063978'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0d71fa73-ff40-4f87-8a07-0c06ed1525b3
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247854
+    prefix: '262063979'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8d420bb5-79b0-441a-81ab-586b7f8ad31c
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 247857
+    prefix: '262063990'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 16872941-41cb-47fe-8a6c-a78d0c86559d
+    country_id: *yt
+    network_id: *yt_maore_mobile_mobile
+  - id: 247858
+    prefix: '262063994'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c3d2abcf-c177-43d8-8ab9-1c25606cfa5e
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247859
+    prefix: '262063995'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f8d9c9b-b181-49a2-a6a6-e6584a4c3c44
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247860
+    prefix: '262063996'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4ff2ceca-550a-4f8d-953d-f73269bea43f
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247861
+    prefix: '262063997'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c203664b-eea1-4eed-aa57-15ca51e2a7e3
+    country_id: *yt
+    network_id: *yt_only_mobile
+  - id: 247862
+    prefix: '262063999'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 303a9675-715a-4f70-b3b3-ace83b22fadc
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 248562
+    prefix: '262070935'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bd8006a2-1234-443e-ab94-4581444376f6
+    country_id: *yt
+    network_id: *yt_mobile
+  - id: 248563
+    prefix: '262070936'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eeb51ac9-443e-4140-a07c-fcca1f01defc
+    country_id: *yt
+    network_id: *yt_mobile
+  - id: 248564
+    prefix: '262070937'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 54d959b7-d254-49c7-a815-1dd258283bbc
+    country_id: *yt
+    network_id: *yt_mobile
+  - id: 248565
+    prefix: '262070938'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e554e4b6-474b-4941-8880-2e3fad973156
+    country_id: *yt
+    network_id: *yt_mobile
+  - id: 248566
+    prefix: '262070939'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 505392ab-21cf-423a-90d9-87d3275f87c9
+    country_id: *yt
+    network_id: *yt_mobile
+  - id: 252216
+    prefix: '2620700800'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 02f54c55-fa43-4c5f-86bd-d89a8fc4e8fd
+    country_id: *yt
+    network_id: *yt_sfr_mayotte_mobile
+  - id: 252217
+    prefix: '2620700801'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 4f883949-de69-495a-83c8-d43375837bd6
+    country_id: *yt
+    network_id: *yt_orange_mobile
+  - id: 252218
+    prefix: '2620700808'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 0c21c204-671a-44fe-b4be-4de6d1501348
+    country_id: *yt
+    network_id: *yt_only_mobile
