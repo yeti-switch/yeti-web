@@ -1,625 +1,625 @@
 country_id: &ky 40
 networks:
 # Fixed Networks
-  - id: &ky_fixed 2969
+  - id: &ky_fixed 6898
     name: KY Fixed
-    uuid: 131bfd78-8ddb-41a3-abab-2324a8444c27
+    uuid: bdb03f15-c16c-4d6f-9ecc-3ee568b32004
     type_id: 12
 # Supplementary services Networks
-  - id: &ky_internet_access 2970
+  - id: &ky_internet_access 6899
     name: KY Internet Access
-    uuid: fc412a2e-d033-43d6-9e64-dfadd9690f43
+    uuid: a94806c4-d147-43c0-baa6-0b45b4fef7b2
     type_id: 14
-  - id: &ky_premium_rate_services 2975
+  - id: &ky_premium_rate_services 6904
     name: KY Premium Rate Services
-    uuid: 1d59c33b-5fe9-45b6-98e0-700812423c51
+    uuid: e5194e8f-0da0-4aa1-b0ad-8d3841339fc9
     type_id: 14
-  - id: &ky_national_stop_line_allocation 2976
+  - id: &ky_national_stop_line_allocation 6905
     name: KY National Stop Line Allocation
-    uuid: f4294e27-1f42-4af1-957a-07530a7c6aad
+    uuid: 0ffd3890-db2c-4b37-a922-626a05f160ab
     type_id: 14
 # Mobile Networks
-  - id: &ky_digicel_mobile 2971
+  - id: &ky_digicel_mobile 6900
     name: KY Digicel Mobile
-    uuid: 62b13678-f991-4191-8560-7bb3345c5fab
+    uuid: 0ef01518-0f99-4cb0-a77f-0a80f7cef82b
     type_id: 3
-  - id: &ky_logic_mobile 2972
+  - id: &ky_logic_mobile 6901
     name: KY Logic Mobile
-    uuid: fed7f6e7-911f-4566-a7a7-d730d9214646
+    uuid: 7b5991d3-75bd-4469-ae4f-32ace029c649
     type_id: 3
-  - id: &ky_flow_mobile 2973
+  - id: &ky_flow_mobile 6902
     name: KY Flow Mobile
-    uuid: 9af5b9cd-c765-4b47-bb42-847f89923969
+    uuid: dcd91e3a-8a29-41aa-a290-4f69dfea1e3d
     type_id: 3
 # Paging Networks
-  - id: &ky_flow_paging 2974
+  - id: &ky_flow_paging 6903
     name: KY Flow Paging
-    uuid: 263da277-7c9e-4e99-98cd-212a280cc586
+    uuid: 47fe4812-73b4-4c79-8201-9e87d8b620dd
     type_id: 13
 network_prefixes:
 # Country code Prefixes
-  - id: 114960
+  - id: 114946
     prefix: '1345'
     number_min_length: 2
     number_max_length: 100
-    uuid: cfab59f1-9a16-4068-84cb-88a30072d357
+    uuid: 8966f37e-daea-4b9d-a94b-085a7922bdf8
     country_id: *ky
     network_id: null
 # Fixed Prefixes
-  - id: 115003
+  - id: 114987
     prefix: '1345222'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ef43ef5-ccc3-47a5-ba72-cf9405a79cbf
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 114988
+    prefix: '1345232'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9aed90d0-d244-4acb-ba8b-bb5df7cb1a60
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 114989
+    prefix: '1345233'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e2364a3-793c-4013-ad70-a9300a799610
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 114990
+    prefix: '1345244'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9092f53e-202c-459c-aa7e-3a95a26516eb
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115003
+    prefix: '1345333'
     number_min_length: 11
     number_max_length: 11
     uuid: 54c4ac7e-6bdb-477f-8b2e-0e9abaf564f1
     country_id: *ky
     network_id: *ky_fixed
-  - id: 115004
-    prefix: '1345232'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e45a3b0-1f22-481d-bb6d-583db1ca9f25
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115005
-    prefix: '1345233'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f042520-cbdf-4bce-98e0-9b99a80a35a3
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115006
-    prefix: '1345244'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1727649c-e10b-4f3b-9bff-26bf91f2cefc
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115019
-    prefix: '1345333'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a443c996-c326-4838-830f-7f1c64078dab
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115031
+  - id: 115015
     prefix: '1345444'
     number_min_length: 11
     number_max_length: 11
-    uuid: 305e3951-49ae-4b2b-a6d0-ec6c509d3997
+    uuid: 74da3b9f-65a4-4536-9c53-8b084cda215d
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115036
+    prefix: '1345623'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 71364d6b-fb56-4a6c-9a4a-24cf99e217bc
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115037
+    prefix: '1345638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1d6abd79-506e-46b6-ac54-ef9fdaec33a3
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115040
+    prefix: '1345640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 03c473a6-b11a-418e-8cba-ff8a22ac2e11
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115041
+    prefix: '1345649'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d15dafbb-615c-4244-bfbe-2efa08b28c34
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115042
+    prefix: '1345730'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc144c1b-91fc-44da-b20a-91ef1db6783a
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115043
+    prefix: '1345743'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8540489-314d-4f9b-a5f2-5d1855d22155
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115044
+    prefix: '1345745'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b8a94715-943e-4d7f-af49-3144d2e5f00c
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115045
+    prefix: '1345746'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9cbaa2a7-b5a5-44d2-ad3d-d00692956f22
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115046
+    prefix: '1345747'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7543054-a22a-431e-a3b3-1f9b3896d583
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115047
+    prefix: '1345749'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ceab547d-cb2f-45ca-90c6-2785e67cdaf6
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115048
+    prefix: '1345766'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fd4cd09f-859a-442b-9fae-f4687e4fe682
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115049
+    prefix: '1345768'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d619701a-4b23-4af2-bf2a-2be18123396b
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115050
+    prefix: '1345769'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 61f09aca-e824-40dc-891f-a7f6aa4115ee
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 115051
+    prefix: '1345777'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0bec4812-a67a-4ecb-befd-8085ad4e1281
     country_id: *ky
     network_id: *ky_fixed
   - id: 115052
-    prefix: '1345623'
+    prefix: '1345800'
     number_min_length: 11
     number_max_length: 11
     uuid: 21bea3d9-b1ef-4b58-abe5-ad920b67eb7e
     country_id: *ky
     network_id: *ky_fixed
   - id: 115053
-    prefix: '1345638'
+    prefix: '1345814'
     number_min_length: 11
     number_max_length: 11
     uuid: 663c4995-a765-4233-b61f-0f29dcb21059
     country_id: *ky
     network_id: *ky_fixed
-  - id: 115056
-    prefix: '1345640'
+  - id: 115054
+    prefix: '1345815'
     number_min_length: 11
     number_max_length: 11
-    uuid: 07945e2c-cd0e-4c5e-8398-26f9757f3456
+    uuid: 4d9813d2-3003-4dc0-8014-0f954902b92d
     country_id: *ky
     network_id: *ky_fixed
   - id: 115057
-    prefix: '1345649'
+    prefix: '1345848'
     number_min_length: 11
     number_max_length: 11
     uuid: 19bc8d6c-acde-49b6-be20-d2f7f57179c0
     country_id: *ky
     network_id: *ky_fixed
   - id: 115058
-    prefix: '1345730'
+    prefix: '1345849'
     number_min_length: 11
     number_max_length: 11
     uuid: 85d10de2-c3ee-4eb6-a5b7-4890f9d0da41
     country_id: *ky
     network_id: *ky_fixed
   - id: 115059
-    prefix: '1345743'
+    prefix: '1345888'
     number_min_length: 11
     number_max_length: 11
     uuid: 39960b9f-44ee-4a9e-9292-095de2fd8d49
     country_id: *ky
     network_id: *ky_fixed
   - id: 115060
-    prefix: '1345745'
+    prefix: '1345914'
     number_min_length: 11
     number_max_length: 11
     uuid: e8f16c44-c9b2-448b-aaf9-b66b496c749a
     country_id: *ky
     network_id: *ky_fixed
-  - id: 115061
-    prefix: '1345746'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7ceb2703-91c6-4072-9519-cd0d3d624d51
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115062
-    prefix: '1345747'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7d2deeab-5df9-4fe1-806b-76e86111d791
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115063
-    prefix: '1345749'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3f19a834-f0f8-4e30-a39e-964b513d745a
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115064
-    prefix: '1345766'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8d099f03-779b-43dd-bd31-7bfc7361f1c4
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115065
-    prefix: '1345768'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c89d91d0-f8b7-4d20-ba1b-6958d26d3f42
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115066
-    prefix: '1345769'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c7d75589-a172-40ac-b36b-2002fe574acc
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115067
-    prefix: '1345777'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e32ef2e0-84e8-46f5-9892-f53217f977e3
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115068
-    prefix: '1345800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c71b7c9f-7e8f-4056-9c8b-8bbee4d73e30
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115069
-    prefix: '1345814'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c0339c19-5eb5-4e10-bf9e-17d752297f15
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115070
-    prefix: '1345815'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 62e4c977-07a2-4705-b680-5d482bc3f840
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115073
-    prefix: '1345848'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 44b565ee-2365-4b74-8ad6-1b6fc63198cd
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115074
-    prefix: '1345849'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aea7a5ca-08be-4c27-9abe-722bbbbd7a84
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115075
-    prefix: '1345888'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba44655f-3939-4db9-8fac-779061d19cac
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115076
-    prefix: '1345914'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2154173d-6955-496f-8545-89b349efcc0d
-    country_id: *ky
-    network_id: *ky_fixed
-  - id: 115093
+  - id: 115077
     prefix: '1345940'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1a19aeab-b927-418c-a036-92b7752013df
+    uuid: da541df3-55aa-4096-bc90-0c9c5c0868d5
     country_id: *ky
     network_id: *ky_fixed
-  - id: 115094
+  - id: 115078
     prefix: '1345943'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c0dc517-7816-43bb-8f29-e28554d9ca6c
+    uuid: 07dac2b3-984d-4ce9-8089-ab0022ec9733
     country_id: *ky
     network_id: *ky_fixed
-  - id: 115095
+  - id: 115079
     prefix: '1345945'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7910f368-1804-4d75-a239-e1fb24657c80
+    uuid: 66007f16-1288-4ec3-a1ef-9f05af52edbc
     country_id: *ky
     network_id: *ky_fixed
-  - id: 115096
+  - id: 115080
     prefix: '1345946'
     number_min_length: 11
     number_max_length: 11
-    uuid: 48d07eb7-e1b7-4758-8442-242495d495d1
+    uuid: 187bbd09-3180-4d94-b491-cc26bc5e4eb9
     country_id: *ky
     network_id: *ky_fixed
-  - id: 115097
+  - id: 115081
     prefix: '1345947'
     number_min_length: 11
     number_max_length: 11
-    uuid: 476278b5-8822-4c1f-838f-341b52bcae7d
+    uuid: d442f01c-0224-409c-89d0-fdd5ac409f7d
     country_id: *ky
     network_id: *ky_fixed
-  - id: 115099
+  - id: 115083
     prefix: '1345949'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8fcef6ed-275d-4fb6-99a0-db9f18d6b375
+    uuid: 0b346ba3-92e2-4dff-82ed-cb9bbb41d3c0
     country_id: *ky
     network_id: *ky_fixed
 # Supplementary services Prefixes
-  - id: 115007
+  - id: 114991
     prefix: '1345266'
     number_min_length: 11
     number_max_length: 11
-    uuid: 99195123-8fd0-4fd9-b0e1-2acbf12fdca5
+    uuid: c8a396ea-f06d-414d-a18a-a3423ebe2cec
     country_id: *ky
     network_id: *ky_internet_access
-  - id: 115054
+  - id: 115038
     prefix: '13456384638'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4d9813d2-3003-4dc0-8014-0f954902b92d
+    uuid: 520da36f-8d63-4f8c-9148-923b5b4fd328
     country_id: *ky
     network_id: *ky_internet_access
-  - id: 115055
+  - id: 115039
     prefix: '13456387873'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5350bc20-5532-48ed-810c-1e6d68126864
+    uuid: 014b5b97-48f5-42d3-8f42-22b7d570d5ad
     country_id: *ky
     network_id: *ky_internet_access
-  - id: 115100
+  - id: 115084
     prefix: '1345976'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ba4c797-9b3b-457e-8595-a720d3714c43
+    uuid: f5c1299d-5536-473a-9b0f-bc3b8e2ab8c4
     country_id: *ky
     network_id: *ky_premium_rate_services
-  - id: 115102
+  - id: 115086
     prefix: '1345995'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65e6b2cd-0310-458c-9422-54f81c0cbfb0
+    uuid: 8c4e675b-05c8-4bcc-a606-1f4c55a0230e
     country_id: *ky
     network_id: *ky_national_stop_line_allocation
 # Mobile Prefixes
-  - id: 115009
+  - id: 114993
     prefix: '1345321'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b9a7efbe-54ec-4a01-aee4-9562562dfa87
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 114994
+    prefix: '1345322'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d4aef506-1dcd-4a6e-bbce-6c99ae017675
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 114995
+    prefix: '1345323'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fa3491fd-7fc3-477b-8d37-12e3ee0f58fd
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 114996
+    prefix: '1345324'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94741c5a-db47-4228-bd6c-a2e3c8c7fe24
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 114997
+    prefix: '1345325'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7cfc78da-261f-4797-8e45-8b424d937b4b
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 114998
+    prefix: '1345326'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8ced0d63-7956-4b08-8ff3-4f25327248df
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 114999
+    prefix: '1345327'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dec7be45-11fc-44bc-a02c-3c7c5aa08e8b
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 115000
+    prefix: '1345328'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 728c1f5f-b509-42e7-9e4d-881c4fb21eeb
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 115001
+    prefix: '1345329'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc7c8eef-bda1-41b6-b6f5-03f084186832
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 115008
+    prefix: '1345420'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e3d23c7e-c1d8-4fb8-9546-eff6c8021b67
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 115009
+    prefix: '1345421'
     number_min_length: 11
     number_max_length: 11
     uuid: 35e7680b-e27f-4823-aaec-29e935f4fc8a
     country_id: *ky
     network_id: *ky_digicel_mobile
   - id: 115010
-    prefix: '1345322'
+    prefix: '1345422'
     number_min_length: 11
     number_max_length: 11
     uuid: af546ac2-8a92-4554-9f26-99852250194a
     country_id: *ky
     network_id: *ky_digicel_mobile
   - id: 115011
-    prefix: '1345323'
+    prefix: '1345423'
     number_min_length: 11
     number_max_length: 11
     uuid: 100efd55-090e-4da0-9f9d-d6a8c8cea7eb
     country_id: *ky
     network_id: *ky_digicel_mobile
   - id: 115012
-    prefix: '1345324'
+    prefix: '1345424'
     number_min_length: 11
     number_max_length: 11
     uuid: 4b754f26-732a-4921-9c07-4a5c01b86f0a
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115013
-    prefix: '1345325'
+  - id: 115021
+    prefix: '1345516'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8ce85b67-d453-4ea0-b9a2-3d3e68830b93
+    uuid: 0d7ed5e7-38df-4dae-955a-550a9e9107f7
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115014
-    prefix: '1345326'
+  - id: 115022
+    prefix: '1345517'
     number_min_length: 11
     number_max_length: 11
-    uuid: aab2dba9-5c4d-4f75-94f6-12082c892cdf
+    uuid: 579b410a-9c0d-44c3-8e30-97983b64abae
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115015
-    prefix: '1345327'
+  - id: 115023
+    prefix: '1345525'
     number_min_length: 11
     number_max_length: 11
-    uuid: 74da3b9f-65a4-4536-9c53-8b084cda215d
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115016
-    prefix: '1345328'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8066db23-59f7-44aa-9aaf-3a4fd382e866
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115017
-    prefix: '1345329'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 69ec9c01-9ee0-4128-a5ab-59fb3cd3ddca
+    uuid: 62e3bca2-b118-46e5-90ad-cfbd36584168
     country_id: *ky
     network_id: *ky_digicel_mobile
   - id: 115024
-    prefix: '1345420'
+    prefix: '1345526'
     number_min_length: 11
     number_max_length: 11
     uuid: 7e16ce08-ac0a-4881-ba24-0c8afa8d8170
     country_id: *ky
     network_id: *ky_digicel_mobile
   - id: 115025
-    prefix: '1345421'
+    prefix: '1345527'
     number_min_length: 11
     number_max_length: 11
     uuid: 08694d98-2baa-40d2-963f-eb89c553b5d3
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115026
-    prefix: '1345422'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e6e1f139-e9ed-4e1d-b853-51c2deae2d52
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115027
-    prefix: '1345423'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9398289b-5af7-47fe-ac4d-670da577f4df
-    country_id: *ky
-    network_id: *ky_digicel_mobile
   - id: 115028
-    prefix: '1345424'
+    prefix: '1345546'
     number_min_length: 11
     number_max_length: 11
     uuid: 501e736c-10af-4bb2-b33f-ecb02bbfe151
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115037
-    prefix: '1345516'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1d6abd79-506e-46b6-ac54-ef9fdaec33a3
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115038
-    prefix: '1345517'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 520da36f-8d63-4f8c-9148-923b5b4fd328
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115039
-    prefix: '1345525'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 014b5b97-48f5-42d3-8f42-22b7d570d5ad
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115040
-    prefix: '1345526'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 03c473a6-b11a-418e-8cba-ff8a22ac2e11
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115041
-    prefix: '1345527'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d15dafbb-615c-4244-bfbe-2efa08b28c34
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115044
-    prefix: '1345546'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8a94715-943e-4d7f-af49-3144d2e5f00c
-    country_id: *ky
-    network_id: *ky_digicel_mobile
-  - id: 115045
+  - id: 115029
     prefix: '1345547'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9cbaa2a7-b5a5-44d2-ad3d-d00692956f22
+    uuid: 5f6c82c7-4fbe-4b99-8b32-9a7aeed97ec0
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115046
+  - id: 115030
     prefix: '1345548'
     number_min_length: 11
     number_max_length: 11
-    uuid: a7543054-a22a-431e-a3b3-1f9b3896d583
+    uuid: 7942801a-30a4-47c8-8676-bfeca2e16aec
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115047
+  - id: 115031
     prefix: '1345549'
     number_min_length: 11
     number_max_length: 11
-    uuid: ceab547d-cb2f-45ca-90c6-2785e67cdaf6
+    uuid: 305e3951-49ae-4b2b-a6d0-ec6c509d3997
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115049
+  - id: 115033
     prefix: '1345550'
     number_min_length: 11
     number_max_length: 11
-    uuid: d619701a-4b23-4af2-bf2a-2be18123396b
+    uuid: 0e3a5020-95c0-4a28-90cb-c1cf24963c6e
     country_id: *ky
     network_id: *ky_digicel_mobile
-  - id: 115071
+  - id: 115055
     prefix: '1345825'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5350bc20-5532-48ed-810c-1e6d68126864
+    country_id: *ky
+    network_id: *ky_logic_mobile
+  - id: 115056
+    prefix: '1345826'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07945e2c-cd0e-4c5e-8398-26f9757f3456
+    country_id: *ky
+    network_id: *ky_logic_mobile
+  - id: 115061
+    prefix: '1345916'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7ceb2703-91c6-4072-9519-cd0d3d624d51
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115062
+    prefix: '1345917'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7d2deeab-5df9-4fe1-806b-76e86111d791
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115063
+    prefix: '1345919'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f19a834-f0f8-4e30-a39e-964b513d745a
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115064
+    prefix: '1345922'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8d099f03-779b-43dd-bd31-7bfc7361f1c4
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115065
+    prefix: '1345923'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c89d91d0-f8b7-4d20-ba1b-6958d26d3f42
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115066
+    prefix: '1345924'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c7d75589-a172-40ac-b36b-2002fe574acc
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115067
+    prefix: '1345925'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e32ef2e0-84e8-46f5-9892-f53217f977e3
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115068
+    prefix: '1345926'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c71b7c9f-7e8f-4056-9c8b-8bbee4d73e30
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115069
+    prefix: '1345927'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c0339c19-5eb5-4e10-bf9e-17d752297f15
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115070
+    prefix: '1345928'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 62e4c977-07a2-4705-b680-5d482bc3f840
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 115071
+    prefix: '1345929'
     number_min_length: 11
     number_max_length: 11
     uuid: 62a91bcf-407b-4d0c-a159-7c81b9d9a8c1
     country_id: *ky
-    network_id: *ky_logic_mobile
+    network_id: *ky_flow_mobile
   - id: 115072
-    prefix: '1345826'
+    prefix: '1345930'
     number_min_length: 11
     number_max_length: 11
     uuid: acc676c6-3f9a-4df1-9622-0438e82593b6
     country_id: *ky
-    network_id: *ky_logic_mobile
-  - id: 115077
-    prefix: '1345916'
+    network_id: *ky_flow_mobile
+  - id: 115073
+    prefix: '1345936'
     number_min_length: 11
     number_max_length: 11
-    uuid: da541df3-55aa-4096-bc90-0c9c5c0868d5
+    uuid: 44b565ee-2365-4b74-8ad6-1b6fc63198cd
     country_id: *ky
     network_id: *ky_flow_mobile
-  - id: 115078
-    prefix: '1345917'
+  - id: 115074
+    prefix: '1345937'
     number_min_length: 11
     number_max_length: 11
-    uuid: 07dac2b3-984d-4ce9-8089-ab0022ec9733
+    uuid: aea7a5ca-08be-4c27-9abe-722bbbbd7a84
     country_id: *ky
     network_id: *ky_flow_mobile
-  - id: 115079
-    prefix: '1345919'
+  - id: 115075
+    prefix: '1345938'
     number_min_length: 11
     number_max_length: 11
-    uuid: 66007f16-1288-4ec3-a1ef-9f05af52edbc
+    uuid: ba44655f-3939-4db9-8fac-779061d19cac
     country_id: *ky
     network_id: *ky_flow_mobile
-  - id: 115080
-    prefix: '1345922'
+  - id: 115076
+    prefix: '1345939'
     number_min_length: 11
     number_max_length: 11
-    uuid: 187bbd09-3180-4d94-b491-cc26bc5e4eb9
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115081
-    prefix: '1345923'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d442f01c-0224-409c-89d0-fdd5ac409f7d
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115082
-    prefix: '1345924'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f083a33-e980-4fee-a19e-8be9fc264088
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115083
-    prefix: '1345925'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0b346ba3-92e2-4dff-82ed-cb9bbb41d3c0
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115084
-    prefix: '1345926'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f5c1299d-5536-473a-9b0f-bc3b8e2ab8c4
+    uuid: 2154173d-6955-496f-8545-89b349efcc0d
     country_id: *ky
     network_id: *ky_flow_mobile
   - id: 115085
-    prefix: '1345927'
+    prefix: '1345990'
     number_min_length: 11
     number_max_length: 11
     uuid: ecee95f5-6b7a-4fa7-b9de-d9de73914c8f
     country_id: *ky
     network_id: *ky_flow_mobile
-  - id: 115086
-    prefix: '1345928'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8c4e675b-05c8-4bcc-a606-1f4c55a0230e
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115087
-    prefix: '1345929'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4584c409-73c4-4757-849c-5c9f87416b70
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115088
-    prefix: '1345930'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 03c6738d-0e67-469a-8cfa-9eb203923f84
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115089
-    prefix: '1345936'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 66ed6e46-9182-46d9-91ad-03b7722bf521
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115090
-    prefix: '1345937'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 08349622-fcb4-4925-a24f-5fff59612849
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115091
-    prefix: '1345938'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ee959754-d3ee-4514-a54a-28309b457835
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115092
-    prefix: '1345939'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a7b29f99-bfd0-4bf8-bcf0-6192c5c2d835
-    country_id: *ky
-    network_id: *ky_flow_mobile
-  - id: 115101
-    prefix: '1345990'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b11361c-7064-448f-bf85-4297249ed496
-    country_id: *ky
-    network_id: *ky_flow_mobile
 # Paging Prefixes
-  - id: 115098
+  - id: 115082
     prefix: '1345948'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1fb7471b-917a-4950-b753-652361c3e8f6
+    uuid: 6f083a33-e980-4fee-a19e-8be9fc264088
     country_id: *ky
     network_id: *ky_flow_paging

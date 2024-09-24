@@ -1,89 +1,89 @@
 country_id: &fk 69
 networks:
 # Fixed Networks
-  - id: &fk_fixed 3703
+  - id: &fk_fixed 7632
     name: FK Fixed
-    uuid: 63c67879-213b-46d5-99d8-d9366f2bd7f4
+    uuid: 7a9c6b9d-bd3f-4aa8-8724-3a940debea91
     type_id: 12
 # Mobile Networks
-  - id: &fk_sure_mobile 4064
+  - id: &fk_sure_mobile 7993
     name: FK Sure Mobile
-    uuid: 97a7d64c-0c28-4a3c-831a-a9d780c56577
+    uuid: 0e1066dd-934f-4acd-950c-0dfebc5480c8
     type_id: 3
 # Supplementary services Networks
-  - id: &fk_special_services 4317
+  - id: &fk_special_services 8246
     name: FK Special Services
-    uuid: cd34a626-9f0b-4a3a-b8ff-0d3f1845ef81
+    uuid: 3a25a9b3-3412-4cb7-8739-7e37293dfd82
     type_id: 14
-  - id: &fk_emergency_services 5146
+  - id: &fk_emergency_services 9075
     name: FK Emergency Services
-    uuid: f2709eae-2a8f-41cf-a79e-bc4a8455ecf3
+    uuid: cf7b050f-068a-4803-b8cd-173c2b965070
     type_id: 14
 network_prefixes:
 # Fixed Prefixes
-  - id: 285970
+  - id: 285931
     prefix: '5002'
     number_min_length: 8
     number_max_length: 8
-    uuid: e8419374-7b29-4a57-85d4-16aa2f67b68f
+    uuid: 26ee23a3-b12e-446d-8427-1c48b5f69a3b
     country_id: *fk
     network_id: *fk_fixed
-  - id: 287463
+  - id: 287416
     prefix: '5003'
     number_min_length: 8
     number_max_length: 8
-    uuid: beee9467-a5d7-4232-ad10-ec22f323cb4b
+    uuid: 3ec9f075-e7bc-4f27-9fe2-56c754edd3b1
     country_id: *fk
     network_id: *fk_fixed
-  - id: 288239
+  - id: 288187
     prefix: '5004'
     number_min_length: 8
     number_max_length: 8
-    uuid: 5b6f6db5-8fa6-4992-9585-190f2f4600d9
+    uuid: be89746f-77b9-430f-90c1-1bf137636c09
     country_id: *fk
     network_id: *fk_fixed
-  - id: 301576
+  - id: 301373
     prefix: '5007'
     number_min_length: 8
     number_max_length: 8
-    uuid: d20163a3-c905-4e62-bfa8-69ab20114321
+    uuid: fa5f1192-685a-44a4-9b43-ecb3728adb4b
     country_id: *fk
     network_id: *fk_fixed
 # Mobile Prefixes
-  - id: 289694
+  - id: 289627
     prefix: '5006'
     number_min_length: 8
     number_max_length: 8
-    uuid: 09d01834-0d6d-4056-8c47-62dc45ef8b72
+    uuid: d8441323-f693-42e4-aeb9-871dae1f6609
     country_id: *fk
     network_id: *fk_sure_mobile
-  - id: 292293
+  - id: 292179
     prefix: '5005'
     number_min_length: 8
     number_max_length: 8
-    uuid: 62af0b81-eb77-42f0-8d87-e2ad5b73e3c1
+    uuid: fce15fae-aa7c-4c8d-bcea-e4934d910696
     country_id: *fk
     network_id: *fk_sure_mobile
 # Country code Prefixes
-  - id: 290857
+  - id: 290775
     prefix: '500'
     number_min_length: 4
     number_max_length: 100
-    uuid: 5d33a5c1-c55b-4a29-a3b0-32a748c1ef00
+    uuid: 5a009c94-5c50-4c74-8196-b0e9f6a8ae25
     country_id: *fk
     network_id: null
 # Supplementary services Prefixes
-  - id: 291259
+  - id: 291176
     prefix: '5001'
     number_min_length: 6
     number_max_length: 6
-    uuid: 2ea1e10a-306a-427d-8c2d-cf4346e70c96
+    uuid: 88cf853b-e5d1-4ad3-86b0-68b8deeea381
     country_id: *fk
     network_id: *fk_special_services
-  - id: 297139
+  - id: 296973
     prefix: '50099'
     number_min_length: 8
     number_max_length: 8
-    uuid: aa3fd2dd-8fab-4b9e-a117-88ffa05bf257
+    uuid: 7f8e0c3f-6312-4114-b2e8-958131c76b31
     country_id: *fk
     network_id: *fk_emergency_services
