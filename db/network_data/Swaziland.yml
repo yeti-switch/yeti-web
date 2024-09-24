@@ -1,661 +1,661 @@
 country_id: &sz 203
 networks:
-# Fixed Networks
-  - id: &sz_fixed 7667
-    name: SZ Fixed
-    uuid: 5e1ef4b5-66fc-4812-ba3f-fc51e24e03cf
-    type_id: 12
 # Supplementary services Networks
-  - id: &sz_special_services 8322
+  - id: &sz_special_services 3954
     name: SZ Special Services
-    uuid: 6b061884-be12-43d3-b13e-a83b84e9e54d
+    uuid: 5eeabba3-3ac1-438d-915c-d767f8128ad2
     type_id: 14
-  - id: &sz_internal_network_services 8972
-    name: SZ Internal Network Services
-    uuid: c240fb4b-90c8-46e5-91ee-0a66140c767f
-    type_id: 14
-  - id: &sz_premium_rate_services 8993
-    name: SZ Premium Rate Services
-    uuid: 18555eea-9228-4f18-b3ed-d8b1c7548f73
-    type_id: 14
-  - id: &sz_emergency_services 9082
-    name: SZ Emergency Services
-    uuid: d6a26f29-0a39-4e1d-a125-99cf1cd4c106
-    type_id: 14
-  - id: &sz_freephone_services 9401
+  - id: &sz_freephone_services 5212
     name: SZ Freephone Services
-    uuid: afd2eb9d-eba1-4f06-8350-3b02d9b2ce44
+    uuid: 4eb26f2d-4673-42cf-94ea-403879a32b98
     type_id: 14
-  - id: &sz_dial_up_internet_access 9502
+  - id: &sz_internal_network_services 5606
+    name: SZ Internal Network Services
+    uuid: 10617bd3-949c-4cf9-885a-4ca821ee111d
+    type_id: 14
+  - id: &sz_premium_rate_services 5626
+    name: SZ Premium Rate Services
+    uuid: 73f5aecd-5438-48fe-be59-833a601bae1f
+    type_id: 14
+  - id: &sz_emergency_services 5702
+    name: SZ Emergency Services
+    uuid: 9c359875-200d-4d47-835a-efacce6fdd05
+    type_id: 14
+  - id: &sz_dial_up_internet_access 5811
     name: SZ Dial_Up Internet Access
-    uuid: 92729a62-bcd1-4c21-b7db-546e9b73cbff
+    uuid: 3954c956-0777-43a1-b765-12657d2e6724
     type_id: 14
-  - id: &sz_call_center_services 9503
+  - id: &sz_call_center_services 5812
     name: SZ Call Center Services
-    uuid: 6309cdb3-f850-4ac5-a7f3-d8101f202289
+    uuid: 16ff3eba-e710-4e86-8abf-e4309f433a44
     type_id: 14
-  - id: &sz_telebanking_services 9504
+  - id: &sz_telebanking_services 5813
     name: SZ Telebanking Services
-    uuid: b420fd52-59d3-41ed-a4d6-6fb3811a01de
+    uuid: 263de601-45a8-4bac-a404-6a609b93d878
     type_id: 14
-  - id: &sz_mass_calling_services 9509
+  - id: &sz_mass_calling_services 5817
     name: SZ Mass Calling Services
-    uuid: f3fbf806-545e-4695-af2a-31016c4db7ba
+    uuid: 2200cf19-c69f-4bb8-81cc-44fbd560be2c
     type_id: 14
+# Fixed Networks
+  - id: &sz_fixed 4336
+    name: SZ Fixed
+    uuid: e3bffff1-0917-4b11-aeba-6a835331dee4
+    type_id: 12
 # Mobile Networks
-  - id: &sz_swazi_mtn_mobile 8865
-    name: SZ Swazi Mtn Mobile
-    uuid: be9996a8-3582-4c2a-babe-5be7595c13ad
-    type_id: 3
-  - id: &sz_mobile 9255
+  - id: &sz_mobile 5414
     name: SZ Mobile
-    uuid: 46216f13-2d54-4cc9-aa3a-7db406ab399a
+    uuid: 18274902-7071-428c-9e2a-2f1902b09c53
     type_id: 3
-  - id: &sz_eswatinitelecom_mobile 9296
+  - id: &sz_swazi_mtn_mobile 5453
+    name: SZ Swazi Mtn Mobile
+    uuid: 37ef61cf-aba1-4146-8e37-64827f235473
+    type_id: 3
+  - id: &sz_eswatinitelecom_mobile 5480
     name: SZ Eswatinitelecom Mobile
-    uuid: d4105cff-aaf4-41db-905c-446089dd8435
+    uuid: b3a87625-f9a9-4219-a640-5165ecee481c
     type_id: 3
-  - id: &sz_eswatini_mobile_mobile 9328
+  - id: &sz_eswatini_mobile_mobile 5512
     name: SZ Eswatini Mobile Mobile
-    uuid: 7f4bda44-f4bb-4437-a894-e3c3b6b57731
+    uuid: 8883d893-191d-4106-9960-bfa8efb85ec3
     type_id: 3
 network_prefixes:
-# Fixed Prefixes
-  - id: 285963
-    prefix: '2682'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9121555b-2106-4aa4-9114-b8e8921b26e1
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286256
-    prefix: '26822'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c91f3bc9-5112-432c-9e16-e0d10461fc88
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286264
-    prefix: '2682200'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 49ab2956-9f74-44cf-a77b-c29dd09469ef
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286272
-    prefix: '2682207'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5fec8097-7692-49a5-ba15-9a7ec32a3f42
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286278
-    prefix: '2682217'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4a313271-3ced-4ab3-a197-e33017a7b3ab
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286335
-    prefix: '2682225'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: faeef13e-44e4-4bf1-86d4-7b389ef174bf
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286344
-    prefix: '2682227'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 075e9b12-891a-4677-a7be-fdb19e294908
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286371
-    prefix: '2682237'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 774b9b19-4b29-408e-a649-714edf95e8f8
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286451
-    prefix: '26823'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be946653-df37-45b8-8820-defcfe811d06
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286459
-    prefix: '2682300'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d0a349fe-1432-410d-bc72-5b3eae9919ff
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286460
-    prefix: '2682303'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6aee3645-a84f-4715-b82b-bf04e0455943
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286461
-    prefix: '2682304'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cdeefc4d-2fa9-4779-8733-bf2b2f5fedd3
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286470
-    prefix: '2682313'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 087deb5a-1bd9-420d-bfbd-8c4f8c8461f8
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286483
-    prefix: '26823232'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4f9a0389-ecd6-439d-bf4b-e9cfee37f960
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286485
-    prefix: '26823236'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 68213f97-daf3-4bd2-bb74-91e1cf37a6e7
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286502
-    prefix: '2682332'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fa4fc6a0-7c80-43f2-8689-76cdbd30b535
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286510
-    prefix: '2682333'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fb579f79-cbd3-4461-96c4-cf234159b73e
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286550
-    prefix: '2682343'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f01b3a55-5554-4416-a4ae-b79c2c8d09f4
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286552
-    prefix: '2682344'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5b1c8d54-e3cb-4134-9da5-c513a9759ae2
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286580
-    prefix: '2682363'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 95a7de7d-9bfe-4d6a-918d-c1030ac5aa36
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286581
-    prefix: '2682364'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7d2d5a0f-3e66-4069-a2c2-a2e56ab0eec4
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286590
-    prefix: '2682373'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0c96eede-594f-43b3-b92b-ccd6ac06fa9b
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286602
-    prefix: '2682383'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e0cf49e0-0fd5-4aae-9e08-fc38911c2dc1
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286642
-    prefix: '26824'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef1b7a2b-14cb-40d3-bc33-930b81555dbf
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286650
-    prefix: '2682400'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8f907efa-26f7-409e-a779-edd109dd2ca6
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286651
-    prefix: '2682404'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0e898ce4-6527-454b-b4e7-734403de6cf7
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286652
-    prefix: '2682405'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d7800a4b-ca93-4ccc-bbec-35b54c1e7bf2
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286653
-    prefix: '2682406'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ec62e081-df05-42e1-8838-d2644313f2b1
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286655
-    prefix: '2682409'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 755722ef-40ab-4d55-96d3-cd719096d2d0
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286662
-    prefix: '2682416'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5345b405-6d9e-4153-873a-435e3db3686d
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286672
-    prefix: '2682421'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ae639dc-e7ba-43ad-8dc5-14689b457570
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286674
-    prefix: '2682422'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 922bb453-be46-4af0-9dd1-30499553bb08
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286686
-    prefix: '2682435'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6fb4dd0e-dcc9-4df5-8970-73ae0124bc1d
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286687
-    prefix: '2682437'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b554c4d1-a125-49b9-865d-0cde9aabcf30
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286696
-    prefix: '2682442'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d075a408-e634-4e68-80c9-3950b259ee7a
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286708
-    prefix: '2682452'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f6b999be-87a5-4717-864c-ec99543e29ad
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286720
-    prefix: '2682467'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2ace1aa3-96c4-4073-99de-95b17ac4b19d
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286728
-    prefix: '2682472'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e0973a6e-28ed-4dc7-8352-3c7b99f0d3b0
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286745
-    prefix: '2682482'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8ecd34d-7681-4cb3-8157-dc974a2219db
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286790
-    prefix: '26825'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5d8cec74-13dd-4571-86bf-b887699cc4b1
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286798
-    prefix: '2682500'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0b7529b9-4d72-4907-b475-067e344e1d00
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286809
-    prefix: '2682505'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b45f0881-6e00-4e03-b170-e70f80c7c03e
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286811
-    prefix: '2682506'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 81c76cbf-64da-405c-9dcc-b87524eaf69c
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286813
-    prefix: '2682507'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5d8357e5-4be3-427a-a164-13dc0a79aa39
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286832
-    prefix: '2682516'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e68a1d71-d321-42bc-9f9e-ca28aea3cdd6
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286834
-    prefix: '2682517'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4b3715f9-6e64-4c43-9207-c207f21dfaa2
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286836
-    prefix: '2682518'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 680a069e-88c5-42ed-8655-2b820632d990
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286839
-    prefix: '2682519'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4cc71b40-d38a-405e-b2de-79b48c510c55
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286853
-    prefix: '26825274'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b626d8dd-b7f0-479e-a207-c1e0b05b59f0
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286854
-    prefix: '2682528'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 626e390f-9080-473e-b3a6-22a117a2271b
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286872
-    prefix: '26825373'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 80bb2930-d97e-4a4b-b57b-e7ce6c22befd
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286873
-    prefix: '2682538'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f32f9bde-d2c4-43b7-acd0-9e0026cff390
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286899
-    prefix: '2682548'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94e8bebf-dff8-4a59-a0ac-bb0680a165be
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286910
-    prefix: '2682550'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 451d575e-53f1-4e6c-b27b-fd876f82864b
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 286913
-    prefix: '2682551'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3440c887-67e4-4478-9950-70ffd26c4f2d
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 499078
-    prefix: '2683'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 61a1c83a-b046-4ab3-8d67-e8b8f1ce065f
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 287649
-    prefix: '26832'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: de7c5ad4-ba97-4144-8352-406d12172ef9
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 287690
-    prefix: '26833'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5237a571-b566-4160-87cc-15ace54437ce
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 287761
-    prefix: '26834'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a2aeef6-d298-44ec-b0db-b3ad5874b82d
-    country_id: *sz
-    network_id: *sz_fixed
-  - id: 287861
-    prefix: '26835'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8e00813c-9af6-4989-9e7c-215244527c54
-    country_id: *sz
-    network_id: *sz_fixed
 # Country code Prefixes
-  - id: 290891
+  - id: 239084
     prefix: '268'
     number_min_length: 4
     number_max_length: 100
-    uuid: 750262dc-2de2-4c08-9692-e718f82b85bf
+    uuid: 1bcf6631-e013-47dd-aecd-f492472de6d9
     country_id: *sz
     network_id: null
 # Supplementary services Prefixes
-  - id: 297520
+  - id: 239462
     prefix: '2681'
     number_min_length: 6
     number_max_length: 9
-    uuid: 46902651-2526-4f78-9893-043840c9f148
+    uuid: 58ad15d4-885f-4d74-a70c-14be943d6a02
     country_id: *sz
     network_id: *sz_special_services
-  - id: 291533
+  - id: 239770
     prefix: '268120'
     number_min_length: 10
     number_max_length: 10
-    uuid: c2bd147f-e071-46bf-8290-bcf662ede80b
+    uuid: 27846b71-1bc3-4552-8e86-846c6a2bed67
     country_id: *sz
     network_id: *sz_special_services
-  - id: 295989
-    prefix: '26890'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 622d8910-d1a8-451f-a3ae-b598e26de650
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 296016
-    prefix: '268900'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9be9af67-d183-4c4f-a5e9-edf474ff1d21
-    country_id: *sz
-    network_id: *sz_premium_rate_services
-  - id: 296159
-    prefix: '26891'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 5f5cb380-6c80-4c67-8647-e86bfa617116
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 296371
-    prefix: '26892'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 6554f7c8-2d57-4a88-810b-acb114513022
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 296642
-    prefix: '26893'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 65bad413-5d63-449c-82fd-252d46b1ca13
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 296910
-    prefix: '26894'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 33f8380c-d38a-4dc3-a2ee-5fc5f0560d66
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 296993
-    prefix: '26899'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: daf30df8-5981-4f46-aea9-bd1a899b6242
-    country_id: *sz
-    network_id: *sz_emergency_services
-  - id: 302797
+  - id: 250021
     prefix: '268800'
     number_min_length: 11
     number_max_length: 11
-    uuid: 731e692b-cc75-4026-903e-314084dcf1f4
+    uuid: 3806049c-3f6e-4ebb-b5b9-1a49b4517874
     country_id: *sz
     network_id: *sz_freephone_services
-  - id: 303575
-    prefix: '268860'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f98e1c21-b871-422e-90c3-d6a21059ad0c
-    country_id: *sz
-    network_id: *sz_dial_up_internet_access
-  - id: 303590
-    prefix: '268861'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 149241fd-bc6f-466e-8077-c0427437e493
-    country_id: *sz
-    network_id: *sz_call_center_services
-  - id: 303684
-    prefix: '268869'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4a77217-ad8a-45b1-9f51-944d6f01c818
-    country_id: *sz
-    network_id: *sz_telebanking_services
-  - id: 303717
-    prefix: '26887'
-    number_min_length: 7
-    number_max_length: 9
-    uuid: 5b2c7846-40d4-417f-aba6-f1cbd796eaf8
-    country_id: *sz
-    network_id: *sz_mass_calling_services
-  - id: 304027
-    prefix: '26895'
+  - id: 253999
+    prefix: '26890'
     number_min_length: 6
     number_max_length: 9
-    uuid: 81048f42-c852-4253-805e-ae1957d53776
+    uuid: b64e208a-97ba-4d07-8805-38e3e7b7cdd7
     country_id: *sz
     network_id: *sz_internal_network_services
-  - id: 304307
-    prefix: '26896'
+  - id: 254026
+    prefix: '268900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e3293ca4-0de9-418c-bb6e-086ee4bfb85c
+    country_id: *sz
+    network_id: *sz_premium_rate_services
+  - id: 254200
+    prefix: '26891'
     number_min_length: 6
     number_max_length: 9
-    uuid: d6a46595-11be-424e-94b8-494beb401039
+    uuid: cc84c6fd-79b1-4b30-931a-3ccf38458c78
     country_id: *sz
     network_id: *sz_internal_network_services
-  - id: 304588
-    prefix: '26897'
+  - id: 254424
+    prefix: '26892'
     number_min_length: 6
     number_max_length: 9
-    uuid: 9140ded1-f093-4dbc-b98c-13ca4cf540ce
+    uuid: 3bd2054b-c359-4e5d-bd37-f1e1e4ae7962
     country_id: *sz
     network_id: *sz_internal_network_services
-  - id: 304859
+  - id: 254696
+    prefix: '26893'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 9b8d4d9d-c415-48c0-865b-fec384dda04a
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 254799
     prefix: '26898'
     number_min_length: 6
     number_max_length: 9
-    uuid: 67154a4f-069f-4a30-85f2-2f32caab4529
+    uuid: d656efeb-c931-4cbd-8fbc-11000e170a63
     country_id: *sz
     network_id: *sz_internal_network_services
-# Mobile Prefixes
-  - id: 295540
-    prefix: '26876'
+  - id: 255025
+    prefix: '26899'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: e32845d6-5850-492d-8564-47ab0250f69d
+    country_id: *sz
+    network_id: *sz_emergency_services
+  - id: 260651
+    prefix: '268860'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6029c3df-09fa-46ca-a559-71e134e7e70e
+    uuid: 93e647ff-890a-47bc-93db-3f7c3e766055
     country_id: *sz
-    network_id: *sz_swazi_mtn_mobile
-  - id: 301406
+    network_id: *sz_dial_up_internet_access
+  - id: 260666
+    prefix: '268861'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f340caf1-0f7a-44f6-b515-dfc6620b32b4
+    country_id: *sz
+    network_id: *sz_call_center_services
+  - id: 260764
+    prefix: '268869'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 13b91fa7-8920-4dd6-91e3-b117f5f59e7b
+    country_id: *sz
+    network_id: *sz_telebanking_services
+  - id: 260797
+    prefix: '26887'
+    number_min_length: 7
+    number_max_length: 9
+    uuid: 88f0d49f-e7e5-4921-90e7-ce96724c7563
+    country_id: *sz
+    network_id: *sz_mass_calling_services
+  - id: 260986
+    prefix: '26894'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: a683a40e-4306-4f2c-a492-dc1737741bc7
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 261232
+    prefix: '26895'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 05d3752f-64dc-4418-a0f4-7332eb40643c
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 261512
+    prefix: '26896'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 504f39f2-25eb-4d59-837c-6256011c12af
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 261793
+    prefix: '26897'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 9d4b56f9-9917-460d-9143-acdded7ed2d7
+    country_id: *sz
+    network_id: *sz_internal_network_services
+# Fixed Prefixes
+  - id: 240315
+    prefix: '26832'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7097f39-0ffa-4d8f-91fd-355b256f30df
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 240356
+    prefix: '26833'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3c5a99b-d42b-4cd6-b5c4-ec2b25537198
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 240432
+    prefix: '26834'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 81321b05-50c7-4271-a47d-a08292a8844a
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 240532
+    prefix: '26835'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 77d43226-bc6f-438f-8f33-28c1a6c5ebea
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244341
+    prefix: '2682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fe822e3e-fa05-49cd-b4b7-a8b81b1ed4c7
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244629
+    prefix: '26822'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bb8fb05f-b14c-4226-a2e3-17f23ef3ebb1
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244637
+    prefix: '2682200'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f11e229f-712b-4875-9008-472507a7ec19
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244645
+    prefix: '2682207'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 426c8737-6c35-4f28-a1de-1a34c1f93dd2
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244651
+    prefix: '2682217'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cfc5b5e-183a-4e2e-85ce-a1e3f8a7d320
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244708
+    prefix: '2682225'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d250bfd9-663d-45ed-bdc9-dce54e0f85eb
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244717
+    prefix: '2682227'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 63446f5b-0f0d-4c8e-8e32-058c7e495026
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244744
+    prefix: '2682237'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1e593113-a539-4339-8c3d-fdab12350cc1
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244824
+    prefix: '26823'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9b101c22-da31-4134-8640-399ffd950eeb
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244832
+    prefix: '2682300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fea9aea8-e097-4978-bb14-9ab2c0d0870d
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244833
+    prefix: '2682303'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4011181b-2dc1-4b4b-9266-01a0dd5ab699
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244834
+    prefix: '2682304'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4c85aed6-b99a-4d3b-81d9-094cdbd4ff4c
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244843
+    prefix: '2682313'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0cc9207e-4e60-4cde-83f0-d21c40ff8b0c
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244856
+    prefix: '26823232'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5ff590c-b77c-4177-a1d3-5d24a667654c
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244858
+    prefix: '26823236'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d05a046a-2bc1-4941-8f26-748bdeda46c9
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244875
+    prefix: '2682332'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1e3c1644-8958-4cf5-9c6c-21bf7f3cbbeb
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244883
+    prefix: '2682333'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e08aa4f-57b7-4fdf-8c0f-42a11262aafc
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244923
+    prefix: '2682343'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96218b3c-34a5-4f50-b6cb-2cbce4948d9e
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244925
+    prefix: '2682344'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aac1fe66-bd54-4f83-8aff-023b2a168a5f
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244953
+    prefix: '2682363'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dec73426-8667-4f6d-b4a5-914cc04d11bd
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244954
+    prefix: '2682364'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58ddf110-d850-40e4-8da1-339ed52b725e
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244963
+    prefix: '2682373'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4975b491-ce11-42cf-9b69-0cf5e3756f85
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 244975
+    prefix: '2682383'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3ddf2b5-bc8a-4eeb-a59d-3494b6ad9702
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245015
+    prefix: '26824'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fa20fb6a-e563-4243-831e-93594557c046
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245023
+    prefix: '2682400'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e3d0a685-3de2-4970-b4d3-69dfb3bce951
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245024
+    prefix: '2682404'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8a46956-2069-40e3-ac0b-c3404b769ad7
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245025
+    prefix: '2682405'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7c716902-3c44-4ba5-ad7a-1f7248235b0a
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245026
+    prefix: '2682406'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e971fff-f320-48e8-bfe0-817d6d97894c
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245028
+    prefix: '2682409'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b057de3a-a1d4-4c2e-bcd3-0796ecf4f4fc
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245035
+    prefix: '2682416'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b11a22d6-606f-4fe2-b0bb-eaba5fe0dd15
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245045
+    prefix: '2682421'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7dfa9e65-291c-4a95-bdb0-fa7a74cbc7b0
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245047
+    prefix: '2682422'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bdb76183-1e21-4641-8d75-93ef66eabe17
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245059
+    prefix: '2682435'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e23c3f0-0b39-436b-a6a6-680c7242fad7
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245060
+    prefix: '2682437'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e357fd5-7eef-49e2-9373-d15c35c23791
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245069
+    prefix: '2682442'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a83389a-074c-44ca-93dd-be3f5e713165
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245081
+    prefix: '2682452'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38576882-618a-46ac-902d-86c6176ea763
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245093
+    prefix: '2682467'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a249e005-ee16-45eb-ada3-2969dd92acd6
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245101
+    prefix: '2682472'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45207f01-0bf0-4f51-b4cc-dac68cb6bb3c
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245118
+    prefix: '2682482'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b87298d5-8111-478e-9aa8-73eed480dcb4
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245163
+    prefix: '26825'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05d5eaa8-f6f3-4081-b8b0-312c972b5107
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245171
+    prefix: '2682500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ab641afb-0726-499c-afaf-46b9b7b66e5a
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245182
+    prefix: '2682505'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d12fc296-64dc-4ead-be97-ab5465a35213
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245184
+    prefix: '2682506'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 440215ef-f3ec-48db-a1c2-dc2a0164c8b0
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245186
+    prefix: '2682507'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ea90c219-315c-420c-8c02-50acfef90ce3
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245205
+    prefix: '2682516'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ed607ed-6b79-4514-9d13-41f46c4ac5d8
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245207
+    prefix: '2682517'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e5027206-4ccf-4dad-9bed-1fc415fdacad
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245209
+    prefix: '2682518'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a1354b23-eb64-4d88-ae9d-452730bce3f8
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245212
+    prefix: '2682519'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 618c4e0d-bbf5-492c-b1da-2bfb72396fee
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245226
+    prefix: '26825274'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b0a73eab-cfd6-4d26-84f7-493734b17795
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245227
+    prefix: '2682528'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 08b70a37-fddb-481f-851e-c832aebf01da
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245245
+    prefix: '26825373'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 72d6f845-779a-4e5c-84d2-5b85c5dc3e6b
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245246
+    prefix: '2682538'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2abcb39f-0bfc-4cd7-9a71-5972ddfca28a
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245272
+    prefix: '2682548'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dee2ab5d-74cb-4283-99bb-a9e8a6d3f06e
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245283
+    prefix: '2682550'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a45772ef-47d2-462e-af54-fec47e0c64d0
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245286
+    prefix: '2682551'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 81a997f9-669e-4f39-925e-6f46eb2f5905
+    country_id: *sz
+    network_id: *sz_fixed
+  - id: 245816
+    prefix: '2683'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f9a02000-7fa3-4107-ba0d-49293c013f28
+    country_id: *sz
+    network_id: *sz_fixed
+# Mobile Prefixes
+  - id: 252119
     prefix: '2687'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9814358f-a858-4178-af35-d276afa504a0
+    uuid: 23591a9e-3702-47e8-aeae-6a8b02758711
     country_id: *sz
     network_id: *sz_mobile
-  - id: 301431
+  - id: 252144
     prefix: '26870'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae7d8589-f831-4dc4-a982-8adb1f343c02
+    uuid: 1ec531a4-c667-4f7c-8920-51e6eeb6507b
     country_id: *sz
     network_id: *sz_mobile
-  - id: 301667
+  - id: 252294
+    prefix: '26876'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7970db36-824a-4662-ad1a-6765d23d6f58
+    country_id: *sz
+    network_id: *sz_swazi_mtn_mobile
+  - id: 252476
     prefix: '26877'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7462d58f-0848-4f0e-85ff-12feab9dcaf4
+    uuid: a51896af-0bf0-4102-b1d5-358482d6cb0b
     country_id: *sz
     network_id: *sz_eswatinitelecom_mobile
-  - id: 302117
+  - id: 252932
     prefix: '26878'
     number_min_length: 11
     number_max_length: 11
-    uuid: e29231a7-efec-4538-a4c7-1e710d4098a8
+    uuid: 361389e2-ec67-41fe-8a66-579780aaf7d0
     country_id: *sz
     network_id: *sz_swazi_mtn_mobile
-  - id: 302414
+  - id: 253229
     prefix: '26879'
     number_min_length: 11
     number_max_length: 11
-    uuid: a29722b5-cacb-4d55-b09d-cf61de702b95
+    uuid: 93abf877-5984-411d-8573-76d5df7340f2
     country_id: *sz
     network_id: *sz_eswatini_mobile_mobile

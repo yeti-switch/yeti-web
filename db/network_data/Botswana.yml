@@ -1,837 +1,837 @@
 country_id: &bw 28
 networks:
-# Fixed Networks
-  - id: &bw_fixed 7737
-    name: BW Fixed
-    uuid: 7188fec2-94f2-4ac6-892b-5d1e35a81497
-    type_id: 12
 # Supplementary services Networks
-  - id: &bw_shared_calls_services 8189
+  - id: &bw_shared_calls_services 3790
     name: BW Shared Calls Services
-    uuid: d12cda6c-b4dc-45cb-afba-32227469a431
+    uuid: 5002738c-339b-4040-acfa-dfb96fb0806a
     type_id: 14
-  - id: &bw_freephone_services 8194
+  - id: &bw_freephone_services 3796
     name: BW Freephone Services
-    uuid: 66882790-16b7-49e6-928b-51b8f8bfc08f
+    uuid: 83c145b1-93cc-4730-9d09-3914834d641e
     type_id: 14
-  - id: &bw_special_services 8225
+  - id: &bw_special_services 3831
     name: BW Special Services
-    uuid: fdd09c38-c2e1-42f7-853e-876885fe68c6
+    uuid: 7ca31c23-8709-4c46-8c42-6600e0279ed6
     type_id: 14
-  - id: &bw_emergency_services 8387
+  - id: &bw_emergency_services 4031
     name: BW Emergency Services
-    uuid: aa29b949-1ddf-4446-858f-8f055cfd55eb
+    uuid: 286a85fd-c1d6-4a47-93f7-97e25713254b
     type_id: 14
+# Fixed Networks
+  - id: &bw_fixed 4483
+    name: BW Fixed
+    uuid: ebf123f2-c161-45ad-8e8c-8f0044e42d47
+    type_id: 12
 # Mobile Networks
-  - id: &bw_mascom_mobile 8676
+  - id: &bw_mascom_mobile 4936
     name: BW Mascom Mobile
-    uuid: 4c964ab2-efb1-44f7-a7c1-ed478fca4cda
+    uuid: e4ea2c56-dc39-4131-abca-b462b21d2ce9
     type_id: 3
-  - id: &bw_orange_mobile 8697
+  - id: &bw_orange_mobile 4958
     name: BW Orange Mobile
-    uuid: 3330558f-187e-495a-b758-1110a66732f9
+    uuid: 857086d8-6428-4d6e-9f65-2f63e8ed7a78
     type_id: 3
-  - id: &bw_btc_mobile_mobile 8705
+  - id: &bw_btc_mobile_mobile 4969
     name: BW Btc Mobile Mobile
-    uuid: 224cdc53-ef1e-4859-adb6-54b85cc08c21
+    uuid: e7dedf5d-72bf-469d-b60c-ca3cbc757e35
     type_id: 3
-  - id: &bw_mobile 9244
+  - id: &bw_mobile 5403
     name: BW Mobile
-    uuid: 85872ed3-0008-4dd7-93ed-b6e820bdf436
+    uuid: 0194e889-acd3-49cf-a10b-0580afcf3ac8
     type_id: 3
 network_prefixes:
-# Fixed Prefixes
-  - id: 286625
-    prefix: '26724'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 796e5db6-580b-4e21-95cc-2443e903fd8c
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 286987
-    prefix: '26726'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: db52c501-f3ea-49db-af8d-3da208efaea9
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 287345
-    prefix: '26729'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 88d9d156-2c52-48ff-88e1-876ea7c5a4fb
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 287406
-    prefix: '2673'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9ed04ed8-ead8-4869-b98b-94dc0fb09bec
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 289394
-    prefix: '26758'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dd30385c-f375-446d-856f-fb148ccdd5d5
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 289491
-    prefix: '26759'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bc525596-8f0f-481a-9f36-8ad9a4400ae6
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 290099
-    prefix: '26762'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 98c5c2fe-dab4-499c-bdd8-e8ce65aa27d7
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 291689
-    prefix: '26746'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6009831c-fd5c-4049-9451-d2c5c58f838f
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 291905
-    prefix: '26747'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 14467328-354d-45da-b568-7339329079fc
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 292112
-    prefix: '26749'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 921b3e1a-0963-4a3d-a655-4010dfdb3860
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 292517
-    prefix: '26753'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 731a0738-09dd-4fa4-b5f2-d8af22882f97
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 292603
-    prefix: '26754'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 82c5afef-adc5-4e22-93a7-9974630cc5e8
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 292818
-    prefix: '26757'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d300cd32-b6b1-4f60-8330-16e46295dc01
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 293789
-    prefix: '26765'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9a0f235d-6070-4d8b-a086-690b06340815
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 300801
-    prefix: '26768'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ae1a3f04-2ded-4ee0-919a-b2f555f63cba
-    country_id: *bw
-    network_id: *bw_fixed
-  - id: 302397
-    prefix: '26779'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 081fc5f9-5afd-4078-86d0-da9e0bcff55b
-    country_id: *bw
-    network_id: *bw_fixed
 # Country code Prefixes
-  - id: 290745
+  - id: 238937
     prefix: '267'
     number_min_length: 4
     number_max_length: 100
-    uuid: 3f60ddb3-9b5b-47b4-a375-7c515d5cb7c6
+    uuid: 71ac7ddc-78b1-4f0c-ab4f-a103ed1e3fd8
     country_id: *bw
     network_id: null
 # Supplementary services Prefixes
-  - id: 291094
+  - id: 239287
     prefix: '26708'
     number_min_length: 13
     number_max_length: 13
-    uuid: 2236431c-2e71-4bc6-acf9-382d7c4fc6cc
+    uuid: d5f39be8-568a-42f5-a24a-438541615cec
     country_id: *bw
     network_id: *bw_shared_calls_services
-  - id: 291101
+  - id: 239294
     prefix: '2670800'
     number_min_length: 13
     number_max_length: 13
-    uuid: f06b2744-87d5-40a6-a68b-e15e5d04d4e9
+    uuid: c3eab147-a75c-4a2c-8522-6ddca67a40c6
     country_id: *bw
     network_id: *bw_freephone_services
-  - id: 291149
+  - id: 239342
     prefix: '2671'
     number_min_length: 6
     number_max_length: 8
-    uuid: 1488df7d-e590-470a-b3b2-c49b64c88232
+    uuid: c04791e6-0ecc-46ec-8ce7-025a5dfa5352
     country_id: *bw
     network_id: *bw_special_services
-  - id: 291362
+  - id: 239555
     prefix: '267110'
     number_min_length: 6
     number_max_length: 6
-    uuid: f5b7be68-941a-41cc-961e-781b05183962
+    uuid: c0406bd3-b86f-4f49-aa1e-fde35e075b0f
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 291364
+  - id: 239558
     prefix: '267111'
     number_min_length: 6
     number_max_length: 6
-    uuid: 8b9de729-e87d-4ebc-b7c7-1ae05ed4a0d8
+    uuid: 4e32e80c-230d-4961-b6bb-3862bd4a7226
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 291372
+  - id: 239566
     prefix: '267112'
     number_min_length: 6
     number_max_length: 6
-    uuid: 5b8a87e9-ff0c-45ea-a5ba-2cc6d14e677e
+    uuid: 1193c009-3ee6-45c1-ab62-c3a3cacc7cbc
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 499099
+  - id: 239584
     prefix: '267113'
     number_min_length: 6
     number_max_length: 6
-    uuid: 1110e18c-1219-491f-b85f-953e99fb8fbf
+    uuid: fb486184-7d7c-4e99-9e0b-ef73c26c5e17
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 291394
+  - id: 239588
     prefix: '267114'
     number_min_length: 6
     number_max_length: 6
-    uuid: e00ec46d-e6a3-4b7c-855d-f60d71d94e59
+    uuid: 9e0990dd-54e0-45ec-b9dc-a92268c8d158
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 291403
+  - id: 239596
     prefix: '267115'
     number_min_length: 6
     number_max_length: 6
-    uuid: 814a6462-418f-42b0-b767-213f4c8f0b9f
+    uuid: 59f63d57-c489-4f67-aa7c-0f6e803449be
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 291417
+  - id: 239610
     prefix: '267116'
     number_min_length: 6
     number_max_length: 6
-    uuid: b259a864-d136-42ba-8260-e1b24c9d5f1e
+    uuid: f6c6e5f2-5a8a-4dc0-ba78-64be2b946965
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 296142
+  - id: 254182
     prefix: '26791'
     number_min_length: 6
     number_max_length: 6
-    uuid: 8c506448-324b-4478-b152-463e35a2d6d9
+    uuid: 6b11d82d-fd4c-45a8-aeee-eb9db9061867
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 296356
+  - id: 254408
     prefix: '26792'
     number_min_length: 6
     number_max_length: 6
-    uuid: 603c8991-cf81-41c4-a8cd-95ff12007cae
+    uuid: 8dc48081-9d08-4c3a-a44d-67a9be46c275
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 296966
+  - id: 254998
     prefix: '26799'
     number_min_length: 6
     number_max_length: 6
-    uuid: 005e3de0-591d-4c12-93b9-586cb86db307
+    uuid: d9e42e56-3fca-40a9-ab54-f8932f0d2cbe
     country_id: *bw
     network_id: *bw_emergency_services
+# Fixed Prefixes
+  - id: 242075
+    prefix: '26758'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 176b34e7-0236-41a9-9148-f41af19689c6
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 242172
+    prefix: '26759'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 13da47e9-228a-43d1-a631-572bd538c08b
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 244998
+    prefix: '26724'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 172f9594-a0fd-4abc-8c1f-1a9a597f0b0f
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 245360
+    prefix: '26726'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 46c89282-09bf-48e8-bab8-b4128eb8ee02
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 245717
+    prefix: '26729'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e7512c32-e83b-4902-bf2d-b4a640663e90
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 245778
+    prefix: '2673'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0a6b810e-dd59-4aa0-b2e2-65a1a2fa510f
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 245967
+    prefix: '26746'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3f4d6ee9-3ef5-4c4e-8d37-9f4f03034806
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 246185
+    prefix: '26747'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 955aac89-31f5-4da3-93f3-bbdcaa01cdae
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 246392
+    prefix: '26749'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1bd8f739-28b5-4178-b1c3-6fe1facb4894
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 246795
+    prefix: '26753'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b710162a-49fd-4839-aaf9-88331261ef98
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 246881
+    prefix: '26754'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1a35797b-0b74-4093-8a4f-19fcb92f2919
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 247098
+    prefix: '26757'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e7d0da70-cc81-4d61-9007-baf96161de33
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 248080
+    prefix: '26765'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3b4f771b-112f-45da-a35b-b0c640829201
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 250951
+    prefix: '26762'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f54380bd-018f-49d8-90a9-18dc1b6a34ed
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 251515
+    prefix: '26768'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5b598ea0-6f94-4186-ad5f-b83fa072246b
+    country_id: *bw
+    network_id: *bw_fixed
+  - id: 253212
+    prefix: '26779'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba668204-9979-4035-a619-529e61537b39
+    country_id: *bw
+    network_id: *bw_fixed
 # Mobile Prefixes
-  - id: 294271
+  - id: 248571
     prefix: '26771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4def2185-4243-4a9b-87d8-18e022b41eff
+    uuid: 2c97eaac-b475-4885-8194-dbe3eb9d374f
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 294357
+  - id: 248657
     prefix: '26772'
     number_min_length: 11
     number_max_length: 11
-    uuid: 56b9867e-4387-4c50-9b47-37cef4f79180
+    uuid: 9dee451c-3592-429a-8feb-2ba3d369370e
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 294411
+  - id: 248711
     prefix: '26773'
     number_min_length: 11
     number_max_length: 11
-    uuid: 188843d5-82f5-4c50-8c2a-14d12a04e7a9
+    uuid: db141122-aa02-4767-ac3e-9bc249c96127
     country_id: *bw
     network_id: *bw_btc_mobile_mobile
-  - id: 294618
+  - id: 248918
     prefix: '267740'
     number_min_length: 11
     number_max_length: 11
-    uuid: acd9eb61-6fd5-4141-be0a-2667c8a1f33a
+    uuid: fe9f3fc9-7406-444b-a81d-32bd1ace9011
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 294649
+  - id: 248949
     prefix: '267741'
     number_min_length: 11
     number_max_length: 11
-    uuid: b68a4c89-35c3-4fad-be9b-183c456f1db0
+    uuid: fc606817-1b2b-4dc9-ab8d-cf5de5ade8f4
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 294675
+  - id: 248975
     prefix: '267742'
     number_min_length: 11
     number_max_length: 11
-    uuid: 984a953c-20f9-4112-b663-e8326c21e4e2
+    uuid: 7f8f7009-a7dd-417e-9a2a-f40c606ce85f
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 294688
+  - id: 248988
     prefix: '267743'
     number_min_length: 11
     number_max_length: 11
-    uuid: 712ee85d-df35-48ae-9e08-e7f424e65684
+    uuid: 4a5952d8-906f-40e6-8b9c-2c525120c81b
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 294741
+  - id: 249140
     prefix: '267744'
     number_min_length: 11
     number_max_length: 11
-    uuid: 56682cb1-03ee-4cf2-88d8-e23431700591
+    uuid: b14ced04-86ab-4014-aefb-87b865816364
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 294803
+  - id: 249203
     prefix: '267745'
     number_min_length: 11
     number_max_length: 11
-    uuid: 71538aa7-31c0-478a-a8da-c19d51a98f70
+    uuid: 74002349-1462-485e-adc8-e5aadb245dc7
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 294876
+  - id: 249265
     prefix: '267746'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0a9f4324-dd77-4ba2-bfb3-220fa41b3503
+    uuid: aec0463f-953b-4a60-a8d0-528f225b8f25
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 294898
+  - id: 249287
     prefix: '267747'
     number_min_length: 11
     number_max_length: 11
-    uuid: d9c256a0-338d-49f6-89b3-76b3c947a45d
+    uuid: 1be62cff-3212-4de0-9175-b56b27f59fc4
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 294916
+  - id: 249305
     prefix: '267748'
     number_min_length: 11
     number_max_length: 11
-    uuid: 32ed42e4-94bb-44f2-993a-e8aa53eb7d27
+    uuid: 0ac0fc55-1b0f-4568-8914-40273ce7f919
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 294979
+  - id: 249370
     prefix: '267749'
     number_min_length: 11
     number_max_length: 11
-    uuid: 039a2cd1-0ba1-41eb-9426-1f150b564bab
+    uuid: e941315a-070a-450b-90f6-144c9d51ff65
     country_id: *bw
     network_id: *bw_btc_mobile_mobile
-  - id: 295020
+  - id: 249411
     prefix: '267750'
     number_min_length: 11
     number_max_length: 11
-    uuid: 32f3cb60-8700-4d31-ad8d-39c2267af892
+    uuid: 2eb8af64-1011-4c9d-9c39-e514efc9a1cf
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 295077
+  - id: 249468
     prefix: '267751'
     number_min_length: 11
     number_max_length: 11
-    uuid: 36b37776-dd1a-4246-b3f8-aa98b37b4eb2
+    uuid: b6e37be3-88f7-4b2e-a979-586dbd21087d
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 295100
+  - id: 249491
     prefix: '267752'
     number_min_length: 11
     number_max_length: 11
-    uuid: fac641da-18fd-4762-8616-4611d1062687
+    uuid: 4e0210b6-11f2-457d-9f0f-cbb3a5561947
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 295137
+  - id: 249528
     prefix: '267753'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4d0204cf-4c1b-42da-97b4-9d27a3da9b46
+    uuid: 3913193b-66d0-4490-a6ea-98f9389c2264
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 295166
+  - id: 249557
     prefix: '267754'
     number_min_length: 11
     number_max_length: 11
-    uuid: 77d07dff-a353-4048-8bfe-65bb5281bbd8
+    uuid: 8a0fa971-2b91-49f8-b63c-d6fd9089ce59
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 295189
+  - id: 249580
     prefix: '267755'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b220965-268a-44d8-aeec-3cd1b134305d
+    uuid: 7877fe55-0b21-4067-9ac5-fc85c2c8698c
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 295282
+  - id: 249673
     prefix: '267756'
     number_min_length: 11
     number_max_length: 11
-    uuid: 737f3a91-7546-4305-aa00-b61d56a0ec7f
+    uuid: 19c43d9b-f784-484b-ba44-21009872e9a6
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 295363
+  - id: 249753
     prefix: '267757'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0f029a98-6762-4891-9edb-d0b2bd2cfadd
+    uuid: 8a2759b2-ec0a-4f8b-bfb3-535c4d059634
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 295489
+  - id: 249880
     prefix: '267758'
     number_min_length: 11
     number_max_length: 11
-    uuid: d9f86001-1846-440a-8b41-62ec19000942
+    uuid: ea7d0d09-ceb3-4047-9c6e-1d58cebe7bd8
     country_id: *bw
     network_id: *bw_btc_mobile_mobile
-  - id: 295507
+  - id: 249898
     prefix: '267759'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8cdee41f-69b4-47f6-be8b-a7ea0878f4d8
+    uuid: 77fadff4-282d-40cf-aac5-0dfc9d6c75d0
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 295545
-    prefix: '267760'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3f622f28-38ec-4cd1-9498-38184afc4d12
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295556
-    prefix: '267761'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e3e566ef-f1aa-4978-992a-53db3b5ef710
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295561
-    prefix: '267762'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fa1d20f6-8b4f-4164-9201-434b5ccb367b
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295580
-    prefix: '267763'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bf7bbf33-8c87-40da-97c2-a0595ef8cb22
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295585
-    prefix: '267764'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4464569c-4f99-4fd8-b96c-e9e34b7d5d8b
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295600
-    prefix: '267765'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 97f6d31e-94e5-401f-aec0-2b6f82c56599
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295616
-    prefix: '267766'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c7a48aaf-de52-4a0c-b146-aa88b21d0eac
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295838
-    prefix: '267890000'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: cf9664b6-6bb2-47ab-92a9-694741a8f7c2
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295839
-    prefix: '267890001'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 31ec621c-eb32-4148-a83f-f04cc19e2579
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295840
-    prefix: '267890002'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 8229ee5d-e6cc-4905-9189-26be6f3ee173
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295841
-    prefix: '267890003'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 17a3ec2d-cff4-4336-bd17-df602c6e33bd
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295842
-    prefix: '267890004'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2b32af98-ad2d-4bcb-afc9-8ca28ab6f4ce
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295843
-    prefix: '267890005'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 0a3ddee5-582a-42b1-b80c-b3daef225896
-    country_id: *bw
-    network_id: *bw_btc_mobile_mobile
-  - id: 295844
-    prefix: '267890006'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 56826354-2746-43d0-90cd-63b8ba6558f9
-    country_id: *bw
-    network_id: *bw_btc_mobile_mobile
-  - id: 295845
-    prefix: '267890007'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 51e56178-9eca-4f31-9724-01969550bf41
-    country_id: *bw
-    network_id: *bw_btc_mobile_mobile
-  - id: 295846
-    prefix: '267890008'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ba3c331e-e6de-48ee-a634-6dd65383e798
-    country_id: *bw
-    network_id: *bw_btc_mobile_mobile
-  - id: 295847
-    prefix: '267890009'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 6830401f-7acc-4fb5-8872-4230a1528b52
-    country_id: *bw
-    network_id: *bw_btc_mobile_mobile
-  - id: 295848
-    prefix: '267890010'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: cfae49c5-8b09-459f-8690-d0f7a3512004
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295849
-    prefix: '267890011'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 23abb9e9-fbac-40db-ac88-ca87a6931f34
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295850
-    prefix: '267890012'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 91ce0bfe-9532-4b19-8aa8-41032417d1e4
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295851
-    prefix: '267890013'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ec08581a-4c6a-4336-b841-39a3ead2719a
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295852
-    prefix: '267890014'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: c8401860-6f04-45fa-8262-3f90fac5b121
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295853
-    prefix: '267890015'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: b2f07256-8b95-46e1-9683-a76e211ab938
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295854
-    prefix: '267890016'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 6c613649-104d-4553-ade8-c3b59e58cba5
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295855
-    prefix: '267890017'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 5f99085f-0cdd-4e8d-b5ed-7cb68f13e4ef
-    country_id: *bw
-    network_id: *bw_mascom_mobile
-  - id: 295856
-    prefix: '267890018'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d3943739-946a-4039-8d0c-43cd346888a4
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295857
-    prefix: '267890019'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 9d2e4442-ded2-4e77-b5ea-bf18cc8c8772
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295858
-    prefix: '267890020'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4a4deaa2-b24d-4b4f-8b68-76f1b7fb2b4b
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295859
-    prefix: '267890021'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 9abe47bb-8e7f-4739-ad01-43b52a30005c
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295860
-    prefix: '267890022'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: a37ae10d-1e63-4c80-8222-73ecfd35e43e
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295861
-    prefix: '267890023'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d617ac5f-2e99-4400-9da8-52552c0f1929
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295862
-    prefix: '267890024'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ba07a7f4-d52f-462a-8e61-c3b3356f92e9
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295863
-    prefix: '267890025'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 9d0b50fc-3fcd-4b48-a7ba-f7c8f8889cc5
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295864
-    prefix: '267890026'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2e520a1c-8c3d-4303-b36f-2dd3a0c96f46
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295865
-    prefix: '267890027'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 5e2486c5-8d0c-46cd-a30f-954d199998d9
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295866
-    prefix: '267890028'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 5891cbdc-2746-4d9b-b436-1b10d5c144fe
-    country_id: *bw
-    network_id: *bw_orange_mobile
-  - id: 295867
-    prefix: '267890029'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 3fe5b0b4-5dc6-47af-8f5c-7b9f4891b500
-    country_id: *bw
-    network_id: *bw_btc_mobile_mobile
-  - id: 295868
-    prefix: '267890069'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2f42ddb7-adf5-4032-b422-53a20bf8951f
-    country_id: *bw
-    network_id: *bw_btc_mobile_mobile
-  - id: 301363
+  - id: 252076
     prefix: '2677'
     number_min_length: 11
     number_max_length: 11
-    uuid: ecddc41d-01b7-4cc0-97d9-37dcaa2c27f7
+    uuid: b2315140-5673-4184-a4b8-f4ff75fad731
     country_id: *bw
     network_id: *bw_mobile
-  - id: 301593
+  - id: 252299
+    prefix: '267760'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: df51ac27-1651-44b6-bcd4-dee26ba9633e
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 252310
+    prefix: '267761'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7431b020-5ce4-4293-8d47-8e7eb9bd5648
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 252315
+    prefix: '267762'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74d4f785-7e28-4583-a01d-0a38d0ea1670
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 252334
+    prefix: '267763'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34dd4f38-15f9-45da-838f-2b8aefdcc4b4
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 252339
+    prefix: '267764'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 63829f9b-d24b-4d92-a81f-17a9a42c2491
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 252354
+    prefix: '267765'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c9235239-daef-4c7f-8ad8-1d4652109174
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 252370
+    prefix: '267766'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 20bb7c10-956d-4909-a22f-4bd1e30f58b3
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 252402
     prefix: '267767'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3532dd5d-4d61-41d6-9e42-c30997e00067
+    uuid: c56a9e94-49e7-4649-8f7b-493081ec59aa
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 301600
+  - id: 252409
     prefix: '267768'
     number_min_length: 11
     number_max_length: 11
-    uuid: f2734cfb-9f97-4738-86ad-fb0eaf94a58a
+    uuid: 13031818-88dc-4c58-bb94-298f04c14d83
     country_id: *bw
     network_id: *bw_btc_mobile_mobile
-  - id: 301625
+  - id: 252434
     prefix: '267769'
     number_min_length: 11
     number_max_length: 11
-    uuid: daf5ab2d-a7c8-4575-bbd3-cbb3ffe94bc3
+    uuid: 4899e7a7-cb38-45e1-81b4-b782742610dc
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 301673
+  - id: 252482
     prefix: '267770'
     number_min_length: 11
     number_max_length: 11
-    uuid: a092b54a-5ae8-4ee1-ae04-1a5076c6c098
+    uuid: 5305c9d5-de34-4b1c-a6aa-ceb9a4e5975e
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 301742
+  - id: 252551
     prefix: '267771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5e341779-bc2f-4297-8d67-06b0dacdbf22
+    uuid: af4f75be-6b92-4332-8b47-813a0136729a
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 301824
+  - id: 252637
     prefix: '267772'
     number_min_length: 11
     number_max_length: 11
-    uuid: 84664e0d-3373-47c7-94d9-f2918d40f95b
+    uuid: 8d7698b6-0ccd-43a0-9d3a-b7a86dee3734
     country_id: *bw
     network_id: *bw_btc_mobile_mobile
-  - id: 301881
+  - id: 252694
     prefix: '267773'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9a72697-e32f-48a6-9747-76e98b1b1ebd
+    uuid: c32ccb5d-3cbd-4388-9c49-b95264fb9dc7
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 301898
+  - id: 252712
     prefix: '267774'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f1e474b-468d-4072-9f1d-aeef96db1005
+    uuid: d3684b99-95e5-448a-a101-42e6027bcbac
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 301921
+  - id: 252736
     prefix: '267775'
     number_min_length: 11
     number_max_length: 11
-    uuid: ffa3efeb-5f83-4a2b-9abc-b289456e76dc
+    uuid: c7af8406-1732-458a-ab85-896837f0a076
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 301961
+  - id: 252776
     prefix: '267776'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4a731420-73fc-47fc-b78b-a43a9148d96f
+    uuid: 4db43976-49ba-4407-9828-58360b8d829a
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 301977
+  - id: 252792
     prefix: '267777'
     number_min_length: 11
     number_max_length: 11
-    uuid: c6ad761b-d66d-4a9d-9487-798b672ca4ff
+    uuid: bcb6f208-3b71-4899-ac2a-c3ecd00ea1a9
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 302014
+  - id: 252829
     prefix: '267778'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87a6306e-0f64-4d8c-9e56-38398150fb54
+    uuid: 024ed794-e7f3-44ca-aa69-c2fd38d922b0
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 302065
+  - id: 252880
     prefix: '267779'
     number_min_length: 11
     number_max_length: 11
-    uuid: f05a9f89-e5ce-4698-b030-bacae00564bb
+    uuid: dbdda913-a68b-4216-b19f-9b59c3e5bfde
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 302120
+  - id: 252935
     prefix: '267780'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6ac06521-ce66-40b5-8f41-18b407a258b2
+    uuid: 6ec004f6-7acf-45fb-b325-c23213b43feb
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 302161
+  - id: 252976
     prefix: '267781'
     number_min_length: 11
     number_max_length: 11
-    uuid: 18941b43-799e-4058-abef-853a396b8d04
+    uuid: 934985d3-5653-410e-adac-6240331b8858
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 302176
+  - id: 252991
     prefix: '267782'
     number_min_length: 11
     number_max_length: 11
-    uuid: cbd8a9a5-ebaa-405c-aa53-dbf57c6dbeae
+    uuid: a9d757f3-f01c-43be-bc6c-6945b81e01a7
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 302198
+  - id: 253013
     prefix: '267783'
     number_min_length: 11
     number_max_length: 11
-    uuid: be7f282f-2c3b-49e1-9477-bda86e7553b6
+    uuid: 252e1993-187b-4472-a939-a46d5c2e1f40
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 302221
+  - id: 253036
     prefix: '267784'
     number_min_length: 11
     number_max_length: 11
-    uuid: b88dac6f-8561-4e16-9790-0cb92bde281c
+    uuid: 13c97cad-9206-4448-8c57-492362df3ad4
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 302255
+  - id: 253070
     prefix: '267785'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6955f806-e2a6-49e7-9f06-3072ff610b34
+    uuid: 05b19d93-8f35-4720-afe1-cfb5923cefe5
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 302271
+  - id: 253086
     prefix: '267786'
     number_min_length: 11
     number_max_length: 11
-    uuid: 33545940-9cf0-41a0-ba6f-145aaa9af7ee
+    uuid: fcb7d341-1c11-4975-98b0-a87b57866ae7
     country_id: *bw
     network_id: *bw_orange_mobile
-  - id: 302295
+  - id: 253110
     prefix: '267787'
     number_min_length: 11
     number_max_length: 11
-    uuid: 94706e8a-3a17-45ae-9fd4-1af8a0f00200
+    uuid: 5869d45f-1b0a-47cf-a1ee-61499b08b79b
     country_id: *bw
     network_id: *bw_orange_mobile
+  - id: 253848
+    prefix: '267890000'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3b40cb17-7b53-4559-bb3a-e845bc2e5425
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253849
+    prefix: '267890001'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 6317fd1a-6325-43eb-9d55-4ed9504de415
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253850
+    prefix: '267890002'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 53251bd4-0db0-454d-bfee-c9a040471477
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253851
+    prefix: '267890003'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 474b7c9f-d2cd-47ce-81ba-e39ccea84eee
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253852
+    prefix: '267890004'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 26aa4ef9-7b6f-4893-ad5f-6e2786711e44
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253853
+    prefix: '267890005'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c9d9fb9a-2e8e-4baa-9be2-76f823ebb5c0
+    country_id: *bw
+    network_id: *bw_btc_mobile_mobile
+  - id: 253854
+    prefix: '267890006'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7c8c0908-f82b-4d39-96d7-4f7db356e9da
+    country_id: *bw
+    network_id: *bw_btc_mobile_mobile
+  - id: 253855
+    prefix: '267890007'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ab853306-b2b9-4905-88a7-509bad24f761
+    country_id: *bw
+    network_id: *bw_btc_mobile_mobile
+  - id: 253856
+    prefix: '267890008'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 162bbdbe-5dfd-470d-ad1a-9b597eeb7c54
+    country_id: *bw
+    network_id: *bw_btc_mobile_mobile
+  - id: 253857
+    prefix: '267890009'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 20ab2fcd-20e0-4705-9093-606a05bc02f1
+    country_id: *bw
+    network_id: *bw_btc_mobile_mobile
+  - id: 253858
+    prefix: '267890010'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c7cb2423-a1b0-40bc-bba6-7d559be7984b
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 253859
+    prefix: '267890011'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e71e6901-5384-4e9f-85ff-1ff3fe0c0180
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 253860
+    prefix: '267890012'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 6f14f52a-13d1-42b3-9d47-ee8eb6b57403
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 253861
+    prefix: '267890013'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 064f9235-84cf-4f18-8017-6d9be5a6f71a
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 253862
+    prefix: '267890014'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 60a8d660-70be-4f57-ac37-fad827e1c29c
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 253863
+    prefix: '267890015'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1ab6cd00-d7b1-410a-8d9d-a366b4fe4951
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 253864
+    prefix: '267890016'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 27ea39d5-9a4c-4774-8f31-fb9e3f240402
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 253865
+    prefix: '267890017'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1d81e77f-cb78-480c-96b7-d41d008a9e21
+    country_id: *bw
+    network_id: *bw_mascom_mobile
+  - id: 253866
+    prefix: '267890018'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: bf0df5a3-f544-4e62-91f5-48e77fe53176
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253867
+    prefix: '267890019'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 0875fa8a-bfbb-40c1-8354-017127f77c89
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253868
+    prefix: '267890020'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 885cc62a-dbf5-48d6-9af7-344ee280a011
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253869
+    prefix: '267890021'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 777d508e-ca40-4e7b-a689-83c4f0e00d07
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253870
+    prefix: '267890022'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 84406e01-fa3f-493c-b8da-ae0629998b21
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253871
+    prefix: '267890023'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 92f64aad-a7e7-4004-81b2-cc7316de23aa
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253872
+    prefix: '267890024'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f8a0ba42-cd84-4fae-8d90-cb5981901380
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253873
+    prefix: '267890025'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 28dbcf4a-8f86-4d59-8104-8b20f632ad04
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253874
+    prefix: '267890026'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7cceee05-fe67-49b5-8227-8324a5c62e76
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253875
+    prefix: '267890027'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 9f9e48bd-fbc0-4ee3-adc3-f59add9cde19
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253876
+    prefix: '267890028'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5c290f86-933c-4adb-a2c7-4b5375c90c11
+    country_id: *bw
+    network_id: *bw_orange_mobile
+  - id: 253877
+    prefix: '267890029'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1dfbb803-905e-4c1f-a99e-82927b6c728a
+    country_id: *bw
+    network_id: *bw_btc_mobile_mobile
+  - id: 253878
+    prefix: '267890069'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 553a349b-5e30-4a18-bdc8-a0ef5beec131
+    country_id: *bw
+    network_id: *bw_btc_mobile_mobile

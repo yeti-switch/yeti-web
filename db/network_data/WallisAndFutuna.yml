@@ -1,103 +1,96 @@
 country_id: &wf 234
 networks:
-# Mobile Networks
-  - id: &wf_manuia_mobile 7884
-    name: WF Manuia Mobile
-    uuid: 920f66f0-c900-4cd6-8b88-c6c7cb2e9236
-    type_id: 3
 # Supplementary services Networks
-  - id: &wf_special_services 8338
+  - id: &wf_special_services 3971
     name: WF Special Services
-    uuid: f48c4565-9030-4d58-bba1-695a8527a0ac
+    uuid: b24f82c2-272b-41cd-b26c-86b2b34bc51f
     type_id: 14
-  - id: &wf_grand_danger_service 9536
-    name: WF Grand Danger Service
-    uuid: 5879821c-96dd-4bf2-af1f-f5c3baf0d7dc
+  - id: &wf_voip 5671
+    name: WF Voip
+    uuid: 790bbda1-ca30-44fe-a741-17e6ad63d38b
     type_id: 14
+# Mobile Networks
+  - id: &wf_manuia_mobile 4424
+    name: WF Manuia Mobile
+    uuid: fb5fe7c4-e2fd-42b6-aecf-d603b9298fcd
+    type_id: 3
 # Fixed Networks
-  - id: &wf_fixed 8584
+  - id: &wf_fixed 4963
     name: WF Fixed
-    uuid: f2e094a7-8df7-4722-91ff-6bd5c8f1134b
+    uuid: 20c28ad3-d26c-4c67-ab82-29871064ee52
     type_id: 12
 network_prefixes:
-# Mobile Prefixes
-  - id: 288238
-    prefix: '68140'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 9fb6856b-fd01-442c-a4b3-c5f4c0f91444
-    country_id: *wf
-    network_id: *wf_manuia_mobile
-  - id: 292163
-    prefix: '681499'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 22339d96-55ce-48b4-a804-ac98b33b1a19
-    country_id: *wf
-    network_id: *wf_manuia_mobile
-  - id: 302758
-    prefix: '68180'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 8dcdc3b7-7291-4f60-85d3-e15e11de6333
-    country_id: *wf
-    network_id: *wf_manuia_mobile
-  - id: 303060
-    prefix: '68182'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 590701f3-b411-493e-b7eb-655e9c04bab3
-    country_id: *wf
-    network_id: *wf_manuia_mobile
-  - id: 303176
-    prefix: '68183'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 3ea84dcd-f7e2-4f93-89f7-d1c8460591a5
-    country_id: *wf
-    network_id: *wf_manuia_mobile
 # Country code Prefixes
-  - id: 290914
+  - id: 239107
     prefix: '681'
     number_min_length: 4
     number_max_length: 100
-    uuid: e3799163-cf9c-4c83-9d3e-d3e0599e9533
+    uuid: 31ab752b-7288-4853-9840-086bc90693c4
     country_id: *wf
     network_id: null
 # Supplementary services Prefixes
-  - id: 291292
+  - id: 255579
     prefix: '6811'
     number_min_length: 5
     number_max_length: 7
-    uuid: 9158e872-3b9d-45d6-ba02-e2fe9efc4f75
+    uuid: 14fabe91-103e-4a3e-91e1-137c587a048a
     country_id: *wf
     network_id: *wf_special_services
-  - id: 305014
-    prefix: '6819860'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 7ad19bb5-2a38-43a5-87bf-7f71cd415fee
-    country_id: *wf
-    network_id: *wf_grand_danger_service
-# Fixed Prefixes
-  - id: 292237
-    prefix: '68150'
+  - id: 254426
+    prefix: '68192'
     number_min_length: 9
     number_max_length: 9
-    uuid: 7e35f9ee-8f92-4101-873b-4008143eede2
+    uuid: a108506e-305e-4e79-bedf-f4e6faeca300
     country_id: *wf
-    network_id: *wf_fixed
-  - id: 294379
+    network_id: *wf_voip
+  - id: 254698
+    prefix: '68193'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: cc7f6421-fc1c-4c8f-b82e-9fe92c4fa4fc
+    country_id: *wf
+    network_id: *wf_voip
+# Mobile Prefixes
+  - id: 240923
+    prefix: '68140'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: ef918da7-4fda-4bd3-8490-fbb3cc1f4511
+    country_id: *wf
+    network_id: *wf_manuia_mobile
+  - id: 246443
+    prefix: '681499'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 031c1ad2-922b-40dd-be97-88ae9f58822e
+    country_id: *wf
+    network_id: *wf_manuia_mobile
+  - id: 249978
+    prefix: '68180'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: c19fd63c-542c-4b5c-8700-4cf0f91fc440
+    country_id: *wf
+    network_id: *wf_manuia_mobile
+  - id: 250329
+    prefix: '68182'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 593c67b6-b8e3-4ebb-b32b-f5da3aeee88c
+    country_id: *wf
+    network_id: *wf_manuia_mobile
+  - id: 250445
+    prefix: '68183'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 4d38d346-b78f-4fe6-af52-4a635f659278
+    country_id: *wf
+    network_id: *wf_manuia_mobile
+# Fixed Prefixes
+  - id: 248679
     prefix: '68172'
     number_min_length: 9
     number_max_length: 9
-    uuid: 27b94d00-3990-465b-a0f1-ca1604f563fa
-    country_id: *wf
-    network_id: *wf_fixed
-  - id: 300811
-    prefix: '68168'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: e208ea67-405d-4368-be85-38d0af6365ca
+    uuid: 0b843080-08b8-445c-b291-5fdf174b1408
     country_id: *wf
     network_id: *wf_fixed
