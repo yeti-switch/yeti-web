@@ -1,27 +1,27 @@
 country_id: &mw 128
 networks:
 # Fixed Networks
-  - id: &mw_fixed 4098
+  - id: &mw_fixed 3723
     name: MW Fixed
-    uuid: 543c39e8-da42-4ac0-961d-b893d69fafda
+    uuid: 45b39ed9-6437-4486-9ce9-7d79ddeeef13
     type_id: 12
 # Supplementary services Networks
-  - id: &mw_voip 4255
+  - id: &mw_voip 3880
     name: MW Voip
-    uuid: 29865ae1-428a-469e-a77d-125bcb1e0928
+    uuid: c484f94b-9efe-4a55-9c84-274943f6e284
     type_id: 14
-  - id: &mw_special_services 4311
+  - id: &mw_special_services 3936
     name: MW Special Services
-    uuid: 7a2ff684-5cb7-4eff-a6ca-3f26da983df1
+    uuid: fb0144a4-fa5f-4e22-8a4c-275fdffa01c2
     type_id: 14
 # Mobile Networks
-  - id: &mw_airtel_mobile 5390
+  - id: &mw_airtel_mobile 5014
     name: MW Airtel Mobile
-    uuid: 909bafaa-f889-4fc8-87a1-f65eb0aee7a1
+    uuid: e2414776-1635-436b-b623-96ed5c19a3b9
     type_id: 3
-  - id: &mw_tnm_mobile 5797
+  - id: &mw_tnm_mobile 5421
     name: MW Tnm Mobile
-    uuid: 3648d8c2-61a7-4840-adaa-fdc7b12a1951
+    uuid: 4375fc2f-8f47-4128-a4bd-4f9a366fe142
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -29,21 +29,21 @@ network_prefixes:
     prefix: '26502'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5921103f-8504-487c-b308-f8280a7b1574
+    uuid: 47e7f53a-98e8-404b-9bd7-faa6bc1bfc7d
     country_id: *mw
     network_id: *mw_fixed
   - id: 291321
     prefix: '26501'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6081f260-8955-460d-9315-1a3a88df90f7
+    uuid: df2cc90e-4ac5-4cce-8ecb-f71b2b6837e4
     country_id: *mw
     network_id: *mw_fixed
   - id: 291471
     prefix: '2650111'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2dcb2834-7f3d-4d52-9275-638e5c8e0050
+    uuid: d8d634be-e324-418f-b809-9fa025dea680
     country_id: *mw
     network_id: *mw_fixed
 # Supplementary services Prefixes
@@ -51,42 +51,42 @@ network_prefixes:
     prefix: '265031'
     number_min_length: 12
     number_max_length: 12
-    uuid: b76425fd-32fe-4707-ada6-c06852d2511e
+    uuid: 216bad85-ebee-4935-b085-1a3884108264
     country_id: *mw
     network_id: *mw_voip
   - id: 288255
     prefix: '2654'
     number_min_length: 6
     number_max_length: 6
-    uuid: 86ce9039-96f9-4da0-936b-8166168dff20
+    uuid: 84eb8d75-5d2f-4e98-982f-97c5bd1609c3
     country_id: *mw
     network_id: *mw_special_services
   - id: 291320
     prefix: '2651'
     number_min_length: 6
     number_max_length: 6
-    uuid: 12ee1d20-3a0d-42d7-9f03-28fa3e5f79e3
+    uuid: df510e53-f87c-4891-ae38-bc7fd7100140
     country_id: *mw
     network_id: *mw_special_services
   - id: 292314
     prefix: '2655'
     number_min_length: 6
     number_max_length: 6
-    uuid: 845d668a-0d87-419a-baef-de9174691286
+    uuid: 679add07-815e-4121-9423-4d5c237a0bd3
     country_id: *mw
     network_id: *mw_special_services
   - id: 296096
     prefix: '2659'
     number_min_length: 6
     number_max_length: 6
-    uuid: e5913167-81c4-4740-83df-41bb7241ef05
+    uuid: abb44d25-f7c4-4f6b-999d-90e059f835db
     country_id: *mw
     network_id: *mw_special_services
   - id: 301591
     prefix: '2657'
     number_min_length: 6
     number_max_length: 6
-    uuid: 4659949f-bfe8-4f2d-9a52-bc5b1f6a4534
+    uuid: 249be6a3-7133-4928-9461-5ef6231edd2f
     country_id: *mw
     network_id: *mw_special_services
 # Country code Prefixes
@@ -94,7 +94,7 @@ network_prefixes:
     prefix: '265'
     number_min_length: 4
     number_max_length: 100
-    uuid: e4f14a1c-5f9a-4882-ab64-9bc06eaa4898
+    uuid: aaaf72c8-d71c-434f-980e-4887f2512abb
     country_id: *mw
     network_id: null
 # Mobile Prefixes
@@ -102,13 +102,13 @@ network_prefixes:
     prefix: '26509'
     number_min_length: 12
     number_max_length: 12
-    uuid: 86dec6b3-c07d-49fe-8dc2-8dd16295e7b0
+    uuid: 3f2a2ef3-dd0b-406a-aac9-fc5fb289afd4
     country_id: *mw
     network_id: *mw_airtel_mobile
   - id: 302926
     prefix: '26508'
     number_min_length: 12
     number_max_length: 12
-    uuid: b191a913-2770-4d49-8272-168817082243
+    uuid: fe285b3e-cdc9-4219-9210-13cd9a6dfe3a
     country_id: *mw
     network_id: *mw_tnm_mobile
