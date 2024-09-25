@@ -3,29 +3,29 @@ networks:
 # Supplementary services Networks
   - id: &ad_special_services 21357
     name: AD Special Services
-    uuid: a182d44d-3b35-40ba-bafe-419fd8d318ad
+    uuid: d51c5033-31f4-41d8-8c60-3b8aee2e521c
     type_id: 14
   - id: &ad_freephone_services 22640
     name: AD Freephone Services
-    uuid: 97655faf-32c6-4764-9588-6acde0f99d32
+    uuid: 6b3bae86-731a-492e-ac9f-fef96e29e965
     type_id: 14
 # Fixed Networks
   - id: &ad_voice_mail_fixed 21851
     name: AD Voice Mail Fixed
-    uuid: 722ce799-c8b1-4957-846f-7ee42cc5c8ae
+    uuid: 01f2da32-ba81-41e3-b9c5-2080481c08f4
     type_id: 12
   - id: &ad_fixed 24141
     name: AD Fixed
-    uuid: 0c77272a-086d-40e2-bb68-e0b8244488d0
+    uuid: a983b2ef-1f30-4df9-b598-6f3a17a93ba0
     type_id: 12
   - id: &ad_voip_fixed 24278
     name: AD Voip Fixed
-    uuid: 19599484-6000-4ad4-9445-da12a589a4bc
+    uuid: 317e1492-b86c-4cf6-a94a-64da9ad41b68
     type_id: 12
 # Mobile Networks
   - id: &ad_mobiland_mobile 22524
     name: AD Mobiland Mobile
-    uuid: 12a85d87-f3ce-4651-973c-d394ba941a2d
+    uuid: 5a0ff9a7-abb9-4c27-be5e-0b6f795af048
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -33,7 +33,7 @@ network_prefixes:
     prefix: '376'
     number_min_length: 4
     number_max_length: 100
-    uuid: 5e29726e-1725-4c26-9abd-4c252a50f2ca
+    uuid: 552697ca-f91c-4029-b03a-9f7607198173
     country_id: *ad
     network_id: null
 # Supplementary services Prefixes
@@ -41,28 +41,28 @@ network_prefixes:
     prefix: '3761'
     number_min_length: 6
     number_max_length: 9
-    uuid: b4efe717-a562-490a-99a6-5e0627be4155
+    uuid: 6f5a0d3e-b470-48d7-909d-ab305bb7e548
     country_id: *ad
     network_id: *ad_special_services
   - id: 247293
     prefix: '3761800'
     number_min_length: 11
     number_max_length: 11
-    uuid: 40b415ac-8d2f-47aa-8632-d4c896dd11ab
+    uuid: 0769a48a-17ce-4a26-9da4-ef94181f8e48
     country_id: *ad
     network_id: *ad_freephone_services
   - id: 247307
     prefix: '3761802'
     number_min_length: 11
     number_max_length: 11
-    uuid: b16398c8-04ca-412c-bf03-fc9fffe68599
+    uuid: 7701289b-f2c7-4892-b352-693e2ddb2217
     country_id: *ad
     network_id: *ad_freephone_services
   - id: 257076
     prefix: '3769'
     number_min_length: 9
     number_max_length: 9
-    uuid: 213ab876-dda0-4329-a65b-5b3f3b128249
+    uuid: 5e17414d-1860-4b80-80ee-d36bc374c9e1
     country_id: *ad
     network_id: *ad_special_services
 # Fixed Prefixes
@@ -70,35 +70,35 @@ network_prefixes:
     prefix: '376170'
     number_min_length: 12
     number_max_length: 12
-    uuid: 479fa2da-4da1-4fcd-aee4-3c20a01bc801
+    uuid: 7f6f1e7d-6574-48ff-9513-f5e7304ef725
     country_id: *ad
     network_id: *ad_voice_mail_fixed
   - id: 243075
     prefix: '376170170'
     number_min_length: 15
     number_max_length: 15
-    uuid: 4943fab7-3e0b-4890-aa62-e77b20464c33
+    uuid: b6e8b9d9-2560-43de-8a94-ac711f2c272c
     country_id: *ad
     network_id: *ad_voice_mail_fixed
   - id: 255231
     prefix: '3767'
     number_min_length: 9
     number_max_length: 9
-    uuid: 9b56fea6-de23-4957-b8d1-272af0f43194
+    uuid: a064bf23-939d-47be-8a2b-08c78e8e3fda
     country_id: *ad
     network_id: *ad_fixed
   - id: 256376
     prefix: '37679'
     number_min_length: 9
     number_max_length: 9
-    uuid: 41fed9c4-8b2e-4564-8e90-3277a4039902
+    uuid: 71af4c8e-e5e0-4cc2-aea6-c9b36fda8fa8
     country_id: *ad
     network_id: *ad_voip_fixed
   - id: 256657
     prefix: '3768'
     number_min_length: 9
     number_max_length: 9
-    uuid: 2df59d3b-c008-4792-a487-96e5340fde13
+    uuid: f9bb68cd-a903-4763-b36f-5776b853acfe
     country_id: *ad
     network_id: *ad_fixed
 # Mobile Prefixes
@@ -106,20 +106,20 @@ network_prefixes:
     prefix: '3766'
     number_min_length: 9
     number_max_length: 9
-    uuid: 18c20535-e4fd-4658-9e6f-ac7711c7b5d1
+    uuid: dcec7368-970e-42aa-bafb-184891564227
     country_id: *ad
     network_id: *ad_mobiland_mobile
   - id: 248879
     prefix: '3763'
     number_min_length: 9
     number_max_length: 9
-    uuid: 21cfc48d-9123-449d-98e3-e65e688b99b3
+    uuid: feed4050-621b-4512-9c5c-fd339a3d5319
     country_id: *ad
     network_id: *ad_mobiland_mobile
   - id: 254878
     prefix: '376690'
     number_min_length: 12
     number_max_length: 12
-    uuid: 14a3190b-283a-48ff-b3ac-eebc19c87d14
+    uuid: e84f391d-b9bf-4a5e-adbb-dd9bec0e7811
     country_id: *ad
     network_id: *ad_mobiland_mobile
