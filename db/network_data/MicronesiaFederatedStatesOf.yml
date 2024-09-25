@@ -1,76 +1,76 @@
 country_id: &fm 139
 networks:
 # Supplementary services Networks
-  - id: &fm_emergency_services 8281
+  - id: &fm_emergency_services 5685
     name: FM Emergency Services
-    uuid: 2d4849b4-7a86-4b95-a82e-aad6747db602
+    uuid: 67ddbcfe-55e6-45d8-8a9a-2fc87356dad5
     type_id: 14
-  - id: &fm_special_services 8359
+  - id: &fm_special_services 5763
     name: FM Special Services
-    uuid: c82aebb3-c14d-4201-9081-edea10d1abac
+    uuid: 16d21934-ba39-4683-a998-f0ca2b19d775
     type_id: 14
 # Fixed Networks
-  - id: &fm_fixed 9985
+  - id: &fm_fixed 7389
     name: FM Fixed
-    uuid: c9272c5a-8b30-44fe-93c0-eca45d5d9802
+    uuid: e2ff9a40-aa8a-4eb2-91b4-9efb067e5ec6
     type_id: 12
 network_prefixes:
 # Country code Prefixes
-  - id: 239005
+  - id: 231996
     prefix: '691'
     number_min_length: 4
     number_max_length: 100
-    uuid: b328bdb6-1871-428f-804c-5e95e0660bed
+    uuid: cda0e8a6-aae2-4407-9c10-1affa798fa51
     country_id: *fm
     network_id: null
 # Supplementary services Prefixes
-  - id: 240266
+  - id: 233256
     prefix: '691311'
     number_min_length: 6
     number_max_length: 6
-    uuid: c7318aed-aa5f-4324-8dda-021562b50393
+    uuid: db3c12bc-7ecc-4fbf-9a5d-781d78ca4b70
     country_id: *fm
     network_id: *fm_emergency_services
-  - id: 240945
+  - id: 233935
     prefix: '6914'
     number_min_length: 6
     number_max_length: 7
-    uuid: b5313478-20bc-43af-9bef-72b4e6d0541c
+    uuid: 3e219a05-72d8-4d9c-85ca-19244ab0f218
     country_id: *fm
     network_id: *fm_special_services
-  - id: 254399
+  - id: 247389
     prefix: '691911'
     number_min_length: 6
     number_max_length: 6
-    uuid: abc5a01d-1a57-4327-aa81-be63b4412e70
+    uuid: c06dbb35-bf63-4aa0-a3d7-97f6ae3496d2
     country_id: *fm
     network_id: *fm_emergency_services
 # Fixed Prefixes
-  - id: 324447
+  - id: 317437
     prefix: '691320'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1ca7e673-736f-483c-bb2b-a929d97e8136
+    uuid: 7d65ca15-5a12-4463-b3a7-ce05d7839c0b
     country_id: *fm
     network_id: *fm_fixed
-  - id: 327763
+  - id: 320753
     prefix: '691330'
     number_min_length: 10
     number_max_length: 10
-    uuid: 05d1419a-07dd-4aa7-aeba-c877971d562d
+    uuid: a50f7956-3df1-4461-b714-0237e86effb9
     country_id: *fm
     network_id: *fm_fixed
-  - id: 349493
+  - id: 342483
     prefix: '691350'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2028db45-24a5-45c2-b2d2-79ed467d33ec
+    uuid: 32bc920a-271c-4bf3-89f9-8371abf1071d
     country_id: *fm
     network_id: *fm_fixed
-  - id: 352979
+  - id: 345969
     prefix: '691370'
     number_min_length: 10
     number_max_length: 10
-    uuid: 944a1c87-2ec8-4960-abb0-8ba3fff2f740
+    uuid: 7c4ab5b3-1c6b-41cc-9600-3128dcd60d03
     country_id: *fm
     network_id: *fm_fixed

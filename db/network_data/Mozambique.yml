@@ -1,212 +1,212 @@
 country_id: &mz 145
 networks:
 # Supplementary services Networks
-  - id: &mz_special_services 7875
+  - id: &mz_special_services 5280
     name: MZ Special Services
-    uuid: bc1e0486-2d8d-452b-b349-5ebf982a0366
+    uuid: 5cc9927f-1e9f-45b8-a510-82874cfc7726
     type_id: 14
-  - id: &mz_fax2mail_service 9882
+  - id: &mz_fax2mail_service 7286
     name: MZ Fax2Mail Service
-    uuid: 37c5a738-4a4f-4784-96c9-a2cf0601fc9e
+    uuid: 1850f6b0-32d1-4a60-9076-e84e7f90bf91
     type_id: 14
 # Fixed Networks
-  - id: &mz_fixed 9881
+  - id: &mz_fixed 7285
     name: MZ Fixed
-    uuid: d1572383-f1a7-4fcc-9e0f-a50d30cdf8f7
+    uuid: d8475ff7-6c09-4564-a3e5-4d465b92b3ad
     type_id: 12
 # Satellite Networks
-  - id: &mz_satellite 9907
+  - id: &mz_satellite 7311
     name: MZ Satellite
-    uuid: 636edfd5-ce54-4ba3-bdbd-e6801f257e87
+    uuid: 05cbfa18-07db-49ba-9783-5403ed8402bb
     type_id: 16
 # Mobile Networks
-  - id: &mz_tmcel_mobile 10253
+  - id: &mz_tmcel_mobile 7656
     name: MZ Tmcel Mobile
-    uuid: f22d5ae9-152e-437a-ab67-8aec284e25db
+    uuid: 3505724c-1f09-4737-9bd2-55b904e92f8f
     type_id: 3
-  - id: &mz_movitel_mobile 10266
+  - id: &mz_movitel_mobile 7669
     name: MZ Movitel Mobile
-    uuid: cdbeb81b-d8e3-48a6-b7bb-a846635fe182
+    uuid: d0d347d3-6f7b-4b94-a045-949c96049cf9
     type_id: 3
-  - id: &mz_vodacom_mobile 10276
+  - id: &mz_vodacom_mobile 7679
     name: MZ Vodacom Mobile
-    uuid: 80b080e1-8c26-490e-bb3a-f5b00b34095e
+    uuid: aaad6359-62fe-479f-90ec-a585649b4913
     type_id: 3
-  - id: &mz_mobile 10315
+  - id: &mz_mobile 7718
     name: MZ Mobile
-    uuid: 0c87ccdd-57c2-47e7-b0ca-d96b21458f2b
+    uuid: efdf138a-cbb0-4193-86d0-eaa17c7e54e7
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 239067
+  - id: 232058
     prefix: '258'
     number_min_length: 4
     number_max_length: 100
-    uuid: 99d83d38-7897-4546-8b9e-4ef087bd8a6b
+    uuid: 54a3c90d-bdf9-4680-9852-1e74576f4d69
     country_id: *mz
     network_id: null
 # Supplementary services Prefixes
-  - id: 239460
+  - id: 232451
     prefix: '2581'
     number_min_length: 7
     number_max_length: 7
-    uuid: e4753ce5-2c32-4afc-83fe-8a77f5b16572
+    uuid: e9bc013f-7145-4fee-b8c6-7acc166825ae
     country_id: *mz
     network_id: *mz_special_services
-  - id: 271258
+  - id: 264248
     prefix: '2582101'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2da34936-714f-4c9e-87fa-a1671938d081
+    uuid: 7bd4ebd5-1472-4c8c-918c-fe182b12243e
     country_id: *mz
     network_id: *mz_fax2mail_service
-  - id: 271259
+  - id: 264249
     prefix: '2582102'
     number_min_length: 11
     number_max_length: 11
-    uuid: c5f335de-9f91-4750-900d-abbc317d6593
+    uuid: 4a9e7922-6c44-4d36-80e5-3b9610e5113d
     country_id: *mz
     network_id: *mz_fax2mail_service
 # Fixed Prefixes
-  - id: 271248
+  - id: 264238
     prefix: '25821'
     number_min_length: 11
     number_max_length: 11
-    uuid: f076d97d-5632-42b0-becb-f0d66dfa8864
+    uuid: fe1d1029-0947-46be-a91d-ade01685079e
     country_id: *mz
     network_id: *mz_fixed
-  - id: 283646
+  - id: 276636
     prefix: '25823'
     number_min_length: 11
     number_max_length: 11
-    uuid: f0ea41ff-b803-44f3-ae56-8639036c9844
+    uuid: 8cb59335-0d3b-44ce-8510-16ae1dfb2a71
     country_id: *mz
     network_id: *mz_fixed
-  - id: 291340
+  - id: 284330
     prefix: '25824'
     number_min_length: 11
     number_max_length: 11
-    uuid: dba63780-88b0-48e0-8983-1a3086ca9956
+    uuid: 698ec466-0f4d-463b-8829-9b8b8e60ead9
     country_id: *mz
     network_id: *mz_fixed
-  - id: 294641
+  - id: 287631
     prefix: '258251'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7b72396f-1568-47bb-b6b4-b44335984540
+    uuid: f0e1f636-2a68-467b-898d-277f13542d38
     country_id: *mz
     network_id: *mz_fixed
-  - id: 295159
+  - id: 288149
     prefix: '258252'
     number_min_length: 11
     number_max_length: 11
-    uuid: c8692e31-3635-4649-a7de-c7ee11e960c6
+    uuid: c2f35e7a-8ec7-4203-bd23-6e834fb55922
     country_id: *mz
     network_id: *mz_fixed
-  - id: 296811
+  - id: 289801
     prefix: '25826'
     number_min_length: 11
     number_max_length: 11
-    uuid: b2230e9e-f024-438e-8480-d3257ecc2a0d
+    uuid: b9423880-9196-4ea6-b20f-fcdbefb4184f
     country_id: *mz
     network_id: *mz_fixed
-  - id: 302227
+  - id: 295217
     prefix: '258271'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3476c2b6-e834-4631-aac7-3cb9a5a246be
+    uuid: 5d815b8d-72db-43ef-a158-a4f3736b427d
     country_id: *mz
     network_id: *mz_fixed
-  - id: 302728
+  - id: 295718
     prefix: '258272'
     number_min_length: 11
     number_max_length: 11
-    uuid: 80408381-e286-4fa9-92e1-fdb7c04ffd68
+    uuid: 65b800aa-bc07-4d1b-84cb-1c18e28a17fe
     country_id: *mz
     network_id: *mz_fixed
-  - id: 304254
+  - id: 297244
     prefix: '258282'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9eb767e-45e2-4f5a-9236-4d530ab521d1
+    uuid: 01abb339-d3d1-4acb-836e-91196d15aee6
     country_id: *mz
     network_id: *mz_fixed
-  - id: 305612
+  - id: 298602
     prefix: '258293'
     number_min_length: 11
     number_max_length: 11
-    uuid: e76c1ab3-c8e9-4a9b-9d8c-e4e7e042b85b
+    uuid: d0ecc072-060c-445f-8c58-f2acbe216c52
     country_id: *mz
     network_id: *mz_fixed
-  - id: 310568
+  - id: 303558
     prefix: '258281'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3ab4b16c-dc16-44a0-b1b4-36fd43c2f8c7
+    uuid: c763d9a5-9ddb-4267-9c24-d665b1648820
     country_id: *mz
     network_id: *mz_fixed
 # Satellite Prefixes
-  - id: 293852
+  - id: 286842
     prefix: '258250'
     number_min_length: 11
     number_max_length: 11
-    uuid: 41063d90-132f-43e0-87b0-77d93b289bf7
+    uuid: e865fd78-5f29-49e6-bca0-d2f6641e6f83
     country_id: *mz
     network_id: *mz_satellite
-  - id: 448421
+  - id: 441409
     prefix: '25889'
     number_min_length: 12
     number_max_length: 12
-    uuid: d891834d-e27b-4db0-ac07-dc7921f78202
+    uuid: 3cadbc75-1174-4a2a-8985-c65f9e3ac976
     country_id: *mz
     network_id: *mz_satellite
 # Mobile Prefixes
-  - id: 415799
+  - id: 408788
     prefix: '25882'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c7665ce-3b40-4de4-be83-38d581891c41
+    uuid: db6f66ac-4d17-420b-aaaf-2532139795f8
     country_id: *mz
     network_id: *mz_tmcel_mobile
-  - id: 419135
+  - id: 412124
     prefix: '25883'
     number_min_length: 12
     number_max_length: 12
-    uuid: 322bb4ca-322c-44a5-b2fe-a4ca60816828
+    uuid: ce6853d6-5614-4da0-a1c0-0fa5e2e29874
     country_id: *mz
     network_id: *mz_tmcel_mobile
-  - id: 425713
+  - id: 418702
     prefix: '25886'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5e90cf4f-a5fe-4c27-a8ac-da82de486e90
+    uuid: beb5ba0f-a012-46be-8022-7fe4615b6175
     country_id: *mz
     network_id: *mz_movitel_mobile
-  - id: 430228
+  - id: 423217
     prefix: '25884'
     number_min_length: 12
     number_max_length: 12
-    uuid: 10149a5f-c2be-4081-ab2d-13551a5bdbd0
+    uuid: bf36c978-58bf-46ed-a1f2-fd851b441d82
     country_id: *mz
     network_id: *mz_vodacom_mobile
-  - id: 432893
+  - id: 425882
     prefix: '25885'
     number_min_length: 12
     number_max_length: 12
-    uuid: ef2fc32e-7187-4554-9806-324cac56a57f
+    uuid: 9795d3ab-37a1-4464-807c-1e4bc907d23e
     country_id: *mz
     network_id: *mz_vodacom_mobile
-  - id: 438119
+  - id: 431108
     prefix: '25887'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0ecca1a4-d1ef-443f-a927-c1dfbecf2bc0
+    uuid: 791cfd5f-dea3-4d0c-bc53-241feff5331c
     country_id: *mz
     network_id: *mz_movitel_mobile
-  - id: 440803
+  - id: 433792
     prefix: '25888'
     number_min_length: 12
     number_max_length: 12
-    uuid: d77a7442-419d-4284-b0d0-de076d5d0291
+    uuid: 5ad6d976-9b84-4425-a7dd-a663f74addca
     country_id: *mz
     network_id: *mz_mobile

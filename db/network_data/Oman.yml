@@ -1,470 +1,470 @@
 country_id: &om 161
 networks:
 # Supplementary services Networks
-  - id: &om_special_services 7890
+  - id: &om_special_services 5295
     name: OM Special Services
-    uuid: 94bcd5d5-bcc1-4a78-b7b2-e73dcdba2e60
+    uuid: ee7013d8-a15c-4cb5-837e-848861d81a31
     type_id: 14
-  - id: &om_internet_of_things_iot_services 8370
+  - id: &om_internet_of_things_iot_services 5774
     name: OM Internet Of Things Iot Services
-    uuid: deed7bda-91ef-4fc0-bbbe-63bf0caab9ef
+    uuid: ded42943-8e0e-458f-9fd1-d95ddd16a931
     type_id: 14
-  - id: &om_freephone_services 9167
+  - id: &om_freephone_services 6571
     name: OM Freephone Services
-    uuid: 7820c757-f0a1-48b5-9e77-5e07ad125da2
+    uuid: d50d17c9-d086-47b7-adb0-b01eeadbbcf9
     type_id: 14
-  - id: &om_premium_rate_services 9583
+  - id: &om_premium_rate_services 6987
     name: OM Premium Rate Services
-    uuid: 97d58d84-c695-445f-b252-af35ad0c9d34
+    uuid: 9d766cdb-36cb-45fe-bcb6-1cde10829212
     type_id: 14
-  - id: &om_emergency_service 9673
+  - id: &om_emergency_service 7077
     name: OM Emergency Service
-    uuid: 41c6a658-f0ea-4620-bbfc-73bb63f50f38
+    uuid: d8b39973-4ae5-491f-8162-e1b44d928929
     type_id: 14
 # Fixed Networks
-  - id: &om_fixed 8665
+  - id: &om_fixed 6069
     name: OM Fixed
-    uuid: 27100919-e1cc-4c81-befc-6a6daf9de97b
+    uuid: 310e116d-7a6e-4805-baf5-a2d02b2ea355
     type_id: 12
 # Mobile Networks
-  - id: &om_omantel_mobile_mobile 8907
+  - id: &om_omantel_mobile_mobile 6311
     name: OM Omantel Mobile Mobile
-    uuid: 47e199be-455a-4273-b29f-c8b297f7c7ee
+    uuid: 4fc6094b-b35e-449b-a366-9a3ae1a28679
     type_id: 3
-  - id: &om_mobile 9119
+  - id: &om_mobile 6523
     name: OM Mobile
-    uuid: 1f4db209-4c64-4a01-9248-a62f7397eb29
+    uuid: ec9a2cb6-6732-4853-81d8-b9c62981aba8
     type_id: 3
-  - id: &om_vodafone_mobile 9415
+  - id: &om_vodafone_mobile 6819
     name: OM Vodafone Mobile
-    uuid: 532bc52b-a58c-4136-b466-e15263e846e4
+    uuid: 0d3a2fdd-7389-4a77-95e2-a992ca0b2422
     type_id: 3
-  - id: &om_ooredoo_mobile 9462
+  - id: &om_ooredoo_mobile 6866
     name: OM Ooredoo Mobile
-    uuid: 4192ddd1-8d91-48f9-a342-5bc6dd5c3047
+    uuid: a52f4d36-e7b4-489a-9f88-813f7f472eb0
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 239084
+  - id: 232075
     prefix: '968'
     number_min_length: 4
     number_max_length: 100
-    uuid: 1808c832-673c-4651-a075-e143b69fea6f
+    uuid: bd67ade6-3250-4e89-85af-29ea2f869b40
     country_id: *om
     network_id: null
 # Supplementary services Prefixes
-  - id: 239478
+  - id: 232469
     prefix: '9681'
     number_min_length: 7
     number_max_length: 7
-    uuid: dfa9a227-d94f-4bd3-b303-0cf6e3a863bd
+    uuid: 1795c97e-f8ef-41a8-be9b-6bc14aface22
     country_id: *om
     network_id: *om_special_services
-  - id: 240966
+  - id: 233956
     prefix: '9684'
     number_min_length: 15
     number_max_length: 15
-    uuid: a8bd4e5e-7260-49e5-9865-1ff7a0bb7703
+    uuid: d8373be5-511f-429e-a5d2-e2652d09f004
     country_id: *om
     network_id: *om_internet_of_things_iot_services
-  - id: 250177
+  - id: 243167
     prefix: '968800'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1c70fbba-7d40-4192-aeec-0a61662849a4
+    uuid: b79147d8-c550-4d1f-9eab-aea406be65cb
     country_id: *om
     network_id: *om_freephone_services
-  - id: 254195
+  - id: 247185
     prefix: '968900'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e198457-4c1f-4fc4-8f97-7c60e900dc3f
+    uuid: 43b52b76-cedd-438e-a3b8-6e428d7ab1bd
     country_id: *om
     network_id: *om_premium_rate_services
-  - id: 255323
+  - id: 248313
     prefix: '9689999'
     number_min_length: 7
     number_max_length: 7
-    uuid: e03b39a1-edc0-42bf-a6d1-83e18ecfbfe0
+    uuid: d3ddb20e-d65d-4e54-859b-f9a326d31757
     country_id: *om
     network_id: *om_emergency_service
 # Fixed Prefixes
-  - id: 244438
+  - id: 237428
     prefix: '9682'
     number_min_length: 11
     number_max_length: 11
-    uuid: 386c7c17-c93e-46a2-948c-4cc6cac40d6d
+    uuid: 932f6f15-e0ec-4e54-8f30-58666ccf40e4
     country_id: *om
     network_id: *om_fixed
-  - id: 244643
+  - id: 237633
     prefix: '96821'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5cc6a5e6-70f5-4266-84ab-89e39ee8a3bb
+    uuid: b2368416-4447-4d84-9564-ebf5c2337548
     country_id: *om
     network_id: *om_fixed
-  - id: 244740
+  - id: 237730
     prefix: '96822'
     number_min_length: 11
     number_max_length: 11
-    uuid: 46405e1e-dac5-4f3b-856b-28d8af27de07
+    uuid: 3349802c-e9ac-4568-9ecb-6e3109717c68
     country_id: *om
     network_id: *om_fixed
-  - id: 244936
+  - id: 237926
     prefix: '96823'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8bb01cee-8d95-462d-aea8-ae897f8bc13d
+    uuid: cc0b0f03-110d-4622-bb1e-69f2da94c349
     country_id: *om
     network_id: *om_fixed
-  - id: 245126
+  - id: 238116
     prefix: '96824'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5f3029e9-ea37-4900-8db0-310a8f2345d0
+    uuid: d4a98d48-d963-4b2c-8f59-2ae1519fbc30
     country_id: *om
     network_id: *om_fixed
-  - id: 245276
+  - id: 238266
     prefix: '96825'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2f6b5420-ea87-4b73-9cb3-14dc1353da6d
+    uuid: 9e3cab43-90e4-4a1f-8a7f-3a80ae9f73ea
     country_id: *om
     network_id: *om_fixed
-  - id: 245485
+  - id: 238475
     prefix: '96826'
     number_min_length: 11
     number_max_length: 11
-    uuid: cb058832-ade5-4abc-bdab-1a6adbbe8b25
+    uuid: 210e0de9-3602-425c-a5a9-55f624d9d3ef
     country_id: *om
     network_id: *om_fixed
 # Mobile Prefixes
-  - id: 248752
+  - id: 241742
     prefix: '96871'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b57b053-67d8-4d4e-a672-60d74c609e88
+    uuid: 5bb8d6ce-819b-4dfe-9825-18817748f345
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 248839
+  - id: 241829
     prefix: '96872'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3752ec6f-8ac6-4377-b3bc-4b2df4467042
+    uuid: 37a512e6-4d5a-4407-8204-8403d3cf8047
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 250107
+  - id: 243097
     prefix: '9688'
     number_min_length: 8
     number_max_length: 8
-    uuid: b413e072-725a-4322-a336-3979331ce0fe
+    uuid: 97149450-9cb0-46c7-83ea-6075f152699c
     country_id: *om
     network_id: *om_mobile
-  - id: 252465
+  - id: 245455
     prefix: '96876'
     number_min_length: 11
     number_max_length: 11
-    uuid: fc7a974a-334c-44ec-b3ca-76903b6bfdf2
+    uuid: 7ab7c45a-bd59-465e-88cf-f1d414a80ff7
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252661
+  - id: 245651
     prefix: '968770'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae53616f-3094-447a-962d-7ea8ab205291
+    uuid: bd857282-bfd5-4a8f-ba2f-5cb820b4d2ff
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252699
+  - id: 245689
     prefix: '968770612'
     number_min_length: 11
     number_max_length: 11
-    uuid: 914fb0cf-64f9-4e24-842f-56f19d581487
+    uuid: 17a1421c-716b-4319-99a4-70c4c55020a0
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252700
+  - id: 245690
     prefix: '968770613'
     number_min_length: 11
     number_max_length: 11
-    uuid: e58f7483-c22a-42b0-9ed7-f6cf676be7c7
+    uuid: 960243fa-c611-45ac-8359-a77e23701171
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252701
+  - id: 245691
     prefix: '968770614'
     number_min_length: 11
     number_max_length: 11
-    uuid: b31fc504-a02b-40a9-a098-8fea9feaac0a
+    uuid: 99f60ba8-9fe2-496f-aeaf-adf63bdae559
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252702
+  - id: 245692
     prefix: '968770615'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef22ec4f-64a0-44b7-bc6c-ec56b2de9948
+    uuid: c1f39628-e882-4836-a86a-65ffafca62a7
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252708
+  - id: 245698
     prefix: '968770761'
     number_min_length: 11
     number_max_length: 11
-    uuid: 552ac65b-691a-4d74-b226-20ca4685e275
+    uuid: e0b29b1c-f45e-4782-9d16-2c56cdde437b
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252709
+  - id: 245699
     prefix: '968770762'
     number_min_length: 11
     number_max_length: 11
-    uuid: 42872c2b-fcf7-459c-9bae-c30043fd3a03
+    uuid: 30476d46-69c0-428b-8361-c175330faf6c
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252710
+  - id: 245700
     prefix: '968770763'
     number_min_length: 11
     number_max_length: 11
-    uuid: 49f29a70-6bd6-4c52-a4cc-315585648448
+    uuid: 85a8a6fe-f429-4262-b4c8-4d17e7b8c90e
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252711
+  - id: 245701
     prefix: '968770764'
     number_min_length: 11
     number_max_length: 11
-    uuid: dbda3b18-7298-4503-8d8f-1226f5b261d0
+    uuid: 7fbead91-0a11-4a12-8492-2ae08a49ab5e
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252716
+  - id: 245706
     prefix: '968770812'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea5e1546-e506-4b21-b769-9990e4e525a3
+    uuid: c97304b8-dc3b-4ea7-b29f-b7fdb81a8a30
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252717
+  - id: 245707
     prefix: '968770813'
     number_min_length: 11
     number_max_length: 11
-    uuid: 10cc7e89-f01f-4f2d-aca8-26a00c39dcfd
+    uuid: 7c30d1c8-7e89-4227-8827-58f7dd495c9b
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252718
+  - id: 245708
     prefix: '968770814'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5bc6fcbe-ed9a-4df6-8ba5-e61c81923237
+    uuid: 72fbc18d-d295-486f-b5fd-c0bbe2da8fec
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252719
+  - id: 245709
     prefix: '968770815'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8ea66289-a20a-40ae-b449-958d51cedc80
+    uuid: 5ad98fb1-cd17-4021-825e-b6b63e0eaf5d
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252720
+  - id: 245710
     prefix: '968770861'
     number_min_length: 11
     number_max_length: 11
-    uuid: 02ddcb8d-4571-4680-8e3c-4d3b12cef9da
+    uuid: c8545ae8-12b7-4911-8f4f-ea2fa8a8316c
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252721
+  - id: 245711
     prefix: '968770862'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a1f3808-53c2-4b56-9fc5-3f4f20c16e64
+    uuid: 03a18a42-5b9b-49b6-bf3d-e18decadbd4a
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252722
+  - id: 245712
     prefix: '968770863'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae031350-12fd-4db9-9dd6-d62fc23f393d
+    uuid: db197bb3-f3a8-46ae-a9a9-9fe68c71fcd6
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252723
+  - id: 245713
     prefix: '968770864'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19cb5aa9-b79a-4854-8277-dbac858c609d
+    uuid: 855fbbb6-dd4a-4659-8305-fdb36146edbc
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252731
+  - id: 245721
     prefix: '968771'
     number_min_length: 11
     number_max_length: 11
-    uuid: e0ad2f76-b391-4f44-ba7f-157508a32ac4
+    uuid: 2d997a2f-b7b1-4919-8e9b-f91e946a320c
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252817
+  - id: 245807
     prefix: '968772'
     number_min_length: 11
     number_max_length: 11
-    uuid: aa430c08-f9d8-4eea-8cce-556e88d403fc
+    uuid: 908136e7-8a52-4c81-9ef8-55917d89f669
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252876
+  - id: 245866
     prefix: '968773'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0a9c90bc-a36f-422b-8ada-69c54629927d
+    uuid: a1217173-b6d3-40f3-a509-0c2b4d8cadfb
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252893
+  - id: 245883
     prefix: '968774'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8567cf6e-3ed0-4862-83b2-d59542d751ef
+    uuid: 75b2fdd8-cdda-4a2c-ada5-74a0c0b0d967
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 252918
+  - id: 245908
     prefix: '968775'
     number_min_length: 11
     number_max_length: 11
-    uuid: f21de2a9-9726-4cce-b6bb-ad2a6a284ec1
+    uuid: dab62df7-085e-4c6d-b449-dc92f67f9563
     country_id: *om
     network_id: *om_vodafone_mobile
-  - id: 253104
+  - id: 246094
     prefix: '96878'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4310bcfc-0d76-4f5a-828c-2b41e114cfea
+    uuid: da4dc456-a177-403c-96d3-d370c68b2e54
     country_id: *om
     network_id: *om_ooredoo_mobile
-  - id: 253401
+  - id: 246391
     prefix: '96879'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea85f6c4-502b-41f0-bd52-57337efbba54
+    uuid: 0d856f20-4588-4eaf-9082-f4ce667215c8
     country_id: *om
     network_id: *om_ooredoo_mobile
-  - id: 254133
+  - id: 247123
     prefix: '9689'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0938fad3-e9c4-4718-a01b-5b2239b81ffe
+    uuid: 77785f27-9fe6-416f-9c32-6fe5dcbc3775
     country_id: *om
     network_id: *om_mobile
-  - id: 254226
+  - id: 247216
     prefix: '968901'
     number_min_length: 11
     number_max_length: 11
-    uuid: bf0bd749-6f80-46cf-8997-e1e39898ad08
+    uuid: 65dba8b6-aebc-45fb-ac52-a29d1516480d
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254245
+  - id: 247235
     prefix: '968902'
     number_min_length: 11
     number_max_length: 11
-    uuid: e8840b82-8b46-4a63-94ab-e1f968c6229d
+    uuid: 2a8fac3c-536f-488c-8ca2-148954339396
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254252
+  - id: 247242
     prefix: '968903'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4322bc0-0882-4ab3-a4c1-357012aed0d9
+    uuid: 39353369-a183-4ce0-b162-7895c7134b1b
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254259
+  - id: 247249
     prefix: '968904'
     number_min_length: 11
     number_max_length: 11
-    uuid: 30e5b014-014a-4f5f-8790-4f9524658b53
+    uuid: 604511d1-d2cb-49f8-87e5-6fd345e4232d
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254279
+  - id: 247269
     prefix: '968905'
     number_min_length: 11
     number_max_length: 11
-    uuid: b01686d7-e9e7-46e7-9271-6607494ff489
+    uuid: aab95580-0fdc-4d6e-a09a-2da6c917d3da
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254306
+  - id: 247296
     prefix: '968906'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a8f76c8-87fd-4f33-9e54-0136acb3c333
+    uuid: c8901544-c190-4cb3-b6e3-0650665bb124
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254315
+  - id: 247305
     prefix: '968907'
     number_min_length: 11
     number_max_length: 11
-    uuid: aa4d94a4-1830-498a-bd8e-9cfb29ca9efa
+    uuid: 3f1d15ee-d020-4a29-b15e-cfb6523caf3a
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254330
+  - id: 247320
     prefix: '968908'
     number_min_length: 11
     number_max_length: 11
-    uuid: f6aff83b-1765-4f6c-b89c-f3ca7f0ba1c4
+    uuid: 9ffaef36-1e83-4e9e-8edb-14b05d7bbeb4
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254359
+  - id: 247349
     prefix: '968909'
     number_min_length: 11
     number_max_length: 11
-    uuid: e4abc5b8-7808-4a86-a856-842e8d6cd0dc
+    uuid: ff071864-abab-4acf-8f1f-909438aea0dc
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254379
+  - id: 247369
     prefix: '96891'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0a85cbb4-e4e0-4c94-b27d-81edc8ef3c6f
+    uuid: af9afc3e-ea6f-4038-a7fe-78022b04754e
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254604
+  - id: 247594
     prefix: '96892'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1f7624f1-603d-4c73-88a7-cd207b9726e5
+    uuid: c052ee23-b35f-47cb-a4bb-e03ed5be1985
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254879
+  - id: 247869
     prefix: '96893'
     number_min_length: 11
     number_max_length: 11
-    uuid: e804ac56-d2bc-45e8-822c-fa68d10aab5e
+    uuid: 68db21c5-4d4d-4477-95b2-e9c638280cd5
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 254978
+  - id: 247968
     prefix: '96898'
     number_min_length: 11
     number_max_length: 11
-    uuid: c0d93c11-965b-43d8-8bde-34da43374a54
+    uuid: e19615ba-dd3b-46d2-96ae-024d8de648cb
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 255202
+  - id: 248192
     prefix: '96899'
     number_min_length: 11
     number_max_length: 11
-    uuid: b24bdb39-fa2f-4aa3-a177-4664bd25c0f8
+    uuid: 4665ce94-3ff4-4fcc-a598-8868c006b92a
     country_id: *om
     network_id: *om_omantel_mobile_mobile
-  - id: 261210
+  - id: 254200
     prefix: '96894'
     number_min_length: 11
     number_max_length: 11
-    uuid: 473c03a7-043c-4c65-8d4b-dd06d31a2e84
+    uuid: 7be45033-4316-41eb-a5b5-d5a990ee4396
     country_id: *om
     network_id: *om_ooredoo_mobile
-  - id: 261456
+  - id: 254446
     prefix: '96895'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19d36dc6-d389-4567-a4c2-49318e0ab99a
+    uuid: 2b55bbe7-5bce-438c-8697-5cb1fd8e2010
     country_id: *om
     network_id: *om_ooredoo_mobile
-  - id: 261734
+  - id: 254724
     prefix: '96896'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9119f2ed-797f-4742-b614-423d5a25b45c
+    uuid: c6f3446a-3d88-4d90-b2dc-2023a48f9e62
     country_id: *om
     network_id: *om_ooredoo_mobile
-  - id: 262015
+  - id: 255005
     prefix: '96897'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6dc1b0b2-f1ab-4187-b86c-34f4c01622fa
+    uuid: 29ecf5ec-9340-4945-80b9-09ddc4915c1b
     country_id: *om
     network_id: *om_ooredoo_mobile
