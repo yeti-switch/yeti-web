@@ -3,61 +3,61 @@ networks:
 # Supplementary services Networks
   - id: &sv_special_services 3946
     name: SV Special Services
-    uuid: 315f4a5b-95fb-429a-897f-835fef47b679
+    uuid: 6fa9520c-1f07-47d0-a114-9bd33ea8ca6b
     type_id: 14
   - id: &sv_freephone_services 5214
     name: SV Freephone Services
-    uuid: 575dbb92-f8f9-493d-a96c-e1a2cb7e6fd5
+    uuid: 529d7a30-51a9-48aa-a659-8eacda8cddc5
     type_id: 14
   - id: &sv_international_freephone_services 5220
     name: SV International Freephone Services
-    uuid: 52a80280-0f84-4ba1-b2d6-0352cb99e4bf
+    uuid: 39443127-4d90-4076-b66d-2bfa89c6f386
     type_id: 14
   - id: &sv_international_freephone_services_with_foreign_operator_assistance 5224
     name: SV International Freephone Services With Foreign Operator Assistance
-    uuid: bba9559d-4b07-4a09-b1af-b2c9a8cf8474
+    uuid: 6c51aa2c-10e9-4e2f-8f51-df0b0f3427c6
     type_id: 14
   - id: &sv_semiautomatic_prepaid_call_services 5242
     name: SV Semiautomatic Prepaid Call Services
-    uuid: 818cdda6-ebe6-4695-8324-72b3bea21247
+    uuid: 0eb69705-2e92-4cd0-affc-68bd0d450867
     type_id: 14
   - id: &sv_premium_rate_services 5627
     name: SV Premium Rate Services
-    uuid: f7d8b95d-28ac-4f09-9a55-f0e0a6a3a2a7
+    uuid: dd216575-f79e-4543-bb2c-98fb3c18d6c2
     type_id: 14
   - id: &sv_international_premium_rate_services 5630
     name: SV International Premium Rate Services
-    uuid: a8584028-c6a2-4d04-8104-c4b10331af7e
+    uuid: c3e72df0-4bdc-4811-8566-102ad41e5f4e
     type_id: 14
 # Mobile Networks
   - id: &sv_mobile 4553
     name: SV Mobile
-    uuid: 6ee6e1cd-d6ee-4a47-8d2a-8e469a212b38
+    uuid: 4bf2a00f-ebdb-4fd5-83db-03c2bc7ad632
     type_id: 3
   - id: &sv_tigo_mobile 4568
     name: SV Tigo Mobile
-    uuid: 62921421-c968-4cd3-966b-4b8cee7e3663
+    uuid: 6bc16b35-8df5-46db-9538-367674928984
     type_id: 3
   - id: &sv_claro_mobile 4862
     name: SV Claro Mobile
-    uuid: 3752bf60-ffef-4809-98b5-afe763106c55
+    uuid: c63fd038-0e9b-4d82-9aa8-394276f342ea
     type_id: 3
   - id: &sv_movistar_mobile 4894
     name: SV Movistar Mobile
-    uuid: 1bc8ce0a-33b2-43a7-8096-b03096f0277e
+    uuid: 3e937c9c-e8ab-4fd6-b004-6df799890c94
     type_id: 3
   - id: &sv_digicel_mobile 4931
     name: SV Digicel Mobile
-    uuid: bc9289ef-01ec-4a5c-94ab-db4c7ae2a07f
+    uuid: 12d05a2a-a713-4907-a68d-fdce7499aa8c
     type_id: 3
   - id: &sv_red_mobile 5524
     name: SV Red Mobile
-    uuid: 1e351534-1634-4ca2-9d72-14e02981cfe6
+    uuid: d2d59805-82ef-4501-afc5-8ad752daf8bc
     type_id: 3
 # Fixed Networks
   - id: &sv_fixed 4735
     name: SV Fixed
-    uuid: eb0dfe5b-45bd-4a0c-a028-019917edb11a
+    uuid: e61af6ca-47fa-43cb-9cd5-b5ef804a68b0
     type_id: 12
 network_prefixes:
 # Country code Prefixes
@@ -65,7 +65,7 @@ network_prefixes:
     prefix: '503'
     number_min_length: 4
     number_max_length: 100
-    uuid: 4fbc89bd-741a-4a89-a68c-791db5d57baa
+    uuid: 983378c9-877e-45cb-8c14-48de7e927169
     country_id: *sv
     network_id: null
 # Supplementary services Prefixes
@@ -73,70 +73,70 @@ network_prefixes:
     prefix: '5031'
     number_min_length: 6
     number_max_length: 9
-    uuid: 960c09b7-c610-4ac7-bc2c-97ada3e29910
+    uuid: 55279189-907a-46d9-8067-b98c58b29d39
     country_id: *sv
     network_id: *sv_special_services
   - id: 250185
     prefix: '503800'
     number_min_length: 10
     number_max_length: 14
-    uuid: 01326164-c969-4282-bc84-6f2cd760e3ea
+    uuid: 837eafb5-f5bd-4394-a72b-fb22af85aa5f
     country_id: *sv
     network_id: *sv_freephone_services
   - id: 250193
     prefix: '5038000'
     number_min_length: 14
     number_max_length: 14
-    uuid: 3d8b703f-7d00-4e66-a60e-96eb1c32b34c
+    uuid: 8774505d-c604-4cfb-9925-bacfff6a95f7
     country_id: *sv
     network_id: *sv_international_freephone_services
   - id: 250199
     prefix: '5038001'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9e95c135-f119-48f0-8b32-34cf767ac2c1
+    uuid: c7850d3e-cbc1-49d2-aca3-bbf400714f07
     country_id: *sv
     network_id: *sv_international_freephone_services_with_foreign_operator_assistance
   - id: 250207
     prefix: '5038006'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2b18f072-11b8-4ace-a80a-e06468392ba3
+    uuid: 4f5d563f-e975-4082-be36-1f7aed0c48ee
     country_id: *sv
     network_id: *sv_international_freephone_services
   - id: 250227
     prefix: '503801'
     number_min_length: 10
     number_max_length: 10
-    uuid: d2993c39-d7ec-4f1c-b0aa-2b4b13f50466
+    uuid: e5512d8c-42f4-4946-963d-6b87337fa380
     country_id: *sv
     network_id: *sv_semiautomatic_prepaid_call_services
   - id: 254149
     prefix: '5039'
     number_min_length: 6
     number_max_length: 6
-    uuid: b4011326-e25e-46b2-b22c-bb670c457d1a
+    uuid: eceac40d-aa29-449f-9132-3bcc8b57514e
     country_id: *sv
     network_id: *sv_special_services
   - id: 254202
     prefix: '503900'
     number_min_length: 10
     number_max_length: 14
-    uuid: 81889880-2c29-4bd4-ad6f-eeb64126ea15
+    uuid: c4171a6a-0d1f-4298-9f38-4abb6631953d
     country_id: *sv
     network_id: *sv_premium_rate_services
   - id: 254205
     prefix: '5039000'
     number_min_length: 14
     number_max_length: 14
-    uuid: 54e1a681-6c87-428b-93a5-ecd85e1f8d32
+    uuid: ad043f7f-eeb8-48ec-a1e6-edf4c1a9e1f4
     country_id: *sv
     network_id: *sv_international_premium_rate_services
   - id: 254212
     prefix: '5039006'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4369e77b-fb82-45b6-ae7f-b00cdbcaf9a0
+    uuid: 47823e8a-ec84-4c62-a8ca-3d5edd60ff67
     country_id: *sv
     network_id: *sv_international_premium_rate_services
 # Mobile Prefixes
@@ -144,1547 +144,1547 @@ network_prefixes:
     prefix: '5036'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2b63fc97-518f-4e78-90fb-b40a261acb0c
+    uuid: aa2f7a78-cf04-402f-b88c-0d3bcee27898
     country_id: *sv
     network_id: *sv_mobile
   - id: 242460
     prefix: '503600'
     number_min_length: 11
     number_max_length: 11
-    uuid: ec491363-b8d2-4262-81e5-f12608e2d690
+    uuid: 24ba9957-b6ee-45f7-9437-72bfc8402840
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 242490
     prefix: '503601'
     number_min_length: 11
     number_max_length: 11
-    uuid: 07cdbd6a-4039-489b-889a-db36f13e0f6c
+    uuid: b9adbe2e-10b5-4a83-8d2f-b3f3a02d9d30
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 242554
     prefix: '503602'
     number_min_length: 11
     number_max_length: 11
-    uuid: 63530ab4-499e-4ba1-bf2f-07dea66e1b67
+    uuid: cc0a0301-8561-417a-9434-74aaeca52d9e
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 247683
     prefix: '503630'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b11a984-6c3f-4b60-a599-390792f5ff0b
+    uuid: 55a75ed6-b712-4341-a422-3f8b74b8b83b
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247706
     prefix: '5036310'
     number_min_length: 11
     number_max_length: 11
-    uuid: fa14128a-6b78-4816-b67f-ad3a729af1e1
+    uuid: d59dac38-fea6-48e3-a06d-c7acb55213f9
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247708
     prefix: '5036311'
     number_min_length: 11
     number_max_length: 11
-    uuid: f4d9cf83-098c-4645-a532-fee6f9c458c3
+    uuid: 2a4fd5ce-7ac4-41ab-84c2-df28dd92fd5f
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247710
     prefix: '5036312'
     number_min_length: 11
     number_max_length: 11
-    uuid: 57a621f5-7e7b-457d-a220-dcc3113dbc55
+    uuid: a0b19f6f-c981-45ad-866d-150a1e941326
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247711
     prefix: '5036313'
     number_min_length: 11
     number_max_length: 11
-    uuid: bccc6ece-ff64-4b08-b4f8-ba0ffe04953a
+    uuid: 9954d3e4-aa83-4784-abbc-5001c3b6ac49
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247713
     prefix: '5036314'
     number_min_length: 11
     number_max_length: 11
-    uuid: fd27c756-4383-407a-8c2b-5fffb1464fe5
+    uuid: dc968630-e9b3-4134-bcab-87781907e9ea
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247715
     prefix: '5036315'
     number_min_length: 11
     number_max_length: 11
-    uuid: acbc394f-f437-49dd-9ae6-3108101a5b01
+    uuid: 403f1558-4106-4ac6-94f1-3a85ce4df01c
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247717
     prefix: '5036316'
     number_min_length: 11
     number_max_length: 11
-    uuid: efbb8e81-309a-43ae-9938-bbc3f2aeedb6
+    uuid: a70ddfce-b4f9-4177-b28e-a93449ccd45a
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247719
     prefix: '50363170'
     number_min_length: 11
     number_max_length: 11
-    uuid: cbcbda21-4642-4fe0-aba7-3833fadbaba7
+    uuid: f60ebdcf-b77a-42ef-99eb-e051ce94690b
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247720
     prefix: '50363171'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae1de2a6-6fe6-4aad-8317-342aadf666bf
+    uuid: 6fed18c6-edc5-4383-a4b5-9eaae09669c6
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247721
     prefix: '50363172'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6ec8fac6-4a64-48eb-ba03-b3026115fd55
+    uuid: c2d82e53-a4bc-41ad-9202-bdd219229960
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247722
     prefix: '50363173'
     number_min_length: 11
     number_max_length: 11
-    uuid: 042cf7d2-5a0f-4b84-b0a4-a03b6185f846
+    uuid: 5ecc83b6-ac0f-431b-9529-ae9b4a9857b5
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 247723
     prefix: '50363174'
     number_min_length: 11
     number_max_length: 11
-    uuid: be8df7d5-5956-4c00-94db-e036462fbf9c
+    uuid: becdf04c-a149-4939-a8aa-ffb1a0310fb7
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248130
     prefix: '503642'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a198c1d-adcf-4198-828b-e014a3c5e50f
+    uuid: 01b20e7f-3d89-440d-af53-02d9991cde60
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 248136
     prefix: '5036430'
     number_min_length: 11
     number_max_length: 11
-    uuid: b28289f7-e846-4060-a962-4e08f030dd7e
+    uuid: 54627174-7d83-49bd-818e-e1a1671a4c7b
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 248137
     prefix: '5036431'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5f472ed9-1c27-43d2-bde6-f8162be65e22
+    uuid: 208767fe-08af-40d4-8854-482a3040a3cd
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 248587
     prefix: '503703'
     number_min_length: 11
     number_max_length: 11
-    uuid: dfe86142-eeb7-4b35-bec8-8a72d64ffb39
+    uuid: 5d1a42ee-541c-4eaa-beb7-8a061375a402
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248607
     prefix: '503704'
     number_min_length: 11
     number_max_length: 11
-    uuid: 575662ea-40c4-4245-a12e-ca2c3c63b231
+    uuid: 9458117d-7787-4bac-ae13-0f3ab918ef1f
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248624
     prefix: '503705'
     number_min_length: 11
     number_max_length: 11
-    uuid: a846e4a7-dfc2-4ab2-9931-58d782fd80e0
+    uuid: 0c6d9838-c37d-4d67-9d19-77f9111f8b35
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248638
     prefix: '503706'
     number_min_length: 11
     number_max_length: 11
-    uuid: a0960463-07f3-42a9-8c5e-47182423eaf3
+    uuid: 13d9ae9b-43db-4ad0-aad0-4f2204d83b87
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248644
     prefix: '50370700'
     number_min_length: 11
     number_max_length: 11
-    uuid: 11beb341-c6b1-4299-9bc8-df3d4fc34299
+    uuid: 137b4bb9-b9fb-4033-a77d-806cc4c9d3f2
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248645
     prefix: '50370701'
     number_min_length: 11
     number_max_length: 11
-    uuid: a18d4c0c-03c2-424d-994d-b76a2bd9b456
+    uuid: 82ce4c30-a6cc-4b27-9842-02e46225e223
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 248646
     prefix: '50370702'
     number_min_length: 11
     number_max_length: 11
-    uuid: f851b2e8-1bfd-4690-81c0-74a4790abe63
+    uuid: 59e5cf35-0da5-43d2-9912-4897ffdb57d4
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 248647
     prefix: '50370703'
     number_min_length: 11
     number_max_length: 11
-    uuid: f01c727b-a69f-45c2-a3c2-97f78f2fe021
+    uuid: 4c9405a5-db90-4460-b48d-74193b2d385a
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248648
     prefix: '50370704'
     number_min_length: 11
     number_max_length: 11
-    uuid: d122494a-7096-4cfb-872a-4c2dc9dd6d87
+    uuid: 4c63d912-f6bc-4d3d-ac13-4c59d0353778
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248649
     prefix: '50370705'
     number_min_length: 11
     number_max_length: 11
-    uuid: b3dbb000-93bc-4d1d-994f-847178a29abc
+    uuid: c1d0711d-3fda-40f5-b825-db00c672743b
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248650
     prefix: '50370706'
     number_min_length: 11
     number_max_length: 11
-    uuid: 024560f5-55a8-4b92-a244-50bb78a5add9
+    uuid: 6126017b-1a57-4406-ae55-dc56a6bd59e1
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 248651
     prefix: '50370707'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b451f69-55cb-4d65-804e-2db8ffdc231d
+    uuid: 2411fa12-23d6-441b-91af-214a49af1e4f
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248652
     prefix: '50370708'
     number_min_length: 11
     number_max_length: 11
-    uuid: d3e8d217-d4d2-48cd-a16c-7f055f7b645d
+    uuid: 09cc07dc-b522-42d7-89a4-eaa6822bf3be
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 248653
     prefix: '50370709'
     number_min_length: 11
     number_max_length: 11
-    uuid: 450c419c-78f1-4730-a00d-31b6c59cdb04
+    uuid: 44b415a3-9ae4-4699-a2f5-200e8648505f
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 248655
     prefix: '50370710'
     number_min_length: 11
     number_max_length: 11
-    uuid: 26680b56-6791-442e-b5c3-deac85462329
+    uuid: 1b7c71a9-e17b-4a06-afa2-428d45bb1a3e
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248656
     prefix: '50370711'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1d979562-f7a7-425a-a1d4-dd7c34ec2df6
+    uuid: 88dfd711-d5c4-49be-a951-f1f18417c0eb
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 248657
     prefix: '50370712'
     number_min_length: 11
     number_max_length: 11
-    uuid: 95203e31-84fa-43ce-a609-280aba73b1bf
+    uuid: bde9753d-b646-4b7d-92fa-dd2c26163547
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248658
     prefix: '50370713'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2212b032-f842-41e7-ba15-bdeee167b06a
+    uuid: 2eda39d1-2064-4ba5-bd7c-2c294ffd5e1d
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 248659
     prefix: '50370714'
     number_min_length: 11
     number_max_length: 11
-    uuid: 79a5db29-b80d-42cc-8bad-c17e669a6778
+    uuid: 0e9190d8-715d-455f-8488-62dcf9028f3e
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 248660
     prefix: '50370715'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5def0b73-3037-4ad9-a2fe-4ff119db0344
+    uuid: 2e848848-69a8-40e7-958e-6b65843c5c51
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 248661
     prefix: '50370716'
     number_min_length: 11
     number_max_length: 11
-    uuid: aedb7ade-ac3f-4cf6-b174-f019cceb7bc7
+    uuid: 039f4b6c-5412-44d6-a3c8-29dc568f9d61
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 248662
     prefix: '50370717'
     number_min_length: 11
     number_max_length: 11
-    uuid: a6550212-7ab7-4b96-ab9c-e78beb5087f6
+    uuid: 23631742-8e49-4c99-81f1-a80711eca0e2
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248663
     prefix: '50370719'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1e3487e9-0445-4ea8-af86-231fbbf4e126
+    uuid: 08dde24f-da40-43c6-aea1-b025abf8b90d
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 248665
     prefix: '5037072'
     number_min_length: 11
     number_max_length: 11
-    uuid: 79209c24-234e-41e0-a54a-e0af431791d4
+    uuid: fe534740-20d9-46cf-b77b-d42db41727ed
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 248667
     prefix: '50370730'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cf61326-88d8-4679-9153-eb5c47834c61
+    uuid: fceed87c-289b-4dda-84ca-4d09763d0a24
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 248668
     prefix: '50370731'
     number_min_length: 11
     number_max_length: 11
-    uuid: d5b7041b-e1ce-4e67-9d70-9fd715fedc52
+    uuid: 1cbe196e-d69f-4c13-a511-0cebac613c4a
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 248669
     prefix: '50370732'
     number_min_length: 11
     number_max_length: 11
-    uuid: c64c0428-c9d7-4eb7-b49f-3a33548df9f1
+    uuid: e0557af5-25d0-4cc4-bdc8-bee8da3bcdd4
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 248670
     prefix: '50370733'
     number_min_length: 11
     number_max_length: 11
-    uuid: 057a2e68-f081-456e-98d0-ae0fe544bc4e
+    uuid: cd572da2-6d39-4fc1-b47c-86828e639425
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 248671
     prefix: '50370734'
     number_min_length: 11
     number_max_length: 11
-    uuid: 31cf45c2-ea5f-4de7-bd1b-988fc253fb2b
+    uuid: 94463007-30e5-41ab-83b5-5c27101405cc
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 248672
     prefix: '50370735'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4127b9d4-b7ba-479e-8061-9a1e7dfe9ecc
+    uuid: 7905ddc9-6a13-4b75-b5ce-769aaa634c20
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248673
     prefix: '50370736'
     number_min_length: 11
     number_max_length: 11
-    uuid: e26ee107-b49a-4cc1-8293-90a48300d0e5
+    uuid: cd726458-5589-40fe-a2d8-876e9d149c32
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248674
     prefix: '50370737'
     number_min_length: 11
     number_max_length: 11
-    uuid: 22dce924-1e34-4cf5-9127-21b32f2f6cbb
+    uuid: b1a38626-dc69-4e71-9132-0b9d0e7575af
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248675
     prefix: '50370738'
     number_min_length: 11
     number_max_length: 11
-    uuid: b880787b-408e-48db-b91b-3e012bd2d577
+    uuid: 5036c0c6-bc8f-4e4d-80ac-6fd75656e206
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248676
     prefix: '50370739'
     number_min_length: 11
     number_max_length: 11
-    uuid: b4a25a4b-fbc5-4df3-ad54-426ad1ec0d7b
+    uuid: 82114af2-3171-41cb-9a29-56b980cb90e4
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248678
     prefix: '50370740'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0016eb89-fb22-4e27-9174-ff1c5ed67fc6
+    uuid: 5b757d31-2287-471d-afe1-21148145c112
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248679
     prefix: '50370741'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87d63b87-21df-478c-84e7-16adb4bb5a0f
+    uuid: e34b8da7-26d6-4973-bcdc-f3288160f526
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248680
     prefix: '50370742'
     number_min_length: 11
     number_max_length: 11
-    uuid: 922716ad-d773-4f7f-a9f7-e140fccee1be
+    uuid: 619c6d31-45a0-4159-9b79-d9640428595d
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248681
     prefix: '50370743'
     number_min_length: 11
     number_max_length: 11
-    uuid: 151134d1-c0e1-4736-92d9-8f24f3546458
+    uuid: 880c107a-e03c-4772-9b23-99f7ddfb2e9e
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248682
     prefix: '50370744'
     number_min_length: 11
     number_max_length: 11
-    uuid: 08cef0df-6737-4896-9c6f-8b38df5c5f5f
+    uuid: 6006a567-a372-4a3d-adec-4e9150464c78
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248683
     prefix: '50370745'
     number_min_length: 11
     number_max_length: 11
-    uuid: 288b458b-1b8e-45c2-9509-d35b9e0f1fb0
+    uuid: 47c3ba8d-0b30-4851-9a55-f3ba958f0e01
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248684
     prefix: '50370746'
     number_min_length: 11
     number_max_length: 11
-    uuid: b0cc04e9-22c6-468f-84b2-b3af5a81d114
+    uuid: 21bb4def-7d09-44e8-ba55-35da81da2114
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248693
     prefix: '503708'
     number_min_length: 11
     number_max_length: 11
-    uuid: d6a845b0-c81b-411e-926e-2dc19df69dfe
+    uuid: 8cd8dedb-2430-49fe-b12c-9fd8ea035175
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248719
     prefix: '503709'
     number_min_length: 11
     number_max_length: 11
-    uuid: a397a719-684d-417c-bf82-30f69b814bb7
+    uuid: cbda0b1e-e8b5-464a-8515-737a095c8351
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 248755
     prefix: '50371'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4de3820b-83c3-45f5-b6a6-6e947306380d
+    uuid: 38d22ebe-bc03-4057-ba17-114e5058448d
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 248843
     prefix: '50372'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9311beef-07cb-449d-ad48-b77dc810b915
+    uuid: f0e68eae-2a67-4f63-b535-c7b62bba9f60
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 248894
     prefix: '50373'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0fa9f84a-b8e7-48ff-9eeb-e05557827e6b
+    uuid: 6b2db579-a43a-4766-b9c7-de7933fd9411
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 249085
     prefix: '503740'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0a8897e2-2604-4458-b867-926739762978
+    uuid: 71f1e06f-5640-47f4-bf00-7ceddd6218d6
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 249117
     prefix: '503741'
     number_min_length: 11
     number_max_length: 11
-    uuid: 18abbb50-3888-4719-920a-71bade6a94e9
+    uuid: 39c5f380-b5e3-4689-95d0-2a93f88a7eee
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 249143
     prefix: '503742'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1cd4a128-a5eb-4018-98fd-234c3b31e598
+    uuid: 1ce0490b-5fd7-468c-bff9-f7e7bc63fedc
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 249156
     prefix: '503743'
     number_min_length: 11
     number_max_length: 11
-    uuid: 16d35ee3-9104-4c7f-b903-907bfab6178f
+    uuid: 34fd5edb-9bd7-47e1-bfc2-cbef08536971
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 249308
     prefix: '503744'
     number_min_length: 11
     number_max_length: 11
-    uuid: ecd7446c-4693-43eb-85f5-0c76de728fed
+    uuid: 23b7ce6b-4c0a-4365-858e-aef2526be7b9
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 249371
     prefix: '503745'
     number_min_length: 11
     number_max_length: 11
-    uuid: edc190d2-708c-4560-ba45-e7b77b172c3e
+    uuid: de5e96be-252c-4820-a983-c7b75261a989
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 249433
     prefix: '503746'
     number_min_length: 11
     number_max_length: 11
-    uuid: 363dd52f-2105-41de-b9f5-3e8d2deaa047
+    uuid: 3539b98a-7ff4-4bc1-983a-b5417b0e48ba
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 249456
     prefix: '503747'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4e9d4f4b-db3a-46e8-876e-c02a7df0798d
+    uuid: 9b91d785-7dd8-4962-9fc9-ee4f9cab63cc
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 249473
     prefix: '503748'
     number_min_length: 11
     number_max_length: 11
-    uuid: 74874056-2f69-478d-b1c8-4e3b9d8666ad
+    uuid: 9f8ddf52-d79e-46b2-affc-c3c473365ead
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 249539
     prefix: '503749'
     number_min_length: 11
     number_max_length: 11
-    uuid: 634d3f9b-ee69-4799-b3e4-f33e91b902c6
+    uuid: b51144ec-d415-446f-80c0-2b3a34981cdd
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 249572
     prefix: '50375'
     number_min_length: 11
     number_max_length: 11
-    uuid: df198ae3-3486-4b34-84e7-29203dfefaee
+    uuid: 72504bed-146d-450d-b3bb-f4f42a523681
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 251006
     prefix: '503610'
     number_min_length: 11
     number_max_length: 11
-    uuid: 32238fe5-1da2-4c42-9e70-33dbc8c7714d
+    uuid: f7d9f777-4f00-4f2a-96a1-4d48d49acad7
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251013
     prefix: '503611'
     number_min_length: 11
     number_max_length: 11
-    uuid: d0951c23-88ee-4686-91ad-277a193b410f
+    uuid: b0f5da4e-f141-45b2-bd0f-44d7e651efb1
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251028
     prefix: '503612'
     number_min_length: 11
     number_max_length: 11
-    uuid: ff4270ea-73d8-4d5d-a737-8bf914f32b1a
+    uuid: d58f4e9a-a55d-482d-a2f5-b6377329a1fe
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251041
     prefix: '503613'
     number_min_length: 11
     number_max_length: 11
-    uuid: dfa6514e-3e31-4606-adf0-aa90160b5a9a
+    uuid: f699cdb5-aeaa-4818-bea1-c97b76392c25
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251055
     prefix: '503614'
     number_min_length: 11
     number_max_length: 11
-    uuid: ca4dd2d5-e4a1-4d72-8536-a392f096235b
+    uuid: 811123ae-5f65-4d60-9090-20f1c3f07a80
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251080
     prefix: '503615'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0452a8e2-4156-447e-8440-36b7b959b746
+    uuid: 45bd77d2-7168-4101-8a71-9b54c55f5bdc
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251090
     prefix: '503616'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6e4c598c-9135-436f-b32f-9334d1dea0af
+    uuid: f3732b57-b21b-454e-8807-5e4872ca43f2
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251096
     prefix: '503617'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8f044ed0-39cf-41a7-a191-bfb3d19b1c0c
+    uuid: ed4bbbd1-e75f-4ae4-98a5-f77a28fbbfa8
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251105
     prefix: '503618'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cd11684-315e-4446-bbc0-681a3be55c66
+    uuid: 5035e5da-971f-49c9-8cd4-9928dbc89b55
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251109
     prefix: '5036190'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0a15a921-df38-40e1-ac3d-38f2fd8a2273
+    uuid: 8ccb6ca4-6a99-4f76-a3c3-59972c8f53ba
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251110
     prefix: '5036191'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3142dbe1-d820-4679-bf25-e908de502fc3
+    uuid: 27c4fb5f-c7f6-4132-9e84-e6135ad1502f
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251111
     prefix: '5036192'
     number_min_length: 11
     number_max_length: 11
-    uuid: 659646f2-069b-41bd-8c34-f9ff0cd860eb
+    uuid: 06055dce-5ba4-49b9-ab40-54431ccb632f
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251112
     prefix: '5036193'
     number_min_length: 11
     number_max_length: 11
-    uuid: de7111a4-1451-4c3b-ab72-874f3aa840ef
+    uuid: af9a3fc8-143d-4e06-9ac4-bc6f4c4b1405
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251113
     prefix: '5036194'
     number_min_length: 11
     number_max_length: 11
-    uuid: a76295b7-f87e-44d4-b9a7-17a3490b6909
+    uuid: 7cdbfaf3-14a2-4ceb-bbfa-ffb66a097269
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251114
     prefix: '5036195'
     number_min_length: 11
     number_max_length: 11
-    uuid: 440793ed-00bc-48f9-aed4-5b0d3df981a2
+    uuid: 36dcc49a-abf2-4f35-9eaf-efd9e5809ee0
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251115
     prefix: '5036196'
     number_min_length: 11
     number_max_length: 11
-    uuid: eeb453cc-50e7-4ecd-9fa6-52ff66398873
+    uuid: e99d5aa0-1f65-4806-9d72-7c02d2d406a5
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251116
     prefix: '5036197'
     number_min_length: 11
     number_max_length: 11
-    uuid: 29c2ac54-1830-47dd-8e87-adf1dc2d8e8d
+    uuid: 1a614531-e20a-4eea-8633-38917c87b096
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251117
     prefix: '5036198'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3f83f182-39bf-4ec4-b792-25e2c645e6ad
+    uuid: 5b6cbd65-6f52-42d0-9a78-b928ace81369
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 251141
     prefix: '503620'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e4c4db3-ab44-496e-9688-2c247e7e5ae9
+    uuid: 9dd37be3-86fc-40eb-8cd5-b637cd590071
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 251351
     prefix: '50366116'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e588207-6f07-4645-80e5-92b45b18b6fa
+    uuid: 02ef2e8f-5077-4ded-90c6-78caffc00daf
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252287
     prefix: '5037'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5d90ec6c-879e-4a7d-b5f7-5c8d9faefa16
+    uuid: e0923bb8-d8f0-4891-bbdc-7eedac05e6ee
     country_id: *sv
     network_id: *sv_mobile
   - id: 252330
     prefix: '503700'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3216b0ee-fe11-49c7-aaa8-923da3b32b47
+    uuid: 9efccfa1-4681-4962-a902-3fee52829baf
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252405
     prefix: '503701'
     number_min_length: 11
     number_max_length: 11
-    uuid: f434e526-f22d-4890-876c-4ae697e7ae89
+    uuid: 1c13731f-9f1b-45ef-b38a-7d823bc8025f
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252416
     prefix: '503702'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea5d9093-a02d-4008-899c-7ba4c759ede2
+    uuid: 08b94133-6ac8-458a-a6d1-611a91e9f117
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252480
     prefix: '503760'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0ceb4e76-1b92-47b1-aae0-42d85420673e
+    uuid: 159e6673-2337-4ca5-a916-18daf736cb0d
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252491
     prefix: '503761'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9e9f17a2-58e9-43f9-9cde-a24e058b95a1
+    uuid: f7f00584-3739-4b7d-8c77-880bff3543b6
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252497
     prefix: '503762'
     number_min_length: 11
     number_max_length: 11
-    uuid: b3c6da27-8b6b-4c0f-a184-d0e81b95f67e
+    uuid: b527a7f8-b725-457a-8d92-3f94f8071565
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252514
     prefix: '503763'
     number_min_length: 11
     number_max_length: 11
-    uuid: d9422849-54af-44a1-8f43-0ff84bc270f1
+    uuid: c1d416bc-68c3-4807-a63a-f04599ef0540
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252519
     prefix: '503764'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9b1be3b-875d-4459-a521-6175e83f085d
+    uuid: 2c95f7ee-d094-4833-9cd6-1a4bab3667a8
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252534
     prefix: '503765'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9682742-634c-4dca-bfc8-3f6fe5c11c46
+    uuid: e4f1de69-1c86-4df9-aaa8-a5ad4ce3637e
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252550
     prefix: '503766'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5407dbb8-43ba-49e7-93bb-f51c60a82bba
+    uuid: fc688075-3f48-4e62-90dc-ee3033c505ae
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252582
     prefix: '503767'
     number_min_length: 11
     number_max_length: 11
-    uuid: 546ed592-b6df-46b4-b06a-50a8de2bdbdd
+    uuid: 828cedbb-e26f-4d83-8ce1-4946d488d6f4
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252589
     prefix: '5037680'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2a4272ed-88b4-4743-9bf8-e9d85d014351
+    uuid: 295fbe79-a2d2-481a-995c-6427d443eecb
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252590
     prefix: '5037681'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8a162421-527a-43d0-ae5a-64c218b7f6f9
+    uuid: d30b00fc-7784-4e03-9505-4ced8df86f30
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252594
     prefix: '5037682'
     number_min_length: 11
     number_max_length: 11
-    uuid: b2ba9766-8540-47e8-86aa-3ccfb056c5ba
+    uuid: 3b8ea492-e64e-4f86-991c-a214269ec670
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252595
     prefix: '5037683'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a90dce3-4ea1-45b4-9837-dd54d9eb820e
+    uuid: f0541522-49fd-41ec-9695-860d3f2f84ac
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252596
     prefix: '5037684'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5788155f-8ebd-4141-93cc-b7c50730f67c
+    uuid: bfd19ae9-962b-49e1-add1-dcbf075322be
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252597
     prefix: '5037685'
     number_min_length: 11
     number_max_length: 11
-    uuid: 92b6edf6-e294-440f-910b-3486057de6f2
+    uuid: d243f863-4cb2-4170-9d01-8608a588a91a
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252598
     prefix: '50376860'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2f63a1ee-f761-4d9d-ae9c-92a848a4ed3b
+    uuid: 6ec53727-2a1c-4757-acf9-3f0ffe361f8b
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252599
     prefix: '50376861'
     number_min_length: 11
     number_max_length: 11
-    uuid: 88a6ec88-5d8a-4460-ac34-8111ea2c6d6d
+    uuid: ccaa6dbb-306e-4585-bcca-f085c4268b01
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252600
     prefix: '50376862'
     number_min_length: 11
     number_max_length: 11
-    uuid: 033e393a-2261-4752-a733-904b9e43d29e
+    uuid: f64998d5-5d7a-44d3-855a-918764180495
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252601
     prefix: '50376863'
     number_min_length: 11
     number_max_length: 11
-    uuid: 94f87aa6-5b84-4da7-878c-a751533e7d22
+    uuid: fe2c6d05-25e5-4e46-b6a2-8d4a9c6e96f6
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252602
     prefix: '50376864'
     number_min_length: 11
     number_max_length: 11
-    uuid: 760a7c17-56a4-47bb-a28d-30cac38028ec
+    uuid: 91dcd224-c763-421d-bfc4-937b4cc74661
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252603
     prefix: '50376865'
     number_min_length: 11
     number_max_length: 11
-    uuid: c24e691e-ca2a-4a31-b8d2-bac4caac29fd
+    uuid: 062737df-9799-4b1a-a507-37bdd85eae51
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252604
     prefix: '50376866'
     number_min_length: 11
     number_max_length: 11
-    uuid: 266b4c8c-a025-4686-95aa-b9351774de5a
+    uuid: cc45b17a-2f9b-4cfa-a89e-5d35129c78ac
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252605
     prefix: '50376867'
     number_min_length: 11
     number_max_length: 11
-    uuid: 156cc2da-ac05-40f5-ad38-75d07554f47c
+    uuid: 0cd52a06-5c32-49bd-b817-def047d5cf11
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252606
     prefix: '50376868'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6507c1f3-5461-4368-807f-17750b913971
+    uuid: 930265e7-5aac-4c5d-aebd-7a4a701f822a
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252607
     prefix: '50376869'
     number_min_length: 11
     number_max_length: 11
-    uuid: 766ba4e4-e78e-43f3-96f1-b3360f531019
+    uuid: 7d0c1c8c-4e77-46d3-bb99-4499e0da67b3
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252608
     prefix: '5037687'
     number_min_length: 11
     number_max_length: 11
-    uuid: a9162f96-901d-46ac-99b8-b9faab8d7b71
+    uuid: 7ec0095b-c27f-482a-b156-6fd904c82b9e
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252609
     prefix: '5037688'
     number_min_length: 11
     number_max_length: 11
-    uuid: fefb843a-7ee9-4102-b516-5522c4409160
+    uuid: 66edbd34-86fe-4ef3-8f21-06e762261526
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252610
     prefix: '5037689'
     number_min_length: 11
     number_max_length: 11
-    uuid: 996294d7-e6cc-42db-852a-c0f83bcf926b
+    uuid: f490e810-7873-43b5-bab4-a33fc58d7c34
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252614
     prefix: '5037690'
     number_min_length: 11
     number_max_length: 11
-    uuid: a39d6219-53c5-4d50-bcc1-612de8c43ec4
+    uuid: 5b342b1a-b583-4704-b77e-c7672539e45c
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252615
     prefix: '5037691'
     number_min_length: 11
     number_max_length: 11
-    uuid: 72094223-3c33-4daf-879f-b1753ad12cc1
+    uuid: 84a1b565-8361-492a-bf6c-7df9b7c8348f
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252616
     prefix: '5037692'
     number_min_length: 11
     number_max_length: 11
-    uuid: f006aa9a-0922-4477-a302-d1fad768f917
+    uuid: 521fc671-aa03-498d-bd3e-de82bea04032
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252618
     prefix: '5037693'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5ed5145e-9483-4e40-b9c0-81e7b084fa35
+    uuid: 98eedc11-ad48-49cd-8163-9f7053d15bf1
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252619
     prefix: '5037694'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea346e59-30dd-447b-bf3c-94335b8d3a04
+    uuid: fa8f449a-4b00-4b57-9368-699208345ba9
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252620
     prefix: '5037695'
     number_min_length: 11
     number_max_length: 11
-    uuid: 535fc8f1-7758-4288-a376-361cd9b41b02
+    uuid: a4456fb6-6056-4c89-9e90-b71643768dd5
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 252621
     prefix: '5037696'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3d154283-034c-46e0-a1e5-f6bad430f519
+    uuid: 57c8428c-ae4d-4304-92a7-67fefe452cea
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 252622
     prefix: '5037697'
     number_min_length: 11
     number_max_length: 11
-    uuid: 98f73855-7b6d-46ba-ba24-db64311ad1ed
+    uuid: 4bf62602-179b-4a6a-b8c2-9de3d81395c5
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 252623
     prefix: '5037698'
     number_min_length: 11
     number_max_length: 11
-    uuid: 09999ea2-6fc1-43cd-9c1d-7a67e975bcc9
+    uuid: 00df3e47-7d4f-4c5e-881b-efb40f31e3d0
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 252625
     prefix: '5037699'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0d0253e5-b3da-45d2-8c63-2bb3e98dcb5c
+    uuid: 55796eca-e401-4be8-bacc-c8e9008cae5d
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252663
     prefix: '503770'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6dfbe3a2-9ab5-4423-9605-712c96e0b566
+    uuid: a6643a00-4079-4276-b8af-5ce4e13cc4ff
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252733
     prefix: '503771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 343dfa44-8583-4b03-932a-9dd37c6471e6
+    uuid: d3fdca05-9566-4d92-9b24-27ca2559e70e
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 252819
     prefix: '503772'
     number_min_length: 11
     number_max_length: 11
-    uuid: 663dbfee-e55d-48b1-ac64-ad637e95de64
+    uuid: 587eaaaf-bbcc-433b-a4a2-f25358078247
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252877
     prefix: '503773'
     number_min_length: 11
     number_max_length: 11
-    uuid: 31acaaa9-5cff-410c-aec3-7fae7b0a9cc5
+    uuid: 70711252-7c11-4edf-b988-fa6536d406e6
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 252895
     prefix: '503774'
     number_min_length: 11
     number_max_length: 11
-    uuid: bcf1d13e-485d-43e6-9940-5a28d888f81a
+    uuid: ce28c756-b003-4f9a-b288-ccd8bd2206bc
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252920
     prefix: '503775'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a26a0b5-69b8-4860-ad9b-d004684b8c05
+    uuid: dc15facb-3ccc-4541-bb04-4a43b260d437
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 252957
     prefix: '503776'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0096a410-890d-41d4-a694-907e5cb20905
+    uuid: 31327a28-dab8-4972-9dc0-a2484848dcb0
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 252976
     prefix: '503777'
     number_min_length: 11
     number_max_length: 11
-    uuid: a722af62-b58e-456e-a812-8202d129f09e
+    uuid: da605803-a72a-4f79-97ce-d1e106d2f130
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 253012
     prefix: '5037780'
     number_min_length: 11
     number_max_length: 11
-    uuid: d3698225-86ce-4910-a9e5-e5d5fd872d47
+    uuid: 1f5f6915-c5ad-4078-a7d0-2206351bf232
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253014
     prefix: '5037781'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4fa39441-4f5b-4140-9f9e-26d58b29dd16
+    uuid: 6db32a4d-104a-427f-9294-06a087c8d5ee
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253026
     prefix: '5037782'
     number_min_length: 11
     number_max_length: 11
-    uuid: a1e56200-56f8-4837-a146-020ec71f1214
+    uuid: c7e05613-af8d-4b98-a69d-ed4db28a73a1
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253029
     prefix: '5037783'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87676206-4454-47de-a175-ec0da46228de
+    uuid: c1600929-fba2-4fe9-abc7-098fad474844
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253032
     prefix: '5037784'
     number_min_length: 11
     number_max_length: 11
-    uuid: 918612c1-e392-435c-8521-a396cecd5a48
+    uuid: 9f17576a-b06c-4bce-a6e3-1fd3e761f6e4
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253035
     prefix: '5037785'
     number_min_length: 11
     number_max_length: 11
-    uuid: 412ce4b7-4e7d-4671-8007-d4cb4a6c33f1
+    uuid: 0e5bff1d-8f2c-442e-a0b2-d5b09c791bba
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253038
     prefix: '5037786'
     number_min_length: 11
     number_max_length: 11
-    uuid: 610c03a8-1d9b-4c1c-a26a-f7cdc594500c
+    uuid: 3a350a2f-a3eb-4229-bf34-53c8e49f94df
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253041
     prefix: '5037787'
     number_min_length: 11
     number_max_length: 11
-    uuid: 403280bb-8e42-4bd5-9ecb-f9cc5fc43605
+    uuid: 5f935b14-6000-4410-bf90-ad252d1a958f
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253043
     prefix: '5037788'
     number_min_length: 11
     number_max_length: 11
-    uuid: d1ced860-a09f-4eb1-8bfa-da6fb9b04384
+    uuid: 75c4f6d3-1cda-4987-af44-78614f5f68c7
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253056
     prefix: '5037789'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2a3bf772-4c7d-4b7c-b66e-21fc4d5b4d03
+    uuid: fd54dd8f-b6c5-4c57-86e3-c8202ef31ee2
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253063
     prefix: '5037790'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6fe6f8e0-b873-43cf-bf7d-22b80807fb53
+    uuid: 2815b740-61fb-4999-afe5-7a79947f6bd3
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253066
     prefix: '5037791'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5f588eb3-e89c-49ef-9e07-68d3bc9bc62e
+    uuid: 1f087279-6265-4712-aa01-62314e47cec5
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253068
     prefix: '5037792'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7faa24e9-173d-475c-b3d9-0c6eddd27dac
+    uuid: a26dfdbd-1c1e-4dc5-9b91-f5e909f0167e
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253070
     prefix: '5037793'
     number_min_length: 11
     number_max_length: 11
-    uuid: 84936cc5-1f20-44a0-89f2-51d09602caee
+    uuid: 78bad865-55a8-4844-8342-7753142e81f6
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253072
     prefix: '5037794'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3bcb58ed-dc55-48b8-9857-5e6365227718
+    uuid: eba1a5c8-bfb7-4d97-9431-e58a3b12c170
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253074
     prefix: '5037795'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9720f630-cd9d-4df8-ae93-378fdf2932c7
+    uuid: 99f586d9-bf47-41fc-bd90-76387b3577af
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253076
     prefix: '5037796'
     number_min_length: 11
     number_max_length: 11
-    uuid: a590f253-8249-4366-a565-b564e3e160a4
+    uuid: 19463037-bb15-4b44-973e-a91922d708b9
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253077
     prefix: '5037797'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19bc3948-6023-410b-92f6-ab5e044f61c9
+    uuid: c04a75eb-3c02-47e7-b3a8-ba7862aff5ce
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253083
     prefix: '5037798'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4a5be633-def1-4399-bb82-51e06b298b83
+    uuid: cfd668f7-32cf-41dd-a6e3-9d414bbe33a5
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253085
     prefix: '5037799'
     number_min_length: 11
     number_max_length: 11
-    uuid: a4391b57-300d-471f-b68e-5a8a9eb1120c
+    uuid: d50a3657-ccbc-4575-a26f-a433caf4a23d
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253117
     prefix: '5037800'
     number_min_length: 11
     number_max_length: 11
-    uuid: dc112ae5-4188-48e8-9e2b-f11d79ed64a2
+    uuid: baf0a8d5-f4b4-4f78-bea7-96995e7d841d
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253120
     prefix: '5037801'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3d8f1873-0a22-4802-9d40-6aa9539edc15
+    uuid: 074466b7-018d-4153-83a9-13e67695dc39
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 253123
     prefix: '50378020'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0b120eb5-cb41-4c2a-b63b-dd1a1232eb4d
+    uuid: f2c6503c-e314-4b93-a986-8b51f8a9d326
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 253124
     prefix: '50378021'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e0f4e0e-d8f5-472e-a775-a4ea7f7df5cd
+    uuid: 7e19c83d-2b5c-4ff2-988f-506ccd3426c7
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 253125
     prefix: '50378022'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55313d98-2df7-4365-a53c-ec96f1fc9e8c
+    uuid: d2d2e759-16ba-419d-a386-723336c5db17
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 253126
     prefix: '50378023'
     number_min_length: 11
     number_max_length: 11
-    uuid: e8d1b28c-085f-446e-af34-e8b0c0ab11e1
+    uuid: cb9bd78e-fa9f-45e3-abf0-391235db8951
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 253127
     prefix: '50378024'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8ebd0f87-72fd-4716-81ae-89c655d49737
+    uuid: 97c70e72-f3d5-40f5-9f49-dcccd2ccfe85
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 253128
     prefix: '50378025'
     number_min_length: 11
     number_max_length: 11
-    uuid: 27676b0a-37cc-433d-b62e-1658466785c4
+    uuid: 631efc38-aa0c-48a6-ab94-fdbf1c6743c9
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253129
     prefix: '50378026'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4551f5e0-0580-40de-8821-eb211ef76b70
+    uuid: 65140c76-07bd-4557-bde7-080888ba43dc
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253130
     prefix: '50378027'
     number_min_length: 11
     number_max_length: 11
-    uuid: 20262250-7236-47a6-9c73-2af105695dbc
+    uuid: 6e5da0e6-41c0-4121-828c-8f8e5a990014
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253131
     prefix: '50378028'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7fca17ee-f198-4632-b51f-b2787ae8d915
+    uuid: 2a8df866-de89-44d9-87e9-189ea5a6aa31
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253132
     prefix: '50378029'
     number_min_length: 11
     number_max_length: 11
-    uuid: b6046e50-6209-45d7-956a-797276b82e7a
+    uuid: 4e8d0ba6-a87e-49fa-beae-5179e0729f3e
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253135
     prefix: '5037803'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4042c713-25a6-4b56-a19c-9662d1ce6c29
+    uuid: 68471f3e-b24b-433e-af2a-fc34b1e28801
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253140
     prefix: '5037805'
     number_min_length: 11
     number_max_length: 11
-    uuid: d3c7e154-d702-43c9-b4c5-6a067423ff0b
+    uuid: f7cd3180-9d49-48ff-9ee3-e619d2512370
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253143
     prefix: '5037806'
     number_min_length: 11
     number_max_length: 11
-    uuid: e79aad81-da35-40a3-a782-f577fd9feca0
+    uuid: 96f6bd48-03e4-42a6-b2f7-edd558ba3b75
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253146
     prefix: '5037807'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9e373384-4186-41b5-b5bd-25dbc1f32e6c
+    uuid: ec4722b3-fff6-403a-ba87-e7dc02747c88
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253149
     prefix: '5037808'
     number_min_length: 11
     number_max_length: 11
-    uuid: 18c09fb7-c761-475a-a518-f6b8640e0976
+    uuid: 3b4cb5d2-b178-448f-b4e8-3a1843ac18a8
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253152
     prefix: '5037809'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cb359c5-2b48-4de2-8204-92554c36733a
+    uuid: 7d60b0e6-8d10-4755-8ac6-42845f24a616
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253157
     prefix: '503781'
     number_min_length: 11
     number_max_length: 11
-    uuid: a579564b-d8e6-414f-99b2-e9da8f7ec66d
+    uuid: 85bf026d-0b4a-4eba-8ce7-cf568407532f
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253172
     prefix: '503782'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6d8d844e-cd87-493a-b1bf-c4d9328938a3
+    uuid: 684be5cb-01db-4a9f-bd85-e9dbc0f9d04f
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253195
     prefix: '503783'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3bf38884-484a-4821-914f-2a5a14974bca
+    uuid: cae17ba3-9fd1-4fd9-929b-82d4edb21825
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253219
     prefix: '5037840'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef220e8f-2e5b-4ba4-aa8a-d83eb4e0d166
+    uuid: 371c5313-74d8-4814-9d66-106c043031f2
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253222
     prefix: '5037841'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4d813b16-a720-4fce-8f2a-9def6026e46c
+    uuid: db2ce9fd-5ba2-403d-8877-1c201c3b55cf
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253225
     prefix: '5037842'
     number_min_length: 11
     number_max_length: 11
-    uuid: 50ce8f01-456d-4700-8a52-7a6e21ae378a
+    uuid: f2fca907-47e5-42c0-905a-56e70498ace0
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253228
     prefix: '5037843'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3da5aa78-4509-4467-a397-982af56a6044
+    uuid: 1b3dd7ba-17a5-483d-942d-749fd7680e1e
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253231
     prefix: '5037844'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7f3128f2-97aa-43ab-a77f-e8841c3abf20
+    uuid: 2579dd75-0557-4e9c-8ebc-db29b5b2c81e
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253234
     prefix: '5037845'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1990eaa9-6668-41eb-9003-f809c4a28ab7
+    uuid: e3464519-d769-4f32-ae9b-021c910b263a
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253237
     prefix: '5037846'
     number_min_length: 11
     number_max_length: 11
-    uuid: 37e39642-b292-45ad-93a6-f8d5dbfc367b
+    uuid: c3f91856-432e-4378-8dd8-519173de4b8d
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253240
     prefix: '5037847'
     number_min_length: 11
     number_max_length: 11
-    uuid: 35b96ece-d70d-4879-8e94-7639344aef09
+    uuid: 22829dcc-1da4-4b99-9718-fb3f01667684
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253243
     prefix: '5037848'
     number_min_length: 11
     number_max_length: 11
-    uuid: ad679a30-1619-4ccc-a003-eb9be5d68208
+    uuid: 280c720c-fef6-4d56-9b35-49d9732fdfa5
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253246
     prefix: '5037849'
     number_min_length: 11
     number_max_length: 11
-    uuid: a8afa3da-01d5-4a71-86ad-f6d79f1c24d9
+    uuid: 96dd071b-c73d-4797-927f-28990102f393
     country_id: *sv
     network_id: *sv_movistar_mobile
   - id: 253252
     prefix: '503785'
     number_min_length: 11
     number_max_length: 11
-    uuid: 34de9751-0d27-4fff-b9e4-a6f27b212616
+    uuid: 348d7ee3-cb12-4c1e-99bb-4223fc6bfa8b
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253268
     prefix: '503786'
     number_min_length: 11
     number_max_length: 11
-    uuid: 56ec8b68-7fcc-4e41-b327-3d1c7b938bff
+    uuid: ad94969d-0c70-4ca3-aa06-7522801d9cd0
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253292
     prefix: '503787'
     number_min_length: 11
     number_max_length: 11
-    uuid: a6ff6af2-e92c-419e-bce1-970ef5c4ebf5
+    uuid: cc2d93a7-2acb-4b63-a044-3f7078cde22c
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253343
     prefix: '503788'
     number_min_length: 11
     number_max_length: 11
-    uuid: ba858dbc-be6c-4f7b-81df-a66aac8fe16e
+    uuid: 0c451ed1-c9d6-43bd-841a-8754e81c31e1
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253359
     prefix: '503789'
     number_min_length: 11
     number_max_length: 11
-    uuid: e3585fdc-ad82-4b1e-a810-3b04b48f9085
+    uuid: 99230f36-8910-448e-9563-01d05d1ae2a6
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253413
     prefix: '503790'
     number_min_length: 11
     number_max_length: 11
-    uuid: 11360d96-9155-4bbf-9f6d-d891b67292bc
+    uuid: b7993788-dae7-4de2-8c36-22fd50342697
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253463
     prefix: '503791'
     number_min_length: 11
     number_max_length: 11
-    uuid: 42d1f3c0-fa3a-48d1-a958-eb756683460f
+    uuid: 140f8810-1b13-4b95-af0f-2f492aa69ec0
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253491
     prefix: '503792'
     number_min_length: 11
     number_max_length: 11
-    uuid: b40d54ad-e90f-4963-86a2-61d2286bcd88
+    uuid: 2bf9531b-2e83-4de5-af3a-e89e53e828ca
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253551
     prefix: '503793'
     number_min_length: 11
     number_max_length: 11
-    uuid: 80774857-b587-44cc-a3bf-05951554ec48
+    uuid: 7da8e8d7-6d53-4a1c-b493-9f4d348ba9bf
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253567
     prefix: '503794'
     number_min_length: 11
     number_max_length: 11
-    uuid: 69d65e1b-2355-49da-b8c2-7011f76d96f0
+    uuid: 22d1fb5f-d513-437c-9369-ecd1968f3cbf
     country_id: *sv
     network_id: *sv_tigo_mobile
   - id: 253580
     prefix: '503795'
     number_min_length: 11
     number_max_length: 11
-    uuid: b4851ace-3091-4ba8-9a52-73848dc8c662
+    uuid: 248a0427-65e2-4379-863c-00565e601a48
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253596
     prefix: '503796'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7f77c4b5-3701-470e-bf9a-97445dd87876
+    uuid: d2ed8743-d203-4539-a8f2-aa0db62081c4
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253599
     prefix: '503797'
     number_min_length: 11
     number_max_length: 11
-    uuid: d3b44da1-5a90-429e-aecf-3035756f0ee9
+    uuid: 72632278-dc09-4db6-8323-2061b470fd14
     country_id: *sv
     network_id: *sv_digicel_mobile
   - id: 253630
     prefix: '5037980'
     number_min_length: 11
     number_max_length: 11
-    uuid: 17046a94-52a8-4977-b88f-55f8443169b1
+    uuid: b13c9b06-d6ba-42d4-8a3d-5c85a496ff35
     country_id: *sv
     network_id: *sv_red_mobile
   - id: 253632
     prefix: '5037981'
     number_min_length: 11
     number_max_length: 11
-    uuid: 95d90e6a-9cd5-4f99-93ce-78ac6166a835
+    uuid: 4f6d8bdf-f387-49b3-baf6-6e1ec717e5e7
     country_id: *sv
     network_id: *sv_red_mobile
   - id: 253634
     prefix: '5037982'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0e81f09f-f42f-42d4-9846-1defd9cc216a
+    uuid: f675f889-5343-406a-9dc3-73eb583af359
     country_id: *sv
     network_id: *sv_red_mobile
   - id: 253636
     prefix: '5037983'
     number_min_length: 11
     number_max_length: 11
-    uuid: 00dc9c6c-82df-49dd-b61d-cb290e438b86
+    uuid: 1ab15678-a947-404c-8589-fc862d6715c7
     country_id: *sv
     network_id: *sv_red_mobile
   - id: 253638
     prefix: '5037984'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a29a2d7-bd1a-491f-b5ce-736d2f5e214c
+    uuid: 92003b92-8ddd-48ea-a0dc-061c212cdf16
     country_id: *sv
     network_id: *sv_red_mobile
   - id: 253640
     prefix: '5037985'
     number_min_length: 11
     number_max_length: 11
-    uuid: eded50a2-e2b5-4b47-b52d-d9d8f8c4a6c9
+    uuid: c7c90d9b-1ebd-4224-b1af-21875608d1d3
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253642
     prefix: '5037986'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0f023edf-1ac6-4544-966f-4003657775d4
+    uuid: 0b19865e-5fc2-437c-a703-dfbb154848cc
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253644
     prefix: '5037987'
     number_min_length: 11
     number_max_length: 11
-    uuid: 15edbc4a-a8cd-446c-994b-0f4a8b0763be
+    uuid: 26222b06-40bf-466e-8292-1d38733b2df4
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253646
     prefix: '5037988'
     number_min_length: 11
     number_max_length: 11
-    uuid: 190c117a-658e-41b7-a5a0-7329cd9bd7f6
+    uuid: b6811327-2d68-47b9-bc85-d6a5a4350cc1
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253648
     prefix: '5037989'
     number_min_length: 11
     number_max_length: 11
-    uuid: 61998a90-578b-4325-a749-92a4c011f57b
+    uuid: 42565b56-f8f0-4cc3-8dad-1e1471f40fcd
     country_id: *sv
     network_id: *sv_claro_mobile
   - id: 253650
     prefix: '503799'
     number_min_length: 11
     number_max_length: 11
-    uuid: 514bf973-06a5-4bca-8067-2db4aab78142
+    uuid: 249d743d-c016-45ea-9729-f7eaae292bde
     country_id: *sv
     network_id: *sv_movistar_mobile
 # Fixed Prefixes
@@ -1692,62 +1692,62 @@ network_prefixes:
     prefix: '50321'
     number_min_length: 11
     number_max_length: 11
-    uuid: 26d58c7b-c36f-4311-9e01-8eceb8f3d5df
+    uuid: 7f3e39e1-c7ac-46a9-a202-6a557d75f149
     country_id: *sv
     network_id: *sv_fixed
   - id: 244744
     prefix: '50322'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b358554-7ee3-4297-a9c4-d3be4a9a51b7
+    uuid: 3ebaec1f-1447-4357-95a2-1f07228e3696
     country_id: *sv
     network_id: *sv_fixed
   - id: 244939
     prefix: '50323'
     number_min_length: 11
     number_max_length: 11
-    uuid: b4902c12-2657-4eff-8916-bfdbb0232f52
+    uuid: 85564b1d-c068-4e89-a6a3-7367f860c902
     country_id: *sv
     network_id: *sv_fixed
   - id: 245130
     prefix: '50324'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9760e0b9-27f4-49ea-b508-daf07fdb2462
+    uuid: 04723796-44ed-449e-b913-9af1f31e3a26
     country_id: *sv
     network_id: *sv_fixed
   - id: 245279
     prefix: '50325'
     number_min_length: 11
     number_max_length: 11
-    uuid: ee855834-59f3-4f9a-92b8-3a17cf8385af
+    uuid: aed02c6f-83d5-4d1e-b2fb-8ccb242b458f
     country_id: *sv
     network_id: *sv_fixed
   - id: 245489
     prefix: '50326'
     number_min_length: 11
     number_max_length: 11
-    uuid: a22c82a5-bfc2-4b2c-a36d-b9c398fe8fdb
+    uuid: 378ac1df-e4df-4863-915f-3d27e189c010
     country_id: *sv
     network_id: *sv_fixed
   - id: 245630
     prefix: '50327'
     number_min_length: 11
     number_max_length: 11
-    uuid: 043a9892-fa20-42cf-bccb-43356e7462b4
+    uuid: 6acb3f44-daf9-4f5e-816d-93d7e7af0645
     country_id: *sv
     network_id: *sv_fixed
   - id: 245767
     prefix: '50328'
     number_min_length: 11
     number_max_length: 11
-    uuid: 43ff1f5c-e2a4-4b0c-bdba-7bcb16cca912
+    uuid: ed817317-c2d6-4789-9f8b-9ebb993e873f
     country_id: *sv
     network_id: *sv_fixed
   - id: 245846
     prefix: '50329'
     number_min_length: 11
     number_max_length: 11
-    uuid: fdf70768-256a-4fa8-8139-ebebd104d7b2
+    uuid: 02a186e3-8815-4e4f-a680-5179b06783e6
     country_id: *sv
     network_id: *sv_fixed
