@@ -3,261 +3,261 @@ networks:
 # Supplementary services Networks
   - id: &pw_operator_services 5105
     name: PW Operator Services
-    uuid: 38aa610c-00b2-4675-bdca-d3d2a7011b7b
+    uuid: c8837e12-9864-42df-ae10-b4e9b83d9dce
     type_id: 14
   - id: &pw_directory_enquiry_services 5810
     name: PW Directory Enquiry Services
-    uuid: 3f7de62d-0b79-4f23-a7ee-51b2257045d7
+    uuid: 1c3221e9-5a33-4a26-a3cb-cda77834c2d7
     type_id: 14
   - id: &pw_trouble_report_services 6709
     name: PW Trouble Report Services
-    uuid: 5aa8f68e-8da0-4466-aae2-2b6c9d58bd29
+    uuid: 437d7d1d-5e11-47e3-8046-6aa553291dd8
     type_id: 14
   - id: &pw_dial_up_internet_access 6828
     name: PW Dial_Up Internet Access
-    uuid: 577919bf-c431-4281-801f-f005f03cef3c
+    uuid: 001fe716-53b2-4160-aade-8c31293c9edd
     type_id: 14
   - id: &pw_emergency_services 7029
     name: PW Emergency Services
-    uuid: 1f3dff11-1b71-4f5e-9e25-1b5b26739aad
+    uuid: 8466aaf3-75f6-42aa-b54b-de37e403c276
     type_id: 14
 # Fixed Networks
   - id: &pw_fixed 5718
     name: PW Fixed
-    uuid: 89cf14f2-be79-40d2-9190-f13e063f3183
+    uuid: 90fdbaf5-77f5-41ab-bd00-d3c14521fdc1
     type_id: 12
 # Mobile Networks
   - id: &pw_palau_mobile_mobile 6677
     name: PW Palau Mobile Mobile
-    uuid: a67a7898-cb9a-4111-91d8-58e6dd91c078
+    uuid: fab54299-2f9d-4b85-a7c9-0c38613f7302
     type_id: 3
   - id: &pw_palaucel_mobile 6846
     name: PW Palaucel Mobile
-    uuid: 1749de31-c078-4ff2-b462-375018f386e9
+    uuid: 99963269-e0c9-4683-98d0-1f37b5144663
     type_id: 3
   - id: &pw_pt_waves_mobile 6917
     name: PW Pt Waves Mobile
-    uuid: 81344839-1ce9-4139-97a1-28ac0b81f9d2
+    uuid: 394d1f2e-410b-4a06-b04a-c9088bd8600e
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 232080
+  - id: 242080
     prefix: '680'
     number_min_length: 4
     number_max_length: 100
-    uuid: dfdd896d-537e-4b4e-a45d-768b4504b149
+    uuid: e29ee63d-28f5-46c4-88d1-1fc37c4cf98f
     country_id: *pw
     network_id: null
 # Supplementary services Prefixes
-  - id: 232150
+  - id: 242150
     prefix: '6800'
     number_min_length: 4
     number_max_length: 4
-    uuid: 2df1ecf3-f3d4-477b-8bbe-d34dfedd953f
+    uuid: 18c7a838-22e9-454a-89ca-cefbe67af46c
     country_id: *pw
     network_id: *pw_operator_services
-  - id: 234157
+  - id: 244157
     prefix: '680411'
     number_min_length: 6
     number_max_length: 6
-    uuid: a631732e-5198-4c06-8986-0019469a3400
+    uuid: 3a644eab-72a1-4a55-aff3-bd2b4eabbff1
     country_id: *pw
     network_id: *pw_directory_enquiry_services
-  - id: 244002
+  - id: 254002
     prefix: '680611'
     number_min_length: 6
     number_max_length: 6
-    uuid: 988ce5e7-f8ee-4256-a36b-a83d4796e47e
+    uuid: 0476711f-63e4-409d-aeb2-fa0f72bceb06
     country_id: *pw
     network_id: *pw_trouble_report_services
-  - id: 245485
+  - id: 255485
     prefix: '680762'
     number_min_length: 10
     number_max_length: 10
-    uuid: f10701f1-64f4-48f1-9287-e677b23e8afd
+    uuid: 51db74a2-2571-41e6-a12d-c2696b899394
     country_id: *pw
     network_id: *pw_dial_up_internet_access
-  - id: 247188
+  - id: 257188
     prefix: '680900'
     number_min_length: 10
     number_max_length: 10
-    uuid: 83f4c399-26ca-44e9-a107-11ae2a1363d9
+    uuid: 068cb5de-8823-4b5d-a134-91de0ed7619a
     country_id: *pw
     network_id: *pw_operator_services
-  - id: 247395
+  - id: 257395
     prefix: '680911'
     number_min_length: 6
     number_max_length: 6
-    uuid: 82db9250-1895-49e6-b077-f1ef78c46099
+    uuid: b5e9e72b-1286-49f8-96f3-8392df8609ab
     country_id: *pw
     network_id: *pw_emergency_services
 # Fixed Prefixes
-  - id: 233540
+  - id: 243540
     prefix: '680345'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6ddea0f1-d7dd-46d1-b369-b01ce05d7ff1
+    uuid: 8c26812e-2740-43b4-a487-b2f127ff72aa
     country_id: *pw
     network_id: *pw_fixed
-  - id: 235238
+  - id: 245238
     prefix: '680587'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5f5976fd-76e6-4562-922a-ac10e398c840
+    uuid: 922d6195-c46b-4aaf-b759-97ec60d14f84
     country_id: *pw
     network_id: *pw_fixed
-  - id: 238385
+  - id: 248385
     prefix: '680255'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9bc7b4b2-b847-4b44-b130-4641b5deb654
+    uuid: ad329e93-5e0d-4e7c-94b8-0bf78353560c
     country_id: *pw
     network_id: *pw_fixed
-  - id: 238707
+  - id: 248707
     prefix: '680277'
     number_min_length: 10
     number_max_length: 10
-    uuid: ead92e93-586e-4f6b-88f6-168778ae3b09
+    uuid: 551b1830-a546-426a-b43f-2466733d1855
     country_id: *pw
     network_id: *pw_fixed
-  - id: 239482
+  - id: 249482
     prefix: '680488'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1acc2be8-a1da-41b9-ad63-d204ba75ffcf
+    uuid: c650346b-889e-409a-8290-dd1476ba3338
     country_id: *pw
     network_id: *pw_fixed
-  - id: 239976
+  - id: 249976
     prefix: '680535'
     number_min_length: 10
     number_max_length: 10
-    uuid: e3f241ab-5656-4fdd-bfdd-489d901f9029
+    uuid: e2603185-e974-4f9a-92ee-711f1eb878a2
     country_id: *pw
     network_id: *pw_fixed
-  - id: 240049
+  - id: 250049
     prefix: '680544'
     number_min_length: 10
     number_max_length: 10
-    uuid: 427e7d57-8f38-49de-b26d-164dd04dfdfb
+    uuid: 6f9b5d98-80b2-43d1-9514-f41f6c9273e3
     country_id: *pw
     network_id: *pw_fixed
-  - id: 241353
+  - id: 251353
     prefix: '680654'
     number_min_length: 10
     number_max_length: 10
-    uuid: b3772681-f850-4197-ad8a-cfdfe8d596c8
+    uuid: 9faf9734-3cdb-438f-802a-d64b84ac5168
     country_id: *pw
     network_id: *pw_fixed
-  - id: 241942
+  - id: 251942
     prefix: '680733'
     number_min_length: 10
     number_max_length: 10
-    uuid: a5d49248-ea1b-4c08-8d93-6b0083a98ced
+    uuid: 5f4d6a3b-e6a9-4835-af82-9dee249f566c
     country_id: *pw
     network_id: *pw_fixed
-  - id: 242445
+  - id: 252445
     prefix: '680747'
     number_min_length: 10
     number_max_length: 10
-    uuid: d8bf6b7d-0300-4ef0-85d6-8f65c6f8783f
+    uuid: 621681a5-218b-4cae-a88f-c6167abef8c7
     country_id: *pw
     network_id: *pw_fixed
-  - id: 243528
+  - id: 253528
     prefix: '680824'
     number_min_length: 10
     number_max_length: 10
-    uuid: d4d7e8f3-f38d-46df-bb44-6f010aaba70f
+    uuid: c57eff5b-6598-4307-a187-459a2969ea88
     country_id: *pw
     network_id: *pw_fixed
-  - id: 244173
+  - id: 254173
     prefix: '680622'
     number_min_length: 10
     number_max_length: 10
-    uuid: fdca0b70-ae98-4a39-bf47-3b6127da779f
+    uuid: 86bdec16-f9b7-4f1e-93e2-ec3e80911f46
     country_id: *pw
     network_id: *pw_fixed
-  - id: 244671
+  - id: 254671
     prefix: '680679'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9790ce5a-e14f-41ca-8eea-f2c976f4b9c8
+    uuid: fecfb474-72a8-4114-bec3-c596e43961f7
     country_id: *pw
     network_id: *pw_fixed
-  - id: 246772
+  - id: 256772
     prefix: '680876'
     number_min_length: 10
     number_max_length: 10
-    uuid: 39fbf22c-be5c-40a4-be70-5973dd06e3c8
+    uuid: c4c4bb03-a19c-4d57-a88c-48d5a4fb85f4
     country_id: *pw
     network_id: *pw_fixed
-  - id: 253791
+  - id: 263791
     prefix: '680855'
     number_min_length: 10
     number_max_length: 10
-    uuid: fd17c40f-e2ac-4c04-b9c6-29a8917a30de
+    uuid: 2b2e9200-12b9-4b40-a199-cfea66827cb1
     country_id: *pw
     network_id: *pw_fixed
 # Mobile Prefixes
-  - id: 243608
+  - id: 253608
     prefix: '680830'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6f8c395e-91ee-43e6-b79c-955a12ce8e5e
+    uuid: aa23c81d-67f8-4c16-be99-b5df37a71939
     country_id: *pw
     network_id: *pw_palau_mobile_mobile
-  - id: 243611
+  - id: 253611
     prefix: '680831'
     number_min_length: 10
     number_max_length: 10
-    uuid: 10970944-b2f8-4781-94c9-3d449900f060
+    uuid: eedbb4ff-975f-4a68-a2ed-3d2e8e28d1b7
     country_id: *pw
     network_id: *pw_palau_mobile_mobile
-  - id: 243616
+  - id: 253616
     prefix: '680832'
     number_min_length: 10
     number_max_length: 10
-    uuid: c228acdf-c0ad-4555-b1a9-16873a908588
+    uuid: 80dbc57d-fe08-4a76-bf93-9bd4634f2cd3
     country_id: *pw
     network_id: *pw_palau_mobile_mobile
-  - id: 243630
+  - id: 253630
     prefix: '680833'
     number_min_length: 10
     number_max_length: 10
-    uuid: 33bb6885-b3bd-4428-82d9-ca6f4c8367ed
+    uuid: 0e676eae-b881-4419-a1d7-0985a090d93f
     country_id: *pw
     network_id: *pw_palau_mobile_mobile
-  - id: 243641
+  - id: 253641
     prefix: '680834'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8cefcf79-448e-4e30-abab-5555cc2ec7fc
+    uuid: 215a16b4-a717-4199-9b13-fcb1081d6258
     country_id: *pw
     network_id: *pw_palau_mobile_mobile
-  - id: 243644
+  - id: 253644
     prefix: '680835'
     number_min_length: 10
     number_max_length: 10
-    uuid: 97c52c62-9697-4ddb-9013-e5e615656bff
+    uuid: de58e09f-60ab-4d82-9f73-ee4365476245
     country_id: *pw
     network_id: *pw_palau_mobile_mobile
-  - id: 245639
+  - id: 255639
     prefix: '68077'
     number_min_length: 10
     number_max_length: 10
-    uuid: b47c8ddc-c41a-4d80-b9cd-8ee7ffbb2279
+    uuid: 0180b8d5-b8de-4074-8841-a874e0ba8e8f
     country_id: *pw
     network_id: *pw_palaucel_mobile
-  - id: 245964
+  - id: 255964
     prefix: '680777'
     number_min_length: 6
     number_max_length: 6
-    uuid: afec1d54-4a94-4d31-9e56-154e37f8336f
+    uuid: 9928f310-598f-4b5d-8869-e56541a66f65
     country_id: *pw
     network_id: *pw_palaucel_mobile
-  - id: 246845
+  - id: 256845
     prefix: '68088'
     number_min_length: 10
     number_max_length: 10
-    uuid: 72a9f4f0-fe64-4338-9271-8518b906a9de
+    uuid: 6510d32e-0ce5-4953-96a6-8d13e3f31974
     country_id: *pw
     network_id: *pw_pt_waves_mobile

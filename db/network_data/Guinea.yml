@@ -3,369 +3,369 @@ networks:
 # Supplementary services Networks
   - id: &gn_special_services 5233
     name: GN Special Services
-    uuid: 7804ff01-e894-44ac-ad84-019051f39af5
+    uuid: 5124ee92-2851-41fb-a11b-ef22a176ad4c
     type_id: 14
   - id: &gn_freephone_services 5388
     name: GN Freephone Services
-    uuid: ffe062b2-9812-43d2-bf74-3ab1df0272d1
+    uuid: 9b9c08ee-b8a9-4802-a659-ab80d2315335
     type_id: 14
   - id: &gn_directory_enquiry_services 5501
     name: GN Directory Enquiry Services
-    uuid: b7e200a1-266b-4ea7-a5fc-4f834169544c
+    uuid: e2cc1255-ef4d-4d30-836e-aefc794e5a0d
     type_id: 14
   - id: &gn_value_addes_services 6515
     name: GN Value Addes Services
-    uuid: 7875eecc-d62e-4f81-9779-dd95577a2d9c
+    uuid: e2ec3757-5b7d-40e8-85f7-f3dc09ca983d
     type_id: 14
   - id: &gn_internet_access_and_new_generation_networks 6773
     name: GN Internet Access And New Generation Networks
-    uuid: 5e655ef7-e8af-4f3b-8f7b-8424d16b6d8c
+    uuid: acdcd1fb-ef8c-470a-bbee-c71a9e270719
     type_id: 14
 # Fixed Networks
   - id: &gn_fixed 5657
     name: GN Fixed
-    uuid: d89f4670-706d-4e85-9efd-b254f11ed0bd
+    uuid: cbe12a41-18f1-407f-a7c0-351f4a15b1bc
     type_id: 12
 # Mobile Networks
   - id: &gn_mobile 5903
     name: GN Mobile
-    uuid: 055929d6-4021-442f-866a-a49b93d36374
+    uuid: 31d09ff4-14b1-43b6-9b28-0b880bbd9399
     type_id: 3
   - id: &gn_cellcom_mobile 6280
     name: GN Cellcom Mobile
-    uuid: 6ddf0896-7388-4551-b132-41f2a72e5335
+    uuid: 2ce2969e-9561-4526-a007-5b800ba8d2c8
     type_id: 3
   - id: &gn_orange_mobile 6711
     name: GN Orange Mobile
-    uuid: f1a9936a-edf4-4110-80f0-a754a1dcb8aa
+    uuid: 859ed231-9c68-455f-955d-470c4a037f35
     type_id: 3
   - id: &gn_mtn_mobile 6726
     name: GN Mtn Mobile
-    uuid: 600b2f5b-216c-493a-bb8e-86e1298cd6a7
+    uuid: bb2a0470-418c-450b-a48c-53a8a9c48fcd
     type_id: 3
 # Satellite Networks
   - id: &gn_gamma_concept_satellite 6334
     name: GN Gamma Concept Satellite
-    uuid: 2badde8d-101b-4008-af91-43351d903346
+    uuid: 53aae6f9-5bc1-46f5-bc32-d899b17a2e05
     type_id: 16
 network_prefixes:
 # Country code Prefixes
-  - id: 232002
+  - id: 242002
     prefix: '224'
     number_min_length: 4
     number_max_length: 100
-    uuid: 0a0d1861-daaf-4b24-988d-258405544c17
+    uuid: 76182c95-604f-4229-be89-60463f7de022
     country_id: *gn
     network_id: null
 # Supplementary services Prefixes
-  - id: 232403
+  - id: 242403
     prefix: '2241'
     number_min_length: 6
     number_max_length: 6
-    uuid: c6b2da73-07d7-42b2-b6b3-3919ff4ca676
+    uuid: 9dd53def-4f20-4702-b165-f41d5bc20c11
     country_id: *gn
     network_id: *gn_special_services
-  - id: 232590
+  - id: 242590
     prefix: '22411'
     number_min_length: 6
     number_max_length: 6
-    uuid: cb6e222d-2bab-4d32-82ca-b62046fdff07
+    uuid: 6551e938-1034-4b8f-aed1-f4500dedc7cd
     country_id: *gn
     network_id: *gn_freephone_services
-  - id: 232804
+  - id: 242804
     prefix: '22412'
     number_min_length: 6
     number_max_length: 6
-    uuid: 6f92608b-e793-4495-9ad6-5a9b5f124723
+    uuid: 8294443a-bc48-4ccb-bdba-4404b5736d8e
     country_id: *gn
     network_id: *gn_directory_enquiry_services
-  - id: 243077
+  - id: 253077
     prefix: '2248'
     number_min_length: 11
     number_max_length: 11
-    uuid: b040099e-9da2-45e1-b8af-a4d36e7efcc7
+    uuid: 133f2bda-e007-43a1-8adc-50db1d43e1e5
     country_id: *gn
     network_id: *gn_value_addes_services
-  - id: 245251
+  - id: 255251
     prefix: '2247'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1667580d-6896-4cbd-859c-4d0dc5544daa
+    uuid: e3c8c262-f458-458f-a985-5c512827acc3
     country_id: *gn
     network_id: *gn_internet_access_and_new_generation_networks
 # Fixed Prefixes
-  - id: 233113
+  - id: 243113
     prefix: '2243024'
     number_min_length: 11
     number_max_length: 11
-    uuid: b1c10a4e-7e91-41df-977c-ef4cc1688fdb
+    uuid: 85d742bb-99d4-4810-8b36-74f7044e7128
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233124
+  - id: 243124
     prefix: '2243031'
     number_min_length: 11
     number_max_length: 11
-    uuid: b053d257-bf0f-417a-a5ee-ecaa64c86ff7
+    uuid: d4200e03-b6e0-4358-9640-413621c29495
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233126
+  - id: 243126
     prefix: '2243032'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3dc4ab6a-e726-4eff-a762-6cd7cb4e85e4
+    uuid: 6e73161d-07b5-4b93-9a13-d2dd3bddff0c
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233150
+  - id: 243150
     prefix: '2243041'
     number_min_length: 11
     number_max_length: 11
-    uuid: 06fc416f-3102-492a-83e7-e08cafcfe0d9
+    uuid: 27a0739b-4af6-4d44-af3a-39c7075f58c4
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233151
+  - id: 243151
     prefix: '2243042'
     number_min_length: 11
     number_max_length: 11
-    uuid: 893cb2de-6dd1-482c-8c7c-fd5b1f2ae5c8
+    uuid: 4d6b59d1-f42a-4f4b-aa56-e43fea3f5831
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233152
+  - id: 243152
     prefix: '2243043'
     number_min_length: 11
     number_max_length: 11
-    uuid: 733a9314-4ba3-4880-96b7-fe741d9dceff
+    uuid: 983565e9-9ad5-4c07-a23e-704ea9a6cf5d
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233153
+  - id: 243153
     prefix: '2243045'
     number_min_length: 11
     number_max_length: 11
-    uuid: ceb4b1bc-919b-46c5-8576-4a9b3277e2c2
+    uuid: 8ba0f33f-2994-41ed-a899-cadf4e68603e
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233154
+  - id: 243154
     prefix: '2243046'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3b73ad2b-ae0a-453a-899b-71740b991053
+    uuid: 7d1fdd72-2917-4069-8698-719fd9ade227
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233155
+  - id: 243155
     prefix: '2243047'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4cc2d04-4108-4ec6-b41b-6ee2a668c0a2
+    uuid: d9eae97a-e981-4ddb-8110-46367c42895d
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233164
+  - id: 243164
     prefix: '2243051'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2dcc6728-db99-4c94-b81a-cd5e5e8d148c
+    uuid: b13c9662-769b-4f1f-a840-1f92dff5822f
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233165
+  - id: 243165
     prefix: '2243053'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2c589283-a585-4cfe-ac1d-83261f7815c4
+    uuid: 10f8ab63-29f8-4a03-a1a1-1858e4609aac
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233175
+  - id: 243175
     prefix: '2243061'
     number_min_length: 11
     number_max_length: 11
-    uuid: c354e45e-c36f-48af-9025-3b74474d7136
+    uuid: 893a66a5-46be-435f-a7f7-572268d56fb4
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233176
+  - id: 243176
     prefix: '22430613'
     number_min_length: 11
     number_max_length: 11
-    uuid: cd501f79-b078-49b0-bf15-c44d3a9ae6a3
+    uuid: 5ebb2736-0603-4a39-850d-562cbec27e50
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233177
+  - id: 243177
     prefix: '2243068'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6e49225f-da82-4f86-a71f-aac5b074a583
+    uuid: 311f3859-abda-4723-8f40-083f2e0b3f1d
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233178
+  - id: 243178
     prefix: '2243069'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6e97f497-caad-462a-becc-4991bfa830e9
+    uuid: f8a87c45-fa12-4d39-a3b6-f18402c67cee
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233188
+  - id: 243188
     prefix: '2243071'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0d48f931-0ae4-4c6a-91b8-7d0d69af747b
+    uuid: 2e46e8e9-9d47-40f6-be47-d1f1f9894c2f
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233198
+  - id: 243198
     prefix: '2243081'
     number_min_length: 11
     number_max_length: 11
-    uuid: a47e0416-2755-4b39-aa95-078817d3aebc
+    uuid: e3efc184-f589-4e46-88d2-40568c76a4de
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233218
+  - id: 243218
     prefix: '2243091'
     number_min_length: 11
     number_max_length: 11
-    uuid: b830a98a-2b70-4db0-b4ab-73daf6ad81ae
+    uuid: 9759f6d3-0918-42dc-89f5-87b7918da778
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233219
+  - id: 243219
     prefix: '2243094'
     number_min_length: 11
     number_max_length: 11
-    uuid: c69a630b-7eb0-445d-95ac-4e1a4ef3acc5
+    uuid: be3e1300-623a-4bad-9906-b403c592d607
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233220
+  - id: 243220
     prefix: '2243097'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1ede6b1d-13d7-4b3e-8496-77f90eea3be9
+    uuid: 76c278b0-afa7-42cd-af54-6f73bed4d15d
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233221
+  - id: 243221
     prefix: '2243098'
     number_min_length: 11
     number_max_length: 11
-    uuid: 09101525-e7cc-4212-970a-49226c8d3d0c
+    uuid: d8017a7b-56f0-4c10-9df6-fe5144cc716b
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233231
+  - id: 243231
     prefix: '22431'
     number_min_length: 11
     number_max_length: 11
-    uuid: 374951cc-cd1a-486d-b13a-32f4d2c79aa1
+    uuid: 9a94b533-0c15-494f-9bb0-17a615fae149
     country_id: *gn
     network_id: *gn_fixed
-  - id: 233367
+  - id: 243367
     prefix: '22432'
     number_min_length: 11
     number_max_length: 11
-    uuid: d441828d-8ae1-41de-aa3f-50365f0e8ee4
+    uuid: df02f865-a771-4ee3-b4f9-7db52a1fa0ff
     country_id: *gn
     network_id: *gn_fixed
-  - id: 238898
+  - id: 248898
     prefix: '2243'
     number_min_length: 11
     number_max_length: 11
-    uuid: 08ca6f23-3e24-4a6b-a99c-13dba277ab55
+    uuid: 1c79e3c3-9ac8-49fc-9642-9c26ea2825b8
     country_id: *gn
     network_id: *gn_fixed
-  - id: 246088
+  - id: 256088
     prefix: '22478'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4207b45b-2a0d-4ff7-b8c3-dc9632f58fe0
+    uuid: 1fd9434a-de70-47af-8d08-ea06e161eb13
     country_id: *gn
     network_id: *gn_fixed
 # Mobile Prefixes
-  - id: 235393
+  - id: 245393
     prefix: '2246'
     number_min_length: 12
     number_max_length: 12
-    uuid: 18570cf5-01f6-4755-b100-bb4c08522208
+    uuid: 327175ac-858f-47e3-bb4f-68609fcbee6d
     country_id: *gn
     network_id: *gn_mobile
-  - id: 241317
+  - id: 251317
     prefix: '224653'
     number_min_length: 12
     number_max_length: 12
-    uuid: 793dcb73-ebe5-4f3c-a2ec-f1d427456362
+    uuid: bbd2402a-e9c4-4d8b-bce9-071c755d1100
     country_id: *gn
     network_id: *gn_cellcom_mobile
-  - id: 241347
+  - id: 251347
     prefix: '224654'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6f1be85a-4d65-4bc5-b4c8-28c7682c8fea
+    uuid: cb9fefb7-6077-4b72-86a5-51b17ee840b6
     country_id: *gn
     network_id: *gn_cellcom_mobile
-  - id: 241386
+  - id: 251386
     prefix: '224655'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1dd09892-30f9-417a-b341-c20d39a2aff5
+    uuid: ee610632-a1f5-4c24-a9ae-412d1cbbb1bd
     country_id: *gn
     network_id: *gn_cellcom_mobile
-  - id: 241407
+  - id: 251407
     prefix: '224656'
     number_min_length: 12
     number_max_length: 12
-    uuid: ffdaec02-a50e-4f2c-8782-0da85ae37aa2
+    uuid: 6169cb10-895f-4f4c-974a-c95382538ba5
     country_id: *gn
     network_id: *gn_cellcom_mobile
-  - id: 241435
+  - id: 251435
     prefix: '224657'
     number_min_length: 12
     number_max_length: 12
-    uuid: 09ddce74-3633-419c-be40-4aaf690e43fe
+    uuid: d4662dee-7a67-45cb-a716-226238ac7c36
     country_id: *gn
     network_id: *gn_cellcom_mobile
-  - id: 244116
+  - id: 254116
     prefix: '22462'
     number_min_length: 12
     number_max_length: 12
-    uuid: 515a9c90-af58-4827-a5c3-be35c666ab00
+    uuid: 784a6365-c1e2-4b85-8d52-bcc783896ef6
     country_id: *gn
     network_id: *gn_orange_mobile
-  - id: 244305
+  - id: 254305
     prefix: '224660'
     number_min_length: 12
     number_max_length: 12
-    uuid: e4cd1edf-d51b-4559-aa18-f91768f6ba78
+    uuid: 6c7221fc-c9a9-4479-9bc4-aae025cbc2e6
     country_id: *gn
     network_id: *gn_mtn_mobile
-  - id: 244333
+  - id: 254333
     prefix: '224661'
     number_min_length: 12
     number_max_length: 12
-    uuid: a532d741-e6cf-4523-a38e-7cd0d12b25fe
+    uuid: ca03f256-b035-4499-b9f1-4a1e957227e8
     country_id: *gn
     network_id: *gn_mtn_mobile
-  - id: 244353
+  - id: 254353
     prefix: '224662'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70616bf8-49b1-4b96-9ed0-65b4f61a20d4
+    uuid: 003ac3e7-3d2f-4fa8-b025-4327f8b94ac7
     country_id: *gn
     network_id: *gn_mtn_mobile
-  - id: 244406
+  - id: 254406
     prefix: '224664'
     number_min_length: 12
     number_max_length: 12
-    uuid: f3addabb-dc45-48b3-a61d-d878cea44ed8
+    uuid: f58e634a-84bf-439e-9db2-1b9e79e0d2ff
     country_id: *gn
     network_id: *gn_mtn_mobile
-  - id: 244456
+  - id: 254456
     prefix: '224666'
     number_min_length: 12
     number_max_length: 12
-    uuid: 85a2797d-089e-4a60-a003-abb10ef3327a
+    uuid: 4134ccbd-5af1-4c32-96f6-5831bf41f2b7
     country_id: *gn
     network_id: *gn_mtn_mobile
-  - id: 244512
+  - id: 254512
     prefix: '224668'
     number_min_length: 12
     number_max_length: 12
-    uuid: 20089d98-d6c3-4c70-a8b0-6d413f63899e
+    uuid: e57b9441-db3d-4739-9065-497e25dd2c4f
     country_id: *gn
     network_id: *gn_mtn_mobile
 # Satellite Prefixes
-  - id: 241845
+  - id: 251845
     prefix: '224722'
     number_min_length: 11
     number_max_length: 11
-    uuid: e517711e-e12a-4e8c-bb10-e3dfd1bf6a23
+    uuid: 6202a105-1c46-49fc-a7b5-0da36054efaf
     country_id: *gn
     network_id: *gn_gamma_concept_satellite

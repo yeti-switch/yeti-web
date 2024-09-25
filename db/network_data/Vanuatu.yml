@@ -3,444 +3,444 @@ networks:
 # Supplementary services Networks
   - id: &vu_freephone_services 5171
     name: VU Freephone Services
-    uuid: b890b3e6-906d-4e1f-a70c-5d7075f6897a
+    uuid: cd77487e-f7d9-4b36-9fec-35fc353201d9
     type_id: 14
   - id: &vu_special_services 5338
     name: VU Special Services
-    uuid: 21549636-bd66-41ac-9a1f-a8416fbc3109
+    uuid: ebe8d1c4-9c5e-409d-834d-530cac26eb6d
     type_id: 14
   - id: &vu_emergency_services 5397
     name: VU Emergency Services
-    uuid: c60b40cc-0370-478f-88b7-48d793942508
+    uuid: 7223d190-e526-4a44-81c1-5bada4e6bf0d
     type_id: 14
   - id: &vu_internal_network_services 5514
     name: VU Internal Network Services
-    uuid: 2887342e-c4ae-4721-84f0-7eed0bc4e216
+    uuid: 5514ccf1-3b03-4898-88cf-b4cf0f3339df
     type_id: 14
   - id: &vu_sms_value_added_services 5589
     name: VU Sms Value Added Services
-    uuid: 414356d6-a69c-4f54-bea5-8295fc1eb2a0
+    uuid: b49ed47b-c72c-43f8-b25e-ea007a52338f
     type_id: 14
   - id: &vu_government_and_ngo_information_services 5617
     name: VU Government And Ngo Information Services
-    uuid: 3a1026ef-734b-4feb-99e1-5d473c2a10d5
+    uuid: 4ab78fc6-4dcd-4d00-9964-67d36db3e52b
     type_id: 14
   - id: &vu_directory_and_customer_care_services 6027
     name: VU Directory And Customer Care Services
-    uuid: 9aa565c9-12dc-46e6-830d-1e4057338124
+    uuid: 93222df7-a5a6-4bc4-9b47-92d47f78e022
     type_id: 14
 # Fixed Networks
   - id: &vu_fixed 5711
     name: VU Fixed
-    uuid: bb5611e1-303e-4faa-9250-bb3b54164e65
+    uuid: 0000baee-a3b4-40cd-9f37-e8102a33e998
     type_id: 12
 # Mobile Networks
   - id: &vu_digicel_mobile 6173
     name: VU Digicel Mobile
-    uuid: f9067a8d-7f87-4a27-9d6c-000af35792d2
+    uuid: 4b0dc0f9-0f31-44c0-ba53-dc1b660b321d
     type_id: 3
   - id: &vu_smile_mobile 6315
     name: VU Smile Mobile
-    uuid: 8d2e422f-e0c3-4bf5-b8e5-b138e6d0e4bf
+    uuid: be4c530f-2c62-462f-9ea5-c220761394c0
     type_id: 3
   - id: &vu_mobile 6786
     name: VU Mobile
-    uuid: 49b7a1c2-f009-4bde-acab-3e1a7dff3c49
+    uuid: a112258a-ea40-4b3f-aa4b-8644950b74b9
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 232131
+  - id: 242131
     prefix: '678'
     number_min_length: 4
     number_max_length: 100
-    uuid: b1443396-c655-4dab-aa36-840e108a9e93
+    uuid: c9a404b9-8c32-4dbb-b9f5-05eb7888d6ee
     country_id: *vu
     network_id: null
 # Supplementary services Prefixes
-  - id: 232326
+  - id: 242326
     prefix: '6780811'
     number_min_length: 9
     number_max_length: 9
-    uuid: 0b3f49d7-a55c-4015-a915-86ef31657c80
+    uuid: 9715ab68-d794-44a1-98ea-a4442b88c054
     country_id: *vu
     network_id: *vu_freephone_services
-  - id: 232327
+  - id: 242327
     prefix: '6780818'
     number_min_length: 9
     number_max_length: 9
-    uuid: b97d772c-8dfd-446d-aaa4-a835ab2ed1ff
+    uuid: b15abdd7-f1d4-483f-a4e7-56cfa7660f78
     country_id: *vu
     network_id: *vu_freephone_services
-  - id: 232518
+  - id: 242518
     prefix: '6781'
     number_min_length: 6
     number_max_length: 6
-    uuid: e86f5ac3-af47-4446-aa25-939045c9dfc3
+    uuid: f976ee6c-7e0b-41c9-932b-96c4d91c0a1d
     country_id: *vu
     network_id: *vu_special_services
-  - id: 232601
+  - id: 242601
     prefix: '67811'
     number_min_length: 6
     number_max_length: 6
-    uuid: e12f982a-d79a-42be-abec-b2f2117935ff
+    uuid: 78c15b34-3301-437c-a383-567654a018d8
     country_id: *vu
     network_id: *vu_emergency_services
-  - id: 232820
+  - id: 242820
     prefix: '67812'
     number_min_length: 6
     number_max_length: 6
-    uuid: 9c127fca-8e06-4a01-a691-758b9f148a36
+    uuid: e58c4cf1-814e-4774-80df-fb310a66f1e2
     country_id: *vu
     network_id: *vu_internal_network_services
-  - id: 232864
+  - id: 242864
     prefix: '67813'
     number_min_length: 6
     number_max_length: 6
-    uuid: 0b8ef057-4cd8-41af-8b23-50b913b1c3e4
+    uuid: f5b3379f-7132-4dbb-871e-b622db1c20b8
     country_id: *vu
     network_id: *vu_internal_network_services
-  - id: 232914
+  - id: 242914
     prefix: '67814'
     number_min_length: 6
     number_max_length: 6
-    uuid: b2ff4496-5188-43dd-a068-fda02d42028a
+    uuid: f8545603-e33a-47dc-9628-5debd36df13f
     country_id: *vu
     network_id: *vu_internal_network_services
-  - id: 232952
+  - id: 242952
     prefix: '67815'
     number_min_length: 6
     number_max_length: 6
-    uuid: db0c13ea-2e52-40f8-8cfc-cd92b522fb76
+    uuid: 46b8f883-669a-4404-8145-3503b4a2ae45
     country_id: *vu
     network_id: *vu_sms_value_added_services
-  - id: 233030
+  - id: 243030
     prefix: '67816'
     number_min_length: 6
     number_max_length: 6
-    uuid: ca1e8d91-e59c-445a-8d6b-b7b9290ed485
+    uuid: 54a4e5ff-0687-46f4-a6f7-06901649976c
     country_id: *vu
     network_id: *vu_government_and_ngo_information_services
-  - id: 233069
+  - id: 243069
     prefix: '67817'
     number_min_length: 6
     number_max_length: 6
-    uuid: af3f8798-63eb-47fe-83bd-e443fc246b1c
+    uuid: 99eca734-aa6b-41de-91a4-82b0e1ab83c8
     country_id: *vu
     network_id: *vu_internal_network_services
-  - id: 237289
+  - id: 247289
     prefix: '67818'
     number_min_length: 6
     number_max_length: 6
-    uuid: 8313ced4-b314-4e30-8bad-d075b1fa0d59
+    uuid: bf70ae2c-550f-48a4-8653-2176c587789e
     country_id: *vu
     network_id: *vu_sms_value_added_services
-  - id: 237347
+  - id: 247347
     prefix: '67819'
     number_min_length: 6
     number_max_length: 6
-    uuid: 62711cb9-761e-4647-b785-15065349a8a2
+    uuid: 2f36abae-dde6-4690-85a4-6061dc23c290
     country_id: *vu
     network_id: *vu_directory_and_customer_care_services
-  - id: 238944
+  - id: 248944
     prefix: '67830'
     number_min_length: 8
     number_max_length: 8
-    uuid: 4c82fbc9-4ec3-432a-9d34-90ff77738bb8
+    uuid: 9301cb80-d77a-479c-b6f4-9b49aa559a80
     country_id: *vu
     network_id: *vu_special_services
 # Fixed Prefixes
-  - id: 233423
+  - id: 243423
     prefix: '67833'
     number_min_length: 8
     number_max_length: 8
-    uuid: 880db20d-2f13-4ecf-b35b-46ceeb07a12f
+    uuid: 32641e44-d36d-4645-bfef-616f3ca80e69
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233498
+  - id: 243498
     prefix: '67834'
     number_min_length: 8
     number_max_length: 8
-    uuid: 1882eb8c-fac8-480f-9f4b-c96ca20c2daa
+    uuid: 6614b5e1-0eb5-4fcc-bb38-7a26241620e2
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233598
+  - id: 243598
     prefix: '67835'
     number_min_length: 8
     number_max_length: 8
-    uuid: 3fab87af-10bf-4244-a332-a96d949482e2
+    uuid: b01b412b-209a-4d73-9834-8e971093666f
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233677
+  - id: 243677
     prefix: '67836'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0854bfae-533b-4d15-b71c-751f79fea235
+    uuid: cf2f284e-0cd0-472c-bde9-dde032fdfc9c
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233722
+  - id: 243722
     prefix: '67837'
     number_min_length: 8
     number_max_length: 8
-    uuid: ca88187f-adfe-462b-9f47-56ba887fa3b8
+    uuid: 179f13e8-f3ab-4f23-993f-6259cde6c9d2
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233873
+  - id: 243873
     prefix: '678380'
     number_min_length: 8
     number_max_length: 8
-    uuid: f0b06f42-6ab3-4e74-b0ee-6240837aef5b
+    uuid: 5871e66b-47b2-4c7d-ac85-a3ffdb06ecb7
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233875
+  - id: 243875
     prefix: '678381'
     number_min_length: 8
     number_max_length: 8
-    uuid: 37b7802f-9e56-4717-a7da-d4b838e57905
+    uuid: 32d5904b-7c57-4a18-b307-45c0d4b9f7c3
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233877
+  - id: 243877
     prefix: '678382'
     number_min_length: 8
     number_max_length: 8
-    uuid: e8d85a3b-d5fd-470d-a411-f76547635243
+    uuid: 90ac7dc4-457d-42ad-8c97-f4573ce91c21
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233879
+  - id: 243879
     prefix: '678383'
     number_min_length: 8
     number_max_length: 8
-    uuid: 855af681-104c-4dc8-9059-dcdc818fbf5b
+    uuid: c72ac401-ebb4-475f-83d9-0f0fa437e321
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233882
+  - id: 243882
     prefix: '678384'
     number_min_length: 8
     number_max_length: 8
-    uuid: 19afe9ee-5d35-4f0d-9a4d-bc29f113e758
+    uuid: bdc56fda-fe7e-43f4-8e68-71b3762a16f9
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233884
+  - id: 243884
     prefix: '678385'
     number_min_length: 8
     number_max_length: 8
-    uuid: ea8fbd11-a48d-4a95-9f11-2584767b8c57
+    uuid: fb97d9ca-84d7-47e6-9ba4-d55ef1936fba
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233885
+  - id: 243885
     prefix: '678386'
     number_min_length: 8
     number_max_length: 8
-    uuid: e3ce0564-3068-448c-abb3-89d253f7107f
+    uuid: cf3c326b-e0df-4788-8ea8-77857a3b8340
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233887
+  - id: 243887
     prefix: '678387'
     number_min_length: 8
     number_max_length: 8
-    uuid: cb77d6c5-b02a-4bdf-b908-2c355f65b8b3
+    uuid: b5e829af-7702-40df-b3dd-69a41447f584
     country_id: *vu
     network_id: *vu_fixed
-  - id: 233889
+  - id: 243889
     prefix: '678388'
     number_min_length: 8
     number_max_length: 8
-    uuid: 00efeab4-43ad-4bde-b0c6-0c66cc2b0c83
+    uuid: 9180d8d8-33ef-4f0d-913f-c08dd2310c03
     country_id: *vu
     network_id: *vu_fixed
-  - id: 237462
+  - id: 247462
     prefix: '67820'
     number_min_length: 8
     number_max_length: 8
-    uuid: 8ec719ed-0f51-4e58-892c-f4c807bc3583
+    uuid: 64298b60-b9ca-4c20-bb88-3b65b787eb66
     country_id: *vu
     network_id: *vu_fixed
-  - id: 237741
+  - id: 247741
     prefix: '67822'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0796704e-b483-4922-9960-6f73d192f504
+    uuid: da4e39d8-a631-4f86-9a94-fa8f73211b79
     country_id: *vu
     network_id: *vu_fixed
-  - id: 237935
+  - id: 247935
     prefix: '67823'
     number_min_length: 8
     number_max_length: 8
-    uuid: 4b010931-364a-4b03-aa2f-e759f3d5b668
+    uuid: 19b826d9-ad67-4bd3-b22d-42af0dcd7cfd
     country_id: *vu
     network_id: *vu_fixed
-  - id: 238126
+  - id: 248126
     prefix: '67824'
     number_min_length: 8
     number_max_length: 8
-    uuid: fc3be51f-af49-4bc2-9188-39357b9a0337
+    uuid: e7a256ab-04b8-47e4-816c-1957debce90a
     country_id: *vu
     network_id: *vu_fixed
-  - id: 238275
+  - id: 248275
     prefix: '67825'
     number_min_length: 8
     number_max_length: 8
-    uuid: 1decbec9-c498-48af-b40a-c71e8ee7d9f4
+    uuid: 52210d09-354f-4fad-8a4d-db3fb7361a9a
     country_id: *vu
     network_id: *vu_fixed
-  - id: 238483
+  - id: 248483
     prefix: '67826'
     number_min_length: 8
     number_max_length: 8
-    uuid: cbf9de06-7c76-48b0-85e3-dee2249baee2
+    uuid: f9af907a-de9b-417e-b3a7-5263b9de9f41
     country_id: *vu
     network_id: *vu_fixed
-  - id: 238625
+  - id: 248625
     prefix: '67827'
     number_min_length: 8
     number_max_length: 8
-    uuid: aae058c4-e435-4155-aaf3-134fb99de154
+    uuid: b7bd966f-cb1c-4be7-876d-6a28bdc2a668
     country_id: *vu
     network_id: *vu_fixed
-  - id: 238760
+  - id: 248760
     prefix: '67828'
     number_min_length: 8
     number_max_length: 8
-    uuid: 07a70c0b-a3e0-4ae9-8313-689b686b2add
+    uuid: 06f76b39-2eb4-4330-b0d0-3fa25929df1f
     country_id: *vu
     network_id: *vu_fixed
-  - id: 238839
+  - id: 248839
     prefix: '67829'
     number_min_length: 8
     number_max_length: 8
-    uuid: b271964e-5c90-44ef-9165-503a1284b689
+    uuid: 8234af45-74f4-499d-a08e-47ac95dfa090
     country_id: *vu
     network_id: *vu_fixed
-  - id: 239451
+  - id: 249451
     prefix: '678484'
     number_min_length: 8
     number_max_length: 8
-    uuid: 07d3e270-f2b9-42c5-ac8c-10b42f922126
+    uuid: 3509496c-692d-428f-a40d-f1216cbc9733
     country_id: *vu
     network_id: *vu_fixed
-  - id: 239463
+  - id: 249463
     prefix: '678485'
     number_min_length: 8
     number_max_length: 8
-    uuid: d669d88e-546d-4075-8293-1239c918ca28
+    uuid: be8ee02b-dd8d-4449-9d2a-0c7bc21e0759
     country_id: *vu
     network_id: *vu_fixed
-  - id: 239469
+  - id: 249469
     prefix: '678486'
     number_min_length: 8
     number_max_length: 8
-    uuid: e579b8bc-d0e0-43d2-8f4e-e867521e31eb
+    uuid: 5389046e-b845-46b0-a602-3a0ee42722c3
     country_id: *vu
     network_id: *vu_fixed
-  - id: 239480
+  - id: 249480
     prefix: '678487'
     number_min_length: 8
     number_max_length: 8
-    uuid: 2ba0ebec-e162-48c0-9cdb-b78d43cc7a91
+    uuid: 3ff98539-ac21-4c16-9b0c-fd3640fe929a
     country_id: *vu
     network_id: *vu_fixed
-  - id: 239483
+  - id: 249483
     prefix: '678488'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0a743ea3-d0b9-4214-8b40-a1bd672f6503
+    uuid: a32ef0bc-aab2-4fe1-89eb-592c767763ab
     country_id: *vu
     network_id: *vu_fixed
-  - id: 239493
+  - id: 249493
     prefix: '678489'
     number_min_length: 8
     number_max_length: 8
-    uuid: f352233c-7552-483c-b81f-d2502ad212e3
+    uuid: 698d35c0-1032-4e6d-9e33-c8089d3dacf1
     country_id: *vu
     network_id: *vu_fixed
-  - id: 246853
+  - id: 256853
     prefix: '67888'
     number_min_length: 8
     number_max_length: 8
-    uuid: 22d0aa28-7bea-413b-817e-19febe347dfe
+    uuid: 39ee7a4b-9371-4de5-9efb-befad91f0776
     country_id: *vu
     network_id: *vu_fixed
-  - id: 247171
+  - id: 257171
     prefix: '67890'
     number_min_length: 10
     number_max_length: 10
-    uuid: ffd922c0-9932-4995-8952-156b91e4f82c
+    uuid: 23d24d5c-b190-4db6-8d71-f91d83343b85
     country_id: *vu
     network_id: *vu_fixed
-  - id: 247382
+  - id: 257382
     prefix: '678910'
     number_min_length: 10
     number_max_length: 10
-    uuid: 09fe0c73-23e1-40cf-bf09-0bf12ee95bde
+    uuid: 4b662a1d-55aa-4c54-b6db-0e771677097a
     country_id: *vu
     network_id: *vu_fixed
-  - id: 247398
+  - id: 257398
     prefix: '678911'
     number_min_length: 10
     number_max_length: 10
-    uuid: e107a83b-45f0-42bb-ae12-2527acefd007
+    uuid: 0fdd06e9-8d5c-4344-9553-752e8fb30df4
     country_id: *vu
     network_id: *vu_fixed
 # Mobile Prefixes
-  - id: 239607
+  - id: 249607
     prefix: '6785'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6edd5c45-3681-44c1-b963-3d6727af4564
+    uuid: e9197015-2abd-423d-af54-0d4a05370e99
     country_id: *vu
     network_id: *vu_digicel_mobile
-  - id: 241748
+  - id: 251748
     prefix: '67871'
     number_min_length: 10
     number_max_length: 10
-    uuid: 77dda800-3a0b-40b1-8f40-7b4de6153dfa
+    uuid: 286c5c07-96b6-4e22-9e9b-55d21ef03c4f
     country_id: *vu
     network_id: *vu_smile_mobile
-  - id: 241887
+  - id: 251887
     prefix: '67873'
     number_min_length: 10
     number_max_length: 10
-    uuid: af9cea7f-b94d-4cc0-a2c8-d3e27c08958a
+    uuid: 5bf0cb97-445b-4dd5-8daf-02909fee1dc1
     country_id: *vu
     network_id: *vu_smile_mobile
-  - id: 242073
+  - id: 252073
     prefix: '67874'
     number_min_length: 10
     number_max_length: 10
-    uuid: b6737fa1-0550-482a-b3f0-47dae5ce1be6
+    uuid: ef044e11-7b00-4294-8876-a60ffc1796f9
     country_id: *vu
     network_id: *vu_smile_mobile
-  - id: 242565
+  - id: 252565
     prefix: '67875'
     number_min_length: 10
     number_max_length: 10
-    uuid: 29242dfe-a16a-4b41-b545-11346e95b229
+    uuid: f7d734a5-fc44-492c-b850-96350a6781db
     country_id: *vu
     network_id: *vu_smile_mobile
-  - id: 245286
+  - id: 255286
     prefix: '6787'
     number_min_length: 10
     number_max_length: 10
-    uuid: 48039863-db56-483d-94ed-0cdfc23be1c0
+    uuid: 6a3f87a8-59a5-4707-8cbf-dbc5a0014684
     country_id: *vu
     network_id: *vu_mobile
-  - id: 245308
+  - id: 255308
     prefix: '67870'
     number_min_length: 10
     number_max_length: 10
-    uuid: 23f41531-c249-4d42-b9f5-3e4a86f5a4df
+    uuid: 2a1054a1-046d-4421-b896-fdc75917d0d1
     country_id: *vu
     network_id: *vu_smile_mobile
-  - id: 245464
+  - id: 255464
     prefix: '67876'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4669d820-b566-4ee8-b362-d9440541f4e8
+    uuid: 0d1d7f69-f344-42e7-958f-2c87310613c4
     country_id: *vu
     network_id: *vu_smile_mobile
-  - id: 245646
+  - id: 255646
     prefix: '67877'
     number_min_length: 10
     number_max_length: 10
-    uuid: fe9724bd-5393-4775-8290-2de5cdf32a2a
+    uuid: a66e0a06-92a7-4aa0-9104-54c67db6a567
     country_id: *vu
     network_id: *vu_smile_mobile
