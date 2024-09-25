@@ -1,550 +1,550 @@
 country_id: &ml 131
 networks:
 # Supplementary services Networks
-  - id: &ml_special_services 7870
+  - id: &ml_special_services 5275
     name: ML Special Services
-    uuid: 00801070-cd30-418e-bb8a-58e89861f48a
+    uuid: 9c4355a9-104e-4e7a-b6c3-76cb0c4b62a2
     type_id: 14
-  - id: &ml_customer_care_services 8103
+  - id: &ml_customer_care_services 5507
     name: ML Customer Care Services
-    uuid: b082f66e-4930-4ba3-9bbe-9834ec558a60
+    uuid: f70ecef6-7373-480b-99b5-a53be126ee86
     type_id: 14
-  - id: &ml_freephone_services 9135
+  - id: &ml_freephone_services 6539
     name: ML Freephone Services
-    uuid: 87c81a65-2858-4b93-addd-c1aa954ea88c
+    uuid: c2b13640-0464-4bed-8b73-50a6d92c2c54
     type_id: 14
-  - id: &ml_local_rate_services 9184
+  - id: &ml_local_rate_services 6588
     name: ML Local Rate Services
-    uuid: 949754f3-0953-4ef7-ad11-e6d993ba5272
+    uuid: 42c0cc0b-f9c7-47e0-8f99-c6981d87fcfc
     type_id: 14
-  - id: &ml_special_rate_services 9187
+  - id: &ml_special_rate_services 6591
     name: ML Special Rate Services
-    uuid: 7ac68a63-6e5a-46b3-9c6b-ad969d263f7f
+    uuid: e7a7b6fa-53a6-4187-9691-e932a693d4ee
     type_id: 14
 # Fixed Networks
-  - id: &ml_fixed 8392
+  - id: &ml_fixed 5796
     name: ML Fixed
-    uuid: 2d0cba0f-51bd-4af7-8a95-37091278a7c0
+    uuid: 3544fde1-bb7c-4347-914b-5d635154ad9f
     type_id: 12
 # Mobile Networks
-  - id: &ml_moov_africa_mobile 8507
+  - id: &ml_moov_africa_mobile 5911
     name: ML Moov Africa Mobile
-    uuid: 1e87ccba-9806-4f93-96ba-3b457ab4ace0
+    uuid: 23536eb1-96e4-4644-9189-b00bf827f0a3
     type_id: 3
-  - id: &ml_telecel_mobile 8767
+  - id: &ml_telecel_mobile 6171
     name: ML Telecel Mobile
-    uuid: fa09b49e-b5af-4632-b028-ef14b48c1a6d
+    uuid: e1e88ca6-cff8-4297-bb9b-7284b1a0f159
     type_id: 3
-  - id: &ml_orange_mobile 9262
+  - id: &ml_orange_mobile 6666
     name: ML Orange Mobile
-    uuid: f603e5ba-666d-4ad0-9e1e-ddc66afb9244
+    uuid: fe298851-031f-46a3-9612-d72796c11c0b
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 239062
+  - id: 232053
     prefix: '223'
     number_min_length: 4
     number_max_length: 100
-    uuid: 578d76be-b0ba-4cbb-98ae-c88962b42478
+    uuid: 91dc5bc3-ea60-4f35-8bfb-833198886843
     country_id: *ml
     network_id: null
 # Supplementary services Prefixes
-  - id: 239455
+  - id: 232446
     prefix: '2231'
     number_min_length: 5
     number_max_length: 7
-    uuid: 5bdf14c9-4bcc-4f8e-94b2-616d9ec0a848
+    uuid: d3afb0b4-2a2b-4383-8165-5953e466e8cf
     country_id: *ml
     network_id: *ml_special_services
-  - id: 239823
+  - id: 232813
     prefix: '22312'
     number_min_length: 7
     number_max_length: 7
-    uuid: 15f807f8-4ef2-48be-8503-b37f1e2f6d1d
+    uuid: b70921db-d3e4-49ca-93b8-8acb50780abc
     country_id: *ml
     network_id: *ml_customer_care_services
-  - id: 240601
+  - id: 233591
     prefix: '22335'
     number_min_length: 8
     number_max_length: 8
-    uuid: 63422f59-004d-4d1b-9c83-5f0f2de01de7
+    uuid: ceef6ba1-ab9d-4483-b065-272d4adee19a
     country_id: *ml
     network_id: *ml_special_services
-  - id: 240679
+  - id: 233669
     prefix: '22336'
     number_min_length: 8
     number_max_length: 8
-    uuid: e46279f1-073f-444d-b488-a45fa2e5256b
+    uuid: 1ad7d327-4567-41fc-8433-86dbc99ed6f7
     country_id: *ml
     network_id: *ml_special_services
-  - id: 240726
+  - id: 233716
     prefix: '22337'
     number_min_length: 8
     number_max_length: 8
-    uuid: 350b6a6f-a462-4534-b72a-432c8c2d2f2e
+    uuid: f49c4e5e-f70b-4f80-86fc-cffcf71c3dd0
     country_id: *ml
     network_id: *ml_special_services
-  - id: 250137
+  - id: 243127
     prefix: '22380'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1b6092b1-0cb0-4719-8804-825059d5726a
+    uuid: a79e7f87-5a57-484f-baa8-f030bc5a7703
     country_id: *ml
     network_id: *ml_freephone_services
-  - id: 250192
+  - id: 243182
     prefix: '2238000'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2653221e-8c5b-4d6d-bc2b-894c36436281
+    uuid: bedff3f6-f195-4814-9582-4c001e48ad17
     country_id: *ml
     network_id: *ml_freephone_services
-  - id: 250198
+  - id: 243188
     prefix: '2238001'
     number_min_length: 11
     number_max_length: 11
-    uuid: 73208bec-c080-4c92-b928-cc32b6e9ae17
+    uuid: f487a624-9968-41f2-8d22-8efa531e10d4
     country_id: *ml
     network_id: *ml_local_rate_services
-  - id: 250201
+  - id: 243191
     prefix: '2238002'
     number_min_length: 11
     number_max_length: 11
-    uuid: d226270a-a969-4397-ab83-15230b81266f
+    uuid: 2c9b5831-3897-4d0e-8afc-1b488e3ad183
     country_id: *ml
     network_id: *ml_special_rate_services
 # Fixed Prefixes
-  - id: 241003
+  - id: 233993
     prefix: '223400'
     number_min_length: 11
     number_max_length: 11
-    uuid: 57438df2-3d12-441c-8b00-21616b24a5b1
+    uuid: 4cb7dd27-a660-45ae-8d41-ac179ac6d966
     country_id: *ml
     network_id: *ml_fixed
-  - id: 241032
+  - id: 234022
     prefix: '223401'
     number_min_length: 11
     number_max_length: 11
-    uuid: e0e04bf2-d9ba-4356-be70-182a12f0935a
+    uuid: 5daf456c-7504-453c-86bc-88e4a13f3dfc
     country_id: *ml
     network_id: *ml_fixed
-  - id: 241052
+  - id: 234042
     prefix: '223402'
     number_min_length: 11
     number_max_length: 11
-    uuid: bcb4db7b-241f-434e-baf5-8e9df0af517c
+    uuid: 27404696-0a90-4d9d-8062-c9a7745e3c48
     country_id: *ml
     network_id: *ml_fixed
-  - id: 241067
+  - id: 234057
     prefix: '223403'
     number_min_length: 11
     number_max_length: 11
-    uuid: c2073644-bf4c-4142-9dfe-6a6902765458
+    uuid: 7ca22162-2663-4bca-869b-6df0505fc471
     country_id: *ml
     network_id: *ml_fixed
-  - id: 241074
+  - id: 234064
     prefix: '223404'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8dd18fb5-ddec-4ab0-a9ad-a1261c9c1efb
+    uuid: 9d6a1cf7-5aa2-44e1-b705-14466d8436d1
     country_id: *ml
     network_id: *ml_fixed
-  - id: 241515
+  - id: 234505
     prefix: '223441'
     number_min_length: 11
     number_max_length: 11
-    uuid: 293ed8bf-e6d3-4d7b-bc93-65342822e07d
+    uuid: cc97a4b7-2e9a-4fd6-b31d-624191f0940f
     country_id: *ml
     network_id: *ml_fixed
-  - id: 241535
+  - id: 234525
     prefix: '223442'
     number_min_length: 11
     number_max_length: 11
-    uuid: 98c3a6d4-030f-44a6-b94e-036850c26f67
+    uuid: 497abe58-a02b-4dcc-a552-5bacca8e4423
     country_id: *ml
     network_id: *ml_fixed
-  - id: 241538
+  - id: 234528
     prefix: '223443'
     number_min_length: 11
     number_max_length: 11
-    uuid: aa5d9574-b8de-4e03-99ef-12fd09e1b7b4
+    uuid: 7770c6e0-7e23-48fc-b574-0fab85220e8f
     country_id: *ml
     network_id: *ml_fixed
-  - id: 241633
+  - id: 234623
     prefix: '223449'
     number_min_length: 11
     number_max_length: 11
-    uuid: 89f119dd-772b-4eef-9f44-1f1b456b95d2
+    uuid: cfd1a452-6adf-4b63-b9a7-6fb5625b9443
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244499
+  - id: 237489
     prefix: '223202'
     number_min_length: 11
     number_max_length: 11
-    uuid: 182a8e1a-423e-43e0-8bcd-40b18db51c61
+    uuid: 0800b5dd-a385-412d-b92b-ddaedaa38e31
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244576
+  - id: 237566
     prefix: '2232070'
     number_min_length: 11
     number_max_length: 11
-    uuid: 01a8227f-16b4-4691-93b3-c8f19d35c7aa
+    uuid: bac575a2-c234-402e-bb7d-fb9a736872d6
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244577
+  - id: 237567
     prefix: '2232071'
     number_min_length: 11
     number_max_length: 11
-    uuid: d3ff6127-2b14-4aaf-9425-d4b9559199f8
+    uuid: 0f5fa15d-c487-4853-b177-6c5cf3422c4f
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244579
+  - id: 237569
     prefix: '2232072'
     number_min_length: 11
     number_max_length: 11
-    uuid: b5761b18-7200-40ba-994c-a04ad57b1fa5
+    uuid: 405ade05-d630-44a3-a962-41713e85e7f1
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244581
+  - id: 237571
     prefix: '2232073'
     number_min_length: 11
     number_max_length: 11
-    uuid: b2921e90-0d87-4c75-b113-bec3b9fe9d42
+    uuid: 1fe080c1-bcdd-41e6-9af9-b6c73a0832f5
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244583
+  - id: 237573
     prefix: '2232074'
     number_min_length: 11
     number_max_length: 11
-    uuid: b02bd113-8f00-4744-9488-24e0a94886cf
+    uuid: c1a4ad4e-5373-48bf-9402-34234235376c
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244585
+  - id: 237575
     prefix: '2232075'
     number_min_length: 11
     number_max_length: 11
-    uuid: 304d1b8c-cf07-4dd5-a3ff-998305341db1
+    uuid: 30ae2f6e-8737-4096-a996-5d147ca6d0b7
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244587
+  - id: 237577
     prefix: '2232076'
     number_min_length: 11
     number_max_length: 11
-    uuid: 619f9ff3-baa4-464b-a7db-9bf210ae4e40
+    uuid: dfedc776-f5dc-4e4a-885b-dc16c57de290
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244588
+  - id: 237578
     prefix: '2232077'
     number_min_length: 11
     number_max_length: 11
-    uuid: 93cca8e7-7948-48a2-8a15-1e7f5b0e462e
+    uuid: 043cd202-7624-4b50-aacc-2e52a439347c
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244590
+  - id: 237580
     prefix: '2232078'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0df293b8-e796-4229-ac87-bbc8d5e75f11
+    uuid: 06a1e424-8201-4495-8ac0-fae9ca432986
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244592
+  - id: 237582
     prefix: '2232079'
     number_min_length: 11
     number_max_length: 11
-    uuid: d976a3ab-198b-4d8e-966f-dc71f1457a74
+    uuid: 57706129-f14a-4d97-8f18-95ebfa8f4c2d
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244663
+  - id: 237653
     prefix: '2232126'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1c7a817-87f2-437b-b4be-6625ad28c70c
+    uuid: c8dad0df-5868-4ad5-9a23-0625f6fab30c
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244664
+  - id: 237654
     prefix: '2232127'
     number_min_length: 11
     number_max_length: 11
-    uuid: 972a1198-54b4-4570-9d70-95e1eb5dec76
+    uuid: cecb7b6c-8ba9-4341-a014-c98a4dfa4d41
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244680
+  - id: 237670
     prefix: '223214'
     number_min_length: 11
     number_max_length: 11
-    uuid: b4226c3f-3863-48fe-afe6-b2fde28b8221
+    uuid: f58b58e0-8c93-4662-99f8-24b25199cf02
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244684
+  - id: 237674
     prefix: '223215'
     number_min_length: 11
     number_max_length: 11
-    uuid: ac71355e-26a5-48a6-a557-1b2e5aa0f3d1
+    uuid: 737327be-7112-4e79-8285-34454f26f8ce
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244688
+  - id: 237678
     prefix: '223216'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8bf8a04b-5de1-4633-b38c-5a87b6c2dae8
+    uuid: 64f5ab31-d475-4eaf-bb71-8cc3e4fc8cc2
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244692
+  - id: 237682
     prefix: '22321700'
     number_min_length: 11
     number_max_length: 11
-    uuid: 68fd35af-3cc3-4be2-a0f4-f8c80c3e23ed
+    uuid: ae6ceecf-003d-4dd0-81ed-6d2fa6fe1698
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244693
+  - id: 237683
     prefix: '22321701'
     number_min_length: 11
     number_max_length: 11
-    uuid: 96c005e1-99f1-4fa5-91e3-41e452092a41
+    uuid: 96f06a9d-833b-47d9-b22f-b2a5dd96ffac
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244694
+  - id: 237684
     prefix: '22321702'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3f020ac6-64b8-472a-8b52-961ca81d3f1b
+    uuid: 8038d2b8-c802-45b5-b125-f9e57e80847d
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244695
+  - id: 237685
     prefix: '22321703'
     number_min_length: 11
     number_max_length: 11
-    uuid: 29a18ed4-a942-4ecb-a0ad-b37450303ad9
+    uuid: 1722a41c-cacf-4529-9403-522916886e60
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244696
+  - id: 237686
     prefix: '22321704'
     number_min_length: 11
     number_max_length: 11
-    uuid: 14b10d3b-8a0a-40ff-9806-8d9fc8bdf013
+    uuid: bdba9409-9100-499e-af17-025eee221b09
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244697
+  - id: 237687
     prefix: '22321705'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0acbe08a-4baa-4efd-8728-4aeae474d28d
+    uuid: d224cc7d-f6ee-4790-8956-3a4a312459ae
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244698
+  - id: 237688
     prefix: '22321706'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7cc0351f-27d6-4d73-912e-0e501f2288b0
+    uuid: 58b9d073-f594-4a36-9e9d-ce53df5c3bf0
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244699
+  - id: 237689
     prefix: '22321707'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2079e1c9-11f9-4ed8-809b-a7da3ff8c849
+    uuid: a4e408ff-32cf-4435-a1ff-048ce08aa40a
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244700
+  - id: 237690
     prefix: '22321708'
     number_min_length: 11
     number_max_length: 11
-    uuid: b4c56b26-4fe0-43c9-a125-e2e1a13f3249
+    uuid: 0f117eaf-4c21-4d4a-be99-a4ed073e24d8
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244701
+  - id: 237691
     prefix: '22321709'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2b3d16ad-c02a-4562-81f3-4fcf4e6d5cf6
+    uuid: c087c7d8-c70c-45f3-9d9b-5db37819f302
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244702
+  - id: 237692
     prefix: '2232171'
     number_min_length: 11
     number_max_length: 11
-    uuid: b79631c8-aa7a-4264-aa82-775e492f94e7
+    uuid: ba65f6d4-40b9-49be-8157-e67a7b81f15e
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244703
+  - id: 237693
     prefix: '2232172'
     number_min_length: 11
     number_max_length: 11
-    uuid: baa3f6b1-dab9-41f4-8034-66549a58093c
+    uuid: e4bf8c33-6580-4c7f-afcb-9ad2d326b412
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244704
+  - id: 237694
     prefix: '2232173'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ff9a1f8-abd6-4e00-977a-d687580a89d4
+    uuid: 5ab34b83-b684-4223-8f60-48f4c5debc3a
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244706
+  - id: 237696
     prefix: '2232174'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55ac413e-4342-4e37-8eff-8422208f835c
+    uuid: 0d28d71b-1bcf-47c6-9e99-019c50634609
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244707
+  - id: 237697
     prefix: '2232175'
     number_min_length: 11
     number_max_length: 11
-    uuid: 916d22a6-54a2-4e80-b593-42dfb83cd32d
+    uuid: 3f612f8a-616d-47ec-a403-3f4e6210a76f
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244709
+  - id: 237699
     prefix: '2232176'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9294e73-3b34-4ead-82a1-22e39bf4a66a
+    uuid: 8c674c54-234f-42b6-b508-44b841a418c5
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244710
+  - id: 237700
     prefix: '2232177'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea403b89-8b9e-4f2f-8998-9fd416221375
+    uuid: f1be29a2-cce7-4cbb-9203-fde4752facd0
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244711
+  - id: 237701
     prefix: '2232178'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cb46861-756d-4990-a27f-45f86fc51a5e
+    uuid: c9b14bbc-b1e2-457a-8d6f-e86bd5947b80
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244712
+  - id: 237702
     prefix: '2232179'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c0e395c-0390-4e6e-a0ab-9fff629eb99a
+    uuid: fc1be41a-2619-479d-8eaf-f1eadff563cc
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244714
+  - id: 237704
     prefix: '223218'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6998f0f0-3a7c-4193-9a18-94a997a26767
+    uuid: dbd30684-9289-48b1-8360-b5e5f6b544d0
     country_id: *ml
     network_id: *ml_fixed
-  - id: 244720
+  - id: 237710
     prefix: '223219'
     number_min_length: 11
     number_max_length: 11
-    uuid: cd192bf8-944f-471f-8416-0df39031ba33
+    uuid: 7b50532f-4122-4ec2-b4a3-be184ea74f68
     country_id: *ml
     network_id: *ml_fixed
 # Mobile Prefixes
-  - id: 242420
+  - id: 235410
     prefix: '2236'
     number_min_length: 11
     number_max_length: 11
-    uuid: f4164fbb-f028-4396-9357-ec3579c96367
+    uuid: 0a3df32e-c932-414d-a30d-5badaaf5dc51
     country_id: *ml
     network_id: *ml_moov_africa_mobile
-  - id: 246599
+  - id: 239589
     prefix: '2235'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6ac7707e-2425-4fae-9e6d-5b03a691241a
+    uuid: 8756bba3-6f50-41e9-83fc-49c642fc7de4
     country_id: *ml
     network_id: *ml_telecel_mobile
-  - id: 250491
+  - id: 243481
     prefix: '22382'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55cbbd1e-3dd9-499d-8219-f8bcb8a746c6
+    uuid: 1d3452de-a672-406f-99d7-d8761ff41fdd
     country_id: *ml
     network_id: *ml_orange_mobile
-  - id: 250607
+  - id: 243597
     prefix: '22383'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1137f7c-b5c7-43e6-9dbc-22a28ceda0df
+    uuid: 96c56ee5-4fce-4d23-b97f-4e1db4023ee2
     country_id: *ml
     network_id: *ml_orange_mobile
-  - id: 252271
+  - id: 245261
     prefix: '2237'
     number_min_length: 11
     number_max_length: 11
-    uuid: da84c98c-fd2c-45cb-8f99-2516b6c7937f
+    uuid: bb7b276e-bf79-45d5-b196-cf9dec88a34a
     country_id: *ml
     network_id: *ml_orange_mobile
-  - id: 254015
+  - id: 247005
     prefix: '22389'
     number_min_length: 11
     number_max_length: 11
-    uuid: bcd25d08-3604-4919-a66e-e887725d61bd
+    uuid: facb583e-e813-46da-a15d-57fe4158b6f3
     country_id: *ml
     network_id: *ml_moov_africa_mobile
-  - id: 254173
+  - id: 247163
     prefix: '22390'
     number_min_length: 11
     number_max_length: 11
-    uuid: 71aa2241-4c92-467b-a0f0-690752b6f9d4
+    uuid: 3075a462-68fc-418b-b587-d03ca17d45e0
     country_id: *ml
     network_id: *ml_orange_mobile
-  - id: 254377
+  - id: 247367
     prefix: '22391'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2926b7c3-9177-405f-9388-22de846402cd
+    uuid: 1072aadd-03e1-47ef-9609-3fb7706b2965
     country_id: *ml
     network_id: *ml_orange_mobile
-  - id: 254601
+  - id: 247591
     prefix: '22392'
     number_min_length: 11
     number_max_length: 11
-    uuid: 93383b32-3aa0-4b07-b940-541445acfebd
+    uuid: 10aec9ca-706d-4745-840b-2336aa1834f0
     country_id: *ml
     network_id: *ml_orange_mobile
-  - id: 254877
+  - id: 247867
     prefix: '22393'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8bf8d5ed-d026-476d-b0ae-54ec685c9dae
+    uuid: 8ad81efb-c894-4d9f-9fbd-e3d27a16f2d1
     country_id: *ml
     network_id: *ml_orange_mobile
-  - id: 255197
+  - id: 248187
     prefix: '22399'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55bed0b9-aad5-4db3-bdcf-9def87641afe
+    uuid: 047778a1-6080-4d0b-9621-7a0cc0db58a5
     country_id: *ml
     network_id: *ml_moov_africa_mobile
-  - id: 261208
+  - id: 254198
     prefix: '22394'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4c45c3e0-b1a5-4b8c-a242-f40a06c72c6c
+    uuid: 54ed68f8-82fa-4d78-a59c-233d9b7df1c4
     country_id: *ml
     network_id: *ml_orange_mobile
-  - id: 261454
+  - id: 254444
     prefix: '22395'
     number_min_length: 11
     number_max_length: 11
-    uuid: bb64e0de-034b-42e5-8e55-a044f20115f8
+    uuid: 94a2b908-1fd2-4893-b104-b84747505044
     country_id: *ml
     network_id: *ml_moov_africa_mobile
-  - id: 261731
+  - id: 254721
     prefix: '22396'
     number_min_length: 11
     number_max_length: 11
-    uuid: f1acedf5-e60b-4138-9e0b-5f5a90444036
+    uuid: 9058b1b5-8d61-425e-991a-0550aa2d1255
     country_id: *ml
     network_id: *ml_moov_africa_mobile
-  - id: 262013
+  - id: 255003
     prefix: '22397'
     number_min_length: 11
     number_max_length: 11
-    uuid: d18aad57-1278-490b-8586-be470a04465e
+    uuid: c202607f-2a8d-4e88-83ad-2cb509a17244
     country_id: *ml
     network_id: *ml_moov_africa_mobile
-  - id: 262282
+  - id: 255272
     prefix: '22398'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8e8688a2-eed2-4136-b178-d8e9c779a557
+    uuid: 26d03dba-03ce-45cc-a698-5333506c46e9
     country_id: *ml
     network_id: *ml_moov_africa_mobile

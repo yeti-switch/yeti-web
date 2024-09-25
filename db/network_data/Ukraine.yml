@@ -1,412 +1,855 @@
 country_id: &ua 222
+
+
+# IDs allocated for UA networks 2500 - 3500. All new network should use IDs from this range
 networks:
-# Fixed Networks
-  - id: &ua_fixed 6649
-    name: UA Fixed
-    uuid: 81cf1eed-716e-4569-8d79-ffb733ef6924
-    type_id: 12
-# Mobile Networks
-  - id: &ua_vodafone_mobile 6728
-    name: UA Vodafone Mobile
-    uuid: a5b40c4c-6b89-4dae-a344-e20ba5df87d9
-    type_id: 3
-  - id: &ua_lifecell_mobile 7040
-    name: UA Lifecell Mobile
-    uuid: 74ed95cd-b3d9-4214-847a-a6c5aa00d2a8
-    type_id: 3
-  - id: &ua_kyivstar_mobile 7141
-    name: UA Kyivstar Mobile
-    uuid: b98e5652-5707-4dfd-b6c4-2e8536c56d26
-    type_id: 3
-  - id: &ua_phoenix_mobile 7318
-    name: UA Phoenix Mobile
-    uuid: 48cb40ee-985b-446b-91d0-5bc66fc5f332
-    type_id: 3
-  - id: &ua_lugacom_mobile 7383
-    name: UA Lugacom Mobile
-    uuid: ce0c5710-8439-4367-85bb-3985d9b04af9
-    type_id: 3
-  - id: &ua_it_mobile 7575
-    name: UA It Mobile
-    uuid: e586a904-8108-49a2-a57c-bc0754dca538
-    type_id: 3
-  - id: &ua_3mob_mobile 10497
-    name: UA 3Mob Mobile
-    uuid: 576935dc-7a8d-4a23-8627-49b7073d0f7f
-    type_id: 3
-  - id: &ua_peoplenet_mobile 10539
-    name: UA Peoplenet Mobile
-    uuid: 4a597102-1e2c-4ef7-9fc6-a795125416e7
-    type_id: 3
-# Supplementary services Networks
-  - id: &ua_personal_number_services 7284
-    name: UA Personal Number Services
-    uuid: 81fad552-145d-41a9-952e-4254848f567e
-    type_id: 14
-  - id: &ua_special_services 7929
-    name: UA Special Services
-    uuid: 7f96c751-aebe-4c0d-a960-3e871a66ca3e
-    type_id: 14
-  - id: &ua_freephone_services 10172
-    name: UA Freephone Services
-    uuid: ed0595ca-11ab-498f-8c99-65c0c698d96f
-    type_id: 14
-  - id: &ua_premium_rate_services 10439
-    name: UA Premium Rate Services
-    uuid: 7baacd86-c3aa-4a41-962d-74d8f5df344d
-    type_id: 14
+- id: &lifecell_mobile 1530
+  name: UA Lifecell Mobile
+  uuid: d094dedb-52f7-11ea-a7a7-525400429a0c
+  type_id: 3
+
+- id: &kyivstar_mobile 1531
+  name: UA Kyivstar Mobile
+  uuid: d094dedc-52f7-11ea-a7a7-525400429a0c
+  type_id: 3
+
+- id: &intertelecom_mobile 1644
+  name: UA Intertelecom Mobile
+  uuid: d088d41f-52f7-11ea-a7a7-525400429a0c
+  type_id: 3
+
+- id: &telesystems_mobile 1906
+  name: UA Telesystems Mobile
+  uuid: 217886ba-b996-11ec-86df-525400429a0c
+  type_id: 3
+
+- id: &trimob_mobile 1908
+  name: UA Tribob Mobile
+  uuid: 321bb334-b996-11ec-86df-525400429a0c
+  type_id: 3
+
+- id: &vodafone_mobile 1534
+  name: UA Vodafone Mobile
+  uuid: d094dedf-52f7-11ea-a7a7-525400429a0c
+  type_id: 3
+
+# Fixed networks
+
+- id: &kyivstar_fixed 2500
+  name: UA Kyivstar Fixed
+  uuid: 09badd10-346e-42d6-98a8-30103640d5c5
+  type_id: 2
+
+- id: &datagroup_fixed 2501
+  name: UA Datagroup Fixed
+  uuid: 075e6702-afdd-4f26-8847-f1bfb53b0ff6
+  type_id: 2
+
+- id: &ukrtelecom_fixed 2502
+  name: UA Ukrtelecom Fixed
+  uuid: 00b3e73e-eb30-4770-a640-137789e965ba
+  type_id: 2
+
+- id: &tr_fixed 2503
+  name: UA T.R. Communication Fixed
+  uuid: 69ccf753-6716-4416-96a9-de59bb3f564d
+  type_id: 2
+
+- id: &atlantis_fixed 2504
+  name: UA Atlantis Telecom Fixed
+  uuid: b6136a89-e689-4f55-9394-045e1d886326
+  type_id: 2
+
+- id: &velton_fixed 2505
+  name: UA Velton Telecom Fixed
+  uuid: 77530620-52f7-43bc-83fd-e69e998c4964
+  type_id: 2
+
+
+# UIFN networks
+
+- id: &velton_uifn 2600
+  name: UA Velton Telecom UIFN
+  uuid: 7776eceb-14c8-497c-8628-2ef8fc701ff2
+  type_id: 10
+
+- id: &lifecell_uifn 2601
+  name: UA Lifecell UIFN
+  uuid: 79ac847f-367f-45f7-8a70-c83c8359a6f7
+  type_id: 10
+
+- id: &datagroup_uifn 2602
+  name: UA Datagroup UIFN
+  uuid: be658d8a-f29c-497c-b61e-da317f8649ec
+  type_id: 10
+
+- id: &kyivstar_uifn 2603
+  name: UA Kyivstar UIFN
+  uuid: b73b518d-013e-46ef-992c-7a3106aeb8c1
+  type_id: 10
+
+- id: &maxnet_uifn 2604
+  name: UA MAXNET UIFN
+  uuid: 3a23bddc-a371-4b16-abd1-c7acbc674993
+  type_id: 10
+
+- id: &binotel_uifn 2605
+  name: UA BINOTEL UIFN
+  uuid: d083b851-120f-48f9-a8f7-0ce0d0ed1534
+  type_id: 10
+
+- id: &vodafone_uifn 2606
+  name: UA Vodafone UIFN
+  uuid: c23bad73-9b62-43cf-ad85-6b270fdd286b
+  type_id: 10
+
+- id: &ukrtelecom_uifn 2607
+  name: UA Ukrtelecom UIFN
+  uuid: 71ff2fcb-0436-4bc3-9f37-da8a9f73e48d
+  type_id: 10
+
+- id: &farlep_uifn 2608
+  name: UA Farlep UIFN
+  uuid: 8a0a88c1-bf77-4348-9db7-33f1eff9213c
+  type_id: 10
+
+- id: &intertelecom_uifn 2609
+  name: UA Intertelecom UIFN
+  uuid: 321446af-5d31-4bea-b8ee-cb035b996b1e
+  type_id: 10
+
+- id: &tr_uifn 2610
+  name: UA T.R Communication UIFN
+  uuid: 21e5043e-95c1-42ca-91f5-fd743f04917e
+  type_id: 10
+
+# Non-geographic number – 900 Premium-rate telephone number,global telecommunication service
+
+- id: &audiotex_premium 2620
+  name: UA Audiotex premium
+  uuid: bc908dab-62e3-4a43-a934-d28cabcd5bcf
+  type_id: 11
+
+- id: &tr_premium 2621
+  name: UA T.R Communication premium
+  uuid: 72f30f6c-8850-4beb-85ae-a5b85f5b8b16
+  type_id: 11
+
+- id: &ukrtelecom_premium 1536
+  name: UA Ukrtelecom premium
+  uuid: d094dee1-52f7-11ea-a7a7-525400429a0c
+  type_id: 11
+
+- id: &datagroup_premium 2623
+  name: UA Datagroup premium
+  uuid: 120f8329-0384-4a76-b471-c4cf14b99ed3
+  type_id: 11
+
+- id: &euroinform_premium 2624
+  name: UA Euro-Inform premium
+  uuid: 6c02e425-b022-4359-898e-33bf93a1f581
+  type_id: 11
+
+- id: &microcom_premium 2625
+  name: UA Microcom premium
+  uuid: adc51dfc-468e-4999-8803-daac5f7e5ed1
+  type_id: 11
+
+# Geo
+- id: &geo_dnipro_region 1523
+  name: UA Dnipro region
+  uuid: d094ded4-52f7-11ea-a7a7-525400429a0c
+  type_id: 2
+
+- id: &geo_kharkiv_region 1525
+  name: UA Kharkiv region
+  uuid: d094ded6-52f7-11ea-a7a7-525400429a0c
+  type_id: 2
+
+- id: &geo_kyiv_region 1527
+  name: UA Kyiv region
+  uuid: d094ded8-52f7-11ea-a7a7-525400429a0c
+  type_id: 2
+
+- id: &geo_kyiv_city 2551
+  name: UA Kyiv city
+  uuid: 297b6087-a835-4e87-b28d-edbc69845e8e
+  type_id: 2
+
+- id: &geo_lviv_region 2576
+  name: UA Lviv region
+  uuid: d82c57a9-3874-41e9-8581-7d45a98dd339
+  type_id: 2
+
+- id: &geo_lviv_city 1528
+  name: UA Lviv city
+  uuid: d094ded9-52f7-11ea-a7a7-525400429a0c
+  type_id: 2
+
+- id: &geo_odesa_region 2577
+  name: UA Odesa region
+  uuid: 22ce8843-9d61-4552-a583-b0a8bd9d8fac
+  type_id: 2
+
+- id: &geo_odesa_city 1535
+  name: UA Odesa city
+  uuid: d094dee0-52f7-11ea-a7a7-525400429a0c
+  type_id: 2
+
+- id: &geo_zakarpattia_region 2552
+  name: UA Zakarpattia region
+  uuid: 7d3495fc-ddbd-406e-94f3-846ced9e4219
+  type_id: 2
+
+- id: &geo_volyn_region 2553
+  name: UA Volyn region
+  uuid: c97a9d5b-cde0-4890-984b-8b4697297321
+  type_id: 2
+
+- id: &geo_frankivsk_region 2554
+  name: UA Ivano-Frankivsk region
+  uuid: cfca3b14-b776-47f9-80a1-ff1ea49afdf7
+  type_id: 2
+
+- id: &geo_ternopil_region 2555
+  name: UA Ternopil region
+  uuid: 664d1304-976b-4b79-94d6-17ea679eeeef
+  type_id: 2
+
+- id: &geo_rivne_region 2556
+  name: UA Rivne region
+  uuid: c2381d0d-d529-4586-9184-6adb82da727b
+  type_id: 2
+
+- id: &geo_chernivtsi_region 2557
+  name: UA Chernivtsi region
+  uuid: 2fbc8b2e-7e39-4253-9de6-f1ec94a23589
+  type_id: 2
+
+- id: &geo_khmelnytskyi_region 2558
+  name: UA Khmelnytskyi region
+  uuid: 92f8dbc3-bfae-45ce-a0c9-80afe09692fc
+  type_id: 2
+
+- id: &geo_zhytomyr_region 2559
+  name: UA Zhytomyr region
+  uuid: 958ac857-47ee-4b0c-8833-0e01c52e325d
+  type_id: 2
+
+- id: &geo_vinnitsia_region 2560
+  name: UA Vinnytsia region
+  uuid: 7149fbbc-b927-4f74-952c-7f2b081a50fa
+  type_id: 2
+
+- id: &geo_chernihiv_region 2561
+  name: UA Chernihiv region
+  uuid: 1b6db6a7-a8e8-4dd9-bd3e-fdb0eee1cdc6
+  type_id: 2
+
+- id: &geo_cherkasy_region 2562
+  name: UA Cherkasy region
+  uuid: 0e4c3cf9-c3b5-4c38-8216-c3bbdf9f2c9a
+  type_id: 2
+
+- id: &geo_mykolaiv_region 2563
+  name: UA Mykolayiv region
+  uuid: b5562fe9-6d4d-4fe9-8207-3c0cbff65075
+  type_id: 2
+
+- id: &geo_kyrovohrad_region 2564
+  name: UA Kirovohrad region
+  uuid: f4595e39-4762-4c30-af3d-b802f893aaa2
+  type_id: 2
+
+- id: &geo_poltava_region 2565
+  name: UA Poltava region
+  uuid: beb0ea06-6329-496f-bee3-858e219c31c3
+  type_id: 2
+
+- id: &geo_sumy_region 2566
+  name: UA Sumy region
+  uuid: 72ad2a2e-4cfb-48f2-9486-a930bbb3651c
+  type_id: 2
+
+- id: &geo_kherson_region 2567
+  name: UA Kherson region
+  uuid: b8e683a5-65a2-471c-89de-35728b6af213
+  type_id: 2
+
+- id: &geo_zaporizhzhia_region 2570
+  name: UA Zaporizhzhia region
+  uuid: ae25b585-ccd3-43bd-b2b0-237e04867101
+  type_id: 2
+
+- id: &geo_donetsk_region 2571
+  name: UA Donetsk region
+  uuid: c1279442-f6d1-442d-b880-2169d13246c6
+  type_id: 2
+
+- id: &geo_luhansk_region 2572
+  name: UA Luhansk region
+  uuid: 4b0b106a-b107-4954-83cf-d7f6205b4e52
+  type_id: 2
+
+- id: &geo_crimea_region 2573
+  name: UA Crimea region
+  uuid: edc1583d-8af4-4730-8b80-c07d89f97715
+  type_id: 2
+
+- id: &geo_sevastopol_city 2575
+  name: UA Sevastopol sity
+  uuid: 386aff21-5ab9-407a-9c5b-5fe93b226329
+  type_id: 2
+
+
+
+# IDs range: 40000 - 50000
 network_prefixes:
-# Fixed Prefixes
-  - id: 41500
-    prefix: '38048'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d174d735-6a54-4bcc-90ac-9fc5119620ab
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 41600
-    prefix: '38051'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a2ab21f9-f080-4e4b-a4a4-abe1292b4a3b
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 41700
-    prefix: '38052'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a4fbd144-2e2c-4423-a57a-586851fa0480
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 41900
-    prefix: '38054'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2f3dff24-f405-43e6-8628-0adafe408619
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 41800
-    prefix: '38053'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 28819267-30ba-4d56-adca-e4028f579e34
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 42000
-    prefix: '38055'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8543a90d-ebda-4a28-802b-0e5c1922d8af
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 42100
-    prefix: '38056'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ea1847af-cdc7-487b-a3cf-55e02cad1be5
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 42200
-    prefix: '38057'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e5290fb6-0f1a-4533-8365-36acf57be4c6
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 42300
-    prefix: '38061'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f73b7b44-9035-4107-a811-dcb646079f28
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 42400
-    prefix: '38062'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b35b9394-2b7c-4783-b9f9-fea826a8428e
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 42500
-    prefix: '38064'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: abd4cb9b-a5a8-40b4-bd20-1121e89c1a3a
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 42600
-    prefix: '38065'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 89c3cb3a-5d24-491e-b495-45e08040fc51
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 42700
-    prefix: '38069'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d25df956-ba67-445b-851d-2dbd5d5ebe28
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40000
-    prefix: '38031'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 138a15af-b9f5-4cee-a665-7331154181bb
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40100
-    prefix: '38032'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 93d8fe16-8d2c-435b-850e-96330580615f
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40200
-    prefix: '38033'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e189474f-dfa1-4b51-b982-9dfa2cf1022c
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40300
-    prefix: '38034'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d99f06c8-887b-4059-9a04-e2de8db7ba29
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40500
-    prefix: '38036'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 76773d69-5f35-45c8-be80-9d2396833971
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40700
-    prefix: '38038'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ce20edb6-2747-458c-b5f1-4d968e500103
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40400
-    prefix: '38035'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7e7005e7-994c-47ba-87d7-28195e6a837e
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40600
-    prefix: '38037'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cfad7728-5f88-47df-ba7a-4cc4077e4918
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40800
-    prefix: '38041'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f8394c11-d44e-42f1-b02a-b73d79fdd227
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 40900
-    prefix: '38043'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c66166d9-467e-4b98-a687-762be3026307
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 989
-    prefix: '38044'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e0a3-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 41300
-    prefix: '38046'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 76d4960e-631c-409a-a950-b13b692e4abe
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 41200
-    prefix: '38045'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4342c464-e1cf-4b1c-9924-39cd4507c54a
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 41400
-    prefix: '38047'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 47e13a17-0053-4f91-9a4d-49d817318672
-    country_id: *ua
-    network_id: *ua_fixed
-  - id: 441752
-    prefix: '38089'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c3203934-69db-4e2a-a2e6-26d6af4b1881
-    country_id: *ua
-    network_id: *ua_fixed
-# Mobile Prefixes
-  - id: 985
-    prefix: '38050'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e09f-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_vodafone_mobile
-  - id: 982
-    prefix: '38063'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e088-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_lifecell_mobile
-  - id: 986
-    prefix: '38066'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e0a0-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_vodafone_mobile
-  - id: 987
-    prefix: '38068'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e0a1-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_kyivstar_mobile
-  - id: 980
-    prefix: '38067'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e086-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_kyivstar_mobile
-  - id: 161016
-    prefix: '38071'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b3937bf5-e3f7-44c7-89e8-0a9a7f5a0216
-    country_id: *ua
-    network_id: *ua_phoenix_mobile
-  - id: 169548
-    prefix: '38072'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 01ee6869-6a0b-4703-a4fa-0592bb57a8e9
-    country_id: *ua
-    network_id: *ua_lugacom_mobile
-  - id: 35653
-    prefix: '38073'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d4e104da-b995-11ec-86df-525400429a0c
-    country_id: *ua
-    network_id: *ua_lifecell_mobile
-  - id: 977
-    prefix: '38094'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094df4e-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_it_mobile
-  - id: 973
-    prefix: '38095'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e080-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_vodafone_mobile
-  - id: 978
-    prefix: '38096'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e084-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_kyivstar_mobile
-  - id: 981
-    prefix: '38097'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e087-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_kyivstar_mobile
-  - id: 979
-    prefix: '38098'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e085-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_kyivstar_mobile
-  - id: 974
-    prefix: '38099'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e081-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_vodafone_mobile
-  - id: 975
-    prefix: '38091'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e082-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_3mob_mobile
-  - id: 976
-    prefix: '38092'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e083-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_peoplenet_mobile
-  - id: 983
-    prefix: '38093'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d094e089-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: *ua_lifecell_mobile
-# Supplementary services Prefixes
-  - id: 151416
-    prefix: '380700'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: de66cc85-13ee-4d3a-8f99-10a00cc9de5d
-    country_id: *ua
-    network_id: *ua_personal_number_services
-  - id: 239523
-    prefix: '38001'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 747e7d42-84a0-4e79-b525-3f6b9e24a4e1
-    country_id: *ua
-    network_id: *ua_special_services
-  - id: 400506
-    prefix: '380800'
-    number_min_length: 12
-    number_max_length: 13
-    uuid: ac6194c3-125a-480f-b693-ec3b8a85e8e0
-    country_id: *ua
-    network_id: *ua_freephone_services
-  - id: 451602
-    prefix: '380900'
-    number_min_length: 12
-    number_max_length: 13
-    uuid: 451a5026-1d5a-4826-8407-67d5ad2f9fa3
-    country_id: *ua
-    network_id: *ua_premium_rate_services
-# Country code Prefixes
-  - id: 996
-    prefix: '380'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: d094e0aa-52f7-11ea-a7a7-525400429a0c
-    country_id: *ua
-    network_id: null
+  # UA aggregated prefix
+- id: 996
+  prefix: '380'
+  number_min_length: 4
+  number_max_length: 100
+  uuid: d094e0aa-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: null #calls should be rejected to aggregated prefix(when validation enabled). More speficic prefix should exists.
+
+  # Mobile prefixes
+- id: 985
+  prefix: '38050'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e09f-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *vodafone_mobile
+- id: 982
+  prefix: '38063'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e088-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *lifecell_mobile
+- id: 986
+  prefix: '38066'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e0a0-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *vodafone_mobile
+- id: 980
+  prefix: '38067'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e086-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *kyivstar_mobile
+- id: 987
+  prefix: '38068'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e0a1-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *kyivstar_mobile
+- id: 35653
+  prefix: '38073'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d4e104da-b995-11ec-86df-525400429a0c
+  country_id: *ua
+  network_id: *lifecell_mobile
+- id: 975
+  prefix: '38091'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e082-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *trimob_mobile
+- id: 976
+  prefix: '38092'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e083-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *telesystems_mobile
+- id: 983
+  prefix: '38093'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e089-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *lifecell_mobile
+- id: 977
+  prefix: '38094'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094df4e-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *intertelecom_mobile
+- id: 973
+  prefix: '38095'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e080-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *vodafone_mobile
+- id: 978
+  prefix: '38096'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e084-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *kyivstar_mobile
+- id: 981
+  prefix: '38097'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e087-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *kyivstar_mobile
+- id: 979
+  prefix: '38098'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e085-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *kyivstar_mobile
+- id: 974
+  prefix: '38099'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e081-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *vodafone_mobile
+
+
+  # Fixed, not geo
+
+- id: 47000
+  prefix: '380891'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: cae9954c-e5e5-46bf-8be6-8907509371b7
+  country_id: *ua
+  network_id: *datagroup_fixed
+
+- id: 47001
+  prefix: '380892'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 90c24014-18fb-4ffa-a65d-b6c84b4789e6
+  country_id: *ua
+  network_id: *ukrtelecom_fixed
+
+
+- id: 47002
+  prefix: '380893'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 3952618c-8fa7-4db8-82c5-fb4666310a63
+  country_id: *ua
+  network_id: *tr_fixed
+
+- id: 47003
+  prefix: '380894'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 0da1c0ed-3d01-426a-b737-3cba664a1d45
+  country_id: *ua
+  network_id: *atlantis_fixed
+
+- id: 47004
+  prefix: '380897'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 95a7ed9e-2f33-4ebd-8920-dc37c9278ac0
+  country_id: *ua
+  network_id: *kyivstar_fixed
+
+- id: 47005
+  prefix: '380899'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: cb438472-41a9-4148-b9c1-c5f265f98c36
+  country_id: *ua
+  network_id: *velton_fixed
+
+  # Geo numbers
+- id: 40000
+  prefix: '38031'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 138a15af-b9f5-4cee-a665-7331154181bb
+  country_id: *ua
+  network_id: *geo_zakarpattia_region
+
+- id: 40100
+  prefix: '38032'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 93d8fe16-8d2c-435b-850e-96330580615f
+  country_id: *ua
+  network_id: *geo_lviv_region
+
+- id: 988
+  prefix: '380322'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e0a2-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *geo_lviv_city
+
+- id: 40200
+  prefix: '38033'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: e189474f-dfa1-4b51-b982-9dfa2cf1022c
+  country_id: *ua
+  network_id: *geo_volyn_region
+
+- id: 40300
+  prefix: '38034'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d99f06c8-887b-4059-9a04-e2de8db7ba29
+  country_id: *ua
+  network_id: *geo_frankivsk_region
+
+- id: 40400
+  prefix: '38035'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 7e7005e7-994c-47ba-87d7-28195e6a837e
+  country_id: *ua
+  network_id: *geo_ternopil_region
+
+- id: 40500
+  prefix: '38036'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 76773d69-5f35-45c8-be80-9d2396833971
+  country_id: *ua
+  network_id: *geo_rivne_region
+
+- id: 40600
+  prefix: '38037'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: cfad7728-5f88-47df-ba7a-4cc4077e4918
+  country_id: *ua
+  network_id: *geo_chernivtsi_region
+
+- id: 40700
+  prefix: '38038'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: ce20edb6-2747-458c-b5f1-4d968e500103
+  country_id: *ua
+  network_id: *geo_khmelnytskyi_region
+
+- id: 40800
+  prefix: '38041'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: f8394c11-d44e-42f1-b02a-b73d79fdd227
+  country_id: *ua
+  network_id: *geo_zhytomyr_region
+
+- id: 40900
+  prefix: '38043'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: c66166d9-467e-4b98-a687-762be3026307
+  country_id: *ua
+  network_id: *geo_vinnitsia_region
+
+- id: 989
+  prefix: '38044'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e0a3-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *geo_kyiv_city
+
+- id: 41200
+  prefix: '38045'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 4342c464-e1cf-4b1c-9924-39cd4507c54a
+  country_id: *ua
+  network_id: *geo_kyiv_region
+
+- id: 41300
+  prefix: '38046'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 76d4960e-631c-409a-a950-b13b692e4abe
+  country_id: *ua
+  network_id: *geo_chernihiv_region
+
+- id: 41400
+  prefix: '38047'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 47e13a17-0053-4f91-9a4d-49d817318672
+  country_id: *ua
+  network_id: *geo_cherkasy_region
+
+- id: 41500
+  prefix: '38048'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d174d735-6a54-4bcc-90ac-9fc5119620ab
+  country_id: *ua
+  network_id: *geo_odesa_region
+
+- id: 971
+  prefix: '380482'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e07e-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *geo_odesa_city
+
+- id: 972
+  prefix: '380487'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d094e07f-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *geo_odesa_city
+
+- id: 41600
+  prefix: '38051'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a2ab21f9-f080-4e4b-a4a4-abe1292b4a3b
+  country_id: *ua
+  network_id: *geo_mykolaiv_region
+
+- id: 41700
+  prefix: '38052'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: a4fbd144-2e2c-4423-a57a-586851fa0480
+  country_id: *ua
+  network_id: *geo_kyrovohrad_region
+
+- id: 41800
+  prefix: '38053'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 28819267-30ba-4d56-adca-e4028f579e34
+  country_id: *ua
+  network_id: *geo_poltava_region
+
+- id: 41900
+  prefix: '38054'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 2f3dff24-f405-43e6-8628-0adafe408619
+  country_id: *ua
+  network_id: *geo_sumy_region
+
+- id: 42000
+  prefix: '38055'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 8543a90d-ebda-4a28-802b-0e5c1922d8af
+  country_id: *ua
+  network_id: *geo_kherson_region
+
+- id: 42100
+  prefix: '38056'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: ea1847af-cdc7-487b-a3cf-55e02cad1be5
+  country_id: *ua
+  network_id: *geo_dnipro_region
+
+- id: 42200
+  prefix: '38057'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: e5290fb6-0f1a-4533-8365-36acf57be4c6
+  country_id: *ua
+  network_id: *geo_kharkiv_region
+
+- id: 42300
+  prefix: '38061'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: f73b7b44-9035-4107-a811-dcb646079f28
+  country_id: *ua
+  network_id: *geo_zaporizhzhia_region
+
+- id: 42400
+  prefix: '38062'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: b35b9394-2b7c-4783-b9f9-fea826a8428e
+  country_id: *ua
+  network_id: *geo_donetsk_region
+
+- id: 42500
+  prefix: '38064'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: abd4cb9b-a5a8-40b4-bd20-1121e89c1a3a
+  country_id: *ua
+  network_id: *geo_luhansk_region
+
+- id: 42600
+  prefix: '38065'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: 89c3cb3a-5d24-491e-b495-45e08040fc51
+  country_id: *ua
+  network_id: *geo_crimea_region
+
+- id: 42700
+  prefix: '38069'
+  number_min_length: 12
+  number_max_length: 12
+  uuid: d25df956-ba67-445b-851d-2dbd5d5ebe28
+  country_id: *ua
+  network_id: *geo_sevastopol_city
+
+  # UIFN prefixes
+
+- id: 45000
+  prefix: '38080010'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: 1f5d3195-29b7-4f9e-b60a-406eb8f21dca
+  country_id: *ua
+  network_id: *velton_uifn
+
+- id: 45001
+  prefix: '38080020'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: b855879d-6c63-4ffa-a16a-b6cbec0041fe
+  country_id: *ua
+  network_id: *lifecell_uifn
+
+- id: 45002
+  prefix: '38080021'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: 672a2f42-03e5-4ec6-a719-6edacd0eabda
+  country_id: *ua
+  network_id: *datagroup_uifn
+
+- id: 45003
+  prefix: '38080030'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: f9a09335-8111-47de-9f60-dc29dd951abf
+  country_id: *ua
+  network_id: *kyivstar_uifn
+
+- id: 45004
+  prefix: '38080031'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: 0d7030cc-0bb3-4ec2-af7c-6cc4b4c5cc71
+  country_id: *ua
+  network_id: *maxnet_uifn
+
+- id: 45005
+  prefix: '38080033'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: efc19752-8289-4e2b-ac84-6f81195e11dc
+  country_id: *ua
+  network_id: *binotel_uifn
+
+- id: 45006
+  prefix: '38080040'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: 4b405077-3170-407a-8560-e13afb4a71ec
+  country_id: *ua
+  network_id: *vodafone_uifn
+
+- id: 45007
+  prefix: '38080050'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: 888fcd06-df95-4909-afe3-e999d6b67a07
+  country_id: *ua
+  network_id: *ukrtelecom_uifn
+
+- id: 45008
+  prefix: '38080060'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: c0cf2b02-684e-4f12-8a1f-b3a55cc9881e
+  country_id: *ua
+  network_id: *farlep_uifn
+
+- id: 45009
+  prefix: '38080075'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: 29d27435-97b5-4c5d-909a-e144b8647989
+  country_id: *ua
+  network_id: *intertelecom_uifn
+
+- id: 45010
+  prefix: '38080080'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: c828e3e4-d38b-40d7-95e1-eb9b6b42b236
+  country_id: *ua
+  network_id: *tr_uifn
+
+  # Premium
+
+- id: 46003
+  prefix: '38090023'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: b84cab89-45c3-4161-ac32-e8260d5a13e8
+  country_id: *ua
+  network_id: *audiotex_premium
+
+- id: 46004
+  prefix: '38090025'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: f075c385-e7cb-410f-9da5-9f24e99c6f72
+  country_id: *ua
+  network_id: *tr_premium
+
+- id: 970
+  prefix: '38090030'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: d094e07d-52f7-11ea-a7a7-525400429a0c
+  country_id: *ua
+  network_id: *ukrtelecom_premium
+
+- id: 46000
+  prefix: '38090031'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: b4037359-2e94-430a-8dbe-46efbbc37eb1
+  country_id: *ua
+  network_id: *datagroup_premium
+
+- id: 46001
+  prefix: '38090032'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: f7065fc2-0ac0-4778-b9e3-a8b88e16ede8
+  country_id: *ua
+  network_id: *euroinform_premium
+
+- id: 46002
+  prefix: '38090090'
+  number_min_length: 12
+  number_max_length: 13
+  uuid: d5418bba-c5b9-4018-bb95-127fa83a98ea
+  country_id: *ua
+  network_id: *microcom_premium
