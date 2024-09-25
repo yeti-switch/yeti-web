@@ -3,28 +3,28 @@ networks:
 # Supplementary services Networks
   - id: &fm_emergency_services 21921
     name: FM Emergency Services
-    uuid: 70c9cd86-6cd3-4a7c-b876-c4a168480c1a
+    uuid: f823b20a-5fb8-4ade-ad99-527586d0fe23
     type_id: 14
   - id: &fm_special_services 22129
     name: FM Special Services
-    uuid: c9014836-149b-49c9-9180-558733e27c2e
+    uuid: 20fef444-35b3-4788-b777-b611d2febbf9
     type_id: 14
 # Fixed Networks
   - id: &fm_pohnpei_fixed 31958
     name: FM Pohnpei Fixed
-    uuid: 289d0068-bbce-4eee-894d-ab047ab9c4ff
+    uuid: fe45116d-b8d1-4bc4-9137-b0607f58906c
     type_id: 12
   - id: &fm_chuuk_fixed 32087
     name: FM Chuuk Fixed
-    uuid: e13791c8-65a3-42c8-be91-524410d30d11
+    uuid: c2ba49d7-6c51-469f-b9cb-064c412c5f26
     type_id: 12
   - id: &fm_yap_fixed 34665
     name: FM Yap Fixed
-    uuid: 6053c988-3455-4999-ae7d-9919f5e913e6
+    uuid: 128de79a-893b-452d-9f04-03a89e60604b
     type_id: 12
   - id: &fm_kosrae_fixed 35255
     name: FM Kosrae Fixed
-    uuid: ac76ae2b-cead-4a5e-b581-0f607db9410f
+    uuid: f36c526e-6243-49bc-9d62-ab127e2f0b1c
     type_id: 12
 network_prefixes:
 # Country code Prefixes
@@ -32,7 +32,7 @@ network_prefixes:
     prefix: '691'
     number_min_length: 4
     number_max_length: 100
-    uuid: 9ffc6048-5b46-41ed-be29-634be4fc0d33
+    uuid: b78f35b9-65dc-488a-8e6a-acec76522250
     country_id: *fm
     network_id: null
 # Supplementary services Prefixes
@@ -40,21 +40,21 @@ network_prefixes:
     prefix: '691311'
     number_min_length: 6
     number_max_length: 6
-    uuid: 69111201-3891-47fc-b4dd-ed3dd32d3a8b
+    uuid: 1a53073d-e48d-4345-b70f-197ebe230d6f
     country_id: *fm
     network_id: *fm_emergency_services
   - id: 243935
     prefix: '6914'
     number_min_length: 6
     number_max_length: 7
-    uuid: 3e271556-6fd3-4c61-9ea8-f4fb600618ec
+    uuid: ccc5385a-2587-40a6-bfb9-5641e932d029
     country_id: *fm
     network_id: *fm_special_services
   - id: 257389
     prefix: '691911'
     number_min_length: 6
     number_max_length: 6
-    uuid: 9b92d0cb-33c3-45f7-8a51-7ab5208a1827
+    uuid: 04cbad8b-7c9f-4209-a02d-09f913bdedac
     country_id: *fm
     network_id: *fm_emergency_services
 # Fixed Prefixes
@@ -62,27 +62,27 @@ network_prefixes:
     prefix: '691320'
     number_min_length: 10
     number_max_length: 10
-    uuid: a3433637-66a2-42f4-ab2d-e4faf3278872
+    uuid: 53e32d2a-f2c2-4dc3-8afb-d0cf0bbe775d
     country_id: *fm
     network_id: *fm_pohnpei_fixed
   - id: 330753
     prefix: '691330'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5bb7eeb8-be83-47d6-bf6e-7955776d95cb
+    uuid: 1e2da4a4-4396-4039-a631-7d0c2e60bbe6
     country_id: *fm
     network_id: *fm_chuuk_fixed
   - id: 352483
     prefix: '691350'
     number_min_length: 10
     number_max_length: 10
-    uuid: dff11e1d-0336-4178-a1aa-45f1447b7ff5
+    uuid: ad0d20b6-8438-440f-80e7-5af41240f5df
     country_id: *fm
     network_id: *fm_yap_fixed
   - id: 355969
     prefix: '691370'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2045cf54-1219-45a2-be91-40981ee747dd
+    uuid: f0821fca-32e2-49b7-94d4-3b5559f00e4f
     country_id: *fm
     network_id: *fm_kosrae_fixed
