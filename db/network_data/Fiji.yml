@@ -3,1003 +3,1003 @@ networks:
 # Supplementary services Networks
   - id: &fj_special_services 5099
     name: FJ Special Services
-    uuid: 0d7e46d2-14e6-4cfa-b8d4-d1140c7b9be2
+    uuid: 894fb55b-d8f6-4a17-9da0-9b1e57a7b311
     type_id: 14
   - id: &fj_home_country_direct 5116
     name: FJ Home Country Direct
-    uuid: dc19f616-9457-4a4d-9fae-9968f9de484f
+    uuid: 2e00e3a8-3ebb-475c-b849-5ecb9ee2b36f
     type_id: 14
   - id: &fj_operator_services_national 5127
     name: FJ Operator Services National
-    uuid: b8c81638-cdee-4d8d-b9d5-b865571ac81a
+    uuid: bc22cd24-9bdd-49f1-8018-a558907b0cb4
     type_id: 14
   - id: &fj_directory_enquiry_services_national 5130
     name: FJ Directory Enquiry Services National
-    uuid: c6fc804b-9f87-4034-8637-33fbb36498a5
+    uuid: 04f4ac37-6d11-4a70-a090-974bb6035f69
     type_id: 14
   - id: &fj_operator_services_international 5132
     name: FJ Operator Services International
-    uuid: 8da25cc9-f6c5-438c-9ca0-4f4d0fab4437
+    uuid: bc6645a9-b5be-458d-a278-e82a5b8ba7cc
     type_id: 14
   - id: &fj_directory_enquiry_services_international 5140
     name: FJ Directory Enquiry Services International
-    uuid: 37c82f5c-5780-4753-9481-f2b00308024b
+    uuid: 2595861b-3ec1-4802-9c9a-4ee7a5a2e601
     type_id: 14
   - id: &fj_collect_calls_services_national 5142
     name: FJ Collect Calls Services National
-    uuid: ff075ebb-7e0e-4f92-8fab-c433672c1f0c
+    uuid: ac406eff-f102-45ce-a23d-7d956ce0223d
     type_id: 14
   - id: &fj_collect_calls_to_usa 5151
     name: FJ Collect Calls To Usa
-    uuid: 9f4d4c26-e0f5-4d3e-9038-713d8fe2df9a
+    uuid: 9306c084-9298-45df-9c4c-22fed678eb66
     type_id: 14
   - id: &fj_freephone_services 5167
     name: FJ Freephone Services
-    uuid: ee8978b0-7d52-4607-ae50-1261df4ff909
+    uuid: c63ec233-fafd-431e-a4e6-654c5e25281e
     type_id: 14
   - id: &fj_premium_rate_services 5175
     name: FJ Premium Rate Services
-    uuid: f2c82108-7619-4140-99cb-8037371dfd2d
+    uuid: f97c129a-cfae-4f07-948f-2493fa85a663
     type_id: 14
   - id: &fj_shared_cost_services 5547
     name: FJ Shared Cost Services
-    uuid: 4e6bbea8-8852-45a3-a78a-42d2a070a9fb
+    uuid: 9b254e35-e801-495f-8dd8-fea8d16d5f46
     type_id: 14
   - id: &fj_emergency_services 6941
     name: FJ Emergency Services
-    uuid: e872ef3a-23c2-4ac1-9db1-15bef592ba78
+    uuid: e94269d9-bae7-433d-a296-70f208e18b8d
     type_id: 14
 # Fixed Networks
   - id: &fj_fixed 5157
     name: FJ Fixed
-    uuid: 5e317c04-5b23-4ec2-8f15-e0a98a938afa
+    uuid: 9c8326d8-5693-424a-99e3-9d39098b712a
     type_id: 12
 # Mobile Networks
   - id: &fj_digicel_mobile 6308
     name: FJ Digicel Mobile
-    uuid: 7b31ab41-a711-48ca-b27e-c4d4366dbdd4
+    uuid: a47f9899-b590-4e3a-93b3-da64b4d1fefa
     type_id: 3
   - id: &fj_vodafone_mobile 6533
     name: FJ Vodafone Mobile
-    uuid: 0fc3f4fa-1a67-4831-b99d-a412ebc87300
+    uuid: 0b997d76-204d-46a5-9eb3-a7f3233067dc
     type_id: 3
   - id: &fj_inkk_mobile_mobile 6690
     name: FJ Inkk Mobile Mobile
-    uuid: aca495ff-26bd-40ce-9f35-d04052123f57
+    uuid: 1e77c09c-46c6-4c60-be09-d6dfd39979e1
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 231992
+  - id: 241992
     prefix: '679'
     number_min_length: 4
     number_max_length: 100
-    uuid: 523aa2f2-9735-4993-bdfc-4ce3c91822b2
+    uuid: 78697a56-3de6-4f44-8462-8b8d1e26d193
     country_id: *fj
     network_id: null
 # Supplementary services Prefixes
-  - id: 232144
+  - id: 242144
     prefix: '6790'
     number_min_length: 6
     number_max_length: 6
-    uuid: ba5543aa-efd9-4013-bf38-24c00c825ec9
+    uuid: a2d12257-050f-4f62-b433-1792502afbeb
     country_id: *fj
     network_id: *fj_special_services
-  - id: 232161
+  - id: 242161
     prefix: '679004890'
     number_min_length: 13
     number_max_length: 13
-    uuid: 2e5f4fef-2424-463f-bdf4-fb2824415b87
+    uuid: e5a49250-de10-40e5-bf54-4b3fbbd23ef7
     country_id: *fj
     network_id: *fj_home_country_direct
-  - id: 232172
+  - id: 242172
     prefix: '679010'
     number_min_length: 6
     number_max_length: 6
-    uuid: 3782dd1f-dc57-4ca7-9546-e832fee2ea99
+    uuid: fd6b64ac-3140-4d05-9542-ba2e37529c8d
     country_id: *fj
     network_id: *fj_operator_services_national
-  - id: 232178
+  - id: 242178
     prefix: '679011'
     number_min_length: 6
     number_max_length: 6
-    uuid: f66cda70-e405-4fbd-8be8-9f80d1082967
+    uuid: 9a2ac056-9fbe-4dd0-ad04-fc8041fe46d8
     country_id: *fj
     network_id: *fj_directory_enquiry_services_national
-  - id: 232180
+  - id: 242180
     prefix: '679012'
     number_min_length: 6
     number_max_length: 6
-    uuid: 6d996209-f54e-40dc-97af-6291f48dcb91
+    uuid: 09a740f9-b697-4f67-aab4-56082ca91509
     country_id: *fj
     network_id: *fj_operator_services_international
-  - id: 232240
+  - id: 242240
     prefix: '679022'
     number_min_length: 6
     number_max_length: 6
-    uuid: bed44abc-4c8a-4f9e-8e8f-22caf79e62cb
+    uuid: fad7414e-6d1b-4987-9fe8-dbde8cedab7c
     country_id: *fj
     network_id: *fj_directory_enquiry_services_international
-  - id: 232245
+  - id: 242245
     prefix: '679030'
     number_min_length: 6
     number_max_length: 6
-    uuid: ed470039-dd90-4c18-88b7-e31c77eacd31
+    uuid: 109caa09-377a-4dc2-85f0-dc2726a861ba
     country_id: *fj
     network_id: *fj_collect_calls_services_national
-  - id: 232257
+  - id: 242257
     prefix: '679050'
     number_min_length: 6
     number_max_length: 6
-    uuid: 3f4bfab6-c5cc-412d-b534-bcd90c0b60fb
+    uuid: 7dac43fb-530c-4f8f-98b6-0cd159a56916
     country_id: *fj
     network_id: *fj_collect_calls_to_usa
-  - id: 232322
+  - id: 242322
     prefix: '6790800'
     number_min_length: 14
     number_max_length: 14
-    uuid: 6fa770cd-f2d5-4919-adad-51aa7e8d0716
+    uuid: 49607d6b-441c-4f52-912e-2f70b3d69f98
     country_id: *fj
     network_id: *fj_freephone_services
-  - id: 232341
+  - id: 242341
     prefix: '6790900'
     number_min_length: 14
     number_max_length: 14
-    uuid: e7f3ea93-2b78-4c27-8837-6f0ce97dcffb
+    uuid: eb15b5c7-3d87-4ed9-837a-ea79929b3743
     country_id: *fj
     network_id: *fj_premium_rate_services
-  - id: 232872
+  - id: 242872
     prefix: '679132'
     number_min_length: 9
     number_max_length: 9
-    uuid: b88c8948-4f77-43e0-87e0-3ff51cfa877a
+    uuid: 015ec005-c6bc-4824-91e8-e046b59d9c60
     country_id: *fj
     network_id: *fj_shared_cost_services
-  - id: 247095
+  - id: 257095
     prefix: '6799'
     number_min_length: 6
     number_max_length: 6
-    uuid: 1bb5e6c9-a030-4e14-bfdb-32a2a3badbe1
+    uuid: c99756bc-42d0-4334-806c-6cf604b8d04b
     country_id: *fj
     network_id: *fj_emergency_services
 # Fixed Prefixes
-  - id: 232290
+  - id: 242290
     prefix: '6790700'
     number_min_length: 12
     number_max_length: 14
-    uuid: d58adeae-b453-43da-aa9f-549d01a3791d
+    uuid: 0477f61a-d35b-4f1d-b008-a6996cea2054
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233364
+  - id: 243364
     prefix: '67932'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8eb0e18c-1a97-4804-a748-16917b012b6d
+    uuid: 14122b6f-4aad-43d3-8723-5c2d5ef9972a
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233411
+  - id: 243411
     prefix: '67933'
     number_min_length: 10
     number_max_length: 10
-    uuid: c2314a05-56bb-451b-854c-3b05c64e32ce
+    uuid: 4366198a-7ac7-44b4-bd96-c63d7c8c49ee
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233443
+  - id: 243443
     prefix: '6793336'
     number_min_length: 10
     number_max_length: 10
-    uuid: d4c0f54c-701b-4406-b797-228b6d2111e8
+    uuid: 27e8f393-349d-4870-a66a-55e429765a50
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233444
+  - id: 243444
     prefix: '6793337'
     number_min_length: 10
     number_max_length: 10
-    uuid: a097252c-2bfb-48d9-a3cb-9b45f59d1774
+    uuid: 5564d1ee-d222-45f7-9fb7-cd3c1bef9fd2
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233448
+  - id: 243448
     prefix: '6793347'
     number_min_length: 10
     number_max_length: 10
-    uuid: 695dbba8-be80-4ebb-8e01-56208d0cd329
+    uuid: b320e580-76ab-4ccc-afb0-34b03216479c
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233449
+  - id: 243449
     prefix: '6793348'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4102c9cc-6649-48ed-aed1-a4cb0222b3dc
+    uuid: db402158-8cd6-4248-a549-ecebcc5b6b92
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233503
+  - id: 243503
     prefix: '6793400'
     number_min_length: 10
     number_max_length: 10
-    uuid: e0916eb4-9e8b-4335-bf9d-85012f623cc0
+    uuid: 894d9a12-b840-476b-901b-87688af257ac
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233510
+  - id: 243510
     prefix: '6793410'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5ab83a4e-1dcf-494e-ab0c-cab89f2ec7d3
+    uuid: 5e8fc911-a70c-4c5f-b310-27a22b21defa
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233511
+  - id: 243511
     prefix: '6793411'
     number_min_length: 10
     number_max_length: 10
-    uuid: 62935bfd-063c-47ad-8cb3-a09648704286
+    uuid: 5f0516eb-f9f9-44c6-a001-3b623a18d688
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233512
+  - id: 243512
     prefix: '6793412'
     number_min_length: 10
     number_max_length: 10
-    uuid: 09c28911-d888-4eaf-9a32-eb838091c861
+    uuid: 3140025d-3ece-46fa-a75e-1c3cab6c3710
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233513
+  - id: 243513
     prefix: '6793413'
     number_min_length: 10
     number_max_length: 10
-    uuid: 049f2db7-4bf2-4fd4-8217-9721eab269e5
+    uuid: 335d613d-ea46-48f7-9238-3170319d0aa2
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233526
+  - id: 243526
     prefix: '6793430'
     number_min_length: 10
     number_max_length: 10
-    uuid: dbaab246-1ad9-4ae6-b3b2-48094b7805f1
+    uuid: 4e8db40d-302e-434f-86c3-b9ad86018e49
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233527
+  - id: 243527
     prefix: '6793435'
     number_min_length: 10
     number_max_length: 10
-    uuid: 73826304-386c-4a1d-aefb-cd3eb898a5d6
+    uuid: 31bbbc27-610a-473a-8dda-25d3f115b343
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233528
+  - id: 243528
     prefix: '6793438'
     number_min_length: 10
     number_max_length: 10
-    uuid: 66bbf1ad-a130-4d50-8ebc-127ae54a3536
+    uuid: ba0acee9-fbec-4ca0-98cd-d1be028dda91
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233535
+  - id: 243535
     prefix: '6793440'
     number_min_length: 10
     number_max_length: 10
-    uuid: cea454b5-a5d1-4f2f-94d3-d6ea324559df
+    uuid: 6fd8e91a-21af-49d7-8be7-8ed0bfd9fa93
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233543
+  - id: 243543
     prefix: '6793450'
     number_min_length: 10
     number_max_length: 10
-    uuid: c4aa94e6-3f23-4822-a10a-65db895766c5
+    uuid: 8466d6cc-0a95-4476-a964-fa0249149297
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233544
+  - id: 243544
     prefix: '6793451'
     number_min_length: 10
     number_max_length: 10
-    uuid: 80985698-22c9-4bc1-9d5c-12b0d8609ee3
+    uuid: f0e609b7-7b97-4be9-bdeb-163c33d5327e
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233545
+  - id: 243545
     prefix: '6793452'
     number_min_length: 10
     number_max_length: 10
-    uuid: 62e621e4-fd44-4618-9332-fc70912f8b6d
+    uuid: f2a4d0fe-5019-406e-8176-15f55b5d1a2f
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233546
+  - id: 243546
     prefix: '6793459'
     number_min_length: 10
     number_max_length: 10
-    uuid: a026e0af-3275-4c93-aaa5-b8d77c299737
+    uuid: b8278f40-a6ba-4eb3-8846-d633e4b6ce9e
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233553
+  - id: 243553
     prefix: '6793460'
     number_min_length: 10
     number_max_length: 10
-    uuid: f8d4751e-9cab-44bc-a94f-862947d1cae9
+    uuid: 57dcbb25-7a34-48a7-9530-59bfb85633d1
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233559
+  - id: 243559
     prefix: '6793470'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6b475170-331b-4a86-8ca8-afdd382b702a
+    uuid: 57fe93bb-7f84-4568-b08c-950b81d919c1
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233560
+  - id: 243560
     prefix: '6793472'
     number_min_length: 10
     number_max_length: 10
-    uuid: e2a9abde-8a17-417d-a5f3-fbe55542521a
+    uuid: 8a887c6c-7acc-4286-bcad-767eefbe0bec
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233561
+  - id: 243561
     prefix: '6793475'
     number_min_length: 10
     number_max_length: 10
-    uuid: a9e523f2-332c-476d-82f3-f32a4b53f875
+    uuid: caf7974c-3865-40b9-a607-1865c41aeb79
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233562
+  - id: 243562
     prefix: '6793476'
     number_min_length: 10
     number_max_length: 10
-    uuid: dcc63b50-be96-4ec6-a5e8-949792f4dd79
+    uuid: dab065f0-f92b-4339-a031-fa8991a13f16
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233563
+  - id: 243563
     prefix: '6793477'
     number_min_length: 10
     number_max_length: 10
-    uuid: eeab471e-bdf4-4716-bd67-d2a5a6a75806
+    uuid: 2c2f0e74-4b75-45a4-8b63-4403a0868082
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233564
+  - id: 243564
     prefix: '6793478'
     number_min_length: 10
     number_max_length: 10
-    uuid: e3044d11-b583-4ceb-9a89-48e2589faf41
+    uuid: d71f0705-5aed-4580-a2d3-45f57a6565a6
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233565
+  - id: 243565
     prefix: '6793479'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3b0081fe-f7cb-436d-a14a-b1dc45d720c3
+    uuid: e64701e2-92b7-463b-9310-da937c581489
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233650
+  - id: 243650
     prefix: '6793590'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4b836f50-a389-4d84-938e-102304a9ce50
+    uuid: 0c4b5563-51fd-4d36-9a65-252e2be94092
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233651
+  - id: 243651
     prefix: '6793591'
     number_min_length: 10
     number_max_length: 10
-    uuid: 30236d98-0857-4560-9a0f-e245a7cbb42d
+    uuid: d0877c1c-5d91-49a8-b13e-cd8fdfc6b283
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233652
+  - id: 243652
     prefix: '6793592'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8eb75f0b-ae3b-4176-8cd2-15f81f5354c5
+    uuid: 1a14c62c-385a-4563-8314-0887fb3359aa
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233653
+  - id: 243653
     prefix: '6793593'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1fe7bffc-3236-49a3-b5e1-18522c0c6f31
+    uuid: 843da71d-8624-43f5-b334-0e4bd1747dcd
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233654
+  - id: 243654
     prefix: '6793595'
     number_min_length: 10
     number_max_length: 10
-    uuid: 537c8df5-454d-4d56-bb5a-45db284e7d85
+    uuid: 8b1584a9-b1bf-4580-b62c-43a96e432376
     country_id: *fj
     network_id: *fj_fixed
-  - id: 233979
+  - id: 243979
     prefix: '67940'
     number_min_length: 10
     number_max_length: 12
-    uuid: 3abfdb92-409d-4b44-91a4-fc9a94596fcd
+    uuid: 450129d7-7527-4425-86a9-36545c2208ed
     country_id: *fj
     network_id: *fj_fixed
-  - id: 235387
+  - id: 245387
     prefix: '6796'
     number_min_length: 10
     number_max_length: 10
-    uuid: f1b6a800-626e-47c4-8451-cf4281f680ec
+    uuid: aae473af-ddfa-403c-b36e-68672c5bb13e
     country_id: *fj
     network_id: *fj_fixed
-  - id: 238894
+  - id: 248894
     prefix: '6793'
     number_min_length: 10
     number_max_length: 10
-    uuid: 938c7f4e-3b6c-42fb-b055-98fa42aee4a9
+    uuid: 67d63538-e0cd-4790-aad7-bebd5b84e227
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241255
+  - id: 251255
     prefix: '6796500'
     number_min_length: 10
     number_max_length: 10
-    uuid: f76dcc8c-3dfd-4d03-ab52-35dafe831809
+    uuid: 0809a40e-a4d6-4350-ace5-91eef7955972
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241259
+  - id: 251259
     prefix: '6796501'
     number_min_length: 10
     number_max_length: 10
-    uuid: a1e42e44-68bb-4ed7-97b6-d5bf1e1dec52
+    uuid: 917092ea-408b-4206-8579-0453db957c6e
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241270
+  - id: 251270
     prefix: '6796509'
     number_min_length: 10
     number_max_length: 10
-    uuid: c055ed1b-c01b-4929-921e-f1a5b8fbb7e9
+    uuid: 2c0e68fb-105f-4785-a8d0-a450420e2e61
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241281
+  - id: 251281
     prefix: '6796510'
     number_min_length: 10
     number_max_length: 10
-    uuid: c48af1c0-b375-479d-8c3c-246465c187a7
+    uuid: 8bfd00a3-d0f9-4674-9574-8e47bece9457
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241282
+  - id: 251282
     prefix: '6796511'
     number_min_length: 10
     number_max_length: 10
-    uuid: 752e5442-c91f-47db-8b91-fed8ce9c9063
+    uuid: 733ad6a5-79ff-4838-a938-1b168b700756
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241283
+  - id: 251283
     prefix: '6796512'
     number_min_length: 10
     number_max_length: 10
-    uuid: 963894af-739a-492c-8fc8-dd303b3ef0d0
+    uuid: 20f3e484-f7a8-4624-9be4-2bda1f2df0af
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241286
+  - id: 251286
     prefix: '6796513'
     number_min_length: 10
     number_max_length: 10
-    uuid: cd0bf751-6577-4467-bcbd-f08fcb15d488
+    uuid: 7b9c413b-0835-43e7-97a1-9430214b7615
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241300
+  - id: 251300
     prefix: '6796520'
     number_min_length: 10
     number_max_length: 10
-    uuid: 91ce8bf9-6958-40a5-b46d-b8725d3205d1
+    uuid: 7c4457c1-0b52-4b2c-bf09-12deb3d2caab
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241302
+  - id: 251302
     prefix: '6796521'
     number_min_length: 10
     number_max_length: 10
-    uuid: b0e12bbc-e5a1-455b-a228-28d8c5901c97
+    uuid: 7f73d165-db65-4d21-98f7-7c24d5cfa273
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241312
+  - id: 251312
     prefix: '6796528'
     number_min_length: 10
     number_max_length: 10
-    uuid: e930c55c-f95c-4391-872d-d24729d0ac09
+    uuid: 81d96df6-b32b-4938-b35e-f11cf48d1885
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241322
+  - id: 251322
     prefix: '6796530'
     number_min_length: 10
     number_max_length: 10
-    uuid: dbcaa3f8-ba00-4a29-8e72-c1273631dc0c
+    uuid: a6598cc7-a63a-48b3-9e69-373b13f313b4
     country_id: *fj
     network_id: *fj_fixed
-  - id: 241393
+  - id: 251393
     prefix: '6796550'
     number_min_length: 10
     number_max_length: 10
-    uuid: 23c21f42-8196-4fdf-96c6-120bf8aa7b90
+    uuid: 527ccb29-fdef-413f-936e-4d6d9a100f23
     country_id: *fj
     network_id: *fj_fixed
-  - id: 243070
+  - id: 253070
     prefix: '6798'
     number_min_length: 10
     number_max_length: 10
-    uuid: fc18d1e7-84cc-481b-a002-af41c1646f1d
+    uuid: 6553c299-b116-4bc0-87a4-a4e75d04d7bd
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244413
+  - id: 254413
     prefix: '6796640'
     number_min_length: 10
     number_max_length: 10
-    uuid: 600d13bd-edac-4620-a185-dd962048bbd7
+    uuid: fc2ee2b5-4bc9-4982-b346-425dcf2b5a00
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244437
+  - id: 254437
     prefix: '6796650'
     number_min_length: 10
     number_max_length: 10
-    uuid: 44d29df5-ff27-4a26-875a-177035a07bf8
+    uuid: 23b477ef-8211-4e5c-bdc8-c23a5023b340
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244439
+  - id: 254439
     prefix: '6796651'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6ec5dc66-6e83-40c7-8404-e6effdf76765
+    uuid: f2e88547-ba03-4e58-94f2-944c7672f29c
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244454
+  - id: 254454
     prefix: '679666'
     number_min_length: 10
     number_max_length: 10
-    uuid: dd1dddf6-9c66-45a5-9991-ded63e517926
+    uuid: 0c88a150-731a-49db-bebc-e20154dbaa46
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244467
+  - id: 254467
     prefix: '679667'
     number_min_length: 10
     number_max_length: 10
-    uuid: c64d95c2-4b0d-4ca7-85d6-fef54b98c1c6
+    uuid: 6c10f7b6-6a63-4d05-b918-e3dc475fbd15
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244518
+  - id: 254518
     prefix: '6796680'
     number_min_length: 10
     number_max_length: 10
-    uuid: ae53a29c-c928-4cf4-9929-d53b934af794
+    uuid: 8303cd95-bcf0-4d58-bec0-8bc655303487
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244520
+  - id: 254520
     prefix: '6796681'
     number_min_length: 10
     number_max_length: 10
-    uuid: 63b96f8b-44c0-4774-bab3-bf0c7ab85b84
+    uuid: 20906603-d926-4151-b5ed-32cfd619c372
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244521
+  - id: 254521
     prefix: '6796682'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8e8f6e3c-a59c-4ddd-8d5a-ce14385394d1
+    uuid: 0340d2b4-bcfc-4945-8387-464dca478c2a
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244523
+  - id: 254523
     prefix: '6796685'
     number_min_length: 10
     number_max_length: 10
-    uuid: a08211c0-738a-4642-a6a2-65c0a514c374
+    uuid: fa3d2791-ac23-4487-b734-a0e01cb4d754
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244524
+  - id: 254524
     prefix: '6796687'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7986c777-8092-497c-a27d-9d2dc983c8de
+    uuid: 2e04ffcd-5a03-43de-a8b3-448e2b4a5d83
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244527
+  - id: 254527
     prefix: '6796689'
     number_min_length: 10
     number_max_length: 10
-    uuid: 61f99652-025f-4fd4-9575-18a043e12b45
+    uuid: 072528dd-7eb9-4cb1-ae78-a4bc3fe9a583
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244580
+  - id: 254580
     prefix: '6796693'
     number_min_length: 10
     number_max_length: 10
-    uuid: fbd1bff8-698f-4673-8c5f-56364423708a
+    uuid: 4917889e-28f6-4065-a730-1ccba890ae13
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244584
+  - id: 254584
     prefix: '6796694'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1bb4caa3-b7ce-44e8-8314-d552ec653574
+    uuid: 35155220-0b55-4cc4-b53f-2763b0e32404
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244587
+  - id: 254587
     prefix: '6796695'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0d8e7c6a-e651-4d1e-a158-0bab30988422
+    uuid: c703f28b-f3c8-407c-9d4b-db60eae5ab9b
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244616
+  - id: 254616
     prefix: '679670'
     number_min_length: 10
     number_max_length: 10
-    uuid: 81f60826-7ed1-4fe9-8af8-828b5b4ede23
+    uuid: d3b8bdf0-0a99-45c6-8f3a-e704a25ddb62
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244625
+  - id: 254625
     prefix: '679672'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3e6ba07e-9f0f-46c4-a241-ccbf6b526d12
+    uuid: 73e366a1-90b4-45e7-a785-ed3ba2e0e23e
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244632
+  - id: 254632
     prefix: '679673'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6ea61f94-e61b-4bd6-a62e-f9a2f221afdd
+    uuid: 91ba673c-02f1-4452-819e-112916a92d11
     country_id: *fj
     network_id: *fj_fixed
-  - id: 244640
+  - id: 254640
     prefix: '679675'
     number_min_length: 10
     number_max_length: 10
-    uuid: d594a660-2225-4645-a643-46d452cf4687
+    uuid: 25a6e96f-e7b1-4acc-b08f-7635629b7679
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246870
+  - id: 256870
     prefix: '6798809'
     number_min_length: 10
     number_max_length: 10
-    uuid: 390d0b27-8ac2-40a1-8cc2-90154aa0f5a3
+    uuid: 06fd9354-83e7-4764-8254-18675e0d615a
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246876
+  - id: 256876
     prefix: '6798811'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4dea58d2-50f3-44e1-a57c-a139d11569c6
+    uuid: 037b97ac-001d-47e2-839f-ec4844af3e20
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246878
+  - id: 256878
     prefix: '6798812'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1c38e799-ca39-4c8c-9f50-8b4c4c4dc546
+    uuid: ada03f11-e95d-4730-b66d-2cc11128d97a
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246880
+  - id: 256880
     prefix: '6798813'
     number_min_length: 10
     number_max_length: 10
-    uuid: af6ecd7d-36b3-407f-ae7a-d8c9fdf87682
+    uuid: 89aea640-604d-49b3-9079-d956ef4117e1
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246883
+  - id: 256883
     prefix: '6798814'
     number_min_length: 10
     number_max_length: 10
-    uuid: b35bd18a-a1e5-4128-958b-58c2aaf3b359
+    uuid: a1a92364-4427-40c5-9a75-9c33e0788397
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246885
+  - id: 256885
     prefix: '6798815'
     number_min_length: 10
     number_max_length: 10
-    uuid: 49809ada-8e6f-4870-8c03-999fcd86fdbc
+    uuid: 7d81e524-9c86-430e-b91a-b77cc1a3a9a2
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246887
+  - id: 256887
     prefix: '6798816'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7177d6e8-500b-4eda-8548-f01405cebe5e
+    uuid: 3cc1736b-6748-4994-a5bc-521308b52c35
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246890
+  - id: 256890
     prefix: '6798817'
     number_min_length: 10
     number_max_length: 10
-    uuid: a1e27394-8001-41d9-bec9-6c24386f8b5f
+    uuid: 8537c63c-e7be-4d01-8cbd-d5674ed3b5d1
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246892
+  - id: 256892
     prefix: '6798818'
     number_min_length: 10
     number_max_length: 10
-    uuid: 886a2746-fbf9-4b8b-9459-c074ca67adf9
+    uuid: 1a7cd77c-e239-4f3c-997a-771b60139421
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246894
+  - id: 256894
     prefix: '6798819'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4c5a5a81-9068-4c49-9104-38e220b2a059
+    uuid: d19d1923-ed06-45be-97fa-8c0b836faa4d
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246901
+  - id: 256901
     prefix: '6798820'
     number_min_length: 10
     number_max_length: 10
-    uuid: e2bd2866-e84f-4f23-9d59-0bcfc7eec85e
+    uuid: 83c83bc9-ad43-4176-be34-346f5c9a535e
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246905
+  - id: 256905
     prefix: '6798823'
     number_min_length: 10
     number_max_length: 10
-    uuid: a8a12601-ee72-44be-ae51-ca68490c8edd
+    uuid: ea72b6c7-2f75-41ab-a249-2b24488fd1ed
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246919
+  - id: 256919
     prefix: '6798832'
     number_min_length: 10
     number_max_length: 10
-    uuid: c1066c49-554f-4028-acec-af77ac1eb4e2
+    uuid: fae62bd2-506a-4023-bed8-0c396beb8148
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246923
+  - id: 256923
     prefix: '6798835'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5605cb05-8c36-41dd-ae2b-bea3c4bc4794
+    uuid: 9d185a21-1ad2-46c5-b13a-f8cc5fe85faa
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246925
+  - id: 256925
     prefix: '6798836'
     number_min_length: 10
     number_max_length: 10
-    uuid: 23e4bd3e-78e5-46de-8e5a-e501c928a03a
+    uuid: 138396ec-7b3e-4dbc-9665-640fd0bab2b3
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246944
+  - id: 256944
     prefix: '6798850'
     number_min_length: 10
     number_max_length: 10
-    uuid: d0968a0a-cca3-4a22-a452-41039b804ebf
+    uuid: e2c425d9-070c-4310-8259-d06b7af73e59
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246945
+  - id: 256945
     prefix: '6798851'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9a95184a-43b2-4557-857a-917680c5c60a
+    uuid: c8889210-e25d-4128-9a00-58906d9e4d53
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246946
+  - id: 256946
     prefix: '6798852'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3723598b-ce09-4f5c-ad4c-1d21d0934f2b
+    uuid: 8c66f219-b620-447f-8932-e328dd6a49e1
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246947
+  - id: 256947
     prefix: '6798853'
     number_min_length: 10
     number_max_length: 10
-    uuid: a8d31f3b-ea46-4527-ba21-2ac5b987c7a9
+    uuid: 80c83175-79c5-4e2d-bd00-f6c62c5022c7
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246954
+  - id: 256954
     prefix: '6798860'
     number_min_length: 10
     number_max_length: 10
-    uuid: ad3f95fd-31f7-496c-b128-153e14f8d4d2
+    uuid: a4744471-f36e-4f65-8473-8a94f2623968
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246974
+  - id: 256974
     prefix: '6798880'
     number_min_length: 10
     number_max_length: 10
-    uuid: 06c6f18e-2862-4322-b4d5-8dde5813d438
+    uuid: f0a8eb88-40cd-42bc-8a89-69d791745f84
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246975
+  - id: 256975
     prefix: '6798881'
     number_min_length: 10
     number_max_length: 10
-    uuid: 76630d8d-8cc7-428c-8968-b6ebdf15fd89
+    uuid: 03097e79-a40c-467a-9b2b-9177613b74aa
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246976
+  - id: 256976
     prefix: '6798882'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1ead17f6-dbcf-45dd-8a8f-0ab009ca3ff7
+    uuid: fda9a9b5-7465-4f44-a70b-c33335782eba
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246979
+  - id: 256979
     prefix: '6798891'
     number_min_length: 10
     number_max_length: 10
-    uuid: cb65ecc1-a5d8-4cce-b4ea-23536b142557
+    uuid: f85558a7-070f-4e06-891f-e4fc00898b93
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246981
+  - id: 256981
     prefix: '6798895'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3500cd58-e73a-4344-af8b-96d839ad5750
+    uuid: e6fb8c28-c391-4b9c-a004-1aa41f261ddb
     country_id: *fj
     network_id: *fj_fixed
-  - id: 246983
+  - id: 256983
     prefix: '6798897'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8ca14429-699c-4b01-b7f5-a9323e92562f
+    uuid: a68aa424-0e90-4431-b9bd-7c9436ea6f36
     country_id: *fj
     network_id: *fj_fixed
-  - id: 253738
+  - id: 263738
     prefix: '6798510'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4273e73f-0ffb-4989-9cbd-316da88648c6
+    uuid: c1275350-b5fe-456d-b99e-1dfb5b149a3f
     country_id: *fj
     network_id: *fj_fixed
-  - id: 253741
+  - id: 263741
     prefix: '6798511'
     number_min_length: 10
     number_max_length: 10
-    uuid: d5e7e927-582c-487f-b76d-f3743c9a1f3d
+    uuid: 71b14ffb-3ff4-4393-9655-ed866b377e85
     country_id: *fj
     network_id: *fj_fixed
-  - id: 253743
+  - id: 263743
     prefix: '6798512'
     number_min_length: 10
     number_max_length: 10
-    uuid: 84749392-efa1-4cc3-966c-d2f172e4b0d9
+    uuid: c69f9bad-759e-4c07-9f21-c4284b991eb7
     country_id: *fj
     network_id: *fj_fixed
 # Mobile Prefixes
-  - id: 241736
+  - id: 251736
     prefix: '67971'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3f70a7e0-8105-4257-b3f7-74671fda389e
+    uuid: 2ed1ec41-c3be-4fa8-9ac6-db1ec958ff1e
     country_id: *fj
     network_id: *fj_digicel_mobile
-  - id: 241823
+  - id: 251823
     prefix: '67972'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9008fe45-fefe-4c4c-bdaf-b8db5555e329
+    uuid: 46d34884-02ad-4f26-a6d1-03b54c0752f8
     country_id: *fj
     network_id: *fj_digicel_mobile
-  - id: 241874
+  - id: 251874
     prefix: '67973'
     number_min_length: 10
     number_max_length: 10
-    uuid: f646b531-3f17-49f5-947a-2b695d523ca1
+    uuid: 6ecdd474-9f12-4432-8d51-428a53f0f254
     country_id: *fj
     network_id: *fj_digicel_mobile
-  - id: 242057
+  - id: 252057
     prefix: '67974'
     number_min_length: 10
     number_max_length: 10
-    uuid: d2ff8aca-bc36-488b-a747-6bda9bbd2702
+    uuid: fc3bad9e-e230-46a5-924c-821274fb5dd0
     country_id: *fj
     network_id: *fj_digicel_mobile
-  - id: 242548
+  - id: 252548
     prefix: '67975'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9699e8c8-151c-42e2-a6ff-22f76ae611a1
+    uuid: 4f79d4e8-230f-43f7-8097-637919a5d908
     country_id: *fj
     network_id: *fj_digicel_mobile
-  - id: 243121
+  - id: 253121
     prefix: '67980'
     number_min_length: 10
     number_max_length: 10
-    uuid: 26953ca7-e449-4c9e-b314-d9b019c0eb34
+    uuid: 7a71f5a8-8a2c-47d3-9854-2c5288c79533
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 243590
+  - id: 253590
     prefix: '67983'
     number_min_length: 10
     number_max_length: 10
-    uuid: f4db1f15-0059-4f14-b377-5b18a583b9da
+    uuid: e94b14ef-d110-4bd3-893a-aded201b7cc0
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 243715
+  - id: 253715
     prefix: '67984'
     number_min_length: 10
     number_max_length: 10
-    uuid: dbeade98-26ed-409b-950a-9297323e753e
+    uuid: 8c6ec41a-be88-4190-bd87-efe68b87f4c2
     country_id: *fj
     network_id: *fj_inkk_mobile_mobile
-  - id: 245293
+  - id: 255293
     prefix: '67970'
     number_min_length: 10
     number_max_length: 10
-    uuid: 34fc6670-20fa-44db-805c-c38552e58536
+    uuid: 6df3acf8-dfc9-4612-839b-6e7602922bcc
     country_id: *fj
     network_id: *fj_digicel_mobile
-  - id: 245447
+  - id: 255447
     prefix: '67976'
     number_min_length: 10
     number_max_length: 10
-    uuid: 479f759d-fbd4-4ee9-b0df-bbe5a8abcd9c
+    uuid: 4267457f-b746-4003-a6e6-603fa9364384
     country_id: *fj
     network_id: *fj_digicel_mobile
-  - id: 245626
+  - id: 255626
     prefix: '67977'
     number_min_length: 10
     number_max_length: 10
-    uuid: 89ea3e24-157e-4ea5-901f-b13ba4463977
+    uuid: a8d89dff-eef7-4fbc-badc-e4e751bd4faa
     country_id: *fj
     network_id: *fj_digicel_mobile
-  - id: 246992
+  - id: 256992
     prefix: '67989'
     number_min_length: 10
     number_max_length: 10
-    uuid: fea78e17-630b-4030-9171-f9090ee58d53
+    uuid: 24cdd98a-eefe-4689-9aeb-39b94aa92afa
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 247156
+  - id: 257156
     prefix: '67990'
     number_min_length: 10
     number_max_length: 10
-    uuid: 76b494c0-f1d0-4e04-87e3-aab0c068e225
+    uuid: 6830c7aa-63aa-43f4-863a-c9d96e4ed089
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 247361
+  - id: 257361
     prefix: '67991'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7b033065-9efd-4d6f-bea7-194ca43b5c33
+    uuid: ee85a7e2-e083-46b9-8bc6-4cfe32585030
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 247586
+  - id: 257586
     prefix: '67992'
     number_min_length: 10
     number_max_length: 10
-    uuid: bf12b3d8-d642-438a-96fb-a922115fdfb5
+    uuid: 073f0422-5f53-4b5f-b30b-86b0592b91c3
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 247863
+  - id: 257863
     prefix: '67993'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4a1dd829-8d60-4be5-b3ff-887fd57342c7
+    uuid: 840227d8-c655-4b22-9755-924616d9aec7
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 248180
+  - id: 258180
     prefix: '67999'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1d9a9f6f-72aa-4a75-8ea7-606cd909da48
+    uuid: 2f95d3de-f528-4c0c-8b85-ff831e3f66e8
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 253849
+  - id: 263849
     prefix: '67986'
     number_min_length: 10
     number_max_length: 10
-    uuid: c6c5ca35-fa2d-4b0c-8a16-7345dd6822d5
+    uuid: 8ba4db87-ca1b-48d4-a592-a5f040b3723b
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 254003
+  - id: 264003
     prefix: '67987'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3b415b22-687d-4677-90bf-5f99b53aced6
+    uuid: 3685940e-e0ba-4827-9ee9-a1089c1b42ad
     country_id: *fj
     network_id: *fj_inkk_mobile_mobile
-  - id: 254192
+  - id: 264192
     prefix: '67994'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8b9a8641-1eb9-405e-83f4-fed26b378e1c
+    uuid: a1b624d7-97a6-4eab-b1bf-5c3d8d7f167e
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 254438
+  - id: 264438
     prefix: '67995'
     number_min_length: 10
     number_max_length: 10
-    uuid: 686f168f-5a5f-4b55-83c9-92d72bbb4079
+    uuid: 44333612-b6f4-422a-9a1c-aa55866b9a43
     country_id: *fj
     network_id: *fj_inkk_mobile_mobile
-  - id: 254715
+  - id: 264715
     prefix: '67996'
     number_min_length: 10
     number_max_length: 10
-    uuid: 60f9c4d1-dab7-442f-9902-5408ce23d39d
+    uuid: a9417eeb-ff83-48e9-82c1-a56494a51aca
     country_id: *fj
     network_id: *fj_inkk_mobile_mobile
-  - id: 254998
+  - id: 264998
     prefix: '67997'
     number_min_length: 10
     number_max_length: 10
-    uuid: 395bbb9b-af35-4c13-83b0-93d73d25d300
+    uuid: b4a8d2f7-91b3-46dd-ac92-c6181c4f07bd
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 255266
+  - id: 265266
     prefix: '67998'
     number_min_length: 10
     number_max_length: 10
-    uuid: 44b6af46-2c16-447d-92ee-e407958ce344
+    uuid: 503e868c-4027-4b57-ae99-0a5982784427
     country_id: *fj
     network_id: *fj_inkk_mobile_mobile

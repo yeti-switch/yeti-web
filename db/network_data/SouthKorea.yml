@@ -3,1253 +3,1253 @@ networks:
 # Supplementary services Networks
   - id: &kr_personal_number_services 4135
     name: KR Personal Number Services
-    uuid: fd440f6c-6fd6-44a2-a2c5-c3b6cbdac2f1
+    uuid: 88608ed7-ab1a-4316-919c-ed4bc2a49353
     type_id: 14
   - id: &kr_audiotext 4357
     name: KR Audiotext
-    uuid: df36fe6f-b983-4d42-bece-35c722fd097d
+    uuid: d245d7d6-cf49-43b9-b993-dcde49aebf55
     type_id: 14
   - id: &kr_freephone_services 4940
     name: KR Freephone Services
-    uuid: c3cdace1-b0e3-4ecf-950a-d755953d8194
+    uuid: 5ea20c8d-10a9-4c65-a462-5b5a3de5701c
     type_id: 14
   - id: &kr_value_added_services 4998
     name: KR Value Added Services
-    uuid: ff03fc6d-9cad-4c19-b5d2-5e23628c9b90
+    uuid: 568228b3-848b-48dc-8d8c-0fa91a5ea31c
     type_id: 14
   - id: &kr_national_carrier_selection_code 5170
     name: KR National Carrier Selection Code
-    uuid: 1a3a37d6-62c7-4b06-82e3-6a8fee750b7b
+    uuid: 6e12c4a0-af21-49fa-b8f8-828c0ff91a79
     type_id: 14
   - id: &kr_special_services 5257
     name: KR Special Services
-    uuid: cc441a3c-799c-4270-bd8a-975856102ea1
+    uuid: 1d4264b1-082b-4ea9-b474-202a241df25c
     type_id: 14
   - id: &kr_single_number_services 5580
     name: KR Single Number Services
-    uuid: 9cb8520c-da36-4f16-9c41-fbe90a4da69b
+    uuid: d484b54b-8b50-4ea1-aefd-9b94ddc83ee4
     type_id: 14
   - id: &kr_machine_to_machine_m2m_services 7118
     name: KR Machine To Machine M2M Services
-    uuid: fe28975c-4dd1-4c98-8171-aef7e0622010
+    uuid: 1f6c1945-c4de-4224-a974-b76b5014bb93
     type_id: 14
   - id: &kr_unified_message_service_ums 7341
     name: KR Unified Message Service Ums
-    uuid: e91b79c9-e955-4043-b498-d83f961dde1b
+    uuid: 8ea18790-4779-49d5-b7e6-57e4956851cf
     type_id: 14
 # Fixed Networks
   - id: &kr_fixed 4192
     name: KR Fixed
-    uuid: 57b8a7f9-3932-463d-ba48-43a8658adea0
+    uuid: 55f5bab8-d1fd-4689-989a-5c2173e17afa
     type_id: 12
 # Satellite Networks
   - id: &kr_u_satellite 7090
     name: KR U Satellite
-    uuid: 7353f532-4d8a-41fe-b7ca-8be4e2f0166d
+    uuid: 5dd458fc-da0e-4d41-a571-c96a24bfa480
     type_id: 16
 # Mobile Networks
   - id: &kr_sk_telecom_mobile 7091
     name: KR Sk Telecom Mobile
-    uuid: 546ff83f-0af0-45e8-843e-74d76252f9fd
+    uuid: b76cbe9b-ff65-43e8-8527-98fe45783671
     type_id: 3
   - id: &kr_kt_mobile 7092
     name: KR Kt Mobile
-    uuid: 5441c938-e5fb-4c83-b02f-98692743ef81
+    uuid: 11ffc914-4856-45ba-81b5-add6ad9bd37a
     type_id: 3
   - id: &kr_u_mobile 7094
     name: KR U Mobile
-    uuid: e9bb9b1c-0605-4ece-be82-508416f58a0d
+    uuid: 4056455a-b214-4241-92dc-c27ddb5d3f97
     type_id: 3
   - id: &kr_kt_powertel_mobile 7129
     name: KR Kt Powertel Mobile
-    uuid: 7c9482ba-b8cf-4371-832e-32e246b19fb6
+    uuid: 9f203c30-37ab-4cc8-9002-ec10c16ace4a
     type_id: 3
   - id: &kr_mobile 7130
     name: KR Mobile
-    uuid: c49759dc-fd13-4a06-8f42-830e05618386
+    uuid: 872a81e9-1ec1-492f-a8fc-d6a246227cf6
     type_id: 3
 # Paging Networks
   - id: &kr_serim_paging 7225
     name: KR Serim Paging
-    uuid: d7ae8249-0f01-4f3d-9703-56d51fb3fe4c
+    uuid: 1bc60504-b806-4786-9076-b6664c1970f1
     type_id: 13
   - id: &kr_paging 7237
     name: KR Paging
-    uuid: d45df3ad-d0ab-45c1-8ff9-f61282bfe912
+    uuid: 4aa78fc9-0494-4cde-a02c-013dbba11925
     type_id: 13
 network_prefixes:
 # Supplementary services Prefixes
-  - id: 44925
+  - id: 54925
     prefix: '8250'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0349880b-1a70-4e9b-bbe7-244213f90bb4
+    uuid: 7b699c53-a929-41ed-a4dd-1bef72366d1c
     country_id: *kr
     network_id: *kr_personal_number_services
-  - id: 85213
+  - id: 95213
     prefix: '8260'
     number_min_length: 11
     number_max_length: 11
-    uuid: 58037fb3-b337-4cee-b649-3e647d240342
+    uuid: 2c3fa54e-64a1-41c0-98bd-fe216e917400
     country_id: *kr
     network_id: *kr_audiotext
-  - id: 197787
+  - id: 207787
     prefix: '8280'
     number_min_length: 12
     number_max_length: 12
-    uuid: f91d7821-f0f2-474d-a8ef-df92b11cf0ae
+    uuid: 436f8bdc-2b3c-425b-a4b8-1b95a9d7e311
     country_id: *kr
     network_id: *kr_freephone_services
-  - id: 205148
+  - id: 215148
     prefix: '8295'
     number_min_length: 8
     number_max_length: 15
-    uuid: ce6fec9a-ebd9-4269-9601-f5749b16e82d
+    uuid: e8ec40b0-3595-4048-b9bf-991eff9e7326
     country_id: *kr
     network_id: *kr_value_added_services
-  - id: 232325
+  - id: 242325
     prefix: '82081'
     number_min_length: 5
     number_max_length: 5
-    uuid: 9185fb9a-623b-44c1-a0d1-3d5c22302fc0
+    uuid: 7acfa582-19cf-4d66-b544-8cae1ddc4244
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232328
+  - id: 242328
     prefix: '82082'
     number_min_length: 5
     number_max_length: 5
-    uuid: 7b4d2e34-f5a6-4e40-8af3-377804d25666
+    uuid: 97a89a27-a8da-4320-b129-51703a0c1390
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232329
+  - id: 242329
     prefix: '82083'
     number_min_length: 5
     number_max_length: 5
-    uuid: aa38d27c-d9da-4a9e-adf7-f688c7eb83f3
+    uuid: 3ee6ff49-d019-4fcd-ab98-c6813a001fd7
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232330
+  - id: 242330
     prefix: '82084'
     number_min_length: 5
     number_max_length: 5
-    uuid: d408b189-1cc2-4282-993a-75a5842a2f03
+    uuid: b6d3cd3a-80f5-4702-92d7-270036bd5fbd
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232331
+  - id: 242331
     prefix: '82085'
     number_min_length: 5
     number_max_length: 5
-    uuid: de0e5d31-580a-434f-9a98-6a7b1ec5dc26
+    uuid: f5e33135-ee1f-4c60-b860-52983ad57a02
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232332
+  - id: 242332
     prefix: '82086'
     number_min_length: 5
     number_max_length: 5
-    uuid: ef9ec82e-ba09-4f41-9aec-61ce0977423d
+    uuid: 29b70e64-473b-4156-909f-ab6103a8d71e
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232333
+  - id: 242333
     prefix: '82087'
     number_min_length: 5
     number_max_length: 5
-    uuid: c0166e54-a35e-4cf5-aa87-b58c7237c609
+    uuid: 3f0fa1c0-cae4-4486-af6c-1b7f90bc006e
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232334
+  - id: 242334
     prefix: '82088'
     number_min_length: 5
     number_max_length: 5
-    uuid: 6422e578-8705-4c48-bd82-2d04e8c2d35c
+    uuid: e164302b-4f80-46a1-ae40-acdfce67404d
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232336
+  - id: 242336
     prefix: '82089'
     number_min_length: 5
     number_max_length: 5
-    uuid: 70b314e5-23af-4a15-8f0a-ad4759576bb7
+    uuid: ab437f0f-1345-417f-b6d1-d5d338652bab
     country_id: *kr
     network_id: *kr_national_carrier_selection_code
-  - id: 232428
+  - id: 242428
     prefix: '821'
     number_min_length: 5
     number_max_length: 6
-    uuid: 1e88e25f-74e4-400d-adaf-11c7baa732c2
+    uuid: 2976ecdf-b77b-4d08-b958-5559779c85ec
     country_id: *kr
     network_id: *kr_special_services
-  - id: 232900
+  - id: 242900
     prefix: '8214'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6abf6270-6679-4dc3-a0e5-ea2d4a98ff71
+    uuid: 5775b1de-54aa-43b4-a02e-ed9d8c20e6e7
     country_id: *kr
     network_id: *kr_special_services
-  - id: 232938
+  - id: 242938
     prefix: '8215'
     number_min_length: 10
     number_max_length: 10
-    uuid: c2aa171a-b7eb-40c1-b822-4ac3592acf6a
+    uuid: 1efb7f52-9405-4f5b-9b6c-b96e97f32bdd
     country_id: *kr
     network_id: *kr_single_number_services
-  - id: 233019
+  - id: 243019
     prefix: '8216'
     number_min_length: 10
     number_max_length: 10
-    uuid: bc027ef4-e0fb-4583-bfdf-ebc088280d1d
+    uuid: 5ff043b6-b666-4dfa-97ef-a018dcab139c
     country_id: *kr
     network_id: *kr_single_number_services
-  - id: 249226
+  - id: 259226
     prefix: '8212'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1e435834-b7b9-405f-a65d-c988117b5047
+    uuid: 40391746-4c63-4780-9b9c-b211fcafbdcd
     country_id: *kr
     network_id: *kr_machine_to_machine_m2m_services
-  - id: 299470
+  - id: 309470
     prefix: '8230'
     number_min_length: 7
     number_max_length: 13
-    uuid: 09586aee-ab17-4374-9ffa-5b3df3d4a1ca
+    uuid: e88a97f0-a7f1-4e49-89e9-4560902cf5ae
     country_id: *kr
     network_id: *kr_unified_message_service_ums
 # Fixed Prefixes
-  - id: 52606
+  - id: 62606
     prefix: '8251'
     number_min_length: 8
     number_max_length: 11
-    uuid: 3227744f-b43a-4f42-ab60-4e1f26cc8156
+    uuid: 25dc0219-fb90-482b-8bc6-81c5bf43bea1
     country_id: *kr
     network_id: *kr_fixed
-  - id: 61658
+  - id: 71658
     prefix: '8252'
     number_min_length: 8
     number_max_length: 12
-    uuid: a396e868-0e36-47f2-9805-eb8feee84d6f
+    uuid: b1ecf091-4ab1-490f-9e07-a41aceb74d08
     country_id: *kr
     network_id: *kr_fixed
-  - id: 63201
+  - id: 73201
     prefix: '8254'
     number_min_length: 8
     number_max_length: 11
-    uuid: 0c848393-ab26-4eec-bc74-1b7011a2bcfa
+    uuid: 319c2457-b966-4a1c-ad86-3ac7f6ea84cf
     country_id: *kr
     network_id: *kr_fixed
-  - id: 66547
+  - id: 76547
     prefix: '8253'
     number_min_length: 8
     number_max_length: 11
-    uuid: 4e56fcd0-1ea2-41c6-a0e5-ae0fa4d4bb0a
+    uuid: a8ed7218-a491-4775-a9d5-ea7bc5f344c4
     country_id: *kr
     network_id: *kr_fixed
-  - id: 68123
+  - id: 78123
     prefix: '8255'
     number_min_length: 8
     number_max_length: 11
-    uuid: b8a8f0d9-558e-4bc7-9016-b78785b3ae45
+    uuid: a99f2b69-ccb2-44c2-b39d-642326b7db7c
     country_id: *kr
     network_id: *kr_fixed
-  - id: 98584
+  - id: 108584
     prefix: '8261'
     number_min_length: 8
     number_max_length: 11
-    uuid: b6aa07be-681e-4c0b-9a49-2935547b2074
+    uuid: 8fc7f01b-0ab3-4b32-8d5a-6269c5439fb7
     country_id: *kr
     network_id: *kr_fixed
-  - id: 101467
+  - id: 111467
     prefix: '8262'
     number_min_length: 8
     number_max_length: 11
-    uuid: 890f8d8f-19c7-47ce-b800-d0ab21de683e
+    uuid: cef75a27-10a1-4440-81c7-227a00bd7c2a
     country_id: *kr
     network_id: *kr_fixed
-  - id: 107829
+  - id: 117829
     prefix: '8263'
     number_min_length: 8
     number_max_length: 12
-    uuid: ecaf1471-93fa-48dd-b3ec-539bea51289d
+    uuid: ed0a5325-8c67-4cd1-8c56-a6feefe23323
     country_id: *kr
     network_id: *kr_fixed
-  - id: 112435
+  - id: 122435
     prefix: '8264'
     number_min_length: 8
     number_max_length: 11
-    uuid: 04b195c2-7068-487a-a1de-a888af342e84
+    uuid: 3ca86239-b795-44b2-ae17-5b692321589c
     country_id: *kr
     network_id: *kr_fixed
-  - id: 140234
+  - id: 150234
     prefix: '8270'
     number_min_length: 12
     number_max_length: 12
-    uuid: 03bcd7ac-bb44-4f86-8706-748eca1f003c
+    uuid: 566b52ea-d45c-4d12-be90-a8b374a77f11
     country_id: *kr
     network_id: *kr_fixed
-  - id: 251202
+  - id: 261202
     prefix: '8221'
     number_min_length: 6
     number_max_length: 7
-    uuid: 1428bf88-f585-48c9-b875-30f323196398
+    uuid: 05a1a94f-f8db-4c8e-aac7-c0e8a5e578be
     country_id: *kr
     network_id: *kr_fixed
-  - id: 251211
+  - id: 261211
     prefix: '8222'
     number_min_length: 10
     number_max_length: 11
-    uuid: cc8305aa-aa00-4624-b223-20c2de46e3be
+    uuid: 186d347c-e0ac-40cd-92e7-6e7fb49ac53d
     country_id: *kr
     network_id: *kr_fixed
-  - id: 251262
+  - id: 261262
     prefix: '8223'
     number_min_length: 10
     number_max_length: 11
-    uuid: 073d7182-d363-464a-aee9-5b671ade9799
+    uuid: 910ef482-b8e4-41d1-800f-2623871e3f72
     country_id: *kr
     network_id: *kr_fixed
-  - id: 251299
+  - id: 261299
     prefix: '8224'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4fec8de6-6c67-474e-a566-d3eb242a609b
+    uuid: c369cdd5-a076-4097-881e-ccf46ade6a5c
     country_id: *kr
     network_id: *kr_fixed
-  - id: 251351
+  - id: 261351
     prefix: '8225'
     number_min_length: 10
     number_max_length: 10
-    uuid: 33765609-b2c8-4d5a-b980-943143eed157
+    uuid: eb282fe5-ff7a-414e-a663-fb889b56c13f
     country_id: *kr
     network_id: *kr_fixed
-  - id: 251392
+  - id: 261392
     prefix: '8226'
     number_min_length: 10
     number_max_length: 11
-    uuid: 1ca2f8f8-61bb-4ee9-bc80-6fb0a2413c9e
+    uuid: d2a5d707-2ca2-48a0-8f55-9053f22d494d
     country_id: *kr
     network_id: *kr_fixed
-  - id: 251482
+  - id: 261482
     prefix: '8227'
     number_min_length: 10
     number_max_length: 11
-    uuid: a9347994-da9e-4c09-8e33-f0411c066e99
+    uuid: 4fdece0e-2263-4021-a188-fce73dc9dee7
     country_id: *kr
     network_id: *kr_fixed
-  - id: 257057
+  - id: 267057
     prefix: '8228'
     number_min_length: 10
     number_max_length: 10
-    uuid: 649c4e38-0233-40fa-abac-9b676e037051
+    uuid: c52b5706-285b-4c96-825f-5e89bec73bb5
     country_id: *kr
     network_id: *kr_fixed
-  - id: 257119
+  - id: 267119
     prefix: '8229'
     number_min_length: 10
     number_max_length: 10
-    uuid: 68d9f778-741a-4e3f-be37-8160dd90552f
+    uuid: 4fd5b70f-c9b3-4ab7-9a45-dbd609433f3e
     country_id: *kr
     network_id: *kr_fixed
-  - id: 311170
+  - id: 321170
     prefix: '8231'
     number_min_length: 8
     number_max_length: 11
-    uuid: 325a452d-d7f8-4f02-bb6a-1c76a5584e87
+    uuid: 6ba0ccd1-3338-4f70-8858-c039df8b9bd1
     country_id: *kr
     network_id: *kr_fixed
-  - id: 317277
+  - id: 327277
     prefix: '8232'
     number_min_length: 8
     number_max_length: 11
-    uuid: bf844126-9be7-418d-865b-ba2b16b27df1
+    uuid: deb4580c-8922-49b3-9ffd-274bc2fdaf92
     country_id: *kr
     network_id: *kr_fixed
-  - id: 327282
+  - id: 337282
     prefix: '8233'
     number_min_length: 8
     number_max_length: 11
-    uuid: 7fd305ea-e7f5-4e8a-94bf-3997151d2ada
+    uuid: 4f6fe7f6-e042-4fe5-a890-8e5adbd25b35
     country_id: *kr
     network_id: *kr_fixed
-  - id: 352525
+  - id: 362525
     prefix: '8241'
     number_min_length: 8
     number_max_length: 11
-    uuid: 053c9955-908b-4395-b36d-877cd93ad385
+    uuid: 37ad43e2-aecd-409e-8b9f-c92906c90a82
     country_id: *kr
     network_id: *kr_fixed
-  - id: 357940
+  - id: 367940
     prefix: '8243'
     number_min_length: 8
     number_max_length: 11
-    uuid: 3225976b-e685-4f72-af23-f17c3a19ed55
+    uuid: f19e5100-084e-47d2-b13e-728cb37ec0bc
     country_id: *kr
     network_id: *kr_fixed
-  - id: 360191
+  - id: 370191
     prefix: '8244'
     number_min_length: 8
     number_max_length: 11
-    uuid: 27985e08-9108-40f9-a982-00fbcaae5cf3
+    uuid: 1c6405f7-adb5-4d43-b162-8a1bdfefe819
     country_id: *kr
     network_id: *kr_fixed
-  - id: 367180
+  - id: 377180
     prefix: '8242'
     number_min_length: 8
     number_max_length: 11
-    uuid: d28b7a6a-ad77-4cea-9fbb-f20de1b6367c
+    uuid: e74dc0c5-538a-4069-b5d6-eef1cb9e783b
     country_id: *kr
     network_id: *kr_fixed
 # Country code Prefixes
-  - id: 232032
+  - id: 242032
     prefix: '82'
     number_min_length: 3
     number_max_length: 100
-    uuid: 16ec7c6e-2291-47ae-9939-11eda52bb4c3
+    uuid: bd19f637-9533-479a-8468-a3e46f77f75a
     country_id: *kr
     network_id: null
 # Satellite Prefixes
-  - id: 248630
+  - id: 258630
     prefix: '82100'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1d0ede21-0e23-4011-aeb5-965ee9c4dfad
+    uuid: 40aca8ac-cf92-4b6c-880a-b0328c2893df
     country_id: *kr
     network_id: *kr_u_satellite
-  - id: 248633
+  - id: 258633
     prefix: '82101'
     number_min_length: 11
     number_max_length: 11
-    uuid: 42d6a5fc-3b99-4934-8cf2-b8d2d6fe492d
+    uuid: 514a1de2-431b-4842-8154-c131c5b02861
     country_id: *kr
     network_id: *kr_u_satellite
 # Mobile Prefixes
-  - id: 248631
+  - id: 258631
     prefix: '821000'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1dfdd52e-ac8c-4335-a896-a5b605de3dad
+    uuid: 8e426a57-2733-46c4-a3ba-98149fa4699f
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248632
+  - id: 258632
     prefix: '821001'
     number_min_length: 11
     number_max_length: 14
-    uuid: e47cc25b-da6a-4290-af1f-cd980f34b4e6
+    uuid: 3bf37947-0e4c-49bc-b0ab-3357e294ee10
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248635
+  - id: 258635
     prefix: '821020'
     number_min_length: 12
     number_max_length: 12
-    uuid: ac586641-045e-46fa-a0f6-b988815ee32a
+    uuid: 47d1c376-e771-47fe-aa5c-f8cd79458eca
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248636
+  - id: 258636
     prefix: '82102091'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1edbf4ca-5972-4003-bb61-9e5c786b69ad
+    uuid: b4e33ad1-b2b6-4a32-a3b5-66b06c3a9caa
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248637
+  - id: 258637
     prefix: '821021'
     number_min_length: 12
     number_max_length: 12
-    uuid: f882f181-1b6b-461a-b87e-100c1ebbdef7
+    uuid: 2e4abab0-effc-4ee6-81a0-96415524d55a
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248638
+  - id: 258638
     prefix: '821022'
     number_min_length: 12
     number_max_length: 12
-    uuid: abeb6c34-1d25-40f1-81e9-b04f91c1225d
+    uuid: 612408db-aa68-4c64-b648-2bc057be114d
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248639
+  - id: 258639
     prefix: '821023'
     number_min_length: 12
     number_max_length: 12
-    uuid: f101bb47-1d5e-433c-836c-762017f55a31
+    uuid: ae0bb660-e016-481f-a854-000dd68da163
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248640
+  - id: 258640
     prefix: '821024'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ed73b67-7c71-40da-ae37-f56e922a5660
+    uuid: e1a26ab7-84a7-4351-a944-0cac54742901
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248641
+  - id: 258641
     prefix: '821025'
     number_min_length: 12
     number_max_length: 12
-    uuid: 07f7b06d-4c14-4b2f-b659-c1e826898367
+    uuid: ee607c35-d089-4fca-9892-bc0cc82e470e
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248642
+  - id: 258642
     prefix: '821026'
     number_min_length: 12
     number_max_length: 12
-    uuid: 91b708bf-e50e-4f65-b514-4c01200055a3
+    uuid: 34b255ad-50f2-4977-a795-c864911c155f
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248643
+  - id: 258643
     prefix: '821027'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2621776e-efc8-4205-8cc0-eb34c20a6e0c
+    uuid: f0e7be0c-194e-4866-9c06-0b205899a669
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248644
+  - id: 258644
     prefix: '821028'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5163a135-fd36-486c-9c29-9b2dda7b0a63
+    uuid: 01b27a51-21bf-4008-9892-c14e44f90256
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248646
+  - id: 258646
     prefix: '82102910'
     number_min_length: 12
     number_max_length: 12
-    uuid: ba3d9fdc-5287-4907-8042-d083eb8fd0bb
+    uuid: 4c678557-2b2d-48b1-9b10-f774dad21e3f
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248647
+  - id: 258647
     prefix: '82102911'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5cd78221-a18b-4a0f-b471-3d444557b238
+    uuid: 9d988399-d3ce-41ec-8250-f01b9e38e2e7
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248648
+  - id: 258648
     prefix: '82102912'
     number_min_length: 12
     number_max_length: 12
-    uuid: d7aee8a1-30aa-4a27-9bd1-2c05e09a9d04
+    uuid: da3b70f7-015c-4bbb-811b-841673a3af8f
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248649
+  - id: 258649
     prefix: '82102913'
     number_min_length: 12
     number_max_length: 12
-    uuid: 377389d7-dc8c-4f6f-a744-a8a1787e91bf
+    uuid: 3d9422bf-cab1-460f-a9f8-87b634116c25
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248650
+  - id: 258650
     prefix: '82102914'
     number_min_length: 12
     number_max_length: 12
-    uuid: 755b608b-7095-46ac-b3a3-aae9db675a4a
+    uuid: d6031cdc-a99e-46be-a5ea-12baa3d4cec6
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248651
+  - id: 258651
     prefix: '82102915'
     number_min_length: 12
     number_max_length: 12
-    uuid: 849a0828-ab3d-4355-b347-3a6beec830f8
+    uuid: d02a466a-777f-42d0-a617-fbf5b3182088
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248652
+  - id: 258652
     prefix: '82102916'
     number_min_length: 12
     number_max_length: 12
-    uuid: 30e86379-125e-4d69-88f1-be4ed3571eac
+    uuid: 19746f82-dbb3-49da-be27-d5ccc3283294
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248653
+  - id: 258653
     prefix: '82102917'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8fecec95-d280-469b-95c8-c69fee11c1b1
+    uuid: c881e11c-253c-482c-8c41-3a990b6c28b4
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248654
+  - id: 258654
     prefix: '82102918'
     number_min_length: 12
     number_max_length: 12
-    uuid: dbbcb1ed-0b46-4bfd-a442-c83e4e940b8e
+    uuid: e77bbcc2-4506-4004-9d10-755dd5ce8e26
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248655
+  - id: 258655
     prefix: '8210292'
     number_min_length: 12
     number_max_length: 12
-    uuid: 735caa55-3bff-423f-88c9-836b2810cc20
+    uuid: d7d8021e-eba5-42af-9f87-e34e3e8da296
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248656
+  - id: 258656
     prefix: '8210293'
     number_min_length: 12
     number_max_length: 12
-    uuid: cf93a370-3ebd-48b9-ae49-c981d960c3f0
+    uuid: 5f00a663-ec44-4743-97bd-a4e1dd711c1f
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248657
+  - id: 258657
     prefix: '8210294'
     number_min_length: 12
     number_max_length: 12
-    uuid: b4a57b55-d8d2-43d5-84c0-1deb110c770e
+    uuid: 3fbdfdca-96b1-4353-bd27-cf2bc24329b3
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248658
+  - id: 258658
     prefix: '8210295'
     number_min_length: 12
     number_max_length: 12
-    uuid: dd54ae7f-3ad4-4643-bff0-f839a710279d
+    uuid: 78e1b4f3-7787-42c9-9fb0-f1e68884a8c5
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248659
+  - id: 258659
     prefix: '8210296'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5c88cf83-498e-4c0e-a612-abd429a097ef
+    uuid: 62d1b6d4-2a6c-4399-8674-fea8eb6090f5
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248660
+  - id: 258660
     prefix: '8210297'
     number_min_length: 12
     number_max_length: 12
-    uuid: 53972e04-4627-4b4b-9097-d5bf43c21650
+    uuid: bdfbe0cd-bb92-4b17-9adf-8219d54a01b1
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248661
+  - id: 258661
     prefix: '8210298'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9cda2928-f8aa-406b-ac9c-201c37eeaae2
+    uuid: 70bceab8-ee03-460e-a06b-deb3cb4db977
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248662
+  - id: 258662
     prefix: '8210299'
     number_min_length: 12
     number_max_length: 12
-    uuid: 378efc4b-05c6-4da1-aa55-ba2f8b614615
+    uuid: 4348d97f-af15-4e86-8a62-ac220395f414
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248663
+  - id: 258663
     prefix: '821030'
     number_min_length: 12
     number_max_length: 12
-    uuid: bda5875c-a829-4b5d-98fb-a99d50883a14
+    uuid: 2ce27ce7-0eee-4843-a423-2d2276e93a29
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248665
+  - id: 258665
     prefix: '821031'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9641241c-84fa-4eb0-af17-185fb9437edb
+    uuid: e25fb8a9-b44a-4290-87be-cf4d3ae2a67f
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248667
+  - id: 258667
     prefix: '821032'
     number_min_length: 12
     number_max_length: 12
-    uuid: df038ddd-bec0-4838-b542-13157a518666
+    uuid: ef6a9270-e0fa-423a-84b0-7d9c7391b83a
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248669
+  - id: 258669
     prefix: '821033'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9afc2e1c-e235-45fd-885f-caa68622366c
+    uuid: dfca116a-a24e-4672-b183-689639f3458c
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248671
+  - id: 258671
     prefix: '821034'
     number_min_length: 12
     number_max_length: 12
-    uuid: 791d3b68-c524-45e8-8df3-432a9f4fb8b8
+    uuid: 124fb510-f352-4a91-b3e0-25cc3da7aa1e
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248673
+  - id: 258673
     prefix: '821035'
     number_min_length: 12
     number_max_length: 12
-    uuid: 90dce789-444e-4c63-9eee-a1356f921677
+    uuid: a9b1d362-000a-4886-ab8c-dc85a21b2381
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248675
+  - id: 258675
     prefix: '821036'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2d81959b-d723-445a-adeb-9094495bd79b
+    uuid: 1acb5506-c445-4256-9a5c-01dfc13cb49f
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248677
+  - id: 258677
     prefix: '821037'
     number_min_length: 12
     number_max_length: 12
-    uuid: b042bdca-27f2-4280-bed0-6f79fbfabe19
+    uuid: aeb679ab-2f09-42f5-ac9b-8a985dcf3864
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248679
+  - id: 258679
     prefix: '821038'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2273d08a-1e7d-4e21-aa1f-e3a325c0cea4
+    uuid: 7f663744-8730-4a7d-8cf2-8bd7b7e88240
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248682
+  - id: 258682
     prefix: '821040'
     number_min_length: 12
     number_max_length: 12
-    uuid: 40abcea7-f02c-4c39-beea-a406ebe9c52c
+    uuid: 3f93a6cb-c0c1-4853-a8ef-2f1ede0e0c40
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248684
+  - id: 258684
     prefix: '821041'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5116fa4c-1fce-4dfa-a641-916026902413
+    uuid: c70bd7c8-03f8-48d0-8442-dc305710f8a3
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248686
+  - id: 258686
     prefix: '821042'
     number_min_length: 12
     number_max_length: 12
-    uuid: dcead679-8ab2-4da4-89ec-ee146486c023
+    uuid: 394fd9a0-5aba-4cc9-9216-d58dcfc63810
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248688
+  - id: 258688
     prefix: '821043'
     number_min_length: 12
     number_max_length: 12
-    uuid: e6e23d17-86df-4f18-859f-8ff5a99efc93
+    uuid: e06841a0-3957-47ec-b9f0-d62523339803
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248690
+  - id: 258690
     prefix: '821044'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3d427c25-ce12-4371-b3e1-bbc4dacfe1db
+    uuid: d78bc8b7-e977-4cb3-bc67-55ecb433176a
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248692
+  - id: 258692
     prefix: '821045'
     number_min_length: 12
     number_max_length: 12
-    uuid: edf2523a-98de-4050-9ae0-d3b34e37e9a5
+    uuid: 61f50d70-76ca-4a2e-b0b4-3d2d5fda3ea1
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248694
+  - id: 258694
     prefix: '821046'
     number_min_length: 12
     number_max_length: 12
-    uuid: 19b96ecb-4041-449f-b0e0-a7737cdd1d41
+    uuid: d3aa8562-a769-4055-94bf-bbab5541122d
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248696
+  - id: 258696
     prefix: '821047'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9901589c-4531-4937-9188-0df569304a6b
+    uuid: 4c54f7e4-02c7-4151-8134-c43eb6155f8d
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248697
+  - id: 258697
     prefix: '821048'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2f01cd9d-4705-4347-a904-46a6d5f50524
+    uuid: 99fbb248-6784-4460-a48d-473b161e06ed
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248698
+  - id: 258698
     prefix: '821049'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8276f65b-4e00-4d62-8fac-a6170fd1c238
+    uuid: c0fa3840-aa07-4b65-953a-7d924d969547
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248699
+  - id: 258699
     prefix: '821050'
     number_min_length: 12
     number_max_length: 12
-    uuid: d83a4fda-54d5-4c17-8991-a8f2ec91b711
+    uuid: 07aad6bf-adf8-474e-bad6-abfffb761761
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248701
+  - id: 258701
     prefix: '821051'
     number_min_length: 12
     number_max_length: 12
-    uuid: ead36b84-3b77-43e2-bbb2-2dc36ba29f2c
+    uuid: 6e5351ac-3efb-49e8-bed3-477b9c7f250a
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248703
+  - id: 258703
     prefix: '821052'
     number_min_length: 12
     number_max_length: 12
-    uuid: dd3b26ad-34e7-4c1f-8f78-bd39a5f80289
+    uuid: 54668ffb-d223-4eb1-a56c-ddb2ed4bc778
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248705
+  - id: 258705
     prefix: '821053'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5704c14f-ce91-40d9-a55d-ab123ae8cce9
+    uuid: edcd515f-1a64-4a21-a92e-4219737568aa
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248707
+  - id: 258707
     prefix: '821054'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7589fc3c-5d03-4cd6-abbd-c04e56136190
+    uuid: f5693fb7-af03-41ae-b81a-823dca17e06a
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248710
+  - id: 258710
     prefix: '821056'
     number_min_length: 12
     number_max_length: 12
-    uuid: aba4414a-0043-46ab-b758-f27ccbc57e62
+    uuid: d9398133-f8b5-4d14-8256-3fa6579a1ff3
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248712
+  - id: 258712
     prefix: '821057'
     number_min_length: 12
     number_max_length: 12
-    uuid: 91152e4b-53b4-4609-9af9-8abb70161d88
+    uuid: e17f23bd-5cf2-4d29-83cf-4928f9da37b9
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248714
+  - id: 258714
     prefix: '821058'
     number_min_length: 12
     number_max_length: 12
-    uuid: 182fb1f4-d558-463a-8407-1acf3a60eab8
+    uuid: 5b54ad8e-4681-4acf-92ae-a025cbf07db9
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248716
+  - id: 258716
     prefix: '821059'
     number_min_length: 12
     number_max_length: 12
-    uuid: 41eca3ba-3da3-46b8-845e-f4eeeae9af3c
+    uuid: b6372e53-a1fa-4b7f-823b-ea3632feb831
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248718
+  - id: 258718
     prefix: '8210591'
     number_min_length: 12
     number_max_length: 12
-    uuid: af690cc1-94fc-460d-8f8f-2ac023a95631
+    uuid: 0c5eb9f9-b3f4-495d-8074-35b274f6f5ff
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248719
+  - id: 258719
     prefix: '8210592'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4383ef62-a0c2-4b85-9d10-bf5582d26bb6
+    uuid: eb0331fa-665b-4912-b775-2d6d996afe66
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248720
+  - id: 258720
     prefix: '8210593'
     number_min_length: 12
     number_max_length: 12
-    uuid: ccf3d386-aa53-454d-8131-5152dab2d645
+    uuid: 73681956-c550-4bd0-a0d8-c78a85cdfa00
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248721
+  - id: 258721
     prefix: '8210594'
     number_min_length: 12
     number_max_length: 12
-    uuid: f465248f-c12e-4ae6-9ad2-042092564c64
+    uuid: c56f1a45-dba4-4f32-9d92-d8311ea0f9a8
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248722
+  - id: 258722
     prefix: '8210595'
     number_min_length: 12
     number_max_length: 12
-    uuid: fb9a43e9-5931-4121-ab64-a3272583c505
+    uuid: a316cf97-6671-4ef2-993a-70d3442c4ea3
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248723
+  - id: 258723
     prefix: '821062'
     number_min_length: 12
     number_max_length: 12
-    uuid: 64acb520-677d-4c0e-9103-11b2331e4f4a
+    uuid: 3e688026-b2b1-4156-82ea-37486604e37e
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248724
+  - id: 258724
     prefix: '821063'
     number_min_length: 12
     number_max_length: 12
-    uuid: 412954a9-e415-48ba-a55a-6c46dd59d7c0
+    uuid: 21804710-55c1-42cf-bc7f-49e6f6d138d0
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248725
+  - id: 258725
     prefix: '821064'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6e85a8b2-a6fb-4ba3-bf17-488d3d9f16df
+    uuid: 9b652376-ffe5-4693-9593-8ba2cf9bed13
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248726
+  - id: 258726
     prefix: '821065'
     number_min_length: 12
     number_max_length: 12
-    uuid: 152e5f90-6c9d-4f13-8c1e-455f2bceb759
+    uuid: f2778937-2a9a-47c4-afc9-443ef6f4a9b0
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248728
+  - id: 258728
     prefix: '821066'
     number_min_length: 12
     number_max_length: 12
-    uuid: 15b08c79-752f-42b8-a9a9-fc6af5cbeb3b
+    uuid: b4c493bd-4dfa-4616-8d81-790636890a7a
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248730
+  - id: 258730
     prefix: '821067'
     number_min_length: 12
     number_max_length: 12
-    uuid: cae2fc18-ae09-44db-a4a1-714a21a43cdc
+    uuid: 7e35054e-5cd1-4f89-a9df-419a6b044a8e
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248731
+  - id: 258731
     prefix: '821068'
     number_min_length: 12
     number_max_length: 12
-    uuid: 92f1255f-1096-44a7-b133-b5ddf72d1db3
+    uuid: 7bdd17db-3667-4fdc-909c-92bd0cf9b4c0
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248733
+  - id: 258733
     prefix: '821071'
     number_min_length: 12
     number_max_length: 12
-    uuid: fa1789fe-59c3-4f78-9286-4db31d9947f6
+    uuid: e7313bac-5baa-41b1-870a-691943c18fea
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248735
+  - id: 258735
     prefix: '821072'
     number_min_length: 12
     number_max_length: 12
-    uuid: 00983eb8-d43d-4d7a-9db2-69d1232ea8bb
+    uuid: a00cadd7-1d4d-431f-866a-c8e4fda274cb
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248736
+  - id: 258736
     prefix: '821073'
     number_min_length: 12
     number_max_length: 12
-    uuid: 61c51134-6c73-455a-a339-b66a2bd767d5
+    uuid: 763b9fb0-799f-4797-a8f8-5068ecab33b1
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248737
+  - id: 258737
     prefix: '821074'
     number_min_length: 12
     number_max_length: 12
-    uuid: e2994f4c-341c-41f5-987a-df266969063f
+    uuid: 177f37c2-e252-4bcf-9b67-592f7980a9af
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248739
+  - id: 258739
     prefix: '821077'
     number_min_length: 12
     number_max_length: 12
-    uuid: fa952d2f-fa02-426e-89be-9b914421399b
+    uuid: 877e2ae6-5ec5-404e-93ec-76afc5c15e3e
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248741
+  - id: 258741
     prefix: '821078'
     number_min_length: 12
     number_max_length: 12
-    uuid: e028411d-739a-42ee-ad9b-7db4ec253529
+    uuid: c9f3d57e-f76a-454e-b3f5-aebbcb74b1ea
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248743
+  - id: 258743
     prefix: '821079'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9af69de9-da1b-4cf0-8a18-c91fb99d5754
+    uuid: 1771ab8c-9603-4a81-8385-2d546509d8f8
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248745
+  - id: 258745
     prefix: '821080'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2d4ba68b-c5fa-48f7-875d-72f972ec38d0
+    uuid: aa44cab1-8b63-4a38-98a5-3433b33ef1c8
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248747
+  - id: 258747
     prefix: '821081'
     number_min_length: 12
     number_max_length: 12
-    uuid: 360cf973-55ec-47a8-ba48-8e3654c67db3
+    uuid: 85f6e3a4-84b1-49fc-888d-fdcb9908a387
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248749
+  - id: 258749
     prefix: '821082'
     number_min_length: 12
     number_max_length: 12
-    uuid: 16722568-f2d2-4469-a0b7-0002b7547711
+    uuid: d54e0bf0-0e89-4cb8-8ae7-65cc23a5409e
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248751
+  - id: 258751
     prefix: '821083'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9f71a8f5-22cd-4338-979d-be856f1505dd
+    uuid: 89ad0221-749d-464c-914d-207c8258f361
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248753
+  - id: 258753
     prefix: '821084'
     number_min_length: 12
     number_max_length: 12
-    uuid: 492575af-2376-490a-8810-975111b9d51d
+    uuid: 766df0ab-f2c4-467e-9986-6a3ef7510e58
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 248755
+  - id: 258755
     prefix: '821085'
     number_min_length: 12
     number_max_length: 12
-    uuid: 127be958-00f1-48a8-bc0c-fd4787ca7362
+    uuid: 71069c9f-a1c0-4a4b-abb9-eef3f74d45d0
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248757
+  - id: 258757
     prefix: '821086'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5ae65c59-cd2c-4218-a90b-8d0be97cb6f7
+    uuid: 09a2b44a-31a8-4197-8b55-f055d4b00d4c
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248759
+  - id: 258759
     prefix: '821087'
     number_min_length: 12
     number_max_length: 12
-    uuid: 51061ec8-ae4b-446c-9176-a8c14c7e63e7
+    uuid: 6e9658ed-b0e1-48cb-9916-ef8074a02722
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248761
+  - id: 258761
     prefix: '821088'
     number_min_length: 12
     number_max_length: 12
-    uuid: 60842d77-17b8-4b44-ac16-c1dd3f15f351
+    uuid: de5f164a-7b25-4f18-af03-ffdb62976993
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248763
+  - id: 258763
     prefix: '821089'
     number_min_length: 12
     number_max_length: 12
-    uuid: a8c45563-f41d-4c4f-8420-d6c60a302db1
+    uuid: 7d77c044-a0a6-459c-a246-d7b07cf4f7b3
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248765
+  - id: 258765
     prefix: '821090'
     number_min_length: 12
     number_max_length: 12
-    uuid: f66e5da4-c516-4d8d-9b4b-805452b09931
+    uuid: a1bf42a4-c8c7-46ef-bf27-7ad8cc548177
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248775
+  - id: 258775
     prefix: '821091'
     number_min_length: 12
     number_max_length: 12
-    uuid: 93cc5786-1070-43af-9b95-a46971ca8c53
+    uuid: bc4d904d-9746-4c75-b772-353d524175f3
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248777
+  - id: 258777
     prefix: '821092'
     number_min_length: 12
     number_max_length: 12
-    uuid: f3b69dca-70ae-4031-91a3-211f6fe11c1b
+    uuid: b786cc97-f595-48ff-8cb7-d1865a5305ed
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248779
+  - id: 258779
     prefix: '821093'
     number_min_length: 12
     number_max_length: 12
-    uuid: f8ab1c8c-11e5-4962-9080-3dddc254cf80
+    uuid: ebc9c5d3-8d57-4fab-859a-d5a53d7a8c73
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248781
+  - id: 258781
     prefix: '821094'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c4c6451-5479-44b5-b6f8-79de81303130
+    uuid: c593907c-74af-42f6-b2ea-6cd167158b7a
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248783
+  - id: 258783
     prefix: '821095'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4cbf7da7-8b65-49a7-9822-9651d662fe3c
+    uuid: d90d1150-7447-45cf-a771-6fb2057d1e87
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248785
+  - id: 258785
     prefix: '821096'
     number_min_length: 12
     number_max_length: 12
-    uuid: 546114f2-a7a2-4cc1-bdfa-97b082faa8b1
+    uuid: cf6c91fb-bbdf-44e8-bfc8-7e31091b1d05
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248787
+  - id: 258787
     prefix: '821097'
     number_min_length: 12
     number_max_length: 12
-    uuid: 023c0138-e741-45a1-8ef3-d524c7f21b8c
+    uuid: db564697-dee1-4649-be0c-b93d6f206b26
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248789
+  - id: 258789
     prefix: '821098'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce57436d-8ad1-4a30-9b5b-ae8259f2e369
+    uuid: e55b2aca-2629-4c2b-b6d9-44e991b8c754
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248791
+  - id: 258791
     prefix: '821099'
     number_min_length: 12
     number_max_length: 12
-    uuid: 96abbef3-a672-483e-9627-3df2c35dd3c1
+    uuid: 579a67de-8b28-4b42-80eb-747d50319f7a
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 248811
+  - id: 258811
     prefix: '8211'
     number_min_length: 11
     number_max_length: 12
-    uuid: 4772e017-e36b-4f98-bfec-f9a8c4c8fd0e
+    uuid: d264c918-51dd-40d5-9f0c-38c3b5aabfb6
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 248877
+  - id: 258877
     prefix: '8211193'
     number_min_length: 12
     number_max_length: 19
-    uuid: d090d111-d1c4-4cfd-a4bc-d83200dcde9a
+    uuid: 2b7e45b2-99ac-4462-bb48-c3fa6afb5651
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
-  - id: 249240
+  - id: 259240
     prefix: '821221'
     number_min_length: 12
     number_max_length: 12
-    uuid: b16cc097-3c2d-4765-8ce9-f07f0eb90b55
+    uuid: d13b1d95-600d-4178-8bd8-5c6cbf5d5a72
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 249241
+  - id: 259241
     prefix: '821223'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3a5ba315-1fd4-4871-b9b7-7c211c08ee96
+    uuid: 4a6fc170-3073-4386-bef1-29799e6ab1d3
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 249650
+  - id: 259650
     prefix: '82130'
     number_min_length: 12
     number_max_length: 12
-    uuid: af66f803-64d2-4c92-ace7-00b950297593
+    uuid: 40aaad0e-4a8b-4408-859e-6d7108034b15
     country_id: *kr
     network_id: *kr_kt_powertel_mobile
-  - id: 249664
+  - id: 259664
     prefix: '82131'
     number_min_length: 12
     number_max_length: 12
-    uuid: 011d7144-4cb6-44fb-a6c5-98dc69418438
+    uuid: e3a8e0d6-7596-4311-b35e-c13b079f2f1b
     country_id: *kr
     network_id: *kr_mobile
-  - id: 249668
+  - id: 259668
     prefix: '82132'
     number_min_length: 12
     number_max_length: 12
-    uuid: c44121a5-2f16-4321-8cef-a350dc83e035
+    uuid: 411d8fc6-e437-4690-8adc-4bcde6867b4f
     country_id: *kr
     network_id: *kr_kt_powertel_mobile
-  - id: 249700
+  - id: 259700
     prefix: '82133'
     number_min_length: 12
     number_max_length: 12
-    uuid: c9cbbe1b-e763-4ef6-b5c5-50dee41964e5
+    uuid: 58be99ca-c5f6-421e-b805-5d19198b74a0
     country_id: *kr
     network_id: *kr_mobile
-  - id: 249944
+  - id: 259944
     prefix: '8214'
     number_min_length: 6
     number_max_length: 6
-    uuid: 5cace599-9a18-483c-894b-d2d64b6a9740
+    uuid: d4ac4a1d-68a7-4e3f-b4fc-70abf7b77ba6
     country_id: *kr
     network_id: *kr_mobile
-  - id: 250506
+  - id: 260506
     prefix: '8218'
     number_min_length: 11
     number_max_length: 11
-    uuid: 72d5b0e4-911e-41ba-b4db-be1ed3023463
+    uuid: 6f8eea7d-78dc-4dd1-b0e1-03865ea183b1
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 250827
+  - id: 260827
     prefix: '8219'
     number_min_length: 11
     number_max_length: 12
-    uuid: 355de73b-5cd9-4587-8337-8579ff2167a5
+    uuid: 6dd93705-7fc3-44a8-8075-a304c3dfed90
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 250862
+  - id: 260862
     prefix: '82191'
     number_min_length: 7
     number_max_length: 8
-    uuid: a413d670-2864-4f6d-949a-5c359b3d98f2
+    uuid: b4da98e2-b0e9-40eb-8055-6b2f4fa2d852
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 256556
+  - id: 266556
     prefix: '8216'
     number_min_length: 8
     number_max_length: 12
-    uuid: 0de143ac-f872-4913-87da-0632430587b5
+    uuid: 0e8bc673-78e5-4395-8e58-faef71d599ee
     country_id: *kr
     network_id: *kr_kt_mobile
-  - id: 256948
+  - id: 266948
     prefix: '8217'
     number_min_length: 11
     number_max_length: 12
-    uuid: 299ec7ea-0a0c-4073-a586-9a221f875444
+    uuid: ac04becc-7a1b-45d0-8b48-f1b4d69efaf1
     country_id: *kr
     network_id: *kr_sk_telecom_mobile
 # Paging Prefixes
-  - id: 256077
+  - id: 266077
     prefix: '82151'
     number_min_length: 11
     number_max_length: 12
-    uuid: d9da6320-321a-4ccc-9e25-776b601df331
+    uuid: 165162f8-c091-4a7d-a6c9-539d005c66ee
     country_id: *kr
     network_id: *kr_serim_paging
-  - id: 256087
+  - id: 266087
     prefix: '82152'
     number_min_length: 11
     number_max_length: 12
-    uuid: 7889c6c9-eac7-4622-9ad2-a92465f64b06
+    uuid: bbb13c50-7f9c-43a0-9bb8-1738c99d1118
     country_id: *kr
     network_id: *kr_serim_paging
-  - id: 256095
+  - id: 266095
     prefix: '82153'
     number_min_length: 11
     number_max_length: 12
-    uuid: abc5ffa5-9077-48bf-8127-01108ad69ec2
+    uuid: 185a58a6-af82-4149-af05-bdf490f766a5
     country_id: *kr
     network_id: *kr_serim_paging
-  - id: 256097
+  - id: 266097
     prefix: '82154'
     number_min_length: 11
     number_max_length: 12
-    uuid: 9c5f12c5-2c12-4cfd-9b48-13bfcad629e2
+    uuid: 4033e90e-7c5d-459c-be35-8cd2f5e6cafd
     country_id: *kr
     network_id: *kr_serim_paging
-  - id: 256100
+  - id: 266100
     prefix: '82155'
     number_min_length: 11
     number_max_length: 12
-    uuid: 9ac0d6e7-c28d-4cef-8832-0d652706d1ea
+    uuid: 3769bacb-bd9f-41ee-a483-c1b94ab01786
     country_id: *kr
     network_id: *kr_serim_paging
-  - id: 256107
+  - id: 266107
     prefix: '82156'
     number_min_length: 11
     number_max_length: 12
-    uuid: b1555332-f618-4294-a7a7-324bf9cd3408
+    uuid: 8d31e9e9-57fe-4b95-8431-7e174b005738
     country_id: *kr
     network_id: *kr_serim_paging
-  - id: 256111
+  - id: 266111
     prefix: '82157'
     number_min_length: 11
     number_max_length: 12
-    uuid: e3c6f2a7-6084-4450-a552-6bc8cc0df952
+    uuid: 74164198-59fa-4715-99af-d4b63b97d383
     country_id: *kr
     network_id: *kr_serim_paging
-  - id: 256118
+  - id: 266118
     prefix: '82158'
     number_min_length: 10
     number_max_length: 10
-    uuid: 449c8015-d0a5-4317-b7bd-e54a3b37cde5
+    uuid: 06589bfd-c5c9-4ef7-be14-ccad44edf63c
     country_id: *kr
     network_id: *kr_paging
-  - id: 256121
+  - id: 266121
     prefix: '82159'
     number_min_length: 10
     number_max_length: 10
-    uuid: 08e1436c-0906-40b4-a5e9-b885ce09ce6a
+    uuid: a761d848-8af8-41cb-adef-c17827155e68
     country_id: *kr
     network_id: *kr_paging
