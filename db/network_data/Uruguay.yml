@@ -1,55 +1,515 @@
 country_id: &uy 227
 networks:
 # Supplementary services Networks
-  - id: &uy_alternative_collection_services 4963
+  - id: &uy_alternative_collection_services 19969
     name: UY Alternative Collection Services
-    uuid: 4c6a66b1-6e05-44e5-ab71-3a7c91ea203a
+    uuid: 794658d2-731b-4767-ae5a-414946afd5d5
     type_id: 14
-  - id: &uy_preselected_international_network_operator 5114
+  - id: &uy_preselected_international_network_operator 21290
     name: UY Preselected International Network Operator
-    uuid: 0db8fed7-57a9-4105-ae9b-877dc0260b9b
+    uuid: ba74a6c3-8c49-48d9-8591-b73d32a5c987
     type_id: 14
-  - id: &uy_selected_international_network_operator 5125
+  - id: &uy_selected_international_network_operator 21301
     name: UY Selected International Network Operator
-    uuid: 69da4543-79d6-4f1f-9bf4-d75492b181b3
+    uuid: 6eaa9b33-dfe4-452b-aaac-4f65b943163e
     type_id: 14
-  - id: &uy_special_services 5334
+  - id: &uy_special_services 21510
     name: UY Special Services
-    uuid: 537d9ad4-6125-4860-a809-820650781d8e
+    uuid: 7a9fefa7-7455-41ac-9070-d7eb40fa29c3
     type_id: 14
-  - id: &uy_emergency_service 7030
+  - id: &uy_emergency_service 24493
     name: UY Emergency Service
-    uuid: a16875de-bd3f-42ce-9a46-6df411f3e3e7
+    uuid: 1df70bed-ef93-4ee9-adde-100a897ed4d4
     type_id: 14
-  - id: &uy_freephone_services 7576
+  - id: &uy_freephone_services 38525
     name: UY Freephone Services
-    uuid: 14c0630d-bf55-45a1-abf7-181fc2fc086c
+    uuid: 02db4d93-d572-414f-a522-8bccb09650f3
     type_id: 14
-  - id: &uy_value_added_services 7774
+  - id: &uy_value_added_services 41696
     name: UY Value Added Services
-    uuid: 0bdfbee3-eab2-4c79-83d4-5bba98fa214b
+    uuid: 8da92e00-46ec-406f-90c5-26f17508c339
     type_id: 14
 # Mobile Networks
-  - id: &uy_movistar_mobile 4981
+  - id: &uy_movistar_mobile 20045
     name: UY Movistar Mobile
-    uuid: 4916934d-fd5a-4940-b1bd-cecca7173da2
+    uuid: 0867aab0-089e-493b-8b46-7376920e981a
     type_id: 3
-  - id: &uy_claro_mobile 5013
+  - id: &uy_claro_mobile 20462
     name: UY Claro Mobile
-    uuid: 1cf020fd-8b50-483a-aead-a916cf62f36d
+    uuid: 69259973-26e2-400e-90a2-393fb2598250
     type_id: 3
-  - id: &uy_antel_movil_mobile 5059
+  - id: &uy_antel_movil_mobile 20795
     name: UY Antel Movil Mobile
-    uuid: edee1fe9-6341-4338-aa90-02dc423f0c60
+    uuid: 189a3b3e-8d4c-4a51-a158-1dc8502fc6da
     type_id: 3
-  - id: &uy_mobile 5089
+  - id: &uy_mobile 21265
     name: UY Mobile
-    uuid: c46c6fd5-6649-4de3-a3a3-bea89d395b05
+    uuid: a0576f4c-4d8a-4005-8679-54c489c4e14c
     type_id: 3
 # Fixed Networks
-  - id: &uy_fixed 5781
-    name: UY Fixed
-    uuid: 28d847f2-e9ce-46f2-b6ec-ea13cc100e41
+  - id: &uy_interior_del_pais_fixed 22153
+    name: UY Interior Del Pais Fixed
+    uuid: 46f4b7e8-c46f-4165-b1f0-d4ec63ba94dc
+    type_id: 12
+  - id: &uy_maldonado_fixed 22227
+    name: UY Maldonado Fixed
+    uuid: a093ea27-e205-4b0a-9e54-5adf7fd9b39a
+    type_id: 12
+  - id: &uy_casupa_fixed 22251
+    name: UY Casupa Fixed
+    uuid: 0ad16e0b-a7a2-4968-bbda-bf41f88b0f52
+    type_id: 12
+  - id: &uy_san_ramon_fixed 22252
+    name: UY San Ramon Fixed
+    uuid: 5e7167e8-e383-4180-9846-64614110d633
+    type_id: 12
+  - id: &uy_santa_rosa_fixed 22253
+    name: UY Santa Rosa Fixed
+    uuid: e05233d8-7f6b-4bc8-aea0-45bb92dfe327
+    type_id: 12
+  - id: &uy_tala_fixed 22254
+    name: UY Tala Fixed
+    uuid: 8eec20af-a3bb-4766-b4a2-915dbd5ef026
+    type_id: 12
+  - id: &uy_migues_fixed 22255
+    name: UY Migues Fixed
+    uuid: 09cb324a-8c3c-44e0-9dd0-843968a6e95a
+    type_id: 12
+  - id: &uy_cerro_colorado_fixed 22256
+    name: UY Cerro Colorado Fixed
+    uuid: 98983d63-d373-4365-aa8f-f3ab31a1b0e5
+    type_id: 12
+  - id: &uy_chamizo_fixed 22257
+    name: UY Chamizo Fixed
+    uuid: d63eba14-0860-4858-98cc-c44c1db4bc5f
+    type_id: 12
+  - id: &uy_las_piedras_fixed 22261
+    name: UY Las Piedras Fixed
+    uuid: 7126b0f3-2e51-4c2e-aa94-fe43b9635ec4
+    type_id: 12
+  - id: &uy_canelones_fixed 22266
+    name: UY Canelones Fixed
+    uuid: d9853256-5f95-4075-a5a3-83805aad1553
+    type_id: 12
+  - id: &uy_25_de_agosto_fixed 22267
+    name: UY 25 De Agosto Fixed
+    uuid: 7bee4d27-7891-4813-95b1-8a4e6f61970e
+    type_id: 12
+  - id: &uy_25_de_mayo_fixed 22268
+    name: UY 25 De Mayo Fixed
+    uuid: f33ecb6d-6b8d-48aa-888b-eb30305670ed
+    type_id: 12
+  - id: &uy_san_jose_fixed 22269
+    name: UY San Jose Fixed
+    uuid: 924e7130-42ab-457f-9ff9-064740c87cdd
+    type_id: 12
+  - id: &uy_libertad_fixed 22270
+    name: UY Libertad Fixed
+    uuid: a3b1985d-51bd-4dd6-a766-cb7619857a47
+    type_id: 12
+  - id: &uy_rafael_perazza_fixed 22271
+    name: UY Rafael Perazza Fixed
+    uuid: 589ac429-aa29-44b3-8ce2-d2a8a8f9bb92
+    type_id: 12
+  - id: &uy_autodromo_fixed 22272
+    name: UY Autodromo Fixed
+    uuid: e9fa4ba4-c071-4e84-b899-5f18099c665f
+    type_id: 12
+  - id: &uy_rodriguez_fixed 22273
+    name: UY Rodriguez Fixed
+    uuid: 53683c8f-6ac2-42da-91fd-da2af98823a3
+    type_id: 12
+  - id: &uy_ecilda_paullier_fixed 22274
+    name: UY Ecilda Paullier Fixed
+    uuid: 81fd7ab4-a6b1-4d2d-8128-e6d7937e600a
+    type_id: 12
+  - id: &uy_villa_rodriguez_fixed 22276
+    name: UY Villa Rodriguez Fixed
+    uuid: 4d353200-ee82-4410-b509-114b663c30b8
+    type_id: 12
+  - id: &uy_florida_fixed 22279
+    name: UY Florida Fixed
+    uuid: 7b181585-0362-4f5b-8e69-424f1829e446
+    type_id: 12
+  - id: &uy_sarandi_grande_fixed 22280
+    name: UY Sarandi Grande Fixed
+    uuid: d6660782-f16e-4e36-991e-40251fa0eddf
+    type_id: 12
+  - id: &uy_durazno_fixed 22283
+    name: UY Durazno Fixed
+    uuid: e1fcb50f-cb77-4556-a601-ca01eeb95d02
+    type_id: 12
+  - id: &uy_blanquillo_san_gregorio_fixed 22284
+    name: UY Blanquillo San Gregorio Fixed
+    uuid: bd4cfa38-47da-45c9-a89a-beddc0c5e922
+    type_id: 12
+  - id: &uy_trinidad_fixed 22285
+    name: UY Trinidad Fixed
+    uuid: d0e1aece-7043-44bc-a3c8-10fc007c1de9
+    type_id: 12
+  - id: &uy_carmen_fixed 22286
+    name: UY Carmen Fixed
+    uuid: 098e7b80-0e89-4122-92da-8a5ba9c66375
+    type_id: 12
+  - id: &uy_sarandi_del_yi_fixed 22287
+    name: UY Sarandi Del Yi Fixed
+    uuid: e68be0c1-5f71-4f12-819b-c03d9ee2c0e0
+    type_id: 12
+  - id: &uy_carlos_reyles_fixed 22288
+    name: UY Carlos Reyles Fixed
+    uuid: f18d8fb8-afc7-4b1c-ae69-be25d63256f8
+    type_id: 12
+  - id: &uy_san_gregorio_fixed 22289
+    name: UY San Gregorio Fixed
+    uuid: a7fa6323-e2b6-4b71-b61d-19c0f064dfe6
+    type_id: 12
+  - id: &uy_atlantida_fixed 22292
+    name: UY Atlantida Fixed
+    uuid: cbc5aada-8d16-4825-92af-540a8ecfdf31
+    type_id: 12
+  - id: &uy_piedras_de_afilar_fixed 22293
+    name: UY Piedras De Afilar Fixed
+    uuid: 6dcae82f-9f5f-4bb4-967f-fac37f5a1743
+    type_id: 12
+  - id: &uy_la_tuna_fixed 22294
+    name: UY La Tuna Fixed
+    uuid: bfc5c961-be5a-4bf4-9527-f9bce904b7fc
+    type_id: 12
+  - id: &uy_solis_de_mataojo_fixed 22295
+    name: UY Solis De Mataojo Fixed
+    uuid: a3846339-dbee-4383-a220-96e21f4f0642
+    type_id: 12
+  - id: &uy_san_jose_de_carrasco_fixed 22301
+    name: UY San Jose De Carrasco Fixed
+    uuid: b3c9421e-1758-4d60-8f30-eb6a37fa63d2
+    type_id: 12
+  - id: &uy_urbancel_mvdeo_distrito_aguada_fixed 22302
+    name: UY Urbancel Mvdeo Distrito Aguada Fixed
+    uuid: 3251b165-0f8b-4df3-8046-8ef7fa79c298
+    type_id: 12
+  - id: &uy_urbancel_mvdeo_distrito_union_fixed 22303
+    name: UY Urbancel Mvdeo Distrito Union Fixed
+    uuid: 66742c83-5432-4767-8ffc-b6723fc4274a
+    type_id: 12
+  - id: &uy_pando_fixed 22304
+    name: UY Pando Fixed
+    uuid: fc5c0691-27ef-4f3c-a6a4-4fb653dca85a
+    type_id: 12
+  - id: &uy_san_jacinto_fixed 22305
+    name: UY San Jacinto Fixed
+    uuid: a6bb4676-92c7-40ec-bd1c-062940679da2
+    type_id: 12
+  - id: &uy_piriapolis_fixed 22327
+    name: UY Piriapolis Fixed
+    uuid: 750c0da3-5986-4416-a42d-c2db2a7f515e
+    type_id: 12
+  - id: &uy_minas_fixed 22349
+    name: UY Minas Fixed
+    uuid: e7470020-b486-4b9a-ba25-0456db4694e6
+    type_id: 12
+  - id: &uy_aigua_fixed 22351
+    name: UY Aigua Fixed
+    uuid: 4fbc38e0-4f8f-44ae-a4d2-ff5d348a5a80
+    type_id: 12
+  - id: &uy_piraraja_fixed 22352
+    name: UY Piraraja Fixed
+    uuid: 03f16219-e143-4577-8b9a-bd2765c499f2
+    type_id: 12
+  - id: &uy_mariscala_fixed 22353
+    name: UY Mariscala Fixed
+    uuid: 977d0545-4847-40d3-a824-d1cd0ed0bd30
+    type_id: 12
+  - id: &uy_treinta_y_tres_fixed 22354
+    name: UY Treinta Y Tres Fixed
+    uuid: e1790663-de16-42d8-844a-a4ecf212ab79
+    type_id: 12
+  - id: &uy_jose_pedro_varela_fixed 22355
+    name: UY Jose Pedro Varela Fixed
+    uuid: 167326e5-2796-4093-bcd7-599b5975ab49
+    type_id: 12
+  - id: &uy_lascano_fixed 22356
+    name: UY Lascano Fixed
+    uuid: df2a4c73-24b4-4580-95a6-7b840164b0ee
+    type_id: 12
+  - id: &uy_velazquez_fixed 22357
+    name: UY Velazquez Fixed
+    uuid: 1cd388f8-8300-41b1-849b-a34e35081490
+    type_id: 12
+  - id: &uy_vergara_fixed 22358
+    name: UY Vergara Fixed
+    uuid: 9e82745c-c698-428c-ac40-7bcf87cca426
+    type_id: 12
+  - id: &uy_cebollati_fixed 22359
+    name: UY Cebollati Fixed
+    uuid: 6ce384aa-171c-4afc-9593-afda8043d741
+    type_id: 12
+  - id: &uy_enrique_martinez_fixed 22360
+    name: UY Enrique Martinez Fixed
+    uuid: 3da1e2ef-b36a-4d05-9a15-909651e9a00a
+    type_id: 12
+  - id: &uy_zapican_fixed 22362
+    name: UY Zapican Fixed
+    uuid: 0fe1e72e-5259-4e96-b4e2-ecba4b5564ce
+    type_id: 12
+  - id: &uy_santa_clara_de_olimar_fixed 22363
+    name: UY Santa Clara De Olimar Fixed
+    uuid: ab70ecda-5c51-4379-99b8-07d7d86c5261
+    type_id: 12
+  - id: &uy_cerro_chato_fixed 22364
+    name: UY Cerro Chato Fixed
+    uuid: 609797fa-2247-4598-ba4f-707f48d9f106
+    type_id: 12
+  - id: &uy_jose_battle_y_ordonez_fixed 22365
+    name: UY Jose Battle Y Ordonez Fixed
+    uuid: a0910cd9-b9a8-48ac-9b77-1735f25ad2fe
+    type_id: 12
+  - id: &uy_battle_y_ordonez_fixed 22366
+    name: UY Battle Y Ordonez Fixed
+    uuid: b05560ec-d18d-4e2c-a1f6-afe86847189c
+    type_id: 12
+  - id: &uy_rocha_fixed 22368
+    name: UY Rocha Fixed
+    uuid: 3c7b34d4-85f0-401f-920c-4fc0447da1ca
+    type_id: 12
+  - id: &uy_chuy_fixed 22369
+    name: UY Chuy Fixed
+    uuid: 0f113c8d-468f-4c88-9fa1-093a3c743c25
+    type_id: 12
+  - id: &uy_castillos_fixed 22370
+    name: UY Castillos Fixed
+    uuid: 8e1f3963-986f-48c5-9d21-2ee7165b129c
+    type_id: 12
+  - id: &uy_la_coronilla_fixed 22371
+    name: UY La Coronilla Fixed
+    uuid: b7ebd94f-7463-4c44-85ae-2012c31b6f85
+    type_id: 12
+  - id: &uy_santa_teresa_fixed 22372
+    name: UY Santa Teresa Fixed
+    uuid: ee31fc9e-5c19-4916-8eca-98a2f18cb24f
+    type_id: 12
+  - id: &uy_la_paloma_fixed 22373
+    name: UY La Paloma Fixed
+    uuid: 965f8d93-978c-416a-a4e0-4ba5cb96b0ce
+    type_id: 12
+  - id: &uy_faro_jose_ignacio_fixed 22376
+    name: UY Faro Jose Ignacio Fixed
+    uuid: 5a4c2396-5beb-4aae-89b0-f615a5cbb002
+    type_id: 12
+  - id: &uy_colonia_fixed 22399
+    name: UY Colonia Fixed
+    uuid: e8976b7c-8b5b-4a4e-9d68-e8773f8052b5
+    type_id: 12
+  - id: &uy_tarariras_fixed 22401
+    name: UY Tarariras Fixed
+    uuid: 76b55efa-626f-4b35-ad56-0fd6482d37e6
+    type_id: 12
+  - id: &uy_santa_ana_fixed 22402
+    name: UY Santa Ana Fixed
+    uuid: 5f92f577-61b2-421b-941b-0cba8810cbb2
+    type_id: 12
+  - id: &uy_mercedes_fixed 22404
+    name: UY Mercedes Fixed
+    uuid: ad858158-176a-469c-8f09-c6e01d89807d
+    type_id: 12
+  - id: &uy_dolores_fixed 22406
+    name: UY Dolores Fixed
+    uuid: be71286a-ac17-476b-a69d-aff41a23d0e7
+    type_id: 12
+  - id: &uy_cardona_fixed 22407
+    name: UY Cardona Fixed
+    uuid: f6a0a165-a047-453b-9485-35012026265b
+    type_id: 12
+  - id: &uy_palmitas_fixed 22408
+    name: UY Palmitas Fixed
+    uuid: 9a171398-e6ba-45f3-be09-b3eab6a63114
+    type_id: 12
+  - id: &uy_jose_enrique_rodo_fixed 22409
+    name: UY Jose Enrique Rodo Fixed
+    uuid: a9340914-710d-48a7-b2f5-382cb497c079
+    type_id: 12
+  - id: &uy_ismael_cortinas_fixed 22410
+    name: UY Ismael Cortinas Fixed
+    uuid: 758be25a-1079-4da8-be16-8fae9df7a9b1
+    type_id: 12
+  - id: &uy_carmelo_fixed 22419
+    name: UY Carmelo Fixed
+    uuid: 5d5172cb-0c22-439c-baf3-0857b965d217
+    type_id: 12
+  - id: &uy_nueva_palmira_fixed 22420
+    name: UY Nueva Palmira Fixed
+    uuid: bd89f438-c057-43dd-82a3-1927996c7eff
+    type_id: 12
+  - id: &uy_rosario_fixed 22431
+    name: UY Rosario Fixed
+    uuid: ff2ba5b3-af3e-41c5-a606-1472a23fb227
+    type_id: 12
+  - id: &uy_juan_lacaze_fixed 22433
+    name: UY Juan Lacaze Fixed
+    uuid: 0ccc01af-e520-401d-b766-d88fbac6ed39
+    type_id: 12
+  - id: &uy_playa_fomento_fixed 22434
+    name: UY Playa Fomento Fixed
+    uuid: 15cb13f5-eb7e-4f1d-aa36-7f0a9197a16f
+    type_id: 12
+  - id: &uy_fray_bentos_fixed 22447
+    name: UY Fray Bentos Fixed
+    uuid: 4af37e37-e39b-4316-a1d7-a1f22ae0a38f
+    type_id: 12
+  - id: &uy_greco_guichon_fixed 22448
+    name: UY Greco Guichon Fixed
+    uuid: 7c59ec83-bee0-41ed-b450-62f76c6894b3
+    type_id: 12
+  - id: &uy_young_fixed 22449
+    name: UY Young Fixed
+    uuid: 1cc7ccd2-414c-4e71-92a0-e86bca7f1078
+    type_id: 12
+  - id: &uy_nuevo_berlin_fixed 22450
+    name: UY Nuevo Berlin Fixed
+    uuid: 555df049-98cf-470f-9a6d-10f5a255cb6c
+    type_id: 12
+  - id: &uy_san_javier_fixed 22451
+    name: UY San Javier Fixed
+    uuid: 7b67c0f4-cf55-4c0f-ba71-65753ce6ec5e
+    type_id: 12
+  - id: &uy_montevideo_area_metropolitana_amm_fixed 22740
+    name: UY Montevideo Area Metropolitana Amm Fixed
+    uuid: 691cfdb6-03e9-4801-9686-fd2336c82cfc
+    type_id: 12
+  - id: &uy_miguelete_fixed 23224
+    name: UY Miguelete Fixed
+    uuid: a7058a20-9b2e-4c19-9bee-5515ca0baf34
+    type_id: 12
+  - id: &uy_ombues_de_lavalle_fixed 23225
+    name: UY Ombues De Lavalle Fixed
+    uuid: cc009ac6-4647-49b4-8f5e-366d5714e058
+    type_id: 12
+  - id: &uy_conchillas_fixed 23226
+    name: UY Conchillas Fixed
+    uuid: 801e3c03-0c5d-474a-86d0-942b732c5eba
+    type_id: 12
+  - id: &uy_colonia_miguelete_fixed 23229
+    name: UY Colonia Miguelete Fixed
+    uuid: 2950b2de-78bc-459a-9086-d15505f23d8f
+    type_id: 12
+  - id: &uy_rivera_fixed 23241
+    name: UY Rivera Fixed
+    uuid: 4a5d6760-62f6-41cb-b3c1-6a679b05e242
+    type_id: 12
+  - id: &uy_tacuarembo_fixed 23243
+    name: UY Tacuarembo Fixed
+    uuid: 4524859d-1245-4fe4-9ade-01509cc94a2d
+    type_id: 12
+  - id: &uy_tambores_tacuarembo_fixed 23244
+    name: UY Tambores Tacuarembo Fixed
+    uuid: 4b4809a7-2c44-414c-8d9c-b11234db09c2
+    type_id: 12
+  - id: &uy_ansina_minas_de_corrales_fixed 23245
+    name: UY Ansina Minas De Corrales Fixed
+    uuid: 05908d3a-8a16-4084-a0f4-ea4b2cbcacab
+    type_id: 12
+  - id: &uy_melo_fixed 23246
+    name: UY Melo Fixed
+    uuid: 84f85e99-7248-4608-a378-0610351ac8d8
+    type_id: 12
+  - id: &uy_arevalo_santa_clara_fixed 23247
+    name: UY Arevalo Santa Clara Fixed
+    uuid: 2be69668-98d9-4772-9d95-a2f501f2e97b
+    type_id: 12
+  - id: &uy_acegua_vichadero_fixed 23248
+    name: UY Acegua Vichadero Fixed
+    uuid: 8697969c-1a19-429a-83de-29bf9acf4619
+    type_id: 12
+  - id: &uy_vichadero_fixed 23251
+    name: UY Vichadero Fixed
+    uuid: 7b27167f-e497-4436-bbcf-c9e0edd19cc0
+    type_id: 12
+  - id: &uy_tranqueras_fixed 23252
+    name: UY Tranqueras Fixed
+    uuid: 597f4adf-09eb-4e65-be51-d2fb4e85faa0
+    type_id: 12
+  - id: &uy_minas_de_corrales_fixed 23253
+    name: UY Minas De Corrales Fixed
+    uuid: 8fb0b46b-79c1-42b7-9b2e-aa94ecd36115
+    type_id: 12
+  - id: &uy_paso_de_los_toros_fixed 23255
+    name: UY Paso De Los Toros Fixed
+    uuid: 78555d49-72cc-403c-884c-3609ba6057fd
+    type_id: 12
+  - id: &uy_rio_branco_fixed 23257
+    name: UY Rio Branco Fixed
+    uuid: ef947440-9419-46c4-8ab9-ac3c4de593dc
+    type_id: 12
+  - id: &uy_lago_merin_fixed 23258
+    name: UY Lago Merin Fixed
+    uuid: 6ab5a412-f53f-4d3b-a1a7-f1fc4b78c3e8
+    type_id: 12
+  - id: &uy_fraile_muerto_fixed 23259
+    name: UY Fraile Muerto Fixed
+    uuid: 69ad3875-1f5d-4141-be1c-1eb385011d61
+    type_id: 12
+  - id: &uy_paysandu_fixed 23264
+    name: UY Paysandu Fixed
+    uuid: 998242cd-5deb-4820-8726-4e02038bd3c8
+    type_id: 12
+  - id: &uy_salto_fixed 23265
+    name: UY Salto Fixed
+    uuid: cc0a5f35-add4-4f0b-9e92-139ba3024498
+    type_id: 12
+  - id: &uy_valentin_termas_de_dayman_fixed 23266
+    name: UY Valentin Termas De Dayman Fixed
+    uuid: c6ebcf72-795e-4a59-a92e-0eff09e002e8
+    type_id: 12
+  - id: &uy_guichon_fixed 23267
+    name: UY Guichon Fixed
+    uuid: 8bee7867-3894-489d-be3f-1e85121e35ff
+    type_id: 12
+  - id: &uy_piedras_colorados_fixed 23268
+    name: UY Piedras Colorados Fixed
+    uuid: fb0552af-1f7f-4af9-964f-a55410a8f678
+    type_id: 12
+  - id: &uy_piedras_coloradas_fixed 23269
+    name: UY Piedras Coloradas Fixed
+    uuid: b5ecee7f-c2c9-47e3-b509-3995e78d3a80
+    type_id: 12
+  - id: &uy_quebracho_fixed 23270
+    name: UY Quebracho Fixed
+    uuid: 834b5b2f-86dd-46ee-9d08-026a58c01416
+    type_id: 12
+  - id: &uy_constitucion_fixed 23271
+    name: UY Constitucion Fixed
+    uuid: 2a10620a-d31b-4141-bd0a-001994a336c7
+    type_id: 12
+  - id: &uy_belen_fixed 23272
+    name: UY Belen Fixed
+    uuid: 2a01c955-bb97-4358-bf29-86bf5c93848e
+    type_id: 12
+  - id: &uy_termas_del_arapey_fixed 23273
+    name: UY Termas Del Arapey Fixed
+    uuid: e7d27b7d-c3e6-45cf-bf42-76da3e05e0a3
+    type_id: 12
+  - id: &uy_artigas_fixed 23274
+    name: UY Artigas Fixed
+    uuid: 3ae00a64-34e6-4c60-ac7c-2cf958af9702
+    type_id: 12
+  - id: &uy_mataojito_tranqueras_fixed 23275
+    name: UY Mataojito Tranqueras Fixed
+    uuid: 07bc44ff-5850-4f3b-a634-3b8077762c42
+    type_id: 12
+  - id: &uy_baltasar_brum_fixed 23276
+    name: UY Baltasar Brum Fixed
+    uuid: f03e66cb-c4ed-4c76-b1a6-cd41cbe586e4
+    type_id: 12
+  - id: &uy_tomas_gomensoro_fixed 23277
+    name: UY Tomas Gomensoro Fixed
+    uuid: fa62dcbb-a799-4e30-8fc7-16d179583347
+    type_id: 12
+  - id: &uy_mones_quintela_fixed 23278
+    name: UY Mones Quintela Fixed
+    uuid: 1bad5685-8089-425e-ab43-4f459c4bd25d
+    type_id: 12
+  - id: &uy_bella_union_fixed 23279
+    name: UY Bella Union Fixed
+    uuid: c2ca4de0-29cc-4e5c-b26f-4c46d5249a0e
     type_id: 12
 network_prefixes:
 # Supplementary services Prefixes
@@ -57,105 +517,105 @@ network_prefixes:
     prefix: '598805'
     number_min_length: 10
     number_max_length: 10
-    uuid: ab65018f-9f24-4cc4-bdb1-0ce898dd5e2f
+    uuid: b8aa841a-41f9-48f8-a399-242307c96f95
     country_id: *uy
     network_id: *uy_alternative_collection_services
   - id: 242159
     prefix: '598000'
     number_min_length: 6
     number_max_length: 6
-    uuid: 8fcb649c-3393-4f1b-8fb6-e48a9a187f4a
+    uuid: 2b8f8ada-f804-4266-95f0-1786f5ec3e48
     country_id: *uy
     network_id: *uy_preselected_international_network_operator
   - id: 242170
     prefix: '59801'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4792f66a-8930-4eb7-97f7-cc069c118445
+    uuid: cfa10d61-82ef-4c25-9f00-5a8fc7c673c9
     country_id: *uy
     network_id: *uy_selected_international_network_operator
   - id: 242514
     prefix: '5981'
     number_min_length: 6
     number_max_length: 7
-    uuid: 3ea99838-5613-4706-a90a-cbb777b52cf5
+    uuid: cdae27fe-261e-4ac5-b241-078778503dd0
     country_id: *uy
     network_id: *uy_special_services
   - id: 257397
     prefix: '598911'
     number_min_length: 6
     number_max_length: 6
-    uuid: d8db8f72-b832-46d5-95dd-f01547462b33
+    uuid: d3da61f4-c968-4d4b-bca4-35e9acee7aa3
     country_id: *uy
     network_id: *uy_emergency_service
   - id: 403496
     prefix: '598800'
     number_min_length: 10
     number_max_length: 10
-    uuid: b55b60aa-f3d1-44e0-ba1b-fdf3650e0fd7
+    uuid: 3130b085-2ef2-4d13-b717-44d0d7657525
     country_id: *uy
     network_id: *uy_freephone_services
   - id: 447289
     prefix: '598903'
     number_min_length: 10
     number_max_length: 10
-    uuid: 46d12aaf-136f-4bf4-876f-58baddd3a606
+    uuid: 2dc2fa93-f4d9-4727-aec2-73ec53500e93
     country_id: *uy
     network_id: *uy_value_added_services
   - id: 454590
     prefix: '598900'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7cd63945-574d-46e2-b61b-ea9e730fedeb
+    uuid: 36529bae-c57f-4513-a84f-43c9bb24de07
     country_id: *uy
     network_id: *uy_value_added_services
   - id: 454714
     prefix: '598901'
     number_min_length: 10
     number_max_length: 10
-    uuid: 18cf1437-7c4e-4994-b33a-95d928a72944
+    uuid: b7230918-ae32-4e69-b219-542c483d2f06
     country_id: *uy
     network_id: *uy_value_added_services
   - id: 454957
     prefix: '598902'
     number_min_length: 10
     number_max_length: 10
-    uuid: 844c7536-a3cf-42a5-b386-978558bdc52c
+    uuid: 6d34ea62-14ae-488f-ac2e-fedb9492c011
     country_id: *uy
     network_id: *uy_value_added_services
   - id: 455872
     prefix: '598904'
     number_min_length: 10
     number_max_length: 10
-    uuid: 91b9c22e-d2d1-41f0-afd5-5180b66168af
+    uuid: cf63b8c9-a6e5-4750-938b-a55a37a8a4c3
     country_id: *uy
     network_id: *uy_value_added_services
   - id: 456601
     prefix: '598907'
     number_min_length: 10
     number_max_length: 10
-    uuid: 12241b9a-5846-4075-b261-a7e072658bf9
+    uuid: 5d76ce92-7519-4eab-81b1-cbf9e8432285
     country_id: *uy
     network_id: *uy_value_added_services
   - id: 457263
     prefix: '598908'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5e4f295a-530f-4b10-920a-74f9db66672e
+    uuid: b1cbf0fd-7e52-45a4-b64a-5456bed4c095
     country_id: *uy
     network_id: *uy_value_added_services
   - id: 462681
     prefix: '598905'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1032b871-748c-4140-97c3-71b06f35aeea
+    uuid: e128caae-eac3-4103-89dd-e40db1c3f9e1
     country_id: *uy
     network_id: *uy_value_added_services
   - id: 462752
     prefix: '598906'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6b1403c0-88fe-451d-a833-602f9ae0fd0a
+    uuid: fe65570f-fa8d-4a94-8780-0d8493814a22
     country_id: *uy
     network_id: *uy_value_added_services
 # Mobile Prefixes
@@ -163,126 +623,126 @@ network_prefixes:
     prefix: '59894'
     number_min_length: 11
     number_max_length: 11
-    uuid: 320719b1-6b96-44a3-94ec-6c0b9d98d872
+    uuid: 4758eb83-1abc-4d19-8a9a-82652280a0a6
     country_id: *uy
     network_id: *uy_movistar_mobile
   - id: 215155
     prefix: '59895'
     number_min_length: 11
     number_max_length: 11
-    uuid: a28388df-ce01-400d-8eb5-ced77dbcf833
+    uuid: 83a714b2-a866-4d8f-9c13-339a3cc09a6d
     country_id: *uy
     network_id: *uy_movistar_mobile
   - id: 221955
     prefix: '59896'
     number_min_length: 11
     number_max_length: 11
-    uuid: 66d00f2f-f0aa-4a76-85f9-e6bfafd0c8d2
+    uuid: dc783fe2-dbf6-41ec-9724-e54dd9b745e2
     country_id: *uy
     network_id: *uy_claro_mobile
   - id: 224445
     prefix: '598971'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5601cbda-dbe4-4e87-a045-9866c8414a93
+    uuid: aefe2184-3b20-46ae-875d-3ee934e9c04c
     country_id: *uy
     network_id: *uy_claro_mobile
   - id: 224546
     prefix: '598972'
     number_min_length: 11
     number_max_length: 11
-    uuid: 21758067-1f40-408a-8f84-ef78ffb7112b
+    uuid: 09044183-5e02-45e0-bc84-3551bd5dbae8
     country_id: *uy
     network_id: *uy_claro_mobile
   - id: 224646
     prefix: '598973'
     number_min_length: 11
     number_max_length: 11
-    uuid: a302378a-01f5-4483-9b50-5e69934ce006
+    uuid: 6fa39854-6583-4856-93a4-47c56057629d
     country_id: *uy
     network_id: *uy_claro_mobile
   - id: 224747
     prefix: '598974'
     number_min_length: 11
     number_max_length: 11
-    uuid: a7ed20ff-63b0-44de-9404-dbc181ba2b0d
+    uuid: 6c422e35-423f-4246-a4e0-e1965ed8e59f
     country_id: *uy
     network_id: *uy_claro_mobile
   - id: 227375
     prefix: '598970'
     number_min_length: 11
     number_max_length: 11
-    uuid: c66c44b8-0ef6-4513-8ab1-e868724694af
+    uuid: 2d4349bc-09a7-4989-a98e-226d3e4eea43
     country_id: *uy
     network_id: *uy_claro_mobile
   - id: 231743
     prefix: '59898'
     number_min_length: 11
     number_max_length: 11
-    uuid: 255a04e8-0ebf-4498-b38f-3928e95c02c8
+    uuid: 0281bf66-93a6-45bc-b6e5-61960df6c169
     country_id: *uy
     network_id: *uy_antel_movil_mobile
   - id: 239381
     prefix: '59899'
     number_min_length: 11
     number_max_length: 11
-    uuid: 692870d4-0128-435f-a503-588dd73ce159
+    uuid: d7fd6c47-3dde-4c87-8ed1-92d16e52b7ba
     country_id: *uy
     network_id: *uy_antel_movil_mobile
   - id: 241928
     prefix: '5989'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2677c52e-ba4a-420d-82ab-71979dc018ad
+    uuid: c66b0721-4b5f-4045-8d2d-1dd7cb870d98
     country_id: *uy
     network_id: *uy_mobile
   - id: 458160
     prefix: '59891'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9d4d6e4-41c6-4410-88dc-41e60dd2eca9
+    uuid: a78e94c5-c81f-41a1-9986-f9f86a547d89
     country_id: *uy
     network_id: *uy_antel_movil_mobile
   - id: 468957
     prefix: '598920'
     number_min_length: 11
     number_max_length: 11
-    uuid: 999a7b4f-00bc-405b-9f68-40fb25e712d5
+    uuid: 483788c8-952b-4ab7-8bf3-7663205d6d4b
     country_id: *uy
     network_id: *uy_antel_movil_mobile
   - id: 469083
     prefix: '598921'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9669b2b4-991f-4c9c-9c6f-ce28923b3e35
+    uuid: 60025c55-4e7b-4b65-b197-104e8400e4cb
     country_id: *uy
     network_id: *uy_antel_movil_mobile
   - id: 476297
     prefix: '598922'
     number_min_length: 11
     number_max_length: 11
-    uuid: 351abefd-a8bd-4ddb-a7d4-be596ad9ed41
+    uuid: 9cff5635-9a51-4a2b-9e0b-706ade5fab2e
     country_id: *uy
     network_id: *uy_antel_movil_mobile
   - id: 485535
     prefix: '598937'
     number_min_length: 11
     number_max_length: 11
-    uuid: 44f72dd7-cb14-4a9a-894e-12ee6304aeea
+    uuid: e5b56adf-5655-4c3a-b53d-52377ef17bf6
     country_id: *uy
     network_id: *uy_movistar_mobile
   - id: 485570
     prefix: '598938'
     number_min_length: 11
     number_max_length: 11
-    uuid: dbfd20b8-b711-4f44-b4be-f480fca7ae9b
+    uuid: 3a1cc401-645e-4384-a9e2-cc40f9182c04
     country_id: *uy
     network_id: *uy_movistar_mobile
   - id: 485614
     prefix: '598939'
     number_min_length: 11
     number_max_length: 11
-    uuid: 83d7c2b7-1380-4222-b563-560c7a35aa2b
+    uuid: 81543adf-1089-47da-a0a9-0ec154049276
     country_id: *uy
     network_id: *uy_movistar_mobile
 # Country code Prefixes
@@ -290,7 +750,7 @@ network_prefixes:
     prefix: '598'
     number_min_length: 4
     number_max_length: 100
-    uuid: 426026c1-e9a4-4fe0-9f55-7b6a327e9020
+    uuid: f237da04-7f61-4b21-a125-06697dd69d81
     country_id: *uy
     network_id: null
 # Fixed Prefixes
@@ -298,1490 +758,1490 @@ network_prefixes:
     prefix: '5984'
     number_min_length: 11
     number_max_length: 11
-    uuid: b13b3963-76ac-4cac-a1e2-131ac010c91f
+    uuid: 3613c409-3618-480c-9ed8-3de0cdbbd34d
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_interior_del_pais_fixed
   - id: 244249
     prefix: '598422'
     number_min_length: 11
     number_max_length: 11
-    uuid: 53f30c44-b4d6-4777-b921-215cb4cba7e7
+    uuid: 8c5e7493-1124-49dd-9408-05e0c8ec0858
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244257
     prefix: '598423'
     number_min_length: 11
     number_max_length: 11
-    uuid: a3675381-c2ae-4f7d-8c31-22a19b393d18
+    uuid: a83054ac-5fb0-4519-bbd5-9c455819bfc1
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244265
     prefix: '598424'
     number_min_length: 11
     number_max_length: 11
-    uuid: a2fce9de-102b-46dc-83bc-7de5ac900629
+    uuid: b8ee7dd7-7828-4d16-bf61-206b4dc28d5d
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244274
     prefix: '598425'
     number_min_length: 11
     number_max_length: 11
-    uuid: 88f75e43-a11d-4b97-ae9d-6e7656c6f9e3
+    uuid: d8c2d39a-9b86-4e61-a38c-be8f5e8e018c
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244276
     prefix: '598426'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8a1490d9-13c0-4c5d-8a9e-e9fb432cd10b
+    uuid: 5441d49e-dd34-4861-a474-a76e3bdf4b7d
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244291
     prefix: '598427'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0ac5acb4-4bb7-4ea7-aa48-19c90e380c68
+    uuid: a2fc157d-5377-4f18-a0cf-bd07cd006860
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244303
     prefix: '598428'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3f306f6f-7867-4f0e-9d23-8aa7bc318d9e
+    uuid: bfd3d368-0c93-43ad-ab99-b8b06367b073
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244315
     prefix: '598429'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2c6c58bb-c990-4286-8eef-000c9559c223
+    uuid: 39c7e61a-c9ba-4651-9cfb-ac64e2fb15d8
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244350
     prefix: '59843101'
     number_min_length: 11
     number_max_length: 11
-    uuid: 05facbf7-45a6-43d3-b5b8-c78f6b68ddfa
+    uuid: 08d719cd-afa8-43f6-992e-077a3a1893c6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_casupa_fixed
   - id: 244351
     prefix: '59843102'
     number_min_length: 11
     number_max_length: 11
-    uuid: a08e4133-5d83-4255-949b-5c5059ece771
+    uuid: a0b4a483-6bbe-4522-bab3-f2110c0e3c35
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_ramon_fixed
   - id: 244352
     prefix: '59843103'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8763fb20-acc7-4ec0-b0a2-8418956acdc7
+    uuid: 143a24c6-9e18-4c06-b48b-0ea22665eca1
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_santa_rosa_fixed
   - id: 244353
     prefix: '59843105'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0145a279-0e11-4a85-8981-13b9bd4fc943
+    uuid: 74b6e0ae-6162-4d60-bbad-d92952f49a50
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tala_fixed
   - id: 244354
     prefix: '59843107'
     number_min_length: 11
     number_max_length: 11
-    uuid: 84f2d917-6375-4086-8d8f-413b8f36ee25
+    uuid: 75f063cd-d011-422c-ac49-0fce7caf33ec
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_migues_fixed
   - id: 244355
     prefix: '59843108'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7487da94-0f59-45f3-9071-84e064821dd8
+    uuid: f39d7601-1b41-4ebd-9f23-d01be1dc7650
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_cerro_colorado_fixed
   - id: 244356
     prefix: '59843109'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5917d4b4-f121-4708-a167-be2fb48bb851
+    uuid: 1267d6a7-6f09-4432-a32e-5dd44d81accd
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_chamizo_fixed
   - id: 244357
     prefix: '5984311'
     number_min_length: 11
     number_max_length: 11
-    uuid: c5f7ffa1-81d7-46d9-846f-f74ceda4ab51
+    uuid: 315b6808-d18d-452e-8ae9-758796387068
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_casupa_fixed
   - id: 244358
     prefix: '5984312'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3bc21482-ad2a-442a-89d3-20fc1e408b39
+    uuid: a7225231-94f0-4706-8a37-9ffc31b4909b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_ramon_fixed
   - id: 244359
     prefix: '5984313'
     number_min_length: 11
     number_max_length: 11
-    uuid: 01903184-a107-4403-a947-2435ddfdafda
+    uuid: 087823d2-569e-4efc-b610-1d09bce53d09
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_santa_rosa_fixed
   - id: 244362
     prefix: '5984315'
     number_min_length: 11
     number_max_length: 11
-    uuid: f61f593f-6377-442f-bf2d-3d74b873aade
+    uuid: 0b10cce3-561a-4fd6-8b6d-5a37b7d68ab8
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tala_fixed
   - id: 244363
     prefix: '5984317'
     number_min_length: 11
     number_max_length: 11
-    uuid: f98cb116-5b84-4f6a-9d48-df8ec6ee05a1
+    uuid: 2e4f483e-a250-471a-a50f-f026f732f8b2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_migues_fixed
   - id: 244364
     prefix: '5984318'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6300f7c1-cf3c-48b6-81cb-8de15034a2ec
+    uuid: c0746058-545e-4c74-bd77-f1fb36044dd8
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_cerro_colorado_fixed
   - id: 244365
     prefix: '5984319'
     number_min_length: 11
     number_max_length: 11
-    uuid: b678b423-f278-4222-bbab-3c5d6f1e8a1b
+    uuid: 7b0a7872-27b2-4b9c-a5a2-2f8e80c47091
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_chamizo_fixed
   - id: 244368
     prefix: '59843202'
     number_min_length: 11
     number_max_length: 11
-    uuid: dfe2e283-2c3f-4f83-944d-30a6bcaffdcb
+    uuid: f634eabf-a238-45ce-8b31-299ad55fdbb9
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_las_piedras_fixed
   - id: 244382
     prefix: '598433'
     number_min_length: 11
     number_max_length: 11
-    uuid: 14b0bcfe-7015-4208-92d1-a5e1fb0c308e
+    uuid: 0d2bce2b-806d-4f99-98dc-50b22f511c9f
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_canelones_fixed
   - id: 244383
     prefix: '5984330'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1ce44891-a590-468d-bb4b-1fe957492b1e
+    uuid: 64fd0987-4798-4d06-bb6e-226f5adfb6d0
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_canelones_fixed
   - id: 244384
     prefix: '59843308'
     number_min_length: 11
     number_max_length: 11
-    uuid: cc353188-f4ce-4f07-a311-ae020e394393
+    uuid: fd86da59-f12f-497b-bff8-1f5a2c952bef
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_25_de_agosto_fixed
   - id: 244385
     prefix: '59843309'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1e05c763-a1ad-4d3c-9c3e-c1fb82e2a656
+    uuid: da2671d5-2026-4409-8cc0-9c7f79fa63c1
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_25_de_mayo_fixed
   - id: 244386
     prefix: '5984338'
     number_min_length: 11
     number_max_length: 11
-    uuid: f7c25938-4ea0-4f08-8a43-ab2fd87a150c
+    uuid: e24df28a-35fb-434e-8e08-6e2a3f5a99a4
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_25_de_agosto_fixed
   - id: 244387
     prefix: '5984339'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9dc8c314-b67e-480d-86ff-f85a4306474a
+    uuid: 9aeaca4d-38bd-4095-bb05-0c3540669f07
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_25_de_mayo_fixed
   - id: 244390
     prefix: '598434'
     number_min_length: 11
     number_max_length: 11
-    uuid: 597c695f-5ec4-4eef-be82-dba3d3ffc66c
+    uuid: 949ac72c-9020-4b00-a3e8-5912181329f4
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_jose_fixed
   - id: 244391
     prefix: '5984340'
     number_min_length: 11
     number_max_length: 11
-    uuid: b18f0101-47b5-48ef-b39b-375a3a6a06ed
+    uuid: b9fbdacf-5995-468d-9c71-ca042abc5556
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_jose_fixed
   - id: 244392
     prefix: '59843405'
     number_min_length: 11
     number_max_length: 11
-    uuid: 972d1b53-6fcf-4977-be83-c2e1634913d1
+    uuid: ab713b6e-8ea5-4ac2-b53d-8155a79ad365
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_libertad_fixed
   - id: 244393
     prefix: '59843406'
     number_min_length: 11
     number_max_length: 11
-    uuid: e936a3fa-66ca-4cb8-a433-d7ad31df9e39
+    uuid: 9e717fbf-a087-4da2-8b19-3efec2f9dc6d
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rafael_perazza_fixed
   - id: 244394
     prefix: '59843407'
     number_min_length: 11
     number_max_length: 11
-    uuid: c32c8fb3-cf20-4a2f-b574-271e5173940a
+    uuid: a3d91f02-ac8d-4bca-8ff5-2814f20b4562
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_autodromo_fixed
   - id: 244395
     prefix: '59843408'
     number_min_length: 11
     number_max_length: 11
-    uuid: d404a8f1-9ee9-4700-a1df-bd3c476dbe31
+    uuid: 21c517d0-36e0-4f10-8a68-7515f7c0c05b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rodriguez_fixed
   - id: 244396
     prefix: '59843409'
     number_min_length: 11
     number_max_length: 11
-    uuid: 992c05c5-2bc3-4fb3-a34e-25cdeb631037
+    uuid: 8d161db4-2070-48f0-9dc2-e085816c66e7
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_ecilda_paullier_fixed
   - id: 244399
     prefix: '5984345'
     number_min_length: 11
     number_max_length: 11
-    uuid: e172cc3d-995f-4a85-b69b-e3f9ef6e7fd8
+    uuid: 8ad6e650-4b05-4875-8512-0774e328f255
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_libertad_fixed
   - id: 244401
     prefix: '5984346'
     number_min_length: 11
     number_max_length: 11
-    uuid: a9bf3a9c-63c5-4a62-a2cb-325499d33e95
+    uuid: 46374273-3fd8-4c8b-88d4-6530ffb31a61
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rafael_perazza_fixed
   - id: 244402
     prefix: '5984348'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8993168b-3d01-410d-b9c4-550531d13a94
+    uuid: a91a2cbb-30ca-48d1-8cdc-044e219bba16
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_villa_rodriguez_fixed
   - id: 244403
     prefix: '5984349'
     number_min_length: 11
     number_max_length: 11
-    uuid: 556f4fa1-9c10-4384-bcf3-91e124e9a067
+    uuid: bf739e9b-51d7-4a23-b499-1c34dc69fadb
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_ecilda_paullier_fixed
   - id: 244408
     prefix: '598435'
     number_min_length: 11
     number_max_length: 11
-    uuid: 15932183-3e75-476b-8c62-724618b2f359
+    uuid: 9f70510c-7172-454c-a75b-226550053923
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_florida_fixed
   - id: 244409
     prefix: '59843502'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4839c7f2-6f2d-4cd9-9183-86eaa56c3808
+    uuid: ad96fd42-a452-47d1-bf2d-ad3196a4e6e6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_florida_fixed
   - id: 244410
     prefix: '59843504'
     number_min_length: 11
     number_max_length: 11
-    uuid: cf1024e7-44a8-42ae-89a2-74d74c3f6625
+    uuid: 9feefe68-ce93-4b16-8874-3eb9113eca58
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_sarandi_grande_fixed
   - id: 244411
     prefix: '5984354'
     number_min_length: 11
     number_max_length: 11
-    uuid: 02e0e020-acdf-4276-a002-0c4d499b0993
+    uuid: afbe9ce3-1063-484b-b9c8-62475251c6a3
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_sarandi_grande_fixed
   - id: 244419
     prefix: '598436'
     number_min_length: 11
     number_max_length: 11
-    uuid: 66f9901e-e220-4261-a7a7-a6c4ec0552a1
+    uuid: 99b1a05f-6ac9-451f-9b54-7d1d22261588
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_durazno_fixed
   - id: 244420
     prefix: '59843602'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4f877dc-ecef-4ac7-aa7a-ef16051be701
+    uuid: f3140d71-8ee4-48a0-aa59-678cc5e64f5c
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_durazno_fixed
   - id: 244421
     prefix: '59843603'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9021de48-a141-475e-adf7-575b3711f450
+    uuid: 20834086-ca7e-47fa-a363-6c0332f77ce6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_blanquillo_san_gregorio_fixed
   - id: 244422
     prefix: '59843604'
     number_min_length: 11
     number_max_length: 11
-    uuid: dbec23a4-51dc-44b8-b99d-870dc25bed29
+    uuid: a4ab7ca1-5461-4935-8406-d64acd625e8d
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_trinidad_fixed
   - id: 244423
     prefix: '59843605'
     number_min_length: 11
     number_max_length: 11
-    uuid: 494e1587-36a8-4a23-8ba4-643e8d2e208c
+    uuid: 0adff194-97d1-4dc9-a487-95bdbccc5681
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_carmen_fixed
   - id: 244424
     prefix: '59843607'
     number_min_length: 11
     number_max_length: 11
-    uuid: a28e159c-d232-4921-b6cd-40c863cff90c
+    uuid: 55d8f58c-14f1-4b47-81d6-0676e10355a2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_sarandi_del_yi_fixed
   - id: 244425
     prefix: '59843608'
     number_min_length: 11
     number_max_length: 11
-    uuid: 88f034c0-ff94-47db-8a11-7458d8850b7e
+    uuid: d727d015-cca8-45f9-a404-4ecbdeb59460
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_carlos_reyles_fixed
   - id: 244426
     prefix: '59843609'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4ab8f23d-41ac-4d62-afa0-21c8f17b8310
+    uuid: c72eeee0-7388-4389-a2c6-f57c6b788c85
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_gregorio_fixed
   - id: 244428
     prefix: '5984364'
     number_min_length: 11
     number_max_length: 11
-    uuid: 38e324dd-fa93-4bb9-8ef7-b479d128e47a
+    uuid: ae9ba64c-cc82-437f-b8c5-6efabd266938
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_trinidad_fixed
   - id: 244429
     prefix: '5984365'
     number_min_length: 11
     number_max_length: 11
-    uuid: 148492fc-e326-415e-8963-3ab299ec1f23
+    uuid: c2b32079-34b4-4149-83e9-655e6649fb53
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_carmen_fixed
   - id: 244431
     prefix: '5984367'
     number_min_length: 11
     number_max_length: 11
-    uuid: b6f2e3ba-43cd-4209-9c7a-e44a61574b20
+    uuid: d60aa4bf-d266-4f70-9b70-59f1391a1b2b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_sarandi_del_yi_fixed
   - id: 244432
     prefix: '5984368'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2445a8de-a236-4bcc-abbc-4b4c18594d0c
+    uuid: 4768dfb7-0dd1-4491-a6a3-c1634d8a97b3
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_carlos_reyles_fixed
   - id: 244433
     prefix: '5984369'
     number_min_length: 11
     number_max_length: 11
-    uuid: c92bef19-fd34-4c90-93be-40d3c16e606b
+    uuid: 81994864-ec82-40b1-a5ec-877dc27cb6ed
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_gregorio_fixed
   - id: 244437
     prefix: '598437'
     number_min_length: 11
     number_max_length: 11
-    uuid: 76fb2a79-b788-486f-a789-6a0be35116b9
+    uuid: 35d6ae1b-41f7-4213-9503-cab2a6e69088
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_atlantida_fixed
   - id: 244438
     prefix: '59843702'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7e9488cf-4a17-4761-8236-8309ce2a37aa
+    uuid: 29e29d85-16dc-451f-b409-1fdf33502c41
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_atlantida_fixed
   - id: 244439
     prefix: '59843707'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9dfd62f0-011d-412e-897e-cc86d400c47f
+    uuid: 9f6067fc-90a3-4149-8648-62fa94cc0f27
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_piedras_de_afilar_fixed
   - id: 244440
     prefix: '59843708'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3952e095-e373-447b-888d-133dad4f18e2
+    uuid: dc2850c9-fe96-4f7a-9ab7-4c1c8d45354e
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_la_tuna_fixed
   - id: 244441
     prefix: '59843709'
     number_min_length: 11
     number_max_length: 11
-    uuid: ada16ade-e031-4cbd-932d-9885c7861506
+    uuid: 6d383099-04b0-4454-b035-3dcd4d96bf2a
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_solis_de_mataojo_fixed
   - id: 244453
     prefix: '5984377'
     number_min_length: 11
     number_max_length: 11
-    uuid: fc63a5b2-4243-4aa9-8c90-c9e817de57f1
+    uuid: 735d7cb2-5609-47ee-9dc0-7bca20b067f4
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_piedras_de_afilar_fixed
   - id: 244455
     prefix: '5984378'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ee7d645-1257-4d2c-aeb3-1659889dc808
+    uuid: 592762e1-6b14-4497-99cd-5289393c22fc
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_la_tuna_fixed
   - id: 244459
     prefix: '59843802'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55a25a95-cee4-44bf-97fe-d925f3f9fb38
+    uuid: 3c3ad672-6c94-4029-b12a-1dfb1075658c
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_jose_de_carrasco_fixed
   - id: 244460
     prefix: '59843804'
     number_min_length: 11
     number_max_length: 11
-    uuid: 70eab9e3-d98b-48a0-a110-d85a5cad1c4d
+    uuid: cb0b57bf-0cab-451e-b396-9fec26fe30b6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_urbancel_mvdeo_distrito_aguada_fixed
   - id: 244461
     prefix: '59843805'
     number_min_length: 11
     number_max_length: 11
-    uuid: 70c6d2f0-5992-46e3-bd5f-7003cf235760
+    uuid: f49d9df0-b223-4511-87b7-5f4b6c89b949
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_urbancel_mvdeo_distrito_union_fixed
   - id: 244472
     prefix: '59843902'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7b195c28-f577-42c5-97a6-af5a4462d5cb
+    uuid: c61bbcb6-40fe-4d7a-b547-99dff229a1e6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_pando_fixed
   - id: 244473
     prefix: '59843909'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4f2049d2-b00a-4f59-8a39-afd09228baf5
+    uuid: 4606403d-8138-4f1b-b1ba-d00833c0ecee
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_jacinto_fixed
   - id: 244479
     prefix: '5984399'
     number_min_length: 11
     number_max_length: 11
-    uuid: 419f270b-43a7-4586-b0a3-59feb407f420
+    uuid: 117e3805-f251-4433-8ddf-ea7d0f6d1b20
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_jacinto_fixed
   - id: 244508
     prefix: '59844102'
     number_min_length: 11
     number_max_length: 11
-    uuid: a7fe7c02-5f61-4842-89f0-f20106adc6fb
+    uuid: 3ca9567c-9f82-4951-9697-d691dda72ff2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_maldonado_fixed
   - id: 244529
     prefix: '598443'
     number_min_length: 11
     number_max_length: 11
-    uuid: 20da9a4d-5efb-441d-af62-e92f1b7aceb4
+    uuid: 093bc5ab-11c7-4080-990a-ae0ed7b71be0
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_piriapolis_fixed
   - id: 244552
     prefix: '598444'
     number_min_length: 11
     number_max_length: 11
-    uuid: 29f527ed-4dcc-4c46-af98-454e92eb47fa
+    uuid: ffa525b2-be95-474d-8a4c-6861d71117d2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_minas_fixed
   - id: 244555
     prefix: '59844402'
     number_min_length: 11
     number_max_length: 11
-    uuid: a60aedc2-954b-4451-91e9-dd61393a4b07
+    uuid: bd7dc3c3-50e8-4bc1-9c74-81795619a1e3
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_minas_fixed
   - id: 244556
     prefix: '59844406'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0d9c9e6b-c6f4-4c1c-8b9d-c66c136ecba0
+    uuid: a8128c00-28de-4873-a2bc-107c69f19fed
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_aigua_fixed
   - id: 244557
     prefix: '59844408'
     number_min_length: 11
     number_max_length: 11
-    uuid: 05da9dd6-b1eb-43b0-b8f5-6b78f953f153
+    uuid: d95fdade-8d5f-4d58-9b57-a00040c0c98b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_piraraja_fixed
   - id: 244558
     prefix: '59844409'
     number_min_length: 11
     number_max_length: 11
-    uuid: f8580820-06a8-4773-8c5d-9d3be893ac12
+    uuid: 32bb6c98-5d10-4682-b69c-33499d0c40bb
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_mariscala_fixed
   - id: 244563
     prefix: '5984446'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b279b52-21fc-446d-8047-c4dcb2cc11f4
+    uuid: 2f4bcf66-bceb-45b1-a82d-f26a593e050d
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_aigua_fixed
   - id: 244565
     prefix: '5984447'
     number_min_length: 11
     number_max_length: 11
-    uuid: 205b21bf-eba5-4d24-a207-0e904a822239
+    uuid: 11527e08-4c8f-4d96-8892-608b4ce2de5e
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_solis_de_mataojo_fixed
   - id: 244567
     prefix: '5984448'
     number_min_length: 11
     number_max_length: 11
-    uuid: 37373da7-f174-4e22-92d7-7000032187ae
+    uuid: 09d2983c-012d-4b71-aa01-42fa2afa6777
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_piraraja_fixed
   - id: 244569
     prefix: '5984449'
     number_min_length: 11
     number_max_length: 11
-    uuid: 16cad1f4-6975-4735-9efe-5fe2e26bbd86
+    uuid: 32776c93-8604-48f1-84d6-8643b8aac3eb
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_mariscala_fixed
   - id: 244572
     prefix: '598445'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9db67f33-0537-4d7f-a427-e992e003f952
+    uuid: 3b53950f-95d9-46d4-a185-adb1ed718ca4
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_treinta_y_tres_fixed
   - id: 244573
     prefix: '59844502'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cff9a23-f157-415f-ab51-ebb7f07378f2
+    uuid: 1928edc5-f097-4f4f-95a6-ac72571e701e
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_treinta_y_tres_fixed
   - id: 244574
     prefix: '59844505'
     number_min_length: 11
     number_max_length: 11
-    uuid: 413d7963-aed6-4568-a0ff-dc709ad96b0f
+    uuid: e61d5e15-dad6-491d-8afe-a2254b3be9b1
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_jose_pedro_varela_fixed
   - id: 244575
     prefix: '59844506'
     number_min_length: 11
     number_max_length: 11
-    uuid: 08f60180-d0ff-4f12-ab78-8326d9da0ea6
+    uuid: 2ef81a7c-8061-4fa8-bc39-580eeedcc9c6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_lascano_fixed
   - id: 244576
     prefix: '59844507'
     number_min_length: 11
     number_max_length: 11
-    uuid: ed874aa2-c3a7-4af9-8634-0b0bf301d206
+    uuid: 4e8eb028-e2c0-4047-865e-0803be4137ef
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_velazquez_fixed
   - id: 244577
     prefix: '59844508'
     number_min_length: 11
     number_max_length: 11
-    uuid: 04aaca55-9675-4f41-84b6-c520f4c00693
+    uuid: 61121147-2c60-4d87-b7e1-6b81c05fc4db
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_vergara_fixed
   - id: 244578
     prefix: '59844509'
     number_min_length: 11
     number_max_length: 11
-    uuid: c7a5d7a0-4bb2-4f49-a7be-61f00c437a93
+    uuid: e27cbd9d-497b-45d2-91db-293ce957972f
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_cebollati_fixed
   - id: 244579
     prefix: '5984455'
     number_min_length: 11
     number_max_length: 11
-    uuid: 925a8e20-9757-4b15-b17d-426a20f95c47
+    uuid: d91af717-f395-4149-8910-80605e5e0ca5
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_jose_pedro_varela_fixed
   - id: 244580
     prefix: '5984456'
     number_min_length: 11
     number_max_length: 11
-    uuid: 44bebbbd-5208-450f-9c3b-28afd3cc014a
+    uuid: 47fedc1b-8766-4bef-a8ca-df1a646887a5
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_lascano_fixed
   - id: 244581
     prefix: '5984457'
     number_min_length: 11
     number_max_length: 11
-    uuid: a5c52684-7c16-4aad-a194-bd1e27a18d90
+    uuid: 4f7ad261-193c-4d4a-9505-170f6a2dec2b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_velazquez_fixed
   - id: 244582
     prefix: '5984458'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9e7604bb-3317-409f-9eb9-e687564e534a
+    uuid: 1caafd5d-d98d-4970-bd0f-6ff0d018093e
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_vergara_fixed
   - id: 244583
     prefix: '5984459'
     number_min_length: 11
     number_max_length: 11
-    uuid: aa252814-9da8-4675-a0e5-f141339e0970
+    uuid: 5bbe8b6d-8794-474e-abb0-ade68d1ccb6f
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_enrique_martinez_fixed
   - id: 244587
     prefix: '59844603'
     number_min_length: 11
     number_max_length: 11
-    uuid: d5ae0fbe-6a7d-4141-b038-29c22f0ec73d
+    uuid: b37595a9-a10e-4c86-a9e7-60a88f831a86
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_zapican_fixed
   - id: 244588
     prefix: '59844604'
     number_min_length: 11
     number_max_length: 11
-    uuid: 734d8175-3a39-4891-b849-491bb1703034
+    uuid: e556acf7-b337-40b8-b563-8e7a803e7cd6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_santa_clara_de_olimar_fixed
   - id: 244589
     prefix: '59844606'
     number_min_length: 11
     number_max_length: 11
-    uuid: 93d2c61c-06b9-4e26-93f6-9a0ea02635f5
+    uuid: 4b763a97-1ba2-418d-af32-dfd64ffb1017
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_cerro_chato_fixed
   - id: 244590
     prefix: '59844609'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3b4cb2a5-0304-4252-9535-11c6645a2324
+    uuid: 87ec35bc-ed51-4905-96fa-b3f0087fe4de
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_jose_battle_y_ordonez_fixed
   - id: 244591
     prefix: '5984463'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4aaee7f8-203b-4a45-8feb-8012131910d7
+    uuid: 42f299c7-9200-4302-ae0d-1a895a82ab9c
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_zapican_fixed
   - id: 244592
     prefix: '5984464'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8375d4c8-1574-4a10-bec1-9263e814503b
+    uuid: 614ccf10-3f58-4234-b78a-1194716689a2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_santa_clara_de_olimar_fixed
   - id: 244593
     prefix: '5984466'
     number_min_length: 11
     number_max_length: 11
-    uuid: ed3c1153-215e-497c-83d7-a28ab20b0eb6
+    uuid: fa61277a-d9d5-4caa-933b-0e9c75de17cd
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_cerro_chato_fixed
   - id: 244594
     prefix: '5984469'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0a2345e3-e189-412c-8e01-d53ff455db5c
+    uuid: 380670f1-d5ea-4bc8-8977-8197ed4cb9c5
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_battle_y_ordonez_fixed
   - id: 244598
     prefix: '598447'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9df169b-e67f-4248-b3b6-2af2d2df8c43
+    uuid: bae1891b-f408-40fe-aaf8-5ef1fe61d7ca
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rocha_fixed
   - id: 244599
     prefix: '59844702'
     number_min_length: 11
     number_max_length: 11
-    uuid: a699bb56-853d-4ae0-9336-4c7d639930a9
+    uuid: f45b2698-fbc5-48b3-827b-cba1020e6671
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rocha_fixed
   - id: 244600
     prefix: '59844704'
     number_min_length: 11
     number_max_length: 11
-    uuid: c2f559b0-71f0-4250-94db-86ce603520e6
+    uuid: f87d9d39-f8e9-4d84-8b89-f574f41976fc
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_chuy_fixed
   - id: 244601
     prefix: '59844705'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5f44e6e4-2320-45cf-a6f7-8b5c7233b5bf
+    uuid: f9b1bec4-a8ef-4895-90c1-adba17e0892a
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_castillos_fixed
   - id: 244602
     prefix: '59844706'
     number_min_length: 11
     number_max_length: 11
-    uuid: cb0bb24f-163a-47a6-8b87-41c04cb2588a
+    uuid: 64095ebe-0e70-4dc1-8efe-c2abdbecf69f
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_la_coronilla_fixed
   - id: 244603
     prefix: '59844707'
     number_min_length: 11
     number_max_length: 11
-    uuid: d2fc545a-656b-4446-a525-fc3043501d36
+    uuid: 7a2aed59-fa9c-460d-b3dc-d15af3ea2583
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_santa_teresa_fixed
   - id: 244604
     prefix: '59844709'
     number_min_length: 11
     number_max_length: 11
-    uuid: dbbecf42-fd24-43f7-b5c4-7ecb0a9b4ff0
+    uuid: c6e3e0f8-28ee-438c-9e06-cf8a6ec103d4
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_la_paloma_fixed
   - id: 244605
     prefix: '5984474'
     number_min_length: 11
     number_max_length: 11
-    uuid: 385ce037-c857-41f6-bfab-e5ac4101cc3d
+    uuid: 98abbd68-86e6-4ce9-84f6-7d25c09140ab
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_chuy_fixed
   - id: 244606
     prefix: '5984475'
     number_min_length: 11
     number_max_length: 11
-    uuid: 38662cb5-8a7f-42da-adc2-de7fdf9c3741
+    uuid: edc7666b-17af-4eb3-ba1d-57d7a3cdec41
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_castillos_fixed
   - id: 244607
     prefix: '5984476'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c522bf0-38d6-446f-9d61-17f33fab914a
+    uuid: 0dba2621-01d0-4d0c-a8d9-edfa07e6e624
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_la_coronilla_fixed
   - id: 244608
     prefix: '5984477'
     number_min_length: 11
     number_max_length: 11
-    uuid: 06c0759f-e886-41ab-a803-016202215a05
+    uuid: 2f7e1159-5212-44fc-b52d-18e7cd68d603
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_santa_teresa_fixed
   - id: 244609
     prefix: '5984479'
     number_min_length: 11
     number_max_length: 11
-    uuid: ce8a8418-9c74-4bab-b5dd-ee9100460e8a
+    uuid: 0dee3287-eb30-4998-953b-1cbaf671eaf6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_la_paloma_fixed
   - id: 244614
     prefix: '59844806'
     number_min_length: 11
     number_max_length: 11
-    uuid: 36e1204d-4966-4329-8388-410ee3265e82
+    uuid: 95bae94b-293b-4cf1-bbd2-f90b051c55c4
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_faro_jose_ignacio_fixed
   - id: 244617
     prefix: '5984486'
     number_min_length: 11
     number_max_length: 11
-    uuid: adee7080-2202-470a-b686-49f5cb1756ca
+    uuid: b7d0d223-f956-4965-9771-546c2cadfd44
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_faro_jose_ignacio_fixed
   - id: 244624
     prefix: '59844902'
     number_min_length: 11
     number_max_length: 11
-    uuid: 58136ee4-2c78-4a4f-a5ab-c7d62600b4de
+    uuid: 15fca59f-511f-493b-9baa-8c7075d0e202
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_piriapolis_fixed
   - id: 244664
     prefix: '598452'
     number_min_length: 11
     number_max_length: 11
-    uuid: d6c38128-78bb-4431-abd3-0c3dfe30030a
+    uuid: 7705dd03-649c-457c-aa2f-dd2b928aff08
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_colonia_fixed
   - id: 244667
     prefix: '59845202'
     number_min_length: 11
     number_max_length: 11
-    uuid: 82d1a3b9-e1e9-4e1b-b524-2ccab5b5fe0f
+    uuid: b2bda91f-8688-438f-9e43-73b9cd9c1da1
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_colonia_fixed
   - id: 244668
     prefix: '59845204'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2ce033b2-fad4-4195-a4bb-777c68e25917
+    uuid: 6d46782e-cfb4-468f-9d04-06f6a57a78c9
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tarariras_fixed
   - id: 244669
     prefix: '59845208'
     number_min_length: 11
     number_max_length: 11
-    uuid: bce482c8-d50c-4fad-8580-b091fa312e3f
+    uuid: fb3805a3-fdba-4484-a64b-cfc4af86b182
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_santa_ana_fixed
   - id: 244680
     prefix: '598453'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6ed905c8-3f5a-4907-afe0-10305070175b
+    uuid: b4b8bfa2-4101-4f43-9e24-7f98cfffb5d5
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_mercedes_fixed
   - id: 244683
     prefix: '59845302'
     number_min_length: 11
     number_max_length: 11
-    uuid: 48dce576-8a34-4552-9154-36a33d55ed48
+    uuid: 0a62843a-17ab-44d8-968e-2c0e97a452a8
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_mercedes_fixed
   - id: 244684
     prefix: '59845304'
     number_min_length: 11
     number_max_length: 11
-    uuid: 596c4f6b-4a0b-4e29-8e8d-cbe394b61a69
+    uuid: eb9f622f-5578-4022-b5bf-30a12d841696
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_dolores_fixed
   - id: 244685
     prefix: '59845306'
     number_min_length: 11
     number_max_length: 11
-    uuid: 66901a23-8ec7-4c64-9d58-65fc5680a976
+    uuid: 70dd9860-4a6b-4fb2-8109-af916c20f3da
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_cardona_fixed
   - id: 244686
     prefix: '59845307'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0acda8b4-89ca-464b-a44a-d173cb6b3000
+    uuid: 8c52861f-a930-4146-9a68-8159160e3eb3
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_palmitas_fixed
   - id: 244687
     prefix: '59845308'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cc8a1c1-7f23-4ec4-9403-36dbde032ec7
+    uuid: 1ac69cef-30f9-4f8b-84b9-c53289bd5c33
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_jose_enrique_rodo_fixed
   - id: 244688
     prefix: '59845309'
     number_min_length: 11
     number_max_length: 11
-    uuid: d621d12d-3993-4e0f-b8d7-2f8ba3a41f6e
+    uuid: 7760c62a-2a97-4330-8c83-ccbd32b0119b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_ismael_cortinas_fixed
   - id: 244697
     prefix: '5984534'
     number_min_length: 11
     number_max_length: 11
-    uuid: 569a8a4a-dfa8-4363-9c1e-5ac71723ed76
+    uuid: 34769c27-3864-4a59-8fd1-529c537d1399
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_dolores_fixed
   - id: 244707
     prefix: '5984536'
     number_min_length: 11
     number_max_length: 11
-    uuid: fa853502-4056-47c6-9707-f929404a27e2
+    uuid: 05625cbe-eb51-4ddf-9816-65bbb3c963e8
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_cardona_fixed
   - id: 244709
     prefix: '5984537'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8a493e77-3c80-46c9-912c-34cdb34c7108
+    uuid: ad02d1ec-b053-43e8-8280-188eda8dadca
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_palmitas_fixed
   - id: 244712
     prefix: '5984538'
     number_min_length: 11
     number_max_length: 11
-    uuid: ccac10c7-edab-4feb-887f-af205c76cfb2
+    uuid: 83893a06-b1b8-436f-a2de-3d73b7d990d2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_jose_enrique_rodo_fixed
   - id: 244715
     prefix: '5984539'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e4dc842-5ab9-4d49-8c0f-99fe0fee4b69
+    uuid: cb973b29-488d-42c2-8e42-f7ffaeccf71e
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_ismael_cortinas_fixed
   - id: 244719
     prefix: '59845402'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1ba47987-553d-451e-b6cd-ca399bb988df
+    uuid: 2b2dafa0-fbc1-4271-bec0-51dbddb4c283
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_carmelo_fixed
   - id: 244720
     prefix: '59845404'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cb0b5f2-90da-481f-a5e4-9fe83f48307e
+    uuid: 546e8267-ebfb-4ade-ba47-2c775f90aa88
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_nueva_palmira_fixed
   - id: 244722
     prefix: '5984542'
     number_min_length: 11
     number_max_length: 11
-    uuid: 787e4b1c-6c70-452d-b675-a03902c2b09b
+    uuid: 42215856-c57c-4f23-8075-b4508f63d7f2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_carmelo_fixed
   - id: 244725
     prefix: '5984544'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3c2dffe8-3e3b-4cb1-ba32-f59d8c4ef469
+    uuid: d8c72515-4c25-4928-93b4-45a52c94a7cf
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_nueva_palmira_fixed
   - id: 244741
     prefix: '598455'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9c1213a0-7e5e-475a-9fe8-09f1a1d2a500
+    uuid: 880880c5-465b-4d22-a917-07816ace5119
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rosario_fixed
   - id: 244744
     prefix: '59845502'
     number_min_length: 11
     number_max_length: 11
-    uuid: f92442f5-8048-4a5a-a4ea-e7a7447dfa6b
+    uuid: f6defd25-1fc2-4985-aaf0-e8ae2e87027a
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rosario_fixed
   - id: 244746
     prefix: '59845506'
     number_min_length: 11
     number_max_length: 11
-    uuid: 050692dd-980c-429b-9845-b1ccf4865c95
+    uuid: 52136faf-7195-49d7-8891-fe6e470f42ba
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_juan_lacaze_fixed
   - id: 244747
     prefix: '59845507'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6c440db2-803d-4174-a1ea-e232056c08d6
+    uuid: e1d9dc1b-614b-4530-890c-a2f66afbb107
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_playa_fomento_fixed
   - id: 244780
     prefix: '598456'
     number_min_length: 11
     number_max_length: 11
-    uuid: 754612f3-53be-432e-a016-cd952b2df58a
+    uuid: 1dce0054-dbb9-4488-a2d9-94458ae5ae32
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_fray_bentos_fixed
   - id: 244781
     prefix: '59845602'
     number_min_length: 11
     number_max_length: 11
-    uuid: c89d83ee-1a78-405b-800c-a24a04ffc6e3
+    uuid: cb15be3f-e9af-4ecb-9a02-063595a0f3cd
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_fray_bentos_fixed
   - id: 244782
     prefix: '59845606'
     number_min_length: 11
     number_max_length: 11
-    uuid: 84f0347f-f76a-4f4b-8662-bebad8196e24
+    uuid: f0986a90-97b2-4fca-a5a8-8f594432de2f
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_greco_guichon_fixed
   - id: 244783
     prefix: '59845607'
     number_min_length: 11
     number_max_length: 11
-    uuid: fff3f3e1-f4c8-45fb-9fcf-7eaf2a978b54
+    uuid: 0bbd44e1-a08f-4026-97fe-90d29c3b4d62
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_young_fixed
   - id: 244784
     prefix: '59845608'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1d540f0a-1900-4418-8a2e-0b44f71073b0
+    uuid: 8af04126-c132-4eca-b67e-3a9fa3e889a9
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_nuevo_berlin_fixed
   - id: 244785
     prefix: '59845609'
     number_min_length: 11
     number_max_length: 11
-    uuid: 788ce7b5-1cb3-443e-9be5-0bfa6c0181bc
+    uuid: 96c011b7-8699-4833-8527-212679d51d0e
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_javier_fixed
   - id: 244794
     prefix: '5984567'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0fa4f376-c348-404b-97b0-72e5a2f5e969
+    uuid: 6ae7b2c1-5689-4aed-a1f3-9d7aced9b73d
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_young_fixed
   - id: 244795
     prefix: '5984568'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f7a7c0c-7a5f-441b-b7b5-7f4ce5e7d6ed
+    uuid: 379f5b44-2910-4572-8662-e47efa08c936
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_nuevo_berlin_fixed
   - id: 244796
     prefix: '5984569'
     number_min_length: 11
     number_max_length: 11
-    uuid: e64bc65e-f744-4edc-b781-22105ae0cd4d
+    uuid: f0d44dee-1d3d-4430-afc8-c370edb4c8ff
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_san_javier_fixed
   - id: 247445
     prefix: '5982'
     number_min_length: 11
     number_max_length: 11
-    uuid: f2fba514-c9e9-4ada-9f56-2601f0b45660
+    uuid: 134d825a-be3e-479e-bb8f-9bf32ba4ff3b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_montevideo_area_metropolitana_amm_fixed
   - id: 249031
     prefix: '59845705'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6771e6f3-ac5e-4426-a19b-f1e33c93407c
+    uuid: 9c54ab45-8ab1-4c73-ae6e-ee778d10df31
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_miguelete_fixed
   - id: 249032
     prefix: '59845706'
     number_min_length: 11
     number_max_length: 11
-    uuid: 04e63d69-dc6d-4c03-919f-431309b893ab
+    uuid: ad9126f6-46ab-483e-a5ab-f41893ffe355
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_ombues_de_lavalle_fixed
   - id: 249033
     prefix: '59845707'
     number_min_length: 11
     number_max_length: 11
-    uuid: ecf9f2a5-536c-4bca-8f8e-eae410468fee
+    uuid: 799317bc-a41f-4b90-b00a-3962b91505f2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_conchillas_fixed
   - id: 249038
     prefix: '5984574'
     number_min_length: 11
     number_max_length: 11
-    uuid: f2cfea55-b7dc-4845-8186-881c84bf9fa1
+    uuid: 94c18661-453b-47b5-a1d5-6042dda7127b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tarariras_fixed
   - id: 249040
     prefix: '5984575'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7801ee5d-f864-46b7-950e-eaa656ef7028
+    uuid: 3fe8b558-bc02-40cc-bea9-df917258f1ed
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_colonia_miguelete_fixed
   - id: 249043
     prefix: '5984576'
     number_min_length: 11
     number_max_length: 11
-    uuid: e103db52-6c83-498c-b828-5bac98d05878
+    uuid: 95004d16-0b22-4e29-8f46-a7c508ac46c2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_ombues_de_lavalle_fixed
   - id: 249046
     prefix: '5984577'
     number_min_length: 11
     number_max_length: 11
-    uuid: a2f9ca32-badc-4ff9-8762-b9563d7cc252
+    uuid: 0bec1906-3c2c-408c-8016-76322e937de2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_conchillas_fixed
   - id: 249060
     prefix: '5984586'
     number_min_length: 11
     number_max_length: 11
-    uuid: b460d736-a921-431a-9274-0a6530161dca
+    uuid: 3545e875-f721-4555-959d-f59609405488
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_juan_lacaze_fixed
   - id: 249062
     prefix: '5984587'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65ad7b11-594b-470e-8ab6-f06a82738295
+    uuid: f6b4c7e5-b1ae-4410-b8db-ac4bcf14b479
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_playa_fomento_fixed
   - id: 249064
     prefix: '5984588'
     number_min_length: 11
     number_max_length: 11
-    uuid: f93b45e8-fdb3-4592-8e80-d7220a44d521
+    uuid: 92e3aeee-2ab9-4abb-a99e-95f6fb5d7653
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_santa_ana_fixed
   - id: 249135
     prefix: '598462'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9c400a6d-61f9-4e22-b1eb-7f1dc00c3b07
+    uuid: 44610237-69a0-4a48-b19c-fcd7f1a2b27e
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rivera_fixed
   - id: 249138
     prefix: '59846202'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0c33a5ba-69b8-4d19-9d2e-cb1b643cdd4c
+    uuid: 41469d19-53d3-4236-a7ed-7fcc103c6b88
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rivera_fixed
   - id: 249164
     prefix: '598463'
     number_min_length: 11
     number_max_length: 11
-    uuid: 60d50804-23e6-4709-84dc-67006b2e03f2
+    uuid: c6d750f3-3f6a-41f0-9878-4b2d60cee989
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tacuarembo_fixed
   - id: 249166
     prefix: '59846302'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a129610-3e62-4736-a5dd-4596daca41af
+    uuid: 8abcba23-f80e-47ab-9e90-002583ee1c6d
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tacuarembo_fixed
   - id: 249167
     prefix: '59846308'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7e62ee9e-72b0-43f2-b044-1ad5e2e24cfc
+    uuid: e6266835-7cd4-4b36-b3f2-c1eac6f1f2fb
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tambores_tacuarembo_fixed
   - id: 249168
     prefix: '59846309'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1c06eb2a-3665-41ae-b12c-22476ed4508a
+    uuid: 9517310e-cb75-4165-8331-f69d64994596
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_ansina_minas_de_corrales_fixed
   - id: 249175
     prefix: '598464'
     number_min_length: 11
     number_max_length: 11
-    uuid: 13808bb7-b493-4cf8-967f-6abe164edb91
+    uuid: 110fe124-99c6-484b-8ac5-c8aa6105cfe5
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_melo_fixed
   - id: 249177
     prefix: '59846402'
     number_min_length: 11
     number_max_length: 11
-    uuid: 56747133-cde4-4bbc-95d0-e4368c181853
+    uuid: 3248233d-a432-4a2c-b064-2fd41fa2278a
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_melo_fixed
   - id: 249178
     prefix: '59846404'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4c0e686f-a214-4a1e-9556-ce32f45952a6
+    uuid: 5974e373-8f45-4f9e-953f-7e17d9aae294
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_arevalo_santa_clara_fixed
   - id: 249179
     prefix: '59846409'
     number_min_length: 11
     number_max_length: 11
-    uuid: 431fd363-859e-4da4-954d-14fd2ebd0afe
+    uuid: aa9ea515-ed43-4abe-8126-b8030b4183ea
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_acegua_vichadero_fixed
   - id: 249196
     prefix: '59846504'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8dc38d74-5bca-400b-819f-9a20cb9ae74b
+    uuid: 91a85f81-e703-471f-b389-89a6344985fa
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_vichadero_fixed
   - id: 249197
     prefix: '59846506'
     number_min_length: 11
     number_max_length: 11
-    uuid: b8286dd1-25c1-4aec-bca0-bc8f06ac6f0a
+    uuid: 8f2bba7f-f86b-4d91-ae02-3004a946df61
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tranqueras_fixed
   - id: 249198
     prefix: '59846508'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1acabc8a-d272-4282-b453-87cc599c2f8c
+    uuid: 8e518e05-936e-4a20-b57a-f5b3bd645da5
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_minas_de_corrales_fixed
   - id: 249207
     prefix: '5984654'
     number_min_length: 11
     number_max_length: 11
-    uuid: ec1db4c7-7a5d-408d-8652-fa8e5d228311
+    uuid: b395f902-aefc-4911-9d7a-4c7eb27049c2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_vichadero_fixed
   - id: 249212
     prefix: '5984656'
     number_min_length: 11
     number_max_length: 11
-    uuid: 24c5a517-e70a-44ea-9aaf-89336db5dd69
+    uuid: 58443f68-0bf2-4802-a851-78af9c4a6171
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tranqueras_fixed
   - id: 249217
     prefix: '5984658'
     number_min_length: 11
     number_max_length: 11
-    uuid: 80160448-0cd5-40d3-ab43-ea176a1d8d04
+    uuid: ce04e4ec-9b7d-44e1-a3bd-270a6a0c39e4
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_minas_de_corrales_fixed
   - id: 249226
     prefix: '59846604'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae467ba2-9386-4e67-bede-cc5760901a26
+    uuid: 2c416b9f-f0cb-45ac-b9cd-052c40622c87
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_paso_de_los_toros_fixed
   - id: 249236
     prefix: '5984664'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8ed2cbf3-88bd-4f7c-adab-c094ccedebf9
+    uuid: 292e2bac-e2cd-451e-9675-5d0e915cb3bd
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_paso_de_los_toros_fixed
   - id: 249248
     prefix: '59846705'
     number_min_length: 11
     number_max_length: 11
-    uuid: a459a2b0-118c-4a87-bcc3-7c336d414bd1
+    uuid: d4e0c3d1-db92-4c3b-8dcc-8cc385c79d90
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rio_branco_fixed
   - id: 249249
     prefix: '59846709'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3e197de1-63f0-41e3-b5ea-501df61a60a6
+    uuid: 841e9d54-1c8f-4a4c-b2d4-f8c9520f4b99
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_lago_merin_fixed
   - id: 249259
     prefix: '5984675'
     number_min_length: 11
     number_max_length: 11
-    uuid: cc75aa86-e941-4c83-ace2-900636612dec
+    uuid: 861e7b57-79e4-4322-b5ff-e63c01ed76ad
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_rio_branco_fixed
   - id: 249268
     prefix: '5984679'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7aa194cc-be9b-46f9-bb84-b6fbc41dbaf2
+    uuid: c47ecbb1-068e-4ae4-987e-f38658925721
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_lago_merin_fixed
   - id: 249271
     prefix: '59846808'
     number_min_length: 11
     number_max_length: 11
-    uuid: 08a679d3-3aae-441f-886e-d8b25b498498
+    uuid: e9f9acd4-2ec2-4b73-a619-555d9134a7cc
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_fraile_muerto_fixed
   - id: 249275
     prefix: '5984688'
     number_min_length: 11
     number_max_length: 11
-    uuid: de4e21a9-8086-45c3-a211-c4cacbdee120
+    uuid: 08e58b5d-53a2-4e67-afd2-1b0915c76cc1
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_fraile_muerto_fixed
   - id: 249325
     prefix: '598472'
     number_min_length: 11
     number_max_length: 11
-    uuid: 397a9d97-1928-419c-9c66-3e28e8914473
+    uuid: 87ec6062-a05a-41d1-b1c5-4e69545c46e5
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_paysandu_fixed
   - id: 249326
     prefix: '59847202'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5272b975-5b1a-4a5c-b9a0-64f1695f7bd0
+    uuid: 32aeea14-1753-40d0-8823-7ab4caadd01f
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_paysandu_fixed
   - id: 249328
     prefix: '598473'
     number_min_length: 11
     number_max_length: 11
-    uuid: 47e17cc0-82ec-44b1-8378-35a75c7adfd6
+    uuid: 4f489c7f-70e9-40ea-ba5b-c0b81b7ec795
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_salto_fixed
   - id: 249329
     prefix: '59847302'
     number_min_length: 11
     number_max_length: 11
-    uuid: 04d8606f-532f-48cd-9a1b-86eb939506a0
+    uuid: c5cedcde-0e89-4b7a-95b6-94d2881021f8
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_salto_fixed
   - id: 249330
     prefix: '59847304'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6fb37dcb-671e-4243-8ff4-8bc6cf0403be
+    uuid: b05f8b59-e818-4289-994a-bc26ed143cea
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_valentin_termas_de_dayman_fixed
   - id: 249333
     prefix: '59847402'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3adbddcb-c286-4590-8847-fc856f1e709b
+    uuid: e3a4197c-fbfe-402d-91c7-2f8b325e94a6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_guichon_fixed
   - id: 249334
     prefix: '59847407'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f72a255-dd20-4031-9ed5-61f5e3e0faa1
+    uuid: facbd3cf-abe4-48b4-8018-db1e362b2927
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_piedras_colorados_fixed
   - id: 249339
     prefix: '5984742'
     number_min_length: 11
     number_max_length: 11
-    uuid: 28fdbfc1-dc14-484f-bf2e-c1cafe5ab1c6
+    uuid: bc763edd-39f8-4a34-b16b-cf055138ea54
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_guichon_fixed
   - id: 249350
     prefix: '5984747'
     number_min_length: 11
     number_max_length: 11
-    uuid: e8e5673c-f71a-471c-bb59-264849db7cb1
+    uuid: f0379de8-9745-46e8-ad8d-d0fd526407e6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_piedras_coloradas_fixed
   - id: 249357
     prefix: '59847504'
     number_min_length: 11
     number_max_length: 11
-    uuid: f487a7bc-af74-48ae-82c0-fd99538b13d1
+    uuid: 9aa38e55-9d6d-4785-8c54-29da89d15596
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_quebracho_fixed
   - id: 249362
     prefix: '5984754'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2c9173a0-c612-4fcd-a3de-734d9d38ede3
+    uuid: b04b2d91-b754-40f4-84d4-2c64b0dc796c
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_quebracho_fixed
   - id: 249370
     prefix: '59847604'
     number_min_length: 11
     number_max_length: 11
-    uuid: b4a4130a-d4a9-48fd-8081-abbe7ea9e52b
+    uuid: 23a42904-82f4-404a-9ed3-432b6c9ea010
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_constitucion_fixed
   - id: 249371
     prefix: '59847606'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b4db08b-d166-4a1a-bef4-7dc43d9bc58b
+    uuid: d61865ee-70ef-4932-b988-28ecb06da8b3
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_belen_fixed
   - id: 249376
     prefix: '5984764'
     number_min_length: 11
     number_max_length: 11
-    uuid: 612be5ad-2061-48af-a134-1174ec5952a7
+    uuid: 4c92840d-769c-4f06-9f97-026d25eef69a
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_constitucion_fixed
   - id: 249379
     prefix: '5984766'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4c964082-54b3-43b8-9f27-ff75aca68df5
+    uuid: f0c4066b-e36e-4b7c-a603-4321926a1ed3
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_belen_fixed
   - id: 249382
     prefix: '5984768'
     number_min_length: 11
     number_max_length: 11
-    uuid: a2dbd754-ae47-45d6-a0de-30fc0ae1340a
+    uuid: e3c22890-d38b-46dc-a887-1b4d06f2e877
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_termas_del_arapey_fixed
   - id: 249385
     prefix: '598477'
     number_min_length: 11
     number_max_length: 11
-    uuid: 68480a2a-bec7-4d0d-b61f-40f5164e18ee
+    uuid: b2089987-5969-4708-95e9-6393406e2356
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_artigas_fixed
   - id: 249387
     prefix: '59847702'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6ded4e96-7ed4-4d74-9e67-48eb95bdcfc4
+    uuid: 1cd27094-c49f-4570-898b-80e45fdcc4af
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_artigas_fixed
   - id: 249388
     prefix: '59847704'
     number_min_length: 11
     number_max_length: 11
-    uuid: 398a22ed-4bc4-4c76-a1f4-1f9eaac66839
+    uuid: 7395c6dd-9c55-447e-a0fc-96353cb148f2
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_mataojito_tranqueras_fixed
   - id: 249389
     prefix: '59847705'
     number_min_length: 11
     number_max_length: 11
-    uuid: d03440ac-0355-4eb9-886d-13d042b48852
+    uuid: 7f917f58-6e1c-4ce1-83c0-bbcac39fc47f
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_termas_del_arapey_fixed
   - id: 249390
     prefix: '59847706'
     number_min_length: 11
     number_max_length: 11
-    uuid: bda18684-e47d-4e05-9ac7-abeca2643bd1
+    uuid: 01d67b80-6bd6-485e-b7a4-5af003fec92b
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_baltasar_brum_fixed
   - id: 249391
     prefix: '59847707'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8caf7b78-1c9e-4c65-a8d0-e8335e852ad9
+    uuid: b79eeda0-e99e-48c7-b21c-a6e85f5a759e
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tomas_gomensoro_fixed
   - id: 249392
     prefix: '59847708'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1bdaf594-a272-49eb-9c6b-49ef86fb8855
+    uuid: 12bb363a-d65a-469c-9777-366c5f707d31
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_mones_quintela_fixed
   - id: 249393
     prefix: '59847709'
     number_min_length: 11
     number_max_length: 11
-    uuid: f86db28e-76b6-4dd2-a826-f0a44bee85e9
+    uuid: fa8f332e-8508-4744-932c-d63e471b71a0
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_bella_union_fixed
   - id: 249400
     prefix: '5984776'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5ea97f49-3a11-4c1e-b9f6-bffdd35d7616
+    uuid: b8365f34-bb44-4cc7-a37f-aaa471888a26
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_baltasar_brum_fixed
   - id: 249402
     prefix: '5984777'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3ea65799-cc3c-48d5-84db-1ea8e508f942
+    uuid: 5db87ea2-2d0f-47ac-99e8-72abf9affdc6
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_tomas_gomensoro_fixed
   - id: 249404
     prefix: '5984778'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19a1d9c7-0d2a-4b90-9a1e-f5dfdab3d3fc
+    uuid: 7366020e-30b8-445d-bbd1-55ea0bf8817a
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_mones_quintela_fixed
   - id: 249406
     prefix: '5984779'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55801981-bdd1-47b2-95d0-e615ba21bd9d
+    uuid: 15752f99-79f7-43ef-8bf7-47206c8b60c8
     country_id: *uy
-    network_id: *uy_fixed
+    network_id: *uy_bella_union_fixed

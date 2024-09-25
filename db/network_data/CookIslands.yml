@@ -1,23 +1,71 @@
 country_id: &ck 51
 networks:
 # Supplementary services Networks
-  - id: &ck_special_services 5097
+  - id: &ck_special_services 21273
     name: CK Special Services
-    uuid: bb31acf5-2094-4acd-bdf0-d095740606a4
+    uuid: 44ae1fd1-0435-4278-8c04-ba3b48ae8057
     type_id: 14
-  - id: &ck_emergency_services 7074
+  - id: &ck_emergency_services 24547
     name: CK Emergency Services
-    uuid: fca3e4b9-b34a-48c1-9b49-0509e2897452
+    uuid: 72bb7d58-cf02-40e4-8223-73413b185cd0
     type_id: 14
 # Fixed Networks
-  - id: &ck_fixed 5666
-    name: CK Fixed
-    uuid: d1cf48ce-ec5c-4f92-aac5-24f91bcd3ef7
+  - id: &ck_aitutaki_fixed 21899
+    name: CK Aitutaki Fixed
+    uuid: 284616cb-b464-4a98-8ce8-1d133bf0a26e
+    type_id: 12
+  - id: &ck_atiu_fixed 21956
+    name: CK Atiu Fixed
+    uuid: 344417de-a71c-4c20-a6ed-22a7aab4b932
+    type_id: 12
+  - id: &ck_mangaia_fixed 21996
+    name: CK Mangaia Fixed
+    uuid: b0b327ad-7f48-4f05-b784-83f5ae9a4ad1
+    type_id: 12
+  - id: &ck_mauke_fixed 22028
+    name: CK Mauke Fixed
+    uuid: ec78d2b0-38b6-43b3-88ee-93456812b6d3
+    type_id: 12
+  - id: &ck_mitiaro_fixed 22060
+    name: CK Mitiaro Fixed
+    uuid: e0df7141-b26d-415a-afc1-8246c4d2c9ec
+    type_id: 12
+  - id: &ck_palmerston_fixed 22077
+    name: CK Palmerston Fixed
+    uuid: d752f863-c1ac-487c-8093-ad22f5d8fcfd
+    type_id: 12
+  - id: &ck_pukapuka_fixed 22188
+    name: CK Pukapuka Fixed
+    uuid: be335aa0-fedb-4a1c-a8dd-d1091e684c07
+    type_id: 12
+  - id: &ck_penrhyn_fixed 22218
+    name: CK Penrhyn Fixed
+    uuid: 1bbb7e38-cd7d-4b39-a0c6-c9cc10c53a20
+    type_id: 12
+  - id: &ck_manihiki_fixed 22243
+    name: CK Manihiki Fixed
+    uuid: 1c99f88a-5c0d-4d27-80b7-36f183a538f3
+    type_id: 12
+  - id: &ck_rakahanga_fixed 22306
+    name: CK Rakahanga Fixed
+    uuid: 5381bafb-8353-4fd3-b870-74f52ffa25d2
+    type_id: 12
+  - id: &ck_nassau_fixed 22383
+    name: CK Nassau Fixed
+    uuid: 091656bb-4a96-4bad-bb24-19104344cc71
+    type_id: 12
+  - id: &ck_voice_mail_fixed 22492
+    name: CK Voice Mail Fixed
+    uuid: b57d2c31-6ad1-443b-a017-346d1e38a103
+    type_id: 12
+  - id: &ck_rarotonga_fixed 22711
+    name: CK Rarotonga Fixed
+    uuid: bdd2b4b3-c45d-4cbd-a3e6-2fbcac5706cc
     type_id: 12
 # Mobile Networks
-  - id: &ck_bluesky_mobile 5852
+  - id: &ck_bluesky_mobile 22465
     name: CK Bluesky Mobile
-    uuid: 46f3ba6e-0de3-4b3f-96c1-4d131177d68a
+    uuid: b2fb8898-a8d3-40da-81ec-d6abfb733f22
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -25,7 +73,7 @@ network_prefixes:
     prefix: '682'
     number_min_length: 4
     number_max_length: 100
-    uuid: 1d9ec42a-37b8-4d50-b3cf-92d2dba2979c
+    uuid: fa7de1a2-2141-4fac-ab01-dba72d44e9b9
     country_id: *ck
     network_id: null
 # Supplementary services Prefixes
@@ -33,21 +81,21 @@ network_prefixes:
     prefix: '6820'
     number_min_length: 6
     number_max_length: 6
-    uuid: 94fe6492-6f7c-448e-abbc-61c0c6493460
+    uuid: 01b25204-9234-4e93-bb8a-1fe6e12c7ae5
     country_id: *ck
     network_id: *ck_special_services
   - id: 242376
     prefix: '6821'
     number_min_length: 6
     number_max_length: 6
-    uuid: 15f8757a-9afd-4444-8799-28df31895a24
+    uuid: 50ca2715-2627-48de-b275-77441f95b17a
     country_id: *ck
     network_id: *ck_special_services
   - id: 258303
     prefix: '682999'
     number_min_length: 6
     number_max_length: 6
-    uuid: bedab903-4d2a-4d2d-893e-634397868b48
+    uuid: 0a23a320-430e-4b69-9167-4f1898a640d4
     country_id: *ck
     network_id: *ck_emergency_services
 # Fixed Prefixes
@@ -55,182 +103,182 @@ network_prefixes:
     prefix: '68231'
     number_min_length: 8
     number_max_length: 8
-    uuid: 360e414b-22ef-43a0-84ef-2d750b398be0
+    uuid: 02a9e9ac-c108-436c-a88a-4787225ddad0
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_aitutaki_fixed
   - id: 243359
     prefix: '68232'
     number_min_length: 8
     number_max_length: 8
-    uuid: 7092389c-7df7-4318-ae2b-c73d9f429db2
+    uuid: c015d1dc-2248-4e05-add1-c3e1054a523d
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_aitutaki_fixed
   - id: 243406
     prefix: '68233'
     number_min_length: 8
     number_max_length: 8
-    uuid: 7bb077bf-a23d-4d0e-a0fe-f75807a0381f
+    uuid: 83e0ec99-4fc2-485a-9765-ca3789e6f6be
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_atiu_fixed
   - id: 243483
     prefix: '68234'
     number_min_length: 8
     number_max_length: 8
-    uuid: 9b2854f9-f1c7-42ec-a227-2640ffa86fd3
+    uuid: 9fe9e0a3-dd70-48a9-b205-c2c2f9c283c0
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_mangaia_fixed
   - id: 243581
     prefix: '68235'
     number_min_length: 8
     number_max_length: 8
-    uuid: 786bbf20-e3a7-4e31-aa4a-0a48d3717d6a
+    uuid: 3a99e2eb-acbf-4508-ac4b-0eefb487598d
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_mauke_fixed
   - id: 243660
     prefix: '68236'
     number_min_length: 8
     number_max_length: 8
-    uuid: 3906b98f-7734-4fa5-a967-3785eea5b563
+    uuid: 8ddfa515-dc5f-4672-810c-c8812bd9e45d
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_mitiaro_fixed
   - id: 243705
     prefix: '68237'
     number_min_length: 8
     number_max_length: 8
-    uuid: 049ac677-4421-4633-8cde-3ec845dc748a
+    uuid: 8833d048-325c-41e0-80d8-12354aa22631
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_palmerston_fixed
   - id: 244128
     prefix: '68241'
     number_min_length: 8
     number_max_length: 8
-    uuid: efee333e-f902-4734-b9b4-921c6ad9b32b
+    uuid: e69bd70c-21ca-4595-abd5-0409f00de2d4
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_pukapuka_fixed
   - id: 244229
     prefix: '68242'
     number_min_length: 8
     number_max_length: 8
-    uuid: 1610d956-5def-499a-a7f4-daaa24999e5a
+    uuid: d3a8cb84-2209-4cd5-bec3-c8ddbe666e7e
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_penrhyn_fixed
   - id: 244329
     prefix: '68243'
     number_min_length: 8
     number_max_length: 8
-    uuid: 829a40f7-2d42-42c4-9d7b-ec1c68ec76b1
+    uuid: db1eab3d-4b64-4e03-9b82-239903e7d126
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_manihiki_fixed
   - id: 244483
     prefix: '68244'
     number_min_length: 8
     number_max_length: 8
-    uuid: 45157750-e50b-41c2-b272-25ed043e3918
+    uuid: 83c9cd33-58be-48af-82a2-76b3d605922d
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_rakahanga_fixed
   - id: 244628
     prefix: '68245'
     number_min_length: 8
     number_max_length: 8
-    uuid: 4d1373b3-2dfc-4f7f-97ae-cbc4c9e8a4dd
+    uuid: 93569cef-fe0b-4739-8ce4-53aec5a63b73
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_nassau_fixed
   - id: 245251
     prefix: '68259'
     number_min_length: 8
     number_max_length: 8
-    uuid: 035da5c2-6197-4e5d-b999-a56e7e8f74ca
+    uuid: e6111beb-f72f-4d77-8049-78a280946d2d
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_voice_mail_fixed
   - id: 247394
     prefix: '6822'
     number_min_length: 8
     number_max_length: 8
-    uuid: ab7aba98-594e-4dbc-ab33-170f8e2e4ecd
+    uuid: f8684720-47c9-4023-ab1e-800b9307b3bc
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_rarotonga_fixed
   - id: 250235
     prefix: '68257'
     number_min_length: 8
     number_max_length: 8
-    uuid: d69a536e-56d6-4221-a66b-4bfc8ac5d2b5
+    uuid: 01cd188e-34e3-491c-b9d7-031c99d82620
     country_id: *ck
-    network_id: *ck_fixed
+    network_id: *ck_voice_mail_fixed
 # Mobile Prefixes
   - id: 245149
     prefix: '68258'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0ae430b6-a20e-4862-8302-2162dbd53dd6
+    uuid: efc321ce-8b9a-4474-98d4-d7cf4e566085
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 245312
     prefix: '682591'
     number_min_length: 8
     number_max_length: 8
-    uuid: cace79f5-5ae9-4ab8-8776-f42f83675087
+    uuid: 963036c2-6ef5-4a12-9adc-b384ca61833c
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 249615
     prefix: '68250'
     number_min_length: 8
     number_max_length: 8
-    uuid: 545499a4-e4b1-426d-b286-5bbb19fc5d3d
+    uuid: 422fbbba-eb56-49ab-84bc-0a8fc27ad688
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 249690
     prefix: '68251'
     number_min_length: 8
     number_max_length: 8
-    uuid: 34703104-392a-45dd-b77c-eb5111a80fb1
+    uuid: fc71f625-3e73-42d6-ae4b-0e5580269861
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 249761
     prefix: '68252'
     number_min_length: 8
     number_max_length: 8
-    uuid: ce5df93c-6227-4d77-880d-8e4268900150
+    uuid: cccd5c68-ddfc-44e7-a750-60bb5557bf8b
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 249919
     prefix: '68253'
     number_min_length: 8
     number_max_length: 8
-    uuid: 9be69648-2c53-48fb-837c-99891e19e988
+    uuid: 67d9d4ad-b319-495e-b2e7-57437743b155
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 250011
     prefix: '68254'
     number_min_length: 8
     number_max_length: 8
-    uuid: 876b8fea-266b-4df3-966f-3f6fbdd52a3d
+    uuid: e1376a8e-23c1-4d91-8663-8d4d1de44298
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 250107
     prefix: '68255'
     number_min_length: 8
     number_max_length: 8
-    uuid: f9968f62-9ec9-4ba1-9160-3bd006255a0d
+    uuid: 02a25162-8573-4673-9629-c808c1c77bf4
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 250193
     prefix: '68256'
     number_min_length: 8
     number_max_length: 8
-    uuid: a9331b1b-a605-4e9f-a8ac-1ac9dc2661e4
+    uuid: 7e67f91f-d0ca-44f2-a876-9f8fda3afc13
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 255240
     prefix: '6827'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0af85a25-3844-4b8f-9bf6-dd60e225e6f9
+    uuid: 3bce003f-1664-4add-a4dc-f8b1f06f7c73
     country_id: *ck
     network_id: *ck_bluesky_mobile
   - id: 256668
     prefix: '6828'
     number_min_length: 8
     number_max_length: 8
-    uuid: a7257127-cb1f-4c02-abf3-f7aecf69bda0
+    uuid: 219c3ae5-f0d6-47dd-9c83-a0f2d27274f4
     country_id: *ck
     network_id: *ck_bluesky_mobile

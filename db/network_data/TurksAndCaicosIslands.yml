@@ -1,23 +1,75 @@
 country_id: &tc 219
 networks:
 # Mobile Networks
-  - id: &tc_flow_mobile 4490
+  - id: &tc_flow_mobile 13446
     name: TC Flow Mobile
-    uuid: 0671b716-f1df-4c94-a2ba-4b7a4eea388c
+    uuid: 96a5fbe2-7542-4eab-a1bd-dff44d2aff55
     type_id: 3
-  - id: &tc_digicel_mobile 4492
+  - id: &tc_digicel_mobile 13448
     name: TC Digicel Mobile
-    uuid: e6803fa1-0a08-47c9-a643-9c2c54521b7d
+    uuid: 54815feb-119d-44c7-ae11-ff82e9bec630
     type_id: 3
 # Fixed Networks
-  - id: &tc_fixed 4491
+  - id: &tc_dial_up_internet_access_fixed 13447
+    name: TC Dial_Up Internet Access Fixed
+    uuid: 1a91f29e-5c7b-4e8c-8720-9736ae5c723f
+    type_id: 12
+  - id: &tc_fixed 13450
     name: TC Fixed
-    uuid: f28d7703-a7a7-4b87-8ebb-553a9be705a4
+    uuid: 3042a01c-7161-475e-80f6-02bdda3d2cea
+    type_id: 12
+  - id: &tc_voip_fixed 13451
+    name: TC Voip Fixed
+    uuid: 37572bdd-dfa1-435c-90e2-1f3d08cf7f21
+    type_id: 12
+  - id: &tc_east_caicos_fixed 13452
+    name: TC East Caicos Fixed
+    uuid: 6db09ecf-495d-4c47-b3ac-d6351e58adf1
+    type_id: 12
+  - id: &tc_providenciales_fixed 13453
+    name: TC Providenciales Fixed
+    uuid: 26788064-cf9e-4988-aa2d-2b5a8fe6174d
+    type_id: 12
+  - id: &tc_ambergris_cay_fixed 13454
+    name: TC Ambergris Cay Fixed
+    uuid: f65849ae-822e-49f0-8f24-e040cf42e87c
+    type_id: 12
+  - id: &tc_south_caicos_fixed 13455
+    name: TC South Caicos Fixed
+    uuid: 0e2c22fe-a134-43f6-afe2-f3f650fca10f
+    type_id: 12
+  - id: &tc_middle_caicos_fixed 13456
+    name: TC Middle Caicos Fixed
+    uuid: 27376102-b1a7-4fbe-8729-66f4b45b2e55
+    type_id: 12
+  - id: &tc_salt_cay_fixed 13457
+    name: TC Salt Cay Fixed
+    uuid: 2426168f-f87a-4eab-bb85-ae25745a1a6f
+    type_id: 12
+  - id: &tc_grand_turk_fixed 13458
+    name: TC Grand Turk Fixed
+    uuid: f899e819-f114-484c-b798-fb2cd7b100fa
+    type_id: 12
+  - id: &tc_north_caicos_fixed 13459
+    name: TC North Caicos Fixed
+    uuid: 67ca5840-7f35-4c37-982f-bf2dacad89d6
+    type_id: 12
+  - id: &tc_pine_cay_fixed 13460
+    name: TC Pine Cay Fixed
+    uuid: 887f599a-7733-45f0-a5cb-af36378cc573
+    type_id: 12
+  - id: &tc_parrot_cay_fixed 13461
+    name: TC Parrot Cay Fixed
+    uuid: 161e5904-3195-4bfc-bf48-dd8ca1eddd6e
+    type_id: 12
+  - id: &tc_west_caicos_fixed 13462
+    name: TC West Caicos Fixed
+    uuid: 5dd1e201-c9ac-4327-ae4e-511dd289148e
     type_id: 12
 # Supplementary services Networks
-  - id: &tc_audiotext 4493
+  - id: &tc_audiotext 13449
     name: TC Audiotext
-    uuid: 71e42753-fbd0-49aa-9e61-beea9aea7891
+    uuid: b83f9573-bb63-4de7-bd04-8efc89793ad2
     type_id: 14
 network_prefixes:
 # Country code Prefixes
@@ -25,7 +77,7 @@ network_prefixes:
     prefix: '1649'
     number_min_length: 2
     number_max_length: 100
-    uuid: f2d1ea63-084b-4864-911c-f3c5e3b15bb6
+    uuid: 910ec0dd-0e2e-4108-9404-6e0bee9fc6f3
     country_id: *tc
     network_id: null
 # Mobile Prefixes
@@ -33,196 +85,196 @@ network_prefixes:
     prefix: '1649231'
     number_min_length: 11
     number_max_length: 11
-    uuid: efbd1f29-b7ff-42d7-bb8e-afefa87a7ab5
+    uuid: a681f522-2370-4737-8ea8-2edcaa25a1cf
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135846
     prefix: '1649232'
     number_min_length: 11
     number_max_length: 11
-    uuid: 985df01a-483b-46a8-b5fa-a44c51c8dcbf
+    uuid: 7ee3d28e-f5a6-4a51-ac26-ea71f08524ac
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135847
     prefix: '1649239'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9f1f1ca9-1655-488d-8b01-388b23c60dd4
+    uuid: 51b354a6-a26d-4602-815b-ac54ebaea2d9
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135848
     prefix: '1649241'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5701d621-3696-42cc-bcc4-2b269d56b95a
+    uuid: 2d5a0879-bbbc-4c3c-a3b9-2903baa55eaa
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135849
     prefix: '1649242'
     number_min_length: 11
     number_max_length: 11
-    uuid: 14daf62f-4f75-43f8-93b5-bdc1ef8131fb
+    uuid: 188cb02e-03e0-4747-b25e-0aa4fb1f6a21
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135850
     prefix: '1649243'
     number_min_length: 11
     number_max_length: 11
-    uuid: 92944b0d-c2aa-410a-a0b4-06b22f8a6110
+    uuid: 3372c9a0-9f61-4949-be44-d923f80e1874
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135851
     prefix: '1649244'
     number_min_length: 11
     number_max_length: 11
-    uuid: 53d8ed9a-ae49-40dc-b5e5-bb6001c5e613
+    uuid: 781f8575-0d97-4e9f-b9d7-ad8c55f7a518
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135852
     prefix: '1649245'
     number_min_length: 11
     number_max_length: 11
-    uuid: 47f0d4d4-1dd4-4484-824c-d2d05e7f4769
+    uuid: f4a50502-fc79-4191-a3c5-59b7c3666421
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135853
     prefix: '1649246'
     number_min_length: 11
     number_max_length: 11
-    uuid: 817f8472-a586-4a52-ba32-258206d707eb
+    uuid: b08ab22e-fe61-4a27-b728-f07d1d551214
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135854
     prefix: '1649247'
     number_min_length: 11
     number_max_length: 11
-    uuid: db5d3e70-d021-4a7d-a67e-33dc41230ee2
+    uuid: 36bdda6c-363b-471a-9c96-db5b7c8c1320
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135856
     prefix: '1649331'
     number_min_length: 11
     number_max_length: 11
-    uuid: a1652d59-a2bb-4771-85b6-4612f5db8e5b
+    uuid: a53b831f-a294-414d-a3b4-c13e40a21d89
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135857
     prefix: '1649332'
     number_min_length: 11
     number_max_length: 11
-    uuid: f8e59c25-b66f-4e86-8bde-69f8275d8491
+    uuid: e9ff4467-8d53-46aa-9fe4-5b77caae8463
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135858
     prefix: '1649333'
     number_min_length: 11
     number_max_length: 11
-    uuid: 21bf4116-9cf9-4220-9ec1-9c0a0634f206
+    uuid: 4b799fa3-9aeb-43b3-847c-ffba9d9cfb98
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135859
     prefix: '1649338'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9ca967b9-a7f1-4c0f-b407-8f8d89e4484f
+    uuid: f9c2238e-37bc-4139-a57d-d2c004d640af
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135860
     prefix: '1649339'
     number_min_length: 11
     number_max_length: 11
-    uuid: 02c70225-129a-42c8-956b-4671350cfc23
+    uuid: d09b6886-4caf-4e1e-8cdf-233dc82b93c7
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135861
     prefix: '1649341'
     number_min_length: 11
     number_max_length: 11
-    uuid: c6062c3f-f832-4872-9dc0-1daafe15f6b4
+    uuid: 939f1f3c-ad10-4d71-9ce0-30c4508d299c
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135862
     prefix: '1649342'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6cf2d98a-4f4d-4658-a221-98da0c20af69
+    uuid: 75a20158-24c1-48d6-a0e7-1346f184b68f
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135863
     prefix: '1649343'
     number_min_length: 11
     number_max_length: 11
-    uuid: 194c6d48-bf32-4d8c-8871-e3d268d9966b
+    uuid: be4f3714-901f-45a8-9160-a3a804cd77de
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135864
     prefix: '1649344'
     number_min_length: 11
     number_max_length: 11
-    uuid: a718f0ce-cdbe-4bf9-819a-3ef97b8cc59e
+    uuid: b0637fe1-2e42-4596-9728-09b4c7e35900
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135865
     prefix: '1649345'
     number_min_length: 11
     number_max_length: 11
-    uuid: 389fa400-9f5e-4e0c-a518-ffdc88f309de
+    uuid: 82e994b0-a81f-4557-ab66-8dfd6f1bbaa7
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135866
     prefix: '1649346'
     number_min_length: 11
     number_max_length: 11
-    uuid: 293b141f-6fe4-44c5-bd62-d01d299435e1
+    uuid: 2c9842c6-dcdb-4977-902a-133d8e8d00f2
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135867
     prefix: '1649348'
     number_min_length: 11
     number_max_length: 11
-    uuid: 10ae0bec-faf6-4957-b2c7-fe28674fb7d1
+    uuid: 4c7a1075-3649-401f-8586-5e42f3179dcd
     country_id: *tc
     network_id: *tc_digicel_mobile
   - id: 135878
     prefix: '1649431'
     number_min_length: 11
     number_max_length: 11
-    uuid: dcd750bc-3ea1-4e44-8c68-c3e4b1ef5c53
+    uuid: cf7b6c92-c0e9-4e4d-89f1-149d0eca9adc
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135879
     prefix: '1649432'
     number_min_length: 11
     number_max_length: 11
-    uuid: ccb7ffcf-fb44-4238-b393-a7ef325fbc3f
+    uuid: 71d03c1e-32c8-4ff8-b2f0-3ab536e3393d
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135880
     prefix: '1649433'
     number_min_length: 11
     number_max_length: 11
-    uuid: ce04b71f-f20d-4c8d-a5e9-8ec5be9781ec
+    uuid: d7824a1d-e9cf-47ad-8cc8-fa1703b0ecd8
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135881
     prefix: '1649441'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5638746e-0110-42df-8da1-392b580a2c41
+    uuid: 7c88810e-2f2c-4842-8d1e-db1913a5ed15
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135882
     prefix: '1649442'
     number_min_length: 11
     number_max_length: 11
-    uuid: adf7ffdf-fc1e-4cf7-83c4-69aa626e6b35
+    uuid: 5b5e416c-9024-4d24-a191-a663d537030d
     country_id: *tc
     network_id: *tc_flow_mobile
   - id: 135883
     prefix: '1649443'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3148c981-d8b6-4b23-b75b-03c58baf7dc3
+    uuid: 31b84905-e187-4f12-8e2e-77cc07ab2fe0
     country_id: *tc
     network_id: *tc_flow_mobile
 # Fixed Prefixes
@@ -230,133 +282,133 @@ network_prefixes:
     prefix: '1649266'
     number_min_length: 11
     number_max_length: 11
-    uuid: f5527ff0-0aa6-44e1-ab40-4b7c3b0f9872
+    uuid: 522aded5-2f5b-4e5b-8150-1e028530a699
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_dial_up_internet_access_fixed
   - id: 135887
     prefix: '1649710'
     number_min_length: 11
     number_max_length: 11
-    uuid: a30e0a95-7922-4e88-b5e6-72be4a23e05f
+    uuid: 5bd833f1-0f3a-4670-8c1b-29ad809265fd
     country_id: *tc
     network_id: *tc_fixed
   - id: 135888
     prefix: '1649711'
     number_min_length: 11
     number_max_length: 11
-    uuid: a7b240ba-0130-46d2-8f33-2e9612ec2f9b
+    uuid: f0063e8f-efbd-4cc1-a8d7-8f5101fa0e30
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_voip_fixed
   - id: 135889
     prefix: '1649712'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ec55b97-2b55-4d62-9b38-03ab9445536f
+    uuid: ff30915e-ab0f-45fe-939e-662290c03a1d
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_voip_fixed
   - id: 135890
     prefix: '1649940'
     number_min_length: 11
     number_max_length: 11
-    uuid: 38c8a360-990e-497a-b2f6-37b886f769d3
+    uuid: ca41c3ab-c445-4537-8c5b-9661553fd8bc
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_east_caicos_fixed
   - id: 135891
     prefix: '1649941'
     number_min_length: 11
     number_max_length: 11
-    uuid: f5a75b47-0486-4cf0-9aec-33d6f13fdc27
+    uuid: 710b0437-4540-489b-bb79-29746a7ae7a1
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_providenciales_fixed
   - id: 135892
     prefix: '1649942'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4715d5e4-d693-4cb1-ad6a-7abfd1e2dd48
+    uuid: 8c761f11-15e3-4471-89dc-3722ee5b7783
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_ambergris_cay_fixed
   - id: 135893
     prefix: '1649943'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a0bdaa0-b67b-469b-8d35-2b273f03a940
+    uuid: d07d4488-28f3-414a-aed8-322d2ce82c2f
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_south_caicos_fixed
   - id: 135894
     prefix: '1649944'
     number_min_length: 11
     number_max_length: 11
-    uuid: 78815ff0-fa39-4628-b4bc-7e904521ffc2
+    uuid: 44d22433-196a-4a9a-b810-e0b38d52b70c
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_middle_caicos_fixed
   - id: 135895
     prefix: '1649945'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4e6f5a8a-819f-4d5b-a6d6-508cbe1e1ce3
+    uuid: 6d4c979f-527b-4f81-a88b-69beffe3d7e0
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_salt_cay_fixed
   - id: 135896
     prefix: '1649946'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f0bddb7-7c1e-4f16-8d8e-4d2c451da2e2
+    uuid: 31c3cbfb-6014-4939-a56f-8a667cf0121d
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_grand_turk_fixed
   - id: 135897
     prefix: '1649947'
     number_min_length: 11
     number_max_length: 11
-    uuid: 914a9b22-3f92-4fe5-9278-ea3484fdc8f6
+    uuid: 5d23d5f3-ee15-4376-b986-86625c0650c6
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_north_caicos_fixed
   - id: 135898
     prefix: '1649948'
     number_min_length: 11
     number_max_length: 11
-    uuid: 891017ed-59b1-44fd-a012-c72289b35022
+    uuid: 7ad5f66f-4ac0-442c-a165-9a4bf93a72b1
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_pine_cay_fixed
   - id: 135899
     prefix: '1649949'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b93187e-9b4f-48e7-a509-c06c302eceb8
+    uuid: e36d622d-3c5b-43b0-adee-3e2c97933def
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_parrot_cay_fixed
   - id: 135900
     prefix: '1649950'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0efb9b93-d014-411e-bb26-8048d6869e89
+    uuid: 4e729f37-5d25-414e-8ad4-9d8f12cf2f27
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_west_caicos_fixed
   - id: 135901
     prefix: '1649966'
     number_min_length: 11
     number_max_length: 11
-    uuid: a7e41bf8-d2ec-4001-bf71-2dcaeb103325
+    uuid: 2aabc393-094b-4d7c-b1bb-a4fbd189b233
     country_id: *tc
-    network_id: *tc_fixed
+    network_id: *tc_voip_fixed
 # Supplementary services Prefixes
   - id: 135884
     prefix: '1649444'
     number_min_length: 11
     number_max_length: 11
-    uuid: 72c6477e-038f-4207-9263-20fc93219a5b
+    uuid: 910b5f2f-7d53-4719-bbdf-327e1449a7e4
     country_id: *tc
     network_id: *tc_audiotext
   - id: 135885
     prefix: '1649445'
     number_min_length: 11
     number_max_length: 11
-    uuid: 638aa312-1435-4a01-96df-26961cb2b1ce
+    uuid: 3bc31782-d599-4faa-a4bc-c3171fb51d0a
     country_id: *tc
     network_id: *tc_audiotext
   - id: 135886
     prefix: '1649446'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1c214fef-dd5d-4f80-82dc-71cd3f58d8f4
+    uuid: 3da8e37e-cb45-496c-b0e3-d91c4f3f62c2
     country_id: *tc
     network_id: *tc_audiotext

@@ -1,42 +1,62 @@
 country_id: &cd 264
 networks:
 # Fixed Networks
-  - id: &cd_fixed 4267
-    name: CD Fixed
-    uuid: e470f526-ec51-4540-a17d-9c2c6bf482a6
+  - id: &cd_kisanga_mbandaka_fixed 7945
+    name: CD Kisanga Mbandaka Fixed
+    uuid: b1f126f0-7338-46fb-bbe5-5174275daecf
+    type_id: 12
+  - id: &cd_maniema_nord_kivu_sud_kivu_fixed 13469
+    name: CD Maniema Nord_Kivu Sud_Kivu Fixed
+    uuid: 49179dea-77d1-4705-a409-7e725647b72d
+    type_id: 12
+  - id: &cd_kinshasa_fixed 24875
+    name: CD Kinshasa Fixed
+    uuid: 32a3d544-46b1-4db4-8e1a-3b482490b125
+    type_id: 12
+  - id: &cd_katanga_fixed 29830
+    name: CD Katanga Fixed
+    uuid: f6b4abec-d268-46d2-bb1e-6297950ef28e
+    type_id: 12
+  - id: &cd_bandundu_bas_congo_fixed 34637
+    name: CD Bandundu Bas_Congo Fixed
+    uuid: 1770be68-836a-4726-a117-e8310518c2bc
+    type_id: 12
+  - id: &cd_kasai_fixed 37893
+    name: CD Kasai Fixed
+    uuid: 477e8118-54c4-472c-9574-74061ff597de
     type_id: 12
 # Mobile Networks
-  - id: &cd_mobile 4319
+  - id: &cd_mobile 9270
     name: CD Mobile
-    uuid: cdbf369c-c2e7-4735-a5d9-a5d0dea38843
+    uuid: 24062f0b-dea1-4d3a-9d47-6b461bd516bb
     type_id: 3
-  - id: &cd_supercell_mobile 4937
+  - id: &cd_supercell_mobile 19836
     name: CD Supercell Mobile
-    uuid: 33ccc530-f295-45bf-ad44-10fc3ecc0468
+    uuid: 71385db2-2e83-4ed5-b871-0456a3916210
     type_id: 3
-  - id: &cd_airtel_mobile 5028
+  - id: &cd_airtel_mobile 20571
     name: CD Airtel Mobile
-    uuid: c2e4cb69-0c21-4c74-b6a4-832bb0687a37
+    uuid: 17b4ccb0-8452-4bdd-980e-a07d3c2b9e46
     type_id: 3
-  - id: &cd_vodacom_mobile 7652
+  - id: &cd_vodacom_mobile 39311
     name: CD Vodacom Mobile
-    uuid: 602b776a-b4da-4e93-b4b1-11036a9c9832
+    uuid: 669c624c-29af-4aeb-b111-e2b05b185fb1
     type_id: 3
-  - id: &cd_orange_mobile 7678
+  - id: &cd_orange_mobile 40853
     name: CD Orange Mobile
-    uuid: ed276bc2-2373-4072-8ee0-7670f7a3839c
+    uuid: 996a2784-0e27-44ad-be29-a0bce548516e
     type_id: 3
-  - id: &cd_tatem_mobile 7712
+  - id: &cd_tatem_mobile 41361
     name: CD Tatem Mobile
-    uuid: 1f1e341e-4bdc-460a-9241-8819f118de41
+    uuid: 6f6552fa-9ded-4ea8-adfd-10639e86ba87
     type_id: 3
-  - id: &cd_yozma_timeturns_mobile 7716
+  - id: &cd_yozma_timeturns_mobile 41564
     name: CD Yozma Timeturns Mobile
-    uuid: 8568bc03-9446-4e6a-ae8e-4e426f041ff5
+    uuid: 328e68e9-04eb-4011-8a5d-84570e122ad4
     type_id: 3
-  - id: &cd_africell_mobile 7817
+  - id: &cd_africell_mobile 42060
     name: CD Africell Mobile
-    uuid: 70b5ee54-40c7-458d-969a-07ccb3fe2697
+    uuid: fef9a775-3932-43c4-b285-72e0aa07680b
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -44,253 +64,253 @@ network_prefixes:
     prefix: '24355'
     number_min_length: 11
     number_max_length: 11
-    uuid: 15244945-470a-4283-8b66-223311256528
+    uuid: ca04316e-7c78-4d98-960d-4d0fbdb3c1de
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_kisanga_mbandaka_fixed
   - id: 135909
     prefix: '24365'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7f8014b6-ab99-495b-b555-1ad2d5585bd0
+    uuid: 5baaed00-33cf-4263-b181-d92bbc20e14f
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_maniema_nord_kivu_sud_kivu_fixed
   - id: 259236
     prefix: '243120'
     number_min_length: 12
     number_max_length: 12
-    uuid: f79bbfc2-1cb3-4baa-9a64-6a3b7791542a
+    uuid: 4f2ec6ba-0c17-4034-b330-03cb741a1dae
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_kinshasa_fixed
   - id: 259237
     prefix: '243121'
     number_min_length: 12
     number_max_length: 12
-    uuid: 64c3268b-5471-4a9f-86de-ad7a40636d80
+    uuid: faae89f7-d4d6-4406-a26c-bbcf30d28b21
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_kinshasa_fixed
   - id: 266065
     prefix: '24315'
     number_min_length: 11
     number_max_length: 11
-    uuid: 098cff13-c13a-4331-9f6b-c9517e74a508
+    uuid: 3e7d724d-f504-4efb-8912-be32a1115401
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_kinshasa_fixed
   - id: 301964
     prefix: '24325'
     number_min_length: 11
     number_max_length: 11
-    uuid: a09be838-893e-4e8c-9b9f-84f2f7ec3ddd
+    uuid: 2acacef9-6860-43b6-ad6c-ec29f9d6dbbb
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_katanga_fixed
   - id: 349443
     prefix: '2434'
     number_min_length: 10
     number_max_length: 10
-    uuid: 06130738-c4eb-4c2c-9d8e-826190733dca
+    uuid: 233829e7-f7f9-442b-bae3-04ed7dc7a17f
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_kinshasa_fixed
   - id: 352231
     prefix: '24335'
     number_min_length: 11
     number_max_length: 11
-    uuid: a155060c-9f0f-4abe-afe1-7ed6f3321afa
+    uuid: 09eaf202-0083-4bd4-ab03-4923e3161872
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_bandundu_bas_congo_fixed
   - id: 392612
     prefix: '24345'
     number_min_length: 11
     number_max_length: 11
-    uuid: 46d96691-e357-4246-b810-7e7e532a1459
+    uuid: 052f74a1-2c14-4a24-a43a-8f874cd58136
     country_id: *cd
-    network_id: *cd_fixed
+    network_id: *cd_kasai_fixed
 # Mobile Prefixes
   - id: 87910
     prefix: '24356'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4c9e348f-58ad-4854-917f-f43f71794df6
+    uuid: c80c4f5a-add9-4390-8ed3-b96b1e1b799c
     country_id: *cd
     network_id: *cd_mobile
   - id: 90289
     prefix: '243573'
     number_min_length: 13
     number_max_length: 13
-    uuid: 48387707-2ee7-46d2-8a25-e90c3d978dc1
+    uuid: 81729b8f-d59e-4ba9-a97b-62e7da31a2c5
     country_id: *cd
     network_id: *cd_mobile
   - id: 146938
     prefix: '243687'
     number_min_length: 10
     number_max_length: 10
-    uuid: e1ab6475-d58c-472b-bc15-d51d94a2bdd4
+    uuid: b042194d-7c24-42e3-961f-89dc894cab77
     country_id: *cd
     network_id: *cd_mobile
   - id: 192216
     prefix: '243772'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9ff776e1-76a0-4583-a733-e05e1b5101d8
+    uuid: e9e0347e-31fc-436d-9406-7cbcd23b34b3
     country_id: *cd
     network_id: *cd_mobile
   - id: 207782
     prefix: '24380'
     number_min_length: 12
     number_max_length: 12
-    uuid: ad00a9f5-0da4-4870-a879-f5a6019a03fc
+    uuid: f409aabc-3c33-458a-ae57-c4029a12490a
     country_id: *cd
     network_id: *cd_supercell_mobile
   - id: 227361
     prefix: '24397'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1a7e196e-522a-4ab6-9fe0-f7ee48bbcaf1
+    uuid: ee0dfd53-5e76-4a35-92f7-c8156f2a3a8e
     country_id: *cd
     network_id: *cd_airtel_mobile
   - id: 231730
     prefix: '24398'
     number_min_length: 12
     number_max_length: 12
-    uuid: 10b8dcd7-a48a-4336-bfd9-a6c395c5ce74
+    uuid: 6b3a400a-f1f3-456b-9d69-5cf77c67eb5d
     country_id: *cd
     network_id: *cd_airtel_mobile
   - id: 239366
     prefix: '24399'
     number_min_length: 12
     number_max_length: 12
-    uuid: 90ee1241-f405-421c-afbd-e63511cee7c3
+    uuid: feb453d9-0dd5-4c4f-b029-f8a5e448c71e
     country_id: *cd
     network_id: *cd_airtel_mobile
   - id: 294348
     prefix: '243243'
     number_min_length: 10
     number_max_length: 10
-    uuid: 61484e0d-2c17-4a3f-8bf6-2d81330ba94a
+    uuid: c8c85b8c-5431-4deb-9769-f55a2b1dd1e7
     country_id: *cd
     network_id: *cd_mobile
   - id: 294351
     prefix: '243246'
     number_min_length: 10
     number_max_length: 10
-    uuid: eb40f5f0-3b78-4a0d-bc34-410387f61197
+    uuid: 2e73ae01-3003-4f39-9755-3f06b199def6
     country_id: *cd
     network_id: *cd_mobile
   - id: 294352
     prefix: '243247'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2ee74dc5-4ac8-49c1-89d1-9988294574ba
+    uuid: 9457f4c6-611d-435e-bd13-43e43c5773dc
     country_id: *cd
     network_id: *cd_mobile
   - id: 296814
     prefix: '243254'
     number_min_length: 10
     number_max_length: 10
-    uuid: 24e207d3-6e6a-4ad0-a25b-ae6a400c300c
+    uuid: f8da1f3e-9017-4697-b3e0-b73a59938287
     country_id: *cd
     network_id: *cd_mobile
   - id: 296825
     prefix: '243256'
     number_min_length: 10
     number_max_length: 10
-    uuid: dcc525a0-c735-4dd0-ae2c-5d0dec823d06
+    uuid: 483a0869-1c14-4815-9efc-448e91d7ff20
     country_id: *cd
     network_id: *cd_mobile
   - id: 296828
     prefix: '243257'
     number_min_length: 10
     number_max_length: 10
-    uuid: 88b7fc61-9561-458d-90be-58eb5b5f10f1
+    uuid: 41b0806a-19e5-4704-b482-682064d7a860
     country_id: *cd
     network_id: *cd_mobile
   - id: 301444
     prefix: '243276'
     number_min_length: 11
     number_max_length: 11
-    uuid: b4b6e158-4470-43c6-8a00-26f028023fdb
+    uuid: 3dfb734b-4f9d-4c38-99e5-d9ccf389c05b
     country_id: *cd
     network_id: *cd_mobile
   - id: 301446
     prefix: '243277'
     number_min_length: 10
     number_max_length: 10
-    uuid: d91fe078-29dd-4ea7-9c0c-88bdcdf2a173
+    uuid: 60604966-ac8f-4744-8f90-004dff65a890
     country_id: *cd
     network_id: *cd_mobile
   - id: 301448
     prefix: '243278'
     number_min_length: 10
     number_max_length: 10
-    uuid: f5ccb8ba-3e27-4385-8ef4-e6a7dae18dbb
+    uuid: d5c3ec3e-68ee-428e-aa84-bc35c89bc83f
     country_id: *cd
     network_id: *cd_mobile
   - id: 355776
     prefix: '243373'
     number_min_length: 10
     number_max_length: 10
-    uuid: e1c5c52d-63d0-4b3a-9c63-98409279787d
+    uuid: cacbc471-040b-4e16-b575-e7ac808c5f9d
     country_id: *cd
     network_id: *cd_mobile
   - id: 370182
     prefix: '24344'
     number_min_length: 10
     number_max_length: 10
-    uuid: baae7e0a-6560-4de6-b90a-ba92150017e8
+    uuid: 5fc7c38c-5ff3-4b0e-bfdc-5b46fee915dd
     country_id: *cd
     network_id: *cd_mobile
   - id: 377227
     prefix: '243424'
     number_min_length: 10
     number_max_length: 10
-    uuid: 18a0e37d-ee5f-4f8e-9c70-38aba056f67b
+    uuid: 830907e9-cf8d-4918-bd5d-588735865753
     country_id: *cd
     network_id: *cd_mobile
   - id: 413671
     prefix: '24381'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1946d85e-bc68-4755-9bb8-bf676cf98106
+    uuid: fad5a3de-6db0-4b0c-9899-a372661fa906
     country_id: *cd
     network_id: *cd_vodacom_mobile
   - id: 418783
     prefix: '24382'
     number_min_length: 12
     number_max_length: 12
-    uuid: e39ad6a9-e3d5-4ac9-88ac-cd067e8cb0e4
+    uuid: b8d5e820-3876-44c6-ba14-ae5cbc30dcca
     country_id: *cd
     network_id: *cd_vodacom_mobile
   - id: 433209
     prefix: '24384'
     number_min_length: 12
     number_max_length: 12
-    uuid: e06bf6f4-8dcb-442e-9f81-ee387bfea627
+    uuid: 1b59b0cb-fce8-4f9b-a21c-d55ce0c1a88d
     country_id: *cd
     network_id: *cd_orange_mobile
   - id: 441102
     prefix: '24387'
     number_min_length: 12
     number_max_length: 12
-    uuid: d9c3bcf4-5cb9-4681-8b5a-12217c77a896
+    uuid: 029ec54e-0fe7-4c0a-93a4-f5a970aaee07
     country_id: *cd
     network_id: *cd_tatem_mobile
   - id: 443784
     prefix: '24388'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9b581543-b25b-406b-8184-9441a6395e7e
+    uuid: 0d8cdd3f-6e13-4895-96b6-a7018f1c3eff
     country_id: *cd
     network_id: *cd_yozma_timeturns_mobile
   - id: 451402
     prefix: '24389'
     number_min_length: 12
     number_max_length: 12
-    uuid: 411dcd17-2631-4a09-bf50-19c027df9a1a
+    uuid: 6fd6f1da-1e34-4ee9-90ec-483d21b2a5c6
     country_id: *cd
     network_id: *cd_orange_mobile
   - id: 454102
     prefix: '24390'
     number_min_length: 12
     number_max_length: 12
-    uuid: b07c0282-4a7f-4b2b-b544-e7fac206618f
+    uuid: 4a4ea87c-33d9-42d6-8402-5423d4773059
     country_id: *cd
     network_id: *cd_africell_mobile
 # Country code Prefixes
@@ -298,6 +318,6 @@ network_prefixes:
     prefix: '243'
     number_min_length: 4
     number_max_length: 100
-    uuid: 68d7d504-1038-4a28-8a88-bbb2deacb6e1
+    uuid: bfad05ea-dd04-42c1-b388-cce76fd7663b
     country_id: *cd
     network_id: null

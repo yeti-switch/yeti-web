@@ -1,39 +1,43 @@
 country_id: &ht 92
 networks:
 # Supplementary services Networks
-  - id: &ht_special_services 5242
+  - id: &ht_special_services 21418
     name: HT Special Services
-    uuid: 716207df-cbf3-4611-abc6-e786dc259a88
+    uuid: 27d72be0-86eb-46b4-b6ab-44862939a374
     type_id: 14
-  - id: &ht_value_added_services 6517
+  - id: &ht_value_added_services 23798
     name: HT Value Added Services
-    uuid: e1cc8104-6bd9-422f-b322-8ce09ae107a5
+    uuid: 81d2caa0-723a-412e-b687-babbfa6c0d95
     type_id: 14
-  - id: &ht_freephone_services 6562
+  - id: &ht_freephone_services 23846
     name: HT Freephone Services
-    uuid: b6c8680e-c317-4e26-9b00-b07962bac735
+    uuid: d50e52a5-104d-4bc5-96a8-8df822596a74
     type_id: 14
-  - id: &ht_emergency_services 7026
+  - id: &ht_emergency_services 24489
     name: HT Emergency Services
-    uuid: a03b61ec-ac8d-4fb6-a03f-ca95bdf3d3a5
+    uuid: e5866581-92d4-4c88-8fb5-76ebc9a48f1f
     type_id: 14
 # Mobile Networks
-  - id: &ht_digicel_mobile 5671
+  - id: &ht_digicel_mobile 21905
     name: HT Digicel Mobile
-    uuid: 875e3379-7c82-4926-b627-fc52dff9d08d
+    uuid: 539df86c-d46c-4375-bdda-9169f4d2e293
     type_id: 3
-  - id: &ht_natcom_mobile 5700
+  - id: &ht_natcom_mobile 21940
     name: HT Natcom Mobile
-    uuid: d07d4c4f-3fc5-4dcc-aa24-065a6263db73
+    uuid: ed61c8cc-fe8d-4709-8474-8c4d3d097fa0
     type_id: 3
-  - id: &ht_mobile 5766
+  - id: &ht_mobile 22132
     name: HT Mobile
-    uuid: 1a4f7977-45f4-4f53-a8c6-b28f1cbed5cf
+    uuid: fea05f6d-8285-44e1-9670-ee58bb35930f
     type_id: 3
 # Fixed Networks
-  - id: &ht_fixed 6061
+  - id: &ht_fixed 22719
     name: HT Fixed
-    uuid: 7cc79252-de96-462b-82f5-7a3d40a07d3d
+    uuid: 7f50cd0b-0c9c-4cb7-98df-7d4e532232cb
+    type_id: 12
+  - id: &ht_voip_fixed 24403
+    name: HT Voip Fixed
+    uuid: a37b67b8-85f2-4c81-be15-5364486537b9
     type_id: 12
 network_prefixes:
 # Country code Prefixes
@@ -41,7 +45,7 @@ network_prefixes:
     prefix: '509'
     number_min_length: 4
     number_max_length: 100
-    uuid: c256c229-5114-4309-94f5-77619e908f70
+    uuid: 92e6ebf3-b481-4e99-ae31-d935e0f1d553
     country_id: *ht
     network_id: null
 # Supplementary services Prefixes
@@ -49,28 +53,28 @@ network_prefixes:
     prefix: '5091'
     number_min_length: 6
     number_max_length: 6
-    uuid: b5a87990-d534-4083-991f-76e974666c51
+    uuid: 5e9eeb68-8b69-4355-80b6-9d70bc95a759
     country_id: *ht
     network_id: *ht_special_services
   - id: 253082
     prefix: '5098'
     number_min_length: 7
     number_max_length: 7
-    uuid: ece7baad-936f-4d14-8f60-6441e5fb2662
+    uuid: 06972d14-5520-4a57-8c9c-17ead31435a8
     country_id: *ht
     network_id: *ht_value_added_services
   - id: 253156
     prefix: '509800'
     number_min_length: 11
     number_max_length: 11
-    uuid: 05d03b31-d487-4cde-8ebd-541e53fb6626
+    uuid: e1179fe8-3092-45dc-bbdc-b7e1c88bac12
     country_id: *ht
     network_id: *ht_freephone_services
   - id: 257391
     prefix: '509911'
     number_min_length: 6
     number_max_length: 6
-    uuid: ffc8860f-32df-4c65-9e26-3b963ff4ad8e
+    uuid: 54847171-cf75-42c1-ade2-50c11c9beef3
     country_id: *ht
     network_id: *ht_emergency_services
 # Mobile Prefixes
@@ -78,140 +82,140 @@ network_prefixes:
     prefix: '50931'
     number_min_length: 11
     number_max_length: 11
-    uuid: 91362a3e-4d21-47f1-88da-3c31d08eb5e4
+    uuid: dde47865-9ad2-4470-8d1f-aa8a87c13d5f
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 243371
     prefix: '50932'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4e2e9edb-d8bd-4946-8be8-a599b607d689
+    uuid: 3647f624-130d-4adf-a774-448ebaf34068
     country_id: *ht
     network_id: *ht_natcom_mobile
   - id: 243415
     prefix: '50933'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3b649432-894b-4fcf-9e1e-6d165ca45250
+    uuid: 0c9f9ddf-4a72-4a05-a685-080b8f6db018
     country_id: *ht
     network_id: *ht_natcom_mobile
   - id: 243424
     prefix: '509330'
     number_min_length: 7
     number_max_length: 7
-    uuid: c979d442-4cbf-4aee-adc6-5f09c787391f
+    uuid: 49a9fa65-5f77-41ad-9e8e-0c6ca92ad6b5
     country_id: *ht
     network_id: *ht_natcom_mobile
   - id: 243491
     prefix: '50934'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea9124c2-ac8d-47bb-89f4-ac8d7066e40b
+    uuid: 31446f85-9b16-4db0-8825-d48db876b62a
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 243589
     prefix: '50935'
     number_min_length: 11
     number_max_length: 11
-    uuid: b08a5b19-bf1f-4d94-9bb8-70429cd7433e
+    uuid: f0b6b4ed-f724-4bd4-88ac-f9ff0176d1f7
     country_id: *ht
     network_id: *ht_natcom_mobile
   - id: 243667
     prefix: '50936'
     number_min_length: 11
     number_max_length: 11
-    uuid: b89d7d13-cc74-42e3-9fbb-4a0e4a470fe9
+    uuid: c39c31f3-364a-4d6d-96b6-7469d2adb1cb
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 243714
     prefix: '50937'
     number_min_length: 11
     number_max_length: 11
-    uuid: e157cb75-4dff-4d23-a056-271f9ff65a6f
+    uuid: ebb7802b-5412-49ba-9ac3-6c049066f42a
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 243863
     prefix: '50938'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b99ad81-70b4-4d94-a600-de156e6e4474
+    uuid: 09a390a0-51fb-4ac9-b4ec-b4f24cfbf330
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 243904
     prefix: '50939'
     number_min_length: 11
     number_max_length: 11
-    uuid: 88e4a109-f811-4ca1-8d35-c1d10f8ad2b3
+    uuid: b89b66e4-9ba9-43b2-8ff7-de611191a1b8
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 243939
     prefix: '5094'
     number_min_length: 11
     number_max_length: 11
-    uuid: 025711f0-e887-41c0-a9b7-fd4d1d6d7891
+    uuid: be91d8f5-41ec-475c-bc88-fb04ca4b30fc
     country_id: *ht
     network_id: *ht_mobile
   - id: 243980
     prefix: '50940'
     number_min_length: 11
     number_max_length: 11
-    uuid: d06c202e-25a7-493c-95e3-64c2952eae54
+    uuid: dfe5d58d-f4b8-49b3-bb6c-5ee0e0e77003
     country_id: *ht
     network_id: *ht_natcom_mobile
   - id: 244134
     prefix: '50941'
     number_min_length: 11
     number_max_length: 11
-    uuid: 662d7d92-ff53-4c13-beb8-68294b2f3aa1
+    uuid: ebbe7a1d-98e8-4de0-919d-d4525613d791
     country_id: *ht
     network_id: *ht_natcom_mobile
   - id: 244236
     prefix: '50942'
     number_min_length: 11
     number_max_length: 11
-    uuid: 709e03fb-d48f-471c-91c4-5228c2edab39
+    uuid: f371a9a0-b041-468d-b7ae-97149e00813a
     country_id: *ht
     network_id: *ht_natcom_mobile
   - id: 244336
     prefix: '50943'
     number_min_length: 11
     number_max_length: 11
-    uuid: 39e15820-b4ba-49b5-b112-bff3d2637ab4
+    uuid: ce82b0be-1c6e-4103-9304-e737f220c31b
     country_id: *ht
     network_id: *ht_natcom_mobile
   - id: 244490
     prefix: '50944'
     number_min_length: 11
     number_max_length: 11
-    uuid: 73c86a20-53a3-4750-b7dc-db9cd91e205f
+    uuid: 7a8d168e-0e5b-4d13-9116-3750b596e64b
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 248934
     prefix: '50930'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1fecb004-c71e-4fc4-850e-c104f3bd6d8e
+    uuid: b4b4abbd-6d14-4064-8885-8f37395f655d
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 249088
     prefix: '50946'
     number_min_length: 11
     number_max_length: 11
-    uuid: b7594db6-5e9f-4cc7-a63a-49be6ece784e
+    uuid: 08ae70c4-1f96-4f7f-93f0-66672a802b0c
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 249305
     prefix: '50947'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65cfe6d2-7ee5-41e3-8b50-84dec834bf8c
+    uuid: 6bc7271b-2ab3-41fc-8e4a-c5309d2778ca
     country_id: *ht
     network_id: *ht_digicel_mobile
   - id: 249512
     prefix: '50949'
     number_min_length: 11
     number_max_length: 11
-    uuid: edb7f96d-ed8c-4df8-8b90-763e0872c636
+    uuid: 7ed41f25-9c13-4232-9f95-0f5f4c7c8631
     country_id: *ht
     network_id: *ht_digicel_mobile
 # Fixed Prefixes
@@ -219,13 +223,13 @@ network_prefixes:
     prefix: '5092'
     number_min_length: 11
     number_max_length: 11
-    uuid: e090fe3b-dbac-46ee-a368-2aca95345498
+    uuid: af05f133-95cb-4466-95e9-1bf6794cd312
     country_id: *ht
     network_id: *ht_fixed
   - id: 257105
     prefix: '5099'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea4d375d-7e61-4f38-a07b-2211a20d9748
+    uuid: a4d4c151-00ce-42a0-85ca-ca6a166e1731
     country_id: *ht
-    network_id: *ht_fixed
+    network_id: *ht_voip_fixed

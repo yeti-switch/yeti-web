@@ -1,103 +1,323 @@
 country_id: &hu 97
 networks:
 # Fixed Networks
-  - id: &hu_fixed 4052
-    name: HU Fixed
-    uuid: 2888d06c-70b2-4589-9605-a3abb1e54d45
+  - id: &hu_ozd_fixed 4197
+    name: HU Ozd Fixed
+    uuid: c55a18df-eacd-4a2c-9aea-32de40cfe3df
+    type_id: 12
+  - id: &hu_mezokovesd_fixed 5023
+    name: HU Mezokovesd Fixed
+    uuid: 3c66801c-b351-4cf2-a36b-7f96df1868dd
+    type_id: 12
+  - id: &hu_debrecen_fixed 6634
+    name: HU Debrecen Fixed
+    uuid: dbb63701-1c72-46d7-8011-2f92319bbda9
+    type_id: 12
+  - id: &hu_berettyoujfalu_fixed 7176
+    name: HU Berettyoujfalu Fixed
+    uuid: 4c6ff6bf-816e-4881-aa20-a711ea3b6577
+    type_id: 12
+  - id: &hu_cegled_fixed 7565
+    name: HU Cegled Fixed
+    uuid: f970d29d-6bb2-4b5a-ae3a-35f248861433
+    type_id: 12
+  - id: &hu_test_number_fixed 7947
+    name: HU Test Number Fixed
+    uuid: a686061c-5513-4975-a11a-a42e07b4b8a1
+    type_id: 12
+  - id: &hu_karcag_fixed 8812
+    name: HU Karcag Fixed
+    uuid: 6204312f-7b6b-4a3c-ab43-77b96d155b32
+    type_id: 12
+  - id: &hu_szolnok_fixed 9272
+    name: HU Szolnok Fixed
+    uuid: c4dffb96-70fe-44e7-96ec-05951961684b
+    type_id: 12
+  - id: &hu_jaszbereny_fixed 9677
+    name: HU Jaszbereny Fixed
+    uuid: 634740d8-c5e2-4d0d-ab08-e1c57a6ced7a
+    type_id: 12
+  - id: &hu_szeged_fixed 11976
+    name: HU Szeged Fixed
+    uuid: 50e53eff-169e-4925-9f03-6a263d5300be
+    type_id: 12
+  - id: &hu_szentes_fixed 12456
+    name: HU Szentes Fixed
+    uuid: 57a979bf-68e2-445d-8164-ddb1f18688f9
+    type_id: 12
+  - id: &hu_bekescsaba_fixed 13674
+    name: HU Bekescsaba Fixed
+    uuid: d8d1b697-23b7-47c5-a018-b7a0d44eb754
+    type_id: 12
+  - id: &hu_oroshaza_fixed 14226
+    name: HU Oroshaza Fixed
+    uuid: eb3598b6-9059-4fc2-898d-8b1c20697b2c
+    type_id: 12
+  - id: &hu_mohacs_fixed 14299
+    name: HU Mohacs Fixed
+    uuid: 22ba030d-1864-49e6-b18d-ba1063c77864
+    type_id: 12
+  - id: &hu_pecs_fixed 16879
+    name: HU Pecs Fixed
+    uuid: a6186758-9e52-46b2-a297-e1ebc0cb2caf
+    type_id: 12
+  - id: &hu_szigetvar_fixed 17151
+    name: HU Szigetvar Fixed
+    uuid: a8025dba-635f-4fb7-815c-1ac72b2a2e9d
+    type_id: 12
+  - id: &hu_szekszard_fixed 17625
+    name: HU Szekszard Fixed
+    uuid: 0bbbd6d2-f5d8-4878-b1ce-2352237451a6
+    type_id: 12
+  - id: &hu_paks_fixed 18007
+    name: HU Paks Fixed
+    uuid: b94ac296-20f2-41e5-be44-4d226ed0b573
+    type_id: 12
+  - id: &hu_kecskemet_fixed 18169
+    name: HU Kecskemet Fixed
+    uuid: a5007280-0194-42a0-b789-3594cf457052
+    type_id: 12
+  - id: &hu_kiskunhalas_fixed 18500
+    name: HU Kiskunhalas Fixed
+    uuid: c34e8f7e-f0c4-42ed-8206-f273209ac5ac
+    type_id: 12
+  - id: &hu_kiskoros_fixed 18842
+    name: HU Kiskoros Fixed
+    uuid: 413aa4d8-0d34-4a91-b67c-b08eedf22b0a
+    type_id: 12
+  - id: &hu_baja_fixed 19653
+    name: HU Baja Fixed
+    uuid: 904b3f72-d267-4c11-9723-1bfd0b9b1a5a
+    type_id: 12
+  - id: &hu_szombathely_fixed 20036
+    name: HU Szombathely Fixed
+    uuid: d58c0871-3190-4c50-91c9-dde2c9443dca
+    type_id: 12
+  - id: &hu_sarvar_fixed 20272
+    name: HU Sarvar Fixed
+    uuid: 6412cbe9-acd7-41eb-b4e5-3f8874e2afcc
+    type_id: 12
+  - id: &hu_gyor_fixed 20456
+    name: HU Gyor Fixed
+    uuid: cf9ae122-408c-41c7-900c-9a3f32b87419
+    type_id: 12
+  - id: &hu_sopron_fixed 21169
+    name: HU Sopron Fixed
+    uuid: aea8c586-8021-46e9-b574-3041b078108d
+    type_id: 12
+  - id: &hu_budapest_fixed 24791
+    name: HU Budapest Fixed
+    uuid: 40e4dc53-2334-4ec5-943f-dc4829adf671
+    type_id: 12
+  - id: &hu_location_independent_service_fixed 27338
+    name: HU Location Independent Service Fixed
+    uuid: 75de3a4d-4b6f-435c-8248-734434abe316
+    type_id: 12
+  - id: &hu_szekesfehervar_fixed 27815
+    name: HU Szekesfehervar Fixed
+    uuid: 9edac514-12f3-4d21-bb2c-e6e18afa66f6
+    type_id: 12
+  - id: &hu_biatorbagy_fixed 28299
+    name: HU Biatorbagy Fixed
+    uuid: ee80dc51-825a-441a-823a-6986b1b1beee
+    type_id: 12
+  - id: &hu_szigetszentmiklos_fixed 28969
+    name: HU Szigetszentmiklos Fixed
+    uuid: 34af2621-b387-4c61-a075-879740530f5a
+    type_id: 12
+  - id: &hu_szentendre_fixed 29510
+    name: HU Szentendre Fixed
+    uuid: 204c4382-5e49-4777-bf14-4cf2a4d3f711
+    type_id: 12
+  - id: &hu_vac_fixed 29784
+    name: HU Vac Fixed
+    uuid: 59a59596-885f-4e3e-bd40-999690a7b8ba
+    type_id: 12
+  - id: &hu_dunaujvaros_fixed 29834
+    name: HU Dunaujvaros Fixed
+    uuid: 0c202b81-3e79-42c2-a022-78bac9708594
+    type_id: 12
+  - id: &hu_monor__fixed 30655
+    name: HU Monor  Fixed
+    uuid: 9ea558d0-c11f-4377-8b66-4e4f6c180cf3
+    type_id: 12
+  - id: &hu_godollo_fixed 31076
+    name: HU Godollo Fixed
+    uuid: ae5d5f0c-9b90-42cb-9407-cfefe4d72b7f
+    type_id: 12
+  - id: &hu_salgotarjan_fixed 31935
+    name: HU Salgotarjan Fixed
+    uuid: 7e6bdddf-c29d-4616-9dcb-5879e35b03af
+    type_id: 12
+  - id: &hu_esztergom_fixed 32554
+    name: HU Esztergom Fixed
+    uuid: f001351a-949b-4fb2-9ef5-a72f6fab560f
+    type_id: 12
+  - id: &hu_tatabanya_fixed 32892
+    name: HU Tatabanya Fixed
+    uuid: 943e9a09-521e-4e8f-ba24-c13fa31fe827
+    type_id: 12
+  - id: &hu_eger_fixed 33656
+    name: HU Eger Fixed
+    uuid: 56507f71-e324-4c19-932b-7d1d397bffaa
+    type_id: 12
+  - id: &hu_balassagyarmat_fixed 34641
+    name: HU Balassagyarmat Fixed
+    uuid: b3cee389-2b7d-4e00-96ba-ad4d56b1e992
+    type_id: 12
+  - id: &hu_gyongyos_fixed 35237
+    name: HU Gyongyos Fixed
+    uuid: c453f3a9-272f-4268-a784-c0c98f0659d2
+    type_id: 12
+  - id: &hu_mateszalka_fixed 36850
+    name: HU Mateszalka Fixed
+    uuid: baee8612-c4f5-4beb-98db-781a4844b4cd
+    type_id: 12
+  - id: &hu_nyiregyhaza_fixed 37233
+    name: HU Nyiregyhaza Fixed
+    uuid: df4f4756-048b-4a6b-aced-6029cfdcde76
+    type_id: 12
+  - id: &hu_miskolc_fixed 37836
+    name: HU Miskolc Fixed
+    uuid: 45dea5a1-77f3-453c-bb71-4b4c9ef0e7b7
+    type_id: 12
+  - id: &hu_kisvarda_fixed 37896
+    name: HU Kisvarda Fixed
+    uuid: 9efbe132-ad82-43ca-8a88-3ceca9a80e54
+    type_id: 12
+  - id: &hu_szerencs_fixed 38312
+    name: HU Szerencs Fixed
+    uuid: cb4f017d-83c1-4cb8-9ccd-95a6fc54a18c
+    type_id: 12
+  - id: &hu_kaposvar_fixed 39696
+    name: HU Kaposvar Fixed
+    uuid: 51416055-23a0-4279-a59b-c65a90021a1e
+    type_id: 12
+  - id: &hu_keszthely_fixed 39800
+    name: HU Keszthely Fixed
+    uuid: eba0bb24-9790-4f3e-9959-52defa4c7f8e
+    type_id: 12
+  - id: &hu_siofok_fixed 40855
+    name: HU Siofok Fixed
+    uuid: 5e294acb-50dc-4513-bf95-6b6f53143a22
+    type_id: 12
+  - id: &hu_marcali_fixed 41034
+    name: HU Marcali Fixed
+    uuid: d1028ff5-ec30-4c9d-8911-c84cf050176f
+    type_id: 12
+  - id: &hu_tapolca_fixed 41362
+    name: HU Tapolca Fixed
+    uuid: e343d223-a2db-4fb4-98e4-384560ecebfb
+    type_id: 12
+  - id: &hu_veszprem_fixed 41566
+    name: HU Veszprem Fixed
+    uuid: 4e180ffe-5448-46a1-a9b5-4cba3cfaefe6
+    type_id: 12
+  - id: &hu_papa_fixed 41981
+    name: HU Papa Fixed
+    uuid: cd4cc6c8-55c0-4908-a218-9d6ad8c224c2
+    type_id: 12
+  - id: &hu_zalaegerszeg_fixed 42796
+    name: HU Zalaegerszeg Fixed
+    uuid: 06185099-da8a-4ff5-b3c0-36aa7cc6c1fc
+    type_id: 12
+  - id: &hu_nagykanizsa_fixed 43099
+    name: HU Nagykanizsa Fixed
+    uuid: 1ac2086b-9b86-4a71-a16a-ca318ae5ef62
     type_id: 12
 # Mobile Networks
-  - id: &hu_mobile 4130
+  - id: &hu_mobile 4665
     name: HU Mobile
-    uuid: ae376337-96e1-4180-9bdc-f87141b0e00a
+    uuid: 98dcd91b-5cd7-48c6-a3a5-7327dd92a458
     type_id: 3
-  - id: &hu_vodafone_mobile 4141
+  - id: &hu_vodafone_mobile 4680
     name: HU Vodafone Mobile
-    uuid: e1a08b4d-44d2-44b5-9892-43e2a7b71277
+    uuid: c90fd326-60c1-4cf7-897f-9b89b89fdd79
     type_id: 3
-  - id: &hu_netfone_mobile 4680
+  - id: &hu_netfone_mobile 14904
     name: HU Netfone Mobile
-    uuid: 5a58077a-0c26-4c83-82e6-e595a69d6fc4
+    uuid: ae4f03f2-f2ea-4968-a915-7828da80340a
     type_id: 3
-  - id: &hu_telekom_mobile 4746
+  - id: &hu_telekom_mobile 16243
     name: HU Telekom Mobile
-    uuid: 5665ff3e-6b81-4ff7-8b07-804e1ae15d37
+    uuid: 149a59c9-b12a-4952-a7a7-3a969c4e3f27
     type_id: 3
-  - id: &hu_yettel_mobile 4747
+  - id: &hu_yettel_mobile 16244
     name: HU Yettel Mobile
-    uuid: b08aa734-9eba-47d1-a83e-c74026446458
+    uuid: 75628d5c-7aa6-4bba-ba6e-eff9cfc72ca7
     type_id: 3
-  - id: &hu_antenna_hungaria_mobile 7267
+  - id: &hu_antenna_hungaria_mobile 26766
     name: HU Antenna Hungaria Mobile
-    uuid: 37988658-0942-4843-8c8d-cf16eee84b2d
+    uuid: 27525a62-b357-4162-8f01-a00d324ae856
     type_id: 3
-  - id: &hu_invitech_mobile 7268
+  - id: &hu_invitech_mobile 26768
     name: HU Invitech Mobile
-    uuid: ec34c868-9b66-4fe3-83e4-6552e7cc336f
+    uuid: 8223321c-64f6-40a0-8247-14f675388679
     type_id: 3
-  - id: &hu_mobil4_mobile 7368
+  - id: &hu_mobil4_mobile 31772
     name: HU Mobil4 Mobile
-    uuid: 75bd8696-42a4-4e84-ba40-acdd790d5be6
+    uuid: f0325217-d8a9-4180-83d0-3bb11a6ad380
     type_id: 3
-  - id: &hu_tarr_mobile 7369
+  - id: &hu_tarr_mobile 31780
     name: HU Tarr Mobile
-    uuid: 21ea0471-813d-4340-9b3f-6068c2b9af4d
+    uuid: f91bb84e-ca41-4b60-adce-3de5e82b3615
     type_id: 3
 # Supplementary services Networks
-  - id: &hu_machine_to_machine_m2m_services 4722
+  - id: &hu_machine_to_machine_m2m_services 16207
     name: HU Machine To Machine M2M Services
-    uuid: 695d7a4e-36be-48d9-a2d7-6b93db5cab61
+    uuid: 35c3dc2e-0bda-4142-854c-15c6a5ecc400
     type_id: 14
-  - id: &hu_freephone_services 4938
+  - id: &hu_freephone_services 19837
     name: HU Freephone Services
-    uuid: 642ff5c2-c361-4a94-9835-bb169f4e34c6
+    uuid: 41544a46-5e8f-4d6b-b83c-6faa967352c2
     type_id: 14
-  - id: &hu_special_services 5243
+  - id: &hu_special_services 21419
     name: HU Special Services
-    uuid: 5f90f13a-6a10-4a72-9b79-72b9a4b42c4f
+    uuid: 6739968f-b4d3-459f-8aa5-bab4469bc320
     type_id: 14
-  - id: &hu_social_value_services 5445
+  - id: &hu_social_value_services 21635
     name: HU Social Value Services
-    uuid: b1c810a8-dda8-4dbd-98d6-0582dffc5b58
+    uuid: 5b28c68a-406a-4f6e-9d77-2576d66fcec3
     type_id: 14
-  - id: &hu_directory_enquiry_services 5476
+  - id: &hu_directory_enquiry_services 21679
     name: HU Directory Enquiry Services
-    uuid: 78c15c58-eb69-423c-bd05-15f95ff50235
+    uuid: 818b1213-c174-46dd-97b5-03903148f4a3
     type_id: 14
-  - id: &hu_customer_care_services 5503
+  - id: &hu_customer_care_services 21715
     name: HU Customer Care Services
-    uuid: 40b06a33-c13c-4c9c-9872-37907b50ab22
+    uuid: acf24e3c-0aca-47f8-8b28-57e7d370c1ae
     type_id: 14
-  - id: &hu_fundraising_services 5550
+  - id: &hu_fundraising_services 21763
     name: HU Fundraising Services
-    uuid: f8b7c62d-c386-4bbb-804f-2a380664967f
+    uuid: 0ef1f892-b35b-4ae4-a3c0-c93db7b85d9b
     type_id: 14
-  - id: &hu_emotional_help_services 5551
+  - id: &hu_emotional_help_services 21764
     name: HU Emotional Help Services
-    uuid: 18efbcbd-052e-4bb6-8f09-208b4d28ddad
+    uuid: c43ef566-05c9-41ea-8e35-8b6906546450
     type_id: 14
-  - id: &hu_premium_rate_services 5618
+  - id: &hu_premium_rate_services 21832
     name: HU Premium Rate Services
-    uuid: 78b4b873-7d50-4d76-96e2-3a71c30d281e
+    uuid: 30e04077-b93e-4421-96f2-bdc04e9fb399
     type_id: 14
-  - id: &hu_adults_entertainment_services 5625
+  - id: &hu_adults_entertainment_services 21839
     name: HU Adults Entertainment Services
-    uuid: e0ecb73a-9883-4da9-a40f-512b909563bd
+    uuid: 7e88619a-6464-4b57-8fe5-587fc1bc1393
     type_id: 14
-  - id: &hu_operator_specific_services 5630
+  - id: &hu_operator_specific_services 21844
     name: HU Operator Specific Services
-    uuid: 02745a2e-0819-4130-8a02-edb21d81336f
+    uuid: 2d214b5d-76e9-490c-9043-4460bd1410a0
     type_id: 14
-  - id: &hu_public_interest_services 5973
+  - id: &hu_public_interest_services 22627
     name: HU Public Interest Services
-    uuid: fd32f499-e92b-4a44-a2db-adf7adf16682
+    uuid: 440a0476-4d68-4d31-a640-ea2ea0c844b1
     type_id: 14
-  - id: &hu_operator_assistance_services 6019
+  - id: &hu_operator_assistance_services 22673
     name: HU Operator Assistance Services
-    uuid: b85a3b6d-e42b-49e6-b44d-c60a05107af9
+    uuid: 1d108db6-0923-4ad2-a84a-52a0d5d15449
     type_id: 14
-  - id: &hu_corporate_networks_services 7433
+  - id: &hu_corporate_networks_services 33845
     name: HU Corporate Networks Services
-    uuid: f5115482-9125-4d44-8920-eb1d1589db5c
+    uuid: 8067a3e2-a876-4bbe-a35c-6566b7711f3c
     type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -105,1086 +325,1086 @@ network_prefixes:
     prefix: '3648'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4851935f-1edd-48e9-b952-b6a7e3c1a71e
+    uuid: d590416b-c78c-4df7-b218-9657940505c1
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_ozd_fixed
   - id: 58227
     prefix: '3649'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3c66886c-a2ef-4ce6-996a-6148fb22c6bd
+    uuid: 907195b8-6990-4be6-bddc-b542cde61ad0
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_mezokovesd_fixed
   - id: 71652
     prefix: '3652'
     number_min_length: 10
     number_max_length: 10
-    uuid: af0c35c7-0072-4aed-abf7-70491c6375a6
+    uuid: be31b3dd-00cb-409b-bac3-28a0190811d0
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_debrecen_fixed
   - id: 73195
     prefix: '3654'
     number_min_length: 10
     number_max_length: 10
-    uuid: cc1515d0-c7a6-440d-bf2c-db6263b0e5d8
+    uuid: 3f7caf59-3059-4d4c-969d-9b12978c6c21
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_berettyoujfalu_fixed
   - id: 76540
     prefix: '3653'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8287a87b-343b-492a-bfcc-e96e959a9d07
+    uuid: b8b11a6c-48a2-493f-9fc0-f2829cf79ee5
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_cegled_fixed
   - id: 78118
     prefix: '3655'
     number_min_length: 10
     number_max_length: 10
-    uuid: d37a4dbd-d4f7-4455-862a-9a55eb0fcd34
+    uuid: 79985583-71c5-4caf-aad5-536d95189dc8
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_test_number_fixed
   - id: 84410
     prefix: '3659'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7525cca9-2e3c-4344-9bca-f0dfc7e8b9d2
+    uuid: 831e394c-11ba-469d-9d22-a0218248336e
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_karcag_fixed
   - id: 87912
     prefix: '3656'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4d2c9810-3660-4aad-ab70-cf7b87d41d90
+    uuid: 05ef1a19-d18f-44f9-982e-392b9b2832a4
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szolnok_fixed
   - id: 90268
     prefix: '3657'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5cb57c86-a98e-45aa-9c58-b7c5f149b9f6
+    uuid: df0b67ba-e45a-4a10-a441-10d79badb352
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_jaszbereny_fixed
   - id: 111462
     prefix: '3662'
     number_min_length: 10
     number_max_length: 10
-    uuid: ff0d8e8e-3c3f-4043-81a3-be5cd264777f
+    uuid: e8b5546e-9e24-452a-a366-e3730aa33ceb
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szeged_fixed
   - id: 117826
     prefix: '3663'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3eaff37f-7645-4e91-8369-e485828a95ca
+    uuid: cfef4cec-f8a8-4431-a592-bf716977ec01
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szentes_fixed
   - id: 138619
     prefix: '3666'
     number_min_length: 10
     number_max_length: 10
-    uuid: b44c7808-7038-416c-a522-d1e09207d14b
+    uuid: e377ec24-2c69-4bc4-bb8d-9a1d24cd725c
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_bekescsaba_fixed
   - id: 146814
     prefix: '3668'
     number_min_length: 10
     number_max_length: 10
-    uuid: df5e0b3c-271e-4b12-9709-44fe3f89bb61
+    uuid: bbb1f346-50e5-4249-b068-22cfe89fb218
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_oroshaza_fixed
   - id: 148657
     prefix: '3669'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1d3a8712-92ab-43fd-aff9-c139abfa853b
+    uuid: 64e3a8c5-453d-4d94-a317-a0375950bfbb
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_mohacs_fixed
   - id: 172525
     prefix: '3672'
     number_min_length: 10
     number_max_length: 10
-    uuid: edb1001f-b57f-4d7d-9738-dd55c396f185
+    uuid: a75e642b-1395-4a86-96e2-58e9c1ec3cfe
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_pecs_fixed
   - id: 174939
     prefix: '3673'
     number_min_length: 10
     number_max_length: 10
-    uuid: 69d31976-edc6-45f9-b152-ea39343872b9
+    uuid: a137ea2e-06fd-478a-864c-9a4f83a5c7c8
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szigetvar_fixed
   - id: 182861
     prefix: '3674'
     number_min_length: 10
     number_max_length: 10
-    uuid: 49bb37de-62ac-42ef-b7fd-ef30efc0f881
+    uuid: 85db17d9-f0f0-4415-a601-541f4c4104a6
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szekszard_fixed
   - id: 185871
     prefix: '3675'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3bf4a666-569d-4e39-8dfd-fbc32717983a
+    uuid: e0331d30-e8f3-4445-a5be-f460c02762fe
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_paks_fixed
   - id: 187983
     prefix: '3676'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5c50f952-ca25-41bb-87e9-d9e5e56ed85e
+    uuid: 082e12ae-cff5-4bc6-8b4f-79f64ae3536a
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_kecskemet_fixed
   - id: 192087
     prefix: '3677'
     number_min_length: 10
     number_max_length: 10
-    uuid: bd94468a-22d1-498c-8f3b-25da6531e73f
+    uuid: 08846164-eedf-4473-9d51-e595ea04fb97
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_kiskunhalas_fixed
   - id: 198391
     prefix: '3678'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8ad05b50-beee-4704-bba6-85c5643259da
+    uuid: 264992bc-9899-4e7d-973d-e7f5866a64f7
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_kiskoros_fixed
   - id: 206655
     prefix: '3679'
     number_min_length: 10
     number_max_length: 10
-    uuid: e0953cf3-a569-4111-8a28-15a72753a830
+    uuid: 78ce233b-ada7-47a4-8f0c-fe5a5c5ac0ab
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_baja_fixed
   - id: 212503
     prefix: '3694'
     number_min_length: 10
     number_max_length: 10
-    uuid: a1cd523d-3c4c-4a27-be8b-f8fe47fbd270
+    uuid: e205af53-3b8f-4369-9770-eb6aa792a9b8
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szombathely_fixed
   - id: 215143
     prefix: '3695'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0a058ea9-68c5-4962-8992-ed530002711a
+    uuid: 4041dec1-243a-4ecc-9566-b43daad62f4a
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_sarvar_fixed
   - id: 221945
     prefix: '3696'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3fa7a059-6c66-4290-aed3-d90fbb2b1cc8
+    uuid: 43726042-8a1d-42c5-8a5c-7ed0c944f988
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_gyor_fixed
   - id: 239369
     prefix: '3699'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6fa7e0c5-f630-4bad-994f-02581b9c15fb
+    uuid: 5f288487-8a17-4c6c-8e50-0a61fd73afa8
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_sopron_fixed
   - id: 258562
     prefix: '361'
     number_min_length: 10
     number_max_length: 10
-    uuid: 411e121f-a30f-4c7c-8c05-a1115f4c014a
+    uuid: 855dc029-82d9-48c8-bf43-333f436bbb7a
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_budapest_fixed
   - id: 274228
     prefix: '3621'
     number_min_length: 11
     number_max_length: 11
-    uuid: 420888aa-a88c-4003-b2ae-a155ab02d74d
+    uuid: 3e3d265b-4803-4125-9ea5-c0111e54aef0
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_location_independent_service_fixed
   - id: 277993
     prefix: '3622'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6d460923-95bb-4375-9fae-6fba1b73791f
+    uuid: 199bdf7c-8b7e-4fe9-b62f-7ad91ae4e8b5
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szekesfehervar_fixed
   - id: 286626
     prefix: '3623'
     number_min_length: 10
     number_max_length: 10
-    uuid: b808ad49-bf64-417a-8e38-53088814dc87
+    uuid: 6aa7d110-cdc3-4a57-8a49-0c674647ba52
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_biatorbagy_fixed
   - id: 294322
     prefix: '3624'
     number_min_length: 10
     number_max_length: 10
-    uuid: f63d07e4-d96f-4d08-b4ea-73881edeb7a7
+    uuid: 61d47e93-afb7-454d-bb8d-ad661d195b13
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szigetszentmiklos_fixed
   - id: 299794
     prefix: '3626'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3378dd16-f9f2-488c-99e2-cad20d5e4133
+    uuid: 3875554c-ee87-4755-8335-f246218d2828
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szentendre_fixed
   - id: 301425
     prefix: '3627'
     number_min_length: 10
     number_max_length: 10
-    uuid: d2af0510-6166-4a4a-b931-ac55c38c8b9f
+    uuid: 4349fe2d-9fa4-43b9-afe3-67c2f4edc1e2
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_vac_fixed
   - id: 301968
     prefix: '3625'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4d7125e4-fbbf-4c52-9f31-262f189d2b57
+    uuid: c2324433-24ea-4930-930f-07129434dbf0
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_dunaujvaros_fixed
   - id: 308504
     prefix: '3629'
     number_min_length: 10
     number_max_length: 10
-    uuid: e11d1c90-49ff-4227-8610-474d73079132
+    uuid: 1fd9c007-66af-4af3-aa96-333b1bb027d4
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_monor__fixed
   - id: 313355
     prefix: '3628'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9b28e8d3-a46a-4ba8-b73f-2dc3797a2c74
+    uuid: 7bc7f7da-0bca-4458-924e-1ba7b4a12c70
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_godollo_fixed
   - id: 327274
     prefix: '3632'
     number_min_length: 10
     number_max_length: 10
-    uuid: 01763e73-0a9c-4172-9161-c1fb1824ba8f
+    uuid: 1038e3f1-7365-42f3-8037-b8f162740376
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_salgotarjan_fixed
   - id: 337278
     prefix: '3633'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1955214f-17c3-4294-8b32-bc931488a6ea
+    uuid: b930291e-301c-401d-95cf-7808112fb77a
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_esztergom_fixed
   - id: 340471
     prefix: '3634'
     number_min_length: 10
     number_max_length: 10
-    uuid: 04b7571d-e4c1-4d67-b3f4-215f6e33fa47
+    uuid: f895a556-e278-4524-a9a9-97fb9630ad9f
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_tatabanya_fixed
   - id: 345940
     prefix: '3636'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5c81b8f4-b50d-4a33-b7be-af89c9a288f1
+    uuid: 46103a52-b665-475b-9398-3ee57304e90d
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_eger_fixed
   - id: 352235
     prefix: '3635'
     number_min_length: 10
     number_max_length: 10
-    uuid: f326b0a5-94aa-46af-a050-9c754bb2b299
+    uuid: 2ecc677a-85ca-42e4-9d5e-9e9952e8e25c
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_balassagyarmat_fixed
   - id: 355755
     prefix: '3637'
     number_min_length: 10
     number_max_length: 10
-    uuid: 947e4ef5-aed7-457d-ac1e-604c3b2cb93c
+    uuid: c2c673bc-ccf0-43e6-97a5-1373f743fbfe
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_gyongyos_fixed
   - id: 370184
     prefix: '3644'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9af4c72a-6df9-4fa9-a643-0d10ba9e6838
+    uuid: ecf0b332-4cf4-4ef4-9657-666fd4749626
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_mateszalka_fixed
   - id: 377175
     prefix: '3642'
     number_min_length: 10
     number_max_length: 10
-    uuid: b2e00212-583e-4feb-96b6-1b59d14bc880
+    uuid: df9c24d9-7744-4e84-bced-e31227d9257a
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_nyiregyhaza_fixed
   - id: 388628
     prefix: '3646'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3aa0c4c7-281b-4ffc-9f4f-39bcb5d74e85
+    uuid: 7e5fe5f5-3fcc-46bd-a9e7-1a3173edcb75
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_miskolc_fixed
   - id: 392615
     prefix: '3645'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0755f28d-27a1-4de3-9300-c7a6b80f4122
+    uuid: e38e2411-5ca2-494f-af29-622f20a5a644
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_kisvarda_fixed
   - id: 399479
     prefix: '3647'
     number_min_length: 10
     number_max_length: 10
-    uuid: ce69f632-1eb4-4d5f-ab46-169027092029
+    uuid: 49bf7415-7622-48e0-b276-4451509b3ddb
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_szerencs_fixed
   - id: 418785
     prefix: '3682'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9544b88b-d631-4b5f-b324-9997ca2dc6c7
+    uuid: 4db354d2-fbfe-40f9-a0a3-2cb0dfebd668
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_kaposvar_fixed
   - id: 422118
     prefix: '3683'
     number_min_length: 10
     number_max_length: 10
-    uuid: a85aa144-6d7e-4f65-aecb-ee80c447304e
+    uuid: fcb513a0-d334-48bb-851c-42db96069fb5
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_keszthely_fixed
   - id: 433211
     prefix: '3684'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6b2c8604-0df7-4cc7-88d3-4099456ac9ee
+    uuid: c86beec9-2b7d-4f88-8dab-55df0e36b031
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_siofok_fixed
   - id: 435878
     prefix: '3685'
     number_min_length: 10
     number_max_length: 10
-    uuid: 408b5305-fb95-4770-bdae-8d290046daa1
+    uuid: 9bfc494d-c3a5-4132-ae6a-236895e9847a
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_marcali_fixed
   - id: 441103
     prefix: '3687'
     number_min_length: 10
     number_max_length: 10
-    uuid: 165e8cfd-2943-4a21-b1a3-1653ed322b9e
+    uuid: a5010392-1b04-4677-ba00-c35c2c294241
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_tapolca_fixed
   - id: 443786
     prefix: '3688'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5f5d4de9-f4ea-4fb2-8563-54a07484dee1
+    uuid: 28be60fa-7d39-4a63-8a28-2d8fefee89a1
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_veszprem_fixed
   - id: 451404
     prefix: '3689'
     number_min_length: 10
     number_max_length: 10
-    uuid: 52cbce94-bc16-4bee-ae67-5c14f26dab83
+    uuid: eed39013-fb44-405e-a401-e0e3aa72257d
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_papa_fixed
   - id: 468946
     prefix: '3692'
     number_min_length: 10
     number_max_length: 10
-    uuid: fc832ef9-a45e-4ac7-be06-6c92747569f7
+    uuid: c1f1af9f-efbf-47c3-849c-a7195c8558e2
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_zalaegerszeg_fixed
   - id: 485426
     prefix: '3693'
     number_min_length: 10
     number_max_length: 10
-    uuid: 112fe714-5e9d-4e1d-b75b-d8225fefb753
+    uuid: cb09e879-e13b-41b6-840b-33735afae76e
     country_id: *hu
-    network_id: *hu_fixed
+    network_id: *hu_nagykanizsa_fixed
 # Mobile Prefixes
   - id: 54919
     prefix: '3650'
     number_min_length: 11
     number_max_length: 11
-    uuid: d809f9b8-e89e-461c-ae7d-fe334fa515d5
+    uuid: 090e57bf-ca94-4d90-a169-875a8e736e29
     country_id: *hu
     network_id: *hu_mobile
   - id: 54935
     prefix: '365010'
     number_min_length: 11
     number_max_length: 11
-    uuid: 075a114e-8d9b-4962-a8b7-6741cc5f4e10
+    uuid: aaecd2e7-5ef2-42e9-929c-ff44f4afbe33
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 54936
     prefix: '365011'
     number_min_length: 11
     number_max_length: 11
-    uuid: 497bb713-df21-446c-ab99-1612d6caca94
+    uuid: 97c381c6-8d4e-40eb-85c4-188f16e78df6
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 54937
     prefix: '365012'
     number_min_length: 11
     number_max_length: 11
-    uuid: ffcdbb73-b006-4e16-a691-e5de9b4ab8e9
+    uuid: 74ec69cb-ef3f-45bd-a6d1-bf972d6f4151
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 54938
     prefix: '365013'
     number_min_length: 11
     number_max_length: 11
-    uuid: 67c37874-02f1-4dd8-81bf-ddcc34ebc0bc
+    uuid: d5421afb-f963-40fc-9123-cc4993acb803
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 150231
     prefix: '3670'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3174a02c-6978-48c3-b610-671ba473a745
+    uuid: c2c42ada-571c-43c8-b51f-55b2287b6a04
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 154318
     prefix: '3670802'
     number_min_length: 11
     number_max_length: 11
-    uuid: 47eceadc-2359-4d7b-9cb6-f622318cf1c2
+    uuid: 5f492499-d6e6-476e-9b4d-5944f77413b5
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154320
     prefix: '3670803'
     number_min_length: 11
     number_max_length: 11
-    uuid: c1a3b8e4-4019-473a-9c1b-1749b33bc96f
+    uuid: 6ab1699f-d4ca-4177-886b-2c97c784daf1
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154323
     prefix: '36708040'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0025ffe9-ff21-4088-987a-d7bbd86f4208
+    uuid: 7bff8b0f-84c8-4fef-8f37-51530226ad73
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154324
     prefix: '36708041'
     number_min_length: 11
     number_max_length: 11
-    uuid: af538f9d-4c22-4709-9e7b-aa5137a79f3b
+    uuid: 03aa0d37-60b2-472d-aea6-b8383e7473a3
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154325
     prefix: '36708042'
     number_min_length: 11
     number_max_length: 11
-    uuid: e2be36c9-dbda-4109-ae98-f511e159cd52
+    uuid: c0b60e0c-68e5-420a-98fc-83ed58e90d9e
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154326
     prefix: '36708043'
     number_min_length: 11
     number_max_length: 11
-    uuid: 83f5e616-9330-4fad-9f09-f10bcd0ebfd5
+    uuid: afc09558-ab05-409f-a732-6ab6e37f542d
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154327
     prefix: '36708044'
     number_min_length: 11
     number_max_length: 11
-    uuid: bede887a-20ee-4463-ba9e-b6333be62987
+    uuid: 85cf40ec-318b-4b7f-a8fa-fc5b7ea1821b
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154328
     prefix: '36708045'
     number_min_length: 11
     number_max_length: 11
-    uuid: 33ca7519-26e4-4c23-b0e4-9bf356cfc9ed
+    uuid: 295686ce-73d2-4b2e-90e1-741af5292122
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154329
     prefix: '36708046'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7cf1d215-3232-434a-8d34-aad58db2c123
+    uuid: b36abf8f-76b4-44a6-886b-19239ae0c6ba
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154342
     prefix: '3670850'
     number_min_length: 11
     number_max_length: 11
-    uuid: 228b0983-4720-4293-b3a6-b1ddee99838d
+    uuid: 3cc49f73-05e8-4f2f-8f52-78df8ca94989
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154343
     prefix: '36708510'
     number_min_length: 11
     number_max_length: 11
-    uuid: 89c537c4-39cc-4017-8380-886dcd3e29bd
+    uuid: ea6863ec-bb44-48c1-87b2-e2c8d67fd2fb
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154344
     prefix: '36708511'
     number_min_length: 11
     number_max_length: 11
-    uuid: 278e896a-3e6c-4108-998b-f3286aede1cb
+    uuid: e3d05bb5-4f32-4f85-b325-481377afd903
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154345
     prefix: '36708512'
     number_min_length: 11
     number_max_length: 11
-    uuid: c2a19a14-301d-4956-be0d-af9a8cf7e527
+    uuid: 636c9b3e-69c3-4961-bde9-fce00edf64d9
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154346
     prefix: '36708513'
     number_min_length: 11
     number_max_length: 11
-    uuid: 72158926-54cb-45a6-9e06-1354312942eb
+    uuid: dbf6eafd-49c4-43d4-b06f-4fa47e4a5d01
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154347
     prefix: '36708514'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0cba7b1f-4fcc-4455-a6c2-2dbb9e91becd
+    uuid: 786e83b2-97f6-4f2f-a4f1-4cb5ea21580f
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154348
     prefix: '36708520'
     number_min_length: 11
     number_max_length: 11
-    uuid: 280f72e4-99fc-49ea-bae1-4f633fea84e9
+    uuid: 853e3659-dd71-4d97-af32-9df84073a397
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154349
     prefix: '36708521'
     number_min_length: 11
     number_max_length: 11
-    uuid: 35b89001-7bcd-4946-aa99-7d19cb20ef65
+    uuid: c5120b8d-2ae8-4c1e-b06a-288c9eafc4f5
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154350
     prefix: '36708522'
     number_min_length: 11
     number_max_length: 11
-    uuid: d35f75a6-735c-43d2-b86a-7af4eeaaac63
+    uuid: 6c95009f-7a1e-42c4-bea8-24e2f0cd2339
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154351
     prefix: '36708523'
     number_min_length: 11
     number_max_length: 11
-    uuid: 18762f14-f686-4c6a-ab29-0653c1002b8c
+    uuid: a741c061-2807-4803-ab5f-591a31480b35
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154352
     prefix: '36708524'
     number_min_length: 11
     number_max_length: 11
-    uuid: 595e418e-f8ce-4506-8729-231c16242ade
+    uuid: 46bcd23d-1b9b-46c9-b140-4f5f1acad387
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154353
     prefix: '36708555'
     number_min_length: 11
     number_max_length: 11
-    uuid: 94018099-a620-47d0-a137-c60cf2af938e
+    uuid: 09259fd8-b658-4089-9288-4e841d29ee0d
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154354
     prefix: '36708556'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0c59f7b0-0ffb-4719-9ba5-694cb673b072
+    uuid: f34cdc3a-e8bd-417c-a0e2-bcf7beaeb711
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154355
     prefix: '36708557'
     number_min_length: 11
     number_max_length: 11
-    uuid: d419da14-2bbd-4a2a-b41e-1411c9657f00
+    uuid: fd99fa61-13db-41a5-8141-868757c4b471
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154356
     prefix: '36708558'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2804ec74-b89b-4a73-b30d-eef6078579db
+    uuid: ddb63f25-0a73-4bfc-b9a5-e7e6391f3b4c
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154357
     prefix: '36708559'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1b5c12e1-5207-4fc5-be18-863e6e2624f1
+    uuid: cf698f99-3bfb-4b5b-a8ea-9332a8463d6e
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154358
     prefix: '3670856'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9cfcec62-2b36-4c5b-b2ca-25946e6b663a
+    uuid: eac1799b-bbe7-498c-8fd8-64fc7dee32b3
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 154359
     prefix: '3670857'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5576cb94-178c-403f-aabf-faff36b5bb16
+    uuid: 0a32fe9a-d00e-4d8c-87a4-fd22b8f2202a
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 164095
     prefix: '367120010'
     number_min_length: 14
     number_max_length: 14
-    uuid: 7b375428-a942-4149-a9d0-c9f603af408c
+    uuid: e12826f8-569f-4952-8db8-f1ba89188fe9
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 164096
     prefix: '367120011'
     number_min_length: 14
     number_max_length: 14
-    uuid: 0ba25f7c-a9cb-4974-8875-01c628d20f04
+    uuid: aff7e1d3-c950-434a-803e-0c1e404d38fc
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 164097
     prefix: '36712001200'
     number_min_length: 14
     number_max_length: 14
-    uuid: 114c1236-6501-44c2-abb2-2318cfc5d16d
+    uuid: 1bfbeaff-bcbe-4b75-a593-51e710690556
     country_id: *hu
     network_id: *hu_yettel_mobile
   - id: 164098
     prefix: '367120013'
     number_min_length: 14
     number_max_length: 14
-    uuid: 9d5d815e-312b-436e-92f5-a5c0fbadbad6
+    uuid: 0ba0437f-a959-48ff-8c0d-2945b2184e0e
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 164099
     prefix: '3671200140'
     number_min_length: 14
     number_max_length: 14
-    uuid: 7b6f6933-268a-4a98-ba3b-304a1ad16ffc
+    uuid: f24e5fc9-5ae9-4adc-8117-cca4ddbcd52c
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 164100
     prefix: '3671200141'
     number_min_length: 14
     number_max_length: 14
-    uuid: 6197a573-3edc-4560-9a97-d4330cdc9055
+    uuid: 48709794-7884-4598-ad8f-c207f507449c
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 164101
     prefix: '3671200142'
     number_min_length: 14
     number_max_length: 14
-    uuid: b87d5d30-e6e3-4ef7-8742-b8a843c4d229
+    uuid: 69eda745-2209-40c2-8a0e-9f2895993aab
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 164102
     prefix: '3671200143'
     number_min_length: 14
     number_max_length: 14
-    uuid: cc014675-2476-481b-8aa0-a373ed8cc216
+    uuid: 1d59369f-e076-4c4f-a0ee-c34d4f859598
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 164103
     prefix: '3671200144'
     number_min_length: 14
     number_max_length: 14
-    uuid: d4c5680c-1573-4e95-a96a-ff8577b764db
+    uuid: 215c261f-5435-4dff-a375-2660fd530cc0
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 164104
     prefix: '3671200200'
     number_min_length: 14
     number_max_length: 14
-    uuid: d04e9c77-016b-4c69-acf3-cadbb107c881
+    uuid: c9d68398-c614-4621-b0ff-96d579da7c05
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 267136
     prefix: '3620'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8a68c04c-301f-4914-b4d9-c2ffea70883a
+    uuid: 2df274c7-1661-4fcc-b3cb-8bacf0b16b11
     country_id: *hu
     network_id: *hu_yettel_mobile
   - id: 267309
     prefix: '36208450'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5aa754b1-bfed-43b2-842f-a2942ed5e874
+    uuid: 45d5b71d-c3d5-4fcb-ac07-69edab51c1cf
     country_id: *hu
     network_id: *hu_antenna_hungaria_mobile
   - id: 267310
     prefix: '36208451'
     number_min_length: 11
     number_max_length: 11
-    uuid: eba15d25-67e7-48ef-a2e2-3617bb4702d8
+    uuid: b049c89b-b17d-44bb-8cc9-d93d359b787f
     country_id: *hu
     network_id: *hu_antenna_hungaria_mobile
   - id: 267312
     prefix: '36208545'
     number_min_length: 11
     number_max_length: 11
-    uuid: a5fa2af8-9cf4-44cf-9a6b-25566376fbcc
+    uuid: c57c08ec-2bc1-4040-a612-512744d2136e
     country_id: *hu
     network_id: *hu_invitech_mobile
   - id: 267313
     prefix: '36208546'
     number_min_length: 11
     number_max_length: 11
-    uuid: 75e69c5c-5a6e-43d3-a554-9d9a46002ffe
+    uuid: 277ad467-43f7-42e4-8297-ed31acb30d6c
     country_id: *hu
     network_id: *hu_invitech_mobile
   - id: 267314
     prefix: '36208547'
     number_min_length: 11
     number_max_length: 11
-    uuid: f3f2186b-5c21-45d3-814e-982c6b759de8
+    uuid: 31b9ff6b-a165-4a10-b0c0-9811743b3b87
     country_id: *hu
     network_id: *hu_invitech_mobile
   - id: 267315
     prefix: '36208548'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f923394-8258-4c9d-ab89-4ec403efdce3
+    uuid: f1f417b3-dcb9-4e15-902f-f4d6abc269f9
     country_id: *hu
     network_id: *hu_invitech_mobile
   - id: 267316
     prefix: '36208549'
     number_min_length: 11
     number_max_length: 11
-    uuid: dd1c6032-d931-4ea2-b8e4-2f1842efce12
+    uuid: b922d8d6-cf4c-465a-914e-c156167f6566
     country_id: *hu
     network_id: *hu_invitech_mobile
   - id: 267317
     prefix: '3620857'
     number_min_length: 11
     number_max_length: 11
-    uuid: f3af6f5b-4d85-4e59-9b97-76a7c63728e3
+    uuid: 42fd5804-f25a-4f9d-a386-e66350805534
     country_id: *hu
     network_id: *hu_invitech_mobile
   - id: 309466
     prefix: '3630'
     number_min_length: 11
     number_max_length: 11
-    uuid: 100aef83-8df5-46e6-9430-ae8bda5e9b8b
+    uuid: 6f2eba91-376a-43ca-afc9-0fa6ece9126d
     country_id: *hu
     network_id: *hu_telekom_mobile
   - id: 312039
     prefix: '363178'
     number_min_length: 11
     number_max_length: 11
-    uuid: cc54fd0a-865f-4be4-9abb-629351923df0
+    uuid: 20e6d155-095c-4373-96a5-22a2a5cbd9f6
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 312040
     prefix: '3631790'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4355f92c-5d3b-441c-a3bc-b92b6464ec27
+    uuid: 3588da37-7033-4c1b-a890-66d928836809
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321166
     prefix: '3631'
     number_min_length: 11
     number_max_length: 11
-    uuid: 30ba16b3-1f0c-4f57-9b68-2172e4a94ed6
+    uuid: b8da9393-1261-45db-a216-4c3413fc47e3
     country_id: *hu
     network_id: *hu_mobile
   - id: 321192
     prefix: '3631200'
     number_min_length: 11
     number_max_length: 11
-    uuid: bb82828e-e9b8-4854-867b-14f7d9615e82
+    uuid: 4b01fd55-94ea-4681-a551-6b8bb31a0a0a
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 321193
     prefix: '36312010'
     number_min_length: 11
     number_max_length: 11
-    uuid: 43269f29-f4c4-4029-9037-c7b66d8e881a
+    uuid: a33a7415-3026-47ef-a164-7936397016ab
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 321194
     prefix: '36312011'
     number_min_length: 11
     number_max_length: 11
-    uuid: e45ec47b-fcfa-4c24-bc47-e869612535ec
+    uuid: 2ea49966-4952-4b5e-ad0c-665ea5487a42
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 321195
     prefix: '36312012'
     number_min_length: 11
     number_max_length: 11
-    uuid: f1cfa3cd-5cd4-41d9-9842-6275f6562972
+    uuid: 561011f2-3efd-44fc-805f-b9671ea27b39
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 321196
     prefix: '36312020'
     number_min_length: 11
     number_max_length: 11
-    uuid: 00dfaa1c-64c8-4ec1-900d-bd3321613d1c
+    uuid: 57976f62-ce90-4c9a-b5c5-baebac0caf1c
     country_id: *hu
     network_id: *hu_netfone_mobile
   - id: 321197
     prefix: '36312022'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4a4a71fc-3475-4c6b-99ba-5a75e439e0ad
+    uuid: 5e992fbc-bac8-427d-a6fb-87e6af80ce4f
     country_id: *hu
     network_id: *hu_mobil4_mobile
   - id: 321204
     prefix: '3631310'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7b3e161d-e8f2-4bd0-8af9-afe476d475cd
+    uuid: 10961384-10af-430e-a9d7-1e919adf1f9a
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321205
     prefix: '3631311'
     number_min_length: 11
     number_max_length: 11
-    uuid: d64df9f9-699e-4397-925f-834e8488dd24
+    uuid: f453e671-a174-4d09-ad8a-beaaa63e7a87
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321206
     prefix: '3631312'
     number_min_length: 11
     number_max_length: 11
-    uuid: 85177288-a085-428b-9f43-e9499830d2f4
+    uuid: b912bbab-fc2c-4508-ba98-6fc078e612bf
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321207
     prefix: '3631313'
     number_min_length: 11
     number_max_length: 11
-    uuid: aac4895d-6669-4310-bb57-fa51282630ba
+    uuid: 201ddfe6-f8a2-4671-a032-562e8d50e7d9
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321208
     prefix: '3631314'
     number_min_length: 11
     number_max_length: 11
-    uuid: b3ae3276-258a-493e-a929-0d0f66aafff3
+    uuid: cfbae6cb-ee73-4b1f-bb22-8f09c9ea7705
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321209
     prefix: '3631315'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4cf001ea-ce0d-4f97-9d70-c479293c81b6
+    uuid: bafdb4a5-21f7-4f11-9b1c-9d0f2bf1da6c
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321210
     prefix: '3631316'
     number_min_length: 11
     number_max_length: 11
-    uuid: 28e96c06-e9c1-4763-b265-11bd8315bce3
+    uuid: 8beafa49-2cba-4948-9882-3e22353a9ec9
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321211
     prefix: '3631317'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4146afb6-2c3f-4983-81af-defb11ceec4d
+    uuid: f4ef8a38-845f-4932-a6e0-1f220de4f4b8
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321212
     prefix: '3631318'
     number_min_length: 11
     number_max_length: 11
-    uuid: 796f6868-e6e0-42cf-a54c-0a47390099d2
+    uuid: 0e489cc3-aae1-4455-a57c-5a6e15a494cf
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321213
     prefix: '36313190'
     number_min_length: 11
     number_max_length: 11
-    uuid: 050494cd-d528-493e-a4e5-b8fec115b9d4
+    uuid: e1115e55-aa5c-4d28-98b0-e201181cc272
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321214
     prefix: '36313191'
     number_min_length: 11
     number_max_length: 11
-    uuid: a56c2756-5a55-437b-af6f-8de593c31434
+    uuid: 4b07e8f8-f557-409c-8140-4ab465b49e9f
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321215
     prefix: '36313192'
     number_min_length: 11
     number_max_length: 11
-    uuid: ade8effc-e8c3-4a45-8be8-5d5a0313870a
+    uuid: 538527f8-6fbf-4d13-8a3f-1e91a5c7f985
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321216
     prefix: '36313193'
     number_min_length: 11
     number_max_length: 11
-    uuid: bcbb4387-aaa6-4884-a0e4-b8e344e70156
+    uuid: 7eb35391-d9da-4d73-8141-a9922adc9644
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321217
     prefix: '36313194'
     number_min_length: 11
     number_max_length: 11
-    uuid: d5dd92c6-57f1-4f60-9471-a2d46bffd1ac
+    uuid: c516749d-0c77-4360-9238-4d41219317b9
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321218
     prefix: '36313195'
     number_min_length: 11
     number_max_length: 11
-    uuid: a26ea73a-3367-40b0-a6da-34d6fa70b7e0
+    uuid: e5ebf585-a9a8-493e-9ea0-46aae7b1f5b0
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321219
     prefix: '36313196'
     number_min_length: 11
     number_max_length: 11
-    uuid: f6e65811-140e-4d5d-ad73-166f95f10488
+    uuid: 75e72196-22ff-45f9-b372-7cf5198e61df
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321220
     prefix: '36313197'
     number_min_length: 11
     number_max_length: 11
-    uuid: 865e7fb0-4842-41b5-9563-4b41f1f74f71
+    uuid: ba2e0456-3e22-4314-8817-5e3e20821b3d
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321221
     prefix: '36313199'
     number_min_length: 11
     number_max_length: 11
-    uuid: 33fefa6b-fecc-4ae7-b3b4-b521fa45cf6a
+    uuid: 9447e90b-fdd4-4409-a1ac-33df6b883235
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321222
     prefix: '3631320'
     number_min_length: 11
     number_max_length: 11
-    uuid: ad8d133d-7b0a-4b66-b5cf-2a13dca514d7
+    uuid: ebc303fd-7895-4298-963d-a2ea347475ea
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321223
     prefix: '3631321'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2148454d-7dd4-445c-81e7-d1e83e4de689
+    uuid: 72a2de93-f040-4dff-b230-7595e3d58a5c
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321224
     prefix: '3631322'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1402475d-370f-449e-8d91-cdc494d2429f
+    uuid: a221886f-72fd-4559-84d3-e9af56ba2def
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321225
     prefix: '3631323'
     number_min_length: 11
     number_max_length: 11
-    uuid: c67f101b-317a-48bb-a3bb-d5dba13b92d2
+    uuid: 3406e465-e5ee-46ea-89bb-f6b0292b648f
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321226
     prefix: '3631324'
     number_min_length: 11
     number_max_length: 11
-    uuid: 38560e72-b5cb-4358-bbd6-04e0dd88147f
+    uuid: 6cb932f5-bced-4037-b455-67ff8489d15a
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321227
     prefix: '3631325'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1c9e4449-dde7-4deb-a923-8b1dd665f0c3
+    uuid: 3989f13e-f64f-4315-b9f5-efc899f9a5d3
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321228
     prefix: '3631326'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3770edd5-e011-4a1a-ada5-17feb97d3fd0
+    uuid: 57578020-1752-4576-a7a2-53ced19ab8ad
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321229
     prefix: '3631327'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4506e5b2-03ad-496e-a12f-5d1bb562525a
+    uuid: 0192586c-ff50-4487-b0ca-a1776d751775
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321230
     prefix: '3631328'
     number_min_length: 11
     number_max_length: 11
-    uuid: 76d48506-08a0-455d-8aae-c2fc10195c8e
+    uuid: a080ca63-92a4-412f-9922-0e4aeb6df308
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321231
     prefix: '36313290'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7d61b74f-1be6-4527-b597-8e893da81791
+    uuid: 3356388e-0623-481d-a3aa-e61b93c41cd7
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321232
     prefix: '36313291'
     number_min_length: 11
     number_max_length: 11
-    uuid: 97774220-25f9-4d6e-90e9-9daa9485943b
+    uuid: a252b8cc-0d03-4890-b9fa-99abeb369cdb
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321233
     prefix: '36313292'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1e76359-de4d-46b9-bb33-2d1d348deee8
+    uuid: f0ce44fa-aa38-4fe6-bdbe-3bc8c4395439
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321234
     prefix: '3631330'
     number_min_length: 11
     number_max_length: 11
-    uuid: ecfee433-d12e-49e4-ae90-468073b1147e
+    uuid: 8b961555-5a81-4ea0-a0f1-ca8de25e78ec
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321235
     prefix: '3631331'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5dbddb3c-675b-41b4-8936-ec211dbe8f84
+    uuid: 80f26b26-5ca5-4ec5-843e-4fd1b0f666ad
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321236
     prefix: '3631332'
     number_min_length: 11
     number_max_length: 11
-    uuid: 923acf15-331b-4e10-a789-492b094ae1b3
+    uuid: 3ccb5dcc-3a9c-42b8-b163-03233bb2bd23
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321237
     prefix: '36313666'
     number_min_length: 11
     number_max_length: 11
-    uuid: d1f364fd-41c8-49ce-8760-2343994c34f1
+    uuid: e948d896-cc43-4c76-a567-3b5add5729f3
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321240
     prefix: '3631700'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7112304d-2642-4825-8430-b6c5d9df250a
+    uuid: 46ff0a68-6184-4a44-b6d7-95fff1cbdb9a
     country_id: *hu
     network_id: *hu_tarr_mobile
   - id: 321241
     prefix: '3631770'
     number_min_length: 11
     number_max_length: 11
-    uuid: 773b8f1b-e837-4830-ac60-ee6ec009dcef
+    uuid: 13700ad8-e101-4e36-b71b-d1a8540f5acc
     country_id: *hu
     network_id: *hu_vodafone_mobile
   - id: 321242
     prefix: '3631771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 24fd309a-c741-45fb-a3c5-f49728ba3c99
+    uuid: 57824642-f52c-4429-b442-d0dfcaf53739
     country_id: *hu
     network_id: *hu_vodafone_mobile
 # Supplementary services Prefixes
@@ -1192,154 +1412,154 @@ network_prefixes:
     prefix: '3671'
     number_min_length: 14
     number_max_length: 14
-    uuid: 0672a108-9dbe-4283-8e63-c557532fe4cc
+    uuid: 32683f46-2919-452e-a29d-24fd696662cc
     country_id: *hu
     network_id: *hu_machine_to_machine_m2m_services
   - id: 207783
     prefix: '3680'
     number_min_length: 10
     number_max_length: 10
-    uuid: 44baf666-ec6b-441b-924b-ed636207a2a0
+    uuid: 1f90c612-d351-4798-b9fc-d36b7179a690
     country_id: *hu
     network_id: *hu_freephone_services
   - id: 242414
     prefix: '361'
     number_min_length: 5
     number_max_length: 8
-    uuid: 28239b7e-b3a9-4bd4-b347-c76f9ba75b0f
+    uuid: a3cfe6bb-279a-4354-9c6f-218520cdc335
     country_id: *hu
     network_id: *hu_special_services
   - id: 242673
     prefix: '36116'
     number_min_length: 8
     number_max_length: 8
-    uuid: bf583951-f494-4162-9af7-3d42d09b80ac
+    uuid: c7f29266-d8a9-4f34-b04c-5bfe747ab373
     country_id: *hu
     network_id: *hu_social_value_services
   - id: 242722
     prefix: '36118'
     number_min_length: 7
     number_max_length: 7
-    uuid: 172d5d7e-f0b9-4d6a-a475-e6c3d5ed224f
+    uuid: de1bab49-239d-45d7-8f6b-22f2314c7563
     country_id: *hu
     network_id: *hu_directory_enquiry_services
   - id: 242807
     prefix: '3612'
     number_min_length: 6
     number_max_length: 6
-    uuid: 288674ac-f670-411c-a796-579c77045935
+    uuid: 40f7adaa-1b3c-489c-9620-9d181b05ac11
     country_id: *hu
     network_id: *hu_customer_care_services
   - id: 242880
     prefix: '36135'
     number_min_length: 6
     number_max_length: 6
-    uuid: 13460bbc-e98e-4a9d-b345-ac046cd3b13e
+    uuid: 6b3896fd-baf5-4be5-8042-aa08d81aede5
     country_id: *hu
     network_id: *hu_fundraising_services
   - id: 242882
     prefix: '36136'
     number_min_length: 7
     number_max_length: 7
-    uuid: 5f3651f4-ab37-49de-b20a-224ee9effcfc
+    uuid: 035c765c-d361-445b-9c91-62c3141f73b1
     country_id: *hu
     network_id: *hu_fundraising_services
   - id: 242884
     prefix: '36137'
     number_min_length: 7
     number_max_length: 7
-    uuid: a893d1e1-3a6b-4d3d-88d5-b5fbc96bba1f
+    uuid: 42c0a89e-8a82-45b5-acd2-9ebbb8feaf60
     country_id: *hu
     network_id: *hu_emotional_help_services
   - id: 242898
     prefix: '3614'
     number_min_length: 6
     number_max_length: 7
-    uuid: 5caad135-0318-48d8-aa30-1a2b49633336
+    uuid: 6b0821de-f526-4492-8674-ac2e8e08cd1b
     country_id: *hu
     network_id: *hu_freephone_services
   - id: 243031
     prefix: '36160'
     number_min_length: 7
     number_max_length: 7
-    uuid: a5c73b61-a191-4da7-afad-de28c5be434d
+    uuid: a40a8fbb-83f5-474d-bcc2-2fa192ed06eb
     country_id: *hu
     network_id: *hu_premium_rate_services
   - id: 243034
     prefix: '36161'
     number_min_length: 8
     number_max_length: 8
-    uuid: e887a70a-ce45-43c9-8324-ca6c0196fcb9
+    uuid: fd64dd3b-2e96-48a0-a00a-3db73a04649e
     country_id: *hu
     network_id: *hu_premium_rate_services
   - id: 243041
     prefix: '36164'
     number_min_length: 7
     number_max_length: 7
-    uuid: 0075bc20-7cfd-4d5a-babe-a4307c4c9403
+    uuid: 6ad8e768-ce7b-44b9-b8ed-ace90a64aa70
     country_id: *hu
     network_id: *hu_premium_rate_services
   - id: 243042
     prefix: '36165'
     number_min_length: 8
     number_max_length: 8
-    uuid: 043e6133-c20f-43d3-bb24-7b992bd88c78
+    uuid: 53f1eaa0-46cb-40a1-b7d9-df0e228d3edd
     country_id: *hu
     network_id: *hu_premium_rate_services
   - id: 243044
     prefix: '36168'
     number_min_length: 7
     number_max_length: 7
-    uuid: 96f64f5f-b3b8-402c-82ef-0378903928b2
+    uuid: 42cb1410-2638-4a8a-aa4c-ddada43c1d33
     country_id: *hu
     network_id: *hu_adults_entertainment_services
   - id: 243046
     prefix: '36169'
     number_min_length: 8
     number_max_length: 8
-    uuid: 82bc6fcb-8181-4e17-94e7-ac62c2d537a4
+    uuid: f6c9bdaf-74bd-458c-a91a-5527b717097e
     country_id: *hu
     network_id: *hu_adults_entertainment_services
   - id: 243057
     prefix: '3617'
     number_min_length: 5
     number_max_length: 7
-    uuid: 665b9b75-11e0-4504-bb09-94240c8ba703
+    uuid: 5eca9476-cb94-407e-9995-029bd0db65a3
     country_id: *hu
     network_id: *hu_operator_specific_services
   - id: 247274
     prefix: '3618'
     number_min_length: 5
     number_max_length: 6
-    uuid: b83bccc4-63a2-4a4d-a352-efa0b0c18760
+    uuid: cc231431-205a-4d15-ba87-30018c40237c
     country_id: *hu
     network_id: *hu_public_interest_services
   - id: 247338
     prefix: '3619'
     number_min_length: 5
     number_max_length: 5
-    uuid: b4317599-9719-495e-ac28-e5152b9c9bf6
+    uuid: c6c396bb-0cff-4920-9cc2-62ffc38154a7
     country_id: *hu
     network_id: *hu_operator_assistance_services
   - id: 347698
     prefix: '3638'
     number_min_length: 11
     number_max_length: 11
-    uuid: 717478a7-3997-4621-9e28-f5337c1999cb
+    uuid: 36ae4950-5b0f-4326-b0a5-ded4c978dee9
     country_id: *hu
     network_id: *hu_corporate_networks_services
   - id: 454103
     prefix: '3690'
     number_min_length: 10
     number_max_length: 10
-    uuid: e0d8b549-d172-4d63-853e-7fd85dc42262
+    uuid: a0af4107-187b-4791-b449-86ab494fc876
     country_id: *hu
     network_id: *hu_adults_entertainment_services
   - id: 458143
     prefix: '3691'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1bec341a-c283-4204-920e-85adc2d9621a
+    uuid: 3492e2e9-c837-4817-80a2-0cbe6850808b
     country_id: *hu
     network_id: *hu_premium_rate_services
 # Country code Prefixes
@@ -1347,6 +1567,6 @@ network_prefixes:
     prefix: '36'
     number_min_length: 3
     number_max_length: 100
-    uuid: 2409fd48-7e16-4236-a44f-af2490c8a639
+    uuid: f28d138b-e17b-4a2c-b783-21be97c58c11
     country_id: *hu
     network_id: null

@@ -1,39 +1,415 @@
 country_id: &ly 121
 networks:
 # Fixed Networks
-  - id: &ly_fixed 4162
-    name: LY Fixed
-    uuid: 8fdd81cc-2783-49ac-a468-24626d86034a
+  - id: &ly_kabaw_fixed 4824
+    name: LY Kabaw Fixed
+    uuid: 8985cde7-8773-4708-84f4-df36bc2183cc
+    type_id: 12
+  - id: &ly_tigi_fixed 4860
+    name: LY Tigi Fixed
+    uuid: 29681cac-739a-4774-b436-145346ee52b7
+    type_id: 12
+  - id: &ly_ghadames_fixed 4960
+    name: LY Ghadames Fixed
+    uuid: 2cd54b32-5e28-46e4-b971-00a1f21e03bc
+    type_id: 12
+  - id: &ly_misratah_fixed 5641
+    name: LY Misratah Fixed
+    uuid: d3112021-1b1b-4925-9f2e-deab33634360
+    type_id: 12
+  - id: &ly_sirt_fixed 7184
+    name: LY Sirt Fixed
+    uuid: c2f96a4f-ca3e-40f0-8c40-22eea8572b31
+    type_id: 12
+  - id: &ly_zliten_fixed 7372
+    name: LY Zliten Fixed
+    uuid: 69ff0340-5bda-48d9-bcd9-b67eb356cd32
+    type_id: 12
+  - id: &ly_tawergha_fixed 7382
+    name: LY Tawergha Fixed
+    uuid: deba81a5-d74e-4774-b3f6-f3a52a11bdad
+    type_id: 12
+  - id: &ly_dafnia_fixed 7406
+    name: LY Dafnia Fixed
+    uuid: b5fd2bec-bf2d-4451-8427-d591909cbf01
+    type_id: 12
+  - id: &ly_kasarahmad_fixed 7424
+    name: LY Kasarahmad Fixed
+    uuid: cdebd217-6441-4ea5-9dd4-ef832f23fa56
+    type_id: 12
+  - id: &ly_zawyat_elmahjub_fixed 7482
+    name: LY Zawyat Elmahjub Fixed
+    uuid: 98b16799-8a56-4a5f-8b94-7f66a29a8f5f
+    type_id: 12
+  - id: &ly_bugrain_fixed 7552
+    name: LY Bugrain Fixed
+    uuid: 6f4d643e-e3f7-49df-a9e6-f66fbaec764e
+    type_id: 12
+  - id: &ly_wodan_fixed 8272
+    name: LY Wodan Fixed
+    uuid: 8764c2cf-40d9-4966-92cb-6608d6234b93
+    type_id: 12
+  - id: &ly_sokna_fixed 8509
+    name: LY Sokna Fixed
+    uuid: b2e51245-c183-4ed4-8c87-a3225041f439
+    type_id: 12
+  - id: &ly_soussa_fixed 8591
+    name: LY Soussa Fixed
+    uuid: 4d2c39eb-f1ad-498b-a80f-6ec12ed5ef85
+    type_id: 12
+  - id: &ly_zella_fixed 8608
+    name: LY Zella Fixed
+    uuid: a2b78fec-ec69-45d8-94f9-fbd4a04500ca
+    type_id: 12
+  - id: &ly_abuhadi_fixed 9044
+    name: LY Abuhadi Fixed
+    uuid: bba6fb72-b622-454f-ba93-698294336159
+    type_id: 12
+  - id: &ly_abengawad_fixed 9107
+    name: LY Abengawad Fixed
+    uuid: 771bfef6-8308-41eb-a28d-474fdc03af23
+    type_id: 12
+  - id: &ly_wadi_jeref_fixed 9119
+    name: LY Wadi Jeref Fixed
+    uuid: 19a4187d-9155-4204-8611-102ac1b65947
+    type_id: 12
+  - id: &ly_noflia_fixed 9139
+    name: LY Noflia Fixed
+    uuid: b2db31ce-f130-4b0c-96be-15e5e6cb6902
+    type_id: 12
+  - id: &ly_hun_fixed 9680
+    name: LY Hun Fixed
+    uuid: 6394c06d-e46d-4917-b434-3b082c648bd7
+    type_id: 12
+  - id: &ly_benghazi_fixed 11792
+    name: LY Benghazi Fixed
+    uuid: 3dc20465-6c32-456a-948f-2d2e814c0d31
+    type_id: 12
+  - id: &ly_jerdina_fixed 12220
+    name: LY Jerdina Fixed
+    uuid: a3bcea64-00a6-4350-bf8f-cdd808cb0ad8
+    type_id: 12
+  - id: &ly_seluk_fixed 12243
+    name: LY Seluk Fixed
+    uuid: c3c0aa40-ebe8-4309-95c3-06770cca1bfc
+    type_id: 12
+  - id: &ly_elmagrun_fixed 12268
+    name: LY Elmagrun Fixed
+    uuid: d817be7f-9eb1-4710-b6aa-01258307eb85
+    type_id: 12
+  - id: &ly_gmines_fixed 12370
+    name: LY Gmines Fixed
+    uuid: 12fd73c1-aee6-4f1d-b8ef-ad2cdf40c00d
+    type_id: 12
+  - id: &ly_elkuwaifia_fixed 12388
+    name: LY Elkuwaifia Fixed
+    uuid: 61c2ea11-b01f-4e17-af05-03168974cfda
+    type_id: 12
+  - id: &ly_deriana_fixed 12414
+    name: LY Deriana Fixed
+    uuid: b5daeda8-df9a-436e-acdb-8a944ab38948
+    type_id: 12
+  - id: &ly_kaalifa_fixed 12440
+    name: LY Kaalifa Fixed
+    uuid: b3a594f6-e34e-4363-8d2e-a8e90c4f429b
+    type_id: 12
+  - id: &ly_benina_fixed 12460
+    name: LY Benina Fixed
+    uuid: 7f2b071c-bc0b-47fc-9ddd-dace0c0a1e22
+    type_id: 12
+  - id: &ly_sidi_sultan_fixed 13009
+    name: LY Sidi Sultan Fixed
+    uuid: d9502362-fb8a-488c-9466-c1f199818092
+    type_id: 12
+  - id: &ly_bisher_fixed 13035
+    name: LY Bisher Fixed
+    uuid: 8b25f058-abe7-46f7-887a-b39c824ab81a
+    type_id: 12
+  - id: &ly_kofra_fixed 13518
+    name: LY Kofra Fixed
+    uuid: 47e1bd7c-2c2b-4ee0-874b-8b00762fe7bd
+    type_id: 12
+  - id: &ly_ojla_fixed 13538
+    name: LY Ojla Fixed
+    uuid: db9f1250-66bc-4802-a97e-ed5b94111997
+    type_id: 12
+  - id: &ly_jalo_fixed 13568
+    name: LY Jalo Fixed
+    uuid: 397eee08-1f9a-47f6-8825-49255fc77b4e
+    type_id: 12
+  - id: &ly_elmareg_fixed 14505
+    name: LY Elmareg Fixed
+    uuid: 36a03859-b0f9-456c-935c-ba310dee4de7
+    type_id: 12
+  - id: &ly_tolmitha_fixed 14603
+    name: LY Tolmitha Fixed
+    uuid: 7e55799c-ea68-4412-8a2a-a915953be6d9
+    type_id: 12
+  - id: &ly_jardas_fixed 14740
+    name: LY Jardas Fixed
+    uuid: ddeb2a8b-9923-4aed-a8f0-72ca51a27465
+    type_id: 12
+  - id: &ly_taknes_fixed 14766
+    name: LY Taknes Fixed
+    uuid: d5612efa-ffc3-4ba7-b652-04edf6e217ca
+    type_id: 12
+  - id: &ly_elbayada_fixed 14813
+    name: LY Elbayada Fixed
+    uuid: 79e14688-0de4-474c-95c9-8a4f02e888fa
+    type_id: 12
+  - id: &ly_tomina_fixed 14835
+    name: LY Tomina Fixed
+    uuid: 9d519b04-d518-49a6-bd99-ef8051357ed5
+    type_id: 12
+  - id: &ly_sebha_fixed 16211
+    name: LY Sebha Fixed
+    uuid: da67d7a2-c6c2-432e-b126-f528e9016d9d
+    type_id: 12
+  - id: &ly_brak_fixed 16591
+    name: LY Brak Fixed
+    uuid: 853ab8b1-f37a-4c8c-a0d2-e0247fe0e6d3
+    type_id: 12
+  - id: &ly_murzuk_fixed 16724
+    name: LY Murzuk Fixed
+    uuid: 70f2b277-e3dd-4ab5-9c9f-e3d8626c4963
+    type_id: 12
+  - id: &ly_um_laranib_fixed 16776
+    name: LY Um Laranib Fixed
+    uuid: 9494d02a-c416-450b-904f-bc723f3da03b
+    type_id: 12
+  - id: &ly_edry_fixed 16934
+    name: LY Edry Fixed
+    uuid: e5eb0bea-26d4-4d9d-9623-5fc062cacebd
+    type_id: 12
+  - id: &ly_ghat_fixed 16991
+    name: LY Ghat Fixed
+    uuid: 958671f3-4dab-496e-a7b0-7d8f953cb793
+    type_id: 12
+  - id: &ly_ghrefa_fixed 17127
+    name: LY Ghrefa Fixed
+    uuid: e64231fd-80a1-42b9-86a1-530eba46b6cc
+    type_id: 12
+  - id: &ly_ubary_fixed 17154
+    name: LY Ubary Fixed
+    uuid: e0c64869-b6ee-4527-9b4f-cce1ecb90fb5
+    type_id: 12
+  - id: &ly_wadi_atba_fixed 17211
+    name: LY Wadi Atba Fixed
+    uuid: d93f21d1-0b38-4469-ae3b-f65286db1505
+    type_id: 12
+  - id: &ly_bergen_fixed 17244
+    name: LY Bergen Fixed
+    uuid: 6919254b-d077-4f10-8f4b-be265a6b725e
+    type_id: 12
+  - id: &ly_garda_fixed 17305
+    name: LY Garda Fixed
+    uuid: 7b782742-1b45-4327-ae2c-add2a5e1f83a
+    type_id: 12
+  - id: &ly_zawaya_fixed 17562
+    name: LY Zawaya Fixed
+    uuid: 98f16727-6968-43ee-b67e-aa4f95ab5e4a
+    type_id: 12
+  - id: &ly_traghen_fixed 17577
+    name: LY Traghen Fixed
+    uuid: 07322b90-bfdc-43ec-ad8c-aedf073fd23a
+    type_id: 12
+  - id: &ly_suk_elkhamis_fixed 26043
+    name: LY Suk Elkhamis Fixed
+    uuid: 8fd08815-e971-4e7d-9fc2-32c4b21c51cd
+    type_id: 12
+  - id: &ly_sidiessaiah_fixed 27031
+    name: LY Sidiessaiah Fixed
+    uuid: 83edb2d1-2469-466b-933f-3df80eab7cae
+    type_id: 12
+  - id: &ly_tripoli_fixed 27344
+    name: LY Tripoli Fixed
+    uuid: b25360d1-ce7e-44e9-b460-b3aaa7630d8b
+    type_id: 12
+  - id: &ly_ben_ghashir_fixed 27819
+    name: LY Ben Ghashir Fixed
+    uuid: b33bcc59-9dcf-4fef-ae91-ddc1432b504b
+    type_id: 12
+  - id: &ly_swajni_fixed 27892
+    name: LY Swajni Fixed
+    uuid: ebb98984-86df-47b1-a3b1-c7f2bc40793a
+    type_id: 12
+  - id: &ly_ezzaonia_zawia_fixed 28306
+    name: LY Ezzaonia Zawia Fixed
+    uuid: 5761198e-0c16-468b-a148-36909a6ac776
+    type_id: 12
+  - id: &ly_sabratha_fixed 28975
+    name: LY Sabratha Fixed
+    uuid: 36581e87-4853-45e1-b979-af8fa85e4d1f
+    type_id: 12
+  - id: &ly_zahra_fixed 29233
+    name: LY Zahra Fixed
+    uuid: bbbe8dd9-3d61-4c95-9e2d-e6de0a128b71
+    type_id: 12
+  - id: &ly_taigura_fixed 29515
+    name: LY Taigura Fixed
+    uuid: d91f8142-a892-4bf0-b5e3-f01bdbcef23c
+    type_id: 12
+  - id: &ly_zuara_fixed 29840
+    name: LY Zuara Fixed
+    uuid: 3b4bafbb-7854-47ad-adf8-241031c598a4
+    type_id: 12
+  - id: &ly_hashan_fixed 30224
+    name: LY Hashan Fixed
+    uuid: 4ea3a077-616b-4e09-8c51-adce0afd80d0
+    type_id: 12
+  - id: &ly_azizia_fixed 30252
+    name: LY Azizia Fixed
+    uuid: cc0a3ddd-95d3-49b4-ae68-ea58c5534ef8
+    type_id: 12
+  - id: &ly_matred_fixed 30289
+    name: LY Matred Fixed
+    uuid: dc7c44fa-4ea6-4f1d-a14a-2fd2166d59f9
+    type_id: 12
+  - id: &ly_mamura_fixed 30409
+    name: LY Mamura Fixed
+    uuid: 7e12e03a-2a73-41c2-9526-5fe02b9c1e9e
+    type_id: 12
+  - id: &ly_elmaya_fixed 30444
+    name: LY Elmaya Fixed
+    uuid: b48e2533-9b4d-49cd-b4f6-c8e733b05176
+    type_id: 12
+  - id: &ly_ajailat_fixed 30470
+    name: LY Ajailat Fixed
+    uuid: 4663c35f-1450-4814-a740-95eb627b97da
+    type_id: 12
+  - id: &ly_hugialin_fixed 30536
+    name: LY Hugialin Fixed
+    uuid: 938c0a13-9072-4675-95ed-4cd10e2547d5
+    type_id: 12
+  - id: &ly_abu_issa_fixed 31045
+    name: LY Abu Issa Fixed
+    uuid: b5198124-68bd-460b-8cc4-109a91ab7ee4
+    type_id: 12
+  - id: &ly_jmail_fixed 31144
+    name: LY Jmail Fixed
+    uuid: 23f5da35-8981-4c99-90d5-5bcbf183530a
+    type_id: 12
+  - id: &ly_khums_fixed 31756
+    name: LY Khums Fixed
+    uuid: 30046720-9a1c-4f12-927e-2f412deee782
+    type_id: 12
+  - id: &ly_tarhuna_fixed 32078
+    name: LY Tarhuna Fixed
+    uuid: 6313e80a-c8c8-49b3-b04c-a7089cbb2bf8
+    type_id: 12
+  - id: &ly_bani_walid_fixed 32403
+    name: LY Bani Walid Fixed
+    uuid: 705e0ee5-f555-470a-8758-2a9399ca18d3
+    type_id: 12
+  - id: &ly_wadi_keam_fixed 32427
+    name: LY Wadi Keam Fixed
+    uuid: 9feb387b-2ab4-48c8-94b0-bab5f3c4ed2a
+    type_id: 12
+  - id: &ly_kussabat_fixed 32497
+    name: LY Kussabat Fixed
+    uuid: 6dbe5b57-154a-4836-abb9-d3ca720cea93
+    type_id: 12
+  - id: &ly_garian_fixed 36243
+    name: LY Garian Fixed
+    uuid: 9c517c8c-7ac3-4267-9618-8a27d9861df8
+    type_id: 12
+  - id: &ly_buzayan_fixed 36520
+    name: LY Buzayan Fixed
+    uuid: 5af63683-8ac0-40de-9df4-90c134f362a0
+    type_id: 12
+  - id: &ly_yefren_fixed 37288
+    name: LY Yefren Fixed
+    uuid: bcf7aea7-5c28-4936-8ffa-4da4755369cc
+    type_id: 12
+  - id: &ly_mizda_fixed 37311
+    name: LY Mizda Fixed
+    uuid: 6dcdddb3-449c-43c7-8180-ad174262e9d7
+    type_id: 12
+  - id: &ly_guassem_fixed 37339
+    name: LY Guassem Fixed
+    uuid: 41e68fc5-8978-4249-84db-071d3793834e
+    type_id: 12
+  - id: &ly_kikla_fixed 37421
+    name: LY Kikla Fixed
+    uuid: 1634658f-1a33-41a4-bcc8-9d2ca161774d
+    type_id: 12
+  - id: &ly_rujban_fixed 37794
+    name: LY Rujban Fixed
+    uuid: 437f11f5-e368-4435-a0be-8874e1a154e5
+    type_id: 12
+  - id: &ly_reyana_fixed 37809
+    name: LY Reyana Fixed
+    uuid: b0ae77cd-11b4-460c-8972-3b1760dd90ee
+    type_id: 12
+  - id: &ly_al_josh_fixed 37925
+    name: LY Al Josh Fixed
+    uuid: 3e27c8ff-a6d9-4ac5-9ee6-6683e06de1b3
+    type_id: 12
+  - id: &ly_nalut_fixed 38315
+    name: LY Nalut Fixed
+    uuid: 77125109-c03d-4ab0-9d67-b4f0a2f86bbd
+    type_id: 12
+  - id: &ly_derna_fixed 39314
+    name: LY Derna Fixed
+    uuid: 86c4ec83-5924-413b-88b8-42af1d4bdb58
+    type_id: 12
+  - id: &ly_haraua_fixed 39698
+    name: LY Haraua Fixed
+    uuid: a525067a-6178-4b92-bf0e-de78b11b9e1b
+    type_id: 12
+  - id: &ly_gubba_fixed 39737
+    name: LY Gubba Fixed
+    uuid: c78a198a-8e26-4122-9eb6-9337c5ff1b24
+    type_id: 12
+  - id: &ly_shahat_fixed 40351
+    name: LY Shahat Fixed
+    uuid: 9cb312e4-9bf9-41d9-8a42-d70f09ce64bd
+    type_id: 12
+  - id: &ly_massa_fixed 40377
+    name: LY Massa Fixed
+    uuid: b7c5f8ec-62c7-40f7-8f7b-781a574c8b82
+    type_id: 12
+  - id: &ly_slenta_fixed 40411
+    name: LY Slenta Fixed
+    uuid: 7123a342-7dc6-4e66-8fb1-dd7d7ae5ac26
+    type_id: 12
+  - id: &ly_el_beida_fixed 40859
+    name: LY El Beida Fixed
+    uuid: 5d0c95bc-9fef-4e77-a19e-cdad4227f80a
+    type_id: 12
+  - id: &ly_jaghbub_fixed 41935
+    name: LY Jaghbub Fixed
+    uuid: 48fc7613-7b1b-4e1f-a700-df192b610c0e
     type_id: 12
 # Mobile Networks
-  - id: &ly_libyana_mobile 4977
+  - id: &ly_libyana_mobile 20039
     name: LY Libyana Mobile
-    uuid: d56a2125-7ee7-4e61-851f-4075754d88e5
+    uuid: c109831b-469a-43d8-9980-0cb5bb74a3bc
     type_id: 3
-  - id: &ly_libyaphone_mobile_mobile 4999
+  - id: &ly_libyaphone_mobile_mobile 20276
     name: LY Libyaphone Mobile Mobile
-    uuid: 98f8b8f8-92cc-4c5f-ab3c-cd173d08d326
+    uuid: 61178cf7-d54e-42fd-b4ea-3568996b3b47
     type_id: 3
-  - id: &ly_al_madar_mobiles_mobile 7893
+  - id: &ly_al_madar_mobiles_mobile 42431
     name: LY Al Madar Mobiles Mobile
-    uuid: fd939f22-b818-463b-b444-a6b94b5d1245
+    uuid: 83f04457-1019-4a21-a8d0-bc12565ceff8
     type_id: 3
 # Supplementary services Networks
-  - id: &ly_special_services_free 5555
+  - id: &ly_special_services_free 21769
     name: LY Special Services Free
-    uuid: 6ae54191-a17f-4512-a61f-2b3d32ffcdb9
+    uuid: 221cdbc6-2771-4bb1-a964-270a9cc9c9e6
     type_id: 14
-  - id: &ly_special_services_paid 5581
+  - id: &ly_special_services_paid 21795
     name: LY Special Services Paid
-    uuid: d384a397-179e-40fc-896a-76ac45bd6d53
+    uuid: 179fe4b6-0f04-402e-a62d-530bc13bdcb4
     type_id: 14
-  - id: &ly_freephone_services 7558
+  - id: &ly_freephone_services 38507
     name: LY Freephone Services
-    uuid: 3677e3c4-9a07-4541-9cdf-d3efdfe0488d
+    uuid: 33bf6fe6-96a4-4cc4-8620-f417fcaeeaea
     type_id: 14
-  - id: &ly_premium_rate_services 7832
+  - id: &ly_premium_rate_services 42077
     name: LY Premium Rate Services
-    uuid: d5f66f6a-4af6-4b89-bdb4-dade0e474e49
+    uuid: 5e4287b5-5e11-47cc-a694-26a1242c5078
     type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -41,694 +417,694 @@ network_prefixes:
     prefix: '218481'
     number_min_length: 11
     number_max_length: 11
-    uuid: bf178d3d-3006-4058-b9ac-cba66035397e
+    uuid: a89dd56f-38b6-4766-9f03-04ab711c6bbb
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_kabaw_fixed
   - id: 56894
     prefix: '218482'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8e4a69d2-c198-4786-bc2a-cb91ab949b3e
+    uuid: ab139a5d-b0d2-4223-8a75-ba9b4aa1b635
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_tigi_fixed
   - id: 57221
     prefix: '218484'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae54d299-7638-4a3e-a701-fa3cb844f0de
+    uuid: c4c31466-b098-4178-8b24-b2277a536905
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_ghadames_fixed
   - id: 62608
     prefix: '21851'
     number_min_length: 11
     number_max_length: 11
-    uuid: 45cb9e3e-58bc-4ba2-a25c-05001dd9555c
+    uuid: ad7937e4-1d5b-4485-801c-d2468924738e
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_misratah_fixed
   - id: 73203
     prefix: '21854'
     number_min_length: 11
     number_max_length: 11
-    uuid: d889a9f2-6c36-4541-b912-53cc1b7c8f67
+    uuid: 55c0805e-5dd5-4514-9181-34f0988bdc1a
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_sirt_fixed
   - id: 76319
     prefix: '218521'
     number_min_length: 11
     number_max_length: 11
-    uuid: bb842eed-d71c-4aa7-b7e2-ebd160576d15
+    uuid: 468feb26-1d00-4fb8-ad2f-fdbe4409b28f
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_zliten_fixed
   - id: 76330
     prefix: '218522'
     number_min_length: 11
     number_max_length: 11
-    uuid: a3ad3583-3219-41b6-8bad-f75d8c9f2755
+    uuid: 9a1022a0-3e18-48c9-a463-17415ab0fb8f
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_tawergha_fixed
   - id: 76366
     prefix: '218523'
     number_min_length: 11
     number_max_length: 11
-    uuid: 891e4f8e-d182-41d9-bad3-28f29994f99b
+    uuid: 8eead42d-c4e9-42cb-9ec8-3e6f7993a0c7
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_dafnia_fixed
   - id: 76385
     prefix: '218524'
     number_min_length: 11
     number_max_length: 11
-    uuid: 39dd45b9-0402-44bb-a7d8-fec2f065769a
+    uuid: d5e00ea3-249d-4959-a8d5-8607ee62c767
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_kasarahmad_fixed
   - id: 76451
     prefix: '218526'
     number_min_length: 11
     number_max_length: 11
-    uuid: adf67529-8a49-4e9b-bdc5-d922990f8ab1
+    uuid: 6f530fc4-f368-4511-9d9d-0af34161c01d
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_zawyat_elmahjub_fixed
   - id: 76524
     prefix: '218529'
     number_min_length: 11
     number_max_length: 11
-    uuid: 195a0238-5c3e-4f48-82b2-1e76a5fe73d4
+    uuid: 90acb526-bf15-4207-b692-ca50e83da95b
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_bugrain_fixed
   - id: 82550
     prefix: '218581'
     number_min_length: 11
     number_max_length: 11
-    uuid: d308b949-5378-43ba-9bca-6d8a9af624cb
+    uuid: 2ac3c6bf-9b78-4e56-954d-05f08362798c
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_wodan_fixed
   - id: 83329
     prefix: '218582'
     number_min_length: 11
     number_max_length: 11
-    uuid: f296d9b2-e71b-4616-bf82-ecf7e069fe0e
+    uuid: 550b5f71-46d3-4eda-9d17-f5d61253c649
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_sokna_fixed
   - id: 83480
     prefix: '218583'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef11ba3b-e0ff-438a-8e81-b2a35b488925
+    uuid: fa1ea2e7-ed82-4132-95bf-e4cd8b818ae4
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_soussa_fixed
   - id: 83498
     prefix: '218584'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8d901bf1-8df4-448d-a4bd-c1b3af03f2bb
+    uuid: a7f16cd4-6c28-49df-85e5-074886cc3b15
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_zella_fixed
   - id: 86697
     prefix: '218551'
     number_min_length: 11
     number_max_length: 11
-    uuid: cae81ab9-9131-49bd-9976-7c69f23b63da
+    uuid: ecc95cf8-d6d4-4862-ad2d-f596a6085e11
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_abuhadi_fixed
   - id: 87009
     prefix: '218553'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6defd1ff-3e54-4d2c-8b6d-2fac42e6c1b5
+    uuid: a872b4ea-eb11-46e4-b667-f17105429cd2
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_abengawad_fixed
   - id: 87028
     prefix: '218554'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4b27b0c-0ef0-4e59-b8db-f4d0ef66c0d3
+    uuid: 050d1335-1ed3-48f4-a866-9388d6695f85
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_wadi_jeref_fixed
   - id: 87056
     prefix: '218555'
     number_min_length: 11
     number_max_length: 11
-    uuid: d6dad6a2-4338-4951-9d1a-83a3ebae5b78
+    uuid: 02f9f10b-aa6e-44ac-9844-e8d8eaacf825
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_noflia_fixed
   - id: 90271
     prefix: '21857'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6fe1efd7-f7d3-4c67-a913-6ae569acb3b1
+    uuid: b7676a55-c367-4318-818f-ab384d78a7e0
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_hun_fixed
   - id: 108586
     prefix: '21861'
     number_min_length: 11
     number_max_length: 11
-    uuid: dfd06126-3e03-4fa7-9a1b-6ea009d6508c
+    uuid: f3f50cce-2cbb-4da9-99ee-0598d86da90e
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_benghazi_fixed
   - id: 113852
     prefix: '218627'
     number_min_length: 11
     number_max_length: 11
-    uuid: df2354ee-47e1-483d-9c78-320fa8446761
+    uuid: d781b64b-af6a-488d-a1f3-56aac7bab288
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_jerdina_fixed
   - id: 114218
     prefix: '218628'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3af6b9fe-3a89-4362-bf04-eb4a769f3469
+    uuid: 0c52c42d-f912-4600-a8e5-57e39bcc2729
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_seluk_fixed
   - id: 114431
     prefix: '218629'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9c737d59-6396-40ea-bcd1-4df92c075435
+    uuid: a541e930-aa5f-46b6-9900-157260ba7384
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_elmagrun_fixed
   - id: 115573
     prefix: '218623'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b1c7424-c159-4d54-a778-6bad32295ec2
+    uuid: ce50668c-ab17-4a13-9870-fd3b69f89464
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_gmines_fixed
   - id: 115959
     prefix: '218624'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5d06ed92-32cb-4993-8e41-e33a6c9e7574
+    uuid: 8e1f5f21-b690-4122-9cd4-43c60a6a7954
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_elkuwaifia_fixed
   - id: 116799
     prefix: '218625'
     number_min_length: 11
     number_max_length: 11
-    uuid: 431934b6-878c-45b7-9c79-475d4bea7887
+    uuid: 13fb1d37-e55a-4445-9856-e5f40131ff46
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_deriana_fixed
   - id: 117148
     prefix: '218626'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19531a6c-fc96-4496-9012-5ad31965e33d
+    uuid: 154d07cc-9c49-4cd5-bb7c-3c3c5c680682
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_kaalifa_fixed
   - id: 117830
     prefix: '21863'
     number_min_length: 11
     number_max_length: 11
-    uuid: a306f21b-b526-432e-bb9e-6f62fd5c8bff
+    uuid: aa9f8a6d-5c2c-4f8b-b249-73c0d72efdb1
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_benina_fixed
   - id: 127135
     prefix: '218654'
     number_min_length: 11
     number_max_length: 11
-    uuid: 234c1f21-1f68-4396-8035-b8f80ffd32bd
+    uuid: 877d1e26-4a9f-43d3-8117-d028410e055b
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_sidi_sultan_fixed
   - id: 127163
     prefix: '218655'
     number_min_length: 11
     number_max_length: 11
-    uuid: 45325439-9537-4bfc-b69d-344ecbf73e6f
+    uuid: 9f3c0585-1c67-4ed1-b104-8375ca7ef1fa
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_bisher_fixed
   - id: 137191
     prefix: '218652'
     number_min_length: 11
     number_max_length: 11
-    uuid: 105bd43e-4f2a-434f-9392-607a4335284f
+    uuid: e08ee248-41fa-49b3-9632-b8cf6ac0434b
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_kofra_fixed
   - id: 137258
     prefix: '218653'
     number_min_length: 11
     number_max_length: 11
-    uuid: aeafbeec-2454-4bef-8034-02d183eea976
+    uuid: 397d2d0a-a2d9-4b35-a7b0-a5baf18f053c
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_ojla_fixed
   - id: 137645
     prefix: '218657'
     number_min_length: 11
     number_max_length: 11
-    uuid: a9ecad6f-cd9a-4305-9277-147ee9759e30
+    uuid: 4098b8b9-f57d-40f9-805e-8b4a5c2fedec
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_jalo_fixed
   - id: 151422
     prefix: '21867'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5375e5fb-410b-48b7-a64d-18c22232636c
+    uuid: 1c9f6131-0c0c-44b9-b91c-12672f3618d4
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_elmareg_fixed
   - id: 151799
     prefix: '218681'
     number_min_length: 11
     number_max_length: 11
-    uuid: 02e8ec78-f42e-4f75-9579-903bdec54ff6
+    uuid: ca23cc8a-e5c2-4336-87a9-15561df7a601
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_tolmitha_fixed
   - id: 152249
     prefix: '218682'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9e65f21a-3030-4987-bf8b-93fe97117d52
+    uuid: 38024359-e693-42eb-a637-e801c68686bb
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_jardas_fixed
   - id: 152629
     prefix: '218683'
     number_min_length: 11
     number_max_length: 11
-    uuid: afc9700f-eff8-4f0f-81d9-a8ae33c9825e
+    uuid: 4ea64a1c-ced9-4f4e-9355-fc283ac9a642
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_taknes_fixed
   - id: 152694
     prefix: '218684'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3b6fafbd-5d16-41b7-add2-1cef9d440c83
+    uuid: aa826b3d-9b1a-4b38-b207-ffda93380851
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_elbayada_fixed
   - id: 152737
     prefix: '218685'
     number_min_length: 11
     number_max_length: 11
-    uuid: bd692637-7c29-4a4e-ad13-81df10fb28f0
+    uuid: 75db840e-2dc6-4475-8740-617ace66a98a
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_tomina_fixed
   - id: 163991
     prefix: '21871'
     number_min_length: 11
     number_max_length: 11
-    uuid: d9793772-6d0e-4b1d-ac37-831ba5425078
+    uuid: 11c8fee0-b0c6-4538-ba26-6214b4740523
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_sebha_fixed
   - id: 169521
     prefix: '218721'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8cd5ade7-8aab-49e0-aabe-0eccf7eade9f
+    uuid: be7ab50f-8d16-40c6-8275-a1433dda006b
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_brak_fixed
   - id: 170428
     prefix: '218725'
     number_min_length: 11
     number_max_length: 11
-    uuid: c29e7e68-ecd8-4012-b92b-4f9dc053cb28
+    uuid: b374199b-70ae-455c-bdc8-0817c16284cf
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_murzuk_fixed
   - id: 170695
     prefix: '218726'
     number_min_length: 11
     number_max_length: 11
-    uuid: 90ba36d6-c360-4435-b52c-7c3faf26a61e
+    uuid: 11e2a436-2a0d-47b6-b2d8-7dbbf796586c
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_um_laranib_fixed
   - id: 173124
     prefix: '218723'
     number_min_length: 11
     number_max_length: 11
-    uuid: 352fe90d-8d3c-4283-a7c7-ce57686f5465
+    uuid: 50026ed7-4c73-41a0-b8cd-383aada5f39b
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_edry_fixed
   - id: 173217
     prefix: '218724'
     number_min_length: 11
     number_max_length: 11
-    uuid: 03c2761e-d0a7-4e4c-b1d6-bce819a188c2
+    uuid: c1c35cbf-4137-4c91-bc1d-52df9676593e
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_ghat_fixed
   - id: 174389
     prefix: '218729'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7a5756c1-4396-42cb-b1ac-b22f1733df14
+    uuid: ddfaf2fa-06d2-422f-8749-a53a9edfff27
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_ghrefa_fixed
   - id: 174942
     prefix: '21873'
     number_min_length: 11
     number_max_length: 11
-    uuid: 287820b4-50d5-4442-afda-e8510eb88d87
+    uuid: 34b4c7e3-b325-449e-8b66-6402dec409ef
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_ubary_fixed
   - id: 175959
     prefix: '218731'
     number_min_length: 11
     number_max_length: 11
-    uuid: f8990d3c-4c4a-4abe-a4fb-dae0cbd55b5b
+    uuid: 036d93b4-f7fa-40e9-95d8-8df3b06e13d9
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_wadi_atba_fixed
   - id: 176375
     prefix: '218732'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0cdc4533-578a-494e-8521-c29cfbe4c338
+    uuid: b8f51087-72f3-4c1f-9397-77bbb30e1bc1
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_bergen_fixed
   - id: 177337
     prefix: '218733'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3fd9df69-ac28-4ee2-b889-a6ee866a34ea
+    uuid: 1923d0a0-0159-4372-a703-57120495a1a7
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_garda_fixed
   - id: 181111
     prefix: '218727'
     number_min_length: 11
     number_max_length: 11
-    uuid: a118ac6d-0daf-411c-b227-31ed0121e7f1
+    uuid: e72b44e8-3222-47ee-8089-8013d7089fd7
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_zawaya_fixed
   - id: 181482
     prefix: '218734'
     number_min_length: 11
     number_max_length: 11
-    uuid: ccf6fe51-c87a-495a-87b1-727804e92c33
+    uuid: d0418237-72ef-406e-8f52-bcb70e7a8cc4
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_traghen_fixed
   - id: 263218
     prefix: '218206'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9f761b72-4ffb-4503-93a9-d6751f15ae64
+    uuid: 5d13b954-ddc5-47f2-ae14-ef3f7334f262
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_suk_elkhamis_fixed
   - id: 269276
     prefix: '218205'
     number_min_length: 11
     number_max_length: 11
-    uuid: e6e024a1-8976-444a-854f-22f169458938
+    uuid: c2b14d22-a931-4e01-aa9b-9d9008ba3b87
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_sidiessaiah_fixed
   - id: 274234
     prefix: '21821'
     number_min_length: 11
     number_max_length: 11
-    uuid: a2c37a0f-791b-47da-85f4-8c35fa4556d5
+    uuid: ca5f3795-276f-4ee5-b4f7-d0d8312503b5
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_tripoli_fixed
   - id: 277998
     prefix: '21822'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1da4493d-6145-4666-80d0-0ec0e22080bb
+    uuid: e9b7acca-7ec3-4663-9c52-2048f10f9cde
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_ben_ghashir_fixed
   - id: 279490
     prefix: '218224'
     number_min_length: 11
     number_max_length: 11
-    uuid: 56b35cf2-a7e8-4a59-b697-e84576af9d54
+    uuid: f4921ad1-d392-4a99-ae8b-c2ea3e3b5107
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_swajni_fixed
   - id: 286633
     prefix: '21823'
     number_min_length: 11
     number_max_length: 11
-    uuid: 33e87467-0f45-47e2-a154-9289d5e59287
+    uuid: af913a0f-1099-40af-9c61-60bc70739189
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_ezzaonia_zawia_fixed
   - id: 294328
     prefix: '21824'
     number_min_length: 11
     number_max_length: 11
-    uuid: e2b14706-8922-42a3-96eb-72bd37f7f1cc
+    uuid: 635d4fdf-ac2c-41f5-8ee0-efa89902a1c8
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_sabratha_fixed
   - id: 298147
     prefix: '218252'
     number_min_length: 11
     number_max_length: 11
-    uuid: fc9cdf6b-67b4-4fd5-8e86-9bbfd105f974
+    uuid: 5a10684b-b3e4-4fc4-a1f5-4a66d9c31ca8
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_zahra_fixed
   - id: 299799
     prefix: '21826'
     number_min_length: 11
     number_max_length: 11
-    uuid: 21c61705-5ce9-449f-8646-a7170da0b8be
+    uuid: b5fc5367-7556-43a7-84e8-a32ecf0fdbf2
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_taigura_fixed
   - id: 301974
     prefix: '21825'
     number_min_length: 11
     number_max_length: 11
-    uuid: 49d73054-cace-48fb-ad33-ca7e5b79632a
+    uuid: 3bfbe32b-ca82-48a2-813f-426802987a5c
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_zuara_fixed
   - id: 305214
     prefix: '218271'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5cbaa931-f9b1-4b5b-a8f1-b7d356c4ce67
+    uuid: 772bdd9c-b3e8-44be-9a6f-c080ad6f5872
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_hashan_fixed
   - id: 305714
     prefix: '218272'
     number_min_length: 11
     number_max_length: 11
-    uuid: 678fb5d2-94a3-4033-89ab-8a2334e356b9
+    uuid: 2b706020-0001-47e4-9dd2-c3cded5bf2c5
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_azizia_fixed
   - id: 306004
     prefix: '218275'
     number_min_length: 11
     number_max_length: 11
-    uuid: 43ec5126-8053-4052-a355-0d878463f955
+    uuid: 4aa26f80-69cc-4ff6-8dde-7abb1e5ce2fb
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_matred_fixed
   - id: 306676
     prefix: '218277'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0609207a-3311-4c59-ac4e-d9f631267089
+    uuid: 0cd18b7a-9384-43b9-aebd-2f478576a5b7
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_mamura_fixed
   - id: 306946
     prefix: '218279'
     number_min_length: 11
     number_max_length: 11
-    uuid: 85baa0a8-4efb-40ef-b5d7-73f32a57d981
+    uuid: 7811b81a-777d-4592-8b44-d62f203b596a
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_elmaya_fixed
   - id: 307242
     prefix: '218282'
     number_min_length: 11
     number_max_length: 11
-    uuid: a0c26be5-1da8-400b-95e7-f410f5c5734a
+    uuid: d8607f6e-dacb-4939-b7fd-78cbbc131fdf
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_ajailat_fixed
   - id: 307699
     prefix: '218284'
     number_min_length: 11
     number_max_length: 11
-    uuid: cf769df0-d3fb-467b-963f-c154251181d9
+    uuid: 98d4a225-36fd-429b-9bd7-96b6eee4037c
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_hugialin_fixed
   - id: 313029
     prefix: '218274'
     number_min_length: 11
     number_max_length: 11
-    uuid: 24590f9a-3d76-4271-a02b-9978fc78a2d7
+    uuid: 6e7da426-0f59-4f1c-acff-4803fe279fd9
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_abu_issa_fixed
   - id: 313556
     prefix: '218281'
     number_min_length: 11
     number_max_length: 11
-    uuid: 237f2c54-1ac7-4f9f-8355-69afe5bcfad8
+    uuid: 937ad0a3-af0e-49d5-abe1-0c291c645171
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_jmail_fixed
   - id: 321172
     prefix: '21831'
     number_min_length: 11
     number_max_length: 11
-    uuid: 85a8f807-296a-4ee6-a45c-7e6b5e6deb23
+    uuid: f0a77266-4458-4b69-9d04-bd674470b36b
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_khums_fixed
   - id: 329241
     prefix: '218325'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e4d4950-33e6-4c31-9db0-660cfcb1e001
+    uuid: 5cc7ad4e-f881-47f7-b167-c16c0ee03811
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_tarhuna_fixed
   - id: 335400
     prefix: '218322'
     number_min_length: 11
     number_max_length: 11
-    uuid: 739adff6-4765-43a5-bdba-3f97339177ee
+    uuid: ce0c3611-4a20-4df8-bdd7-27450ce6e4cc
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_bani_walid_fixed
   - id: 335951
     prefix: '218323'
     number_min_length: 11
     number_max_length: 11
-    uuid: c4763e44-6431-427d-b449-eda64d3804ef
+    uuid: ba55d7b7-1e8a-4589-81ed-240895ae49d3
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_wadi_keam_fixed
   - id: 336869
     prefix: '218326'
     number_min_length: 11
     number_max_length: 11
-    uuid: b0588b2e-7ccd-41ec-ba46-9144f12143f9
+    uuid: b53776c9-65a5-44a5-87bc-2d102b4934ea
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_kussabat_fixed
   - id: 362527
     prefix: '21841'
     number_min_length: 11
     number_max_length: 11
-    uuid: 52028c67-1d2e-469d-920b-cb38d3398351
+    uuid: fe2b8432-992f-4c51-bc3d-02a07a5078f7
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_garian_fixed
   - id: 367181
     prefix: '218425'
     number_min_length: 11
     number_max_length: 11
-    uuid: 39e5150a-2b3d-4303-8279-97c3dc567a60
+    uuid: 62e082c2-9e77-48f8-bf5f-526663ecf32f
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_buzayan_fixed
   - id: 377403
     prefix: '218421'
     number_min_length: 11
     number_max_length: 11
-    uuid: 18546562-4afd-45a3-9517-c3c20448b387
+    uuid: e55055f1-39c7-4f83-bcfc-bbdde02f81c0
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_yefren_fixed
   - id: 377511
     prefix: '218422'
     number_min_length: 11
     number_max_length: 11
-    uuid: 974b43b9-1e55-4a2e-a41a-faeb8e46e9b9
+    uuid: 8ec7d1bf-a7cd-4b1b-88b8-9509d03ed4b4
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_mizda_fixed
   - id: 377567
     prefix: '218423'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a2f79ab-cd82-4a38-ac3d-fc83e28f388a
+    uuid: 960a5491-0138-4c1e-b7aa-12e102173c8f
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_guassem_fixed
   - id: 378718
     prefix: '218427'
     number_min_length: 11
     number_max_length: 11
-    uuid: 31bed3f4-691e-49c2-be31-9a06981a7407
+    uuid: 8f2cf2c8-2934-47a5-9d90-f234e2f0d4b8
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_kikla_fixed
   - id: 387559
     prefix: '218452'
     number_min_length: 11
     number_max_length: 11
-    uuid: d33231eb-8b34-42eb-b81a-cd9cb17be208
+    uuid: e805c543-ae53-4fde-a9e7-80c2758ad045
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_rujban_fixed
   - id: 388173
     prefix: '218453'
     number_min_length: 11
     number_max_length: 11
-    uuid: 908026d9-5998-412e-bbcc-f73f9a2bc404
+    uuid: 3ddaee6a-c8b9-4cea-8a7e-f608539a6109
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_reyana_fixed
   - id: 393425
     prefix: '218454'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7535f4fe-3593-4130-90be-5f77bdc8590a
+    uuid: ed5c1d29-d53d-4fd9-afd6-8b4c65d8a0dd
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_al_josh_fixed
   - id: 399482
     prefix: '21847'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0c7f5ac8-2489-4653-b6d2-6b7d469fc554
+    uuid: 8eb514ea-8bf9-4cf4-b782-51f8531e82a2
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_nalut_fixed
   - id: 413675
     prefix: '21881'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3e3dfaaa-4142-47ad-be8b-b35f597f909b
+    uuid: f76ca886-3b3a-4d45-92b8-ae5c311d2bae
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_derna_fixed
   - id: 418787
     prefix: '21882'
     number_min_length: 11
     number_max_length: 11
-    uuid: 040e630d-49fa-427f-b4dd-fcc98d12b7b8
+    uuid: 6b8dbff4-6376-45cd-ac30-21a9492088a1
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_haraua_fixed
   - id: 419684
     prefix: '218821'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7acb39ae-be2c-4008-bf22-6fb8b9821378
+    uuid: a2e638dd-beaf-4060-b651-95777c2ce00d
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_gubba_fixed
   - id: 427510
     prefix: '218851'
     number_min_length: 11
     number_max_length: 11
-    uuid: a30fe53d-4fa3-4ca0-a77a-99b84e0e5d6d
+    uuid: a7b2c3a0-0662-4011-9681-8d4e06005c5d
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_shahat_fixed
   - id: 427538
     prefix: '218852'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4290f2c5-4156-4686-8de4-48a48e282d4c
+    uuid: f31d8441-f26a-4ef7-9b0e-47f10b315aa2
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_massa_fixed
   - id: 427574
     prefix: '218854'
     number_min_length: 11
     number_max_length: 11
-    uuid: a80d6973-f751-4bc6-9a90-60a83fc8af17
+    uuid: ac105584-6903-4844-9c7d-319b403c695e
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_slenta_fixed
   - id: 433216
     prefix: '21884'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1b760265-da6c-4c72-8093-ad968b32da8f
+    uuid: d28368eb-b3de-4df2-ba0d-b9717f58118b
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_el_beida_fixed
   - id: 451322
     prefix: '218884'
     number_min_length: 11
     number_max_length: 11
-    uuid: b4d2eb4a-e323-4c14-9aa1-b6ab69225576
+    uuid: 431359d9-f7c0-462e-bb89-dd0c16e9e554
     country_id: *ly
-    network_id: *ly_fixed
+    network_id: *ly_jaghbub_fixed
 # Mobile Prefixes
   - id: 212507
     prefix: '21894'
     number_min_length: 12
     number_max_length: 12
-    uuid: f211bc1f-f968-4815-95f8-6ea636039939
+    uuid: e4b46da3-4bbf-419d-bb36-2edfcd220986
     country_id: *ly
     network_id: *ly_libyana_mobile
   - id: 215149
     prefix: '21895'
     number_min_length: 12
     number_max_length: 12
-    uuid: dbf9e820-8384-4bcb-a5f7-c7227d6ee2ec
+    uuid: 15db9d55-11e9-40d2-a22f-1e317909a708
     country_id: *ly
     network_id: *ly_libyaphone_mobile_mobile
   - id: 458148
     prefix: '21891'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ebf5d1c-cae2-43a7-af58-b048cb0020bb
+    uuid: d4b224d1-b51c-4843-a285-a2df1ad8fe04
     country_id: *ly
     network_id: *ly_al_madar_mobiles_mobile
   - id: 468950
     prefix: '21892'
     number_min_length: 12
     number_max_length: 12
-    uuid: 838995d5-6c21-4672-81d3-5dd7b223e101
+    uuid: 5c3f4454-ce1a-47f3-9204-256dc6da4aeb
     country_id: *ly
     network_id: *ly_libyana_mobile
 # Country code Prefixes
@@ -736,7 +1112,7 @@ network_prefixes:
     prefix: '218'
     number_min_length: 4
     number_max_length: 100
-    uuid: 298b76d2-ba79-4621-8a0b-05cbd667af2c
+    uuid: 3185f949-513e-4e3e-b8c3-a482f3262326
     country_id: *ly
     network_id: null
 # Supplementary services Prefixes
@@ -744,27 +1120,27 @@ network_prefixes:
     prefix: '21814'
     number_min_length: 7
     number_max_length: 7
-    uuid: aafe9765-2347-4679-8085-4b62bda5090f
+    uuid: eb5c18a6-597c-4ec8-81e7-b34a23769ea8
     country_id: *ly
     network_id: *ly_special_services_free
   - id: 242940
     prefix: '21815'
     number_min_length: 7
     number_max_length: 7
-    uuid: 80abc825-ff8a-4586-9328-57011f7b90ce
+    uuid: ac7aa173-a050-400a-a098-f1d17c51f3af
     country_id: *ly
     network_id: *ly_special_services_paid
   - id: 403478
     prefix: '218800'
     number_min_length: 12
     number_max_length: 12
-    uuid: d239f87f-69e8-4ec1-ad14-fd72ca2462bb
+    uuid: 76500f59-6c57-4b1e-b3cc-166671448938
     country_id: *ly
     network_id: *ly_freephone_services
   - id: 454579
     prefix: '218900'
     number_min_length: 12
     number_max_length: 12
-    uuid: 43a331ce-7e22-452c-9990-17775419b47a
+    uuid: 1f3a4e16-8fb8-4788-b686-36294217883f
     country_id: *ly
     network_id: *ly_premium_rate_services

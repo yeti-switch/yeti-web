@@ -1,19 +1,47 @@
 country_id: &dj 59
 networks:
 # Supplementary services Networks
-  - id: &dj_special_services 5217
+  - id: &dj_special_services 21393
     name: DJ Special Services
-    uuid: 4bf6ba60-2ead-4528-b1ed-d8f770ba45a9
+    uuid: 1623b9a0-291f-4cf4-83eb-157f3314b8f2
     type_id: 14
 # Fixed Networks
-  - id: &dj_fixed 6095
-    name: DJ Fixed
-    uuid: 6b85daa2-0366-4985-abfa-c3cd503f52f7
+  - id: &dj_djibouti_ville_fixed 22797
+    name: DJ Djibouti Ville Fixed
+    uuid: 8423715a-96c5-49dd-abce-3a05d22b31f0
+    type_id: 12
+  - id: &dj_balbala_fixed 22815
+    name: DJ Balbala Fixed
+    uuid: b691feae-1bf5-4fae-87ee-192691cf8ba2
+    type_id: 12
+  - id: &dj_districts_fixed 23122
+    name: DJ Districts Fixed
+    uuid: c1a634be-b40b-4cd9-ab47-15cdadf40d66
+    type_id: 12
+  - id: &dj_dikhil_fixed 23139
+    name: DJ Dikhil Fixed
+    uuid: 83b570e3-b095-4beb-8c35-2e136d3ac9e5
+    type_id: 12
+  - id: &dj_arta_fixed 23140
+    name: DJ Arta Fixed
+    uuid: 80a8d457-f593-4547-ae0a-22c7e677d622
+    type_id: 12
+  - id: &dj_tadjourah_fixed 23141
+    name: DJ Tadjourah Fixed
+    uuid: 28551d54-c1ef-4757-84e3-8a8891e62909
+    type_id: 12
+  - id: &dj_ali_sabieh_fixed 23142
+    name: DJ Ali_Sabieh Fixed
+    uuid: ce531e92-1178-4764-a199-ae9a915eccff
+    type_id: 12
+  - id: &dj_obock_fixed 23143
+    name: DJ Obock Fixed
+    uuid: 8be2e128-974c-484b-bda3-519c1fd4dd61
     type_id: 12
 # Mobile Networks
-  - id: &dj_evatis_mobile 6844
+  - id: &dj_evatis_mobile 24222
     name: DJ Evatis Mobile
-    uuid: 7a8aefae-0673-463a-83dc-cadf42fc42bc
+    uuid: e4699096-fc46-4eb2-b50e-b4ca9f417c78
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -21,7 +49,7 @@ network_prefixes:
     prefix: '253'
     number_min_length: 4
     number_max_length: 100
-    uuid: 2ee64f70-1797-4c55-bcba-9db15393b990
+    uuid: 282efcf8-5e8e-4a53-9b8b-88e218d99d7b
     country_id: *dj
     network_id: null
 # Supplementary services Prefixes
@@ -29,7 +57,7 @@ network_prefixes:
     prefix: '2531'
     number_min_length: 5
     number_max_length: 7
-    uuid: 2186045d-5866-4a42-8f74-9c7ad816dad4
+    uuid: 18136949-9a61-4a25-8401-b9b395a37af3
     country_id: *dj
     network_id: *dj_special_services
 # Fixed Prefixes
@@ -37,126 +65,126 @@ network_prefixes:
     prefix: '25321'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7b4c327c-bf63-42b9-9a83-fde922f1d41d
+    uuid: 887a922c-308f-4f68-a9b4-a2d335850ca8
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_djibouti_ville_fixed
   - id: 247658
     prefix: '2532131'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1e75c79-8719-4ae9-aeab-2906446ed236
+    uuid: aff2c782-c50d-4fff-941a-d779174ffb61
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_balbala_fixed
   - id: 247664
     prefix: '2532136'
     number_min_length: 11
     number_max_length: 11
-    uuid: c48c897a-a437-4e92-9ba6-38884a273803
+    uuid: dd422b34-6686-4314-afd0-c60f995d1b42
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_balbala_fixed
   - id: 247668
     prefix: '2532139'
     number_min_length: 11
     number_max_length: 11
-    uuid: 15ddcfe1-eb07-4bb7-9f5d-40c03bbe0182
+    uuid: aa81788e-c595-4e19-9026-4350a74cc2b8
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_balbala_fixed
   - id: 247675
     prefix: '2532157'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3c3346f0-3c12-4527-ac61-5b64c9c5f94a
+    uuid: b3d238dc-1d9d-4884-921a-c1a2b6367415
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_djibouti_ville_fixed
   - id: 247676
     prefix: '2532158'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b2822cc-0b1a-4891-b40d-b3c0c498ff6c
+    uuid: 1f93f1b1-0559-4728-8e1c-8be3ff77b81c
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_balbala_fixed
   - id: 248608
     prefix: '25327'
     number_min_length: 11
     number_max_length: 11
-    uuid: faa45ef8-6497-4760-b6a5-867013352ee4
+    uuid: 411edea3-89ef-4561-a2a3-ce9c9fa84136
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_districts_fixed
   - id: 248681
     prefix: '25327420'
     number_min_length: 11
     number_max_length: 11
-    uuid: c7a8f214-fc22-45f2-b37d-dbd58ec4ebf4
+    uuid: 28705a09-c148-42fc-85e0-312772deef01
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_dikhil_fixed
   - id: 248682
     prefix: '25327422'
     number_min_length: 11
     number_max_length: 11
-    uuid: 67da642e-2e37-4af9-9b8a-54c16cafacca
+    uuid: 5163d5ab-80d7-48b8-8e36-792b1fc0681a
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_arta_fixed
   - id: 248683
     prefix: '25327424'
     number_min_length: 11
     number_max_length: 11
-    uuid: a06a7597-fbfa-479b-90ee-f47bc1344208
+    uuid: e65c425c-56a6-4e1d-b0dc-9afd4b0eb7ab
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_tadjourah_fixed
   - id: 248684
     prefix: '25327426'
     number_min_length: 11
     number_max_length: 11
-    uuid: ca02c869-3763-4e8e-84b4-c2823c030726
+    uuid: 9efaeb49-69f0-4054-9451-e36f2a41e539
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_ali_sabieh_fixed
   - id: 248685
     prefix: '25327428'
     number_min_length: 11
     number_max_length: 11
-    uuid: 28866748-b43e-421e-83f3-e3215f03f9f1
+    uuid: af5a7641-2262-45f8-8de7-2d471a44954e
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_obock_fixed
   - id: 248690
     prefix: '2532750'
     number_min_length: 11
     number_max_length: 11
-    uuid: f684943d-26d5-4671-91d9-bf1d65b4628f
+    uuid: 07245b1f-7faa-490e-a246-dc38ba7b3494
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_arta_fixed
   - id: 248691
     prefix: '2532751'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2049be4c-9a56-44e9-a213-13ba38d20fd6
+    uuid: 80ba953a-1deb-4176-a486-57005277e3b7
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_tadjourah_fixed
   - id: 248692
     prefix: '2532752'
     number_min_length: 11
     number_max_length: 11
-    uuid: e25fc2bc-2533-4250-8cd5-8ffa1398b4b4
+    uuid: 5f39a469-2b9a-4e26-aad8-e68aa10a5c9b
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_dikhil_fixed
   - id: 248693
     prefix: '2532753'
     number_min_length: 11
     number_max_length: 11
-    uuid: 04eb9ae6-be6f-42cb-af4e-8bdbaf2554c1
+    uuid: 4da7c5e9-d5d9-4dfc-b496-ad1dab0ade27
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_ali_sabieh_fixed
   - id: 248694
     prefix: '2532754'
     number_min_length: 11
     number_max_length: 11
-    uuid: 82475178-9264-4284-9a92-b3dc56e238e6
+    uuid: 2e23e6db-9a71-4f7d-bc11-8e66f8193ede
     country_id: *dj
-    network_id: *dj_fixed
+    network_id: *dj_obock_fixed
 # Mobile Prefixes
   - id: 255623
     prefix: '25377'
     number_min_length: 7
     number_max_length: 11
-    uuid: 4fb179f1-d28f-41c8-9fdc-2a4c5229bef7
+    uuid: 61b59554-60a4-4329-b441-aa4afef188d7
     country_id: *dj
     network_id: *dj_evatis_mobile

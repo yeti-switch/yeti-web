@@ -1,71 +1,375 @@
 country_id: &ge 257
 networks:
 # Fixed Networks
-  - id: &ge_fixed 4033
+  - id: &ge_chiatura_fixed 4095
+    name: GE Chiatura Fixed
+    uuid: 905b1d2f-0b24-46fb-99cd-aca8001cf4e4
+    type_id: 12
+  - id: &ge_khoni_fixed 4500
+    name: GE Khoni Fixed
+    uuid: 53469fb2-290e-4dbd-9ed8-b1747bfc4894
+    type_id: 12
+  - id: &ge_ozurgeti_fixed 4519
+    name: GE Ozurgeti Fixed
+    uuid: 6d1ba055-bc89-4f0e-89a7-912baade3c36
+    type_id: 12
+  - id: &ge_tkibuli_fixed 4577
+    name: GE Tkibuli Fixed
+    uuid: 830a0b2a-033b-4fe6-be62-f6d10849ff0e
+    type_id: 12
+  - id: &ge_terjola_fixed 5041
+    name: GE Terjola Fixed
+    uuid: c0b041ed-0f94-4c0b-b37f-d8b933302f84
+    type_id: 12
+  - id: &ge_zestafoni_fixed 5072
+    name: GE Zestafoni Fixed
+    uuid: 9c13cc44-1ae0-4c6f-ae68-53b6bdaf0c10
+    type_id: 12
+  - id: &ge_poti_fixed 5114
+    name: GE Poti Fixed
+    uuid: 3743596a-8369-4194-8fae-f5684d03c9ba
+    type_id: 12
+  - id: &ge_lanchkhuti_fixed 5153
+    name: GE Lanchkhuti Fixed
+    uuid: b0753893-ca23-42be-97d7-1424a67c6dfc
+    type_id: 12
+  - id: &ge_voip_fixed 15259
+    name: GE Voip Fixed
+    uuid: 70873ea9-af50-4551-ad50-8dcb9c4734d3
+    type_id: 12
+  - id: &ge_fixed 19682
     name: GE Fixed
-    uuid: fdb336c9-c618-4158-87aa-61ee96289ab7
+    uuid: 3054836a-7022-46a4-99d2-9b632eaef32f
+    type_id: 12
+  - id: &ge_tbilisi_fixed 31932
+    name: GE Tbilisi Fixed
+    uuid: 3945aa62-1fe1-4bd2-ae02-25eb8704a127
+    type_id: 12
+  - id: &ge_rustavi_fixed 32942
+    name: GE Rustavi Fixed
+    uuid: 891dd557-e5b3-4b33-ae93-20b8e222d922
+    type_id: 12
+  - id: &ge_akhalgori_fixed 32973
+    name: GE Akhalgori Fixed
+    uuid: bd952f99-9911-497b-aec4-e434dc2b4817
+    type_id: 12
+  - id: &ge_stepantsminda_kazbegi_fixed 33151
+    name: GE Stepantsminda Kazbegi Fixed
+    uuid: 204524f1-97bb-49ce-8080-2ec0c0308afd
+    type_id: 12
+  - id: &ge_dusheti_fixed 33215
+    name: GE Dusheti Fixed
+    uuid: a8b0c5b8-07b2-4c62-98bb-3fae0a2a9374
+    type_id: 12
+  - id: &ge_djava_fixed 33295
+    name: GE Djava Fixed
+    uuid: 496dc9a9-6ad5-4dd5-88ca-15f2d0ed0082
+    type_id: 12
+  - id: &ge_kvareli_fixed 33414
+    name: GE Kvareli Fixed
+    uuid: 36406074-21bd-4271-92aa-d1753945f27f
+    type_id: 12
+  - id: &ge_signagi_fixed 33479
+    name: GE Signagi Fixed
+    uuid: ed44e810-6292-4ea3-adbd-8a4199002f56
+    type_id: 12
+  - id: &ge_dedoplistskaro_fixed 33491
+    name: GE Dedoplistskaro Fixed
+    uuid: 8793dce7-e827-4043-a5e9-e8b49bd4f9b1
+    type_id: 12
+  - id: &ge_marneuli_fixed 33528
+    name: GE Marneuli Fixed
+    uuid: 7300c5d8-96b2-41a3-b3a6-a6560bb99cda
+    type_id: 12
+  - id: &ge_bolnisi_fixed 33576
+    name: GE Bolnisi Fixed
+    uuid: c0096787-3108-474a-abf2-3089a78c890f
+    type_id: 12
+  - id: &ge_tetritskaro_fixed 33625
+    name: GE Tetritskaro Fixed
+    uuid: f9c778f0-52da-4a20-85df-a004ce8780e1
+    type_id: 12
+  - id: &ge_dmanisi_fixed 33686
+    name: GE Dmanisi Fixed
+    uuid: 77712aa7-8003-41fb-98d1-aab04855a2ce
+    type_id: 12
+  - id: &ge_tskhinvali_fixed 34538
+    name: GE Tskhinvali Fixed
+    uuid: 06e3f184-8cdf-4ad5-8ac7-cc79cd378136
+    type_id: 12
+  - id: &ge_tianeti_fixed 34566
+    name: GE Tianeti Fixed
+    uuid: a2e3f504-5ead-4a4b-81c5-92ed989ee725
+    type_id: 12
+  - id: &ge_akhmeta_fixed 34580
+    name: GE Akhmeta Fixed
+    uuid: 567308af-74cb-4d7d-a8e4-06e8859d2d46
+    type_id: 12
+  - id: &ge_telavi_fixed 34666
+    name: GE Telavi Fixed
+    uuid: 5cd05df4-4ee9-4955-867c-f388f44c848b
+    type_id: 12
+  - id: &ge_sagaredjo_fixed 34692
+    name: GE Sagaredjo Fixed
+    uuid: b202e2c6-aabb-4bd6-9cf5-d213422cfdf2
+    type_id: 12
+  - id: &ge_gurjaani_fixed 34765
+    name: GE Gurjaani Fixed
+    uuid: 73a754d8-14a8-46bc-a8f4-ffe6d0b2baba
+    type_id: 12
+  - id: &ge_lagodekhi_fixed 34842
+    name: GE Lagodekhi Fixed
+    uuid: 0d948635-aa66-49ab-a510-3e9afa14ff66
+    type_id: 12
+  - id: &ge_ninotsminda_fixed 34880
+    name: GE Ninotsminda Fixed
+    uuid: 222d1d42-4e63-4ca6-a140-4e99f4aa3343
+    type_id: 12
+  - id: &ge_akhalkalaki_fixed 34948
+    name: GE Akhalkalaki Fixed
+    uuid: 1d3532c0-b3ae-4cbf-8c2f-b727c7a958a4
+    type_id: 12
+  - id: &ge_tsalka_fixed 34982
+    name: GE Tsalka Fixed
+    uuid: 249896ae-4afc-4b63-aaa1-15dff151fde2
+    type_id: 12
+  - id: &ge_aspindza_fixed 35020
+    name: GE Aspindza Fixed
+    uuid: e9d38c8c-297b-4b5c-b4dd-5096278c078d
+    type_id: 12
+  - id: &ge_akhaltsikhe_fixed 35052
+    name: GE Akhaltsikhe Fixed
+    uuid: 95d4222b-01cd-4a3e-857b-e203c8e6cef0
+    type_id: 12
+  - id: &ge_adigeni_fixed 35070
+    name: GE Adigeni Fixed
+    uuid: 1898aa2b-91e2-408e-a406-accb7c0a4612
+    type_id: 12
+  - id: &ge_borjomi_fixed 35117
+    name: GE Borjomi Fixed
+    uuid: cc8a1677-7fa6-4049-9a8d-6bf73313cd51
+    type_id: 12
+  - id: &ge_khashuri_fixed 35166
+    name: GE Khashuri Fixed
+    uuid: 4aa3dd6b-7e78-4961-a2e3-a75f2cf69be5
+    type_id: 12
+  - id: &ge_kareli_fixed 35200
+    name: GE Kareli Fixed
+    uuid: e667cf43-6dea-43c2-9b2f-4134ac0d4111
+    type_id: 12
+  - id: &ge_gori_fixed 35256
+    name: GE Gori Fixed
+    uuid: 750f5ac0-746b-41ba-94be-adb542e5a5f6
+    type_id: 12
+  - id: &ge_kaspi_fixed 35267
+    name: GE Kaspi Fixed
+    uuid: 4f0072de-1dcb-4dcf-8ac5-f907a70f007c
+    type_id: 12
+  - id: &ge_gardabani_fixed 35281
+    name: GE Gardabani Fixed
+    uuid: 41044eaf-9805-4432-8229-0c7525ba7aa9
+    type_id: 12
+  - id: &ge_mtskheta_fixed 35315
+    name: GE Mtskheta Fixed
+    uuid: f5ec0ae1-dc4b-49f8-aea5-8141c3aa27cc
+    type_id: 12
+  - id: &ge_tigvi_fixed 35362
+    name: GE Tigvi Fixed
+    uuid: 93c30c23-e4c2-49f6-8a0c-c9b9a0c37fae
+    type_id: 12
+  - id: &ge_mestia_fixed 36261
+    name: GE Mestia Fixed
+    uuid: de518935-1cca-4d7f-9813-e4a002670d9a
+    type_id: 12
+  - id: &ge_samtredia_fixed 36281
+    name: GE Samtredia Fixed
+    uuid: c3573ef6-45f3-4519-a3de-83f09297ac41
+    type_id: 12
+  - id: &ge_zugdidi_fixed 36327
+    name: GE Zugdidi Fixed
+    uuid: 42e06c87-1449-4d9a-aedc-968eb45dcf7d
+    type_id: 12
+  - id: &ge_chokhatauri_fixed 36377
+    name: GE Chokhatauri Fixed
+    uuid: 732a8f1b-a4a2-432d-a130-f526330ffa41
+    type_id: 12
+  - id: &ge_shuakhevi_fixed 36478
+    name: GE Shuakhevi Fixed
+    uuid: 9a66fdbe-3305-4c23-b4c7-020710b75192
+    type_id: 12
+  - id: &ge_keda_fixed 36519
+    name: GE Keda Fixed
+    uuid: 67d1356a-f000-49e0-8459-c9e856b35ba9
+    type_id: 12
+  - id: &ge_kutaisi_fixed 36716
+    name: GE Kutaisi Fixed
+    uuid: 247f129a-d202-4ee0-8834-eb1cf885debc
+    type_id: 12
+  - id: &ge_bagdati_fixed 36739
+    name: GE Bagdati Fixed
+    uuid: 30213bbd-c67c-4196-b5b4-4d231f29a311
+    type_id: 12
+  - id: &ge_sachkhere_fixed 36800
+    name: GE Sachkhere Fixed
+    uuid: 6cdd767c-d045-43ee-a79e-14fd4f19295b
+    type_id: 12
+  - id: &ge_ambrolauri_fixed 36839
+    name: GE Ambrolauri Fixed
+    uuid: f4d23540-528c-411a-992d-99a00fe75b72
+    type_id: 12
+  - id: &ge_abasha_fixed 36964
+    name: GE Abasha Fixed
+    uuid: 2dcca8da-1896-4636-bf96-39892c3a7e61
+    type_id: 12
+  - id: &ge_senaki_fixed 37001
+    name: GE Senaki Fixed
+    uuid: 9f2a0f3b-adb0-4f86-ad75-cb24d9ac074c
+    type_id: 12
+  - id: &ge_khobi_fixed 37051
+    name: GE Khobi Fixed
+    uuid: 1139895f-8dbe-40ae-9f3f-f2b491ed9681
+    type_id: 12
+  - id: &ge_tsalenjikha_fixed 37066
+    name: GE Tsalenjikha Fixed
+    uuid: 8c8ee2dd-2954-462d-9c00-e7a45514cf6d
+    type_id: 12
+  - id: &ge_chkhorotsku_fixed 37103
+    name: GE Chkhorotsku Fixed
+    uuid: e8520fb5-466f-4a22-81c6-eac80c1481bc
+    type_id: 12
+  - id: &ge_martvili_fixed 37197
+    name: GE Martvili Fixed
+    uuid: 85e6eb9c-cc81-47aa-9bda-851e60f8ee62
+    type_id: 12
+  - id: &ge_batumi_fixed 37308
+    name: GE Batumi Fixed
+    uuid: 7aa836e5-ae87-4491-add1-a5c5a2d57ae4
+    type_id: 12
+  - id: &ge_khulo_fixed 37336
+    name: GE Khulo Fixed
+    uuid: 2bae46af-e241-4dd8-879e-295f3ed586b9
+    type_id: 12
+  - id: &ge_kobuleti_fixed 37386
+    name: GE Kobuleti Fixed
+    uuid: 9de8e4cc-4820-42cc-a1b2-61f5b8734600
+    type_id: 12
+  - id: &ge_khelvachauri_fixed 37418
+    name: GE Khelvachauri Fixed
+    uuid: 2fe4822a-8b62-4025-8dec-674b76fda5f3
+    type_id: 12
+  - id: &ge_vani_fixed 37432
+    name: GE Vani Fixed
+    uuid: 95e48a26-f308-444a-9efe-632e49e28876
+    type_id: 12
+  - id: &ge_kharagauli_fixed 37499
+    name: GE Kharagauli Fixed
+    uuid: 18c0f254-e4b3-4d26-8dd3-99b39e43ba2e
+    type_id: 12
+  - id: &ge_tskaltubo_fixed 37568
+    name: GE Tskaltubo Fixed
+    uuid: c2080482-ac7d-4ac0-b136-7fdbe9717942
+    type_id: 12
+  - id: &ge_lentekhi_fixed 37587
+    name: GE Lentekhi Fixed
+    uuid: a8f0b1b5-5e3e-4c74-a25f-3150f4100c1d
+    type_id: 12
+  - id: &ge_gagra_fixed 37663
+    name: GE Gagra Fixed
+    uuid: 5a58ad03-81cd-4866-843d-5d3e163e3b1d
+    type_id: 12
+  - id: &ge_gudauta_fixed 37674
+    name: GE Gudauta Fixed
+    uuid: b8ecd046-5119-4806-979a-00cf3d8550ea
+    type_id: 12
+  - id: &ge_ochamchire_fixed 37689
+    name: GE Ochamchire Fixed
+    uuid: 7dafacbc-ad29-44de-9f4b-276729ce31dd
+    type_id: 12
+  - id: &ge_tkvarcheli_fixed 37702
+    name: GE Tkvarcheli Fixed
+    uuid: f471057e-f05a-4895-ae41-82216e516680
+    type_id: 12
+  - id: &ge_gali_fixed 37716
+    name: GE Gali Fixed
+    uuid: 0e4bb224-fe2b-4ca9-8b3b-0deaad109e21
+    type_id: 12
+  - id: &ge_gulripshi_fixed 37729
+    name: GE Gulripshi Fixed
+    uuid: 0f1ed8f5-9ee0-4e50-8d1e-d631a6123326
+    type_id: 12
+  - id: &ge_sukhumi_fixed 37877
+    name: GE Sukhumi Fixed
+    uuid: 31a9ce7a-aa7f-4158-9c41-b193ad226749
+    type_id: 12
+  - id: &ge_tsageri_fixed 38133
+    name: GE Tsageri Fixed
+    uuid: e48c8352-0462-4c8b-9320-0d4a4aa17395
+    type_id: 12
+  - id: &ge_oni_fixed 38174
+    name: GE Oni Fixed
+    uuid: 0e4be7ad-bb1d-4e90-8478-80c60cc963fc
     type_id: 12
 # Mobile Networks
-  - id: &ge_mobilive_mobile 4150
+  - id: &ge_mobilive_mobile 4690
     name: GE Mobilive Mobile
-    uuid: 40c6ce20-62ed-44d5-a926-132f2dd0d38c
+    uuid: b2934b92-ed16-4947-b66f-d32fa1ed964a
     type_id: 3
-  - id: &ge_cellfie_mobile_mobile 4151
+  - id: &ge_cellfie_mobile_mobile 4691
     name: GE Cellfie Mobile Mobile
-    uuid: 04253acc-dc85-4a45-b7d1-ec9202adb6d8
+    uuid: bd2767ef-93dd-497e-95e3-fff8e4de72d1
     type_id: 3
-  - id: &ge_icell_telecom_mobile 4152
+  - id: &ge_icell_telecom_mobile 4692
     name: GE Icell Telecom Mobile
-    uuid: e16c2251-a23c-498e-8e15-8a474ed7da8e
+    uuid: 036678b6-59e8-4134-847f-19ac46481bb0
     type_id: 3
-  - id: &ge_geocell_mobile 4153
+  - id: &ge_geocell_mobile 4693
     name: GE Geocell Mobile
-    uuid: e91c7619-04b3-4928-85e3-94ea4f590dcf
+    uuid: c4936591-28fd-46d9-a9f1-4179c845a90b
     type_id: 3
-  - id: &ge_hallo_mobile 4154
+  - id: &ge_hallo_mobile 4694
     name: GE Hallo Mobile
-    uuid: 266dc0d6-0697-47e0-ba8a-204b56f549c8
+    uuid: a35e6b39-03c6-4ac8-9588-2347d939dabd
     type_id: 3
-  - id: &ge_unicell_mobile_mobile 4155
+  - id: &ge_unicell_mobile_mobile 4695
     name: GE Unicell Mobile Mobile
-    uuid: 8c4502bc-19fb-4ad1-a654-a81b18a90188
+    uuid: 4c512e3f-1f12-4287-b5e1-2e64618ea93c
     type_id: 3
-  - id: &ge_magti_mobile 4156
+  - id: &ge_magti_mobile 4696
     name: GE Magti Mobile
-    uuid: f18bdd4d-ae1e-4aba-b49e-6e51261ac5ea
+    uuid: b6b018ab-a1d9-4699-a761-e968ec260ab5
     type_id: 3
-  - id: &ge_silknet_mobile 4202
+  - id: &ge_silknet_mobile 5662
     name: GE Silknet Mobile
-    uuid: fffae1cf-1557-4bf6-848b-14f2b1c740d8
+    uuid: 1d66d10c-6f3c-494a-b9dc-94149226bcec
     type_id: 3
-  - id: &ge_globalcell_mobile 4221
+  - id: &ge_globalcell_mobile 5829
     name: GE Globalcell Mobile
-    uuid: 01f60bf3-092b-4945-a648-416243f5849a
+    uuid: 04fe1445-b9cd-478f-ba4b-ec043a6ca265
     type_id: 3
-  - id: &ge_servicebox_mobile 4230
+  - id: &ge_servicebox_mobile 6118
     name: GE Servicebox Mobile
-    uuid: 3a3ab085-3b22-4e30-9cdd-2568963ae7ed
+    uuid: 9957b16e-6060-4981-92f0-cab6cb23c5df
     type_id: 3
-  - id: &ge_premium_net_international_mobile 4316
+  - id: &ge_premium_net_international_mobile 9079
     name: GE Premium Net International Mobile
-    uuid: 2c854386-f939-4dbe-99f4-9b16aab58cb4
+    uuid: ae75598a-0187-4496-a7bb-4aab8aab2477
     type_id: 3
 # Supplementary services Networks
-  - id: &ge_special_services 5230
+  - id: &ge_special_services 21406
     name: GE Special Services
-    uuid: cb3f65f9-9001-4af8-b089-5d83cf729bcf
+    uuid: ed85aa81-b9cf-4a97-9dc9-d64c9d6f6c41
     type_id: 14
-  - id: &ge_sms_mms_services 6943
+  - id: &ge_sms_mms_services 24398
     name: GE Sms_Mms Services
-    uuid: 64a7b32a-f03a-4398-929d-405b1f24a63f
+    uuid: 401b2bde-a971-4828-91a2-783f4e20585a
     type_id: 14
-  - id: &ge_freephone_services 7551
+  - id: &ge_freephone_services 38500
     name: GE Freephone Services
-    uuid: 44ae3f52-02e5-4a68-8ad3-c1b956b85026
+    uuid: 8cb29aec-9b86-4c75-ba66-fa2bd51cd8f0
     type_id: 14
-  - id: &ge_value_added_services 7770
+  - id: &ge_value_added_services 41691
     name: GE Value Added Services
-    uuid: 871adc42-5e8f-439b-8f4e-791c7eeba160
+    uuid: f562348e-d87e-4e87-b182-3e6fd90a63bd
     type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -73,2885 +377,2885 @@ network_prefixes:
     prefix: '995479'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8c296a1b-3e6d-4ec9-9a0a-3c113a289699
+    uuid: 6a5691bb-c30f-4461-bd01-b8463ccc6c62
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_chiatura_fixed
   - id: 53597
     prefix: '995495'
     number_min_length: 12
     number_max_length: 12
-    uuid: 68233910-530d-4da1-9b86-7ddeb27cf9cb
+    uuid: de224e2e-1cb2-4afe-ac59-501688b26333
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_khoni_fixed
   - id: 53900
     prefix: '995496'
     number_min_length: 12
     number_max_length: 12
-    uuid: a24c76b9-7353-4a46-88f2-07aa23aa54e5
+    uuid: 9e1f852b-53b7-4bdb-8eb7-d73a2ac4cf97
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_ozurgeti_fixed
   - id: 54273
     prefix: '995497'
     number_min_length: 12
     number_max_length: 12
-    uuid: 780060ed-a111-4742-abf0-42349db5afc1
+    uuid: f02ba16e-ab8e-440d-9f40-0d7e0fb540f6
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tkibuli_fixed
   - id: 58331
     prefix: '995491'
     number_min_length: 12
     number_max_length: 12
-    uuid: 34c7434d-185b-4334-b786-cbaabfb014b1
+    uuid: 5295b927-c9e5-4eb9-8739-6b06e42e4a81
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_terjola_fixed
   - id: 58362
     prefix: '995492'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0325fb67-5947-4e84-89ba-ebe69b19d035
+    uuid: 4ebd71f5-481e-4704-a593-9ea7d4b193f5
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_zestafoni_fixed
   - id: 58876
     prefix: '995493'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0a8f010f-0dab-4faa-a719-f69de16f016e
+    uuid: 78dbd5a1-d5b5-4933-a285-f2a29734c261
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_poti_fixed
   - id: 59286
     prefix: '995494'
     number_min_length: 12
     number_max_length: 12
-    uuid: 58e674c9-4947-4a0b-9d22-06394f7d55d6
+    uuid: 8020fe5b-dd3e-48c4-9cae-199cb0b503e7
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_lanchkhuti_fixed
   - id: 156530
     prefix: '995707'
     number_min_length: 12
     number_max_length: 12
-    uuid: f44e0c42-93b3-4842-b960-e32b07644f9b
+    uuid: 93d711e4-f380-4cd1-9e4c-00c459aeb4f8
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_voip_fixed
   - id: 162177
     prefix: '995706'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1369756a-c757-48f2-a76e-51210b11dddd
+    uuid: 8ecc4291-fea0-4ada-8954-aa781a1b99f8
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_voip_fixed
   - id: 207029
     prefix: '995790'
     number_min_length: 12
     number_max_length: 12
-    uuid: 024044c2-dddc-486a-ac52-96ff04c310a2
+    uuid: 610a3dd6-8c48-405b-a900-01c9fdb78f7b
     country_id: *ge
     network_id: *ge_fixed
   - id: 327271
     prefix: '99532'
     number_min_length: 12
     number_max_length: 12
-    uuid: 43384da3-60b3-4135-8138-cbe981379661
+    uuid: 1481371e-1896-4b16-9ded-9a9c3ef7a437
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tbilisi_fixed
   - id: 340779
     prefix: '995341'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6489fab7-dacf-4609-b6e8-f1de4babb374
+    uuid: 23a4a4a5-9be7-4fa2-a9d8-ac6ddf639e7d
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_rustavi_fixed
   - id: 341351
     prefix: '995342'
     number_min_length: 12
     number_max_length: 12
-    uuid: 374b495c-b2a4-45fa-92a9-8a811940dd19
+    uuid: 1a8fc96d-1671-40a2-bbbf-bb80e53c18a8
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_akhalgori_fixed
   - id: 342377
     prefix: '995345'
     number_min_length: 12
     number_max_length: 12
-    uuid: cc3bef70-21dd-40dc-aafe-de9237ea7b57
+    uuid: 576b68cd-8794-40b7-8c01-d266fe7c5cee
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_stepantsminda_kazbegi_fixed
   - id: 342552
     prefix: '995346'
     number_min_length: 12
     number_max_length: 12
-    uuid: dc4ab6c8-32f3-4fae-b5c3-f470459c2061
+    uuid: 30c52093-269c-4982-8363-43e0c6531ffe
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_dusheti_fixed
   - id: 343335
     prefix: '995347'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70130b47-f6c3-4672-8084-35934cce7e19
+    uuid: 68c527b1-6cc2-4d52-8458-8a4cb6070fac
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_djava_fixed
   - id: 344849
     prefix: '995352'
     number_min_length: 12
     number_max_length: 12
-    uuid: c1664908-afa5-4b99-8832-e7fe5b090594
+    uuid: e84fd942-c9b4-4083-84cb-9cb52dec2fb4
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_kvareli_fixed
   - id: 345581
     prefix: '995355'
     number_min_length: 12
     number_max_length: 12
-    uuid: f923967e-baca-4dff-b912-27f8a2f591b8
+    uuid: d019302c-91d4-4af1-bcbd-b6fe572dfb8b
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_signagi_fixed
   - id: 345619
     prefix: '995356'
     number_min_length: 12
     number_max_length: 12
-    uuid: c89d68cc-fb47-4d52-9d55-a24937bd66d0
+    uuid: f287bfc0-90d1-478c-9323-eb6b9a4d7cb6
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_dedoplistskaro_fixed
   - id: 345686
     prefix: '995357'
     number_min_length: 12
     number_max_length: 12
-    uuid: 19ac812f-c4c6-4e0b-89f8-8b8a082707bc
+    uuid: 2b6ffa44-4fce-43ca-8ed3-e84ff38c2577
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_marneuli_fixed
   - id: 345765
     prefix: '995358'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0e68247c-b0c4-40a9-a18f-834e71685553
+    uuid: 91bb0e7c-ab31-4bdb-a1cd-f2f89be0a4e6
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_bolnisi_fixed
   - id: 345881
     prefix: '995359'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0a603dcd-70c8-456f-8a21-e15cd262a675
+    uuid: ab35b067-e743-48e7-b1fb-11c7a3e5bc99
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tetritskaro_fixed
   - id: 345977
     prefix: '995360'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0974de61-313d-458b-b233-44b01fdd2674
+    uuid: 00641197-4ba7-4c1b-b443-40e5b37db849
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_dmanisi_fixed
   - id: 351693
     prefix: '995344'
     number_min_length: 12
     number_max_length: 12
-    uuid: ea90d274-e2d9-4a6e-8931-0a84fd9d7a4d
+    uuid: 4a76cbec-c924-4a29-aa11-3f24a63eabda
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tskhinvali_fixed
   - id: 351742
     prefix: '995348'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6d1bec35-1f06-40c6-9115-f5afdc1b4bc2
+    uuid: 19c44dfe-b322-46fd-b383-1b9d68b24730
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tianeti_fixed
   - id: 352135
     prefix: '995349'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd57d65d-dd8c-4cc3-a7c1-7a220fab073f
+    uuid: b9672f0f-c306-4a00-9a6c-4882d7b7934e
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_akhmeta_fixed
   - id: 352484
     prefix: '995350'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70862c9f-8597-4551-b71b-71d528282e29
+    uuid: e12121b1-e030-444b-a12f-e4094f5050af
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_telavi_fixed
   - id: 352569
     prefix: '995351'
     number_min_length: 12
     number_max_length: 12
-    uuid: 453c6837-4cdb-47c8-acf2-72534b64ff26
+    uuid: 165445eb-61d6-419e-9a2e-08cf91a0adc9
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_sagaredjo_fixed
   - id: 353311
     prefix: '995353'
     number_min_length: 12
     number_max_length: 12
-    uuid: b99529d3-cd57-46c2-9dfa-05d027eb787b
+    uuid: 1716d0e9-f329-4c76-ae25-ac31f29ce603
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_gurjaani_fixed
   - id: 353749
     prefix: '995354'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2a37e1c7-2785-458a-890d-d8ce614316f7
+    uuid: d51060d6-bfc9-44e1-ab20-f506928cf8f7
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_lagodekhi_fixed
   - id: 354014
     prefix: '995361'
     number_min_length: 12
     number_max_length: 12
-    uuid: 18be4de2-21c9-4021-b3c6-6db884d3e536
+    uuid: 407719a3-61b7-4874-a4b4-a5f308724ce9
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_ninotsminda_fixed
   - id: 354532
     prefix: '995362'
     number_min_length: 12
     number_max_length: 12
-    uuid: d2984c74-4cc1-418a-b29e-6bd36b2b33ec
+    uuid: 70ffd6ce-9ca1-4593-940b-4f3a55727070
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_akhalkalaki_fixed
   - id: 354570
     prefix: '995363'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4c2b0b09-dba0-4400-87dc-38df4001fbac
+    uuid: 7e89377b-0a3b-404b-b632-e06e94681192
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tsalka_fixed
   - id: 354623
     prefix: '995364'
     number_min_length: 12
     number_max_length: 12
-    uuid: ef7a04eb-627d-4397-9d30-6f7ae95a1f16
+    uuid: 2d3cc855-8c51-44c6-87de-7d8e3573b0ff
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_aspindza_fixed
   - id: 354731
     prefix: '995365'
     number_min_length: 12
     number_max_length: 12
-    uuid: 93ba2301-3efe-44e9-8546-d805dff7f95a
+    uuid: 65e0f309-fbde-49a0-8e0d-ca6a88e309cf
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_akhaltsikhe_fixed
   - id: 355398
     prefix: '995366'
     number_min_length: 12
     number_max_length: 12
-    uuid: 238e5f2a-50d7-44cd-8a51-4aa3fdac4df1
+    uuid: 0869184d-5e46-4852-9ebe-f10bc56e1440
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_adigeni_fixed
   - id: 355447
     prefix: '995367'
     number_min_length: 12
     number_max_length: 12
-    uuid: b92ec4f0-aec9-4a02-8251-442840e4222a
+    uuid: 32758a9f-6a9d-48bd-ba51-fd68d9c44c20
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_borjomi_fixed
   - id: 355597
     prefix: '995368'
     number_min_length: 12
     number_max_length: 12
-    uuid: 54a42de2-e94e-40f9-95c4-698fe29ef11a
+    uuid: fbf90058-7957-4777-8bad-e0ca794a6bce
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_khashuri_fixed
   - id: 355693
     prefix: '995369'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce91e273-2a5c-49dc-a136-393eb4b667d0
+    uuid: f87d0c59-26c2-475f-9ac1-375609850c55
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_kareli_fixed
   - id: 355970
     prefix: '995370'
     number_min_length: 12
     number_max_length: 12
-    uuid: 59d11ed4-dee2-4368-b3e9-4fab8a859723
+    uuid: b959759b-2255-41b5-8799-48a2e0158d48
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_gori_fixed
   - id: 356093
     prefix: '995371'
     number_min_length: 12
     number_max_length: 12
-    uuid: 49a57ffb-31eb-4b1a-b686-e78306988b6f
+    uuid: 334822fc-071c-4046-8dce-9bca76a5b90c
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_kaspi_fixed
   - id: 356152
     prefix: '995372'
     number_min_length: 12
     number_max_length: 12
-    uuid: 976855ed-3503-42d5-acd4-0fbca5a37565
+    uuid: 3cca8d3d-1248-40c5-a449-71c3d49835c8
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_gardabani_fixed
   - id: 356216
     prefix: '995373'
     number_min_length: 12
     number_max_length: 12
-    uuid: 52929550-9f99-4c99-9f6d-1e057abc3475
+    uuid: 215b8923-9aeb-4d6f-aab4-e9147012dbe9
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_mtskheta_fixed
   - id: 356389
     prefix: '995374'
     number_min_length: 12
     number_max_length: 12
-    uuid: f3f84943-b53b-4134-b4e7-fb1e0791e5da
+    uuid: 2b2f503c-1fb5-4574-86cd-bdf222c6e892
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tigvi_fixed
   - id: 362651
     prefix: '995410'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6f214329-a2d4-4f15-ad5f-88ae41435110
+    uuid: c0e07040-a120-49da-ad08-778709404d0b
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_mestia_fixed
   - id: 363449
     prefix: '995411'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70f53446-8fe8-467c-9a5d-dd00e62b17d8
+    uuid: 5c1a7b33-53da-4f16-838c-03bbe9a2d637
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_samtredia_fixed
   - id: 363949
     prefix: '995415'
     number_min_length: 12
     number_max_length: 12
-    uuid: c90728d1-c0dc-4a02-8685-b1746f863517
+    uuid: 7f01a38a-60bc-43a1-bdee-5f8a9630dcf2
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_zugdidi_fixed
   - id: 365481
     prefix: '995419'
     number_min_length: 12
     number_max_length: 12
-    uuid: c4a3de6e-1616-4839-8152-31681d5a1650
+    uuid: 97e0687d-e6a9-4ebd-98e8-857403a340ce
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_chokhatauri_fixed
   - id: 366684
     prefix: '995424'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3a5b65fb-2c12-403b-8ca0-0f2c70234804
+    uuid: 10bc6055-53fa-4678-ad21-b5b78172caed
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_shuakhevi_fixed
   - id: 367180
     prefix: '995425'
     number_min_length: 12
     number_max_length: 12
-    uuid: ac10aecd-04eb-449b-9b04-09c2a1e8b3ef
+    uuid: 7ac09387-8c06-44ff-a0de-f542400ca3b7
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_keda_fixed
   - id: 368409
     prefix: '995431'
     number_min_length: 12
     number_max_length: 12
-    uuid: f1ff42e1-39a2-4bf0-881e-4f842092748f
+    uuid: 13b9b63f-6fb1-4568-9d60-1af5708663ea
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_kutaisi_fixed
   - id: 368485
     prefix: '995434'
     number_min_length: 12
     number_max_length: 12
-    uuid: fa734a75-9861-432d-816e-a5c4664bc29b
+    uuid: 7a99805c-9202-4afe-9d07-41932484557f
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_bagdati_fixed
   - id: 369352
     prefix: '995435'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6ec92d5d-049c-471b-bfee-95468fea5437
+    uuid: 84e5f00b-8eb9-4e69-a857-d836bc179604
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_sachkhere_fixed
   - id: 370168
     prefix: '995439'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2aa675af-bd51-4627-ab1a-83dda81888a2
+    uuid: 7021a745-da6c-410b-8a8f-d6764a72c41e
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_ambrolauri_fixed
   - id: 371921
     prefix: '995412'
     number_min_length: 12
     number_max_length: 12
-    uuid: d3d20369-81cb-445c-83da-bfe52c325b5f
+    uuid: fc083d45-a23b-4fd3-acbc-8aa60a7cc3e5
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_abasha_fixed
   - id: 372951
     prefix: '995413'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9ad0a4ae-f777-4fcc-b660-bae7c6c4b45a
+    uuid: 042854b0-5c0d-4f33-81d6-3383be249a8c
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_senaki_fixed
   - id: 373761
     prefix: '995414'
     number_min_length: 12
     number_max_length: 12
-    uuid: 345637c9-6af0-4e5f-b6ab-728abc420fb5
+    uuid: 67fdad80-746e-4921-9ea4-78319b34fb87
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_khobi_fixed
   - id: 374503
     prefix: '995416'
     number_min_length: 12
     number_max_length: 12
-    uuid: 79a4f8d9-5414-4072-92dc-23d563014103
+    uuid: 3cd2b5c1-0195-4a62-88cd-4c9f44158deb
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tsalenjikha_fixed
   - id: 375176
     prefix: '995417'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1cd63505-d9b6-4a9e-b190-b98188d9e587
+    uuid: 32f1c0c3-3502-4a2a-bb0b-05a1c5d428a1
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_chkhorotsku_fixed
   - id: 376180
     prefix: '995418'
     number_min_length: 12
     number_max_length: 12
-    uuid: f86ea0bb-c5de-46e8-828c-69e4e653a74f
+    uuid: 240bbfb8-a013-4b19-ab92-a69eccbdde68
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_martvili_fixed
   - id: 377507
     prefix: '995422'
     number_min_length: 12
     number_max_length: 12
-    uuid: f5f4e537-32f6-40eb-ae67-c593e4c40908
+    uuid: 85b66289-cb06-48c0-ba8b-564e7867df1c
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_batumi_fixed
   - id: 377564
     prefix: '995423'
     number_min_length: 12
     number_max_length: 12
-    uuid: c74249c7-c23d-4c27-afe2-1a399b526857
+    uuid: 9bab93e6-b1a5-4bdd-a28c-98c2b6c5c97b
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_khulo_fixed
   - id: 378658
     prefix: '995426'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c7e7579-1a73-4910-8997-43ad0fd83eb6
+    uuid: 4f0f2f39-7d56-4dad-8a2e-0f1edfcb8fe9
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_kobuleti_fixed
   - id: 378715
     prefix: '995427'
     number_min_length: 12
     number_max_length: 12
-    uuid: 85d2b9a7-1d9d-4d49-9c97-115e1e46d323
+    uuid: 559ea8c4-03b5-4292-a6fc-9f233f298e90
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_khelvachauri_fixed
   - id: 379799
     prefix: '995432'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3b674c6b-076e-437f-ac34-7e334ac03419
+    uuid: 7355f4c8-ef71-41a6-80a8-bc3345c0a7a9
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_vani_fixed
   - id: 380262
     prefix: '995433'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0b4c77ef-8ec8-42e1-90a3-7ec0e30d8bdd
+    uuid: 18e51b7f-385b-4efe-80c1-2b6dc667e950
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_kharagauli_fixed
   - id: 380671
     prefix: '995436'
     number_min_length: 12
     number_max_length: 12
-    uuid: eee1e01e-ceca-40f5-9447-68382a0e46db
+    uuid: 83fbf4ee-53ca-4128-902d-b5b635923789
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tskaltubo_fixed
   - id: 380922
     prefix: '995437'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6345d064-3a68-4057-8a1d-9acb1eb66cf5
+    uuid: 839dc2ba-0702-4e2b-bddc-5e0da94383c2
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_lentekhi_fixed
   - id: 382971
     prefix: '995443'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ea64879-a73c-4f71-89c1-3852d2f2b587
+    uuid: 454c7c20-d96f-401c-ac50-355f8345faac
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_gagra_fixed
   - id: 384109
     prefix: '995444'
     number_min_length: 12
     number_max_length: 12
-    uuid: d1766c91-2505-4fcf-bb8d-cb5570859e05
+    uuid: efdbcaca-e00f-4d9a-8dfb-6eb9d86a99bd
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_gudauta_fixed
   - id: 384979
     prefix: '995445'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5a32bacb-e28d-448a-bf3c-afff35fb2642
+    uuid: 2db4c99a-5c54-49be-abc1-9e79626d6dde
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_ochamchire_fixed
   - id: 385467
     prefix: '995446'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4068c023-d39f-4c41-9eb8-13c51e7db537
+    uuid: 59d08171-0ea2-4a32-a89b-785964cea051
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tkvarcheli_fixed
   - id: 385743
     prefix: '995447'
     number_min_length: 12
     number_max_length: 12
-    uuid: ac4f19fc-5ba7-4bda-ae97-af15e6aa30d7
+    uuid: b6838b9e-7280-492f-90cf-64d1de81925a
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_gali_fixed
   - id: 386197
     prefix: '995448'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7d7a28a3-b9fd-437e-ac1e-8c2f75408777
+    uuid: c511ed24-f297-4979-a408-22fafe07681f
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_gulripshi_fixed
   - id: 389934
     prefix: '995442'
     number_min_length: 12
     number_max_length: 12
-    uuid: c9e9fe3d-fc9c-4c52-bccd-e57213959f06
+    uuid: f53b3c28-c809-4794-83a0-01e08452cd21
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_sukhumi_fixed
   - id: 396539
     prefix: '995472'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7c89e953-a556-4d4f-b75b-35138020dbb2
+    uuid: 1df06cb5-8433-42c0-9047-a7aba108dde4
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_tsageri_fixed
   - id: 396993
     prefix: '995473'
     number_min_length: 12
     number_max_length: 12
-    uuid: 986d4e22-e6b9-42d7-82bc-c20e49e060bf
+    uuid: 1a00c3e8-2ca2-42e5-bf69-d3b723e60f60
     country_id: *ge
-    network_id: *ge_fixed
+    network_id: *ge_oni_fixed
 # Mobile Prefixes
   - id: 54948
     prefix: '99550000'
     number_min_length: 12
     number_max_length: 12
-    uuid: 66c73045-c269-4a0d-ba08-c3bfc0376ce9
+    uuid: 1282dfe5-33cb-4ae7-bcdd-13373a00c571
     country_id: *ge
     network_id: *ge_mobilive_mobile
   - id: 54949
     prefix: '99550001'
     number_min_length: 12
     number_max_length: 12
-    uuid: f223d9af-b22f-4cb1-8571-a525032c2cc5
+    uuid: 74ffd940-c675-443f-9084-0548d0be1a21
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54950
     prefix: '99550002'
     number_min_length: 12
     number_max_length: 12
-    uuid: 15f8f1c8-2edd-4944-8ebe-1634c22cae91
+    uuid: 1f270218-3706-4ab8-900c-e49b45c6eae6
     country_id: *ge
     network_id: *ge_icell_telecom_mobile
   - id: 54951
     prefix: '995500050'
     number_min_length: 12
     number_max_length: 12
-    uuid: a31f446e-f0a3-408f-a786-950ec3665b83
+    uuid: 32d58d0c-7faf-40e8-9ba2-57f3e9052212
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 54952
     prefix: '995500051'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6a8002a8-eebf-4c5d-9762-6f2eac57cc2e
+    uuid: aa19c098-d45b-4a68-8831-2071603c27ef
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 54953
     prefix: '995500052'
     number_min_length: 12
     number_max_length: 12
-    uuid: 523ca310-6bb4-460d-b512-eb41a465246b
+    uuid: be2d9a27-ae95-42a1-a855-888c594124ef
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 54954
     prefix: '995500053'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3c7b2dbc-d5de-4934-903b-ed4ace758ea9
+    uuid: 6d7ca5bd-edcc-4214-9d2e-7c07046f61db
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 54955
     prefix: '995500054'
     number_min_length: 12
     number_max_length: 12
-    uuid: 095d44a0-9c41-4748-b92d-c0dcee841034
+    uuid: a0b1598c-0fc3-410b-8b44-03c68496d526
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 54956
     prefix: '995500055'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1cfeb004-9b32-4702-a378-c834c650515f
+    uuid: 4fc887ce-9cb5-4691-943d-df41373386c8
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54957
     prefix: '995500056'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8bbe85ae-af8a-47b5-8b3d-4479ef94c2c7
+    uuid: e06ac588-b30c-4ba6-9355-d45bb8ce8be7
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54958
     prefix: '995500057'
     number_min_length: 12
     number_max_length: 12
-    uuid: 300da50f-5dca-4e1b-a9eb-e1a046f89ca2
+    uuid: 0f63b952-6a6c-43cf-aac3-6a051823181e
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54959
     prefix: '995500058'
     number_min_length: 12
     number_max_length: 12
-    uuid: a118bca1-f30a-49ae-af7e-fa5dfadd5d79
+    uuid: a9ef8b72-1dae-4aef-9591-fd8d70141e99
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54960
     prefix: '995500059'
     number_min_length: 12
     number_max_length: 12
-    uuid: 15b6f808-2fc2-48cf-becf-6e4d4a2133b6
+    uuid: a3b958b3-fbc0-413c-9d4e-8d3bb8e25921
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54961
     prefix: '995500100'
     number_min_length: 12
     number_max_length: 12
-    uuid: 483bdcdb-226f-4b6f-b9df-eb2fad25e7f9
+    uuid: 26ad52c6-98d4-4183-99c2-2f5e5c3fc306
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54962
     prefix: '995500101'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8ab44bae-5ce5-4e2c-9f2c-e738a7bc6899
+    uuid: 4d3a8f33-e97d-4122-bff8-0d1da5790c92
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54963
     prefix: '995500102'
     number_min_length: 12
     number_max_length: 12
-    uuid: 791686e4-efaf-476a-bbbe-28da39bcf190
+    uuid: 4134b193-b364-4764-8995-5b3fc27d27ec
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54964
     prefix: '995500103'
     number_min_length: 12
     number_max_length: 12
-    uuid: 56019ac5-fa65-4f1a-901d-b593338f6ff4
+    uuid: cd39ebbd-1205-4048-b955-4e9cdf0f850c
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54965
     prefix: '995500104'
     number_min_length: 12
     number_max_length: 12
-    uuid: 374a859a-9522-4b39-a05b-723ccbd0b3b9
+    uuid: c5da4d71-ea85-47c7-a776-762862c2d6bd
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54966
     prefix: '99550011'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8ccede15-d808-4df2-80a3-c8a72084a74a
+    uuid: a83be840-421c-4641-8873-def4ec3efbda
     country_id: *ge
     network_id: *ge_hallo_mobile
   - id: 54967
     prefix: '99550022'
     number_min_length: 12
     number_max_length: 12
-    uuid: 324e1cdb-23a4-4188-b69c-172d6cc5b009
+    uuid: 8c7854d3-6cd3-465e-a4d5-c44c2190e6d0
     country_id: *ge
     network_id: *ge_hallo_mobile
   - id: 54968
     prefix: '995500305'
     number_min_length: 12
     number_max_length: 12
-    uuid: 25866342-f257-4669-8639-3de671c351a3
+    uuid: 3c3cf56d-0017-4323-86d0-62b90af138fa
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54969
     prefix: '995500306'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5109aa9e-c3c8-47f1-9d01-221770cacff7
+    uuid: c541d287-d1ad-4698-83c1-2b35fd64a6b6
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54970
     prefix: '995500307'
     number_min_length: 12
     number_max_length: 12
-    uuid: 87f0409e-b898-4673-a6da-495924a7bcea
+    uuid: 8605fa13-a1ad-4628-863a-a38733df9da8
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54971
     prefix: '995500308'
     number_min_length: 12
     number_max_length: 12
-    uuid: 19a31fdc-ef6f-468d-9994-fed59d821f10
+    uuid: 504a9dce-f317-4984-8f0c-4e3b2a4daff3
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54972
     prefix: '995500309'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5e5d71fd-9d25-4e26-9edb-d642c908a2a6
+    uuid: 9bcef741-3392-40b8-afd1-310810106106
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54973
     prefix: '99550031'
     number_min_length: 12
     number_max_length: 12
-    uuid: dc8175ce-ef70-456b-91e2-0cd757826f91
+    uuid: ceafb544-41d0-4f2e-8107-f7f19ecb14e9
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54974
     prefix: '99550032'
     number_min_length: 12
     number_max_length: 12
-    uuid: e5c0ebaa-18b3-4338-a31d-07a45b754d95
+    uuid: 046beedb-4c4b-49ca-93c3-75e95cb255b9
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54975
     prefix: '99550033'
     number_min_length: 12
     number_max_length: 12
-    uuid: 37633184-b8a1-453a-b37d-f0176a50e403
+    uuid: 6d10d8ba-6590-4b7e-865b-74d70c84e217
     country_id: *ge
     network_id: *ge_hallo_mobile
   - id: 54976
     prefix: '99550034'
     number_min_length: 12
     number_max_length: 12
-    uuid: e4bb6692-0722-4d35-98ed-736155c3eb46
+    uuid: fdadcf9f-dfed-4cc7-8b04-ce51cc9a5ceb
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54977
     prefix: '99550035'
     number_min_length: 12
     number_max_length: 12
-    uuid: d8cc63ff-e232-417e-b922-f5382e3247a2
+    uuid: 5794a8d9-3a08-410d-afdb-11750897f880
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54978
     prefix: '995500360'
     number_min_length: 12
     number_max_length: 12
-    uuid: c7309a10-a182-4bbf-b5e9-3832e1ab0d34
+    uuid: 6f042d82-8b54-438d-b74d-ebef5a33f76d
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54979
     prefix: '995500361'
     number_min_length: 12
     number_max_length: 12
-    uuid: ecf69dbb-3875-4e9d-8139-5778c6dcdf6c
+    uuid: 2af1b13f-f9dd-4cf5-a3c1-b555be183537
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54980
     prefix: '995500362'
     number_min_length: 12
     number_max_length: 12
-    uuid: 805692d0-dcfd-4d2a-a4a5-b241306e3e44
+    uuid: 21212a26-f972-497d-b1db-01014f5f2dc0
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54981
     prefix: '995500363'
     number_min_length: 12
     number_max_length: 12
-    uuid: c5478450-a809-4f3c-831b-e423cbe7c864
+    uuid: 51cc4be5-fce9-4f43-a614-fca617977dbd
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54982
     prefix: '995500364'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8a0653cf-f26a-4545-9131-7f1c41f786d4
+    uuid: b53f4bec-7dd7-4107-a9ff-5e52f33097da
     country_id: *ge
     network_id: *ge_unicell_mobile_mobile
   - id: 54983
     prefix: '99550044'
     number_min_length: 12
     number_max_length: 12
-    uuid: 84d7a072-9334-49a7-bfa3-b4dabaae67f5
+    uuid: a90611a4-6d8b-4bab-8e86-ec1460a0b0fb
     country_id: *ge
     network_id: *ge_hallo_mobile
   - id: 54984
     prefix: '99550050'
     number_min_length: 12
     number_max_length: 12
-    uuid: ed0dcc85-b702-45c4-889e-d60e0a030d05
+    uuid: 4bbbaee3-f218-4bf1-88ad-599bae15db48
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 54985
     prefix: '99550055'
     number_min_length: 12
     number_max_length: 12
-    uuid: d6943529-1fda-49af-8cd3-23677837f182
+    uuid: dc46d6d6-0444-48ee-8df9-2fab97d0959e
     country_id: *ge
     network_id: *ge_hallo_mobile
   - id: 54986
     prefix: '995500700'
     number_min_length: 12
     number_max_length: 12
-    uuid: d5c088b0-c61b-485f-91bc-508deb77ff5b
+    uuid: 314894da-ed01-4b60-94d5-853b2e9bde07
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54987
     prefix: '995500701'
     number_min_length: 12
     number_max_length: 12
-    uuid: a57b12bb-8238-4623-9151-d064c19a39cc
+    uuid: 3b14490b-7e0d-425c-b504-1c12cecca0a1
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54988
     prefix: '995500702'
     number_min_length: 12
     number_max_length: 12
-    uuid: f0ef158e-12b7-43fb-9e37-97f82407fb44
+    uuid: f402a5cd-03fe-4765-98f6-fed5e3c5373a
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54989
     prefix: '995500703'
     number_min_length: 12
     number_max_length: 12
-    uuid: 52365c17-b3f3-4575-8483-3035c4a0df3a
+    uuid: 5661a9e2-cf6c-428a-a197-3387227c97c1
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54990
     prefix: '995500704'
     number_min_length: 12
     number_max_length: 12
-    uuid: 44be5885-9dad-4a49-b00a-552effdde3f6
+    uuid: ce0900a9-7153-4c5b-be40-0734e3930003
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54991
     prefix: '99550077'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2a0d483d-9b35-4ebc-9d5a-9e086237f890
+    uuid: f3a7b9f3-1826-457f-a793-2e06c2c5f84b
     country_id: *ge
     network_id: *ge_hallo_mobile
   - id: 54992
     prefix: '99550088'
     number_min_length: 12
     number_max_length: 12
-    uuid: e7c32e98-bf29-4028-801f-a52beb922286
+    uuid: f0efc92b-f732-4df1-ab1c-ca5ac2bb3c95
     country_id: *ge
     network_id: *ge_hallo_mobile
   - id: 54993
     prefix: '995500900'
     number_min_length: 12
     number_max_length: 12
-    uuid: 03706191-d46a-495a-bca7-9a5bd7056ffe
+    uuid: 053c571c-6b70-4c30-87ce-51420153b428
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54994
     prefix: '995500901'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ab08d02-1b89-4791-98cd-34492c8527a0
+    uuid: 6891c05a-3c96-4b49-9850-656f1bd6d13d
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54995
     prefix: '995500902'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6947251f-9e85-424a-883f-f497f5597a23
+    uuid: ee111f45-b6da-461e-a415-71cb8b88e59c
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54996
     prefix: '995500903'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2c6b3122-e377-4ec4-9657-c84c8fff3dde
+    uuid: 7e0d6bc3-f43a-4f00-ba03-dc1d5371e082
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54997
     prefix: '995500904'
     number_min_length: 12
     number_max_length: 12
-    uuid: cae3ea9c-3082-4696-97db-5c1a662cb39c
+    uuid: f19e0d69-40f6-4b40-b6c4-71ec3dbba557
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 54998
     prefix: '99550099'
     number_min_length: 12
     number_max_length: 12
-    uuid: 04fdb57f-535c-4dd0-9f69-5253db0765e0
+    uuid: 9e994987-4946-4906-83a9-70017ea5dd46
     country_id: *ge
     network_id: *ge_hallo_mobile
   - id: 55006
     prefix: '995501110'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0d9e1c7d-210e-4950-bda8-3cf5a502813e
+    uuid: ce570907-10d9-4090-9ffe-1a3d7748a3e7
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 55007
     prefix: '995501111'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8dcbcaed-9b2f-415f-8110-0eeff83a4996
+    uuid: c063b4fb-4366-4d0e-b54a-1c0775fcc51f
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 55008
     prefix: '995501112'
     number_min_length: 12
     number_max_length: 12
-    uuid: 89515e6b-f6b6-4feb-bb96-a841936c1f6e
+    uuid: 1966875e-3076-4235-98f9-1c1771d1659a
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 55009
     prefix: '995501113'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7cecf9ac-cca6-477c-8dec-f3ea7c18b6d9
+    uuid: 96bf2281-d4cf-4435-94f9-d39e5315551a
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 55010
     prefix: '995501114'
     number_min_length: 12
     number_max_length: 12
-    uuid: e328d69e-a540-44b2-9e92-86b9f29f8cfc
+    uuid: a4415247-36a3-4427-ac16-71224fbfb6d9
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 62735
     prefix: '995510000'
     number_min_length: 12
     number_max_length: 12
-    uuid: c03e5b1c-b3dc-4441-9c4a-fce1ec2f36b2
+    uuid: edd9bbb7-b268-4200-b5d6-205eda668eee
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 62736
     prefix: '995510001'
     number_min_length: 12
     number_max_length: 12
-    uuid: 60ac3746-d42b-4829-9875-33701e0c934d
+    uuid: f93f9747-8914-4b41-b52e-78f13c0d2539
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 62737
     prefix: '995510002'
     number_min_length: 12
     number_max_length: 12
-    uuid: 50628c3f-336f-416c-a657-d43294c6afd7
+    uuid: a3b98dc0-da38-4607-aaa2-7ec954ac68cd
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 62738
     prefix: '995510003'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3bcfadc4-908e-4ffe-93bc-8fe7b6d3a141
+    uuid: ceb7ed0c-98d2-4d0e-9e98-d671afb87761
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 62739
     prefix: '995510004'
     number_min_length: 12
     number_max_length: 12
-    uuid: f016abe5-88e6-458a-b1f0-b7c2ad10d855
+    uuid: 50144b56-c698-453a-9aa1-ca56abd529a5
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 62740
     prefix: '995510100'
     number_min_length: 12
     number_max_length: 12
-    uuid: 637fa959-4cf2-4ef9-bb1d-a8180511c482
+    uuid: daa8a21b-c184-430a-89b6-919d710a76df
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 62741
     prefix: '995510101'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9ecc54b9-983f-4c4d-a79f-70d073f09cd8
+    uuid: 892a391c-e744-4781-9f4f-9add6bbf4be6
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 62742
     prefix: '995510102'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7c4879a7-7198-4f02-bd2a-c93c67ae7e6d
+    uuid: ed8104df-0315-40e4-9350-9fd953cf3abd
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 62743
     prefix: '995510103'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0aa9a111-345e-475c-8cc2-5a5f92bcd29e
+    uuid: e9b2493e-5805-42f7-967d-f1f0d6d40941
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 62744
     prefix: '995510104'
     number_min_length: 12
     number_max_length: 12
-    uuid: d74f03f6-d10f-4056-aa65-c39f3e909d5b
+    uuid: f30c3b16-b777-4ed6-beae-5002ac137d4f
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 64002
     prefix: '995514'
     number_min_length: 12
     number_max_length: 12
-    uuid: e86f410a-d3cf-49e1-99e0-8323d07ba3e9
+    uuid: cd0e63fb-4d73-439e-b71b-b28efe45285d
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65328
     prefix: '995517775'
     number_min_length: 12
     number_max_length: 12
-    uuid: aa3c18dc-5acb-48ba-bb1d-6e6bae68297b
+    uuid: c30756dc-e87f-4204-94b2-e2d1365b8ba9
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 65330
     prefix: '995517776'
     number_min_length: 12
     number_max_length: 12
-    uuid: ec84829a-d83a-49be-9fbf-84b77fd9612d
+    uuid: 0ea1dc6d-7ff8-436b-a73a-d93af0b7dc88
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 65331
     prefix: '995517777'
     number_min_length: 12
     number_max_length: 12
-    uuid: 907291c1-cf18-49e2-a133-be6bab2f72a8
+    uuid: 8bae0fbf-f50d-4688-b2fb-dd7d41992fdb
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 65333
     prefix: '995517778'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4a73b9c4-602b-48b8-b5fb-55bee8171d72
+    uuid: d84ced0e-2130-4936-b3bf-b9b5cba8982e
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 65334
     prefix: '995517779'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3e7e1b5e-b047-4f6a-8cbf-4b59ae661d09
+    uuid: 88c47362-eea2-46c7-8036-e2fd19f7c7d0
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 65703
     prefix: '995520000'
     number_min_length: 12
     number_max_length: 12
-    uuid: e2eb385f-6c65-4d71-9232-84755d3cbf2f
+    uuid: 14c891c3-1937-4226-8107-96a3f210aec0
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65704
     prefix: '995520001'
     number_min_length: 12
     number_max_length: 12
-    uuid: 50034ff8-74c2-4f72-a5f8-0f6785b04b0a
+    uuid: 8bc4efbc-cf7f-4d9e-aee7-5355368c1475
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65705
     prefix: '995520002'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8f40e639-6aa8-401f-954a-dc11c26e3a2d
+    uuid: 4e1a6229-05af-4324-b150-44f6ddfdb099
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65706
     prefix: '995520003'
     number_min_length: 12
     number_max_length: 12
-    uuid: 33196f4c-8cdb-4296-ae87-2063d8d2e895
+    uuid: 111a13f6-d99a-4d82-82fa-44843bea6dfc
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65707
     prefix: '995520004'
     number_min_length: 12
     number_max_length: 12
-    uuid: 437dd087-98be-471a-ba74-1ec46ddec9b1
+    uuid: 5fac23a1-5dc1-496a-9786-e475bc58b7c3
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65708
     prefix: '995520200'
     number_min_length: 12
     number_max_length: 12
-    uuid: 768d8ad8-deb5-4b59-8f78-7422e0684727
+    uuid: 7be809ea-8e07-481a-8a2f-767eee5669ee
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65710
     prefix: '995520201'
     number_min_length: 12
     number_max_length: 12
-    uuid: ea0fe4e9-a124-493a-9848-94b55d391989
+    uuid: a68025de-ec91-469f-8020-7a1346880a1c
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65712
     prefix: '995520202'
     number_min_length: 12
     number_max_length: 12
-    uuid: b640510b-79fb-4153-b3ff-43d36a235ab3
+    uuid: 321c02e2-bd7f-43ba-8337-c314e2c0a8f4
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65714
     prefix: '995520203'
     number_min_length: 12
     number_max_length: 12
-    uuid: 17ed6593-b423-418f-aaad-f91376d0fb4c
+    uuid: f8532950-57c4-42df-a694-0afb0374c2a0
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65716
     prefix: '995520204'
     number_min_length: 12
     number_max_length: 12
-    uuid: c117cd8a-555a-4d99-9aed-7a122c961245
+    uuid: 8cd5b009-2d57-4488-b374-75fe4dddbc8a
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 65750
     prefix: '995504440'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5caef7e8-aa96-4809-8e88-da0c840c4b59
+    uuid: 6ca50fda-0832-48dc-840a-f25931f5c638
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 65751
     prefix: '995504441'
     number_min_length: 12
     number_max_length: 12
-    uuid: b5bd18f0-d2b9-40b8-acef-9d30e9590da9
+    uuid: b5cc2585-91f1-4278-9f2d-7e06d55e6f12
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 65753
     prefix: '995504442'
     number_min_length: 12
     number_max_length: 12
-    uuid: 858ff6e2-4310-4626-98c7-5de3976ecb9d
+    uuid: 34ef91f4-3b31-43fb-ab85-f0779d38a3c3
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 65755
     prefix: '995504443'
     number_min_length: 12
     number_max_length: 12
-    uuid: ceba0aaa-30cd-464a-8873-ca03c207e38b
+    uuid: 4f577f2e-4ce7-462a-a271-fdc6f74dd0f5
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 65757
     prefix: '995504444'
     number_min_length: 12
     number_max_length: 12
-    uuid: ebf2939b-563c-472b-a866-08122a5b29d1
+    uuid: bdda82db-71ba-4bf7-98cf-9dcf09278807
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 66084
     prefix: '995505050'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c129571-b342-4303-8b4e-97cf8506a012
+    uuid: 9fd43850-90cb-4afc-86bd-5f98b84de31d
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 66085
     prefix: '995505051'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2cf1facc-d744-4791-b030-301d42413b71
+    uuid: 2b09479d-d8a8-456b-95bf-bc62410ac378
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 66086
     prefix: '995505052'
     number_min_length: 12
     number_max_length: 12
-    uuid: b292f9e9-a250-4aa2-a462-9fb85e5fa387
+    uuid: 39d00518-485c-4d6e-9fd5-a5cc963f6b3c
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 66087
     prefix: '995505053'
     number_min_length: 12
     number_max_length: 12
-    uuid: fa0828cf-d6cc-45ef-84ba-34e28dbb24d0
+    uuid: 6e42554f-1731-4ec1-b305-c21f362740d9
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 66088
     prefix: '995505054'
     number_min_length: 12
     number_max_length: 12
-    uuid: 07fa7c0c-afc0-44a5-b6d6-50fc8721db98
+    uuid: 7efa6b53-8994-4844-a858-9470171425e9
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 66436
     prefix: '995505555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 98f8eaae-255d-4119-80af-6342f30a4d1f
+    uuid: 83039852-64f0-42d9-b39d-4339063690ea
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 66438
     prefix: '995505556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7143ebea-6184-4fde-8fe9-e8b75e582bbd
+    uuid: cc48512c-1693-4a7d-8fe6-ed4a7c62e9f2
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 66440
     prefix: '995505557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 871de0dd-a178-4be4-ad3e-eed46a23cd59
+    uuid: c238be38-07c7-407b-8fde-505004d78bde
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 66442
     prefix: '995505558'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0c105406-08d7-4e84-a549-024d2cc12629
+    uuid: 5cf07760-bcdb-42dd-b67f-e38ed6f974e1
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 66443
     prefix: '995505559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 33985d38-f8d1-42aa-90e4-d4a90d72e3dd
+    uuid: f46a2aba-c28b-4631-9a54-698e6bb1b2c3
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 66630
     prefix: '995507775'
     number_min_length: 12
     number_max_length: 12
-    uuid: e9da86dc-dd6d-46f3-a585-3ab62e2e7f12
+    uuid: b05064f8-b720-423e-b19e-34888253316e
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 66632
     prefix: '995507776'
     number_min_length: 12
     number_max_length: 12
-    uuid: 32e81c30-b60d-45ae-a2eb-356f0fe214fe
+    uuid: 5ddaa237-0a87-42e6-bdb7-271ba866e4ca
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 66634
     prefix: '995507777'
     number_min_length: 12
     number_max_length: 12
-    uuid: 557468ef-c4b9-4773-b15d-8500c527f5d7
+    uuid: 4f4b89bb-f5d3-4158-bbd1-fccf2daf0b83
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 66636
     prefix: '995507778'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0f927f1d-243b-4d34-9dc4-dd3fd4ebe7f9
+    uuid: 4f8e9af0-5ea6-4e08-b82b-ee91e3d3d7a4
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 66638
     prefix: '995507779'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9dd00a38-4f11-41da-a622-c4dacccf8b86
+    uuid: 192b1020-f8f6-4ce4-9616-919e979cb675
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 68170
     prefix: '99551100'
     number_min_length: 12
     number_max_length: 12
-    uuid: 13e6e485-7f80-4219-8df0-f7fba41e629f
+    uuid: 6c078208-fcc7-4126-b1a4-ab81cccaaad0
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68171
     prefix: '99551101'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8a5a0444-bb2c-4e05-87c1-1e34172202b7
+    uuid: 92a0eb2c-f35b-481b-bc48-20a8001dda5b
     country_id: *ge
     network_id: *ge_servicebox_mobile
   - id: 68172
     prefix: '995511070'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4b22ddf6-a440-424a-b832-0115bdc125b2
+    uuid: 2d669535-5ed8-4631-9560-e268833c54e9
     country_id: *ge
     network_id: *ge_servicebox_mobile
   - id: 68173
     prefix: '995511071'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4b0cf477-f422-4560-9ac7-c220990b52a8
+    uuid: 42b78d37-cc78-4674-a5ef-1cf40e04a50a
     country_id: *ge
     network_id: *ge_servicebox_mobile
   - id: 68174
     prefix: '995511072'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0b59a5c2-2be6-4cfe-82ab-73ac7e5b9cdf
+    uuid: e56c9310-2304-4541-84f6-4f0ab2908551
     country_id: *ge
     network_id: *ge_servicebox_mobile
   - id: 68175
     prefix: '995511073'
     number_min_length: 12
     number_max_length: 12
-    uuid: b771d042-7021-4205-b853-b20e8c039e48
+    uuid: 359c3f07-e2e1-4feb-9845-538d6ae074b2
     country_id: *ge
     network_id: *ge_servicebox_mobile
   - id: 68176
     prefix: '995511074'
     number_min_length: 12
     number_max_length: 12
-    uuid: 765cc1e7-1be6-4928-964c-2c730c70a87a
+    uuid: 179554ab-8941-4569-a85a-4367472fcb31
     country_id: *ge
     network_id: *ge_servicebox_mobile
   - id: 68177
     prefix: '9955111'
     number_min_length: 12
     number_max_length: 12
-    uuid: 217745d4-3460-451a-9a92-a0c2d9aed2dd
+    uuid: d8a9938b-c6f0-4a10-92f0-1f506f7d1a0b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68178
     prefix: '9955112'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9921c2be-b9dd-48ca-8a1a-84f6494813de
+    uuid: e90d5d8f-ffb5-4b83-bf10-f107785d9cdb
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68179
     prefix: '99551130'
     number_min_length: 12
     number_max_length: 12
-    uuid: f0838126-0351-4ed0-9417-a9ae015a94a7
+    uuid: 890f8eac-c14e-4999-a327-46e27d83d440
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68180
     prefix: '99551131'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6ea39cdb-c800-4aea-a0fa-2404b6f5171f
+    uuid: c1c5bf12-1abc-464c-972c-d2197404f07b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68181
     prefix: '995511330'
     number_min_length: 12
     number_max_length: 12
-    uuid: 43aba5c2-b0c6-4d3b-a4f8-d4ff945def40
+    uuid: 8557f25f-acd2-411a-a4e0-f1bdb79d9e4e
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68182
     prefix: '995511331'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9eda3a7a-0b62-4ed6-acdc-245e4d596b2d
+    uuid: b2412a85-71e8-4939-827e-55d774d5cefc
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68183
     prefix: '995511332'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3dc9d4e8-938c-44dc-b0cb-b4c709f9df2d
+    uuid: 96b3db31-9a24-4f87-bb93-762e61655c14
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68184
     prefix: '995511333'
     number_min_length: 12
     number_max_length: 12
-    uuid: d0ed9d6d-35b5-427d-8090-f3cf6c6a091d
+    uuid: 0bb73c3e-6f64-4068-8e1d-409fb0a66423
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68185
     prefix: '995511334'
     number_min_length: 12
     number_max_length: 12
-    uuid: fb49c089-c30b-4e7e-9720-c11d6b0a5bcd
+    uuid: 5f94dbd1-b078-4412-a36c-be2da8c7dfa3
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68186
     prefix: '9955114'
     number_min_length: 12
     number_max_length: 12
-    uuid: 19f0ac22-10e8-4c24-b9b5-e0ca2ae58dae
+    uuid: 8ae630d1-a79b-4bb8-bed0-1e8fb5ed89bb
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68187
     prefix: '995511510'
     number_min_length: 12
     number_max_length: 12
-    uuid: 04f17899-d06a-4a13-996c-ba5c686cc165
+    uuid: 68c3312b-d008-4181-96e6-7ed810abd287
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 68188
     prefix: '995511511'
     number_min_length: 12
     number_max_length: 12
-    uuid: 035cc24a-ff2d-46f0-872d-100eb24a0bf4
+    uuid: 1a17b7bd-f780-4f32-9e0f-094cef043c3d
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 68189
     prefix: '995511512'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8bcfbd71-061c-4bd9-ac1f-a172e3970307
+    uuid: 1fe09ab8-bd0b-448f-bd5e-2183f35b8b9e
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 68190
     prefix: '995511513'
     number_min_length: 12
     number_max_length: 12
-    uuid: b49433e8-8e4e-45e6-9685-bc13c7569f26
+    uuid: ba095d09-9a0a-4200-b668-8ff9e2c87aa9
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 68191
     prefix: '995511514'
     number_min_length: 12
     number_max_length: 12
-    uuid: ff51c210-5ee7-4b19-92b6-47bd05d8942b
+    uuid: 7b0c049f-fb5f-4a4d-93e9-7281c455ebbf
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 68192
     prefix: '995511775'
     number_min_length: 12
     number_max_length: 12
-    uuid: f11e5574-09aa-48b5-b493-75a50f769841
+    uuid: e551bf86-7395-491d-9e0f-b13bbc354790
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68193
     prefix: '995511776'
     number_min_length: 12
     number_max_length: 12
-    uuid: bfe78a10-09f7-4db9-93fa-243bcda55d06
+    uuid: 4277f2ff-60f0-4cad-b7ed-01c1435145dc
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68194
     prefix: '995511777'
     number_min_length: 12
     number_max_length: 12
-    uuid: cbf19dcf-bd21-4092-893a-55e4ca099261
+    uuid: 15fca882-9335-40ca-8ac7-29a4351edef9
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68195
     prefix: '995511778'
     number_min_length: 12
     number_max_length: 12
-    uuid: e86dfb0b-4d7e-43ed-a37f-f0077415f7c3
+    uuid: bc677888-8426-40ae-8350-6c29523c9f84
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 68196
     prefix: '995511779'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5858521b-e9fe-411f-bbc5-99f81c4c05e0
+    uuid: 13da05b2-983b-4eaa-ae32-d2033e0a5667
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 69588
     prefix: '995515555'
     number_min_length: 12
     number_max_length: 12
-    uuid: d2c7e756-9938-4c52-91e1-8c3a26163cf5
+    uuid: d37762fc-edc1-440f-8d4b-7b367a061d8b
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 69590
     prefix: '995515556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 079003b2-2aff-43ef-a509-6882dbb943d2
+    uuid: 5f74a350-9415-4409-b3fb-52c6f7239525
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 69592
     prefix: '995515557'
     number_min_length: 12
     number_max_length: 12
-    uuid: e99741bc-f1fd-4fa8-875b-4109db410ff3
+    uuid: 560136c3-f2df-42a2-8514-0c92876d9945
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 69594
     prefix: '995515558'
     number_min_length: 12
     number_max_length: 12
-    uuid: 48befa2e-20b1-4372-9b60-e45a13b574f0
+    uuid: 68d83a2d-daf1-470c-9830-b88252e568e2
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 69596
     prefix: '995515559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 58b5dd74-dc54-4b87-aa95-2572bcd7cfa9
+    uuid: 61473ba1-eb47-4ca7-ad70-47b0205e979f
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 71726
     prefix: '995530000'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9ae3f81a-1a24-41bd-a3fe-3dc5ad846d17
+    uuid: 8e0e3990-018d-406d-82ef-d8e2c7dee822
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71727
     prefix: '995530001'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9dc554e3-f24a-405d-8dce-4e12b6dcf5ce
+    uuid: 3b2a6b04-810a-4e8c-910a-984f5c9c679f
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71728
     prefix: '995530002'
     number_min_length: 12
     number_max_length: 12
-    uuid: 396afbec-2aef-4415-b68d-45a8a8ce0706
+    uuid: a99dcd47-3ab1-4846-a18e-4e6715635166
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71729
     prefix: '995530003'
     number_min_length: 12
     number_max_length: 12
-    uuid: cef4cecd-9cf7-4a10-9a40-c15b11faafe6
+    uuid: 7a24912c-60ab-488e-8e80-602a8c372af3
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71730
     prefix: '995530004'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1563bbfd-fa6d-4866-8f97-b069ce558fd5
+    uuid: 04ce9507-0b33-40ba-b190-6c20ff1de12f
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71830
     prefix: '995530300'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4ea4b6d2-85f7-486d-8544-8961c9842f73
+    uuid: 4f3104ec-b73b-441e-9e94-dd3dd7f35d56
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71832
     prefix: '995530301'
     number_min_length: 12
     number_max_length: 12
-    uuid: f0de6f26-bd97-4364-8107-865a31ae6a12
+    uuid: 63c2b2ac-d436-40da-a172-abb151d7228a
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71834
     prefix: '995530302'
     number_min_length: 12
     number_max_length: 12
-    uuid: a577a917-74a5-4efd-8fc0-6eb12cf23727
+    uuid: bcfa7508-f6ca-4863-a52c-016b7a55b7bc
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71836
     prefix: '995530303'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4c62cf67-b47a-4cf1-bde7-94dc5a24686e
+    uuid: 7d6309fd-a1d4-44ae-a253-6565388234ff
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 71838
     prefix: '995530304'
     number_min_length: 12
     number_max_length: 12
-    uuid: bb388454-a0f1-4170-8add-b6c1161e744b
+    uuid: 35781b2a-08d5-4921-b1d2-1def58e6e8f0
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 72764
     prefix: '995533330'
     number_min_length: 12
     number_max_length: 12
-    uuid: df24d443-1123-4123-99d7-a1af254b1393
+    uuid: cc647d9f-b9a5-4fac-bdde-d9f0dab444e4
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 72765
     prefix: '995533331'
     number_min_length: 12
     number_max_length: 12
-    uuid: b889fd7b-f85a-4921-b987-3b43478127f4
+    uuid: d76b31b4-59d9-4969-b04c-0e6929c539c8
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 72766
     prefix: '995533332'
     number_min_length: 12
     number_max_length: 12
-    uuid: b1ca2781-1b7c-4f91-8552-0f9536062a89
+    uuid: efb4bbcd-8fb7-48db-9a7f-26b0ebdda70a
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 72767
     prefix: '995533333'
     number_min_length: 12
     number_max_length: 12
-    uuid: df50d1ca-b984-4b51-873b-abc260a3107d
+    uuid: 3341dce4-93a2-49da-94b3-34c946cfea7b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 72768
     prefix: '995533334'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4a2cc391-505b-4b82-a433-ec0668183360
+    uuid: 3a5ec56b-6967-4d8b-b8a9-23c06382a2d3
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 72769
     prefix: '995533530'
     number_min_length: 12
     number_max_length: 12
-    uuid: 325967ae-6bfb-48f5-be80-cddb57a2978d
+    uuid: da103f81-85e5-4c22-a533-5e7011a07d6e
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 72770
     prefix: '995533531'
     number_min_length: 12
     number_max_length: 12
-    uuid: f05bf78e-60c5-4dda-885e-2576e9b1c518
+    uuid: a5ac7b1a-5120-4dc4-9d9f-c4cd4ac87811
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 72771
     prefix: '995533532'
     number_min_length: 12
     number_max_length: 12
-    uuid: a908a1c6-6759-4770-83d0-22b2966479cb
+    uuid: fb02434d-b35e-4b56-9d4c-90727ac44825
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 72772
     prefix: '995533533'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9d1883e4-1ef7-4cec-865b-fa36b5525839
+    uuid: f66c56f0-a1c2-4ec8-b818-53622acb05de
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 72773
     prefix: '995533534'
     number_min_length: 12
     number_max_length: 12
-    uuid: d95fd8f2-48c5-43d9-9729-c6a4febc6260
+    uuid: ec8e7e6e-c823-401f-a99f-dcee18edd5b0
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 72904
     prefix: '995535555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6bbe164d-7184-480e-90b2-2ae223dba946
+    uuid: 98db12d4-b807-409b-9517-5b4504572d2f
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 72905
     prefix: '995535556'
     number_min_length: 12
     number_max_length: 12
-    uuid: ee8d6fb0-a0bf-438a-a3e9-f0d8f8893946
+    uuid: 91744325-f753-4867-9264-8d9ed9f6749a
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 72906
     prefix: '995535557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 00ff7d4f-ef9e-4f33-b6e3-b5d8028e9b20
+    uuid: c4113f7c-ea02-46cd-b815-ce6f9b85fa74
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 72907
     prefix: '995535558'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9b6f69f3-6bf1-4bac-be40-83d8132efbeb
+    uuid: 540b56fa-16e7-43e6-b487-1f28f63fc3b3
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 72908
     prefix: '995535559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 775d3493-0602-4435-84cc-13f28a94f434
+    uuid: b1088349-a4fb-4531-91a7-337906cabd00
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 73314
     prefix: '995540000'
     number_min_length: 12
     number_max_length: 12
-    uuid: 23dd4f50-1faa-4710-9b22-39aaef3befc4
+    uuid: 7c44c3de-2a0c-4676-a2a4-32a14d278e80
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73315
     prefix: '995540001'
     number_min_length: 12
     number_max_length: 12
-    uuid: 31fd3d1c-1e31-4e1c-ab5e-8546d239486d
+    uuid: df1d61f8-1e0f-4be8-8384-c96673d1635d
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73316
     prefix: '995540002'
     number_min_length: 12
     number_max_length: 12
-    uuid: b11baef0-f773-45d7-baa0-e2fceda72307
+    uuid: 58b9cbce-473a-4b63-af3c-ffffb0d98f77
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73317
     prefix: '995540003'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9d143a33-720e-48a0-a81e-7e1e0c22c16d
+    uuid: 052b7e95-daad-4575-bdda-6136a84acaf9
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73318
     prefix: '995540004'
     number_min_length: 12
     number_max_length: 12
-    uuid: 235eb3af-b10f-43b1-a758-18da37ca30c6
+    uuid: 5678a7f2-9395-4bd2-93b2-26d8a1656360
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73517
     prefix: '995540400'
     number_min_length: 12
     number_max_length: 12
-    uuid: aef90b6c-ece6-43ee-a78c-38b5daf6f1b6
+    uuid: 1979a5a6-0980-40b5-8923-912835c0e8c1
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73519
     prefix: '995540401'
     number_min_length: 12
     number_max_length: 12
-    uuid: f3af96e7-2ca5-4879-aeb0-7ba6f2e8e1c1
+    uuid: 2a415e7e-f35f-43e6-987f-4e6dbec2a1d9
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73521
     prefix: '995540402'
     number_min_length: 12
     number_max_length: 12
-    uuid: f2458068-8dc8-4f11-a85a-1a0986d25440
+    uuid: 0acae874-6a09-441b-b3d7-8edf52cff305
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73523
     prefix: '995540403'
     number_min_length: 12
     number_max_length: 12
-    uuid: 015d98c9-a413-48cd-9852-759e7f410642
+    uuid: 55d57cab-de25-42d8-a347-c5a92b26871b
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 73525
     prefix: '995540404'
     number_min_length: 12
     number_max_length: 12
-    uuid: ad847082-48d3-418b-a5ef-d0f929abafde
+    uuid: 6aeb3ccb-fc1e-4439-98e2-c8bc5afab8d5
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 76336
     prefix: '995522220'
     number_min_length: 12
     number_max_length: 12
-    uuid: b08836cb-9b7e-45cc-9c2d-cac6c5db8fca
+    uuid: 60b06592-fb9e-4d84-ae97-54db33ae3f88
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 76337
     prefix: '995522221'
     number_min_length: 12
     number_max_length: 12
-    uuid: fc663df6-f2d5-4cb1-b023-78d6448b07c5
+    uuid: c55e5ee1-8862-4e8c-9e5b-ed75d12d7777
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 76338
     prefix: '995522222'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0a979372-4e54-4ad1-9cd8-030298720cd9
+    uuid: 023182cc-6883-4396-938c-5ee75bca5a47
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 76339
     prefix: '995522223'
     number_min_length: 12
     number_max_length: 12
-    uuid: 817c25c2-61fb-47f2-a49d-13860edee3a3
+    uuid: e38e1a74-530e-46ef-9518-c3121d22b140
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 76340
     prefix: '995522224'
     number_min_length: 12
     number_max_length: 12
-    uuid: aff9db9a-b47d-46b3-96ab-880d93a74b46
+    uuid: 33e69bca-203c-40d2-8039-e736035b203b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 76341
     prefix: '995522520'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4c716007-175e-4a1d-9897-21c228f95668
+    uuid: e22a8508-80ae-4d81-b800-904f8a6d1bbb
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 76342
     prefix: '995522521'
     number_min_length: 12
     number_max_length: 12
-    uuid: b0e21277-365a-425e-befe-e060988c4c93
+    uuid: bef4425d-d857-48f3-b09f-1a0176dced0b
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 76343
     prefix: '995522522'
     number_min_length: 12
     number_max_length: 12
-    uuid: 23297d42-7a3d-4502-a49b-369dbb59d2a2
+    uuid: 7e00f684-34db-41f4-ae93-c46d56e60a5a
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 76344
     prefix: '995522523'
     number_min_length: 12
     number_max_length: 12
-    uuid: e9f940b7-e2b2-4610-84e2-d685edd24b7f
+    uuid: e781586e-17d5-4f43-90eb-d40827e95437
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 76345
     prefix: '995522524'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5e4e00ea-94d7-4ed4-bd2f-fa9ddd4db4f6
+    uuid: e26b7fb4-b582-40dc-abcf-e00acf18606e
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 76420
     prefix: '995525555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6d89a9c8-2c4d-4e14-8783-e800c08ce9d3
+    uuid: 5d451b71-527f-4ba1-91a9-132947c795d7
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 76421
     prefix: '995525556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3296a816-85e5-460e-b979-b9e8a80a9dbb
+    uuid: f5baa744-c766-4a30-aeb0-561f8ffd05a9
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 76422
     prefix: '995525557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 39fa1b31-07d9-44d0-a6fc-1f33220c172b
+    uuid: 81330c8f-1b99-4baa-ad95-de4960131970
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 76423
     prefix: '995525558'
     number_min_length: 12
     number_max_length: 12
-    uuid: c3ffa20c-b5b8-4515-bf3b-f048715b0f97
+    uuid: ccf3eb6e-0dce-481a-86bc-f60a654bdcc2
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 76424
     prefix: '995525559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7cf4e926-de52-4aa4-91ee-243af658fde1
+    uuid: 4049e151-40f9-48e4-ad03-6a41d414a945
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 77544
     prefix: '99554444'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2bcc3c2d-a045-49ec-889b-2eacd2c1e3c2
+    uuid: 8f100105-92e9-4be2-bf96-45d0ecf9ef1c
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 77545
     prefix: '995544540'
     number_min_length: 12
     number_max_length: 12
-    uuid: a6922316-a0f4-4815-a82a-6841f06705f9
+    uuid: f58cd05d-1a68-44d8-b366-c1bd231c1a81
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 77546
     prefix: '995544541'
     number_min_length: 12
     number_max_length: 12
-    uuid: d9faa793-c861-48c5-9397-43dcee7a276c
+    uuid: bf2c6df5-50f6-400d-acc4-20f7f3328fe3
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 77547
     prefix: '995544542'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5fba7d6b-25ac-4917-996b-387876c0673b
+    uuid: 754306c2-b9ca-4852-9f16-dac958323a2f
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 77548
     prefix: '995544543'
     number_min_length: 12
     number_max_length: 12
-    uuid: ed463161-af19-403d-b9b5-a7f4bc3f3508
+    uuid: 58749649-181d-4f09-a0bb-2c534af267bb
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 77549
     prefix: '995544544'
     number_min_length: 12
     number_max_length: 12
-    uuid: 27546588-73aa-4c80-b0a6-ff17f472632a
+    uuid: 072f4340-a5b4-41b7-8f9a-5913fb46fbd8
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 77550
     prefix: '995544555'
     number_min_length: 12
     number_max_length: 12
-    uuid: ad0e60ea-bece-4935-955b-1d3df3b25d6c
+    uuid: bb308427-67e0-47dd-8eb5-bbfbe517fbea
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 77551
     prefix: '995544556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 76e8987d-f66b-4d12-8218-e3af8ee8b54b
+    uuid: 12a1a751-0b9c-468b-bc3d-257e10520cde
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 77552
     prefix: '995544557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1be51313-22f2-4536-b9cc-a2ae12b97f50
+    uuid: 912df23d-1d1c-4dd1-99d9-bbe30c3667fb
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 77553
     prefix: '995544558'
     number_min_length: 12
     number_max_length: 12
-    uuid: 799caa8e-8ec3-4ac3-af85-e95655b98905
+    uuid: c484d1d2-08dc-497d-b350-ab155b4b0330
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 77554
     prefix: '995544559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6b1ab648-3946-40a1-b82a-d2c5f57fefb9
+    uuid: 3d8a790a-7707-4ccc-851f-66f108e51e06
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 77586
     prefix: '995545555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1b7f8663-4fc6-43c0-9b02-73acf45e4057
+    uuid: 23b2d8c2-0527-49c5-ab67-707bee08a79c
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 77587
     prefix: '995545556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0713c390-eae2-4884-a9df-f0672772550c
+    uuid: fb4361fd-d6a7-441c-9d8e-f660da6005f4
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 77588
     prefix: '995545557'
     number_min_length: 12
     number_max_length: 12
-    uuid: dea491bf-a30e-4a56-b866-f20544f56cce
+    uuid: 05438c0d-5186-4ab9-8c37-08c9949e6533
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 77589
     prefix: '995545558'
     number_min_length: 12
     number_max_length: 12
-    uuid: dd824d4a-173a-47b9-8e67-ba99ac2cfae0
+    uuid: 51701d5e-99a0-4543-b7e4-dd6422b59fb5
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 77590
     prefix: '995545559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 333a3ab4-581b-4e30-9566-3bb713c8cef3
+    uuid: 5f1c1be0-b725-4b32-9aac-4b6c74dd1e00
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 83877
     prefix: '995585555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 25836411-075d-4263-a641-8ccb4387f367
+    uuid: cb9cd629-c770-4d4a-97aa-581179d8441c
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 83879
     prefix: '995585556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9e6b2b33-1db5-4f66-9ddd-51a5fb6b4267
+    uuid: 4b1c3bd1-1049-4caf-a4e3-6f7e8d603c2c
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 83881
     prefix: '995585557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7bc13b76-2931-41cb-97fb-0148fa978f26
+    uuid: 59db4f6a-5fb6-47f1-8145-f912ae894091
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 83883
     prefix: '995585558'
     number_min_length: 12
     number_max_length: 12
-    uuid: e9930247-1e70-418f-a1e4-a5d658b76cf3
+    uuid: bf8ed94c-31af-4654-8d2f-b486800a9dd5
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 83885
     prefix: '995585559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 96376f2f-c701-41fb-9143-8a0403f04259
+    uuid: 0bc92c5e-cfed-4107-bd39-e2e18fa7dc11
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 84396
     prefix: '99558855'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2477b6da-eef4-4e99-b887-a4d737f4df31
+    uuid: 13299120-26a5-4d56-aaee-5ee9e9e3e6e9
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84397
     prefix: '99558888'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5304a879-84a5-4a45-a046-fa7fbb5cc602
+    uuid: 0e07d92e-e333-4ec8-98eb-adf5149c882e
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84436
     prefix: '995590000'
     number_min_length: 12
     number_max_length: 12
-    uuid: c1746817-0694-40f7-8dc9-585e5a84722a
+    uuid: a42de798-e9bf-4fca-8d3a-d4229a283c88
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84437
     prefix: '995590001'
     number_min_length: 12
     number_max_length: 12
-    uuid: 004306b7-5508-4d63-90db-328aabb8160b
+    uuid: 904171a8-50cc-428e-a82f-141e4395d8e1
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84438
     prefix: '995590002'
     number_min_length: 12
     number_max_length: 12
-    uuid: defb44e7-2878-4c94-a09a-a70adaf9ec78
+    uuid: f20579e9-dd16-43d9-9106-c331745679d7
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84439
     prefix: '995590003'
     number_min_length: 12
     number_max_length: 12
-    uuid: 41357d90-fdd0-4174-913f-ebd0dae5c7f3
+    uuid: 1d57d88f-d7f6-4584-8858-f96a1293adb1
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84440
     prefix: '995590004'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4dea566a-2fa0-404f-bcf3-f804ae6cc466
+    uuid: e1479cf2-3038-4a3f-b489-3142f69830e4
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84441
     prefix: '99559090'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4daca037-2cde-4cc9-b0bc-45422c807b23
+    uuid: 73c685a3-dd99-42ee-8620-ec8354fe86f0
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84454
     prefix: '995591'
     number_min_length: 12
     number_max_length: 12
-    uuid: 962c8c4a-ab52-4e3d-a6be-11166741b5e1
+    uuid: 73132a12-9d7e-45e8-98e6-db0bc512135b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 84485
     prefix: '995592'
     number_min_length: 12
     number_max_length: 12
-    uuid: ec48e83e-26eb-41c6-815d-291ac00b71f0
+    uuid: 583b740c-590f-4789-bd4d-ddfdcaac12bf
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 84533
     prefix: '995593'
     number_min_length: 12
     number_max_length: 12
-    uuid: f64c065c-001f-4781-acd6-8f07b4751492
+    uuid: 72e00e43-21f7-4b15-9693-291a5a9ba8cf
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 84644
     prefix: '995595'
     number_min_length: 12
     number_max_length: 12
-    uuid: 023d6cf2-20a8-4004-abfa-57d4fcf9e6f3
+    uuid: 7cfba6e0-2caf-47ff-8192-3b4e63ad97f8
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 84807
     prefix: '995596'
     number_min_length: 12
     number_max_length: 12
-    uuid: 02a8283c-ab3f-4cc1-a87e-f3783249e099
+    uuid: ef6ce2d8-ef03-40e4-89b0-2fd4040e93fb
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 84841
     prefix: '995597'
     number_min_length: 12
     number_max_length: 12
-    uuid: b8a32d64-8de3-4f76-bf56-d14532c7b956
+    uuid: 6a2c1689-fe8c-4231-a450-483ffa9fd7e0
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 84894
     prefix: '995598'
     number_min_length: 12
     number_max_length: 12
-    uuid: 99ac5a41-555a-4875-aa1b-b21e50ac5d42
+    uuid: 1deb6ce6-14ff-46e4-8ff5-f28af85e063a
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 84900
     prefix: '995599'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e73c14a-44d6-4252-a06c-f87af038f9e4
+    uuid: e7c2090f-46e4-4f9d-ab19-32f8a2619888
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 86674
     prefix: '99555000'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7c3fd393-80cb-401d-b299-105bc0836c13
+    uuid: 890b944e-fc15-48fe-9717-c3501bc77328
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 86675
     prefix: '99555005'
     number_min_length: 12
     number_max_length: 12
-    uuid: 12bfa4af-6275-4acb-92b7-9be8bcad2f7f
+    uuid: 0059b5c0-da01-4eac-a8be-179bcefb73b8
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 86676
     prefix: '99555050'
     number_min_length: 12
     number_max_length: 12
-    uuid: d38d9cc1-61d8-44a7-940e-1d2d3deec954
+    uuid: e2639549-d0de-4fe6-8df1-1dbd98ba567c
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 86677
     prefix: '995550555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2500e84e-5927-414d-b4c4-32a51f45a1ff
+    uuid: 630b8396-e139-4ead-8ae0-644947fea243
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 86678
     prefix: '995550556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 81ed9216-c676-42f8-9362-a44b8c6a5951
+    uuid: e12926fa-a781-4b87-8c41-b8e8d7bd38c3
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 86679
     prefix: '995550557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9439961d-1de5-4d5a-b24b-6237dcc85fa1
+    uuid: 61d70018-45ea-40c5-b802-e2270fc1b187
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 86680
     prefix: '995550558'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e60e5b3-d877-4dcd-aed3-5425cd0f7794
+    uuid: 1c184939-d187-40fa-8f72-877e75dc2e2c
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 86681
     prefix: '995550559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 637c200d-d5e1-4764-b567-81e70da29b5e
+    uuid: 8bf541ed-b26b-4769-829d-78956480735a
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 86693
     prefix: '995551'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9433c768-ecb3-41e0-b93f-2073dedb1ef7
+    uuid: 36e384c5-1199-4ce9-924c-c82598a12f67
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 86976
     prefix: '99555200'
     number_min_length: 12
     number_max_length: 12
-    uuid: f081e399-84c5-46e4-b0aa-449c5e0f510a
+    uuid: 1063586e-4a94-4bd2-9398-f2fefb97f6e5
     country_id: *ge
     network_id: *ge_premium_net_international_mobile
   - id: 86977
     prefix: '995552220'
     number_min_length: 12
     number_max_length: 12
-    uuid: d096f338-108b-4ca3-b7bd-2708566e94db
+    uuid: d3769ee2-1a11-406b-9bb8-ce26bf1293b7
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 86978
     prefix: '995552221'
     number_min_length: 12
     number_max_length: 12
-    uuid: bf907635-b6b8-4e86-9458-017adaf82339
+    uuid: 28658add-42ac-4ed8-ae67-6c622660d01f
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 86979
     prefix: '995552222'
     number_min_length: 12
     number_max_length: 12
-    uuid: 63d4d329-dd38-49e2-810e-7dd2b143e551
+    uuid: 53a603fc-4b83-46c7-a895-3e38c7dad77d
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 86980
     prefix: '995552223'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4e301f06-b14c-4e39-a58c-fa2e7dac4b9c
+    uuid: ba27cf49-7597-475e-a73a-7f328f98bc6b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 86981
     prefix: '995552224'
     number_min_length: 12
     number_max_length: 12
-    uuid: 02bcf1b7-bb7c-4042-8e1c-8171d7a43727
+    uuid: 1ab45292-a47e-4b03-9795-09662697d1d3
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 87014
     prefix: '995553330'
     number_min_length: 12
     number_max_length: 12
-    uuid: 21d16092-1a76-4838-8937-2123a7617dc3
+    uuid: 8817a5c8-98b5-4947-ab43-0fa3450cef10
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87015
     prefix: '995553331'
     number_min_length: 12
     number_max_length: 12
-    uuid: eebdd32e-fa44-440e-b6a6-ff62a0fd1a60
+    uuid: 58fcb8f4-3e00-411f-81c3-5f0f799f3cce
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87016
     prefix: '995553332'
     number_min_length: 12
     number_max_length: 12
-    uuid: 14cb8978-704d-46c4-af4f-1441198bd943
+    uuid: f1b4da9f-8da5-4084-a2bc-5452cda5b0a8
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87017
     prefix: '995553333'
     number_min_length: 12
     number_max_length: 12
-    uuid: 83ec1005-799f-438f-8080-d261824b9ece
+    uuid: c58a5b64-4831-4c06-9947-d39589c83212
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87018
     prefix: '995553334'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5601d401-eb17-40cf-8237-5c7fbf31eee4
+    uuid: 43d8f0b3-dc3c-4a04-b084-f211b13471ac
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 87033
     prefix: '995554440'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5a06b23e-8d02-4696-8f3c-1b89f5f0c1f2
+    uuid: 0b51de50-93d3-46ec-873d-126e09fd4b5d
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87034
     prefix: '995554441'
     number_min_length: 12
     number_max_length: 12
-    uuid: 47b3de03-33ae-43e1-b299-9b3e7a2d987c
+    uuid: 25c68fc3-9671-40a1-b128-8eca0e4026b7
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87035
     prefix: '995554442'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8d8c978e-7c42-440e-a494-c90a4adaa7e1
+    uuid: 4d4c674a-3fff-411e-bdfc-1eb6c1e32a2c
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87036
     prefix: '995554443'
     number_min_length: 12
     number_max_length: 12
-    uuid: e69b0f11-37d2-467f-a0ee-3ad68f30ef2c
+    uuid: 90afd0c3-2384-4947-8f6a-fb423bf6293c
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87037
     prefix: '995554444'
     number_min_length: 12
     number_max_length: 12
-    uuid: fe068d2c-ca01-48fb-b67d-fdbcb425593c
+    uuid: c9914f60-436a-4293-9772-62defe35a3c7
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87053
     prefix: '995555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 48b9eb34-89fe-4e54-88a8-a131ac745f6c
+    uuid: bb53ddcd-b21e-4f29-84db-df200b4de91d
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87092
     prefix: '995557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 671c9ff4-0821-4843-a100-ca30402249f0
+    uuid: c573b174-6d4d-4546-b405-614e19822a7c
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87147
     prefix: '995558'
     number_min_length: 12
     number_max_length: 12
-    uuid: aa3fa6b4-8701-42e2-8da9-de4f9b7d151c
+    uuid: 0693c3bc-9d41-4358-a5ab-a7a1b9b49eb8
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87167
     prefix: '99555900'
     number_min_length: 12
     number_max_length: 12
-    uuid: 579d9de0-5a3b-4f14-a436-a403e0ef21f6
+    uuid: e587f86e-1dc8-49ab-b666-08c6c1b953fa
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 87492
     prefix: '995559555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2cebe3ad-f07a-410d-89ff-9f541ae4fcf1
+    uuid: f635feac-6e8e-4b57-85b5-7872cdfc4869
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87494
     prefix: '995559556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6469933e-5f09-4b9b-a313-d1028bbce5c4
+    uuid: 76638522-41c9-4df6-94d7-0a0adc550064
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87496
     prefix: '995559557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7fefb783-8eb4-4383-8a83-c4f61064df02
+    uuid: 796717e2-a887-4795-93e6-6dbef6b4e9d9
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87498
     prefix: '995559558'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4b5f6e2a-ef75-438c-ae3e-a23db6986723
+    uuid: d5be39f7-0200-411c-b34c-180887a37aec
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87500
     prefix: '995559559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 696abed1-8c34-460c-b83c-a057d5b3bfb1
+    uuid: 9abc61f9-5cac-4469-b5cc-bb80cf8e0c1d
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 87889
     prefix: '995559995'
     number_min_length: 12
     number_max_length: 12
-    uuid: 85cc331f-1287-4777-8706-58540c5b9145
+    uuid: 47ba6eba-ca0d-4c71-8521-9fbdd3a920a3
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 87891
     prefix: '995559996'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4eaf47ab-2e4a-4286-960b-dc4782532f80
+    uuid: 473c1f79-ee52-4dec-9d00-654939bc4804
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 87893
     prefix: '995559997'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2fe2b60d-6e1a-4802-9e61-508dec2b7b91
+    uuid: 892247b5-e58b-4eb5-8de4-38a0be511257
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 87895
     prefix: '995559998'
     number_min_length: 12
     number_max_length: 12
-    uuid: 492679a0-2e7a-4ad5-9867-953248dd08b1
+    uuid: 84c26245-524c-400e-bc45-1c2f268d8e36
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 87897
     prefix: '995559999'
     number_min_length: 12
     number_max_length: 12
-    uuid: bb2d8063-c5ed-4819-a4b4-96c1a6583942
+    uuid: b72b94c2-7f76-41f7-9c81-0f7160ce6c0d
     country_id: *ge
     network_id: *ge_globalcell_mobile
   - id: 90232
     prefix: '995568'
     number_min_length: 12
     number_max_length: 12
-    uuid: 474d287c-c43f-4c10-9ba3-78b2f79366e4
+    uuid: 86431ce6-3205-4bd9-92a2-014c65d9126d
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 90294
     prefix: '995570'
     number_min_length: 12
     number_max_length: 12
-    uuid: d49f39e8-7342-4f1f-a3ca-c37decba731f
+    uuid: de149624-b296-4035-b120-7a04b6191112
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 91092
     prefix: '995571'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7d0cd02e-f9c6-4fc0-834f-6d29aad1d152
+    uuid: b5b19c7d-7a2c-42e3-a18b-bcd9032ba093
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 91454
     prefix: '995574'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2e99d3e4-eecb-437e-962f-cbc73d3415bf
+    uuid: 469be127-795a-43c8-b1a7-aaf7e41498e1
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 91870
     prefix: '995575000'
     number_min_length: 12
     number_max_length: 12
-    uuid: 56ed4a7a-2370-4321-9fe4-297a69c20c26
+    uuid: 22307153-0f0f-4bfe-aa2d-a311195f862b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 91871
     prefix: '995575001'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2565b74c-8b06-4a08-89a0-1330b78f5e8e
+    uuid: fffc77af-6492-4b56-9f4e-77d75ff51868
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 91872
     prefix: '995575002'
     number_min_length: 12
     number_max_length: 12
-    uuid: e2b55a60-48c1-4547-a63c-05c5c72b9259
+    uuid: b6e5c644-1584-4488-b57b-0f309185ad8e
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 91873
     prefix: '995575003'
     number_min_length: 12
     number_max_length: 12
-    uuid: b6f5630f-3456-4d88-8314-53689d2ef782
+    uuid: 68b96994-cf2d-4d7e-82cd-579264826bce
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 91874
     prefix: '995575004'
     number_min_length: 12
     number_max_length: 12
-    uuid: 93943233-8aa9-4e8e-9b7a-7e2b8d5dfbf8
+    uuid: 89cbba93-bb05-4bf4-9aac-1abf777114c5
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 92166
     prefix: '995575555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 71e8f3ba-a563-43cb-b884-f769c4a2048e
+    uuid: 4037a5a9-45e6-436c-aaa3-fea3af59e74b
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 92168
     prefix: '995575556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c68252f-735e-44a6-a9db-c943d655d8d0
+    uuid: 2ee78554-01e8-4120-a8f0-d0ee2a367d01
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 92170
     prefix: '995575557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 72dc6753-9f1e-4582-a774-aa0cf6556c52
+    uuid: 9e3273b8-181b-47d5-967c-993534513d40
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 92172
     prefix: '995575558'
     number_min_length: 12
     number_max_length: 12
-    uuid: b2f6f28e-9e5c-43b8-8d2c-49f3814c69c3
+    uuid: 7514ddb0-3fe7-4a33-9412-af7926949bd5
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 92173
     prefix: '995575559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 51c7d653-da46-4e3d-8e8d-8c0d861b8b62
+    uuid: a68a4c3a-b59d-42de-98fb-fe181c0e29b2
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 92299
     prefix: '99557575'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0f502ae9-255c-4353-82a0-13a2565283ff
+    uuid: 51dac7fb-2acc-4363-ad04-9647073c0644
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 92321
     prefix: '995575777'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3d0e548c-a279-4a71-b038-2adf37ed72b8
+    uuid: 54a3c94d-b080-4a0e-b07a-6636f9eaa58b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 92323
     prefix: '995575778'
     number_min_length: 12
     number_max_length: 12
-    uuid: bc7ec3bf-7e0b-4a6e-849c-dac63902d37d
+    uuid: 8d894f3a-07f0-45d7-aa1f-98e3167d7a4d
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 92324
     prefix: '995575779'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f12177d-d7d1-4ece-be58-fd41d2c1b793
+    uuid: 58e1889f-78be-439f-9d3c-c6856e4bbdbc
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 92326
     prefix: '995575780'
     number_min_length: 12
     number_max_length: 12
-    uuid: d21acaa6-e1b2-4e61-88d7-00bf427424cb
+    uuid: 412eef28-b079-4195-a321-b0bc147c4803
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 92327
     prefix: '995575781'
     number_min_length: 12
     number_max_length: 12
-    uuid: d2097d93-3961-4b40-afb9-54d954daee8e
+    uuid: 0421d3c4-8497-41f4-8017-a573371e597b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 92416
     prefix: '995577'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7b6d6cf1-9eba-465f-828d-d14e5b49a007
+    uuid: e41801ee-c27f-4f76-a664-8e3462bc9535
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 92433
     prefix: '995579'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2300e4b2-a729-4f6c-9ad0-1796a3bfe9d3
+    uuid: 6419f5db-19b2-45cd-b8e4-645ae0f1174f
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 93117
     prefix: '99558000'
     number_min_length: 12
     number_max_length: 12
-    uuid: 364ea578-3fc9-446e-8268-0a24c2a72446
+    uuid: 81c4a34e-398f-4b5d-8ee3-aa9ea9b5ba66
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 93678
     prefix: '995580805'
     number_min_length: 12
     number_max_length: 12
-    uuid: 865a04da-c270-4596-b504-f49b56300ab0
+    uuid: 034b5d33-3b76-4498-ae93-8bc6828e470c
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 93680
     prefix: '995580806'
     number_min_length: 12
     number_max_length: 12
-    uuid: d7685431-7b47-44e1-bad2-efe1359a5fb0
+    uuid: 15188625-1b6c-49fa-aa37-f0814030d973
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 93682
     prefix: '995580807'
     number_min_length: 12
     number_max_length: 12
-    uuid: f67f6536-2eab-4e68-8cfc-2784048b935e
+    uuid: dd7d8d68-e89c-4ce9-b28d-c1faf30303ed
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 93684
     prefix: '995580808'
     number_min_length: 12
     number_max_length: 12
-    uuid: 08606438-e5d6-485d-b245-811d91b657db
+    uuid: 636f6187-ce2c-4164-979c-01dbd9c30c9e
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 93686
     prefix: '995580809'
     number_min_length: 12
     number_max_length: 12
-    uuid: 30ca2e6f-e4ca-4085-a86c-55319ebb69d4
+    uuid: 7f9df213-09c6-49b5-b0ea-a8819fac44d2
     country_id: *ge
     network_id: *ge_geocell_mobile
   - id: 93955
     prefix: '995585888'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f15cc19-b08c-4fcf-8c8d-2f9458089d82
+    uuid: 9732ceeb-1c29-4f55-b61a-a359704ebefd
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 93957
     prefix: '995585889'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9f99f0de-98db-42f8-840e-95f5e987150e
+    uuid: 10bd28ae-5893-4eb7-ac20-3d22b5343151
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 93959
     prefix: '995585890'
     number_min_length: 12
     number_max_length: 12
-    uuid: e0e83c73-856c-456e-a240-6e4e3ce22946
+    uuid: 1e66c8b9-c94b-4184-b6f6-3e41d53518a5
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 93961
     prefix: '995585891'
     number_min_length: 12
     number_max_length: 12
-    uuid: c9569376-2e09-4246-a6b3-a643a9cc0ead
+    uuid: d89a5632-ee06-4006-9837-9765c20876a3
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 93962
     prefix: '995585892'
     number_min_length: 12
     number_max_length: 12
-    uuid: d2b628f7-c239-4f4f-a855-bc955373daa1
+    uuid: 928e123f-2196-445e-b707-cdd08a60bb00
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157320
     prefix: '99570800'
     number_min_length: 12
     number_max_length: 12
-    uuid: 18720a55-2ff9-4cda-af4e-5ff8f0e1c4bc
+    uuid: 4adae6ea-308a-4482-a9c8-9e6f78ab6bb2
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157321
     prefix: '99570801'
     number_min_length: 12
     number_max_length: 12
-    uuid: 206d5d02-ea2d-46c1-bdd0-d301261d8e2d
+    uuid: 29312662-1b27-49ad-8382-e4d2fdc8c6c9
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157322
     prefix: '99570802'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7bac7690-3cdc-46ca-b40d-6585612bbb6d
+    uuid: dec59057-2960-410b-855e-91185056f4c8
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157323
     prefix: '99570803'
     number_min_length: 12
     number_max_length: 12
-    uuid: 192a38e1-cff9-4d36-a728-542811b4940a
+    uuid: 58169949-20c9-461d-8cc1-5411dd85ea42
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157324
     prefix: '99570804'
     number_min_length: 12
     number_max_length: 12
-    uuid: d027a8ff-3b36-486f-a89e-249dc1c3da25
+    uuid: 273deb17-b6cc-4038-be20-a817929da0f8
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157325
     prefix: '99570807'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6ed9401b-18d2-4f79-8553-4f88a1ac2dd6
+    uuid: bffe4ff0-d211-4c72-9e23-4a65f49214bd
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157326
     prefix: '99570808'
     number_min_length: 12
     number_max_length: 12
-    uuid: f89433bd-aad0-41d1-9a40-1d61b33d5833
+    uuid: fc213cc1-026d-4da6-9f67-00b45d4a0a80
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157327
     prefix: '99570809'
     number_min_length: 12
     number_max_length: 12
-    uuid: c5aa4a82-4cdc-4efd-b78f-b7659d5cb9b8
+    uuid: 6b22fef4-e23d-49ca-9e23-c6a1ec705055
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157328
     prefix: '99570810'
     number_min_length: 12
     number_max_length: 12
-    uuid: 69d0e654-975e-4599-9181-f47b35e25b01
+    uuid: e1a22616-f58e-4113-b97a-81200ee4d947
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157329
     prefix: '99570811'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4ac493da-5128-4b44-a1c6-e973cbaa66c0
+    uuid: 39bf9f00-e814-4b09-a461-78d527312f12
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157330
     prefix: '99570812'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9427f376-7fb9-4c26-b3dd-92c05b1166de
+    uuid: edc98c1d-fe57-433a-904c-27765b663864
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157331
     prefix: '99570813'
     number_min_length: 12
     number_max_length: 12
-    uuid: f425fea0-4f44-4e3f-afd5-e35378b5b0d0
+    uuid: 380f2b54-36d7-467c-97b3-8d36d0a21b90
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157332
     prefix: '99570814'
     number_min_length: 12
     number_max_length: 12
-    uuid: cdb411ab-84b7-4b9d-abd4-071b65fde0d1
+    uuid: fc9138bc-819f-4315-8c36-a7bcd8bad53b
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157333
     prefix: '99570815'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8d2468df-fae9-42c5-bcb2-2994c1eeff62
+    uuid: 10fea2a8-1db5-4fd9-8334-2b9f40829528
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157334
     prefix: '99570816'
     number_min_length: 12
     number_max_length: 12
-    uuid: b2971f2f-9771-4877-a9dd-f599d87524df
+    uuid: 2836a3a9-7bcb-4c4f-93b1-f310bc726a5d
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157335
     prefix: '99570818'
     number_min_length: 12
     number_max_length: 12
-    uuid: b16a7031-3c19-44ea-a783-ef74c54f16a6
+    uuid: 35183016-4c8b-4952-bf56-c28737ddffca
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157336
     prefix: '99570819'
     number_min_length: 12
     number_max_length: 12
-    uuid: 656be578-73d6-4b0a-961e-74981a37f8bd
+    uuid: a5f51841-bd2b-455f-a6ef-583614ee6a27
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157337
     prefix: '99570820'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7340ca1-fe80-4880-bad9-7cfb6e27e5d1
+    uuid: e858d610-3dd7-4895-a540-3c921a56215e
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157348
     prefix: '99570821'
     number_min_length: 12
     number_max_length: 12
-    uuid: d725ae62-6e6f-4295-84ca-c1931a32f8f3
+    uuid: 7caee808-77a5-4015-a9f7-b512966de5da
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157358
     prefix: '99570822'
     number_min_length: 12
     number_max_length: 12
-    uuid: a90d4781-0629-43ff-9a2e-a82346f22db7
+    uuid: b8b21bc8-a113-44b2-b94d-a26d231560c5
     country_id: *ge
     network_id: *ge_magti_mobile
   - id: 157409
     prefix: '995708270'
     number_min_length: 12
     number_max_length: 12
-    uuid: 922f882c-17e1-4487-a778-605b61e13c8c
+    uuid: 31606a83-c4e4-4352-a391-2e503257e269
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 157411
     prefix: '995708271'
     number_min_length: 12
     number_max_length: 12
-    uuid: fc8a7a24-d939-47fe-adad-d162b7ae7627
+    uuid: ae56c0d7-6f26-49c6-a81b-6c238a9da3b5
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 157413
     prefix: '995708272'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4d8f6e83-2e4c-4925-8e1f-b5068b9fd1b3
+    uuid: e4a4e20a-dca2-44e0-8dfc-35273c1779b1
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 157415
     prefix: '995708273'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4fd90368-e773-485a-b165-1195f799a2db
+    uuid: 901f7d80-66af-42a6-99d5-7d80f48c71c5
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 157417
     prefix: '995708274'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4a1a54e1-38e9-4178-a95a-0f53da6594ac
+    uuid: a8c82ebd-fc50-4dd0-a973-83b2bb9123b9
     country_id: *ge
     network_id: *ge_cellfie_mobile_mobile
   - id: 157881
     prefix: '99571100'
     number_min_length: 12
     number_max_length: 12
-    uuid: e3c4a286-4e8f-4739-b8cd-420b3a1b0150
+    uuid: 520e4dda-bee1-4368-ae7e-2cc915cac9dc
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157882
     prefix: '99571101'
     number_min_length: 12
     number_max_length: 12
-    uuid: fce9f006-17eb-472d-ab72-327ab9801ce2
+    uuid: c92e95e7-4713-431b-9178-467505b061d6
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157883
     prefix: '99571103'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9cc16159-2011-497c-a2b5-ad13c1881d8c
+    uuid: cca274cc-aa53-4b44-baa7-20673767ab2f
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157884
     prefix: '99571104'
     number_min_length: 12
     number_max_length: 12
-    uuid: def05b08-d0af-4835-916a-de01b9ea9149
+    uuid: c40606bd-fe47-48e8-ad05-b2cdc011239f
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157885
     prefix: '99571105'
     number_min_length: 12
     number_max_length: 12
-    uuid: 459639dc-75d8-4ff8-9327-b51a1dc21bd7
+    uuid: 5a2099a0-e01f-4214-ba55-8f1a6a89bb52
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157886
     prefix: '99571106'
     number_min_length: 12
     number_max_length: 12
-    uuid: ba0ae0e2-4dc9-448f-90cd-204f83012ea5
+    uuid: a6637c51-5fb2-43fc-ae29-123bf2a360ae
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157887
     prefix: '9957111'
     number_min_length: 12
     number_max_length: 12
-    uuid: b52163dc-962b-4b80-98a8-02bc4d1ced5c
+    uuid: 6bb94b6d-d6e7-40fd-988c-73d3ee98be0d
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157930
     prefix: '99571120'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0efdd022-6752-4562-939f-b975b2c4aed5
+    uuid: 248d86f5-c4c6-4188-9683-966c39cc9f83
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157931
     prefix: '99571121'
     number_min_length: 12
     number_max_length: 12
-    uuid: 57186a15-db7a-4fd8-84c3-7ae387bdcda9
+    uuid: 9b4332ff-c1a7-4577-90c0-0337a93388de
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157932
     prefix: '99571122'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2bcd95d0-d16f-4fd7-929e-01a3404d7418
+    uuid: dded9fe7-04fc-401a-a466-64879a8f6e22
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157933
     prefix: '99571123'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8cdbbe6c-b5da-4710-87c6-e51d772f550d
+    uuid: 0c2e9318-80e9-44cf-8261-24f2cf77e07a
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157934
     prefix: '99571124'
     number_min_length: 12
     number_max_length: 12
-    uuid: 62f2d022-a8e4-4523-a315-c88aaf1ee4b7
+    uuid: 3b787c71-24e8-4102-a594-b8e999e9e365
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157935
     prefix: '99571125'
     number_min_length: 12
     number_max_length: 12
-    uuid: cc6fcb03-4b37-406b-9581-de31e3f850e6
+    uuid: 6064d2c1-3ebd-4a88-b730-9377d0aa3120
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157936
     prefix: '99571126'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e06db57-ab0e-40cb-9872-2de75d6a5706
+    uuid: 06a86a34-e8fc-4712-92f6-aa4f30531168
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 157937
     prefix: '99571127'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4bc2d7a1-52f5-4814-93b7-f37b11341074
+    uuid: 8d5061f7-ddda-4b8b-864e-3f0dcdc41a00
     country_id: *ge
     network_id: *ge_silknet_mobile
   - id: 162866
     prefix: '9957085'
     number_min_length: 12
     number_max_length: 12
-    uuid: 735d6d66-fb18-44a4-9f7a-f3446a9f29a8
+    uuid: 18112f28-d816-4011-9cac-349224796c1b
     country_id: *ge
     network_id: *ge_magti_mobile
 # Country code Prefixes
@@ -2959,7 +3263,7 @@ network_prefixes:
     prefix: '995'
     number_min_length: 4
     number_max_length: 100
-    uuid: 5379ab74-4a6e-4cb9-8f30-efd884faafec
+    uuid: 9d0134d3-3f8e-4cba-8306-b1a15e8de173
     country_id: *ge
     network_id: null
 # Supplementary services Prefixes
@@ -2967,48 +3271,48 @@ network_prefixes:
     prefix: '9951'
     number_min_length: 6
     number_max_length: 9
-    uuid: cf41d0d7-3777-4bf1-b718-20da4642884d
+    uuid: 0fb41f2e-a3a3-4693-b91b-ea172a4d464f
     country_id: *ge
     network_id: *ge_special_services
   - id: 257097
     prefix: '9959'
     number_min_length: 8
     number_max_length: 8
-    uuid: a38251cf-6689-4b06-99f7-cf2c2ca45221
+    uuid: f069dc5c-f6e6-4791-8fde-de948ed00208
     country_id: *ge
     network_id: *ge_sms_mms_services
   - id: 403470
     prefix: '995800'
     number_min_length: 12
     number_max_length: 12
-    uuid: 28969484-4301-43b1-b81a-c0a8ef8949a6
+    uuid: 7497f127-3624-4ae5-b769-fd43854f29e0
     country_id: *ge
     network_id: *ge_freephone_services
   - id: 447282
     prefix: '995903'
     number_min_length: 12
     number_max_length: 12
-    uuid: dea54857-54bf-411d-82e2-1def41f8f951
+    uuid: 4d7bfa1b-8ed5-4b85-a66d-191ad3299063
     country_id: *ge
     network_id: *ge_value_added_services
   - id: 454575
     prefix: '995900'
     number_min_length: 12
     number_max_length: 12
-    uuid: 596c2422-c3d7-4d8c-a28f-ad3e9ad15e9f
+    uuid: c5e654ee-d826-4264-bd3b-e9513814a0c7
     country_id: *ge
     network_id: *ge_value_added_services
   - id: 454705
     prefix: '995901'
     number_min_length: 12
     number_max_length: 12
-    uuid: b463e1f6-efc8-4029-a7ac-a0422b803cff
+    uuid: 57676533-e220-4092-856a-0b14437aeea5
     country_id: *ge
     network_id: *ge_value_added_services
   - id: 454950
     prefix: '995902'
     number_min_length: 12
     number_max_length: 12
-    uuid: fb828d8b-2718-4eda-80ee-7b560bc6e7c2
+    uuid: 6e9ef126-7821-48a2-b4d8-7f1454f94d7c
     country_id: *ge
     network_id: *ge_value_added_services

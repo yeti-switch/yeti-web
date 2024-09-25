@@ -1,63 +1,75 @@
 country_id: &gt 88
 networks:
 # Mobile Networks
-  - id: &gt_mobile 4102
+  - id: &gt_mobile 4613
     name: GT Mobile
-    uuid: e8af0903-bb0b-45e4-bfd0-cb91c232731f
+    uuid: 1cc8a7d9-fd46-4323-96d3-c6fa80810ea4
     type_id: 3
-  - id: &gt_tigo_mobile 4109
+  - id: &gt_tigo_mobile 4620
     name: GT Tigo Mobile
-    uuid: 230ecac5-160d-49bd-af6d-e96312fee1a5
+    uuid: 3c35dcde-ac00-4442-badb-1eebe634127c
     type_id: 3
-  - id: &gt_claro_mobile 4110
+  - id: &gt_claro_mobile 4621
     name: GT Claro Mobile
-    uuid: e7228c74-e823-4dd9-9fe0-4bef0029e4f4
+    uuid: ed23e5c4-7460-48b8-8ca5-4dbbb3639f74
     type_id: 3
-  - id: &gt_movistar_mobile 4111
+  - id: &gt_movistar_mobile 4622
     name: GT Movistar Mobile
-    uuid: df379351-69bd-4646-925b-a369a50e31ae
+    uuid: c2ff0de5-51c6-48bf-ab46-bba89f423893
     type_id: 3
 # Fixed Networks
-  - id: &gt_fixed 4303
-    name: GT Fixed
-    uuid: b2b6ed8a-65d5-4eae-980c-ecf55ea97ed2
+  - id: &gt_metropolitan_suburban_zone_fixed 8974
+    name: GT Metropolitan Suburban Zone Fixed
+    uuid: 95957db7-9fdc-44ee-ad4d-d782046b8308
+    type_id: 12
+  - id: &gt_interurban_zone_fixed 14381
+    name: GT Interurban Zone Fixed
+    uuid: afa042a7-9f19-47e2-94a6-a5bef1e2c04f
+    type_id: 12
+  - id: &gt_interurban_zone_rural_telephony_fixed 14435
+    name: GT Interurban Zone Rural Telephony Fixed
+    uuid: 9f24e727-57fc-44f9-9fd6-2bd575be11f0
+    type_id: 12
+  - id: &gt_metropolitan_zone_fixed 25845
+    name: GT Metropolitan Zone Fixed
+    uuid: 7a703127-a6c6-4e5a-ac47-c46156f92169
     type_id: 12
 # Supplementary services Networks
-  - id: &gt_public_use_assistance_services 5389
+  - id: &gt_public_use_assistance_services 21567
     name: GT Public Use_Assistance Services
-    uuid: e3a25783-3874-4345-b8b5-e5885d481766
+    uuid: cbc0b214-f900-48d0-8e25-f19d62011aba
     type_id: 14
-  - id: &gt_emergency_services 5502
+  - id: &gt_emergency_services 21714
     name: GT Emergency Services
-    uuid: dd203cf1-2db4-46a2-ba47-f777141a6d0b
+    uuid: 6a28a549-a9af-47fa-a19b-2d8518b0c5cf
     type_id: 14
-  - id: &gt_network_operator_selection_services 5531
+  - id: &gt_network_operator_selection_services 21744
     name: GT Network Operator Selection Services
-    uuid: 245b38de-b533-40bc-8691-1e343d4a90e2
+    uuid: b903a9f9-bee9-4741-af12-2d8263c3492f
     type_id: 14
-  - id: &gt_country_direct_services 5574
+  - id: &gt_country_direct_services 21788
     name: GT Country Direct Services
-    uuid: 64a5d3a5-216a-4c99-b8c8-77505cd946f2
+    uuid: 48c51525-386c-4f78-b7fa-371547a15bfc
     type_id: 14
-  - id: &gt_information_and_assistance_services 5579
+  - id: &gt_information_and_assistance_services 21793
     name: GT Information And Assistance Services
-    uuid: a2835def-0273-4ba8-9612-8f62bbe7508e
+    uuid: 47545963-96b1-42c0-90fc-afa6bf0ecd1e
     type_id: 14
-  - id: &gt_international_freephone_services 5988
+  - id: &gt_international_freephone_services 22642
     name: GT International Freephone Services
-    uuid: b3ac733f-c14d-44f2-bb7c-71a1b884cea3
+    uuid: afbca3fc-774b-4ac7-9959-94ddcceb029d
     type_id: 14
-  - id: &gt_national_freephone_services 5996
+  - id: &gt_national_freephone_services 22650
     name: GT National Freephone Services
-    uuid: b2d4f42b-c4a9-4345-94b5-fafc7f646afc
+    uuid: 5260fa98-5fed-4f84-8284-f73c8f825493
     type_id: 14
-  - id: &gt_international_special_charge_services 6034
+  - id: &gt_international_special_charge_services 22688
     name: GT International Special Charge Services
-    uuid: 69bba45d-9135-4df5-b324-5f56e88eb867
+    uuid: 1b11bc91-0b34-408f-a237-2d26d846968b
     type_id: 14
-  - id: &gt_national_special_charge_services 6041
+  - id: &gt_national_special_charge_services 22695
     name: GT National Special Charge Services
-    uuid: 6f94da5a-22a2-4e08-82d5-60209f7184ad
+    uuid: 69d2993d-5ad0-40d4-b0a4-778a8571b13a
     type_id: 14
 network_prefixes:
 # Mobile Prefixes
@@ -65,1701 +77,1701 @@ network_prefixes:
     prefix: '5025'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6b02a1c2-6a07-4978-91ae-b5bb4c798313
+    uuid: 3e6e272b-e14c-4e6b-8cb3-01e3aaaba082
     country_id: *gt
     network_id: *gt_mobile
   - id: 54588
     prefix: '502500'
     number_min_length: 11
     number_max_length: 11
-    uuid: f1718740-4214-4515-b420-dee852046cd1
+    uuid: a3010be1-6a2b-45d5-8c45-18eae463193d
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54589
     prefix: '502501'
     number_min_length: 11
     number_max_length: 11
-    uuid: e8c48aba-2cc2-4dc1-b5b4-cd4734fd9cd4
+    uuid: abf594c5-3188-483f-96cb-f59ec56c8f6e
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54590
     prefix: '502502'
     number_min_length: 11
     number_max_length: 11
-    uuid: c113873d-709e-4df3-b2b7-c9069c8d3baa
+    uuid: 5596d6c8-f6a0-4b5a-bdb1-b07ab033cca8
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54591
     prefix: '502503'
     number_min_length: 11
     number_max_length: 11
-    uuid: 50c756f8-e4ab-4969-8ab7-4171ac0276c1
+    uuid: e74e70ea-fa58-4814-baaa-3eb47c61b704
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54592
     prefix: '502504'
     number_min_length: 11
     number_max_length: 11
-    uuid: dfa3e4bf-dbb3-4c69-a6fb-f82f183e18a1
+    uuid: 0da4f6be-e614-4ad5-84de-dac141a7c29d
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54593
     prefix: '502505'
     number_min_length: 11
     number_max_length: 11
-    uuid: edd1a196-2e40-4fd8-ae70-96cc1a79c12d
+    uuid: c508f40e-2096-4719-816f-33bf906feb3c
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54594
     prefix: '502506'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0618af3d-7937-4828-ac87-855812a2211c
+    uuid: 21d5b7d1-eeab-4256-8550-04fdc087fe8d
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54595
     prefix: '502507'
     number_min_length: 11
     number_max_length: 11
-    uuid: c2ae8d7f-49e5-44d3-a97e-423fe6862165
+    uuid: 57b743cd-5706-4e94-9e30-2731c9c3d175
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54596
     prefix: '502508'
     number_min_length: 11
     number_max_length: 11
-    uuid: 67b821d5-ca67-4e1f-b079-87d31fd85e2f
+    uuid: 49774687-c5f5-4205-bfc7-51be66fc528d
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54597
     prefix: '502509'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1477cb34-4eaf-49e3-bc0d-fc377193e272
+    uuid: 7685cabd-a6b5-4e3f-ad43-d3deea55f24c
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54598
     prefix: '502510'
     number_min_length: 11
     number_max_length: 11
-    uuid: c40c3836-74dd-4e3a-8950-8917027796eb
+    uuid: 6b58283c-1ee4-4684-8624-f283fe2fafdd
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54600
     prefix: '502511'
     number_min_length: 11
     number_max_length: 11
-    uuid: fbfbdd56-af8e-4a05-9a08-8ec3b1b35397
+    uuid: d0a768e5-489b-429d-9ed6-f77d874ab546
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54602
     prefix: '502512'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8dd23afc-14dc-4b56-be3b-36a8d2d5467e
+    uuid: 10cd23ee-da18-49d7-9b42-8f00f07521a8
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54603
     prefix: '502513'
     number_min_length: 11
     number_max_length: 11
-    uuid: c91d0ffc-259b-41c5-8f3e-aa4a4ef44957
+    uuid: f8c2c2e9-6db4-4e36-a0c1-b327773bdbb5
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54604
     prefix: '502514'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2b4b9216-6ec8-465e-abc4-28626908ab5f
+    uuid: a3b21d2b-cdb7-48fe-ad9f-4ec0c45fed6e
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54605
     prefix: '502515'
     number_min_length: 11
     number_max_length: 11
-    uuid: f5e85daf-65b0-4380-bfef-221bc698cc4a
+    uuid: 1704b50a-dab2-4736-a996-6584573505b8
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54606
     prefix: '502516'
     number_min_length: 11
     number_max_length: 11
-    uuid: c541660b-fa1b-4bae-aaaa-e7fef5b3bafa
+    uuid: 5981ef2c-4cb2-4f41-b8b6-4b79023b3dbf
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54607
     prefix: '502517'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1b8b3b06-af6e-48b1-b941-eee02dccbfe0
+    uuid: 267d6a8f-4b60-402f-8487-cea99f1af3ae
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54608
     prefix: '502518'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5ffbb104-14cd-4895-a5b9-599064b9cc5c
+    uuid: 363704d1-5108-4496-8869-115d635124d8
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54609
     prefix: '502519'
     number_min_length: 11
     number_max_length: 11
-    uuid: aedc96d0-f7ae-4076-bed8-441885ecfb57
+    uuid: 3a639896-5ad5-4e4b-ba98-7d8137001fdc
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54612
     prefix: '502520'
     number_min_length: 11
     number_max_length: 11
-    uuid: 72d1b667-1b04-48ae-b8ea-18209dbfb7e2
+    uuid: b60ffec1-19ac-4193-9413-1997df20975c
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54614
     prefix: '502521'
     number_min_length: 11
     number_max_length: 11
-    uuid: a1146c8d-9218-4d99-9b4b-b9a1a2e0ca03
+    uuid: 7f94127e-2ad3-409c-a06e-056f9d60db7d
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54617
     prefix: '502522'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1cd0ca3b-64c7-429a-a47f-603570dee1ff
+    uuid: 9c24686e-27f5-4960-9d42-1cefd662558c
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54620
     prefix: '502523'
     number_min_length: 11
     number_max_length: 11
-    uuid: 00c30222-6005-43a6-b22a-814af62ef949
+    uuid: a03275b3-1347-4be8-8025-2e40656206eb
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54623
     prefix: '502524'
     number_min_length: 11
     number_max_length: 11
-    uuid: b1472576-ec35-4289-9bd8-ba93bb944bca
+    uuid: 31980f3c-8e64-4a6e-b2b6-aafa7751fe01
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54645
     prefix: '502525'
     number_min_length: 11
     number_max_length: 11
-    uuid: 731ebdec-4956-4775-ace0-140f955a9b01
+    uuid: 8ae3e5d7-757e-4d00-8165-4d32c08de73c
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54655
     prefix: '502526'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65f709c4-6bfe-4d5c-83e3-8865cc97400e
+    uuid: d6b1c861-e9f2-436e-81b9-8ec0decaf662
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54663
     prefix: '502527'
     number_min_length: 11
     number_max_length: 11
-    uuid: 80960c0d-0edb-461e-8a8d-99891da78adc
+    uuid: 37399261-0796-4c7b-9fe0-03f71fdf1b3f
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54665
     prefix: '502528'
     number_min_length: 11
     number_max_length: 11
-    uuid: 10369704-6e21-4a82-a21a-b1e7775f0c85
+    uuid: fd0c1996-803b-486e-aa95-71299548041a
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54669
     prefix: '502529'
     number_min_length: 11
     number_max_length: 11
-    uuid: ce39e37e-d892-411e-ad80-1d474c79a211
+    uuid: cae8e089-a415-4688-b4ce-551119fd7df0
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54681
     prefix: '502530'
     number_min_length: 11
     number_max_length: 11
-    uuid: ec3931df-0733-44be-a7e6-b6e1634bd44b
+    uuid: 797b53f6-f3e7-4c13-8df9-7c3c3c125ce1
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54686
     prefix: '5025310'
     number_min_length: 11
     number_max_length: 11
-    uuid: dcedd5be-0085-4eaa-90eb-375f8e9e1744
+    uuid: 0e6805c9-3e60-45d6-91f2-aa314f5b17ec
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54688
     prefix: '5025311'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b7ab35c-7e9d-420a-8ee1-7185ceb28e08
+    uuid: 53a1599d-2e9f-4a24-961d-a371236f9eb9
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54689
     prefix: '5025312'
     number_min_length: 11
     number_max_length: 11
-    uuid: 73dd0e8a-93f3-4685-a0a8-212270561b4a
+    uuid: ebc1b763-5200-4a4d-979d-5d8b21ed0815
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54691
     prefix: '5025313'
     number_min_length: 11
     number_max_length: 11
-    uuid: ee2b4d46-95b6-4add-88ad-38bf1c4370bc
+    uuid: 18435b9f-f8cc-4ff8-949b-abfc2a962c01
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54693
     prefix: '5025314'
     number_min_length: 11
     number_max_length: 11
-    uuid: cc13c528-d662-4608-aef2-ef5ffca91b00
+    uuid: fe128064-5a2f-4806-9cec-d6eb5ad69424
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54694
     prefix: '5025315'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5e597483-ff5d-4373-bbce-6f71c5549653
+    uuid: 6db71a26-698d-47f0-9e28-7656c547dcbf
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54695
     prefix: '5025316'
     number_min_length: 11
     number_max_length: 11
-    uuid: 89557000-5ac1-4d62-8ac1-095eb13de710
+    uuid: d41f75af-c579-4ceb-8b7f-a209fc33dedf
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54696
     prefix: '5025317'
     number_min_length: 11
     number_max_length: 11
-    uuid: 972d698e-87fc-44d2-b54e-525b798484cf
+    uuid: b62db9a7-c89d-47d9-871f-7d772843ace4
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54697
     prefix: '5025318'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5099ecab-23af-4824-9b1e-9536f63dfeed
+    uuid: 622eefe6-2d15-47c2-9cef-dd35c6e92ea7
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54698
     prefix: '5025319'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7c62133d-7daf-4f74-815a-c4ea24ec4103
+    uuid: 712a97c6-5e0c-4c2c-962b-e7290ce9db41
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54699
     prefix: '502532'
     number_min_length: 11
     number_max_length: 11
-    uuid: 75511276-cabc-4d77-8d8e-ec984a2c72b8
+    uuid: 55edfc6d-5b1b-4f09-bf29-e0d4ba3164d1
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54701
     prefix: '502533'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3672dbfc-ead4-4d27-96ba-db09491677a3
+    uuid: 8da87eec-c27a-4fdd-8b09-da054ecdc2e1
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54705
     prefix: '502534'
     number_min_length: 11
     number_max_length: 11
-    uuid: b9fc63d0-1dbb-4a40-aff1-ffcf699ce04d
+    uuid: c5aadfbe-5306-46dd-8352-c53da171af58
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54707
     prefix: '502535'
     number_min_length: 11
     number_max_length: 11
-    uuid: be61f61e-2f9b-4eb8-9cb1-3b3f1f04c01c
+    uuid: c6beb7cf-568b-4ad5-8cb9-5f592b593b57
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54709
     prefix: '502536'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5e5811af-ab7b-4092-886a-9d0ce3bbf9a0
+    uuid: 403e658b-668c-416a-a424-cfc91fd42191
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54713
     prefix: '502537'
     number_min_length: 11
     number_max_length: 11
-    uuid: a9660a59-b9d1-4cfb-b02e-eaafe43a8495
+    uuid: b93ec620-38af-4f00-a296-ff09687b5af3
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54719
     prefix: '502538'
     number_min_length: 11
     number_max_length: 11
-    uuid: e63823dc-69d5-4c18-8f92-ceaebed73df5
+    uuid: 369042ed-f415-40f8-904b-61e24b65ff32
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54724
     prefix: '502539'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2fba3807-bdf8-42b3-8649-a9caee0cca34
+    uuid: 08ffa7b1-67b7-499a-8c09-b03811d91b52
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54739
     prefix: '502540'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2f693565-dbd8-45c2-9713-7de73a4e5adb
+    uuid: dd439d7e-0b4b-448c-945f-7f3c2eb2c1f4
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54740
     prefix: '502541'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6b2cfd6b-9520-486a-8e03-b4cfd3376e68
+    uuid: a9b2e5b3-6f52-4e81-a712-f05c5d7a497f
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54741
     prefix: '502542'
     number_min_length: 11
     number_max_length: 11
-    uuid: ee143f0f-643d-4fbb-bdd0-c8e200ad22c8
+    uuid: 502919cf-9e89-4e6c-b7b4-945fac981a27
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54742
     prefix: '502543'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9e5b2227-861c-4b4c-95b1-8e0152d56c41
+    uuid: 30db0615-706b-4852-b0c8-7d86060998a4
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54743
     prefix: '502544'
     number_min_length: 11
     number_max_length: 11
-    uuid: c3128b43-0162-4bd2-97ae-32b3b1e420d0
+    uuid: a3a2cdeb-2531-46d8-b0df-5fb810f5453d
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54744
     prefix: '502545'
     number_min_length: 11
     number_max_length: 11
-    uuid: 18e612ca-d1b4-4be5-8c73-89e4cb714876
+    uuid: 8d49dce8-1686-40c2-bea6-dfed834e45a6
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54745
     prefix: '502546'
     number_min_length: 11
     number_max_length: 11
-    uuid: 80dfeb71-1c33-4e73-adff-cd1ca9753a1e
+    uuid: a7f5ef83-4aee-4272-b5f8-7add3614aa95
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54746
     prefix: '502547'
     number_min_length: 11
     number_max_length: 11
-    uuid: d7b58af9-26c7-437b-9fcb-276ac598830c
+    uuid: c05c30fa-3612-4479-9ec4-896d64373abc
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54747
     prefix: '502548'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5fa9a170-c4e3-45aa-9739-000f8ba725fc
+    uuid: 01507253-e5b8-4d46-9432-e419501aba12
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54748
     prefix: '502549'
     number_min_length: 11
     number_max_length: 11
-    uuid: 673aad03-18e2-464f-b133-7be16a74816b
+    uuid: 0ef4828e-bb28-4e6f-9237-c9d5e0fa538e
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54751
     prefix: '502550'
     number_min_length: 11
     number_max_length: 11
-    uuid: 88fb11f7-c237-4434-98f4-59bc6d02a666
+    uuid: 6c69ad49-701f-49a2-85c3-25bad7b02a60
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54765
     prefix: '5025510'
     number_min_length: 11
     number_max_length: 11
-    uuid: 81b9ea64-2f72-42bc-a7fe-6a39deaeb181
+    uuid: e490c5fa-90cd-45ab-8d60-f112e6cb78c2
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54766
     prefix: '5025511'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2d2541f1-8ea4-4d12-b2c3-7521759a9768
+    uuid: 7011d8a0-4138-400a-b9d1-a6fcbef4acb0
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54767
     prefix: '5025512'
     number_min_length: 11
     number_max_length: 11
-    uuid: b771e65c-978a-4b3a-a9d7-67f3315b18ef
+    uuid: 00b8b07b-dd66-4cee-8cce-c8c7c39f5e98
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54768
     prefix: '5025513'
     number_min_length: 11
     number_max_length: 11
-    uuid: a13462f0-1166-4c65-bf6e-d116ff31247e
+    uuid: abba061d-f536-4ab1-9ad0-f74118590406
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54769
     prefix: '5025514'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9d356d2-087d-48ca-8762-179bac1e4a65
+    uuid: db3f2414-8170-4153-a4f1-6853a0d0eba4
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54770
     prefix: '5025515'
     number_min_length: 11
     number_max_length: 11
-    uuid: e8aa940b-fd9a-402a-9952-50a0bf945fec
+    uuid: 64179db1-8082-4944-bc15-7b90569d7119
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54771
     prefix: '5025516'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4232bcb8-9362-4a18-842e-d3a168543942
+    uuid: e47054c0-e2c5-4181-ac56-49a96557e3f2
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54772
     prefix: '5025517'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c6b2146-cefd-4ee5-9273-a554075d4b35
+    uuid: 3784e431-0390-404d-a356-d3019d87c619
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54773
     prefix: '5025518'
     number_min_length: 11
     number_max_length: 11
-    uuid: 67d6331b-d14a-4040-9fe1-6ed4fc3a3dff
+    uuid: 004b92c1-a3c3-43f6-96e8-da09cdd3dd95
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54774
     prefix: '5025519'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cb4263b-7559-4816-ac40-4a4279c26616
+    uuid: 8dbc94c6-03cf-4e27-8342-058926b29290
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54775
     prefix: '502552'
     number_min_length: 11
     number_max_length: 11
-    uuid: f88ad5c4-e2cf-40ee-a9ab-dc88259a6a64
+    uuid: d6a0dab9-b704-4af4-b7d0-83cc69054b20
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54776
     prefix: '502553'
     number_min_length: 11
     number_max_length: 11
-    uuid: 926bfaaf-4042-40ac-be50-260c7116638a
+    uuid: 74f4da5c-a9d3-4ce2-b45b-12bdfac80cc1
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54777
     prefix: '5025540'
     number_min_length: 11
     number_max_length: 11
-    uuid: 70139f0b-4a65-48d6-b342-ca8d2f321454
+    uuid: 1be0fd38-6f42-4691-bdbc-583d4d00decb
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54778
     prefix: '5025541'
     number_min_length: 11
     number_max_length: 11
-    uuid: 57deaf46-d6ec-484d-89f9-e9d492c0b9c6
+    uuid: 93741e1b-2ff6-42a2-992f-45fbb9f497e5
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54779
     prefix: '5025542'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9c301763-2e19-41bf-829b-5606f52b6df7
+    uuid: abf9c1fd-2767-4a1e-a4ad-5f19c1f4c942
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54780
     prefix: '5025543'
     number_min_length: 11
     number_max_length: 11
-    uuid: 863ee99d-f240-4fa2-ad18-f6cb0c191eef
+    uuid: 435f0f2d-02a1-4341-bc31-36aa1fcddec6
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54781
     prefix: '5025544'
     number_min_length: 11
     number_max_length: 11
-    uuid: d24826ad-b1ea-4de4-9a99-e5e29b18177b
+    uuid: 5b64ac0f-8188-4435-8bba-e32f8a8424f6
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54782
     prefix: '5025545'
     number_min_length: 11
     number_max_length: 11
-    uuid: 78ea1bf6-ba33-4ecd-a70c-f6980b5936ca
+    uuid: 66377028-0837-4533-8ad1-a84e783c276e
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54783
     prefix: '5025546'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65a7dc3c-2797-4dd9-8edf-b2fb15a2a4f8
+    uuid: a7f6c44c-d1a6-4364-87d7-df60bc26f2ba
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54784
     prefix: '5025547'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5411b661-602c-48c8-9740-de951162b6ac
+    uuid: 6fca0c1f-22a2-4470-81b4-8b1254e130f6
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54785
     prefix: '5025548'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8efd99b1-68b3-464d-a272-df121d1f6c38
+    uuid: 4da2c515-4e33-432a-8804-fcdda2457bf3
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54786
     prefix: '5025549'
     number_min_length: 11
     number_max_length: 11
-    uuid: 303cc9c9-7d16-461f-8701-1e26df522586
+    uuid: 75c7b777-8199-4662-8c5d-ca60a8ca85df
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54787
     prefix: '5025550'
     number_min_length: 11
     number_max_length: 11
-    uuid: b1b41c7a-a4ca-422c-a3e7-6480ed5bd8dc
+    uuid: 339df9e0-8061-441b-9548-9740b45d834b
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54788
     prefix: '5025551'
     number_min_length: 11
     number_max_length: 11
-    uuid: 79781efb-99d1-42c9-94bf-4f484210b749
+    uuid: 7c98791f-5e55-4720-9624-45ec8b4b850c
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54789
     prefix: '5025552'
     number_min_length: 11
     number_max_length: 11
-    uuid: ee85b78e-86ce-470b-b03a-514f4c818780
+    uuid: 4fd4b549-9e21-4544-955a-b4be81736ce0
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54790
     prefix: '5025553'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4cb22231-3bbf-4d8d-b70f-bdf3e23dda49
+    uuid: 145bdfae-3d3e-407d-bd96-616d74d1c487
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54791
     prefix: '5025554'
     number_min_length: 11
     number_max_length: 11
-    uuid: a6f6ab83-fa30-43e0-a91e-e6693a79ba9e
+    uuid: 27915f8c-aa32-45a9-97fa-03e1c1c625a4
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54792
     prefix: '5025555'
     number_min_length: 11
     number_max_length: 11
-    uuid: 42612731-969c-47b8-a32e-9fae13517bea
+    uuid: 88b9ae43-be05-4050-9c4a-85da8eb0380b
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54793
     prefix: '5025556'
     number_min_length: 11
     number_max_length: 11
-    uuid: 869c7912-4667-47fb-a239-383a852727a1
+    uuid: be844ad5-5390-4279-8cd6-8cfaa5f76036
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54794
     prefix: '5025557'
     number_min_length: 11
     number_max_length: 11
-    uuid: 500d5337-deed-4e53-bcc5-4accc3fd51b4
+    uuid: 7fd9364b-e08a-4626-9eb7-282bb189b620
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54795
     prefix: '5025558'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5067f0b7-39e2-4ce9-bbe8-c9cd6cf3f606
+    uuid: 45a6f687-0e08-4308-adb0-19efa40364d6
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54796
     prefix: '5025559'
     number_min_length: 11
     number_max_length: 11
-    uuid: 948a13fe-dd55-455c-ad77-22a3cc88998a
+    uuid: 9d56a5cf-e762-4227-8d33-77a71d46cdbb
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54797
     prefix: '502556'
     number_min_length: 11
     number_max_length: 11
-    uuid: b6eed01a-8067-4d98-b6fd-d7f473680b21
+    uuid: 6890ae07-6929-4acc-b353-2b30711adbf4
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54798
     prefix: '502557'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9f2536af-acb9-4f7f-a174-5cd954f9456f
+    uuid: 1dd983f7-cdef-49a3-b049-efccd662c963
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54799
     prefix: '5025580'
     number_min_length: 11
     number_max_length: 11
-    uuid: 81a96da0-dcef-4dc8-a577-87f90fac073e
+    uuid: da46b43f-2107-4e0f-a8a5-063638b24db4
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54800
     prefix: '5025581'
     number_min_length: 11
     number_max_length: 11
-    uuid: 10d566c6-0a67-4bb6-ab6a-1b6996a4f0e0
+    uuid: 09c54b75-11a8-440f-8120-fb039583e0f3
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54801
     prefix: '5025582'
     number_min_length: 11
     number_max_length: 11
-    uuid: 151d390b-9f00-42ac-91ad-ed83a601d237
+    uuid: 18ba0f2d-a811-440e-98cb-5e18e5197b0f
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54802
     prefix: '5025583'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5face46c-f6f8-403d-9fa7-e784aa79fb6b
+    uuid: 6287d9c1-fa11-4c2e-8a14-4c953445ce10
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54803
     prefix: '5025584'
     number_min_length: 11
     number_max_length: 11
-    uuid: 43cee848-590d-4eca-b0da-5903e79cb7b0
+    uuid: 1593ceeb-643f-4ee8-a10a-933e190c3c45
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54804
     prefix: '5025585'
     number_min_length: 11
     number_max_length: 11
-    uuid: f1c136da-50da-4619-88d4-08a533d789e8
+    uuid: fb94abf1-30a1-4cdd-95b6-67177c3a2522
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54805
     prefix: '5025586'
     number_min_length: 11
     number_max_length: 11
-    uuid: b5c73d8b-f308-4083-b7e0-8f156374ec48
+    uuid: fd08fdf5-5bbf-4e7a-a07b-147feea0bf52
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54806
     prefix: '5025587'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a6865d6-1b94-4894-9436-8d4b5d32e3be
+    uuid: 9f8a1e5a-e784-4bb1-ad84-678a4a1e1f6e
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54807
     prefix: '5025588'
     number_min_length: 11
     number_max_length: 11
-    uuid: b0e887c5-fca9-4970-aa2b-a2a50e1dd915
+    uuid: 0ac12457-e3ca-4c3e-8238-49ea3064c2d6
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54808
     prefix: '5025589'
     number_min_length: 11
     number_max_length: 11
-    uuid: 37320152-5178-440b-bb8d-82e492e716b2
+    uuid: b7dd01c5-d09b-4160-a1e2-ef9d97dfd82d
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54809
     prefix: '502559'
     number_min_length: 11
     number_max_length: 11
-    uuid: e430ba58-0d13-4c2c-a73b-780f1d90d64e
+    uuid: a9f10296-0fc2-4852-937d-c42d5c6a257b
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54812
     prefix: '502560'
     number_min_length: 11
     number_max_length: 11
-    uuid: 15c85e9c-0ec7-4a7a-a815-9158e26ab03b
+    uuid: 78441d66-c6ca-4b06-ae89-20710c3e46d8
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54824
     prefix: '502561'
     number_min_length: 11
     number_max_length: 11
-    uuid: 04b29cef-26d5-4fb0-90a6-ce40b77ca212
+    uuid: c36a0006-89ce-425b-9513-70d20ea3ed68
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54825
     prefix: '502562'
     number_min_length: 11
     number_max_length: 11
-    uuid: 17a2b789-e4ef-4d53-b638-13707b29f681
+    uuid: b210fbd8-37ef-49a3-b2ce-d042299c7690
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54826
     prefix: '502563'
     number_min_length: 11
     number_max_length: 11
-    uuid: aacdbd7c-892a-44a0-bad3-9303c41c90f3
+    uuid: 657eace2-249d-4188-b7f1-57adcbe3c47b
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54827
     prefix: '502564'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f3f44ee-58bf-495a-9232-73115e24bbeb
+    uuid: 90776b07-309e-4336-a1cd-94421a234023
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54828
     prefix: '502565'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2ee73242-923f-4a41-82e2-a09389262e8d
+    uuid: 74372d30-ea2d-4803-a4a1-a0723c4ae3f7
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54829
     prefix: '502566'
     number_min_length: 11
     number_max_length: 11
-    uuid: a5296197-afd7-4936-8b99-593fd7932deb
+    uuid: f987eed4-dda4-4719-bb7b-c3093b6f91f3
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54831
     prefix: '502567'
     number_min_length: 11
     number_max_length: 11
-    uuid: eee328f7-a4cb-4993-a36d-f25003763d0b
+    uuid: 97a90a83-b146-4c68-a5e1-b3bdaa9639ba
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54832
     prefix: '502568'
     number_min_length: 11
     number_max_length: 11
-    uuid: 64942cea-05a4-4882-8633-ab80a0802244
+    uuid: 71f150b5-a31d-44fd-8fe5-00b9478ab1fc
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54833
     prefix: '502569'
     number_min_length: 11
     number_max_length: 11
-    uuid: 723e488c-4c99-4f68-b1ed-6f72425fdc59
+    uuid: 60c31bd0-3050-4eef-9912-77f67bac4a10
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54834
     prefix: '502570'
     number_min_length: 11
     number_max_length: 11
-    uuid: 62578b3a-4693-4c28-9162-e51fe3fcd1da
+    uuid: f31303b5-7e55-4121-94f6-63057e68ec48
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54837
     prefix: '5025710'
     number_min_length: 11
     number_max_length: 11
-    uuid: d7eb7a58-e96a-4117-bafd-4f413eaa29ff
+    uuid: e21ed595-4790-4f9d-93ca-030841c536c5
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54848
     prefix: '5025711'
     number_min_length: 11
     number_max_length: 11
-    uuid: 864fa35f-15d6-4191-b694-0c38d6da9f9c
+    uuid: 5cfea6de-f769-4ba9-91bd-117e0f90fbf4
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54849
     prefix: '5025712'
     number_min_length: 11
     number_max_length: 11
-    uuid: a67e383c-9b85-415a-96c8-425a056b94c6
+    uuid: 0b8452e2-2bed-4eec-a80d-0965d8f1e8df
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54850
     prefix: '5025713'
     number_min_length: 11
     number_max_length: 11
-    uuid: 391971ba-73bb-4f6d-9e83-d45ad223790b
+    uuid: 3075b574-817f-419c-b277-9c8be70beecc
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54851
     prefix: '5025714'
     number_min_length: 11
     number_max_length: 11
-    uuid: b32902f2-bf9a-473e-b20e-762f05d26d93
+    uuid: 4b0e8429-9bff-4610-bf27-40a3795a9b97
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54852
     prefix: '5025715'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9c1f17e8-2fcf-415c-aa19-04916aa3fd0f
+    uuid: 76ac60fc-bd06-4d82-b481-b77bbc0d0eaf
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54853
     prefix: '5025716'
     number_min_length: 11
     number_max_length: 11
-    uuid: dc6a37fb-451b-4abc-b2ac-0d2e359bb76b
+    uuid: aabf0a3c-0354-4386-b6fe-10d872da2272
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54854
     prefix: '5025717'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6b83b2b9-ca09-43fd-912f-52c34865fb78
+    uuid: 9e674ead-a00c-4a50-8e45-6f7475397a31
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54855
     prefix: '5025718'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2cccd7e2-c4d6-4715-b418-e92f2bf5df6e
+    uuid: 5b811611-c197-4bfa-9009-fadc7184c712
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54856
     prefix: '5025719'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7a6a16dd-d69f-4ee8-8a88-d96f315c742f
+    uuid: 8cae6c7c-a7b9-464d-848e-a648bbcfade8
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54857
     prefix: '502572'
     number_min_length: 11
     number_max_length: 11
-    uuid: fcc28073-d82d-4515-b07b-bad97649ee93
+    uuid: 02d66284-42d6-4ded-94a8-b06f13fee6c9
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54859
     prefix: '502573'
     number_min_length: 11
     number_max_length: 11
-    uuid: 599115e6-8114-4b11-ae14-1502ad245f51
+    uuid: 6121300f-8660-4948-8527-cbe524eb1743
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54860
     prefix: '502574'
     number_min_length: 11
     number_max_length: 11
-    uuid: d8fb251b-6224-430c-93b6-6b9cd79c5227
+    uuid: 902a3a56-9176-46b8-9d31-f2255bbb51b0
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54862
     prefix: '502575'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6b0590fd-9fe2-403f-a405-f89b47894356
+    uuid: 1ecfa18c-993a-4748-97bb-07fc76e6bf35
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54864
     prefix: '502576'
     number_min_length: 11
     number_max_length: 11
-    uuid: 70048717-ec94-4d29-8a15-a719cbc8db20
+    uuid: b7cd9410-c4bd-43a0-935d-8cbdd4fa04e5
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54866
     prefix: '502577'
     number_min_length: 11
     number_max_length: 11
-    uuid: ff2723a2-8272-4c34-8d77-3fc22104f0fc
+    uuid: 51a8fe7c-f2b3-4096-b9c9-5ec408f2e039
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54868
     prefix: '502578'
     number_min_length: 11
     number_max_length: 11
-    uuid: 213e1c33-02e9-4b3c-a029-903db6203122
+    uuid: 6f8b6341-a620-4e10-bd0f-f587536f12c6
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54870
     prefix: '502579'
     number_min_length: 11
     number_max_length: 11
-    uuid: 86fb0c98-c602-4dea-bdf3-f1a5c0464d3d
+    uuid: 272fecb4-a6b5-4271-8381-293d98bb058f
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54872
     prefix: '502580'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2d18a2aa-a409-463d-b445-b5f11d454f8f
+    uuid: 245187d2-269e-4329-be15-dc5c347051a2
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54873
     prefix: '5025810'
     number_min_length: 11
     number_max_length: 11
-    uuid: 504faa44-a4c3-4c71-989c-5fe7312ab9b4
+    uuid: b9845696-1307-4e1d-8d7b-bfe0b53ccd8e
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54874
     prefix: '5025811'
     number_min_length: 11
     number_max_length: 11
-    uuid: 22ca6804-eac6-4818-90b7-7cb534b71287
+    uuid: de1fae03-b966-46f3-9370-9b897fa70885
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54875
     prefix: '5025812'
     number_min_length: 11
     number_max_length: 11
-    uuid: e699f730-6d70-460b-8cb0-3ce8902dc49d
+    uuid: 4a3fa42e-e2aa-440a-bd92-51d600d3cbfa
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54876
     prefix: '5025813'
     number_min_length: 11
     number_max_length: 11
-    uuid: d161fd9d-c9b9-41c0-8ba4-a6b939738522
+    uuid: f50650f7-1c37-42e6-ad04-c2566c0924d7
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54877
     prefix: '5025814'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2fa78251-7597-414c-bdbf-014dd56934fb
+    uuid: ac6bea40-b891-409f-b04f-2399b9c04404
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54878
     prefix: '5025815'
     number_min_length: 11
     number_max_length: 11
-    uuid: e73909ec-a4f9-46ed-8ec8-d8aea0a488e1
+    uuid: 5afed848-3ee0-48e6-9ab0-65701776b87a
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54879
     prefix: '5025816'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2f3e2bae-9ab6-4d1a-902e-9c1ef93bfca4
+    uuid: 1e6cdee2-01a7-4edd-a7dc-e04d99663633
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54880
     prefix: '5025817'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8a4af5c8-0ae0-41f1-837d-8ed30314c4c6
+    uuid: 3469f14a-b11a-4327-bb93-011929e6ac37
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54881
     prefix: '5025818'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4e12331b-58d1-4540-abad-a16ae6d8573e
+    uuid: a4a4c753-827d-4d05-84d5-59e67badf353
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54882
     prefix: '5025819'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65b10067-56bd-49cc-8590-45113650e9c5
+    uuid: 4aeb598a-109e-4fed-942e-d97d4570d456
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54883
     prefix: '502582'
     number_min_length: 11
     number_max_length: 11
-    uuid: ece1d8c7-ae59-4a6c-af9d-a31709134b7b
+    uuid: 3ad034a7-e2a1-4b4e-be2f-a6cfd50f85cd
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54884
     prefix: '502583'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0fb8d5c0-e80d-4f85-b0ec-db981084b0f1
+    uuid: 5accc423-062a-45dc-8e27-2c6c402345ea
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54885
     prefix: '502584'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3243ce45-70d8-4d6a-909f-2abde9c42d07
+    uuid: 948eff4c-328a-42f2-9e51-a9839d10dca8
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54886
     prefix: '502585'
     number_min_length: 11
     number_max_length: 11
-    uuid: e8b3f159-85f0-40c1-851b-97eea0e1e926
+    uuid: 0ac6a954-f283-400e-afdb-b8ba42d46c58
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54887
     prefix: '502586'
     number_min_length: 11
     number_max_length: 11
-    uuid: c8c6839f-0c73-425f-99c2-9d79eface1be
+    uuid: 9fa8150e-fcc8-4e15-9168-e69ee49b7c9d
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54888
     prefix: '502587'
     number_min_length: 11
     number_max_length: 11
-    uuid: cbc25c08-3db6-40da-be23-7067d1f5e57d
+    uuid: 461e8678-a3ab-4d19-9d5e-47fb09ea2888
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54889
     prefix: '502588'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2a4ae707-08bf-4d35-b8e9-29fb8192cbdf
+    uuid: 7d67d8c3-d8f0-48a1-8c8b-c4f58804b19a
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54890
     prefix: '502589'
     number_min_length: 11
     number_max_length: 11
-    uuid: ddf64fd3-4fd8-4f4a-9f21-a6e969940ce0
+    uuid: 446640cf-8d47-4e62-adb2-74277e91679a
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54892
     prefix: '502590'
     number_min_length: 11
     number_max_length: 11
-    uuid: 509b05db-a678-4ff6-8274-9031b54387d2
+    uuid: 766cea71-2681-4f02-8bb0-693b8fc89d82
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54893
     prefix: '5025910'
     number_min_length: 11
     number_max_length: 11
-    uuid: 287c9e70-65da-45dc-934b-aeb2df52cdc7
+    uuid: 45948d5c-5906-4261-97a5-fa677f5300b3
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54894
     prefix: '5025911'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2199980f-ce5c-47e1-9201-59c50201816b
+    uuid: 3a29df73-1c34-43f2-b502-92163f3c4dbb
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54895
     prefix: '5025912'
     number_min_length: 11
     number_max_length: 11
-    uuid: 86e34592-c803-45fc-a624-21cfd6f46b69
+    uuid: 186d0cd3-083c-4771-990f-6bdcb238a536
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54896
     prefix: '5025913'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1a3b7fd8-4ec1-4251-8175-301ba62207b9
+    uuid: 359ce846-996a-429b-b3e2-c9f182b44b35
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54897
     prefix: '5025914'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8dcfa9a4-4513-4bfe-98e1-75ad75e05fe0
+    uuid: eae6eba3-b583-4902-8a9c-4ee0488f7750
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54898
     prefix: '5025915'
     number_min_length: 11
     number_max_length: 11
-    uuid: 126bdd3a-eba5-41f2-8f53-64c41e84a05f
+    uuid: 949a0390-222a-45a5-adf7-b3ff6b2f92fd
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54899
     prefix: '5025916'
     number_min_length: 11
     number_max_length: 11
-    uuid: 64522911-ce2c-4fbc-949c-50d9410a8128
+    uuid: 6bf36de1-2e3a-4439-bc50-9a960477a3c2
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54900
     prefix: '5025917'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0be60b03-98d3-4c40-94cb-8f98db611355
+    uuid: b5a7902d-cddb-41b0-ae99-88168c05ca7c
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 54901
     prefix: '5025918'
     number_min_length: 11
     number_max_length: 11
-    uuid: fcae7b9f-fb1b-4c42-9a58-61a61ed6a4c1
+    uuid: 9e200040-7654-4b7c-868d-6393952c9e4a
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54902
     prefix: '5025919'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9886f153-d652-4623-8c6a-44db937450b0
+    uuid: fef3918b-8dae-4cf9-ac76-5e53301d9a04
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 54903
     prefix: '502592'
     number_min_length: 11
     number_max_length: 11
-    uuid: a88e2246-f03e-42b7-b71a-3e49f745f27a
+    uuid: 8629318d-53d3-4725-8d86-bb027c4bffc8
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54904
     prefix: '502593'
     number_min_length: 11
     number_max_length: 11
-    uuid: 92378225-eac9-4715-8bc3-ab2bf834392f
+    uuid: 6590d4d8-031e-4ad8-a3ff-de9831634cf6
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54905
     prefix: '502594'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4a4f89a3-f01a-4083-8734-e2cdfbaff264
+    uuid: 5f992de1-1365-4d7c-92f6-39c97f4635c1
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54906
     prefix: '502595'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55ead06d-b73d-4eb9-aa61-a71d7f9a6ab4
+    uuid: b130cbce-12ff-450b-9f27-202b3b8c81ea
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54907
     prefix: '502596'
     number_min_length: 11
     number_max_length: 11
-    uuid: e90cd3d0-ee77-4ce8-8638-69f50e09d7f3
+    uuid: a86f53a7-0155-4674-a14d-a5e3205038d9
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54908
     prefix: '502597'
     number_min_length: 11
     number_max_length: 11
-    uuid: f81c2e23-c14f-47da-8f75-b37ea24c9d63
+    uuid: 296d8682-725a-4bf8-8e00-f271a10554c6
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54909
     prefix: '502598'
     number_min_length: 11
     number_max_length: 11
-    uuid: 870fd174-8386-4aa4-a661-e561cd075de6
+    uuid: 7a498f72-de8d-451e-b725-379aa9877b51
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 54910
     prefix: '502599'
     number_min_length: 11
     number_max_length: 11
-    uuid: bcaa7490-4075-478f-a215-070fec3c6a08
+    uuid: ed084fa1-f543-4b2d-b4e8-8a9603f5769e
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 315868
     prefix: '5023'
     number_min_length: 11
     number_max_length: 11
-    uuid: db5fedec-e3e1-4e2a-9c4f-083a875eb0f9
+    uuid: 96d40827-4310-4bc4-9291-ff2cecaaa757
     country_id: *gt
     network_id: *gt_mobile
   - id: 315877
     prefix: '50230'
     number_min_length: 11
     number_max_length: 11
-    uuid: 61ef08d5-943e-4f7d-9110-4f8994ae3cd0
+    uuid: c960ed62-957d-4a68-9347-09712184d5b3
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 315878
     prefix: '50231'
     number_min_length: 11
     number_max_length: 11
-    uuid: cfb23982-0e80-4348-96ec-1337687fbcdb
+    uuid: 76a0ad4a-d6e8-4e91-9751-f2f61872e792
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 315880
     prefix: '50232'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b454d1c-7716-4d54-b238-01778aa5669e
+    uuid: ae6e1c1b-7e11-4781-af77-942eb522bea7
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 315950
     prefix: '5023229'
     number_min_length: 11
     number_max_length: 11
-    uuid: 801748cf-b498-4289-a684-170f67cc8d95
+    uuid: f3265eb2-2ba8-413f-b452-361b4ade080f
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 316178
     prefix: '50233'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6348120e-132b-4395-afcd-3a46298fcd5c
+    uuid: cde223b6-7b86-42c2-a0d7-83219974f91e
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 316279
     prefix: '50234'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7c152714-da7e-4caf-b573-8834ababb56f
+    uuid: 0e3802b2-1159-44be-8092-ff4612ba43b9
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316439
     prefix: '502350'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3e7248d3-a85a-4cc2-afeb-496e76edf916
+    uuid: 60e97149-58f9-4151-a146-ebb164ef5767
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316441
     prefix: '502351'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef692b75-adf4-4534-ade6-fd64f2760a68
+    uuid: 74218e75-0071-474e-ad36-a79b2533dc18
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316443
     prefix: '502352'
     number_min_length: 11
     number_max_length: 11
-    uuid: 77e1c07c-59b5-421c-bc93-44f6a22ca063
+    uuid: 95aae9d7-c1a7-4487-992c-782753ce6695
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316466
     prefix: '502353'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b6fde47-d92e-4fb6-bea4-b72fa9fc08ae
+    uuid: 741581a3-605e-4ff1-9597-193cd38ba63a
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316470
     prefix: '502354'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b464b47-d6cf-4d14-b8cb-d047cbd91495
+    uuid: 5c40e9c9-88c7-48d6-8613-8c9ca52f2d20
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316478
     prefix: '502355'
     number_min_length: 11
     number_max_length: 11
-    uuid: 03cca617-5fff-4a39-9c44-dc88c5619281
+    uuid: 69d60bb5-cf7f-4846-bf65-01353b54bd4e
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316550
     prefix: '5023560'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3149748e-ff53-4a7e-8e06-8ebd28f25008
+    uuid: 0d4375ed-b90f-4adf-aee6-7393bc624251
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316551
     prefix: '5023561'
     number_min_length: 11
     number_max_length: 11
-    uuid: fff1bb54-f6ab-4e06-87ba-1f4713fd8309
+    uuid: 60c82122-890b-4223-a7d2-bb27edf3bcd3
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316552
     prefix: '5023562'
     number_min_length: 11
     number_max_length: 11
-    uuid: 89b3f6e0-a6cf-4710-b3d8-33cc3e1a9f7f
+    uuid: a067b12a-b89f-4078-94e8-d2eb6e36aa0f
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316553
     prefix: '5023563'
     number_min_length: 11
     number_max_length: 11
-    uuid: 356a06d3-c510-4758-8527-cbd1ede7efd7
+    uuid: a5192650-4ba7-43df-87f4-6b384732adcd
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316554
     prefix: '5023564'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0ed79a80-286a-4859-8df5-9ecc0fb5be06
+    uuid: a196dd70-965d-4578-8dda-6754bb0df056
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 316834
     prefix: '5023700'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3ce39449-6c46-4d6c-b417-8aa61fb8ed60
+    uuid: b31c393a-1944-497d-b919-42aca2d553b4
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 316835
     prefix: '5023701'
     number_min_length: 11
     number_max_length: 11
-    uuid: 209f44df-a1b3-4c64-bd6c-bdc300160076
+    uuid: 2df5dcf6-123a-4edc-ba8a-3811682cfb3d
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 316836
     prefix: '5023702'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5822c597-70b7-4c81-abde-17e2f91924a6
+    uuid: e6b56a10-083c-4938-90c7-72937444a2c2
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 316837
     prefix: '5023703'
     number_min_length: 11
     number_max_length: 11
-    uuid: a139187c-2d0e-4bcc-9995-cb45a9a4c940
+    uuid: 059239b2-414a-4a63-886d-c55e6ad6adff
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 316838
     prefix: '5023704'
     number_min_length: 11
     number_max_length: 11
-    uuid: f8549c42-1957-4c95-846c-2eb3d761b7b4
+    uuid: e5283fce-01fc-4143-9e58-f267641dee74
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349445
     prefix: '5024'
     number_min_length: 11
     number_max_length: 11
-    uuid: 01dc400d-8819-4072-9e77-e6d66029b9da
+    uuid: 97622b66-5501-42fa-9628-8ab089a3b8e2
     country_id: *gt
     network_id: *gt_mobile
   - id: 349451
     prefix: '50240'
     number_min_length: 11
     number_max_length: 11
-    uuid: c2d0e99b-a3ec-4128-a257-e6e8cd0230f5
+    uuid: 790670b1-f817-4907-9b34-a445e2e3cf92
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349452
     prefix: '50241'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1acaf1f-7a02-4054-bab9-dcb1731c46d2
+    uuid: 1501a9d5-5cea-4643-a648-ede482887f6a
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349454
     prefix: '50242'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7592987f-6b34-41cc-b0df-e99e2109d7f1
+    uuid: fc7ba31f-c865-41a7-84a3-4ff1082a92d8
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349526
     prefix: '50243'
     number_min_length: 11
     number_max_length: 11
-    uuid: f641360d-99a6-4f91-af90-bdbba85051c0
+    uuid: 14dd845a-821f-4a4d-805b-2d502c45eae7
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349561
     prefix: '502440'
     number_min_length: 11
     number_max_length: 11
-    uuid: 56bb0589-bcaa-4e55-8a2b-7ddf12ed6fb4
+    uuid: 72dff544-057f-4114-bbba-de1d5d2df62c
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349562
     prefix: '502441'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8243972e-bac4-49f4-9434-7ab52ade71c4
+    uuid: 71e5ed72-ad03-4c55-afe4-9212f916e803
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349563
     prefix: '502442'
     number_min_length: 11
     number_max_length: 11
-    uuid: b01a4e89-e350-4641-b023-f06537cf196c
+    uuid: 082de58e-95b6-4418-80d2-37193c512728
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349564
     prefix: '502443'
     number_min_length: 11
     number_max_length: 11
-    uuid: e3df844d-d5c1-422d-994e-d9134b29ff5b
+    uuid: 418fffc8-7841-4a9f-9e6d-b01b3f6c619d
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349569
     prefix: '502444'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3945971c-6aa9-4ecf-9967-3f6f73557772
+    uuid: 28d95098-016d-4115-a6e4-a21eb61473f8
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349570
     prefix: '502445'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0fcf3623-03b6-4535-a326-2759b1622b47
+    uuid: 8861c74d-d57f-4e1d-9509-1d309772320f
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349571
     prefix: '502446'
     number_min_length: 11
     number_max_length: 11
-    uuid: 14573e2b-7e1b-4397-8b71-165e9acf85c4
+    uuid: 04bbef85-6e9a-479e-a154-adcf91c066c3
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349581
     prefix: '5024470'
     number_min_length: 11
     number_max_length: 11
-    uuid: 558b0a8f-a2a3-4eb6-964c-82ce7e215e5c
+    uuid: d9e5b122-5c6f-4519-ab07-206a4b13c347
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349582
     prefix: '5024471'
     number_min_length: 11
     number_max_length: 11
-    uuid: 45483770-efd3-41c3-b4bc-9348e59471f0
+    uuid: ec1779fb-1920-4991-adf5-0b67df19679e
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349583
     prefix: '5024472'
     number_min_length: 11
     number_max_length: 11
-    uuid: 219ce8ab-8803-43e8-a832-6baf12b9711c
+    uuid: dd61856c-6f29-4313-9a22-fa8001a6f4a4
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349584
     prefix: '5024473'
     number_min_length: 11
     number_max_length: 11
-    uuid: ba1f07d0-24b9-4d4b-911c-5137c2e58480
+    uuid: 1eb2f9e7-8c33-4de9-a3d6-163a597a8778
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349585
     prefix: '5024474'
     number_min_length: 11
     number_max_length: 11
-    uuid: ec1e8ef8-86a6-4428-ac2d-68383996c32e
+    uuid: b776147c-f724-44ab-af48-62fa049cca54
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349586
     prefix: '5024475'
     number_min_length: 11
     number_max_length: 11
-    uuid: 022d7e8b-49e2-4c1f-954e-3ac6c77ee9b4
+    uuid: 4f6c5887-77b1-44df-8adf-cc4b0897abd9
     country_id: *gt
     network_id: *gt_movistar_mobile
   - id: 349587
     prefix: '5024476'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8cce506f-e322-460f-88a9-7cddefb0faea
+    uuid: 26fc4280-fabf-4e5b-9130-db45d8fadbf9
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349588
     prefix: '5024477'
     number_min_length: 11
     number_max_length: 11
-    uuid: a0a72146-7b1b-4392-a7ef-e2fd3bfb1e92
+    uuid: ac25107b-eefd-4280-9887-f398a1a3f1b8
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349589
     prefix: '5024478'
     number_min_length: 11
     number_max_length: 11
-    uuid: 21ad27f9-b25e-47b7-aedd-90388d79d552
+    uuid: 91ad165e-72b6-4f69-ab9e-4411613bcfb7
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349590
     prefix: '5024479'
     number_min_length: 11
     number_max_length: 11
-    uuid: 97b75070-49fe-491a-bc17-6b2e6fc495fd
+    uuid: db4d173f-538c-43df-ad3d-774353d62248
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349591
     prefix: '502448'
     number_min_length: 11
     number_max_length: 11
-    uuid: 50a2408e-ce40-4e63-adc3-6635be7c6119
+    uuid: 45b84b99-a57e-4a4b-931d-32911bbf838a
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349603
     prefix: '502449'
     number_min_length: 11
     number_max_length: 11
-    uuid: 885f9053-900a-4889-8485-baae0ba50365
+    uuid: dd4caf55-0682-4ee5-b6c0-549c66d4b518
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349611
     prefix: '50245'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3d301e2b-a375-464a-9bf7-651a99d3182a
+    uuid: 48c14a93-4e89-4717-92c5-752ca7da1c3b
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349665
     prefix: '50246'
     number_min_length: 11
     number_max_length: 11
-    uuid: a9bdcfd9-ff2b-4713-8847-5a166a258d38
+    uuid: 571f89f9-dac2-4233-ba8d-4841645fd51c
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349691
     prefix: '502470'
     number_min_length: 11
     number_max_length: 11
-    uuid: 583e8a47-fefa-42e9-b672-46cf096318dc
+    uuid: 0bbdc8c8-0f44-4fa8-91b8-73ee99958561
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349695
     prefix: '502471'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6d4b0f65-76ec-4521-9e6c-7093a56491b6
+    uuid: f795ac84-40a3-4794-8042-3bcfc943b583
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349697
     prefix: '502472'
     number_min_length: 11
     number_max_length: 11
-    uuid: 33ce905b-a149-4326-8011-3ba7842bda56
+    uuid: a80efb2b-68fc-4520-90b7-ae34991e17a8
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349698
     prefix: '502473'
     number_min_length: 11
     number_max_length: 11
-    uuid: 76bf0116-d187-49fd-867e-6220397f6641
+    uuid: 569bcb45-599c-45bf-a580-d7c9de5c0bd0
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349699
     prefix: '502474'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19854f85-3a27-46e7-a765-fad467b4eaa3
+    uuid: e2872ed4-03e7-4e46-8744-f1674dfbfc69
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349702
     prefix: '502475'
     number_min_length: 11
     number_max_length: 11
-    uuid: d9cafbab-d6b9-4a3d-9bc8-a6f5afbc53d7
+    uuid: 6c7f295b-9d8e-4cb1-b240-ed8f184a7876
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349703
     prefix: '502476'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19da00ca-b5af-4404-bfe1-739dd30fe378
+    uuid: 331ba1a0-583c-472e-a7d7-ec065601f79c
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349704
     prefix: '5024770'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3cb838f1-adf2-4338-b974-1ad133500865
+    uuid: f68a2198-81b0-48db-b078-003040b9b961
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349705
     prefix: '5024771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 781e99c9-0385-448c-a06a-4c0b274d271e
+    uuid: 68c08140-6553-42dd-a591-0077bb1c4aef
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349706
     prefix: '5024772'
     number_min_length: 11
     number_max_length: 11
-    uuid: d8679804-a76a-4e86-ac9c-8ab34ee8a9de
+    uuid: a212495f-0402-4be8-811e-7846bb66dfdd
     country_id: *gt
     network_id: *gt_claro_mobile
   - id: 349707
     prefix: '5024773'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65bcaf73-8c0d-4e66-899c-69ec39829862
+    uuid: 1d1e8839-3ae9-4348-96f1-c6d65803a335
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349708
     prefix: '5024774'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6dc91f47-ffd7-4ad8-aace-1f48b434f5c5
+    uuid: 8d6cea90-6845-4d0a-9dc4-3531cf3d0e25
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349709
     prefix: '5024775'
     number_min_length: 11
     number_max_length: 11
-    uuid: a2c7df55-2c5c-4cfa-af10-71987ca07d8c
+    uuid: 20384305-4c4d-4a3a-8fc6-3013d709cf9c
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349710
     prefix: '5024776'
     number_min_length: 11
     number_max_length: 11
-    uuid: 144aea81-61f5-4726-9a1e-ae510883f180
+    uuid: 9d7ae2e2-048c-4f51-bc3a-d9009ed96bd0
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349711
     prefix: '5024777'
     number_min_length: 11
     number_max_length: 11
-    uuid: f4e539e9-e394-473f-83e6-c71d82dd73a6
+    uuid: b07a072e-ef28-4e77-ac29-509682188931
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349722
     prefix: '5024778'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8a3deead-fc4c-4742-b2a8-b58e72f9e7aa
+    uuid: 6736ce55-50de-4a27-8f22-2ebd97b8f120
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349723
     prefix: '5024779'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7701c499-eccf-41e8-b442-afc6675d34d5
+    uuid: 8e3b5e2f-bfa1-4126-8c28-50a1204a8b15
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349724
     prefix: '502478'
     number_min_length: 11
     number_max_length: 11
-    uuid: 02508673-1e7c-444c-afdb-1a25f6fb3a27
+    uuid: f184562a-de0a-4fb8-9441-f5da0ae350b3
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349727
     prefix: '502479'
     number_min_length: 11
     number_max_length: 11
-    uuid: 26d1b64b-5e2d-439d-994a-9e8f37f17c3a
+    uuid: dda3ed22-22ef-4835-9e4a-7cf25ff5b119
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349728
     prefix: '50248'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1f6dca45-b84c-4ea2-8bcb-d549ad7d19f2
+    uuid: 3ab7423a-6da1-4455-9df7-a85f1d170ce8
     country_id: *gt
     network_id: *gt_tigo_mobile
   - id: 349812
     prefix: '50249'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8214fef9-fa6b-47a1-8386-d6583ef6fcfa
+    uuid: 83c428f8-aa48-4608-a45a-f8515d58bf93
     country_id: *gt
     network_id: *gt_tigo_mobile
 # Fixed Prefixes
@@ -1767,85 +1779,85 @@ network_prefixes:
     prefix: '5026'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5f66e4b4-1162-4453-afc6-7d5d832637f9
+    uuid: 8ef67099-43e0-42cd-b794-4414b57e3e11
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_metropolitan_suburban_zone_fixed
   - id: 149334
     prefix: '5027'
     number_min_length: 11
     number_max_length: 11
-    uuid: 393a5878-8d3a-4a6d-ac80-de157c47516d
+    uuid: 31f67d71-c7d3-42fd-94a1-79f7e9fb5286
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_fixed
   - id: 150001
     prefix: '5027860'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0947eef9-ae92-4588-802f-499ef05b048b
+    uuid: d255c333-fd3f-4944-b888-501d07e0ea1a
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_rural_telephony_fixed
   - id: 150002
     prefix: '5027861'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8a79c5aa-3f05-409c-b019-9e60748e7cb7
+    uuid: 1e8daa1e-33e3-4e84-9615-0c967ca27237
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_rural_telephony_fixed
   - id: 150003
     prefix: '5027862'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f8001bf-4c94-4824-9fe4-c688cdd1c8fd
+    uuid: bdc45a68-0460-40df-8368-a173d23a741f
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_rural_telephony_fixed
   - id: 150005
     prefix: '5027863'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7432cf49-070e-4bb5-a4f7-a281d70bd45d
+    uuid: 1c06f133-c2de-4caf-81ec-113c1980992f
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_rural_telephony_fixed
   - id: 150007
     prefix: '5027864'
     number_min_length: 11
     number_max_length: 11
-    uuid: f60a5c90-378f-4c47-adc1-ae20d193539b
+    uuid: c076c39b-f210-4260-a852-d948a6e60181
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_rural_telephony_fixed
   - id: 150009
     prefix: '5027865'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9dd5cb0e-44fb-4853-90aa-0035414d25c2
+    uuid: 13e78369-e8c4-4bc0-9755-293aa9000789
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_rural_telephony_fixed
   - id: 150011
     prefix: '5027866'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6b6890c2-f3a1-4b50-8c19-0f31b3080264
+    uuid: 38bdadda-8e94-4b16-8bdf-b2795fa76afa
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_rural_telephony_fixed
   - id: 150015
     prefix: '5027869'
     number_min_length: 11
     number_max_length: 11
-    uuid: f9fc2cc7-12e3-49fc-a6df-0c694e8153e0
+    uuid: d19f9ca2-3b7c-4e3f-ac96-4eedd1711c86
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_interurban_zone_rural_telephony_fixed
   - id: 261190
     prefix: '5022'
     number_min_length: 11
     number_max_length: 11
-    uuid: 01d18818-511f-4c9a-91c3-0daaa8fc5737
+    uuid: 3e7fd802-fce5-41b8-8e44-f83d81f5706d
     country_id: *gt
-    network_id: *gt_fixed
+    network_id: *gt_metropolitan_zone_fixed
 # Country code Prefixes
   - id: 242009
     prefix: '502'
     number_min_length: 4
     number_max_length: 100
-    uuid: 2546dbca-e406-4c8e-87c6-d6502dd88413
+    uuid: 605149d8-4a43-456e-bd00-917748968325
     country_id: *gt
     network_id: null
 # Supplementary services Prefixes
@@ -1853,90 +1865,90 @@ network_prefixes:
     prefix: '50211'
     number_min_length: 6
     number_max_length: 6
-    uuid: 76151f11-5c80-4336-a036-35df56cf048b
+    uuid: 5df25300-3611-4d54-a4e1-f892f2b9262c
     country_id: *gt
     network_id: *gt_public_use_assistance_services
   - id: 242806
     prefix: '50212'
     number_min_length: 6
     number_max_length: 6
-    uuid: 013117eb-1d75-42b8-a88b-2324a9b5250f
+    uuid: 388b7414-84b2-4ac8-b40c-739848ddea1f
     country_id: *gt
     network_id: *gt_emergency_services
   - id: 242850
     prefix: '50213'
     number_min_length: 9
     number_max_length: 14
-    uuid: cb1f7d50-8f81-431f-add8-c9d087706ec8
+    uuid: 8530b837-2c6b-4163-a354-e3438afc7fe7
     country_id: *gt
     network_id: *gt_network_operator_selection_services
   - id: 242897
     prefix: '50214'
     number_min_length: 9
     number_max_length: 14
-    uuid: fec369f7-89fb-4b1a-a4b2-a6fd90f95966
+    uuid: 2c59bc80-4ffa-42e2-95cf-837ba360edc5
     country_id: *gt
     network_id: *gt_network_operator_selection_services
   - id: 242927
     prefix: '5021459'
     number_min_length: 10
     number_max_length: 10
-    uuid: 392fa70c-8dd2-4ce8-b3f8-e7c082fba6f8
+    uuid: 155ca982-6741-4e1d-8f5e-806ebf56bfbb
     country_id: *gt
     network_id: *gt_country_direct_services
   - id: 242937
     prefix: '50215'
     number_min_length: 7
     number_max_length: 7
-    uuid: 346029d9-2269-48a0-be54-ea62925d8dcc
+    uuid: f67e6ede-ef91-4a34-8b4c-b461b84174aa
     country_id: *gt
     network_id: *gt_information_and_assistance_services
   - id: 243018
     prefix: '50216'
     number_min_length: 9
     number_max_length: 14
-    uuid: 63c24895-6c1b-4ec2-9810-ea9fa1f9ad16
+    uuid: 51043950-42d0-41aa-810c-c6ea37484270
     country_id: *gt
     network_id: *gt_network_operator_selection_services
   - id: 243056
     prefix: '50217'
     number_min_length: 7
     number_max_length: 7
-    uuid: c7a52254-6bbf-4b8f-a206-7e7fea00db64
+    uuid: de32dbf4-e592-40bd-a866-aefba9820800
     country_id: *gt
     network_id: *gt_information_and_assistance_services
   - id: 247296
     prefix: '5021800'
     number_min_length: 14
     number_max_length: 14
-    uuid: 7f15db36-1362-4b71-b100-6af193089976
+    uuid: 44c832fa-c696-4d57-8ccd-5ef5e5e72e61
     country_id: *gt
     network_id: *gt_international_freephone_services
   - id: 247305
     prefix: '5021801'
     number_min_length: 14
     number_max_length: 14
-    uuid: aaf34790-733b-4baa-a1c0-93873e226e42
+    uuid: 5ceefd28-df8b-4d28-ba89-1c7273b1b37b
     country_id: *gt
     network_id: *gt_national_freephone_services
   - id: 247354
     prefix: '5021900'
     number_min_length: 14
     number_max_length: 14
-    uuid: ff81c3a1-7472-4b09-b44b-d802f6ce9a77
+    uuid: 56c8e2b2-b1eb-4738-81fe-5f78563593e1
     country_id: *gt
     network_id: *gt_international_special_charge_services
   - id: 247361
     prefix: '5021901'
     number_min_length: 14
     number_max_length: 14
-    uuid: 17d76f5d-afba-4e49-859b-644d4da90060
+    uuid: 042e19e5-9177-4ba4-a16e-1942a38633f3
     country_id: *gt
     network_id: *gt_national_special_charge_services
   - id: 258312
     prefix: '5029999'
     number_min_length: 10
     number_max_length: 10
-    uuid: bdaf74df-e6d8-40dc-97bc-1a268445aef5
+    uuid: eea0bc58-5cab-4a7d-b385-b730d75fc5bc
     country_id: *gt
     network_id: *gt_country_direct_services

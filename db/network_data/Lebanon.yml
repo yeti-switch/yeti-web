@@ -1,23 +1,47 @@
 country_id: &lb 118
 networks:
 # Supplementary services Networks
-  - id: &lb_special_services 5259
+  - id: &lb_special_services 21435
     name: LB Special Services
-    uuid: 25c23839-fb30-4c32-856b-86abaf4a3553
+    uuid: 2a6dae83-018e-4eee-8f25-361055fc12ce
     type_id: 14
 # Fixed Networks
-  - id: &lb_fixed 5260
-    name: LB Fixed
-    uuid: db230f2c-49fb-4b7b-8432-5eef61c29f5e
+  - id: &lb_beirut_fixed 21436
+    name: LB Beirut Fixed
+    uuid: 07b8909d-333d-4e4b-b58a-2ac2f9a70d6f
+    type_id: 12
+  - id: &lb_metn_mount_lebanon_fixed 22134
+    name: LB Metn Mount Lebanon Fixed
+    uuid: 4c03a9c5-5e36-447a-a86c-d7e888a71dd9
+    type_id: 12
+  - id: &lb_north_lebanon_fixed 22541
+    name: LB North Lebanon Fixed
+    uuid: ad6bf637-f319-4130-8d6c-115a684af60f
+    type_id: 12
+  - id: &lb_chouf_mount_lebanon_fixed 23010
+    name: LB Chouf Mount Lebanon Fixed
+    uuid: 8f503e6f-e0fb-41f6-8926-6f43751c2b90
+    type_id: 12
+  - id: &lb_south_lebanon_fixed 23123
+    name: LB South Lebanon Fixed
+    uuid: f10ce959-d30b-425e-8d11-838d0bdf53e8
+    type_id: 12
+  - id: &lb_bekaa_fixed 23172
+    name: LB Bekaa Fixed
+    uuid: 6365ec57-2f01-4569-ad1f-2a740a2dbe47
+    type_id: 12
+  - id: &lb_jbeil_keserwan_mount_lebanon_fixed 23189
+    name: LB Jbeil Keserwan Mount Lebanon Fixed
+    uuid: 55ac9c99-5a10-44b9-bc6e-7cdf8c381ff2
     type_id: 12
 # Mobile Networks
-  - id: &lb_alfa_mobile 5672
+  - id: &lb_alfa_mobile 21906
     name: LB Alfa Mobile
-    uuid: 6b6f0be3-63cd-428e-b3fd-d432cd10961e
+    uuid: 9acf2e6a-67a6-43ff-a11a-75d8d3d575ba
     type_id: 3
-  - id: &lb_touch_mobile 5729
+  - id: &lb_touch_mobile 22061
     name: LB Touch Mobile
-    uuid: 92182e74-6793-478f-b69a-d005df1ef4a4
+    uuid: 31d8d480-8ec6-4474-8729-a965ff9ca5b4
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -25,7 +49,7 @@ network_prefixes:
     prefix: '961'
     number_min_length: 4
     number_max_length: 100
-    uuid: 089e6baa-1cd8-4f54-ab29-16ff460acf43
+    uuid: 91d6ceb2-a2ba-47ae-b4e7-658a30f48d48
     country_id: *lb
     network_id: null
 # Supplementary services Prefixes
@@ -33,7 +57,7 @@ network_prefixes:
     prefix: '9611'
     number_min_length: 6
     number_max_length: 7
-    uuid: ebb74f16-47ad-495f-a6f0-566bdd7ded8e
+    uuid: cc3c0330-b166-4002-bc62-d5a41b11ff76
     country_id: *lb
     network_id: *lb_special_services
 # Fixed Prefixes
@@ -41,644 +65,644 @@ network_prefixes:
     prefix: '96101'
     number_min_length: 10
     number_max_length: 10
-    uuid: 38ebc2df-84d0-4d6a-9ac3-8d8e87bf18dd
+    uuid: 9ba32593-64a2-4cc7-9bb2-b1a44ff962e9
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_beirut_fixed
   - id: 243943
     prefix: '96104'
     number_min_length: 10
     number_max_length: 10
-    uuid: 57cf6f9d-ec32-43da-bf69-0203b110cef7
+    uuid: c861a98d-6a0e-44e1-aae0-b06dae196adb
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_metn_mount_lebanon_fixed
   - id: 245404
     prefix: '96106'
     number_min_length: 10
     number_max_length: 10
-    uuid: f681b60c-4aed-45d1-9419-302fb59930a7
+    uuid: 1d66d952-9778-4f2a-9efd-dfe0911fe024
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_north_lebanon_fixed
   - id: 247627
     prefix: '96121'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7265beb5-e207-4976-90d2-9b3c819ca08c
+    uuid: 3672d7bf-2160-4946-857e-4b24ccf674e4
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_beirut_fixed
   - id: 248112
     prefix: '96124'
     number_min_length: 11
     number_max_length: 11
-    uuid: b99558de-2d13-492b-a986-5c250b2bf929
+    uuid: 5645428b-2983-435d-ba83-f0a0fe2856ba
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_metn_mount_lebanon_fixed
   - id: 248259
     prefix: '96125'
     number_min_length: 11
     number_max_length: 11
-    uuid: fbbb32cb-1df9-40a9-9d13-7cd861e571cc
+    uuid: 7bc55a55-ca98-46ee-9bad-ca3d68f54c5b
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_chouf_mount_lebanon_fixed
   - id: 248471
     prefix: '96126'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4a46a09c-f3b4-4b01-b428-79fcad8ca77c
+    uuid: 60044add-69cf-46e2-b5f0-e9442c765ef6
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_north_lebanon_fixed
   - id: 248613
     prefix: '96127'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5cd7211d-dec1-4bdc-99d1-a6a4d9373da1
+    uuid: 949270b8-137a-41f9-a9c9-1f7db721256a
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 248770
     prefix: '961282'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae3454ce-74eb-45e7-9957-c707817824b2
+    uuid: 4d5a0b52-2946-4f2f-ad18-db58474a1b87
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 248777
     prefix: '961283'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a570c1c-5772-47b7-b6b3-691169c9cd36
+    uuid: ae6ff76f-ba59-4353-8889-581449b51268
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 248783
     prefix: '961284'
     number_min_length: 11
     number_max_length: 11
-    uuid: ee403223-4b45-48e4-a1e6-f0147a482408
+    uuid: 67b1ec38-cd5d-41c7-bba0-fbd03da1ff52
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 248793
     prefix: '961285'
     number_min_length: 11
     number_max_length: 11
-    uuid: 258a0234-0faa-417e-ba8c-6e9eea55896a
+    uuid: 779f62a6-1b2b-4998-9052-5de87b867dc5
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 248797
     prefix: '961286'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4d571c38-390d-4bd7-8a18-0a68372108d7
+    uuid: e3b83d5c-044a-4e7e-b9ee-d65e0553c544
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 248803
     prefix: '961287'
     number_min_length: 11
     number_max_length: 11
-    uuid: 98cf775e-4ea9-4e3a-8317-d358fc7c89ed
+    uuid: f998a8a4-92da-4036-8ebe-0774530eb410
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 248807
     prefix: '961288'
     number_min_length: 11
     number_max_length: 11
-    uuid: 36ecd787-fb3b-4cd0-8d16-0306c6750864
+    uuid: 10523dd2-ce6d-4aee-977c-713420d3fe02
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 248811
     prefix: '961289'
     number_min_length: 11
     number_max_length: 11
-    uuid: c320eddf-131d-4a5f-bf9b-d19efc6dab9c
+    uuid: e61ceb13-eea1-4ff3-9626-89ca795c51c2
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 248830
     prefix: '96129'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7e9d14be-8d19-4f26-8f1c-27ed149a91aa
+    uuid: eedebfdd-3bcd-4ab6-b02a-37c42c8712a0
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_jbeil_keserwan_mount_lebanon_fixed
   - id: 249585
     prefix: '96105'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7b488216-e79d-449b-9e13-911e9a29e855
+    uuid: 1155e2a0-44c8-41e7-ae8f-1f8e491fc536
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_chouf_mount_lebanon_fixed
   - id: 251825
     prefix: '961072'
     number_min_length: 10
     number_max_length: 10
-    uuid: ba9e6e47-7dcd-4354-86e0-81ac4173ef31
+    uuid: bcdb8d96-d0b0-4ebe-bc52-fa682cebc5c6
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 251878
     prefix: '961073'
     number_min_length: 10
     number_max_length: 10
-    uuid: 72b35286-e75a-461d-8d3e-2c31ecf9c815
+    uuid: 3f835695-7dd6-4ea5-b37a-f7d3be3b6e9e
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 252063
     prefix: '961074'
     number_min_length: 10
     number_max_length: 10
-    uuid: 89dfc5cc-3c9f-4a40-9b05-3d2edf7eec13
+    uuid: f16679f2-b19a-4882-952b-12ecd04392cf
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 252554
     prefix: '961075'
     number_min_length: 10
     number_max_length: 10
-    uuid: ff50f433-b32a-45d5-a8af-a8c236ea547b
+    uuid: 0af0f5c9-6f14-4f58-b7b3-7b0f13871eb3
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 253479
     prefix: '961082'
     number_min_length: 10
     number_max_length: 10
-    uuid: d0a5f58a-73e9-4782-8449-2730756b902c
+    uuid: dd3c3178-f16f-4928-99a6-16d2d1127bc7
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 253594
     prefix: '961083'
     number_min_length: 10
     number_max_length: 10
-    uuid: 84a4842a-96b1-4843-91ff-c639ba177269
+    uuid: f71a2f4c-f820-4fc8-a4ca-df729f2b5f4b
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 253720
     prefix: '961084'
     number_min_length: 10
     number_max_length: 10
-    uuid: 06b402d1-f9df-4df7-87dc-bfbef7bfbf24
+    uuid: 252efd9c-2d62-465a-9deb-b9cc5f2abac7
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 255484
     prefix: '9610762'
     number_min_length: 10
     number_max_length: 10
-    uuid: d46154f7-9d5c-4ef5-8c3c-f91252efa6cf
+    uuid: a60fbdfb-4d74-40ec-b11f-56a2b6914e89
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 255634
     prefix: '961077'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0313d8c0-9ac4-47e0-bbe8-9fdfa5fdadc5
+    uuid: b29833db-994e-430f-babb-c0c14c1d8b87
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256103
     prefix: '9610780'
     number_min_length: 10
     number_max_length: 10
-    uuid: d5ba7ffe-d9b0-4ddf-a577-dfc8c4306b2f
+    uuid: 5e1c6351-2191-4222-a837-e016f16ebc71
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256145
     prefix: '9610781'
     number_min_length: 10
     number_max_length: 10
-    uuid: b2c308de-7e08-495f-971e-3e499626424c
+    uuid: 3ccd7f1c-47a7-4ab4-b560-04c656b064f6
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256160
     prefix: '9610782'
     number_min_length: 10
     number_max_length: 10
-    uuid: 37d7dcdb-330b-4429-96d8-4466e80b7c1a
+    uuid: 31d5bf8a-5cb6-4918-a6e3-1f02039283ec
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256182
     prefix: '9610783'
     number_min_length: 10
     number_max_length: 10
-    uuid: c43f7219-25a2-45db-ab5c-4b881fbe38b2
+    uuid: 41be92cd-a1a8-4074-825c-738e7747d206
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256204
     prefix: '9610784'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3b0ad08e-2ee8-4338-9a40-46c718a1f3b0
+    uuid: 0953e171-9e34-4676-9a2c-8233eb9d7074
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256239
     prefix: '9610785'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6fd2ba39-1183-492d-b5b0-8a6788ecd163
+    uuid: 08efdbc5-a9e0-446c-b78d-e9df376aa342
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256255
     prefix: '9610786'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3dd4e35e-b7b6-4265-88c2-25ed1a00ccbc
+    uuid: 8957f5dd-a0f6-45d0-8fbe-5ad0f91e0890
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256279
     prefix: '9610787'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1cada00e-03c3-4071-acf5-e15e4f8ead20
+    uuid: a6561e53-d7d7-4c22-b68b-d5a71f5e63e8
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256478
     prefix: '9610792'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9626295d-55f8-4580-99a5-61b2b7453878
+    uuid: 079f37ba-ba43-4e2e-93a6-da15a03814be
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_south_lebanon_fixed
   - id: 256840
     prefix: '961088'
     number_min_length: 10
     number_max_length: 10
-    uuid: a62c66f2-991e-45e8-9d54-eebe9db9cd3a
+    uuid: 32e63362-c35d-4864-a548-89492d34a4be
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 257001
     prefix: '961089'
     number_min_length: 10
     number_max_length: 10
-    uuid: dd1dae07-d7bc-4f34-a409-262bfdbecdee
+    uuid: b8f95ddc-8968-4f72-98d4-778941409fda
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 257111
     prefix: '96109'
     number_min_length: 10
     number_max_length: 10
-    uuid: b13bc842-9ccc-4eb2-81ba-6c5489b1cca8
+    uuid: 4b4b6f41-b85b-4a8c-8ccd-5d00789cd012
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_jbeil_keserwan_mount_lebanon_fixed
   - id: 263707
     prefix: '961085'
     number_min_length: 10
     number_max_length: 10
-    uuid: 256c64e7-b3b6-4217-875e-b54a829aa71f
+    uuid: 89928423-f7e1-4ca7-9c7b-d076c276edc8
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 263854
     prefix: '961086'
     number_min_length: 10
     number_max_length: 10
-    uuid: b374d932-de43-40ba-b080-b1b5eeee8c6f
+    uuid: 4dffa19b-416b-481f-9db4-b683f7cdb0ed
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
   - id: 264007
     prefix: '961087'
     number_min_length: 10
     number_max_length: 10
-    uuid: e082e297-2d69-4477-bcc1-1d4798915f5c
+    uuid: 518c6807-85db-4155-b8bc-39caf747d98d
     country_id: *lb
-    network_id: *lb_fixed
+    network_id: *lb_bekaa_fixed
 # Mobile Prefixes
   - id: 243234
     prefix: '961031'
     number_min_length: 10
     number_max_length: 10
-    uuid: d5c319f4-8cd4-43ca-8092-49fa914893a0
+    uuid: b4a68bd0-e48f-4b5b-9c67-e515d08eb13c
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 243372
     prefix: '961032'
     number_min_length: 10
     number_max_length: 10
-    uuid: 86c71c67-d793-4d1c-a277-90279182b527
+    uuid: 586fee81-28df-44d2-ae2f-ab48d719903c
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 243416
     prefix: '961033'
     number_min_length: 10
     number_max_length: 10
-    uuid: c7d01bba-45b8-4bc3-ab2a-9237838afab6
+    uuid: 4e003572-617b-4d7b-84d6-bd20c6a96f3d
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 243492
     prefix: '961034'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3e0bfc3f-90cb-4142-8d6a-9c59d541c541
+    uuid: 2fe65e7b-95ca-4443-b00c-19614f9df0bf
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 243590
     prefix: '961035'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4a7d4b2a-d672-457a-9243-aeb774094b2e
+    uuid: 3c76b03c-1ace-4007-9517-79d819064cba
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 243668
     prefix: '961036'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5a9602a2-5a30-4f7c-988c-ce939f7ac85c
+    uuid: 875ead51-a839-4c67-8398-8e346f1440cb
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 243715
     prefix: '961037'
     number_min_length: 10
     number_max_length: 10
-    uuid: 95f7073b-0760-46c6-a1fb-015f07ff84c5
+    uuid: 565ea327-7ce4-442c-83c4-a9d9bace5125
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 243866
     prefix: '961038'
     number_min_length: 10
     number_max_length: 10
-    uuid: d0242dc3-9765-48e8-abc7-7a1c6f769208
+    uuid: bdee57d3-05cc-4505-a228-6ff1174a1735
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 243907
     prefix: '961039'
     number_min_length: 10
     number_max_length: 10
-    uuid: 77013b44-b5f9-446f-b48e-23b4869fceed
+    uuid: f8ff4544-8b0b-4147-ac35-bcf4d805bf9a
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 248935
     prefix: '961030'
     number_min_length: 10
     number_max_length: 10
-    uuid: 551eb90d-7d4a-496e-bf99-4ba8a83743ed
+    uuid: 0a75dddd-22f1-49e5-9d6a-f38551359c1b
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251595
     prefix: '9610704'
     number_min_length: 11
     number_max_length: 11
-    uuid: edfcad8f-a21f-42b5-87cb-7222242b1e35
+    uuid: c1ffe37d-100b-4d10-a978-5e91e7033fcd
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 251612
     prefix: '9610705'
     number_min_length: 11
     number_max_length: 11
-    uuid: 872a4a11-7283-427d-881e-f6a915c8f35c
+    uuid: de365d9a-7560-4875-bf7e-d77d24b2718e
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 251627
     prefix: '9610706'
     number_min_length: 11
     number_max_length: 11
-    uuid: d12ad915-f0d9-4f17-a677-d88b65343905
+    uuid: 90e0419f-f88d-46e0-98ee-4d9c1fa71d03
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251632
     prefix: '9610707'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7e8758e0-7788-44a0-98fe-5baa856614be
+    uuid: c6d1d5c0-a15b-488f-8ec8-021d2d298802
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251681
     prefix: '9610708'
     number_min_length: 11
     number_max_length: 11
-    uuid: e3d578ba-3a4b-4b42-acbe-4a30d8aa028b
+    uuid: dee8ace1-59d2-47b5-9cdd-a003020ec2af
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251708
     prefix: '9610709'
     number_min_length: 11
     number_max_length: 11
-    uuid: 99f7d6e7-5d1b-4439-ab55-4c4298ed1551
+    uuid: c8518b4b-8e9d-4792-95a0-fe32f058ebee
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251749
     prefix: '9610710'
     number_min_length: 11
     number_max_length: 11
-    uuid: cf7c09a1-9c8f-453a-9622-7955f39bfc3a
+    uuid: 3cfe5d91-798e-46c3-8618-08480bad0109
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 251756
     prefix: '9610711'
     number_min_length: 11
     number_max_length: 11
-    uuid: 52423177-a584-4e52-aa28-b64bd6b40857
+    uuid: 03000fbe-c3aa-47db-92f9-df1640a46508
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251775
     prefix: '9610712'
     number_min_length: 11
     number_max_length: 11
-    uuid: 585daa04-94e9-4ac1-9607-cbc59846b51a
+    uuid: 7b9f927b-c9c4-4339-87f3-4e8f30ed526a
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251779
     prefix: '9610713'
     number_min_length: 11
     number_max_length: 11
-    uuid: e77ac3c7-c8d8-4590-ab6a-c72505e55a53
+    uuid: 22b36ad7-68d5-4c62-a228-baf76d1dfc56
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251782
     prefix: '9610714'
     number_min_length: 11
     number_max_length: 11
-    uuid: 459f9edc-32ff-490c-afbe-933145b3e719
+    uuid: 908ee805-fa9d-4f21-8ab4-573ecc87f345
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251784
     prefix: '9610715'
     number_min_length: 11
     number_max_length: 11
-    uuid: 84863e21-ed52-4e19-8a08-4cf3d52d66d9
+    uuid: e4fde143-10fd-4f59-9fef-2d969e727213
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 251786
     prefix: '9610716'
     number_min_length: 11
     number_max_length: 11
-    uuid: b07138c2-dbe3-4f94-80b4-b0a044d77d25
+    uuid: de3c5b0e-547a-463f-bed0-71732b3c0623
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 251788
     prefix: '9610717'
     number_min_length: 11
     number_max_length: 11
-    uuid: dffd7068-97f3-4654-989f-1618eb4247de
+    uuid: 744aef90-1a95-41a7-a556-867f5018efcc
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 251803
     prefix: '9610718'
     number_min_length: 11
     number_max_length: 11
-    uuid: a6fd8b94-a3a0-421d-bd09-9ab067aacdf1
+    uuid: fca27a80-bc92-4497-a45f-af279487ecd2
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 251804
     prefix: '9610719'
     number_min_length: 11
     number_max_length: 11
-    uuid: 71b1be7d-8b84-4911-bfb6-dfd9843a72be
+    uuid: 11ed15d8-14c3-4cd0-b7b4-69860880edfe
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 253355
     prefix: '9610812'
     number_min_length: 11
     number_max_length: 11
-    uuid: e36f9aff-b96d-4cba-8107-debba0658efc
+    uuid: 9c6fee55-06a3-4f9a-9645-00b696db5304
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 253358
     prefix: '9610813'
     number_min_length: 11
     number_max_length: 11
-    uuid: f93c6e82-9097-4b83-b232-e139f29135d5
+    uuid: f774e261-2e68-4e89-bb34-46f1f229b049
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 253378
     prefix: '9610814'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1bb8f9c4-179d-4f4c-91fd-1545469a1720
+    uuid: 4215b574-1e1b-4b4b-ba6d-3c086bff5001
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 253399
     prefix: '9610816'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3e5d5ca3-06bd-4dce-9de7-f82b8d16400c
+    uuid: d3c0277b-c1fc-4ef1-8b2a-6150700f76db
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 253411
     prefix: '9610817'
     number_min_length: 11
     number_max_length: 11
-    uuid: a74df334-c2a9-4c0f-bd76-55ea5a01ec4b
+    uuid: fbab2ee5-b457-4c04-b902-816eeb31d223
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 253423
     prefix: '9610818'
     number_min_length: 11
     number_max_length: 11
-    uuid: e04dfe5c-383d-434e-8c6c-aa3b7fcee3d2
+    uuid: 775365c6-a602-45aa-ab7f-96c91ba34888
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 253445
     prefix: '9610819'
     number_min_length: 11
     number_max_length: 11
-    uuid: ec499225-a6d6-4b4a-ba75-8108e4d65bd3
+    uuid: 73241386-1fd7-4a49-ba6d-e4418f17dd61
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 255318
     prefix: '9610700'
     number_min_length: 11
     number_max_length: 11
-    uuid: 35e1bd14-7c82-462a-8b86-1648156f0de7
+    uuid: 11f3c6a4-1bfd-44ca-917b-36f451a545da
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 255393
     prefix: '9610701'
     number_min_length: 11
     number_max_length: 11
-    uuid: c31a4ca6-5d7f-446a-98e7-ba66794204ec
+    uuid: b725dd6e-bd2e-4dd1-ad90-81b8f8f3b35a
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 255404
     prefix: '9610702'
     number_min_length: 11
     number_max_length: 11
-    uuid: 16f24b02-b7fc-4e68-9b0b-daddcfea75d8
+    uuid: be6af3a1-9a9b-4ae2-b6ff-602e64e5ba39
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 255421
     prefix: '9610703'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1ee0a493-633a-4e70-8da5-85f3e6719172
+    uuid: fca69aa7-cc78-476e-939d-d3ae8f6c7ac9
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 255468
     prefix: '9610760'
     number_min_length: 11
     number_max_length: 11
-    uuid: 905e4d5e-c615-4530-a951-56762a7ffb3e
+    uuid: 95db1db6-79b3-44b9-ae8c-37d07503f3b9
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 255479
     prefix: '9610761'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4c2c734b-63a8-4941-b1b8-0c1c0aa0bdad
+    uuid: 3eb561db-74e9-4505-ab69-007e6c8b6ff9
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 255503
     prefix: '9610763'
     number_min_length: 11
     number_max_length: 11
-    uuid: f3cecff8-f1cf-4071-ba9e-166aa01b9a8f
+    uuid: cb49c3ed-86aa-4fee-a44f-7631db8a51c5
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 255508
     prefix: '9610764'
     number_min_length: 11
     number_max_length: 11
-    uuid: c427badc-af30-430b-aef2-509b874e15cf
+    uuid: 48c4088e-a629-4619-be5a-0a28d00e2915
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 255523
     prefix: '9610765'
     number_min_length: 11
     number_max_length: 11
-    uuid: e06bb844-5694-49b9-aec7-1f4482385e0e
+    uuid: 15c4ebed-72f2-44d2-8387-8e112c6fdd52
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 255539
     prefix: '9610766'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4c24cd37-4915-4600-8e28-08e4a4172cd7
+    uuid: 13d87978-9b7b-404e-a189-bc430c5b49e8
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 255571
     prefix: '9610767'
     number_min_length: 11
     number_max_length: 11
-    uuid: dbd8f596-7f07-4a86-a4e8-655fb080cdc0
+    uuid: cfc1c3f1-bde1-4247-806e-4d9f91202586
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 255578
     prefix: '9610768'
     number_min_length: 11
     number_max_length: 11
-    uuid: 020f3643-4d9d-48aa-8997-e6778b5f0db4
+    uuid: c2d0d2ae-fe39-4f8f-9331-9b5cff920bda
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 255603
     prefix: '9610769'
     number_min_length: 11
     number_max_length: 11
-    uuid: 954e7ff4-3e8d-46c6-b122-f5ee28edf51a
+    uuid: 5cda90ba-952c-4887-b5dc-ef69900895e2
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 256330
     prefix: '9610788'
     number_min_length: 11
     number_max_length: 11
-    uuid: a2decbae-a213-4e48-85f5-e68c6e43f834
+    uuid: a3a2ea10-12c5-4ab2-bba7-7516073c7c88
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 256347
     prefix: '9610789'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2c7c1400-a756-451c-9354-cae172f57d8b
+    uuid: c1fc1cde-ebf6-4e50-930b-5e403afa9dd2
     country_id: *lb
     network_id: *lb_touch_mobile
   - id: 256450
     prefix: '9610791'
     number_min_length: 11
     number_max_length: 11
-    uuid: 79b95c5f-0f23-454b-9ce3-0c46ea4f84a0
+    uuid: 0be8a714-903b-42b4-bf68-68877cded2bc
     country_id: *lb
     network_id: *lb_alfa_mobile
   - id: 256538
     prefix: '9610793'
     number_min_length: 11
     number_max_length: 11
-    uuid: 68e3a95a-dee7-411c-bff9-25c0d9c10d46
+    uuid: cc7848e5-7e41-4888-be31-87a5cd3a4a86
     country_id: *lb
     network_id: *lb_alfa_mobile

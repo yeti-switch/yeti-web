@@ -1,35 +1,63 @@
 country_id: &zm 238
 networks:
 # Mobile Networks
-  - id: &zm_zamtel_mobile 4837
+  - id: &zm_zamtel_mobile 18020
     name: ZM Zamtel Mobile
-    uuid: c3a30d11-2354-464a-95ea-6325a65e0414
+    uuid: 49318cfd-fe86-4512-836d-d416fbf1c920
     type_id: 3
-  - id: &zm_mtn_mobile 4847
+  - id: &zm_mtn_mobile 18180
     name: ZM Mtn Mobile
-    uuid: aa4c623c-d157-42cb-963a-4db391f3ecd8
+    uuid: 42a0602b-d037-4445-8401-a8ade4068de1
     type_id: 3
-  - id: &zm_airtel_mobile 4875
+  - id: &zm_airtel_mobile 18516
     name: ZM Airtel Mobile
-    uuid: 9415fe56-46b5-4f9f-a777-0ac9124c99c1
+    uuid: c5313948-d4eb-4253-b92a-e8d8f5fd9f7a
     type_id: 3
-  - id: &zm_zedmobile_mobile 5061
+  - id: &zm_zedmobile_mobile 20797
     name: ZM Zedmobile Mobile
-    uuid: d92446cf-f96e-4d52-afa1-eee4b41cdd3d
+    uuid: ba1480df-18ce-485e-8224-f1b143f9d310
     type_id: 3
 # Supplementary services Networks
-  - id: &zm_special_services 5343
+  - id: &zm_special_services 21519
     name: ZM Special Services
-    uuid: 430261cc-ae7b-493d-9ca8-882c70ef64ee
+    uuid: 0ce9a036-faef-402c-82de-dc12a068997c
     type_id: 14
-  - id: &zm_emergency_services 5422
+  - id: &zm_emergency_services 21600
     name: ZM Emergency Services
-    uuid: 7846bf7c-cece-41cc-8611-bf0f672f3bd8
+    uuid: a3ae9eb6-093b-4694-a2af-e6eeb62633ca
     type_id: 14
 # Fixed Networks
-  - id: &zm_fixed 7279
-    name: ZM Fixed
-    uuid: e276a89d-e515-46ff-a0a6-776f276f8fbc
+  - id: &zm_lusaka_fixed 27205
+    name: ZM Lusaka Fixed
+    uuid: b437f6b1-5a1c-4b99-92c0-91140284195f
+    type_id: 12
+  - id: &zm_copperbelt_fixed 27221
+    name: ZM Copperbelt Fixed
+    uuid: 66ace9eb-d032-48a6-b3be-72c5277b6e6a
+    type_id: 12
+  - id: &zm_kabwe_fixed 27240
+    name: ZM Kabwe Fixed
+    uuid: 40fe69d1-f9a8-4b3e-acba-509001e08258
+    type_id: 12
+  - id: &zm_livingstone_fixed 27367
+    name: ZM Livingstone Fixed
+    uuid: 808d5fac-026e-403d-a36c-3b341a68ba66
+    type_id: 12
+  - id: &zm_kasama_fixed 27407
+    name: ZM Kasama Fixed
+    uuid: e90a3a00-7a96-42f4-a4d7-64b1f5d31a24
+    type_id: 12
+  - id: &zm_solwezi_fixed 27436
+    name: ZM Solwezi Fixed
+    uuid: 8fc4104e-eee4-46f6-8644-f893d5b29983
+    type_id: 12
+  - id: &zm_mongu_fixed 27578
+    name: ZM Mongu Fixed
+    uuid: 27ae2023-9b2d-46af-89cf-81c7e68c4265
+    type_id: 12
+  - id: &zm_chipata_fixed 28040
+    name: ZM Chipata Fixed
+    uuid: 1e0ed5cb-d357-4ac7-b23e-128062df1f2e
     type_id: 12
 network_prefixes:
 # Mobile Prefixes
@@ -37,49 +65,49 @@ network_prefixes:
     prefix: '26075'
     number_min_length: 12
     number_max_length: 12
-    uuid: b2b8cc02-a998-46f7-8c44-3d523121a674
+    uuid: b27b2507-0c19-4b15-82dd-c754fe2849a8
     country_id: *zm
     network_id: *zm_zamtel_mobile
   - id: 188004
     prefix: '26076'
     number_min_length: 12
     number_max_length: 12
-    uuid: 13c167fe-6b02-446e-9f3b-d7b110571c6a
+    uuid: aa95985a-d005-46cf-bfdf-88091e91f843
     country_id: *zm
     network_id: *zm_mtn_mobile
   - id: 192110
     prefix: '26077'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3f18c947-c99f-4915-9e66-d9bddbbc5d19
+    uuid: c3941eea-3b1f-4593-8d52-2aeaf20ed1ee
     country_id: *zm
     network_id: *zm_airtel_mobile
   - id: 215158
     prefix: '26095'
     number_min_length: 12
     number_max_length: 12
-    uuid: aff69682-ec4b-4cae-a4a0-76a69efae95e
+    uuid: fc554c0a-a209-4e84-95e7-a236f79be915
     country_id: *zm
     network_id: *zm_zamtel_mobile
   - id: 221957
     prefix: '26096'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3fb18614-9a43-419d-85fb-bb357163fe9a
+    uuid: 4bdaf3a3-1005-4b43-8772-4a7d6026a634
     country_id: *zm
     network_id: *zm_mtn_mobile
   - id: 227373
     prefix: '26097'
     number_min_length: 12
     number_max_length: 12
-    uuid: 23f66c2e-c036-49ea-8a3b-e17f012919bb
+    uuid: 88881ae6-e4b2-4a55-9b83-d11dee0f1f9d
     country_id: *zm
     network_id: *zm_airtel_mobile
   - id: 231747
     prefix: '26098'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3501997e-54e2-4d58-a5ec-4b80afadbb8f
+    uuid: cd9a72ec-2f27-4285-bfb8-3132becc55bb
     country_id: *zm
     network_id: *zm_zedmobile_mobile
 # Country code Prefixes
@@ -87,7 +115,7 @@ network_prefixes:
     prefix: '260'
     number_min_length: 4
     number_max_length: 100
-    uuid: 9d93673d-52d5-424e-a824-2981115bec1b
+    uuid: 8e709927-900b-4fb8-bb02-91a1e8ef640e
     country_id: *zm
     network_id: null
 # Supplementary services Prefixes
@@ -95,35 +123,35 @@ network_prefixes:
     prefix: '2601'
     number_min_length: 6
     number_max_length: 6
-    uuid: 767900c2-fcdb-4d23-aeed-c354c9157878
+    uuid: 495e4b9a-4262-4992-aedb-7309e8ac36b0
     country_id: *zm
     network_id: *zm_special_services
   - id: 242631
     prefix: '260112'
     number_min_length: 6
     number_max_length: 6
-    uuid: 447011d4-f53b-428d-8ac9-a0c8c1b53307
+    uuid: ca6348f0-6dc4-4840-a851-679185e0419d
     country_id: *zm
     network_id: *zm_emergency_services
   - id: 243973
     prefix: '2604'
     number_min_length: 7
     number_max_length: 7
-    uuid: a1cfab4c-262e-48ab-b336-d07eed99854b
+    uuid: 68dcf8cd-b3ab-4c27-b52c-6412dbc108d6
     country_id: *zm
     network_id: *zm_special_services
   - id: 248928
     prefix: '2603'
     number_min_length: 7
     number_max_length: 7
-    uuid: 2b07ba42-adb2-4ae4-a5dd-ea09a0f10329
+    uuid: 382b8f16-a149-4818-be78-ff28e12409a7
     country_id: *zm
     network_id: *zm_special_services
   - id: 257149
     prefix: '2609'
     number_min_length: 6
     number_max_length: 6
-    uuid: 6febf6b1-ac59-47c5-8add-0631717cf7e4
+    uuid: 75965c26-7a2d-4ab3-b691-9c32b1bea33c
     country_id: *zm
     network_id: *zm_emergency_services
 # Fixed Prefixes
@@ -131,55 +159,55 @@ network_prefixes:
     prefix: '260211'
     number_min_length: 12
     number_max_length: 12
-    uuid: b9abf8a6-e9aa-43f6-8faa-1c63c4c08e8d
+    uuid: 05088ff3-abd3-44e3-a7bf-5b157510c25b
     country_id: *zm
-    network_id: *zm_fixed
+    network_id: *zm_lusaka_fixed
   - id: 271761
     prefix: '260212'
     number_min_length: 12
     number_max_length: 12
-    uuid: 66562496-a5a8-481b-8abc-d82821ba5639
+    uuid: 96dc0d4e-b03d-42e9-91af-5487cebe8207
     country_id: *zm
-    network_id: *zm_fixed
+    network_id: *zm_copperbelt_fixed
   - id: 272273
     prefix: '260215'
     number_min_length: 12
     number_max_length: 12
-    uuid: b1424c1d-e695-4ac9-a429-b208a1de022a
+    uuid: a1b986df-ee98-47b7-9f47-79ccef4c9d5c
     country_id: *zm
-    network_id: *zm_fixed
+    network_id: *zm_kabwe_fixed
   - id: 274343
     prefix: '260213'
     number_min_length: 12
     number_max_length: 12
-    uuid: 591dd601-7a7d-4cc9-822c-2b97e9ef35a4
+    uuid: 10407441-57d9-4040-9efd-e713ebf033b8
     country_id: *zm
-    network_id: *zm_fixed
+    network_id: *zm_livingstone_fixed
   - id: 275049
     prefix: '260214'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7215951-16b2-4ed9-bcb3-86f9c0de5aae
+    uuid: 768aa396-471e-4abb-bec2-f82f39c3f796
     country_id: *zm
-    network_id: *zm_fixed
+    network_id: *zm_kasama_fixed
   - id: 276002
     prefix: '260217'
     number_min_length: 12
     number_max_length: 12
-    uuid: a3ab0710-fd25-41f0-a999-de2428c13cec
+    uuid: 7335099a-5ab7-4b34-8ef0-586e212842a4
     country_id: *zm
-    network_id: *zm_fixed
+    network_id: *zm_solwezi_fixed
   - id: 276805
     prefix: '260218'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5063ba66-dcf9-427e-9850-6c6fbc06937d
+    uuid: 8aff97dd-3caf-445f-833a-25991360db5e
     country_id: *zm
-    network_id: *zm_fixed
+    network_id: *zm_mongu_fixed
   - id: 282715
     prefix: '260216'
     number_min_length: 12
     number_max_length: 12
-    uuid: f347873f-b828-4cc5-aa8d-5851d9959b36
+    uuid: db8d0133-37f2-40fa-96b5-755d3017d786
     country_id: *zm
-    network_id: *zm_fixed
+    network_id: *zm_chipata_fixed

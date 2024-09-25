@@ -1,80 +1,380 @@
 country_id: &ma 144
 networks:
 # Fixed Networks
-  - id: &ma_fixed 4225
+  - id: &ma_limited_mobility_services_fixed 5897
+    name: MA Limited Mobility Services Fixed
+    uuid: 35a2be9e-6005-495b-a4da-21dcb75da104
+    type_id: 12
+  - id: &ma_agadir_oulad_teima_taroudante_fixed 5900
+    name: MA Agadir Oulad Teima Taroudante Fixed
+    uuid: bc82d2cc-5c63-4551-a1ce-99e4fb58c8a1
+    type_id: 12
+  - id: &ma_agadir_ait_baha_ait_meloul_anza_aourir_belfaa_bensergao_drarga_massa_taghazout_tamri_tikiouine_fixed 5901
+    name: MA Agadir Ait Baha Ait Meloul Anza Aourir Belfaa Bensergao Drarga Massa
+      Taghazout Tamri Tikiouine Fixed
+    uuid: 24576879-fab2-4a4d-b5cf-856364e6b3cb
+    type_id: 12
+  - id: &ma_agadir_bensergao_drarga_fixed 5902
+    name: MA Agadir Bensergao Drarga Fixed
+    uuid: 43c24eee-7fc2-4d79-b8d2-472f948ffe5a
+    type_id: 12
+  - id: &ma_oulad_teima_sebt_guerdane_taroudant_fixed 5903
+    name: MA Oulad Teima Sebt Guerdane Taroudant Fixed
+    uuid: 1cd9c09c-04c4-4c41-b355-8aba9a3edd92
+    type_id: 12
+  - id: &ma_tighmi_tiznit_tlat_lakhsas_fixed 5904
+    name: MA Tighmi Tiznit Tlat Lakhsas Fixed
+    uuid: bf998cc2-8255-43dc-bbfc-c2b6fd9e6470
+    type_id: 12
+  - id: &ma_assa_tantan_tata_fixed 5905
+    name: MA Assa Tantan Tata Fixed
+    uuid: 26349b4b-944a-40b1-b0a5-e491bd081639
+    type_id: 12
+  - id: &ma_agadir_ait_amira_akka_biougra_guelmim_ighram_sidi_bibi_tafraoute_tantan_taroudant_tata_tiznit_fixed 5906
+    name: MA Agadir Ait Amira Akka Biougra Guelmim Ighram Sidi Bibi Tafraoute Tantan
+      Taroudant Tata Tiznit Fixed
+    uuid: cef769aa-e5dc-46a5-8611-26540fa02e11
+    type_id: 12
+  - id: &ma_dakhla_laayoune_fixed 5907
+    name: MA Dakhla Laayoune Fixed
+    uuid: f8b2b935-c56a-43ff-a121-93a3d261aa66
+    type_id: 12
+  - id: &ma_casablanca_fixed 5908
+    name: MA Casablanca Fixed
+    uuid: cb2ab907-8b46-4be7-8ecb-5c459f0ab8e4
+    type_id: 12
+  - id: &ma_fixed 5909
     name: MA Fixed
-    uuid: 46a85ffc-bec9-4237-be35-c5b463df968c
+    uuid: b0061336-9594-4623-acb4-937f9291bfc8
+    type_id: 12
+  - id: &ma_marrakech_fixed 5910
+    name: MA Marrakech Fixed
+    uuid: 7f347184-7c80-4cfc-916b-441652a11fb8
+    type_id: 12
+  - id: &ma_agadir_fixed 5911
+    name: MA Agadir Fixed
+    uuid: f2f0169d-58b3-4968-9e90-377741cfe5ed
+    type_id: 12
+  - id: &ma_south_fixed 6642
+    name: MA South Fixed
+    uuid: 7c09900b-dee6-41cf-a3e8-ab24b50f04ec
+    type_id: 12
+  - id: &ma_beni_mellal_berrechid_casablanca_el_jadida_khouribga_mohammedia_settat_fixed 6652
+    name: MA Beni Mellal Berrechid Casablanca El Jadida Khouribga Mohammedia Settat
+      Fixed
+    uuid: b68cd45f-6ba3-433a-a7f1-70108a157038
+    type_id: 12
+  - id: &ma_berrechid_casablanca_deroua_had_soualem_fixed 6654
+    name: MA Berrechid Casablanca Deroua Had Soualem Fixed
+    uuid: 0d4ca055-f5c8-4a32-ad5c-1d727af7ab66
+    type_id: 12
+  - id: &ma_ain_harrouda_bouskoura_casablanca_fixed 6655
+    name: MA Ain Harrouda Bouskoura Casablanca Fixed
+    uuid: 794a6330-5b50-41d4-a6cd-da567745c0b4
+    type_id: 12
+  - id: &ma_berrechid_casablanca_fixed 6659
+    name: MA Berrechid Casablanca Fixed
+    uuid: 9239bf63-4c6c-4090-8057-8fa02d4f4c7c
+    type_id: 12
+  - id: &ma_berrechid_casablanca_deroua_fixed 6660
+    name: MA Berrechid Casablanca Deroua Fixed
+    uuid: ede64e7a-3c17-4609-a165-9dcba17f3d1c
+    type_id: 12
+  - id: &ma_bouskoura_casablanca_fixed 6664
+    name: MA Bouskoura Casablanca Fixed
+    uuid: 730c7d51-e605-4954-a13b-22a1b1e9c92c
+    type_id: 12
+  - id: &ma_berrechid_casablanca_had_soualem_sidi_rahal_fixed 6665
+    name: MA Berrechid Casablanca Had Soualem Sidi Rahal Fixed
+    uuid: fb6ebce7-dcc1-40ff-86e0-66d771204a64
+    type_id: 12
+  - id: &ma_benslimane_casablanca_fixed 6666
+    name: MA Benslimane Casablanca Fixed
+    uuid: fdb8387d-f98c-4d17-a552-f49750a06e76
+    type_id: 12
+  - id: &ma_benslimane_mohammedia_fixed 6667
+    name: MA Benslimane Mohammedia Fixed
+    uuid: 51aec1bf-79a4-4292-88e2-9ec534772ca2
+    type_id: 12
+  - id: &ma_azemmour_beni_yakhlef_benslimane_bir_jdid_el_jadida_el_oualidia_had_oulad_frej_jorf_lasfar_khemis_zemamra_larbaa_aounate_fixed 6668
+    name: MA Azemmour Beni Yakhlef Benslimane Bir Jdid El Jadida El Oualidia Had Oulad
+      Frej Jorf Lasfar Khemis Zemamra Larbaa Aounate Fixed
+    uuid: 4fe1f23d-ff28-4ba9-a672-2656d5a1031c
+    type_id: 12
+  - id: &ma_afourer_ait_aatab_azilal_ben_ahmed_beni_mellal_bzou_dar_oulad_zidouh_el_ksiba_fkih_ben_salah_had_bradia_kasba_tadla_fixed 6669
+    name: MA Afourer Ait Aatab Azilal Ben Ahmed Beni Mellal Bzou Dar Oulad Zidouh
+      El Ksiba Fkih Ben Salah Had Bradia Kasba Tadla Fixed
+    uuid: 44eeeee7-7e57-4023-b956-22a0517e10b1
+    type_id: 12
+  - id: &ma_aghbala_azilal_bejaad_beni_mellal_boujniba_boulanoire_demnate_el_ksiba_fkih_ben_salah_hattane_khouribga_lagfaf_fixed 6670
+    name: MA Aghbala Azilal Bejaad Beni Mellal Boujniba Boulanoire Demnate El Ksiba
+      Fkih Ben Salah Hattane Khouribga Lagfaf Fixed
+    uuid: 73eb2e81-63c7-416c-a541-41a70e2d2dea
+    type_id: 12
+  - id: &ma_ben_ahmed_oulad_abbou_ras_ain_settat_sidi_hajjaj_fixed 6671
+    name: MA Ben Ahmed Oulad Abbou Ras Ain Settat Sidi Hajjaj Fixed
+    uuid: 026a9c61-a7fe-4a45-8d1f-e4560b9c58d6
+    type_id: 12
+  - id: &ma_el_jadida_fixed 6672
+    name: MA El Jadida Fixed
+    uuid: 837e80b6-32b0-462e-85ae-c87725289a8c
+    type_id: 12
+  - id: &ma_attaouia_el_brouj_freita_kelaa_marrakech_settat_sidi_rahal_tamellalt_fixed 6673
+    name: MA Attaouia El Brouj Freita Kelaa Marrakech Settat Sidi Rahal Tamellalt
+      Fixed
+    uuid: 674d634a-422e-43dc-93ae-3108fb97e496
+    type_id: 12
+  - id: &ma_benguerir_marrakech_oukeimdene_sidi_bouathmane_skhour_rhamna_fixed 6674
+    name: MA Benguerir Marrakech Oukeimdene Sidi Bouathmane Skhour Rhamna Fixed
+    uuid: af02b0c3-c61d-48ef-b917-07c4d0805cd4
+    type_id: 12
+  - id: &ma_ait_ourir_amezmiz_chemaia_el_kelaa_marrakech_ourika_tahanaout_tamesloht_fixed 6675
+    name: MA Ait Ourir Amezmiz Chemaia El Kelaa Marrakech Ourika Tahanaout Tamesloht
+      Fixed
+    uuid: dd2b1fba-b168-492b-8c29-c15215cbbe25
+    type_id: 12
+  - id: &ma_safi_fixed 6676
+    name: MA Safi Fixed
+    uuid: 1f0e563c-a75e-44db-82bc-2f1bae2ca13a
+    type_id: 12
+  - id: &ma_essaouira_ghazoua_hanchan_talmest_tamanar_fixed 6677
+    name: MA Essaouira Ghazoua Hanchan Talmest Tamanar Fixed
+    uuid: e189278c-68e8-43d3-89c6-20f12c87df89
+    type_id: 12
+  - id: &ma_agdez_boumalen_khmis_dades_klaa_mhamid_ouarzazate_oudgha_skoura_tabounte_taghazoute_tagounite_tamzmoute_tazarine_fixed 6678
+    name: MA Agdez Boumalen Khmis Dades Klaa Mhamid Ouarzazate Oudgha Skoura Tabounte
+      Taghazoute Tagounite Tamzmoute Tazarine Fixed
+    uuid: 9f705cc8-27fd-4b4b-9919-9d87d4276938
+    type_id: 12
+  - id: &ma_agadir_dakhla_essaouira_laayoune_marrakech_ouarzazate_safi_fixed 6679
+    name: MA Agadir Dakhla Essaouira Laayoune Marrakech Ouarzazate Safi Fixed
+    uuid: 7c617a6b-cdb7-4a10-beef-505c6e54e348
+    type_id: 12
+  - id: &ma_north_fixed 7573
+    name: MA North Fixed
+    uuid: af776caa-069d-45ae-b7e1-8d046ba2b8ab
+    type_id: 12
+  - id: &ma_kenitra_rabat_fixed 7585
+    name: MA Kenitra Rabat Fixed
+    uuid: 05b9ddfe-d5e0-4452-99f7-b618298fc8c4
+    type_id: 12
+  - id: &ma_al_hoceima_chefchaouen_larache_tanger_tetouan_fixed 7586
+    name: MA Al Hoceima Chefchaouen Larache Tanger Tetouan Fixed
+    uuid: 1474a9d0-3292-4553-a90a-2854913023c2
+    type_id: 12
+  - id: &ma_errachidia_fes_meknes_nador_oujda_taza_fixed 7588
+    name: MA Errachidia Fes Meknes Nador Oujda Taza Fixed
+    uuid: e1bb02c4-891f-433f-b937-065c24dbe1e7
+    type_id: 12
+  - id: &ma_ifrane_fixed 7591
+    name: MA Ifrane Fixed
+    uuid: 516fc735-73ed-498d-ae1a-d7f2a90884b7
+    type_id: 12
+  - id: &ma_ajdir_aknoul_azrou_guercif_guigou_had_oulad_zbair_oued_amlil_taza_tizi_ousli_zerarda_fixed 7592
+    name: MA Ajdir Aknoul Azrou Guercif Guigou Had Oulad Zbair Oued Amlil Taza Tizi
+      Ousli Zerarda Fixed
+    uuid: fd553f25-cf4e-4007-a1c2-a0af2d7598e2
+    type_id: 12
+  - id: &ma_aghbalou_aguelmous_ait_ishak_el_kbab_errachidia_haj_kaddour_kerrouchen_khenifra_meknes_midelt_mrirt_my_bouazza_rich_fixed 7593
+    name: MA Aghbalou Aguelmous Ait Ishak El Kbab Errachidia Haj Kaddour Kerrouchen
+      Khenifra Meknes Midelt Mrirt My Bouazza Rich Fixed
+    uuid: c77f6381-14c3-4861-b9aa-ee5e150ad170
+    type_id: 12
+  - id: &ma_agourai_beni_mhamed_boufekrane_meknes_mhaya_taoujdate_fixed 7594
+    name: MA Agourai Beni Mhamed Boufekrane Meknes Mhaya Taoujdate Fixed
+    uuid: 9c8b9c62-7e75-48e6-8b8d-278fa076ccd7
+    type_id: 12
+  - id: &ma_aghbalou_ainleuh_azrou_benimhamed_boudarbala_boulmane_boumia_dkhrissa_erfoud_errachidia_hajeb_ifrane_fixed 7595
+    name: MA Aghbalou Ainleuh Azrou Benimhamed Boudarbala Boulmane Boumia Dkhrissa
+      Erfoud Errachidia Hajeb Ifrane Fixed
+    uuid: 5aeab1ef-63da-44b8-be5f-b8b397d6525c
+    type_id: 12
+  - id: &ma_ainchegag_azrou_bhalil_fes_guercif_imouzzer_karia_ribat_khair_matmata_menzel_missour_my_yaacoub_oulad_tayeb_rhafssai_fixed 7596
+    name: MA Ainchegag Azrou Bhalil Fes Guercif Imouzzer Karia Ribat Khair Matmata
+      Menzel Missour My Yaacoub Oulad Tayeb Rhafssai Fixed
+    uuid: a905682d-ed50-4ed3-abf6-918e715722af
+    type_id: 12
+  - id: &ma_ain_aicha_alnif_aoufouss_bni_tajjt_bouanane_boudnib_fes_goulmima_jorf_ouartzagh_oujda_rissani_talsinet_thar_souk_fixed 7597
+    name: MA Ain Aicha Alnif Aoufouss Bni Tajjt Bouanane Boudnib Fes Goulmima Jorf
+      Ouartzagh Oujda Rissani Talsinet Thar Souk Fixed
+    uuid: 535f7935-2449-4015-8b36-2181b3c6ffcf
+    type_id: 12
+  - id: &ma_alnif_azrou_goulmima_gourrama_ifrane_mellaab_sidi_addi_tinejdad_fixed 7598
+    name: MA Alnif Azrou Goulmima Gourrama Ifrane Mellaab Sidi Addi Tinejdad Fixed
+    uuid: 1980dd0e-fdd6-4bcb-9089-5a35c327c8a2
+    type_id: 12
+  - id: &ma_azzaba_bir_tamtam_bni_oulid_fes_ras_el_ma_sefrou_fixed 7600
+    name: MA Azzaba Bir Tamtam Bni Oulid Fes Ras El Ma Sefrou Fixed
+    uuid: 51414a9f-f774-44f9-a880-ffd53567e1dd
+    type_id: 12
+  - id: &ma_saidia_fixed 7601
+    name: MA Saidia Fixed
+    uuid: 819043d1-a2bf-4bc6-aae1-0c631789b1d6
+    type_id: 12
+  - id: &ma_berkane_chouihia_latamna_sidi_slimane_fixed 7602
+    name: MA Berkane Chouihia Latamna Sidi Slimane Fixed
+    uuid: f77bb242-ba85-4e6d-a50d-cbb55bccb6f3
+    type_id: 12
+  - id: &ma_arouit_bni_chiker_bni_nsar_driouch_ferkhana_iddyrene_igetti_kariat_midar_nador_selouane_tazaghine_tlat_lota_zegangane_fixed 7604
+    name: MA Arouit Bni Chiker Bni Nsar Driouch Ferkhana Iddyrene Igetti Kariat Midar
+      Nador Selouane Tazaghine Tlat Lota Zegangane Fixed
+    uuid: 2761c912-1ed5-4c29-bba4-178fbab6b0c5
+    type_id: 12
+  - id: &ma_bentayb_boudinar_cassita_crona_dar_kebdani_tafersit_tala_azlaf_tiztoutine_fixed 7605
+    name: MA Bentayb Boudinar Cassita Crona Dar Kebdani Tafersit Tala Azlaf Tiztoutine
+      Fixed
+    uuid: 5338a92e-a344-4b6d-8263-b3968b580423
+    type_id: 12
+  - id: &ma_hassi_blal_lmsalla_oued_nachef_fixed 7606
+    name: MA Hassi Blal Lmsalla Oued Nachef Fixed
+    uuid: e534a827-5630-4912-bb05-5b4de44c57f9
+    type_id: 12
+  - id: &ma_ahfir_ain_bni_mathar_ain_reggada_aklim_berkane_bni_drar_bni_nsar_debdou_el_aouine_labsara_madagh_nador_oujda_fixed 7607
+    name: MA Ahfir Ain Bni Mathar Ain Reggada Aklim Berkane Bni Drar Bni Nsar Debdou
+      El Aouine Labsara Madagh Nador Oujda Fixed
+    uuid: 98850483-02f1-4e03-ab07-84e5097f4616
+    type_id: 12
+  - id: &ma_bouarfa_oujda_taourirt_fixed 7608
+    name: MA Bouarfa Oujda Taourirt Fixed
+    uuid: 28b7ed72-3041-4ba3-9444-301d96b02a92
+    type_id: 12
+  - id: &ma_figuig_jerada_fixed 7609
+    name: MA Figuig Jerada Fixed
+    uuid: 72b8d27c-12a7-4964-aace-94f188acea7b
+    type_id: 12
+  - id: &ma_rabat_tamesna_fixed 7610
+    name: MA Rabat Tamesna Fixed
+    uuid: 8b408e16-0af7-47da-92bc-632054d226ab
+    type_id: 12
+  - id: &ma_rabat_fixed 7611
+    name: MA Rabat Fixed
+    uuid: 825a8969-fc18-4a58-9279-80346a0b418d
+    type_id: 12
+  - id: &ma_dar_balamri_dar_el_gueddari_kenitra_mehdia_sidi_allal_tazi_sidi_taybi_sidi_yahia_fixed 7612
+    name: MA Dar Balamri Dar El Gueddari Kenitra Mehdia Sidi Allal Tazi Sidi Taybi
+      Sidi Yahia Fixed
+    uuid: 6322cc10-f665-4290-bda7-de77ff12ff03
+    type_id: 12
+  - id: &ma_arbaoua_bouznika_lalla_mimouna_mbelksiri_my_bouslham_ouazane_sanaoubar_souk_larbaa_tamesna_temara_fixed 7613
+    name: MA Arbaoua Bouznika Lalla Mimouna Mbelksiri My Bouslham Ouazane Sanaoubar
+      Souk Larbaa Tamesna Temara Fixed
+    uuid: a8bc013c-bfdd-4c18-95ae-d49a53aeddb1
+    type_id: 12
+  - id: &ma_ain_aouda_bahraoui_brachoua_khemisset_maaziz_oulmes_rabat_rommani_sala_el_jadida_sidi_kacem_sidi_slimane_skhirate_fixed 7614
+    name: MA Ain Aouda Bahraoui Brachoua Khemisset Maaziz Oulmes Rabat Rommani Sala
+      El Jadida Sidi Kacem Sidi Slimane Skhirate Fixed
+    uuid: 16a31012-d40e-46b3-84c9-4c091593c756
+    type_id: 12
+  - id: &ma_bouznika_rabat_sidi_yahya_zeir_skhirate_tamesna_temara_fixed 7615
+    name: MA Bouznika Rabat Sidi Yahya Zeir Skhirate Tamesna Temara Fixed
+    uuid: 8d03fcb1-d3d1-437b-9d3d-9cceae37a257
+    type_id: 12
+  - id: &ma_ain_aouda_bouznika_rabat_sale_skhirate_temara_fixed 7616
+    name: MA Ain Aouda Bouznika Rabat Sale Skhirate Temara Fixed
+    uuid: 1024a523-7511-4dc4-91ac-5ff5ceceac37
+    type_id: 12
+  - id: &ma_bouknadel_had_kourt_sala_el_jadida_sale_fixed 7617
+    name: MA Bouknadel Had Kourt Sala El Jadida Sale Fixed
+    uuid: 06566f7a-7d50-4ad8-ae5b-7411721e759e
+    type_id: 12
+  - id: &ma_belksiri_dlalha_jorf_el_melha_khenichet_ouazane_souk_larbaa_fixed 7618
+    name: MA Belksiri Dlalha Jorf El Melha Khenichet Ouazane Souk Larbaa Fixed
+    uuid: 72f1f82b-cd2e-4fb5-beaa-ece0d06ba716
+    type_id: 12
+  - id: &ma_tanger_fixed 7620
+    name: MA Tanger Fixed
+    uuid: 4345b8b6-f5f9-4da1-a926-fda85cf15ef4
+    type_id: 12
+  - id: &ma_fes_meknes_fixed 7621
+    name: MA Fes Meknes Fixed
+    uuid: 9c2f7650-1aa7-4631-ad0d-eceaee6deb71
+    type_id: 12
+  - id: &ma_larache_fixed 7622
+    name: MA Larache Fixed
+    uuid: 055e1a7e-5301-4adb-9d1d-acc3a051c9b6
+    type_id: 12
+  - id: &ma_tetouan_fixed 7623
+    name: MA Tetouan Fixed
+    uuid: 449c053b-b66b-4987-9969-f2a46bdfe240
+    type_id: 12
+  - id: &ma_al_hoceima_tetouan_fixed 7624
+    name: MA Al Hoceima Tetouan Fixed
+    uuid: 7f614086-f5fa-423f-92a0-144fa073b506
+    type_id: 12
+  - id: &ma_al_hoceima_larache_fixed 7625
+    name: MA Al Hoceima Larache Fixed
+    uuid: 22c9d198-0886-4f04-bd19-6b05f6c83f6c
     type_id: 12
 # Satellite Networks
-  - id: &ma_nortis_satellite 4292
+  - id: &ma_nortis_satellite 8821
     name: MA Nortis Satellite
-    uuid: 8215d8b3-e72f-430b-a14f-23abb9a206ab
+    uuid: 074f9377-6ff4-47e3-8c4b-8b2c64e16af0
     type_id: 16
-  - id: &ma_spacecom_satellite 4293
+  - id: &ma_spacecom_satellite 8822
     name: MA Spacecom Satellite
-    uuid: 3a51c2f0-2f5d-4174-8c3c-b6eab7a953df
+    uuid: 419a1f3a-18e8-42c8-a64e-a3c98fbcbf3a
     type_id: 16
-  - id: &ma_gulfsat_satellite 4294
+  - id: &ma_gulfsat_satellite 8823
     name: MA Gulfsat Satellite
-    uuid: 06af3da2-b960-4174-bfae-e5c440802ebb
+    uuid: 2495bb26-888a-4aa8-a530-ce0add34c5db
     type_id: 16
-  - id: &ma_iam_satellite 4295
+  - id: &ma_iam_satellite 8824
     name: MA Iam Satellite
-    uuid: 990e2af5-f385-4ab6-857d-c8c168f35560
+    uuid: 057e5068-2799-4f62-b1b4-c3c3c3b35bfe
     type_id: 16
-  - id: &ma_globalstar_satellite 7796
+  - id: &ma_globalstar_satellite 41991
     name: MA Globalstar Satellite
-    uuid: fc1fa6c6-0922-4127-8107-954c345a607f
+    uuid: 8590e503-11f3-49ce-b99f-28756bce6ad3
     type_id: 16
 # Mobile Networks
-  - id: &ma_inwi_mobile 4358
+  - id: &ma_inwi_mobile 10533
     name: MA Inwi Mobile
-    uuid: 912af4e4-1dd9-4e34-8bea-8c73255bde1f
+    uuid: cc3ad91e-56d3-4d3c-afea-7b32bd05c8e7
     type_id: 3
-  - id: &ma_iam_mobile 4400
+  - id: &ma_iam_mobile 11088
     name: MA Iam Mobile
-    uuid: db67fa6f-d916-4850-9223-c4c9024141f0
+    uuid: 7f275b1c-fe25-4a80-92e9-3846711154ce
     type_id: 3
-  - id: &ma_orange_mobile 4403
+  - id: &ma_orange_mobile 11092
     name: MA Orange Mobile
-    uuid: 4e8b5e5d-d7f6-4eab-bb36-088a35c8717c
+    uuid: 3277af3c-5904-4673-9cef-42f6c509ed7f
     type_id: 3
-  - id: &ma_mobile 4599
+  - id: &ma_mobile 14369
     name: MA Mobile
-    uuid: 2bb9129b-8b75-4488-8a76-bb90d4a62553
+    uuid: 9631572f-e65c-43d9-a648-aac033fb8063
     type_id: 3
 # Supplementary services Networks
-  - id: &ma_freephone_and_shared_cost_services 4941
+  - id: &ma_freephone_and_shared_cost_services 19841
     name: MA Freephone And Shared Cost Services
-    uuid: 03ac9adf-63be-4ad6-a4da-8665ded84286
+    uuid: ad7ddb41-59f7-4aad-bfa7-f98984762124
     type_id: 14
-  - id: &ma_freephone_services 4949
+  - id: &ma_freephone_services 19852
     name: MA Freephone Services
-    uuid: c93f13fb-f906-47ba-9ebe-c303fcb9db38
+    uuid: 28dff2b7-fb5e-4613-b2c1-e413a665208c
     type_id: 14
-  - id: &ma_special_services 5269
+  - id: &ma_special_services 21445
     name: MA Special Services
-    uuid: 1c834495-8bf3-4c0d-832f-b19deec9d5a7
+    uuid: 38b18dd0-d700-4c7d-9307-1570449030ec
     type_id: 14
-  - id: &ma_shared_cost_services 7526
+  - id: &ma_shared_cost_services 38474
     name: MA Shared Cost Services
-    uuid: c85903fb-d32f-4567-809d-0eb1d4f0b19d
+    uuid: 63bcec4b-2a88-47ca-9868-81f3fcde1062
     type_id: 14
-  - id: &ma_direct_number_services_calling_party_pays 7530
+  - id: &ma_direct_number_services_calling_party_pays 38479
     name: MA Direct Number Services Calling Party Pays
-    uuid: e555934a-308c-4d60-b95a-1befff459bbb
+    uuid: d6c7dc5d-55ac-4b0c-ae56-050e44c725e1
     type_id: 14
-  - id: &ma_voip 7532
+  - id: &ma_voip 38481
     name: MA Voip
-    uuid: 762d4d7e-35dd-4f6b-8aaa-752a8d0f1bdf
+    uuid: 07b3cb6e-d26f-4aa6-b0a8-a0dae89c905d
     type_id: 14
-  - id: &ma_volp 7535
+  - id: &ma_volp 38484
     name: MA Volp
-    uuid: 4f262f8f-9fbd-4f06-bcd7-b51b396a6310
+    uuid: e35188a8-cc29-4fe3-b44e-fad365a4f3aa
     type_id: 14
-  - id: &ma_shared_revenue_services 7792
+  - id: &ma_shared_revenue_services 41983
     name: MA Shared Revenue Services
-    uuid: adcd813f-8aba-4cbe-a959-e41154f5ff11
+    uuid: 0b88410b-45cc-4a01-abcc-be89bb6968ff
     type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -82,728 +382,728 @@ network_prefixes:
     prefix: '212527'
     number_min_length: 12
     number_max_length: 12
-    uuid: c9426e2a-ac50-4ed3-9c96-eeabefcfd06f
+    uuid: 80b15a42-5ad4-44ed-9a86-3454d8c427f9
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 65682
     prefix: '2125280'
     number_min_length: 12
     number_max_length: 12
-    uuid: dbb4fbfc-2787-401f-a90b-7695b9f8b5a4
+    uuid: f8a6bbf8-e2f2-464f-962f-239161436eb2
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_agadir_oulad_teima_taroudante_fixed
   - id: 65683
     prefix: '2125282'
     number_min_length: 12
     number_max_length: 12
-    uuid: 239056a3-1e78-44bd-acef-e65a18161883
+    uuid: 7b09405b-5163-4678-8c65-34a17dc47b11
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_agadir_ait_baha_ait_meloul_anza_aourir_belfaa_bensergao_drarga_massa_taghazout_tamri_tikiouine_fixed
   - id: 65684
     prefix: '2125283'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd5597da-0d83-4079-9dfc-8ef9a85b1f72
+    uuid: ffe63099-4aa5-420e-a74a-326d51f542a6
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_agadir_bensergao_drarga_fixed
   - id: 65685
     prefix: '2125285'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7b985f07-9b8f-4e54-a095-f727f494239b
+    uuid: 4095b6cd-0eb2-4c4e-b88a-ead6f8a88cba
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_oulad_teima_sebt_guerdane_taroudant_fixed
   - id: 65686
     prefix: '2125286'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7b8cb0f2-ae00-433c-aed3-e141082577be
+    uuid: ae63b940-6b4d-4681-8e1d-bdee24d697a2
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_tighmi_tiznit_tlat_lakhsas_fixed
   - id: 65687
     prefix: '2125287'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6265990f-a0ea-4b39-84b9-d410ada4213f
+    uuid: 7ae709c9-35e1-4c89-ba01-17dad8113616
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_assa_tantan_tata_fixed
   - id: 65688
     prefix: '2125288'
     number_min_length: 12
     number_max_length: 12
-    uuid: 63089cbb-23a0-48d7-8a6a-20e1e11cf95a
+    uuid: ad1dc9b5-d18a-454a-b7d6-ab8a5e4e0090
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_agadir_ait_amira_akka_biougra_guelmim_ighram_sidi_bibi_tafraoute_tantan_taroudant_tata_tiznit_fixed
   - id: 65689
     prefix: '2125289'
     number_min_length: 12
     number_max_length: 12
-    uuid: 98fc2683-f628-498b-a1d5-be2a129ace55
+    uuid: b5af52b0-1355-47a2-8b4a-280b3fe038f8
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_dakhla_laayoune_fixed
   - id: 65690
     prefix: '2125290'
     number_min_length: 12
     number_max_length: 12
-    uuid: be826c5c-c363-4bfb-98b9-484f8c0b5095
+    uuid: 0fcdd91c-6249-4eec-a326-9d3f192dab2d
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_casablanca_fixed
   - id: 65691
     prefix: '2125291'
     number_min_length: 12
     number_max_length: 12
-    uuid: cac4eb3d-5ee4-460f-89d6-152e8550c115
+    uuid: 1c08c2ca-1872-4ff8-9420-bca1445b17f8
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_casablanca_fixed
   - id: 65692
     prefix: '2125292'
     number_min_length: 12
     number_max_length: 12
-    uuid: 30cc48f0-8856-4127-a6d0-f097483fe593
+    uuid: 1178976e-4edd-4772-9009-54e5c6be7a93
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_casablanca_fixed
   - id: 65693
     prefix: '2125293'
     number_min_length: 12
     number_max_length: 12
-    uuid: 619c9d3a-de62-4092-991c-3c3e91e1e6e5
+    uuid: 7425446d-50d2-4c80-b6fe-d9b7434989b1
     country_id: *ma
     network_id: *ma_fixed
   - id: 65694
     prefix: '2125294'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3b53ec68-eab8-4952-8f86-53002b23c56d
+    uuid: b510c33c-fe8a-4ee0-95a7-245128f5a5fa
     country_id: *ma
     network_id: *ma_fixed
   - id: 65695
     prefix: '2125295'
     number_min_length: 12
     number_max_length: 12
-    uuid: 744a8475-76d5-45bf-9ace-9fa3676f09c6
+    uuid: 967af9c6-c47a-4143-bcac-f74d45f7ae3a
     country_id: *ma
     network_id: *ma_fixed
   - id: 65696
     prefix: '2125296'
     number_min_length: 12
     number_max_length: 12
-    uuid: 61f318ec-8c6e-45b8-9ad8-1b03213e8ade
+    uuid: e86e2244-ca47-4afc-8c31-bb8af182bef2
     country_id: *ma
     network_id: *ma_fixed
   - id: 65697
     prefix: '2125297'
     number_min_length: 12
     number_max_length: 12
-    uuid: eaa262ed-1253-41f6-bd30-0ddf62d28e8b
+    uuid: 1b4d506a-44d4-41b3-bf7f-3bfc4ebd7429
     country_id: *ma
     network_id: *ma_fixed
   - id: 65698
     prefix: '2125298'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2912804c-e4f3-4ce2-aeef-8f3cc10a962b
+    uuid: 6b9e1381-aa7a-48d9-a6d0-ec35036d1cdf
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_marrakech_fixed
   - id: 65699
     prefix: '2125299'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5252bc8a-1885-4134-baab-659466a3a90f
+    uuid: 4345cd26-41b1-4d74-9147-d91407535682
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_agadir_fixed
   - id: 71660
     prefix: '21252'
     number_min_length: 12
     number_max_length: 12
-    uuid: 306ca759-4950-442e-aa44-82e669eb0af8
+    uuid: 2424b208-928b-49b4-abe3-3923505b9475
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_south_fixed
   - id: 71671
     prefix: '212520'
     number_min_length: 12
     number_max_length: 12
-    uuid: d260d0d8-2a71-4e22-9de0-8a7651486be4
+    uuid: 300d649f-64a7-4f81-b8f0-83f13efecca0
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_casablanca_fixed
   - id: 71673
     prefix: '212521'
     number_min_length: 12
     number_max_length: 12
-    uuid: 46d0c168-5791-486c-a864-a587a9ebabfd
+    uuid: 8d570ab1-445b-4305-bd08-0f476b68b36a
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_beni_mellal_berrechid_casablanca_el_jadida_khouribga_mohammedia_settat_fixed
   - id: 71677
     prefix: '2125220'
     number_min_length: 12
     number_max_length: 12
-    uuid: d82b2e25-bba6-4126-8216-5a071cc848ad
+    uuid: 220b8498-2f73-46a0-88b3-d5e40dc3f685
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_berrechid_casablanca_deroua_had_soualem_fixed
   - id: 71678
     prefix: '2125221'
     number_min_length: 12
     number_max_length: 12
-    uuid: 00a4b852-9fc4-4d6a-9a02-a63dc58b6f08
+    uuid: 3381ff4d-8f59-4447-b26f-716b36288c80
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ain_harrouda_bouskoura_casablanca_fixed
   - id: 71679
     prefix: '2125222'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7d92989-df1a-4ae2-a76e-e4e350c3d78c
+    uuid: cef5fba0-2b97-4072-afb6-554607eaeb0e
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_casablanca_fixed
   - id: 71687
     prefix: '2125223'
     number_min_length: 12
     number_max_length: 12
-    uuid: f218305f-0584-4896-a8ff-8497ecc4d3d7
+    uuid: 1d68a2c7-13f8-439a-b898-c77e440e9b9e
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_berrechid_casablanca_fixed
   - id: 71688
     prefix: '2125224'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4d1cbf8f-474f-414c-9a14-d9c5fd77d493
+    uuid: 0f837674-bf3d-4033-a771-5bcc9164ef51
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_casablanca_fixed
   - id: 71689
     prefix: '2125225'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8ce117c6-43d1-43a3-a2b1-20b722ee6561
+    uuid: fe019e8d-f40c-482a-b816-6a825f10be07
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_berrechid_casablanca_deroua_fixed
   - id: 71690
     prefix: '2125226'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8c782157-e9cf-4948-ba7b-788aa25a548f
+    uuid: ba044a81-2478-47b3-899f-dcc948582fca
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_casablanca_fixed
   - id: 71691
     prefix: '2125227'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8816b622-fa43-456b-b07a-407a9d961448
+    uuid: b5590296-f283-4274-8392-c9382a50b5fb
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_casablanca_fixed
   - id: 71695
     prefix: '2125228'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5b2b5afb-b12e-4650-a079-981216ae5a02
+    uuid: 21c77b46-da7d-40fb-8496-8096b1b33658
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_bouskoura_casablanca_fixed
   - id: 71696
     prefix: '2125229'
     number_min_length: 12
     number_max_length: 12
-    uuid: a0c62d1f-b8f8-4382-8cfb-09313f3edb5c
+    uuid: b83aae89-5cc6-47c3-997e-24220e2da1bc
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_berrechid_casablanca_had_soualem_sidi_rahal_fixed
   - id: 71698
     prefix: '2125231'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7ed14e40-e449-4670-93b5-2feb31063ee4
+    uuid: 0dbee1cb-a4db-4a41-b5f1-50edaf645973
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_benslimane_casablanca_fixed
   - id: 71699
     prefix: '2125232'
     number_min_length: 12
     number_max_length: 12
-    uuid: ef04cd22-804b-4226-90ed-fe304b31aab6
+    uuid: b6bcacc9-95f1-467e-8007-d733bca860cd
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_benslimane_mohammedia_fixed
   - id: 71700
     prefix: '2125233'
     number_min_length: 12
     number_max_length: 12
-    uuid: b6287d2c-4925-4278-a694-13d101322911
+    uuid: 5b716494-a07a-4ab3-ab21-8b9c95a998cb
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_azemmour_beni_yakhlef_benslimane_bir_jdid_el_jadida_el_oualidia_had_oulad_frej_jorf_lasfar_khemis_zemamra_larbaa_aounate_fixed
   - id: 71701
     prefix: '2125234'
     number_min_length: 12
     number_max_length: 12
-    uuid: fa5f1db0-59e3-4749-a7b5-9340b157a271
+    uuid: 384ae204-6811-4ead-9be3-a6d78c323605
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_afourer_ait_aatab_azilal_ben_ahmed_beni_mellal_bzou_dar_oulad_zidouh_el_ksiba_fkih_ben_salah_had_bradia_kasba_tadla_fixed
   - id: 71702
     prefix: '2125235'
     number_min_length: 12
     number_max_length: 12
-    uuid: a39bec5d-50fe-47d7-9ede-2406c425bec2
+    uuid: f3a5e165-304b-440e-be24-928a26449776
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_aghbala_azilal_bejaad_beni_mellal_boujniba_boulanoire_demnate_el_ksiba_fkih_ben_salah_hattane_khouribga_lagfaf_fixed
   - id: 71703
     prefix: '2125237'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1e742d14-8f6d-4f7c-8df4-37f98434c3f8
+    uuid: b8d805e7-ad5c-4e0f-8961-207c6d5b4e4c
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ben_ahmed_oulad_abbou_ras_ain_settat_sidi_hajjaj_fixed
   - id: 71704
     prefix: '2125238'
     number_min_length: 12
     number_max_length: 12
-    uuid: c612fa79-2a56-486b-a96a-24bd2585640d
+    uuid: 095fcc5d-1aef-446e-9920-7e4a2131d780
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_el_jadida_fixed
   - id: 71705
     prefix: '2125240'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9af6e709-c50c-4dbc-a4ac-27e35f550288
+    uuid: 84954218-eaf3-497f-a434-643c4bae3f28
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_marrakech_fixed
   - id: 71706
     prefix: '2125242'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3823625a-df65-4e82-88ac-9a76ec2f3f0f
+    uuid: 54b4da4a-f7b9-4cac-b21f-c333ebee1cc5
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_attaouia_el_brouj_freita_kelaa_marrakech_settat_sidi_rahal_tamellalt_fixed
   - id: 71707
     prefix: '2125243'
     number_min_length: 12
     number_max_length: 12
-    uuid: 83a29a32-13d9-43c3-80bc-4be61fa0178e
+    uuid: 200b84ef-6b5b-4028-9991-ed8fddfa15a8
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_benguerir_marrakech_oukeimdene_sidi_bouathmane_skhour_rhamna_fixed
   - id: 71708
     prefix: '2125244'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9807e2b4-126e-4591-b745-61ac60ffb63e
+    uuid: 1fe1c6fe-badc-4416-a799-46570318aab0
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ait_ourir_amezmiz_chemaia_el_kelaa_marrakech_ourika_tahanaout_tamesloht_fixed
   - id: 71709
     prefix: '2125246'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6dc878b0-30b5-4c6e-afbe-77321cc2bbeb
+    uuid: 57d41dd6-e73b-402c-9a2a-6b9744d5556a
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_safi_fixed
   - id: 71710
     prefix: '2125247'
     number_min_length: 12
     number_max_length: 12
-    uuid: 597e8258-5ae0-465d-a248-e78e0cf1ae29
+    uuid: 2d851d35-0d35-4e4d-bf15-16a2723083f9
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_essaouira_ghazoua_hanchan_talmest_tamanar_fixed
   - id: 71713
     prefix: '2125248'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6a2f5ecd-7845-4bd6-ab3f-e6b51717371e
+    uuid: 4381b532-93dd-4c1a-9a01-2305e771e276
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_agdez_boumalen_khmis_dades_klaa_mhamid_ouarzazate_oudgha_skoura_tabounte_taghazoute_tagounite_tamzmoute_tazarine_fixed
   - id: 71714
     prefix: '212525'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4bdfc478-dd36-43d6-b95e-725f73055474
+    uuid: dd11d403-3597-439a-bef5-349a6d96c695
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_agadir_dakhla_essaouira_laayoune_marrakech_ouarzazate_safi_fixed
   - id: 71716
     prefix: '212526'
     number_min_length: 12
     number_max_length: 12
-    uuid: f99f3c90-3ed0-443c-b012-ebf7ffe1f366
+    uuid: ddc1f894-6f07-40e7-a2ef-3986262f5e1a
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 73216
     prefix: '212540'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3d1c73f0-a518-4b8d-828a-9d9da519264a
+    uuid: fa3f2515-8ecd-4f04-bfc0-34be4f51ec9a
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 73229
     prefix: '212546'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9f496fa2-9985-4e4b-9837-e033790ead62
+    uuid: 3d3357b9-7169-4c30-8c86-e981921d901b
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 73230
     prefix: '212547'
     number_min_length: 12
     number_max_length: 12
-    uuid: 744dc66c-4d0b-403c-8bec-65f32e48e197
+    uuid: ca812ff8-4d5a-4ee1-b326-6298394930b6
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 75646
     prefix: '212553'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3fef7b0d-d096-4ef0-9f1d-378049b4354f
+    uuid: 569e7ef2-dc45-486f-b984-706e50654c4f
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 76548
     prefix: '21253'
     number_min_length: 12
     number_max_length: 12
-    uuid: 228d14c0-c2c0-4f26-9ce2-6d3cff130c17
+    uuid: ff80a1b2-e89b-400e-b7dd-e2ee2dc71606
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_north_fixed
   - id: 76562
     prefix: '212530'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ab8faed-a995-4e20-8c64-78b3156b59d6
+    uuid: 27a62ac2-1e33-45c8-95a5-c5b2da251483
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_kenitra_rabat_fixed
   - id: 76563
     prefix: '212531'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5cb5ed39-42e8-43a2-aed3-1010776c1591
+    uuid: 1c24738c-5111-40c0-8672-1cedda010368
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_al_hoceima_chefchaouen_larache_tanger_tetouan_fixed
   - id: 76565
     prefix: '212532'
     number_min_length: 12
     number_max_length: 12
-    uuid: 53126b0f-0ef0-491c-9a48-e62cc6ac4505
+    uuid: 2f874541-9a5c-492d-aab0-741af70b985e
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_errachidia_fes_meknes_nador_oujda_taza_fixed
   - id: 76566
     prefix: '212533'
     number_min_length: 12
     number_max_length: 12
-    uuid: a8350951-a635-4042-98d6-30169b8b67d9
+    uuid: 2e0b684d-94c6-4f31-9384-241fd80427a2
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 76568
     prefix: '212534'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1e6f4136-67e4-4a40-a1c4-062a7ea0a508
+    uuid: e80c99b9-d1b4-432e-8533-81c4d942913e
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 76570
     prefix: '2125350'
     number_min_length: 12
     number_max_length: 12
-    uuid: 55670950-1e77-45ed-8d17-0e2070e5d9b6
+    uuid: 10e87c1e-a740-4369-a7d8-81f90b079da3
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ifrane_fixed
   - id: 76571
     prefix: '2125352'
     number_min_length: 12
     number_max_length: 12
-    uuid: c81caa71-8143-411e-8dc6-9304a5ea2795
+    uuid: 0240f3f8-b577-4df7-b5d7-bc63ef3e03ea
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ajdir_aknoul_azrou_guercif_guigou_had_oulad_zbair_oued_amlil_taza_tizi_ousli_zerarda_fixed
   - id: 76572
     prefix: '2125353'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9e312c15-dcac-4c0f-b5bb-074c7658b50f
+    uuid: a406ebcb-ef7b-4497-8e1d-912a9163dc7f
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_aghbalou_aguelmous_ait_ishak_el_kbab_errachidia_haj_kaddour_kerrouchen_khenifra_meknes_midelt_mrirt_my_bouazza_rich_fixed
   - id: 76573
     prefix: '2125354'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8f849bc6-c34c-409d-bd13-f2dc8e51bbae
+    uuid: be910cb0-8493-4642-96c2-bff370a2ecdd
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_agourai_beni_mhamed_boufekrane_meknes_mhaya_taoujdate_fixed
   - id: 76574
     prefix: '2125355'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3546fc1b-1dcf-4698-8004-ef07a3486c91
+    uuid: 0e25311a-4ab7-462e-b07f-43f4d243e083
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_aghbalou_ainleuh_azrou_benimhamed_boudarbala_boulmane_boumia_dkhrissa_erfoud_errachidia_hajeb_ifrane_fixed
   - id: 76575
     prefix: '2125356'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7c8659d-f486-4073-8211-dfe51142cb8f
+    uuid: 729fa63c-bf6d-4591-a3d2-8071702f9ffd
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ainchegag_azrou_bhalil_fes_guercif_imouzzer_karia_ribat_khair_matmata_menzel_missour_my_yaacoub_oulad_tayeb_rhafssai_fixed
   - id: 76577
     prefix: '2125357'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8464b317-faf2-40d4-9ccb-f0f7a45240fe
+    uuid: 052acf28-3ad3-43a0-9349-91207e93f012
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ain_aicha_alnif_aoufouss_bni_tajjt_bouanane_boudnib_fes_goulmima_jorf_ouartzagh_oujda_rissani_talsinet_thar_souk_fixed
   - id: 76578
     prefix: '2125358'
     number_min_length: 12
     number_max_length: 12
-    uuid: d1796d9c-994e-4f0f-af87-983c144fc124
+    uuid: 0d8dd9e6-c813-4bb9-b53a-5e85ef5ba7cf
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_alnif_azrou_goulmima_gourrama_ifrane_mellaab_sidi_addi_tinejdad_fixed
   - id: 76580
     prefix: '2125359'
     number_min_length: 12
     number_max_length: 12
-    uuid: af1b92ad-39a4-4ce8-af92-6824730345e5
+    uuid: ada2a9f4-0e67-4d54-97a9-cb52b2ea1318
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_azzaba_bir_tamtam_bni_oulid_fes_ras_el_ma_sefrou_fixed
   - id: 76581
     prefix: '2125360'
     number_min_length: 12
     number_max_length: 12
-    uuid: c695db24-d0bc-45e8-be2c-c8dbc1c39a11
+    uuid: ef9a65e9-d21c-4ea9-905c-4728eb6d2b20
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_saidia_fixed
   - id: 76582
     prefix: '2125362'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3a3fa727-d0fa-471e-9358-d4038e023558
+    uuid: e0053587-82b2-438b-9398-f9e10c97bdff
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_berkane_chouihia_latamna_sidi_slimane_fixed
   - id: 76584
     prefix: '2125363'
     number_min_length: 12
     number_max_length: 12
-    uuid: c552c47e-25aa-4343-82e0-654d564fade0
+    uuid: cd661abf-9a67-4129-b9c0-0d0bd3ff71d3
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_arouit_bni_chiker_bni_nsar_driouch_ferkhana_iddyrene_igetti_kariat_midar_nador_selouane_tazaghine_tlat_lota_zegangane_fixed
   - id: 76585
     prefix: '2125364'
     number_min_length: 12
     number_max_length: 12
-    uuid: afe3fb3c-2158-42d0-9549-96b8442214f3
+    uuid: c0f1878e-197e-426f-833f-5ac3953508fc
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_bentayb_boudinar_cassita_crona_dar_kebdani_tafersit_tala_azlaf_tiztoutine_fixed
   - id: 76586
     prefix: '2125365'
     number_min_length: 12
     number_max_length: 12
-    uuid: bd442b9b-6ca8-437b-9947-dbb9c08a30f1
+    uuid: c017e158-555f-444f-bb90-e04ba021de40
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_hassi_blal_lmsalla_oued_nachef_fixed
   - id: 76587
     prefix: '2125366'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce14264e-fb96-4040-938b-94504e350bc9
+    uuid: 6f29b02f-2609-463d-b050-af54c0694a6d
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ahfir_ain_bni_mathar_ain_reggada_aklim_berkane_bni_drar_bni_nsar_debdou_el_aouine_labsara_madagh_nador_oujda_fixed
   - id: 76588
     prefix: '2125367'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6b0b7edc-5722-4285-94c1-8e1164779911
+    uuid: fc21c8ec-2cb3-40d2-9b47-dcb8ac9da5e4
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_bouarfa_oujda_taourirt_fixed
   - id: 76589
     prefix: '2125368'
     number_min_length: 12
     number_max_length: 12
-    uuid: fe15d70b-f063-4e1d-bd1c-8ed8aec12cac
+    uuid: d47f42e4-5579-41be-ac44-bbdc256ddbe1
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_figuig_jerada_fixed
   - id: 76590
     prefix: '2125370'
     number_min_length: 12
     number_max_length: 12
-    uuid: be46a363-08ac-4080-aff4-0240f4876c35
+    uuid: 697a4ab5-ce42-42ab-a6aa-019e389bf4d9
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_rabat_tamesna_fixed
   - id: 76591
     prefix: '2125371'
     number_min_length: 12
     number_max_length: 12
-    uuid: 95485351-1f7a-4849-adfc-a22610a4705e
+    uuid: 318fbc76-86d8-474a-957b-01d0a5ec8f8f
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_rabat_fixed
   - id: 76592
     prefix: '2125372'
     number_min_length: 12
     number_max_length: 12
-    uuid: ea0a089c-6d02-4f75-853d-c6fa0cc9ea71
+    uuid: 86e26b80-e673-42be-ac14-7a3be81b9825
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_rabat_fixed
   - id: 76593
     prefix: '2125373'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd2267b9-7cae-47ce-96c6-630d3b9e1d73
+    uuid: 4ca189e6-dbc6-4aa1-8902-786efa8c8705
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_dar_balamri_dar_el_gueddari_kenitra_mehdia_sidi_allal_tazi_sidi_taybi_sidi_yahia_fixed
   - id: 76594
     prefix: '2125374'
     number_min_length: 12
     number_max_length: 12
-    uuid: c5e6aebe-6ed4-4e67-8652-b1aaf520f078
+    uuid: 746695a3-9a87-4c60-bf81-5493ca50f053
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_arbaoua_bouznika_lalla_mimouna_mbelksiri_my_bouslham_ouazane_sanaoubar_souk_larbaa_tamesna_temara_fixed
   - id: 76595
     prefix: '2125375'
     number_min_length: 12
     number_max_length: 12
-    uuid: fb2d9760-6a3b-4e4c-a438-fe86f67b7383
+    uuid: 92453999-e133-4baf-918f-25eb7d10e5b9
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ain_aouda_bahraoui_brachoua_khemisset_maaziz_oulmes_rabat_rommani_sala_el_jadida_sidi_kacem_sidi_slimane_skhirate_fixed
   - id: 76596
     prefix: '2125376'
     number_min_length: 12
     number_max_length: 12
-    uuid: c1d2a458-5dbd-45bd-877e-febebd1ac63b
+    uuid: 4ae06174-8bd1-4fbd-8ac6-6559c75b393a
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_bouznika_rabat_sidi_yahya_zeir_skhirate_tamesna_temara_fixed
   - id: 76597
     prefix: '2125377'
     number_min_length: 12
     number_max_length: 12
-    uuid: 194f007f-11d4-4df7-9928-52a5f767ce48
+    uuid: e53ad17f-6b0e-4582-a941-ded9f46669ce
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_ain_aouda_bouznika_rabat_sale_skhirate_temara_fixed
   - id: 76598
     prefix: '2125378'
     number_min_length: 12
     number_max_length: 12
-    uuid: bc094e2b-cf24-45da-ad3c-4056acbb7f57
+    uuid: c2c3747d-7899-44c8-8ae9-75d2db0b4f4e
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_bouknadel_had_kourt_sala_el_jadida_sale_fixed
   - id: 76599
     prefix: '2125379'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7ad8c34d-959f-4eaa-8e91-0e987476afcd
+    uuid: f1f81378-5fc2-498c-b54d-ca0913bf3e14
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_belksiri_dlalha_jorf_el_melha_khenichet_ouazane_souk_larbaa_fixed
   - id: 76601
     prefix: '2125380'
     number_min_length: 12
     number_max_length: 12
-    uuid: 40e61387-fb74-4ccb-9759-8f357ce9b947
+    uuid: 334d1c09-aae6-4f14-965c-2f8526d13d3d
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_rabat_fixed
   - id: 76602
     prefix: '2125381'
     number_min_length: 12
     number_max_length: 12
-    uuid: a9db411c-f3d8-4420-9fb4-d1bc73a1d72d
+    uuid: 79139fca-0867-4540-838e-4cea1c42b49f
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_rabat_fixed
   - id: 76603
     prefix: '2125382'
     number_min_length: 12
     number_max_length: 12
-    uuid: 06c4626c-3072-442c-b600-8e69f1e73afa
+    uuid: c5e16405-5355-44c2-9079-26356ea050d7
     country_id: *ma
     network_id: *ma_fixed
   - id: 76604
     prefix: '2125383'
     number_min_length: 12
     number_max_length: 12
-    uuid: a5c1720f-8cc5-454b-873c-b7de857c44a3
+    uuid: 30c06136-7bed-431b-b734-36a7f9b43e0c
     country_id: *ma
     network_id: *ma_fixed
   - id: 76605
     prefix: '2125384'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4456a8da-de64-450f-b37e-7cacfa2d7da1
+    uuid: 2c402a32-003c-4b2d-8f8d-2b355ebf8a31
     country_id: *ma
     network_id: *ma_fixed
   - id: 76606
     prefix: '2125385'
     number_min_length: 12
     number_max_length: 12
-    uuid: 92876ea2-03f6-4736-b56c-50b97cb5775b
+    uuid: 0458dc5c-471a-470f-ba6f-d4473a6152e5
     country_id: *ma
     network_id: *ma_fixed
   - id: 76607
     prefix: '2125386'
     number_min_length: 12
     number_max_length: 12
-    uuid: 19fa58d3-7b03-4c3f-a3d5-0025d32c1f50
+    uuid: 45c8eeac-58db-4f4c-911e-e4826d8d80e2
     country_id: *ma
     network_id: *ma_fixed
   - id: 76608
     prefix: '2125387'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5a4b58a1-3916-490b-8f3c-c527f8187f5a
+    uuid: 592bc178-c174-44f1-bf02-f8fbaa522579
     country_id: *ma
     network_id: *ma_fixed
   - id: 76609
     prefix: '2125388'
     number_min_length: 12
     number_max_length: 12
-    uuid: c2b6b747-ef12-429d-af6b-c805241fd8cb
+    uuid: d0a1d2b6-643a-4857-95ed-b3e8d49f2167
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_tanger_fixed
   - id: 76610
     prefix: '2125389'
     number_min_length: 12
     number_max_length: 12
-    uuid: f3a5b1a8-c672-4146-b45d-0987d506e09d
+    uuid: af05f229-f83a-4fc4-808f-6bf6d93c20a3
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_fes_meknes_fixed
   - id: 76614
     prefix: '2125393'
     number_min_length: 12
     number_max_length: 12
-    uuid: fec91501-4f0f-4889-b088-ddfb9960aeba
+    uuid: 5307988d-7265-4e40-9543-e379b6f80acc
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_tanger_fixed
   - id: 76620
     prefix: '2125394'
     number_min_length: 12
     number_max_length: 12
-    uuid: 89b9c205-4481-4a72-bd64-45321d43a866
+    uuid: 6afb29df-3b95-443c-9df1-4a2c9af9b6d8
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_tanger_fixed
   - id: 76621
     prefix: '2125395'
     number_min_length: 12
     number_max_length: 12
-    uuid: e17a63d7-12fb-403b-874d-b73b40b9a3a4
+    uuid: ff70da7d-9a37-49b9-bf8f-bd2ae219246c
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_larache_fixed
   - id: 76622
     prefix: '2125396'
     number_min_length: 12
     number_max_length: 12
-    uuid: 62964d63-c917-4db7-8ada-96f5b8a83cf1
+    uuid: 1c5f0d38-26b6-4a31-a262-5c559dabe868
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_tetouan_fixed
   - id: 76623
     prefix: '2125397'
     number_min_length: 12
     number_max_length: 12
-    uuid: 394333b9-9906-437b-8dc2-81e709884add
+    uuid: dabb8178-45c8-4353-b627-1bfc15cf52a9
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_tetouan_fixed
   - id: 76630
     prefix: '2125398'
     number_min_length: 12
     number_max_length: 12
-    uuid: d68c71e1-0bb8-4b5c-ad9e-44c3424219ce
+    uuid: 7e613d58-6778-4014-a2ea-adffaba3d178
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_al_hoceima_tetouan_fixed
   - id: 76720
     prefix: '2125399'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1f18c082-ef0e-4e01-82a0-0e76fb5da696
+    uuid: c2be7eae-410d-486c-bfcc-dc9ecbc25fb2
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_al_hoceima_larache_fixed
   - id: 78139
     prefix: '212550'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4f37d921-518e-468e-a4b5-991b3d517f52
+    uuid: b26bd2fd-d278-4ffe-b6e5-aeecfcdbd495
     country_id: *ma
-    network_id: *ma_fixed
+    network_id: *ma_limited_mobility_services_fixed
   - id: 84933
     prefix: '2125'
     number_min_length: 12
     number_max_length: 12
-    uuid: ba47ec4d-160c-4a9f-ac83-79c4f67bfcb1
+    uuid: 0ed4e39a-8607-48c5-a46a-b26d5b9ffd29
     country_id: *ma
     network_id: *ma_fixed
 # Satellite Prefixes
@@ -811,56 +1111,56 @@ network_prefixes:
     prefix: '21259240'
     number_min_length: 12
     number_max_length: 12
-    uuid: 98d26a16-01c2-45e5-acdd-fb9bc97b5b6b
+    uuid: 08a8e9d0-cdaf-40c4-a191-3b014d0031b6
     country_id: *ma
     network_id: *ma_nortis_satellite
   - id: 84425
     prefix: '21259241'
     number_min_length: 12
     number_max_length: 12
-    uuid: bbdf93d7-d59b-4e28-918b-ca9d85b00a56
+    uuid: cf481a16-bd1c-48eb-9936-ce9231273bf0
     country_id: *ma
     network_id: *ma_spacecom_satellite
   - id: 84426
     prefix: '21259242'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2f1f45dd-6a32-4079-9b0a-08165b2e0c92
+    uuid: b2f1c44c-6258-4c7c-ac6c-2b3de61b6b3d
     country_id: *ma
     network_id: *ma_gulfsat_satellite
   - id: 84427
     prefix: '21259293'
     number_min_length: 12
     number_max_length: 12
-    uuid: e5109647-d34f-4d5d-8adb-5ce58c94ecde
+    uuid: 2329655f-1bc4-4466-8ee9-a5a5e73a9007
     country_id: *ma
     network_id: *ma_iam_satellite
   - id: 451446
     prefix: '2128920'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c6cd5ad-a808-4430-a9a7-137e42d6c267
+    uuid: 172e40b2-9824-4ecc-be62-1f086d512355
     country_id: *ma
     network_id: *ma_globalstar_satellite
   - id: 451449
     prefix: '2128921'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7343edbb-4711-4f19-9054-479b762e5c2d
+    uuid: 2b0ff02f-4cfd-4c8d-bd1c-90cad40fb9c6
     country_id: *ma
     network_id: *ma_globalstar_satellite
   - id: 451451
     prefix: '2128922'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0f33db3a-aa08-4338-a582-7b5fb39a453d
+    uuid: d9fde64a-a4fb-4128-b363-9b55d9f9faa8
     country_id: *ma
     network_id: *ma_globalstar_satellite
   - id: 451469
     prefix: '21289293'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0469cfc9-60bf-4dc3-8323-db73a7e27ea5
+    uuid: ca5095cb-d82a-480e-be71-1a550c16f065
     country_id: *ma
     network_id: *ma_iam_satellite
 # Mobile Prefixes
@@ -868,973 +1168,973 @@ network_prefixes:
     prefix: '21260'
     number_min_length: 12
     number_max_length: 12
-    uuid: 79371979-dfcb-4113-8b81-8d2f9f2692e4
+    uuid: 18d6fdb5-8380-4f6a-91b0-0f15821f9a2d
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 95244
     prefix: '21260276'
     number_min_length: 12
     number_max_length: 12
-    uuid: 971f87e9-aec5-457a-bacc-87000d5315bd
+    uuid: c7af23f7-cdbf-4b46-a801-dc158c8053ca
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 95245
     prefix: '21260277'
     number_min_length: 12
     number_max_length: 12
-    uuid: f027ad1d-fc76-4b52-b5c1-989a07deade7
+    uuid: 7f1e941c-9043-4ad4-b893-eef62ffec3d6
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 95246
     prefix: '21260278'
     number_min_length: 12
     number_max_length: 12
-    uuid: f57bae05-ed7b-4a00-ab89-ab45f72ca668
+    uuid: 40ce01e4-55da-4e24-882e-dee47400ff46
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 98943
     prefix: '212618'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1a855b73-a832-40c1-b728-2af243f7937b
+    uuid: f23a1f02-c16a-4522-83e8-17ee68cefeb0
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 98947
     prefix: '21261800'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2260391c-441d-4989-8ed7-166e21ad694d
+    uuid: 4933be0d-abd8-42de-8f1c-74d7384c29c0
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 99023
     prefix: '212619'
     number_min_length: 12
     number_max_length: 12
-    uuid: ca745405-2bbc-45db-8451-b1668969b641
+    uuid: 429cbfa0-6918-4fff-b16c-b39f65d7d1f4
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 108601
     prefix: '212610'
     number_min_length: 12
     number_max_length: 12
-    uuid: 812f8715-4daa-481b-98da-f7153ae6de55
+    uuid: d7c3292e-85a1-48df-9737-f6e8758e4747
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108622
     prefix: '212611'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1cd6b5fa-adda-4870-8383-b44b88a1b276
+    uuid: aec6ca02-c7c0-4098-9206-014ef77b78f2
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108626
     prefix: '21261100'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3394956c-dde5-4fec-b90c-4ea7d47d9acc
+    uuid: 7a76cb20-c804-49fb-8eb6-d3310a484546
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108652
     prefix: '212612'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7462750f-1c32-4850-8684-873e19392342
+    uuid: b7895b0d-2a3d-4177-9c07-003a21dda382
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 108658
     prefix: '21261231'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9a8eee90-8d56-41d6-ae77-ceb386c0ccee
+    uuid: 6f2cf022-4183-4d14-bf1f-5c481a658a65
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 108659
     prefix: '21261232'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f791cc7-74bc-4da8-9a56-fc7b604d7c9b
+    uuid: 900d8707-af4f-4719-925c-7bd53f0db084
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 108660
     prefix: '21261233'
     number_min_length: 12
     number_max_length: 12
-    uuid: a9cc0725-2a12-4ca1-a05c-da88e562a39d
+    uuid: bfeaef32-1147-427a-a399-14f7a44ff2a0
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 108665
     prefix: '212613'
     number_min_length: 12
     number_max_length: 12
-    uuid: d2a69df8-66b3-4eae-bcda-d6ec73390b22
+    uuid: c4751bb5-2724-43e5-a1c2-bad07a9f2b7d
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108668
     prefix: '21261300'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8ea0a405-d23d-4b91-8e96-56f19013f05d
+    uuid: e5d01603-ed2b-4e9a-af66-3691aa8a057c
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108672
     prefix: '212614'
     number_min_length: 12
     number_max_length: 12
-    uuid: 618d1d3b-c307-451c-b1d1-465e0fd7e9a6
+    uuid: 3f02ce23-c136-4a79-9162-b68566a847f6
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 108691
     prefix: '212615'
     number_min_length: 12
     number_max_length: 12
-    uuid: f5d1826d-889c-4a0f-aff2-b3efc8e6f01c
+    uuid: a1979cb5-27c2-4107-9437-611f1594fe01
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108695
     prefix: '21261500'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1ad87a92-a5f8-4a58-9581-292a539b5abc
+    uuid: 55204ae2-5f64-4698-9432-9f3692df4a83
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108809
     prefix: '212616'
     number_min_length: 12
     number_max_length: 12
-    uuid: 78ccf91a-4145-4c40-bdd0-28704067af55
+    uuid: e15f2a93-9ac1-4094-8ffd-32edb8442578
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108813
     prefix: '21261600'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ed31e5e-a8bf-434a-8f05-edf791a7aeb9
+    uuid: 2b03fbd4-67a3-451a-9d08-e0de51fa5425
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 108918
     prefix: '212617'
     number_min_length: 12
     number_max_length: 12
-    uuid: f4f399e7-9d4a-489a-8549-3e3b8b3d8236
+    uuid: f82876e1-411a-4c3f-abbc-a7bcb55486f0
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 111480
     prefix: '212620'
     number_min_length: 12
     number_max_length: 12
-    uuid: e8195a5a-55ee-468a-a8ed-678246f9d5e3
+    uuid: 315f6cad-914f-4066-b7d3-d1e8ea8d3ce0
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 111573
     prefix: '212621'
     number_min_length: 12
     number_max_length: 12
-    uuid: 59ce637d-03a4-4ac0-935a-9718a0921f2d
+    uuid: 924a8f7a-8d52-457b-aa68-1624512c8db0
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 111651
     prefix: '212622'
     number_min_length: 12
     number_max_length: 12
-    uuid: 67086645-1fdf-4bfa-8ea9-5c8742dc6f4b
+    uuid: 6de91253-1ae5-4a63-b202-712f96938ddd
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 111739
     prefix: '212623'
     number_min_length: 12
     number_max_length: 12
-    uuid: 39eed0a0-58ab-4a59-9750-048ce83e6121
+    uuid: af0e91a0-128f-4911-869f-0fc6061f5ecb
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 111829
     prefix: '212624'
     number_min_length: 12
     number_max_length: 12
-    uuid: 62990cbb-b1ec-4bf6-a5eb-3c2c51a010a7
+    uuid: dc4ab741-b2de-428c-84da-a3675114c489
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 111907
     prefix: '212625'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0154d5fa-71ef-4ddf-b974-55fc24d3b685
+    uuid: 9a2897b4-8cab-4d02-ae0d-ab6fe9a54818
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 112007
     prefix: '212626'
     number_min_length: 12
     number_max_length: 12
-    uuid: e6b61e70-b66d-493a-a4d8-a625d6161907
+    uuid: b0ea67a2-70d7-4a4d-83ee-248e6e72501e
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 112093
     prefix: '212627'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9c634f2c-edd8-4393-8345-d1629e17a09a
+    uuid: 195937e4-0a11-4074-89dc-ad8eacf3143a
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 112197
     prefix: '212628'
     number_min_length: 12
     number_max_length: 12
-    uuid: ec931859-04bc-4a87-b16c-f1fb14a6483e
+    uuid: d3b7703d-9c48-42ca-a984-c522fa5269bb
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 112304
     prefix: '212629'
     number_min_length: 12
     number_max_length: 12
-    uuid: 947c4b18-377b-4c64-a2c2-59dffa1db515
+    uuid: 00209646-bca2-452e-a320-c52f58340c6a
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 117845
     prefix: '212630'
     number_min_length: 12
     number_max_length: 12
-    uuid: feb303b6-48b6-4957-8e97-3388540ddf0f
+    uuid: 03822dd1-1217-41cc-bd5f-03199a1ab15b
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 117938
     prefix: '212631'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6cfde442-06b5-4205-a2b5-440fc1b7dd12
+    uuid: 5536b1ef-10f4-44d6-8ad2-07ffe020c826
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 118045
     prefix: '212632'
     number_min_length: 12
     number_max_length: 12
-    uuid: e0601651-fa96-49eb-b3c8-03dbd5c5a359
+    uuid: 7f80eb11-85ba-4e36-982a-7fa9770cdc2c
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 118139
     prefix: '212633'
     number_min_length: 12
     number_max_length: 12
-    uuid: e559104a-9790-4daf-a4ce-53ea4418595e
+    uuid: fb67acaf-a99d-497f-9044-be520fc4833c
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 118240
     prefix: '212634'
     number_min_length: 12
     number_max_length: 12
-    uuid: dc6e7b82-0838-45ea-af23-1dccea1361aa
+    uuid: 59dae840-3ada-4089-9a0d-101a75dd74b0
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 118326
     prefix: '212635'
     number_min_length: 12
     number_max_length: 12
-    uuid: f5094909-8edf-4baa-a7e7-38fafa13c541
+    uuid: 8cbb1f10-5ffd-47cf-84ad-3ad9050682d0
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 118426
     prefix: '212636'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6d0959d0-864b-41ae-8cb4-0117c14d2332
+    uuid: 8e79f0e5-78ea-4a18-8106-168a199fe990
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 118513
     prefix: '212637'
     number_min_length: 12
     number_max_length: 12
-    uuid: e7913d47-1624-4cb1-9325-22a3c6b4308e
+    uuid: a67db00e-82c8-48e0-abae-6fea8baceca6
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 118605
     prefix: '212638'
     number_min_length: 12
     number_max_length: 12
-    uuid: 346f4f12-b1dc-4ddc-8d34-e5d857b01b8b
+    uuid: b6be0bec-5ef9-4cf5-bdaf-da2daabfcac3
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 118707
     prefix: '212639'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4f7742ca-c95b-402d-bdc9-e43854864eca
+    uuid: 34283c8c-1854-4adf-be34-10d37ae6158d
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 122447
     prefix: '212640'
     number_min_length: 12
     number_max_length: 12
-    uuid: 211daefd-f0d2-45f5-85cd-99753b57cb45
+    uuid: 7b950033-795b-4e8b-821a-23abd06c6168
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122532
     prefix: '212640891'
     number_min_length: 12
     number_max_length: 12
-    uuid: 04eb89de-d48d-4354-be44-0171701e222b
+    uuid: 19d00bee-6d78-4b32-9ee5-9f25ae748af3
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122533
     prefix: '212640892'
     number_min_length: 12
     number_max_length: 12
-    uuid: d520b7bd-ec6a-48ba-8230-adb37e2cf534
+    uuid: 9bebcee5-df77-4c9c-80aa-cf0779e82722
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122534
     prefix: '212640893'
     number_min_length: 12
     number_max_length: 12
-    uuid: 538cfed6-aa9f-48e9-9a4f-6cec99503414
+    uuid: 543722bb-367c-40b5-8d88-6f8df0ec7d0f
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122535
     prefix: '212640894'
     number_min_length: 12
     number_max_length: 12
-    uuid: e101692f-2ee6-4384-a344-ce7b8a3ed3a6
+    uuid: 4ab30ead-2eb8-4546-9bc4-b5a5a2b4eaed
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122536
     prefix: '212640895'
     number_min_length: 12
     number_max_length: 12
-    uuid: 937b1a38-3064-4751-92b7-54429b8dcbff
+    uuid: 921eb568-7389-4a28-9e2b-03ab4f697888
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122537
     prefix: '212640896'
     number_min_length: 12
     number_max_length: 12
-    uuid: caa4ad8e-f0cb-413e-90fb-4b947f12f9ec
+    uuid: d1fbc01b-17d9-481c-a0fe-bf62a0d6a89b
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122538
     prefix: '212640897'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0c9b0e0e-76a8-4e12-85ca-ec40d160a84c
+    uuid: 0d370565-f7f8-4175-9f29-fbe3b1c4d700
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122539
     prefix: '212640898'
     number_min_length: 12
     number_max_length: 12
-    uuid: 45e49b25-ad95-416a-ac1c-8f4b66e7c7d6
+    uuid: 3e8a5824-e69c-44c6-bbbe-172929340168
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122540
     prefix: '212640899'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8450123a-be7a-4beb-b40a-288d84b67532
+    uuid: 9a3602b9-0df2-494d-a57b-3d2f45df5f9f
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 122550
     prefix: '212641'
     number_min_length: 12
     number_max_length: 12
-    uuid: fc81b6f2-35d9-4e4f-9bca-ad1d707e39ca
+    uuid: 94a0a6a9-076b-4d45-8cac-b78860cd0a15
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 122554
     prefix: '21264100'
     number_min_length: 12
     number_max_length: 12
-    uuid: bbeea097-9429-49c8-bcc4-cdd53fb48343
+    uuid: f3670d6a-f28b-40ed-9ca7-a9f4e607574c
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 122646
     prefix: '212642'
     number_min_length: 12
     number_max_length: 12
-    uuid: cd3b0757-ccb1-4b60-9ea2-6111cda366c7
+    uuid: 160e7644-4bf9-46e2-9d0a-106102eec410
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 122650
     prefix: '21264200'
     number_min_length: 12
     number_max_length: 12
-    uuid: 54dc5f68-f167-4c26-862c-665d867ef5a2
+    uuid: 920b234e-6306-4c4a-bd30-d4a2a6d7eeed
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 122752
     prefix: '212643'
     number_min_length: 12
     number_max_length: 12
-    uuid: ad486d0a-170e-4d44-8e53-84280e0075aa
+    uuid: 1831ff40-29a2-4edc-8a2f-6ad801c0ba9a
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 122830
     prefix: '212644'
     number_min_length: 12
     number_max_length: 12
-    uuid: a829dd71-2b05-4b2c-8cba-6c7f104afd88
+    uuid: e7115459-2b56-4bc6-b869-4aedbded441f
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 122926
     prefix: '212645'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2d2e7524-3d23-47c4-9086-eeb948b5cf86
+    uuid: 165b3cef-5a61-422c-ac90-10aef5a137cb
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 123020
     prefix: '212646'
     number_min_length: 12
     number_max_length: 12
-    uuid: dadd8b8b-1eaf-4a11-ad0c-350ab3fe4550
+    uuid: 32f298f4-a874-4383-8ef6-99eca02176eb
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 123114
     prefix: '212647'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70bed261-65fa-48dc-9d0f-1497bdb48402
+    uuid: a256d1d3-d6ad-46c3-9aca-663a4eef65c6
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 123186
     prefix: '21264775'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0803388e-5abc-4d2b-b2cc-4600fca2edf8
+    uuid: 1196a6d4-4cff-48b0-acaa-c8b3f84fd996
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 123209
     prefix: '212648'
     number_min_length: 12
     number_max_length: 12
-    uuid: 15cd07e8-6452-49cb-86a6-e730fa9eb444
+    uuid: f678e971-fc3b-46ab-8951-ec464a663db2
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 123213
     prefix: '21264800'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3fe21d1a-e180-4397-b396-3f6174906fea
+    uuid: b0f40268-61fc-4e60-9208-511f948c2e66
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 123305
     prefix: '212649'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c4374e3-555b-444c-b3a9-3efefb5486b9
+    uuid: b6dc019d-2c86-485e-88fe-7e1b2b0ce109
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 125932
     prefix: '212654'
     number_min_length: 12
     number_max_length: 12
-    uuid: b459cf66-fb89-4c0c-b83d-894ecd204386
+    uuid: 19860e0f-27a6-4ace-b46d-6c335dd2b456
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 126018
     prefix: '212655'
     number_min_length: 12
     number_max_length: 12
-    uuid: 69a3bce6-95a1-42de-a02e-1506100cb401
+    uuid: 03eefd2e-1e25-4b56-a621-6df8bba01034
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 126110
     prefix: '212656'
     number_min_length: 12
     number_max_length: 12
-    uuid: e301850b-3050-45a1-b8d8-b6ff71100050
+    uuid: 04b73ec5-c8ac-4c7c-8498-42e9c8be9a22
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 126190
     prefix: '212657'
     number_min_length: 12
     number_max_length: 12
-    uuid: 00da9a77-6209-4286-b6ef-eed76453ba99
+    uuid: 31b8b9e7-7ffc-4d1f-bdb6-31447f1a600e
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 126265
     prefix: '212658'
     number_min_length: 12
     number_max_length: 12
-    uuid: c06f2d8f-d861-467f-80f5-446ac81f99b9
+    uuid: b9806255-0f2e-469c-ab6e-04ad3cfd2cb4
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 126362
     prefix: '212659'
     number_min_length: 12
     number_max_length: 12
-    uuid: ee720ce0-cd01-4845-94e8-1d034c58602d
+    uuid: 0b2bd04e-842c-4287-b543-5fdec0e1105c
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 135931
     prefix: '212650'
     number_min_length: 12
     number_max_length: 12
-    uuid: e69f081e-1850-41e8-8089-ff716452d28a
+    uuid: 4e277879-48d1-4ca7-a464-0a9afc290728
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 135934
     prefix: '21265000'
     number_min_length: 12
     number_max_length: 12
-    uuid: ad12c9a2-a0fa-4204-867e-fe94fc5a5edf
+    uuid: 8dace254-f4a8-4ad0-957c-779edbfab71a
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 136024
     prefix: '212651'
     number_min_length: 12
     number_max_length: 12
-    uuid: b8376673-1779-4b08-bdc9-f692d61ae336
+    uuid: d0c2a878-9f86-480a-8ec8-7c64146d0953
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 136026
     prefix: '21265100'
     number_min_length: 12
     number_max_length: 12
-    uuid: ff48659e-deea-4926-b43d-ea13c2c7d3d1
+    uuid: 01d3c68d-a59d-442f-9a4a-cd2326bd11b9
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 136043
     prefix: '212652'
     number_min_length: 12
     number_max_length: 12
-    uuid: ffe740c8-1c73-4bdb-8a66-4a1d9a745f8c
+    uuid: fab5a21b-c750-441a-9a45-a15611b95139
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 136045
     prefix: '21265200'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36098c7b-11ff-4d38-8c71-617a2aa5c71d
+    uuid: ceccfe31-6a26-4fab-97d0-e145545246f3
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 136129
     prefix: '212653'
     number_min_length: 12
     number_max_length: 12
-    uuid: 42b60474-5ae4-43d0-b587-0e99bb5bdd40
+    uuid: 87cc30ae-71c3-49eb-8d5c-e7d3e26e8919
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 138643
     prefix: '212660'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2e0b76ce-6976-4660-b154-c28beece7ed2
+    uuid: db3256c9-2a5c-4b22-99be-e1b60756e32c
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 138735
     prefix: '212661'
     number_min_length: 12
     number_max_length: 12
-    uuid: 82cf90d5-8be5-4483-b9b6-cafcd21de47d
+    uuid: 4158454f-af4e-4737-bb7f-c5d736c54775
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 138799
     prefix: '212662'
     number_min_length: 12
     number_max_length: 12
-    uuid: bd63ef8a-deb0-4d9b-818e-83ec397cef14
+    uuid: 1d0c9544-22ee-4d14-9938-9c1acca14d3a
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 138802
     prefix: '21266200'
     number_min_length: 12
     number_max_length: 12
-    uuid: ad3bf80e-81b0-4793-bcca-0c6f8b5097a6
+    uuid: 1d2e2bed-475f-45cf-907f-2d08ccb43dd8
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 138809
     prefix: '212663'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8f7f770c-93b1-4309-8266-ca6dfdbc1238
+    uuid: 53193922-0e49-43d1-9678-d7e26072c105
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 138811
     prefix: '212664'
     number_min_length: 12
     number_max_length: 12
-    uuid: fe2104cf-0e11-4b78-9835-b20317a7f719
+    uuid: d99d7e0e-2a1a-471a-8840-d3f010865578
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 138824
     prefix: '212665'
     number_min_length: 12
     number_max_length: 12
-    uuid: b3e9fd39-7968-4286-b48d-9b6f1c09201e
+    uuid: d0e092d5-b72f-4118-99ac-d5514580e494
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 138828
     prefix: '212666'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4098e199-541e-49ac-b5fc-0273c3784dac
+    uuid: 01fdbf5a-7bc5-4fa3-a420-aa44c4f91330
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 138836
     prefix: '212667'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9769af68-dfe1-4ba9-93e2-a814ab803e13
+    uuid: c46b6f42-7362-475d-bd38-107b1c74065c
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 138838
     prefix: '212668'
     number_min_length: 12
     number_max_length: 12
-    uuid: 86802dbc-9605-470e-8f81-fbe40bcf6b11
+    uuid: 0e3db37f-e691-4ac3-9439-e6b31aee8f22
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 138841
     prefix: '212669'
     number_min_length: 12
     number_max_length: 12
-    uuid: b4a0beaa-e2c7-4528-92d2-ca2405a57340
+    uuid: c46015a2-dad9-44b8-a3c1-ffccf07643e1
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 146830
     prefix: '212680'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5b8fbb3d-e583-4f30-9e37-3edde9096505
+    uuid: 28680efa-c891-4f3a-bf24-92f6d6e98f59
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 146847
     prefix: '212681'
     number_min_length: 12
     number_max_length: 12
-    uuid: 59aa913e-7538-40e1-9cd6-531e1bae6713
+    uuid: a9a0538c-4027-4c25-8cb3-d0c2c3f1e9be
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 146851
     prefix: '212682'
     number_min_length: 12
     number_max_length: 12
-    uuid: 76f06336-135b-4ba0-b4e6-4f3e78f6ef07
+    uuid: 4ee36435-4eea-48b7-b94a-dac5ff744f11
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 146852
     prefix: '21268200'
     number_min_length: 12
     number_max_length: 12
-    uuid: efe5b01b-b527-4cf1-8f18-3fd59167fe41
+    uuid: 3b161743-8cf0-457c-88a2-014717040782
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 146913
     prefix: '212684'
     number_min_length: 12
     number_max_length: 12
-    uuid: e870789f-6de1-4ad5-bcc6-4a41ceabf84b
+    uuid: 61b5b6cd-4a5e-476c-b03d-0cea2da8de89
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 146939
     prefix: '212687'
     number_min_length: 12
     number_max_length: 12
-    uuid: 92efd2b6-6ec1-453d-b357-acad73f48cca
+    uuid: 5904649e-0209-48d1-8b1b-8cc252298dae
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 146942
     prefix: '212688'
     number_min_length: 12
     number_max_length: 12
-    uuid: c554859b-9634-4275-816d-b771deece91d
+    uuid: f3b906fa-5a10-4312-a6bc-533b32e81057
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 146945
     prefix: '212689'
     number_min_length: 12
     number_max_length: 12
-    uuid: 01955813-aa8b-4c01-a145-2e4f4f428229
+    uuid: 8b307511-3085-46af-92fd-520dc5253be4
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 146947
     prefix: '21268900'
     number_min_length: 12
     number_max_length: 12
-    uuid: e98095bf-553c-476f-a120-bbd801bfd593
+    uuid: 81008106-639e-4794-b8cf-d66f1a0b49cd
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 148671
     prefix: '212690'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1502868d-c466-45a9-ba73-81e132f28abb
+    uuid: fe69f722-a7d1-410a-a4d2-c03ef9230585
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 148674
     prefix: '212691'
     number_min_length: 12
     number_max_length: 12
-    uuid: dcff3aa2-2a29-4556-8b9f-05c7f1814b71
+    uuid: 2179e4b0-53fd-4108-acf5-ada18224f726
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 148681
     prefix: '212693'
     number_min_length: 12
     number_max_length: 12
-    uuid: 997b4f19-f35d-49fe-b824-1aca4db5d1af
+    uuid: 66a6725e-9459-4adf-94af-12c49e0d9308
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 148683
     prefix: '212694'
     number_min_length: 12
     number_max_length: 12
-    uuid: ceb32d0e-d2c2-4638-8f29-9ec06b2437b1
+    uuid: 42234932-d0b0-4c40-b466-5b2957585316
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 148694
     prefix: '212695'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5750bf2b-285b-4077-92b9-8ec02b4a721e
+    uuid: 781292f6-1932-4629-9c31-90b92d8a32d7
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 148697
     prefix: '212696'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3fda8626-4a80-4c65-98f9-2df8628f260e
+    uuid: 6ece15cc-3474-473a-9b14-8547fd155e21
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 148702
     prefix: '212697'
     number_min_length: 12
     number_max_length: 12
-    uuid: f9ced109-5c56-4853-a373-98ce124c1fdd
+    uuid: 47eb971f-98a9-4d92-989b-cbbe89472d8e
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 148704
     prefix: '212698'
     number_min_length: 12
     number_max_length: 12
-    uuid: f97867a6-400c-4f05-9dde-d1e80774c6bd
+    uuid: 050da6a4-3fe8-4f3c-9193-ac3be6596b66
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 148707
     prefix: '212699'
     number_min_length: 12
     number_max_length: 12
-    uuid: 347fefe3-6c28-48be-a718-67f107dd28ef
+    uuid: 72843b62-ff8c-453b-baed-eb7817b0a54d
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 148715
     prefix: '21269975'
     number_min_length: 12
     number_max_length: 12
-    uuid: a2b06a00-86be-4c32-ba15-248683b3b0f2
+    uuid: a98ee109-38d6-4caf-b845-4c1cf65f601e
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 148716
     prefix: '21269976'
     number_min_length: 12
     number_max_length: 12
-    uuid: 979c8cd4-f11d-4fa9-8020-60c7c86ac5f9
+    uuid: 7fab6846-6726-42a3-8d79-10a791683aff
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 148720
     prefix: '21269977'
     number_min_length: 12
     number_max_length: 12
-    uuid: 83257623-1752-4e07-a418-bcef6a24a7d1
+    uuid: c6bee257-37c6-4b07-9145-cd710390b541
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 148721
     prefix: '21269978'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3f08c03f-fd27-4510-9571-2337d1825d43
+    uuid: 5dbea762-9ca5-4658-ac76-f6cb9be90bba
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 149322
     prefix: '2126'
     number_min_length: 12
     number_max_length: 12
-    uuid: 57cc85a6-4118-4a14-a8d1-dd02bc7f81db
+    uuid: 229d1f10-0074-40c3-b98b-e1ab73eefbb5
     country_id: *ma
     network_id: *ma_mobile
   - id: 150236
     prefix: '21270'
     number_min_length: 12
     number_max_length: 12
-    uuid: df923f39-8304-4a2f-87ea-c1fbe149e840
+    uuid: 37260675-c617-40bc-9f23-68d73a6a3df3
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 151436
     prefix: '212670'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3e52e437-a28c-427f-ad82-09b50331db3b
+    uuid: 8364383b-2c83-47bf-ad55-caae3392bf98
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 151437
     prefix: '212671'
     number_min_length: 12
     number_max_length: 12
-    uuid: 88114aad-960f-4087-ae44-279469428bf5
+    uuid: d227c5fe-d82e-4e53-95a0-68c02017fa34
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 151441
     prefix: '212672'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9c28466b-0d82-461f-9b44-16c259e36221
+    uuid: fd48ebd8-7a1e-4053-bcb0-63f9dc094b8f
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 151453
     prefix: '212673'
     number_min_length: 12
     number_max_length: 12
-    uuid: a52d63c0-e004-4d3b-bfd3-fa17fd62c82b
+    uuid: 8b9d2a0e-839e-4cb8-a57e-f463eb720efe
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 151456
     prefix: '21267300'
     number_min_length: 12
     number_max_length: 12
-    uuid: 691bc7d5-c2f8-4413-8a42-bfee2dbf58af
+    uuid: 03f3ae76-f13b-47e4-9a09-a8476ecb6a3d
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 151482
     prefix: '212674'
     number_min_length: 12
     number_max_length: 12
-    uuid: 06b36874-bb29-47d1-b451-7ce832c218ae
+    uuid: b2bcbc46-b473-41d7-a91c-96a1b257d38f
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 151486
     prefix: '212675'
     number_min_length: 12
     number_max_length: 12
-    uuid: f5fb1886-793e-4365-870a-72425dcb1db7
+    uuid: afc92237-29f4-4b23-8483-06eec5ccb0d9
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 151496
     prefix: '212676'
     number_min_length: 12
     number_max_length: 12
-    uuid: 56f41ccc-d796-4405-882b-59e8e7584840
+    uuid: 475fd6ca-7b79-4a53-afc7-06522f8c49b8
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 151499
     prefix: '212677'
     number_min_length: 12
     number_max_length: 12
-    uuid: e5a9d7e9-0c76-4640-ae4f-ae4c943dac3b
+    uuid: f77ba489-fba0-4bc6-b98e-68bdbfafbfcc
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 151503
     prefix: '212678'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6aab99a0-9b71-4f22-b4af-f9608d5162d7
+    uuid: 44e25748-0726-4f0e-b8e5-630742942b0e
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 151526
     prefix: '212679'
     number_min_length: 12
     number_max_length: 12
-    uuid: cb777211-a2ed-41b0-9611-1191df8e891d
+    uuid: bea59661-8060-4157-b955-bace7fa256ce
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 163993
     prefix: '21271'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9f2eaf7f-8d28-4f49-a27f-d59fc53f99a2
+    uuid: b3224abf-f872-4a6e-a327-6d40e0eb6210
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 167873
     prefix: '212721'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0f55ad05-420b-424d-8bd9-f27a117869ff
+    uuid: 7733b0da-0c07-41d7-ba45-31a2e605beee
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 167956
     prefix: '212722'
     number_min_length: 12
     number_max_length: 12
-    uuid: f88d4cea-f351-4331-b8aa-12c0c87e96ae
+    uuid: 8f029bbd-8e12-4bd4-89c3-fd3f72583ac2
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 167999
     prefix: '212723'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8383a7b8-4bab-4b18-b192-3f649350931a
+    uuid: ef860c28-3657-4fe6-b020-9b96a07db342
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 168125
     prefix: '212724'
     number_min_length: 12
     number_max_length: 12
-    uuid: 82ef9509-c66d-4fa5-92e8-ce8984f7e658
+    uuid: a42e4ccb-ca1d-4967-a567-553e29ebd064
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 172542
     prefix: '212720'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7151ed90-3ac9-40f4-b97a-85ba0c4495f2
+    uuid: 8bdb159f-3605-4007-a991-d59f7a4c809a
     country_id: *ma
     network_id: *ma_inwi_mobile
   - id: 185891
     prefix: '212750'
     number_min_length: 12
     number_max_length: 12
-    uuid: cb25c9b3-b7a8-427f-9bd9-dde06f9ae303
+    uuid: ce4486a5-0b6f-4b4d-8602-f64872db050b
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 185902
     prefix: '212751'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e016eb6-9c90-4912-99bd-61487c2b23f0
+    uuid: c474d925-910d-42d4-a55b-c638802d1e65
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 187989
     prefix: '21276'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2763bae7-4c22-433f-9ed4-6527432bdc47
+    uuid: e0065788-addb-461f-8360-ed088a38326a
     country_id: *ma
     network_id: *ma_iam_mobile
   - id: 192093
     prefix: '21277'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1315e2cd-6af5-488a-ba13-b8c2a1c78c10
+    uuid: a495841b-e4e1-41bc-ae56-cf0079b733f5
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 198409
     prefix: '212780'
     number_min_length: 12
     number_max_length: 12
-    uuid: 521ec1b1-9a39-42e5-8346-b798dd6ef02a
+    uuid: 0083e891-ca7f-4caa-909c-ca6800446809
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 198432
     prefix: '212781'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8b1befef-74ea-4141-ba90-464ead18f9bd
+    uuid: c141aac1-4519-49d0-adcb-204acf594836
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 198459
     prefix: '212782'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7b527fbe-f2e9-4d71-a13c-5bdcf9e746a6
+    uuid: 2a727d0f-183a-4db5-b836-71c10705066e
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 198492
     prefix: '212783'
     number_min_length: 12
     number_max_length: 12
-    uuid: 75d2a577-8541-42b9-8be7-c7fdaaad3572
+    uuid: 91d82bb6-30f3-4a8b-8ab5-6abb157105ac
     country_id: *ma
     network_id: *ma_orange_mobile
   - id: 207503
     prefix: '2127'
     number_min_length: 12
     number_max_length: 12
-    uuid: 55c7c15f-ee6a-44ea-9cf7-f8503e450d17
+    uuid: c486edf7-684b-4934-91f4-c5be80550982
     country_id: *ma
     network_id: *ma_mobile
 # Supplementary services Prefixes
@@ -1842,161 +2142,161 @@ network_prefixes:
     prefix: '21280'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9ea1befa-1dac-4c43-a31f-8f42b2419004
+    uuid: 5ca311ae-9764-4caa-bf76-db52bfc4ae88
     country_id: *ma
     network_id: *ma_freephone_and_shared_cost_services
   - id: 207801
     prefix: '212800'
     number_min_length: 12
     number_max_length: 12
-    uuid: eb90470f-aa1a-455d-978e-fdb805c83245
+    uuid: 33f4b7f2-dfde-4b57-b1ed-7a5bcd89cfd3
     country_id: *ma
     network_id: *ma_freephone_services
   - id: 242440
     prefix: '2121'
     number_min_length: 5
     number_max_length: 8
-    uuid: f54f362d-0ab0-42a8-8527-8ebd6f9cde6e
+    uuid: ae5b9de3-69c1-4141-b979-858d86115f9a
     country_id: *ma
     network_id: *ma_special_services
   - id: 243945
     prefix: '2124'
     number_min_length: 5
     number_max_length: 8
-    uuid: 68dd30dc-dc2e-46f5-9b2d-05a681fa96d4
+    uuid: b7ecc6fb-e57a-4656-8fb7-552a6399c055
     country_id: *ma
     network_id: *ma_special_services
   - id: 245408
     prefix: '2126'
     number_min_length: 5
     number_max_length: 8
-    uuid: 081216cd-be76-4f3d-8eaa-6455ebe537a9
+    uuid: 5c1d7335-a50b-4c02-aee4-97d6f618e696
     country_id: *ma
     network_id: *ma_special_services
   - id: 247418
     prefix: '2122'
     number_min_length: 5
     number_max_length: 8
-    uuid: faf53b75-2125-4c89-8b6c-e28e1bb18156
+    uuid: 85e31703-1faa-4e6d-84c6-3431d2ae971c
     country_id: *ma
     network_id: *ma_special_services
   - id: 248909
     prefix: '2123'
     number_min_length: 5
     number_max_length: 8
-    uuid: 06d69ef4-426c-4bbb-847b-e351a7f26cb9
+    uuid: cd376e8a-50e9-4c2e-a9ef-880995a517f7
     country_id: *ma
     network_id: *ma_special_services
   - id: 249588
     prefix: '2125'
     number_min_length: 5
     number_max_length: 8
-    uuid: 5bcc69a9-a5c8-48e8-a752-2e5170f9cd2f
+    uuid: 3cbb661e-679c-41d1-8b28-5ae2a1161827
     country_id: *ma
     network_id: *ma_special_services
   - id: 253090
     prefix: '2128'
     number_min_length: 5
     number_max_length: 8
-    uuid: cce7a656-7320-4452-a663-35e2972da30a
+    uuid: 5ac06347-7a01-401e-a42e-d7ead9605bb3
     country_id: *ma
     network_id: *ma_special_services
   - id: 255259
     prefix: '2127'
     number_min_length: 5
     number_max_length: 8
-    uuid: 708a9ca8-846c-430b-b7a3-6ab6ede398b7
+    uuid: 51c41309-b28e-4398-a8d3-3a70f47027f2
     country_id: *ma
     network_id: *ma_special_services
   - id: 257114
     prefix: '2129'
     number_min_length: 5
     number_max_length: 8
-    uuid: e00ffe9b-46e2-4d55-ae11-97828003bd9f
+    uuid: f564d833-d308-48cc-b41e-23ffdd6c8092
     country_id: *ma
     network_id: *ma_special_services
   - id: 402819
     prefix: '212801'
     number_min_length: 12
     number_max_length: 12
-    uuid: edd8417f-be34-49ba-a36e-da9204bb9101
+    uuid: 63bf1e1f-44b0-487d-89e9-5f3138a99d5a
     country_id: *ma
     network_id: *ma_shared_cost_services
   - id: 402925
     prefix: '212802'
     number_min_length: 12
     number_max_length: 12
-    uuid: bb107680-3065-4f97-ac13-3aced353ef03
+    uuid: 0c912876-aff4-4523-884e-32827feb4da8
     country_id: *ma
     network_id: *ma_direct_number_services_calling_party_pays
   - id: 403386
     prefix: '2128080'
     number_min_length: 12
     number_max_length: 12
-    uuid: a192f11c-5a53-4071-9430-06884e248f74
+    uuid: 34d7b5f1-3f14-4e99-861a-9d648f12490a
     country_id: *ma
     network_id: *ma_voip
   - id: 403390
     prefix: '2128081'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5e48273f-bd79-4f65-8e16-b5a688e46e89
+    uuid: 031a8493-47db-4061-8502-eeaaa227cd84
     country_id: *ma
     network_id: *ma_voip
   - id: 403393
     prefix: '2128082'
     number_min_length: 12
     number_max_length: 12
-    uuid: 97083013-74fb-449a-a522-715622a6ad66
+    uuid: 2ab27a4e-7c22-44ab-b8e1-853fc1fcc62c
     country_id: *ma
     network_id: *ma_volp
   - id: 403396
     prefix: '2128083'
     number_min_length: 12
     number_max_length: 12
-    uuid: 172eaf47-bec9-442e-9e35-a53b07ae0cbd
+    uuid: 8bd17f28-b08f-4516-a48b-74a336b069fb
     country_id: *ma
     network_id: *ma_voip
   - id: 403399
     prefix: '2128084'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5ff410e4-51e0-4292-b283-9ab7bb6c3608
+    uuid: 22c34954-fa79-41c3-bf83-7c2fe4aee291
     country_id: *ma
     network_id: *ma_voip
   - id: 403402
     prefix: '2128085'
     number_min_length: 12
     number_max_length: 12
-    uuid: b0368d8f-70b5-44ba-84fb-6618b9d7b1f5
+    uuid: e26f685e-530f-4cc5-8708-c4be6a0774ad
     country_id: *ma
     network_id: *ma_voip
   - id: 403405
     prefix: '2128086'
     number_min_length: 12
     number_max_length: 12
-    uuid: 26115d78-6f18-4fa9-a127-6244a17402ba
+    uuid: b4fb1339-19cd-47f0-bd5c-87c94d0013b0
     country_id: *ma
     network_id: *ma_voip
   - id: 403441
     prefix: '2128098'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3b9be0a6-dc2e-4245-a282-fc0a5ca5fb3b
+    uuid: a493f1a7-b9fd-4366-b973-3a9ff3a4f4d6
     country_id: *ma
     network_id: *ma_voip
   - id: 403454
     prefix: '2128099'
     number_min_length: 12
     number_max_length: 12
-    uuid: d0a34bb1-8f7f-46aa-9d06-bea6b8d23ac5
+    uuid: f3ee580d-a78d-428e-93ea-621d83ec7503
     country_id: *ma
     network_id: *ma_voip
   - id: 451407
     prefix: '21289'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4e37e714-4591-4fed-9421-6f2633faa2bf
+    uuid: 85616942-3c44-41ad-a7c0-adf82d955d76
     country_id: *ma
     network_id: *ma_shared_revenue_services
 # Country code Prefixes
@@ -2004,6 +2304,6 @@ network_prefixes:
     prefix: '212'
     number_min_length: 4
     number_max_length: 100
-    uuid: d238d787-12dd-48b4-a9b4-3ebc87057120
+    uuid: 1a6acb0e-0c50-466b-b99b-3915f5b730f3
     country_id: *ma
     network_id: null

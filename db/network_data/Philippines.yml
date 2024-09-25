@@ -1,39 +1,183 @@
 country_id: &ph 169
 networks:
 # Fixed Networks
-  - id: &ph_fixed 4058
-    name: PH Fixed
-    uuid: d4996d95-02ea-49f7-a78d-2c62dcb5cb3a
+  - id: &ph_palawan_fixed 4203
+    name: PH Palawan Fixed
+    uuid: bb68c5fb-192f-42ec-bef6-e45d873beb15
+    type_id: 12
+  - id: &ph_laguna_fixed 5028
+    name: PH Laguna Fixed
+    uuid: 348454cb-dbef-4c8f-9481-c58af4401d61
+    type_id: 12
+  - id: &ph_albay_catanduanes_fixed 6647
+    name: PH Albay Catanduanes Fixed
+    uuid: 50b3b39b-37e9-4498-976a-e8b962f3ee9f
+    type_id: 12
+  - id: &ph_camarines_norte_camarines_sur_fixed 7188
+    name: PH Camarines Norte Camarines Sur Fixed
+    uuid: 49df51cd-262d-4670-83b4-4dc622bde3b6
+    type_id: 12
+  - id: &ph_biliran_leyte_southern_leyte_fixed 7579
+    name: PH Biliran Leyte Southern Leyte Fixed
+    uuid: 22187867-e6c9-4939-ac65-6caf747d9ae1
+    type_id: 12
+  - id: &ph_eastern_samar_northern_samar_western_samar_fixed 7959
+    name: PH Eastern Samar Northern Samar Western Samar Fixed
+    uuid: 7393d860-bcfa-49e3-b3d1-a645571b3bd8
+    type_id: 12
+  - id: &ph_masbate_sorsogon_fixed 9280
+    name: PH Masbate Sorsogon Fixed
+    uuid: 612daf68-5000-4eae-8483-c2049b355de6
+    type_id: 12
+  - id: &ph_basilan_zamboanga_del_sur_zamboanga_sibugay_fixed 11986
+    name: PH Basilan Zamboanga Del Sur Zamboanga Sibugay Fixed
+    uuid: ff6786ba-99cb-4239-be2f-1c8373e00974
+    type_id: 12
+  - id: &ph_lanao_del_norte_lanao_del_sur_fixed 12467
+    name: PH Lanao Del Norte Lanao Del Sur Fixed
+    uuid: 679d89d9-6760-414a-af98-02d82dfc59f5
+    type_id: 12
+  - id: &ph_cotabato_maguindanao_sultan_kudarat_fixed 12730
+    name: PH Cotabato Maguindanao Sultan Kudarat Fixed
+    uuid: 0a2e48f9-eacc-4c37-9809-26881655e6de
+    type_id: 12
+  - id: &ph_zamboanga_del_norte_fixed 13481
+    name: PH Zamboanga Del Norte Fixed
+    uuid: 73927ebc-a050-4f57-a657-8f1c08557a3f
+    type_id: 12
+  - id: &ph_sulu_tawi_tawi_fixed 14232
+    name: PH Sulu Tawi_Tawi Fixed
+    uuid: 6e4194bc-05b6-4e9b-aa9d-97c4046cb214
+    type_id: 12
+  - id: &ph_la_union_fixed 16886
+    name: PH La Union Fixed
+    uuid: 7c933fe4-4b70-4274-a27e-46a579f1fee4
+    type_id: 12
+  - id: &ph_cordillera_administrative_region_fixed 17635
+    name: PH Cordillera Administrative Region Fixed
+    uuid: 62c46a19-5272-4dc7-a7d7-b5d6dabd8965
+    type_id: 12
+  - id: &ph_pangasinan_fixed 18015
+    name: PH Pangasinan Fixed
+    uuid: bd881b1f-0b9a-4bcf-b90c-3213aec0e4a1
+    type_id: 12
+  - id: &ph_ilocos_norte_ilocos_sur_fixed 18509
+    name: PH Ilocos Norte Ilocos Sur Fixed
+    uuid: cc50aed9-49ef-4fc4-b1bb-98bdd364c7db
+    type_id: 12
+  - id: &ph_cagayan_valley_fixed 18848
+    name: PH Cagayan Valley Fixed
+    uuid: 42972020-7888-4f1f-95bf-58f7ce670c59
+    type_id: 12
+  - id: &ph_metro_manila_rizal_fixed 25851
+    name: PH Metro Manila Rizal Fixed
+    uuid: f25aa421-5a6b-4467-bd04-c240b7060341
+    type_id: 12
+  - id: &ph_cebu_fixed 31943
+    name: PH Cebu Fixed
+    uuid: b91dbf7d-a402-4761-98a8-c2be2ec468fc
+    type_id: 12
+  - id: &ph_guimaras_iloilo_fixed 32567
+    name: PH Guimaras Iloilo Fixed
+    uuid: e20f8c70-64e3-4829-b0b7-359f9fa3d29c
+    type_id: 12
+  - id: &ph_negros_occidental_fixed 32900
+    name: PH Negros Occidental Fixed
+    uuid: 72835e6a-bf08-41f5-bdb5-609b1ea0dd69
+    type_id: 12
+  - id: &ph_aklan_antique_capiz_fixed 33663
+    name: PH Aklan Antique Capiz Fixed
+    uuid: 1c338031-0adb-4f47-9023-850ca58b3c99
+    type_id: 12
+  - id: &ph_bohol_fixed 33852
+    name: PH Bohol Fixed
+    uuid: 865ccc70-bb33-4477-aca9-7e7ed6294f21
+    type_id: 12
+  - id: &ph_negros_oriental_siquijor_fixed 34648
+    name: PH Negros Oriental Siquijor Fixed
+    uuid: a39a9d32-aa6d-4efa-90b4-4c0e56091bd7
+    type_id: 12
+  - id: &ph_batangas_mindoro_occidental_mindoro_oriental_fixed 36596
+    name: PH Batangas Mindoro Occidental Mindoro Oriental Fixed
+    uuid: 7a3cbae6-ce92-4f8a-b915-fac97af69a16
+    type_id: 12
+  - id: &ph_bulacan_nueva_ecija_fixed 36863
+    name: PH Bulacan Nueva Ecija Fixed
+    uuid: 7158b656-bfcd-49f6-952b-f3354ff66621
+    type_id: 12
+  - id: &ph_aurora_marinduque_quezon_romblon_fixed 37242
+    name: PH Aurora Marinduque Quezon Romblon Fixed
+    uuid: bca71f28-d5e4-400e-aae0-5e7d179e24d0
+    type_id: 12
+  - id: &ph_cavite_fixed 37844
+    name: PH Cavite Fixed
+    uuid: 81d84945-0a46-4163-ad42-861d75def72f
+    type_id: 12
+  - id: &ph_pampanga_tarlac_fixed 37904
+    name: PH Pampanga Tarlac Fixed
+    uuid: 3206e7cd-22c3-48b2-b3de-8ab73992ab5c
+    type_id: 12
+  - id: &ph_bataan_zambales_fixed 38320
+    name: PH Bataan Zambales Fixed
+    uuid: 1307b067-49cb-4a26-bca0-4d22e2de754a
+    type_id: 12
+  - id: &ph_davao_del_sur_fixed 39704
+    name: PH Davao Del Sur Fixed
+    uuid: e10738d8-1ac8-4aac-8818-989edb036802
+    type_id: 12
+  - id: &ph_sarangani_south_cotabato_fixed 39807
+    name: PH Sarangani South Cotabato Fixed
+    uuid: 2f95418a-fd9f-4e48-aed8-26bfa3ebc23f
+    type_id: 12
+  - id: &ph_dinagat_islands_surigao_del_norte_surigao_del_sur_fixed 40547
+    name: PH Dinagat Islands Surigao Del Norte Surigao Del Sur Fixed
+    uuid: 238eeb48-b371-40ff-8bd5-8b91598655da
+    type_id: 12
+  - id: &ph_davao_del_norte_fixed 40864
+    name: PH Davao Del Norte Fixed
+    uuid: 4a526656-7ea9-446e-bad5-16c064f1a680
+    type_id: 12
+  - id: &ph_agusan_del_norte_agusan_del_sur_fixed 41036
+    name: PH Agusan Del Norte Agusan Del Sur Fixed
+    uuid: 3eb7d675-498f-49c6-8bca-c65d6e90d4e9
+    type_id: 12
+  - id: &ph_compostela_valley_davao_oriental_fixed 41368
+    name: PH Compostela Valley Davao Oriental Fixed
+    uuid: caf687e9-f51e-4251-9f22-3c1d9ab03c88
+    type_id: 12
+  - id: &ph_bukidnon_camiguin_misamis_occidental_misamis_oriental_fixed 41573
+    name: PH Bukidnon Camiguin Misamis Occidental Misamis Oriental Fixed
+    uuid: fc2a6b09-6c71-4984-8f2e-808022487993
     type_id: 12
 # Mobile Networks
-  - id: &ph_sun_cellular_mobile 4986
+  - id: &ph_sun_cellular_mobile 20140
     name: PH Sun Cellular Mobile
-    uuid: 196f99b2-e3d2-471e-ae3a-f9c8204342da
+    uuid: d85b3513-4b1d-4be9-a8a0-1a39aa984ca0
     type_id: 3
-  - id: &ph_globe_mobile 4991
+  - id: &ph_globe_mobile 20190
     name: PH Globe Mobile
-    uuid: f5937586-338e-4d8b-8de1-5e77817521ed
+    uuid: 59aaf84b-6aeb-4ea8-8893-4756c59a36ea
     type_id: 3
-  - id: &ph_smart_mobile 4993
+  - id: &ph_smart_mobile 20222
     name: PH Smart Mobile
-    uuid: 6dfd98f6-cbe8-4f5c-b48b-c62a3240cef2
+    uuid: b82bcbc1-7a0e-41ad-befa-0561449ea775
     type_id: 3
-  - id: &ph_mobile 5091
+  - id: &ph_mobile 21267
     name: PH Mobile
-    uuid: abd1537e-8850-4f43-b885-dca462ddbe4c
+    uuid: 77aff718-0ee2-467f-ae6d-ec39e4d33970
     type_id: 3
 # Supplementary services Networks
-  - id: &ph_freephone_services 7147
+  - id: &ph_freephone_services 25562
     name: PH Freephone Services
-    uuid: 53f1e9c5-1491-45ea-b564-710dd5552b4f
+    uuid: 93b8b57b-a71b-448d-aa9b-983b816948c3
     type_id: 14
-  - id: &ph_premium_rate_services 7158
+  - id: &ph_premium_rate_services 25710
     name: PH Premium Rate Services
-    uuid: 9981e812-0fd4-4180-8c7b-e98c344ee1bb
+    uuid: 6fbbca3f-e4cd-4bfb-8d8f-d3ad27df537a
     type_id: 14
-  - id: &ph_embassies_call_centers 7159
+  - id: &ph_embassies_call_centers 25712
     name: PH Embassies Call Centers
-    uuid: 469d46bc-52e1-48af-9ef0-d6d119704444
+    uuid: de9fdd7e-ed8e-4187-823c-57b929c68c5c
     type_id: 14
 network_prefixes:
 # Fixed Prefixes
@@ -41,1121 +185,1121 @@ network_prefixes:
     prefix: '6348'
     number_min_length: 11
     number_max_length: 11
-    uuid: fb2420eb-978c-4fcf-915f-73d838374e30
+    uuid: 64ee6a59-392b-4602-8392-c34cf6a15de4
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_palawan_fixed
   - id: 58232
     prefix: '6349'
     number_min_length: 11
     number_max_length: 11
-    uuid: 090ec55f-8b20-4077-9393-5bf2f4beebfe
+    uuid: a6bf5d95-a0ec-4500-8f82-7c8b3a94c3a1
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_laguna_fixed
   - id: 71665
     prefix: '6352'
     number_min_length: 11
     number_max_length: 11
-    uuid: 98d769e0-11ff-4981-8a71-e6a8cb5b1a92
+    uuid: 704eea22-8efe-4b40-8242-b24327ea59d1
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_albay_catanduanes_fixed
   - id: 73207
     prefix: '6354'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7cf35e0c-3cb3-4b5f-a37a-45994b26b8b9
+    uuid: c8fcd604-978c-4716-a3f7-496cfaa2224e
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_camarines_norte_camarines_sur_fixed
   - id: 76554
     prefix: '6353'
     number_min_length: 11
     number_max_length: 11
-    uuid: f28b31b7-f34b-4567-9314-a7a58d0bc9ac
+    uuid: 73e5c536-8ec6-41b6-baab-06a8b4bddc36
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_biliran_leyte_southern_leyte_fixed
   - id: 78131
     prefix: '6355'
     number_min_length: 11
     number_max_length: 11
-    uuid: 16cf346c-d6f4-4463-857a-ecc8f9076699
+    uuid: 01a2c366-7e4c-4509-9c16-4e757b1c51aa
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_eastern_samar_northern_samar_western_samar_fixed
   - id: 87923
     prefix: '6356'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5088c69b-cac6-4f45-ac7d-8a39d6427f0c
+    uuid: 306609f6-968f-412f-ba2e-375a6cf253e4
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_masbate_sorsogon_fixed
   - id: 111472
     prefix: '6362'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9e844370-c549-4e7f-bc16-f512c3ce552f
+    uuid: 8d16b477-a40a-4c0f-be75-cae387a8d293
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_basilan_zamboanga_del_sur_zamboanga_sibugay_fixed
   - id: 117837
     prefix: '6363'
     number_min_length: 11
     number_max_length: 11
-    uuid: c80e283f-c556-4bd6-b10f-187e5c129114
+    uuid: 37d83e87-ac10-4d62-aa4b-7536128a5687
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_lanao_del_norte_lanao_del_sur_fixed
   - id: 122443
     prefix: '6364'
     number_min_length: 11
     number_max_length: 11
-    uuid: bdb08020-a372-4b56-9bfa-1142e76f4f48
+    uuid: 1f6fdde2-15c0-4085-9775-0b6816a33908
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_cotabato_maguindanao_sultan_kudarat_fixed
   - id: 135921
     prefix: '6365'
     number_min_length: 11
     number_max_length: 11
-    uuid: d654fff7-1b45-4bb6-8981-c79aa1dbadde
+    uuid: 3ef28220-8275-4b2a-8d41-df1b27d6bfb2
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_zamboanga_del_norte_fixed
   - id: 146823
     prefix: '6368'
     number_min_length: 11
     number_max_length: 11
-    uuid: 24a52dc2-27e9-42fc-9c71-9724fe46ac00
+    uuid: 7032271d-47d8-4017-9ea0-80ef4350a8e9
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_sulu_tawi_tawi_fixed
   - id: 172534
     prefix: '6372'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3ad56d32-a67e-4ffd-a556-b81dd68c3562
+    uuid: 2521fe24-f782-4c1b-9a27-4d452ce9472b
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_la_union_fixed
   - id: 182871
     prefix: '6374'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9f217eba-5faf-43d4-96a1-9d1dc9ad878a
+    uuid: 497c84eb-14e7-4430-bec6-0dd14c386426
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_cordillera_administrative_region_fixed
   - id: 185880
     prefix: '6375'
     number_min_length: 11
     number_max_length: 11
-    uuid: a6ae6014-49c6-40c5-a851-d262bf1bd12b
+    uuid: 2a2826b7-a93f-4cde-86e2-1b7473b64eb4
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_pangasinan_fixed
   - id: 192100
     prefix: '6377'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7850693b-e397-47eb-ba3e-fececd13866b
+    uuid: 80b40c24-af4c-4d11-b569-c6fc6d827624
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_ilocos_norte_ilocos_sur_fixed
   - id: 198401
     prefix: '6378'
     number_min_length: 11
     number_max_length: 11
-    uuid: 262fe037-94f6-40dd-a132-57ba08670739
+    uuid: 5c7ccc94-31d5-4cc6-8b59-473aba926060
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_cagayan_valley_fixed
   - id: 261197
     prefix: '632'
     number_min_length: 10
     number_max_length: 10
-    uuid: 582d214b-d72c-4e2e-af79-9f4bf71e1814
+    uuid: e09a6e03-caef-4ce4-abc8-7461ae1675cc
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_metro_manila_rizal_fixed
   - id: 327284
     prefix: '6332'
     number_min_length: 11
     number_max_length: 11
-    uuid: c8d550ec-2e56-41ba-8576-60a84d98c14e
+    uuid: 86882db2-1fe9-48ff-a2f1-c5d1357cd38e
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_cebu_fixed
   - id: 337292
     prefix: '6333'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0fad5c80-996d-4c8b-a0be-dbe4a68e4e4f
+    uuid: e11637b5-69a5-4c72-a0af-5601346db76d
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_guimaras_iloilo_fixed
   - id: 340480
     prefix: '6334'
     number_min_length: 11
     number_max_length: 11
-    uuid: f9d97d32-a8c7-42a6-88d5-3b3e96f89110
+    uuid: 3cac9b08-da39-4cff-9150-81874818bfc8
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_negros_occidental_fixed
   - id: 345948
     prefix: '6336'
     number_min_length: 11
     number_max_length: 11
-    uuid: a5d1e126-c608-4428-bdd4-0ec2c574feca
+    uuid: 9cc10fe5-61c7-4b62-9b3c-df3eb1c8f2b1
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_aklan_antique_capiz_fixed
   - id: 347707
     prefix: '6338'
     number_min_length: 11
     number_max_length: 11
-    uuid: c57fb653-3890-4323-8002-f7847ed692a8
+    uuid: 7a86e07f-057d-4498-b355-24691ed6c12b
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_bohol_fixed
   - id: 352243
     prefix: '6335'
     number_min_length: 11
     number_max_length: 11
-    uuid: a65d4584-64a4-4915-a9ab-2e982ec9becd
+    uuid: be84f14d-a003-4a65-9136-d28549dad9ba
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_negros_oriental_siquijor_fixed
   - id: 367945
     prefix: '6343'
     number_min_length: 11
     number_max_length: 11
-    uuid: d700166b-f67f-41ea-9c09-b114a95ff158
+    uuid: 40d9399c-b1ec-44b4-b65b-fa328556d4ee
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_batangas_mindoro_occidental_mindoro_oriental_fixed
   - id: 370198
     prefix: '6344'
     number_min_length: 11
     number_max_length: 11
-    uuid: 255d8cc1-1266-44a1-8f02-a5368a6db403
+    uuid: c1640c5c-9bc1-4284-922f-3f544986411c
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_bulacan_nueva_ecija_fixed
   - id: 377185
     prefix: '6342'
     number_min_length: 11
     number_max_length: 11
-    uuid: f4a1966b-1c89-4421-b815-b6145a4d535b
+    uuid: 59509e32-75f5-4bf6-ab89-0e3b5b368e60
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_aurora_marinduque_quezon_romblon_fixed
   - id: 388637
     prefix: '6346'
     number_min_length: 11
     number_max_length: 11
-    uuid: 98a43970-f77a-48f2-beea-cbeeb9275660
+    uuid: d5e450c3-ec2f-40c2-ad95-c0e26c197500
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_cavite_fixed
   - id: 392624
     prefix: '6345'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1e93806a-a863-402b-b2cc-3c9fe05d1ce8
+    uuid: 112ffe63-e910-4ade-9dd5-523ff5a6ea60
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_pampanga_tarlac_fixed
   - id: 399488
     prefix: '6347'
     number_min_length: 11
     number_max_length: 11
-    uuid: cdacb4c4-138f-4adb-9198-c30210c9f410
+    uuid: 6de06367-7fa1-4c31-8b6d-6ecc90c91b66
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_bataan_zambales_fixed
   - id: 418794
     prefix: '6382'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9df4393e-ea01-4ce2-802f-42310041ed9c
+    uuid: d3e687ee-1862-4ac1-bb9a-7d936e3a7525
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_davao_del_sur_fixed
   - id: 422130
     prefix: '6383'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5a371bdb-211d-41e0-958f-c804861fbbad
+    uuid: dc33f9b9-5082-49ab-994c-76c5952de5d7
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_sarangani_south_cotabato_fixed
   - id: 428708
     prefix: '6386'
     number_min_length: 11
     number_max_length: 11
-    uuid: f92d4d58-5e4f-4996-8168-15de324e1ad1
+    uuid: 1f04b058-e58f-40b1-9b57-228e7f019538
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_dinagat_islands_surigao_del_norte_surigao_del_sur_fixed
   - id: 433223
     prefix: '6384'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1deecdc-bd0b-41c4-917e-c13edbcf9ec8
+    uuid: c2d2b5e7-645d-48c8-963a-0f2fbbc10875
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_davao_del_norte_fixed
   - id: 435887
     prefix: '6385'
     number_min_length: 11
     number_max_length: 11
-    uuid: f730165a-fc22-448c-be22-fbb06d82c3d4
+    uuid: 21dcfb3b-b7c2-45ad-b752-85d14fad3346
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_agusan_del_norte_agusan_del_sur_fixed
   - id: 441114
     prefix: '6387'
     number_min_length: 11
     number_max_length: 11
-    uuid: f01688b6-ae02-4e87-9ba4-ccf9f78e9768
+    uuid: 7574539d-6d8c-4d53-a3d0-aa7aeb4a2617
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_compostela_valley_davao_oriental_fixed
   - id: 443797
     prefix: '6388'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6c677951-476b-4d9f-8cfb-d8705a3f2446
+    uuid: fd688321-29e1-474e-8d19-f92615d350c0
     country_id: *ph
-    network_id: *ph_fixed
+    network_id: *ph_bukidnon_camiguin_misamis_occidental_misamis_oriental_fixed
 # Mobile Prefixes
   - id: 213827
     prefix: '63942'
     number_min_length: 12
     number_max_length: 12
-    uuid: c4516c0a-f0b1-4928-b439-d99ae26a66de
+    uuid: eb93989e-64d1-4320-a4b9-c58d1b1a18ce
     country_id: *ph
     network_id: *ph_sun_cellular_mobile
   - id: 213851
     prefix: '63943'
     number_min_length: 12
     number_max_length: 12
-    uuid: dae39d74-f8a4-43e7-9a3b-356bae815855
+    uuid: c92b45f8-337a-43c2-b52b-a087f5c4e826
     country_id: *ph
     network_id: *ph_sun_cellular_mobile
   - id: 213955
     prefix: '63945'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8c6a7c4d-dc6e-46b4-880f-9483ceb8adfa
+    uuid: 9fba80ff-3310-408b-9f8c-c08c4321dde0
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 214153
     prefix: '63946'
     number_min_length: 12
     number_max_length: 12
-    uuid: bc23340f-a01c-4b73-9566-3a80e4a909e4
+    uuid: f3cd9220-0df2-4f8c-8d4d-8cec68f9f85a
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 214165
     prefix: '63947'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6f44b358-d016-43af-9250-227687cda031
+    uuid: 0f09cd17-9d54-40dc-8017-c25cb5e07162
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 214363
     prefix: '63948'
     number_min_length: 12
     number_max_length: 12
-    uuid: dba559dc-ab89-477d-9879-1bb127cf0dcd
+    uuid: 238d417b-4343-41c3-97a0-233af4c7d3e6
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 214421
     prefix: '63949'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6012fef8-9516-42b9-a2a5-c0b6118d800f
+    uuid: d7d7a8b4-2cf2-4139-94ab-c008d5da1c28
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 216355
     prefix: '63957'
     number_min_length: 12
     number_max_length: 12
-    uuid: 74d40483-e41b-4cee-a091-7a5668b2df2f
+    uuid: e47865b6-2fff-401a-86ba-81fc7fb00b00
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 216367
     prefix: '63958'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0844bc3e-89d0-49fa-96e1-a4cef6d63be3
+    uuid: de15be19-5d61-4bec-a050-5d03942a48f1
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 217224
     prefix: '63939'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9446c432-dd1b-4eca-9449-f738752cb565
+    uuid: 4a9fee9f-f19d-46e8-9b3c-f923b9a26718
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 217415
     prefix: '63950'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4a32a064-b8d9-4de2-8008-a78222fd3bb0
+    uuid: a827b522-91f9-419d-893a-82e5dfd2ba9a
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 217427
     prefix: '63951'
     number_min_length: 12
     number_max_length: 12
-    uuid: 07b2d144-2d12-4c79-8149-b31096851f50
+    uuid: 137d2658-fa8e-4a68-a5f1-06fe1d7ddcdf
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 219048
     prefix: '63952'
     number_min_length: 12
     number_max_length: 12
-    uuid: e03dbc5e-6861-4896-a472-f3058f71c5f7
+    uuid: 87ee30c0-11cf-4219-99b0-f47c90de6865
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 219427
     prefix: '63953'
     number_min_length: 12
     number_max_length: 12
-    uuid: f866b265-eaba-4c1f-810c-e61c58f18179
+    uuid: a32a9d3a-2e05-4567-9138-fa671ffeaaf0
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 219982
     prefix: '63954'
     number_min_length: 12
     number_max_length: 12
-    uuid: 18fe2295-00b9-4f00-9354-b39f7f3afe74
+    uuid: 57c37afd-8a34-41bb-826b-d6ca0df706ec
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 221102
     prefix: '63955'
     number_min_length: 12
     number_max_length: 12
-    uuid: 42f7b165-486f-4934-a049-0c86bf0f36a0
+    uuid: 04343d62-7db9-42ff-aeb3-d0b9b47b51d3
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 221116
     prefix: '63956'
     number_min_length: 12
     number_max_length: 12
-    uuid: 32883e74-be89-45f6-a15b-51e287105ba4
+    uuid: 26d80ce5-cc89-4e75-816b-457b2301c0d2
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 221788
     prefix: '63959'
     number_min_length: 12
     number_max_length: 12
-    uuid: dbcbc02e-c552-4f3e-83db-8861f6b4d224
+    uuid: 89548797-d7b1-4abe-b53c-300d664976ec
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 223705
     prefix: '63965'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5b59fd44-4a58-4b37-ab38-902effe3e10f
+    uuid: 29394b08-5b80-436a-b33e-e9198ba87795
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 224288
     prefix: '63968'
     number_min_length: 12
     number_max_length: 12
-    uuid: de601152-3178-4b97-9b52-008187c8aa83
+    uuid: 23e0bfa3-91ff-4441-9d07-14b074a9981c
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 225111
     prefix: '63960'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9ef10b49-d8ed-4dd6-bb20-bad55e3b9d1d
+    uuid: 94677891-020a-45dd-a07f-ba4057c5f030
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 225134
     prefix: '63961'
     number_min_length: 12
     number_max_length: 12
-    uuid: 84ed67f4-c010-44f7-a2e3-659a0ef9551b
+    uuid: 335e6bb9-a6ac-4e4d-b06c-b7ad5846b96b
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 225373
     prefix: '63962'
     number_min_length: 12
     number_max_length: 12
-    uuid: c88e9a23-2f4d-4f8e-88f9-076ae9cc30bc
+    uuid: 4aaec379-fb33-4bb7-b7dd-d85bf0450787
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 226310
     prefix: '63966'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c2453f6-ea1d-493a-b24e-e425f23e7268
+    uuid: a8a1d198-5079-47c0-8eae-f4e969fb6dca
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 226686
     prefix: '63967'
     number_min_length: 12
     number_max_length: 12
-    uuid: a9060a9d-8e5d-4644-b479-32649e0f4618
+    uuid: df0fb4de-752e-42cc-a039-20a7fc704ab2
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 228264
     prefix: '63971'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6b7fa084-3a7f-4ac5-9365-d976cf1c5556
+    uuid: 89736967-8618-4dd3-9bb5-b9c5e9b2b3f5
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 229619
     prefix: '63972'
     number_min_length: 12
     number_max_length: 12
-    uuid: cc10f4c8-2ea7-480c-a5be-330abf722c47
+    uuid: 6ddb65db-7ffc-4cea-816a-8dc86de40370
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 232902
     prefix: '63982'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4f01ebeb-52d2-4cb8-927a-b312a6adafe0
+    uuid: c16d9f7f-8625-4a11-a963-f4ee0d5e6950
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 233335
     prefix: '63975'
     number_min_length: 12
     number_max_length: 12
-    uuid: a20381ac-2c7e-40a6-89a1-4d58ff7d3cd4
+    uuid: 1b1c2820-e751-43b8-8eef-e5647f2f4a38
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 233345
     prefix: '63976'
     number_min_length: 12
     number_max_length: 12
-    uuid: a26ba21a-74d3-4323-a0fe-e1411aa8b0c0
+    uuid: 66909eba-8af9-491c-94ad-0544941277ba
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 233358
     prefix: '63977'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0f13c65e-09e0-4439-afbc-7ddbbf9eba82
+    uuid: b490c41e-6126-47e6-b4a1-657e5c75399f
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 233379
     prefix: '63978'
     number_min_length: 12
     number_max_length: 12
-    uuid: a3e23dfa-004d-40a0-a414-c34fda96b6ca
+    uuid: 893f034e-5e6c-4de4-b711-587644c2404d
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 235047
     prefix: '63981'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8dbf3932-f1d5-4cda-b25b-57cdf3041f34
+    uuid: 8709d499-060d-4bcc-b52c-a935217c1b7c
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 241086
     prefix: '63995'
     number_min_length: 12
     number_max_length: 12
-    uuid: d84306b6-2495-49de-a190-232544b8230c
+    uuid: a4cbe882-941a-4bfc-b4c2-a15638b69561
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 241143
     prefix: '63996'
     number_min_length: 12
     number_max_length: 12
-    uuid: f7fd1dc2-c527-4a8d-9f72-925e254b2e8d
+    uuid: 17d50e3b-4771-4c38-880d-5c793eebe835
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 241373
     prefix: '63997'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6d0c698f-07e5-4173-a5dd-e8edf5039036
+    uuid: 0e0091a1-1970-407a-8156-d28402edbcb0
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 241930
     prefix: '639'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3b958968-b705-40ef-9651-135f459d6f3f
+    uuid: f925121b-a239-4d54-b2c0-b8e5282a9a9c
     country_id: *ph
     network_id: *ph_mobile
   - id: 245885
     prefix: '63998'
     number_min_length: 12
     number_max_length: 12
-    uuid: f4b86af3-1e53-4dd3-a905-907f6a6e84b4
+    uuid: d733cb35-8e96-4621-ae45-c71b6d03d4fd
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 246800
     prefix: '63999'
     number_min_length: 12
     number_max_length: 12
-    uuid: e62bce7a-436e-467b-a897-dbb2a436d1ea
+    uuid: d549374e-3402-4941-90f5-2cd7043ea14e
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 415683
     prefix: '63813'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8149e360-a9d7-42db-810b-1b166921efa6
+    uuid: 0371ea78-8449-4128-85e4-0583dd90e82f
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 456598
     prefix: '63907'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8d239aa0-bcba-450b-8f64-782c1e60683b
+    uuid: 8b65b8bd-a4f8-4a56-8a3c-0a3f78c9f82e
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 457260
     prefix: '63908'
     number_min_length: 12
     number_max_length: 12
-    uuid: b3f326c0-0b95-4385-abed-0cf1a36c85a6
+    uuid: 64084f48-af51-44dc-a678-f3cc19f9e4de
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 458517
     prefix: '63910'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e4623fc-3362-4673-b969-f804059e0716
+    uuid: ccada6f5-79ee-40ce-a916-5e895ecf74d1
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 461706
     prefix: '63917'
     number_min_length: 12
     number_max_length: 12
-    uuid: bd20d07b-104b-4115-a447-179788a5a9ec
+    uuid: c575bfe2-a2d7-4de3-8785-a3b99d047122
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461710
     prefix: '639170001'
     number_min_length: 12
     number_max_length: 12
-    uuid: e95d30ff-25a6-416f-aa30-a092909eb87b
+    uuid: 143461c0-5814-4a21-b9af-5a0f5111ee4e
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461711
     prefix: '639170002'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7eae472-b831-4934-88f8-06d66bf475f4
+    uuid: 3183c562-aa06-4271-aef5-f0119cc58e30
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461712
     prefix: '639170003'
     number_min_length: 12
     number_max_length: 12
-    uuid: d8f6cf50-f4ba-4db7-b713-4f766c87b31a
+    uuid: c2b2e209-6ec4-44d3-9682-0358b6e414ad
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461713
     prefix: '639170004'
     number_min_length: 12
     number_max_length: 12
-    uuid: ddfb2c22-0cf7-4803-b094-ae77a83e592d
+    uuid: 5ca2ecfd-3b34-4a6a-99c7-a819022748d6
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461714
     prefix: '639170005'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1400a8df-16d2-4f28-b01b-c4fa5a836b69
+    uuid: 8f7209e9-c0f5-4a53-969b-04452ccb6ff0
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461715
     prefix: '639170006'
     number_min_length: 12
     number_max_length: 12
-    uuid: a8fa749e-6bca-4372-a230-4efbf2afc501
+    uuid: 8fdc0658-7358-487e-b172-a98958fa8961
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461716
     prefix: '639170007'
     number_min_length: 12
     number_max_length: 12
-    uuid: 670f57a8-317b-4132-81c7-6ce8e089b461
+    uuid: 24f68304-611e-49d4-9bf2-02b83cb946a8
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461717
     prefix: '639170008'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4fd2bf29-8f1a-4c64-99fd-17eb1e9321fe
+    uuid: cdd8cd6f-5cd9-4650-8db3-f521bf2825de
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461718
     prefix: '639170009'
     number_min_length: 12
     number_max_length: 12
-    uuid: 612b4bf7-f029-4251-840d-814af3717dd7
+    uuid: be5ebfa0-6c39-4b97-a6fd-75ece2e46be2
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461719
     prefix: '63917001'
     number_min_length: 12
     number_max_length: 12
-    uuid: 99948759-e6a1-4cfe-96dc-04140455eecc
+    uuid: ea44928a-4c28-44d0-849e-b07bb8497a8d
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461720
     prefix: '63917002'
     number_min_length: 12
     number_max_length: 12
-    uuid: fdb4351e-42f7-415c-8cdd-ee223d58fe5a
+    uuid: 81bbae4a-07bd-45df-ab74-d0434bf1c967
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461721
     prefix: '63917003'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0286ec3e-add5-4ae0-9719-0f2aa9da1dcc
+    uuid: 3ce703d3-1c6a-4ffc-99f0-3f2ae2e4a814
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461722
     prefix: '63917004'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3b14bc4a-d54e-465b-b902-ca8af151a596
+    uuid: 9c7749bd-cf41-4ee0-af63-2d82c2d11e54
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461723
     prefix: '63917005'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7c477a20-52b0-4d9e-b24e-c7d65b71fa2c
+    uuid: dc7f8656-1a49-49ee-b342-a6207b16eef0
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461724
     prefix: '63917006'
     number_min_length: 12
     number_max_length: 12
-    uuid: 641245c4-9d7a-4e46-8c44-26a50df5509a
+    uuid: 961d1416-4a4a-41eb-8e57-3c55d952ff77
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461725
     prefix: '63917007'
     number_min_length: 12
     number_max_length: 12
-    uuid: a8262fd9-ec65-43f8-93ca-ca1f551c3389
+    uuid: 0090cb77-0777-46b5-9a55-09855822ce99
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461726
     prefix: '63917008'
     number_min_length: 12
     number_max_length: 12
-    uuid: 97181d2e-ca5d-4074-ab53-9ee2bb740f17
+    uuid: 5247d5c7-45f6-4505-a1d0-0e98aa6c379b
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461727
     prefix: '63917009'
     number_min_length: 12
     number_max_length: 12
-    uuid: f0b3df15-f762-4b86-bdec-f488a24e05d4
+    uuid: 9c07f5e0-a8a6-4d24-8050-8e76cf94e8cd
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461728
     prefix: '6391701'
     number_min_length: 12
     number_max_length: 12
-    uuid: b64f586d-7117-4db6-a703-f38429b3a34b
+    uuid: 28b4ea86-15c7-4e00-a3b3-3614c81ba9bd
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461729
     prefix: '6391702'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c298eb4-e4bc-4098-837b-93d749b122df
+    uuid: 344ba058-54ac-41cc-9173-a0e9e64c5ee3
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461730
     prefix: '6391703'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ff61093-c537-4380-b4a3-79a3e9ce1814
+    uuid: d40409e7-01b8-4462-ab7d-41f8189d42d8
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461731
     prefix: '6391704'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2c23b8ab-1979-4e94-b29b-81ee2322b62d
+    uuid: 53b12e5c-362f-496f-b0ad-cf8f68a4f3ba
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461732
     prefix: '6391705'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1f112224-eee9-4cfb-9bb8-699136cf9cd7
+    uuid: 200f0e0c-1cf0-40db-867c-1f116729af25
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461733
     prefix: '6391706'
     number_min_length: 12
     number_max_length: 12
-    uuid: 61f77980-cde3-425b-868d-b2b5b84de3fc
+    uuid: d228af72-e49b-4015-951f-1e19354d57ec
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461734
     prefix: '6391707'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8010ac8b-e19e-4b98-94b6-25ea4b15760f
+    uuid: e3a2889c-d3cc-49e6-b22c-bd0925226613
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461735
     prefix: '6391708'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3e7791b0-3b5f-40fb-a7e2-6d0c5bdde1b9
+    uuid: b5cef1ef-d55a-4cc8-92da-dcaa8ea7412b
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 461736
     prefix: '6391709'
     number_min_length: 12
     number_max_length: 12
-    uuid: fe34f380-e568-458f-8f4f-b532abe6b253
+    uuid: 24601fa2-d43d-4fc8-8c16-e599e2f228de
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 462677
     prefix: '63905'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0a655334-34a7-44d9-bbc3-f2652254463a
+    uuid: 722421fc-5f26-4d07-8b11-e3a4ba807d7f
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 462748
     prefix: '63906'
     number_min_length: 12
     number_max_length: 12
-    uuid: 37a30f75-8793-4d24-b369-3e25683c22ee
+    uuid: d33fb6ff-98f1-42a4-b7dd-d02b01abc8fe
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 463577
     prefix: '63909'
     number_min_length: 12
     number_max_length: 12
-    uuid: 93147af1-ca0c-497e-80a3-58da1b3d9fd0
+    uuid: 04f2941a-9727-4a43-9c02-9cea578bdfe5
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 465641
     prefix: '63912'
     number_min_length: 12
     number_max_length: 12
-    uuid: f4c7bb9d-3c43-4e25-87cc-ecbc32124dbc
+    uuid: 7a15937f-edce-42f2-bd19-7ee62ca25050
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 466838
     prefix: '63915'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4964228a-2e2f-42d9-ad68-4f747e7bf304
+    uuid: f6d305ca-3d7d-48cd-93cd-bec2e4cdd857
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467205
     prefix: '63916'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5fb0e17f-65cf-4524-8a8a-48ab11e388c7
+    uuid: 20c9aa37-e9eb-40f6-a7c4-27c797f95137
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467210
     prefix: '639160001'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3a3db310-bb4d-4701-89ab-f348cac3ad99
+    uuid: fb43a7dc-e6f7-4b33-8050-54721cd9fece
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467211
     prefix: '639160002'
     number_min_length: 12
     number_max_length: 12
-    uuid: 56f7c14d-2742-4734-a224-5b32759f273b
+    uuid: 0c8b8805-5dfe-45b9-84ff-cef04e406228
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467212
     prefix: '639160003'
     number_min_length: 12
     number_max_length: 12
-    uuid: effe0f54-48f4-4eef-aa4b-deb28fd09ab2
+    uuid: cf9b3774-ceb5-40c1-b33e-4043a24ba452
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467213
     prefix: '639160004'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7ed5111d-3c52-4de6-b81f-da78b8779ce4
+    uuid: ac151135-b87e-465e-875a-3157f554609c
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467214
     prefix: '639160005'
     number_min_length: 12
     number_max_length: 12
-    uuid: 808a2c83-42d1-4454-b599-a2e3d5788ae7
+    uuid: 6fa6d192-5a52-4ec2-8a5a-0ed515d5ff4b
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467215
     prefix: '639160006'
     number_min_length: 12
     number_max_length: 12
-    uuid: d86ce1e0-9966-42fc-82ff-ebe3b781ad69
+    uuid: f362fcff-90b4-4cc6-b27f-ccef9a13cf0d
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467216
     prefix: '639160007'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e20e6c5-3809-4be7-b5a7-4f90bb9ad3e6
+    uuid: 48155f00-979d-4720-bf24-28414cee87f7
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467217
     prefix: '639160008'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1eca6f6d-6b56-44b7-83fd-7454e947639b
+    uuid: 38ec1592-7c05-4d91-a620-6dd120f96ea2
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467218
     prefix: '639160009'
     number_min_length: 12
     number_max_length: 12
-    uuid: ff8a875a-cef1-4099-8270-c559142c3f2c
+    uuid: e2f13c53-582e-457c-aa0f-e624b19e5b7b
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467219
     prefix: '63916001'
     number_min_length: 12
     number_max_length: 12
-    uuid: a67fc27d-8eb8-402f-ab2e-15bbc84c6f66
+    uuid: b8360b04-d91a-47c7-b497-2fdf8170c03e
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467220
     prefix: '63916002'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5b245a23-9817-4c88-a432-ade0a12fd92b
+    uuid: 05abbd8a-b2b8-4f17-af77-e2b44837842d
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467221
     prefix: '63916003'
     number_min_length: 12
     number_max_length: 12
-    uuid: ed21ad6d-f195-4ce8-b71b-5f7ff03f6173
+    uuid: 448f02a6-ef9f-4451-a8e3-a20f3e8c00fc
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467222
     prefix: '63916004'
     number_min_length: 12
     number_max_length: 12
-    uuid: c48edef9-da72-43d2-a1e5-638d0150d60e
+    uuid: 8272f630-3d56-40c0-8359-91238fbb0f50
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467223
     prefix: '63916005'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f2c20a3-3f9c-4c0a-ae9e-faadbb156f93
+    uuid: 17b5d008-be8f-4fa8-9d96-0927f29d91a0
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467224
     prefix: '63916006'
     number_min_length: 12
     number_max_length: 12
-    uuid: 798575fd-cdba-4339-9350-74bfec20ea03
+    uuid: df2bccc2-5243-4933-b548-f334d6e69769
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467225
     prefix: '63916007'
     number_min_length: 12
     number_max_length: 12
-    uuid: fc7c215e-acc5-4ef7-bc12-e63f52f24f0d
+    uuid: 253bb08f-e3f7-4cdf-b6df-bdc865b716a7
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467226
     prefix: '63916008'
     number_min_length: 12
     number_max_length: 12
-    uuid: c466b330-855e-4965-9509-f09b429ec097
+    uuid: bcfc9649-024e-45c6-9391-17bb97000f51
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467227
     prefix: '63916009'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9ace66d0-8d67-4d11-9255-f8d2f80b5001
+    uuid: f5ad6735-438f-4ad2-9088-31d9f3e3ed11
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467228
     prefix: '6391601'
     number_min_length: 12
     number_max_length: 12
-    uuid: 751887fd-d859-453f-acbc-96fec3de9fed
+    uuid: 10a2993a-f5ad-4d1c-80e9-230eafb15fb0
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467229
     prefix: '6391602'
     number_min_length: 12
     number_max_length: 12
-    uuid: 994d393a-b0cb-4be1-b92e-5101eead22b2
+    uuid: 037fd9e3-6631-44cd-adf8-158e6f08a193
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467230
     prefix: '6391603'
     number_min_length: 12
     number_max_length: 12
-    uuid: fa45a624-d0f6-4dc6-9a69-b7cc4bf16804
+    uuid: 415f8901-e0c0-45f2-85c3-c55ec273aeb9
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467231
     prefix: '6391604'
     number_min_length: 12
     number_max_length: 12
-    uuid: bb40a230-64ad-4740-a721-317d0fba6a83
+    uuid: 13ac1597-5ba2-4251-b061-fee87894e4f9
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467232
     prefix: '6391605'
     number_min_length: 12
     number_max_length: 12
-    uuid: 14d213fd-df2f-422f-ab29-034ff0c5418c
+    uuid: e229e6e2-9dd1-41fa-8ed9-520dc84edfe3
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467233
     prefix: '6391606'
     number_min_length: 12
     number_max_length: 12
-    uuid: 03b4a10e-b0ee-4f4e-9a0e-9b47f63ee277
+    uuid: bb2bb88b-d9eb-49a8-ab0c-ad45a8c8147f
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467234
     prefix: '6391607'
     number_min_length: 12
     number_max_length: 12
-    uuid: f5daa0a7-257d-4df3-8ab8-024f13445c74
+    uuid: dc5d8daa-614b-4107-9faa-b964e8c39ecc
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467235
     prefix: '6391608'
     number_min_length: 12
     number_max_length: 12
-    uuid: 52fd9ede-fc80-405e-b81f-3247ab1365e4
+    uuid: 4a43b6ea-d5ea-4162-8cd0-b37c2ffeaf7a
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467236
     prefix: '6391609'
     number_min_length: 12
     number_max_length: 12
-    uuid: 14fe5093-0619-4767-bf08-3d52c3a28f44
+    uuid: 9a7238b3-4ef3-4148-9ef2-854329c9a58c
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 467621
     prefix: '63918'
     number_min_length: 12
     number_max_length: 12
-    uuid: 72887a18-9ab1-45f3-b4f3-7d4692359e42
+    uuid: 84ab5a8b-10f0-43e0-95c4-17330acc3c63
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 469805
     prefix: '63919'
     number_min_length: 12
     number_max_length: 12
-    uuid: 96df7c56-a535-4676-8197-ac58e9ea14a7
+    uuid: e21cf21c-f3c0-43ae-9709-75077f4a0899
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 470616
     prefix: '63920'
     number_min_length: 12
     number_max_length: 12
-    uuid: 41e4ad0b-733b-4707-b85d-6d211d6e4e0f
+    uuid: b1d97757-55be-4e8d-9a1e-140cc4b93727
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 474670
     prefix: '63925'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36685521-351f-4579-adad-c43cdadad580
+    uuid: 472cfb95-5861-4311-b1c3-9352767ca5e2
     country_id: *ph
     network_id: *ph_sun_cellular_mobile
   - id: 475299
     prefix: '63926'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e4a3188-3d70-4b87-b713-f8000ae37658
+    uuid: 62979cb2-b596-4af8-bdef-29e16cc58f5e
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 476598
     prefix: '63921'
     number_min_length: 12
     number_max_length: 12
-    uuid: bb3774a9-c1c3-4939-b648-275c3673c74d
+    uuid: 9ac0abe1-19b6-4c74-aa67-c0f456a984a2
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 477111
     prefix: '63922'
     number_min_length: 12
     number_max_length: 12
-    uuid: 784c8961-dbf6-46a7-becb-74529f4c75ff
+    uuid: be4abfd5-c4ad-40b2-abf1-c44d378af323
     country_id: *ph
     network_id: *ph_sun_cellular_mobile
   - id: 478440
     prefix: '63923'
     number_min_length: 12
     number_max_length: 12
-    uuid: a4156794-8f1c-4185-879a-b1f9bed45adc
+    uuid: b92941d6-cce6-4813-8873-2c3b347665bb
     country_id: *ph
     network_id: *ph_sun_cellular_mobile
   - id: 481755
     prefix: '63929'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f33e117-42d5-495c-a907-bb2843d1485e
+    uuid: b5fa4fcc-50c5-44f9-b4a0-7c18953563e4
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 482772
     prefix: '63927'
     number_min_length: 12
     number_max_length: 12
-    uuid: cb7a9749-b061-41ce-b79e-f46b0ceef7ff
+    uuid: bc14884b-c59c-4b6d-b696-2d7f74feda0c
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 482787
     prefix: '63928'
     number_min_length: 12
     number_max_length: 12
-    uuid: fc5a3d6e-1d88-483f-8b89-57458c4f88fa
+    uuid: 7b90767a-3466-475a-8262-4f98ca5611a1
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 485707
     prefix: '63930'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ca8cd64-3194-4980-8eb2-71423211496c
+    uuid: dcefd9ef-b3c5-418c-9318-6ec519ff4252
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 486097
     prefix: '63933'
     number_min_length: 12
     number_max_length: 12
-    uuid: 395c52b9-7d36-4924-bb28-8ca382ce0207
+    uuid: d019953a-93a2-4fdf-babd-f15f1f00aea4
     country_id: *ph
     network_id: *ph_sun_cellular_mobile
   - id: 490007
     prefix: '63931'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6e855672-9380-4625-8ed3-b9e981a170d5
+    uuid: 3558edeb-c617-4630-b9f6-5179ba8a25d3
     country_id: *ph
     network_id: *ph_smart_mobile
   - id: 490540
     prefix: '63932'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3c07cb44-b805-4d11-ba98-2d91c7341b9a
+    uuid: 8f883e07-95ee-4728-bc83-6ffc06bef7ee
     country_id: *ph
     network_id: *ph_sun_cellular_mobile
   - id: 493045
     prefix: '63935'
     number_min_length: 12
     number_max_length: 12
-    uuid: b54218c2-aa55-4fd8-b88a-402f4f20a103
+    uuid: 5c7a440d-34ad-48ad-9dda-2e37fccb4e79
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 498644
     prefix: '63936'
     number_min_length: 12
     number_max_length: 12
-    uuid: 94d05bf4-fde3-4c5c-b775-2e4a177a4af6
+    uuid: 1aa96024-4c5c-4e32-9e96-afc6735a175f
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 498824
     prefix: '63937'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9fce9370-32c9-4225-824b-fee446a1edf2
+    uuid: 7564d976-5e51-4404-811e-c1aac2e12bea
     country_id: *ph
     network_id: *ph_globe_mobile
   - id: 501491
     prefix: '63938'
     number_min_length: 12
     number_max_length: 12
-    uuid: c2964521-7860-4a4b-8527-62f4fe4f5a9b
+    uuid: 99fc718c-10bd-4778-99a1-93ec7ee15bc0
     country_id: *ph
     network_id: *ph_smart_mobile
 # Country code Prefixes
@@ -1163,7 +1307,7 @@ network_prefixes:
     prefix: '63'
     number_min_length: 3
     number_max_length: 100
-    uuid: 6a4e9ac0-8d5e-4f60-ae30-f9511d7413e1
+    uuid: 4850900e-355e-4303-9b4c-b9dfe3c9384e
     country_id: *ph
     network_id: null
 # Supplementary services Prefixes
@@ -1171,20 +1315,20 @@ network_prefixes:
     prefix: '631800'
     number_min_length: 14
     number_max_length: 15
-    uuid: 2b38ed2d-f786-43d4-93e7-52f240c68111
+    uuid: ad9bbf18-c638-43bc-b24d-a042ff84f31c
     country_id: *ph
     network_id: *ph_freephone_services
   - id: 261008
     prefix: '631908'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4d7ddcc3-9d0b-4203-8624-4b3cc211f804
+    uuid: 9145a642-a8a4-48fe-936f-91aff406df65
     country_id: *ph
     network_id: *ph_premium_rate_services
   - id: 261011
     prefix: '631909'
     number_min_length: 13
     number_max_length: 13
-    uuid: 3192d739-a17f-41d3-8380-65968e39c2d0
+    uuid: a633705f-2e15-40b0-b0d0-d876272fe352
     country_id: *ph
     network_id: *ph_embassies_call_centers

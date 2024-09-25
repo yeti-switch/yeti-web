@@ -1,171 +1,375 @@
 country_id: &ie 103
 networks:
 # Fixed Networks
-  - id: &ie_fixed 4053
-    name: IE Fixed
-    uuid: 347798d3-d9f3-4276-9a97-cd66f563f764
+  - id: &ie_northern_ireland_fixed 4198
+    name: IE Northern Ireland Fixed
+    uuid: 2edd0faf-81fd-41e8-a190-3f13af42591d
+    type_id: 12
+  - id: &ie_thurles_fixed 4806
+    name: IE Thurles Fixed
+    uuid: 70279e0d-7111-4806-a659-a9419370401c
+    type_id: 12
+  - id: &ie_belturbet_cavan_cootehill_oldcastle_fixed 5024
+    name: IE Belturbet Cavan Cootehill Oldcastle Fixed
+    uuid: 9b3e8bd2-4a99-448a-8a47-c1d1291a2e0f
+    type_id: 12
+  - id: &ie_carrick_on_suir__kilmacthomas_new_ross_waterford_fixed 5635
+    name: IE Carrick_On_Suir  Kilmacthomas New Ross Waterford Fixed
+    uuid: 067c5bdf-b0c7-45ff-8fd2-f5256c706fd7
+    type_id: 12
+  - id: &ie_roscrea_fixed 5925
+    name: IE Roscrea Fixed
+    uuid: 18518c47-e975-4695-bb52-d558cb990555
+    type_id: 12
+  - id: &ie_cahir_clonmel_killenaule_fixed 6635
+    name: IE Cahir Clonmel Killenaule Fixed
+    uuid: 9a55cc20-3732-4991-b0e5-64f9edba7566
+    type_id: 12
+  - id: &ie_enniscorthy_ferns_gorey_wexford_fixed 7566
+    name: IE Enniscorthy Ferns Gorey Wexford Fixed
+    uuid: a0b46482-f2aa-413c-a1f6-af2a6f6f34a8
+    type_id: 12
+  - id: &ie_athy_baltinglass_carlow_muine_bheag_fixed 8813
+    name: IE Athy Baltinglass Carlow Muine Bheag Fixed
+    uuid: f157e2ba-7c13-4bf8-b00c-bc1e3356cea5
+    type_id: 12
+  - id: &ie_castlecomer_freshford_kilkenny_fixed 9273
+    name: IE Castlecomer Freshford Kilkenny Fixed
+    uuid: a2105532-b301-4aaa-b5bc-0a47dddd0af4
+    type_id: 12
+  - id: &ie_abbeyleix_birr_portlaoise_tullamore_fixed 9678
+    name: IE Abbeyleix Birr Portlaoise Tullamore Fixed
+    uuid: ec9f3dd7-a978-4459-ad32-de989c426b8e
+    type_id: 12
+  - id: &ie_dungarvan_fixed 10244
+    name: IE Dungarvan Fixed
+    uuid: 6fb5f06b-658a-46cc-9812-6f518fbf256a
+    type_id: 12
+  - id: &ie_limerick_scarriff_fixed 11786
+    name: IE Limerick Scarriff Fixed
+    uuid: c0daadc1-aba0-4868-aaa3-f3b760068a48
+    type_id: 12
+  - id: &ie_cashel_tipperary_fixed 11977
+    name: IE Cashel Tipperary Fixed
+    uuid: edcc2751-ce76-4d7c-a540-5c1709799b3c
+    type_id: 12
+  - id: &ie_rathluirc_fixed 12457
+    name: IE Rathluirc Fixed
+    uuid: 658d8d06-0f77-46d5-acb7-9497fce4780e
+    type_id: 12
+  - id: &ie_killarney_rathmore_fixed 12719
+    name: IE Killarney Rathmore Fixed
+    uuid: b1cec333-9a49-4b73-a80b-e80b804add2a
+    type_id: 12
+  - id: &ie_ennis_ennistymon_kilrush_fixed 13472
+    name: IE Ennis Ennistymon Kilrush Fixed
+    uuid: af88a13f-552c-4841-a934-0fc740f85b65
+    type_id: 12
+  - id: &ie_cahirciveen_dingle_killorglin_tralee_fixed 13675
+    name: IE Cahirciveen Dingle Killorglin Tralee Fixed
+    uuid: 487efc24-c235-42d4-97df-64ea1092cef9
+    type_id: 12
+  - id: &ie_listowel_fixed 14227
+    name: IE Listowel Fixed
+    uuid: 70702014-1d44-45a1-902d-edbd7cd802d1
+    type_id: 12
+  - id: &ie_newcastle_west_fixed 14300
+    name: IE Newcastle West Fixed
+    uuid: 76e2e0cb-dd91-45ad-975b-4ffbb68cdca6
+    type_id: 12
+  - id: &ie_nenagh_fixed 14503
+    name: IE Nenagh Fixed
+    uuid: 3ada1ce4-1759-4d95-a043-9b798123325c
+    type_id: 12
+  - id: &ie_carrick_on_shannon_manorhamilton_sligo_fixed 16208
+    name: IE Carrick_On_Shannon Manorhamilton Sligo Fixed
+    uuid: 00057c8f-d3ee-413c-875c-0bb3bfd73ffa
+    type_id: 12
+  - id: &ie_buncrana_donegal_dungloe_letterkenny_fixed 17626
+    name: IE Buncrana Donegal Dungloe Letterkenny Fixed
+    uuid: 19ae768a-760c-45ae-b841-63078b1e6985
+    type_id: 12
+  - id: &ie_ballinrobe_castlebar_castlerea_claremorris_fixed 20037
+    name: IE Ballinrobe Castlebar Castlerea Claremorris Fixed
+    uuid: 3e177ac3-a4b9-48a6-b334-109db2ede37f
+    type_id: 12
+  - id: &ie_clifden_fixed 20273
+    name: IE Clifden Fixed
+    uuid: b780c86a-e957-4b87-aa43-32b35d1469c4
+    type_id: 12
+  - id: &ie_ballina_fixed 20457
+    name: IE Ballina Fixed
+    uuid: 56197601-a6cb-4b3d-9830-7789f46c58b7
+    type_id: 12
+  - id: &ie_belmullet_fixed 20573
+    name: IE Belmullet Fixed
+    uuid: 8b78635f-03d6-4a61-89cf-ecd86a7628a8
+    type_id: 12
+  - id: &ie_westport_fixed 20790
+    name: IE Westport Fixed
+    uuid: 8f5621e1-6994-497c-909e-269ad1f87df9
+    type_id: 12
+  - id: &ie_kilronan_fixed 21170
+    name: IE Kilronan Fixed
+    uuid: bcab670c-09f5-46de-afe8-0db8f8510562
+    type_id: 12
+  - id: &ie_number_portability_routing_geographic_fixed 21862
+    name: IE Number Portability Routing Geographic Fixed
+    uuid: 2fbdf315-57c5-4c1d-8672-c85992e38294
+    type_id: 12
+  - id: &ie_number_portability_routing_voip_fixed 22615
+    name: IE Number Portability Routing Voip Fixed
+    uuid: 3c60831b-87fc-4dba-b397-ae44b03c8efa
+    type_id: 12
+  - id: &ie_dublin_fixed 24792
+    name: IE Dublin Fixed
+    uuid: 61fbef38-78d7-4046-9a34-eb235ddb3825
+    type_id: 12
+  - id: &ie_cork_coachford_kinsale_fixed 27340
+    name: IE Cork Coachford Kinsale Fixed
+    uuid: 82f0b24a-a795-4b19-87fd-b5da295f2a48
+    type_id: 12
+  - id: &ie_mallow_fixed 27818
+    name: IE Mallow Fixed
+    uuid: e9d56107-8bd8-4caa-833f-869927abaa6c
+    type_id: 12
+  - id: &ie_bandon_fixed 28300
+    name: IE Bandon Fixed
+    uuid: b1fdebec-4f42-4848-8547-6ad34368f229
+    type_id: 12
+  - id: &ie_youghal_fixed 28971
+    name: IE Youghal Fixed
+    uuid: 15dd6782-ebca-4c73-819e-717518ce8662
+    type_id: 12
+  - id: &ie_macroom_fixed 29511
+    name: IE Macroom Fixed
+    uuid: 4fb31393-08a3-4d87-b192-83bae5e89dbb
+    type_id: 12
+  - id: &ie_bantry_fixed 29785
+    name: IE Bantry Fixed
+    uuid: f5329dea-2626-4973-b7df-dd8f5c03b2b6
+    type_id: 12
+  - id: &ie_fermoy_fixed 29835
+    name: IE Fermoy Fixed
+    uuid: 5dc4bd93-40dd-48ae-ab7b-3a003d7277c5
+    type_id: 12
+  - id: &ie_kanturk_fixed 30656
+    name: IE Kanturk Fixed
+    uuid: 49d4b316-05f7-42ab-ac01-9791c752ad77
+    type_id: 12
+  - id: &ie_skibbereen_fixed 31077
+    name: IE Skibbereen Fixed
+    uuid: e123c438-a2b6-4377-9bf6-f6f8fbc23f16
+    type_id: 12
+  - id: &ie_wicklow_fixed 34443
+    name: IE Wicklow Fixed
+    uuid: f52d21aa-76cd-41da-b00c-e2ae2b5fb881
+    type_id: 12
+  - id: &ie_arklow_fixed 35984
+    name: IE Arklow Fixed
+    uuid: 419ae158-4f5c-4aa3-8f31-19a6e45ebddb
+    type_id: 12
+  - id: &ie_ardee_drogheda_fixed 36238
+    name: IE Ardee Drogheda Fixed
+    uuid: afacd8bd-e378-4927-bae6-82e42d86569d
+    type_id: 12
+  - id: &ie_granard_longford_fixed 36587
+    name: IE Granard Longford Fixed
+    uuid: ef77fc23-3d1c-40bf-9598-f07bf27a302b
+    type_id: 12
+  - id: &ie_castlepollard_mullingar_tyrellspass_fixed 36852
+    name: IE Castlepollard Mullingar Tyrellspass Fixed
+    uuid: b05cd1f3-3b27-4646-adae-37b8300fcae0
+    type_id: 12
+  - id: &ie_carrickmacross_castleblaney_dundalk_fixed 37234
+    name: IE Carrickmacross Castleblaney Dundalk Fixed
+    uuid: ee06efa1-005c-4d7f-805d-6b9db8759020
+    type_id: 12
+  - id: &ie_edenderry_enfield_kells_navan_trim_fixed 37837
+    name: IE Edenderry Enfield Kells Navan Trim Fixed
+    uuid: e97773c3-e9c8-4e20-8a0c-693b6cfc32be
+    type_id: 12
+  - id: &ie_curragh_kildare_naas_fixed 37897
+    name: IE Curragh Kildare Naas Fixed
+    uuid: 7cc3cc93-e3a6-4fce-b6c3-d3a36ed12015
+    type_id: 12
+  - id: &ie_clones_monaghan_fixed 38313
+    name: IE Clones Monaghan Fixed
+    uuid: b7d97d9f-85f5-414e-aa59-055bef18ceeb
+    type_id: 12
+  - id: &ie_athlone_ballinasloe_portumna_roscommon_fixed 42061
+    name: IE Athlone Ballinasloe Portumna Roscommon Fixed
+    uuid: de3b893b-10fb-41ec-93f3-301ef6176c43
+    type_id: 12
+  - id: &ie_galway_gort_loughrea_fixed 42428
+    name: IE Galway Gort Loughrea Fixed
+    uuid: 44f872ac-d931-4340-b83f-02d52028a207
+    type_id: 12
+  - id: &ie_tuam_fixed 43100
+    name: IE Tuam Fixed
+    uuid: f7ce5af6-e6e7-4e02-ae32-a86e6fe311d9
     type_id: 12
 # Supplementary services Networks
-  - id: &ie_personal_number_services 4687
+  - id: &ie_personal_number_services 14917
     name: IE Personal Number Services
-    uuid: fb0ec0cc-507e-44f6-9540-9f0671e1b4dd
+    uuid: 8ea5f88b-5626-4930-a1a9-001eb78de74d
     type_id: 14
-  - id: &ie_special_services 5246
+  - id: &ie_special_services 21422
     name: IE Special Services
-    uuid: c047e3a5-012a-4c8b-82fe-389c4878f82f
+    uuid: 129cff24-b114-4cdd-a81d-a3d797af058c
     type_id: 14
-  - id: &ie_emergency_services 5412
+  - id: &ie_emergency_services 21590
     name: IE Emergency Services
-    uuid: f5628a90-055a-4d63-83fc-54855d1429ae
+    uuid: 50f3c7aa-6510-4161-9c13-4b9d528d06b0
     type_id: 14
-  - id: &ie_social_value_services 5446
+  - id: &ie_social_value_services 21636
     name: IE Social Value Services
-    uuid: 2873a3cc-5299-4d81-830c-e88a28aa7833
+    uuid: e0631fcc-5ba8-4229-9657-fadebe907045
     type_id: 14
-  - id: &ie_directory_enquiry_services 5477
+  - id: &ie_directory_enquiry_services 21680
     name: IE Directory Enquiry Services
-    uuid: af6fc36e-3596-42c4-b309-fe7b57bdce72
+    uuid: ed0cd9b3-2501-47b6-8f19-9bb10f79b62a
     type_id: 14
-  - id: &ie_premium_rate_services_per_call_rate 5597
+  - id: &ie_premium_rate_services_per_call_rate 21811
     name: IE Premium Rate Services Per_Call Rate
-    uuid: f6702113-47b0-433d-8e30-f2e86b125b47
+    uuid: 38c33979-836c-4fb2-b779-80568492a197
     type_id: 14
-  - id: &ie_premium_rate_services_per_minute_rate 5599
+  - id: &ie_premium_rate_services_per_minute_rate 21813
     name: IE Premium Rate Services Per_Minute Rate
-    uuid: 352e5ee6-3584-4099-b42b-50601c2c7948
+    uuid: 40f17d2c-bc2a-4cc7-a473-79d30b630451
     type_id: 14
-  - id: &ie_adults_entertainment_services_general_content 5604
+  - id: &ie_adults_entertainment_services_general_content 21818
     name: IE Adults Entertainment Services General Content
-    uuid: 8ce23de6-4681-4cb2-a8a4-590a448bd033
+    uuid: 735e8b74-79b2-41de-aca6-0389a547084c
     type_id: 14
-  - id: &ie_adults_entertainment_services_sexual_content 5605
+  - id: &ie_adults_entertainment_services_sexual_content 21819
     name: IE Adults Entertainment Services Sexual Content
-    uuid: d8ec070a-ee54-415c-8f1c-d45c49d1b54d
+    uuid: 0e6aa373-b875-4e8e-bee9-748d692085d0
     type_id: 14
-  - id: &ie_internal_network_services 5643
+  - id: &ie_internal_network_services 21857
     name: IE Internal Network Services
-    uuid: 174ad17c-01ec-4e8a-98b9-85c408a134ca
+    uuid: 8b658e37-f0d2-4656-aba4-28779895420f
     type_id: 14
-  - id: &ie_number_portability_routing_internal 5646
+  - id: &ie_number_portability_routing_internal 21860
     name: IE Number Portability Routing Internal
-    uuid: be52eb02-299e-4e6f-aa8d-e7cb7a30ed6a
+    uuid: a83f5074-41b7-41ec-875f-4c65f74b6a9c
     type_id: 14
-  - id: &ie_number_portability_routing_non_geographic 5647
+  - id: &ie_number_portability_routing_non_geographic 21861
     name: IE Number Portability Routing Non_Geographic
-    uuid: e1ccc7df-9770-4254-a1ef-97046f3b3069
+    uuid: 921475d3-161e-4a8b-b09b-c827b180870e
     type_id: 14
-  - id: &ie_sms_mms_services_general_adult_content 5859
+  - id: &ie_sms_mms_services_general_adult_content 22473
     name: IE Sms_Mms Services General Adult Content
-    uuid: 6ba25aa1-8fc6-4c68-919a-c1a07cd895d2
+    uuid: 6f15fb6b-3351-46dc-8246-96a5e6dbb721
     type_id: 14
-  - id: &ie_sms_mms_services_sexual_adult_content 5875
+  - id: &ie_sms_mms_services_sexual_adult_content 22496
     name: IE Sms_Mms Services Sexual Adult Content
-    uuid: 1688e8a9-a0b4-4faa-b6e6-669800f5e9f7
+    uuid: 73c9ca6c-131e-459b-891f-a830f55c8f0a
     type_id: 14
-  - id: &ie_freephone_services 5990
+  - id: &ie_freephone_services 22644
     name: IE Freephone Services
-    uuid: e3a8a826-2d6c-4633-b58f-7473dd230afd
+    uuid: 33fce4c5-19ad-4d84-9f8e-8307c0f7efcf
     type_id: 14
-  - id: &ie_eircom_charge_card_and_virtual_private_network 6001
+  - id: &ie_eircom_charge_card_and_virtual_private_network 22655
     name: IE Eircom Charge Card And Virtual Private Network
-    uuid: 1eddf254-79da-4bcb-9653-e274a0d590c9
+    uuid: da70ff4e-fed4-4c0e-aba6-6b4a76099340
     type_id: 14
-  - id: &ie_internet_access_local_rate 6014
+  - id: &ie_internet_access_local_rate 22668
     name: IE Internet Access Local Rate
-    uuid: a0a70c27-0815-4f75-8e7a-310ebde89bef
+    uuid: cb124348-df51-4377-b42e-2f2ef12f6c0f
     type_id: 14
-  - id: &ie_internet_access_pay_as_you_go_rate 6015
+  - id: &ie_internet_access_pay_as_you_go_rate 22669
     name: IE Internet Access Pay_As_You_Go Rate
-    uuid: 4ea55668-6d1c-44f3-a0f4-6214ced02f8a
+    uuid: 89aa7925-a0f3-427b-a55b-4023439305dd
     type_id: 14
-  - id: &ie_internet_access_flat_rate 6016
+  - id: &ie_internet_access_flat_rate 22670
     name: IE Internet Access Flat Rate
-    uuid: 797041c3-8c79-44bd-b47b-278818d63643
+    uuid: c35470a6-633c-4bf2-932c-f04ad5d71a60
     type_id: 14
-  - id: &ie_customer_support_services 6020
+  - id: &ie_customer_support_services 22674
     name: IE Customer Support Services
-    uuid: 03db661e-965d-41c1-b773-708ede004e41
+    uuid: b3607a7d-fe5a-445c-82d8-2f839a7742ba
     type_id: 14
-  - id: &ie_sms_mms_services 6167
+  - id: &ie_sms_mms_services 23308
     name: IE Sms_Mms Services
-    uuid: 1f90509f-274b-4bd0-8f27-41e9cb08bc9c
+    uuid: 219e998e-f0a2-4e7f-8075-7f89e4f3fc7a
     type_id: 14
-  - id: &ie_sms_mms_services_free 6178
+  - id: &ie_sms_mms_services_free 23323
     name: IE Sms_Mms Services Free
-    uuid: 5d87ad60-ff96-4663-bc85-fe1e3085257c
+    uuid: 76d4aacf-89af-44d5-b4ff-fb5524287740
     type_id: 14
-  - id: &ie_sms_mms_services_standard_rate 6193
+  - id: &ie_sms_mms_services_standard_rate 23343
     name: IE Sms_Mms Services Standard Rate
-    uuid: d5638693-1afb-45b8-913b-aef0678a2c21
+    uuid: d7e8d4bb-4a56-485b-97d9-08e25c2c19f7
     type_id: 14
-  - id: &ie_sms_mms_services_basic_rate 6203
+  - id: &ie_sms_mms_services_basic_rate 23360
     name: IE Sms_Mms Services Basic Rate
-    uuid: 56acea8d-fdb2-4a45-9e43-af2c75414fa1
+    uuid: d3f35eac-2a4f-4e05-bd0d-7e5e0184e46b
     type_id: 14
-  - id: &ie_sms_mms_services_high_rate 6219
+  - id: &ie_sms_mms_services_high_rate 23414
     name: IE Sms_Mms Services High Rate
-    uuid: dac2b7c6-e1df-4d0b-83cb-3282956a77c7
+    uuid: e73d7b9d-df3c-4a6f-962c-f93cf22da357
     type_id: 14
-  - id: &ie_drama_services 7250
+  - id: &ie_drama_services 26712
     name: IE Drama Services
-    uuid: 12150cd6-c34a-430b-bd36-845f0976396e
+    uuid: 08256d9e-8e7c-46ef-877c-dcb212456b0c
     type_id: 14
-  - id: &ie_drama_services_filming 7270
+  - id: &ie_drama_services_filming 26774
     name: IE Drama Services Filming
-    uuid: 5b85c549-b0e2-4ad2-873d-605eb4091fee
+    uuid: 5eb3f434-9bf7-426f-9d03-23197cd1a27e
     type_id: 14
-  - id: &ie_universal_access_services 7620
+  - id: &ie_universal_access_services 38930
     name: IE Universal Access Services
-    uuid: 95f0886d-5566-41f8-a0e4-dc9d7239230d
+    uuid: 9a20f693-c442-4172-b56a-9a3a9df34957
     type_id: 14
 # Mobile Networks
-  - id: &ie_ogcio_mobile 5962
+  - id: &ie_ogcio_mobile 22616
     name: IE Ogcio Mobile
-    uuid: 0603e6e2-7cd9-454a-a332-3aa61a1a1539
+    uuid: 6aae7426-929b-49a0-851f-02b4b8ac1425
     type_id: 3
-  - id: &ie_virgin_media_mobile 5963
+  - id: &ie_virgin_media_mobile 22617
     name: IE Virgin Media Mobile
-    uuid: 700314e0-a780-4ac4-8a8a-68d791a03335
+    uuid: 4efbe325-885e-417f-9886-57f6b4dc9747
     type_id: 3
-  - id: &ie_lycamobile_mobile 5964
+  - id: &ie_lycamobile_mobile 22618
     name: IE Lycamobile Mobile
-    uuid: 36d2aba8-667c-4a4b-a1b3-fedadc7b870d
+    uuid: 22711883-44e6-4981-acef-887ca80df0a3
     type_id: 3
-  - id: &ie_3_mobile 5965
+  - id: &ie_3_mobile 22619
     name: IE 3 Mobile
-    uuid: 0a9d7ad6-92ef-4a7a-950b-4e6bc87bd645
+    uuid: dbb7ee59-3c73-405e-b151-8445a6964344
     type_id: 3
-  - id: &ie_tesco_mobile_mobile 5966
+  - id: &ie_tesco_mobile_mobile 22620
     name: IE Tesco Mobile Mobile
-    uuid: f0f4b811-e17b-4224-a410-75622da0566c
+    uuid: 9600c1db-6dee-4f92-a722-bd6d95cbc973
     type_id: 3
-  - id: &ie_eir_mobile_mobile 5967
+  - id: &ie_eir_mobile_mobile 22621
     name: IE Eir Mobile Mobile
-    uuid: 10a808c7-70de-4a90-83c6-6695a9c68dd5
+    uuid: 7d6884cf-c260-41bf-8811-01dd51de27e6
     type_id: 3
-  - id: &ie_vodafone_mobile 5968
+  - id: &ie_vodafone_mobile 22622
     name: IE Vodafone Mobile
-    uuid: 3a39f6c9-2a21-4512-a2c4-f635ed5a6c31
+    uuid: 63a68716-75e6-445a-877c-ca24142997a5
     type_id: 3
-  - id: &ie_sky_mobile_mobile 5969
+  - id: &ie_sky_mobile_mobile 22623
     name: IE Sky Mobile Mobile
-    uuid: 42ef0aeb-3c5d-4694-b28b-9925972f30a9
+    uuid: 580a03f8-28de-4724-a6ba-83b35265d095
     type_id: 3
-  - id: &ie_mobile 7717
+  - id: &ie_mobile 41567
     name: IE Mobile
-    uuid: aed19522-2609-4352-848b-7a32a7afbc95
+    uuid: d00e2d82-0642-4139-8c11-0625fb41e564
     type_id: 3
-  - id: &ie_cubic_telecom_mobile 7722
+  - id: &ie_cubic_telecom_mobile 41576
     name: IE Cubic Telecom Mobile
-    uuid: e940ed36-6dd0-4e38-a766-afe047b1c3ee
+    uuid: d99281e1-fd2e-46f6-9290-f6ffca67b0c8
     type_id: 3
-  - id: &ie_net_feasa_mobile 7723
+  - id: &ie_net_feasa_mobile 41577
     name: IE Net Feasa Mobile
-    uuid: 6f862bb2-09c4-476a-815e-c2dfc089c93a
+    uuid: 0c381f0c-4928-43e2-b95f-7b3094a45aca
     type_id: 3
-  - id: &ie_bt_mobile 7795
+  - id: &ie_bt_mobile 41990
     name: IE Bt Mobile
-    uuid: 06393134-5efe-4613-8b42-bdb5cbf82e72
+    uuid: d6ced7ca-ed90-4375-b66e-80bf8a601e56
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -173,729 +377,729 @@ network_prefixes:
     prefix: '35348'
     number_min_length: 13
     number_max_length: 13
-    uuid: e34be298-9bf8-4efe-b456-666079c07b27
+    uuid: d6879639-b081-4cc1-8b00-c3de7c725787
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_northern_ireland_fixed
   - id: 55871
     prefix: '353504'
     number_min_length: 11
     number_max_length: 11
-    uuid: cff38b44-366a-4a6c-9be3-a40f8c9ca84d
+    uuid: 5bac8fc7-cd5a-47cb-baea-82527c0c9849
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_thurles_fixed
   - id: 58228
     prefix: '35349'
     number_min_length: 12
     number_max_length: 12
-    uuid: e0dc5647-8c5b-4463-afab-a01078971059
+    uuid: 4ed0ba7f-3134-4766-8f93-d261a6215feb
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_belturbet_cavan_cootehill_oldcastle_fixed
   - id: 62602
     prefix: '35351'
     number_min_length: 11
     number_max_length: 11
-    uuid: c6669c5b-15f2-472e-82c6-132ec97d9686
+    uuid: 84b9a010-560c-4982-b1c3-77f4a5dfd46a
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_carrick_on_suir__kilmacthomas_new_ross_waterford_fixed
   - id: 66079
     prefix: '353505'
     number_min_length: 11
     number_max_length: 11
-    uuid: fe32ccd3-dc0b-46b8-9b90-e8eb3755e5e5
+    uuid: 49dabab1-8de0-422e-9eb0-bbbf34e7d631
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_roscrea_fixed
   - id: 71653
     prefix: '35352'
     number_min_length: 12
     number_max_length: 12
-    uuid: e4fd64d2-010b-4a0b-99a7-c5587cf69b21
+    uuid: 6b58ed7e-54d9-441f-b6cc-1ce3a2bb9f1e
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_cahir_clonmel_killenaule_fixed
   - id: 76541
     prefix: '35353'
     number_min_length: 12
     number_max_length: 12
-    uuid: 074a4a97-d58a-40d1-a66b-410a54890016
+    uuid: a9b06e9a-54f4-4b14-95e8-323568a7d517
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_enniscorthy_ferns_gorey_wexford_fixed
   - id: 84411
     prefix: '35359'
     number_min_length: 12
     number_max_length: 12
-    uuid: f671843e-a321-4912-88c7-01327a8f6c1c
+    uuid: 86999756-7734-4489-a36c-182d5e6367e1
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_athy_baltinglass_carlow_muine_bheag_fixed
   - id: 87913
     prefix: '35356'
     number_min_length: 12
     number_max_length: 12
-    uuid: ec1df05a-c711-434c-9a1d-59463cc40ea9
+    uuid: 0088cf59-768f-4346-86a2-4687ea15be61
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_castlecomer_freshford_kilkenny_fixed
   - id: 90269
     prefix: '35357'
     number_min_length: 12
     number_max_length: 12
-    uuid: 88bc8653-50a5-452d-b0ba-4bc17fd96b04
+    uuid: 8eac0f1e-9fff-426c-93a8-0875f5a24408
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_abbeyleix_birr_portlaoise_tullamore_fixed
   - id: 93093
     prefix: '35358'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8e4aaac9-577c-4d01-9c6d-9cff42199db6
+    uuid: e8219e90-b819-4ab6-bd5d-8bd8d03e6406
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_dungarvan_fixed
   - id: 108580
     prefix: '35361'
     number_min_length: 11
     number_max_length: 11
-    uuid: ddf620ea-77c6-4795-b5ec-bcff001f587d
+    uuid: dcd666c2-a6d7-46db-843e-02b506b32bd3
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_limerick_scarriff_fixed
   - id: 111463
     prefix: '35362'
     number_min_length: 10
     number_max_length: 10
-    uuid: ad0a844a-8ae7-45d1-b460-639b36cf06c2
+    uuid: 59d60907-e9b0-4c15-a2f0-52d8e7c5ac45
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_cashel_tipperary_fixed
   - id: 117827
     prefix: '35363'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7289e3e3-7b06-4118-a660-e26150ba534c
+    uuid: 3bd962b3-1399-49e9-bea8-16a970708dc3
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_rathluirc_fixed
   - id: 122432
     prefix: '35364'
     number_min_length: 12
     number_max_length: 12
-    uuid: 432760a0-642d-4610-af63-bb3e03db0f93
+    uuid: 9280e2e1-ea6c-45fc-8bfd-459d4f35d688
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_killarney_rathmore_fixed
   - id: 135912
     prefix: '35365'
     number_min_length: 12
     number_max_length: 12
-    uuid: f9981c63-3fdc-43c7-8a86-8585595d3101
+    uuid: 856996da-0e1c-4ef4-b3a3-7405276cafea
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_ennis_ennistymon_kilrush_fixed
   - id: 138620
     prefix: '35366'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5c886238-f25d-4cdb-b369-88dafbc673ad
+    uuid: 39ff5517-d03f-4a89-be95-40b8f6f60a60
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_cahirciveen_dingle_killorglin_tralee_fixed
   - id: 146815
     prefix: '35368'
     number_min_length: 10
     number_max_length: 10
-    uuid: 32b29a61-7b02-4619-a4a4-6f66858c8ec5
+    uuid: fd0188c9-3081-47c9-bdb4-50e91fb57e64
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_listowel_fixed
   - id: 148658
     prefix: '35369'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4f7f8822-b105-4b37-9aac-7350963e09ee
+    uuid: ac11df77-fe7a-486f-bce3-d9e335932b42
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_newcastle_west_fixed
   - id: 151419
     prefix: '35367'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5e44d79a-bdb3-4507-8cfa-147886968511
+    uuid: f6a75d71-e557-439f-bdaf-9ca2a8ee9675
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_nenagh_fixed
   - id: 163987
     prefix: '35371'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1678ef0a-e5d9-45e3-8d01-9deef9160400
+    uuid: ce26496d-6c04-4ecb-9ab2-59ef1e9fa0a7
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_carrick_on_shannon_manorhamilton_sligo_fixed
   - id: 182862
     prefix: '35374'
     number_min_length: 12
     number_max_length: 12
-    uuid: 86cd0628-cf9b-49a7-bd1b-006e610a2e22
+    uuid: 8ce27d0d-f60c-48b9-92f5-b43dd394eadc
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_buncrana_donegal_dungloe_letterkenny_fixed
   - id: 212505
     prefix: '35394'
     number_min_length: 12
     number_max_length: 12
-    uuid: 23201dcb-00ca-44e8-b2f3-22d0029d400a
+    uuid: 6e22be91-1c98-4802-8407-80e9dd3508aa
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_ballinrobe_castlebar_castlerea_claremorris_fixed
   - id: 215145
     prefix: '35395'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4d26523a-8fa0-4700-9371-e95a7b8c0c96
+    uuid: 55c7e86a-f4cf-47a7-8a5a-b61a84517820
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_clifden_fixed
   - id: 221947
     prefix: '35396'
     number_min_length: 10
     number_max_length: 10
-    uuid: 86bcad77-7747-4033-8d7c-a6bb4df77bba
+    uuid: 87d34ea4-817b-4d1e-83f6-d326c4c83925
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_ballina_fixed
   - id: 227365
     prefix: '35397'
     number_min_length: 10
     number_max_length: 10
-    uuid: a35f8306-24cc-4001-9bda-258b89475c50
+    uuid: d68c39b3-654e-46f6-befe-ca57fbe70006
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_belmullet_fixed
   - id: 231734
     prefix: '35398'
     number_min_length: 10
     number_max_length: 10
-    uuid: c3afad37-a133-417c-a391-868307d063e3
+    uuid: 5ba63221-7638-4a24-bd77-287d1306285a
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_westport_fixed
   - id: 239371
     prefix: '35399'
     number_min_length: 10
     number_max_length: 10
-    uuid: 831a8d06-d766-47e7-bb22-ca50a77a93cb
+    uuid: 1bbdf762-1b4e-4124-9d11-bcb2bd5354e6
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_kilronan_fixed
   - id: 243088
     prefix: '3531752'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5452a018-fca2-4f4f-a221-bead7f40b2aa
+    uuid: fbcc2a3b-5a70-40bc-97ba-78dea01463d4
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_number_portability_routing_geographic_fixed
   - id: 243089
     prefix: '3531753'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1967f0ae-c86b-4aaa-a53e-0bda0649ddff
+    uuid: a2f2e09c-268e-4fc3-9518-833869a18d50
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_number_portability_routing_geographic_fixed
   - id: 243090
     prefix: '3531754'
     number_min_length: 10
     number_max_length: 10
-    uuid: b924ba99-5526-4832-a1a4-9818d05ac7bb
+    uuid: f5068cb5-cfed-4f99-a097-1fa4cd3ba82b
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_number_portability_routing_geographic_fixed
   - id: 247251
     prefix: '3531755'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6fa87e65-c3c2-4a79-973d-85a8221b70b4
+    uuid: 4166992a-82c9-4587-8a78-d2cd5f32fa07
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_number_portability_routing_geographic_fixed
   - id: 247252
     prefix: '3531756'
     number_min_length: 10
     number_max_length: 10
-    uuid: 75ae4681-23a9-40cd-84a2-86ade7888f89
+    uuid: 54b69ecf-32de-4096-9287-901dfc14e423
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_number_portability_routing_geographic_fixed
   - id: 247253
     prefix: '3531757'
     number_min_length: 10
     number_max_length: 10
-    uuid: 228e6ff9-a3e2-4450-b194-dce142607320
+    uuid: 00be1b31-5e15-43ce-bd12-44a1109497bb
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_number_portability_routing_geographic_fixed
   - id: 247254
     prefix: '3531758'
     number_min_length: 10
     number_max_length: 10
-    uuid: f17808c7-3468-481d-a79e-0ef28dfc4e20
+    uuid: 6c15d120-62ea-49b9-a99c-3af44292fbb9
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_number_portability_routing_geographic_fixed
   - id: 247255
     prefix: '3531759'
     number_min_length: 10
     number_max_length: 10
-    uuid: 593d5435-61df-49dc-a85c-10eae50ab902
+    uuid: 5e171bf6-bc92-46f9-a8c9-10a5e02e5ed9
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_number_portability_routing_voip_fixed
   - id: 258563
     prefix: '3531'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9edb76f1-aafe-4c72-ac56-5650fb48ce12
+    uuid: 4a4b73bd-b311-432d-956b-430993b04255
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_dublin_fixed
   - id: 274230
     prefix: '35321'
     number_min_length: 12
     number_max_length: 12
-    uuid: 66950db3-2e5a-477e-a06e-8fbbd767a185
+    uuid: 058760f3-cf66-4e4f-b91a-f7ab2467699d
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_cork_coachford_kinsale_fixed
   - id: 277996
     prefix: '35322'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3a964240-4d23-486c-9516-bb85b17789bf
+    uuid: 294feb0e-0f34-4381-bbe6-5e2ce20148c0
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_mallow_fixed
   - id: 286627
     prefix: '35323'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce008549-ae9c-410f-8e64-b941a032cd10
+    uuid: 7fdee102-05f4-4887-80d4-d75cceb36b07
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_bandon_fixed
   - id: 294324
     prefix: '35324'
     number_min_length: 10
     number_max_length: 10
-    uuid: d1828e76-faf3-4cfd-861b-d0f84d12ac97
+    uuid: fc53adf1-448a-4144-8b48-0cf3d9dc261d
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_youghal_fixed
   - id: 299795
     prefix: '35326'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4b8dac59-5a49-4d61-996f-9d929f34524c
+    uuid: f7b374cc-3c91-4c5a-b234-68af6f05f48c
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_macroom_fixed
   - id: 301426
     prefix: '35327'
     number_min_length: 10
     number_max_length: 10
-    uuid: 468d5d72-43f5-438a-a8ff-2c43624a7cc2
+    uuid: 1e3f7576-e071-47c4-b6f1-a0e3f64b590e
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_bantry_fixed
   - id: 301969
     prefix: '35325'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3c90fa08-e1f8-485d-821a-f47387d95184
+    uuid: 366c99ad-2af3-4717-b105-1dae6ffb7551
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_fermoy_fixed
   - id: 308505
     prefix: '35329'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7456b0d4-51fe-4c3e-8c46-44b390d97ba1
+    uuid: b034060d-e62b-4fcb-8b2c-8848a284f531
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_kanturk_fixed
   - id: 313356
     prefix: '35328'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3866cb03-b18e-4668-855f-031f30ca4563
+    uuid: e9a00ce8-721e-49fb-87df-a80bfed84b05
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_skibbereen_fixed
   - id: 350765
     prefix: '353404'
     number_min_length: 11
     number_max_length: 11
-    uuid: ff69a17e-0eea-46da-a99d-dd638b5f0180
+    uuid: 03e01646-97de-4ab0-be28-b77fee551058
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_wicklow_fixed
   - id: 358918
     prefix: '353402'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2c1d0281-a3c7-441e-beba-4894dd552fe9
+    uuid: 47d4363b-354b-4c8e-855b-78c683c65256
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_arklow_fixed
   - id: 362522
     prefix: '35341'
     number_min_length: 12
     number_max_length: 12
-    uuid: 459ca971-ccfc-41c2-aba8-59ad73be9fbd
+    uuid: 5806b3cb-1a4c-49f9-b2c6-443114d57c64
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_ardee_drogheda_fixed
   - id: 367935
     prefix: '35343'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8644820f-9d6c-4474-b326-8a9ecbf39cdb
+    uuid: 5d69d3bf-3d02-47a7-8e84-76d5ca393d2e
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_granard_longford_fixed
   - id: 370186
     prefix: '35344'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5298bdbb-b07f-420e-9092-eba04f749e04
+    uuid: f49d6f63-0611-400f-8c8e-9d833d15b268
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_castlepollard_mullingar_tyrellspass_fixed
   - id: 377176
     prefix: '35342'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1a44b68e-c27b-4c15-93cd-bd167c615bff
+    uuid: beac040f-19e2-4ca4-889e-910826ce792c
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_carrickmacross_castleblaney_dundalk_fixed
   - id: 388629
     prefix: '35346'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8485e123-ef01-44c2-9a1b-eaf96d9a55ee
+    uuid: 6bfc9c25-1607-458a-a482-b81eecbcd010
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_edenderry_enfield_kells_navan_trim_fixed
   - id: 392616
     prefix: '35345'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0b8ae4c7-c360-4104-b476-16cdf49e02c7
+    uuid: cc174dc9-b162-4a14-bb69-c7113b9b8c57
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_curragh_kildare_naas_fixed
   - id: 399480
     prefix: '35347'
     number_min_length: 10
     number_max_length: 10
-    uuid: 76f7928f-9b21-4b77-9223-9254206524f1
+    uuid: bf06cbfd-0cc1-4f00-84dc-0a1c5a878229
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_clones_monaghan_fixed
   - id: 454105
     prefix: '35390'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3c3f475f-23e6-41ce-97e0-166c8d1da972
+    uuid: 40dab723-252e-4e0e-9cbd-a9ab8cf03845
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_athlone_ballinasloe_portumna_roscommon_fixed
   - id: 458145
     prefix: '35391'
     number_min_length: 11
     number_max_length: 11
-    uuid: 64aa37e9-52b1-4c98-92cd-34ac8b8c8483
+    uuid: cadcbc39-36a7-40f2-bcd8-66b4040de0af
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_galway_gort_loughrea_fixed
   - id: 485428
     prefix: '35393'
     number_min_length: 10
     number_max_length: 10
-    uuid: e759f62b-74e7-487a-a1bc-2562b61c3db4
+    uuid: 328f17d1-284d-42e0-9f44-b2bd63791b91
     country_id: *ie
-    network_id: *ie_fixed
+    network_id: *ie_tuam_fixed
 # Supplementary services Prefixes
   - id: 154404
     prefix: '353700'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6e1da05a-18c9-471d-8b0d-782a98048862
+    uuid: fddfffc0-23b1-4e83-a757-b57c9dfceb36
     country_id: *ie
     network_id: *ie_personal_number_services
   - id: 242417
     prefix: '3531'
     number_min_length: 5
     number_max_length: 8
-    uuid: abc2c610-8425-4e42-8c13-b54fbd5db3d8
+    uuid: 7fbc2eb7-82db-4047-802a-bfc4cad23077
     country_id: *ie
     network_id: *ie_special_services
   - id: 242621
     prefix: '353112'
     number_min_length: 6
     number_max_length: 6
-    uuid: d9e9452e-eaea-4ea8-8bf0-a071c761dfba
+    uuid: b17c910d-098a-4964-9b82-c5f7da04bdda
     country_id: *ie
     network_id: *ie_emergency_services
   - id: 242674
     prefix: '353116'
     number_min_length: 9
     number_max_length: 9
-    uuid: d3671c08-48f3-4cd1-a73a-437cf87d7653
+    uuid: dfe39090-36b0-4d9f-bd2c-cd6348073aaf
     country_id: *ie
     network_id: *ie_social_value_services
   - id: 242723
     prefix: '353118'
     number_min_length: 8
     number_max_length: 8
-    uuid: e555d3c3-41cb-40af-9217-b527100a3e0e
+    uuid: 79dda47d-84eb-4140-950a-cc06714aa17a
     country_id: *ie
     network_id: *ie_directory_enquiry_services
   - id: 242967
     prefix: '3531512'
     number_min_length: 13
     number_max_length: 13
-    uuid: 234d7204-bc74-4b2a-91ab-4c06290e8786
+    uuid: a664059c-6cdd-4068-b099-8b20faf09f03
     country_id: *ie
     network_id: *ie_premium_rate_services_per_call_rate
   - id: 242968
     prefix: '3531513'
     number_min_length: 13
     number_max_length: 13
-    uuid: 9220dd58-8727-40ae-b5ed-7484ae01d985
+    uuid: 585a6f50-fe3b-4b65-bc90-93447b9a387a
     country_id: *ie
     network_id: *ie_premium_rate_services_per_call_rate
   - id: 242969
     prefix: '3531514'
     number_min_length: 13
     number_max_length: 13
-    uuid: 18d9afab-90c1-4de0-990a-dfdedf17b097
+    uuid: a8f06171-a111-4e01-8d06-25e06d51338e
     country_id: *ie
     network_id: *ie_premium_rate_services_per_call_rate
   - id: 242970
     prefix: '3531515'
     number_min_length: 13
     number_max_length: 13
-    uuid: af7167a2-8144-41aa-8b88-f8ce08fe79c0
+    uuid: 2b38c973-b592-4b49-90e6-ffb5ef2aa212
     country_id: *ie
     network_id: *ie_premium_rate_services_per_call_rate
   - id: 242971
     prefix: '3531516'
     number_min_length: 13
     number_max_length: 13
-    uuid: ce8a9c4a-1c5c-4657-88d5-faac3c8e1053
+    uuid: 08d70eb8-32c3-47c1-9579-abed8336028c
     country_id: *ie
     network_id: *ie_premium_rate_services_per_call_rate
   - id: 242972
     prefix: '3531517'
     number_min_length: 13
     number_max_length: 13
-    uuid: ac2eb5b6-1f3d-4db4-97e6-c269759476c1
+    uuid: 75b4cd83-371e-4873-8f86-a4d68a1dc4e6
     country_id: *ie
     network_id: *ie_premium_rate_services_per_call_rate
   - id: 242973
     prefix: '3531518'
     number_min_length: 13
     number_max_length: 13
-    uuid: 49ca872f-6b42-4568-bbf1-c5946ce0e9f3
+    uuid: 6b9c8f22-ee7c-4a54-add8-0f17d25da5ef
     country_id: *ie
     network_id: *ie_premium_rate_services_per_call_rate
   - id: 242978
     prefix: '3531520'
     number_min_length: 13
     number_max_length: 13
-    uuid: 85cf1562-ac02-4e91-aa20-bfa0b5f8fb6e
+    uuid: c23c3dc0-db55-4bbf-9caa-8362d3119677
     country_id: *ie
     network_id: *ie_premium_rate_services_per_minute_rate
   - id: 242983
     prefix: '3531530'
     number_min_length: 13
     number_max_length: 13
-    uuid: 5b960392-304b-4dbd-b995-2ea27d292a44
+    uuid: 05989420-5f26-49b7-afee-b4c648b198aa
     country_id: *ie
     network_id: *ie_premium_rate_services_per_minute_rate
   - id: 242988
     prefix: '3531540'
     number_min_length: 13
     number_max_length: 13
-    uuid: 551b0459-c8b0-4a8b-891f-239ba37cf12c
+    uuid: af8beee7-e9af-4dc9-85fb-ada9fb0cf2b2
     country_id: *ie
     network_id: *ie_premium_rate_services_per_minute_rate
   - id: 242993
     prefix: '3531550'
     number_min_length: 13
     number_max_length: 13
-    uuid: eb950982-d359-4ed5-8af3-f7bb115624b3
+    uuid: 6eea513e-c2ca-42d5-9b06-ccd8989c0d53
     country_id: *ie
     network_id: *ie_premium_rate_services_per_minute_rate
   - id: 242996
     prefix: '3531560'
     number_min_length: 13
     number_max_length: 13
-    uuid: 7b2a5daa-4f59-49b8-b3af-8360306617e8
+    uuid: b7c4bdf5-a0a4-488d-b2c9-b0db6dca7d19
     country_id: *ie
     network_id: *ie_premium_rate_services_per_minute_rate
   - id: 242999
     prefix: '3531570'
     number_min_length: 13
     number_max_length: 13
-    uuid: cd075117-a3f6-4d57-aaa1-325f5ae7f4d2
+    uuid: 1140c82e-c891-4eb0-9e45-c820bda1e2e1
     country_id: *ie
     network_id: *ie_premium_rate_services_per_minute_rate
   - id: 243001
     prefix: '3531580'
     number_min_length: 13
     number_max_length: 13
-    uuid: ea4d381e-9911-47dd-804f-6a957fe8f3f8
+    uuid: 076993e2-08ac-4dcb-8216-d26413493b6a
     country_id: *ie
     network_id: *ie_premium_rate_services_per_minute_rate
   - id: 243003
     prefix: '3531590'
     number_min_length: 13
     number_max_length: 13
-    uuid: ac4adbb3-02c8-4b8a-ba42-de4514d23618
+    uuid: 36bc4d92-e3e8-4fa9-9e64-8ad9482af795
     country_id: *ie
     network_id: *ie_premium_rate_services_per_minute_rate
   - id: 243004
     prefix: '3531598'
     number_min_length: 13
     number_max_length: 13
-    uuid: a9793d7b-ffb6-43fb-ab24-812c1441f177
+    uuid: ed3da077-59de-4c4c-9aa1-9c69a4727e11
     country_id: *ie
     network_id: *ie_adults_entertainment_services_general_content
   - id: 243005
     prefix: '3531599'
     number_min_length: 13
     number_max_length: 13
-    uuid: 0959f34a-5dd6-4abc-9f09-917650b5dfea
+    uuid: 11419b58-ae77-463a-b114-081dc0083566
     country_id: *ie
     network_id: *ie_adults_entertainment_services_sexual_content
   - id: 243078
     prefix: '353171'
     number_min_length: 6
     number_max_length: 6
-    uuid: 427e14e6-9755-48b3-a134-c4bbc3ba4746
+    uuid: cee55e3a-10b5-42cd-b0f9-2b020672d703
     country_id: *ie
     network_id: *ie_internal_network_services
   - id: 243082
     prefix: '353172'
     number_min_length: 6
     number_max_length: 6
-    uuid: 20684fc7-90e9-414f-a270-f637f378c4d6
+    uuid: 36ab8749-2df5-4475-ad3b-8ded53bf95a4
     country_id: *ie
     network_id: *ie_internal_network_services
   - id: 243084
     prefix: '353173'
     number_min_length: 6
     number_max_length: 6
-    uuid: cbd4ba75-29f8-465f-8316-aa34c6ed1edf
+    uuid: 20f5769f-e3dd-4379-88df-df8380e578cf
     country_id: *ie
     network_id: *ie_internal_network_services
   - id: 243085
     prefix: '353174'
     number_min_length: 7
     number_max_length: 7
-    uuid: 6e42e4f6-fd2d-4bb3-95e0-a3ed140b7414
+    uuid: c7d905c1-68b0-4039-ad92-08fc370fbe00
     country_id: *ie
     network_id: *ie_internal_network_services
   - id: 243086
     prefix: '3531750'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8d5b3bb3-a918-4bb3-ada4-5948a5f9c46e
+    uuid: 1cfe3f4c-2244-4959-9c99-544785c7bb25
     country_id: *ie
     network_id: *ie_number_portability_routing_internal
   - id: 243087
     prefix: '3531751'
     number_min_length: 10
     number_max_length: 10
-    uuid: b182cbc2-fa37-45d6-8459-706533dcc6de
+    uuid: de14b072-1b88-43b2-920b-ae7b0b225d6f
     country_id: *ie
     network_id: *ie_number_portability_routing_non_geographic
   - id: 245161
     prefix: '35358'
     number_min_length: 8
     number_max_length: 8
-    uuid: 6356264b-51b2-44d3-b555-a595785da7ed
+    uuid: 6681a71e-cf49-483d-b9a6-8bbd6234092c
     country_id: *ie
     network_id: *ie_sms_mms_services_general_adult_content
   - id: 245262
     prefix: '35359'
     number_min_length: 8
     number_max_length: 8
-    uuid: 8e7680a5-a217-4c77-b352-d74a9b78832e
+    uuid: 9d49915c-a276-4b2c-b7cb-ad63b4de5709
     country_id: *ie
     network_id: *ie_sms_mms_services_sexual_adult_content
   - id: 247298
     prefix: '3531800'
     number_min_length: 13
     number_max_length: 13
-    uuid: f9cafc9a-fb8d-4d17-9354-c7f44e436146
+    uuid: d20ed60c-0c31-4ba6-98b3-ec1e7189d34a
     country_id: *ie
     network_id: *ie_freephone_services
   - id: 247311
     prefix: '3531808'
     number_min_length: 13
     number_max_length: 13
-    uuid: d366afb0-c479-4587-908e-0360ac13972a
+    uuid: 3d776b74-cb29-4f3c-ac8c-5df0334e20a5
     country_id: *ie
     network_id: *ie_eircom_charge_card_and_virtual_private_network
   - id: 247328
     prefix: '3531891'
     number_min_length: 13
     number_max_length: 13
-    uuid: ef91bdc6-aa57-4699-8d28-b6e34c7a48fc
+    uuid: e3a89b43-8334-4431-8cdf-3ce097efbeda
     country_id: *ie
     network_id: *ie_internet_access_local_rate
   - id: 247329
     prefix: '3531892'
     number_min_length: 13
     number_max_length: 13
-    uuid: ee48cd5d-c304-4b76-840a-1a2335bfd5b7
+    uuid: 2a223e34-6e23-4dd9-873f-dc0bddaa753a
     country_id: *ie
     network_id: *ie_internet_access_pay_as_you_go_rate
   - id: 247330
     prefix: '3531893'
     number_min_length: 13
     number_max_length: 13
-    uuid: f36f1e17-6392-4a3a-aa52-2c57004e7dfa
+    uuid: 96e11869-171c-430f-b05e-57d7d8b529c0
     country_id: *ie
     network_id: *ie_internet_access_flat_rate
   - id: 247339
     prefix: '35319'
     number_min_length: 7
     number_max_length: 7
-    uuid: 947939c9-6b1b-4598-acfc-3f21b05b11ee
+    uuid: f4726644-7b6c-48c4-993d-b92e2fcdf6b5
     country_id: *ie
     network_id: *ie_customer_support_services
   - id: 247382
     prefix: '353199'
     number_min_length: 6
     number_max_length: 6
-    uuid: 7a2849d8-ae52-4eba-b6a4-1628997adafb
+    uuid: f641ee28-6f5e-42ef-b2bc-5f238b4573ea
     country_id: *ie
     network_id: *ie_internal_network_services
   - id: 249579
     prefix: '3535'
     number_min_length: 8
     number_max_length: 8
-    uuid: 780c2de3-a34a-424a-9899-5a549fa0a80c
+    uuid: 8dc95e80-f455-4d38-b6fb-36c5d82d1f95
     country_id: *ie
     network_id: *ie_sms_mms_services
   - id: 249623
     prefix: '35350'
     number_min_length: 8
     number_max_length: 8
-    uuid: b96d0619-e03c-4517-a5f9-35ed038312e2
+    uuid: 512514ef-e89c-42e1-a30d-2e403c03dce9
     country_id: *ie
     network_id: *ie_sms_mms_services_free
   - id: 249699
     prefix: '35351'
     number_min_length: 8
     number_max_length: 8
-    uuid: 6f8a2522-ec29-4769-a5eb-b6166b6c138e
+    uuid: 414f3a8d-b97b-4e7e-84fd-06e632f74583
     country_id: *ie
     network_id: *ie_sms_mms_services_standard_rate
   - id: 249927
     prefix: '35353'
     number_min_length: 8
     number_max_length: 8
-    uuid: 75ea997f-ac14-413e-a367-aae5a59540f1
+    uuid: 1ed023d5-8e54-45bd-bc4d-566f45c4a5ee
     country_id: *ie
     network_id: *ie_sms_mms_services_basic_rate
   - id: 250246
     prefix: '35357'
     number_min_length: 8
     number_max_length: 8
-    uuid: 35d4cf7e-bd71-4c90-8f82-9e92a9d63116
+    uuid: 70d5c6e9-f3e7-4ca5-a45a-bb1270cbee45
     country_id: *ie
     network_id: *ie_sms_mms_services_high_rate
   - id: 258304
     prefix: '353999'
     number_min_length: 6
     number_max_length: 6
-    uuid: 2c2cc8b9-9ffb-441f-b4b8-ae0b4d58b36e
+    uuid: 6dd205d7-c304-4f16-9f10-1903c07a38c7
     country_id: *ie
     network_id: *ie_emergency_services
   - id: 267138
     prefix: '35320'
     number_min_length: 12
     number_max_length: 12
-    uuid: ba9b7eac-4d70-4dd6-807e-27a62024cf94
+    uuid: 3f471698-70fc-4e5d-8278-5ddd5ffea484
     country_id: *ie
     network_id: *ie_drama_services
   - id: 267329
     prefix: '3532091'
     number_min_length: 12
     number_max_length: 12
-    uuid: d124c60f-1b0d-4576-9cb9-e71c6ad22317
+    uuid: 35501567-510b-43d7-a486-4aa5efde8db1
     country_id: *ie
     network_id: *ie_drama_services_filming
   - id: 409345
     prefix: '353818'
     number_min_length: 12
     number_max_length: 12
-    uuid: cc83dec6-d248-4422-a68d-bc55420fd004
+    uuid: 6bb7355d-0be3-405b-9056-edb2c08f007b
     country_id: *ie
     network_id: *ie_universal_access_services
 # Country code Prefixes
@@ -903,7 +1107,7 @@ network_prefixes:
     prefix: '353'
     number_min_length: 4
     number_max_length: 100
-    uuid: 4d757e9a-0338-4203-9d34-bcb6b829852d
+    uuid: b42fcb80-f88b-4774-8549-ec3fbb062460
     country_id: *ie
     network_id: null
 # Mobile Prefixes
@@ -911,496 +1115,496 @@ network_prefixes:
     prefix: '35317670'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0f3f768f-5b4d-4a31-bfcb-849281249265
+    uuid: 8be3061f-f8ed-498e-915b-6e3324b99937
     country_id: *ie
     network_id: *ie_ogcio_mobile
   - id: 247257
     prefix: '35317680'
     number_min_length: 8
     number_max_length: 8
-    uuid: 924b9196-c48a-48da-8b56-192ec2241cf1
+    uuid: 6f7b53c2-f2bb-4673-a8c9-56560643d4a1
     country_id: *ie
     network_id: *ie_virgin_media_mobile
   - id: 247258
     prefix: '35317682'
     number_min_length: 8
     number_max_length: 8
-    uuid: 9d56645e-e5a0-48bf-bc5d-ca32f6adc1ae
+    uuid: 1998c5d0-59f4-4376-9ec1-2944b0f8487a
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 247259
     prefix: '35317683'
     number_min_length: 8
     number_max_length: 8
-    uuid: 46b1ff8c-63e1-4751-a855-ee1bf06a8cbe
+    uuid: 016008f7-cf1b-4b36-bdea-81cad775f087
     country_id: *ie
     network_id: *ie_3_mobile
   - id: 247260
     prefix: '35317684'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0d693442-2d72-460f-a569-0bc8cea09159
+    uuid: 78b53d7d-e98e-4505-8f67-46bb81dffb77
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 247261
     prefix: '35317685'
     number_min_length: 8
     number_max_length: 8
-    uuid: 5c20eb71-85b3-47aa-b60f-b94a99c73dd3
+    uuid: 7376a33d-632e-47e4-9c26-dcb87f3ece5c
     country_id: *ie
     network_id: *ie_eir_mobile_mobile
   - id: 247262
     prefix: '35317686'
     number_min_length: 8
     number_max_length: 8
-    uuid: ad8d53b7-e85c-40ff-8895-17a835538c88
+    uuid: aee04de7-0a23-4dfc-9f38-403619a6bd1e
     country_id: *ie
     network_id: *ie_3_mobile
   - id: 247263
     prefix: '35317687'
     number_min_length: 8
     number_max_length: 8
-    uuid: 504af468-54ec-4d81-8551-c7abf02a6bfd
+    uuid: d273f8e1-464a-4a68-9635-141898a5e746
     country_id: *ie
     network_id: *ie_vodafone_mobile
   - id: 247264
     prefix: '35317689'
     number_min_length: 8
     number_max_length: 8
-    uuid: f77f4bb0-40c3-430a-8ae4-bd6f8133b995
+    uuid: fe3aaab6-4ebf-4c84-824b-2f56e7a28a1d
     country_id: *ie
     network_id: *ie_sky_mobile_mobile
   - id: 421297
     prefix: '353835'
     number_min_length: 13
     number_max_length: 13
-    uuid: 93a63749-3b8e-48ac-a876-1d1ca9037662
+    uuid: 4c457c7f-fa04-44ea-b573-8152f004647a
     country_id: *ie
     network_id: *ie_3_mobile
   - id: 422119
     prefix: '35383'
     number_min_length: 12
     number_max_length: 12
-    uuid: aaff0540-87a8-4c18-8a05-d2a3378cfabd
+    uuid: 010c7919-f173-4dac-af18-65be3a443e5a
     country_id: *ie
     network_id: *ie_3_mobile
   - id: 428696
     prefix: '35386'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7926aaa0-8775-484e-bdd4-0405c7bf7677
+    uuid: 34479a9d-6760-4b10-ac5c-295d5c347b82
     country_id: *ie
     network_id: *ie_3_mobile
   - id: 428825
     prefix: '353865'
     number_min_length: 13
     number_max_length: 13
-    uuid: 1a7da79f-05dc-4856-83b3-a2d0fd07bc46
+    uuid: 38f18ff7-47e6-4dd5-bdca-d5fd4cc4bcd2
     country_id: *ie
     network_id: *ie_3_mobile
   - id: 435879
     prefix: '35385'
     number_min_length: 12
     number_max_length: 12
-    uuid: 06dbb8ec-58b8-4d9b-82ef-1d3011d44e37
+    uuid: 7108cf21-aeaa-42f4-b59b-1ab09f786baf
     country_id: *ie
     network_id: *ie_eir_mobile_mobile
   - id: 436045
     prefix: '353855'
     number_min_length: 13
     number_max_length: 13
-    uuid: 664e0793-2896-4078-af29-ed87eb77d7c4
+    uuid: 5dcc5285-a686-4ef2-971e-5fa90d0857d8
     country_id: *ie
     network_id: *ie_eir_mobile_mobile
   - id: 441104
     prefix: '35387'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9b863a7a-b98e-42ec-9f2e-98a6db42d2ca
+    uuid: 7d34755c-3103-4922-b2f6-8dab64a2f7ab
     country_id: *ie
     network_id: *ie_vodafone_mobile
   - id: 441248
     prefix: '353875'
     number_min_length: 13
     number_max_length: 13
-    uuid: 38366c0a-bfbd-4b8d-a275-50ed95141190
+    uuid: d83890b9-7189-412a-8d56-8fb1cf745d37
     country_id: *ie
     network_id: *ie_vodafone_mobile
   - id: 443787
     prefix: '35388'
     number_min_length: 15
     number_max_length: 15
-    uuid: 8a1adf8f-13d1-4f20-bdf5-d4e0c33ac70d
+    uuid: 35019d79-a0d2-4fb3-83b6-c9fa652db3aa
     country_id: *ie
     network_id: *ie_mobile
   - id: 443849
     prefix: '35388200'
     number_min_length: 15
     number_max_length: 15
-    uuid: 9f3032d2-fd82-4d95-9c90-732c925e4734
+    uuid: 5f34b491-2837-4a31-af78-2dc498248403
     country_id: *ie
     network_id: *ie_cubic_telecom_mobile
   - id: 443852
     prefix: '35388210'
     number_min_length: 15
     number_max_length: 15
-    uuid: dae560af-b032-4db7-bba8-09f60864b144
+    uuid: 73fb9b86-5b3e-4d42-a199-13f5e13486ba
     country_id: *ie
     network_id: *ie_3_mobile
   - id: 443857
     prefix: '35388220'
     number_min_length: 15
     number_max_length: 15
-    uuid: feb2db22-d3d2-4b65-b6e0-a8a360ffd9f0
+    uuid: ae9bce3f-61d0-414e-9134-b7877b51abd0
     country_id: *ie
     network_id: *ie_net_feasa_mobile
   - id: 443858
     prefix: '353882210'
     number_min_length: 15
     number_max_length: 15
-    uuid: e1d43eee-d164-4e6c-a86a-cb4f535239c9
+    uuid: eacd7a71-ac1f-4df2-9ff5-7e28a0a2ba63
     country_id: *ie
     network_id: *ie_net_feasa_mobile
   - id: 443859
     prefix: '353882211'
     number_min_length: 15
     number_max_length: 15
-    uuid: 101ce5c9-f881-4724-86cd-f783bc53a05a
+    uuid: 91f8f6b6-24db-4f21-b9a0-f140286344e2
     country_id: *ie
     network_id: *ie_net_feasa_mobile
   - id: 443860
     prefix: '353882212'
     number_min_length: 15
     number_max_length: 15
-    uuid: 4699c531-162b-4785-a544-4d6f554ad9e1
+    uuid: f6b09520-4da0-4d9e-89f9-4642c39f0eba
     country_id: *ie
     network_id: *ie_net_feasa_mobile
   - id: 443861
     prefix: '353882213'
     number_min_length: 15
     number_max_length: 15
-    uuid: 47f20feb-7688-46cd-b800-e1287774f666
+    uuid: 89df5a29-8ca1-4cf8-93b4-acfbb81f6d35
     country_id: *ie
     network_id: *ie_net_feasa_mobile
   - id: 443862
     prefix: '353882214'
     number_min_length: 15
     number_max_length: 15
-    uuid: 1a181016-95ea-46cc-9e85-3b6188185fce
+    uuid: d80c623c-0c11-453a-8662-5740557f9c39
     country_id: *ie
     network_id: *ie_net_feasa_mobile
   - id: 451420
     prefix: '3538900'
     number_min_length: 12
     number_max_length: 12
-    uuid: c82d502a-30ff-46e0-8b4f-edfbfd7c7557
+    uuid: 9fd4d8c0-9ea2-4631-8b5a-c6974039154e
     country_id: *ie
     network_id: *ie_eir_mobile_mobile
   - id: 451431
     prefix: '3538911'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9fa41cc4-e50c-4c21-a1ee-6e22331762b2
+    uuid: 6ed07dcf-6576-4142-be8f-c495184010df
     country_id: *ie
     network_id: *ie_bt_mobile
   - id: 451445
     prefix: '3538920'
     number_min_length: 12
     number_max_length: 12
-    uuid: 008ff402-0653-4d03-abba-ac37f5c1898d
+    uuid: 424556ce-5ba6-4b65-87af-c94d65d6b58a
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451448
     prefix: '3538921'
     number_min_length: 12
     number_max_length: 12
-    uuid: 94b76a1c-f65f-48db-b718-fe00c2135dba
+    uuid: 212fd210-b1fd-42ce-bfdf-b1ed7439d48e
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451450
     prefix: '3538922'
     number_min_length: 12
     number_max_length: 12
-    uuid: 13393989-0de9-47ab-8ee8-d7e2fd6162dd
+    uuid: f40b473d-9ef1-4741-8107-e562c88ff3fe
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451456
     prefix: '3538923'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0bed72a1-539b-4468-9882-2d4c8206b083
+    uuid: b9b143f1-02da-4b1f-8446-47166eb4927c
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451457
     prefix: '3538924'
     number_min_length: 12
     number_max_length: 12
-    uuid: 78a79a2a-73ec-450d-acd6-e1eac546afcb
+    uuid: d7799260-5ec2-4240-bf00-bc1a92d533bf
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451462
     prefix: '3538925'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9f7d726c-f928-404e-bfca-5a02f7bd4c5a
+    uuid: 82a8d787-4fce-4af2-b5e6-8ffcebfa62d1
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451464
     prefix: '3538926'
     number_min_length: 12
     number_max_length: 12
-    uuid: f3ff4f9f-4ac9-41ab-8d15-66eae9088e80
+    uuid: 804b0c5a-2f44-4743-a287-de5448db7882
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451466
     prefix: '3538927'
     number_min_length: 12
     number_max_length: 12
-    uuid: cc2f0f7a-4d49-4b5b-a208-efa28df266b0
+    uuid: adbfe5ea-1c57-4698-8de2-45315c153de6
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451471
     prefix: '3538930'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2fac6e1b-b685-4384-ab94-c441c6618d58
+    uuid: 25c89d0a-37d2-4439-9ed1-4d80577a7cde
     country_id: *ie
     network_id: *ie_ogcio_mobile
   - id: 451552
     prefix: '353894'
     number_min_length: 12
     number_max_length: 12
-    uuid: c27a95b0-bb14-4114-a76e-45466a4e2027
+    uuid: 6bb3d484-964b-4d22-ba8d-5cf4ab0ba6d7
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451569
     prefix: '35389500'
     number_min_length: 13
     number_max_length: 13
-    uuid: 6fc9bf04-3dea-4a84-959e-b73ff85b6658
+    uuid: 1ae42660-1ba1-4004-8639-70bf6579e5b2
     country_id: *ie
     network_id: *ie_eir_mobile_mobile
   - id: 451572
     prefix: '35389520'
     number_min_length: 13
     number_max_length: 13
-    uuid: 799cf541-a9b8-4823-9ee1-ffe52c6b6038
+    uuid: 3e4f32d2-46aa-4a52-aae3-dfcb38be5f4c
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451573
     prefix: '35389521'
     number_min_length: 13
     number_max_length: 13
-    uuid: 17bbe528-2f79-483c-a4e5-b26c74c4ad88
+    uuid: 56932cd2-c1fe-4f44-8ad6-e1d0512891ac
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451574
     prefix: '35389522'
     number_min_length: 13
     number_max_length: 13
-    uuid: 9a6a4d58-9447-4f91-950f-680240aefa32
+    uuid: 2dd5bfb7-ea33-471f-badd-a001f77f62db
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451575
     prefix: '35389523'
     number_min_length: 13
     number_max_length: 13
-    uuid: 77aa16cb-b490-4e40-bcb6-f339df97b839
+    uuid: e665acd5-89d2-422d-b52b-859cc638a8b4
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451576
     prefix: '35389524'
     number_min_length: 13
     number_max_length: 13
-    uuid: f2b70cda-1b1f-42d2-88e9-9498e895228d
+    uuid: 0ba00a40-6c46-4eab-92d8-6bfeec736f05
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451577
     prefix: '35389525'
     number_min_length: 13
     number_max_length: 13
-    uuid: bc7af021-cdae-4d44-afc1-474d828bd89c
+    uuid: d6201bca-1787-4405-8d57-4ea835cf0545
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451578
     prefix: '35389526'
     number_min_length: 13
     number_max_length: 13
-    uuid: 9ea9d209-98c3-45d7-bb3b-9a9a32fdc217
+    uuid: 2316cd28-3233-4b16-8b36-021f4e12ee77
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451579
     prefix: '35389527'
     number_min_length: 13
     number_max_length: 13
-    uuid: bcea9619-bcf0-4e2b-9f52-34316be6f59c
+    uuid: b2557f1f-5aad-4217-936e-98ec0d719fd4
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451583
     prefix: '35389530'
     number_min_length: 13
     number_max_length: 13
-    uuid: 378cf980-4e03-4a5f-958a-89d87925af51
+    uuid: 4be1e2b5-086c-4d78-a4c1-8b25cbd7cdfb
     country_id: *ie
     network_id: *ie_ogcio_mobile
   - id: 451585
     prefix: '3538954'
     number_min_length: 13
     number_max_length: 13
-    uuid: ffa62e33-265c-48a3-b372-8e7b93317e2b
+    uuid: 6dd60304-eab0-4d4e-a117-4ed861c11349
     country_id: *ie
     network_id: *ie_tesco_mobile_mobile
   - id: 451588
     prefix: '35389560'
     number_min_length: 13
     number_max_length: 13
-    uuid: 42862534-cdfb-4820-b137-6abe9133baa9
+    uuid: b2b04de0-82b6-40de-b10e-35d981268662
     country_id: *ie
     network_id: *ie_virgin_media_mobile
   - id: 451589
     prefix: '35389561'
     number_min_length: 13
     number_max_length: 13
-    uuid: dce40165-2616-4886-a6fb-59046e660276
+    uuid: bea95df7-7575-480f-8ab0-4adbb52b5e24
     country_id: *ie
     network_id: *ie_virgin_media_mobile
   - id: 451590
     prefix: '35389562'
     number_min_length: 13
     number_max_length: 13
-    uuid: 186b826a-260e-4401-be00-dd495fa91aa5
+    uuid: 62b977bd-a2f6-4375-aa8b-d00856408348
     country_id: *ie
     network_id: *ie_virgin_media_mobile
   - id: 451591
     prefix: '35389565'
     number_min_length: 13
     number_max_length: 13
-    uuid: c8e4f74a-461e-465c-93a5-5fbc5487ac90
+    uuid: 2e963125-51ff-41c4-9741-7de37ba6957a
     country_id: *ie
     network_id: *ie_sky_mobile_mobile
   - id: 451592
     prefix: '35389566'
     number_min_length: 13
     number_max_length: 13
-    uuid: f1a953ad-27a7-4205-9603-d594041dd33f
+    uuid: 35f8d12f-e70d-4e05-a591-f58517e3ed8f
     country_id: *ie
     network_id: *ie_sky_mobile_mobile
   - id: 451593
     prefix: '35389567'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4900ca26-d1ba-4d55-983a-e3c38bd1ce96
+    uuid: 2430ea4a-081e-47b1-b202-4eda5ede2c06
     country_id: *ie
     network_id: *ie_sky_mobile_mobile
   - id: 451598
     prefix: '35389594'
     number_min_length: 13
     number_max_length: 13
-    uuid: b9038ee2-ee06-43de-8241-6e3010eb2ee1
+    uuid: 8923a972-cec0-4f84-9467-8bf5433d3271
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451599
     prefix: '35389595'
     number_min_length: 13
     number_max_length: 13
-    uuid: e3f21a9a-7911-4861-8cef-a70dde7f3e6e
+    uuid: abc14c00-5afe-40a2-955d-4276fe6e716e
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451600
     prefix: '35389596'
     number_min_length: 13
     number_max_length: 13
-    uuid: 1ff1f7a1-22b2-4dd9-9b03-f8ca567b9833
+    uuid: 2f9cb412-b8ee-4ba6-ad7c-da566050e62f
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451601
     prefix: '35389597'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8a8c9528-dc8d-46ef-94d6-14656be57d16
+    uuid: 4884a145-a295-4443-a1fb-0e757c3209e1
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451602
     prefix: '35389598'
     number_min_length: 13
     number_max_length: 13
-    uuid: de770981-c70f-48e3-8840-5be510c442a6
+    uuid: 53b9a5d1-d874-4147-aa31-0fab38424b3d
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451606
     prefix: '3538960'
     number_min_length: 12
     number_max_length: 12
-    uuid: caf0f158-44a6-43a8-addf-533a6d829bec
+    uuid: 55ee4e6e-e57c-41a2-8e4a-c97d3fe5940c
     country_id: *ie
     network_id: *ie_virgin_media_mobile
   - id: 451608
     prefix: '3538961'
     number_min_length: 12
     number_max_length: 12
-    uuid: 28383d2c-22ac-4957-b46e-a704bb3d466d
+    uuid: c37fdb2f-b688-41dd-8bb6-c0de54ea3928
     country_id: *ie
     network_id: *ie_virgin_media_mobile
   - id: 451610
     prefix: '3538962'
     number_min_length: 12
     number_max_length: 12
-    uuid: a75c1ae9-af38-4397-b9d9-633c3fa8b0ad
+    uuid: ea60f3e3-48f1-42cc-aa2f-fc200e3630f4
     country_id: *ie
     network_id: *ie_virgin_media_mobile
   - id: 451617
     prefix: '3538965'
     number_min_length: 12
     number_max_length: 12
-    uuid: 226d71d0-e6ea-4214-9f7d-939726f8cedf
+    uuid: 356b47ce-3cdb-4ee7-af15-d0a5eb568314
     country_id: *ie
     network_id: *ie_sky_mobile_mobile
   - id: 451621
     prefix: '3538966'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0a083fd1-c1b5-4674-a04b-f956f8bbd2a1
+    uuid: 358fe576-5259-431b-ba54-c8b3bce8e1a1
     country_id: *ie
     network_id: *ie_sky_mobile_mobile
   - id: 451626
     prefix: '3538967'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c2a8992-d3c3-4f4c-840b-c75c4c6d66b7
+    uuid: 3ee67284-8051-420d-be1b-bf6950c0298a
     country_id: *ie
     network_id: *ie_sky_mobile_mobile
   - id: 451659
     prefix: '3538994'
     number_min_length: 12
     number_max_length: 12
-    uuid: 53e87845-8d89-46b7-95e2-cf4473c96c38
+    uuid: 9fafce8b-3a0a-462a-bd7f-d0c12c576e32
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451660
     prefix: '3538995'
     number_min_length: 12
     number_max_length: 12
-    uuid: 817a436d-3ce3-4812-9ee4-b92e649211a4
+    uuid: 282296b2-f5e1-44ce-8905-ddcf0c574208
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451662
     prefix: '3538996'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2b3c7d9d-fdae-4207-bf11-b996da9cafab
+    uuid: 7e125e11-28da-42b9-9e00-42263ab0b99b
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451663
     prefix: '3538997'
     number_min_length: 12
     number_max_length: 12
-    uuid: 48802a50-d2b0-4b8a-8ef4-da0a18483bdd
+    uuid: 72080ac6-5720-4e96-a530-bf5be5927ee2
     country_id: *ie
     network_id: *ie_lycamobile_mobile
   - id: 451669
     prefix: '3538998'
     number_min_length: 12
     number_max_length: 12
-    uuid: 49bb047c-ffa7-41d5-a0da-edbd8fac178b
+    uuid: 51991e9f-89a7-4143-a78b-1cb914c816aa
     country_id: *ie
     network_id: *ie_lycamobile_mobile

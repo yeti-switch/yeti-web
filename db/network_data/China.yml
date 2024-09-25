@@ -1,76 +1,1340 @@
 country_id: &cn 44
 networks:
 # Fixed Networks
-  - id: &cn_fixed 4010
-    name: CN Fixed
-    uuid: 0cdfa888-6b5d-4ac3-82d4-af7de17a3481
+  - id: &cn_bayannaoer_fixed 4019
+    name: CN Bayannaoer Fixed
+    uuid: c0076311-cd41-445e-92d9-a6ff593c7946
+    type_id: 12
+  - id: &cn_xilin_gol_fixed 4094
+    name: CN Xilin Gol Fixed
+    uuid: 655dfffa-0db4-4ed1-a788-4f1115ca53f0
+    type_id: 12
+  - id: &cn_xingan_fixed 4858
+    name: CN Xingan Fixed
+    uuid: 337ef31c-888f-4fa2-a2dc-a1481ae8fb20
+    type_id: 12
+  - id: &cn_alashan_fixed 4917
+    name: CN Alashan Fixed
+    uuid: 6ff832a0-e089-4932-9514-11ed820191c1
+    type_id: 12
+  - id: &cn_wuxi_fixed 5658
+    name: CN Wuxi Fixed
+    uuid: cdc87a25-2640-4712-acc6-d599c2681785
+    type_id: 12
+  - id: &cn_yangzhou_fixed 5719
+    name: CN Yangzhou Fixed
+    uuid: e997282b-5b8e-41e9-8416-49743601c071
+    type_id: 12
+  - id: &cn_huaian_fixed 5758
+    name: CN Huaian Fixed
+    uuid: 8b0311d5-0dab-420e-b5ed-0f0181d242ce
+    type_id: 12
+  - id: &cn_lianyungang_fixed 5845
+    name: CN Lianyungang Fixed
+    uuid: 272747d8-daa6-406a-9ab7-c9f3d3c17667
+    type_id: 12
+  - id: &cn_zhenjiang_fixed 6112
+    name: CN Zhenjiang Fixed
+    uuid: a827e1eb-716e-49f0-9291-25b22a9311b8
+    type_id: 12
+  - id: &cn_suzhou_fixed 6125
+    name: CN Suzhou Fixed
+    uuid: 0c0a4b3f-db47-42d5-83b1-c3429b1dc861
+    type_id: 12
+  - id: &cn_nantong_fixed 6171
+    name: CN Nantong Fixed
+    uuid: e4c94273-c7bf-471e-a3b2-02c9a543c163
+    type_id: 12
+  - id: &cn_yancheng_fixed 6197
+    name: CN Yancheng Fixed
+    uuid: 9a27fbff-adb7-486e-bfcf-10f2958dbe37
+    type_id: 12
+  - id: &cn_xuzhou_fixed 6301
+    name: CN Xuzhou Fixed
+    uuid: 4270d860-a834-4821-aa7a-08f4898cb761
+    type_id: 12
+  - id: &cn_changzhou_fixed 6399
+    name: CN Changzhou Fixed
+    uuid: c8a06293-6ff3-4123-8a85-7aa83c2765eb
+    type_id: 12
+  - id: &cn_heze_fixed 6681
+    name: CN Heze Fixed
+    uuid: 8b7f0e75-f8d3-4897-9e86-40d6ab804d3b
+    type_id: 12
+  - id: &cn_jinan_fixed 6811
+    name: CN Jinan Fixed
+    uuid: 812d8afa-e4f9-4cea-b2fb-f1b45561afa8
+    type_id: 12
+  - id: &cn_qingdao_fixed 6882
+    name: CN Qingdao Fixed
+    uuid: 57ddccaa-1e2c-4b6a-91cc-a10d412bd59b
+    type_id: 12
+  - id: &cn_zibo_fixed 6909
+    name: CN Zibo Fixed
+    uuid: ff5d4190-1f82-4eab-849c-be3057835636
+    type_id: 12
+  - id: &cn_dezhou_fixed 6940
+    name: CN Dezhou Fixed
+    uuid: 2896ac17-ceec-41d8-9db4-b3e3332f95a0
+    type_id: 12
+  - id: &cn_yantai_fixed 6999
+    name: CN Yantai Fixed
+    uuid: 1768bcdc-65b2-499a-8b49-b6c1f469a7af
+    type_id: 12
+  - id: &cn_weifang_fixed 7023
+    name: CN Weifang Fixed
+    uuid: 9acf37bb-7e54-48f0-a569-e92dd0e0b49b
+    type_id: 12
+  - id: &cn_jining_fixed 7041
+    name: CN Jining Fixed
+    uuid: e6f51e6b-d972-4bbd-b026-8645c8e8c29a
+    type_id: 12
+  - id: &cn_taian_fixed 7059
+    name: CN Taian Fixed
+    uuid: 59fef45a-eed6-4aee-a829-97b0c5de0bb8
+    type_id: 12
+  - id: &cn_linyi_fixed 7067
+    name: CN Linyi Fixed
+    uuid: 8b21cf4a-a4b3-4f5d-a36a-96d9217ff511
+    type_id: 12
+  - id: &cn_taizhou_fixed 7405
+    name: CN Taizhou Fixed
+    uuid: 9fedcf85-6fcb-4b6a-bf6e-3945d1213120
+    type_id: 12
+  - id: &cn_suqian_fixed 7502
+    name: CN Suqian Fixed
+    uuid: 28d08fb2-e08f-49c5-9967-686095b1672f
+    type_id: 12
+  - id: &cn_binzhou_fixed 7811
+    name: CN Binzhou Fixed
+    uuid: eeb7c306-97be-45d2-93e2-e6dce225cbfb
+    type_id: 12
+  - id: &cn_dongying_fixed 7874
+    name: CN Dongying Fixed
+    uuid: 44436811-7847-4c05-a639-1303972f920e
+    type_id: 12
+  - id: &cn_huaibei_fixed 7991
+    name: CN Huaibei Fixed
+    uuid: 9fdf066e-1c70-43b6-a9de-d9e307f1c315
+    type_id: 12
+  - id: &cn_huzhou_fixed 8025
+    name: CN Huzhou Fixed
+    uuid: 744bf5bd-e077-48a4-9d6a-2a36517910e1
+    type_id: 12
+  - id: &cn_jiaxing_fixed 8081
+    name: CN Jiaxing Fixed
+    uuid: 7e86f1e6-243f-4109-9493-60bb6f4c96ec
+    type_id: 12
+  - id: &cn_fuzhou_fixed 8842
+    name: CN Fuzhou Fixed
+    uuid: b23e4bfa-3302-48c1-8503-7fee39ded2cf
+    type_id: 12
+  - id: &cn_xiamen_fixed 8848
+    name: CN Xiamen Fixed
+    uuid: c0d2f86c-31cf-4241-bebc-34727daf4b67
+    type_id: 12
+  - id: &cn_ningde_fixed 8868
+    name: CN Ningde Fixed
+    uuid: 88a903dd-51f3-45b5-a2bd-314455d1dbf6
+    type_id: 12
+  - id: &cn_putian_fixed 8879
+    name: CN Putian Fixed
+    uuid: 9b6de500-b60f-4e26-93bf-6c256ee61e27
+    type_id: 12
+  - id: &cn_quanzhou_fixed 8908
+    name: CN Quanzhou Fixed
+    uuid: e4f84f13-822d-4eca-8621-2ff82c286baf
+    type_id: 12
+  - id: &cn_zhangzhou_fixed 8926
+    name: CN Zhangzhou Fixed
+    uuid: 576a587d-140b-4357-af01-ea08894d43c9
+    type_id: 12
+  - id: &cn_longyan_fixed 8944
+    name: CN Longyan Fixed
+    uuid: 1676e1fe-a1c2-45f4-9c16-6b22df6b7581
+    type_id: 12
+  - id: &cn_sanming_fixed 8955
+    name: CN Sanming Fixed
+    uuid: 673374cf-03b8-4f36-a95b-5bcfecceb98d
+    type_id: 12
+  - id: &cn_nanping_fixed 8959
+    name: CN Nanping Fixed
+    uuid: 33e5e72d-dc02-432a-afe9-b1d18464a086
+    type_id: 12
+  - id: &cn_chuzhou_fixed 9026
+    name: CN Chuzhou Fixed
+    uuid: 5533cd39-6a9f-4544-b0d5-dd2459f63fd1
+    type_id: 12
+  - id: &cn_hefei_fixed 9039
+    name: CN Hefei Fixed
+    uuid: 720f0f85-e47d-4c2e-bcfa-5f950cc5d792
+    type_id: 12
+  - id: &cn_bengbu_fixed 9074
+    name: CN Bengbu Fixed
+    uuid: 4d4dcf01-ce52-449b-a873-b38328b683cf
+    type_id: 12
+  - id: &cn_wuhu_fixed 9104
+    name: CN Wuhu Fixed
+    uuid: b664a8cd-1692-488e-957d-258fbae9af73
+    type_id: 12
+  - id: &cn_huainan_fixed 9116
+    name: CN Huainan Fixed
+    uuid: f2f6a30e-92aa-4011-9eeb-0ed2fddd870d
+    type_id: 12
+  - id: &cn_maanshan_fixed 9136
+    name: CN Maanshan Fixed
+    uuid: 873d61f6-5614-4b25-a1b0-87d76b6e5feb
+    type_id: 12
+  - id: &cn_anqing_fixed 9156
+    name: CN Anqing Fixed
+    uuid: 8c602617-a9c9-4b7b-925a-2e2f8417dae9
+    type_id: 12
+  - id: &cn_bozhou_fuyang_fixed 9191
+    name: CN Bozhou Fuyang Fixed
+    uuid: efaa0aa2-9eef-4fb5-ae00-0de3b8c9624e
+    type_id: 12
+  - id: &cn_huangshan_fixed 9203
+    name: CN Huangshan Fixed
+    uuid: a36f3a91-aa0f-4921-b063-5375bb86d2f5
+    type_id: 12
+  - id: &cn_tongling_fixed 9294
+    name: CN Tongling Fixed
+    uuid: 3d69ce54-9129-4585-8248-c13333ac682d
+    type_id: 12
+  - id: &cn_xuancheng_fixed 9319
+    name: CN Xuancheng Fixed
+    uuid: 10e768ce-6127-42d3-aa0c-02f267aa37aa
+    type_id: 12
+  - id: &cn_luan_fixed 9420
+    name: CN Luan Fixed
+    uuid: 149bc0ff-ff62-4879-b82e-38679a2be04a
+    type_id: 12
+  - id: &cn_chizhou_fixed 9502
+    name: CN Chizhou Fixed
+    uuid: 9b413171-bca9-4629-84e6-a576f9b938ff
+    type_id: 12
+  - id: &cn_quzhou_fixed 9692
+    name: CN Quzhou Fixed
+    uuid: 6d713bc8-8243-4f8a-964b-01861731adf6
+    type_id: 12
+  - id: &cn_hangzhou_fixed 9850
+    name: CN Hangzhou Fixed
+    uuid: 0e1164da-caef-4752-9994-0c4e55a02ac8
+    type_id: 12
+  - id: &cn_ningbo_fixed 9905
+    name: CN Ningbo Fixed
+    uuid: 33be1148-ce0f-4ea1-a7ae-df45cf455c08
+    type_id: 12
+  - id: &cn_shaoxing_fixed 9961
+    name: CN Shaoxing Fixed
+    uuid: 32f7a9e2-8863-4cae-9892-1cf9bfede41f
+    type_id: 12
+  - id: &cn_wenzhou_fixed 10086
+    name: CN Wenzhou Fixed
+    uuid: 1933a91c-6c12-4b2c-b1d8-f62ccbbfa7d0
+    type_id: 12
+  - id: &cn_lishui_fixed 10096
+    name: CN Lishui Fixed
+    uuid: 986993cb-318d-43eb-921b-90454e12f7c9
+    type_id: 12
+  - id: &cn_jinhua_fixed 10099
+    name: CN Jinhua Fixed
+    uuid: 14fff577-a273-4e90-8602-abab9e05d1ec
+    type_id: 12
+  - id: &cn_zhoushan_fixed 10258
+    name: CN Zhoushan Fixed
+    uuid: d9b878de-bb43-4802-8667-1635a44a72c1
+    type_id: 12
+  - id: &cn_zaozhuang_fixed 12302
+    name: CN Zaozhuang Fixed
+    uuid: baddc05a-4e67-464f-beb7-0e675a1941d5
+    type_id: 12
+  - id: &cn_rizhao_fixed 12330
+    name: CN Rizhao Fixed
+    uuid: 86aba8ba-b9ee-4877-98d9-a28d77b24ebf
+    type_id: 12
+  - id: &cn_weihai_fixed 12514
+    name: CN Weihai Fixed
+    uuid: 7febd4ab-eba8-4650-ad11-6d0818848f16
+    type_id: 12
+  - id: &cn_laiwu_fixed 12879
+    name: CN Laiwu Fixed
+    uuid: f9dfa699-8970-47b4-9f2a-63622b7390c8
+    type_id: 12
+  - id: &cn_liaocheng_fixed 12900
+    name: CN Liaocheng Fixed
+    uuid: 5a27bd71-c012-425b-bbc2-2a128e14fcec
+    type_id: 12
+  - id: &cn_yangjiang_fixed 13093
+    name: CN Yangjiang Fixed
+    uuid: 7c1faf53-a502-4971-b644-03ff36676d63
+    type_id: 12
+  - id: &cn_maoming_fixed 13248
+    name: CN Maoming Fixed
+    uuid: 4e2df936-540d-4d94-af96-207e61fb9084
+    type_id: 12
+  - id: &cn_shanwei_fixed 13717
+    name: CN Shanwei Fixed
+    uuid: 34d25d24-71d8-4a8a-9a92-eb4689c44843
+    type_id: 12
+  - id: &cn_jieyang_fixed 13909
+    name: CN Jieyang Fixed
+    uuid: e290d71a-c1ff-4191-92bc-d292221c4974
+    type_id: 12
+  - id: &cn_xishuangbanna_dai_autonomous_prefecture_fixed 14331
+    name: CN Xishuangbanna Dai Autonomous Prefecture Fixed
+    uuid: 467f0c78-d6cc-40aa-9373-7d41d74fa257
+    type_id: 12
+  - id: &cn_dehong_dai_and_jingpo_autonomous_prefecture_fixed 14340
+    name: CN Dehong Dai And Jingpo Autonomous Prefecture Fixed
+    uuid: da866093-b987-4b36-b322-3c2db4a7ac4a
+    type_id: 12
+  - id: &cn_yingtan_fixed 14924
+    name: CN Yingtan Fixed
+    uuid: b0ee6353-3ee1-421e-a0d0-fbe756f0abcb
+    type_id: 12
+  - id: &cn_xiangyang_fixed 15355
+    name: CN Xiangyang Fixed
+    uuid: 2978f454-9cfb-4dcf-9221-449b20537d4e
+    type_id: 12
+  - id: &cn_ezhou_fixed 15380
+    name: CN Ezhou Fixed
+    uuid: ff9dbd10-8aa9-4712-83ad-5984817ea8a8
+    type_id: 12
+  - id: &cn_xiaogan_fixed 15412
+    name: CN Xiaogan Fixed
+    uuid: 2e77b977-5882-42e7-87ec-041256c7c72a
+    type_id: 12
+  - id: &cn_huanggang_fixed 15603
+    name: CN Huanggang Fixed
+    uuid: db4cc0b8-b78c-4510-a57a-014d3f45db17
+    type_id: 12
+  - id: &cn_jingzhou_fixed 15750
+    name: CN Jingzhou Fixed
+    uuid: e27c2fd2-4c4f-48fd-908f-4e2c68d74b06
+    type_id: 12
+  - id: &cn_huangshi_fixed 16293
+    name: CN Huangshi Fixed
+    uuid: e50edafb-8589-41d9-a902-0393c7200c84
+    type_id: 12
+  - id: &cn_xianning_fixed 16339
+    name: CN Xianning Fixed
+    uuid: cd5e33a6-9df4-4952-967f-ab8c56e7ad94
+    type_id: 12
+  - id: &cn_yichang_fixed 16409
+    name: CN Yichang Fixed
+    uuid: e24534ff-32c9-42b3-866c-5f8f60dfab09
+    type_id: 12
+  - id: &cn_enshi_tujia_and_miao_autonomous_prefecture_fixed 16494
+    name: CN Enshi Tujia And Miao Autonomous Prefecture Fixed
+    uuid: c71dc421-768c-4ba3-962b-091af543858f
+    type_id: 12
+  - id: &cn_suizhou_fixed 16626
+    name: CN Suizhou Fixed
+    uuid: a05eb742-8ece-4b7e-a6cc-ceabf557a3a7
+    type_id: 12
+  - id: &cn_shennongjia_forestry_district_shiyan_fixed 16810
+    name: CN Shennongjia Forestry District Shiyan Fixed
+    uuid: 9c37c81b-1db4-4c01-a0ca-d438bd4c1987
+    type_id: 12
+  - id: &cn_jingmen_fixed 16987
+    name: CN Jingmen Fixed
+    uuid: 0f2e41be-b9d9-4fe9-8f1f-867170fde9fa
+    type_id: 12
+  - id: &cn_qianjiang_tianmen_xiantao_fixed 17085
+    name: CN Qianjiang Tianmen Xiantao Fixed
+    uuid: 433848c7-6d8c-4a6e-9cc2-c7e930f27784
+    type_id: 12
+  - id: &cn_yueyang_fixed 17195
+    name: CN Yueyang Fixed
+    uuid: 6ba1579c-a557-47a8-9ad6-f7aa8fdbcba0
+    type_id: 12
+  - id: &cn_changsha_xiangtan_zhuzhou_fixed 17207
+    name: CN Changsha Xiangtan Zhuzhou Fixed
+    uuid: dc1eba67-afc5-4d6d-927d-4a99f20a7b78
+    type_id: 12
+  - id: &cn_chenzhou_fixed 17326
+    name: CN Chenzhou Fixed
+    uuid: c19ea339-0cff-4a54-9873-f2e80ebca144
+    type_id: 12
+  - id: &cn_changde_fixed 17342
+    name: CN Changde Fixed
+    uuid: f1ff23b3-b922-4598-a64f-214036d1b31a
+    type_id: 12
+  - id: &cn_yiyang_fixed 17364
+    name: CN Yiyang Fixed
+    uuid: c35a1b12-029f-4988-85b1-3d641b017678
+    type_id: 12
+  - id: &cn_huaihua_fixed 17383
+    name: CN Huaihua Fixed
+    uuid: 6cbeb7d4-005d-4217-af5a-aaf475b4a136
+    type_id: 12
+  - id: &cn_yongzhou_fixed 17406
+    name: CN Yongzhou Fixed
+    uuid: f9dcbc85-4d20-4441-b684-93083c207a9c
+    type_id: 12
+  - id: &cn_shenzhen_fixed 17460
+    name: CN Shenzhen Fixed
+    uuid: 4a43236d-d015-4f08-bbd4-14dcac37b69b
+    type_id: 12
+  - id: &cn_zhuhai_fixed 17473
+    name: CN Zhuhai Fixed
+    uuid: 50f3b679-be44-48d0-af7d-99d2ead509b2
+    type_id: 12
+  - id: &cn_foshan_fixed 17496
+    name: CN Foshan Fixed
+    uuid: a1445a2c-8ec4-49a9-9e5f-920cb7642a36
+    type_id: 12
+  - id: &cn_hengyang_fixed 17574
+    name: CN Hengyang Fixed
+    uuid: 9045d34a-dc4f-44c0-a359-136996f106a7
+    type_id: 12
+  - id: &cn_loudi_fixed 17589
+    name: CN Loudi Fixed
+    uuid: b77827ef-cfc9-467f-9045-cccab5ad5f94
+    type_id: 12
+  - id: &cn_shaoyang_fixed 17603
+    name: CN Shaoyang Fixed
+    uuid: 8c678c50-3d60-4303-865f-14122f63af90
+    type_id: 12
+  - id: &cn_xiangxi_tujia_and_miao_autonomous_prefecture_fixed 17875
+    name: CN Xiangxi Tujia And Miao Autonomous Prefecture Fixed
+    uuid: 500b15fd-0c11-466e-9164-19633450dac4
+    type_id: 12
+  - id: &cn_zhangjiajie_fixed 17934
+    name: CN Zhangjiajie Fixed
+    uuid: c8f97ea2-6c62-4614-bd1d-cef74aec4dde
+    type_id: 12
+  - id: &cn_jiangmen_fixed 18042
+    name: CN Jiangmen Fixed
+    uuid: 0e761f6c-62cd-45e7-b77c-7c53d13ea3f4
+    type_id: 12
+  - id: &cn_shaoguan_fixed 18051
+    name: CN Shaoguan Fixed
+    uuid: 6b0a08b7-5747-43fe-bf2c-963946d9437e
+    type_id: 12
+  - id: &cn_huizhou_fixed 18057
+    name: CN Huizhou Fixed
+    uuid: ded33048-16d7-4fe4-bc37-ade2ec69d8f8
+    type_id: 12
+  - id: &cn_meizhou_fixed 18083
+    name: CN Meizhou Fixed
+    uuid: e9a4eed2-029d-496b-a8f4-f2108553cdb1
+    type_id: 12
+  - id: &cn_shantou_fixed 18100
+    name: CN Shantou Fixed
+    uuid: 44fae5b1-16fd-4bb5-99b5-24d52a1fa7b7
+    type_id: 12
+  - id: &cn_zhaoqing_fixed 18130
+    name: CN Zhaoqing Fixed
+    uuid: 5ceb750b-3231-4bc2-ae06-2c45ae3fd824
+    type_id: 12
+  - id: &cn_zhanjiang_fixed 18156
+    name: CN Zhanjiang Fixed
+    uuid: adc86a8f-e3d4-44f3-8917-7f486f0d32e5
+    type_id: 12
+  - id: &cn_zhongshan_fixed 18204
+    name: CN Zhongshan Fixed
+    uuid: 5dcf17fe-9ff4-4763-bce0-02500527e01f
+    type_id: 12
+  - id: &cn_heyuan_fixed 18308
+    name: CN Heyuan Fixed
+    uuid: a7fad3f0-48f0-40e8-aa7c-c77a9aa7b416
+    type_id: 12
+  - id: &cn_yunfu_fixed 18389
+    name: CN Yunfu Fixed
+    uuid: 3cf23ea4-1201-41f1-bed7-a81a0c3a5dfc
+    type_id: 12
+  - id: &cn_qingyuan_fixed 18441
+    name: CN Qingyuan Fixed
+    uuid: d1274be8-5104-4c4b-99cb-4a2f1afe7107
+    type_id: 12
+  - id: &cn_fangchenggang_fixed 18524
+    name: CN Fangchenggang Fixed
+    uuid: e0f974d6-9ce2-4900-9f18-1c4179fccc80
+    type_id: 12
+  - id: &cn_chongzuo_nanning_fixed 18546
+    name: CN Chongzuo Nanning Fixed
+    uuid: 57db6551-ad83-4089-a246-7d071cb3aa0e
+    type_id: 12
+  - id: &cn_laibin_liuzhou_fixed 18564
+    name: CN Laibin Liuzhou Fixed
+    uuid: d7692d41-a26c-43e2-a411-37bb74e1c87f
+    type_id: 12
+  - id: &cn_guilin_fixed 18608
+    name: CN Guilin Fixed
+    uuid: c629a194-540a-4233-9a39-dddc21bbfc3e
+    type_id: 12
+  - id: &cn_hezhou_wuzhou_fixed 18642
+    name: CN Hezhou Wuzhou Fixed
+    uuid: f496f73f-ab1d-4bfc-a2c8-31c8eb5c89dd
+    type_id: 12
+  - id: &cn_baise_fixed 18717
+    name: CN Baise Fixed
+    uuid: c5be25b5-8357-4dcf-ba82-da36c079e48e
+    type_id: 12
+  - id: &cn_qinzhou_fixed 18741
+    name: CN Qinzhou Fixed
+    uuid: cd794105-45a5-487d-b5ed-370939462d10
+    type_id: 12
+  - id: &cn_beihai_fixed 18767
+    name: CN Beihai Fixed
+    uuid: 3a1f8789-7e81-49a5-ac46-829d0dcd3068
+    type_id: 12
+  - id: &cn_chaozhou_fixed 19102
+    name: CN Chaozhou Fixed
+    uuid: dbb02f24-9cb4-4946-89d7-64c3a60bfb09
+    type_id: 12
+  - id: &cn_dongguan_fixed 19126
+    name: CN Dongguan Fixed
+    uuid: cff84fac-6c78-41d3-bfa7-35610e0f3c2a
+    type_id: 12
+  - id: &cn_guigang_yulin_fixed 19153
+    name: CN Guigang Yulin Fixed
+    uuid: d9d6d548-a25b-4d1d-bd38-0b4d9769948f
+    type_id: 12
+  - id: &cn_hechi_fixed 19191
+    name: CN Hechi Fixed
+    uuid: 1ac96abe-ffd5-478f-b508-f53ac8ff0f6a
+    type_id: 12
+  - id: &cn_xinyu_fixed 19681
+    name: CN Xinyu Fixed
+    uuid: 8e269ff7-8bae-4e48-962f-290b752f1c3e
+    type_id: 12
+  - id: &cn_nanchang_fixed 19693
+    name: CN Nanchang Fixed
+    uuid: d86e86ba-e8b7-46ad-b54d-1335a93f003e
+    type_id: 12
+  - id: &cn_jiujiang_fixed 19698
+    name: CN Jiujiang Fixed
+    uuid: 63eb1559-78e4-4b30-a673-b3e3f55511b2
+    type_id: 12
+  - id: &cn_shangrao_fixed 19701
+    name: CN Shangrao Fixed
+    uuid: 4ffa652e-6395-4f21-a944-95bf9425b178
+    type_id: 12
+  - id: &cn_yichun_fixed 19732
+    name: CN Yichun Fixed
+    uuid: 09f51a2e-0310-4ac1-b8df-5d9865e7677d
+    type_id: 12
+  - id: &cn_jian_fixed 19750
+    name: CN Jian Fixed
+    uuid: 97d1be4d-b613-4b62-979e-237b4ebbe794
+    type_id: 12
+  - id: &cn_ganzhou_fixed 19760
+    name: CN Ganzhou Fixed
+    uuid: ab481b9e-e356-4bb4-834d-a5764cdce8d7
+    type_id: 12
+  - id: &cn_jingdezhen_fixed 19770
+    name: CN Jingdezhen Fixed
+    uuid: e28eef16-9c0f-4d0f-be98-d63d9119e7e7
+    type_id: 12
+  - id: &cn_pingxiang_fixed 19771
+    name: CN Pingxiang Fixed
+    uuid: 34e737a3-7c12-446a-9c1d-5e4d38d65422
+    type_id: 12
+  - id: &cn_gannan_tibetan_autonomous_prefecture_fixed 20126
+    name: CN Gannan Tibetan Autonomous Prefecture Fixed
+    uuid: 9e950097-7816-4edb-81fb-125aa076bb22
+    type_id: 12
+  - id: &cn_baiyin_fixed 20159
+    name: CN Baiyin Fixed
+    uuid: c8f17b98-5aca-4b3d-af46-33e02adec9f0
+    type_id: 12
+  - id: &cn_longnan_fixed 20332
+    name: CN Longnan Fixed
+    uuid: 4362c4d7-55ce-4d66-8050-51269a2aad2e
+    type_id: 12
+  - id: &cn_yinchuan_fixed 20346
+    name: CN Yinchuan Fixed
+    uuid: ca9d39e6-fd24-4ec2-adde-dfb9394aa0a6
+    type_id: 12
+  - id: &cn_shizuishan_fixed 20367
+    name: CN Shizuishan Fixed
+    uuid: 9330c12c-b67b-463d-8977-5f5ab56bfb40
+    type_id: 12
+  - id: &cn_wuzhong_fixed 20387
+    name: CN Wuzhong Fixed
+    uuid: 65d0ce22-fe7c-4c88-a929-ee113a25a415
+    type_id: 12
+  - id: &cn_guyuan_fixed 20399
+    name: CN Guyuan Fixed
+    uuid: 5529c9d4-e3af-4c84-8d63-aa48d350a789
+    type_id: 12
+  - id: &cn_zhongwei_fixed 20414
+    name: CN Zhongwei Fixed
+    uuid: d110d7c2-f3f0-478c-925d-e00077da0e7e
+    type_id: 12
+  - id: &cn_xining_fixed 20671
+    name: CN Xining Fixed
+    uuid: 119e2479-9145-4dab-9c57-91513d3e84c4
+    type_id: 12
+  - id: &cn_haibei_tibetan_autonomous_prefecture_fixed 20679
+    name: CN Haibei Tibetan Autonomous Prefecture Fixed
+    uuid: cf491142-be6d-4851-b46f-94147de94e3a
+    type_id: 12
+  - id: &cn_haidong_fixed 20689
+    name: CN Haidong Fixed
+    uuid: 6f0f6e69-3df2-4907-80d8-0bc1bfaa3fd6
+    type_id: 12
+  - id: &cn_huangnan_tibetan_autonomous_prefecture_fixed 20707
+    name: CN Huangnan Tibetan Autonomous Prefecture Fixed
+    uuid: 1cc76354-0611-4fc0-8cb8-7e89ce1c445c
+    type_id: 12
+  - id: &cn_golmud_fixed 20748
+    name: CN Golmud Fixed
+    uuid: 9d1e2bdb-e601-4a84-afda-60ded42b6767
+    type_id: 12
+  - id: &cn_hainan_tibetan_autonomous_prefecture_fixed 20822
+    name: CN Hainan Tibetan Autonomous Prefecture Fixed
+    uuid: 4efd49b3-3fd6-4f7c-a2f7-7ffd67e1c587
+    type_id: 12
+  - id: &cn_guoluo_tibetan_autonomous_prefecture_fixed 20835
+    name: CN Guoluo Tibetan Autonomous Prefecture Fixed
+    uuid: fdda76c6-2bea-4e9e-a4ea-a4e23acf3209
+    type_id: 12
+  - id: &cn_yushu_tibetan_autonomous_prefecture_fixed 20839
+    name: CN Yushu Tibetan Autonomous Prefecture Fixed
+    uuid: 0707280c-2117-4d10-a87c-36a1fcd8994c
+    type_id: 12
+  - id: &cn_haixi_mongol_and_tibetan_autonomous_prefecture_fixed 20847
+    name: CN Haixi Mongol And Tibetan Autonomous Prefecture Fixed
+    uuid: 3c3cc2d6-089d-4776-bf7b-0ebdedb2b14e
+    type_id: 12
+  - id: &cn_hoboksar_mongol_autonomous_county_karamay_fixed 21176
+    name: CN Hoboksar Mongol Autonomous County Karamay Fixed
+    uuid: 8069041b-ab19-49b1-98b8-d290f912c6f0
+    type_id: 12
+  - id: &cn_urumqi_fixed 21189
+    name: CN Urumqi Fixed
+    uuid: 028a3287-4976-441c-ab85-0a9d54732fc6
+    type_id: 12
+  - id: &cn_shawan_county_shihezi_fixed 21202
+    name: CN Shawan County Shihezi Fixed
+    uuid: 4533102e-e0db-4c81-9491-7234d6163e09
+    type_id: 12
+  - id: &cn_dushanzi_kuitun_wusu_fixed 21210
+    name: CN Dushanzi Kuitun Wusu Fixed
+    uuid: 13ca3a73-6b63-4fa1-a29a-7606698313b0
+    type_id: 12
+  - id: &cn_changji_hui_autonomous_prefecture_wujiaqu_fixed 21220
+    name: CN Changji Hui Autonomous Prefecture Wujiaqu Fixed
+    uuid: 7ff0d229-ce6f-40c1-9050-69cd58906d95
+    type_id: 12
+  - id: &cn_turpan_fixed 21233
+    name: CN Turpan Fixed
+    uuid: 054e58da-4176-457e-9003-dc88c699304d
+    type_id: 12
+  - id: &cn_bayingolin_mongol_autonomous_prefecture_fixed 21244
+    name: CN Bayingolin Mongol Autonomous Prefecture Fixed
+    uuid: 7cf3d1dc-ee4a-4e51-a0b3-202f36b8b0da
+    type_id: 12
+  - id: &cn_aksu_akqi_county_alar_fixed 21255
+    name: CN Aksu Akqi County Alar Fixed
+    uuid: 44f0b26b-8147-49a3-aba9-906b336c131c
+    type_id: 12
+  - id: &cn_kashi_tumxuk_fixed 22606
+    name: CN Kashi Tumxuk Fixed
+    uuid: e5d43be0-d12c-4910-b41c-2016694c094e
+    type_id: 12
+  - id: &cn_ili_kazakh_autonomous_prefecture_fixed 22610
+    name: CN Ili Kazakh Autonomous Prefecture Fixed
+    uuid: 594f1919-faa3-49d4-843c-daa3385b090b
+    type_id: 12
+  - id: &cn_beijing_fixed 24806
+    name: CN Beijing Fixed
+    uuid: ca9ca54c-6850-41a2-964c-7824b3e481e6
+    type_id: 12
+  - id: &cn_guangzhou_fixed 26707
+    name: CN Guangzhou Fixed
+    uuid: 65424a21-1754-401a-b66e-29c518bf9e2f
+    type_id: 12
+  - id: &cn_shanghai_fixed 27335
+    name: CN Shanghai Fixed
+    uuid: 0a6b81f7-7029-4301-ac8d-9c8c735d9544
+    type_id: 12
+  - id: &cn_tianjin_fixed 27811
+    name: CN Tianjin Fixed
+    uuid: 51e6f3c0-b687-4d33-81c3-821827a35a07
+    type_id: 12
+  - id: &cn_chongqing_fixed 28296
+    name: CN Chongqing Fixed
+    uuid: 059c998c-4002-41d4-b225-5a571bbd9a67
+    type_id: 12
+  - id: &cn_benxi_fushun_shenyang_tieling_fixed 28966
+    name: CN Benxi Fushun Shenyang Tieling Fixed
+    uuid: dd6b6a35-a99f-4e34-8016-058774eda0ee
+    type_id: 12
+  - id: &cn_wuhan_fixed 29782
+    name: CN Wuhan Fixed
+    uuid: 8d35df10-9f5b-41bf-a63f-cd59d33ba713
+    type_id: 12
+  - id: &cn_nanjing_fixed 29829
+    name: CN Nanjing Fixed
+    uuid: af792e41-6826-4828-ba3d-2fca40b82f6b
+    type_id: 12
+  - id: &cn_xian_xianyang_fixed 30651
+    name: CN Xian Xianyang Fixed
+    uuid: 72453fe6-6f82-4f4d-b054-8149fec2a17e
+    type_id: 12
+  - id: &cn_chengdu_meishan_ziyang_fixed 31075
+    name: CN Chengdu Meishan Ziyang Fixed
+    uuid: 3b9f0f80-839b-4b1c-8d95-4c05229a2d3f
+    type_id: 12
+  - id: &cn_baoding_fixed 31790
+    name: CN Baoding Fixed
+    uuid: 5528b74d-982e-447a-9d01-c531fe115c40
+    type_id: 12
+  - id: &cn_handan_fixed 31799
+    name: CN Handan Fixed
+    uuid: 94e4eaed-5902-4020-a4d6-7800f84393a5
+    type_id: 12
+  - id: &cn_shijiazhuang_fixed 31814
+    name: CN Shijiazhuang Fixed
+    uuid: cd151726-993d-46f9-af76-33b413b97663
+    type_id: 12
+  - id: &cn_zhangjiakou_fixed 31835
+    name: CN Zhangjiakou Fixed
+    uuid: d8b79d78-1376-46c5-b273-e5fe3ba4fa5e
+    type_id: 12
+  - id: &cn_tangshan_fixed 31852
+    name: CN Tangshan Fixed
+    uuid: 8b1ee585-8922-4094-a8c7-98673d1c72db
+    type_id: 12
+  - id: &cn_cangzhou_fixed 31862
+    name: CN Cangzhou Fixed
+    uuid: e8d6ac5f-90dc-43dc-bf35-7d68f2f2ae9a
+    type_id: 12
+  - id: &cn_hengshui_fixed 31893
+    name: CN Hengshui Fixed
+    uuid: 376ba249-6bcf-4170-bd90-e39e86554558
+    type_id: 12
+  - id: &cn_qinhuangdao_fixed 32169
+    name: CN Qinhuangdao Fixed
+    uuid: 1f7895a3-a01f-4393-aed6-34d7d99113eb
+    type_id: 12
+  - id: &cn_chengde_fixed 32223
+    name: CN Chengde Fixed
+    uuid: 6365d213-6f4e-4fe6-bd7b-cb062bf22656
+    type_id: 12
+  - id: &cn_langfang_fixed 32277
+    name: CN Langfang Fixed
+    uuid: a92ce685-eaa3-4356-90ef-009b663d4551
+    type_id: 12
+  - id: &cn_xingtai_fixed 32344
+    name: CN Xingtai Fixed
+    uuid: eadb427f-3c4d-4152-9bff-9776579abf8d
+    type_id: 12
+  - id: &cn_datong_fixed 33413
+    name: CN Datong Fixed
+    uuid: 95727cec-ec5b-4bf0-af26-111f6d281465
+    type_id: 12
+  - id: &cn_changzhi_fixed 33477
+    name: CN Changzhi Fixed
+    uuid: 40cbf7c0-a094-4912-bb42-4d1239f79a21
+    type_id: 12
+  - id: &cn_jincheng_fixed 33490
+    name: CN Jincheng Fixed
+    uuid: 9e6607f6-dd84-4d04-94bb-78cf57bb7fdb
+    type_id: 12
+  - id: &cn_linfen_fixed 33527
+    name: CN Linfen Fixed
+    uuid: a26b64a2-c513-44e0-9b37-6ccfcc6af3ba
+    type_id: 12
+  - id: &cn_luliang_fixed 33575
+    name: CN Luliang Fixed
+    uuid: 4afb0888-cc4b-43ea-9735-27fca3d6ce28
+    type_id: 12
+  - id: &cn_yuncheng_fixed 33624
+    name: CN Yuncheng Fixed
+    uuid: f0a188bb-d996-4991-b102-89a142433af3
+    type_id: 12
+  - id: &cn_pingdingshan_fixed 33749
+    name: CN Pingdingshan Fixed
+    uuid: 5c23aca7-b550-4519-a4c1-fc133dc039c5
+    type_id: 12
+  - id: &cn_xinyang_fixed 33767
+    name: CN Xinyang Fixed
+    uuid: 580d9680-a636-454b-ac6f-23e2d19bb283
+    type_id: 12
+  - id: &cn_nanyang_fixed 33788
+    name: CN Nanyang Fixed
+    uuid: c66da3a6-3e7b-44e0-9292-6c1adf10a1df
+    type_id: 12
+  - id: &cn_luoyang_fixed 33831
+    name: CN Luoyang Fixed
+    uuid: eaf38a44-b44c-4b87-87b5-13488a4a3a71
+    type_id: 12
+  - id: &cn_zhumadian_fixed 34126
+    name: CN Zhumadian Fixed
+    uuid: 6e0ab02a-7196-4de9-8a32-10ee458da0e7
+    type_id: 12
+  - id: &cn_sanmenxia_fixed 34179
+    name: CN Sanmenxia Fixed
+    uuid: e8876f34-65e1-4e5e-a712-2dde20a536a8
+    type_id: 12
+  - id: &cn_shuozhou_fixed 34579
+    name: CN Shuozhou Fixed
+    uuid: cb065c80-ff50-4115-a640-99c183502aa1
+    type_id: 12
+  - id: &cn_xinzhou_fixed 34664
+    name: CN Xinzhou Fixed
+    uuid: 3fce0a30-a61a-4227-84f2-97f29264ace5
+    type_id: 12
+  - id: &cn_taiyuan_fixed 34690
+    name: CN Taiyuan Fixed
+    uuid: d776db33-7702-4aa7-8e53-3adbe0855aa8
+    type_id: 12
+  - id: &cn_yangquan_fixed 34764
+    name: CN Yangquan Fixed
+    uuid: 55390b4e-771c-4f1b-9b38-55b59533b6b3
+    type_id: 12
+  - id: &cn_jinzhong_fixed 34841
+    name: CN Jinzhong Fixed
+    uuid: 6dc6a6e5-a758-49c9-a397-8fdf91cb20c2
+    type_id: 12
+  - id: &cn_shangqiu_fixed 35254
+    name: CN Shangqiu Fixed
+    uuid: 872e4d64-38e4-4956-b025-a92e8b7eb303
+    type_id: 12
+  - id: &cn_kaifeng_zhengzhou_fixed 35265
+    name: CN Kaifeng Zhengzhou Fixed
+    uuid: cb9edc4b-d2bd-4a10-b997-640f26c5fea5
+    type_id: 12
+  - id: &cn_anyang_fixed 35280
+    name: CN Anyang Fixed
+    uuid: c7c14543-e173-41f5-bcda-505e5363515e
+    type_id: 12
+  - id: &cn_xinxiang_fixed 35314
+    name: CN Xinxiang Fixed
+    uuid: 8f4a53d5-4079-44f9-b803-91cc914e4195
+    type_id: 12
+  - id: &cn_xuchang_fixed 35361
+    name: CN Xuchang Fixed
+    uuid: 0791057b-8e69-43f5-81cd-01f226476ac7
+    type_id: 12
+  - id: &cn_jiaozuo_jiyuan_fixed 35765
+    name: CN Jiaozuo Jiyuan Fixed
+    uuid: e2e66cfc-85ef-4fcb-b0e4-56dbfdb9f2da
+    type_id: 12
+  - id: &cn_hebi_fixed 35818
+    name: CN Hebi Fixed
+    uuid: 44cb2571-72dc-4173-8a55-16be80467c4e
+    type_id: 12
+  - id: &cn_puyang_fixed 35871
+    name: CN Puyang Fixed
+    uuid: ea6c752b-63ba-48b5-8cc6-6158f8d78aee
+    type_id: 12
+  - id: &cn_zhoukou_fixed 35918
+    name: CN Zhoukou Fixed
+    uuid: 4a3c73f1-9363-4900-bcac-c049dc6f6dcf
+    type_id: 12
+  - id: &cn_luohe_fixed 35971
+    name: CN Luohe Fixed
+    uuid: 2785182e-9f5f-4b97-8bdb-657b7bc5be5f
+    type_id: 12
+  - id: &cn_dalian_fixed 36280
+    name: CN Dalian Fixed
+    uuid: 129c4774-4284-40ef-8fed-88f215fe9e4c
+    type_id: 12
+  - id: &cn_dandong_fixed 36326
+    name: CN Dandong Fixed
+    uuid: 001bbccd-c994-4e70-827e-a9da83ac41f1
+    type_id: 12
+  - id: &cn_liaoyang_fixed 36376
+    name: CN Liaoyang Fixed
+    uuid: d0b1f8f4-8dce-4193-9578-806c78e1731c
+    type_id: 12
+  - id: &cn_huludao_fixed 36566
+    name: CN Huludao Fixed
+    uuid: 66bb7d5a-5eeb-45dc-b6a4-f02bbce8bd6d
+    type_id: 12
+  - id: &cn_changchun_fixed 36714
+    name: CN Changchun Fixed
+    uuid: acb1d7b4-77d1-4f52-984f-281d975d6018
+    type_id: 12
+  - id: &cn_siping_fixed 36738
+    name: CN Siping Fixed
+    uuid: d3e81212-ab51-4d4a-b36c-ded2e50f8e12
+    type_id: 12
+  - id: &cn_tonghua_fixed 36799
+    name: CN Tonghua Fixed
+    uuid: 09bc3a91-f61f-4009-a21b-5533e2a1c5bc
+    type_id: 12
+  - id: &cn_baishan_fixed 36838
+    name: CN Baishan Fixed
+    uuid: 44e9d0c8-f8e5-49f3-8dc8-29b7011296a5
+    type_id: 12
+  - id: &cn_anshan_fixed 36963
+    name: CN Anshan Fixed
+    uuid: 04428359-cf22-4ee1-8a53-274650de42a7
+    type_id: 12
+  - id: &cn_jinzhou_fixed 37065
+    name: CN Jinzhou Fixed
+    uuid: 1c294209-e924-40c6-9bbd-576dc758ab4a
+    type_id: 12
+  - id: &cn_yingkou_fixed 37102
+    name: CN Yingkou Fixed
+    uuid: 14fbd3fb-66bc-4601-8f27-2f353668930d
+    type_id: 12
+  - id: &cn_fuxin_fixed 37196
+    name: CN Fuxin Fixed
+    uuid: 9d8a56b7-147a-4e91-88cb-18db2151895a
+    type_id: 12
+  - id: &cn_chaoyang_fixed 37284
+    name: CN Chaoyang Fixed
+    uuid: 9966e039-148e-4347-a37b-d1e1e9ba1aeb
+    type_id: 12
+  - id: &cn_panjin_fixed 37417
+    name: CN Panjin Fixed
+    uuid: 98820f24-e0e3-4cd8-b56b-bae0ec4db6dd
+    type_id: 12
+  - id: &cn_jilin_fixed 37431
+    name: CN Jilin Fixed
+    uuid: d8f73527-287b-4999-9a44-9926f346fa7d
+    type_id: 12
+  - id: &cn_yanbian_korean_autonomous_prefecture_fixed 37498
+    name: CN Yanbian Korean Autonomous Prefecture Fixed
+    uuid: 3239ff09-b65f-4107-9ab9-8766c4b46fff
+    type_id: 12
+  - id: &cn_baicheng_fixed 37567
+    name: CN Baicheng Fixed
+    uuid: 984fd845-2aa4-4ca3-9403-3e0186b85294
+    type_id: 12
+  - id: &cn_liaoyuan_fixed 37586
+    name: CN Liaoyuan Fixed
+    uuid: 74e69b4e-88a9-409b-a2e9-747c58c0d947
+    type_id: 12
+  - id: &cn_songyuan_fixed 37595
+    name: CN Songyuan Fixed
+    uuid: 39d33f9f-d80c-48a8-9131-1216ba1e0671
+    type_id: 12
+  - id: &cn_harbin_fixed 37780
+    name: CN Harbin Fixed
+    uuid: 88343394-4487-4c8e-965a-2acdc902bd5c
+    type_id: 12
+  - id: &cn_qiqihar_fixed 37791
+    name: CN Qiqihar Fixed
+    uuid: 918b0aec-67cb-4343-ba22-a4fff00e769d
+    type_id: 12
+  - id: &cn_mudanjiang_fixed 37807
+    name: CN Mudanjiang Fixed
+    uuid: 6e1a0616-bb47-4ae5-919c-9c51c2e5b6d4
+    type_id: 12
+  - id: &cn_daqing_fixed 37813
+    name: CN Daqing Fixed
+    uuid: f673e0b8-8857-4faf-9076-e3fd0a353da0
+    type_id: 12
+  - id: &cn_jiamusi_fixed 37923
+    name: CN Jiamusi Fixed
+    uuid: d0adfcbb-dd23-4d4d-b567-8aa1f8f1dda2
+    type_id: 12
+  - id: &cn_suihua_fixed 37944
+    name: CN Suihua Fixed
+    uuid: 0cc00a4b-eea5-4e2b-bde7-677e1564a2fc
+    type_id: 12
+  - id: &cn_heihe_fixed 37965
+    name: CN Heihe Fixed
+    uuid: eeefb568-a666-4626-991c-38f47b59d391
+    type_id: 12
+  - id: &cn_daxinganling_jiagedaqi_fixed 37983
+    name: CN Daxinganling Jiagedaqi Fixed
+    uuid: 644fa954-8a41-4ac5-9d8d-935ef8c431fc
+    type_id: 12
+  - id: &cn_qitaihe_fixed 38039
+    name: CN Qitaihe Fixed
+    uuid: a670f725-9285-4618-9cf8-e18cecfc36a4
+    type_id: 12
+  - id: &cn_shuangyashan_fixed 38077
+    name: CN Shuangyashan Fixed
+    uuid: c218187f-1bd5-4d1d-8d4b-772349514abe
+    type_id: 12
+  - id: &cn_hohhot_fixed 38089
+    name: CN Hohhot Fixed
+    uuid: 08e859e4-0a98-41fa-bc43-e3c9b421c141
+    type_id: 12
+  - id: &cn_baotou_fixed 38132
+    name: CN Baotou Fixed
+    uuid: 54f05940-5868-4d84-a778-1d8b981c2529
+    type_id: 12
+  - id: &cn_wuhai_fixed 38173
+    name: CN Wuhai Fixed
+    uuid: 1563c801-5088-434d-83e2-03ba1408a60d
+    type_id: 12
+  - id: &cn_wulanchabu_fixed 38234
+    name: CN Wulanchabu Fixed
+    uuid: 21e78147-0137-4f0d-8180-7da159c48949
+    type_id: 12
+  - id: &cn_ordos_fixed 38256
+    name: CN Ordos Fixed
+    uuid: b5df9aaa-9735-4041-a666-9f552f3e16df
+    type_id: 12
+  - id: &cn_jixi_fixed 38293
+    name: CN Jixi Fixed
+    uuid: ad40e551-8bbb-4fa0-a876-47c57b44d57c
+    type_id: 12
+  - id: &cn_hegang_fixed 38301
+    name: CN Hegang Fixed
+    uuid: 1bbe10ac-0cde-442e-b229-5cbb2576031a
+    type_id: 12
+  - id: &cn_hulunbeier_fixed 38325
+    name: CN Hulunbeier Fixed
+    uuid: 388ce4a0-00ff-4996-93ea-b25d24a80a59
+    type_id: 12
+  - id: &cn_tongliao_fixed 38357
+    name: CN Tongliao Fixed
+    uuid: 79d1e77d-0ad1-4151-a940-da0c70365176
+    type_id: 12
+  - id: &cn_chifeng_fixed 38397
+    name: CN Chifeng Fixed
+    uuid: e46827ea-b239-429f-880d-a8488956e974
+    type_id: 12
+  - id: &cn_panzhihua_fixed 38709
+    name: CN Panzhihua Fixed
+    uuid: 9024cd71-f295-47d7-902e-cc1bd576920b
+    type_id: 12
+  - id: &cn_dazhou_fixed 38928
+    name: CN Dazhou Fixed
+    uuid: 4f5d0946-8e88-4539-b527-495d92d82f6c
+    type_id: 12
+  - id: &cn_suining_fixed 39025
+    name: CN Suining Fixed
+    uuid: ee6c6730-7fed-4105-ae1d-b96603a2efde
+    type_id: 12
+  - id: &cn_guangan_fixed 39044
+    name: CN Guangan Fixed
+    uuid: 134c2c85-6e71-46ef-8db1-b4e42f2a1dad
+    type_id: 12
+  - id: &cn_zigong_fixed 39373
+    name: CN Zigong Fixed
+    uuid: 09238e9d-242f-4c5b-9521-7fb53d658fe1
+    type_id: 12
+  - id: &cn_mianyang_fixed 39426
+    name: CN Mianyang Fixed
+    uuid: 9745fa27-d60d-4acd-83f5-58ac2f117878
+    type_id: 12
+  - id: &cn_nanchong_fixed 39489
+    name: CN Nanchong Fixed
+    uuid: d5ebae7f-839c-4f7b-b220-66445e7ca541
+    type_id: 12
+  - id: &cn_bazhong_fixed 39759
+    name: CN Bazhong Fixed
+    uuid: 1ef38200-5217-487c-bf56-4e5fb13c4b1c
+    type_id: 12
+  - id: &cn_neijiang_fixed 39874
+    name: CN Neijiang Fixed
+    uuid: 743eae79-8414-4969-8a18-c225abc8c158
+    type_id: 12
+  - id: &cn_liangshan_yi_autonomous_prefecture_fixed 39903
+    name: CN Liangshan Yi Autonomous Prefecture Fixed
+    uuid: bd0b4967-41e0-494b-9f51-a602a4ab3650
+    type_id: 12
+  - id: &cn_yaan_fixed 39945
+    name: CN Yaan Fixed
+    uuid: b9b8472b-b84e-4b3f-9111-f473e0b950e1
+    type_id: 12
+  - id: &cn_ganzi_tibetan_autonomous_prefecture_fixed 39980
+    name: CN Ganzi Tibetan Autonomous Prefecture Fixed
+    uuid: 2ef889af-1689-4161-b518-87e512630459
+    type_id: 12
+  - id: &cn_aba_tibetan_and_qiang_autonomous_prefecture_fixed 40009
+    name: CN Aba Tibetan And Qiang Autonomous Prefecture Fixed
+    uuid: 214074aa-e81f-4211-b0b4-d1ccfe13afde
+    type_id: 12
+  - id: &cn_deyang_fixed 40031
+    name: CN Deyang Fixed
+    uuid: 679b02df-d417-432b-a467-09353cff6b28
+    type_id: 12
+  - id: &cn_anshun_guiyang_zunyi_fixed 40349
+    name: CN Anshun Guiyang Zunyi Fixed
+    uuid: 70794946-6ed7-4f04-884e-f2a254201074
+    type_id: 12
+  - id: &cn_qiannan_buyei_and_miao_autonomous_prefecture_fixed 40409
+    name: CN Qiannan Buyei And Miao Autonomous Prefecture Fixed
+    uuid: 422b4172-ada3-4853-b88b-1438cc910ac7
+    type_id: 12
+  - id: &cn_southeast_qian_autonomous_prefecture_of_miao_and_dong_fixed 40432
+    name: CN Southeast Qian Autonomous Prefecture Of Miao And Dong Fixed
+    uuid: 99750ceb-dd50-45d9-a01b-843bcbe28a7d
+    type_id: 12
+  - id: &cn_tongren_fixed 40472
+    name: CN Tongren Fixed
+    uuid: 1e771576-ba91-4b5e-a424-8d10db083b8b
+    type_id: 12
+  - id: &cn_guizhou_south_buyi_and_miao_autonomous_prefecture_fixed 40512
+    name: CN Guizhou South Buyi And Miao Autonomous Prefecture Fixed
+    uuid: b6a87630-7951-44e6-8062-3189bd607853
+    type_id: 12
+  - id: &cn_luzhou_fixed 40676
+    name: CN Luzhou Fixed
+    uuid: ac50746d-cf39-4f99-8972-ff8713bf23ec
+    type_id: 12
+  - id: &cn_yibin_fixed 40756
+    name: CN Yibin Fixed
+    uuid: 9879df46-e08c-4cf0-894d-4bb0ad995239
+    type_id: 12
+  - id: &cn_leshan_fixed 40779
+    name: CN Leshan Fixed
+    uuid: a5ab1184-c670-4e16-a35b-181ee9c738b0
+    type_id: 12
+  - id: &cn_guangyuan_fixed 40836
+    name: CN Guangyuan Fixed
+    uuid: 8cb6ac8a-e08b-4034-9acf-7b91f4f11ef0
+    type_id: 12
+  - id: &cn_bijie_fixed 41067
+    name: CN Bijie Fixed
+    uuid: 01d67338-7fd0-45ca-868e-f5afffe1e573
+    type_id: 12
+  - id: &cn_liupanshui_fixed 41081
+    name: CN Liupanshui Fixed
+    uuid: cbc3c3c1-dd5c-4f81-96d3-d79dbea04f49
+    type_id: 12
+  - id: &cn_zhaotong_fixed 41372
+    name: CN Zhaotong Fixed
+    uuid: 8194386d-93eb-45ca-a26b-fb06965725f0
+    type_id: 12
+  - id: &cn_dali_bai_autonomous_prefecture_fixed 41500
+    name: CN Dali Bai Autonomous Prefecture Fixed
+    uuid: 49f2b6af-1fed-4833-a504-7192bf25ba50
+    type_id: 12
+  - id: &cn_honghe_hani_and_yi_autonomous_prefecture_fixed 41537
+    name: CN Honghe Hani And Yi Autonomous Prefecture Fixed
+    uuid: f9c189ce-e183-4fd7-afa9-723673b4330d
+    type_id: 12
+  - id: &cn_puer_fixed 41551
+    name: CN Puer Fixed
+    uuid: 96cdc1fb-735e-45e1-979b-b9adc30263b4
+    type_id: 12
+  - id: &cn_hotan_fixed 41690
+    name: CN Hotan Fixed
+    uuid: 9ab853a8-7e22-4eba-947a-5cc17cab067b
+    type_id: 12
+  - id: &cn_kunming_fixed 41819
+    name: CN Kunming Fixed
+    uuid: 99b3be1f-565a-4343-aef4-5fe7e2e2a680
+    type_id: 12
+  - id: &cn_qujing_fixed 41840
+    name: CN Qujing Fixed
+    uuid: 36cd3d62-c653-4f15-91b4-991b842efcac
+    type_id: 12
+  - id: &cn_baoshan_fixed 41856
+    name: CN Baoshan Fixed
+    uuid: 9a900185-ec61-44aa-872c-2714e6d8af56
+    type_id: 12
+  - id: &cn_wenshan_zhuang_and_miao_autonomous_prefecture_fixed 41866
+    name: CN Wenshan Zhuang And Miao Autonomous Prefecture Fixed
+    uuid: d6717552-023c-45d2-a272-c621a6101735
+    type_id: 12
+  - id: &cn_yuxi_fixed 41879
+    name: CN Yuxi Fixed
+    uuid: 69ec53a9-1504-4e7a-9033-b97353124379
+    type_id: 12
+  - id: &cn_chuxiong_yi_autonomous_prefecture_fixed 41896
+    name: CN Chuxiong Yi Autonomous Prefecture Fixed
+    uuid: 7f87f828-3da1-4e4e-aa4c-8e100cb7385b
+    type_id: 12
+  - id: &cn_lincang_fixed 41928
+    name: CN Lincang Fixed
+    uuid: 09fb64a4-68f6-44ad-9e8f-8aa57b5ace40
+    type_id: 12
+  - id: &cn_nujiang_lisu_autonomous_prefecture_fixed 41955
+    name: CN Nujiang Lisu Autonomous Prefecture Fixed
+    uuid: f82e15b2-b989-4fdd-87a4-e841c4b105e7
+    type_id: 12
+  - id: &cn_diqing_tibetan_autonomous_prefecture_fixed 41969
+    name: CN Diqing Tibetan Autonomous Prefecture Fixed
+    uuid: 06c7c419-01e7-43f4-ae04-72e390d70556
+    type_id: 12
+  - id: &cn_lijiang_fixed 41974
+    name: CN Lijiang Fixed
+    uuid: 557b6563-2030-475e-a7d8-1bcdc990eb5c
+    type_id: 12
+  - id: &cn_lhasa_fixed 41995
+    name: CN Lhasa Fixed
+    uuid: e07c2349-7a4c-49fa-939c-d22d34de72b8
+    type_id: 12
+  - id: &cn_shigatse_fixed 41999
+    name: CN Shigatse Fixed
+    uuid: 1813a57d-2536-4ca9-807a-78f573c4940b
+    type_id: 12
+  - id: &cn_shannan_fixed 42004
+    name: CN Shannan Fixed
+    uuid: 264553d6-d4a5-4b09-9785-735eb32433b0
+    type_id: 12
+  - id: &cn_nyingchi_fixed 42016
+    name: CN Nyingchi Fixed
+    uuid: a0257393-a596-4888-8570-da5f5c8de0e1
+    type_id: 12
+  - id: &cn_qamdo_fixed 42026
+    name: CN Qamdo Fixed
+    uuid: f4510651-b7a5-4d33-b3f6-c58006c4c8a5
+    type_id: 12
+  - id: &cn_nagqu_fixed 42030
+    name: CN Nagqu Fixed
+    uuid: f7716b5c-e969-490c-8aee-6094f5c9cb1a
+    type_id: 12
+  - id: &cn_ali_fixed 42037
+    name: CN Ali Fixed
+    uuid: 16cc188d-b764-4f7f-b475-e2758f348c45
+    type_id: 12
+  - id: &cn_hainan_province_fixed 42041
+    name: CN Hainan Province Fixed
+    uuid: 99092cc1-4ba4-482a-8565-ac10958a2d7d
+    type_id: 12
+  - id: &cn_tacheng_fixed 42109
+    name: CN Tacheng Fixed
+    uuid: fe958ab9-95e3-4baa-8a81-90cf2adc63bc
+    type_id: 12
+  - id: &cn_hami_fixed 42120
+    name: CN Hami Fixed
+    uuid: e223174a-5655-46c0-b3c3-7c047da19e70
+    type_id: 12
+  - id: &cn_kizilsu_kirgiz_autonomous_prefecture_fixed 42402
+    name: CN Kizilsu Kirgiz Autonomous Prefecture Fixed
+    uuid: 10496805-02de-4398-8744-aedd3fe2a5b6
+    type_id: 12
+  - id: &cn_shangluo_fixed 42502
+    name: CN Shangluo Fixed
+    uuid: 8b348c51-0d73-4a99-8f2e-34bf401c4e9e
+    type_id: 12
+  - id: &cn_baoji_fixed 42533
+    name: CN Baoji Fixed
+    uuid: d61fd127-73f9-44cc-a539-7a859e515514
+    type_id: 12
+  - id: &cn_altay_beitun_tiemenguan_fixed 42548
+    name: CN Altay Beitun Tiemenguan Fixed
+    uuid: 622b47de-a990-45bd-a380-d08ac57a3b75
+    type_id: 12
+  - id: &cn_bortala_mongolian_autonomous_prefecture_fixed 42623
+    name: CN Bortala Mongolian Autonomous Prefecture Fixed
+    uuid: 284b64ca-039e-466e-b156-e23ff0211366
+    type_id: 12
+  - id: &cn_yanan_fixed 42643
+    name: CN Yanan Fixed
+    uuid: 18c0e933-a8ae-4d28-a9c6-611d69ce1c66
+    type_id: 12
+  - id: &cn_yulin_fixed 42654
+    name: CN Yulin Fixed
+    uuid: 92f05f54-f958-4938-ae2f-a523d09dc905
+    type_id: 12
+  - id: &cn_weinan_fixed 42704
+    name: CN Weinan Fixed
+    uuid: 5744d3cc-7754-4cd2-aa0e-b7802ae424da
+    type_id: 12
+  - id: &cn_ankang_fixed 42717
+    name: CN Ankang Fixed
+    uuid: 28bc884d-001b-4f2f-96b7-5ed88fc0056a
+    type_id: 12
+  - id: &cn_hanzhong_fixed 42736
+    name: CN Hanzhong Fixed
+    uuid: f52c4a48-a15b-48a0-a10f-658d4cbd5ba3
+    type_id: 12
+  - id: &cn_tongchuan_fixed 42827
+    name: CN Tongchuan Fixed
+    uuid: 9f29bb44-ab3f-40ab-a7e6-f5938f869a17
+    type_id: 12
+  - id: &cn_linxia_hui_autonomous_prefecture_fixed 43103
+    name: CN Linxia Hui Autonomous Prefecture Fixed
+    uuid: 196fb60d-fc05-42f2-b6fe-54083d7f0806
+    type_id: 12
+  - id: &cn_pingliang_fixed 43115
+    name: CN Pingliang Fixed
+    uuid: c51b4680-aadc-4c9d-a8e2-37c7ef3acdf5
+    type_id: 12
+  - id: &cn_qingyang_fixed 43128
+    name: CN Qingyang Fixed
+    uuid: 074342ff-2398-4a84-ba4b-9d9d0e553fab
+    type_id: 12
+  - id: &cn_lanzhou_fixed 43141
+    name: CN Lanzhou Fixed
+    uuid: f09fa7c6-cf11-446d-b8dc-784a77e49f63
+    type_id: 12
+  - id: &cn_dingxi_fixed 43190
+    name: CN Dingxi Fixed
+    uuid: fcb106b7-2634-4cf9-9443-cc71446154a4
+    type_id: 12
+  - id: &cn_jinchang_wuwei_fixed 43199
+    name: CN Jinchang Wuwei Fixed
+    uuid: 3d8b644e-709b-4b9a-b9d0-9d4f8be6bb17
+    type_id: 12
+  - id: &cn_zhangye_fixed 43291
+    name: CN Zhangye Fixed
+    uuid: 85e2dac9-61fd-4eed-a49a-166cbd7bc575
+    type_id: 12
+  - id: &cn_jiayuguan_jiuquan_fixed 43297
+    name: CN Jiayuguan Jiuquan Fixed
+    uuid: 6d06d52f-adf0-4659-8233-0eb20b95f9f5
+    type_id: 12
+  - id: &cn_tianshui_fixed 43306
+    name: CN Tianshui Fixed
+    uuid: d7022711-d584-49ab-9a7a-9ebb8d0538d4
     type_id: 12
 # Supplementary services Networks
-  - id: &cn_special_services 5204
+  - id: &cn_special_services 21380
     name: CN Special Services
-    uuid: 8a71a4ab-8642-4316-b5ac-526d011aa9d6
+    uuid: 224038d1-9bc5-4f5e-83a0-434d4aeb43a2
     type_id: 14
-  - id: &cn_sms_services 5370
+  - id: &cn_sms_services 21547
     name: CN Sms Services
-    uuid: eabff407-6d2b-44ae-8291-7e14ee1c2977
+    uuid: b6c21b6c-9d5d-4793-a19b-278d6a90ae86
     type_id: 14
-  - id: &cn_machine_to_machine_m2m_services 5371
+  - id: &cn_machine_to_machine_m2m_services 21548
     name: CN Machine To Machine M2M Services
-    uuid: 0dc06b76-1059-4cdc-920a-a3d89b77fb33
+    uuid: da44c602-e7de-40a6-b0cf-bb1e5d77e367
     type_id: 14
-  - id: &cn_shared_cost_services 5794
+  - id: &cn_shared_cost_services 22167
     name: CN Shared Cost Services
-    uuid: de525e0f-a2c7-4c38-a0ef-4c790e1ab1d6
+    uuid: d4ea3057-b664-44ca-8868-71f18c7c884f
     type_id: 14
-  - id: &cn_virtual_private_network 5929
+  - id: &cn_virtual_private_network 22566
     name: CN Virtual Private Network
-    uuid: 5f138b32-cd1e-479d-a9c3-4fcd24bd5ff3
+    uuid: 7fdb53c8-b295-4db2-857c-7f7ef7b87ee0
     type_id: 14
-  - id: &cn_freephone_services 6548
+  - id: &cn_freephone_services 23832
     name: CN Freephone Services
-    uuid: be3e2ca8-516d-4764-b016-5f18fc94c06b
+    uuid: 548458fe-3550-44ce-931a-c9170869708d
     type_id: 14
-  - id: &cn_personal_communication_services 6798
+  - id: &cn_personal_communication_services 24174
     name: CN Personal Communication Services
-    uuid: a62e0a46-38f8-491c-a892-e22bfedd43f9
+    uuid: 93cfdc4d-768d-4dad-b69b-8edd687f2778
     type_id: 14
-  - id: &cn_local_emergency_services 7071
+  - id: &cn_local_emergency_services 24544
     name: CN Local Emergency Services
-    uuid: cb20315f-13ec-4c2f-8bd2-33f2f30b116f
+    uuid: 3f4e6fb7-ad27-4bf3-8ad4-5e99a8aa9d4a
     type_id: 14
-  - id: &cn_beijing_emergency_services 7073
+  - id: &cn_beijing_emergency_services 24546
     name: CN Beijing Emergency Services
-    uuid: 71b41889-a354-4056-87e4-326a8001a7ac
+    uuid: ed2514c8-67c7-4046-b015-6f69eb198e5d
     type_id: 14
-  - id: &cn_national_special_services 7200
+  - id: &cn_national_special_services 26123
     name: CN National Special Services
-    uuid: 4786a4de-268c-4c91-9806-b0de14779776
+    uuid: 5f079fdd-b6b4-4548-a474-7b569da14141
     type_id: 14
-  - id: &cn_local_special_services 7207
+  - id: &cn_local_special_services 26131
     name: CN Local Special Services
-    uuid: a7dcabbe-2611-4f84-b594-457081abe53c
+    uuid: 6e6f59c5-9218-45ca-8d42-57c0f3358e88
     type_id: 14
 # Mobile Networks
-  - id: &cn_china_unicom_mobile 5372
+  - id: &cn_china_unicom_mobile 21549
     name: CN China Unicom Mobile
-    uuid: 38cd37f7-f841-45a3-a025-9604c7eaac07
+    uuid: 42c372f9-c079-452d-89ee-aa616ec165a7
     type_id: 3
-  - id: &cn_china_mobile_mobile 5373
+  - id: &cn_china_mobile_mobile 21550
     name: CN China Mobile Mobile
-    uuid: 706b7acd-90fe-4acc-a3ce-18d2535e41ff
+    uuid: 8fe8a145-95aa-4a02-9674-47452ef01c6f
     type_id: 3
-  - id: &cn_china_telecom_mobile 5374
+  - id: &cn_china_telecom_mobile 21551
     name: CN China Telecom Mobile
-    uuid: 297f528c-243f-400a-8d22-2890c18180a9
+    uuid: baea755d-119c-4d7d-afa9-dfe3a3fd520e
     type_id: 3
 # Satellite Networks
-  - id: &cn_china_telecom_satellite 7131
+  - id: &cn_china_telecom_satellite 25120
     name: CN China Telecom Satellite
-    uuid: 79ae1c9f-90ad-4da4-9074-f90ab2228de3
+    uuid: eb05e744-a266-4f8d-bd13-898105eec2e4
     type_id: 16
-  - id: &cn_inmarsat_satellite 7139
+  - id: &cn_inmarsat_satellite 25446
     name: CN Inmarsat Satellite
-    uuid: 46bc739c-b7a5-4e80-8f33-e59d779c7fe3
+    uuid: 4f4b87ca-ce8d-4bd0-a644-5baf73ab223f
     type_id: 16
 network_prefixes:
 # Fixed Prefixes
@@ -78,2255 +1342,2255 @@ network_prefixes:
     prefix: '86478'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36cd7844-2e6b-494b-866a-f3ccf7c3cbcc
+    uuid: ec162ab6-fbdb-4ec4-acaf-6eeb471ffc8f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_bayannaoer_fixed
   - id: 50849
     prefix: '86479'
     number_min_length: 12
     number_max_length: 12
-    uuid: ff933e21-e4a1-4588-bf9f-ce2e27fb500b
+    uuid: 55ab5cf6-1181-42b8-bf5c-fc77212ac430
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xilin_gol_fixed
   - id: 56892
     prefix: '86482'
     number_min_length: 12
     number_max_length: 12
-    uuid: 336b3e12-5389-4ea0-a121-072e212f0c0a
+    uuid: 8d6286e6-144d-4d1c-a366-18d271657e0f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xingan_fixed
   - id: 57066
     prefix: '86483'
     number_min_length: 12
     number_max_length: 12
-    uuid: e733551b-8870-4b5d-b300-7cd40b64b127
+    uuid: 36854b6b-ab28-45cf-bf54-2fb537fc7c7b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_alashan_fixed
   - id: 62729
     prefix: '86510'
     number_min_length: 13
     number_max_length: 13
-    uuid: 2bcf50c7-d084-459a-9355-96320705f194
+    uuid: 7bfcfee3-1a37-4115-94c2-560c49dba8dd
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_wuxi_fixed
   - id: 64001
     prefix: '86514'
     number_min_length: 13
     number_max_length: 13
-    uuid: 13d06e3b-285e-4970-90be-2f5a826529a5
+    uuid: 63d59753-a155-4107-8d99-7b45924da964
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yangzhou_fixed
   - id: 64870
     prefix: '86517'
     number_min_length: 13
     number_max_length: 13
-    uuid: e997a0b7-d480-4609-9d4e-4839fa9275dc
+    uuid: 400852dc-aac3-4324-90a8-9ca6d12ab4e2
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huaian_fixed
   - id: 65506
     prefix: '86518'
     number_min_length: 13
     number_max_length: 13
-    uuid: 932aa881-8f25-42be-a4f1-dd85a4a5f986
+    uuid: 756a4be8-aa9e-4796-82e4-66e320b6ab72
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_lianyungang_fixed
   - id: 68164
     prefix: '86511'
     number_min_length: 13
     number_max_length: 13
-    uuid: c9db435a-a07b-4ef0-b68e-c1d66d1b1c9e
+    uuid: 56f414b3-a010-444b-8961-21a4b279ab70
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhenjiang_fixed
   - id: 68203
     prefix: '86512'
     number_min_length: 13
     number_max_length: 13
-    uuid: 7e0e2ecd-0409-44d1-8c67-8603a14a77b4
+    uuid: a0ff2f3e-723f-4495-bef0-9e07e0c89a9b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_suzhou_fixed
   - id: 68995
     prefix: '86513'
     number_min_length: 13
     number_max_length: 13
-    uuid: c43fd8af-4ca1-4377-ab9c-5994cd84f2c1
+    uuid: 9afe8557-5480-4ad6-89bf-fb90e79c17ab
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nantong_fixed
   - id: 69288
     prefix: '86515'
     number_min_length: 13
     number_max_length: 13
-    uuid: e0ff35dc-4577-4175-8caf-3080c8918fbc
+    uuid: 68b0d22f-d3fb-4ba3-b355-c69239964f41
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yancheng_fixed
   - id: 69853
     prefix: '86516'
     number_min_length: 13
     number_max_length: 13
-    uuid: 45320a17-f048-4f31-9e32-55e5127e7762
+    uuid: 846ae72e-51ef-4882-bfcb-144cf25165e7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xuzhou_fixed
   - id: 70851
     prefix: '86519'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4f053c00-bfaf-4cee-95c1-4ccc63330375
+    uuid: 668a4fa0-7b16-444c-b9b2-b26136ac3a7e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_changzhou_fixed
   - id: 71721
     prefix: '86530'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2399fe59-e1f5-4a48-8a5e-59a5eabee7fb
+    uuid: 99c15da2-7eea-4698-b318-d5aecdda94be
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_heze_fixed
   - id: 72509
     prefix: '86531'
     number_min_length: 13
     number_max_length: 13
-    uuid: 06f19e05-83d3-46e6-9931-06bcd2c80fa5
+    uuid: 4f3c5458-43b0-40e6-bd2b-dfab16454db1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jinan_fixed
   - id: 72729
     prefix: '86532'
     number_min_length: 13
     number_max_length: 13
-    uuid: b49dc5bf-4996-4b32-a977-d403d8fe52cc
+    uuid: c030c9b8-6729-4861-84e2-526d1ba722ee
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qingdao_fixed
   - id: 72757
     prefix: '86533'
     number_min_length: 12
     number_max_length: 12
-    uuid: d84a01fc-3a30-4ab8-afec-5e89f4374cc8
+    uuid: b63d1247-fb72-425c-8660-4e4e1eacc4f4
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zibo_fixed
   - id: 72800
     prefix: '86534'
     number_min_length: 12
     number_max_length: 12
-    uuid: 50dcaf60-f96c-4c9e-9c2d-1f8510645d98
+    uuid: f09b4399-bc55-4c92-8560-5bad933ffc4b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dezhou_fixed
   - id: 72900
     prefix: '86535'
     number_min_length: 12
     number_max_length: 12
-    uuid: 040eadd8-b338-4cc2-861e-4397a64f8646
+    uuid: b7b0f9f6-ccb8-4681-9413-8578116de15f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yantai_fixed
   - id: 72930
     prefix: '86536'
     number_min_length: 12
     number_max_length: 12
-    uuid: c7f3e21b-d3c5-43e3-a397-2c658a203ff9
+    uuid: 73453d13-e217-4b90-b698-d8df9791a18b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_weifang_fixed
   - id: 72959
     prefix: '86537'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5d930261-d086-4e1a-88bb-a2ccf0678034
+    uuid: 79f9d9fe-43da-4857-b565-26131b6d3e85
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jining_fixed
   - id: 72978
     prefix: '86538'
     number_min_length: 12
     number_max_length: 12
-    uuid: a1205a84-3ad4-4091-9044-324e98fdd5e6
+    uuid: 6e8257b8-0375-417d-a834-3545549a6e0a
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_taian_fixed
   - id: 72987
     prefix: '86539'
     number_min_length: 12
     number_max_length: 12
-    uuid: fa1089b5-d08d-4200-9085-05b1dbf97687
+    uuid: 86834d23-133a-42c4-b740-048f6093f1ad
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_linyi_fixed
   - id: 76365
     prefix: '86523'
     number_min_length: 13
     number_max_length: 13
-    uuid: 74cc521c-b013-422b-8bd9-0896dcfde8d4
+    uuid: 9b437f0d-3414-468f-9a28-70ec5eb8b845
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_taizhou_fixed
   - id: 76472
     prefix: '86527'
     number_min_length: 13
     number_max_length: 13
-    uuid: 820903ca-39bf-43ac-a693-753b66de3138
+    uuid: 7a10c470-49bf-488d-b132-757c7c03f546
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_suqian_fixed
   - id: 77522
     prefix: '86543'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c3cefa9-6bcc-4f56-a10b-794f106fceef
+    uuid: 83a8dae7-5725-40a6-b06a-0d073a9b4caa
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_binzhou_fixed
   - id: 77605
     prefix: '86546'
     number_min_length: 12
     number_max_length: 12
-    uuid: 656a6556-10bc-4a6a-a3a6-9f2efa0a7a67
+    uuid: fd50416d-8ac2-4470-9096-6bc638d9c4f5
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dongying_fixed
   - id: 80639
     prefix: '86561'
     number_min_length: 12
     number_max_length: 12
-    uuid: b411fde9-a6f9-4db6-b112-8127fbaedfc0
+    uuid: 45388ccf-30bb-4d2e-9500-7fb753b1fa1c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huaibei_fixed
   - id: 81921
     prefix: '86572'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7bf0fef4-e132-48fd-808e-136de145da80
+    uuid: 07b8fc75-3ff0-49ff-8318-cbce1e1780a0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huzhou_fixed
   - id: 82010
     prefix: '86573'
     number_min_length: 13
     number_max_length: 13
-    uuid: c3399ff5-fb98-432a-b1da-75ceb1c981ee
+    uuid: fc39fb85-fd2b-467a-99a3-1a0b5f4ba009
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jiaxing_fixed
   - id: 84452
     prefix: '86591'
     number_min_length: 13
     number_max_length: 13
-    uuid: 078477da-5300-4d3a-b033-da929fa41d68
+    uuid: 04a82445-36c1-4247-bbdd-ecfffa51ede3
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_fuzhou_fixed
   - id: 84484
     prefix: '86592'
     number_min_length: 12
     number_max_length: 12
-    uuid: a1f93c54-e100-444d-8e8a-562637acaa62
+    uuid: 0f891ebd-c1e8-4aff-8047-b8b9501be943
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xiamen_fixed
   - id: 84532
     prefix: '86593'
     number_min_length: 12
     number_max_length: 12
-    uuid: b9c22284-fb32-4d2c-9864-2bb902962ed4
+    uuid: e9b988f8-7c27-4fdc-b6bb-fa09febd627a
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ningde_fixed
   - id: 84587
     prefix: '86594'
     number_min_length: 12
     number_max_length: 12
-    uuid: a2810888-0ab7-4010-94c0-b87d0733e3c6
+    uuid: 22c94f0f-8e12-4bea-9780-e7d06f72df65
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_putian_fixed
   - id: 84643
     prefix: '86595'
     number_min_length: 13
     number_max_length: 13
-    uuid: 400df438-5119-4337-9098-05c9df76dc43
+    uuid: a2df2c69-8da8-48f0-b589-b52eb8808483
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_quanzhou_fixed
   - id: 84806
     prefix: '86596'
     number_min_length: 12
     number_max_length: 12
-    uuid: af85d2c0-7c30-4973-9a0e-3143b19a18cd
+    uuid: a3ffb626-f614-4cad-81e0-ea77e46c3f97
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhangzhou_fixed
   - id: 84840
     prefix: '86597'
     number_min_length: 12
     number_max_length: 12
-    uuid: ca949ac2-7c9f-4256-88b2-b997a048cd05
+    uuid: 3091d4c9-866f-4338-84f6-30e13152d6bd
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_longyan_fixed
   - id: 84893
     prefix: '86598'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2bf34390-1cd1-4ec4-a53c-bff6a3ba3992
+    uuid: dea24eed-2882-4a44-b0d0-4fcff1393bb5
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_sanming_fixed
   - id: 84899
     prefix: '86599'
     number_min_length: 12
     number_max_length: 12
-    uuid: 67b86581-0365-454c-a845-9390fecfe577
+    uuid: f1010c1f-ee44-4a87-bf24-a3c3816b7149
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nanping_fixed
   - id: 86669
     prefix: '86550'
     number_min_length: 12
     number_max_length: 12
-    uuid: a7bc455a-6421-4958-952f-7020ed449d67
+    uuid: f0521d02-a733-4ec5-8eaf-44661c699c45
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chuzhou_fixed
   - id: 86691
     prefix: '86551'
     number_min_length: 13
     number_max_length: 13
-    uuid: 5fdb53b6-7b2c-416b-a942-20be05b90c82
+    uuid: 5aa77a89-bd81-43d5-b3e9-d4005853c6f8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hefei_fixed
   - id: 86969
     prefix: '86552'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9dbf0a71-7c0c-443b-a68f-48a9033bdac6
+    uuid: a4ae0dc5-f4e6-41dd-9de9-5b4d73716542
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_bengbu_fixed
   - id: 87006
     prefix: '86553'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f3e9642-1974-485a-817d-eec4ed8d66f6
+    uuid: a4969080-74aa-4c2c-be18-5599de419c96
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_wuhu_fixed
   - id: 87025
     prefix: '86554'
     number_min_length: 12
     number_max_length: 12
-    uuid: aa8f76f9-5004-4ae0-90d2-9742fe0863f9
+    uuid: 3f1ad454-669c-47e3-96cc-5ff0054941ef
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huainan_fixed
   - id: 87052
     prefix: '86555'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0479e1b7-539e-4b60-95e6-53f8415267e3
+    uuid: c1d68df9-d355-4c47-be0b-a883d5fac53f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_maanshan_fixed
   - id: 87075
     prefix: '86556'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1aedf8e5-5645-4aed-8c61-1c280ba13757
+    uuid: 097c16ed-4e57-4a76-acd8-51bd4c7d5185
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_anqing_fixed
   - id: 87091
     prefix: '86557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8f9d2282-a260-42df-8b0d-66b0d66d8b8d
+    uuid: f6b70ac1-d15f-4ebf-9b74-30709e58efd8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_suzhou_fixed
   - id: 87146
     prefix: '86558'
     number_min_length: 12
     number_max_length: 12
-    uuid: 37f038b8-e0c9-47bc-a9ac-8f5a9e524580
+    uuid: 98d61228-c16f-42e5-8300-51a0f5089310
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_bozhou_fuyang_fixed
   - id: 87162
     prefix: '86559'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5039275a-e99f-4060-b5e5-841d8f017d53
+    uuid: d2a6ac98-f28f-4b0f-9fa0-658e484b6cf1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huangshan_fixed
   - id: 88597
     prefix: '86562'
     number_min_length: 12
     number_max_length: 12
-    uuid: 99eb9b0e-4d42-4a4e-b48e-28873ce7d550
+    uuid: d0ace5b2-d5f0-4d91-8472-77935d82a34e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tongling_fixed
   - id: 89282
     prefix: '86563'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8ed53ec0-0b7c-4543-a22e-0b1e8b31b562
+    uuid: 28342712-b9c7-434d-9b8a-e61eb73049e9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xuancheng_fixed
   - id: 89670
     prefix: '86564'
     number_min_length: 12
     number_max_length: 12
-    uuid: 739a3b2f-fd23-4348-ba87-90b5cdc372af
+    uuid: 62ca3efd-595c-4cfc-9987-fe78dca41e8a
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_luan_fixed
   - id: 89814
     prefix: '86566'
     number_min_length: 12
     number_max_length: 12
-    uuid: ddc20593-e305-423c-841b-e6bd636b980f
+    uuid: 52d3923c-a797-4da6-a973-53718a94e48e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chizhou_fixed
   - id: 90293
     prefix: '86570'
     number_min_length: 12
     number_max_length: 12
-    uuid: 23ac0070-8115-4342-9389-0edc8a25c397
+    uuid: b9b30657-6766-494b-99f3-362f336a3b2b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_quzhou_fixed
   - id: 91090
     prefix: '86571'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4d6164a0-c10d-4149-a567-461903e2b220
+    uuid: 251a057b-4f39-4c8e-9549-72019be9d5c1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hangzhou_fixed
   - id: 91453
     prefix: '86574'
     number_min_length: 13
     number_max_length: 13
-    uuid: b3a65c60-425d-45e4-868b-df2aa30c68f7
+    uuid: c45fa641-f4cf-4e23-8a82-737ba52a7ff9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ningbo_fixed
   - id: 91864
     prefix: '86575'
     number_min_length: 13
     number_max_length: 13
-    uuid: 627de8af-ef35-41e3-9283-106dbf1a1b74
+    uuid: 77879f6a-5bd2-4483-a214-b3f8974f25db
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shaoxing_fixed
   - id: 92402
     prefix: '86576'
     number_min_length: 13
     number_max_length: 13
-    uuid: 1f381567-a170-4a63-a537-c29bc5c2e266
+    uuid: 71aeab63-7887-4ce8-9e8f-f657a2fa89cb
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_taizhou_fixed
   - id: 92415
     prefix: '86577'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4f26cdc6-4f13-4de0-9d3d-79f3f3e34f57
+    uuid: acac3b32-0c4a-41c6-9ec1-8ccdfa69ee73
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_wenzhou_fixed
   - id: 92427
     prefix: '86578'
     number_min_length: 12
     number_max_length: 12
-    uuid: 19766a7b-399c-49c3-a2fc-55f5beda2b26
+    uuid: a906fb77-4cd9-4d3f-b422-7954eba29597
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_lishui_fixed
   - id: 92432
     prefix: '86579'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8afd131d-32ee-496d-8178-2cebaba75bea
+    uuid: 0e3e7b30-1176-46fd-a12e-79fc5a917ee6
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jinhua_fixed
   - id: 93113
     prefix: '86580'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0101ee89-90a2-4ae3-ae55-7510439a47ce
+    uuid: 64094bba-2e25-4c9b-89ef-bb583ec233c2
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhoushan_fixed
   - id: 114637
     prefix: '86632'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd47e22c-da02-4ec3-bb0f-993452ea1737
+    uuid: 344e157f-90fb-4e16-975a-a5280c3abdad
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zaozhuang_fixed
   - id: 114797
     prefix: '86633'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3acb100a-86e0-4347-8e83-24c381fe9ddb
+    uuid: 87c7cd13-af16-4f07-a70b-cc6f59aec0ee
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_rizhao_fixed
   - id: 119675
     prefix: '86631'
     number_min_length: 12
     number_max_length: 12
-    uuid: b27ffcb9-b72a-4904-9d46-9e4270e6c6f3
+    uuid: 34e97333-efc0-48d0-a86e-8d2d25358c4c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_weihai_fixed
   - id: 124161
     prefix: '86634'
     number_min_length: 12
     number_max_length: 12
-    uuid: c9980143-d9fe-41b0-8964-e3bae464d69d
+    uuid: 0e1052b4-f333-4c90-8ae5-d42d39a928f1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_laiwu_fixed
   - id: 124252
     prefix: '86635'
     number_min_length: 12
     number_max_length: 12
-    uuid: 04589396-1301-4817-b18b-24436b983ff7
+    uuid: 6fd92ffd-b95e-4412-b506-10ed0f950323
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_liaocheng_fixed
   - id: 128925
     prefix: '86662'
     number_min_length: 12
     number_max_length: 12
-    uuid: eff33cf1-2158-42fb-8975-1dcc318eed39
+    uuid: b1cb17d7-767c-4751-be56-127dbd41cf1d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yangjiang_fixed
   - id: 132170
     prefix: '86668'
     number_min_length: 12
     number_max_length: 12
-    uuid: c275ccf1-44ee-436f-84bd-0794c392c567
+    uuid: e2378138-68ff-4452-a5a0-ca1d6ef24e68
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_maoming_fixed
   - id: 138940
     prefix: '86660'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70509132-1af4-4bc2-8e74-655414252ae2
+    uuid: 02d6e17f-a2b2-483c-9e41-0f114302a32c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shanwei_fixed
   - id: 139897
     prefix: '86663'
     number_min_length: 12
     number_max_length: 12
-    uuid: 874a8945-ab27-4721-a393-9c6fe93740e4
+    uuid: 61eba71e-bf52-42f4-a5c0-929f078a4d52
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jieyang_fixed
   - id: 148882
     prefix: '86691'
     number_min_length: 12
     number_max_length: 12
-    uuid: ef1ac354-21ee-4f70-adbe-c9dea53488be
+    uuid: 63798201-6044-4b8d-a034-e6c89ff53a02
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xishuangbanna_dai_autonomous_prefecture_fixed
   - id: 149037
     prefix: '86692'
     number_min_length: 12
     number_max_length: 12
-    uuid: 112f695b-9de1-4c9d-a758-579b5063da82
+    uuid: a4b077b1-76c9-4d44-96ea-aeee9f21e908
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dehong_dai_and_jingpo_autonomous_prefecture_fixed
   - id: 154412
     prefix: '86701'
     number_min_length: 12
     number_max_length: 12
-    uuid: 95093b6a-f2ad-4590-83ef-e34838416d23
+    uuid: 8c649a92-a7c7-4868-961f-b68c659ad853
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yingtan_fixed
   - id: 157850
     prefix: '86710'
     number_min_length: 12
     number_max_length: 12
-    uuid: cfdb0520-2ab6-41af-b971-f4a7e9487aa9
+    uuid: 2876160d-d864-4fd1-8b3b-5de37a4bc7cd
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xiangyang_fixed
   - id: 157876
     prefix: '86711'
     number_min_length: 12
     number_max_length: 12
-    uuid: e3c2eb73-9cd2-4cc6-ae09-21c10fa50415
+    uuid: fceec198-f224-47a7-a0c1-37f8aea670e0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ezhou_fixed
   - id: 157964
     prefix: '86712'
     number_min_length: 12
     number_max_length: 12
-    uuid: a0445b1e-c74d-4636-8ca5-7eb41051101c
+    uuid: 5a18b1e1-a03b-48b9-9cde-de84538ffd43
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xiaogan_fixed
   - id: 159089
     prefix: '86713'
     number_min_length: 12
     number_max_length: 12
-    uuid: a823e7d3-64fe-40f1-8a22-ed9ea93f8fcd
+    uuid: 49005685-49dc-4eac-8858-2cc7f09d984b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huanggang_fixed
   - id: 160458
     prefix: '86716'
     number_min_length: 12
     number_max_length: 12
-    uuid: e357b285-33f8-41e2-9fca-5db4abc436a4
+    uuid: 316455aa-3b72-4bee-bd00-cddccffb0765
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jingzhou_fixed
   - id: 164976
     prefix: '86714'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e8cfa77-1cb1-4fcf-926b-a10d8f9ecd14
+    uuid: 1ca0cbbc-3108-43f6-b9a2-08995e05c3f1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huangshi_fixed
   - id: 165862
     prefix: '86715'
     number_min_length: 12
     number_max_length: 12
-    uuid: 19da7ac8-9e6d-46a4-a866-bc28674dec23
+    uuid: 16c66b6f-1e0a-4e58-aff1-7f3050c32562
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xianning_fixed
   - id: 166728
     prefix: '86717'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2bd73bb8-ac62-49cd-b8d5-8bb12322d4fe
+    uuid: cf024a08-023e-40b1-b985-fb0b8413da6f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yichang_fixed
   - id: 167577
     prefix: '86718'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2d5c6dc3-aeac-4143-b85e-8c1f762a2418
+    uuid: 1496c781-9134-4ad9-ad10-8db772be35e3
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_enshi_tujia_and_miao_autonomous_prefecture_fixed
   - id: 169650
     prefix: '86722'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0a35d5e2-b926-47aa-962c-9dad94b34a17
+    uuid: 0175da18-7be0-4f21-a760-7ecb9a8015be
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_suizhou_fixed
   - id: 171841
     prefix: '86719'
     number_min_length: 12
     number_max_length: 12
-    uuid: a6770297-18f1-4751-bc9e-5617c2b2afcf
+    uuid: 202acdca-3b55-4aa8-9e92-14123fb19c96
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shennongjia_forestry_district_shiyan_fixed
   - id: 173212
     prefix: '86724'
     number_min_length: 12
     number_max_length: 12
-    uuid: cc59d986-af85-47a3-bb7e-45496b4d12b7
+    uuid: c52b1d57-4090-437a-ba89-6d461db36fc7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jingmen_fixed
   - id: 174268
     prefix: '86728'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8d5d438e-d839-405f-a6c3-47c2595f0db0
+    uuid: 29bcee3a-3817-4723-93a6-cd8c01c8f86d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qianjiang_tianmen_xiantao_fixed
   - id: 175897
     prefix: '86730'
     number_min_length: 12
     number_max_length: 12
-    uuid: 15d1c1de-3de2-4640-a519-8a2de92f15ed
+    uuid: 2d4d7281-3ef7-4b6b-940f-8f90a832446f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yueyang_fixed
   - id: 175955
     prefix: '86731'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4e71f316-6ba3-49be-af51-da0aa49af877
+    uuid: c7151ac6-e84f-4592-9bce-33b8b3424846
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_changsha_xiangtan_zhuzhou_fixed
   - id: 177844
     prefix: '86735'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9ce0b261-b4f8-4cd9-bc89-3f44db466d6c
+    uuid: 0194a815-b5b7-4165-91dd-b2f588e02286
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chenzhou_fixed
   - id: 178472
     prefix: '86736'
     number_min_length: 12
     number_max_length: 12
-    uuid: e19a12d9-b0ae-4499-be99-dd9c7d605698
+    uuid: ec124c8e-9dc8-4f60-b3cf-cc3487396d15
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_changde_fixed
   - id: 178586
     prefix: '86737'
     number_min_length: 12
     number_max_length: 12
-    uuid: c7886757-95f0-461e-a644-0e2301402748
+    uuid: b506a84f-5ea0-4f84-82c8-05fa72d58564
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yiyang_fixed
   - id: 179304
     prefix: '86745'
     number_min_length: 12
     number_max_length: 12
-    uuid: 54dd6012-821b-48ba-8ca4-9ab15d424723
+    uuid: 2f4fe9bd-aa31-4a07-a65b-7007899507b4
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huaihua_fixed
   - id: 179479
     prefix: '86746'
     number_min_length: 12
     number_max_length: 12
-    uuid: 172729d2-3046-41f3-8b47-d93cdd5c8ac1
+    uuid: 6ea85f09-1968-46aa-97dd-ad46febed3eb
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yongzhou_fixed
   - id: 179939
     prefix: '86755'
     number_min_length: 13
     number_max_length: 13
-    uuid: b27cca52-bdb9-4c18-a923-67fe99301abf
+    uuid: c1583f40-b235-47f5-825c-cb24598c9426
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shenzhen_fixed
   - id: 180276
     prefix: '86756'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2973d4a2-8f08-44ee-9cc2-0d9c1e2f2d75
+    uuid: 0607d733-2339-437d-af03-08784b364c1f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhuhai_fixed
   - id: 180588
     prefix: '86757'
     number_min_length: 13
     number_max_length: 13
-    uuid: cf467eab-17ba-4361-a708-1b9da933099f
+    uuid: 1c75e315-3d03-4706-a421-eb3fb17d8aed
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_foshan_fixed
   - id: 181479
     prefix: '86734'
     number_min_length: 12
     number_max_length: 12
-    uuid: 62d4d467-9030-4c1b-af30-4ae5325ab9cb
+    uuid: f92e66ca-ffc8-4d3d-b114-d21aa0bae2aa
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hengyang_fixed
   - id: 182707
     prefix: '86738'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9cdcdd31-feca-438f-8319-8ee87e19d98e
+    uuid: 03a43554-9cbd-4646-9ee5-55fd43300b13
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_loudi_fixed
   - id: 182765
     prefix: '86739'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8239c196-8821-4e08-a33a-9c2b2858c837
+    uuid: a81afb49-c84e-4525-bb8b-f614c614f722
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shaoyang_fixed
   - id: 184619
     prefix: '86743'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36345524-01af-44c0-9c55-0a7d2e41e095
+    uuid: 8e44c4bd-e0c9-47c9-8c47-491e12a93e95
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xiangxi_tujia_and_miao_autonomous_prefecture_fixed
   - id: 184815
     prefix: '86744'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0514a956-6896-42ab-8025-221eb5dd60ad
+    uuid: d61b8746-af72-40d8-9532-9456b8757c32
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhangjiajie_fixed
   - id: 186323
     prefix: '86750'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7182629e-e96d-41f6-ab61-36fbb1831a01
+    uuid: 7eca6c74-7fb2-43c6-8c08-222387016fa6
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jiangmen_fixed
   - id: 186337
     prefix: '86751'
     number_min_length: 12
     number_max_length: 12
-    uuid: efd3893a-ff35-4283-8dc7-7c7c5de89bf9
+    uuid: bacb5a07-4b7b-4761-8c3a-5a3644af3530
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shaoguan_fixed
   - id: 186370
     prefix: '86752'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9dd00ce5-4902-41cf-b2ee-09d69eedddf2
+    uuid: 74e6cbc8-d9a6-4512-940b-cb0897c90340
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huizhou_fixed
   - id: 186399
     prefix: '86753'
     number_min_length: 12
     number_max_length: 12
-    uuid: bc68510d-471a-40f4-b825-11796b805bd9
+    uuid: e02f81c6-441a-4ab3-be20-91df95853d3e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_meizhou_fixed
   - id: 186907
     prefix: '86754'
     number_min_length: 13
     number_max_length: 13
-    uuid: 62e292e9-ec76-4987-92cc-4ff73949c521
+    uuid: d26452bc-9452-4d83-8220-73dba5367751
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shantou_fixed
   - id: 187751
     prefix: '86758'
     number_min_length: 12
     number_max_length: 12
-    uuid: e37abdab-9966-4ca0-99d6-454ccacbea6d
+    uuid: 7abc9289-8eda-417b-8569-ad1ec5497bf0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhaoqing_fixed
   - id: 187884
     prefix: '86759'
     number_min_length: 12
     number_max_length: 12
-    uuid: 56ae7453-0a0d-48d9-802b-1f19fbd6d9e0
+    uuid: 22001dd3-8e3f-455e-a54b-fa999281103b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhanjiang_fixed
   - id: 188699
     prefix: '86760'
     number_min_length: 13
     number_max_length: 13
-    uuid: c71f2e85-9da0-469a-82ec-170af2da53e7
+    uuid: e76c75bc-7f56-47ac-98f3-9cc68f66de02
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhongshan_fixed
   - id: 189548
     prefix: '86762'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ea08154-1c9f-421b-b05e-3b03f9871927
+    uuid: 2b97d5f6-8fe7-4bfc-a94a-efd4cfcbe474
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_heyuan_fixed
   - id: 190353
     prefix: '86766'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2331055f-0fec-47e3-ba46-0b8e82a6f5de
+    uuid: e54235b6-25c8-4d1b-a443-accfbcda6595
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yunfu_fixed
   - id: 191129
     prefix: '86763'
     number_min_length: 12
     number_max_length: 12
-    uuid: 82d98640-b88b-49d7-8d36-5a60d215d898
+    uuid: 071760a5-bf48-48c9-80a9-054820bfd0f5
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qingyuan_fixed
   - id: 192569
     prefix: '86770'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3d45a044-ce35-4fbd-a12d-f9b0ef18dbdd
+    uuid: 90e2bd61-ae83-4038-92af-cec274535b48
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_fangchenggang_fixed
   - id: 193381
     prefix: '86771'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4e124572-9848-4168-aaf0-e8fece91ee62
+    uuid: f0c77ab9-7900-48bf-b331-bc13cbcdf1c9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chongzuo_nanning_fixed
   - id: 194422
     prefix: '86772'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8b88127d-71d8-461b-b345-71f6c963303b
+    uuid: fa7eccf6-f2d2-4ae8-967e-0998724018df
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_laibin_liuzhou_fixed
   - id: 195005
     prefix: '86773'
     number_min_length: 12
     number_max_length: 12
-    uuid: 43b54b5f-1172-4645-b4af-75e5c910a3d5
+    uuid: d5bf26ee-e274-4f80-819f-ca8f02046a78
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_guilin_fixed
   - id: 196211
     prefix: '86774'
     number_min_length: 12
     number_max_length: 12
-    uuid: da80b0c9-7594-4dc0-9495-d277f2b780b2
+    uuid: 5c5fa423-7730-4481-8286-83535fba3b5d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hezhou_wuzhou_fixed
   - id: 196702
     prefix: '86776'
     number_min_length: 12
     number_max_length: 12
-    uuid: b605d4fe-00db-4ac4-9448-cda46fbc3c58
+    uuid: 8ab17247-1272-453e-a804-bcfe700e49c0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_baise_fixed
   - id: 196999
     prefix: '86777'
     number_min_length: 12
     number_max_length: 12
-    uuid: d8f0118c-ca77-489d-be69-377755ec78d5
+    uuid: a66db1e8-3c0d-4d31-a9ef-e2bfe4c3e783
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qinzhou_fixed
   - id: 197895
     prefix: '86779'
     number_min_length: 12
     number_max_length: 12
-    uuid: 226b8d4b-d697-48e8-86f0-7bcbdd769ed9
+    uuid: 11fd089a-0ea2-4134-a614-3676f47ed18c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_beihai_fixed
   - id: 200406
     prefix: '86768'
     number_min_length: 12
     number_max_length: 12
-    uuid: bb4c8273-c689-46f2-af4e-67aac5d979df
+    uuid: 33ed5966-cf45-4aa6-b692-ab819e8018c0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chaozhou_fixed
   - id: 200510
     prefix: '86769'
     number_min_length: 13
     number_max_length: 13
-    uuid: 39835484-a6e0-48ad-b191-ea41ab17227e
+    uuid: 5449f4ed-958d-495f-9bb5-c5e45576a7f3
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dongguan_fixed
   - id: 200896
     prefix: '86775'
     number_min_length: 12
     number_max_length: 12
-    uuid: b4e723fa-5e71-45c8-8f5f-e7ca2c0d0ff6
+    uuid: fb242c1a-e65a-405c-ae42-bdd5376b9156
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_guigang_yulin_fixed
   - id: 202438
     prefix: '86778'
     number_min_length: 12
     number_max_length: 12
-    uuid: 82ddebbc-e221-49cf-9b17-bb2490396da6
+    uuid: e279f9d6-5559-451c-8258-503592bb7665
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hechi_fixed
   - id: 207028
     prefix: '86790'
     number_min_length: 12
     number_max_length: 12
-    uuid: b2c913b7-1e36-4c5e-be9a-f0ae07fe400f
+    uuid: 29a15794-a16b-43e8-b4d6-7bde150a55e2
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xinyu_fixed
   - id: 207043
     prefix: '86791'
     number_min_length: 13
     number_max_length: 13
-    uuid: efbae2e0-4ffb-4e9e-b76f-303ead11cbdc
+    uuid: 13cba4de-a453-495a-ba2a-75d61b717a7e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nanchang_fixed
   - id: 207224
     prefix: '86792'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4a1554c1-0d68-4dde-b095-227b416de557
+    uuid: 0daf122b-c2a8-4f1a-8878-45d69449d3c8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jiujiang_fixed
   - id: 207228
     prefix: '86793'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8b62dfbb-8475-4056-a7f2-7b546a6b9575
+    uuid: 7c602fba-fc11-44c9-a96a-9d9afd639df3
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shangrao_fixed
   - id: 207249
     prefix: '86794'
     number_min_length: 12
     number_max_length: 12
-    uuid: 43b05212-e1e7-40b3-97fd-75d68276a6bd
+    uuid: c3e88ad2-67fa-442c-ac4b-3cc3fd1d7378
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_fuzhou_fixed
   - id: 207271
     prefix: '86795'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6743562a-4380-43ff-acd4-8e587c1daf26
+    uuid: 342b8edf-47cf-4466-b578-453d230480d6
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yichun_fixed
   - id: 207300
     prefix: '86796'
     number_min_length: 12
     number_max_length: 12
-    uuid: a82487d4-6a29-4eed-9a60-9258be74bc51
+    uuid: ff2c66ae-de0d-4b1c-83ab-6a469236ba9c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jian_fixed
   - id: 207312
     prefix: '86797'
     number_min_length: 12
     number_max_length: 12
-    uuid: 850a7616-40ac-44c3-aa99-5be371e285be
+    uuid: 0c5a3dbd-cea1-4e6f-864a-5a49b7186a5c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ganzhou_fixed
   - id: 207470
     prefix: '86798'
     number_min_length: 12
     number_max_length: 12
-    uuid: d198e0a3-0217-4458-9d4b-7619b243c3ef
+    uuid: b0a7b5d3-a4d2-42a0-a99c-785b67dbe59c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jingdezhen_fixed
   - id: 207473
     prefix: '86799'
     number_min_length: 12
     number_max_length: 12
-    uuid: 31f5ea40-4994-40cf-84ff-2c0807738fb7
+    uuid: cd51044d-8f77-4102-ae83-2d5877f346a8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_pingxiang_fixed
   - id: 213364
     prefix: '86941'
     number_min_length: 12
     number_max_length: 12
-    uuid: 483f9dad-b930-49c7-8ff9-482c73ecdb9c
+    uuid: ebca6524-7c4c-4ab0-bd28-1df5b35cab39
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_gannan_tibetan_autonomous_prefecture_fixed
   - id: 213847
     prefix: '86943'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7a5d3409-6598-41fa-a265-40a179f2310c
+    uuid: 8f60968c-29d5-4885-a302-7f932e5bef5e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_baiyin_fixed
   - id: 217221
     prefix: '86939'
     number_min_length: 12
     number_max_length: 12
-    uuid: 870177aa-d8ab-4a8d-89ed-3fd381bf6b7f
+    uuid: c2088752-95cf-4d1c-a51a-ab06db6d4613
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_longnan_fixed
   - id: 217423
     prefix: '86951'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7eb46bab-79cc-402c-a433-34caf9db023e
+    uuid: 84aa1cd3-3f8d-4352-9564-f615195bd39f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yinchuan_fixed
   - id: 219045
     prefix: '86952'
     number_min_length: 12
     number_max_length: 12
-    uuid: 69641fd6-1432-485d-b5a1-d7cd426739b1
+    uuid: c97b2268-8dd4-4c42-a99e-8279508a1051
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shizuishan_fixed
   - id: 219424
     prefix: '86953'
     number_min_length: 12
     number_max_length: 12
-    uuid: 17d52f55-2339-4b7a-ae18-e078cf057897
+    uuid: f3c4ddcf-5193-4b87-91f8-6fb661095244
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_wuzhong_fixed
   - id: 219979
     prefix: '86954'
     number_min_length: 12
     number_max_length: 12
-    uuid: cd4f9977-91d2-4d30-83f5-6e693b10b487
+    uuid: 9a40c925-ada2-44ff-92d2-2722a4901e48
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_guyuan_fixed
   - id: 221099
     prefix: '86955'
     number_min_length: 12
     number_max_length: 12
-    uuid: 238919c6-9827-4741-829a-80bacccd6f3f
+    uuid: 27a46ce0-21df-4896-ba50-2913a0087c11
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhongwei_fixed
   - id: 228260
     prefix: '86971'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1220f20f-5a2d-495c-8d48-e84298e44ab9
+    uuid: 6280647a-74a1-4c01-a08f-3748f34588ba
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xining_fixed
   - id: 229461
     prefix: '86970'
     number_min_length: 12
     number_max_length: 12
-    uuid: f418c64e-a8f4-4e1a-83c0-754bbb79c96e
+    uuid: 334ac708-a27e-42b9-86ab-f9634293a718
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_haibei_tibetan_autonomous_prefecture_fixed
   - id: 229614
     prefix: '86972'
     number_min_length: 12
     number_max_length: 12
-    uuid: fb0657dc-0d67-442d-b1cc-b99431811985
+    uuid: 00116356-b40b-4938-81ed-3dbc9961ca93
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_haidong_fixed
   - id: 230512
     prefix: '86973'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce9b5e38-95f3-485d-a23e-48308e2cb0e0
+    uuid: 80e76c50-d37f-48ae-ba39-79cc1d109dc9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huangnan_tibetan_autonomous_prefecture_fixed
   - id: 231183
     prefix: '86979'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd0c2a4e-9b10-421b-a441-ddd75a3f8de5
+    uuid: ce27ec6a-dbf3-42cd-90aa-23123151005e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_golmud_fixed
   - id: 233312
     prefix: '86974'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1dba77f0-b3e4-4a41-86da-9fc56d1bba89
+    uuid: 6abb6f72-32b4-4e5e-8dc9-52c55bc300be
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hainan_tibetan_autonomous_prefecture_fixed
   - id: 233332
     prefix: '86975'
     number_min_length: 12
     number_max_length: 12
-    uuid: 77d99aae-03e3-4faf-b4cf-5144dd6654aa
+    uuid: 0e7f3729-399f-4533-924f-b6c84746b7c6
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_guoluo_tibetan_autonomous_prefecture_fixed
   - id: 233343
     prefix: '86976'
     number_min_length: 12
     number_max_length: 12
-    uuid: e758a0b3-08ef-4c5d-a142-3d43de4f9eb6
+    uuid: 765549e8-bb64-4e85-b74a-b8427799b51e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yushu_tibetan_autonomous_prefecture_fixed
   - id: 233354
     prefix: '86977'
     number_min_length: 12
     number_max_length: 12
-    uuid: 02925955-15b2-4490-8176-11b97e88b07f
+    uuid: 447fc29d-7a21-4829-b462-57c7bbf48be7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_haixi_mongol_and_tibetan_autonomous_prefecture_fixed
   - id: 239776
     prefix: '86990'
     number_min_length: 12
     number_max_length: 12
-    uuid: caf58f83-8897-4225-8354-ba3f0e3cf5cb
+    uuid: 94738bab-9dd3-4c39-a6d2-91350d67c7f7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hoboksar_mongol_autonomous_county_karamay_fixed
   - id: 239967
     prefix: '86991'
     number_min_length: 12
     number_max_length: 12
-    uuid: 992f31d6-1094-4d16-92fe-3aca3f5228a3
+    uuid: 74e7483d-09d1-4bd6-a581-cb4c7a660fc4
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_urumqi_fixed
   - id: 240004
     prefix: '86993'
     number_min_length: 12
     number_max_length: 12
-    uuid: eaa94fa3-0e02-4cc8-8569-38b512b500e3
+    uuid: f48bd4d5-a569-44f4-817f-993ee73249e8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shawan_county_shihezi_fixed
   - id: 240748
     prefix: '86992'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36176a30-9187-46c1-a97a-92ed6a7e2cdb
+    uuid: a1054a15-7924-4f7b-9738-54ae7641b8bd
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dushanzi_kuitun_wusu_fixed
   - id: 240993
     prefix: '86994'
     number_min_length: 12
     number_max_length: 12
-    uuid: 07332896-5a29-467d-9a76-674a548ee67c
+    uuid: cea9e926-70a3-4c8f-8606-86ab641f05bc
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_changji_hui_autonomous_prefecture_wujiaqu_fixed
   - id: 241081
     prefix: '86995'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0dd66901-e67e-4190-bb75-c0a3a4842c86
+    uuid: fc40d3a2-52ec-40b3-9f2a-4f7d2f799cee
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_turpan_fixed
   - id: 241137
     prefix: '86996'
     number_min_length: 12
     number_max_length: 12
-    uuid: c29b12a8-b3b9-4b96-879e-56fc3068d9e5
+    uuid: 73a704a2-c8f1-4be6-9d24-d2db6ac37425
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_bayingolin_mongol_autonomous_prefecture_fixed
   - id: 241368
     prefix: '86997'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2d5c85f0-c23d-401a-abbf-3074d9e96d83
+    uuid: ad79c67a-a130-41f5-834b-75d0475794ce
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_aksu_akqi_county_alar_fixed
   - id: 245881
     prefix: '86998'
     number_min_length: 12
     number_max_length: 12
-    uuid: 84218c86-52e0-476f-968a-620fb3ad4261
+    uuid: c8d60614-df3b-4d97-b46b-8d08496ad63e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_kashi_tumxuk_fixed
   - id: 246796
     prefix: '86999'
     number_min_length: 12
     number_max_length: 12
-    uuid: 21baffe1-58e2-496a-a66d-3aaed43c6d33
+    uuid: 463fa27f-fdf4-4fc1-bc22-59f6e49f9bd0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ili_kazakh_autonomous_prefecture_fixed
   - id: 258619
     prefix: '8610'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3484a378-3dab-4f17-84f9-d8d6db3aeb08
+    uuid: 03b09a50-9960-4ec5-9361-b034298fe4af
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_beijing_fixed
   - id: 267131
     prefix: '8620'
     number_min_length: 12
     number_max_length: 12
-    uuid: c0ba5f98-38b4-43a3-89e2-428669537129
+    uuid: c88c1c3e-10b5-446e-96f3-0fb92ad3612c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_guangzhou_fixed
   - id: 274224
     prefix: '8621'
     number_min_length: 12
     number_max_length: 14
-    uuid: 929aab26-2e19-4cef-a4c8-824a4e39a90f
+    uuid: 0882e9ed-f369-4361-9109-bf4130b34d39
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shanghai_fixed
   - id: 277989
     prefix: '8622'
     number_min_length: 12
     number_max_length: 12
-    uuid: 523e3d39-2a34-4a79-944f-563ab774ae4f
+    uuid: e8b21cc1-3756-46bb-af2e-0d5d60a4bee4
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tianjin_fixed
   - id: 286622
     prefix: '8623'
     number_min_length: 12
     number_max_length: 12
-    uuid: bed7e2eb-e965-4c1a-9589-79f066e9cf60
+    uuid: 0b742ffe-af6d-4d6d-af69-04a0300d7290
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chongqing_fixed
   - id: 294318
     prefix: '8624'
     number_min_length: 12
     number_max_length: 12
-    uuid: c9bebf89-cf03-4995-aa4b-a1c8f42c137c
+    uuid: 5d5d4962-6d5d-41cc-ade0-f0dfa30d13e3
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_benxi_fushun_shenyang_tieling_fixed
   - id: 301422
     prefix: '8627'
     number_min_length: 12
     number_max_length: 12
-    uuid: f47b204c-d7dd-471b-949a-36694d047ca5
+    uuid: 93a49e5f-75ba-412d-a964-4bd895366fa2
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_wuhan_fixed
   - id: 301963
     prefix: '8625'
     number_min_length: 12
     number_max_length: 12
-    uuid: b4d9fdaf-947e-4aaf-a9fd-31dae393e6d2
+    uuid: aa4d7641-8f8e-406b-bc89-fd012e4f42aa
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nanjing_fixed
   - id: 308500
     prefix: '8629'
     number_min_length: 12
     number_max_length: 12
-    uuid: 93cf8f86-c61f-4d00-8eff-853510a59711
+    uuid: 2439b2e7-b96a-4330-b0e2-42cd04ecaf20
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xian_xianyang_fixed
   - id: 313354
     prefix: '8628'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e112f97-166d-48e3-a12f-da79964e9ebc
+    uuid: 6eca7cb8-5c3a-4657-92f8-4512bdc3a585
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chengdu_meishan_ziyang_fixed
   - id: 321798
     prefix: '86312'
     number_min_length: 12
     number_max_length: 12
-    uuid: 78a981cf-2f2a-44d3-a201-6e65c139256c
+    uuid: 8ea0d6af-7176-4d0a-9b86-c65a34238013
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_baoding_fixed
   - id: 322776
     prefix: '86310'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd2fb950-4d62-4773-a535-bfd2fd00fd7b
+    uuid: c5396539-af99-4ccf-ae4d-7c69cb764fd9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_handan_fixed
   - id: 323560
     prefix: '86311'
     number_min_length: 13
     number_max_length: 13
-    uuid: b4f190c5-9dd3-4f6d-bc6b-3b7212d9007a
+    uuid: ed84a33a-4bd9-4e45-b76c-039814d96fc3
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shijiazhuang_fixed
   - id: 324591
     prefix: '86313'
     number_min_length: 12
     number_max_length: 12
-    uuid: ae9d4e65-b577-4b00-a1ec-bff4aeb6513d
+    uuid: 10e3805d-1f4d-47d7-946b-2a4b47ca2bc0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhangjiakou_fixed
   - id: 325883
     prefix: '86315'
     number_min_length: 12
     number_max_length: 12
-    uuid: f74750c8-d254-4a79-b418-d41d64addde5
+    uuid: 8f33c359-6844-460d-a519-011b69ec24c9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tangshan_fixed
   - id: 326140
     prefix: '86317'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6123a7ed-444e-47e2-b406-a032799dc6d8
+    uuid: 888555a1-1ee2-4a04-ab75-b53054dc10da
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_cangzhou_fixed
   - id: 327073
     prefix: '86318'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0d7a1a9b-b51f-4239-b0bf-4e14f832e435
+    uuid: b1877733-d663-4dcd-af2b-cbf4383ba6c0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hengshui_fixed
   - id: 331708
     prefix: '86335'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4be53e93-df19-439b-970c-3e2315274e66
+    uuid: 05ebe08c-4b07-431c-ba72-6c4b74b1783c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qinhuangdao_fixed
   - id: 332506
     prefix: '86314'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e558397-3dd1-43cc-aa14-0ecdc19e3899
+    uuid: 1f7a6499-3acb-4cc4-b951-f7aaff80595d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chengde_fixed
   - id: 333722
     prefix: '86316'
     number_min_length: 12
     number_max_length: 12
-    uuid: f34d42a6-90f9-4158-b9ad-2bb64acb5db0
+    uuid: 919ef55b-e5b9-4df4-bd65-d1e1fcd83c0f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_langfang_fixed
   - id: 334585
     prefix: '86319'
     number_min_length: 12
     number_max_length: 12
-    uuid: b5492579-9e93-47ba-9c5f-6ce80bebdbeb
+    uuid: 47d6b863-b672-47e4-a397-569df11005a6
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xingtai_fixed
   - id: 344848
     prefix: '86352'
     number_min_length: 12
     number_max_length: 12
-    uuid: 14270d19-608f-4eec-a45a-4e41b344cd17
+    uuid: 59e83f4f-3d25-4b2c-a359-2851b3eef06f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_datong_fixed
   - id: 345579
     prefix: '86355'
     number_min_length: 12
     number_max_length: 12
-    uuid: c979d221-7477-48a1-9b06-c88f58ee5b9f
+    uuid: 2e6673b9-4d29-4c54-b5c2-eb3fc01003c8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_changzhi_fixed
   - id: 345618
     prefix: '86356'
     number_min_length: 12
     number_max_length: 12
-    uuid: 75d7a979-7664-4d25-bbdf-fdeb88e8bd71
+    uuid: 31c9d5d6-2fac-4ead-8b0e-ea8a402d1950
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jincheng_fixed
   - id: 345685
     prefix: '86357'
     number_min_length: 12
     number_max_length: 12
-    uuid: 53213073-6eab-48d8-a675-5e0bf7a4a026
+    uuid: c9f6a1f9-7f43-4897-af0b-8ce32fa96d74
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_linfen_fixed
   - id: 345764
     prefix: '86358'
     number_min_length: 12
     number_max_length: 12
-    uuid: 887b52fe-ea27-4f2b-85b5-6ed51c0a5374
+    uuid: f43ad5b0-908c-4b43-b872-bfa5d56d9d9d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_luliang_fixed
   - id: 345880
     prefix: '86359'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7a7e01f-b979-4d42-b400-d3e0a30aac8a
+    uuid: 123a6209-594d-48db-a245-f0d7c61e3611
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yuncheng_fixed
   - id: 346850
     prefix: '86375'
     number_min_length: 12
     number_max_length: 12
-    uuid: 85dd8d92-a67c-49a6-8f9b-1df33e7ee242
+    uuid: 8ad056b3-39e3-43c9-929c-83877eef8e78
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_pingdingshan_fixed
   - id: 347106
     prefix: '86376'
     number_min_length: 12
     number_max_length: 12
-    uuid: 08a0286f-6147-41ed-9b41-1e6b30c7843f
+    uuid: 84a209b0-d613-472e-814e-5943fae9bbac
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xinyang_fixed
   - id: 347228
     prefix: '86377'
     number_min_length: 13
     number_max_length: 13
-    uuid: 459f25d1-3605-4263-9820-ef8b12429975
+    uuid: 0f1a834e-ef8f-4763-a847-a7046e90fcbd
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nanyang_fixed
   - id: 347678
     prefix: '86379'
     number_min_length: 13
     number_max_length: 13
-    uuid: 2101a987-494c-4f09-907e-5531fb3d29a2
+    uuid: f5025d7a-977d-4f52-b6f5-a18fa9467972
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_luoyang_fixed
   - id: 349296
     prefix: '86396'
     number_min_length: 12
     number_max_length: 12
-    uuid: e717bcc1-fe00-4f78-99ae-089306527de1
+    uuid: 5b9e9356-a030-4626-a911-20c8228f9eb9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhumadian_fixed
   - id: 349351
     prefix: '86398'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4c67beb6-915a-4422-aff2-ea96ac1fda4d
+    uuid: 2d9990a5-3bde-42e6-b330-17897b1f848d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_sanmenxia_fixed
   - id: 352134
     prefix: '86349'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8f10c5c4-0a79-41f2-ae03-426bb2387ec0
+    uuid: 44b5531b-1e72-420d-8a00-5f99c3aeccbe
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shuozhou_fixed
   - id: 352482
     prefix: '86350'
     number_min_length: 12
     number_max_length: 12
-    uuid: 540d6a25-e950-4d6c-92cf-0c9251a7bfb9
+    uuid: 2421e9a6-235d-4523-9150-3725cc8171a1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xinzhou_fixed
   - id: 352567
     prefix: '86351'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4452e1cf-dfa2-46b2-86cb-1e665fd233d2
+    uuid: f8d71c77-4726-4d68-a7ae-7e54a761efc8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_taiyuan_fixed
   - id: 353310
     prefix: '86353'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1d6f6bc5-92a8-4979-b882-4f0265b79675
+    uuid: 6ec4f4a5-3f11-4811-8ab6-782f32b0c59b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yangquan_fixed
   - id: 353748
     prefix: '86354'
     number_min_length: 12
     number_max_length: 12
-    uuid: d134d5ff-41ff-491c-a286-cde72f37e95a
+    uuid: 58a7e79a-53b7-4793-9573-82eebcc21cd5
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jinzhong_fixed
   - id: 355968
     prefix: '86370'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0286ab1f-29e6-4c0c-a18e-dd071d632625
+    uuid: d558c622-af03-44de-a336-cfb7c672d231
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shangqiu_fixed
   - id: 356091
     prefix: '86371'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8046d5cb-8d37-4d72-9402-3e8528aeeb6f
+    uuid: 8e27f092-ebcf-401e-bf01-7700733313f3
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_kaifeng_zhengzhou_fixed
   - id: 356151
     prefix: '86372'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4bac3ccc-caad-4232-85c2-3222f74b6458
+    uuid: 209d4ec0-b76b-4082-ad83-62341a5e77c1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_anyang_fixed
   - id: 356215
     prefix: '86373'
     number_min_length: 12
     number_max_length: 12
-    uuid: a9f50e66-ee91-45b5-8dc0-4c1c63ed96c0
+    uuid: 91e0e5ea-2c67-469f-9c4f-31f21fa6f47e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xinxiang_fixed
   - id: 356388
     prefix: '86374'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0817a15a-4954-4538-b94a-d93fa4c25416
+    uuid: 8d4f5215-b619-47ca-8d9a-2a3b587adf62
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_xuchang_fixed
   - id: 357613
     prefix: '86391'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2c4a7ee1-7d3b-4efa-b25a-20fd9a7bde21
+    uuid: 1a62a984-401f-4e87-8e54-8f66ef6b5824
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jiaozuo_jiyuan_fixed
   - id: 357876
     prefix: '86392'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4ef1d3d1-bcd7-42b4-89ed-274cb7b158eb
+    uuid: 5fc8c2ef-e49c-4d04-b363-af751b6ed104
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hebi_fixed
   - id: 358276
     prefix: '86393'
     number_min_length: 12
     number_max_length: 12
-    uuid: 38c2b2be-59dd-4d70-8964-c9f069d2ecf3
+    uuid: bb5094a9-a4c6-42d1-8f27-cd0fd55ef9a4
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_puyang_fixed
   - id: 358591
     prefix: '86394'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5713f71e-6258-4dd5-982b-47fb79eee276
+    uuid: bff4c450-4fa7-4fcc-b8e3-22cbaa7fa0c7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhoukou_fixed
   - id: 358667
     prefix: '86395'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9318a865-a69b-410d-b750-d153ff8131e8
+    uuid: 41ca4772-52a5-42cb-932e-b25c530813d8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_luohe_fixed
   - id: 363448
     prefix: '86411'
     number_min_length: 13
     number_max_length: 13
-    uuid: 9ae8c214-bc53-4b13-8e15-00b1280234b8
+    uuid: 4ea82b9b-da9c-4142-a51c-4ba529e17553
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dalian_fixed
   - id: 363948
     prefix: '86415'
     number_min_length: 12
     number_max_length: 12
-    uuid: e6c70148-dc87-4695-a709-6e5136341273
+    uuid: 703ca5d5-25ac-4081-8c9a-83be2fcacb6f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dandong_fixed
   - id: 365480
     prefix: '86419'
     number_min_length: 12
     number_max_length: 12
-    uuid: 95d98032-4ac9-428d-bf7d-f9eea7f46c7a
+    uuid: 29eaaef7-da5b-4b38-9dd3-3477623ef409
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_liaoyang_fixed
   - id: 367668
     prefix: '86429'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9c777659-c216-4eec-a909-a684a4fcedd4
+    uuid: ef35a1b5-d8c9-4d3f-bc08-13a57f9aeec9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_huludao_fixed
   - id: 368407
     prefix: '86431'
     number_min_length: 13
     number_max_length: 13
-    uuid: 9466f8b7-e9de-479b-a52a-666e7851c95b
+    uuid: 2a7b576d-c209-43f9-abb9-f073f4e15bbb
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_changchun_fixed
   - id: 368484
     prefix: '86434'
     number_min_length: 12
     number_max_length: 12
-    uuid: ba4d6bae-95a8-4901-a78d-89b66014bf9f
+    uuid: dbe9af16-9004-4a29-be53-71b5f70a36f1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_siping_fixed
   - id: 369351
     prefix: '86435'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5ff823d4-aaab-428b-a3a6-7e6f9cd6917b
+    uuid: 970c3bae-7d0e-4fdb-855a-b8a50a825481
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tonghua_fixed
   - id: 370167
     prefix: '86439'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9a1b0833-21ef-4fb0-a647-8fe7e098857d
+    uuid: 5870cc51-ed63-4e78-9c4a-03ee2b07d11c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_baishan_fixed
   - id: 371920
     prefix: '86412'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5da74e48-8b0d-454d-a781-3ef92c0ec91f
+    uuid: 736f3760-beb7-4e4c-aa82-195704c03934
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_anshan_fixed
   - id: 374502
     prefix: '86416'
     number_min_length: 12
     number_max_length: 12
-    uuid: a5e9159a-41b9-45c6-9cfa-f5e3e8833d2f
+    uuid: 7511e7dc-e3cd-446e-8cba-debbd6f0ad1f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jinzhou_fixed
   - id: 375175
     prefix: '86417'
     number_min_length: 12
     number_max_length: 12
-    uuid: 730cc2b2-fb88-45b5-828e-50c75b948436
+    uuid: df5e06a9-fc0a-4358-9a13-3e5e08d61f53
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yingkou_fixed
   - id: 376179
     prefix: '86418'
     number_min_length: 12
     number_max_length: 12
-    uuid: 91c04d09-b8f6-4217-8504-6aa9d6ee9262
+    uuid: bd9a5fed-fb04-4387-ad35-1f852e63a9a7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_fuxin_fixed
   - id: 377399
     prefix: '86421'
     number_min_length: 12
     number_max_length: 12
-    uuid: a3433638-544e-4105-90d2-feaedd9911b1
+    uuid: e644fbb9-1b83-43b3-a736-3c55aa52e9b2
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chaoyang_fixed
   - id: 378714
     prefix: '86427'
     number_min_length: 12
     number_max_length: 12
-    uuid: 647ee9e6-4447-44fd-bb8b-a3d7c46fc8cc
+    uuid: 851b2d6e-11d3-4fb2-b599-9807c08693ae
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_panjin_fixed
   - id: 379798
     prefix: '86432'
     number_min_length: 13
     number_max_length: 13
-    uuid: 28e9d5b1-4f96-493a-aae4-b9c305901aad
+    uuid: 92aa75a0-f435-4431-bdac-b579bf671651
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jilin_fixed
   - id: 380261
     prefix: '86433'
     number_min_length: 12
     number_max_length: 12
-    uuid: 79ac98f0-b384-4e99-bf93-a2ab2c77f9f0
+    uuid: 59d6672b-ebee-434e-8bd4-d2a753c3f9ff
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yanbian_korean_autonomous_prefecture_fixed
   - id: 380670
     prefix: '86436'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f42533b-f495-46f3-b003-5939cfd8ea19
+    uuid: 1eee08cc-bcd7-4753-be05-65ad154577f0
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_baicheng_fixed
   - id: 380921
     prefix: '86437'
     number_min_length: 12
     number_max_length: 12
-    uuid: c682f66b-df79-45f7-b27e-5ba214fc55ce
+    uuid: 02f31c12-2e45-4aa9-9dbf-4d0fd8f5c2fc
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_liaoyuan_fixed
   - id: 381394
     prefix: '86438'
     number_min_length: 12
     number_max_length: 12
-    uuid: cca6f142-82f4-44ac-977d-b69b4f66b335
+    uuid: 58a25d7b-9634-4c33-8a95-beacab8a381e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_songyuan_fixed
   - id: 387507
     prefix: '86451'
     number_min_length: 13
     number_max_length: 13
-    uuid: 23ec7f5e-ff32-4d4b-ae93-2ebe7cd38f1a
+    uuid: 3ae68050-9757-4d17-9db3-55b4978629cb
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_harbin_fixed
   - id: 387556
     prefix: '86452'
     number_min_length: 12
     number_max_length: 12
-    uuid: 575e74e3-6e46-4ea6-acec-5ed5a4e645a0
+    uuid: 2b514aa5-7e0f-4ef5-a651-8070e3708a91
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qiqihar_fixed
   - id: 388171
     prefix: '86453'
     number_min_length: 12
     number_max_length: 12
-    uuid: 13273b85-8ae2-48a9-b9f1-17d169bf85df
+    uuid: 1b2cd80e-cae8-4f86-ad1a-98bbfd9c4c64
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_mudanjiang_fixed
   - id: 388472
     prefix: '86459'
     number_min_length: 12
     number_max_length: 12
-    uuid: 367fdfe6-7a2f-4e11-b240-68b200506e6b
+    uuid: d80df473-7c6c-4031-bf2d-bb69a37794d8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_daqing_fixed
   - id: 393423
     prefix: '86454'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7654cdcf-3524-4895-8405-bd52f9b5cc0a
+    uuid: 7476d29b-e8a5-412a-828b-db8cc0a877a5
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jiamusi_fixed
   - id: 393482
     prefix: '86455'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9b9ae107-9035-42a2-bc45-02b68f69512c
+    uuid: 4793be8a-52f3-4b6e-8131-4bdf02fbac66
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_suihua_fixed
   - id: 393540
     prefix: '86456'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6226da87-f18f-4305-9659-b0cadb9f1d3e
+    uuid: 7c021770-461f-4482-8b87-cb1d848b54bc
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_heihe_fixed
   - id: 393861
     prefix: '86457'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1b813dc6-2830-4f97-990b-a79b4b2294d6
+    uuid: 49bd0532-1cb6-4927-8d20-1e49ed3a6f5c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_daxinganling_jiagedaqi_fixed
   - id: 393928
     prefix: '86458'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3af85c84-1688-4223-bc0e-433ad63f299d
+    uuid: 7468a675-b00c-40fc-92b0-d5c6d633ab37
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yichun_fixed
   - id: 394997
     prefix: '86464'
     number_min_length: 12
     number_max_length: 12
-    uuid: 01788741-27d3-4da0-ab6f-e57af18a0610
+    uuid: 6a234f3e-2508-4beb-b7d4-935558e84d0e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qitaihe_fixed
   - id: 395418
     prefix: '86469'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7291f20-3389-43a3-95ac-c3ae80db295b
+    uuid: 624e4310-5c51-4775-ae81-c6b653c2d372
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shuangyashan_fixed
   - id: 396470
     prefix: '86471'
     number_min_length: 12
     number_max_length: 12
-    uuid: 69adcafb-ebac-494b-a796-5b1a00425ca4
+    uuid: 6451bde5-6150-4329-84d1-4b0cc9a32a32
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hohhot_fixed
   - id: 396538
     prefix: '86472'
     number_min_length: 12
     number_max_length: 12
-    uuid: b4339c07-eda8-425c-9284-2d0e9b459336
+    uuid: 22d6188e-d0df-4d71-8bfa-6c8b3f94d0b7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_baotou_fixed
   - id: 396992
     prefix: '86473'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3dd15842-07ea-42c9-b595-0081c1f2111f
+    uuid: 4f95a572-ce75-4138-ade8-9f81f6af3a6d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_wuhai_fixed
   - id: 397485
     prefix: '86474'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2fd6b5b1-ea72-4880-ae22-deebea57daa2
+    uuid: 6a53054c-bb77-4f83-9049-d7d32e301c10
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_wulanchabu_fixed
   - id: 397647
     prefix: '86477'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6a185ced-9a59-4a1f-8329-face48a0e89a
+    uuid: b9fbe5e5-a4e3-4ff2-99c6-a069dbe4b6db
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ordos_fixed
   - id: 399111
     prefix: '86467'
     number_min_length: 12
     number_max_length: 12
-    uuid: 58ee71e2-f384-48c1-8e13-70dde5f6cf0a
+    uuid: 360a4d01-4a8d-4a68-93cc-41de0ef22377
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jixi_fixed
   - id: 399162
     prefix: '86468'
     number_min_length: 12
     number_max_length: 12
-    uuid: 53c0b112-8aa4-4bc1-9aa5-4fb3f9037516
+    uuid: df49d5a3-53cd-4734-8f6e-8a096149bff8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hegang_fixed
   - id: 399607
     prefix: '86470'
     number_min_length: 12
     number_max_length: 12
-    uuid: aae72759-a952-46e5-95f9-70766758a24b
+    uuid: 69dc5cae-f0c3-49c0-928f-90f549b1a869
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hulunbeier_fixed
   - id: 400772
     prefix: '86475'
     number_min_length: 12
     number_max_length: 12
-    uuid: f88f2029-7139-455d-99e8-6b3c2c938961
+    uuid: e593e2fa-6651-4493-9691-c5a450301d9e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tongliao_fixed
   - id: 401269
     prefix: '86476'
     number_min_length: 12
     number_max_length: 12
-    uuid: e243c669-c004-40de-96f5-4f2b78a4f117
+    uuid: 34c8a1ba-72d7-4762-870d-890bf807171f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chifeng_fixed
   - id: 406940
     prefix: '86812'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e24c39d-72ad-42c5-a88f-3b7e8b38f795
+    uuid: 6219f864-1afc-4ea8-8eb5-2735525b69ef
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_panzhihua_fixed
   - id: 409343
     prefix: '86818'
     number_min_length: 12
     number_max_length: 12
-    uuid: 83672c24-b627-46a4-b289-b3143dcad543
+    uuid: bcf01cf2-0d76-4e9f-9e4c-ba7bb59f0274
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dazhou_fixed
   - id: 410223
     prefix: '86825'
     number_min_length: 12
     number_max_length: 12
-    uuid: 635a7055-5ad9-4dc9-990b-58242c0bff29
+    uuid: 24e083b2-b6be-4c02-b2b9-bf78436283bb
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_suining_fixed
   - id: 411013
     prefix: '86826'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6acf5932-d568-446c-8244-bb06e91ffabb
+    uuid: f2e220e4-4153-4c9c-b73a-a185ef7df876
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_guangan_fixed
   - id: 415681
     prefix: '86813'
     number_min_length: 12
     number_max_length: 12
-    uuid: 528e53cc-f5e6-4ca1-ae77-faf13dc90ec9
+    uuid: b63b70f9-e77a-42c5-b17e-2350c38509a6
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zigong_fixed
   - id: 416782
     prefix: '86816'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8015c14d-07e3-4580-8d72-89c6d2c178f2
+    uuid: f444fb9e-16b9-4b0d-890e-167fd8b84410
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_mianyang_fixed
   - id: 417586
     prefix: '86817'
     number_min_length: 12
     number_max_length: 12
-    uuid: e0c72fc2-8b04-438a-ae65-56d838041291
+    uuid: 64c9d7c8-f854-408b-9198-b981c9d55caa
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nanchong_fixed
   - id: 420496
     prefix: '86827'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9ed3ab4b-2d91-4fc1-8624-679296cee996
+    uuid: 9870aeb0-c6b1-4469-9869-d5038d3e4ca7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_bazhong_fixed
   - id: 422637
     prefix: '86832'
     number_min_length: 12
     number_max_length: 12
-    uuid: c7b40038-1d90-4cbe-a01d-8f6a878bfe8d
+    uuid: a53278ca-6d73-4fe9-9262-831723cf5a49
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_neijiang_fixed
   - id: 423367
     prefix: '86834'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7ad4b3d6-0971-42cc-91b4-29a689af2101
+    uuid: 22e6aebf-5d41-410c-bd7d-9d3b595a2cda
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_liangshan_yi_autonomous_prefecture_fixed
   - id: 424050
     prefix: '86835'
     number_min_length: 12
     number_max_length: 12
-    uuid: 81885996-38aa-4326-9694-7de609cdb8e0
+    uuid: e6b550fa-086d-48a5-9de1-961768e2af1b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yaan_fixed
   - id: 424181
     prefix: '86836'
     number_min_length: 12
     number_max_length: 12
-    uuid: bc85e79a-cae3-4565-8340-7a1af6445ed9
+    uuid: 4cdd4988-bf1b-440c-bc7a-54ee9a795da7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ganzi_tibetan_autonomous_prefecture_fixed
   - id: 424282
     prefix: '86837'
     number_min_length: 12
     number_max_length: 12
-    uuid: 99ce2290-c261-465d-952a-4457ea3ce2b2
+    uuid: 08de4f99-ad7e-44df-9735-791f066ec8e4
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_aba_tibetan_and_qiang_autonomous_prefecture_fixed
   - id: 424306
     prefix: '86838'
     number_min_length: 12
     number_max_length: 12
-    uuid: cce991e2-2c51-4cf0-9b8d-49a283aeb699
+    uuid: 12158785-67b4-4511-bb71-df60e078dfd6
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_deyang_fixed
   - id: 427507
     prefix: '86851'
     number_min_length: 13
     number_max_length: 13
-    uuid: b1fec36b-3075-4cea-907f-88f7296e196b
+    uuid: 3418f54f-9d1b-417c-b73f-6f6e4ec7649a
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_anshun_guiyang_zunyi_fixed
   - id: 427572
     prefix: '86854'
     number_min_length: 12
     number_max_length: 12
-    uuid: 68814014-7cc9-4b46-a9b9-3f975e557dd2
+    uuid: 942ed533-81c4-4321-bf31-4b41b972fcde
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qiannan_buyei_and_miao_autonomous_prefecture_fixed
   - id: 427735
     prefix: '86855'
     number_min_length: 12
     number_max_length: 12
-    uuid: 381a1672-d4cb-44d7-a16b-2e0032fe51d5
+    uuid: d2bfe247-45de-4eea-b410-d746981c1d18
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_southeast_qian_autonomous_prefecture_of_miao_and_dong_fixed
   - id: 427779
     prefix: '86856'
     number_min_length: 12
     number_max_length: 12
-    uuid: dcfc2157-5380-4aa3-9255-124b379eeed0
+    uuid: 0a3d11a3-68d6-478d-af61-da1366964817
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tongren_fixed
   - id: 428125
     prefix: '86859'
     number_min_length: 12
     number_max_length: 12
-    uuid: ca855766-e03e-4a13-a4ae-a8f2258a68e3
+    uuid: c3197ecf-7d27-4eaa-80b6-7a1364136de5
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_guizhou_south_buyi_and_miao_autonomous_prefecture_fixed
   - id: 431066
     prefix: '86830'
     number_min_length: 12
     number_max_length: 12
-    uuid: e126ea91-847b-479f-920d-d5f36da783a7
+    uuid: 315adba5-5b8f-4b60-9fd2-d27dfaeea97a
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_luzhou_fixed
   - id: 431567
     prefix: '86831'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6be82fff-b082-40f3-9aca-7609db22ebe4
+    uuid: d29309ce-6171-4aa0-90e1-882da07833cb
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yibin_fixed
   - id: 432161
     prefix: '86833'
     number_min_length: 12
     number_max_length: 12
-    uuid: 958d2dcd-4603-4d3e-b66b-592aae1d3e7e
+    uuid: 1fe2598b-77b0-4046-b848-2b8890c344f9
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_leshan_fixed
   - id: 433060
     prefix: '86839'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0ebd15b3-b4fd-440e-a795-3816f0964c15
+    uuid: b26494b2-b979-4f9a-ab5f-55543b6ae212
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_guangyuan_fixed
   - id: 436707
     prefix: '86857'
     number_min_length: 12
     number_max_length: 12
-    uuid: f3a67522-5ecf-443a-ace4-04fddd58b930
+    uuid: 7a38657d-4ecb-4313-b790-b00b67485a3d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_bijie_fixed
   - id: 437068
     prefix: '86858'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5520a6b1-e98f-475c-a4be-1772e383011d
+    uuid: d7a9475c-b82b-4f42-9e0a-26e7bffb300d
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_liupanshui_fixed
   - id: 441405
     prefix: '86870'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7a5ce4a4-de82-4967-918f-a36bc85076b8
+    uuid: bd27edf9-a6e3-417f-8b51-a9d13044089f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhaotong_fixed
   - id: 442239
     prefix: '86872'
     number_min_length: 12
     number_max_length: 12
-    uuid: 784fa3f2-efb2-4958-8804-f104db8b109c
+    uuid: 9f754d1b-7b5a-46f7-8269-d09e56a47ff1
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dali_bai_autonomous_prefecture_fixed
   - id: 443099
     prefix: '86873'
     number_min_length: 12
     number_max_length: 12
-    uuid: 45439401-c842-4733-9ba6-4c2c227e62f0
+    uuid: db0844fe-a01f-4ccb-9d98-49acb5c1b71f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_honghe_hani_and_yi_autonomous_prefecture_fixed
   - id: 443761
     prefix: '86879'
     number_min_length: 12
     number_max_length: 12
-    uuid: d1d127ac-b1ca-4f0e-afaa-15828113c001
+    uuid: 62f33eb3-b087-4e49-9cbc-ce00f7c0cbf7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_puer_fixed
   - id: 447281
     prefix: '86903'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3a3b7909-ec26-45b3-9127-cf928d6079bf
+    uuid: ddd2fbe6-140b-4c63-a866-0059ce5022ea
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hotan_fixed
   - id: 448899
     prefix: '86871'
     number_min_length: 13
     number_max_length: 13
-    uuid: 508a5b1d-0242-4d4b-8e07-c7ee2b809d65
+    uuid: e5a7dfe7-d5c8-4512-9270-4b96ea4ef891
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_kunming_fixed
   - id: 450457
     prefix: '86874'
     number_min_length: 12
     number_max_length: 12
-    uuid: d42eac5c-7d76-4e42-ae3f-59051802ee12
+    uuid: 9af35c35-b940-419a-a6fc-d2d83268dd1f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qujing_fixed
   - id: 450473
     prefix: '86875'
     number_min_length: 12
     number_max_length: 12
-    uuid: cd874a3f-57df-43c6-8935-ae3f0e87f570
+    uuid: dd4c8410-0126-4392-a564-20b2573da176
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_baoshan_fixed
   - id: 450484
     prefix: '86876'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1fc115ad-b802-44a4-bf18-a45cf1edda6b
+    uuid: cd56481f-6dca-447c-bcea-426d19c43d77
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_wenshan_zhuang_and_miao_autonomous_prefecture_fixed
   - id: 450702
     prefix: '86877'
     number_min_length: 12
     number_max_length: 12
-    uuid: d4f1b65b-931d-49e9-8416-6e657a439bdd
+    uuid: 78698c1d-f1aa-40af-94ca-d31b00b0903b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yuxi_fixed
   - id: 451092
     prefix: '86878'
     number_min_length: 12
     number_max_length: 12
-    uuid: 78b89c16-fc6f-42b3-9f7c-bb548189b4e8
+    uuid: 24ea99c6-066a-43c2-b456-0bef9e12adcc
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_chuxiong_yi_autonomous_prefecture_fixed
   - id: 451301
     prefix: '86883'
     number_min_length: 12
     number_max_length: 12
-    uuid: b4bc8ada-b6d5-4673-a57a-d59544bffbb9
+    uuid: 74d4dcbb-25bc-4a2b-b1ca-afcb18526e1f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_lincang_fixed
   - id: 451353
     prefix: '86886'
     number_min_length: 12
     number_max_length: 12
-    uuid: 49593c15-4a79-4786-a051-a41c102a1342
+    uuid: 2ebb4c50-c9fa-4e67-9c53-e717dd7fc7c7
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nujiang_lisu_autonomous_prefecture_fixed
   - id: 451368
     prefix: '86887'
     number_min_length: 12
     number_max_length: 12
-    uuid: 627abca3-19a2-4a30-a9d5-577c86d68053
+    uuid: 2ac2dcd2-feaa-4669-9afb-8f811fe4c087
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_diqing_tibetan_autonomous_prefecture_fixed
   - id: 451381
     prefix: '86888'
     number_min_length: 12
     number_max_length: 12
-    uuid: df905d38-814b-4d8a-92a3-b2e01df3c52d
+    uuid: a86509a4-602f-47e2-8ce7-a6c81a5dbf62
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_lijiang_fixed
   - id: 451771
     prefix: '86891'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7b1a93a1-1661-4438-bdfb-73287992ff28
+    uuid: 47026f88-554d-4262-a823-4ce83ba739c2
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_lhasa_fixed
   - id: 451909
     prefix: '86892'
     number_min_length: 12
     number_max_length: 12
-    uuid: cca364d9-7551-4b58-a88d-6624a2565831
+    uuid: b9f93e92-ad5c-4894-a020-c9116e390c84
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shigatse_fixed
   - id: 451946
     prefix: '86893'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6764e542-659f-4329-b439-84f570f597b0
+    uuid: 002a6fb5-e2fd-4ba7-9116-d874466e072a
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shannan_fixed
   - id: 451960
     prefix: '86894'
     number_min_length: 12
     number_max_length: 12
-    uuid: 24fea794-b054-42e8-bfe6-8ea21eae7659
+    uuid: d9e01ead-ad3c-4903-8f05-5ab53ef92939
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nyingchi_fixed
   - id: 452240
     prefix: '86895'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7a09c971-98d8-4883-ad01-b308f1f4db8e
+    uuid: 91b4feca-94d2-4082-85d0-e627d70d5d58
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qamdo_fixed
   - id: 452246
     prefix: '86896'
     number_min_length: 12
     number_max_length: 12
-    uuid: e5d095fb-aab8-4fd8-9d58-98b2a0e0f0ae
+    uuid: 92a139e2-afb0-47d1-84df-6e0188d61b2f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_nagqu_fixed
   - id: 452254
     prefix: '86897'
     number_min_length: 12
     number_max_length: 12
-    uuid: 818c9985-4508-48e4-92f1-34696c192d09
+    uuid: 8b59b14b-cfc9-4036-b41a-fa4f7dd8c85c
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ali_fixed
   - id: 452467
     prefix: '86898'
     number_min_length: 13
     number_max_length: 13
-    uuid: e5eebb3b-ea04-42f2-81e8-8b3c0bf2c8e4
+    uuid: ca238fb8-ecec-46f1-946a-1cdcbb5921d3
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hainan_province_fixed
   - id: 454703
     prefix: '86901'
     number_min_length: 12
     number_max_length: 12
-    uuid: e8be3b5d-62c3-4626-a59f-dfe270e047ad
+    uuid: 975d210a-4bad-4591-8011-2cdd818bc7f8
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tacheng_fixed
   - id: 454949
     prefix: '86902'
     number_min_length: 12
     number_max_length: 12
-    uuid: b590e6c7-890d-401c-8fa7-c3f693acdaca
+    uuid: eade6da7-5dc5-4662-b508-f7d66c55fb1f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hami_fixed
   - id: 457259
     prefix: '86908'
     number_min_length: 12
     number_max_length: 12
-    uuid: e903ab2e-3a1d-4e51-980b-e3da3e148fcf
+    uuid: dc294999-4f4a-4f9a-82c4-0a9ec7ad595f
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_kizilsu_kirgiz_autonomous_prefecture_fixed
   - id: 460336
     prefix: '86914'
     number_min_length: 12
     number_max_length: 12
-    uuid: d8e3e2cc-ff8d-4e38-976e-8bdaf45344f5
+    uuid: 729a648b-2af7-43af-a8ca-b500d64bbcaa
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_shangluo_fixed
   - id: 461703
     prefix: '86917'
     number_min_length: 12
     number_max_length: 12
-    uuid: ade50340-81b6-4059-b389-d5264fd91096
+    uuid: 35833274-8d3d-4836-b462-012813fa8358
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_baoji_fixed
   - id: 462744
     prefix: '86906'
     number_min_length: 12
     number_max_length: 12
-    uuid: d1cb7237-f3f3-484b-8e42-5bd1a31edf08
+    uuid: b427ae5e-f289-4f7e-9910-9f46f24e7a27
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_altay_beitun_tiemenguan_fixed
   - id: 463572
     prefix: '86909'
     number_min_length: 12
     number_max_length: 12
-    uuid: ad99400b-e987-4dc0-9fe8-202068f25713
+    uuid: ac8e724f-3d08-41ac-b368-edc3bf64b7ae
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_bortala_mongolian_autonomous_prefecture_fixed
   - id: 465120
     prefix: '86911'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7ebf3d5-5806-4630-b952-46708f6e44c3
+    uuid: fd785964-21c9-4ed0-a21d-2642ecaea452
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yanan_fixed
   - id: 465639
     prefix: '86912'
     number_min_length: 12
     number_max_length: 12
-    uuid: ca7b2da2-b45d-4d99-83c5-312265514233
+    uuid: 825f5c09-dfa8-4d51-8a5d-b28fb6c979a4
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_yulin_fixed
   - id: 466314
     prefix: '86913'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1b70d095-ca44-45be-a5fa-7b4d834aac35
+    uuid: 92179203-c6c9-411c-aca6-a342015a6a35
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_weinan_fixed
   - id: 466836
     prefix: '86915'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7216b7fb-f22c-4c51-a79c-33c016d1ade8
+    uuid: c90d5b38-a84f-4596-b4c3-97b0111ac7ae
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_ankang_fixed
   - id: 467202
     prefix: '86916'
     number_min_length: 12
     number_max_length: 12
-    uuid: a57e8fe8-4ecc-4380-b757-22beb42acd3c
+    uuid: b83f10e7-0c33-4f7a-b74a-6371e21f0c5e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_hanzhong_fixed
   - id: 469802
     prefix: '86919'
     number_min_length: 12
     number_max_length: 12
-    uuid: ba354bf0-5797-4c56-b34b-59a62d2793ac
+    uuid: d08a70a2-763d-4caa-8bf8-a23128183a05
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tongchuan_fixed
   - id: 485704
     prefix: '86930'
     number_min_length: 12
     number_max_length: 12
-    uuid: f2009e5b-6e17-4166-804c-61871e4f1755
+    uuid: 7a909b17-f5cb-471e-9268-27c93002d876
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_linxia_hui_autonomous_prefecture_fixed
   - id: 486094
     prefix: '86933'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2f88414e-7fec-420e-857a-9e321ab065d5
+    uuid: 78372188-e340-420d-9193-c96af2cc783a
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_pingliang_fixed
   - id: 487056
     prefix: '86934'
     number_min_length: 12
     number_max_length: 12
-    uuid: c135c894-0b83-452e-9499-11446692f132
+    uuid: 451ce05a-51fc-4754-8e65-eaf83c2ea963
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_qingyang_fixed
   - id: 490004
     prefix: '86931'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6e901c7b-cefd-42b5-956d-f93494f76cfb
+    uuid: c41f6d73-62d2-41c9-a0ca-45b10310c418
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_lanzhou_fixed
   - id: 490536
     prefix: '86932'
     number_min_length: 12
     number_max_length: 12
-    uuid: a10ffaa7-5c8a-4305-8235-c2895e73470f
+    uuid: cc877fa4-193d-4a4f-87af-5ba829f3634b
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_dingxi_fixed
   - id: 493043
     prefix: '86935'
     number_min_length: 12
     number_max_length: 12
-    uuid: bdd07949-a405-4392-b7d8-1a0906100d28
+    uuid: 815c7c1d-d578-4c91-9482-cd10791a525e
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jinchang_wuwei_fixed
   - id: 498641
     prefix: '86936'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1047c53e-9e6b-4728-bbbd-51d25681e9dd
+    uuid: 43ad67f0-d257-4d0e-94f8-ac85a354ab87
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_zhangye_fixed
   - id: 498820
     prefix: '86937'
     number_min_length: 12
     number_max_length: 12
-    uuid: 073592de-f98a-400a-85d0-8fb48614cca4
+    uuid: 71f0162c-6cc1-46b5-a591-83a8d35444e6
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_jiayuguan_jiuquan_fixed
   - id: 501487
     prefix: '86938'
     number_min_length: 12
     number_max_length: 12
-    uuid: a3777669-863e-4e2c-8333-6b33a7208aee
+    uuid: 96886d46-4947-4cfd-88f8-4079895a922a
     country_id: *cn
-    network_id: *cn_fixed
+    network_id: *cn_tianshui_fixed
 # Country code Prefixes
   - id: 241967
     prefix: '86'
     number_min_length: 3
     number_max_length: 100
-    uuid: 3fc2d04e-74d9-48db-bc46-9f09e3e6c4f8
+    uuid: 3229d43e-8c86-48fd-8fb5-e87fcf0f2468
     country_id: *cn
     network_id: null
 # Supplementary services Prefixes
@@ -2334,77 +3598,77 @@ network_prefixes:
     prefix: '861'
     number_min_length: 5
     number_max_length: 15
-    uuid: ee7c64b6-fbdc-45b4-815d-55afec94471a
+    uuid: d028da77-c0bd-46ae-92d4-b412519c045d
     country_id: *cn
     network_id: *cn_special_services
   - id: 242559
     prefix: '86106'
     number_min_length: 7
     number_max_length: 15
-    uuid: 1322d392-54c0-4196-bf5a-dcd90d6ae06e
+    uuid: 7f57befd-6148-4341-9922-93a15f3338cb
     country_id: *cn
     network_id: *cn_sms_services
   - id: 242562
     prefix: '861064'
     number_min_length: 15
     number_max_length: 15
-    uuid: 195cd1e4-1ca3-4fff-a4a7-e4ed973bd087
+    uuid: 0d0f439d-51fb-4eac-a236-69b05da68d9a
     country_id: *cn
     network_id: *cn_machine_to_machine_m2m_services
   - id: 243990
     prefix: '86400'
     number_min_length: 12
     number_max_length: 12
-    uuid: 318e53cf-8822-4ed5-b270-2b69060f08ad
+    uuid: fc52fff6-b344-4b01-95b7-55f3ffef00a1
     country_id: *cn
     network_id: *cn_shared_cost_services
   - id: 245445
     prefix: '86600'
     number_min_length: 15
     number_max_length: 15
-    uuid: d87c2f1e-9258-4431-9117-24990fafcdf8
+    uuid: 52fb6153-1e5a-413e-9f2b-e41fff848137
     country_id: *cn
     network_id: *cn_virtual_private_network
   - id: 253139
     prefix: '86800'
     number_min_length: 12
     number_max_length: 12
-    uuid: ee4b0629-f955-4f2e-8859-2bb98a0b6f20
+    uuid: 21507bd9-c550-4419-bd0a-91ae34acc216
     country_id: *cn
     network_id: *cn_freephone_services
   - id: 255312
     prefix: '86700'
     number_min_length: 15
     number_max_length: 15
-    uuid: fcf0dfa2-774e-42b6-8e38-0072f0ed4c95
+    uuid: 16488959-c8e7-4b65-91db-b768a9cccbb5
     country_id: *cn
     network_id: *cn_personal_communication_services
   - id: 258265
     prefix: '869977'
     number_min_length: 6
     number_max_length: 6
-    uuid: f4897f4d-4462-476a-843f-787de01030c5
+    uuid: 1c6bad93-51ad-4300-8475-42ecbd002152
     country_id: *cn
     network_id: *cn_local_emergency_services
   - id: 258302
     prefix: '86999'
     number_min_length: 5
     number_max_length: 5
-    uuid: be7315cf-0f9f-4300-864c-80945cb8495a
+    uuid: 8cf1f958-1a71-44cd-91b8-a0bb70d00560
     country_id: *cn
     network_id: *cn_beijing_emergency_services
   - id: 264431
     prefix: '8695'
     number_min_length: 7
     number_max_length: 15
-    uuid: 028c86f9-3ad3-497c-9254-15f2be9d1092
+    uuid: 76462e19-8b35-4522-8943-e67cc326de21
     country_id: *cn
     network_id: *cn_national_special_services
   - id: 264710
     prefix: '8696'
     number_min_length: 7
     number_max_length: 10
-    uuid: 919f6067-4f88-41c1-9a41-49d5b922f925
+    uuid: c8090d35-859b-4f25-a4f7-7ae0065b6e7d
     country_id: *cn
     network_id: *cn_local_special_services
 # Mobile Prefixes
@@ -2412,511 +3676,511 @@ network_prefixes:
     prefix: '8610646'
     number_min_length: 15
     number_max_length: 15
-    uuid: e7f58626-a5a4-4109-9f58-48e3359d65f6
+    uuid: 0c3bae11-b184-4b70-8848-9bb483d26163
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 242564
     prefix: '8610647'
     number_min_length: 15
     number_max_length: 15
-    uuid: a83c477b-86f7-4702-ae6c-8b61dcbbe6bf
+    uuid: 3dc2c9d1-7033-46bc-b1af-652f949ea737
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 242565
     prefix: '8610648'
     number_min_length: 15
     number_max_length: 15
-    uuid: de3ec8eb-6747-4ed7-9380-f37ff3746976
+    uuid: 52562682-98ca-41ed-b550-2b3cd472b467
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 242566
     prefix: '8610649'
     number_min_length: 15
     number_max_length: 15
-    uuid: bf2babcd-60be-4dc8-997b-268fee8af7a2
+    uuid: 482d1aab-1b6d-4bb8-afb5-1b8a5773c601
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 259648
     prefix: '86130'
     number_min_length: 13
     number_max_length: 13
-    uuid: 2146041b-62b1-446f-a0a1-0ddce0f65496
+    uuid: 3f800b1b-0dcf-4ebc-a947-e74f1046860d
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 259661
     prefix: '86131'
     number_min_length: 13
     number_max_length: 13
-    uuid: a58e5ebc-1af6-499f-9c74-3d2abfae5091
+    uuid: 395b0af5-84d1-4d1b-b121-2db8d720dcef
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 259666
     prefix: '86132'
     number_min_length: 13
     number_max_length: 13
-    uuid: 1d38ee55-3dc7-448f-85c7-a2167501186a
+    uuid: 112180a6-c666-42e5-af66-97bd534a177b
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 259699
     prefix: '86133'
     number_min_length: 13
     number_max_length: 13
-    uuid: a78f9a50-a253-4254-bc13-3743633701a9
+    uuid: 09c82f83-d090-42dc-b01b-f0f7c3cd6f8a
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 259744
     prefix: '861340'
     number_min_length: 13
     number_max_length: 13
-    uuid: a3c3ab45-1780-43fc-aeff-26ca7246912f
+    uuid: b230e4e0-84ea-4846-964e-de975ec41aea
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259745
     prefix: '861341'
     number_min_length: 13
     number_max_length: 13
-    uuid: e682b3a6-3eb2-4e65-b605-53908cb45d1e
+    uuid: 51d849e0-fa24-4dc6-acbb-cbe9db2f96b1
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259746
     prefix: '861342'
     number_min_length: 13
     number_max_length: 13
-    uuid: 22a95523-60bd-4337-b3dc-17689946ecf6
+    uuid: a075e196-54a7-45fb-b3e8-710f005867c6
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259747
     prefix: '861343'
     number_min_length: 13
     number_max_length: 13
-    uuid: f8c0b387-59ad-4863-b99a-7d58792b710c
+    uuid: 7466243b-2a70-4779-883a-3d5e9738ae70
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259748
     prefix: '861344'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8a97a5ee-facc-48e5-88c7-1852de224b93
+    uuid: 6cda556a-7c4f-4004-94db-9959ffc6aae8
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259749
     prefix: '861345'
     number_min_length: 13
     number_max_length: 13
-    uuid: b64e28dd-fbd1-4c78-b02a-7c913e6cfe56
+    uuid: 7b3333f2-28c8-4493-b0d0-5a1637c6e51a
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259750
     prefix: '861346'
     number_min_length: 13
     number_max_length: 13
-    uuid: 65b760ec-7e09-44f9-b46b-e1086a5b14fb
+    uuid: 9bf362e3-1d9a-46b5-9fb4-3b889f10b11e
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259751
     prefix: '861347'
     number_min_length: 13
     number_max_length: 13
-    uuid: 05a7ee09-6492-485b-b30b-c57ee054c5ff
+    uuid: e138f7fc-180a-40da-a2f1-5ea55b683e86
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259752
     prefix: '861348'
     number_min_length: 13
     number_max_length: 13
-    uuid: 3a39288f-1ca2-456f-b7f0-45128de59100
+    uuid: 41a64843-29a6-4167-a06f-d429250f4ed8
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259786
     prefix: '86135'
     number_min_length: 13
     number_max_length: 13
-    uuid: ff3095a1-e7f3-4ecb-8a96-1c6894ba47f8
+    uuid: be31382a-6ab2-4934-8849-9b21c6826aa6
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259806
     prefix: '86136'
     number_min_length: 13
     number_max_length: 13
-    uuid: 188bfc9b-1625-4a91-a86b-c9be873b95a4
+    uuid: 8cd61244-4d90-4398-b48b-e4aa2e946743
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259845
     prefix: '86137'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8dbf6a58-f3a3-4b89-a21e-4a0460544f9b
+    uuid: 5fe3ab44-2152-4823-a466-de58f5294d5e
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259876
     prefix: '86138'
     number_min_length: 13
     number_max_length: 13
-    uuid: deac1ff1-b6e0-44ce-a01f-51b13ff98df1
+    uuid: 53bc0d78-06e7-40f2-98e5-5862280c54fa
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 259921
     prefix: '86139'
     number_min_length: 13
     number_max_length: 13
-    uuid: d96d2083-0937-47b2-97ae-3324fe593851
+    uuid: 34ddcd69-ab81-4412-a4d4-568cc73191f7
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260101
     prefix: '861410'
     number_min_length: 13
     number_max_length: 13
-    uuid: 195a84e1-f4c2-4f98-b7ff-48c859f609c6
+    uuid: 19e52b2d-b2b2-427d-ba41-75d5dd5cd6a4
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260197
     prefix: '861440'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8d3286aa-df22-4d8f-8f96-ebbd2bf3564f
+    uuid: f03a63ee-338e-4a8d-a265-cd4689611b9b
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260308
     prefix: '861700'
     number_min_length: 13
     number_max_length: 13
-    uuid: 43275eb5-1488-4359-8478-310bd1a80b3d
+    uuid: b0ba6539-3a69-422b-b9ab-1b9d88af3c5a
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260309
     prefix: '861701'
     number_min_length: 13
     number_max_length: 13
-    uuid: 5b408568-91ad-4db5-bbc4-6c983b5de4f7
+    uuid: 688a4a86-13ff-4add-b73c-e4dccaca797f
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260310
     prefix: '861702'
     number_min_length: 13
     number_max_length: 13
-    uuid: f972edd6-9808-425c-9fff-e3a28cab4c0f
+    uuid: f768d44d-8ba4-45b0-911e-7dc1dd93cea5
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260311
     prefix: '861703'
     number_min_length: 13
     number_max_length: 13
-    uuid: c8c4829d-80f0-4e65-8af0-5fe55657adcd
+    uuid: 800c408a-1375-46ed-a26f-cfb8b8c7ade4
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260312
     prefix: '861704'
     number_min_length: 13
     number_max_length: 13
-    uuid: 336f66a2-0ebc-4e36-a316-84ac626ba63a
+    uuid: 5449c223-5214-4e63-b98a-f17dd5fa9048
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260313
     prefix: '861705'
     number_min_length: 13
     number_max_length: 13
-    uuid: 89058bba-b32e-4bfc-9a61-bfeb64f072c5
+    uuid: faa80ea1-1f32-48f1-89ed-d676f7022d2c
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260314
     prefix: '861706'
     number_min_length: 13
     number_max_length: 13
-    uuid: f03c8664-58f5-4a05-89a8-05f334a6d139
+    uuid: 909d8739-6a12-40b2-8d4a-067c87f76151
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260315
     prefix: '861707'
     number_min_length: 13
     number_max_length: 13
-    uuid: 28048f92-50d9-4491-bfea-0a459ecc5bee
+    uuid: fa76c3bf-a169-43a6-bee0-77b37a822a29
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260316
     prefix: '861708'
     number_min_length: 13
     number_max_length: 13
-    uuid: 83915811-9e91-4b79-ac5b-febd6b0dcf5f
+    uuid: 2d8d9c67-d557-4676-b6bd-cfb636ab005d
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260317
     prefix: '861709'
     number_min_length: 13
     number_max_length: 13
-    uuid: 135d1c3d-948b-4aeb-825b-fb866d5ee802
+    uuid: 330e82fe-89e9-49c9-86fe-a1b8f0a23be0
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260329
     prefix: '86171'
     number_min_length: 13
     number_max_length: 13
-    uuid: 90e65680-6403-494d-936c-30be8957d770
+    uuid: 92ee544e-b29c-4fdc-a267-3e4d1fa4197d
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260352
     prefix: '86173'
     number_min_length: 13
     number_max_length: 13
-    uuid: 57453cf1-0d1e-4b66-ab66-2052c0509f7a
+    uuid: b3c68e94-04c0-4fd6-947c-2903ec331cd8
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260407
     prefix: '86175'
     number_min_length: 13
     number_max_length: 13
-    uuid: c0e55c8e-6b69-425e-8240-0bd637c76db5
+    uuid: 9f26de86-2e23-4874-b5f6-48d84843569c
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260426
     prefix: '86176'
     number_min_length: 13
     number_max_length: 13
-    uuid: acabbd7b-56db-4320-8204-677b0180b89e
+    uuid: 0c2f579f-58d2-4304-8c25-ac7996b1f4ea
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260447
     prefix: '86177'
     number_min_length: 13
     number_max_length: 13
-    uuid: 631b2115-ef23-46f9-8974-f0364cc25d5a
+    uuid: 519a6d0c-4c28-4278-b0c9-e3cbe1e6831b
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260465
     prefix: '86178'
     number_min_length: 13
     number_max_length: 13
-    uuid: e0f8ca86-5825-424a-afda-c1077391b478
+    uuid: c87f181f-817e-4e25-8f5f-c9db64be4af5
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260655
     prefix: '86180'
     number_min_length: 13
     number_max_length: 13
-    uuid: daca9696-eebf-4d44-aab7-c943e5ba2a63
+    uuid: 1a4c833a-be6d-4f91-81ca-98d39ed7c29c
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260674
     prefix: '86181'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4d442728-a68f-41f4-ae7f-544d820b29a8
+    uuid: c8687fc2-5556-4c40-a253-5fc1b593541a
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260678
     prefix: '86182'
     number_min_length: 13
     number_max_length: 13
-    uuid: 14a6c669-acdd-4338-a7db-b35fa4d94446
+    uuid: 1dcaa3cf-2a03-43b7-8ab3-db6187a25090
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260695
     prefix: '86183'
     number_min_length: 13
     number_max_length: 13
-    uuid: c67b6c25-7880-49bc-825c-bdb43165fd24
+    uuid: 45bcda73-33c6-458b-a0cc-7a8b9c590fa6
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260707
     prefix: '86184'
     number_min_length: 13
     number_max_length: 13
-    uuid: 9c4c9303-10e7-40b6-b57c-fe944076b314
+    uuid: eb18e075-8bd0-4932-8cae-45a19108be3c
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260722
     prefix: '86185'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4454e37b-cdba-429d-a06c-5d4690a7dda1
+    uuid: 25c90319-24d3-4d3c-ac81-e00b990f44c7
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260746
     prefix: '86186'
     number_min_length: 13
     number_max_length: 13
-    uuid: 6359c539-5738-4b9f-854d-3e18a3fd1e71
+    uuid: 1ef45c02-6f85-4bb6-a522-faafa7efb98d
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 260763
     prefix: '86187'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4df15fda-316f-4e43-b196-db4a629e6838
+    uuid: 955be6c8-1a12-4e05-9cba-d722cb44e6ff
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260786
     prefix: '86188'
     number_min_length: 13
     number_max_length: 13
-    uuid: 9f737c13-0131-4d83-9e3a-359766cd129c
+    uuid: 6d7c0f12-00fd-4479-85ca-f75fd4402ecb
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 260803
     prefix: '86189'
     number_min_length: 13
     number_max_length: 13
-    uuid: c6b2cc6d-5738-4028-8d38-62706e5cd708
+    uuid: 162487f9-8566-414c-85d8-5385c4955830
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 260990
     prefix: '86190'
     number_min_length: 13
     number_max_length: 13
-    uuid: a37c8a2f-faa1-4379-ae56-a7c0529388de
+    uuid: ed334f23-6dc0-499f-95c9-cd4eb46bb1ae
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 261013
     prefix: '86191'
     number_min_length: 13
     number_max_length: 13
-    uuid: b1ce6c56-0ce2-44a5-b099-1af9a42e6fe8
+    uuid: c815ad29-d1df-482f-b651-067be7693bcb
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 261038
     prefix: '86193'
     number_min_length: 13
     number_max_length: 13
-    uuid: 362fe143-e80a-4fda-bc23-7d00eec6f301
+    uuid: edfd07ad-e13b-4b22-9098-a63afcb56417
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 261100
     prefix: '86196'
     number_min_length: 13
     number_max_length: 13
-    uuid: 69f4fde9-fe0b-4ce3-ba9a-4be7755a94e6
+    uuid: b0287a4a-d9d3-4d28-a8f9-89b996a00b61
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 261139
     prefix: '86198'
     number_min_length: 13
     number_max_length: 13
-    uuid: 686cc458-7ec2-43fb-bc68-6a64c638443e
+    uuid: 3c054a6d-5dec-413b-9a65-7eea7a503f85
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 261160
     prefix: '86199'
     number_min_length: 13
     number_max_length: 13
-    uuid: 15abd7f8-c44f-4e5c-94be-12db45ac19eb
+    uuid: aebdd024-d340-44ba-9d0c-5c98612ed942
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 265887
     prefix: '86145'
     number_min_length: 13
     number_max_length: 13
-    uuid: fe97020f-b88b-4545-83c4-e266a86988b0
+    uuid: aaba7c98-5a44-4eb4-a86e-a3bf9a55da28
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 265926
     prefix: '86146'
     number_min_length: 13
     number_max_length: 13
-    uuid: 05d07db9-d0ac-4a0b-9d97-517a4a8cb4ea
+    uuid: a13226fa-fa3e-4e1a-9bb0-a97ec385067b
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 265976
     prefix: '86147'
     number_min_length: 13
     number_max_length: 13
-    uuid: a20c7ad9-d720-45fa-8ded-bb1c7627da39
+    uuid: 93f96639-07a5-4bd3-8d54-9acd6f6e963c
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 266004
     prefix: '86148'
     number_min_length: 13
     number_max_length: 13
-    uuid: 0e64c0e7-fff9-4722-8f55-816206f04cbc
+    uuid: 869ed61f-586f-4421-87b8-553d64ff21e4
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 266042
     prefix: '86149'
     number_min_length: 13
     number_max_length: 13
-    uuid: 3daed467-e577-4a78-9760-c3338ddae08c
+    uuid: 5bb48110-4766-4047-ace8-4db2171e7a8e
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 266195
     prefix: '86150'
     number_min_length: 13
     number_max_length: 13
-    uuid: f53ffa21-6b2b-4c0b-bb40-41721adf522c
+    uuid: d849f627-5457-4f90-89fa-e1c5af6e4b67
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 266219
     prefix: '86151'
     number_min_length: 13
     number_max_length: 13
-    uuid: 1b82d361-79f1-4246-a1f2-297c44eb51cb
+    uuid: 44ad8379-0f28-46c4-b0da-cd71878acae7
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 266243
     prefix: '86152'
     number_min_length: 13
     number_max_length: 13
-    uuid: 3f96e689-17b3-4c33-a51d-2ef232929d99
+    uuid: e94db3e4-e5d2-4ab0-9ab9-5936002a4970
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 266284
     prefix: '86153'
     number_min_length: 13
     number_max_length: 13
-    uuid: 85af30c7-4193-41b8-a94a-dfb74cf8e5fe
+    uuid: 188bf6f8-773b-482d-87a5-3645422f9498
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 266365
     prefix: '86155'
     number_min_length: 13
     number_max_length: 13
-    uuid: 805ba113-d6c1-4f85-b3fb-4ad4f00cc4e9
+    uuid: 7da412da-f25b-4360-ab88-82cf9c0c9efa
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 266381
     prefix: '86156'
     number_min_length: 13
     number_max_length: 13
-    uuid: 47111411-95fd-4ae4-a6c2-f4a6cdb4bab1
+    uuid: 60a4f335-829c-4890-8e30-c4d32c746cfb
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 266437
     prefix: '86157'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4e8f1932-4d99-43eb-8363-532c760f9026
+    uuid: c398c584-ace1-44c9-9bb1-466df152ce4a
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 266457
     prefix: '86158'
     number_min_length: 13
     number_max_length: 13
-    uuid: d43cc5b9-856b-47f4-a6e6-0b34786eafd8
+    uuid: 262afcff-385d-4d0a-8d69-985ba743d76f
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 266498
     prefix: '86159'
     number_min_length: 13
     number_max_length: 13
-    uuid: ee5a30b1-3c3f-4fab-84f7-c039b3abea5a
+    uuid: 1ba8aa72-daed-418e-879a-c02c85e3c7ee
     country_id: *cn
     network_id: *cn_china_mobile_mobile
   - id: 266785
     prefix: '86162'
     number_min_length: 13
     number_max_length: 13
-    uuid: c88dad98-38b5-4eb8-ada8-079fdf64ae2c
+    uuid: dc37edb4-50fe-47eb-9665-ddae638f18d7
     country_id: *cn
     network_id: *cn_china_telecom_mobile
   - id: 266871
     prefix: '86166'
     number_min_length: 13
     number_max_length: 13
-    uuid: b9ed5cbd-b49c-4245-9825-d60f32284646
+    uuid: d11a0565-bc02-4245-ab82-09ef2b0c4532
     country_id: *cn
     network_id: *cn_china_unicom_mobile
   - id: 266889
     prefix: '86167'
     number_min_length: 13
     number_max_length: 13
-    uuid: 84ba6d02-ce0a-43c5-96ce-02262a3c78fd
+    uuid: 95981811-44a1-4c35-8464-bbdd15aae048
     country_id: *cn
     network_id: *cn_china_unicom_mobile
 # Satellite Prefixes
@@ -2924,104 +4188,104 @@ network_prefixes:
     prefix: '861349'
     number_min_length: 13
     number_max_length: 13
-    uuid: c7fe410b-c8a8-4586-bb73-bb0df842ba3d
+    uuid: 207421d3-c109-4e78-a4e0-868dca91fa6c
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260378
     prefix: '8617400'
     number_min_length: 13
     number_max_length: 13
-    uuid: 389d1336-7217-4c83-831a-044f16dbc09b
+    uuid: 3b6c17ea-81c4-4f09-b2c0-e7a0a5f605ac
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260379
     prefix: '8617401'
     number_min_length: 13
     number_max_length: 13
-    uuid: f64c0877-a463-4405-a22b-8279a0f67a5f
+    uuid: 5e4d039a-e45d-4bc5-a043-ae02e4755275
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260380
     prefix: '8617402'
     number_min_length: 13
     number_max_length: 13
-    uuid: 1b33eb49-29a7-4f78-8cc9-9cf581d3fa0c
+    uuid: 1eaf87cc-58a4-44ab-830c-b6d718c832cb
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260381
     prefix: '8617403'
     number_min_length: 13
     number_max_length: 13
-    uuid: 101b0447-22be-4e23-ae7a-fb84015e995e
+    uuid: df8f10a3-6c63-4fde-8694-eba5798f9a9d
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260382
     prefix: '8617404'
     number_min_length: 13
     number_max_length: 13
-    uuid: 472de516-9063-4c8d-8de4-8b7fb3471d3d
+    uuid: 4d81895c-2d5c-4c05-8e8c-fb274237340d
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260383
     prefix: '8617405'
     number_min_length: 13
     number_max_length: 13
-    uuid: 1497206e-62b9-4af2-9430-30511f179dfe
+    uuid: b33f385c-c428-46c4-a5a1-fbd9e57d9435
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260384
     prefix: '8617406'
     number_min_length: 13
     number_max_length: 13
-    uuid: f081a14c-82a2-4655-8400-7274c60f8cec
+    uuid: 00939cb8-7e3f-44c4-8334-06f24c7e9ca8
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260385
     prefix: '8617407'
     number_min_length: 13
     number_max_length: 13
-    uuid: d5aa6545-3df3-434c-903a-8f89209ea922
+    uuid: e87df55e-ccfe-4e8b-ae1a-f030a5f998de
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260386
     prefix: '8617408'
     number_min_length: 13
     number_max_length: 13
-    uuid: 3197c0d7-1d2b-4db0-a647-afa0c7870e39
+    uuid: b8452500-4075-4cd2-9599-40f3ed97e4ae
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260387
     prefix: '8617409'
     number_min_length: 13
     number_max_length: 13
-    uuid: 678189e0-13b3-4c8e-b445-6194373e3917
+    uuid: 9ecba572-be7e-4421-b76b-be1e990f9095
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260388
     prefix: '8617410'
     number_min_length: 13
     number_max_length: 13
-    uuid: c27fa592-789a-4c51-a58b-2e5b5649f02d
+    uuid: f0575c55-f9dc-4618-bc11-884469e08af0
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260389
     prefix: '8617411'
     number_min_length: 13
     number_max_length: 13
-    uuid: 7e414614-6cd1-4865-852e-4dc9a14ca587
+    uuid: 49b457f1-cb56-46a5-a5ff-10ed76aeff2e
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260390
     prefix: '8617412'
     number_min_length: 13
     number_max_length: 13
-    uuid: a2d96376-c540-41da-b270-5166ce698c75
+    uuid: be9cc2d9-063c-48d2-a13b-0b9aeeeee02f
     country_id: *cn
     network_id: *cn_china_telecom_satellite
   - id: 260391
     prefix: '861749'
     number_min_length: 13
     number_max_length: 13
-    uuid: 2c229deb-710e-428a-b817-670b3781212a
+    uuid: ce2393f8-cd60-46c5-a036-008f6cbc58e8
     country_id: *cn
     network_id: *cn_inmarsat_satellite

@@ -1,131 +1,235 @@
 country_id: &sk 192
 networks:
 # Fixed Networks
-  - id: &sk_fixed 4061
-    name: SK Fixed
-    uuid: 1646be76-1610-4083-8c47-9d0a3ef1cc88
+  - id: &sk_banska_bystrica_fixed 4206
+    name: SK Banska Bystrica Fixed
+    uuid: 26954720-4137-49f6-b471-feec446d6fb0
+    type_id: 12
+  - id: &sk_presov_fixed 5649
+    name: SK Presov Fixed
+    uuid: 231524d2-7f71-4502-892b-e414c8e549a9
+    type_id: 12
+  - id: &sk_poprad_fixed 6649
+    name: SK Poprad Fixed
+    uuid: 54d79b6d-6fd4-4447-aff9-999ee715d13e
+    type_id: 12
+  - id: &sk_bardejov_fixed 7191
+    name: SK Bardejov Fixed
+    uuid: c52e9f9c-d5f6-4891-889b-ae39184ed329
+    type_id: 12
+  - id: &sk_spisska_nova_ves_fixed 7583
+    name: SK Spisska Nova Ves Fixed
+    uuid: 85d5b23c-b12f-4dbe-913c-f646a7512b00
+    type_id: 12
+  - id: &sk_kosice_fixed 7962
+    name: SK Kosice Fixed
+    uuid: 6ff3c366-e444-4f99-b0e6-babc107cc792
+    type_id: 12
+  - id: &sk_michalovce_fixed 9283
+    name: SK Michalovce Fixed
+    uuid: 1cc72037-b999-4abb-adbe-b462c69f5f20
+    type_id: 12
+  - id: &sk_humenne_fixed 9686
+    name: SK Humenne Fixed
+    uuid: cb0ad11d-d945-4586-b5f4-268ba3c018e1
+    type_id: 12
+  - id: &sk_roznava_fixed 10252
+    name: SK Roznava Fixed
+    uuid: 6b8fc590-db2b-424e-b292-223bc09bedf4
+    type_id: 12
+  - id: &sk_voip_fixed 10650
+    name: SK Voip Fixed
+    uuid: dacbafe4-ecbd-459c-b76b-a32ef4e78921
+    type_id: 12
+  - id: &sk_special_telecommunications_networks_fixed 20461
+    name: SK Special Telecommunications Networks Fixed
+    uuid: d09f3758-04ce-4c84-8800-a8cea0fb6056
+    type_id: 12
+  - id: &sk_bratislava_fixed 25853
+    name: SK Bratislava Fixed
+    uuid: b074f9ab-18e2-48d3-851c-ffffe6dbce0d
+    type_id: 12
+  - id: &sk_dunajska_streda_fixed 31765
+    name: SK Dunajska Streda Fixed
+    uuid: b4e52021-11cb-49e8-ab7f-632c48bd7a25
+    type_id: 12
+  - id: &sk_trencin_fixed 31947
+    name: SK Trencin Fixed
+    uuid: d88337a8-2e58-4980-9265-bd905425504e
+    type_id: 12
+  - id: &sk_trnava_fixed 32570
+    name: SK Trnava Fixed
+    uuid: 9861d403-c3dd-4b9a-863e-51914e14b4b9
+    type_id: 12
+  - id: &sk_senica_fixed 32903
+    name: SK Senica Fixed
+    uuid: 56511dc6-d453-4deb-a3e3-3de60d34ed46
+    type_id: 12
+  - id: &sk_levice_fixed 33665
+    name: SK Levice Fixed
+    uuid: b0923598-e379-4841-9452-70fcea05af2b
+    type_id: 12
+  - id: &sk_topolcany_fixed 33855
+    name: SK Topolcany Fixed
+    uuid: b8ea1989-3726-4806-bf89-940733f4bfed
+    type_id: 12
+  - id: &sk_nove_zamky_fixed 34651
+    name: SK Nove Zamky Fixed
+    uuid: 1c44b2b5-8646-44ec-9fa1-2b79ccc5361e
+    type_id: 12
+  - id: &sk_nitra_fixed 35243
+    name: SK Nitra Fixed
+    uuid: 2b68346e-ba6a-4bb6-b3c8-82f480c30bc3
+    type_id: 12
+  - id: &sk_zilina_fixed 36253
+    name: SK Zilina Fixed
+    uuid: ec767b87-832b-41fa-96dd-325c67f02d96
+    type_id: 12
+  - id: &sk_martin_fixed 36598
+    name: SK Martin Fixed
+    uuid: c1ddde40-cb04-4615-8da1-0a85e7357212
+    type_id: 12
+  - id: &sk_liptovsky_mikulas_fixed 36866
+    name: SK Liptovsky Mikulas Fixed
+    uuid: d3eafd67-b42b-4c92-90b5-c8689e29685b
+    type_id: 12
+  - id: &sk_povazska_bystrica_fixed 37244
+    name: SK Povazska Bystrica Fixed
+    uuid: d153cdef-19aa-4f34-8035-8c9f2849982d
+    type_id: 12
+  - id: &sk_prievidza_fixed 37847
+    name: SK Prievidza Fixed
+    uuid: f79eee60-9d56-4385-a588-c1d26360da56
+    type_id: 12
+  - id: &sk_zvolen_fixed 37906
+    name: SK Zvolen Fixed
+    uuid: ef010651-dd68-41bc-b8b6-5110ed52e3b3
+    type_id: 12
+  - id: &sk_lucenec_fixed 38322
+    name: SK Lucenec Fixed
+    uuid: c4199010-e7e9-43b7-9c34-2bf489d0e282
     type_id: 12
 # Supplementary services Networks
-  - id: &sk_internet_providers_access_points 4383
+  - id: &sk_internet_providers_access_points 10569
     name: SK Internet Providers Access Points
-    uuid: 84687f6d-a3e8-405f-932b-192a730f3dff
+    uuid: 336c13d4-80e5-49c4-b988-46843af36c00
     type_id: 14
-  - id: &sk_machine_to_machine_m2m_services 4423
+  - id: &sk_machine_to_machine_m2m_services 11801
     name: SK Machine To Machine M2M Services
-    uuid: dd13649d-bbe3-4f79-9f11-242bb06b9d83
+    uuid: 7ae34182-6e5f-46ad-87fb-6483c59feb3a
     type_id: 14
-  - id: &sk_machine_to_machine_m2m_services_extra_territorial_use_in_europe 4449
+  - id: &sk_machine_to_machine_m2m_services_extra_territorial_use_in_europe 12469
     name: SK Machine To Machine M2M Services Extra_Territorial Use In Europe
-    uuid: cd1418d9-ba52-436e-b932-37e7c82372e6
+    uuid: 378343df-fa60-46c5-b689-0e6704bfb22e
     type_id: 14
-  - id: &sk_audiotext 5029
+  - id: &sk_audiotext 20576
     name: SK Audiotext
-    uuid: 3b6c1a23-c1ff-4942-8ba7-30db27d245a5
+    uuid: 83293b72-db39-44a5-ad68-ba79a9188fd9
     type_id: 14
-  - id: &sk_special_services 5320
+  - id: &sk_special_services 21496
     name: SK Special Services
-    uuid: 1b3d8dc6-ac5f-47d7-875b-5f2781c345ae
+    uuid: d045e103-d5dd-46cf-91e6-a495f5dd5d87
     type_id: 14
-  - id: &sk_harmonised_european_numbers 5394
+  - id: &sk_harmonised_european_numbers 21572
     name: SK Harmonised European Numbers
-    uuid: 874c4037-0a9e-4b46-8d0c-c6de2c35a98e
+    uuid: a443e0c1-10fc-4ca6-98a0-48074d0e6a46
     type_id: 14
-  - id: &sk_interactive_information_services_ 5511
+  - id: &sk_interactive_information_services_ 21723
     name: 'SK Interactive Information Services '
-    uuid: 5ff8f0b4-dc40-4256-9d1e-b5fe7059cc8b
+    uuid: bdb94f23-3b76-4cdd-8611-0687127388dc
     type_id: 14
-  - id: &sk_non_public_network_testing_services 5540
+  - id: &sk_non_public_network_testing_services 21753
     name: SK Non_Public Network Testing Services
-    uuid: 452b0a90-14e4-44fb-a4c5-811c2a5b8d08
+    uuid: 5f778251-890d-49a3-a25b-129b0e3879be
     type_id: 14
-  - id: &sk_information_and_assistance_services 5563
+  - id: &sk_information_and_assistance_services 21777
     name: SK Information And Assistance Services
-    uuid: 57da2402-eaae-4625-87be-a1296cbcde8a
+    uuid: 96e6b091-e841-46a8-b351-532cfd897b16
     type_id: 14
-  - id: &sk_emergency_services 5587
+  - id: &sk_emergency_services 21801
     name: SK Emergency Services
-    uuid: 381e2cf6-d29d-4b9f-970c-15e91d447ee4
+    uuid: d150a6ea-4fd3-4924-b907-0815a695130c
     type_id: 14
-  - id: &sk_regional_public_interest_services 5615
+  - id: &sk_regional_public_interest_services 21829
     name: SK Regional Public Interest Services
-    uuid: e8ae0f3d-5e9f-4d81-9498-55afe2fca051
+    uuid: 736d3dd2-cc9d-453a-9c96-428d0d847be8
     type_id: 14
-  - id: &sk_public_interest_services 5981
+  - id: &sk_public_interest_services 22635
     name: SK Public Interest Services
-    uuid: c57bafbe-5bad-4a6d-99de-f67115463053
+    uuid: 758372ac-4f59-42da-b93a-7e0a2b13691c
     type_id: 14
-  - id: &sk_public_data_networks_access 6025
+  - id: &sk_public_data_networks_access 22679
     name: SK Public Data Networks Access
-    uuid: c005768b-7645-493f-ab79-50271f2e40a6
+    uuid: d979cc45-2f57-4936-b771-f400c14e717b
     type_id: 14
-  - id: &sk_routing 7069
+  - id: &sk_routing 24542
     name: SK Routing
-    uuid: 47f0f581-084b-4258-b164-64cf988b3a13
+    uuid: a4f9d3a0-0377-444e-aab6-06fdb6653711
     type_id: 14
-  - id: &sk_voice_mail 7523
+  - id: &sk_voice_mail 38418
     name: SK Voice Mail
-    uuid: b06818a6-1dde-42b2-9825-25054f3ccf02
+    uuid: 09d02a76-767e-4219-ae09-40dbcb6bfe0a
     type_id: 14
-  - id: &sk_freephone_services 7572
+  - id: &sk_freephone_services 38521
     name: SK Freephone Services
-    uuid: b995dc41-9ea3-4be1-a27b-25fcc8d0ef91
+    uuid: e2e43eea-68d5-4252-8ce8-404938202d93
     type_id: 14
-  - id: &sk_dial_up_internet_access 7654
+  - id: &sk_dial_up_internet_access 39501
     name: SK Dial_Up Internet Access
-    uuid: c9eb0954-9189-4d57-83ef-3b335e7fa55d
+    uuid: 4d77edcd-19ff-412b-b056-4189b85d902b
     type_id: 14
-  - id: &sk_shared_cost_services 7668
+  - id: &sk_shared_cost_services 40535
     name: SK Shared Cost Services
-    uuid: a7718098-2e28-4574-8e90-c34d9b0f1953
+    uuid: 849460ba-9515-490f-940d-3a565bf6161a
     type_id: 14
-  - id: &sk_universal_access_number_uan 7688
+  - id: &sk_universal_access_number_uan 41049
     name: SK Universal Access Number Uan
-    uuid: c837b325-6b51-475a-9783-7b0983272bd0
+    uuid: 3b49a88f-cc16-4911-a45a-6cd93ce04da5
     type_id: 14
-  - id: &sk_direct_marketing_services 7790
+  - id: &sk_direct_marketing_services 41975
     name: SK Direct Marketing Services
-    uuid: f1d8932b-d677-444f-a9fb-5e37b4072085
+    uuid: 1987d9ba-9eab-4e8d-b8b2-9e3408a2d42a
     type_id: 14
-  - id: &sk_televoting_services 7797
+  - id: &sk_televoting_services 41992
     name: SK Televoting Services
-    uuid: 6ce9bad4-d78d-4420-9056-006451fbcda0
+    uuid: 01375df3-3274-497e-a85e-a2e3b50e8e76
     type_id: 14
-  - id: &sk_premium_rate_services 7838
+  - id: &sk_premium_rate_services 42083
     name: SK Premium Rate Services
-    uuid: 6cea52b9-00bf-408c-89e6-c593d65563fd
+    uuid: c3fc1a03-8bf9-466e-b80e-6e7603bf0c54
     type_id: 14
 # Mobile Networks
-  - id: &sk_o2_mobile 4984
+  - id: &sk_o2_mobile 20050
     name: SK O2 Mobile
-    uuid: 26157a7e-64f3-474c-a79a-b8242ba21239
+    uuid: 5ee5e0c8-aa8b-4ad2-bc8a-b9980520d55e
     type_id: 3
-  - id: &sk_vonage_mobile 4987
+  - id: &sk_vonage_mobile 20163
     name: SK Vonage Mobile
-    uuid: 9a4f9a4b-49e4-40b4-b66e-3a31dc052086
+    uuid: 8f03cbfb-8b73-4741-9bef-b19d9a495fa1
     type_id: 3
-  - id: &sk_bsg_mobile 4988
+  - id: &sk_bsg_mobile 20164
     name: SK Bsg Mobile
-    uuid: c2053bcd-b5fa-491f-b366-b9324cca93e1
+    uuid: d5a4b23c-ae38-40bf-84e1-0c22f2f30e46
     type_id: 3
-  - id: &sk_uniphone_mobile 4989
+  - id: &sk_uniphone_mobile 20165
     name: SK Uniphone Mobile
-    uuid: f58b3a6b-5f5b-4301-81d9-be49803fd941
+    uuid: 7c84fa61-02b1-4043-8203-14322f721c7c
     type_id: 3
-  - id: &sk_orange_mobile 4992
+  - id: &sk_orange_mobile 20191
     name: SK Orange Mobile
-    uuid: 1c7552fd-b2d7-4023-91b7-13e927d87cf7
+    uuid: 29a4624b-e06c-419b-a424-69056ad62dbc
     type_id: 3
-  - id: &sk_4ka_mobile 5005
+  - id: &sk_4ka_mobile 20339
     name: SK 4Ka Mobile
-    uuid: 9b3d21fb-2b7b-4973-803f-f0bfad4fa8fe
+    uuid: eaff6e25-d36f-415a-9454-4ee116f4cc4b
     type_id: 3
-  - id: &sk_zsr_mobile 5008
+  - id: &sk_zsr_mobile 20446
     name: SK Zsr Mobile
-    uuid: a389f22c-e561-4e91-a835-7f66a758a25b
+    uuid: 2abf5a69-bc71-43de-b426-fe671fec4f31
     type_id: 3
-  - id: &sk_telekom_mobile 7772
+  - id: &sk_telekom_mobile 41694
     name: SK Telekom Mobile
-    uuid: 3e014ae1-7722-4a12-81af-9639437970dc
+    uuid: 294eb3bf-af8a-4c77-9824-ca6395ed00bc
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -133,498 +237,498 @@ network_prefixes:
     prefix: '42148'
     number_min_length: 12
     number_max_length: 12
-    uuid: 408c76d6-ca83-401c-b16d-10074505af75
+    uuid: 24e80fe3-efe2-4426-b493-da48e4b8efc6
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_banska_bystrica_fixed
   - id: 62616
     prefix: '42151'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2902accf-4624-41d2-a6fa-0e148e0aaf49
+    uuid: bf52d0eb-a677-4177-9453-1f0df08554f8
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_presov_fixed
   - id: 71667
     prefix: '42152'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1737eb8c-3cd8-497e-a84d-3539c052dae0
+    uuid: 96acbb65-a3fe-45f3-a1c0-de988d761ca7
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_poprad_fixed
   - id: 73210
     prefix: '42154'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6fe19d2a-23d0-4274-b440-847d552f88d7
+    uuid: 82cd9acb-4c34-4044-a8a2-ceeba06a317a
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_bardejov_fixed
   - id: 76558
     prefix: '42153'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3fa952cc-7cd7-4ee6-bf8c-4c617596e421
+    uuid: 7180abda-ed0b-4acb-8c5a-39eeced82809
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_spisska_nova_ves_fixed
   - id: 78134
     prefix: '42155'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3d6da80d-3900-4098-98e1-6be77b8ceed7
+    uuid: 424065cd-e1a8-4fd1-bb83-86b013075941
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_kosice_fixed
   - id: 87926
     prefix: '42156'
     number_min_length: 12
     number_max_length: 12
-    uuid: 744301a5-f1f6-473b-a3ef-ba3e2e84bf16
+    uuid: cfe15883-5c70-4b8e-a9bb-9f1d8b9f9f26
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_michalovce_fixed
   - id: 90277
     prefix: '42157'
     number_min_length: 12
     number_max_length: 12
-    uuid: a6a3af71-8250-4a66-beb5-f3ef3945da29
+    uuid: 77983eb1-33cb-473a-af8c-3707e3765a58
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_humenne_fixed
   - id: 93102
     prefix: '42158'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4525a434-ced2-4527-baa5-a99e6b18e7d4
+    uuid: 203824db-bf87-4dc0-b682-c26afbfdc12b
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_roznava_fixed
   - id: 96139
     prefix: '421602'
     number_min_length: 12
     number_max_length: 12
-    uuid: 33afe5d4-f0a5-4368-b72f-b8a59534edc3
+    uuid: 0299d615-26d6-4bc0-858b-96e74a9ffb7a
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 126598
     prefix: '421650'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e666103-2fc1-40f5-9ead-cf1347868274
+    uuid: fd4be0d1-b2c7-45aa-a1a2-eb514116cf84
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 127136
     prefix: '421654'
     number_min_length: 12
     number_max_length: 12
-    uuid: 61c33425-72e3-47b0-a431-d0137f901a22
+    uuid: 6edf1819-148d-480c-9d1c-3132f914a4fd
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 136664
     prefix: '421651'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7500d927-5c32-4b42-85f9-9a48ace6057a
+    uuid: 9c162de1-820b-42f9-9fc2-bb512eea2c4e
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 137193
     prefix: '421652'
     number_min_length: 12
     number_max_length: 12
-    uuid: 921623d5-bee5-4a55-b6aa-d15503b5da0e
+    uuid: b007371d-cdd4-4bed-93a2-2c858aa2044b
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 137260
     prefix: '421653'
     number_min_length: 12
     number_max_length: 12
-    uuid: a8c3b46b-7b8b-4eae-ad04-83aba79e4289
+    uuid: 9c56f338-47c4-45f4-ab14-327e7d5d2b53
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 148822
     prefix: '421690'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0e51b23d-def2-4472-951d-57c6b57f44fd
+    uuid: 61537922-4ea9-4b30-8bff-adb6a26b71f6
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 148885
     prefix: '421691'
     number_min_length: 12
     number_max_length: 12
-    uuid: d851e12d-aa72-4864-9a07-a1edd497a0d1
+    uuid: f358cb20-30e9-4cd4-9989-f8ff1ab0ec08
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 149040
     prefix: '421692'
     number_min_length: 12
     number_max_length: 12
-    uuid: 653f2a3e-1fc6-4808-8b2a-b7e39f715ec7
+    uuid: f771fa37-a295-4539-9a4c-f926b192f992
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 149052
     prefix: '421693'
     number_min_length: 12
     number_max_length: 12
-    uuid: a45d511d-b0d9-4732-af9d-1b18aac09f6d
+    uuid: 52d3cf20-bd64-4b5f-ba7d-7d972c08c0b1
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 149076
     prefix: '421694'
     number_min_length: 12
     number_max_length: 12
-    uuid: c5b955be-3db6-40cc-8259-b7992fad8cd6
+    uuid: aed8170e-e33f-48c5-85ca-a76de5a64552
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 153113
     prefix: '421695'
     number_min_length: 12
     number_max_length: 12
-    uuid: fe782518-e035-40c5-8b08-6b23b30f290b
+    uuid: 8d4b9949-d305-43cc-858a-52fb657560ef
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 153530
     prefix: '421696'
     number_min_length: 12
     number_max_length: 12
-    uuid: 14eb13a9-cd80-4a2a-8d37-09c9289afa17
+    uuid: f060bdca-5d94-45c0-8e06-45d997105505
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_voip_fixed
   - id: 221953
     prefix: '42196'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3616ae82-7496-4978-98a6-9d16033e0314
+    uuid: 082ab0c4-00b0-405c-99e0-f8dea960047a
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_special_telecommunications_networks_fixed
   - id: 261199
     prefix: '4212'
     number_min_length: 12
     number_max_length: 12
-    uuid: a4f4e098-8fd0-4596-954a-3365a9df6657
+    uuid: ae270a50-4d6a-4b25-a7f0-b873c6358c89
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_bratislava_fixed
   - id: 321182
     prefix: '42131'
     number_min_length: 12
     number_max_length: 12
-    uuid: be13723d-d03d-4bac-8603-143b413bafcf
+    uuid: 9a01f5c9-f410-40d9-90f1-6509d7e2ab0f
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_dunajska_streda_fixed
   - id: 327289
     prefix: '42132'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9cf12975-d287-4e7c-8d4a-fdd4e9fb7f5f
+    uuid: 96e2c927-7d56-496c-9115-2bf29eb8a3ba
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_trencin_fixed
   - id: 337295
     prefix: '42133'
     number_min_length: 12
     number_max_length: 12
-    uuid: dfd9cb96-6120-4a84-b61c-ed53b51f132d
+    uuid: 4279b259-5cba-492e-a66c-b763e4c7bde0
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_trnava_fixed
   - id: 340484
     prefix: '42134'
     number_min_length: 12
     number_max_length: 12
-    uuid: 309b5ff4-693a-4ec2-90fc-2e71cf16a5b0
+    uuid: 1ee1cf6b-fbed-445e-9904-14c53354b48a
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_senica_fixed
   - id: 345950
     prefix: '42136'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1434d241-a033-4e41-9529-48461b968d03
+    uuid: f6dcf255-dec8-48d6-8855-7ec05bcc791b
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_levice_fixed
   - id: 347710
     prefix: '42138'
     number_min_length: 12
     number_max_length: 12
-    uuid: df05341c-3bb5-4315-b28b-b84195889418
+    uuid: 152c4338-23e8-4729-8ac7-176c725a172d
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_topolcany_fixed
   - id: 352246
     prefix: '42135'
     number_min_length: 12
     number_max_length: 12
-    uuid: 60c247d4-eaaf-4f58-83fd-3b52978faf71
+    uuid: a402edaa-4899-4541-acc3-48eb5824f45f
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_nove_zamky_fixed
   - id: 355763
     prefix: '42137'
     number_min_length: 12
     number_max_length: 12
-    uuid: faeeadc7-712d-43d8-b4c2-bcd5edb5fca1
+    uuid: 45b8d44a-8a15-4866-a1f5-3f5cbeb2c6f7
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_nitra_fixed
   - id: 362538
     prefix: '42141'
     number_min_length: 12
     number_max_length: 12
-    uuid: a945d4a9-1bce-44a1-85ce-d8ae991cceb3
+    uuid: 86f008ef-3909-4cb9-9447-29c05b072b30
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_zilina_fixed
   - id: 367947
     prefix: '42143'
     number_min_length: 12
     number_max_length: 12
-    uuid: e64a82a1-b45c-421c-9f92-8bb1a1784b9a
+    uuid: 5e1b63b7-b924-4877-b403-a2f74e14b131
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_martin_fixed
   - id: 370201
     prefix: '42144'
     number_min_length: 12
     number_max_length: 12
-    uuid: 42e86839-ab4a-4026-b670-ee1b0a87241b
+    uuid: e6cbd0d5-8915-4bf1-8c31-e3c0492dbdf3
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_liptovsky_mikulas_fixed
   - id: 377187
     prefix: '42142'
     number_min_length: 12
     number_max_length: 12
-    uuid: a0ec7b14-0189-401d-bbea-ad0ff81b3d0f
+    uuid: f72fb859-71f2-46f7-b32b-3635c133e71f
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_povazska_bystrica_fixed
   - id: 388640
     prefix: '42146'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1d941d92-13a1-4123-9dd2-5aa8c7efb47f
+    uuid: dc9744c6-24ba-44d7-97a3-9c6595c9588b
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_prievidza_fixed
   - id: 392626
     prefix: '42145'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1fe455c2-43a3-4e93-8846-703992222aa5
+    uuid: 9259c560-e01c-4e7b-b782-12f6c41c2b1e
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_zvolen_fixed
   - id: 399491
     prefix: '42147'
     number_min_length: 12
     number_max_length: 12
-    uuid: 34054675-4fb0-420a-9fd5-f23a68b8f246
+    uuid: a3adb462-b7b5-4c42-8531-1548ceff1711
     country_id: *sk
-    network_id: *sk_fixed
+    network_id: *sk_lucenec_fixed
 # Supplementary services Prefixes
   - id: 95277
     prefix: '421601'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2af8bf43-afaf-40fd-9ace-7122ebb367e7
+    uuid: 69352b76-4a4d-47cb-9c58-b61aa7d34357
     country_id: *sk
     network_id: *sk_internet_providers_access_points
   - id: 108596
     prefix: '42161'
     number_min_length: 15
     number_max_length: 15
-    uuid: e021a7c0-f178-4bcb-80cc-5e1c7b689ba3
+    uuid: aa4cc492-e0e3-489a-8865-702964a29a9b
     country_id: *sk
     network_id: *sk_machine_to_machine_m2m_services
   - id: 111475
     prefix: '42162'
     number_min_length: 15
     number_max_length: 15
-    uuid: eb2db12c-5c43-48e9-a8d9-9615ec78080b
+    uuid: 66890621-1c3e-4c98-8266-0aeca6a449c4
     country_id: *sk
     network_id: *sk_machine_to_machine_m2m_services
   - id: 117840
     prefix: '42163'
     number_min_length: 15
     number_max_length: 15
-    uuid: c5c1cf06-3de1-4f42-9970-5c22ada39400
+    uuid: 25347d53-e9c5-467d-b670-88d621218e74
     country_id: *sk
     network_id: *sk_machine_to_machine_m2m_services_extra_territorial_use_in_europe
   - id: 227369
     prefix: '42197'
     number_min_length: 12
     number_max_length: 12
-    uuid: b0c595f7-af93-4735-99cd-1567f57b878a
+    uuid: 64e78519-22ed-488e-9641-62966fdc33df
     country_id: *sk
     network_id: *sk_audiotext
   - id: 231739
     prefix: '42198'
     number_min_length: 12
     number_max_length: 12
-    uuid: 277dd0de-a244-4392-866a-86cbdbba1c32
+    uuid: f4a52211-6390-409f-91a4-75e74260a565
     country_id: *sk
     network_id: *sk_audiotext
   - id: 242499
     prefix: '4211'
     number_min_length: 6
     number_max_length: 9
-    uuid: 162a954a-9bc1-4d1b-97c5-075125b1435d
+    uuid: 70c31a89-e2e0-48f6-b264-a3c02bc8c4af
     country_id: *sk
     network_id: *sk_special_services
   - id: 242598
     prefix: '42111'
     number_min_length: 6
     number_max_length: 9
-    uuid: 1a443421-fcfd-4b38-9e37-6a21c7213132
+    uuid: 4f04af58-c509-4574-838f-69f851b5e33e
     country_id: *sk
     network_id: *sk_harmonised_european_numbers
   - id: 242817
     prefix: '42112'
     number_min_length: 8
     number_max_length: 8
-    uuid: 90fb43df-db8a-41b5-9a97-1e3b415eb58d
+    uuid: 9825ffd7-020c-4d64-a9bc-8dee5af9238d
     country_id: *sk
     network_id: *sk_interactive_information_services_
   - id: 242862
     prefix: '42113'
     number_min_length: 8
     number_max_length: 8
-    uuid: 279c9308-b2ce-4fa5-9ca3-0b4dd330a409
+    uuid: c3c15426-91ae-4956-a4d2-3029ce25cb9a
     country_id: *sk
     network_id: *sk_non_public_network_testing_services
   - id: 242912
     prefix: '42114'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0cc1d33d-3833-4e2d-bd47-9ed721fe946d
+    uuid: 259b4046-f21f-4b2c-967f-638997e41009
     country_id: *sk
     network_id: *sk_information_and_assistance_services
   - id: 242950
     prefix: '42115'
     number_min_length: 6
     number_max_length: 6
-    uuid: b8a9b92f-5138-45bb-9f05-0a6d3ea1275c
+    uuid: ec6d8dfa-8e56-499a-b63f-f097783b12e8
     country_id: *sk
     network_id: *sk_emergency_services
   - id: 243028
     prefix: '42116'
     number_min_length: 8
     number_max_length: 8
-    uuid: c6ae264a-f85e-4511-a43f-917cf90ee779
+    uuid: 490d98b4-295a-446d-895e-5df846c3b584
     country_id: *sk
     network_id: *sk_regional_public_interest_services
   - id: 243066
     prefix: '42117'
     number_min_length: 8
     number_max_length: 8
-    uuid: ccd1da1b-0fa5-4698-9e0d-470e712d525a
+    uuid: 0bd9aa0c-b35b-4879-a7bb-77cf248b73b9
     country_id: *sk
     network_id: *sk_regional_public_interest_services
   - id: 247287
     prefix: '42118'
     number_min_length: 8
     number_max_length: 8
-    uuid: 57562c0d-d17c-4941-b558-0ca06676e1b8
+    uuid: 387cc517-260f-4717-a125-8ed503005b85
     country_id: *sk
     network_id: *sk_public_interest_services
   - id: 247345
     prefix: '421019'
     number_min_length: 7
     number_max_length: 7
-    uuid: c40118e1-9d73-4fc3-a0cb-b185f5e453e8
+    uuid: 5d0544b6-b38f-4007-ab07-5bed2acb8cb4
     country_id: *sk
     network_id: *sk_public_data_networks_access
   - id: 258200
     prefix: '42199'
     number_min_length: 7
     number_max_length: 7
-    uuid: 9720ca97-5745-4272-8502-f88705fcdb21
+    uuid: 214ead0f-3d01-4a7e-9181-b41c3b2b124d
     country_id: *sk
     network_id: *sk_routing
   - id: 401753
     prefix: '421806'
     number_min_length: 12
     number_max_length: 12
-    uuid: 02e60e38-a753-4367-9044-649f1b94455f
+    uuid: 6b2516a3-2d33-47b7-a189-3319af040ed3
     country_id: *sk
     network_id: *sk_voice_mail
   - id: 403492
     prefix: '421800'
     number_min_length: 12
     number_max_length: 12
-    uuid: bc44fd46-bc38-4533-8e80-fa72655aaeaf
+    uuid: 4d09a88b-444d-447a-a11b-8ac9e432df5b
     country_id: *sk
     network_id: *sk_freephone_services
   - id: 412069
     prefix: '421807'
     number_min_length: 12
     number_max_length: 12
-    uuid: ffd6e09c-85ed-4fa6-83f6-ff2ca92f71b5
+    uuid: 3432cb97-059a-44da-9371-33fb08b77913
     country_id: *sk
     network_id: *sk_voice_mail
   - id: 412365
     prefix: '421808'
     number_min_length: 12
     number_max_length: 12
-    uuid: 26c131b1-7a8a-496c-8d1b-3339d2617c7a
+    uuid: 19cd0244-f924-43d1-8587-d5205a4662d5
     country_id: *sk
     network_id: *sk_voice_mail
   - id: 412994
     prefix: '421809'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5d585e76-2274-4a92-bb9d-b44b58637bce
+    uuid: 8f7a0294-fec6-4fe8-bb81-49c84117e5c4
     country_id: *sk
     network_id: *sk_voice_mail
   - id: 418000
     prefix: '4218190000'
     number_min_length: 12
     number_max_length: 12
-    uuid: bda2239f-2b58-467b-a310-b0674b654ee2
+    uuid: 3d403f2b-249b-4b97-8336-c91bd1f9f0ea
     country_id: *sk
     network_id: *sk_dial_up_internet_access
   - id: 428691
     prefix: '42185'
     number_min_length: 12
     number_max_length: 12
-    uuid: 16bdea9c-350d-4eee-8c14-7ead4168ecc0
+    uuid: 8a14c779-5464-4fe6-9ecb-9f3f923775e2
     country_id: *sk
     network_id: *sk_shared_cost_services
   - id: 436267
     prefix: '421850'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1d98a6c9-ea22-427b-83c9-d0fe3ef502fa
+    uuid: bf5f67fc-1add-41d5-97cf-0c7093bd2c00
     country_id: *sk
     network_id: *sk_universal_access_number_uan
   - id: 441097
     prefix: '42186'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9fb0eb4b-e746-4323-9abd-04bf58f6652e
+    uuid: 394a8adb-de38-4f97-9494-baf4957cfc2a
     country_id: *sk
     network_id: *sk_shared_cost_services
   - id: 443778
     prefix: '42187'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2b4eff1f-5dcd-4ba7-82d5-2faa201b4d4e
+    uuid: 4a5694b8-45b9-4c98-a1d1-6738fa4c1291
     country_id: *sk
     network_id: *sk_shared_cost_services
   - id: 444740
     prefix: '42189'
     number_min_length: 12
     number_max_length: 12
-    uuid: 543b733f-a0f4-4ed4-8dcd-69f55620058e
+    uuid: b2434d55-bbb5-4a96-bf78-e023dc049d03
     country_id: *sk
     network_id: *sk_shared_cost_services
   - id: 451386
     prefix: '421888'
     number_min_length: 12
     number_max_length: 12
-    uuid: f257b093-f31d-4090-86ea-711bba547d9a
+    uuid: 915e129e-0694-435d-bee4-daa09f51f28d
     country_id: *sk
     network_id: *sk_direct_marketing_services
   - id: 451397
     prefix: '42188'
     number_min_length: 12
     number_max_length: 12
-    uuid: ab782992-3cd9-4fb4-911e-568fb6a34f52
+    uuid: 8c4493e9-091a-4a4a-a326-2e08def095ac
     country_id: *sk
     network_id: *sk_shared_cost_services
   - id: 451763
     prefix: '421890'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9b33cd6e-77b8-47fa-85f0-fb17e02a328a
+    uuid: 8967b5c8-bb86-4706-af6d-f6d65e940b16
     country_id: *sk
     network_id: *sk_televoting_services
   - id: 454586
     prefix: '421900'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2437c89c-9184-45d6-966a-e68dca9a2871
+    uuid: 2b73fe88-dd10-4547-aa98-454193a38531
     country_id: *sk
     network_id: *sk_premium_rate_services
 # Mobile Prefixes
@@ -632,280 +736,280 @@ network_prefixes:
     prefix: '421940'
     number_min_length: 12
     number_max_length: 12
-    uuid: b81f067d-3f68-42b6-8e2c-5babc1fb8710
+    uuid: cdb29043-90d8-47f8-af02-664d98786a51
     country_id: *sk
     network_id: *sk_o2_mobile
   - id: 213854
     prefix: '421943001'
     number_min_length: 12
     number_max_length: 12
-    uuid: b5867cbe-b7f8-4372-92e3-82df9e4255f4
+    uuid: a0e83072-540f-49a3-853b-f7a0f9b667d1
     country_id: *sk
     network_id: *sk_vonage_mobile
   - id: 213855
     prefix: '421943002'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8443d7fa-ffda-4a6f-b48f-f0782379ecc0
+    uuid: 65bb32ec-d6ee-4eeb-8c0e-658c2bc40b82
     country_id: *sk
     network_id: *sk_bsg_mobile
   - id: 213856
     prefix: '42194312'
     number_min_length: 12
     number_max_length: 12
-    uuid: 65e97596-4402-4af8-8190-afdbbdc2b644
+    uuid: 093ffb78-1a2e-4a80-ab1b-af80f302ee91
     country_id: *sk
     network_id: *sk_uniphone_mobile
   - id: 213905
     prefix: '42194333'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6d1df8a0-6022-452f-a735-45a160c475f8
+    uuid: ff198331-c3c6-48ee-a689-261d3e7a686d
     country_id: *sk
     network_id: *sk_uniphone_mobile
   - id: 213944
     prefix: '421944'
     number_min_length: 12
     number_max_length: 12
-    uuid: daf626c5-28d7-4b74-a90d-f063907d55c9
+    uuid: 15793d01-09ac-41cd-8aa1-50bc373b8284
     country_id: *sk
     network_id: *sk_o2_mobile
   - id: 213956
     prefix: '421945'
     number_min_length: 12
     number_max_length: 12
-    uuid: 24a6a99b-fdf5-4397-b109-dd3fdbf15e97
+    uuid: f0c658bd-0673-4b9b-8ee4-30807aa2840b
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 214166
     prefix: '421947'
     number_min_length: 12
     number_max_length: 12
-    uuid: fa841a91-c6b5-49b1-af16-f0411aa3549d
+    uuid: 42b7feab-9a1b-435e-9c49-c3ae9137609b
     country_id: *sk
     network_id: *sk_o2_mobile
   - id: 214364
     prefix: '421948'
     number_min_length: 12
     number_max_length: 12
-    uuid: b6761da2-899d-482b-aa9d-a06a8a69c369
+    uuid: eb3c31f9-8795-4f07-bff3-a01dcfe3c0df
     country_id: *sk
     network_id: *sk_o2_mobile
   - id: 214422
     prefix: '421949'
     number_min_length: 12
     number_max_length: 12
-    uuid: 648be2d2-bbc1-4aa7-81d0-39e5c7187472
+    uuid: da790721-095d-4292-82ff-ce28d8cc469f
     country_id: *sk
     network_id: *sk_o2_mobile
   - id: 217416
     prefix: '421950'
     number_min_length: 12
     number_max_length: 12
-    uuid: c5d756a3-0368-483d-bb35-c217b389a794
+    uuid: f0dbad93-502a-4f04-a7bc-2493ba5a4d0b
     country_id: *sk
     network_id: *sk_4ka_mobile
   - id: 217428
     prefix: '421951'
     number_min_length: 12
     number_max_length: 12
-    uuid: 87adc682-c0ed-46d3-904a-154574478ab0
+    uuid: 49a03f1e-2408-4361-a554-0045bde2f099
     country_id: *sk
     network_id: *sk_4ka_mobile
   - id: 219049
     prefix: '421952'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5a92ade0-4548-45b8-bf15-7696a8df0aa7
+    uuid: 70a84329-eb14-4869-b808-162617ef7d1b
     country_id: *sk
     network_id: *sk_4ka_mobile
   - id: 221905
     prefix: '4219598'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c83202c-5d4b-4588-974a-76a0ef389d57
+    uuid: c9f14aeb-5a09-48f5-8484-23efff323a90
     country_id: *sk
     network_id: *sk_zsr_mobile
   - id: 447286
     prefix: '421903'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7bf73b00-8f45-4bc2-b7bb-24c8625243db
+    uuid: 84ea4ed8-15f1-455c-ad71-6333cd5f4ebd
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 454711
     prefix: '421901'
     number_min_length: 12
     number_max_length: 12
-    uuid: ca5568f4-75e0-47f9-81d1-b007d5510602
+    uuid: f85bea48-23e1-4ca4-a31a-f11518da44d1
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 454954
     prefix: '421902'
     number_min_length: 12
     number_max_length: 12
-    uuid: dbaccc98-bf84-4817-af8c-f3e4d910029b
+    uuid: 37c5b015-5f88-43ce-bfd9-052705591385
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 455871
     prefix: '421904'
     number_min_length: 12
     number_max_length: 12
-    uuid: 45ed87c6-6845-4dce-b1ee-68e7f760291d
+    uuid: 53df37f3-7543-476d-a736-1abe98fde45b
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 456599
     prefix: '421907'
     number_min_length: 12
     number_max_length: 12
-    uuid: e5ded7eb-8377-452b-9000-dcf223a43d62
+    uuid: 29688dc8-9baa-4c0f-883a-71c7ea3e610f
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 457261
     prefix: '421908'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5ab9a17f-5e49-4505-9928-24f47d3b0116
+    uuid: df4905ad-c29e-469c-91c4-336d86b41ffd
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 457534
     prefix: '4219094'
     number_min_length: 12
     number_max_length: 12
-    uuid: fb4fc08f-55b7-4d8e-9b84-6335b5d92abb
+    uuid: 5fe901e9-f044-45e2-a61f-5e51e28a2abf
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 457634
     prefix: '4219095'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e7648b1-3ae1-4657-9844-748d75601127
+    uuid: 65673301-2c4a-4eef-9f34-a4b47194f0cb
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 457734
     prefix: '4219096'
     number_min_length: 12
     number_max_length: 12
-    uuid: 768abf89-69e8-4435-b74a-a2eea1fcdeac
+    uuid: 4165aebc-b50a-4620-9787-0313e261d515
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 457833
     prefix: '4219097'
     number_min_length: 12
     number_max_length: 12
-    uuid: 06aa3160-3627-498d-9b61-8bf08b0e49a7
+    uuid: 8795040c-abaa-4490-a30b-43a8a975b269
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 457932
     prefix: '4219098'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8b9527fa-64ae-40bd-8e90-3c70506b2fed
+    uuid: 9167f82a-fd7f-4b83-ac34-76f31dae425c
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 458031
     prefix: '4219099'
     number_min_length: 12
     number_max_length: 12
-    uuid: 706dbc11-392f-4968-a5ff-ea3e1dbc654c
+    uuid: 015e4d93-2247-48dc-ba5d-7b81907d51e6
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 458518
     prefix: '421910'
     number_min_length: 12
     number_max_length: 12
-    uuid: 34f8d9eb-7bd6-4b25-aeb5-5886389da387
+    uuid: ebeee8dc-6841-4d79-9c03-7354e6884e2a
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 460339
     prefix: '421914'
     number_min_length: 12
     number_max_length: 12
-    uuid: 964ec017-0528-47b3-be68-195861366b77
+    uuid: 9e45e6fe-08ec-4ef0-badd-ca187501ff44
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 461707
     prefix: '421917'
     number_min_length: 12
     number_max_length: 12
-    uuid: a5569ddc-b4b4-48bc-84b8-ae58490eaa05
+    uuid: 34b8b4e9-04a7-4e34-8a51-cc5b36a71147
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 462679
     prefix: '421905'
     number_min_length: 12
     number_max_length: 12
-    uuid: bf61ae9e-1ce6-4840-b726-9c133c043f4d
+    uuid: c99469b4-ac18-4466-8d4e-8ca5bcc85e1a
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 462750
     prefix: '421906'
     number_min_length: 12
     number_max_length: 12
-    uuid: a07312c4-6b75-482a-a53f-5d30e506ebe4
+    uuid: f6849c59-176e-4aa8-8855-08321fd77436
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 463581
     prefix: '4219091'
     number_min_length: 12
     number_max_length: 12
-    uuid: 18047cee-295d-4a2d-b0e2-4f1901d4b238
+    uuid: 91af0d42-48c2-42bb-baba-d58a156f95dd
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 463582
     prefix: '4219092'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5470dff0-d8e9-451d-9683-c2a754dfedfb
+    uuid: 32beb062-8454-4280-aba1-a487d918674e
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 463682
     prefix: '4219093'
     number_min_length: 12
     number_max_length: 12
-    uuid: 689a631f-3d88-4d91-bfc2-50c134cd01d6
+    uuid: a3cbf86f-9114-484d-8bf1-adf66cf8b313
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 465123
     prefix: '421911'
     number_min_length: 12
     number_max_length: 12
-    uuid: 281385dc-6b5a-4904-9db2-a5a7822e1e11
+    uuid: 80ecc43a-a956-446c-ad19-8664adf92d4a
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 465642
     prefix: '421912'
     number_min_length: 12
     number_max_length: 12
-    uuid: a2ab6121-fda8-435a-8f80-e4161005966b
+    uuid: f565e1ff-22f7-4737-9828-d18ac712e9a8
     country_id: *sk
     network_id: *sk_telekom_mobile
   - id: 466839
     prefix: '421915'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36f81533-305a-4ece-9746-34396a82265b
+    uuid: af97bb38-45c6-4906-a7d5-62fdb407198d
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 467206
     prefix: '421916'
     number_min_length: 12
     number_max_length: 12
-    uuid: f38585ba-2c34-4581-a21c-9886db370245
+    uuid: a1b3c5c3-39ab-4cec-8c1e-4f2df61a8d17
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 467622
     prefix: '421918'
     number_min_length: 12
     number_max_length: 12
-    uuid: 91fb9599-5c9e-492a-b225-8481c0384a3a
+    uuid: b79f1840-65f6-4a9d-92ad-c1839ea27f6e
     country_id: *sk
     network_id: *sk_orange_mobile
   - id: 469806
     prefix: '421919'
     number_min_length: 12
     number_max_length: 12
-    uuid: aefc74a4-16ba-4fc8-ae14-45f81f07e0f5
+    uuid: 8195ee96-cebf-439c-8625-4bcaed8308bf
     country_id: *sk
     network_id: *sk_orange_mobile
 # Country code Prefixes
@@ -913,6 +1017,6 @@ network_prefixes:
     prefix: '421'
     number_min_length: 4
     number_max_length: 100
-    uuid: 2d63a4c8-0568-49df-8a41-8084cda56541
+    uuid: ec111780-1d0d-45df-9fc6-b895d5c8092a
     country_id: *sk
     network_id: null

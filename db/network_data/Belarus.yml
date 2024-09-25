@@ -1,50 +1,526 @@
 country_id: &by 20
 networks:
 # Supplementary services Networks
-  - id: &by_telematic_services 4387
+  - id: &by_telematic_services 10648
     name: BY Telematic Services
-    uuid: dc84f0d6-5e92-4a92-9a15-7516315c4c7d
+    uuid: 308f818b-1015-4991-a18d-4b027f6510bd
     type_id: 14
-  - id: &by_national_traffic_exchange_center 4830
+  - id: &by_national_traffic_exchange_center 17671
     name: BY National Traffic Exchange Center
-    uuid: 3903ceac-944b-4727-9fc6-84ea19a5606e
+    uuid: 759a4edb-b4fe-4913-8040-a8b6402eafe2
     type_id: 14
-  - id: &by_intelligent_network_services 4958
+  - id: &by_intelligent_network_services 19964
     name: BY Intelligent Network Services
-    uuid: 93c9326d-5a44-48c8-a3c7-c0fbf468f361
+    uuid: 939298c8-b3be-45f3-b435-cb52eb00569f
     type_id: 14
-  - id: &by_special_services 5194
+  - id: &by_special_services 21370
     name: BY Special Services
-    uuid: d1a7f75d-48d8-45d6-8b92-12e4d77658f7
+    uuid: 9536657f-71b5-4577-b0c0-4c57b8505a27
     type_id: 14
-  - id: &by_home_country_direct_ 7544
+  - id: &by_home_country_direct_ 38493
     name: 'BY Home Country Direct '
-    uuid: d2424b6b-41ba-4829-825e-9d54213fb585
+    uuid: b5fa7858-7bba-4ff4-ab82-a14a42491a42
     type_id: 14
-  - id: &by_freephone_services 7587
+  - id: &by_freephone_services 38536
     name: BY Freephone Services
-    uuid: f081d10a-447a-4e06-8c7e-39a0f35c20cf
+    uuid: 05601ebd-6ad4-4173-8a6e-413d8aab3b99
     type_id: 14
-  - id: &by_interactive_polling_services_free 7603
+  - id: &by_interactive_polling_services_free 38625
     name: BY Interactive Polling Services Free
-    uuid: c6ae6321-8b15-4107-a90c-2af314b93145
+    uuid: b31b0c3f-6747-4024-b872-146aecdeb9c0
     type_id: 14
-  - id: &by_interactive_polling_services_paid 7612
+  - id: &by_interactive_polling_services_paid 38642
     name: BY Interactive Polling Services Paid
-    uuid: 1a932efb-ced1-4301-8b7c-cdeda589de9d
+    uuid: e3bc7193-94c9-4482-b2ac-bbb200305944
     type_id: 14
-  - id: &by_international_free_services 7659
+  - id: &by_international_free_services 39721
     name: BY International Free Services
-    uuid: 9b96b490-8134-467b-9af5-294946518de0
+    uuid: ddd6c406-dd53-40d3-b7da-e5959617efa8
     type_id: 14
-  - id: &by_premium_rate_services 7869
+  - id: &by_premium_rate_services 42119
     name: BY Premium Rate Services
-    uuid: 8ded3655-8527-412a-b6fa-daa2ee3ad6ad
+    uuid: 0588475e-498b-4970-ae8a-832a90b4b407
     type_id: 14
 # Fixed Networks
-  - id: &by_fixed 7138
-    name: BY Fixed
-    uuid: c8ca9875-b80f-4236-a59d-371162fe2048
+  - id: &by_maryina_gorka_fixed 25408
+    name: BY Maryina Gorka Fixed
+    uuid: 7359316a-16bf-417f-a028-587384ba61f0
+    type_id: 12
+  - id: &by_cherven_fixed 25409
+    name: BY Cherven Fixed
+    uuid: b6af5e5a-5eb7-44cd-98ab-70a5a9855c59
+    type_id: 12
+  - id: &by_berezino_fixed 25410
+    name: BY Berezino Fixed
+    uuid: fb43e6c5-2b26-4527-a95a-e45e4510331d
+    type_id: 12
+  - id: &by_dzerzhinsk_fixed 25411
+    name: BY Dzerzhinsk Fixed
+    uuid: d67918f7-874c-4766-84c1-899658d14459
+    type_id: 12
+  - id: &by_stolbtsy_fixed 25412
+    name: BY Stolbtsy Fixed
+    uuid: bfd8f6a8-30c8-4cc9-b5e4-1c8b188d99b1
+    type_id: 12
+  - id: &by_uzda_fixed 25413
+    name: BY Uzda Fixed
+    uuid: 3b17007a-64ff-4c96-8059-6a52317e1959
+    type_id: 12
+  - id: &by_kopyl_fixed 25414
+    name: BY Kopyl Fixed
+    uuid: 9a57c8ab-a4c6-401c-8a41-1b49109fcc85
+    type_id: 12
+  - id: &by_soligorsk_fixed 25442
+    name: BY Soligorsk Fixed
+    uuid: f4aaafe6-9bb0-4e6b-8995-596b138886aa
+    type_id: 12
+  - id: &by_molodechno_fixed 25475
+    name: BY Molodechno Fixed
+    uuid: 594d49e6-9a36-490d-ab69-148f6ccd2be7
+    type_id: 12
+  - id: &by_borisov_fixed 25494
+    name: BY Borisov Fixed
+    uuid: 17e50144-9a17-4a4c-a64e-cf45880b16ae
+    type_id: 12
+  - id: &by_nesvizh_fixed 25496
+    name: BY Nesvizh Fixed
+    uuid: f3ddbb62-89ed-405e-b65e-c871d5bc8912
+    type_id: 12
+  - id: &by_vileyka_fixed 25498
+    name: BY Vileyka Fixed
+    uuid: 676e34ff-c32c-473a-9c4a-4ce666755484
+    type_id: 12
+  - id: &by_volozhin_fixed 25500
+    name: BY Volozhin Fixed
+    uuid: cbbd5426-c0ee-4a3a-ba32-99fbe59f1928
+    type_id: 12
+  - id: &by_logoysk_fixed 25503
+    name: BY Logoysk Fixed
+    uuid: 606718c1-7e71-4178-aced-f84133255671
+    type_id: 12
+  - id: &by_zhodino_fixed 25504
+    name: BY Zhodino Fixed
+    uuid: ac94e932-353e-42f9-8c6a-dddfb53a2c29
+    type_id: 12
+  - id: &by_smolevichi_fixed 25506
+    name: BY Smolevichi Fixed
+    uuid: 804743fa-7962-4d95-88e6-565a2349dadc
+    type_id: 12
+  - id: &by_starye_dorogi_fixed 25527
+    name: BY Starye Dorogi Fixed
+    uuid: 0c330413-9288-40f4-8e0f-fc5c45e23c9a
+    type_id: 12
+  - id: &by_kletsk_fixed 25530
+    name: BY Kletsk Fixed
+    uuid: eac800ff-36bc-4bf4-9fe3-2a5cfe24d4b8
+    type_id: 12
+  - id: &by_lyuban_fixed 25532
+    name: BY Lyuban Fixed
+    uuid: 05106d4d-3a0f-4970-a980-2b627284d36b
+    type_id: 12
+  - id: &by_slutsk_fixed 25534
+    name: BY Slutsk Fixed
+    uuid: 6855f9df-3842-4b34-af7b-6bc7c48badb6
+    type_id: 12
+  - id: &by_krupki_fixed 25537
+    name: BY Krupki Fixed
+    uuid: 609106c3-7470-4ab5-979a-2368a2ba3650
+    type_id: 12
+  - id: &by_myadel_fixed 25540
+    name: BY Myadel Fixed
+    uuid: ba2c1887-8995-4400-96ba-e3ef890ba31e
+    type_id: 12
+  - id: &by_berestovitsa_fixed 26330
+    name: BY Berestovitsa Fixed
+    uuid: 3a08b378-922b-43d8-ab5a-ca66d4f48e75
+    type_id: 12
+  - id: &by_volkovysk_fixed 26331
+    name: BY Volkovysk Fixed
+    uuid: 409542aa-b5d1-4ec5-9e3a-ffddc799ac6d
+    type_id: 12
+  - id: &by_svisloch_fixed 26332
+    name: BY Svisloch Fixed
+    uuid: d5e7ead3-da33-4a0f-9c45-08939c15f24c
+    type_id: 12
+  - id: &by_shchuchin_fixed 26333
+    name: BY Shchuchin Fixed
+    uuid: a9e351ad-cfc2-4e89-bf48-b1ad03607fc5
+    type_id: 12
+  - id: &by_mosty_fixed 26335
+    name: BY Mosty Fixed
+    uuid: fe4403db-7c80-42e9-9aba-d1c26a0fd549
+    type_id: 12
+  - id: &by_grodno_fixed 26336
+    name: BY Grodno Fixed
+    uuid: ead8e562-abed-4c54-81e0-9a2741d1c905
+    type_id: 12
+  - id: &by_lida_fixed 26384
+    name: BY Lida Fixed
+    uuid: 58c64c99-e6b6-4f34-9988-89edbdf9ba6c
+    type_id: 12
+  - id: &by_slonim_fixed 26423
+    name: BY Slonim Fixed
+    uuid: ae989ba7-3293-41f7-b378-db7f7b6a73ce
+    type_id: 12
+  - id: &by_dyatlovo_fixed 26426
+    name: BY Dyatlovo Fixed
+    uuid: ccbbc82f-ded3-4af1-b90b-9eb24578d809
+    type_id: 12
+  - id: &by_zelva_fixed 26429
+    name: BY Zelva Fixed
+    uuid: c0a07c2c-acdd-429d-9297-78b38fc5fdba
+    type_id: 12
+  - id: &by_ostrovets_fixed 26487
+    name: BY Ostrovets Fixed
+    uuid: c4a81028-f307-4104-ab8b-f7e608dfd5c8
+    type_id: 12
+  - id: &by_smorgon_fixed 26490
+    name: BY Smorgon Fixed
+    uuid: 47f09252-f343-46c0-98a4-8254345514cc
+    type_id: 12
+  - id: &by_oshmyany_fixed 26493
+    name: BY Oshmyany Fixed
+    uuid: ade8972b-99dd-4e5c-8f67-8926ea870a70
+    type_id: 12
+  - id: &by_voronovo_fixed 26496
+    name: BY Voronovo Fixed
+    uuid: 2785c58e-d432-4caf-af39-6604e0c03882
+    type_id: 12
+  - id: &by_ivye_fixed 26500
+    name: BY Ivye Fixed
+    uuid: 885bb80d-0168-4b70-b6f8-9c4bc678f748
+    type_id: 12
+  - id: &by_korelichi_fixed 26505
+    name: BY Korelichi Fixed
+    uuid: 6b42bf07-842d-43dc-92f5-93880f8952c0
+    type_id: 12
+  - id: &by_novogrudok_fixed 26507
+    name: BY Novogrudok Fixed
+    uuid: f0e3b3e7-f185-4997-bbc7-3152addd9bfb
+    type_id: 12
+  - id: &by_brest_fixed 26531
+    name: BY Brest Fixed
+    uuid: 25ea5ce7-e4f4-4e58-90d3-66fa3ccfe560
+    type_id: 12
+  - id: &by_baranovichi_fixed 26545
+    name: BY Baranovichi Fixed
+    uuid: 34505a5a-f6a1-479c-94e6-5f86b22428f6
+    type_id: 12
+  - id: &by_kamenets_fixed 26549
+    name: BY Kamenets Fixed
+    uuid: 3eea90d0-50e6-41d7-9e99-44bc6ab31142
+    type_id: 12
+  - id: &by_pruzhany_fixed 26551
+    name: BY Pruzhany Fixed
+    uuid: 57d28e27-9433-406a-bbed-6720646adeac
+    type_id: 12
+  - id: &by_lyakhovichi_fixed 26554
+    name: BY Lyakhovichi Fixed
+    uuid: 361e263c-421b-46d0-a7ff-ca730a40050a
+    type_id: 12
+  - id: &by_zhabinka_fixed 26575
+    name: BY Zhabinka Fixed
+    uuid: 450ef9c9-4c4a-49ca-a328-2b86d2466f4a
+    type_id: 12
+  - id: &by_kobrin_fixed 26577
+    name: BY Kobrin Fixed
+    uuid: 7604003e-7cd9-4539-a681-15fffd5b379b
+    type_id: 12
+  - id: &by_bereza_fixed 26579
+    name: BY Bereza Fixed
+    uuid: dee08d19-0615-4959-a0b6-3540ab99c692
+    type_id: 12
+  - id: &by_drogichin_fixed 26581
+    name: BY Drogichin Fixed
+    uuid: 94476dd8-3caf-4cdb-9d04-8376c247c291
+    type_id: 12
+  - id: &by_ivatsevichi_fixed 26583
+    name: BY Ivatsevichi Fixed
+    uuid: 89d00b75-4e5e-44d0-8781-59f979e40223
+    type_id: 12
+  - id: &by_gantsevichi_fixed 26584
+    name: BY Gantsevichi Fixed
+    uuid: b8713b68-6762-4dad-ba02-1aec5247f442
+    type_id: 12
+  - id: &by_luninets_fixed 26586
+    name: BY Luninets Fixed
+    uuid: 683a0c1e-2344-40b1-a4a8-3ce3920f5d92
+    type_id: 12
+  - id: &by_pinsk_fixed 26589
+    name: BY Pinsk Fixed
+    uuid: 18f32cb7-97c4-44e6-a15e-9df12e3d86db
+    type_id: 12
+  - id: &by_malorita_fixed 26593
+    name: BY Malorita Fixed
+    uuid: 10b14582-87fa-4584-8856-41814b14043c
+    type_id: 12
+  - id: &by_ivanovo_fixed 26596
+    name: BY Ivanovo Fixed
+    uuid: 13451a0a-ed78-41df-9634-279542d50404
+    type_id: 12
+  - id: &by_stolin_fixed 26602
+    name: BY Stolin Fixed
+    uuid: a5c31551-f8e0-4f70-ada0-8b18c8c3633f
+    type_id: 12
+  - id: &by_minsk_fixed 26673
+    name: BY Minsk Fixed
+    uuid: 7bc63ae2-a833-48ef-8c32-18e7fda53d41
+    type_id: 12
+  - id: &by_vitebsk_fixed 27215
+    name: BY Vitebsk Fixed
+    uuid: 9f009ba1-27e4-4841-a860-afc311654763
+    type_id: 12
+  - id: &by_shumilino_fixed 27383
+    name: BY Shumilino Fixed
+    uuid: 781a61ca-8cf4-4124-bae1-9e1c05383b75
+    type_id: 12
+  - id: &by_beshenkovichi_fixed 27385
+    name: BY Beshenkovichi Fixed
+    uuid: fed3beb4-8d43-4983-a64d-fcf23dcb8649
+    type_id: 12
+  - id: &by_lepel_fixed 27387
+    name: BY Lepel Fixed
+    uuid: 07a21855-26e9-4fb5-b5e2-a2029b4c82d5
+    type_id: 12
+  - id: &by_chashniki_fixed 27390
+    name: BY Chashniki Fixed
+    uuid: f476af11-374b-47d1-92bc-690d6be2cd17
+    type_id: 12
+  - id: &by_senno_fixed 27393
+    name: BY Senno Fixed
+    uuid: a25b2d1e-b178-4f8a-ac8c-500798c3bf1e
+    type_id: 12
+  - id: &by_tolochin_fixed 27395
+    name: BY Tolochin Fixed
+    uuid: 63793515-b03b-4580-99a7-fb246836d736
+    type_id: 12
+  - id: &by_dubrovno_fixed 27397
+    name: BY Dubrovno Fixed
+    uuid: 3a55698d-e521-476a-9e12-7d95bcecb6cf
+    type_id: 12
+  - id: &by_liozno_fixed 27400
+    name: BY Liozno Fixed
+    uuid: d549a561-940c-4993-9861-d50743b69ef9
+    type_id: 12
+  - id: &by_gorodok_fixed 27402
+    name: BY Gorodok Fixed
+    uuid: 2f1f53e2-3b49-4760-9394-65b4801ec4eb
+    type_id: 12
+  - id: &by_polotsk_fixed 27404
+    name: BY Polotsk Fixed
+    uuid: ee825aa1-0a38-4fb9-9803-abfe808f7e00
+    type_id: 12
+  - id: &by_glusk_fixed 27857
+    name: BY Glusk Fixed
+    uuid: b7ebe2be-6618-4c97-80ba-804406fd142a
+    type_id: 12
+  - id: &by_byhov_fixed 27859
+    name: BY Byhov Fixed
+    uuid: 210ab552-0c4c-4b63-baf5-528d05e9a7e0
+    type_id: 12
+  - id: &by_belynichi_fixed 27862
+    name: BY Belynichi Fixed
+    uuid: 638e6b45-da00-409d-aa72-fd387b8e0a6c
+    type_id: 12
+  - id: &by_gorki_fixed 27866
+    name: BY Gorki Fixed
+    uuid: 6742dd63-dab5-4948-8b93-201f73710049
+    type_id: 12
+  - id: &by_krugloye_fixed 27870
+    name: BY Krugloye Fixed
+    uuid: 4a2dadc5-e552-4b11-96c3-d594f75e0915
+    type_id: 12
+  - id: &by_osipovichi_fixed 27874
+    name: BY Osipovichi Fixed
+    uuid: ebbf6214-1556-4f38-b8f7-c5c8592a6c97
+    type_id: 12
+  - id: &by_klichev_fixed 27878
+    name: BY Klichev Fixed
+    uuid: e118ab6f-37c7-4d83-b08c-95347bb42d91
+    type_id: 12
+  - id: &by_kirovsk_fixed 27882
+    name: BY Kirovsk Fixed
+    uuid: 1fbdd0e5-eff8-4661-a382-05361b2f8e0a
+    type_id: 12
+  - id: &by_krasnopolye_fixed 27886
+    name: BY Krasnopolye Fixed
+    uuid: debc2b74-c1b7-4207-b2fd-20393ec92a21
+    type_id: 12
+  - id: &by_shklov_fixed 27890
+    name: BY Shklov Fixed
+    uuid: fdca88ba-ec99-474b-ad34-ce84102831a5
+    type_id: 12
+  - id: &by_verhnedvinsk_fixed 28019
+    name: BY Verhnedvinsk Fixed
+    uuid: 79e50cc9-2299-4ffd-85d3-dbc8c39d62e0
+    type_id: 12
+  - id: &by_miory_fixed 28021
+    name: BY Miory Fixed
+    uuid: 85785b57-87c3-4810-99e7-6d5e62662834
+    type_id: 12
+  - id: &by_braslav_fixed 28023
+    name: BY Braslav Fixed
+    uuid: cd9deb32-c6e1-41bd-bed8-36ac0ac45ab0
+    type_id: 12
+  - id: &by_sharkovshchina_fixed 28025
+    name: BY Sharkovshchina Fixed
+    uuid: c27db157-dd40-4d87-96bb-e6524298bcee
+    type_id: 12
+  - id: &by_postavy_fixed 28027
+    name: BY Postavy Fixed
+    uuid: e18aae35-1ffc-4833-a120-7d114e5b232f
+    type_id: 12
+  - id: &by_glubokoye_fixed 28028
+    name: BY Glubokoye Fixed
+    uuid: a0052465-bfd1-4fe9-bdfe-474c49330ef4
+    type_id: 12
+  - id: &by_dokshitsy_fixed 28030
+    name: BY Dokshitsy Fixed
+    uuid: 17ef9338-bb06-437a-b0cb-2b3519aa1050
+    type_id: 12
+  - id: &by_ushachi_fixed 28032
+    name: BY Ushachi Fixed
+    uuid: 94520790-c058-4743-8a3f-0ee402b60f74
+    type_id: 12
+  - id: &by_rossony_fixed 28034
+    name: BY Rossony Fixed
+    uuid: 1fe8c3a6-c084-47e6-bcb7-ab5d422eddb3
+    type_id: 12
+  - id: &by_orsha_fixed 28036
+    name: BY Orsha Fixed
+    uuid: b292f163-4b60-4ac6-8751-56c6459e19bd
+    type_id: 12
+  - id: &by_mogilev_fixed 28092
+    name: BY Mogilev Fixed
+    uuid: 2a418c1b-ca5e-42a3-b8e5-10f6f7923d90
+    type_id: 12
+  - id: &by_mstislavl_fixed 28098
+    name: BY Mstislavl Fixed
+    uuid: 3a961ad4-046a-4eb7-acc0-89e535c7b98a
+    type_id: 12
+  - id: &by_krichev_fixed 28100
+    name: BY Krichev Fixed
+    uuid: 7d79824b-b23c-4d8a-85d3-c41929b94116
+    type_id: 12
+  - id: &by_chausy_fixed 28105
+    name: BY Chausy Fixed
+    uuid: ec22ddb3-5c39-45f1-9ae2-77eb6a4f243a
+    type_id: 12
+  - id: &by_cherikov_fixed 28110
+    name: BY Cherikov Fixed
+    uuid: b381a36a-5a25-45c3-9087-3864f6954288
+    type_id: 12
+  - id: &by_klimovichi_fixed 28115
+    name: BY Klimovichi Fixed
+    uuid: 7a9b8253-8142-4add-bce9-ae1206636fc0
+    type_id: 12
+  - id: &by_kostyukovichi_fixed 28120
+    name: BY Kostyukovichi Fixed
+    uuid: c5c71102-0632-4688-9ba8-65b62c05bdd1
+    type_id: 12
+  - id: &by_slavgorod_fixed 28125
+    name: BY Slavgorod Fixed
+    uuid: e2a5a940-e7b4-4f43-8211-a8828b16745b
+    type_id: 12
+  - id: &by_khotimsk_fixed 28129
+    name: BY Khotimsk Fixed
+    uuid: d3cad02d-e6e4-4016-8071-959f19e2e4ba
+    type_id: 12
+  - id: &by_dribin_fixed 28133
+    name: BY Dribin Fixed
+    uuid: 76ae6dfb-d074-46bd-afbd-087fe06c0cc3
+    type_id: 12
+  - id: &by_bobruysk_fixed 28136
+    name: BY Bobruysk Fixed
+    uuid: 255dc21a-c7ed-45dc-a24e-c9d1b62b908b
+    type_id: 12
+  - id: &by_rechitsa_fixed 28421
+    name: BY Rechitsa Fixed
+    uuid: 2930ab77-9a10-457a-9dab-aaad7453fac5
+    type_id: 12
+  - id: &by_svetlogorsk_fixed 28425
+    name: BY Svetlogorsk Fixed
+    uuid: 2de6e053-f2f7-4a39-af06-aaafad20c25c
+    type_id: 12
+  - id: &by_bragin_fixed 28431
+    name: BY Bragin Fixed
+    uuid: 7105d24a-31ee-45b5-a991-2034f9a21531
+    type_id: 12
+  - id: &by_kalinkovichi_fixed 28434
+    name: BY Kalinkovichi Fixed
+    uuid: 04829944-5745-486d-98b8-4c733d83ee83
+    type_id: 12
+  - id: &by_khoiniki_fixed 28437
+    name: BY Khoiniki Fixed
+    uuid: be76166b-94a2-405e-b72c-fa72675699f4
+    type_id: 12
+  - id: &by_loyev_fixed 28439
+    name: BY Loyev Fixed
+    uuid: 68c13bc8-cb02-40ae-85cb-bc6ab4983131
+    type_id: 12
+  - id: &by_petrikov_fixed 28449
+    name: BY Petrikov Fixed
+    uuid: d78cd962-3b57-4ace-8c82-7ec54355abc2
+    type_id: 12
+  - id: &by_zhitkovichi_fixed 28459
+    name: BY Zhitkovichi Fixed
+    uuid: 23cb4b80-6a60-4dc7-a783-237840bc95eb
+    type_id: 12
+  - id: &by_yelsk_fixed 28464
+    name: BY Yelsk Fixed
+    uuid: 0629d433-09b2-45f3-84ae-6cc9f047b573
+    type_id: 12
+  - id: &by_narovlya_fixed 28468
+    name: BY Narovlya Fixed
+    uuid: 39ec4138-8dad-427d-8ae3-7cad8bfd76c4
+    type_id: 12
+  - id: &by_lelchitsy_fixed 28472
+    name: BY Lelchitsy Fixed
+    uuid: 67de332b-5f09-4639-b7ba-577af64b1114
+    type_id: 12
+  - id: &by_oktyabrskiy_fixed 28475
+    name: BY Oktyabrskiy Fixed
+    uuid: 0ae735e4-6b2e-4dd5-8288-c6cb0e9c9368
+    type_id: 12
+  - id: &by_mozyr_fixed 28486
+    name: BY Mozyr Fixed
+    uuid: 6af71349-bc56-4622-b556-2bcddaabfb32
+    type_id: 12
+  - id: &by_gomel_fixed 28797
+    name: BY Gomel Fixed
+    uuid: a7191188-3001-40e7-aca6-00169e2c058b
+    type_id: 12
+  - id: &by_vetka_fixed 28843
+    name: BY Vetka Fixed
+    uuid: 5526860a-4f15-4eb9-834e-5cb5985d4f94
+    type_id: 12
+  - id: &by_chechersk_fixed 28848
+    name: BY Chechersk Fixed
+    uuid: bed82235-c0c8-4566-bdfd-e4f84c3331c7
+    type_id: 12
+  - id: &by_dobrush_fixed 28852
+    name: BY Dobrush Fixed
+    uuid: 0042f330-3e65-4cb7-9084-b78126b38b1a
+    type_id: 12
+  - id: &by_zhlobin_fixed 28856
+    name: BY Zhlobin Fixed
+    uuid: 0084c540-6232-427e-adb1-4ca17086928b
+    type_id: 12
+  - id: &by_budo_koshelevo_fixed 28863
+    name: BY Budo_Koshelevo Fixed
+    uuid: 91b8db91-af58-461b-9c21-26b5fe7f3e82
+    type_id: 12
+  - id: &by_korma_fixed 28866
+    name: BY Korma Fixed
+    uuid: 73043316-283f-4cdc-84cf-ab1afefc86e7
+    type_id: 12
+  - id: &by_rogachev_fixed 28870
+    name: BY Rogachev Fixed
+    uuid: 383ac901-1d47-4106-a0bd-44dc3bda7702
+    type_id: 12
+  - id: &by_data_network_access_services_fixed 28964
+    name: BY Data Network Access Services Fixed
+    uuid: 608597d9-3e15-456a-94b2-43a0540cce1a
     type_id: 12
 network_prefixes:
 # Supplementary services Prefixes
@@ -52,70 +528,70 @@ network_prefixes:
     prefix: '375602'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3d920bd8-1cba-4d15-a467-c4f255733360
+    uuid: 9cfbc893-09e6-4627-b11b-93e7891bce37
     country_id: *by
     network_id: *by_telematic_services
   - id: 183421
     prefix: '375740'
     number_min_length: 13
     number_max_length: 13
-    uuid: 60bbc6f8-89cd-4d7d-a2a2-f8b29e369256
+    uuid: 9a909ddb-d44a-4b4b-b8f5-4ca0ce40f3be
     country_id: *by
     network_id: *by_national_traffic_exchange_center
   - id: 209216
     prefix: '375805'
     number_min_length: 13
     number_max_length: 13
-    uuid: 7d271ad7-1f0a-4ebd-ba32-cfaff1017144
+    uuid: 0a15e500-c585-40af-9b9b-623c022569b4
     country_id: *by
     network_id: *by_intelligent_network_services
   - id: 242362
     prefix: '3751'
     number_min_length: 6
     number_max_length: 6
-    uuid: b8ea3456-1f60-45dd-ad81-3db68ee56dfe
+    uuid: db961a61-32a7-48df-bed6-6f867c501787
     country_id: *by
     network_id: *by_special_services
   - id: 403463
     prefix: '375800'
     number_min_length: 9
     number_max_length: 9
-    uuid: cf7dc061-8b72-4239-a9d5-274d9447d5c4
+    uuid: eec31db5-c0ce-49e0-965a-4530a0132d14
     country_id: *by
     network_id: *by_home_country_direct_
   - id: 403514
     prefix: '375801'
     number_min_length: 13
     number_max_length: 13
-    uuid: b38a69ee-029d-4431-80f2-4f2b9a1656ad
+    uuid: 8b38bb9b-e587-4793-bb88-9d74a4dcf0d0
     country_id: *by
     network_id: *by_freephone_services
   - id: 404888
     prefix: '375803'
     number_min_length: 13
     number_max_length: 13
-    uuid: 7735049a-4b02-401f-a844-faf06e1ed686
+    uuid: 12c939ba-b440-4d13-a0bf-90dab8a10e41
     country_id: *by
     network_id: *by_interactive_polling_services_free
   - id: 406402
     prefix: '375810'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8dc9d438-ac05-4e84-b9dc-e9fd021f53da
+    uuid: 849dfe1b-142e-4dbd-b98c-524943831e9b
     country_id: *by
     network_id: *by_interactive_polling_services_paid
   - id: 419596
     prefix: '375820'
     number_min_length: 14
     number_max_length: 14
-    uuid: a2a6934f-1c15-43bf-b005-87f447f0128b
+    uuid: 7f915ec6-4434-45ff-b4cc-6b878f0ccc47
     country_id: *by
     network_id: *by_international_free_services
   - id: 454947
     prefix: '375902'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8edba83c-7ba3-4cd3-a67e-aa85c992912e
+    uuid: 61577665-d313-4d1c-ae0e-eb34149ecea5
     country_id: *by
     network_id: *by_premium_rate_services
 # Country code Prefixes
@@ -123,7 +599,7 @@ network_prefixes:
     prefix: '375'
     number_min_length: 4
     number_max_length: 100
-    uuid: 095f91a2-8e90-4de0-85e4-524303b3aa47
+    uuid: 18578920-bb20-4070-923c-b80d839b9c53
     country_id: *by
     network_id: null
 # Fixed Prefixes
@@ -131,839 +607,839 @@ network_prefixes:
     prefix: '3751713'
     number_min_length: 12
     number_max_length: 12
-    uuid: b8c74f1c-d58e-4287-9fe2-c99503662e7b
+    uuid: 2e724d21-f50d-4d04-ada2-7b13bc6bd4b0
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_maryina_gorka_fixed
   - id: 260333
     prefix: '3751714'
     number_min_length: 12
     number_max_length: 12
-    uuid: 60aebf6e-ce74-458d-855b-2bf3a1be491d
+    uuid: 32c645f3-1ed1-4189-94e2-e6e430aee49f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_cherven_fixed
   - id: 260334
     prefix: '3751715'
     number_min_length: 12
     number_max_length: 12
-    uuid: 88e08418-cf53-4dba-b661-08e92c941730
+    uuid: 96b0d846-ce55-458d-b6d0-a1bb194bb788
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_berezino_fixed
   - id: 260335
     prefix: '3751716'
     number_min_length: 12
     number_max_length: 12
-    uuid: c8ad8b02-b007-49de-9177-9988fd79ed11
+    uuid: 4325edb3-cf5a-4b96-9ada-b8a79f6db9e1
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_dzerzhinsk_fixed
   - id: 260336
     prefix: '3751717'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1a2f2a26-7c1f-41d2-87dd-f38b6ac5a656
+    uuid: 66a35913-c3e1-4f17-a50e-40c80c2911a3
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_stolbtsy_fixed
   - id: 260337
     prefix: '3751718'
     number_min_length: 12
     number_max_length: 12
-    uuid: a107c3a4-09ca-4df2-b2f8-1e722df57d86
+    uuid: a0e40bfe-4cb1-4f6f-88e2-ad0dbf8a6b0f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_uzda_fixed
   - id: 260338
     prefix: '3751719'
     number_min_length: 12
     number_max_length: 12
-    uuid: 94d965e4-4010-4e53-bb66-1297b0c58ef9
+    uuid: 0208d957-a1e5-43f6-9e84-45731d734369
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_kopyl_fixed
   - id: 260373
     prefix: '375174'
     number_min_length: 12
     number_max_length: 12
-    uuid: 276d8d24-d3ce-4f79-ac48-f818fa1fbb24
+    uuid: 1b6a875c-48aa-41b0-978b-750607ffeefd
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_soligorsk_fixed
   - id: 260425
     prefix: '375176'
     number_min_length: 12
     number_max_length: 12
-    uuid: 58d5daf4-7c72-442a-83d8-3b745bbc29a1
+    uuid: 5cf49300-6f8e-43f5-8160-25f82e338052
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_molodechno_fixed
   - id: 260446
     prefix: '375177'
     number_min_length: 12
     number_max_length: 12
-    uuid: 789137f9-b2fd-4e33-a7c0-c2bba2cbea82
+    uuid: 5122307b-3aca-4abc-a52c-a12f526ac9ea
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_borisov_fixed
   - id: 260450
     prefix: '3751770'
     number_min_length: 12
     number_max_length: 12
-    uuid: a5669aa3-5067-45ef-81c4-ecac4ca7876d
+    uuid: ba91971e-2df2-41ff-b8a4-ca3a8ee1e9f0
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_nesvizh_fixed
   - id: 260452
     prefix: '3751771'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9e824ba0-f68a-49c0-bab2-b96a11750878
+    uuid: b1776fc2-ba88-4382-b3b5-f4b097298eac
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_vileyka_fixed
   - id: 260454
     prefix: '3751772'
     number_min_length: 12
     number_max_length: 12
-    uuid: f73422e1-2b93-4adb-b50c-fff8c0c9ec80
+    uuid: 08d4c86f-6820-45c2-aa0b-112da6560b02
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_volozhin_fixed
   - id: 260457
     prefix: '3751774'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1ed85389-9185-4d28-8ad4-800c57ac51e2
+    uuid: 174bd4fc-06d2-4bcd-9e33-e806daaad9e4
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_logoysk_fixed
   - id: 260458
     prefix: '3751775'
     number_min_length: 12
     number_max_length: 12
-    uuid: 64b6eed8-339f-42f3-acd1-47c54c1f08f0
+    uuid: 90bfc98c-498c-4656-b858-cff2ef77032b
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_zhodino_fixed
   - id: 260460
     prefix: '3751776'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2db438d1-da95-4e98-b195-6e2e72667e39
+    uuid: b5e11ee7-341a-42d1-87e0-42e22bd70a5c
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_smolevichi_fixed
   - id: 260482
     prefix: '3751792'
     number_min_length: 12
     number_max_length: 12
-    uuid: fe8a1cc2-0be9-4c59-a09b-b250f0044428
+    uuid: ff415055-b9ab-40a7-80b9-e1f3d5b56d36
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_starye_dorogi_fixed
   - id: 260485
     prefix: '3751793'
     number_min_length: 12
     number_max_length: 12
-    uuid: f1b9b0a6-ae6f-429a-9dc4-922a28521483
+    uuid: b6da5e6b-79a2-44df-9e74-451397b89d4e
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_kletsk_fixed
   - id: 260487
     prefix: '3751794'
     number_min_length: 12
     number_max_length: 12
-    uuid: b37f9209-259b-469c-aec3-648b849715d6
+    uuid: bd7d4b3a-86ef-47aa-8eb1-ad6d841cfc50
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_lyuban_fixed
   - id: 260489
     prefix: '3751795'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7af81c0c-f46a-41b0-a79a-40d2b42a19f8
+    uuid: 7016cd51-f4b1-454e-995f-0266ea67a8f5
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_slutsk_fixed
   - id: 260492
     prefix: '3751796'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e763a32-78b4-4942-b929-52b99e011f0a
+    uuid: 2399fcc8-ef11-4b23-8258-c3a849e324ce
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_krupki_fixed
   - id: 260495
     prefix: '3751797'
     number_min_length: 12
     number_max_length: 12
-    uuid: ede96f1a-223f-485f-b6cd-12fd55d1f8a6
+    uuid: d39367a4-12fe-459a-8823-347ad9e4609c
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_myadel_fixed
   - id: 266224
     prefix: '3751511'
     number_min_length: 12
     number_max_length: 12
-    uuid: 77243e7e-9faf-42fd-a371-605f163c9958
+    uuid: bfd36c00-3fea-43bd-98e2-849ca2073275
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_berestovitsa_fixed
   - id: 266225
     prefix: '3751512'
     number_min_length: 12
     number_max_length: 12
-    uuid: 592bac7c-267d-4470-8f23-acaa6f0d19b9
+    uuid: 1a5ae503-eb93-495b-8fcd-b50b2e9563c1
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_volkovysk_fixed
   - id: 266227
     prefix: '3751513'
     number_min_length: 12
     number_max_length: 12
-    uuid: 89920dec-abd2-4648-bd80-bfbdede2aa24
+    uuid: 609db4da-cb91-4ec5-b3c4-022f08ee1ae3
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_svisloch_fixed
   - id: 266228
     prefix: '3751514'
     number_min_length: 12
     number_max_length: 12
-    uuid: e991f87c-4391-47a8-b2c6-fc4541a38992
+    uuid: 37dfe8fd-5533-454c-8839-d26fefffe8ff
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_shchuchin_fixed
   - id: 266238
     prefix: '3751515'
     number_min_length: 12
     number_max_length: 12
-    uuid: 11fad518-2d42-4b22-8a9b-f61676ea15e5
+    uuid: c4e425fe-7620-4722-a95d-5787f30a6c68
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_mosty_fixed
   - id: 266242
     prefix: '375152'
     number_min_length: 12
     number_max_length: 12
-    uuid: 722f6a31-45e6-4cac-af35-9c4b6fefae43
+    uuid: fee2bb83-91b8-4d2c-988e-6fc75768ca5c
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_grodno_fixed
   - id: 266328
     prefix: '375154'
     number_min_length: 12
     number_max_length: 12
-    uuid: e6e989ff-b76d-4510-a87c-92c133f947e0
+    uuid: d5e2ce45-bc32-4911-b6f2-a3b3f26fda30
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_lida_fixed
   - id: 266400
     prefix: '3751562'
     number_min_length: 12
     number_max_length: 12
-    uuid: ab8f6600-735c-400b-b893-df0197c59c8f
+    uuid: 83000530-36b8-4eee-af35-98b181f96d3e
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_slonim_fixed
   - id: 266404
     prefix: '3751563'
     number_min_length: 12
     number_max_length: 12
-    uuid: 040ef927-35c8-4e5e-94eb-de4eead55ea6
+    uuid: 33dda71e-6995-4107-9930-d4e35a0b9d6f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_dyatlovo_fixed
   - id: 266407
     prefix: '3751564'
     number_min_length: 12
     number_max_length: 12
-    uuid: de5f3737-ad45-465c-a28d-f3e0f4fa6635
+    uuid: 538e1243-2dde-46e7-a05e-f77bcac9d384
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_zelva_fixed
   - id: 266510
     prefix: '3751591'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6ad349ca-cd16-4a85-9476-c4dcb75540fa
+    uuid: e5f8dacb-10ec-4a9f-a89d-e5c97ec83152
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_ostrovets_fixed
   - id: 266513
     prefix: '3751592'
     number_min_length: 12
     number_max_length: 12
-    uuid: 21762c13-7782-4fcb-9189-4965b03b2c49
+    uuid: b83a7800-e991-44bd-8d78-21c03447edde
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_smorgon_fixed
   - id: 266517
     prefix: '3751593'
     number_min_length: 12
     number_max_length: 12
-    uuid: e40261eb-ea11-4032-9c48-de58595f6c99
+    uuid: 83be36cd-f575-4321-8e00-95984a047d3c
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_oshmyany_fixed
   - id: 266520
     prefix: '3751594'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6bd90a65-6a26-4d7e-b88a-f9a8edd8cb26
+    uuid: 0bf40df7-fa92-43a4-bd5b-49402ba1ff5d
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_voronovo_fixed
   - id: 266532
     prefix: '3751595'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c0d1102-63e4-44db-a033-f7eba609103d
+    uuid: ab4c3308-daa6-4b9f-bcdb-7fb11a285985
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_ivye_fixed
   - id: 266542
     prefix: '3751596'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6e9d1c3a-0574-4eef-ab4f-6407c15d835e
+    uuid: ea34cccb-b924-4fef-a380-ec82f710d7f7
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_korelichi_fixed
   - id: 266544
     prefix: '3751597'
     number_min_length: 12
     number_max_length: 12
-    uuid: c171eda5-a5c0-4e89-9abc-1553c051a937
+    uuid: 1e35ff4b-9db2-49bc-8885-769e0d66c336
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_novogrudok_fixed
   - id: 266784
     prefix: '375162'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c5922b0-d339-4635-b460-a0768f2bae95
+    uuid: 359d4059-b659-4185-878a-d001745dbb3f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_brest_fixed
   - id: 266799
     prefix: '375163'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1494eea5-af39-41a1-8109-35df8462160d
+    uuid: 697b7d8b-82b9-4b2f-b942-4556a56afb3d
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_baranovichi_fixed
   - id: 266805
     prefix: '3751631'
     number_min_length: 12
     number_max_length: 12
-    uuid: af1d8b47-f851-4a5e-9afc-a64542f21c96
+    uuid: fb7502ba-2adb-46d6-8103-baa5f1dd5d33
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_kamenets_fixed
   - id: 266807
     prefix: '3751632'
     number_min_length: 12
     number_max_length: 12
-    uuid: d02ca561-be71-420b-b54b-a286b67b7d15
+    uuid: 6d921e38-e56f-4c9c-a407-358e561a3ab5
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_pruzhany_fixed
   - id: 266810
     prefix: '3751633'
     number_min_length: 12
     number_max_length: 12
-    uuid: d9e4a12f-438c-409c-8d7b-041ffd298039
+    uuid: 25765669-fd5a-4f46-b857-e5f93e76bf91
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_lyakhovichi_fixed
   - id: 266835
     prefix: '3751641'
     number_min_length: 12
     number_max_length: 12
-    uuid: 661cbdba-51f7-479a-90a3-3489236221b6
+    uuid: 9268ce37-6e90-4423-af9c-fa7016477ed7
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_zhabinka_fixed
   - id: 266837
     prefix: '3751642'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4b206c95-2318-4356-8756-968d9ddb3996
+    uuid: 58e3cb82-edad-472c-beb5-7b6b1e0f4628
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_kobrin_fixed
   - id: 266839
     prefix: '3751643'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9b3efc74-800a-414f-b3e7-bb0e727438f9
+    uuid: bcb2c364-654c-42ca-99a6-97493b5e6e6f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_bereza_fixed
   - id: 266841
     prefix: '3751644'
     number_min_length: 12
     number_max_length: 12
-    uuid: 12ed23b3-7872-4968-a438-e2d394d5a6ae
+    uuid: 9b735649-3a88-470f-8293-f9b09d5cfc0b
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_drogichin_fixed
   - id: 266843
     prefix: '3751645'
     number_min_length: 12
     number_max_length: 12
-    uuid: e1d56754-355c-40c1-96d4-2171bc78f076
+    uuid: 1a9140cb-01ba-416d-8068-544ee300d2f0
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_ivatsevichi_fixed
   - id: 266844
     prefix: '3751646'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1e160346-8605-4a50-aa1f-0b761cdc8b30
+    uuid: bcce2181-8eaf-49b8-9321-8032cc06c827
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_gantsevichi_fixed
   - id: 266846
     prefix: '3751647'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3d983d92-50ee-49c5-8ff1-2daa1e648b95
+    uuid: 94ae240f-54ab-4663-87c0-831ad2bc74f4
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_luninets_fixed
   - id: 266849
     prefix: '375165'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3b12a371-5d4e-492a-87b2-e5f2da670657
+    uuid: 0deae9c9-bbac-492a-839b-d9fbc91b7493
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_pinsk_fixed
   - id: 266853
     prefix: '3751651'
     number_min_length: 12
     number_max_length: 12
-    uuid: 06e35ed9-2a3f-4396-b54d-d693117649d6
+    uuid: b99811d7-c067-4f1f-b9c6-5235b6c18aea
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_malorita_fixed
   - id: 266856
     prefix: '3751652'
     number_min_length: 12
     number_max_length: 12
-    uuid: 71202afb-5d37-416b-b8c7-68cb43c76cb2
+    uuid: 931c256b-ac13-4082-b4d8-55681182ce96
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_ivanovo_fixed
   - id: 266862
     prefix: '3751655'
     number_min_length: 12
     number_max_length: 12
-    uuid: 242ce143-282b-477d-993b-a18f3db2cc50
+    uuid: 8701205d-9bd9-4a78-9fa9-b85917059034
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_stolin_fixed
   - id: 266940
     prefix: '37517'
     number_min_length: 12
     number_max_length: 12
-    uuid: ef3463b6-b2bf-4581-88fd-1f92da7c3890
+    uuid: 9be304ad-17df-4101-9965-fdac347d4e9b
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_minsk_fixed
   - id: 271754
     prefix: '375212'
     number_min_length: 12
     number_max_length: 12
-    uuid: 75ec792b-82d5-4eef-9391-ba5aedfaa28a
+    uuid: fda0e239-a3a4-4231-9b6a-622cd3f2727e
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_vitebsk_fixed
   - id: 275024
     prefix: '3752130'
     number_min_length: 12
     number_max_length: 12
-    uuid: d726eb1b-f634-489e-9540-ed76dd466481
+    uuid: 992792db-6810-4a58-b2e8-8e19fffb9a5f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_shumilino_fixed
   - id: 275026
     prefix: '3752131'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9435c235-1663-409a-b9ec-11a8c05cfdd6
+    uuid: 96d6a6d9-6483-4c0d-99c3-6688d7e44dc4
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_beshenkovichi_fixed
   - id: 275028
     prefix: '3752132'
     number_min_length: 12
     number_max_length: 12
-    uuid: 267238bb-7a0d-40be-89b4-326d101e373d
+    uuid: 593f37dd-fc28-40a2-9002-fe5f7ddf00e5
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_lepel_fixed
   - id: 275031
     prefix: '3752133'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e15d749-5c0b-4201-88be-9988c7fb9006
+    uuid: 2a403eef-260f-4828-b256-b891ce7e3641
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_chashniki_fixed
   - id: 275034
     prefix: '3752135'
     number_min_length: 12
     number_max_length: 12
-    uuid: 425d8895-8fc0-4a69-b661-15372ff7a1e1
+    uuid: a76b7df2-b856-46e5-b8ed-d46151f32557
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_senno_fixed
   - id: 275036
     prefix: '3752136'
     number_min_length: 12
     number_max_length: 12
-    uuid: b008f1ea-54d3-4352-b060-db57e9802bbb
+    uuid: c8b8ccd4-f70a-4a38-9611-fe3917ff691b
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_tolochin_fixed
   - id: 275038
     prefix: '3752137'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7c556c6e-e987-42dc-800d-9ab76a3f515b
+    uuid: e9933a8c-beb8-448e-9da5-0695b3f39b58
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_dubrovno_fixed
   - id: 275041
     prefix: '3752138'
     number_min_length: 12
     number_max_length: 12
-    uuid: c1d1a4a6-1253-4ba6-a50d-89f098deee1e
+    uuid: 35ec8d17-1529-4e00-b2f2-b160d94cb067
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_liozno_fixed
   - id: 275043
     prefix: '3752139'
     number_min_length: 12
     number_max_length: 12
-    uuid: d0e1b333-5eac-4329-8e49-3893b998e4f5
+    uuid: 041ae36a-2a18-40ea-97f7-cc912bfd68f6
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_gorodok_fixed
   - id: 275045
     prefix: '375214'
     number_min_length: 12
     number_max_length: 12
-    uuid: a2dbb02c-6aa3-4086-a67c-3605ffc35dcc
+    uuid: 04d4657c-a2ce-41db-b267-ede8766f9668
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_polotsk_fixed
   - id: 279455
     prefix: '3752230'
     number_min_length: 12
     number_max_length: 12
-    uuid: 033e565d-c32d-46c0-a633-04dbc8fbc4eb
+    uuid: 48d6f593-d3af-418f-b417-fe19b541a344
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_glusk_fixed
   - id: 279457
     prefix: '3752231'
     number_min_length: 12
     number_max_length: 12
-    uuid: ff3ebc04-2f5e-4665-85dc-30eb64b7d596
+    uuid: d068c82f-8fa1-455b-9b3b-2f9db98d253f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_byhov_fixed
   - id: 279460
     prefix: '3752232'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5bde6f2d-d581-4543-b132-2c45eb8eb114
+    uuid: b72a0001-bfaa-438b-9f73-f5a361545ad1
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_belynichi_fixed
   - id: 279464
     prefix: '3752233'
     number_min_length: 12
     number_max_length: 12
-    uuid: 79d22efc-a7e2-442f-a8c8-84b45eeaddc6
+    uuid: 25941758-f8e3-4035-bd4f-a64128eaa33e
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_gorki_fixed
   - id: 279468
     prefix: '3752234'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4817c5c2-d5f7-4400-bdcb-be58869f9830
+    uuid: 2fdb84d4-7996-4c83-a804-5e68377b0360
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_krugloye_fixed
   - id: 279472
     prefix: '3752235'
     number_min_length: 12
     number_max_length: 12
-    uuid: 32ffacf4-b143-4ed1-af61-fc04568dab66
+    uuid: de004c15-6957-4b0d-b757-cd92e8e727a6
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_osipovichi_fixed
   - id: 279476
     prefix: '3752236'
     number_min_length: 12
     number_max_length: 12
-    uuid: a1d4fe68-12ed-4d88-ab3a-b193ef35bb8c
+    uuid: 905e8813-dfa9-45b2-9e3e-4dc481baf457
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_klichev_fixed
   - id: 279480
     prefix: '3752237'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7342a8b3-1495-43ba-9ea4-07194127be11
+    uuid: b68fd54f-2ac4-40fc-85bd-5ae5491cafda
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_kirovsk_fixed
   - id: 279484
     prefix: '3752238'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1ad827b3-24eb-47fc-9b91-35b717f2024f
+    uuid: c9f2e1f6-86a0-41f6-9b6c-5191dc46081d
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_krasnopolye_fixed
   - id: 279488
     prefix: '3752239'
     number_min_length: 12
     number_max_length: 12
-    uuid: 63d78b96-37c8-4baa-bf29-cbca29a09b15
+    uuid: 72798a1b-2feb-4daa-bdc9-f65405eb3438
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_shklov_fixed
   - id: 282692
     prefix: '3752151'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2f1647a3-4a1f-47e8-9aec-9cd58d021f0a
+    uuid: 47c23995-ed4f-4177-bbdf-e5d15ca515e7
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_verhnedvinsk_fixed
   - id: 282694
     prefix: '3752152'
     number_min_length: 12
     number_max_length: 12
-    uuid: f1931993-cb69-48ae-bae6-c153d8bd19ab
+    uuid: 379dd168-b128-48a2-8a80-ba6f0239e6fb
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_miory_fixed
   - id: 282696
     prefix: '3752153'
     number_min_length: 12
     number_max_length: 12
-    uuid: d66a47da-66ae-4dcb-8489-c734fd52b576
+    uuid: 68213880-05bd-492e-803c-5eb97591e8f2
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_braslav_fixed
   - id: 282698
     prefix: '3752154'
     number_min_length: 12
     number_max_length: 12
-    uuid: c443106f-973c-40f8-a1ee-3ab5d9b3a462
+    uuid: 280d90da-04b5-4bc8-bf27-5440b76ab676
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_sharkovshchina_fixed
   - id: 282700
     prefix: '3752155'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5befe2b6-fd53-4cb7-a284-655eeef4e252
+    uuid: e6df2365-75ce-4ae2-a0ae-5a47fb3847bf
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_postavy_fixed
   - id: 282701
     prefix: '3752156'
     number_min_length: 12
     number_max_length: 12
-    uuid: 55bd7550-d5f2-41a2-bdb5-5c28e7df9b4a
+    uuid: 0c1afe9e-2b44-48da-8c71-a24f7f00e63b
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_glubokoye_fixed
   - id: 282703
     prefix: '3752157'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2286317a-43ce-4bf8-9971-61a61fe312cc
+    uuid: 0f4edc17-cdb5-482d-a022-9d20d77aa99d
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_dokshitsy_fixed
   - id: 282705
     prefix: '3752158'
     number_min_length: 12
     number_max_length: 12
-    uuid: dab3e8a7-99f8-451c-b5cc-371b9c567314
+    uuid: e8f0d193-ca0d-4789-917c-a775d62a9f81
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_ushachi_fixed
   - id: 282707
     prefix: '3752159'
     number_min_length: 12
     number_max_length: 12
-    uuid: dc0ed9f7-57b3-4ca0-83b2-43613c350080
+    uuid: 772fac44-1502-4d43-9674-c5e3499a3007
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_rossony_fixed
   - id: 282709
     prefix: '375216'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0bace9f0-be76-44e4-a175-c076635fb953
+    uuid: 3ddcbc2c-0d1f-4348-9948-231066fbaefc
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_orsha_fixed
   - id: 283772
     prefix: '375222'
     number_min_length: 12
     number_max_length: 12
-    uuid: 540ddc55-499b-477f-ada6-444cce1c430a
+    uuid: 3c779ae5-d8ba-4fc9-97af-902509ac9ccd
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_mogilev_fixed
   - id: 283900
     prefix: '3752240'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9066782e-4f86-465b-8691-671799598224
+    uuid: 297904d5-1fd3-4fa7-b7ef-76f8108ec7bd
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_mstislavl_fixed
   - id: 283903
     prefix: '3752241'
     number_min_length: 12
     number_max_length: 12
-    uuid: 18ea48d2-85a7-43f4-8a3b-0e5fbf0f3b39
+    uuid: d28bb97b-ba0b-4085-9ee5-f8dbf8e91273
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_krichev_fixed
   - id: 283909
     prefix: '3752242'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ca26d60-7a0a-4608-9412-93b7bd7f9aa7
+    uuid: 09aa1e35-95a6-4a86-baea-d8b8bdded4bd
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_chausy_fixed
   - id: 283915
     prefix: '3752243'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6fc66e85-ed37-4705-bf6b-fd8475ee5223
+    uuid: ddb9a9cf-604d-411c-b657-d36dbccf4ec9
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_cherikov_fixed
   - id: 283921
     prefix: '3752244'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e626534-d5f7-400f-b26f-575365f16023
+    uuid: e782e75f-1d57-469a-9028-3dacc4bbc84a
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_klimovichi_fixed
   - id: 283927
     prefix: '3752245'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5ac3d3f5-1380-42b3-aef3-c8b310857173
+    uuid: d722cc79-0695-4611-9645-2da479af3abf
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_kostyukovichi_fixed
   - id: 283933
     prefix: '3752246'
     number_min_length: 12
     number_max_length: 12
-    uuid: c4488f43-eb5d-405c-b362-846641f74756
+    uuid: 2d5b9af9-32e6-4501-9d52-4f3aeef72fb1
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_slavgorod_fixed
   - id: 283937
     prefix: '3752247'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6a0908d6-8a2b-424a-92fc-4ca576d5ce3a
+    uuid: b94015a5-4927-45a9-be8d-21afc626aa28
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_khotimsk_fixed
   - id: 283941
     prefix: '3752248'
     number_min_length: 12
     number_max_length: 12
-    uuid: b6467faa-8af5-4577-bf11-2e51958504e7
+    uuid: 2b4a11dd-8362-4433-85dd-fa28446d9596
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_dribin_fixed
   - id: 283944
     prefix: '375225'
     number_min_length: 12
     number_max_length: 12
-    uuid: 38395e01-e0b6-4ead-b84f-a26ff4aedf20
+    uuid: 6e7f016d-bf8a-4d9b-aceb-b92cf2c735e3
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_bobruysk_fixed
   - id: 287449
     prefix: '3752340'
     number_min_length: 12
     number_max_length: 12
-    uuid: bc5f86e8-2215-4a28-b260-d8930fed6829
+    uuid: 7401c754-084c-4b8b-8f50-805e355d1d90
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_rechitsa_fixed
   - id: 287454
     prefix: '3752342'
     number_min_length: 12
     number_max_length: 12
-    uuid: 11dabeed-d736-4bc2-9936-65367f14dfaf
+    uuid: 6c270871-efbd-44a9-a52c-cd488de153e1
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_svetlogorsk_fixed
   - id: 287463
     prefix: '3752344'
     number_min_length: 12
     number_max_length: 12
-    uuid: d0587dd9-be3a-446c-96bb-f2f19821ee29
+    uuid: 062c9834-4377-4ebf-91d9-59d1e5854744
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_bragin_fixed
   - id: 287476
     prefix: '3752345'
     number_min_length: 12
     number_max_length: 12
-    uuid: cd977680-32ce-4f93-be4f-2943f6796cf6
+    uuid: 72753d30-a3d6-46bc-afb8-418de7260762
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_kalinkovichi_fixed
   - id: 287486
     prefix: '3752346'
     number_min_length: 12
     number_max_length: 12
-    uuid: 35689d49-6399-4f28-9d9e-98cec49fe149
+    uuid: 2fba1219-86a6-4c02-854e-bcde56bcb019
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_khoiniki_fixed
   - id: 287488
     prefix: '3752347'
     number_min_length: 12
     number_max_length: 12
-    uuid: 90f71853-e46c-48fa-9088-b31c0bee34e6
+    uuid: 6628c3cc-5a72-4d0f-bdf6-14918fc82e6e
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_loyev_fixed
   - id: 287638
     prefix: '3752350'
     number_min_length: 12
     number_max_length: 12
-    uuid: 47b14e28-4ad5-401e-b5c2-1961613b7683
+    uuid: 330800e5-26b1-42a5-a3c5-3d097427d17e
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_petrikov_fixed
   - id: 287651
     prefix: '3752353'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9576d914-7eeb-473c-aace-a95bc3a0e54c
+    uuid: c404a254-d1cb-4b9c-9ec7-89966b31c93f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_zhitkovichi_fixed
   - id: 287657
     prefix: '3752354'
     number_min_length: 12
     number_max_length: 12
-    uuid: d529dd4c-7adc-454c-b61a-22648e418dcc
+    uuid: 3dc5c7cb-3556-476d-b10b-77664b997260
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_yelsk_fixed
   - id: 287663
     prefix: '3752355'
     number_min_length: 12
     number_max_length: 12
-    uuid: d8926efd-040c-427a-913e-9a1eaf93b6a5
+    uuid: 489d847a-1066-4c7f-9aa8-7ea58b6dbf8a
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_narovlya_fixed
   - id: 287668
     prefix: '3752356'
     number_min_length: 12
     number_max_length: 12
-    uuid: 810c9467-84ec-4c97-abc0-5a7b1f16dd39
+    uuid: c12075da-88cd-407a-b3df-ba86fd0225d0
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_lelchitsy_fixed
   - id: 287672
     prefix: '3752357'
     number_min_length: 12
     number_max_length: 12
-    uuid: 139a0538-01be-426d-872b-f880adfd4073
+    uuid: fa80a7bb-6d24-4a05-b4c9-10a3330e017c
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_oktyabrskiy_fixed
   - id: 287685
     prefix: '375236'
     number_min_length: 12
     number_max_length: 12
-    uuid: 182fc11b-28c8-4cac-930b-98004c9cad04
+    uuid: 6a6a9664-9318-4526-9d73-705ce4b42647
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_mozyr_fixed
   - id: 292489
     prefix: '375232'
     number_min_length: 12
     number_max_length: 12
-    uuid: 64101489-2772-4aba-9096-bf520f213a61
+    uuid: b113e7a2-631b-432d-bd45-62a8c21a9837
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_gomel_fixed
   - id: 293063
     prefix: '3752330'
     number_min_length: 12
     number_max_length: 12
-    uuid: b5e40784-5d2b-46ad-bb46-3ca14042dab7
+    uuid: dc31d3e4-d5d0-42e3-8003-2db8ec217f4f
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_vetka_fixed
   - id: 293069
     prefix: '3752332'
     number_min_length: 12
     number_max_length: 12
-    uuid: 34578041-f2b3-48d9-9cba-dc908597c211
+    uuid: 438d4dc7-ea4e-4218-ad30-0185f608a573
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_chechersk_fixed
   - id: 293075
     prefix: '3752333'
     number_min_length: 12
     number_max_length: 12
-    uuid: 53061c8f-1743-4d5b-90c9-227bec4c9651
+    uuid: 5eef147d-09f7-41b0-acc8-63793cc6adca
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_dobrush_fixed
   - id: 293080
     prefix: '3752334'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9a9ff4d3-80f7-4038-aabf-186a4cb1dd9b
+    uuid: 7efc7409-8590-421c-a76a-8b1330716755
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_zhlobin_fixed
   - id: 293105
     prefix: '3752336'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1f23993d-0e7f-403c-99e3-82b38e490cc5
+    uuid: e20c7710-b4b8-455e-b492-4afbfd34d6de
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_budo_koshelevo_fixed
   - id: 293109
     prefix: '3752337'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6aa14499-145c-46b4-949b-d29c62149432
+    uuid: 30feeed2-2994-4453-bab4-c17fcfe57913
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_korma_fixed
   - id: 293114
     prefix: '3752339'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7b055bfb-3e60-481e-9a5f-97913b02998c
+    uuid: dcfe39e8-0b2f-45a6-9ed2-aa82f4c7141c
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_rogachev_fixed
   - id: 294315
     prefix: '37524'
     number_min_length: 12
     number_max_length: 12
-    uuid: 33ec0cff-90e6-4661-af9c-5d907371a884
+    uuid: d0dfc865-ff25-475d-be7a-820d2ec5d60e
     country_id: *by
-    network_id: *by_fixed
+    network_id: *by_data_network_access_services_fixed

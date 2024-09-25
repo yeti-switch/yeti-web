@@ -1,63 +1,515 @@
 country_id: &pk 162
 networks:
 # Fixed Networks
-  - id: &pk_fixed 4057
-    name: PK Fixed
-    uuid: 3792e618-1e04-4e4c-b92f-634867504fb5
+  - id: &pk_sargodha_fixed 4202
+    name: PK Sargodha Fixed
+    uuid: f3a25f77-d2f3-42ee-afc2-2a5685279666
+    type_id: 12
+  - id: &pk_kasur_fixed 5027
+    name: PK Kasur Fixed
+    uuid: 0ff9ca27-d7fc-419c-8a46-7e43eafe7ec5
+    type_id: 12
+  - id: &pk_islamabad_rawalpindi_fixed 5646
+    name: PK Islamabad Rawalpindi Fixed
+    uuid: 107d01cd-a1fa-48e2-94f0-8cc437c95191
+    type_id: 12
+  - id: &pk_sialkot_fixed 6645
+    name: PK Sialkot Fixed
+    uuid: 7863790a-9361-4a50-8fa0-d7f64bdf917f
+    type_id: 12
+  - id: &pk_gujrat_fixed 7577
+    name: PK Gujrat Fixed
+    uuid: 09205c8f-bdf5-480f-a8f0-72d31a391ac8
+    type_id: 12
+  - id: &pk_narowal_fixed 7793
+    name: PK Narowal Fixed
+    uuid: 83677e97-e6eb-4a87-862d-e0307f09a4fb
+    type_id: 12
+  - id: &pk_chakwal_fixed 7814
+    name: PK Chakwal Fixed
+    uuid: 2a899abf-459a-4a73-b446-876805190d19
+    type_id: 12
+  - id: &pk_jhelum_fixed 7828
+    name: PK Jhelum Fixed
+    uuid: 14a44a00-0672-4e23-ab04-cc42713fdd9d
+    type_id: 12
+  - id: &pk_mandi_bahauddin_fixed 7877
+    name: PK Mandi Bahauddin Fixed
+    uuid: 9674815c-f58a-4a64-86d6-0729d362d5ab
+    type_id: 12
+  - id: &pk_hafizabad_fixed 7896
+    name: PK Hafizabad Fixed
+    uuid: a39ae96f-6276-4194-9897-446290e99e01
+    type_id: 12
+  - id: &pk_gujranwala_fixed 7958
+    name: PK Gujranwala Fixed
+    uuid: ea1fdd65-5717-413c-85ec-f2532f862fca
+    type_id: 12
+  - id: &pk_gilgit_district_fixed 8501
+    name: PK Gilgit District Fixed
+    uuid: ed49b575-689c-4f63-9099-bae18a7f77c5
+    type_id: 12
+  - id: &pk_diamer_district_fixed 8502
+    name: PK Diamer District Fixed
+    uuid: f1c2ef9e-f301-434f-b94a-874864548dd0
+    type_id: 12
+  - id: &pk_hunza_district_fixed 8503
+    name: PK Hunza District Fixed
+    uuid: e306213f-0c01-4292-9ed1-9a0246af5fee
+    type_id: 12
+  - id: &pk_ghizer_district_fixed 8504
+    name: PK Ghizer District Fixed
+    uuid: 27b45fd9-9a8e-442e-900a-862b13ba56be
+    type_id: 12
+  - id: &pk_skardu_district_fixed 8505
+    name: PK Skardu District Fixed
+    uuid: 742d06f9-5550-4e6c-8b3d-3b8aa0d91aec
+    type_id: 12
+  - id: &pk_ghanche_district_fixed 8506
+    name: PK Ghanche District Fixed
+    uuid: 85320a77-0fb5-4c53-b1f0-483c8ec4bdc4
+    type_id: 12
+  - id: &pk_astore_district_fixed 8507
+    name: PK Astore District Fixed
+    uuid: a1eb6080-090a-48ab-9543-48321ac560d7
+    type_id: 12
+  - id: &pk_neelum_district_fixed 8563
+    name: PK Neelum District Fixed
+    uuid: 8272a47c-41bc-4690-bb13-4e6882cd636a
+    type_id: 12
+  - id: &pk_muzaffrabad_district_fixed 8567
+    name: PK Muzaffrabad District Fixed
+    uuid: 8e585a19-47ff-4d4c-9916-abb542bb37b1
+    type_id: 12
+  - id: &pk_bagh_district_fixed 8571
+    name: PK Bagh District Fixed
+    uuid: 00b5f2d9-57e5-47e3-a6d1-d37eebb0a3d8
+    type_id: 12
+  - id: &pk_poonch_district_fixed 8575
+    name: PK Poonch District Fixed
+    uuid: ceba4197-8ca6-42c5-ab2f-2787231d5e11
+    type_id: 12
+  - id: &pk_sudhanoti_district_fixed 8579
+    name: PK Sudhanoti District Fixed
+    uuid: b647621d-b0e6-4855-8452-506870b9d3ea
+    type_id: 12
+  - id: &pk_kotli_district_fixed 8582
+    name: PK Kotli District Fixed
+    uuid: 89f8b98a-76c9-40c2-a1c1-782ad8564a95
+    type_id: 12
+  - id: &pk_mirpur_district_fixed 8585
+    name: PK Mirpur District Fixed
+    uuid: 2461547a-e4ec-43d0-9925-5f68a40b1f82
+    type_id: 12
+  - id: &pk_bhimber_district_fixed 8588
+    name: PK Bhimber District Fixed
+    uuid: e0c118a3-69f6-4117-87bf-a811ebac64a2
+    type_id: 12
+  - id: &pk_sheikhupura_fixed 9278
+    name: PK Sheikhupura Fixed
+    uuid: 9c053b7b-688c-4b3d-92da-61145ef46ffb
+    type_id: 12
+  - id: &pk_attock_fixed 9684
+    name: PK Attock Fixed
+    uuid: 8698b1e3-c163-4723-9db0-ba78262de978
+    type_id: 12
+  - id: &pk_rajanpur_fixed 10707
+    name: PK Rajanpur Fixed
+    uuid: fa7b0d23-6f7f-4177-9407-48787b8b10f0
+    type_id: 12
+  - id: &pk_lodhran_fixed 10949
+    name: PK Lodhran Fixed
+    uuid: 96ad3c16-0117-4757-9411-4d6945df99ef
+    type_id: 12
+  - id: &pk_layyah_fixed 11651
+    name: PK Layyah Fixed
+    uuid: 66c96383-83a9-4e73-a123-cfaf7bfe2299
+    type_id: 12
+  - id: &pk_multan_fixed 11795
+    name: PK Multan Fixed
+    uuid: f0873e5a-3993-4223-ae9b-aad671989898
+    type_id: 12
+  - id: &pk_bahawalpur_fixed 11984
+    name: PK Bahawalpur Fixed
+    uuid: 5218e393-e97d-49b5-bb49-fdd905f2d8ed
+    type_id: 12
+  - id: &pk_bahawalnagar_fixed 12465
+    name: PK Bahawalnagar Fixed
+    uuid: 45741687-cfb5-41f9-8eef-3cfe969eb709
+    type_id: 12
+  - id: &pk_dera_ghazi_khan_fixed 12728
+    name: PK Dera Ghazi Khan Fixed
+    uuid: ef64c119-e7d2-4475-bf89-6ade92995ac3
+    type_id: 12
+  - id: &pk_khanewal_fixed 13479
+    name: PK Khanewal Fixed
+    uuid: da16adf0-ba8c-47e9-8f0a-63b7a6348c35
+    type_id: 12
+  - id: &pk_muzaffargarh_fixed 13684
+    name: PK Muzaffargarh Fixed
+    uuid: e28bb2ea-40cb-49cc-87aa-118ce23c7349
+    type_id: 12
+  - id: &pk_rahim_yar_khan_fixed 14231
+    name: PK Rahim Yar Khan Fixed
+    uuid: 50862756-05b0-4a49-8d47-8e2827a836ec
+    type_id: 12
+  - id: &pk_vehari_fixed 14510
+    name: PK Vehari Fixed
+    uuid: 34b2730b-8583-4a6d-a507-e4f8ed9df407
+    type_id: 12
+  - id: &pk_sukkur_fixed 16217
+    name: PK Sukkur Fixed
+    uuid: 6df62fea-ae2a-492e-92c8-09ec54db5af2
+    type_id: 12
+  - id: &pk_jacobabad_fixed 16630
+    name: PK Jacobabad Fixed
+    uuid: d5a78b78-0538-40b4-98a6-e4c3adbb1a1a
+    type_id: 12
+  - id: &pk_shikarpur_fixed 16778
+    name: PK Shikarpur Fixed
+    uuid: 8f322bb0-7f2d-43ed-a7f6-2b9c47e37135
+    type_id: 12
+  - id: &pk_ghotki_fixed 16936
+    name: PK Ghotki Fixed
+    uuid: c76b7712-0833-4427-a67f-647c592d4ac7
+    type_id: 12
+  - id: &pk_larkana_fixed 17633
+    name: PK Larkana Fixed
+    uuid: ac129dce-9003-420e-b585-9fda1acdbfc8
+    type_id: 12
+  - id: &pk_bajaur_agency_fixed 20139
+    name: PK Bajaur Agency Fixed
+    uuid: 36e09e14-1327-442a-b544-bd778a0a137f
+    type_id: 12
+  - id: &pk_chitral_fixed 20161
+    name: PK Chitral Fixed
+    uuid: 32858627-5d91-4038-a717-25a49519cf37
+    type_id: 12
+  - id: &pk_upper_dir_fixed 20179
+    name: PK Upper Dir Fixed
+    uuid: 790178af-bd46-49d5-8272-e09ca35773fc
+    type_id: 12
+  - id: &pk_lower_dir_fixed 20189
+    name: PK Lower Dir Fixed
+    uuid: 8f051d45-d67a-4923-9543-5cb723216a6d
+    type_id: 12
+  - id: &pk_swat_fixed 20221
+    name: PK Swat Fixed
+    uuid: 8af4811c-cf81-4632-8b68-27a4d3beec34
+    type_id: 12
+  - id: &pk_buner_fixed 20334
+    name: PK Buner Fixed
+    uuid: cded9bb2-d229-4c0e-adca-2a1d52b60a2e
+    type_id: 12
+  - id: &pk_tank_fixed 20479
+    name: PK Tank Fixed
+    uuid: eac393da-1ac0-4b0b-aaad-bb9a2839faf7
+    type_id: 12
+  - id: &pk_south_waziristan_fixed 20504
+    name: PK South Waziristan Fixed
+    uuid: 53d61900-fc64-452b-abd6-ed7b883432b1
+    type_id: 12
+  - id: &pk_dera_ismail_khan_fixed 20547
+    name: PK Dera Ismail Khan Fixed
+    uuid: 2b09de06-2457-4d4c-bc1d-080fba1fe733
+    type_id: 12
+  - id: &pk_lakki_marwat_fixed 20567
+    name: PK Lakki Marwat Fixed
+    uuid: f58418c4-be95-4984-a18a-7e8d51a02c1f
+    type_id: 12
+  - id: &pk_abbottabad_fixed 21212
+    name: PK Abbottabad Fixed
+    uuid: 3ae7fe3a-9907-4737-bc1c-a815982db4aa
+    type_id: 12
+  - id: &pk_haripur_fixed 21236
+    name: PK Haripur Fixed
+    uuid: 86de5ab3-4066-4f54-a382-874f8153d06f
+    type_id: 12
+  - id: &pk_shangla_fixed 21247
+    name: PK Shangla Fixed
+    uuid: 0deb1bc7-64e4-4c53-9851-8068019a1cfd
+    type_id: 12
+  - id: &pk_mansehra_batagram_fixed 21258
+    name: PK Mansehra Batagram Fixed
+    uuid: f60912e4-2b9b-4044-afb6-99d5dd9b1e52
+    type_id: 12
+  - id: &pk_kohistan_fixed 22608
+    name: PK Kohistan Fixed
+    uuid: 50c7ba0d-ad96-40ed-9c97-6e095a4a5b1c
+    type_id: 12
+  - id: &pk_karachi_fixed 27348
+    name: PK Karachi Fixed
+    uuid: 37e8f2a9-fa0c-45de-b3e3-5453997e4b67
+    type_id: 12
+  - id: &pk_hyderabad_fixed 27822
+    name: PK Hyderabad Fixed
+    uuid: 8e3e3081-8c73-404b-b3fd-e3c01cb5396f
+    type_id: 12
+  - id: &pk_sanghar_fixed 28446
+    name: PK Sanghar Fixed
+    uuid: 0a9fb0c6-29a8-417e-8433-5506071109f2
+    type_id: 12
+  - id: &pk_umerkot_fixed 28637
+    name: PK Umerkot Fixed
+    uuid: de67a2c7-5578-4b6b-9094-6b1d619e63f8
+    type_id: 12
+  - id: &pk_tharparkar_fixed 28800
+    name: PK Tharparkar Fixed
+    uuid: d1de002a-6109-487d-b1a0-6a24fa4aba57
+    type_id: 12
+  - id: &pk_mirpur_khas_fixed 28838
+    name: PK Mirpur Khas Fixed
+    uuid: 22ffd9a0-ca08-448c-9026-583f1e11d6af
+    type_id: 12
+  - id: &pk_naushero_feroze_fixed 29003
+    name: PK Naushero Feroze Fixed
+    uuid: dd3e33c4-028f-476e-b135-548efc87a189
+    type_id: 12
+  - id: &pk_khairpur_fixed 29060
+    name: PK Khairpur Fixed
+    uuid: 5948f24c-d4e3-4068-b5bd-2211118c51e8
+    type_id: 12
+  - id: &pk_nawabshah_fixed 29086
+    name: PK Nawabshah Fixed
+    uuid: 5b823319-dde4-4fdb-90d3-9ef57e56da2f
+    type_id: 12
+  - id: &pk_dadu_fixed 29843
+    name: PK Dadu Fixed
+    uuid: 5304bb9b-df28-463d-99ea-278c57df98d3
+    type_id: 12
+  - id: &pk_badin_fixed 31211
+    name: PK Badin Fixed
+    uuid: 4455f5f4-e524-472b-9018-04c89a50fbce
+    type_id: 12
+  - id: &pk_thatta_fixed 31236
+    name: PK Thatta Fixed
+    uuid: 28244411-6c2f-47f3-a65f-7aa043b5131a
+    type_id: 12
+  - id: &pk_sahiwal_fixed 34322
+    name: PK Sahiwal Fixed
+    uuid: 01c41ef4-1cc8-4a4a-92d6-140b1dc6b430
+    type_id: 12
+  - id: &pk_faisalabad_fixed 36248
+    name: PK Faisalabad Fixed
+    uuid: 054bee1d-f433-4a78-9cbf-d7d1a232ee0d
+    type_id: 12
+  - id: &pk_okara_fixed 36861
+    name: PK Okara Fixed
+    uuid: 20f71a35-f877-4c30-ac80-4cf4260aac22
+    type_id: 12
+  - id: &pk_lahore_fixed 37240
+    name: PK Lahore Fixed
+    uuid: b1421298-8dbf-4ebf-bae7-cc5ce41a47c6
+    type_id: 12
+  - id: &pk_bhakkar_fixed 37811
+    name: PK Bhakkar Fixed
+    uuid: 40ce4fd0-be56-42a7-a0f7-810c58532a59
+    type_id: 12
+  - id: &pk_mianwali_fixed 37816
+    name: PK Mianwali Fixed
+    uuid: 8761e153-b459-4d8d-be48-81e2688b6061
+    type_id: 12
+  - id: &pk_toba_tek_singh_fixed 37843
+    name: PK Toba Tek Singh Fixed
+    uuid: 51373c0f-3fe3-4751-8360-dba8c7709652
+    type_id: 12
+  - id: &pk_khushab_fixed 37927
+    name: PK Khushab Fixed
+    uuid: 126c1387-b380-410c-a560-d96171f7387b
+    type_id: 12
+  - id: &pk_pakpattan_fixed 37986
+    name: PK Pakpattan Fixed
+    uuid: 6bea6f94-5905-4771-96e5-aa76b77ab37a
+    type_id: 12
+  - id: &pk_jhang_fixed 38319
+    name: PK Jhang Fixed
+    uuid: 35bb23a1-7a0d-4e03-b55e-6df331c1d334
+    type_id: 12
+  - id: &pk_zhob_fixed 38969
+    name: PK Zhob Fixed
+    uuid: 53cc76c4-81e3-4af4-86b5-1b83b71a7498
+    type_id: 12
+  - id: &pk_killa_saifullah_fixed 38995
+    name: PK Killa Saifullah Fixed
+    uuid: 91f6b990-618e-4a06-81a3-9cf61aeed22e
+    type_id: 12
+  - id: &pk_loralai_fixed 39015
+    name: PK Loralai Fixed
+    uuid: f9e810cd-7453-4375-bcec-8ebf070f8e45
+    type_id: 12
+  - id: &pk_chagai_fixed 39027
+    name: PK Chagai Fixed
+    uuid: 2cc4d485-c154-426d-aba5-6d06b1a779e0
+    type_id: 12
+  - id: &pk_k_abdullah_pishin__fixed 39047
+    name: PK K Abdullah Pishin  Fixed
+    uuid: c058e9b3-a35b-4ba1-a363-a4e6c852bc6c
+    type_id: 12
+  - id: &pk_quetta_fixed 39318
+    name: PK Quetta Fixed
+    uuid: a950c9da-174b-4066-a630-fbb8fd953234
+    type_id: 12
+  - id: &pk_musakhel_fixed 39771
+    name: PK Musakhel Fixed
+    uuid: 04eb8deb-7b93-4160-98e7-78f48921d4c7
+    type_id: 12
+  - id: &pk_barkhan_kohlu_fixed 39789
+    name: PK Barkhan Kohlu Fixed
+    uuid: a7de21f1-fe1a-4c13-b64e-f473e4698651
+    type_id: 12
+  - id: &pk_bolan_fixed 39877
+    name: PK Bolan Fixed
+    uuid: 48bc6b4b-8fc4-4ddf-9865-7bb0c4d3aa8e
+    type_id: 12
+  - id: &pk_dera_bugti_fixed 39948
+    name: PK Dera Bugti Fixed
+    uuid: 4f66ba84-5b78-40d8-b2b7-be6fda28fa19
+    type_id: 12
+  - id: &pk_jhal_magsi_fixed 40011
+    name: PK Jhal Magsi Fixed
+    uuid: 4c6a4397-92c7-4d09-ba8f-7db29c40c3e6
+    type_id: 12
+  - id: &pk_jaffarabad_nasirabad_fixed 40033
+    name: PK Jaffarabad Nasirabad Fixed
+    uuid: 19cae85e-6b5f-4660-a016-0520300db176
+    type_id: 12
+  - id: &pk_mastung_fixed 40073
+    name: PK Mastung Fixed
+    uuid: 7c2610ed-a0bf-4cdf-83fd-c1758233881e
+    type_id: 12
+  - id: &pk_kalat_fixed 40163
+    name: PK Kalat Fixed
+    uuid: c30d0457-8180-45c8-83ea-6fbfb57dbc42
+    type_id: 12
+  - id: &pk_kharan_fixed 40297
+    name: PK Kharan Fixed
+    uuid: a94adbcd-4c32-434c-9040-74556eda8303
+    type_id: 12
+  - id: &pk_kech_fixed 40378
+    name: PK Kech Fixed
+    uuid: a4da1d3f-6f39-4528-aeaf-5a6c08a9e704
+    type_id: 12
+  - id: &pk_lasbela_fixed 40391
+    name: PK Lasbela Fixed
+    uuid: e44f353b-6b6e-4443-803b-a4a6432e18c9
+    type_id: 12
+  - id: &pk_panjgur_fixed 40434
+    name: PK Panjgur Fixed
+    uuid: 1a172ac4-e68b-43d3-9cb5-aa82fc59007a
+    type_id: 12
+  - id: &pk_awaran_fixed 40474
+    name: PK Awaran Fixed
+    uuid: 80ae9fb4-5d2f-44d2-adad-12fed4fe882b
+    type_id: 12
+  - id: &pk_gwadar_fixed 40546
+    name: PK Gwadar Fixed
+    uuid: d5c9aaf5-173d-4f07-b152-6b713dd66861
+    type_id: 12
+  - id: &pk_sibi_ziarat_fixed 40782
+    name: PK Sibi Ziarat Fixed
+    uuid: 056a7a56-39b3-4bc5-bd9a-1af853227bf7
+    type_id: 12
+  - id: &pk_khuzdar_fixed 41010
+    name: PK Khuzdar Fixed
+    uuid: 11ce6563-fc60-4310-b6ff-aeda1aaeb584
+    type_id: 12
+  - id: &pk_peshawar_charsadda_fixed 42435
+    name: PK Peshawar Charsadda Fixed
+    uuid: 5f536dff-4208-487b-add1-066abe2be788
+    type_id: 12
+  - id: &pk_mohmand_agency_khyber_agency_fixed 42920
+    name: PK Mohmand Agency Khyber Agency Fixed
+    uuid: 80ca7c15-250e-4ad3-870d-0dc561098833
+    type_id: 12
+  - id: &pk_hangu_orakzai_agency_fixed 42923
+    name: PK Hangu Orakzai Agency Fixed
+    uuid: 7daebbae-6ca3-4d3b-8167-c9ec78f3aae8
+    type_id: 12
+  - id: &pk_kurram_agency_fixed 42943
+    name: PK Kurram Agency Fixed
+    uuid: 78560a79-6e1b-43be-8139-ee8a33762e16
+    type_id: 12
+  - id: &pk_kohat_fixed 42970
+    name: PK Kohat Fixed
+    uuid: 743e587a-408e-43b8-aab7-a0037d01dc6f
+    type_id: 12
+  - id: &pk_nowshera_fixed 42981
+    name: PK Nowshera Fixed
+    uuid: d593b7e6-047e-4b74-bc37-d713d0a35dfc
+    type_id: 12
+  - id: &pk_karak_fixed 43030
+    name: PK Karak Fixed
+    uuid: 581d0e46-be09-46eb-9f2d-4dd187c5de00
+    type_id: 12
+  - id: &pk_bannu_north_waziristan_fixed 43043
+    name: PK Bannu North Waziristan Fixed
+    uuid: 33443885-dea6-439c-b425-d1b92895b744
+    type_id: 12
+  - id: &pk_malakand_fixed 43193
+    name: PK Malakand Fixed
+    uuid: 49bc1af0-c412-4742-befa-1f31624ac600
+    type_id: 12
+  - id: &pk_mardan_fixed 43299
+    name: PK Mardan Fixed
+    uuid: 25d05085-a0b7-40bc-ab5d-7accac7b56e1
+    type_id: 12
+  - id: &pk_swabi_fixed 43308
+    name: PK Swabi Fixed
+    uuid: d3298271-875e-47e4-b6b7-aa8ad898c5d1
     type_id: 12
 # Supplementary services Networks
-  - id: &pk_special_services 5104
+  - id: &pk_special_services 21280
     name: PK Special Services
-    uuid: 1fb11afa-793e-46a6-919d-dcf6f6c4a7bf
+    uuid: fd640907-fd53-48a9-a3ad-a38cc1737df9
     type_id: 14
-  - id: &pk_universal_access_number_uan 5402
+  - id: &pk_universal_access_number_uan 21580
     name: PK Universal Access Number Uan
-    uuid: 0e29d528-1579-4657-a570-aaa3f7b9f914
+    uuid: 89a0efe8-9c08-45ce-a8d3-c72534bfb0e6
     type_id: 14
-  - id: &pk_universal_personal_telecommunications_upt 5518
+  - id: &pk_universal_personal_telecommunications_upt 21730
     name: PK Universal Personal Telecommunications Upt
-    uuid: 9eef4e81-fe04-4752-95b3-a296d5d758ef
+    uuid: 1174a789-f289-446d-80bf-46b8e9d235dd
     type_id: 14
-  - id: &pk_universal_internet_number_uin 5545
+  - id: &pk_universal_internet_number_uin 21758
     name: PK Universal Internet Number Uin
-    uuid: a49d65f1-c3ea-4bf2-8a16-761c74af4a7a
+    uuid: e70c29ed-4f36-4246-8988-73777324a0c7
     type_id: 14
-  - id: &pk_sms_services 6524
+  - id: &pk_sms_services 23806
     name: PK Sms Services
-    uuid: 7d34319c-3e54-45ad-9f11-5013ca874034
+    uuid: 8b2167df-9689-42f1-a3aa-f8a5585af790
     type_id: 14
-  - id: &pk_freephone_services 7565
+  - id: &pk_freephone_services 38514
     name: PK Freephone Services
-    uuid: 1419a696-0e95-4986-8702-e991347421a7
+    uuid: 70b9d4d0-d8c5-4098-ac83-728d3583b097
     type_id: 14
-  - id: &pk_premium_rate_services 7836
+  - id: &pk_premium_rate_services 42081
     name: PK Premium Rate Services
-    uuid: 2cc29188-9e30-4805-96c8-db4437fcfc8f
+    uuid: 7c1ed41a-3d65-4cf4-9b25-ce71392f09bc
     type_id: 14
 # Mobile Networks
-  - id: &pk_jazz_mobile 7342
+  - id: &pk_jazz_mobile 30873
     name: PK Jazz Mobile
-    uuid: 1c4db077-1669-4a5f-88d5-270a1ad902ec
+    uuid: 1055fa12-0bbf-4f85-95e4-e9d3e9978b87
     type_id: 3
-  - id: &pk_zong_mobile 7366
+  - id: &pk_zong_mobile 31761
     name: PK Zong Mobile
-    uuid: 34263296-31fa-426b-980b-ccd6bcae704b
+    uuid: 029d9c6c-dde8-4f5d-90ea-dc6c755f5795
     type_id: 3
-  - id: &pk_ufone_mobile 7400
+  - id: &pk_ufone_mobile 32566
     name: PK Ufone Mobile
-    uuid: bfc3d69e-3bfd-408c-9f5d-78733257bda3
+    uuid: 7af2be05-d82c-46de-9d7c-8506c77ce655
     type_id: 3
-  - id: &pk_telenor_mobile 7408
+  - id: &pk_telenor_mobile 32899
     name: PK Telenor Mobile
-    uuid: 56af7710-1607-43c0-a5d9-70228e44728f
+    uuid: c6d2688d-c848-4079-a61f-ea1c699a1b0f
     type_id: 3
-  - id: &pk_mobile 7435
+  - id: &pk_mobile 34258
     name: PK Mobile
-    uuid: 53c0bf4b-ceec-4b1f-adda-e03f345dd611
+    uuid: b45d3523-e409-4000-8c38-d4ed8b861b44
     type_id: 3
-  - id: &pk_scom_mobile 7442
+  - id: &pk_scom_mobile 34647
     name: PK Scom Mobile
-    uuid: f0bfa1fd-819e-425f-babe-7ac7402cadd4
+    uuid: eabcee1a-177d-4470-8168-8b20827b88bc
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -65,806 +517,806 @@ network_prefixes:
     prefix: '9248'
     number_min_length: 11
     number_max_length: 11
-    uuid: a33afaff-7e49-4977-bd2c-b7731268f2bc
+    uuid: f13efb27-f33a-40f4-a474-fb1f5372d177
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_sargodha_fixed
   - id: 58231
     prefix: '9249'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4bfa591a-7830-43db-a702-34dc69bf786b
+    uuid: 2b5b1434-ae43-4762-a931-bafcd9236f79
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_kasur_fixed
   - id: 62613
     prefix: '9251'
     number_min_length: 11
     number_max_length: 11
-    uuid: 35000354-f4d5-43d0-8992-4a9c965c2454
+    uuid: 8a0339de-fc98-48ec-8ca4-13a4817e3a8a
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_islamabad_rawalpindi_fixed
   - id: 71663
     prefix: '9252'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef335a51-472d-4b08-92f2-67b13216abd8
+    uuid: afd0910c-561a-49dd-a2ab-19ed87a99208
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_sialkot_fixed
   - id: 76552
     prefix: '9253'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5bc0f7f0-6d6c-4441-900e-b4f83e7b902e
+    uuid: eb20ba33-042e-4bc4-85be-61f31cd85861
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_gujrat_fixed
   - id: 77503
     prefix: '92542'
     number_min_length: 11
     number_max_length: 12
-    uuid: 8e9dd195-d4e1-4738-82a7-fb8b25b58a47
+    uuid: c02a6b05-7670-4ff8-b267-8edcb068c5f9
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_narowal_fixed
   - id: 77525
     prefix: '92543'
     number_min_length: 11
     number_max_length: 12
-    uuid: d6d5d22c-5ead-4155-addf-5b5bccd437eb
+    uuid: c8b2a847-745f-4bd9-af95-9370c693effb
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_chakwal_fixed
   - id: 77541
     prefix: '92544'
     number_min_length: 11
     number_max_length: 12
-    uuid: 74451f67-4f24-46ba-89ab-21ab63d51ec7
+    uuid: e149030a-1f90-4913-b7ed-85087b27d331
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_jhelum_fixed
   - id: 77608
     prefix: '92546'
     number_min_length: 11
     number_max_length: 12
-    uuid: fa6fdc05-52a9-40b3-a0d0-8082c5fe5d97
+    uuid: df7dd3fa-f3d0-45cf-b964-41dcf8c3997c
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_mandi_bahauddin_fixed
   - id: 77628
     prefix: '92547'
     number_min_length: 11
     number_max_length: 12
-    uuid: 2ef46084-0d81-4afd-98de-2036af1830e4
+    uuid: f826cdc9-7ad0-464c-b2a6-3019d87cdd1e
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_hafizabad_fixed
   - id: 78130
     prefix: '9255'
     number_min_length: 11
     number_max_length: 11
-    uuid: a6c5aeee-cd59-44bd-95fd-6daeafd66731
+    uuid: d423385e-99ae-443f-ac70-c677cab4b7dd
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_gujranwala_fixed
   - id: 83321
     prefix: '925811'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8bdb7875-bbc6-4ba7-b4be-19e651f140e3
+    uuid: 6ca0b2a5-479b-47dd-a8f1-7e889b24c47a
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_gilgit_district_fixed
   - id: 83322
     prefix: '925812'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6a20a595-c45f-4abc-bf37-2e913fa2b598
+    uuid: 2821e294-5db9-4b3a-927b-2a995da62933
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_diamer_district_fixed
   - id: 83323
     prefix: '925813'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ca12482-7692-4d85-8eee-d58b9fa53e99
+    uuid: d0d6e53d-5b98-4e32-8ef8-18305c2fd89d
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_hunza_district_fixed
   - id: 83324
     prefix: '925814'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7d182d08-b99b-4c4f-aeb1-19956948b97a
+    uuid: 6e36f64d-a3d8-442b-98c7-036be2adc460
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_ghizer_district_fixed
   - id: 83325
     prefix: '925815'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9c2a55a4-aa41-4121-8da9-0c3acc2814f0
+    uuid: 7ee9b6e1-a056-4e44-a77c-c28f5ed130b9
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_skardu_district_fixed
   - id: 83326
     prefix: '925816'
     number_min_length: 12
     number_max_length: 12
-    uuid: da4c68d2-4579-4c1b-bf75-04bbccd0e5b8
+    uuid: 166df8da-0038-48d0-9418-3905ef746b9c
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_ghanche_district_fixed
   - id: 83327
     prefix: '925817'
     number_min_length: 12
     number_max_length: 12
-    uuid: 42dafe99-609f-4c77-ac64-e2cf3fed3a7a
+    uuid: f2ef8a75-126f-4341-8aef-7c6156905fcf
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_astore_district_fixed
   - id: 83452
     prefix: '925821'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8a8f3b83-a024-4ec1-b161-9af8530c82bb
+    uuid: 3ca0f829-61fa-46c7-9990-1d1a995980e6
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_neelum_district_fixed
   - id: 83456
     prefix: '925822'
     number_min_length: 12
     number_max_length: 12
-    uuid: 935ef694-9d80-4fe5-8388-bd63ea0ca6a8
+    uuid: 9020c9a5-7e72-4004-83d8-d22597e083f5
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_muzaffrabad_district_fixed
   - id: 83460
     prefix: '925823'
     number_min_length: 12
     number_max_length: 12
-    uuid: 30d94bf2-124f-4d14-93fb-6d9fa54e27ff
+    uuid: 71019d48-6b9e-4e67-8967-cbf6d05e5df2
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_bagh_district_fixed
   - id: 83464
     prefix: '925824'
     number_min_length: 12
     number_max_length: 12
-    uuid: b22d471d-067a-4ad0-ba50-a0ab5e593eb2
+    uuid: ce04b9ae-923a-4fae-a488-6f656f8df958
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_poonch_district_fixed
   - id: 83468
     prefix: '925825'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6272965a-0604-4a02-8a07-c1603479c272
+    uuid: edbcf89b-4060-42b3-9357-81733aca938a
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_sudhanoti_district_fixed
   - id: 83471
     prefix: '925826'
     number_min_length: 12
     number_max_length: 12
-    uuid: d381d150-17d4-4327-9c26-d63d244a32d0
+    uuid: a33cb8b1-758e-48c9-98d5-f36bc04fb1b7
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_kotli_district_fixed
   - id: 83474
     prefix: '925827'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4bb5b6b1-b097-4a98-93fb-c0d7ed798f0d
+    uuid: 0bc1cff7-9f39-4bde-9b55-4e7b749e8f45
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_mirpur_district_fixed
   - id: 83477
     prefix: '925828'
     number_min_length: 12
     number_max_length: 12
-    uuid: 667c2332-ce49-4208-97ab-9929a75f71db
+    uuid: 0c18cba5-1391-4fcf-851c-0ab0a66cc1c2
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_bhimber_district_fixed
   - id: 87921
     prefix: '9256'
     number_min_length: 11
     number_max_length: 11
-    uuid: 26bdf2f3-78be-441c-a79b-44e263155a38
+    uuid: 8f8d5054-85ed-43fb-98b8-c0b68c848399
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_sheikhupura_fixed
   - id: 90275
     prefix: '9257'
     number_min_length: 11
     number_max_length: 11
-    uuid: 70c22571-d854-4101-a5d9-215fc8ca2346
+    uuid: 12f25147-3e09-4ae5-a373-29528fc8554d
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_attock_fixed
   - id: 96475
     prefix: '92604'
     number_min_length: 11
     number_max_length: 12
-    uuid: 63473f7e-660a-4f60-8391-60484b1c6d76
+    uuid: 48e0fd4f-3682-4e53-83af-d7fc081e8f04
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_rajanpur_fixed
   - id: 98023
     prefix: '92608'
     number_min_length: 11
     number_max_length: 12
-    uuid: 06cff831-ceff-4afd-a011-a0af3ff0de64
+    uuid: a259e6dc-6990-46f6-894a-24a98fe2e902
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_lodhran_fixed
   - id: 107077
     prefix: '92606'
     number_min_length: 11
     number_max_length: 12
-    uuid: 06031341-915f-4905-8736-87bfc7b66790
+    uuid: f6652080-7c17-4407-b4fd-d26545b2dc33
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_layyah_fixed
   - id: 108589
     prefix: '9261'
     number_min_length: 11
     number_max_length: 11
-    uuid: 107a643c-4c84-45be-9f95-5960f0d659b8
+    uuid: d476c9ec-479f-4747-b795-371ec94e96f4
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_multan_fixed
   - id: 111470
     prefix: '9262'
     number_min_length: 11
     number_max_length: 11
-    uuid: 921c96ea-4c21-46f0-acb3-bb415694f857
+    uuid: 59bedbc4-8b56-463f-8020-395b81ed9eb9
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_bahawalpur_fixed
   - id: 117835
     prefix: '9263'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6d0668eb-b025-4fcf-8bb4-61c401547079
+    uuid: 8dd7561f-7e8a-45a1-9c2f-35ceb41f89c8
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_bahawalnagar_fixed
   - id: 122441
     prefix: '9264'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ac28e8f-af5d-4ad2-84b9-f3a993c31515
+    uuid: ca5e4206-ce6c-4c9e-aa90-2e01afdaa291
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_dera_ghazi_khan_fixed
   - id: 135919
     prefix: '9265'
     number_min_length: 11
     number_max_length: 11
-    uuid: b2f92bdd-00aa-46cd-81c0-5cff44dddfd4
+    uuid: 752a3fbf-1878-4ab7-b4a9-3150168c7002
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_khanewal_fixed
   - id: 138631
     prefix: '9266'
     number_min_length: 11
     number_max_length: 11
-    uuid: fc747a4e-95d1-490b-8d48-cd7ae206e555
+    uuid: f7f3a7db-d383-4e67-9dc6-4d40e3e7cf12
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_muzaffargarh_fixed
   - id: 146822
     prefix: '9268'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef009973-856a-4696-8ba5-9f16ecfacc51
+    uuid: 2d131dee-10b8-4f78-bb10-d0e00040e83d
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_rahim_yar_khan_fixed
   - id: 151428
     prefix: '9267'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0190b9ab-011e-4dd7-ba6f-223ecb01e727
+    uuid: 4e83756b-059a-4be5-b43f-d54e9ba655f9
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_vehari_fixed
   - id: 164001
     prefix: '9271'
     number_min_length: 11
     number_max_length: 11
-    uuid: cd57a080-14c4-4f5b-a234-3f00aa0994a4
+    uuid: c3121014-6692-4ea6-b279-a673fd68eff9
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_sukkur_fixed
   - id: 169655
     prefix: '92722'
     number_min_length: 11
     number_max_length: 12
-    uuid: b88906df-a629-4a0e-a176-648d8f253824
+    uuid: b13b3337-e91c-4608-a110-f76d04885436
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_jacobabad_fixed
   - id: 170697
     prefix: '92726'
     number_min_length: 11
     number_max_length: 12
-    uuid: 73a0fd3c-885c-47d7-8b8e-b3959eda111a
+    uuid: 73bfd0b4-a34b-4a7b-8ed5-be4d975b31e3
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_shikarpur_fixed
   - id: 173126
     prefix: '92723'
     number_min_length: 11
     number_max_length: 12
-    uuid: 0a29a9c3-fa71-4af4-a18c-08a7fb5d437d
+    uuid: 393de386-c76d-4ff2-8cf8-58b606f836ad
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_ghotki_fixed
   - id: 182869
     prefix: '9274'
     number_min_length: 11
     number_max_length: 11
-    uuid: 420ec660-157b-4516-a4d1-f0a3d59bea7a
+    uuid: d912ac8d-5c89-4064-ad03-275055f1390f
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_larkana_fixed
   - id: 213826
     prefix: '92942'
     number_min_length: 11
     number_max_length: 12
-    uuid: 46c3e27a-d4b8-403c-9818-19d52efb5c9b
+    uuid: 7a3e228f-5b01-4d8f-919a-b366962477f5
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_bajaur_agency_fixed
   - id: 213850
     prefix: '92943'
     number_min_length: 11
     number_max_length: 12
-    uuid: 414b352f-e1ae-4cee-b45e-62596a6a635e
+    uuid: dd35797f-b102-46d5-a904-8a9333c1acb9
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_chitral_fixed
   - id: 213943
     prefix: '92944'
     number_min_length: 11
     number_max_length: 12
-    uuid: fd7b9889-1fe7-4916-a485-362cf053634f
+    uuid: 8fdb0a00-59b9-4af0-b276-a93858c488a0
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_upper_dir_fixed
   - id: 213954
     prefix: '92945'
     number_min_length: 11
     number_max_length: 12
-    uuid: 10d60359-c3fa-4aa9-b5cf-ae3a31373f3b
+    uuid: eeca7e1a-ad83-482a-bfe1-0465dcc14f2e
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_lower_dir_fixed
   - id: 214152
     prefix: '92946'
     number_min_length: 11
     number_max_length: 12
-    uuid: 14ad53ff-3c02-4c5a-96b0-d38839abe328
+    uuid: 1a42cce9-9e87-450f-80ce-ce01e595ad79
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_swat_fixed
   - id: 217223
     prefix: '92939'
     number_min_length: 11
     number_max_length: 12
-    uuid: a18dd555-ffc4-4146-86f8-e6164455636f
+    uuid: aa24c806-d356-4590-a656-3d3d57b7767f
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_buner_fixed
   - id: 223348
     prefix: '92963'
     number_min_length: 11
     number_max_length: 12
-    uuid: e508f871-802b-4d47-b5f6-77ef7ec769ee
+    uuid: 080aaf9d-60b8-4155-b55f-b54724db75d0
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_tank_fixed
   - id: 223704
     prefix: '92965'
     number_min_length: 11
     number_max_length: 12
-    uuid: 359b87c0-c6c2-42ed-91bf-c909b630fab6
+    uuid: f7f5f8e6-c11d-403d-8e81-d2d934d9f0a8
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_south_waziristan_fixed
   - id: 226309
     prefix: '92966'
     number_min_length: 11
     number_max_length: 12
-    uuid: 61d77b15-a55d-447f-97ad-876dfc33be0b
+    uuid: 81b04b44-f72d-4f1c-81e3-be4ab17e3123
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_dera_ismail_khan_fixed
   - id: 227307
     prefix: '92969'
     number_min_length: 11
     number_max_length: 12
-    uuid: 3338bd40-6f35-44df-b9b1-9e45c4eb99e9
+    uuid: 61a7f1eb-d631-48ed-a78d-4e5507eba4b5
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_lakki_marwat_fixed
   - id: 240751
     prefix: '92992'
     number_min_length: 11
     number_max_length: 12
-    uuid: 3795c261-f4ca-463f-8a06-df2c55145826
+    uuid: bcaf7448-e2b5-4340-aaaf-5550e7ca6c66
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_abbottabad_fixed
   - id: 241085
     prefix: '92995'
     number_min_length: 11
     number_max_length: 12
-    uuid: 36e3d0c6-56a5-4e8a-af06-983d780a7302
+    uuid: 4b201dbb-5578-4ef5-9028-500ee48e3eb3
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_haripur_fixed
   - id: 241142
     prefix: '92996'
     number_min_length: 11
     number_max_length: 12
-    uuid: 1ca92b10-edc3-46e4-ab45-13001bd0a688
+    uuid: ecc4f14b-ad6e-476d-afe4-1065073cdc88
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_shangla_fixed
   - id: 241372
     prefix: '92997'
     number_min_length: 11
     number_max_length: 12
-    uuid: 27099123-e2d5-4dd8-b75c-54b49656da07
+    uuid: 4c8188f2-ca27-4836-afbc-031b8046736a
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_mansehra_batagram_fixed
   - id: 245884
     prefix: '92998'
     number_min_length: 11
     number_max_length: 12
-    uuid: ec5422ef-2469-45d3-a7c2-d30a9c241af8
+    uuid: f85ac967-ea6a-4843-b123-d57bf86832ac
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_kohistan_fixed
   - id: 274241
     prefix: '9221'
     number_min_length: 12
     number_max_length: 12
-    uuid: 834b9f16-9948-4eca-9b2c-3ecc0d36cd49
+    uuid: c9308846-f10c-4d31-ab3e-25bd576fd28b
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_karachi_fixed
   - id: 278003
     prefix: '9222'
     number_min_length: 11
     number_max_length: 11
-    uuid: 14d38923-470a-4058-87e9-59fcbd2ff8da
+    uuid: e7c62809-6677-430b-ba1d-537c627ba65c
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_hyderabad_fixed
   - id: 287495
     prefix: '92235'
     number_min_length: 11
     number_max_length: 12
-    uuid: 165be3c3-dba2-4ecd-9aee-823d2cb2629f
+    uuid: d24a538b-457c-4041-af17-275fb19a0b67
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_sanghar_fixed
   - id: 288633
     prefix: '92238'
     number_min_length: 11
     number_max_length: 12
-    uuid: 1f2b8c1f-d9a6-4524-83c0-1f876c70f876
+    uuid: 9f6cc2ed-f52b-4e45-bddc-c27dc2a65d7f
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_umerkot_fixed
   - id: 292492
     prefix: '92232'
     number_min_length: 11
     number_max_length: 12
-    uuid: 8f8fe6e7-68dd-40bb-b978-7bcdd4c6d216
+    uuid: 044b8dc8-d985-4171-b4dd-d65111945af0
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_tharparkar_fixed
   - id: 292942
     prefix: '92233'
     number_min_length: 11
     number_max_length: 12
-    uuid: 7e478579-4c7d-4bd3-9903-1e8509e401b5
+    uuid: deb5f4ec-1344-41c6-9c7c-9cca1d53dbcf
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_mirpur_khas_fixed
   - id: 294653
     prefix: '92242'
     number_min_length: 11
     number_max_length: 12
-    uuid: c3eceabd-dadc-49c9-887c-5e02613b7bab
+    uuid: d9d23751-6e50-43a2-8655-2ca0b74abec1
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_naushero_feroze_fixed
   - id: 294881
     prefix: '92243'
     number_min_length: 11
     number_max_length: 12
-    uuid: 9a2fa21a-e66f-47e0-a77c-d03b286947f6
+    uuid: b983b559-e75f-4ec4-9ab8-d73bf2a23548
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_khairpur_fixed
   - id: 295191
     prefix: '92244'
     number_min_length: 11
     number_max_length: 12
-    uuid: 1435bd00-1e80-4694-b397-1b710d2b7961
+    uuid: c41b72ae-69f7-47b8-ac00-3ccab1d75e9f
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_nawabshah_fixed
   - id: 301977
     prefix: '9225'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1c694c22-8400-4e5d-a9d8-428f37687ab9
+    uuid: 5b0ab2c1-b7a6-4688-9ad0-33829280b984
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_dadu_fixed
   - id: 315551
     prefix: '92297'
     number_min_length: 11
     number_max_length: 12
-    uuid: a9a5178a-c210-496d-bafb-3c1eee5a2de9
+    uuid: 6249a4b9-8475-4fd4-8bdb-17ed4590fb2e
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_badin_fixed
   - id: 315801
     prefix: '92298'
     number_min_length: 11
     number_max_length: 12
-    uuid: fbcc6fc8-ebeb-49f5-98ec-65c747bf2275
+    uuid: dc6afa5d-cda3-41f1-b8ae-74b688e6f937
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_thatta_fixed
   - id: 349896
     prefix: '9240'
     number_min_length: 11
     number_max_length: 11
-    uuid: f54334fe-c2d9-4e96-a921-f4251f41e310
+    uuid: b1886014-e369-486d-9e50-d0f1cee6d001
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_sahiwal_fixed
   - id: 362533
     prefix: '9241'
     number_min_length: 11
     number_max_length: 11
-    uuid: 230322e9-a57b-46a2-b4c7-2983e063cc3e
+    uuid: 805cf996-1972-470c-9ed7-1f532f0bb2b9
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_faisalabad_fixed
   - id: 370196
     prefix: '9244'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0c0d782e-0e93-445b-91a2-5855334ef970
+    uuid: 243ae431-82d7-409b-b883-5a9af6b688bf
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_okara_fixed
   - id: 377183
     prefix: '9242'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9712404e-4ad5-4906-9eaf-6042f48bf472
+    uuid: 64495914-38b8-4e1b-8be2-b6982731c2ff
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_lahore_fixed
   - id: 388175
     prefix: '92453'
     number_min_length: 11
     number_max_length: 12
-    uuid: 0da9441a-e29c-439a-bb07-0f256274d78a
+    uuid: 05f8c5d1-3211-4d0e-8948-730423cc5e3f
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_bhakkar_fixed
   - id: 388475
     prefix: '92459'
     number_min_length: 11
     number_max_length: 12
-    uuid: 3486421f-d2e9-4651-8ff4-01e390be4c37
+    uuid: 669d6db8-c7d2-468e-b8e1-43731e518a9a
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_mianwali_fixed
   - id: 388636
     prefix: '9246'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0ae594bc-baeb-4993-b791-d54c85d3b3ed
+    uuid: 53d862c1-7297-45e4-8831-dfe2c28d9b32
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_toba_tek_singh_fixed
   - id: 393427
     prefix: '92454'
     number_min_length: 11
     number_max_length: 12
-    uuid: ac120d02-e257-4aec-a2b4-c16b17596cae
+    uuid: c0067002-0a09-4626-abb3-5a44e1a49d16
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_khushab_fixed
   - id: 393864
     prefix: '92457'
     number_min_length: 11
     number_max_length: 12
-    uuid: 810695d2-4c92-4c51-8697-0205f70fe993
+    uuid: 347856a5-6e85-4f4f-8e19-3f2cab994796
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_pakpattan_fixed
   - id: 399487
     prefix: '9247'
     number_min_length: 11
     number_max_length: 11
-    uuid: 37e5b8c4-e0f5-4947-b31a-bc95e1871f0f
+    uuid: 43f122f3-2f4b-4cf5-b630-6a2c3cc058f1
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_jhang_fixed
   - id: 409900
     prefix: '92822'
     number_min_length: 11
     number_max_length: 12
-    uuid: 3e91d7f7-3d04-4818-b8fa-51ebbba2f5ed
+    uuid: fdf6a2c7-8cee-4e62-a027-07e59568e040
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_zhob_fixed
   - id: 409929
     prefix: '92823'
     number_min_length: 11
     number_max_length: 12
-    uuid: 278ee6c4-1df0-4809-ab7a-12ccf09ead95
+    uuid: 10122751-15c6-4baf-a392-a52955b14205
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_killa_saifullah_fixed
   - id: 409993
     prefix: '92824'
     number_min_length: 11
     number_max_length: 12
-    uuid: c9237b07-591f-413a-b430-f15484af2032
+    uuid: c8bd7853-903e-49b1-b80e-97524331d069
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_loralai_fixed
   - id: 410226
     prefix: '92825'
     number_min_length: 11
     number_max_length: 12
-    uuid: 1001f002-1f4f-41d7-b78c-a1a026168b76
+    uuid: ff1a3a57-ed8f-4735-8b69-5bc9bcc92554
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_chagai_fixed
   - id: 411016
     prefix: '92826'
     number_min_length: 11
     number_max_length: 12
-    uuid: 45b29d7d-b368-4361-856f-7bcceae1aea6
+    uuid: 8f575fff-2541-477a-8089-2a8bd13748fd
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_k_abdullah_pishin__fixed
   - id: 413680
     prefix: '9281'
     number_min_length: 11
     number_max_length: 11
-    uuid: a3a8fe10-5ffa-4212-a059-0dfd333cba35
+    uuid: af1fcef6-9b3b-49f4-809c-24a9aa54d965
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_quetta_fixed
   - id: 420509
     prefix: '92828'
     number_min_length: 11
     number_max_length: 12
-    uuid: 1923f581-7674-4e0c-affa-e52c99883a23
+    uuid: 98888659-3aee-4ba9-8323-9b1b91e5886f
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_musakhel_fixed
   - id: 421397
     prefix: '92829'
     number_min_length: 11
     number_max_length: 12
-    uuid: b2f7a39f-097d-4436-a97c-078bf0787197
+    uuid: c6d7b885-0b2a-4db4-a01a-9bfa05cb992d
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_barkhan_kohlu_fixed
   - id: 422640
     prefix: '92832'
     number_min_length: 11
     number_max_length: 12
-    uuid: dbbe99e0-84ef-4ac0-b11e-58c1c4795619
+    uuid: 43d3b29c-3943-4bc8-9b9f-e6315050fa73
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_bolan_fixed
   - id: 424053
     prefix: '92835'
     number_min_length: 11
     number_max_length: 12
-    uuid: 4fae021d-69d1-42a4-96c6-f34a97e7d158
+    uuid: e1cf7aa0-8e93-4371-a126-9619828478f7
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_dera_bugti_fixed
   - id: 424284
     prefix: '92837'
     number_min_length: 11
     number_max_length: 12
-    uuid: 25a49095-abc2-4e44-8406-28575703c86f
+    uuid: ed2cf898-ff9d-4678-b805-219da1fe37c0
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_jhal_magsi_fixed
   - id: 424309
     prefix: '92838'
     number_min_length: 11
     number_max_length: 12
-    uuid: 4476ed1c-e4a7-4856-b4e5-5847e0ae2a94
+    uuid: c0dbe371-2a01-4217-a940-f619aefe5478
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_jaffarabad_nasirabad_fixed
   - id: 424518
     prefix: '92843'
     number_min_length: 11
     number_max_length: 12
-    uuid: bb0a094f-45a4-4970-b0bc-6f33a1fd8247
+    uuid: 2e37e7c3-bce2-4ef1-b737-ab68ac35e314
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_mastung_fixed
   - id: 425338
     prefix: '92844'
     number_min_length: 11
     number_max_length: 12
-    uuid: b82751fa-e4ae-4b81-b6c4-730c64c5a20e
+    uuid: 5d77d202-cab9-4c9a-af70-647e09dd68e0
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_kalat_fixed
   - id: 426085
     prefix: '92847'
     number_min_length: 11
     number_max_length: 12
-    uuid: 215604eb-e239-4ebf-81af-89f8f6ddd060
+    uuid: b90dca73-ee7f-4b56-be21-466120e35d0c
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_kharan_fixed
   - id: 427539
     prefix: '92852'
     number_min_length: 11
     number_max_length: 12
-    uuid: c2d33c46-6e24-4f6c-aff1-83e331245cab
+    uuid: ca9b282d-9fd7-4ca6-953f-a1f931a41fe2
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_kech_fixed
   - id: 427554
     prefix: '92853'
     number_min_length: 11
     number_max_length: 12
-    uuid: 17886ed5-45cf-494a-b067-4a0c9de1f131
+    uuid: a40b41db-efc0-478d-8337-8e9ab30eb232
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_lasbela_fixed
   - id: 427738
     prefix: '92855'
     number_min_length: 11
     number_max_length: 12
-    uuid: 19fa6e50-80dd-4932-a544-83ba4d34a41f
+    uuid: 00b9b14a-e308-43f7-adaa-11b79df86712
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_panjgur_fixed
   - id: 427782
     prefix: '92856'
     number_min_length: 11
     number_max_length: 12
-    uuid: dbbd64b1-2aee-4771-949b-3733a47ddd9f
+    uuid: e7ef1b23-979a-4685-8e23-45b1f53a7a15
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_awaran_fixed
   - id: 428707
     prefix: '9286'
     number_min_length: 11
     number_max_length: 11
-    uuid: 74cf06d1-6924-43cd-9a5f-5c7e794e8649
+    uuid: 97133b5a-320c-43a7-b358-0f414d2c863c
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_gwadar_fixed
   - id: 432164
     prefix: '92833'
     number_min_length: 11
     number_max_length: 12
-    uuid: 22b10605-79e5-446d-981b-cfe0ca25ad30
+    uuid: 9fa555b0-9e88-4eaf-a8a6-251d567bde83
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_sibi_ziarat_fixed
   - id: 435329
     prefix: '92848'
     number_min_length: 11
     number_max_length: 12
-    uuid: 82ec4119-f58f-42f2-ae7b-e831e9055970
+    uuid: 3b96ec97-b845-4299-8f87-8da22df37d7e
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_khuzdar_fixed
   - id: 458153
     prefix: '9291'
     number_min_length: 11
     number_max_length: 11
-    uuid: c2f73852-692f-4c49-99d0-df7829b1ffe7
+    uuid: e08fd783-f2ac-4533-a0ec-9bd162a5fdc6
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_peshawar_charsadda_fixed
   - id: 474429
     prefix: '92924'
     number_min_length: 11
     number_max_length: 12
-    uuid: 45243fed-813d-4ca4-aea2-27129303d5df
+    uuid: 7d1f2f0f-32aa-442a-851f-32c0afadd1b7
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_mohmand_agency_khyber_agency_fixed
   - id: 474669
     prefix: '92925'
     number_min_length: 11
     number_max_length: 12
-    uuid: 52354c9d-bbaf-42f1-ad4a-0dc0f327b9ad
+    uuid: d48dabc5-cc40-435a-b277-9a31d04fbf64
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_hangu_orakzai_agency_fixed
   - id: 475298
     prefix: '92926'
     number_min_length: 11
     number_max_length: 12
-    uuid: 91bbdb0b-0d4c-408b-b725-91008b2f5764
+    uuid: 0e6e8df2-fbb9-407f-943a-b8bd454e68e0
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_kurram_agency_fixed
   - id: 477110
     prefix: '92922'
     number_min_length: 11
     number_max_length: 12
-    uuid: 5f9e6697-b828-44da-9baf-14a19b62fa26
+    uuid: 99a6f3f4-7945-4533-a62e-8c5efc07713e
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_kohat_fixed
   - id: 478439
     prefix: '92923'
     number_min_length: 11
     number_max_length: 12
-    uuid: 8dcb54bd-67da-45e6-8282-3868efc217db
+    uuid: e1d18f8a-f0c0-4cd4-90a3-95cce6e02e75
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_nowshera_fixed
   - id: 482771
     prefix: '92927'
     number_min_length: 11
     number_max_length: 12
-    uuid: bca65190-fed1-4e7e-93b4-6bc323dfc7f0
+    uuid: e403ef13-0221-49a3-9f2f-0b4f1193ab83
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_karak_fixed
   - id: 482786
     prefix: '92928'
     number_min_length: 11
     number_max_length: 12
-    uuid: a3a2a848-2d49-4249-ac64-a72990a8cae9
+    uuid: 94fde2f4-0917-46b8-a95f-0b8a3dbca23e
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_bannu_north_waziristan_fixed
   - id: 490539
     prefix: '92932'
     number_min_length: 11
     number_max_length: 12
-    uuid: 97128358-bb4e-41de-b51c-f33ac0c5980d
+    uuid: d7592186-59ac-4640-84ed-74da07916ab8
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_malakand_fixed
   - id: 498823
     prefix: '92937'
     number_min_length: 11
     number_max_length: 12
-    uuid: 1bb33d88-3e7f-4e40-934f-1e6bdd186cb7
+    uuid: fd2db56a-8d43-4821-b5fd-65cab1a1e14d
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_mardan_fixed
   - id: 501490
     prefix: '92938'
     number_min_length: 11
     number_max_length: 12
-    uuid: 570eb4b4-ca0a-4117-bc1a-e7e485aa98ba
+    uuid: 1821b791-0a93-4c94-a7e4-73d81457a06c
     country_id: *pk
-    network_id: *pk_fixed
+    network_id: *pk_swabi_fixed
 # Country code Prefixes
   - id: 242076
     prefix: '92'
     number_min_length: 3
     number_max_length: 100
-    uuid: 973b73e9-c0b5-4d2d-97d7-a02e15a16ff9
+    uuid: 5cd7958a-c516-40aa-a2ef-e46b8a7888ed
     country_id: *pk
     network_id: null
 # Supplementary services Prefixes
@@ -872,70 +1324,70 @@ network_prefixes:
     prefix: '920'
     number_min_length: 6
     number_max_length: 7
-    uuid: 36d88c3c-539a-4f78-aa80-c6c95b636f4b
+    uuid: ffb2d9c8-ff5e-48ff-ab62-8691d9f30a68
     country_id: *pk
     network_id: *pk_special_services
   - id: 242470
     prefix: '921'
     number_min_length: 4
     number_max_length: 7
-    uuid: f1eba9e9-c95b-41b2-862a-63d2d3413a97
+    uuid: 6d0f77e4-eef2-43a2-9f1d-8388a4a2ac80
     country_id: *pk
     network_id: *pk_special_services
   - id: 242608
     prefix: '92111'
     number_min_length: 11
     number_max_length: 11
-    uuid: f8086595-c7f9-42e2-a0e3-9aa0ddf7172f
+    uuid: 8a742d8e-97a8-4d0c-8fe8-ebec379f3908
     country_id: *pk
     network_id: *pk_universal_access_number_uan
   - id: 242825
     prefix: '921220'
     number_min_length: 11
     number_max_length: 11
-    uuid: a0b841b8-abf5-4919-add4-e1735cdc804a
+    uuid: 2d84578c-b988-4dbd-9f46-2c11ac734817
     country_id: *pk
     network_id: *pk_universal_personal_telecommunications_upt
   - id: 242826
     prefix: '921229'
     number_min_length: 11
     number_max_length: 11
-    uuid: e501a96d-b185-49fc-b84a-220301e025ef
+    uuid: cf740da6-eeec-4390-85f4-a09b89bb61ad
     country_id: *pk
     network_id: *pk_universal_personal_telecommunications_upt
   - id: 242870
     prefix: '92131'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8c137d16-873d-489c-8600-1cf44c6f5c8d
+    uuid: c753f37c-a102-46a7-aae4-495589c9dd5c
     country_id: *pk
     network_id: *pk_universal_internet_number_uin
   - id: 253098
     prefix: '928'
     number_min_length: 6
     number_max_length: 6
-    uuid: 60195f81-69a9-4f6f-9fae-c1f13ca69f20
+    uuid: 210887ef-5e40-4601-8542-5adca5d01160
     country_id: *pk
     network_id: *pk_sms_services
   - id: 257124
     prefix: '929'
     number_min_length: 6
     number_max_length: 6
-    uuid: a77ed974-b470-43a0-a974-76bbb5202ddc
+    uuid: 19725529-738e-4480-88f0-8057c794c513
     country_id: *pk
     network_id: *pk_sms_services
   - id: 403485
     prefix: '92800'
     number_min_length: 10
     number_max_length: 10
-    uuid: 20e7b7ad-dcca-485e-a6af-96ec39ae9966
+    uuid: 2e332f4a-595a-44d5-b9c8-8dda8bc28890
     country_id: *pk
     network_id: *pk_freephone_services
   - id: 454584
     prefix: '92900'
     number_min_length: 10
     number_max_length: 10
-    uuid: eced8d73-10d3-4fbc-8ca5-7cf6f69b2bcf
+    uuid: 1e22dda6-db58-4a74-9ef4-fc8629b14a0b
     country_id: *pk
     network_id: *pk_premium_rate_services
 # Mobile Prefixes
@@ -943,48 +1395,48 @@ network_prefixes:
     prefix: '9230'
     number_min_length: 12
     number_max_length: 12
-    uuid: 068d982c-e8a0-4368-9846-7f64960d7b9b
+    uuid: d90cd476-8b0c-4423-a7eb-56a0919eb0ab
     country_id: *pk
     network_id: *pk_jazz_mobile
   - id: 321178
     prefix: '9231'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4859e45a-b0bc-472e-a343-3882d98f7073
+    uuid: f85b9106-d3df-4be6-a68d-d42e473dfc61
     country_id: *pk
     network_id: *pk_zong_mobile
   - id: 327283
     prefix: '9232'
     number_min_length: 12
     number_max_length: 12
-    uuid: 20f58c45-e843-4a23-b754-4a9d872794a1
+    uuid: 059e1496-40db-4c69-b16d-bcc0d802558b
     country_id: *pk
     network_id: *pk_jazz_mobile
   - id: 337291
     prefix: '9233'
     number_min_length: 12
     number_max_length: 12
-    uuid: c9443643-6e2d-4cdc-a012-0ba6add4598a
+    uuid: c996732a-8228-4142-aca5-73be701f0919
     country_id: *pk
     network_id: *pk_ufone_mobile
   - id: 340479
     prefix: '9234'
     number_min_length: 12
     number_max_length: 12
-    uuid: b826d97b-268a-4b88-a121-dad7587f2786
+    uuid: f0c62598-5cc3-4ba2-ab57-9590a0d835da
     country_id: *pk
     network_id: *pk_telenor_mobile
   - id: 349433
     prefix: '923'
     number_min_length: 12
     number_max_length: 12
-    uuid: dcca5ee5-a14b-4665-b0b5-bbc873cf3d8f
+    uuid: bac00d74-5be2-4337-99f3-f67262af4dbe
     country_id: *pk
     network_id: *pk_mobile
   - id: 352242
     prefix: '9235'
     number_min_length: 12
     number_max_length: 12
-    uuid: e1673b46-50b4-435b-9883-e8bdcc136e5c
+    uuid: 644ba129-8e51-4af6-bbea-d95b801a886d
     country_id: *pk
     network_id: *pk_scom_mobile
