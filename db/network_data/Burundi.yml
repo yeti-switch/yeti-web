@@ -3,407 +3,407 @@ networks:
 # Supplementary services Networks
   - id: &bi_special_services 3820
     name: BI Special Services
-    uuid: 6139cc4e-e939-4b5a-abb2-6c2ff0d27c8e
+    uuid: 83996aa0-bae9-49bb-b7f7-f1e1efa2436a
     type_id: 14
   - id: &bi_emergency_services 4014
     name: BI Emergency Services
-    uuid: 946a7087-87ca-4aa3-9c3d-3ef7150c6b43
+    uuid: 84e5fbe2-d97a-4a35-a086-8fd949f233e8
     type_id: 14
   - id: &bi_value_added_services 4212
     name: BI Value Added Services
-    uuid: a82828c6-838d-4511-9cd2-430b7ecf4b36
+    uuid: f019a344-cb8b-4531-b819-215fb0e21330
     type_id: 14
 # Fixed Networks
   - id: &bi_fixed 4298
     name: BI Fixed
-    uuid: 75d2b190-9457-4428-904f-c3fe0e3be3bc
+    uuid: 1d201882-1612-4a0e-8540-7322a12fcdfd
     type_id: 12
 # Mobile Networks
   - id: &bi_lumitel_mobile 4905
     name: BI Lumitel Mobile
-    uuid: a577775a-c390-45f4-b4b0-1e5e722353c9
+    uuid: 459108c3-eb6b-45bb-a1b8-f672c1b4ffce
     type_id: 3
   - id: &bi_econet_leo_mobile 4937
     name: BI Econet Leo Mobile
-    uuid: 5de32eb8-a88f-4ec7-8a47-40b331bd3a7d
+    uuid: e1561d3f-4e3b-48a2-bc79-05f1254f3765
     type_id: 3
   - id: &bi_onamob_mobile 5476
     name: BI Onamob Mobile
-    uuid: 5370310d-67f2-490a-8a1d-c99c45a938a1
+    uuid: 9e52df55-f2b3-416f-a8ec-876feef6f86d
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 238954
+  - id: 238957
     prefix: '257'
     number_min_length: 4
     number_max_length: 100
-    uuid: 595a120a-c092-4333-a79b-03842013f557
+    uuid: fd0ddb2b-1507-45d9-a301-70d29c5b23b9
     country_id: *bi
     network_id: null
 # Supplementary services Prefixes
-  - id: 239359
+  - id: 239362
     prefix: '2571'
     number_min_length: 6
     number_max_length: 6
-    uuid: a29dc11a-f5c7-4e1c-937a-71df5f565420
+    uuid: 45080a7f-2207-48c9-81dc-766b8c714370
     country_id: *bi
     network_id: *bi_special_services
-  - id: 239584
+  - id: 239590
     prefix: '25711'
     number_min_length: 6
     number_max_length: 6
-    uuid: 29920195-2dee-41c2-ab58-52d435b1570c
+    uuid: bb9cb430-1ab7-4e19-8dce-9e29dc46b6b2
     country_id: *bi
     network_id: *bi_emergency_services
-  - id: 239935
+  - id: 239941
     prefix: '25715'
     number_min_length: 6
     number_max_length: 6
-    uuid: b6ca1edd-6b0e-48b9-82e2-e371fff4924d
+    uuid: ff84fbd6-86fd-4b19-8fcc-60b6e8f1b232
     country_id: *bi
     network_id: *bi_value_added_services
-  - id: 240010
+  - id: 240016
     prefix: '25716'
     number_min_length: 6
     number_max_length: 11
-    uuid: 5dca17a7-50e6-4f9d-90f0-de59d5d8f141
+    uuid: 9024b749-91a2-407f-b58c-dd98e61fe3d3
     country_id: *bi
     network_id: *bi_value_added_services
-  - id: 240923
+  - id: 240929
     prefix: '2574'
     number_min_length: 6
     number_max_length: 6
-    uuid: b50f5e6e-e500-4198-8add-0ca06052eca7
+    uuid: ce15861b-4067-4c93-ab80-374b7668e483
     country_id: *bi
     network_id: *bi_special_services
-  - id: 244373
+  - id: 244397
     prefix: '2572'
     number_min_length: 6
     number_max_length: 6
-    uuid: d6d3336c-0146-4c06-94bd-c9e9ee6487cf
+    uuid: 8550d3f1-486a-4b7c-bf93-2ee9137599e9
     country_id: *bi
     network_id: *bi_special_services
-  - id: 246544
+  - id: 246571
     prefix: '2575'
     number_min_length: 6
     number_max_length: 6
-    uuid: e1c658b4-4ea3-429b-88bf-253debe305d4
+    uuid: 88b7dafa-e891-42df-8e46-43ee0d7e3742
     country_id: *bi
     network_id: *bi_special_services
-  - id: 253606
+  - id: 253668
     prefix: '2578'
     number_min_length: 6
     number_max_length: 6
-    uuid: b3d7550e-ddbf-4bf9-9362-b712aa8012c8
+    uuid: 08e4ea9a-4fba-4907-bda5-ecef67272280
     country_id: *bi
     network_id: *bi_special_services
 # Fixed Prefixes
-  - id: 240227
+  - id: 240233
     prefix: '25731'
     number_min_length: 11
     number_max_length: 11
-    uuid: b453a297-a437-41b0-83fb-055f7a4b0bef
+    uuid: 5d6f626b-bee6-49a1-8ca0-72e8d5d1adef
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244699
+  - id: 244725
     prefix: '25722'
     number_min_length: 11
     number_max_length: 11
-    uuid: 29749123-722b-4d15-91bd-845b7fe5c301
+    uuid: f938dc11-1ff6-4255-a74e-423786f1c12e
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244747
+  - id: 244773
     prefix: '2572220'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0ccfcc79-564e-440b-a6e7-6fdd6c60731d
+    uuid: a605dca5-82fe-4b9b-bcb7-d8741382405e
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244751
+  - id: 244777
     prefix: '2572221'
     number_min_length: 11
     number_max_length: 11
-    uuid: d3171da8-9a06-43a0-b47c-0bec91e9c39a
+    uuid: 7e5745cd-47bf-4a0a-97db-83e177e88cb2
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244762
+  - id: 244788
     prefix: '2572222'
     number_min_length: 11
     number_max_length: 11
-    uuid: 72f5c6bb-e3f8-4305-aba4-5231c016d0c2
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244774
-    prefix: '2572223'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 884ecb3b-e416-48da-bac1-0aa7f970ae82
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244786
-    prefix: '2572224'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 89dfe90c-35d4-45bb-a663-8a2408992610
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244797
-    prefix: '2572225'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4a0aea0d-c373-4f3c-81fd-88e916b7b3c4
+    uuid: 8ee27d6f-17a7-4d9f-9d9b-38c7660a0af8
     country_id: *bi
     network_id: *bi_fixed
   - id: 244800
-    prefix: '2572226'
+    prefix: '2572223'
     number_min_length: 11
     number_max_length: 11
-    uuid: f732b456-0bff-486f-84c6-d921d4fe862c
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244802
-    prefix: '25722261'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6105cfbf-c748-46fe-9149-3d1123f6562b
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244803
-    prefix: '25722262'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2ba3727e-eaf6-4308-afbf-c3b032a529a9
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244804
-    prefix: '25722263'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 103d5ef7-37f4-4e8c-b539-898784c17f56
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244805
-    prefix: '25722264'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e7e48d83-65ad-4352-b61c-9a33735cd9f2
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244806
-    prefix: '2572227'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d3dc55d5-8761-4e12-bd4c-d075eab84fc7
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244809
-    prefix: '257222700'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8c022413-5b3b-4896-b898-7918d596136c
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244810
-    prefix: '257222703'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 17edf49b-97a6-4cd8-8637-472ee7a22fe3
-    country_id: *bi
-    network_id: *bi_fixed
-  - id: 244811
-    prefix: '25722275'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 774a210e-c874-4d0e-8350-24a38f344757
+    uuid: 11589e9c-7244-4a28-a2ec-a25c988d909b
     country_id: *bi
     network_id: *bi_fixed
   - id: 244812
+    prefix: '2572224'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 79bfd882-82b1-47ed-b322-3e00507b8773
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244823
+    prefix: '2572225'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 67dd1ab0-03a2-42e6-9074-6815accfc80b
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244826
+    prefix: '2572226'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9499dca8-b0bb-4f14-a7f7-8d947fba132c
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244828
+    prefix: '25722261'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f7c0ea0f-bc53-41ca-a5c7-5def3a215a28
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244829
+    prefix: '25722262'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5603b8ba-0417-4993-9aac-0dc3c4a9c730
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244830
+    prefix: '25722263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a6afc28-a080-4a9e-993e-962f1909865c
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244831
+    prefix: '25722264'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a680ebf-640b-4d17-bd13-d0e7eb121747
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244832
+    prefix: '2572227'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 249dde58-9bc0-4ee0-8e0c-7810ac464552
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244835
+    prefix: '257222700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 527ad4b4-e134-4e83-b873-d20f52a281b8
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244836
+    prefix: '257222703'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ae9b0a14-8080-429d-93db-f4ddf4d19162
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244837
+    prefix: '25722275'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: abf7a2cf-8ec3-4449-ba81-28a03de9c714
+    country_id: *bi
+    network_id: *bi_fixed
+  - id: 244838
     prefix: '25722276'
     number_min_length: 11
     number_max_length: 11
-    uuid: 59ef028b-d22c-48d2-902b-e8c761417983
+    uuid: e13a7505-72aa-4674-8b88-32b7f3126aa0
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244813
+  - id: 244839
     prefix: '25722277'
     number_min_length: 11
     number_max_length: 11
-    uuid: 17861380-1870-4f59-9684-a0801860b591
+    uuid: 2ce7c0a4-3353-475c-9a2d-3deaae731abd
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244817
+  - id: 244843
     prefix: '2572230'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9a7dbcd7-cb2d-4f9a-ba4e-947feec4aedf
+    uuid: 5e0e9b1c-4420-4a0a-8480-172f783d1c3a
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244819
+  - id: 244845
     prefix: '25722302'
     number_min_length: 11
     number_max_length: 11
-    uuid: ad2f637e-de6f-43e3-a45a-2aed1cad3ea1
+    uuid: 6fa26e96-72b0-4bbc-9b5c-5a7b40a43784
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244820
+  - id: 244846
     prefix: '25722304'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8cb3da82-c754-4d24-be96-87feb0f09b46
+    uuid: 534c5aaa-3bea-4faa-9325-3bc0edccc4c3
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244821
+  - id: 244847
     prefix: '25722305'
     number_min_length: 11
     number_max_length: 11
-    uuid: 88bf9b76-4103-4930-93d0-7cfdde7352f8
+    uuid: 7afb1128-906f-44a5-9f1a-0289612363dd
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244822
+  - id: 244848
     prefix: '25722306'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1a0c5728-447e-40f9-bd75-e36904193ffb
+    uuid: b3d88cc4-a842-4409-8913-0f50cf071d40
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244842
+  - id: 244868
     prefix: '2572240'
     number_min_length: 11
     number_max_length: 11
-    uuid: 07fa89de-4529-4284-b844-f6ac15dc3e92
+    uuid: 8482a73d-ed75-4e9b-a26e-17d5f04addbc
     country_id: *bi
     network_id: *bi_fixed
-  - id: 244850
+  - id: 244876
     prefix: '2572250'
     number_min_length: 11
     number_max_length: 11
-    uuid: 79d36e13-fd83-4220-9bc9-57206d42c9ad
+    uuid: d6a5facb-a4bc-465d-b378-a95c4d627e61
     country_id: *bi
     network_id: *bi_fixed
 # Mobile Prefixes
-  - id: 248189
+  - id: 248242
     prefix: '25765'
     number_min_length: 11
     number_max_length: 11
-    uuid: 910f3d34-c4c7-437a-86b5-225ec540ae6e
+    uuid: 05583dc3-adc9-42ae-a26f-cabab303f16c
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 248680
+  - id: 248734
     prefix: '25771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3f10c614-848c-4b04-8f0e-5c0b771fe8cd
+    uuid: 832a4860-338d-4ed2-9f64-9adfd6f5a5ac
     country_id: *bi
     network_id: *bi_econet_leo_mobile
-  - id: 248767
+  - id: 248821
     prefix: '25772'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4cd22767-d5c1-4fec-a09a-85ef219d5f4e
+    uuid: 1ef9a241-40d8-4ea0-8657-ab2b7746f4c6
     country_id: *bi
     network_id: *bi_econet_leo_mobile
-  - id: 250933
+  - id: 250988
     prefix: '25761'
     number_min_length: 11
     number_max_length: 11
-    uuid: 43b176a7-4187-4e53-821e-d25f06ea14f8
+    uuid: 3d6d09a6-412f-461b-8898-3b9d0fb030f8
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251062
+  - id: 251118
     prefix: '25762'
     number_min_length: 11
     number_max_length: 11
-    uuid: 694a78f1-0425-4fe9-92d0-94438ca15970
+    uuid: e400d838-f043-45f9-8393-bbaef81f6c11
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251256
+  - id: 251312
     prefix: '257660'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a5382dd-9956-4c42-b9d7-f6168015f5cd
+    uuid: b239f509-9a19-4201-a1a0-c18e60e54131
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251284
+  - id: 251340
     prefix: '257661'
     number_min_length: 11
     number_max_length: 11
-    uuid: 482bfb3e-6e95-4a7c-a5af-7f198a551458
+    uuid: 687e1281-69f4-450d-931c-e41d1adbc113
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251304
+  - id: 251360
     prefix: '257662'
     number_min_length: 11
     number_max_length: 11
-    uuid: 455086ab-5d81-43dd-bbd3-f975c12fd4c7
+    uuid: 3757447d-e3b0-4a34-abff-56247a604885
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251328
+  - id: 251384
     prefix: '257663'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b49f2dc-82a5-41e7-acc4-f6606936f141
+    uuid: 7c03a482-f2b2-4ece-aae1-97ade10bcd84
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251357
+  - id: 251413
     prefix: '257664'
     number_min_length: 11
     number_max_length: 11
-    uuid: a58fad71-6c0c-4358-b37d-26b037e89b6a
+    uuid: d94d5622-63c1-4138-afda-17ff4666dffb
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251382
+  - id: 251438
     prefix: '257665'
     number_min_length: 11
     number_max_length: 11
-    uuid: 66424508-cf73-498e-b7da-2dab43dd3413
+    uuid: e12612cc-1e21-4a49-9104-fc5c3efb4347
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251405
+  - id: 251461
     prefix: '257666'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0dbc7360-e903-4222-9b33-0ea719bc24f4
+    uuid: 840d2d00-4b26-443b-9368-c01a8ca908bb
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251554
+  - id: 251610
     prefix: '25767'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9fcd7c3-88dc-46fc-88e8-b5183722c8a4
+    uuid: 393dc8cd-176d-426c-89b4-685afec1b2ac
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251627
+  - id: 251683
     prefix: '25768'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a11a860-8b42-43cb-90d6-45d333d1c685
+    uuid: d470e8cc-fbe2-431e-9a90-36864e86b71b
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 251815
+  - id: 251871
     prefix: '25769'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3f7dee90-db4a-443a-82c4-d90284e28f1b
+    uuid: 0bb75c77-446d-4504-ad4f-dbad0bce3ab8
     country_id: *bi
     network_id: *bi_lumitel_mobile
-  - id: 252388
+  - id: 252450
     prefix: '25776'
     number_min_length: 11
     number_max_length: 11
-    uuid: 094eaf06-d3d1-48d6-b708-4282cbda4f01
+    uuid: 0995e10b-250f-4493-8753-9479de8e88b9
     country_id: *bi
     network_id: *bi_econet_leo_mobile
-  - id: 252564
+  - id: 252626
     prefix: '25777'
     number_min_length: 11
     number_max_length: 11
-    uuid: 053b6cc8-1305-4aae-aa7f-0cfe641057f4
+    uuid: 2372e98c-f26f-4273-8a42-ab811a8bcabf
     country_id: *bi
     network_id: *bi_onamob_mobile
-  - id: 253325
+  - id: 253387
     prefix: '25779'
     number_min_length: 11
     number_max_length: 11
-    uuid: 52cb8033-53c3-4b9c-98ea-f35426dce26c
+    uuid: 93cee949-ab70-41f3-98b2-a78d45938afd
     country_id: *bi
     network_id: *bi_econet_leo_mobile

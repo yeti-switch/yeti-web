@@ -3,253 +3,253 @@ networks:
 # Supplementary services Networks
   - id: &gi_special_services 3866
     name: GI Special Services
-    uuid: 216d8132-a67f-40f0-95f6-68537688931d
+    uuid: 804efdbb-b882-44b9-8dbe-9092a21f23ee
     type_id: 14
   - id: &gi_emergency_services 4045
     name: GI Emergency Services
-    uuid: dd7f42a3-56cd-4df2-aecb-f12c9692367f
+    uuid: aef28008-9c13-42eb-a7d0-4393dd5f631b
     type_id: 14
   - id: &gi_social_value_services 4077
     name: GI Social Value Services
-    uuid: 39dbbedf-2123-4db8-802b-b042ce70fbb2
+    uuid: 870d3208-7954-46f5-a015-e88c32295715
     type_id: 14
   - id: &gi_directory_enquiry_services 4109
     name: GI Directory Enquiry Services
-    uuid: 623345dc-84e9-454a-9297-50ed84e2028e
+    uuid: 9d9cf39c-ec90-4ec4-8e08-d4b763326915
     type_id: 14
   - id: &gi_emergency_services_fire_ambulance 4663
     name: GI Emergency Services Fire Ambulance
-    uuid: c08f1bc6-3dd8-4fb8-8d8a-97a5691006c8
+    uuid: da897e81-58cb-437e-a4b4-c2b35229baa6
     type_id: 14
   - id: &gi_emergency_services_police 4685
     name: GI Emergency Services Police
-    uuid: 244f1839-417d-40e9-a8a6-0a5c7f22f00b
+    uuid: f1d8130b-81cc-4240-9ef3-23cb46fb367a
     type_id: 14
   - id: &gi_freephone_services 5170
     name: GI Freephone Services
-    uuid: 7b471427-727b-4085-b403-f28c1aecb381
+    uuid: bbd060c4-bd1e-42cd-8284-ff6ba3b3d324
     type_id: 14
   - id: &gi_premium_rate_services 5549
     name: GI Premium Rate Services
-    uuid: 90f3fb44-c822-453f-82af-9ce960b2ed57
+    uuid: 65ad5810-59d9-4b84-83d5-4e360fa7ee97
     type_id: 14
   - id: &gi_shared_cost_services 5818
     name: GI Shared Cost Services
-    uuid: ff38abe9-7c3e-486f-bd6f-086cb21d0949
+    uuid: f1f3c92d-3ab1-45e2-abb4-d2847e71233e
     type_id: 14
 # Mobile Networks
   - id: &gi_gibtel_mobile 4491
     name: GI Gibtel Mobile
-    uuid: 32dea44f-b009-4f52-afbc-2f466ff05082
+    uuid: ca304d2d-5412-4b94-842f-dc62cb811735
     type_id: 3
   - id: &gi_mcom_mobile 4578
     name: GI Mcom Mobile
-    uuid: f74298e1-2a9a-4e04-ad52-71087b6602a7
+    uuid: b588c53e-ed31-48f4-b4bf-97b603afa427
     type_id: 3
   - id: &gi_mobile 4799
     name: GI Mobile
-    uuid: 898834b0-f6f9-43ef-b41d-eb6a23d3b323
+    uuid: 80d843d5-7fd3-4914-b80d-eabc5987778f
     type_id: 3
   - id: &gi_gibfibrespeed_mobile 4830
     name: GI Gibfibrespeed Mobile
-    uuid: b8540ad4-a66c-4cb0-bb4f-68423b3ab159
+    uuid: b405f5ae-d55b-4d46-b88a-e6c7e68a91a6
     type_id: 3
 # Fixed Networks
   - id: &gi_fixed 4693
     name: GI Fixed
-    uuid: 7d513304-3dd3-4bca-af33-70b79a20f034
+    uuid: 9a9d51f0-4223-4d77-b739-f2d115743421
     type_id: 12
 network_prefixes:
 # Country code Prefixes
-  - id: 239007
+  - id: 239010
     prefix: '350'
     number_min_length: 4
     number_max_length: 100
-    uuid: 75d84c28-e62b-4e99-aa0c-690cf5ab6f32
+    uuid: d7ccc4c6-3ac2-4805-a4fd-12cfb9231125
     country_id: *gi
     network_id: null
 # Supplementary services Prefixes
-  - id: 239408
+  - id: 239411
     prefix: '3501'
     number_min_length: 6
     number_max_length: 9
-    uuid: ff82ddd5-4213-410a-8e01-9eef438dadf8
+    uuid: 556f381a-98c9-4a36-b098-25121fb8bc01
     country_id: *gi
     network_id: *gi_special_services
-  - id: 239623
+  - id: 239629
     prefix: '350112'
     number_min_length: 6
     number_max_length: 6
-    uuid: e1321375-0ec5-45a3-a81e-24c7745b6d29
+    uuid: 148202f6-4579-4ce4-b322-cc701ada71e2
     country_id: *gi
     network_id: *gi_emergency_services
-  - id: 239674
+  - id: 239680
     prefix: '350116'
     number_min_length: 9
     number_max_length: 9
-    uuid: 200a9095-3869-47dc-8508-082f84b81561
+    uuid: c0b49a2c-92e9-4af7-a6c7-580738072b3c
     country_id: *gi
     network_id: *gi_social_value_services
-  - id: 239724
+  - id: 239730
     prefix: '350118'
     number_min_length: 8
     number_max_length: 8
-    uuid: 440a08c9-620e-4cd2-924e-9f8c182d3a9d
+    uuid: 8f18f70c-9054-4092-b69a-6b1db91cc48a
     country_id: *gi
     network_id: *gi_directory_enquiry_services
-  - id: 244334
+  - id: 244358
     prefix: '350190'
     number_min_length: 6
     number_max_length: 6
-    uuid: 45266c83-2251-4d8a-9236-480a75c0c6f7
+    uuid: 1ad8a78e-a490-4d3a-8907-70883fe27c69
     country_id: *gi
     network_id: *gi_emergency_services_fire_ambulance
-  - id: 244366
+  - id: 244390
     prefix: '350199'
     number_min_length: 6
     number_max_length: 6
-    uuid: 082847da-7fac-42f8-8f2e-f875eb5111ec
+    uuid: 4ebfa30e-1e69-470d-94bc-1f4b5267ec65
     country_id: *gi
     network_id: *gi_emergency_services_police
-  - id: 250032
+  - id: 250086
     prefix: '3508'
     number_min_length: 6
     number_max_length: 7
-    uuid: 44e344b3-05a1-4abb-9a1e-116820c5c4ea
+    uuid: ef12db6a-9da3-464d-9a27-50214773ea7e
     country_id: *gi
     network_id: *gi_special_services
-  - id: 250078
+  - id: 250133
     prefix: '35080'
     number_min_length: 7
     number_max_length: 7
-    uuid: 5851c88a-c08a-4d49-8ecd-5bda3ce8e52c
+    uuid: 3927848c-535a-4398-ad0c-9455bafa0cae
     country_id: *gi
     network_id: *gi_freephone_services
-  - id: 253785
+  - id: 253848
     prefix: '35088'
     number_min_length: 7
     number_max_length: 7
-    uuid: f369d902-91c1-42fa-98e7-6310a0a2536b
+    uuid: ef922e67-a4b9-417b-8206-4f001cbcabd0
     country_id: *gi
     network_id: *gi_premium_rate_services
-  - id: 253943
+  - id: 254006
     prefix: '35089'
     number_min_length: 7
     number_max_length: 7
-    uuid: 50566e8b-80a6-4af7-bf2d-4fba41ace2ee
+    uuid: ac1282da-2d2b-4ca5-96d1-409f68dffd28
     country_id: *gi
     network_id: *gi_premium_rate_services
-  - id: 260912
+  - id: 261015
     prefix: '35087'
     number_min_length: 7
     number_max_length: 7
-    uuid: c5a64982-933c-46a6-bb59-7f58efae3cc6
+    uuid: 66638717-0daf-48a9-8fcb-ab92473d84d1
     country_id: *gi
     network_id: *gi_shared_cost_services
 # Mobile Prefixes
-  - id: 242156
+  - id: 242166
     prefix: '35058'
     number_min_length: 11
     number_max_length: 11
-    uuid: d56c1709-039f-49ea-bfbe-00361cef0c19
+    uuid: 7cd9fc82-28b7-4df2-85ea-5c659e974bc9
     country_id: *gi
     network_id: *gi_gibtel_mobile
-  - id: 242470
+  - id: 242493
     prefix: '3506010'
     number_min_length: 11
     number_max_length: 11
-    uuid: 674311da-e9c2-4a46-ab71-466ea8b3cf21
+    uuid: de1ef473-357d-489d-aaa6-74caf922b1bf
     country_id: *gi
     network_id: *gi_mcom_mobile
-  - id: 242473
+  - id: 242496
     prefix: '3506011'
     number_min_length: 11
     number_max_length: 11
-    uuid: a43003d0-0cab-4238-b7e5-5de284f2033d
+    uuid: eb3787b8-bddd-45cd-bcce-62a4d8c9252e
     country_id: *gi
     network_id: *gi_mcom_mobile
-  - id: 246554
+  - id: 246584
     prefix: '3505'
     number_min_length: 11
     number_max_length: 11
-    uuid: 05faf5dc-1d3c-4a61-8540-3234b9fab9df
+    uuid: 6ac45a74-ba67-41c2-ba5e-3a3caab18fdf
     country_id: *gi
     network_id: *gi_mobile
-  - id: 246680
+  - id: 246715
     prefix: '350510'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8cb6a2a6-7d1f-497a-92c0-4a9422a96c5f
+    uuid: 53c236f2-715a-402d-bb86-9a60c3d078a2
     country_id: *gi
     network_id: *gi_gibfibrespeed_mobile
-  - id: 246813
+  - id: 246849
     prefix: '3505250'
     number_min_length: 11
     number_max_length: 11
-    uuid: 602a0528-2b3d-4300-9c42-c32bcd819a49
+    uuid: c741d681-cef0-4051-bd43-6fa1c748087c
     country_id: *gi
     network_id: *gi_gibfibrespeed_mobile
-  - id: 246815
+  - id: 246851
     prefix: '35052510'
     number_min_length: 11
     number_max_length: 11
-    uuid: 86cd8bad-3566-410d-9228-048e8e09b13d
+    uuid: c3a2c76b-a15e-4aeb-a593-413affef465b
     country_id: *gi
     network_id: *gi_gibfibrespeed_mobile
-  - id: 246816
+  - id: 246852
     prefix: '35052511'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4c251b67-aad8-4241-a112-0af285826f01
+    uuid: a3226372-e248-4c1c-8a66-eae06a9ae77a
     country_id: *gi
     network_id: *gi_gibfibrespeed_mobile
-  - id: 246817
+  - id: 246853
     prefix: '35052512'
     number_min_length: 11
     number_max_length: 11
-    uuid: 97d55746-e32d-418d-97da-f6a4f2e7165e
+    uuid: 52f8b93f-7268-4e4b-9b47-eb01d98e5279
     country_id: *gi
     network_id: *gi_gibfibrespeed_mobile
-  - id: 246818
+  - id: 246854
     prefix: '35052513'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8230cab2-0592-4c40-ac10-d3e3c8739cc4
+    uuid: dc5333f9-da6b-4fab-8f9f-628a2d1c66db
     country_id: *gi
     network_id: *gi_gibfibrespeed_mobile
-  - id: 246819
+  - id: 246855
     prefix: '35052514'
     number_min_length: 11
     number_max_length: 11
-    uuid: bcfdcd13-c6e8-4409-9b8b-9343e9df50bd
+    uuid: 0b3fa7c2-eeee-461c-8670-a2d469bfbcd1
     country_id: *gi
     network_id: *gi_gibfibrespeed_mobile
-  - id: 246987
+  - id: 247027
     prefix: '35054'
     number_min_length: 11
     number_max_length: 11
-    uuid: b823cf3e-af50-4737-a11b-f8f804358f6c
+    uuid: 5f438a06-8150-4b4a-a1b3-3bf79bd342fa
     country_id: *gi
     network_id: *gi_gibtel_mobile
-  - id: 247164
+  - id: 247210
     prefix: '35056'
     number_min_length: 11
     number_max_length: 11
-    uuid: b059f525-2732-4ee1-936b-9f6c6a5cafb9
+    uuid: c139d252-1b45-4f29-b556-7094802c46be
     country_id: *gi
     network_id: *gi_gibtel_mobile
-  - id: 247206
+  - id: 247252
     prefix: '35057'
     number_min_length: 11
     number_max_length: 11
-    uuid: c33e65c8-e169-4e82-b487-5d9155946638
+    uuid: 472fbb3e-418e-4638-b6ac-e73d964c8fc0
     country_id: *gi
     network_id: *gi_gibtel_mobile
 # Fixed Prefixes
-  - id: 244390
+  - id: 244415
     prefix: '3502'
     number_min_length: 11
     number_max_length: 11
-    uuid: 88bfe29e-6f0f-4441-95a8-e63f725b92f5
+    uuid: f8198961-651f-46d4-85c6-d796ca5921d0
     country_id: *gi
     network_id: *gi_fixed

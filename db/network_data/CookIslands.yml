@@ -3,234 +3,234 @@ networks:
 # Supplementary services Networks
   - id: &ck_special_services 3731
     name: CK Special Services
-    uuid: 849e6dd7-079b-4109-8162-39969cd30ea3
+    uuid: b8d1281c-3186-4b69-8c76-8420a6ed0a3a
     type_id: 14
   - id: &ck_emergency_services 5709
     name: CK Emergency Services
-    uuid: 1d712c0b-ec68-41b7-a64f-9e6db0923e98
+    uuid: fcaf7b46-21c2-4081-a285-96406a2e88ac
     type_id: 14
 # Fixed Networks
   - id: &ck_fixed 4301
     name: CK Fixed
-    uuid: 21f84fb7-35a4-4732-9f28-4ffe62139dcb
+    uuid: e64bc7e8-9b46-494a-88bc-98ca324072b1
     type_id: 12
 # Mobile Networks
   - id: &ck_bluesky_mobile 4487
     name: CK Bluesky Mobile
-    uuid: 521d32e3-d0fb-4b81-bd3d-604e79e78cdf
+    uuid: 87ef22e0-20f6-48f6-8a00-69ee4996dd71
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 238978
+  - id: 238981
     prefix: '682'
     number_min_length: 4
     number_max_length: 100
-    uuid: be4d92c8-8f25-4a73-985d-374c3199f922
+    uuid: 4bb8a57a-62d3-4d30-8404-5b87e7e8ca8f
     country_id: *ck
     network_id: null
 # Supplementary services Prefixes
-  - id: 239148
+  - id: 239151
     prefix: '6820'
     number_min_length: 6
     number_max_length: 6
-    uuid: 5c612c2c-a404-4ad1-bb4c-2f72791b4f40
+    uuid: 04c71323-c6d5-4e63-aa89-5b8d46d02fda
     country_id: *ck
     network_id: *ck_special_services
-  - id: 239382
+  - id: 239385
     prefix: '6821'
     number_min_length: 6
     number_max_length: 6
-    uuid: 13d59522-d5b8-4f4f-9971-2be4403caa88
+    uuid: 554851e5-e3e0-49ef-838f-290208c3830b
     country_id: *ck
     network_id: *ck_special_services
-  - id: 255244
+  - id: 255313
     prefix: '682999'
     number_min_length: 6
     number_max_length: 6
-    uuid: ec4994df-8bcd-46e0-9253-7716f9b12117
+    uuid: d59d8654-d036-4495-8d6e-25d43baa28a1
     country_id: *ck
     network_id: *ck_emergency_services
 # Fixed Prefixes
-  - id: 240230
+  - id: 240236
     prefix: '68231'
     number_min_length: 8
     number_max_length: 8
-    uuid: a64e0a55-56df-4473-9d81-932a763d8309
+    uuid: a1f59a40-ec8f-434c-a336-150e27358a65
     country_id: *ck
     network_id: *ck_fixed
-  - id: 240363
+  - id: 240369
     prefix: '68232'
     number_min_length: 8
     number_max_length: 8
-    uuid: 953f3e48-cc47-4213-931b-c91b4c4adc0e
+    uuid: 0f90bf88-1e57-4644-bc82-baf1c4d120e9
     country_id: *ck
     network_id: *ck_fixed
-  - id: 240410
+  - id: 240416
     prefix: '68233'
     number_min_length: 8
     number_max_length: 8
-    uuid: 23a2eebd-cdc8-4ff7-9bb4-4364a24e5ba6
+    uuid: f6e881bb-0d55-4a69-b5fd-86543cd7b55e
     country_id: *ck
     network_id: *ck_fixed
-  - id: 240487
+  - id: 240493
     prefix: '68234'
     number_min_length: 8
     number_max_length: 8
-    uuid: bfa9e907-c5a0-4365-a6f1-6d589c5249fb
+    uuid: 5c804d0a-208d-4ca1-9b9a-4fd0bd1f8f84
     country_id: *ck
     network_id: *ck_fixed
-  - id: 240585
+  - id: 240591
     prefix: '68235'
     number_min_length: 8
     number_max_length: 8
-    uuid: a9f9daf4-1e13-4ab4-a9f4-0c3ab4150e6e
+    uuid: 107c4a96-5ca1-4dd2-a367-eef05e75ad0a
     country_id: *ck
     network_id: *ck_fixed
-  - id: 240664
+  - id: 240670
     prefix: '68236'
     number_min_length: 8
     number_max_length: 8
-    uuid: 70229dd8-3b2b-4f63-99b1-526693bfc432
+    uuid: fb035d21-bdf5-4d12-8dfc-047da98a1b4d
     country_id: *ck
     network_id: *ck_fixed
-  - id: 240709
+  - id: 240715
     prefix: '68237'
     number_min_length: 8
     number_max_length: 8
-    uuid: 30feafd7-35f5-42d3-a706-2fc3f037597b
+    uuid: 629b1616-f5e7-4f48-9511-70f5766d4ffd
     country_id: *ck
     network_id: *ck_fixed
-  - id: 241130
+  - id: 241138
     prefix: '68241'
     number_min_length: 8
     number_max_length: 8
-    uuid: 207df1f9-b5b3-471e-9141-401cb58f2af4
+    uuid: fa593c8d-bed7-4b68-9563-51e07bd8bc2b
     country_id: *ck
     network_id: *ck_fixed
-  - id: 241231
+  - id: 241239
     prefix: '68242'
     number_min_length: 8
     number_max_length: 8
-    uuid: 1cc10872-7d94-4ed0-91d3-13b7da025adc
+    uuid: 3c5c7050-8237-4b26-a4d3-896f565b4bbc
     country_id: *ck
     network_id: *ck_fixed
-  - id: 241331
+  - id: 241339
     prefix: '68243'
     number_min_length: 8
     number_max_length: 8
-    uuid: d90d80ac-99ff-4d78-b5bf-bf9ff8e26228
+    uuid: 829e6e3a-bf2d-4fcb-9f95-dafb8239f2e1
     country_id: *ck
     network_id: *ck_fixed
-  - id: 241485
+  - id: 241493
     prefix: '68244'
     number_min_length: 8
     number_max_length: 8
-    uuid: 3e4fb263-73ae-47b4-b3b5-79ac1d6200b2
+    uuid: d4574082-885a-49d0-a141-de9ed5cda7d1
     country_id: *ck
     network_id: *ck_fixed
-  - id: 241630
+  - id: 241638
     prefix: '68245'
     number_min_length: 8
     number_max_length: 8
-    uuid: 4be7eb9a-5d26-4c3e-b013-29bba01df24d
+    uuid: b3421de7-049f-476f-8622-af129acef09c
     country_id: *ck
     network_id: *ck_fixed
-  - id: 242250
+  - id: 242261
     prefix: '68259'
     number_min_length: 8
     number_max_length: 8
-    uuid: 9b3dd70f-5874-4b3a-a541-db3745603296
+    uuid: d7855567-a85e-4567-9703-9e890d0a4d2b
     country_id: *ck
     network_id: *ck_fixed
-  - id: 244380
+  - id: 244404
     prefix: '6822'
     number_min_length: 8
     number_max_length: 8
-    uuid: 74c0184a-2c57-4b2c-b868-c4da87066afc
+    uuid: d0dd9882-a454-4e71-9f35-a4780a4b5912
     country_id: *ck
     network_id: *ck_fixed
-  - id: 247199
+  - id: 247245
     prefix: '68257'
     number_min_length: 8
     number_max_length: 8
-    uuid: 96a3a737-6824-4948-a817-42dfc0e951da
+    uuid: a2ce9e1e-f239-4d6c-b3d1-6a391b889833
     country_id: *ck
     network_id: *ck_fixed
 # Mobile Prefixes
-  - id: 242149
+  - id: 242159
     prefix: '68258'
     number_min_length: 8
     number_max_length: 8
-    uuid: 141abb03-504f-431e-896b-efe86dbaa3d9
+    uuid: 48cb135b-fe01-40bf-9134-598c9d262c7b
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 242310
+  - id: 242322
     prefix: '682591'
     number_min_length: 8
     number_max_length: 8
-    uuid: 3d7c26f8-8560-4474-ba33-97d2796d198c
+    uuid: f44a7f7a-bf0e-4b39-afdf-dbc9cee84f2a
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 246591
+  - id: 246625
     prefix: '68250'
     number_min_length: 8
     number_max_length: 8
-    uuid: a0e589ef-0ef2-4559-8cfc-eade5f64cdcc
+    uuid: 3e32b5f6-9e15-4fc5-ba1e-8d70e250cbdc
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 246666
+  - id: 246700
     prefix: '68251'
     number_min_length: 8
     number_max_length: 8
-    uuid: b0c9d3f6-79dc-4a8f-9f54-a0432fad4f24
+    uuid: 12063d08-af18-4241-9046-78cb247ed45a
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 246736
+  - id: 246771
     prefix: '68252'
     number_min_length: 8
     number_max_length: 8
-    uuid: f1168560-d966-456b-84cf-b1c702ff1dbc
+    uuid: 0d01ffcf-953e-4ec7-b6bd-e404044c1541
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 246890
+  - id: 246929
     prefix: '68253'
     number_min_length: 8
     number_max_length: 8
-    uuid: 24996afe-4585-4dfe-b158-7e7938250475
+    uuid: 9eef9ab8-cfd3-4686-8529-e81dc3da38d9
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 246981
+  - id: 247021
     prefix: '68254'
     number_min_length: 8
     number_max_length: 8
-    uuid: ace99e3f-618d-4d89-8df5-ad54855ae9ac
+    uuid: 37fa6da0-4cb6-47ed-af74-8989e3e3da6f
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 247074
+  - id: 247117
     prefix: '68255'
     number_min_length: 8
     number_max_length: 8
-    uuid: b3af1621-6998-484d-9cd3-2a112faf0b83
+    uuid: b26f8044-55ef-4cdd-814c-41ee9dfb9dcf
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 247157
+  - id: 247203
     prefix: '68256'
     number_min_length: 8
     number_max_length: 8
-    uuid: df4713dd-97cc-44bb-8420-5a6a13b1682b
+    uuid: 7c6c973c-6bd5-4955-a980-3aa6fb915080
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 252193
+  - id: 252250
     prefix: '6827'
     number_min_length: 8
     number_max_length: 8
-    uuid: f2e85a16-1301-447d-a810-9353893cb8ac
+    uuid: 25bd38df-4f88-4965-b4c2-0add6c0cf2ee
     country_id: *ck
     network_id: *ck_bluesky_mobile
-  - id: 253615
+  - id: 253678
     prefix: '6828'
     number_min_length: 8
     number_max_length: 8
-    uuid: 545759aa-c5fa-427c-86be-08edffbcfa33
+    uuid: 547e8e14-aab5-4350-8e5e-9eeb6c8d308a
     country_id: *ck
     network_id: *ck_bluesky_mobile

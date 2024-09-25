@@ -3,511 +3,511 @@ networks:
 # Mobile Networks
   - id: &td_airtel_mobile 4554
     name: TD Airtel Mobile
-    uuid: 84c0ab38-ef45-4b1d-8f22-c3ca7d439252
+    uuid: 50d5128f-c615-43c8-9ef0-e7e7d2d975b1
     type_id: 3
   - id: &td_salam_mobile 5418
     name: TD Salam Mobile
-    uuid: abc8ea64-f8cc-40d9-9c87-85a88ef527aa
+    uuid: 6f2a4ba4-4331-4e86-b9bc-0e3eb0109842
     type_id: 3
   - id: &td_moov_africa_mobile 5594
     name: TD Moov Africa Mobile
-    uuid: 0712e747-dedb-4ba6-a367-4bff33547873
+    uuid: 499dd3e5-4cd9-434f-a1b4-1f1fb675c4d0
     type_id: 3
 # Fixed Networks
   - id: &td_fixed 4709
     name: TD Fixed
-    uuid: 8163f63a-e783-499a-ad57-6881dc0190e0
+    uuid: 21e1396c-8f39-4ca8-9b83-dee6174e6f67
     type_id: 12
 # Supplementary services Networks
   - id: &td_value_added_services 5161
     name: TD Value Added Services
-    uuid: 9ca98418-52a6-4a84-9da9-790c41b53b3c
+    uuid: 1c0684e2-83c9-4e66-8d07-e548b7d70a95
     type_id: 14
 network_prefixes:
 # Country code Prefixes
-  - id: 239119
+  - id: 239122
     prefix: '235'
     number_min_length: 4
     number_max_length: 100
-    uuid: c297c601-630f-4a48-9217-23605153304a
+    uuid: 54114186-15a6-4351-856e-3fe883e7adde
     country_id: *td
     network_id: null
 # Mobile Prefixes
-  - id: 242415
+  - id: 242437
     prefix: '2356'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3b595cc7-4c4c-4884-878a-d3e5650d8542
+    uuid: 1f6d14f9-dc7b-420b-95fb-7f57e1dd4422
     country_id: *td
     network_id: *td_airtel_mobile
-  - id: 252229
+  - id: 252291
     prefix: '2357'
     number_min_length: 11
     number_max_length: 11
-    uuid: c11ec835-0523-436d-841c-95a8517ac898
+    uuid: 9899c19e-269a-4311-ad01-fe635965cada
     country_id: *td
     network_id: *td_salam_mobile
-  - id: 254088
+  - id: 254153
     prefix: '2359'
     number_min_length: 11
     number_max_length: 11
-    uuid: 093d7a77-f278-49f1-b527-2793db706428
+    uuid: 6b55893b-76de-4ee0-b021-0019edc18eee
     country_id: *td
     network_id: *td_moov_africa_mobile
-  - id: 255255
+  - id: 255324
     prefix: '23599999902'
     number_min_length: 14
     number_max_length: 14
-    uuid: dbf7a631-4c2a-4ad4-a8da-363d51cac533
+    uuid: c0451de4-5a81-4396-a909-6dfecc30e494
     country_id: *td
     network_id: *td_moov_africa_mobile
-  - id: 255256
+  - id: 255325
     prefix: '23599999905'
     number_min_length: 14
     number_max_length: 14
-    uuid: 45ae9b59-c131-4a48-a1ca-321e0bd50ea1
+    uuid: 43ef758e-f35a-4a2b-9d16-83c44e6b220d
     country_id: *td
     network_id: *td_moov_africa_mobile
-  - id: 255257
+  - id: 255326
     prefix: '23599999906'
     number_min_length: 14
     number_max_length: 14
-    uuid: c99c5daf-94ba-4a14-8add-b9e47ce0c731
+    uuid: cc1d88be-324c-468e-8a61-715a5e988634
     country_id: *td
     network_id: *td_moov_africa_mobile
 # Fixed Prefixes
-  - id: 244427
+  - id: 244452
     prefix: '2352'
     number_min_length: 11
     number_max_length: 11
-    uuid: f285a25c-cdea-4343-b886-b87ec1be2953
+    uuid: 8bfcef3b-5251-477f-86ca-88e74fa7d398
     country_id: *td
     network_id: *td_fixed
-  - id: 245263
+  - id: 245289
     prefix: '2352500'
     number_min_length: 11
     number_max_length: 11
-    uuid: 070f6b04-439a-499b-8d27-26f1e2b919ce
+    uuid: 77737135-3182-40ab-b97f-6226d32ab23d
     country_id: *td
     network_id: *td_fixed
-  - id: 245264
+  - id: 245290
     prefix: '2352501'
     number_min_length: 11
     number_max_length: 11
-    uuid: f3f4a97d-90bc-4d08-bd8d-4260dbc3bdcf
+    uuid: 55194b8c-a3c2-4652-b852-5199c22c818e
     country_id: *td
     network_id: *td_fixed
-  - id: 245265
+  - id: 245291
     prefix: '2352502'
     number_min_length: 11
     number_max_length: 11
-    uuid: 69b2a5c1-c43c-4d2a-80c6-70e5f7ca2917
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245266
-    prefix: '23525025'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 33ed66a7-c4ac-4542-adb9-78ec56e5587e
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245267
-    prefix: '23525026'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7d9eff46-814f-44c2-974d-04cc70b9817b
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245268
-    prefix: '23525027'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f682e788-26b7-4890-9060-0e80051a7a87
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245269
-    prefix: '23525028'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6a1f966d-fa69-49de-8152-4a3ac2c99de5
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245270
-    prefix: '23525029'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5c1a3cb5-77e8-4afa-a48f-cdaf0f8c04f2
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245271
-    prefix: '2352503'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d4c287ba-ebc0-4b7e-9524-512880bb7f02
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245272
-    prefix: '2352504'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e39ad30a-8c1d-44aa-8a87-238430ab0943
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245274
-    prefix: '2352505'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 04376087-1a37-452d-bc90-e33e303f5fc0
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245276
-    prefix: '2352506'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f233be04-269f-4418-ac01-c186324d457e
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245278
-    prefix: '2352507'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4bd769c-5f15-40a7-a724-0a3af49d2e79
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245279
-    prefix: '23525075'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8e7bdca-b9ed-4a4f-8026-6f25c405661b
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245280
-    prefix: '23525076'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6e645b67-2978-45a0-ba48-2294d1301a57
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245281
-    prefix: '23525077'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fa22a922-43a8-472b-a40a-579691d16d05
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245282
-    prefix: '23525078'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3cc58ef7-7387-4277-a8a9-0bf74df0f6d3
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245283
-    prefix: '23525079'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 15e077f4-27bd-4efc-a729-3e586c0e032f
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245284
-    prefix: '2352508'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 28b65f4e-3b87-4b70-8a59-755e6bf80fd9
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245286
-    prefix: '2352509'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5109d1f9-1c64-4771-b5e6-eb03d7db7398
+    uuid: 1ef4bfcd-1c26-43d5-98a8-3a8afba7fa30
     country_id: *td
     network_id: *td_fixed
   - id: 245292
-    prefix: '235251'
+    prefix: '23525025'
     number_min_length: 11
     number_max_length: 11
-    uuid: fb50d0a9-c20b-4233-9207-8a0e4ef85c64
+    uuid: cd0b6ddb-2d48-40f8-b233-be780f6fec98
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245293
+    prefix: '23525026'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ac8f799-16e4-402c-997b-f64aaed917ff
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245294
+    prefix: '23525027'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e87b02d8-65d8-4117-ae27-c3bac5dea1b0
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245295
+    prefix: '23525028'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2aa4753c-6376-4f92-b051-bbb4a25ff599
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245296
+    prefix: '23525029'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 11155e4c-8556-43a3-a67d-0203476768e4
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245297
+    prefix: '2352503'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dfcb7472-70dc-42bc-bdd5-214c31b2542f
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245298
+    prefix: '2352504'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5a436063-8ee2-415a-b6dc-1153c4caa2ec
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245300
+    prefix: '2352505'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ddc477a2-2551-4392-a775-d70d53e93af7
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245302
+    prefix: '2352506'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 19451e08-c9e0-449d-a3de-d5a275a31416
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245304
+    prefix: '2352507'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 22636e82-5595-4480-8f04-e12a0271ae87
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245305
+    prefix: '23525075'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0d815c8a-f98f-4641-9494-1e27bc1c69ba
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245306
+    prefix: '23525076'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c65fbbcb-1103-48a1-abfa-faab24dcd988
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245307
+    prefix: '23525077'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 70a78531-0ee4-4885-8608-847dc30784db
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245308
+    prefix: '23525078'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a5c6acd-8b61-4849-9833-2f857e0f9bd5
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245309
+    prefix: '23525079'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 60e8ed06-f9c3-4582-ba99-0a536a3f1fdd
     country_id: *td
     network_id: *td_fixed
   - id: 245310
+    prefix: '2352508'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b2e8c4b0-0735-4dd4-b52a-a4a29a925c8d
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245312
+    prefix: '2352509'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fe9558e8-dec1-45ce-95be-d8ec09dab366
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245318
+    prefix: '235251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e9841f41-4753-4d14-b1a7-79bf767aa8bf
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245336
     prefix: '235252'
     number_min_length: 11
     number_max_length: 11
-    uuid: 25781ecf-d92d-4c6b-9f7e-bb7cd53502be
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245325
-    prefix: '235253'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 596c6d0b-e9b6-4585-bb71-07d0009d07b3
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245344
-    prefix: '2352540'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c37798e3-2a1c-45dc-8074-eb29e2ac6307
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245345
-    prefix: '23525406'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bc6c1d74-2c1c-4635-8e60-1d4157811728
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245346
-    prefix: '23525407'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18ca14eb-8d57-4c75-a8b9-3d14e1c0681c
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245347
-    prefix: '23525408'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7ba94703-6de9-49a1-8d37-4271670e9e41
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245348
-    prefix: '23525409'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b31ef764-7dae-4e59-8911-53185f8a3a28
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245350
-    prefix: '2352541'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bc8bd549-b08c-4a55-b011-801e91905e8a
+    uuid: 732303fd-69e3-4b40-892c-bcf36aabb77e
     country_id: *td
     network_id: *td_fixed
   - id: 245351
+    prefix: '235253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 54a2d763-e276-4721-a776-96d20f7cc818
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245370
+    prefix: '2352540'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f9528fa3-636c-431f-8589-deb86f8828ad
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245371
+    prefix: '23525406'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0158c0e0-cda7-4c7f-a999-9bbbc5ef70d2
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245372
+    prefix: '23525407'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 579f259b-f147-4536-8821-5b9cb17e5815
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245373
+    prefix: '23525408'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb0c2439-29ae-4d0a-b892-7fd2af3d246c
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245374
+    prefix: '23525409'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5fbcbea7-6e8a-4da9-9269-d3b671111ed5
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245376
+    prefix: '2352541'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 874f1179-6d2d-45a0-843e-3fdd4d6dab5c
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245377
     prefix: '23525416'
     number_min_length: 11
     number_max_length: 11
-    uuid: 28b4ce5f-a67b-486e-9dc5-aaaa6b15b30e
+    uuid: d5201733-59ac-4fe7-82de-41be4589bdba
     country_id: *td
     network_id: *td_fixed
-  - id: 245352
+  - id: 245378
     prefix: '23525417'
     number_min_length: 11
     number_max_length: 11
-    uuid: f38ea4f2-c7c1-4e3d-99f3-2fbcceaa4cc3
+    uuid: 97f0ba86-20e0-4790-b623-1c9ad6a79dba
     country_id: *td
     network_id: *td_fixed
-  - id: 245353
+  - id: 245379
     prefix: '23525418'
     number_min_length: 11
     number_max_length: 11
-    uuid: 178fcb7d-b6e2-4ffe-bcd7-1657b165c24a
+    uuid: 930d236d-8a75-4ebf-993f-9e830fa1f321
     country_id: *td
     network_id: *td_fixed
-  - id: 245354
+  - id: 245380
     prefix: '23525419'
     number_min_length: 11
     number_max_length: 11
-    uuid: 057efb54-1e72-4238-bd3c-5839c1cb04bd
+    uuid: 85a0fb82-c00c-406a-abdb-7fdf56e875a6
     country_id: *td
     network_id: *td_fixed
-  - id: 245357
+  - id: 245383
     prefix: '2352542'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1c69edd3-196c-4645-9140-bab65602c89b
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245553
-    prefix: '2352680'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a8fde81a-609b-4d7c-98c8-76e27482cd27
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245554
-    prefix: '2352681'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c0e1cf52-a1b1-4266-b4e0-d910625fcf9c
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245555
-    prefix: '2352682'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8bced665-3329-47b9-8f82-ab9f39adaa15
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245556
-    prefix: '2352683'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 28063c81-7efd-4805-ade3-b82d9d84795a
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245557
-    prefix: '2352684'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cfe57707-29c0-45d6-b233-94db8b70b958
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245558
-    prefix: '23526845'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3ce50c28-7d08-40f4-bbd1-d2c7524f3726
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245559
-    prefix: '23526846'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e04e632c-6317-45bb-a14a-3ba5f8084360
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245560
-    prefix: '23526847'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fab0b3a2-0a3e-4532-a150-baa5c7a56a14
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245561
-    prefix: '23526848'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bf8cdfc1-2c25-41bb-8ca1-139e154406c3
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245562
-    prefix: '23526849'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c62bdc0f-2557-4c1e-8e35-cdc3c0660812
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245563
-    prefix: '2352685'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 67c0e3ed-d6fc-4909-8cc8-b25fa2533416
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245564
-    prefix: '2352686'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8c3b74ba-d890-4342-afd8-2b29b66cc8dc
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245565
-    prefix: '2352687'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1b15925f-9aab-4150-a13c-ba850367d8ee
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245566
-    prefix: '2352688'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 54653235-8e5c-470f-b60a-50b1ff2d540c
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245568
-    prefix: '2352689'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b75d28f9-ac3f-49be-ac50-831b3e0e8d63
-    country_id: *td
-    network_id: *td_fixed
-  - id: 245576
-    prefix: '235269'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b898eecb-20ac-41a8-9c43-3c24d2348400
+    uuid: b06df682-c5ec-4bd0-8284-8571fc65af80
     country_id: *td
     network_id: *td_fixed
   - id: 245579
-    prefix: '2352693'
+    prefix: '2352680'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2fa6e1c0-040c-4c66-8ae1-c13b220c2c80
+    uuid: 9a26fcb5-6438-41a3-b3dc-c47143a640fe
     country_id: *td
     network_id: *td_fixed
   - id: 245580
-    prefix: '2352694'
+    prefix: '2352681'
     number_min_length: 11
     number_max_length: 11
-    uuid: 48c8ffb2-588f-42f6-b181-9f9e40b3ae20
+    uuid: 72c0156b-1d10-4595-85a4-3c57cad5f352
     country_id: *td
     network_id: *td_fixed
   - id: 245581
-    prefix: '2352695'
+    prefix: '2352682'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0b253bf9-2cf9-42de-abeb-fd2004dabc31
+    uuid: 3d156748-6d86-4d18-a096-d581dad12df1
     country_id: *td
     network_id: *td_fixed
   - id: 245582
-    prefix: '2352696'
+    prefix: '2352683'
     number_min_length: 11
     number_max_length: 11
-    uuid: 50cf95fe-f718-43fb-ae1f-af2ddfa6ed55
+    uuid: 3b47397c-9ab7-423d-951c-bae08ae70069
     country_id: *td
     network_id: *td_fixed
   - id: 245583
-    prefix: '2352697'
+    prefix: '2352684'
     number_min_length: 11
     number_max_length: 11
-    uuid: b55879bb-e0bb-4c42-b587-6c8280679f98
+    uuid: 9697eb3c-245f-4a29-9a91-b4ba0f8e7583
     country_id: *td
     network_id: *td_fixed
   - id: 245584
-    prefix: '2352698'
+    prefix: '23526845'
     number_min_length: 11
     number_max_length: 11
-    uuid: 904d4d90-6f51-48b6-b2f1-57d827e71913
+    uuid: d93d0adf-1add-441b-8d03-f32a271f24cc
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245585
+    prefix: '23526846'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ccf4dc5b-431f-46ad-9749-da0025cf64ef
     country_id: *td
     network_id: *td_fixed
   - id: 245586
-    prefix: '2352699'
+    prefix: '23526847'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4d48c2ce-9f1f-4b21-896a-fdb3e93a6f65
+    uuid: f5747ed0-e51c-46cf-9f21-9f0609697b78
     country_id: *td
     network_id: *td_fixed
   - id: 245587
-    prefix: '23526990'
+    prefix: '23526848'
     number_min_length: 11
     number_max_length: 11
-    uuid: a4984c20-c6ea-4992-baea-7064e6643b01
+    uuid: c5f14f81-0ae1-42b2-b3f2-3a7ecda384bb
     country_id: *td
     network_id: *td_fixed
   - id: 245588
-    prefix: '23526991'
+    prefix: '23526849'
     number_min_length: 11
     number_max_length: 11
-    uuid: d09fb2ac-9341-47fd-bdbf-104c4869636a
+    uuid: abe42b27-6a71-4d01-baed-c9743b3404a4
     country_id: *td
     network_id: *td_fixed
   - id: 245589
+    prefix: '2352685'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1b7f54a1-000e-4df8-8515-0fb6a9264c5f
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245590
+    prefix: '2352686'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 90fe1d9f-a085-47e4-99e8-1da2f2b864f7
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245591
+    prefix: '2352687'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8d63034e-5c2c-4a3a-aca6-7273f6558186
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245592
+    prefix: '2352688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 14140237-ffea-46c7-bac1-1a7c851978e9
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245594
+    prefix: '2352689'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff35e0e6-c328-405a-9393-8e6a7aaa3b0c
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245602
+    prefix: '235269'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a75f5349-78f5-4be4-bcca-da8edff2251c
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245605
+    prefix: '2352693'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 76f38801-e286-4506-a2ed-64617254393d
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245606
+    prefix: '2352694'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9edfa609-2b57-4466-883c-e183e57c19c3
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245607
+    prefix: '2352695'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 26a504d5-ec2e-430c-9134-eaf9b46d6b3f
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245608
+    prefix: '2352696'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0d55051c-b3e6-4b94-a1b1-3af06a4898ab
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245609
+    prefix: '2352697'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d9457454-a7b2-4801-9ab5-5f1b18aaef68
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245610
+    prefix: '2352698'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c26307e4-efbf-4ae8-a026-941722a0a8cc
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245612
+    prefix: '2352699'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e8f9c3cb-6a17-403f-9d04-cae2e8b638ab
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245613
+    prefix: '23526990'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bf265376-271d-4da5-935a-e8fa6cd13dea
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245614
+    prefix: '23526991'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b36e19ce-5283-4cd4-9441-4c6adcd367b1
+    country_id: *td
+    network_id: *td_fixed
+  - id: 245615
     prefix: '23526992'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9c9fd164-3308-48e3-9a24-16728fcb2d1c
+    uuid: 03852d58-f1a2-40c8-ac7b-d95e6310856c
     country_id: *td
     network_id: *td_fixed
 # Supplementary services Prefixes
-  - id: 250066
+  - id: 250121
     prefix: '2358'
     number_min_length: 11
     number_max_length: 11
-    uuid: 57344d83-8760-4cee-bf87-7d3036e98a80
+    uuid: 12289dbc-404e-4be4-8590-ecbf2bbe6cd4
     country_id: *td
     network_id: *td_value_added_services
