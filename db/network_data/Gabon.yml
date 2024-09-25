@@ -3,399 +3,399 @@ networks:
 # Supplementary services Networks
   - id: &ga_intelligent_network 3796
     name: GA Intelligent Network
-    uuid: 4261176c-b121-409d-a8bf-f28ddcd78608
+    uuid: bb2be170-60f6-4a23-aa15-d7a3a8f47fae
     type_id: 14
   - id: &ga_special_services 3862
     name: GA Special Services
-    uuid: 6c9d7ef7-c2b5-405d-8f97-0e2b9185816a
+    uuid: ba7e9fc4-385c-4a14-97bd-ec1475bc2798
     type_id: 14
   - id: &ga_value_added_services 5149
     name: GA Value Added Services
-    uuid: 935496b7-7764-4287-b035-aa0ae95b9366
+    uuid: f97a678a-37d3-42ba-bf1d-37d4a759cba5
     type_id: 14
   - id: &ga_gabonese_administration_rag 5577
     name: GA Gabonese Administration Rag
-    uuid: 0be2baac-74e2-452f-a353-8aff721aeed3
+    uuid: fe8dbd1e-409c-44a1-8a64-8e119c2af6e6
     type_id: 14
 # Fixed Networks
   - id: &ga_fixed 4022
     name: GA Fixed
-    uuid: 4d354168-bdca-40a0-9a3a-07c6ceb4329c
+    uuid: 170354f7-d3ad-4154-91c4-73f4bd3056fe
     type_id: 12
 # Satellite Networks
   - id: &ga_moov_africa_satellite 4061
     name: GA Moov Africa Satellite
-    uuid: 2b978fb4-df14-4f62-ba59-d0b798d9a753
+    uuid: ff15cc58-8fa0-4942-ae53-dc886884f05b
     type_id: 16
 # Mobile Networks
   - id: &ga_moov_africa_mobile 4906
     name: GA Moov Africa Mobile
-    uuid: 2a01ff02-e925-48f8-82b2-d14781168485
+    uuid: f8f8092b-f170-4d2a-a832-14d1edc0755b
     type_id: 3
   - id: &ga_airtel_mobile 4997
     name: GA Airtel Mobile
-    uuid: 1e7f6555-b6bf-4a6a-b673-8541a806b85b
+    uuid: bb2c288e-0bbb-454a-81b5-a9e11df49125
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 239003
+  - id: 239006
     prefix: '241'
     number_min_length: 4
     number_max_length: 100
-    uuid: 4da8411e-cd76-4b5b-a584-ff9e64c0e489
+    uuid: 676c12e6-f3a6-41ee-86fc-888631c56dda
     country_id: *ga
     network_id: null
 # Supplementary services Prefixes
-  - id: 239323
+  - id: 239326
     prefix: '241080'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5038a969-d2e6-4135-8f38-21e9216c498a
+    uuid: 48e97700-189f-440c-873a-68f31b239edf
     country_id: *ga
     network_id: *ga_intelligent_network
-  - id: 239404
+  - id: 239407
     prefix: '2411'
     number_min_length: 5
     number_max_length: 7
-    uuid: 70d96476-09f0-4d14-b5e6-6fc0d018a21b
+    uuid: 9e4fe48d-5429-4b27-87e3-3efb47e80918
     country_id: *ga
     network_id: *ga_special_services
-  - id: 250028
+  - id: 250082
     prefix: '24108'
     number_min_length: 11
     number_max_length: 11
-    uuid: d29adae1-ef43-462e-bb8b-5fd7245be6af
+    uuid: d78a7b49-84a0-4908-8853-b032b9b0ead1
     country_id: *ga
     network_id: *ga_value_added_services
-  - id: 254042
+  - id: 254106
     prefix: '24109'
     number_min_length: 11
     number_max_length: 11
-    uuid: ba7d097f-018a-46ea-beb2-c5dfd0bf2fc9
+    uuid: d14af867-2519-443c-91d5-b6c320aa19c3
     country_id: *ga
     network_id: *ga_gabonese_administration_rag
 # Fixed Prefixes
-  - id: 239593
+  - id: 239599
     prefix: '241011'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87c76a2c-7138-4626-9b6a-cc44a75f2b5f
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239641
-    prefix: '24101140'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 90d4828b-787c-42c1-a538-9a73c5dcabb6
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239642
-    prefix: '241011420'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d875f4c9-62e8-46f8-bcc8-4e938fd7049d
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239643
-    prefix: '241011424'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3e941a17-e3cb-475b-8fd0-3d4aeeba6ff0
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239644
-    prefix: '24101144'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 46f2db98-a90b-4d45-83ee-53e1c3ce3699
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239645
-    prefix: '24101145'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 10bec02d-5c70-4f9a-bd6b-fd47fb74b2ec
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239646
-    prefix: '24101146'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 19f076f2-416e-49d7-9f7d-571341010e7b
+    uuid: 71554f90-342d-405f-b6d2-7905720fd856
     country_id: *ga
     network_id: *ga_fixed
   - id: 239647
-    prefix: '24101147'
+    prefix: '24101140'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1425064e-df86-46d2-9300-eddb388bb456
+    uuid: 69532337-63cc-421e-8461-c78a27024a33
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239648
+    prefix: '241011420'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1dd3fbc8-d12e-443d-8e55-5d59b95c72a8
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239649
+    prefix: '241011424'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 88fba607-7727-4184-8da2-6ebd8e487690
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239650
+    prefix: '24101144'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 44fff48d-0036-4297-b7c3-8af29fd45443
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239651
+    prefix: '24101145'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 479cf3e7-60e6-46a9-b698-4142acd51beb
     country_id: *ga
     network_id: *ga_fixed
   - id: 239652
-    prefix: '24101150'
+    prefix: '24101146'
     number_min_length: 11
     number_max_length: 11
-    uuid: 36825aa3-7fe2-4de7-9b1c-6d481916cf7b
+    uuid: 0f633c18-0a4e-4832-8103-6dae60b785a2
     country_id: *ga
     network_id: *ga_fixed
   - id: 239653
+    prefix: '24101147'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1af9dfaa-3f3f-4a90-a1f2-11ba4a880841
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239658
+    prefix: '24101150'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f56bde04-e04c-4c4c-a585-bc29e916e7c4
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239659
     prefix: '24101154'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1d2f666e-34b9-437c-a3ba-231e2f4fe906
+    uuid: 650f1eaf-0e28-4f40-9383-cd0e5b56416f
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239654
+  - id: 239660
     prefix: '24101155'
     number_min_length: 11
     number_max_length: 11
-    uuid: a2a0a58a-07f4-4099-b5f1-2d3de1921be3
+    uuid: d06e9804-bc44-4668-9b4b-99a92764dc78
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239655
+  - id: 239661
     prefix: '24101156'
     number_min_length: 11
     number_max_length: 11
-    uuid: 31b57496-60cc-46b8-8c41-f2f696eff4e5
+    uuid: 596fed64-9ce8-4916-bc94-e77b02d8ca8f
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239656
+  - id: 239662
     prefix: '24101158'
     number_min_length: 11
     number_max_length: 11
-    uuid: b043e255-dc86-418d-87e7-0c9ded3875f1
+    uuid: c688e615-2490-4c32-9048-4639d064a424
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239657
+  - id: 239663
     prefix: '24101159'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9ecd387a-4bf1-4fb7-b5d1-e3a04b135cdb
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239696
-    prefix: '24101160'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ea113b92-1b88-4749-9ae6-f8ee4c43c429
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239697
-    prefix: '24101162'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 65a5d0e6-1af8-488d-8cbb-9b6059f5e0e3
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239698
-    prefix: '24101164'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a94450ea-1caa-4149-a3dc-516ad6ecb34b
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239699
-    prefix: '24101165'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ead69fdf-8d27-4678-b5b3-7401b32474fa
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239700
-    prefix: '24101166'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b69588b-e1ef-43d8-9a16-87f7fa0d4489
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239701
-    prefix: '24101167'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1f6aac80-1181-4916-a2ff-a98d41a31ebf
+    uuid: eb912dcc-2b0d-4150-a88e-5a69070520d6
     country_id: *ga
     network_id: *ga_fixed
   - id: 239702
-    prefix: '241011693'
+    prefix: '24101160'
     number_min_length: 11
     number_max_length: 11
-    uuid: 34ad4b25-5bb7-45e0-8850-02d619087bc8
+    uuid: a2cd4f53-e47e-4ec9-be35-439d99dadbe7
     country_id: *ga
     network_id: *ga_fixed
   - id: 239703
-    prefix: '241011696'
+    prefix: '24101162'
     number_min_length: 11
     number_max_length: 11
-    uuid: aa171ab9-a574-4281-a505-19ce250c6811
+    uuid: dd2105b2-d279-482c-8581-873d5ce29626
     country_id: *ga
     network_id: *ga_fixed
   - id: 239704
-    prefix: '241011699'
+    prefix: '24101164'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6690a3c2-edc5-4e18-8d3b-0b267edd2630
+    uuid: 3077ad9f-b5db-41a2-882e-523a2ebd20c6
     country_id: *ga
     network_id: *ga_fixed
   - id: 239705
-    prefix: '24101170'
+    prefix: '24101165'
     number_min_length: 11
     number_max_length: 11
-    uuid: 040e0803-9b29-4b2c-a55d-2d52eb7df1cd
+    uuid: 94b13c21-fb6b-401d-b054-3040c6e7809e
     country_id: *ga
     network_id: *ga_fixed
   - id: 239706
-    prefix: '24101171'
+    prefix: '24101166'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3014bc79-8e32-4d90-b2e6-f5d146cd2337
+    uuid: 02580c1f-528f-41f7-a194-eda080c2c2f2
     country_id: *ga
     network_id: *ga_fixed
   - id: 239707
-    prefix: '24101172'
+    prefix: '24101167'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8e5dd20c-809a-4cf3-9b37-99abb5b0bdc4
+    uuid: 62a3a435-3344-4c56-aa83-3224fbb4c443
     country_id: *ga
     network_id: *ga_fixed
   - id: 239708
-    prefix: '24101173'
+    prefix: '241011693'
     number_min_length: 11
     number_max_length: 11
-    uuid: bd6b6bf0-7db7-40b3-9d97-1362a98443c2
+    uuid: d585f86a-2726-4128-9e8f-e7b7f4e83276
     country_id: *ga
     network_id: *ga_fixed
   - id: 239709
-    prefix: '24101174'
+    prefix: '241011696'
     number_min_length: 11
     number_max_length: 11
-    uuid: c0ae56d4-fac7-48f3-8366-a052f0af63fc
+    uuid: 69e8228f-2908-4d31-b542-18ceb8191000
     country_id: *ga
     network_id: *ga_fixed
   - id: 239710
-    prefix: '24101176'
+    prefix: '241011699'
     number_min_length: 11
     number_max_length: 11
-    uuid: e26362df-fbc1-4f50-b2f9-b85074ca1ea9
+    uuid: 51a264dd-0c31-42a0-9f42-040c7a5f2bec
     country_id: *ga
     network_id: *ga_fixed
   - id: 239711
-    prefix: '24101177'
+    prefix: '24101170'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3087651e-f140-4bf5-9bb4-ca49518b1649
+    uuid: a14559f3-e311-4e59-b8d2-8fa93e005b33
     country_id: *ga
     network_id: *ga_fixed
   - id: 239712
-    prefix: '24101178'
+    prefix: '24101171'
     number_min_length: 11
     number_max_length: 11
-    uuid: df2e97e2-48c7-4406-b65e-afa5c09861de
+    uuid: 9516bfae-84de-40fc-858d-3c066cd43ce6
     country_id: *ga
     network_id: *ga_fixed
   - id: 239713
+    prefix: '24101172'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6677a915-2145-408c-8cba-4d070ce26c97
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239714
+    prefix: '24101173'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ecc6c09c-d979-4f59-957f-d54e10eba1a2
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239715
+    prefix: '24101174'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a2f6f2b-c082-4864-b712-bb19101d669c
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239716
+    prefix: '24101176'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 699ff41a-f59e-4343-87c7-106a5a6e8a29
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239717
+    prefix: '24101177'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fa3cab20-553d-49fa-899d-9cda13e619f1
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239718
+    prefix: '24101178'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0e647bfc-848e-4ac0-abca-fbdd6dc23bc3
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239719
     prefix: '24101179'
     number_min_length: 11
     number_max_length: 11
-    uuid: fde15bb4-599d-4330-b690-4d0fd0ce6733
-    country_id: *ga
-    network_id: *ga_fixed
-  - id: 239748
-    prefix: '24101182'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba9a5101-dd94-40ba-adc4-43ccd70e7008
+    uuid: d3caa211-9775-4afd-af31-12651fabe3a2
     country_id: *ga
     network_id: *ga_fixed
   - id: 239754
+    prefix: '24101182'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96e4947e-83fd-47bb-a297-7a54fd4046d7
+    country_id: *ga
+    network_id: *ga_fixed
+  - id: 239760
     prefix: '24101183'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9ea9c12-f4d5-4eb0-9834-a66dd0dabf47
+    uuid: e851e576-9741-4d06-9044-3f0c4c20ef70
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239771
+  - id: 239777
     prefix: '24101186'
     number_min_length: 11
     number_max_length: 11
-    uuid: 904e0098-7a73-4e10-ad03-c62e2b6abc7f
+    uuid: 9cb36e7f-560d-4653-b226-8235e2d20bb4
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239792
+  - id: 239798
     prefix: '24101190'
     number_min_length: 11
     number_max_length: 11
-    uuid: e6563b1a-b9e3-4f88-b8ea-8c4a96af90a5
+    uuid: 8bce1ce1-e04f-4932-b0ec-2d6002c812c6
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239793
+  - id: 239799
     prefix: '24101192'
     number_min_length: 11
     number_max_length: 11
-    uuid: 32809667-747d-44bd-8378-159a32f8a9f9
+    uuid: db94f619-8da3-45ed-83d4-f8a3ab62ede0
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239794
+  - id: 239800
     prefix: '24101193'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2d1e078e-8c12-414f-89d5-8973c07b03b0
+    uuid: 2e32a53f-f9b9-4181-88d0-fc170f254056
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239795
+  - id: 239801
     prefix: '24101196'
     number_min_length: 11
     number_max_length: 11
-    uuid: 48b61fa8-5b61-4e14-a7df-7e16c5757cbf
+    uuid: b4d72c40-cb07-4703-b860-44528b43b00f
     country_id: *ga
     network_id: *ga_fixed
-  - id: 239796
+  - id: 239802
     prefix: '24101198'
     number_min_length: 11
     number_max_length: 11
-    uuid: 489a4fa7-1eab-4583-9333-24fbfee90f19
+    uuid: f7e2e298-e4c6-4702-b66e-25de7974b1f8
     country_id: *ga
     network_id: *ga_fixed
 # Satellite Prefixes
-  - id: 239648
+  - id: 239654
     prefix: '24101149'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4e3b1d7a-2c99-4874-a419-a9cb75549e0a
+    uuid: c9b594e8-3e09-42b5-baf7-87555f930336
     country_id: *ga
     network_id: *ga_moov_africa_satellite
 # Mobile Prefixes
-  - id: 248195
+  - id: 248248
     prefix: '241065'
     number_min_length: 11
     number_max_length: 11
-    uuid: 119e65c5-6233-4c81-a93f-44788f38d8c0
+    uuid: df059a34-31a6-4ceb-8e03-daddc1107ed9
     country_id: *ga
     network_id: *ga_moov_africa_mobile
-  - id: 249016
+  - id: 249070
     prefix: '241074'
     number_min_length: 11
     number_max_length: 11
-    uuid: e8a58d92-2ddb-44f0-9ae1-971611a63ffb
+    uuid: 54a4aef9-cc28-45c6-93a9-aa55131c9c88
     country_id: *ga
     network_id: *ga_airtel_mobile
-  - id: 251069
+  - id: 251125
     prefix: '241062'
     number_min_length: 11
     number_max_length: 11
-    uuid: d6089513-0ac4-452c-a920-545970bd97cb
+    uuid: 7a90226a-e877-4e30-804f-36666b99cba5
     country_id: *ga
     network_id: *ga_moov_africa_mobile
-  - id: 251243
+  - id: 251299
     prefix: '241066'
     number_min_length: 11
     number_max_length: 11
-    uuid: 45f52793-452d-4387-b95f-20f8063d80cb
+    uuid: c8154e74-7330-4827-a470-5861ac1ec8cc
     country_id: *ga
     network_id: *ga_moov_africa_mobile
-  - id: 252577
+  - id: 252639
     prefix: '241077'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19593ea2-f837-44ef-9413-d3496f34e5bd
+    uuid: 817f4aab-fd3e-468e-9c49-80155da5675a
     country_id: *ga
     network_id: *ga_airtel_mobile

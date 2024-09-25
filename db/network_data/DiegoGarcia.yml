@@ -3,68 +3,68 @@ networks:
 # Supplementary services Networks
   - id: &dg_special_services 3850
     name: DG Special Services
-    uuid: 4dc68e9c-e827-4d25-be91-bc6fab30e2f5
+    uuid: cd4f0165-d736-45b7-8006-98328cb7e849
     type_id: 14
 # Fixed Networks
   - id: &dg_fixed 4367
     name: DG Fixed
-    uuid: 3a1bc6f8-97a3-465c-a2f5-0a57851ddcfa
+    uuid: 7d3f81c3-8ad7-4254-b844-e0183ec111a9
     type_id: 12
 # Paging Networks
   - id: &dg_paging 4370
     name: DG Paging
-    uuid: 41f95441-b540-4cea-adaa-2b31cfba3c2e
+    uuid: e2cfed1d-48b2-451a-8d91-f4daf64d05b2
     type_id: 13
 # Mobile Networks
   - id: &dg_foneplus_cellular_sure_mobile 4383
     name: DG Foneplus Cellular Sure Mobile
-    uuid: 23afa403-34ad-4192-a418-46b212bb93e5
+    uuid: edc68677-477c-4b7e-86a7-0c66f6ff74d2
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 238987
+  - id: 238990
     prefix: '246'
     number_min_length: 4
     number_max_length: 100
-    uuid: 5c52eebe-0c63-42a2-b4a2-ba8f757174f1
+    uuid: 3c95785d-d274-4cf6-b06d-d94759fef94b
     country_id: *dg
     network_id: null
 # Supplementary services Prefixes
-  - id: 239391
+  - id: 239394
     prefix: '2461'
     number_min_length: 6
     number_max_length: 6
-    uuid: ff37ea73-25d7-48fc-b905-405c261e7ffd
+    uuid: b53fd345-72d2-4035-bfbb-696dfa644d74
     country_id: *dg
     network_id: *dg_special_services
-  - id: 254037
+  - id: 254100
     prefix: '2469'
     number_min_length: 7
     number_max_length: 7
-    uuid: 695b8ff7-70cd-40fb-b3bc-671cce9719d1
+    uuid: c216f7b8-13c9-4c43-870d-0a80c38d4fd0
     country_id: *dg
     network_id: *dg_special_services
 # Fixed Prefixes
-  - id: 240712
+  - id: 240718
     prefix: '24637'
     number_min_length: 10
     number_max_length: 10
-    uuid: f3d0b660-d19f-4a84-9894-a8858592a441
+    uuid: 21151c13-ebdf-4e28-aa73-df435bc9c451
     country_id: *dg
     network_id: *dg_fixed
 # Paging Prefixes
-  - id: 240728
+  - id: 240734
     prefix: '2463709300'
     number_min_length: 10
     number_max_length: 10
-    uuid: b3276d1c-814c-4dea-a0a9-d5fdadfcb0bf
+    uuid: 29ce1209-f9f2-4786-8efc-72d927faae04
     country_id: *dg
     network_id: *dg_paging
 # Mobile Prefixes
-  - id: 240862
+  - id: 240868
     prefix: '24638'
     number_min_length: 10
     number_max_length: 10
-    uuid: ce2e0dad-125a-44aa-9149-55ad2d12a798
+    uuid: abbb16be-c97b-4f14-a5ab-4b55ecb089f2
     country_id: *dg
     network_id: *dg_foneplus_cellular_sure_mobile

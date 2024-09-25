@@ -3,471 +3,471 @@ networks:
 # Supplementary services Networks
   - id: &cv_special_services 3844
     name: CV Special Services
-    uuid: 657f3d47-617d-41e6-af59-62ddceb6f198
+    uuid: 57003395-ba6b-4b1c-a3d6-bc0aad1a4e89
     type_id: 14
   - id: &cv_voip_nomadic 4394
     name: CV Voip Nomadic
-    uuid: d169523a-212b-4a8b-a819-e67e80849014
+    uuid: 3bf6706a-701c-4c54-b861-2bcc6f8b2fe9
     type_id: 14
   - id: &cv_value_added_services 4533
     name: CV Value Added Services
-    uuid: 217e8e14-7b44-4156-b641-130a7304eb48
+    uuid: 7294be02-3e4a-41b9-8c8e-c61624754973
     type_id: 14
   - id: &cv_freephone_services 5185
     name: CV Freephone Services
-    uuid: 0a792a06-5aa5-4e64-a45f-a31dc3fff192
+    uuid: 490479e9-b4a3-4c73-b344-9ea89b0a23bb
     type_id: 14
   - id: &cv_shared_cost_services 5261
     name: CV Shared Cost Services
-    uuid: 595e4692-97f4-428e-9871-e48acba2aa01
+    uuid: ab6ffc94-3bf9-4c27-b3b1-a1539438b568
     type_id: 14
 # Mobile Networks
   - id: &cv_cvmovel_mobile 4488
     name: CV Cvmovel Mobile
-    uuid: 9441bbee-6012-478c-b151-80c0280c7880
+    uuid: 39c04420-966a-4f08-8db2-ee3b54001e70
     type_id: 3
   - id: &cv_mobile 4797
     name: CV Mobile
-    uuid: a7e95b31-3f17-4835-9ba2-25c835f62d5b
+    uuid: 34762ebd-7386-4007-9cbe-6befaa4f180f
     type_id: 3
   - id: &cv_unitel_t_mobile 4826
     name: CV Unitel T Mobile
-    uuid: 0172c242-ba83-47db-afd5-7fa00ab0b2d8
+    uuid: 03fe1ad3-6e7a-4d8d-80a6-da1bc5425a06
     type_id: 3
 # Fixed Networks
   - id: &cv_fixed 4692
     name: CV Fixed
-    uuid: 60421deb-933c-4ccd-9d77-05f0324037da
+    uuid: 7172e824-4541-47d7-8ba2-4f3cc9417282
     type_id: 12
 network_prefixes:
 # Country code Prefixes
-  - id: 238981
+  - id: 238984
     prefix: '238'
     number_min_length: 4
     number_max_length: 100
-    uuid: 0b6b8736-fcf4-4589-922b-06f1f2f5698a
+    uuid: 6a0b3bf4-1fda-4f54-a2f6-170943123ded
     country_id: *cv
     network_id: null
 # Supplementary services Prefixes
-  - id: 239385
+  - id: 239388
     prefix: '2381'
     number_min_length: 6
     number_max_length: 6
-    uuid: 3f60cb83-5ac4-454e-a5df-ee4f056d3148
+    uuid: 1771b859-fc1e-4014-9818-8ceaa6dd810f
     country_id: *cv
     network_id: *cv_special_services
-  - id: 240930
+  - id: 240936
     prefix: '2384'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2a48ec06-dbf8-4f04-ba4b-746191b3ba48
+    uuid: 1710d81e-fdea-43e9-80f2-a53155555444
     country_id: *cv
     network_id: *cv_voip_nomadic
-  - id: 242371
+  - id: 242389
     prefix: '2386'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3b3999fa-4b2b-47d2-a4e8-f5bc26a31836
+    uuid: 60eef9d3-c4e6-4ba4-8e89-0a0a05e6e163
     country_id: *cv
     network_id: *cv_value_added_services
-  - id: 250096
+  - id: 250151
     prefix: '238800'
     number_min_length: 10
     number_max_length: 10
-    uuid: 582cde01-4067-4d6e-8db4-4af96f564eb6
+    uuid: cab4fccb-daaf-4ef4-8fd7-a49e3e4b7148
     country_id: *cv
     network_id: *cv_freephone_services
-  - id: 250232
+  - id: 250287
     prefix: '238808'
     number_min_length: 10
     number_max_length: 10
-    uuid: b7ad2507-b32e-4817-ae6c-f8eb4b5fc15f
+    uuid: 2c7c5a54-1a28-4cbe-b208-2fc80c4e0042
     country_id: *cv
     network_id: *cv_shared_cost_services
-  - id: 253617
+  - id: 253680
     prefix: '2388'
     number_min_length: 10
     number_max_length: 10
-    uuid: e66c6bc3-a41c-4610-968c-de5b2bb2f253
+    uuid: b39f9f06-3742-4986-bfc5-4ff2aac5207e
     country_id: *cv
     network_id: *cv_special_services
 # Mobile Prefixes
-  - id: 242150
+  - id: 242160
     prefix: '23858'
     number_min_length: 10
     number_max_length: 10
-    uuid: 62a1a2ef-55c4-4ce4-b413-fe8336235906
+    uuid: 71d89b6f-d446-488e-9e4b-e04f5c75071b
     country_id: *cv
     network_id: *cv_cvmovel_mobile
-  - id: 242252
+  - id: 242263
     prefix: '23859'
     number_min_length: 10
     number_max_length: 10
-    uuid: edefea16-7cad-43c4-b5a7-65be30089379
+    uuid: 2e112d43-0864-4b4d-822b-c2210d0e299a
     country_id: *cv
     network_id: *cv_cvmovel_mobile
-  - id: 246548
+  - id: 246576
     prefix: '2385'
     number_min_length: 10
     number_max_length: 10
-    uuid: b07972c4-92ab-4cc2-b510-82e7dbd81505
+    uuid: 60f1b7c3-d27a-4549-8ad4-c560de8f4fb8
     country_id: *cv
     network_id: *cv_mobile
-  - id: 246667
+  - id: 246701
     prefix: '23851'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9300438f-648e-4998-8e8e-c35a9dd39946
+    uuid: 7ca472f5-956d-4a23-b10b-4dd15759bade
     country_id: *cv
     network_id: *cv_unitel_t_mobile
-  - id: 246737
+  - id: 246772
     prefix: '23852'
     number_min_length: 10
     number_max_length: 10
-    uuid: 89eb0a32-da2c-42cc-87f5-8c3c64445379
+    uuid: 186435e7-df80-4e01-bf98-3bcb139663a8
     country_id: *cv
     network_id: *cv_unitel_t_mobile
-  - id: 246891
+  - id: 246930
     prefix: '23853'
     number_min_length: 10
     number_max_length: 10
-    uuid: 58f228eb-3d46-4c4e-9c4e-cf2445dd46a5
+    uuid: e940a11a-3652-43df-9ac7-c6504a9b2892
     country_id: *cv
     network_id: *cv_unitel_t_mobile
-  - id: 254034
+  - id: 254097
     prefix: '2389'
     number_min_length: 10
     number_max_length: 10
-    uuid: b63debdf-3454-4903-8b34-0a4d22f62ccc
+    uuid: e0b0f580-b82f-432f-bdbf-fc9a4df88be5
     country_id: *cv
     network_id: *cv_mobile
-  - id: 254302
+  - id: 254367
     prefix: '23891'
     number_min_length: 10
     number_max_length: 10
-    uuid: 84020852-0677-47d8-9ee8-2cd35652eefd
+    uuid: e0be84d1-82ee-4004-b342-51422b130ec4
     country_id: *cv
     network_id: *cv_unitel_t_mobile
-  - id: 254528
+  - id: 254593
     prefix: '23892'
     number_min_length: 10
     number_max_length: 10
-    uuid: f5016968-c03f-4318-82e3-c86abc63a5a0
+    uuid: 3cdd4b90-49fe-4b48-8f7d-1e5aa1aa6c46
     country_id: *cv
     network_id: *cv_unitel_t_mobile
-  - id: 254803
+  - id: 254869
     prefix: '23893'
     number_min_length: 10
     number_max_length: 10
-    uuid: a0f5077b-0812-4c38-8087-16bcc4700e29
+    uuid: 77fc7579-a9ab-455a-b3c7-dc315c69caab
     country_id: *cv
     network_id: *cv_unitel_t_mobile
-  - id: 255120
+  - id: 255186
     prefix: '23899'
     number_min_length: 10
     number_max_length: 10
-    uuid: d8e981dd-ebf5-45ef-a37a-0f447503f1c7
+    uuid: ba709566-9bb0-47da-89dd-5b862423263f
     country_id: *cv
     network_id: *cv_cvmovel_mobile
-  - id: 261341
+  - id: 261444
     prefix: '23895'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5cf1cc65-e3fc-40a2-8677-f6e11b819d93
+    uuid: 106967fd-e333-4546-9e4a-9cb692af73c6
     country_id: *cv
     network_id: *cv_cvmovel_mobile
-  - id: 261902
+  - id: 262005
     prefix: '23897'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0daa3c42-4a44-4fb3-9bc6-9f3927dc1935
+    uuid: 5c5b1ed8-d448-4597-9102-a7756de122d7
     country_id: *cv
     network_id: *cv_cvmovel_mobile
-  - id: 262170
+  - id: 262273
     prefix: '23898'
     number_min_length: 10
     number_max_length: 10
-    uuid: 71ca7f33-b0a6-468d-8e21-5c769e78bdd8
+    uuid: 70cc018e-2e31-4fff-9cc5-b148ea0b92c4
     country_id: *cv
     network_id: *cv_cvmovel_mobile
 # Fixed Prefixes
-  - id: 244381
+  - id: 244405
     prefix: '2382'
     number_min_length: 10
     number_max_length: 10
-    uuid: f643a5be-e992-4d23-bc6f-14274934761e
+    uuid: 0f79794c-0567-4747-bf8a-523af82ada27
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244739
+  - id: 244765
     prefix: '238221'
     number_min_length: 10
     number_max_length: 10
-    uuid: 73a47510-49c4-4a13-abdf-f68742079b5c
+    uuid: c15cd4bf-f6cc-40c3-9000-586f563e7ee3
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244744
+  - id: 244770
     prefix: '238222'
     number_min_length: 10
     number_max_length: 10
-    uuid: 99079dbe-d619-421c-9390-f275ecdcd677
+    uuid: 283b7fa0-434a-4d0d-ba58-1d40214f591b
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244815
+  - id: 244841
     prefix: '238223'
     number_min_length: 10
     number_max_length: 10
-    uuid: b402384a-a2f3-48c5-b15c-abfb9130a188
+    uuid: 72c13811-1617-4aee-8e26-d94e673c5353
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244838
+  - id: 244864
     prefix: '238224'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9365f2a8-f643-446b-b84f-849d66486cfa
+    uuid: 3396c944-07b8-4626-99bb-6870070707e8
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244847
+  - id: 244873
     prefix: '238225'
     number_min_length: 10
     number_max_length: 10
-    uuid: 507f319f-48cd-4780-b6c2-e77b3fa18abd
+    uuid: 35679a89-7e85-453e-b395-5934fa096e64
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244862
+  - id: 244888
     prefix: '238226'
     number_min_length: 10
     number_max_length: 10
-    uuid: ef5b0ffd-4b34-4512-9c82-52f753c26eb6
+    uuid: 34fa6abd-036d-4ae9-8a3b-9aa8bd34c60d
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244871
+  - id: 244897
     prefix: '238227'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5b4f29f9-330e-4816-b522-d74baef7c325
+    uuid: b1f685d2-0404-45c5-8800-e7cc4ac19ed8
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244920
+  - id: 244946
     prefix: '238230'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1aba587b-0e4a-48b0-b506-023a99c83637
+    uuid: 2d2feffb-2a10-4208-950f-49ad7799beb6
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244928
+  - id: 244954
     prefix: '238231'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1a5ebeb9-7e7a-4b64-a3bc-45a00070df9e
+    uuid: e904ad75-f32b-436b-88e9-7469fd01858e
     country_id: *cv
     network_id: *cv_fixed
-  - id: 244939
+  - id: 244965
     prefix: '238232'
     number_min_length: 10
     number_max_length: 10
-    uuid: 55be0229-7c10-4577-be14-4b2bf4fba5c6
-    country_id: *cv
-    network_id: *cv_fixed
-  - id: 245024
-    prefix: '238235'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 746cef53-8e3c-4844-bad0-e43da2dd4ded
-    country_id: *cv
-    network_id: *cv_fixed
-  - id: 245036
-    prefix: '238236'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9e04428c-a6eb-44cb-984b-82603d328796
+    uuid: d927b794-3179-4c98-8376-cd7b7c163b11
     country_id: *cv
     network_id: *cv_fixed
   - id: 245050
+    prefix: '238235'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 74356456-068f-418a-849c-cc6fdd4c215a
+    country_id: *cv
+    network_id: *cv_fixed
+  - id: 245062
+    prefix: '238236'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7d3d03e2-fe97-4e91-8aa2-de3851ce8ec7
+    country_id: *cv
+    network_id: *cv_fixed
+  - id: 245076
     prefix: '238237'
     number_min_length: 10
     number_max_length: 10
-    uuid: 51c95ed2-c075-4211-9624-53d9823d5e0f
+    uuid: 5aba9e17-ec23-4a80-8254-55dfb6c2f24c
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245058
+  - id: 245084
     prefix: '238238'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4e108b9b-0dc7-4e1c-aa1e-663553e1dde0
+    uuid: 2538350e-a3aa-4479-a539-9d6503a18cb4
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245120
+  - id: 245146
     prefix: '238241'
     number_min_length: 10
     number_max_length: 10
-    uuid: e916abcc-56fd-47dc-b4dd-9c50ff0d89c1
+    uuid: dba0c756-ac1b-4cde-b98a-34efda71c91c
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245129
+  - id: 245155
     prefix: '238242'
     number_min_length: 10
     number_max_length: 10
-    uuid: 59981de4-81ff-4347-b4f3-c960bc0896bc
+    uuid: d05c8790-7cd6-4f64-81c0-0082d9c14a61
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245287
+  - id: 245313
     prefix: '238251'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2990e706-9e21-462d-8cc0-166a501dac1a
+    uuid: a3eec074-561e-46b5-a572-ef170fa546e6
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245305
+  - id: 245331
     prefix: '238252'
     number_min_length: 10
     number_max_length: 10
-    uuid: 40278309-bc84-4552-a729-b1fbe38b267f
+    uuid: 24fda84c-de53-441c-b2f0-35cfac29d18d
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245367
+  - id: 245393
     prefix: '238255'
     number_min_length: 10
     number_max_length: 10
-    uuid: cbae33dd-fd79-44d0-8540-ba5f1ee493ac
+    uuid: 4031e956-2761-4ac8-b238-0b5c02b25f8f
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245392
+  - id: 245418
     prefix: '238256'
     number_min_length: 10
     number_max_length: 10
-    uuid: f407568d-71f0-40d2-8add-d8a54dcd7e0f
+    uuid: ed8a7499-4615-412b-b6b4-c16328342b12
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245468
+  - id: 245494
     prefix: '238260'
     number_min_length: 10
     number_max_length: 10
-    uuid: 38d53a9d-ac24-4b0b-9b00-fa7acd0dd3c0
+    uuid: a9ca09e2-1c4c-4767-8f54-9a035726df2e
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245474
+  - id: 245500
     prefix: '238261'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8e0a200e-1190-4850-81d2-243f683712f1
+    uuid: a4752723-265e-4934-a6a6-8d340bc5ce82
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245483
+  - id: 245509
     prefix: '238262'
     number_min_length: 10
     number_max_length: 10
-    uuid: 43bc762c-c594-4440-b83f-36dec07a9fdb
+    uuid: c92420b4-8397-4ee0-aa62-df537197a3a4
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245497
+  - id: 245523
     prefix: '238263'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5fecccab-e446-4cb7-816e-676d026c72f9
+    uuid: ac95d465-e0cd-4bac-b93e-000597371652
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245507
+  - id: 245533
     prefix: '238264'
     number_min_length: 10
     number_max_length: 10
-    uuid: 09397dde-5a61-40cf-a41c-a1faac5204a4
+    uuid: 9ee3ff27-208a-42fa-8455-9fe10bb2aabe
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245517
+  - id: 245543
     prefix: '238265'
     number_min_length: 10
     number_max_length: 10
-    uuid: a30e3a10-77a1-4107-8a8f-5a89b06a111f
+    uuid: e31c6be1-3ace-4e7a-a52e-2b59e947f4e2
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245528
+  - id: 245554
     prefix: '238266'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4382a67f-b5e1-4850-afd3-c3b0bc17689a
+    uuid: 5b98b64d-a138-46d8-a67b-e9e7c4d164ba
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245542
+  - id: 245568
     prefix: '238267'
     number_min_length: 10
     number_max_length: 10
-    uuid: d697150e-a28f-4467-b6b9-075310f0cdbc
+    uuid: ce724e28-c834-47e3-af5e-15469f657743
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245548
+  - id: 245574
     prefix: '238268'
     number_min_length: 10
     number_max_length: 10
-    uuid: 34820a70-d01f-462d-b9f7-79e57a89dc1e
+    uuid: 7858edd9-3d17-4ebe-827b-40fe16226c2d
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245569
+  - id: 245595
     prefix: '238269'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3a5796e5-cc8f-489b-b28b-216161f52b5b
+    uuid: 7084a299-d1c5-4dfb-b70e-920492fd4232
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245612
+  - id: 245638
     prefix: '238271'
     number_min_length: 10
     number_max_length: 10
-    uuid: 21ba3837-81cc-41fc-89c3-0485c2353f64
+    uuid: d729f53c-a7c6-4bab-9a03-db7a3c9ecc6b
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245625
+  - id: 245651
     prefix: '238272'
     number_min_length: 10
     number_max_length: 10
-    uuid: 219fdcbc-22eb-4d0e-94d4-c424b6e62261
+    uuid: 3448ce13-d6db-468b-9246-cc682b0be1e3
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245650
+  - id: 245676
     prefix: '238273'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2e36f40b-fbe7-451c-bef1-bb592c048e16
+    uuid: c74b66b0-b46e-4d51-988a-250476bd1087
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245748
+  - id: 245774
     prefix: '238281'
     number_min_length: 10
     number_max_length: 10
-    uuid: de5597cb-f057-49ba-980c-df0c3b737e8c
+    uuid: 11549064-0236-4dbc-979c-dae8ed0d7c44
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245752
+  - id: 245778
     prefix: '238282'
     number_min_length: 10
     number_max_length: 10
-    uuid: fc036796-7cd9-4330-a8a3-adc1f53dace5
+    uuid: c0e210c7-c07f-4256-a8bb-4ee22798dbf2
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245759
+  - id: 245785
     prefix: '238283'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0b9365c7-e5a2-4eae-b51a-1b14012db288
+    uuid: 4053bcfe-3931-4e71-8bb2-b7d71ef97a90
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245765
+  - id: 245791
     prefix: '238284'
     number_min_length: 10
     number_max_length: 10
-    uuid: 51ca6d4f-41ed-4959-b121-47a6e78285ad
+    uuid: b21485ed-1be6-4ed9-b967-045d8109b92d
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245775
+  - id: 245801
     prefix: '238285'
     number_min_length: 10
     number_max_length: 10
-    uuid: 32d3e5a7-7939-4564-b187-4336bb63698b
+    uuid: bc2f8910-0e47-4fb6-9477-e5ed42a86819
     country_id: *cv
     network_id: *cv_fixed
-  - id: 245873
+  - id: 245899
     prefix: '2383'
     number_min_length: 10
     number_max_length: 10
-    uuid: c74a4e9d-6c8c-446f-92d2-35340484adcb
+    uuid: de7b1517-794d-4780-af2d-917f02433840
     country_id: *cv
     network_id: *cv_fixed

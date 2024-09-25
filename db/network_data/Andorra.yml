@@ -3,115 +3,115 @@ networks:
 # Supplementary services Networks
   - id: &ad_special_services 3815
     name: AD Special Services
-    uuid: 479b6541-33bf-4108-95c0-1fd72771cffd
+    uuid: 1f3ee118-c270-4bac-8be4-97cab0885d1e
     type_id: 14
   - id: &ad_freephone_services 4621
     name: AD Freephone Services
-    uuid: f72cb03e-8506-4df8-968b-1257bb425c3d
+    uuid: 1d6cf38b-5392-4f0b-a2fe-a3368d5fdea1
     type_id: 14
 # Fixed Networks
   - id: &ad_fixed 4272
     name: AD Fixed
-    uuid: bbb83f9e-26b1-480c-82d2-0aa705a16bef
+    uuid: a6e28fbf-161c-4a8d-88a6-4c5a061505fb
     type_id: 12
 # Mobile Networks
   - id: &ad_mobiland_mobile 4530
     name: AD Mobiland Mobile
-    uuid: 1914d7ba-808b-463d-8083-79806f4895d3
+    uuid: ffc75076-d96f-4126-8620-5f784e36d1f1
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 238947
+  - id: 238950
     prefix: '376'
     number_min_length: 4
     number_max_length: 100
-    uuid: 9e7eb0a7-3b1f-464e-9866-663de9ab9681
+    uuid: 6737721f-e6bd-40e7-9b17-985905c10e43
     country_id: *ad
     network_id: null
 # Supplementary services Prefixes
-  - id: 239354
+  - id: 239357
     prefix: '3761'
     number_min_length: 6
     number_max_length: 9
-    uuid: b8e05cf1-afed-4abe-ba24-02f422fa4e8f
+    uuid: de1dc532-94b7-4a20-9fa9-a753eaf400f4
     country_id: *ad
     network_id: *ad_special_services
-  - id: 244280
+  - id: 244303
     prefix: '3761800'
     number_min_length: 11
     number_max_length: 11
-    uuid: ebe2f759-4a15-49f1-a41b-a4f5bdd77c64
+    uuid: 4dceb8ff-7753-4466-905c-1b959f62f621
     country_id: *ad
     network_id: *ad_freephone_services
-  - id: 244294
+  - id: 244317
     prefix: '3761802'
     number_min_length: 11
     number_max_length: 11
-    uuid: 51db5c83-40b5-49ab-8258-4727bc62391c
+    uuid: 826fd184-8626-41cb-b7cd-c72815ef9d26
     country_id: *ad
     network_id: *ad_freephone_services
-  - id: 254023
+  - id: 254086
     prefix: '3769'
     number_min_length: 9
     number_max_length: 9
-    uuid: ae7c93b9-b6aa-40b8-b162-390030f67c35
+    uuid: b0b02400-e5bf-4213-96b1-7bc8f106c2a1
     country_id: *ad
     network_id: *ad_special_services
 # Fixed Prefixes
-  - id: 240074
+  - id: 240080
     prefix: '376170'
     number_min_length: 12
     number_max_length: 12
-    uuid: 94b2f4c3-cf1e-4eda-b794-1935451806b1
+    uuid: 3b649036-57a7-4538-933f-f4e94e06f81a
     country_id: *ad
     network_id: *ad_fixed
-  - id: 240079
+  - id: 240085
     prefix: '376170170'
     number_min_length: 15
     number_max_length: 15
-    uuid: 24a8529d-97c6-45e4-89f2-5485607a5023
+    uuid: 11158cdb-ce30-4a79-9f68-76ee0dfe523e
     country_id: *ad
     network_id: *ad_fixed
-  - id: 252185
+  - id: 252241
     prefix: '3767'
     number_min_length: 9
     number_max_length: 9
-    uuid: f5e88250-8cc9-4775-9d55-5d543ccc69a9
+    uuid: cfd02825-adbc-4d93-91a5-9f25cc482d7e
     country_id: *ad
     network_id: *ad_fixed
-  - id: 253324
+  - id: 253386
     prefix: '37679'
     number_min_length: 9
     number_max_length: 9
-    uuid: 165d2ae5-7986-44e4-a278-be8bb31fd5d5
+    uuid: b8f47eb6-fc11-46d3-acc2-b0a2a111a70c
     country_id: *ad
     network_id: *ad_fixed
-  - id: 253605
+  - id: 253667
     prefix: '3768'
     number_min_length: 9
     number_max_length: 9
-    uuid: 43cab40c-f398-459b-a600-a7510aab311d
+    uuid: 31056991-0f65-4730-ad14-abf0ad53e961
     country_id: *ad
     network_id: *ad_fixed
 # Mobile Prefixes
-  - id: 242366
+  - id: 242383
     prefix: '3766'
     number_min_length: 9
     number_max_length: 9
-    uuid: cd4063b3-91b7-4313-ab22-e41000fe28d0
+    uuid: fb501a89-438e-474b-9114-23ff8e5fc439
     country_id: *ad
     network_id: *ad_mobiland_mobile
-  - id: 245863
+  - id: 245889
     prefix: '3763'
     number_min_length: 9
     number_max_length: 9
-    uuid: e39aa2e9-8562-4d3f-a4ba-b88d31ac556f
+    uuid: 733aae7b-4994-4b7d-9798-e26ec1b70dfd
     country_id: *ad
     network_id: *ad_mobiland_mobile
-  - id: 251832
+  - id: 251888
     prefix: '376690'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c533aad-5737-4731-a56f-197450170688
+    uuid: def5a068-cb65-4a91-a855-c58cd172faa6
     country_id: *ad
     network_id: *ad_mobiland_mobile

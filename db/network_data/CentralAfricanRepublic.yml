@@ -3,167 +3,167 @@ networks:
 # Supplementary services Networks
   - id: &cf_special_services 3835
     name: CF Special Services
-    uuid: 96dc26a1-2f5b-4617-ba47-f4e76e343583
+    uuid: 6254b468-5473-42de-abef-afb08071a097
     type_id: 14
   - id: &cf_value_added_services 4392
     name: CF Value Added Services
-    uuid: ad846ca1-5502-4ffb-81ae-229d1c985276
+    uuid: d7853555-e794-4096-a46f-7e24590d78ea
     type_id: 14
   - id: &cf_internet_services 5808
     name: CF Internet Services
-    uuid: cd49bf4c-e51b-416f-87ab-fc770afa5a19
+    uuid: fae0ab29-0b88-463d-b5bf-8bc56746f0ed
     type_id: 14
 # Fixed Networks
   - id: &cf_fixed 4691
     name: CF Fixed
-    uuid: 8f0c4909-a6a4-40ce-9756-18aa01907fad
+    uuid: 41ec44c5-a4c2-4089-8528-437690795685
     type_id: 12
 # Mobile Networks
   - id: &cf_socatel_mobile 4940
     name: CF Socatel Mobile
-    uuid: e76915b7-3e01-42f4-aff0-3eb9a9c6700c
+    uuid: c1607805-0593-41ce-92f7-496b4b81070f
     type_id: 3
   - id: &cf_orange_mobile 4962
     name: CF Orange Mobile
-    uuid: 55117e7b-fabd-4f57-8fbb-6b3eaf9fcc8d
+    uuid: 98ca54f9-9465-4bb5-b7d8-d0b04b01b707
     type_id: 3
   - id: &cf_telecel_mobile 5106
     name: CF Telecel Mobile
-    uuid: 7222f528-4780-4c69-a311-a4c7fbda2eda
+    uuid: 2f93dedd-330b-4b38-b8e8-14ba557a1cf9
     type_id: 3
   - id: &cf_mobile 5407
     name: CF Mobile
-    uuid: 9ec69a28-bf1e-413d-b473-e6d06c117e71
+    uuid: e0a040b7-dfcd-4757-85cf-f88ffe0acf78
     type_id: 3
   - id: &cf_moov_africa_mobile 5422
     name: CF Moov Africa Mobile
-    uuid: 2f044fc7-d4c5-42ea-9791-fe300741723c
+    uuid: 958850c8-52ea-4e2e-9579-f0f11162e5d9
     type_id: 3
   - id: &cf_azur_mobile 5477
     name: CF Azur Mobile
-    uuid: 0dfb13c2-238b-439e-9f53-5ce851558902
+    uuid: 5def4d2a-a65b-478f-8ef6-90b4a05aced1
     type_id: 3
 network_prefixes:
 # Country code Prefixes
-  - id: 238970
+  - id: 238973
     prefix: '236'
     number_min_length: 4
     number_max_length: 100
-    uuid: e17e8170-8a58-4011-8782-aebe6af3de43
+    uuid: fee54fd7-e071-4477-9f07-48ce8717aa59
     country_id: *cf
     network_id: null
 # Supplementary services Prefixes
-  - id: 239375
+  - id: 239378
     prefix: '2361'
     number_min_length: 6
     number_max_length: 9
-    uuid: 1e169320-0383-4f30-b1ad-772e2ee98c01
+    uuid: 32325631-5574-47eb-b477-9ca914aae561
     country_id: *cf
     network_id: *cf_special_services
-  - id: 240927
+  - id: 240933
     prefix: '2364'
     number_min_length: 7
     number_max_length: 9
-    uuid: a9d836a0-755d-4994-9b50-5346e5a35865
+    uuid: 3638fa79-7dbf-4469-9304-e9dd7b6783c5
     country_id: *cf
     network_id: *cf_value_added_services
-  - id: 253611
+  - id: 253674
     prefix: '2368'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7d97bf91-ade5-4c18-8151-2c4b92261386
+    uuid: e75830a5-7c90-432c-b8f5-06483a554268
     country_id: *cf
     network_id: *cf_value_added_services
-  - id: 253731
+  - id: 253794
     prefix: '236877'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b337d26-29bc-4be5-b958-62e9e4517cf1
+    uuid: 2bef6c6c-de02-4681-a463-fae3b679b97d
     country_id: *cf
     network_id: *cf_value_added_services
-  - id: 260604
+  - id: 260707
     prefix: '23685'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7460c137-52d1-442e-be2d-542af8305d96
+    uuid: 3a606cb0-71b1-4d8f-8082-abdcfb6c214b
     country_id: *cf
     network_id: *cf_value_added_services
-  - id: 260665
+  - id: 260768
     prefix: '2368522'
     number_min_length: 11
     number_max_length: 11
-    uuid: 481349f1-b6f7-4f51-91b1-e4e445e4cec7
+    uuid: c0e0536c-69ab-4839-9f12-3854a3172eed
     country_id: *cf
     network_id: *cf_internet_services
 # Fixed Prefixes
-  - id: 244378
+  - id: 244402
     prefix: '2362'
     number_min_length: 11
     number_max_length: 11
-    uuid: 73eed303-00cd-4e23-a3b4-f5fea7901bf4
+    uuid: b56bf4d7-1d83-4fe3-a4b5-00d89ae3f7a3
     country_id: *cf
     network_id: *cf_fixed
-  - id: 244604
+  - id: 244630
     prefix: '23621'
     number_min_length: 11
     number_max_length: 11
-    uuid: b42a3e89-1551-4ffe-87aa-5ed5591466e3
+    uuid: 7b8a0821-17cb-4937-86d2-ae14ddb5bcd0
     country_id: *cf
     network_id: *cf_fixed
-  - id: 244701
+  - id: 244727
     prefix: '23622'
     number_min_length: 11
     number_max_length: 11
-    uuid: 10651ef0-720b-4997-bdf1-910cd8a300f1
+    uuid: c56a8a83-22d2-44ee-b19a-540807b8664e
     country_id: *cf
     network_id: *cf_fixed
-  - id: 254030
+  - id: 254093
     prefix: '2369'
     number_min_length: 11
     number_max_length: 11
-    uuid: 254ee63a-b3eb-4c3c-9652-1860165ed262
+    uuid: ea1102f0-37f9-45d4-b999-e7359adcd89f
     country_id: *cf
     network_id: *cf_fixed
 # Mobile Prefixes
-  - id: 248684
+  - id: 248738
     prefix: '23671'
     number_min_length: 11
     number_max_length: 11
-    uuid: 52fb2419-82b9-43e9-b1e2-9de6243b89be
+    uuid: d5c95b1c-c632-4557-a101-dd6def4b4073
     country_id: *cf
     network_id: *cf_socatel_mobile
-  - id: 248770
+  - id: 248824
     prefix: '23672'
     number_min_length: 11
     number_max_length: 11
-    uuid: 61464116-2026-4117-adde-89e30a7cbc40
+    uuid: f70ab446-6b78-44f2-ae08-fe8983257a86
     country_id: *cf
     network_id: *cf_orange_mobile
-  - id: 249498
+  - id: 249552
     prefix: '23675'
     number_min_length: 11
     number_max_length: 11
-    uuid: 197800b1-4a99-4a95-903f-750df60eaefd
+    uuid: 49c43da4-9fcf-4d0c-9978-90e154998c34
     country_id: *cf
     network_id: *cf_telecel_mobile
-  - id: 252191
+  - id: 252248
     prefix: '2367'
     number_min_length: 11
     number_max_length: 11
-    uuid: b43d92d6-d309-4b9e-acf2-ce983911561f
+    uuid: 4fafc0aa-6443-4b26-b5dc-451cdb8f4137
     country_id: *cf
     network_id: *cf_mobile
-  - id: 252237
+  - id: 252299
     prefix: '23670'
     number_min_length: 11
     number_max_length: 11
-    uuid: 709b0765-798e-4d22-8b9e-2b511bc0beb2
+    uuid: 907e49a2-db97-472b-9e55-b0822e2c1dfe
     country_id: *cf
     network_id: *cf_moov_africa_mobile
-  - id: 252567
+  - id: 252629
     prefix: '23677'
     number_min_length: 11
     number_max_length: 11
-    uuid: c2058cf2-38c8-47c4-aa2b-5b067d9b2bd7
+    uuid: e1121ce4-b5c0-41dc-ac23-b1ffe63bebd5
     country_id: *cf
     network_id: *cf_azur_mobile
