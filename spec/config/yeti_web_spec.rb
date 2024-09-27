@@ -56,7 +56,10 @@ RSpec.describe 'config/yeti_web.yml' do
         url_callback: a_kind_of(String),
         url_return: a_kind_of(String)
       },
-      routing_simulation_default_interface: a_kind_of(String)
+      routing_simulation_default_interface: a_kind_of(String),
+      invoice: {
+        auto_approve: boolean
+      }
     }
   end
 

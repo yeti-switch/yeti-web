@@ -203,4 +203,45 @@ RSpec.describe BillingInvoice::Generate do
                                 )
     end
   end
+
+  context 'when "invoice.auto_approve" setting has "true" value' do
+    before { allow(YetiConfig.invoice).to receive(:auto_approve).and_return(true) }
+
+    it 'should create invoice with approved state' do
+      expect { subject }.to change(Billing::Invoice.approved, :count).by(1)
+      expect(YetiConfig.invoice).to have_received(:auto_approve).once
+    end
+  end
+
+  context 'when the "invoice.auto_approve" setting has "false" value' do
+    before { allow(YetiConfig.invoice).to receive(:auto_approve).and_return(false) }
+
+    it 'should create the "new" with approved state' do
+      expect { subject }.to change(Billing::Invoice.pending, :count).by(1)
+    end
+  end
+
+  context 'when BillingInvoice::Create service return error' do
+    before { allow(BillingInvoice::Create).to receive(:call).and_raise(BillingInvoice::Create::Error, 'error') }
+
+    it 'raises error' do
+      expect { subject }.to raise_error BillingInvoice::Generate::Error
+    end
+  end
+
+  context 'when BillingInvoice::Fill service return error' do
+    before { allow(BillingInvoice::Fill).to receive(:call).and_raise(BillingInvoice::Fill::Error, 'error') }
+
+    it 'raises error' do
+      expect { subject }.to raise_error BillingInvoice::Generate::Error
+    end
+  end
+
+  context 'when validation error generated' do
+    before { allow(BillingInvoice::Create).to receive(:call).and_raise(ActiveRecord::RecordInvalid) }
+
+    it 'raises error' do
+      expect { subject }.to raise_error BillingInvoice::Generate::Error
+    end
+  end
 end

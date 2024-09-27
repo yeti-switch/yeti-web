@@ -47,13 +47,6 @@ RSpec.describe BillingInvoice::Create do
                              uuid: be_present
                            )
     end
-
-    it 'enqueues Worker::FillInvoiceJob with invoice.id' do
-      subject
-      invoice = Billing::Invoice.last!
-
-      expect(Worker::FillInvoiceJob).to have_been_enqueued.with(invoice.id)
-    end
   end
 
   shared_examples :does_not_create_invoice do

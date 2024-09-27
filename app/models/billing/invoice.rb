@@ -158,14 +158,6 @@ class Billing::Invoice < Cdr::Base
     "Invoice #{id}"
   end
 
-  # todo service
-  def approve
-    transaction do
-      update!(state_id: Billing::InvoiceState::APPROVED)
-      send_email
-    end
-  end
-
   def approvable?
     state.pending?
   end
@@ -194,12 +186,6 @@ class Billing::Invoice < Cdr::Base
 
   def subject
     display_name
-  end
-
-  # FIX this copy paste
-  # todo service
-  def send_email
-    invoice_document&.send_invoice
   end
 
   private
