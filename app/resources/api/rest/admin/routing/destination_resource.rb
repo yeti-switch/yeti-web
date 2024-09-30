@@ -47,8 +47,12 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
   ransack_filter :reverse_billing, type: :boolean
   ransack_filter :profit_control_mode_id, type: :number
   ransack_filter :rate_policy_id, type: :number
-  ransack_filter :rateplan_id, type: :foreign_key, column: :rate_group_rateplans_id
-  ransack_filter :country_id, type: :foreign_key, column: :network_prefix_country_id
+  filter :rateplan_id_eq, apply: lambda { |records, values, _options|
+    records.ransack(rateplan_id_filter: values).result
+  }
+  filter :country_id_eq, apply: lambda { |records, values, _options|
+    records.ransack(country_id_filter: values).result
+  }
 
   def self.updatable_fields(_context)
     %i[

@@ -71,9 +71,12 @@ class Routing::Destination < ApplicationRecord
   scope :time_valid, -> { where('valid_till >= :time AND valid_from < :time', time: Time.now) }
   scope :rateplan_id_filter, lambda { |value|
     rate_group_ids = Routing::RatePlanGroup.where(rateplan_id: value).pluck(:rate_group_id)
-    where('rate_group_id IN (?)', rate_group_ids)
+    where(rate_group_id: rate_group_ids)
   }
-
+  scope :country_id_filter, lambda { |value|
+    network_prefix_ids = System::NetworkPrefix.where(country_id: value).pluck(:id)
+    where(network_prefix_id: network_prefix_ids)
+  }
   scope :where_customer, lambda { |id|
     joins(:rate_group).joins(:rateplans).joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })
   }
@@ -176,6 +179,7 @@ class Routing::Destination < ApplicationRecord
       tagged
       routing_tag_ids_count_equals
       rateplan_id_filter
+      country_id_filter
     ]
   end
 end
