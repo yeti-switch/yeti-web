@@ -31,8 +31,15 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   end
 
   batch_action :approve, confirm: 'Are you sure?', if: proc { authorized?(:approve) } do |selection|
-    active_admin_config.resource_class.find(selection).each(&:approve)
-    redirect_to collection_path, notice: "#{active_admin_config.resource_label.pluralize} are approved!"
+    active_admin_config.resource_class.find(selection).each do |record|
+      BillingInvoice::Approve.call(invoice: record)
+      flash[:notice] = "#{active_admin_config.resource_label.pluralize} are approved!"
+    rescue BillingInvoice::Approve::Error => e
+      flash[:error] = "##{record.id}, #{e.message}"
+      break
+    end
+
+    redirect_to collection_path
   end
 
   member_action :approve, method: :post do
