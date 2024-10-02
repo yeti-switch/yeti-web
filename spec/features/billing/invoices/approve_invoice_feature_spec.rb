@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Approve invoide feature', type: :feature do
-  subject { click_action_item 'Approve' }
-
+RSpec.describe 'Approve invoice feature', type: :feature do
   include_context :login_as_admin
 
+  let(:approved_state_id) { Billing::InvoiceState::APPROVED }
+  let!(:invoice) { FactoryBot.create(:invoice, :manual, :pending, :with_vendor_account) }
+
   context 'when valid data' do
-    let!(:invoice) { FactoryBot.create(:invoice, :manual, :pending, :with_vendor_account) }
-    let(:approved_state_id) { Billing::InvoiceState::APPROVED }
+    subject { click_action_item 'Approve' }
 
     before { visit invoice_path(invoice) }
 
@@ -19,8 +19,25 @@ RSpec.describe 'Approve invoide feature', type: :feature do
     end
   end
 
+  context 'when approve from batch action' do
+    subject { click_button :OK }
+
+    before do
+      visit invoices_path
+      check class: 'toggle_all'
+      click_batch_action 'Approve Selected'
+    end
+
+    it 'should approve invoice', :js do
+      subject
+
+      expect(page).to have_flash_message 'Invoices are approved!', type: :notice
+      expect(invoice.reload).to have_attributes(state_id: approved_state_id)
+    end
+  end
+
   context 'when invalid data', :js do
-    let!(:invoice) { FactoryBot.create(:invoice, :pending, :with_vendor_account) }
+    subject { click_action_item 'Approve' }
 
     before do
       allow(BillingInvoice::Approve).to receive(:call).and_raise(BillingInvoice::Approve::Error, 'error')
