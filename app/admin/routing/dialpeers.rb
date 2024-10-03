@@ -182,22 +182,13 @@ ActiveAdmin.register Dialpeer do
   filter :network_prefix_country_id_eq,
          as: :select,
          label: 'Country',
-         input_html: {
-           class: 'chosen network_prefix_country_id_eq-filter'
-         },
+         input_html: { class: 'chosen' },
          collection: -> { System::Country.order(:name) }
 
   association_ajax_filter :network_prefix_network_id_eq,
                           label: 'Network',
                           scope: -> { System::Network.order(:name) },
-                          path: '/system_networks/search',
-                          input_html: {
-                            'data-path-params': { 'q[country_id_eq]': '.network_prefix_country_id_eq-filter' }.to_json,
-                            'data-required-param': 'q[country_id_eq]'
-                          },
-                          fill_params: lambda {
-                            { country_id_eq: params.dig(:q, :network_prefix_country_id_eq) }
-                          }
+                          path: '/system_networks/search'
 
   filter :created_at, as: :date_time_range
   filter :external_id

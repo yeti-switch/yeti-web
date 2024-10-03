@@ -13,7 +13,7 @@ RSpec.describe 'Create new Network Prefix', type: :feature, js: true do
     visit new_system_network_prefix_path
 
     aa_form.set_text 'Prefix', '123'
-    aa_form.select_chosen 'Network', network.display_name
+    fill_in_chosen 'Network', with: network.name, ajax: true
   end
 
   it 'creates record' do

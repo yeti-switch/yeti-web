@@ -19,8 +19,16 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   filter :id
   filter :routing_plan, collection: -> { Routing::RoutingPlan.having_static_routes }, input_html: { class: 'chosen' }
   filter :prefix
-  filter :country, input_html: { class: 'chosen' }
-  filter :network, input_html: { class: 'chosen' }
+  filter :network_prefix_country_id_eq,
+         as: :select,
+         label: 'Country',
+         input_html: { class: 'chosen' },
+         collection: -> { System::Country.order(:name) }
+
+  association_ajax_filter :network_prefix_network_id_eq,
+                          label: 'Network',
+                          scope: -> { System::Network.order(:name) },
+                          path: '/system_networks/search'
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   # after_build do |resource|
