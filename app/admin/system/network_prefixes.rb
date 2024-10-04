@@ -57,7 +57,10 @@ ActiveAdmin.register System::NetworkPrefix do
       f.input :number_min_length
       f.input :number_max_length
       f.input :country, input_html: { class: 'chosen' }
-      f.input :network, input_html: { class: 'chosen' }
+      f.association_ajax_input :network_id,
+                               label: 'Network',
+                               scope: System::Network.order(:name),
+                               path: '/system_networks/search'
     end
     f.actions
   end
