@@ -22,5 +22,18 @@ ActiveAdmin.before_load do |_app|
         records.fast_count(:all)
       end
     end
+
+    def current_page_collection_size
+      is_last_page = collection.total_count <= collection_offset + collection.limit_value
+      if is_last_page
+        collection.total_count - collection_offset
+      else
+        collection.limit_value
+      end
+    end
+
+    def collection_offset
+      (collection.current_page - 1) * collection.limit_value
+    end
   end
 end
