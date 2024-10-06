@@ -10,7 +10,7 @@
 #  date_end        :timestamptz      not null
 #  date_start      :timestamptz      not null
 #  filter          :string
-#  group_by        :string           is an Array
+#  group_by        :string           default([]), not null, is an Array
 #  interval_length :integer(4)       not null
 #  send_to         :integer(4)       is an Array
 #  created_at      :timestamptz      not null

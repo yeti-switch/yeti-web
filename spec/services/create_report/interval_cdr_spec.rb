@@ -80,23 +80,12 @@ RSpec.describe CreateReport::IntervalCdr do
     include_examples :creates_report
   end
 
-  context 'with group_by=null' do
-    let(:service_params) do
-      super().merge group_by: nil
-    end
-    let(:expected_report_attrs) do
-      super().merge group_by: nil
-    end
-
-    include_examples :creates_report
-  end
-
   context 'with group_by=[]' do
     let(:service_params) do
       super().merge group_by: []
     end
     let(:expected_report_attrs) do
-      super().merge group_by: nil
+      super().merge group_by: []
     end
 
     include_examples :creates_report

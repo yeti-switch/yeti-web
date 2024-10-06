@@ -9,7 +9,7 @@ module Report
     attribute :filter, :string
     attribute :aggregate_by, :string
     attribute :interval_length, :integer
-    attribute :group_by, :string, array: { reject_blank: true }
+    attribute :group_by, :string, array: { reject_blank: true }, default: []
     attribute :send_to, :integer, array: { reject_blank: true }
 
     validate :validate_group_by
@@ -37,7 +37,7 @@ module Report
         aggregate_by: aggregate_by,
         interval_length: interval_length,
         filter: filter.presence,
-        group_by: group_by.presence,
+        group_by: group_by,
         send_to: send_to.presence
       )
     rescue CreateReport::CustomCdr::Error => e
