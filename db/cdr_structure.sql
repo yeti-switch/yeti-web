@@ -2277,7 +2277,7 @@ CREATE TABLE reports.cdr_interval_report (
     date_start timestamp with time zone NOT NULL,
     date_end timestamp with time zone NOT NULL,
     filter character varying,
-    group_by character varying[],
+    group_by character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     created_at timestamp with time zone NOT NULL,
     interval_length integer NOT NULL,
     aggregator_id integer NOT NULL,
@@ -4401,6 +4401,8 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240405165010'),
 ('20240411092931'),
 ('20240609092136'),
-('20240617084103');
+('20240617084103'),
+('20241006113650'),
+('20241006123022');
 
 

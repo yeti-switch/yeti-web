@@ -3,7 +3,7 @@
 module CreateReport
   class IntervalCdr < Base
     parameter :filter
-    parameter :group_by
+    parameter :group_by, default: []
     parameter :aggregation_function
     parameter :aggregate_by
     parameter :interval_length
@@ -18,7 +18,7 @@ module CreateReport
         date_start: date_start,
         date_end: date_end,
         filter: filter.presence,
-        group_by: group_by.presence,
+        group_by: group_by,
         send_to: send_to.presence
       )
     end

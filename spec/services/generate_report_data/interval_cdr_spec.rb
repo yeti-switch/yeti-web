@@ -24,7 +24,7 @@ RSpec.describe GenerateReportData::IntervalCdr do
       aggregation_function: aggregation_function,
       interval_length: 1440, # 24 hours
       aggregate_by: 'customer_price',
-      group_by: nil,
+      group_by: [],
       filter: nil
     }
   end

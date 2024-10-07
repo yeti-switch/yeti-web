@@ -31,7 +31,7 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
       aggregate_by: 'destination_fee',
       interval_length: 10,
       send_to: nil,
-      group_by: nil,
+      group_by: [],
       filter: nil
     )
   end
@@ -106,7 +106,7 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
                           aggregate_by: 'destination_fee',
                           interval_length: 10,
                           send_to: nil,
-                          group_by: nil,
+                          group_by: [],
                           filter: 'customer_id=123'
                         )
     end
@@ -132,7 +132,7 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
                           aggregate_by: 'destination_fee',
                           interval_length: 10,
                           send_to: [contact.id],
-                          group_by: nil,
+                          group_by: [],
                           filter: nil
                         )
     end
@@ -159,7 +159,7 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
                           aggregate_by: 'destination_fee',
                           interval_length: 10,
                           send_to: match_array([contacts.first.id, contacts.second.id]),
-                          group_by: nil,
+                          group_by: [],
                           filter: nil
                         )
     end
