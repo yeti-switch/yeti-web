@@ -690,7 +690,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'customer-price-no-vat' => cdr.customer_price_no_vat,
             'customer-duration' => cdr.customer_duration,
             'vendor-duration' => cdr.vendor_duration,
-            'destination-rate-policy-id' => cdr.destination_rate_policy_id
+            'destination-rate-policy-id' => cdr.destination_rate_policy_id,
+            'metadata' => nil
           },
           'relationships' => hash_including(
             'rateplan' => hash_including(
@@ -769,8 +770,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
   end
 
   describe 'PATCH update' do
-    it 'PATCH should not be routable', type: :routing do
-      expect(patch: '/api/rest/admin/cdr/cdrs/123').to_not be_routable
+    it 'PATCH should be routable', type: :routing do
+      expect(patch: '/api/rest/admin/cdr/cdrs/123').to be_routable
     end
   end
 

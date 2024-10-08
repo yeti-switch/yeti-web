@@ -38,4 +38,35 @@ RSpec.resource 'Cdrs' do
       expect(status).to eq(200)
     end
   end
+
+  patch '/api/rest/admin/cdr/cdrs/:id' do
+    with_options scope: :data, with_example: true do
+      parameter :type, 'Resource type (cdrs)', required: true
+      parameter :id, 'CDR ID', required: true
+      parameter :attributes, 'list of fields/values to update', required: true
+    end
+
+    jsonapi_attribute :metadata
+
+    context '200' do
+      let(:id) { create(:cdr).id }
+
+      example 'Update an CDR' do
+        request = {
+          data: {
+            id: id,
+            type: 'cdrs',
+            attributes: {
+              metadata: { some_json: 'some value' }
+            }
+          }
+        }
+
+        do_request(request)
+
+        expect(status).to eq(200)
+        expect(JSON.parse(response_body).dig('data', 'attributes', 'metadata')).to eq 'some_json' => 'some value'
+      end
+    end
+  end
 end
