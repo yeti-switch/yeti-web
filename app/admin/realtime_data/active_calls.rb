@@ -28,8 +28,8 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
            !request.xhr?
          }
 
-   association_ajax_filter :dst_network_id_eq,
-                          label: 'Dst Network',
+  association_ajax_filter :dst_network_id_eq,
+                          label: 'Destination Network',
                           scope: -> { System::Network.order(:name) },
                           path: '/system_networks/search'
 
