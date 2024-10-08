@@ -95,7 +95,7 @@ Rails.application.routes.draw do
           jsonapi_resources :incoming_registrations, only: %i[index]
 
           namespace :cdr do
-            jsonapi_resources :cdrs, only: %i[index show] do
+            jsonapi_resources :cdrs, only: %i[index show update] do
               member { get :recording }
               # jsonapi_relationships
               patched_jsonapi_relationships

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::Cdr::CdrResource < BaseResource
-  immutable
   model_name 'Cdr::Cdr'
   paginator :paged
 
@@ -16,6 +15,10 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
 
   def self.default_sort
     [{ field: 'time_start', direction: :desc }]
+  end
+
+  def self.updatable_fields(_context)
+    [:metadata]
   end
 
   attributes :time_start,
@@ -127,7 +130,8 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :customer_price_no_vat,
              :customer_duration,
              :vendor_duration,
-             :destination_rate_policy_id
+             :destination_rate_policy_id,
+             :metadata
 
   has_one :rateplan, class_name: 'Rateplan', force_routed: true
   has_one :dialpeer, force_routed: true
