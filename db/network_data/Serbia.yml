@@ -1,0 +1,688 @@
+country_id: &rs 247
+networks:
+# Supplementary services Networks
+  - id: &rs_sms_value_added_services_free 4137
+    name: RS Sms Value Added Services Free
+    uuid: 60546c15-9df8-409c-b701-3fd7fa109e9a
+    type_id: 14
+  - id: &rs_sms_value_added_services_standard_rate 4196
+    name: RS Sms Value Added Services Standard Rate
+    uuid: aea78094-02dc-43e5-b03c-c208e99e67f0
+    type_id: 14
+  - id: &rs_sms_value_added_services_basic_rate 4259
+    name: RS Sms Value Added Services Basic Rate
+    uuid: 9800d9cd-e953-4164-a840-a114c93a34fa
+    type_id: 14
+  - id: &rs_sms_value_added_services_high_rate 4269
+    name: RS Sms Value Added Services High Rate
+    uuid: c52949b3-65c0-481e-b075-820e1e52e7bf
+    type_id: 14
+  - id: &rs_universal_access_services 4721
+    name: RS Universal Access Services
+    uuid: daae4941-19d7-4c44-8f18-7246615e1100
+    type_id: 14
+  - id: &rs_machine_to_machine_m2m_services 4789
+    name: RS Machine To Machine M2M Services
+    uuid: 65f9268a-267c-4d12-b2fd-3cc4022a6765
+    type_id: 14
+  - id: &rs_nomadic_services 4846
+    name: RS Nomadic Services
+    uuid: 5e5cbb59-ab5f-4fdb-a7b5-fb2854753c79
+    type_id: 14
+  - id: &rs_televoting_services 4917
+    name: RS Televoting Services
+    uuid: 7cde2ca7-aaea-4ec8-8a2e-9cd53eae8c81
+    type_id: 14
+  - id: &rs_special_services 5316
+    name: RS Special Services
+    uuid: 24d0f92e-702c-440f-934a-0d9acfd4f956
+    type_id: 14
+  - id: &rs_social_value_services 5461
+    name: RS Social Value Services
+    uuid: 6735bb5d-eaf0-4138-9b13-021235f555db
+    type_id: 14
+  - id: &rs_directory_enquiry_services 5489
+    name: RS Directory Enquiry Services
+    uuid: 149774d0-e7a1-4cf9-9aa5-69264086429a
+    type_id: 14
+  - id: &rs_freephone_services 7571
+    name: RS Freephone Services
+    uuid: 9071af75-dbdd-4b5a-a9f0-9c793b8a7976
+    type_id: 14
+  - id: &rs_prepaid_phone_cards 7639
+    name: RS Prepaid Phone Cards
+    uuid: f66a8af0-a5c6-4239-a08a-eec20b4e27e4
+    type_id: 14
+  - id: &rs_value_added_services_marketing 7837
+    name: RS Value Added Services Marketing
+    uuid: 7108f9aa-9dde-43dc-b1b6-4c74cb082dbe
+    type_id: 14
+  - id: &rs_value_added_services_entertainment 7866
+    name: RS Value Added Services Entertainment
+    uuid: 3c3f2917-d08c-4013-a3a2-1f8aa7e4c430
+    type_id: 14
+  - id: &rs_value_added_services_children_content 7873
+    name: RS Value Added Services Children Content
+    uuid: d109736b-d570-4631-a4f4-742a3e15f1f4
+    type_id: 14
+  - id: &rs_value_added_services 7888
+    name: RS Value Added Services
+    uuid: 348dd6f1-f100-4974-bc71-b073b862006e
+    type_id: 14
+  - id: &rs_value_added_services_humanitarian_aid 7913
+    name: RS Value Added Services Humanitarian Aid
+    uuid: 19480d90-c131-414b-83e0-2b766539f1e7
+    type_id: 14
+  - id: &rs_value_added_services_adult_content 7919
+    name: RS Value Added Services Adult Content
+    uuid: 8f5e237a-d46b-498f-a9ac-b29e1fdd68f7
+    type_id: 14
+  - id: &rs_value_added_services_lottery 7924
+    name: RS Value Added Services Lottery
+    uuid: 7c081175-da67-4ea0-a5e9-c72d4456be01
+    type_id: 14
+# Mobile Networks
+  - id: &rs_a1_mobile 4364
+    name: RS A1 Mobile
+    uuid: ae363c6f-057d-4cef-97ec-70915b7be582
+    type_id: 3
+  - id: &rs_yettel_mobile 4435
+    name: RS Yettel Mobile
+    uuid: 65fb589d-dfe6-44f8-a7af-680611586214
+    type_id: 3
+  - id: &rs_mts_mobilna_telefonija_srbije_mobile 4463
+    name: RS Mts Mobilna Telefonija Srbije Mobile
+    uuid: f00fe720-b658-4003-b063-ee290f092057
+    type_id: 3
+  - id: &rs_globaltel_mobile 4537
+    name: RS Globaltel Mobile
+    uuid: b9d0b135-c46c-4fa5-a9d8-4a02f73f2117
+    type_id: 3
+  - id: &rs_mobile 4549
+    name: RS Mobile
+    uuid: b99083cc-298f-44ed-9fa3-999d4dbea40a
+    type_id: 3
+# Fixed Networks
+  - id: &rs_fixed 7087
+    name: RS Fixed
+    uuid: 337a2521-bfd0-4410-9804-a23f395272e7
+    type_id: 12
+network_prefixes:
+# Supplementary services Prefixes
+  - id: 54930
+    prefix: '38150'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f3fb6a37-9b12-4c39-a489-be3ada5edea6
+    country_id: *rs
+    network_id: *rs_sms_value_added_services_free
+  - id: 62615
+    prefix: '38151'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 59fc707c-e87d-4f06-909a-141003687183
+    country_id: *rs
+    network_id: *rs_sms_value_added_services_standard_rate
+  - id: 76557
+    prefix: '38153'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1f944466-5ae3-472f-8079-5ad78e49b8a8
+    country_id: *rs
+    network_id: *rs_sms_value_added_services_basic_rate
+  - id: 78133
+    prefix: '38155'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 84eff0b8-7d74-483c-b830-b5b58cdf7482
+    country_id: *rs
+    network_id: *rs_sms_value_added_services_high_rate
+  - id: 163977
+    prefix: '38170'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 82e1fcd0-8027-4b0e-a4b7-627c24e86a7f
+    country_id: *rs
+    network_id: *rs_universal_access_services
+  - id: 172537
+    prefix: '38172'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 801ab275-6838-409c-9dbb-26f267cb23cc
+    country_id: *rs
+    network_id: *rs_machine_to_machine_m2m_services
+  - id: 187997
+    prefix: '38176'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 92caad01-262a-4a55-9a59-357184f68768
+    country_id: *rs
+    network_id: *rs_nomadic_services
+  - id: 206649
+    prefix: '38178'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 270cd2a5-82e4-43bb-8d7f-fc56614c3ca9
+    country_id: *rs
+    network_id: *rs_televoting_services
+  - id: 242495
+    prefix: '3811'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: ee455f31-e4b3-4307-9dbf-cda93373a9f6
+    country_id: *rs
+    network_id: *rs_special_services
+  - id: 242689
+    prefix: '381116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: fe98666d-9dc3-4cfe-ae27-00bee2d0cee4
+    country_id: *rs
+    network_id: *rs_social_value_services
+  - id: 242735
+    prefix: '381118'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e753cd6c-b258-4538-9bdb-c49db13d384f
+    country_id: *rs
+    network_id: *rs_directory_enquiry_services
+  - id: 403491
+    prefix: '381800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6c35c7e9-be70-4ecb-838c-6945b001c257
+    country_id: *rs
+    network_id: *rs_freephone_services
+  - id: 412364
+    prefix: '381808'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 508bb809-7608-465f-87cf-85183838cf6f
+    country_id: *rs
+    network_id: *rs_prepaid_phone_cards
+  - id: 454585
+    prefix: '381900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9b5a2f5e-bd56-4638-a6a4-bff70207f388
+    country_id: *rs
+    network_id: *rs_value_added_services_marketing
+  - id: 454710
+    prefix: '381901'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 049010c5-7226-4f02-ab45-eece974c8805
+    country_id: *rs
+    network_id: *rs_value_added_services_entertainment
+  - id: 455870
+    prefix: '381904'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7a16e230-549c-452c-904e-aee94de4febb
+    country_id: *rs
+    network_id: *rs_value_added_services_children_content
+  - id: 458133
+    prefix: '38190'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e9f871ca-40bb-427d-befb-5b2d40bcdf0d
+    country_id: *rs
+    network_id: *rs_value_added_services
+  - id: 462678
+    prefix: '381905'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b9860a00-2db0-451e-8096-edb609e45560
+    country_id: *rs
+    network_id: *rs_value_added_services_humanitarian_aid
+  - id: 462749
+    prefix: '381906'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cd847f0c-d6a3-4976-8992-1268c38167a1
+    country_id: *rs
+    network_id: *rs_value_added_services_adult_content
+  - id: 463578
+    prefix: '381909'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6d3b5969-d918-4eb0-910f-6ae798ecd049
+    country_id: *rs
+    network_id: *rs_value_added_services_lottery
+# Mobile Prefixes
+  - id: 95221
+    prefix: '38160'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: e420d79b-ffdb-4094-9537-e411bd488472
+    country_id: *rs
+    network_id: *rs_a1_mobile
+  - id: 95253
+    prefix: '3816077'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 656ec0a9-3749-42c1-9d81-2125c48655ee
+    country_id: *rs
+    network_id: *rs_a1_mobile
+  - id: 108595
+    prefix: '38161'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 8af797c2-f69d-46a3-b7f2-9e42ec2463a1
+    country_id: *rs
+    network_id: *rs_a1_mobile
+  - id: 108984
+    prefix: '3816177'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 14b25e77-8bad-4d80-acd4-5557b0621674
+    country_id: *rs
+    network_id: *rs_a1_mobile
+  - id: 111474
+    prefix: '38162'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6ab257fb-f450-43a1-a9f5-ac8c20330325
+    country_id: *rs
+    network_id: *rs_yettel_mobile
+  - id: 112315
+    prefix: '38162909'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 4ac4e85a-7ef9-42b4-abdc-a97b14d53db8
+    country_id: *rs
+    network_id: *rs_yettel_mobile
+  - id: 117839
+    prefix: '38163'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 394fe91e-608d-4b92-9e25-d89bcd5f94c8
+    country_id: *rs
+    network_id: *rs_yettel_mobile
+  - id: 118717
+    prefix: '38163909'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 12dab830-0377-4296-af59-00249cab7acc
+    country_id: *rs
+    network_id: *rs_yettel_mobile
+  - id: 122444
+    prefix: '38164'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 86a85a22-bd3b-48bc-81e5-0ad30e3003f6
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 123126
+    prefix: '38164710'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 2d8b403f-a407-464e-866c-c523eb82265c
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 126201
+    prefix: '38165710'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 4ecbc3ce-ca20-405f-b9a8-7b968a9dd1cd
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 135923
+    prefix: '38165'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 22cccea1-8ee3-4066-9318-0ed714521585
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 138635
+    prefix: '38166'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: e1dc612a-0325-4a3d-85cd-e7601504e5b1
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 138837
+    prefix: '38166710'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 0248bb22-9ff8-499d-a031-e432d40231c6
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 145602
+    prefix: '381676'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 1d4a15a3-9e32-41aa-ba22-4544fcc71821
+    country_id: *rs
+    network_id: *rs_globaltel_mobile
+  - id: 145844
+    prefix: '381677'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 4218c0ed-1f05-4c4d-9592-8c1ffb3a292b
+    country_id: *rs
+    network_id: *rs_globaltel_mobile
+  - id: 146809
+    prefix: '38167'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 96aab1a5-822f-4f7a-b170-ea9c086ea77d
+    country_id: *rs
+    network_id: *rs_mobile
+  - id: 146825
+    prefix: '38168'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 990c49c1-df3d-4ce3-a61c-bb7143a73346
+    country_id: *rs
+    network_id: *rs_a1_mobile
+  - id: 146941
+    prefix: '3816877'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 0baa1911-b05e-44aa-96a7-abe8efd3b01b
+    country_id: *rs
+    network_id: *rs_a1_mobile
+  - id: 148666
+    prefix: '38169'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: d243a2ba-6ab3-42cc-84f0-182037e0f913
+    country_id: *rs
+    network_id: *rs_yettel_mobile
+  - id: 148709
+    prefix: '38169909'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: b46e8701-9a73-4ae9-9141-cdb0a6196302
+    country_id: *rs
+    network_id: *rs_yettel_mobile
+  - id: 167927
+    prefix: '3817215000'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 35221da9-63a6-4fc4-ba48-40b6839878dc
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 167928
+    prefix: '3817215002'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: be5cd97e-1663-46ce-9870-22fd291b00a4
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 167929
+    prefix: '3817215035'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bf4bf96a-26d1-43a6-8a70-0fcf2d461b7f
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 167930
+    prefix: '3817215044'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1d58e808-4eb8-411f-9832-adfa238ba94e
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 167931
+    prefix: '3817215046'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fd47af8a-b598-42c3-9622-c34bf0dae645
+    country_id: *rs
+    network_id: *rs_mts_mobilna_telefonija_srbije_mobile
+  - id: 399490
+    prefix: '38147'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 469f1b7b-7371-4521-ad91-3c8329192d67
+    country_id: *rs
+    network_id: *rs_mobile
+# Country code Prefixes
+  - id: 242103
+    prefix: '381'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 3d3bb52c-b81e-4dcf-be51-e80adf52c214
+    country_id: *rs
+    network_id: null
+# Fixed Prefixes
+  - id: 258625
+    prefix: '38110'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: c6005318-55c3-4a90-8a75-583b6a71ee0f
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 258819
+    prefix: '38111'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 012e0742-5269-4e88-8481-084799561844
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 259232
+    prefix: '38112'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 3798c938-60a1-4793-be93-c7a98df68406
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 259512
+    prefix: '38113'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: fcc1917b-2025-4a4e-9590-0838917b7c26
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 259947
+    prefix: '38114'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: ab9ad0cb-5493-44c3-9a51-3ac83e559202
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 260508
+    prefix: '38118'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: fab9c5c2-25cb-41cf-a27a-30e0c1943fce
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 260830
+    prefix: '38119'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 1815c431-34e3-4672-b4f8-ae556bcb50f2
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 266073
+    prefix: '38115'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 10d8938c-65c2-415e-a785-4be173de7444
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 266560
+    prefix: '38116'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: b633c8b2-424b-4a0d-82ce-44dd929a0b0f
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 266952
+    prefix: '38117'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 68834388-ffea-47d1-809f-b06779fa8726
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 267146
+    prefix: '38120'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: ea9e38e0-13fa-4b69-a0ef-345dfac427a6
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 274243
+    prefix: '38121'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 16737406-ed00-4a28-875e-326baff007d7
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 282799
+    prefix: '38122'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: a3043667-0587-4a47-ba84-a167ed12f072
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 286640
+    prefix: '38123'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6636b6f7-0b7c-42c4-9a14-a41684e2a64b
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 286659
+    prefix: '381230'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 3b084da4-ff41-4c10-8cb2-580540f56486
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 294334
+    prefix: '38124'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: bc74143d-6597-4c1c-870d-c65d76008c9f
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 299806
+    prefix: '38126'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 9666340f-f81c-4ff1-aa69-d1e598e763d9
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 301431
+    prefix: '38127'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 08003d2a-5989-45cc-a756-c21e345f2da1
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 301980
+    prefix: '38125'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6d187150-0f46-4e31-ac5e-b4595951b023
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 308510
+    prefix: '38129'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: ed4516f3-a372-4c1d-9605-d2976746bdc7
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 308516
+    prefix: '381290'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 052faf60-e80e-40ef-a1fe-4f36d77d2054
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 309476
+    prefix: '38130'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: d0f2d535-ffb0-4e4b-bb2b-b47e057f7fa9
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 313360
+    prefix: '38128'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 009d60d9-92b2-46fb-9fd5-6cf8ebb43332
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 313539
+    prefix: '381280'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 74e0091f-ebd1-4d6e-a093-0481784e2e56
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 321181
+    prefix: '38131'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: fd4d7566-25ba-40f6-b9ea-df72e1a386f8
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 327288
+    prefix: '38132'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 5c61c1cd-374b-4c09-8e62-08ce3dc580a7
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 337294
+    prefix: '38133'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 88c969c0-f1e6-4bb8-a784-03655698c2ba
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 340483
+    prefix: '38134'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: f966131b-d2cc-4084-a9b7-f06848c41e95
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 345949
+    prefix: '38136'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: e27ec1c3-f98f-46ce-b197-26acb2c28799
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 347709
+    prefix: '38138'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 417e8cc9-c216-4688-bcf2-0c478a13b215
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 352245
+    prefix: '38135'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 0fadbbd3-a319-418b-8d30-eed9f3181813
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 355762
+    prefix: '38137'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 8fea5ef6-7b12-4131-8af1-08a8d9b0a5bb
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 357539
+    prefix: '38139'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8623080-30cf-48b4-83d4-a540f4334e3d
+    country_id: *rs
+    network_id: *rs_fixed
+  - id: 357550
+    prefix: '381390'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 427c6ee8-523f-4023-8e77-150eb27658bc
+    country_id: *rs
+    network_id: *rs_fixed

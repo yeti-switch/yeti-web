@@ -1,0 +1,276 @@
+country_id: &ws 184
+networks:
+# Supplementary services Networks
+  - id: &ws_special_services 5340
+    name: WS Special Services
+    uuid: ba066d20-312e-452d-9e70-603c324c8805
+    type_id: 14
+  - id: &ws_freephone_services 6582
+    name: WS Freephone Services
+    uuid: 4bff8a2d-a06c-4dea-8afd-384f35e24a50
+    type_id: 14
+  - id: &ws_emergency_services 6961
+    name: WS Emergency Services
+    uuid: 85195e91-5b74-43dd-b3e6-bf8441934ac3
+    type_id: 14
+# Fixed Networks
+  - id: &ws_fixed 5782
+    name: WS Fixed
+    uuid: c7e80545-4192-4276-b697-8a364a4b6879
+    type_id: 12
+# Mobile Networks
+  - id: &ws_digicel_mobile 6332
+    name: WS Digicel Mobile
+    uuid: bae6187c-98cf-4709-a5ec-e91c4d9143ef
+    type_id: 3
+  - id: &ws_bluesky_mobile 6475
+    name: WS Bluesky Mobile
+    uuid: f2d3c897-2a80-4918-b85d-822adf2d7947
+    type_id: 3
+  - id: &ws_mobile 6929
+    name: WS Mobile
+    uuid: b6746f91-e914-412e-a531-c0cb96d9a619
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242133
+    prefix: '685'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 0f957567-28c6-493e-9a8d-29dcdc11a681
+    country_id: *ws
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242520
+    prefix: '6851'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 61b60f2d-7eca-49a8-b20e-87d1a1e9ad5a
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 243970
+    prefix: '6854'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: dbf1f461-26a1-4701-a633-c09ea53e8c51
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 245431
+    prefix: '6856'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: d4b529da-40dc-4bb7-95ad-d44e76eba150
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 247446
+    prefix: '6852'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 54ff8212-90df-443c-8ef7-84372ef69696
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 248925
+    prefix: '6853'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 86464d85-cde9-4cbf-8553-4b3362375b18
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 249608
+    prefix: '6855'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 221b5667-92df-47ba-b1d4-646984b3df31
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 253115
+    prefix: '6858'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 1e2a7eb1-4355-45d1-8249-11b0d5437cc2
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 253179
+    prefix: '685800'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 5497fd5c-e5af-44b0-b09c-c81c8a363cab
+    country_id: *ws
+    network_id: *ws_freephone_services
+  - id: 255287
+    prefix: '6857'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: bc67dddf-94ed-424d-99c0-10d8003f3292
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 257148
+    prefix: '6859'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 14b79f70-cfef-4614-930d-e235bdfc4d2c
+    country_id: *ws
+    network_id: *ws_emergency_services
+# Fixed Prefixes
+  - id: 243971
+    prefix: '6854'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e8e5e17b-b7a3-4246-b53a-ba4db816720d
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 247447
+    prefix: '6852'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1aaa5958-8d03-4211-8216-a7f735c7155a
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 248926
+    prefix: '6853'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f718f3de-314c-4602-a5ce-3d35587fb597
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 249609
+    prefix: '6855'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 835c4b53-19c2-4e3c-93ef-19d94fc0811e
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 250665
+    prefix: '68563'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: d1736934-b973-4588-a647-7ec50df31670
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 251032
+    prefix: '68564'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 14ff930e-9c18-4595-858a-d4c566f1295d
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 251244
+    prefix: '68565'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 0d46620e-3b3e-464d-a8b1-68e389a3a4b9
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 253992
+    prefix: '68561'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: a0f56ca5-d7b4-4f9e-8be8-dad354a4fe99
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 254124
+    prefix: '68562'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7e7c4e8b-d55f-4ced-9097-148cf2dc0ed3
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 254300
+    prefix: '68566'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ea6dce21-c84e-4947-b854-fc82acc16e18
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 254614
+    prefix: '68567'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ce4a4966-371a-4937-aad6-dd316ebede68
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 254686
+    prefix: '68568'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ee28ed74-e410-40e1-a20d-38ace2b28605
+    country_id: *ws
+    network_id: *ws_fixed
+  - id: 254876
+    prefix: '68569'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 287e2445-2f91-45d5-a0ea-d111eb4967e2
+    country_id: *ws
+    network_id: *ws_fixed
+# Mobile Prefixes
+  - id: 251836
+    prefix: '68572'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ef90f34c-38dc-4a53-a704-a6c4d1d876ce
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 252566
+    prefix: '68575'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f091686-3b86-422f-b797-429ba1ecaca6
+    country_id: *ws
+    network_id: *ws_bluesky_mobile
+  - id: 253606
+    prefix: '68583'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 67602d46-accd-4845-9a5c-6ef82ef64e49
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 253729
+    prefix: '68584'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aab77e0a-261f-4c0b-a19e-7ca8305fd94e
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 255465
+    prefix: '68576'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 934138c4-acc7-483e-a95a-ecc0a56535c1
+    country_id: *ws
+    network_id: *ws_bluesky_mobile
+  - id: 255647
+    prefix: '68577'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d9550b00-af2f-4f9b-ad58-1654a9d1f422
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 256672
+    prefix: '68587'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f272d18a-2814-4cee-857e-fa211ac3e0c5
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 257013
+    prefix: '68589'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 885373ae-a264-4715-be32-3ef0e42676c8
+    country_id: *ws
+    network_id: *ws_mobile
+  - id: 263717
+    prefix: '68585'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b149fdec-3395-464c-b14c-f89c174d6872
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 263860
+    prefix: '68586'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fc5e71f1-c001-48a8-92ba-b138b61c55ea
+    country_id: *ws
+    network_id: *ws_digicel_mobile

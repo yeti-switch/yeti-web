@@ -1,0 +1,738 @@
+country_id: &tn 216
+networks:
+# Supplementary services Networks
+  - id: &tn_special_services 5329
+    name: TN Special Services
+    uuid: 8384b3eb-baba-47a9-bb99-b6eb3dd554e0
+    type_id: 14
+  - id: &tn_internal_network_services 5361
+    name: TN Internal Network Services
+    uuid: fc23e2a6-3312-49de-bad0-c1de68cb8092
+    type_id: 14
+  - id: &tn_intra_operators_technical_tests_services 5376
+    name: TN Intra_Operators Technical Tests Services
+    uuid: 0f04f0b1-9a18-4950-bf11-43df2cd387a0
+    type_id: 14
+  - id: &tn_network_operation_information_services 5395
+    name: TN Network Operation Information Services
+    uuid: a29f474b-bbba-413e-8326-06b08d8e5ae4
+    type_id: 14
+  - id: &tn_information_services 5512
+    name: TN Information Services
+    uuid: cdef479c-58bd-423a-9d6f-80a936b304f4
+    type_id: 14
+  - id: &tn_internet_and_data_services 5616
+    name: TN Internet And Data Services
+    uuid: 691a5b5d-93a7-435e-8e35-2c6e097202dc
+    type_id: 14
+  - id: &tn_call_switching_and_telegram_services 5635
+    name: TN Call Switching And Telegram Services
+    uuid: 30fe0c58-5712-474b-a2e7-dfc8a7d9c121
+    type_id: 14
+  - id: &tn_public_interest_services 5982
+    name: TN Public Interest Services
+    uuid: 8a7589cf-6a1d-47a6-815a-e5a4e4700b6c
+    type_id: 14
+  - id: &tn_emergency_services 6026
+    name: TN Emergency Services
+    uuid: e5634068-789c-471c-9510-76ccd6f0c240
+    type_id: 14
+  - id: &tn_value_added_services 6527
+    name: TN Value Added Services
+    uuid: 73e31ae5-4c22-4eed-9d6a-ca307aff14e2
+    type_id: 14
+  - id: &tn_freephone_services 6543
+    name: TN Freephone Services
+    uuid: f26c8c31-b297-4216-af20-369cec57357d
+    type_id: 14
+  - id: &tn_call_center_services 6645
+    name: TN Call Center Services
+    uuid: e2a644e7-8083-4323-b225-b2d7f1a74b53
+    type_id: 14
+  - id: &tn_shared_cost_services 6668
+    name: TN Shared Cost Services
+    uuid: fd65627e-36d3-496e-96c3-803408afcdef
+    type_id: 14
+  - id: &tn_unique_number_services 6676
+    name: TN Unique Number Services
+    uuid: 5b7815f4-5c5b-4783-afe7-c1542c4e9802
+    type_id: 14
+  - id: &tn_audiotext 6920
+    name: TN Audiotext
+    uuid: 3f8ff82e-8f82-4072-a5b6-835cf3962a36
+    type_id: 14
+  - id: &tn_sms_mms_services 7171
+    name: TN Sms_Mms Services
+    uuid: b6cdae72-54a0-44a0-9320-6424111b6163
+    type_id: 14
+# Fixed Networks
+  - id: &tn_fixed 5679
+    name: TN Fixed
+    uuid: 3945d06f-1067-4b27-8a14-40057f417376
+    type_id: 12
+# Mobile Networks
+  - id: &tn_orange_mobile 5686
+    name: TN Orange Mobile
+    uuid: fd97cec2-8ca1-47cf-ab71-1692af9f8ad4
+    type_id: 3
+  - id: &tn_tt_mobile_mobile 5791
+    name: TN Tt Mobile Mobile
+    uuid: faff934b-8d60-489c-bc60-db79e87c470d
+    type_id: 3
+  - id: &tn_lycamobile_mobile 5819
+    name: TN Lycamobile Mobile
+    uuid: bf0aab20-cef8-45ac-abb0-b215a48245d3
+    type_id: 3
+  - id: &tn_ooredoo_mobile 6075
+    name: TN Ooredoo Mobile
+    uuid: 665653af-ba83-49b7-b13b-1e9963f6f6a9
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242121
+    prefix: '216'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 196790b9-4db8-4616-b590-eab768e3b0df
+    country_id: *tn
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242509
+    prefix: '2161'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 3aeaaf5b-b9b9-454d-86d3-239d20f17063
+    country_id: *tn
+    network_id: *tn_special_services
+  - id: 242543
+    prefix: '21610'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 23883561-3d11-442c-b9d6-80abd7221743
+    country_id: *tn
+    network_id: *tn_internal_network_services
+  - id: 242572
+    prefix: '216108'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 08a9c7b5-eb05-44d9-a223-baac8321f55d
+    country_id: *tn
+    network_id: *tn_intra_operators_technical_tests_services
+  - id: 242575
+    prefix: '216109'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 99d3b47a-cee3-49c1-86bd-d13fd8f45805
+    country_id: *tn
+    network_id: *tn_intra_operators_technical_tests_services
+  - id: 242599
+    prefix: '21611'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 667690be-d57a-4dd5-8311-0b3bc20873fb
+    country_id: *tn
+    network_id: *tn_network_operation_information_services
+  - id: 242818
+    prefix: '21612'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: d0e5d984-5d6d-4259-ac71-94e63d0a0e6f
+    country_id: *tn
+    network_id: *tn_information_services
+  - id: 243029
+    prefix: '21616'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 48a8b92b-cd6b-44c1-ab41-57fbcc2896e2
+    country_id: *tn
+    network_id: *tn_internet_and_data_services
+  - id: 243067
+    prefix: '21617'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: b2f6091e-fbf7-401c-8260-cfe013e920e7
+    country_id: *tn
+    network_id: *tn_call_switching_and_telegram_services
+  - id: 247288
+    prefix: '21618'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: d05fa1c9-8696-4a10-b3a5-e20a98661280
+    country_id: *tn
+    network_id: *tn_public_interest_services
+  - id: 247346
+    prefix: '21619'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 43b14d21-2247-4487-8b8e-213ebaab3b8e
+    country_id: *tn
+    network_id: *tn_emergency_services
+  - id: 253113
+    prefix: '2168'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7de86d2-918e-4a21-a5fc-0bcff9ed4433
+    country_id: *tn
+    network_id: *tn_value_added_services
+  - id: 253133
+    prefix: '21680'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 912966d8-a234-4db8-bfdc-131400e65d09
+    country_id: *tn
+    network_id: *tn_freephone_services
+  - id: 253330
+    prefix: '21681'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 82d0ee02-993c-4c92-b881-ed2e5a30aeb3
+    country_id: *tn
+    network_id: *tn_call_center_services
+  - id: 253488
+    prefix: '21682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a400154a-12d1-4819-8f7b-108c45cc9474
+    country_id: *tn
+    network_id: *tn_shared_cost_services
+  - id: 253604
+    prefix: '21683'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 803737f3-74fd-451e-a1b2-01908d250331
+    country_id: *tn
+    network_id: *tn_unique_number_services
+  - id: 256852
+    prefix: '21688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2de9f9f9-cf45-45ce-841d-efdbee182f88
+    country_id: *tn
+    network_id: *tn_audiotext
+  - id: 263716
+    prefix: '21685'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 69409711-c2bb-41b9-ae03-227dceb74809
+    country_id: *tn
+    network_id: *tn_sms_mms_services
+# Fixed Prefixes
+  - id: 243243
+    prefix: '21631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca21becf-e314-4b05-b069-cb2d50d9994a
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 243382
+    prefix: '21632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 19791315-b656-4a7a-be96-fcdae0150700
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 243676
+    prefix: '21636'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f764a2fe-c7eb-4b4d-9680-492928a8c60b
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 243915
+    prefix: '21639'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f26247c-369f-47ec-bfcb-7962c0b7c939
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 245429
+    prefix: '2166'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96fc6097-b266-42d4-858b-6a6b71648f5d
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 248943
+    prefix: '21630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6b84f559-6fd3-4078-8262-bdcbb340115a
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 251746
+    prefix: '21671'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 523b3568-fa97-4654-851c-a2d2b4535a54
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 251834
+    prefix: '21672'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7e64003-61aa-4841-a1e2-af31e70a3e36
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 251886
+    prefix: '21673'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b9ebfb48-a9bf-4902-9331-8e838b520481
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 252072
+    prefix: '21674'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 991f7b9f-1a84-4304-9b26-9824a3d655a2
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 252564
+    prefix: '21675'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 766b5fbf-6b2e-4966-bb72-f789f65a8971
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 255284
+    prefix: '2167'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2fc6e7fc-a60d-49cd-b885-c78fc4750910
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 255463
+    prefix: '21676'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f7a49d13-eeae-4752-9951-79d139d998c6
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 255645
+    prefix: '21677'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dd67517b-af75-4f7a-b1d3-c65e1a5cf84d
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 256101
+    prefix: '21678'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: df93fc4b-6a69-4c9f-9516-aaa98175280e
+    country_id: *tn
+    network_id: *tn_fixed
+# Mobile Prefixes
+  - id: 243263
+    prefix: '216311'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 372fc4f6-c64e-4671-b40b-991d4173a269
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 243273
+    prefix: '216312'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5afa192c-90e3-4b46-9c01-de2499a5e604
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 243987
+    prefix: '21640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bf3f12ef-38e3-42e7-b8b0-829288ca8b50
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 244142
+    prefix: '21641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 48fa6ba1-b029-4453-b0e9-8f1348c742d8
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 244245
+    prefix: '21642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3800f9c-6bb6-4ee6-bb76-d1b0f3f11d86
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 244344
+    prefix: '216430'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07bff449-ab59-436b-9997-5cac61743b99
+    country_id: *tn
+    network_id: *tn_lycamobile_mobile
+  - id: 244348
+    prefix: '216431'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4249181b-4028-4e54-a079-fa7087d3c4bc
+    country_id: *tn
+    network_id: *tn_lycamobile_mobile
+  - id: 244366
+    prefix: '216432'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4eea160d-e4f4-4bd9-89ef-0b01ac097b26
+    country_id: *tn
+    network_id: *tn_lycamobile_mobile
+  - id: 244381
+    prefix: '216433'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 54cb4960-0d0a-4dd0-b7c5-13b812aa5d9c
+    country_id: *tn
+    network_id: *tn_lycamobile_mobile
+  - id: 244389
+    prefix: '216434'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 12119aef-4a09-4712-8256-ac4cb9f97ca0
+    country_id: *tn
+    network_id: *tn_lycamobile_mobile
+  - id: 244407
+    prefix: '216435'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1ce2bf79-c46b-485a-bc69-e2cc5237066f
+    country_id: *tn
+    network_id: *tn_lycamobile_mobile
+  - id: 244418
+    prefix: '216436'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f96e0be3-29bb-41fa-a985-86845907f160
+    country_id: *tn
+    network_id: *tn_lycamobile_mobile
+  - id: 244436
+    prefix: '216437'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: feebce9b-7f9a-43b2-8f9c-5caf7aba3ae9
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 244501
+    prefix: '21644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68ea77db-2edc-4844-8ef8-cfebb14cc155
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 245166
+    prefix: '21658'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2ddac141-3332-4523-8486-57e15dbbddbc
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 245232
+    prefix: '21658500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f699f186-dc1b-47ef-a1ce-70a84b91e0f5
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 245233
+    prefix: '21658501'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 21a42381-9855-42ff-8d53-b6568ccf5d20
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 245234
+    prefix: '21658502'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c70f4e55-61a0-4b98-83b2-194cc2c153e6
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 245235
+    prefix: '21658503'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f5207ad-e0a4-43ad-bce4-4c3766340487
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 247444
+    prefix: '2162'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0611f49f-419f-47f2-892a-701b93a68d0d
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248816
+    prefix: '2162890'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84d964f1-685e-4439-96e3-48247d79aece
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248817
+    prefix: '2162892'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc916a89-d1d4-4a17-ad33-8d1da56834c1
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248818
+    prefix: '2162893'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa32e710-f87a-4168-ab13-6b228fd122b8
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248819
+    prefix: '2162894'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8536a7d4-d550-4d9b-a6b0-4b6674671af8
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248820
+    prefix: '2162895'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6d6e32b2-db98-4cbc-9c82-0778549aefe3
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248821
+    prefix: '2162896'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba4ce42c-6fcc-4bf2-b297-d79db5538885
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248822
+    prefix: '2162897'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 24a16399-dab3-449f-98f6-2080e5a5ce99
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248970
+    prefix: '2163001'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2f97adb3-9568-4aef-af8d-a93d211e6dbd
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 249093
+    prefix: '216460'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c535271e-ed52-4a77-99e9-483fd6fc7f4c
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 249109
+    prefix: '216461'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5f4e3ea3-1435-46e9-a0ce-9af310abf60e
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 249134
+    prefix: '216462'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30eb387a-32d8-4609-9286-4d0dad6d304b
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 249163
+    prefix: '216463'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c112083e-38bd-4931-8767-5444fd4bc6ca
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 249174
+    prefix: '216464'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8144788f-c074-4fd8-aa93-4569bfbb7bf8
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 249193
+    prefix: '216465'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 47c9b06d-b94a-4e62-be24-98cb131c1f84
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 249222
+    prefix: '216466'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 56a4dace-c45b-445d-9e28-13840b0c883e
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 249245
+    prefix: '216467'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9183e949-e5fc-4ec5-9009-83ae8d4acd58
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 249311
+    prefix: '2164700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: df936602-4ec0-4a6c-a666-5470e595ca52
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 249312
+    prefix: '2164701'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4fe615d3-2fb6-4c29-9d93-3a83f305f412
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 249313
+    prefix: '2164702'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e67ca237-5c77-41bd-8357-4c9ee7cbb3d0
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 249628
+    prefix: '21650'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc1d114d-bea3-4c8b-a4df-15af58bfc290
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 249633
+    prefix: '21650002'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a040c244-840e-471e-b807-5e308c23f477
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 249634
+    prefix: '21650003'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5bcf3665-9d38-43b2-993c-8349905d61a9
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 249635
+    prefix: '21650004'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d68974cd-8da0-4591-bf01-3a0d90cfcdf9
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 249636
+    prefix: '21650005'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8041261-5c31-40a0-b4a3-b86ea0262301
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 249703
+    prefix: '21651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 13c29b02-a8f3-4461-b170-a4c918e5dde4
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 249773
+    prefix: '21652'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c9bc502f-7675-4d1f-9f56-0ce7690482a4
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 249932
+    prefix: '21653'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8ae43c3e-a448-42ce-bfc5-92bc0e233d4f
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 250023
+    prefix: '21654'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 997466ce-f58f-4808-a9d7-e6f5f7fd98f1
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 250124
+    prefix: '21655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7522abbb-124c-424a-8455-c149597e4369
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 250207
+    prefix: '21656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 21ce61ba-603b-442e-9d79-d558c9ed09c0
+    country_id: *tn
+    network_id: *tn_orange_mobile
+  - id: 251581
+    prefix: '2167031'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c38d5f8b-79ae-4fbd-83b3-f1b929144d2e
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 251629
+    prefix: '2167065'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cb3f0451-d3d8-4a61-8c5a-cd99528fce11
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 256591
+    prefix: '216797'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ea61ab3e-c0c7-43c5-adc7-8f0ed3bfde4d
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 257146
+    prefix: '2169'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 561b2c8e-54dd-45fd-a79b-edd5653aac2b
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 257994
+    prefix: '2169801'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30460c58-184b-4232-a2bf-efec593e3618
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 257996
+    prefix: '2169802'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2be969b3-95a8-4548-9951-1621018bd5f0
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 257998
+    prefix: '2169803'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4d0cc6ee-175e-4341-b019-bc0cced586f1
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 258000
+    prefix: '2169804'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd8e8a09-123a-46b0-ad10-c2e0f7a92d7b
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 258002
+    prefix: '2169805'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4d9b76ea-16fe-41e3-8227-049d47562340
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile

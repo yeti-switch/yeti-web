@@ -1,0 +1,838 @@
+country_id: &cr 52
+networks:
+# Supplementary services Networks
+  - id: &cr_special_and_sms_mms_services 5211
+    name: CR Special And Sms_Mms Services
+    uuid: c5c8715c-0e91-4b7a-8f1c-0d9d75bab594
+    type_id: 14
+  - id: &cr_emergency_service 5367
+    name: CR Emergency Service
+    uuid: 5a94ecb2-4e55-490f-8d8a-a6b832dbd0f8
+    type_id: 14
+  - id: &cr_sms_mms_services 5760
+    name: CR Sms_Mms Services
+    uuid: 8aacc93e-773b-4ac7-a5cb-a08045a38854
+    type_id: 14
+  - id: &cr_freephone_services 7548
+    name: CR Freephone Services
+    uuid: 472ea81e-b803-4f5b-91e0-83812b39fc89
+    type_id: 14
+  - id: &cr_universal_access_number_uan 7630
+    name: CR Universal Access Number Uan
+    uuid: 4688cb33-f26c-403e-a6f7-d92e0d3319ae
+    type_id: 14
+  - id: &cr_professional_services 7844
+    name: CR Professional Services
+    uuid: 987b0722-03ab-4890-b862-cbe551033b2c
+    type_id: 14
+  - id: &cr_social_screening_services 7845
+    name: CR Social Screening Services
+    uuid: 801db230-392c-4caa-a40a-aa2118f7d5e2
+    type_id: 14
+  - id: &cr_communications_and_paging_services_ 7847
+    name: 'CR Communications And Paging Services '
+    uuid: a56cb311-0a2f-4eaa-a7cd-0040e74700b7
+    type_id: 14
+  - id: &cr_internet_access_services 7850
+    name: CR Internet Access Services
+    uuid: 757284b2-518f-492e-972e-e732215f6e66
+    type_id: 14
+  - id: &cr_fundraising_services 7851
+    name: CR Fundraising Services
+    uuid: 34376194-9baf-434a-a236-822f368c4167
+    type_id: 14
+  - id: &cr_promotions_services 7852
+    name: CR Promotions Services
+    uuid: 9bc53670-66ba-4bf6-a550-de830be7db34
+    type_id: 14
+  - id: &cr_entertainment_services 7853
+    name: CR Entertainment Services
+    uuid: 4fe3c608-bdf4-452c-ac05-8359c8c2ae59
+    type_id: 14
+  - id: &cr_adults_entertainment_services 7854
+    name: CR Adults Entertainment Services
+    uuid: 3991ce92-a439-445a-9711-4e2eb3dcbc92
+    type_id: 14
+  - id: &cr_contest_and_telemarketing_services 7855
+    name: CR Contest And Telemarketing Services
+    uuid: ea5dad92-5c6b-4b01-a14e-6874ac66ef4e
+    type_id: 14
+  - id: &cr_contest_and_entertainment_services 7856
+    name: CR Contest And Entertainment Services
+    uuid: c1804e6b-a5f4-4c74-8825-b8d222a7339e
+    type_id: 14
+  - id: &cr_digital_government_services 7858
+    name: CR Digital Government Services
+    uuid: 45a44ba0-bf47-4ca0-8dfa-c85b13e0637b
+    type_id: 14
+  - id: &cr_mass_call_services 7911
+    name: CR Mass Call Services
+    uuid: bb7df041-4298-4a64-a229-c5e9ecce04e1
+    type_id: 14
+  - id: &cr_voice_mail 7920
+    name: CR Voice Mail
+    uuid: 8a818da3-8dd1-491b-b66e-9a9aa52b3533
+    type_id: 14
+# Fixed Networks
+  - id: &cr_fixed 5761
+    name: CR Fixed
+    uuid: ab0ea617-91f2-4b80-a8d4-16a60d26c30f
+    type_id: 12
+# Mobile Networks
+  - id: &cr_liberty_mobile 5936
+    name: CR Liberty Mobile
+    uuid: 43af8345-88e3-4d1d-819e-f4391723c260
+    type_id: 3
+  - id: &cr_racsa_mobile 6182
+    name: CR Racsa Mobile
+    uuid: 96951563-7001-4127-bcfd-3e29e9b20b61
+    type_id: 3
+  - id: &cr_multicom_mobile 6197
+    name: CR Multicom Mobile
+    uuid: 97be26f9-82d8-43e6-8588-0a65b4b14dd7
+    type_id: 3
+  - id: &cr_tuyo_movil_mobile 6220
+    name: CR Tuyo Movil Mobile
+    uuid: 777c1de9-0bd7-45bb-b9ff-2c890925429b
+    type_id: 3
+  - id: &cr_claro_mobile 6289
+    name: CR Claro Mobile
+    uuid: c7ed9bf4-e3cb-4ade-bbd1-6954b03da956
+    type_id: 3
+  - id: &cr_kolbi_mobile 6672
+    name: CR Kolbi Mobile
+    uuid: e3592e7d-8c49-42b5-a624-2b3933739d17
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 241976
+    prefix: '506'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 48f9c242-aad7-42ad-9b9d-a68a9a6b9d6d
+    country_id: *cr
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242380
+    prefix: '5061'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 7275c4e2-23f7-4b9b-b649-0d4c83fca1ac
+    country_id: *cr
+    network_id: *cr_special_and_sms_mms_services
+  - id: 242552
+    prefix: '5061022'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 4562a7ff-5204-465b-810a-0cd117ceea29
+    country_id: *cr
+    network_id: *cr_emergency_service
+  - id: 242615
+    prefix: '506112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 377ea7fa-07d0-423e-8953-0321ecef1552
+    country_id: *cr
+    network_id: *cr_emergency_service
+  - id: 243927
+    prefix: '5064'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 28743498-7ae4-47d2-aefc-554ae308ef9f
+    country_id: *cr
+    network_id: *cr_sms_mms_services
+  - id: 245380
+    prefix: '5066'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 6d939408-0268-4776-bfe1-6dec4bf69867
+    country_id: *cr
+    network_id: *cr_sms_mms_services
+  - id: 247396
+    prefix: '5062'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 6351348f-2a43-41ed-8968-a7b1a2c3f921
+    country_id: *cr
+    network_id: *cr_sms_mms_services
+  - id: 248890
+    prefix: '5063'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 6efabc93-48fe-4383-a1a4-db9f42cbd6cc
+    country_id: *cr
+    network_id: *cr_sms_mms_services
+  - id: 249567
+    prefix: '5065'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 3c9c539a-8d00-4cd7-9b0d-e022d6622b38
+    country_id: *cr
+    network_id: *cr_sms_mms_services
+  - id: 255241
+    prefix: '5067'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 963b2597-f5d8-4220-b5d9-c0b0d49220d1
+    country_id: *cr
+    network_id: *cr_sms_mms_services
+  - id: 256671
+    prefix: '5068'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 76f20305-f9ff-4499-9126-d1d207a10d86
+    country_id: *cr
+    network_id: *cr_sms_mms_services
+  - id: 257088
+    prefix: '5069'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: b43e78a1-6311-4c68-98bb-a715e9a8fa2e
+    country_id: *cr
+    network_id: *cr_sms_mms_services
+  - id: 257388
+    prefix: '506911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 95c7286e-9b80-46d2-bf61-df917482ea72
+    country_id: *cr
+    network_id: *cr_emergency_service
+  - id: 403467
+    prefix: '506800'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d273b87d-41c7-47e0-b9ed-5d999f1b298b
+    country_id: *cr
+    network_id: *cr_freephone_services
+  - id: 412355
+    prefix: '506808'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 27a7a2ee-37fc-4f3b-b8d3-46cfcca7f561
+    country_id: *cr
+    network_id: *cr_universal_access_number_uan
+  - id: 454593
+    prefix: '5069000'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1d99c858-116c-4a60-925d-2f33a184f83f
+    country_id: *cr
+    network_id: *cr_professional_services
+  - id: 454595
+    prefix: '5069001'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8935bc03-2b78-43fd-902b-8e640d23e66f
+    country_id: *cr
+    network_id: *cr_social_screening_services
+  - id: 454598
+    prefix: '5069002'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 467c0eba-d664-4d75-b351-3d8f865007ad
+    country_id: *cr
+    network_id: *cr_communications_and_paging_services_
+  - id: 454605
+    prefix: '5069003'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a4c26172-9792-47a4-aaec-8fd8ea69e714
+    country_id: *cr
+    network_id: *cr_internet_access_services
+  - id: 454615
+    prefix: '5069004'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 513a9468-332a-4c49-9784-138293596f82
+    country_id: *cr
+    network_id: *cr_fundraising_services
+  - id: 454623
+    prefix: '5069005'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 853b8993-4ef4-41e5-86ae-49462c32bf01
+    country_id: *cr
+    network_id: *cr_promotions_services
+  - id: 454633
+    prefix: '5069006'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 82eb205e-9399-47f6-8648-7a2081434147
+    country_id: *cr
+    network_id: *cr_entertainment_services
+  - id: 454652
+    prefix: '5069007'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 88faf0ea-dced-4fab-b75b-2491533b9d5a
+    country_id: *cr
+    network_id: *cr_adults_entertainment_services
+  - id: 454663
+    prefix: '5069008'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3004dc87-810f-4294-b080-ef1cf4ffe3ef
+    country_id: *cr
+    network_id: *cr_contest_and_telemarketing_services
+  - id: 454679
+    prefix: '5069009'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4886cfc6-00df-4f16-8987-18f7ae30bbdb
+    country_id: *cr
+    network_id: *cr_contest_and_entertainment_services
+  - id: 454694
+    prefix: '506900999777'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c61b91fe-64a5-44ed-9890-a33569f048d7
+    country_id: *cr
+    network_id: *cr_digital_government_services
+  - id: 462674
+    prefix: '506905'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 907368d6-f031-48cb-a47e-7cb8cd6722ed
+    country_id: *cr
+    network_id: *cr_mass_call_services
+  - id: 463573
+    prefix: '506909'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 28e7d6fc-52ff-48da-9fa2-d868f1bd2b1c
+    country_id: *cr
+    network_id: *cr_voice_mail
+# Fixed Prefixes
+  - id: 243928
+    prefix: '5064'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb51695f-9744-4c19-9827-a8f9c192d2b8
+    country_id: *cr
+    network_id: *cr_fixed
+  - id: 247397
+    prefix: '5062'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 04df0e61-f29e-4640-8a25-f79fcdf0399b
+    country_id: *cr
+    network_id: *cr_fixed
+# Mobile Prefixes
+  - id: 245453
+    prefix: '50660001'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 428bdf1b-ed31-474a-8665-72ff7461b24e
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245454
+    prefix: '50660002'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 442631f6-3ba7-4617-978a-2af4da71eb37
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245455
+    prefix: '50660003'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2395b38a-2372-4a2d-ae95-0006294dc947
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245456
+    prefix: '50660004'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87a991f5-e8d1-45e6-aaa6-ab54a20729f0
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245457
+    prefix: '50660005'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7a055ee6-4d83-4630-9143-ebacf17440fc
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245458
+    prefix: '50660006'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 636e7095-d8b2-4ca1-a84b-1f1e1b8514ad
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245459
+    prefix: '50660007'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca091673-9330-4f4b-91ff-9b955fa942ab
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245460
+    prefix: '50660008'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f02c064d-4996-448a-927d-6ad7f6a9ad17
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245461
+    prefix: '50660009'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45d80569-0e65-40bb-ab06-2c8a6bd364f5
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245462
+    prefix: '5066001'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 03dcae3a-4c53-4743-8b38-bf122b440606
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245464
+    prefix: '5066002'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5f0b7de-6953-430f-9683-e974203b34b5
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245466
+    prefix: '5066003'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: beebd3cd-2ce3-4c53-a37a-eb90a2d9eedc
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245467
+    prefix: '5066004'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: af152c33-25e8-41e8-b403-8a3c3fce4cdf
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245468
+    prefix: '5066005'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2dfad03-5bec-4320-969e-de369000549c
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245469
+    prefix: '5066006'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 92ac3806-b5e6-4e18-b7d0-b46f0aa8376b
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245470
+    prefix: '5066007'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 66685ff1-163b-4b65-85e7-d820faad7c96
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245471
+    prefix: '5066008'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 98af403b-2fe2-4533-b89d-b487ea9c849f
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245472
+    prefix: '5066009'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e89606c7-9694-4650-a37a-46f73b4ca8ca
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245473
+    prefix: '506601'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f51fecc-1645-4f28-84be-98bcf0f5c7ec
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 245539
+    prefix: '506602'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e4565bf2-0276-40c3-887a-8dff26168c5d
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 249630
+    prefix: '506500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ea8dca5-96c3-4fd5-8e84-bfafa67f772d
+    country_id: *cr
+    network_id: *cr_racsa_mobile
+  - id: 249640
+    prefix: '506501'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2a630661-aff7-4b36-895f-92902614bb67
+    country_id: *cr
+    network_id: *cr_racsa_mobile
+  - id: 249709
+    prefix: '5065100'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f2be410b-dfc3-4ef3-99a1-0696ba6e4aad
+    country_id: *cr
+    network_id: *cr_multicom_mobile
+  - id: 250250
+    prefix: '506570'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db1d54fb-7f62-400e-a63e-bfe16a6836b4
+    country_id: *cr
+    network_id: *cr_tuyo_movil_mobile
+  - id: 250263
+    prefix: '506571'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 49bf76b0-34b7-417e-924a-dc8e482c060d
+    country_id: *cr
+    network_id: *cr_tuyo_movil_mobile
+  - id: 250278
+    prefix: '506572'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9912fad9-ad7a-4b38-90d6-b5e0427670c5
+    country_id: *cr
+    network_id: *cr_tuyo_movil_mobile
+  - id: 250285
+    prefix: '506573'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 56103f12-844d-45b2-817d-eaca70b47b91
+    country_id: *cr
+    network_id: *cr_tuyo_movil_mobile
+  - id: 250657
+    prefix: '50663'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d1394e60-baf6-49d7-9427-c4d25914f1a7
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 251020
+    prefix: '50664'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b18cf751-0deb-4041-9c61-526823e1c991
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 251257
+    prefix: '50665000'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9dd9f102-ec40-4451-bfb4-f2e7d3f78dbb
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 251258
+    prefix: '50665001'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 007edf00-96f7-4b98-8a5d-e461ec706f8f
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 251592
+    prefix: '506704'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: edde1e96-24c8-4056-ba3d-3e4b3fdeced7
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251609
+    prefix: '506705'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a6dc9d5-d266-414f-83f6-545d767ec07c
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251626
+    prefix: '506706'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e82efd1-28ad-4617-95fe-0335ebfa6feb
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251630
+    prefix: '506707'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f059787-a63b-4e09-b52b-89f554a976b4
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251679
+    prefix: '506708'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c73f4c46-23e6-455a-9963-7b501e8414cb
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251705
+    prefix: '506709'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bb32a7c1-8441-4ac6-bb0f-055cfe0e2b85
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251731
+    prefix: '50671'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7a15afd-6c59-43fc-b613-34330fea7012
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251817
+    prefix: '50672'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 284edf37-13dc-418f-8f43-169a5b5c15bb
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251890
+    prefix: '5067300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5bc2a033-c57c-45a2-9508-632c8ff128a1
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 251894
+    prefix: '5067301'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9257e81a-ebc8-4836-a936-50ea77a68c76
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 253586
+    prefix: '50683'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f1b064d-6256-4459-a9bc-d582343fc536
+    country_id: *cr
+    network_id: *cr_kolbi_mobile
+  - id: 253712
+    prefix: '50684'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f1d45303-a834-4d59-86c2-f51a308fda65
+    country_id: *cr
+    network_id: *cr_kolbi_mobile
+  - id: 253808
+    prefix: '506603'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3a293594-83fe-47ac-a433-2ccd2cccc661
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 253828
+    prefix: '506604'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3a6b8084-e276-4b4e-b902-a950bbad6881
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 253859
+    prefix: '506605'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fa83d476-fa71-418f-8f57-204afdab3490
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 253885
+    prefix: '506606'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b2cbf4f7-681a-4364-929f-8feb05774f69
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 253906
+    prefix: '506607'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 11a47bea-6d84-410a-8c0b-38eb278cd850
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 253913
+    prefix: '506608'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cdd918ef-b59d-4217-8d59-23eea53ecb8b
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 253921
+    prefix: '506609'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1d5e091c-8dbd-4bd0-9dd9-ff584ed10dba
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 253981
+    prefix: '50661'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e399b716-34d8-4ceb-8dce-615124abb15f
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 254112
+    prefix: '50662'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 116c0d5f-5894-4f81-a844-427dd8cf9599
+    country_id: *cr
+    network_id: *cr_liberty_mobile
+  - id: 255345
+    prefix: '50670010'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b0d03413-5981-4139-a58d-f75ef066395b
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255346
+    prefix: '50670011'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e50c4ac-82b0-4bfb-aa9d-502d87c0ef24
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255347
+    prefix: '50670012'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce895013-c508-49c0-a251-babfd03a7f53
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255348
+    prefix: '50670013'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 21aa7cf8-4493-45ab-9301-378579d37624
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255349
+    prefix: '50670014'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1f3a0c33-cce5-4188-969d-f009e5e84dc8
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255350
+    prefix: '5067002'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d4a3a7e3-b562-4e5f-b29c-dfde27bdb439
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255352
+    prefix: '5067003'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2cbf8e4b-dbe2-400f-af4f-d3b81faaa15d
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255354
+    prefix: '5067004'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cb667e74-0b7f-4f44-af45-3128eb15c1c9
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255356
+    prefix: '5067005'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0e7f3170-e052-426b-aab1-54e94d7ebcfe
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255362
+    prefix: '5067006'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 93070f74-8d2d-4f64-84fa-fa1d7ea38242
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255368
+    prefix: '5067007'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2b985eef-65b2-402d-ac0e-bd4942432d55
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255374
+    prefix: '5067008'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1edabf02-34f5-4930-beae-e2092ca0cfdc
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255380
+    prefix: '5067009'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bd64eeb9-6dc9-4569-a004-a04d6c373fce
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255387
+    prefix: '506701'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b32b1a22-d76f-4a8c-802b-4d29a03616c8
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255399
+    prefix: '506702'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 856a5fdb-106d-44b1-980c-a4400185ccb7
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 255418
+    prefix: '506703'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e78dbeec-4667-45ea-a588-5a2060591b8a
+    country_id: *cr
+    network_id: *cr_claro_mobile
+  - id: 256834
+    prefix: '50688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a2cbb247-667f-48ce-84ec-c8ef26acdb16
+    country_id: *cr
+    network_id: *cr_kolbi_mobile
+  - id: 256989
+    prefix: '50689'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f0398d9e-8a10-4e2d-bba0-d2d6b31ba8d9
+    country_id: *cr
+    network_id: *cr_kolbi_mobile
+  - id: 260991
+    prefix: '50619008'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c51244cf-cc68-4e90-ad58-ea434890eca6
+    country_id: *cr
+    network_id: *cr_kolbi_mobile
+  - id: 263700
+    prefix: '50685'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba71bb42-5227-48e7-a3d2-706b8db50b1f
+    country_id: *cr
+    network_id: *cr_kolbi_mobile
+  - id: 263846
+    prefix: '50686'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 079595e3-22e1-4769-8efc-292210528e1c
+    country_id: *cr
+    network_id: *cr_kolbi_mobile
+  - id: 264000
+    prefix: '50687'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e89baefc-2ae8-477e-bb36-45d312000ff2
+    country_id: *cr
+    network_id: *cr_kolbi_mobile

@@ -1,0 +1,196 @@
+country_id: &sl 190
+networks:
+# Fixed Networks
+  - id: &sl_fixed 4252
+    name: SL Fixed
+    uuid: 8d28e861-6473-4cf1-82b3-bb3ee5de4ad8
+    type_id: 12
+# Mobile Networks
+  - id: &sl_onlime_mobile 4504
+    name: SL Onlime Mobile
+    uuid: 8e6734aa-ff74-40c2-8df0-a0703b663ae2
+    type_id: 3
+  - id: &sl_orange_mobile 4788
+    name: SL Orange Mobile
+    uuid: 16a900a9-d16d-4d47-91b7-010366904324
+    type_id: 3
+  - id: &sl_africell_mobile 4871
+    name: SL Africell Mobile
+    uuid: 6b0f6720-74ca-44c6-9cc9-abe6487780a7
+    type_id: 3
+  - id: &sl_sierratel_mobile 7329
+    name: SL Sierratel Mobile
+    uuid: dc972847-0019-46fc-b01b-e2fb0f05c3ca
+    type_id: 3
+  - id: &sl_qcell_mobile 7367
+    name: SL Qcell Mobile
+    uuid: ed59baba-d1d1-4a22-9a24-c209f89d05fd
+    type_id: 3
+  - id: &sl_iptel_mobile 7443
+    name: SL Iptel Mobile
+    uuid: 4f736701-6966-46e1-b3ce-9279a969d5a5
+    type_id: 3
+# Supplementary services Networks
+  - id: &sl_special_services 5311
+    name: SL Special Services
+    uuid: 65afcbcb-5fdb-4ac1-a9fe-e5b4bd67673d
+    type_id: 14
+network_prefixes:
+# Fixed Prefixes
+  - id: 73209
+    prefix: '23254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ebd8c477-d3d6-4fa4-bb41-7e0cc744c8c5
+    country_id: *sl
+    network_id: *sl_fixed
+  - id: 76556
+    prefix: '23253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 57fe9140-b4b6-431c-bb40-acf79dadc415
+    country_id: *sl
+    network_id: *sl_fixed
+  - id: 278005
+    prefix: '23222'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3e98787f-e8d0-4a18-9f87-007ea878bc1b
+    country_id: *sl
+    network_id: *sl_fixed
+# Mobile Prefixes
+  - id: 138633
+    prefix: '23266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b13523ac-205c-4493-ba15-6a25f2dd5a87
+    country_id: *sl
+    network_id: *sl_onlime_mobile
+  - id: 172536
+    prefix: '23272'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30668751-9b59-44a9-8e81-19653aedddfe
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 174949
+    prefix: '23273'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8828c574-ceb4-4795-b096-2d456e87f1fa
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 182873
+    prefix: '23274'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 261cfecf-8cf4-4af1-b64f-edff015ac7b9
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 185882
+    prefix: '23275'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 367a7d9d-2062-40d8-bc2b-f2ae3a9c425a
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 187996
+    prefix: '23276'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7dd5e52e-d244-4a25-83f9-822b400293ee
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 192102
+    prefix: '23277'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ad8a808b-1275-43e7-be4a-60c3f8a1ab8c
+    country_id: *sl
+    network_id: *sl_africell_mobile
+  - id: 198402
+    prefix: '23278'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 920c938c-3398-4d28-85c7-446db9e95468
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 206666
+    prefix: '23279'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f29a3178-1823-45a7-b751-6a7bf0590928
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 239377
+    prefix: '23299'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73cd863b-7045-4f4b-b8f0-e3942c6f1f82
+    country_id: *sl
+    network_id: *sl_africell_mobile
+  - id: 301979
+    prefix: '23225'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f5964c2-672f-45e3-a104-8ce04b4d4f66
+    country_id: *sl
+    network_id: *sl_sierratel_mobile
+  - id: 309475
+    prefix: '23230'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 97efc7a4-c0fe-466f-b5fe-f90a6c369d6a
+    country_id: *sl
+    network_id: *sl_africell_mobile
+  - id: 321180
+    prefix: '23231'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9aa60329-231d-4e9d-8259-0c3b19bc98c2
+    country_id: *sl
+    network_id: *sl_qcell_mobile
+  - id: 327287
+    prefix: '23232'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0d811681-163e-4bea-8b8c-ecfc13e92e2a
+    country_id: *sl
+    network_id: *sl_qcell_mobile
+  - id: 340482
+    prefix: '23234'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c8df8b8-af2a-402c-969e-94843cbba20a
+    country_id: *sl
+    network_id: *sl_qcell_mobile
+  - id: 352244
+    prefix: '23235'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e5ba445-a33d-4fac-b4ce-b6397c25e75e
+    country_id: *sl
+    network_id: *sl_iptel_mobile
+  - id: 443798
+    prefix: '23288'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f14d735-b962-471d-a693-5fb3b372693e
+    country_id: *sl
+    network_id: *sl_africell_mobile
+# Country code Prefixes
+  - id: 242098
+    prefix: '232'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 673ae448-d14b-4fb5-846c-39a35c44bae3
+    country_id: *sl
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242490
+    prefix: '2321'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: b46e4871-c3d1-4bfa-a48b-4e7123e728dc
+    country_id: *sl
+    network_id: *sl_special_services

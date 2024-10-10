@@ -1,0 +1,185 @@
+country_id: &zm 238
+networks:
+# Mobile Networks
+  - id: &zm_zamtel_mobile 4837
+    name: ZM Zamtel Mobile
+    uuid: c3a30d11-2354-464a-95ea-6325a65e0414
+    type_id: 3
+  - id: &zm_mtn_mobile 4847
+    name: ZM Mtn Mobile
+    uuid: aa4c623c-d157-42cb-963a-4db391f3ecd8
+    type_id: 3
+  - id: &zm_airtel_mobile 4875
+    name: ZM Airtel Mobile
+    uuid: 9415fe56-46b5-4f9f-a777-0ac9124c99c1
+    type_id: 3
+  - id: &zm_zedmobile_mobile 5061
+    name: ZM Zedmobile Mobile
+    uuid: d92446cf-f96e-4d52-afa1-eee4b41cdd3d
+    type_id: 3
+# Supplementary services Networks
+  - id: &zm_special_services 5343
+    name: ZM Special Services
+    uuid: 430261cc-ae7b-493d-9ca8-882c70ef64ee
+    type_id: 14
+  - id: &zm_emergency_services 5422
+    name: ZM Emergency Services
+    uuid: 7846bf7c-cece-41cc-8611-bf0f672f3bd8
+    type_id: 14
+# Fixed Networks
+  - id: &zm_fixed 7279
+    name: ZM Fixed
+    uuid: e276a89d-e515-46ff-a0a6-776f276f8fbc
+    type_id: 12
+network_prefixes:
+# Mobile Prefixes
+  - id: 185889
+    prefix: '26075'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b2b8cc02-a998-46f7-8c44-3d523121a674
+    country_id: *zm
+    network_id: *zm_zamtel_mobile
+  - id: 188004
+    prefix: '26076'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 13c167fe-6b02-446e-9f3b-d7b110571c6a
+    country_id: *zm
+    network_id: *zm_mtn_mobile
+  - id: 192110
+    prefix: '26077'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3f18c947-c99f-4915-9e66-d9bddbbc5d19
+    country_id: *zm
+    network_id: *zm_airtel_mobile
+  - id: 215158
+    prefix: '26095'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aff69682-ec4b-4cae-a4a0-76a69efae95e
+    country_id: *zm
+    network_id: *zm_zamtel_mobile
+  - id: 221957
+    prefix: '26096'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3fb18614-9a43-419d-85fb-bb357163fe9a
+    country_id: *zm
+    network_id: *zm_mtn_mobile
+  - id: 227373
+    prefix: '26097'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 23f66c2e-c036-49ea-8a3b-e17f012919bb
+    country_id: *zm
+    network_id: *zm_airtel_mobile
+  - id: 231747
+    prefix: '26098'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3501997e-54e2-4d58-a5ec-4b80afadbb8f
+    country_id: *zm
+    network_id: *zm_zedmobile_mobile
+# Country code Prefixes
+  - id: 242137
+    prefix: '260'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 9d93673d-52d5-424e-a824-2981115bec1b
+    country_id: *zm
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242523
+    prefix: '2601'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 767900c2-fcdb-4d23-aeed-c354c9157878
+    country_id: *zm
+    network_id: *zm_special_services
+  - id: 242631
+    prefix: '260112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 447011d4-f53b-428d-8ac9-a0c8c1b53307
+    country_id: *zm
+    network_id: *zm_emergency_services
+  - id: 243973
+    prefix: '2604'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: a1cfab4c-262e-48ab-b336-d07eed99854b
+    country_id: *zm
+    network_id: *zm_special_services
+  - id: 248928
+    prefix: '2603'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 2b07ba42-adb2-4ae4-a5dd-ea09a0f10329
+    country_id: *zm
+    network_id: *zm_special_services
+  - id: 257149
+    prefix: '2609'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 6febf6b1-ac59-47c5-8add-0631717cf7e4
+    country_id: *zm
+    network_id: *zm_emergency_services
+# Fixed Prefixes
+  - id: 271733
+    prefix: '260211'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b9abf8a6-e9aa-43f6-8faa-1c63c4c08e8d
+    country_id: *zm
+    network_id: *zm_fixed
+  - id: 271761
+    prefix: '260212'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 66562496-a5a8-481b-8abc-d82821ba5639
+    country_id: *zm
+    network_id: *zm_fixed
+  - id: 272273
+    prefix: '260215'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b1424c1d-e695-4ac9-a429-b208a1de022a
+    country_id: *zm
+    network_id: *zm_fixed
+  - id: 274343
+    prefix: '260213'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 591dd601-7a7d-4cc9-822c-2b97e9ef35a4
+    country_id: *zm
+    network_id: *zm_fixed
+  - id: 275049
+    prefix: '260214'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b7215951-16b2-4ed9-bcb3-86f9c0de5aae
+    country_id: *zm
+    network_id: *zm_fixed
+  - id: 276002
+    prefix: '260217'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a3ab0710-fd25-41f0-a999-de2428c13cec
+    country_id: *zm
+    network_id: *zm_fixed
+  - id: 276805
+    prefix: '260218'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5063ba66-dcf9-427e-9850-6c6fbc06937d
+    country_id: *zm
+    network_id: *zm_fixed
+  - id: 282715
+    prefix: '260216'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f347873f-b828-4cc5-aa8d-5851d9959b36
+    country_id: *zm
+    network_id: *zm_fixed

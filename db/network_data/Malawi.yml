@@ -1,0 +1,114 @@
+country_id: &mw 128
+networks:
+# Supplementary services Networks
+  - id: &mw_special_services 5285
+    name: MW Special Services
+    uuid: 63c16ed9-6f74-4923-b636-e41f01da569b
+    type_id: 14
+  - id: &mw_voip 5673
+    name: MW Voip
+    uuid: 822e9d57-fcf9-4a79-ba39-9d2cd2bcdafc
+    type_id: 14
+# Fixed Networks
+  - id: &mw_fixed 5286
+    name: MW Fixed
+    uuid: 97e7fb0b-748b-44b6-b51a-85bb05b7c096
+    type_id: 12
+# Mobile Networks
+  - id: &mw_tnm_mobile 6522
+    name: MW Tnm Mobile
+    uuid: 7420cbc9-0241-40ae-9cb4-52af337aaf1d
+    type_id: 3
+  - id: &mw_airtel_mobile 6950
+    name: MW Airtel Mobile
+    uuid: 102e6cc2-c18f-4d33-b8ac-a9f9cdf5930a
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242062
+    prefix: '265'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 30beec7a-d2d7-4cdd-a28e-71db0aeca9d6
+    country_id: *mw
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242456
+    prefix: '2651'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: b914d9e7-808e-4f0d-8e40-fa606fdfea0c
+    country_id: *mw
+    network_id: *mw_special_services
+  - id: 243235
+    prefix: '265031'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 464b51db-4ab2-432b-a2ef-ee3eeca950d2
+    country_id: *mw
+    network_id: *mw_voip
+  - id: 243949
+    prefix: '2654'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: e3ca1c03-6936-49d3-8afe-77d2b35b1830
+    country_id: *mw
+    network_id: *mw_special_services
+  - id: 249592
+    prefix: '2655'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 0997f0bc-0507-4f76-9604-b73b79686f43
+    country_id: *mw
+    network_id: *mw_special_services
+  - id: 255262
+    prefix: '2657'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 7266ef71-d89c-412d-a672-e9953e9277de
+    country_id: *mw
+    network_id: *mw_special_services
+  - id: 257116
+    prefix: '2659'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 614e0c07-cca7-45a9-92ab-dfa532e2dc6e
+    country_id: *mw
+    network_id: *mw_special_services
+# Fixed Prefixes
+  - id: 242457
+    prefix: '26501'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e4fad5b-fb3b-465b-bb14-101b4678531a
+    country_id: *mw
+    network_id: *mw_fixed
+  - id: 242607
+    prefix: '2650111'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 82c5e23d-f7c8-42ee-96c8-acec6a02c81c
+    country_id: *mw
+    network_id: *mw_fixed
+  - id: 247423
+    prefix: '26502'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a4abc3a2-f530-4029-b30b-169698785621
+    country_id: *mw
+    network_id: *mw_fixed
+# Mobile Prefixes
+  - id: 253093
+    prefix: '26508'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 88606306-67bd-4adc-9254-027f6c39dfb4
+    country_id: *mw
+    network_id: *mw_tnm_mobile
+  - id: 257117
+    prefix: '26509'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3cef56ae-8307-41cc-bcc2-c796251c017c
+    country_id: *mw
+    network_id: *mw_airtel_mobile

@@ -1,0 +1,243 @@
+country_id: &cg 49
+networks:
+# Supplementary services Networks
+  - id: &cg_special_services 5207
+    name: CG Special Services
+    uuid: 4be59919-3b98-4af7-a8ee-e603b40418f3
+    type_id: 14
+  - id: &cg_arpce_assistance_service 6186
+    name: CG Arpce Assistance Service
+    uuid: 95932dbd-70c2-46b0-b6ee-573eb1773cf6
+    type_id: 14
+  - id: &cg_value_added_services 6549
+    name: CG Value Added Services
+    uuid: b4bc7449-c807-4ed7-9f0c-fc798b5918a5
+    type_id: 14
+  - id: &cg_shared_cost_services 6637
+    name: CG Shared Cost Services
+    uuid: 2387bdbb-aac4-4856-82f7-74bcdff75c3c
+    type_id: 14
+  - id: &cg_internet_access_services 6678
+    name: CG Internet Access Services
+    uuid: c5629ba2-ce01-4b0f-b065-077ffd1ee3f4
+    type_id: 14
+  - id: &cg_shared_revenue_services 6913
+    name: CG Shared Revenue Services
+    uuid: 2b0cb18a-a6d9-4b03-862a-e9dfe7fc0649
+    type_id: 14
+  - id: &cg_nomadic_and_convergent__services 6939
+    name: CG Nomadic And Convergent  Services
+    uuid: 14996bab-e7db-4b8c-988f-698a33e32275
+    type_id: 14
+# Mobile Networks
+  - id: &cg_mobile 5715
+    name: CG Mobile
+    uuid: dccffa2d-6a05-46db-89d7-869f447a2c09
+    type_id: 3
+  - id: &cg_airtel_mobile 7078
+    name: CG Airtel Mobile
+    uuid: 2ed8471d-082e-4e52-9bde-bf603d2f820b
+    type_id: 3
+  - id: &cg_mtn_mobile 7079
+    name: CG Mtn Mobile
+    uuid: 55effc17-2d60-4c3d-bd10-cc58171cb787
+    type_id: 3
+# Fixed Networks
+  - id: &cg_fixed 7287
+    name: CG Fixed
+    uuid: aed1bdac-0d3b-4785-b31e-625992e959f1
+    type_id: 12
+network_prefixes:
+# Country code Prefixes
+  - id: 241971
+    prefix: '242'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 84328406-aea0-4bf9-ad49-5ea4889d4111
+    country_id: *cg
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242375
+    prefix: '2421'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 4fdfe03a-6d29-49dd-977a-499cdbceb88f
+    country_id: *cg
+    network_id: *cg_special_services
+  - id: 249658
+    prefix: '2425050'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 06a5ac63-bfaf-4f51-b2c9-1949da9419d9
+    country_id: *cg
+    network_id: *cg_arpce_assistance_service
+  - id: 253140
+    prefix: '242800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d5acd58d-ceca-4737-9a47-778f4f2ee251
+    country_id: *cg
+    network_id: *cg_value_added_services
+  - id: 253207
+    prefix: '242801'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 69a28d64-1792-4167-8a8b-73d385780d27
+    country_id: *cg
+    network_id: *cg_value_added_services
+  - id: 253219
+    prefix: '242802'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2183b6be-12eb-4bfc-9b38-619c22e0475f
+    country_id: *cg
+    network_id: *cg_value_added_services
+  - id: 253309
+    prefix: '24281'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0e55a157-9285-48c4-95c0-d43b64e671de
+    country_id: *cg
+    network_id: *cg_shared_cost_services
+  - id: 253610
+    prefix: '2428300'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a055bb7c-b549-4290-9834-ccaa019bd1d5
+    country_id: *cg
+    network_id: *cg_internet_access_services
+  - id: 256833
+    prefix: '24288'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9f275d39-7102-4a59-b158-d93e471fe711
+    country_id: *cg
+    network_id: *cg_shared_revenue_services
+  - id: 257015
+    prefix: '2428900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 168d9534-8640-4b12-9de2-dfcf0e9f0daa
+    country_id: *cg
+    network_id: *cg_value_added_services
+  - id: 257086
+    prefix: '2429'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a177bc2-b831-4d45-bab2-1317fcc59ba0
+    country_id: *cg
+    network_id: *cg_nomadic_and_convergent__services
+# Mobile Prefixes
+  - id: 243482
+    prefix: '24234'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e4ebeae3-7b6b-416f-8d2c-58395542f691
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 243659
+    prefix: '24236'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c7c4d469-3b6b-4651-be97-55689484a536
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 243856
+    prefix: '24238'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 8b66b294-136d-4154-80ee-896f81f6127a
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 248887
+    prefix: '2423'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 4aabca8e-dcad-4e3e-9905-b4536ca6fd89
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 258380
+    prefix: '24204'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0d3bb966-5a75-4e71-98cc-2364d9632e4c
+    country_id: *cg
+    network_id: *cg_airtel_mobile
+  - id: 258416
+    prefix: '24205'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a1dda4de-63f9-4a1e-b12a-96aa375af770
+    country_id: *cg
+    network_id: *cg_airtel_mobile
+  - id: 258456
+    prefix: '24206'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8a6614de-e7a6-41fa-b8f0-bd43dca1aa07
+    country_id: *cg
+    network_id: *cg_mtn_mobile
+  - id: 258557
+    prefix: '2420'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6c0589ac-a760-428a-af00-ad5e248f18b7
+    country_id: *cg
+    network_id: *cg_mobile
+# Fixed Prefixes
+  - id: 277990
+    prefix: '24222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 974a8467-5182-417e-926a-50a5dff2bf02
+    country_id: *cg
+    network_id: *cg_fixed
+  - id: 282807
+    prefix: '2422221'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 826899be-33ca-41c2-b78e-1d7a2257bd3c
+    country_id: *cg
+    network_id: *cg_fixed
+  - id: 282809
+    prefix: '2422222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6d67bddf-5096-4bad-9e40-beabbfe03ca9
+    country_id: *cg
+    network_id: *cg_fixed
+  - id: 282811
+    prefix: '2422223'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b4904334-7de6-4f5f-93b5-5b616a33b4d0
+    country_id: *cg
+    network_id: *cg_fixed
+  - id: 282813
+    prefix: '2422224'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3811918a-5b4b-49bb-9511-8f3d54d05b23
+    country_id: *cg
+    network_id: *cg_fixed
+  - id: 282815
+    prefix: '2422225'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1d358baf-b4df-4618-9b56-47afb1036f4e
+    country_id: *cg
+    network_id: *cg_fixed
+  - id: 282818
+    prefix: '2422228'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 68d8a70d-0c0c-4d6a-9c2c-a1aaf0289545
+    country_id: *cg
+    network_id: *cg_fixed
+  - id: 282820
+    prefix: '2422229'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 144727ae-6688-4a60-8718-a3319ff38a68
+    country_id: *cg
+    network_id: *cg_fixed

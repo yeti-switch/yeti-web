@@ -1,0 +1,384 @@
+country_id: &sa 187
+networks:
+# Mobile Networks
+  - id: &sa_mobile 4105
+    name: SA Mobile
+    uuid: 6a2487fc-4ad4-43db-ae0c-e0a5615b6fc5
+    type_id: 3
+  - id: &sa_stc_mobile 4108
+    name: SA Stc Mobile
+    uuid: ff4fcc25-7879-4137-be13-78a116d36ed7
+    type_id: 3
+  - id: &sa_salam_mobile 4112
+    name: SA Salam Mobile
+    uuid: b0bc934f-1199-4317-b983-bb9095db29ac
+    type_id: 3
+  - id: &sa_mobily_mobile 4118
+    name: SA Mobily Mobile
+    uuid: 75851f86-281a-44d0-8c62-e62d2b4448e1
+    type_id: 3
+  - id: &sa_virgin_mobile_mobile 4119
+    name: SA Virgin Mobile Mobile
+    uuid: 80da1f28-5c26-44e9-925f-05e7edb41e12
+    type_id: 3
+  - id: &sa_red_bull_mobile_mobile 4120
+    name: SA Red Bull Mobile Mobile
+    uuid: 7fdf8f8d-7f3c-4f8c-8eed-f218cf619b2a
+    type_id: 3
+  - id: &sa_lebara_mobile_mobile 4121
+    name: SA Lebara Mobile Mobile
+    uuid: 2267ee1e-b3ef-42da-b924-722093339a98
+    type_id: 3
+  - id: &sa_zain_mobile 4122
+    name: SA Zain Mobile
+    uuid: 65654be7-57ea-4a48-b29a-3f84296c0564
+    type_id: 3
+# Supplementary services Networks
+  - id: &sa_premium_rate_services 4692
+    name: SA Premium Rate Services
+    uuid: 0bee731e-c55c-4a2d-a30e-a5edc59bf36a
+    type_id: 14
+  - id: &sa_special_services 5306
+    name: SA Special Services
+    uuid: fe540ba9-4ddb-4864-a7a1-692ac28b7697
+    type_id: 14
+  - id: &sa_emergency_services 5420
+    name: SA Emergency Services
+    uuid: e5f6071c-8f7a-4ce5-8c0b-36850cb3742a
+    type_id: 14
+  - id: &sa_home_country_direct 5994
+    name: SA Home Country Direct
+    uuid: a26f7c4f-6516-4e77-94c8-d8af61cd86a7
+    type_id: 14
+  - id: &sa_national_freephone_services 7570
+    name: SA National Freephone Services
+    uuid: 93ce28ce-ab2e-413e-849b-60478e6c88f6
+    type_id: 14
+  - id: &sa_international_freephone_services 7580
+    name: SA International Freephone Services
+    uuid: 13e01070-87ea-454c-b9b8-3707d473eea3
+    type_id: 14
+  - id: &sa_machine_to_machine_m2m_services 7676
+    name: SA Machine To Machine M2M Services
+    uuid: 361619ca-e005-4ffe-ad54-e1b7e2bc96aa
+    type_id: 14
+  - id: &sa_public_mobile_data_services 7677
+    name: SA Public Mobile Data Services
+    uuid: 561d7440-e684-41fd-9cb4-67fadceba917
+    type_id: 14
+  - id: &sa_universal_personal_telecommunications_upt 7800
+    name: SA Universal Personal Telecommunications Upt
+    uuid: 2789c171-4e89-4bb0-8b96-eecfcd1b128f
+    type_id: 14
+  - id: &sa_shared_cost_services 7942
+    name: SA Shared Cost Services
+    uuid: 3a33c60b-d70f-4b62-a7d7-17da9c0d671a
+    type_id: 14
+  - id: &sa_shared_revenue_services 7944
+    name: SA Shared Revenue Services
+    uuid: 6f7d3b8d-d39a-4ae7-8dfa-629c4157a452
+    type_id: 14
+# Fixed Networks
+  - id: &sa_fixed 7105
+    name: SA Fixed
+    uuid: a5d834ce-bbe4-4af8-92b8-645710dab7e2
+    type_id: 12
+network_prefixes:
+# Mobile Prefixes
+  - id: 54584
+    prefix: '9665'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e90e75ce-0532-4aeb-81f8-3dff7e99769b
+    country_id: *sa
+    network_id: *sa_mobile
+  - id: 54587
+    prefix: '96650'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e6fe98af-0440-476b-9b46-5d966f9d8ae9
+    country_id: *sa
+    network_id: *sa_stc_mobile
+  - id: 54599
+    prefix: '966510'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 041699b4-c397-49f5-a8d4-0c4f554b3137
+    country_id: *sa
+    network_id: *sa_salam_mobile
+  - id: 54601
+    prefix: '966511'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dfe7175b-e395-4999-8654-f6eac13c1e8c
+    country_id: *sa
+    network_id: *sa_salam_mobile
+  - id: 54678
+    prefix: '96653'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2ec9a689-4d24-4fff-b64d-cda62e4bae3a
+    country_id: *sa
+    network_id: *sa_stc_mobile
+  - id: 54736
+    prefix: '96654'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9b32c975-ae55-4c62-a517-63e186e966d8
+    country_id: *sa
+    network_id: *sa_mobily_mobile
+  - id: 54749
+    prefix: '96655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4d9150dd-0a39-4574-9d2a-4c4957ab6fbe
+    country_id: *sa
+    network_id: *sa_stc_mobile
+  - id: 54810
+    prefix: '96656'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1dc7889c-1600-491f-a8b1-119f87525bb1
+    country_id: *sa
+    network_id: *sa_mobily_mobile
+  - id: 54835
+    prefix: '966570'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4b4c7785-5413-46cb-83c5-b9d21ab7313c
+    country_id: *sa
+    network_id: *sa_virgin_mobile_mobile
+  - id: 54836
+    prefix: '966571'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 34e641b6-ed6d-4027-b47e-7847012b6df7
+    country_id: *sa
+    network_id: *sa_virgin_mobile_mobile
+  - id: 54858
+    prefix: '966572'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 667b4e0f-3464-42dc-915a-07dc67634fe6
+    country_id: *sa
+    network_id: *sa_virgin_mobile_mobile
+  - id: 54863
+    prefix: '966575'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d63e32cb-ca5a-42e0-bd59-7905feaa0cb7
+    country_id: *sa
+    network_id: *sa_red_bull_mobile_mobile
+  - id: 54865
+    prefix: '966576'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a2323987-a909-4a41-916c-dfa9a763b177
+    country_id: *sa
+    network_id: *sa_lebara_mobile_mobile
+  - id: 54867
+    prefix: '966577'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 80ff028d-fbc1-41c1-b462-77f4c1881799
+    country_id: *sa
+    network_id: *sa_lebara_mobile_mobile
+  - id: 54869
+    prefix: '966578'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 53890c26-1cc6-4af2-977d-be0301df0de7
+    country_id: *sa
+    network_id: *sa_lebara_mobile_mobile
+  - id: 54871
+    prefix: '96658'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1d7aaed3-7843-4db8-8f3e-a31c7bfc609e
+    country_id: *sa
+    network_id: *sa_zain_mobile
+  - id: 54891
+    prefix: '96659'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 08de6aed-9653-4572-a72b-d4040bf458d0
+    country_id: *sa
+    network_id: *sa_zain_mobile
+# Supplementary services Prefixes
+  - id: 154409
+    prefix: '966700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ad020dbc-ee5d-41bd-9c41-c478333ee8f7
+    country_id: *sa
+    network_id: *sa_premium_rate_services
+  - id: 242483
+    prefix: '9661'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: ee9fc890-8668-4266-9883-94d18e55ca98
+    country_id: *sa
+    network_id: *sa_special_services
+  - id: 242629
+    prefix: '966112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: c2785c69-5d33-4dbf-831e-244bfe52d96d
+    country_id: *sa
+    network_id: *sa_emergency_services
+  - id: 247302
+    prefix: '9661800'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 28fcb504-6251-4588-9500-2849b085a5ed
+    country_id: *sa
+    network_id: *sa_home_country_direct
+  - id: 257133
+    prefix: '9669'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 6c2ca414-ae83-4db5-9156-296e40545a65
+    country_id: *sa
+    network_id: *sa_special_services
+  - id: 403490
+    prefix: '966800'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d721a714-e52e-487d-b865-dd8d768011e2
+    country_id: *sa
+    network_id: *sa_national_freephone_services
+  - id: 403501
+    prefix: '96680018'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e2fdef6e-f2be-4deb-a929-927947291454
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403502
+    prefix: '96680028'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d9c3e21f-9718-4cbc-8593-2e6c4e18d4c0
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403503
+    prefix: '96680038'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a37c0f7e-ccba-477d-b856-42f2f855cef5
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403505
+    prefix: '96680048'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7d806693-fc45-4b1a-8db4-fabf65672761
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403507
+    prefix: '96680068'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 9260c44b-c849-47aa-8a4d-3377304be40a
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403508
+    prefix: '96680078'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2a591a29-4356-4be0-9bd7-f59037dd0275
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 431067
+    prefix: '966830'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: e0e07861-becc-4cf2-b62b-de854ae39f7f
+    country_id: *sa
+    network_id: *sa_machine_to_machine_m2m_services
+  - id: 431573
+    prefix: '966831'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f47be3c4-d33d-4a68-8859-a5b00720ba87
+    country_id: *sa
+    network_id: *sa_public_mobile_data_services
+  - id: 451774
+    prefix: '966891'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 2cbad548-6c3d-4785-b102-831a817f2573
+    country_id: *sa
+    network_id: *sa_universal_personal_telecommunications_upt
+  - id: 470617
+    prefix: '966920'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8ffee982-58c8-46ff-9b73-cd341f27d4be
+    country_id: *sa
+    network_id: *sa_shared_cost_services
+  - id: 474671
+    prefix: '966925'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 00cb4150-52da-4a79-b3d0-c70cb30353f1
+    country_id: *sa
+    network_id: *sa_shared_revenue_services
+# Country code Prefixes
+  - id: 242091
+    prefix: '966'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 4a480a17-0a29-491e-bb92-f7a6794a794b
+    country_id: *sa
+    network_id: null
+# Fixed Prefixes
+  - id: 258817
+    prefix: '96611'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b06baf5b-9681-491f-ad28-f89575e66569
+    country_id: *sa
+    network_id: *sa_fixed
+  - id: 259230
+    prefix: '96612'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 02abe1b5-5fe7-4aeb-bdcd-9741935c624a
+    country_id: *sa
+    network_id: *sa_fixed
+  - id: 259511
+    prefix: '96613'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 045c5f08-f068-4213-8935-53f5417980eb
+    country_id: *sa
+    network_id: *sa_fixed
+  - id: 259946
+    prefix: '96614'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 41ac92df-cbfe-4110-ae5a-07a019d9d05e
+    country_id: *sa
+    network_id: *sa_fixed
+  - id: 266559
+    prefix: '96616'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dfafee2f-0741-48d6-950c-da7d2ec2258f
+    country_id: *sa
+    network_id: *sa_fixed
+  - id: 266951
+    prefix: '96617'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 71cd3bed-8bac-458e-98d2-a364f8eb4e1f
+    country_id: *sa
+    network_id: *sa_fixed
+  - id: 406908
+    prefix: '966811'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 139e21ab-bcb7-4f11-ac88-55ff8f0beb51
+    country_id: *sa
+    network_id: *sa_fixed

@@ -1,0 +1,143 @@
+country_id: &kw 114
+networks:
+# Supplementary services Networks
+  - id: &kw_special_services 5353
+    name: KW Special Services
+    uuid: ce09f203-9286-44ab-991b-eee59444943f
+    type_id: 14
+  - id: &kw_corporate_numbers 5975
+    name: KW Corporate Numbers
+    uuid: 541c5349-4b2a-4123-8b52-21735c7f0c79
+    type_id: 14
+# Mobile Networks
+  - id: &kw_virgin_mobile_mobile 5807
+    name: KW Virgin Mobile Mobile
+    uuid: f6dbbd3f-774f-4ab5-a760-da5c6c17d1c9
+    type_id: 3
+  - id: &kw_ooredoo_mobile 5907
+    name: KW Ooredoo Mobile
+    uuid: 7ce85694-3cde-44d4-95ef-7383d4b4a856
+    type_id: 3
+  - id: &kw_stc_mobile 6169
+    name: KW Stc Mobile
+    uuid: d92decc8-066a-4fc7-a1f4-8213ce00d4b8
+    type_id: 3
+  - id: &kw_zain_mobile 6948
+    name: KW Zain Mobile
+    uuid: 481897f7-b0e8-4c57-9677-d4623322ccc2
+    type_id: 3
+# Fixed Networks
+  - id: &kw_fixed 6062
+    name: KW Fixed
+    uuid: f14d20c6-23d3-4789-97b7-64b9f0334e38
+    type_id: 12
+network_prefixes:
+# Country code Prefixes
+  - id: 242033
+    prefix: '965'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 2119c079-77a9-4a6e-ba54-d56b6baa3e8e
+    country_id: *kw
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242535
+    prefix: '96510'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: fdaa4b8f-37d6-4990-a2c8-8896b7cdc9a5
+    country_id: *kw
+    network_id: *kw_special_services
+  - id: 242594
+    prefix: '96511'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: a30381e4-1e0e-41ad-b3a8-05bc14f0e9e8
+    country_id: *kw
+    network_id: *kw_special_services
+  - id: 242809
+    prefix: '96512'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 933b90f0-9499-49c0-a3aa-bf7dde832b9c
+    country_id: *kw
+    network_id: *kw_special_services
+  - id: 242853
+    prefix: '96513'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 0e389e5f-53da-4292-868a-1bc376822950
+    country_id: *kw
+    network_id: *kw_special_services
+  - id: 242901
+    prefix: '96514'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 4e6fbb6a-b020-43c8-803d-cc289d160810
+    country_id: *kw
+    network_id: *kw_special_services
+  - id: 242939
+    prefix: '96515'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: b553374d-3a33-45bf-8d49-a01e218ffbbd
+    country_id: *kw
+    network_id: *kw_special_services
+  - id: 243020
+    prefix: '96516'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 2860311b-98d0-416b-9bb2-16fc3930379d
+    country_id: *kw
+    network_id: *kw_special_services
+  - id: 243058
+    prefix: '96517'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 6ebe86f1-fb29-4556-b5aa-65d51ef9df2f
+    country_id: *kw
+    network_id: *kw_special_services
+  - id: 247276
+    prefix: '96518'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6cf12f0a-a71b-49d5-8a28-d38463a591a0
+    country_id: *kw
+    network_id: *kw_corporate_numbers
+# Mobile Prefixes
+  - id: 244137
+    prefix: '96541'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f15228a5-6978-4406-93a9-2eca15110722
+    country_id: *kw
+    network_id: *kw_virgin_mobile_mobile
+  - id: 245403
+    prefix: '9656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 10d4f73a-aac8-4b6e-a7ec-54f45074477a
+    country_id: *kw
+    network_id: *kw_ooredoo_mobile
+  - id: 249584
+    prefix: '9655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: de8f3ff2-b571-4d20-bf76-5b2656cd5747
+    country_id: *kw
+    network_id: *kw_stc_mobile
+  - id: 257110
+    prefix: '9659'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ef9e27e-c227-49f8-8612-b834b1e7a38b
+    country_id: *kw
+    network_id: *kw_zain_mobile
+# Fixed Prefixes
+  - id: 247413
+    prefix: '9652'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 860a72f0-406f-4393-ac8a-ed62dc36c898
+    country_id: *kw
+    network_id: *kw_fixed

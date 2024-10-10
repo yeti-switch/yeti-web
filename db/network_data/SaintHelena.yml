@@ -1,0 +1,262 @@
+country_id: &sh 179
+networks:
+# Supplementary services Networks
+  - id: &sh_special_services 5108
+    name: SH Special Services
+    uuid: 300318c1-26d4-4dec-a788-4d153f0752b6
+    type_id: 14
+  - id: &sh_information_services 6125
+    name: SH Information Services
+    uuid: 3eb3dc5a-7eee-4240-a9db-d6dab628f147
+    type_id: 14
+  - id: &sh_voice_messaging_services 6127
+    name: SH Voice Messaging Services
+    uuid: 73c8d4a6-e12a-4d22-979b-00e9dd72b91c
+    type_id: 14
+  - id: &sh_flexible_access_services 6128
+    name: SH Flexible Access Services
+    uuid: fd81c4b9-f1c8-46f9-a258-67588f92569e
+    type_id: 14
+  - id: &sh_emergency_services 6956
+    name: SH Emergency Services
+    uuid: eb2f2e3d-0ef9-4763-ab7d-e04c0ccc9064
+    type_id: 14
+# Mobile Networks
+  - id: &sh_mobile 5778
+    name: SH Mobile
+    uuid: f95fe2a8-fb62-4b48-901b-c3520606d692
+    type_id: 3
+# Fixed Networks
+  - id: &sh_fixed 6082
+    name: SH Fixed
+    uuid: 54ef6854-0786-466e-8b4e-9e1e36e6ffeb
+    type_id: 12
+network_prefixes:
+# Country code Prefixes
+  - id: 242095
+    prefix: '247'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: ca50fc0a-215d-4485-9d00-90d29865f5e5
+    country_id: *sh
+    network_id: null
+  - id: 242096
+    prefix: '290'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 33aa7d2e-1096-4bc8-a5f4-b62edfa71660
+    country_id: *sh
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242153
+    prefix: '2470'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 735f0614-c142-461c-a70d-ef006b67b3bd
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 242487
+    prefix: '2471'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 9bac7062-d5c4-442d-ae75-cbfd94a83213
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 242488
+    prefix: '2901'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 9f91d58f-2159-4df3-afae-973982ef82ca
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 248488
+    prefix: '290260'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 04425aaa-92a6-4baa-8716-120a4414d685
+    country_id: *sh
+    network_id: *sh_information_services
+  - id: 248497
+    prefix: '290261'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: be67b457-9d1f-42ef-bd6b-e891fdce3a75
+    country_id: *sh
+    network_id: *sh_information_services
+  - id: 248506
+    prefix: '290262'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 39196d8c-bcfc-4150-a627-cb7d7662b907
+    country_id: *sh
+    network_id: *sh_voice_messaging_services
+  - id: 248521
+    prefix: '290263'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7fbd38ae-8d04-4d46-b8b8-5fd2e4eb1b6e
+    country_id: *sh
+    network_id: *sh_flexible_access_services
+  - id: 249603
+    prefix: '2475'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 3f1fbd4f-f3ff-4890-aaf0-a47dc07d967f
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 253106
+    prefix: '2478'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 0801b08c-da2b-4fa3-9f5c-233275b9862e
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 257136
+    prefix: '2479'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 7a2eaa90-ef70-4537-acb8-51eb6d789ba6
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 257137
+    prefix: '2909'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 1d41b8ed-64c7-4a9f-b89a-48d29077957f
+    country_id: *sh
+    network_id: *sh_emergency_services
+# Mobile Prefixes
+  - id: 243964
+    prefix: '2474'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e0a1608b-384b-431d-a9d8-1b9bf51dd835
+    country_id: *sh
+    network_id: *sh_mobile
+  - id: 245424
+    prefix: '2906'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1ddd5ed5-0fff-4a85-b2e6-92ca7468b6a3
+    country_id: *sh
+    network_id: *sh_mobile
+  - id: 249604
+    prefix: '2905'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: d96c88cc-9651-4fab-8864-45e4781cdcdb
+    country_id: *sh
+    network_id: *sh_mobile
+# Fixed Prefixes
+  - id: 247460
+    prefix: '29020'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 95311976-128a-4efe-946f-c8bec524b2e7
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 247637
+    prefix: '29021'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 20254512-c81e-43d5-a266-84d53bd657f2
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 247733
+    prefix: '29022'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 8cd51eab-fb0e-401b-bd6f-72b5f10ed22f
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 247928
+    prefix: '29023'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 4a785b46-3e8f-4d7b-8952-45db0de9a847
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 248119
+    prefix: '29024'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f4057d12-d24a-4ac6-8682-69a4f1bfdc65
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 248268
+    prefix: '29025'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7fa0452d-4204-45cd-9a9b-6f688a391494
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 248478
+    prefix: '29026'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 14d9ba6c-414c-4e4c-81bd-ecf7e894eeea
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 248619
+    prefix: '29027'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7e471b4d-6a4e-48c1-8db0-3556e0c9b961
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 248756
+    prefix: '29028'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e8b7dc45-da5e-41a8-b4c3-aba9c40bfb36
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 248835
+    prefix: '29029'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 759a9b40-6b8a-462c-a8c8-bede12be7d69
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 250663
+    prefix: '24763'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 949c0f8c-0747-45be-a933-c1a3cacc7a78
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 251029
+    prefix: '24764'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 38d85f01-fe61-461d-8ec4-2818ad50ea07
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 253107
+    prefix: '2908'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: f451f090-618b-4449-aad0-d605d57b91b7
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 254122
+    prefix: '24762'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: bedaf702-7881-40e3-8f3f-95ea4b643c1b
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 254298
+    prefix: '24766'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 30233dd8-1bdf-4d85-ab62-84e08baec792
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 254612
+    prefix: '24767'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: fb71cc6c-d7a3-4190-8db2-48e0b857e27c
+    country_id: *sh
+    network_id: *sh_fixed

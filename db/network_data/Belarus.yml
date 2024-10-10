@@ -1,0 +1,969 @@
+country_id: &by 20
+networks:
+# Supplementary services Networks
+  - id: &by_telematic_services 4387
+    name: BY Telematic Services
+    uuid: dc84f0d6-5e92-4a92-9a15-7516315c4c7d
+    type_id: 14
+  - id: &by_national_traffic_exchange_center 4830
+    name: BY National Traffic Exchange Center
+    uuid: 3903ceac-944b-4727-9fc6-84ea19a5606e
+    type_id: 14
+  - id: &by_intelligent_network_services 4958
+    name: BY Intelligent Network Services
+    uuid: 93c9326d-5a44-48c8-a3c7-c0fbf468f361
+    type_id: 14
+  - id: &by_special_services 5194
+    name: BY Special Services
+    uuid: d1a7f75d-48d8-45d6-8b92-12e4d77658f7
+    type_id: 14
+  - id: &by_home_country_direct_ 7544
+    name: 'BY Home Country Direct '
+    uuid: d2424b6b-41ba-4829-825e-9d54213fb585
+    type_id: 14
+  - id: &by_freephone_services 7587
+    name: BY Freephone Services
+    uuid: f081d10a-447a-4e06-8c7e-39a0f35c20cf
+    type_id: 14
+  - id: &by_interactive_polling_services_free 7603
+    name: BY Interactive Polling Services Free
+    uuid: c6ae6321-8b15-4107-a90c-2af314b93145
+    type_id: 14
+  - id: &by_interactive_polling_services_paid 7612
+    name: BY Interactive Polling Services Paid
+    uuid: 1a932efb-ced1-4301-8b7c-cdeda589de9d
+    type_id: 14
+  - id: &by_international_free_services 7659
+    name: BY International Free Services
+    uuid: 9b96b490-8134-467b-9af5-294946518de0
+    type_id: 14
+  - id: &by_premium_rate_services 7869
+    name: BY Premium Rate Services
+    uuid: 8ded3655-8527-412a-b6fa-daa2ee3ad6ad
+    type_id: 14
+# Fixed Networks
+  - id: &by_fixed 7138
+    name: BY Fixed
+    uuid: c8ca9875-b80f-4236-a59d-371162fe2048
+    type_id: 12
+network_prefixes:
+# Supplementary services Prefixes
+  - id: 96135
+    prefix: '375602'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3d920bd8-1cba-4d15-a467-c4f255733360
+    country_id: *by
+    network_id: *by_telematic_services
+  - id: 183421
+    prefix: '375740'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 60bbc6f8-89cd-4d7d-a2a2-f8b29e369256
+    country_id: *by
+    network_id: *by_national_traffic_exchange_center
+  - id: 209216
+    prefix: '375805'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7d271ad7-1f0a-4ebd-ba32-cfaff1017144
+    country_id: *by
+    network_id: *by_intelligent_network_services
+  - id: 242362
+    prefix: '3751'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: b8ea3456-1f60-45dd-ad81-3db68ee56dfe
+    country_id: *by
+    network_id: *by_special_services
+  - id: 403463
+    prefix: '375800'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: cf7dc061-8b72-4239-a9d5-274d9447d5c4
+    country_id: *by
+    network_id: *by_home_country_direct_
+  - id: 403514
+    prefix: '375801'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b38a69ee-029d-4431-80f2-4f2b9a1656ad
+    country_id: *by
+    network_id: *by_freephone_services
+  - id: 404888
+    prefix: '375803'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7735049a-4b02-401f-a844-faf06e1ed686
+    country_id: *by
+    network_id: *by_interactive_polling_services_free
+  - id: 406402
+    prefix: '375810'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8dc9d438-ac05-4e84-b9dc-e9fd021f53da
+    country_id: *by
+    network_id: *by_interactive_polling_services_paid
+  - id: 419596
+    prefix: '375820'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a2a6934f-1c15-43bf-b005-87f447f0128b
+    country_id: *by
+    network_id: *by_international_free_services
+  - id: 454947
+    prefix: '375902'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8edba83c-7ba3-4cd3-a67e-aa85c992912e
+    country_id: *by
+    network_id: *by_premium_rate_services
+# Country code Prefixes
+  - id: 241957
+    prefix: '375'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 095f91a2-8e90-4de0-85e4-524303b3aa47
+    country_id: *by
+    network_id: null
+# Fixed Prefixes
+  - id: 260332
+    prefix: '3751713'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b8c74f1c-d58e-4287-9fe2-c99503662e7b
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260333
+    prefix: '3751714'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 60aebf6e-ce74-458d-855b-2bf3a1be491d
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260334
+    prefix: '3751715'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 88e08418-cf53-4dba-b661-08e92c941730
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260335
+    prefix: '3751716'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c8ad8b02-b007-49de-9177-9988fd79ed11
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260336
+    prefix: '3751717'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1a2f2a26-7c1f-41d2-87dd-f38b6ac5a656
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260337
+    prefix: '3751718'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a107c3a4-09ca-4df2-b2f8-1e722df57d86
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260338
+    prefix: '3751719'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 94d965e4-4010-4e53-bb66-1297b0c58ef9
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260373
+    prefix: '375174'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 276d8d24-d3ce-4f79-ac48-f818fa1fbb24
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260425
+    prefix: '375176'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 58d5daf4-7c72-442a-83d8-3b745bbc29a1
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260446
+    prefix: '375177'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 789137f9-b2fd-4e33-a7c0-c2bba2cbea82
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260450
+    prefix: '3751770'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a5669aa3-5067-45ef-81c4-ecac4ca7876d
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260452
+    prefix: '3751771'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9e824ba0-f68a-49c0-bab2-b96a11750878
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260454
+    prefix: '3751772'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f73422e1-2b93-4adb-b50c-fff8c0c9ec80
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260457
+    prefix: '3751774'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1ed85389-9185-4d28-8ad4-800c57ac51e2
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260458
+    prefix: '3751775'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 64b6eed8-339f-42f3-acd1-47c54c1f08f0
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260460
+    prefix: '3751776'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2db438d1-da95-4e98-b195-6e2e72667e39
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260482
+    prefix: '3751792'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fe8a1cc2-0be9-4c59-a09b-b250f0044428
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260485
+    prefix: '3751793'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f1b9b0a6-ae6f-429a-9dc4-922a28521483
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260487
+    prefix: '3751794'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b37f9209-259b-469c-aec3-648b849715d6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260489
+    prefix: '3751795'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7af81c0c-f46a-41b0-a79a-40d2b42a19f8
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260492
+    prefix: '3751796'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8e763a32-78b4-4942-b929-52b99e011f0a
+    country_id: *by
+    network_id: *by_fixed
+  - id: 260495
+    prefix: '3751797'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ede96f1a-223f-485f-b6cd-12fd55d1f8a6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266224
+    prefix: '3751511'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 77243e7e-9faf-42fd-a371-605f163c9958
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266225
+    prefix: '3751512'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 592bac7c-267d-4470-8f23-acaa6f0d19b9
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266227
+    prefix: '3751513'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 89920dec-abd2-4648-bd80-bfbdede2aa24
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266228
+    prefix: '3751514'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e991f87c-4391-47a8-b2c6-fc4541a38992
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266238
+    prefix: '3751515'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 11fad518-2d42-4b22-8a9b-f61676ea15e5
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266242
+    prefix: '375152'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 722f6a31-45e6-4cac-af35-9c4b6fefae43
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266328
+    prefix: '375154'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e6e989ff-b76d-4510-a87c-92c133f947e0
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266400
+    prefix: '3751562'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ab8f6600-735c-400b-b893-df0197c59c8f
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266404
+    prefix: '3751563'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 040ef927-35c8-4e5e-94eb-de4eead55ea6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266407
+    prefix: '3751564'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: de5f3737-ad45-465c-a28d-f3e0f4fa6635
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266510
+    prefix: '3751591'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6ad349ca-cd16-4a85-9476-c4dcb75540fa
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266513
+    prefix: '3751592'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 21762c13-7782-4fcb-9189-4965b03b2c49
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266517
+    prefix: '3751593'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e40261eb-ea11-4032-9c48-de58595f6c99
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266520
+    prefix: '3751594'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6bd90a65-6a26-4d7e-b88a-f9a8edd8cb26
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266532
+    prefix: '3751595'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1c0d1102-63e4-44db-a033-f7eba609103d
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266542
+    prefix: '3751596'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6e9d1c3a-0574-4eef-ab4f-6407c15d835e
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266544
+    prefix: '3751597'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c171eda5-a5c0-4e89-9abc-1553c051a937
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266784
+    prefix: '375162'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6c5922b0-d339-4635-b460-a0768f2bae95
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266799
+    prefix: '375163'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1494eea5-af39-41a1-8109-35df8462160d
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266805
+    prefix: '3751631'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af1d8b47-f851-4a5e-9afc-a64542f21c96
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266807
+    prefix: '3751632'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d02ca561-be71-420b-b54b-a286b67b7d15
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266810
+    prefix: '3751633'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d9e4a12f-438c-409c-8d7b-041ffd298039
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266835
+    prefix: '3751641'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 661cbdba-51f7-479a-90a3-3489236221b6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266837
+    prefix: '3751642'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4b206c95-2318-4356-8756-968d9ddb3996
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266839
+    prefix: '3751643'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9b3efc74-800a-414f-b3e7-bb0e727438f9
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266841
+    prefix: '3751644'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 12ed23b3-7872-4968-a438-e2d394d5a6ae
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266843
+    prefix: '3751645'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e1d56754-355c-40c1-96d4-2171bc78f076
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266844
+    prefix: '3751646'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1e160346-8605-4a50-aa1f-0b761cdc8b30
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266846
+    prefix: '3751647'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3d983d92-50ee-49c5-8ff1-2daa1e648b95
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266849
+    prefix: '375165'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3b12a371-5d4e-492a-87b2-e5f2da670657
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266853
+    prefix: '3751651'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 06e35ed9-2a3f-4396-b54d-d693117649d6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266856
+    prefix: '3751652'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 71202afb-5d37-416b-b8c7-68cb43c76cb2
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266862
+    prefix: '3751655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 242ce143-282b-477d-993b-a18f3db2cc50
+    country_id: *by
+    network_id: *by_fixed
+  - id: 266940
+    prefix: '37517'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ef3463b6-b2bf-4581-88fd-1f92da7c3890
+    country_id: *by
+    network_id: *by_fixed
+  - id: 271754
+    prefix: '375212'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 75ec792b-82d5-4eef-9391-ba5aedfaa28a
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275024
+    prefix: '3752130'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d726eb1b-f634-489e-9540-ed76dd466481
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275026
+    prefix: '3752131'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9435c235-1663-409a-b9ec-11a8c05cfdd6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275028
+    prefix: '3752132'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 267238bb-7a0d-40be-89b4-326d101e373d
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275031
+    prefix: '3752133'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8e15d749-5c0b-4201-88be-9988c7fb9006
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275034
+    prefix: '3752135'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 425d8895-8fc0-4a69-b661-15372ff7a1e1
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275036
+    prefix: '3752136'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b008f1ea-54d3-4352-b060-db57e9802bbb
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275038
+    prefix: '3752137'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7c556c6e-e987-42dc-800d-9ab76a3f515b
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275041
+    prefix: '3752138'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c1d1a4a6-1253-4ba6-a50d-89f098deee1e
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275043
+    prefix: '3752139'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d0e1b333-5eac-4329-8e49-3893b998e4f5
+    country_id: *by
+    network_id: *by_fixed
+  - id: 275045
+    prefix: '375214'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a2dbb02c-6aa3-4086-a67c-3605ffc35dcc
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279455
+    prefix: '3752230'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 033e565d-c32d-46c0-a633-04dbc8fbc4eb
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279457
+    prefix: '3752231'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ff3ebc04-2f5e-4665-85dc-30eb64b7d596
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279460
+    prefix: '3752232'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5bde6f2d-d581-4543-b132-2c45eb8eb114
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279464
+    prefix: '3752233'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 79d22efc-a7e2-442f-a8c8-84b45eeaddc6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279468
+    prefix: '3752234'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4817c5c2-d5f7-4400-bdcb-be58869f9830
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279472
+    prefix: '3752235'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 32ffacf4-b143-4ed1-af61-fc04568dab66
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279476
+    prefix: '3752236'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a1d4fe68-12ed-4d88-ab3a-b193ef35bb8c
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279480
+    prefix: '3752237'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7342a8b3-1495-43ba-9ea4-07194127be11
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279484
+    prefix: '3752238'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1ad827b3-24eb-47fc-9b91-35b717f2024f
+    country_id: *by
+    network_id: *by_fixed
+  - id: 279488
+    prefix: '3752239'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 63d78b96-37c8-4baa-bf29-cbca29a09b15
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282692
+    prefix: '3752151'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2f1647a3-4a1f-47e8-9aec-9cd58d021f0a
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282694
+    prefix: '3752152'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f1931993-cb69-48ae-bae6-c153d8bd19ab
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282696
+    prefix: '3752153'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d66a47da-66ae-4dcb-8489-c734fd52b576
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282698
+    prefix: '3752154'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c443106f-973c-40f8-a1ee-3ab5d9b3a462
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282700
+    prefix: '3752155'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5befe2b6-fd53-4cb7-a284-655eeef4e252
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282701
+    prefix: '3752156'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 55bd7550-d5f2-41a2-bdb5-5c28e7df9b4a
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282703
+    prefix: '3752157'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2286317a-43ce-4bf8-9971-61a61fe312cc
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282705
+    prefix: '3752158'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dab3e8a7-99f8-451c-b5cc-371b9c567314
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282707
+    prefix: '3752159'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dc0ed9f7-57b3-4ca0-83b2-43613c350080
+    country_id: *by
+    network_id: *by_fixed
+  - id: 282709
+    prefix: '375216'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0bace9f0-be76-44e4-a175-c076635fb953
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283772
+    prefix: '375222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 540ddc55-499b-477f-ada6-444cce1c430a
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283900
+    prefix: '3752240'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9066782e-4f86-465b-8691-671799598224
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283903
+    prefix: '3752241'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 18ea48d2-85a7-43f4-8a3b-0e5fbf0f3b39
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283909
+    prefix: '3752242'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2ca26d60-7a0a-4608-9412-93b7bd7f9aa7
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283915
+    prefix: '3752243'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6fc66e85-ed37-4705-bf6b-fd8475ee5223
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283921
+    prefix: '3752244'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7e626534-d5f7-400f-b26f-575365f16023
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283927
+    prefix: '3752245'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5ac3d3f5-1380-42b3-aef3-c8b310857173
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283933
+    prefix: '3752246'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c4488f43-eb5d-405c-b362-846641f74756
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283937
+    prefix: '3752247'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6a0908d6-8a2b-424a-92fc-4ca576d5ce3a
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283941
+    prefix: '3752248'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b6467faa-8af5-4577-bf11-2e51958504e7
+    country_id: *by
+    network_id: *by_fixed
+  - id: 283944
+    prefix: '375225'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 38395e01-e0b6-4ead-b84f-a26ff4aedf20
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287449
+    prefix: '3752340'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bc5f86e8-2215-4a28-b260-d8930fed6829
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287454
+    prefix: '3752342'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 11dabeed-d736-4bc2-9936-65367f14dfaf
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287463
+    prefix: '3752344'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d0587dd9-be3a-446c-96bb-f2f19821ee29
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287476
+    prefix: '3752345'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cd977680-32ce-4f93-be4f-2943f6796cf6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287486
+    prefix: '3752346'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 35689d49-6399-4f28-9d9e-98cec49fe149
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287488
+    prefix: '3752347'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 90f71853-e46c-48fa-9088-b31c0bee34e6
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287638
+    prefix: '3752350'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 47b14e28-4ad5-401e-b5c2-1961613b7683
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287651
+    prefix: '3752353'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9576d914-7eeb-473c-aace-a95bc3a0e54c
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287657
+    prefix: '3752354'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d529dd4c-7adc-454c-b61a-22648e418dcc
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287663
+    prefix: '3752355'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d8926efd-040c-427a-913e-9a1eaf93b6a5
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287668
+    prefix: '3752356'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 810c9467-84ec-4c97-abc0-5a7b1f16dd39
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287672
+    prefix: '3752357'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 139a0538-01be-426d-872b-f880adfd4073
+    country_id: *by
+    network_id: *by_fixed
+  - id: 287685
+    prefix: '375236'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 182fc11b-28c8-4cac-930b-98004c9cad04
+    country_id: *by
+    network_id: *by_fixed
+  - id: 292489
+    prefix: '375232'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 64101489-2772-4aba-9096-bf520f213a61
+    country_id: *by
+    network_id: *by_fixed
+  - id: 293063
+    prefix: '3752330'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b5e40784-5d2b-46ad-bb46-3ca14042dab7
+    country_id: *by
+    network_id: *by_fixed
+  - id: 293069
+    prefix: '3752332'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 34578041-f2b3-48d9-9cba-dc908597c211
+    country_id: *by
+    network_id: *by_fixed
+  - id: 293075
+    prefix: '3752333'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 53061c8f-1743-4d5b-90c9-227bec4c9651
+    country_id: *by
+    network_id: *by_fixed
+  - id: 293080
+    prefix: '3752334'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9a9ff4d3-80f7-4038-aabf-186a4cb1dd9b
+    country_id: *by
+    network_id: *by_fixed
+  - id: 293105
+    prefix: '3752336'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1f23993d-0e7f-403c-99e3-82b38e490cc5
+    country_id: *by
+    network_id: *by_fixed
+  - id: 293109
+    prefix: '3752337'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6aa14499-145c-46b4-949b-d29c62149432
+    country_id: *by
+    network_id: *by_fixed
+  - id: 293114
+    prefix: '3752339'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7b055bfb-3e60-481e-9a5f-97913b02998c
+    country_id: *by
+    network_id: *by_fixed
+  - id: 294315
+    prefix: '37524'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 33ec0cff-90e6-4661-af9c-5d907371a884
+    country_id: *by
+    network_id: *by_fixed

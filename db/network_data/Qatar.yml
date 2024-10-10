@@ -1,0 +1,222 @@
+country_id: &qa 174
+networks:
+# Supplementary services Networks
+  - id: &qa_special_services 5303
+    name: QA Special Services
+    uuid: 966e1106-c6b2-4576-8dc0-13cd9fbc2148
+    type_id: 14
+  - id: &qa_public_services 5358
+    name: QA Public Services
+    uuid: fd6a8f8b-9500-4cd6-a2b1-8ad52f7cd22d
+    type_id: 14
+  - id: &qa_emergency_services 5419
+    name: QA Emergency Services
+    uuid: 9fd42195-1b11-429a-ba09-2ee35a38f875
+    type_id: 14
+  - id: &qa_security_services 6113
+    name: QA Security Services
+    uuid: e795e22e-75cc-4a8b-801d-f04a5b08d160
+    type_id: 14
+  - id: &qa_military_services 6124
+    name: QA Military Services
+    uuid: 03d5bb36-b116-4d50-bda8-e5b34eabf4b2
+    type_id: 14
+  - id: &qa_machine_to_machine_m2m___internet_of_things_iot_services 6133
+    name: QA Machine To Machine M2M _ Internet Of Things Iot Services
+    uuid: 94829eb6-5293-46b8-82e5-6482709d8864
+    type_id: 14
+  - id: &qa_freephone_services 6574
+    name: QA Freephone Services
+    uuid: 06ca0b57-fa72-404b-8906-ce32ac549aab
+    type_id: 14
+  - id: &qa_value_added_services_audiotext_services 6989
+    name: QA Value Added Services Audiotext Services
+    uuid: 944ffafb-6b68-450f-8cd4-cf5e1d486ba6
+    type_id: 14
+# Fixed Networks
+  - id: &qa_fixed 5777
+    name: QA Fixed
+    uuid: f2252f85-7aa1-46ab-b150-0767fdcf3fb8
+    type_id: 12
+# Mobile Networks
+  - id: &qa_ooredoo_mobile 5915
+    name: QA Ooredoo Mobile
+    uuid: 0bfa106e-8111-43c1-9c65-1f73295a36f9
+    type_id: 3
+  - id: &qa_vodafone_mobile 6777
+    name: QA Vodafone Mobile
+    uuid: de115c98-44be-4a11-904f-9cdc012b4438
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242088
+    prefix: '974'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: c075b13e-e3cc-45c7-9d1b-c176d1408611
+    country_id: *qa
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242479
+    prefix: '9741'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 0cd85e33-cd6c-4a83-acf6-bc741a95cbea
+    country_id: *qa
+    network_id: *qa_special_services
+  - id: 242540
+    prefix: '97410'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 9d53c2dd-46a8-426c-b2dc-d16f3237ba49
+    country_id: *qa
+    network_id: *qa_public_services
+  - id: 242628
+    prefix: '974112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 311d7e0e-16ef-4fad-b768-72bb7c98087d
+    country_id: *qa
+    network_id: *qa_emergency_services
+  - id: 242860
+    prefix: '97413'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 3a78557d-77a7-46be-a13e-99f95a59aa0a
+    country_id: *qa
+    network_id: *qa_public_services
+  - id: 243025
+    prefix: '97416'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b83ee843-169a-4fb2-82da-d5faaaec1f5b
+    country_id: *qa
+    network_id: *qa_public_services
+  - id: 247284
+    prefix: '97418'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: a7546729-4839-4347-b505-43c008d7859b
+    country_id: *qa
+    network_id: *qa_public_services
+  - id: 247458
+    prefix: '97420'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 5d8d6261-19c0-42dd-b581-5ad1321accc9
+    country_id: *qa
+    network_id: *qa_special_services
+  - id: 247927
+    prefix: '97423'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c15e994c-bafe-46a2-8795-66b102eaa2cd
+    country_id: *qa
+    network_id: *qa_security_services
+  - id: 248476
+    prefix: '97426'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 623090b4-afa7-4366-a644-f231194aea23
+    country_id: *qa
+    network_id: *qa_military_services
+  - id: 248754
+    prefix: '97428'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 28abcb3f-315f-4c9a-a499-337a3eac65d9
+    country_id: *qa
+    network_id: *qa_machine_to_machine_m2m___internet_of_things_iot_services
+  - id: 248834
+    prefix: '97429'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 87ef0b4e-e62c-4afb-96e3-4bcc4e164bb5
+    country_id: *qa
+    network_id: *qa_machine_to_machine_m2m___internet_of_things_iot_services
+  - id: 253170
+    prefix: '974800'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 10462fe6-cb5e-4f3e-8e1e-5999841d3c23
+    country_id: *qa
+    network_id: *qa_freephone_services
+  - id: 257189
+    prefix: '974900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ae7ba3ea-cb97-49b2-bfd0-2db5970a4f14
+    country_id: *qa
+    network_id: *qa_value_added_services_audiotext_services
+  - id: 257372
+    prefix: '97491'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: d66aa2ca-c867-450e-9cd7-3e4a6df0c046
+    country_id: *qa
+    network_id: *qa_special_services
+  - id: 257380
+    prefix: '974910'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: ee75a756-c7b8-4bf3-a501-0b08fc3e8862
+    country_id: *qa
+    network_id: *qa_emergency_services
+  - id: 258193
+    prefix: '97499'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 1a3c5396-9717-42d9-a2aa-3363fe320f4e
+    country_id: *qa
+    network_id: *qa_emergency_services
+# Fixed Prefixes
+  - id: 243962
+    prefix: '9744'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 826065eb-7282-4fa2-95e3-dd274086c2db
+    country_id: *qa
+    network_id: *qa_fixed
+# Mobile Prefixes
+  - id: 245421
+    prefix: '9746'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5cdd662-bf83-4039-adb8-4404d848230c
+    country_id: *qa
+    network_id: *qa_ooredoo_mobile
+  - id: 248918
+    prefix: '9743'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30a04589-a172-44be-b507-fe3db90e4a70
+    country_id: *qa
+    network_id: *qa_ooredoo_mobile
+  - id: 249602
+    prefix: '9745'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ea75dd44-4b99-4b9b-ba0d-8c6b8e063d98
+    country_id: *qa
+    network_id: *qa_ooredoo_mobile
+  - id: 255272
+    prefix: '9747'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 566339c4-7df5-45c2-955d-2a4c605d748a
+    country_id: *qa
+    network_id: *qa_vodafone_mobile
+  - id: 257596
+    prefix: '97492'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 625268e7-9b03-45ff-8ba9-2f7f29ecefd3
+    country_id: *qa
+    network_id: *qa_ooredoo_mobile
+  - id: 265007
+    prefix: '97497'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 79ec629e-5d1e-474e-9adc-d766f1bd39e3
+    country_id: *qa
+    network_id: *qa_vodafone_mobile

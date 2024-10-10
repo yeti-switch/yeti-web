@@ -1,0 +1,1044 @@
+country_id: &bj 23
+networks:
+# Supplementary services Networks
+  - id: &bj_carrier_selection_services 5095
+    name: BJ Carrier Selection Services
+    uuid: d3a032b4-ae5f-4167-9693-902a95749f90
+    type_id: 14
+  - id: &bj_special_services 5188
+    name: BJ Special Services
+    uuid: b4caac25-979d-4e60-a5de-87461059e600
+    type_id: 14
+  - id: &bj_emergency_services 5380
+    name: BJ Emergency Services
+    uuid: 3597d521-f6b9-4041-bc57-dc7e50cec360
+    type_id: 14
+  - id: &bj_customer_care_services 5497
+    name: BJ Customer Care Services
+    uuid: 86644d21-5923-422c-a6fb-d84241f5f717
+    type_id: 14
+  - id: &bj_information_and_assistance_services 5529
+    name: BJ Information And Assistance Services
+    uuid: b77f2a2b-8ab3-4387-af1f-8da17e2450db
+    type_id: 14
+  - id: &bj_social_value_services 5606
+    name: BJ Social Value Services
+    uuid: 26226627-6631-442f-845a-d0f40c105ad5
+    type_id: 14
+  - id: &bj_routing_number_portability 6136
+    name: BJ Routing Number Portability
+    uuid: 28d155d2-b6a8-4aae-afa4-90bdfffc4ac1
+    type_id: 14
+  - id: &bj_value_added_services_no_charge 6336
+    name: BJ Value Added Services No Charge
+    uuid: 098808dd-505f-4fd8-ab62-2361ddffd980
+    type_id: 14
+  - id: &bj_access_services 6529
+    name: BJ Access Services
+    uuid: 47f40c7e-ed13-4357-8fa2-cce58f240da3
+    type_id: 14
+  - id: &bj_internet_services 6601
+    name: BJ Internet Services
+    uuid: ceec36d5-c1a5-4067-b471-a31021a6c3e4
+    type_id: 14
+  - id: &bj_information_and_videotext_services 6622
+    name: BJ Information And Videotext Services
+    uuid: fe2c1909-7ecb-4da0-9add-4b99b34bc2f5
+    type_id: 14
+  - id: &bj_value_added_services 6634
+    name: BJ Value Added Services
+    uuid: bb31bfe0-7ac1-442f-8ebb-55d326b85e12
+    type_id: 14
+  - id: &bj_service_providers_and_virtual_operators_services 7166
+    name: BJ Service Providers And Virtual Operators Services
+    uuid: b3a6b4ee-cc13-4000-bafa-32d4a013d2f4
+    type_id: 14
+# Fixed Networks
+  - id: &bj_fixed 5133
+    name: BJ Fixed
+    uuid: 278b7263-f6be-4898-9dfd-1692dd2b0296
+    type_id: 12
+# Mobile Networks
+  - id: &bj_celtiis_mobile 5134
+    name: BJ Celtiis Mobile
+    uuid: b99c76c3-e947-42b4-b4d7-bda7b93d4aeb
+    type_id: 3
+  - id: &bj_mtn_mobile 5135
+    name: BJ Mtn Mobile
+    uuid: 168cc594-28b0-4ebf-8d86-76bde3c3b55d
+    type_id: 3
+  - id: &bj_moov_africa_mobile 5136
+    name: BJ Moov Africa Mobile
+    uuid: f0a8ffa3-8db6-4d08-aeed-a7ee6f658d61
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 241950
+    prefix: '229'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 2ff4a114-f7ca-4170-996a-c7e716c6f894
+    country_id: *bj
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242140
+    prefix: '2290'
+    number_min_length: 5
+    number_max_length: 6
+    uuid: 88912e6d-8582-42f6-b2dd-de6e4d2af869
+    country_id: *bj
+    network_id: *bj_carrier_selection_services
+  - id: 242355
+    prefix: '2291'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 6c559236-87ae-47dd-9eb9-eacfe6a106d0
+    country_id: *bj
+    network_id: *bj_special_services
+  - id: 242581
+    prefix: '22911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 02c75766-4fce-467c-b3fa-06979a14f219
+    country_id: *bj
+    network_id: *bj_emergency_services
+  - id: 242796
+    prefix: '22912'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 220996c3-0d7c-4006-8a6c-af53f3c6d856
+    country_id: *bj
+    network_id: *bj_customer_care_services
+  - id: 242842
+    prefix: '22913'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: cdeb77b0-4135-4450-bef4-aa30b2d37bf7
+    country_id: *bj
+    network_id: *bj_information_and_assistance_services
+  - id: 243007
+    prefix: '22916'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 8908b3dc-526a-4b54-bafd-90cd1a478de3
+    country_id: *bj
+    network_id: *bj_social_value_services
+  - id: 248881
+    prefix: '2293'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: f10e75cc-711a-4682-9c54-d257a1efa847
+    country_id: *bj
+    network_id: *bj_routing_number_portability
+  - id: 251865
+    prefix: '22973'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 251ea42f-0850-43fe-89f5-ea79227dd2cf
+    country_id: *bj
+    network_id: *bj_value_added_services_no_charge
+  - id: 252049
+    prefix: '22974'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 6f572e52-2f39-4c5d-b414-ac12ed72166b
+    country_id: *bj
+    network_id: *bj_value_added_services_no_charge
+  - id: 252540
+    prefix: '22975'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: f6ad41f5-f483-4456-b6cc-704c8b84c432
+    country_id: *bj
+    network_id: *bj_value_added_services_no_charge
+  - id: 253117
+    prefix: '22980'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 303c670f-154c-4fdb-ab2f-73339d4f39b0
+    country_id: *bj
+    network_id: *bj_access_services
+  - id: 253205
+    prefix: '229801'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f71d78f-df0d-41f4-9b24-2537ff412b3e
+    country_id: *bj
+    network_id: *bj_internet_services
+  - id: 253266
+    prefix: '229807'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50b8cf5d-049e-469b-849e-166078558b53
+    country_id: *bj
+    network_id: *bj_information_and_videotext_services
+  - id: 253306
+    prefix: '22981'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 228f5714-6bdb-441b-a431-c7a4878bfd46
+    country_id: *bj
+    network_id: *bj_value_added_services
+  - id: 255233
+    prefix: '2297'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 35cd01e1-5ef8-4565-967b-03051022978e
+    country_id: *bj
+    network_id: *bj_value_added_services
+  - id: 256660
+    prefix: '2298'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cdde3ae8-8990-4a3d-b1c0-fa9ff45361f9
+    country_id: *bj
+    network_id: *bj_special_services
+  - id: 263695
+    prefix: '22985'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 910591ef-805f-4d35-aa4f-316da0e2755a
+    country_id: *bj
+    network_id: *bj_service_providers_and_virtual_operators_services
+# Fixed Prefixes
+  - id: 242181
+    prefix: '2290120'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a62cb39e-81b3-4517-8db7-a4c3ce3c181b
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 242182
+    prefix: '2290121'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 0b56b378-b5d7-4aa8-8b11-83f7479cfc06
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 242183
+    prefix: '2290122'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ee61a0ca-31ed-4b60-a064-4e2f071c1330
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 242184
+    prefix: '2290123'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b03be11a-3e0c-4f97-a06b-b6bd4c95c3e9
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 242185
+    prefix: '2290124'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 699358a0-c411-4db0-afab-8e1c33f051d0
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247389
+    prefix: '2292'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3048c15b-8d1d-4680-94ce-ef12db97eab9
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247448
+    prefix: '22920'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 39bd6efd-72b6-4830-b9a9-fb63a8c441c4
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247494
+    prefix: '2292021'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 90fcece0-d41e-45ef-9069-4f4e953e3d10
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247496
+    prefix: '2292022'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2eb3bd2-1c5c-4465-b350-b59ee5f104b6
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247499
+    prefix: '2292024'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0fb055c-5e86-4f78-8b30-c2dea32d87f5
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247501
+    prefix: '2292025'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8810536-0e92-44bb-b314-71b6116e4888
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247503
+    prefix: '2292026'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 92299f05-9247-458c-9290-549ebada7de9
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247505
+    prefix: '2292027'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8799a720-1e3a-4b7d-ab36-ccd8931036ff
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247508
+    prefix: '2292029'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 997da700-4597-4be8-a921-f6b4317c5abc
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247619
+    prefix: '22921'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 95a41ffa-53ec-4dcb-9329-c6ab2854c310
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247656
+    prefix: '2292130'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d264a525-9b8b-4877-84e9-45441f104ac1
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247657
+    prefix: '2292131'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 80f23c59-d225-488e-b4e2-f93689c6ffa2
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247659
+    prefix: '2292132'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0c9426cb-ec71-46ca-96c1-99c081b34d21
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247660
+    prefix: '2292133'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68f1871f-7b84-4224-b278-4ae921f73e8d
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247661
+    prefix: '2292134'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f5ddbeaf-43ae-4996-b207-b9a684190e10
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247662
+    prefix: '2292135'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 76ebee55-bfb8-47d1-898d-3d3cbb62874f
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247663
+    prefix: '2292136'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2f696a09-8ea8-4253-a079-069fdb1d2901
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247665
+    prefix: '2292137'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7bd0f4c-e8a5-4625-9e3f-d4c9b0954561
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247666
+    prefix: '2292138'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e66d711-aba5-4942-a8b2-6bbf50dc2bc4
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247667
+    prefix: '2292139'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 394ee148-7d85-4a5a-a75c-fed41090da2e
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247695
+    prefix: '22921736'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1655df4c-015b-4bb5-b875-e86a293ef1e7
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247716
+    prefix: '22922'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5caf8d5-2e74-4a38-a045-984dba532c89
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247859
+    prefix: '2292241'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d6eff8b-3a60-4689-b10a-038df766c90c
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247860
+    prefix: '2292243'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 650e9cf1-7422-4fae-b417-dcb4f6f85685
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247861
+    prefix: '2292246'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58f0c7d6-fdff-48d9-962b-563ae68f5ce2
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247862
+    prefix: '2292249'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 95606903-5e8e-442c-bfe4-13020258dd13
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247867
+    prefix: '2292250'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4018aef9-8342-4747-95cb-51fc9efbb139
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247868
+    prefix: '2292251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb3b7168-c388-47c3-b244-6bd41b847f78
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247873
+    prefix: '2292252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a9dfb94e-9c47-4796-9f98-3fb9273c5006
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247874
+    prefix: '2292253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8ffa4959-b248-4e97-9051-a09bdc651b14
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247875
+    prefix: '2292254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0b46581-c0f9-47e6-be05-ebbb0505757f
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247876
+    prefix: '2292255'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ace322a2-230e-4d5c-ab32-92c0ad67c316
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247877
+    prefix: '2292259'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 29e804cc-92d5-4dae-9436-86130929655c
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 247911
+    prefix: '22923'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7a145d3d-ce44-4f23-b0b4-158cc1cbc844
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248057
+    prefix: '2292361'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c44149f2-c7c9-4b6b-b1d2-be8977c35ea1
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248058
+    prefix: '2292362'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a94e8ff-b31e-4106-96e9-ab523bd6e503
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248059
+    prefix: '2292363'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b29d3cb2-7a77-45f4-8fe3-ed4b97e5f566
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248062
+    prefix: '2292365'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94c12f69-cb8e-4e76-8b40-f311f9e7f332
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248064
+    prefix: '2292367'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3339f5b0-5c71-4f4a-8361-1f4926ef2baa
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248078
+    prefix: '2292380'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2cfdde41-8147-44eb-802a-9ad431c4b450
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248079
+    prefix: '2292382'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c5c116a4-6069-4084-b1a3-770fb5f27eab
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248080
+    prefix: '2292383'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34d9c0f7-8ede-405a-9b36-bd35f7073641
+    country_id: *bj
+    network_id: *bj_fixed
+  - id: 248103
+    prefix: '22924'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d9328008-1b9c-4962-a1a9-4ce64b0d93e2
+    country_id: *bj
+    network_id: *bj_fixed
+# Mobile Prefixes
+  - id: 242186
+    prefix: '2290140'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4ae35963-b10e-4696-a2b8-7cd41cd4b832
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 242188
+    prefix: '2290141'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3cde18a7-1312-49c7-8614-6d5dbf7a15ca
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 242190
+    prefix: '2290142'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: dbfb25f2-c8a0-4af6-b4e7-23cc4a4e8b80
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242192
+    prefix: '2290143'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: cde07b30-7ea6-4655-ac8d-7a577fe63616
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 242194
+    prefix: '2290144'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 565d3581-3f09-4031-ad78-7d242192400c
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 242195
+    prefix: '2290145'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7b5129fd-78cc-45fc-bb77-3d7a612d1c45
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242196
+    prefix: '2290146'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b7719018-df22-4c5d-a3d2-d2ab0db1ae2d
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242197
+    prefix: '2290147'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 9dd0ea42-7db1-4d8f-8512-aee38107f276
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 242199
+    prefix: '2290150'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f1cdcbaa-f96a-4778-9277-4e801db94b49
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242201
+    prefix: '2290151'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5a8d9f17-7c00-4b1d-900a-255e9724cbb5
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242203
+    prefix: '2290152'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 734ddedf-3c42-4cdd-8a03-1ae65df03b1e
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242205
+    prefix: '2290153'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c56630ce-af1b-49a3-b2b8-989109569e60
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242207
+    prefix: '2290154'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: bdeb7e77-9949-4c05-9b28-ae836e5d6f1f
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242208
+    prefix: '2290155'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e58cec77-0803-4a52-a34e-b1b5bd68fceb
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242209
+    prefix: '2290156'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: db70b8f1-ac49-4791-82e6-4b4d27c23728
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242210
+    prefix: '2290157'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 6a1584af-ce2c-4e8a-beb3-f47f9ec8fd43
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242211
+    prefix: '2290158'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4168aacb-a496-441d-a95c-433c2e6a9209
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242212
+    prefix: '2290159'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 68407d4e-fcfe-4f9b-bd7d-5f4423b7c646
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242213
+    prefix: '2290160'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: beef895c-e4b6-4a62-a485-a3291169e646
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242214
+    prefix: '2290161'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 27069919-543a-4ad0-83a6-29c4084261cc
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242215
+    prefix: '2290162'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 802b5c5a-fbf3-4028-83e6-6cbe18d3b644
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242216
+    prefix: '2290163'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 9b52170b-51a7-46a9-b557-65fcee0f91c0
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242217
+    prefix: '2290164'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3e948658-64a1-47b2-a338-4e3314813b6d
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242218
+    prefix: '2290165'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c804c9c5-d5ed-4b3c-ad9b-a5820114567d
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242219
+    prefix: '2290166'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4dbb0a9e-2a11-48fa-91b8-7830a3030d19
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242220
+    prefix: '2290167'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: dd9cd814-4f81-4c3f-9357-fbb3a87b0ef7
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242221
+    prefix: '2290168'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f3238eb2-e8a3-4bb6-a25f-2bc41df0dfcd
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242222
+    prefix: '2290169'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 680d2d72-acce-4219-9cc4-fc4cade03e43
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242227
+    prefix: '2290190'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 278ec065-d5e3-472e-ae99-3b3e7c3f14ae
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242228
+    prefix: '2290191'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7db8f04c-c508-49dc-ba35-72ea1dedd8bd
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242229
+    prefix: '2290194'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b9d7bc8c-e34f-40cc-b4d5-7e3b13e62376
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242230
+    prefix: '2290195'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d0cf8b4d-6d54-4984-ada1-48e0b92e887a
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242231
+    prefix: '2290196'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e15c280d-f6ee-4744-8e85-3763c549af27
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242232
+    prefix: '2290197'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f4c31fa0-c28e-41ca-bd0a-60f34a20af66
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 242233
+    prefix: '2290198'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f4ea16a2-591e-4fab-a7a4-50c370805175
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 242234
+    prefix: '2290199'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f15845d4-ba32-4689-a1cc-c545a16e5cf2
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 243974
+    prefix: '22940'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 677a2a25-c141-48ca-bbb1-4da8a144fdb3
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 244126
+    prefix: '22941'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73b3324e-073f-43c7-ae2e-b8a4c3e6cfcb
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 244227
+    prefix: '22942'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2b14092d-88f7-4daf-b492-b5a02128c4af
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 244327
+    prefix: '22943'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5aa06d84-ce1f-419a-8d54-8f9f894292d7
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 244481
+    prefix: '22944'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d2ef9342-5c12-4a1d-9a6d-853a9e8a2d77
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 244626
+    prefix: '22945'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a2287a4-22b1-4c36-beff-4160defec636
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 245145
+    prefix: '22958'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 18085d88-4781-441d-9b9f-a05510297cef
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 245248
+    prefix: '22959'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34d31aca-4b00-4265-bd2c-282100fd6576
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 245432
+    prefix: '22960'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec34ff20-8e01-4485-9a64-88dcecb857f1
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 249078
+    prefix: '22946'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38b8f62a-8edd-4273-a4be-65bb5f194b39
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 249296
+    prefix: '22947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3b73922-6d2f-40e2-a8bc-f21b171d31e2
+    country_id: *bj
+    network_id: *bj_celtiis_mobile
+  - id: 249611
+    prefix: '22950'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0150df3c-eaf1-443c-b24a-539a77697ab2
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 249687
+    prefix: '22951'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 053a6dce-4eb1-4a65-8ae8-7bbab334b0c8
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 249758
+    prefix: '22952'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e2c1d692-5714-4ac4-810c-66869ec4afa2
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 249915
+    prefix: '22953'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: df22c5a0-87a5-424e-b6fd-accfe29fae55
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 250006
+    prefix: '22954'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 55ca0721-17ad-4a8d-8015-2586d60cbabd
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 250104
+    prefix: '22955'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0572fa8b-9e95-4b15-8672-261bd4308e41
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 250190
+    prefix: '22956'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 780dfda5-b9b0-4f13-b43a-75e4befe9de3
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 250231
+    prefix: '22957'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 466bbbc6-197f-46b5-b062-6412ec08fab3
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 250655
+    prefix: '22963'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 249cc02d-8437-4df2-a456-d04b9b02750e
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 251017
+    prefix: '22964'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6c37bf97-cbcc-43ed-bb5f-66ddd883a37c
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 251233
+    prefix: '22965'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 957fbdde-5dd9-41c1-932a-0241ca7ea814
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 253979
+    prefix: '22961'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38229e1a-ebc5-433f-aad7-7cfb3e966411
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 254109
+    prefix: '22962'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cbe92c4a-41ad-4adf-ad71-eb5a618a4296
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 254284
+    prefix: '22966'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 349d8019-d671-4ac2-aeb9-0196ed76e509
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 254601
+    prefix: '22967'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 69a37bb7-a890-48fe-b85c-b167899bf0be
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 254674
+    prefix: '22968'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 14b6ee92-0911-4a54-9576-a583377523f7
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 254862
+    prefix: '22969'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: baa601d0-f1d6-4e61-ba64-f8106e55b649
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 257152
+    prefix: '22990'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 76c59f51-d384-47cd-8f1c-7f03d476b8d3
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 257354
+    prefix: '22991'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d37bc458-f340-48fd-a1d0-f956d09ec41d
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 258172
+    prefix: '22999'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50e528c3-bc25-4847-a5ff-581d603d2f46
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 264189
+    prefix: '22994'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7905e393-a031-49e3-aea6-2c8398923ab1
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 264429
+    prefix: '22995'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 979e108f-6d28-4bd0-bcf2-1d5ba7832263
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile
+  - id: 264709
+    prefix: '22996'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 63d53132-c593-4e57-930e-4c8c7478425a
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 264991
+    prefix: '22997'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d07f392f-a88d-42c8-a089-8f7f0c417ed7
+    country_id: *bj
+    network_id: *bj_mtn_mobile
+  - id: 265260
+    prefix: '22998'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45652ce4-9f83-423f-948c-13c3a0967383
+    country_id: *bj
+    network_id: *bj_moov_africa_mobile

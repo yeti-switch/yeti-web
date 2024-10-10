@@ -1,0 +1,300 @@
+country_id: &km 48
+networks:
+# Supplementary services Networks
+  - id: &km_special_services 5209
+    name: KM Special Services
+    uuid: 5dba71e7-5c2a-49de-9c8c-4e82e917625e
+    type_id: 14
+  - id: &km_emergency_services 5382
+    name: KM Emergency Services
+    uuid: 724bb36c-a453-4681-8233-69e4bc15021e
+    type_id: 14
+  - id: &km_value_added_services 6895
+    name: KM Value Added Services
+    uuid: 75ec9b26-c047-4258-a654-7452cd653dd8
+    type_id: 14
+# Mobile Networks
+  - id: &km_telma_mobile 5758
+    name: KM Telma Mobile
+    uuid: 8bbb9779-bb88-43b0-8674-ed36e00fce06
+    type_id: 3
+  - id: &km_huri_mobile 6138
+    name: KM Huri Mobile
+    uuid: 1de55e20-43f4-4332-b3b7-82ce8e64edac
+    type_id: 3
+# Fixed Networks
+  - id: &km_fixed 6306
+    name: KM Fixed
+    uuid: 081582dc-6f8c-40d4-8eb2-a1acc53a82a6
+    type_id: 12
+network_prefixes:
+# Country code Prefixes
+  - id: 241974
+    prefix: '269'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: fbaa4052-3031-4d24-962f-0ce94807587d
+    country_id: *km
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242378
+    prefix: '2691'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 3cf5cbfb-50c8-4eb3-995c-7fb8fcb3291a
+    country_id: *km
+    network_id: *km_special_services
+  - id: 242583
+    prefix: '26911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 6a6bd05b-36ee-4b9d-842b-ab8d44b82b66
+    country_id: *km
+    network_id: *km_emergency_services
+  - id: 249565
+    prefix: '2695'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 66b9de4e-805d-404e-ad69-37d42bd95d2c
+    country_id: *km
+    network_id: *km_special_services
+  - id: 256669
+    prefix: '2698'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ff9cdc5d-a2a6-49e7-8a7c-15e505b200d1
+    country_id: *km
+    network_id: *km_value_added_services
+# Mobile Prefixes
+  - id: 243925
+    prefix: '2694'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20fad497-5250-4b91-b4f6-117eae9fe081
+    country_id: *km
+    network_id: *km_telma_mobile
+  - id: 248888
+    prefix: '2693'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e3ffa2de-9266-4b61-89b5-05a07c5b5af2
+    country_id: *km
+    network_id: *km_huri_mobile
+# Fixed Prefixes
+  - id: 251730
+    prefix: '26971'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 54e8ea26-ae10-4cb5-8b02-1652cacee5e6
+    country_id: *km
+    network_id: *km_fixed
+  - id: 251816
+    prefix: '26972'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5c54d222-3d12-4eb4-b032-cc399e4c752d
+    country_id: *km
+    network_id: *km_fixed
+  - id: 251869
+    prefix: '26973'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1c9921f-78b1-46da-ba77-8bc5c5e9cd6d
+    country_id: *km
+    network_id: *km_fixed
+  - id: 252052
+    prefix: '26974'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6299ade8-b91b-4c50-b515-c6d2fa0bc101
+    country_id: *km
+    network_id: *km_fixed
+  - id: 252544
+    prefix: '26975'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 298b51b3-5e58-4189-9449-4433d18fd452
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255443
+    prefix: '26976'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 92b56a52-300e-44bc-ade8-45d23d854ea9
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255621
+    prefix: '26977'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0f5a247e-4224-4355-b879-3bef40f591d7
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255714
+    prefix: '2697709'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2415589e-de5d-4350-942f-4de471ad0c3c
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255719
+    prefix: '269771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee0da3cf-81ee-4b61-9f61-b87148b4a9dc
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255724
+    prefix: '2697710'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f2afb1a-13a0-4dd0-bac5-ef12c2937d98
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255731
+    prefix: '2697711'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f1a172a8-4305-43a2-be73-2fcb20a5a4a3
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255745
+    prefix: '2697712'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 22c15662-dc1d-4d38-9678-e16d223056d2
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255749
+    prefix: '2697713'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0228def3-5fee-4292-9afa-01769f4f4703
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255753
+    prefix: '2697714'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 97022447-6452-4952-ad89-b245b5ac755e
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255757
+    prefix: '2697715'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a0dda68c-7443-427f-b915-05aafca48d46
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255770
+    prefix: '2697716'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d0f26e78-ecba-478a-aa4d-cdeb419373bd
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255785
+    prefix: '2697718'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e7b34154-289e-453a-b90c-a2b4391b219b
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255805
+    prefix: '269772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 13a5933c-cc00-4914-901a-28b159df8ff8
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255810
+    prefix: '2697720'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5c4ee26b-d9b1-4f01-9c48-044b87d71d26
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255814
+    prefix: '2697721'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f118008c-de72-499b-9886-cd171cb2fb90
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255817
+    prefix: '2697722'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e27296c6-9338-4d01-8945-50ce19f0475b
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255822
+    prefix: '2697723'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3a462c1c-98cc-457a-9e50-16f985c5ec1d
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255825
+    prefix: '2697724'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 81d581ca-6fa2-4585-aa65-9e6a5c4ef9f4
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255837
+    prefix: '2697725'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7a9c2bb5-1d92-4597-8ee7-019da480b04d
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255849
+    prefix: '2697726'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca975830-23b7-489e-ae6b-5489aeab31af
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255856
+    prefix: '2697728'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bbc12928-2fcf-4a8a-a1bf-818f0ba1f48b
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255862
+    prefix: '269773'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1503e361-7805-40c2-ae15-e4ef77ca7854
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255904
+    prefix: '269775'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f8fc2942-a113-4d11-a19d-9190ac475a4f
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255960
+    prefix: '269777'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f678baaa-2162-44ee-903e-eca7ce1c0856
+    country_id: *km
+    network_id: *km_fixed
+  - id: 255997
+    prefix: '269778'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 078df774-d27c-4fc4-aa90-6b93aac41cbe
+    country_id: *km
+    network_id: *km_fixed
+  - id: 256048
+    prefix: '269779'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f46bb4c3-4bd1-4e69-890e-11192eb54f52
+    country_id: *km
+    network_id: *km_fixed

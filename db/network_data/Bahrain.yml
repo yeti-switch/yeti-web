@@ -1,0 +1,1019 @@
+country_id: &bh 17
+networks:
+# Supplementary services Networks
+  - id: &bh_special_services 5096
+    name: BH Special Services
+    uuid: 601d48bf-0d59-4431-a08c-dada379fade4
+    type_id: 14
+  - id: &bh_off_net_special_services_on_net_sms_services 5119
+    name: BH Off_Net Special Services On_Net Sms Services
+    uuid: d656e052-4df2-47d7-b0a2-95cf267dc092
+    type_id: 14
+  - id: &bh_national_carrier_selection_codes 5138
+    name: BH National Carrier Selection Codes
+    uuid: ac23b5ba-44eb-435b-9e9b-5c45a74497fd
+    type_id: 14
+  - id: &bh_on_net_special_services_on_net_sms_services 5152
+    name: BH On_Net Special Services On_Net Sms Services
+    uuid: 92fd2498-cf93-46e9-a60d-97b3cf0bb114
+    type_id: 14
+  - id: &bh_emergency_services 5405
+    name: BH Emergency Services
+    uuid: 2c56b9cb-56f5-47cc-9c98-3894d2315f56
+    type_id: 14
+  - id: &bh_freephone_services 6530
+    name: BH Freephone Services
+    uuid: 2be7b513-ae37-4d1a-a513-2bf37205e0a2
+    type_id: 14
+  - id: &bh_special_services_free_on_net_sms_services_free 6635
+    name: BH Special Services Free On_Net Sms Services Free
+    uuid: 3c00cf6e-2dc5-423e-aebc-2ed31486d067
+    type_id: 14
+  - id: &bh_shared_cost_services 6688
+    name: BH Shared Cost Services
+    uuid: 16eb9230-df7e-4552-805b-9908e6b0d773
+    type_id: 14
+  - id: &bh_special_services_on_net_sms_services 6912
+    name: BH Special Services On_Net Sms Services
+    uuid: eff2e881-354e-4dff-8d7a-9ae8d6b8b99b
+    type_id: 14
+  - id: &bh_premium_rate_services 6936
+    name: BH Premium Rate Services
+    uuid: a31237b4-8ff7-4355-a56d-55380cd4c799
+    type_id: 14
+  - id: &bh_premium_rate_services_low_charge 6963
+    name: BH Premium Rate Services Low Charge
+    uuid: c1bd3b05-5c0b-40e4-a68d-0bb8bf86a6aa
+    type_id: 14
+  - id: &bh_off_net_prs_low_charge_on_net_sms_prs_low_charge 7019
+    name: BH Off_Net Prs Low Charge On_Net Sms Prs Low Charge
+    uuid: 6a1646f5-1bb5-47fa-9f71-65fe7e3424e1
+    type_id: 14
+  - id: &bh_special_services_shared_cost_on_net_sms_services_shared_cost 7167
+    name: BH Special Services Shared Cost On_Net Sms Services Shared Cost
+    uuid: 16cb1e07-0efd-4282-87fe-d28020e0c6be
+    type_id: 14
+  - id: &bh_off_net_prs_medium_charge_on_net_sms_prs_medium_charge 7198
+    name: BH Off_Net Prs Medium Charge On_Net Sms Prs Medium Charge
+    uuid: cebdf5b2-5846-4160-9cd9-329848529478
+    type_id: 14
+  - id: &bh_premium_rate_services_medium_charge 7199
+    name: BH Premium Rate Services Medium Charge
+    uuid: ffbf40c1-8632-4d78-b172-c4e4f13e21ec
+    type_id: 14
+  - id: &bh_premium_rate_services_high_charge 7210
+    name: BH Premium Rate Services High Charge
+    uuid: 213abe62-9df7-4072-ae28-78016c31d3d4
+    type_id: 14
+  - id: &bh_off_net_prs_high_charge_on_net_sms_prs_high_charge 7217
+    name: BH Off_Net Prs High Charge On_Net Sms Prs High Charge
+    uuid: 2e75650d-3c1b-496e-848b-b7e7c8a98bbb
+    type_id: 14
+# Fixed Networks
+  - id: &bh_fixed 5530
+    name: BH Fixed
+    uuid: 3ee3775b-2175-4d05-9585-1a6047f0ae35
+    type_id: 12
+# Mobile Networks
+  - id: &bh_royal_court_mobile 5664
+    name: BH Royal Court Mobile
+    uuid: 7da5f7d5-0493-450f-ba22-204cd787bc37
+    type_id: 3
+  - id: &bh_batelco_mobile 5705
+    name: BH Batelco Mobile
+    uuid: 96dac0c3-82d0-4716-b4bf-8389afd60392
+    type_id: 3
+  - id: &bh_stc_mobile 5707
+    name: BH Stc Mobile
+    uuid: f0395973-f003-4094-aaa5-de0560c0e589
+    type_id: 3
+  - id: &bh_zain_mobile 5728
+    name: BH Zain Mobile
+    uuid: 1962b667-28c1-4c13-a549-9881b4fa9210
+    type_id: 3
+  - id: &bh_mobile 6137
+    name: BH Mobile
+    uuid: 3eb39a76-a0fa-401e-afb0-c2cfddb23ba9
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 241955
+    prefix: '973'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 1c7b8db1-7b0a-4181-9f14-113a2e2f0f03
+    country_id: *bh
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242141
+    prefix: '9730'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 2fe05e25-2376-4be2-bc82-4a92dd4fa362
+    country_id: *bh
+    network_id: *bh_special_services
+  - id: 242164
+    prefix: '97301'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 57a5c966-fee4-4f84-a202-678196735cc3
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 242236
+    prefix: '97302'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f6192b6d-ade9-468c-958b-4c45850a7d03
+    country_id: *bh
+    network_id: *bh_national_carrier_selection_codes
+  - id: 242280
+    prefix: '97306'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 0155c211-392a-4413-9936-c78d7c1f7b61
+    country_id: *bh
+    network_id: *bh_on_net_special_services_on_net_sms_services
+  - id: 242286
+    prefix: '97307'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c67359e4-331b-4f2e-9904-437560035bf0
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 242360
+    prefix: '9731'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 2d12b5aa-8c6c-4215-b2a7-f97983a6f52d
+    country_id: *bh
+    network_id: *bh_special_services
+  - id: 242529
+    prefix: '97310'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 97a91066-de97-4dba-abd1-12dd4f9d7feb
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 242612
+    prefix: '973112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 31c756cb-e758-479d-91a7-694dda0455e6
+    country_id: *bh
+    network_id: *bh_emergency_services
+  - id: 242797
+    prefix: '97312'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 0ea96a1c-a010-4e3b-9485-eb389027564a
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 242915
+    prefix: '973140'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 7ce6bd20-8422-4e4a-a0a0-bd36a3246f8f
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 242919
+    prefix: '973141'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 31669c60-e200-4ec0-b167-0d33ea70bfb9
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 242961
+    prefix: '973151'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 39865d97-9425-47a7-94f6-0c5d5132c2ca
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 247314
+    prefix: '973181'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: f6913a9c-e6b8-4faf-a6d0-b16781837681
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 247326
+    prefix: '973188'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 44b1b0a3-59b3-469b-bb72-bf2e4118c27c
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 247363
+    prefix: '973191'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: e9bb80d4-c87b-464a-b44a-51fc600fae20
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 247372
+    prefix: '973196'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: f4c087f8-06d1-4b3f-9895-a20166340f7b
+    country_id: *bh
+    network_id: *bh_off_net_special_services_on_net_sms_services
+  - id: 247378
+    prefix: '973199'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 2ec39b10-4435-4fe1-a439-f0b691cddf1c
+    country_id: *bh
+    network_id: *bh_emergency_services
+  - id: 253118
+    prefix: '97380'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 03fb90af-8929-4d27-a83d-a2ff92bf485f
+    country_id: *bh
+    network_id: *bh_freephone_services
+  - id: 253307
+    prefix: '97381'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: fb3641d5-f155-4850-97e4-4d3f0dede0f3
+    country_id: *bh
+    network_id: *bh_special_services_free_on_net_sms_services_free
+  - id: 253710
+    prefix: '97384'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 898b5ff7-5575-45e0-8619-ce2667fa06b6
+    country_id: *bh
+    network_id: *bh_shared_cost_services
+  - id: 256661
+    prefix: '9738'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 290d0550-6726-4d59-940f-ebcfd4027268
+    country_id: *bh
+    network_id: *bh_special_services
+  - id: 256830
+    prefix: '97388'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 0f7ed117-8afe-4cb4-85bf-6dff4ab38ddf
+    country_id: *bh
+    network_id: *bh_special_services_on_net_sms_services
+  - id: 257079
+    prefix: '9739'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: b5367a1d-d0f4-48f0-ad3e-68c544f06bab
+    country_id: *bh
+    network_id: *bh_premium_rate_services
+  - id: 257153
+    prefix: '97390'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 470ff053-7d69-4e52-9a4b-d18f478af829
+    country_id: *bh
+    network_id: *bh_premium_rate_services_low_charge
+  - id: 257355
+    prefix: '97391'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 092b6e0c-4352-4096-8375-e41fcfbf67c9
+    country_id: *bh
+    network_id: *bh_off_net_prs_low_charge_on_net_sms_prs_low_charge
+  - id: 258173
+    prefix: '97399'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: b351b823-3ad8-49e4-be66-e441198125ef
+    country_id: *bh
+    network_id: *bh_emergency_services
+  - id: 263696
+    prefix: '97385'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 8811bc3f-4974-4eb3-bbda-9a605b05609e
+    country_id: *bh
+    network_id: *bh_special_services_shared_cost_on_net_sms_services_shared_cost
+  - id: 263996
+    prefix: '97387'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 574afa3f-85b2-4dd7-a7ef-1f888a7b86e0
+    country_id: *bh
+    network_id: *bh_special_services
+  - id: 264190
+    prefix: '97394'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b98ddafb-1194-43c1-8c54-cc561795ed3c
+    country_id: *bh
+    network_id: *bh_off_net_prs_medium_charge_on_net_sms_prs_medium_charge
+  - id: 264430
+    prefix: '97395'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45de8001-c92a-44dd-8099-e43fdfb1ad31
+    country_id: *bh
+    network_id: *bh_premium_rate_services_medium_charge
+  - id: 264992
+    prefix: '97397'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30ab91ee-69f8-452c-bf71-d8cb84b78c61
+    country_id: *bh
+    network_id: *bh_premium_rate_services_high_charge
+  - id: 265261
+    prefix: '97398'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 14c5096c-a0f5-4d8b-9623-85d74122f945
+    country_id: *bh
+    network_id: *bh_off_net_prs_high_charge_on_net_sms_prs_high_charge
+# Fixed Prefixes
+  - id: 242843
+    prefix: '97313'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 29e8afc5-f269-4e45-944f-6a1cddff1846
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 243008
+    prefix: '97316'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6b2b9af-74eb-4cfe-af57-a31f6722a4b3
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 243050
+    prefix: '97317'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0aa0a74d-ccff-4b12-b1fb-702100cb2aef
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 251254
+    prefix: '9736500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 78022b3c-5a58-4ba3-8ec7-671be550c8c1
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254005
+    prefix: '9736111'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d246253d-783d-431a-a67a-2359977be13c
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254312
+    prefix: '97366000'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 13368204-a3f8-4316-b1de-5346d7be1c78
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254313
+    prefix: '97366001'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aaf7b8d9-f313-4f6f-b22c-aeda9ee5511a
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254315
+    prefix: '97366002'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7bc1adec-1921-4e80-ae28-88d6b1bcf08f
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254316
+    prefix: '97366003'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87101bff-a7a1-497c-a701-aa7ad3d30301
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254317
+    prefix: '97366004'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 510661b8-4288-460c-9462-1e24d1c1cfc0
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254318
+    prefix: '97366006'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07ae33a7-0c5a-40ca-8a4b-75ad95126227
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254319
+    prefix: '97366007'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a92ff21c-ae55-4ad7-849e-4e2ca3c25fd8
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254382
+    prefix: '9736631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c1f8c23a-b2f6-4eae-b588-5e9f6faeb641
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254383
+    prefix: '9736632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 249bd3a2-98f8-4dd3-bb0f-35d5291f61c7
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254446
+    prefix: '97366555'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3ce4c547-602a-43df-aac9-e3a46d957b1e
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254486
+    prefix: '9736677'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7519663-aa55-4445-ad61-4b6b16bdba4f
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254490
+    prefix: '97366780'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a3533859-4b3f-4128-b130-822c3cd73d72
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254491
+    prefix: '97366781'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7211175-262b-4266-b992-d847af756110
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254492
+    prefix: '97366782'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c324fe0e-2f45-4d6e-b1d6-30af5b586eba
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254493
+    prefix: '97366783'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: afb448a1-2738-494f-a276-4caf910eb5aa
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254494
+    prefix: '97366784'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a77f1c7e-3fd4-49c7-9a49-7a9dfac07693
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254495
+    prefix: '97366785'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1901615b-832b-4f06-ae9e-bbf53700dbdd
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254499
+    prefix: '97366789'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6fc1750d-8b7e-44ed-a24b-45afdc85f0f4
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254501
+    prefix: '97366790'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2388c5b9-d387-4be0-91c8-f96ceabbe283
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254502
+    prefix: '97366791'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc94d5bd-6b0f-48c9-bd22-48993af188c5
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254503
+    prefix: '97366792'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d6162996-91b5-45e5-8e7c-91e1225ef3f6
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254504
+    prefix: '97366793'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bd89dbea-d6b8-4c8a-8d15-ac55da9f4fef
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254505
+    prefix: '97366794'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e34b6c1-7c40-430c-92df-8adb486bdb03
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254506
+    prefix: '97366795'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8bf9eaa-8205-4acf-98ab-72cdb309bbb7
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254507
+    prefix: '97366796'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4785415f-fb57-429e-bbcd-8b355d6c772e
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254509
+    prefix: '97366798'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 06db9d30-331c-4eb0-ba81-1d69fb5653c8
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254525
+    prefix: '97366886'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 46eef37f-4f3c-4d18-ae70-f2d7db9b7c09
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 254526
+    prefix: '97366888'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7922a6af-f6f7-416c-87e7-ea4df0d7e714
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 255167
+    prefix: '9736966'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5128b697-a587-42d5-a844-6d0b418a1542
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 255189
+    prefix: '9736969'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1f8e1109-0ff3-4583-baaf-512ece7b6f70
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 255228
+    prefix: '9736996'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3075182f-f80a-4c05-8a45-5f57bc19a2c6
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 255229
+    prefix: '9736999'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 06e29e2c-f0d8-4849-86d7-7a944727aed8
+    country_id: *bh
+    network_id: *bh_fixed
+  - id: 255618
+    prefix: '97377'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ebfb6ef-5a1d-45e2-ad1d-584c29ac0232
+    country_id: *bh
+    network_id: *bh_fixed
+# Mobile Prefixes
+  - id: 243224
+    prefix: '97331'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d4fdafb6-0e60-499c-b8c8-8db37fe79576
+    country_id: *bh
+    network_id: *bh_royal_court_mobile
+  - id: 243383
+    prefix: '973320'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c4ff52d-d8ce-4790-b490-61197f213a2f
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243386
+    prefix: '973321'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c70fb686-4624-4bb1-9d9a-8b20c6ccfe6b
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243388
+    prefix: '973322'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07571b99-943e-43de-ae11-28367cb9b0f6
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243391
+    prefix: '973323'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b0dec308-d9d3-4331-a863-53b5b7be2294
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243397
+    prefix: '9733250'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0d8eaf50-2618-4c47-8f33-54533c4b81a9
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243404
+    prefix: '97333'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: df76c507-f8d3-446d-94ba-fd7b383f2333
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243499
+    prefix: '973340'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f10421cb-9d89-44eb-a283-d7d01261c437
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243505
+    prefix: '973341'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e48f9c51-a2d3-42ef-9c25-587afd34551b
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243515
+    prefix: '973342'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 89eabb14-fd54-45b6-82c5-0a94b3f9f9e7
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243522
+    prefix: '973343'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 36dffa2c-61b0-4081-b976-2e7a5d5f37de
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243530
+    prefix: '973344'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2527a13e-2cae-4ec5-b484-1b0b42c01048
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243537
+    prefix: '973345'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: efd81fca-e9de-4ceb-bffc-a45377142baa
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243548
+    prefix: '973346'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00046528-a329-45a5-933d-4dd9b06ad987
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243599
+    prefix: '973350'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65804ebf-ae64-4928-a7e1-dec5ccfa6dff
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243606
+    prefix: '973351'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 24fda412-1cce-43e0-aace-98f1cef7356e
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243617
+    prefix: '973353'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9faac256-5f47-46bd-b0ae-2a1c449a1a46
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243621
+    prefix: '973354'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5dd6fb1b-c314-4035-ae78-d0293d335d7b
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243626
+    prefix: '973355'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 91d52a4c-6536-4e3c-800a-a7f78a841ac1
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243631
+    prefix: '973356'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b1ad7ac9-217f-4e23-a8e5-d227b519c1a8
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243647
+    prefix: '973359'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a0041a8-6593-4fa6-b561-c2b4bbea7597
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 243657
+    prefix: '97336'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b68c298e-6aab-454f-b274-0800e296cf94
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 243704
+    prefix: '97337'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d1c4a329-e957-47cc-a14c-f0f6d9161e1b
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 243871
+    prefix: '973380'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 12a8458a-aa6d-4307-be11-8ba20bfb54db
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243874
+    prefix: '973381'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 39b0316d-e281-4b37-8c53-65dfbab336b0
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243876
+    prefix: '973382'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38cf3a19-828f-4a09-a079-8ce5534ea667
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243878
+    prefix: '973383'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b98a742c-427a-4845-a0f1-a429b5146409
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243881
+    prefix: '973384'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc7be944-894f-48fb-8b99-f9c44df3195a
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243886
+    prefix: '973387'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c9728f9a-bf29-487f-8134-14914e001587
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243888
+    prefix: '973388'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: da7e5c8d-2412-415f-b8e6-73b6b85972fc
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243890
+    prefix: '973389'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 83fa23ac-9cc1-4f6b-86b8-403f383c64bd
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 243892
+    prefix: '97339'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ba3358b-63cb-4b95-a20b-5d5befce850a
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 248883
+    prefix: '9733'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec70478d-f9e4-4fa0-b273-a376b3d4e21e
+    country_id: *bh
+    network_id: *bh_mobile
+  - id: 250674
+    prefix: '9736300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ed0346d3-b2eb-491d-9a3b-e5604894b88f
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 250742
+    prefix: '9736333'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be2a6b97-7d5b-407d-81ea-7e61e81024c0
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 250829
+    prefix: '9736361'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c9b13097-e846-4bb1-b354-52bc3f70d320
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 250838
+    prefix: '9736366'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc6f37dd-d8f9-402e-b28d-c10010877776
+    country_id: *bh
+    network_id: *bh_stc_mobile
+  - id: 251134
+    prefix: '9736441'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 42527a06-eaea-4f10-8dcb-efb1930fa5fe
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254381
+    prefix: '9736630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f50662b-915b-4b49-b10f-472a472d6c78
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254384
+    prefix: '9736633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 993808ad-7e77-4664-b7b5-59a80d16b0b2
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254394
+    prefix: '9736634'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f03ad4c-44f9-4360-b3df-d8bce19a3ac6
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254395
+    prefix: '9736635'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f3d2760-e9c2-4407-a376-be7de76fc581
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254396
+    prefix: '9736636'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b326c3bf-5b22-4249-8355-8f229b4d61cc
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254397
+    prefix: '9736637'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30493181-bdc2-40e9-b65f-b13c62ccbb2d
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254399
+    prefix: '9736638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e6e72aa-626a-46d3-9cf4-806e9b9d1dab
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254401
+    prefix: '9736639'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b979cddf-3396-4365-ac90-1bc5b14fb105
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254452
+    prefix: '973666'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1fd2078-4cbd-481f-9b4c-54dac257f132
+    country_id: *bh
+    network_id: *bh_zain_mobile
+  - id: 254471
+    prefix: '9736670'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7863d2b9-0c44-438d-aed9-73b846c12154
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254474
+    prefix: '9736671'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1b35e39b-77cb-4e22-9f01-ed20eb2dcfbb
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254476
+    prefix: '9736672'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bddad5a9-ec39-4d63-aeb7-53a2862b467a
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254478
+    prefix: '9736673'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ef57622-d930-480b-b93f-94a398c51761
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254480
+    prefix: '9736674'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc94fafd-e937-4659-9a63-b692b70e699c
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254482
+    prefix: '9736675'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b8c8c88e-28c4-4017-999e-eaa7f95c1ade
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254484
+    prefix: '9736676'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c85d1826-0e06-4951-a6af-6aef736cbeb5
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254496
+    prefix: '97366786'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01aecc0e-c524-4c70-9ae7-34afe11b7229
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254497
+    prefix: '97366787'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ae45ae3-5ed0-4ef7-8c3d-5c2c5be256fe
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254498
+    prefix: '97366788'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 49f70037-3144-499a-8b14-566144d09c2a
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254508
+    prefix: '97366797'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fd5160e4-4b83-4051-86a7-003b3c6aba5f
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254510
+    prefix: '97366799'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 911c426c-a080-42c8-87d3-93d5603f016a
+    country_id: *bh
+    network_id: *bh_batelco_mobile
+  - id: 254528
+    prefix: '973669'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 11cb210c-a9a3-4aa7-b6ea-df02ad6736c1
+    country_id: *bh
+    network_id: *bh_zain_mobile

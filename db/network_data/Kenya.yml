@@ -1,0 +1,768 @@
+country_id: &ke 110
+networks:
+# Fixed Networks
+  - id: &ke_fixed 4134
+    name: KE Fixed
+    uuid: 5fb15543-9d02-4c39-b503-f040602f3014
+    type_id: 12
+# Mobile Networks
+  - id: &ke_safaricom_mobile 4720
+    name: KE Safaricom Mobile
+    uuid: 4d11abb0-3a15-4f30-a4c7-645a4fce5ee4
+    type_id: 3
+  - id: &ke_faiba_mobile 4809
+    name: KE Faiba Mobile
+    uuid: dd4b8504-b395-411b-b483-b9a8fe0bce06
+    type_id: 3
+  - id: &ke_airtel_mobile 4810
+    name: KE Airtel Mobile
+    uuid: 864d4492-f5aa-4508-8346-fec2906bb8f6
+    type_id: 3
+  - id: &ke_homeland_media_mobile 4832
+    name: KE Homeland Media Mobile
+    uuid: 3608b31e-f044-4605-94e8-49607abf413c
+    type_id: 3
+  - id: &ke_mobile 4833
+    name: KE Mobile
+    uuid: 6b2a962c-6781-4ddd-bbe6-19172a1e7cb1
+    type_id: 3
+  - id: &ke_tangaza_pesa_mobile 4856
+    name: KE Tangaza Pesa Mobile
+    uuid: add98f2a-a3b8-4141-8862-2348ffc477cc
+    type_id: 3
+  - id: &ke_eferio_mobile 4858
+    name: KE Eferio Mobile
+    uuid: 8e9c68fd-e24a-4cf0-93f2-6ed235840fca
+    type_id: 3
+  - id: &ke_equitel_mobile 4859
+    name: KE Equitel Mobile
+    uuid: fc0d3cc6-e26f-47a9-bc4d-564fcbc3e03d
+    type_id: 3
+  - id: &ke_telkom_mobile 4884
+    name: KE Telkom Mobile
+    uuid: a4c9fcb1-1083-4345-9acc-64d140639980
+    type_id: 3
+  - id: &ke_jambo_telcoms_mobile 7123
+    name: KE Jambo Telcoms Mobile
+    uuid: fb4ba3c5-5fb5-418d-a3f7-ad28411cd285
+    type_id: 3
+  - id: &ke_infura_mobile 7125
+    name: KE Infura Mobile
+    uuid: 6018a2b7-d71b-4bfb-a7ce-cc52b61b1464
+    type_id: 3
+# Supplementary services Networks
+  - id: &ke_sms_and_special_services 5254
+    name: KE Sms And Special Services
+    uuid: aaa8a038-9286-4fda-8ec7-62da9f116702
+    type_id: 14
+  - id: &ke_emergency_services 5414
+    name: KE Emergency Services
+    uuid: 2871c996-1e1f-4711-8ddc-d74cf617eb82
+    type_id: 14
+  - id: &ke_sms_services 5767
+    name: KE Sms Services
+    uuid: 9c7ae2fd-6c3b-415a-868b-9e66b1acb3b4
+    type_id: 14
+  - id: &ke_machine_to_machine_m2m_services 7340
+    name: KE Machine To Machine M2M Services
+    uuid: 5ed0b6d3-598d-4071-9a73-cdf503806494
+    type_id: 14
+  - id: &ke_freephone_services 7556
+    name: KE Freephone Services
+    uuid: 3f73b31b-2413-4a75-a105-b07bd3e3d38f
+    type_id: 14
+  - id: &ke_premium_rate_services 7831
+    name: KE Premium Rate Services
+    uuid: 09b8a969-6e43-4e5d-897d-8a3707b85d00
+    type_id: 14
+network_prefixes:
+# Fixed Prefixes
+  - id: 54924
+    prefix: '25450'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0c639337-b114-4299-a796-f7699005d3dd
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 62605
+    prefix: '25451'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 39cc34c9-758e-4cea-bb1f-c0ec29cba36e
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 71656
+    prefix: '25452'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 536808a8-f992-412b-9001-375f02976f16
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 73199
+    prefix: '25454'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 5f469504-c4e8-4225-84ea-20aba5e7d647
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 76545
+    prefix: '25453'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 3b69aeaa-e8fe-4b79-a220-a5d09bfc4536
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 78121
+    prefix: '25455'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: bb7f7dab-4b2b-433b-ae47-14ba6b36bf59
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 84414
+    prefix: '25459'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: e3dc1e0d-d5a8-4180-a09a-d33ff8fb1bfd
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 87916
+    prefix: '25456'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: bad6d970-4111-496b-b825-66132e6c4cd2
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 90270
+    prefix: '25457'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: b271f8af-8804-4ac9-b437-a23ae8dc1e9e
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 93097
+    prefix: '25458'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f6be7595-e1e8-4c5d-aef2-6444a4f4fd18
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 95211
+    prefix: '25460'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 67fdd1d3-1f3d-4ec1-91b8-f0c57338343a
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 108582
+    prefix: '25461'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 1fdca361-cdb0-44a2-9c4c-e93efcbf87fc
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 111465
+    prefix: '25462'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0c217847-882d-4922-93e1-8379459d91a9
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 122433
+    prefix: '25464'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: bfc72604-ae27-4349-9f87-293635535ea6
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 135913
+    prefix: '25465'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: a1dde196-6827-4d59-ab8f-b411d56f76e1
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 138623
+    prefix: '25466'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: cb3448e2-eba1-4d4b-95d8-1a56d41368e6
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 146816
+    prefix: '25468'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2f1d3761-63f9-475e-ba02-0119f874220e
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 148659
+    prefix: '25469'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: d48bc188-6286-4d0c-89a7-8c53a20c9806
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 151420
+    prefix: '25467'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: a0580383-e0ce-48c5-ae50-d06f14fb8218
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 267140
+    prefix: '25420'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: b59919e2-6b41-449d-814d-5ed74ba1988c
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 349893
+    prefix: '25440'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: e7665196-ee80-4274-bd55-0e68d44f32e9
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 362524
+    prefix: '25441'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9711f8c8-2a61-4581-a69f-8c87e925364e
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 367938
+    prefix: '25443'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 50248fce-5cca-45d2-b0f6-079d14358696
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 370189
+    prefix: '25444'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 4bcfeb56-5148-4102-9889-32c54e568166
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 377178
+    prefix: '25442'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 45587ad8-67a9-4925-893d-214b50bc6ed6
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 388631
+    prefix: '25446'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8c797152-8e56-42ed-8a3a-d27a23aed69e
+    country_id: *ke
+    network_id: *ke_fixed
+  - id: 392619
+    prefix: '25445'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 8223eaf3-1297-4b80-93fa-16f74779be7b
+    country_id: *ke
+    network_id: *ke_fixed
+# Mobile Prefixes
+  - id: 163975
+    prefix: '25470'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2dff8ebd-b878-4a20-b07a-30032784a04c
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 172520
+    prefix: '25471'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b56658ad-7921-4cbc-83ae-9aaa47b6dda2
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 174932
+    prefix: '25472'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8f61507b-cef4-42b4-aa37-998b77b820b1
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 179308
+    prefix: '254745'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ad94d950-2d02-4816-a7c3-1f8e69ddc3b1
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 179483
+    prefix: '254746'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fbb60c71-7c64-4050-92a5-c302150e2356
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 179657
+    prefix: '254747'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c1174cdb-8859-4c0f-b701-fd48f90ece4b
+    country_id: *ke
+    network_id: *ke_faiba_mobile
+  - id: 179943
+    prefix: '254755'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a1ca479c-b0d7-41dc-8f56-acbdec11bac3
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 180279
+    prefix: '254756'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 58d25ea4-2769-4090-a0b4-af7b1564b240
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 180591
+    prefix: '254757'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9d989392-2de7-400d-a1bd-5618cf3f52eb
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 182855
+    prefix: '25473'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b203f0b2-3ad6-480f-98aa-c82c9009dec4
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 183425
+    prefix: '254740'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 69b3b0d3-80b4-42eb-a029-4877b85e09c1
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 184221
+    prefix: '254741'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3d3f8856-41ed-42b4-8b0d-6607320398ea
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 184388
+    prefix: '254742'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7856da20-e131-4dcf-8b54-74b35ce75078
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 184623
+    prefix: '254743'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0591019e-ca70-4d75-b89e-c8f645c5c42d
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 184820
+    prefix: '254744'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 830eca0a-232d-4d78-856f-2f7f8018463a
+    country_id: *ke
+    network_id: *ke_homeland_media_mobile
+  - id: 185533
+    prefix: '254748'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a725941-7d2d-4790-a7c2-740c644ee4b3
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 185762
+    prefix: '254749'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e58fbd39-8307-4a9e-8930-16661d13a252
+    country_id: *ke
+    network_id: *ke_mobile
+  - id: 186327
+    prefix: '254750'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6772adc0-13ed-4e4e-8e8a-c2c7e69a9c05
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 186343
+    prefix: '254751'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e45451b2-508d-4914-8b93-6300f343e54c
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 186373
+    prefix: '254752'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6f70c56f-dcaf-4bb5-815d-6afe81d91447
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 186403
+    prefix: '254753'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 69b3ee98-7742-4100-afcf-d7fca18a7efa
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 186910
+    prefix: '254754'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c2817d06-4dc7-44b6-a2a8-e469e078c360
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 187754
+    prefix: '254758'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 81f602cb-8f5d-4b20-b24f-8d8fe61ccf02
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 187887
+    prefix: '254759'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 32433107-c819-4115-89a8-082a0a1410d2
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 188702
+    prefix: '254760'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5d466f25-069e-43b4-97a5-88e16de332bb
+    country_id: *ke
+    network_id: *ke_tangaza_pesa_mobile
+  - id: 189504
+    prefix: '254761'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 47c6755d-81c8-4051-89dc-08d4a8e03b4a
+    country_id: *ke
+    network_id: *ke_eferio_mobile
+  - id: 189550
+    prefix: '254762'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 21b4d0ef-4fae-462b-8d35-45efa6ea46ee
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 190356
+    prefix: '254766'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1920bd72-c033-49d6-9923-a4cf76b7fe3b
+    country_id: *ke
+    network_id: *ke_equitel_mobile
+  - id: 190558
+    prefix: '254767'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0e0efd28-ff46-4831-a0b7-b9b97c098fcd
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 191133
+    prefix: '254763'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bd6645ec-94e9-492e-9cbf-40577af491fb
+    country_id: *ke
+    network_id: *ke_equitel_mobile
+  - id: 191541
+    prefix: '254764'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dc06bce9-b60e-4dd1-8925-bde6fca00c77
+    country_id: *ke
+    network_id: *ke_equitel_mobile
+  - id: 191691
+    prefix: '254765'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 003ffbb9-28be-46fc-b105-b34b378858ee
+    country_id: *ke
+    network_id: *ke_equitel_mobile
+  - id: 198385
+    prefix: '25477'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e52ba818-9c55-4ca1-aa6a-1bcf29030fe0
+    country_id: *ke
+    network_id: *ke_telkom_mobile
+  - id: 200409
+    prefix: '254768'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 60c5ebf1-d454-4ba3-9d30-59882cb3c632
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 200512
+    prefix: '254769'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f2e7d3bd-70b7-4a40-9b56-2cd5a796f486
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 206648
+    prefix: '25478'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: feb7e6c8-3dfa-48b3-8eeb-e5cd7b3b2623
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 207498
+    prefix: '25479'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7087f818-1bd4-4054-aec8-7e486d4b7337
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 207511
+    prefix: '2547'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d16c982-5d8f-4fe4-a29e-756aa7ecbf54
+    country_id: *ke
+    network_id: *ke_mobile
+  - id: 258792
+    prefix: '254100'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ba13e7d9-153b-42ab-bce8-214c8aac6d1c
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 258793
+    prefix: '254101'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 25bc09f0-faf4-4445-be09-943722eca7dc
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 258794
+    prefix: '254102'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 36d9ba5f-6d50-4e64-bdbb-f5ec5461bad2
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 258795
+    prefix: '254103'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9e3e284f-e2dd-4c93-b227-c0f9a0451fee
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 258796
+    prefix: '254104'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4097a663-7ede-43f0-8582-404e73fbda09
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 258797
+    prefix: '254105'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3082adee-1de7-4065-8ab4-4d67f3256350
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 258798
+    prefix: '254106'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ed0b27d0-88f3-4138-ba6f-d66a5d1284eb
+    country_id: *ke
+    network_id: *ke_airtel_mobile
+  - id: 259201
+    prefix: '254110'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e86e055a-4ab9-4fdf-a477-5e8d7767614f
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 259202
+    prefix: '254111'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ff19c98b-bc20-4b25-ba9f-0703a3e0355c
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 259204
+    prefix: '254112'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 486736f5-7947-4919-8252-56a6d73f3547
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 259206
+    prefix: '254113'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aeeb3ab2-4f99-4cab-a006-23c24a08b055
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 259209
+    prefix: '254114'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 18957e62-a2ec-4550-b54b-6a9eaf51e07e
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 259212
+    prefix: '254115'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eeb9d708-0ebb-4abe-a2f0-7351df157db5
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+  - id: 259332
+    prefix: '254120'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cdf5ed56-37b2-4645-8efa-53a11b0c1631
+    country_id: *ke
+    network_id: *ke_jambo_telcoms_mobile
+  - id: 259345
+    prefix: '254121'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 658a7e18-ab55-42f4-b954-ccc6124d2084
+    country_id: *ke
+    network_id: *ke_infura_mobile
+  - id: 259393
+    prefix: '254124'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f3be1e99-2772-4097-9fbf-78902fd0963a
+    country_id: *ke
+    network_id: *ke_equitel_mobile
+  - id: 261178
+    prefix: '2541'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 32f48ca4-966d-4d87-b454-0ce8757e35d6
+    country_id: *ke
+    network_id: *ke_mobile
+  - id: 309480
+    prefix: '25430000'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 31507697-ec34-4210-b577-d760fa41a9ab
+    country_id: *ke
+    network_id: *ke_safaricom_mobile
+# Country code Prefixes
+  - id: 242028
+    prefix: '254'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 406087c5-c8d6-4a4e-9233-757fd34f848f
+    country_id: *ke
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242425
+    prefix: '2541'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: cdb39972-7dc5-4670-8a9e-cb09d79ed56d
+    country_id: *ke
+    network_id: *ke_sms_and_special_services
+  - id: 242623
+    prefix: '254112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 022d9932-9128-4c4a-8bc3-45556515d8c6
+    country_id: *ke
+    network_id: *ke_emergency_services
+  - id: 243942
+    prefix: '2544'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: a28eadc7-8ccf-4290-b29f-61ba86b077ab
+    country_id: *ke
+    network_id: *ke_sms_services
+  - id: 245402
+    prefix: '2546'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: bb88b01c-7ee6-4704-b362-48a2e87f5efb
+    country_id: *ke
+    network_id: *ke_sms_services
+  - id: 247412
+    prefix: '2542'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 5248fee7-0de2-458d-a9d4-f86ee466ecc2
+    country_id: *ke
+    network_id: *ke_sms_services
+  - id: 248905
+    prefix: '2543'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 4e46cb39-35a9-4195-90c7-e921e90e4a72
+    country_id: *ke
+    network_id: *ke_sms_services
+  - id: 249583
+    prefix: '2545'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: a997eb37-d364-4b30-aba6-5e5a6e5f7e08
+    country_id: *ke
+    network_id: *ke_sms_services
+  - id: 253086
+    prefix: '2548'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 24232d7b-06e1-4b96-b8d2-4894a2ad3921
+    country_id: *ke
+    network_id: *ke_sms_services
+  - id: 255257
+    prefix: '2547'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: a3c60296-a390-4a35-bc7b-d606d6c5605b
+    country_id: *ke
+    network_id: *ke_sms_and_special_services
+  - id: 257108
+    prefix: '2549'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 611a5e6b-b648-4940-8f8f-08200942a8ad
+    country_id: *ke
+    network_id: *ke_sms_and_special_services
+  - id: 258305
+    prefix: '254999'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 65e61000-d0fe-4cf8-bc1d-7f3425b5d2ae
+    country_id: *ke
+    network_id: *ke_emergency_services
+  - id: 309469
+    prefix: '25430'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 93be6de9-f6a2-4595-8513-d39f442faa5e
+    country_id: *ke
+    network_id: *ke_machine_to_machine_m2m_services
+  - id: 403476
+    prefix: '254800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e32a7928-33fd-404f-a3bc-5b587bc9d6ea
+    country_id: *ke
+    network_id: *ke_freephone_services
+  - id: 454578
+    prefix: '254900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f65e43ad-4b6b-49f8-bbe3-217cc4903283
+    country_id: *ke
+    network_id: *ke_premium_rate_services

@@ -1,0 +1,2403 @@
+country_id: &lv 117
+networks:
+# Supplementary services Networks
+  - id: &lv_emergency_services 5101
+    name: LV Emergency Services
+    uuid: f458af82-929f-4d2c-a00f-42ed845127b2
+    type_id: 14
+  - id: &lv_special_services 5267
+    name: LV Special Services
+    uuid: 9420566d-e596-4cd7-87c1-d26009577761
+    type_id: 14
+  - id: &lv_operator_services 5391
+    name: LV Operator Services
+    uuid: 80c59b2e-2cd5-4a4c-9050-92cdda13e7b8
+    type_id: 14
+  - id: &lv_social_value_services 5451
+    name: LV Social Value Services
+    uuid: fd614183-cce6-4d62-921a-41ca9293881b
+    type_id: 14
+  - id: &lv_directory_enquiry_services 5480
+    name: LV Directory Enquiry Services
+    uuid: 1927ab5e-6dd7-4468-afcf-ff4af46742dc
+    type_id: 14
+  - id: &lv_freephone_services 6538
+    name: LV Freephone Services
+    uuid: 2e5be073-690a-451a-a0c4-0eca552c3d87
+    type_id: 14
+  - id: &lv_shared_cost_services 6642
+    name: LV Shared Cost Services
+    uuid: 3ba4205a-d8cd-45c3-ade9-bb9f752f9817
+    type_id: 14
+  - id: &lv_virtual_private_network_public_radio_network 6871
+    name: LV Virtual Private Network Public Radio Network
+    uuid: dacc2318-9ca5-464f-813d-2da5b9ccc23d
+    type_id: 14
+  - id: &lv_electronic_communications_services 6872
+    name: LV Electronic Communications Services
+    uuid: cf717314-d01b-4a45-bd15-323ec38a6317
+    type_id: 14
+  - id: &lv_public_telephones_virtual_mail 6876
+    name: LV Public Telephones Virtual Mail
+    uuid: 42715b6c-4426-4c5f-b8e1-5b5e996e73f2
+    type_id: 14
+  - id: &lv_premium_rate_services 6971
+    name: LV Premium Rate Services
+    uuid: e549a0e6-1e22-42d2-9f01-9a21f97a6390
+    type_id: 14
+# Fixed Networks
+  - id: &lv_fixed 5909
+    name: LV Fixed
+    uuid: 7da4819c-f3f1-42eb-b22b-b63ffb61ce8c
+    type_id: 12
+# Mobile Networks
+  - id: &lv_mobile 6065
+    name: LV Mobile
+    uuid: 2435cc4d-2101-4458-b49d-3541eedf9013
+    type_id: 3
+  - id: &lv_tele2_mobile 6084
+    name: LV Tele2 Mobile
+    uuid: da713c0e-afab-4b8d-93a6-d53251ee3973
+    type_id: 3
+  - id: &lv_bite_mobile 6090
+    name: LV Bite Mobile
+    uuid: ae5802a5-8d57-4234-97cd-ecebad382968
+    type_id: 3
+  - id: &lv_lmt_mobile 6091
+    name: LV Lmt Mobile
+    uuid: 61427ac2-613a-40dc-8052-e8d594499480
+    type_id: 3
+  - id: &lv_triatel_mobile 6094
+    name: LV Triatel Mobile
+    uuid: 6bd4d603-cfb3-4d30-9c49-a3f2006d420f
+    type_id: 3
+  - id: &lv_xomobile_mobile 6097
+    name: LV Xomobile Mobile
+    uuid: 5bd913e3-2e46-4331-b26d-31ab2f2afc3d
+    type_id: 3
+  - id: &lv_venta_mobile_mobile 6112
+    name: LV Venta Mobile Mobile
+    uuid: 7cb38414-8719-4bd3-b62b-cb9962e61a11
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242043
+    prefix: '371'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 589138ef-b31f-4a47-a21f-c15075a6497f
+    country_id: *lv
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242146
+    prefix: '3710'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: d1894e4a-e4d5-4775-ad9b-afb027b196a3
+    country_id: *lv
+    network_id: *lv_emergency_services
+  - id: 242438
+    prefix: '3711'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 65f46ece-f880-4768-add9-89a48c8998ff
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 242595
+    prefix: '37111'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: c593acc7-673c-4d57-b8e8-627fd4555c84
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 242679
+    prefix: '371116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 47a561fa-50a2-4690-a75d-40071c15c6a4
+    country_id: *lv
+    network_id: *lv_social_value_services
+  - id: 242726
+    prefix: '371118'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 640c97b2-7750-4252-8fd6-e1bdb57f9019
+    country_id: *lv
+    network_id: *lv_directory_enquiry_services
+  - id: 242758
+    prefix: '3711184'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c4aeb0dc-8596-4fb2-98bd-8108f3f72ae4
+    country_id: *lv
+    network_id: *lv_directory_enquiry_services
+  - id: 242811
+    prefix: '37112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: bc384a4b-5463-4742-be73-80fe35f0856c
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 242855
+    prefix: '37113'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: e95cbc58-c592-4a98-a932-39e5dbface84
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 242903
+    prefix: '37114'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: edb7e706-c80f-4291-9bcb-302289c54656
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 242941
+    prefix: '37115'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 86ffd035-1955-4ca4-8a85-31a00613530e
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 243021
+    prefix: '37116'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: aca2c0d2-4795-49d8-8c3e-e7a668fab9a1
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 243059
+    prefix: '37117'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 8193b145-b7fd-4cb0-bdcd-74e6edde21a6
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 247277
+    prefix: '37118'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e436f62b-d00a-404f-bc37-bc097165785d
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 253126
+    prefix: '37180'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34716929-b11d-4fa7-8567-a656bef58028
+    country_id: *lv
+    network_id: *lv_freephone_services
+  - id: 253322
+    prefix: '37181'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f4c64f63-5540-4dcb-add5-75eced098cde
+    country_id: *lv
+    network_id: *lv_shared_cost_services
+  - id: 253480
+    prefix: '37182'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1b06ac6b-a35b-4c54-94df-ea7f42a2df84
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 253596
+    prefix: '37183'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 8210f504-7b83-4efc-aee5-c757a831cf84
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 253723
+    prefix: '37184'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 08e25f79-46b9-4d92-a81f-1aefc60414f6
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 256146
+    prefix: '371781'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 272faf40-6f27-46a6-bade-286cc413db5c
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 256161
+    prefix: '371782'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d34febc3-6c0e-465f-8717-f378721ccf49
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 256183
+    prefix: '371783'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff8a0a0a-f6ba-41d9-a7fa-1fdffb0d1451
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 256205
+    prefix: '371784'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 495e73bd-bf62-432e-aec4-b58852e4f00e
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 256240
+    prefix: '371785'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c221e72-6c7d-4068-ba78-faf42f913454
+    country_id: *lv
+    network_id: *lv_virtual_private_network_public_radio_network
+  - id: 256256
+    prefix: '371786'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dac57677-ba07-447b-b20c-204d59df857f
+    country_id: *lv
+    network_id: *lv_electronic_communications_services
+  - id: 256280
+    prefix: '371787'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c8d1546-f1e2-43f2-a6fb-d837be93db0e
+    country_id: *lv
+    network_id: *lv_electronic_communications_services
+  - id: 256331
+    prefix: '371788'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07ae5cc1-1060-408c-b1ae-08b39a867bec
+    country_id: *lv
+    network_id: *lv_electronic_communications_services
+  - id: 256348
+    prefix: '371789'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0c360dc7-484b-4aa2-888e-9bb62a183896
+    country_id: *lv
+    network_id: *lv_public_telephones_virtual_mail
+  - id: 256842
+    prefix: '37188'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 4dcbaadb-5118-4362-a713-5ee626772214
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 257004
+    prefix: '37189'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e0011e79-52cf-460c-9e3c-57ecc691c42c
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 257162
+    prefix: '37190'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 408046c8-3230-4456-a5ce-bb4598763601
+    country_id: *lv
+    network_id: *lv_premium_rate_services
+  - id: 263709
+    prefix: '37185'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: a53d3abb-88fe-40fa-be52-3ac3ca1812eb
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 263856
+    prefix: '37186'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: fbf00122-a5fb-4c8c-b764-f8ab710cb5f2
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 264010
+    prefix: '37187'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 875b5516-18dd-414f-bd69-fcfda675b131
+    country_id: *lv
+    network_id: *lv_operator_services
+# Fixed Prefixes
+  - id: 245406
+    prefix: '3716'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 326ce2e6-a052-429b-a5ea-b4ea34611d86
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250549
+    prefix: '371627'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d5c76e72-93d8-4525-8cfc-716ebe9c4278
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250573
+    prefix: '371628'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8c36933d-d542-47d0-93a8-bbab45717b8b
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250624
+    prefix: '371629'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fcff643d-ff89-48d2-a7b2-5b3d44f52eee
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250671
+    prefix: '371630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fd8c37a8-30e7-4e1c-9d88-f91fdfc00492
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250691
+    prefix: '371631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 689ff9da-ec64-443e-a9c9-237021f0ebfc
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250720
+    prefix: '371632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2661742d-63f7-43b3-9d18-11ce844795a4
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250736
+    prefix: '371633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 85fbb2d5-7b16-4ba1-a85d-befef6f2f421
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250755
+    prefix: '371634'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8bbbb3b8-675f-46d8-a9d0-719ed92f016c
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250797
+    prefix: '371635'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94be1454-aef4-45cd-ad49-52dff4b661a2
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250824
+    prefix: '371636'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d2d12fb4-af65-4266-9ea4-f06306da3ec1
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250850
+    prefix: '371637'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc473801-903b-4258-b84d-27f71f74ae60
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250871
+    prefix: '371638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c0d9e01-51a3-4ea1-ba92-06eace5e8b93
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 250904
+    prefix: '371639'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c525286-b52f-4aa9-8a83-0a196d979308
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251036
+    prefix: '371640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01fb7a5e-3b97-4088-b302-6d258557bdaf
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251087
+    prefix: '371641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73c4618e-3388-4789-97e2-635157890dcf
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251118
+    prefix: '371642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2311243e-1729-41eb-ae5c-4048cb655002
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251124
+    prefix: '371643'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34c95c61-20bb-4016-9233-a132981d9984
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251131
+    prefix: '371644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 296d3c4f-2583-473f-aabb-723847a9614d
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251157
+    prefix: '371645'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74deb2a2-6dc4-4e6d-9932-28551f79fcb9
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251164
+    prefix: '371646'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3c1f608a-c244-4d4c-a8e3-f9b7a901086b
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251172
+    prefix: '371647'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 790f7cae-bfe5-4974-b41e-b3da5543fc0c
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251177
+    prefix: '371648'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 72b1237f-5f21-4034-9061-68b86e4283b5
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251184
+    prefix: '371649'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: efd36e3d-0485-4459-bdc1-5333bb2116a7
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251251
+    prefix: '371650'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0598dcb5-c035-40e2-b4f4-26443817180e
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251279
+    prefix: '371651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e9ac601-4568-4e42-ac6f-8c8302622ded
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251297
+    prefix: '371652'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a85db8f0-1013-420a-a826-61f63b7e4b8a
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251320
+    prefix: '371653'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: de4017f8-3971-4a8b-8d89-d97b893ef282
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251350
+    prefix: '371654'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2e1c0d7-161d-4d68-866b-018a7bd401fc
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251391
+    prefix: '371655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a2e8732c-125a-4184-b325-cd64a24ef7a5
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251411
+    prefix: '371656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b5769c1-d300-48f2-9fa6-414a4aba530c
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251437
+    prefix: '371657'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 06c3bad1-6e5e-4ede-83d0-36918230caf8
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251508
+    prefix: '371658'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7febb169-963f-4f00-a579-049e027f70e3
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 251527
+    prefix: '371659'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e11bee4c-8c54-41e1-92a5-33a4b18c2883
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254029
+    prefix: '371613'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2aaba0d6-5545-4d79-9470-57361234b569
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254079
+    prefix: '371616'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f93a3e04-f54e-49fe-bc63-e99289317ed6
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254085
+    prefix: '371617'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a4407fd1-8586-46a9-984c-f33749106b4d
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254129
+    prefix: '371620'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f2387d4d-8eaa-433b-aa74-c29933de5ff9
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254149
+    prefix: '371621'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba4d6672-4f3b-4e40-85d2-26344e471e15
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254171
+    prefix: '371622'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 13723612-a184-4359-acc9-8fa8e6827543
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254182
+    prefix: '371623'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7ebbf95b-a4a7-4882-8b2c-37c8372d56cf
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254214
+    prefix: '371624'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ffc7d8c-0539-4ebf-8862-821b300b5d63
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254231
+    prefix: '371625'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 48cd0aea-c2e2-4953-9ec1-c1135f35377a
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254252
+    prefix: '371626'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7163247-76ff-4a23-842b-939d101b3ca9
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254294
+    prefix: '37166'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 976d3ddb-cdd9-41ca-8e8a-eb289ecec3ca
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254608
+    prefix: '37167'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ae070026-c520-431a-ae40-22b8f98bb093
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254690
+    prefix: '371680'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6c8f9ae8-95f9-486a-87ff-0a8f542ed9fd
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254737
+    prefix: '371682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d5ad03e-041e-49ac-b5f4-08c6c269add2
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254747
+    prefix: '371683'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b29d8d3-6088-4a2b-b351-7b16187ee5b2
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254756
+    prefix: '371684'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d706d0f1-adee-45f0-b491-e4cdd4b530d8
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254801
+    prefix: '371686'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 49c074f7-3b57-4a21-8f26-500284ed15b8
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254809
+    prefix: '371687'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c28a77f2-a9d8-4be1-960e-25c24d0a4103
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254823
+    prefix: '371688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0e7edae7-9a8b-4579-8e0a-647cbfd7b795
+    country_id: *lv
+    network_id: *lv_fixed
+# Mobile Prefixes
+  - id: 247416
+    prefix: '3712'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a8e14ee-5011-4122-828f-a3789d21a588
+    country_id: *lv
+    network_id: *lv_mobile
+  - id: 247464
+    prefix: '371200'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dacb4485-ea12-4eeb-a261-47d2668a3274
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247473
+    prefix: '3712010'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 26256e10-8740-4b7a-9d73-89e4fbd79c26
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247474
+    prefix: '3712011'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7cf156be-5f3d-428a-94d5-5e3f4dc103de
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247476
+    prefix: '3712012'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db41258b-af2e-4125-95e0-d9f827251fd9
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247478
+    prefix: '3712013'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e2db78e-b507-40c9-8493-9ba9c3fec8f2
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247480
+    prefix: '3712014'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ebec64bb-0052-479c-b7b8-dcb7343367a5
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247482
+    prefix: '3712015'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 54d3b9dc-6895-4d89-b324-d71e9fefb9e5
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247483
+    prefix: '3712016'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7bd71c0c-f677-4489-aa7d-9211584f4c60
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247484
+    prefix: '3712017'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 26877cae-3b64-4b6b-857e-7d3ce71b75ee
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247485
+    prefix: '3712019'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0accb958-dc40-4c41-9d93-5fce9d4d18e1
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247488
+    prefix: '371202'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a2899e5-b634-4188-b67e-1e39e46ef447
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247512
+    prefix: '371203'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 08929436-9527-4f12-927e-571978a4de64
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247534
+    prefix: '371204'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d197c07-145d-4ebf-909e-53dedc9e7b97
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247544
+    prefix: '371205'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c9aeb24-7c5b-4c59-8a6c-6760a3243d08
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247554
+    prefix: '371206'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9754a3aa-a7ac-4814-9211-72d0befd79ad
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247563
+    prefix: '371207'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 23fb02c6-81f7-4d67-9583-e2e4d3d04beb
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247586
+    prefix: '3712080'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7a9b53e-8291-4824-967b-4b5542c0210f
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247587
+    prefix: '3712081'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 549ae63f-46f4-4025-b399-2b13036d3c5b
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247588
+    prefix: '3712082'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5e21a45-2226-4e3a-ac6a-2989db8c9a52
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247589
+    prefix: '3712083'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 55f4c7e6-a3f7-4fc2-9743-9581ac093731
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247590
+    prefix: '3712084'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7d32980c-8688-4645-a58d-019adceadc60
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247591
+    prefix: '3712085'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fecb56b7-8c1a-46fd-93cf-baa233a11fa0
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247592
+    prefix: '3712086'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a02918d-a780-4e94-b9a2-c9ba97cb807b
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247593
+    prefix: '3712087'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7f24571-309f-4377-9f23-d774d0943761
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247594
+    prefix: '3712088'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 085ad628-3451-4e88-ab5f-80735fb2f6e6
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247597
+    prefix: '37120900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0eb6373d-ee55-4ce7-bc29-1c5940e8c629
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247606
+    prefix: '3712094'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3e6b6e2f-ed7c-42f9-af75-3534d35f5099
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 247617
+    prefix: '37120999'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: abc15d36-5346-46fb-9a00-0fdd95a7a345
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247629
+    prefix: '37121'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0412ebf6-3673-48ec-b904-9a598fea880a
+    country_id: *lv
+    network_id: *lv_xomobile_mobile
+  - id: 247743
+    prefix: '3712200'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 312119a1-d9c7-42cb-8f0f-d0866d40f9a5
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247745
+    prefix: '3712201'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84dcb457-bdb2-4cdc-8e65-5c7c33524522
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247746
+    prefix: '3712202'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4602f365-16b2-4392-af08-bb346b8f6c7b
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247747
+    prefix: '3712203'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f212afd-1a5f-48af-9800-3ca0fed6baef
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247748
+    prefix: '3712204'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8fe0d478-b670-4670-bea1-e8ca5c80763c
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247749
+    prefix: '3712205'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: de6a7703-2aa3-4896-a2e5-c693ef5f01d6
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247750
+    prefix: '3712206'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7fdd5607-ebc5-490d-b653-ff77525d73a1
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247751
+    prefix: '3712207'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d60cefe3-b47d-4434-b251-468cc2f3a1b7
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247753
+    prefix: '3712208'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f03ac1da-10bb-46cb-ba93-306f6a39e39e
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247754
+    prefix: '3712209'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b78f5c9b-0e45-4c91-b992-55b3fb4e2db6
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247757
+    prefix: '371221'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e7d53dd-b779-43f8-9666-ada3c7b4b2ef
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247762
+    prefix: '371222'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ea7ad52-81c6-461a-97c7-9c1aeb212e69
+    country_id: *lv
+    network_id: *lv_xomobile_mobile
+  - id: 247834
+    prefix: '3712230'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1f9ddddc-2263-43f8-b0a8-2f51f1aa226a
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247839
+    prefix: '3712231'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ebe85f74-c1a0-47e1-bb9b-2f2504a57eb3
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247842
+    prefix: '3712232'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 932379d6-f374-44b4-806c-d83f05e6b383
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247843
+    prefix: '3712233'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fa626842-effa-46d1-a8ca-5e1a5e4b6c76
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247847
+    prefix: '3712234'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce1f3ca8-b0bc-4f4c-886f-7fbc149ec0a5
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247848
+    prefix: '3712235'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8cd4c464-8a56-4cf6-8052-43a69f91fd0f
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247849
+    prefix: '3712236'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a00c8e23-a711-43c2-a7ca-d7288b54c39e
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247850
+    prefix: '3712237'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c4ab382-16f7-4881-8e81-bc437d774349
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247852
+    prefix: '3712238'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0e70df06-e0af-4a3a-b838-a8ef91fe3138
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247853
+    prefix: '3712239'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 90e5cacd-2596-405b-b018-006882e53560
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247856
+    prefix: '371224'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 553c3250-6d7a-4486-bed0-42ce0a9e31b3
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247865
+    prefix: '371225'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 077d323b-c5e4-469a-b764-0b4620ebc0cc
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247885
+    prefix: '3712266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ee26b014-d7b7-43a7-8912-35fc0b6bb4d9
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247886
+    prefix: '3712267'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3bb72e17-64db-440b-b045-333105e40d2f
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247890
+    prefix: '3712272'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7c59ebd-f2da-4911-8bd1-7d2c2c531c95
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247892
+    prefix: '3712277'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a5d733d-4b27-4a61-8670-8526a6d3ab4e
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247895
+    prefix: '3712280'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9b10fd8f-1349-41ab-bf6a-fdfc15ab0624
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247896
+    prefix: '3712281'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7544735a-6843-4c5c-bd60-9cd4764e9780
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247897
+    prefix: '3712282'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e78c135-9677-41bd-aa99-8a9bcff80f54
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247898
+    prefix: '3712283'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 81377e21-6ebc-44b2-82d1-6280f02615d0
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247899
+    prefix: '3712284'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 615672aa-abe5-4de3-89ba-39e955d11cc0
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247900
+    prefix: '3712286'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2fdf4246-08cf-4328-8f51-ebebb94db23d
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 247901
+    prefix: '37122864'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8fab458a-0be2-4deb-b843-15900b6cfd57
+    country_id: *lv
+    network_id: *lv_venta_mobile_mobile
+  - id: 247902
+    prefix: '37122865'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 71036f68-93eb-448e-9f4c-fecc651878f4
+    country_id: *lv
+    network_id: *lv_venta_mobile_mobile
+  - id: 247903
+    prefix: '37122867'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8e835ee-e499-4a5d-a41e-b2403dca4757
+    country_id: *lv
+    network_id: *lv_venta_mobile_mobile
+  - id: 247904
+    prefix: '37122868'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bfd1f743-cc07-4594-8cfc-5190cf1646d9
+    country_id: *lv
+    network_id: *lv_venta_mobile_mobile
+  - id: 247905
+    prefix: '3712287'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1bf837ce-c4bd-4b67-97ba-d5fe4da1e507
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 247906
+    prefix: '3712288'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f2008cf-7bd3-407c-96d7-4a1ddc285667
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247909
+    prefix: '3712299'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 47b94397-e038-4b5a-b27b-0dce7590d70a
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247938
+    prefix: '3712300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ee9e815-5d96-4e0b-ae3b-63cf33245d4a
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247942
+    prefix: '3712307'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8170aeb4-a1e5-402e-b5fb-09ebe59207d7
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247948
+    prefix: '37123100'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 90c2caf8-129d-45e1-ae42-568c851336b9
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247949
+    prefix: '3712311'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec064aad-a3df-4b22-9860-2c83a8b3ea08
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247952
+    prefix: '3712317'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 02d95874-005d-4e75-a303-d8136e446375
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247959
+    prefix: '3712320'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e60ad288-e1d8-4a59-ae06-ed704428328b
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247960
+    prefix: '3712322'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e4328975-d72f-4395-9cb2-af96b580441f
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247961
+    prefix: '37123230'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b64f138b-47a4-4c8e-9a11-a2bc16f7f699
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247962
+    prefix: '37123232'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 432d55c5-8567-48bc-810b-5e62882f6dbb
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247964
+    prefix: '37123233'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87c7ebfc-539d-4f41-b93f-16ac4010c0f1
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247966
+    prefix: '37123238'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 426e92ce-e44d-4208-bd5a-6d3ca837dad7
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247967
+    prefix: '3712327'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd4ad9a0-cc48-431c-9082-7944a9d60320
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247968
+    prefix: '3712328'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0481a620-0d83-4a6b-bc36-17938aafe506
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 247975
+    prefix: '3712330'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c7746a56-a515-4673-abbb-7ea7d5b8f030
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 247992
+    prefix: '37123330'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a51e59bf-58ed-4f0e-98cb-4c3f01597e63
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247995
+    prefix: '37123332'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f011cdf2-41e0-4d76-8a4b-e5d98baae649
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 247997
+    prefix: '37123333'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4356b26d-2bb1-4bbd-86cc-84c8bd12c647
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248002
+    prefix: '37123338'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3e6a327-5428-4582-91ab-0e285266666b
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248017
+    prefix: '3712337'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bd44a391-09ab-467b-8e85-fc63be58c97c
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248026
+    prefix: '37123400'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa0cbf01-9ecc-46e6-bc6d-5db212bd0d8d
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248027
+    prefix: '37123402'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9cabf3ef-b536-4996-b204-543e5fb0dfbb
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248033
+    prefix: '37123444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4572a50e-afb5-4034-90ff-b4b0033c9dd8
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248035
+    prefix: '37123456'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: becad93e-cd2a-45dc-b770-3f0e7722d35a
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248037
+    prefix: '3712347'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5b16568d-3344-41fa-a8b7-996f0d6ccdbf
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248046
+    prefix: '37123500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 93d766e0-9f43-4703-b02d-eddab616e112
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248048
+    prefix: '3712355'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7d7b0e96-25b7-4f20-8953-7c95ccbaf58e
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248050
+    prefix: '3712357'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 304e24c6-ceb8-48e1-af93-5160882ffcc8
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248063
+    prefix: '3712366'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 49a8d5e5-82c9-461e-b8d3-3067e8bc970b
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248072
+    prefix: '3712377'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aac0e59b-ccca-4e3d-916b-552b1b97f6b3
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248085
+    prefix: '3712388'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7a47ef44-a3ac-4074-9aca-a64d9e4d9689
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248100
+    prefix: '3712399'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1e94903a-1a59-43fa-8d11-a2664d9a14e8
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248129
+    prefix: '3712400'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cfba3130-4a1b-4adb-b624-d673a3f35529
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248141
+    prefix: '3712411'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d4b08259-23b4-4510-a0f2-197a9f01cbee
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248151
+    prefix: '3712420'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a93f6781-a6bc-4e09-898c-56b134a82db1
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248153
+    prefix: '3712422'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: beecda8e-a4c5-4ae0-b502-93a1757c2b93
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248155
+    prefix: '3712424'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 49062b4b-afb5-47e3-8fdb-1d065537c811
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248162
+    prefix: '3712433'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 714614c8-c88b-4efa-b058-bd2118670c37
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248174
+    prefix: '3712440'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e4fd6014-a29f-48c7-a49b-a949dcce8680
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248175
+    prefix: '3712442'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40784447-89a8-4656-9be3-0af854ed99d6
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248177
+    prefix: '3712444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5f30978d-c5fa-4f80-8c26-2e4139568006
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248184
+    prefix: '3712450'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ddcd9046-3a4f-4ab6-aeeb-fceae2790afb
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248192
+    prefix: '3712455'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 14182566-d6da-4c42-b832-db0973a73b53
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248198
+    prefix: '3712460'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c7a6e98-d053-4596-b06b-e8bef7525a07
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248199
+    prefix: '3712466'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db95c8ed-e64c-4812-abbe-539714164a9f
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248214
+    prefix: '3712477'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c7e3d157-48ef-486b-8889-c1a6ea7cea12
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248215
+    prefix: '3712478'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1ad3c72-d5d2-4ca1-889a-16caa19134d0
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248217
+    prefix: '3712479'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0614ae61-d69a-458c-ba23-0f93b865af09
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248222
+    prefix: '3712480'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b2a76f0-732d-418f-bc21-2f334c7f131e
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248223
+    prefix: '3712481'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 680fb4e6-c4db-4343-b348-f073d3aa4fc6
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248224
+    prefix: '3712482'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 08a87afb-8a34-4ddc-a630-4ef7bdb53fe5
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248226
+    prefix: '3712483'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52480df9-a264-4221-8468-c903af554ae5
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248227
+    prefix: '3712484'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 313888cf-88d7-407e-8e70-78f9a2ed7f5f
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248228
+    prefix: '3712485'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a64cbf38-9c84-4c08-aa7b-b186bea45075
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248229
+    prefix: '3712486'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1059927f-15e6-4610-9351-3a97269d2c4f
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248230
+    prefix: '3712487'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5ea2e123-98ee-482d-aece-b2c6075a6491
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248231
+    prefix: '3712488'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c1a249bf-dc8d-4c89-9535-ff3a440d5dd9
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248232
+    prefix: '3712489'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2b13092e-8366-4627-a685-f7693aaad4d6
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248237
+    prefix: '3712490'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cb0421a2-6fa1-4382-93a9-cbf79d72cfbb
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248239
+    prefix: '3712491'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9058f8b7-9dba-4dd6-a30f-0743377ac3a8
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248241
+    prefix: '3712492'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dfd240e3-c73a-4027-975a-b8ba055632db
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248243
+    prefix: '3712493'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a2cc799f-e0ec-4e52-8d4d-b644f82ef317
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248244
+    prefix: '3712494'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2601fc40-df3c-4cc0-89cd-7621b0b2e7ff
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248245
+    prefix: '3712495'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e72741f-a3f5-47a5-b0e9-b96c6f5b9b24
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248246
+    prefix: '3712496'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8c95f8a3-9190-472b-8d94-2970112df346
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248247
+    prefix: '3712497'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68c601a7-17be-4f42-8584-1bd56497b37d
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248248
+    prefix: '3712498'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0726c6dc-42d0-472b-aede-7222906c2e8f
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248249
+    prefix: '3712499'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 12a53cf1-9200-40f1-8522-7e90d85aa593
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248277
+    prefix: '3712500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 926d7fac-ccd6-4870-8e30-676d82e24497
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248305
+    prefix: '371251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6b41c521-f264-4c69-90c4-d8a2ed66bc02
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248323
+    prefix: '371252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7be0b01-f851-4e5b-958e-49c3af367669
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248338
+    prefix: '371253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00e47c58-2f60-460e-85f2-8d678743fe73
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248356
+    prefix: '371254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b98283d-b186-482c-a208-6268683f625a
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248389
+    prefix: '3712550'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f6a5d53-0f1a-48d9-9707-b3ced90bca8b
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248392
+    prefix: '3712551'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0d9c4b36-309e-44b1-b26f-d072282e015f
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248395
+    prefix: '3712552'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9b1591da-e950-4eaa-82ad-db49d58d16c7
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248397
+    prefix: '3712553'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba5906b9-d93c-4759-b2c0-0f1081193e68
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248399
+    prefix: '3712554'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 46588d73-bbef-421f-9658-0d689e4294ce
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248401
+    prefix: '3712555'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be0eaf32-da73-4785-82b4-3c5e91fb91e4
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248403
+    prefix: '3712556'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8c89e974-c801-40b5-a38c-26ffcc4c7aef
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248404
+    prefix: '3712557'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3b6b7ebe-03fb-45ea-8f00-ce60a0fa0346
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248405
+    prefix: '3712558'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5774deba-270b-4173-a708-6a83e533e7f3
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248406
+    prefix: '3712559'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f04eb5f-8539-405a-b1e9-a491b2cf9d39
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248410
+    prefix: '371256'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 53edc916-9cee-43f0-9f72-cf1e5b27b47f
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248420
+    prefix: '371257'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7bd46b7d-95c3-4418-a226-bfbcb86608b0
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248431
+    prefix: '3712580'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc320031-f3de-4893-8746-6b34f23e0e66
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 248432
+    prefix: '3712581'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ae2b52b7-ae1b-4946-9aec-aea6af96ee29
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 248433
+    prefix: '3712582'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a4efa43e-4619-4302-8b41-19f15ca27eb2
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 248434
+    prefix: '3712583'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fe922308-9e38-42d0-a41f-c8ac81b89712
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 248436
+    prefix: '3712584'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3c5be1c0-fb97-4184-a028-65ce7bbbc08b
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 248437
+    prefix: '3712585'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8d618b4c-93ec-4505-aaf9-92f29ff02970
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248438
+    prefix: '3712586'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a3cfd79a-f8f1-4cfc-92d5-96899b04c71c
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248439
+    prefix: '3712587'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 535de3b6-450d-4348-964b-490176f0bd19
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248440
+    prefix: '3712588'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 423478d6-3bf8-42d7-902b-b1a4895bcd58
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248441
+    prefix: '3712589'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74cd0ff7-99c9-4e94-a2b0-fc0fb16edad0
+    country_id: *lv
+    network_id: *lv_triatel_mobile
+  - id: 248443
+    prefix: '371259'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8a931fc7-abc8-410c-8927-2484f49e0ea6
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248486
+    prefix: '371260'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 597adc0d-37b7-40ee-97ca-cf90e1f052df
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248493
+    prefix: '371261'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b94c7c32-0093-4b6c-ab15-742f2891a1ec
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248502
+    prefix: '371262'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7bc89197-0056-47bd-8f15-c20fc2b77fa7
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248516
+    prefix: '371263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65476a6b-db0b-4bf5-95d6-4bf009bb1301
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248525
+    prefix: '371264'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b2c282d-090f-4694-a9db-3e7e2df27aa8
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248536
+    prefix: '371265'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1fff5df7-b6f6-406b-aa49-ea7f879b45f7
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248547
+    prefix: '371266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4702ad3f-5cef-4e63-90e8-255a1fc44527
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248561
+    prefix: '371267'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6859f1a4-a8f7-4e71-bfcb-1310ba564f8e
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248566
+    prefix: '371268'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94aa7cad-4a0f-48b4-a7f0-e4894ba85618
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248588
+    prefix: '371269'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94158702-7628-4760-bccd-76bf234dcb02
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248626
+    prefix: '371270'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b326deb2-ec23-4e9c-982b-d6ccd023fa45
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248630
+    prefix: '371271'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 55a8db33-6444-4b44-bfb9-ecdf94065221
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248644
+    prefix: '3712720'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 243ef125-2445-49cc-9588-a7d77e7e63b3
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248647
+    prefix: '3712721'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3c06c0b6-9fa5-4cd8-b724-9931d73c5d2e
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248652
+    prefix: '3712722'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7906c007-a24d-4d36-a410-e3f1af0ba8af
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248655
+    prefix: '3712723'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6e25f00b-139c-4941-88e0-d82941b3c3ae
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248658
+    prefix: '3712724'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b252d0ff-72d0-40df-910b-ac07f51fe65c
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248662
+    prefix: '3712725'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 934bdec5-af0e-4e80-a65a-60fb83ab2659
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248663
+    prefix: '3712726'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f5e2298c-3680-46a9-a56f-68531c8d6d47
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248664
+    prefix: '3712727'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 221c3e5f-bdc1-4767-ac3b-8df2e9f4c651
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248665
+    prefix: '3712729'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40a02328-332e-4445-9f4d-0991ced6125b
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248668
+    prefix: '371273'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4abf1f5d-f43b-4c68-96fb-1a952c89fd16
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248679
+    prefix: '371274'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 288601f3-3f35-4bea-a2aa-78ade40a90a1
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248687
+    prefix: '371275'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a07f186-bb07-455f-b98c-8ccbb715e74b
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248698
+    prefix: '3712760'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e99f617-fb26-4edb-b852-6f1d7b6d47b6
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248699
+    prefix: '3712761'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b8c7906-5200-4e92-9831-28fce2c3f84f
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248700
+    prefix: '3712762'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1dd64417-74a2-4549-b47e-ca48e27078cf
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248701
+    prefix: '3712763'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5ccf28c6-f1b8-457c-9e58-5684cd707ada
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248702
+    prefix: '3712764'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d6384170-7f73-45db-bc47-d912762dc20a
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248703
+    prefix: '3712765'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9161bd83-bd02-4789-b860-95e41c7b7b6c
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248704
+    prefix: '3712766'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 99e64fb3-2eae-4284-941f-36e80e8950cb
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248705
+    prefix: '3712767'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 18b6baa4-4e3c-4ae2-947e-2097f9fc3a3b
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248709
+    prefix: '3712770'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5c8105cc-91b1-4e91-b80c-35b771a18f85
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248710
+    prefix: '3712771'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6e18149e-8dbe-43ef-aa0c-49aa7829ebc2
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248711
+    prefix: '3712772'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 713af0fc-cd82-488f-9714-6d90e503f1df
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248713
+    prefix: '3712773'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2474c978-abac-44ac-87d1-bde336df3770
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248714
+    prefix: '3712774'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0a553e2b-9c52-4f03-9566-fc22a438d52b
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248716
+    prefix: '3712775'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 456064d9-afe9-4a3d-b38b-3fa5cb9486b8
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248718
+    prefix: '3712776'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc7689ce-ca5e-46a0-99de-f3aa26521da6
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248720
+    prefix: '3712777'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c84e6cbc-c8b1-4e61-844d-73ede24270ac
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248722
+    prefix: '3712778'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52d9755c-1753-4c01-b17c-b4b4d0c4dd25
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248725
+    prefix: '3712779'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 11af53ea-2385-4475-b4c0-fa43f16a079e
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248728
+    prefix: '371278'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba2d1f4d-8e1b-45c1-9814-4727f44a9325
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248739
+    prefix: '3712790'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db8804db-6c7d-49b3-a1da-4403cc183821
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248740
+    prefix: '3712792'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5598b5a4-7bc8-40c8-883d-13e27f69dc1e
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248745
+    prefix: '3712799'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d408d4e7-9933-4050-b4cc-cf8b2fa90e91
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248762
+    prefix: '371280'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 80554ee3-4507-414f-aefb-6da78f7504be
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248766
+    prefix: '371281'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d94604c-6bc1-4396-a98f-f5de6dc61f25
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248771
+    prefix: '371282'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f75d644-909d-402b-873f-00773a450170
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248778
+    prefix: '371283'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e144bc98-ebf4-4696-870d-0bc1ede39096
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248785
+    prefix: '3712844'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e54726e-a0e1-4b4f-9517-b35cab6269f0
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248786
+    prefix: '3712845'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05690c49-510f-44c3-aa65-d80d9cc05ee3
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248787
+    prefix: '3712846'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a736bcb6-e4b5-42d5-9bfa-88f13110d39d
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248788
+    prefix: '3712847'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1df920e-52af-4abb-b7e1-a7102bc8e3f4
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248789
+    prefix: '3712848'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1aa90a14-4a3f-4a10-8e7b-6716ad4b7ad4
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248790
+    prefix: '3712849'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f58cd61-d242-446c-93cf-19aed702ec13
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248795
+    prefix: '3712855'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 277315e7-bac2-40f0-a231-4486649def80
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248798
+    prefix: '371286'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0e20994-a3f7-4e90-83bb-11872a9768cb
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248804
+    prefix: '371287'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: af681040-b74a-44a1-bcdc-954291f0ae64
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248808
+    prefix: '371288'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d5aadee1-afa0-4913-93f8-52e9088008ea
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248812
+    prefix: '371289'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8da4812e-1d39-4427-9918-f07312f5e351
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248840
+    prefix: '3712900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52f8a3eb-5208-4f4e-be16-3a5f323444e3
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248841
+    prefix: '3712902'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3eae8d0e-d149-4fef-b8cf-1fb1aea7d0cf
+    country_id: *lv
+    network_id: *lv_bite_mobile
+  - id: 248843
+    prefix: '371291'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 63f97089-e81f-4bf6-b28e-3e6fd5d75cc8
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248847
+    prefix: '371292'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bcc3e4dd-8cec-4f09-a347-1df1c8d2e387
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248850
+    prefix: '371293'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5523e9fe-f4c2-4e81-85d2-feca38e523cf
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248852
+    prefix: '371294'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 70d74763-ff7d-47ed-b70e-fa3b01366a5d
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248854
+    prefix: '371295'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e605e242-5ab0-4475-a80c-14b4a09ca88e
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248857
+    prefix: '371296'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1bf2e48a-187e-4e33-bc50-eb7650dc9a6a
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248860
+    prefix: '371297'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16558e1f-85cb-475c-9d4b-e880feb1e10c
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248868
+    prefix: '371298'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7389a31a-cd7f-49e6-bd04-e7e4856b591f
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248870
+    prefix: '371299'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e4444cb-7aba-4d54-bc87-a357977d43dc
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248956
+    prefix: '37130000000'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 560fee68-30e6-4717-ae68-cbc2d0985e89
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248957
+    prefix: '37130000001'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 5a5a1dee-2f93-4604-84bd-ef2b91c21afb
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248958
+    prefix: '37130000002'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: cc38817a-d8d9-469e-ba22-b9cf2c5aa92a
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248959
+    prefix: '37130000003'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 2749f1b2-a127-49d5-a4a6-e05cd667d778
+    country_id: *lv
+    network_id: *lv_lmt_mobile
+  - id: 248960
+    prefix: '37130000010'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f8efbc57-3ef7-45f6-81d6-7ca2d27edd07
+    country_id: *lv
+    network_id: *lv_tele2_mobile
+  - id: 248961
+    prefix: '37130000030'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: fd0d02ff-64ba-497e-a15b-9fe222f4437f
+    country_id: *lv
+    network_id: *lv_bite_mobile

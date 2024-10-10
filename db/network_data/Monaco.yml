@@ -1,0 +1,129 @@
+country_id: &mc 141
+networks:
+# Supplementary services Networks
+  - id: &mc_special_services 5270
+    name: MC Special Services
+    uuid: 90cb9e67-4503-4b6f-a8e6-95c514a18efa
+    type_id: 14
+  - id: &mc_machine_to_machine_m2m_services 6067
+    name: MC Machine To Machine M2M Services
+    uuid: 981b7f97-a220-4335-a7b4-8426ad8a0ef3
+    type_id: 14
+  - id: &mc_audiotext 6776
+    name: MC Audiotext
+    uuid: cb2ee192-9a0f-4de0-88a6-883d6aa65f83
+    type_id: 14
+# Mobile Networks
+  - id: &mc_monaco_telecom_mobile 5769
+    name: MC Monaco Telecom Mobile
+    uuid: 9656dcf1-6445-4753-9425-23bda60c0da1
+    type_id: 3
+  - id: &mc_vala_mobile 5827
+    name: MC Vala Mobile
+    uuid: 571319ba-67f3-42e6-8cbc-ff8478c6d5e0
+    type_id: 3
+  - id: &mc_z_mobile_mobile 5843
+    name: MC Z Mobile Mobile
+    uuid: 3cc4f09e-c8c5-4373-9e37-c1f92035e37c
+    type_id: 3
+# Fixed Networks
+  - id: &mc_fixed 6898
+    name: MC Fixed
+    uuid: f1837ded-1bd5-43c6-b56d-17a353e14f6b
+    type_id: 12
+network_prefixes:
+# Country code Prefixes
+  - id: 242046
+    prefix: '377'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 3be579c5-438e-49d0-8aa7-66849a5bf801
+    country_id: *mc
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242441
+    prefix: '3771'
+    number_min_length: 5
+    number_max_length: 6
+    uuid: c44aae92-c40c-45f9-97a3-c89e3085f2a2
+    country_id: *mc
+    network_id: *mc_special_services
+  - id: 247419
+    prefix: '3772'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 379d31f3-584e-48f7-afbb-a6938f6ae524
+    country_id: *mc
+    network_id: *mc_machine_to_machine_m2m_services
+  - id: 255260
+    prefix: '3777'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 04fbcad8-650e-4a23-b961-f3a65b570b14
+    country_id: *mc
+    network_id: *mc_audiotext
+# Mobile Prefixes
+  - id: 243946
+    prefix: '37704'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9755352e-acea-4fb7-959b-192bf40a6893
+    country_id: *mc
+    network_id: *mc_monaco_telecom_mobile
+  - id: 244493
+    prefix: '377044'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 686ba98d-77d4-4161-ae85-293dfc9df0ad
+    country_id: *mc
+    network_id: *mc_vala_mobile
+  - id: 244635
+    prefix: '377045'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 265af174-416a-48af-9783-357faa04b313
+    country_id: *mc
+    network_id: *mc_vala_mobile
+  - id: 244739
+    prefix: '3770455'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4090c02-bb2f-4443-a23e-374634863b70
+    country_id: *mc
+    network_id: *mc_z_mobile_mobile
+  - id: 244776
+    prefix: '3770456'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cb069443-b08f-4d8e-a060-3d6d447d8cbd
+    country_id: *mc
+    network_id: *mc_z_mobile_mobile
+  - id: 245409
+    prefix: '37706'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5c44e38b-84dc-40ee-a1ca-a5f05be6bcaf
+    country_id: *mc
+    network_id: *mc_monaco_telecom_mobile
+  - id: 248910
+    prefix: '37703'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4cd3980d-1097-48b3-a00b-32dbb6d04205
+    country_id: *mc
+    network_id: *mc_monaco_telecom_mobile
+# Fixed Prefixes
+  - id: 256675
+    prefix: '377870'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e65feabc-e8e0-4a01-b5db-d403c70892a5
+    country_id: *mc
+    network_id: *mc_fixed
+  - id: 257115
+    prefix: '3779'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2f10d120-0ee1-4788-b8bc-68878a4de9dd
+    country_id: *mc
+    network_id: *mc_fixed

@@ -11,7 +11,7 @@ RSpec.describe Api::Rest::Admin::Routing::DestinationsController, type: :request
 
     let!(:destinations) do
       [
-        FactoryBot.create(:destination, prefix: '12345', rate_group:, routing_tag_ids: []),
+        FactoryBot.create(:destination, prefix: '370614', rate_group:, routing_tag_ids: []),
         FactoryBot.create(:destination, rate_group:, routing_tag_ids: [routing_tag.id, nil])
       ]
     end
