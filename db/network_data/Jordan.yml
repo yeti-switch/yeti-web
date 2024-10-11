@@ -1,0 +1,828 @@
+country_id: &jo 108
+networks:
+# Fixed Networks
+  - id: &jo_middle_region_region 4614
+    name: JO Middle Region Region
+    uuid: 6b98cdc4-76b0-48ca-b5d5-274a04ee9737
+    type_id: 2
+  - id: &jo_zarqa_region 4642
+    name: JO Zarqa Region
+    uuid: 8f0862b1-3114-441b-ba1b-e56d85151f58
+    type_id: 2
+  - id: &jo_madaba_region 4643
+    name: JO Madaba Region
+    uuid: f5b991c6-a314-4d51-9ba7-a1d232a5f1fb
+    type_id: 2
+  - id: &jo_balqa_region 4644
+    name: JO Balqa Region
+    uuid: 13a65383-7a9d-40ec-871c-2a27f941f9ff
+    type_id: 2
+  - id: &jo_greater_amman_region_region 8974
+    name: JO Greater Amman Region Region
+    uuid: 13373d0f-6d38-4d8a-a25d-6022abb9e4af
+    type_id: 2
+  - id: &jo_greater_amman_region 8981
+    name: JO Greater Amman Region
+    uuid: 6a8e6ccf-58c2-4766-afc5-34a98072f7a0
+    type_id: 2
+  - id: &jo_northern_region_region 25845
+    name: JO Northern Region Region
+    uuid: ddc39e60-bb14-423e-9a36-c8ac6728aa4e
+    type_id: 2
+  - id: &jo_mafraq_region 25957
+    name: JO Mafraq Region
+    uuid: f61c8e19-7c0f-476b-85a4-52b6fed9bb89
+    type_id: 2
+  - id: &jo_jerash_region 25959
+    name: JO Jerash Region
+    uuid: 57c60c02-5736-4e03-b1ff-6e9aa36cafbe
+    type_id: 2
+  - id: &jo_ajloun_region 25961
+    name: JO Ajloun Region
+    uuid: 783487db-a356-4f5d-b515-496549be1e6a
+    type_id: 2
+  - id: &jo_irbid_region 25966
+    name: JO Irbid Region
+    uuid: 5d75f36e-3b45-4223-ab25-271b22a8d90e
+    type_id: 2
+  - id: &jo_jarash_region 25986
+    name: JO Jarash Region
+    uuid: 1892582a-e091-4488-b55d-ce354fc49616
+    type_id: 2
+  - id: &jo_southern_region_region 31291
+    name: JO Southern Region Region
+    uuid: 62f63030-b7fd-4c8a-a238-5edf45d54942
+    type_id: 2
+  - id: &jo_aqaba_region 31299
+    name: JO Aqaba Region
+    uuid: b7f65ca5-f756-4471-a8a1-e4717da2dc69
+    type_id: 2
+  - id: &jo_maan_region 31302
+    name: JO Maan Region
+    uuid: 8668c975-2b34-476c-8558-11db464f28a4
+    type_id: 2
+  - id: &jo_tafila_region 31305
+    name: JO Tafila Region
+    uuid: 0288a6d1-c658-493a-93be-99bf6015c821
+    type_id: 2
+  - id: &jo_karak_region 31325
+    name: JO Karak Region
+    uuid: fe6ffa43-d88e-47bf-af4f-2451b4a812ce
+    type_id: 2
+  - id: &jo_tafileh_region 31329
+    name: JO Tafileh Region
+    uuid: b06e20e7-0c77-43cc-b587-22488eacb8da
+    type_id: 2
+# Mobile Networks
+  - id: &jo_mobile 14382
+    name: JO Mobile
+    uuid: 6a80f972-57dd-450c-96cf-7d759b4222be
+    type_id: 3
+  - id: &jo_orange_mobile 14432
+    name: JO Orange Mobile
+    uuid: 80a6f2d7-ae94-4006-9b0b-77f8c6581500
+    type_id: 3
+  - id: &jo_umniah_mobile 14433
+    name: JO Umniah Mobile
+    uuid: 3298864a-fdd7-46dc-a53e-1288fd6d062f
+    type_id: 3
+  - id: &jo_zain_mobile 14435
+    name: JO Zain Mobile
+    uuid: 8422e434-68fb-4ee6-8650-e28df54d42aa
+    type_id: 3
+# Paging Networks
+  - id: &jo_mirsal_paging 14424
+    name: JO Mirsal Paging
+    uuid: 699a18f9-b5a1-4ca9-ac94-439332c12416
+    type_id: 12
+# Supplementary services Networks
+  - id: &jo_freephone_services 19789
+    name: JO Freephone Services
+    uuid: 24d07c30-4cb1-426c-968a-1cbcc5d85676
+    type_id: 13
+  - id: &jo_fixed_cost_services 19790
+    name: JO Fixed Cost Services
+    uuid: e85110b1-64b3-4d97-9408-86977e1b10dd
+    type_id: 13
+  - id: &jo_shared_cost_services 19804
+    name: JO Shared Cost Services
+    uuid: c7ef8cac-4612-444d-9641-12e0055db311
+    type_id: 13
+  - id: &jo_special_services 21426
+    name: JO Special Services
+    uuid: 2abea687-1bf8-43a4-bdaf-0bc856103d14
+    type_id: 13
+  - id: &jo_emergency_services 24487
+    name: JO Emergency Services
+    uuid: 73acce0b-2e20-4490-94d0-2e0415fc80d5
+    type_id: 13
+  - id: &jo_premium_rate_services 41579
+    name: JO Premium Rate Services
+    uuid: b4400179-d17a-4a2c-b025-6b63ce984cf0
+    type_id: 13
+network_prefixes:
+# Fixed Prefixes
+  - id: 54582
+    prefix: '9625'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a03f6ad1-e90a-472a-9104-0de4a95121b9
+    country_id: *jo
+    network_id: *jo_middle_region_region
+  - id: 54682
+    prefix: '9625300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9498b54f-c580-4e34-ad2e-428eda8c56fd
+    country_id: *jo
+    network_id: *jo_zarqa_region
+  - id: 54683
+    prefix: '9625301'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c28038c2-9e19-4425-901b-ae392352ec68
+    country_id: *jo
+    network_id: *jo_zarqa_region
+  - id: 54684
+    prefix: '9625302'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 444900c2-2340-433c-843e-26687038c61a
+    country_id: *jo
+    network_id: *jo_zarqa_region
+  - id: 54685
+    prefix: '9625303'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38a37d64-125f-4b09-b881-fb6f189a9623
+    country_id: *jo
+    network_id: *jo_zarqa_region
+  - id: 54687
+    prefix: '9625310'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e9a09796-8052-40ee-9d71-a819d12f217b
+    country_id: *jo
+    network_id: *jo_madaba_region
+  - id: 54690
+    prefix: '9625312'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6fed3645-2853-47c7-b4f6-94132ffe79fe
+    country_id: *jo
+    network_id: *jo_madaba_region
+  - id: 54692
+    prefix: '9625313'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cca61a72-4916-4c26-bb7b-30c3514f4e50
+    country_id: *jo
+    network_id: *jo_madaba_region
+  - id: 54700
+    prefix: '962532'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0bc5bc44-bb58-4349-9091-1ebf6217e5bb
+    country_id: *jo
+    network_id: *jo_madaba_region
+  - id: 54702
+    prefix: '9625330'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07568598-0cec-4227-8c5c-988790a67ef2
+    country_id: *jo
+    network_id: *jo_balqa_region
+  - id: 54703
+    prefix: '9625332'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aecac638-c855-4ae7-bfe9-8f7497d97187
+    country_id: *jo
+    network_id: *jo_balqa_region
+  - id: 54704
+    prefix: '9625333'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 02de0fae-549c-4f63-8536-2101e204287d
+    country_id: *jo
+    network_id: *jo_balqa_region
+  - id: 54706
+    prefix: '962534'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 69168278-6281-4528-b03f-ce5c4132f39c
+    country_id: *jo
+    network_id: *jo_balqa_region
+  - id: 54708
+    prefix: '962535'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4622a03b-75fd-4143-b56e-01e7def5d235
+    country_id: *jo
+    network_id: *jo_balqa_region
+  - id: 54710
+    prefix: '962536'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c91215e2-b9b4-4697-908e-99f1f8586c49
+    country_id: *jo
+    network_id: *jo_zarqa_region
+  - id: 54714
+    prefix: '962537'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2df99f2b-278a-4116-b1e2-f68707de2bb4
+    country_id: *jo
+    network_id: *jo_zarqa_region
+  - id: 54720
+    prefix: '962538'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fd7430a3-d5dc-46d3-922a-87c794352e5a
+    country_id: *jo
+    network_id: *jo_zarqa_region
+  - id: 54725
+    prefix: '962539'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 585505ef-eff2-4ad4-9795-7d4c0de346df
+    country_id: *jo
+    network_id: *jo_zarqa_region
+  - id: 84944
+    prefix: '9626'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a1a5a271-d4fd-466a-ab46-78d22e57c139
+    country_id: *jo
+    network_id: *jo_greater_amman_region_region
+  - id: 84953
+    prefix: '96262'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f2bdd1d6-9d53-433a-81fc-0227b3efb7c8
+    country_id: *jo
+    network_id: *jo_greater_amman_region
+  - id: 85145
+    prefix: '96263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d239da7-5780-4e82-9cc6-3b6d96d46dfe
+    country_id: *jo
+    network_id: *jo_greater_amman_region
+  - id: 85239
+    prefix: '96264'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f5f6d95a-3b80-454b-9157-4b8753336648
+    country_id: *jo
+    network_id: *jo_greater_amman_region
+  - id: 85249
+    prefix: '96265'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff399fba-a407-48ad-887d-0de929803629
+    country_id: *jo
+    network_id: *jo_greater_amman_region
+  - id: 261193
+    prefix: '9622'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50c3dd19-b467-4a7e-a266-74fb9af369c5
+    country_id: *jo
+    network_id: *jo_northern_region_region
+  - id: 261400
+    prefix: '962262'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 33caacb0-1163-40c7-b7da-c9b9a6163ffa
+    country_id: *jo
+    network_id: *jo_mafraq_region
+  - id: 261403
+    prefix: '962263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2c10e1a-106d-4b94-a2c1-049364a26228
+    country_id: *jo
+    network_id: *jo_jerash_region
+  - id: 261407
+    prefix: '962264'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2f1c8489-95e3-4611-abeb-7e3c7b86534a
+    country_id: *jo
+    network_id: *jo_ajloun_region
+  - id: 261416
+    prefix: '962265'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f9e052e8-4a6a-4535-9d40-53419a673e87
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261430
+    prefix: '9622660'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: da275c03-3d3c-4dd7-ab96-d1367e9202e5
+    country_id: *jo
+    network_id: *jo_mafraq_region
+  - id: 261433
+    prefix: '9622662'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84039f48-d504-428d-9af2-8867437fcd06
+    country_id: *jo
+    network_id: *jo_mafraq_region
+  - id: 261435
+    prefix: '9622663'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b5f25621-fab6-4bd2-a299-af230543a004
+    country_id: *jo
+    network_id: *jo_mafraq_region
+  - id: 261444
+    prefix: '9622670'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25b423c6-c8e1-49d5-9cf9-94fd0d225a4b
+    country_id: *jo
+    network_id: *jo_jarash_region
+  - id: 261447
+    prefix: '9622672'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5386eabb-6a31-4f80-af63-09715822d4d3
+    country_id: *jo
+    network_id: *jo_jarash_region
+  - id: 261449
+    prefix: '9622673'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8a88d41c-a067-48ab-92dd-a4df7daca193
+    country_id: *jo
+    network_id: *jo_jarash_region
+  - id: 261456
+    prefix: '9622680'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c464748-66a0-49d5-a431-1cd6556c81e5
+    country_id: *jo
+    network_id: *jo_ajloun_region
+  - id: 261460
+    prefix: '9622682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a201462-dd88-42cb-893e-2f78d0dec5c5
+    country_id: *jo
+    network_id: *jo_ajloun_region
+  - id: 261463
+    prefix: '9622683'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7590a6e1-f4ed-4e65-be3a-4e86126326d1
+    country_id: *jo
+    network_id: *jo_ajloun_region
+  - id: 261474
+    prefix: '9622690'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3463ecdf-59a3-47fb-91bb-6f27033612a5
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261476
+    prefix: '9622691'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: de7d4083-3310-4f5e-99af-686ffa9a4200
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261477
+    prefix: '9622692'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc441793-9f7d-4130-862e-7e6e558f9aa1
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261479
+    prefix: '9622693'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f54727a-7afe-44fc-80cb-755810b2cfc5
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261483
+    prefix: '962270'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bdcf4b8e-1618-4772-96d2-35705d618e4e
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261489
+    prefix: '962271'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5c9306c-63c1-4de6-b37e-609cb1912d41
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261491
+    prefix: '962272'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 37ecf7c9-4cbb-4756-946f-2ce9ef5e1ae5
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261493
+    prefix: '962273'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28dde1da-b025-4f8a-b119-6ce15796ca01
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261495
+    prefix: '962274'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f03971cc-fa7c-41b5-9c33-9b2b58b44521
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 261497
+    prefix: '962275'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac21efc4-c34d-4a07-b857-2a67fd49e99b
+    country_id: *jo
+    network_id: *jo_irbid_region
+  - id: 315871
+    prefix: '9623'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db801098-c4ce-4dd4-83c6-a3f9de20ed42
+    country_id: *jo
+    network_id: *jo_southern_region_region
+  - id: 315882
+    prefix: '962320'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00ff1e61-a4c1-42e6-895d-c3cc0a01b4dd
+    country_id: *jo
+    network_id: *jo_aqaba_region
+  - id: 315893
+    prefix: '962321'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1128dc20-a8c0-4aef-9173-45c54faceeb3
+    country_id: *jo
+    network_id: *jo_maan_region
+  - id: 315904
+    prefix: '962322'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9984ba91-27cf-4605-bcea-ea38e15f3e87
+    country_id: *jo
+    network_id: *jo_tafila_region
+  - id: 315961
+    prefix: '962323'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8b1d5cf-6798-4c56-be39-3850f78a44cc
+    country_id: *jo
+    network_id: *jo_karak_region
+  - id: 315972
+    prefix: '9623240'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2a35960d-7f55-4ebf-8a79-6e32ae863e21
+    country_id: *jo
+    network_id: *jo_aqaba_region
+  - id: 315973
+    prefix: '9623241'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 920762f5-9b57-4719-8b64-46b8805cd264
+    country_id: *jo
+    network_id: *jo_aqaba_region
+  - id: 315974
+    prefix: '9623242'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28b6480e-811b-4c8c-9562-de2ab4d0a0c6
+    country_id: *jo
+    network_id: *jo_aqaba_region
+  - id: 315985
+    prefix: '9623243'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 53e33914-5ae6-4151-8140-5d1d18a3fff9
+    country_id: *jo
+    network_id: *jo_aqaba_region
+  - id: 316009
+    prefix: '9623250'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2293e53c-8d55-4f87-afb1-755477b307d7
+    country_id: *jo
+    network_id: *jo_maan_region
+  - id: 316011
+    prefix: '9623252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fe9aa605-c1de-4076-ad66-41908bfc0e72
+    country_id: *jo
+    network_id: *jo_maan_region
+  - id: 316012
+    prefix: '9623253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8ea7931d-5e54-47c5-a796-9a6dbcdad1db
+    country_id: *jo
+    network_id: *jo_maan_region
+  - id: 316013
+    prefix: '9623260'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 474627ec-4872-49ce-8a1e-7a86ed839580
+    country_id: *jo
+    network_id: *jo_tafileh_region
+  - id: 316034
+    prefix: '9623262'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5ab21091-c4b1-4366-a8f0-eedd00910d0b
+    country_id: *jo
+    network_id: *jo_tafileh_region
+  - id: 316045
+    prefix: '9623263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8a4c2fb-c9ff-4b8b-bbf3-29dacd18f632
+    country_id: *jo
+    network_id: *jo_tafileh_region
+  - id: 316083
+    prefix: '9623270'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aba2e99e-82c9-4a47-ac54-9ddea3809cf2
+    country_id: *jo
+    network_id: *jo_karak_region
+  - id: 316095
+    prefix: '9623272'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f948d330-10f8-415f-8a1e-a5807d714ee2
+    country_id: *jo
+    network_id: *jo_karak_region
+  - id: 316106
+    prefix: '9623273'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a496aebc-925f-457a-a10f-89a34a422285
+    country_id: *jo
+    network_id: *jo_karak_region
+# Mobile Prefixes
+  - id: 149336
+    prefix: '9627'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 912cecf5-38be-44f8-8634-0f9730d7ba4f
+    country_id: *jo
+    network_id: *jo_mobile
+  - id: 149846
+    prefix: '962770'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d8588033-b55a-48d5-a02a-224da68a2c12
+    country_id: *jo
+    network_id: *jo_orange_mobile
+  - id: 149847
+    prefix: '962771'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a1aaa365-3265-4f89-a81c-eed573ac751d
+    country_id: *jo
+    network_id: *jo_orange_mobile
+  - id: 149848
+    prefix: '962772'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 68ecd971-6b01-46ad-9c41-2304dfb9dd09
+    country_id: *jo
+    network_id: *jo_orange_mobile
+  - id: 149851
+    prefix: '962775'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1202b2f-5e57-4a61-8ce1-fac8c4fc1419
+    country_id: *jo
+    network_id: *jo_orange_mobile
+  - id: 149853
+    prefix: '962776'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a90e5f4f-2e04-45df-ad3e-69714d8bdab1
+    country_id: *jo
+    network_id: *jo_orange_mobile
+  - id: 149855
+    prefix: '962777'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 34850fc2-edae-4b12-85b9-75d52a17b7b4
+    country_id: *jo
+    network_id: *jo_orange_mobile
+  - id: 149866
+    prefix: '962778'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 24f2b04b-9cd3-4cab-85da-984af6c31639
+    country_id: *jo
+    network_id: *jo_orange_mobile
+  - id: 149878
+    prefix: '962779'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a91f5a57-1188-410d-ae89-22ea3e11e94e
+    country_id: *jo
+    network_id: *jo_orange_mobile
+  - id: 149880
+    prefix: '962780'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e06e7b77-5497-4178-92c3-4d1fec403715
+    country_id: *jo
+    network_id: *jo_umniah_mobile
+  - id: 149921
+    prefix: '962781'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d53f2d58-07e6-4f0b-b3c3-0cde63860b62
+    country_id: *jo
+    network_id: *jo_umniah_mobile
+  - id: 149956
+    prefix: '962782'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 48fa2085-8518-41e3-a759-91b0c80f8590
+    country_id: *jo
+    network_id: *jo_umniah_mobile
+  - id: 149979
+    prefix: '962785'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 18192d3a-82b0-4ae8-a5ec-42192a1e1ab1
+    country_id: *jo
+    network_id: *jo_umniah_mobile
+  - id: 149999
+    prefix: '962786'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 985a0d12-a81c-405a-a10b-2c2881db4eff
+    country_id: *jo
+    network_id: *jo_umniah_mobile
+  - id: 150017
+    prefix: '962787'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 983841c7-06cf-471a-b70b-e2dad90c05c1
+    country_id: *jo
+    network_id: *jo_umniah_mobile
+  - id: 150035
+    prefix: '962788'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1facb9e3-0cfa-444f-bf12-a1e9d16ee191
+    country_id: *jo
+    network_id: *jo_umniah_mobile
+  - id: 150046
+    prefix: '962789'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1a46b879-d2ea-4105-9082-2efcaac1ce15
+    country_id: *jo
+    network_id: *jo_umniah_mobile
+  - id: 150066
+    prefix: '962790'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d92d2557-0e8f-477d-bbe2-fb2646be1749
+    country_id: *jo
+    network_id: *jo_zain_mobile
+  - id: 150096
+    prefix: '962791'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9a05a543-fb1c-4607-bb8f-f269ee654032
+    country_id: *jo
+    network_id: *jo_zain_mobile
+  - id: 150103
+    prefix: '962792'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b30608fc-5e95-430f-a51d-b100282cced9
+    country_id: *jo
+    network_id: *jo_zain_mobile
+  - id: 150152
+    prefix: '962795'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9cfd4cb0-7a5f-45a7-a13f-74a16af5c6bf
+    country_id: *jo
+    network_id: *jo_zain_mobile
+  - id: 150158
+    prefix: '962796'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ca883147-05a9-4b11-a201-c47774dd1ea4
+    country_id: *jo
+    network_id: *jo_zain_mobile
+  - id: 150162
+    prefix: '962797'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e5cbf5e7-761c-4828-b969-6c39df6aaf15
+    country_id: *jo
+    network_id: *jo_zain_mobile
+  - id: 150198
+    prefix: '962798'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bc1ab7a9-bb85-4dcb-8dbf-4adbf6ecdd86
+    country_id: *jo
+    network_id: *jo_zain_mobile
+  - id: 150226
+    prefix: '962799'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4f03040c-08f9-4fb2-a607-881577f8e009
+    country_id: *jo
+    network_id: *jo_zain_mobile
+# Paging Prefixes
+  - id: 149726
+    prefix: '9627466'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af5020cc-f707-4882-8d85-a62de47c1efe
+    country_id: *jo
+    network_id: *jo_mirsal_paging
+  - id: 149742
+    prefix: '9627477'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c6a7fc2c-c800-4c0f-8f83-b580f7ec0f6a
+    country_id: *jo
+    network_id: *jo_mirsal_paging
+# Supplementary services Prefixes
+  - id: 207519
+    prefix: '96280'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1f23378-3092-44d8-b15a-0c4377c5e1d2
+    country_id: *jo
+    network_id: *jo_freephone_services
+  - id: 207520
+    prefix: '962810'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e52bfbf-25b5-4002-8e0d-8ceaed2c5d02
+    country_id: *jo
+    network_id: *jo_fixed_cost_services
+  - id: 207552
+    prefix: '96285'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 27c7cd3f-dba6-4574-9c98-3735cef45527
+    country_id: *jo
+    network_id: *jo_shared_cost_services
+  - id: 207615
+    prefix: '96287'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a3b4498-1129-4d24-8228-59ce9385f4ce
+    country_id: *jo
+    network_id: *jo_fixed_cost_services
+  - id: 242423
+    prefix: '9621'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 19e2d068-ce96-477c-870c-ff879ed1fa09
+    country_id: *jo
+    network_id: *jo_special_services
+  - id: 257392
+    prefix: '962911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 99489e10-7fba-42ac-a482-505d365d644d
+    country_id: *jo
+    network_id: *jo_emergency_services
+  - id: 444753
+    prefix: '9629'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f78451dd-2fdc-477e-9291-a13e23b7b0ac
+    country_id: *jo
+    network_id: *jo_premium_rate_services
+# Country code Prefixes
+  - id: 242026
+    prefix: '962'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 63e070f2-bcf2-4a1d-98b4-2656e11496d8
+    country_id: *jo
+    network_id: null

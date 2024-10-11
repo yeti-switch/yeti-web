@@ -1,0 +1,252 @@
+country_id: &mz 145
+networks:
+# Supplementary services Networks
+  - id: &mz_special_services 21454
+    name: MZ Special Services
+    uuid: a7698bd2-e194-4934-9a49-f6ce51775d23
+    type_id: 13
+  - id: &mz_fax2mail_service 27351
+    name: MZ Fax2Mail Service
+    uuid: 540940f7-b0e7-4d25-ad98-da538cf326f9
+    type_id: 13
+# Fixed Networks
+  - id: &mz_maputo_region 27343
+    name: MZ Maputo Region
+    uuid: 5100b695-afe7-4800-9f50-8364300adc41
+    type_id: 2
+  - id: &mz_beira_region 28305
+    name: MZ Beira Region
+    uuid: bcc527a4-7168-41d3-88f8-dad9e5d69156
+    type_id: 2
+  - id: &mz_quelimane_region 28974
+    name: MZ Quelimane Region
+    uuid: 569e1afc-70e5-4d4f-87de-1368a11ede99
+    type_id: 2
+  - id: &mz_manica_region 29191
+    name: MZ Manica Region
+    uuid: 0fc9cd2e-bc42-43bf-ab05-6486941bd044
+    type_id: 2
+  - id: &mz_tete_region 29232
+    name: MZ Tete Region
+    uuid: 669d3711-a270-430a-8992-90636eaab6e4
+    type_id: 2
+  - id: &mz_nampula_region 29514
+    name: MZ Nampula Region
+    uuid: aeaca5e5-e77c-412f-8dcd-501fbce66f3d
+    type_id: 2
+  - id: &mz_lichinga_region 30224
+    name: MZ Lichinga Region
+    uuid: 0b1b3bbb-6aec-4dab-aa18-507c9de0b8f6
+    type_id: 2
+  - id: &mz_pemba_region 30252
+    name: MZ Pemba Region
+    uuid: f09e534a-5dc6-4429-80ae-a6981d42461e
+    type_id: 2
+  - id: &mz_xai_xai_region 30469
+    name: MZ Xai Xai Region
+    uuid: e64287d3-bd40-495c-a542-ecc1799418d7
+    type_id: 2
+  - id: &mz_inhambane_region 30731
+    name: MZ Inhambane Region
+    uuid: caaa9466-71a0-4331-b7f3-e1a4f3ea9dbc
+    type_id: 2
+  - id: &mz_chokwe_region 31143
+    name: MZ Chokwe Region
+    uuid: 7395b894-7a0b-4b67-b06f-6d6def7b4c4f
+    type_id: 2
+# Satellite Networks
+  - id: &mz_satellite 29148
+    name: MZ Satellite
+    uuid: 1404f900-d143-470d-b809-eb3bae0840a7
+    type_id: 15
+# Mobile Networks
+  - id: &mz_tmcel_mobile 39691
+    name: MZ Tmcel Mobile
+    uuid: 523b4e32-161f-48f4-9cb5-ed9ebe42499c
+    type_id: 3
+  - id: &mz_movitel_mobile 40535
+    name: MZ Movitel Mobile
+    uuid: 5f10269c-c7b3-45c7-9c29-68286aa8399d
+    type_id: 3
+  - id: &mz_vodacom_mobile 40852
+    name: MZ Vodacom Mobile
+    uuid: c4ffe292-9d44-4a44-9194-af9aa02887eb
+    type_id: 3
+  - id: &mz_mobile 41562
+    name: MZ Mobile
+    uuid: b426f5fb-4110-4cc9-8f77-8731f66752bb
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242058
+    prefix: '258'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 6ab90571-3065-4bcd-b7f2-00efebd67c64
+    country_id: *mz
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242451
+    prefix: '2581'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 347f62de-1d14-4319-97aa-44963e73a286
+    country_id: *mz
+    network_id: *mz_special_services
+  - id: 274248
+    prefix: '2582101'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 862e1a5d-4c0b-4551-a0ca-1ae64eb0ee26
+    country_id: *mz
+    network_id: *mz_fax2mail_service
+  - id: 274249
+    prefix: '2582102'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac8c8874-93f0-4c5f-839b-0acd67f5a5b1
+    country_id: *mz
+    network_id: *mz_fax2mail_service
+# Fixed Prefixes
+  - id: 274238
+    prefix: '25821'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a584afc7-1faf-472e-b9dd-203c57340575
+    country_id: *mz
+    network_id: *mz_maputo_region
+  - id: 286636
+    prefix: '25823'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c1f0d89-9ece-4ad9-9c7f-d32a5ca7d2c0
+    country_id: *mz
+    network_id: *mz_beira_region
+  - id: 294330
+    prefix: '25824'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a180c9b1-a825-456b-9387-897b529c7388
+    country_id: *mz
+    network_id: *mz_quelimane_region
+  - id: 297631
+    prefix: '258251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 03bad065-8b04-4512-b80a-60ba17bb344f
+    country_id: *mz
+    network_id: *mz_manica_region
+  - id: 298149
+    prefix: '258252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: beca004c-f362-4a1c-8096-f6a9b8a0a72f
+    country_id: *mz
+    network_id: *mz_tete_region
+  - id: 299801
+    prefix: '25826'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c32483d3-6437-4567-a058-39d18585c6a4
+    country_id: *mz
+    network_id: *mz_nampula_region
+  - id: 305217
+    prefix: '258271'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5f400cae-a0bb-4266-8b1e-c3bc06c6565e
+    country_id: *mz
+    network_id: *mz_lichinga_region
+  - id: 305718
+    prefix: '258272'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 95bcbee5-8380-456b-8d39-fc16a822222c
+    country_id: *mz
+    network_id: *mz_pemba_region
+  - id: 307244
+    prefix: '258282'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f07a3839-b7a8-45c6-aeaa-352c7a26496e
+    country_id: *mz
+    network_id: *mz_xai_xai_region
+  - id: 308602
+    prefix: '258293'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e67067c7-84b3-401b-ac86-568df7795abc
+    country_id: *mz
+    network_id: *mz_inhambane_region
+  - id: 313558
+    prefix: '258281'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8bcb4074-9953-4897-9d73-5b89ac5880a4
+    country_id: *mz
+    network_id: *mz_chokwe_region
+# Satellite Prefixes
+  - id: 296842
+    prefix: '258250'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a2e26b3-9b7e-44c2-9352-7695af58b921
+    country_id: *mz
+    network_id: *mz_satellite
+  - id: 451409
+    prefix: '25889'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 524db735-4454-44ca-be41-ff2f5aee4a04
+    country_id: *mz
+    network_id: *mz_satellite
+# Mobile Prefixes
+  - id: 418788
+    prefix: '25882'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fee4aecf-8b17-42e6-a3de-5d5549ed6004
+    country_id: *mz
+    network_id: *mz_tmcel_mobile
+  - id: 422124
+    prefix: '25883'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1a4628b8-e0d0-44d2-acab-e3ccf06bbb09
+    country_id: *mz
+    network_id: *mz_tmcel_mobile
+  - id: 428702
+    prefix: '25886'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3f53a446-7274-4611-a0cc-af0c0f0e6cdc
+    country_id: *mz
+    network_id: *mz_movitel_mobile
+  - id: 433217
+    prefix: '25884'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5088491c-52ba-4658-95d0-6f2f8b562270
+    country_id: *mz
+    network_id: *mz_vodacom_mobile
+  - id: 435882
+    prefix: '25885'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1e11c57a-c882-4484-b015-e0094fd01ffe
+    country_id: *mz
+    network_id: *mz_vodacom_mobile
+  - id: 441108
+    prefix: '25887'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ae714d94-d87b-405f-9144-483bdaed87dc
+    country_id: *mz
+    network_id: *mz_movitel_mobile
+  - id: 443792
+    prefix: '25888'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1b2462f2-d5c8-4177-bbe7-16569a851bed
+    country_id: *mz
+    network_id: *mz_mobile

@@ -1,0 +1,445 @@
+country_id: &ao 6
+networks:
+# Supplementary services Networks
+  - id: &ao_private_networks 15188
+    name: AO Private Networks
+    uuid: 0a6da1ce-736c-4ca9-83ef-8ff4d7b20322
+    type_id: 13
+  - id: &ao_business_networks 18039
+    name: AO Business Networks
+    uuid: 10212dda-c6bb-49aa-906b-99ee64b4f4ed
+    type_id: 13
+  - id: &ao_shared_cost_services 19961
+    name: AO Shared Cost Services
+    uuid: 1f045f22-74db-4c63-a38f-f6663d62df8d
+    type_id: 13
+  - id: &ao_special_services 21353
+    name: AO Special Services
+    uuid: f9c3c9a6-979c-4a13-bedf-465cfcf45624
+    type_id: 13
+  - id: &ao_emergency_services 21579
+    name: AO Emergency Services
+    uuid: ee7e01ff-6383-47f7-bd63-2240e067a9ab
+    type_id: 13
+  - id: &ao_value_added_services_sms 22117
+    name: AO Value Added Services Sms
+    uuid: 1148d91d-47f8-4276-9ee4-536b133543ba
+    type_id: 13
+  - id: &ao_value_added_services_voice 22520
+    name: AO Value Added Services Voice
+    uuid: fbe690f4-4332-46e5-96f0-104583739e3e
+    type_id: 13
+  - id: &ao_freephone_services 38481
+    name: AO Freephone Services
+    uuid: f99b7f26-a039-4237-835a-80db49413e41
+    type_id: 13
+  - id: &ao_country_direct_services 39261
+    name: AO Country Direct Services
+    uuid: 549f516f-e396-4a66-8b36-958679c2f279
+    type_id: 13
+  - id: &ao_automatic_reply_services 40551
+    name: AO Automatic Reply Services
+    uuid: 3b551527-a0c4-43d6-8e1d-c8e18cdc4719
+    type_id: 13
+  - id: &ao_personal_number_services 40865
+    name: AO Personal Number Services
+    uuid: d0d19268-8102-40bd-91d7-1e51dab3fc45
+    type_id: 13
+  - id: &ao_value_added_services_business_and_marketing 42061
+    name: AO Value Added Services Business And Marketing
+    uuid: ace6b94f-8d59-43c0-8e8b-2ff34c406f4d
+    type_id: 13
+  - id: &ao_value_added_services_entertainment_and_games 42099
+    name: AO Value Added Services Entertainment And Games
+    uuid: ff4676fc-4e6c-4b31-825b-87f988684835
+    type_id: 13
+  - id: &ao_value_added_services_radio_and_television_competitions 42532
+    name: AO Value Added Services Radio And Television Competitions
+    uuid: e930a7c2-2d56-4b60-90e5-52582a4b658f
+    type_id: 13
+  - id: &ao_maritime_radio 42537
+    name: AO Maritime Radio
+    uuid: f3876b36-bbfa-4a14-b1f0-288bddbb1005
+    type_id: 13
+# Mobile Networks
+  - id: &ao_unitel_mobile 20029
+    name: AO Unitel Mobile
+    uuid: c0e69f3a-18d7-4adc-ae5b-a0eb578893ed
+    type_id: 3
+  - id: &ao_africell_mobile 20265
+    name: AO Africell Mobile
+    uuid: 21778f28-35ca-427d-85d0-632349e221c7
+    type_id: 3
+  - id: &ao_movicel_mobile 21166
+    name: AO Movicel Mobile
+    uuid: 1623438a-a978-4016-a496-5f02f4678361
+    type_id: 3
+# Fixed Networks
+  - id: &ao_voip_region 23196
+    name: AO Voip Region
+    uuid: c705b2f2-9ec7-4ce0-ad87-0d975c3315d0
+    type_id: 2
+  - id: &ao_luanda_region 27805
+    name: AO Luanda Region
+    uuid: 7cb45722-edf7-4013-a232-040bcdb6d16b
+    type_id: 2
+  - id: &ao_cabinda_region 28336
+    name: AO Cabinda Region
+    uuid: 5ea408bf-8634-4793-8f40-4dd54f5f8d4e
+    type_id: 2
+  - id: &ao_kwanza_norte_region 28438
+    name: AO Kwanza Norte Region
+    uuid: 719775bf-8bed-49d4-91e9-d382e016d809
+    type_id: 2
+  - id: &ao_kwanza_sul_region 28480
+    name: AO Kwanza Sul Region
+    uuid: 1a813372-8852-42c0-a465-30f315e208b2
+    type_id: 2
+  - id: &ao_huambo_region 28681
+    name: AO Huambo Region
+    uuid: 30e5f41d-fcbf-43e9-bd59-a6a11ed6a823
+    type_id: 2
+  - id: &ao_kuando_kubango_region 28776
+    name: AO Kuando Kubango Region
+    uuid: c4c0a451-554f-40e2-bb59-569143ecf092
+    type_id: 2
+  - id: &ao_zaire_region 28792
+    name: AO Zaire Region
+    uuid: 6805df3a-3426-42de-baea-d93944106957
+    type_id: 2
+  - id: &ao_uige_region 28829
+    name: AO Uige Region
+    uuid: 4182daac-bcbc-4d51-a7e5-319d1877b28d
+    type_id: 2
+  - id: &ao_bengo_region 28869
+    name: AO Bengo Region
+    uuid: 3ae677a5-a131-4943-8e1a-4d1dc6ea4646
+    type_id: 2
+  - id: &ao_bie_region 29124
+    name: AO Bie Region
+    uuid: 8f27608a-7ecf-44e7-8dd2-0d901f8e1bb3
+    type_id: 2
+  - id: &ao_malange_region 29186
+    name: AO Malange Region
+    uuid: b38cdbb8-43a9-44b0-92a0-0080b2e61248
+    type_id: 2
+  - id: &ao_lunda_norte_region 29227
+    name: AO Lunda Norte Region
+    uuid: d5a8083b-1682-40f8-a557-f010c5609311
+    type_id: 2
+  - id: &ao_huila_region 29589
+    name: AO Huila Region
+    uuid: a747e73d-f47c-4e40-8d68-8dffb8773c3c
+    type_id: 2
+  - id: &ao_lunda_sul_region 29925
+    name: AO Lunda Sul Region
+    uuid: 3f7a29d5-5d88-4184-93e0-e5a3a6ea8563
+    type_id: 2
+  - id: &ao_moxico_region 29953
+    name: AO Moxico Region
+    uuid: d185c1d8-d4b1-47c7-afc6-7b05a1878137
+    type_id: 2
+  - id: &ao_namibe_region 30038
+    name: AO Namibe Region
+    uuid: 668f8ed9-6b57-4e57-8d78-21cd27841fb7
+    type_id: 2
+  - id: &ao_cunene_region 30084
+    name: AO Cunene Region
+    uuid: 3f2df001-6f94-4eac-bea3-80ff80e577eb
+    type_id: 2
+  - id: &ao_benguela_region 30247
+    name: AO Benguela Region
+    uuid: 87a76586-bc6b-4d31-8777-f716c95bbc21
+    type_id: 2
+network_prefixes:
+# Supplementary services Prefixes
+  - id: 156263
+    prefix: '244705'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 205a7c5f-64bc-49b2-a1ed-f32e80620a97
+    country_id: *ao
+    network_id: *ao_private_networks
+  - id: 186322
+    prefix: '244750'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2bd34122-ba91-4834-9060-8623d0839cc7
+    country_id: *ao
+    network_id: *ao_business_networks
+  - id: 209215
+    prefix: '244805'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b302bd5b-186b-48a8-9e18-8dc7aefdf20e
+    country_id: *ao
+    network_id: *ao_shared_cost_services
+  - id: 242346
+    prefix: '2441'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 98de764d-7f11-4987-83cd-1e156aae5d62
+    country_id: *ao
+    network_id: *ao_special_services
+  - id: 242609
+    prefix: '244112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: e74597cc-ca0a-4aee-83dc-bfb63e309c3b
+    country_id: *ao
+    network_id: *ao_emergency_services
+  - id: 243918
+    prefix: '2444'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 44965845-60ca-46f3-ac49-b40ccdad6b3d
+    country_id: *ao
+    network_id: *ao_value_added_services_sms
+  - id: 245372
+    prefix: '2446'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4d6f68ab-ba83-4d8a-b19c-71f7d103070b
+    country_id: *ao
+    network_id: *ao_value_added_services_voice
+  - id: 403456
+    prefix: '244800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aadd1716-76b2-4a02-ad3e-62611db3fc8f
+    country_id: *ao
+    network_id: *ao_freephone_services
+  - id: 412354
+    prefix: '244808'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 01569455-3d72-4e8e-8838-ac4d62dffa98
+    country_id: *ao
+    network_id: *ao_country_direct_services
+  - id: 429043
+    prefix: '244860'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1f2284ac-347a-4fd2-b357-34d2644048ec
+    country_id: *ao
+    network_id: *ao_automatic_reply_services
+  - id: 433662
+    prefix: '244840'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f3b40ff2-15e2-49b9-86f3-c7f3abf7999e
+    country_id: *ao
+    network_id: *ao_personal_number_services
+  - id: 454566
+    prefix: '244900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f3548675-6104-4ad1-9efb-39cfbdbd49dc
+    country_id: *ao
+    network_id: *ao_value_added_services_business_and_marketing
+  - id: 454698
+    prefix: '244901'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3217f40a-1cfd-4f07-a275-fd5df731004d
+    country_id: *ao
+    network_id: *ao_value_added_services_entertainment_and_games
+  - id: 462671
+    prefix: '244905'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e63722e8-08b0-4d1d-847b-36744f83f2db
+    country_id: *ao
+    network_id: *ao_value_added_services_radio_and_television_competitions
+  - id: 462740
+    prefix: '244906'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 599705a2-63df-40d0-b8ae-5dfce6453674
+    country_id: *ao
+    network_id: *ao_maritime_radio
+# Mobile Prefixes
+  - id: 212497
+    prefix: '24494'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1e5e43c-9c58-4c77-b5a6-41a8559abda8
+    country_id: *ao
+    network_id: *ao_unitel_mobile
+  - id: 215136
+    prefix: '24495'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 73ee173b-28b7-4aa1-aa81-e6cd663f7a55
+    country_id: *ao
+    network_id: *ao_africell_mobile
+  - id: 239362
+    prefix: '24499'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 847c4fe5-6296-4a03-a537-d8c89ee6af5a
+    country_id: *ao
+    network_id: *ao_movicel_mobile
+  - id: 458135
+    prefix: '24491'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f186fad-5c86-482c-a90c-48bf110f9293
+    country_id: *ao
+    network_id: *ao_movicel_mobile
+  - id: 468939
+    prefix: '24492'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 06862ecc-1e29-4ce7-b26b-5296d788ef79
+    country_id: *ao
+    network_id: *ao_unitel_mobile
+  - id: 485420
+    prefix: '24493'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 781af84a-b719-454a-8729-4067402005f8
+    country_id: *ao
+    network_id: *ao_unitel_mobile
+# Country code Prefixes
+  - id: 241939
+    prefix: '244'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 5af0ee66-3574-45d3-b017-0d2517a1b3d4
+    country_id: *ao
+    network_id: null
+# Fixed Prefixes
+  - id: 248878
+    prefix: '2443'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3bad25cf-cc20-4e3a-a9bf-217eb2e1a7ae
+    country_id: *ao
+    network_id: *ao_voip_region
+  - id: 277985
+    prefix: '24422'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6026340b-1c92-494b-98bb-0298099a2776
+    country_id: *ao
+    network_id: *ao_luanda_region
+  - id: 286671
+    prefix: '244231'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bb8ea212-3e0f-45b7-8843-e787d24f6e39
+    country_id: *ao
+    network_id: *ao_cabinda_region
+  - id: 287490
+    prefix: '244235'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0e1d2c22-2f6a-48f3-8ab3-322f4f8d3b7b
+    country_id: *ao
+    network_id: *ao_kwanza_norte_region
+  - id: 287681
+    prefix: '244236'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 391e0a58-3d2a-48a4-bf55-683a6e9b8ffb
+    country_id: *ao
+    network_id: *ao_kwanza_sul_region
+  - id: 289565
+    prefix: '244241'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3c3831cb-490e-48d8-98c5-7205a0e30018
+    country_id: *ao
+    network_id: *ao_huambo_region
+  - id: 291355
+    prefix: '244249'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6b59d203-1efc-440f-a15c-c6af2859ff92
+    country_id: *ao
+    network_id: *ao_kuando_kubango_region
+  - id: 292487
+    prefix: '244232'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a45de7b4-48e8-4d03-849a-b827cc448854
+    country_id: *ao
+    network_id: *ao_zaire_region
+  - id: 292936
+    prefix: '244233'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 379fd0f2-fe32-464e-8d06-ff04190ad1ad
+    country_id: *ao
+    network_id: *ao_uige_region
+  - id: 293116
+    prefix: '244234'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cb1ed37f-21a2-4bd1-a1d3-955a2f5bc01f
+    country_id: *ao
+    network_id: *ao_bengo_region
+  - id: 295943
+    prefix: '244248'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 857e8c89-46e7-43ea-a398-edc1b6280ea0
+    country_id: *ao
+    network_id: *ao_bie_region
+  - id: 297625
+    prefix: '244251'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 62c02ba9-7913-4383-b3ce-c2838eeb909d
+    country_id: *ao
+    network_id: *ao_malange_region
+  - id: 298144
+    prefix: '244252'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5d5e8f98-5895-4abc-94b9-16fe097835f1
+    country_id: *ao
+    network_id: *ao_lunda_norte_region
+  - id: 300274
+    prefix: '244261'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7ec0d2af-1016-4ea1-9c95-1018e47fe215
+    country_id: *ao
+    network_id: *ao_huila_region
+  - id: 302694
+    prefix: '244253'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 97055ea3-620d-4103-83ab-4dc6d951f617
+    country_id: *ao
+    network_id: *ao_lunda_sul_region
+  - id: 303231
+    prefix: '244254'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8e3300f7-cc8e-482e-9a8f-cd1b0de6f99b
+    country_id: *ao
+    network_id: *ao_moxico_region
+  - id: 303629
+    prefix: '244264'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5e4cde69-4b6b-4d24-a585-0455637e150d
+    country_id: *ao
+    network_id: *ao_namibe_region
+  - id: 303698
+    prefix: '244265'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7aa458b8-f9f0-4f18-a5fd-5233e213f87f
+    country_id: *ao
+    network_id: *ao_cunene_region
+  - id: 305712
+    prefix: '244272'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2158a650-87a1-43bc-b375-1b6a37edfbfc
+    country_id: *ao
+    network_id: *ao_benguela_region

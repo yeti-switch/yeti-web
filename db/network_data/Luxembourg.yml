@@ -1,0 +1,596 @@
+country_id: &lu 124
+networks:
+# Supplementary services Networks
+  - id: &lu_routing_cross_net 21318
+    name: LU Routing Cross Net
+    uuid: ff55c15b-5260-48b5-a3e3-bd4a55aa586c
+    type_id: 13
+  - id: &lu_special_services 21440
+    name: LU Special Services
+    uuid: 0ba8bbee-eade-43a1-bb44-b74a1def99d7
+    type_id: 13
+  - id: &lu_social_value_services 21638
+    name: LU Social Value Services
+    uuid: 2f58028d-d012-429f-8c04-4054f6192c6a
+    type_id: 13
+  - id: &lu_directory_enquiry_services 21680
+    name: LU Directory Enquiry Services
+    uuid: 63f212e1-c194-4a79-ac5c-123f0d85a754
+    type_id: 13
+  - id: &lu_internet_access_services 21715
+    name: LU Internet Access Services
+    uuid: 00b8828f-17e9-40b5-a6b5-bfa07ba48f61
+    type_id: 13
+  - id: &lu_mass_call_services 21745
+    name: LU Mass Call Services
+    uuid: dde8e23e-393d-4e61-8ed4-ed9d0a7f26a5
+    type_id: 13
+  - id: &lu_freephone_services 23847
+    name: LU Freephone Services
+    uuid: 25b3f91e-1aae-4ba3-82fb-2536dad6805d
+    type_id: 13
+  - id: &lu_shared_cost_services 23885
+    name: LU Shared Cost Services
+    uuid: a651cab8-9715-48c3-9f6e-349c5c4b0fb2
+    type_id: 13
+  - id: &lu_personal_number_services 24147
+    name: LU Personal Number Services
+    uuid: 470efb3a-19d1-4013-bad3-da9f3c0d70c6
+    type_id: 13
+  - id: &lu_information_services 24440
+    name: LU Information Services
+    uuid: e05edf16-53ab-4ceb-8b3d-a0d30924a6ee
+    type_id: 13
+  - id: &lu_entertainment_services 24455
+    name: LU Entertainment Services
+    uuid: b32f7b28-3f5d-49a4-9d13-8e4937473d41
+    type_id: 13
+  - id: &lu_adults_entertainment_services 24461
+    name: LU Adults Entertainment Services
+    uuid: b6ab3b5a-05d8-4a0b-968b-858403570d23
+    type_id: 13
+# Fixed Networks
+  - id: &lu_fixed 22133
+    name: LU Fixed
+    uuid: 107a50bc-658e-4e93-ad3e-d30b356d2c60
+    type_id: 2
+  - id: &lu_voip_region 22744
+    name: LU Voip Region
+    uuid: 868b6101-2fdf-43ab-b2aa-5262205e903b
+    type_id: 2
+# Mobile Networks
+  - id: &lu_mobile 22557
+    name: LU Mobile
+    uuid: aed451cc-8275-435e-801c-7613f0d20e46
+    type_id: 3
+  - id: &lu_mtx_connect_mobile 22568
+    name: LU Mtx Connect Mobile
+    uuid: 7bb7cf60-8a91-497e-bf67-bc217d382b49
+    type_id: 3
+  - id: &lu_join_mobile 22571
+    name: LU Join Mobile
+    uuid: c552d481-2ca2-4637-bcda-3e301929cb88
+    type_id: 3
+  - id: &lu_tango_mobile 22572
+    name: LU Tango Mobile
+    uuid: b27f963a-b824-4393-a018-502045e0c632
+    type_id: 3
+  - id: &lu_post_mobile 22588
+    name: LU Post Mobile
+    uuid: 01d64d12-2af4-4895-b060-9f93bc4153f9
+    type_id: 3
+  - id: &lu_eltrona_mobile 23519
+    name: LU Eltrona Mobile
+    uuid: 1fd93837-c39f-4af3-9d81-2aef1ba54c5b
+    type_id: 3
+  - id: &lu_luxembourg_online_mobile 23536
+    name: LU Luxembourg Online Mobile
+    uuid: 7b47502f-6a42-424d-91e3-e04f60d9f150
+    type_id: 3
+  - id: &lu_orange_mobile 24026
+    name: LU Orange Mobile
+    uuid: d084b6ca-fdbe-4aec-9b14-eb17b3c7dce8
+    type_id: 3
+  - id: &lu_bouygues_telecom_mobile 24027
+    name: LU Bouygues Telecom Mobile
+    uuid: 0f9657df-a705-433a-a249-93907727c6c3
+    type_id: 3
+  - id: &lu_e_lux_mobile_mobile 24103
+    name: LU E Lux Mobile Mobile
+    uuid: 37c7cb06-f59c-4aac-aa27-46e4a2bee79e
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242042
+    prefix: '352'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: d1dc6d31-4ad2-4e58-ace5-e0798b7d6d58
+    country_id: *lu
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242247
+    prefix: '35204'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 4fe40b88-c44f-4097-982c-cfa697e39a2b
+    country_id: *lu
+    network_id: *lu_routing_cross_net
+  - id: 242437
+    prefix: '3521'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 31332bda-9fa4-4eb3-8a4c-6cd09b68f037
+    country_id: *lu
+    network_id: *lu_special_services
+  - id: 242678
+    prefix: '352116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 760b9a8a-e592-40f2-93ce-7404b936a928
+    country_id: *lu
+    network_id: *lu_social_value_services
+  - id: 242725
+    prefix: '352118'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c3a79442-39fd-4c48-83dc-06bb37143717
+    country_id: *lu
+    network_id: *lu_directory_enquiry_services
+  - id: 242810
+    prefix: '35212'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7f302cbb-e1e5-4855-99f2-8faef701b776
+    country_id: *lu
+    network_id: *lu_internet_access_services
+  - id: 242854
+    prefix: '35213'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: f618baf8-9649-4275-9fdf-23c7d41e22ca
+    country_id: *lu
+    network_id: *lu_mass_call_services
+  - id: 253160
+    prefix: '352800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 630e124a-fa97-40ec-baa0-9b529a0ec394
+    country_id: *lu
+    network_id: *lu_freephone_services
+  - id: 253212
+    prefix: '352801'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c18d84a7-2610-4c4d-a3bd-efdea433d976
+    country_id: *lu
+    network_id: *lu_shared_cost_services
+  - id: 255258
+    prefix: '3527'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 0a883e7d-65e1-46fe-be80-8159fa0e6338
+    country_id: *lu
+    network_id: *lu_personal_number_services
+  - id: 257182
+    prefix: '352900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f5c05bef-02f7-40c9-b72e-4cf3f1ba3f61
+    country_id: *lu
+    network_id: *lu_information_services
+  - id: 257214
+    prefix: '352901'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e7e27d27-56dc-48ad-9085-e0d643f528e1
+    country_id: *lu
+    network_id: *lu_entertainment_services
+  - id: 257267
+    prefix: '352905'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 97b32ed7-e07a-432a-8880-80aebf0cb407
+    country_id: *lu
+    network_id: *lu_adults_entertainment_services
+# Fixed Prefixes
+  - id: 243944
+    prefix: '3524'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 3757dd8a-e3cf-45f4-b935-20949bc0c8b8
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 247454
+    prefix: '35220'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28409956-5dd9-4d6f-ac4e-fe73483d8500
+    country_id: *lu
+    network_id: *lu_voip_region
+  - id: 247725
+    prefix: '35222'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 0ea165f1-10ce-4f1e-874d-5d93bbbc9475
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 247920
+    prefix: '35223'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 56d24e5a-150b-46fc-9b56-d3f7b6934776
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 248113
+    prefix: '35224'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 14bcfd03-2b3f-4baa-ac79-00f35b6fb84b
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 248261
+    prefix: '35225'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: b6bd53db-b01b-4fb9-bfb1-5a5e60c5128c
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 248472
+    prefix: '35226'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4001d02-b5df-4c73-9dfa-d6c590d6d87d
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 248615
+    prefix: '35227'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 85c2f63d-88b6-4bdc-b6f8-590c95b04dc2
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 248751
+    prefix: '35228'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6289d34d-7538-4371-a568-4bea06801f55
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 248832
+    prefix: '35229'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 9fbb544a-31b4-4652-ab74-a831cdda8342
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 248908
+    prefix: '3523'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 29bbdb8a-7fce-46b0-a86d-04e195c0bfcb
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 249587
+    prefix: '3525'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 1cbe8485-57f8-4a08-a01b-6ff1a805a130
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253225
+    prefix: '352802'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 6bcc450c-43a6-479d-885c-13be3eb3052c
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253237
+    prefix: '352803'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: a8b7af11-9535-4091-8530-36a48fb2479c
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253246
+    prefix: '352804'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 3d6a17cb-9964-48f3-94ac-2dafd5d92a70
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253254
+    prefix: '352805'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: cfa640bd-510d-43c4-ac36-045548960d4d
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253263
+    prefix: '352806'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 55784ae7-7ef3-46c6-8175-29fc20e6ef72
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253273
+    prefix: '352807'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: ab2e84bc-30ad-4a8f-9745-56faf79c1c49
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253284
+    prefix: '352808'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 30662715-2260-4730-a6bc-3be5c26e2cb9
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253295
+    prefix: '352809'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: b0ef5057-47a6-4064-a4be-7d626ac2d2fd
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253321
+    prefix: '35281'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: bfc66a1d-8800-405a-bfe4-10891809dfc6
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253595
+    prefix: '35283'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 9b5c2c45-bb9e-4694-afef-295d7ad48693
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 253722
+    prefix: '35284'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 9f46cfff-ba60-4a79-8d99-7a5d9768e62c
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 256841
+    prefix: '35288'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: c7599fc6-84af-4e7a-b8dc-f70901bbffb8
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257003
+    prefix: '35289'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 079a0f92-3129-4739-8458-7a8a3d0cf330
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257318
+    prefix: '352908'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: e3c81825-e8a7-4057-bb0c-6fbda39628ba
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257346
+    prefix: '352909'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 71e49042-7acd-45f3-a124-ff6c6fe21a19
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257590
+    prefix: '35292'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 6a51b180-7c56-4900-be2c-69254633ba12
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257865
+    prefix: '35293'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: f4bdc5b3-db6d-4482-a3ba-fd433728c34f
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 258185
+    prefix: '35299'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: c318f9bc-8dbd-476b-9b0a-dad38c680422
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 263708
+    prefix: '35285'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: a7fdc2e4-8f66-4fc0-be01-4bf98bfe1627
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 263855
+    prefix: '35286'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: c5479324-5beb-4e94-846e-9812002f5123
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 264009
+    prefix: '35287'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 1639185d-8334-4c24-a418-9b62b48b9c7e
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 264196
+    prefix: '35294'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: e56f651c-eecc-4f83-9160-9819801d23d9
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 264442
+    prefix: '35295'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 0c413652-0aaf-4eb7-9163-e5c80eeca440
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 265001
+    prefix: '35297'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 2b5a4769-b555-46a6-b9c5-ca199c316789
+    country_id: *lu
+    network_id: *lu_fixed
+# Mobile Prefixes
+  - id: 245438
+    prefix: '35260'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 810bc7f3-7d81-4868-9c28-e7a45eff4b61
+    country_id: *lu
+    network_id: *lu_mobile
+  - id: 245451
+    prefix: '3526000'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 40c0d709-55d2-4174-9a24-cce63b725130
+    country_id: *lu
+    network_id: *lu_mtx_connect_mobile
+  - id: 245463
+    prefix: '3526001'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 84689cad-8baa-4b8b-b587-ac2254cd1efd
+    country_id: *lu
+    network_id: *lu_join_mobile
+  - id: 245465
+    prefix: '3526002'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 312b3396-2ba6-4ab5-904a-082307dba317
+    country_id: *lu
+    network_id: *lu_tango_mobile
+  - id: 245549
+    prefix: '3526021'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 4de2ce6e-eab6-4cef-9283-878a7716e954
+    country_id: *lu
+    network_id: *lu_post_mobile
+  - id: 250572
+    prefix: '352628'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 123bb453-36dc-468e-8f55-4179ca98876c
+    country_id: *lu
+    network_id: *lu_post_mobile
+  - id: 251278
+    prefix: '352651'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 94d7f234-bba7-457d-bf03-590927eddf53
+    country_id: *lu
+    network_id: *lu_eltrona_mobile
+  - id: 251390
+    prefix: '352655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dcd4a524-425c-463a-b073-9e2009388ed3
+    country_id: *lu
+    network_id: *lu_mtx_connect_mobile
+  - id: 251410
+    prefix: '352656'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8e76c877-b506-44ca-b979-5687aa182b46
+    country_id: *lu
+    network_id: *lu_luxembourg_online_mobile
+  - id: 251507
+    prefix: '352658'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ea837c39-5178-4ff5-a632-f21f1eaa596b
+    country_id: *lu
+    network_id: *lu_eltrona_mobile
+  - id: 253892
+    prefix: '3526061'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f03356f7-0410-4a3c-b7f7-3f519ec4316e
+    country_id: *lu
+    network_id: *lu_orange_mobile
+  - id: 253903
+    prefix: '3526067'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: e3710f18-48cb-439e-b079-05590360a536
+    country_id: *lu
+    network_id: *lu_bouygues_telecom_mobile
+  - id: 254148
+    prefix: '352621'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cb63f5f1-46ab-46e9-b145-32fd02c650ea
+    country_id: *lu
+    network_id: *lu_post_mobile
+  - id: 254336
+    prefix: '352661'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 90cbde6f-5aef-4c50-a0e6-60719c8c220d
+    country_id: *lu
+    network_id: *lu_orange_mobile
+  - id: 254514
+    prefix: '352668'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 23163c53-a20d-498f-9cb3-412883b420b2
+    country_id: *lu
+    network_id: *lu_orange_mobile
+  - id: 254623
+    prefix: '352671'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af89be1f-9b59-4a31-9206-6f5950815e5c
+    country_id: *lu
+    network_id: *lu_join_mobile
+  - id: 254666
+    prefix: '352678'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 99746aea-e36e-47b6-bfb6-99ca554630e4
+    country_id: *lu
+    network_id: *lu_join_mobile
+  - id: 254670
+    prefix: '352679'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 911ffddb-c79c-468b-8a3b-ec23d3dca739
+    country_id: *lu
+    network_id: *lu_mobile
+  - id: 254713
+    prefix: '352681'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 89e6c20f-6ce2-496c-a299-d9e343e453b6
+    country_id: *lu
+    network_id: *lu_e_lux_mobile_mobile
+  - id: 254966
+    prefix: '352691'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f37580c8-9b9d-4378-949e-26e385fc9d59
+    country_id: *lu
+    network_id: *lu_tango_mobile
+  - id: 255209
+    prefix: '352698'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 40ec64ed-bbc4-4cc5-94ac-65b80b71cf04
+    country_id: *lu
+    network_id: *lu_tango_mobile

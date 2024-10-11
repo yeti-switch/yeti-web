@@ -1,0 +1,633 @@
+country_id: &ky 40
+networks:
+# Fixed Networks
+  - id: &ky_george_town_grand_cayman_island_region 33159
+    name: KY George Town Grand Cayman Island Region
+    uuid: 9cace56c-ec05-4d5f-81e7-72683645801e
+    type_id: 2
+  - id: &ky_fixed 33160
+    name: KY Fixed
+    uuid: 49cad974-2876-4850-89d6-da8fbe77a8a7
+    type_id: 2
+  - id: &ky_government_region 33161
+    name: KY Government Region
+    uuid: c70749f6-ba60-4449-b336-fc7277f7c7e8
+    type_id: 2
+# Supplementary services Networks
+  - id: &ky_internet_access 33162
+    name: KY Internet Access
+    uuid: 31cd2aac-90ac-4739-bfa2-5bf6a2c890a6
+    type_id: 13
+  - id: &ky_premium_rate_services 33185
+    name: KY Premium Rate Services
+    uuid: 952207dc-e287-40bb-9742-f81f5c3471b0
+    type_id: 13
+  - id: &ky_national_stop_line_allocation 33186
+    name: KY National Stop Line Allocation
+    uuid: fc3c9d5f-9120-4b97-9c55-0648c52f1546
+    type_id: 13
+# Mobile Networks
+  - id: &ky_digicel_mobile 33164
+    name: KY Digicel Mobile
+    uuid: bc8412c4-b147-4848-a913-4b3da44244be
+    type_id: 3
+  - id: &ky_logic_mobile 33182
+    name: KY Logic Mobile
+    uuid: 1bba15cb-5f28-4c6c-a470-ffc63f160408
+    type_id: 3
+  - id: &ky_flow_mobile 33183
+    name: KY Flow Mobile
+    uuid: e3ca2b3d-8311-4b7d-a79e-13b4db9f5c97
+    type_id: 3
+# Paging Networks
+  - id: &ky_flow_paging 33184
+    name: KY Flow Paging
+    uuid: 69f62d0e-08b2-49e6-9d19-877d5f874441
+    type_id: 12
+network_prefixes:
+# Country code Prefixes
+  - id: 342375
+    prefix: '1345'
+    number_min_length: 2
+    number_max_length: 100
+    uuid: f2aaeb30-3b21-4da2-a511-e545fbacafb6
+    country_id: *ky
+    network_id: null
+# Fixed Prefixes
+  - id: 342418
+    prefix: '1345222'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 898b2341-f269-4ebd-862b-b7245a908ec2
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+  - id: 342419
+    prefix: '1345232'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c60ab0ad-8a9d-462f-a5b0-7807ed4a9b79
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342420
+    prefix: '1345233'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa647b0c-50ef-40ee-919c-0a0607047a9c
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342421
+    prefix: '1345244'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28f83e17-d3cd-42b4-a8b1-2eac8b53ebe5
+    country_id: *ky
+    network_id: *ky_government_region
+  - id: 342434
+    prefix: '1345333'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6275bbcd-53de-4433-93aa-f5faf0662a66
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342446
+    prefix: '1345444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a932d859-6b9a-4a1d-af85-b432024d2caf
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+  - id: 342467
+    prefix: '1345623'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 37718f3b-f25b-4e29-91e2-569e2e26e50d
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342468
+    prefix: '1345638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e0139df-2c43-4973-b605-8ddf1b10b1ca
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342471
+    prefix: '1345640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5f80443-075c-4b52-bf32-08a3c9b461dc
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342472
+    prefix: '1345649'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50561686-47fe-46a8-9d36-a6a596bd7ef6
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342473
+    prefix: '1345730'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9310ce10-5bc0-447a-9117-a3de55e7da4f
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342474
+    prefix: '1345743'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0cae65b1-923c-434b-9f4f-17a312524600
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342475
+    prefix: '1345745'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 15dafd0a-1a1e-4f10-b2b3-a8060328216e
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342476
+    prefix: '1345746'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dd3697d9-1569-4636-ae98-a4ef43645797
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342477
+    prefix: '1345747'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7ff1caaf-baca-4319-9ea0-7fbc1ae3eab2
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342478
+    prefix: '1345749'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f24d787f-e56f-4835-aaba-7156f7b57b71
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342479
+    prefix: '1345766'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00d23030-6093-40de-be95-fa830c3c8548
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342480
+    prefix: '1345768'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 89239ec9-2bda-4ec6-a5e2-ceef35bf613d
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342481
+    prefix: '1345769'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e354136b-dd5f-4125-9a6f-67a3e0d93771
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342482
+    prefix: '1345777'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7c9228b9-d077-412d-98f2-dd565b2d63c2
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+  - id: 342483
+    prefix: '1345800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f0549cf-285f-4739-a2f1-d338b6c8289b
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342484
+    prefix: '1345814'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e3e40eac-81e2-49d1-a242-7fddae34c471
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342485
+    prefix: '1345815'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 747c83a7-b599-4115-9563-d38d78ef2f6c
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342488
+    prefix: '1345848'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4403724e-985d-4072-9990-0c2e33deaa9c
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342489
+    prefix: '1345849'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d262abf-2c76-492b-82cc-a080e179ea23
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342490
+    prefix: '1345888'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f18378d-c9fa-4cf7-9de2-642e51187eec
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+  - id: 342491
+    prefix: '1345914'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3e9c73d-b212-4b9d-8403-ecdbedd7ae65
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342508
+    prefix: '1345940'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 461be0ae-7b27-4a87-94ae-427f4b2967c2
+    country_id: *ky
+    network_id: *ky_fixed
+  - id: 342509
+    prefix: '1345943'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ed366a9-264e-4ca8-a98d-b87fb70367bd
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+  - id: 342510
+    prefix: '1345945'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b794e1a4-e919-4e47-8d49-c98223c081ea
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+  - id: 342511
+    prefix: '1345946'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: da43e11b-9f5b-4db4-a71b-d606a1c7292a
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+  - id: 342512
+    prefix: '1345947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e61315c-c559-4469-858a-af32c7673cb8
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+  - id: 342514
+    prefix: '1345949'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c6f6861a-fc47-4679-b37d-a7ece566a47d
+    country_id: *ky
+    network_id: *ky_george_town_grand_cayman_island_region
+# Supplementary services Prefixes
+  - id: 342422
+    prefix: '1345266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a31d76e-3c89-4496-8a25-8307dc889387
+    country_id: *ky
+    network_id: *ky_internet_access
+  - id: 342469
+    prefix: '13456384638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 009d4fa9-be75-49d3-a9d3-c53f394967c4
+    country_id: *ky
+    network_id: *ky_internet_access
+  - id: 342470
+    prefix: '13456387873'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 349df6ec-bc93-4333-b202-7e0d4583d705
+    country_id: *ky
+    network_id: *ky_internet_access
+  - id: 342515
+    prefix: '1345976'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b629678a-44c1-415e-83b7-186a3dfb9218
+    country_id: *ky
+    network_id: *ky_premium_rate_services
+  - id: 342517
+    prefix: '1345995'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94e06d3b-f78a-45b0-b5ad-771a03b51cc1
+    country_id: *ky
+    network_id: *ky_national_stop_line_allocation
+# Mobile Prefixes
+  - id: 342424
+    prefix: '1345321'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3dd1bcbf-b050-4938-a6e5-e53ec04e9826
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342425
+    prefix: '1345322'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c07086d6-9667-4a79-ba86-40e40188aa11
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342426
+    prefix: '1345323'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b547b980-2464-4177-b223-ed0048f65af4
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342427
+    prefix: '1345324'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 91e329dc-6f82-41d6-825c-c12ad4aa216c
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342428
+    prefix: '1345325'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 019b7e34-d014-4055-8c53-014982a5375c
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342429
+    prefix: '1345326'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4763f851-77c5-446d-b68c-ed1cffae7ae8
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342430
+    prefix: '1345327'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 99a3356f-ce30-4a63-9712-8862985a9d6a
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342431
+    prefix: '1345328'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f907a7d-64e3-4bc9-a42c-47dd9c13bde9
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342432
+    prefix: '1345329'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f003876-6896-4408-83ac-7f2334079b9d
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342439
+    prefix: '1345420'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 551a8ae6-065a-4434-bb35-d76804233a7a
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342440
+    prefix: '1345421'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9cf6dc9a-a34e-4c1c-a160-200daa8c3a1a
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342441
+    prefix: '1345422'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: df9ab03a-b5e1-490f-ae0d-dbab874e288a
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342442
+    prefix: '1345423'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0fad583-d269-4ac9-9a8a-8159860bef9e
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342443
+    prefix: '1345424'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c674b141-eb78-44dd-9f13-381ccb52db8e
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342452
+    prefix: '1345516'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1b36746e-50b8-4c5b-b72f-ea36e943d75d
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342453
+    prefix: '1345517'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9d0e2b7b-5ac3-4a77-b61b-ca07f12f1102
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342454
+    prefix: '1345525'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b200cbda-e99a-48be-8ef8-cfd8012f5e92
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342455
+    prefix: '1345526'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b35aa09f-5c82-4794-a412-88127f4d94c1
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342456
+    prefix: '1345527'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a1cd71d-799d-4c8e-9efc-f5a16fcbbc17
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342459
+    prefix: '1345546'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d1b935f-6f14-4e2c-9e63-d17e884371f7
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342460
+    prefix: '1345547'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ef4f834-9647-4368-8da4-2f24984fbd61
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342461
+    prefix: '1345548'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 31453816-0ae5-43eb-8f48-ceec594cf13f
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342462
+    prefix: '1345549'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: adf2db56-bff6-4765-8cdb-032585197279
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342464
+    prefix: '1345550'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db035f96-1aaa-4330-991c-d6f50c940876
+    country_id: *ky
+    network_id: *ky_digicel_mobile
+  - id: 342486
+    prefix: '1345825'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ddd90dc0-5d25-4fa9-b9fa-dabaab42803b
+    country_id: *ky
+    network_id: *ky_logic_mobile
+  - id: 342487
+    prefix: '1345826'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a8186e4-8051-441f-96bb-58abe481a3ec
+    country_id: *ky
+    network_id: *ky_logic_mobile
+  - id: 342492
+    prefix: '1345916'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dd9b3703-01e9-479d-8569-725b6422c3cc
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342493
+    prefix: '1345917'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e953bd35-e8e5-4f47-9d23-25532004cd84
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342494
+    prefix: '1345919'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3214c03d-f38c-41fa-98e4-9fe3ebec2d45
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342495
+    prefix: '1345922'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8bcbe91-5345-407f-9c6a-56b7d6d98f54
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342496
+    prefix: '1345923'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 074a5535-5da8-47be-8c60-940409124a01
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342497
+    prefix: '1345924'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9384efeb-e610-44bb-977a-994c83adfd6c
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342498
+    prefix: '1345925'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 82404ddd-f24e-49f4-b8ea-4b72ccab4d96
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342499
+    prefix: '1345926'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b2b408df-1145-4630-ab85-8f1cd9d9694b
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342500
+    prefix: '1345927'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f0a127d7-c366-40f5-9f13-fb7870c36a60
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342501
+    prefix: '1345928'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0e5c876a-1040-4a0a-91cc-6d3897cdfac8
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342502
+    prefix: '1345929'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16eabd01-5f91-4061-908f-4397c59e8bf5
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342503
+    prefix: '1345930'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2142f57f-8217-4353-a56d-aa1d3b4030c5
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342504
+    prefix: '1345936'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bd1ab6f3-45b2-48c4-9559-ddec2f8d390c
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342505
+    prefix: '1345937'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a9b603a-3214-4ba7-a832-0443f3611b9f
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342506
+    prefix: '1345938'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6f5cfb8-48fa-4aeb-a503-07d5018c8f42
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342507
+    prefix: '1345939'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73a6ec36-f8c2-4e3e-b5fd-48f174982460
+    country_id: *ky
+    network_id: *ky_flow_mobile
+  - id: 342516
+    prefix: '1345990'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a408f6c-a30b-4ee1-8775-21f5690e76f3
+    country_id: *ky
+    network_id: *ky_flow_mobile
+# Paging Prefixes
+  - id: 342513
+    prefix: '1345948'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 393acdc7-c99c-4fa1-9781-94e15fa44aaa
+    country_id: *ky
+    network_id: *ky_flow_paging

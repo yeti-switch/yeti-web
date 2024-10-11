@@ -1,0 +1,371 @@
+country_id: &gw 90
+networks:
+# Fixed Networks
+  - id: &gw_fixed 22128
+    name: GW Fixed
+    uuid: cf9c8125-9151-4d4d-b3f6-c31f16eb3bf2
+    type_id: 2
+  - id: &gw_bissau_region 22326
+    name: GW Bissau Region
+    uuid: ab931dd8-bbe6-4b0a-a76a-814e9bfb6ebf
+    type_id: 2
+  - id: &gw_santa_luzia_region 22327
+    name: GW Santa Luzia Region
+    uuid: 2304716a-112d-4081-8ea9-d4b4156c67aa
+    type_id: 2
+  - id: &gw_bra_region 22328
+    name: GW Bra Region
+    uuid: 5bc6c902-b5ad-4185-88f4-f92eb1959c23
+    type_id: 2
+  - id: &gw_mansoa_region 22329
+    name: GW Mansoa Region
+    uuid: 655ccdea-121e-4fcc-a36d-1b70ec0f5cbf
+    type_id: 2
+  - id: &gw_bissora_region 22330
+    name: GW Bissora Region
+    uuid: 314047b1-203d-4ab5-ba33-ec807126ae5e
+    type_id: 2
+  - id: &gw_mansaba_region 22331
+    name: GW Mansaba Region
+    uuid: 998eb23e-ec43-4b56-9f31-8da5ec0a99dd
+    type_id: 2
+  - id: &gw_farim_region 22332
+    name: GW Farim Region
+    uuid: c59c9a29-cd94-4f5a-bf8d-07a5a44be48b
+    type_id: 2
+  - id: &gw_bafata_region 22333
+    name: GW Bafata Region
+    uuid: bc2a702b-b437-4bdb-9c1f-87d6df568055
+    type_id: 2
+  - id: &gw_bambadinca_region 22334
+    name: GW Bambadinca Region
+    uuid: 4ba8fb65-cb87-42b8-ab16-b7711679bf03
+    type_id: 2
+  - id: &gw_gabu_region 22335
+    name: GW Gabu Region
+    uuid: cb9506be-742b-4d61-9aae-070e4470721d
+    type_id: 2
+  - id: &gw_sonaco_region 22336
+    name: GW Sonaco Region
+    uuid: 7d47cfb3-f1ce-4894-a09c-c6d7e6fa3860
+    type_id: 2
+  - id: &gw_pirada_region 22337
+    name: GW Pirada Region
+    uuid: a38e88c1-905c-4a1a-b936-1b3e76ddb6ee
+    type_id: 2
+  - id: &gw_pitche_region 22338
+    name: GW Pitche Region
+    uuid: d682c9d4-6b46-4038-a296-4d2198b8e8a8
+    type_id: 2
+  - id: &gw_buba_region 22339
+    name: GW Buba Region
+    uuid: 2007b492-1c40-4396-8c25-2e560c6ff206
+    type_id: 2
+  - id: &gw_canchungo_region 22340
+    name: GW Canchungo Region
+    uuid: 2d9dd40f-9037-42e0-9a95-d5662717e851
+    type_id: 2
+  - id: &gw_cacheu_region 22341
+    name: GW Cacheu Region
+    uuid: 228f7e9e-6b9f-4a5a-a1b3-1dc2cfdc1fca
+    type_id: 2
+  - id: &gw_sao_domingos_region 22342
+    name: GW Sao Domingos Region
+    uuid: 0ad90b50-749a-426c-89cc-cf0f456667d9
+    type_id: 2
+  - id: &gw_bula_region 22343
+    name: GW Bula Region
+    uuid: d0ec4540-dccd-419b-950b-a026419feed9
+    type_id: 2
+  - id: &gw_ingore_region 22344
+    name: GW Ingore Region
+    uuid: b44fa7ab-ac1c-431e-b7f3-ce5d0d87d479
+    type_id: 2
+  - id: &gw_bigene_region 22345
+    name: GW Bigene Region
+    uuid: 3ea39683-f96b-409f-87e1-42e16bd9904c
+    type_id: 2
+  - id: &gw_voip_region 22348
+    name: GW Voip Region
+    uuid: 1a93e244-8f6b-4b2c-8e2f-37801bf8f12c
+    type_id: 2
+# Mobile Networks
+  - id: &gw_mobile 24397
+    name: GW Mobile
+    uuid: 6d417d5b-def5-43a4-9de1-f6ee70a0881a
+    type_id: 3
+  - id: &gw_orange_mobile 26125
+    name: GW Orange Mobile
+    uuid: 2d000369-4fc6-4252-adb8-417c1f1372e5
+    type_id: 3
+  - id: &gw_mtn_mobile 26131
+    name: GW Mtn Mobile
+    uuid: 86ba030c-3018-4613-87a2-29c3de9c76d5
+    type_id: 3
+  - id: &gw_guinetel_mobile 26142
+    name: GW Guinetel Mobile
+    uuid: 04d8d3ad-d529-4e1d-9c35-bfe2e3702425
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242005
+    prefix: '245'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 6ffa3263-6a08-4b1b-9be3-e92776a28fef
+    country_id: *gw
+    network_id: null
+# Fixed Prefixes
+  - id: 243937
+    prefix: '2454'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e89c2e9e-0b34-49e2-8d9c-f8fb77e5370d
+    country_id: *gw
+    network_id: *gw_fixed
+  - id: 244530
+    prefix: '24544320'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aff4f896-3903-4960-b627-a275168a0cdf
+    country_id: *gw
+    network_id: *gw_bissau_region
+  - id: 244531
+    prefix: '24544321'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 40f67b9d-15e9-4c1b-a561-982137228c45
+    country_id: *gw
+    network_id: *gw_bissau_region
+  - id: 244532
+    prefix: '24544322'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 223e9c55-d92f-4a0f-9555-b26b137d3e1e
+    country_id: *gw
+    network_id: *gw_santa_luzia_region
+  - id: 244533
+    prefix: '24544325'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 39b90b00-69b4-4a93-9822-1eefbf525043
+    country_id: *gw
+    network_id: *gw_bra_region
+  - id: 244534
+    prefix: '24544331'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 323f7846-7ab0-4bd8-9e4f-3564bc1061a2
+    country_id: *gw
+    network_id: *gw_mansoa_region
+  - id: 244535
+    prefix: '24544332'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 69c2cd4f-9911-45f9-8457-f5b4869eaaad
+    country_id: *gw
+    network_id: *gw_bissora_region
+  - id: 244536
+    prefix: '24544334'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 817721dc-8719-460b-a580-16db3f892824
+    country_id: *gw
+    network_id: *gw_mansaba_region
+  - id: 244537
+    prefix: '24544335'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3603a6ee-3c1f-4ec3-994f-ec633e2a6a91
+    country_id: *gw
+    network_id: *gw_farim_region
+  - id: 244538
+    prefix: '24544341'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c724b31c-75cd-45a0-991f-db62e912f533
+    country_id: *gw
+    network_id: *gw_bafata_region
+  - id: 244539
+    prefix: '24544342'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1053e99-183c-4da0-8d02-181eaca1d48b
+    country_id: *gw
+    network_id: *gw_bambadinca_region
+  - id: 244540
+    prefix: '24544351'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b9b05e8d-3614-4f79-90c3-8431c3ebb7e0
+    country_id: *gw
+    network_id: *gw_gabu_region
+  - id: 244541
+    prefix: '24544352'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 29713b69-eeed-4f14-a116-5e827bed0ae2
+    country_id: *gw
+    network_id: *gw_sonaco_region
+  - id: 244542
+    prefix: '24544353'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bf6d9329-473e-4a19-b392-15d020c338c1
+    country_id: *gw
+    network_id: *gw_pirada_region
+  - id: 244543
+    prefix: '24544354'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 87b4c75f-743d-4a78-9e2a-743dedd16636
+    country_id: *gw
+    network_id: *gw_pitche_region
+  - id: 244544
+    prefix: '24544370'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0586df47-acec-4640-a2a0-0697c89157d4
+    country_id: *gw
+    network_id: *gw_buba_region
+  - id: 244545
+    prefix: '24544391'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9ffd5430-7250-41c8-ad18-1e690a8fb77e
+    country_id: *gw
+    network_id: *gw_canchungo_region
+  - id: 244546
+    prefix: '24544392'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bab740ec-872b-4548-bc80-935521380ddb
+    country_id: *gw
+    network_id: *gw_cacheu_region
+  - id: 244547
+    prefix: '24544393'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c7b06a14-a760-4d7a-98d8-3a541eb4ed45
+    country_id: *gw
+    network_id: *gw_sao_domingos_region
+  - id: 244548
+    prefix: '24544394'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f668e880-d691-4a9b-91d2-b7a0195cafd4
+    country_id: *gw
+    network_id: *gw_bula_region
+  - id: 244549
+    prefix: '24544396'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 34c8bad8-c819-4352-a16c-ba7fb057333b
+    country_id: *gw
+    network_id: *gw_ingore_region
+  - id: 244550
+    prefix: '24544397'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 27f1c850-a259-4511-a3fc-c99e3a15e0ed
+    country_id: *gw
+    network_id: *gw_bigene_region
+  - id: 244553
+    prefix: '2454440'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8e9f98ee-6d70-4fb5-b913-796baa8a08ec
+    country_id: *gw
+    network_id: *gw_voip_region
+# Mobile Prefixes
+  - id: 257100
+    prefix: '2459'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 35263605-0614-45ad-9065-e9a0e6e577d3
+    country_id: *gw
+    network_id: *gw_mobile
+  - id: 264582
+    prefix: '245955'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 49635b14-01b3-4c41-986e-d30c2c1a5c56
+    country_id: *gw
+    network_id: *gw_orange_mobile
+  - id: 264614
+    prefix: '245956'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3b52bd56-78e8-4d20-92f9-78a331bb4227
+    country_id: *gw
+    network_id: *gw_orange_mobile
+  - id: 264628
+    prefix: '245957'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fd88d941-2595-4527-aadb-ef60fb538802
+    country_id: *gw
+    network_id: *gw_orange_mobile
+  - id: 264838
+    prefix: '2459650'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 809faa41-ec3a-4024-8644-dd1f3a29aa61
+    country_id: *gw
+    network_id: *gw_mtn_mobile
+  - id: 264840
+    prefix: '2459651'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 769b307b-e383-4dd5-aac3-b5ecb2bdf60a
+    country_id: *gw
+    network_id: *gw_mtn_mobile
+  - id: 264842
+    prefix: '2459652'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0e1633b7-2474-4631-9a77-acd8ca662fb9
+    country_id: *gw
+    network_id: *gw_mtn_mobile
+  - id: 264844
+    prefix: '2459653'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 321b0045-15b9-4ee2-af0f-fd4b53268cd7
+    country_id: *gw
+    network_id: *gw_mtn_mobile
+  - id: 264853
+    prefix: '245966'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dcb58ff0-de4f-4646-b15d-f09d387cb89a
+    country_id: *gw
+    network_id: *gw_mtn_mobile
+  - id: 264967
+    prefix: '2459690'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1e4c216a-a123-4154-9b02-e4eb262d4374
+    country_id: *gw
+    network_id: *gw_mtn_mobile
+  - id: 264970
+    prefix: '2459691'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 56f1b009-6156-4575-ada3-d01421b12c3d
+    country_id: *gw
+    network_id: *gw_mtn_mobile
+  - id: 264973
+    prefix: '2459692'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1d3cb0e1-30a4-48e1-b625-8206904a88ef
+    country_id: *gw
+    network_id: *gw_mtn_mobile
+  - id: 265189
+    prefix: '245977'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af7140dd-0f57-4b8b-b11e-4d385d914f43
+    country_id: *gw
+    network_id: *gw_guinetel_mobile

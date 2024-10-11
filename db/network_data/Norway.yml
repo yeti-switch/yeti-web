@@ -1,0 +1,6280 @@
+country_id: &no 160
+networks:
+# Supplementary services Networks
+  - id: &no_special_services 21277
+    name: NO Special Services
+    uuid: b439b8ce-91b7-4b1b-bc34-9d017608ceae
+    type_id: 13
+  - id: &no_emergency_services_fire 21577
+    name: NO Emergency Services Fire
+    uuid: fb75de13-eb08-4562-9b09-58348048c85b
+    type_id: 13
+  - id: &no_emergency_services_police 21593
+    name: NO Emergency Services Police
+    uuid: 51eeeb0e-09b9-4a0c-8ba2-e6f4c2012409
+    type_id: 13
+  - id: &no_emergency_services_medical_aid 21600
+    name: NO Emergency Services Medical Aid
+    uuid: cd8d11ce-4d0b-467c-a668-21e9db56858c
+    type_id: 13
+  - id: &no_social_value_services 21645
+    name: NO Social Value Services
+    uuid: c2ab41b6-0d0b-4411-a373-b245121314c9
+    type_id: 13
+  - id: &no_emergency_services_hearing_impaired 21781
+    name: NO Emergency Services Hearing Impaired
+    uuid: c458822f-f945-41d7-aef8-0c16a759cd63
+    type_id: 13
+  - id: &no_machine_to_machine_m2m_services 22471
+    name: NO Machine To Machine M2M Services
+    uuid: 6429cb0f-d8b5-4c42-b152-eb4c06c5c955
+    type_id: 13
+  - id: &no_directory_enquiry_services 22628
+    name: NO Directory Enquiry Services
+    uuid: 8a1b311e-e8d2-4cf2-9e0c-0d8b70f20f5e
+    type_id: 13
+  - id: &no_freephone_services 23851
+    name: NO Freephone Services
+    uuid: 5d5d82a2-36b8-4932-a622-bdd22d030b71
+    type_id: 13
+  - id: &no_shared_cost_services 23930
+    name: NO Shared Cost Services
+    uuid: 7c50410b-95f4-4efe-a62e-e0b10cb1d58d
+    type_id: 13
+  - id: &no_local_rate_services 23933
+    name: NO Local Rate Services
+    uuid: bbc46fd6-4807-48a4-9aec-e5abcc1b4351
+    type_id: 13
+  - id: &no_voice_mail 23935
+    name: NO Voice Mail
+    uuid: 740f57f1-0dff-45c6-88fd-a4f6a7074fc7
+    type_id: 13
+  - id: &no_long_distance_rate_services 23946
+    name: NO Long Distance Rate Services
+    uuid: f9fde7cd-b064-4678-a05e-8d4ea06ee2e9
+    type_id: 13
+  - id: &no_premium_rate_services 23955
+    name: NO Premium Rate Services
+    uuid: 9b65771a-6f27-4162-84a3-43c56691a453
+    type_id: 13
+  - id: &no_fundraising_services 23961
+    name: NO Fundraising Services
+    uuid: d1e19771-fbeb-494c-8b8f-e988d95dd512
+    type_id: 13
+  - id: &no_personal_number_services 24345
+    name: NO Personal Number Services
+    uuid: 470d96f1-f43d-489b-8fd4-77d501033933
+    type_id: 13
+# Fixed Networks
+  - id: &no_buskerud_county_region 21907
+    name: NO Buskerud County Region
+    uuid: 80d8beae-4d05-47a5-80a7-478c1e82a3c7
+    type_id: 2
+  - id: &no_vestfold_county_region 21959
+    name: NO Vestfold County Region
+    uuid: f1b95dde-222b-48d4-8e9f-0afd4ddeeb78
+    type_id: 2
+  - id: &no_telemark_county_region 22032
+    name: NO Telemark County Region
+    uuid: ac9ca391-2e7d-4d12-a4d9-ed7420339e14
+    type_id: 2
+  - id: &no_aust_agder_county_region 22080
+    name: NO Aust Agder County Region
+    uuid: 17e9cae4-f96a-4ff1-8fc6-d5d47f6b73cc
+    type_id: 2
+  - id: &no_vest_agder_county_region 22108
+    name: NO Vest Agder County Region
+    uuid: c5113089-8ee5-4529-a770-0621598355b9
+    type_id: 2
+  - id: &no_oslo_county_region 22798
+    name: NO Oslo County Region
+    uuid: 48fa7f2c-0ca6-4eca-a17f-80efe14aa530
+    type_id: 2
+  - id: &no_rogaland_county_region 23341
+    name: NO Rogaland County Region
+    uuid: cc1be433-9b06-4973-ba05-5e8d92abdc42
+    type_id: 2
+  - id: &no_hordaland_county_region 23358
+    name: NO Hordaland County Region
+    uuid: 2a740f47-fb59-4717-9319-3c2353515c4b
+    type_id: 2
+  - id: &no_sogn_og_fjordane_county_region 23412
+    name: NO Sogn Og Fjordane County Region
+    uuid: ad459d0e-1cdc-4462-acea-2b076ce8fcad
+    type_id: 2
+  - id: &no_akershus_county_region 23433
+    name: NO Akershus County Region
+    uuid: 4ad963d4-4c52-4140-bddf-074bf7e3f872
+    type_id: 2
+  - id: &no_more_og_romsdal_county_region 23571
+    name: NO More Og Romsdal County Region
+    uuid: b36e3188-1786-4202-83d5-84ad313f3357
+    type_id: 2
+  - id: &no_trondelag_county_region 23591
+    name: NO Trondelag County Region
+    uuid: 27bae59e-9b0a-4654-9b13-069a8ab55087
+    type_id: 2
+  - id: &no_nordland_county_region 23743
+    name: NO Nordland County Region
+    uuid: 728a8d2e-eaae-4245-87f1-68ab99246fbf
+    type_id: 2
+  - id: &no_oppland_county_region 24032
+    name: NO Oppland County Region
+    uuid: 4230c73e-98de-4d8c-9597-6bf41e662d59
+    type_id: 2
+  - id: &no_hedmark_county_region 24040
+    name: NO Hedmark County Region
+    uuid: 24d41fd2-a869-406c-afaf-d112251a4640
+    type_id: 2
+  - id: &no_ostfold_county_region 24116
+    name: NO Ostfold County Region
+    uuid: e624f2d0-dd8e-4f06-88d0-b5f241ab80b9
+    type_id: 2
+  - id: &no_troms_county_region 24222
+    name: NO Troms County Region
+    uuid: e97a83ba-c34e-4c1f-b347-6ec1cced8c1d
+    type_id: 2
+  - id: &no_finnmark_county_region 24260
+    name: NO Finnmark County Region
+    uuid: d97c962a-ac43-4ad9-8342-2c3517dc01a3
+    type_id: 2
+  - id: &no_svalbard_region 24278
+    name: NO Svalbard Region
+    uuid: d1c3afdb-bf3f-464c-a5c8-eee28a4b7682
+    type_id: 2
+  - id: &no_voip_and_ip_fax_region 26057
+    name: NO Voip And Ip Fax Region
+    uuid: 17f5931d-ed61-47cd-8dc6-8539a531a2d1
+    type_id: 2
+# Mobile Networks
+  - id: &no_mobile 22139
+    name: NO Mobile
+    uuid: e7ff334e-fd6b-443d-8ff3-f1925cf3bf4d
+    type_id: 3
+  - id: &no_telia_mobile 22169
+    name: NO Telia Mobile
+    uuid: 2c18e77f-7fcd-43d5-8367-1edeecd8280c
+    type_id: 3
+  - id: &no_telenor_mobile 22171
+    name: NO Telenor Mobile
+    uuid: 1c21dd84-ea56-4345-b9ff-c86aa140c187
+    type_id: 3
+  - id: &no_nextgentel_mobile 22176
+    name: NO Nextgentel Mobile
+    uuid: e7449d2a-ccf0-43d4-a9bd-36569bba9c53
+    type_id: 3
+  - id: &no_sierra_wireless_mobile 22177
+    name: NO Sierra Wireless Mobile
+    uuid: dc5b1108-4154-484a-9e1e-10b77997385e
+    type_id: 3
+  - id: &no_lycamobile_mobile 22185
+    name: NO Lycamobile Mobile
+    uuid: 6be22ff4-7929-4bd6-942e-eb82aa2a4875
+    type_id: 3
+  - id: &no_chilimobil_mobile 22198
+    name: NO Chilimobil Mobile
+    uuid: 6d82f912-9ea9-41cd-9af7-d63627fac1ec
+    type_id: 3
+  - id: &no_nkom_mobile 22221
+    name: NO Nkom Mobile
+    uuid: d0144dde-ade4-45b4-9c94-62cc3b74bc1a
+    type_id: 3
+  - id: &no_erate_mobile 22409
+    name: NO Erate Mobile
+    uuid: ee2def01-301e-4a0e-967b-024d85d51940
+    type_id: 3
+  - id: &no_telavox_mobile 22474
+    name: NO Telavox Mobile
+    uuid: 4f5354fd-e6b6-4f12-a58a-140f8996139f
+    type_id: 3
+  - id: &no_jetnett_mobile 22475
+    name: NO Jetnett Mobile
+    uuid: 608394a6-c6b8-42c9-8d84-85b030902b7f
+    type_id: 3
+  - id: &no_svea_mobile 22476
+    name: NO Svea Mobile
+    uuid: e55feb74-19d6-4821-9c33-a7c4c6ec8bc1
+    type_id: 3
+  - id: &no_unifon_mobile 22477
+    name: NO Unifon Mobile
+    uuid: b6f2c199-22f1-4ac6-9947-ce5ecd641700
+    type_id: 3
+  - id: &no_altibox_mobil_mobile 22478
+    name: NO Altibox Mobil Mobile
+    uuid: 3e927699-bfd4-4a8f-a8c5-bc51a934ce21
+    type_id: 3
+  - id: &no_com4_mobile 22479
+    name: NO Com4 Mobile
+    uuid: 2676ea1c-30dc-467a-b7d6-c6b95aec1de5
+    type_id: 3
+  - id: &no_ice__mobile 22480
+    name: NO Ice  Mobile
+    uuid: be055733-71a2-4c0f-ac97-66594185be84
+    type_id: 3
+  - id: &no_intility_mobile 22481
+    name: NO Intility Mobile
+    uuid: 7bd122fd-7f88-4ef1-95fd-b846e21d5805
+    type_id: 3
+  - id: &no_bigblu_mobile 22482
+    name: NO Bigblu Mobile
+    uuid: 5a9dda79-61d5-4004-8204-ab1642127373
+    type_id: 3
+  - id: &no_iristel_mobile 23284
+    name: NO Iristel Mobile
+    uuid: aa73079e-9c5d-4c20-8a07-6d2a1efba208
+    type_id: 3
+  - id: &no_nodnett_mobile 24325
+    name: NO Nodnett Mobile
+    uuid: f4d38721-0592-4991-9046-1d1b838a2a11
+    type_id: 3
+  - id: &no_bane_nor_mobile 24328
+    name: NO Bane Nor Mobile
+    uuid: 58403b15-1050-4f7f-a506-73f8cecf4c07
+    type_id: 3
+  - id: &no_globalconnect_mobile 24529
+    name: NO Globalconnect Mobile
+    uuid: 300360ad-df6f-4f86-9c80-de7234987623
+    type_id: 3
+  - id: &no_puzzel_mobile 26126
+    name: NO Puzzel Mobile
+    uuid: f4a9a017-a14e-431b-9efe-fe454d8c381a
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242071
+    prefix: '47'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: cf2a898c-f604-42ae-aa76-fbdecd2896cd
+    country_id: *no
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242148
+    prefix: '470'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 2901637c-f7e1-4ee2-ada3-7ab8b77f0efd
+    country_id: *no
+    network_id: *no_special_services
+  - id: 242465
+    prefix: '471'
+    number_min_length: 5
+    number_max_length: 8
+    uuid: 5a60741c-d0f5-4531-97c8-fe5ec8c4cfad
+    country_id: *no
+    network_id: *no_special_services
+  - id: 242605
+    prefix: '47110'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 29407b49-a966-4cae-bc0d-f8b66adb98b4
+    country_id: *no
+    network_id: *no_emergency_services_fire
+  - id: 242626
+    prefix: '47112'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: beec5d01-3e47-4423-acd4-ba0ea404b1cf
+    country_id: *no
+    network_id: *no_emergency_services_police
+  - id: 242634
+    prefix: '47113'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 2e544fb7-c0f2-444e-8076-dcf3ea32fbfe
+    country_id: *no
+    network_id: *no_emergency_services_medical_aid
+  - id: 242685
+    prefix: '47116'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 81b24ddf-f242-41e7-abcd-c00c9d718935
+    country_id: *no
+    network_id: *no_social_value_services
+  - id: 242921
+    prefix: '471412'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 373a71a2-55e8-41d8-a9a0-f3b7959c1165
+    country_id: *no
+    network_id: *no_emergency_services_hearing_impaired
+  - id: 245163
+    prefix: '4758'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 361fa324-37e5-47f5-a249-2f2d3743c3a9
+    country_id: *no
+    network_id: *no_machine_to_machine_m2m_services
+  - id: 245263
+    prefix: '4759'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 998b18dc-7a96-4346-afdc-3fc911597355
+    country_id: *no
+    network_id: *no_machine_to_machine_m2m_services
+  - id: 247281
+    prefix: '4718'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 7007abb8-1bdf-4927-9481-7d5cac0fe6e2
+    country_id: *no
+    network_id: *no_directory_enquiry_services
+  - id: 253166
+    prefix: '47800'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 54c1431f-9185-4578-80ee-ff9ec4d2b9e4
+    country_id: *no
+    network_id: *no_freephone_services
+  - id: 253215
+    prefix: '47801'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 37938ea8-143b-49c9-a205-c249a888d189
+    country_id: *no
+    network_id: *no_freephone_services
+  - id: 253332
+    prefix: '47810'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0256658d-02f2-4d01-b367-2f69c9e9400b
+    country_id: *no
+    network_id: *no_shared_cost_services
+  - id: 253336
+    prefix: '4781007'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f4114d2-b77b-4838-8204-dea7e935ad25
+    country_id: *no
+    network_id: *no_local_rate_services
+  - id: 253337
+    prefix: '4781008'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 298b04b1-62f4-4686-bb6e-1dc1f02df54c
+    country_id: *no
+    network_id: *no_local_rate_services
+  - id: 253338
+    prefix: '4781009'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b965b783-8719-4962-8f10-df2a7559396d
+    country_id: *no
+    network_id: *no_local_rate_services
+  - id: 253339
+    prefix: '478101'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b7c6496a-0465-4cd9-b75e-dbeed6dc11a1
+    country_id: *no
+    network_id: *no_local_rate_services
+  - id: 253341
+    prefix: '47811'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dbad687e-b9e4-4799-a2fb-e14d8122abc8
+    country_id: *no
+    network_id: *no_voice_mail
+  - id: 253356
+    prefix: '47812'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3f399be6-cfe2-40df-9776-90307353dfd0
+    country_id: *no
+    network_id: *no_voice_mail
+  - id: 253359
+    prefix: '47813'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5d430cec-acd5-4f54-afda-0a48b27ae572
+    country_id: *no
+    network_id: *no_voice_mail
+  - id: 253380
+    prefix: '47814'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a933b167-f09b-454d-bbf5-2c1bf63f436f
+    country_id: *no
+    network_id: *no_voice_mail
+  - id: 253397
+    prefix: '47815'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e18710e8-2819-48ee-9400-3b546cf7d743
+    country_id: *no
+    network_id: *no_long_distance_rate_services
+  - id: 253446
+    prefix: '47819'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7db4bd94-be2d-44a3-b25f-04fc9e79f03b
+    country_id: *no
+    network_id: *no_voice_mail
+  - id: 253492
+    prefix: '47820'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d768f017-87fd-4aed-8606-60b7f7ad378c
+    country_id: *no
+    network_id: *no_premium_rate_services
+  - id: 253510
+    prefix: '47822'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 078338e4-49bb-4513-958f-b92c798ac87a
+    country_id: *no
+    network_id: *no_fundraising_services
+  - id: 253572
+    prefix: '47829'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee20007e-da58-437c-bc61-58b88d721bb2
+    country_id: *no
+    network_id: *no_premium_rate_services
+  - id: 256859
+    prefix: '47880'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6200f073-7249-449b-973f-1d52d1dac128
+    country_id: *no
+    network_id: *no_personal_number_services
+# Fixed Prefixes
+  - id: 243237
+    prefix: '4731'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 086fb626-2a2e-411e-bc81-c5a37c0787eb
+    country_id: *no
+    network_id: *no_buskerud_county_region
+  - id: 243375
+    prefix: '4732'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 185ff40d-921b-4917-9509-88400f690689
+    country_id: *no
+    network_id: *no_buskerud_county_region
+  - id: 243418
+    prefix: '4733'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8615beeb-9762-4628-953f-a06ed3196c9f
+    country_id: *no
+    network_id: *no_vestfold_county_region
+  - id: 243594
+    prefix: '4735'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44d516cd-d1da-4ca8-a4d7-2f907feeb8ad
+    country_id: *no
+    network_id: *no_telemark_county_region
+  - id: 243717
+    prefix: '4737'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 326cb13c-5820-4dc7-9da6-e5ddb443bfc9
+    country_id: *no
+    network_id: *no_aust_agder_county_region
+  - id: 243867
+    prefix: '4738'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 672ebd52-7eba-4dd1-8977-250309d1d56c
+    country_id: *no
+    network_id: *no_vest_agder_county_region
+  - id: 247632
+    prefix: '4721'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 24cd56dc-3adf-4794-9d24-295a465ff660
+    country_id: *no
+    network_id: *no_oslo_county_region
+  - id: 247729
+    prefix: '4722'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 985666aa-31c1-4eb8-8805-5f99ab5ca5b8
+    country_id: *no
+    network_id: *no_oslo_county_region
+  - id: 247925
+    prefix: '4723'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6b58d04b-362d-4111-8111-5dbb0354e487
+    country_id: *no
+    network_id: *no_oslo_county_region
+  - id: 248115
+    prefix: '4724'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 654bf52e-eda5-407c-890b-34426090a1b6
+    country_id: *no
+    network_id: *no_oslo_county_region
+  - id: 249702
+    prefix: '4751'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b5b2f1c7-c625-4240-8ff3-6c735743d252
+    country_id: *no
+    network_id: *no_rogaland_county_region
+  - id: 249771
+    prefix: '4752'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cd092c88-4d66-43b4-b252-bfed08be5799
+    country_id: *no
+    network_id: *no_rogaland_county_region
+  - id: 249929
+    prefix: '4753'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c3009c8e-c4c1-40e5-bd64-ac02c42b2d13
+    country_id: *no
+    network_id: *no_hordaland_county_region
+  - id: 250120
+    prefix: '4755'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dbfafac1-9a39-4c40-8406-154edb720103
+    country_id: *no
+    network_id: *no_hordaland_county_region
+  - id: 250205
+    prefix: '4756'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 23ce3b85-7f10-46c7-bf7e-cf2bd24e6138
+    country_id: *no
+    network_id: *no_hordaland_county_region
+  - id: 250248
+    prefix: '4757'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 53fb7771-23ee-4807-8cd8-d68f7108ec2a
+    country_id: *no
+    network_id: *no_sogn_og_fjordane_county_region
+  - id: 250662
+    prefix: '4763'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 237288fd-8499-4e84-b938-4574a5c1dad2
+    country_id: *no
+    network_id: *no_akershus_county_region
+  - id: 251027
+    prefix: '4764'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2067af0b-df8d-4423-8a8d-1e0796f2f461
+    country_id: *no
+    network_id: *no_akershus_county_region
+  - id: 251741
+    prefix: '4771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 29d1af08-5f43-4ed2-90a7-6e891f839f8d
+    country_id: *no
+    network_id: *no_more_og_romsdal_county_region
+  - id: 251828
+    prefix: '4772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9f65f15c-7f93-4b30-82de-4e4f748b1267
+    country_id: *no
+    network_id: *no_trondelag_county_region
+  - id: 251880
+    prefix: '4773'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e7028870-77f7-42a0-93c7-6de175dda48b
+    country_id: *no
+    network_id: *no_trondelag_county_region
+  - id: 252067
+    prefix: '4774'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 014e3730-b972-4cb5-bc1c-8fb264884548
+    country_id: *no
+    network_id: *no_trondelag_county_region
+  - id: 252557
+    prefix: '4775'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 622578ac-af24-4d58-a4a5-3d15b3f34cf1
+    country_id: *no
+    network_id: *no_nordland_county_region
+  - id: 253988
+    prefix: '4761'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aee3c408-d2e8-4adc-addf-4ef1ff2b5951
+    country_id: *no
+    network_id: *no_oppland_county_region
+  - id: 254119
+    prefix: '4762'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aa82b531-3b40-4a53-a0bc-ee8bf08b7371
+    country_id: *no
+    network_id: *no_hedmark_county_region
+  - id: 254297
+    prefix: '4766'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 37186d19-62a6-42e5-baaf-5414d04ad6fe
+    country_id: *no
+    network_id: *no_akershus_county_region
+  - id: 254609
+    prefix: '4767'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d4913907-422d-4c1f-b7e6-85e426a24495
+    country_id: *no
+    network_id: *no_akershus_county_region
+  - id: 254872
+    prefix: '4769'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4cb5e471-05ac-4ff2-b142-da73ebda8116
+    country_id: *no
+    network_id: *no_ostfold_county_region
+  - id: 255300
+    prefix: '4770'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b2049db9-11db-4bd7-a2dc-5176b5f9fedb
+    country_id: *no
+    network_id: *no_more_og_romsdal_county_region
+  - id: 255454
+    prefix: '4776'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7b00467d-fed2-41f5-aa35-e0d78d914bcd
+    country_id: *no
+    network_id: *no_nordland_county_region
+  - id: 255638
+    prefix: '4777'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 611f6b84-4f16-4da4-8a25-77a48a20495d
+    country_id: *no
+    network_id: *no_troms_county_region
+  - id: 256093
+    prefix: '4778'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f7457553-960c-4af6-bcd4-58092f998a47
+    country_id: *no
+    network_id: *no_finnmark_county_region
+  - id: 256390
+    prefix: '4779'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fb92a7a7-740d-4c0d-aa0d-c56003bd8e0d
+    country_id: *no
+    network_id: *no_svalbard_region
+  - id: 263712
+    prefix: '4785'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b320717b-4921-42ed-989e-5349446cc545
+    country_id: *no
+    network_id: *no_voip_and_ip_fax_region
+# Mobile Prefixes
+  - id: 243953
+    prefix: '474'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4acbb775-f275-4c65-b018-caaecd3a4339
+    country_id: *no
+    network_id: *no_mobile
+  - id: 243994
+    prefix: '474000'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a5b10b87-d748-429e-9860-58f8d4b86405
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244004
+    prefix: '474001'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7dd91e4b-f8af-4dcc-934e-ce4cb12e2b76
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244011
+    prefix: '474002'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: db875426-17aa-46da-9096-6ccc644eeb69
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244012
+    prefix: '474003'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 06188f8b-0ddc-456f-b6f3-6d1668f09d4a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244013
+    prefix: '474004'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 95113612-260a-498c-8274-264ced9d1662
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244014
+    prefix: '474005'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c6a62b0f-c171-4d97-8b3d-5a260d1d5922
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244015
+    prefix: '474006'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 018a84e8-c05b-4279-a9e3-8a3dbdac3250
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244016
+    prefix: '474007'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 118ef97b-737f-4fce-8e04-c5f8b1376476
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244018
+    prefix: '474008'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9ff838f9-2fe6-483f-8771-5f1441806c1d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244019
+    prefix: '474009'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 30d85b53-9e24-48dd-b5e9-1cc0d9d08f9c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244023
+    prefix: '474010'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7f91e9e1-f208-48fe-8cc3-ea0bf65d3090
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244025
+    prefix: '474011'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c01429a4-3151-4fe5-9d64-00419739de69
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244027
+    prefix: '474012'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 85d25b9c-8908-4869-a9d1-415ef7472273
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244028
+    prefix: '474013'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9a8736a7-3038-4591-ae2c-3858d356dfb4
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244030
+    prefix: '474014'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: efcdd232-08f2-4824-b6a7-5c79b7763a65
+    country_id: *no
+    network_id: *no_nextgentel_mobile
+  - id: 244032
+    prefix: '474015'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 64cc22d5-8ab7-4491-9030-ad4244423a9d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244034
+    prefix: '474016'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9ac70c4b-9bf5-404a-bb0d-dd7dfe9c1a9e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244036
+    prefix: '474017'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f53ffbfa-c581-4975-bf64-7c2c4821f881
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244038
+    prefix: '474018'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f45f24d-6159-4eca-acc3-404199813060
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244040
+    prefix: '474019'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f82009b6-3ba3-4353-a352-04175340bb6a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244043
+    prefix: '474020'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca99c00b-348d-4e45-8f8c-3a58703f3a7c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244045
+    prefix: '474021'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c4a40c74-4e97-4523-8bb9-bbf7c741e35d
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244047
+    prefix: '474022'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c6c948df-5c84-4a6b-9a3e-46b9bebaf738
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244048
+    prefix: '474023'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3f3172ec-0670-4ccd-ba99-7c71150aab60
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244049
+    prefix: '474024'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 648c8665-3948-4ab2-9534-f2c95e6066da
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244050
+    prefix: '474025'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a2ba5a12-85bc-4bb4-8161-4d3120b99fb2
+    country_id: *no
+    network_id: *no_sierra_wireless_mobile
+  - id: 244051
+    prefix: '474026'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d83ca91f-424d-4ddd-b4ca-aaa837e8ccff
+    country_id: *no
+    network_id: *no_sierra_wireless_mobile
+  - id: 244053
+    prefix: '474027'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aa0a14c5-61c8-4e94-8aad-e1bfd2228e1c
+    country_id: *no
+    network_id: *no_sierra_wireless_mobile
+  - id: 244054
+    prefix: '474028'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9cc4d0d1-429a-435a-8b6a-c4c70daae60c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244055
+    prefix: '474029'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6d240f47-37d8-40cd-adea-72ed98a7d921
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244058
+    prefix: '47403'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ab3487dd-424f-44f2-a171-641453e218a9
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244065
+    prefix: '47404'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 259fa980-ab30-4ed9-878c-133e06559336
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244068
+    prefix: '47405'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aea947f4-06df-447a-8b8b-b7d13c0d1058
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244072
+    prefix: '474060'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a016c5c7-b487-42dd-b4bb-508ab03a2c30
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244073
+    prefix: '474061'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f02a5fbe-47c7-4d66-8235-6d901e5fbd74
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244074
+    prefix: '474062'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 35ae83c2-aa0a-470d-a144-e05414c7635a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244075
+    prefix: '474063'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4d6de0f9-7bfb-4ac7-b4d7-2b972158ca4c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244076
+    prefix: '474064'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6f156f60-97bb-4b50-9f2a-0298580429a6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244077
+    prefix: '474065'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5282ca33-05d6-4756-9f47-8482e9579098
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244078
+    prefix: '474067'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ff771714-1994-4621-958f-096017481414
+    country_id: *no
+    network_id: *no_nextgentel_mobile
+  - id: 244079
+    prefix: '474068'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 702f9f99-e46b-4318-b558-160d640d0ce3
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244080
+    prefix: '474069'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cb858016-f027-4bdd-91a5-318e0210470c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244082
+    prefix: '47407'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f3ba6c4e-d379-4d6e-ada5-566376378428
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244085
+    prefix: '474080'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e33ed98-6459-4c56-badc-ef2724fa1ca8
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244086
+    prefix: '474081'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7d5b8598-8046-4364-b66e-31cf1232c9ad
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244087
+    prefix: '4740820'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 89bd892e-4076-47aa-a2bd-793bf7d43940
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244088
+    prefix: '4740821'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f27e3236-e35a-4d00-9ffc-cec2057772c8
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244089
+    prefix: '4740822'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d3d0e991-8a75-4b61-8530-2b60dfd1d0ed
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244090
+    prefix: '4740823'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee8963ec-8174-47bd-b408-ae74cfe180c6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244091
+    prefix: '4740824'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 65f0eeaf-83e2-41a9-b386-cfb08e979d8b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244092
+    prefix: '4740825'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1ec1665-8241-442f-8167-5441d2d3b115
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244093
+    prefix: '4740826'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9bf120e8-fe5a-406b-8bdc-d0154fd623cb
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244094
+    prefix: '4740827'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5d6186ac-7aa4-4384-9cb7-9cdea0417c76
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244095
+    prefix: '4740828'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a40b6810-dd8f-4557-a26e-e8915f8679bc
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244096
+    prefix: '4740829'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fb58376c-abf5-4cc5-b8aa-653c0dbd85a4
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244097
+    prefix: '474083'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f4e4d96e-10d4-43cd-9740-50b9f747cea1
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244098
+    prefix: '474084'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3d5ea6ea-0caf-4a5a-a7b3-9dab3332acc0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244099
+    prefix: '474085'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2d018b83-cf48-44f5-8c6d-87587d6a6b44
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244100
+    prefix: '474086'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bc3e7787-8494-4fda-9f61-6e7ba0ef0efe
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244101
+    prefix: '474087'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4cf28358-d7ee-41e8-a6f8-8e5e6a11b54e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244102
+    prefix: '474088'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2f12b6b2-bd19-4f10-b463-3d799d6cf9ce
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244104
+    prefix: '474089'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b22725c5-04e8-4895-a893-465c617c608a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244107
+    prefix: '474090'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4366ba4a-8c6b-465a-991c-ccdffe29b042
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244108
+    prefix: '474091'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8dc3d05b-98e1-4339-9645-b746d918f88e
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244109
+    prefix: '4740920'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cb2b84d2-3c36-42b6-a7b9-d44a3ccc33cb
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244110
+    prefix: '4740921'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bc5a868e-427d-47fa-ab8b-26fa22600af4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244111
+    prefix: '4740922'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e625cec-b383-43ba-b44b-edb13ed6dd59
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244112
+    prefix: '4740923'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3229d643-32b1-4145-bc45-ada16b59993b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244113
+    prefix: '4740924'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 70dd341d-7e07-4209-a4f6-ff4c76a49eff
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244114
+    prefix: '4740925'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d726ef1e-4f4f-463f-ad0d-93558e23071b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244115
+    prefix: '4740926'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 472dbe12-017a-4ec0-b082-ed792c6e1f97
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244116
+    prefix: '4740927'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 931cc462-8bb9-497f-8d4c-75af4b16e7e2
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244117
+    prefix: '4740928'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 443623bb-1883-4c28-9288-6be0a73fe2d3
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244118
+    prefix: '4740929'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 072722fc-e2c8-4aac-825d-20465fd2c06a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244119
+    prefix: '474093'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 345131fb-2528-45cf-ab91-d72b30c89241
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244120
+    prefix: '474094'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7032f39a-df8c-4478-8e24-aad404183c96
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244121
+    prefix: '474095'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: db963b2f-db51-4f10-befc-826a999e4757
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244122
+    prefix: '474096'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: acd14b42-548b-4d46-83c2-72fb213f8ab9
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244123
+    prefix: '474097'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8078203e-af75-4cc6-9f01-8bd5c50b7679
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244124
+    prefix: '474098'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a8aae4ed-fe62-465f-89bb-1fa79205df32
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244125
+    prefix: '474099'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e62a215-bfb0-4095-aba4-cc76dc78fef8
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244144
+    prefix: '474100'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3f1bb508-eb46-4e84-b5c0-d02940357fda
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244145
+    prefix: '474101'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dfc4f606-7717-41ad-b2d0-5a6249bf467a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244146
+    prefix: '474102'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0d769c19-9569-41a4-af3d-b39557bcea21
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244147
+    prefix: '474103'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fc916246-6e97-494d-b797-94c7b30c6f47
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244148
+    prefix: '474104'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ccfcd5d3-74fe-4060-bbe5-dd40fcfbbf7a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244150
+    prefix: '474105'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a47be44c-392b-4027-92d0-22a1f1c2ef18
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244151
+    prefix: '474106'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 851edcf7-84b3-42e1-8394-65a56b1b5168
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244152
+    prefix: '474107'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fda7a713-04cb-4a1c-91b3-8829d34a8ebe
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244153
+    prefix: '474108'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8573a873-341a-4f7d-b265-b9e6fe1751bf
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244154
+    prefix: '474109'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fe20f92f-1dfb-474b-abe0-d5d52708ffe0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244159
+    prefix: '474110'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 90cff7e7-dac0-4eaa-b716-da48aec38230
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 244160
+    prefix: '474111'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 31cc3142-996e-4081-9b3c-b053be371750
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 244161
+    prefix: '474112'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6c374d27-44ad-4b63-b712-f460455acdf3
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 244162
+    prefix: '474113'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5b81f6b8-7c2a-4b43-9192-ba320ece1d2c
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 244163
+    prefix: '474114'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3302817d-f593-4c23-ad01-3f15a453a978
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 244165
+    prefix: '474115'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2d276986-d9b8-44ad-b7c0-5586eeb4cd42
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 244167
+    prefix: '474116'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bf6a2ffd-88cc-4517-9551-f6239d1e30af
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 244168
+    prefix: '474117'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 64d76489-a24f-4be0-8674-aa04aa343600
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244169
+    prefix: '474118'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ee68d31-aff8-4773-a8ae-309b535fb1b8
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244170
+    prefix: '474119'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a278fabc-28f8-4a69-aa43-d74da7534268
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244173
+    prefix: '47412'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: db92a093-e81f-4397-8b01-f29ef9c3ceaf
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244177
+    prefix: '47413'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e1f44930-22a3-4f66-81d3-2978bad08bc7
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244180
+    prefix: '47414'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f79aa3c5-2288-44ce-be6b-04c499f3aba8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244184
+    prefix: '47415'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e51c2df0-8871-420b-91ce-80134d185dd4
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244190
+    prefix: '47416'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8134276d-4201-444e-be6c-43c40b2f6f16
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244205
+    prefix: '47417'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b32221bc-74ce-4aeb-b15c-b4b4f20d96c5
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244207
+    prefix: '474171'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: be3b1e87-06f7-4438-b365-83c20a5dfae9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244212
+    prefix: '47418'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c3ccc273-a92f-4ce4-8f5e-86f3ffa92818
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244216
+    prefix: '47419'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eaee976e-f9ce-4988-89e6-78d63003666b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244241
+    prefix: '4742'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6dc24bd7-8fb1-41e2-adf3-e0f7ee46d62b
+    country_id: *no
+    network_id: *no_nkom_mobile
+  - id: 244339
+    prefix: '4743'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee094d2d-f5f2-4f04-b936-4e67dc739be2
+    country_id: *no
+    network_id: *no_nkom_mobile
+  - id: 244495
+    prefix: '4744'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b09ba812-87b1-49ab-a553-0095511ae1f5
+    country_id: *no
+    network_id: *no_nkom_mobile
+  - id: 244640
+    prefix: '47450'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 95242084-072a-45dc-a4ec-37e8d65cc67a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244651
+    prefix: '47451'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a0e43a49-c1ec-42d1-ad7c-568a9b19818a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244663
+    prefix: '47452'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f05ee1f5-148a-4524-ad5f-2f9ec1291e5f
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244681
+    prefix: '474530'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fbdb3a08-9a3a-43bb-86e4-b6c4d0d9430c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244689
+    prefix: '474531'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6bd981a7-2b42-4a12-bd1b-859faad08f93
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244690
+    prefix: '474532'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 913f33ea-9473-4b35-90ec-b16647a70154
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 244691
+    prefix: '474533'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fc620032-913a-45f0-b4ed-926712d46b97
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 244696
+    prefix: '474534'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6eb55727-a8ca-4c8e-b079-00ab805de17b
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 244705
+    prefix: '474535'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 72874d6c-0b77-4db2-be68-cd6c565adc30
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 244706
+    prefix: '474536'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 32c69644-8aad-403d-92b1-916940d0c488
+    country_id: *no
+    network_id: *no_nkom_mobile
+  - id: 244708
+    prefix: '474537'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 11587058-9c57-438a-bdab-955fd174799d
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 244711
+    prefix: '474538'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e53de621-6f98-4c65-b6c2-bf3f91fe0696
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 244714
+    prefix: '474539'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b49beaf7-6076-465a-b348-10b981d1258c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244717
+    prefix: '47454'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 324b077b-0433-43c8-83c1-9f7a1654f962
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244743
+    prefix: '474550'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 21cb86b1-3e63-4fb7-80d9-5f215edf1b10
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244749
+    prefix: '474551'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 779dbef8-ac37-4298-b334-33d6b152910b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244751
+    prefix: '474552'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b9644e7c-34a9-494a-bdd0-8c8f178bb943
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244753
+    prefix: '474553'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 08dce7d8-bd78-4d55-b238-978c929385c8
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244757
+    prefix: '474554'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 185fda61-cd2a-4f4c-97c4-4021c3fbf3c9
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244763
+    prefix: '474555'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 87ad98b1-3b3f-4a8f-ae41-77951abc29f7
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244765
+    prefix: '474556'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9bb437a9-788a-47ad-975f-64f16e0ff249
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244770
+    prefix: '474557'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4ad9d6bd-a866-4700-af73-de45b5b14d86
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244772
+    prefix: '474558'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 48f96e98-d25c-4cf9-ab67-1bb1424e060c
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 244773
+    prefix: '474559'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5b9ace43-f9e5-46e3-9469-d30825821925
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 244778
+    prefix: '47456'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 906a7d48-f7ba-471f-af07-3e7c1f0d1cef
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245170
+    prefix: '47580000'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a821d21b-70bb-45db-b5a9-aba725a3b0aa
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245171
+    prefix: '475800010'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 2ce7522f-d4e3-4f26-809b-9a3b1981107f
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245172
+    prefix: '4758000110'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 06f73b98-a317-412b-8534-3f3b1fdbe55c
+    country_id: *no
+    network_id: *no_telavox_mobile
+  - id: 245173
+    prefix: '4758000111'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 49856154-3ec9-49e3-891f-75dc16f48007
+    country_id: *no
+    network_id: *no_jetnett_mobile
+  - id: 245174
+    prefix: '4758000112'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: cff54c68-4e9b-463a-98b8-a8160b35754d
+    country_id: *no
+    network_id: *no_jetnett_mobile
+  - id: 245175
+    prefix: '4758000121'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 886b7558-8dea-48ca-88d5-147cfaea753e
+    country_id: *no
+    network_id: *no_svea_mobile
+  - id: 245176
+    prefix: '4758000122'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 8e04c171-e6c1-49f5-8bcb-179803f678b6
+    country_id: *no
+    network_id: *no_svea_mobile
+  - id: 245177
+    prefix: '475800020'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 020af8e7-cb9f-4dc8-a642-f10ad80a4dad
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245178
+    prefix: '475800021'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 473afdd3-9ff1-4866-8bb7-33bd63d442b1
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245179
+    prefix: '4758000220'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 5fc28db2-4a02-436c-afb8-63454516a814
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245180
+    prefix: '4758000221'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 388902d4-ff91-4b0d-9efb-cad338894cd3
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245181
+    prefix: '4758000222'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 800d08b0-5f39-42cf-a321-df203b9a8b14
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245182
+    prefix: '475800030'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 70bde640-5bac-47fc-9fac-3c10dfb1d473
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245183
+    prefix: '475800040'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: fd98e7cb-975e-4357-a7ac-1db90bf43adf
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 245184
+    prefix: '475800041'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 08b1035e-9546-48f4-b397-2b201d4f75fc
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 245185
+    prefix: '475800042'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a3f1be1f-5e03-4521-a533-43e4122f1312
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245186
+    prefix: '4758000450'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 1ebed3e2-aeb0-4411-902c-dc26ce8a88c8
+    country_id: *no
+    network_id: *no_unifon_mobile
+  - id: 245187
+    prefix: '4758000451'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a364b872-3e62-42fc-bbab-e7dd11e06433
+    country_id: *no
+    network_id: *no_unifon_mobile
+  - id: 245188
+    prefix: '4758000452'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 230de2a3-fb98-4c31-a489-5cafac020872
+    country_id: *no
+    network_id: *no_unifon_mobile
+  - id: 245189
+    prefix: '475800050'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: fed8a6be-a46e-4eeb-80fc-26ef9c03bb0c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245190
+    prefix: '475800060'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 445bbd2c-6aed-45d8-9639-b049868f44ed
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245191
+    prefix: '4758000610'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 1a1c76bb-33a8-44d7-81cb-6d2a22faf171
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245192
+    prefix: '475800070'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 49971e52-e709-487e-8e79-f54a1f5ac6df
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 245193
+    prefix: '475800071'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: ed5d2051-3fba-46c5-a975-8b1c4e590c3c
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 245194
+    prefix: '475800072'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 2f000cf0-b45b-49cb-91a5-ad41e811ae27
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 245195
+    prefix: '475800073'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 16d96781-33e9-48f5-8466-84b378f2a25e
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 245196
+    prefix: '475800074'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 50a4e1e9-6bd6-4982-aee9-816a03dbec0f
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 245197
+    prefix: '475800075'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 7ef476a6-af5f-4125-8e6d-1bfcfe0e2054
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 245198
+    prefix: '475800076'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: bdd1a82a-2523-44c5-85d0-180f84222f07
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245199
+    prefix: '4758000800'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 3b5a961a-f85d-43d2-b2bc-2cd1661615f6
+    country_id: *no
+    network_id: *no_com4_mobile
+  - id: 245200
+    prefix: '4758000801'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: a5a02f50-f528-4d55-83b9-0c055a8fad4a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245201
+    prefix: '4758000802'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 7f98e26c-4689-489f-90c5-89f322aa5cb7
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245202
+    prefix: '4758000803'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 28a03244-bd15-4bd3-9a22-2038f2c12e5d
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245203
+    prefix: '4758000804'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 27fb9710-5603-490e-b6e3-f846a737d00f
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245204
+    prefix: '4758000805'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 91b9b0b4-da32-42d0-913c-f47ffb423aa4
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 245205
+    prefix: '4758000806'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 915cf4ca-8115-482d-a8e8-47ce1c3ed615
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 245206
+    prefix: '4758000897'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: eaa14fc1-e1d6-4cfc-8aaa-0108ceeea9e2
+    country_id: *no
+    network_id: *no_nextgentel_mobile
+  - id: 245207
+    prefix: '4758000898'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 83e71829-d457-4ff8-bec7-5628ed4cb330
+    country_id: *no
+    network_id: *no_nextgentel_mobile
+  - id: 245208
+    prefix: '4758000899'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 47904f8a-369d-4b59-bb4f-d3154e2cff0a
+    country_id: *no
+    network_id: *no_nextgentel_mobile
+  - id: 245209
+    prefix: '47580009'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b4e163d6-9c42-416f-93c4-8257eed468b4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245210
+    prefix: '47580010'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 915799a5-efe3-4961-b974-b60d0481513b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245211
+    prefix: '47580011'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 5ccff3b3-e974-4d10-a5eb-76be64243d5c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245212
+    prefix: '47580012'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 1ea3b982-392f-4da1-b43e-44b7b27758d7
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245213
+    prefix: '475800130'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 28a8e30a-4c7b-4960-9fef-f8b5af74ef26
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 245214
+    prefix: '475800131'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 533b1255-5d48-43c1-b899-caaf6873b4a2
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 245215
+    prefix: '475800132'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 62cb3953-4352-45da-affd-b27370468bd2
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 245216
+    prefix: '4758001350'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 41877467-446c-4edd-a149-3b16ee87f9f2
+    country_id: *no
+    network_id: *no_intility_mobile
+  - id: 245217
+    prefix: '4758001351'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b28bc7b3-5bbf-4d22-a5f7-ffa53fcc9eda
+    country_id: *no
+    network_id: *no_intility_mobile
+  - id: 245218
+    prefix: '4758001352'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: dd1df684-d67e-4139-a85f-f9ee583a858e
+    country_id: *no
+    network_id: *no_intility_mobile
+  - id: 245219
+    prefix: '4758001355'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: c8b3a14a-14d3-4ca5-9189-291d1333d37d
+    country_id: *no
+    network_id: *no_bigblu_mobile
+  - id: 245220
+    prefix: '47580014'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 93c89962-c48e-41c9-91ef-b7e29a76c00f
+    country_id: *no
+    network_id: *no_com4_mobile
+  - id: 245221
+    prefix: '475800150'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 0e9b4ea1-c792-4be9-a551-8f16d7fa5b0e
+    country_id: *no
+    network_id: *no_com4_mobile
+  - id: 245222
+    prefix: '47580016'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b13e3f7a-af02-42ff-b36c-e76ed87823b8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245270
+    prefix: '475900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 14d188cf-5017-490e-bd22-66033a5047d1
+    country_id: *no
+    network_id: *no_com4_mobile
+  - id: 245272
+    prefix: '475901'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 457868f5-019c-453a-9ae7-ee5624ca0f5d
+    country_id: *no
+    network_id: *no_com4_mobile
+  - id: 245285
+    prefix: '475902'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 18d5df70-ded4-4667-82b3-ea4b04c0655f
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245290
+    prefix: '475905'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 83c39b1f-a3f7-444a-bf26-ad9fb1b15c49
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 245302
+    prefix: '475906'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 99b36fc0-a294-40df-b8fc-847c0f21f851
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245307
+    prefix: '475907'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e294bb4-585f-4ec4-a578-0d17aa7db0d1
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245309
+    prefix: '475908'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 382bd693-9fe0-40d8-9a08-21be98c6e506
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245310
+    prefix: '475909'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 687f8cb5-3b0d-404d-aad0-201bec59badb
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245316
+    prefix: '47591'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: accdfd30-a687-4a0c-b513-1166e43fd467
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245319
+    prefix: '47592'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 443b8da6-294b-47e3-b1aa-17ad7e035577
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245323
+    prefix: '475930'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 26079d64-afe1-433a-b71a-abb7d15f474c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245324
+    prefix: '475931'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e71ebc8d-3cf7-4810-8c21-69be5dfd9a64
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 245325
+    prefix: '475932'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1fefa92d-b956-4077-bf10-a478610dc8d1
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245326
+    prefix: '475933'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f73fcd23-04df-4b38-9788-5d395c123b06
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245332
+    prefix: '475940'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3f39d99d-08eb-455c-9fc0-693b679f9fc4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245333
+    prefix: '475941'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 749090c7-0ed6-4089-8b28-2ff407b709b6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245334
+    prefix: '475942'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5074ce1b-4ca5-4292-9130-a87fe9fab220
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245335
+    prefix: '475943'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 543c93c7-7fbf-4f6f-90b3-f02bc03aec7f
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245336
+    prefix: '475944'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1067015f-312e-4db5-bdef-8629491d8128
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245337
+    prefix: '475945'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 529c2f2d-ed1e-46f1-89b5-e3fdbb802af4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245338
+    prefix: '475946'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6b9bdaa-1ddb-4d2f-8990-c469dc360e6a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245339
+    prefix: '475947'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: de3c4317-ed18-4135-b9e1-fcfc28b0b80d
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245340
+    prefix: '475948'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 56c49771-45e8-4840-8719-509244e799ec
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245341
+    prefix: '475949'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f09acb61-5a2f-436f-820d-810719ddb8a5
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 245344
+    prefix: '47595'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d984def7-d736-49e5-85ab-ebb4aba44c7d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 245359
+    prefix: '475960'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ccfeaec7-12de-4808-ad5c-f55ec7de26b7
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 245368
+    prefix: '47598'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 32ada7be-469d-4b47-aaab-6797096a24ef
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 245370
+    prefix: '47599'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cf69ef63-65bc-4e30-adce-e4f3640654ac
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249028
+    prefix: '47457'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66cce14e-a82a-4b39-9802-743a06d65f20
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249053
+    prefix: '474580'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: db7a6c1e-ce0a-47e7-b7cb-7efd75e1f0da
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249054
+    prefix: '474581'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66846332-53a8-4e72-9eaf-eaadaa361792
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249055
+    prefix: '474582'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c486557e-3f11-4ec4-8463-8690326764d8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249056
+    prefix: '474583'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: caaad695-c214-4d76-9ac4-e95aad61a09b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249057
+    prefix: '474584'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e96705a8-9ef5-466c-8062-a64e380b0009
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249058
+    prefix: '474585'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 76f706fe-e4d3-42ee-8ab4-3d666d1da5c9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249059
+    prefix: '474586'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 42f2205e-5904-4ea7-914a-6fdc53258f4d
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249061
+    prefix: '474587'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bd44b409-cd2d-49bf-9e25-b6a948748369
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249063
+    prefix: '474588'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d5be1633-aa9a-413e-a735-06d0e9e1b074
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249065
+    prefix: '474589'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5b717811-1bb1-41dd-ac3e-3989b5f62b79
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249067
+    prefix: '474590'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 49368b06-3a6e-4f84-aadc-f61a7154cade
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249068
+    prefix: '474591'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3b679b28-6472-4628-9656-52d25e9362f5
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249069
+    prefix: '474592'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2c4b04ae-1f7f-43c0-8759-2c3ccd1fa3ca
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 249070
+    prefix: '474593'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ad77e2d5-f73f-41e3-81a2-8ba0b2fd3ca8
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249071
+    prefix: '474594'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f765339-2826-4dd8-8cc0-961ac1564531
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249072
+    prefix: '474595'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6cb31aa-9d0c-41f5-8455-c29695f645ee
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249073
+    prefix: '474596'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2a329f1a-98f5-4893-8f61-513b7c9b5a40
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249074
+    prefix: '474597'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e07cd1d5-70b3-4735-bccd-6f9184f2fe1f
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249075
+    prefix: '474598'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c61d9c17-3f57-4b6c-ad66-298b3825629f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249076
+    prefix: '474599'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dc95c43f-ca08-4475-b081-b54ee0fb54c0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249092
+    prefix: '47460'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4310214f-faa9-43ce-899d-34f1778bd5c3
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249111
+    prefix: '474610'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7813582e-64be-4733-9898-a083e480f8c6
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249113
+    prefix: '474611'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 684b06c5-b0e2-470d-8d57-81f1a12830c8
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 249116
+    prefix: '474612'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: de3f4219-0542-407a-8f3b-af401ce461d7
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 249119
+    prefix: '474613'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a78e2f91-5c33-4e13-8574-e38af6dd4b6c
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 249122
+    prefix: '474614'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9bc9391c-6685-4e66-ab23-7561bc4b1b81
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 249125
+    prefix: '474615'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f29c62ca-b16d-4cde-9ec2-993237036744
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 249127
+    prefix: '474616'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ce84f62-c0a3-48cc-b768-2907ddae2471
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 249129
+    prefix: '474617'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0bde43c7-3d7a-4bfb-9472-85d0f57299fa
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249131
+    prefix: '474618'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 81ad8f73-7363-411d-81d5-77687b37a9fa
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249133
+    prefix: '474619'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7e94fe76-fe1d-4803-9098-fcd953410937
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249137
+    prefix: '474620'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aa71315b-59e1-4219-a1bc-b05f5433da69
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249140
+    prefix: '474621'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4aeb8340-d33d-448f-8a18-d538836838f1
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249143
+    prefix: '474622'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2f1412de-9810-4768-aba5-b1efce099d5e
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249145
+    prefix: '474623'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a1a0757b-3f39-4d80-89d5-68e683e77261
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249147
+    prefix: '474624'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 53947b3e-4711-4dd3-9592-67e4009609b4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249150
+    prefix: '474625'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e9a53844-b6ba-460f-b528-2334b6c993ba
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249154
+    prefix: '474626'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9faa0fe0-96f8-4e6b-8017-47ff65359830
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249156
+    prefix: '474627'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b9041347-9dee-4fa7-ac45-8a9317994276
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249158
+    prefix: '474628'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bf1d7bdd-b006-4291-97bc-9bc9a6b24380
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 249160
+    prefix: '474629'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5738c70e-ddb0-448e-afe2-0eb8761ffef9
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 249162
+    prefix: '47463'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9a5d867c-14d9-491f-b98d-456807e7d3fe
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249173
+    prefix: '47464'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b9693a60-9c2c-4edf-b871-7e6770108cd5
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249195
+    prefix: '474650'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2771bbb5-aa88-4c7c-8b08-7080fe65f333
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249200
+    prefix: '474651'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4c60f979-8fe7-49c9-8eca-9530492ee0e0
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 249202
+    prefix: '474652'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e5ac724f-0aaa-499c-9fbe-394640aa52a5
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 249204
+    prefix: '474653'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e7b5efd-ee27-4445-b999-30a69df55c02
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 249206
+    prefix: '474654'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98e062dd-c6b4-4bf3-a550-c051749b5e57
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249209
+    prefix: '474655'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1ad082e8-f7ba-4366-a1ea-727c91678cbc
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249211
+    prefix: '474656'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 332f98c4-99a1-49bf-887a-2009677772af
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249214
+    prefix: '474657'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 34dfcce5-7c80-4732-bf38-da176cf41cef
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249216
+    prefix: '474658'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 005428b0-4fae-4ac5-abb8-4855823252db
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249219
+    prefix: '474659'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 619bfc79-2be4-4444-8422-1ff0dfba3150
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249224
+    prefix: '474660'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 49ee1800-f4ea-4b79-a5e3-b07ec3296ce2
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249228
+    prefix: '474661'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 39152377-e90a-41d2-a372-c846eb0b9289
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249231
+    prefix: '474662'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0f2eb103-5dad-4341-8295-ae7acf6f965b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249233
+    prefix: '474663'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 25c8dc91-4f65-4c4d-9ffe-91e5f535b532
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249235
+    prefix: '474664'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e6bd3b2-5367-4cb7-a90b-53d5bb10667a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249237
+    prefix: '474665'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 18a44317-f971-43ab-9db3-e38dc7b84ddb
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249239
+    prefix: '474666'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5df11b63-4992-47e5-86d0-aa2fdf734bc6
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249240
+    prefix: '474667'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3c71bc38-0c2b-4d37-8254-bb3c439b4d81
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249241
+    prefix: '474668'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c331485d-0049-42d1-8553-37f9c1ee4354
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249242
+    prefix: '474669'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40304f5f-9c89-4e06-aac8-382474217592
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249247
+    prefix: '474670'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 616463f9-f002-4061-a5c6-f175fc0f3843
+    country_id: *no
+    network_id: *no_unifon_mobile
+  - id: 249251
+    prefix: '474671'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5a10f38c-e0f3-478b-8db4-276bb0832879
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 249253
+    prefix: '474672'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 17d3908a-4bb7-46d4-8d16-142d35b23d65
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 249256
+    prefix: '474674'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 64fa8ccc-e47a-4dfd-a759-234446da49a6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249258
+    prefix: '474675'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 97e9d734-7e02-4b40-862b-b8e2d1ac45bd
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249261
+    prefix: '474676'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20c06b90-fe4f-4a12-8c56-eb6f8a19b24e
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249263
+    prefix: '474677'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 26a7e5e0-ef9a-4f8f-8d3e-8545ffe66ba8
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249265
+    prefix: '474678'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4fb52293-676a-487d-9ac3-d97b5c5020db
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249267
+    prefix: '474679'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 03ad30c8-ce30-4cc1-a855-78020166caf4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249270
+    prefix: '47468'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0f164ed0-52ed-4c95-9816-f77bb640d2b9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249277
+    prefix: '474690'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 253b8497-b420-4c3d-b8d6-d3f38f34f7d8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249279
+    prefix: '474691'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a0272263-1801-4b8f-98d2-6e588894c238
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249281
+    prefix: '474692'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44b7f67e-2a84-48bb-808d-95b86da7b1ed
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249283
+    prefix: '474693'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b1fd088e-54fa-4f16-9232-40df5b4cdf48
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249285
+    prefix: '474694'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c05f1512-bbe8-4a35-9dc1-3766d4fddbb8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249287
+    prefix: '474695'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8463ad12-3487-4b1b-9fc9-0b7d2609fc00
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249289
+    prefix: '474696'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d493a47b-5c40-4b91-95fb-cdaa933e8196
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249291
+    prefix: '474697'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20e9f10e-1037-4020-abba-e0ea57bf9f1b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249293
+    prefix: '474698'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 23d7f6b1-867f-4d31-b4bd-2de60310ff8d
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249310
+    prefix: '47470'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e116694-6deb-4042-9ccc-feb91cfda19b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249314
+    prefix: '474710'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1af62d2d-d187-4a72-b69f-aa5f469b3e89
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249315
+    prefix: '474711'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8bcbd292-3313-4ae0-9678-f0d5254966da
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249316
+    prefix: '474712'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4bf0348f-e644-4fc5-8400-2401c06327cd
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249317
+    prefix: '474713'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cd97db5c-b594-49cd-9cc6-322eb9611d57
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249318
+    prefix: '474714'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e2daaf59-f14e-4f7c-8730-7a73255a74a3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249319
+    prefix: '474715'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 70fc444e-ec36-4068-8ebb-4cb92f64d059
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249320
+    prefix: '474716'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c351b724-d2cf-4317-a629-1bd32b0f00c3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249321
+    prefix: '474717'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c9731227-819d-4681-a6c7-aea9d7c3a984
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249322
+    prefix: '474718'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f521222c-88a4-49a6-b8a2-6b940928eee4
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 249323
+    prefix: '474719'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2b4900df-7b52-48c3-aa96-e712d34dbcf1
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 249324
+    prefix: '47472'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 01bb083d-f5da-4730-9f3e-ae1c6ab59043
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249327
+    prefix: '47473'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9ef7c45e-71f8-4797-b4ef-0fdac67f2506
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249332
+    prefix: '474740'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e142e21f-a2de-439b-981c-8edcb7ea7c8e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249336
+    prefix: '474741'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ef426d8d-932a-47dc-8200-e778ed6b41b7
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249338
+    prefix: '474742'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9d59cebd-182d-4e19-b909-42b60260da3b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249341
+    prefix: '474743'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7f5df239-ef82-4710-a06a-cc9e2b20f25b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249343
+    prefix: '474744'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cd89b69f-e9ed-4fef-be61-3bce000ec4f6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249345
+    prefix: '474745'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 607fc8f8-77ca-4919-b2c7-f6d8af9227e4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249347
+    prefix: '474746'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cb9c7f20-1e9b-4aeb-86a4-f5e13f7e1885
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249349
+    prefix: '474747'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b1016859-f4a7-4ac8-ac0e-52f08459e1f7
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249352
+    prefix: '474748'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9a5efe78-1f83-435b-9008-492a70dc4a38
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249354
+    prefix: '474749'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 532d1c00-fd1b-4ad8-8ac3-b51caf1476b0
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249356
+    prefix: '474750'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a4e1ad37-eb64-4852-a707-93e58f55b485
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249358
+    prefix: '474751'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5dbebcc7-1dd6-477d-96ba-d85bee2468ea
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249359
+    prefix: '474752'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 70c4e587-780e-4c91-a11b-1c333cc72518
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 249360
+    prefix: '474753'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0d945f29-9089-4170-ab7c-a88622604938
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 249361
+    prefix: '474754'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c0f562d3-8677-4564-ad39-8873bc2da04f
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 249363
+    prefix: '474755'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1eff5072-cdb2-49bb-a7dc-048dad59a96f
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 249364
+    prefix: '474756'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ec7a2333-aa1f-4d2c-9f12-c1dadb5ff9e6
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 249365
+    prefix: '474757'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 51a8cf3a-ae1b-41b3-a44b-86f9df49a8a3
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 249366
+    prefix: '474758'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 82d528e2-798a-4019-95da-315f5eaedccc
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 249367
+    prefix: '474759'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 997fe140-d412-4bc4-adfa-f17d1e64661a
+    country_id: *no
+    network_id: *no_altibox_mobil_mobile
+  - id: 249369
+    prefix: '474760'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66167f60-2692-47bd-b7ae-7a4f2fb35f5a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249372
+    prefix: '474761'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1b7617b0-a3eb-4c79-80f9-b8676e7fe305
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249373
+    prefix: '474762'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 03421b76-0990-4cdb-b114-d0b9bea5f2bc
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249374
+    prefix: '474763'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4a082011-20e7-443d-8e65-5f65567eabb9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249375
+    prefix: '474764'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 07627887-aaf4-4786-9b49-72c32071d3a1
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249377
+    prefix: '474765'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c2408e6c-32f1-48f1-b67c-5c91c3c929fa
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249378
+    prefix: '474766'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 457be779-5c23-4518-aee7-b5c9d0c09d58
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249380
+    prefix: '474767'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8814c829-5dcd-4f65-a416-d058a2ccb0f4
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249381
+    prefix: '474768'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6896f390-9dd1-4b01-9e48-3c4f519d3b2c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249383
+    prefix: '474769'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 68bf4e3d-b73c-4b3f-a44e-4d91304e886c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249386
+    prefix: '474770'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f54580f3-2a78-42a1-b8df-0deeb38ed3f7
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249394
+    prefix: '474771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 47edbf26-a0a4-4b70-aa9d-4abd79bcd2e0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249395
+    prefix: '474772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e425664-4f0a-44df-8a68-20de38f00871
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249396
+    prefix: '474773'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 25ea9e82-4fec-432c-b3d1-8750cd9ab335
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249397
+    prefix: '474774'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 28373224-0fe3-42bd-9d17-7b4a33f8f461
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249398
+    prefix: '474775'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8034202c-772b-4546-9863-b7e3bdaa9f8e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249399
+    prefix: '474776'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d42dbbee-c64d-41e4-9d58-d71c01932a13
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249401
+    prefix: '474777'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b0f59073-13fd-4579-a989-e48604c920a3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249403
+    prefix: '474778'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d5019c31-9bf7-431f-b6c4-197a44f28586
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249405
+    prefix: '474779'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 81b5b3b9-d1f2-4a8e-9f6a-4300aea20284
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249408
+    prefix: '47478'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6ec6ab77-cc16-49c8-85f7-202a202ad852
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249410
+    prefix: '474790'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c9e4dc56-3a54-4656-b79f-8475911619c8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249411
+    prefix: '474791'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 22894995-1834-41c2-a0be-79681f5cfd80
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249412
+    prefix: '474792'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 858e6c2f-36c3-4232-983a-eb294489ea5c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249413
+    prefix: '474793'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2482072b-4813-4167-a5c0-656d381092dc
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249414
+    prefix: '474794'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1dd664f-34a3-4b69-a6f0-f35939c41851
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249415
+    prefix: '474795'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 87b4de13-9bca-487a-a97d-98ac823a54cd
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249416
+    prefix: '474796'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 270055c3-6526-4f26-b344-41310da2ee47
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249417
+    prefix: '474797'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4a6a2d1c-f111-43f9-a561-46014dc9f828
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249418
+    prefix: '474798'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c4212af1-7d71-47b8-aef4-40a2e48520b8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249419
+    prefix: '474799'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dc41b1f8-b6a5-48d6-a49a-37c35cad04f0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249432
+    prefix: '47480'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b103a616-d7b2-4837-b581-1a3c3c352681
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249436
+    prefix: '47481'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cb680d37-dbfa-4741-9414-793e4fcd62b9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249437
+    prefix: '47482'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8342050b-652e-4198-8d3d-c065c74736cf
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249438
+    prefix: '474830'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: deca2147-9f2c-4d39-8784-50b77853005f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249439
+    prefix: '474831'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5364736d-ced5-412a-b923-5da2147670b2
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249440
+    prefix: '474832'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1b873369-37a7-4c09-8bbf-84ae08ba8531
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249441
+    prefix: '474833'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 42342915-de39-4c64-9f7e-85162e2b9f2b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249442
+    prefix: '474834'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0a5f7029-4613-42de-8112-485610b7d8e3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249444
+    prefix: '474835'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fda1f8d7-9ef2-42a9-93eb-6d70f1ea94c4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249446
+    prefix: '474836'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a7f22bc6-02fb-4c4d-a00d-a8b1eee098dd
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249449
+    prefix: '474838'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 23586afb-478d-4db4-9027-4aaa8a6a21ad
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 249450
+    prefix: '474839'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0715b47c-93ff-4d7c-a724-fed2e6b0ba55
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 249452
+    prefix: '474840'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 13887c30-f2d5-4a75-a143-3d8973156a2c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249453
+    prefix: '474841'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2680d233-88da-4c22-8ae8-a382f35e33e1
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249454
+    prefix: '474842'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d0b73624-9cc9-4214-9709-4fb4760d7f9f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249455
+    prefix: '474843'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d53d8e76-d7fe-414f-ba20-3a02cb21f0a5
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249456
+    prefix: '474844'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: edff9814-b5a0-4e3b-89bd-646c2e01de9a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249457
+    prefix: '474845'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5772f5dd-9fa0-4efb-9ba6-818afea52baa
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249458
+    prefix: '474846'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 28004d8f-a852-4b9a-bb07-94e32814377c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249459
+    prefix: '474847'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4d2ecc01-1694-47be-9b8b-4792707661f2
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249460
+    prefix: '474848'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e3ffa920-cd9c-47d7-a84f-34f0257bc0af
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 249461
+    prefix: '474849'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f35c2762-ed06-42a7-9dc2-8aed7c8e04c7
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 249464
+    prefix: '474850'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3a53bd53-9c95-4bb0-a308-4101bf20593a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249465
+    prefix: '474851'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 17c60ead-687a-4f34-8f75-ca5746775190
+    country_id: *no
+    network_id: *no_nextgentel_mobile
+  - id: 249466
+    prefix: '474858'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bfc50254-8780-43a0-875a-b766b0fdcf33
+    country_id: *no
+    network_id: *no_iristel_mobile
+  - id: 249467
+    prefix: '474859'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 17c20200-f14e-4f51-a8da-c9b7373eaa85
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 249470
+    prefix: '474860'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 72ae202e-82cd-46cd-9310-6a235dd197e3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249471
+    prefix: '474861'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e64ed72d-a268-4654-abd0-be06424f8a3a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249472
+    prefix: '474862'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e9bd2929-79e8-405d-b235-9505352977f1
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249473
+    prefix: '474863'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f06b538e-1e1c-4860-be46-c22afbda00bc
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249474
+    prefix: '474864'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a37b5a37-e18b-4c4b-af1e-10c6d072a739
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249475
+    prefix: '474865'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 256c6fd8-568e-4f44-856f-05ea82fc07ca
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249476
+    prefix: '474866'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 62650dcf-1607-4f6f-a73e-01f0eb0ab21b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249477
+    prefix: '474867'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a3841dd9-c277-4d76-912f-275c6a9e59e9
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249478
+    prefix: '474868'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ec6d9bb5-5378-422c-92e4-15d15647f77a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249485
+    prefix: '474884'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d537fe01-96e6-4d15-96ae-02f6053eb66c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249486
+    prefix: '474885'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f033df8f-0fb9-4da3-bb87-edeba9a6a486
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249487
+    prefix: '474886'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 195552c9-8492-48c8-aac0-912ec8520f44
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249489
+    prefix: '474888'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cf0f9782-b071-4d74-9f1c-77d565db4ad0
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249490
+    prefix: '474889'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eac8581f-5599-4479-93cf-d1fac764bde5
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249494
+    prefix: '474890'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 072bf618-0075-49cb-ab56-800895a5392d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249495
+    prefix: '474891'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 610a1fc1-527d-4668-b057-37904099f3d6
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249496
+    prefix: '474892'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e957878a-afa5-493a-811b-7287c5521faa
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249497
+    prefix: '474893'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 26550b6a-c919-4870-b89f-6b067e060ee4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249498
+    prefix: '474894'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3bafbe54-602d-4e0c-a916-28ba04b2ea77
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249499
+    prefix: '474895'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b4fdaf94-7f71-4411-bc37-45f3866e059e
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249500
+    prefix: '474896'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 83c63bc5-7bef-4c66-8bd1-874507365f48
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249501
+    prefix: '474898'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3fb09d0e-fbc2-45a6-9a53-fee81d7b68a9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 249502
+    prefix: '474899'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9a378abf-3e22-4c94-897b-c77f2c778046
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 249514
+    prefix: '4749'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20249a53-d36c-4811-a3e1-896d790a6883
+    country_id: *no
+    network_id: *no_nkom_mobile
+  - id: 256802
+    prefix: '47878'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cdb409e9-da33-482d-94f9-53db9c37ba4f
+    country_id: *no
+    network_id: *no_nodnett_mobile
+  - id: 256817
+    prefix: '47879'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f05b8a0f-4698-48ca-962c-0672bb633977
+    country_id: *no
+    network_id: *no_bane_nor_mobile
+  - id: 257121
+    prefix: '479'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f91824aa-8aeb-4ee2-b809-eee10942fd89
+    country_id: *no
+    network_id: *no_mobile
+  - id: 257184
+    prefix: '47900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 72be4f26-e8fb-4b0e-95da-6215cb5defda
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257215
+    prefix: '47901'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 36f739f5-ff34-41cd-aecf-08a9a0117a33
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257234
+    prefix: '47902'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 26555503-937c-4788-8f9c-8f1be0e594ac
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257241
+    prefix: '47903'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e3065b3c-b0b5-4bf4-96f6-f4928585e875
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257253
+    prefix: '479040'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 07d163f0-e579-445a-9ac7-83f3bef09ce9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257254
+    prefix: '479041'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4c24b1b5-8d13-49c9-8fcd-1130c563c0ea
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257255
+    prefix: '479042'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b604df1c-35d4-4177-8a0c-f771c5595b98
+    country_id: *no
+    network_id: *no_svea_mobile
+  - id: 257256
+    prefix: '479043'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eca7f2bb-d1e1-4337-aa94-4ac5ba7fb990
+    country_id: *no
+    network_id: *no_svea_mobile
+  - id: 257257
+    prefix: '479044'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 85ec91dc-9151-4e47-8de6-01fa6a270e8f
+    country_id: *no
+    network_id: *no_svea_mobile
+  - id: 257258
+    prefix: '479045'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f07d47cf-95c2-4572-9c70-fd4ab497684e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257259
+    prefix: '479046'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4429d493-b993-4782-a0b7-d8f8b468185f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257260
+    prefix: '479047'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9151ef7d-0746-4b90-8e81-d2605a322d0f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257261
+    prefix: '479048'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 549adc6c-ef7a-45cd-86d4-9508ec190642
+    country_id: *no
+    network_id: *no_telavox_mobile
+  - id: 257262
+    prefix: '479049'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0fab07a4-12ec-4268-9824-3e0094a0e3b3
+    country_id: *no
+    network_id: *no_telavox_mobile
+  - id: 257268
+    prefix: '47905'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c4c4dcb8-ef52-46cb-84ec-f9bea3fa757c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257295
+    prefix: '47906'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6843ff19-b2cd-41c3-9668-0c4624024cdd
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257304
+    prefix: '47907'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b3fab953-1e67-4ce8-b3ea-32ae6269b248
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257319
+    prefix: '47908'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 03490427-7202-4011-b11f-2f5dbd6fb4a9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257348
+    prefix: '47909'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 112cdcf4-1f60-45ea-8822-367c2edbd437
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257378
+    prefix: '47910'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d13423b2-7ad2-480b-8b0d-edf1b904ab23
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257393
+    prefix: '47911'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4c3a0ef1-213f-43e4-81d8-13b12c245c0f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257414
+    prefix: '479120'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a6fd9f7b-4189-4e63-a49a-f0aa7aec76ae
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 257416
+    prefix: '479121'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 274586ff-88f9-40a4-9ea1-ba3094d32816
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 257418
+    prefix: '479122'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f4a98de3-d1ad-42d1-ba73-01452d85b2b8
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 257420
+    prefix: '479123'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 24052a34-10bf-40da-8e86-854d0573ba01
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 257422
+    prefix: '479124'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8f0aac54-a441-409b-8a4f-2f7068aad061
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257424
+    prefix: '479125'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 988ae1c9-5be9-4d85-a5ae-16ae207130fa
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 257425
+    prefix: '479126'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 170a01b3-75ed-404c-82e3-4aea4c1cf2a8
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 257426
+    prefix: '479127'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 894356d6-069c-4ba1-9162-32a0c5b60a23
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 257427
+    prefix: '479128'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2b029c7c-2bef-4294-9e7b-d8c9d5237378
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 257428
+    prefix: '479129'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5ab9f093-7240-4afa-876f-e8a491b5dfec
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 257430
+    prefix: '47913'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d04d96c0-8c5e-4262-ab19-d35da7ec5987
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257453
+    prefix: '47914'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e77f24d-f7bb-4577-8ff3-bbf948a2fdf8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257458
+    prefix: '47915'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b4d85f0e-457f-4f8a-a41e-08aa09bf5891
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257482
+    prefix: '47916'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c99dc8cc-7ea2-46b9-9631-d6aa73e75ca7
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257488
+    prefix: '47917'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cbb47a39-f09d-4930-8b30-d696bdfb8435
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257493
+    prefix: '47918'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 387643be-5950-4ec0-af69-98dc5c78b4c0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257508
+    prefix: '47919'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: efd564b2-b77f-4b32-9422-07ab7a413748
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257603
+    prefix: '47920'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20c80ec1-aba8-4807-a22c-b45fa56ea563
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257604
+    prefix: '47920'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8ea45e9a-7fcb-4bd4-8e7e-6841ac4742f8
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257629
+    prefix: '479210'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c6615f5c-67f6-45a9-b22e-25273dc9a58e
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257632
+    prefix: '479211'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 23de4152-d313-4e67-96fb-3e50e798cb5a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257634
+    prefix: '479212'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0972c55e-d3fa-4484-bc89-38d5feb68c00
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257636
+    prefix: '479213'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1bc4c843-de88-438d-aa67-9191ddcc2953
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257638
+    prefix: '479214'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7fb2db5a-a232-4273-a595-cc4db9affd65
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257640
+    prefix: '479215'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 963c3390-2350-4739-9455-69d1a0b52615
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257642
+    prefix: '479216'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a52c39f8-7aff-47f8-a5ad-8fdfa32df0d0
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257644
+    prefix: '479217'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 435d67fe-eda1-4e25-8e6f-32ea7e469169
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257646
+    prefix: '479218'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 41fd32e2-3227-4fd6-be0b-726d0fc8931d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257648
+    prefix: '479219'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f8c60790-b155-44fd-b41d-164357db5a4c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257651
+    prefix: '47922'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b629aa1f-568d-4f6a-8110-9a9ec2dc3227
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257676
+    prefix: '479230'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1729cd84-f068-464b-a605-d7122528a5a2
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257680
+    prefix: '479231'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cebf4428-0bbf-4f99-86ff-1abc8e94a1f0
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257683
+    prefix: '479232'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c9b120e6-f6ac-43c5-ad63-0ffe0406d8f4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257686
+    prefix: '479233'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0686c716-dce2-474e-9a27-bdbc91f2a79b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257689
+    prefix: '479234'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7666d5ba-4a3e-4aa9-abe2-f61e47cd29b5
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257692
+    prefix: '479235'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e50324ba-9704-4670-832b-744a002bec9d
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257695
+    prefix: '479236'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4d5c3421-c411-4bf8-8508-0d82a73c7b2b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257698
+    prefix: '479237'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6e1ebb9b-875d-412d-89b8-e4f5f14d2204
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257701
+    prefix: '479238'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: af279e33-7245-41a1-b03d-f2382a18175e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257704
+    prefix: '479239'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 967feccf-10d9-4d09-89f3-be81420b4747
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257709
+    prefix: '47924'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 608fcbdf-bea9-44bd-8fa0-753b4107c15a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257729
+    prefix: '479250'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4b0e93fa-d88d-4671-8c77-32d831d908ee
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257730
+    prefix: '479251'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 659ae7d8-82bc-4083-a5ab-0c888f70c0b7
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257731
+    prefix: '479252'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 60bac7ad-dc78-434f-a5dd-11b1f001379e
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257732
+    prefix: '479253'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3df71c33-87dd-46a2-b394-cf8329e5684b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257733
+    prefix: '479254'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d19c4719-5087-4aba-ac5f-cd8fd861491b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257734
+    prefix: '479255'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6706d448-51ce-4b2b-9c1f-2e576855bfd3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257735
+    prefix: '479256'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 30b74389-6adc-4a95-af20-e366459aca68
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257736
+    prefix: '479257'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2a0a258e-7f9a-4a3f-ae10-abe63880e3aa
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257737
+    prefix: '479258'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4e17fd61-e7b3-4eaf-b751-e0570f37bb11
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257738
+    prefix: '479259'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 08c953a2-5a42-4779-b27f-f1241083f621
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257742
+    prefix: '47926'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d062a063-19b1-4f41-a83b-42048cebf381
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257771
+    prefix: '479270'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc2320cb-d4a3-46a0-a758-979742e93504
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257774
+    prefix: '479271'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5550cc9f-8279-4d1e-9dd4-22f255717afb
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257777
+    prefix: '479272'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5501c7d4-f8d5-45f0-9589-07840ead585b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257780
+    prefix: '479273'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ff4be0a8-95b0-4994-b47c-ec834dae10ea
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257783
+    prefix: '479274'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 29af220b-b90f-4a51-be68-9c52d44b1e3a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257786
+    prefix: '479275'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 28a9fff6-70f5-4bca-86e9-2d0166e8468b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257789
+    prefix: '479276'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9c8d3898-4856-4125-bb15-5474235015c2
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257792
+    prefix: '479277'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4f464887-df6c-4dcf-85dc-eb5fd1fd4e8e
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257795
+    prefix: '479278'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b63659ca-eff0-4c26-bcd4-585a9a73409a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257798
+    prefix: '479279'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d62a1391-630c-4d61-a5e4-19d4e5f3b087
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257802
+    prefix: '47928'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6daae6b-0dae-43fd-b7c6-9383fa21b437
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257821
+    prefix: '479290'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bf7ea36a-1a1f-4880-b5f8-4ed7541367d1
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257825
+    prefix: '479291'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0ff11473-d269-4608-abaa-19c184cbe923
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257828
+    prefix: '479292'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fc3929b2-95e0-4db1-b7d6-2f77a02f5a3d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257832
+    prefix: '479293'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: daa8ef80-b3e9-4270-8114-8f28d3f187fa
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257836
+    prefix: '479294'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 19f3a52c-7744-4f11-9b1c-850c6ab5fc22
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257840
+    prefix: '479295'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 12723dec-7fed-4065-9bf9-2936913fc719
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257845
+    prefix: '479296'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c637784b-fb74-4f8c-9c88-dddef362c71c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257849
+    prefix: '479297'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4e4a8031-fb7f-42ea-bcb2-9768f74b2226
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 257853
+    prefix: '479298'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 827a298f-035f-4294-ab3a-fcc0b897b612
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 257857
+    prefix: '479299'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2f4acce5-b322-419d-a978-72349e619f1f
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 257877
+    prefix: '47930'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a7b87a6d-fd19-4dd7-a5cf-252affa8b69a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257886
+    prefix: '479310'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 83807c42-1ee2-42bc-9ae0-b1a2aa27434e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257888
+    prefix: '479311'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3a911d68-9af9-4d19-931e-38f1ecb011e2
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257891
+    prefix: '479312'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: da2aab33-d7cb-45f4-b4a2-cf97f808e329
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257893
+    prefix: '479313'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 17638e5f-7171-4acf-83c0-75e51acee4a8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257895
+    prefix: '479314'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0a8710a5-02db-4f63-b33a-23110c0a44ff
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257897
+    prefix: '479315'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 32fd857c-269f-488f-8d0f-c86fa7e390d3
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257899
+    prefix: '479316'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f93396f7-6086-4e59-b841-57b4723c0835
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257901
+    prefix: '479317'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b1747375-7a87-41b6-a6c8-0f885b4df456
+    country_id: *no
+    network_id: *no_intility_mobile
+  - id: 257903
+    prefix: '479318'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 566fe547-e3a3-4f98-b718-86d12e597beb
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257905
+    prefix: '479319'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3f14ff19-b567-40a3-aae6-441b087bc7c2
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257908
+    prefix: '47932'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f23a1568-7e70-43a2-a3ca-ab91c395dfdc
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 257945
+    prefix: '479330'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 38c9bd83-6e5c-48fc-961a-16e88e6b8a99
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257947
+    prefix: '479331'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6c78cdbf-d8a0-4855-8d43-ed7d21e1b501
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257953
+    prefix: '479332'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f6357707-df98-4fd6-a1d7-e8d77b09b563
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257961
+    prefix: '479333'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 87fef60f-1fe6-42d5-8b4b-4a11db8d552a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257965
+    prefix: '479334'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d4ef4c9f-a76f-4150-879a-ada454efd89a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 257980
+    prefix: '47980'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c5c2bcf-8793-451d-88c4-e33b973a703f
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258011
+    prefix: '47981'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 342159b0-0c54-42df-bb43-47793ed1bddb
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258039
+    prefix: '47982'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 36f3c88c-8dd6-477b-a172-2163a93a76f9
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258075
+    prefix: '479830'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5bf86c5a-bb5d-44b3-aed3-432f8151814b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258077
+    prefix: '479831'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a9329566-4e2a-4b4c-a372-03d1cafec572
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258079
+    prefix: '479832'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c1a33bf0-8369-450a-9571-535e0d7e35e1
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258081
+    prefix: '479833'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 38192075-03e2-4886-a3e0-5a74cc33f103
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258083
+    prefix: '479834'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1e379be1-74f8-4568-8ff3-2d2e5f8b8435
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258085
+    prefix: '479835'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 662bdb17-3cbe-4ce6-aea9-b515fae38235
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258087
+    prefix: '479836'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6e551374-4cf0-446a-92c5-49a2d1c85b5c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258089
+    prefix: '479837'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: df53c074-d757-4699-b1c1-d77d9dbcb10f
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258091
+    prefix: '479838'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f5cfd99-56c6-405f-9d20-d0b4b3af74af
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258093
+    prefix: '479839'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: af21e035-ae9d-4746-a766-a5b9dee15915
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258097
+    prefix: '47984'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 726cdf0e-0b56-4375-a203-ddb935a91038
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258115
+    prefix: '479850'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 12a2d2f2-0e84-4988-9ec3-5f11580b7d9d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258116
+    prefix: '479851'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: da8161f1-bf36-4d1d-a9f0-62cb53bff0e9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258117
+    prefix: '479852'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1734386a-1911-4e2e-b0bf-a6bc3cb5cbac
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258118
+    prefix: '479853'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1107443f-d5ec-4117-a678-142776bc6d36
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258119
+    prefix: '479854'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c4fc852d-2702-4630-b8ba-f61af3db5497
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258120
+    prefix: '479855'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f440f58a-ea54-4c40-bb81-3d1ade6ddc15
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258121
+    prefix: '479856'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b2c687b5-eef1-424d-8614-675c7308998f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258122
+    prefix: '479857'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 08e84c2e-8715-49b5-8a26-f44ca68ba67d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258123
+    prefix: '479858'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dde10309-afc7-49dc-8dc7-e4896966b4b1
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258124
+    prefix: '479859'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e639e246-ec05-4ba9-ac02-c9a9d3a6c4ec
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258127
+    prefix: '47986'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ff90158b-7352-43da-85b9-b540d5ed0b20
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258135
+    prefix: '479870'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8ebd70a1-e9ca-4cfc-8ecf-5f9278c65f8b
+    country_id: *no
+    network_id: *no_globalconnect_mobile
+  - id: 258136
+    prefix: '479876'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ae6c76b1-7e35-4a51-8033-6fbad5f1b34b
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258137
+    prefix: '479877'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 080f8453-9f7a-40db-965c-14c25e43937d
+    country_id: *no
+    network_id: *no_chilimobil_mobile
+  - id: 258141
+    prefix: '47988'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d3909ef8-0752-405b-abc1-215c21bcb2d0
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258158
+    prefix: '479890'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e91651f-721a-45a1-b1d7-9fd65ef420ba
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258159
+    prefix: '479891'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6501d398-1e04-4de8-8a95-0c03eb724a66
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258160
+    prefix: '479892'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5151f225-93e3-4bba-a16b-a8b3a55eacda
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258161
+    prefix: '479893'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 737abc72-d852-45ef-b985-7ae89ed0aa6d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258162
+    prefix: '479894'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bd52db26-6875-4108-ace4-2f38a5de51cf
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258163
+    prefix: '479895'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6ac0104e-95b1-42df-a4ad-d6e8fae42a31
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258164
+    prefix: '479896'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 74d4207a-d54b-4dbb-a0b2-47a9c0858218
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258166
+    prefix: '479897'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 03469565-352c-400c-81cc-70f04126930a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258167
+    prefix: '479898'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44cd8046-3291-406c-b34f-bafae9efa40a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258169
+    prefix: '479899'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 029f6782-ada5-4ee3-aa46-557a6f0ceb7c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258206
+    prefix: '479900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 474a943f-b821-4713-a9c6-e25d74ba74d3
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258207
+    prefix: '479901'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 877df298-28cf-4786-a025-d86268663530
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258208
+    prefix: '479902'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 63d1ee36-5e72-4071-9caa-eb9f7edac691
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258209
+    prefix: '479903'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 37ff0108-3fde-4b92-a91d-a707e04940ef
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258210
+    prefix: '479904'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 47b9ac4c-3df3-48a5-a53a-663da4a355c5
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258211
+    prefix: '479905'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 001b11b4-722c-47db-8905-eb5dc846d542
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258212
+    prefix: '479906'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 41e922b5-80c8-45dc-b2a4-fb76ad7f23a9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258213
+    prefix: '479907'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0fa657c5-fd2b-435c-8b7b-3b31f1541646
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258214
+    prefix: '479908'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a66c96c4-eb59-449e-8003-edffac1d5706
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258215
+    prefix: '479909'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6977be5-52e4-4a3e-804d-80286a72503c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258217
+    prefix: '47991'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6a1d0c4d-5ff7-4185-8fcf-5ffe3ee5675b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258221
+    prefix: '47992'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 906d4ad4-98c6-4d84-a8c8-b446cd974e28
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258225
+    prefix: '47993'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c13c9e60-90a3-4f5a-9869-4f8cefaf67d7
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258229
+    prefix: '47994'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9963ad69-c614-49f2-8e38-df1b8db46e1a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258243
+    prefix: '47995'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fd91af1c-4d12-494b-ac04-c1b007b2a4cd
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258249
+    prefix: '479960'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3b928a15-51a7-411c-a542-da44d8258250
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258250
+    prefix: '479961'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: adf5b193-3a44-4799-9d8c-5ccfa8a250f7
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258251
+    prefix: '479962'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40396a14-2044-4af4-ab96-b965a1caf0cd
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258252
+    prefix: '479963'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 479256c4-dd0c-4313-977b-6aa50b17e70d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258253
+    prefix: '479964'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fdac467e-d5c8-4a58-80b1-4f06618a7b07
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258254
+    prefix: '479965'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 32ff60b3-ed63-4d01-b560-be3df54d6c00
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258255
+    prefix: '479966'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: db4b02ed-6d36-4b63-9da5-704fd189a48c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258256
+    prefix: '479967'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5c498e54-8baf-44ee-8138-0c3de16577a7
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258257
+    prefix: '479968'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8b639a09-3316-41a7-b3c3-9014195cfcb8
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258258
+    prefix: '479969'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fe6618ec-7cb2-4727-aa1b-48872427df73
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258261
+    prefix: '47997'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8121e4c8-6754-4be3-b00f-b2819c862e07
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258268
+    prefix: '479980'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 61840136-40f1-46ed-a8af-72167357a61c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258270
+    prefix: '479981'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 558dd30b-cef8-45da-bd0d-c224cd4d0039
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258272
+    prefix: '479982'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e0f02e27-6dac-4fe1-831c-7fc6229b6cf0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258287
+    prefix: '479983'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 73716f10-d507-46a0-9d44-d604e2c76e56
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258289
+    prefix: '479984'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9630058a-0e39-4560-a91e-9b54e798fc28
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 258291
+    prefix: '479985'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7a0645d3-e474-4d0e-8a71-1122d14459c1
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258293
+    prefix: '479986'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4ca7ed15-bdd7-4dca-b8c3-16d096de43dd
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258295
+    prefix: '479987'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9b86fb00-87fd-4a19-97f2-8d5fdefdb1e9
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258297
+    prefix: '479988'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bef91f26-a35d-4a5f-9c65-d3cee3d5abc3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 258299
+    prefix: '479989'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f57d2a49-8d46-4e64-8c49-ed2b10741394
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264018
+    prefix: '479335'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 93d06bf9-a210-4b0d-87df-68b56636be1b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264021
+    prefix: '479336'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7a646785-de18-4507-b339-4fd669ae4515
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264024
+    prefix: '479337'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b741654c-de89-455c-8bd7-b2df95df1948
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264027
+    prefix: '479338'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e0f61090-0b3a-41ca-9a60-2d86ebadb0ce
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264030
+    prefix: '479339'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 01e75a64-ec7c-46e5-bedf-8b5af0dbe98c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264034
+    prefix: '47934'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b64a02e3-9382-466f-8a71-b88690cb709a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264054
+    prefix: '479350'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 29dca959-f05b-43eb-acc9-249f18a8a1aa
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264055
+    prefix: '479351'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 33b1ae28-bc77-44f4-bcaa-f2563f482fd4
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264056
+    prefix: '479352'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5cd44993-7c80-450d-9bc2-f12ca8d73478
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264057
+    prefix: '479353'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2b614d4a-c708-4bf8-b69f-22dbdb574109
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264058
+    prefix: '479354'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9cb80482-3496-4791-943c-8cc040668360
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264059
+    prefix: '479355'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4eb90d6a-b2c1-4fdc-8a82-1848b273bbb3
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264060
+    prefix: '479356'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4f4eb556-0da0-4355-8794-ecf52537fad5
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264061
+    prefix: '479357'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 094abb0e-3ee5-4982-9bb0-5d37be7627e6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264062
+    prefix: '479358'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4db62870-1b5e-4707-b10d-4181aafe2d89
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264063
+    prefix: '479359'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fa6dec3b-2c68-4b16-a5a9-816d8a16988b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264066
+    prefix: '47936'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: adae1d00-7132-4e16-b9f3-7ed13ce1ff11
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264085
+    prefix: '479370'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 43e5b9f8-d1c8-4698-a3a7-db23a9005a22
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264088
+    prefix: '479371'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 54ee7eea-c4ce-46dc-a345-c3bece815614
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264091
+    prefix: '479372'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eb706724-ff18-4a1e-8e52-ebebb024dcb9
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264094
+    prefix: '479373'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 00bc3e78-24c8-4037-a4a2-fafb37b5fffe
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264106
+    prefix: '479374'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0295bcbb-3f00-45dd-b5c0-ba97becf1e53
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264108
+    prefix: '479375'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8b47685b-63b8-409c-bd55-9aa0d033fbe0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264121
+    prefix: '479376'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e979b73e-0c78-44b2-b633-85025c125a40
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264124
+    prefix: '479377'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ae1e1f9c-05a2-4125-88ff-bfe72568a100
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264127
+    prefix: '479378'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ed3ef99-0b53-4319-be2a-d90fb101da10
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264130
+    prefix: '479379'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 58d4bb3c-794a-4f92-b3e8-b0ba66c34e7a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264134
+    prefix: '47938'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ddc4b6f3-5f59-492c-8b2c-15bd501d8e22
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264163
+    prefix: '479390'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: afd5cbe2-6708-4338-b2da-09fe2d961f8a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264166
+    prefix: '479391'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e4b1c3b1-d0cd-46c6-a40b-17205bb1fa72
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264168
+    prefix: '479392'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 601aae7a-479e-4483-b530-88db6312ace9
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264171
+    prefix: '479393'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e3bfa090-31bc-43a4-ab89-c3c4aaa85b8a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264173
+    prefix: '479394'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 42557fbe-66b9-4b79-af2c-342a693f9dd5
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264176
+    prefix: '479395'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e0a1a8a7-a2bc-4ba0-9c50-8b2661ff54f3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264179
+    prefix: '479396'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 631dadda-803b-48c2-96fc-252c25700cf6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264182
+    prefix: '479397'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c413098d-a799-4b31-afc4-cfb5d31a6831
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264185
+    prefix: '479398'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 99a63839-5ca5-45a6-8890-3911bfa15e3d
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264187
+    prefix: '479399'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d293c70b-6b9a-41f7-9b39-d8d72abf2c37
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264208
+    prefix: '479400'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5eba1835-e0ff-49eb-8d74-05d4a10a2a84
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264209
+    prefix: '479401'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2a65109b-47c2-42b0-888d-06df844ea278
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264210
+    prefix: '479402'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e9d06d0b-f571-4535-b3b7-81bfacf632e2
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264211
+    prefix: '479403'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 70f5d097-39de-4825-8c25-891b8e0d00dd
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264212
+    prefix: '479404'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 92a535cc-169f-4451-b72b-96cc1b1ed603
+    country_id: *no
+    network_id: *no_com4_mobile
+  - id: 264213
+    prefix: '479405'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f49087cc-7b5a-4dc0-975b-400ac37415aa
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264214
+    prefix: '479406'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8cfc1cd3-06f6-4da3-ab2f-8e0504229581
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 264215
+    prefix: '479407'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f86ca0f0-8ed7-4096-8efc-6e6b4e9195b1
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 264216
+    prefix: '479408'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5556fe1b-5f7a-4ec3-b547-c1a8c22baed9
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 264217
+    prefix: '479409'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a55eae2a-1b3d-4ed3-aa09-6b539a24f788
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 264220
+    prefix: '479410'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dc9c1510-0e2c-42a1-b438-b3b6080e7f27
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264222
+    prefix: '479411'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dfe00a87-c2e3-46ed-9ea3-3c3a950868a5
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264224
+    prefix: '479412'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c632e951-9119-40e7-a0ec-a5194b5a2df0
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264226
+    prefix: '479413'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2fc7da06-c7d4-4963-bfc0-5c75cbd94277
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264228
+    prefix: '479414'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cd376029-ea10-4450-88be-834744b524c4
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264230
+    prefix: '479415'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 685451b6-6a29-42cd-9e5d-b5593ed3f9f1
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264232
+    prefix: '479416'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4cfc8ecf-01d6-4907-bbfa-9d027ec1f2e5
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264234
+    prefix: '479417'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7491d436-e68a-4966-bdf0-e72f0c85375e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264236
+    prefix: '479418'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 59cff3b0-de0a-4f77-b33c-aa8025fc2dcc
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264238
+    prefix: '479419'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a5bad2cc-2051-4db6-ae15-219265fc0ea0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264243
+    prefix: '47942'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cbe3e7c9-a9a3-47b8-90b5-9ac3de9a59b6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264257
+    prefix: '47943'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b337b7e1-e4f9-4509-8fc4-a084509ca211
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264282
+    prefix: '479440'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ed7174c3-1b2d-408d-bef4-99900d430189
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264284
+    prefix: '479441'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ddcf2d20-ae42-4c15-b308-109d9d2518b6
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264286
+    prefix: '479442'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2510508f-5d50-4d1f-a5b4-f4a42a60dd93
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264288
+    prefix: '479443'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac716389-736b-44a3-9faf-8a35e53a7c34
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264290
+    prefix: '479444'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9a6c8d51-b40c-4f98-b0a8-b98350011f5e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264292
+    prefix: '479445'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a4038f76-4ed8-402c-b818-df9617934c41
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264294
+    prefix: '479446'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ef704a66-b0b1-40df-8cda-895b661b0cde
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264296
+    prefix: '479447'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 59df1c0e-b65f-42e1-a65e-91df2c959513
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264298
+    prefix: '479448'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 69764d9d-4412-4025-8cfb-d7fc8a56cdb9
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264300
+    prefix: '479449'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee047740-502c-4973-a4ff-baab5bcfaf49
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264306
+    prefix: '479450'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b4f2b9af-1173-4fe9-a14d-955bed275d75
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264307
+    prefix: '479451'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5688ff69-593d-4362-91e5-369b741775d3
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264308
+    prefix: '479452'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 90b32266-6fd0-477f-ac74-9ab458cd301a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264309
+    prefix: '479453'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7f30828f-6953-429a-9f8d-601b3a799df9
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264310
+    prefix: '479454'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 138b3981-ad26-464d-a3c5-dacebc321667
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264337
+    prefix: '479471'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 714500ed-3143-4a17-9a87-98872e5dff8b
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 264339
+    prefix: '479472'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0b7a7d2e-c66e-4e5e-a7f7-6e8d9827c1e7
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 264341
+    prefix: '479473'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5269af16-e59e-453d-b009-501d3891600a
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 264343
+    prefix: '479474'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4ebf651e-ca8a-412d-b69b-e56800dac8fe
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264347
+    prefix: '479475'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7935d476-0ccb-4959-bc2c-c520fd671854
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264351
+    prefix: '479476'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ff907da7-5433-4599-9524-123badaab29c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264355
+    prefix: '479477'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66ffeb05-c79e-4324-864d-f45553a5d691
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264359
+    prefix: '479478'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac988c97-ecc3-4df6-9630-cce22dddb4b6
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264362
+    prefix: '479479'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e021e45e-aaca-44b6-8122-26300c81af4f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264367
+    prefix: '47948'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d6aa80b2-062c-4e69-a021-bc356f05fc7b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264390
+    prefix: '479490'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7390d4a8-105c-40ee-ba69-1e7d5c101b81
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264401
+    prefix: '479491'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a637c90e-3cbb-4f1c-afa5-0d7e0570072d
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264403
+    prefix: '479492'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ff93157-a752-4786-abb6-022939813cd5
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264405
+    prefix: '479493'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f2fd83ad-a047-4713-b76f-15c5f597dd2b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264407
+    prefix: '479494'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0b20021f-3be2-4f51-aba5-9dab25425771
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264409
+    prefix: '479495'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6b8475b-340d-40a2-9042-5315c8f164d2
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264411
+    prefix: '479496'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 17aab597-4947-469c-b3ac-3694e30e6487
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264413
+    prefix: '479497'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eef29464-054f-4b13-9fa7-354c2f59c18f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264424
+    prefix: '479498'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8778df17-8215-4ae9-9f3c-4b4efdd59691
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264426
+    prefix: '479499'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: beed32d6-2d8d-44c6-862a-c5d34dbc62f6
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264454
+    prefix: '47950'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4f087015-b4a1-4b42-ad92-8b3137d1b3b8
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264476
+    prefix: '47951'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 119d297b-f57c-48b4-b2ec-44b850c5cd69
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264489
+    prefix: '47952'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fbc9d926-e8dc-44a3-82f3-aab106c36711
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264520
+    prefix: '47953'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 78ae6840-e26d-4674-9796-1c9481d25513
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264552
+    prefix: '47954'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ccce7a00-af3d-473b-a195-6af03c4baf85
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264584
+    prefix: '479550'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: be2a5709-d4db-483e-abab-dfb2fc29dc30
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264586
+    prefix: '479551'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9f78969f-73e8-461c-b802-7d2353c8ca24
+    country_id: *no
+    network_id: *no_puzzel_mobile
+  - id: 264588
+    prefix: '479552'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7e37aa7b-309c-43bc-8e18-0690e38a2c32
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264590
+    prefix: '479553'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 08905474-d82b-47a9-9ff5-5ce00f716f31
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264592
+    prefix: '479554'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ec454b5f-0d9d-440f-adae-4659bfceb6f1
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264594
+    prefix: '479555'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9fe66540-f4ed-4800-9906-df726428655f
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264605
+    prefix: '479556'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5d3e98ec-83a6-46ac-9e1d-054301a704ee
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264607
+    prefix: '479557'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8bee08e3-89ff-4b5f-a8fb-df48a0710a76
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264609
+    prefix: '479558'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b76ef416-5171-496d-97de-db200bde316a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264611
+    prefix: '479559'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 88336823-084b-473e-a435-a0f070ec9851
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264616
+    prefix: '47956'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: da5c0566-3119-4bf9-91d2-8fca88d79e1c
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264630
+    prefix: '47957'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b1e319a4-0329-4a56-b00b-fe129c6ba590
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264644
+    prefix: '47958'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f066c4e-4ca0-4fd0-a02b-03e67bae41a0
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264684
+    prefix: '47959'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e1db392d-7a87-4986-8038-e21230672210
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264735
+    prefix: '479600'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 92bcb0eb-3314-4d27-b738-04330f88cc29
+    country_id: *no
+    network_id: *no_unifon_mobile
+  - id: 264742
+    prefix: '479601'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e1989e77-1597-456c-a40e-97c6c2619d82
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264744
+    prefix: '479602'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e695f85-645e-43d2-904c-fd416dec26ff
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264746
+    prefix: '479603'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 718cf8fd-0d8c-49e4-9e6d-2394f008b527
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264748
+    prefix: '479604'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 08b5aeb1-884a-4dd2-a9bf-673e4f9e95a4
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264750
+    prefix: '479605'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e50f6adc-31a6-4303-9403-6ff174721fda
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264752
+    prefix: '479606'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d63765da-c1c3-47de-a3a8-35e803000bbb
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264754
+    prefix: '479607'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c223b2f5-eae9-4fde-b118-3511d5fc38f6
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264756
+    prefix: '479608'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4ccc068f-832c-466d-86a0-2acd414d9a97
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264758
+    prefix: '479609'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0ae68724-21fd-465d-ac6f-5d2ca2386c31
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264762
+    prefix: '47961'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d885b0dd-cf75-4424-bfa8-ca3adfa2c851
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264776
+    prefix: '47962'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c372a70d-cf60-4d41-be01-9e20f32c550b
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264790
+    prefix: '47963'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9a73ae47-5dac-454e-b27d-02ce2f9e00d4
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264822
+    prefix: '47964'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d856190f-7f69-4f91-896a-1c990dd742bb
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264836
+    prefix: '47965'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1a1eaae6-685e-4805-81c0-a064007e8189
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264856
+    prefix: '479660'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0f8de395-ba15-4c54-b3b6-ff7c617006f1
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 264858
+    prefix: '479661'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a0fe5978-f8c6-4f63-b74b-ebd436df1886
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 264860
+    prefix: '479662'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0cf936e5-432a-4c60-ba5c-845eabe17a4c
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 264862
+    prefix: '479663'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ddc568f5-11de-4f97-9e7c-a7861435b9b2
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 264864
+    prefix: '479664'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c995982e-4b7d-481c-86e2-fd1256beeed4
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 264875
+    prefix: '479665'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eff91ee5-bed7-4d52-b253-7ce1ba21bef4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264877
+    prefix: '479666'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3dc3e078-7ee7-4c92-880b-ac7dbc148916
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264879
+    prefix: '479667'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 551ed951-2274-4f84-a992-b04ca1019193
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264881
+    prefix: '479668'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fbdff038-37a6-48c9-acb9-4a435e86d3fb
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264883
+    prefix: '479669'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5b35a09a-8a98-4404-b086-4c4567a1afbe
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264888
+    prefix: '479670'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9e2a2053-df15-4418-a2af-ce363bdcf451
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264890
+    prefix: '479671'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc039369-1186-449b-8e8c-bea397ba788e
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264892
+    prefix: '479672'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 90bfb040-e0c7-41b8-9de8-f9e2a5947635
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264894
+    prefix: '479673'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4a29aafd-dae2-46af-8942-b142273129f4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264896
+    prefix: '479674'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3fe0b606-48b2-4f53-8cd5-9c9f361d31c0
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264898
+    prefix: '479675'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d8bec4e7-0bc3-4b20-a617-869a662e2af8
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264912
+    prefix: '479679'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 351b101c-aeb2-4691-8a06-dc7ce8fb95ad
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264926
+    prefix: '479680'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c93ccf5e-a746-4a3e-8e13-fb380498c668
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264928
+    prefix: '479681'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f4b837d5-9fe7-4e09-bc7d-355bea4ed278
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264930
+    prefix: '479682'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d20acd00-7b6e-47f1-bd51-f84e75095047
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264941
+    prefix: '479683'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0cb9b708-a8b3-4beb-a6ba-85989a45af28
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264952
+    prefix: '479684'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c19769d6-dfb1-4212-ab3b-f771a3194aaa
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264954
+    prefix: '479685'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d06ef827-55b8-40a0-b44d-50c5828cae46
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264956
+    prefix: '479686'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e65e2dc1-da8c-4faf-bb87-4a017532f5fa
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264958
+    prefix: '479687'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cfad05a5-42b1-4393-9570-ece716f9c53c
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264960
+    prefix: '479688'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5dece7d6-d25b-462b-ad1a-d1d8e88b9a51
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264962
+    prefix: '479689'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4adde3b1-0bcb-44fd-80d5-8ac50409361a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264968
+    prefix: '479690'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3bbec71c-f1f0-40ac-a680-59e9180d31b4
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 264971
+    prefix: '479691'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: badb386f-ec83-4374-a5f8-a069fdeccd11
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 264974
+    prefix: '479692'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0d6e20d1-3538-4554-a12e-293db35ed159
+    country_id: *no
+    network_id: *no_erate_mobile
+  - id: 264976
+    prefix: '479693'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 209ea3ef-5ba2-456e-a018-cc09bafabf67
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 264978
+    prefix: '479694'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c7a74a13-ba18-49b7-adc5-175bcfd282bb
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 264980
+    prefix: '479695'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0976f1fa-5c8a-4ca8-9b3d-ec7a54234ad6
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 264983
+    prefix: '479696'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 835cb16b-4844-4153-a830-5b945abefecc
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 264985
+    prefix: '479697'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 43b90204-e8f6-4b59-841a-b7b655f82ff5
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 264987
+    prefix: '479698'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ba88f7e4-0176-4c9a-9a82-4ab59171bdf5
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 264989
+    prefix: '479699'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a22527ce-8b35-4da7-b51e-5d493ca865d5
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 265017
+    prefix: '47970'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: abc6bb4b-b4d9-49ce-bcd7-06305858f9db
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265045
+    prefix: '47971'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3bbab043-edc4-4fc6-9d1e-c3620330ce66
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265062
+    prefix: '47972'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ce02a9da-d0eb-4b60-b8cb-37c930bce345
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265089
+    prefix: '479730'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: db65e796-babb-4234-8bbb-c1bee7349563
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 265091
+    prefix: '479731'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 01dbfeea-0526-40d0-be1c-27fc62b33ac1
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 265093
+    prefix: '479732'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 21d0d8d4-2a54-4c78-ad10-11867b3d303e
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 265095
+    prefix: '479733'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 558f6a94-b25e-4b74-b328-8e23e3b9010d
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 265097
+    prefix: '479734'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 659adaa5-9b51-40cd-ade3-17c161edf89a
+    country_id: *no
+    network_id: *no_ice__mobile
+  - id: 265099
+    prefix: '479735'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 55ba6dbb-ef3a-4f44-9727-44bb9f0f5b76
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 265101
+    prefix: '479736'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ebebfc45-1a76-4d92-a773-d643d8b690cb
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 265103
+    prefix: '479737'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 41fbb2b4-7242-4b8c-8314-b6351edd19a9
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 265105
+    prefix: '479738'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: efac0181-221b-442b-95a8-0c81e672d4cb
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 265107
+    prefix: '479739'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ea0d0e15-009e-4f1e-9b82-507aec79bc04
+    country_id: *no
+    network_id: *no_lycamobile_mobile
+  - id: 265113
+    prefix: '47974'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5c10c515-d256-4e64-a3d7-3f86338c11ab
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265146
+    prefix: '47975'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ff55542f-5846-47f7-ac62-69c121f65768
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265153
+    prefix: '47976'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8465ed8c-c098-47df-8ff8-34124e6ad380
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265191
+    prefix: '47977'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4f39598c-017c-4783-98f9-2e2da4f1a586
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265215
+    prefix: '47978'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 54925e36-fc82-4b59-b0b4-24ad926c9b31
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 265240
+    prefix: '479790'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1b458f48-9557-4965-8919-f28938dfec7a
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 265242
+    prefix: '479791'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1b2a32fd-1683-4282-805a-5b2c415eeef4
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 265244
+    prefix: '479792'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c8a9aaf3-6692-4ed2-bb70-3fb1734948cd
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 265246
+    prefix: '479793'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40cf82ee-7ba9-495f-86d3-eae3c80bc368
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 265248
+    prefix: '479794'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66f4a5b2-5995-43df-a683-e71ad0bcf035
+    country_id: *no
+    network_id: *no_telia_mobile
+  - id: 265250
+    prefix: '479795'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ba0d781b-de9a-4f94-a08d-6f105dd2741a
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265252
+    prefix: '479796'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c3e64fd6-bb78-43d9-82df-7d536458c8e6
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265254
+    prefix: '479797'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7237e16d-4869-4cd2-bb4a-4c27c37ff33e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265256
+    prefix: '479798'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 07bb5fdd-e3bb-4145-932a-55ae06f4e45e
+    country_id: *no
+    network_id: *no_telenor_mobile
+  - id: 265258
+    prefix: '479799'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8adfe59e-9925-493c-a88a-807970b9a9bc
+    country_id: *no
+    network_id: *no_telenor_mobile

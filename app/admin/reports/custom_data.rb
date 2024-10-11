@@ -43,7 +43,7 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
     end
   end
 
-  assoc_filter_columns = Report::CustomCdr::CDR_COLUMNS - %i[destination_id dialpeer_id customer_id vendor_id vendor_acc_id customer_acc_id]
+  assoc_filter_columns = Report::CustomCdr::CDR_COLUMNS - %i[destination_id dialpeer_id customer_id vendor_id vendor_acc_id customer_acc_id dst_network_id src_network_id]
   assoc_filter_columns.each do |key|
     filter key.to_s[0..-4].to_sym,
            if: proc { @custom_cdr.group_by_include? key },

@@ -1,0 +1,70 @@
+country_id: &dg 275
+networks:
+# Supplementary services Networks
+  - id: &dg_special_services 21390
+    name: DG Special Services
+    uuid: 2d9b123c-8d6d-4495-91cd-e86ef3668cb2
+    type_id: 13
+# Fixed Networks
+  - id: &dg_fixed 22077
+    name: DG Fixed
+    uuid: 2c508c04-3f9d-4d1f-a0a3-0fe0ac3a4ffe
+    type_id: 2
+# Paging Networks
+  - id: &dg_paging 22085
+    name: DG Paging
+    uuid: ded4192b-13db-461d-9969-7499daad166c
+    type_id: 12
+# Mobile Networks
+  - id: &dg_foneplus_cellular_sure_mobile 22103
+    name: DG Foneplus Cellular Sure Mobile
+    uuid: d480898d-1461-48e8-9ac9-13f864de9021
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 241981
+    prefix: '246'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 75be4ae8-205f-450d-a68e-7fd94cc4d971
+    country_id: *dg
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242385
+    prefix: '2461'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 3d46db54-704e-49b6-a001-e09605356091
+    country_id: *dg
+    network_id: *dg_special_services
+  - id: 257090
+    prefix: '2469'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 4eef080b-cd3c-4502-bdd0-3aa409c57b24
+    country_id: *dg
+    network_id: *dg_special_services
+# Fixed Prefixes
+  - id: 243708
+    prefix: '24637'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c1122edc-9a47-43fb-9650-9d636d904f3c
+    country_id: *dg
+    network_id: *dg_fixed
+# Paging Prefixes
+  - id: 243724
+    prefix: '2463709300'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: beef50b4-e450-46da-bd6d-2c593f1e605a
+    country_id: *dg
+    network_id: *dg_paging
+# Mobile Prefixes
+  - id: 243858
+    prefix: '24638'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44df09e8-1fc4-4434-b025-c108695cbd58
+    country_id: *dg
+    network_id: *dg_foneplus_cellular_sure_mobile

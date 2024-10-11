@@ -1,0 +1,284 @@
+country_id: &ws 184
+networks:
+# Supplementary services Networks
+  - id: &ws_special_services 21514
+    name: WS Special Services
+    uuid: d01b96df-a68b-4e90-bfa3-b523faff0ea6
+    type_id: 13
+  - id: &ws_freephone_services 23863
+    name: WS Freephone Services
+    uuid: 903170fc-74a2-4bd8-a513-0e45a9258ea7
+    type_id: 13
+  - id: &ws_emergency_services 24415
+    name: WS Emergency Services
+    uuid: a415adb8-db72-4bc0-a293-dcb9f0e1a694
+    type_id: 13
+# Fixed Networks
+  - id: &ws_upolu_rural_area_region 22152
+    name: WS Upolu Rural Area Region
+    uuid: 8aa4e9a8-ed9a-4ee5-85f1-cc653f09cc8d
+    type_id: 2
+  - id: &ws_apia_region 22738
+    name: WS Apia Region
+    uuid: 85240858-500a-41ac-bd47-90d36a32ab04
+    type_id: 2
+  - id: &ws_savaii_region 23315
+    name: WS Savaii Region
+    uuid: aef67164-0fdf-4aa6-9b31-38cabf34e526
+    type_id: 2
+# Mobile Networks
+  - id: &ws_digicel_mobile 23596
+    name: WS Digicel Mobile
+    uuid: 745757b2-74e2-4fb3-a107-cd8e881e5692
+    type_id: 3
+  - id: &ws_bluesky_mobile 23748
+    name: WS Bluesky Mobile
+    uuid: fdf7eb42-30fb-47b2-9f78-39b98a03116d
+    type_id: 3
+  - id: &ws_mobile 24379
+    name: WS Mobile
+    uuid: d4479511-bb8a-484e-a000-3b3f97757dfd
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242133
+    prefix: '685'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: f69acedd-9b75-4729-aac9-88e76bf155bd
+    country_id: *ws
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242520
+    prefix: '6851'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: a06746a3-d66e-4b74-a438-3ac8931a72cd
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 243970
+    prefix: '6854'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 0160b49e-7988-4366-9394-1e04ae49e903
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 245431
+    prefix: '6856'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 86aeedf9-25be-4eb2-a4f4-13e39420bdbf
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 247446
+    prefix: '6852'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 54d2de58-345e-4942-89a8-1ebf68548079
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 248925
+    prefix: '6853'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 9bdbb1e2-d06d-46ec-89af-41139db2dde1
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 249608
+    prefix: '6855'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: afd9c1e2-56fe-43c8-9b0d-fee99aa9f8c1
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 253115
+    prefix: '6858'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: e069c3fa-4c93-4767-8179-4f575cead696
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 253179
+    prefix: '685800'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: e61a438c-405d-4cc5-8fff-9d73567c16e4
+    country_id: *ws
+    network_id: *ws_freephone_services
+  - id: 255287
+    prefix: '6857'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 12556e6f-0c9f-4905-98f3-2ad651387121
+    country_id: *ws
+    network_id: *ws_special_services
+  - id: 257148
+    prefix: '6859'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 92288514-b9f0-4549-ba7d-c92d49fa8793
+    country_id: *ws
+    network_id: *ws_emergency_services
+# Fixed Prefixes
+  - id: 243971
+    prefix: '6854'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 39c606d0-0877-4c93-9672-4e18ca446a00
+    country_id: *ws
+    network_id: *ws_upolu_rural_area_region
+  - id: 247447
+    prefix: '6852'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c0064820-fd3a-4d8a-8318-82e7f8c6c0c3
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 248926
+    prefix: '6853'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b2670cec-5fe7-47cb-85e0-6208c065d479
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 249609
+    prefix: '6855'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 07afdcab-edef-491a-bac1-ff41b128118c
+    country_id: *ws
+    network_id: *ws_savaii_region
+  - id: 250665
+    prefix: '68563'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f1e96a8b-0b6c-4dee-a10e-54bc13a81dcd
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 251032
+    prefix: '68564'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 15018c3f-8e6e-441f-bcdf-6ed9f49ca5c6
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 251244
+    prefix: '68565'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7ae7a1ba-37fc-4759-8879-97ec64cf29f4
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 253992
+    prefix: '68561'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 82b698f8-7743-4177-96cf-5d104d8a217a
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 254124
+    prefix: '68562'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e91ad2b6-c862-4023-b99d-2824c5e27fe4
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 254300
+    prefix: '68566'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 09a7d087-161c-46c4-947a-7b14284da848
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 254614
+    prefix: '68567'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: bd5b0698-3726-44ce-9c58-bf14ec5e00aa
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 254686
+    prefix: '68568'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b4e756b2-50ee-487c-b39c-d5831b9cb258
+    country_id: *ws
+    network_id: *ws_apia_region
+  - id: 254876
+    prefix: '68569'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 5a938068-d88d-4674-bc82-b129e7fd02da
+    country_id: *ws
+    network_id: *ws_apia_region
+# Mobile Prefixes
+  - id: 251836
+    prefix: '68572'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 11c15393-3b87-48e2-a6f4-7f15e51e2622
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 252566
+    prefix: '68575'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e245dc94-39d2-4980-a2a9-be69c367ea6a
+    country_id: *ws
+    network_id: *ws_bluesky_mobile
+  - id: 253606
+    prefix: '68583'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0e096dc8-2ccf-49ac-9899-5790146294fc
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 253729
+    prefix: '68584'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e31595a-6430-4d0e-aba5-e69a539dcaf2
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 255465
+    prefix: '68576'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 236de4f1-3f41-4f8e-b568-dc392612fef8
+    country_id: *ws
+    network_id: *ws_bluesky_mobile
+  - id: 255647
+    prefix: '68577'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 078fab7b-2488-4f3e-abe8-f9b11df6e833
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 256672
+    prefix: '68587'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a6f6576c-c848-4f3a-b21b-d6e1b09ccf0a
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 257013
+    prefix: '68589'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: fcd65d1e-60d6-4ea7-a3a2-d441d92de4f2
+    country_id: *ws
+    network_id: *ws_mobile
+  - id: 263717
+    prefix: '68585'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 12564371-b73e-4c51-8fa7-7a4f93aff45d
+    country_id: *ws
+    network_id: *ws_digicel_mobile
+  - id: 263860
+    prefix: '68586'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca8bf6dc-80d7-44fc-9dc1-ed411f677576
+    country_id: *ws
+    network_id: *ws_digicel_mobile

@@ -1,0 +1,284 @@
+country_id: &ck 51
+networks:
+# Supplementary services Networks
+  - id: &ck_special_services 21271
+    name: CK Special Services
+    uuid: 87eb2d65-6e83-4d0c-82c4-37b3c4deee95
+    type_id: 13
+  - id: &ck_emergency_services 24544
+    name: CK Emergency Services
+    uuid: 401f358a-4f48-48d4-b014-069270d15b9c
+    type_id: 13
+# Fixed Networks
+  - id: &ck_aitutaki_region 21897
+    name: CK Aitutaki Region
+    uuid: 530c3280-03ee-414b-a206-78bb4186c800
+    type_id: 2
+  - id: &ck_atiu_region 21954
+    name: CK Atiu Region
+    uuid: d2972c9f-4669-4c29-bf8f-8a5ce42c64c3
+    type_id: 2
+  - id: &ck_mangaia_region 21994
+    name: CK Mangaia Region
+    uuid: e2b90584-0fa6-4923-b42e-bfd08177903a
+    type_id: 2
+  - id: &ck_mauke_region 22026
+    name: CK Mauke Region
+    uuid: 2ab6ef41-4a29-405c-8707-9210042159d3
+    type_id: 2
+  - id: &ck_mitiaro_region 22058
+    name: CK Mitiaro Region
+    uuid: 9bf9091b-bf19-41bd-a804-6bc0d84ed831
+    type_id: 2
+  - id: &ck_palmerston_region 22075
+    name: CK Palmerston Region
+    uuid: f3f8358f-4bb3-45df-b9c9-3ed9aadcd7db
+    type_id: 2
+  - id: &ck_pukapuka_region 22186
+    name: CK Pukapuka Region
+    uuid: f13a1941-ca2c-457e-9353-6a39299d9acf
+    type_id: 2
+  - id: &ck_penrhyn_region 22216
+    name: CK Penrhyn Region
+    uuid: 0a8b6220-55b9-4ef3-b52a-891c0ae5bed3
+    type_id: 2
+  - id: &ck_manihiki_region 22241
+    name: CK Manihiki Region
+    uuid: 199eb48c-4ec5-473c-b796-f0ee8e85cf23
+    type_id: 2
+  - id: &ck_rakahanga_region 22304
+    name: CK Rakahanga Region
+    uuid: 9748f102-41a4-4dbb-968c-a31f5a028d5e
+    type_id: 2
+  - id: &ck_nassau_region 22381
+    name: CK Nassau Region
+    uuid: 903bc213-6dd4-4f3c-95a5-cd2ac854d2b3
+    type_id: 2
+  - id: &ck_voice_mail_region 22489
+    name: CK Voice Mail Region
+    uuid: 898f68c6-dce7-4af0-9421-13a5cf4db1ad
+    type_id: 2
+  - id: &ck_rarotonga_region 22708
+    name: CK Rarotonga Region
+    uuid: b7187341-26a2-4f56-9bab-98b5c0fe1c53
+    type_id: 2
+# Mobile Networks
+  - id: &ck_bluesky_mobile 22462
+    name: CK Bluesky Mobile
+    uuid: 3444181b-cf78-45d1-9007-f0f7a8ea673e
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 241972
+    prefix: '682'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 6c6ff5eb-85d0-41a8-b00e-56def3ce3813
+    country_id: *ck
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242142
+    prefix: '6820'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 150973ca-1f31-4d02-afdf-a7d3ff6315c8
+    country_id: *ck
+    network_id: *ck_special_services
+  - id: 242376
+    prefix: '6821'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 774f240a-592d-4a19-b44c-cabae4570ebd
+    country_id: *ck
+    network_id: *ck_special_services
+  - id: 258303
+    prefix: '682999'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 05fa1e44-3e5a-41d3-9f52-62fbef9a41d5
+    country_id: *ck
+    network_id: *ck_emergency_services
+# Fixed Prefixes
+  - id: 243226
+    prefix: '68231'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b66783c4-f95e-461d-9222-e67bf856cd98
+    country_id: *ck
+    network_id: *ck_aitutaki_region
+  - id: 243359
+    prefix: '68232'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 38593ad3-dcc0-4068-b35c-f43ca0b9fbf2
+    country_id: *ck
+    network_id: *ck_aitutaki_region
+  - id: 243406
+    prefix: '68233'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: d4737fa3-5050-4c3a-9c00-6d52b9cb0052
+    country_id: *ck
+    network_id: *ck_atiu_region
+  - id: 243483
+    prefix: '68234'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 8b3bac3a-9028-4cef-a0a0-52d8f84756fd
+    country_id: *ck
+    network_id: *ck_mangaia_region
+  - id: 243581
+    prefix: '68235'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 963c8a10-3345-49cb-af98-90f53c3ec8b7
+    country_id: *ck
+    network_id: *ck_mauke_region
+  - id: 243660
+    prefix: '68236'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 3f8e4e4c-ad0c-45e2-9f91-169738dccd85
+    country_id: *ck
+    network_id: *ck_mitiaro_region
+  - id: 243705
+    prefix: '68237'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 6ede84a7-da99-416c-9441-e5cec4dd851d
+    country_id: *ck
+    network_id: *ck_palmerston_region
+  - id: 244128
+    prefix: '68241'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1c609eac-eaab-456c-9d30-47a2109dd260
+    country_id: *ck
+    network_id: *ck_pukapuka_region
+  - id: 244229
+    prefix: '68242'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b54cef26-bbbc-479f-b1ba-4c634cc5838e
+    country_id: *ck
+    network_id: *ck_penrhyn_region
+  - id: 244329
+    prefix: '68243'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 419f3117-ca23-4246-8d9a-49ea818496de
+    country_id: *ck
+    network_id: *ck_manihiki_region
+  - id: 244483
+    prefix: '68244'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1ee58136-b00d-4d81-a8bd-e2e2f14283ee
+    country_id: *ck
+    network_id: *ck_rakahanga_region
+  - id: 244628
+    prefix: '68245'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 2f8db873-733e-425f-895a-e7061ee0d17e
+    country_id: *ck
+    network_id: *ck_nassau_region
+  - id: 245251
+    prefix: '68259'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 040ee4f8-d64b-4351-8069-968e42a7f294
+    country_id: *ck
+    network_id: *ck_voice_mail_region
+  - id: 247394
+    prefix: '6822'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1fd87b6d-53be-4dc0-b449-5d7f096b7171
+    country_id: *ck
+    network_id: *ck_rarotonga_region
+  - id: 250235
+    prefix: '68257'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 877cd738-bbf8-4269-b31e-ec1b65323722
+    country_id: *ck
+    network_id: *ck_voice_mail_region
+# Mobile Prefixes
+  - id: 245149
+    prefix: '68258'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 6dcee061-1d6a-4ca5-84f2-b96f2b4cd3ef
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 245312
+    prefix: '682591'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 8cc2f3c1-cecd-4b4e-8114-d1e3997f366c
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 249615
+    prefix: '68250'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: fe87a872-c019-4d23-ae96-ebb5d9b099be
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 249690
+    prefix: '68251'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1c581eb3-96a0-46df-8c06-c6b1096b2b54
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 249761
+    prefix: '68252'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b53f1e55-873b-4c77-86ce-d004754be777
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 249919
+    prefix: '68253'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ee18ea4a-8782-4ae2-8097-26fd230865a9
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 250011
+    prefix: '68254'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1ac20fb0-2857-4a7b-8d97-de71916c0e42
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 250107
+    prefix: '68255'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: cf43e11c-e8f3-4e0c-bf79-df17a835aadf
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 250193
+    prefix: '68256'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 94970a7c-1cb5-4f34-909a-d3c68c5d4083
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 255240
+    prefix: '6827'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: fc88d98d-be0a-4e41-bee9-06985be4fc22
+    country_id: *ck
+    network_id: *ck_bluesky_mobile
+  - id: 256668
+    prefix: '6828'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 34e63410-188a-4e35-bf5c-cccc567dc308
+    country_id: *ck
+    network_id: *ck_bluesky_mobile

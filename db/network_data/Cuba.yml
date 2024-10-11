@@ -1,0 +1,566 @@
+country_id: &cu 55
+networks:
+# Supplementary services Networks
+  - id: &cu_national_operator 21303
+    name: CU National Operator
+    uuid: 6be392d5-9b89-47ee-9840-97874a9074fa
+    type_id: 13
+  - id: &cu_international_operator 21305
+    name: CU International Operator
+    uuid: 302b1e1e-0765-4145-9c59-28f6a910f766
+    type_id: 13
+  - id: &cu_special_services 21386
+    name: CU Special Services
+    uuid: 25cf36f3-381a-444d-9770-b5e1535b0879
+    type_id: 13
+  - id: &cu_emergency_services 21524
+    name: CU Emergency Services
+    uuid: 90982401-9f65-4120-8e7b-02711acebc9e
+    type_id: 13
+  - id: &cu_customer_care_services 21559
+    name: CU Customer Care Services
+    uuid: b3bf6aaa-31e2-4bb4-a73a-9756f05717d3
+    type_id: 13
+  - id: &cu_social_value_services 21621
+    name: CU Social Value Services
+    uuid: d7a3c13a-d085-4873-b43f-d9397b5cef15
+    type_id: 13
+  - id: &cu_data_services_and_internet_access 22573
+    name: CU Data Services And Internet Access
+    uuid: a3852178-cc34-4e97-900c-362fe0c5c5c3
+    type_id: 13
+  - id: &cu_internal_network_services 22742
+    name: CU Internal Network Services
+    uuid: 1638c8d7-56de-4063-9e9d-920708d91aa6
+    type_id: 13
+  - id: &cu_freephone_services 23832
+    name: CU Freephone Services
+    uuid: 8755b292-5280-4d92-b4e8-2006371ecce0
+    type_id: 13
+  - id: &cu_national_access_services 23889
+    name: CU National Access Services
+    uuid: d3c351e1-062d-4ccc-9e53-746fe45da008
+    type_id: 13
+  - id: &cu_mass_call_services 23895
+    name: CU Mass Call Services
+    uuid: 26c6e9c5-8f26-4ae7-9902-73738574d215
+    type_id: 13
+  - id: &cu_premium_rate_services 23904
+    name: CU Premium Rate Services
+    uuid: 072fc2ed-8fd7-4148-bec3-6a560e0e14dd
+    type_id: 13
+  - id: &cu_shared_cost_services 23908
+    name: CU Shared Cost Services
+    uuid: e212b367-205e-4ac1-b69d-732969a8d168
+    type_id: 13
+  - id: &cu_personal_telecommunications_services 24323
+    name: CU Personal Telecommunications Services
+    uuid: 24cda956-52f8-4841-ba2e-9ea3dda69388
+    type_id: 13
+# Fixed Networks
+  - id: &cu_las_tunas_region 21898
+    name: CU Las Tunas Region
+    uuid: 47965856-3e56-4073-9d72-de3f3a8e14df
+    type_id: 2
+  - id: &cu_camaguey_region 21930
+    name: CU Camaguey Region
+    uuid: 1b5786ec-4afb-419a-ae67-bc9a158af2eb
+    type_id: 2
+  - id: &cu_ciego_de_avila_region 21955
+    name: CU Ciego De Avila Region
+    uuid: 42d2c359-854f-47a8-bf5c-e6ce6f1a61e0
+    type_id: 2
+  - id: &cu_sancti_spiritus_region 22187
+    name: CU Sancti Spiritus Region
+    uuid: ad330453-c108-4ce7-97a5-9dcfbb6f171e
+    type_id: 2
+  - id: &cu_villa_clara_region 22217
+    name: CU Villa Clara Region
+    uuid: 3f34b1ca-60ae-4b6d-b685-a7dbe89c2527
+    type_id: 2
+  - id: &cu_cienfuegos_region 22242
+    name: CU Cienfuegos Region
+    uuid: 3d1770ea-1e97-451d-8eb7-d3fad926a46a
+    type_id: 2
+  - id: &cu_matanzas_region 22382
+    name: CU Matanzas Region
+    uuid: 11c1e197-10e1-4f35-b8ec-afd09a5093ff
+    type_id: 2
+  - id: &cu_guantanamo_region 22793
+    name: CU Guantanamo Region
+    uuid: 26431ce3-21ab-4fc5-aa27-d5bf174fa5cf
+    type_id: 2
+  - id: &cu_santiago_de_cuba_region 22836
+    name: CU Santiago De Cuba Region
+    uuid: 4a2515b2-e11b-4d6f-ba77-82a22e49e3ee
+    type_id: 2
+  - id: &cu_granma_region 22905
+    name: CU Granma Region
+    uuid: e02f6388-3eec-4c9c-95cd-b3b6fc5cb80e
+    type_id: 2
+  - id: &cu_holguin_region 22967
+    name: CU Holguin Region
+    uuid: 751b9c9a-ffd7-4f59-88fa-f1428d1640ae
+    type_id: 2
+  - id: &cu_isla_de_la_juventud_region 23230
+    name: CU Isla De La Juventud Region
+    uuid: 8da5079e-4007-46ed-8d91-46604ccf5897
+    type_id: 2
+  - id: &cu_mayabeque_region 23259
+    name: CU Mayabeque Region
+    uuid: 6458cc91-754c-47f1-ae7c-0e6493ee2c65
+    type_id: 2
+  - id: &cu_pinar_del_rio_region 23277
+    name: CU Pinar Del Rio Region
+    uuid: b057b315-199f-42cc-9c9f-4624a3132f3c
+    type_id: 2
+  - id: &cu_artemisa_region 23287
+    name: CU Artemisa Region
+    uuid: e925e83e-38d0-4669-b3fb-37582482f47c
+    type_id: 2
+  - id: &cu_la_habana_region 24144
+    name: CU La Habana Region
+    uuid: 671fca0b-ade2-4585-a169-201e727f1b2f
+    type_id: 2
+  - id: &cu_guantanamo_bay_usa_territory_region 24532
+    name: CU Guantanamo Bay Usa Territory Region
+    uuid: 7974d889-adc5-4ad8-b8b8-406fdfe4cc85
+    type_id: 2
+# Mobile Networks
+  - id: &cu_mobile 22459
+    name: CU Mobile
+    uuid: aa06f3e9-8d2e-463f-81db-7d2aa71cda98
+    type_id: 3
+  - id: &cu_cubacel_mobile 22464
+    name: CU Cubacel Mobile
+    uuid: 5b2ddb46-e42f-4bdd-a00a-bc621798bc20
+    type_id: 3
+  - id: &cu_movitel_mobile 23407
+    name: CU Movitel Mobile
+    uuid: 61535286-ae7d-4e45-b7e9-62dbe045aabd
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 241977
+    prefix: '53'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 8a8a3370-5790-43a2-89ac-7cade543aa06
+    country_id: *cu
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242177
+    prefix: '53011'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 342f609e-01ae-43e3-9ecc-3590e12e3bc8
+    country_id: *cu
+    network_id: *cu_national_operator
+  - id: 242179
+    prefix: '53012'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 80481458-c611-4623-a2fd-26a766af13d4
+    country_id: *cu
+    network_id: *cu_international_operator
+  - id: 242381
+    prefix: '531'
+    number_min_length: 5
+    number_max_length: 8
+    uuid: d8b6c42b-ff2e-468c-a2cd-96acfd3e7fdd
+    country_id: *cu
+    network_id: *cu_special_services
+  - id: 242531
+    prefix: '5310'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: c7be756b-5744-4465-933d-a0dc12019d18
+    country_id: *cu
+    network_id: *cu_emergency_services
+  - id: 242584
+    prefix: '5311'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: ed7d18e1-033a-46df-a7b1-3b5914017b46
+    country_id: *cu
+    network_id: *cu_customer_care_services
+  - id: 242660
+    prefix: '53116'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 5f43f7c6-29b3-4317-bc8d-98d159a60170
+    country_id: *cu
+    network_id: *cu_social_value_services
+  - id: 245474
+    prefix: '53601'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8c22ca1d-a652-44fa-a17e-8790d128d7c9
+    country_id: *cu
+    network_id: *cu_data_services_and_internet_access
+  - id: 247451
+    prefix: '5320'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dc154bf8-2d84-46d2-a91f-541f98b31218
+    country_id: *cu
+    network_id: *cu_internal_network_services
+  - id: 253142
+    prefix: '53800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6075b520-abcf-4f74-9157-4f044d4ab0c4
+    country_id: *cu
+    network_id: *cu_freephone_services
+  - id: 253220
+    prefix: '53802'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b6752bc9-7be8-46be-9ffa-a3f5b2ce62db
+    country_id: *cu
+    network_id: *cu_national_access_services
+  - id: 253249
+    prefix: '53805'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ac4f3e9e-f257-4baf-b21f-4a779d075905
+    country_id: *cu
+    network_id: *cu_mass_call_services
+  - id: 253267
+    prefix: '53807'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a58f4bd0-2f9d-43bb-ad1b-15fc32e040d8
+    country_id: *cu
+    network_id: *cu_premium_rate_services
+  - id: 253278
+    prefix: '53808'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 932696c5-4f61-481b-acd9-0154bc2f1369
+    country_id: *cu
+    network_id: *cu_shared_cost_services
+  - id: 256799
+    prefix: '53878'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 704f8dfb-b92a-4a82-9621-2f6e4830b30d
+    country_id: *cu
+    network_id: *cu_personal_telecommunications_services
+# Fixed Prefixes
+  - id: 243227
+    prefix: '5331'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dba969b3-6452-4b35-9300-b7370d7239f6
+    country_id: *cu
+    network_id: *cu_las_tunas_region
+  - id: 243360
+    prefix: '5332'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9fc2d5e0-eeaf-4550-b2a0-4649f12b015b
+    country_id: *cu
+    network_id: *cu_camaguey_region
+  - id: 243407
+    prefix: '5333'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 367f52c1-c3e9-4b3e-93e7-4f66583d67c6
+    country_id: *cu
+    network_id: *cu_ciego_de_avila_region
+  - id: 244129
+    prefix: '5341'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5519a506-d45b-4402-8853-caa5706cdbc0
+    country_id: *cu
+    network_id: *cu_sancti_spiritus_region
+  - id: 244230
+    prefix: '5342'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0ee8eb26-155f-44ce-b037-b1ea154fc061
+    country_id: *cu
+    network_id: *cu_villa_clara_region
+  - id: 244330
+    prefix: '5343'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cd556399-ca4a-4161-bd04-1e4f1d731ade
+    country_id: *cu
+    network_id: *cu_cienfuegos_region
+  - id: 244629
+    prefix: '5345'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e5ba49d-bb53-438a-b6d2-12408d6c1a75
+    country_id: *cu
+    network_id: *cu_matanzas_region
+  - id: 247622
+    prefix: '5321'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b47a6fdf-8516-408c-bd06-a702e593dbff
+    country_id: *cu
+    network_id: *cu_guantanamo_region
+  - id: 247719
+    prefix: '5322'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9dca528a-63d3-4972-ac21-92f2cdb43e30
+    country_id: *cu
+    network_id: *cu_santiago_de_cuba_region
+  - id: 247913
+    prefix: '5323'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c708199-0829-4274-a3e9-1c716a77ccc6
+    country_id: *cu
+    network_id: *cu_granma_region
+  - id: 248107
+    prefix: '5324'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d5ab9a1f-e1e8-47d6-a369-93f67d04772c
+    country_id: *cu
+    network_id: *cu_holguin_region
+  - id: 249081
+    prefix: '5346'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac1c32c2-27a2-46e9-8a7d-67e941f71159
+    country_id: *cu
+    network_id: *cu_isla_de_la_juventud_region
+  - id: 249299
+    prefix: '5347'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2abacd02-353d-4f5b-adc6-e022071c657e
+    country_id: *cu
+    network_id: *cu_mayabeque_region
+  - id: 249422
+    prefix: '5348'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 988a27f3-17af-43eb-897a-467ca3f51939
+    country_id: *cu
+    network_id: *cu_pinar_del_rio_region
+  - id: 249506
+    prefix: '5349'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 674563d6-d2f0-424f-a29a-5953d4c54bad
+    country_id: *cu
+    network_id: *cu_artemisa_region
+  - id: 255242
+    prefix: '537'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8d24c0d1-c191-44ee-871f-543f6745f298
+    country_id: *cu
+    network_id: *cu_la_habana_region
+  - id: 258177
+    prefix: '5399'
+    number_min_length: 8
+    number_max_length: 9
+    uuid: a6196839-bf36-4563-97f9-d66ef7a9e72f
+    country_id: *cu
+    network_id: *cu_guantanamo_bay_usa_territory_region
+# Mobile Prefixes
+  - id: 245143
+    prefix: '535799'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40c08795-fb72-441f-aae9-86489857814f
+    country_id: *cu
+    network_id: *cu_mobile
+  - id: 245151
+    prefix: '5358'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 88a694ec-a549-470e-a785-21add5b827bc
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 245254
+    prefix: '5359'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9a303847-67cd-488c-b303-aa0128b04d95
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 249616
+    prefix: '5350'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bc066050-fe47-4c86-bd45-5e0084e888dd
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 249692
+    prefix: '5351'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 422c7fc1-84a5-4819-a9c3-e8b5030e4d34
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 249763
+    prefix: '5352'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d7c50787-0676-44ec-a26b-80cc204639e3
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 249921
+    prefix: '5353'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1f932237-912a-44e8-befc-1b14391d4b1b
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250012
+    prefix: '5354'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e86a88d4-784d-4921-8224-7a2fa2963229
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250089
+    prefix: '53549901'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a0e5a80a-3c8b-4aa3-80ed-d02a1f78771d
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250090
+    prefix: '53549902'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d8cbeab9-023b-43cb-8644-69ea163e7617
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250091
+    prefix: '53549903'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2494927a-7dc7-497d-9836-ed5a8d279d61
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250092
+    prefix: '53549904'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 60d0d3d4-7d33-4b8a-90ed-a0889cd5bb8a
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250093
+    prefix: '53549905'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9283bf1d-70eb-4112-9fcd-d2c6a5dd6e2a
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250094
+    prefix: '53549906'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c55c87ab-8e4b-4e3b-b5a8-84f67b1500a5
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250095
+    prefix: '53549907'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9b1593f8-6e69-400c-8d8c-19be0895f61e
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250096
+    prefix: '53549908'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac1260e6-166a-4212-b589-861166237016
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250097
+    prefix: '53549909'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 84052e88-3ff3-45d2-9554-38c731d3c110
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250098
+    prefix: '5354991'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 678b9ae4-66f4-443c-ba52-157a094083b5
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250099
+    prefix: '53549920'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 62bf9cc9-03df-41a7-b7cb-7236c82a2fb0
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250100
+    prefix: '53549921'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 646a7f8b-a3bc-4650-9917-96e19476a0c8
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250101
+    prefix: '53549922'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a37c20eb-03a9-498b-97bc-d87c4d4f32a3
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250102
+    prefix: '53549923'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1ee21c5a-b831-40e9-a4ae-b17802e21829
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250109
+    prefix: '5355'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7b84027a-036c-42c6-bb10-714540c91a4b
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250194
+    prefix: '5356'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 76db85d2-5661-4010-a95e-9480fefe9c81
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 250237
+    prefix: '5357'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5a7465c2-6a4f-4f3c-9249-3e6a1c76d21f
+    country_id: *cu
+    network_id: *cu_movitel_mobile
+  - id: 250658
+    prefix: '5363'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: edf2226f-0d07-45e7-9e52-dcbedef9b0ee
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 251021
+    prefix: '5364'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 39eb0a6f-311f-4a1c-be5f-f68e1db6b014
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 254113
+    prefix: '5362'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 041e27f8-08b0-46c9-ae3a-256dace20ce1
+    country_id: *cu
+    network_id: *cu_cubacel_mobile

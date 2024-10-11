@@ -1,0 +1,934 @@
+country_id: &is 98
+networks:
+# Supplementary services Networks
+  - id: &is_special_services 21423
+    name: IS Special Services
+    uuid: d0a36219-65b6-4fa2-8952-c69317b2c19b
+    type_id: 13
+  - id: &is_emergency_services 21589
+    name: IS Emergency Services
+    uuid: fb4d31c2-6f0c-4f71-addb-3282d517b438
+    type_id: 13
+  - id: &is_social_value_services 21635
+    name: IS Social Value Services
+    uuid: 5124b85b-5113-4a61-a195-4e8cbcd991cd
+    type_id: 13
+  - id: &is_directory_services_national 21679
+    name: IS Directory Services National
+    uuid: 49272b14-51f3-4ae3-9d83-0870df9c89cf
+    type_id: 13
+  - id: &is_directory_services 22625
+    name: IS Directory Services
+    uuid: 429133a4-34f0-4908-b139-bd7e71452309
+    type_id: 13
+  - id: &is_sms_services 22680
+    name: IS Sms Services
+    uuid: d72497ba-5557-4e38-9352-23a826266149
+    type_id: 13
+  - id: &is_intelligent_network_services 23742
+    name: IS Intelligent Network Services
+    uuid: 65987e21-fa95-4614-8cf1-30736ba0b4e9
+    type_id: 13
+  - id: &is_freephone_services 23844
+    name: IS Freephone Services
+    uuid: b32b4551-0a4c-41f0-8a01-6a9b2544bbbf
+    type_id: 13
+  - id: &is_universal_international_freephone_number_uifn 23884
+    name: IS Universal International Freephone Number Uifn
+    uuid: bc9bb87e-9e14-42f1-8e06-04f7779f2d7d
+    type_id: 13
+  - id: &is_voice_mail 24297
+    name: IS Voice Mail
+    uuid: d3ad3dc1-6b4f-4c67-8ecb-12f1df65fb56
+    type_id: 13
+  - id: &is_premium_rate_services 24422
+    name: IS Premium Rate Services
+    uuid: ea6bc4d2-753d-49c2-a7d0-e650014790a9
+    type_id: 13
+# Mobile Networks
+  - id: &is_nova_mobile 22035
+    name: IS Nova Mobile
+    uuid: 5b5e67fe-2aac-4fda-834d-156dfb2166b5
+    type_id: 3
+  - id: &is_tismi_mobile 22040
+    name: IS Tismi Mobile
+    uuid: 42de4a30-5ba4-4bda-bc15-1a0322fbdc98
+    type_id: 3
+  - id: &is_mobile 22107
+    name: IS Mobile
+    uuid: e690a341-f208-4c89-8366-14e0b55b6530
+    type_id: 3
+  - id: &is_siminn_mobile 22112
+    name: IS Siminn Mobile
+    uuid: 8dd11237-6f0e-4fd1-9705-c54cb771a00b
+    type_id: 3
+  - id: &is_tetra_mobile 23449
+    name: IS Tetra Mobile
+    uuid: ea9bab44-440f-47f0-8911-0de4f53efa6c
+    type_id: 3
+  - id: &is_vodafone_mobile 23500
+    name: IS Vodafone Mobile
+    uuid: 7f3b974b-5bb8-4083-a98c-25a17bb1a8ee
+    type_id: 3
+# Fixed Networks
+  - id: &is_fixed 22190
+    name: IS Fixed
+    uuid: 77470a15-5c09-4abc-8425-4c6fc47f72b2
+    type_id: 2
+  - id: &is_voip_region 23289
+    name: IS Voip Region
+    uuid: 34228f6a-a087-4ec0-a8e2-7e3ae64c01db
+    type_id: 2
+  - id: &is_reykjavik_region 23306
+    name: IS Reykjavik Region
+    uuid: 54160f5d-bc72-4c24-b43a-4fea4945138a
+    type_id: 2
+  - id: &is_public_telephones_region 24475
+    name: IS Public Telephones Region
+    uuid: 1502d8a8-0dde-4d6a-8fc9-6a23f9754ce8
+    type_id: 2
+network_prefixes:
+# Country code Prefixes
+  - id: 242023
+    prefix: '354'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 0a1c3712-b3fa-4acd-8065-021dc9f01491
+    country_id: *is
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242420
+    prefix: '3541'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 21c1c065-35d7-47d4-9f96-dbf9016f4cf2
+    country_id: *is
+    network_id: *is_special_services
+  - id: 242622
+    prefix: '354112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: e9cd2dbf-01c3-48b1-a3ad-a0d8398305e7
+    country_id: *is
+    network_id: *is_emergency_services
+  - id: 242675
+    prefix: '354116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 06a789c5-cbb9-4d06-bc78-bcd8d72f91a6
+    country_id: *is
+    network_id: *is_social_value_services
+  - id: 242724
+    prefix: '354118'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 7d2d35da-f08b-4a6b-8bcf-45f7c70d6873
+    country_id: *is
+    network_id: *is_directory_services_national
+  - id: 247275
+    prefix: '35418'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: cd9670ab-ae57-495e-9d4b-0aefeaeaaebe
+    country_id: *is
+    network_id: *is_directory_services
+  - id: 247349
+    prefix: '354190'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: b21cf5aa-cec3-4b25-bf7a-73bd749785a5
+    country_id: *is
+    network_id: *is_sms_services
+  - id: 252552
+    prefix: '35475'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3d7e06db-39c5-4168-ab78-9ec158bda4a7
+    country_id: *is
+    network_id: *is_intelligent_network_services
+  - id: 253157
+    prefix: '354800'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 60874825-8184-4024-b20a-f59ed1a5c073
+    country_id: *is
+    network_id: *is_freephone_services
+  - id: 253211
+    prefix: '354801'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4c0d7afe-0c5a-49bd-8ebd-a7229cd58188
+    country_id: *is
+    network_id: *is_universal_international_freephone_number_uifn
+  - id: 253224
+    prefix: '354802'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b4299e8a-4820-442d-a354-59f528853612
+    country_id: *is
+    network_id: *is_universal_international_freephone_number_uifn
+  - id: 253235
+    prefix: '354803'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e565a697-2f0b-45a1-b665-0d1247c2965b
+    country_id: *is
+    network_id: *is_universal_international_freephone_number_uifn
+  - id: 253245
+    prefix: '354804'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9f9d0e78-dad8-4ae2-bff9-df13c45ee178
+    country_id: *is
+    network_id: *is_universal_international_freephone_number_uifn
+  - id: 253253
+    prefix: '354805'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f4f0bd32-4160-4b87-ba82-5bcb11cebd5a
+    country_id: *is
+    network_id: *is_universal_international_freephone_number_uifn
+  - id: 253262
+    prefix: '354806'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0b3e6a0e-fc3e-4e96-8e1f-45be481612ff
+    country_id: *is
+    network_id: *is_universal_international_freephone_number_uifn
+  - id: 253272
+    prefix: '354807'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 608aad39-f5f1-41fe-a80e-830c8697db45
+    country_id: *is
+    network_id: *is_universal_international_freephone_number_uifn
+  - id: 253283
+    prefix: '354808'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: afc9ef7b-5f9b-4c1f-a31c-50c344a318fc
+    country_id: *is
+    network_id: *is_universal_international_freephone_number_uifn
+  - id: 253294
+    prefix: '354809'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 82f153bd-6a28-4974-9da4-0412b1f00d51
+    country_id: *is
+    network_id: *is_directory_services
+  - id: 256674
+    prefix: '354870'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b7c2a555-e69f-4cee-992d-307f316771ea
+    country_id: *is
+    network_id: *is_voice_mail
+  - id: 256816
+    prefix: '354879'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 277290bc-1ad3-4267-8f9b-59175e839b30
+    country_id: *is
+    network_id: *is_voice_mail
+  - id: 257159
+    prefix: '35490'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fe02df3a-c583-4b58-8061-2f0ec72c7707
+    country_id: *is
+    network_id: *is_premium_rate_services
+# Mobile Prefixes
+  - id: 243600
+    prefix: '354350'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0dd5fd0e-fe93-4e6a-8d03-05f8a98552fe
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 243604
+    prefix: '35435035'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 324c2a1e-937a-4238-85a5-0aed7148582f
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 243611
+    prefix: '354352'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c247e7da-927d-46dd-a27b-1523328e4509
+    country_id: *is
+    network_id: *is_tismi_mobile
+  - id: 243615
+    prefix: '35435201'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 16ea4c15-58b9-450b-bb7c-a0c87ade66ec
+    country_id: *is
+    network_id: *is_tismi_mobile
+  - id: 243865
+    prefix: '35438'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e133ed8e-49e1-48dc-bc38-e2976e0969dc
+    country_id: *is
+    network_id: *is_mobile
+  - id: 243883
+    prefix: '354385'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ce387f65-47e9-4d46-a0e7-0ca01e24fcb1
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 243906
+    prefix: '35439'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e3085eb7-a513-40a6-85e4-2fd40e0ed58d
+    country_id: *is
+    network_id: *is_mobile
+  - id: 250660
+    prefix: '35463'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 393216e4-eb72-43f6-985c-b85746e3ec5c
+    country_id: *is
+    network_id: *is_mobile
+  - id: 250670
+    prefix: '354630'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6986d952-ceff-4571-a9d8-a1951b616e1c
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 250719
+    prefix: '354632'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8a793abc-86d6-4939-8d43-8166cc265efa
+    country_id: *is
+    network_id: *is_tismi_mobile
+  - id: 250823
+    prefix: '354636'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aca5d035-bff0-4a30-97cc-21484c27a049
+    country_id: *is
+    network_id: *is_tetra_mobile
+  - id: 250849
+    prefix: '354637'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8fbdffe2-a880-43fc-8dcb-9c32e49db2d4
+    country_id: *is
+    network_id: *is_tetra_mobile
+  - id: 250870
+    prefix: '354638'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c236a3e3-d86c-4290-890c-f119697127fc
+    country_id: *is
+    network_id: *is_tetra_mobile
+  - id: 250903
+    prefix: '354639'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3311c12d-f49f-4145-baaf-450a2f8290b6
+    country_id: *is
+    network_id: *is_tetra_mobile
+  - id: 251025
+    prefix: '35464'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 995eb7be-3e22-43c6-962d-aad5123c9d08
+    country_id: *is
+    network_id: *is_mobile
+  - id: 251035
+    prefix: '354640'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 83c7db57-e4ca-441c-a53b-321d1a8d82b8
+    country_id: *is
+    network_id: *is_tetra_mobile
+  - id: 251086
+    prefix: '354641'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ad9cfee-f969-450e-845c-901d3313c83a
+    country_id: *is
+    network_id: *is_tetra_mobile
+  - id: 251130
+    prefix: '354644'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 17759fa4-2024-49b4-a291-10549d2f1096
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 251162
+    prefix: '354646'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ae40f74c-cb4e-4316-90c8-19488e53e735
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 251170
+    prefix: '354647'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4995d840-33e5-4a6c-9134-2c7ec1475d7a
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 251182
+    prefix: '354649'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 25265a51-774f-40a0-8687-5d5221579a9c
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 251240
+    prefix: '35465'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b4467741-7f2c-4ae5-8f7b-01a9651dd6b2
+    country_id: *is
+    network_id: *is_mobile
+  - id: 251249
+    prefix: '354650'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c9e8de13-d6f7-4f63-b59d-6921b6e5edae
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 251276
+    prefix: '354651'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7049c49e-ef8e-4791-b857-e5eb95a0b8e1
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 251388
+    prefix: '354655'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 669a9825-a71a-4fc9-b630-9b5a8c3964d1
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 251525
+    prefix: '354659'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0e1e5742-653d-4179-b2dc-855468e68bee
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 253491
+    prefix: '354820'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3216a860-bf8a-4893-874e-3dbdfa0d9a2d
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 253496
+    prefix: '354821'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 071ab5ea-4daf-40e6-8a4f-703494ee50e7
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 253509
+    prefix: '354822'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a757af92-94a4-4391-8f78-1bb9ea5c2868
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 253523
+    prefix: '354823'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d592eecf-a693-4c82-9bc3-d4adc4ff7202
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 253527
+    prefix: '354824'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 926af597-258f-4af1-b1d3-dbe1d3c1eefe
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 253532
+    prefix: '354825'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 223d91aa-98e5-430a-bc47-cf2413f8896a
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 253593
+    prefix: '35483'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a765c53d-2d8c-49ee-ab24-e52f10565297
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 253719
+    prefix: '35484'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 89dacb44-b4ac-401c-ae20-00a5d1d8afba
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 253986
+    prefix: '35461'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e80a2f7b-2dfb-4519-a82d-2f67cd566a04
+    country_id: *is
+    network_id: *is_mobile
+  - id: 254000
+    prefix: '354611'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 058e197d-2df3-4a6f-b1cd-ccf5b119b2e2
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254016
+    prefix: '354612'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a8f6db25-f587-4014-a268-e3a6c6bf0b51
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254028
+    prefix: '354613'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a832808d-a7ea-456d-8d6c-1a7ed283fe9f
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254043
+    prefix: '354614'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 743ae414-2adc-4c23-91d8-14b34c692085
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254068
+    prefix: '354615'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c3eedfb6-b291-42f5-a6dc-8f164e3a9a5b
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254078
+    prefix: '354616'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d5d2caa6-8567-4512-b21e-51b0d9d75fce
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254084
+    prefix: '354617'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8f2490bd-c188-42fd-9e77-a59221c8de8e
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254094
+    prefix: '354618'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9269e774-7b44-4caf-9a08-21b15df27e77
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254117
+    prefix: '35462'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3bf12ab3-7114-40a8-b41b-26b0a20388a2
+    country_id: *is
+    network_id: *is_mobile
+  - id: 254128
+    prefix: '354620'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 530e4e02-1e24-4b92-97eb-de101ed6e3b6
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254147
+    prefix: '354621'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0bb98f29-01a0-4927-bee7-54ae46c5f997
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254170
+    prefix: '354622'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 43adf64c-2604-4a32-931c-fe7edf9feffb
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254181
+    prefix: '354623'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1fc3e43-ab50-4e06-a358-ee342b34fe20
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254213
+    prefix: '354624'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c1bd718f-d740-4baf-88fd-daa7b601241c
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254230
+    prefix: '354625'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 682508fe-eb02-469a-9d3b-c8dd0ca290bb
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254251
+    prefix: '354626'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 140ba9cf-950e-4ac7-8600-4c7bc0c37eed
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254292
+    prefix: '35466'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 192f97b1-7927-485e-8881-75024fd087dc
+    country_id: *is
+    network_id: *is_mobile
+  - id: 254307
+    prefix: '354660'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1b247d5-1498-4665-a6c9-313265132e8d
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254335
+    prefix: '354661'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: be9eab7b-835e-4597-9f05-35c2e6880fec
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254355
+    prefix: '354662'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8fa94b9d-94a6-4db9-a768-81895ae4b36a
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254378
+    prefix: '354663'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca7e3845-9646-45a0-b77c-55a424fa2ae6
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254408
+    prefix: '354664'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a9c5b65d-f445-4eeb-b56a-88f7ff4d5289
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254432
+    prefix: '354665'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 65ca72fe-b446-4795-8493-922715ee8e93
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254457
+    prefix: '354666'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7f4b5542-f9d1-47dd-9327-5a3e6aa829f0
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254531
+    prefix: '354669'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 48792a6f-6084-427c-a013-79a864b61aa1
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254606
+    prefix: '35467'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 22081d35-b589-46b4-8b78-02ad36017534
+    country_id: *is
+    network_id: *is_mobile
+  - id: 254618
+    prefix: '354670'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e603371e-83e5-423b-a41e-9d7faddb4d69
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254681
+    prefix: '35468'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d7859f63-21e1-4eaf-8bb9-c51da2415bbd
+    country_id: *is
+    network_id: *is_mobile
+  - id: 254689
+    prefix: '354680'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5a75ad46-2c20-41a6-abe9-4319f8a6b103
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254800
+    prefix: '354686'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c01097f1-8ed3-4e8c-aeff-367011bb1ea5
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254808
+    prefix: '354687'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3a157ecb-27b4-4a14-a660-5c092a16e2a0
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254822
+    prefix: '354688'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bf2e624e-9438-4512-a4f0-8406e07c7b9d
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254851
+    prefix: '354689'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 52b54cb2-b199-491a-a591-e88f0fc0c684
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 254870
+    prefix: '35469'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 54468e21-cd5b-4f44-974f-8ba36c67726a
+    country_id: *is
+    network_id: *is_vodafone_mobile
+  - id: 255452
+    prefix: '35476'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc4dfe54-b061-4bd2-b9f6-9c1f4191f85b
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 255632
+    prefix: '35477'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 937ff6c4-9710-45f8-87a1-0788a29bcd0b
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 256090
+    prefix: '35478'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5a8cf2f2-d030-461b-ab21-a30dd71eac9e
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 256399
+    prefix: '354790'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0e12faf5-2f9f-431b-a949-1480a8dca310
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 256449
+    prefix: '354791'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fc538179-d627-4770-b46c-576717735ad4
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 256477
+    prefix: '354792'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e6965d89-397f-47aa-8de4-4a414a273736
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 256537
+    prefix: '354793'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ede42b3f-84f4-4e08-9b22-c0bf14841eb2
+    country_id: *is
+    network_id: *is_nova_mobile
+  - id: 256691
+    prefix: '354871'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a51c7219-4373-4624-85db-40e2671bdd05
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 256709
+    prefix: '354872'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e1e292a5-7523-4134-a575-4fad53987ce3
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 256801
+    prefix: '354878'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 09c752ab-4c35-4405-8ad4-3edc0c901258
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 256856
+    prefix: '354880'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 86fc1318-7cdb-47ec-839c-330361fef4b1
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 256897
+    prefix: '354882'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9c4ed52c-e8ab-49a8-8ede-7b8d0707a45f
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 256914
+    prefix: '354883'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: be8718c7-18c1-448c-a8a1-7688a649390d
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 256969
+    prefix: '354888'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 044b0da0-9e3e-44f5-a770-a77abdfeab63
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 257000
+    prefix: '35489'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5af85bc4-44f8-4ca0-be7e-af36a79b30c7
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 263706
+    prefix: '35485'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 69637de5-864f-43c7-a3fe-d8d722b0ed15
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 263853
+    prefix: '35486'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8ed6e063-f8f8-4fca-b6e4-c1729e4bf69e
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 264551
+    prefix: '354954'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0bf3d647-efb4-427d-9064-80d44c205a95
+    country_id: *is
+    network_id: *is_siminn_mobile
+  - id: 264643
+    prefix: '354958'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6709f95d-7056-42ff-bf9e-abeeba21bbfb
+    country_id: *is
+    network_id: *is_siminn_mobile
+# Fixed Prefixes
+  - id: 244135
+    prefix: '35441'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e6351ba0-f18a-4340-beef-7f67d916e4c3
+    country_id: *is
+    network_id: *is_fixed
+  - id: 244237
+    prefix: '35442'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 27fc83e9-7037-45be-9a75-4374e95816b6
+    country_id: *is
+    network_id: *is_fixed
+  - id: 244337
+    prefix: '35443'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2765501b-41fa-494f-a457-def8ae39799c
+    country_id: *is
+    network_id: *is_fixed
+  - id: 244491
+    prefix: '35444'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 28b20caa-5a04-4200-853a-4e7d48dff857
+    country_id: *is
+    network_id: *is_fixed
+  - id: 244634
+    prefix: '35445'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 13446880-52f3-498e-8771-f694f326c784
+    country_id: *is
+    network_id: *is_fixed
+  - id: 249089
+    prefix: '35446'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 57e380f8-0b0f-4953-8d8c-ddc8f69f786a
+    country_id: *is
+    network_id: *is_fixed
+  - id: 249306
+    prefix: '35447'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 36e87922-11d8-42c8-8a59-562e98ecb8ac
+    country_id: *is
+    network_id: *is_fixed
+  - id: 249428
+    prefix: '35448'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d15a2a18-419a-46a9-afc8-dcbe8708c942
+    country_id: *is
+    network_id: *is_fixed
+  - id: 249513
+    prefix: '35449'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9962d635-efaf-4e22-9bd4-ebe6cf65603d
+    country_id: *is
+    network_id: *is_voip_region
+  - id: 249581
+    prefix: '3545'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 791f9f5c-f78d-4d99-84af-29fdc1873c7c
+    country_id: *is
+    network_id: *is_reykjavik_region
+  - id: 257345
+    prefix: '354909'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f3d42ba-57ca-4c2f-b2fa-1c1b4f26ff45
+    country_id: *is
+    network_id: *is_public_telephones_region

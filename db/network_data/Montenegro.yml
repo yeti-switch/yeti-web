@@ -1,0 +1,312 @@
+country_id: &me 262
+networks:
+# Fixed Networks
+  - id: &me_bijelo_polje_region 4672
+    name: ME Bijelo Polje Region
+    uuid: bbf8359c-710e-4c8e-901d-83a1ad7e00db
+    type_id: 2
+  - id: &me_berane_region 5643
+    name: ME Berane Region
+    uuid: e7ad156d-1d3e-4fd1-9e38-42693059033f
+    type_id: 2
+  - id: &me_pljevlja_region 6643
+    name: ME Pljevlja Region
+    uuid: 48c8b01c-9edc-4ae9-843c-a5f6223df017
+    type_id: 2
+  - id: &me_voip_region 18843
+    name: ME Voip Region
+    uuid: eb216d95-add3-44a3-aab6-7c2997252b14
+    type_id: 2
+  - id: &me_podgorica_region 26712
+    name: ME Podgorica Region
+    uuid: 0d4e8fb4-963e-4e95-8e53-e507ece16521
+    type_id: 2
+  - id: &me_bar_region 30868
+    name: ME Bar Region
+    uuid: d5cca0aa-224d-470e-9fe9-f3978b9b0a33
+    type_id: 2
+  - id: &me_herceg_novi_region 31756
+    name: ME Herceg Novi Region
+    uuid: ac6fae79-4428-4165-8605-7bec859bbda0
+    type_id: 2
+  - id: &me_kotor_region 31939
+    name: ME Kotor Region
+    uuid: 0eaf2bce-7ca3-438c-8157-08462c52997f
+    type_id: 2
+  - id: &me_budva_region 32560
+    name: ME Budva Region
+    uuid: 764ea66b-9252-4c5c-9ffb-68fcf30e8ad1
+    type_id: 2
+  - id: &me_niksic_region 34316
+    name: ME Niksic Region
+    uuid: 8aa94eb8-4f13-469b-b11a-904860a10f46
+    type_id: 2
+  - id: &me_cetinje_region 36241
+    name: ME Cetinje Region
+    uuid: b2360a1b-d3e0-40c1-aacc-816ce49d0934
+    type_id: 2
+# Mobile Networks
+  - id: &me_mtel_mobile 10534
+    name: ME Mtel Mobile
+    uuid: ab5ecf7e-a17f-4bb1-a5f3-41e95cce41ac
+    type_id: 3
+  - id: &me_one_mobile 12461
+    name: ME One Mobile
+    uuid: 27d44a4b-22ff-48d8-a99f-d1e35d818e46
+    type_id: 3
+  - id: &me_telekom_mobile 13679
+    name: ME Telekom Mobile
+    uuid: ed014f60-43c2-4a5f-a288-ccb7c4807530
+    type_id: 3
+# Supplementary services Networks
+  - id: &me_unique_number_services 14446
+    name: ME Unique Number Services
+    uuid: 934d9a2d-1dcd-46c0-abae-ed2c5114bc87
+    type_id: 13
+  - id: &me_machine_to_machine_m2m_services 16211
+    name: ME Machine To Machine M2M Services
+    uuid: 9486d066-cda2-40db-8262-e6f6be3727c1
+    type_id: 13
+  - id: &me_access_to_business_customers 18503
+    name: ME Access To Business Customers
+    uuid: 119cfc7d-39de-4b5a-91da-72c58d792b26
+    type_id: 13
+  - id: &me_freephone_services 19840
+    name: ME Freephone Services
+    uuid: 22900d82-00df-4669-9476-19202b3e5ed0
+    type_id: 13
+  - id: &me_premium_rate_services 20038
+    name: ME Premium Rate Services
+    uuid: 6c5a6326-7cdd-4f43-97ef-916c617fe59c
+    type_id: 13
+  - id: &me_special_services 21452
+    name: ME Special Services
+    uuid: ec5aef9f-f1cd-46cb-8892-28bc31f54f0a
+    type_id: 13
+  - id: &me_social_value_services 21643
+    name: ME Social Value Services
+    uuid: fbb11d47-38fb-45d8-b034-fc9097d37d4e
+    type_id: 13
+  - id: &me_directory_enquiry_services 21685
+    name: ME Directory Enquiry Services
+    uuid: a97bc0bf-556f-433a-a966-fc3183d116f7
+    type_id: 13
+  - id: &me_shared_cost_services 39795
+    name: ME Shared Cost Services
+    uuid: 5742a38f-5327-4784-b64f-edfbe1a0dd9a
+    type_id: 13
+network_prefixes:
+# Fixed Prefixes
+  - id: 54926
+    prefix: '38250'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e126b3f1-bd6e-46d6-8282-c9bc27fba0bd
+    country_id: *me
+    network_id: *me_bijelo_polje_region
+  - id: 62610
+    prefix: '38251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0aa317a6-e1b7-48a3-b41b-1a6649cc81eb
+    country_id: *me
+    network_id: *me_berane_region
+  - id: 71661
+    prefix: '38252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 02f35ea2-759b-4c94-a041-de135891f45b
+    country_id: *me
+    network_id: *me_pljevlja_region
+  - id: 198398
+    prefix: '38278'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dbff1372-5606-4d72-9540-dcefa92224c6
+    country_id: *me
+    network_id: *me_voip_region
+  - id: 267142
+    prefix: '38220'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 232c83ff-4f83-4b47-abf8-5bc77cd41b60
+    country_id: *me
+    network_id: *me_podgorica_region
+  - id: 309471
+    prefix: '38230'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7a3327bf-dff6-4a45-8743-da494da7cd71
+    country_id: *me
+    network_id: *me_bar_region
+  - id: 321175
+    prefix: '38231'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1535fddd-c5ef-4c27-aba0-b8f4c108fbd8
+    country_id: *me
+    network_id: *me_herceg_novi_region
+  - id: 327282
+    prefix: '38232'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 161733e3-97aa-438f-aeb7-dbb4e14c0719
+    country_id: *me
+    network_id: *me_kotor_region
+  - id: 337287
+    prefix: '38233'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9cf181b8-373a-4e88-916e-425f69833776
+    country_id: *me
+    network_id: *me_budva_region
+  - id: 349894
+    prefix: '38240'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 02968f42-d736-48bf-83cb-3738e057fb5c
+    country_id: *me
+    network_id: *me_niksic_region
+  - id: 362530
+    prefix: '38241'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b5d4ad1-c563-4793-92a1-4cca34d495d6
+    country_id: *me
+    network_id: *me_cetinje_region
+# Mobile Prefixes
+  - id: 95216
+    prefix: '38260'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b64895ba-4d3d-4be0-9cff-b4f6755a2f58
+    country_id: *me
+    network_id: *me_mtel_mobile
+  - id: 117832
+    prefix: '38263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc38793a-4712-4e2b-b58b-480b0147943b
+    country_id: *me
+    network_id: *me_one_mobile
+  - id: 138626
+    prefix: '38266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 976b1bcd-6eab-4b89-b930-d007d489590b
+    country_id: *me
+    network_id: *me_telekom_mobile
+  - id: 146819
+    prefix: '38268'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa6b918c-cd4f-430b-8439-253ab9535464
+    country_id: *me
+    network_id: *me_mtel_mobile
+  - id: 148662
+    prefix: '38269'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 10d679e9-8e30-43fa-a58d-b11ae3468d56
+    country_id: *me
+    network_id: *me_one_mobile
+  - id: 151424
+    prefix: '38267'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 17dfc18e-a789-4a63-b0d0-dfe565b1ec73
+    country_id: *me
+    network_id: *me_telekom_mobile
+  - id: 164118
+    prefix: '38271670'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c056935b-03e8-41c4-8bbf-d77d9bef529e
+    country_id: *me
+    network_id: *me_telekom_mobile
+  - id: 164119
+    prefix: '38271690'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 51efcd45-2024-49fa-b218-c69bd97b2d99
+    country_id: *me
+    network_id: *me_one_mobile
+# Supplementary services Prefixes
+  - id: 150238
+    prefix: '38270'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6817687f-c072-4dea-a437-00185844fe37
+    country_id: *me
+    network_id: *me_unique_number_services
+  - id: 163996
+    prefix: '38271'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 37750464-afc3-48a8-9d9a-cb4f61d9580d
+    country_id: *me
+    network_id: *me_machine_to_machine_m2m_services
+  - id: 192096
+    prefix: '38277'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28edeea8-f150-4412-bdc2-a3df9fca69dd
+    country_id: *me
+    network_id: *me_access_to_business_customers
+  - id: 207789
+    prefix: '38280'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9686e5c9-0eb0-4dcc-89aa-a5446d8edf96
+    country_id: *me
+    network_id: *me_freephone_services
+  - id: 212508
+    prefix: '38294'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8cad968f-9c30-4dc2-9780-c4e6e334e75a
+    country_id: *me
+    network_id: *me_premium_rate_services
+  - id: 215150
+    prefix: '38295'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ae427f0f-2a9b-4134-b01a-44ebb3608cc6
+    country_id: *me
+    network_id: *me_premium_rate_services
+  - id: 242449
+    prefix: '3821'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 5b291196-567c-4702-bc99-e1163dd25f1f
+    country_id: *me
+    network_id: *me_special_services
+  - id: 242683
+    prefix: '382116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: a7bcba5f-8838-4241-844d-0e9ad8152ab4
+    country_id: *me
+    network_id: *me_social_value_services
+  - id: 242730
+    prefix: '382118'
+    number_min_length: 7
+    number_max_length: 8
+    uuid: 344467ef-3439-4b4d-bf29-66324ca19d5d
+    country_id: *me
+    network_id: *me_directory_enquiry_services
+  - id: 422123
+    prefix: '38283'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 843cc3f7-065c-4efe-a454-36e3e5e4730b
+    country_id: *me
+    network_id: *me_shared_cost_services
+# Country code Prefixes
+  - id: 242056
+    prefix: '382'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 44ca4534-3dd9-4eb4-a48d-32371ca67458
+    country_id: *me
+    network_id: null

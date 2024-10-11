@@ -1,0 +1,771 @@
+country_id: &hr 256
+networks:
+# Fixed Networks
+  - id: &hr_koprivnica_krizevci_county_region 4196
+    name: HR Koprivnica Krizevci County Region
+    uuid: 8ddd5061-b7dc-4c8f-8e1c-1a0f4db2063e
+    type_id: 2
+  - id: &hr_krapina_zagorje_county_region 5022
+    name: HR Krapina Zagorje County Region
+    uuid: f68241b0-c95c-47cd-a154-33174eeac3c8
+    type_id: 2
+  - id: &hr_primorje_gorski_kotar_county_region 5634
+    name: HR Primorje Gorski Kotar County Region
+    uuid: aa6d56ad-864c-483f-9495-337d3fcfa394
+    type_id: 2
+  - id: &hr_istra_county_region 6633
+    name: HR Istra County Region
+    uuid: 768d7953-2b71-44f9-8509-0e6161e816b9
+    type_id: 2
+  - id: &hr_lika_senj_county_region 7564
+    name: HR Lika Senj County Region
+    uuid: 579ac083-8931-48c0-bc33-e4e64adf451d
+    type_id: 2
+  - id: &hr_zagreb_county_region 24787
+    name: HR Zagreb County Region
+    uuid: 123f4d50-5008-418d-86dc-e3d7c589c16c
+    type_id: 2
+  - id: &hr_dubrovnik_neretva_county_region 26707
+    name: HR Dubrovnik Neretva County Region
+    uuid: d3276ee5-c970-45a8-80c0-6621e38edd96
+    type_id: 2
+  - id: &hr_split_dalmatia_county_region 27334
+    name: HR Split Dalmatia County Region
+    uuid: 7f48c269-44c6-4c44-a9f0-07cfa480cc63
+    type_id: 2
+  - id: &hr_sibenik_knin_county_region 27811
+    name: HR Sibenik Knin County Region
+    uuid: a76f5f98-aa51-4e9d-9f32-8f9c66ebc738
+    type_id: 2
+  - id: &hr_zadar_county_region 28295
+    name: HR Zadar County Region
+    uuid: a097025a-ceab-49ad-8ec2-a406724d7cbf
+    type_id: 2
+  - id: &hr_osijek_baranja_county_region 31748
+    name: HR Osijek Baranja County Region
+    uuid: 000661ed-9cbd-40ad-8e2e-1ce780b11d6f
+    type_id: 2
+  - id: &hr_vukovar_srijem_county_region 31931
+    name: HR Vukovar Srijem County Region
+    uuid: edd29fa4-3e69-4df1-9ee9-766bb1f319b9
+    type_id: 2
+  - id: &hr_virovitica_podravina_county_region 32550
+    name: HR Virovitica Podravina County Region
+    uuid: f966c670-45a4-431a-a551-8d58a3a8064b
+    type_id: 2
+  - id: &hr_pozega_slavonia_county_region 32888
+    name: HR Pozega Slavonia County Region
+    uuid: 2c12391b-bbd1-4f02-80bf-dcca9590b27e
+    type_id: 2
+  - id: &hr_medimurje_county_region 34312
+    name: HR Medimurje County Region
+    uuid: 4a554be3-ca70-486f-877a-44235254f969
+    type_id: 2
+  - id: &hr_brod_posavina_county_region 34636
+    name: HR Brod Posavina County Region
+    uuid: ecb4e922-dd10-4980-9ad6-4b59530f259f
+    type_id: 2
+  - id: &hr_bjelovar_bilogora_county_region 36581
+    name: HR Bjelovar Bilogora County Region
+    uuid: 2e5287fc-78ad-491c-b28b-24d1113f445f
+    type_id: 2
+  - id: &hr_sisak_moslavina_county_region 36844
+    name: HR Sisak Moslavina County Region
+    uuid: a205f341-ba27-4be9-863e-a369b5110fd9
+    type_id: 2
+  - id: &hr_varazdin_county_region 37227
+    name: HR Varazdin County Region
+    uuid: 71c1981d-257e-469d-8cd6-504d3875a7d6
+    type_id: 2
+  - id: &hr_karlovac_county_region 38306
+    name: HR Karlovac County Region
+    uuid: 41fb094a-b6c7-411b-b269-adff526854d1
+    type_id: 2
+# Supplementary services Networks
+  - id: &hr_general_content_services 10527
+    name: HR General Content Services
+    uuid: 32d3a980-3c9b-4354-a38f-f5ae2a88f47b
+    type_id: 13
+  - id: &hr_humanitarian_services 11072
+    name: HR Humanitarian Services
+    uuid: 358a967a-4397-45e6-8563-001a85243477
+    type_id: 13
+  - id: &hr_televoting_services 11783
+    name: HR Televoting Services
+    uuid: 86cbf687-e11a-4c7d-896c-106895b31291
+    type_id: 13
+  - id: &hr_universal_access_number_uan 11974
+    name: HR Universal Access Number Uan
+    uuid: 3ca86fcd-8756-4a58-93d4-97c377d67a05
+    type_id: 13
+  - id: &hr_adults_entertainment_services 12717
+    name: HR Adults Entertainment Services
+    uuid: 4fc9f3c5-ad5a-4672-ac41-bca8ba062927
+    type_id: 13
+  - id: &hr_prize_games_services 13470
+    name: HR Prize Games Services
+    uuid: 3218f896-e0ce-47f1-a746-c319f5c487fb
+    type_id: 13
+  - id: &hr_children_entertainment_services 14297
+    name: HR Children Entertainment Services
+    uuid: 104214d1-1e49-442f-815d-80577324129e
+    type_id: 13
+  - id: &hr_personal_number_services 17622
+    name: HR Personal Number Services
+    uuid: e9396fdf-2f72-4928-a6b1-c9a55d0fb115
+    type_id: 13
+  - id: &hr_dial_up_internet_access 18166
+    name: HR Dial Up Internet Access
+    uuid: 3d1b177d-5eb0-48f6-98eb-c86a0fb81718
+    type_id: 13
+  - id: &hr_special_services 21415
+    name: HR Special Services
+    uuid: 2869771f-9176-4a14-97f6-69a621a811a4
+    type_id: 13
+  - id: &hr_emergency_services 21587
+    name: HR Emergency Services
+    uuid: a17a12d3-8bc8-4328-9621-d320baf02392
+    type_id: 13
+  - id: &hr_social_value_services 21632
+    name: HR Social Value Services
+    uuid: 28863f58-b259-4466-af2a-a7c8a2789d6e
+    type_id: 13
+  - id: &hr_directory_enquiry_service 21676
+    name: HR Directory Enquiry Service
+    uuid: 7497980f-bf22-4149-850d-5b38b5ee9f83
+    type_id: 13
+  - id: &hr_payment_services 21737
+    name: HR Payment Services
+    uuid: 7bf4b00e-5338-49df-a42c-9676279389db
+    type_id: 13
+  - id: &hr_customer_care_services 21743
+    name: HR Customer Care Services
+    uuid: 24fffc95-2984-4441-8cf2-ab35fe9c4f1b
+    type_id: 13
+  - id: &hr_sms_activation_services 21759
+    name: HR Sms Activation Services
+    uuid: f58ba538-2362-40bb-8472-3c335f83b629
+    type_id: 13
+  - id: &hr_sms_mms_services 22536
+    name: HR Sms_Mms Services
+    uuid: 63819e8c-df89-4c8d-959e-a2b0d1975493
+    type_id: 13
+  - id: &hr_sms_mms_services_prize_games 22555
+    name: HR Sms_Mms Services Prize Games
+    uuid: f2e11eb8-e2b8-43f5-a60e-c2b6257a0dd8
+    type_id: 13
+  - id: &hr_sms_mms_services_adults_entertainment 23471
+    name: HR Sms_Mms Services Adults Entertainment
+    uuid: 93a28f3b-33e3-43a2-a539-2f1d23d80407
+    type_id: 13
+  - id: &hr_sms_mms_services_payment_services 23570
+    name: HR Sms_Mms Services Payment Services
+    uuid: 5ab7cb3e-0c50-4497-9e15-ce9eea2ae6e5
+    type_id: 13
+  - id: &hr_sms_mms_services_free 23842
+    name: HR Sms_Mms Services Free
+    uuid: 0e9cec1b-770a-4a36-afc4-bdc5d2a30be3
+    type_id: 13
+  - id: &hr_sms_mms_services_customer_services 23924
+    name: HR Sms_Mms Services Customer Services
+    uuid: 4892cb7b-b456-4abd-9259-8f2af19c8c39
+    type_id: 13
+  - id: &hr_sms_mms_services_entertainment 24058
+    name: HR Sms_Mms Services Entertainment
+    uuid: bc98f832-dce3-40c8-9e72-5b97152bbb14
+    type_id: 13
+  - id: &hr_sms_mms_services_adults_chat 24335
+    name: HR Sms_Mms Services Adults Chat
+    uuid: c8f3330a-c5e6-4cfb-807b-2878c681758e
+    type_id: 13
+  - id: &hr_sms_mms_services_chat 26056
+    name: HR Sms_Mms Services Chat
+    uuid: e213b11d-bb9c-451b-ab54-a789a63e594d
+    type_id: 13
+  - id: &hr_freephone_services 38497
+    name: HR Freephone Services
+    uuid: f21aa3ad-a2f3-41ae-b3e4-055a650944e9
+    type_id: 13
+  - id: &hr_calling_card_services 38533
+    name: HR Calling Card Services
+    uuid: f206a24b-9b5c-4723-86d5-0505d0012d1d
+    type_id: 13
+  - id: &hr_machine_to_machine_m2m_services 41986
+    name: HR Machine To Machine M2M Services
+    uuid: 38937b85-3d80-4c00-9fbe-4d73268f7c49
+    type_id: 13
+# Mobile Networks
+  - id: &hr_telemach_mobile 20269
+    name: HR Telemach Mobile
+    uuid: db06d030-1cc4-4a6a-b06a-a9fb56c31a23
+    type_id: 3
+  - id: &hr_telekom_mobile 20678
+    name: HR Telekom Mobile
+    uuid: f72a1823-ee33-4c5c-9d46-7b8ba1e7bcc4
+    type_id: 3
+  - id: &hr_tele_focus_mobile 20836
+    name: HR Tele Focus Mobile
+    uuid: baf3a721-a492-4298-a6d5-517805a02f82
+    type_id: 3
+  - id: &hr_a1_mobile 41985
+    name: HR A1 Mobile
+    uuid: 69006554-8f4d-46c8-860c-eea4d690022a
+    type_id: 3
+network_prefixes:
+# Fixed Prefixes
+  - id: 51609
+    prefix: '38548'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 54cf8c6a-df2f-4f39-be1e-3094a4c96248
+    country_id: *hr
+    network_id: *hr_koprivnica_krizevci_county_region
+  - id: 58226
+    prefix: '38549'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 8704a402-1777-447b-a8cd-a588c687cf61
+    country_id: *hr
+    network_id: *hr_krapina_zagorje_county_region
+  - id: 62601
+    prefix: '38551'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6d8df4c3-b5da-4419-ab27-e8b8f9a03e2e
+    country_id: *hr
+    network_id: *hr_primorje_gorski_kotar_county_region
+  - id: 71651
+    prefix: '38552'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 8440fff3-e30e-4f50-9cba-7a841057c33b
+    country_id: *hr
+    network_id: *hr_istra_county_region
+  - id: 76539
+    prefix: '38553'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 0e781960-a619-4907-94b3-67bc53bee977
+    country_id: *hr
+    network_id: *hr_lika_senj_county_region
+  - id: 258561
+    prefix: '3851'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d1529d9c-a3fa-412c-b9a1-2ff475b8638c
+    country_id: *hr
+    network_id: *hr_zagreb_county_region
+  - id: 267135
+    prefix: '38520'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: a0b73f4d-c52f-45d8-8667-ec37d40d3b9e
+    country_id: *hr
+    network_id: *hr_dubrovnik_neretva_county_region
+  - id: 274227
+    prefix: '38521'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: f5dac789-10a6-4f1f-92a7-6e5667ac9c0f
+    country_id: *hr
+    network_id: *hr_split_dalmatia_county_region
+  - id: 277992
+    prefix: '38522'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 789bab44-762c-4abf-af26-3e21d81d1574
+    country_id: *hr
+    network_id: *hr_sibenik_knin_county_region
+  - id: 286625
+    prefix: '38523'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 4e0d4952-a622-43da-874c-1ed74954f5fe
+    country_id: *hr
+    network_id: *hr_zadar_county_region
+  - id: 321165
+    prefix: '38531'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 3ba5a9f9-be25-48e1-b6fd-d302ee9daef5
+    country_id: *hr
+    network_id: *hr_osijek_baranja_county_region
+  - id: 327273
+    prefix: '38532'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6acd3f48-d6b2-40fc-89e9-39af133b90fd
+    country_id: *hr
+    network_id: *hr_vukovar_srijem_county_region
+  - id: 337277
+    prefix: '38533'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 17b8db90-96c4-4b4d-a2ee-afbb551f5a50
+    country_id: *hr
+    network_id: *hr_virovitica_podravina_county_region
+  - id: 340470
+    prefix: '38534'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 2698f4bc-d92f-4e3d-9e35-004edca30c1b
+    country_id: *hr
+    network_id: *hr_pozega_slavonia_county_region
+  - id: 349889
+    prefix: '38540'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: b6232d3a-4489-4c8e-894f-1c8ff3f43832
+    country_id: *hr
+    network_id: *hr_medimurje_county_region
+  - id: 352234
+    prefix: '38535'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 56bd1d88-9bd6-4113-bad8-fd1117b1a9a3
+    country_id: *hr
+    network_id: *hr_brod_posavina_county_region
+  - id: 367934
+    prefix: '38543'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 5a75cc41-d5a8-4738-9105-5ca31470b144
+    country_id: *hr
+    network_id: *hr_bjelovar_bilogora_county_region
+  - id: 370183
+    prefix: '38544'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 3dfea3ec-f8b6-4d07-adca-90446c4f86c2
+    country_id: *hr
+    network_id: *hr_sisak_moslavina_county_region
+  - id: 377174
+    prefix: '38542'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6a64cdb1-d69b-4783-a474-598ada9b3a62
+    country_id: *hr
+    network_id: *hr_varazdin_county_region
+  - id: 399478
+    prefix: '38547'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6ec01c62-3aa4-424f-afd8-7a55270bf4f9
+    country_id: *hr
+    network_id: *hr_karlovac_county_region
+# Supplementary services Prefixes
+  - id: 95208
+    prefix: '38560'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 3e7524fd-e810-43e2-9be5-4e19ae20add6
+    country_id: *hr
+    network_id: *hr_general_content_services
+  - id: 98852
+    prefix: '385609'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 49bf31c4-6382-4b0f-adc9-12f8b83c86e1
+    country_id: *hr
+    network_id: *hr_humanitarian_services
+  - id: 108578
+    prefix: '38561'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 4949bad9-8a94-40f1-b361-0ef15d21df3e
+    country_id: *hr
+    network_id: *hr_televoting_services
+  - id: 111461
+    prefix: '38562'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb164468-f835-4695-9355-0deb0051e28a
+    country_id: *hr
+    network_id: *hr_universal_access_number_uan
+  - id: 122431
+    prefix: '38564'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ceaa6ade-b27e-41ee-a271-9542d2a1bdae
+    country_id: *hr
+    network_id: *hr_adults_entertainment_services
+  - id: 135911
+    prefix: '38565'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a99c08bc-726b-4f2f-b994-a4ea56307cba
+    country_id: *hr
+    network_id: *hr_prize_games_services
+  - id: 148656
+    prefix: '38569'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 44212d15-3257-4008-ac91-050f495b0c9b
+    country_id: *hr
+    network_id: *hr_children_entertainment_services
+  - id: 172524
+    prefix: '38572'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0478203a-48fd-47d5-a3bd-53210f035634
+    country_id: *hr
+    network_id: *hr_universal_access_number_uan
+  - id: 182860
+    prefix: '38574'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 54eb24d3-ba02-4108-af80-7ae33c5aa0b9
+    country_id: *hr
+    network_id: *hr_personal_number_services
+  - id: 185870
+    prefix: '38575'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e9925893-66fe-4f3f-b285-45f82172e76d
+    country_id: *hr
+    network_id: *hr_personal_number_services
+  - id: 187982
+    prefix: '38576'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 44d4c335-81bb-490a-8901-10417fc942c7
+    country_id: *hr
+    network_id: *hr_dial_up_internet_access
+  - id: 192086
+    prefix: '38577'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4f72271b-b626-48bd-adb6-a7e1c01ba365
+    country_id: *hr
+    network_id: *hr_dial_up_internet_access
+  - id: 242412
+    prefix: '3851'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 5904a678-45b2-4717-8d7e-113ebfb16d15
+    country_id: *hr
+    network_id: *hr_special_services
+  - id: 242620
+    prefix: '385112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 840c2609-8b3e-44dd-ba60-651c4b2e6cdd
+    country_id: *hr
+    network_id: *hr_emergency_services
+  - id: 242672
+    prefix: '385116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: d6e8562d-a556-4fa0-a5f7-450e3f7c8b2c
+    country_id: *hr
+    network_id: *hr_social_value_services
+  - id: 242721
+    prefix: '385118'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: dd272795-6073-4f04-9258-4d752ded8efd
+    country_id: *hr
+    network_id: *hr_directory_enquiry_service
+  - id: 242839
+    prefix: '385129'
+    number_min_length: 7
+    number_max_length: 8
+    uuid: 6599f6a3-581f-42df-af6f-0a0cdb20a192
+    country_id: *hr
+    network_id: *hr_payment_services
+  - id: 242851
+    prefix: '38513'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 82e35dd8-1533-4392-9da5-74c1945761d9
+    country_id: *hr
+    network_id: *hr_customer_care_services
+  - id: 242875
+    prefix: '385133'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 6e38f520-1c43-4bb5-bda5-52e5fab16e17
+    country_id: *hr
+    network_id: *hr_sms_activation_services
+  - id: 245398
+    prefix: '3856'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: fbe9c139-35f9-4780-ab8e-156593b2bbf2
+    country_id: *hr
+    network_id: *hr_sms_mms_services
+  - id: 245435
+    prefix: '38560'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b9a37a8d-9ac3-4541-88c1-4e7afa03873f
+    country_id: *hr
+    network_id: *hr_sms_mms_services_prize_games
+  - id: 247337
+    prefix: '38519'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 3e2ad8a8-8ef2-402f-a215-308eb58df14f
+    country_id: *hr
+    network_id: *hr_emergency_services
+  - id: 251024
+    prefix: '38564'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 15206b71-57b3-4146-b9dd-6f62606e135e
+    country_id: *hr
+    network_id: *hr_sms_mms_services_adults_entertainment
+  - id: 251239
+    prefix: '38565'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: b0f0f5fb-3a80-49e7-bf10-f4a50e77f8f5
+    country_id: *hr
+    network_id: *hr_sms_mms_services_prize_games
+  - id: 251739
+    prefix: '38571'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 182e4f8c-8bc2-4114-9dc4-572136e5e33b
+    country_id: *hr
+    network_id: *hr_sms_mms_services_payment_services
+  - id: 253081
+    prefix: '3858'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 5fa40393-abac-43cc-99b3-294e66f89c66
+    country_id: *hr
+    network_id: *hr_sms_mms_services
+  - id: 253155
+    prefix: '385800'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: e8695119-9c2b-4d67-bc5f-684b30d33b78
+    country_id: *hr
+    network_id: *hr_sms_mms_services_free
+  - id: 253320
+    prefix: '38581'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 79b4f4d6-fa62-4b6d-bb16-78e0f7cfdb8b
+    country_id: *hr
+    network_id: *hr_sms_mms_services_customer_services
+  - id: 253718
+    prefix: '38584'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 39c83214-3243-46be-a430-1dd760566828
+    country_id: *hr
+    network_id: *hr_sms_mms_services_adults_entertainment
+  - id: 253985
+    prefix: '38561'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: cfb69694-fad1-4ef0-a0b4-ddffc01e3f8f
+    country_id: *hr
+    network_id: *hr_sms_mms_services_customer_services
+  - id: 254291
+    prefix: '38566'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: dca07252-5cea-448d-b68b-70340b6c31e0
+    country_id: *hr
+    network_id: *hr_sms_mms_services_entertainment
+  - id: 255254
+    prefix: '3857'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 38e6ac60-68f6-4299-8e88-5dd52c272974
+    country_id: *hr
+    network_id: *hr_sms_mms_services
+  - id: 255297
+    prefix: '38570'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 45eeaeb3-6060-42b0-8fbe-1ca2fde3253e
+    country_id: *hr
+    network_id: *hr_sms_mms_services_payment_services
+  - id: 256839
+    prefix: '38588'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 477f2cb0-f1f4-4da3-8e5b-aaa5daadf5aa
+    country_id: *hr
+    network_id: *hr_sms_mms_services_adults_chat
+  - id: 263705
+    prefix: '38585'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 85fa416d-2804-445f-9a81-3488f678bb95
+    country_id: *hr
+    network_id: *hr_sms_mms_services_chat
+  - id: 263852
+    prefix: '38586'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 386199c5-65b6-4a70-8db9-f33bd81d2141
+    country_id: *hr
+    network_id: *hr_sms_mms_services_entertainment
+  - id: 403472
+    prefix: '385800'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 76673283-bb85-44f5-8e8d-252745d212ea
+    country_id: *hr
+    network_id: *hr_freephone_services
+  - id: 403516
+    prefix: '385801'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 174dd682-b814-4cd9-8ff4-088ec943520c
+    country_id: *hr
+    network_id: *hr_calling_card_services
+  - id: 451770
+    prefix: '385890'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3c58c6b1-c7f6-407e-b36b-e78bed264a7d
+    country_id: *hr
+    network_id: *hr_machine_to_machine_m2m_services
+  - id: 451908
+    prefix: '385891'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 9d1647f6-cec9-4a9b-a52e-8a5c8bd75135
+    country_id: *hr
+    network_id: *hr_machine_to_machine_m2m_services
+  - id: 451945
+    prefix: '385892'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 6a0cdd26-d259-4f95-baf0-851999ea133a
+    country_id: *hr
+    network_id: *hr_machine_to_machine_m2m_services
+  - id: 451959
+    prefix: '385893'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8d353d39-4a04-4287-a56c-60d24829db59
+    country_id: *hr
+    network_id: *hr_machine_to_machine_m2m_services
+  - id: 452239
+    prefix: '385894'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 93e29a22-3914-4c92-a2ab-db2d75ee6a21
+    country_id: *hr
+    network_id: *hr_machine_to_machine_m2m_services
+# Mobile Prefixes
+  - id: 215142
+    prefix: '38595'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5b2ff838-1942-4203-813c-83cc79d0cbb9
+    country_id: *hr
+    network_id: *hr_telemach_mobile
+  - id: 229462
+    prefix: '385970'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d30e910e-d123-4629-9d64-326c9cc303c4
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 231184
+    prefix: '385979'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7c3018f3-1ba8-4740-bbd9-560e67a3052d
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 231732
+    prefix: '38598'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 7b2b2816-1380-4ffe-8166-30b2701a9576
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 233342
+    prefix: '3859751'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ef7ee92b-c1de-4e78-b950-d4bc9f9da33b
+    country_id: *hr
+    network_id: *hr_tele_focus_mobile
+  - id: 233344
+    prefix: '385976'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f39a6d5f-ae3c-4fa7-aebd-e8fc18c89c49
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 233355
+    prefix: '385977'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eb39d383-bd28-44d8-977b-789de936db0e
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 239368
+    prefix: '38599'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cf99caa2-751c-46ad-a3b1-a80207c42957
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 451765
+    prefix: '38589000'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 316284d0-ca67-4055-9558-5d8543cdd412
+    country_id: *hr
+    network_id: *hr_telemach_mobile
+  - id: 451766
+    prefix: '38589091'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: acce8a47-6716-477d-8ca6-9a2220c7ee22
+    country_id: *hr
+    network_id: *hr_a1_mobile
+  - id: 451767
+    prefix: '38589097'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ccd5f967-4870-4548-b551-0b418be720dd
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 451768
+    prefix: '38589098'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e00bdd00-2144-415f-9f77-7fe1d04d6e3a
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 451769
+    prefix: '38589099'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a54e2ac7-cfc5-4772-90ed-72743bd8e200
+    country_id: *hr
+    network_id: *hr_telekom_mobile
+  - id: 458142
+    prefix: '38591'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2e5ae3c2-2d89-48db-9fad-182347a26944
+    country_id: *hr
+    network_id: *hr_a1_mobile
+  - id: 468945
+    prefix: '38592'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dad38aa7-4525-4591-8ff3-16a5ebc704d4
+    country_id: *hr
+    network_id: *hr_a1_mobile
+# Country code Prefixes
+  - id: 242014
+    prefix: '385'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 44df9c13-014b-4326-8191-2819ffa8580a
+    country_id: *hr
+    network_id: null

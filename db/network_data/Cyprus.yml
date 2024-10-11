@@ -1,0 +1,512 @@
+country_id: &cy 56
+networks:
+# Supplementary services Networks
+  - id: &cy_sms_mms_services 21387
+    name: CY Sms_Mms Services
+    uuid: 84abdfb1-e62e-4781-a0bf-1d031aac19d7
+    type_id: 13
+  - id: &cy_special_services 21560
+    name: CY Special Services
+    uuid: a4df34ed-40bf-4bb7-9fbf-8323dc13ff98
+    type_id: 13
+  - id: &cy_social_value_services 21622
+    name: CY Social Value Services
+    uuid: 3181e1ef-83be-4d9e-88c8-244341c5829f
+    type_id: 13
+  - id: &cy_inquiry_services 21668
+    name: CY Inquiry Services
+    uuid: 622e80ab-b9ea-4d01-91eb-9554ed958925
+    type_id: 13
+  - id: &cy_virtual_private_network_corporate_networks 23318
+    name: CY Virtual Private Network Corporate Networks
+    uuid: ad8bec52-8c3d-4982-8c11-d2464995661a
+    type_id: 13
+  - id: &cy_intelligent_network_services 23566
+    name: CY Intelligent Network Services
+    uuid: 6c2603db-c8d0-4061-b1d4-fd031025634a
+    type_id: 13
+  - id: &cy_shared_cost_services 23812
+    name: CY Shared Cost Services
+    uuid: df2234e4-06ac-4240-8e45-76b938762ca6
+    type_id: 13
+  - id: &cy_freephone_services 23833
+    name: CY Freephone Services
+    uuid: 288aacc2-5d3a-4c95-881c-9d6e87b36da1
+    type_id: 13
+  - id: &cy_internet_services 23913
+    name: CY Internet Services
+    uuid: a53f16c4-6ce4-434b-ba88-2c74040764da
+    type_id: 13
+  - id: &cy_personal_number_services 24172
+    name: CY Personal Number Services
+    uuid: 426d8da1-f470-46c7-b532-7ac878a5b866
+    type_id: 13
+  - id: &cy_universal_access_services 24218
+    name: CY Universal Access Services
+    uuid: 9732fc87-3b72-4587-b437-b17b686ad8a0
+    type_id: 13
+  - id: &cy_premium_rate_services 24418
+    name: CY Premium Rate Services
+    uuid: c8c2f757-e22d-43d0-a281-f5a98340bf3c
+    type_id: 13
+  - id: &cy_entertainment_services 24433
+    name: CY Entertainment Services
+    uuid: 4764c07d-e578-4969-84d1-115c698eb290
+    type_id: 13
+  - id: &cy_business_informational_or_non_profit_services 24473
+    name: CY Business Informational Or Non Profit Services
+    uuid: 165aa03a-b8fa-4eaf-a4cc-ee9906fc6daa
+    type_id: 13
+# Mobile Networks
+  - id: &cy_epic_mobile 21726
+    name: CY Epic Mobile
+    uuid: 0e8a5518-406c-443a-aeab-9deba2f48b04
+    type_id: 3
+  - id: &cy_primetel_mobile_mobile 21729
+    name: CY Primetel Mobile Mobile
+    uuid: 18e31da8-9f5e-4351-81ac-3280ee453cf7
+    type_id: 3
+  - id: &cy_cablenet_mobile_mobile 21731
+    name: CY Cablenet Mobile Mobile
+    uuid: 909c0f84-c552-4efe-901d-76193f4ccce3
+    type_id: 3
+  - id: &cy_cytamobile_vodafone_mobile 21732
+    name: CY Cytamobile Vodafone Mobile
+    uuid: c1a3b766-10ca-4fd4-9233-14a7f65cd016
+    type_id: 3
+# Fixed Networks
+  - id: &cy_voice_mail_region 21730
+    name: CY Voice Mail Region
+    uuid: f2d6dfad-d4a0-4c0a-a405-b4767a1e1d9b
+    type_id: 2
+  - id: &cy_nicosia_region 22837
+    name: CY Nicosia Region
+    uuid: abf6d82d-0ed2-4c7f-accc-47cc93cf2f27
+    type_id: 2
+  - id: &cy_famagusta_region 22906
+    name: CY Famagusta Region
+    uuid: 173dec60-2d10-4711-a193-43bba538f4c4
+    type_id: 2
+  - id: &cy_larnaca_region 22968
+    name: CY Larnaca Region
+    uuid: c9d178b1-5d26-4cd0-84d1-9fa6fb18473d
+    type_id: 2
+  - id: &cy_limassol_region 23006
+    name: CY Limassol Region
+    uuid: 796e8b57-8852-44c2-8938-95b24556f7eb
+    type_id: 2
+  - id: &cy_paphos_region 23080
+    name: CY Paphos Region
+    uuid: 4aa1fa52-f349-4f1c-9f81-d8b7115e61bd
+    type_id: 2
+network_prefixes:
+# Country code Prefixes
+  - id: 241978
+    prefix: '357'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: bd2f0731-e57c-4bdb-b545-73f249f62ead
+    country_id: *cy
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242382
+    prefix: '3571'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 8aa89d28-ebdb-48de-b84e-0b3b4a9c5e4b
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 242585
+    prefix: '35711'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: bfd4a545-d0f9-440e-887b-85383b445016
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 242661
+    prefix: '357116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: b67f3aaa-d6bf-46c0-ad0e-5cc7e5586371
+    country_id: *cy
+    network_id: *cy_social_value_services
+  - id: 242713
+    prefix: '357118'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 2abe7911-384f-475e-b1ec-3c1ccbe4713f
+    country_id: *cy
+    network_id: *cy_inquiry_services
+  - id: 242798
+    prefix: '35712'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: a0da2ba7-da2f-427d-86b4-97862c279782
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 242845
+    prefix: '35713'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 82470244-b6bb-4303-9815-b2603a460014
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 242891
+    prefix: '35714'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 7b13871f-2179-4c5d-bf51-7990ed3bc5dd
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 242932
+    prefix: '35715'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 3ae60249-269a-47a9-8d89-09916ba3f5f4
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 243010
+    prefix: '35716'
+    number_min_length: 7
+    number_max_length: 9
+    uuid: 916dfc02-ea4e-4b1c-a8eb-7ab59351aa34
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 243051
+    prefix: '35717'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9027308a-7674-4975-9528-0d97a3bbc2bc
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 243929
+    prefix: '3574'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 5c3f121a-ee07-46d3-b18e-5ed1fc569946
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 245381
+    prefix: '3576'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 76f8a8ac-fc02-4a9d-b04a-7331e985899b
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 247269
+    prefix: '35718'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: fd3b4d0a-ec15-4b2a-834c-8a19c88a6037
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 247333
+    prefix: '35719'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: a6925519-0643-4c01-b06a-3faffcecf030
+    country_id: *cy
+    network_id: *cy_special_services
+  - id: 247398
+    prefix: '3572'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: bb59360d-097c-4a80-ad4b-ae805bc867e6
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 248891
+    prefix: '3573'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 5fd7a645-5c1f-4345-8bd2-d16ed990ce6b
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 249568
+    prefix: '3575'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 34db0dc6-a60d-4362-9ecd-016cccbba088
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 249617
+    prefix: '35750'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a954819c-ca01-43f3-99e5-26ccc1f67b7c
+    country_id: *cy
+    network_id: *cy_virtual_private_network_corporate_networks
+  - id: 251732
+    prefix: '35771'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7ca65c70-75f0-4a9b-87c3-b6b2c32dd4c1
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 251818
+    prefix: '35772'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8a532576-46ba-4321-bba4-67fe1d9c9545
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 251870
+    prefix: '35773'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 629dccd2-ae58-44c2-abc7-f774da84d5d9
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 252053
+    prefix: '35774'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3fb387bc-4acf-4c7c-82c2-174e3b731885
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 252545
+    prefix: '35775'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 003fc14d-3296-4031-b31f-361e68976349
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 253066
+    prefix: '3578'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: bc605c64-a0ad-462d-837f-9776112cc3b0
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 253119
+    prefix: '35780'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9177e52f-162b-4020-a8c9-673a15a99de2
+    country_id: *cy
+    network_id: *cy_shared_cost_services
+  - id: 253143
+    prefix: '357800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 76cb7397-3f70-4043-8ad5-966e4506fd47
+    country_id: *cy
+    network_id: *cy_freephone_services
+  - id: 253301
+    prefix: '35780901'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1bea1af8-cbf5-475c-b408-515116c10f54
+    country_id: *cy
+    network_id: *cy_internet_services
+  - id: 253302
+    prefix: '35780902'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: df0ee08a-a8a4-4f31-9e5c-67c1529336c2
+    country_id: *cy
+    network_id: *cy_internet_services
+  - id: 255243
+    prefix: '3577'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 3c26bc70-1323-473f-a738-04a5fe3cde8b
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 255313
+    prefix: '357700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 353bfe8e-af3f-4e98-89f0-1bc5cc007c73
+    country_id: *cy
+    network_id: *cy_personal_number_services
+  - id: 255444
+    prefix: '35776'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58136747-5c4c-4c15-a434-d6c462d550d9
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 255622
+    prefix: '35777'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5027e797-5356-4ee2-a5d7-3152e8b29e40
+    country_id: *cy
+    network_id: *cy_universal_access_services
+  - id: 256082
+    prefix: '35778'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6cb985ba-d24f-4cc7-b0c7-4e9ff03ca909
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 256381
+    prefix: '35779'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e8a55fd-7219-4ab3-974f-b0204a9e58af
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 257089
+    prefix: '3579'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 50befe0f-cc5c-47c8-9bc9-88f08e301b22
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 257154
+    prefix: '35790'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 97ce9843-c6bd-4fb2-af55-01ffa40ae7c3
+    country_id: *cy
+    network_id: *cy_premium_rate_services
+  - id: 257174
+    prefix: '357900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0570b5f-5fc9-48d9-b8d7-9a83675e85fc
+    country_id: *cy
+    network_id: *cy_entertainment_services
+  - id: 257339
+    prefix: '357909'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 732210a6-b4e3-4e9d-92e9-9e91bbd89d96
+    country_id: *cy
+    network_id: *cy_business_informational_or_non_profit_services
+  - id: 257352
+    prefix: '35790902'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5c67f191-0772-4215-9dce-31ffa6cd0f55
+    country_id: *cy
+    network_id: *cy_internet_services
+# Mobile Prefixes
+  - id: 242823
+    prefix: '35712196'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 54264047-a216-45a5-a7e5-b64a93280af3
+    country_id: *cy
+    network_id: *cy_epic_mobile
+  - id: 242827
+    prefix: '35712295'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b0c72e35-3bd5-416a-ac60-e563c8e10ec9
+    country_id: *cy
+    network_id: *cy_primetel_mobile_mobile
+  - id: 242830
+    prefix: '357123940'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 2f9b1da9-d7e8-442d-87f9-38438c6f6e33
+    country_id: *cy
+    network_id: *cy_cablenet_mobile_mobile
+  - id: 242831
+    prefix: '35712397'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 7ffff661-ecbe-4138-a976-67891a3ffdc9
+    country_id: *cy
+    network_id: *cy_cytamobile_vodafone_mobile
+  - id: 242832
+    prefix: '35712399'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 5a135e44-a3e0-4368-a7bd-0de91495a5c7
+    country_id: *cy
+    network_id: *cy_cytamobile_vodafone_mobile
+  - id: 258178
+    prefix: '35799'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3cfefc5b-2a5e-41fe-bc8f-3f1171b54bf3
+    country_id: *cy
+    network_id: *cy_cytamobile_vodafone_mobile
+  - id: 264205
+    prefix: '357940'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7047bb58-644f-480c-a5ac-7bda8443c023
+    country_id: *cy
+    network_id: *cy_cablenet_mobile_mobile
+  - id: 264240
+    prefix: '357942'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 26c5b833-f03c-445d-b056-302fe08fe55a
+    country_id: *cy
+    network_id: *cy_epic_mobile
+  - id: 264278
+    prefix: '357944'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 53ff052d-7ac8-499a-b008-428727d1c9ba
+    country_id: *cy
+    network_id: *cy_cablenet_mobile_mobile
+  - id: 264435
+    prefix: '35795'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4177f1af-8387-4212-94d4-8f6377ea7c09
+    country_id: *cy
+    network_id: *cy_primetel_mobile_mobile
+  - id: 264712
+    prefix: '35796'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e08e791-a8cc-42e9-8552-1ab2a82bee8a
+    country_id: *cy
+    network_id: *cy_epic_mobile
+  - id: 264996
+    prefix: '35797'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1926c0c4-53df-4e5f-bca2-0d3d502c5418
+    country_id: *cy
+    network_id: *cy_cytamobile_vodafone_mobile
+# Fixed Prefixes
+  - id: 242829
+    prefix: '3571232'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b9f6fcd9-abd6-4129-bdb4-87c271659e43
+    country_id: *cy
+    network_id: *cy_voice_mail_region
+  - id: 247720
+    prefix: '35722'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ea54036-c486-4e98-aa7f-26eeb5ed35bd
+    country_id: *cy
+    network_id: *cy_nicosia_region
+  - id: 247914
+    prefix: '35723'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bb23f542-99d1-4242-b0b3-d4d7af6f19b6
+    country_id: *cy
+    network_id: *cy_famagusta_region
+  - id: 248108
+    prefix: '35724'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 42154598-891b-4c4d-88a7-d240729faa9d
+    country_id: *cy
+    network_id: *cy_larnaca_region
+  - id: 248254
+    prefix: '35725'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 585f06f3-8e1f-4c08-80a5-acc2b1b0da90
+    country_id: *cy
+    network_id: *cy_limassol_region
+  - id: 248468
+    prefix: '35726'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd177dc5-8259-4a7b-99ff-9fe62c208bd5
+    country_id: *cy
+    network_id: *cy_paphos_region

@@ -1,0 +1,136 @@
+country_id: &gq 65
+networks:
+# Supplementary services Networks
+  - id: &gq_emergency_services 21409
+    name: GQ Emergency Services
+    uuid: d63ff632-e7f4-4dce-a9ed-a095314edb94
+    type_id: 13
+  - id: &gq_information_services 21410
+    name: GQ Information Services
+    uuid: a952b4ba-fe0b-47b9-b42e-b02a8a08ba63
+    type_id: 13
+  - id: &gq_value_added_services 23793
+    name: GQ Value Added Services
+    uuid: 719afa7a-9de3-49bc-a488-aab02455cee3
+    type_id: 13
+# Fixed Networks
+  - id: &gq_centro_sur_kie_ntem_wele_nzas_region 21970
+    name: GQ Centro Sur Kie Ntem Wele Nzas Region
+    uuid: 6e7dd4a8-1db1-486f-97e1-02605054e39e
+    type_id: 2
+  - id: &gq_annobon_litoral_region 21971
+    name: GQ Annobon Litoral Region
+    uuid: cc428d61-1f3d-4a33-9a0b-7575a99ca107
+    type_id: 2
+  - id: &gq_bioko_island_region 21972
+    name: GQ Bioko Island Region
+    uuid: 9e59d173-216a-45fe-86c9-57fe62a59e1f
+    type_id: 2
+  - id: &gq_fixed 23205
+    name: GQ Fixed
+    uuid: 91a98534-330f-46a5-8f08-14b9fad16f68
+    type_id: 2
+# Satellite Networks
+  - id: &gq_gecomsa_satellite 22534
+    name: GQ Gecomsa Satellite
+    uuid: b47e374c-7f29-43b3-a365-a8e2e9ea5c15
+    type_id: 15
+# Mobile Networks
+  - id: &gq_getesa_mobile 22714
+    name: GQ Getesa Mobile
+    uuid: 75d685f9-f1a3-4f5d-aa58-dbb4fea92b97
+    type_id: 3
+  - id: &gq_muni_mobile 23303
+    name: GQ Muni Mobile
+    uuid: 8018574a-9094-4a9b-a961-ac263796b31c
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242006
+    prefix: '240'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 978179be-7a66-4af4-9daf-90a45fa33b34
+    country_id: *gq
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242405
+    prefix: '2401'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 900fb829-df34-4671-aade-85a83db773b5
+    country_id: *gq
+    network_id: *gq_emergency_services
+  - id: 242406
+    prefix: '2401'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 02566504-bfa7-497a-994a-d8a19ceaa5e1
+    country_id: *gq
+    network_id: *gq_information_services
+  - id: 253079
+    prefix: '2408'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9d3ac661-b255-497a-a99a-0a2ae3a08439
+    country_id: *gq
+    network_id: *gq_value_added_services
+  - id: 257101
+    prefix: '2409'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a0de6901-5a9e-4c94-ab24-8d9e12bde023
+    country_id: *gq
+    network_id: *gq_value_added_services
+# Fixed Prefixes
+  - id: 243440
+    prefix: '24033307'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fe423e54-f1b5-450c-9ce1-66643b3f9d41
+    country_id: *gq
+    network_id: *gq_centro_sur_kie_ntem_wele_nzas_region
+  - id: 243441
+    prefix: '24033308'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 08aea9be-2599-48d0-87ae-6f6fd378597d
+    country_id: *gq
+    network_id: *gq_annobon_litoral_region
+  - id: 243442
+    prefix: '24033309'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: df6c9a7e-667a-49f4-ab50-d554201a7025
+    country_id: *gq
+    network_id: *gq_bioko_island_region
+  - id: 248900
+    prefix: '2403'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: beb5ce13-08ec-4cbd-8b27-7ea01d7d255e
+    country_id: *gq
+    network_id: *gq_fixed
+# Satellite Prefixes
+  - id: 245395
+    prefix: '2406'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 801768f9-819b-4b37-a749-9897066a5d95
+    country_id: *gq
+    network_id: *gq_gecomsa_satellite
+# Mobile Prefixes
+  - id: 247407
+    prefix: '2402'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 02ec9c60-f913-4ce6-8c68-c57c205d1c72
+    country_id: *gq
+    network_id: *gq_getesa_mobile
+  - id: 249575
+    prefix: '2405'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 78cac722-381e-472d-8232-9329744199cc
+    country_id: *gq
+    network_id: *gq_muni_mobile

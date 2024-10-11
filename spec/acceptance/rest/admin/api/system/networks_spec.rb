@@ -20,8 +20,6 @@ RSpec.resource 'Networks' do
     before do
       System::NetworkPrefix.delete_all
       System::Network.delete_all
-      FactoryBot.create(:network, name: 'US')
-      FactoryBot.create(:network, name: 'CA')
     end
 
     example_request 'get listing' do
@@ -30,7 +28,8 @@ RSpec.resource 'Networks' do
   end
 
   get '/api/rest/admin/system/networks/:id' do
-    let(:id) { System::Network.find_by!(name: 'UNITED STATES').id }
+    let!(:network) { create(:network) }
+    let(:id) { network.id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)
@@ -60,7 +59,7 @@ RSpec.resource 'Networks' do
     jsonapi_attributes(required_params, [])
     jsonapi_relationships(required_relationships, [])
 
-    let!(:network) { System::Network.find_by!(name: 'UNITED STATES') }
+    let!(:network) { System::Network.take! }
     let!(:network_type) { create(:network_type) }
     let(:id) { network.id }
     let(:name) { 'name' }

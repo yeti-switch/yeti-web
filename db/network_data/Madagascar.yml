@@ -1,0 +1,308 @@
+country_id: &mg 127
+networks:
+# Supplementary services Networks
+  - id: &mg_special_services 21446
+    name: MG Special Services
+    uuid: b8870aa6-b091-4115-a134-3f25f9f0414f
+    type_id: 13
+# Fixed Networks
+  - id: &mg_fixed 26711
+    name: MG Fixed
+    uuid: 485b191a-e651-4499-a8f6-f6eebc36e180
+    type_id: 2
+  - id: &mg_antananarivo_region 26725
+    name: MG Antananarivo Region
+    uuid: 835ce966-2374-43af-8d44-e80c6e8329ed
+    type_id: 2
+  - id: &mg_toamasina_region 26743
+    name: MG Toamasina Region
+    uuid: 82f80389-ef87-4662-9b34-2252f72f8fe2
+    type_id: 2
+  - id: &mg_ambatondrazaka_region 26744
+    name: MG Ambatondrazaka Region
+    uuid: dc56b835-3cac-42b5-8614-e84ddec834e3
+    type_id: 2
+  - id: &mg_moramanga_region 26746
+    name: MG Moramanga Region
+    uuid: e811248c-ef3c-4f98-a259-042f530bd1de
+    type_id: 2
+  - id: &mg_sainte_marie_region 26747
+    name: MG Sainte Marie Region
+    uuid: cfa95356-4232-46c7-a8a1-6c9cc599328b
+    type_id: 2
+  - id: &mg_mahajanga_region 26749
+    name: MG Mahajanga Region
+    uuid: e9e3ee47-daaa-4c72-9e09-3e71d5ec5838
+    type_id: 2
+  - id: &mg_antsohihy_region 26750
+    name: MG Antsohihy Region
+    uuid: 8d22859c-fbbd-4aef-838d-ed63aec1b815
+    type_id: 2
+  - id: &mg_maintirano_region 26751
+    name: MG Maintirano Region
+    uuid: 84a0d705-c593-43fd-a97d-a0934418c2f4
+    type_id: 2
+  - id: &mg_manakara_region 26754
+    name: MG Manakara Region
+    uuid: c9987a58-2de7-4ba5-bc40-0ebc4c57e696
+    type_id: 2
+  - id: &mg_mananjary_region 26755
+    name: MG Mananjary Region
+    uuid: 1e10abc2-c0f9-49fd-bfbb-dface447a7e5
+    type_id: 2
+  - id: &mg_farafangana_region 26756
+    name: MG Farafangana Region
+    uuid: 87772569-1670-41b5-8f50-93b1a4b13042
+    type_id: 2
+  - id: &mg_fianarantsoa_region 26757
+    name: MG Fianarantsoa Region
+    uuid: c5cad47e-62d4-40bf-92e8-584f6f3aa3d4
+    type_id: 2
+  - id: &mg_antsiranana_region 26762
+    name: MG Antsiranana Region
+    uuid: 83a22e29-84b1-44e2-a75f-e1da0d81f258
+    type_id: 2
+  - id: &mg_nosy_be_region 26766
+    name: MG Nosy Be Region
+    uuid: b631be39-894a-4c7e-9da7-431c974155f5
+    type_id: 2
+  - id: &mg_sambava_region 26768
+    name: MG Sambava Region
+    uuid: 6df4017c-91d8-4f0f-927e-37137598b799
+    type_id: 2
+  - id: &mg_tolagnaro_region 26772
+    name: MG Tolagnaro Region
+    uuid: e6f956dd-4a78-4bc2-808e-8c7df142b0d5
+    type_id: 2
+  - id: &mg_toliara_region 26774
+    name: MG Toliara Region
+    uuid: 2cc68700-7953-4b72-beb3-a47e82a96608
+    type_id: 2
+  - id: &mg_morondava_region 26775
+    name: MG Morondava Region
+    uuid: 69e07813-e078-4f7e-929d-b5323d5e98ea
+    type_id: 2
+# Satellite Networks
+  - id: &mg_blueline_satellite 27818
+    name: MG Blueline Satellite
+    uuid: 9f23734d-4a56-4e5e-9323-d9d152117546
+    type_id: 15
+# Mobile Networks
+  - id: &mg_orange_mobile 31937
+    name: MG Orange Mobile
+    uuid: e068994e-00b0-4acc-a418-53f5f3aeb0d2
+    type_id: 3
+  - id: &mg_airtel_mobile 32557
+    name: MG Airtel Mobile
+    uuid: 1e2dafcc-2b34-440d-a3cf-eb0a78471ad2
+    type_id: 3
+  - id: &mg_telma_mobile 32894
+    name: MG Telma Mobile
+    uuid: 8974b047-21f2-4927-9169-172f18618bb0
+    type_id: 3
+  - id: &mg_blueline_mobile 35689
+    name: MG Blueline Mobile
+    uuid: 77f9426b-2c0f-4f09-a8da-2af6294abcd4
+    type_id: 3
+network_prefixes:
+# Country code Prefixes
+  - id: 242048
+    prefix: '261'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: cecbcdc3-f102-43a7-b9e9-eb3c6b9a42c4
+    country_id: *mg
+    network_id: null
+# Supplementary services Prefixes
+  - id: 242443
+    prefix: '2611'
+    number_min_length: 5
+    number_max_length: 6
+    uuid: 9abdac63-596d-44ae-b764-48e8e065d63d
+    country_id: *mg
+    network_id: *mg_special_services
+# Fixed Prefixes
+  - id: 267141
+    prefix: '26120'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 313dd59b-914f-460e-8ae9-fe7edfbe6aba
+    country_id: *mg
+    network_id: *mg_fixed
+  - id: 267168
+    prefix: '261202'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 34c61b4e-2eb8-4851-aa55-a3008e6731a4
+    country_id: *mg
+    network_id: *mg_antananarivo_region
+  - id: 267244
+    prefix: '2612053'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7b60fb1f-fcbd-4ae0-91eb-ec2b3a717b0f
+    country_id: *mg
+    network_id: *mg_toamasina_region
+  - id: 267247
+    prefix: '2612054'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e15d076c-c1e3-4d18-8cae-17f407893c71
+    country_id: *mg
+    network_id: *mg_ambatondrazaka_region
+  - id: 267252
+    prefix: '2612056'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b7a2daf5-ad15-434f-b750-4324cc0a7aaa
+    country_id: *mg
+    network_id: *mg_moramanga_region
+  - id: 267255
+    prefix: '2612057'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 541cdb84-5dfc-4af2-b79e-7b511f6262de
+    country_id: *mg
+    network_id: *mg_sainte_marie_region
+  - id: 267265
+    prefix: '2612062'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e263ac55-2320-4c8f-a24e-fde635479da8
+    country_id: *mg
+    network_id: *mg_mahajanga_region
+  - id: 267275
+    prefix: '2612067'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 20bc9d18-6abc-49c7-a667-0f2e8ff5a6d7
+    country_id: *mg
+    network_id: *mg_antsohihy_region
+  - id: 267277
+    prefix: '2612069'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a6a9e203-2c40-43b7-8b77-976bd618370d
+    country_id: *mg
+    network_id: *mg_maintirano_region
+  - id: 267289
+    prefix: '26120722'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7d659d61-7b5b-4e02-9c83-f2edbfeaa33a
+    country_id: *mg
+    network_id: *mg_manakara_region
+  - id: 267290
+    prefix: '26120729'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a9e3402e-b988-4e1e-9b0e-69a406cfb1da
+    country_id: *mg
+    network_id: *mg_mananjary_region
+  - id: 267292
+    prefix: '2612073'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ceac6dbd-f661-4d0a-9461-b29cefeae60c
+    country_id: *mg
+    network_id: *mg_farafangana_region
+  - id: 267295
+    prefix: '2612075'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 55a94d7d-a78d-4536-9812-ec0fd867d455
+    country_id: *mg
+    network_id: *mg_fianarantsoa_region
+  - id: 267306
+    prefix: '2612082'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 77235885-35d0-46e5-b56a-1168c8b74ef8
+    country_id: *mg
+    network_id: *mg_antsiranana_region
+  - id: 267319
+    prefix: '2612086'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4d4a6755-869c-45c3-a61c-4f103ade1c26
+    country_id: *mg
+    network_id: *mg_nosy_be_region
+  - id: 267322
+    prefix: '2612088'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1442f5d1-169d-44f3-814c-020397dccf1e
+    country_id: *mg
+    network_id: *mg_sambava_region
+  - id: 267331
+    prefix: '2612092'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 24dc2fb1-3300-45c9-abab-0720c945c893
+    country_id: *mg
+    network_id: *mg_tolagnaro_region
+  - id: 267334
+    prefix: '2612094'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9eb3485a-3a5a-4353-97f7-63173c5dbc20
+    country_id: *mg
+    network_id: *mg_toliara_region
+  - id: 267336
+    prefix: '2612095'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a6374c84-6b55-421c-8b94-ad7f4a552066
+    country_id: *mg
+    network_id: *mg_morondava_region
+# Satellite Prefixes
+  - id: 278000
+    prefix: '26122'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 06bd6dc0-53f0-4cdc-9054-3b0cefd2127f
+    country_id: *mg
+    network_id: *mg_blueline_satellite
+# Mobile Prefixes
+  - id: 327280
+    prefix: '26132'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 43faabd2-5557-4a12-a29f-8f876eccf442
+    country_id: *mg
+    network_id: *mg_orange_mobile
+  - id: 337284
+    prefix: '26133'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1577aa52-c043-4d2e-97e6-1f6d4fe8a68e
+    country_id: *mg
+    network_id: *mg_airtel_mobile
+  - id: 340476
+    prefix: '26134'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dfc95c7a-bf8c-4991-82ee-f68a9e192b80
+    country_id: *mg
+    network_id: *mg_telma_mobile
+  - id: 347703
+    prefix: '26138'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1900ce2-16d1-437b-8d07-278bbb9135e8
+    country_id: *mg
+    network_id: *mg_telma_mobile
+  - id: 355759
+    prefix: '26137'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9e6adced-0a24-44f0-a252-9c8ddaf7fd00
+    country_id: *mg
+    network_id: *mg_orange_mobile
+  - id: 357534
+    prefix: '26139'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0c84caba-630b-4e9b-a18b-a1814f88f4c8
+    country_id: *mg
+    network_id: *mg_blueline_mobile
