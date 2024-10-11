@@ -3,37 +3,37 @@ networks:
 # Supplementary services Networks
   - id: &bq_value_added_services 21363
     name: BQ Value Added Services
-    uuid: 98506ef7-0420-4773-a14d-b7e42670ab7c
-    type_id: 14
+    uuid: d7ea4262-cd56-4932-92a6-0ee8ad6f491d
+    type_id: 13
 # Mobile Networks
   - id: &bq_chippie_mobile 21926
     name: BQ Chippie Mobile
-    uuid: 439798cb-d127-4f65-9bdc-39e31cadb131
+    uuid: 93bfc1a9-a198-4155-b1a8-212e341a7353
     type_id: 3
   - id: &bq_digicel_mobile 24169
     name: BQ Digicel Mobile
-    uuid: 3767fa2e-6a74-49f5-9a9d-362f790c1aa3
+    uuid: 5f6e6a8e-4479-450b-ab45-41ec1f103efa
     type_id: 3
 # Fixed Networks
-  - id: &bq_saba_fixed 22119
-    name: BQ Saba Fixed
-    uuid: 8152d20e-cf23-4a47-8466-97ba6f7331a3
-    type_id: 12
-  - id: &bq_sint_eustatius_fixed 23198
-    name: BQ Sint Eustatius Fixed
-    uuid: 696b358e-9b53-4d9e-ba69-2414776e742f
-    type_id: 12
-  - id: &bq_bonaire_fixed 24140
-    name: BQ Bonaire Fixed
-    uuid: 58d71900-0ad6-49fb-a1e7-3fa2843779b9
-    type_id: 12
+  - id: &bq_saba_region 22119
+    name: BQ Saba Region
+    uuid: d584f580-0ec4-4f58-9e3f-0c31d086fd90
+    type_id: 2
+  - id: &bq_sint_eustatius_region 23198
+    name: BQ Sint Eustatius Region
+    uuid: baaed870-cca4-4ddd-a229-5a5717b82ed6
+    type_id: 2
+  - id: &bq_bonaire_region 24140
+    name: BQ Bonaire Region
+    uuid: 8bc5a093-cae3-44d1-9cf4-2b5745ef9fe1
+    type_id: 2
 network_prefixes:
 # Country code Prefixes
   - id: 241951
     prefix: '599'
     number_min_length: 4
     number_max_length: 100
-    uuid: a98e6794-1609-46f0-9eb2-fbd1ed7e8379
+    uuid: 94ffb026-6f0f-4dd8-8baa-845c36dc71d1
     country_id: *bq
     network_id: null
 # Supplementary services Prefixes
@@ -41,14 +41,14 @@ network_prefixes:
     prefix: '5991'
     number_min_length: 10
     number_max_length: 10
-    uuid: 83f94fb8-67b1-42dc-b5f3-3030e1b69ea6
+    uuid: 25e7efed-44e6-4f06-b60f-b938e2c0cce3
     country_id: *bq
     network_id: *bq_value_added_services
   - id: 245375
     prefix: '5996'
     number_min_length: 10
     number_max_length: 10
-    uuid: 962207ed-922f-4174-a5fa-fff7a92ad68a
+    uuid: b8b0bd17-32e4-4f7a-bdb9-95dee7be61f1
     country_id: *bq
     network_id: *bq_value_added_services
 # Mobile Prefixes
@@ -56,189 +56,189 @@ network_prefixes:
     prefix: '59903181'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5ea8c6e2-c757-4121-95ac-d23fcdc7fe5f
+    uuid: 85c07b85-c0f6-460e-90f4-12913fd4d87f
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243336
     prefix: '59903184'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9a1727ea-7937-4509-b113-3b8e4ea94ba3
+    uuid: ee7f806f-7eb4-4c2a-9502-c6d842b21507
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243337
     prefix: '59903185'
     number_min_length: 10
     number_max_length: 10
-    uuid: 23cd7c1f-776b-4ac0-824c-b728c368c85f
+    uuid: 1700dbbd-462e-4bc7-bde5-0322e1ef8cc9
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243338
     prefix: '59903186'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3398b9bf-d66a-4e42-baca-991302c040e2
+    uuid: ac73acd2-04b9-42f7-81c9-8d7ddbec16a5
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243339
     prefix: '59903187'
     number_min_length: 10
     number_max_length: 10
-    uuid: bf68f055-e7ef-4ca9-9f28-a3c65d6171cf
+    uuid: eee195a1-b406-44bf-932a-a28e46df3e73
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243340
     prefix: '59903188'
     number_min_length: 10
     number_max_length: 10
-    uuid: 16ddf21e-f7c6-45d4-b070-e92b4843301a
+    uuid: 414366c9-a4af-42ce-b632-a885401fc93f
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243351
     prefix: '59903191'
     number_min_length: 10
     number_max_length: 10
-    uuid: 81e7f165-854a-4d37-a541-7c2631e7910c
+    uuid: cf55ecc5-71ce-46ea-ace4-e55fabcda33f
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243352
     prefix: '59903193'
     number_min_length: 10
     number_max_length: 10
-    uuid: 35979e25-3a14-480f-a681-7c22d3fee078
+    uuid: 10226c74-8604-411a-ab7b-9db83b5e3f56
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243353
     prefix: '59903194'
     number_min_length: 10
     number_max_length: 10
-    uuid: 53a75465-e6d2-4aa2-9c22-35cd7c2addca
+    uuid: 15a563d6-846f-467c-ae16-64f2449412ab
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243354
     prefix: '59903195'
     number_min_length: 10
     number_max_length: 10
-    uuid: d33f0ab5-7a9d-4225-a267-b80ebfab2b45
+    uuid: 746c1f83-a102-4256-8323-ca56af167db2
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243355
     prefix: '59903197'
     number_min_length: 10
     number_max_length: 10
-    uuid: 74404cb7-9b68-4592-b1b5-ec4cd5a2d66a
+    uuid: 180abcac-cf1c-49c9-8092-a6c8a7a8b4d8
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 243356
     prefix: '59903198'
     number_min_length: 10
     number_max_length: 10
-    uuid: e437a92f-44de-4ac6-865d-97abda7d414d
+    uuid: ba9ab6cb-f9ac-43ac-b443-5f5e7fb36336
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 244192
     prefix: '59904161'
     number_min_length: 10
     number_max_length: 10
-    uuid: 22c25200-383a-46bf-adc3-d247768c5052
+    uuid: 6cb2423e-7de5-402d-9c4a-b00d33106a4c
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 244193
     prefix: '59904164'
     number_min_length: 10
     number_max_length: 10
-    uuid: 041d6814-47c4-44a6-9f52-370f19e242f0
+    uuid: d7c238fd-b5ad-4f67-b7d9-71b1c932e032
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 244194
     prefix: '59904165'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4398bf58-a410-446d-a5a3-52cb494d109b
+    uuid: f256e00c-0d82-41e9-8b39-7d10c1f1d655
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 244196
     prefix: '59904166'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7620d0eb-185b-4cca-93d6-c4b1fa66b531
+    uuid: 1a2890d6-1ce5-4f77-87ee-c624fe56405a
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 244198
     prefix: '59904167'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3cb233e8-a60b-4fc2-87bd-710c32b59c7e
+    uuid: 2a6cf957-12d1-472f-9243-d73d91600af6
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 244200
     prefix: '59904168'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2e3104fe-63bc-43fa-aa34-4c88b17e1a65
+    uuid: deb53f8f-b3af-4d5e-8349-53cf898b43de
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 244202
     prefix: '59904169'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7c23e7e9-b9a1-4429-af65-6d742d52b6db
+    uuid: 50c9b457-098f-46cd-b837-3d92aee36e39
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 255310
     prefix: '5990700'
     number_min_length: 10
     number_max_length: 10
-    uuid: 85e527c7-2365-433f-b524-98385a1e3f35
+    uuid: 81b4d3c2-1f3c-4314-9c1e-e7049502f66e
     country_id: *bq
     network_id: *bq_digicel_mobile
   - id: 255386
     prefix: '5990701'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1ff68642-b929-4210-b594-758cab5c4dab
+    uuid: 6ea1126a-8d49-439a-820d-d753b3387d9c
     country_id: *bq
     network_id: *bq_digicel_mobile
   - id: 255648
     prefix: '5990770'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4379096d-3c77-4a77-8d74-b099c054161b
+    uuid: 2730de80-2619-4187-90b4-91de94ee60cb
     country_id: *bq
     network_id: *bq_digicel_mobile
   - id: 255958
     prefix: '5990777'
     number_min_length: 10
     number_max_length: 10
-    uuid: f9dd1ba2-7f0c-4fd1-9e02-0480a5564ec7
+    uuid: 53da9861-bb51-4b57-a322-b67731faafe7
     country_id: *bq
     network_id: *bq_digicel_mobile
   - id: 256079
     prefix: '599078'
     number_min_length: 10
     number_max_length: 10
-    uuid: e008789f-fd10-4e3f-ac55-ca0509213ccc
+    uuid: d70471c8-f4eb-4e4b-bc4d-41ac5e4f5ef3
     country_id: *bq
     network_id: *bq_digicel_mobile
   - id: 256398
     prefix: '5990790'
     number_min_length: 10
     number_max_length: 10
-    uuid: cc90842e-2e5e-438a-9e2e-998778be5d50
+    uuid: 51c3846d-050f-4fd0-93d0-c679e8e7e7b5
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 256568
     prefix: '5990795'
     number_min_length: 10
     number_max_length: 10
-    uuid: 064e56b2-7ccd-4213-8bfb-968a84cd2e1c
+    uuid: d2eeb8f5-30b3-4fe1-9d3f-8c14ee7e42bb
     country_id: *bq
     network_id: *bq_chippie_mobile
   - id: 256584
     prefix: '5990796'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2099a118-89c4-42f2-aa58-7e3a57047614
+    uuid: ac7d3a52-ee4d-4262-92d0-9d77dddbdc2c
     country_id: *bq
     network_id: *bq_chippie_mobile
 # Fixed Prefixes
@@ -246,20 +246,20 @@ network_prefixes:
     prefix: '59904'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0a91ed17-ece4-4ecc-b288-e0c7eb503d4c
+    uuid: 0f37c3e8-0dbb-466f-929f-a3f5ea548269
     country_id: *bq
-    network_id: *bq_saba_fixed
+    network_id: *bq_saba_region
   - id: 248882
     prefix: '59903'
     number_min_length: 10
     number_max_length: 10
-    uuid: 567321e6-fe3e-4fb7-a4d2-2856df88a7d9
+    uuid: d41f533a-a9bb-48d6-9f5f-a348f16361c5
     country_id: *bq
-    network_id: *bq_sint_eustatius_fixed
+    network_id: *bq_sint_eustatius_region
   - id: 255234
     prefix: '59907'
     number_min_length: 10
     number_max_length: 10
-    uuid: 06813544-06c6-481e-be22-a5b8331af967
+    uuid: e33b53e9-b4ef-4c7d-8c20-e252d639eeb1
     country_id: *bq
-    network_id: *bq_bonaire_fixed
+    network_id: *bq_bonaire_region

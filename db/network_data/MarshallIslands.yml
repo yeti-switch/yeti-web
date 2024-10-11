@@ -3,25 +3,25 @@ networks:
 # Mobile Networks
   - id: &mh_minta_mobile 21951
     name: MH Minta Mobile
-    uuid: d92c23c2-d39f-4663-bb34-ad018ce7abbb
+    uuid: 75ac54cd-d285-4381-9dd9-e5f08162dbf1
     type_id: 3
 # Fixed Networks
-  - id: &mh_majuro_atoll_fixed 22996
-    name: MH Majuro Atoll Fixed
-    uuid: 27ad4951-1abd-4ef4-ad30-466e34611183
-    type_id: 12
+  - id: &mh_majuro_atoll_region 22996
+    name: MH Majuro Atoll Region
+    uuid: ddf23529-a781-4940-8d26-fef26f307082
+    type_id: 2
 # Satellite Networks
   - id: &mh_minta_satellite 23448
     name: MH Minta Satellite
-    uuid: 878acd10-a5b7-412e-aeba-d773aebcf83e
-    type_id: 16
+    uuid: e14bf223-69a0-46d4-9584-14dda19a6ee6
+    type_id: 15
 network_prefixes:
 # Country code Prefixes
   - id: 242051
     prefix: '692'
     number_min_length: 4
     number_max_length: 100
-    uuid: 5cc412ee-b574-4365-9927-8c9688f1ba46
+    uuid: 31f3340d-da99-4a58-b5c5-d2975778cc97
     country_id: *mh
     network_id: null
 # Mobile Prefixes
@@ -29,70 +29,70 @@ network_prefixes:
     prefix: '692329'
     number_min_length: 10
     number_max_length: 10
-    uuid: d3dc2cff-ad10-4894-a20f-01ad16db0533
+    uuid: 9e37285c-b344-454b-a428-b78f91165f1c
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 244740
     prefix: '692455'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6d693cf6-ab76-4cb8-bcbf-48fbec95b1c6
+    uuid: b9a37e52-67cc-4bdd-b9a7-f044c8650c17
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 244777
     prefix: '692456'
     number_min_length: 10
     number_max_length: 10
-    uuid: ccaca52e-1316-4c62-86d7-bf58fa348eda
+    uuid: 0b37611a-03e6-4388-9ee8-7e3acd24edc1
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 248042
     prefix: '692235'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9cc1f43d-0abb-4740-b284-e2116fc890ce
+    uuid: d87e88d1-b1b6-46b2-a796-3222d2de732f
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 250056
     prefix: '6925451'
     number_min_length: 10
     number_max_length: 10
-    uuid: bec294b2-7aba-444c-a252-b5f9af0acd60
+    uuid: 7e1844ee-2438-4207-b4e9-9771484a0e76
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 250058
     prefix: '6925452'
     number_min_length: 10
     number_max_length: 10
-    uuid: 06160108-5071-469c-90de-ee730b0d051a
+    uuid: de249adb-b718-4a20-84ad-f1ee99314dd9
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 250060
     prefix: '6925453'
     number_min_length: 10
     number_max_length: 10
-    uuid: badd4fa9-7afa-46aa-a6ba-3602dc8b57b3
+    uuid: 88b7ef3d-f7d2-48c1-853d-e1069c68b21f
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 250062
     prefix: '6925454'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9f8d7cf2-3358-42ac-8cb3-b6f2160ef9db
+    uuid: 303f3938-2655-4373-ada8-e97a9e3f5f71
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 258310
     prefix: '6929997'
     number_min_length: 7
     number_max_length: 7
-    uuid: 7d20d7fb-d031-4e2c-81bb-c6ab5ae06e1b
+    uuid: 7c7607ba-556b-470d-a7ff-ed807e477edf
     country_id: *mh
     network_id: *mh_minta_mobile
   - id: 258311
     prefix: '6929998'
     number_min_length: 7
     number_max_length: 7
-    uuid: c060117e-d189-41ae-845a-4f172aae9407
+    uuid: 2f27251a-05b8-487d-840b-f498c659bd9a
     country_id: *mh
     network_id: *mh_minta_mobile
 # Fixed Prefixes
@@ -100,28 +100,28 @@ network_prefixes:
     prefix: '692247'
     number_min_length: 10
     number_max_length: 10
-    uuid: d8be954c-9744-4f66-ac8e-404003e050a7
+    uuid: c987647e-d06a-4f2d-9431-62d232ef5d2e
     country_id: *mh
-    network_id: *mh_majuro_atoll_fixed
+    network_id: *mh_majuro_atoll_region
   - id: 249880
     prefix: '692528'
     number_min_length: 10
     number_max_length: 10
-    uuid: dae76b5b-8cea-467b-a82d-25abd6829e5e
+    uuid: fbe9e7f1-d9c5-48ec-a759-a3971197f49a
     country_id: *mh
-    network_id: *mh_majuro_atoll_fixed
+    network_id: *mh_majuro_atoll_region
   - id: 254232
     prefix: '692625'
     number_min_length: 10
     number_max_length: 10
-    uuid: bdad58f7-c0b7-4d25-9a3d-0e0f5c575df4
+    uuid: 35175617-03d0-4b2b-a1f0-61623c9a25c3
     country_id: *mh
-    network_id: *mh_majuro_atoll_fixed
+    network_id: *mh_majuro_atoll_region
 # Satellite Prefixes
   - id: 250799
     prefix: '692635'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0d1591af-f1e8-4ae3-bd8b-41d93c39f0d1
+    uuid: 7021639a-d3be-49cd-b031-ea98d3124a05
     country_id: *mh
     network_id: *mh_minta_satellite

@@ -3,66 +3,66 @@ networks:
 # Supplementary services Networks
   - id: &aw_special_services 21268
     name: AW Special Services
-    uuid: 43f964af-85cd-4c98-bbc7-a263c5d946ac
-    type_id: 14
+    uuid: 1995b2a7-1d1c-4716-8dbf-86a442cbc85a
+    type_id: 13
   - id: &aw_internet_access 21291
     name: AW Internet Access
-    uuid: b30daa4b-9628-4838-9e08-b19b40559598
-    type_id: 14
+    uuid: 480cdf42-c2e0-4b6a-bff1-246735ecb84f
+    type_id: 13
   - id: &aw_freephone_services 23809
     name: AW Freephone Services
-    uuid: de437ed5-4fa7-48bd-87b9-dee2b835ea6b
-    type_id: 14
+    uuid: 07ebc395-8d41-4ed7-b412-8504fcdd7a4e
+    type_id: 13
   - id: &aw_personal_assistant_services 24330
     name: AW Personal Assistant Services
-    uuid: 4a797270-1495-46cd-a614-9453bc10545d
-    type_id: 14
+    uuid: 38ffd6e1-2f27-46bb-bf15-aeb1a296ca6a
+    type_id: 13
   - id: &aw_electronic_messaging_services 24374
     name: AW Electronic Messaging Services
-    uuid: 7816ee94-bf40-40c3-a2d7-faeefa34b7de
-    type_id: 14
+    uuid: f4559ea0-0da6-4609-b613-579c185e8e33
+    type_id: 13
   - id: &aw_value_added_services 24416
     name: AW Value Added Services
-    uuid: 4062486f-1632-4f0a-b395-ededcd358fba
-    type_id: 14
+    uuid: 3c999be0-4723-47ff-b054-dc21224d051c
+    type_id: 13
   - id: &aw_virtual_private_network 26100
     name: AW Virtual Private Network
-    uuid: 2e73fb7a-59d0-4449-933d-629e19485c5a
-    type_id: 14
+    uuid: 188e634d-ade2-4411-81fa-d4bfa57e66ff
+    type_id: 13
 # Mobile Networks
   - id: &aw_setar_mobile 22487
     name: AW Setar Mobile
-    uuid: d204eff2-b299-4084-8fa7-b56e1cb42589
+    uuid: 94437280-2e31-483f-8cd1-717145a2642c
     type_id: 3
   - id: &aw_mio_mobile 22561
     name: AW Mio Mobile
-    uuid: 3a9b20dd-a41d-4c8f-85e6-824be598d3bd
+    uuid: 236128f1-2604-4d73-ab45-7c8c201b2341
     type_id: 3
   - id: &aw_digicel_mobile 23435
     name: AW Digicel Mobile
-    uuid: cf8728ec-bf9f-4e49-b248-447e5e157070
+    uuid: 39fa0d36-a6a5-4e47-b14f-44462d3b505e
     type_id: 3
 # Fixed Networks
-  - id: &aw_voip_fixed 22704
-    name: AW Voip Fixed
-    uuid: a427628e-e0ba-4f38-b0bd-492fa0c4fcbb
-    type_id: 12
+  - id: &aw_voip_region 22704
+    name: AW Voip Region
+    uuid: fdb852d5-a57a-4bd9-ad90-a18bf292d018
+    type_id: 2
   - id: &aw_fixed 23298
     name: AW Fixed
-    uuid: faf5d9e7-5f19-4f1a-b922-fdb6314c0bca
-    type_id: 12
+    uuid: 1c60aa91-aaa7-49c1-862d-cc7aebbe74e3
+    type_id: 2
 # Paging Networks
   - id: &aw_paging 23948
     name: AW Paging
-    uuid: 20568bcc-2668-43ed-8364-7c0837a1bc39
-    type_id: 13
+    uuid: 4483d7f9-a14f-4d67-b7da-a529b55588a7
+    type_id: 12
 network_prefixes:
 # Country code Prefixes
   - id: 241937
     prefix: '297'
     number_min_length: 4
     number_max_length: 100
-    uuid: b46be261-8774-4265-98f5-f7cd70011320
+    uuid: da144199-9944-4e41-bb11-424ce7cda1dd
     country_id: *aw
     network_id: null
 # Supplementary services Prefixes
@@ -70,91 +70,91 @@ network_prefixes:
     prefix: '2970'
     number_min_length: 6
     number_max_length: 6
-    uuid: 5a3dc2fa-97f3-4026-9f58-665d286e4934
+    uuid: 711461c3-58c5-41f8-8433-8857164a2091
     country_id: *aw
     network_id: *aw_special_services
   - id: 242162
     prefix: '29701'
     number_min_length: 7
     number_max_length: 7
-    uuid: 741d0043-fd06-4337-a926-0d291e530e65
+    uuid: c7eb5326-8e8a-4916-8766-c59267c33842
     country_id: *aw
     network_id: *aw_internet_access
   - id: 242345
     prefix: '2971'
     number_min_length: 6
     number_max_length: 6
-    uuid: 0b3e9623-2eaf-4a4d-8375-7dda5a12e3da
+    uuid: fccdc90a-675a-49fc-9f01-257d3f80f38c
     country_id: *aw
     network_id: *aw_special_services
   - id: 253116
     prefix: '29780'
     number_min_length: 10
     number_max_length: 10
-    uuid: d98bebe8-0c68-43ba-bc3d-41e95eb3e766
+    uuid: 4bb7b8e8-77f1-4a60-8d30-7c74c9dd3784
     country_id: *aw
     network_id: *aw_freephone_services
   - id: 253290
     prefix: '297809'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2e8bac05-3964-4188-a1d5-3d748aeae727
+    uuid: 882edbef-73bc-4c2e-be82-97cd11a51109
     country_id: *aw
     network_id: *aw_freephone_services
   - id: 253304
     prefix: '29781'
     number_min_length: 10
     number_max_length: 10
-    uuid: 55286377-64be-4938-bdb9-094b546bd477
+    uuid: 4934c8e1-940c-428b-ad52-31bf2990c1c9
     country_id: *aw
     network_id: *aw_freephone_services
   - id: 253444
     prefix: '297819'
     number_min_length: 10
     number_max_length: 10
-    uuid: 447b08c6-55fa-4c2a-be8f-0b02b6447537
+    uuid: e8df4af2-dc4a-4389-a2f3-e4ae3410bff5
     country_id: *aw
     network_id: *aw_freephone_services
   - id: 256828
     prefix: '29788'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9646e3f3-b7f6-4c28-95ce-57f9c87ba458
+    uuid: 386a761c-f180-4ded-bbbf-516e1a726c1f
     country_id: *aw
     network_id: *aw_personal_assistant_services
   - id: 256984
     prefix: '29789'
     number_min_length: 10
     number_max_length: 10
-    uuid: fc5a2109-d00d-4c09-8ff1-f7d07bbc1cfc
+    uuid: 5faefb5e-50be-4bcb-b8c3-2187c0157332
     country_id: *aw
     network_id: *aw_electronic_messaging_services
   - id: 257151
     prefix: '29790'
     number_min_length: 10
     number_max_length: 10
-    uuid: 29feabd0-9cac-4868-9684-6aa32d4987f1
+    uuid: c0420d2a-b4b4-4a9c-a94e-8dc9c221a1f3
     country_id: *aw
     network_id: *aw_value_added_services
   - id: 257290
     prefix: '297906'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2accd012-64b5-420f-b6b4-7a86a6e99311
+    uuid: 77bdd756-5da3-41d7-9c86-3829b6bce592
     country_id: *aw
     network_id: *aw_value_added_services
   - id: 257353
     prefix: '29791'
     number_min_length: 6
     number_max_length: 6
-    uuid: 505ab9d8-598c-4720-8244-57ace28bbc98
+    uuid: 3f3d4b43-5211-460f-b7b6-533b7bcd2a17
     country_id: *aw
     network_id: *aw_special_services
   - id: 263994
     prefix: '29787'
     number_min_length: 10
     number_max_length: 10
-    uuid: 99aa8e4a-0bb2-4484-ad3f-f4e22544e378
+    uuid: 6c01d627-e71c-4799-9215-f48b125d1215
     country_id: *aw
     network_id: *aw_virtual_private_network
 # Mobile Prefixes
@@ -162,91 +162,91 @@ network_prefixes:
     prefix: '29759'
     number_min_length: 10
     number_max_length: 10
-    uuid: aee44539-a258-4eca-9f5a-f22b7370e22d
+    uuid: 716b5209-1335-49d4-99dd-a56b51bc8834
     country_id: *aw
     network_id: *aw_setar_mobile
   - id: 245443
     prefix: '297600'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7f8ed909-2c5f-45db-9810-84cdd994f376
+    uuid: 43f668b4-72e7-462f-8ec0-fdac3bc02327
     country_id: *aw
     network_id: *aw_mio_mobile
   - id: 250188
     prefix: '29756'
     number_min_length: 10
     number_max_length: 10
-    uuid: c6d3dabf-51b8-437a-b234-ad6e1b7e1af1
+    uuid: a04a5d7b-8435-4cd8-84e4-1d8cbfc28f5c
     country_id: *aw
     network_id: *aw_setar_mobile
   - id: 250666
     prefix: '297630'
     number_min_length: 10
     number_max_length: 10
-    uuid: c376494f-b7d5-481c-9943-07809f1d65fa
+    uuid: 2c75b0db-1d6c-4589-a7cc-1770d6ddd996
     country_id: *aw
     network_id: *aw_digicel_mobile
   - id: 251033
     prefix: '297640'
     number_min_length: 10
     number_max_length: 10
-    uuid: dac25cc8-9f89-47f2-ab14-5ec78a12ecbc
+    uuid: 3a69a4e4-f93f-42dc-b3af-b3733848b8e2
     country_id: *aw
     network_id: *aw_digicel_mobile
   - id: 251083
     prefix: '297641'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8c2c9ffa-ebe9-4fcd-a426-fb88506ef821
+    uuid: 29f35e07-738d-4082-8491-43487ea4f25d
     country_id: *aw
     network_id: *aw_digicel_mobile
   - id: 251864
     prefix: '29773'
     number_min_length: 10
     number_max_length: 10
-    uuid: cb28d844-b989-44b3-a44c-c60612a4d8ef
+    uuid: 8847f938-0cf6-4ef8-920f-3ca3dce8f363
     country_id: *aw
     network_id: *aw_digicel_mobile
   - id: 252048
     prefix: '29774'
     number_min_length: 10
     number_max_length: 10
-    uuid: 56528f80-823f-46ff-a7d8-060ee153b7ea
+    uuid: 78f5d736-528e-44f5-b94a-11f7573686b6
     country_id: *aw
     network_id: *aw_digicel_mobile
   - id: 254166
     prefix: '297622'
     number_min_length: 10
     number_max_length: 10
-    uuid: eafa9107-9e69-40bd-9ec3-30d9c0530ffa
+    uuid: 55ef38cc-aa98-4ff7-954a-a1e29347dc5b
     country_id: *aw
     network_id: *aw_mio_mobile
   - id: 254301
     prefix: '297660'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8fed326e-409c-4122-8324-f55377e74070
+    uuid: b3c7301e-5661-4509-978c-52b0287821ab
     country_id: *aw
     network_id: *aw_setar_mobile
   - id: 254329
     prefix: '297661'
     number_min_length: 10
     number_max_length: 10
-    uuid: 341dd87f-4ff9-4c17-a7dc-34c1b9a33a2c
+    uuid: 88208b01-38f2-43c0-81f1-05703487d6d4
     country_id: *aw
     network_id: *aw_setar_mobile
   - id: 254877
     prefix: '297690'
     number_min_length: 10
     number_max_length: 10
-    uuid: fd2dfc95-bbcb-41fd-b2d2-3589ed84381b
+    uuid: 70208c78-36cc-4ef2-8a6a-9fc09fba1d9d
     country_id: *aw
     network_id: *aw_setar_mobile
   - id: 258170
     prefix: '29799'
     number_min_length: 10
     number_max_length: 10
-    uuid: fd79fbfc-84c0-4c69-932a-f6fd818a8b1d
+    uuid: ffdd4e9a-6ac0-402a-b69a-206ce9e55de5
     country_id: *aw
     network_id: *aw_setar_mobile
 # Fixed Prefixes
@@ -254,28 +254,28 @@ network_prefixes:
     prefix: '2972'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5133ee17-5376-4a73-a178-3b29df2476ed
+    uuid: 6c04bcac-cddd-4c85-b866-ca97c3105245
     country_id: *aw
-    network_id: *aw_voip_fixed
+    network_id: *aw_voip_region
   - id: 249559
     prefix: '2975'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0973cf08-e553-4216-82ff-ca32d1253b3f
+    uuid: 1cd95d01-c62f-4c87-a4c9-5c86a66b75f9
     country_id: *aw
     network_id: *aw_fixed
   - id: 249639
     prefix: '297501'
     number_min_length: 10
     number_max_length: 10
-    uuid: 64fd33ad-4028-48a4-95ef-250ccfd6c0b6
+    uuid: 40765993-1e03-4a09-b289-bbdb23ef3a01
     country_id: *aw
-    network_id: *aw_voip_fixed
+    network_id: *aw_voip_region
 # Paging Prefixes
   - id: 253467
     prefix: '29782'
     number_min_length: 10
     number_max_length: 10
-    uuid: d64f02ee-a53c-4f40-b9f1-170a868ec89d
+    uuid: dd26f91b-19fa-40a0-b1f1-68f7151408d2
     country_id: *aw
     network_id: *aw_paging

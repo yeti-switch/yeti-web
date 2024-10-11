@@ -3,61 +3,61 @@ networks:
 # Supplementary services Networks
   - id: &st_special_services 21492
     name: ST Special Services
-    uuid: 3c891709-236e-4e52-9bed-7d100e1e6ed6
-    type_id: 14
+    uuid: 3d22819e-b716-4e4a-a81d-c0340681c179
+    type_id: 13
 # Fixed Networks
   - id: &st_fixed 22730
     name: ST Fixed
-    uuid: 861e729b-cebe-46cc-b0ba-b780e93a7598
-    type_id: 12
-  - id: &st_santo_amaro_fixed 22853
-    name: ST Santo Amaro Fixed
-    uuid: ee5a233a-e919-42a6-adde-9458f9de5f9d
-    type_id: 12
-  - id: &st_agua_grande_fixed 22854
-    name: ST Agua Grande Fixed
-    uuid: 5ca246da-2ec9-4e27-86d7-f98ca39b3ead
-    type_id: 12
-  - id: &st_guadalupe_fixed 22880
-    name: ST Guadalupe Fixed
-    uuid: d79a96ca-677d-4f7b-aaa6-d5159e64b3ae
-    type_id: 12
-  - id: &st_neves_santa_catarina_fixed 22881
-    name: ST Neves Santa Catarina Fixed
-    uuid: b68c8e50-91a0-498a-9288-4008540eeac1
-    type_id: 12
-  - id: &st_regiao_autonoma_do_principe_fixed 22892
-    name: ST Regiao Autonoma Do Principe Fixed
-    uuid: 1c32985f-9ad1-4536-9766-d9d8e9aa8e60
-    type_id: 12
-  - id: &st_angolares_porto_alegre_fixed 22898
-    name: ST Angolares Porto Alegre Fixed
-    uuid: 81d67b2f-57ed-4116-b7e6-207b17d4e102
-    type_id: 12
-  - id: &st_santana_ribeira_afonso_fixed 22899
-    name: ST Santana Ribeira Afonso Fixed
-    uuid: 8dfcab9c-67db-42da-91e7-78cac6e0b778
-    type_id: 12
-  - id: &st_trindade_fixed 22901
-    name: ST Trindade Fixed
-    uuid: 5851dd7d-7d0f-4e9c-8d54-cbe7bbd9962b
-    type_id: 12
-  - id: &st_madalena_fixed 22902
-    name: ST Madalena Fixed
-    uuid: 3eae38bd-e378-414f-a12e-ca4fbee074fb
-    type_id: 12
+    uuid: 6260cb08-0f8f-43e1-9573-cbde207717f2
+    type_id: 2
+  - id: &st_santo_amaro_region 22853
+    name: ST Santo Amaro Region
+    uuid: 978bb5e6-a5ce-4288-b47f-4138b1544862
+    type_id: 2
+  - id: &st_agua_grande_region 22854
+    name: ST Agua Grande Region
+    uuid: 99b899f2-8b29-4d23-ae44-12ec627318ea
+    type_id: 2
+  - id: &st_guadalupe_region 22880
+    name: ST Guadalupe Region
+    uuid: ff221ebb-c67b-4baa-a002-72c4836816d3
+    type_id: 2
+  - id: &st_neves_santa_catarina_region 22881
+    name: ST Neves Santa Catarina Region
+    uuid: b015744e-66cc-4bc6-bbab-fccbf537dbd5
+    type_id: 2
+  - id: &st_regiao_autonoma_do_principe_region 22892
+    name: ST Regiao Autonoma Do Principe Region
+    uuid: 61c58321-d2e6-45d9-82b1-9add98fed00e
+    type_id: 2
+  - id: &st_angolares_porto_alegre_region 22898
+    name: ST Angolares Porto Alegre Region
+    uuid: 05b3955e-1d0e-4d02-8f8f-aa019ace4c56
+    type_id: 2
+  - id: &st_santana_ribeira_afonso_region 22899
+    name: ST Santana Ribeira Afonso Region
+    uuid: 8d264503-9264-48ae-862b-589b4c8a65df
+    type_id: 2
+  - id: &st_trindade_region 22901
+    name: ST Trindade Region
+    uuid: 3a7ca0c7-b48a-4820-8a51-f4182ff2a388
+    type_id: 2
+  - id: &st_madalena_region 22902
+    name: ST Madalena Region
+    uuid: 1c683dbd-826f-40a0-b7bc-dd4bc277c355
+    type_id: 2
 # Mobile Networks
   - id: &st_mobile 24412
     name: ST Mobile
-    uuid: 493a8670-4079-4606-900a-87bfe894737c
+    uuid: 5e09918e-7fc2-4d3e-84ef-a340381fada1
     type_id: 3
   - id: &st_unitel_mobile 24427
     name: ST Unitel Mobile
-    uuid: 10c0c74d-ca53-4356-b8f5-d8e56b171b5e
+    uuid: 7f8a65c9-6bf0-410a-89a8-12b115c51dbb
     type_id: 3
   - id: &st_cstmovel_mobile 24523
     name: ST Cstmovel Mobile
-    uuid: 140f1486-88c7-42cc-bd7e-646fbe77eabd
+    uuid: 4532a88e-cbe3-4e90-9632-e2e2ba190dce
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -65,7 +65,7 @@ network_prefixes:
     prefix: '239'
     number_min_length: 4
     number_max_length: 100
-    uuid: a17b2f34-23c9-4ac4-87d3-495ab398df97
+    uuid: f4332ef6-8c78-4dd7-94fd-c7faae0fc06c
     country_id: *st
     network_id: null
 # Supplementary services Prefixes
@@ -73,35 +73,35 @@ network_prefixes:
     prefix: '2391'
     number_min_length: 5
     number_max_length: 8
-    uuid: 3ac4475f-f724-4a36-82a4-df048100c19a
+    uuid: f314feae-bf89-4cac-8f4b-8b80787723cb
     country_id: *st
     network_id: *st_special_services
   - id: 245426
     prefix: '2396'
     number_min_length: 10
     number_max_length: 10
-    uuid: eb9bdfd0-bca8-4560-bae4-e685839351c8
+    uuid: fffaf73e-0a9a-4165-9ca6-d97e4e191cd3
     country_id: *st
     network_id: *st_special_services
   - id: 253110
     prefix: '2398'
     number_min_length: 10
     number_max_length: 10
-    uuid: 509561d7-4929-415b-a0ee-6500048b0803
+    uuid: 29d159cf-31ff-49ba-b486-e5dee77ae12b
     country_id: *st
     network_id: *st_special_services
   - id: 254216
     prefix: '239624'
     number_min_length: 10
     number_max_length: 10
-    uuid: 97d4d90a-a614-45ee-911d-5ec6cc578088
+    uuid: 8a3bc041-06d5-4b09-8d70-c9e5e839f7fe
     country_id: *st
     network_id: *st_special_services
   - id: 255279
     prefix: '2397'
     number_min_length: 10
     number_max_length: 10
-    uuid: b18d271c-6850-47b0-84e3-9977bd97926b
+    uuid: 2a258139-b045-4e55-8cba-284c79eadaed
     country_id: *st
     network_id: *st_special_services
 # Fixed Prefixes
@@ -109,238 +109,238 @@ network_prefixes:
     prefix: '2392'
     number_min_length: 10
     number_max_length: 10
-    uuid: ef0874ea-4d07-41f9-913e-a14e07c9d48a
+    uuid: 0334a3ec-3442-451b-aec3-e0d0cbda9120
     country_id: *st
     network_id: *st_fixed
   - id: 247765
     prefix: '23922200'
     number_min_length: 10
     number_max_length: 10
-    uuid: 35e3f682-97e5-473f-bdbc-f44f5525ef7b
+    uuid: 4137022b-31e8-4ad7-a0dc-e564db55db5c
     country_id: *st
-    network_id: *st_santo_amaro_fixed
+    network_id: *st_santo_amaro_region
   - id: 247766
     prefix: '23922201'
     number_min_length: 10
     number_max_length: 10
-    uuid: d2f959a7-e742-4f23-a58c-43236f753bfd
+    uuid: edf78cea-92fc-4156-8353-7b2287a39517
     country_id: *st
-    network_id: *st_santo_amaro_fixed
+    network_id: *st_santo_amaro_region
   - id: 247768
     prefix: '2392221'
     number_min_length: 10
     number_max_length: 10
-    uuid: e76cbcb8-bf7f-4767-b5d2-e3eac05f3842
+    uuid: 3cba650c-1b75-40e6-9ffb-dc4e8f0b441d
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247779
     prefix: '2392222'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0bcc3ece-4680-497b-891d-6d75be9183e8
+    uuid: 6b6af6a8-c573-498c-8120-98d59943dce0
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247791
     prefix: '2392223'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0787254a-1307-4bf4-afcf-0b144ab24481
+    uuid: 0bde6e09-49e5-43ca-bf6c-419f6cf82938
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247803
     prefix: '2392224'
     number_min_length: 10
     number_max_length: 10
-    uuid: b4def928-7eb4-4de1-b233-e7b520b9abc0
+    uuid: 9179b753-0e44-49ce-9fe4-a2c5ac3f2e3e
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247814
     prefix: '2392225'
     number_min_length: 10
     number_max_length: 10
-    uuid: 67120025-ce93-41c7-9bfe-1812304f3092
+    uuid: 0ed9ec79-9767-43cc-a86d-1d38d8ca6ad2
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247817
     prefix: '2392226'
     number_min_length: 10
     number_max_length: 10
-    uuid: d535efd4-7fa8-4759-9d65-a6901773cc6e
+    uuid: 3e3138c6-02d8-4617-9718-30da0110decc
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247823
     prefix: '2392227'
     number_min_length: 10
     number_max_length: 10
-    uuid: 20dd9bf1-f5e8-4726-8ecd-6bcb4ef0beb9
+    uuid: 7af5b6b3-5b6c-45c5-ae9b-cefd8f35b05f
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247830
     prefix: '2392228'
     number_min_length: 10
     number_max_length: 10
-    uuid: 71048714-d242-4d4f-b6ab-57aad51c0773
+    uuid: 652ca80f-1170-4e80-bd6a-a1ce8a59de0e
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247840
     prefix: '23922310'
     number_min_length: 10
     number_max_length: 10
-    uuid: 09db38d2-34bc-40c3-9aa2-b93c9979d33e
+    uuid: daef59fb-3bad-4c0c-bcc4-df59aab73efb
     country_id: *st
-    network_id: *st_guadalupe_fixed
+    network_id: *st_guadalupe_region
   - id: 247841
     prefix: '23922311'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7c528728-1756-46d5-9511-9e7041aade6c
+    uuid: decce436-845d-428d-abc6-3c2691ce4c20
     country_id: *st
-    network_id: *st_guadalupe_fixed
+    network_id: *st_guadalupe_region
   - id: 247844
     prefix: '23922330'
     number_min_length: 10
     number_max_length: 10
-    uuid: f48af3c9-b635-43d0-8d65-688deb523e01
+    uuid: bee23742-1192-40b9-a20b-90e7efc62b8d
     country_id: *st
-    network_id: *st_neves_santa_catarina_fixed
+    network_id: *st_neves_santa_catarina_region
   - id: 247845
     prefix: '23922331'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9884d8ed-c65c-445f-bf0d-b596259ad7e7
+    uuid: 330babdd-042b-4114-9171-496a4148a854
     country_id: *st
-    network_id: *st_neves_santa_catarina_fixed
+    network_id: *st_neves_santa_catarina_region
   - id: 247846
     prefix: '23922332'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4b61d13f-75b7-4e86-9094-a981decdd9b6
+    uuid: 95ffeb86-ab5c-4d55-b038-d0c5bf33f77f
     country_id: *st
-    network_id: *st_neves_santa_catarina_fixed
+    network_id: *st_neves_santa_catarina_region
   - id: 247857
     prefix: '239224'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6ac42845-8c18-4f2a-a864-4dd72a29ee53
+    uuid: 78f63539-e4fc-4479-b97b-b5eb7e3d9f3e
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247869
     prefix: '23922510'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2db39edc-f658-4b1b-a2ad-50e8819750bc
+    uuid: ca8ab226-b65c-43b6-8d4d-f79a7aff22e5
     country_id: *st
-    network_id: *st_regiao_autonoma_do_principe_fixed
+    network_id: *st_regiao_autonoma_do_principe_region
   - id: 247870
     prefix: '23922511'
     number_min_length: 10
     number_max_length: 10
-    uuid: c00c8ed4-e6ca-4279-bd70-893773813bc6
+    uuid: 814ac2fb-c680-4cc6-a036-32b1082a333f
     country_id: *st
-    network_id: *st_regiao_autonoma_do_principe_fixed
+    network_id: *st_regiao_autonoma_do_principe_region
   - id: 247871
     prefix: '23922512'
     number_min_length: 10
     number_max_length: 10
-    uuid: f0091aea-7e92-42a6-bd09-27dea9645457
+    uuid: ba184a84-bca9-4fb5-abe8-1e5ddca375b4
     country_id: *st
-    network_id: *st_regiao_autonoma_do_principe_fixed
+    network_id: *st_regiao_autonoma_do_principe_region
   - id: 247872
     prefix: '23922513'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3a8c1583-ae3e-4601-998d-18ac9e73a80b
+    uuid: 6e897cfd-7f0d-4e8d-933f-254bcc68e3db
     country_id: *st
-    network_id: *st_regiao_autonoma_do_principe_fixed
+    network_id: *st_regiao_autonoma_do_principe_region
   - id: 247880
     prefix: '23922610'
     number_min_length: 10
     number_max_length: 10
-    uuid: 960b0fb1-4d33-40b5-983b-7ac126048678
+    uuid: a27b2a7f-994e-4477-915d-1626bdad9884
     country_id: *st
-    network_id: *st_angolares_porto_alegre_fixed
+    network_id: *st_angolares_porto_alegre_region
   - id: 247881
     prefix: '23922611'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4798c074-ae30-4d22-b1c1-22dffc8d1f7c
+    uuid: 25c57d5c-038e-4db8-8b18-11272715288b
     country_id: *st
-    network_id: *st_angolares_porto_alegre_fixed
+    network_id: *st_angolares_porto_alegre_region
   - id: 247882
     prefix: '23922650'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3e8be298-34c6-4110-83e1-126793237632
+    uuid: c93f97b7-5222-41e3-bb16-2b11179efe94
     country_id: *st
-    network_id: *st_santana_ribeira_afonso_fixed
+    network_id: *st_santana_ribeira_afonso_region
   - id: 247883
     prefix: '23922651'
     number_min_length: 10
     number_max_length: 10
-    uuid: c0d11392-c249-44d5-81fd-96e47dd50a3d
+    uuid: f914de4b-cef6-463c-b84a-c6746fddc1b7
     country_id: *st
-    network_id: *st_santana_ribeira_afonso_fixed
+    network_id: *st_santana_ribeira_afonso_region
   - id: 247884
     prefix: '23922652'
     number_min_length: 10
     number_max_length: 10
-    uuid: 84053ad5-4e86-4ff5-b4f4-3c0bf5b4461e
+    uuid: bf151783-4902-4135-bddd-ea16688fd82f
     country_id: *st
-    network_id: *st_santana_ribeira_afonso_fixed
+    network_id: *st_santana_ribeira_afonso_region
   - id: 247889
     prefix: '2392271'
     number_min_length: 10
     number_max_length: 10
-    uuid: 69c25bda-2ff7-4e81-a04a-9bd8d196f573
+    uuid: c968d1a4-11aa-42b3-9840-4a769c47a5a0
     country_id: *st
-    network_id: *st_trindade_fixed
+    network_id: *st_trindade_region
   - id: 247891
     prefix: '23922721'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7ba5481c-c4c9-438f-b33d-0c5b5ddd90e7
+    uuid: 3a95c583-cbe9-44a8-ad6d-fb6d5c3de4f1
     country_id: *st
-    network_id: *st_madalena_fixed
+    network_id: *st_madalena_region
   - id: 247894
     prefix: '239228'
     number_min_length: 10
     number_max_length: 10
-    uuid: 45021b91-4d83-4238-a686-20a92eee0767
+    uuid: 644cb7c3-c627-484e-885a-e8dcaabe5a3c
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
   - id: 247908
     prefix: '239229'
     number_min_length: 10
     number_max_length: 10
-    uuid: 72132d0e-c7b1-428c-8de8-817ec0dac057
+    uuid: 9685369f-093f-41c6-b7c5-c0ed72bbe05c
     country_id: *st
-    network_id: *st_agua_grande_fixed
+    network_id: *st_agua_grande_region
 # Mobile Prefixes
   - id: 257142
     prefix: '2399'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7a03e820-f0a2-40e2-b816-1a435a9eb475
+    uuid: f1d42d59-5a49-4ae4-b610-a93d8f266846
     country_id: *st
     network_id: *st_mobile
   - id: 257166
     prefix: '23990'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7e9ef4e6-aebd-4fe6-84ec-a09efdec9524
+    uuid: 1c36ef66-47bd-49b1-9c4b-da8dc59e6ca3
     country_id: *st
     network_id: *st_unitel_mobile
   - id: 257973
     prefix: '23998'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3a126114-f7e9-4685-a8c0-42941e5c7ddc
+    uuid: 3a5b9e22-0a65-440e-8ed0-400bc335c625
     country_id: *st
     network_id: *st_cstmovel_mobile
   - id: 258199
     prefix: '23999'
     number_min_length: 10
     number_max_length: 10
-    uuid: 269417a4-41a5-4e12-bab0-934a41e14a07
+    uuid: bbb10ede-b2ac-4611-aead-189519490887
     country_id: *st
     network_id: *st_cstmovel_mobile

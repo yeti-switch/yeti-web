@@ -3,49 +3,49 @@ networks:
 # Supplementary services Networks
   - id: &nc_freephone_services 21323
     name: NC Freephone Services
-    uuid: aff43220-75ce-4a9e-8a28-3c56a937734f
-    type_id: 14
+    uuid: be974c1b-a75c-49df-82e0-8953619e5a54
+    type_id: 13
   - id: &nc_emergency_services 21463
     name: NC Emergency Services
-    uuid: 91746827-1b30-47ee-a08c-5eb2b6fcde52
-    type_id: 14
+    uuid: 47e0e580-2d61-4e88-9b82-4def32b84ce2
+    type_id: 13
   - id: &nc_special_services 21530
     name: NC Special Services
-    uuid: 82082c58-eb6d-4237-b0df-0bcfd19b635c
-    type_id: 14
+    uuid: c0ebe349-10b4-4e68-b2a0-1b9325092e0d
+    type_id: 13
   - id: &nc_audiotext_internet_and_voice_services 22060
     name: NC Audiotext Internet And Voice Services
-    uuid: 3c38d84b-857a-4026-83a8-ac1f4442a40a
-    type_id: 14
+    uuid: 078b1585-73f1-4930-b75f-b0d24dc51abd
+    type_id: 13
   - id: &nc_marine_vhf 24060
     name: NC Marine Vhf
-    uuid: eab32a4f-32db-4427-bedf-e2a83f4c9e70
-    type_id: 14
+    uuid: 314c61d4-dd6b-47ca-b9bc-2b21c5197a92
+    type_id: 13
 # Fixed Networks
   - id: &nc_fixed 21906
     name: NC Fixed
-    uuid: 309eb69e-d222-4580-924f-4bf6861db229
-    type_id: 12
-  - id: &nc_province_sud_fixed 22031
-    name: NC Province Sud Fixed
-    uuid: e990b607-449a-446b-8b84-8c0d6aa6dfb5
-    type_id: 12
-  - id: &nc_province_nord_fixed 22220
-    name: NC Province Nord Fixed
-    uuid: 86058cfe-2931-40af-a494-565cca738fca
-    type_id: 12
-  - id: &nc_province_des_iles_fixed 22384
-    name: NC Province Des Iles Fixed
-    uuid: 5ba502cb-22d4-4304-9f62-dfdac1c9a7f8
-    type_id: 12
-  - id: &nc_public_telephones_fixed 24336
-    name: NC Public Telephones Fixed
-    uuid: 5120ddf4-dcc5-4dd8-b8c3-045c47bd0854
-    type_id: 12
+    uuid: 53fd091c-5a1e-4829-a38b-ac5a16c2b7b1
+    type_id: 2
+  - id: &nc_province_sud_region 22031
+    name: NC Province Sud Region
+    uuid: b18cfa5c-3d29-4170-8aa4-f347f39f05b6
+    type_id: 2
+  - id: &nc_province_nord_region 22220
+    name: NC Province Nord Region
+    uuid: 15b1c748-f247-471a-9f51-adb53a3b7a9b
+    type_id: 2
+  - id: &nc_province_des_iles_region 22384
+    name: NC Province Des Iles Region
+    uuid: 7bddce93-7a9b-4ed2-8e0c-a683340cf39a
+    type_id: 2
+  - id: &nc_public_telephones_region 24336
+    name: NC Public Telephones Region
+    uuid: 2dcf43e3-18ea-4caa-a053-ae1f97d4e4e0
+    type_id: 2
 # Mobile Networks
   - id: &nc_mobilis_mobile 23322
     name: NC Mobilis Mobile
-    uuid: 9488f66b-92fb-49b1-bc5a-a71177acdfe9
+    uuid: b3d4788a-0589-4ef4-9768-c910b7c5df87
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -53,7 +53,7 @@ network_prefixes:
     prefix: '687'
     number_min_length: 4
     number_max_length: 100
-    uuid: 3da1dae7-d569-44e4-a382-6142794c6951
+    uuid: 6cd51ec3-1ebf-4695-861b-cac10fca4531
     country_id: *nc
     network_id: null
 # Supplementary services Prefixes
@@ -61,63 +61,63 @@ network_prefixes:
     prefix: '68705'
     number_min_length: 9
     number_max_length: 9
-    uuid: cb2a20c2-82b6-47b6-bc04-be9fe4bff4db
+    uuid: 4ebb71ae-4008-4b5a-8385-3989c6d82802
     country_id: *nc
     network_id: *nc_freephone_services
   - id: 242460
     prefix: '6871'
     number_min_length: 5
     number_max_length: 5
-    uuid: e0fdcce7-e328-48e1-88b5-eefb138ae256
+    uuid: 0bb1a490-d894-45b9-b378-e35dc400c90b
     country_id: *nc
     network_id: *nc_emergency_services
   - id: 242537
     prefix: '68710'
     number_min_length: 7
     number_max_length: 7
-    uuid: 5150c824-9c28-4033-bcc2-525d812dcc8f
+    uuid: 11e4072f-d340-493a-81e4-ecd5cec8247b
     country_id: *nc
     network_id: *nc_special_services
   - id: 243671
     prefix: '68736'
     number_min_length: 9
     number_max_length: 9
-    uuid: ab7f66a0-5eb6-46bf-97d3-b644a8f88498
+    uuid: 82a873d5-99c0-4685-be5c-a91b3889ad28
     country_id: *nc
     network_id: *nc_audiotext_internet_and_voice_services
   - id: 245162
     prefix: '68758'
     number_min_length: 6
     number_max_length: 6
-    uuid: e7c1cb2b-7ad8-4fd6-b66d-77238150355f
+    uuid: 8a8c900f-60a9-4018-977a-65f4e0ac0f5a
     country_id: *nc
     network_id: *nc_special_services
   - id: 250119
     prefix: '68755'
     number_min_length: 11
     number_max_length: 11
-    uuid: f5d4a307-e586-4c25-9d96-421e3e7a2d54
+    uuid: 359e36ba-a8c0-4bfb-aa5b-8bbc8fa76538
     country_id: *nc
     network_id: *nc_special_services
   - id: 250204
     prefix: '68756'
     number_min_length: 6
     number_max_length: 6
-    uuid: 08ef3a0c-ff15-4b3f-af4a-60b20b4117a6
+    uuid: 5deecdb6-771e-4d13-8ab2-71af9557fc6a
     country_id: *nc
     network_id: *nc_special_services
   - id: 250247
     prefix: '68757'
     number_min_length: 6
     number_max_length: 6
-    uuid: 1ce32813-c025-4db6-a0ef-1e5b24530529
+    uuid: 3e86cb2a-6145-49ac-b722-2efb65ea68e4
     country_id: *nc
     network_id: *nc_special_services
   - id: 254296
     prefix: '68766'
     number_min_length: 9
     number_max_length: 9
-    uuid: 76a9ad79-2abe-4256-8231-f11164c09388
+    uuid: d26143b2-9d1c-435f-8ad1-853449abd1ee
     country_id: *nc
     network_id: *nc_marine_vhf
 # Fixed Prefixes
@@ -125,266 +125,266 @@ network_prefixes:
     prefix: '68731'
     number_min_length: 9
     number_max_length: 9
-    uuid: 602423fe-ccd8-4e2e-97c9-f43b3129b057
+    uuid: 5c83af1c-8434-4441-b063-df5a5a59e66e
     country_id: *nc
     network_id: *nc_fixed
   - id: 243374
     prefix: '68732'
     number_min_length: 9
     number_max_length: 9
-    uuid: 6552a4d1-2e4c-49e0-8fa8-6a063fdc382c
+    uuid: 58438fb8-00d1-4033-9d46-c6374f915b22
     country_id: *nc
     network_id: *nc_fixed
   - id: 243417
     prefix: '68733'
     number_min_length: 9
     number_max_length: 9
-    uuid: ebc0eff5-2885-4029-bf84-7ed83437b7ed
+    uuid: f968c721-8ee2-4719-b800-02f320e30d0b
     country_id: *nc
     network_id: *nc_fixed
   - id: 243494
     prefix: '68734'
     number_min_length: 9
     number_max_length: 9
-    uuid: 310e1796-0938-4b7f-a710-a2b4ba03eef0
+    uuid: 7c72db4e-6968-4139-b5a7-97f96c7e67ae
     country_id: *nc
     network_id: *nc_fixed
   - id: 243593
     prefix: '68735'
     number_min_length: 9
     number_max_length: 9
-    uuid: db84189e-9d69-42a2-8d4d-6f905d21ba78
+    uuid: 6dcbc795-119d-47c0-840c-1a5da0a75cf5
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 244139
     prefix: '68741'
     number_min_length: 9
     number_max_length: 9
-    uuid: b7141b00-e92e-45b9-ae7d-6c02773313d7
+    uuid: 8171c5ab-c0f9-4903-b941-c35534708636
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 244240
     prefix: '68742'
     number_min_length: 9
     number_max_length: 9
-    uuid: 0b9bf9a5-56c9-407d-9d15-4a37abcd1c2c
+    uuid: 3a8cc16a-a5bd-4441-bd78-c4e13921dfd9
     country_id: *nc
-    network_id: *nc_province_nord_fixed
+    network_id: *nc_province_nord_region
   - id: 244338
     prefix: '68743'
     number_min_length: 9
     number_max_length: 9
-    uuid: 1d485148-cb83-4b72-aa32-b1c828120cd0
+    uuid: 703a2763-f8dc-40b4-b69d-5cafb2cc4528
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 244494
     prefix: '68744'
     number_min_length: 9
     number_max_length: 9
-    uuid: a959b687-5924-440b-a63f-733d982d16e5
+    uuid: 95e98679-6146-4abd-a256-71ee521656ff
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 244637
     prefix: '68745'
     number_min_length: 9
     number_max_length: 9
-    uuid: e6cfd4a1-3891-4a0b-91b4-2ae1f32674ea
+    uuid: 83515393-2c70-43bb-8a52-206d4f57d52e
     country_id: *nc
-    network_id: *nc_province_des_iles_fixed
+    network_id: *nc_province_des_iles_region
   - id: 247456
     prefix: '68720'
     number_min_length: 9
     number_max_length: 9
-    uuid: e18c00c6-f82e-41d3-a50b-80a3d90733c6
+    uuid: 1094d02b-0737-4a68-b7b2-983d717ed2de
     country_id: *nc
     network_id: *nc_fixed
   - id: 247922
     prefix: '68723'
     number_min_length: 9
     number_max_length: 9
-    uuid: c7369f81-9340-4c1a-9d53-1bedfed4ee80
+    uuid: 60e1b4c0-afbe-4428-889f-5f1127894fa9
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 248114
     prefix: '68724'
     number_min_length: 9
     number_max_length: 9
-    uuid: f9dcac91-b347-4b01-ac58-bc0d47493019
+    uuid: 4938b841-15ba-4790-ad7c-5a1eba9c6e18
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 248264
     prefix: '68725'
     number_min_length: 9
     number_max_length: 9
-    uuid: f6a12d62-8b28-4c6f-a794-085a157e8ccd
+    uuid: d451b347-e437-43af-8e74-88093bcd9be6
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 248474
     prefix: '68726'
     number_min_length: 9
     number_max_length: 9
-    uuid: d58e5ab3-17f1-4690-912d-bdab06f7de37
+    uuid: d568bbd2-833d-4b4f-a407-fdd252a5f44c
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 248617
     prefix: '68727'
     number_min_length: 9
     number_max_length: 9
-    uuid: 6945614d-1f68-4dad-a84f-270d273e5acb
+    uuid: 2fd91148-f4b7-4429-a989-732f18579271
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 248753
     prefix: '68728'
     number_min_length: 9
     number_max_length: 9
-    uuid: 25d1f341-1226-4122-8b13-06d2f1271868
+    uuid: 10a2c620-a01a-4a62-a58d-403eaba344d1
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 248833
     prefix: '68729'
     number_min_length: 9
     number_max_length: 9
-    uuid: 4827d8c5-1ac6-4311-bfa1-d4ac398e1dca
+    uuid: c2723ac8-18a8-4a1c-bffb-7a4fccb8fdaf
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 248937
     prefix: '68730'
     number_min_length: 9
     number_max_length: 9
-    uuid: 88fb1b44-9557-41a1-b8f2-945abd5d0ead
+    uuid: 82bf6960-7dc8-4283-90c6-21a4e96ca957
     country_id: *nc
     network_id: *nc_fixed
   - id: 249091
     prefix: '68746'
     number_min_length: 9
     number_max_length: 9
-    uuid: 91be8079-e21f-466e-92c2-884b48e3a037
+    uuid: c5ee117e-e27d-45d3-acf5-0007ef440d53
     country_id: *nc
-    network_id: *nc_province_sud_fixed
+    network_id: *nc_province_sud_region
   - id: 249308
     prefix: '68747'
     number_min_length: 9
     number_max_length: 9
-    uuid: e6b5d51d-4902-4eb3-b466-2665e4f86542
+    uuid: cd83e996-488b-4265-87e1-ec90dbfb21a3
     country_id: *nc
-    network_id: *nc_province_nord_fixed
+    network_id: *nc_province_nord_region
   - id: 256843
     prefix: '68788'
     number_min_length: 9
     number_max_length: 9
-    uuid: 1da4c5a6-e182-481d-a062-7c278c367dae
+    uuid: fdd321d0-20b2-42ff-9b6a-444ec691d5cb
     country_id: *nc
-    network_id: *nc_public_telephones_fixed
+    network_id: *nc_public_telephones_region
 # Mobile Prefixes
   - id: 249625
     prefix: '68750'
     number_min_length: 9
     number_max_length: 9
-    uuid: faeafcab-a331-4b13-8071-a809b9b5a051
+    uuid: 389cc0b6-3be0-408f-bad9-f52933acd9db
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 249701
     prefix: '68751'
     number_min_length: 9
     number_max_length: 9
-    uuid: 0b652a50-9842-48ca-8d27-f74e18fe4a43
+    uuid: d3668c19-70ca-43ee-835b-0ca65bf59d36
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 249770
     prefix: '68752'
     number_min_length: 9
     number_max_length: 9
-    uuid: 4497ab40-c95a-47c3-9ccb-8213eb9b8a4c
+    uuid: 928f1236-bb90-43f9-924b-09b06e729d9a
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 249928
     prefix: '68753'
     number_min_length: 9
     number_max_length: 9
-    uuid: 71b01161-241f-46b9-9dd9-e6cb63d2490c
+    uuid: 28d0e53c-bc67-42cb-9713-9b004a021af1
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 250021
     prefix: '68754'
     number_min_length: 9
     number_max_length: 9
-    uuid: d735ee74-f010-4ea3-b931-f5000d0c3717
+    uuid: 5b18f5be-eff1-4216-a0ef-71bd9bfcca45
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 253128
     prefix: '68780'
     number_min_length: 9
     number_max_length: 9
-    uuid: 491c0d12-5b82-49d5-98e8-3b7ba4014717
+    uuid: f43ad4ae-3a38-4729-8b28-e3f7db26c566
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 253324
     prefix: '68781'
     number_min_length: 9
     number_max_length: 9
-    uuid: 23494d4e-36aa-4465-b3f7-b687bc2654e2
+    uuid: cbc657c6-5df4-4d48-b6a9-f344887ee8f7
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 253483
     prefix: '68782'
     number_min_length: 9
     number_max_length: 9
-    uuid: 7047caa6-5875-4da1-8094-e1b6b37470e3
+    uuid: 229682ce-9933-45a0-8b61-3fd26afff6b8
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 253599
     prefix: '68783'
     number_min_length: 9
     number_max_length: 9
-    uuid: 168cb2b1-25fa-48f2-9160-b22616a2aed2
+    uuid: cb7913a2-dcf5-4760-9fd1-00fe9020e982
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 253724
     prefix: '68784'
     number_min_length: 9
     number_max_length: 9
-    uuid: 183e8ba3-2818-49c0-87a2-9f560e4f181e
+    uuid: 6072a4de-2c30-416f-aa5a-706cc374439c
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 255264
     prefix: '6877'
     number_min_length: 9
     number_max_length: 9
-    uuid: 0588c5f7-df90-4da8-b6f1-08ef5dd8373d
+    uuid: 0ed07fd0-e845-4430-8a93-7d02708f621d
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 257008
     prefix: '68789'
     number_min_length: 9
     number_max_length: 9
-    uuid: 5a7923ab-9ffc-4c34-b955-d79dbd9f064e
+    uuid: 2cf66185-f7b5-4dfc-965d-f72d8fd4a0a8
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 257120
     prefix: '6879'
     number_min_length: 9
     number_max_length: 9
-    uuid: c23088ac-9ecf-47b0-a7cf-60a766e9a975
+    uuid: 8830de21-1cdd-4690-87ae-8b1ed42d7149
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 263710
     prefix: '68785'
     number_min_length: 9
     number_max_length: 9
-    uuid: 12e73297-4cb5-4992-a91b-87854633b8cb
+    uuid: c1a03416-f71e-403f-9b0c-e8acef10fc26
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 263857
     prefix: '68786'
     number_min_length: 9
     number_max_length: 9
-    uuid: e2b53fbc-fc81-4d6b-bc49-2e3d3d3ea507
+    uuid: 4b73e64b-7a05-4dac-89ca-6e4541e6e19c
     country_id: *nc
     network_id: *nc_mobilis_mobile
   - id: 264011
     prefix: '68787'
     number_min_length: 9
     number_max_length: 9
-    uuid: c02f6873-0ce7-4a9d-8d7f-f391e4f75924
+    uuid: 8be52398-5d1f-4553-8aa8-8850a1150e5d
     country_id: *nc
     network_id: *nc_mobilis_mobile

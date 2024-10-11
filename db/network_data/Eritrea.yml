@@ -3,45 +3,45 @@ networks:
 # Mobile Networks
   - id: &er_eritel_mobile 14379
     name: ER Eritel Mobile
-    uuid: c4a0e437-2c1a-4797-9e80-5aa4cdda8a2b
+    uuid: 5184838b-6539-4089-94db-d29b5799fb63
     type_id: 3
 # Fixed Networks
   - id: &er_fixed 19784
     name: ER Fixed
-    uuid: 52db25df-433a-46af-89b1-eb6a439909fc
-    type_id: 12
-  - id: &er_asmara_fixed 24786
-    name: ER Asmara Fixed
-    uuid: 314511b0-444d-493b-bdf0-1b7099977467
-    type_id: 12
+    uuid: 2389b4ad-43b8-46d4-a719-18ea74cd2280
+    type_id: 2
+  - id: &er_asmara_region 24786
+    name: ER Asmara Region
+    uuid: 0e79838a-9521-4d6b-bf4d-5a9b91494dcc
+    type_id: 2
 network_prefixes:
 # Mobile Prefixes
   - id: 149333
     prefix: '2917'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5d0732a8-1034-4f7c-a648-51397f2c2777
+    uuid: c46d8bc5-9e44-45df-8893-53ea123fe8ff
     country_id: *er
     network_id: *er_eritel_mobile
   - id: 258574
     prefix: '291171'
     number_min_length: 10
     number_max_length: 10
-    uuid: a74cc876-21c1-4408-b2e2-4043647dc995
+    uuid: ca067298-82a1-4d6e-801c-480234a7e221
     country_id: *er
     network_id: *er_eritel_mobile
   - id: 258576
     prefix: '291172'
     number_min_length: 10
     number_max_length: 10
-    uuid: 616dc955-9298-4506-83f4-f2d6993c6786
+    uuid: 1bfda203-f6b0-4905-a2ad-bc83464c20f0
     country_id: *er
     network_id: *er_eritel_mobile
   - id: 258577
     prefix: '291173'
     number_min_length: 10
     number_max_length: 10
-    uuid: acca0831-85c0-47e8-bfe6-bcea3b57e840
+    uuid: d369cc5e-2160-46da-a32e-a1fc5fa4ca7f
     country_id: *er
     network_id: *er_eritel_mobile
 # Fixed Prefixes
@@ -49,21 +49,21 @@ network_prefixes:
     prefix: '2918'
     number_min_length: 10
     number_max_length: 10
-    uuid: bab2594e-3f54-47f4-bd29-5b7c3a350df6
+    uuid: 17f10bc3-54da-4bc6-8985-77e3350d596f
     country_id: *er
     network_id: *er_fixed
   - id: 258560
     prefix: '2911'
     number_min_length: 10
     number_max_length: 10
-    uuid: 03bae1b2-3479-4e7b-91b9-5c1a6b4b46ae
+    uuid: 301c296d-3d77-4b78-ae5a-f7856f76f9fc
     country_id: *er
-    network_id: *er_asmara_fixed
+    network_id: *er_asmara_region
 # Country code Prefixes
   - id: 241987
     prefix: '291'
     number_min_length: 4
     number_max_length: 100
-    uuid: 13b08fb7-b294-4e5b-8d8a-ae990274412b
+    uuid: e6519c6f-5915-41b5-87ce-3f939747bc6a
     country_id: *er
     network_id: null

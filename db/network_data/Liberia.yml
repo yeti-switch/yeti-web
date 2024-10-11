@@ -3,57 +3,57 @@ networks:
 # Supplementary services Networks
   - id: &lr_special_services 21435
     name: LR Special Services
-    uuid: bcb7d5e5-39c6-4a2d-bf7e-b52e6bee12a2
-    type_id: 14
+    uuid: dcfea970-ed2d-4c37-973e-d4c9af260f6e
+    type_id: 13
   - id: &lr_premium_rate_services 21968
     name: LR Premium Rate Services
-    uuid: 506d41c7-340a-40f6-bfab-123cd2480217
-    type_id: 14
+    uuid: 43631d2d-751a-47d2-a70a-c31eba93ddad
+    type_id: 13
   - id: &lr_telemedia_services 24423
     name: LR Telemedia Services
-    uuid: 646df6aa-0e22-4661-a0f4-3a0072f6d299
-    type_id: 14
+    uuid: 83ade0cc-ed28-4209-b411-43425ba53012
+    type_id: 13
 # Fixed Networks
   - id: &lr_fixed 22233
     name: LR Fixed
-    uuid: 5d2706ff-2b45-4011-9379-948a2dcbfb76
-    type_id: 12
-  - id: &lr_secure_network_fixed 22796
-    name: LR Secure Network Fixed
-    uuid: 34f5d3d0-8799-43fa-bc32-3dc26805b28b
-    type_id: 12
-  - id: &lr_monrovia_fixed 22838
-    name: LR Monrovia Fixed
-    uuid: 2af13929-0dd0-4809-a05d-35b9d4f4a483
-    type_id: 12
-  - id: &lr_outside_monrovia_fixed 22907
-    name: LR Outside Monrovia Fixed
-    uuid: 0fe30256-410f-474a-bfbb-d176b9c5e9d7
-    type_id: 12
-  - id: &lr_government_of_liberia_fixed 23121
-    name: LR Government Of Liberia Fixed
-    uuid: 5cb27c39-7628-47b3-89aa-c3d7ff6728c2
-    type_id: 12
-  - id: &lr_freephone_services_fixed 23163
-    name: LR Freephone Services Fixed
-    uuid: 3e56de8c-6091-482b-b0ac-f83e7d9ccf46
-    type_id: 12
-  - id: &lr_emergency_calls_fixed 23187
-    name: LR Emergency Calls Fixed
-    uuid: c824c815-2c9f-4be2-aee3-c331b1508807
-    type_id: 12
+    uuid: 2f5689a8-d174-437c-b557-f24cd5730b61
+    type_id: 2
+  - id: &lr_secure_network_region 22796
+    name: LR Secure Network Region
+    uuid: 5f93d5c3-97db-43dc-9261-f786152af66f
+    type_id: 2
+  - id: &lr_monrovia_region 22838
+    name: LR Monrovia Region
+    uuid: 0abd126e-e8f2-471a-80cd-5abbe69923f8
+    type_id: 2
+  - id: &lr_outside_monrovia_region 22907
+    name: LR Outside Monrovia Region
+    uuid: f663f2da-adea-450b-b7a2-ebcf375a93f2
+    type_id: 2
+  - id: &lr_government_of_liberia_region 23121
+    name: LR Government Of Liberia Region
+    uuid: 1f543fce-6681-4dac-8cde-160718bd926e
+    type_id: 2
+  - id: &lr_freephone_services_region 23163
+    name: LR Freephone Services Region
+    uuid: 8d012af7-2dea-4731-9a85-dee72db01e94
+    type_id: 2
+  - id: &lr_emergency_calls_region 23187
+    name: LR Emergency Calls Region
+    uuid: b1d4b7ea-b9d6-470f-a83d-4ffaa12b452e
+    type_id: 2
 # Mobile Networks
   - id: &lr_ltc_mobile_mobile 22845
     name: LR Ltc Mobile Mobile
-    uuid: 310962c5-3c81-41d7-9815-cad462ba68b9
+    uuid: 780c1b17-7be8-4a4c-a07f-80bd145fea14
     type_id: 3
   - id: &lr_mtn_mobile 23392
     name: LR Mtn Mobile
-    uuid: cb8e5a7b-f602-4337-b21d-0b20dbafe8a0
+    uuid: 788ed847-975e-49f7-9195-9f904ef8a3fe
     type_id: 3
   - id: &lr_orange_mobile 24228
     name: LR Orange Mobile
-    uuid: c6c74318-baf9-4e5b-8d27-c13eb947fc14
+    uuid: c5188990-5bd2-4873-b334-083d89d4c2c7
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -61,7 +61,7 @@ network_prefixes:
     prefix: '231'
     number_min_length: 4
     number_max_length: 100
-    uuid: 0b99d4ba-4d98-427b-a71b-7b3b39a451f1
+    uuid: 8fd5788e-344b-4ebd-88ac-bed3f8781fb9
     country_id: *lr
     network_id: null
 # Supplementary services Prefixes
@@ -69,28 +69,28 @@ network_prefixes:
     prefix: '2311'
     number_min_length: 6
     number_max_length: 6
-    uuid: b3ea48b6-3629-4378-b3ec-912fe23e4cf7
+    uuid: 4255830d-a623-4708-b2a2-a5c555755cb7
     country_id: *lr
     network_id: *lr_special_services
   - id: 243436
     prefix: '23133202'
     number_min_length: 12
     number_max_length: 12
-    uuid: ee8f9b5c-ae32-4c3a-ab77-7aee1ec473a0
+    uuid: 2defb061-3cfe-4f9c-9fd3-3a0bed4772b1
     country_id: *lr
     network_id: *lr_premium_rate_services
   - id: 253087
     prefix: '2318'
     number_min_length: 6
     number_max_length: 6
-    uuid: 3867f88b-18ae-46b6-beec-33bf743f048c
+    uuid: d852a863-f9df-4f8b-aa34-97130778e683
     country_id: *lr
     network_id: *lr_special_services
   - id: 257160
     prefix: '23190'
     number_min_length: 12
     number_max_length: 12
-    uuid: 340688eb-662e-4eb5-8960-bace47ff9b6e
+    uuid: d3996eab-c768-40e5-8654-41c64903081a
     country_id: *lr
     network_id: *lr_telemedia_services
 # Fixed Prefixes
@@ -98,168 +98,168 @@ network_prefixes:
     prefix: '231424'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4dc3e976-02fb-4303-a62c-8cb5c5df4535
+    uuid: 94ba9dcc-8a48-452b-8a85-eede966b222e
     country_id: *lr
     network_id: *lr_fixed
   - id: 247628
     prefix: '23121'
     number_min_length: 11
     number_max_length: 11
-    uuid: fa8ccf3f-635a-464c-9c76-a6a809e72db4
+    uuid: c75d6bd9-ab9e-4ed7-a4dc-6d927fe1e432
     country_id: *lr
-    network_id: *lr_secure_network_fixed
+    network_id: *lr_secure_network_region
   - id: 247724
     prefix: '23122'
     number_min_length: 11
     number_max_length: 11
-    uuid: 16353b57-533f-4e40-9cb7-27e09d9ddc66
+    uuid: 0c39cb79-6904-4ba7-863e-011c068c445a
     country_id: *lr
-    network_id: *lr_monrovia_fixed
+    network_id: *lr_monrovia_region
   - id: 247919
     prefix: '23123'
     number_min_length: 11
     number_max_length: 11
-    uuid: 031007df-05be-4bc6-b4b8-1022225f9b61
+    uuid: b1393711-ca7d-4326-961a-699d241fc90f
     country_id: *lr
-    network_id: *lr_outside_monrovia_fixed
+    network_id: *lr_outside_monrovia_region
   - id: 248260
     prefix: '23125'
     number_min_length: 11
     number_max_length: 11
-    uuid: afd0be15-157b-4c1e-973d-a3b016d16a8f
+    uuid: a2092931-003f-496a-a367-83a2267a0787
     country_id: *lr
     network_id: *lr_fixed
   - id: 248614
     prefix: '23127'
     number_min_length: 11
     number_max_length: 11
-    uuid: 38bae383-0a37-4381-b31c-be2263d8eb4c
+    uuid: ed3e2c00-14ce-4939-ba9f-76ed97b4a50d
     country_id: *lr
-    network_id: *lr_government_of_liberia_fixed
+    network_id: *lr_government_of_liberia_region
   - id: 248750
     prefix: '23128'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0fc05be1-7c6f-4344-b1e1-d2dab78450ee
+    uuid: 71d9847e-7b84-4162-882f-7458247130d5
     country_id: *lr
-    network_id: *lr_freephone_services_fixed
+    network_id: *lr_freephone_services_region
   - id: 248831
     prefix: '23129'
     number_min_length: 11
     number_max_length: 11
-    uuid: 110c10ed-72df-42c6-9fa4-5e3f1212de13
+    uuid: f9647291-7be8-457a-8381-890db113f3dd
     country_id: *lr
-    network_id: *lr_emergency_calls_fixed
+    network_id: *lr_emergency_calls_region
 # Mobile Prefixes
   - id: 247742
     prefix: '231220'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0e1a5440-0671-4f2e-8907-d64e82f67a63
+    uuid: 2ddde2f3-46b6-4f78-a0fb-893d23e8ab6b
     country_id: *lr
     network_id: *lr_ltc_mobile_mobile
   - id: 250166
     prefix: '231555'
     number_min_length: 12
     number_max_length: 12
-    uuid: dc1e0d3e-3dab-4d7e-bd3a-eaa8e514ec49
+    uuid: 6698d5b3-c87f-44db-99d6-94f40a7ab463
     country_id: *lr
     network_id: *lr_mtn_mobile
   - id: 255650
     prefix: '231770'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce2fb55d-92f0-4682-acf0-2768e5908010
+    uuid: 6e60fbc2-00dd-4ee9-9f35-aacee9f2765f
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 255806
     prefix: '231772'
     number_min_length: 12
     number_max_length: 12
-    uuid: b4ff6634-f20e-41e2-b4b6-9f39fd38ff20
+    uuid: 8cea502f-01fd-4dee-bb6e-335a2e7b9a12
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 255865
     prefix: '231773'
     number_min_length: 12
     number_max_length: 12
-    uuid: b1260f1b-1b88-4f2b-9e86-519da2f2e8d3
+    uuid: 365b027b-736a-48e5-bc01-fc42c033924a
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 255882
     prefix: '231774'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5da7eef4-91c3-4341-afee-13566d791d34
+    uuid: f1bfeb9d-345a-43fa-add3-bf2e35afd1c2
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 255906
     prefix: '231775'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6cb7cc7d-b302-48d6-9b54-07d91196959d
+    uuid: e047320d-d697-4ae7-9526-d9246c402429
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 255946
     prefix: '231776'
     number_min_length: 12
     number_max_length: 12
-    uuid: 59f1c403-a2fa-4914-8c2a-8b3a6c875437
+    uuid: 698d4349-aaeb-4c0a-b500-84a2cd8e4ca5
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 255963
     prefix: '231777'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9066ce24-69d9-4677-87d1-37797a7d8566
+    uuid: 8a2708ca-44b7-4c48-a156-33e279844dc3
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 255999
     prefix: '231778'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6da1c695-75a8-4328-a167-739e207df4d7
+    uuid: 5302e826-2223-4e01-bd2b-e263786f35ad
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 256050
     prefix: '231779'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3dec0147-c907-4ada-aaa9-ee346c232679
+    uuid: a13bf88a-4658-47ed-8c7b-6316856bd7ce
     country_id: *lr
     network_id: *lr_orange_mobile
   - id: 256857
     prefix: '231880'
     number_min_length: 12
     number_max_length: 12
-    uuid: 03efa431-04d9-4495-912f-a12678cfd244
+    uuid: da1b49c1-7574-42ad-90dd-68a1d2c33ba9
     country_id: *lr
     network_id: *lr_mtn_mobile
   - id: 256873
     prefix: '231881'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5b6b4463-e584-4d55-8adb-fcf2adbb8e08
+    uuid: dda44b2e-8807-4165-9add-6022427ab2a2
     country_id: *lr
     network_id: *lr_mtn_mobile
   - id: 256951
     prefix: '231886'
     number_min_length: 12
     number_max_length: 12
-    uuid: e7235509-ff52-4530-88df-4f206af0de2c
+    uuid: a99cb33a-50f7-4795-970f-6173f6ce811b
     country_id: *lr
     network_id: *lr_mtn_mobile
   - id: 256962
     prefix: '231887'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ffdad99-15df-4e19-a44e-1324a28081fe
+    uuid: 4e4d3613-97ad-417f-9599-6a2f91040219
     country_id: *lr
     network_id: *lr_mtn_mobile
   - id: 256970
     prefix: '231888'
     number_min_length: 12
     number_max_length: 12
-    uuid: 95028132-9c96-466e-bf4a-01314978777f
+    uuid: ea80444b-7022-4530-a5a3-b7f1738d4e37
     country_id: *lr
     network_id: *lr_mtn_mobile

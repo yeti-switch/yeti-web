@@ -3,56 +3,56 @@ networks:
 # Mobile Networks
   - id: &sx_telcell_mobile 16600
     name: SX Telcell Mobile
-    uuid: 7d5c0a04-f6a7-4ede-80c0-4df32cffb250
+    uuid: ff1d1c68-18db-4475-93d4-38d5e9219ace
     type_id: 3
   - id: &sx_chippie_mobile 16611
     name: SX Chippie Mobile
-    uuid: 808eaab6-e84c-4cff-a942-c7316c97137e
+    uuid: 6fb14913-d059-442d-ae0c-551cb05b94f8
     type_id: 3
 # Fixed Networks
   - id: &sx_fixed 16601
     name: SX Fixed
-    uuid: f7a6ff94-cb70-440d-a491-2bb87707c9c0
-    type_id: 12
-  - id: &sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_fixed 16604
-    name: SX Guana Bay Oyster Pond Philipsburg Pointe Blanche Fixed
-    uuid: dadbc2c1-7799-4943-8bae-5780c3a6ff83
-    type_id: 12
-  - id: &sx_caybay_colebay_pelican_fixed 16605
-    name: SX Caybay Colebay Pelican Fixed
-    uuid: b0b7d4fa-e7a6-426a-bcc8-d2944ec60e29
-    type_id: 12
-  - id: &sx_beacon_hill_cupecoy_maho_simpson_bay_fixed 16606
-    name: SX Beacon Hill Cupecoy Maho Simpson Bay Fixed
-    uuid: 4ecd4b5b-10ec-4168-8d4f-eb8f767cbdd2
-    type_id: 12
-  - id: &sx_did_fixed 16607
-    name: SX Did Fixed
-    uuid: 82cdd29d-01ea-4050-909f-0cab08ce1c0f
-    type_id: 12
-  - id: &sx_belvedere_dutch_quarter_middle_region_fixed 16608
-    name: SX Belvedere Dutch Quarter Middle Region Fixed
-    uuid: 6a320fb8-40ce-491d-9957-b0130a3abc6f
-    type_id: 12
-  - id: &sx_bettys_estate_cul_de_sac_ebenezer_saunders_south_reward_fixed 16609
-    name: SX Bettys Estate Cul De Sac Ebenezer Saunders South Reward Fixed
-    uuid: 4b4990bc-a54e-4aef-aacb-cac9dec030c8
-    type_id: 12
-  - id: &sx_antelecom_international_services_fixed 16612
-    name: SX Antelecom International Services Fixed
-    uuid: 7079394b-69b7-487c-8bd4-df21d78fc685
-    type_id: 12
-  - id: &sx_smitcoms_international_services_fixed 16613
-    name: SX Smitcoms International Services Fixed
-    uuid: 9113cc4e-48f5-4925-b11b-4e96eae552db
-    type_id: 12
+    uuid: 3fbf7947-9fd2-43ae-a9ff-0829f13b8985
+    type_id: 2
+  - id: &sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_region 16604
+    name: SX Guana Bay Oyster Pond Philipsburg Pointe Blanche Region
+    uuid: 85dcb1ea-d589-44af-9575-0dcc02b54243
+    type_id: 2
+  - id: &sx_caybay_colebay_pelican_region 16605
+    name: SX Caybay Colebay Pelican Region
+    uuid: 3f35ced8-9687-429d-8eac-8b81f6e29fb2
+    type_id: 2
+  - id: &sx_beacon_hill_cupecoy_maho_simpson_bay_region 16606
+    name: SX Beacon Hill Cupecoy Maho Simpson Bay Region
+    uuid: 3dd85daa-9a0d-4c2e-9fdf-1d763a21569d
+    type_id: 2
+  - id: &sx_did_region 16607
+    name: SX Did Region
+    uuid: 5138c660-41b7-424e-ae10-22e2a8c3b834
+    type_id: 2
+  - id: &sx_belvedere_dutch_quarter_middle_region_region 16608
+    name: SX Belvedere Dutch Quarter Middle Region Region
+    uuid: 5a31cb90-4d25-4dc8-b96b-c51a65c65058
+    type_id: 2
+  - id: &sx_bettys_estate_cul_de_sac_ebenezer_saunders_south_reward_region 16609
+    name: SX Bettys Estate Cul De Sac Ebenezer Saunders South Reward Region
+    uuid: 3a605b8f-77bf-4f2f-bc92-4b75120ffbe2
+    type_id: 2
+  - id: &sx_antelecom_international_services_region 16612
+    name: SX Antelecom International Services Region
+    uuid: 1f394031-b9fd-4daf-8877-db82c6f43390
+    type_id: 2
+  - id: &sx_smitcoms_international_services_region 16613
+    name: SX Smitcoms International Services Region
+    uuid: 6feaa21e-0756-4029-88fa-4bc3cd7c08ea
+    type_id: 2
 network_prefixes:
 # Country code Prefixes
   - id: 169524
     prefix: '1721'
     number_min_length: 2
     number_max_length: 100
-    uuid: a67eb29d-4081-4576-af90-8b99126f0d27
+    uuid: 57c44d2e-f4ca-4057-a0af-bfb683475606
     country_id: *sx
     network_id: null
 # Mobile Prefixes
@@ -60,140 +60,140 @@ network_prefixes:
     prefix: '1721520'
     number_min_length: 11
     number_max_length: 11
-    uuid: 49a7bc6c-d18b-45fd-9c8b-eff50b5b97f2
+    uuid: eac7d04f-fe09-4d5b-ac79-a474b7e126c4
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169601
     prefix: '1721521'
     number_min_length: 11
     number_max_length: 11
-    uuid: a3c8386b-2895-4b00-bb28-52f10989eb53
+    uuid: ad463acb-f883-4144-8627-e37c6dacecb8
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169602
     prefix: '1721522'
     number_min_length: 11
     number_max_length: 11
-    uuid: 33f581d8-9a68-443d-b478-3ac8be9be5dc
+    uuid: 8cd05dc0-493f-4f46-b36a-f96259bcf85e
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169603
     prefix: '1721523'
     number_min_length: 11
     number_max_length: 11
-    uuid: bec3592d-ab20-409c-b5ab-362b25614061
+    uuid: e6c5d27b-aa51-4d8d-a5b6-0fef7a1e6e7b
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169604
     prefix: '1721524'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5234f87c-a8d2-48b6-af4a-8a62239714fc
+    uuid: ef8fea90-427b-4850-8b10-c711af72f995
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169606
     prefix: '1721526'
     number_min_length: 11
     number_max_length: 11
-    uuid: 962fe1fc-60c9-4e75-bffb-c9d1d18b0089
+    uuid: 9d4a2c1e-bd85-4e8c-ba1d-83dc9492d31a
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169607
     prefix: '1721527'
     number_min_length: 11
     number_max_length: 11
-    uuid: be859e74-a86f-432e-b4c3-99adc8c88495
+    uuid: 8f11937a-f559-4f83-a297-43624e532dee
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169608
     prefix: '1721528'
     number_min_length: 11
     number_max_length: 11
-    uuid: 08696b64-9efe-45a0-aaf3-d27d3cf6a676
+    uuid: a296f2fa-4d00-4c62-a633-c6b7112f7e2f
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169609
     prefix: '1721529'
     number_min_length: 11
     number_max_length: 11
-    uuid: 81fb252c-6e51-49d2-8fd6-d42534580498
+    uuid: 34c3084f-5540-40f8-9a53-40695423fdb2
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169620
     prefix: '1721550'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7a303850-4fde-441f-ba9e-dd946857d134
+    uuid: 3cfba280-42b9-43b3-8334-8f28cbe7d4e3
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169621
     prefix: '1721556'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7a37f699-0119-4088-9cb8-c71073728b1b
+    uuid: ccc6887d-7f0a-4537-9ec3-a88b94cfcc09
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169622
     prefix: '1721557'
     number_min_length: 11
     number_max_length: 11
-    uuid: 599dbf42-d3ed-48fa-989c-37bf84f01a9e
+    uuid: f9aee2a7-69e0-47ff-a40b-5999a0fe640f
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169623
     prefix: '1721559'
     number_min_length: 11
     number_max_length: 11
-    uuid: 63a379f0-8187-47ec-8057-d53f3dc26d73
+    uuid: 22381564-cf68-4a76-b3d2-3da5677b0343
     country_id: *sx
     network_id: *sx_telcell_mobile
   - id: 169625
     prefix: '1721580'
     number_min_length: 11
     number_max_length: 11
-    uuid: a898d3cc-11a7-4e93-bd1a-28683032d45d
+    uuid: 696af98f-5202-4949-8ba9-84a304357b0d
     country_id: *sx
     network_id: *sx_chippie_mobile
   - id: 169626
     prefix: '1721581'
     number_min_length: 11
     number_max_length: 11
-    uuid: 02712307-384a-4188-a8bf-43dcf757dbf0
+    uuid: 399afceb-9fdd-4eab-afc1-fd6d411843eb
     country_id: *sx
     network_id: *sx_chippie_mobile
   - id: 169627
     prefix: '1721584'
     number_min_length: 11
     number_max_length: 11
-    uuid: c64beb79-27dd-4766-87ac-b2d79c4b61d3
+    uuid: 4d05c699-e1bd-46bb-9ef8-fc2d49a97a60
     country_id: *sx
     network_id: *sx_chippie_mobile
   - id: 169628
     prefix: '1721585'
     number_min_length: 11
     number_max_length: 11
-    uuid: e2ac75e0-c71a-4983-9868-cf3ba90114d9
+    uuid: 65862f3b-9361-4307-b81d-e853a0eb5b9d
     country_id: *sx
     network_id: *sx_chippie_mobile
   - id: 169629
     prefix: '1721586'
     number_min_length: 11
     number_max_length: 11
-    uuid: da496b27-e896-482d-a2e9-55308c0ebf1a
+    uuid: de25ccce-32d9-4dc9-80b8-a672253f3403
     country_id: *sx
     network_id: *sx_chippie_mobile
   - id: 169630
     prefix: '1721587'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5f142ce1-5519-4c96-b606-e94490ab6321
+    uuid: 82fb3dfe-07c6-4830-b9f1-7e2b2f8bb38b
     country_id: *sx
     network_id: *sx_chippie_mobile
   - id: 169631
     prefix: '1721588'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9ff51464-b54a-4cea-9a2b-c74c97dbd4b8
+    uuid: 3f642a8a-c584-43b2-b3c5-778da84fe0e8
     country_id: *sx
     network_id: *sx_chippie_mobile
 # Fixed Prefixes
@@ -201,83 +201,83 @@ network_prefixes:
     prefix: '1721525'
     number_min_length: 11
     number_max_length: 11
-    uuid: f1b6b426-0424-4569-83a8-5cbe298fcddb
+    uuid: d6f43361-a751-4102-a562-7b3928955082
     country_id: *sx
     network_id: *sx_fixed
   - id: 169612
     prefix: '172154'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b6cd3a3-1381-403b-bb6e-c3ddaaa3c238
+    uuid: ddf8413a-bba7-44b5-9629-2a5fe54b5bd4
     country_id: *sx
     network_id: *sx_fixed
   - id: 169613
     prefix: '1721542'
     number_min_length: 11
     number_max_length: 11
-    uuid: e991d33a-d363-47c0-8f74-7e82d70c5e16
+    uuid: b3ab5c55-57bb-41c9-8cdb-3a382987659c
     country_id: *sx
-    network_id: *sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_fixed
+    network_id: *sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_region
   - id: 169614
     prefix: '1721543'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0fca0dc1-7009-4ee7-96de-39f634f97cce
+    uuid: b3c8610a-e69a-4354-8fac-0ada3e39db4d
     country_id: *sx
-    network_id: *sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_fixed
+    network_id: *sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_region
   - id: 169615
     prefix: '1721544'
     number_min_length: 11
     number_max_length: 11
-    uuid: d404665b-3b5d-49ff-8ff4-e727521c7682
+    uuid: 693acf04-248e-4848-b71a-b4795463b47c
     country_id: *sx
-    network_id: *sx_caybay_colebay_pelican_fixed
+    network_id: *sx_caybay_colebay_pelican_region
   - id: 169616
     prefix: '1721545'
     number_min_length: 11
     number_max_length: 11
-    uuid: f99a49e2-7d25-41bd-a4d0-2e2a1d3bf044
+    uuid: f4976839-8771-4a41-a82b-715cecc5902a
     country_id: *sx
-    network_id: *sx_beacon_hill_cupecoy_maho_simpson_bay_fixed
+    network_id: *sx_beacon_hill_cupecoy_maho_simpson_bay_region
   - id: 169617
     prefix: '1721546'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3e848d7a-fa98-4dc1-87cb-607b40586ea8
+    uuid: 5e4b6894-0c81-48c8-a9c4-58d324c7bdfb
     country_id: *sx
-    network_id: *sx_did_fixed
+    network_id: *sx_did_region
   - id: 169618
     prefix: '1721547'
     number_min_length: 11
     number_max_length: 11
-    uuid: c0cc9bb0-e287-41a3-b129-682835536589
+    uuid: 3b4aa86f-f387-4394-b26d-d3ffd862f684
     country_id: *sx
-    network_id: *sx_belvedere_dutch_quarter_middle_region_fixed
+    network_id: *sx_belvedere_dutch_quarter_middle_region_region
   - id: 169619
     prefix: '1721548'
     number_min_length: 11
     number_max_length: 11
-    uuid: a18e30f2-fe22-4fb1-882d-6ea2aaadd412
+    uuid: a06bfad0-544a-459a-9540-89eee8152127
     country_id: *sx
-    network_id: *sx_bettys_estate_cul_de_sac_ebenezer_saunders_south_reward_fixed
+    network_id: *sx_bettys_estate_cul_de_sac_ebenezer_saunders_south_reward_region
   - id: 169632
     prefix: '1721590'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3c48ce25-cdf3-46c3-9872-20bbe5602271
+    uuid: 962c9320-96d7-4def-8bfe-e62ecb04d387
     country_id: *sx
-    network_id: *sx_antelecom_international_services_fixed
+    network_id: *sx_antelecom_international_services_region
   - id: 169633
     prefix: '1721595'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2c887f19-112e-4c7a-9878-9ff980ef8b1b
+    uuid: 582a9824-a1d2-4dcb-a28f-604d97ac946b
     country_id: *sx
-    network_id: *sx_smitcoms_international_services_fixed
+    network_id: *sx_smitcoms_international_services_region
   - id: 169634
     prefix: '1721596'
     number_min_length: 11
     number_max_length: 11
-    uuid: 361c5f91-a5e1-40fb-bbaa-af4e025a373c
+    uuid: b02ff826-2284-40f3-9f8d-eb6a4714385b
     country_id: *sx
-    network_id: *sx_smitcoms_international_services_fixed
+    network_id: *sx_smitcoms_international_services_region

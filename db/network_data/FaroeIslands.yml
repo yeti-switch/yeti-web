@@ -1,63 +1,63 @@
 country_id: &fo 70
 networks:
 # Fixed Networks
-  - id: &fo_fixed_network_prefixes_fixed 21401
-    name: FO Fixed Network Prefixes Fixed
-    uuid: a8f7eabf-0531-417a-b760-7485cbb43c3e
-    type_id: 12
+  - id: &fo_fixed_network_prefixes_region 21401
+    name: FO Fixed Network Prefixes Region
+    uuid: 964fe2ef-4e54-47d6-8355-db3fb549c05e
+    type_id: 2
   - id: &fo_fixed 22126
     name: FO Fixed
-    uuid: ae01133b-9557-49c9-8d21-4b56abee0972
-    type_id: 12
-  - id: &fo_voip_fixed 22531
-    name: FO Voip Fixed
-    uuid: 163431b3-ed8a-4956-bce1-ea9a741f0f20
-    type_id: 12
+    uuid: 80de31e1-9967-4e07-9766-abfa99611bcf
+    type_id: 2
+  - id: &fo_voip_region 22531
+    name: FO Voip Region
+    uuid: 00604440-f7e6-4617-be16-9f534617ea11
+    type_id: 2
 # Supplementary services Networks
   - id: &fo_special_services 21562
     name: FO Special Services
-    uuid: 57226aaf-02a7-438b-bfc0-f817f14a379d
-    type_id: 14
+    uuid: 35a89777-6352-4a32-b9dd-f40bdfaf9c53
+    type_id: 13
   - id: &fo_emergency_services 21585
     name: FO Emergency Services
-    uuid: 16d1637c-afe2-460e-97d3-0e3a23bf5e15
-    type_id: 14
+    uuid: 490e2b32-1097-40b5-88b1-e8a2a0250686
+    type_id: 13
   - id: &fo_sms_mms_services 21710
     name: FO Sms_Mms Services
-    uuid: a3ef6967-f4ee-4249-9463-208e1e01b287
-    type_id: 14
+    uuid: a999250f-685b-408c-a2bf-bf5078a8c7ee
+    type_id: 13
   - id: &fo_datanet_access 21790
     name: FO Datanet Access
-    uuid: b241d195-1c99-4c66-96f9-20e62d0d90bd
-    type_id: 14
+    uuid: 920d4869-15ad-46cf-b7d8-cacb35385984
+    type_id: 13
   - id: &fo_universal_services 22622
     name: FO Universal Services
-    uuid: 035c7455-0425-4b39-802f-997fefb3fdb8
-    type_id: 14
+    uuid: 4626c881-78c3-4610-b2a9-1f43f16a4df9
+    type_id: 13
   - id: &fo_freephone_services 23815
     name: FO Freephone Services
-    uuid: 77003d5f-8a9f-409c-8966-1b818625ab7c
-    type_id: 14
+    uuid: 6e3a75e3-7201-4a29-ad13-ff954e317dd2
+    type_id: 13
   - id: &fo_shared_cost_services 24162
     name: FO Shared Cost Services
-    uuid: 7bdda354-da19-4b8f-a80e-6b24d6750828
-    type_id: 14
+    uuid: 6e47be1e-8859-4d32-8f46-87e0a3a61de3
+    type_id: 13
   - id: &fo_900_services 24420
     name: FO 900 Services
-    uuid: 75a75303-d8d1-423f-b219-836210040b8c
-    type_id: 14
+    uuid: e9fc9f63-ae58-407d-b50a-886235e32b45
+    type_id: 13
 # Mobile Networks
   - id: &fo_ft_mobile 22795
     name: FO Ft Mobile
-    uuid: 88f8857e-7c52-4832-977a-20245934e696
+    uuid: d47761c1-b897-486c-b3db-e7f0fdaacba3
     type_id: 3
   - id: &fo_hey_mobile 23301
     name: FO Hey Mobile
-    uuid: 3975241f-bd81-40ba-89ad-f5f89c11b8b7
+    uuid: ea3fe476-947e-4264-9398-b1dc0d832c7f
     type_id: 3
   - id: &fo_mobile 24498
     name: FO Mobile
-    uuid: 74e5c277-c3ae-49f4-a7f7-e36a15f94397
+    uuid: b625212d-e5e2-492b-9195-ab80706d55f1
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -65,7 +65,7 @@ network_prefixes:
     prefix: '298'
     number_min_length: 4
     number_max_length: 100
-    uuid: da05bfaa-6935-4416-a8c1-e0f21a5ebd91
+    uuid: c4ceb5de-6a2f-4fab-890c-148328fe1714
     country_id: *fo
     network_id: null
 # Fixed Prefixes
@@ -73,98 +73,98 @@ network_prefixes:
     prefix: '2981'
     number_min_length: 7
     number_max_length: 7
-    uuid: b17b1cee-90a4-4059-ae69-09d4c5f5b735
+    uuid: a4efe21f-0f2f-4772-a63f-1614f835b372
     country_id: *fo
-    network_id: *fo_fixed_network_prefixes_fixed
+    network_id: *fo_fixed_network_prefixes_region
   - id: 243934
     prefix: '2984'
     number_min_length: 9
     number_max_length: 9
-    uuid: 4eabbc6d-c6f9-4d5f-b087-d00f7ff2579f
+    uuid: 198f6792-8d35-44fd-97c0-6c1d244fdd6d
     country_id: *fo
     network_id: *fo_fixed
   - id: 245390
     prefix: '2986'
     number_min_length: 9
     number_max_length: 9
-    uuid: c70da4cc-cfc1-4a40-a0a2-b78e895cc912
+    uuid: 6de08cb2-a365-40b5-b2bb-b20180a1dd9f
     country_id: *fo
-    network_id: *fo_voip_fixed
+    network_id: *fo_voip_region
   - id: 247452
     prefix: '29820'
     number_min_length: 9
     number_max_length: 9
-    uuid: 89e8c6f6-b2e7-4064-b289-6ff6b7f47b1f
+    uuid: 9e7cc060-0910-4af0-a944-c9eb5ab676a9
     country_id: *fo
     network_id: *fo_fixed
   - id: 248896
     prefix: '2983'
     number_min_length: 9
     number_max_length: 9
-    uuid: 81869db7-d689-410b-9606-bc13bbe3f9c3
+    uuid: 87b0576e-11a0-4e56-8bd8-de4a113b37c1
     country_id: *fo
     network_id: *fo_fixed
   - id: 253315
     prefix: '29881'
     number_min_length: 9
     number_max_length: 9
-    uuid: f29ff22b-c362-4cbe-8c56-4cb34b099770
+    uuid: 9639ff51-afb1-4f11-9042-c16537540f00
     country_id: *fo
     network_id: *fo_fixed
   - id: 253474
     prefix: '29882'
     number_min_length: 9
     number_max_length: 9
-    uuid: 290f6e8b-f34c-4a0d-989d-5f86487e289f
+    uuid: 811bc90e-dae1-45d9-ae81-48cba0b417f7
     country_id: *fo
     network_id: *fo_fixed
   - id: 253591
     prefix: '29883'
     number_min_length: 9
     number_max_length: 9
-    uuid: 9092d062-07eb-49ff-884c-c0f556cfba51
+    uuid: 1f9cef4a-6657-4005-b2ee-e698abb136d4
     country_id: *fo
     network_id: *fo_fixed
   - id: 253716
     prefix: '29884'
     number_min_length: 9
     number_max_length: 9
-    uuid: e0fbc965-fde1-4ae8-9b15-aba35b5e407f
+    uuid: 31ea6ad2-0ca6-496a-a6ca-408f6c140297
     country_id: *fo
     network_id: *fo_fixed
   - id: 256837
     prefix: '29888'
     number_min_length: 9
     number_max_length: 9
-    uuid: c0f10965-9aee-43c3-9efa-367936f8277f
+    uuid: 65141252-3a74-4822-97f5-be87e8263813
     country_id: *fo
     network_id: *fo_fixed
   - id: 256994
     prefix: '29889'
     number_min_length: 9
     number_max_length: 9
-    uuid: 316484df-9f0d-48df-8cb6-71660aec1ef9
+    uuid: 27396b9b-46fd-49d6-839f-68cd060f607a
     country_id: *fo
     network_id: *fo_fixed
   - id: 263703
     prefix: '29885'
     number_min_length: 9
     number_max_length: 9
-    uuid: 09e56c49-af57-4575-a698-e747a4672d85
+    uuid: 0e425d78-34dc-4503-8a29-616ed66d5c1b
     country_id: *fo
     network_id: *fo_fixed
   - id: 263850
     prefix: '29886'
     number_min_length: 9
     number_max_length: 9
-    uuid: 29f757c8-3bee-4267-b26c-ccab07a65cfa
+    uuid: 692d8d8d-fb8a-41df-a04a-b33225f1debe
     country_id: *fo
     network_id: *fo_fixed
   - id: 264004
     prefix: '29887'
     number_min_length: 9
     number_max_length: 9
-    uuid: cf10f672-f7c2-4ebe-8cf9-964e74d484cb
+    uuid: 764d504f-7501-4b72-98f9-5412e2b72827
     country_id: *fo
     network_id: *fo_fixed
 # Supplementary services Prefixes
@@ -172,84 +172,84 @@ network_prefixes:
     prefix: '29811'
     number_min_length: 6
     number_max_length: 6
-    uuid: 4f12d029-b27d-47a7-aa70-291e6e8ebd2b
+    uuid: 740030df-aa29-4d78-8349-a0a193d34028
     country_id: *fo
     network_id: *fo_special_services
   - id: 242618
     prefix: '298112'
     number_min_length: 6
     number_max_length: 6
-    uuid: 6c0ce6d6-e5cb-4461-959f-f8e8d917f98e
+    uuid: 0a3b60b8-dc28-4f7a-b465-cf38feb4e69e
     country_id: *fo
     network_id: *fo_emergency_services
   - id: 242803
     prefix: '29812'
     number_min_length: 7
     number_max_length: 7
-    uuid: c4172e0c-9850-465a-bbee-ef8a32ae4b2d
+    uuid: 7ae42836-0eb5-4091-bab5-fc6cebfe4d6b
     country_id: *fo
     network_id: *fo_sms_mms_services
   - id: 242895
     prefix: '29814'
     number_min_length: 7
     number_max_length: 7
-    uuid: 0d14d6d8-888b-4622-a1ca-4f5b7707fccd
+    uuid: 1f8c825b-417d-48dd-a89e-cd14ed25bca2
     country_id: *fo
     network_id: *fo_special_services
   - id: 242935
     prefix: '29815'
     number_min_length: 7
     number_max_length: 7
-    uuid: b9ac3e9c-d277-4de8-b93e-071b7eab12fe
+    uuid: 30220c80-d5a5-413a-90aa-2c1c1d232f26
     country_id: *fo
     network_id: *fo_datanet_access
   - id: 243016
     prefix: '29816'
     number_min_length: 7
     number_max_length: 7
-    uuid: d7fd95bf-63f6-478d-b0ee-d45aeac4f798
+    uuid: be6c7fa4-60ed-4aec-acda-499f64c51de4
     country_id: *fo
     network_id: *fo_datanet_access
   - id: 243054
     prefix: '29817'
     number_min_length: 7
     number_max_length: 7
-    uuid: 856d1f59-d619-46b8-8300-f8248b31a4bc
+    uuid: 4bea29d3-43ce-405a-8e48-7b748146a460
     country_id: *fo
     network_id: *fo_special_services
   - id: 247272
     prefix: '29818'
     number_min_length: 7
     number_max_length: 7
-    uuid: 886d1420-da15-4d91-aac9-20574e1dc3fa
+    uuid: 813ae844-1ada-49a8-b62a-976faaffd614
     country_id: *fo
     network_id: *fo_universal_services
   - id: 247336
     prefix: '29819'
     number_min_length: 7
     number_max_length: 7
-    uuid: 6ff2fede-a348-4f01-b451-925b1b91c154
+    uuid: e49236d5-cf47-4f49-9e58-837040fc5083
     country_id: *fo
     network_id: *fo_sms_mms_services
   - id: 253122
     prefix: '29880'
     number_min_length: 9
     number_max_length: 9
-    uuid: b3d9c17a-e094-40b7-93a3-7fb8a02608f9
+    uuid: f358eb3c-61dd-4905-a31f-21ef1d0a68f0
     country_id: *fo
     network_id: *fo_freephone_services
   - id: 255294
     prefix: '29870'
     number_min_length: 9
     number_max_length: 9
-    uuid: 91584950-f1db-43a5-b042-864f3969e9a6
+    uuid: 28c85520-a19c-4685-ab9a-9c6acc74c344
     country_id: *fo
     network_id: *fo_shared_cost_services
   - id: 257157
     prefix: '29890'
     number_min_length: 9
     number_max_length: 9
-    uuid: e7936eac-3cf8-456c-9eea-f03ebaa704fa
+    uuid: 72a80ec4-08ca-4616-88c7-2bc49b651945
     country_id: *fo
     network_id: *fo_900_services
 # Mobile Prefixes
@@ -257,195 +257,195 @@ network_prefixes:
     prefix: '29821'
     number_min_length: 9
     number_max_length: 9
-    uuid: ec0488c6-2251-4bb7-ba34-8d301e679b11
+    uuid: 55325299-a8bc-4ed0-bba6-7dedb390ad55
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 247722
     prefix: '29822'
     number_min_length: 9
     number_max_length: 9
-    uuid: 741e74a9-527c-4c85-9a9a-70d6085ea40f
+    uuid: baa52693-c6b4-4513-bf3c-0716f55b7ef0
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 247917
     prefix: '29823'
     number_min_length: 9
     number_max_length: 9
-    uuid: 474e1469-f127-4af9-821c-9925183c8573
+    uuid: 3fc21f30-ad08-46c6-84d1-e06cd4cc8d93
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 248110
     prefix: '29824'
     number_min_length: 9
     number_max_length: 9
-    uuid: 2ae59ecd-f9f6-475b-b96d-93cbde6c5702
+    uuid: 43ca2f16-e7ea-4814-a3a8-a9b1019db463
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 248257
     prefix: '29825'
     number_min_length: 9
     number_max_length: 9
-    uuid: a4195f8b-08b1-4b40-98e3-b4d1b9c95aba
+    uuid: 7a99497a-bef1-428f-ba6f-1a8727e2dfe8
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 248469
     prefix: '29826'
     number_min_length: 9
     number_max_length: 9
-    uuid: b7d049bd-d8ce-4f1c-b96f-f19e27760886
+    uuid: d5be00d4-18b6-439c-baea-2f22b9cf23c2
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 248611
     prefix: '29827'
     number_min_length: 9
     number_max_length: 9
-    uuid: 6cfeb722-8255-4a3b-b55f-ab2809a889ce
+    uuid: 5e12477e-0b5f-46dc-9da4-bcb52652d33c
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 248748
     prefix: '29828'
     number_min_length: 9
     number_max_length: 9
-    uuid: 4a17b896-d672-458a-8285-6741839a650f
+    uuid: ccf69380-a5ed-4ced-bc08-45ddb243380e
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 248828
     prefix: '29829'
     number_min_length: 9
     number_max_length: 9
-    uuid: 9a23e939-9e92-4f47-90d0-d50368387827
+    uuid: 9973a145-2b07-4e38-a9fb-9e6efec65f44
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 249572
     prefix: '2985'
     number_min_length: 9
     number_max_length: 9
-    uuid: 5965a899-02f5-4c51-a777-976c8d73a84a
+    uuid: 60bedb8a-e56a-4412-ac83-c79865c46dc5
     country_id: *fo
     network_id: *fo_hey_mobile
   - id: 251737
     prefix: '29871'
     number_min_length: 9
     number_max_length: 9
-    uuid: c41e45c3-7697-4fae-8450-3319ed73e918
+    uuid: b3799836-2adc-4fbc-b829-13ee62dace5e
     country_id: *fo
     network_id: *fo_hey_mobile
   - id: 251824
     prefix: '29872'
     number_min_length: 9
     number_max_length: 9
-    uuid: e33597c5-df85-4c67-9018-b0f9eb58ca0a
+    uuid: 070135b7-e9cb-4072-b15a-70a4b9d11403
     country_id: *fo
     network_id: *fo_hey_mobile
   - id: 251876
     prefix: '29873'
     number_min_length: 9
     number_max_length: 9
-    uuid: a4d272d6-8f82-4666-9598-acb323023901
+    uuid: a90c52b7-a6d7-4984-a962-7c71949b098a
     country_id: *fo
     network_id: *fo_hey_mobile
   - id: 252059
     prefix: '29874'
     number_min_length: 9
     number_max_length: 9
-    uuid: d74a2cf8-4b96-4a47-a6d3-4f9ec5e8959f
+    uuid: 10598d30-eed1-4bd8-b150-1161d4de052f
     country_id: *fo
     network_id: *fo_hey_mobile
   - id: 252550
     prefix: '29875'
     number_min_length: 9
     number_max_length: 9
-    uuid: 6b76ffae-cdeb-4e6f-9e24-a95a892c6e6a
+    uuid: ffa38d44-a456-4d1c-8b4d-7ca70f148486
     country_id: *fo
     network_id: *fo_hey_mobile
   - id: 255449
     prefix: '29876'
     number_min_length: 9
     number_max_length: 9
-    uuid: 78d4bf47-db2e-49f9-9071-4925d787bd30
+    uuid: bbbaad5d-5b69-460d-a7c1-5ad69c9e4698
     country_id: *fo
     network_id: *fo_hey_mobile
   - id: 255628
     prefix: '29877'
     number_min_length: 9
     number_max_length: 9
-    uuid: 3f78d798-b293-4f0b-9495-8fbdf637588d
+    uuid: 6acca7b3-d118-4f29-a71a-e774115a90a6
     country_id: *fo
     network_id: *fo_hey_mobile
   - id: 256086
     prefix: '29878'
     number_min_length: 9
     number_max_length: 9
-    uuid: c4754434-c643-4af6-aea6-9d00124fe915
+    uuid: ffd5456f-c6c7-4915-ada6-fd23e5835a37
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 256384
     prefix: '29879'
     number_min_length: 9
     number_max_length: 9
-    uuid: 254e0948-7cf8-458e-9cd4-17a8146c4735
+    uuid: 6e7b9534-2053-4fcb-8df5-977eacd2f3e3
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 257363
     prefix: '29891'
     number_min_length: 9
     number_max_length: 9
-    uuid: 4fee965c-6054-4f07-b8d2-99ef61f3f3f1
+    uuid: 30940830-53f1-41b6-a0f4-c579b29139a8
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 257588
     prefix: '29892'
     number_min_length: 9
     number_max_length: 9
-    uuid: 7e1fe333-ad33-4d9d-80f0-8df5a0338723
+    uuid: dd312fe2-7f1f-41b2-a191-37818d975fb5
     country_id: *fo
     network_id: *fo_mobile
   - id: 257864
     prefix: '29893'
     number_min_length: 9
     number_max_length: 9
-    uuid: 3af0188d-672b-4a1b-a9d3-4afb20843673
+    uuid: dd8c72d0-74e5-45ad-af37-e9064df70d31
     country_id: *fo
     network_id: *fo_mobile
   - id: 258182
     prefix: '29899'
     number_min_length: 9
     number_max_length: 9
-    uuid: 6a9cae09-d061-47b5-a03a-a52733756680
+    uuid: f0d91f74-4195-4656-af36-cff55796e323
     country_id: *fo
     network_id: *fo_mobile
   - id: 264194
     prefix: '29894'
     number_min_length: 9
     number_max_length: 9
-    uuid: c7e12f08-a887-4515-957a-94daa5342265
+    uuid: be0750a4-84f3-44ae-a974-d49a0e910f2f
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 264440
     prefix: '29895'
     number_min_length: 9
     number_max_length: 9
-    uuid: 276c521b-5bad-4d4b-b1a1-3bb12d4bc764
+    uuid: 295d865b-2462-48d6-b962-59fcc0f6a4cf
     country_id: *fo
     network_id: *fo_mobile
   - id: 264717
     prefix: '29896'
     number_min_length: 9
     number_max_length: 9
-    uuid: 0bddfbb4-10b1-40b0-a015-08ac73599fca
+    uuid: 085cbdc6-fb81-47f5-bae4-17f6fee51a40
     country_id: *fo
     network_id: *fo_ft_mobile
   - id: 264999
     prefix: '29897'
     number_min_length: 9
     number_max_length: 9
-    uuid: b7a424a3-9b1c-4790-a91e-2ce67644fa9c
+    uuid: 0debd8da-2c99-4f5e-aa45-0d5a6b4a7275
     country_id: *fo
     network_id: *fo_mobile
   - id: 265268
     prefix: '29898'
     number_min_length: 9
     number_max_length: 9
-    uuid: ac10c440-5d95-4b9c-a8fe-b82fd1563ebc
+    uuid: 30807d90-7ecf-4a42-8d8f-a1e50f963c90
     country_id: *fo
     network_id: *fo_mobile
