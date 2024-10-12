@@ -13,15 +13,18 @@
 #  created_at             :timestamptz
 #  updated_at             :timestamptz
 #  customer_id            :integer(4)       not null
+#  provision_gateway_id   :integer(4)
 #
 # Indexes
 #
-#  api_access_customer_id_idx  (customer_id)
-#  api_access_login_key        (login) UNIQUE
+#  api_access_customer_id_idx           (customer_id)
+#  api_access_login_key                 (login) UNIQUE
+#  api_access_provision_gateway_id_idx  (provision_gateway_id)
 #
 # Foreign Keys
 #
-#  api_access_customer_id_fkey  (customer_id => contractors.id)
+#  api_access_customer_id_fkey           (customer_id => contractors.id)
+#  api_access_provision_gateway_id_fkey  (provision_gateway_id => gateways.id)
 #
 
 class System::ApiAccess < ApplicationRecord
@@ -30,6 +33,7 @@ class System::ApiAccess < ApplicationRecord
   has_secure_password
 
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id
+  belongs_to :provision_gateway, class_name: 'Gateway', foreign_key: :provision_gateway_id, optional: true
 
   validates :login, uniqueness: true
   validates :login, :customer, presence: true

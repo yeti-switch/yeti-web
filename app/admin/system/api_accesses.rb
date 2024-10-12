@@ -14,12 +14,21 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
                 :customer_id,
                 :formtastic_allowed_ips,
                 :allow_listen_recording,
+                :provision_gateway_id,
                 account_ids: []
+
+  includes :customer, :provision_gateway
 
   filter :id
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true, ordered_by: :name } }
-
   filter :login
+  filter :allow_listen_recording
+  filter :provision_gateway,
+         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         collection: proc {
+           resource_id = params.fetch(:q, {})[:gateway_id_eq]
+           resource_id ? Gateway.where(id: resource_id) : []
+         }
 
   index do
     selectable_column
@@ -34,6 +43,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
     end
     column :allowed_ips
     column :allow_listen_recording
+    column :provision_gateway
     column :created_at
     column :updated_at
   end
@@ -50,6 +60,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
       end
       row :allowed_ips
       row :allow_listen_recording
+      row :provision_gateway
       row :created_at
       row :updated_at
     end
@@ -61,7 +72,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
     f.inputs do
       f.input :login, hint: link_to('Сlick to fill random login', 'javascript:void(0)', onclick: 'generateCredential(this)')
       f.input :password, as: :string, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
-      f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }
+      f.contractor_input :customer_id, label: 'Customer'
       f.account_input :account_ids,
                       multiple: true,
                       fill_params: { contractor_id_eq: f.object.customer_id },
@@ -72,10 +83,18 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
                       }
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'
-      f.input :allow_listen_recording,
-              as: :select,
-              input_html: { class: 'chosen' },
-              collection: [['Yes', true], ['No', false]]
+      f.input :allow_listen_recording
+      # f.input :provision_gateway
+
+      f.association_ajax_input :provision_gateway_id,
+                               label: 'Provision Gateway',
+                               scope: Gateway.order(:name),
+                               path: '/gateways/search',
+                               fill_params: { contractor_id_eq: f.object.customer_id },
+                               input_html: {
+                                 'data-path-params': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
+                                 'data-required-param': 'q[contractor_id_eq]'
+                               }
     end
     f.actions
   end

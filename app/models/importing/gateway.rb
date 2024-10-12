@@ -38,6 +38,7 @@
 #  force_symmetric_rtp                :boolean
 #  gateway_group_name                 :string
 #  host                               :string
+#  incoming_auth_allow_jwt            :boolean          default(FALSE), not null
 #  incoming_auth_password             :string
 #  incoming_auth_username             :string
 #  is_changed                         :boolean

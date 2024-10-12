@@ -3176,7 +3176,8 @@ CREATE TABLE class4.gateways (
     stir_shaken_crt_id smallint,
     to_rewrite_rule character varying,
     to_rewrite_result character varying,
-    privacy_mode_id smallint DEFAULT 0 NOT NULL
+    privacy_mode_id smallint DEFAULT 0 NOT NULL,
+    incoming_auth_allow_jwt boolean DEFAULT false NOT NULL
 );
 
 
@@ -22887,7 +22888,7 @@ $$;
 -- Name: load_incoming_auth(); Type: FUNCTION; Schema: switch21; Owner: -
 --
 
-CREATE FUNCTION switch21.load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying)
+CREATE FUNCTION switch21.load_incoming_auth() RETURNS TABLE(id integer, username character varying, password character varying, allow_jwt_auth boolean, jwt_gid character varying)
     LANGUAGE plpgsql COST 10 ROWS 10
     AS $$
 BEGIN
@@ -22895,12 +22896,18 @@ BEGIN
     SELECT
       gw.id,
       gw.incoming_auth_username,
-      gw.incoming_auth_password
+      gw.incoming_auth_password,
+      gw.incoming_auth_allow_jwt,
+      gw.uuid::varchar
     from class4.gateways gw
     where
       gw.enabled and
-      gw.incoming_auth_username is not null and gw.incoming_auth_password is not null and
-      gw.incoming_auth_username !='' and gw.incoming_auth_password !='';
+      (
+        ( gw.incoming_auth_username is not null and gw.incoming_auth_password is not null and
+          gw.incoming_auth_username !='' and gw.incoming_auth_password !=''
+        )  OR
+        incoming_auth_allow_jwt
+      );
 END;
 $$;
 
@@ -34116,7 +34123,8 @@ CREATE TABLE data_import.import_gateways (
     registered_aor_mode_id smallint,
     registered_aor_mode_name character varying,
     to_rewrite_rule character varying,
-    to_rewrite_result character varying
+    to_rewrite_result character varying,
+    incoming_auth_allow_jwt boolean DEFAULT false NOT NULL
 );
 
 
@@ -35691,7 +35699,8 @@ CREATE TABLE sys.api_access (
     allowed_ips inet[] DEFAULT '{0.0.0.0/0,::/0}'::inet[] NOT NULL,
     allow_listen_recording boolean DEFAULT false NOT NULL,
     created_at timestamp with time zone,
-    updated_at timestamp with time zone
+    updated_at timestamp with time zone,
+    provision_gateway_id integer
 );
 
 
@@ -39844,6 +39853,13 @@ CREATE INDEX api_access_customer_id_idx ON sys.api_access USING btree (customer_
 
 
 --
+-- Name: api_access_provision_gateway_id_idx; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE INDEX api_access_provision_gateway_id_idx ON sys.api_access USING btree (provision_gateway_id);
+
+
+--
 -- Name: cdr_tables_name_idx; Type: INDEX; Schema: sys; Owner: -
 --
 
@@ -40950,6 +40966,14 @@ ALTER TABLE ONLY sys.api_access
 
 
 --
+-- Name: api_access api_access_provision_gateway_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.api_access
+    ADD CONSTRAINT api_access_provision_gateway_id_fkey FOREIGN KEY (provision_gateway_id) REFERENCES class4.gateways(id);
+
+
+--
 -- Name: currencies currencies_country_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -41203,6 +41227,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240805121644'),
 ('20240806205100'),
 ('20240822145410'),
-('20240824084143');
+('20240824084143'),
+('20241012124910');
 
 

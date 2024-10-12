@@ -32,6 +32,7 @@
 #  force_one_way_early_media        :boolean          default(FALSE), not null
 #  force_symmetric_rtp              :boolean          default(TRUE), not null
 #  host                             :string
+#  incoming_auth_allow_jwt          :boolean          default(FALSE), not null
 #  incoming_auth_password           :string
 #  incoming_auth_username           :string
 #  is_shared                        :boolean          default(FALSE), not null
@@ -271,6 +272,7 @@ class Gateway < ApplicationRecord
   belongs_to :stir_shaken_crt, class_name: 'Equipment::StirShaken::SigningCertificate', foreign_key: :stir_shaken_crt_id, optional: :true
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
+  has_many :api_accesses, class_name: 'System::ApiAccess', foreign_key: :provision_gateway_id, dependent: :nullify
   has_many :dialpeers, class_name: 'Dialpeer', dependent: :restrict_with_error
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :gateway_id, dependent: :nullify
   has_many :rate_management_projects, class_name: 'RateManagement::Project'
@@ -486,7 +488,7 @@ class Gateway < ApplicationRecord
   end
 
   def incoming_auth_can_be_disabled
-    if (incoming_auth_username_changed?(to: nil) || incoming_auth_username_changed?(to: '')) && customers_auths.where(require_incoming_auth: true).any?
+    if incoming_auth_disabled? && customers_auths.where(require_incoming_auth: true).any?
       errors.add(:incoming_auth_username, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_username.cant_be_cleared'))
       errors.add(:incoming_auth_password, I18n.t('activerecord.errors.models.gateway.attributes.incoming_auth_password.cant_be_cleared'))
     end
@@ -514,21 +516,28 @@ class Gateway < ApplicationRecord
 
   # @see Yeti::IncomingAuthReloader
   def reload_incoming_auth_on_create?
-    incoming_auth_username.present?
+    incoming_auth_username.present? || incoming_auth_allow_jwt == true
   end
 
   # @see Yeti::IncomingAuthReloader
   def reload_incoming_auth_on_update?
-    (incoming_auth_username.present? && enabled_changed?) || incoming_auth_changed?
+    ((incoming_auth_username.present? or incoming_auth_allow_jwt == true) && enabled_changed?) || incoming_auth_changed?
   end
 
   # @see Yeti::IncomingAuthReloader
   def reload_incoming_auth_on_destroy?
-    incoming_auth_username.present?
+    incoming_auth_username.present? || incoming_auth_allow_jwt == true
   end
 
   def incoming_auth_changed?
-    incoming_auth_username_changed? || incoming_auth_password_changed?
+    incoming_auth_username_changed? || incoming_auth_password_changed? || incoming_auth_allow_jwt_changed?
+  end
+
+  def incoming_auth_disabled?
+    (
+      (incoming_auth_username_changed?(to: nil) || incoming_auth_username_changed?(to: '')
+      ) && incoming_auth_allow_jwt == false
+    ) || (incoming_auth_allow_jwt_changed?(to: false) && incoming_auth_username == true)
   end
 
   def check_associated_records
