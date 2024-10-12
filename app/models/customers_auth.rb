@@ -390,7 +390,7 @@ class CustomersAuth < ApplicationRecord
   end
 
   def gateway_supports_incoming_auth
-    if gateway.try(:incoming_auth_username).blank? && require_incoming_auth
+    if gateway.try(:incoming_auth_username).blank? && gateway.try(:incoming_auth_allow_jwt) == false && require_incoming_auth
       errors.add(:gateway, I18n.t('activerecord.errors.models.customers_auth.attributes.gateway.incoming_auth_required'))
       errors.add(:require_incoming_auth, I18n.t('activerecord.errors.models.customers_auth.attributes.require_incoming_auth.gateway_with_auth_reqired'))
     end

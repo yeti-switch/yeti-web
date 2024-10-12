@@ -81,6 +81,7 @@ ActiveAdmin.register Importing::Gateway do
 
     column :incoming_auth_username
     column :incoming_auth_password
+    column :incoming_auth_allow_jwt
 
     column :auth_enabled
     column :auth_user

@@ -230,6 +230,7 @@ class Importing::Gateway < Importing::Base
     rel100_mode_id
     incoming_auth_username
     incoming_auth_password
+    incoming_auth_allow_jwt
     preserve_anonymous_from_domain
     termination_dst_numberlist_id
     termination_src_numberlist_id
