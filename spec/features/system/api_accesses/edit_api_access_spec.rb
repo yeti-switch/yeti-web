@@ -12,7 +12,7 @@ RSpec.describe 'Update Api Access', type: :feature, js: true do
     include_context :fill_form, 'edit_system_api_access'
     let(:attributes) do
       {
-        allow_listen_recording: -> { fill_in_chosen('Allow listen recording', with: 'Yes') }
+        allow_listen_recording: -> { check 'Allow listen recording' }
       }
     end
     let(:api_access) { create(:api_access, allow_listen_recording: false) }
@@ -28,7 +28,7 @@ RSpec.describe 'Update Api Access', type: :feature, js: true do
     include_context :fill_form, 'edit_system_api_access'
     let(:attributes) do
       {
-        allow_listen_recording: -> { fill_in_chosen('Allow listen recording', with: 'No') }
+        allow_listen_recording: -> { uncheck 'Allow listen recording' }
       }
     end
     let(:api_access) { create(:api_access, allow_listen_recording: true) }
