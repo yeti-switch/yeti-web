@@ -39,7 +39,7 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
     context 'with allow_listen_recording=true' do
       let(:attributes) do
         super().merge allow_listen_recording: lambda {
-          fill_in_chosen('Allow listen recording', with: 'Yes')
+          check 'Allow listen recording'
         }
       end
 

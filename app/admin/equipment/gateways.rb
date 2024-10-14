@@ -62,7 +62,7 @@ ActiveAdmin.register Gateway do
                  :to_rewrite_rule, :to_rewrite_result,
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
                  :auth_enabled, :auth_user, :auth_password, :auth_from_user, :auth_from_domain,
-                 :incoming_auth_username, :incoming_auth_password,
+                 :incoming_auth_username, :incoming_auth_password, :incoming_auth_allow_jwt,
                  :term_use_outbound_proxy, :term_force_outbound_proxy,
                  [:term_proxy_transport_protocol_name, proc { |row| row.term_proxy_transport_protocol.try(:name) }],
                  :term_outbound_proxy,
@@ -216,7 +216,7 @@ ActiveAdmin.register Gateway do
     column :resolve_ruri
 
     column :incoming_auth_username
-    column :incoming_auth_password
+    column :incoming_auth_allow_jwt
 
     column :auth_enabled
     column :auth_user
@@ -313,6 +313,7 @@ ActiveAdmin.register Gateway do
   filter :auth_password
   filter :incoming_auth_username
   filter :incoming_auth_password
+  filter :incoming_auth_allow_jwt
   filter :codec_group, input_html: { class: 'chosen' }, collection: proc { CodecGroup.pluck(:name, :id) }
   filter :diversion_send_mode
   filter :sip_schema_id, as: :select, collection: proc { Gateway::SIP_SCHEMAS.invert }
@@ -393,6 +394,7 @@ ActiveAdmin.register Gateway do
               f.input :sip_interface_name
               f.input :incoming_auth_username, hint: "#{link_to('Сlick to fill random username', 'javascript:void(0)', onclick: 'generateCredential(this)')}. #{t('formtastic.hints.gateway.incoming_auth_username')}".html_safe
               f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
+              f.input :incoming_auth_allow_jwt
             end
 
             f.inputs 'Origination' do
@@ -605,6 +607,7 @@ ActiveAdmin.register Gateway do
 
             row :incoming_auth_username
             row :incoming_auth_password
+            row :incoming_auth_allow_jwt
           end
         end
         panel 'Termination' do

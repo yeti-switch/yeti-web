@@ -89,6 +89,7 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Auth from domain',                   item.auth_from_domain.to_s],
         ['Incoming auth username',             item.incoming_auth_username.to_s],
         ['Incoming auth password',             item.incoming_auth_password.to_s],
+        ['Incoming auth allow jwt',            item.incoming_auth_allow_jwt.to_s],
         ['Term use outbound proxy',            item.term_use_outbound_proxy.to_s],
         ['Term force outbound proxy',          item.term_force_outbound_proxy.to_s],
         ['Term proxy transport protocol name', item.term_proxy_transport_protocol.name],

@@ -32,6 +32,7 @@
 #  force_one_way_early_media        :boolean          default(FALSE), not null
 #  force_symmetric_rtp              :boolean          default(TRUE), not null
 #  host                             :string
+#  incoming_auth_allow_jwt          :boolean          default(FALSE), not null
 #  incoming_auth_password           :string
 #  incoming_auth_username           :string
 #  is_shared                        :boolean          default(FALSE), not null
