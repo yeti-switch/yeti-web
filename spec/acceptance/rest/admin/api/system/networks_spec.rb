@@ -29,7 +29,7 @@ RSpec.resource 'Networks' do
   end
 
   get '/api/rest/admin/system/networks/:id' do
-    let!(:network) { create(:network) } # ensure a valid network is created
+    let!(:network) { create(:network) }
     let(:id) { network.id }
 
     example_request 'get specific entry' do
