@@ -23,7 +23,15 @@ ActiveAdmin.register System::NetworkPrefix do
   filter :uuid_equals, label: 'UUID'
   filter :prefix
   filter :country, input_html: { class: 'chosen' }
-  filter :network, input_html: { class: 'chosen' }
+  association_ajax_filter :network_id_eq,
+                          label: 'Network',
+                          scope: -> { System::Network.order(:name) },
+                          path: '/system_networks/search'
+  filter :network_type_id_eq,
+         label: 'Network Type',
+         as: :select,
+         input_html: { class: 'chosen' },
+         collection: -> { System::NetworkType.collection }
   filter :number_contains
   filter :number_min_length
   filter :number_max_length
