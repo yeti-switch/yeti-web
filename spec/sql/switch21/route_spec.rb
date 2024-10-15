@@ -505,7 +505,9 @@ RSpec.describe '#routing logic' do
                           ss_src_rewrite_result: customer_auth_ss_src_rewrite_result,
                           ss_dst_rewrite_rule: customer_auth_ss_dst_rewrite_rule,
                           ss_dst_rewrite_result: customer_auth_ss_dst_rewrite_result,
-                          privacy_mode_id: customer_auth_privacy_mode_id)
+                          privacy_mode_id: customer_auth_privacy_mode_id,
+                          src_name_field_id: customer_auth_src_name_field_id,
+                          src_number_field_id: customer_auth_src_number_field_id)
       end
 
       let!(:customer_auth_check_account_balance) { true }
@@ -531,6 +533,8 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_ss_dst_rewrite_rule) { nil }
       let(:customer_auth_ss_dst_rewrite_result) { nil }
       let(:customer_auth_privacy_mode_id) { CustomersAuth::PRIVACY_MODE_REJECT_ANONYMOUS }
+      let(:customer_auth_src_name_field_id) { 1 }
+      let(:customer_auth_src_number_field_id) { 1 }
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
@@ -912,6 +916,52 @@ RSpec.describe '#routing logic' do
           expect(subject.first[:customer_auth_id]).to be
           expect(subject.first[:customer_id]).to be
           expect(subject.first[:disconnect_code_id]).to eq(nil)
+        end
+      end
+
+      context 'Authorized, Src name field' do
+        let(:from_dsp) { 'from_display_name' }
+        let(:from_name) { 'from_username' }
+
+        context 'From Display name' do
+          let!(:customer_auth_src_name_field_id) { 1 }
+          it 'routing OK ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:src_name_in]).to eq('from_display_name')
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+          end
+        end
+
+        context 'From Userpart' do
+          let!(:customer_auth_src_name_field_id) { 2 }
+          it 'routing OK ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:src_name_in]).to eq('from_username')
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+          end
+        end
+      end
+
+      context 'Authorized, Src number field' do
+        let(:from_dsp) { 'from_display_name' }
+        let(:from_name) { 'from_username' }
+
+        context 'From Display name' do
+          let!(:customer_auth_src_number_field_id) { 1 }
+          it 'routing OK ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:src_prefix_in]).to eq('from_username')
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+          end
+        end
+
+        context 'From Userpart' do
+          let!(:customer_auth_src_number_field_id) { 2 }
+          it 'routing OK ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:src_prefix_in]).to eq('from_display_name')
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+          end
         end
       end
 
