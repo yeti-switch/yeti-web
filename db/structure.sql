@@ -26416,7 +26416,9 @@ CREATE FUNCTION switch21.route(i_node_id integer, i_pop_id integer, i_protocol_i
         -- redefine call SRC/DST numbers
 
         IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
-          v_ret.src_name_in:=i_from_dsp;
+          v_ret.src_name_in=i_from_dsp;
+        ELSIF v_customer_auth_normalized.src_name_field_id=2 THEN /* from uri userpart */
+          v_ret.src_name_in=i_from_name;
         END IF;
         v_ret.src_name_out:=v_ret.src_name_in;
 
@@ -28054,7 +28056,9 @@ CREATE FUNCTION switch21.route_debug(i_node_id integer, i_pop_id integer, i_prot
         -- redefine call SRC/DST numbers
 
         IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
-          v_ret.src_name_in:=i_from_dsp;
+          v_ret.src_name_in=i_from_dsp;
+        ELSIF v_customer_auth_normalized.src_name_field_id=2 THEN /* from uri userpart */
+          v_ret.src_name_in=i_from_name;
         END IF;
         v_ret.src_name_out:=v_ret.src_name_in;
 
@@ -29664,7 +29668,9 @@ CREATE FUNCTION switch21.route_release(i_node_id integer, i_pop_id integer, i_pr
         -- redefine call SRC/DST numbers
 
         IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
-          v_ret.src_name_in:=i_from_dsp;
+          v_ret.src_name_in=i_from_dsp;
+        ELSIF v_customer_auth_normalized.src_name_field_id=2 THEN /* from uri userpart */
+          v_ret.src_name_in=i_from_name;
         END IF;
         v_ret.src_name_out:=v_ret.src_name_in;
 
@@ -41228,6 +41234,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240806205100'),
 ('20240822145410'),
 ('20240824084143'),
-('20241012124910');
+('20241012124910'),
+('20241015092015');
 
 
