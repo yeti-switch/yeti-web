@@ -1,568 +1,800 @@
 country_id: &np 149
 networks:
 # Fixed Networks
-  - id: &np_fixed 4056
-    name: NP Fixed
-    uuid: 25731fa4-0f56-44ab-9c4d-f0bf3b2441b1
-    type_id: 12
+  - id: &np_ramechhap_region 4201
+    name: NP Ramechhap Region
+    uuid: a682e318-dfd3-4a88-88d9-dc39e2ea685c
+    type_id: 2
+  - id: &np_dolakha_region 5026
+    name: NP Dolakha Region
+    uuid: d7115adc-96b5-4342-98b9-db261ac3d3e5
+    type_id: 2
+  - id: &np_parsa_region 5645
+    name: NP Parsa Region
+    uuid: 813ae677-bf5e-4afc-bb95-c678adae9245
+    type_id: 2
+  - id: &np_bara_region 7576
+    name: NP Bara Region
+    uuid: 82ff37bf-1e5a-4bdd-89b3-b86db8ce5bb9
+    type_id: 2
+  - id: &np_rautahat_region 7957
+    name: NP Rautahat Region
+    uuid: 257b452c-c50f-43a0-a73a-cd7fe0952da6
+    type_id: 2
+  - id: &np_chitwan_region 9276
+    name: NP Chitwan Region
+    uuid: 8e91895e-5c4c-41f2-86d2-a89ee3bf8374
+    type_id: 2
+  - id: &np_makwanpur_region 9682
+    name: NP Makwanpur Region
+    uuid: 0608fd0d-77d2-4f68-a386-63468022ce5b
+    type_id: 2
+  - id: &np_kaski_region 11793
+    name: NP Kaski Region
+    uuid: 6f81a4ba-143c-4c90-880a-08302750364b
+    type_id: 2
+  - id: &np_syangja_region 12463
+    name: NP Syangja Region
+    uuid: 2ca98dc0-4f66-4031-954b-e009409ae738
+    type_id: 2
+  - id: &np_gorkha_region 12726
+    name: NP Gorkha Region
+    uuid: 3c443a0f-3b69-4469-8f87-e12a3a05a417
+    type_id: 2
+  - id: &np_tanahu_region 13477
+    name: NP Tanahu Region
+    uuid: a36ad2d1-ecd1-4be0-976d-e28c4ae96436
+    type_id: 2
+  - id: &np_lamgunj_manang_region 13682
+    name: NP Lamgunj Manang Region
+    uuid: 86fdb8c2-0b54-4dc6-a147-e3d82a0a3274
+    type_id: 2
+  - id: &np_baglung_region 14229
+    name: NP Baglung Region
+    uuid: 12e5b741-c6ef-4c17-8e4e-c3e40dd9714f
+    type_id: 2
+  - id: &np_mustang_myagdi_region 14304
+    name: NP Mustang Myagdi Region
+    uuid: eccdfbe0-edc4-45f3-827c-14159121ef07
+    type_id: 2
+  - id: &np_parbat_region 14508
+    name: NP Parbat Region
+    uuid: ba789212-87fe-4ab8-9473-60417a12540d
+    type_id: 2
+  - id: &np_rupandehi_region 16214
+    name: NP Rupandehi Region
+    uuid: a75c7b2b-1e91-439c-a2eb-8ce6967b440d
+    type_id: 2
+  - id: &np_palpa_region 18012
+    name: NP Palpa Region
+    uuid: 2bdeed39-ea4a-4ff4-83fc-4aebda647820
+    type_id: 2
+  - id: &np_kapilvastu_region 18172
+    name: NP Kapilvastu Region
+    uuid: a91659f9-39ce-41de-83f5-75c355d5fbd4
+    type_id: 2
+  - id: &np_arghakhanchi_region 18506
+    name: NP Arghakhanchi Region
+    uuid: 11b14150-06c7-47be-91bf-587416fb0b97
+    type_id: 2
+  - id: &np_nawalparasi_region 18845
+    name: NP Nawalparasi Region
+    uuid: f1d6e318-e2ad-4d42-b346-a5e9ca9b356c
+    type_id: 2
+  - id: &np_gulmi_region 19657
+    name: NP Gulmi Region
+    uuid: 0e3df676-5cd0-4f11-8c5e-b0c8b002ea02
+    type_id: 2
+  - id: &np_voip_region 19843
+    name: NP Voip Region
+    uuid: c25f6975-0cfe-4c7b-be34-859a5675fc0b
+    type_id: 2
+  - id: &np_doti_region 20040
+    name: NP Doti Region
+    uuid: 18771b5a-3894-4d3e-b785-c56fb5e3d433
+    type_id: 2
+  - id: &np_baitadi_region 20275
+    name: NP Baitadi Region
+    uuid: 21195eae-c1f4-4a47-9854-e67e4c1011ba
+    type_id: 2
+  - id: &np_dadeldhura_region 20457
+    name: NP Dadeldhura Region
+    uuid: 975ab60f-fd0f-4446-97a4-96c1fe6121a0
+    type_id: 2
+  - id: &np_achham_bajura_region 20573
+    name: NP Achham Bajura Region
+    uuid: 57b27382-a59d-4d3d-a843-c671d260ec67
+    type_id: 2
+  - id: &np_kanchanpur_region 21170
+    name: NP Kanchanpur Region
+    uuid: 7fa3d1bc-3b80-4ac6-9b3b-f2be0ebb0d0a
+    type_id: 2
+  - id: &np_rural_telephony_region 21179
+    name: NP Rural Telephony Region
+    uuid: 7eebc91c-3f80-4a3c-950b-df7113b346ae
+    type_id: 2
+  - id: &np_bhaktapur_kathmandu_lalitpur_region 24794
+    name: NP Bhaktapur Kathmandu Lalitpur Region
+    uuid: 7b00a96e-6ca6-4147-b9fe-9c05188d7357
+    type_id: 2
+  - id: &np_dhading_nuwakot_rasuwa_region 24807
+    name: NP Dhading Nuwakot Rasuwa Region
+    uuid: a1a60c47-e5e9-42b5-ae32-7d08bbfeaa3a
+    type_id: 2
+  - id: &np_kavrepalanchok_sindhupalchok_region 24834
+    name: NP Kavrepalanchok Sindhupalchok Region
+    uuid: 5db3714a-dfb3-4b6a-95f7-99e5086c7d6f
+    type_id: 2
+  - id: &np_morang_region 27344
+    name: NP Morang Region
+    uuid: 8167a851-8609-4c6f-9c8b-1b552ab01d94
+    type_id: 2
+  - id: &np_jhapa_region 28307
+    name: NP Jhapa Region
+    uuid: 11a52ce6-f91e-4f51-a460-bc309f5109c8
+    type_id: 2
+  - id: &np_panchthar_taplejung_region 28976
+    name: NP Panchthar Taplejung Region
+    uuid: 2789e997-957d-42f2-925d-016675dcd860
+    type_id: 2
+  - id: &np_dhankuta_tehrathum_region 29516
+    name: NP Dhankuta Tehrathum Region
+    uuid: 53f029a9-3499-48b3-8d17-f9074ff249a9
+    type_id: 2
+  - id: &np_ilam_region 29785
+    name: NP Ilam Region
+    uuid: 6cfcfb18-319f-4874-966c-2763f5a2e7d0
+    type_id: 2
+  - id: &np_sunsari_region 29839
+    name: NP Sunsari Region
+    uuid: d6eb7037-6637-40bf-87a0-e8bcaf872ce1
+    type_id: 2
+  - id: &np_bhojpur_sankhuwasabha_region 30655
+    name: NP Bhojpur Sankhuwasabha Region
+    uuid: 18a90736-d384-406b-9df6-e1834c3d8683
+    type_id: 2
+  - id: &np_saptari_region 31757
+    name: NP Saptari Region
+    uuid: 83d218c0-d246-4a43-8e3b-ee1d2194a6d0
+    type_id: 2
+  - id: &np_siraha_region 32562
+    name: NP Siraha Region
+    uuid: 2065cfa9-ace0-409a-a86d-823f20064e2d
+    type_id: 2
+  - id: &np_khotang_region 33658
+    name: NP Khotang Region
+    uuid: e94ca3d6-2c46-477b-b0fe-2577b2e2d6a8
+    type_id: 2
+  - id: &np_solukhumbu_region 33847
+    name: NP Solukhumbu Region
+    uuid: afafd286-d51b-48e4-a2f1-4140c38190aa
+    type_id: 2
+  - id: &np_udayapur_region 34642
+    name: NP Udayapur Region
+    uuid: 09922f7f-c18f-41c7-8c63-56aee31f25d4
+    type_id: 2
+  - id: &np_okhaldhunga_region 35237
+    name: NP Okhaldhunga Region
+    uuid: 6e9163c1-8488-4420-968e-e831e44527d2
+    type_id: 2
+  - id: &np_dhanusa_region 36242
+    name: NP Dhanusa Region
+    uuid: 869a6b7a-31a6-49fe-b165-397e64e1a0ce
+    type_id: 2
+  - id: &np_mahottari_region 36855
+    name: NP Mahottari Region
+    uuid: 9c7400ae-a458-4045-ad85-91a9963087f2
+    type_id: 2
+  - id: &np_sarlahi_region 37837
+    name: NP Sarlahi Region
+    uuid: 95e6bcc2-40db-4bce-9214-24fc14e20eda
+    type_id: 2
+  - id: &np_sindhuli_region 38313
+    name: NP Sindhuli Region
+    uuid: a787c537-6324-49fb-b678-252c5856f8f9
+    type_id: 2
+  - id: &np_banke_region 39312
+    name: NP Banke Region
+    uuid: 99f7723f-bdb7-49f9-a4fc-68d84cb17e13
+    type_id: 2
+  - id: &np_dang_region 39694
+    name: NP Dang Region
+    uuid: 7f951d3e-5aea-4f40-93fe-848a98439ae7
+    type_id: 2
+  - id: &np_surkhet_region 39796
+    name: NP Surkhet Region
+    uuid: cf46a077-3c91-425d-835d-a1ae6cdd5d10
+    type_id: 2
+  - id: &np_rolpa_pyuthan_region 40536
+    name: NP Rolpa Pyuthan Region
+    uuid: 9b3336a4-7076-416a-9a9e-cc2b99f5ad85
+    type_id: 2
+  - id: &np_bardiya_region 40854
+    name: NP Bardiya Region
+    uuid: fb003af0-46c8-4813-a6bc-d8fcf418f2e2
+    type_id: 2
+  - id: &np_dolpa_humla_jumla_kalikot_mugu_region 41358
+    name: NP Dolpa Humla Jumla Kalikot Mugu Region
+    uuid: 565d6eca-8a01-405d-b728-4342e387433f
+    type_id: 2
+  - id: &np_rukum_salyan_region 41564
+    name: NP Rukum Salyan Region
+    uuid: ae4633d4-792c-495c-b1c0-26d7a44e6776
+    type_id: 2
+  - id: &np_dailekh_jajarkot_region 41977
+    name: NP Dailekh Jajarkot Region
+    uuid: e7d31f09-d663-4ed4-8693-7ac43169c439
+    type_id: 2
+  - id: &np_kailali_region 42426
+    name: NP Kailali Region
+    uuid: 7fb9e8f8-c578-4620-b1f8-8e77bdf184e2
+    type_id: 2
+  - id: &np_bajhang_region 42790
+    name: NP Bajhang Region
+    uuid: cb3b123f-b40b-4f76-a8db-66c53b71c64f
+    type_id: 2
+  - id: &np_darchula_region 43094
+    name: NP Darchula Region
+    uuid: b4918900-52a8-4993-ba94-6e102aadaca5
+    type_id: 2
 # Mobile Networks
-  - id: &np_hello_nepal_mobile 5019
+  - id: &np_hello_nepal_mobile 20476
     name: NP Hello Nepal Mobile
-    uuid: 4cbf511d-1be6-422b-a311-c3580cab85c8
+    uuid: 39a9a611-efe9-4923-98e2-cda3f7fc9a88
     type_id: 3
-  - id: &np_cg_telecom_mobile 5023
+  - id: &np_cg_telecom_mobile 20517
     name: NP Cg Telecom Mobile
-    uuid: 12580de6-aeff-4a51-a8da-352adf236a61
+    uuid: 2c760ce7-016b-46a6-b381-c740b9ffc2bd
     type_id: 3
-  - id: &np_smart_mobile 5025
+  - id: &np_smart_mobile 20529
     name: NP Smart Mobile
-    uuid: a03ad43c-cb44-4cbf-8c44-6b6b430ecbd9
+    uuid: a32a0168-423f-4388-a723-c7515eba87c5
     type_id: 3
-  - id: &np_utl_mobile 5048
+  - id: &np_utl_mobile 20691
     name: NP Utl Mobile
-    uuid: db3f38c6-7b8f-4959-9c77-54f1846a0bcb
+    uuid: c1b0b196-1021-42d4-a34d-39e342c52bdb
     type_id: 3
-  - id: &np_ncell_mobile 5065
+  - id: &np_ncell_mobile 20803
     name: NP Ncell Mobile
-    uuid: 90366109-b3a7-4351-b2f3-22f145f1a828
+    uuid: 13324d8a-141d-434b-927e-54543ac78c59
     type_id: 3
-  - id: &np_sky_phone_nepal_telecom_mobile_mobile 5067
+  - id: &np_sky_phone_nepal_telecom_mobile_mobile 20823
     name: NP Sky Phone Nepal Telecom Mobile Mobile
-    uuid: be3c6068-acff-4187-9f98-5b7524ad6920
+    uuid: c4dc1a70-e528-413d-a91c-72200663fa6e
     type_id: 3
-  - id: &np_mobile 5072
+  - id: &np_mobile 21165
     name: NP Mobile
-    uuid: 0f0cc87f-bd12-4706-8a3f-8875f67ddd16
+    uuid: 04d9915c-02e6-4730-9a26-71fa9e54ac17
     type_id: 3
 # Supplementary services Networks
-  - id: &np_special_services 5293
+  - id: &np_special_services 21467
     name: NP Special Services
-    uuid: dd5bafc0-1b65-4bc5-af9e-5cacb8791934
-    type_id: 14
-  - id: &np_audio_notice_board_recording_services 5622
+    uuid: cc1f6521-d40a-4b16-9b67-63fc239d54ab
+    type_id: 13
+  - id: &np_audio_notice_board_recording_services 21834
     name: NP Audio Notice Board Recording Services
-    uuid: b2a0bd7b-67fe-464d-9baf-5703f6766da0
-    type_id: 14
-  - id: &np_audio_notice_board_listening_services 5623
+    uuid: 324c9c6d-7de8-4cfb-83a0-7564ff2c1df0
+    type_id: 13
+  - id: &np_audio_notice_board_listening_services 21835
     name: NP Audio Notice Board Listening Services
-    uuid: 8f88f953-5311-4f6a-a8d6-c592f784d40e
-    type_id: 14
-  - id: &np_freephone_services 5624
+    uuid: a239f9f0-907b-4d62-9c8d-91fc2486ca0d
+    type_id: 13
+  - id: &np_freephone_services 21836
     name: NP Freephone Services
-    uuid: 9ffd9222-38b2-4e92-a4cf-40615b564d5e
-    type_id: 14
+    uuid: 29cd94b8-f861-4cc0-9064-a4b8ed13a5c8
+    type_id: 13
 network_prefixes:
 # Fixed Prefixes
   - id: 51614
     prefix: '97748'
     number_min_length: 11
     number_max_length: 11
-    uuid: d7521c64-7c9d-470f-85b1-1d6cb9cf4bf9
+    uuid: 52ceefd2-dfb1-4438-8f1d-d48e8ebfd601
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_ramechhap_region
   - id: 58230
     prefix: '97749'
     number_min_length: 11
     number_max_length: 11
-    uuid: f8eafbca-df93-4cee-81bc-fd24a317a824
+    uuid: c8254205-0dd8-4c30-83fd-26268d34e701
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_dolakha_region
   - id: 62612
     prefix: '97751'
     number_min_length: 11
     number_max_length: 11
-    uuid: b19ed835-aa8d-4c2a-b490-290690ad9f60
+    uuid: d4988e47-118e-4b46-8755-faa80df2a8c4
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_parsa_region
   - id: 76551
     prefix: '97753'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7d6730d3-0cb6-484a-81f1-530fa29e97fe
+    uuid: 299acb7a-dbb7-4ade-97d7-625fcb091fcd
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_bara_region
   - id: 78129
     prefix: '97755'
     number_min_length: 11
     number_max_length: 11
-    uuid: 38a5c219-466e-479b-80a7-ecc82a282a05
+    uuid: 9d04e71e-dd15-4caf-8f88-9d0921934be0
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_rautahat_region
   - id: 87920
     prefix: '97756'
     number_min_length: 11
     number_max_length: 11
-    uuid: e3c8c9da-5493-41b7-b00b-00638c1c6cba
+    uuid: 7a32d5bd-0fe6-4efc-8f9a-a61fb0a73eb1
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_chitwan_region
   - id: 90274
     prefix: '97757'
     number_min_length: 11
     number_max_length: 11
-    uuid: 200893ae-8ab8-4bc9-8657-133e6b76ad80
+    uuid: 7f827f13-9ef6-4878-a83f-7a47a0c805e9
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_makwanpur_region
   - id: 108588
     prefix: '97761'
     number_min_length: 11
     number_max_length: 11
-    uuid: a5370190-b7ad-4d19-8fee-52c879449f41
+    uuid: 07c1d6c7-50c6-4f68-945e-2d32914efe7d
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_kaski_region
   - id: 117834
     prefix: '97763'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4e018cf-5b97-4a0c-b518-2056fa9f9925
+    uuid: f8d0de38-df95-4241-a503-a5886a69430e
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_syangja_region
   - id: 122440
     prefix: '97764'
     number_min_length: 11
     number_max_length: 11
-    uuid: da43df8c-bbfb-453a-a430-9d79ff23cee4
+    uuid: 0020bfd5-b011-456b-8961-121a3cd1c504
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_gorkha_region
   - id: 135918
     prefix: '97765'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3151fe72-8a42-4b8d-9c42-2124c1eef7b8
+    uuid: 9d5c0e87-60c3-4883-adb4-de26f17ff07f
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_tanahu_region
   - id: 138630
     prefix: '97766'
     number_min_length: 11
     number_max_length: 11
-    uuid: ccf4193a-8618-452f-8a2e-139ac046352b
+    uuid: 5ed1d949-036a-4c78-a50e-9266ed38a22d
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_lamgunj_manang_region
   - id: 146821
     prefix: '97768'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5b334ea6-5e85-4745-a37f-4c0fd564bc74
+    uuid: f27aac5a-ffbd-4e58-9b44-c40235ddbfb5
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_baglung_region
   - id: 148665
     prefix: '97769'
     number_min_length: 11
     number_max_length: 11
-    uuid: b7295564-d9fd-4c90-85e5-cb8661ba1dd9
+    uuid: 870ff360-bc34-41b7-a183-1c6635d0f892
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_mustang_myagdi_region
   - id: 151427
     prefix: '97767'
     number_min_length: 11
     number_max_length: 11
-    uuid: 425e09b7-860e-4c26-b8d5-026e1e0e0db5
+    uuid: b05aad4e-2f39-4ce3-9731-d8256e68ccfb
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_parbat_region
   - id: 164000
     prefix: '97771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7743115c-3aff-448a-954f-a6efb87012b2
+    uuid: bcab829c-380f-42a1-a4c8-4619f26b6908
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_rupandehi_region
   - id: 185879
     prefix: '97775'
     number_min_length: 11
     number_max_length: 11
-    uuid: 41a1a884-ae06-4de8-9ce9-2f6cc155cae4
+    uuid: d410212d-56cf-4840-8359-c9c88a5b5367
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_palpa_region
   - id: 187993
     prefix: '97776'
     number_min_length: 11
     number_max_length: 11
-    uuid: 32cc7e6f-50d5-4b88-acda-60dd7f6a4c0d
+    uuid: cde00961-cbe0-440b-b73b-0f163bfee1b4
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_kapilvastu_region
   - id: 192099
     prefix: '97777'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5fb7580a-1a82-43a0-a57c-70f6cff282c6
+    uuid: 4ab2c514-9633-4be2-ae30-19b847468cd7
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_arghakhanchi_region
   - id: 198400
     prefix: '97778'
     number_min_length: 11
     number_max_length: 11
-    uuid: 276675cd-4406-47b3-b603-7982a4df8fcf
+    uuid: 5e2b51d7-9346-48e1-bce6-b19f2dbca2be
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_nawalparasi_region
   - id: 206664
     prefix: '97779'
     number_min_length: 11
     number_max_length: 11
-    uuid: 02e9a777-ae8b-48e1-95d0-d0ce22e6441a
+    uuid: 9d580b4b-0567-415b-bd4c-20ba9038d1a5
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_gulmi_region
   - id: 207793
     prefix: '97780'
     number_min_length: 13
     number_max_length: 13
-    uuid: 02dc2529-f9ca-4dae-910a-5b8025157f58
+    uuid: 6be04fd5-210c-4782-b122-ff79527eb64f
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_voip_region
   - id: 212510
     prefix: '97794'
     number_min_length: 11
     number_max_length: 11
-    uuid: 670cef5b-da2f-461b-ab21-95c5b489f0f2
+    uuid: 5f63b467-5c07-4db7-b07a-c454e39bc1bf
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_doti_region
   - id: 215152
     prefix: '97795'
     number_min_length: 11
     number_max_length: 11
-    uuid: 656db133-4d4f-4083-82a7-230406b12610
+    uuid: 14d3f7f8-a397-49d6-9d4a-2e43ec72fe8e
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_baitadi_region
   - id: 221951
     prefix: '97796'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e2c17a9-b442-4197-b1ee-c0feffebe086
+    uuid: 013364ab-9451-480a-a9e2-d49b2765d080
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_dadeldhura_region
   - id: 227368
     prefix: '97797'
     number_min_length: 11
     number_max_length: 11
-    uuid: b3c0cd0b-b935-40a0-86c1-bb1d6cf57122
+    uuid: b9828caa-1715-4d81-87a7-c7effb612617
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_achham_bajura_region
   - id: 239375
     prefix: '97799'
     number_min_length: 11
     number_max_length: 11
-    uuid: 63db50a8-7ed9-4ed4-8df8-7d4e9a0b954d
+    uuid: 9f1ed415-abe8-43eb-a014-531fa43ea9b2
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_kanchanpur_region
   - id: 239781
     prefix: '977990'
     number_min_length: 12
     number_max_length: 12
-    uuid: c81c7335-d5e9-4e12-a71e-c491c79e09d6
+    uuid: 10b33ca5-d746-4b6a-96eb-73049db8c606
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_rural_telephony_region
   - id: 240007
     prefix: '977993'
     number_min_length: 12
     number_max_length: 12
-    uuid: 809f63fc-3a0d-473d-ab98-e4e21dacc363
+    uuid: 206b0103-0ff3-4e67-b72a-ae9205755b09
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_rural_telephony_region
   - id: 258568
     prefix: '9771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1b1cfdca-b876-49fd-8764-0869d227fdc6
+    uuid: 0ce424df-1b52-4e03-8250-b0234bc7fd98
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_bhaktapur_kathmandu_lalitpur_region
   - id: 258624
     prefix: '97710'
     number_min_length: 11
     number_max_length: 11
-    uuid: 04132c1a-b27c-4179-aaf8-ee1b5826abc3
+    uuid: 21c59b26-a5f4-4293-82e9-02160003bfa7
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_dhading_nuwakot_rasuwa_region
   - id: 258815
     prefix: '97711'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b5eab5f-b712-451f-9c4d-b101c67a87f7
+    uuid: 0d1fe38b-6397-43b4-bef0-0389e7984571
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_kavrepalanchok_sindhupalchok_region
   - id: 274239
     prefix: '97721'
     number_min_length: 11
     number_max_length: 11
-    uuid: 89a31ccf-3880-46d5-b456-a201ffd93e14
+    uuid: d00c546a-3b15-420b-8ccd-95e295745873
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_morang_region
   - id: 286638
     prefix: '97723'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5624d1cb-d5fe-4d6f-80de-86c58adf6de9
+    uuid: 0a62e588-8a55-47c7-8093-c575f1a64969
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_jhapa_region
   - id: 294332
     prefix: '97724'
     number_min_length: 11
     number_max_length: 11
-    uuid: aa2f54d0-0f32-4f39-abb7-85255e40acc2
+    uuid: 18920686-a9b7-4cb2-a154-b670bd7b8b8d
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_panchthar_taplejung_region
   - id: 299803
     prefix: '97726'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f1cdcd3-40c1-4dcd-a774-f3d3be19fd81
+    uuid: 1e2183e2-8a15-4a01-bed0-e1d7256efedb
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_dhankuta_tehrathum_region
   - id: 301429
     prefix: '97727'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8202264b-e7b9-4774-b671-5976f9e7f280
+    uuid: 2216ebd2-e244-436c-942b-4c1b6ff785c2
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_ilam_region
   - id: 301976
     prefix: '97725'
     number_min_length: 11
     number_max_length: 11
-    uuid: f359bb54-b6d5-4032-8597-5efc3a078b9c
+    uuid: f368cd48-d6b2-4153-a28f-81885d1b6d1f
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_sunsari_region
   - id: 308507
     prefix: '97729'
     number_min_length: 11
     number_max_length: 11
-    uuid: 06016e89-545e-4881-b460-2f432a3d3a2e
+    uuid: 0b12fadf-1ccf-45c9-8d92-280533082610
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_bhojpur_sankhuwasabha_region
   - id: 321177
     prefix: '97731'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9d7605af-3cbb-421f-9b22-26396597e735
+    uuid: d60c848c-d074-4846-8796-19780332599d
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_saptari_region
   - id: 337290
     prefix: '97733'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7a543185-ca6a-4050-83dd-91e8ab78bc49
+    uuid: ab3c96d9-cead-4c1f-bad3-83e496525db9
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_siraha_region
   - id: 345947
     prefix: '97736'
     number_min_length: 11
     number_max_length: 11
-    uuid: 40d1dc3a-ca61-4339-84b8-d9f5293dd240
+    uuid: 237469c1-19a4-430a-93fd-c2ee00aece8c
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_khotang_region
   - id: 347706
     prefix: '97738'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2f3dd7ae-8bb9-4e28-9f8c-910338008552
+    uuid: e740ca14-b786-436a-a620-7781be2955c7
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_solukhumbu_region
   - id: 352241
     prefix: '97735'
     number_min_length: 11
     number_max_length: 11
-    uuid: 26cbcf49-ad63-45d5-bbf0-39bde1849aeb
+    uuid: 34de2df8-700a-4758-8478-2b06e7e1d912
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_udayapur_region
   - id: 355761
     prefix: '97737'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9e46de9e-11f5-4fc9-ad9d-266985f80b63
+    uuid: 718c36aa-9160-4ea0-91af-6c8ef2954952
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_okhaldhunga_region
   - id: 362532
     prefix: '97741'
     number_min_length: 11
     number_max_length: 11
-    uuid: f462e29f-a8ac-4f42-8933-bdb485498f42
+    uuid: c1bae9a0-5a10-483b-b19f-41d76f37a25d
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_dhanusa_region
   - id: 370195
     prefix: '97744'
     number_min_length: 11
     number_max_length: 11
-    uuid: 59a2354a-c40d-4141-a466-e4f854b26eba
+    uuid: c154d9f0-a49b-49b2-9a36-01a69d44fe00
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_mahottari_region
   - id: 388635
     prefix: '97746'
     number_min_length: 11
     number_max_length: 11
-    uuid: d79f5af2-6ee1-4bee-9bb4-f014cbe877e9
+    uuid: 298e8022-ed0d-4566-b59b-d9fe732acf85
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_sarlahi_region
   - id: 399486
     prefix: '97747'
     number_min_length: 11
     number_max_length: 11
-    uuid: 69edf90b-8004-4589-9226-7496ed6c38b5
+    uuid: 8223ff99-87e0-4c61-96b2-fa064bc0856e
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_sindhuli_region
   - id: 413679
     prefix: '97781'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2875cfcf-61a8-4722-9883-6724735756b3
+    uuid: 24b6ccbc-985b-4cf6-8900-748f7f4f342c
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_banke_region
   - id: 418792
     prefix: '97782'
     number_min_length: 11
     number_max_length: 11
-    uuid: ead3b7ee-d87d-42a6-8d2f-738e004449ed
+    uuid: 4ab35f00-211e-4fcd-8274-80f0f7fd8bf7
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_dang_region
   - id: 422127
     prefix: '97783'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2f70ce66-7e1c-40b0-9fc9-1eb409e1fe89
+    uuid: f5da285a-28df-4f7a-974a-f4c207f44b81
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_surkhet_region
   - id: 428705
     prefix: '97786'
     number_min_length: 11
     number_max_length: 11
-    uuid: 764fa767-7a3d-4ba7-956b-0cb55bd1609b
+    uuid: 12b6ff01-c976-4423-80b0-cc9cd3abb403
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_rolpa_pyuthan_region
   - id: 433221
     prefix: '97784'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4fe9eb8f-c328-40b6-be84-1fdda6100d60
+    uuid: 791a4cdc-580c-4418-bab7-096cf105c203
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_bardiya_region
   - id: 441112
     prefix: '97787'
     number_min_length: 11
     number_max_length: 11
-    uuid: fa3ef537-55c4-4b97-9430-706afa4cf90c
+    uuid: 579d0040-2627-481c-9024-7d3f72d0b277
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_dolpa_humla_jumla_kalikot_mugu_region
   - id: 443796
     prefix: '97788'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0c2e678e-1c18-46a2-a6fa-25a1ff4d7b22
+    uuid: 753651c7-45f8-4ca3-861a-f5c769ad2e95
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_rukum_salyan_region
   - id: 451413
     prefix: '97789'
     number_min_length: 11
     number_max_length: 11
-    uuid: b8d5d3e2-1039-499f-9e95-db2205bcbc93
+    uuid: 876e3217-3ca8-4c85-9d03-a8a8532c1fbf
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_dailekh_jajarkot_region
   - id: 458152
     prefix: '97791'
     number_min_length: 11
     number_max_length: 11
-    uuid: a4b124cd-7a0a-4383-a967-61df18c0b457
+    uuid: 7cb8d720-ea96-4453-b9af-dfe8cf518af8
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_kailali_region
   - id: 468951
     prefix: '97792'
     number_min_length: 11
     number_max_length: 11
-    uuid: 63261636-5a20-449e-bf55-c18e788c2f32
+    uuid: d3e17db3-227f-49a4-a47e-80d39dfaa230
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_bajhang_region
   - id: 485431
     prefix: '97793'
     number_min_length: 11
     number_max_length: 11
-    uuid: afe6ebd5-ef93-4c76-a9ec-706451cd170c
+    uuid: d9917754-03a7-48ed-8c51-e98f8e3a7eed
     country_id: *np
-    network_id: *np_fixed
+    network_id: *np_darchula_region
 # Mobile Prefixes
   - id: 223347
     prefix: '977963'
     number_min_length: 13
     number_max_length: 13
-    uuid: 6a0c22f4-c21a-402a-8a8a-8ceb24c002ac
+    uuid: 0d0a263f-7f09-48ad-84e5-702a25fa756c
     country_id: *np
     network_id: *np_hello_nepal_mobile
   - id: 225110
     prefix: '977960'
     number_min_length: 13
     number_max_length: 13
-    uuid: c4abf383-33a6-49eb-97d5-e8ecf61ae140
+    uuid: 28175b8c-210f-4c5e-960c-43d66f874024
     country_id: *np
     network_id: *np_cg_telecom_mobile
   - id: 225133
     prefix: '977961'
     number_min_length: 13
     number_max_length: 13
-    uuid: 3349d149-00da-4e97-a68a-8a91cd605178
+    uuid: 2cecad6f-57f1-426c-9859-fb659a8c7f53
     country_id: *np
     network_id: *np_smart_mobile
   - id: 229618
     prefix: '977972'
     number_min_length: 13
     number_max_length: 13
-    uuid: 8403d77c-00c4-4798-9114-87d12a03cbd2
+    uuid: 38818545-3001-494d-b718-f1cf2bc69f36
     country_id: *np
     network_id: *np_utl_mobile
   - id: 232321
     prefix: '977980'
     number_min_length: 13
     number_max_length: 13
-    uuid: 88d3f4f7-7c43-4ff9-b966-6c37c544b67a
+    uuid: 8898727a-b7d0-44dc-84b5-bbfcf668b267
     country_id: *np
     network_id: *np_ncell_mobile
   - id: 232901
     prefix: '977982'
     number_min_length: 13
     number_max_length: 13
-    uuid: 51ee43e5-8201-408c-819d-03dc5f341dc1
+    uuid: 686a8ecc-a253-4a91-be96-f233987d52a1
     country_id: *np
     network_id: *np_ncell_mobile
   - id: 233315
     prefix: '977974'
     number_min_length: 13
     number_max_length: 13
-    uuid: 4ce3bb28-1630-41b3-a4e7-609cbc2e3035
+    uuid: 93547a06-2dd6-42b7-9cc6-26788ddf8379
     country_id: *np
     network_id: *np_sky_phone_nepal_telecom_mobile_mobile
   - id: 233334
     prefix: '977975'
     number_min_length: 13
     number_max_length: 13
-    uuid: 418f32df-1070-40f3-a812-b0da6ed86ab7
+    uuid: 9c725f73-5bde-4596-adcb-d5767e9bcdea
     country_id: *np
     network_id: *np_sky_phone_nepal_telecom_mobile_mobile
   - id: 235046
     prefix: '977981'
     number_min_length: 13
     number_max_length: 13
-    uuid: 5268d9ee-505b-4495-bdcb-f7e2b4a8d180
+    uuid: 1496fe3f-27a6-4002-ada6-6a01d5f81a8b
     country_id: *np
     network_id: *np_ncell_mobile
   - id: 235720
     prefix: '977984'
     number_min_length: 13
     number_max_length: 13
-    uuid: eec2d483-5536-4419-a1d9-c80d1f21f2f0
+    uuid: 3c474432-14aa-4e33-9d6b-edcd2521b02e
     country_id: *np
     network_id: *np_sky_phone_nepal_telecom_mobile_mobile
   - id: 236764
     prefix: '977985'
     number_min_length: 13
     number_max_length: 13
-    uuid: 15edbabb-283f-412d-9d49-a420328f1a8f
+    uuid: 5257ae4f-97f5-4188-bdfb-5ca307fc20fc
     country_id: *np
     network_id: *np_sky_phone_nepal_telecom_mobile_mobile
   - id: 237098
     prefix: '977986'
     number_min_length: 13
     number_max_length: 13
-    uuid: d5a09855-63f3-4932-8808-ffc6cdb6e7fe
+    uuid: a6b4689d-0446-42bb-ba48-263a6aa5f0c3
     country_id: *np
     network_id: *np_sky_phone_nepal_telecom_mobile_mobile
   - id: 239361
     prefix: '97798'
     number_min_length: 13
     number_max_length: 13
-    uuid: 17091ff7-9021-467e-ab82-2f06b022dd84
+    uuid: b8b57d52-aeef-49fb-bfae-c50eebf1755f
     country_id: *np
     network_id: *np_mobile
 # Country code Prefixes
@@ -570,7 +802,7 @@ network_prefixes:
     prefix: '977'
     number_min_length: 4
     number_max_length: 100
-    uuid: 86af9a3e-a557-4cd2-93cb-f419590652a5
+    uuid: 8aaf7c01-e94f-493c-873f-fc959081a6df
     country_id: *np
     network_id: null
 # Supplementary services Prefixes
@@ -578,83 +810,83 @@ network_prefixes:
     prefix: '9771'
     number_min_length: 6
     number_max_length: 8
-    uuid: 31b374df-c598-4b99-b543-1230ba6b4776
+    uuid: 9ee1b647-d89a-4bf4-9bfb-5cb3f3363d40
     country_id: *np
     network_id: *np_special_services
   - id: 243037
     prefix: '9771610'
     number_min_length: 15
     number_max_length: 15
-    uuid: 7db8991e-3f61-435e-a645-55d7deed1a33
+    uuid: e5ee9830-d30b-4996-88ab-5b19603cee87
     country_id: *np
     network_id: *np_audio_notice_board_recording_services
   - id: 243038
     prefix: '9771618'
     number_min_length: 15
     number_max_length: 15
-    uuid: e3fab225-86b3-4263-8899-b446b840009c
+    uuid: 1b6075f0-527a-4723-b939-a723ccf10f0d
     country_id: *np
     network_id: *np_audio_notice_board_listening_services
   - id: 243043
     prefix: '977166001'
     number_min_length: 14
     number_max_length: 14
-    uuid: 0928fdee-be70-40d1-beb4-39088cdb74e0
+    uuid: decc0850-8409-4249-a67d-e342404ac414
     country_id: *np
     network_id: *np_freephone_services
   - id: 243954
     prefix: '9774'
     number_min_length: 6
     number_max_length: 9
-    uuid: fed3aa32-dfb6-45fa-a9a0-fef414f2c7c3
+    uuid: c616e379-f350-45df-8058-cde9b693dfff
     country_id: *np
     network_id: *np_special_services
   - id: 245416
     prefix: '9776'
     number_min_length: 6
     number_max_length: 9
-    uuid: 49fbfd0a-f910-46e0-9c45-de9ac59ccdd6
+    uuid: cd0fd764-673c-426d-bffe-88feed49b442
     country_id: *np
     network_id: *np_special_services
   - id: 247427
     prefix: '9772'
     number_min_length: 6
     number_max_length: 9
-    uuid: 3194ea40-98c5-489a-ab4c-9b758ef6896c
+    uuid: 68bf8a55-8a60-48d9-9daf-248620269a48
     country_id: *np
     network_id: *np_special_services
   - id: 248913
     prefix: '9773'
     number_min_length: 6
     number_max_length: 9
-    uuid: 4ea34600-b4d9-476d-874c-cac2d97f84fe
+    uuid: 36e67556-c169-477b-b30f-8b689bfaf435
     country_id: *np
     network_id: *np_special_services
   - id: 249596
     prefix: '9775'
     number_min_length: 6
     number_max_length: 9
-    uuid: 16c4efd8-98c1-4dcb-bddf-2d07b4579806
+    uuid: 79ea2453-7dd9-4a98-855d-507385f83d70
     country_id: *np
     network_id: *np_special_services
   - id: 253096
     prefix: '9778'
     number_min_length: 6
     number_max_length: 9
-    uuid: f4844af1-c216-45a4-975f-7779bb35ae6c
+    uuid: 2e2f6dc8-ed22-49ff-ae4b-005abc76c0a1
     country_id: *np
     network_id: *np_special_services
   - id: 255267
     prefix: '9777'
     number_min_length: 6
     number_max_length: 9
-    uuid: 2901eb37-a73d-4b8b-956f-6573798b63a2
+    uuid: d54aa0cb-244f-4c08-ad33-fdffa1444306
     country_id: *np
     network_id: *np_special_services
   - id: 257122
     prefix: '9779'
     number_min_length: 6
     number_max_length: 9
-    uuid: 87b1aa9c-66f6-4c2a-a405-59ca326cd1ad
+    uuid: 26aa24ea-d071-42f7-b312-58ef66cdf47c
     country_id: *np
     network_id: *np_special_services

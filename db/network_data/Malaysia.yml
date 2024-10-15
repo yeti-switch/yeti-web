@@ -1,143 +1,171 @@
 country_id: &my 129
 networks:
 # Fixed Networks
-  - id: &my_fixed 4104
-    name: MY Fixed
-    uuid: 62c2d520-144f-482f-8c23-fe4522539e08
-    type_id: 12
+  - id: &my_perak_region 4615
+    name: MY Perak Region
+    uuid: 2b9deb3e-26de-4241-a22b-d8cac05d9113
+    type_id: 2
+  - id: &my_melaka_negeri_sembilan_region 8976
+    name: MY Melaka Negeri Sembilan Region
+    uuid: 68679fef-bef2-4295-8343-e897eb3932ad
+    type_id: 2
+  - id: &my_johor_region 14383
+    name: MY Johor Region
+    uuid: 2e27f6b5-848f-4032-a598-58c547d40b8a
+    type_id: 2
+  - id: &my_kuala_lumpur_putrajaya_selangor_region 31293
+    name: MY Kuala Lumpur Putrajaya Selangor Region
+    uuid: 13a0f16c-2936-4a8d-bc04-e557c35a6e94
+    type_id: 2
+  - id: &my_kedah_penang_perlis_region 34264
+    name: MY Kedah Penang Perlis Region
+    uuid: 6aaa45cd-c451-4486-88f5-7148b2807da8
+    type_id: 2
+  - id: &my_sarawak_region 39692
+    name: MY Sarawak Region
+    uuid: 20ae7263-9859-4822-bf10-1237af4984cb
+    type_id: 2
+  - id: &my_sabah_region 41357
+    name: MY Sabah Region
+    uuid: 87cd60da-42b9-4d46-8076-d12394281d7d
+    type_id: 2
+  - id: &my_kelantan_pahang_terengganu_region 41581
+    name: MY Kelantan Pahang Terengganu Region
+    uuid: 277d29ec-e372-418c-a94b-3239137f3330
+    type_id: 2
 # Supplementary services Networks
-  - id: &my_special_services 5287
+  - id: &my_special_services 21461
     name: MY Special Services
-    uuid: e6b6c97b-7bf1-400a-b1b5-e120a840874f
-    type_id: 14
-  - id: &my_information_services 5369
+    uuid: 18af1b24-86a2-408e-a37b-84959d470bb9
+    type_id: 13
+  - id: &my_information_services 21544
     name: MY Information Services
-    uuid: d7bacf4d-1ba8-44f0-9bcc-1fc62e6ddfb5
-    type_id: 14
-  - id: &my_toll_free_services 5543
+    uuid: 911e2fd9-26d5-4bc3-ab36-db41d70ab0e2
+    type_id: 13
+  - id: &my_toll_free_services 21754
     name: MY Toll Free Services
-    uuid: e46cbcb8-3adc-481b-9421-ca8c50f7f127
-    type_id: 14
-  - id: &my_internal_network_services 5544
+    uuid: 52efe037-dc32-48e3-8821-04074777ddbc
+    type_id: 13
+  - id: &my_internal_network_services 21755
     name: MY Internal Network Services
-    uuid: 9a16a113-3563-4ee4-b72f-c120ce67d9a3
-    type_id: 14
-  - id: &my_mass_calling_services 5549
+    uuid: 5b590089-f19a-462a-be00-b40c3e9f493c
+    type_id: 13
+  - id: &my_mass_calling_services 21760
     name: MY Mass Calling Services
-    uuid: f134ad8a-0ce8-4945-9461-ebfe124fce54
-    type_id: 14
-  - id: &my_internationally_accessible_information_services 5568
+    uuid: 261181b4-0eb3-47dc-bd34-1b4d8fe044e9
+    type_id: 13
+  - id: &my_internationally_accessible_information_services 21780
     name: MY Internationally Accessible Information Services
-    uuid: 801855ce-e910-4f38-a98c-2c6b6e8b55ec
-    type_id: 14
-  - id: &my_calling_party_pay_cpp_messaging_services 5593
+    uuid: 66f8aa48-61e1-4360-9968-38ec4fd65342
+    type_id: 13
+  - id: &my_calling_party_pay_cpp_messaging_services 21805
     name: MY Calling Party Pay Cpp Messaging Services
-    uuid: d7de049a-e84c-466a-b8d3-70e38115a7a9
-    type_id: 14
-  - id: &my_dial_up_internet_access 5594
-    name: MY Dial_Up Internet Access
-    uuid: 2d8353b7-713d-405f-b903-c0736abc9138
-    type_id: 14
-  - id: &my_assistance_services 5600
+    uuid: 8438a080-f2ad-4638-8fe0-b1dc522bf5b3
+    type_id: 13
+  - id: &my_dial_up_internet_access 21806
+    name: MY Dial Up Internet Access
+    uuid: 786fe67b-5352-4843-9b68-679b6e9eed93
+    type_id: 13
+  - id: &my_assistance_services 21812
     name: MY Assistance Services
-    uuid: fed9bf83-54f2-40f2-8681-bdd5b14d6b14
-    type_id: 14
-  - id: &my_premium_rate_services 5620
+    uuid: b8d0b5ec-d91c-4e23-b2b0-0ebc4db2c67e
+    type_id: 13
+  - id: &my_premium_rate_services 21832
     name: MY Premium Rate Services
-    uuid: 6b1c21dd-2941-4f5c-8074-0db37224e5cc
-    type_id: 14
-  - id: &my_forwarding_services 5641
+    uuid: 9eaed442-10ad-4147-8801-776ce1db0809
+    type_id: 13
+  - id: &my_forwarding_services 21853
     name: MY Forwarding Services
-    uuid: 99f1b751-5c58-47bb-9b17-fbbcd4d6520e
-    type_id: 14
-  - id: &my_sms_mms_services 5771
+    uuid: fa24afe2-a415-45ae-a2e0-b417e3025500
+    type_id: 13
+  - id: &my_sms_mms_services 22137
     name: MY Sms_Mms Services
-    uuid: 4eca0b90-c872-449c-8c9c-b948d23264e9
-    type_id: 14
-  - id: &my_freephone_services 5992
+    uuid: dc81266a-fd6f-4580-90d4-499cb156962d
+    type_id: 13
+  - id: &my_freephone_services 22643
     name: MY Freephone Services
-    uuid: 3f6d8b94-effb-4daf-bde8-c064fdcc24f0
-    type_id: 14
-  - id: &my_multimedia_services 6036
+    uuid: 6878446e-409b-402a-9900-63fd081e5b79
+    type_id: 13
+  - id: &my_multimedia_services 22687
     name: MY Multimedia Services
-    uuid: 2ee53c61-71d9-48eb-a58f-fcdd2e781e3a
-    type_id: 14
-  - id: &my_emergency_services 6951
+    uuid: 9f337431-42aa-48c3-b9ce-bdb2add98c9a
+    type_id: 13
+  - id: &my_emergency_services 24405
     name: MY Emergency Services
-    uuid: cb773641-1d6a-44cb-8e45-6c16468731e7
-    type_id: 14
+    uuid: 65d9160b-d632-4775-814c-3669cea9b76a
+    type_id: 13
 # Mobile Networks
-  - id: &my_mobile 7086
+  - id: &my_mobile 24805
     name: MY Mobile
-    uuid: 519f272d-df03-4a60-a0ec-9ea4d48fbce5
+    uuid: c7f2d27b-c5cd-44f7-868c-ae54b90d8bf6
     type_id: 3
-  - id: &my_digi_mobile 7093
+  - id: &my_digi_mobile 24816
     name: MY Digi Mobile
-    uuid: cf146347-b4c8-4b1c-880c-06b30d54d96f
+    uuid: a523133f-932b-442f-8c13-fd975d7faf50
     type_id: 3
-  - id: &my_xox_mobile 7096
+  - id: &my_xox_mobile 24819
     name: MY Xox Mobile
-    uuid: a9b4f30b-c01e-4add-adc7-58847ce9b734
+    uuid: 5e39af4e-e7dd-441d-8af9-790349f1d10d
     type_id: 3
-  - id: &my_unifi_mobile 7097
+  - id: &my_unifi_mobile 24820
     name: MY Unifi Mobile
-    uuid: c689bad3-0809-4a2d-a9e4-8107e6c71b43
+    uuid: 5abe66f8-97fb-4c8a-9c73-8b7fc485f8a4
     type_id: 3
-  - id: &my_celcom_mobile 7098
+  - id: &my_celcom_mobile 24821
     name: MY Celcom Mobile
-    uuid: fc501bd7-5f08-45ea-9871-09aa61096150
+    uuid: dd64a11b-c396-472b-bbb3-72fd7a1a3d64
     type_id: 3
-  - id: &my_maxis_mobile 7099
+  - id: &my_maxis_mobile 24822
     name: MY Maxis Mobile
-    uuid: 8e412beb-b906-45a6-b405-4cb245c9d5d1
+    uuid: 0d1db570-6cd8-48b3-af1f-bae660703afb
     type_id: 3
-  - id: &my_tune_talk_mobile 7100
+  - id: &my_tune_talk_mobile 24823
     name: MY Tune Talk Mobile
-    uuid: 5dbcb670-21d3-4de3-906f-02d48b5dbad5
+    uuid: 0a615ce9-358b-46b9-b066-86f57114cfa4
     type_id: 3
-  - id: &my_redtone_mobile_mobile 7107
+  - id: &my_redtone_mobile_mobile 24841
     name: MY Redtone Mobile Mobile
-    uuid: aa146f9e-4c35-46a1-8e1a-3ddddac9497b
+    uuid: d2689e4c-7a36-4e1d-8d1c-82bc91d386d5
     type_id: 3
-  - id: &my_u_mobile_mobile 7108
+  - id: &my_u_mobile_mobile 24842
     name: MY U Mobile Mobile
-    uuid: 1b791ada-c2c2-4e70-ba88-bafdb786552d
+    uuid: dd9443f2-4c5d-4a41-80fe-1dcaca779a54
     type_id: 3
-  - id: &my_yes_mobile 7109
+  - id: &my_yes_mobile 24843
     name: MY Yes Mobile
-    uuid: 4b122fd8-5bf0-4bf7-ad4f-ca87e1054629
+    uuid: f3e21467-42bb-4793-9e5e-85a39fcc3923
     type_id: 3
-  - id: &my_atur_450_mobile 7110
-    name: MY Atur_450 Mobile
-    uuid: 572c34c4-1b1e-46eb-8d8c-42d28ae9fded
+  - id: &my_atur_450_mobile 24844
+    name: MY Atur 450 Mobile
+    uuid: 209bdd3a-5ffb-4c54-9d45-e4fad26316e9
     type_id: 3
-  - id: &my_altel_communications_mobile 7111
+  - id: &my_altel_communications_mobile 24845
     name: MY Altel Communications Mobile
-    uuid: 78092da5-f025-428a-8724-2a8944b9dea6
+    uuid: 5d6fc833-29c7-4491-87f8-b74a407feaf5
     type_id: 3
-  - id: &my_tt_dotcom_mobile 7241
+  - id: &my_tt_dotcom_mobile 26384
     name: MY Tt Dotcom Mobile
-    uuid: e65494fa-c53d-4890-82b4-3e5c6d3246cd
+    uuid: 1030a2ca-f29c-4e33-9e02-e50657cb6357
     type_id: 3
-  - id: &my_redtone_mobile 7242
+  - id: &my_redtone_mobile 26385
     name: MY Redtone Mobile
-    uuid: 6c2cd165-0ecc-4f24-9a79-b16e7a3fd336
+    uuid: e385608b-4102-4296-9a7e-2ee7c925f93b
     type_id: 3
-  - id: &my_y_max_mobile 7243
-    name: MY Y_Max Mobile
-    uuid: a3dcafbc-6437-4c33-b429-dc0f6a6f4b03
+  - id: &my_y_max_mobile 26386
+    name: MY Y Max Mobile
+    uuid: 6ef0b44f-4707-4347-b71d-b9fda14f7a59
     type_id: 3
-  - id: &my_maxis_broadband_mobile 7244
+  - id: &my_maxis_broadband_mobile 26387
     name: MY Maxis Broadband Mobile
-    uuid: fb1e6212-a4a9-49fd-b088-a6c206c675df
+    uuid: b2ac07b6-403b-440d-8208-78c2194ecfd6
     type_id: 3
-  - id: &my_ocesb_mobile 7245
+  - id: &my_ocesb_mobile 26388
     name: MY Ocesb Mobile
-    uuid: c9ffe6f4-4797-4774-ace0-f733c9ed9f2e
+    uuid: b8f9ae6f-a04e-400c-b4c0-e1e72f97050a
     type_id: 3
-  - id: &my_mkn_mobile 7246
+  - id: &my_mkn_mobile 26414
     name: MY Mkn Mobile
-    uuid: 5a67c64a-3a17-4880-aa6b-7cd09582bf09
+    uuid: 4ef913f6-981f-4c26-b0ff-173eee5de894
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
@@ -145,106 +173,106 @@ network_prefixes:
     prefix: '605'
     number_min_length: 10
     number_max_length: 10
-    uuid: 075b5aa3-1ecc-4e87-81d9-b46c6feca98f
+    uuid: 12bb401a-c379-40fc-b70d-dc696d0b38dc
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_perak_region
   - id: 84946
     prefix: '606'
     number_min_length: 10
     number_max_length: 10
-    uuid: d13e501c-ada4-4398-86be-8bb38689da69
+    uuid: 44dca0d3-80d0-42b5-8e55-bdad37697b1e
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_melaka_negeri_sembilan_region
   - id: 149337
     prefix: '607'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4a3f4e6c-d901-4db5-95ff-4e6ac522f61b
+    uuid: 6d21658a-8264-435f-b6b6-73878f89eda8
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_johor_region
   - id: 315873
     prefix: '603'
     number_min_length: 11
     number_max_length: 11
-    uuid: f9118709-ee32-4650-ae2e-c2fbefa59422
+    uuid: b4913c3c-e0c7-407a-b6c4-87e31fdc2a43
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_kuala_lumpur_putrajaya_selangor_region
   - id: 349448
     prefix: '604'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9aca183d-541a-4d44-87b2-639e1b3edd38
+    uuid: 5970bba0-a92f-4fd3-9af7-063c3f9f1b5c
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_kedah_penang_perlis_region
   - id: 418789
     prefix: '6082'
     number_min_length: 10
     number_max_length: 10
-    uuid: 020b4348-6618-4cc9-8645-cbf24ad01ea9
+    uuid: f2aa6760-215d-41b4-9b7f-7bbf595a3f4b
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_sarawak_region
   - id: 422125
     prefix: '6083'
     number_min_length: 10
     number_max_length: 10
-    uuid: fd5b2e26-ed52-4395-80c9-1eb39b9e6514
+    uuid: e2f96bf9-fc84-4235-8199-c73e8feeb370
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_sarawak_region
   - id: 428703
     prefix: '6086'
     number_min_length: 10
     number_max_length: 10
-    uuid: c52f1c2a-68fb-4632-89dc-0125c1e63d1e
+    uuid: ec8e76e7-06e1-47cc-8312-0e1e95d3294f
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_sarawak_region
   - id: 433218
     prefix: '6084'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0e680785-479d-4582-a6e6-04da49f8544a
+    uuid: 6c372e6b-a499-4a5e-a589-412035a7182e
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_sarawak_region
   - id: 435883
     prefix: '6085'
     number_min_length: 10
     number_max_length: 10
-    uuid: 031e8222-2c94-431a-992a-3e2c8a99cb2e
+    uuid: a7013125-09fd-4343-ba2e-28ed6a35a80b
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_sarawak_region
   - id: 441109
     prefix: '6087'
     number_min_length: 10
     number_max_length: 10
-    uuid: f32b9915-2038-4955-bba1-e3f7e3ed27f9
+    uuid: ec84a631-a106-4585-a652-1b735069b0fa
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_sabah_region
   - id: 443793
     prefix: '6088'
     number_min_length: 10
     number_max_length: 10
-    uuid: b2a3b781-9283-4f6e-ba29-a665c2424c91
+    uuid: 8808d169-1e4b-481f-aef8-b36547212c16
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_sabah_region
   - id: 444755
     prefix: '609'
     number_min_length: 10
     number_max_length: 10
-    uuid: ddf923f2-c087-4032-a1b4-294d96547d69
+    uuid: 027e136c-7274-4d52-900d-9dc41d8b8733
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_kelantan_pahang_terengganu_region
   - id: 451410
     prefix: '6089'
     number_min_length: 10
     number_max_length: 10
-    uuid: 37210574-463e-40f9-9d79-8ae6b365f2b4
+    uuid: b81f46be-216b-4025-8b70-d2e2a0c314e8
     country_id: *my
-    network_id: *my_fixed
+    network_id: *my_sabah_region
 # Country code Prefixes
   - id: 242063
     prefix: '60'
     number_min_length: 3
     number_max_length: 100
-    uuid: 62504367-84e8-4fd0-af82-420aad42e57c
+    uuid: d6bc952c-7bf2-4b7c-8e49-8ba5354ecbc3
     country_id: *my
     network_id: null
 # Supplementary services Prefixes
@@ -252,280 +280,280 @@ network_prefixes:
     prefix: '601'
     number_min_length: 5
     number_max_length: 7
-    uuid: 321f1351-6f44-4c59-ab88-282e7b97ff9b
+    uuid: a9e9ccb6-bd97-48dd-bf68-9fb7924cbb15
     country_id: *my
     network_id: *my_special_services
   - id: 242557
     prefix: '60105'
     number_min_length: 6
     number_max_length: 6
-    uuid: 9a9922b7-30db-4d46-ab06-5c5a13aa6ef2
+    uuid: 42ce6157-118a-4d07-8970-ca56c66880b5
     country_id: *my
     network_id: *my_information_services
   - id: 242561
     prefix: '60106'
     number_min_length: 6
     number_max_length: 6
-    uuid: ddafd3a9-2916-48c6-b5e1-6c392d567dcc
+    uuid: 46a1f60b-9db1-4d2e-ae59-15b023678298
     country_id: *my
     network_id: *my_information_services
   - id: 242569
     prefix: '60107'
     number_min_length: 6
     number_max_length: 6
-    uuid: 66e4f6ab-1a7f-4727-aa6e-6baeeaf1b17f
+    uuid: 58898a76-bdc5-4f08-ac20-7494162e8bb3
     country_id: *my
     network_id: *my_information_services
   - id: 242571
     prefix: '60108'
     number_min_length: 6
     number_max_length: 6
-    uuid: 5ad9440c-61ca-4fb6-9846-3a48b9ae7d9b
+    uuid: 061cb178-77c1-4579-a44c-a0180da96fda
     country_id: *my
     network_id: *my_information_services
   - id: 242574
     prefix: '60109'
     number_min_length: 6
     number_max_length: 6
-    uuid: f1f58770-3295-4858-a42c-9a452e90251d
+    uuid: 7835473c-6076-45e8-a281-a245c0545e27
     country_id: *my
     network_id: *my_information_services
   - id: 242867
     prefix: '601300'
     number_min_length: 12
     number_max_length: 12
-    uuid: 499b14aa-3420-42c9-aaa3-0e4a8c00c855
+    uuid: c6fc435f-6736-4b4d-9cf7-29eafab05433
     country_id: *my
     network_id: *my_toll_free_services
   - id: 242869
     prefix: '60131'
     number_min_length: 6
     number_max_length: 7
-    uuid: 92d11dce-0cb4-4bfb-9171-4b4e01e2c743
+    uuid: 015ce166-cd27-45c7-be59-d3dcbf9693d7
     country_id: *my
     network_id: *my_internal_network_services
   - id: 242873
     prefix: '60132'
     number_min_length: 6
     number_max_length: 7
-    uuid: 9979dd2d-fd98-4232-b99f-81b182cb0788
+    uuid: 8a850a87-7304-430c-97d6-9e9b372367c8
     country_id: *my
     network_id: *my_internal_network_services
   - id: 242876
     prefix: '60133'
     number_min_length: 6
     number_max_length: 7
-    uuid: f6e64674-18d1-478e-be7e-93592058dc1c
+    uuid: eaff43fb-aedf-48c3-bdd7-6405123d50a3
     country_id: *my
     network_id: *my_internal_network_services
   - id: 242878
     prefix: '60134'
     number_min_length: 7
     number_max_length: 7
-    uuid: b968a0a6-68ad-429b-ad82-c5dd355381a7
+    uuid: 7de7f421-a6df-4629-8577-908cf6fad557
     country_id: *my
     network_id: *my_mass_calling_services
   - id: 242881
     prefix: '60135'
     number_min_length: 7
     number_max_length: 7
-    uuid: f8187572-9d0e-4225-8a83-7a8d3b3a55fe
+    uuid: db74cebd-8261-45c0-b8c2-64c4f9bf41f8
     country_id: *my
     network_id: *my_mass_calling_services
   - id: 242883
     prefix: '60136'
     number_min_length: 7
     number_max_length: 7
-    uuid: 1d50685e-a6e1-4672-8b7e-f592e59d670b
+    uuid: a7c2bbda-f8dd-4c35-8889-a6c91488b80d
     country_id: *my
     network_id: *my_mass_calling_services
   - id: 242885
     prefix: '60137'
     number_min_length: 7
     number_max_length: 7
-    uuid: 86d07f0b-545f-4292-b761-9fc663e1721e
+    uuid: 84c9560f-3fd4-4f2d-927a-65e193f73eec
     country_id: *my
     network_id: *my_mass_calling_services
   - id: 242886
     prefix: '60138'
     number_min_length: 7
     number_max_length: 7
-    uuid: 0bb876d4-8c01-4843-9668-523e398fb8ee
+    uuid: 037b02aa-dac9-4672-b30d-3f8c4b8282fd
     country_id: *my
     network_id: *my_mass_calling_services
   - id: 242887
     prefix: '60139'
     number_min_length: 7
     number_max_length: 7
-    uuid: 2ffe8ee4-f59a-480d-b4e8-d0bb96d01f5c
+    uuid: 2761bd50-d05f-4be5-9837-fa34014f1122
     country_id: *my
     network_id: *my_mass_calling_services
   - id: 242920
     prefix: '60141'
     number_min_length: 7
     number_max_length: 7
-    uuid: 3bdf70e1-51be-4008-8ab9-b0dff2d82a16
+    uuid: 457d5a63-f919-4157-9fe6-6670c804cc2c
     country_id: *my
     network_id: *my_internationally_accessible_information_services
   - id: 242959
     prefix: '601500'
     number_min_length: 12
     number_max_length: 12
-    uuid: c7fb56bb-b0d4-43e8-9b0e-d4ba720b32ae
+    uuid: 33ad6eb0-31fe-46f8-b5e3-65c02d573efe
     country_id: *my
     network_id: *my_calling_party_pay_cpp_messaging_services
   - id: 242960
     prefix: '601508'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6831e143-9d61-49be-a362-0a4215b5fed3
+    uuid: 5ad70053-2580-4cee-9d1a-cbd65f3c428e
     country_id: *my
     network_id: *my_dial_up_internet_access
   - id: 242965
     prefix: '60151'
     number_min_length: 6
     number_max_length: 6
-    uuid: efe1d2e0-5c21-4e01-85fc-fc59357cbb79
+    uuid: 85f32971-9ee3-4e57-ba2b-1308baaa94e9
     country_id: *my
     network_id: *my_dial_up_internet_access
   - id: 242976
     prefix: '60152'
     number_min_length: 6
     number_max_length: 6
-    uuid: 83506952-7020-43a4-92e2-513a7384f3bd
+    uuid: f20b6529-ade4-4d0b-b605-fea74407680d
     country_id: *my
     network_id: *my_dial_up_internet_access
   - id: 242981
     prefix: '60153'
     number_min_length: 7
     number_max_length: 7
-    uuid: e5860139-393c-4993-b053-14276f45fb10
+    uuid: 3317da94-63b2-40e5-99fb-5ba5168636be
     country_id: *my
     network_id: *my_assistance_services
   - id: 242986
     prefix: '60154'
     number_min_length: 7
     number_max_length: 7
-    uuid: 51d0cf17-df52-4905-97a1-5350d9a27a3e
+    uuid: 528bfe0d-d813-4749-8d8e-585631abc8e2
     country_id: *my
     network_id: *my_assistance_services
   - id: 242991
     prefix: '60155'
     number_min_length: 7
     number_max_length: 7
-    uuid: cc8c9086-664e-4d21-b6c7-a8c94b3bc465
+    uuid: 98242f4c-b319-4c52-8bbc-cee944ea7811
     country_id: *my
     network_id: *my_assistance_services
   - id: 242994
     prefix: '60156'
     number_min_length: 7
     number_max_length: 7
-    uuid: c088e00f-ffd8-44ab-aa20-b482a1850724
+    uuid: dd83678b-93a7-4445-bb86-841fa2998b86
     country_id: *my
     network_id: *my_assistance_services
   - id: 242997
     prefix: '60157'
     number_min_length: 7
     number_max_length: 7
-    uuid: 58cc90fb-97cb-4aac-baea-f95014a28e3a
+    uuid: 088e3dc5-4eac-4a49-89d4-7f54081a4c24
     country_id: *my
     network_id: *my_assistance_services
   - id: 243000
     prefix: '60158'
     number_min_length: 7
     number_max_length: 7
-    uuid: bd0ce28c-2b0b-4134-a246-080720898b38
+    uuid: 0a991ebb-fd8e-44b2-96a8-ecc37fcd4f7c
     country_id: *my
     network_id: *my_assistance_services
   - id: 243002
     prefix: '60159'
     number_min_length: 7
     number_max_length: 7
-    uuid: 625a3b8c-e808-4d88-8ae9-a9a9e637128c
+    uuid: 57fe2950-cada-4dce-b4a2-848a25f0b775
     country_id: *my
     network_id: *my_assistance_services
   - id: 243033
     prefix: '601600'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ea87c3d-118f-4494-8616-434e09aa9700
+    uuid: e531b502-a3e3-4035-8324-78896ab31343
     country_id: *my
     network_id: *my_premium_rate_services
   - id: 243074
     prefix: '601700'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6f6ca59a-6a5a-4966-a8de-d26c7606e9a2
+    uuid: e69bd25f-4286-49d6-aa35-878a51e28bdf
     country_id: *my
     network_id: *my_forwarding_services
   - id: 243950
     prefix: '604'
     number_min_length: 7
     number_max_length: 7
-    uuid: 98e34957-0338-45aa-bcad-90be6b907b66
+    uuid: a9642872-dd6b-470d-b680-44a6924b553e
     country_id: *my
     network_id: *my_sms_mms_services
   - id: 245412
     prefix: '606'
     number_min_length: 7
     number_max_length: 7
-    uuid: 0f638589-dac3-4643-9e0a-e2c627ec005f
+    uuid: 235c673c-b319-4e79-893e-fe1620464e5e
     country_id: *my
     network_id: *my_sms_mms_services
   - id: 247300
     prefix: '601800'
     number_min_length: 8
     number_max_length: 8
-    uuid: 4f0ab31b-1148-4df6-89fc-f79bb8a5214b
+    uuid: 4ca11c8b-1a4f-421d-9e22-a316af5c25ad
     country_id: *my
     network_id: *my_freephone_services
   - id: 247356
     prefix: '601900'
     number_min_length: 12
     number_max_length: 12
-    uuid: b54c5f4f-1d8d-4cce-be92-af6bdc32f97e
+    uuid: d7dda186-5c38-4292-917c-5a2ff4890eea
     country_id: *my
     network_id: *my_multimedia_services
   - id: 247424
     prefix: '602'
     number_min_length: 7
     number_max_length: 7
-    uuid: facbb6f8-c654-4f22-a9a1-02f86bd02dd8
+    uuid: 850cb15f-c9e1-4c34-ad08-d28fcd04bec2
     country_id: *my
     network_id: *my_sms_mms_services
   - id: 248912
     prefix: '603'
     number_min_length: 7
     number_max_length: 7
-    uuid: 66bd012a-7420-423e-9dfe-2d0949f30906
+    uuid: 946209ff-cddd-4a61-87c1-946a1bfb01a4
     country_id: *my
     network_id: *my_sms_mms_services
   - id: 249593
     prefix: '605'
     number_min_length: 7
     number_max_length: 7
-    uuid: a4d7e28e-6ac1-499d-8791-4ac23bf53dd6
+    uuid: 8ea5ee51-d60f-442b-aa9c-8944713f813f
     country_id: *my
     network_id: *my_sms_mms_services
   - id: 253094
     prefix: '608'
     number_min_length: 7
     number_max_length: 7
-    uuid: 794b2533-3f25-422f-b673-f20864dc726d
+    uuid: 232bbdc7-4e7e-4f6c-bdc2-8726ab3c220c
     country_id: *my
     network_id: *my_sms_mms_services
   - id: 255263
     prefix: '607'
     number_min_length: 7
     number_max_length: 7
-    uuid: e5e9d985-e878-4684-93f4-8daef7dd25cc
+    uuid: 305f1f36-9e0a-4ebe-bc61-4bdad13d985d
     country_id: *my
     network_id: *my_sms_mms_services
   - id: 257118
     prefix: '609'
     number_min_length: 5
     number_max_length: 5
-    uuid: b7230797-29df-4834-8dde-5f43b925734a
+    uuid: 36eb69a9-a406-4c52-b1aa-55244fe517eb
     country_id: *my
     network_id: *my_emergency_services
 # Mobile Prefixes
@@ -533,2918 +561,2918 @@ network_prefixes:
     prefix: '6010'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1a86fbc7-9eb3-476e-87c0-3998eb76261f
+    uuid: 4aded740-019a-493c-b859-0f25fd5383f5
     country_id: *my
     network_id: *my_mobile
   - id: 258634
     prefix: '60102'
     number_min_length: 11
     number_max_length: 11
-    uuid: 08417ec6-c24f-4c13-b004-b5502e050611
+    uuid: 669ec223-9869-44c6-b9bc-7ece62e26fae
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258664
     prefix: '601030'
     number_min_length: 11
     number_max_length: 11
-    uuid: bbd7ba66-2f9a-476d-a145-ac8ff5391e07
+    uuid: 84e3039c-8fa2-49eb-bc6b-23ff57b7d8d7
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258666
     prefix: '601031'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4994b72e-0695-49a9-b0a3-1e28a3792674
+    uuid: f863f229-bd95-4298-a7b6-4fa803320de4
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258668
     prefix: '601032'
     number_min_length: 11
     number_max_length: 11
-    uuid: f9259f2a-9ee4-44f8-a2e8-81c78dbb3b8b
+    uuid: 73778664-3859-480a-b59e-4710bdaa8fee
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258670
     prefix: '601033'
     number_min_length: 11
     number_max_length: 11
-    uuid: fb63a463-e20b-464a-984a-26f031e76877
+    uuid: 2bc4cf3c-e8be-4a88-a13a-00a0c3a2f75c
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258672
     prefix: '601034'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8579da07-a663-4497-827b-cefe0eb2cbcf
+    uuid: 3fdc8652-bf49-49ff-a6c0-3eb489889893
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258674
     prefix: '601035'
     number_min_length: 11
     number_max_length: 11
-    uuid: a26f4b23-baaf-4cbf-98bb-7c502b77d664
+    uuid: 88a014ac-1fba-47c8-8d88-f08c57c4c893
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258676
     prefix: '601036'
     number_min_length: 11
     number_max_length: 11
-    uuid: ab4c2627-12fe-4865-9af4-f8c74c1895a6
+    uuid: b7ce5eeb-f582-44d5-a5d8-6a5841057c7c
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258678
     prefix: '601037'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6588462f-63fd-48ef-a42d-53efc6e5b0c0
+    uuid: d7b6f909-dec6-4619-b435-b2f2c92fef86
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258680
     prefix: '601038'
     number_min_length: 11
     number_max_length: 11
-    uuid: b9ed4a3c-8276-4cf4-8f45-62af096f1081
+    uuid: fc476814-f263-4286-b634-69b63c48693b
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258681
     prefix: '601039'
     number_min_length: 11
     number_max_length: 11
-    uuid: c82ea7a5-fdaf-4ecb-bd0f-ba07138c52f5
+    uuid: 2838b486-afb2-426d-8716-1d82558b7d0c
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258683
     prefix: '601040'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3c05a00e-e371-4e7d-bace-5b91528e8f6f
+    uuid: 21ea8610-c457-4a36-89d0-994b5d8f46a0
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258685
     prefix: '601041'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b6a01fb-b946-4f46-8689-1d7945c4c64c
+    uuid: 09ad2859-9e8c-471d-9d47-3884d2169e1a
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258687
     prefix: '601042'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1440a676-d48d-4662-8257-70804482535a
+    uuid: 1256ad95-6e94-4d82-a3dd-8ce931597c5a
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258689
     prefix: '601043'
     number_min_length: 11
     number_max_length: 11
-    uuid: de98f98c-0285-4b53-b704-3783e119e5e7
+    uuid: e162f400-090c-4ee1-a1b5-4a8d657b8e7c
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258691
     prefix: '601044'
     number_min_length: 11
     number_max_length: 11
-    uuid: 64fcfef6-f429-42a5-85ec-a8ccfd329f2c
+    uuid: 03c10e22-001b-4b7e-b483-13c5ae8757d8
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258693
     prefix: '601045'
     number_min_length: 11
     number_max_length: 11
-    uuid: 59821eaf-eca0-4719-b3a0-a2817c79ab94
+    uuid: f99c9027-838e-49ab-b9b8-c296ed7d5204
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258695
     prefix: '601046'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5c492242-6cba-408f-a48a-6645d8c367d7
+    uuid: d6e475d1-fb8c-4303-8f25-07c572f50378
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258700
     prefix: '601050'
     number_min_length: 11
     number_max_length: 11
-    uuid: c8e3096a-9f02-4c74-8e97-ed540b1d2509
+    uuid: 21c3c072-a6d7-4a53-87b0-fc53d713f1b1
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258702
     prefix: '601051'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3f96c790-f387-4129-a5f6-6df52a7d26bc
+    uuid: ca0dad04-faf8-47a8-89b6-e13fbb5bfdee
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258704
     prefix: '601052'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea26dab9-1a68-4a76-ba86-cbb4d0af3027
+    uuid: 7c34d79e-bc2f-4e73-89b3-d914632a852e
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258706
     prefix: '601053'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9de3576b-205e-4b6c-82de-74fd89fa690a
+    uuid: 0373d0de-d2fa-414a-b671-dea0e13c158e
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258708
     prefix: '601054'
     number_min_length: 11
     number_max_length: 11
-    uuid: a328cca3-82fd-405b-a9b5-24e15213b0e3
+    uuid: 4a41de92-210c-4eb8-a641-f1376590cdd5
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258709
     prefix: '601055'
     number_min_length: 11
     number_max_length: 11
-    uuid: ab410565-29be-4b3e-9692-1dc3b0dbb3e5
+    uuid: bfcd6d16-97b8-4799-9590-ef5b554cb2b8
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258711
     prefix: '601056'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1edabf93-875b-451a-b0bf-4cbebfd0a234
+    uuid: 6b0e4dea-d887-4ec8-9594-e2dc4383d260
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258713
     prefix: '601057'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2be2b926-c67f-4e51-8d2d-7fbb9fc18c0e
+    uuid: b5beaa8f-eac7-48cc-be47-bbfefac8aa70
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258715
     prefix: '601058'
     number_min_length: 11
     number_max_length: 11
-    uuid: 21ecd628-f9ca-4ca7-9070-66ee5e1572f1
+    uuid: 0986f32b-25f2-4b00-b5a8-cc14567196b1
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258717
     prefix: '601059'
     number_min_length: 11
     number_max_length: 11
-    uuid: d8306dff-6b89-4e6a-9302-6e4728df835d
+    uuid: 753c5af8-0c14-4c74-a74a-28b9730f0a17
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258727
     prefix: '601065'
     number_min_length: 11
     number_max_length: 11
-    uuid: acdb1d8a-f9e8-43ac-be7b-256981f25984
+    uuid: 8163e60f-5e52-43b3-8c95-aa795b722399
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258729
     prefix: '601066'
     number_min_length: 11
     number_max_length: 11
-    uuid: cf735bed-aa3a-4fb0-bce2-b1b03c7a40c4
+    uuid: f47ad572-bff5-4ecf-9330-7a1305a96aab
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258732
     prefix: '601070'
     number_min_length: 11
     number_max_length: 11
-    uuid: bddaab87-c456-4b0a-a381-e5ec1d2a13ea
+    uuid: 3bd7aa69-738f-4adb-97a0-5a6e2f642e87
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258734
     prefix: '601071'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8035e571-1db5-4ee8-aaa2-0fffcaca0d02
+    uuid: 7a5ee950-b861-40a5-b8d6-fab1857e6fe7
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258738
     prefix: '601076'
     number_min_length: 11
     number_max_length: 11
-    uuid: a99c35a7-a909-4f22-8fb7-dd53f844c7e2
+    uuid: 8ca493a5-8dfb-4f55-9276-d2bc9564ebdf
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258740
     prefix: '601077'
     number_min_length: 11
     number_max_length: 11
-    uuid: d1c284e4-3bd5-4b54-817b-8165f2bb602f
+    uuid: ef96cd5f-7bdc-4fee-b4ce-286c6364c6ab
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258742
     prefix: '601078'
     number_min_length: 11
     number_max_length: 11
-    uuid: b68834c8-03ef-434a-82a7-24ad9961ea19
+    uuid: ff91ea27-a109-4079-8a80-25dc0aa019fc
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258744
     prefix: '601079'
     number_min_length: 11
     number_max_length: 11
-    uuid: 92131892-ceb7-410a-8756-f1849d468b5f
+    uuid: 7c029b94-8859-4c60-98d3-86b49c1bf3b3
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258746
     prefix: '601080'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5cdd919c-020d-4a34-9bf1-d1b5148e8801
+    uuid: a72e7b7f-9ab6-43ee-94fb-b7e09ef81743
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258748
     prefix: '601081'
     number_min_length: 11
     number_max_length: 11
-    uuid: d57ac8e2-f8bd-4faa-8edc-f9c476fa3e10
+    uuid: f0cdb1dd-a6d7-410e-9388-878aeb31e83e
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258750
     prefix: '601082'
     number_min_length: 11
     number_max_length: 11
-    uuid: b9700a8c-42ff-4775-8921-8b007c37c2a2
+    uuid: 3414217e-f120-47b8-a3b4-792b43bb2fbf
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258752
     prefix: '601083'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2412ea2e-0ee7-45b7-8904-480b3b6db9d9
+    uuid: 84d49a45-c84b-4b8b-aade-f3593e21fb62
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258754
     prefix: '601084'
     number_min_length: 11
     number_max_length: 11
-    uuid: d067896c-c914-43b6-8b2f-442d84a13729
+    uuid: 39b4c179-65b8-47a0-bfc9-d4d8b93c445c
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258756
     prefix: '601085'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87dad8fd-6013-4dc6-b2f9-b0cfa929d692
+    uuid: f5e7d57e-071c-4583-b3c0-adc2694154aa
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258758
     prefix: '601086'
     number_min_length: 11
     number_max_length: 11
-    uuid: faab69c7-6962-4602-80d5-b260f6dcc020
+    uuid: a746f60a-22b2-4f7f-b3f7-17d86fe7f454
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258760
     prefix: '601087'
     number_min_length: 11
     number_max_length: 11
-    uuid: 363a6865-34fc-45ea-88ad-224ad2efbf06
+    uuid: 192cced2-a706-490e-b70d-6a12f7f4001d
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258762
     prefix: '601088'
     number_min_length: 11
     number_max_length: 11
-    uuid: f56e3656-9cee-47f1-802b-f1963ca17417
+    uuid: 96d92fe3-c7d4-4a0d-920b-e053c11f07f5
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258764
     prefix: '601089'
     number_min_length: 11
     number_max_length: 11
-    uuid: be5f0ab7-bf78-4870-96ed-bea96a28893b
+    uuid: 233424e3-cb2b-4fe8-9ede-7054786d83f2
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258766
     prefix: '6010900'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9fdbc21c-0d83-40db-b5a0-978004893417
+    uuid: 29790e3f-e06d-4ad4-91d4-a78ad939ee57
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258767
     prefix: '6010901'
     number_min_length: 11
     number_max_length: 11
-    uuid: 812a509e-ae8c-4b37-8a44-74411de4d303
+    uuid: 73ed63c6-4dfe-4e8a-b00b-e6093931b4ea
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258768
     prefix: '6010902'
     number_min_length: 11
     number_max_length: 11
-    uuid: 523a990c-758b-4c6f-823f-17679dc1a758
+    uuid: 0b9053cd-ca3a-462f-84d9-e11ad9519d66
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258769
     prefix: '6010903'
     number_min_length: 11
     number_max_length: 11
-    uuid: a26ef22e-9b56-47da-9ef4-53302b2ecba5
+    uuid: 8694fede-86e9-4a5d-a438-86293c8ef4cc
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258770
     prefix: '6010905'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1f927291-498c-4c67-91d2-ef4527736c19
+    uuid: b8b537d3-4d5f-4a9d-b14b-b674f2cc4f3f
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258771
     prefix: '6010906'
     number_min_length: 11
     number_max_length: 11
-    uuid: 69187908-8c2e-4645-9b58-71120632248f
+    uuid: efbf77d2-605a-48e5-9461-be310355c61d
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258772
     prefix: '6010907'
     number_min_length: 11
     number_max_length: 11
-    uuid: 99c1059f-0ae4-444e-a46d-2548ef64853c
+    uuid: 30225b33-f562-4cf5-9ac4-4f4efd150693
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258773
     prefix: '6010908'
     number_min_length: 11
     number_max_length: 11
-    uuid: e6a6c4bd-2f81-4e8e-9190-5f3ce789314d
+    uuid: 32062de8-093a-46c4-8b99-2b974c2b84ab
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258774
     prefix: '6010909'
     number_min_length: 11
     number_max_length: 11
-    uuid: a18e26f2-94a5-459d-9937-8778d8f483a7
+    uuid: e2bd1f09-4bbe-4e12-a7b7-ba8b70ff280e
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258776
     prefix: '601091'
     number_min_length: 11
     number_max_length: 11
-    uuid: beda86fd-020b-4fe2-bd58-98c66c1d9d51
+    uuid: 6b86d251-9195-4896-8c71-b001d88404af
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258778
     prefix: '601092'
     number_min_length: 11
     number_max_length: 11
-    uuid: c27cb2b9-579c-465c-96e0-069eda156e69
+    uuid: a2a9de7e-25a9-45b2-b163-c3e45fc2364e
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258780
     prefix: '601093'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3023dd69-e585-4173-98a2-0c6f52219496
+    uuid: b471be9f-111e-4c1e-8b58-a59155b58d21
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258782
     prefix: '601094'
     number_min_length: 11
     number_max_length: 11
-    uuid: 89a1112b-313f-492f-9555-746eb4bca449
+    uuid: ccb5af97-2694-48a5-a165-0e53a9f35ea7
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258784
     prefix: '601095'
     number_min_length: 11
     number_max_length: 11
-    uuid: 31384792-83ba-4cb8-9428-95efc0f23cfe
+    uuid: 425b8fd0-cf70-4e84-bd78-a5067e310734
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258786
     prefix: '601096'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4d8cbc01-256b-4fb1-9b5f-1cc521a6e695
+    uuid: 477cd675-78a5-466f-af9a-d5d0dca5c0a1
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258788
     prefix: '601097'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3aa1dbc7-5403-4bc7-8144-c0288805cfd8
+    uuid: 8ba3771d-a915-48cf-8797-25eea8bce753
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258790
     prefix: '601098'
     number_min_length: 11
     number_max_length: 11
-    uuid: 860bb1ee-37f7-4ff3-9094-e37113b6db75
+    uuid: c3aed9be-74de-4f36-9c61-d87028d50629
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258814
     prefix: '6011'
     number_min_length: 12
     number_max_length: 12
-    uuid: bc779a44-6220-43fb-ba43-03a978fa5a1c
+    uuid: 322da6c9-9f37-40bb-a30e-42afd335e08e
     country_id: *my
     network_id: *my_mobile
   - id: 258823
     prefix: '6011100'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5a7a85f4-91fd-45ab-bbd0-567b56df58e0
+    uuid: 05e97fdc-a3c9-4439-9780-f9b60b8a922f
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258824
     prefix: '6011101'
     number_min_length: 12
     number_max_length: 12
-    uuid: cf6b6e91-9c37-4ddb-9924-07c1963a5654
+    uuid: 87f1dc89-b387-454f-8469-50b615413bce
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258825
     prefix: '6011102'
     number_min_length: 12
     number_max_length: 12
-    uuid: 42fbcfd6-5718-4079-8fba-5ad3b1fc1964
+    uuid: 3956f86e-640e-4538-a7c3-d80c83188c93
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258826
     prefix: '6011103'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8fb45ae7-fbda-4d5d-afe1-cbf82eee25d8
+    uuid: 9623abe8-3a9a-4a68-b211-b028c04551d2
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258827
     prefix: '6011104'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce3d9aa6-3182-4687-9bc1-d66e26e0bc53
+    uuid: f0c3d885-93cc-4116-ace9-4d43a0973a5d
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258828
     prefix: '6011105'
     number_min_length: 12
     number_max_length: 12
-    uuid: 12b6a37a-128f-4a13-b86d-09a3379ae5e3
+    uuid: 6783f5d9-f4ce-4baf-bf5d-d0ec7cde224e
     country_id: *my
     network_id: *my_redtone_mobile_mobile
   - id: 258829
     prefix: '6011106'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8bb98994-6cc7-44cd-8346-5ca73e95bec8
+    uuid: efcc094b-37e1-4d0e-849b-51a6bd4d2f8d
     country_id: *my
     network_id: *my_redtone_mobile_mobile
   - id: 258830
     prefix: '6011107'
     number_min_length: 12
     number_max_length: 12
-    uuid: afe68a9e-ac0c-419d-a5e8-35b16bc30f08
+    uuid: 5f6d213f-0394-4c01-bc8b-5aeadf5db622
     country_id: *my
     network_id: *my_redtone_mobile_mobile
   - id: 258831
     prefix: '6011108'
     number_min_length: 12
     number_max_length: 12
-    uuid: 320fe1e0-51a5-4830-9c18-1bd43c601f0a
+    uuid: ed19d8ce-4976-4d15-8cc6-6ff636e75c93
     country_id: *my
     network_id: *my_redtone_mobile_mobile
   - id: 258832
     prefix: '6011109'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5714d86b-d8ae-4114-b32c-fc04eca055eb
+    uuid: f2a33dd5-2d42-4346-b4b8-0a4eda333440
     country_id: *my
     network_id: *my_redtone_mobile_mobile
   - id: 258833
     prefix: '601111'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8b7eba45-4de9-41bc-b7e6-5f53b6900e6d
+    uuid: 62a6c6fd-8db5-4ac0-9893-5fb0f351b16f
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258834
     prefix: '601112'
     number_min_length: 12
     number_max_length: 12
-    uuid: 29ff81ae-d5ce-4b67-80a1-81a2a9421bd6
+    uuid: 86c67c70-a529-4fb8-8401-5f42227537bc
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258835
     prefix: '6011130'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3aa48ce9-3bbb-4d5f-9c43-f09fbf8fdb62
+    uuid: c12d7e08-6c53-463e-b67e-f90af0ffbf5d
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258836
     prefix: '6011131'
     number_min_length: 12
     number_max_length: 12
-    uuid: 81c69e02-24f4-4eac-a488-13e9c3fd898e
+    uuid: 0a7d850b-8dc1-4e36-a081-4f75821d045c
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258837
     prefix: '6011132'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4b0c1db6-48b3-40fc-952e-7cf7f4dfc649
+    uuid: 06b1609a-754a-4f88-bf54-22dc4bd7eb20
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258838
     prefix: '6011133'
     number_min_length: 12
     number_max_length: 12
-    uuid: e0dcd4cc-e428-489e-8d19-3caf7437615f
+    uuid: ec4229e2-9ace-4a5f-a3c4-e19cb037768f
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258839
     prefix: '6011134'
     number_min_length: 12
     number_max_length: 12
-    uuid: 18f88fca-207b-40c2-85dc-805deedf9076
+    uuid: 0de242a9-c559-4054-b1a2-0f91e9735c22
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258840
     prefix: '6011140'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2a3a23ae-2d2a-4e6d-8e6f-44527627584e
+    uuid: 423b5082-e4a9-404f-bc8c-3787d5121519
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258841
     prefix: '6011141'
     number_min_length: 12
     number_max_length: 12
-    uuid: 29dc1f4b-549d-46c3-97f0-c470d280aee5
+    uuid: b662a03e-a6a4-4733-bbc6-56b0f81989c3
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258842
     prefix: '6011142'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2a0b1c75-e642-4140-8853-23684103e090
+    uuid: 42432989-41b0-4a91-967f-926c0b354f75
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258843
     prefix: '6011143'
     number_min_length: 12
     number_max_length: 12
-    uuid: e4805a2e-618b-46a6-8c72-2fbb330ed3dc
+    uuid: b3df112b-2962-4e25-8b43-faeb16cd5fd5
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258844
     prefix: '6011144'
     number_min_length: 12
     number_max_length: 12
-    uuid: a92a140e-801a-4efd-90cf-8f7e0ac0eae5
+    uuid: 1e85db17-9f33-4e68-8955-a9e27a61fa16
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258845
     prefix: '6011145'
     number_min_length: 11
     number_max_length: 11
-    uuid: bda5beb2-271c-42b5-bc17-e5abd058527d
+    uuid: 3680924b-212a-48b8-8250-ff5a66a7fe00
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258846
     prefix: '6011146'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8937786d-7fc5-4e24-9441-828945c8a96c
+    uuid: 613adb11-ad6d-4bc5-a4b8-65829bcfb402
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258847
     prefix: '6011147'
     number_min_length: 11
     number_max_length: 11
-    uuid: 70f35f53-fc83-4bb5-9f8b-b35e2aae82fa
+    uuid: 0b67b506-f0bf-4d71-b19d-21af6604d053
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258848
     prefix: '6011148'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5b94a7cd-91a9-447f-9d3e-445430e06343
+    uuid: a1e1a602-aa49-4606-84e9-0803d7d9334f
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258849
     prefix: '6011149'
     number_min_length: 11
     number_max_length: 11
-    uuid: 050b42bb-9f5b-4fc8-919c-56d0f39e3928
+    uuid: 800922c1-7435-4245-a530-6ceeeae0b1eb
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258850
     prefix: '6011150'
     number_min_length: 12
     number_max_length: 12
-    uuid: 73b637d6-2107-495f-8669-cf4eaa80cbf2
+    uuid: d800a672-e4d4-4651-b659-0d462e4d5954
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258851
     prefix: '6011151'
     number_min_length: 12
     number_max_length: 12
-    uuid: f9ecb928-60dc-4cb3-b78e-13b927bf7052
+    uuid: 6c7a20fe-a5c9-4e37-bd05-d4c04003c2e2
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258852
     prefix: '6011152'
     number_min_length: 12
     number_max_length: 12
-    uuid: d96abdc8-32cc-4009-ba37-ca28943b6a57
+    uuid: 06d59bd5-78c3-4581-9083-3701de71f24c
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258853
     prefix: '6011153'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70ff85b0-84c0-4a28-a652-ad6550025a97
+    uuid: 00e6f343-60c6-4b4d-8aa8-234205117569
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258854
     prefix: '6011154'
     number_min_length: 12
     number_max_length: 12
-    uuid: 949738d1-9348-41ab-aa8a-d380a54c3ec9
+    uuid: 2a786d57-1387-4495-a868-e18c437b5ef8
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258855
     prefix: '601116'
     number_min_length: 12
     number_max_length: 12
-    uuid: 52cd88f4-b980-4241-9b7c-a9b725ac5fe9
+    uuid: 0a36933f-16e0-4d5b-86ad-ec552c33584c
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258856
     prefix: '6011170'
     number_min_length: 12
     number_max_length: 12
-    uuid: c26a5fde-9b60-4341-a902-48489c41b617
+    uuid: c561f693-8dc0-42f2-b3a0-fff3488f4bc5
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258857
     prefix: '6011171'
     number_min_length: 12
     number_max_length: 12
-    uuid: 150fc08a-1554-41eb-b0d1-1c645b20d0a9
+    uuid: 048b14da-dbef-4a4a-bacd-6936ba8414de
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258858
     prefix: '6011172'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4e7c8333-ffdc-440d-b435-d99961330020
+    uuid: ad1a2a75-538b-4b35-9359-892122eee312
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258859
     prefix: '6011173'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ec18086-6750-4f5a-9b50-fc6422a2c158
+    uuid: 10f4bffe-98ca-43aa-af72-623f22a0d429
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258860
     prefix: '6011174'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3f766d4e-ad98-4ff5-bcd7-299c63754096
+    uuid: f9f14870-a02b-4315-a065-ba1477860af7
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258861
     prefix: '6011175'
     number_min_length: 12
     number_max_length: 12
-    uuid: 57128beb-3efd-4998-81b2-b1603bc190d5
+    uuid: 0742ad5d-1ed6-4882-82d5-af2e8f15eb2f
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258862
     prefix: '6011176'
     number_min_length: 12
     number_max_length: 12
-    uuid: b47fc7b7-146d-4ec4-8daf-fb138fe8c696
+    uuid: 4eedb46f-fd57-439d-9566-ac77cd0874e9
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258863
     prefix: '6011177'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0dc48679-31b1-4dd6-b9d2-f894ddc24418
+    uuid: 9221fa82-6a8e-4c95-9ad2-4bc6017c578c
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258864
     prefix: '6011178'
     number_min_length: 12
     number_max_length: 12
-    uuid: f89274dc-6739-4cea-ad21-7bd47a1deced
+    uuid: 27e2ac6c-dd74-40d5-9ec0-533655e68b46
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258865
     prefix: '6011179'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5bcb2e67-9900-44cd-9ba4-81713049c0a1
+    uuid: 9d0e7a0b-d5a1-4231-840c-ab54c890549a
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258866
     prefix: '6011180'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5cce0ffd-4f49-4210-a877-c3b32043e5fa
+    uuid: 12909bba-31f9-4709-ba7d-fd7bf6f1fa2d
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 258867
     prefix: '6011181'
     number_min_length: 12
     number_max_length: 12
-    uuid: acb70285-63ae-4c03-b207-41126bed83f7
+    uuid: 6345aa09-7025-4f67-a76b-1de079694577
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 258868
     prefix: '6011182'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0dbc22da-05bc-4805-b2f4-e6c594424430
+    uuid: b5fd73b6-75fe-4753-8ba1-dd91bb9eda02
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 258869
     prefix: '6011183'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8b51ac8a-fb88-4b0d-b980-f6aef6ef2ea9
+    uuid: 539bf071-0163-4a78-8a85-19198ce62aad
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 258870
     prefix: '6011184'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8d43abfb-37ff-473d-8178-eddbee95cb92
+    uuid: bf2f625a-8d97-4cd4-a46a-7c578bd02a9d
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 258871
     prefix: '6011185'
     number_min_length: 12
     number_max_length: 12
-    uuid: a3b9be8c-666f-4acf-a932-19a137df34fa
+    uuid: c30871b2-39f6-46f6-8e9b-ea9212079ff4
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258872
     prefix: '6011186'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9405c21d-ab72-4524-b3ac-090d2a3923b7
+    uuid: 73f52c4e-717b-485e-8036-da2254dcdf8c
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258873
     prefix: '6011187'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0a17649a-6038-4f79-baf1-c2108a6f3dd6
+    uuid: 86ee9c9c-322a-4abd-8c8a-35d6deda105c
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258874
     prefix: '6011188'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e970e8d-4a4a-472b-a670-08cea8ec45ef
+    uuid: 9374f6ee-8716-4a5a-9a55-e9af9409d978
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258875
     prefix: '6011189'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8aabbad2-4cb5-47a3-ac42-dfc73cb84298
+    uuid: d78280f3-06db-4064-8714-efe43378e7c6
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258876
     prefix: '601119'
     number_min_length: 11
     number_max_length: 11
-    uuid: ebe92172-dbc7-4775-aded-edf00aef3d95
+    uuid: 293dfd51-f662-4091-a287-2d84b73fe0f9
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258878
     prefix: '6011200'
     number_min_length: 12
     number_max_length: 12
-    uuid: cc201085-57cd-420a-ba62-03de2edea586
+    uuid: a5b5d45d-88e6-4836-8b89-49ad9cf46cf2
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258879
     prefix: '6011201'
     number_min_length: 12
     number_max_length: 12
-    uuid: fda782f2-48e8-481b-ba88-daf04dc5a266
+    uuid: 6254fc2a-f704-4e14-8186-7551dcd5ffd5
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258880
     prefix: '6011202'
     number_min_length: 12
     number_max_length: 12
-    uuid: 936dd1d3-2c7a-40f3-9af1-b44c649d4acb
+    uuid: a48edd7c-bcb2-4542-8b00-d137b6635fd4
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258881
     prefix: '6011203'
     number_min_length: 12
     number_max_length: 12
-    uuid: 100fa9ce-2685-4d68-be35-7becad407839
+    uuid: 50cbb69c-7ad9-4c62-9b1c-6df07a7322ba
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258882
     prefix: '6011204'
     number_min_length: 12
     number_max_length: 12
-    uuid: f67260ec-5cc2-4d5c-998b-83becd76823a
+    uuid: 05261136-24ad-45d8-9671-b99957500952
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258883
     prefix: '6011205'
     number_min_length: 12
     number_max_length: 12
-    uuid: ef0db4d9-b4e6-4157-84b9-872dda21990c
+    uuid: 44d1d80e-c520-4e93-84f1-546f5210b32e
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258884
     prefix: '6011206'
     number_min_length: 12
     number_max_length: 12
-    uuid: 762ba360-1b97-438d-9398-282a5a22b31e
+    uuid: 26151692-2a2a-4d4c-86d5-6bfe87009a54
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258885
     prefix: '6011207'
     number_min_length: 12
     number_max_length: 12
-    uuid: d256b4cb-20bd-4fc7-8edd-a45a611e7b6a
+    uuid: 8ea3e8fe-8515-46f1-9d26-e489206936e6
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258886
     prefix: '6011208'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3f4f3756-ff1e-45a3-835f-cf5ec56f0e69
+    uuid: f0508ce4-c675-43d7-b439-3f10f02f17ed
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258887
     prefix: '6011209'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8125d46b-6c5d-48f1-892c-44a3e0d19057
+    uuid: 062f1e6d-8395-4116-a3e0-6f6a0473ef0d
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258888
     prefix: '601121'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0b730724-cbe9-4e68-af40-9dead82e7f7b
+    uuid: fb61222a-cc71-4980-ae81-8783dcfa6036
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258889
     prefix: '601122'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9b885935-b95a-486d-8b6e-df46ee2c42ba
+    uuid: b4816813-1b7e-4b0a-a2f1-a57e45c3ee90
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258890
     prefix: '601123'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9d7d119d-0cf1-41db-b6fc-82e24a0fd776
+    uuid: a2248e60-0ab2-43c0-868f-1889622961f8
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258891
     prefix: '6011240'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9e3e4de6-0bb3-40f8-a76b-0d3fc0be2e2e
+    uuid: 2b53bcd7-3965-4963-8477-969d9bd3a810
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258892
     prefix: '6011241'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f33f2de-ab72-4f45-a887-146754e7c4e5
+    uuid: d9909ca5-5982-4475-84b3-443cb2427fb1
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258893
     prefix: '6011242'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8d50f89d-37dd-4b0e-a96e-5a1f38110d36
+    uuid: 0690976b-9501-4296-8f06-87257c368d0f
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258894
     prefix: '6011243'
     number_min_length: 12
     number_max_length: 12
-    uuid: fe394fe9-3c67-46b9-911d-9d547d32f942
+    uuid: b71c2201-b273-4bc4-9282-84018d1e8a72
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258895
     prefix: '6011244'
     number_min_length: 12
     number_max_length: 12
-    uuid: 52798938-0e18-4c43-a7ac-65151bb89d06
+    uuid: ccd4557e-8f00-4604-abc8-ce6c1338480b
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258896
     prefix: '6011245'
     number_min_length: 11
     number_max_length: 11
-    uuid: 03adcf57-2847-4f20-9896-e5cb62f301a7
+    uuid: 41551aa1-7ef3-4aee-ace4-04f4180599d7
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258897
     prefix: '6011246'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5c6c5048-554e-4b13-9044-c2df19894869
+    uuid: 00384170-2c0d-42f6-8324-419928bb6018
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258898
     prefix: '6011247'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a537e93-6cc1-4b46-aa98-77ea2064d5ec
+    uuid: ee68cc42-9f41-43f7-abb5-92fc5c72ba5d
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258899
     prefix: '6011248'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1230c60e-5f00-4004-a74f-4c8eed18940b
+    uuid: 79e22743-bc2f-429c-aa04-bf54f66300c0
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258900
     prefix: '6011249'
     number_min_length: 11
     number_max_length: 11
-    uuid: 101eac94-4650-443b-a04e-535dad506718
+    uuid: 91aa38f1-afec-474f-81bc-a97671a9b344
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258901
     prefix: '601125'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9994fe06-250f-436b-9745-6a843e7fee4a
+    uuid: b336be95-e2db-4c8d-8ab3-1f76f82fd507
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258902
     prefix: '601126'
     number_min_length: 12
     number_max_length: 12
-    uuid: 840f1773-529f-4f5b-b274-efb2645c4053
+    uuid: a5194dcf-2717-46d3-a534-12c026730dad
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258903
     prefix: '6011270'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5b4518b2-5202-4492-8871-dc37dd1f62a8
+    uuid: 4ddcc723-4d62-4fb0-857a-e4a95e708f50
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258904
     prefix: '6011271'
     number_min_length: 12
     number_max_length: 12
-    uuid: 23159548-627f-4ad0-8eb0-f4a97373744e
+    uuid: 161a80ea-9bf5-4126-9bd5-89d5afd4e91d
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258905
     prefix: '6011272'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4ecec128-77d7-4552-99c6-09646aacb551
+    uuid: 82d4e4d3-3a48-4951-a213-bfa5a82abe04
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258906
     prefix: '6011273'
     number_min_length: 12
     number_max_length: 12
-    uuid: ecd6b749-c935-44db-9795-cb91560b9a4c
+    uuid: 9d1a30b1-9541-44c4-8095-081f61cc6ae8
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258907
     prefix: '6011274'
     number_min_length: 12
     number_max_length: 12
-    uuid: ca091b58-d5dd-4443-a966-175cfef29a92
+    uuid: 193df88a-9c1c-4d89-ab84-053664f05430
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258908
     prefix: '6011275'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2e4175a6-38ff-4767-9101-1f48b8e15fde
+    uuid: 52501ba1-a2d5-4dd5-936e-31986638d843
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258909
     prefix: '6011276'
     number_min_length: 12
     number_max_length: 12
-    uuid: abb4f5df-7200-4cb5-a226-096b43b8e12c
+    uuid: 231a94e8-a5e6-4ea1-8066-214daf475dc3
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258910
     prefix: '6011277'
     number_min_length: 12
     number_max_length: 12
-    uuid: 66dfaa2f-4878-4693-8a0c-5b8e12f4272c
+    uuid: 8e1990c1-357f-4a3d-addb-fe0bc59f467d
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258911
     prefix: '6011278'
     number_min_length: 12
     number_max_length: 12
-    uuid: 82b66aff-4ece-4d59-bc86-a253c9dfcff3
+    uuid: ff362d82-a8b3-4963-9426-d7cfad0589de
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258912
     prefix: '6011279'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ec1687e-c108-4b50-8af1-337333d098a5
+    uuid: 33fc9db8-9d93-405a-906e-fceb6bb4c736
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 258913
     prefix: '601128'
     number_min_length: 12
     number_max_length: 12
-    uuid: de2f959c-8aca-458b-9e6c-d73c99fd7fe3
+    uuid: b1b20982-70b9-4969-a6bb-f3f59ffd3fc6
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258914
     prefix: '601129'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ac818e6-f44d-48f7-b9ca-e354df3eee5a
+    uuid: c0d6071c-0689-4267-9348-58668eb18268
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258915
     prefix: '601130'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5d3261d4-1d7a-40ad-93eb-d1f61d12a570
+    uuid: 9ff285ff-11b5-4fe1-9e33-4251a24ea11c
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258916
     prefix: '601131'
     number_min_length: 12
     number_max_length: 12
-    uuid: f16ae3b9-7b11-4b23-93a7-04052cc91a54
+    uuid: c60f61ea-bf98-4f7c-8a1a-03061de54946
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258917
     prefix: '601132'
     number_min_length: 12
     number_max_length: 12
-    uuid: f957e010-4078-42a8-b009-4b7707c621f1
+    uuid: d46285e0-ada5-4332-97d0-9ac407e2783a
     country_id: *my
     network_id: *my_altel_communications_mobile
   - id: 258918
     prefix: '601133'
     number_min_length: 12
     number_max_length: 12
-    uuid: 079e0292-1711-490d-baa0-814a43ca8b71
+    uuid: 91cd0e08-49b9-4376-9e1d-6e4b1d311a74
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258919
     prefix: '601134'
     number_min_length: 12
     number_max_length: 12
-    uuid: a79eb669-d0cc-4ae6-900c-9ebcd06fb7c3
+    uuid: f515a3d9-04dc-4f07-a7cb-040d4779b9a4
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258920
     prefix: '601135'
     number_min_length: 12
     number_max_length: 12
-    uuid: 188ec027-2153-466e-ac9a-4ffbe295c077
+    uuid: 10c2b2d1-bb38-45df-af76-f61ffaa5ddaa
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258921
     prefix: '601136'
     number_min_length: 12
     number_max_length: 12
-    uuid: c7497de5-0532-4ad4-a821-1811a6a13687
+    uuid: 17ac7618-2d5f-4b79-8a4a-6cfb29f926c8
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258922
     prefix: '601137'
     number_min_length: 12
     number_max_length: 12
-    uuid: 92e686f1-818f-4f12-a67e-13f3a191e54f
+    uuid: c696f5eb-034f-4cc4-8b01-f811c7fc3482
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258923
     prefix: '601138'
     number_min_length: 12
     number_max_length: 12
-    uuid: e4a1646b-685e-48c1-98ce-bb960b28a819
+    uuid: fe3a4b7c-d6e4-47a4-b0bf-d553afa97362
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258924
     prefix: '601139'
     number_min_length: 12
     number_max_length: 12
-    uuid: a31489b6-1b1d-440c-af10-2a9516ec918d
+    uuid: 4df77033-814d-4b8c-917b-fdbf46d6b7d6
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258925
     prefix: '601140'
     number_min_length: 11
     number_max_length: 11
-    uuid: e793e511-c23a-4039-b1ca-be758c49c77c
+    uuid: bebdbde4-8968-403f-8fc9-aa394dc22080
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258926
     prefix: '601141'
     number_min_length: 11
     number_max_length: 11
-    uuid: c530dae9-8354-4017-b57f-f90a427ef6ea
+    uuid: 79cad46b-5cc8-4d3f-a590-8c5828cf7baa
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258928
     prefix: '601142'
     number_min_length: 12
     number_max_length: 12
-    uuid: fee3a87a-4eef-4776-a8e7-0852b7327ae8
+    uuid: 7e83b75f-73e4-4548-ab74-f2a7db5c6f06
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258929
     prefix: '601150'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6fb170f0-1e4b-4a58-afa9-2bc69e98ed02
+    uuid: 2cca4d72-0cd9-43ad-9e38-b6d3129c6de7
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258930
     prefix: '601151'
     number_min_length: 12
     number_max_length: 12
-    uuid: 41c60f06-23a0-4cb9-99a3-845e87a8f19e
+    uuid: d341e82c-f32a-42f8-bcce-3236655e8a13
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258931
     prefix: '601152'
     number_min_length: 12
     number_max_length: 12
-    uuid: 38e22336-0211-429c-b323-64dbaf6f094f
+    uuid: 137c9ead-64a2-4d6d-a8cb-3933a78ca6e8
     country_id: *my
     network_id: *my_altel_communications_mobile
   - id: 258932
     prefix: '601153'
     number_min_length: 12
     number_max_length: 12
-    uuid: 835b5e13-931f-4e97-8dac-4e78ab2ba7a3
+    uuid: 70788be4-650c-40c4-ad60-958a82147bf2
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 258933
     prefix: '601154'
     number_min_length: 11
     number_max_length: 11
-    uuid: 49b092f5-4526-429d-ad62-a896904e2fe2
+    uuid: 6135467f-a7de-4f25-adec-43f717d9f6e3
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258934
     prefix: '601155'
     number_min_length: 12
     number_max_length: 12
-    uuid: aa40f2bd-e58e-4eb3-bebc-6d036f3e429a
+    uuid: 3a8d0ba6-a354-40da-9ef1-f474ae798bfd
     country_id: *my
     network_id: *my_redtone_mobile_mobile
   - id: 258935
     prefix: '6011560'
     number_min_length: 11
     number_max_length: 11
-    uuid: da7ff342-7004-4225-9705-81f3d2f0800c
+    uuid: c2b89ece-2f9f-4f66-9a57-dceb06acede1
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258936
     prefix: '6011561'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a85ca6b-9fdd-476c-b4b8-59541d957baf
+    uuid: 27500ccb-2ea0-4bad-807d-1db31a301d12
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258937
     prefix: '6011562'
     number_min_length: 11
     number_max_length: 11
-    uuid: f605ee00-dc54-48a9-89fa-7e4f43a7d9ed
+    uuid: a6afbbe2-58ea-4d2f-ad37-0b51657c735a
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258938
     prefix: '6011563'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2f48ce79-7989-4051-97a6-4a120838ba8c
+    uuid: 8bb978da-62c4-4087-9ccc-2923653790d3
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258939
     prefix: '6011564'
     number_min_length: 11
     number_max_length: 11
-    uuid: 579f716b-5815-4665-a192-16025d3eeab8
+    uuid: d0d3a488-4057-4cc1-ab5d-d7d7e6de2bc8
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 258940
     prefix: '6011565'
     number_min_length: 12
     number_max_length: 12
-    uuid: 82963ff3-8875-44fe-a89a-de998de9fc95
+    uuid: fd6db7ae-2c26-4d5e-ac35-608a0f137d74
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258941
     prefix: '6011566'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3deb758a-80d0-45a4-85c2-e6533510f1c7
+    uuid: 8a28284e-5140-43a3-a713-7e3cfdcf4238
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258942
     prefix: '6011567'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6bd9a69d-46f2-42e1-818e-51a03e8f7ae7
+    uuid: 50ca69e7-f4db-4c4e-a4a4-03222f6a17a7
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258943
     prefix: '6011568'
     number_min_length: 12
     number_max_length: 12
-    uuid: 952f133a-661c-43e0-908a-88815eef9f44
+    uuid: cd494db1-4eed-44e6-8090-9b967f677599
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258944
     prefix: '6011569'
     number_min_length: 12
     number_max_length: 12
-    uuid: be9a1e8d-035b-4902-8f1c-e124054a681d
+    uuid: fe5cbf45-5c64-46a8-82a8-334185b698f0
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258946
     prefix: '6011570'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1b55989a-ca33-4c0c-88e1-168d452b1e0a
+    uuid: b6835537-5904-4364-bf71-1f0a21b93a8e
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258947
     prefix: '6011571'
     number_min_length: 12
     number_max_length: 12
-    uuid: a9e34e08-f77e-4d75-8025-a5da8bc10bc6
+    uuid: e776326c-d2b2-418a-a0b8-eac38f8bf688
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258948
     prefix: '6011572'
     number_min_length: 12
     number_max_length: 12
-    uuid: a0e00c28-c00d-40ce-9f1a-f3c11a11d596
+    uuid: bd9f6ab6-43ba-4ccf-a2a6-37f3d9f6a958
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258949
     prefix: '6011573'
     number_min_length: 12
     number_max_length: 12
-    uuid: 53098a9c-f79d-4efa-8abf-20329dfcea16
+    uuid: d5032d0c-91da-4705-af26-fa39142c7962
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258950
     prefix: '6011574'
     number_min_length: 12
     number_max_length: 12
-    uuid: 962daccb-bc65-4b42-a9e1-9a84d797f6f5
+    uuid: 5407afb6-48aa-4a1c-9666-a19a6e0765e9
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258951
     prefix: '6011575'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9807d0ac-c6d9-41f9-973b-ff37f8e0f0b4
+    uuid: 67dfef48-9399-4b2d-8cea-de6b94654b14
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258952
     prefix: '6011576'
     number_min_length: 12
     number_max_length: 12
-    uuid: d98ae0d0-48d2-452e-9c8b-0c67fe20daba
+    uuid: ffc2a344-2bea-4f5e-96e8-07a53b1c4755
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258953
     prefix: '6011577'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8fca6ac1-9330-43b6-9ecb-f021c1aa39bc
+    uuid: d86dfcee-f4c9-41c8-94c9-c29e1f9c2271
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258954
     prefix: '6011578'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0dfcabd2-72bf-4d04-820f-0c6cd21633d3
+    uuid: 053d961a-ca68-43db-bab8-26f9cbcb69eb
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258955
     prefix: '6011579'
     number_min_length: 12
     number_max_length: 12
-    uuid: e4d47546-a1f5-4781-82ce-cc1207f0508d
+    uuid: c96e3d79-e413-4f5d-9aa9-bba25ff4880c
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258956
     prefix: '6011580'
     number_min_length: 12
     number_max_length: 12
-    uuid: b58572ea-3e71-42f2-884f-53739f678cd2
+    uuid: 098eaf20-8032-4514-b0bc-f362e1980b42
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258957
     prefix: '6011581'
     number_min_length: 12
     number_max_length: 12
-    uuid: c94e4047-6a04-4e58-b92d-a45b968c3f27
+    uuid: c2dbaefe-9e9e-4d16-b00f-14be2fdad200
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258958
     prefix: '6011582'
     number_min_length: 12
     number_max_length: 12
-    uuid: 889e0f21-7970-4fff-8159-77faf0eec1db
+    uuid: 4b34a85f-76f0-47e2-ab61-7171caf1297c
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258959
     prefix: '6011583'
     number_min_length: 12
     number_max_length: 12
-    uuid: 663dc60a-4aa6-4204-99ca-baed1df3657f
+    uuid: a8e9ea9f-6238-466d-afff-d1cf870c18ac
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258960
     prefix: '6011584'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5278fa46-fec3-435f-a09f-d7ebcbf14a01
+    uuid: e60d5a20-5311-414d-afdc-8f826ae6779c
     country_id: *my
     network_id: *my_yes_mobile
   - id: 258961
     prefix: '6011585'
     number_min_length: 12
     number_max_length: 12
-    uuid: 27e2b929-367e-4a69-888f-00473705ba84
+    uuid: 677a9da8-105f-42b5-b2f1-1abb15ee1653
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258962
     prefix: '6011586'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5c322475-8c25-47aa-b671-1dfb4da7e517
+    uuid: d6d03511-ddf8-4751-a94a-0fc68f505542
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258963
     prefix: '6011587'
     number_min_length: 12
     number_max_length: 12
-    uuid: 64112e8c-96eb-4a91-8d55-739209033823
+    uuid: 3c37bf98-ce09-4393-a93a-7f21af1ae25e
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258964
     prefix: '6011588'
     number_min_length: 12
     number_max_length: 12
-    uuid: ed3ba282-1eb7-46fa-bd03-e455f4fad44b
+    uuid: 74a28b32-fe19-4a07-8324-1370cd4dd186
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258965
     prefix: '6011589'
     number_min_length: 12
     number_max_length: 12
-    uuid: 66cfc1b2-f53d-46f2-89c7-fbdfabfce988
+    uuid: be490730-06e9-4db0-9ed7-a3ebc586459f
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258966
     prefix: '6011590'
     number_min_length: 12
     number_max_length: 12
-    uuid: 426dbbce-f85d-442e-859b-89ec514010d7
+    uuid: 74cb2f14-aa41-4985-9718-9b035f666c7a
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258967
     prefix: '6011591'
     number_min_length: 12
     number_max_length: 12
-    uuid: b7d154f7-8b5a-4f3a-abe3-fdcb919c626e
+    uuid: bbe83d39-7b78-4f42-ae6c-224388f60f2b
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258968
     prefix: '6011592'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7bebf706-0bd6-4705-b1ba-0cd4bb064af1
+    uuid: c94939eb-2c09-4d53-ba14-300847eddd20
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258969
     prefix: '6011593'
     number_min_length: 12
     number_max_length: 12
-    uuid: 47b50fd9-e364-42ac-aaa9-69b47f725d28
+    uuid: c204ebc6-a3f5-4b35-8b34-8a0e860dc6e9
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258970
     prefix: '6011594'
     number_min_length: 12
     number_max_length: 12
-    uuid: f70d0de1-d5ae-4ad9-97f5-95d336564105
+    uuid: a98e272c-0d3b-4668-a027-59ea04c5b3bf
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258971
     prefix: '6011595'
     number_min_length: 12
     number_max_length: 12
-    uuid: a69f5303-eb5d-46c9-89fb-00716271af92
+    uuid: 02323581-8a8f-419d-b17f-6334c7d0e5ee
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258972
     prefix: '6011596'
     number_min_length: 12
     number_max_length: 12
-    uuid: 059463d0-1a57-464e-81a7-9917db3e6a8a
+    uuid: 497f6740-d07b-4d6b-ad42-3638519e6de9
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258973
     prefix: '6011597'
     number_min_length: 12
     number_max_length: 12
-    uuid: 244122d0-f76e-4b01-8de1-682c6ccee7cf
+    uuid: bbcadb30-3f27-4107-962b-9c1526b412d4
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258974
     prefix: '6011598'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2da60c9c-c9e7-4c14-b564-179948c34e3a
+    uuid: 417abeaa-bda0-4991-a675-2588d9eb8dfc
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258975
     prefix: '6011599'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1228e1d5-fd84-47b4-b27a-53f5e65ef24d
+    uuid: 655544d6-3448-452a-b1b8-3274afed1c68
     country_id: *my
     network_id: *my_xox_mobile
   - id: 258976
     prefix: '6011605'
     number_min_length: 12
     number_max_length: 12
-    uuid: ab67e361-9d77-4f48-b4f0-3d02f17fa5c8
+    uuid: 6e1321b8-9c92-44a3-a0e2-202e149a0d29
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258977
     prefix: '6011606'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6b18bdd1-fd14-4abb-a9f7-aa3f201ab3ed
+    uuid: 4e0f956a-35fd-4dae-a781-0efa3c879ed9
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258978
     prefix: '6011607'
     number_min_length: 12
     number_max_length: 12
-    uuid: f20d8c98-ec10-4555-8050-b860d4a6b935
+    uuid: aac4ac78-e364-4b91-b7e4-19c938c04cea
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258979
     prefix: '6011608'
     number_min_length: 12
     number_max_length: 12
-    uuid: 100513ca-2c05-40c4-b999-e7a8343691ce
+    uuid: 05058cd6-5fa0-49aa-987f-f62e73a077dc
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258980
     prefix: '6011609'
     number_min_length: 12
     number_max_length: 12
-    uuid: 784a44f4-11c0-4ae9-82ce-d77cc2adc7a3
+    uuid: 46660a56-b2ae-4814-86de-89f8aa1173be
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258981
     prefix: '601161'
     number_min_length: 12
     number_max_length: 12
-    uuid: 03eff6b1-2fef-4346-a8b0-e558637c3f27
+    uuid: b338a0ea-d983-4063-8c7e-3fa613411293
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258982
     prefix: '6011620'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9987f8f5-03b1-4b74-a3b5-b355b2ad3c87
+    uuid: daff1aee-2af0-471f-a22e-443a34d15ffc
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258983
     prefix: '6011621'
     number_min_length: 12
     number_max_length: 12
-    uuid: 86312d06-f266-408b-80f1-815c440ebda2
+    uuid: 41b14c8b-a143-4374-ad88-c75260acd8a2
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258984
     prefix: '6011622'
     number_min_length: 12
     number_max_length: 12
-    uuid: aa9efc02-8227-4d23-88ec-af7afeabb96b
+    uuid: 5f7c58e9-3e13-4ff0-93ef-58e22ef763f2
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258985
     prefix: '6011623'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8d521d21-f91b-4fe4-bb57-c8cf64ead827
+    uuid: 369938e3-76fd-49af-a91d-48d46e22c455
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258986
     prefix: '6011624'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2da1de6a-6ad2-487f-b26a-796fda9df43e
+    uuid: b35b0096-a984-486c-aa8f-50554adf949b
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 258987
     prefix: '6011625'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0babb605-c556-4a77-bf98-665adff5e2ad
+    uuid: e15da3d2-9c95-4f66-ae33-1477470c68c5
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258988
     prefix: '6011626'
     number_min_length: 12
     number_max_length: 12
-    uuid: e04e30fd-f10d-4294-97cf-1a56dd57b834
+    uuid: 75d4bfc2-4302-4e0c-a108-e3658ae8bcca
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258989
     prefix: '6011627'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ed245e5-cbe6-4c5c-b433-c938ccfb7ac3
+    uuid: 65b1c708-1ee5-405b-869a-aa5522b806b8
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258990
     prefix: '6011628'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36ba9042-0fef-48b5-883f-5baed34c344c
+    uuid: 9065cd43-548a-48c9-b983-b9300f3f62a3
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258991
     prefix: '6011629'
     number_min_length: 12
     number_max_length: 12
-    uuid: c625a6df-48d2-4868-bf89-36abe8b4fec8
+    uuid: c4d04c51-fb0b-4f2a-86a9-6875f57ef960
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258992
     prefix: '6011630'
     number_min_length: 12
     number_max_length: 12
-    uuid: 520571d3-3225-4635-b7f0-c6358295cd0e
+    uuid: 677829c4-3821-4d94-af52-7f53ca6fcc57
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258993
     prefix: '6011631'
     number_min_length: 12
     number_max_length: 12
-    uuid: 71129cba-b21b-4977-b6ba-7ec8737544bd
+    uuid: 31bc8974-7dae-4f97-a59b-360241ac6705
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258994
     prefix: '6011632'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4cd61463-db36-45f3-9f55-16fdc9d1feb5
+    uuid: 77a607c0-cf63-43bb-a566-0b7b192a9cf0
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258995
     prefix: '6011633'
     number_min_length: 12
     number_max_length: 12
-    uuid: 411c8d85-567d-46fd-b6c7-cfff4d39edc6
+    uuid: 064f1fdc-7403-4adb-8127-74a6b16bef1a
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258996
     prefix: '6011634'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3b035026-fbab-4404-8c87-1e9f11f7eb3e
+    uuid: e0525fa6-7dae-42d8-b579-a97d1a2f79f6
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258997
     prefix: '6011635'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9f3bae43-7673-4437-b4ab-9df835362160
+    uuid: cb696257-ca73-4459-9a0b-dc6d96ae0c5c
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 258998
     prefix: '6011646'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2342c766-806b-4e0e-ae30-c6eb744cd082
+    uuid: 150010c3-35f9-4917-9b36-04d1246da56f
     country_id: *my
     network_id: *my_digi_mobile
   - id: 258999
     prefix: '6011647'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36bf1d77-b105-4ed1-ad52-1d19c57806f4
+    uuid: 8da1b773-a4af-472f-9c42-c8401656fd01
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259000
     prefix: '6011648'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8f07a305-143e-4550-a004-7f99a8cf1dcb
+    uuid: 19fb12e7-f22a-42d2-b036-94927842849d
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259001
     prefix: '6011649'
     number_min_length: 12
     number_max_length: 12
-    uuid: 29ddc456-12ac-4a4f-8715-050a2111355f
+    uuid: 23840cf0-98f3-4e8f-95ce-1074ee17f8d4
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259002
     prefix: '601165'
     number_min_length: 12
     number_max_length: 12
-    uuid: 23b4de81-2b9b-4998-b85b-3637d0678bef
+    uuid: bb304f95-bd65-4338-bdd9-7766dd3df218
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259003
     prefix: '6011660'
     number_min_length: 12
     number_max_length: 12
-    uuid: 16d20fe6-d286-48b0-90ef-7033b3911fc6
+    uuid: c860326c-d343-41f4-bc69-047168f1c626
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259004
     prefix: '6011661'
     number_min_length: 12
     number_max_length: 12
-    uuid: ab274d0d-5001-4c3c-ae6c-5e02026d813b
+    uuid: 2189c8a2-38ec-4e9f-bf0e-640f9b5d95dd
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259005
     prefix: '6011662'
     number_min_length: 12
     number_max_length: 12
-    uuid: f6ad5d4b-ebba-446f-a9cd-bf484b2bd955
+    uuid: 5354276f-66b3-4198-bdc6-691cf94fa3c3
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259006
     prefix: '6011663'
     number_min_length: 12
     number_max_length: 12
-    uuid: 66be6d96-3305-4967-bc40-b5515595f39c
+    uuid: 057310ed-011c-4869-b74d-8e0ce9d55167
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259007
     prefix: '6011664'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0d94d5e0-80fa-4469-999c-ea9e5d2af686
+    uuid: d05d4dbb-b040-43ee-ab47-f4311ac4f13d
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259008
     prefix: '6011665'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5cbc6f00-71c8-4c9e-a74c-637eab7008c2
+    uuid: 1205901a-5064-455b-9a4b-d973423af7f7
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259009
     prefix: '6011667'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd15b604-d603-48d9-9721-c04a7915c1f5
+    uuid: 1e288e19-32f5-4aca-b7e2-6cea38b9172e
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259010
     prefix: '6011668'
     number_min_length: 12
     number_max_length: 12
-    uuid: 14e937f9-aee8-4418-820d-c75757625e7a
+    uuid: 6637034a-268b-4377-bc2d-18039b71eaf4
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259011
     prefix: '601167'
     number_min_length: 12
     number_max_length: 12
-    uuid: ee3ee484-43ef-4bb3-a1ec-d26a9ca2c020
+    uuid: 9c4432ba-3ca5-47b2-8454-b0533f886cf2
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259012
     prefix: '6011680'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7bc05bba-a48a-4413-b452-f55ec1d7f810
+    uuid: e11da7a1-a021-474f-a485-74efe8f1897e
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259013
     prefix: '6011681'
     number_min_length: 12
     number_max_length: 12
-    uuid: 886a70ce-14e0-4702-8eef-68498fea7238
+    uuid: 368c8bf4-a5ad-494d-bf61-153b44515aee
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259014
     prefix: '6011682'
     number_min_length: 12
     number_max_length: 12
-    uuid: ca47ad0d-4d42-423f-9672-2877c2a7201f
+    uuid: 74b1f907-0f27-4a25-a71e-1bb491026d8d
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259015
     prefix: '6011683'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1abddfae-f392-47bc-95b7-e8a72a8ed18f
+    uuid: 187368f1-611c-4677-98d1-8225012e280b
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259016
     prefix: '6011684'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4e7c7e6a-b62e-48ad-8c95-035a519339ef
+    uuid: 4d217839-add4-4dc3-85bc-11380e8b5a80
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259017
     prefix: '6011685'
     number_min_length: 12
     number_max_length: 12
-    uuid: e617b722-6efd-48a2-9616-30898d3f9f5b
+    uuid: d266c9ad-c905-420e-be65-97567d345ab6
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259018
     prefix: '6011686'
     number_min_length: 12
     number_max_length: 12
-    uuid: 87ce55cc-2389-4e76-8b6f-80f4667807b9
+    uuid: 165c59c3-3f08-4817-b362-1f0412036f93
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259019
     prefix: '6011687'
     number_min_length: 12
     number_max_length: 12
-    uuid: 84ebe0bc-3151-409a-8a29-9d4013ea8377
+    uuid: 9d1da724-74fb-402b-b005-cc563c2237ca
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259020
     prefix: '6011688'
     number_min_length: 12
     number_max_length: 12
-    uuid: d452a0c2-2cc1-4daf-b43b-151c5ff0a94d
+    uuid: f7fcda38-4de8-4d6f-8b73-ba88fd154a14
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259021
     prefix: '6011690'
     number_min_length: 12
     number_max_length: 12
-    uuid: aac23128-97e0-4414-b234-30ebc17d8bb2
+    uuid: 348ed57d-1079-4fdc-904a-41d43717283a
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259022
     prefix: '6011691'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8cccb77d-ad0b-4251-bb4a-2b092228aaeb
+    uuid: e8bd655b-cf26-4c5d-ad4e-6a729d34fa74
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 259023
     prefix: '6011692'
     number_min_length: 12
     number_max_length: 12
-    uuid: b83184d8-4f6a-454d-991e-8e7fbe4246fa
+    uuid: a23dac88-8948-4f0b-8493-cff349936ad1
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259024
     prefix: '6011703'
     number_min_length: 12
     number_max_length: 12
-    uuid: a1f6ae59-192e-41ac-8dc6-d12e6e1f30f8
+    uuid: ad49ed0a-8494-438b-b7b1-bc6ae54847d2
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259025
     prefix: '6011704'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1d61b951-fe60-4714-a557-e67ed5ff8196
+    uuid: abb78812-26db-4c50-9c49-1993212cabcb
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259026
     prefix: '6011705'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4f3f8ea8-18f5-435e-a70e-32606ae7fb95
+    uuid: f8bdd63f-7035-4808-a7cd-bfdfe0053ce3
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259027
     prefix: '6011706'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c95d278-0ebb-415b-a477-f218072c74f1
+    uuid: 6b9eb620-30d2-4f4a-81b4-730c159821ef
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259028
     prefix: '6011707'
     number_min_length: 12
     number_max_length: 12
-    uuid: f25ebf48-3074-4560-96b9-b58523208f17
+    uuid: e4265155-14a1-4777-ae18-398d09716c90
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259029
     prefix: '6011708'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8acea57d-e910-46f6-a18e-d08c7114ba52
+    uuid: acd0a912-1416-4b08-88f8-f628053fe76a
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259030
     prefix: '6011709'
     number_min_length: 12
     number_max_length: 12
-    uuid: 905268ee-eed9-4704-b755-cd1a57bded46
+    uuid: 40c3c636-1f31-4d72-95f6-0cbec954155a
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259031
     prefix: '6011710'
     number_min_length: 12
     number_max_length: 12
-    uuid: c545de7f-a00a-48e4-aff6-8ca8b71e51fb
+    uuid: bca95901-0907-47f9-9166-bc8a89cfb7cb
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259032
     prefix: '6011711'
     number_min_length: 12
     number_max_length: 12
-    uuid: dbac5773-b322-41a3-b806-75725803a40e
+    uuid: b53f0c75-2f96-47dc-b111-6a9c44d66a9e
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259227
     prefix: '6012'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4f2761ed-d3a9-4402-956f-fd5d6db2b401
+    uuid: 726c28e8-9f8f-49bb-a8da-e2275b7228fb
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 259508
     prefix: '6013'
     number_min_length: 11
     number_max_length: 11
-    uuid: 41ec4158-25a0-420f-8a44-c5e6112ab5bf
+    uuid: 50d974b2-9001-444f-a619-0045841b619a
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 259951
     prefix: '60142'
     number_min_length: 11
     number_max_length: 11
-    uuid: f6ff3c1d-e017-4c3a-a3af-21f066d99309
+    uuid: 1683b906-96f3-44c1-9e5e-167aa006a433
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 259952
     prefix: '60143'
     number_min_length: 11
     number_max_length: 11
-    uuid: 290b5346-31cd-4c56-b972-490bcaefde96
+    uuid: eb15c496-813b-46c9-accd-68b738b5cbca
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259953
     prefix: '6014400'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9318aa6-20fc-4b54-83b6-ffca88efd8e9
+    uuid: 9203cbd6-4abb-4bcf-a997-13521c8124bc
     country_id: *my
     network_id: *my_tune_talk_mobile
   - id: 259954
     prefix: '60145'
     number_min_length: 11
     number_max_length: 11
-    uuid: 81770da9-6f0e-462c-919b-0160b7385cb8
+    uuid: 5812d8f6-7824-48ed-ac84-5ecaef7dd139
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 259956
     prefix: '60146'
     number_min_length: 11
     number_max_length: 11
-    uuid: df908b7a-361e-4cca-aef5-4c339993d113
+    uuid: e1c15a57-8362-4395-a092-89de1f74e0b6
     country_id: *my
     network_id: *my_digi_mobile
   - id: 259957
     prefix: '60147'
     number_min_length: 11
     number_max_length: 11
-    uuid: ade49f9a-beae-48be-827e-85618a0510dd
+    uuid: 17a6ea92-ab43-405d-be41-530845e3d41c
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 259958
     prefix: '60148'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2715f4fe-e5d5-49ed-96d1-6ac910711667
+    uuid: ab7da2d1-9945-4bfa-a529-6643bcaea0f9
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 259960
     prefix: '60149'
     number_min_length: 11
     number_max_length: 11
-    uuid: 14b6b7cd-5bbb-4e2a-bfee-91c2ee15b351
+    uuid: 68c89349-8eac-4a03-8e94-f92f1e0299ba
     country_id: *my
     network_id: *my_digi_mobile
   - id: 260514
     prefix: '601811'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2aa63608-9d44-4924-af6d-f10a0fbd3da7
+    uuid: db978926-0bc7-4231-904c-cc367e90a4c3
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260516
     prefix: '60182'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9edca0db-e544-475b-89a0-9664d59529c7
+    uuid: f1dd2d66-8237-4eea-8341-b5d6d7b36681
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260518
     prefix: '601830'
     number_min_length: 11
     number_max_length: 11
-    uuid: 205289a1-6b89-452b-b351-0bde8a9994d7
+    uuid: 5264a27e-3b8f-4638-a9a2-4b54a3462ca2
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260519
     prefix: '601831'
     number_min_length: 11
     number_max_length: 11
-    uuid: 186f246d-6298-4522-a28b-539f0daa4367
+    uuid: 9037909a-b5ab-43e8-afe2-31516932db71
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260520
     prefix: '601832'
     number_min_length: 11
     number_max_length: 11
-    uuid: ac0897cc-6a3e-468c-93d8-8dac735a3909
+    uuid: dc804ad2-b133-4a0e-a6ae-2fbaad5cd98a
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260521
     prefix: '601833'
     number_min_length: 11
     number_max_length: 11
-    uuid: f62549fa-d56d-4e78-81d5-bae8a42dc507
+    uuid: 8b7f4a5d-5e78-47d4-8452-63021f8e9352
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260522
     prefix: '601834'
     number_min_length: 11
     number_max_length: 11
-    uuid: b964ba74-9217-444d-ad4c-64312f50a819
+    uuid: ce3675ed-a79c-414b-ad5e-52193bd327ed
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260523
     prefix: '601835'
     number_min_length: 11
     number_max_length: 11
-    uuid: 851dc399-c98c-4e33-b9fd-f9c59cef4ce3
+    uuid: f7189b35-5f51-4314-b434-42c227add75d
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260524
     prefix: '601836'
     number_min_length: 11
     number_max_length: 11
-    uuid: a195e5c8-37e0-4f0c-9cef-3f51b2ef3a64
+    uuid: 6281eda1-11d3-4a4c-a18b-b5d42ef47be2
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260525
     prefix: '601837'
     number_min_length: 11
     number_max_length: 11
-    uuid: 47cf27d1-d018-4181-95f7-df201c313d49
+    uuid: 0233c8ca-cd8c-4771-bae2-dd30be28ef5c
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260526
     prefix: '601838'
     number_min_length: 11
     number_max_length: 11
-    uuid: fc4f1a9f-2efc-4992-bcd7-f35d85dbd721
+    uuid: fc762c16-d488-4001-99fb-505113e21869
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260527
     prefix: '601839'
     number_min_length: 11
     number_max_length: 11
-    uuid: fe98339a-e83f-4998-b9f1-12264ae962a2
+    uuid: 8ed7ccea-423c-49b8-a94e-9c9a06b8b2f2
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260528
     prefix: '601840'
     number_min_length: 11
     number_max_length: 11
-    uuid: d9330ee5-78f4-4c25-8ac4-2ea103d6fe5c
+    uuid: a01503ad-6bbf-48d8-9421-9c0c5fdf9737
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260529
     prefix: '601846'
     number_min_length: 11
     number_max_length: 11
-    uuid: 154fe4a8-57d9-4cd3-b38f-dcfc89cc503d
+    uuid: ee74f2b2-98d1-4e9f-a5f3-bb3515581a15
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260530
     prefix: '6018470'
     number_min_length: 11
     number_max_length: 11
-    uuid: 16127ac9-490b-4453-a8e8-1693a8289f91
+    uuid: fb1ee3dc-ac70-4b1f-8871-c855006f821b
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260531
     prefix: '6018471'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2d0066bc-99b8-47e1-989b-4a3ff2ae6a6c
+    uuid: c6ec113d-4ec3-42d3-b09b-795ffe04cb87
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260532
     prefix: '6018472'
     number_min_length: 11
     number_max_length: 11
-    uuid: a72e15c1-e281-440f-bad6-7e2cc454ab58
+    uuid: 5485e061-84d9-473c-b214-0f6654d21f56
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260533
     prefix: '6018473'
     number_min_length: 11
     number_max_length: 11
-    uuid: 300259aa-8c0b-416d-9699-12100259a472
+    uuid: 26e2ef18-4b91-49a9-8113-3fb3f39788dd
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260534
     prefix: '6018474'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f0c2153-5ab0-4a4b-9c7a-23b0d2b98107
+    uuid: 779fc64a-8932-4d1f-b25d-5e1ff03c40ad
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260537
     prefix: '601857'
     number_min_length: 11
     number_max_length: 11
-    uuid: 78380396-7d48-44a7-b11b-a6c970e34dce
+    uuid: 414e770e-4539-4253-b7b6-b2824aba04c0
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260538
     prefix: '601858'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2977856d-c337-402d-9046-c6b8eefbfd9e
+    uuid: 2b40d5b0-47e1-4aa6-9c0c-9eec8ddd63a4
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260539
     prefix: '601859'
     number_min_length: 11
     number_max_length: 11
-    uuid: 64f9545f-f93e-4b58-89c0-9c979c3d92b9
+    uuid: 7b453129-121f-4b95-b7b1-5b16bbc6dd55
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260540
     prefix: '601860'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65ccdc54-d9e7-4413-9f67-bae6ed0990bf
+    uuid: e7b16948-a53f-45d1-abe5-6bf41169d0e1
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260541
     prefix: '601861'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4ad9d677-ec76-4cc3-b904-e66e58a800a5
+    uuid: ae46b062-909c-4443-b155-127e95d17a8f
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260542
     prefix: '601862'
     number_min_length: 11
     number_max_length: 11
-    uuid: 693dfa75-6e54-4a47-8615-2ce69bb80141
+    uuid: e7fbb097-0569-4d49-868d-54a00a4c2209
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260543
     prefix: '601863'
     number_min_length: 11
     number_max_length: 11
-    uuid: a1236ec3-c3b0-45e9-9945-2c147fd02b4b
+    uuid: 169ec63f-7db7-4b1b-b130-b1c5e71161ed
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260544
     prefix: '601864'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8ce56b38-05cf-4c5f-82d2-ad64ac0d5bf0
+    uuid: 4e58ea94-e6db-4316-a110-c6db54809d47
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260545
     prefix: '601865'
     number_min_length: 11
     number_max_length: 11
-    uuid: f850e723-8109-4d8e-ae88-4bf88c1c3ecb
+    uuid: d23f6e4a-f665-41e2-9fb3-306c5e072982
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260546
     prefix: '601866'
     number_min_length: 11
     number_max_length: 11
-    uuid: d40b0de8-7e22-4580-a6a2-de38800a7d04
+    uuid: d9d167ae-dfda-4841-9d98-c856feda98ce
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260547
     prefix: '601867'
     number_min_length: 11
     number_max_length: 11
-    uuid: 265c4106-f4bd-40d5-98bf-5f1d015e660b
+    uuid: 15e35dfb-3829-47f9-a208-01291d02a1f9
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260548
     prefix: '601868'
     number_min_length: 11
     number_max_length: 11
-    uuid: 190631e3-827a-419c-9a98-6b474e10cb23
+    uuid: 31b26e6d-873b-4099-ba54-5c54ff33182b
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260549
     prefix: '601869'
     number_min_length: 11
     number_max_length: 11
-    uuid: c318e145-783d-458b-be11-df625398d7a7
+    uuid: a2c6dc50-036d-4d2e-9950-1db84f4d989a
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260551
     prefix: '601870'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2d1c50d9-858a-494e-81b3-e653a4f72af9
+    uuid: 627972f1-71c3-45bc-83b4-1eb1264ac621
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260552
     prefix: '601871'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a4e841a-00a4-4343-9f76-03a0182e3450
+    uuid: fedd37b2-d7ba-41f0-bc55-3d661ee1f044
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260553
     prefix: '601876'
     number_min_length: 11
     number_max_length: 11
-    uuid: a1185c35-5081-453e-a873-fbaf2b141bd9
+    uuid: c57e303c-92d9-462e-b9ff-47abeb2c087c
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260554
     prefix: '601877'
     number_min_length: 11
     number_max_length: 11
-    uuid: db7d9719-ec3a-4920-ae51-d60c1ffa0685
+    uuid: 58b498fa-e4b5-4b10-9c2b-1139f31e87be
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260555
     prefix: '601878'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5bcb1eeb-2f98-416b-881e-aeec8b33db44
+    uuid: 543b54c2-d99c-40c1-9863-4d77198649b9
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260556
     prefix: '6018790'
     number_min_length: 11
     number_max_length: 11
-    uuid: ab81cc17-0086-4905-a7dd-658ed6b04fb7
+    uuid: 901ab74a-678d-4ebe-86f8-b69912eb6bc1
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260557
     prefix: '6018791'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b317cf7-f8f0-41e0-9870-ee5817deb8e8
+    uuid: 9b8ea7ab-4ffe-4b3d-845d-100ffc5eb646
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260558
     prefix: '6018792'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5685bccb-a06e-40d0-aab8-54be3f044506
+    uuid: 7b6cda55-7a7d-4cd5-a483-a04cedbcf5f6
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260559
     prefix: '6018793'
     number_min_length: 11
     number_max_length: 11
-    uuid: 88a4ba87-f4d5-49a6-b281-44738509b8f0
+    uuid: 00677b9b-61de-4967-8ffc-c7245be04d12
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260560
     prefix: '6018794'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c792a48-cf9d-4d04-bcdc-1a8eb1ce849c
+    uuid: 15007364-ddf0-4520-8f0e-69dbe3c166f7
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260561
     prefix: '6018795'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2d7b975a-9143-4deb-88e6-b4fc66de179e
+    uuid: d3ed87d7-ab1e-4615-b2ac-1b7044fafd5f
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260562
     prefix: '6018796'
     number_min_length: 11
     number_max_length: 11
-    uuid: 00950767-72f7-4422-8811-35eb92e14929
+    uuid: 50df6f22-fe76-4b89-90d8-ae9f4fa2bb39
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260563
     prefix: '6018797'
     number_min_length: 11
     number_max_length: 11
-    uuid: 092cba6e-3b47-4abf-8743-4c433f99650a
+    uuid: 1cd93be8-35ec-4683-ac5d-c58bfe7a2402
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260564
     prefix: '6018798'
     number_min_length: 11
     number_max_length: 11
-    uuid: 721c849a-715a-4208-bef1-bc9436384098
+    uuid: 24d027d0-382c-4f85-b91c-6f5f1935d59d
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260565
     prefix: '6018799'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b2ae15b-3d00-432d-9d5b-ab701366467e
+    uuid: 1524d7e7-e701-4ac0-adf0-bc199b91f46a
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260566
     prefix: '601880'
     number_min_length: 11
     number_max_length: 11
-    uuid: dc73cb9f-fd32-40f5-b77b-80a6ae19c2c4
+    uuid: 1247c682-74e9-4550-8405-341f06c2e2cd
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260567
     prefix: '601881'
     number_min_length: 11
     number_max_length: 11
-    uuid: d085ff4f-73ba-4865-b0f5-f2d86fa2567d
+    uuid: b4759c37-677c-48a1-b036-e8ae88e3fd33
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260568
     prefix: '6018820'
     number_min_length: 11
     number_max_length: 11
-    uuid: bc177928-8da6-4aa4-ba6b-e8e531d59334
+    uuid: ad3b9f44-459f-44ca-8824-d3b45730adcd
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260569
     prefix: '6018821'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1613c9bb-5055-477e-bf97-a09200c377de
+    uuid: d94a16d3-89a2-417a-b0b5-0b4bf1a02f6f
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260570
     prefix: '6018822'
     number_min_length: 11
     number_max_length: 11
-    uuid: cd5c9023-126e-453c-872a-5a627badab8e
+    uuid: 5b913f29-fb30-4f91-8099-625691a85e60
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260571
     prefix: '6018823'
     number_min_length: 11
     number_max_length: 11
-    uuid: d700298a-69df-4e7b-98ba-38f93545fff1
+    uuid: 1b6848de-faa2-4c4f-a164-cb30b69d8276
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260572
     prefix: '6018824'
     number_min_length: 11
     number_max_length: 11
-    uuid: 07748bb3-2dff-47f0-8dac-e31ca4319372
+    uuid: 2e935b69-80e2-41e0-b092-e5cdb4fb698d
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260573
     prefix: '6018870'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19acbd30-9e79-4737-9492-f5f7603fb7b6
+    uuid: 58752175-1501-4a00-902e-d5a7a730348a
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260574
     prefix: '6018871'
     number_min_length: 11
     number_max_length: 11
-    uuid: b116b1a2-eb7f-48d2-80d6-9e852cd7ac76
+    uuid: 90b9257f-1676-4dac-baa0-127ab5943199
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260575
     prefix: '6018872'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6ea91395-d1bd-49b1-b555-f5c4862542f6
+    uuid: 66753ec0-6e46-47fa-a314-d3b0d1148f9c
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260576
     prefix: '6018873'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ea64c4c-20cb-47a3-a84a-f973bdb90345
+    uuid: 8ea97fc7-711d-4dd3-8771-7c3188331dee
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260577
     prefix: '6018874'
     number_min_length: 11
     number_max_length: 11
-    uuid: aecbcef2-6f26-41ca-a9f3-58ae7ad43296
+    uuid: 25e30b47-493f-4555-82f5-0d25926e4a4f
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260579
     prefix: '601890'
     number_min_length: 11
     number_max_length: 11
-    uuid: 04536b7b-2af7-457d-9569-1bc986b0cda1
+    uuid: 3bbc1733-9d7f-45b2-996e-1da559982fdc
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260580
     prefix: '601891'
     number_min_length: 11
     number_max_length: 11
-    uuid: cb391050-edfd-4d95-91f2-6b673cbb0bff
+    uuid: 24d58517-c257-47f9-bda3-6ecae8ce1c27
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260583
     prefix: '601892'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2a88c068-8e5d-4f7e-b37c-94ce95e0c307
+    uuid: a4b2cfd4-fae5-4516-8de6-7d43eeabde0f
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260587
     prefix: '601893'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4ca6a3e7-883e-4b44-a0a5-09aa925a5968
+    uuid: 55a05be0-095a-4683-be60-19b92c3e8dd5
     country_id: *my
     network_id: *my_yes_mobile
   - id: 260610
     prefix: '601894'
     number_min_length: 11
     number_max_length: 11
-    uuid: 551079fc-70a6-482f-a18d-495de2059012
+    uuid: 76a84b3d-08c3-4c41-a47c-4e242a5bafef
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260611
     prefix: '601895'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0bcfa278-e4ad-4d68-88dd-1dd54b8a0f82
+    uuid: a1f041fb-b97e-4101-bce6-3f039e8b545b
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260613
     prefix: '601896'
     number_min_length: 11
     number_max_length: 11
-    uuid: f9051d21-1b2b-4aad-a182-5ef53eede06e
+    uuid: 3d9fd218-10db-4e30-a993-73d69b47da13
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260614
     prefix: '601897'
     number_min_length: 11
     number_max_length: 11
-    uuid: a1fc2c98-3e92-4ca6-91e8-ba349281f472
+    uuid: bebcd731-2907-478b-9b51-04800ea150bd
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260626
     prefix: '601898'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5a0db8d5-6fa9-41a8-9a0a-c4de09d22dde
+    uuid: 5c9b2faf-eb34-4121-bdb6-9016a9bd95ae
     country_id: *my
     network_id: *my_u_mobile_mobile
   - id: 260829
     prefix: '6019'
     number_min_length: 11
     number_max_length: 11
-    uuid: db91f3d3-902b-40e7-b0e6-edbbe538a124
+    uuid: 0e0e706b-bbc6-4ff2-a886-dd78155bfb22
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260835
     prefix: '6019020'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8e4c8aa7-b4ce-405a-9901-b085455392cb
+    uuid: d1f67114-f2f3-493d-b8a7-58e5bccbc55f
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260836
     prefix: '6019030'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2a5b8a80-ebe1-444d-a446-cc2c3f06b37f
+    uuid: 513eedc0-11fc-4c86-a94e-fbf3c534ac25
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260837
     prefix: '6019031'
     number_min_length: 11
     number_max_length: 11
-    uuid: c4079cdb-b15d-4e9c-b40e-098e343f834c
+    uuid: 765582f7-500d-407c-a32a-573a382e9455
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260838
     prefix: '6019033'
     number_min_length: 11
     number_max_length: 11
-    uuid: 118740fb-1121-4ef1-9caa-ae3cb33468e6
+    uuid: dbbf74b6-3871-4e03-bd16-6fcf4d408691
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260839
     prefix: '6019034'
     number_min_length: 11
     number_max_length: 11
-    uuid: 604825d0-d9c3-44b6-8c23-844e05c3da58
+    uuid: 87b1b7a7-d5aa-4186-a9d0-52ae77039b74
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260840
     prefix: '6019035'
     number_min_length: 11
     number_max_length: 11
-    uuid: f596349d-7726-4513-b78d-d66ef681a058
+    uuid: 7abc8b6b-1506-40eb-bda0-39a98c57fa37
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260841
     prefix: '6019036'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2c1278d5-d637-4cd4-9445-6bac1a029f46
+    uuid: 2ddc49c9-039f-447c-b6a5-a5916753f40e
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260842
     prefix: '6019038'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0adeef4d-e441-4860-bebb-47fb479a516c
+    uuid: 336598ff-0365-4df1-9fbc-a9da0bd7fb87
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260843
     prefix: '6019039'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a64d9bc-4155-4c93-a98a-a7d4009c4175
+    uuid: 39d5d6f6-974a-4fe9-9602-18938bebb609
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260844
     prefix: '6019051'
     number_min_length: 11
     number_max_length: 11
-    uuid: 383f1f1b-736a-41e9-8298-652f1569df0e
+    uuid: cd7f71fc-e23e-46ae-a1d3-fb2f32473921
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260845
     prefix: '6019052'
     number_min_length: 11
     number_max_length: 11
-    uuid: ca4804d7-4874-424d-9332-531650723aa8
+    uuid: 63832cb6-5e9b-4302-b91a-ed0c682c7199
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260846
     prefix: '6019053'
     number_min_length: 11
     number_max_length: 11
-    uuid: c235f3d5-0f9c-4b7f-bc47-92474e09ac58
+    uuid: cf7e9f6b-8dde-467d-8d20-5f948959c48b
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260847
     prefix: '6019054'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5e4d26fd-480f-4e71-a61e-c18b0510a4f3
+    uuid: 03e99328-a915-4bc8-9289-809deb69361c
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260848
     prefix: '6019070'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1dfffd9f-d548-40a0-a0af-757e8109b74f
+    uuid: 25a85af1-69e9-49bc-934d-2b5089057980
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260849
     prefix: '6019071'
     number_min_length: 11
     number_max_length: 11
-    uuid: 643038be-9976-42be-9b96-263cb97e6781
+    uuid: 772667f2-160d-4c0d-a0b0-9e2cb83d6a15
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260850
     prefix: '6019074'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5456e2bc-82f0-4983-a6b1-391563785693
+    uuid: a4adffbb-e6f9-461c-b99a-635806d445d9
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260851
     prefix: '6019080'
     number_min_length: 11
     number_max_length: 11
-    uuid: f497f32b-b8d3-46a2-962a-fab1bc1dfe61
+    uuid: 1c521462-a45a-41bc-9b76-b9aa8e54f501
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260852
     prefix: '6019081'
     number_min_length: 11
     number_max_length: 11
-    uuid: 751f5bfb-671a-454b-81ba-bd50d9655ea7
+    uuid: 40837641-e447-4c2c-a11c-cdcfa7394b53
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260853
     prefix: '6019082'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6f5887e9-01e9-478a-b6bb-95a14e457db7
+    uuid: 251e0919-1f68-44db-8cd3-af2e427dd4d7
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260854
     prefix: '6019083'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2ec69e2c-9a4a-4e87-8619-52463295bd74
+    uuid: 7da20564-e6c1-4937-9783-523f9f9c4799
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260855
     prefix: '6019085'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0f17db3e-c15d-497d-a3c0-b8aa475fb41e
+    uuid: 51e80e8b-c1b4-4353-9ae8-1c1f6acadc9d
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260856
     prefix: '6019087'
     number_min_length: 11
     number_max_length: 11
-    uuid: 66db6fb0-2273-43e2-9510-16d9170e6405
+    uuid: 25aeb9d9-a8f0-4667-a5c0-0647a75164d6
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260857
     prefix: '6019089'
     number_min_length: 11
     number_max_length: 11
-    uuid: b6a39c0c-a8d7-49c5-bb5e-04bdf11ee37e
+    uuid: 998ceec7-de15-46d7-a390-fa01a0ad6d86
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260858
     prefix: '6019090'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae53fb8d-2777-4977-a04f-0fb5f79966ef
+    uuid: 85991fc5-027f-4dcd-8568-edf8c07a51a6
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260859
     prefix: '6019091'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9bdcdcda-3cde-411d-b31c-97255e07d16a
+    uuid: 41125295-250d-46a3-a338-2644bb569b49
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260860
     prefix: '6019092'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a8ee811-ac37-4fd1-b761-c589bd7d58d2
+    uuid: ea0ef9d7-3369-439e-a9c6-92fda6ac4eb4
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 260861
     prefix: '6019093'
     number_min_length: 11
     number_max_length: 11
-    uuid: 85d17b90-92c0-4fcc-9660-0d572f0e3abd
+    uuid: b6604aba-691a-430e-a257-64681fc7455f
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 266331
     prefix: '60154'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6f16ae5e-9b22-4db0-a54b-fd354b24b083
+    uuid: 33e201e5-1214-43e6-a262-f6dc083717c6
     country_id: *my
     network_id: *my_mobile
   - id: 266333
     prefix: '6015460'
     number_min_length: 12
     number_max_length: 12
-    uuid: 840063b2-e4e3-4cda-be25-4aa0d81f1c9f
+    uuid: e82f0ca0-4149-444d-82a6-3731e68e6eb6
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 266334
     prefix: '60154610'
     number_min_length: 12
     number_max_length: 12
-    uuid: edd49b19-eb9a-47df-ad1e-22ac4e146f86
+    uuid: e052d99e-66c1-4773-90b2-d48dd30534ad
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 266335
     prefix: '60154611'
     number_min_length: 12
     number_max_length: 12
-    uuid: c3a93f03-e769-4e7e-8d02-917588c242ba
+    uuid: fa35e596-eacc-41b4-9d5b-e1e88255d37e
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 266336
     prefix: '60154612'
     number_min_length: 12
     number_max_length: 12
-    uuid: d3bf1c2f-22ec-45e1-9894-510ade0f7f08
+    uuid: 3d3d07ae-ace7-45f4-93a6-db41dd10ea65
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 266337
     prefix: '60154613'
     number_min_length: 12
     number_max_length: 12
-    uuid: af3911d3-1876-4e32-9e5d-abd15af97b32
+    uuid: fe50fb7f-39de-4656-8f83-8302eef8afb7
     country_id: *my
     network_id: *my_atur_450_mobile
   - id: 266338
     prefix: '60154821'
     number_min_length: 12
     number_max_length: 12
-    uuid: 75373421-2612-4aff-a257-3f8df9259dff
+    uuid: 9446ce74-5681-4f82-a79c-a12799cd122f
     country_id: *my
     network_id: *my_tt_dotcom_mobile
   - id: 266339
     prefix: '60154840'
     number_min_length: 12
     number_max_length: 12
-    uuid: 961d5c02-2a57-4740-8228-e68675adfde7
+    uuid: 7f06d49d-2489-46f3-8b1c-aaad8865dbd2
     country_id: *my
     network_id: *my_redtone_mobile
   - id: 266340
     prefix: '60154841'
     number_min_length: 12
     number_max_length: 12
-    uuid: e3df64b0-dd45-4dac-8531-eba18c76461a
+    uuid: 074512d7-b1ba-48d9-b379-14c78a77ed6e
     country_id: *my
     network_id: *my_y_max_mobile
   - id: 266341
     prefix: '60154848'
     number_min_length: 12
     number_max_length: 12
-    uuid: e3eba245-5d2c-452f-91de-318dcdde6499
+    uuid: fa4cb3a9-f38a-4e0c-8d08-9549668e7c89
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 266342
     prefix: '60154849'
     number_min_length: 12
     number_max_length: 12
-    uuid: 645e5645-4613-4c86-a98a-8965ca798bf1
+    uuid: bcc2eda9-d902-4e1c-81fd-5a94237502ad
     country_id: *my
     network_id: *my_unifi_mobile
   - id: 266343
     prefix: '60154851'
     number_min_length: 12
     number_max_length: 12
-    uuid: b92093a5-98e3-4512-a8bb-516832be4628
+    uuid: 875367c1-5636-458d-a466-cd04434741c7
     country_id: *my
     network_id: *my_maxis_broadband_mobile
   - id: 266344
     prefix: '60154870'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1cb4d507-d48a-4801-bbdb-235b2d98ccf5
+    uuid: 915663c5-1945-4642-9bc6-a1a24992d22f
     country_id: *my
     network_id: *my_ocesb_mobile
   - id: 266345
     prefix: '60154871'
     number_min_length: 12
     number_max_length: 12
-    uuid: 81288aba-96f6-4486-a955-a9ad8a6fa883
+    uuid: 508c4db6-d483-4a24-954c-c37033940ffb
     country_id: *my
     network_id: *my_redtone_mobile
   - id: 266346
     prefix: '60154872'
     number_min_length: 12
     number_max_length: 12
-    uuid: d214000c-ede2-4b80-9a72-58d0c477feb8
+    uuid: 91e90d3e-6359-4de9-b6e0-d7af807e7291
     country_id: *my
     network_id: *my_redtone_mobile
   - id: 266347
     prefix: '60154873'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8e4958ef-9f04-4b8e-950a-1c84207a9b31
+    uuid: 8c911442-d397-4e58-8f13-fba1deba7b9e
     country_id: *my
     network_id: *my_redtone_mobile
   - id: 266348
     prefix: '60154874'
     number_min_length: 12
     number_max_length: 12
-    uuid: ead5c826-fc07-4b4e-b5a2-9ac56b1d95df
+    uuid: d5fcac5e-f969-468c-a6eb-3a99b21dc8c5
     country_id: *my
     network_id: *my_redtone_mobile
   - id: 266349
     prefix: '60154876'
     number_min_length: 12
     number_max_length: 12
-    uuid: e88a0532-e91f-459e-a2e4-ed8b48b3d914
+    uuid: 3ee73ec5-3775-4f35-941d-846cbb2ade97
     country_id: *my
     network_id: *my_redtone_mobile
   - id: 266350
     prefix: '60154877'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce3476b6-5c11-4d99-be5c-246ac797021e
+    uuid: bd8b5c99-89e3-4f9a-a3f2-2a4343ead427
     country_id: *my
     network_id: *my_redtone_mobile
   - id: 266351
     prefix: '60154879'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3fb86fe5-5e11-4c72-9384-573b73a1eb39
+    uuid: 7a585b14-f18c-4b88-93d4-ce6c6c84dad0
     country_id: *my
     network_id: *my_redtone_mobile
   - id: 266382
     prefix: '60156'
     number_min_length: 12
     number_max_length: 12
-    uuid: a7212fef-f9f8-40be-b481-294db14faab0
+    uuid: 01654aac-aee8-464c-a777-b79714bd146a
     country_id: *my
     network_id: *my_mobile
   - id: 266387
     prefix: '60156320'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5f44bb76-b889-406c-841c-092dca21d8b6
+    uuid: 02d6492a-d0ba-4661-9cb2-6afc26287e08
     country_id: *my
     network_id: *my_mkn_mobile
   - id: 266388
     prefix: '60156321'
     number_min_length: 12
     number_max_length: 12
-    uuid: d012686f-3fdd-4b56-94d6-34475fccd423
+    uuid: 67dc61de-f3aa-40b7-9b87-69dc442c081a
     country_id: *my
     network_id: *my_mkn_mobile
   - id: 266389
     prefix: '60156322'
     number_min_length: 12
     number_max_length: 12
-    uuid: 76c11bba-635f-4edd-bba3-47b354c0e2e3
+    uuid: b18cab7f-eb06-4c0c-90c1-d2a5830e2ed2
     country_id: *my
     network_id: *my_mkn_mobile
   - id: 266390
     prefix: '60156323'
     number_min_length: 12
     number_max_length: 12
-    uuid: c033d1cb-ace6-4e2e-84dd-78f6a1747f74
+    uuid: 61cf15b8-d398-4df6-a2e0-51f2fa207744
     country_id: *my
     network_id: *my_mkn_mobile
   - id: 266391
     prefix: '60156324'
     number_min_length: 12
     number_max_length: 12
-    uuid: bfd096d9-5edf-49c4-aa63-227bb2a6c338
+    uuid: c9aba059-e9d7-4ba6-9fe7-483af602503c
     country_id: *my
     network_id: *my_mkn_mobile
   - id: 266392
     prefix: '60156325'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0639f24f-d0ff-43ba-9fb0-152a1cdabe80
+    uuid: 5a1f9ffd-b95f-412d-995a-03c824fa342b
     country_id: *my
     network_id: *my_mkn_mobile
   - id: 266393
     prefix: '60156326'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3e22650e-4652-4c42-9ede-2604cdefd063
+    uuid: 17a7a54c-567d-4df4-8554-910ffd4c81db
     country_id: *my
     network_id: *my_mkn_mobile
   - id: 266499
     prefix: '60159'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7c2db057-8dd2-4149-bfc2-50a829b08a75
+    uuid: 589dec80-1238-4c2a-8ccd-3d05caf5e739
     country_id: *my
     network_id: *my_mobile
   - id: 266501
     prefix: '601591'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3f58aa63-630f-45bd-9041-1e3a7fbcde3d
+    uuid: 00c515f1-8d9d-483e-9da8-1a4747dd5fda
     country_id: *my
     network_id: *my_digi_mobile
   - id: 266502
     prefix: '601592'
     number_min_length: 12
     number_max_length: 12
-    uuid: ddc11c74-72e5-44a6-b82b-9866df5c7e0d
+    uuid: 60f3223a-aa2b-4c59-a81c-fa0fb3d98ff0
     country_id: *my
     network_id: *my_celcom_mobile
   - id: 266503
     prefix: '6015960'
     number_min_length: 12
     number_max_length: 12
-    uuid: 334f11ad-3038-4eb6-b766-9653b7ab2f15
+    uuid: b74b8639-3462-4fd3-86da-85ecc5f170ac
     country_id: *my
     network_id: *my_digi_mobile
   - id: 266504
     prefix: '6015961'
     number_min_length: 12
     number_max_length: 12
-    uuid: e28f0cf4-dfa4-4367-9006-87134b6c2f17
+    uuid: 2d98d621-2730-444a-8d3e-aa1f7155747e
     country_id: *my
     network_id: *my_digi_mobile
   - id: 266505
     prefix: '6015962'
     number_min_length: 12
     number_max_length: 12
-    uuid: a4484742-3e56-4da4-bff3-b7b6a4757e54
+    uuid: 64ebcee1-7536-447c-ac82-f82e51158667
     country_id: *my
     network_id: *my_digi_mobile
   - id: 266506
     prefix: '6015963'
     number_min_length: 12
     number_max_length: 12
-    uuid: 95705928-a1db-4c61-b06e-0f0289720d4a
+    uuid: 7d0139a0-82c1-49b0-8b43-2e5a64e3cc20
     country_id: *my
     network_id: *my_digi_mobile
   - id: 266507
     prefix: '6015964'
     number_min_length: 12
     number_max_length: 12
-    uuid: d5586a2e-c2f1-4b7d-8980-2830dfe81acc
+    uuid: 47182d30-1796-4a7b-bd21-4cca103432ba
     country_id: *my
     network_id: *my_digi_mobile
   - id: 266557
     prefix: '6016'
     number_min_length: 11
     number_max_length: 11
-    uuid: b57df4b3-67a7-4430-8745-1d6bf9a339f7
+    uuid: ce9e2f34-116a-44e3-86a4-b54d15ca4473
     country_id: *my
     network_id: *my_digi_mobile
   - id: 266949
     prefix: '6017'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2cd991cb-517e-4340-8ed4-dd7733dc0419
+    uuid: 449cf995-4cd0-4be1-878d-5a7d810989cd
     country_id: *my
     network_id: *my_maxis_mobile
   - id: 266956
     prefix: '60170'
     number_min_length: 11
     number_max_length: 11
-    uuid: e07fbfbf-2f38-45d2-872e-ebdc77b80014
+    uuid: 230fe12a-2ff1-41e6-930e-30f4c2fba0c3
     country_id: *my
     network_id: *my_maxis_mobile

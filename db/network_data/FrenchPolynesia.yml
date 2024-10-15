@@ -1,35 +1,59 @@
 country_id: &pf 75
 networks:
 # Supplementary services Networks
-  - id: &pf_emergency_services 5302
+  - id: &pf_emergency_services 21476
     name: PF Emergency Services
-    uuid: 83c2455e-8c3b-418c-a35a-1c93a5848029
-    type_id: 14
-  - id: &pf_special_services 5776
+    uuid: 6c295876-ca3d-463e-a66b-65514c2275e4
+    type_id: 13
+  - id: &pf_special_services 22144
     name: PF Special Services
-    uuid: 54679481-9dde-42e8-9bb1-64d54e336552
-    type_id: 14
-  - id: &pf_audiotext 5828
+    uuid: 927f38fe-d6f0-47ba-81a4-5f663b16b0c3
+    type_id: 13
+  - id: &pf_audiotext 22308
     name: PF Audiotext
-    uuid: 85b45e4b-293d-4b04-88ec-a7215c163531
-    type_id: 14
+    uuid: 89e8c4d8-6c3f-4395-9d7c-196cb321c5bb
+    type_id: 13
 # Fixed Networks
-  - id: &pf_fixed 5788
+  - id: &pf_fixed 22158
     name: PF Fixed
-    uuid: 7e8f873e-67fb-4e5e-9476-dc40bcefabe3
-    type_id: 12
+    uuid: 4e02cf78-b8f1-4ed3-a81c-8b1e6410433a
+    type_id: 2
+  - id: &pf_iles_du_vent_idv_region 22181
+    name: PF Iles Du Vent Idv Region
+    uuid: 1b115c9f-131a-4965-bf41-924bbab72ed0
+    type_id: 2
+  - id: &pf_iles_sous_le_vent_islv_region 22182
+    name: PF Iles Sous Le Vent Islv Region
+    uuid: 47354827-6d3e-47fe-be1a-963688c93dcd
+    type_id: 2
+  - id: &pf_public_telephones_region 22183
+    name: PF Public Telephones Region
+    uuid: 8273d80c-473c-441b-91b8-99cecc18384f
+    type_id: 2
+  - id: &pf_remote_archipelago_vinibox_service_region 22184
+    name: PF Remote Archipelago Vinibox Service Region
+    uuid: 91e74c1e-3764-4afa-8139-8a980a4b83a8
+    type_id: 2
+  - id: &pf_voip_region 23291
+    name: PF Voip Region
+    uuid: b8075094-57e1-4a8b-bb0d-3d300dc25c00
+    type_id: 2
+  - id: &pf_vinibox_service_region 23296
+    name: PF Vinibox Service Region
+    uuid: e2bd6ea4-817f-412f-963e-8c35cca6a218
+    type_id: 2
 # Mobile Networks
-  - id: &pf_vini_mobile 6901
+  - id: &pf_vini_mobile 24309
     name: PF Vini Mobile
-    uuid: 2e6b0fb1-78fc-41f2-a7fc-99de90eac0b2
+    uuid: 523410cb-dfc5-4bdd-864b-58c6f4ac9ba4
     type_id: 3
-  - id: &pf_ora_mobile 6918
+  - id: &pf_ora_mobile 24339
     name: PF Ora Mobile
-    uuid: 2acdc256-e0d7-44cf-accd-3362859c8c57
+    uuid: 93900375-5d7c-467a-b534-b2fcbcb3bb6e
     type_id: 3
-  - id: &pf_vodafone_mobile 6928
+  - id: &pf_vodafone_mobile 24378
     name: PF Vodafone Mobile
-    uuid: 71087c63-34d1-427c-bf7e-d61b1d2a682c
+    uuid: 0127f43b-58c9-4d18-a61e-81c818b9f89e
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -37,7 +61,7 @@ network_prefixes:
     prefix: '689'
     number_min_length: 4
     number_max_length: 100
-    uuid: c790a330-a9bc-45b0-a298-2598e05a1c24
+    uuid: 0a7d4681-9cb6-424c-bddd-d52835d29593
     country_id: *pf
     network_id: null
 # Supplementary services Prefixes
@@ -45,21 +69,21 @@ network_prefixes:
     prefix: '6891'
     number_min_length: 5
     number_max_length: 5
-    uuid: 5a828a6d-c7b3-4d5c-917c-92ee7207cfce
+    uuid: fc6cdb27-2cb2-4c2b-90ca-af64a9ae9df8
     country_id: *pf
     network_id: *pf_emergency_services
   - id: 243961
     prefix: '6894'
     number_min_length: 7
     number_max_length: 9
-    uuid: 42881b29-443b-4b48-82c6-5179ffb3ec2c
+    uuid: 1b875bbd-267a-44af-bf6c-b8487cfe0e0f
     country_id: *pf
     network_id: *pf_special_services
   - id: 244497
     prefix: '68944'
     number_min_length: 9
     number_max_length: 9
-    uuid: b18821c5-aff7-4830-9a4f-8cbe4819b6db
+    uuid: 3317c2ad-cfdf-4ed3-9dab-f4a8649242fd
     country_id: *pf
     network_id: *pf_audiotext
 # Fixed Prefixes
@@ -67,126 +91,126 @@ network_prefixes:
     prefix: '68940'
     number_min_length: 11
     number_max_length: 11
-    uuid: db3baece-d040-4774-989f-fb75181aff04
+    uuid: 6d9bcee8-e87c-42ac-af33-fc8a4f900db9
     country_id: *pf
     network_id: *pf_fixed
   - id: 244066
     prefix: '689404'
     number_min_length: 11
     number_max_length: 11
-    uuid: b8915695-5969-48b0-986c-b34b012491be
+    uuid: 32de05cf-2a4c-4fa2-99fc-98f97eb6762e
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_iles_du_vent_idv_region
   - id: 244069
     prefix: '689405'
     number_min_length: 11
     number_max_length: 11
-    uuid: 310b995a-2226-44a9-9874-95f87ad17735
+    uuid: 6df50fab-3904-4bf3-955e-c523b7d416fe
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_iles_du_vent_idv_region
   - id: 244071
     prefix: '689406'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87bb62b0-76ab-4908-95da-bf1fbffc697e
+    uuid: 32f33f9f-bea8-49af-bda5-0dba280dfba5
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_iles_sous_le_vent_islv_region
   - id: 244084
     prefix: '689408'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3222d8d4-909d-4b9c-a9dd-d0ed58c8a55a
+    uuid: 6e638eff-259c-45cc-9e7c-8a9d5918b008
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_iles_du_vent_idv_region
   - id: 244103
     prefix: '6894088'
     number_min_length: 11
     number_max_length: 11
-    uuid: 330db898-2b41-47b9-9341-e3d670bdd483
+    uuid: 53802149-ba9c-46d3-8b71-fff0ecc17b4b
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_public_telephones_region
   - id: 244106
     prefix: '689409'
     number_min_length: 11
     number_max_length: 11
-    uuid: b6f8a64e-1e5a-44c5-b5eb-bb8eb47d3b47
+    uuid: 220aa69e-194e-4d97-9887-f4a028285fd3
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_remote_archipelago_vinibox_service_region
   - id: 249518
     prefix: '689494'
     number_min_length: 11
     number_max_length: 11
-    uuid: d9119335-77d4-486d-b1cf-912549c2436a
+    uuid: d75e382e-f085-433c-b9bc-959c6e79bb08
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_voip_region
   - id: 249533
     prefix: '689495'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9d3b786e-3aea-4da2-9de2-c3435e4c4dcc
+    uuid: ff0dc8e5-36f0-45f7-a16d-fcf0445821f3
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_voip_region
   - id: 249541
     prefix: '689496'
     number_min_length: 11
     number_max_length: 11
-    uuid: c1599784-c44f-459f-9fcd-1a39594a3860
+    uuid: e41bd549-b229-44f4-8eea-50128ed5fbf1
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_voip_region
   - id: 249542
     prefix: '689498'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9adfb9ce-e953-4e2d-8582-c8e71178e2bc
+    uuid: 455e0853-0d27-4640-ae63-e1030dafa7ad
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_voip_region
   - id: 249554
     prefix: '689499'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef65d583-6ce2-4686-a971-74a6302c850b
+    uuid: 887e7da0-a07e-4efe-8c59-bca8ded5d5a5
     country_id: *pf
-    network_id: *pf_fixed
+    network_id: *pf_vinibox_service_region
 # Mobile Prefixes
   - id: 256746
     prefix: '68987411'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ad63ca9-da63-4f56-9af0-9a8c3a1fa900
+    uuid: 6ac3af2c-90be-4919-a7c1-8318fd324527
     country_id: *pf
     network_id: *pf_vini_mobile
   - id: 256847
     prefix: '68988'
     number_min_length: 11
     number_max_length: 11
-    uuid: f41ad95e-de25-477d-b690-95ab883565f7
+    uuid: cc7ce48b-cd6f-4ccf-b870-cfb4a7b5f231
     country_id: *pf
     network_id: *pf_ora_mobile
   - id: 256937
     prefix: '68988411'
     number_min_length: 11
     number_max_length: 11
-    uuid: 08ef4246-4e8f-4f6b-8fff-ed093e572771
+    uuid: 22a606c7-1627-460c-a160-58a5ca859d5d
     country_id: *pf
     network_id: *pf_ora_mobile
   - id: 257010
     prefix: '68989'
     number_min_length: 11
     number_max_length: 11
-    uuid: 372982ee-0164-46cb-a721-c428e7f85f88
+    uuid: c31bebf4-312c-4423-94b4-079c418ac969
     country_id: *pf
     network_id: *pf_vodafone_mobile
   - id: 257057
     prefix: '68989411'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7d68eb6b-3b8f-4952-95e0-93bd960bd37e
+    uuid: 97b8d0ca-cf6f-408d-9962-862f246e89e8
     country_id: *pf
     network_id: *pf_vodafone_mobile
   - id: 264013
     prefix: '68987'
     number_min_length: 11
     number_max_length: 11
-    uuid: d5196a1e-6e53-42a9-b47f-ad6db6c1feb7
+    uuid: 41e6bba8-b6ab-4ae9-b405-27308d88e2a7
     country_id: *pf
     network_id: *pf_vini_mobile

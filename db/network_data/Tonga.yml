@@ -1,538 +1,586 @@
 country_id: &to 214
 networks:
 # Fixed Networks
-  - id: &to_fixed 4138
-    name: TO Fixed
-    uuid: 0b50eb1b-0186-4389-ad2c-9079da8e37f3
-    type_id: 12
+  - id: &to_eua_island_region 4677
+    name: TO Eua Island Region
+    uuid: 26dc01d5-e95e-486a-95d2-ecd8a4b52a11
+    type_id: 2
+  - id: &to_haapai_islands_region 10542
+    name: TO Haapai Islands Region
+    uuid: 33dc12aa-b385-4795-a866-6e1acf80abb8
+    type_id: 2
+  - id: &to_vavau_islands_region 14452
+    name: TO Vavau Islands Region
+    uuid: da6aed8a-5c5f-48b9-b139-2a8d022035f0
+    type_id: 2
+  - id: &to_niuas_region 19845
+    name: TO Niuas Region
+    uuid: 2e404e6c-2d92-4d09-a9b1-28896d718519
+    type_id: 2
+  - id: &to_nukualofa_region 26718
+    name: TO Nukualofa Region
+    uuid: afbf76cc-e8da-4495-b4f4-f520bea4c97c
+    type_id: 2
+  - id: &to_pea_region 30658
+    name: TO Pea Region
+    uuid: 70dfb94c-b1b9-47ef-b620-a445a529a27e
+    type_id: 2
+  - id: &to_mua_region 31765
+    name: TO Mua Region
+    uuid: 9d9dc84d-850d-46ef-86d2-9027cd9e7230
+    type_id: 2
+  - id: &to_kolonga_region 32570
+    name: TO Kolonga Region
+    uuid: 70e4cc1b-dc4d-41e6-9449-68efff6eae8c
+    type_id: 2
+  - id: &to_nakolo_region 33663
+    name: TO Nakolo Region
+    uuid: 96b118e0-513c-4f3b-abaf-6f88312e6466
+    type_id: 2
+  - id: &to_vaini_region 33852
+    name: TO Vaini Region
+    uuid: 0aababc1-43b3-475f-9193-44c165b05e2f
+    type_id: 2
+  - id: &to_kolovai_region 34320
+    name: TO Kolovai Region
+    uuid: bb5f61fe-c7df-4d16-802d-9d0d31c1b41c
+    type_id: 2
+  - id: &to_masilamea_region 36250
+    name: TO Masilamea Region
+    uuid: 2e759398-e2b9-4093-a0d8-a994aaa638c0
+    type_id: 2
+  - id: &to_matangiake_region 36595
+    name: TO Matangiake Region
+    uuid: bc92c912-694a-4c38-a7f2-6fc796c54d21
+    type_id: 2
 # Mobile Networks
-  - id: &to_wantok_mobile 4254
+  - id: &to_wantok_mobile 7204
     name: TO Wantok Mobile
-    uuid: b205c010-fbc6-4f7c-ba44-2d60864f6e24
+    uuid: 577df0cc-a5b2-456a-90b7-a5c3e8e95065
     type_id: 3
-  - id: &to_mobile 4445
+  - id: &to_mobile 12305
     name: TO Mobile
-    uuid: 1a606cba-9a7e-4b1b-91d1-d716540e8e94
+    uuid: 5e34db0c-abaf-4069-809d-e92183536825
     type_id: 3
-  - id: &to_digicel_mobile 4567
+  - id: &to_digicel_mobile 14324
     name: TO Digicel Mobile
-    uuid: bb7d57c1-8382-43e5-8f64-bd2979a8a3dd
+    uuid: 78c7457e-7f31-4527-8052-d993e493b18b
     type_id: 3
-  - id: &to_u_call_mobile 4781
-    name: TO U_Call Mobile
-    uuid: fe10fb44-9e2a-49a8-b6ba-1f709b8eb596
+  - id: &to_u_call_mobile 16569
+    name: TO U Call Mobile
+    uuid: bb809711-29bf-426e-b3d4-747426e34975
     type_id: 3
 # Supplementary services Networks
-  - id: &to_freephone_services 5168
+  - id: &to_freephone_services 21342
     name: TO Freephone Services
-    uuid: 7fe52797-2652-4ddb-9910-096079d6265b
-    type_id: 14
-  - id: &to_sms_rapidpro_for_unicef 6785
+    uuid: b95550a4-318e-427e-9508-68eeac1c9428
+    type_id: 13
+  - id: &to_sms_rapidpro_for_unicef 24158
     name: TO Sms Rapidpro For Unicef
-    uuid: b5705a8c-60af-487c-90ca-153c6992cea0
-    type_id: 14
-  - id: &to_special_services 6960
+    uuid: abcac447-a31e-47e5-9822-54d0e1a7d40e
+    type_id: 13
+  - id: &to_special_services 24414
     name: TO Special Services
-    uuid: c1e3646c-5512-4b86-98b9-5da494c6a8f9
-    type_id: 14
+    uuid: ff192894-e702-4217-98fd-ccce259b85b3
+    type_id: 13
 network_prefixes:
 # Fixed Prefixes
   - id: 54931
     prefix: '67650'
     number_min_length: 8
     number_max_length: 8
-    uuid: b69b8f2e-d505-4714-995b-f1d880dc6007
+    uuid: 768b09e7-110e-4ac9-9754-c5d499f88866
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_eua_island_region
   - id: 95224
     prefix: '67660'
     number_min_length: 8
     number_max_length: 8
-    uuid: 3e87954e-915b-4b95-bff8-4e6002ac4c2b
+    uuid: a5b4f244-1849-4b81-b072-957cd248f92e
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_haapai_islands_region
   - id: 148667
     prefix: '67669'
     number_min_length: 8
     number_max_length: 8
-    uuid: 4716fbaf-0ede-4073-9630-f1650bf23d99
+    uuid: 5ca72d60-1fd9-4b20-be38-6450297462b6
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_haapai_islands_region
   - id: 150244
     prefix: '67670'
     number_min_length: 8
     number_max_length: 8
-    uuid: 313882d0-f283-48b9-b355-3fb7c9cb4b73
+    uuid: 1e72330e-127c-48e9-b00c-b40abe4c3218
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vavau_islands_region
   - id: 164006
     prefix: '67671'
     number_min_length: 8
     number_max_length: 8
-    uuid: fc8fffe2-ee26-4d81-80dd-6e87e2f2d099
+    uuid: 29134387-5e57-48a6-8f27-d4f8f03f8f71
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vavau_islands_region
   - id: 172539
     prefix: '67672'
     number_min_length: 8
     number_max_length: 8
-    uuid: db252837-27fd-4190-b998-12c62626ba10
+    uuid: bdba2e98-5d6f-441b-9afd-176a6c71b024
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vavau_islands_region
   - id: 182876
     prefix: '67674'
     number_min_length: 8
     number_max_length: 8
-    uuid: aa6dfea9-c0b8-407a-bcdb-469aa023fcb6
+    uuid: df5f2b2f-e701-4cb2-88d8-66ba7afc61ad
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vavau_islands_region
   - id: 185885
     prefix: '67675'
     number_min_length: 8
     number_max_length: 8
-    uuid: ca7bfa95-a667-401b-b8e2-8f710865fc9f
+    uuid: c3cf8e86-f6a7-45a5-aea5-5d698ffdd7aa
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vavau_islands_region
   - id: 188000
     prefix: '67676'
     number_min_length: 8
     number_max_length: 8
-    uuid: 641b2e50-c977-4039-a2c5-37e583ba02c2
+    uuid: 8b60c13a-c603-40df-ad1a-bbf2d1308d21
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vavau_islands_region
   - id: 206668
     prefix: '67679'
     number_min_length: 8
     number_max_length: 8
-    uuid: 6e60f5f8-8a3e-4b53-aec1-044750d837b5
+    uuid: 2cb196fa-c7ea-47f9-a878-8dca886e97af
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vavau_islands_region
   - id: 207796
     prefix: '67680'
     number_min_length: 8
     number_max_length: 8
-    uuid: e7f91789-b31f-48f2-a978-8112c784747f
+    uuid: 42278c4f-d0f4-4c36-9f7d-6308a6eaef32
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_niuas_region
   - id: 267148
     prefix: '67620'
     number_min_length: 8
     number_max_length: 8
-    uuid: 463d8699-adb5-4523-aec7-e545699750ab
+    uuid: dad93296-8be1-402b-9e53-92f927932623
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 274246
     prefix: '67621'
     number_min_length: 8
     number_max_length: 8
-    uuid: 54ecb82c-321b-401b-ab4d-d389c74a1c7b
+    uuid: 230ee241-d793-4763-9667-10ca2c072cf6
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 282801
     prefix: '67622'
     number_min_length: 8
     number_max_length: 8
-    uuid: 654108dc-936b-49ea-a6cc-677559d10265
+    uuid: b50e68c9-df5a-4c0c-b5ca-7d710d60b30b
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 286643
     prefix: '67623'
     number_min_length: 8
     number_max_length: 8
-    uuid: b8c7deb6-b0ae-471c-8382-8bab9be0deea
+    uuid: 794c782a-87e9-4f8f-adab-11edcb0d3171
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 294335
     prefix: '67624'
     number_min_length: 8
     number_max_length: 8
-    uuid: 42b2c044-d944-4f6a-a806-d38e1fc1f564
+    uuid: e90688b0-1231-444b-aca2-2b0c4f151e7d
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 299808
     prefix: '67626'
     number_min_length: 8
     number_max_length: 8
-    uuid: 43bbe477-a5a7-4a00-96d2-b2ca450d0928
+    uuid: 4a2ad16e-48ed-445c-8294-bd2cb0ee1e1a
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 301432
     prefix: '67627'
     number_min_length: 8
     number_max_length: 8
-    uuid: 8508f567-fcec-40ba-b728-6e215f5a5065
+    uuid: ad317005-e452-4ef9-9038-d0c0f9305213
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 301981
     prefix: '67625'
     number_min_length: 8
     number_max_length: 8
-    uuid: 7e240bad-25a3-43f8-ab0b-e9eec8168c96
+    uuid: 10c2278c-51c2-4244-88f0-eecd50fd05a7
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 308511
     prefix: '67629'
     number_min_length: 8
     number_max_length: 8
-    uuid: 2eeda769-2366-44ac-8f5e-9148d53f52fa
+    uuid: fbac66db-e62a-4e94-8434-0022b5649283
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_pea_region
   - id: 309478
     prefix: '67630'
     number_min_length: 8
     number_max_length: 8
-    uuid: e6e3b06c-0ffc-4cb1-9a01-c722244784b3
+    uuid: a7511238-e527-408b-a290-0545f07e6738
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_pea_region
   - id: 313361
     prefix: '67628'
     number_min_length: 8
     number_max_length: 8
-    uuid: 508d55e3-4767-421b-8a83-b215c892d165
+    uuid: 7eab66d9-9a34-41b9-b48e-5eb627bb09cf
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nukualofa_region
   - id: 321186
     prefix: '67631'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0b4b7ad0-37ca-46b1-97f7-383a37b81afb
+    uuid: c62bd9a3-1c49-4826-8633-edfabeab4226
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_mua_region
   - id: 327291
     prefix: '67632'
     number_min_length: 8
     number_max_length: 8
-    uuid: 02440bee-4239-48d2-b2f2-e57060bcf24c
+    uuid: af34f16d-ede5-4303-b4e3-e7a1117c1680
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_mua_region
   - id: 337299
     prefix: '67633'
     number_min_length: 8
     number_max_length: 8
-    uuid: badc89ed-6489-4e36-8c0a-a4faec27a350
+    uuid: 8bed5d6d-070f-41c0-9bdd-649e0e8b37fd
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_kolonga_region
   - id: 340486
     prefix: '67634'
     number_min_length: 8
     number_max_length: 8
-    uuid: 6dd24aec-90af-4fb5-97d8-e10fdd13e7dc
+    uuid: d4f8aed1-9369-45e5-9bad-ebbd12a65551
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_kolonga_region
   - id: 345953
     prefix: '67636'
     number_min_length: 8
     number_max_length: 8
-    uuid: a2904dac-091f-460d-9dd7-5b6752cfbf29
+    uuid: d2e5bed4-faeb-41d7-9070-4cf49db9bca2
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nakolo_region
   - id: 347712
     prefix: '67638'
     number_min_length: 8
     number_max_length: 8
-    uuid: 3a12c25e-421b-4fdb-a72b-212d4737a4f1
+    uuid: f51d7fe8-bdb9-483e-b994-5781e8c4186e
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vaini_region
   - id: 349899
     prefix: '67640'
     number_min_length: 8
     number_max_length: 8
-    uuid: 6a8c1827-63a2-4be1-a0fa-fc1edcb5a49e
+    uuid: de8abc37-627a-4f0f-9b1e-3a471a5e7cef
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_kolovai_region
   - id: 352249
     prefix: '67635'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0faa4b04-cf4f-4674-ad31-0bddfe274cdd
+    uuid: dcfbc04f-7a61-477a-8d08-d2c15995f6ae
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_nakolo_region
   - id: 355765
     prefix: '67637'
     number_min_length: 8
     number_max_length: 8
-    uuid: ca0d5930-3e47-43cf-8d4a-13283151a279
+    uuid: 1bcbd25c-2869-49e2-9570-eccc4e7b7902
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_vaini_region
   - id: 362541
     prefix: '67641'
     number_min_length: 8
     number_max_length: 8
-    uuid: 69115365-24db-41ec-98dc-1f4a628b4787
+    uuid: f722f1c5-1729-4b1a-a80a-8a43e7977f4c
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_masilamea_region
   - id: 367951
     prefix: '67643'
     number_min_length: 8
     number_max_length: 8
-    uuid: f45a1740-5dff-418e-8b6a-3e37f703499d
+    uuid: 48bab5fe-9c67-4782-8e37-eb43b82e1da5
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_matangiake_region
   - id: 377190
     prefix: '67642'
     number_min_length: 8
     number_max_length: 8
-    uuid: aafe4cab-0dc7-447b-88c5-321984b8b0fb
+    uuid: c295948c-2553-4a6e-96e7-709cd6aad0a7
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_masilamea_region
   - id: 435890
     prefix: '67685'
     number_min_length: 8
     number_max_length: 8
-    uuid: 2b718ddf-cf42-4c8e-a00e-1f544083f806
+    uuid: d1c9dd7f-f27d-4c01-a793-f50ee834d538
     country_id: *to
-    network_id: *to_fixed
+    network_id: *to_niuas_region
 # Mobile Prefixes
   - id: 73312
     prefix: '676540'
     number_min_length: 10
     number_max_length: 10
-    uuid: d2ddb03d-98b9-4bba-bb4d-4b4627669d09
+    uuid: 51d028ab-1a91-4e6f-b81d-f39f563278bb
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 74124
     prefix: '676541'
     number_min_length: 10
     number_max_length: 10
-    uuid: d560a884-687a-4934-a9e9-16b07970e50f
+    uuid: 7e363b38-3a09-4c66-b341-d86a8363f731
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 77505
     prefix: '676542'
     number_min_length: 10
     number_max_length: 10
-    uuid: a935113b-23cd-4f3a-a3a0-f4903a7fe25a
+    uuid: 76b1ae91-daf8-4467-8d74-a6b797e7eaf8
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 77527
     prefix: '676543'
     number_min_length: 10
     number_max_length: 10
-    uuid: cd9004ad-79f3-4ca0-8214-295cfd77f9da
+    uuid: 91a14c14-ebaa-458c-ac48-96749180350e
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 77543
     prefix: '676544'
     number_min_length: 10
     number_max_length: 10
-    uuid: ed73fd93-edc9-40ba-a542-dac4445500c6
+    uuid: 16049c3a-2e44-4b65-8608-ec3f12c1dde9
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 77585
     prefix: '676545'
     number_min_length: 10
     number_max_length: 10
-    uuid: d2e97cd6-aad0-468c-af50-1267b8271e73
+    uuid: 6c5648a3-a904-4659-82e8-0c1e59b4b72a
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 77610
     prefix: '676546'
     number_min_length: 10
     number_max_length: 10
-    uuid: ac507a22-7567-42fe-97f6-fb1d971c562c
+    uuid: 5980d044-5d84-4b42-b863-695be3f87e18
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 77630
     prefix: '676547'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5677399e-898e-4c53-8db4-88eab9628244
+    uuid: f25f08c4-de18-4d7a-a595-7094946045de
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 77649
     prefix: '676548'
     number_min_length: 10
     number_max_length: 10
-    uuid: deedd1bd-f5b5-4c0e-b613-6c485276f494
+    uuid: 84c327fa-7231-4e55-8e72-e35d8c1b9777
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 78089
     prefix: '676549'
     number_min_length: 10
     number_max_length: 10
-    uuid: ed34fbb0-633d-4cb0-8122-ea8e74312a38
+    uuid: 62a3e0f7-efe5-4671-83b7-47d66cb18a1c
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 86673
     prefix: '676550'
     number_min_length: 10
     number_max_length: 10
-    uuid: a31aae60-2142-49f8-bd49-f742c495b5db
+    uuid: 5924edb6-af29-4beb-95cb-c2b3760bd176
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 86699
     prefix: '676551'
     number_min_length: 10
     number_max_length: 10
-    uuid: b4b04919-1392-43d0-8787-d302423954f8
+    uuid: 2510b8b3-f008-4f4e-8493-52a2d6dd92aa
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 86974
     prefix: '676552'
     number_min_length: 10
     number_max_length: 10
-    uuid: f09b017c-753f-48be-a7de-b29d5357fc4a
+    uuid: 90b32898-5659-490c-af95-0309e4c483d0
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 87012
     prefix: '676553'
     number_min_length: 10
     number_max_length: 10
-    uuid: d4de905f-3eb3-41a4-8b17-7e1ab3991cb7
+    uuid: a8abbde6-facd-4db7-8d05-700b1a681b38
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 87031
     prefix: '676554'
     number_min_length: 10
     number_max_length: 10
-    uuid: 52b8a323-8323-4509-b93d-da07fc7c4f86
+    uuid: 1b47d531-a171-40ba-b3e9-c1e27334c07c
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 87059
     prefix: '676555'
     number_min_length: 10
     number_max_length: 10
-    uuid: 84fe0422-794f-421c-b276-612012514744
+    uuid: 16edbea1-c2c9-4a80-b2aa-32238719e3cf
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 87078
     prefix: '676556'
     number_min_length: 10
     number_max_length: 10
-    uuid: efcb37ee-debf-4cec-8f6a-b2c8dc13665e
+    uuid: 57e41bc8-96cb-4acb-bc71-7bb5f20a2e83
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 87096
     prefix: '676557'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9293e5d1-0587-4c15-a838-a78c444a9f4f
+    uuid: bc238c45-fc95-43d1-9a3b-ed5325e05cba
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 87150
     prefix: '676558'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5a104e59-992a-4635-bf3e-2aca3979717f
+    uuid: f4514f34-f250-49e4-ba0d-429495dca220
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 87164
     prefix: '676559'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9f512f60-1976-4ca9-b141-132abec41632
+    uuid: 419925a4-5d06-419f-83f3-cf9190cee836
     country_id: *to
     network_id: *to_wantok_mobile
   - id: 114642
     prefix: '676632'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4909aaa1-971b-477e-83fb-4de1933e7ea9
+    uuid: a999eb7a-5436-4a9e-9a27-8d6cd1264ecb
     country_id: *to
     network_id: *to_mobile
   - id: 148824
     prefix: '676690'
     number_min_length: 10
     number_max_length: 10
-    uuid: 75f555f5-ab0c-492e-a272-a552bd4d250b
+    uuid: 8dec75fb-e10d-48ad-a600-75ab8475f574
     country_id: *to
     network_id: *to_digicel_mobile
   - id: 151801
     prefix: '676681'
     number_min_length: 10
     number_max_length: 10
-    uuid: b6829224-0d92-4dfc-83e5-872e8e2da242
+    uuid: 466173c1-01f6-42df-b1b7-f59195a67553
     country_id: *to
     network_id: *to_digicel_mobile
   - id: 152739
     prefix: '676685'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3cd79006-1a56-4aaa-b5bb-ee35a38657b5
+    uuid: 337d4e2b-de40-4557-b004-8fb59c2837f6
     country_id: *to
     network_id: *to_digicel_mobile
   - id: 168587
     prefix: '676720'
     number_min_length: 10
     number_max_length: 10
-    uuid: c0c70638-6d01-4f03-803f-7831daf293f2
+    uuid: c9589c0e-cbf0-44cc-a46b-c925128bf1bd
     country_id: *to
     network_id: *to_u_call_mobile
   - id: 175900
     prefix: '676730'
     number_min_length: 10
     number_max_length: 10
-    uuid: 94ca5445-b32a-4f97-9866-3b2535b938c3
+    uuid: 51761dbd-6c6d-47a6-b2ec-c82962bf808a
     country_id: *to
     network_id: *to_u_call_mobile
   - id: 183427
     prefix: '676740'
     number_min_length: 10
     number_max_length: 10
-    uuid: ed2b17c5-22bc-4b85-b11d-0b7c03d47d4d
+    uuid: 648a3f8d-6e34-4f19-8e08-13fc476dd7de
     country_id: *to
     network_id: *to_u_call_mobile
   - id: 186330
     prefix: '676750'
     number_min_length: 10
     number_max_length: 10
-    uuid: dca132d9-95ad-425c-abae-12d25404f037
+    uuid: fd0ddfff-5a6d-4964-9b4f-2981399e1df8
     country_id: *to
     network_id: *to_u_call_mobile
   - id: 188703
     prefix: '676760'
     number_min_length: 10
     number_max_length: 10
-    uuid: a8a19fe4-3af1-4fb4-ac4d-0c36dc3ddfff
+    uuid: e43e5b02-7247-4dbf-8c8c-9273ddcc2bbe
     country_id: *to
     network_id: *to_u_call_mobile
   - id: 192574
     prefix: '676770'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2fbdce2f-6a2e-4f74-a982-9cf753f48bd5
+    uuid: cbf0c511-980a-4d1a-87a4-eebbe922aaba
     country_id: *to
     network_id: *to_u_call_mobile
   - id: 198703
     prefix: '676780'
     number_min_length: 10
     number_max_length: 10
-    uuid: bcd3d5e7-a90e-4293-9530-799e929af017
+    uuid: ce90c12f-de47-4c9f-a27c-d942b4868204
     country_id: *to
     network_id: *to_u_call_mobile
   - id: 429045
     prefix: '676860'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7460e1e8-8804-444e-89a7-1e949ff11703
+    uuid: 3ae16c5d-460f-4aaa-8a8b-d17f2084c5ca
     country_id: *to
     network_id: *to_digicel_mobile
   - id: 433665
     prefix: '676840'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5e9fe3c8-1793-4809-87a7-ab1baa6aeda6
+    uuid: bd92a7a1-4572-4d8c-bbc8-90227a8b0c15
     country_id: *to
     network_id: *to_digicel_mobile
   - id: 441409
     prefix: '676870'
     number_min_length: 10
     number_max_length: 10
-    uuid: dc673575-9ddd-4b4b-b2db-197d046cdbac
+    uuid: d91d6dcf-8411-4492-9aaa-29616fc305c4
     country_id: *to
     network_id: *to_digicel_mobile
   - id: 451249
     prefix: '676880'
     number_min_length: 10
     number_max_length: 10
-    uuid: 51ab7efd-9187-45da-9f44-88b304b9d52a
+    uuid: 1ff1312e-0206-4942-a069-5e2197a08de0
     country_id: *to
     network_id: *to_digicel_mobile
   - id: 451764
     prefix: '676890'
     number_min_length: 10
     number_max_length: 10
-    uuid: ee75c0d5-da16-4651-b2aa-07f8662b1bb6
+    uuid: acf42b72-616c-4406-a68e-553e29a8ca61
     country_id: *to
     network_id: *to_digicel_mobile
 # Country code Prefixes
@@ -540,7 +588,7 @@ network_prefixes:
     prefix: '676'
     number_min_length: 4
     number_max_length: 100
-    uuid: d982d949-e19e-4991-870b-e76b1879ff5f
+    uuid: db27b785-e793-4df6-8002-a83d882a2ef8
     country_id: *to
     network_id: null
 # Supplementary services Prefixes
@@ -548,20 +596,20 @@ network_prefixes:
     prefix: '6760800'
     number_min_length: 10
     number_max_length: 11
-    uuid: 3caf7932-03af-4a27-bf04-905f2e6b280f
+    uuid: 38cdadde-4a05-4bfe-8539-8144b84035b2
     country_id: *to
     network_id: *to_freephone_services
   - id: 255283
     prefix: '6767'
     number_min_length: 6
     number_max_length: 6
-    uuid: 22d88af7-d6b7-4fab-9f5c-71ea710e37d5
+    uuid: f9db209c-3497-4732-b837-0733bf6b71fd
     country_id: *to
     network_id: *to_sms_rapidpro_for_unicef
   - id: 257145
     prefix: '6769'
     number_min_length: 6
     number_max_length: 6
-    uuid: 79b5f692-fb41-4752-a26b-a13f7b4a18fc
+    uuid: 656db2a9-5a81-47d5-a91a-eee0399fdc5b
     country_id: *to
     network_id: *to_special_services

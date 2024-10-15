@@ -1,47 +1,237 @@
 country_id: &ni 154
 networks:
 # Supplementary services Networks
-  - id: &ni_special_services 5291
+  - id: &ni_special_services 21465
     name: NI Special Services
-    uuid: 23247499-6734-44e1-a8d8-6feba4a732c3
-    type_id: 14
-  - id: &ni_freephone_services 5993
+    uuid: 63ac5b5e-5633-4c6c-b557-3705dfac5171
+    type_id: 13
+  - id: &ni_freephone_services 22644
     name: NI Freephone Services
-    uuid: c952eb0d-30df-41c8-a839-cc8ff1f67fe0
-    type_id: 14
-  - id: &ni_value_added_services 6037
+    uuid: 0781e3e4-f4da-454b-ae91-a67769a14df6
+    type_id: 13
+  - id: &ni_value_added_services 22688
     name: NI Value Added Services
-    uuid: d8b368c1-24b5-4dd6-bdc6-0c7d485c613d
-    type_id: 14
+    uuid: 79000ea7-30f7-459e-976e-9df9122628e0
+    type_id: 13
 # Mobile Networks
-  - id: &ni_claro_mobile 5848
+  - id: &ni_claro_mobile 22458
     name: NI Claro Mobile
-    uuid: 29094a0a-8160-4f49-b3df-8c30162127ce
+    uuid: 59d701d8-d48a-4e52-ad47-31dd7cc46a3e
     type_id: 3
-  - id: &ni_mobile 5912
+  - id: &ni_mobile 22544
     name: NI Mobile
-    uuid: 7603c704-51d5-473d-973c-20a5a6b46486
+    uuid: a668a1d9-d6f2-45ec-8e83-395fef94bf41
     type_id: 3
-  - id: &ni_tigo_mobile 6660
+  - id: &ni_tigo_mobile 23945
     name: NI Tigo Mobile
-    uuid: 934f4644-6988-4995-b937-d8e0b233760e
+    uuid: 5c35e17f-15ed-48c3-b3b5-3161433d29d4
     type_id: 3
-  - id: &ni_cootel_mobile 6744
+  - id: &ni_cootel_mobile 24111
     name: NI Cootel Mobile
-    uuid: be51d6d7-aea2-41db-9b4f-7391d36b3658
+    uuid: 17858c5b-97db-4cfd-b10b-4fe35e603d72
     type_id: 3
 # Fixed Networks
-  - id: &ni_fixed 6042
+  - id: &ni_voip_region 22693
+    name: NI Voip Region
+    uuid: 33fadcf6-f964-4bc4-be84-8ab106d83102
+    type_id: 2
+  - id: &ni_fixed 22725
     name: NI Fixed
-    uuid: 4fa950f7-2aca-415d-b1af-5a5afebfc44a
-    type_id: 12
+    uuid: 26e1944c-3938-4497-8e2f-db23dd532ab3
+    type_id: 2
+  - id: &ni_managua_region 22839
+    name: NI Managua Region
+    uuid: 74e627ba-f0ca-423b-bb9c-7b6871265f96
+    type_id: 2
+  - id: &ni_leon_region 22908
+    name: NI Leon Region
+    uuid: 859f1344-26ec-4ab7-b2fb-745fb070a9d1
+    type_id: 2
+  - id: &ni_malpaisillo_region 22920
+    name: NI Malpaisillo Region
+    uuid: a2d0b983-755c-43b4-ab46-8efed9fc51af
+    type_id: 2
+  - id: &ni_poneloya_region 22921
+    name: NI Poneloya Region
+    uuid: b18af4f3-3bf5-446a-a50e-9d7e70c47db1
+    type_id: 2
+  - id: &ni_granada_region 23008
+    name: NI Granada Region
+    uuid: 89601004-98e3-49eb-a1f9-8f64b1850b4a
+    type_id: 2
+  - id: &ni_juigalpa_region 23023
+    name: NI Juigalpa Region
+    uuid: dc0d18f3-97fe-4745-8a75-9a478844a316
+    type_id: 2
+  - id: &ni_la_libertad_santo_domingo_region 23024
+    name: NI La Libertad Santo Domingo Region
+    uuid: 93f8b352-3298-4960-b1ac-3fe86a9c8407
+    type_id: 2
+  - id: &ni_muelle_de_los_bueyes_region 23025
+    name: NI Muelle De Los Bueyes Region
+    uuid: a0ebb923-9fd9-4789-91c4-507696bee1c5
+    type_id: 2
+  - id: &ni_la_gateada_villa_sandino_region 23027
+    name: NI La Gateada Villa Sandino Region
+    uuid: e1a9e4ef-2349-4873-8246-79c1e0a81719
+    type_id: 2
+  - id: &ni_el_rama_region 23028
+    name: NI El Rama Region
+    uuid: c0a69b61-1321-4590-951c-f15d31191a5b
+    type_id: 2
+  - id: &ni_acoyapa_region 23029
+    name: NI Acoyapa Region
+    uuid: 687f1032-a051-4057-8e49-515a154c0dcb
+    type_id: 2
+  - id: &ni_santo_tomas_region 23030
+    name: NI Santo Tomas Region
+    uuid: 55c301e2-a56c-4e9d-8808-593bc77f3815
+    type_id: 2
+  - id: &ni_masatepe_nandasmo_region 23033
+    name: NI Masatepe Nandasmo Region
+    uuid: 321fe811-78d8-430e-b3a7-cda9a2226e7a
+    type_id: 2
+  - id: &ni_dolores_el_rosario_jinotepe_santa_teresa_wisquiliapa_region 23038
+    name: NI Dolores El Rosario Jinotepe Santa Teresa Wisquiliapa Region
+    uuid: d698c626-9fe6-47d1-8ce3-93a7a7bed239
+    type_id: 2
+  - id: &ni_diriamba_region 23039
+    name: NI Diriamba Region
+    uuid: c4a1df5e-6952-47af-bb7d-fea4b7d097eb
+    type_id: 2
+  - id: &ni_san_marcos_region 23040
+    name: NI San Marcos Region
+    uuid: 861308e0-96fc-42a7-8a95-11acc3a5d076
+    type_id: 2
+  - id: &ni_boaco_empalme_de_boaco_remates_san_lorenzo_san_jose_santa_lucia_teustepe_region 23049
+    name: NI Boaco Empalme De Boaco Remates San Lorenzo San Jose Santa Lucia Teustepe
+      Region
+    uuid: bec0a7ca-6215-41bd-9026-715dc77db73a
+    type_id: 2
+  - id: &ni_camoapa_region 23054
+    name: NI Camoapa Region
+    uuid: 24f8a758-ea99-48f5-91fe-0ec3d12f7df8
+    type_id: 2
+  - id: &ni_nandaime_region 23061
+    name: NI Nandaime Region
+    uuid: b732415f-aef8-4dff-9746-36de5cc724d7
+    type_id: 2
+  - id: &ni_belen_buenos_aires_cardenas_la_virgen_popoyuapa_potosi_rivas_san_jorge_tola_region 23062
+    name: NI Belen Buenos Aires Cardenas La Virgen Popoyuapa Potosi Rivas San Jorge
+      Tola Region
+    uuid: 56a7b595-bfec-4a5b-963c-6e673d5a28fa
+    type_id: 2
+  - id: &ni_penas_blancas_sapoa_region 23063
+    name: NI Penas Blancas Sapoa Region
+    uuid: 6f0eff61-821e-44c3-85bd-d87b4ad4d31c
+    type_id: 2
+  - id: &ni_san_juan_del_sur_region 23064
+    name: NI San Juan Del Sur Region
+    uuid: ba02de38-8035-4795-abd3-4f97852d27f5
+    type_id: 2
+  - id: &ni_moyogalpa_region 23065
+    name: NI Moyogalpa Region
+    uuid: c195db28-2249-4233-8999-e0d34031bfb1
+    type_id: 2
+  - id: &ni_bluefields_laguna_de_perla_region 23066
+    name: NI Bluefields Laguna De Perla Region
+    uuid: 7792b390-e107-40ae-95f1-ddae34f7f7fc
+    type_id: 2
+  - id: &ni_nueva_guinea_region 23067
+    name: NI Nueva Guinea Region
+    uuid: 95dc3a22-98ae-4437-b60a-add995e0dd29
+    type_id: 2
+  - id: &ni_corn_island_region 23068
+    name: NI Corn Island Region
+    uuid: 25ce1d8c-417c-4d31-be70-2720dcd3b1f0
+    type_id: 2
+  - id: &ni_el_bluff_region 23069
+    name: NI El Bluff Region
+    uuid: 6537335c-f1d9-472d-817e-61374060e519
+    type_id: 2
+  - id: &ni_san_carlos_region 23071
+    name: NI San Carlos Region
+    uuid: 84eb4b31-008c-4624-bbb0-cab3bd048e1e
+    type_id: 2
+  - id: &ni_esteli_region 23122
+    name: NI Esteli Region
+    uuid: 4078d4d6-b644-4022-be73-0ef590f8ffa4
+    type_id: 2
+  - id: &ni_condega_la_trinidad_region 23129
+    name: NI Condega La Trinidad Region
+    uuid: c68a3688-1931-401b-a10d-5eba2e45f09d
+    type_id: 2
+  - id: &ni_san_nicolas_region 23130
+    name: NI San Nicolas Region
+    uuid: baef79bd-ba67-4daa-8a31-b2d8a05de70d
+    type_id: 2
+  - id: &ni_el_tuma_esquipulas_matagalpa_san_dionisio_san_ramon_region 23146
+    name: NI El Tuma Esquipulas Matagalpa San Dionisio San Ramon Region
+    uuid: 827e9177-7469-4950-bd1d-75fbd561d27a
+    type_id: 2
+  - id: &ni_la_dalia_region 23147
+    name: NI La Dalia Region
+    uuid: 85100a30-d0dd-4820-9c9a-d5bfb36238e4
+    type_id: 2
+  - id: &ni_chaguitillo_sebaco_region 23148
+    name: NI Chaguitillo Sebaco Region
+    uuid: 9f197058-6947-4e1e-9250-c67e421ea194
+    type_id: 2
+  - id: &ni_ciudad_dario_terrabona_region 23149
+    name: NI Ciudad Dario Terrabona Region
+    uuid: 6206f6a9-5343-43c0-9a8c-25f6a5772804
+    type_id: 2
+  - id: &ni_muy_muy_region 23150
+    name: NI Muy Muy Region
+    uuid: 3e48b637-3d0e-45e8-9e0f-92107e65cf75
+    type_id: 2
+  - id: &ni_rio_blanco_region 23151
+    name: NI Rio Blanco Region
+    uuid: f1365c3e-37cc-459b-9210-12004c116ff6
+    type_id: 2
+  - id: &ni_matiguas_region 23152
+    name: NI Matiguas Region
+    uuid: ffea4098-7658-4545-b070-8c99e0572418
+    type_id: 2
+  - id: &ni_san_isidro_region 23153
+    name: NI San Isidro Region
+    uuid: 414f7cb8-c76b-40bc-b73d-323561cf2b09
+    type_id: 2
+  - id: &ni_jinotega_region 23155
+    name: NI Jinotega Region
+    uuid: a001585a-0962-4b9d-99e9-379474015b88
+    type_id: 2
+  - id: &ni_la_concordia_san_rafael_del_norte_region 23156
+    name: NI La Concordia San Rafael Del Norte Region
+    uuid: 0514f6b6-1093-4a6e-8d5b-01711f355331
+    type_id: 2
+  - id: &ni_yali_region 23157
+    name: NI Yali Region
+    uuid: cd051807-efdc-4eca-bb23-546284166d9b
+    type_id: 2
+  - id: &ni_puerto_cabeza_region 23159
+    name: NI Puerto Cabeza Region
+    uuid: b2e0e86e-1eb4-4939-a221-925a5bd900dc
+    type_id: 2
+  - id: &ni_bonanza_region 23160
+    name: NI Bonanza Region
+    uuid: cba7ca48-0a9c-4d43-ba69-4947f606cfbe
+    type_id: 2
+  - id: &ni_rosita_region 23161
+    name: NI Rosita Region
+    uuid: 1566804d-e8ef-4ce7-a235-9151b2d98996
+    type_id: 2
+  - id: &ni_siuna_region 23162
+    name: NI Siuna Region
+    uuid: 7ad6a222-beac-45b3-858c-17b77dda4217
+    type_id: 2
 network_prefixes:
 # Country code Prefixes
   - id: 242068
     prefix: '505'
     number_min_length: 4
     number_max_length: 100
-    uuid: 361590eb-8269-446f-b9c3-cfbc54c04473
+    uuid: b28dba3c-9dc2-4917-a99d-76015d4d41ce
     country_id: *ni
     network_id: null
 # Supplementary services Prefixes
@@ -49,21 +239,21 @@ network_prefixes:
     prefix: '5051'
     number_min_length: 6
     number_max_length: 7
-    uuid: b335f7ed-e1a7-4e9d-8b0a-e601cc2b779d
+    uuid: 4f0fde0a-a30f-410e-8fd8-4aa8588676db
     country_id: *ni
     network_id: *ni_special_services
   - id: 247301
     prefix: '5051800'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7ca2808a-c979-4049-a87e-3b4b14f6c116
+    uuid: 143f353b-3fe6-4edd-8dfe-0320c7fdbdd5
     country_id: *ni
     network_id: *ni_freephone_services
   - id: 247357
     prefix: '5051900'
     number_min_length: 11
     number_max_length: 11
-    uuid: 699812de-6833-41af-8ff8-7ba7b2414c99
+    uuid: 04af837f-014f-45cb-886f-5dc7a0aed478
     country_id: *ni
     network_id: *ni_value_added_services
 # Mobile Prefixes
@@ -71,546 +261,546 @@ network_prefixes:
     prefix: '505578'
     number_min_length: 11
     number_max_length: 11
-    uuid: 20047e94-6723-40e1-ba11-367ac6455e06
+    uuid: 0f45235f-b10c-4f88-be27-6c22d2a9caeb
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 245168
     prefix: '505580'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0d3a9d51-8c6b-421b-bf31-79b11c985f20
+    uuid: a50e7137-3ce9-4e4e-88a9-dd40101c495d
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 245224
     prefix: '505581'
     number_min_length: 11
     number_max_length: 11
-    uuid: c8e7309f-f9a6-4e48-9549-8a4b0944db5a
+    uuid: c0f455af-74be-4169-9489-629d828cfc1f
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 245226
     prefix: '505582'
     number_min_length: 11
     number_max_length: 11
-    uuid: 64f4c5df-1634-4cf3-8f22-5f4822d3270c
+    uuid: 1c6bb9bc-3a9d-47fb-b9e1-aa96ca25b87b
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 245228
     prefix: '505583'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c9f2c98-1d10-44ac-9ba8-8ee5b46dbbb5
+    uuid: 6498e027-45bc-4226-889c-333511245d81
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 245230
     prefix: '505584'
     number_min_length: 11
     number_max_length: 11
-    uuid: c36d5d93-ac72-4cec-b6f0-7b64f18e9d5a
+    uuid: 7d94a042-b000-4f0c-96ad-0f33c079c8ae
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 245414
     prefix: '5056'
     number_min_length: 11
     number_max_length: 11
-    uuid: dfb0726c-fcc2-4135-ac38-6a1ad0f8a213
+    uuid: 2ec45529-bbfd-40c5-ad76-e7d7057a852a
     country_id: *ni
     network_id: *ni_mobile
   - id: 249594
     prefix: '5055'
     number_min_length: 11
     number_max_length: 11
-    uuid: 40674f47-fda4-491a-8f02-4758daefc418
+    uuid: e1e3c993-ca78-4a1d-9853-449636b4fc18
     country_id: *ni
     network_id: *ni_mobile
   - id: 250299
     prefix: '505574'
     number_min_length: 11
     number_max_length: 11
-    uuid: f89e65a7-9af4-4a93-95bd-81426f46555c
+    uuid: 7a67a6b3-652a-4edf-9e19-6e7794243f21
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253095
     prefix: '5058'
     number_min_length: 11
     number_max_length: 11
-    uuid: 20f8ab1f-4266-4460-a1a1-7b51bde8f928
+    uuid: 78cb35f4-5caa-4661-b28d-a1b15af91ce8
     country_id: *ni
     network_id: *ni_mobile
   - id: 253396
     prefix: '505815'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1752b540-db37-439f-bae8-b1d9e10eb427
+    uuid: 7649e75b-0512-49b4-8789-5a20a7210f45
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 253536
     prefix: '505826'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0e1a4088-35cc-4e5f-8a28-c36eadeb1f61
+    uuid: 5cba6755-71af-4318-ae1b-e99a5409e85a
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 253615
     prefix: '505832'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9547b2d1-fc80-48a6-8e9f-153a7a77b823
+    uuid: b32adf52-11d9-482c-9aa4-70b708e99802
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 253629
     prefix: '505833'
     number_min_length: 11
     number_max_length: 11
-    uuid: 944d8ec3-b06b-4a3a-94ba-064503ba2f96
+    uuid: 8b09358e-3f8f-4def-a9e4-406466e0e09d
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253643
     prefix: '505835'
     number_min_length: 11
     number_max_length: 11
-    uuid: 97c6857c-8d9a-4dcf-9a68-98566dab0bb6
+    uuid: 3850e037-5b64-40be-a139-bdfcc49b6299
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253660
     prefix: '505836'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3ddcd399-b36c-4e62-916a-abc385bdae0a
+    uuid: a7fca326-2276-40fd-94f1-c88148608fcd
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253673
     prefix: '505837'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2d768a15-8bc6-4018-a7d0-88d64f440a73
+    uuid: b076b4af-190d-46d8-ae7a-066c4238a445
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 253684
     prefix: '505838'
     number_min_length: 11
     number_max_length: 11
-    uuid: 215e23a5-705b-4f13-a587-5bb00c2bf6f5
+    uuid: cc0a92d6-3543-4b4f-bf73-519eec8dd19a
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 253697
     prefix: '505839'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8ce56873-2827-437c-ac19-2a222cfc3254
+    uuid: 1694ceed-38d8-4475-92b7-f13235d2b729
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 253732
     prefix: '505840'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7cabcfce-59a5-4a0f-94ad-448e9b438ad4
+    uuid: c3f8326e-1ccc-4814-b98e-392fd9c4c2e4
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253747
     prefix: '505841'
     number_min_length: 11
     number_max_length: 11
-    uuid: fece5690-8ca9-45c5-b852-de31f72bb665
+    uuid: 6de12d0a-6290-44a4-8bb8-6e9fbba76ce1
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253762
     prefix: '505842'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a6abda2-efcb-424f-a21f-a88f9d054bc1
+    uuid: ce6b75ae-a92a-45b1-8f6d-82af8837fd64
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253768
     prefix: '505843'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea6a8a24-808c-4862-9834-2f369ad13867
+    uuid: dba92fa8-d0ae-4518-9cda-7a92c5d436ce
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253774
     prefix: '505844'
     number_min_length: 11
     number_max_length: 11
-    uuid: 21bc4d42-100f-423e-8376-d473bec7179d
+    uuid: b37c8455-1ee3-454d-ae90-109272355345
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 253779
     prefix: '505845'
     number_min_length: 11
     number_max_length: 11
-    uuid: a9e4b338-0897-469f-949a-1305470229b5
+    uuid: 812ceba7-d3d3-41e8-bceb-1967c316b8e4
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 253792
     prefix: '505846'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1fc0c765-6bd6-4674-93a1-142913868bc4
+    uuid: ff08a077-142a-4007-81d0-d7556fec358d
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 254825
     prefix: '505688'
     number_min_length: 11
     number_max_length: 11
-    uuid: d3448c75-f1e3-46a5-a5ec-0eacc777ab12
+    uuid: 930efcf7-bbb3-465d-81f5-38264b2606d5
     country_id: *ni
     network_id: *ni_cootel_mobile
   - id: 255265
     prefix: '5057'
     number_min_length: 11
     number_max_length: 11
-    uuid: 22599791-e7b1-4b22-8d80-b51108ffa81f
+    uuid: b1b0e324-fe89-43b0-912c-144b421fd255
     country_id: *ni
     network_id: *ni_mobile
   - id: 255720
     prefix: '505771'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2b2cca7b-5a54-47cd-a0cb-8db00ec6b2a5
+    uuid: 35ca9698-0ec7-4709-a670-69c5145af697
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 255907
     prefix: '505775'
     number_min_length: 11
     number_max_length: 11
-    uuid: 72a6bf6b-d6a9-4bbe-8b94-9f2d8b9e1fa3
+    uuid: b3cdfecf-1809-4ad6-a5a8-e69f63fa4ece
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256281
     prefix: '505787'
     number_min_length: 11
     number_max_length: 11
-    uuid: 62503486-62a1-4b5b-aaa7-a35b3c92c4ae
+    uuid: 7357379f-bda9-4b8c-b35a-99feea18a10b
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256676
     prefix: '505870'
     number_min_length: 11
     number_max_length: 11
-    uuid: 153fb6f5-82e4-4aee-99be-7a8c100538f1
+    uuid: 38f28fa3-1847-4250-b2e7-1307c54975c1
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256692
     prefix: '505871'
     number_min_length: 11
     number_max_length: 11
-    uuid: 725d8c66-9468-45f7-9219-5fb98384f1e4
+    uuid: 268aebf8-c836-437f-9d71-d4ddfb0703ba
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256710
     prefix: '505872'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4299499-65a0-4d91-ada5-19fe49d155d3
+    uuid: 3288828a-c9e4-4a35-b514-ea27a833d21a
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256726
     prefix: '505873'
     number_min_length: 11
     number_max_length: 11
-    uuid: f774da1c-917c-45f5-a315-e44952042f97
+    uuid: 624a057e-8b2a-489a-8d85-06c9b70bdb4a
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256741
     prefix: '505874'
     number_min_length: 11
     number_max_length: 11
-    uuid: 86871206-9275-47e4-8380-b98d2096affa
+    uuid: 12ab9615-c49a-4cae-9741-c457f67bed28
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256756
     prefix: '505875'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55ea2981-5e29-42ae-84a7-c54023deb5aa
+    uuid: 4e1d8bcb-20a4-4274-8522-ab3a8c8a8727
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256770
     prefix: '505876'
     number_min_length: 11
     number_max_length: 11
-    uuid: 25d56b0a-83e3-4a28-8ff7-92c0b145ab8c
+    uuid: f01eaa11-fe91-4276-9e03-85773ab5904d
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256786
     prefix: '505877'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b5b3fdf-16f3-466a-8ba9-03188dc0fc07
+    uuid: 0604cdcd-51b0-45e5-b86b-e39b5e3f3c91
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256858
     prefix: '505880'
     number_min_length: 11
     number_max_length: 11
-    uuid: ac778f12-5011-4fbc-9699-e82ceca5290b
+    uuid: da661b63-78d6-4a5c-90c3-3a1387ce10ca
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256874
     prefix: '505881'
     number_min_length: 11
     number_max_length: 11
-    uuid: 372f6d31-4621-4711-ad4b-1da80103f058
+    uuid: ee6ff216-9043-4921-8861-5bafeeb578d2
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256898
     prefix: '505882'
     number_min_length: 11
     number_max_length: 11
-    uuid: 359d90f6-fc06-47f5-aa60-4223ba613e6a
+    uuid: 683d6ab9-b13d-4a12-9032-2aafc170951d
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256915
     prefix: '505883'
     number_min_length: 11
     number_max_length: 11
-    uuid: e0b3a2eb-9af2-49f5-97d2-53088dd96ce0
+    uuid: 3f72eb12-8031-455b-92a2-25aa73571f2d
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256931
     prefix: '505884'
     number_min_length: 11
     number_max_length: 11
-    uuid: ad90fad3-1905-4f83-8f33-8e056e1ae63c
+    uuid: 7592217c-fafe-4bd9-a35e-f6aa16529ad4
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256943
     prefix: '505885'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5b50cd32-3d5b-4ed3-a91f-319e8353deb3
+    uuid: 1438bc15-9e6b-41b0-a29d-53b79bb155b6
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 256952
     prefix: '505886'
     number_min_length: 11
     number_max_length: 11
-    uuid: f1e8badf-5937-4c14-b7f3-9ec0ea90a74c
+    uuid: bcac521b-7cc1-4e83-849b-6bfb34483a60
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256963
     prefix: '505887'
     number_min_length: 11
     number_max_length: 11
-    uuid: 64e37c12-ec27-4db7-aef4-0b5b6fb294d2
+    uuid: d93ae003-4e9a-482e-b812-a28f9139b3a8
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256971
     prefix: '505888'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0cab1b03-2ef1-4319-9a81-3ade708cad58
+    uuid: ac3eb3ac-ccec-4c9d-872f-595faa982182
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 256977
     prefix: '505889'
     number_min_length: 11
     number_max_length: 11
-    uuid: 12f60a33-1861-41ed-badf-f2841813ecba
+    uuid: a05b93d4-a843-4777-b63f-7972fccc83ee
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 257014
     prefix: '505890'
     number_min_length: 11
     number_max_length: 11
-    uuid: 847af8d4-e87c-4f6b-aa3a-88f9af713e79
+    uuid: da9edd05-b47a-4f05-a1d8-858ad5026feb
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 257047
     prefix: '505891'
     number_min_length: 11
     number_max_length: 11
-    uuid: 05ab9715-b03f-42b5-bbb1-6fef0ecec2fd
+    uuid: 9b3c0c91-3d2f-429b-98a9-5d73d639db36
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 257050
     prefix: '505892'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6369a76c-b714-4e36-9dd3-a4c2a3f063c5
+    uuid: 6d4c3d0c-77d6-414d-83a2-7039e06f6ad9
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 257051
     prefix: '505893'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7d8aa3bd-8cab-4739-97a6-7b4f68ec677e
+    uuid: b7818547-9f38-4a18-a9db-114377448c97
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 257056
     prefix: '505894'
     number_min_length: 11
     number_max_length: 11
-    uuid: 855eb6c6-74ca-4a85-b83c-26eca95aa870
+    uuid: 727a9279-110f-4f47-8e45-1d0487b1891e
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 257064
     prefix: '505895'
     number_min_length: 11
     number_max_length: 11
-    uuid: 014b93fc-4fb1-4107-9d9e-839efda060d3
+    uuid: 35f16d6d-0c32-494e-84c0-2a87780bf4f7
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 257071
     prefix: '505896'
     number_min_length: 11
     number_max_length: 11
-    uuid: 07a376cb-58da-40c4-87b8-37bbd6c18e2a
+    uuid: 69793ddb-99d5-4d4c-800f-19c591367f02
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 257072
     prefix: '505897'
     number_min_length: 11
     number_max_length: 11
-    uuid: 30500db9-4721-42a7-9601-3aade37987b6
+    uuid: 30ac56e3-0337-45a7-ad80-92c2a6accc58
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 257074
     prefix: '505899'
     number_min_length: 11
     number_max_length: 11
-    uuid: 778c9bf4-3a90-402a-bea0-bf7807b31cf6
+    uuid: 2b4aec08-1a02-480d-987d-cc4013bd4aa9
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 263663
     prefix: '505847'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87c565a4-996e-4708-8670-3d04aeb47630
+    uuid: 38f1a70b-7687-4269-8930-5729cd8ef152
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 263668
     prefix: '505848'
     number_min_length: 11
     number_max_length: 11
-    uuid: e4e5d6b8-8d6b-4b3d-9f5c-2ad3f14e3192
+    uuid: d931b85c-220a-4717-bcb8-a6ea4386d361
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 263682
     prefix: '505849'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2feb678a-77d5-4ad2-b30f-3372704e975c
+    uuid: d75872ea-20d3-4000-b9de-7eb5e4b8c70d
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263720
     prefix: '505850'
     number_min_length: 11
     number_max_length: 11
-    uuid: bdaaa0eb-9799-4e81-b675-a6a14562e289
+    uuid: d21e9080-9606-41b6-b1bd-6c98b12b540c
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263735
     prefix: '505851'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0250b34f-e50f-45db-a1ba-9227bc24fc84
+    uuid: 337307aa-3b7d-4691-9aae-7f418584a4a2
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263754
     prefix: '505852'
     number_min_length: 11
     number_max_length: 11
-    uuid: b626b2ce-f447-4040-aeb0-4f1ba51e8e67
+    uuid: 356b5e46-0a1d-463d-8a7e-4d8229107beb
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263769
     prefix: '505853'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5ea8c0b8-3d04-4e15-a796-31cc5702a5fe
+    uuid: c1d81c99-1738-45a8-a947-3abdaa913a74
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263783
     prefix: '505854'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4e72cf4a-fbee-482d-b3b9-4833af415d84
+    uuid: da5415ab-da8c-4284-a098-211ff85a5cfe
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263789
     prefix: '505855'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c44259f-1a04-48f9-824c-d9ee7bc9a79f
+    uuid: 9023f188-e4a9-4d06-a3e3-909bf017169c
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 263831
     prefix: '505859'
     number_min_length: 11
     number_max_length: 11
-    uuid: a3b46b61-042d-4728-b34d-5dbaeead77c6
+    uuid: d776b659-9c1e-4603-b9eb-347ee79e2b44
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 263866
     prefix: '505860'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6555f4b0-5622-44cc-aa3f-daaceed54ac3
+    uuid: e4161524-c803-403d-aa7e-7876717c78cc
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263883
     prefix: '505861'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1079d924-bafb-465e-81d8-22f180ab73d6
+    uuid: faad8222-0c0b-4e10-aff0-17e8b3e76079
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263896
     prefix: '505862'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9b9b1c06-e771-4986-bf47-c1c712e9ea8e
+    uuid: 0d06537c-6562-43a7-98b7-4e270a6d243e
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263908
     prefix: '505863'
     number_min_length: 11
     number_max_length: 11
-    uuid: f6c03cab-8a45-4bf0-9320-b9830ff627c5
+    uuid: 79e8875c-4922-4411-bbb0-dc4db19a518f
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263920
     prefix: '505864'
     number_min_length: 11
     number_max_length: 11
-    uuid: dfd6610c-5901-4be9-a7f6-427ce4935dab
+    uuid: 44fa0e54-45fc-4257-a306-3aec01df26e7
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263933
     prefix: '505865'
     number_min_length: 11
     number_max_length: 11
-    uuid: e3b29fcb-16fb-4a46-836d-7fbdc29f19d0
+    uuid: 3651f6ed-c007-4a1c-9536-b85828c10665
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263947
     prefix: '505866'
     number_min_length: 11
     number_max_length: 11
-    uuid: adc04066-7b16-4f83-96c7-26b76ebb4321
+    uuid: 8b3b9313-40de-4c73-ac4e-0446b4bf5314
     country_id: *ni
     network_id: *ni_claro_mobile
   - id: 263959
     prefix: '505867'
     number_min_length: 11
     number_max_length: 11
-    uuid: d5938c4d-c109-47d0-95bd-a867913d5f38
+    uuid: d28e08ca-eab4-4a52-ab3e-4c99abbefa20
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 263967
     prefix: '505868'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1b41a9b5-5596-44f2-80fc-f173b8da067d
+    uuid: fd2e5991-a0b3-4318-971a-c240d23668f9
     country_id: *ni
     network_id: *ni_tigo_mobile
   - id: 263981
     prefix: '505869'
     number_min_length: 11
     number_max_length: 11
-    uuid: fb5ab784-9435-4082-9585-ca7c2f9b9ee7
+    uuid: aeb618f8-0bea-458b-b67e-e54a47092a48
     country_id: *ni
     network_id: *ni_claro_mobile
 # Fixed Prefixes
@@ -618,335 +808,335 @@ network_prefixes:
     prefix: '5051906'
     number_min_length: 14
     number_max_length: 14
-    uuid: 2878781e-5d10-4ae8-b68e-77d43bf31076
+    uuid: 5a6121c6-c6bc-4b80-a073-f2b39fd57dfa
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_voip_region
   - id: 247426
     prefix: '5052'
     number_min_length: 11
     number_max_length: 11
-    uuid: e852308a-81f4-4824-a3f5-758d0e38213f
+    uuid: 1ad5d27b-6ff3-4cbc-8bb1-8230a31dd79a
     country_id: *ni
     network_id: *ni_fixed
   - id: 247728
     prefix: '50522'
     number_min_length: 11
     number_max_length: 11
-    uuid: a34af1d5-a74c-4be0-9388-a0a8a059860e
+    uuid: e82908be-5bfe-4a2a-a458-f02a62d485c4
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_managua_region
   - id: 247924
     prefix: '50523'
     number_min_length: 11
     number_max_length: 11
-    uuid: cf71f972-296f-4f7b-944e-b88aa3ce3a31
+    uuid: 3ee12b23-5d61-4e2d-9e29-da770abaff1a
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_leon_region
   - id: 247951
     prefix: '50523160'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0f726a6f-2c4e-47e8-af9a-637e38470deb
+    uuid: 1740fe8f-fe3b-4d8e-b4e4-100c7968fa28
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_malpaisillo_region
   - id: 247953
     prefix: '50523170'
     number_min_length: 11
     number_max_length: 11
-    uuid: 75201fe4-ee23-4865-b471-4c0da2b5911a
+    uuid: 13914a06-6eb8-4b56-8b59-3e0f3fd51176
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_poneloya_region
   - id: 248265
     prefix: '50525'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8fd2cfaf-574f-4899-8e55-482846ae7594
+    uuid: e85be53f-94ad-449f-9b39-72c01a063f83
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_granada_region
   - id: 248309
     prefix: '5052512'
     number_min_length: 11
     number_max_length: 11
-    uuid: 13cad1dd-85c6-46d5-a08b-78e800aed1bc
+    uuid: 95449f60-e8c2-4bf5-b76b-5440e99918b4
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_juigalpa_region
   - id: 248310
     prefix: '50525140'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1770ab31-6ab2-41cf-a673-f71155ac9076
+    uuid: 9036f67d-ef7e-4431-8796-1f27db8e69c7
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_la_libertad_santo_domingo_region
   - id: 248311
     prefix: '50525150'
     number_min_length: 11
     number_max_length: 11
-    uuid: c55463d0-c1b4-4987-8f56-87771c6ed06c
+    uuid: f368b57c-d7ad-46a7-9e3f-f2fb2643166c
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_muelle_de_los_bueyes_region
   - id: 248313
     prefix: '50525160'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5d6cd6ba-399e-49f5-b32d-06bcaecec49b
+    uuid: 42268754-c470-4124-89ef-1b7e1ba3c418
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_la_gateada_villa_sandino_region
   - id: 248315
     prefix: '50525170'
     number_min_length: 11
     number_max_length: 11
-    uuid: 878fa563-e8bf-4139-b787-883a7f8e4e91
+    uuid: 66d665fd-8b38-4bed-a88a-441b66781c89
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_el_rama_region
   - id: 248317
     prefix: '50525180'
     number_min_length: 11
     number_max_length: 11
-    uuid: bd7bacd1-9fa4-487f-9ec2-7da5a293452a
+    uuid: aa4eda73-ad96-4097-ab37-fdbf0a96aed1
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_acoyapa_region
   - id: 248320
     prefix: '50525190'
     number_min_length: 11
     number_max_length: 11
-    uuid: 29feeefd-0bdc-4864-8b9a-caeaa758bcd6
+    uuid: 8d561ad9-05ec-40b8-873b-47f898d86821
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_santo_tomas_region
   - id: 248330
     prefix: '5052523'
     number_min_length: 11
     number_max_length: 11
-    uuid: 860e04a9-e0d2-4782-99b2-97c8184e251a
+    uuid: 7388173b-9baf-4ad8-94b5-f641a49e87c8
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_masatepe_nandasmo_region
   - id: 248344
     prefix: '5052532'
     number_min_length: 11
     number_max_length: 11
-    uuid: ad585042-a70b-41ce-9b3b-d22c3bbba4a9
+    uuid: 00868da2-b461-45b7-b3c5-e66281bae047
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_dolores_el_rosario_jinotepe_santa_teresa_wisquiliapa_region
   - id: 248347
     prefix: '5052534'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3875f0a8-f300-45b4-bba3-ba22971e8e5d
+    uuid: 3da42c81-ea2c-4bb9-b24e-f3cc809871c0
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_diriamba_region
   - id: 248349
     prefix: '5052535'
     number_min_length: 11
     number_max_length: 11
-    uuid: f66a2ee1-60d7-4d00-b6be-56acd1269c4b
+    uuid: 0bbf8e9a-5707-4816-959d-c61387f83615
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_san_marcos_region
   - id: 248372
     prefix: '5052542'
     number_min_length: 11
     number_max_length: 11
-    uuid: d958b21b-e9a7-4231-98a7-4c00eabd09ea
+    uuid: bbbf1b0b-24a2-43de-b4ee-98b4c209a0db
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_boaco_empalme_de_boaco_remates_san_lorenzo_san_jose_santa_lucia_teustepe_region
   - id: 248382
     prefix: '50525492'
     number_min_length: 11
     number_max_length: 11
-    uuid: 50f0df07-57d0-4946-897c-2347e7da95c5
+    uuid: 28962f51-f943-4ed2-9fac-27ba3d397c99
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_camoapa_region
   - id: 248413
     prefix: '5052561'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5d6fdd04-e212-4e81-87f5-b84634eacf49
+    uuid: 46488d13-9638-47f1-82e3-fa441ece530b
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_nandaime_region
   - id: 248414
     prefix: '5052563'
     number_min_length: 11
     number_max_length: 11
-    uuid: 42cab782-e959-4da2-9237-64c9758fe2d7
+    uuid: c27c28df-8bc1-498d-8892-479624d86ae6
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_belen_buenos_aires_cardenas_la_virgen_popoyuapa_potosi_rivas_san_jorge_tola_region
   - id: 248415
     prefix: '5052565'
     number_min_length: 11
     number_max_length: 11
-    uuid: c0d2a735-691a-4238-bd1d-55f13d33c532
+    uuid: 68397f76-5f80-48be-ad6f-caf0e7b4e7a6
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_penas_blancas_sapoa_region
   - id: 248416
     prefix: '5052568'
     number_min_length: 11
     number_max_length: 11
-    uuid: 94e83d15-7a72-4ce5-90a5-17f0e422d579
+    uuid: ee773cb1-b4fd-44b8-a244-3615f225908f
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_san_juan_del_sur_region
   - id: 248417
     prefix: '5052569'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8162a2d7-b979-41b5-a548-47c4d7133be9
+    uuid: f683ab21-a676-484d-bbba-ac9767838772
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_moyogalpa_region
   - id: 248423
     prefix: '5052572'
     number_min_length: 11
     number_max_length: 11
-    uuid: ba17fc73-3ede-4c2c-a442-27a65881cc83
+    uuid: 4cbdb6f6-dcc0-4e41-a544-8e3696dab690
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_bluefields_laguna_de_perla_region
   - id: 248424
     prefix: '50525750'
     number_min_length: 11
     number_max_length: 11
-    uuid: d7b6845f-5a23-4bcd-86a9-60daed82c87d
+    uuid: 39790d5d-6789-421e-bf19-8f2fe464af5e
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_nueva_guinea_region
   - id: 248425
     prefix: '50525755'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7d57c90a-8e2d-4870-87cf-1841b2abce69
+    uuid: 88740dcb-afb1-4bfb-accb-a8c5b4341d2d
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_corn_island_region
   - id: 248426
     prefix: '5052577'
     number_min_length: 11
     number_max_length: 11
-    uuid: a15a6500-e68a-4d5e-9c8a-f9a9caa0a508
+    uuid: d1328336-0e87-4155-93b3-e7419694df7e
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_el_bluff_region
   - id: 248435
     prefix: '50525830'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7e016bda-0341-4d11-b71f-a0d91bca42b6
+    uuid: 2e604ca3-8d1a-474e-8485-b5c2de0aef9d
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_san_carlos_region
   - id: 248618
     prefix: '50527'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5701fc34-8c6e-4efd-bab8-1836fefd0214
+    uuid: 489c4e23-e7bb-4f69-bf33-307aafd46aa5
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_esteli_region
   - id: 248638
     prefix: '50527152'
     number_min_length: 11
     number_max_length: 11
-    uuid: ecf1bdd1-ce8c-4611-96fd-047d9a62b6ea
+    uuid: 7eeba7e7-d73d-46b4-984a-0c6ff0d12659
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_condega_la_trinidad_region
   - id: 248640
     prefix: '50527162'
     number_min_length: 11
     number_max_length: 11
-    uuid: b5663084-8521-488d-a3cb-245a993d8a0b
+    uuid: 82ed719f-d29f-4f49-b6a7-7f482488ad1a
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_san_nicolas_region
   - id: 248712
     prefix: '5052772'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9378ee2-50ae-4c9e-8c75-a80ca41d6ce7
+    uuid: ce5b76c1-bf19-4419-8c3a-cbaf2cf4fb1a
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_el_tuma_esquipulas_matagalpa_san_dionisio_san_ramon_region
   - id: 248715
     prefix: '5052774'
     number_min_length: 11
     number_max_length: 11
-    uuid: ecc96068-900b-460a-94a4-be29904b481f
+    uuid: 115a65b2-ed02-4fb8-9094-e5a37a212d91
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_la_dalia_region
   - id: 248717
     prefix: '50527752'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1ccb90b8-a37f-4015-87d8-acdf16f93f13
+    uuid: 97d2f34a-c5be-4cb0-a2f1-f7ff42b622d5
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_chaguitillo_sebaco_region
   - id: 248719
     prefix: '50527762'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3c000a4a-8857-4966-b633-c369dc0471a9
+    uuid: 826a27bd-5ddf-4431-a91b-4aec0430a8a5
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_ciudad_dario_terrabona_region
   - id: 248721
     prefix: '50527772'
     number_min_length: 11
     number_max_length: 11
-    uuid: b3884b92-eca7-4152-8e56-4a3f6d604eba
+    uuid: 2f4c1545-3dba-4def-af5b-53fb2f2cc1f3
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_muy_muy_region
   - id: 248723
     prefix: '50527780'
     number_min_length: 11
     number_max_length: 11
-    uuid: 355fd931-0672-4231-abf1-11bccdaebfe5
+    uuid: 93e27e96-e942-4d2c-8924-bd40487dd61f
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_rio_blanco_region
   - id: 248724
     prefix: '50527781'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8106bcc0-f58c-4ab9-be8e-7dcf49d627dd
+    uuid: 1984c0bf-830a-4417-ba57-e3bcfc9b04e0
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_matiguas_region
   - id: 248726
     prefix: '50527790'
     number_min_length: 11
     number_max_length: 11
-    uuid: c70a6fef-4c3d-45dc-a59b-6154b98603e2
+    uuid: 741a0b0f-b110-4be0-866a-3bbade645749
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_san_isidro_region
   - id: 248733
     prefix: '5052782'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3f33cc6d-3461-494a-88d3-0b4ee18fac33
+    uuid: 4f55362d-bec8-48f3-b341-68fc4f3b674f
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_jinotega_region
   - id: 248735
     prefix: '50527842'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1896051-ef29-44d2-9d76-82eab1d0f759
+    uuid: 0947a7c6-ba71-40cc-85b7-423e1ea11c2d
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_la_concordia_san_rafael_del_norte_region
   - id: 248736
     prefix: '50527853'
     number_min_length: 11
     number_max_length: 11
-    uuid: b690c263-d3ee-42cd-a3ac-71320c9f3eda
+    uuid: e9df8ffa-d781-4285-bceb-919a510f98ab
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_yali_region
   - id: 248741
     prefix: '50527922'
     number_min_length: 11
     number_max_length: 11
-    uuid: 90277f9c-2add-4a47-bc6e-0908bbdd2361
+    uuid: d0a6f353-1f91-4bfb-bdfe-c6b71bdd17ba
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_puerto_cabeza_region
   - id: 248742
     prefix: '50527940'
     number_min_length: 11
     number_max_length: 11
-    uuid: 55c773d8-71ce-4732-89d8-f565df496861
+    uuid: c1aed29e-2ae5-4372-9ef5-47027e6effd4
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_bonanza_region
   - id: 248743
     prefix: '50527941'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4a1c6599-5aef-47c4-ba10-da39f1a604a7
+    uuid: aaf355cc-9b12-4e9a-8662-8d967e3481c1
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_rosita_region
   - id: 248744
     prefix: '50527942'
     number_min_length: 11
     number_max_length: 11
-    uuid: 99df5065-65d7-4762-895b-77a070ac7c3f
+    uuid: ab7c2405-a883-47d7-b06b-2410e4ae484e
     country_id: *ni
-    network_id: *ni_fixed
+    network_id: *ni_siuna_region

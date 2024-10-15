@@ -1,47 +1,75 @@
 country_id: &ki 111
 networks:
 # Supplementary services Networks
-  - id: &ki_special_services 5256
+  - id: &ki_special_services 21430
     name: KI Special Services
-    uuid: 159c6601-ef8d-4f40-8259-846c6eb56a5f
-    type_id: 14
-  - id: &ki_international_operator 5651
+    uuid: d7c521f0-6902-48ba-9ea0-7e4dbed279b7
+    type_id: 13
+  - id: &ki_international_operator 21864
     name: KI International Operator
-    uuid: 4ff0be04-aa17-404a-a3b5-94ff7ec3519d
-    type_id: 14
-  - id: &ki_voip 6365
+    uuid: 6dc6ba4d-bf61-449a-8a94-d9086e6a49f5
+    type_id: 13
+  - id: &ki_voip 23634
     name: KI Voip
-    uuid: 6a0c0b7c-1e90-42fc-b665-11de12dbdd24
-    type_id: 14
-  - id: &ki_virtual_private_network 6366
+    uuid: a36fd53e-a060-401b-97de-7a75c44c3542
+    type_id: 13
+  - id: &ki_virtual_private_network 23635
     name: KI Virtual Private Network
-    uuid: 5c70153c-a90e-4111-998b-42a00760cf75
-    type_id: 14
-  - id: &ki_voice_mail 6862
+    uuid: 5f269712-cfe7-416f-9092-f4a9da40845a
+    type_id: 13
+  - id: &ki_voice_mail 24251
     name: KI Voice Mail
-    uuid: e7113a11-d43d-4f2d-a8cc-b14d952585c2
-    type_id: 14
+    uuid: 4317f03d-88b6-4146-b54a-43d2cd8f2d22
+    type_id: 13
 # Mobile Networks
-  - id: &ki_ocean_link_mobile 6228
+  - id: &ki_ocean_link_mobile 23439
     name: KI Ocean Link Mobile
-    uuid: 6888d8e9-be3c-4d17-9ec1-a5882f2e8dd1
+    uuid: d17a9984-1a9a-4f1e-8525-4b6cdab79270
     type_id: 3
-  - id: &ki_frigatenet_mobile 6341
+  - id: &ki_frigatenet_mobile 23607
     name: KI Frigatenet Mobile
-    uuid: 7c7a490f-ef0c-47a2-951b-edb8e1c045b7
+    uuid: a6c664c9-f6c8-448b-a20c-0c9136a61aff
     type_id: 3
 # Fixed Networks
-  - id: &ki_fixed 6275
-    name: KI Fixed
-    uuid: c5d979ce-620c-4e99-8a59-4d2e19bd3d8d
-    type_id: 12
+  - id: &ki_bairiki_region 23515
+    name: KI Bairiki Region
+    uuid: 3d5a3b11-b2a1-4463-a467-5d5be4d2f3f5
+    type_id: 2
+  - id: &ki_betio_region 23521
+    name: KI Betio Region
+    uuid: 2502b11f-eccd-4f10-b104-46be3a098ee7
+    type_id: 2
+  - id: &ki_bikenibeu_region 23524
+    name: KI Bikenibeu Region
+    uuid: 022eafc1-c37b-49aa-b939-93f3a6ecf45d
+    type_id: 2
+  - id: &ki_gilbert_islands_region 23528
+    name: KI Gilbert Islands Region
+    uuid: b6e64a17-c421-4599-920e-bac88ad82f75
+    type_id: 2
+  - id: &ki_line_islands_region 23532
+    name: KI Line Islands Region
+    uuid: a01cd68b-7512-4ee7-88bb-a1923ca42a8a
+    type_id: 2
+  - id: &ki_phoenix_islands_region 23535
+    name: KI Phoenix Islands Region
+    uuid: c71e4ff2-ee42-48cb-a65c-11b79976bfab
+    type_id: 2
+  - id: &ki_amalgamating_telecommunication_holdings_kiribati_ltd_athkl_region 23613
+    name: KI Amalgamating Telecommunication Holdings Kiribati Ltd Athkl Region
+    uuid: 40ac6157-cff3-4e7e-83e3-4dd53ebe0bb6
+    type_id: 2
+  - id: &ki_south_tarawa_region 23751
+    name: KI South Tarawa Region
+    uuid: 145e7dfb-d2e3-4221-a348-1a5aa600aca6
+    type_id: 2
 network_prefixes:
 # Country code Prefixes
   - id: 242031
     prefix: '686'
     number_min_length: 4
     number_max_length: 100
-    uuid: ad74250e-a4d6-4fe6-b842-8fffa9c9c665
+    uuid: 5041086d-a087-4957-8918-835e5d0f98f7
     country_id: *ki
     network_id: null
 # Supplementary services Prefixes
@@ -49,196 +77,196 @@ network_prefixes:
     prefix: '6861'
     number_min_length: 6
     number_max_length: 7
-    uuid: f47202aa-c6bc-40ea-94b0-8b1d7f0a8759
+    uuid: 15e33454-ee3b-4203-98a4-58b34cac8b8b
     country_id: *ki
     network_id: *ki_special_services
   - id: 243094
     prefix: '686301211'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4e0a659-6bf5-40a0-94a0-cdb92a168cb3
+    uuid: 365bebae-cd2a-4427-bd00-e3f6fd4b9930
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243095
     prefix: '686301212'
     number_min_length: 11
     number_max_length: 11
-    uuid: 830b61bf-8c30-4631-be5b-b7d6f2be12a4
+    uuid: d558c4e0-4d01-45a4-8485-73ef9acae77a
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243096
     prefix: '686301213'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4d4e73ff-1d1e-46c8-9d2a-7b184388353e
+    uuid: e488b692-7e9d-4534-b1a5-1793b5b29dd0
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243097
     prefix: '686301214'
     number_min_length: 11
     number_max_length: 11
-    uuid: b1d59647-4e59-449f-b879-73f6654554d7
+    uuid: 3f276b05-d582-459c-ae41-865bb13146ed
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243098
     prefix: '686301215'
     number_min_length: 11
     number_max_length: 11
-    uuid: 30fd7e56-9fdf-4f8f-84bb-2df3814daa90
+    uuid: 643e7189-23e5-484c-be79-5edf23abf95b
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243099
     prefix: '686301216'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6583f466-b7dd-4d2e-a7c4-22c2fa938b98
+    uuid: a9e77330-c590-4fea-9b06-259316513754
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243100
     prefix: '686301217'
     number_min_length: 11
     number_max_length: 11
-    uuid: 74909a81-0030-45dc-8c91-e47d4686febe
+    uuid: ed403bae-8e90-4276-a578-388d859fa924
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243101
     prefix: '686301218'
     number_min_length: 11
     number_max_length: 11
-    uuid: db93fd5c-3aba-463b-8de6-e2e31283f1ca
+    uuid: f9f03734-4520-454e-b70d-b5a5ad296932
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243102
     prefix: '686301219'
     number_min_length: 11
     number_max_length: 11
-    uuid: f9291e59-6de3-4c25-b6fe-a7eb0557104d
+    uuid: ea722259-a6f7-4dd7-ab25-861e34dc5d40
     country_id: *ki
     network_id: *ki_international_operator
   - id: 243103
     prefix: '686301220'
     number_min_length: 11
     number_max_length: 11
-    uuid: d5628eec-3bbe-46fc-ada0-1fbb33c15ca6
+    uuid: a766b41e-ec88-4cd2-8476-fe35a6a7edff
     country_id: *ki
     network_id: *ki_international_operator
   - id: 248951
     prefix: '6863000'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4e7f936-9e8d-481d-841b-ca93c726f4c1
+    uuid: e6d19d59-fd71-424c-8b4b-2f5496da6e5b
     country_id: *ki
     network_id: *ki_international_operator
   - id: 248965
     prefix: '6863001'
     number_min_length: 11
     number_max_length: 11
-    uuid: f19a672c-d6a4-4337-a7f8-44143284b7ca
+    uuid: 7a3ab650-8958-4f0b-8478-730bb7870491
     country_id: *ki
     network_id: *ki_international_operator
   - id: 251838
     prefix: '68672000'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3ff9ce4e-68e8-44ae-a5b3-f457fcdad049
+    uuid: e96f65a2-3e21-4f7a-9783-d9ad5954ea59
     country_id: *ki
     network_id: *ki_special_services
   - id: 251839
     prefix: '68672001'
     number_min_length: 11
     number_max_length: 11
-    uuid: b8536d84-fa46-4d6c-8805-862db2e2553b
+    uuid: 2bb41864-d93c-4b39-bcf4-c751551d6b7b
     country_id: *ki
     network_id: *ki_special_services
   - id: 252079
     prefix: '68674020'
     number_min_length: 11
     number_max_length: 11
-    uuid: c283dbf2-8b99-4aba-b4f5-d4b45d34d2d3
+    uuid: 4b9148b5-7e2a-435e-a0c5-640031a8671d
     country_id: *ki
     network_id: *ki_voip
   - id: 252080
     prefix: '68674021'
     number_min_length: 11
     number_max_length: 11
-    uuid: 29ab4c0d-e865-4420-94ba-00fe37beecfe
+    uuid: 5248762c-c685-4b20-b136-d65e6a6665cd
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252081
     prefix: '68674022'
     number_min_length: 11
     number_max_length: 11
-    uuid: 047d1458-580c-41f0-89be-564a2a30e2a3
+    uuid: 88fe39b6-b20e-475e-8e2f-aa54d228bea6
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252082
     prefix: '68674023'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1de036a2-f11f-43ff-a25c-9cd4374e1d47
+    uuid: b3fe29ce-cedd-44e3-966b-66e59c65c912
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252083
     prefix: '68674024'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7e40b899-d697-4958-a170-091ae94375ed
+    uuid: aa574a05-d9cb-4b8a-b403-74ce7f5cf214
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252084
     prefix: '68674025'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae3276e6-3313-4e47-be9d-0af33b9335db
+    uuid: a4a60d37-5000-4f8f-a5b6-240959663d10
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252085
     prefix: '68674026'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1cf83d35-f087-4d56-9fc9-a36bd91b3053
+    uuid: f07ac939-b91f-4e4a-8df7-17680c6e7aa4
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252086
     prefix: '68674027'
     number_min_length: 11
     number_max_length: 11
-    uuid: a16935b0-69ec-4be0-8cee-4ebb7d3a36f7
+    uuid: feb52b4a-e1ac-4f99-81e3-7148f9727cc2
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252087
     prefix: '68674028'
     number_min_length: 11
     number_max_length: 11
-    uuid: 837e6ab7-e8a2-4017-8e56-715ca3f57a63
+    uuid: 56fa09dc-35d4-4918-b26c-047504383f25
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252088
     prefix: '68674029'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19a9bbe9-ab0f-4e76-bb80-2141677af735
+    uuid: e225eabd-8f5a-4e39-a29d-c35f612eb78e
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 252099
     prefix: '68674081'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0bcf3e27-7604-4347-b9c3-f758e8a21c04
+    uuid: 386edf50-733f-4c11-97e0-a7e1bc375baa
     country_id: *ki
     network_id: *ki_virtual_private_network
   - id: 255962
     prefix: '686777'
     number_min_length: 6
     number_max_length: 6
-    uuid: 5b6bb5a5-fcb3-4ac3-9b52-8e026543c0c2
+    uuid: 403d29cb-fc25-4dde-8ca3-913dd69316ce
     country_id: *ki
     network_id: *ki_voice_mail
   - id: 257109
     prefix: '6869'
     number_min_length: 6
     number_max_length: 6
-    uuid: ed4e657c-a4dd-4d6f-b143-2be29baf4d2a
+    uuid: eb822d51-6b53-4d4e-ab6f-8e56c42ad915
     country_id: *ki
     network_id: *ki_special_services
 # Mobile Prefixes
@@ -246,77 +274,77 @@ network_prefixes:
     prefix: '6866300'
     number_min_length: 11
     number_max_length: 11
-    uuid: d66a3fdf-2094-4318-8027-66b26c18ceae
+    uuid: c8731432-6e05-4f89-ac6a-d8c9a6f2a092
     country_id: *ki
     network_id: *ki_ocean_link_mobile
   - id: 250678
     prefix: '6866301'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8d5212a0-6c28-40ce-a6dc-de4a9d064b6c
+    uuid: 1fa44110-39f2-40ec-9a67-37040cc89f7b
     country_id: *ki
     network_id: *ki_ocean_link_mobile
   - id: 251893
     prefix: '6867300'
     number_min_length: 11
     number_max_length: 11
-    uuid: 663f0083-4d76-4a40-bde3-202ce7fc1f98
+    uuid: f84ebaf6-7246-46e4-8fe3-9e5a915660bd
     country_id: *ki
     network_id: *ki_frigatenet_mobile
   - id: 251897
     prefix: '6867301'
     number_min_length: 11
     number_max_length: 11
-    uuid: b9cf1ed3-3442-4e10-92f5-c71c467168db
+    uuid: daa0ca86-9787-4528-9eff-a2cb920e6854
     country_id: *ki
     network_id: *ki_frigatenet_mobile
   - id: 251900
     prefix: '6867302'
     number_min_length: 11
     number_max_length: 11
-    uuid: 97e35928-0708-4305-a6ad-55731f85bd19
+    uuid: 0878a596-2d08-4e37-b533-f89f564fe431
     country_id: *ki
     network_id: *ki_frigatenet_mobile
   - id: 251902
     prefix: '6867303'
     number_min_length: 11
     number_max_length: 11
-    uuid: 91adfd53-4a34-4ca4-abd1-6107cb54b2e8
+    uuid: bd56154b-51d6-4688-aebf-72c3676ebb09
     country_id: *ki
     network_id: *ki_frigatenet_mobile
   - id: 251907
     prefix: '6867304'
     number_min_length: 11
     number_max_length: 11
-    uuid: 415c3da7-a2ea-4cc9-a46a-0fe761af5b9a
+    uuid: fe7cb78b-dcd8-4964-9cde-835afc78ac53
     country_id: *ki
     network_id: *ki_frigatenet_mobile
   - id: 251915
     prefix: '6867305'
     number_min_length: 11
     number_max_length: 11
-    uuid: b6e33ba3-4a24-49e9-9bcf-f93b40fb9087
+    uuid: 23c058b0-1d3f-4de4-b164-8e832c71af32
     country_id: *ki
     network_id: *ki_frigatenet_mobile
   - id: 251934
     prefix: '68673140'
     number_min_length: 11
     number_max_length: 11
-    uuid: 245415d4-dae8-405e-a461-162c955b5980
+    uuid: e3b7582a-ca6b-414f-9962-45a57a5f1980
     country_id: *ki
     network_id: *ki_frigatenet_mobile
   - id: 254133
     prefix: '68662000'
     number_min_length: 11
     number_max_length: 11
-    uuid: 80195734-ac29-4960-8649-421f45be89ad
+    uuid: 5c8af756-8b0d-4934-9681-40f3bfeaf9cc
     country_id: *ki
     network_id: *ki_ocean_link_mobile
   - id: 254134
     prefix: '68662001'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6b2223b7-0f7b-4ba1-9f16-321200938e24
+    uuid: 79d20aaf-ddcd-42a6-9d8f-46a833f7742a
     country_id: *ki
     network_id: *ki_ocean_link_mobile
 # Fixed Prefixes
@@ -324,132 +352,132 @@ network_prefixes:
     prefix: '68665021'
     number_min_length: 11
     number_max_length: 11
-    uuid: 21edb6bf-9c88-45da-867b-9a6c8bb10e00
+    uuid: d5a65c81-e257-4402-8138-4a771570690f
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_bairiki_region
   - id: 251263
     prefix: '68665022'
     number_min_length: 11
     number_max_length: 11
-    uuid: fca2f133-8e97-4c88-8f7d-1e0ccf3f513a
+    uuid: df2ec501-6241-4e79-8ba8-91aa6e83e3a2
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_bairiki_region
   - id: 251284
     prefix: '68665125'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6266c3cb-6a45-410a-a0f5-53e27b7254e7
+    uuid: 7a6afb5e-fbcd-4df8-acdd-6e219c9ddfae
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_betio_region
   - id: 251285
     prefix: '68665126'
     number_min_length: 11
     number_max_length: 11
-    uuid: 220df91a-34e3-4982-b9f5-350dba1f25f5
+    uuid: 8f7299b1-19fd-475a-9298-7f5313797bff
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_betio_region
   - id: 251305
     prefix: '68665228'
     number_min_length: 11
     number_max_length: 11
-    uuid: a390acf8-3d7a-4b27-bf48-cd07a8dfb938
+    uuid: 2d3be61b-6730-43de-82bf-057cbafe9278
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_bikenibeu_region
   - id: 251306
     prefix: '68665229'
     number_min_length: 11
     number_max_length: 11
-    uuid: 91bb3e32-28f2-43bc-8145-986eb9e87d42
+    uuid: 79cd84c4-282e-41a9-9e08-42e9c00dccb2
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_bikenibeu_region
   - id: 251325
     prefix: '68665300'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3e6800f4-92cd-41d4-bfe0-c8365cc7f27e
+    uuid: db886770-7651-41b4-bddd-18c2936f4dd4
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_gilbert_islands_region
   - id: 251355
     prefix: '68665400'
     number_min_length: 11
     number_max_length: 11
-    uuid: 79e4c802-03e8-47ec-ab0a-d3c5762f7c06
+    uuid: a40ada4b-d8db-4fd1-95a6-57e7c67bce66
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_line_islands_region
   - id: 251395
     prefix: '68665500'
     number_min_length: 11
     number_max_length: 11
-    uuid: 652d2785-5330-4474-92ec-7313d0018ecf
+    uuid: b5194a82-f7e5-4231-9e82-bc3ee1a5aa1e
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_phoenix_islands_region
   - id: 251859
     prefix: '68672700'
     number_min_length: 11
     number_max_length: 11
-    uuid: 554bad13-cecf-47fa-956f-2154993a30a9
+    uuid: 36fbabc5-7825-4b17-83a9-70866bf91dad
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_gilbert_islands_region
   - id: 251931
     prefix: '68673100'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3b613198-0fe6-434f-b8cd-de77b1220a38
+    uuid: 914c1339-653d-49ec-90f8-4e6593cbf1c0
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_amalgamating_telecommunication_holdings_kiribati_ltd_athkl_region
   - id: 252576
     prefix: '68675021'
     number_min_length: 11
     number_max_length: 11
-    uuid: 38c42a73-ae22-4ac9-8932-68f24ce19655
+    uuid: 76490faa-a19b-45d7-a875-ce64a4fc5eb2
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_south_tarawa_region
   - id: 252577
     prefix: '68675022'
     number_min_length: 11
     number_max_length: 11
-    uuid: 83cf7a61-5f01-45ec-8670-1981e2d8c4ac
+    uuid: 026c71ba-cb03-40a0-b59b-81bba4827dde
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_south_tarawa_region
   - id: 252632
     prefix: '68675125'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef249893-927e-45e3-87ab-15ad8cf4b0b7
+    uuid: 22b9b2e3-05f3-4a3d-a7f1-82231e821f47
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_south_tarawa_region
   - id: 252633
     prefix: '68675126'
     number_min_length: 11
     number_max_length: 11
-    uuid: d209025e-b52d-4986-a9dd-b9bafd9cb5bc
+    uuid: 32b0d707-1999-46fd-bfec-d7367f25b2ea
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_south_tarawa_region
   - id: 252669
     prefix: '68675228'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1cb81991-bd7b-4e0e-8028-c790ae5b36a2
+    uuid: cb2466e8-f98a-4bcb-a6b7-f9910a82b64c
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_south_tarawa_region
   - id: 252670
     prefix: '68675229'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2458798d-f168-49b6-8762-81b9f5303dd4
+    uuid: 800cc8a0-9812-4460-a202-0a1ddbb1dd2b
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_south_tarawa_region
   - id: 252711
     prefix: '68675381'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1badbf8d-b338-4632-8954-cb6e6f5a093e
+    uuid: c94d04b6-d28e-434b-8a47-edd1c2d15060
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_line_islands_region
   - id: 252717
     prefix: '68675400'
     number_min_length: 11
     number_max_length: 11
-    uuid: 91ecaefc-6982-4d73-8362-0824ba96c08e
+    uuid: 7e8edd5a-7588-4e94-81ec-305ac247e5ca
     country_id: *ki
-    network_id: *ki_fixed
+    network_id: *ki_phoenix_islands_region

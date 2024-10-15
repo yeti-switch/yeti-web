@@ -1,111 +1,415 @@
 country_id: &az 15
 networks:
 # Mobile Networks
-  - id: &az_azercell_mobile 4125
+  - id: &az_azercell_mobile 4659
     name: AZ Azercell Mobile
-    uuid: 260357a9-3bae-4168-80ce-581013efe691
+    uuid: 91460428-fe2b-48fa-a799-e6dd48eb6ba7
     type_id: 3
-  - id: &az_bakcell_mobile 4266
+  - id: &az_bakcell_mobile 7939
     name: AZ Bakcell Mobile
-    uuid: fba9abe8-f3c0-4399-8a74-f4aadeb09bcb
+    uuid: 09f6f850-40bc-4885-9a74-9d29e40cb8cf
     type_id: 3
-  - id: &az_naxtel_mobile 4353
+  - id: &az_naxtel_mobile 10523
     name: AZ Naxtel Mobile
-    uuid: 0f4ee959-e1dc-4b05-a003-66fe3acd9a37
+    uuid: 4f6ecf82-732a-4c36-8582-b9534ae7be63
     type_id: 3
-  - id: &az_nar_mobile_mobile 4614
+  - id: &az_nar_mobile_mobile 14439
     name: AZ Nar Mobile Mobile
-    uuid: 66de3f2d-34ca-4d57-81f9-2f71427211ba
+    uuid: fc6a2695-4adb-4a88-be8e-04ee4b70f11e
     type_id: 3
-  - id: &az_fonex_mobile 7436
+  - id: &az_fonex_mobile 34308
     name: AZ Fonex Mobile
-    uuid: e64ab13e-d390-4f58-b7e9-adfa495a5120
+    uuid: 187b0acc-dad9-4b8a-9c93-c8408e136865
     type_id: 3
 # Supplementary services Networks
-  - id: &az_special_services 5185
+  - id: &az_special_services 21359
     name: AZ Special Services
-    uuid: b381f96b-a318-4b8c-9461-60720a95e3cd
-    type_id: 14
-  - id: &az_operator_assistance_service 5378
+    uuid: cd1918db-f10d-48fa-b994-0efc3e83ca31
+    type_id: 13
+  - id: &az_operator_assistance_service 21554
     name: AZ Operator Assistance Service
-    uuid: ea969306-26ad-4e83-9c4a-345c5a7ad9a0
-    type_id: 14
-  - id: &az_information_services 7120
+    uuid: 47180c38-3d21-4178-85a5-6f8aa25936fe
+    type_id: 13
+  - id: &az_information_services 24873
     name: AZ Information Services
-    uuid: f998f36c-9f35-419e-9ff8-fe56ec794c5e
-    type_id: 14
-  - id: &az_interactive_calls 7848
+    uuid: 4473aacd-9ac2-46b3-be4e-358c1f2058eb
+    type_id: 13
+  - id: &az_interactive_calls 42085
     name: AZ Interactive Calls
-    uuid: 1ce01802-3662-45a1-aeb6-a80f07e7f6bf
-    type_id: 14
+    uuid: 3c727558-32d0-4984-a311-58ebdf43654b
+    type_id: 13
 # Fixed Networks
-  - id: &az_fixed 7116
+  - id: &az_baku_region 24862
+    name: AZ Baku Region
+    uuid: 483ab45d-01c4-4bbb-b156-6e1f71acd014
+    type_id: 2
+  - id: &az_sumgayit_region 25541
+    name: AZ Sumgayit Region
+    uuid: b253ca07-d7f8-41d2-a923-45349a01b38e
+    type_id: 2
+  - id: &az_barda_region 26726
+    name: AZ Barda Region
+    uuid: 80f75c53-b65f-41ea-9770-4dcca008ab10
+    type_id: 2
+  - id: &az_ujar_region 26727
+    name: AZ Ujar Region
+    uuid: ee8041b2-7e36-415d-8bc7-5447a9090627
+    type_id: 2
+  - id: &az_agsu_region 26728
+    name: AZ Agsu Region
+    uuid: eb9034cb-26ac-46d0-8371-69bbda181500
+    type_id: 2
+  - id: &az_agdash_region 26729
+    name: AZ Agdash Region
+    uuid: 70150657-55d9-4be5-8549-fcf0cd336884
+    type_id: 2
+  - id: &az_gobustan_region 26730
+    name: AZ Gobustan Region
+    uuid: 86497e3a-6006-4ed2-a70a-a5b84ae82d4e
+    type_id: 2
+  - id: &az_kurdamir_region 26731
+    name: AZ Kurdamir Region
+    uuid: 30d54747-914c-4371-a41e-5a1a84215b38
+    type_id: 2
+  - id: &az_shamakhi_region 26732
+    name: AZ Shamakhi Region
+    uuid: c2f3ec98-ba00-417b-90d8-f9be65f4ebfe
+    type_id: 2
+  - id: &az_goychay_region 26733
+    name: AZ Goychay Region
+    uuid: 111c375c-ecaf-4fed-bef8-959f56db7214
+    type_id: 2
+  - id: &az_ismayilli_region 26734
+    name: AZ Ismayilli Region
+    uuid: 1086bb61-80dc-43ac-95e0-0a688b9df68f
+    type_id: 2
+  - id: &az_zardab_region 26735
+    name: AZ Zardab Region
+    uuid: 20f63156-770a-44bd-afb5-6d5ebc89bd3e
+    type_id: 2
+  - id: &az_hajigabul_region 27352
+    name: AZ Hajigabul Region
+    uuid: 98ee94ce-e1cf-4520-b75f-a014ac1fcdf4
+    type_id: 2
+  - id: &az_shirvan_region 27353
+    name: AZ Shirvan Region
+    uuid: 8dae2c35-3829-4543-bd05-7132f9557ace
+    type_id: 2
+  - id: &az_beylagan_region 27354
+    name: AZ Beylagan Region
+    uuid: 5a04fddd-917c-46f1-ad51-9cbb62b15399
+    type_id: 2
+  - id: &az_sabirabad_region 27355
+    name: AZ Sabirabad Region
+    uuid: ae787292-eeec-42b0-a4a2-e76d9dcd25ef
+    type_id: 2
+  - id: &az_imishli_region 27356
+    name: AZ Imishli Region
+    uuid: e12fc19d-fd5d-466c-949b-9bfea80b62d4
+    type_id: 2
+  - id: &az_salyan_region 27357
+    name: AZ Salyan Region
+    uuid: 5906f7a9-5ebf-448c-8d9e-cd4c8d4f5880
+    type_id: 2
+  - id: &az_neftchala_region 27358
+    name: AZ Neftchala Region
+    uuid: 38dd15bf-6348-4ece-a44f-9d244a81fcb9
+    type_id: 2
+  - id: &az_agjabadi_region 27359
+    name: AZ Agjabadi Region
+    uuid: d1701f79-303d-4e85-910d-c60e338f7abd
+    type_id: 2
+  - id: &az_saatli_region 27360
+    name: AZ Saatli Region
+    uuid: d2d86873-69ff-49eb-a44c-664b48cfcd75
+    type_id: 2
+  - id: &az_goygol_region 28042
+    name: AZ Goygol Region
+    uuid: 62ae2b82-00ca-4f6c-bc06-2ea65dc05d62
+    type_id: 2
+  - id: &az_dashkasan_region 28043
+    name: AZ Dashkasan Region
+    uuid: 37a7ba15-685e-4777-b5f0-8f9e13b83be0
+    type_id: 2
+  - id: &az_agstafa_region 28045
+    name: AZ Agstafa Region
+    uuid: 65404029-a0b1-4558-a503-9eaa59182211
+    type_id: 2
+  - id: &az_tartar_region 28047
+    name: AZ Tartar Region
+    uuid: fdeaadfa-7c60-459c-b286-2914906dc02a
+    type_id: 2
+  - id: &az_goranboy_region 28049
+    name: AZ Goranboy Region
+    uuid: 88750947-7322-42ec-9bf1-fba1b6f50596
+    type_id: 2
+  - id: &az_ganja_region 28051
+    name: AZ Ganja Region
+    uuid: 43baf343-1113-4a9e-8a6d-cb54d8e53b56
+    type_id: 2
+  - id: &az_samukh_region 28053
+    name: AZ Samukh Region
+    uuid: eda37978-d7ac-4ea0-a4ac-0375be24dd64
+    type_id: 2
+  - id: &az_gazakh_region 28055
+    name: AZ Gazakh Region
+    uuid: 512cd79a-7a50-4a2d-b31d-7866226b54bc
+    type_id: 2
+  - id: &az_shamkir_region 28057
+    name: AZ Shamkir Region
+    uuid: 03a29043-7be3-43da-858b-9062cbb44615
+    type_id: 2
+  - id: &az_tovuz_region 28058
+    name: AZ Tovuz Region
+    uuid: 5766f1b3-7ad5-4026-b7ec-9e2af3369ef0
+    type_id: 2
+  - id: &az_gadabay_region 28059
+    name: AZ Gadabay Region
+    uuid: 9cd5d6c1-587a-43a1-a167-3a944222dc73
+    type_id: 2
+  - id: &az_yevlakh_region 28060
+    name: AZ Yevlakh Region
+    uuid: a233f9da-514d-4a36-8cf9-d882ca004e8c
+    type_id: 2
+  - id: &az_naftalan_region 28061
+    name: AZ Naftalan Region
+    uuid: ec033ebb-ceac-4aaf-abfa-ba81644c417b
+    type_id: 2
+  - id: &az_agstafa_ganja_yevlakh_region 28062
+    name: AZ Agstafa Ganja Yevlakh Region
+    uuid: 45a2798b-6aca-40e3-bd61-95c1d5de5b2c
+    type_id: 2
+  - id: &az_siyazan_region 28314
+    name: AZ Siyazan Region
+    uuid: 7150a707-0848-4d30-8e16-9c9f57adaa9b
+    type_id: 2
+  - id: &az_khizi_region 28315
+    name: AZ Khizi Region
+    uuid: de4139ea-7401-46ec-86f5-7c525ac34a4c
+    type_id: 2
+  - id: &az_khachmaz_region 28316
+    name: AZ Khachmaz Region
+    uuid: 70c18ded-bb84-4c7a-b379-53698b91fed4
+    type_id: 2
+  - id: &az_guba_region 28317
+    name: AZ Guba Region
+    uuid: ae56dee0-52bb-4a68-978f-e1f1c1c30146
+    type_id: 2
+  - id: &az_shabran_region 28318
+    name: AZ Shabran Region
+    uuid: 7bea176d-09ba-437e-9f57-00cf63f67d54
+    type_id: 2
+  - id: &az_gusar_region 28319
+    name: AZ Gusar Region
+    uuid: 3364c02c-b0bc-4b36-801e-f32c83e8f6b6
+    type_id: 2
+  - id: &az_gabala_region 28983
+    name: AZ Gabala Region
+    uuid: 0fb808f6-8891-4521-a297-b092605dc590
+    type_id: 2
+  - id: &az_oguz_region 28984
+    name: AZ Oguz Region
+    uuid: db5a73e6-b22b-4254-bf46-d73f8de7f1cd
+    type_id: 2
+  - id: &az_zagatala_region 28985
+    name: AZ Zagatala Region
+    uuid: 545446d6-0708-4e47-aa35-65e7e5ae68b6
+    type_id: 2
+  - id: &az_shaki_region 28986
+    name: AZ Shaki Region
+    uuid: fbb46d0d-5d2d-4d5d-a28a-0bf5fffa21ff
+    type_id: 2
+  - id: &az_gakh_region 28987
+    name: AZ Gakh Region
+    uuid: 97da2f6f-ab53-49b9-a5cd-3b9c7820ab92
+    type_id: 2
+  - id: &az_mingachevir_region 28988
+    name: AZ Mingachevir Region
+    uuid: 3198a650-eb5b-4802-bb3e-414f32feacbb
+    type_id: 2
+  - id: &az_balakan_region 28989
+    name: AZ Balakan Region
+    uuid: d1358f09-d2c8-4cb5-8207-518b3d241a83
+    type_id: 2
+  - id: &az_masalli_region 29131
+    name: AZ Masalli Region
+    uuid: bf884630-7dc1-4176-bfb7-2e11753412e1
+    type_id: 2
+  - id: &az_astara_region 29132
+    name: AZ Astara Region
+    uuid: 09042457-cbf7-499b-b629-35f002e3a0f6
+    type_id: 2
+  - id: &az_jalilabad_region 29133
+    name: AZ Jalilabad Region
+    uuid: ec60eac5-d2d1-470a-bbed-a99ee8a613f2
+    type_id: 2
+  - id: &az_lankaran_region 29134
+    name: AZ Lankaran Region
+    uuid: 39ebbee8-0aca-44b4-98e1-a1ea7c58ea14
+    type_id: 2
+  - id: &az_lerik_region 29135
+    name: AZ Lerik Region
+    uuid: 9c1513a3-07f3-443b-8226-11af76793185
+    type_id: 2
+  - id: &az_bilasuvar_region 29136
+    name: AZ Bilasuvar Region
+    uuid: 0c367f85-e0c6-42bd-9fdb-597d5e7f5ea5
+    type_id: 2
+  - id: &az_khojali_region 29524
+    name: AZ Khojali Region
+    uuid: 6c4a2c02-9959-4d62-9bb3-ba69773c8dde
+    type_id: 2
+  - id: &az_lachin_region 29525
+    name: AZ Lachin Region
+    uuid: 064ba5d8-e5c5-4001-9b6c-4cb8fc61994c
+    type_id: 2
+  - id: &az_khankendi_region 29526
+    name: AZ Khankendi Region
+    uuid: 3718148b-b9a7-44f4-90ba-6d5c0c4110b6
+    type_id: 2
+  - id: &az_qubadli_region 29527
+    name: AZ Qubadli Region
+    uuid: b3924bd6-85eb-41f9-8ee2-8542494d7fe9
+    type_id: 2
+  - id: &az_zangilan_region 29528
+    name: AZ Zangilan Region
+    uuid: b04bf921-bfd2-4fed-ae6c-02fc5b06b565
+    type_id: 2
+  - id: &az_shusha_region 29529
+    name: AZ Shusha Region
+    uuid: 2f7cac30-daa9-4819-8242-1fb4572ddae7
+    type_id: 2
+  - id: &az_kalbajar_region 29530
+    name: AZ Kalbajar Region
+    uuid: 8fc9df33-de2c-4064-bb0b-445b9f98281e
+    type_id: 2
+  - id: &az_khojavand_region 29531
+    name: AZ Khojavand Region
+    uuid: ed854bba-93cd-4b7a-a119-7509592336e0
+    type_id: 2
+  - id: &az_fuzuli_region 29532
+    name: AZ Fuzuli Region
+    uuid: 481d7f3f-818e-4957-bd29-2d555e0c263b
+    type_id: 2
+  - id: &az_agdam_region 29533
+    name: AZ Agdam Region
+    uuid: 627e0820-67c6-48ab-81fb-3d62e0227bb4
+    type_id: 2
+  - id: &az_jabrayil_region 29534
+    name: AZ Jabrayil Region
+    uuid: 44d26597-c969-4108-a739-e2282fa116fa
+    type_id: 2
+  - id: &az_yardimli_region 29845
+    name: AZ Yardimli Region
+    uuid: af138d7d-7db9-4411-b207-6d223e6f3825
+    type_id: 2
+  - id: &az_nakhchivan_autonomous_republic_region 33648
+    name: AZ Nakhchivan Autonomous Republic Region
+    uuid: 0eea4ae0-e9f5-4e5a-a1c9-6ee1444fae67
+    type_id: 2
+  - id: &az_babek_region 33673
+    name: AZ Babek Region
+    uuid: ac8962ab-1f16-403b-8c34-1d4e43906d6e
+    type_id: 2
+  - id: &az_sharur_region 33674
+    name: AZ Sharur Region
+    uuid: 17d5b0fa-d691-4306-be19-9f5e087b459d
+    type_id: 2
+  - id: &az_shahbuz_region 33675
+    name: AZ Shahbuz Region
+    uuid: 7b8cf079-5405-45b5-a3ac-f86cc79879aa
+    type_id: 2
+  - id: &az_nakhchivan_city_region 33676
+    name: AZ Nakhchivan City Region
+    uuid: f6a77d0a-9921-4e73-b7f3-91a767fb81de
+    type_id: 2
+  - id: &az_julfa_region 33677
+    name: AZ Julfa Region
+    uuid: 7fe5ed00-e501-4ff8-9305-dce3d4543add
+    type_id: 2
+  - id: &az_ordubad_region 33678
+    name: AZ Ordubad Region
+    uuid: b7cc86ef-16dc-4b34-9422-26b9784d6aab
+    type_id: 2
+  - id: &az_kangarli_region 33679
+    name: AZ Kangarli Region
+    uuid: efbcbf4d-1804-4fd3-be28-afb5ee2e396a
+    type_id: 2
+  - id: &az_sadarak_region 33680
+    name: AZ Sadarak Region
+    uuid: 6bc40f52-6e83-46a6-bbba-c8e2331de505
+    type_id: 2
+  - id: &az_regions_region 36841
+    name: AZ Regions Region
+    uuid: 26df0d3d-f2af-44ad-a6aa-d740b8a2ff1f
+    type_id: 2
+  - id: &az_fixed 37826
     name: AZ Fixed
-    uuid: 26527a51-294a-4015-810f-19cc9c54290a
-    type_id: 12
+    uuid: 23e5e5ab-02b9-41a1-a886-ed7106fcd05b
+    type_id: 2
 network_prefixes:
 # Mobile Prefixes
   - id: 54913
     prefix: '99450'
     number_min_length: 12
     number_max_length: 12
-    uuid: cc267ad6-2b6a-4fc2-92f2-6954721a12da
+    uuid: ab467ff2-9efb-44dd-8643-47d30c76caab
     country_id: *az
     network_id: *az_azercell_mobile
   - id: 62593
     prefix: '99451'
     number_min_length: 12
     number_max_length: 12
-    uuid: 749c474e-ccad-42d1-bfd8-34af9736338a
+    uuid: 6c53446b-29c1-42c8-9a59-6d714b3ac310
     country_id: *az
     network_id: *az_azercell_mobile
   - id: 78108
     prefix: '99455'
     number_min_length: 12
     number_max_length: 12
-    uuid: e30430b1-e0b2-4857-a21e-b29c8428df78
+    uuid: 3381202e-1aa0-47d8-8689-d17878726993
     country_id: *az
     network_id: *az_bakcell_mobile
   - id: 95204
     prefix: '99460'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd6e94ed-204a-43a0-a2d5-d509fb66bb41
+    uuid: 2ddc8c94-94cf-44ae-8577-571ed2690c2d
     country_id: *az
     network_id: *az_naxtel_mobile
   - id: 150228
     prefix: '99470'
     number_min_length: 12
     number_max_length: 12
-    uuid: b1df80cb-86a2-488e-9c36-eafad0803f82
+    uuid: 49e5bf45-bc19-4b36-9ece-843f77982d5d
     country_id: *az
     network_id: *az_nar_mobile_mobile
   - id: 192080
     prefix: '99477'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3dba4dd4-9a30-4846-af81-07bc083d69ee
+    uuid: c28ffca1-9467-4a63-930a-db72e349cddd
     country_id: *az
     network_id: *az_nar_mobile_mobile
   - id: 239364
     prefix: '99499'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3de20357-c125-4de4-aca4-59ff5da16114
+    uuid: 554e1113-e726-4aab-a9cc-c988ded1b601
     country_id: *az
     network_id: *az_bakcell_mobile
   - id: 258617
     prefix: '99410'
     number_min_length: 12
     number_max_length: 12
-    uuid: b8fadb24-5d8b-49e9-8498-11a8f0abc970
+    uuid: 09d230ac-a723-4623-946e-b22b1b540977
     country_id: *az
     network_id: *az_azercell_mobile
   - id: 349885
     prefix: '99440'
     number_min_length: 12
     number_max_length: 12
-    uuid: 234ecf17-f42a-4b2f-9fbe-59ba9f36592d
+    uuid: 005d68e7-5ed1-4dff-8242-e5ec3b1cf66d
     country_id: *az
     network_id: *az_fonex_mobile
 # Country code Prefixes
@@ -113,7 +417,7 @@ network_prefixes:
     prefix: '994'
     number_min_length: 4
     number_max_length: 100
-    uuid: 6b2e468e-9ec8-4fe9-a4a1-e1fc4a857cc1
+    uuid: d0e5e30f-3dd2-4df9-95c3-28fb2ceee748
     country_id: *az
     network_id: null
 # Supplementary services Prefixes
@@ -121,35 +425,35 @@ network_prefixes:
     prefix: '9941'
     number_min_length: 5
     number_max_length: 6
-    uuid: 6dfd38c4-3b1b-40c1-b4cd-0b43ce895314
+    uuid: eaed0d28-ffcd-462e-a9e2-6899e76b9ccf
     country_id: *az
     network_id: *az_special_services
   - id: 242579
     prefix: '99411'
     number_min_length: 5
     number_max_length: 5
-    uuid: 26e016a4-5215-4008-a7e0-4dd2d5076f60
+    uuid: f6775334-2d7f-48a3-a479-fd9f6ee0b878
     country_id: *az
     network_id: *az_operator_assistance_service
   - id: 257077
     prefix: '9949'
     number_min_length: 6
     number_max_length: 6
-    uuid: aa38e4ea-5442-4deb-9ece-4eab2135f781
+    uuid: 61d4d7e4-14cb-44a7-89b1-a27a9474b8f4
     country_id: *az
     network_id: *az_special_services
   - id: 259238
     prefix: '99412109'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5c9fa0ba-ef26-4265-ad94-18b9113d9f53
+    uuid: 0f6c866a-0ba5-49f9-887f-4027cb17ecd5
     country_id: *az
     network_id: *az_information_services
   - id: 454600
     prefix: '994900200'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9998de33-0f7f-4179-abe7-1fe4edb500b7
+    uuid: 7beebb43-4edf-4bc3-94cf-91ba4a3134e0
     country_id: *az
     network_id: *az_interactive_calls
 # Fixed Prefixes
@@ -157,580 +461,580 @@ network_prefixes:
     prefix: '99412'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6c12da29-506c-4090-86de-10e526f89682
+    uuid: ea2b71bf-307c-4fe5-8ced-77e8d42a3723
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_baku_region
   - id: 260500
     prefix: '99418'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9de692b6-f80f-49bc-8997-9e196b1c4a66
+    uuid: 03e7ae7a-853c-4a08-89fe-120734009a33
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_sumgayit_region
   - id: 267170
     prefix: '9942020'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1ef455b0-f0e7-4417-a7b8-a7dfa4eba1ac
+    uuid: 83e5761e-51f4-41d0-89f3-7bdd2cbef4c7
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_barda_region
   - id: 267172
     prefix: '9942021'
     number_min_length: 12
     number_max_length: 12
-    uuid: 90595f11-029f-43a6-a042-ec9b5b032283
+    uuid: 13caa03c-060b-4005-b1cf-82968b214743
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_ujar_region
   - id: 267174
     prefix: '9942022'
     number_min_length: 12
     number_max_length: 12
-    uuid: e94e7d11-df5c-416e-8e72-6fcf0a00897f
+    uuid: e3e0ec68-6be3-48d1-b001-ed4fc30a3057
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_agsu_region
   - id: 267176
     prefix: '9942023'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6a232790-bdee-47ba-8022-e6169cf66acf
+    uuid: ead317c4-e0b3-4ffe-af53-9372de4d9494
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_agdash_region
   - id: 267178
     prefix: '9942024'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f85605d-846e-4a3b-8f7d-4cfa42393470
+    uuid: ab9d03cc-88ad-4b8d-87ba-23dc7e4cb325
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_gobustan_region
   - id: 267180
     prefix: '9942025'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2dbeb6a5-ae6a-4470-981f-b227da205d2a
+    uuid: 80e8b8bc-a858-4294-8835-cf6d9f8f3cc3
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_kurdamir_region
   - id: 267182
     prefix: '9942026'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4da3702c-d787-480b-a026-e48749286c9a
+    uuid: d52a1c11-4916-4fc2-b2b7-24e5db14e382
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_shamakhi_region
   - id: 267184
     prefix: '9942027'
     number_min_length: 12
     number_max_length: 12
-    uuid: 40c3513f-f14f-4712-bd7b-6e746fa5e6f4
+    uuid: 153af22d-948f-4fdb-9c57-444018d1c2cf
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_goychay_region
   - id: 267195
     prefix: '9942028'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6d9a4ec5-ef86-4347-bf79-e2698391d6aa
+    uuid: d5af1f34-6aef-49d6-b3eb-a600e5940e00
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_ismayilli_region
   - id: 267197
     prefix: '9942029'
     number_min_length: 12
     number_max_length: 12
-    uuid: 27f9c72a-b0f0-4408-a607-5dcefb0c252f
+    uuid: 81b6d47d-7948-44e7-a0cb-b106f49e88e0
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_zardab_region
   - id: 274250
     prefix: '9942120'
     number_min_length: 12
     number_max_length: 12
-    uuid: fda21e4a-898e-487a-ba34-a7381206ca3c
+    uuid: 1894bec1-3ae8-4d9b-b520-ef0165152bc5
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_hajigabul_region
   - id: 274251
     prefix: '9942121'
     number_min_length: 12
     number_max_length: 12
-    uuid: 43275b11-3819-4126-a7c3-5b03e6c217d7
+    uuid: c7534e20-27e9-4bc5-87ba-fa0f9163accc
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_shirvan_region
   - id: 274252
     prefix: '9942122'
     number_min_length: 12
     number_max_length: 12
-    uuid: f92f646c-908e-46e3-acee-86d3b5d2b1a2
+    uuid: 18ee4403-ee7b-4464-b684-05445d7a25f0
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_beylagan_region
   - id: 274253
     prefix: '9942123'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2c548582-60f6-4a5b-8fa9-b657815b0be5
+    uuid: ee2825c5-452f-44c9-8947-8cd2a8b0f853
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_sabirabad_region
   - id: 274254
     prefix: '9942124'
     number_min_length: 12
     number_max_length: 12
-    uuid: 961d9bf3-67f4-4a79-a580-4650df978fa2
+    uuid: 5d788c0d-f982-4fcf-95be-730d59a45487
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_imishli_region
   - id: 274255
     prefix: '9942125'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5273aeae-843b-4e33-9fb5-e1b62f9b6e51
+    uuid: 45b5386e-adec-42ab-ac9d-bdf4d04f53c3
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_salyan_region
   - id: 274256
     prefix: '9942126'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4dc648bf-d3f2-4c3d-9927-b11e2b99d96f
+    uuid: dd0fa0a9-c13e-4d3a-a14a-efcfbe213846
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_neftchala_region
   - id: 274257
     prefix: '9942127'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e5a8032-d1b3-4a3e-96bd-24ecec4eee91
+    uuid: 7569fdbc-4950-41a6-b578-e937f1fe8144
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_agjabadi_region
   - id: 274258
     prefix: '9942128'
     number_min_length: 12
     number_max_length: 12
-    uuid: 02172efa-a473-4927-8817-3a3329bb309e
+    uuid: 6a1bafef-c863-4fc2-8dfd-13d1222a5dd9
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_saatli_region
   - id: 274259
     prefix: '99421428'
     number_min_length: 12
     number_max_length: 12
-    uuid: 672f86c3-c8b3-4334-a697-239f96d12765
+    uuid: 30d77e89-bd36-46f4-bfd1-13a322acb923
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_hajigabul_region
   - id: 282805
     prefix: '9942220'
     number_min_length: 12
     number_max_length: 12
-    uuid: dfde2160-8091-4ab5-a714-05696bfc01b8
+    uuid: 2e7cce11-774a-4737-9ce7-0b16fbef4949
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_goygol_region
   - id: 282806
     prefix: '9942221'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2a96451c-a962-4145-9427-6da78af72aaf
+    uuid: 1633741f-9b37-4cdd-a016-3c0c6158df23
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_dashkasan_region
   - id: 282808
     prefix: '9942222'
     number_min_length: 12
     number_max_length: 12
-    uuid: ea5432e5-9fd1-4590-ac74-d527343d237a
+    uuid: 957a6830-ee2f-42b3-a17b-0f362255e3f2
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_agstafa_region
   - id: 282810
     prefix: '9942223'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4d51a028-33f3-4f6d-89a6-fb6971e2d2c1
+    uuid: ac06eccc-817b-488f-b53e-7922dd1b34a9
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_tartar_region
   - id: 282812
     prefix: '9942224'
     number_min_length: 12
     number_max_length: 12
-    uuid: 45f44e5f-fc7f-4b6b-8c75-57604240c6ee
+    uuid: eba8ae2f-8020-4b9f-9260-5f5f44bbe109
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_goranboy_region
   - id: 282814
     prefix: '9942225'
     number_min_length: 12
     number_max_length: 12
-    uuid: b2477fe8-82f8-4bad-9b15-dde20a656ace
+    uuid: 15bb1d0d-8977-4c0a-bb0d-d38ff92e7c66
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_ganja_region
   - id: 282816
     prefix: '9942226'
     number_min_length: 12
     number_max_length: 12
-    uuid: c821c2d9-ae03-4583-91db-ad9beeda8a1a
+    uuid: 88efdf05-1bdf-4e2f-a6ef-30a6fc44812a
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_ganja_region
   - id: 282817
     prefix: '9942227'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0d021fab-eeba-44bf-80a5-5ae26e403739
+    uuid: 145440bb-d0b7-4b5f-a391-b3569ea39b47
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_samukh_region
   - id: 282819
     prefix: '9942229'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7d7aef2d-94f0-4ae5-bec6-1a202b926675
+    uuid: bc30028a-9d74-4872-856c-89265dc71a78
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_gazakh_region
   - id: 282821
     prefix: '9942230'
     number_min_length: 12
     number_max_length: 12
-    uuid: ce9423fa-1f93-4bc5-a2ab-7e605613847b
+    uuid: 344fdc7d-4a17-4600-b805-d5935bd6b6f8
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_shamkir_region
   - id: 282822
     prefix: '9942231'
     number_min_length: 12
     number_max_length: 12
-    uuid: a15fcf2c-c5d5-4924-9a36-5c02cefc4294
+    uuid: 203f438d-a7cb-4291-8990-2c35c30b9b2f
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_tovuz_region
   - id: 282823
     prefix: '9942232'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e3ef9c6-e6c8-4908-a3c4-629ad20d9f28
+    uuid: 6e4f76ff-3df2-4f3c-8efc-74e11b4c844c
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_gadabay_region
   - id: 282824
     prefix: '9942233'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3438bf73-b63f-404b-bb4b-94be58bc5ef2
+    uuid: 1a54faab-aeea-4b5d-98e8-06f15291b30c
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_yevlakh_region
   - id: 282825
     prefix: '9942235'
     number_min_length: 12
     number_max_length: 12
-    uuid: bec08914-3f04-45af-9b81-4df6b688b361
+    uuid: 54487e38-73a0-4ae9-a56f-68853294782b
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_naftalan_region
   - id: 282826
     prefix: '99422428'
     number_min_length: 12
     number_max_length: 12
-    uuid: f0f5d0f0-f098-4c42-9d77-0d19c3666de4
+    uuid: b5ab3736-9ad7-4a83-81f5-1191ad18c692
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_agstafa_ganja_yevlakh_region
   - id: 286647
     prefix: '9942330'
     number_min_length: 12
     number_max_length: 12
-    uuid: d411d1f5-1953-47bc-90d0-4612a5f25485
+    uuid: 138574ce-5887-428d-b1ee-0473f48e622f
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_siyazan_region
   - id: 286648
     prefix: '9942331'
     number_min_length: 12
     number_max_length: 12
-    uuid: 831c6c1b-2fba-48db-88c6-4850d1375c76
+    uuid: 0b87dcc9-57e9-4b0d-bf3d-3f3c62aebf06
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_khizi_region
   - id: 286649
     prefix: '9942332'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8350f967-3532-4482-94e1-c933eef5798f
+    uuid: 6f8ab9db-a316-40a1-9eaf-c81c4e0aa273
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_khachmaz_region
   - id: 286650
     prefix: '9942333'
     number_min_length: 12
     number_max_length: 12
-    uuid: b0885bf2-c206-4fef-9e30-9a0030612c5c
+    uuid: 1bff3f66-b0f0-45d9-b523-4aa9d332c5b7
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_guba_region
   - id: 286651
     prefix: '9942335'
     number_min_length: 12
     number_max_length: 12
-    uuid: bcc9a4b4-1b48-48f3-8a74-bcbc820c49d1
+    uuid: 17467e62-d79d-4051-b009-68021d8b6c2c
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_shabran_region
   - id: 286652
     prefix: '9942338'
     number_min_length: 12
     number_max_length: 12
-    uuid: 92dddb1e-5493-4851-bdda-a1681603c095
+    uuid: 7bb89db5-dfd1-4272-a318-8a9a0394bad5
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_gusar_region
   - id: 294341
     prefix: '9942420'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9c74973d-3c7d-4fc8-820c-e590b0ca7b6a
+    uuid: b4ca9bc6-f4a0-4116-9c6f-ab2bf5ea13b0
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_gabala_region
   - id: 294342
     prefix: '9942421'
     number_min_length: 12
     number_max_length: 12
-    uuid: e7215e9a-b11d-4de0-a286-060260268d47
+    uuid: c5a98d9d-46ae-472f-af68-c37fd50e11fa
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_oguz_region
   - id: 294343
     prefix: '9942422'
     number_min_length: 12
     number_max_length: 12
-    uuid: d3a8d025-dfa7-471f-8763-93e648b84725
+    uuid: 88b5c455-6216-4210-9f57-53f96ca850df
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_zagatala_region
   - id: 294344
     prefix: '9942424'
     number_min_length: 12
     number_max_length: 12
-    uuid: 72c0a275-16af-4329-897b-eca38c202a80
+    uuid: 4ec97648-37a4-4482-a334-f1c7eadc500b
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_shaki_region
   - id: 294345
     prefix: '9942425'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8046cd44-a51a-487a-a36f-2334e72f4726
+    uuid: a4898dc2-a3a1-4f81-9e8a-944cbbc2475f
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_gakh_region
   - id: 294346
     prefix: '9942427'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7b25e9a7-0098-4c7c-a520-2c48252273a0
+    uuid: cedaa9b0-a7db-4163-90c7-fa02edfbf190
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_mingachevir_region
   - id: 294347
     prefix: '9942429'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0ba7cf67-079a-4796-9fc2-c4d062c23351
+    uuid: 0673d212-20df-44f9-a32a-435291a558f6
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_balakan_region
   - id: 296808
     prefix: '9942521'
     number_min_length: 12
     number_max_length: 12
-    uuid: acb0fb73-05f0-4985-86b3-345816c3d820
+    uuid: 49e7a37f-d609-4884-bd86-565700777d30
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_masalli_region
   - id: 296809
     prefix: '9942522'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1454ade7-75c3-4164-bb52-2d7471efd795
+    uuid: 25376287-43a9-498d-9a97-dbf178840588
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_astara_region
   - id: 296810
     prefix: '9942524'
     number_min_length: 12
     number_max_length: 12
-    uuid: da670b54-8446-44b1-9411-7e76508cecb1
+    uuid: 5c88aa80-5f60-4e39-a9a8-13e10d9fee32
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_jalilabad_region
   - id: 296811
     prefix: '9942525'
     number_min_length: 12
     number_max_length: 12
-    uuid: bf00a213-9b27-4be2-972d-3424bd7816f5
+    uuid: 12af586f-0a0e-4d01-b272-61f475c163c0
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_lankaran_region
   - id: 296812
     prefix: '9942527'
     number_min_length: 12
     number_max_length: 12
-    uuid: 82c79322-9454-4752-b17c-e2e3cdc422f4
+    uuid: cbba2a9d-2d87-4e41-8575-7aa94c747791
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_lerik_region
   - id: 296813
     prefix: '9942529'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9c074f88-52f2-4a7e-992f-1b8a8cfc888c
+    uuid: 849ade2c-88a1-47ee-a44d-e379178c04ec
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_bilasuvar_region
   - id: 299814
     prefix: '9942620'
     number_min_length: 12
     number_max_length: 12
-    uuid: 857b10b0-3af3-469a-9b8d-87ccc175dad3
+    uuid: bfb25d38-a99f-490c-b65f-e190d2a6cb40
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_khojali_region
   - id: 299815
     prefix: '9942621'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7f39e6f5-98ac-4ee6-9665-71e15bfb0f56
+    uuid: 012b02cf-e620-47c5-87a7-d649266b24f8
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_lachin_region
   - id: 299816
     prefix: '9942622'
     number_min_length: 12
     number_max_length: 12
-    uuid: 89e69111-cb11-4a92-a803-b1a4fae275ea
+    uuid: 12e50f31-20c4-484b-b231-0cb551cc66a0
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_khankendi_region
   - id: 299817
     prefix: '9942623'
     number_min_length: 12
     number_max_length: 12
-    uuid: b3c399ca-b09e-4557-9fa3-7bd4a1a97df2
+    uuid: 207570f5-145b-4e60-99bc-8418d168ab61
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_qubadli_region
   - id: 299818
     prefix: '9942625'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0326154e-9517-4ee8-aa60-65a31e45b98c
+    uuid: c8ad245c-e828-426f-99b6-b18d45ee0ba2
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_zangilan_region
   - id: 299819
     prefix: '9942626'
     number_min_length: 12
     number_max_length: 12
-    uuid: eb7e7682-6cac-42b5-b031-2e55152725c6
+    uuid: 84bd7330-8a58-4bce-b40d-3169413da79b
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_shusha_region
   - id: 299820
     prefix: '9942627'
     number_min_length: 12
     number_max_length: 12
-    uuid: c16ed47d-0c94-4bd5-bd6c-e82285bb9ca9
+    uuid: 69bcd804-f94e-4678-b763-9ea285537e32
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_kalbajar_region
   - id: 299821
     prefix: '9942629'
     number_min_length: 12
     number_max_length: 12
-    uuid: ad3e2998-d577-49e5-968a-cfac96e49089
+    uuid: 3d19f76c-1fd9-4814-a420-7450718b59f1
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_khojavand_region
   - id: 299823
     prefix: '9942631'
     number_min_length: 12
     number_max_length: 12
-    uuid: dab5517a-beb3-4591-8ac5-251a8f930b44
+    uuid: b18c2840-24d9-485a-b4fc-f4416b79f500
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_fuzuli_region
   - id: 299824
     prefix: '9942632'
     number_min_length: 12
     number_max_length: 12
-    uuid: c6122d0b-2e7e-41d1-94a9-597d74eacdce
+    uuid: db4851e9-b9a4-4397-9532-1d1a8fbe8431
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_agdam_region
   - id: 299825
     prefix: '9942638'
     number_min_length: 12
     number_max_length: 12
-    uuid: 22e1afc5-f414-4f35-81df-74d3d2a8a27d
+    uuid: 88d4b2df-476a-4bb9-abbc-dfe524089d45
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_jabrayil_region
   - id: 301985
     prefix: '9942520'
     number_min_length: 12
     number_max_length: 12
-    uuid: 49f6a115-2282-47f9-973c-22cb647e248b
+    uuid: 5de2df2b-6b40-4047-8d57-027ccbfe11c9
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_yardimli_region
   - id: 345935
     prefix: '99436'
     number_min_length: 12
     number_max_length: 12
-    uuid: f3e4cdce-49b6-400e-89b9-96290c7b8c8a
+    uuid: fb843ba7-5f1b-49ff-a79c-8c20187cb770
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_nakhchivan_autonomous_republic_region
   - id: 345964
     prefix: '99436541'
     number_min_length: 12
     number_max_length: 12
-    uuid: 71333355-1f61-4a42-ac74-8a9c0a402d0b
+    uuid: 6ff8dc0a-ea0c-41a6-8f9b-d5d67c36ce7f
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_babek_region
   - id: 345965
     prefix: '99436542'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5495ec00-a497-4b0c-9290-3d655e3a2186
+    uuid: eb2d6c9e-0065-4be8-bd55-f4a6c25e84f5
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_sharur_region
   - id: 345966
     prefix: '99436543'
     number_min_length: 12
     number_max_length: 12
-    uuid: 69ea21a5-12ca-46af-9901-258af2f8fd4b
+    uuid: bec9f803-048e-4b6b-992a-9e6be0034c08
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_shahbuz_region
   - id: 345967
     prefix: '99436544'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70c2117c-a370-43ff-9358-fb1f1e8498ec
+    uuid: 068a6bf0-6d56-419e-8e72-7816160daf87
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_nakhchivan_city_region
   - id: 345968
     prefix: '99436546'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4d787e6f-2a26-4dd4-ac5a-3309b92974af
+    uuid: 3e0010ce-c73b-4961-b2c1-334aa5ad5429
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_julfa_region
   - id: 345969
     prefix: '99436547'
     number_min_length: 12
     number_max_length: 12
-    uuid: fd993a10-bd2a-4191-8bbc-9e7142ed6fda
+    uuid: 8a557cba-1428-498c-9992-0768bb69e3ee
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_ordubad_region
   - id: 345970
     prefix: '99436548'
     number_min_length: 12
     number_max_length: 12
-    uuid: 36ac85d7-60f1-488f-876f-d2286ace6528
+    uuid: 3dcacb2e-f83e-49b1-83b6-e6f7e9f4d3bf
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_kangarli_region
   - id: 345971
     prefix: '99436549'
     number_min_length: 12
     number_max_length: 12
-    uuid: 76a31df9-84ad-4353-b1ff-3b586cb2c28c
+    uuid: 0945fe13-08e3-456c-ae20-83aa5568491e
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_sadarak_region
   - id: 345972
     prefix: '99436550'
     number_min_length: 12
     number_max_length: 12
-    uuid: 253ece1e-9cc2-4e7c-92e5-38c498ad8140
+    uuid: 2b15fca0-801d-4b0f-b24b-0d80c15b6ab2
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_nakhchivan_city_region
   - id: 345973
     prefix: '99436552'
     number_min_length: 12
     number_max_length: 12
-    uuid: 06e91261-0f0f-45ff-991b-4dbd0cc84f65
+    uuid: b8192342-0687-4531-b772-865d08ae827e
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_sharur_region
   - id: 345974
     prefix: '99436554'
     number_min_length: 12
     number_max_length: 12
-    uuid: e5042e74-49e4-4ad6-8b65-6e94a39a516f
+    uuid: feddf888-53ad-4411-87a0-c0004239376d
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_nakhchivan_autonomous_republic_region
   - id: 370177
     prefix: '99444'
     number_min_length: 12
     number_max_length: 12
-    uuid: 04d22a64-74e1-4bd8-8977-8a1939782b78
+    uuid: b2c202ac-5533-4258-95c2-433b2f9da6b2
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_regions_region
   - id: 388622
     prefix: '99446'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0397a8e3-a6f5-49d6-9594-3ce0dac72352
+    uuid: a1aeaad3-a918-4449-af93-700946820d61
     country_id: *az
     network_id: *az_fixed
   - id: 443780
     prefix: '99488'
     number_min_length: 12
     number_max_length: 12
-    uuid: dc8558bc-cbd0-4db0-872d-5b4d78dad88e
+    uuid: 8f9c7e52-11fd-47dd-8640-6f44b10ac46f
     country_id: *az
-    network_id: *az_fixed
+    network_id: *az_baku_region

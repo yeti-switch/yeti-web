@@ -1,822 +1,994 @@
 country_id: &md 140
 networks:
 # Fixed Networks
-  - id: &md_fixed 4246
-    name: MD Fixed
-    uuid: bfdcbafb-9a7c-477b-8b85-c6ecb370844b
-    type_id: 12
+  - id: &md_tiraspol_region 6911
+    name: MD Tiraspol Region
+    uuid: 56cbfd63-6d25-4f12-a440-4c8d41de2f6f
+    type_id: 2
+  - id: &md_bender_region 9075
+    name: MD Bender Region
+    uuid: b47db32c-1be2-4bbd-bdeb-f690f887b820
+    type_id: 2
+  - id: &md_ribnita_region 9139
+    name: MD Ribnita Region
+    uuid: de665aa6-f0c5-4b42-8722-fd224a2c95df
+    type_id: 2
+  - id: &md_slobozia_region 9171
+    name: MD Slobozia Region
+    uuid: bb688b26-6f8f-40f8-bf89-e0b489aa36e5
+    type_id: 2
+  - id: &md_grigoriopol_region 27195
+    name: MD Grigoriopol Region
+    uuid: 03ab2028-02f1-4b89-968d-a783146a3e1a
+    type_id: 2
+  - id: &md_dubasari_region 27235
+    name: MD Dubasari Region
+    uuid: 13c232d8-0837-4b3f-adc2-08f0d34345ba
+    type_id: 2
+  - id: &md_dnestrovsk_region 27769
+    name: MD Dnestrovsk Region
+    uuid: 64feddae-6097-4148-b506-d155dfebfcb6
+    type_id: 2
+  - id: &md_chisinau_region 27817
+    name: MD Chisinau Region
+    uuid: 80d3a6e6-730a-4704-beff-e83ff5712bd3
+    type_id: 2
+  - id: &md_camenca_region 28035
+    name: MD Camenca Region
+    uuid: 54fbb881-2260-4883-869f-bd2b1e0658b7
+    type_id: 2
+  - id: &md_soroca_region 28324
+    name: MD Soroca Region
+    uuid: 8b538361-0d4c-4fc6-b6f2-66696fddbbc5
+    type_id: 2
+  - id: &md_balti_region 28342
+    name: MD Balti Region
+    uuid: 776e3e4a-f887-41f9-afef-c6017c763aea
+    type_id: 2
+  - id: &md_orhei_region 28441
+    name: MD Orhei Region
+    uuid: 4beb98b9-21c7-4292-83fa-d86dd39cfd40
+    type_id: 2
+  - id: &md_ungheni_region 28484
+    name: MD Ungheni Region
+    uuid: ad953a14-7aef-4e57-bcd7-7e5751d6c561
+    type_id: 2
+  - id: &md_straseni_region 28608
+    name: MD Straseni Region
+    uuid: 97abb6c1-0b03-4166-95a5-0c036be12e5a
+    type_id: 2
+  - id: &md_cimislia_region 28685
+    name: MD Cimislia Region
+    uuid: 1f6d54a8-7989-46ca-b791-cd4939e572a8
+    type_id: 2
+  - id: &md_edinet_region 28710
+    name: MD Edinet Region
+    uuid: 65e143c3-7a22-4733-8375-46b74d5d5ba7
+    type_id: 2
+  - id: &md_briceni_region 28757
+    name: MD Briceni Region
+    uuid: 8c6d6c3d-1011-4d6b-80b0-adf65c42f035
+    type_id: 2
+  - id: &md_glodeni_region 28779
+    name: MD Glodeni Region
+    uuid: b3a778be-b558-46ad-85c8-83b53faf15cb
+    type_id: 2
+  - id: &md_stefan_voda_region 28999
+    name: MD Stefan Voda Region
+    uuid: 23f27e84-7e78-4540-9b5f-d7f28fff40a9
+    type_id: 2
+  - id: &md_causeni_region 29055
+    name: MD Causeni Region
+    uuid: b785186d-6852-4bbf-85f1-cfd21c7f4ea3
+    type_id: 2
+  - id: &md_calarasi_region 29081
+    name: MD Calarasi Region
+    uuid: c2036353-94db-4a6c-9090-dbbf68dd6be7
+    type_id: 2
+  - id: &md_criuleni_region 29125
+    name: MD Criuleni Region
+    uuid: 2f82d4f0-eee4-4af0-beb2-b7efbcd13f3e
+    type_id: 2
+  - id: &md_floresti_region 29147
+    name: MD Floresti Region
+    uuid: 2a44f077-e46b-493e-b1dd-22d3b3b25e86
+    type_id: 2
+  - id: &md_donduseni_region 29190
+    name: MD Donduseni Region
+    uuid: e51a80e4-5d82-40b7-9bed-6383ad0959e6
+    type_id: 2
+  - id: &md_drochia_region 29231
+    name: MD Drochia Region
+    uuid: b4df30eb-03dd-44fe-94cb-c581c9167d2f
+    type_id: 2
+  - id: &md_riscani_region 29355
+    name: MD Riscani Region
+    uuid: ad929629-8445-4c4e-a56d-4423f5291bc4
+    type_id: 2
+  - id: &md_telenesti_region 29451
+    name: MD Telenesti Region
+    uuid: 0f05d46a-ff60-4822-a766-18231d3dee9a
+    type_id: 2
+  - id: &md_falesti_region 29476
+    name: MD Falesti Region
+    uuid: 368524ec-3149-44df-b106-c20f88c81d3c
+    type_id: 2
+  - id: &md_singerei_region 29614
+    name: MD Singerei Region
+    uuid: 544d1003-3892-4ccd-89fc-891643c7b80d
+    type_id: 2
+  - id: &md_ialoveni_region 29675
+    name: MD Ialoveni Region
+    uuid: 5d9a10e0-dbdf-4db3-9292-ebf993dfe1b1
+    type_id: 2
+  - id: &md_hincesti_region 29714
+    name: MD Hincesti Region
+    uuid: 08dcf9b6-e817-4cc5-ae2a-d9170e3b75d9
+    type_id: 2
+  - id: &md_rezina_region 29956
+    name: MD Rezina Region
+    uuid: e031afb4-f38f-4f42-b752-4ca73bab0cbd
+    type_id: 2
+  - id: &md_leova_region 30004
+    name: MD Leova Region
+    uuid: 33e2655a-f0da-4d49-bbb6-7889acf8827c
+    type_id: 2
+  - id: &md_nisporeni_region 30042
+    name: MD Nisporeni Region
+    uuid: 9a1f135f-32fc-416e-97b3-2ae5ee4ebb26
+    type_id: 2
+  - id: &md_anenii_noi_region 30088
+    name: MD Anenii Noi Region
+    uuid: 20fe348b-c542-48e8-b857-72850d4d8a5d
+    type_id: 2
+  - id: &md_ocnita_region 30222
+    name: MD Ocnita Region
+    uuid: 2878e89f-0fd6-46b3-a367-48504310c499
+    type_id: 2
+  - id: &md_soldanesti_region 30250
+    name: MD Soldanesti Region
+    uuid: 4208291e-011f-4e5f-aa4b-c3710aa3f2c9
+    type_id: 2
+  - id: &md_ceadir_lunga_region 30687
+    name: MD Ceadir Lunga Region
+    uuid: d47f267b-7047-4a2c-980e-c82292055b24
+    type_id: 2
+  - id: &md_vulcanesti_region 30730
+    name: MD Vulcanesti Region
+    uuid: a8c0669f-d987-4480-9724-47bed0c3900f
+    type_id: 2
+  - id: &md_taraclia_region 30763
+    name: MD Taraclia Region
+    uuid: 46360ab1-89d1-49e2-afde-84bf7f28031e
+    type_id: 2
+  - id: &md_cantemir_region 31007
+    name: MD Cantemir Region
+    uuid: 9f197c15-7205-4f4b-89b9-524c79b053b3
+    type_id: 2
+  - id: &md_basarabeasca_region 31205
+    name: MD Basarabeasca Region
+    uuid: 64ba8484-3b32-416d-9980-38894366f53a
+    type_id: 2
+  - id: &md_comrat_region 31232
+    name: MD Comrat Region
+    uuid: 6b89be84-9166-4fa4-ae63-2b7171f6aa9c
+    type_id: 2
+  - id: &md_cahul_region 31260
+    name: MD Cahul Region
+    uuid: 9c66036c-597c-4b2b-8e65-7e29240e4263
+    type_id: 2
 # Mobile Networks
-  - id: &md_orange_mobile 4359
+  - id: &md_orange_mobile 10533
     name: MD Orange Mobile
-    uuid: 809d0b85-c0e3-4873-9d82-30ec9cd89ae6
+    uuid: f796f53e-4a8a-441b-9686-a11846d3018f
     type_id: 3
-  - id: &md_unite_mobile 4641
+  - id: &md_unite_mobile 14514
     name: MD Unite Mobile
-    uuid: f7aa4fef-9572-413f-8277-8b7b3201038c
+    uuid: 5abbe21c-1e06-42f7-8291-181d8e1de2df
     type_id: 3
-  - id: &md_mobile 4723
+  - id: &md_mobile 16210
     name: MD Mobile
-    uuid: a88d6e1a-1175-4dd8-803f-0e6f45cfb975
+    uuid: 127c3e53-02ac-48e8-b15b-1ed5a8e870d6
     type_id: 3
-  - id: &md_moldcell_mobile 4848
+  - id: &md_moldcell_mobile 18179
     name: MD Moldcell Mobile
-    uuid: c502e8d7-b60d-4c6b-a8e4-7a0318bc7095
+    uuid: 10a67c9d-f1fb-4e75-a881-ba00ea584c7c
     type_id: 3
-  - id: &md_idc_mobile 4869
+  - id: &md_idc_mobile 18502
     name: MD Idc Mobile
-    uuid: 2ab7423c-d28a-479b-acd2-cbbeafd97e30
+    uuid: be1079da-a02b-4b31-811e-39968d5c4249
     type_id: 3
 # Paging Networks
-  - id: &md_paging 4462
+  - id: &md_paging 12723
     name: MD Paging
-    uuid: b1697afb-0d12-4aab-9880-2c80b375024a
-    type_id: 13
+    uuid: 29a4a935-a702-418b-8bb8-8ff6752ef942
+    type_id: 12
 # Supplementary services Networks
-  - id: &md_special_services 5271
+  - id: &md_special_services 21445
     name: MD Special Services
-    uuid: 61136e3f-8da2-41e5-9af3-5a40f235bc92
-    type_id: 14
-  - id: &md_emergency_services 5415
+    uuid: 4fb966ba-21bd-490a-a670-01f12c34dfe5
+    type_id: 13
+  - id: &md_emergency_services 21591
     name: MD Emergency Services
-    uuid: 03db1437-35b6-4e20-ae0f-5883eeda23a7
-    type_id: 14
-  - id: &md_social_value_services 5452
+    uuid: f10ca005-9c05-4f6f-8c1d-50f9b160ba05
+    type_id: 13
+  - id: &md_social_value_services 21640
     name: MD Social Value Services
-    uuid: 008dcb4c-0e03-477e-b56a-4a787c7ccd82
-    type_id: 14
-  - id: &md_directory_enquiry_services 5481
+    uuid: 8e01a95d-f6f0-4158-8afe-55ff78d6d2c6
+    type_id: 13
+  - id: &md_directory_enquiry_services 21682
     name: MD Directory Enquiry Services
-    uuid: 9d861d13-1b47-4d80-a946-409f9c2a7ded
-    type_id: 14
-  - id: &md_non_communications_services 5542
-    name: MD Non_Communications Services
-    uuid: 658f2139-36dd-40f4-87af-6f557f92ec8c
-    type_id: 14
-  - id: &md_general_interest_services 5556
+    uuid: 82183fbb-e66d-4fc6-b1fa-e5c2bae74fcb
+    type_id: 13
+  - id: &md_non_communications_services 21753
+    name: MD Non Communications Services
+    uuid: 958f72ec-d585-456d-8bb8-de5225cad703
+    type_id: 13
+  - id: &md_general_interest_services 21768
     name: MD General Interest Services
-    uuid: 2606995e-9a71-481d-8b3d-ed4b675b1abe
-    type_id: 14
-  - id: &md_premium_rate_services 5591
+    uuid: f959a498-76d1-4e8c-bb38-0ced6eebda50
+    type_id: 13
+  - id: &md_premium_rate_services 21803
     name: MD Premium Rate Services
-    uuid: 16f367a6-f73b-449d-bc3f-7280357f1b7d
-    type_id: 14
-  - id: &md_electronic_communications_services 5619
+    uuid: b634593c-e7a6-429d-99d3-00196ec40fa3
+    type_id: 13
+  - id: &md_electronic_communications_services 21831
     name: MD Electronic Communications Services
-    uuid: febb1bfe-58e8-45f0-bda6-39f7f58ece01
-    type_id: 14
-  - id: &md_operator_services_long_distance_and_international 5626
+    uuid: 6dcb4df7-4278-4c7d-b473-8ef9b83a000d
+    type_id: 13
+  - id: &md_operator_services_long_distance_and_international 21838
     name: MD Operator Services Long Distance And International
-    uuid: 8cdd887c-6c59-4c3c-8764-9871610e04c5
-    type_id: 14
-  - id: &md_routing 5631
+    uuid: b42c4682-e2b0-4f75-802f-49088c8c0796
+    type_id: 13
+  - id: &md_routing 21843
     name: MD Routing
-    uuid: 9ad6676c-d6af-45b6-b0e4-878e780bd44e
-    type_id: 14
-  - id: &md_internet_access 6030
+    uuid: 6fb74f59-e541-4813-8ce0-6aad79d47874
+    type_id: 13
+  - id: &md_internet_access 22681
     name: MD Internet Access
-    uuid: f889fe38-fb09-434f-81c8-df65d33f9b3f
-    type_id: 14
-  - id: &md_freephone_services 7560
+    uuid: 19b242f5-b10b-4943-8dc2-1e0a7c2c1f21
+    type_id: 13
+  - id: &md_freephone_services 38504
     name: MD Freephone Services
-    uuid: ea7c690e-d30c-4c72-91f2-f90828660697
-    type_id: 14
-  - id: &md_international_freephone_services 7582
+    uuid: e78ab8f7-9a58-488a-8a20-8bdbbb2aba81
+    type_id: 13
+  - id: &md_international_freephone_services 38526
     name: MD International Freephone Services
-    uuid: d3370f34-bcb2-420e-8222-eb89feca179d
-    type_id: 14
-  - id: &md_universal_access_services 7606
+    uuid: 1585afe7-670e-4dea-984e-37f53bf3a053
+    type_id: 13
+  - id: &md_universal_access_services 38623
     name: MD Universal Access Services
-    uuid: fc76a283-6dfd-4a4b-9e5c-1d793920be0e
-    type_id: 14
-  - id: &md_transport_services 7617
+    uuid: ed44cd4d-d360-4dce-86f6-a69d1ca91ad9
+    type_id: 13
+  - id: &md_transport_services 38760
     name: MD Transport Services
-    uuid: d12595b9-74bf-48c7-951f-9abf4145fa94
-    type_id: 14
-  - id: &md_shared_cost_services 7635
+    uuid: 6042641d-3022-4cef-9930-21c7494ae04b
+    type_id: 13
+  - id: &md_shared_cost_services 39267
     name: MD Shared Cost Services
-    uuid: fd54958f-2a92-4fc6-bdc4-984fa6678f97
-    type_id: 14
-  - id: &md_dial_up_internet_and_data_transmission_access_services 7661
-    name: MD Dial_Up Internet And Data Transmission Access Services
-    uuid: 7b8479ee-1a74-44e8-b581-149265e17436
-    type_id: 14
-  - id: &md_entertainment_games_contests_and_children_services 7833
+    uuid: 17dea9dd-e82a-4199-a44f-dcb106f4e9f0
+    type_id: 13
+  - id: &md_dial_up_internet_and_data_transmission_access_services 39730
+    name: MD Dial Up Internet And Data Transmission Access Services
+    uuid: d3e69530-7b6c-49ba-8daf-12303d2c1e1d
+    type_id: 13
+  - id: &md_entertainment_games_contests_and_children_services 42070
     name: MD Entertainment Games Contests And Children Services
-    uuid: 75ffe25c-2230-4b40-958a-1c829300867b
-    type_id: 14
-  - id: &md_televoting_services 7857
+    uuid: 26815ff9-1b6d-477c-a673-657892536ddc
+    type_id: 13
+  - id: &md_televoting_services 42094
     name: MD Televoting Services
-    uuid: 0ec59bc9-442d-4be5-991f-e7726f633a86
-    type_id: 14
-  - id: &md_information_services 7912
+    uuid: 3d8a242c-1076-4351-afa2-c3b1e2b8fe28
+    type_id: 13
+  - id: &md_information_services 42535
     name: MD Information Services
-    uuid: a78b06db-fad8-48a6-aad7-b5a350dfdca6
-    type_id: 14
-  - id: &md_adults_entertainment_services 7917
+    uuid: 9a3de8d9-8708-437b-b1ae-7fac868f723f
+    type_id: 13
+  - id: &md_adults_entertainment_services 42542
     name: MD Adults Entertainment Services
-    uuid: f62bdfbf-7980-4924-9171-00c5aeed81c6
-    type_id: 14
+    uuid: a8920585-6ad4-431e-8331-838191c461c0
+    type_id: 13
 network_prefixes:
 # Fixed Prefixes
   - id: 72760
     prefix: '373533'
     number_min_length: 11
     number_max_length: 11
-    uuid: f46251a0-0bf5-47cb-9656-031c07793431
+    uuid: 2ee81548-9c64-43ea-bea4-845a70e8449e
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_tiraspol_region
   - id: 86971
     prefix: '373552'
     number_min_length: 11
     number_max_length: 11
-    uuid: eba84bc4-ff50-47ad-aeac-01ab39aef994
+    uuid: a17cbd42-f1ec-46a6-9912-d0aaa69eb5e9
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_bender_region
   - id: 87057
     prefix: '373555'
     number_min_length: 11
     number_max_length: 11
-    uuid: 94cbca14-c0cc-4adf-bc71-69206635ea78
+    uuid: 644dfa11-80c0-4252-8af4-fc6ce2ad8ffe
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ribnita_region
   - id: 87094
     prefix: '373557'
     number_min_length: 11
     number_max_length: 11
-    uuid: 296c2285-efd0-4925-a599-ce0fc98f7c68
+    uuid: 2f28288e-ce03-4eca-97dc-589695825001
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_slobozia_region
   - id: 270994
     prefix: '373210'
     number_min_length: 11
     number_max_length: 11
-    uuid: a8f5e20f-1584-43e5-bf31-27c292e8edee
+    uuid: 561b0eba-8e4f-46a4-a89d-f055538325bc
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_grigoriopol_region
   - id: 272270
     prefix: '373215'
     number_min_length: 11
     number_max_length: 11
-    uuid: 18d7ed4a-79e9-470e-83d2-400d31adabcc
+    uuid: 662e4370-6da7-484e-b1d3-06b72420a90e
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_dubasari_region
   - id: 277506
     prefix: '373219'
     number_min_length: 11
     number_max_length: 11
-    uuid: a67deca9-7848-4e63-a9bd-eb1c1e3e72c9
+    uuid: 17cbe983-9eb0-43d6-95f4-5d5c6e184395
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_dnestrovsk_region
   - id: 277999
     prefix: '37322'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8684b3c0-7749-4084-b621-ffcca669bd9b
+    uuid: 311b4626-360d-4a4d-b6de-0136d1cdf1f0
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_chisinau_region
   - id: 282711
     prefix: '373216'
     number_min_length: 11
     number_max_length: 11
-    uuid: c1ee5a41-b3cc-4ca1-a643-97241a69ebc9
+    uuid: 7979c21e-0aef-4bbf-8020-5bc99b9ea29b
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_camenca_region
   - id: 286658
     prefix: '373230'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2a384429-9210-4d9a-8ba6-0d4fa02bfd47
+    uuid: e0fee5c8-16f7-4aed-a3ad-61647efc79b5
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_soroca_region
   - id: 286678
     prefix: '373231'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6d4b53d3-29b9-4b27-8af2-e7a267af178c
+    uuid: de7e5ab3-1e08-4515-a81d-92121c755845
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_balti_region
   - id: 287493
     prefix: '373235'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4511d61-916d-4d58-b3bf-b607f423122d
+    uuid: 696dfb8e-ff59-48e3-9efc-b0e4465e18bb
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_orhei_region
   - id: 287687
     prefix: '373236'
     number_min_length: 11
     number_max_length: 11
-    uuid: ebcf8da0-c462-4459-92bc-172e99636241
+    uuid: 911192f3-2e8f-4e16-8cd0-a74232861703
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ungheni_region
   - id: 288515
     prefix: '373237'
     number_min_length: 11
     number_max_length: 11
-    uuid: 06f7911c-f8ff-44d1-8467-8bfaaa91dba9
+    uuid: bfe411bd-6abe-40e0-97b6-744651cf75e1
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_straseni_region
   - id: 289569
     prefix: '373241'
     number_min_length: 11
     number_max_length: 11
-    uuid: 06ddacfe-c1a1-4051-8df6-7c60e10cab84
+    uuid: f7fa50d4-1472-4cc9-a37d-4856e639e711
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_cimislia_region
   - id: 290176
     prefix: '373246'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0226ecd5-6c81-4e21-9b82-05c55846c16f
+    uuid: e7947d59-5d2f-4e27-9b60-7d9831f5dcf6
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_edinet_region
   - id: 290917
     prefix: '373247'
     number_min_length: 11
     number_max_length: 11
-    uuid: 406fa54b-deb8-43bc-a5d6-30ec7686211e
+    uuid: 92c67b4b-48a0-4745-8acb-a1ba755492e5
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_briceni_region
   - id: 291360
     prefix: '373249'
     number_min_length: 11
     number_max_length: 11
-    uuid: deb0451b-5746-492f-989b-9f3516175d53
+    uuid: 4a14114c-1f58-439e-a15e-035e4d3611ee
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_glodeni_region
   - id: 294652
     prefix: '373242'
     number_min_length: 11
     number_max_length: 11
-    uuid: 24e5132f-1977-47dc-b361-8d00481de0b5
+    uuid: d70b597a-ab19-44ab-b54b-bdd2150feb16
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_stefan_voda_region
   - id: 294879
     prefix: '373243'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5f59ef89-b563-464b-a0c2-be835d953de9
+    uuid: c6cba55f-bb30-43b6-a92d-93f3818c948d
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_causeni_region
   - id: 295189
     prefix: '373244'
     number_min_length: 11
     number_max_length: 11
-    uuid: 754df729-58d9-40ec-a00d-d4c09bb31847
+    uuid: 43fd3a8f-a795-47b6-b779-a5bf281279d3
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_calarasi_region
   - id: 295944
     prefix: '373248'
     number_min_length: 11
     number_max_length: 11
-    uuid: 874357bf-7dc2-4aee-875e-5e07faec813f
+    uuid: 0fd4b385-24ad-4795-ae30-13a6f7485750
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_criuleni_region
   - id: 296841
     prefix: '373250'
     number_min_length: 11
     number_max_length: 11
-    uuid: f06061f4-06bb-4b26-98f2-631d749c92e9
+    uuid: b0f9aa9c-5410-40e4-964a-b074a02d6f1a
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_floresti_region
   - id: 297630
     prefix: '373251'
     number_min_length: 11
     number_max_length: 11
-    uuid: e144abfa-20fd-4be1-9f9d-dbdd55e8802e
+    uuid: 9ff795f1-2209-453b-ac79-02d0138e0f2f
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_donduseni_region
   - id: 298148
     prefix: '373252'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3fea73c0-bab2-44ec-8187-03823382686d
+    uuid: bfbdef4b-644b-4c75-93c3-12d8b63522ec
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_drochia_region
   - id: 298836
     prefix: '373256'
     number_min_length: 11
     number_max_length: 11
-    uuid: 309fd912-85b5-48ab-98a5-4a4760d713c8
+    uuid: 1278c097-986d-4488-8774-659ecb951e8f
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_riscani_region
   - id: 299701
     prefix: '373258'
     number_min_length: 11
     number_max_length: 11
-    uuid: 49c90214-0cdf-4043-8dfa-101be1eb9a3d
+    uuid: 8678aeb8-5981-4d77-9e0d-0303e723096c
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_telenesti_region
   - id: 299743
     prefix: '373259'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3873b544-90c6-47a2-a4ba-9e093c0ea345
+    uuid: 65c8dc5a-4a3e-4e51-af50-1b916b5606cc
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_falesti_region
   - id: 300307
     prefix: '373262'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7664ab53-b8f7-4669-b4da-361d9ef589bc
+    uuid: 240df1aa-826a-4d80-a4b1-ce945213e062
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_singerei_region
   - id: 300770
     prefix: '373268'
     number_min_length: 11
     number_max_length: 11
-    uuid: 588e3c7c-e509-4909-9d55-5afc24991cec
+    uuid: 3d9794e4-2644-4018-a3d6-59b3ac032679
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ialoveni_region
   - id: 300852
     prefix: '373269'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9d72438-1a4b-41b9-8ea6-62649d795c65
+    uuid: 3188c74f-2361-4181-abfe-79ba8fdacfc2
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_hincesti_region
   - id: 303234
     prefix: '373254'
     number_min_length: 11
     number_max_length: 11
-    uuid: ed1eaccf-d919-491e-82a2-5fc6bd0e68dc
+    uuid: abcadf25-59ed-45a0-8891-f71471350e19
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_rezina_region
   - id: 303551
     prefix: '373263'
     number_min_length: 11
     number_max_length: 11
-    uuid: bdde86dd-c4f0-4e18-a660-a23d0a207557
+    uuid: 593ae3cd-cbc4-4242-b7b2-204ced81649f
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_leova_region
   - id: 303635
     prefix: '373264'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b0116bc-c914-41be-996b-a38671c14acf
+    uuid: 71dbaf83-69ac-4de7-9536-49beff674e40
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_nisporeni_region
   - id: 303702
     prefix: '373265'
     number_min_length: 11
     number_max_length: 11
-    uuid: a1df0429-a9dd-4c2c-9ed9-4d1170d60ffb
+    uuid: 84116ac8-3e6a-4310-a2f1-15156d23eecf
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_anenii_noi_region
   - id: 305215
     prefix: '373271'
     number_min_length: 11
     number_max_length: 11
-    uuid: b9a21af9-916c-4699-bf3c-fe81bc5c1dce
+    uuid: d90e3980-c925-4052-ac91-6422f14b0d37
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ocnita_region
   - id: 305715
     prefix: '373272'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2ea80ecb-4fbd-447a-90f2-b300de6717a0
+    uuid: d1c42bdc-3118-454e-b5be-f6d7e62a7214
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_soldanesti_region
   - id: 308545
     prefix: '373291'
     number_min_length: 11
     number_max_length: 11
-    uuid: 11f326db-e2f0-4d39-9c4d-89552cca27e9
+    uuid: 7bfdc92c-fb79-41da-9e17-fb6c56b543e7
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ceadir_lunga_region
   - id: 308601
     prefix: '373293'
     number_min_length: 11
     number_max_length: 11
-    uuid: 553cb8af-c797-4a57-96eb-713872a78d10
+    uuid: de27ac6f-d65f-4ca9-bee4-ba2c02d0de44
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_vulcanesti_region
   - id: 308644
     prefix: '373294'
     number_min_length: 11
     number_max_length: 11
-    uuid: 92415d34-1d23-4894-9c18-f7ab7ec57c9a
+    uuid: dde6d1d3-965e-46d9-b574-55b6ce558398
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_taraclia_region
   - id: 312762
     prefix: '373273'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65620caa-4edf-42a2-965a-901841c4ca9e
+    uuid: 7c6b323b-992a-40e0-b932-2713332635ec
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_cantemir_region
   - id: 315548
     prefix: '373297'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4a197231-078c-4dd6-9278-05a83afcf912
+    uuid: 4b1fed61-af21-4655-b9f4-45171e339ec2
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_basarabeasca_region
   - id: 315800
     prefix: '373298'
     number_min_length: 11
     number_max_length: 11
-    uuid: 024876d2-657f-4157-b8de-dafbc21fc77d
+    uuid: 8095faee-e734-43c1-8055-4651d1fb4b92
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_comrat_region
   - id: 315831
     prefix: '373299'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9d47a6b3-cfef-40cb-9fec-dd07ff5a2dba
+    uuid: d767c2e5-27b9-41e6-bc6e-7d730ad37acb
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_cahul_region
   - id: 327279
     prefix: '37332'
     number_min_length: 11
     number_max_length: 11
-    uuid: 15e1ed42-054f-4bd8-ad09-4093d80b80e6
+    uuid: 70417674-cfaf-4e8c-a7ee-72ccbfb32a91
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_chisinau_region
   - id: 330755
     prefix: '373330'
     number_min_length: 11
     number_max_length: 11
-    uuid: 43484881-6e8c-460f-b457-4434adc0a966
+    uuid: e1997c03-fd57-42c8-8faf-a3d98a0572fd
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_soroca_region
   - id: 331586
     prefix: '373331'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3a4b32f5-15b2-48ba-8a04-8ab652b12cd8
+    uuid: e216d065-82be-4f47-90e0-cea175d4f490
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_balti_region
   - id: 331711
     prefix: '373335'
     number_min_length: 11
     number_max_length: 11
-    uuid: efd25b81-f1f7-4da9-93d3-e8360dfa02fc
+    uuid: 6d0d38b0-c93d-435c-9cb0-6e72d8865a57
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_orhei_region
   - id: 331750
     prefix: '373336'
     number_min_length: 11
     number_max_length: 11
-    uuid: 959e8344-4b6a-4786-a8e3-508f661db1f6
+    uuid: a6e0c60e-030d-422a-b83e-b43e41d3fd9b
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ungheni_region
   - id: 340783
     prefix: '373341'
     number_min_length: 11
     number_max_length: 11
-    uuid: ac2fff9b-4e57-41e4-8912-6dd82e6c6f5a
+    uuid: 87354355-c690-457f-a478-2d0c8d0b86a5
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_cimislia_region
   - id: 341356
     prefix: '373342'
     number_min_length: 11
     number_max_length: 11
-    uuid: 417a36b6-0c2f-4216-806b-efbe0bca5650
+    uuid: 7be55ea1-afdc-4210-b0ca-00decffeeb75
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_stefan_voda_region
   - id: 342093
     prefix: '373337'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4cf73d84-275f-44b2-92f3-ee34c55087d1
+    uuid: c57944cf-7ff0-4ce4-8ede-68395a949d2f
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_straseni_region
   - id: 342556
     prefix: '373346'
     number_min_length: 11
     number_max_length: 11
-    uuid: f4f4a067-cf34-46d4-b45b-6380d9fa41de
+    uuid: 839f8ace-5686-4b3d-b054-88db82a277a3
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_edinet_region
   - id: 343338
     prefix: '373347'
     number_min_length: 11
     number_max_length: 11
-    uuid: 19e2867f-129f-4e94-a5e3-f3273ee2cd8a
+    uuid: 1e85dfa7-9c19-4773-ad04-30a6e58172ab
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_briceni_region
   - id: 344851
     prefix: '373352'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1b51c6b0-0be4-4125-a336-ca5c40dc87eb
+    uuid: 7c05663f-0252-4d38-a869-722f4bf5b8c7
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_drochia_region
   - id: 345622
     prefix: '373356'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4abcaf89-fa13-4d41-908f-139ded152cb6
+    uuid: 6267f57d-8157-4fd8-8379-5b41a2eb482b
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_riscani_region
   - id: 345767
     prefix: '373358'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4004407b-ff0c-4cae-8371-d3209482ce30
+    uuid: 169887b4-530a-4da5-9906-c015636a7535
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_telenesti_region
   - id: 345882
     prefix: '373359'
     number_min_length: 11
     number_max_length: 11
-    uuid: 69356753-1f28-48f1-b10a-767fd13b2fdd
+    uuid: d9fa1608-31e7-44fc-9c8e-a3de58edca64
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_falesti_region
   - id: 349317
     prefix: '373397'
     number_min_length: 11
     number_max_length: 11
-    uuid: 568c817b-a797-4be9-a260-fe938c1b64e1
+    uuid: 075ce33c-1c00-4c3f-9d42-24eab30342d4
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_basarabeasca_region
   - id: 349352
     prefix: '373398'
     number_min_length: 11
     number_max_length: 11
-    uuid: 39439ea8-2d1f-4b84-8d89-95145a90f476
+    uuid: 8475434b-6825-4a52-a4d0-271d06ed438d
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_comrat_region
   - id: 349390
     prefix: '373399'
     number_min_length: 11
     number_max_length: 11
-    uuid: ad31b17c-b54b-4e6a-a21e-0b8183ff4a11
+    uuid: 5b161535-f1ab-4698-9d6c-f048537cfe97
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_cahul_region
   - id: 350981
     prefix: '373343'
     number_min_length: 11
     number_max_length: 11
-    uuid: dd6db609-f0e7-40f5-91d8-45fa11694954
+    uuid: deb48acf-4d5a-4624-8cea-9377a517ba32
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_causeni_region
   - id: 351694
     prefix: '373344'
     number_min_length: 11
     number_max_length: 11
-    uuid: 220fb3e0-0fcf-4db1-af6c-b9a95b8837c4
+    uuid: f7bf886f-ab3a-41b1-96eb-ce319ca75451
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_calarasi_region
   - id: 351744
     prefix: '373348'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0cef2a45-f22e-4f03-a2ab-8d38cb4e742c
+    uuid: 485d9f1e-a872-4add-abd7-6e0349bae11e
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_criuleni_region
   - id: 352138
     prefix: '373349'
     number_min_length: 11
     number_max_length: 11
-    uuid: a173e907-2d1a-4210-a71f-3ff3f0bdd0ca
+    uuid: 1d39840d-0890-489c-b058-685d21b612aa
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_glodeni_region
   - id: 352485
     prefix: '373350'
     number_min_length: 11
     number_max_length: 11
-    uuid: e0b4f3cf-9e8c-4d15-a181-c05fd9827245
+    uuid: 5ad60226-78aa-4019-93d9-de3bc88fc80a
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_floresti_region
   - id: 352571
     prefix: '373351'
     number_min_length: 11
     number_max_length: 11
-    uuid: 266c64e8-4be3-474b-9331-1c374028a828
+    uuid: a2910c1a-4ab4-4cb8-969e-a78cdb6206ff
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_donduseni_region
   - id: 354535
     prefix: '373362'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7565f8a2-07e8-4dec-8b7c-66a5e5329267
+    uuid: 207343dc-8322-4f4e-993e-61f9f88f8af4
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_singerei_region
   - id: 354573
     prefix: '373363'
     number_min_length: 11
     number_max_length: 11
-    uuid: d5715785-3b72-4960-a0b1-bdf4063381fc
+    uuid: d3856ea6-223c-430e-be02-3e52de766845
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_leova_region
   - id: 354625
     prefix: '373364'
     number_min_length: 11
     number_max_length: 11
-    uuid: c97c8cab-b95a-4ad4-bc0d-5449ee3ab411
+    uuid: 56ceb6c7-20a5-43b4-a2a8-db233c406223
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_nisporeni_region
   - id: 354733
     prefix: '373365'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7aed2047-e455-42f1-9a92-d65de9d40a7b
+    uuid: 4f74f0c1-e9f0-4420-a8c8-f5df13b8bb57
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_anenii_noi_region
   - id: 355601
     prefix: '373368'
     number_min_length: 11
     number_max_length: 11
-    uuid: a3795565-bf82-46e1-96b2-b9739bf4832d
+    uuid: 9ac64699-165b-49b1-8c6a-4266112c096b
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ialoveni_region
   - id: 355695
     prefix: '373369'
     number_min_length: 11
     number_max_length: 11
-    uuid: 542e0a03-8727-4f9d-a82f-be2025dbfd4e
+    uuid: 6a63075b-4bd7-4039-bb40-1bd671a8d1da
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_hincesti_region
   - id: 356095
     prefix: '373371'
     number_min_length: 11
     number_max_length: 11
-    uuid: f32b78a5-7235-4edd-92d2-8b4a88221e24
+    uuid: b5c8ab60-fd17-4978-b775-f0f3c28a3cf9
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ocnita_region
   - id: 356155
     prefix: '373372'
     number_min_length: 11
     number_max_length: 11
-    uuid: 24eed197-11c4-43ec-8405-72f3996b4f93
+    uuid: 0e357166-1197-4e5b-8a79-a0e5a74c865a
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_soldanesti_region
   - id: 356220
     prefix: '373373'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1ed3bd3-0e78-46cf-83bb-fc8620707602
+    uuid: 39d0a327-4e7a-4b59-8d9b-87c40fd64d48
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_cantemir_region
   - id: 357616
     prefix: '373391'
     number_min_length: 11
     number_max_length: 11
-    uuid: e3f3b2c4-d0bf-4963-8c75-d30bd5758e65
+    uuid: fa9fb2f8-4230-4338-91e7-a9f29867df40
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_ceadir_lunga_region
   - id: 358278
     prefix: '373393'
     number_min_length: 11
     number_max_length: 11
-    uuid: 84f283d6-20a1-4e93-8f3d-e58503615089
+    uuid: cd5ddf61-fc43-405b-8a0b-bbaa87a10450
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_vulcanesti_region
   - id: 358592
     prefix: '373394'
     number_min_length: 11
     number_max_length: 11
-    uuid: 779c75cf-5b37-4ad2-8fa6-800abdb6bda1
+    uuid: bf167f24-5a78-49b7-b3ed-0e7ff1549cdb
     country_id: *md
-    network_id: *md_fixed
+    network_id: *md_taraclia_region
 # Mobile Prefixes
   - id: 95215
     prefix: '37360'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5b931074-aa87-4b4c-9dd1-a2c49ca95fef
+    uuid: 48c33681-2c46-4cce-a4cc-4d84c049ffd4
     country_id: *md
     network_id: *md_orange_mobile
   - id: 108602
     prefix: '373610'
     number_min_length: 11
     number_max_length: 11
-    uuid: ea6086c6-25c4-4b0d-9f8e-39c2a285892b
+    uuid: e26db3c7-1a24-4127-85e6-6268047c4b05
     country_id: *md
     network_id: *md_orange_mobile
   - id: 108623
     prefix: '373611'
     number_min_length: 11
     number_max_length: 11
-    uuid: 94764fbf-83b8-4e29-a0ba-16e46a6a2616
+    uuid: c7bdce8c-f422-4bd8-8a76-34386a62f8a5
     country_id: *md
     network_id: *md_orange_mobile
   - id: 111481
     prefix: '373620'
     number_min_length: 11
     number_max_length: 11
-    uuid: 761121ce-f16a-4da2-bcb7-00db7ddc7355
+    uuid: 7f959ef6-a34e-4ffd-bf97-2264f9f761da
     country_id: *md
     network_id: *md_orange_mobile
   - id: 111574
     prefix: '373621'
     number_min_length: 11
     number_max_length: 11
-    uuid: e82fb84c-c8c3-49dd-bf13-446e78fc7902
+    uuid: 34f321aa-e33c-4ef8-84cc-2668962df643
     country_id: *md
     network_id: *md_orange_mobile
   - id: 146818
     prefix: '37368'
     number_min_length: 11
     number_max_length: 11
-    uuid: ccb57e52-25c3-4352-95f1-100272dac04b
+    uuid: 2460668d-efb5-4f4b-bebe-b5800907d68c
     country_id: *md
     network_id: *md_orange_mobile
   - id: 148661
     prefix: '37369'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae0ecadf-32fc-4382-9497-490faa64e6ac
+    uuid: 81932a8f-05fa-43bd-9d72-a9e1288abd1b
     country_id: *md
     network_id: *md_orange_mobile
   - id: 151438
     prefix: '373671'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2fd84df9-6d30-492b-89d7-e74400024f4c
+    uuid: 74d41209-6b9a-4603-b642-6456bf3f3247
     country_id: *md
     network_id: *md_unite_mobile
   - id: 151442
     prefix: '373672'
     number_min_length: 11
     number_max_length: 11
-    uuid: a1832238-e557-4e77-945a-f896d9e7d491
+    uuid: 70a8142d-098a-4b4c-8652-39d59c97b87b
     country_id: *md
     network_id: *md_unite_mobile
   - id: 151454
     prefix: '373673'
     number_min_length: 11
     number_max_length: 11
-    uuid: dc659a70-e293-446f-b1fb-01f7197159c9
+    uuid: 472c5dcf-7bd6-4b11-83bc-0ee5773a53f8
     country_id: *md
     network_id: *md_unite_mobile
   - id: 151483
     prefix: '373674'
     number_min_length: 11
     number_max_length: 11
-    uuid: a811437b-1f1a-4c97-a9fa-b3e2eca46060
+    uuid: 1587f11a-7770-462f-9c8c-c969b156e1eb
     country_id: *md
     network_id: *md_unite_mobile
   - id: 151487
     prefix: '373675'
     number_min_length: 11
     number_max_length: 11
-    uuid: e7a0d461-1548-4bb9-b227-e41d76d1c05d
+    uuid: 6934d45e-2144-46ab-b7f7-2395be048c02
     country_id: *md
     network_id: *md_unite_mobile
   - id: 151497
     prefix: '373676'
     number_min_length: 11
     number_max_length: 11
-    uuid: ca2bce36-46ae-4ac2-80ef-c89fdd90313d
+    uuid: 3fbc0762-e18b-482c-9ebe-ecc36b98e37c
     country_id: *md
     network_id: *md_unite_mobile
   - id: 151500
     prefix: '373677'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8e377b43-a36c-4868-a683-3b82079dfc0d
+    uuid: 648e6116-e62c-4702-b0df-11c29348a34b
     country_id: *md
     network_id: *md_unite_mobile
   - id: 151522
     prefix: '3736788'
     number_min_length: 11
     number_max_length: 11
-    uuid: ed82fccf-1557-4823-910a-d7bcec2424eb
+    uuid: f54d728e-985c-483a-8e40-07edcc68102b
     country_id: *md
     network_id: *md_unite_mobile
   - id: 163994
     prefix: '37371'
     number_min_length: 11
     number_max_length: 11
-    uuid: a892d5cc-4d46-48ae-a15b-9cf8edbfd3b3
+    uuid: d822db3e-6385-443a-a03e-45768565ba61
     country_id: *md
     network_id: *md_mobile
   - id: 188005
     prefix: '373760'
     number_min_length: 11
     number_max_length: 11
-    uuid: 095e0fad-5a3f-40ba-946b-41cd7366481c
+    uuid: bb1c5d41-2b38-40d1-aa04-3ef85d2ad7ef
     country_id: *md
     network_id: *md_moldcell_mobile
   - id: 188520
     prefix: '373767'
     number_min_length: 11
     number_max_length: 11
-    uuid: e600a41a-a6fa-479f-93da-447799fe56e3
+    uuid: 7aabf330-ba74-49d4-8fa0-fc82ca39c8bc
     country_id: *md
     network_id: *md_moldcell_mobile
   - id: 192094
     prefix: '37377'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8546c4c5-1e6d-4b75-aa54-de6ad8117f77
+    uuid: b8701567-93df-4604-bb0a-5e28639a232f
     country_id: *md
     network_id: *md_idc_mobile
   - id: 198396
     prefix: '37378'
     number_min_length: 11
     number_max_length: 11
-    uuid: e15a9a28-199b-42b3-8398-178774f8a756
+    uuid: bf68a8eb-db4f-4413-a549-07ae6e13bdcd
     country_id: *md
     network_id: *md_moldcell_mobile
   - id: 206660
     prefix: '37379'
     number_min_length: 11
     number_max_length: 11
-    uuid: 35217ee5-65ed-4d68-bc61-5a130f9b71b6
+    uuid: fc5e352d-4319-48e1-8b1d-36e43810a368
     country_id: *md
     network_id: *md_moldcell_mobile
 # Paging Prefixes
@@ -824,7 +996,7 @@ network_prefixes:
     prefix: '37364'
     number_min_length: 11
     number_max_length: 11
-    uuid: 44260208-3505-4b4e-a550-ada9eccc9dc4
+    uuid: b4450730-4580-4fb4-ae1d-b34aeb10cfee
     country_id: *md
     network_id: *md_paging
 # Country code Prefixes
@@ -832,7 +1004,7 @@ network_prefixes:
     prefix: '373'
     number_min_length: 4
     number_max_length: 100
-    uuid: 0a73f8db-198e-49c2-bc1a-1359db0c940c
+    uuid: 4a1d3e0f-ed04-4434-9272-008324141c37
     country_id: *md
     network_id: null
 # Supplementary services Prefixes
@@ -840,244 +1012,244 @@ network_prefixes:
     prefix: '3731'
     number_min_length: 6
     number_max_length: 9
-    uuid: 018f5982-d108-44e9-a692-052202581cd0
+    uuid: 0b57783d-3216-4fe7-9542-ec3044bd108a
     country_id: *md
     network_id: *md_special_services
   - id: 242624
     prefix: '373112'
     number_min_length: 6
     number_max_length: 6
-    uuid: e5be754d-71a8-4615-83d4-e868d0c409c5
+    uuid: a80ebe9d-42bf-4687-b97e-954b808bac19
     country_id: *md
     network_id: *md_emergency_services
   - id: 242680
     prefix: '373116'
     number_min_length: 9
     number_max_length: 9
-    uuid: f0c94c05-de46-41e2-b7b4-0b8a26417011
+    uuid: 012da4be-3f13-4239-898b-94bde797b1c5
     country_id: *md
     network_id: *md_social_value_services
   - id: 242727
     prefix: '373118'
     number_min_length: 7
     number_max_length: 8
-    uuid: 6ad954eb-ec1e-4f1e-a308-49ea05eb1015
+    uuid: be7aac4e-2268-41b2-ae70-e2fb43c44ed5
     country_id: *md
     network_id: *md_directory_enquiry_services
   - id: 242866
     prefix: '373130'
     number_min_length: 7
     number_max_length: 7
-    uuid: 845516b3-27c9-4e2b-bcbb-8fcb4d02da70
+    uuid: adbf389b-1de7-4929-97ae-bb470eb71d7b
     country_id: *md
     network_id: *md_non_communications_services
   - id: 242868
     prefix: '373131'
     number_min_length: 7
     number_max_length: 7
-    uuid: 86d098b3-8a49-46d5-adcb-911b0fa2ff1a
+    uuid: be426ba7-a77a-4f0d-b045-4c5ace9243b7
     country_id: *md
     network_id: *md_non_communications_services
   - id: 242904
     prefix: '37314'
     number_min_length: 8
     number_max_length: 8
-    uuid: 8cf4d98d-0f83-482e-a75b-f7fa06849fdc
+    uuid: 96513ba7-f80c-4b52-b86f-7b85a00e18aa
     country_id: *md
     network_id: *md_general_interest_services
   - id: 242956
     prefix: '373150'
     number_min_length: 7
     number_max_length: 7
-    uuid: b44a78c6-4c89-4b57-80f2-a49bd13c2d6e
+    uuid: f40d5ecc-8dde-40ca-8f3a-c93240a40428
     country_id: *md
     network_id: *md_premium_rate_services
   - id: 242964
     prefix: '373151'
     number_min_length: 7
     number_max_length: 7
-    uuid: a9dc5358-050c-47cc-8f7d-06fd75082462
+    uuid: ab8cddb1-6e5c-4d85-8df4-2888ba81cb8b
     country_id: *md
     network_id: *md_premium_rate_services
   - id: 242975
     prefix: '373152'
     number_min_length: 7
     number_max_length: 7
-    uuid: bd691384-b298-4238-9bb5-6e683dbe6e85
+    uuid: 96661b62-be4d-4354-bb96-1a1bf825898e
     country_id: *md
     network_id: *md_premium_rate_services
   - id: 242980
     prefix: '373153'
     number_min_length: 7
     number_max_length: 7
-    uuid: 743877c2-e18a-48f4-9832-3a25a45192d0
+    uuid: 15cdd87b-2e72-476c-aeaf-395552a86bd7
     country_id: *md
     network_id: *md_premium_rate_services
   - id: 242985
     prefix: '373154'
     number_min_length: 7
     number_max_length: 7
-    uuid: f798046f-1209-4104-bb37-dd816ead17c1
+    uuid: 59caf383-4885-402e-bf80-55beed1080f2
     country_id: *md
     network_id: *md_premium_rate_services
   - id: 242990
     prefix: '373155'
     number_min_length: 7
     number_max_length: 7
-    uuid: e2eccaea-43b3-437c-9200-ae5abb729dec
+    uuid: 972b8622-d38b-4954-8637-763fe3c589e0
     country_id: *md
     network_id: *md_premium_rate_services
   - id: 243032
     prefix: '373160'
     number_min_length: 7
     number_max_length: 7
-    uuid: 92fddcc1-a376-419d-9b6a-bf32a9c5c8e0
+    uuid: 5411737e-fbf2-418e-ad17-40c15bc7baa4
     country_id: *md
     network_id: *md_electronic_communications_services
   - id: 243035
     prefix: '373161'
     number_min_length: 7
     number_max_length: 7
-    uuid: c5ea9082-6d3a-4283-b049-9ddc67aaf181
+    uuid: c096780d-36cb-4b37-9bf3-2f235bc135b9
     country_id: *md
     network_id: *md_electronic_communications_services
   - id: 243039
     prefix: '373162'
     number_min_length: 7
     number_max_length: 7
-    uuid: 5df6fe2a-9619-4ee0-9cb2-949f1808163d
+    uuid: dd7d334e-642d-4230-a3d8-c79de558f4cf
     country_id: *md
     network_id: *md_electronic_communications_services
   - id: 243040
     prefix: '373163'
     number_min_length: 7
     number_max_length: 7
-    uuid: e1d20635-fc9f-4fc0-bd8b-c6a702fd83c3
+    uuid: 14a80703-e449-4924-8461-fc732f118524
     country_id: *md
     network_id: *md_electronic_communications_services
   - id: 243045
     prefix: '373168'
     number_min_length: 7
     number_max_length: 7
-    uuid: b605f08d-e98f-4afe-a0d2-0b90b2fc588a
+    uuid: 410fd578-6c3f-4976-adeb-97eabb7a98b5
     country_id: *md
     network_id: *md_operator_services_long_distance_and_international
   - id: 243047
     prefix: '373169'
     number_min_length: 7
     number_max_length: 7
-    uuid: e812b7d0-e4d4-4e6f-8a1b-112fed9b3659
+    uuid: 02aa30e8-7b58-495d-b363-6cce9be05814
     country_id: *md
     network_id: *md_operator_services_long_distance_and_international
   - id: 243060
     prefix: '37317'
     number_min_length: 7
     number_max_length: 7
-    uuid: 70a182ad-bd77-4130-9020-01b3adb703d2
+    uuid: f710df32-6d76-4468-85bf-875ca6d71b6c
     country_id: *md
     network_id: *md_routing
   - id: 247350
     prefix: '373190'
     number_min_length: 7
     number_max_length: 7
-    uuid: 42be5bae-afff-4ddb-98d4-0cb9d9d087a9
+    uuid: 07621e55-8351-4608-845b-6c543d5cd53f
     country_id: *md
     network_id: *md_internet_access
   - id: 247364
     prefix: '373191'
     number_min_length: 7
     number_max_length: 7
-    uuid: aa9ddabb-1ddb-4f21-96f0-f895b4570a11
+    uuid: 610e02ef-aaf8-4d8d-97e4-3a729c268041
     country_id: *md
     network_id: *md_internet_access
   - id: 247366
     prefix: '373192'
     number_min_length: 7
     number_max_length: 7
-    uuid: c139c971-344b-4d94-a67c-5658a1e3cf2a
+    uuid: 1b3cd255-0b02-4972-b4ce-58f2dc5ebcd9
     country_id: *md
     network_id: *md_internet_access
   - id: 247369
     prefix: '373193'
     number_min_length: 7
     number_max_length: 7
-    uuid: 72933814-6cf7-4431-8d6f-0fc0d4cb9463
+    uuid: 28d29d94-253e-4c5a-81e7-820f8847cf23
     country_id: *md
     network_id: *md_internet_access
   - id: 247371
     prefix: '373194'
     number_min_length: 7
     number_max_length: 7
-    uuid: f330fdd5-1a5f-4874-9a88-750b54f767a0
+    uuid: 4c787e56-1ff6-4297-be5b-6a752da9ff23
     country_id: *md
     network_id: *md_internet_access
   - id: 403480
     prefix: '373800'
     number_min_length: 11
     number_max_length: 11
-    uuid: e3f0f10b-ae89-4c26-bf64-37d9216b017a
+    uuid: b44446f2-fd48-4de2-ad39-0338934f07d4
     country_id: *md
     network_id: *md_freephone_services
   - id: 403506
     prefix: '3738006'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6d10a115-fec1-4043-89eb-6c5099b82a1e
+    uuid: 26336b42-7f27-47a1-9bfb-0bd79981aa95
     country_id: *md
     network_id: *md_international_freephone_services
   - id: 404891
     prefix: '373803'
     number_min_length: 11
     number_max_length: 11
-    uuid: e7b807d5-b65b-4d63-8a7e-44719acf7939
+    uuid: 954c84f5-33cc-4960-8e34-7fc402f2375a
     country_id: *md
     network_id: *md_universal_access_services
   - id: 407397
     prefix: '373814'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e2ebe7a-650a-49ae-9b6a-c2c35d51e628
+    uuid: 13df4020-d9a3-4119-bab8-3a6d709b73c7
     country_id: *md
     network_id: *md_transport_services
   - id: 412360
     prefix: '373808'
     number_min_length: 11
     number_max_length: 11
-    uuid: c24e9dc6-c568-4f3d-b4e1-00c5befadbd0
+    uuid: cabbff8e-a4ee-4a1e-9c7d-7e18e791902f
     country_id: *md
     network_id: *md_shared_cost_services
   - id: 419685
     prefix: '373821'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0a6a8a31-158c-40a4-8ae9-81b32a2b2248
+    uuid: 8c3fac63-38d7-4cbe-879c-7f0e005dd5c8
     country_id: *md
     network_id: *md_dial_up_internet_and_data_transmission_access_services
   - id: 454581
     prefix: '373900'
     number_min_length: 11
     number_max_length: 11
-    uuid: aa9cdd80-2687-49cc-9d52-3cc6a82b0b96
+    uuid: 9bf76379-3885-43b8-b704-2ce4eeab7aa9
     country_id: *md
     network_id: *md_entertainment_games_contests_and_children_services
   - id: 454680
     prefix: '3739009'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7c720c7d-41fc-4bbf-a29b-4d4541ba873e
+    uuid: 465d72c0-3c60-4cc6-b162-05784aa2b0d6
     country_id: *md
     network_id: *md_televoting_services
   - id: 462676
     prefix: '373905'
     number_min_length: 11
     number_max_length: 11
-    uuid: 618e2c35-c3cb-4611-8906-3df79369d450
+    uuid: af3a3537-7798-46c1-a4d6-e344fa81b7bd
     country_id: *md
     network_id: *md_information_services
   - id: 462746
     prefix: '373906'
     number_min_length: 11
     number_max_length: 11
-    uuid: 80150100-e7e4-41ba-9c6f-e14fb7554569
+    uuid: 538b246c-dba5-4826-b234-90c68d8f4887
     country_id: *md
     network_id: *md_adults_entertainment_services
