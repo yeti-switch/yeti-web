@@ -1,30 +1,42 @@
 country_id: &vi 233
 networks:
 # Fixed Networks
-  - id: &vi_fixed 7410
-    name: VI Fixed
-    uuid: 75795bec-4829-440a-a805-f75b4a51caad
-    type_id: 12
+  - id: &vi_charlotte_amalie_st_thomas_region 32918
+    name: VI Charlotte Amalie St Thomas Region
+    uuid: 55c9212b-42c0-4ab3-85c5-8cdc13409248
+    type_id: 2
+  - id: &vi_st_croix_region 32920
+    name: VI St Croix Region
+    uuid: 753d216b-464b-428c-a1d5-7932db18b415
+    type_id: 2
+  - id: &vi_christiansted_st_croix_region 32924
+    name: VI Christiansted St Croix Region
+    uuid: db8e9583-c763-410c-95db-f2cdae77cf92
+    type_id: 2
+  - id: &vi_frederiksted_st_croix_region 32925
+    name: VI Frederiksted St Croix Region
+    uuid: 07ec5f35-3677-4f0a-a84c-d932ccfebead
+    type_id: 2
 # Mobile Networks
-  - id: &vi_liberty_mobile 7411
+  - id: &vi_liberty_mobile 32919
     name: VI Liberty Mobile
-    uuid: 95eaadb3-43e4-4045-b759-aea4a21bc998
+    uuid: d4e38204-9ef9-47ec-b553-6e2d4b158bd0
     type_id: 3
-  - id: &vi_t_mobile_mobile 7412
-    name: VI T_Mobile Mobile
-    uuid: b27024a5-6d6d-4129-aa13-21daaacaec66
+  - id: &vi_t_mobile_mobile 32921
+    name: VI T Mobile Mobile
+    uuid: 19b61e4a-d9c4-4b49-bbeb-93967218bf22
     type_id: 3
-  - id: &vi_viya_mobile 7413
+  - id: &vi_viya_mobile 32922
     name: VI Viya Mobile
-    uuid: 22f5c8dd-410a-4188-af42-2533bde582c3
+    uuid: f2eade2f-ce61-4e13-ba92-7132f1479412
     type_id: 3
-  - id: &vi_gigsky_mobile_mobile 7414
+  - id: &vi_gigsky_mobile_mobile 32923
     name: VI Gigsky Mobile Mobile
-    uuid: afcc80ec-d3a3-4fc4-8f38-a82ae84b1c49
+    uuid: b53b5049-5a81-4790-9111-2c67cee3dd13
     type_id: 3
-  - id: &vi_windkeeper_mobile 7415
+  - id: &vi_windkeeper_mobile 32926
     name: VI Windkeeper Mobile
-    uuid: 4d3e2c76-26bc-4792-a060-bca1eab058f5
+    uuid: 12c33a57-f93b-422d-b137-9935c0d5b667
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -32,7 +44,7 @@ network_prefixes:
     prefix: '1340'
     number_min_length: 2
     number_max_length: 100
-    uuid: 93657f35-67cd-4678-a603-c410f905cf0b
+    uuid: bacdf96e-db7d-4a54-9b30-f3c05bd913aa
     country_id: *vi
     network_id: null
 # Fixed Prefixes
@@ -40,406 +52,406 @@ network_prefixes:
     prefix: '1340200'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9407e28c-4cdf-414b-bea5-938cde508a9a
+    uuid: bc8f7e66-452c-4b37-8db2-9fba90768c81
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340701
     prefix: '1340202'
     number_min_length: 11
     number_max_length: 11
-    uuid: e6cb056f-2a8d-4e70-9598-9c4b55733fab
+    uuid: 6e5645aa-5453-498e-9514-aa1667026f1a
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_st_croix_region
   - id: 340710
     prefix: '1340212'
     number_min_length: 11
     number_max_length: 11
-    uuid: 995bd5c2-47c7-4c80-b4c5-d2b426bb0ce6
+    uuid: a102c3e8-218a-49ed-9f44-7e354428cca4
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_st_croix_region
   - id: 340716
     prefix: '1340249'
     number_min_length: 11
     number_max_length: 11
-    uuid: 24819afe-5cbf-468c-92e3-98ad3c5a0250
+    uuid: 367f7409-1cfc-4405-80b1-fb78a7ff91a1
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340725
     prefix: '1340489'
     number_min_length: 11
     number_max_length: 11
-    uuid: f8b1ff93-a978-4b3f-aea1-659d98f451e2
+    uuid: 4d0ed772-b69f-4c10-8ea7-49b239cf097a
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_christiansted_st_croix_region
   - id: 340728
     prefix: '1340625'
     number_min_length: 11
     number_max_length: 11
-    uuid: 90912240-34c1-486f-b5e8-0cf5f7b10b87
+    uuid: 65c1a5c0-f5ae-4e06-8ed8-5065ff61834e
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_frederiksted_st_croix_region
   - id: 340734
     prefix: '1340692'
     number_min_length: 11
     number_max_length: 11
-    uuid: af54ac89-5314-4e91-a659-906bbd22588b
+    uuid: f94d167c-360a-437e-8bea-f1d815a4e50e
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_st_croix_region
   - id: 340735
     prefix: '1340693'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9e9a55f6-9afd-4874-8dfa-077d984c5ffe
+    uuid: f9fe2978-9c92-4758-8367-e80bd9902717
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340736
     prefix: '1340712'
     number_min_length: 11
     number_max_length: 11
-    uuid: d3a0b8f1-9a91-454d-85b9-637c4b56e196
+    uuid: 50489be3-cf9a-4419-84ae-10fdd93fae8c
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_christiansted_st_croix_region
   - id: 340737
     prefix: '1340713'
     number_min_length: 11
     number_max_length: 11
-    uuid: f3818e80-fdab-43a8-9096-1687327158fb
+    uuid: ba32765c-c790-4ca3-85f0-7fc8269bdba1
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_christiansted_st_croix_region
   - id: 340738
     prefix: '1340714'
     number_min_length: 11
     number_max_length: 11
-    uuid: 807d858c-8329-4c67-bc1c-90de081ce898
+    uuid: c101deb2-2d50-4364-a163-59ed76830530
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340739
     prefix: '1340715'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2e46b307-8347-4290-a108-f362b53cf8bf
+    uuid: d72bcab8-db82-4b6b-a765-3922f8dad6eb
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340741
     prefix: '1340718'
     number_min_length: 11
     number_max_length: 11
-    uuid: a2185a33-d110-4701-801d-35425fe6ad39
+    uuid: fec0c9eb-d5b8-4c16-9356-5c8c6dec4fe1
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_christiansted_st_croix_region
   - id: 340742
     prefix: '1340719'
     number_min_length: 11
     number_max_length: 11
-    uuid: 639d7dc4-0148-4714-966b-d92072746127
+    uuid: 3ab8754e-f78f-485f-8395-42a600989aad
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_christiansted_st_croix_region
   - id: 340745
     prefix: '1340770'
     number_min_length: 11
     number_max_length: 11
-    uuid: 862af56c-6a89-4e2a-b18e-29744bab6f61
+    uuid: b3fb2c0b-d42d-48a0-b5e1-4b4b9c1d3fce
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340747
     prefix: '1340772'
     number_min_length: 11
     number_max_length: 11
-    uuid: 27fd1794-ba33-4d1e-9fa1-42a3ae6f9f57
+    uuid: 775bacf6-59ae-47db-9f82-79199c6140b1
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_frederiksted_st_croix_region
   - id: 340748
     prefix: '1340773'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c4b217b-1b12-4238-8761-cfa60b150751
+    uuid: 365cf5b4-fdc0-4a79-9e47-af9d180f1ac4
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_christiansted_st_croix_region
   - id: 340749
     prefix: '1340774'
     number_min_length: 11
     number_max_length: 11
-    uuid: e55ad359-8d92-4371-b2d4-325a1c4ec09c
+    uuid: 350b4f6d-3ae7-4d47-ba3a-5af567527e70
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340750
     prefix: '1340775'
     number_min_length: 11
     number_max_length: 11
-    uuid: e383210e-bcf2-42b9-abf4-da6cc347cbd1
+    uuid: e8a5bfe7-4cea-4581-933b-59abf0fc2e21
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340751
     prefix: '1340776'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2435b25c-4e08-406f-aca8-3a7606f28c06
+    uuid: a17dc59f-9433-4d29-975a-7fd59d314530
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340752
     prefix: '1340777'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2f503e58-59f5-49b7-b9af-25e915cbe33c
+    uuid: 1c5688b8-7df2-4a08-a647-043aba310287
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340753
     prefix: '1340778'
     number_min_length: 11
     number_max_length: 11
-    uuid: ee138883-7b84-4897-a630-727c3e02e5ee
+    uuid: ab80a682-1978-4ada-852d-0e836e667fd5
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340754
     prefix: '1340779'
     number_min_length: 11
     number_max_length: 11
-    uuid: c531c214-f5c2-4579-80c5-5037f2a264f3
+    uuid: 4a56369f-df0c-4519-a7da-cdd736485542
     country_id: *vi
-    network_id: *vi_fixed
+    network_id: *vi_charlotte_amalie_st_thomas_region
 # Mobile Prefixes
   - id: 340700
     prefix: '1340201'
     number_min_length: 11
     number_max_length: 11
-    uuid: 035e361a-ac75-4940-a6dc-7e312aac30b5
+    uuid: bd912279-1eac-4b3c-a990-2aff6269d85d
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340702
     prefix: '1340203'
     number_min_length: 11
     number_max_length: 11
-    uuid: 145c6561-f498-4f14-987f-26801b6c6b44
+    uuid: 722dbdc7-c8eb-4a41-a3d8-dc5639b6878a
     country_id: *vi
     network_id: *vi_t_mobile_mobile
   - id: 340703
     prefix: '1340204'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2650ebe8-e5fc-44a3-a01e-b4974a026870
+    uuid: ea8b8b9d-88fe-422b-93cf-25f0cc356ee8
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340704
     prefix: '1340205'
     number_min_length: 11
     number_max_length: 11
-    uuid: afeba6ce-7da8-4d70-8a38-3f395217045c
+    uuid: 00b677a9-1700-4d39-9aff-e5c840db67f2
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340705
     prefix: '1340206'
     number_min_length: 11
     number_max_length: 11
-    uuid: cc91f778-d1e0-4210-a5b5-aa3eedff8967
+    uuid: a113d967-6cd9-4012-bf33-32e91850f4ac
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340706
     prefix: '1340207'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8e0e3654-4972-4103-bf47-9a23febb6994
+    uuid: f4bedef3-f24b-4a68-af63-c9d82ec4f8c9
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340707
     prefix: '1340208'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87874393-9dc9-47ae-9845-1558863d8fc3
+    uuid: 6b9c279a-b81b-4692-8642-054a53c69fcb
     country_id: *vi
     network_id: *vi_t_mobile_mobile
   - id: 340708
     prefix: '1340209'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1473bd9-0f0d-4135-8034-56d4923026f6
+    uuid: 9a4b89af-f225-43a0-a244-74223406ac5e
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340709
     prefix: '1340210'
     number_min_length: 11
     number_max_length: 11
-    uuid: fc5d5ab6-602f-4a54-bb83-2971ec648207
+    uuid: 8fbcc76f-39b1-4b42-b695-cc7c8a3a08ee
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340711
     prefix: '1340220'
     number_min_length: 11
     number_max_length: 11
-    uuid: 04d4cd10-fc17-48db-8e17-a3428669044f
+    uuid: ac52e19f-b281-41d0-84d3-418d3a07a1f8
     country_id: *vi
     network_id: *vi_viya_mobile
   - id: 340712
     prefix: '1340226'
     number_min_length: 11
     number_max_length: 11
-    uuid: 85b23a1b-a881-4e94-a64f-53a1f7b11c37
+    uuid: 9efc3c04-3eb9-4a6c-8ddd-fdd42027c7eb
     country_id: *vi
     network_id: *vi_t_mobile_mobile
   - id: 340713
     prefix: '1340227'
     number_min_length: 11
     number_max_length: 11
-    uuid: f0414a2a-c28b-41c2-8448-4f661313b6af
+    uuid: 284b919f-49ac-4427-8da2-21837b3866e9
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340714
     prefix: '1340228'
     number_min_length: 11
     number_max_length: 11
-    uuid: d4043f82-b383-434b-adf4-aeb62e695e8f
+    uuid: 9403a36f-e8af-40f1-becd-3a2948c92699
     country_id: *vi
     network_id: *vi_viya_mobile
   - id: 340715
     prefix: '1340244'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1fcc043c-cb15-428f-944a-b314a7b41a7f
+    uuid: 97852943-f763-4be1-a7eb-2cd240622eee
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340717
     prefix: '1340277'
     number_min_length: 11
     number_max_length: 11
-    uuid: 312c4e8f-6d29-4a27-9910-98cdb61c7d58
+    uuid: 5a2dcfed-a2c4-4fab-a76b-4433dd492d5c
     country_id: *vi
     network_id: *vi_t_mobile_mobile
   - id: 340718
     prefix: '1340332'
     number_min_length: 11
     number_max_length: 11
-    uuid: 23bb7716-493b-4848-ac3e-3ce872f75f4b
+    uuid: 85c772b6-1ed9-47ae-843e-06d3243372ea
     country_id: *vi
     network_id: *vi_t_mobile_mobile
   - id: 340719
     prefix: '1340344'
     number_min_length: 11
     number_max_length: 11
-    uuid: 052bfef8-b9db-4c60-abf1-fee6aa44d107
+    uuid: a29bf2c3-84ed-41fc-813b-f58f04922a90
     country_id: *vi
     network_id: *vi_t_mobile_mobile
   - id: 340720
     prefix: '1340422'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9b2f116-3d14-45f9-aef4-7ddce483fece
+    uuid: de035564-b65a-4ab8-a785-0ed3e9658b29
     country_id: *vi
     network_id: *vi_viya_mobile
   - id: 340721
     prefix: '1340423'
     number_min_length: 11
     number_max_length: 11
-    uuid: 12bb65fc-9c8d-429f-91f9-4cabe7c5f818
+    uuid: b407b632-b292-4aef-8a12-7f207569f5e3
     country_id: *vi
     network_id: *vi_viya_mobile
   - id: 340722
     prefix: '1340444'
     number_min_length: 11
     number_max_length: 11
-    uuid: 85bb91b2-ebe2-4c72-ba0b-3b7b3799b7a5
+    uuid: 6a3349e2-b9db-4ddc-b359-5b534d9cfacc
     country_id: *vi
     network_id: *vi_gigsky_mobile_mobile
   - id: 340723
     prefix: '1340473'
     number_min_length: 11
     number_max_length: 11
-    uuid: b2e747af-7479-4a9d-b8ee-648ad450f3ad
+    uuid: 7ab1da27-6498-48d2-a048-33d4862c1739
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340724
     prefix: '1340474'
     number_min_length: 11
     number_max_length: 11
-    uuid: 82083bae-a109-474e-8ed1-cd97f6a4d802
+    uuid: bb2a8f12-57f9-4872-b898-1cd08c04c5e1
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340726
     prefix: '1340513'
     number_min_length: 11
     number_max_length: 11
-    uuid: afe347ad-8e5c-4441-9d51-d383ad30c1ba
+    uuid: c6cc507d-4f0f-46cf-a7a4-e872939ee9db
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340727
     prefix: '1340514'
     number_min_length: 11
     number_max_length: 11
-    uuid: 33883910-a21c-4b54-807a-ddba5a6b824a
+    uuid: 038b7e6f-36d5-452f-adbd-0c2b1d2203a0
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340729
     prefix: '1340626'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1e851870-a5da-4561-b72c-2be445b57362
+    uuid: 4b69dacd-7a97-419f-8737-55c2e1a80ea8
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340730
     prefix: '1340642'
     number_min_length: 11
     number_max_length: 11
-    uuid: a65523e8-f0f3-43c8-a7b4-974bf63ca43c
+    uuid: 6ba03e50-dcf2-4aa6-aabd-43b28cea11f7
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340731
     prefix: '1340643'
     number_min_length: 11
     number_max_length: 11
-    uuid: c3d1782b-7b31-4f62-9301-756fb463e390
+    uuid: bf982392-9608-404a-b61f-0b3674aceea9
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340732
     prefix: '1340677'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9277fd41-f2d2-4be2-a725-fbde7f62ab59
+    uuid: aaa356e5-a8b8-405e-83c0-b4e436c54fc0
     country_id: *vi
     network_id: *vi_t_mobile_mobile
   - id: 340733
     prefix: '1340690'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9b3d0eb-4c75-4db3-922e-58ffe6d2a809
+    uuid: 20559822-0c78-4e5a-b647-eead9535366c
     country_id: *vi
     network_id: *vi_liberty_mobile
   - id: 340740
     prefix: '1340717'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6bda0792-7bff-4ea8-820d-0059d1e36404
+    uuid: 35ea0e4f-5574-435e-a07f-df7893a583e0
     country_id: *vi
     network_id: *vi_viya_mobile
   - id: 340743
     prefix: '1340725'
     number_min_length: 11
     number_max_length: 11
-    uuid: 39e7f8f8-c661-42f2-808b-375b923905e8
+    uuid: 2045bfe5-9f90-412c-8da5-62acf6c9209a
     country_id: *vi
     network_id: *vi_viya_mobile
   - id: 340744
     prefix: '1340727'
     number_min_length: 11
     number_max_length: 11
-    uuid: d430e399-89e8-4282-a9e0-25adc508d314
+    uuid: 128fca9e-0cb7-4b0c-b343-7dc2a4c12e3b
     country_id: *vi
     network_id: *vi_viya_mobile
   - id: 340746
     prefix: '1340771'
     number_min_length: 11
     number_max_length: 11
-    uuid: b0b02e2a-5d74-4421-904b-b77ce5697414
+    uuid: 117f3c9f-d26d-426b-a50a-05ced1326cf6
     country_id: *vi
     network_id: *vi_viya_mobile
   - id: 340755
     prefix: '1340884'
     number_min_length: 11
     number_max_length: 11
-    uuid: 37b4a066-d7a5-40cf-a629-b2cfd16ea362
+    uuid: 8100cc02-ec92-4887-a497-c474b9d3e4ef
     country_id: *vi
     network_id: *vi_windkeeper_mobile
   - id: 340756
     prefix: '1340998'
     number_min_length: 11
     number_max_length: 11
-    uuid: b55e5797-223c-483e-b02e-262fd41c7238
+    uuid: d2dc5009-a27e-4cac-8ea4-fb11f1006597
     country_id: *vi
     network_id: *vi_t_mobile_mobile

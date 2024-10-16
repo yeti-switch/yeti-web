@@ -28,12 +28,10 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
            !request.xhr?
          }
 
-  filter :dst_network_id_eq,
-         as: :select,
-         collection: proc { System::Network.all },
-         label: 'Destination network',
-         input_html: { class: 'chosen' },
-         if: proc { !request.xhr? }
+  association_ajax_filter :dst_network_id_eq,
+         label: 'Destination Network',
+         scope: -> { System::Network.order(:name) },
+         path: '/system_networks/search'
 
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }

@@ -1,216 +1,256 @@
 country_id: &zw 239
 networks:
 # Fixed Networks
-  - id: &zw_fixed 4253
-    name: ZW Fixed
-    uuid: 766faffe-56e0-4a1f-82ae-dc09d912e9a6
-    type_id: 12
+  - id: &zw_midlands_region 7195
+    name: ZW Midlands Region
+    uuid: a0892c74-0f6a-491c-9589-734e36e7d8f1
+    type_id: 2
+  - id: &zw_mashonaland_region 11803
+    name: ZW Mashonaland Region
+    uuid: f98fd93d-5a08-41b8-9b65-01be2a469eda
+    type_id: 2
+  - id: &zw_manicaland_region 26720
+    name: ZW Manicaland Region
+    uuid: 93f32dc2-00ff-4b71-a513-5ab658bf15ba
+    type_id: 2
+  - id: &zw_harare_region 28981
+    name: ZW Harare Region
+    uuid: c5ea5738-1dd2-4ab8-9f52-b29015479572
+    type_id: 2
+  - id: &zw_bulawayo_region 30660
+    name: ZW Bulawayo Region
+    uuid: 0a3971a9-1c04-42fd-9f4c-b04f6144d914
+    type_id: 2
+  - id: &zw_masvingo_region 31768
+    name: ZW Masvingo Region
+    uuid: 5942cf32-7ca4-4e0b-b96f-171f80b6d33a
+    type_id: 2
+  - id: &zw_matabeleland_region 39316
+    name: ZW Matabeleland Region
+    uuid: fcdafaf3-40ab-4deb-bd94-5400215c75dd
+    type_id: 2
+  - id: &zw_victoria_falls_region 39802
+    name: ZW Victoria Falls Region
+    uuid: 6541e47a-9842-4cc7-8cb9-8b9715554e78
+    type_id: 2
+  - id: &zw_beitbridge_region 41031
+    name: ZW Beitbridge Region
+    uuid: 3e66773d-09d2-4ccf-bc16-3a53e86ad2be
+    type_id: 2
+  - id: &zw_voip_region 41351
+    name: ZW Voip Region
+    uuid: 12d976d1-a04c-44c6-85af-ea635bd56bcb
+    type_id: 2
+  - id: &zw_plumtree_region 41981
+    name: ZW Plumtree Region
+    uuid: dd78d101-6bdb-4358-b402-8fcc36b6a7e0
+    type_id: 2
 # Mobile Networks
-  - id: &zw_netone_mobile 4727
+  - id: &zw_netone_mobile 16221
     name: ZW Netone Mobile
-    uuid: e787034b-fb9b-430c-8bdc-3763b7da1bbf
+    uuid: 1756bb80-e4a4-4755-9e43-cf40fdee675d
     type_id: 3
-  - id: &zw_telecel_mobile 4801
+  - id: &zw_telecel_mobile 17162
     name: ZW Telecel Mobile
-    uuid: 9491c317-4de7-409f-921f-c202f853838a
+    uuid: 07bf69a4-3a3f-42c6-9e15-388eeb9d1b33
     type_id: 3
-  - id: &zw_econet_mobile 4876
+  - id: &zw_econet_mobile 18515
     name: ZW Econet Mobile
-    uuid: 5d4c67fa-3061-481b-977b-74d3199446ea
+    uuid: fb9d44cf-4f72-4cbc-855c-7fa567ca1251
     type_id: 3
-  - id: &zw_mobile 4930
+  - id: &zw_mobile 19780
     name: ZW Mobile
-    uuid: 13321217-744c-4993-97ee-e00d78458fe2
+    uuid: 183f5e76-e922-4d9d-8ddd-2ba6d511e8aa
     type_id: 3
 # Supplementary services Networks
-  - id: &zw_freephone_services 5163
+  - id: &zw_freephone_services 21337
     name: ZW Freephone Services
-    uuid: 481633a8-f993-43f3-8530-0ad9a7737643
-    type_id: 14
-  - id: &zw_special_services 5344
+    uuid: 47ef7761-283b-43a4-be36-e44a9d6a5c9f
+    type_id: 13
+  - id: &zw_special_services 21518
     name: ZW Special Services
-    uuid: 7a68c908-c1d0-4681-94f8-f5cf45528453
-    type_id: 14
-  - id: &zw_premium_rate_services 6141
+    uuid: e56c13c2-0a34-449b-9752-54895ce4ccbf
+    type_id: 13
+  - id: &zw_premium_rate_services 23212
     name: ZW Premium Rate Services
-    uuid: 5cfef75c-1031-4edc-962c-89facfedafa7
-    type_id: 14
+    uuid: c3b59ec5-3a06-4954-8293-3cac59ac8d0e
+    type_id: 13
 network_prefixes:
 # Fixed Prefixes
   - id: 73215
     prefix: '26354'
     number_min_length: 12
     number_max_length: 12
-    uuid: bf6b6795-2e7c-4c93-9306-7eb95c964041
+    uuid: 5b234d16-e76d-4e7a-820d-df7561336ff9
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_midlands_region
   - id: 78138
     prefix: '26355'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0eab98b7-200d-44a0-af4a-cf5d450d414b
+    uuid: cad6e3bc-086d-4cf7-bdbb-173663a0d61e
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_midlands_region
   - id: 108600
     prefix: '26361'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4848d3cf-5dbe-4e1f-8673-486d25631650
+    uuid: a4c18a66-8504-4921-a3dd-5e1451679af9
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_mashonaland_region
   - id: 135930
     prefix: '26365'
     number_min_length: 12
     number_max_length: 12
-    uuid: 29fabb4c-a6cb-49a6-b851-53f606e04f1b
+    uuid: 2d81f64e-5dd7-4d19-8128-4eea267f8876
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_mashonaland_region
   - id: 138642
     prefix: '26366'
     number_min_length: 12
     number_max_length: 12
-    uuid: 1c2c51a5-eb14-451b-a489-e3537e745e49
+    uuid: 965f2f04-6241-434b-9ca2-7ff411350062
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_mashonaland_region
   - id: 146829
     prefix: '26368'
     number_min_length: 12
     number_max_length: 12
-    uuid: 86110bd9-8f4b-4b22-9ec6-7ed32ab14cd9
+    uuid: bc172729-ea67-4193-b1eb-bb14262d836a
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_mashonaland_region
   - id: 267151
     prefix: '26320'
     number_min_length: 12
     number_max_length: 12
-    uuid: 86a56ed5-c1a6-40c7-b81f-26a34a2076f7
+    uuid: 1a06607a-8c20-43c6-9475-553f4323782b
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_manicaland_region
   - id: 294338
     prefix: '26324'
     number_min_length: 12
     number_max_length: 12
-    uuid: 753f2520-a6e1-4b43-9d77-e46868ffe562
+    uuid: 2edf6b83-cc05-42ef-9c52-0270330e87b2
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_harare_region
   - id: 299810
     prefix: '26326'
     number_min_length: 12
     number_max_length: 12
-    uuid: cdff4004-8fc4-4fca-80be-b4f60a44ee89
+    uuid: 0f5d7a15-0dbd-47fd-85eb-c78529bbde37
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_manicaland_region
   - id: 301435
     prefix: '26327'
     number_min_length: 12
     number_max_length: 12
-    uuid: d1f9dfb3-2c44-4b5e-8c93-2b559bde248a
+    uuid: fc59ca00-8d0d-4283-8bd8-9f8576a4b34b
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_manicaland_region
   - id: 301983
     prefix: '26325'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9a014d5b-9745-421f-8b26-e4239155af82
+    uuid: a4974d9b-3e98-49a6-a2e8-384e666bacdb
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_manicaland_region
   - id: 308513
     prefix: '26329'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3666b13c-cf2a-4033-9bda-dd42ca528e67
+    uuid: 459fd916-67af-47f4-b8cd-5874ae6cd01d
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_bulawayo_region
   - id: 321190
     prefix: '26331'
     number_min_length: 12
     number_max_length: 12
-    uuid: 40c9d457-e4ef-44c1-85ec-e43f80c6df26
+    uuid: 509da893-74c9-4a91-acba-362f20f725b2
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_masvingo_region
   - id: 357544
     prefix: '26339'
     number_min_length: 12
     number_max_length: 12
-    uuid: a6538697-8ef1-4f50-bea8-4d2a2e257363
+    uuid: 3c4fd27b-d036-478e-8b37-cc9d8390ca84
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_masvingo_region
   - id: 413685
     prefix: '26381'
     number_min_length: 12
     number_max_length: 12
-    uuid: 00edc7e6-7541-46d7-a61e-15d924e00e1c
+    uuid: ea889788-ae12-4913-858b-f20cbd37a4d2
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_matabeleland_region
   - id: 422135
     prefix: '26383'
     number_min_length: 12
     number_max_length: 12
-    uuid: 543364ac-b016-49d5-9904-62b3b3d7a37e
+    uuid: db9e7bd7-03fc-4e36-9046-45d651a1dfc1
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_victoria_falls_region
   - id: 433227
     prefix: '26384'
     number_min_length: 12
     number_max_length: 12
-    uuid: 620419db-8156-41cc-bcfd-67b9ad6a94ac
+    uuid: 9260c155-de7f-472a-a92f-49ad5f5a57e2
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_matabeleland_region
   - id: 435892
     prefix: '26385'
     number_min_length: 12
     number_max_length: 12
-    uuid: 62ae396d-a4ef-4d63-bee6-0da21dbcb225
+    uuid: b2b9331d-932c-426b-bba1-a566880bb61a
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_beitbridge_region
   - id: 441098
     prefix: '26386'
     number_min_length: 13
     number_max_length: 13
-    uuid: 03857fcb-9d04-4357-9842-09c69cc50e2c
+    uuid: 43ce7279-2c1b-4675-b7ad-fa8c39ea6a6d
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_voip_region
   - id: 451417
     prefix: '26389'
     number_min_length: 12
     number_max_length: 12
-    uuid: c93170f6-6af6-478e-8750-9f9fa50c5258
+    uuid: 3226184f-bca7-4caf-8b79-f695895eab60
     country_id: *zw
-    network_id: *zw_fixed
+    network_id: *zw_plumtree_region
 # Mobile Prefixes
   - id: 164011
     prefix: '26371'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6cfec6d9-c2a7-4831-896b-d3e784170919
+    uuid: 8b353627-69c5-455a-827c-a66d209185b7
     country_id: *zw
     network_id: *zw_netone_mobile
   - id: 174956
     prefix: '26373'
     number_min_length: 12
     number_max_length: 12
-    uuid: cf184e86-7abf-4d8e-bb39-218942e53683
+    uuid: 7f7466ab-cd5b-4df7-aecb-5547bd853fb4
     country_id: *zw
     network_id: *zw_telecel_mobile
   - id: 192111
     prefix: '26377'
     number_min_length: 12
     number_max_length: 12
-    uuid: 00bfedc4-b6f3-469f-921b-d5860439a391
+    uuid: a7cc36cb-483b-42b7-bdc6-81cb9d0c0918
     country_id: *zw
     network_id: *zw_econet_mobile
   - id: 198408
     prefix: '26378'
     number_min_length: 12
     number_max_length: 12
-    uuid: f4ac0b64-9f85-4856-b6ea-7ade5651e65d
+    uuid: 708060ae-016d-4a81-b30e-27beb77bc754
     country_id: *zw
     network_id: *zw_econet_mobile
   - id: 207509
     prefix: '2637'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9033ffe4-f36e-459b-b70c-196fd6bb07e8
+    uuid: 09882530-37c9-4ebc-bb3b-1c760bb811ba
     country_id: *zw
     network_id: *zw_mobile
 # Country code Prefixes
@@ -218,7 +258,7 @@ network_prefixes:
     prefix: '263'
     number_min_length: 4
     number_max_length: 100
-    uuid: 656b6867-47dd-4ffb-bc89-172a4cf070d3
+    uuid: 73814775-8247-484a-bb95-31ceaf5a2718
     country_id: *zw
     network_id: null
 # Supplementary services Prefixes
@@ -226,27 +266,27 @@ network_prefixes:
     prefix: '263080'
     number_min_length: 11
     number_max_length: 14
-    uuid: 445353a9-77bc-47b0-8f36-d052d8f7d7a3
+    uuid: 9ca6d8e9-3c0a-4b9c-8b6b-a0e32becc65e
     country_id: *zw
     network_id: *zw_freephone_services
   - id: 242524
     prefix: '2631'
     number_min_length: 6
     number_max_length: 6
-    uuid: 854d5494-2ad9-4ffd-8c90-a8c5a8aaab99
+    uuid: 59478a20-7398-4abd-9b66-4cccdfc21204
     country_id: *zw
     network_id: *zw_special_services
   - id: 248929
     prefix: '2633'
     number_min_length: 8
     number_max_length: 8
-    uuid: 2b13c679-ffcd-4ac7-9de8-bdd7ac40a547
+    uuid: 0ad3c407-f9d3-4c93-b32f-378eb7c8c387
     country_id: *zw
     network_id: *zw_premium_rate_services
   - id: 257150
     prefix: '2639'
     number_min_length: 6
     number_max_length: 6
-    uuid: ed071813-ef2a-4b8b-9ae2-44b28944a03d
+    uuid: 7d3129c5-7015-445f-9624-de3da283c521
     country_id: *zw
     network_id: *zw_special_services

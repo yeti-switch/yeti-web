@@ -1,19 +1,51 @@
 country_id: &tv 220
 networks:
 # Supplementary services Networks
-  - id: &tv_special_services 5331
+  - id: &tv_special_services 21505
     name: TV Special Services
-    uuid: 9f5ae747-689c-4b20-9824-377d2deac200
-    type_id: 14
+    uuid: 81afd296-6ff6-4dfc-b80f-fed5d9781246
+    type_id: 13
 # Fixed Networks
-  - id: &tv_fixed 6083
-    name: TV Fixed
-    uuid: cb375c61-66c4-49a7-bd42-d1aa0a8ad31e
-    type_id: 12
+  - id: &tv_funafuti_region 22749
+    name: TV Funafuti Region
+    uuid: 7d9b77d0-d8b0-4152-b00b-606641fe5503
+    type_id: 2
+  - id: &tv_niulakita_region 22844
+    name: TV Niulakita Region
+    uuid: 85b011dd-6405-4be1-84de-e4756035474e
+    type_id: 2
+  - id: &tv_nui_region 22914
+    name: TV Nui Region
+    uuid: dcc21c68-6ada-422d-a68a-7c1ee4624195
+    type_id: 2
+  - id: &tv_nukufetau_region 22974
+    name: TV Nukufetau Region
+    uuid: ca93b85a-e852-4aad-8d6e-593955c7aa6f
+    type_id: 2
+  - id: &tv_nukulaelae_region 23013
+    name: TV Nukulaelae Region
+    uuid: afd10050-2f52-471d-abcc-8de933d549d9
+    type_id: 2
+  - id: &tv_nanumea_region 23085
+    name: TV Nanumea Region
+    uuid: 25b11fa5-ed6d-459b-9cfc-978c9dfae207
+    type_id: 2
+  - id: &tv_nanumaga_region 23125
+    name: TV Nanumaga Region
+    uuid: cc202ee3-891b-4677-bdc8-86da3c59ada4
+    type_id: 2
+  - id: &tv_niutao_region 23165
+    name: TV Niutao Region
+    uuid: eec6698c-b3ac-4ca1-bbd1-da44244493bd
+    type_id: 2
+  - id: &tv_vaitupu_region 23189
+    name: TV Vaitupu Region
+    uuid: 7bde03d2-49a0-4834-aeb2-6243770657ec
+    type_id: 2
 # Mobile Networks
-  - id: &tv_tuvalu_telecom_mobile 6314
+  - id: &tv_tuvalu_telecom_mobile 23576
     name: TV Tuvalu Telecom Mobile
-    uuid: 073bcd4b-d2d0-4d3a-8309-d6baf3c0c9a5
+    uuid: e0e66155-900a-437e-875a-ec68ba09cc49
     type_id: 3
 network_prefixes:
 # Country code Prefixes
@@ -21,7 +53,7 @@ network_prefixes:
     prefix: '688'
     number_min_length: 4
     number_max_length: 100
-    uuid: d0f6e970-d289-4a98-a502-867aa000c1fe
+    uuid: 667dc255-f1c8-4102-826b-ac7a71c5a9f9
     country_id: *tv
     network_id: null
 # Supplementary services Prefixes
@@ -29,7 +61,7 @@ network_prefixes:
     prefix: '6881'
     number_min_length: 6
     number_max_length: 6
-    uuid: df276ff0-e705-41dc-aba4-41a7d5d3df1e
+    uuid: 4e31a6fb-fc6e-4b68-b675-5f287885429f
     country_id: *tv
     network_id: *tv_special_services
 # Fixed Prefixes
@@ -37,84 +69,84 @@ network_prefixes:
     prefix: '68820'
     number_min_length: 8
     number_max_length: 8
-    uuid: 406cc284-aed5-4f18-8005-ceba9650d4c9
+    uuid: ab0d01ab-84cf-4c91-8f42-c71ef9ed4aa8
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_funafuti_region
   - id: 247740
     prefix: '68822'
     number_min_length: 8
     number_max_length: 8
-    uuid: 9c214261-da7e-414b-b70e-088f5b10cadc
+    uuid: 5b89beda-1abb-48f6-942e-153ba8ea4316
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_niulakita_region
   - id: 247934
     prefix: '68823'
     number_min_length: 8
     number_max_length: 8
-    uuid: 98b1a009-42d0-486a-88a4-5057e278ae99
+    uuid: b4dbf9cc-b8ac-4147-935a-981b400ce22c
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_nui_region
   - id: 248125
     prefix: '68824'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0c69a1e0-56e3-4805-b7e0-e9b74af48d9b
+    uuid: 97982f29-2f5a-4f5d-95e0-86aa9f0b2996
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_nukufetau_region
   - id: 248274
     prefix: '68825'
     number_min_length: 8
     number_max_length: 8
-    uuid: d8f7336b-696e-4e1b-96e6-89510f2db161
+    uuid: 5d08f45f-fe57-486f-9c53-cac769ee4f79
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_nukulaelae_region
   - id: 248482
     prefix: '68826'
     number_min_length: 8
     number_max_length: 8
-    uuid: f335c4a8-5ea1-4d2f-a622-d7f61002dfe4
+    uuid: b0828f80-8555-40f0-806d-944ff10403b7
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_nanumea_region
   - id: 248624
     prefix: '68827'
     number_min_length: 8
     number_max_length: 8
-    uuid: 9b7fddf4-ce9f-499c-a4e7-281babc8545f
+    uuid: deff615a-bda2-493d-b068-1dde9fa347a1
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_nanumaga_region
   - id: 248759
     prefix: '68828'
     number_min_length: 8
     number_max_length: 8
-    uuid: 84c28f09-7942-49da-a94f-3bd85f745aa3
+    uuid: e8eb1502-ffb4-4bc4-87a5-4384ed170152
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_niutao_region
   - id: 248838
     prefix: '68829'
     number_min_length: 8
     number_max_length: 8
-    uuid: e97bdc65-072e-4e65-8bb6-528fa7dba4b1
+    uuid: a4a91c5e-6f3e-49bc-ab13-c6460a03af99
     country_id: *tv
-    network_id: *tv_fixed
+    network_id: *tv_vaitupu_region
 # Mobile Prefixes
   - id: 251747
     prefix: '68871'
     number_min_length: 10
     number_max_length: 10
-    uuid: 051c3d29-f63f-49d9-b262-b05b5a913013
+    uuid: 413048aa-50d9-48da-b124-3cd70c4583ee
     country_id: *tv
     network_id: *tv_tuvalu_telecom_mobile
   - id: 255307
     prefix: '68870'
     number_min_length: 10
     number_max_length: 10
-    uuid: d1bed8b1-37ba-4415-969d-be7846e655b3
+    uuid: 5bddfda3-03a6-4c8d-9cce-2470988d8cff
     country_id: *tv
     network_id: *tv_tuvalu_telecom_mobile
   - id: 257170
     prefix: '68890'
     number_min_length: 9
     number_max_length: 9
-    uuid: ff103402-7a80-4e6a-9747-adc65423668f
+    uuid: 376b3e30-7b1f-47b6-a952-7054e7acb8b4
     country_id: *tv
     network_id: *tv_tuvalu_telecom_mobile
