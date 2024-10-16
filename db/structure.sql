@@ -22898,7 +22898,7 @@ BEGIN
       gw.incoming_auth_username,
       gw.incoming_auth_password,
       gw.incoming_auth_allow_jwt,
-      gw.uuid::varchar
+      gw.id::varchar
     from class4.gateways gw
     where
       gw.enabled and
@@ -41235,6 +41235,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240822145410'),
 ('20240824084143'),
 ('20241012124910'),
-('20241015092015');
+('20241015092015'),
+('20241016075439');
 
 
