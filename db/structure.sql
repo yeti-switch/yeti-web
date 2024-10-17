@@ -39894,6 +39894,13 @@ CREATE UNIQUE INDEX "index_sys.cdr_exports_on_uuid" ON sys.cdr_exports USING btr
 
 
 --
+-- Name: network_prefixes_network_id_idx; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE INDEX network_prefixes_network_id_idx ON sys.network_prefixes USING btree (network_id);
+
+
+--
 -- Name: network_prefixes_prefix_key; Type: INDEX; Schema: sys; Owner: -
 --
 
@@ -41236,6 +41243,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20240824084143'),
 ('20241012124910'),
 ('20241015092015'),
-('20241016075439');
+('20241016075439'),
+('20241017124729');
 
 
