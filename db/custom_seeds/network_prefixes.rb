@@ -20,25 +20,25 @@ System::NetworkPrefix.transaction do
   System::NetworkPrefix.insert_all!(network_prefixes) if network_prefixes.any?
 end
 
-  Dir.glob('db/network_data/**/*.yml') do |f|
-    System::NetworkPrefix.transaction do
-      puts "processing file #{f}:" # rubocop:disable Rails/Output
-      data = YAML.load_file(f, aliases: true)
-      n = data['networks']
+Dir.glob('db/network_data/**/*.yml') do |f|
+  System::NetworkPrefix.transaction do
+    puts "processing file #{f}:" # rubocop:disable Rails/Output
+    data = YAML.load_file(f, aliases: true)
+    n = data['networks']
 
-      System::Network.insert_all!(n) if n.any?
-      puts "  loaded #{n.length} networks" # rubocop:disable Rails/Output
-      n_ids = n.map { |ni| ni['id'] }.uniq
+    System::Network.insert_all!(n) if n.any?
+    puts "  loaded #{n.length} networks" # rubocop:disable Rails/Output
+    n_ids = n.map { |ni| ni['id'] }.uniq
 
-      np = data['network_prefixes']
-      System::NetworkPrefix.insert_all!(np) if np.any?
-      puts "  loaded #{np.length} network prefixes" # rubocop:disable Rails/Output
-      np_ids = np.map { |npi| npi['network_id'] }.uniq
-      
-      no_prefixes = n_ids - np_ids
-      puts "  networks without prefixes: #{no_prefixes}" if no_prefixes.any? # rubocop:disable Rails/Output
-    end
+    np = data['network_prefixes']
+    System::NetworkPrefix.insert_all!(np) if np.any?
+    puts "  loaded #{np.length} network prefixes" # rubocop:disable Rails/Output
+    np_ids = np.map { |npi| npi['network_id'] }.uniq
+
+    no_prefixes = n_ids - np_ids
+    puts "  networks without prefixes: #{no_prefixes}" if no_prefixes.any? # rubocop:disable Rails/Output
   end
+end
 
 System::NetworkPrefix.transaction do
   SqlCaller::Yeti.execute "SELECT pg_catalog.setval('sys.network_types_id_seq', MAX(id), true) FROM sys.network_types"
