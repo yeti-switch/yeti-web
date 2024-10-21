@@ -7,7 +7,27 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
     def create_resource(object)
       object.save
     rescue Billing::Provisioning::Errors::Error => e
-      flash[:warning] = e.message
+      object.errors.add(:base, e.message)
+      false
+    rescue SocketError => e
+      capture_exception(e)
+      object.errors.add(:base, e.message)
+      false
+    end
+
+    def destroy_resource(object)
+      object.destroy
+    rescue Billing::Provisioning::PhoneSystems::PhoneSystemsApiClient::NotFoundError => _e
+      # continue deleting Service in Yeti side because record already deleted from Phone Systems server
+      flash[:warning] = 'The Customer already deleted from the Phone Systems server'
+      # perform delete request without the Billing::Provisioning::Base#before_destroy callback
+      object.delete
+    rescue Billing::Provisioning::Errors::Error => e
+      object.errors.add(:base, e.message)
+      false
+    rescue SocketError => e
+      capture_exception(e)
+      object.errors.add(:base, e.message)
       false
     end
   end

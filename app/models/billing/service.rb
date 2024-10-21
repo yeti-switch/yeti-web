@@ -69,6 +69,7 @@ class Billing::Service < ApplicationRecord
   validate :validate_variables
 
   before_create :verify_provisioning_variables
+  before_create :assign_uuid
   before_update :verify_provisioning_variables, if: :variables_changed?
 
   after_create :create_initial_transaction
@@ -139,6 +140,10 @@ class Billing::Service < ApplicationRecord
   rescue Billing::Provisioning::Errors::InvalidVariablesError => e
     e.full_error_messages.each { |msg| errors.add(:variables, msg) }
     throw(:abort)
+  end
+
+  def assign_uuid
+    self.uuid = SecureRandom.uuid
   end
 
   def create_initial_transaction
