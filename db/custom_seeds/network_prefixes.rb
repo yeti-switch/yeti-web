@@ -18,11 +18,14 @@ System::NetworkPrefix.transaction do
   System::Network.insert_all!(networks) if networks.any?
   System::Country.insert_all!(countries) if countries.any?
   System::NetworkPrefix.insert_all!(network_prefixes) if network_prefixes.any?
+end
 
-  Dir.glob('db/network_data/**/*.yml') do |f|
+Dir.glob('db/network_data/**/*.yml') do |f|
+  System::NetworkPrefix.transaction do
     puts "processing file #{f}:" # rubocop:disable Rails/Output
     data = YAML.load_file(f, aliases: true)
     n = data['networks']
+
     System::Network.insert_all!(n) if n.any?
     puts "  loaded #{n.length} networks" # rubocop:disable Rails/Output
     n_ids = n.map { |ni| ni['id'] }.uniq
@@ -35,7 +38,9 @@ System::NetworkPrefix.transaction do
     no_prefixes = n_ids - np_ids
     puts "  networks without prefixes: #{no_prefixes}" if no_prefixes.any? # rubocop:disable Rails/Output
   end
+end
 
+System::NetworkPrefix.transaction do
   SqlCaller::Yeti.execute "SELECT pg_catalog.setval('sys.network_types_id_seq', MAX(id), true) FROM sys.network_types"
   SqlCaller::Yeti.execute "SELECT pg_catalog.setval('sys.networks_id_seq', MAX(id), true) FROM sys.networks"
   SqlCaller::Yeti.execute "SELECT pg_catalog.setval('sys.countries_id_seq', MAX(id), true) FROM sys.countries"
