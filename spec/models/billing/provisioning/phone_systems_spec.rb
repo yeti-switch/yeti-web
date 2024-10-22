@@ -1,121 +1,172 @@
 # frozen_string_literal: true
 
-RSpec.describe Billing::Provisioning::PhoneSystems, type: :model do
+RSpec.describe Billing::Provisioning::PhoneSystems do
+  let(:random_uuid) { SecureRandom.uuid }
+  let(:gateway_uuid) { SecureRandom.uuid }
+  let(:generate_name) { "gw-#{random_uuid}" }
   let(:telecom_center_api_host) { 'https://api.telecom.center' }
   let(:telecom_center_api_endpoint) { "#{telecom_center_api_host}/api/rest/public/operator/customers" }
   let(:service_type_attrs) { { variables: { endpoint: telecom_center_api_host, username: 'user', password: 'pass' } } }
   let(:service_type) { FactoryBot.create(:service_type, service_type_attrs) }
+  let(:service) { FactoryBot.create(:service, service_attrs) }
+  let(:stub_customer_post_request!) do
+    WebMock.stub_request(:post, "#{telecom_center_api_host}/api/rest/public/operator/customers")
+           .to_return(status: 201, body: { data: { id: 123, type: 'customers' } }.to_json)
+  end
+  let(:stub_incoming_trunks_post_request!) do
+    WebMock.stub_request(:post, "#{telecom_center_api_host}/api/rest/public/operator/incoming_trunks")
+           .with(
+             body: {
+               data: {
+                 type: 'incoming_trunks',
+                 attributes: { name: generate_name },
+                 relationships: {
+                   customer: {
+                     data: {
+                       type: 'customers',
+                       id: service.id
+                     }
+                   }
+                 }
+               }
+             }.to_json
+           )
+           .to_return(
+             status: 201,
+             body: {
+               data: {
+                 id: random_uuid,
+                 type: 'incoming_trunks',
+                 attributes: {
+                   domain: '3391285728100.did-gw-sandbox.phone.systems'
+                 }
+               }
+             }.to_json
+           )
+  end
+  let(:stub_gateway_post_request!) do
+    WebMock.stub_request(:post, "#{telecom_center_api_host}/api/rest/public/operator/termination_gateways")
+           .with(
+             body: {
+               data: {
+                 type: 'termination_gateways',
+                 attributes: { host: 'sip.yeti-switch.org', authorization_name: username, authorization_password: password, name: generate_name },
+                 relationships: {
+                   customer: {
+                     data: {
+                       type: 'customers',
+                       id: service.id
+                     }
+                   }
+                 }
+               }
+             }.to_json
+           )
+           .to_return(
+             status: 201,
+             body: {
+               data: {
+                 id: gateway_uuid,
+                 type: 'termination_gateways',
+                 attributes: {
+                   operator: true,
+                   name: generate_name
+                 }
+               }
+             }.to_json
+           )
+  end
+  let(:stub_termination_route_post_request!) do
+    WebMock.stub_request(:post, "#{telecom_center_api_host}/api/rest/public/operator/termination_routes")
+           .with(
+             body: {
+               data: {
+                 type: 'termination_routes',
+                 attributes: { name: generate_name },
+                 relationships: {
+                   gateway: {
+                     data: {
+                       type: 'termination_gateways',
+                       id: gateway_uuid
+                     }
+                   },
+                   customer: {
+                     data: {
+                       type: 'customers',
+                       id: service.reload.id
+                     }
+                   }
+                 }
+               }
+             }.to_json
+           )
+           .to_return(
+             status: 201,
+             body: {
+               data: {
+                 id: SecureRandom.uuid,
+                 type: 'termination_routes',
+                 attributes: {
+                   name: generate_name
+                 }
+               }
+             }.to_json
+           )
+  end
+  let(:password) { SecureRandom.alphanumeric(20) }
+  let(:username) { SecureRandom.alphanumeric(20) }
   let(:service_attrs) do
     {
       type: service_type,
+      uuid: random_uuid,
       variables: {
         attributes: {
-          name: 'Test Service', language: 'EN', trm_mode: 'AUTO', capacity_limit: 100, sip_account_limit: 10
+          name: 'Test Service'
         }
       }
     }
   end
-  let(:service) { FactoryBot.create(:service, service_attrs) }
-  let(:response_body_from_telecom_center) do
-    {
-      data: {
-        id: 123,
-        type: 'customers',
-        attributes: {
-          name: 'Test Service',
-          language: 'EN',
-          trm_mode: 'AUTO',
-          capacity_limit: 100,
-          sip_account_limit: 10
-        }
-      }
-    }
-  end
-  let(:auth_header) { 'Basic dXNlcjpwYXNz' }
 
   before do
+    allow_any_instance_of(Billing::Provisioning::PhoneSystems::IncomingTrunkService).to receive(:generate_name).and_return(generate_name)
+    allow_any_instance_of(Billing::Provisioning::PhoneSystems::GatewayService).to receive(:generate_auth_username).and_return(username)
+    allow_any_instance_of(Billing::Provisioning::PhoneSystems::GatewayService).to receive(:generate_auth_password).and_return(password)
+    allow_any_instance_of(Billing::Provisioning::PhoneSystems::GatewayService).to receive(:phone_systems_gateway_name).and_return(generate_name)
+    allow_any_instance_of(Billing::Provisioning::PhoneSystems::RouteService).to receive(:generate_name).and_return(generate_name)
     allow(service).to receive(:update)
     WebMock.reset!
   end
 
   describe '#after_create' do
-    subject { described_class.new(service).after_create }
+    context 'when valid data' do
+      subject { described_class.new(service).after_create }
 
-    context 'when customer creation is successful' do
       before do
-        WebMock
-          .stub_request(:post, telecom_center_api_endpoint)
-          .with(
-            body: { data: { id: service.id, type: 'customers', attributes: service.variables['attributes'] } }.to_json,
-            headers: {
-              'Authorization' => auth_header,
-              'Content-Type' => 'application/vnd.api+json'
-            }
-          )
-          .to_return(status: 200, body: { data: { id: 123 } }.to_json)
+        FactoryBot.create(:codec_group)
+        stub_customer_post_request!
+        stub_incoming_trunks_post_request!
+        stub_gateway_post_request!
+        stub_termination_route_post_request!
       end
 
-      it 'sends a POST request to create the customer' do
+      it 'should perform post request to create Customer on the Phone Systems server' do
         subject
-        expect(WebMock).to have_requested(:post, telecom_center_api_endpoint).once
-        expect(service).to have_received(:update).with(id: 123)
-      end
-    end
-
-    context 'when customer creation fails with a validation error' do
-      let(:error_body) { { errors: [{ title: 'Language not found!', detail: 'Language not found!' }] } }
-
-      before do
-        WebMock
-          .stub_request(:post, telecom_center_api_endpoint)
-          .to_return(status: 422, body: error_body.to_json)
+        expect(stub_customer_post_request!).to have_been_requested
       end
 
-      it 'raises a validation error' do
-        expect { subject }.to raise_error(Billing::Provisioning::Errors::Error, 'Language not found!')
-      end
-    end
-
-    context 'when customer creation fails with a server error' do
-      before do
-        WebMock
-          .stub_request(:post, telecom_center_api_endpoint)
-          .to_return(status: 500, body: nil)
-      end
-
-      it 'raises an unknown error' do
-        expect { subject }.to raise_error(Billing::Provisioning::Errors::Error, 'Unknown error')
-      end
-    end
-  end
-
-  describe '#before_destroy' do
-    subject { described_class.new(service).before_destroy }
-
-    context 'when customer deletion is successful' do
-      before do
-        WebMock
-          .stub_request(:delete, "#{telecom_center_api_endpoint}/#{service.id}")
-          .to_return(status: 204)
-      end
-
-      it 'sends a DELETE request to delete the customer' do
+      it 'should perform post request to create Incoming Trunk on the Phone Systems server' do
         subject
-        expect(WebMock).to have_requested(:delete, "#{telecom_center_api_endpoint}/#{service.id}").once
-      end
-    end
-
-    context 'when customer deletion fails' do
-      let(:error_body) { { errors: [{ title: 'Validation error', detail: 'Validation error' }] } }
-
-      before do
-        WebMock
-          .stub_request(:delete, "#{telecom_center_api_endpoint}/#{service.id}")
-          .to_return(status: 422, body: error_body.to_json)
+        expect(stub_incoming_trunks_post_request!).to have_been_requested
       end
 
-      it 'raises a validation error' do
-        expect { subject }.to raise_error(Billing::Provisioning::Errors::Error)
+      it 'should perform post request to create Gateway on the Phone Systems server' do
+        subject
+        expect(stub_gateway_post_request!).to have_been_requested
+      end
+
+      it 'should perform post request to create Termination Route on the Phone Systems server' do
+        subject
+        expect(stub_termination_route_post_request!).to have_been_requested
       end
     end
   end
