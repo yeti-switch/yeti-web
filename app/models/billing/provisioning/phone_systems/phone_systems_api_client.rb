@@ -35,6 +35,10 @@ module Billing
           post_request('/api/rest/public/operator/termination_routes', payload)
         end
 
+        def create_session(payload)
+          post_request('/api/rest/public/operator/sessions', payload)
+        end
+
         def process_response(response, action)
           if response.success?
             Rails.logger.info "#{action} successfully on telecom.center"
@@ -82,6 +86,8 @@ module Billing
             headers: { 'Content-Type' => 'application/vnd.api+json' },
             debug_output: @debug ? $stdout : false
           )
+        rescue Socket::ResolutionError => e
+          raise Billing::Provisioning::Errors::Error, e.message
         end
 
         def delete_request(path)
