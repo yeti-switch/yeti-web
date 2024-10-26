@@ -108,7 +108,7 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'factory_bot_rails'
   gem 'parallel_tests'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 6.0'
   # https://github.com/zipmark/rspec_api_documentation/pull/458
   # present only on master
   # Temporary solution. Waiting for merge https://github.com/zipmark/rspec_api_documentation/pull/507
