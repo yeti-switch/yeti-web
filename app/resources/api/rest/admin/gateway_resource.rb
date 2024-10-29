@@ -25,6 +25,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   has_one :session_refresh_method
   has_one :sdp_alines_filter_type, class_name: 'FilterType'
   has_one :term_disconnect_policy, class_name: 'DisconnectPolicy'
+  has_one :orig_disconnect_policy, class_name: 'DisconnectPolicy'
   has_one :gateway_group
   has_one :diversion_send_mode, class_name: 'Equipment::GatewayDiversionSendMode'
   has_one :pop
@@ -49,6 +50,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   relationship_filter :session_refresh_method
   relationship_filter :sdp_alines_filter_type
   relationship_filter :term_disconnect_policy
+  relationship_filter :orig_disconnect_policy
   relationship_filter :gateway_group
   relationship_filter :diversion_send_mode
   relationship_filter :pop
@@ -212,6 +214,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       term_append_headers_req
       orig_append_headers_req
       orig_append_headers_reply
+      orig_disconnect_policy
       sdp_alines_filter_list
       ringing_timeout
       relay_options
