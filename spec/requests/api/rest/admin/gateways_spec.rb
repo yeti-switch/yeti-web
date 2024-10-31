@@ -8,6 +8,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     session-refresh-method
     sdp-alines-filter-type
     term-disconnect-policy
+    orig-disconnect-policy
     gateway-group
     diversion-send-mode
     pop
