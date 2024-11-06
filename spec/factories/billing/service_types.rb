@@ -8,6 +8,7 @@
 #  force_renew        :boolean          default(FALSE), not null
 #  name               :string           not null
 #  provisioning_class :string
+#  ui_type            :string
 #  variables          :jsonb
 #
 # Indexes
@@ -19,5 +20,6 @@ FactoryBot.define do
     sequence(:name) { |n| "Service Type #{n}" }
     provisioning_class { 'Billing::Provisioning::Logging' }
     variables { { 'foo' => 'bar' } }
+    ui_type { 'phone_systems' }
   end
 end

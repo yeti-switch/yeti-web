@@ -8,6 +8,7 @@
 #  force_renew        :boolean          default(FALSE), not null
 #  name               :string           not null
 #  provisioning_class :string
+#  ui_type            :string
 #  variables          :jsonb
 #
 # Indexes
