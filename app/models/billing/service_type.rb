@@ -52,6 +52,12 @@ class Billing::ServiceType < ApplicationRecord
     self.variables = value
   end
 
+  def self.available_provisioning_classes
+    Dir[Rails.root.join('app/models/billing/provisioning/*.rb')].map do |file|
+      "Billing::Provisioning::#{File.basename(file, '.rb').camelize}"
+    end
+  end
+
   private
 
   def validate_provisioning_class

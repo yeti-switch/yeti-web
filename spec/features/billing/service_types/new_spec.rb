@@ -11,7 +11,7 @@ RSpec.describe 'Billing Service Types New', js: true, bullet: [:n] do
 
   let(:fill_form!) do
     fill_in 'Name', with: attributes[:name]
-    fill_in 'Provisioning class', with: attributes[:provisioning_class]
+    fill_in_chosen 'Provisioning class', with: attributes[:provisioning_class]
     fill_in 'Variables', with: attributes[:variables_json]
     check 'Force renew' if attributes[:force_renew]
   end
@@ -73,23 +73,6 @@ RSpec.describe 'Billing Service Types New', js: true, bullet: [:n] do
         expect(page).to have_semantic_error_texts(
                         'Variables must be a JSON object or empty'
                       )
-      }.not_to change { Billing::ServiceType.count }
-      expect(page).to have_current_path service_types_path
-      expect(page).to have_field 'Name', with: attributes[:name]
-    end
-  end
-
-  context 'with non-existing provisioning class' do
-    let(:attributes) do
-      super().merge provisioning_class: 'Billing::Provisioning::NonExisting'
-    end
-
-    it 'does not create service type' do
-      expect {
-        subject
-        expect(page).to have_semantic_error_texts(
-                          'Provisioning class is invalid'
-                        )
       }.not_to change { Billing::ServiceType.count }
       expect(page).to have_current_path service_types_path
       expect(page).to have_field 'Name', with: attributes[:name]
