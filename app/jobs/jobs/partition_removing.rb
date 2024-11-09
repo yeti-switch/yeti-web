@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'prometheus/partition_remove_hook_processor'
+
 module Jobs
   class PartitionRemoving < ::BaseJob
     self.cron_line = '20 * * * *'
@@ -51,15 +53,23 @@ module Jobs
       cdr_remove_candidate = cdr_collection.first
 
       if YetiConfig.partition_remove_hook.present?
+        start_time = get_time
         cmd = "#{YetiConfig.partition_remove_hook} #{cdr_remove_candidate.class} #{cdr_remove_candidate.parent_table} #{cdr_remove_candidate.name}"
+
         logger.info { "Running partition removing hook: #{cmd}" }
+        collect_prometheus_executions_metric!
+
         return_value, sout, serr = execute_cmd(cmd)
+
         logger.info { "Partition remove hook stdout:\n#{sout}" }
         logger.info { "Partition remove hook stderr:\n#{serr}" }
+        collect_prometheus_duration_metric!(start_time)
+
         if return_value.success?
           logger.info { "Partition remove hook succeed, exit code: #{return_value.exitstatus}" }
         else
           logger.info { "Partition remove hook failed: #{return_value.exitstatus}. Stopping removing procedure" }
+          collect_prometheus_errors_metric!
           return
         end
       end
@@ -76,6 +86,25 @@ module Jobs
       logger.error { "#{self.class}: {#{table_name}} <#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
       capture_error(e, extra: { partition_class: partition_class.name, model_class: model_class.name })
       raise e
+    end
+
+    def collect_prometheus_executions_metric!
+      PartitionRemoveHookProcessor.collect_executions_metric if PrometheusConfig.enabled?
+    end
+
+    def collect_prometheus_errors_metric!
+      PartitionRemoveHookProcessor.collect_errors_metric if PrometheusConfig.enabled?
+    end
+
+    def collect_prometheus_duration_metric!(start_time)
+      return unless PrometheusConfig.enabled?
+
+      duration = duration = (get_time - start_time).round(6)
+      PartitionRemoveHookProcessor.collect_duration_metric(duration)
+    end
+
+    def get_time
+      ::Process.clock_gettime(::Process::CLOCK_MONOTONIC)
     end
   end
 end
