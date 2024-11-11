@@ -13,6 +13,7 @@ RSpec.describe 'Billing Service Types New', js: true, bullet: [:n] do
     fill_in 'Name', with: attributes[:name]
     fill_in_chosen 'Provisioning class', with: attributes[:provisioning_class]
     fill_in 'Variables', with: attributes[:variables_json]
+    fill_in 'Ui type', with: 'phone_systems'
     check 'Force renew' if attributes[:force_renew]
   end
   let(:attributes) do
@@ -20,7 +21,8 @@ RSpec.describe 'Billing Service Types New', js: true, bullet: [:n] do
       name: 'Test',
       force_renew: true,
       provisioning_class: 'Billing::Provisioning::Logging',
-      variables_json: '{"key": "value"}'
+      variables_json: '{"key": "value"}',
+      ui_type: 'phone_systems'
     }
   end
 
@@ -34,7 +36,8 @@ RSpec.describe 'Billing Service Types New', js: true, bullet: [:n] do
                               name: attributes[:name],
                               force_renew: true,
                               provisioning_class: attributes[:provisioning_class],
-                              variables: JSON.parse(attributes[:variables_json])
+                              variables: JSON.parse(attributes[:variables_json]),
+                              ui_type: attributes[:ui_type]
                             )
     expect(page).to have_current_path service_type_path(service_type)
     expect(page).to have_attribute_row('ID', exact_text: service_type.id.to_s)
