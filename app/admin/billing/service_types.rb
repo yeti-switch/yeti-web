@@ -53,7 +53,7 @@ ActiveAdmin.register Billing::ServiceType, as: 'ServiceType' do
     end
   end
 
-  permit_params :name, :provisioning_class, :force_renew, :variables_json
+  permit_params :name, :provisioning_class, :force_renew, :variables_json, :ui_type
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
