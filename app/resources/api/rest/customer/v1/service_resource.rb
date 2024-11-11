@@ -12,6 +12,7 @@ class Api::Rest::Customer::V1::ServiceResource < Api::Rest::Customer::V1::BaseRe
   attribute :renew_at
   attribute :renew_period
   attribute :service_type
+  attribute :ui_type
 
   has_one :account, class_name: 'Account', foreign_key_on: :related
   has_many :transactions, class_name: 'Transaction', foreign_key_on: :related
@@ -29,6 +30,10 @@ class Api::Rest::Customer::V1::ServiceResource < Api::Rest::Customer::V1::BaseRe
 
   def service_type
     _model.type.name
+  end
+
+  def ui_type
+    _model.type.ui_type
   end
 
   def self.sortable_fields(_ctx = nil)

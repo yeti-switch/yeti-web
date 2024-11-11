@@ -31489,7 +31489,8 @@ CREATE TABLE billing.service_types (
     name character varying NOT NULL,
     provisioning_class character varying,
     variables jsonb,
-    force_renew boolean DEFAULT false NOT NULL
+    force_renew boolean DEFAULT false NOT NULL,
+    ui_type character varying
 );
 
 
@@ -41244,6 +41245,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241012124910'),
 ('20241015092015'),
 ('20241016075439'),
-('20241017124729');
+('20241017124729'),
+('20241107212537');
 
 
