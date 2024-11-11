@@ -92,8 +92,9 @@ config/click_house.yml:
 	cp config/click_house.yml.distr config/click_house.yml
 
 config/secrets.yml:
-	$(info:msg=Creating secrets.yml for tests)
-	cp config/secrets.yml.distr config/secrets.yml
+	$(info:msg=Creating master key for test env)
+	touch config/credentials/test.key
+	echo "3dfebf8475fd661c870bff8cf91f24a8" > config/credentials/test.key
 
 config/yeti_web.yml:
 	$(info:msg=Creating yeti_web.yml for build/tests)

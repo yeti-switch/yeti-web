@@ -8,7 +8,7 @@ module JwtToken
   # @param payload [Hash]
   # @return [String] token
   def encode(payload)
-    secret_key = Rails.application.secrets.secret_key_base
+    secret_key = Rails.application.credentials.secret_key_base
     payload[:aud] = Array.wrap(payload[:aud]) unless payload[:aud].nil?
     JWT.encode(payload, secret_key, ALGO)
   end
@@ -19,7 +19,7 @@ module JwtToken
   def decode(token, verify_expiration:, aud: nil)
     return if token.blank?
 
-    secret_key = Rails.application.secrets.secret_key_base
+    secret_key = Rails.application.credentials.secret_key_base
     decode_options = {
       algorithm: ALGO,
       verify_expiration: verify_expiration,

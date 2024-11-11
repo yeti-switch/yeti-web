@@ -10,7 +10,7 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack', ' ~> 2.2.6'
-gem 'rails', '~> 7.0'
+gem 'rails', '~> 7.1.0'
 gem 'responders'
 
 # Authentication
@@ -108,7 +108,7 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'factory_bot_rails'
   gem 'parallel_tests'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 6.0'
   # https://github.com/zipmark/rspec_api_documentation/pull/458
   # present only on master
   # Temporary solution. Waiting for merge https://github.com/zipmark/rspec_api_documentation/pull/507
