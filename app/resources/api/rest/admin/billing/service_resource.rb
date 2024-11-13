@@ -14,15 +14,16 @@ class Api::Rest::Admin::Billing::ServiceResource < ::BaseResource
   attribute :renew_period
   attribute :uuid
 
-  has_one :account, class_name: 'Account', foreign_key_on: :related
-  has_one :service_type, class_name: 'ServiceType', relation_name: :type, foreign_key_on: :related
+  has_one :account, class_name: 'Account', always_include_linkage_data: true
+  has_one :service_type, class_name: 'ServiceType', foreign_key: :type_id, relation_name: :type
   has_many :transactions, class_name: 'Transaction', foreign_key_on: :related
+
+  ransack_filter :account_id, type: :foreign_key
+  ransack_filter :type_id, type: :foreign_key
 
   ransack_filter :uuid, type: :uuid
   ransack_filter :created_at, type: :datetime
   ransack_filter :name, type: :string
-  ransack_filter :account_id, type: :foreign_key
-  ransack_filter :type_id, type: :foreign_key
   ransack_filter :initial_price, type: :number
   ransack_filter :renew_price, type: :number
   ransack_filter :renew_at, type: :datetime

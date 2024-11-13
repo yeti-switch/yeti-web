@@ -7,5 +7,6 @@ class Api::Rest::Admin::Billing::InvoiceTemplateResource < ::BaseResource
 
   paginator :paged
 
-  filter :name
+  ransack_filter :name, type: :string
+  ransack_filter :filename, type: :string
 end
