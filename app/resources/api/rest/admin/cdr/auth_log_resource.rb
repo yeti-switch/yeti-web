@@ -38,9 +38,9 @@ class Api::Rest::Admin::Cdr::AuthLogResource < BaseResource
              :x_yeti_auth,
              :diversion, :pai, :ppi, :privacy, :rpid, :rpid_privacy
 
-  has_one :gateway, class_name: 'Gateway', force_routed: true, always_include_linkage_data: true
-  has_one :pop, class_name: 'Pop', force_routed: true, always_include_linkage_data: true
-  has_one :node, class_name: 'Node', force_routed: true, always_include_linkage_data: true
+  has_one :gateway, class_name: 'Gateway', force_routed: true
+  has_one :pop, class_name: 'Pop', force_routed: true
+  has_one :node, class_name: 'Node', force_routed: true
   has_one :origination_protocol, class_name: 'TransportProtocol', foreign_key: :origination_proto_id, force_routed: true
   has_one :transport_protocol, class_name: 'TransportProtocol', foreign_key: :transport_proto_id, force_routed: true
 
@@ -51,12 +51,6 @@ class Api::Rest::Admin::Cdr::AuthLogResource < BaseResource
     records.where('request_time <= ?', values[0])
   }
 
-  ransack_filter :gateway_id, type: :foreign_key
-  ransack_filter :pop_id, type: :foreign_key
-  ransack_filter :node_id, type: :foreign_key
-  ransack_filter :origination_proto_id, type: :foreign_key
-  ransack_filter :transport_proto_id, type: :foreign_key
-
   ransack_filter :request_time, type: :datetime
   ransack_filter :success, type: :boolean
   ransack_filter :code, type: :number
@@ -64,10 +58,15 @@ class Api::Rest::Admin::Cdr::AuthLogResource < BaseResource
   ransack_filter :internal_reason, type: :string
   ransack_filter :origination_ip, type: :string
   ransack_filter :origination_port, type: :number
+  ransack_filter :origination_proto_id, type: :number
+  ransack_filter :transport_proto_id, type: :number
   ransack_filter :transport_remote_ip, type: :string
   ransack_filter :transport_remote_port, type: :number
   ransack_filter :transport_local_ip, type: :string
   ransack_filter :transport_local_port, type: :number
+  ransack_filter :pop_id, type: :number
+  ransack_filter :node_id, type: :number
+  ransack_filter :gateway_id, type: :number
   ransack_filter :username, type: :string
   ransack_filter :realm, type: :string
   ransack_filter :request_method, type: :string
