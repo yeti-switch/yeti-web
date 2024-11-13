@@ -23,8 +23,15 @@ module QueryBuilder
     define_chainable :includes do |*values|
       old_includes = include_values.dup
       old_includes_nested = old_includes.extract_options!
-      new_includes = values.flatten
-      new_includes_nested = new_includes.extract_options!
+      new_includes = []
+      new_includes_nested = {}
+      values.flatten.each do |val|
+        if val.is_a?(Hash)
+          new_includes_nested.deep_merge!(val)
+        else
+          new_includes << val
+        end
+      end
       simple = (old_includes + new_includes).uniq.map(&:to_sym)
       nested = old_includes_nested.deep_merge(new_includes_nested)
       self.include_values = simple + [nested]
