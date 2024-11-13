@@ -22,15 +22,9 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   end
 
   attributes :time_start,
-             :destination_next_rate,
-             :destination_fee,
-             :dialpeer_next_rate,
-             :dialpeer_fee,
              :internal_disconnect_code,
              :internal_disconnect_reason,
              :disconnect_initiator_id,
-             :customer_price,
-             :vendor_price,
              :duration,
              :success,
              :profit,
@@ -53,16 +47,29 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :vendor_invoice_id,
              :customer_invoice_id,
              :local_tag,
+             :rateplan_id,
+             :destination_id,
              :destination_initial_rate,
-             :dialpeer_initial_rate,
              :destination_initial_interval,
              :destination_next_interval,
+             :destination_next_rate,
+             :destination_fee,
+             :destination_rate_policy_id,
+             :destination_reverse_billing,
+             :routing_plan_id,
+             :routing_group_id,
+             :dialpeer_id,
+             :dialpeer_initial_rate,
              :dialpeer_initial_interval,
              :dialpeer_next_interval,
+             :dialpeer_next_rate,
+             :dialpeer_fee,
+             :dialpeer_reverse_billing,
              :routing_attempt,
              :is_last_cdr,
              :lega_disconnect_code,
              :lega_disconnect_reason,
+             :pop_id,
              :node_id,
              :src_name_in,
              :src_name_out,
@@ -112,25 +119,31 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :privacy_out,
              :rpid_out,
              :rpid_privacy_out,
-             :destination_reverse_billing,
-             :dialpeer_reverse_billing,
              :is_redirected,
              :customer_account_check_balance,
+             :customer_id,
              :customer_external_id,
+             :customer_auth_id,
              :customer_auth_external_id,
+             :customer_acc_id,
              :customer_acc_vat,
              :customer_acc_external_id,
+             :customer_duration,
+             :customer_price,
+             :customer_price_no_vat,
              :routing_tag_ids,
+             :vendor_id,
              :vendor_external_id,
+             :vendor_acc_id,
              :vendor_acc_external_id,
+             :vendor_duration,
+             :vendor_price,
+             :orig_gw_id,
              :orig_gw_external_id,
+             :term_gw_id,
              :term_gw_external_id,
              :failed_resource_type_id,
              :failed_resource_id,
-             :customer_price_no_vat,
-             :customer_duration,
-             :vendor_duration,
-             :destination_rate_policy_id,
              :metadata
 
   has_one :rateplan, class_name: 'Rateplan', force_routed: true
@@ -234,6 +247,43 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
     records.where(customer_auth_external_type: nil).or(records.where.not(customer_auth_external_type: values))
   }
 
+  relationship_filter :rateplan
+  relationship_filter :dialpeer
+  relationship_filter :pop
+  relationship_filter :routing_group
+  relationship_filter :routing_plan
+  relationship_filter :destination
+  relationship_filter :customer_auth
+  relationship_filter :vendor
+  relationship_filter :customer
+  relationship_filter :customer_acc
+  relationship_filter :vendor_acc
+  relationship_filter :orig_gw
+  relationship_filter :term_gw
+  relationship_filter :dst_country
+  relationship_filter :dst_network
+  relationship_filter :src_country
+  relationship_filter :src_network
+
+  ransack_filter :rateplan_id, type: number
+  ransack_filter :dialpeer_id, type: number
+  ransack_filter :pop_id, type: number
+  ransack_filter :routing_group_id, type: number
+  ransack_filter :routing_plan_id, type: number
+  ransack_filter :destination_id, type: number
+  ransack_filter :customer_auth_id, type: number
+  ransack_filter :vendor_id, type: number
+  ransack_filter :customer_id, type: number
+  ransack_filter :customer_acc_id, type: number
+  ransack_filter :vendor_acc_id, type: number
+  ransack_filter :orig_gw_id, type: number
+  ransack_filter :term_gw_id, type: number
+  ransack_filter :dst_country_id, type: number
+  ransack_filter :dst_network_id, type: number
+  ransack_filter :src_country_id, type: number
+  ransack_filter :src_network_id, type: number
+
+  ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime
   ransack_filter :destination_next_rate, type: :number
   ransack_filter :destination_fee, type: :number
@@ -287,10 +337,6 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :auth_orig_ip, type: :inet
   ransack_filter :auth_orig_port, type: :number
   ransack_filter :global_tag, type: :string
-  ransack_filter :src_country_id, type: :number
-  ransack_filter :src_network_id, type: :number
-  ransack_filter :dst_country_id, type: :number
-  ransack_filter :dst_network_id, type: :number
   ransack_filter :src_prefix_routing, type: :string
   ransack_filter :dst_prefix_routing, type: :string
   ransack_filter :routing_delay, type: :number
