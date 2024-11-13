@@ -22,8 +22,8 @@ class Api::Rest::Admin::Equipment::SipOptionsProberResource < ::BaseResource
              :updated_at,
              :external_id
 
-  has_one :node, class_name: 'Node'
-  has_one :pop, class_name: 'Pop'
-  has_one :proxy_transport_protocol, class_name: 'TransportProtocol'
-  has_one :transport_protocol, class_name: 'TransportProtocol'
+  has_one :node, class_name: 'Node', always_include_linkage_data: true
+  has_one :pop, class_name: 'Pop', always_include_linkage_data: true
+  has_one :proxy_transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
+  has_one :transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
 end

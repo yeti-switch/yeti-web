@@ -11,7 +11,7 @@ class Api::Rest::Admin::Routing::NumberlistResource < ::BaseResource
 
   paginator :paged
 
-  has_one :tag_action, class_name: 'TagAction'
+  has_one :tag_action, class_name: 'TagAction', always_include_linkage_data: true
 
   filter :name
 

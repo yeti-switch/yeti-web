@@ -7,7 +7,7 @@ class Api::Rest::Admin::Routing::AreaPrefixResource < ::BaseResource
 
   paginator :paged
 
-  has_one :area, class_name: 'Area'
+  has_one :area, class_name: 'Area', always_include_linkage_data: true
 
   ransack_filter :prefix, type: :string
 end

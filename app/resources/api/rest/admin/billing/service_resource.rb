@@ -14,8 +14,8 @@ class Api::Rest::Admin::Billing::ServiceResource < ::BaseResource
   attribute :renew_period
   attribute :uuid
 
-  has_one :account, class_name: 'Account', foreign_key_on: :related
-  has_one :service_type, class_name: 'ServiceType', relation_name: :type, foreign_key_on: :related
+  has_one :account, class_name: 'Account', foreign_key_on: :related, always_include_linkage_data: true
+  has_one :service_type, class_name: 'ServiceType', relation_name: :type, foreign_key_on: :related, always_include_linkage_data: true
   has_many :transactions, class_name: 'Transaction', foreign_key_on: :related
 
   ransack_filter :uuid, type: :uuid

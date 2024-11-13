@@ -133,23 +133,23 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :destination_rate_policy_id,
              :metadata
 
-  has_one :rateplan, class_name: 'Rateplan', force_routed: true
-  has_one :dialpeer, force_routed: true
-  has_one :pop, force_routed: true
-  has_one :routing_group, class_name: 'RoutingGroup', force_routed: true
-  has_one :routing_plan, class_name: 'RoutingPlan', force_routed: true
-  has_one :destination, class_name: 'Destination', force_routed: true
-  has_one :customer_auth, force_routed: true
-  has_one :vendor, class_name: 'Contractor', force_routed: true
-  has_one :customer, class_name: 'Contractor', force_routed: true
-  has_one :customer_acc, class_name: 'Account', force_routed: true
-  has_one :vendor_acc, class_name: 'Account', force_routed: true
-  has_one :orig_gw, class_name: 'Gateway', force_routed: true
-  has_one :term_gw, class_name: 'Gateway', force_routed: true
-  has_one :dst_country, class_name: 'Country', force_routed: true
-  has_one :dst_network, class_name: 'Network', force_routed: true
-  has_one :src_country, class_name: 'Country', force_routed: true
-  has_one :src_network, class_name: 'Network', force_routed: true
+  has_one :rateplan, class_name: 'Rateplan', force_routed: true, always_include_linkage_data: true
+  has_one :dialpeer, force_routed: true, always_include_linkage_data: true
+  has_one :pop, force_routed: true, always_include_linkage_data: true
+  has_one :routing_group, class_name: 'RoutingGroup', force_routed: true, always_include_linkage_data: true
+  has_one :routing_plan, class_name: 'RoutingPlan', force_routed: true, always_include_linkage_data: true
+  has_one :destination, class_name: 'Destination', force_routed: true, always_include_linkage_data: true
+  has_one :customer_auth, force_routed: true, always_include_linkage_data: true
+  has_one :vendor, class_name: 'Contractor', force_routed: true, always_include_linkage_data: true
+  has_one :customer, class_name: 'Contractor', force_routed: true, always_include_linkage_data: true
+  has_one :customer_acc, class_name: 'Account', force_routed: true, always_include_linkage_data: true
+  has_one :vendor_acc, class_name: 'Account', force_routed: true, always_include_linkage_data: true
+  has_one :orig_gw, class_name: 'Gateway', force_routed: true, always_include_linkage_data: true
+  has_one :term_gw, class_name: 'Gateway', force_routed: true, always_include_linkage_data: true
+  has_one :dst_country, class_name: 'Country', force_routed: true, always_include_linkage_data: true
+  has_one :dst_network, class_name: 'Network', force_routed: true, always_include_linkage_data: true
+  has_one :src_country, class_name: 'Country', force_routed: true, always_include_linkage_data: true
+  has_one :src_network, class_name: 'Network', force_routed: true, always_include_linkage_data: true
 
   filter :customer_auth_external_id_eq, apply: lambda { |records, values, _options|
     records.where(customer_auth_external_id: values)
@@ -234,6 +234,25 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
     records.where(customer_auth_external_type: nil).or(records.where.not(customer_auth_external_type: values))
   }
 
+  relationship_filter :rateplan
+  relationship_filter :dialpeer
+  relationship_filter :pop
+  relationship_filter :routing_group
+  relationship_filter :routing_plan
+  relationship_filter :destination
+  relationship_filter :customer_auth
+  relationship_filter :vendor
+  relationship_filter :customer
+  relationship_filter :customer_acc
+  relationship_filter :vendor_acc
+  relationship_filter :orig_gw
+  relationship_filter :term_gw
+  relationship_filter :dst_country
+  relationship_filter :dst_network
+  relationship_filter :src_country
+  relationship_filter :src_network
+
+  ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime
   ransack_filter :destination_next_rate, type: :number
   ransack_filter :destination_fee, type: :number

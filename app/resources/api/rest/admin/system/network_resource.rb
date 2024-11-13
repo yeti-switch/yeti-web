@@ -6,5 +6,5 @@ class Api::Rest::Admin::System::NetworkResource < ::BaseResource
   paginator :paged
   filter :name
 
-  has_one :network_type, class_name: 'NetworkType', foreign_key: :type_id
+  has_one :network_type, class_name: 'NetworkType', foreign_key: :type_id, always_include_linkage_data: true
 end

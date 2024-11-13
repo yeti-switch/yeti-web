@@ -15,8 +15,8 @@ class Api::Rest::Admin::Routing::DestinationResource < ::BaseResource
 
   paginator :paged
 
-  has_one :rate_group, class_name: 'RateGroup'
-  has_one :routing_tag_mode, class_name: 'RoutingTagMode'
+  has_one :rate_group, class_name: 'RateGroup', always_include_linkage_data: true
+  has_one :routing_tag_mode, class_name: 'RoutingTagMode', always_include_linkage_data: true
   has_one :country, class_name: 'Country', force_routed: true, foreign_key_on: :related
   has_one :network, class_name: 'Network', force_routed: true, foreign_key_on: :related
   has_many :destination_next_rates, class_name: 'DestinationNextRate'

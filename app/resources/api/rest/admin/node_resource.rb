@@ -5,7 +5,7 @@ class Api::Rest::Admin::NodeResource < ::BaseResource
 
   paginator :paged
 
-  has_one :pop
+  has_one :pop, always_include_linkage_data: true
 
   filter :name # DEPRECATED
 

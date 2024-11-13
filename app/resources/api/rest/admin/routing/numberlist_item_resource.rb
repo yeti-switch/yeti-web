@@ -11,8 +11,8 @@ class Api::Rest::Admin::Routing::NumberlistItemResource < ::BaseResource
 
   paginator :paged
 
-  has_one :numberlist, class_name: 'Numberlist'
-  has_one :tag_action, class_name: 'TagAction'
+  has_one :numberlist, class_name: 'Numberlist', always_include_linkage_data: true
+  has_one :tag_action, class_name: 'TagAction', always_include_linkage_data: true
 
   relationship_filter :numberlist
 

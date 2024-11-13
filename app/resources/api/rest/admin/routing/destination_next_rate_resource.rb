@@ -7,7 +7,7 @@ class Api::Rest::Admin::Routing::DestinationNextRateResource < ::BaseResource
 
   paginator :paged
 
-  has_one :destination, class_name: 'Destination'
+  has_one :destination, class_name: 'Destination', always_include_linkage_data: true
 
   filter :external_id
 

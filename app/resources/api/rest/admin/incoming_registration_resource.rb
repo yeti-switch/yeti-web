@@ -7,7 +7,7 @@ class Api::Rest::Admin::IncomingRegistrationResource < ::BaseResource
 
   attributes :auth_id, :contact, :expires, :path, :user_agent
 
-  has_one :gateway, class_name: 'Gateway'
+  has_one :gateway, class_name: 'Gateway', always_include_linkage_data: true
 
   filter :auth_id_eq
 

@@ -5,7 +5,7 @@ class Api::Rest::Admin::GatewayGroupResource < BaseResource
 
   paginator :paged
 
-  has_one :vendor, class_name: 'Contractor'
+  has_one :vendor, class_name: 'Contractor', always_include_linkage_data: true
 
   filter :name
 

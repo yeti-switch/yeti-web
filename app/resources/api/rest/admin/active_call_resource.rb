@@ -56,18 +56,18 @@ class Api::Rest::Admin::ActiveCallResource < ::BaseResource
              :node_id,
              :pop_id
 
-  has_one :customer, class_name: 'Contractor'
-  has_one :vendor, class_name: 'Contractor'
-  has_one :customer_acc, class_name: 'Account'
-  has_one :vendor_acc, class_name: 'Account'
-  has_one :customer_auth, class_name: 'CustomersAuth'
-  has_one :destination, class_name: 'Routing::Destination'
-  has_one :dialpeer, class_name: 'Dialpeer'
-  has_one :orig_gw, class_name: 'Gateway'
-  has_one :term_gw, class_name: 'Gateway'
-  has_one :routing_group, class_name: 'Routing::RoutingGroup'
-  has_one :rateplan, class_name: 'Routing::Rateplan'
-  has_one :node, class_name: 'Node', foreign_key: :node_id
+  has_one :customer, class_name: 'Contractor', always_include_linkage_data: true
+  has_one :vendor, class_name: 'Contractor', always_include_linkage_data: true
+  has_one :customer_acc, class_name: 'Account', always_include_linkage_data: true
+  has_one :vendor_acc, class_name: 'Account', always_include_linkage_data: true
+  has_one :customer_auth, class_name: 'CustomersAuth', always_include_linkage_data: true
+  has_one :destination, class_name: 'Routing::Destination', always_include_linkage_data: true
+  has_one :dialpeer, class_name: 'Dialpeer', always_include_linkage_data: true
+  has_one :orig_gw, class_name: 'Gateway', always_include_linkage_data: true
+  has_one :term_gw, class_name: 'Gateway', always_include_linkage_data: true
+  has_one :routing_group, class_name: 'Routing::RoutingGroup', always_include_linkage_data: true
+  has_one :rateplan, class_name: 'Routing::Rateplan', always_include_linkage_data: true
+  has_one :node, class_name: 'Node', foreign_key: :node_id, always_include_linkage_data: true
 
   filter :node_id_eq
   filter :dst_country_id_eq

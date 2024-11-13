@@ -20,8 +20,8 @@ class Api::Rest::Admin::Equipment::RegistrationResource < ::BaseResource
              :username,
              :sip_schema_id
 
-  has_one :transport_protocol, class_name: 'TransportProtocol'
-  has_one :proxy_transport_protocol, class_name: 'TransportProtocol'
-  has_one :pop, class_name: 'Pop'
-  has_one :node, class_name: 'Node'
+  has_one :transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
+  has_one :proxy_transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
+  has_one :pop, class_name: 'Pop', always_include_linkage_data: true
+  has_one :node, class_name: 'Node', always_include_linkage_data: true
 end
