@@ -235,22 +235,22 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   }
 
   ransack_filter :rateplan_id, type: :foreign_key
-  ransack_filter :dialpeer, type: :foreign_key
-  ransack_filter :pop, type: :foreign_key
-  ransack_filter :routing_group, type: :foreign_key
-  ransack_filter :routing_plan, type: :foreign_key
-  ransack_filter :destination, type: :foreign_key
-  ransack_filter :customer_auth, type: :foreign_key
-  ransack_filter :vendor, type: :foreign_key
-  ransack_filter :customer, type: :foreign_key
-  ransack_filter :customer_acc, type: :foreign_key
-  ransack_filter :vendor_acc, type: :foreign_key
-  ransack_filter :orig_gw, type: :foreign_key
-  ransack_filter :term_gw, type: :foreign_key
-  ransack_filter :dst_country, type: :foreign_key
-  ransack_filter :dst_network, type: :foreign_key
-  ransack_filter :src_country, type: :foreign_key
-  ransack_filter :src_network, type: :foreign_key
+  ransack_filter :dialpeer_id, type: :foreign_key
+  ransack_filter :pop_id, type: :foreign_key
+  ransack_filter :routing_group_id, type: :foreign_key
+  ransack_filter :routing_plan_id, type: :foreign_key
+  ransack_filter :destination_id, type: :foreign_key
+  ransack_filter :customer_auth_id, type: :foreign_key
+  ransack_filter :vendor_id, type: :foreign_key
+  ransack_filter :customer_id, type: :foreign_key
+  ransack_filter :customer_acc_id, type: :foreign_key
+  ransack_filter :vendor_acc_id, type: :foreign_key
+  ransack_filter :orig_gw_id, type: :foreign_key
+  ransack_filter :term_gw_id, type: :foreign_key
+  ransack_filter :dst_country_id, type: :foreign_key
+  ransack_filter :dst_network_id, type: :foreign_key
+  ransack_filter :src_country_id, type: :foreign_key
+  ransack_filter :src_network_id, type: :foreign_key
 
   ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime
