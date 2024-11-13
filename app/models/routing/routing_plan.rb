@@ -64,9 +64,10 @@ class Routing::RoutingPlan < ApplicationRecord
 
   include WithPaperTrail
 
-  validates :name, :max_rerouting_attempts, presence: true
+  validates :name, :max_rerouting_attempts, :rate_delta_max, presence: true
   validates :name, uniqueness: { allow_blank: false }
   validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 30, allow_nil: false, only_integer: true }
+  validates :rate_delta_max, numericality: { greater_than_or_equal_to: 0, allow_nil: false }
   validates :external_id, uniqueness: { allow_blank: true }
 
   validates :sorting_id, inclusion: { in: SORTINGS.keys }, allow_nil: false
