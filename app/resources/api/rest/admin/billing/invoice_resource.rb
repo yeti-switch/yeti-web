@@ -37,12 +37,14 @@ class Api::Rest::Admin::Billing::InvoiceResource < ::BaseResource
   attribute :services_amount_earned
   attribute :service_transactions_count
 
-  has_one :account, class_name: 'Account', foreign_key_on: :related
+  has_one :account, class_name: 'Account', always_include_linkage_data: true
   has_many :originated_destinations, class_name: 'InvoiceOriginatedDestination'
   has_many :originated_networks, class_name: 'InvoiceOriginatedNetwork'
   has_many :terminated_destinations, class_name: 'InvoiceTerminatedDestination'
   has_many :terminated_networks, class_name: 'InvoiceTerminatedNetwork'
   has_many :service_data, class_name: 'InvoiceServiceDatum'
+
+  relationship_filter :account
 
   ransack_filter :reference, type: :string
   ransack_filter :start_date, type: :datetime

@@ -10,8 +10,10 @@ class Api::Rest::Admin::Billing::TransactionResource < ::BaseResource
   attribute :created_at
   attribute :uuid
 
-  has_one :account, class_name: 'Account', foreign_key_on: :related
-  has_one :service, class_name: 'Service', relation_name: :type, foreign_key_on: :related
+  has_one :account, class_name: 'Account', always_include_linkage_data: true
+  has_one :service, class_name: 'Service', relation_name: :type, always_include_linkage_data: true
+
+  relationship_filter :account
 
   ransack_filter :uuid, type: :uuid
   ransack_filter :created_at, type: :datetime

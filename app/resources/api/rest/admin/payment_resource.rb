@@ -8,9 +8,11 @@ class Api::Rest::Admin::PaymentResource < BaseResource
 
   paginator :paged
 
-  has_one :account
+  has_one :account, always_include_linkage_data: true
 
   relationship_filter :account
+
+  ransack_filter :id, type: :number
   ransack_filter :amount, type: :number
   ransack_filter :notes, type: :string
   ransack_filter :status, type: :enum, collection: Payment::CONST::STATUS_IDS.values

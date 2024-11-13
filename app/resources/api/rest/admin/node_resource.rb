@@ -5,11 +5,13 @@ class Api::Rest::Admin::NodeResource < ::BaseResource
 
   paginator :paged
 
-  has_one :pop
+  has_one :pop, always_include_linkage_data: true
 
-  filter :name # DEPRECATED
+  relationship_filter :pop
 
+  ransack_filter :id, type: :number
   ransack_filter :name, type: :string
+  ransack_filter :rpc_endpoint, type: :string
 
   def self.updatable_fields(_context)
     %i[
