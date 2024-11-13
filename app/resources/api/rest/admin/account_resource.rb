@@ -12,9 +12,9 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :origination_capacity, :termination_capacity, :total_capacity,
              :send_invoices_to, :invoice_period
 
-  has_one :contractor
-  has_one :timezone, class_name: 'System::Timezone'
-  has_one :invoice_template, class_name: 'Billing::InvoiceTemplate'
+  has_one :contractor, always_include_linkage_data: true
+  has_one :timezone, class_name: 'System::Timezone', always_include_linkage_data: true
+  has_one :invoice_template, class_name: 'Billing::InvoiceTemplate', always_include_linkage_data: true
 
   filter :name
 

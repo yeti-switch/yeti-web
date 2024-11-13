@@ -6,7 +6,7 @@ class Api::Rest::Admin::DialpeerNextRateResource < BaseResource
 
   paginator :paged
 
-  has_one :dialpeer
+  has_one :dialpeer, always_include_linkage_data: true
 
   filter :external_id
 
