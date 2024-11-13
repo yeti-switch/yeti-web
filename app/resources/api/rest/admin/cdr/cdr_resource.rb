@@ -265,23 +265,23 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   relationship_filter :src_country
   relationship_filter :src_network
 
-  ransack_filter :rateplan_id, type: number
-  ransack_filter :dialpeer_id, type: number
-  ransack_filter :pop_id, type: number
-  ransack_filter :routing_group_id, type: number
-  ransack_filter :routing_plan_id, type: number
-  ransack_filter :destination_id, type: number
-  ransack_filter :customer_auth_id, type: number
-  ransack_filter :vendor_id, type: number
-  ransack_filter :customer_id, type: number
-  ransack_filter :customer_acc_id, type: number
-  ransack_filter :vendor_acc_id, type: number
-  ransack_filter :orig_gw_id, type: number
-  ransack_filter :term_gw_id, type: number
-  ransack_filter :dst_country_id, type: number
-  ransack_filter :dst_network_id, type: number
-  ransack_filter :src_country_id, type: number
-  ransack_filter :src_network_id, type: number
+  ransack_filter :rateplan_id, type: :number
+  ransack_filter :dialpeer_id, type: :number
+  ransack_filter :pop_id, type: :number
+  ransack_filter :routing_group_id, type: :number
+  ransack_filter :routing_plan_id, type: :number
+  ransack_filter :destination_id, type: :number
+  ransack_filter :customer_auth_id, type: :number
+  ransack_filter :vendor_id, type: :number
+  ransack_filter :customer_id, type: :number
+  ransack_filter :customer_acc_id, type: :number
+  ransack_filter :vendor_acc_id, type: :number
+  ransack_filter :orig_gw_id, type: :number
+  ransack_filter :term_gw_id, type: :number
+  ransack_filter :dst_country_id, type: :number
+  ransack_filter :dst_network_id, type: :number
+  ransack_filter :src_country_id, type: :number
+  ransack_filter :src_network_id, type: :number
 
   ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime
