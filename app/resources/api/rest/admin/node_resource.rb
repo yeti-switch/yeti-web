@@ -7,7 +7,7 @@ class Api::Rest::Admin::NodeResource < ::BaseResource
 
   has_one :pop, always_include_linkage_data: true
 
-  relationship_filter :pop
+  ransack_filter :pop_id, type: :foreign_key
 
   ransack_filter :id, type: :number
   ransack_filter :name, type: :string

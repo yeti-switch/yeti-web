@@ -44,7 +44,7 @@ class Api::Rest::Admin::Billing::InvoiceResource < ::BaseResource
   has_many :terminated_networks, class_name: 'InvoiceTerminatedNetwork'
   has_many :service_data, class_name: 'InvoiceServiceDatum'
 
-  relationship_filter :account
+  ransack_filter :account_id, type: :foreign_key
 
   ransack_filter :reference, type: :string
   ransack_filter :start_date, type: :datetime
@@ -83,8 +83,6 @@ class Api::Rest::Admin::Billing::InvoiceResource < ::BaseResource
   ransack_filter :services_amount_spent, type: :number
   ransack_filter :services_amount_earned, type: :number
   ransack_filter :service_transactions_count, type: :number
-
-  ransack_filter :account_id, type: :foreign_key
 
   def state
     _model.state.name

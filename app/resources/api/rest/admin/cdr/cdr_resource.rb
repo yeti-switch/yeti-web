@@ -234,23 +234,23 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
     records.where(customer_auth_external_type: nil).or(records.where.not(customer_auth_external_type: values))
   }
 
-  relationship_filter :rateplan
-  relationship_filter :dialpeer
-  relationship_filter :pop
-  relationship_filter :routing_group
-  relationship_filter :routing_plan
-  relationship_filter :destination
-  relationship_filter :customer_auth
-  relationship_filter :vendor
-  relationship_filter :customer
-  relationship_filter :customer_acc
-  relationship_filter :vendor_acc
-  relationship_filter :orig_gw
-  relationship_filter :term_gw
-  relationship_filter :dst_country
-  relationship_filter :dst_network
-  relationship_filter :src_country
-  relationship_filter :src_network
+  ransack_filter :rateplan_id, type: :foreign_key
+  ransack_filter :dialpeer, type: :foreign_key
+  ransack_filter :pop, type: :foreign_key
+  ransack_filter :routing_group, type: :foreign_key
+  ransack_filter :routing_plan, type: :foreign_key
+  ransack_filter :destination, type: :foreign_key
+  ransack_filter :customer_auth, type: :foreign_key
+  ransack_filter :vendor, type: :foreign_key
+  ransack_filter :customer, type: :foreign_key
+  ransack_filter :customer_acc, type: :foreign_key
+  ransack_filter :vendor_acc, type: :foreign_key
+  ransack_filter :orig_gw, type: :foreign_key
+  ransack_filter :term_gw, type: :foreign_key
+  ransack_filter :dst_country, type: :foreign_key
+  ransack_filter :dst_network, type: :foreign_key
+  ransack_filter :src_country, type: :foreign_key
+  ransack_filter :src_network, type: :foreign_key
 
   ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime

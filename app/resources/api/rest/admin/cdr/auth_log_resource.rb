@@ -51,6 +51,12 @@ class Api::Rest::Admin::Cdr::AuthLogResource < BaseResource
     records.where('request_time <= ?', values[0])
   }
 
+  ransack_filter :gateway_id, type: :foreign_key
+  ransack_filter :pop_id, type: :foreign_key
+  ransack_filter :node_id, type: :foreign_key
+  ransack_filter :origination_proto_id, type: :foreign_key
+  ransack_filter :transport_proto_id, type: :foreign_key
+
   ransack_filter :request_time, type: :datetime
   ransack_filter :success, type: :boolean
   ransack_filter :code, type: :number
@@ -58,15 +64,10 @@ class Api::Rest::Admin::Cdr::AuthLogResource < BaseResource
   ransack_filter :internal_reason, type: :string
   ransack_filter :origination_ip, type: :string
   ransack_filter :origination_port, type: :number
-  ransack_filter :origination_proto_id, type: :number
-  ransack_filter :transport_proto_id, type: :number
   ransack_filter :transport_remote_ip, type: :string
   ransack_filter :transport_remote_port, type: :number
   ransack_filter :transport_local_ip, type: :string
   ransack_filter :transport_local_port, type: :number
-  ransack_filter :pop_id, type: :number
-  ransack_filter :node_id, type: :number
-  ransack_filter :gateway_id, type: :number
   ransack_filter :username, type: :string
   ransack_filter :realm, type: :string
   ransack_filter :request_method, type: :string

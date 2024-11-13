@@ -15,11 +15,11 @@ class Api::Rest::Admin::Billing::ServiceResource < ::BaseResource
   attribute :uuid
 
   has_one :account, class_name: 'Account', always_include_linkage_data: true
-  has_one :service_type, class_name: 'ServiceType', relation_name: :type, always_include_linkage_data: true
+  has_one :service_type, class_name: 'ServiceType', foreign_key: :type_id, relation_name: :type, always_include_linkage_data: true
   has_many :transactions, class_name: 'Transaction', foreign_key_on: :related
 
-  relationship_filter :account
-  relationship_filter :service_type
+  ransack_filter :account_id, type: :foreign_key
+  ransack_filter :type_id, type: :foreign_key
 
   ransack_filter :uuid, type: :uuid
   ransack_filter :created_at, type: :datetime

@@ -13,12 +13,11 @@ class Api::Rest::Admin::Billing::TransactionResource < ::BaseResource
   has_one :account, class_name: 'Account', always_include_linkage_data: true
   has_one :service, class_name: 'Service', relation_name: :type, always_include_linkage_data: true
 
-  relationship_filter :account
+  ransack_filter :account_id, type: :foreign_key
+  ransack_filter :service_id, type: :foreign_key
 
   ransack_filter :uuid, type: :uuid
   ransack_filter :created_at, type: :datetime
-  ransack_filter :account_id, type: :foreign_key
-  ransack_filter :service_id, type: :foreign_key
   ransack_filter :amount, type: :number
   ransack_filter :description, type: :string
 
