@@ -5,7 +5,7 @@ class Api::Rest::Admin::ContractorResource < BaseResource
 
   paginator :paged
 
-  has_one :smtp_connection, class_name: 'System::SmtpConnection'
+  has_one :smtp_connection, class_name: 'System::SmtpConnection', always_include_linkage_data: true
 
   filter :name
 

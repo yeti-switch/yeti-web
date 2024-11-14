@@ -7,7 +7,7 @@ class Api::Rest::Admin::ContactResource < ::BaseResource
 
   paginator :paged
 
-  has_one :contractor
+  has_one :contractor, always_include_linkage_data: true
 
   ransack_filter :email, type: :string
   ransack_filter :notes, type: :string

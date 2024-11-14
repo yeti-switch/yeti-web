@@ -63,7 +63,6 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :is_last_cdr,
              :lega_disconnect_code,
              :lega_disconnect_reason,
-             :node_id,
              :src_name_in,
              :src_name_out,
              :diversion_in,
@@ -74,10 +73,6 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
              :auth_orig_ip,
              :auth_orig_port,
              :global_tag,
-             :src_network_id,
-             :src_country_id,
-             :dst_country_id,
-             :dst_network_id,
              :src_prefix_routing,
              :dst_prefix_routing,
              :routing_delay,
@@ -136,6 +131,7 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   has_one :rateplan, class_name: 'Rateplan', force_routed: true, always_include_linkage_data: true
   has_one :dialpeer, force_routed: true, always_include_linkage_data: true
   has_one :pop, force_routed: true, always_include_linkage_data: true
+  has_one :node, force_routed: true, always_include_linkage_data: true
   has_one :routing_group, class_name: 'RoutingGroup', force_routed: true, always_include_linkage_data: true
   has_one :routing_plan, class_name: 'RoutingPlan', force_routed: true, always_include_linkage_data: true
   has_one :destination, class_name: 'Destination', force_routed: true, always_include_linkage_data: true
@@ -235,22 +231,23 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   }
 
   ransack_filter :rateplan_id, type: :foreign_key
-  ransack_filter :dialpeer, type: :foreign_key
-  ransack_filter :pop, type: :foreign_key
-  ransack_filter :routing_group, type: :foreign_key
-  ransack_filter :routing_plan, type: :foreign_key
-  ransack_filter :destination, type: :foreign_key
-  ransack_filter :customer_auth, type: :foreign_key
-  ransack_filter :vendor, type: :foreign_key
-  ransack_filter :customer, type: :foreign_key
-  ransack_filter :customer_acc, type: :foreign_key
-  ransack_filter :vendor_acc, type: :foreign_key
-  ransack_filter :orig_gw, type: :foreign_key
-  ransack_filter :term_gw, type: :foreign_key
-  ransack_filter :dst_country, type: :foreign_key
-  ransack_filter :dst_network, type: :foreign_key
-  ransack_filter :src_country, type: :foreign_key
-  ransack_filter :src_network, type: :foreign_key
+  ransack_filter :dialpeer_id, type: :foreign_key
+  ransack_filter :pop_id, type: :foreign_key
+  ransack_filter :node_id, type: :foreign_key
+  ransack_filter :routing_group_id, type: :foreign_key
+  ransack_filter :routing_plan_id, type: :foreign_key
+  ransack_filter :destination_id, type: :foreign_key
+  ransack_filter :customer_auth_id, type: :foreign_key
+  ransack_filter :vendor_id, type: :foreign_key
+  ransack_filter :customer_id, type: :foreign_key
+  ransack_filter :customer_acc_id, type: :foreign_key
+  ransack_filter :vendor_acc_id, type: :foreign_key
+  ransack_filter :orig_gw_id, type: :foreign_key
+  ransack_filter :term_gw_id, type: :foreign_key
+  ransack_filter :dst_country_id, type: :foreign_key
+  ransack_filter :dst_network_id, type: :foreign_key
+  ransack_filter :src_country_id, type: :foreign_key
+  ransack_filter :src_network_id, type: :foreign_key
 
   ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime
@@ -295,7 +292,6 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :is_last_cdr, type: :boolean
   ransack_filter :lega_disconnect_code, type: :number
   ransack_filter :lega_disconnect_reason, type: :string
-  ransack_filter :node_id, type: :number
   ransack_filter :src_name_in, type: :string
   ransack_filter :src_name_out, type: :string
   ransack_filter :diversion_in, type: :string
@@ -306,10 +302,6 @@ class Api::Rest::Admin::Cdr::CdrResource < BaseResource
   ransack_filter :auth_orig_ip, type: :inet
   ransack_filter :auth_orig_port, type: :number
   ransack_filter :global_tag, type: :string
-  ransack_filter :src_country_id, type: :number
-  ransack_filter :src_network_id, type: :number
-  ransack_filter :dst_country_id, type: :number
-  ransack_filter :dst_network_id, type: :number
   ransack_filter :src_prefix_routing, type: :string
   ransack_filter :dst_prefix_routing, type: :string
   ransack_filter :routing_delay, type: :number
