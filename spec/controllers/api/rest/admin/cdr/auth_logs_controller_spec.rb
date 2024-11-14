@@ -170,9 +170,6 @@ RSpec.describe Api::Rest::Admin::Cdr::AuthLogsController, type: :controller do
             'transport-local-ip' => auth_log.transport_local_ip,
             'transport-local-port' => auth_log.transport_local_port,
 
-            'pop-id' => auth_log.pop_id,
-            'node-id' => auth_log.node_id,
-            'gateway-id' => auth_log.gateway_id,
             'username' => auth_log.username,
             'realm' => auth_log.realm,
             'request-method' => auth_log.request_method,
