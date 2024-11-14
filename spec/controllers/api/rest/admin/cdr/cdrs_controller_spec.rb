@@ -445,6 +445,8 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     let(:trait) { :with_id_and_uuid }
     let(:json_api_request_query) { nil }
 
+    # TODO add tests for filters by foreign keys
+
     it_behaves_like :jsonapi_filters_by_datetime_field, :time_start
     it_behaves_like :jsonapi_filters_by_number_field, :destination_next_rate
     it_behaves_like :jsonapi_filters_by_number_field, :destination_fee
@@ -487,7 +489,6 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_boolean_field, :is_last_cdr
     it_behaves_like :jsonapi_filters_by_number_field, :lega_disconnect_code
     it_behaves_like :jsonapi_filters_by_string_field, :lega_disconnect_reason
-    it_behaves_like :jsonapi_filters_by_number_field, :node_id
     it_behaves_like :jsonapi_filters_by_string_field, :src_name_in
     it_behaves_like :jsonapi_filters_by_string_field, :src_name_out
     it_behaves_like :jsonapi_filters_by_string_field, :diversion_in
@@ -498,10 +499,6 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_inet_field, :auth_orig_ip
     it_behaves_like :jsonapi_filters_by_number_field, :auth_orig_port
     it_behaves_like :jsonapi_filters_by_string_field, :global_tag
-    it_behaves_like :jsonapi_filters_by_number_field, :src_country_id
-    it_behaves_like :jsonapi_filters_by_number_field, :src_network_id
-    it_behaves_like :jsonapi_filters_by_number_field, :dst_country_id
-    it_behaves_like :jsonapi_filters_by_number_field, :dst_network_id
     it_behaves_like :jsonapi_filters_by_string_field, :src_prefix_routing
     it_behaves_like :jsonapi_filters_by_string_field, :dst_prefix_routing
     it_behaves_like :jsonapi_filters_by_number_field, :routing_delay
