@@ -45,7 +45,7 @@ gem 'active_admin_sidebar', '1.1.0'
 gem 'excelinator', github: 'senid231/excelinator', branch: 'ruby3-fix'
 
 # REST API
-gem 'jsonapi-resources', '~> 0.9.12'
+gem 'jsonapi-resources', github: 'cerebris/jsonapi-resources', branch: 'master'
 
 # gem 'activeadmin_async_export'
 
