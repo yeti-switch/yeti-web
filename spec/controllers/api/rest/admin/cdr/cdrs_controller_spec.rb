@@ -620,7 +620,6 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'is-last-cdr' => cdr.is_last_cdr,
             'lega-disconnect-code' => cdr.lega_disconnect_code,
             'lega-disconnect-reason' => cdr.lega_disconnect_reason,
-            'node-id' => cdr.node_id,
             'src-name-in' => cdr.src_name_in,
             'src-name-out' => cdr.src_name_out,
             'diversion-in' => cdr.diversion_in,
@@ -631,10 +630,6 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
             'auth-orig-ip' => cdr.auth_orig_ip,
             'auth-orig-port' => cdr.auth_orig_port,
             'global-tag' => cdr.global_tag,
-            'src-country-id' => cdr.src_country_id,
-            'src-network-id' => cdr.src_network_id,
-            'dst-country-id' => cdr.dst_country_id,
-            'dst-network-id' => cdr.dst_network_id,
             'src-prefix-routing' => cdr.src_prefix_routing,
             'dst-prefix-routing' => cdr.dst_prefix_routing,
             'routing-delay' => cdr.routing_delay,
@@ -698,6 +693,9 @@ RSpec.describe Api::Rest::Admin::Cdr::CdrsController, type: :controller do
               'data' => nil
             ),
             'pop' => hash_including(
+              'data' => nil
+            ),
+            'node' => hash_including(
               'data' => nil
             ),
             'routing-group' => hash_including(
