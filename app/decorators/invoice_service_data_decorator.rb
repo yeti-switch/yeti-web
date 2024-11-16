@@ -8,12 +8,12 @@ class InvoiceServiceDataDecorator < BillingDecorator
   end
 
   def type_badge
-    model.spent ? h.status_tag('spent', class: :blue) : h.status_tag('earned', class: :green)
+    model.spent ? status_tag('spent', class: :blue) : status_tag('earned', class: :green)
   end
 
   def service_link
     if model.service
-      h.link_to model.service.name, h.billing_service_path(model.service)
+      h.link_to model.service.name, service_path(model.service)
     elsif model.service_id
       model.service_id
     else
