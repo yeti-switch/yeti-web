@@ -27,22 +27,22 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   has_one :term_disconnect_policy, class_name: 'DisconnectPolicy', always_include_linkage_data: true
   has_one :orig_disconnect_policy, class_name: 'DisconnectPolicy', always_include_linkage_data: true
   has_one :gateway_group, always_include_linkage_data: true
-  has_one :diversion_send_mode, class_name: 'Equipment::GatewayDiversionSendMode', always_include_linkage_data: true
+  has_one :diversion_send_mode, class_name: 'GatewayDiversionSendMode', always_include_linkage_data: true
   has_one :pop, always_include_linkage_data: true
   has_one :codec_group, always_include_linkage_data: true
   has_one :sdp_c_location, class_name: 'SdpCLocation', always_include_linkage_data: true
-  has_one :sensor, class_name: 'System::Sensor', always_include_linkage_data: true
-  has_one :sensor_level, class_name: 'System::SensorLevel', always_include_linkage_data: true
-  has_one :dtmf_receive_mode, class_name: 'System::DtmfReceiveMode', always_include_linkage_data: true
-  has_one :dtmf_send_mode, class_name: 'System::DtmfSendMode', always_include_linkage_data: true
-  has_one :transport_protocol, class_name: 'Equipment::TransportProtocol', always_include_linkage_data: true
-  has_one :term_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', always_include_linkage_data: true
-  has_one :orig_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', always_include_linkage_data: true
-  has_one :rel100_mode, class_name: 'Equipment::GatewayRel100Mode', always_include_linkage_data: true
-  has_one :rx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', always_include_linkage_data: true
-  has_one :tx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', always_include_linkage_data: true
-  has_one :network_protocol_priority, class_name: 'Equipment::GatewayNetworkProtocolPriority', always_include_linkage_data: true
-  has_one :media_encryption_mode, class_name: 'Equipment::GatewayMediaEncryptionMode', always_include_linkage_data: true
+  has_one :sensor, class_name: 'Sensor', always_include_linkage_data: true
+  has_one :sensor_level, class_name: 'SensorLevel', always_include_linkage_data: true
+  has_one :dtmf_receive_mode, class_name: 'DtmfReceiveMode', always_include_linkage_data: true
+  has_one :dtmf_send_mode, class_name: 'DtmfSendMode', always_include_linkage_data: true
+  has_one :transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
+  has_one :term_proxy_transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
+  has_one :orig_proxy_transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
+  has_one :rel100_mode, class_name: 'GatewayRel100Mode', always_include_linkage_data: true
+  has_one :rx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', always_include_linkage_data: true
+  has_one :tx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', always_include_linkage_data: true
+  has_one :network_protocol_priority, class_name: 'GatewayNetworkProtocolPriority', always_include_linkage_data: true
+  has_one :media_encryption_mode, class_name: 'GatewayMediaEncryptionMode', always_include_linkage_data: true
 
   filter :name # DEPRECATED
 

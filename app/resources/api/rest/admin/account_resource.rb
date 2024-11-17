@@ -13,8 +13,8 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :send_invoices_to, :invoice_period
 
   has_one :contractor, always_include_linkage_data: true
-  has_one :timezone, class_name: 'System::Timezone', always_include_linkage_data: true
-  has_one :invoice_template, class_name: 'Billing::InvoiceTemplate', always_include_linkage_data: true
+  has_one :timezone, class_name: 'Timezone', always_include_linkage_data: true
+  has_one :invoice_template, class_name: 'InvoiceTemplate', always_include_linkage_data: true
 
   filter :name
 

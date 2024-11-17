@@ -26,7 +26,7 @@ class BatchUpdateForm::Base
   #     end
   #   end
   #
-  #   # app/admin/billing/contacts.rb
+  #   # app/admin/contacts.rb
   #   ActiveAdmin.register Billing::Contact do
   #     acts_as_async_update BatchUpdateForm::Contact
   #     # ...

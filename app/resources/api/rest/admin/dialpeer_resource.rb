@@ -12,11 +12,11 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
 
   has_one :gateway, always_include_linkage_data: true
   has_one :gateway_group, always_include_linkage_data: true
-  has_one :routing_group, class_name: 'Routing::RoutingGroup', always_include_linkage_data: true
+  has_one :routing_group, class_name: 'RoutingGroup', always_include_linkage_data: true
   has_one :vendor, class_name: 'Contractor', always_include_linkage_data: true
   has_one :account, always_include_linkage_data: true
-  has_one :routing_tag_mode, class_name: 'Routing::RoutingTagMode', always_include_linkage_data: true
-  has_one :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', always_include_linkage_data: true
+  has_one :routing_tag_mode, class_name: 'RoutingTagMode', always_include_linkage_data: true
+  has_one :routeset_discriminator, class_name: 'RoutesetDiscriminator', always_include_linkage_data: true
 
   has_many :dialpeer_next_rates
 

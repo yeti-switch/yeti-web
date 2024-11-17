@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
-RSpec.shared_context :acceptance_index_show do |namespace: nil, type:|
+RSpec.shared_context :acceptance_index_show do |type:|
   # let(:collection) { ModelClass.all }
   # let(:record) { ModelClass.take  }
 
   let(:type) { type }
 
-  resource_path = begin
-                    str = '/api/rest/admin'
-                    str += "/#{namespace}" if namespace
-                    str + "/#{type}"
-                  end
+  resource_path = "/api/rest/admin/#{type}"
 
   get resource_path do
     before { collection }

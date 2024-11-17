@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.shared_examples :returns_json_api_record do |relationships: [], type: nil, status: 200|
-  let(:json_api_record_data) { response_json[:data] } # can be overridden to check one of collection's item
+  let(:json_api_data_detect_by_id_type) { response_json[:data].detect { |d| d[:id] == json_api_record_id && d[:type] == type } }
+  # can be overridden to check one of collection's item
+  # let(:json_api_record_data) { json_api_data_detect_by_id_type }
+  let(:json_api_record_data) { response_json[:data] }
   let(:json_api_record_id) { nil }
   let(:json_api_record_attributes) { nil }
   let(:json_api_record_type) { type || json_api_resource_type }
