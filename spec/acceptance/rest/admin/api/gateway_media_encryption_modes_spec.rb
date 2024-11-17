@@ -3,12 +3,7 @@
 require 'rspec_api_documentation/dsl'
 
 RSpec.resource 'Gateway Media encryption modes' do
-  header 'Accept', 'application/vnd.api+json'
-  header 'Content-Type', 'application/vnd.api+json'
-  header 'Authorization', :auth_token
-
-  let(:user) { create :admin_user }
-  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
+  include_context :acceptance_admin_user
   let(:type) { 'gateway-media-encryption-modes' }
 
   get '/api/rest/admin/gateway-media-encryption-modes' do

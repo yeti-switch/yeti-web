@@ -17,7 +17,7 @@ RSpec.shared_examples :json_api_admin_check_authorization do |status: 200|
 
   context 'with expired auth token' do
     let(:json_api_auth_token) do
-      ::Knock::AuthToken.new(payload: { sub: admin_user.id, exp: 1.minute.ago.to_i }).token
+      Authentication::AdminAuth.build_auth_data(admin_user, expires_at: 1.minute.ago).token
     end
 
     include_examples :responds_with_status, 401, without_body: true
@@ -31,7 +31,7 @@ RSpec.shared_examples :json_api_admin_check_authorization do |status: 200|
     include_examples :responds_with_status, 401, without_body: true
   end
 
-  context 'when admin_user.allowed_ips does not match request.remote_ip' do
+  context 'when admin_user.allowed_ips matches request.remote_ip' do
     before do
       admin_user.update! allowed_ips: ['127.0.0.1']
       when_valid_auth

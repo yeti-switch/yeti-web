@@ -2,15 +2,7 @@
 
 RSpec.describe Api::Rest::Admin::GatewayGroupsController, type: :controller do
   let(:vendor) { create :contractor, vendor: true }
-
-  let(:user) { create :admin_user }
-  let(:auth_token) { ::Knock::AuthToken.new(payload: { sub: user.id }).token }
-
-  before do
-    request.accept = 'application/vnd.api+json'
-    request.headers['Content-Type'] = 'application/vnd.api+json'
-    request.headers['Authorization'] = auth_token
-  end
+  include_context :jsonapi_admin_headers
 
   describe 'GET index' do
     let!(:gateway_groups) { create_list :gateway_group, 2 }

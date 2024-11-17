@@ -295,7 +295,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
       before { get :show, params: { id: destination.to_param, include: 'country' } }
 
       include_examples :responds_with_status, 200
-      include_examples :returns_json_api_record, type: 'destinations', relationships: %i[country network] do
+      include_examples :returns_json_api_record, type: 'destinations', relationships: %i[country network destination-next-rates rate-group routing-tag-mode] do
         let(:json_api_record_id) { destination.id.to_s }
         let(:json_api_record_attributes) do
           hash_including(

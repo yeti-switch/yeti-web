@@ -4,10 +4,10 @@ module AdminApiAuthorizable
   extend ActiveSupport::Concern
 
   included do
-    include Knock::Authenticable
-    undef :current_admin_user
+    rescue_from Authorization::AdminAuth::AuthorizationError, with: :handle_authorization_error
 
-    before_action :authenticate_admin_user!
+    before_action :authorize
+    attr_reader :current_admin_user
   end
 
   def context
@@ -27,9 +27,13 @@ module AdminApiAuthorizable
 
   private
 
-  def authenticate_admin_user!
-    if !authenticate_for(::AdminUser) || !current_admin_user.ip_allowed?(request.remote_ip)
-      unauthorized_entity('admin_user')
-    end
+  def authorize
+    auth_token = params[:token] || request.headers['Authorization']&.split&.last
+    result = Authorization::AdminAuth.authorize!(auth_token, remote_ip: request.remote_ip)
+    @current_admin_user = result.entity
+  end
+
+  def handle_authorization_error
+    head 401
   end
 end
