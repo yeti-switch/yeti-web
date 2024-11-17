@@ -140,4 +140,72 @@ class BaseResource < JSONAPI::Resource
     includes = includes.first if includes.size == 1
     includes
   end
+
+  def self.concat_table_field(table, field, quoted = false)
+    if table.blank? || field.to_s.include?('.')
+      if quoted
+        quote(field)
+      else
+        field.to_s
+      end
+    elsif quoted
+      # https://github.com/cerebris/jsonapi-resources/issues/1369
+      # original: "#{quote(table)}.#{quote(field)}"
+      # start patch
+      quoted_table = ActiveRecord::Base.connection.quote_table_name(table)
+      quoted_field = ActiveRecord::Base.connection.quote_column_name(field)
+      "#{quoted_table}.#{quoted_field}"
+      # end patch
+    else
+      "#{table}.#{field}"
+    end
+  end
+
+  def self.alias_table_field(table, field, quoted = false)
+    if table.blank? || field.to_s.include?('.')
+      if quoted
+        quote(field)
+      else
+        field.to_s
+      end
+    elsif quoted
+      # https://github.com/cerebris/jsonapi-resources/issues/1369
+      # original: quote("#{table}_#{field}")
+      # start patch
+      quote("#{table.tr('.', '_')}_#{field}")
+      # end patch
+    else
+      # original: "#{table}_#{field}"
+      # start patch
+      "#{table.tr('.', '_')}_#{field}"
+      # end patch
+    end
+  end
+
+  def self.apply_filter(records, filter, value, options = {})
+    strategy = _allowed_filters.fetch(filter.to_sym, {})[:apply]
+
+    if strategy
+      records = call_method_or_proc(strategy, records, value, options)
+    else
+      join_manager = options.dig(:_relation_helper_options, :join_manager)
+      field = join_manager ? get_aliased_field(filter, join_manager) : filter
+      # https://github.com/cerebris/jsonapi-resources/issues/1369
+      # original: records = records.where(Arel.sql(field) => value)
+      # start patch
+      if field.include?('.')
+        parts = field.split('.')
+        table = parts[0..-2].join('.')
+        field = parts[-1]
+        # {"class4.destinations.id" => 123 } -> { "class4_destinations" => { "id" => 123 } }
+        # because records.where("class4.destinations.id" => 123) will produce SQL like "WHERE class4.destinations = 123"
+        records = records.where(Arel.sql(table) => { Arel.sql(field) => value })
+      else
+        records = records.where(Arel.sql(field) => value)
+      end
+      # end patch
+    end
+
+    records
+  end
 end

@@ -2,7 +2,6 @@
 
 require 'jsonapi/exceptions/authorization_failed'
 require 'jsonapi/exceptions/authentication_failed'
-require 'jsonapi/operation_dispatcher_patch'
 require 'jsonapi/relationship_patch'
 require 'jsonapi/request_parser_patch'
 

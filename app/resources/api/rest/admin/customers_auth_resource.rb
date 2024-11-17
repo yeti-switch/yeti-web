@@ -13,7 +13,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
 
   paginator :paged
 
-  has_one :customer, always_include_linkage_data: true
+  has_one :customer, class_name: 'Contractor', always_include_linkage_data: true
   has_one :rateplan, class_name: 'Rateplan', always_include_linkage_data: true
   has_one :routing_plan, class_name: 'RoutingPlan', always_include_linkage_data: true
   has_one :gateway, always_include_linkage_data: true

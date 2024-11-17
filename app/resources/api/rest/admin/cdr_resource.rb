@@ -126,7 +126,7 @@ class Api::Rest::Admin::CdrResource < BaseResource
   has_one :routing_group, class_name: 'RoutingGroup', always_include_linkage_data: true
   has_one :routing_plan, class_name: 'RoutingPlan', always_include_linkage_data: true
   has_one :destination, class_name: 'Destination', always_include_linkage_data: true
-  has_one :customer_auth, always_include_linkage_data: true
+  has_one :customer_auth, class_name: 'CustomersAuth', always_include_linkage_data: true
   has_one :vendor, class_name: 'Contractor', always_include_linkage_data: true
   has_one :customer, class_name: 'Contractor', always_include_linkage_data: true
   has_one :customer_acc, class_name: 'Account', always_include_linkage_data: true

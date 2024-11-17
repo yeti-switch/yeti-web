@@ -135,12 +135,10 @@ RSpec.describe Api::Rest::Admin::AuthLogsController, type: :controller do
     end
 
     subject do
-      get :show, params: {
-        id: auth_log.id, include: includes.join(',')
-      }
+      get :show, params: show_params
     end
-    let(:includes) do
-      %w[pop gateway node origination-protocol transport-protocol]
+    let(:show_params) do
+      { id: auth_log.id }
     end
 
     it 'http status should eq 200' do
@@ -151,76 +149,130 @@ RSpec.describe Api::Rest::Admin::AuthLogsController, type: :controller do
     it 'response body should be valid' do
       subject
       expect(response_data).to match(
-        hash_including(
-          'id' => auth_log.id.to_s,
-          'type' => 'auth-logs',
-          'attributes' => {
-            'request-time' => auth_log.request_time.iso8601(3),
-            'success' => auth_log.success,
-            'code' => auth_log.code,
-            'reason' => auth_log.reason,
-            'internal-reason' => auth_log.internal_reason,
-            'origination-ip' => auth_log.origination_ip,
-            'origination-port' => auth_log.origination_port,
-            'origination-proto-id' => auth_log.origination_proto_id,
+                                 hash_including(
+                                   'id' => auth_log.id.to_s,
+                                   'type' => 'auth-logs',
+                                   'attributes' => {
+                                     'request-time' => auth_log.request_time.iso8601(3),
+                                     'success' => auth_log.success,
+                                     'code' => auth_log.code,
+                                     'reason' => auth_log.reason,
+                                     'internal-reason' => auth_log.internal_reason,
+                                     'origination-ip' => auth_log.origination_ip,
+                                     'origination-port' => auth_log.origination_port,
+                                     'origination-proto-id' => auth_log.origination_proto_id,
 
-            'transport-proto-id' => auth_log.transport_proto_id,
-            'transport-remote-ip' => auth_log.transport_remote_ip,
-            'transport-remote-port' => auth_log.transport_remote_port,
-            'transport-local-ip' => auth_log.transport_local_ip,
-            'transport-local-port' => auth_log.transport_local_port,
+                                     'transport-proto-id' => auth_log.transport_proto_id,
+                                     'transport-remote-ip' => auth_log.transport_remote_ip,
+                                     'transport-remote-port' => auth_log.transport_remote_port,
+                                     'transport-local-ip' => auth_log.transport_local_ip,
+                                     'transport-local-port' => auth_log.transport_local_port,
 
-            'username' => auth_log.username,
-            'realm' => auth_log.realm,
-            'request-method' => auth_log.request_method,
-            'ruri' => auth_log.ruri,
-            'from-uri' => auth_log.from_uri,
-            'to-uri' => auth_log.to_uri,
-            'call-id' => auth_log.call_id,
-            'nonce' => auth_log.nonce,
-            'response' => auth_log.response,
-            'x-yeti-auth' => auth_log.x_yeti_auth,
-            'diversion' => auth_log.diversion,
-            'pai' => auth_log.pai,
-            'ppi' => auth_log.ppi,
-            'privacy' => auth_log.privacy,
-            'rpid' => auth_log.rpid,
-            'rpid-privacy' => auth_log.rpid_privacy
-          },
-          'relationships' => hash_including(
-            'pop' => hash_including(
-              'data' => {
-                'type' => 'pops',
-                'id' => auth_log.pop.id.to_s
-              }
-            ),
-            'gateway' => hash_including(
-              'data' => {
-                'type' => 'gateways',
-                'id' => auth_log.gateway.id.to_s
-              }
-            ),
-            'node' => hash_including(
-              'data' => {
-                'type' => 'nodes',
-                'id' => auth_log.node.id.to_s
-              }
-            ),
-            'origination-protocol' => hash_including(
-              'data' => {
-                'type' => 'transport-protocols',
-                'id' => auth_log.origination_protocol.id.to_s
-              }
-            ),
-            'transport-protocol' => hash_including(
-              'data' => {
-                'type' => 'transport-protocols',
-                'id' => auth_log.transport_protocol.id.to_s
-              }
-            )
-          )
-        )
-      )
+                                     'username' => auth_log.username,
+                                     'realm' => auth_log.realm,
+                                     'request-method' => auth_log.request_method,
+                                     'ruri' => auth_log.ruri,
+                                     'from-uri' => auth_log.from_uri,
+                                     'to-uri' => auth_log.to_uri,
+                                     'call-id' => auth_log.call_id,
+                                     'nonce' => auth_log.nonce,
+                                     'response' => auth_log.response,
+                                     'x-yeti-auth' => auth_log.x_yeti_auth,
+                                     'diversion' => auth_log.diversion,
+                                     'pai' => auth_log.pai,
+                                     'ppi' => auth_log.ppi,
+                                     'privacy' => auth_log.privacy,
+                                     'rpid' => auth_log.rpid,
+                                     'rpid-privacy' => auth_log.rpid_privacy
+                                   }
+                                 )
+                               )
+    end
+
+    context 'without includes' do
+      let(:show_params) do
+        super().merge include: %w[pop gateway node origination-protocol transport-protocol].join(',')
+      end
+
+      it 'http status should eq 200' do
+        subject
+        expect(response.status).to eq(200)
+      end
+
+      it 'response body should be valid' do
+        subject
+        expect(response_data).to match(
+                                   hash_including(
+                                     'id' => auth_log.id.to_s,
+                                     'type' => 'auth-logs',
+                                     'attributes' => {
+                                       'request-time' => auth_log.request_time.iso8601(3),
+                                       'success' => auth_log.success,
+                                       'code' => auth_log.code,
+                                       'reason' => auth_log.reason,
+                                       'internal-reason' => auth_log.internal_reason,
+                                       'origination-ip' => auth_log.origination_ip,
+                                       'origination-port' => auth_log.origination_port,
+                                       'origination-proto-id' => auth_log.origination_proto_id,
+
+                                       'transport-proto-id' => auth_log.transport_proto_id,
+                                       'transport-remote-ip' => auth_log.transport_remote_ip,
+                                       'transport-remote-port' => auth_log.transport_remote_port,
+                                       'transport-local-ip' => auth_log.transport_local_ip,
+                                       'transport-local-port' => auth_log.transport_local_port,
+
+                                       'username' => auth_log.username,
+                                       'realm' => auth_log.realm,
+                                       'request-method' => auth_log.request_method,
+                                       'ruri' => auth_log.ruri,
+                                       'from-uri' => auth_log.from_uri,
+                                       'to-uri' => auth_log.to_uri,
+                                       'call-id' => auth_log.call_id,
+                                       'nonce' => auth_log.nonce,
+                                       'response' => auth_log.response,
+                                       'x-yeti-auth' => auth_log.x_yeti_auth,
+                                       'diversion' => auth_log.diversion,
+                                       'pai' => auth_log.pai,
+                                       'ppi' => auth_log.ppi,
+                                       'privacy' => auth_log.privacy,
+                                       'rpid' => auth_log.rpid,
+                                       'rpid-privacy' => auth_log.rpid_privacy
+                                     },
+                                     'relationships' => hash_including(
+                                       'pop' => hash_including(
+                                         'data' => {
+                                           'type' => 'pops',
+                                           'id' => auth_log.pop.id.to_s
+                                         }
+                                       ),
+                                       'gateway' => hash_including(
+                                         'data' => {
+                                           'type' => 'gateways',
+                                           'id' => auth_log.gateway.id.to_s
+                                         }
+                                       ),
+                                       'node' => hash_including(
+                                         'data' => {
+                                           'type' => 'nodes',
+                                           'id' => auth_log.node.id.to_s
+                                         }
+                                       ),
+                                       'origination-protocol' => hash_including(
+                                         'data' => {
+                                           'type' => 'transport-protocols',
+                                           'id' => auth_log.origination_protocol.id.to_s
+                                         }
+                                       ),
+                                       'transport-protocol' => hash_including(
+                                         'data' => {
+                                           'type' => 'transport-protocols',
+                                           'id' => auth_log.transport_protocol.id.to_s
+                                         }
+                                       )
+                                     )
+                                   )
+                                 )
+      end
     end
   end
 
