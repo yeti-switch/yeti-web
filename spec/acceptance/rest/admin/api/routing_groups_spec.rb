@@ -1,0 +1,60 @@
+# frozen_string_literal: true
+
+require 'rspec_api_documentation/dsl'
+
+RSpec.resource 'Routing groups' do
+  include_context :acceptance_admin_user
+  let(:type) { 'routing-groups' }
+
+  get '/api/rest/admin/routing-groups' do
+    jsonapi_filters Api::Rest::Admin::RoutingGroupResource._allowed_filters
+
+    before { create_list(:routing_group, 2) }
+
+    example_request 'get listing' do
+      expect(status).to eq(200)
+    end
+  end
+
+  get '/api/rest/admin/routing-groups/:id' do
+    let(:id) { create(:routing_group).id }
+
+    example_request 'get specific entry' do
+      expect(status).to eq(200)
+    end
+  end
+
+  post '/api/rest/admin/routing-groups' do
+    parameter :type, 'Resource type (routing-groups)', scope: :data, required: true
+
+    jsonapi_attributes([:name], [])
+
+    let(:name) { 'name' }
+
+    example_request 'create new entry' do
+      expect(status).to eq(201)
+    end
+  end
+
+  put '/api/rest/admin/routing-groups/:id' do
+    parameter :type, 'Resource type (routing-groups)', scope: :data, required: true
+    parameter :id, 'Routing group ID', scope: :data, required: true
+
+    jsonapi_attributes([:name], [])
+
+    let(:id) { create(:routing_group).id }
+    let(:name) { 'name' }
+
+    example_request 'update values' do
+      expect(status).to eq(200)
+    end
+  end
+
+  delete '/api/rest/admin/routing-groups/:id' do
+    let(:id) { create(:routing_group).id }
+
+    example_request 'delete entry' do
+      expect(status).to eq(204)
+    end
+  end
+end

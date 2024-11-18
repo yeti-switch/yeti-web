@@ -22,7 +22,6 @@ gem 'net-ldap', '~> 0.16.0'
 
 # Seamless JWT authentication for Rails API
 gem 'jwt'
-gem 'knock', github: 'nsarno/knock'
 
 # ActiveAdmin
 gem 'activeadmin'

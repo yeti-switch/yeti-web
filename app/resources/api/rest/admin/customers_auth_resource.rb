@@ -14,18 +14,18 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   paginator :paged
 
   has_one :customer, always_include_linkage_data: true
-  has_one :rateplan, class_name: 'Routing::Rateplan', always_include_linkage_data: true
+  has_one :rateplan, class_name: 'Rateplan', always_include_linkage_data: true
   has_one :routing_plan, class_name: 'RoutingPlan', always_include_linkage_data: true
   has_one :gateway, always_include_linkage_data: true
   has_one :account, always_include_linkage_data: true
   has_one :diversion_policy, always_include_linkage_data: true
   has_one :pop, always_include_linkage_data: true
-  has_one :dst_numberlist, class_name: 'Routing::Numberlist', always_include_linkage_data: true
-  has_one :src_numberlist, class_name: 'Routing::Numberlist', always_include_linkage_data: true
-  has_one :tag_action, class_name: 'Routing::TagAction', always_include_linkage_data: true
-  has_one :radius_auth_profile, class_name: 'Equipment::Radius::AuthProfile', always_include_linkage_data: true
-  has_one :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', always_include_linkage_data: true
-  has_one :transport_protocol, class_name: 'Equipment::TransportProtocol', always_include_linkage_data: true
+  has_one :dst_numberlist, class_name: 'Numberlist', always_include_linkage_data: true
+  has_one :src_numberlist, class_name: 'Numberlist', always_include_linkage_data: true
+  has_one :tag_action, class_name: 'TagAction', always_include_linkage_data: true
+  has_one :radius_auth_profile, class_name: 'AuthProfile', always_include_linkage_data: true
+  has_one :radius_accounting_profile, class_name: 'AccountingProfile', always_include_linkage_data: true
+  has_one :transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
 
   filter :name
 
