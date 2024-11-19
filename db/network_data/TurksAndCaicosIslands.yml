@@ -1,22 +1,13 @@
 country_id: &tc 219
 networks:
-# Mobile Networks
-  - id: &tc_flow_mobile 13445
-    name: TC Flow Mobile
-    uuid: a0b30afd-b6b9-427e-8d2a-816341cde331
-    type_id: 3
-  - id: &tc_digicel_mobile 13447
-    name: TC Digicel Mobile
-    uuid: 4cb72a8c-6a48-49f3-951c-fd3557bad6e3
-    type_id: 3
 # Fixed Networks
-  - id: &tc_dial_up_internet_access_region 13446
-    name: TC Dial Up Internet Access Region
-    uuid: 3f182a39-d965-4e32-97f6-aba375b636f0
-    type_id: 2
   - id: &tc_fixed 13449
     name: TC Fixed
     uuid: 83d0ea74-3f05-46bd-9cc2-440f2e00ccd8
+    type_id: 2
+  - id: &tc_dial_up_internet_access_region 13446
+    name: TC Dial Up Internet Access Region
+    uuid: 3f182a39-d965-4e32-97f6-aba375b636f0
     type_id: 2
   - id: &tc_voip_region 13450
     name: TC Voip Region
@@ -66,20 +57,141 @@ networks:
     name: TC West Caicos Region
     uuid: 2f9a27e2-9938-4f07-a85b-af36ca7d44bd
     type_id: 2
+# Mobile Networks
+  - id: &tc_flow_mobile 13445
+    name: TC Flow Mobile
+    uuid: a0b30afd-b6b9-427e-8d2a-816341cde331
+    type_id: 3
+  - id: &tc_digicel_mobile 13447
+    name: TC Digicel Mobile
+    uuid: 4cb72a8c-6a48-49f3-951c-fd3557bad6e3
+    type_id: 3
 # Supplementary services Networks
   - id: &tc_audiotext 13448
     name: TC Audiotext
     uuid: f8c59b41-0920-4286-8aaf-7f5a3b20f7ea
     type_id: 13
 network_prefixes:
-# Country code Prefixes
-  - id: 135776
+# Fixed Prefixes
+  - id: 518455
     prefix: '1649'
-    number_min_length: 2
+    number_min_length: 5
     number_max_length: 100
-    uuid: dbb5ccbe-03dc-4345-b396-0a3239d1ee00
+    uuid: 5d5f88bf-b4fa-404f-948b-becc49b76c7e
     country_id: *tc
-    network_id: null
+    network_id: *tc_fixed
+  - id: 135855
+    prefix: '1649266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 672930c2-11af-4364-a923-05b103b7b130
+    country_id: *tc
+    network_id: *tc_dial_up_internet_access_region
+  - id: 135887
+    prefix: '1649710'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 32c9af17-e9c0-49d4-a4ba-8880fc1b4f39
+    country_id: *tc
+    network_id: *tc_fixed
+  - id: 135888
+    prefix: '1649711'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a2811192-0a3c-4bb3-ae1e-b892e8fa468b
+    country_id: *tc
+    network_id: *tc_voip_region
+  - id: 135889
+    prefix: '1649712'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5f8719d3-af95-438f-9c8e-92bc884858e1
+    country_id: *tc
+    network_id: *tc_voip_region
+  - id: 135890
+    prefix: '1649940'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1d515a63-9c0d-45c6-9017-2510d14dcb44
+    country_id: *tc
+    network_id: *tc_east_caicos_region
+  - id: 135891
+    prefix: '1649941'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 21249cdd-0a20-4c62-a18c-8693cc88188a
+    country_id: *tc
+    network_id: *tc_providenciales_region
+  - id: 135892
+    prefix: '1649942'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68bbeb9b-f740-438d-b453-a13b3592e6ff
+    country_id: *tc
+    network_id: *tc_ambergris_cay_region
+  - id: 135893
+    prefix: '1649943'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58f0e452-71cf-49e7-92e8-c48acaecdfce
+    country_id: *tc
+    network_id: *tc_south_caicos_region
+  - id: 135894
+    prefix: '1649944'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec5de005-af81-4e01-a05b-b868f64cdeda
+    country_id: *tc
+    network_id: *tc_middle_caicos_region
+  - id: 135895
+    prefix: '1649945'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dd4e9bf2-75d3-4ad9-8a88-f38c8442d50d
+    country_id: *tc
+    network_id: *tc_salt_cay_region
+  - id: 135896
+    prefix: '1649946'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1ee4a282-79f9-4dda-ab83-16e17b068afc
+    country_id: *tc
+    network_id: *tc_grand_turk_region
+  - id: 135897
+    prefix: '1649947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: af0ef572-f96c-4e7c-9fe4-750c3e6fa389
+    country_id: *tc
+    network_id: *tc_north_caicos_region
+  - id: 135898
+    prefix: '1649948'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8a013d35-a8f5-4e5b-8f24-5f019225ba66
+    country_id: *tc
+    network_id: *tc_pine_cay_region
+  - id: 135899
+    prefix: '1649949'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 279cb222-0da9-4641-a47b-bbcb078d44a7
+    country_id: *tc
+    network_id: *tc_parrot_cay_region
+  - id: 135900
+    prefix: '1649950'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3614c4ac-8cd3-4dd0-8095-6ec6e2a6489b
+    country_id: *tc
+    network_id: *tc_west_caicos_region
+  - id: 135901
+    prefix: '1649966'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6c2a52f-e209-4591-a8ac-af6caee0414a
+    country_id: *tc
+    network_id: *tc_voip_region
 # Mobile Prefixes
   - id: 135845
     prefix: '1649231'
@@ -277,119 +389,6 @@ network_prefixes:
     uuid: 55e1f563-5bf0-4d87-85d3-a63db494dc67
     country_id: *tc
     network_id: *tc_flow_mobile
-# Fixed Prefixes
-  - id: 135855
-    prefix: '1649266'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 672930c2-11af-4364-a923-05b103b7b130
-    country_id: *tc
-    network_id: *tc_dial_up_internet_access_region
-  - id: 135887
-    prefix: '1649710'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 32c9af17-e9c0-49d4-a4ba-8880fc1b4f39
-    country_id: *tc
-    network_id: *tc_fixed
-  - id: 135888
-    prefix: '1649711'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a2811192-0a3c-4bb3-ae1e-b892e8fa468b
-    country_id: *tc
-    network_id: *tc_voip_region
-  - id: 135889
-    prefix: '1649712'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5f8719d3-af95-438f-9c8e-92bc884858e1
-    country_id: *tc
-    network_id: *tc_voip_region
-  - id: 135890
-    prefix: '1649940'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1d515a63-9c0d-45c6-9017-2510d14dcb44
-    country_id: *tc
-    network_id: *tc_east_caicos_region
-  - id: 135891
-    prefix: '1649941'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 21249cdd-0a20-4c62-a18c-8693cc88188a
-    country_id: *tc
-    network_id: *tc_providenciales_region
-  - id: 135892
-    prefix: '1649942'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 68bbeb9b-f740-438d-b453-a13b3592e6ff
-    country_id: *tc
-    network_id: *tc_ambergris_cay_region
-  - id: 135893
-    prefix: '1649943'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 58f0e452-71cf-49e7-92e8-c48acaecdfce
-    country_id: *tc
-    network_id: *tc_south_caicos_region
-  - id: 135894
-    prefix: '1649944'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ec5de005-af81-4e01-a05b-b868f64cdeda
-    country_id: *tc
-    network_id: *tc_middle_caicos_region
-  - id: 135895
-    prefix: '1649945'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dd4e9bf2-75d3-4ad9-8a88-f38c8442d50d
-    country_id: *tc
-    network_id: *tc_salt_cay_region
-  - id: 135896
-    prefix: '1649946'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1ee4a282-79f9-4dda-ab83-16e17b068afc
-    country_id: *tc
-    network_id: *tc_grand_turk_region
-  - id: 135897
-    prefix: '1649947'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: af0ef572-f96c-4e7c-9fe4-750c3e6fa389
-    country_id: *tc
-    network_id: *tc_north_caicos_region
-  - id: 135898
-    prefix: '1649948'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8a013d35-a8f5-4e5b-8f24-5f019225ba66
-    country_id: *tc
-    network_id: *tc_pine_cay_region
-  - id: 135899
-    prefix: '1649949'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 279cb222-0da9-4641-a47b-bbcb078d44a7
-    country_id: *tc
-    network_id: *tc_parrot_cay_region
-  - id: 135900
-    prefix: '1649950'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3614c4ac-8cd3-4dd0-8095-6ec6e2a6489b
-    country_id: *tc
-    network_id: *tc_west_caicos_region
-  - id: 135901
-    prefix: '1649966'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a6c2a52f-e209-4591-a8ac-af6caee0414a
-    country_id: *tc
-    network_id: *tc_voip_region
 # Supplementary services Prefixes
   - id: 135884
     prefix: '1649444'

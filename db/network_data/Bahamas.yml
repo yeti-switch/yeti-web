@@ -1,6 +1,27 @@
 country_id: &bs 16
 networks:
+# Supplementary services Networks
+  - id: &bs_international_freephone_services 38525
+    name: BS International Freephone Services
+    uuid: 42156487-e0a3-4d7c-b1c6-e2142b709eab
+    type_id: 13
+  - id: &bs_national_freephone_services 29005
+    name: BS National Freephone Services
+    uuid: 2384e98b-cf8e-4908-bf3c-e4c607216bb4
+    type_id: 13
+  - id: &bs_information_services 29024
+    name: BS Information Services
+    uuid: f0cbd62f-bbd5-4ce4-958d-04c64beb15cd
+    type_id: 13
+  - id: &bs_special_services 29027
+    name: BS Special Services
+    uuid: 4aad2a9c-3825-49e8-9128-dce93bcd2cd0
+    type_id: 13
 # Fixed Networks
+  - id: &bs_fixed 29025
+    name: BS Fixed
+    uuid: d6605704-315e-49ee-a79a-3d9771b5fe27
+    type_id: 2
   - id: &bs_new_providence_island_did_region 29003
     name: BS New Providence Island Did Region
     uuid: b7d0100b-569f-44a0-98df-3c0376ea43bf
@@ -77,27 +98,6 @@ networks:
     name: BS Abaco Island Region
     uuid: 9ea4ff14-ac88-42f9-968c-f2fe0ba7a5d5
     type_id: 2
-  - id: &bs_fixed 29025
-    name: BS Fixed
-    uuid: d6605704-315e-49ee-a79a-3d9771b5fe27
-    type_id: 2
-# Supplementary services Networks
-  - id: &bs_national_freephone_services 29005
-    name: BS National Freephone Services
-    uuid: 2384e98b-cf8e-4908-bf3c-e4c607216bb4
-    type_id: 13
-  - id: &bs_information_services 29024
-    name: BS Information Services
-    uuid: f0cbd62f-bbd5-4ce4-958d-04c64beb15cd
-    type_id: 13
-  - id: &bs_special_services 29027
-    name: BS Special Services
-    uuid: 4aad2a9c-3825-49e8-9128-dce93bcd2cd0
-    type_id: 13
-  - id: &bs_international_freephone_services 38525
-    name: BS International Freephone Services
-    uuid: 42156487-e0a3-4d7c-b1c6-e2142b709eab
-    type_id: 13
 # Mobile Networks
   - id: &bs_cybercell_mobile 29022
     name: BS Cybercell Mobile
@@ -108,15 +108,43 @@ networks:
     uuid: 8083c3ee-4ad8-4273-a3d3-f9cbd716c64a
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 294650
-    prefix: '1242'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: a9da03a5-7b08-420a-86bb-d273ba08ca68
+# Supplementary services Prefixes
+  - id: 403504
+    prefix: '1800389'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c82328b-3a41-4fed-b4dd-82e828763619
     country_id: *bs
-    network_id: null
+    network_id: *bs_international_freephone_services
+  - id: 294659
+    prefix: '1242300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 91a8572d-84b7-4016-8e8e-465f4ec4a62c
+    country_id: *bs
+    network_id: *bs_national_freephone_services
+  - id: 294783
+    prefix: '1242555'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba77d733-0bd1-4504-8329-2eed91d8adfc
+    country_id: *bs
+    network_id: *bs_information_services
+  - id: 294837
+    prefix: '12429'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: bce4a4ce-de95-475e-9f03-5bcf9f5cba67
+    country_id: *bs
+    network_id: *bs_special_services
 # Fixed Prefixes
+  - id: 512945
+    prefix: '1242'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: 4958bc8b-b8ea-4e05-ac9b-99d97fb6a9c8
+    country_id: *bs
+    network_id: *bs_fixed
   - id: 294657
     prefix: '1242225'
     number_min_length: 11
@@ -754,35 +782,6 @@ network_prefixes:
     uuid: 3daf3b8e-45ef-4a68-968a-7a9b704b5214
     country_id: *bs
     network_id: *bs_fixed
-# Supplementary services Prefixes
-  - id: 294659
-    prefix: '1242300'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 91a8572d-84b7-4016-8e8e-465f4ec4a62c
-    country_id: *bs
-    network_id: *bs_national_freephone_services
-  - id: 294783
-    prefix: '1242555'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba77d733-0bd1-4504-8329-2eed91d8adfc
-    country_id: *bs
-    network_id: *bs_information_services
-  - id: 294837
-    prefix: '12429'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: bce4a4ce-de95-475e-9f03-5bcf9f5cba67
-    country_id: *bs
-    network_id: *bs_special_services
-  - id: 403504
-    prefix: '1800389'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1c82328b-3a41-4fed-b4dd-82e828763619
-    country_id: *bs
-    network_id: *bs_international_freephone_services
 # Mobile Prefixes
   - id: 294701
     prefix: '1242357'

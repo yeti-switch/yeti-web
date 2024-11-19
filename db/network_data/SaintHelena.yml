@@ -1,9 +1,38 @@
 country_id: &sh 179
 networks:
+# Fixed Networks
+  - id: &sh_fixed 22748
+    name: SH Fixed
+    uuid: ba25bf9e-865c-42d3-aa7d-66cad49cb24a
+    type_id: 2
+  - id: &sh_us_base_region 24042
+    name: SH Us Base Region
+    uuid: 1f1028e6-aa3c-4f72-97bf-3a2d2e2f5575
+    type_id: 2
+  - id: &sh_airhead_travellers_hill_region 23434
+    name: SH Airhead Travellers Hill Region
+    uuid: 81350275-88a0-4127-a55d-d2b13d5b52bf
+    type_id: 2
+  - id: &sh_two_boats_region 23472
+    name: SH Two Boats Region
+    uuid: 466183cc-a53e-4a8e-ac2f-53794174ccae
+    type_id: 2
+  - id: &sh_georgetown_region 24061
+    name: SH Georgetown Region
+    uuid: e0efd09e-af82-4c34-ac8b-6604a20d99af
+    type_id: 2
+  - id: &sh_tristan_da_cunha_region 23806
+    name: SH Tristan Da Cunha Region
+    uuid: 4811c191-d3d1-469a-8598-c0cacfdd3495
+    type_id: 2
 # Supplementary services Networks
   - id: &sh_special_services 21282
     name: SH Special Services
     uuid: 21284c25-131e-41e5-95e1-7bfae7aa12ee
+    type_id: 13
+  - id: &sh_emergency_services 24410
+    name: SH Emergency Services
+    uuid: daa11dfd-1159-4fee-b8d0-ae789d49dda9
     type_id: 13
   - id: &sh_information_services 23087
     name: SH Information Services
@@ -17,156 +46,12 @@ networks:
     name: SH Flexible Access Services
     uuid: bf4fe418-426f-4f28-b596-082353265f93
     type_id: 13
-  - id: &sh_emergency_services 24410
-    name: SH Emergency Services
-    uuid: daa11dfd-1159-4fee-b8d0-ae789d49dda9
-    type_id: 13
 # Mobile Networks
   - id: &sh_mobile 22146
     name: SH Mobile
     uuid: 3a0a7095-8d3e-45b6-b093-6d1710a6b27d
     type_id: 3
-# Fixed Networks
-  - id: &sh_fixed 22748
-    name: SH Fixed
-    uuid: ba25bf9e-865c-42d3-aa7d-66cad49cb24a
-    type_id: 2
-  - id: &sh_airhead_travellers_hill_region 23434
-    name: SH Airhead Travellers Hill Region
-    uuid: 81350275-88a0-4127-a55d-d2b13d5b52bf
-    type_id: 2
-  - id: &sh_two_boats_region 23472
-    name: SH Two Boats Region
-    uuid: 466183cc-a53e-4a8e-ac2f-53794174ccae
-    type_id: 2
-  - id: &sh_tristan_da_cunha_region 23806
-    name: SH Tristan Da Cunha Region
-    uuid: 4811c191-d3d1-469a-8598-c0cacfdd3495
-    type_id: 2
-  - id: &sh_us_base_region 24042
-    name: SH Us Base Region
-    uuid: 1f1028e6-aa3c-4f72-97bf-3a2d2e2f5575
-    type_id: 2
-  - id: &sh_georgetown_region 24061
-    name: SH Georgetown Region
-    uuid: e0efd09e-af82-4c34-ac8b-6604a20d99af
-    type_id: 2
 network_prefixes:
-# Country code Prefixes
-  - id: 242095
-    prefix: '247'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 51af3063-672c-41d9-9968-fa922472cc93
-    country_id: *sh
-    network_id: null
-  - id: 242096
-    prefix: '290'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: cc3e6c16-0a7b-43bb-a0fb-893c804c77e5
-    country_id: *sh
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242153
-    prefix: '2470'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 59197127-5c4d-4781-834a-e40fe32c50b6
-    country_id: *sh
-    network_id: *sh_special_services
-  - id: 242487
-    prefix: '2471'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 06f41021-9521-4cb8-8c62-f93b0d2ff7d8
-    country_id: *sh
-    network_id: *sh_special_services
-  - id: 242488
-    prefix: '2901'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 8c19dc1f-9c79-467a-b7b2-00185ad01bcf
-    country_id: *sh
-    network_id: *sh_special_services
-  - id: 248488
-    prefix: '290260'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: ba101344-3501-4077-8c3b-7d06d68632ec
-    country_id: *sh
-    network_id: *sh_information_services
-  - id: 248497
-    prefix: '290261'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: c65e4aa9-4d49-42f3-a174-3563fa1a2ad8
-    country_id: *sh
-    network_id: *sh_information_services
-  - id: 248506
-    prefix: '290262'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 9eb499fd-5108-42aa-9639-9a887b768471
-    country_id: *sh
-    network_id: *sh_voice_messaging_services
-  - id: 248521
-    prefix: '290263'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: e3a78ac6-983f-414b-8b19-774f9b3cdeea
-    country_id: *sh
-    network_id: *sh_flexible_access_services
-  - id: 249603
-    prefix: '2475'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: cf858d28-0baf-45ad-b6d7-b383cc466359
-    country_id: *sh
-    network_id: *sh_special_services
-  - id: 253106
-    prefix: '2478'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 7bcfc6a0-9c12-48b0-9978-221c2097419e
-    country_id: *sh
-    network_id: *sh_special_services
-  - id: 257136
-    prefix: '2479'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 550cc932-803a-493c-8b57-293ac6adacd0
-    country_id: *sh
-    network_id: *sh_special_services
-  - id: 257137
-    prefix: '2909'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: c6c5b4ab-efd7-45e3-8d1f-8924c468a868
-    country_id: *sh
-    network_id: *sh_emergency_services
-# Mobile Prefixes
-  - id: 243964
-    prefix: '2474'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 0babee3a-d11a-45e8-87af-a89678905d54
-    country_id: *sh
-    network_id: *sh_mobile
-  - id: 245424
-    prefix: '2906'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: d6a75b8c-a7b5-4160-95bb-cb518b9e528a
-    country_id: *sh
-    network_id: *sh_mobile
-  - id: 249604
-    prefix: '2905'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: d3ce94dc-650e-4c57-a6f5-964b00c9c287
-    country_id: *sh
-    network_id: *sh_mobile
 # Fixed Prefixes
   - id: 247460
     prefix: '29020'
@@ -182,6 +67,27 @@ network_prefixes:
     uuid: 5dff0b3a-acca-41c4-b3c6-6cfe7c3d1242
     country_id: *sh
     network_id: *sh_fixed
+  - id: 242095
+    prefix: '247'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 51af3063-672c-41d9-9968-fa922472cc93
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 242096
+    prefix: '290'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: cc3e6c16-0a7b-43bb-a0fb-893c804c77e5
+    country_id: *sh
+    network_id: *sh_fixed
+  - id: 254122
+    prefix: '24762'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 442c3cb5-7992-4d2b-ae17-1e2844b47134
+    country_id: *sh
+    network_id: *sh_us_base_region
   - id: 247733
     prefix: '29022'
     number_min_length: 8
@@ -252,20 +158,6 @@ network_prefixes:
     uuid: f2f5ca22-ad77-453c-9b38-21255d38ae71
     country_id: *sh
     network_id: *sh_two_boats_region
-  - id: 253107
-    prefix: '2908'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 570d1b57-7948-48d8-b634-bafcfeb32e29
-    country_id: *sh
-    network_id: *sh_tristan_da_cunha_region
-  - id: 254122
-    prefix: '24762'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 442c3cb5-7992-4d2b-ae17-1e2844b47134
-    country_id: *sh
-    network_id: *sh_us_base_region
   - id: 254298
     prefix: '24766'
     number_min_length: 8
@@ -280,3 +172,110 @@ network_prefixes:
     uuid: c2aafa2b-1e52-4e86-a45b-2bbcfe63c949
     country_id: *sh
     network_id: *sh_georgetown_region
+  - id: 253107
+    prefix: '2908'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 570d1b57-7948-48d8-b634-bafcfeb32e29
+    country_id: *sh
+    network_id: *sh_tristan_da_cunha_region
+# Supplementary services Prefixes
+  - id: 242153
+    prefix: '2470'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 59197127-5c4d-4781-834a-e40fe32c50b6
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 242487
+    prefix: '2471'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 06f41021-9521-4cb8-8c62-f93b0d2ff7d8
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 242488
+    prefix: '2901'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 8c19dc1f-9c79-467a-b7b2-00185ad01bcf
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 257136
+    prefix: '2479'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 550cc932-803a-493c-8b57-293ac6adacd0
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 257137
+    prefix: '2909'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: c6c5b4ab-efd7-45e3-8d1f-8924c468a868
+    country_id: *sh
+    network_id: *sh_emergency_services
+  - id: 248488
+    prefix: '290260'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ba101344-3501-4077-8c3b-7d06d68632ec
+    country_id: *sh
+    network_id: *sh_information_services
+  - id: 248497
+    prefix: '290261'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c65e4aa9-4d49-42f3-a174-3563fa1a2ad8
+    country_id: *sh
+    network_id: *sh_information_services
+  - id: 248506
+    prefix: '290262'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9eb499fd-5108-42aa-9639-9a887b768471
+    country_id: *sh
+    network_id: *sh_voice_messaging_services
+  - id: 248521
+    prefix: '290263'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e3a78ac6-983f-414b-8b19-774f9b3cdeea
+    country_id: *sh
+    network_id: *sh_flexible_access_services
+  - id: 249603
+    prefix: '2475'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: cf858d28-0baf-45ad-b6d7-b383cc466359
+    country_id: *sh
+    network_id: *sh_special_services
+  - id: 253106
+    prefix: '2478'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 7bcfc6a0-9c12-48b0-9978-221c2097419e
+    country_id: *sh
+    network_id: *sh_special_services
+# Mobile Prefixes
+  - id: 243964
+    prefix: '2474'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 0babee3a-d11a-45e8-87af-a89678905d54
+    country_id: *sh
+    network_id: *sh_mobile
+  - id: 245424
+    prefix: '2906'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: d6a75b8c-a7b5-4160-95bb-cb518b9e528a
+    country_id: *sh
+    network_id: *sh_mobile
+  - id: 249604
+    prefix: '2905'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: d3ce94dc-650e-4c57-a6f5-964b00c9c287
+    country_id: *sh
+    network_id: *sh_mobile

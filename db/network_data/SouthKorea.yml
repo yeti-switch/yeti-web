@@ -1,82 +1,13 @@
 country_id: &kr 260
 networks:
-# Supplementary services Networks
-  - id: &kr_personal_number_services 4671
-    name: KR Personal Number Services
-    uuid: 033588f7-11fa-4185-b6ac-7c8a8e304a76
-    type_id: 13
-  - id: &kr_audiotext 10531
-    name: KR Audiotext
-    uuid: 63156805-8b74-44d8-9625-7e78140942c9
-    type_id: 13
-  - id: &kr_freephone_services 19838
-    name: KR Freephone Services
-    uuid: c4570b56-ae0c-443b-bf51-f8722af16097
-    type_id: 13
-  - id: &kr_value_added_services 20273
-    name: KR Value Added Services
-    uuid: 297fe10a-0a39-4394-8cfb-5ecaa7f6bc99
-    type_id: 13
-  - id: &kr_national_carrier_selection_code 21344
-    name: KR National Carrier Selection Code
-    uuid: 01493e92-5e9d-4cdd-a555-9bd37b2a0f43
-    type_id: 13
-  - id: &kr_special_services 21431
-    name: KR Special Services
-    uuid: 99436676-a38b-4a0f-9796-a3174f6cae36
-    type_id: 13
-  - id: &kr_single_number_services 21792
-    name: KR Single Number Services
-    uuid: 8908dd35-7a8f-4e63-a118-c1aa157963d0
-    type_id: 13
-  - id: &kr_machine_to_machine_m2m_services 24865
-    name: KR Machine To Machine M2M Services
-    uuid: 45d391e4-0ebc-4258-9eac-616e2b9cf285
-    type_id: 13
-  - id: &kr_unified_message_service_ums 30867
-    name: KR Unified Message Service Ums
-    uuid: 605953d1-7f0c-43ae-8e1c-768f53238451
-    type_id: 13
 # Fixed Networks
-  - id: &kr_busan_region 5639
-    name: KR Busan Region
-    uuid: 99a7cf71-3e01-4809-8fc1-8fb64c119d7b
-    type_id: 2
-  - id: &kr_ulsan_region 6640
-    name: KR Ulsan Region
-    uuid: 24164c27-9170-40df-b399-10d58798a8f0
-    type_id: 2
-  - id: &kr_gyeongsangbuk_do_region 7182
-    name: KR Gyeongsangbuk Do Region
-    uuid: 5b28f69d-1cbe-40d4-b4be-dc67f15cc1de
-    type_id: 2
-  - id: &kr_daegu_region 7572
-    name: KR Daegu Region
-    uuid: c7f52d20-5745-42c8-a09c-1bdc9269b01e
-    type_id: 2
-  - id: &kr_gyeongsangnam_do_region 7952
-    name: KR Gyeongsangnam Do Region
-    uuid: d5256dcb-676e-4b60-a70f-7ee8439ff129
-    type_id: 2
-  - id: &kr_jeollanam_do_region 11789
-    name: KR Jeollanam Do Region
-    uuid: 3d97d1f5-6b34-46c9-bb2a-9b2f87802135
-    type_id: 2
-  - id: &kr_gwangju_region 11980
-    name: KR Gwangju Region
-    uuid: b0dcffb8-ba3c-4c8b-89eb-90feda9ff4db
-    type_id: 2
-  - id: &kr_jeollabuk_do_region 12458
-    name: KR Jeollabuk Do Region
-    uuid: f2d8bbad-81c8-4bb0-8a68-e72b78d8b84d
-    type_id: 2
-  - id: &kr_jeju_do_region 12721
-    name: KR Jeju Do Region
-    uuid: fb6b0a95-2f24-4660-87d7-5954ade1350a
-    type_id: 2
   - id: &kr_voip_region 14443
     name: KR Voip Region
     uuid: e77825f9-6e2a-4274-a513-4246a1252cd4
+    type_id: 2
+  - id: &kr_fixed 43426
+    name: KR Fixed
+    uuid: ee595b14-3d40-4f92-a06f-ec1dc356bd41
     type_id: 2
   - id: &kr_seoul_region 25853
     name: KR Seoul Region
@@ -98,6 +29,10 @@ networks:
     name: KR Chungcheongnam Do  Region
     uuid: 8862a4eb-d4eb-4182-a053-8e81e06e06a3
     type_id: 2
+  - id: &kr_daejeon_region 37233
+    name: KR Daejeon Region
+    uuid: d0fe5bb3-6177-401e-8d21-e7fb4ae6bbc5
+    type_id: 2
   - id: &kr_chungcheongbuk_do_region 36587
     name: KR Chungcheongbuk Do Region
     uuid: 49c65c7e-1885-4c1e-8d77-037f8ad3b139
@@ -106,10 +41,79 @@ networks:
     name: KR Sejong City Region
     uuid: d35b8f37-4d71-42df-a235-e1e98e8f29d3
     type_id: 2
-  - id: &kr_daejeon_region 37233
-    name: KR Daejeon Region
-    uuid: d0fe5bb3-6177-401e-8d21-e7fb4ae6bbc5
+  - id: &kr_busan_region 5639
+    name: KR Busan Region
+    uuid: 99a7cf71-3e01-4809-8fc1-8fb64c119d7b
     type_id: 2
+  - id: &kr_ulsan_region 6640
+    name: KR Ulsan Region
+    uuid: 24164c27-9170-40df-b399-10d58798a8f0
+    type_id: 2
+  - id: &kr_daegu_region 7572
+    name: KR Daegu Region
+    uuid: c7f52d20-5745-42c8-a09c-1bdc9269b01e
+    type_id: 2
+  - id: &kr_gyeongsangbuk_do_region 7182
+    name: KR Gyeongsangbuk Do Region
+    uuid: 5b28f69d-1cbe-40d4-b4be-dc67f15cc1de
+    type_id: 2
+  - id: &kr_gyeongsangnam_do_region 7952
+    name: KR Gyeongsangnam Do Region
+    uuid: d5256dcb-676e-4b60-a70f-7ee8439ff129
+    type_id: 2
+  - id: &kr_jeollanam_do_region 11789
+    name: KR Jeollanam Do Region
+    uuid: 3d97d1f5-6b34-46c9-bb2a-9b2f87802135
+    type_id: 2
+  - id: &kr_gwangju_region 11980
+    name: KR Gwangju Region
+    uuid: b0dcffb8-ba3c-4c8b-89eb-90feda9ff4db
+    type_id: 2
+  - id: &kr_jeollabuk_do_region 12458
+    name: KR Jeollabuk Do Region
+    uuid: f2d8bbad-81c8-4bb0-8a68-e72b78d8b84d
+    type_id: 2
+  - id: &kr_jeju_do_region 12721
+    name: KR Jeju Do Region
+    uuid: fb6b0a95-2f24-4660-87d7-5954ade1350a
+    type_id: 2
+# Supplementary services Networks
+  - id: &kr_freephone_services 19838
+    name: KR Freephone Services
+    uuid: c4570b56-ae0c-443b-bf51-f8722af16097
+    type_id: 13
+  - id: &kr_national_carrier_selection_code 21344
+    name: KR National Carrier Selection Code
+    uuid: 01493e92-5e9d-4cdd-a555-9bd37b2a0f43
+    type_id: 13
+  - id: &kr_special_services 21431
+    name: KR Special Services
+    uuid: 99436676-a38b-4a0f-9796-a3174f6cae36
+    type_id: 13
+  - id: &kr_single_number_services 21792
+    name: KR Single Number Services
+    uuid: 8908dd35-7a8f-4e63-a118-c1aa157963d0
+    type_id: 13
+  - id: &kr_machine_to_machine_m2m_services 24865
+    name: KR Machine To Machine M2M Services
+    uuid: 45d391e4-0ebc-4258-9eac-616e2b9cf285
+    type_id: 13
+  - id: &kr_unified_message_service_ums 30867
+    name: KR Unified Message Service Ums
+    uuid: 605953d1-7f0c-43ae-8e1c-768f53238451
+    type_id: 13
+  - id: &kr_personal_number_services 4671
+    name: KR Personal Number Services
+    uuid: 033588f7-11fa-4185-b6ac-7c8a8e304a76
+    type_id: 13
+  - id: &kr_audiotext 10531
+    name: KR Audiotext
+    uuid: 63156805-8b74-44d8-9625-7e78140942c9
+    type_id: 13
+  - id: &kr_value_added_services 20273
+    name: KR Value Added Services
+    uuid: 297fe10a-0a39-4394-8cfb-5ecaa7f6bc99
+    type_id: 13
 # Satellite Networks
   - id: &kr_u_satellite 24813
     name: KR U Satellite
@@ -146,21 +150,197 @@ networks:
     uuid: 8255bddb-5095-4988-9c30-19036c41aff1
     type_id: 12
 network_prefixes:
-# Supplementary services Prefixes
-  - id: 54925
-    prefix: '8250'
+# Fixed Prefixes
+  - id: 150234
+    prefix: '8270'
     number_min_length: 12
     number_max_length: 12
-    uuid: 26d33e57-1d3b-4838-ac54-76dc15fbdc04
+    uuid: 5d7de551-6306-4f00-a487-e33d69154372
     country_id: *kr
-    network_id: *kr_personal_number_services
-  - id: 95213
-    prefix: '8260'
-    number_min_length: 11
+    network_id: *kr_voip_region
+  - id: 242032
+    prefix: '82'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 48443ecf-a2bd-437e-a962-c30d32a0b152
+    country_id: *kr
+    network_id: *kr_fixed
+  - id: 261482
+    prefix: '8227'
+    number_min_length: 10
     number_max_length: 11
-    uuid: 0ebd7c03-836d-43d4-ba1d-686e61b2d958
+    uuid: d4a65c51-2900-40d9-b10b-065cb354b86c
     country_id: *kr
-    network_id: *kr_audiotext
+    network_id: *kr_seoul_region
+  - id: 267057
+    prefix: '8228'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0e89f534-05f3-4af8-ac90-35e62a213a8a
+    country_id: *kr
+    network_id: *kr_seoul_region
+  - id: 267119
+    prefix: '8229'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20b53d37-93f6-42c8-ae2f-9c6a979ae0b5
+    country_id: *kr
+    network_id: *kr_seoul_region
+  - id: 261202
+    prefix: '8221'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 6b363694-94e3-4e38-bef7-55be4faf8b40
+    country_id: *kr
+    network_id: *kr_seoul_region
+  - id: 261211
+    prefix: '8222'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4c265ae4-c235-4995-84c1-5fadd19b5e6a
+    country_id: *kr
+    network_id: *kr_seoul_region
+  - id: 261262
+    prefix: '8223'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 163c4c20-0f67-4fd5-9ec7-95d95fe17eb7
+    country_id: *kr
+    network_id: *kr_seoul_region
+  - id: 261299
+    prefix: '8224'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44042c2b-2845-4aae-9d67-f075d9278590
+    country_id: *kr
+    network_id: *kr_seoul_region
+  - id: 261351
+    prefix: '8225'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 85744047-7c01-4d20-9b02-03e0416b15b4
+    country_id: *kr
+    network_id: *kr_seoul_region
+  - id: 261392
+    prefix: '8226'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 269610cb-b20f-45d3-8c50-2aa41548e88d
+    country_id: *kr
+    network_id: *kr_seoul_region
+  - id: 321170
+    prefix: '8231'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: d6669be8-cd37-4dee-bd24-318aae3e92c5
+    country_id: *kr
+    network_id: *kr_gyeonggi_do_region
+  - id: 327277
+    prefix: '8232'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 3d3caff9-d2b3-4856-956e-e5926bf20abb
+    country_id: *kr
+    network_id: *kr_incheon_region
+  - id: 337282
+    prefix: '8233'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 6cd8d34a-a7a8-46c7-bf78-1f3e04fc1ec3
+    country_id: *kr
+    network_id: *kr_gangwon_do_region
+  - id: 362525
+    prefix: '8241'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 4bf78c72-8fde-4e99-ae91-338c4fb25a10
+    country_id: *kr
+    network_id: *kr_chungcheongnam_do__region
+  - id: 377180
+    prefix: '8242'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 7c7225aa-00f6-4049-a390-8abb41d54054
+    country_id: *kr
+    network_id: *kr_daejeon_region
+  - id: 367940
+    prefix: '8243'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 448552d7-7bde-4c79-8cdd-15713542dfba
+    country_id: *kr
+    network_id: *kr_chungcheongbuk_do_region
+  - id: 370191
+    prefix: '8244'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: a569ddbe-6b28-4347-9088-e3b4279c86c5
+    country_id: *kr
+    network_id: *kr_sejong_city_region
+  - id: 62606
+    prefix: '8251'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 11ba93f0-6266-41e7-8fb1-40599c3062f4
+    country_id: *kr
+    network_id: *kr_busan_region
+  - id: 71658
+    prefix: '8252'
+    number_min_length: 8
+    number_max_length: 12
+    uuid: a7689936-19fd-4b85-88cf-e5954d31c317
+    country_id: *kr
+    network_id: *kr_ulsan_region
+  - id: 76547
+    prefix: '8253'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 25ff25b1-6956-488e-8e7a-c4b426a58109
+    country_id: *kr
+    network_id: *kr_daegu_region
+  - id: 73201
+    prefix: '8254'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 32c50f5b-5fad-4f0a-8e8b-ab27292dd476
+    country_id: *kr
+    network_id: *kr_gyeongsangbuk_do_region
+  - id: 78123
+    prefix: '8255'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: b0466446-0127-46c7-89f4-3360be67ed4e
+    country_id: *kr
+    network_id: *kr_gyeongsangnam_do_region
+  - id: 108584
+    prefix: '8261'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: c068a2d6-f350-4c64-9181-e1db213c6f86
+    country_id: *kr
+    network_id: *kr_jeollanam_do_region
+  - id: 111467
+    prefix: '8262'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: 57e77291-c8a2-4c5c-acfa-ad33ce296392
+    country_id: *kr
+    network_id: *kr_gwangju_region
+  - id: 117829
+    prefix: '8263'
+    number_min_length: 8
+    number_max_length: 12
+    uuid: c7523e31-c3ce-46da-9dc5-7a6951192415
+    country_id: *kr
+    network_id: *kr_jeollabuk_do_region
+  - id: 122435
+    prefix: '8264'
+    number_min_length: 8
+    number_max_length: 11
+    uuid: b644bb21-93ff-43fc-8d3d-8c6af3c40b15
+    country_id: *kr
+    network_id: *kr_jeju_do_region
+# Supplementary services Prefixes
   - id: 207787
     prefix: '8280'
     number_min_length: 12
@@ -168,13 +348,6 @@ network_prefixes:
     uuid: 77778f96-3885-45f4-aded-3eaf2b444891
     country_id: *kr
     network_id: *kr_freephone_services
-  - id: 215148
-    prefix: '8295'
-    number_min_length: 8
-    number_max_length: 15
-    uuid: f59f7999-82cf-4edd-8ed6-12274f8e3b80
-    country_id: *kr
-    network_id: *kr_value_added_services
   - id: 242325
     prefix: '82081'
     number_min_length: 5
@@ -280,197 +453,27 @@ network_prefixes:
     uuid: 7cde00d2-d8f5-452a-a356-65ae8dc7ff43
     country_id: *kr
     network_id: *kr_unified_message_service_ums
-# Fixed Prefixes
-  - id: 62606
-    prefix: '8251'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 11ba93f0-6266-41e7-8fb1-40599c3062f4
-    country_id: *kr
-    network_id: *kr_busan_region
-  - id: 71658
-    prefix: '8252'
-    number_min_length: 8
-    number_max_length: 12
-    uuid: a7689936-19fd-4b85-88cf-e5954d31c317
-    country_id: *kr
-    network_id: *kr_ulsan_region
-  - id: 73201
-    prefix: '8254'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 32c50f5b-5fad-4f0a-8e8b-ab27292dd476
-    country_id: *kr
-    network_id: *kr_gyeongsangbuk_do_region
-  - id: 76547
-    prefix: '8253'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 25ff25b1-6956-488e-8e7a-c4b426a58109
-    country_id: *kr
-    network_id: *kr_daegu_region
-  - id: 78123
-    prefix: '8255'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: b0466446-0127-46c7-89f4-3360be67ed4e
-    country_id: *kr
-    network_id: *kr_gyeongsangnam_do_region
-  - id: 108584
-    prefix: '8261'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: c068a2d6-f350-4c64-9181-e1db213c6f86
-    country_id: *kr
-    network_id: *kr_jeollanam_do_region
-  - id: 111467
-    prefix: '8262'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 57e77291-c8a2-4c5c-acfa-ad33ce296392
-    country_id: *kr
-    network_id: *kr_gwangju_region
-  - id: 117829
-    prefix: '8263'
-    number_min_length: 8
-    number_max_length: 12
-    uuid: c7523e31-c3ce-46da-9dc5-7a6951192415
-    country_id: *kr
-    network_id: *kr_jeollabuk_do_region
-  - id: 122435
-    prefix: '8264'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: b644bb21-93ff-43fc-8d3d-8c6af3c40b15
-    country_id: *kr
-    network_id: *kr_jeju_do_region
-  - id: 150234
-    prefix: '8270'
+  - id: 54925
+    prefix: '8250'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5d7de551-6306-4f00-a487-e33d69154372
+    uuid: 26d33e57-1d3b-4838-ac54-76dc15fbdc04
     country_id: *kr
-    network_id: *kr_voip_region
-  - id: 261202
-    prefix: '8221'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 6b363694-94e3-4e38-bef7-55be4faf8b40
-    country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 261211
-    prefix: '8222'
-    number_min_length: 10
+    network_id: *kr_personal_number_services
+  - id: 95213
+    prefix: '8260'
+    number_min_length: 11
     number_max_length: 11
-    uuid: 4c265ae4-c235-4995-84c1-5fadd19b5e6a
+    uuid: 0ebd7c03-836d-43d4-ba1d-686e61b2d958
     country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 261262
-    prefix: '8223'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 163c4c20-0f67-4fd5-9ec7-95d95fe17eb7
-    country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 261299
-    prefix: '8224'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 44042c2b-2845-4aae-9d67-f075d9278590
-    country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 261351
-    prefix: '8225'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 85744047-7c01-4d20-9b02-03e0416b15b4
-    country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 261392
-    prefix: '8226'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 269610cb-b20f-45d3-8c50-2aa41548e88d
-    country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 261482
-    prefix: '8227'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d4a65c51-2900-40d9-b10b-065cb354b86c
-    country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 267057
-    prefix: '8228'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0e89f534-05f3-4af8-ac90-35e62a213a8a
-    country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 267119
-    prefix: '8229'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 20b53d37-93f6-42c8-ae2f-9c6a979ae0b5
-    country_id: *kr
-    network_id: *kr_seoul_region
-  - id: 321170
-    prefix: '8231'
+    network_id: *kr_audiotext
+  - id: 215148
+    prefix: '8295'
     number_min_length: 8
-    number_max_length: 11
-    uuid: d6669be8-cd37-4dee-bd24-318aae3e92c5
+    number_max_length: 15
+    uuid: f59f7999-82cf-4edd-8ed6-12274f8e3b80
     country_id: *kr
-    network_id: *kr_gyeonggi_do_region
-  - id: 327277
-    prefix: '8232'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 3d3caff9-d2b3-4856-956e-e5926bf20abb
-    country_id: *kr
-    network_id: *kr_incheon_region
-  - id: 337282
-    prefix: '8233'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 6cd8d34a-a7a8-46c7-bf78-1f3e04fc1ec3
-    country_id: *kr
-    network_id: *kr_gangwon_do_region
-  - id: 362525
-    prefix: '8241'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 4bf78c72-8fde-4e99-ae91-338c4fb25a10
-    country_id: *kr
-    network_id: *kr_chungcheongnam_do__region
-  - id: 367940
-    prefix: '8243'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 448552d7-7bde-4c79-8cdd-15713542dfba
-    country_id: *kr
-    network_id: *kr_chungcheongbuk_do_region
-  - id: 370191
-    prefix: '8244'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: a569ddbe-6b28-4347-9088-e3b4279c86c5
-    country_id: *kr
-    network_id: *kr_sejong_city_region
-  - id: 377180
-    prefix: '8242'
-    number_min_length: 8
-    number_max_length: 11
-    uuid: 7c7225aa-00f6-4049-a390-8abb41d54054
-    country_id: *kr
-    network_id: *kr_daejeon_region
-# Country code Prefixes
-  - id: 242032
-    prefix: '82'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 48443ecf-a2bd-437e-a962-c30d32a0b152
-    country_id: *kr
-    network_id: null
+    network_id: *kr_value_added_services
 # Satellite Prefixes
   - id: 258630
     prefix: '82100'
@@ -1222,6 +1225,20 @@ network_prefixes:
     uuid: 2548f2af-bd0a-465f-be40-7b7699b3592a
     country_id: *kr
     network_id: *kr_mobile
+  - id: 266556
+    prefix: '8216'
+    number_min_length: 8
+    number_max_length: 12
+    uuid: 8eb9e0ff-436f-4f6e-94e5-8f83fbc5a88e
+    country_id: *kr
+    network_id: *kr_kt_mobile
+  - id: 266948
+    prefix: '8217'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 447871a4-d6f4-43af-8b10-935e5643b15d
+    country_id: *kr
+    network_id: *kr_sk_telecom_mobile
   - id: 260506
     prefix: '8218'
     number_min_length: 11
@@ -1243,20 +1260,6 @@ network_prefixes:
     uuid: 8772a169-8ac5-4451-b030-9f8421fd280e
     country_id: *kr
     network_id: *kr_u_mobile
-  - id: 266556
-    prefix: '8216'
-    number_min_length: 8
-    number_max_length: 12
-    uuid: 8eb9e0ff-436f-4f6e-94e5-8f83fbc5a88e
-    country_id: *kr
-    network_id: *kr_kt_mobile
-  - id: 266948
-    prefix: '8217'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 447871a4-d6f4-43af-8b10-935e5643b15d
-    country_id: *kr
-    network_id: *kr_sk_telecom_mobile
 # Paging Prefixes
   - id: 266077
     prefix: '82151'

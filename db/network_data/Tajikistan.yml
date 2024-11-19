@@ -1,9 +1,26 @@
 country_id: &tj 208
 networks:
+# Mobile Networks
+  - id: &tj_megafon_mobile 42057
+    name: TJ Megafon Mobile
+    uuid: 4f4244ea-19dd-4a1f-9dc9-bd19eca6bd5a
+    type_id: 3
+  - id: &tj_beeline_mobile 42432
+    name: TJ Beeline Mobile
+    uuid: 577a0aea-137b-44e3-ae5f-c1de39f56eb3
+    type_id: 3
+  - id: &tj_babilon_mobile_mobile 20792
+    name: TJ Babilon Mobile Mobile
+    uuid: b1940009-cf04-44bb-b372-a212ad5357cd
+    type_id: 3
+  - id: &tj_tcell_mobile 42792
+    name: TJ Tcell Mobile
+    uuid: f34428d6-4467-4c67-b1c6-3e0a55599852
+    type_id: 3
 # Fixed Networks
-  - id: &tj_local_fixed_communication_services_region 4218
-    name: TJ Local Fixed Communication Services Region
-    uuid: b5782c33-eb3f-4f23-9f93-6590cc34473a
+  - id: &tj_fixed 43470
+    name: TJ Fixed
+    uuid: 4f4606e5-e53e-4ee7-a016-846c3a827c47
     type_id: 2
   - id: &tj_dushanbe_operator_service_region 22100
     name: TJ Dushanbe Operator Service Region
@@ -12,38 +29,6 @@ networks:
   - id: &tj_yavan_region 31840
     name: TJ Yavan Region
     uuid: 55f19207-4af6-4af5-9b6b-d1f533799f3e
-    type_id: 2
-  - id: &tj_shaartuz_region 32062
-    name: TJ Shaartuz Region
-    uuid: c65dcf52-c3dd-4cad-b373-c235d024df6a
-    type_id: 2
-  - id: &tj_khuroson_region 32065
-    name: TJ Khuroson Region
-    uuid: 457a8ebd-1395-4c84-980f-b728a715378b
-    type_id: 2
-  - id: &tj_abdurakhmana_jami_region 32067
-    name: TJ Abdurakhmana Jami Region
-    uuid: 9828684b-a0dd-43a0-bf2b-21ad3021193e
-    type_id: 2
-  - id: &tj_bokhtar_region 32069
-    name: TJ Bokhtar Region
-    uuid: d86a529e-c022-493b-ba95-fc5f91c5fbd2
-    type_id: 2
-  - id: &tj_vakhsh_region 32070
-    name: TJ Vakhsh Region
-    uuid: ddbeca1d-4e57-4ff5-8661-d5a903f0b8ce
-    type_id: 2
-  - id: &tj_kolkhozabad_region 32071
-    name: TJ Kolkhozabad Region
-    uuid: c996a6d3-de17-4c17-a3c4-05d0f97f545c
-    type_id: 2
-  - id: &tj_djilikul_region 32072
-    name: TJ Djilikul Region
-    uuid: 1ff9d82b-a906-40d6-8e7c-c7f0aa0a5e08
-    type_id: 2
-  - id: &tj_kumsangir_region 32073
-    name: TJ Kumsangir Region
-    uuid: 38fa9a0e-4076-4af9-87ef-4ddd6adbf731
     type_id: 2
   - id: &tj_tursunzade_region 32196
     name: TJ Tursunzade Region
@@ -101,9 +86,37 @@ networks:
     name: TJ Tavildara Region
     uuid: 502153d6-1dbc-43fa-8ed1-83f960676211
     type_id: 2
-  - id: &tj_kurgan_tube_region 32414
-    name: TJ Kurgan Tube Region
-    uuid: 90a0eab5-9959-4d41-9419-e46edc56a8e8
+  - id: &tj_shaartuz_region 32062
+    name: TJ Shaartuz Region
+    uuid: c65dcf52-c3dd-4cad-b373-c235d024df6a
+    type_id: 2
+  - id: &tj_khuroson_region 32065
+    name: TJ Khuroson Region
+    uuid: 457a8ebd-1395-4c84-980f-b728a715378b
+    type_id: 2
+  - id: &tj_abdurakhmana_jami_region 32067
+    name: TJ Abdurakhmana Jami Region
+    uuid: 9828684b-a0dd-43a0-bf2b-21ad3021193e
+    type_id: 2
+  - id: &tj_bokhtar_region 32069
+    name: TJ Bokhtar Region
+    uuid: d86a529e-c022-493b-ba95-fc5f91c5fbd2
+    type_id: 2
+  - id: &tj_vakhsh_region 32070
+    name: TJ Vakhsh Region
+    uuid: ddbeca1d-4e57-4ff5-8661-d5a903f0b8ce
+    type_id: 2
+  - id: &tj_kolkhozabad_region 32071
+    name: TJ Kolkhozabad Region
+    uuid: c996a6d3-de17-4c17-a3c4-05d0f97f545c
+    type_id: 2
+  - id: &tj_djilikul_region 32072
+    name: TJ Djilikul Region
+    uuid: 1ff9d82b-a906-40d6-8e7c-c7f0aa0a5e08
+    type_id: 2
+  - id: &tj_kumsangir_region 32073
+    name: TJ Kumsangir Region
+    uuid: 38fa9a0e-4076-4af9-87ef-4ddd6adbf731
     type_id: 2
   - id: &tj_sarband_region 32486
     name: TJ Sarband Region
@@ -116,6 +129,10 @@ networks:
   - id: &tj_panj_region 32490
     name: TJ Panj Region
     uuid: 71593fea-761f-40bc-a0a1-66818b47edf4
+    type_id: 2
+  - id: &tj_kurgan_tube_region 32414
+    name: TJ Kurgan Tube Region
+    uuid: 90a0eab5-9959-4d41-9419-e46edc56a8e8
     type_id: 2
   - id: &tj_vose_region 32574
     name: TJ Vose Region
@@ -209,6 +226,10 @@ networks:
     name: TJ Kanibadam Region
     uuid: 41613d62-876c-4556-b423-3b76583f56da
     type_id: 2
+  - id: &tj_khorog_region 34731
+    name: TJ Khorog Region
+    uuid: 9d62d975-7a28-474c-ba02-f58b4ef5dad2
+    type_id: 2
   - id: &tj_vanj_region 33479
     name: TJ Vanj Region
     uuid: 62c05a1b-59e5-4f2c-b233-c167273c2178
@@ -241,45 +262,71 @@ networks:
     name: TJ Ayni Region
     uuid: c344b38d-053d-4494-803e-8a23268c87e9
     type_id: 2
-  - id: &tj_khorog_region 34731
-    name: TJ Khorog Region
-    uuid: 9d62d975-7a28-474c-ba02-f58b4ef5dad2
-    type_id: 2
   - id: &tj_dushanbe_region 35282
     name: TJ Dushanbe Region
     uuid: 5fe81b29-fa90-4983-8cad-0148c80ca4ef
     type_id: 2
-# Mobile Networks
-  - id: &tj_babilon_mobile_mobile 20792
-    name: TJ Babilon Mobile Mobile
-    uuid: b1940009-cf04-44bb-b372-a212ad5357cd
-    type_id: 3
-  - id: &tj_megafon_mobile 42057
-    name: TJ Megafon Mobile
-    uuid: 4f4244ea-19dd-4a1f-9dc9-bd19eca6bd5a
-    type_id: 3
-  - id: &tj_beeline_mobile 42432
-    name: TJ Beeline Mobile
-    uuid: 577a0aea-137b-44e3-ae5f-c1de39f56eb3
-    type_id: 3
-  - id: &tj_tcell_mobile 42792
-    name: TJ Tcell Mobile
-    uuid: f34428d6-4467-4c67-b1c6-3e0a55599852
-    type_id: 3
+  - id: &tj_local_fixed_communication_services_region 4218
+    name: TJ Local Fixed Communication Services Region
+    uuid: b5782c33-eb3f-4f23-9f93-6590cc34473a
+    type_id: 2
 # Supplementary services Networks
   - id: &tj_special_services 21284
     name: TJ Special Services
     uuid: 14f68ad0-1fcb-44ba-96fe-57d88600415e
     type_id: 13
 network_prefixes:
-# Fixed Prefixes
-  - id: 51661
-    prefix: '992487'
+# Mobile Prefixes
+  - id: 454114
+    prefix: '99290'
     number_min_length: 12
     number_max_length: 12
-    uuid: 81ac23af-fc89-4159-8fd8-85f0c5f94fc4
+    uuid: e60d55d4-2824-48a1-9394-b0f75f90b356
     country_id: *tj
-    network_id: *tj_local_fixed_communication_services_region
+    network_id: *tj_megafon_mobile
+  - id: 458159
+    prefix: '99291'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ee80a003-73e9-45ef-8d6b-17a38c95eaa7
+    country_id: *tj
+    network_id: *tj_beeline_mobile
+  - id: 467624
+    prefix: '992918'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 03e04242-89aa-479d-9460-c235828232eb
+    country_id: *tj
+    network_id: *tj_babilon_mobile_mobile
+  - id: 231742
+    prefix: '99298'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 06c559b4-1070-4ccf-86cc-98e6cacb474b
+    country_id: *tj
+    network_id: *tj_babilon_mobile_mobile
+  - id: 468955
+    prefix: '99292'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3c5870d9-d9a1-4b78-b626-c0719166c1f3
+    country_id: *tj
+    network_id: *tj_tcell_mobile
+  - id: 485434
+    prefix: '99293'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6c2bb85c-8688-4876-bca2-fcfd417fbd11
+    country_id: *tj
+    network_id: *tj_tcell_mobile
+# Fixed Prefixes
+  - id: 242116
+    prefix: '992'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 2a9eac51-c614-4c5e-8872-450a273bc1a6
+    country_id: *tj
+    network_id: *tj_fixed
   - id: 243853
     prefix: '9923782'
     number_min_length: 7
@@ -294,62 +341,6 @@ network_prefixes:
     uuid: 781ce476-a41f-412a-8f65-d24aeb276cc5
     country_id: *tj
     network_id: *tj_yavan_region
-  - id: 329219
-    prefix: '9923240'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 34123f05-568b-438c-9eb2-ac9c0db59223
-    country_id: *tj
-    network_id: *tj_shaartuz_region
-  - id: 329224
-    prefix: '9923242'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 383e0be5-8714-4bc2-8139-8ddc22c72a9e
-    country_id: *tj
-    network_id: *tj_khuroson_region
-  - id: 329227
-    prefix: '9923243'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f25871e5-7391-465c-a294-c6b6a2262b7b
-    country_id: *tj
-    network_id: *tj_abdurakhmana_jami_region
-  - id: 329231
-    prefix: '9923245'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 34a5d65b-52f7-4523-86eb-094ef7c031f4
-    country_id: *tj
-    network_id: *tj_bokhtar_region
-  - id: 329233
-    prefix: '9923246'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 590b0d76-00c4-42cc-83b5-3bf665158ae0
-    country_id: *tj
-    network_id: *tj_vakhsh_region
-  - id: 329235
-    prefix: '9923247'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6b4cb359-c67d-47c3-8256-2b28ee42dd01
-    country_id: *tj
-    network_id: *tj_kolkhozabad_region
-  - id: 329237
-    prefix: '9923248'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ae6c2330-1262-4815-9a09-3a08a7e2f6ef
-    country_id: *tj
-    network_id: *tj_djilikul_region
-  - id: 329239
-    prefix: '9923249'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 355b5c56-9045-4fd1-a9f6-cdbc4ef96db3
-    country_id: *tj
-    network_id: *tj_kumsangir_region
   - id: 332482
     prefix: '9923130'
     number_min_length: 12
@@ -448,13 +439,62 @@ network_prefixes:
     uuid: 31295bd9-f6fe-4bae-b491-a983df09d190
     country_id: *tj
     network_id: *tj_tavildara_region
-  - id: 335939
-    prefix: '9923222'
+  - id: 329219
+    prefix: '9923240'
     number_min_length: 12
     number_max_length: 12
-    uuid: db4c7530-35ab-4e68-8919-3340f5f77796
+    uuid: 34123f05-568b-438c-9eb2-ac9c0db59223
     country_id: *tj
-    network_id: *tj_kurgan_tube_region
+    network_id: *tj_shaartuz_region
+  - id: 329224
+    prefix: '9923242'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 383e0be5-8714-4bc2-8139-8ddc22c72a9e
+    country_id: *tj
+    network_id: *tj_khuroson_region
+  - id: 329227
+    prefix: '9923243'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f25871e5-7391-465c-a294-c6b6a2262b7b
+    country_id: *tj
+    network_id: *tj_abdurakhmana_jami_region
+  - id: 329231
+    prefix: '9923245'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 34a5d65b-52f7-4523-86eb-094ef7c031f4
+    country_id: *tj
+    network_id: *tj_bokhtar_region
+  - id: 329233
+    prefix: '9923246'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 590b0d76-00c4-42cc-83b5-3bf665158ae0
+    country_id: *tj
+    network_id: *tj_vakhsh_region
+  - id: 329235
+    prefix: '9923247'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6b4cb359-c67d-47c3-8256-2b28ee42dd01
+    country_id: *tj
+    network_id: *tj_kolkhozabad_region
+  - id: 329237
+    prefix: '9923248'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ae6c2330-1262-4815-9a09-3a08a7e2f6ef
+    country_id: *tj
+    network_id: *tj_djilikul_region
+  - id: 329239
+    prefix: '9923249'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 355b5c56-9045-4fd1-a9f6-cdbc4ef96db3
+    country_id: *tj
+    network_id: *tj_kumsangir_region
   - id: 336852
     prefix: '9923250'
     number_min_length: 12
@@ -476,6 +516,13 @@ network_prefixes:
     uuid: 47edd2ba-8d96-4ad2-90c0-3e9d02259d97
     country_id: *tj
     network_id: *tj_panj_region
+  - id: 335939
+    prefix: '9923222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: db4c7530-35ab-4e68-8919-3340f5f77796
+    country_id: *tj
+    network_id: *tj_kurgan_tube_region
   - id: 338865
     prefix: '9923311'
     number_min_length: 12
@@ -637,6 +684,13 @@ network_prefixes:
     uuid: d9d5b242-8c25-4e9f-8f5e-c5fda679d902
     country_id: *tj
     network_id: *tj_kanibadam_region
+  - id: 353278
+    prefix: '9923522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 97877959-6bf1-4bda-b64f-a53f2bc64d69
+    country_id: *tj
+    network_id: *tj_khorog_region
   - id: 345611
     prefix: '9923551'
     number_min_length: 12
@@ -693,13 +747,6 @@ network_prefixes:
     uuid: 989a93ae-2611-47c3-96ff-cb8d968d9560
     country_id: *tj
     network_id: *tj_ayni_region
-  - id: 353278
-    prefix: '9923522'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 97877959-6bf1-4bda-b64f-a53f2bc64d69
-    country_id: *tj
-    network_id: *tj_khorog_region
   - id: 356159
     prefix: '992372'
     number_min_length: 12
@@ -721,57 +768,13 @@ network_prefixes:
     uuid: b974f814-6a09-4a9d-951b-87f119e9323c
     country_id: *tj
     network_id: *tj_local_fixed_communication_services_region
-# Mobile Prefixes
-  - id: 231742
-    prefix: '99298'
+  - id: 51661
+    prefix: '992487'
     number_min_length: 12
     number_max_length: 12
-    uuid: 06c559b4-1070-4ccf-86cc-98e6cacb474b
+    uuid: 81ac23af-fc89-4159-8fd8-85f0c5f94fc4
     country_id: *tj
-    network_id: *tj_babilon_mobile_mobile
-  - id: 454114
-    prefix: '99290'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e60d55d4-2824-48a1-9394-b0f75f90b356
-    country_id: *tj
-    network_id: *tj_megafon_mobile
-  - id: 458159
-    prefix: '99291'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ee80a003-73e9-45ef-8d6b-17a38c95eaa7
-    country_id: *tj
-    network_id: *tj_beeline_mobile
-  - id: 467624
-    prefix: '992918'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 03e04242-89aa-479d-9460-c235828232eb
-    country_id: *tj
-    network_id: *tj_babilon_mobile_mobile
-  - id: 468955
-    prefix: '99292'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3c5870d9-d9a1-4b78-b626-c0719166c1f3
-    country_id: *tj
-    network_id: *tj_tcell_mobile
-  - id: 485434
-    prefix: '99293'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6c2bb85c-8688-4876-bca2-fcfd417fbd11
-    country_id: *tj
-    network_id: *tj_tcell_mobile
-# Country code Prefixes
-  - id: 242116
-    prefix: '992'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 2a9eac51-c614-4c5e-8872-450a273bc1a6
-    country_id: *tj
-    network_id: null
+    network_id: *tj_local_fixed_communication_services_region
 # Supplementary services Prefixes
   - id: 242155
     prefix: '9920'

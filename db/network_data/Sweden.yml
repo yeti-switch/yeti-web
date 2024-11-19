@@ -1,6 +1,634 @@
 country_id: &se 204
 networks:
 # Fixed Networks
+  - id: &se_bjorna_region 13094
+    name: SE Bjorna Region
+    uuid: 538f2711-264b-49ed-9ca1-3f125c9c5c44
+    type_id: 2
+  - id: &se_bergsjo_region 13519
+    name: SE Bergsjo Region
+    uuid: 38813019-4d96-40fa-ae57-29b5e0913a36
+    type_id: 2
+  - id: &se_delsbo_region 13539
+    name: SE Delsbo Region
+    uuid: 5c18f098-bff2-4174-83be-3f86ae144e9a
+    type_id: 2
+  - id: &se_ornskoldsvik_region 13718
+    name: SE Ornskoldsvik Region
+    uuid: 04fa85c4-04fb-4e2c-877f-0abf64104a12
+    type_id: 2
+  - id: &se_bredbyn_region 13870
+    name: SE Bredbyn Region
+    uuid: 84ad8067-a5df-4caf-a7e3-075a18f4666e
+    type_id: 2
+  - id: &se_husum_region 13911
+    name: SE Husum Region
+    uuid: c07c9a2d-9464-49cf-8416-d34bff810034
+    type_id: 2
+  - id: &se_stromsund_region 13973
+    name: SE Stromsund Region
+    uuid: 2dc7e095-7dbb-4d65-9ce1-ea37fef7ddb5
+    type_id: 2
+  - id: &se_hoting_region 13991
+    name: SE Hoting Region
+    uuid: f382f72a-ae10-415f-a1da-956f077db211
+    type_id: 2
+  - id: &se_gaddede_region 13999
+    name: SE Gaddede Region
+    uuid: de68babb-385d-4ded-921b-9ea6520111c7
+    type_id: 2
+  - id: &se_svenstavik_region 14261
+    name: SE Svenstavik Region
+    uuid: a54a57f7-bc9d-4cca-a8c1-51986e7da308
+    type_id: 2
+  - id: &se_hammarstrand_region 14858
+    name: SE Hammarstrand Region
+    uuid: f65a6489-969b-488e-9c6f-1193b844bba4
+    type_id: 2
+  - id: &se_sveg_region 14547
+    name: SE Sveg Region
+    uuid: eb99275a-6f0d-4baf-a438-89f5178216be
+    type_id: 2
+  - id: &se_ratan_region 14740
+    name: SE Ratan Region
+    uuid: ac2c389e-b05a-4601-93c3-36b065f0cab3
+    type_id: 2
+  - id: &se_funasdalen_hede_region 14813
+    name: SE Funasdalen Hede Region
+    uuid: f6a35125-9b27-44e6-8c78-0ed02168b176
+    type_id: 2
+  - id: &se_ange_region 14323
+    name: SE Ange Region
+    uuid: 421142f8-8a1c-4877-b62d-1db6ac1c2642
+    type_id: 2
+  - id: &se_torpshammar_region 14331
+    name: SE Torpshammar Region
+    uuid: cdafe871-56a7-4c1a-9246-d6e3674cb2e6
+    type_id: 2
+  - id: &se_liden_region 14340
+    name: SE Liden Region
+    uuid: c3e2f822-ade1-4429-bcb5-dba0ecc8a382
+    type_id: 2
+  - id: &se_bracke_gallo_region 14348
+    name: SE Bracke Gallo Region
+    uuid: 5611e33b-f052-49f7-b899-3daafb6dfcbb
+    type_id: 2
+  - id: &se_stugun_region 14854
+    name: SE Stugun Region
+    uuid: d1221fa5-f22e-4f1c-ad68-9d568ad81ff5
+    type_id: 2
+  - id: &se_stockholm_region 19788
+    name: SE Stockholm Region
+    uuid: 06e987b1-d85d-4662-9499-e2f82726c19e
+    type_id: 2
+  - id: &se_umea_region 42056
+    name: SE Umea Region
+    uuid: 9fe56172-c27f-49ff-9080-0ebe719b271c
+    type_id: 2
+  - id: &se_skelleftea_region 42435
+    name: SE Skelleftea Region
+    uuid: 763e4fe0-b1c8-4a5d-b752-4923a2e1dfc2
+    type_id: 2
+  - id: &se_byske_region 42648
+    name: SE Byske Region
+    uuid: 29c31e24-a6db-4a65-bbdb-a2873308a5d2
+    type_id: 2
+  - id: &se_burtrask_region 42497
+    name: SE Burtrask Region
+    uuid: c6356fbb-d42c-41b4-8629-8721b266c9b0
+    type_id: 2
+  - id: &se_pitea_region 42638
+    name: SE Pitea Region
+    uuid: 186decc0-940d-4219-8687-6b8731dd7126
+    type_id: 2
+  - id: &se_lovanger_region 42699
+    name: SE Lovanger Region
+    uuid: af10f4e3-c9c2-4b3c-8a0d-cc618609c898
+    type_id: 2
+  - id: &se_bastutrask_region 42711
+    name: SE Bastutrask Region
+    uuid: 38d99a97-6de1-4e5b-a8dc-21a18b0a2054
+    type_id: 2
+  - id: &se_jorn_region 42731
+    name: SE Jorn Region
+    uuid: 94ca0701-f47f-454b-9f91-8f724009dded
+    type_id: 2
+  - id: &se_lulea_region 42825
+    name: SE Lulea Region
+    uuid: 428af5ef-8bba-47f0-ad40-c79e5b26978e
+    type_id: 2
+  - id: &se_norsjo_region 42743
+    name: SE Norsjo Region
+    uuid: 619f61b7-6339-4cef-9fb6-62929cb1b69c
+    type_id: 2
+  - id: &se_porjus_region 20707
+    name: SE Porjus Region
+    uuid: 6956289d-d2db-4a0c-8759-c4ca1e4e25f7
+    type_id: 2
+  - id: &se_kiruna_region 20804
+    name: SE Kiruna Region
+    uuid: 35781fcd-759f-4802-be47-76f488ccf102
+    type_id: 2
+  - id: &se_vittangi_region 20896
+    name: SE Vittangi Region
+    uuid: e5fd2b3a-f24c-4f06-9e24-4ab39e334390
+    type_id: 2
+  - id: &se_hakkas_region 20835
+    name: SE Hakkas Region
+    uuid: ef931631-9e52-422a-896d-1042f12392ae
+    type_id: 2
+  - id: &se_vuollerim_region 20838
+    name: SE Vuollerim Region
+    uuid: 83c066d5-5c72-40c4-a3c4-cbdfb1729ff0
+    type_id: 2
+  - id: &se_korpilombolo_region 20848
+    name: SE Korpilombolo Region
+    uuid: 118b3cd3-ea18-48b6-8d1b-b8bf22d956b2
+    type_id: 2
+  - id: &se_pajala_region 20860
+    name: SE Pajala Region
+    uuid: bdaa9b2a-bc7f-4aba-930a-2cfb46d8fe43
+    type_id: 2
+  - id: &se_fixed 43466
+    name: SE Fixed
+    uuid: f450d776-7580-44aa-b0e9-9b819012b40a
+    type_id: 2
+  - id: &se_norrkoping_region 24839
+    name: SE Norrkoping Region
+    uuid: 8fc409ce-3c87-45d5-8f53-66d8c933c960
+    type_id: 2
+  - id: &se_atvidaberg_region 24878
+    name: SE Atvidaberg Region
+    uuid: 37e981e6-a7a0-4c85-b77d-d372a7b055b5
+    type_id: 2
+  - id: &se_soderkoping_region 24892
+    name: SE Soderkoping Region
+    uuid: 7818ba3f-4d9e-432c-81e9-8f46fde4832f
+    type_id: 2
+  - id: &se_finspang_region 24895
+    name: SE Finspang Region
+    uuid: 88598778-be6f-444c-be05-54d073555d9b
+    type_id: 2
+  - id: &se_valdemarsvik_region 24905
+    name: SE Valdemarsvik Region
+    uuid: 2b13321e-5b88-4899-b780-bc061ac73441
+    type_id: 2
+  - id: &se_vikbolandet_region 24930
+    name: SE Vikbolandet Region
+    uuid: e39e4383-65a9-4af0-a6ae-5f7d71872b28
+    type_id: 2
+  - id: &se_linkoping_region 25032
+    name: SE Linkoping Region
+    uuid: 1173524d-1692-4193-aa1f-f310f9d4f54d
+    type_id: 2
+  - id: &se_tranas_region 25283
+    name: SE Tranas Region
+    uuid: 342b5b1d-c1e8-4d6f-95f0-290ae0338da8
+    type_id: 2
+  - id: &se_motala_region 25295
+    name: SE Motala Region
+    uuid: 79eca9ea-62ee-4d4e-b34c-878c960ab389
+    type_id: 2
+  - id: &se_boxholm_mjolby_skanninge_region 25297
+    name: SE Boxholm Mjolby Skanninge Region
+    uuid: 0f893244-14f4-43b1-9412-730f255ce06a
+    type_id: 2
+  - id: &se_vadstena_region 25328
+    name: SE Vadstena Region
+    uuid: 05da3f82-ca5d-40f0-ade4-a2321fbf485e
+    type_id: 2
+  - id: &se_odeshog_region 25368
+    name: SE Odeshog Region
+    uuid: 9dccff9b-d6a9-4015-a829-11c8713ad16b
+    type_id: 2
+  - id: &se_katrineholm_region 26305
+    name: SE Katrineholm Region
+    uuid: de2c6d3e-bca1-48ba-be01-67feb3474aee
+    type_id: 2
+  - id: &se_vingaker_region 26326
+    name: SE Vingaker Region
+    uuid: 1c89c3ac-d6a7-4d3a-a410-8594bc500fdf
+    type_id: 2
+  - id: &se_strangnas_region 26334
+    name: SE Strangnas Region
+    uuid: 93ab11a6-0c6e-4586-aff8-7279cfb24833
+    type_id: 2
+  - id: &se_nykoping_oxelosund_region 26400
+    name: SE Nykoping Oxelosund Region
+    uuid: 1df45d99-799c-4a7d-9181-3aec806caf00
+    type_id: 2
+  - id: &se_trosa_vagnharad_region 26412
+    name: SE Trosa Vagnharad Region
+    uuid: 36c22168-c23d-4870-ac53-6bb93b75fd3d
+    type_id: 2
+  - id: &se_flen_malmkoping_region 26442
+    name: SE Flen Malmkoping Region
+    uuid: d624f5c5-38dd-49e2-a636-bafa3f9e9636
+    type_id: 2
+  - id: &se_gnesta_region 26459
+    name: SE Gnesta Region
+    uuid: 662547f4-926b-45d0-869c-2ee7ce10e89d
+    type_id: 2
+  - id: &se_mariefred_region 26481
+    name: SE Mariefred Region
+    uuid: 26cac5b1-feae-48a9-b9a0-2bdb8d4eab81
+    type_id: 2
+  - id: &se_eskilstuna_torshalla_region 26515
+    name: SE Eskilstuna Torshalla Region
+    uuid: 73653c71-263c-47d2-be2a-b83a79b41aeb
+    type_id: 2
+  - id: &se_enkoping_region 25404
+    name: SE Enkoping Region
+    uuid: 10667592-4c35-4f3c-b42a-5b854e889493
+    type_id: 2
+  - id: &se_oregrund_osthammar_region 25425
+    name: SE Oregrund Osthammar Region
+    uuid: 9cdb1e72-3df6-40cc-b802-b8ec05f951c4
+    type_id: 2
+  - id: &se_alunda_region 25442
+    name: SE Alunda Region
+    uuid: cdd4e7b2-9666-4d58-9cfa-833ba39f8257
+    type_id: 2
+  - id: &se_hallstavik_rimbo_region 25460
+    name: SE Hallstavik Rimbo Region
+    uuid: 254ad4b1-9422-4b47-b266-66df188ab2ac
+    type_id: 2
+  - id: &se_norrtalje_region 25474
+    name: SE Norrtalje Region
+    uuid: be048d4d-2ce3-4b39-9273-b53f2ba2f7e8
+    type_id: 2
+  - id: &se_uppsala_region 25548
+    name: SE Uppsala Region
+    uuid: 48c28a22-77ae-49ce-b151-c9d11c030828
+    type_id: 2
+  - id: &se_kumla_orebro_region 25690
+    name: SE Kumla Orebro Region
+    uuid: a46190c5-1c57-4ef7-8bed-5b87808f09f7
+    type_id: 2
+  - id: &se_vasteras_region 27348
+    name: SE Vasteras Region
+    uuid: e7759e2b-1085-4818-b935-fd4e0eb0165e
+    type_id: 2
+  - id: &se_skinnskatteberg_region 28092
+    name: SE Skinnskatteberg Region
+    uuid: ab0ab37a-d280-4f66-ad16-b55e51543242
+    type_id: 2
+  - id: &se_hallstahammar_surahammar_region 28068
+    name: SE Hallstahammar Surahammar Region
+    uuid: b77feb3b-5f7e-4503-a44e-a0f14c2ed3d6
+    type_id: 2
+  - id: &se_koping_region 28080
+    name: SE Koping Region
+    uuid: f8626450-ace2-4744-8e5c-b5f4c69751ae
+    type_id: 2
+  - id: &se_fagersta_norberg_region 27850
+    name: SE Fagersta Norberg Region
+    uuid: 37ee4549-526c-40c8-b381-6beb0532d571
+    type_id: 2
+  - id: &se_heby_sala_region 27893
+    name: SE Heby Sala Region
+    uuid: c4d13bfe-9626-4a75-96f6-3649751deec2
+    type_id: 2
+  - id: &se_kungsor_region 27957
+    name: SE Kungsor Region
+    uuid: b6e33e7a-0c65-4d7c-921c-5d35f3eceb85
+    type_id: 2
+  - id: &se_falun_region 28310
+    name: SE Falun Region
+    uuid: 40ce9587-976f-4573-ba02-5078dbff3693
+    type_id: 2
+  - id: &se_hedemora_sater_region 28137
+    name: SE Hedemora Sater Region
+    uuid: 2c536184-534c-4393-8c46-93d2d105fcfa
+    type_id: 2
+  - id: &se_avesta_krylbo_region 28189
+    name: SE Avesta Krylbo Region
+    uuid: 76723189-68a2-4d3f-9f7e-b70b48081ef7
+    type_id: 2
+  - id: &se_ludvika_smedjebacken_region 28993
+    name: SE Ludvika Smedjebacken Region
+    uuid: 8e207f68-5ce3-4e2d-9c5c-fc70d4195257
+    type_id: 2
+  - id: &se_floda_gagnef_region 28687
+    name: SE Floda Gagnef Region
+    uuid: 207e7dc9-80ed-45bb-95b4-cc98b00fc404
+    type_id: 2
+  - id: &se_borlange_region 29058
+    name: SE Borlange Region
+    uuid: 4129e816-6e2e-49f0-909b-e8fefcfeaae2
+    type_id: 2
+  - id: &se_insjon_leksand_region 28759
+    name: SE Insjon Leksand Region
+    uuid: 3703fd3f-f558-4ed6-9e9e-1f5cf50ec16f
+    type_id: 2
+  - id: &se_rattvik_region 29127
+    name: SE Rattvik Region
+    uuid: 1b8aa2cc-31e2-4737-802b-c57f7790ce84
+    type_id: 2
+  - id: &se_enviken_svardsjo_region 28712
+    name: SE Enviken Svardsjo Region
+    uuid: f5c1252d-695d-4913-969b-249ec8581d9c
+    type_id: 2
+  - id: &se_idre_sarna_region 29929
+    name: SE Idre Sarna Region
+    uuid: b1ae9fc6-35bc-49eb-97c5-bbf347c0c153
+    type_id: 2
+  - id: &se_bollnas_region 30435
+    name: SE Bollnas Region
+    uuid: a7e17a3a-d32f-410a-b726-670c454c3f01
+    type_id: 2
+  - id: &se_malung_region 31125
+    name: SE Malung Region
+    uuid: 0e35ac85-2d27-4208-ba1a-07c2cce775f8
+    type_id: 2
+  - id: &se_vansbro_region 31144
+    name: SE Vansbro Region
+    uuid: a8b1e7b7-223e-4251-9e6d-0447d270e180
+    type_id: 2
+  - id: &se_hofors_storvik_region 30663
+    name: SE Hofors Storvik Region
+    uuid: 7c3e117d-2e1c-4842-b36b-e1d6e15a9772
+    type_id: 2
+  - id: &se_hedesunda_osterfarnebo_region 30689
+    name: SE Hedesunda Osterfarnebo Region
+    uuid: 498e08ff-7fb7-4977-a960-8f0c87d7d011
+    type_id: 2
+  - id: &se_ostervala_tarnsjo_region 30700
+    name: SE Ostervala Tarnsjo Region
+    uuid: 5ed3bdd2-73be-4f41-99bb-24740f6cbd21
+    type_id: 2
+  - id: &se_soderfors_tierp_region 30733
+    name: SE Soderfors Tierp Region
+    uuid: af931bf7-8b4b-4a3f-b2ed-3234b9d14e59
+    type_id: 2
+  - id: &se_karlholmsbruk_skarplinge_region 30767
+    name: SE Karlholmsbruk Skarplinge Region
+    uuid: d206498e-8483-4c8c-949e-2e1f10d38247
+    type_id: 2
+  - id: &se_lerum_region 30930
+    name: SE Lerum Region
+    uuid: a99db6c8-27f7-435f-a425-b24b773bb7ce
+    type_id: 2
+  - id: &se_kungalv_region 31409
+    name: SE Kungalv Region
+    uuid: 29799d0a-418f-4b55-9893-00fddc3f9dec
+    type_id: 2
+  - id: &se_mora_orsa_region 29149
+    name: SE Mora Orsa Region
+    uuid: 0c8fa27c-9794-4382-8f9d-f5c646c55a73
+    type_id: 2
+  - id: &se_alvdalen_region 29193
+    name: SE Alvdalen Region
+    uuid: 2c94512c-2719-42d8-91b8-c843483df3cc
+    type_id: 2
+  - id: &se_routing_voice_mail_ip_centrex_region 29957
+    name: SE Routing Voice Mail Ip Centrex Region
+    uuid: 3808d771-9784-487c-9098-98b6ac56f1c7
+    type_id: 2
+  - id: &se_routing_voice_mail_voip_region 29322
+    name: SE Routing Voice Mail Voip Region
+    uuid: 3a7ca2f8-6587-41f0-834e-5b69e619818e
+    type_id: 2
+  - id: &se_furudal_region 29452
+    name: SE Furudal Region
+    uuid: e2df0a18-4299-4d7a-9393-b441c796e1ee
+    type_id: 2
+  - id: &se_gavle_sandviken_region 29520
+    name: SE Gavle Sandviken Region
+    uuid: 4c833c7b-2e0e-492e-ad63-8309e6f749f1
+    type_id: 2
+  - id: &se_soderhamn_region 29792
+    name: SE Soderhamn Region
+    uuid: e9014fb2-ab1d-4e98-b6fc-a9f81660eabc
+    type_id: 2
+  - id: &se_alfta_edsbyn_region 30226
+    name: SE Alfta Edsbyn Region
+    uuid: 3345dda0-92e7-428e-a2a8-d587f9ae10b0
+    type_id: 2
+  - id: &se_orbyhus_dannemora_region 30791
+    name: SE Orbyhus Dannemora Region
+    uuid: 5bcc96fc-438e-433d-84c1-8b1adaf5a717
+    type_id: 2
+  - id: &se_hamrange_ockelbo_region 31209
+    name: SE Hamrange Ockelbo Region
+    uuid: 89aa523e-dfb6-4aba-8528-608e3e613ae5
+    type_id: 2
+  - id: &se_kungsbacka_region 30895
+    name: SE Kungsbacka Region
+    uuid: 9759ca6a-e105-40a3-9cc3-1eadf241a005
+    type_id: 2
+  - id: &se_hindas_region 30899
+    name: SE Hindas Region
+    uuid: 9ea12e37-527e-4bef-b755-a2854a350cd9
+    type_id: 2
+  - id: &se_orust_tjorn_region 31415
+    name: SE Orust Tjorn Region
+    uuid: de56c99b-dd13-4e35-8e00-1063e5a48dfe
+    type_id: 2
+  - id: &se_goteborg_region 31763
+    name: SE Goteborg Region
+    uuid: a7bd6b47-12ad-4d2e-9ab7-7b6288e2b28b
+    type_id: 2
+  - id: &se_ulricehamn_region 32046
+    name: SE Ulricehamn Region
+    uuid: 7a20a0ad-5685-4efe-bd9e-755ff9ebf03d
+    type_id: 2
+  - id: &se_alingsas_vargarda_region 32402
+    name: SE Alingsas Vargarda Region
+    uuid: bc87a0c4-3a4c-4717-9ab3-e947bd6a4e7f
+    type_id: 2
+  - id: &se_svenljunga_tranemo_region 32077
+    name: SE Svenljunga Tranemo Region
+    uuid: 78fe9deb-be40-4fc8-867e-f9985a6b3f20
+    type_id: 2
+  - id: &se_kinna_region 31958
+    name: SE Kinna Region
+    uuid: 5b5d4b06-aaef-4342-9d3b-bf7ae1eca400
+    type_id: 2
+  - id: &se_boras_region 32568
+    name: SE Boras Region
+    uuid: f05a4f1a-8ce5-45e6-83a3-68e3ad392268
+    type_id: 2
+  - id: &se_hyltebruk_torup_region 33153
+    name: SE Hyltebruk Torup Region
+    uuid: 60abd8d2-4af6-4028-944d-43bd96a16f31
+    type_id: 2
+  - id: &se_falkenberg_region 33216
+    name: SE Falkenberg Region
+    uuid: 81ee99b2-9bf0-46d9-87af-f514605f90bb
+    type_id: 2
+  - id: &se_varberg_region 32916
+    name: SE Varberg Region
+    uuid: 768eb8ea-ad4e-4cda-9184-240a58981b41
+    type_id: 2
+  - id: &se_halmstad_region 34648
+    name: SE Halmstad Region
+    uuid: 9c46bb4c-ff8f-4a8f-b0ed-f18eb5ec9448
+    type_id: 2
+  - id: &se_machine_to_machine_m2m_services_region 33812
+    name: SE Machine To Machine M2M Services Region
+    uuid: 328934b9-4079-4145-b256-4cd887f05fb4
+    type_id: 2
+  - id: &se_nassjo_region 35365
+    name: SE Nassjo Region
+    uuid: a06cc9ed-f0dc-4f41-84e8-90da5c9c919d
+    type_id: 2
+  - id: &se_eksjo_region 35385
+    name: SE Eksjo Region
+    uuid: 779d6362-4c62-4335-8660-e175c6dc61a6
+    type_id: 2
+  - id: &se_savsjo_region 35421
+    name: SE Savsjo Region
+    uuid: 795b4b0a-e7fa-41e5-90b3-c51f923eb30a
+    type_id: 2
+  - id: &se_granna_region 35699
+    name: SE Granna Region
+    uuid: 59a4cd89-7ebb-4e3e-b520-19ad6cb94d45
+    type_id: 2
+  - id: &se_mullsjo_region 35815
+    name: SE Mullsjo Region
+    uuid: 17f5a58a-06c4-43e4-a646-70703f50dd39
+    type_id: 2
+  - id: &se_malmo_region 34319
+    name: SE Malmo Region
+    uuid: f96b5c90-fd8a-403e-a45b-4aeb662a1d9c
+    type_id: 2
+  - id: &se_huskvarna_jonkoping_region 33662
+    name: SE Huskvarna Jonkoping Region
+    uuid: 4da0c9f3-5fa7-4085-af6a-85e4dbd0090a
+    type_id: 2
+  - id: &se_varnamo_region 35256
+    name: SE Varnamo Region
+    uuid: 665790de-9ee7-4fdf-bd3b-c92848915469
+    type_id: 2
+  - id: &se_anderstorp_gislaved_region 35266
+    name: SE Anderstorp Gislaved Region
+    uuid: feaad147-d769-4e5a-9875-4c9b193ee94c
+    type_id: 2
+  - id: &se_ljungby_region 35281
+    name: SE Ljungby Region
+    uuid: ff476736-f93a-44db-bf0c-0711fdf413d2
+    type_id: 2
+  - id: &se_vetlanda_region 35486
+    name: SE Vetlanda Region
+    uuid: 4a3282b1-f6c8-4ba8-9314-f3920e78b719
+    type_id: 2
+  - id: &se_vaggeryd_region 35868
+    name: SE Vaggeryd Region
+    uuid: a4607ede-cba1-46a3-9cc9-576d7d45c4c0
+    type_id: 2
+  - id: &se_trelleborg_region 36258
+    name: SE Trelleborg Region
+    uuid: 6b61df24-2e2d-4837-a863-1bc3b21fa9c9
+    type_id: 2
+  - id: &se_eslov_hoor_region 37002
+    name: SE Eslov Hoor Region
+    uuid: f1ce7853-2fbe-4e49-96c8-40bd1e2a5949
+    type_id: 2
+  - id: &se_sjobo_region 37065
+    name: SE Sjobo Region
+    uuid: 8dc360fa-00aa-4923-9694-fd7aacd990d4
+    type_id: 2
+  - id: &se_markaryd_stromsnasbruk_region 37497
+    name: SE Markaryd Stromsnasbruk Region
+    uuid: 64045d9f-4048-4f89-aaaf-9b64ec07f7b8
+    type_id: 2
+  - id: &se_ystad_region 36281
+    name: SE Ystad Region
+    uuid: 1f0b6852-6a4d-43b8-8cdf-f01b2a492b17
+    type_id: 2
+  - id: &se_simrishamn_region 37049
+    name: SE Simrishamn Region
+    uuid: 4ab2a0d6-4d11-4b7d-b454-9b0b2b63f56e
+    type_id: 2
+  - id: &se_horby_region 36326
+    name: SE Horby Region
+    uuid: 17d57887-09bd-45dc-b8ea-3fa84a8a3475
+    type_id: 2
+  - id: &se_tomelilla_region 37101
+    name: SE Tomelilla Region
+    uuid: d165729f-7b80-4828-bb50-9c83605008d4
+    type_id: 2
+  - id: &se_landskrona_svalov_region 37197
+    name: SE Landskrona Svalov Region
+    uuid: 84fc3c20-a8f2-4122-a1b6-4cbded8845e6
+    type_id: 2
+  - id: &se_helsingborg_hoganas_region 37240
+    name: SE Helsingborg Hoganas Region
+    uuid: 70749845-3382-4f6b-8b49-6ba12e3186d6
+    type_id: 2
+  - id: &se_laholm_region 36623
+    name: SE Laholm Region
+    uuid: 4e0525d2-618b-4b94-8446-1d53316b4837
+    type_id: 2
+  - id: &se_angelholm_bastad_region 36716
+    name: SE Angelholm Bastad Region
+    uuid: 3d798c39-be13-4331-933b-8b6f7cb69812
+    type_id: 2
+  - id: &se_klippan_perstorp_region 36799
+    name: SE Klippan Perstorp Region
+    uuid: 9a67da27-2802-49d1-801c-93c947472155
+    type_id: 2
+  - id: &se_kristianstad_region 36862
+    name: SE Kristianstad Region
+    uuid: 0961740f-ce16-4708-873a-9240ad7644c3
+    type_id: 2
+  - id: &se_karlshamn_olofstrom_region 37923
+    name: SE Karlshamn Olofstrom Region
+    uuid: c6c9250c-155c-45fe-a073-7ed9ca1de985
+    type_id: 2
+  - id: &se_karlskrona_region 37942
+    name: SE Karlskrona Region
+    uuid: cc67db33-bd82-4bfb-8690-200936c406b8
+    type_id: 2
+  - id: &se_bromolla_solvesborg_region 37963
+    name: SE Bromolla Solvesborg Region
+    uuid: c88ff6c8-a48b-40cb-90a3-66e583bfd057
+    type_id: 2
+  - id: &se_ronneby_region 37982
+    name: SE Ronneby Region
+    uuid: 694a303f-49aa-41bb-983f-b50fad03ebb1
+    type_id: 2
+  - id: &se_ryd_region 37812
+    name: SE Ryd Region
+    uuid: 38f0fe75-8d8f-4279-a7c2-5ec656a9eb49
+    type_id: 2
+  - id: &se_hassleholm_region 37782
+    name: SE Hassleholm Region
+    uuid: 895e71c5-1d10-4f39-b42b-11a538c3071e
+    type_id: 2
+  - id: &se_lund_region 37843
+    name: SE Lund Region
+    uuid: d657e845-3fb0-42e6-aee0-f775c451d878
+    type_id: 2
+  - id: &se_vaxjo_region 38322
+    name: SE Vaxjo Region
+    uuid: 67ba89b9-3b0f-4cf9-a47e-aafff17ddfab
+    type_id: 2
+  - id: &se_emmaboda_region 38091
+    name: SE Emmaboda Region
+    uuid: da84f8d8-ad74-4acb-8421-aaa73e2521c8
+    type_id: 2
+  - id: &se_alvesta_rydaholm_region 38132
+    name: SE Alvesta Rydaholm Region
+    uuid: b0ea82e4-bd28-4c05-9574-d3bd4aca669d
+    type_id: 2
+  - id: &se_almhult_region 38396
+    name: SE Almhult Region
+    uuid: 3486f50a-cf92-4c34-b25f-c8e2fbce977b
+    type_id: 2
+  - id: &se_tingsryd_region 38253
+    name: SE Tingsryd Region
+    uuid: e74857d0-b380-4589-9735-fd211d4a9203
+    type_id: 2
+  - id: &se_kalmar_region 4233
+    name: SE Kalmar Region
+    uuid: 7eb53f34-a65f-4679-a030-1a6fed832172
+    type_id: 2
+  - id: &se_aseda_lenhovda_region 38234
+    name: SE Aseda Lenhovda Region
+    uuid: 0508c2b1-6672-4060-aff9-925411e3612a
+    type_id: 2
   - id: &se_lessebo_region 4024
     name: SE Lessebo Region
     uuid: abc01b0d-f7ee-4cce-9031-7091ce7ba7af
@@ -9,21 +637,21 @@ networks:
     name: SE Osby Region
     uuid: 6820a367-f79c-4a46-9634-b9ad772233fc
     type_id: 2
-  - id: &se_kalmar_region 4233
-    name: SE Kalmar Region
-    uuid: 7eb53f34-a65f-4679-a030-1a6fed832172
+  - id: &se_nybro_region 4828
+    name: SE Nybro Region
+    uuid: 92c26a57-80d3-45f1-a413-ebff501c5396
     type_id: 2
-  - id: &se_oland_region 4363
-    name: SE Oland Region
-    uuid: 4189c7a9-8a51-46e6-9971-24c0eed0c648
+  - id: &se_vastervik_region 5036
+    name: SE Vastervik Region
+    uuid: 5bf253b6-8fea-4b39-929a-e63bae8b1897
     type_id: 2
-  - id: &se_torsas_region 4410
-    name: SE Torsas Region
-    uuid: 83c9662f-0786-4ae3-ab3a-a9567608d17e
+  - id: &se_hogsby_oskarshamn_region 5045
+    name: SE Hogsby Oskarshamn Region
+    uuid: 008a71f4-b095-4f92-8351-5d7faca205c7
     type_id: 2
-  - id: &se_hultsfred_virserum_region 4506
-    name: SE Hultsfred Virserum Region
-    uuid: 39117ade-f200-4482-89ec-225957fe8244
+  - id: &se_vimmerby_region 5077
+    name: SE Vimmerby Region
+    uuid: 46782c60-db94-442d-bf03-852d819b2982
     type_id: 2
   - id: &se_mariannelund_region 4523
     name: SE Mariannelund Region
@@ -49,25 +677,13 @@ networks:
     name: SE Tidaholm Region
     uuid: 5e955a32-cc35-43f3-bc8f-379ef91696e4
     type_id: 2
-  - id: &se_tibro_region 4808
-    name: SE Tibro Region
-    uuid: b046bcd8-82ad-4bfc-bc6e-1565bd5a1e25
+  - id: &se_oland_region 4363
+    name: SE Oland Region
+    uuid: 4189c7a9-8a51-46e6-9971-24c0eed0c648
     type_id: 2
-  - id: &se_nybro_region 4828
-    name: SE Nybro Region
-    uuid: 92c26a57-80d3-45f1-a413-ebff501c5396
-    type_id: 2
-  - id: &se_vastervik_region 5036
-    name: SE Vastervik Region
-    uuid: 5bf253b6-8fea-4b39-929a-e63bae8b1897
-    type_id: 2
-  - id: &se_hogsby_oskarshamn_region 5045
-    name: SE Hogsby Oskarshamn Region
-    uuid: 008a71f4-b095-4f92-8351-5d7faca205c7
-    type_id: 2
-  - id: &se_vimmerby_region 5077
-    name: SE Vimmerby Region
-    uuid: 46782c60-db94-442d-bf03-852d819b2982
+  - id: &se_torsas_region 4410
+    name: SE Torsas Region
+    uuid: 83c9662f-0786-4ae3-ab3a-a9567608d17e
     type_id: 2
   - id: &se_gamleby_region 5120
     name: SE Gamleby Region
@@ -77,9 +693,17 @@ networks:
     name: SE Kisa Region
     uuid: 95b9e158-2eac-4149-a74f-22b2d86e897d
     type_id: 2
+  - id: &se_hultsfred_virserum_region 4506
+    name: SE Hultsfred Virserum Region
+    uuid: 39117ade-f200-4482-89ec-225957fe8244
+    type_id: 2
   - id: &se_hjo_region 5187
     name: SE Hjo Region
     uuid: 1b086297-81a3-47b8-acac-c77c3f92c54f
+    type_id: 2
+  - id: &se_tibro_region 4808
+    name: SE Tibro Region
+    uuid: b046bcd8-82ad-4bfc-bc6e-1565bd5a1e25
     type_id: 2
   - id: &se_hova_toreboda_region 5275
     name: SE Hova Toreboda Region
@@ -92,10 +716,6 @@ networks:
   - id: &se_grastorp_region 5722
     name: SE Grastorp Region
     uuid: 04696375-2e7b-4ff7-b4fa-9f03497d47be
-    type_id: 2
-  - id: &se_trollhattan_region 5913
-    name: SE Trollhattan Region
-    uuid: ef4a338a-f71e-4e00-bc67-aa02d0f3eb5c
     type_id: 2
   - id: &se_karlsborg_region 5926
     name: SE Karlsborg Region
@@ -117,29 +737,9 @@ networks:
     name: SE Falkoping Region
     uuid: 7f1fc3b4-bc84-41b3-97f6-b5f3e3cfc9bc
     type_id: 2
-  - id: &se_mellerud_region 6684
-    name: SE Mellerud Region
-    uuid: 688e4938-eae3-45c4-812d-cb1bd5493eba
-    type_id: 2
-  - id: &se_bengtsfors_region 6816
-    name: SE Bengtsfors Region
-    uuid: d181d8c2-1e64-47e8-b9e6-61bbc08e7619
-    type_id: 2
-  - id: &se_amal_region 6889
-    name: SE Amal Region
-    uuid: 4c67d066-bde2-4848-b41e-6ee8ee738df4
-    type_id: 2
-  - id: &se_saffle_region 6913
-    name: SE Saffle Region
-    uuid: f7beac88-074a-4c8e-b397-f4be80e025e9
-    type_id: 2
-  - id: &se_ed_region 6943
-    name: SE Ed Region
-    uuid: c355756f-3b4a-4fcb-b761-775142681fa4
-    type_id: 2
-  - id: &se_karlstad_region 7192
-    name: SE Karlstad Region
-    uuid: f7cc6fa2-962d-4d47-bd22-0c0a149c95fa
+  - id: &se_trollhattan_region 5913
+    name: SE Trollhattan Region
+    uuid: ef4a338a-f71e-4e00-bc67-aa02d0f3eb5c
     type_id: 2
   - id: &se_vanersborg_region 7375
     name: SE Vanersborg Region
@@ -169,9 +769,37 @@ networks:
     name: SE Fargelanda Region
     uuid: 7fb6a419-ebea-4819-aa34-265101baf25e
     type_id: 2
-  - id: &se_torsby_region 7979
-    name: SE Torsby Region
-    uuid: 14f20176-db8a-4207-9ac0-f8b516541629
+  - id: &se_mellerud_region 6684
+    name: SE Mellerud Region
+    uuid: 688e4938-eae3-45c4-812d-cb1bd5493eba
+    type_id: 2
+  - id: &se_bengtsfors_region 6816
+    name: SE Bengtsfors Region
+    uuid: d181d8c2-1e64-47e8-b9e6-61bbc08e7619
+    type_id: 2
+  - id: &se_amal_region 6889
+    name: SE Amal Region
+    uuid: 4c67d066-bde2-4848-b41e-6ee8ee738df4
+    type_id: 2
+  - id: &se_saffle_region 6913
+    name: SE Saffle Region
+    uuid: f7beac88-074a-4c8e-b397-f4be80e025e9
+    type_id: 2
+  - id: &se_ed_region 6943
+    name: SE Ed Region
+    uuid: c355756f-3b4a-4fcb-b761-775142681fa4
+    type_id: 2
+  - id: &se_karlstad_region 7192
+    name: SE Karlstad Region
+    uuid: f7cc6fa2-962d-4d47-bd22-0c0a149c95fa
+    type_id: 2
+  - id: &se_hagfors_munkfors_region 9321
+    name: SE Hagfors Munkfors Region
+    uuid: 880d6347-5676-407c-a47d-8d09918a0d3b
+    type_id: 2
+  - id: &se_syssleback_region 9422
+    name: SE Syssleback Region
+    uuid: 970cdf1d-fe99-422d-afa6-49dda2212ab8
     type_id: 2
   - id: &se_arjang_region 8086
     name: SE Arjang Region
@@ -233,13 +861,9 @@ networks:
     name: SE Grums Region
     uuid: 85d5c4ad-8c8f-4c36-9433-c0332ac83ef8
     type_id: 2
-  - id: &se_hagfors_munkfors_region 9321
-    name: SE Hagfors Munkfors Region
-    uuid: 880d6347-5676-407c-a47d-8d09918a0d3b
-    type_id: 2
-  - id: &se_syssleback_region 9422
-    name: SE Syssleback Region
-    uuid: 970cdf1d-fe99-422d-afa6-49dda2212ab8
+  - id: &se_torsby_region 7979
+    name: SE Torsby Region
+    uuid: 14f20176-db8a-4207-9ac0-f8b516541629
     type_id: 2
   - id: &se_sunne_region 9478
     name: SE Sunne Region
@@ -269,14 +893,6 @@ networks:
     name: SE Sundsvall Timra Region
     uuid: 16f671b5-d487-48d0-b792-ebec8821c904
     type_id: 2
-  - id: &se_harnosand_region 11116
-    name: SE Harnosand Region
-    uuid: cbbe4024-9621-48f1-a6d4-3f189aae27cf
-    type_id: 2
-  - id: &se_kramfors_region 11124
-    name: SE Kramfors Region
-    uuid: 0f9ce4c8-1200-414f-958f-9a7acfd5afeb
-    type_id: 2
   - id: &se_ullanger_region 11135
     name: SE Ullanger Region
     uuid: b1f43b7d-e1f1-45cc-a62f-87c4a0dcb873
@@ -285,9 +901,13 @@ networks:
     name: SE Solleftea Region
     uuid: 10a8bb97-e789-470e-aaf2-60ea4c97ac8c
     type_id: 2
-  - id: &se_junsele_region 12187
-    name: SE Junsele Region
-    uuid: 5e237c8f-9186-48e7-aa0b-551508ec2c1a
+  - id: &se_harnosand_region 11116
+    name: SE Harnosand Region
+    uuid: cbbe4024-9621-48f1-a6d4-3f189aae27cf
+    type_id: 2
+  - id: &se_kramfors_region 11124
+    name: SE Kramfors Region
+    uuid: 0f9ce4c8-1200-414f-958f-9a7acfd5afeb
     type_id: 2
   - id: &se_nasaker_region 12199
     name: SE Nasaker Region
@@ -301,21 +921,13 @@ networks:
     name: SE Backe Region
     uuid: 46d878f8-bf53-4e03-9ef1-7846839630a4
     type_id: 2
+  - id: &se_junsele_region 12187
+    name: SE Junsele Region
+    uuid: 5e237c8f-9186-48e7-aa0b-551508ec2c1a
+    type_id: 2
   - id: &se_ostersund_region 12469
     name: SE Ostersund Region
     uuid: 3e23464f-520c-46e2-9489-ed9fd56b13f5
-    type_id: 2
-  - id: &se_krokom_region 12744
-    name: SE Krokom Region
-    uuid: cfe64fc4-1a4f-4ba5-b9ff-1225d1bbbb88
-    type_id: 2
-  - id: &se_hudiksvall_region 12978
-    name: SE Hudiksvall Region
-    uuid: db854201-4d7b-463b-a19d-6e04d4b4adb3
-    type_id: 2
-  - id: &se_bjorna_region 13094
-    name: SE Bjorna Region
-    uuid: 538f2711-264b-49ed-9ca1-3f125c9c5c44
     type_id: 2
   - id: &se_lit_region 13327
     name: SE Lit Region
@@ -329,689 +941,37 @@ networks:
     name: SE Hammerdal Region
     uuid: a1682633-9a2e-4cf0-948c-3ae9b6fc104f
     type_id: 2
+  - id: &se_are_jarpen_region 13408
+    name: SE Are Jarpen Region
+    uuid: 66e4c23a-00b6-4567-b2be-bd666cacc09c
+    type_id: 2
+  - id: &se_krokom_region 12744
+    name: SE Krokom Region
+    uuid: cfe64fc4-1a4f-4ba5-b9ff-1225d1bbbb88
+    type_id: 2
   - id: &se_follinge_region 13389
     name: SE Follinge Region
     uuid: a3f9eaf0-74f1-47b7-93a2-41e962e42240
     type_id: 2
-  - id: &se_are_jarpen_region 13408
-    name: SE Are Jarpen Region
-    uuid: 66e4c23a-00b6-4567-b2be-bd666cacc09c
+  - id: &se_hudiksvall_region 12978
+    name: SE Hudiksvall Region
+    uuid: db854201-4d7b-463b-a19d-6e04d4b4adb3
     type_id: 2
   - id: &se_ljusdal_region 13506
     name: SE Ljusdal Region
     uuid: 35bd0ca8-d14a-403b-bdd9-28d85aac4d95
     type_id: 2
-  - id: &se_bergsjo_region 13519
-    name: SE Bergsjo Region
-    uuid: 38813019-4d96-40fa-ae57-29b5e0913a36
-    type_id: 2
-  - id: &se_delsbo_region 13539
-    name: SE Delsbo Region
-    uuid: 5c18f098-bff2-4174-83be-3f86ae144e9a
-    type_id: 2
   - id: &se_los_region 13568
     name: SE Los Region
     uuid: 422c7c5c-8557-4aec-b5ec-cb40cbaa0c8e
     type_id: 2
-  - id: &se_ornskoldsvik_region 13718
-    name: SE Ornskoldsvik Region
-    uuid: 04fa85c4-04fb-4e2c-877f-0abf64104a12
-    type_id: 2
-  - id: &se_bredbyn_region 13870
-    name: SE Bredbyn Region
-    uuid: 84ad8067-a5df-4caf-a7e3-075a18f4666e
-    type_id: 2
-  - id: &se_husum_region 13911
-    name: SE Husum Region
-    uuid: c07c9a2d-9464-49cf-8416-d34bff810034
-    type_id: 2
-  - id: &se_stromsund_region 13973
-    name: SE Stromsund Region
-    uuid: 2dc7e095-7dbb-4d65-9ce1-ea37fef7ddb5
-    type_id: 2
-  - id: &se_hoting_region 13991
-    name: SE Hoting Region
-    uuid: f382f72a-ae10-415f-a1da-956f077db211
-    type_id: 2
-  - id: &se_gaddede_region 13999
-    name: SE Gaddede Region
-    uuid: de68babb-385d-4ded-921b-9ea6520111c7
-    type_id: 2
-  - id: &se_svenstavik_region 14261
-    name: SE Svenstavik Region
-    uuid: a54a57f7-bc9d-4cca-a8c1-51986e7da308
-    type_id: 2
-  - id: &se_ange_region 14323
-    name: SE Ange Region
-    uuid: 421142f8-8a1c-4877-b62d-1db6ac1c2642
-    type_id: 2
-  - id: &se_torpshammar_region 14331
-    name: SE Torpshammar Region
-    uuid: cdafe871-56a7-4c1a-9246-d6e3674cb2e6
-    type_id: 2
-  - id: &se_liden_region 14340
-    name: SE Liden Region
-    uuid: c3e2f822-ade1-4429-bcb5-dba0ecc8a382
-    type_id: 2
-  - id: &se_bracke_gallo_region 14348
-    name: SE Bracke Gallo Region
-    uuid: 5611e33b-f052-49f7-b899-3daafb6dfcbb
-    type_id: 2
-  - id: &se_sveg_region 14547
-    name: SE Sveg Region
-    uuid: eb99275a-6f0d-4baf-a438-89f5178216be
-    type_id: 2
-  - id: &se_ratan_region 14740
-    name: SE Ratan Region
-    uuid: ac2c389e-b05a-4601-93c3-36b065f0cab3
-    type_id: 2
-  - id: &se_funasdalen_hede_region 14813
-    name: SE Funasdalen Hede Region
-    uuid: f6a35125-9b27-44e6-8c78-0ed02168b176
-    type_id: 2
-  - id: &se_stugun_region 14854
-    name: SE Stugun Region
-    uuid: d1221fa5-f22e-4f1c-ad68-9d568ad81ff5
-    type_id: 2
-  - id: &se_hammarstrand_region 14858
-    name: SE Hammarstrand Region
-    uuid: f65a6489-969b-488e-9c6f-1193b844bba4
-    type_id: 2
-  - id: &se_stockholm_region 19788
-    name: SE Stockholm Region
-    uuid: 06e987b1-d85d-4662-9499-e2f82726c19e
-    type_id: 2
-  - id: &se_vilhelmina_region 20049
-    name: SE Vilhelmina Region
-    uuid: 262ad158-82ff-42e5-9910-49df289c4231
-    type_id: 2
-  - id: &se_asele_region 20126
-    name: SE Asele Region
-    uuid: 57278bdf-af88-4539-a887-b9d1bcd7db59
-    type_id: 2
-  - id: &se_dorotea_region 20139
-    name: SE Dorotea Region
-    uuid: 0af7f76a-3e36-458d-ad45-0a3292b020e5
-    type_id: 2
-  - id: &se_fredrika_region 20160
-    name: SE Fredrika Region
-    uuid: 00b3d306-33ea-4b54-bed4-4c89c8883479
-    type_id: 2
-  - id: &se_lycksele_region 20338
-    name: SE Lycksele Region
-    uuid: b0f776ac-70b1-431b-b1c1-f9b1fb6d2e20
-    type_id: 2
-  - id: &se_storuman_region 20348
-    name: SE Storuman Region
-    uuid: 5bfdbc73-6cd5-4eee-a8ab-abb57c855fe0
-    type_id: 2
-  - id: &se_sorsele_region 20368
-    name: SE Sorsele Region
-    uuid: ec5f4d6c-8011-425f-aa49-34921eb20300
-    type_id: 2
-  - id: &se_mala_region 20388
-    name: SE Mala Region
-    uuid: e07e6193-0a15-4aa0-99b9-f2ed48346eef
-    type_id: 2
-  - id: &se_tarnaby_region 20400
-    name: SE Tarnaby Region
-    uuid: 90ec5a76-1f01-44f3-8c77-ee3f9cea0733
-    type_id: 2
-  - id: &se_arvidsjaur_region 20518
-    name: SE Arvidsjaur Region
-    uuid: 8e281330-c581-479e-9c19-d8709cabcd80
-    type_id: 2
-  - id: &se_arjeplog_region 20530
-    name: SE Arjeplog Region
-    uuid: 62bf8b62-a1a4-4921-b3fb-1f0a178623f7
-    type_id: 2
-  - id: &se_jokkmokk_region 20674
-    name: SE Jokkmokk Region
-    uuid: 4d554afc-055f-4adf-9812-40013977357c
-    type_id: 2
-  - id: &se_gallivare_region 20681
-    name: SE Gallivare Region
-    uuid: 3a4c6dd5-fdb8-4f12-ba68-c18866abfefc
-    type_id: 2
-  - id: &se_porjus_region 20707
-    name: SE Porjus Region
-    uuid: 6956289d-d2db-4a0c-8759-c4ca1e4e25f7
-    type_id: 2
-  - id: &se_kiruna_region 20804
-    name: SE Kiruna Region
-    uuid: 35781fcd-759f-4802-be47-76f488ccf102
-    type_id: 2
-  - id: &se_hakkas_region 20835
-    name: SE Hakkas Region
-    uuid: ef931631-9e52-422a-896d-1042f12392ae
-    type_id: 2
-  - id: &se_vuollerim_region 20838
-    name: SE Vuollerim Region
-    uuid: 83c066d5-5c72-40c4-a3c4-cbdfb1729ff0
-    type_id: 2
-  - id: &se_korpilombolo_region 20848
-    name: SE Korpilombolo Region
-    uuid: 118b3cd3-ea18-48b6-8d1b-b8bf22d956b2
-    type_id: 2
-  - id: &se_pajala_region 20860
-    name: SE Pajala Region
-    uuid: bdaa9b2a-bc7f-4aba-930a-2cfb46d8fe43
-    type_id: 2
-  - id: &se_vittangi_region 20896
-    name: SE Vittangi Region
-    uuid: e5fd2b3a-f24c-4f06-9e24-4ab39e334390
-    type_id: 2
-  - id: &se_norrkoping_region 24839
-    name: SE Norrkoping Region
-    uuid: 8fc409ce-3c87-45d5-8f53-66d8c933c960
-    type_id: 2
-  - id: &se_atvidaberg_region 24878
-    name: SE Atvidaberg Region
-    uuid: 37e981e6-a7a0-4c85-b77d-d372a7b055b5
-    type_id: 2
-  - id: &se_soderkoping_region 24892
-    name: SE Soderkoping Region
-    uuid: 7818ba3f-4d9e-432c-81e9-8f46fde4832f
-    type_id: 2
-  - id: &se_finspang_region 24895
-    name: SE Finspang Region
-    uuid: 88598778-be6f-444c-be05-54d073555d9b
-    type_id: 2
-  - id: &se_valdemarsvik_region 24905
-    name: SE Valdemarsvik Region
-    uuid: 2b13321e-5b88-4899-b780-bc061ac73441
-    type_id: 2
-  - id: &se_vikbolandet_region 24930
-    name: SE Vikbolandet Region
-    uuid: e39e4383-65a9-4af0-a6ae-5f7d71872b28
-    type_id: 2
-  - id: &se_linkoping_region 25032
-    name: SE Linkoping Region
-    uuid: 1173524d-1692-4193-aa1f-f310f9d4f54d
-    type_id: 2
-  - id: &se_tranas_region 25283
-    name: SE Tranas Region
-    uuid: 342b5b1d-c1e8-4d6f-95f0-290ae0338da8
-    type_id: 2
-  - id: &se_motala_region 25295
-    name: SE Motala Region
-    uuid: 79eca9ea-62ee-4d4e-b34c-878c960ab389
-    type_id: 2
-  - id: &se_boxholm_mjolby_skanninge_region 25297
-    name: SE Boxholm Mjolby Skanninge Region
-    uuid: 0f893244-14f4-43b1-9412-730f255ce06a
-    type_id: 2
-  - id: &se_vadstena_region 25328
-    name: SE Vadstena Region
-    uuid: 05da3f82-ca5d-40f0-ade4-a2321fbf485e
-    type_id: 2
-  - id: &se_odeshog_region 25368
-    name: SE Odeshog Region
-    uuid: 9dccff9b-d6a9-4015-a829-11c8713ad16b
-    type_id: 2
-  - id: &se_enkoping_region 25404
-    name: SE Enkoping Region
-    uuid: 10667592-4c35-4f3c-b42a-5b854e889493
-    type_id: 2
-  - id: &se_oregrund_osthammar_region 25425
-    name: SE Oregrund Osthammar Region
-    uuid: 9cdb1e72-3df6-40cc-b802-b8ec05f951c4
-    type_id: 2
-  - id: &se_alunda_region 25442
-    name: SE Alunda Region
-    uuid: cdd4e7b2-9666-4d58-9cfa-833ba39f8257
-    type_id: 2
-  - id: &se_hallstavik_rimbo_region 25460
-    name: SE Hallstavik Rimbo Region
-    uuid: 254ad4b1-9422-4b47-b266-66df188ab2ac
-    type_id: 2
-  - id: &se_norrtalje_region 25474
-    name: SE Norrtalje Region
-    uuid: be048d4d-2ce3-4b39-9273-b53f2ba2f7e8
-    type_id: 2
-  - id: &se_uppsala_region 25548
-    name: SE Uppsala Region
-    uuid: 48c28a22-77ae-49ce-b151-c9d11c030828
-    type_id: 2
-  - id: &se_kumla_orebro_region 25690
-    name: SE Kumla Orebro Region
-    uuid: a46190c5-1c57-4ef7-8bed-5b87808f09f7
-    type_id: 2
-  - id: &se_katrineholm_region 26305
-    name: SE Katrineholm Region
-    uuid: de2c6d3e-bca1-48ba-be01-67feb3474aee
-    type_id: 2
-  - id: &se_vingaker_region 26326
-    name: SE Vingaker Region
-    uuid: 1c89c3ac-d6a7-4d3a-a410-8594bc500fdf
-    type_id: 2
-  - id: &se_strangnas_region 26334
-    name: SE Strangnas Region
-    uuid: 93ab11a6-0c6e-4586-aff8-7279cfb24833
-    type_id: 2
-  - id: &se_nykoping_oxelosund_region 26400
-    name: SE Nykoping Oxelosund Region
-    uuid: 1df45d99-799c-4a7d-9181-3aec806caf00
-    type_id: 2
-  - id: &se_trosa_vagnharad_region 26412
-    name: SE Trosa Vagnharad Region
-    uuid: 36c22168-c23d-4870-ac53-6bb93b75fd3d
-    type_id: 2
-  - id: &se_flen_malmkoping_region 26442
-    name: SE Flen Malmkoping Region
-    uuid: d624f5c5-38dd-49e2-a636-bafa3f9e9636
-    type_id: 2
-  - id: &se_gnesta_region 26459
-    name: SE Gnesta Region
-    uuid: 662547f4-926b-45d0-869c-2ee7ce10e89d
-    type_id: 2
-  - id: &se_mariefred_region 26481
-    name: SE Mariefred Region
-    uuid: 26cac5b1-feae-48a9-b9a0-2bdb8d4eab81
-    type_id: 2
-  - id: &se_eskilstuna_torshalla_region 26515
-    name: SE Eskilstuna Torshalla Region
-    uuid: 73653c71-263c-47d2-be2a-b83a79b41aeb
-    type_id: 2
-  - id: &se_vasteras_region 27348
-    name: SE Vasteras Region
-    uuid: e7759e2b-1085-4818-b935-fd4e0eb0165e
-    type_id: 2
-  - id: &se_fagersta_norberg_region 27850
-    name: SE Fagersta Norberg Region
-    uuid: 37ee4549-526c-40c8-b381-6beb0532d571
-    type_id: 2
-  - id: &se_heby_sala_region 27893
-    name: SE Heby Sala Region
-    uuid: c4d13bfe-9626-4a75-96f6-3649751deec2
-    type_id: 2
-  - id: &se_kungsor_region 27957
-    name: SE Kungsor Region
-    uuid: b6e33e7a-0c65-4d7c-921c-5d35f3eceb85
-    type_id: 2
-  - id: &se_hallstahammar_surahammar_region 28068
-    name: SE Hallstahammar Surahammar Region
-    uuid: b77feb3b-5f7e-4503-a44e-a0f14c2ed3d6
-    type_id: 2
-  - id: &se_koping_region 28080
-    name: SE Koping Region
-    uuid: f8626450-ace2-4744-8e5c-b5f4c69751ae
-    type_id: 2
-  - id: &se_skinnskatteberg_region 28092
-    name: SE Skinnskatteberg Region
-    uuid: ab0ab37a-d280-4f66-ad16-b55e51543242
-    type_id: 2
-  - id: &se_hedemora_sater_region 28137
-    name: SE Hedemora Sater Region
-    uuid: 2c536184-534c-4393-8c46-93d2d105fcfa
-    type_id: 2
-  - id: &se_avesta_krylbo_region 28189
-    name: SE Avesta Krylbo Region
-    uuid: 76723189-68a2-4d3f-9f7e-b70b48081ef7
-    type_id: 2
-  - id: &se_falun_region 28310
-    name: SE Falun Region
-    uuid: 40ce9587-976f-4573-ba02-5078dbff3693
-    type_id: 2
-  - id: &se_floda_gagnef_region 28687
-    name: SE Floda Gagnef Region
-    uuid: 207e7dc9-80ed-45bb-95b4-cc98b00fc404
-    type_id: 2
-  - id: &se_enviken_svardsjo_region 28712
-    name: SE Enviken Svardsjo Region
-    uuid: f5c1252d-695d-4913-969b-249ec8581d9c
-    type_id: 2
-  - id: &se_insjon_leksand_region 28759
-    name: SE Insjon Leksand Region
-    uuid: 3703fd3f-f558-4ed6-9e9e-1f5cf50ec16f
-    type_id: 2
-  - id: &se_ludvika_smedjebacken_region 28993
-    name: SE Ludvika Smedjebacken Region
-    uuid: 8e207f68-5ce3-4e2d-9c5c-fc70d4195257
-    type_id: 2
-  - id: &se_borlange_region 29058
-    name: SE Borlange Region
-    uuid: 4129e816-6e2e-49f0-909b-e8fefcfeaae2
-    type_id: 2
-  - id: &se_rattvik_region 29127
-    name: SE Rattvik Region
-    uuid: 1b8aa2cc-31e2-4737-802b-c57f7790ce84
-    type_id: 2
-  - id: &se_mora_orsa_region 29149
-    name: SE Mora Orsa Region
-    uuid: 0c8fa27c-9794-4382-8f9d-f5c646c55a73
-    type_id: 2
-  - id: &se_alvdalen_region 29193
-    name: SE Alvdalen Region
-    uuid: 2c94512c-2719-42d8-91b8-c843483df3cc
-    type_id: 2
-  - id: &se_routing_voice_mail_voip_region 29322
-    name: SE Routing Voice Mail Voip Region
-    uuid: 3a7ca2f8-6587-41f0-834e-5b69e619818e
-    type_id: 2
-  - id: &se_furudal_region 29452
-    name: SE Furudal Region
-    uuid: e2df0a18-4299-4d7a-9393-b441c796e1ee
-    type_id: 2
-  - id: &se_gavle_sandviken_region 29520
-    name: SE Gavle Sandviken Region
-    uuid: 4c833c7b-2e0e-492e-ad63-8309e6f749f1
-    type_id: 2
-  - id: &se_soderhamn_region 29792
-    name: SE Soderhamn Region
-    uuid: e9014fb2-ab1d-4e98-b6fc-a9f81660eabc
-    type_id: 2
-  - id: &se_idre_sarna_region 29929
-    name: SE Idre Sarna Region
-    uuid: b1ae9fc6-35bc-49eb-97c5-bbf347c0c153
-    type_id: 2
-  - id: &se_routing_voice_mail_ip_centrex_region 29957
-    name: SE Routing Voice Mail Ip Centrex Region
-    uuid: 3808d771-9784-487c-9098-98b6ac56f1c7
-    type_id: 2
-  - id: &se_alfta_edsbyn_region 30226
-    name: SE Alfta Edsbyn Region
-    uuid: 3345dda0-92e7-428e-a2a8-d587f9ae10b0
-    type_id: 2
-  - id: &se_bollnas_region 30435
-    name: SE Bollnas Region
-    uuid: a7e17a3a-d32f-410a-b726-670c454c3f01
-    type_id: 2
-  - id: &se_hofors_storvik_region 30663
-    name: SE Hofors Storvik Region
-    uuid: 7c3e117d-2e1c-4842-b36b-e1d6e15a9772
-    type_id: 2
-  - id: &se_hedesunda_osterfarnebo_region 30689
-    name: SE Hedesunda Osterfarnebo Region
-    uuid: 498e08ff-7fb7-4977-a960-8f0c87d7d011
-    type_id: 2
-  - id: &se_ostervala_tarnsjo_region 30700
-    name: SE Ostervala Tarnsjo Region
-    uuid: 5ed3bdd2-73be-4f41-99bb-24740f6cbd21
-    type_id: 2
-  - id: &se_soderfors_tierp_region 30733
-    name: SE Soderfors Tierp Region
-    uuid: af931bf7-8b4b-4a3f-b2ed-3234b9d14e59
-    type_id: 2
-  - id: &se_karlholmsbruk_skarplinge_region 30767
-    name: SE Karlholmsbruk Skarplinge Region
-    uuid: d206498e-8483-4c8c-949e-2e1f10d38247
-    type_id: 2
-  - id: &se_orbyhus_dannemora_region 30791
-    name: SE Orbyhus Dannemora Region
-    uuid: 5bcc96fc-438e-433d-84c1-8b1adaf5a717
-    type_id: 2
-  - id: &se_kungsbacka_region 30895
-    name: SE Kungsbacka Region
-    uuid: 9759ca6a-e105-40a3-9cc3-1eadf241a005
-    type_id: 2
-  - id: &se_hindas_region 30899
-    name: SE Hindas Region
-    uuid: 9ea12e37-527e-4bef-b755-a2854a350cd9
-    type_id: 2
-  - id: &se_lerum_region 30930
-    name: SE Lerum Region
-    uuid: a99db6c8-27f7-435f-a425-b24b773bb7ce
-    type_id: 2
-  - id: &se_malung_region 31125
-    name: SE Malung Region
-    uuid: 0e35ac85-2d27-4208-ba1a-07c2cce775f8
-    type_id: 2
-  - id: &se_vansbro_region 31144
-    name: SE Vansbro Region
-    uuid: a8b1e7b7-223e-4251-9e6d-0447d270e180
-    type_id: 2
-  - id: &se_hamrange_ockelbo_region 31209
-    name: SE Hamrange Ockelbo Region
-    uuid: 89aa523e-dfb6-4aba-8528-608e3e613ae5
-    type_id: 2
-  - id: &se_kungalv_region 31409
-    name: SE Kungalv Region
-    uuid: 29799d0a-418f-4b55-9893-00fddc3f9dec
-    type_id: 2
-  - id: &se_orust_tjorn_region 31415
-    name: SE Orust Tjorn Region
-    uuid: de56c99b-dd13-4e35-8e00-1063e5a48dfe
-    type_id: 2
-  - id: &se_goteborg_region 31763
-    name: SE Goteborg Region
-    uuid: a7bd6b47-12ad-4d2e-9ab7-7b6288e2b28b
-    type_id: 2
-  - id: &se_kinna_region 31958
-    name: SE Kinna Region
-    uuid: 5b5d4b06-aaef-4342-9d3b-bf7ae1eca400
-    type_id: 2
-  - id: &se_ulricehamn_region 32046
-    name: SE Ulricehamn Region
-    uuid: 7a20a0ad-5685-4efe-bd9e-755ff9ebf03d
-    type_id: 2
-  - id: &se_svenljunga_tranemo_region 32077
-    name: SE Svenljunga Tranemo Region
-    uuid: 78fe9deb-be40-4fc8-867e-f9985a6b3f20
-    type_id: 2
-  - id: &se_alingsas_vargarda_region 32402
-    name: SE Alingsas Vargarda Region
-    uuid: bc87a0c4-3a4c-4717-9ab3-e947bd6a4e7f
-    type_id: 2
-  - id: &se_boras_region 32568
-    name: SE Boras Region
-    uuid: f05a4f1a-8ce5-45e6-83a3-68e3ad392268
-    type_id: 2
-  - id: &se_varberg_region 32916
-    name: SE Varberg Region
-    uuid: 768eb8ea-ad4e-4cda-9184-240a58981b41
-    type_id: 2
-  - id: &se_hyltebruk_torup_region 33153
-    name: SE Hyltebruk Torup Region
-    uuid: 60abd8d2-4af6-4028-944d-43bd96a16f31
-    type_id: 2
-  - id: &se_falkenberg_region 33216
-    name: SE Falkenberg Region
-    uuid: 81ee99b2-9bf0-46d9-87af-f514605f90bb
-    type_id: 2
-  - id: &se_huskvarna_jonkoping_region 33662
-    name: SE Huskvarna Jonkoping Region
-    uuid: 4da0c9f3-5fa7-4085-af6a-85e4dbd0090a
-    type_id: 2
-  - id: &se_machine_to_machine_m2m_services_region 33812
-    name: SE Machine To Machine M2M Services Region
-    uuid: 328934b9-4079-4145-b256-4cd887f05fb4
-    type_id: 2
-  - id: &se_malmo_region 34319
-    name: SE Malmo Region
-    uuid: f96b5c90-fd8a-403e-a45b-4aeb662a1d9c
-    type_id: 2
-  - id: &se_halmstad_region 34648
-    name: SE Halmstad Region
-    uuid: 9c46bb4c-ff8f-4a8f-b0ed-f18eb5ec9448
-    type_id: 2
-  - id: &se_varnamo_region 35256
-    name: SE Varnamo Region
-    uuid: 665790de-9ee7-4fdf-bd3b-c92848915469
-    type_id: 2
-  - id: &se_anderstorp_gislaved_region 35266
-    name: SE Anderstorp Gislaved Region
-    uuid: feaad147-d769-4e5a-9875-4c9b193ee94c
-    type_id: 2
-  - id: &se_ljungby_region 35281
-    name: SE Ljungby Region
-    uuid: ff476736-f93a-44db-bf0c-0711fdf413d2
-    type_id: 2
-  - id: &se_nassjo_region 35365
-    name: SE Nassjo Region
-    uuid: a06cc9ed-f0dc-4f41-84e8-90da5c9c919d
-    type_id: 2
-  - id: &se_eksjo_region 35385
-    name: SE Eksjo Region
-    uuid: 779d6362-4c62-4335-8660-e175c6dc61a6
-    type_id: 2
-  - id: &se_savsjo_region 35421
-    name: SE Savsjo Region
-    uuid: 795b4b0a-e7fa-41e5-90b3-c51f923eb30a
-    type_id: 2
-  - id: &se_vetlanda_region 35486
-    name: SE Vetlanda Region
-    uuid: 4a3282b1-f6c8-4ba8-9314-f3920e78b719
-    type_id: 2
-  - id: &se_granna_region 35699
-    name: SE Granna Region
-    uuid: 59a4cd89-7ebb-4e3e-b520-19ad6cb94d45
-    type_id: 2
-  - id: &se_mullsjo_region 35815
-    name: SE Mullsjo Region
-    uuid: 17f5a58a-06c4-43e4-a646-70703f50dd39
-    type_id: 2
-  - id: &se_vaggeryd_region 35868
-    name: SE Vaggeryd Region
-    uuid: a4607ede-cba1-46a3-9cc9-576d7d45c4c0
-    type_id: 2
-  - id: &se_trelleborg_region 36258
-    name: SE Trelleborg Region
-    uuid: 6b61df24-2e2d-4837-a863-1bc3b21fa9c9
-    type_id: 2
-  - id: &se_ystad_region 36281
-    name: SE Ystad Region
-    uuid: 1f0b6852-6a4d-43b8-8cdf-f01b2a492b17
-    type_id: 2
-  - id: &se_horby_region 36326
-    name: SE Horby Region
-    uuid: 17d57887-09bd-45dc-b8ea-3fa84a8a3475
-    type_id: 2
-  - id: &se_laholm_region 36623
-    name: SE Laholm Region
-    uuid: 4e0525d2-618b-4b94-8446-1d53316b4837
-    type_id: 2
-  - id: &se_angelholm_bastad_region 36716
-    name: SE Angelholm Bastad Region
-    uuid: 3d798c39-be13-4331-933b-8b6f7cb69812
-    type_id: 2
-  - id: &se_klippan_perstorp_region 36799
-    name: SE Klippan Perstorp Region
-    uuid: 9a67da27-2802-49d1-801c-93c947472155
-    type_id: 2
-  - id: &se_kristianstad_region 36862
-    name: SE Kristianstad Region
-    uuid: 0961740f-ce16-4708-873a-9240ad7644c3
-    type_id: 2
-  - id: &se_eslov_hoor_region 37002
-    name: SE Eslov Hoor Region
-    uuid: f1ce7853-2fbe-4e49-96c8-40bd1e2a5949
-    type_id: 2
-  - id: &se_simrishamn_region 37049
-    name: SE Simrishamn Region
-    uuid: 4ab2a0d6-4d11-4b7d-b454-9b0b2b63f56e
-    type_id: 2
-  - id: &se_sjobo_region 37065
-    name: SE Sjobo Region
-    uuid: 8dc360fa-00aa-4923-9694-fd7aacd990d4
-    type_id: 2
-  - id: &se_tomelilla_region 37101
-    name: SE Tomelilla Region
-    uuid: d165729f-7b80-4828-bb50-9c83605008d4
-    type_id: 2
-  - id: &se_landskrona_svalov_region 37197
-    name: SE Landskrona Svalov Region
-    uuid: 84fc3c20-a8f2-4122-a1b6-4cbded8845e6
-    type_id: 2
-  - id: &se_helsingborg_hoganas_region 37240
-    name: SE Helsingborg Hoganas Region
-    uuid: 70749845-3382-4f6b-8b49-6ba12e3186d6
-    type_id: 2
-  - id: &se_markaryd_stromsnasbruk_region 37497
-    name: SE Markaryd Stromsnasbruk Region
-    uuid: 64045d9f-4048-4f89-aaaf-9b64ec07f7b8
-    type_id: 2
-  - id: &se_hassleholm_region 37782
-    name: SE Hassleholm Region
-    uuid: 895e71c5-1d10-4f39-b42b-11a538c3071e
-    type_id: 2
-  - id: &se_ryd_region 37812
-    name: SE Ryd Region
-    uuid: 38f0fe75-8d8f-4279-a7c2-5ec656a9eb49
-    type_id: 2
-  - id: &se_lund_region 37843
-    name: SE Lund Region
-    uuid: d657e845-3fb0-42e6-aee0-f775c451d878
-    type_id: 2
-  - id: &se_karlshamn_olofstrom_region 37923
-    name: SE Karlshamn Olofstrom Region
-    uuid: c6c9250c-155c-45fe-a073-7ed9ca1de985
-    type_id: 2
-  - id: &se_karlskrona_region 37942
-    name: SE Karlskrona Region
-    uuid: cc67db33-bd82-4bfb-8690-200936c406b8
-    type_id: 2
-  - id: &se_bromolla_solvesborg_region 37963
-    name: SE Bromolla Solvesborg Region
-    uuid: c88ff6c8-a48b-40cb-90a3-66e583bfd057
-    type_id: 2
-  - id: &se_ronneby_region 37982
-    name: SE Ronneby Region
-    uuid: 694a303f-49aa-41bb-983f-b50fad03ebb1
-    type_id: 2
-  - id: &se_emmaboda_region 38091
-    name: SE Emmaboda Region
-    uuid: da84f8d8-ad74-4acb-8421-aaa73e2521c8
-    type_id: 2
-  - id: &se_alvesta_rydaholm_region 38132
-    name: SE Alvesta Rydaholm Region
-    uuid: b0ea82e4-bd28-4c05-9574-d3bd4aca669d
-    type_id: 2
-  - id: &se_aseda_lenhovda_region 38234
-    name: SE Aseda Lenhovda Region
-    uuid: 0508c2b1-6672-4060-aff9-925411e3612a
-    type_id: 2
-  - id: &se_tingsryd_region 38253
-    name: SE Tingsryd Region
-    uuid: e74857d0-b380-4589-9735-fd211d4a9203
-    type_id: 2
-  - id: &se_vaxjo_region 38322
-    name: SE Vaxjo Region
-    uuid: 67ba89b9-3b0f-4cf9-a47e-aafff17ddfab
-    type_id: 2
-  - id: &se_almhult_region 38396
-    name: SE Almhult Region
-    uuid: 3486f50a-cf92-4c34-b25f-c8e2fbce977b
-    type_id: 2
-  - id: &se_umea_region 42056
-    name: SE Umea Region
-    uuid: 9fe56172-c27f-49ff-9080-0ebe719b271c
-    type_id: 2
-  - id: &se_skelleftea_region 42435
-    name: SE Skelleftea Region
-    uuid: 763e4fe0-b1c8-4a5d-b752-4923a2e1dfc2
-    type_id: 2
-  - id: &se_burtrask_region 42497
-    name: SE Burtrask Region
-    uuid: c6356fbb-d42c-41b4-8629-8721b266c9b0
-    type_id: 2
-  - id: &se_pitea_region 42638
-    name: SE Pitea Region
-    uuid: 186decc0-940d-4219-8687-6b8731dd7126
-    type_id: 2
-  - id: &se_byske_region 42648
-    name: SE Byske Region
-    uuid: 29c31e24-a6db-4a65-bbdb-a2873308a5d2
-    type_id: 2
-  - id: &se_lovanger_region 42699
-    name: SE Lovanger Region
-    uuid: af10f4e3-c9c2-4b3c-8a0d-cc618609c898
-    type_id: 2
-  - id: &se_bastutrask_region 42711
-    name: SE Bastutrask Region
-    uuid: 38d99a97-6de1-4e5b-a8dc-21a18b0a2054
-    type_id: 2
-  - id: &se_jorn_region 42731
-    name: SE Jorn Region
-    uuid: 94ca0701-f47f-454b-9f91-8f724009dded
-    type_id: 2
-  - id: &se_norsjo_region 42743
-    name: SE Norsjo Region
-    uuid: 619f61b7-6339-4cef-9fb6-62929cb1b69c
-    type_id: 2
-  - id: &se_lulea_region 42825
-    name: SE Lulea Region
-    uuid: 428af5ef-8bba-47f0-ad40-c79e5b26978e
+  - id: &se_boden_region 42959
+    name: SE Boden Region
+    uuid: 6f44b119-ef31-477d-8758-e058321970b2
+    type_id: 2
+  - id: &se_haparanda_region 42963
+    name: SE Haparanda Region
+    uuid: 9358fc10-1264-42a9-89dd-c8da01589bbc
     type_id: 2
   - id: &se_ranea_region 42913
     name: SE Ranea Region
@@ -1025,29 +985,29 @@ networks:
     name: SE Overkalix Region
     uuid: d676e2d3-e9ff-47e2-a147-c559c57984bb
     type_id: 2
-  - id: &se_boden_region 42959
-    name: SE Boden Region
-    uuid: 6f44b119-ef31-477d-8758-e058321970b2
-    type_id: 2
-  - id: &se_haparanda_region 42963
-    name: SE Haparanda Region
-    uuid: 9358fc10-1264-42a9-89dd-c8da01589bbc
-    type_id: 2
   - id: &se_kalix_region 42974
     name: SE Kalix Region
     uuid: 757b8d0f-a217-4dbf-982f-fa9787a9afbd
     type_id: 2
-  - id: &se_alvsbyn_region 43015
-    name: SE Alvsbyn Region
-    uuid: 86a52378-f4ec-4e3a-923e-c267c79dfbf9
+  - id: &se_harads_region 43036
+    name: SE Harads Region
+    uuid: aacc6bf8-a84c-4d9f-a84f-512ae37d31ef
     type_id: 2
   - id: &se_overtornea_region 43023
     name: SE Overtornea Region
     uuid: 3ed14dd5-0ba8-4c38-80db-d510064fde66
     type_id: 2
-  - id: &se_harads_region 43036
-    name: SE Harads Region
-    uuid: aacc6bf8-a84c-4d9f-a84f-512ae37d31ef
+  - id: &se_alvsbyn_region 43015
+    name: SE Alvsbyn Region
+    uuid: 86a52378-f4ec-4e3a-923e-c267c79dfbf9
+    type_id: 2
+  - id: &se_bjurholm_region 43186
+    name: SE Bjurholm Region
+    uuid: 8f73ec1d-1c78-4a88-becd-cce909bb32df
+    type_id: 2
+  - id: &se_robertsfors_region 43123
+    name: SE Robertsfors Region
+    uuid: dd116412-98d5-4b38-9f5e-1b395d1c45b4
     type_id: 2
   - id: &se_nordmaling_region 43097
     name: SE Nordmaling Region
@@ -1057,27 +1017,63 @@ networks:
     name: SE Vindeln Region
     uuid: e5429872-9d9f-446b-a772-84ad82be619e
     type_id: 2
-  - id: &se_robertsfors_region 43123
-    name: SE Robertsfors Region
-    uuid: dd116412-98d5-4b38-9f5e-1b395d1c45b4
-    type_id: 2
-  - id: &se_bjurholm_region 43186
-    name: SE Bjurholm Region
-    uuid: 8f73ec1d-1c78-4a88-becd-cce909bb32df
-    type_id: 2
   - id: &se_vannas_region 43192
     name: SE Vannas Region
     uuid: c030e83a-4218-4535-bc5f-f40df37a1a7e
     type_id: 2
+  - id: &se_vilhelmina_region 20049
+    name: SE Vilhelmina Region
+    uuid: 262ad158-82ff-42e5-9910-49df289c4231
+    type_id: 2
+  - id: &se_asele_region 20126
+    name: SE Asele Region
+    uuid: 57278bdf-af88-4539-a887-b9d1bcd7db59
+    type_id: 2
+  - id: &se_lycksele_region 20338
+    name: SE Lycksele Region
+    uuid: b0f776ac-70b1-431b-b1c1-f9b1fb6d2e20
+    type_id: 2
+  - id: &se_storuman_region 20348
+    name: SE Storuman Region
+    uuid: 5bfdbc73-6cd5-4eee-a8ab-abb57c855fe0
+    type_id: 2
+  - id: &se_sorsele_region 20368
+    name: SE Sorsele Region
+    uuid: ec5f4d6c-8011-425f-aa49-34921eb20300
+    type_id: 2
+  - id: &se_dorotea_region 20139
+    name: SE Dorotea Region
+    uuid: 0af7f76a-3e36-458d-ad45-0a3292b020e5
+    type_id: 2
+  - id: &se_fredrika_region 20160
+    name: SE Fredrika Region
+    uuid: 00b3d306-33ea-4b54-bed4-4c89c8883479
+    type_id: 2
+  - id: &se_mala_region 20388
+    name: SE Mala Region
+    uuid: e07e6193-0a15-4aa0-99b9-f2ed48346eef
+    type_id: 2
+  - id: &se_tarnaby_region 20400
+    name: SE Tarnaby Region
+    uuid: 90ec5a76-1f01-44f3-8c77-ee3f9cea0733
+    type_id: 2
+  - id: &se_arjeplog_region 20530
+    name: SE Arjeplog Region
+    uuid: 62bf8b62-a1a4-4921-b3fb-1f0a178623f7
+    type_id: 2
+  - id: &se_arvidsjaur_region 20518
+    name: SE Arvidsjaur Region
+    uuid: 8e281330-c581-479e-9c19-d8709cabcd80
+    type_id: 2
+  - id: &se_jokkmokk_region 20674
+    name: SE Jokkmokk Region
+    uuid: 4d554afc-055f-4adf-9812-40013977357c
+    type_id: 2
+  - id: &se_gallivare_region 20681
+    name: SE Gallivare Region
+    uuid: 3a4c6dd5-fdb8-4f12-ba68-c18866abfefc
+    type_id: 2
 # Mobile Networks
-  - id: &se_telia_mobile 14094
-    name: SE Telia Mobile
-    uuid: 07dbd4bc-7c56-4bbb-a373-bd5d8918484c
-    type_id: 3
-  - id: &se_telenor_mobile 14109
-    name: SE Telenor Mobile
-    uuid: 03d1a494-4f9a-4b1d-9325-09d8e58eaf1f
-    type_id: 3
   - id: &se_3_mobile 14119
     name: SE 3 Mobile
     uuid: 94f9e567-eb05-4571-a2d0-1b8378b1a2ab
@@ -1089,6 +1085,14 @@ networks:
   - id: &se_gotanet_mobile 14165
     name: SE Gotanet Mobile
     uuid: fc6a0416-d6c3-47ad-b4d1-254cb3345401
+    type_id: 3
+  - id: &se_telia_mobile 14094
+    name: SE Telia Mobile
+    uuid: 07dbd4bc-7c56-4bbb-a373-bd5d8918484c
+    type_id: 3
+  - id: &se_telenor_mobile 14109
+    name: SE Telenor Mobile
+    uuid: 03d1a494-4f9a-4b1d-9325-09d8e58eaf1f
     type_id: 3
   - id: &se_mobile 14451
     name: SE Mobile
@@ -1174,26 +1178,6 @@ networks:
     name: SE Infracom Mobile
     uuid: e35aa368-b697-400e-95d9-3e9256a5119f
     type_id: 3
-  - id: &se_telenor_connexion_mobile 15346
-    name: SE Telenor Connexion Mobile
-    uuid: d5c29531-99b0-43df-b837-c260f4de4028
-    type_id: 3
-  - id: &se_maingate_mobile 15347
-    name: SE Maingate Mobile
-    uuid: 17f15c7c-144a-4c62-adbe-fde39e33b030
-    type_id: 3
-  - id: &se_com4_mobile 15348
-    name: SE Com4 Mobile
-    uuid: 13a0e6a6-b47d-4292-b3dd-00d8af502667
-    type_id: 3
-  - id: &se_dstny_mobile 15349
-    name: SE Dstny Mobile
-    uuid: 00b6c4af-d88a-4c5b-bf63-57ff475147d6
-    type_id: 3
-  - id: &se_telness_mobile 15350
-    name: SE Telness Mobile
-    uuid: 55a6bd8f-6eab-47a5-8808-0e5f29bfe841
-    type_id: 3
   - id: &se_bahnhof_mobile 16223
     name: SE Bahnhof Mobile
     uuid: 5a82bee1-e17f-4fd5-b197-a3ea24285d7d
@@ -1210,9 +1194,17 @@ networks:
     name: SE Fibio Mobile
     uuid: cc57dc33-01cc-4ebe-a5d2-e979a3d88817
     type_id: 3
+  - id: &se_telness_mobile 15350
+    name: SE Telness Mobile
+    uuid: 55a6bd8f-6eab-47a5-8808-0e5f29bfe841
+    type_id: 3
   - id: &se_verbal_mobile 16227
     name: SE Verbal Mobile
     uuid: c0097c94-0f86-4e85-8011-daa914ab0557
+    type_id: 3
+  - id: &se_dstny_mobile 15349
+    name: SE Dstny Mobile
+    uuid: 00b6c4af-d88a-4c5b-bf63-57ff475147d6
     type_id: 3
   - id: &se_fonia_mobile 16228
     name: SE Fonia Mobile
@@ -1262,9 +1254,33 @@ networks:
     name: SE Svea Internet Mobile
     uuid: eb43702b-c1b2-42cc-87bb-8291975e0fed
     type_id: 3
+  - id: &se_maingate_mobile 15347
+    name: SE Maingate Mobile
+    uuid: 17f15c7c-144a-4c62-adbe-fde39e33b030
+    type_id: 3
   - id: &se_svea_billing_services_mobile 16252
     name: SE Svea Billing Services Mobile
     uuid: 8f850fcf-c8d0-4644-8bf1-2a2d35eee9cc
+    type_id: 3
+  - id: &se_telenor_connexion_mobile 15346
+    name: SE Telenor Connexion Mobile
+    uuid: d5c29531-99b0-43df-b837-c260f4de4028
+    type_id: 3
+  - id: &se_com4_mobile 15348
+    name: SE Com4 Mobile
+    uuid: 13a0e6a6-b47d-4292-b3dd-00d8af502667
+    type_id: 3
+  - id: &se_bsg_mobile 16518
+    name: SE Bsg Mobile
+    uuid: c623ad23-a69a-4f7d-a99a-dcf345ebca1f
+    type_id: 3
+  - id: &se_messit_minicall_mobile 16890
+    name: SE Messit Minicall Mobile
+    uuid: 5b3a594a-f0ee-466f-8b24-d6fa416a5a8f
+    type_id: 3
+  - id: &se_wifog_mobile 16545
+    name: SE Wifog Mobile
+    uuid: 1f49c067-7995-412a-b68d-cbbc8cb545c7
     type_id: 3
   - id: &se_net_at_once_mobile 16515
     name: SE Net At Once Mobile
@@ -1277,10 +1293,6 @@ networks:
   - id: &se_xplora_mobile_mobile 16517
     name: SE Xplora Mobile Mobile
     uuid: 88c8b1c5-d606-4882-bcd2-a74fd72a3675
-    type_id: 3
-  - id: &se_bsg_mobile 16518
-    name: SE Bsg Mobile
-    uuid: c623ad23-a69a-4f7d-a99a-dcf345ebca1f
     type_id: 3
   - id: &se_netmore_mobile 16519
     name: SE Netmore Mobile
@@ -1326,10 +1338,6 @@ networks:
     name: SE Albatross Mobile
     uuid: afdce6a8-16d5-47e8-94b3-4e6d31ddec19
     type_id: 3
-  - id: &se_wifog_mobile 16545
-    name: SE Wifog Mobile
-    uuid: 1f49c067-7995-412a-b68d-cbbc8cb545c7
-    type_id: 3
   - id: &se_fink_telecom_mobile 16554
     name: SE Fink Telecom Mobile
     uuid: cb890c73-c53e-482a-8380-0317d7953174
@@ -1369,10 +1377,6 @@ networks:
   - id: &se_puzzel_mobile 16565
     name: SE Puzzel Mobile
     uuid: 2a159b66-bdf1-41e8-ae32-0c31f6b6db1f
-    type_id: 3
-  - id: &se_messit_minicall_mobile 16890
-    name: SE Messit Minicall Mobile
-    uuid: 5b3a594a-f0ee-466f-8b24-d6fa416a5a8f
     type_id: 3
   - id: &se_infobip_mobile 17164
     name: SE Infobip Mobile
@@ -1443,13 +1447,9 @@ networks:
     name: SE Network Operator Services
     uuid: 040e8fae-bdf5-4789-bd85-27180044c643
     type_id: 13
-  - id: &se_entertainment_services 20178
-    name: SE Entertainment Services
-    uuid: 159ac5dc-58b0-4a1e-a562-fde8a17bcff4
-    type_id: 13
-  - id: &se_premium_rate_services_non_information_services 20333
-    name: SE Premium Rate Services Non Information Services
-    uuid: 0364f2d0-4c44-4489-860b-efa4ef35f57b
+  - id: &se_premium_rate_services_information_services 42076
+    name: SE Premium Rate Services Information Services
+    uuid: 1a9d250d-fed6-420b-8f44-a2abafca1588
     type_id: 13
   - id: &se_mass_call_services 21172
     name: SE Mass Call Services
@@ -1467,21 +1467,1131 @@ networks:
     name: SE Freephone Services
     uuid: edd4c904-f12e-4bf7-9255-fbd12b6f060d
     type_id: 13
-  - id: &se_premium_rate_services_information_services 42076
-    name: SE Premium Rate Services Information Services
-    uuid: 1a9d250d-fed6-420b-8f44-a2abafca1588
+  - id: &se_premium_rate_services_non_information_services 20333
+    name: SE Premium Rate Services Non Information Services
+    uuid: 0364f2d0-4c44-4489-860b-efa4ef35f57b
+    type_id: 13
+  - id: &se_entertainment_services 20178
+    name: SE Entertainment Services
+    uuid: 159ac5dc-58b0-4a1e-a562-fde8a17bcff4
     type_id: 13
 # Paging Networks
-  - id: &se_paging 17635
-    name: SE Paging
-    uuid: 66d1cf93-5aef-41e8-b015-92736a76c9f7
-    type_id: 12
   - id: &se_messit_minicall_paging 17639
     name: SE Messit Minicall Paging
     uuid: 977484b0-3a86-4304-9548-24d9e269232b
     type_id: 12
+  - id: &se_paging 17635
+    name: SE Paging
+    uuid: 66d1cf93-5aef-41e8-b015-92736a76c9f7
+    type_id: 12
 network_prefixes:
 # Fixed Prefixes
+  - id: 128929
+    prefix: '46662'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 800ca474-54ca-48bb-b1df-9a4bdec2d189
+    country_id: *se
+    network_id: *se_bjorna_region
+  - id: 137194
+    prefix: '46652'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 23ce187e-ee3d-49e3-ac7b-d9ec1da04962
+    country_id: *se
+    network_id: *se_bergsjo_region
+  - id: 137261
+    prefix: '46653'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4302ca1e-96f3-4247-bd11-0e952c8ee775
+    country_id: *se
+    network_id: *se_delsbo_region
+  - id: 138944
+    prefix: '46660'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d3a001c6-4093-41c2-bbd9-7c18e0e3695f
+    country_id: *se
+    network_id: *se_ornskoldsvik_region
+  - id: 139459
+    prefix: '46661'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 04f08991-1b7e-4452-91b5-3b4228aff1bb
+    country_id: *se
+    network_id: *se_bredbyn_region
+  - id: 139901
+    prefix: '46663'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 87e190a3-db53-4c0d-96c5-fd5fe35bc01c
+    country_id: *se
+    network_id: *se_husum_region
+  - id: 143788
+    prefix: '46670'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f6f8c14a-3ffa-476f-8634-2aac665d907b
+    country_id: *se
+    network_id: *se_stromsund_region
+  - id: 143869
+    prefix: '46671'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e328beed-3835-430d-947c-e22b7ae60b22
+    country_id: *se
+    network_id: *se_hoting_region
+  - id: 144069
+    prefix: '46672'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 509db0de-a5b1-4eb4-9ba2-637fbd2d7d41
+    country_id: *se
+    network_id: *se_gaddede_region
+  - id: 147968
+    prefix: '46687'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 3b8a49dd-ec3a-4108-87b2-011dc4cc341d
+    country_id: *se
+    network_id: *se_svenstavik_region
+  - id: 153532
+    prefix: '46696'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f3ec065c-de5a-4067-a7a0-8191c1bb2631
+    country_id: *se
+    network_id: *se_hammarstrand_region
+  - id: 151601
+    prefix: '46680'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 7823336d-2baa-4c20-9584-d69d0ae00528
+    country_id: *se
+    network_id: *se_sveg_region
+  - id: 152251
+    prefix: '46682'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 298d6b53-6201-4af4-a9ee-01e1ff63274d
+    country_id: *se
+    network_id: *se_ratan_region
+  - id: 152696
+    prefix: '46684'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: ad546875-df4e-4998-a577-3f8f3625b6b3
+    country_id: *se
+    network_id: *se_funasdalen_hede_region
+  - id: 148823
+    prefix: '46690'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e80e1ffe-fac4-48ac-9970-d71dc24977eb
+    country_id: *se
+    network_id: *se_ange_region
+  - id: 148886
+    prefix: '46691'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 1e07bcf3-922e-492b-92b7-695df9bef86e
+    country_id: *se
+    network_id: *se_torpshammar_region
+  - id: 149041
+    prefix: '46692'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 15037890-9270-4088-ae93-c3fec748a8f5
+    country_id: *se
+    network_id: *se_liden_region
+  - id: 149053
+    prefix: '46693'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6ce64dc1-87b1-4a24-81a1-12d67c9390b4
+    country_id: *se
+    network_id: *se_bracke_gallo_region
+  - id: 153115
+    prefix: '46695'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d372acea-f501-4f19-be4a-443aa61c497f
+    country_id: *se
+    network_id: *se_stugun_region
+  - id: 207518
+    prefix: '468'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 1ba8149a-6e27-4f8e-b63b-98a4b92c74b1
+    country_id: *se
+    network_id: *se_stockholm_region
+  - id: 454113
+    prefix: '4690'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 82f432c7-c9f6-4c8a-8086-0c2849c47ab0
+    country_id: *se
+    network_id: *se_umea_region
+  - id: 458519
+    prefix: '46910'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 90481be6-4b55-48f1-980d-3db8aa0d0c40
+    country_id: *se
+    network_id: *se_skelleftea_region
+  - id: 465643
+    prefix: '46912'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 7ecb7132-b2b5-4dc5-bed6-78ed271452f3
+    country_id: *se
+    network_id: *se_byske_region
+  - id: 460340
+    prefix: '46914'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 55d7de22-b877-448f-8e5a-614ef38380fc
+    country_id: *se
+    network_id: *se_burtrask_region
+  - id: 465124
+    prefix: '46911'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6361d87b-a4a2-4d2f-adda-198b76cbb632
+    country_id: *se
+    network_id: *se_pitea_region
+  - id: 466317
+    prefix: '46913'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6e63ddde-6a60-4228-867a-b1bb1bfebe3e
+    country_id: *se
+    network_id: *se_lovanger_region
+  - id: 466840
+    prefix: '46915'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 80b9b1d1-3cac-4118-9535-60fbcd14bf4c
+    country_id: *se
+    network_id: *se_bastutrask_region
+  - id: 467207
+    prefix: '46916'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 7df4ba1d-6e7f-427a-8b21-d23fcefd07f9
+    country_id: *se
+    network_id: *se_jorn_region
+  - id: 470618
+    prefix: '46920'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 276281b1-8be0-4e03-ac93-898258f02feb
+    country_id: *se
+    network_id: *se_lulea_region
+  - id: 467623
+    prefix: '46918'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 9fdeb491-2916-471d-b70a-29e53c67a7b4
+    country_id: *se
+    network_id: *se_norsjo_region
+  - id: 230514
+    prefix: '46973'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 14779fe8-f657-405f-9bcd-573f64e5b92e
+    country_id: *se
+    network_id: *se_porjus_region
+  - id: 232322
+    prefix: '46980'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 7217143f-f50f-480f-a3de-e952b5f7b0db
+    country_id: *se
+    network_id: *se_kiruna_region
+  - id: 235048
+    prefix: '46981'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 9c3ea4dd-ef10-437e-a1ea-32b7e9e0e02b
+    country_id: *se
+    network_id: *se_vittangi_region
+  - id: 233336
+    prefix: '46975'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 789b26c9-a9a2-4598-94f3-e221d48a1db4
+    country_id: *se
+    network_id: *se_hakkas_region
+  - id: 233346
+    prefix: '46976'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cc1912cc-6260-47c5-822e-e9068cd1307c
+    country_id: *se
+    network_id: *se_vuollerim_region
+  - id: 233359
+    prefix: '46977'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 44bca00a-846d-42bd-a3e0-63854d7c3703
+    country_id: *se
+    network_id: *se_korpilombolo_region
+  - id: 233380
+    prefix: '46978'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4e41a69d-1136-4c29-867f-c3e33c3159a8
+    country_id: *se
+    network_id: *se_pajala_region
+  - id: 242109
+    prefix: '46'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: b4d686ce-17e7-4f65-94ae-d0eb6fe83800
+    country_id: *se
+    network_id: *se_fixed
+  - id: 258820
+    prefix: '4611'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 0f7855ea-74fb-4cb3-86cd-b4b8933f8f80
+    country_id: *se
+    network_id: *se_norrkoping_region
+  - id: 259333
+    prefix: '46120'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4334daaf-2fd4-4a65-9b02-ce9ac5b928d0
+    country_id: *se
+    network_id: *se_atvidaberg_region
+  - id: 259347
+    prefix: '46121'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4576e178-d345-48d0-b4f1-13f545bd0a09
+    country_id: *se
+    network_id: *se_soderkoping_region
+  - id: 259351
+    prefix: '46122'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 190fcf3b-a2e3-4648-8b24-ca20469647b8
+    country_id: *se
+    network_id: *se_finspang_region
+  - id: 259363
+    prefix: '46123'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 49897220-f71f-423f-80b7-21e3d5fcf629
+    country_id: *se
+    network_id: *se_valdemarsvik_region
+  - id: 259403
+    prefix: '46125'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e268f10f-749a-49d3-9b70-8a82bc4f5b0a
+    country_id: *se
+    network_id: *se_vikbolandet_region
+  - id: 259513
+    prefix: '4613'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 6597adbe-738d-411d-a4ea-f441ec168c65
+    country_id: *se
+    network_id: *se_linkoping_region
+  - id: 260088
+    prefix: '46140'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 2c9279a5-b9fa-4412-ad67-4aa42668bc50
+    country_id: *se
+    network_id: *se_tranas_region
+  - id: 260100
+    prefix: '46141'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e3e1d28e-c2f0-442c-a27b-11d44b19f15a
+    country_id: *se
+    network_id: *se_motala_region
+  - id: 260104
+    prefix: '46142'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 69e42a10-ce11-4bc0-99d2-e552a67eac88
+    country_id: *se
+    network_id: *se_boxholm_mjolby_skanninge_region
+  - id: 260142
+    prefix: '46143'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4699fa87-a673-4874-8138-4e56f68a0cb1
+    country_id: *se
+    network_id: *se_vadstena_region
+  - id: 260195
+    prefix: '46144'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 38fee16d-6e9d-4cd3-b407-c3a656e80997
+    country_id: *se
+    network_id: *se_odeshog_region
+  - id: 266196
+    prefix: '46150'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6322f16d-f962-44ec-adef-f23015fbc4a9
+    country_id: *se
+    network_id: *se_katrineholm_region
+  - id: 266223
+    prefix: '46151'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cb452933-add2-4b82-be51-ae670618f979
+    country_id: *se
+    network_id: *se_vingaker_region
+  - id: 266244
+    prefix: '46152'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 5c07f12f-ebfd-4c23-94fd-70aeeabe5bea
+    country_id: *se
+    network_id: *se_strangnas_region
+  - id: 266367
+    prefix: '46155'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8b0dbdf9-5389-4610-abb1-3ee5dab38ffb
+    country_id: *se
+    network_id: *se_nykoping_oxelosund_region
+  - id: 266383
+    prefix: '46156'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 41f5fd00-7b05-428d-b6f4-48c0ae873e6d
+    country_id: *se
+    network_id: *se_trosa_vagnharad_region
+  - id: 266439
+    prefix: '46157'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fe989996-9226-4884-9dce-dd629b0eb9d7
+    country_id: *se
+    network_id: *se_flen_malmkoping_region
+  - id: 266458
+    prefix: '46158'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 56a262a8-5122-43c2-8442-5224afc74359
+    country_id: *se
+    network_id: *se_gnesta_region
+  - id: 266500
+    prefix: '46159'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a32cc691-3b75-465d-9a4b-27a32f110473
+    country_id: *se
+    network_id: *se_mariefred_region
+  - id: 266562
+    prefix: '4616'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 122d7b28-ac3b-4e12-abf6-f2068d885c9a
+    country_id: *se
+    network_id: *se_eskilstuna_torshalla_region
+  - id: 260331
+    prefix: '46171'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b9554baf-0973-4928-b001-240238761dea
+    country_id: *se
+    network_id: *se_enkoping_region
+  - id: 260353
+    prefix: '46173'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4b7a7d8d-45bd-47f4-a4ab-5f882b399937
+    country_id: *se
+    network_id: *se_oregrund_osthammar_region
+  - id: 260376
+    prefix: '46174'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f27bc1b2-a457-44e7-af48-e93bc7d8a054
+    country_id: *se
+    network_id: *se_alunda_region
+  - id: 260409
+    prefix: '46175'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: eeb5b3c0-6ad1-4c19-8474-8bf1265d94e7
+    country_id: *se
+    network_id: *se_hallstavik_rimbo_region
+  - id: 260428
+    prefix: '46176'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e8e338c9-218f-4b1d-80d7-2a07b283c69a
+    country_id: *se
+    network_id: *se_norrtalje_region
+  - id: 260510
+    prefix: '4618'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: af8318d6-5ed5-47cf-a3d5-1012bdbc57c5
+    country_id: *se
+    network_id: *se_uppsala_region
+  - id: 260832
+    prefix: '4619'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fdc173ab-0ed0-400b-84f1-8a208947594f
+    country_id: *se
+    network_id: *se_kumla_orebro_region
+  - id: 274244
+    prefix: '4621'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 28898e32-cddb-4aef-a72f-17b3966dead2
+    country_id: *se
+    network_id: *se_vasteras_region
+  - id: 283777
+    prefix: '46222'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 91f042ff-6af1-4efd-9edd-20a1035db0b7
+    country_id: *se
+    network_id: *se_skinnskatteberg_region
+  - id: 282995
+    prefix: '46220'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b8a6f86e-d6ae-4608-8e40-702d77047d2c
+    country_id: *se
+    network_id: *se_hallstahammar_surahammar_region
+  - id: 283234
+    prefix: '46221'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d1c463ed-160a-498e-8f96-888eeffdf31b
+    country_id: *se
+    network_id: *se_koping_region
+  - id: 278993
+    prefix: '46223'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a829f462-7900-4a52-abbb-5303a7654559
+    country_id: *se
+    network_id: *se_fagersta_norberg_region
+  - id: 279494
+    prefix: '46224'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 212c325a-d559-4220-baf5-4ed6bc878a7a
+    country_id: *se
+    network_id: *se_heby_sala_region
+  - id: 281107
+    prefix: '46227'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 99a7bf4c-5aaf-4f87-8587-941fa199d75c
+    country_id: *se
+    network_id: *se_kungsor_region
+  - id: 286641
+    prefix: '4623'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 888cc17b-7cd1-4a5b-80d0-cce41f15a53f
+    country_id: *se
+    network_id: *se_falun_region
+  - id: 283949
+    prefix: '46225'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6a9f9550-8330-4a24-9282-2c4acf685517
+    country_id: *se
+    network_id: *se_hedemora_sater_region
+  - id: 284700
+    prefix: '46226'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 30c6cd3e-3918-4494-9b32-66975676d245
+    country_id: *se
+    network_id: *se_avesta_krylbo_region
+  - id: 294490
+    prefix: '46240'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6575dce7-b159-4c8b-ae61-623b6147a4bb
+    country_id: *se
+    network_id: *se_ludvika_smedjebacken_region
+  - id: 289571
+    prefix: '46241'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: dc6a1e58-2ddf-4adf-8b6c-a24b3cf77f2f
+    country_id: *se
+    network_id: *se_floda_gagnef_region
+  - id: 294882
+    prefix: '46243'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 25bc9a20-a467-4b3f-86cd-d036e3e1e95d
+    country_id: *se
+    network_id: *se_borlange_region
+  - id: 290919
+    prefix: '46247'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8d1649e2-4cd8-44a3-965e-e1a2ece6aedd
+    country_id: *se
+    network_id: *se_insjon_leksand_region
+  - id: 295946
+    prefix: '46248'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cb805005-8719-4054-a631-9d58cfd981cc
+    country_id: *se
+    network_id: *se_rattvik_region
+  - id: 290178
+    prefix: '46246'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8fbc2c31-5deb-449c-b2e3-651e209acfd6
+    country_id: *se
+    network_id: *se_enviken_svardsjo_region
+  - id: 302698
+    prefix: '46253'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 05fa34cf-97cf-4dc6-95a0-63800b42e1e6
+    country_id: *se
+    network_id: *se_idre_sarna_region
+  - id: 306710
+    prefix: '46278'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 9f0d65c0-26f7-4bdc-aee3-c561d5e7f60b
+    country_id: *se
+    network_id: *se_bollnas_region
+  - id: 313540
+    prefix: '46280'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 2a33f97c-6890-4132-8bb1-63170172bb45
+    country_id: *se
+    network_id: *se_malung_region
+  - id: 313559
+    prefix: '46281'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d8a8ff97-8669-4f02-b743-04db0c681514
+    country_id: *se
+    network_id: *se_vansbro_region
+  - id: 308517
+    prefix: '46290'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: bbefc827-fd6d-4529-9d4d-72514ab70f23
+    country_id: *se
+    network_id: *se_hofors_storvik_region
+  - id: 308547
+    prefix: '46291'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fbf33e0c-d9ef-42a9-bddb-81bb01b3d150
+    country_id: *se
+    network_id: *se_hedesunda_osterfarnebo_region
+  - id: 308560
+    prefix: '46292'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 95fb1e62-4024-4492-a74c-97bc3c5969a6
+    country_id: *se
+    network_id: *se_ostervala_tarnsjo_region
+  - id: 308604
+    prefix: '46293'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 59bfaac9-47a8-4d3f-812b-1f0f69fdd1f4
+    country_id: *se
+    network_id: *se_soderfors_tierp_region
+  - id: 308648
+    prefix: '46294'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a48655c8-f9c2-4ac0-9eb6-8c0134280dd6
+    country_id: *se
+    network_id: *se_karlholmsbruk_skarplinge_region
+  - id: 310429
+    prefix: '46302'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 63745ceb-770c-4651-8fe1-0da7f0ce0000
+    country_id: *se
+    network_id: *se_lerum_region
+  - id: 317567
+    prefix: '46303'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: ae0b0ef5-363a-4bbf-ac99-c5570b195d82
+    country_id: *se
+    network_id: *se_kungalv_region
+  - id: 296843
+    prefix: '46250'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 0f685732-f835-4d00-8f70-70fd3f2134cb
+    country_id: *se
+    network_id: *se_mora_orsa_region
+  - id: 297633
+    prefix: '46251'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6617e635-3ff3-4860-9c4b-d48c3306e5fb
+    country_id: *se
+    network_id: *se_alvdalen_region
+  - id: 303235
+    prefix: '46254'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 1e3125ba-73ed-4586-92f4-c6e4dbbe3796
+    country_id: *se
+    network_id: *se_routing_voice_mail_ip_centrex_region
+  - id: 298798
+    prefix: '46255'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: d2339213-6f69-4003-b51e-e1b9154dae64
+    country_id: *se
+    network_id: *se_routing_voice_mail_voip_region
+  - id: 299702
+    prefix: '46258'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 83f28ad7-b6bf-439d-bd6a-4fa3df7d97a5
+    country_id: *se
+    network_id: *se_furudal_region
+  - id: 299807
+    prefix: '4626'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 49baea76-02b2-4711-a48e-7bf6d1c4081b
+    country_id: *se
+    network_id: *se_gavle_sandviken_region
+  - id: 301620
+    prefix: '46270'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 0386fb0e-ec99-4bdd-afec-5975e185f8cf
+    country_id: *se
+    network_id: *se_soderhamn_region
+  - id: 305219
+    prefix: '46271'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 39814767-c984-4591-867a-42facd08c666
+    country_id: *se
+    network_id: *se_alfta_edsbyn_region
+  - id: 309094
+    prefix: '46295'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8811c003-b02c-414a-b5f1-61a2d7e2e028
+    country_id: *se
+    network_id: *se_orbyhus_dannemora_region
+  - id: 315552
+    prefix: '46297'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 52b0f4c4-28ea-4266-bd20-5c44b566cd69
+    country_id: *se
+    network_id: *se_hamrange_ockelbo_region
+  - id: 309575
+    prefix: '46300'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 441fd378-a39a-4dde-8943-01c99c1ef66b
+    country_id: *se
+    network_id: *se_kungsbacka_region
+  - id: 309602
+    prefix: '46301'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 49a1a4a6-c570-4318-8ffb-52e7736d4489
+    country_id: *se
+    network_id: *se_hindas_region
+  - id: 318250
+    prefix: '46304'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 2461924b-6493-440e-9b5c-c88810f1e57a
+    country_id: *se
+    network_id: *se_orust_tjorn_region
+  - id: 321184
+    prefix: '4631'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 35146e48-c3d2-43ec-a132-d446b998086c
+    country_id: *se
+    network_id: *se_goteborg_region
+  - id: 327970
+    prefix: '46321'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: c686da63-b1a6-4d0f-9be9-756ba4385a6c
+    country_id: *se
+    network_id: *se_ulricehamn_region
+  - id: 335403
+    prefix: '46322'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e2011fdc-5dd7-48a3-bf34-495f26a41c91
+    country_id: *se
+    network_id: *se_alingsas_vargarda_region
+  - id: 329243
+    prefix: '46325'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cd448bdc-1d6e-400b-a1eb-604c00643dab
+    country_id: *se
+    network_id: *se_svenljunga_tranemo_region
+  - id: 327440
+    prefix: '46320'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 49330ffc-abfd-42a8-8e0f-47f51e721fe6
+    country_id: *se
+    network_id: *se_kinna_region
+  - id: 337296
+    prefix: '4633'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: b4f54141-adc3-4fdf-a4f7-da1a66b2a93e
+    country_id: *se
+    network_id: *se_boras_region
+  - id: 342384
+    prefix: '46345'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4fe0c649-90f2-41f4-98c2-92f3145e2b1b
+    country_id: *se
+    network_id: *se_hyltebruk_torup_region
+  - id: 342560
+    prefix: '46346'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 284368f6-0a54-4477-ac52-3c5e26cba28b
+    country_id: *se
+    network_id: *se_falkenberg_region
+  - id: 340692
+    prefix: '46340'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4f03be94-aef5-42d4-a90b-9b2e984871da
+    country_id: *se
+    network_id: *se_varberg_region
+  - id: 352247
+    prefix: '4635'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: e0df70cf-06d9-4618-a246-4636ab566bd4
+    country_id: *se
+    network_id: *se_halmstad_region
+  - id: 347287
+    prefix: '4637810'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 03472d3f-1e98-4fd0-a796-e496f9ab331f
+    country_id: *se
+    network_id: *se_machine_to_machine_m2m_services_region
+  - id: 347320
+    prefix: '4637811'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7e41d725-2eb1-4d21-9913-c557e3e11292
+    country_id: *se
+    network_id: *se_machine_to_machine_m2m_services_region
+  - id: 356528
+    prefix: '46380'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 5367ad02-b5fe-4d5e-ab6e-a136e2e503d7
+    country_id: *se
+    network_id: *se_nassjo_region
+  - id: 356662
+    prefix: '46381'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a48fc927-84b6-4ebd-8dd0-aef098578521
+    country_id: *se
+    network_id: *se_eksjo_region
+  - id: 356721
+    prefix: '46382'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cc47954d-cca7-4b3d-ae52-b18f5476d59b
+    country_id: *se
+    network_id: *se_savsjo_region
+  - id: 357551
+    prefix: '46390'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 9a2a5d45-0e29-4413-9af6-d356c867b14c
+    country_id: *se
+    network_id: *se_granna_region
+  - id: 357879
+    prefix: '46392'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 072bdaf9-254b-467c-9ded-388a45f683e4
+    country_id: *se
+    network_id: *se_mullsjo_region
+  - id: 349898
+    prefix: '4640'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 64b6f489-2956-495d-bd99-95b23dd57caf
+    country_id: *se
+    network_id: *se_malmo_region
+  - id: 345951
+    prefix: '4636'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 5098dc01-8ec6-4ae6-a5b2-baa0b9f1175d
+    country_id: *se
+    network_id: *se_huskvarna_jonkoping_region
+  - id: 355975
+    prefix: '46370'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 407262a6-a42d-4838-a4e2-0cfe505c325c
+    country_id: *se
+    network_id: *se_varnamo_region
+  - id: 356097
+    prefix: '46371'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4e200b68-6379-4820-a148-d251778b36ad
+    country_id: *se
+    network_id: *se_anderstorp_gislaved_region
+  - id: 356158
+    prefix: '46372'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e4106946-cce3-4c86-a8b0-c4d30ad7ffb8
+    country_id: *se
+    network_id: *se_ljungby_region
+  - id: 356849
+    prefix: '46383'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fb493d64-2577-403f-a216-f47f014c2cb2
+    country_id: *se
+    network_id: *se_vetlanda_region
+  - id: 358280
+    prefix: '46393'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 0a84e06b-1f22-426e-8334-722f1c83c1c1
+    country_id: *se
+    network_id: *se_vaggeryd_region
+  - id: 362653
+    prefix: '46410'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: c7eab419-520e-4e0f-b290-e43c11a206b8
+    country_id: *se
+    network_id: *se_trelleborg_region
+  - id: 372957
+    prefix: '46413'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 7eda9c86-6f50-473b-a015-5d0a8dfb9fb6
+    country_id: *se
+    network_id: *se_eslov_hoor_region
+  - id: 374507
+    prefix: '46416'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e72fa9f7-c9ce-4fba-9d8d-5730c517518a
+    country_id: *se
+    network_id: *se_sjobo_region
+  - id: 380265
+    prefix: '46433'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 02554da2-ed95-4ba7-808b-73f209c0ed5a
+    country_id: *se
+    network_id: *se_markaryd_stromsnasbruk_region
+  - id: 363454
+    prefix: '46411'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 26bb7505-b27b-4268-9f96-64becd0ee5cc
+    country_id: *se
+    network_id: *se_ystad_region
+  - id: 373764
+    prefix: '46414'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 77e2c4c2-94c4-49ec-a099-e51827a782c3
+    country_id: *se
+    network_id: *se_simrishamn_region
+  - id: 363953
+    prefix: '46415'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f2d351ea-1451-43ee-9b9d-cab8ef3c157c
+    country_id: *se
+    network_id: *se_horby_region
+  - id: 375179
+    prefix: '46417'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 599641ef-b20e-490e-8eb9-a44d1b8623d2
+    country_id: *se
+    network_id: *se_tomelilla_region
+  - id: 376185
+    prefix: '46418'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 3d70e05d-f2a9-4416-9238-681ab3cca54a
+    country_id: *se
+    network_id: *se_landskrona_svalov_region
+  - id: 377188
+    prefix: '4642'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 64d9766a-1937-44c9-822b-91d0c70898a5
+    country_id: *se
+    network_id: *se_helsingborg_hoganas_region
+  - id: 368151
+    prefix: '46430'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 12c99d5f-1178-4fc1-abe8-424052cca9b8
+    country_id: *se
+    network_id: *se_laholm_region
+  - id: 368414
+    prefix: '46431'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 0b9a8b1f-5c6b-44e0-b5c5-653b76a9a688
+    country_id: *se
+    network_id: *se_angelholm_bastad_region
+  - id: 369356
+    prefix: '46435'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 38409740-0473-41ef-aeff-54d012b2b3f7
+    country_id: *se
+    network_id: *se_klippan_perstorp_region
+  - id: 370202
+    prefix: '4644'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: bc356418-d19e-400d-9c3c-c419882e2f45
+    country_id: *se
+    network_id: *se_kristianstad_region
+  - id: 393429
+    prefix: '46454'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b12c7162-76fc-4c3c-98aa-401a8c35c906
+    country_id: *se
+    network_id: *se_karlshamn_olofstrom_region
+  - id: 393485
+    prefix: '46455'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 45a674cf-2255-421a-88b3-c88f2407049b
+    country_id: *se
+    network_id: *se_karlskrona_region
+  - id: 393543
+    prefix: '46456'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6ef45c2b-2f9b-4122-b6f2-9b978f2fb906
+    country_id: *se
+    network_id: *se_bromolla_solvesborg_region
+  - id: 393865
+    prefix: '46457'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b285262e-67fe-461d-88e2-b25477280148
+    country_id: *se
+    network_id: *se_ronneby_region
+  - id: 388476
+    prefix: '46459'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: eee55c6f-d959-411a-a39f-22e0b025bce3
+    country_id: *se
+    network_id: *se_ryd_region
+  - id: 387514
+    prefix: '46451'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 73c28ceb-ca68-42dd-987f-4c76dadcb4b5
+    country_id: *se
+    network_id: *se_hassleholm_region
+  - id: 388641
+    prefix: '4646'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 4b9a1707-2dc0-4ebf-91d8-945a4e4714a2
+    country_id: *se
+    network_id: *se_lund_region
+  - id: 399609
+    prefix: '46470'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 81c729ff-e1e3-4d35-ba67-1b1c8895630a
+    country_id: *se
+    network_id: *se_vaxjo_region
+  - id: 396477
+    prefix: '46471'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 5e1832cb-c6bb-4449-92ae-8cca43181aac
+    country_id: *se
+    network_id: *se_emmaboda_region
+  - id: 396543
+    prefix: '46472'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 73ed1608-b474-4eaf-8358-82f05517c452
+    country_id: *se
+    network_id: *se_alvesta_rydaholm_region
+  - id: 401273
+    prefix: '46476'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d865bb3a-664a-4d15-9d13-0b0e5e2914c6
+    country_id: *se
+    network_id: *se_almhult_region
+  - id: 397650
+    prefix: '46477'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4f3206f4-d899-41bb-ad9a-d93508ad0115
+    country_id: *se
+    network_id: *se_tingsryd_region
+  - id: 51752
+    prefix: '46480'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4e618dc7-e459-49c8-ae2b-c93bde547f4d
+    country_id: *se
+    network_id: *se_kalmar_region
+  - id: 397490
+    prefix: '46474'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 65959ad1-7a30-4f10-ad85-6c048eb1384f
+    country_id: *se
+    network_id: *se_aseda_lenhovda_region
   - id: 50185
     prefix: '46478'
     number_min_length: 10
@@ -1496,34 +2606,34 @@ network_prefixes:
     uuid: e5807e66-9453-43d4-979d-64f492446674
     country_id: *se
     network_id: *se_osby_region
-  - id: 51752
-    prefix: '46480'
+  - id: 56458
+    prefix: '46481'
     number_min_length: 10
     number_max_length: 11
-    uuid: 4e618dc7-e459-49c8-ae2b-c93bde547f4d
+    uuid: 339b226c-98c1-4501-94fd-0c47220e4926
     country_id: *se
-    network_id: *se_kalmar_region
-  - id: 52978
-    prefix: '46485'
+    network_id: *se_nybro_region
+  - id: 58326
+    prefix: '46490'
     number_min_length: 10
     number_max_length: 11
-    uuid: 560e6fa3-d941-44be-9802-a38be739a441
+    uuid: 13bbea36-23ea-468a-822b-9c9b26040896
     country_id: *se
-    network_id: *se_oland_region
-  - id: 53149
-    prefix: '46486'
+    network_id: *se_vastervik_region
+  - id: 58335
+    prefix: '46491'
     number_min_length: 10
     number_max_length: 11
-    uuid: 044ab359-21be-4627-8643-898c5e55a6a7
+    uuid: 790c5e1e-32b2-46bd-ac45-127ea8128b16
     country_id: *se
-    network_id: *se_torsas_region
-  - id: 53603
-    prefix: '46495'
+    network_id: *se_hogsby_oskarshamn_region
+  - id: 58367
+    prefix: '46492'
     number_min_length: 10
     number_max_length: 11
-    uuid: 7a0f5f8d-dff3-4c0e-a02f-05c1e8ef0ef6
+    uuid: 4a083510-a3e0-4c07-93a3-58684438d6db
     country_id: *se
-    network_id: *se_hultsfred_virserum_region
+    network_id: *se_vimmerby_region
   - id: 53904
     prefix: '46496'
     number_min_length: 10
@@ -1566,41 +2676,20 @@ network_prefixes:
     uuid: 134b5f83-9a31-42ac-970a-667a557f3a5c
     country_id: *se
     network_id: *se_tidaholm_region
-  - id: 55873
-    prefix: '46504'
+  - id: 52978
+    prefix: '46485'
     number_min_length: 10
     number_max_length: 11
-    uuid: 40d873c5-65b5-4896-af81-afd98929ea9c
+    uuid: 560e6fa3-d941-44be-9802-a38be739a441
     country_id: *se
-    network_id: *se_tibro_region
-  - id: 56458
-    prefix: '46481'
+    network_id: *se_oland_region
+  - id: 53149
+    prefix: '46486'
     number_min_length: 10
     number_max_length: 11
-    uuid: 339b226c-98c1-4501-94fd-0c47220e4926
+    uuid: 044ab359-21be-4627-8643-898c5e55a6a7
     country_id: *se
-    network_id: *se_nybro_region
-  - id: 58326
-    prefix: '46490'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 13bbea36-23ea-468a-822b-9c9b26040896
-    country_id: *se
-    network_id: *se_vastervik_region
-  - id: 58335
-    prefix: '46491'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 790c5e1e-32b2-46bd-ac45-127ea8128b16
-    country_id: *se
-    network_id: *se_hogsby_oskarshamn_region
-  - id: 58367
-    prefix: '46492'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4a083510-a3e0-4c07-93a3-58684438d6db
-    country_id: *se
-    network_id: *se_vimmerby_region
+    network_id: *se_torsas_region
   - id: 58882
     prefix: '46493'
     number_min_length: 10
@@ -1615,6 +2704,13 @@ network_prefixes:
     uuid: 8e6ad314-2f96-4171-85b3-045687e89d8c
     country_id: *se
     network_id: *se_kisa_region
+  - id: 53603
+    prefix: '46495'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 7a0f5f8d-dff3-4c0e-a02f-05c1e8ef0ef6
+    country_id: *se
+    network_id: *se_hultsfred_virserum_region
   - id: 60063
     prefix: '46503'
     number_min_length: 10
@@ -1622,6 +2718,13 @@ network_prefixes:
     uuid: d224141c-0944-4990-9e4a-6ac90868c758
     country_id: *se
     network_id: *se_hjo_region
+  - id: 55873
+    prefix: '46504'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 40d873c5-65b5-4896-af81-afd98929ea9c
+    country_id: *se
+    network_id: *se_tibro_region
   - id: 60994
     prefix: '46506'
     number_min_length: 10
@@ -1643,13 +2746,6 @@ network_prefixes:
     uuid: 47c2644e-7126-4642-b846-670837b3e932
     country_id: *se
     network_id: *se_grastorp_region
-  - id: 65701
-    prefix: '46520'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f21d70e2-e54a-465f-bf9a-687f5be95d48
-    country_id: *se
-    network_id: *se_trollhattan_region
   - id: 66081
     prefix: '46505'
     number_min_length: 10
@@ -1685,48 +2781,13 @@ network_prefixes:
     uuid: 23c28790-c501-4f33-a765-fefedf6dc662
     country_id: *se
     network_id: *se_falkoping_region
-  - id: 71724
-    prefix: '46530'
+  - id: 65701
+    prefix: '46520'
     number_min_length: 10
     number_max_length: 11
-    uuid: c227aea4-9f10-46e8-a4a7-482e9d700c31
+    uuid: f21d70e2-e54a-465f-bf9a-687f5be95d48
     country_id: *se
-    network_id: *se_mellerud_region
-  - id: 72515
-    prefix: '46531'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 89b508bd-25e1-4137-9da3-ce0335163fef
-    country_id: *se
-    network_id: *se_bengtsfors_region
-  - id: 72736
-    prefix: '46532'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: ad268239-04fe-4296-a126-3d73fd583a65
-    country_id: *se
-    network_id: *se_amal_region
-  - id: 72763
-    prefix: '46533'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 0fb487c6-6608-4a86-b0ca-44dabfdd2739
-    country_id: *se
-    network_id: *se_saffle_region
-  - id: 72804
-    prefix: '46534'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 9ccaa4cb-be15-45af-9c2b-3e45a0079080
-    country_id: *se
-    network_id: *se_ed_region
-  - id: 73211
-    prefix: '4654'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f7859f55-e560-478c-a3da-9b7dec6aecd6
-    country_id: *se
-    network_id: *se_karlstad_region
+    network_id: *se_trollhattan_region
   - id: 76322
     prefix: '46521'
     number_min_length: 10
@@ -1776,13 +2837,62 @@ network_prefixes:
     uuid: ac7dd459-2ee1-4508-8028-988f2fc6563e
     country_id: *se
     network_id: *se_fargelanda_region
-  - id: 80627
-    prefix: '46560'
+  - id: 71724
+    prefix: '46530'
     number_min_length: 10
     number_max_length: 11
-    uuid: d5d3b708-6e78-4913-8cd2-1419860564e0
+    uuid: c227aea4-9f10-46e8-a4a7-482e9d700c31
     country_id: *se
-    network_id: *se_torsby_region
+    network_id: *se_mellerud_region
+  - id: 72515
+    prefix: '46531'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 89b508bd-25e1-4137-9da3-ce0335163fef
+    country_id: *se
+    network_id: *se_bengtsfors_region
+  - id: 72736
+    prefix: '46532'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: ad268239-04fe-4296-a126-3d73fd583a65
+    country_id: *se
+    network_id: *se_amal_region
+  - id: 72763
+    prefix: '46533'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 0fb487c6-6608-4a86-b0ca-44dabfdd2739
+    country_id: *se
+    network_id: *se_saffle_region
+  - id: 72804
+    prefix: '46534'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 9ccaa4cb-be15-45af-9c2b-3e45a0079080
+    country_id: *se
+    network_id: *se_ed_region
+  - id: 73211
+    prefix: '4654'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f7859f55-e560-478c-a3da-9b7dec6aecd6
+    country_id: *se
+    network_id: *se_karlstad_region
+  - id: 89285
+    prefix: '46563'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 0e2484b2-6c25-42f0-90c7-0187cfdc04ac
+    country_id: *se
+    network_id: *se_hagfors_munkfors_region
+  - id: 89673
+    prefix: '46564'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f2ae0570-2f7e-40f6-8bd0-ccf691d506ef
+    country_id: *se
+    network_id: *se_syssleback_region
   - id: 82015
     prefix: '46573'
     number_min_length: 10
@@ -1888,20 +2998,13 @@ network_prefixes:
     uuid: abc43eae-5190-45c4-b1c7-30bbf7e353b4
     country_id: *se
     network_id: *se_grums_region
-  - id: 89285
-    prefix: '46563'
+  - id: 80627
+    prefix: '46560'
     number_min_length: 10
     number_max_length: 11
-    uuid: 0e2484b2-6c25-42f0-90c7-0187cfdc04ac
+    uuid: d5d3b708-6e78-4913-8cd2-1419860564e0
     country_id: *se
-    network_id: *se_hagfors_munkfors_region
-  - id: 89673
-    prefix: '46564'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f2ae0570-2f7e-40f6-8bd0-ccf691d506ef
-    country_id: *se
-    network_id: *se_syssleback_region
+    network_id: *se_torsby_region
   - id: 89790
     prefix: '46565'
     number_min_length: 10
@@ -1951,20 +3054,6 @@ network_prefixes:
     uuid: b584fc2c-4eff-4353-af88-58d3e6f08788
     country_id: *se
     network_id: *se_sundsvall_timra_region
-  - id: 100129
-    prefix: '46611'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 35d3ade1-9d48-4bba-84ca-3b4c0039a5e6
-    country_id: *se
-    network_id: *se_harnosand_region
-  - id: 100138
-    prefix: '46612'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 963a0123-29d2-4454-9b16-af4e959f678a
-    country_id: *se
-    network_id: *se_kramfors_region
   - id: 101331
     prefix: '46613'
     number_min_length: 10
@@ -1979,13 +3068,20 @@ network_prefixes:
     uuid: c6e0a64c-295e-499b-a129-4161b2fe164e
     country_id: *se
     network_id: *se_solleftea_region
-  - id: 113194
-    prefix: '46621'
+  - id: 100129
+    prefix: '46611'
     number_min_length: 10
     number_max_length: 11
-    uuid: 65477f84-813e-4aae-9776-dd3d0243aca7
+    uuid: 35d3ade1-9d48-4bba-84ca-3b4c0039a5e6
     country_id: *se
-    network_id: *se_junsele_region
+    network_id: *se_harnosand_region
+  - id: 100138
+    prefix: '46612'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 963a0123-29d2-4454-9b16-af4e959f678a
+    country_id: *se
+    network_id: *se_kramfors_region
   - id: 113230
     prefix: '46622'
     number_min_length: 10
@@ -2007,6 +3103,13 @@ network_prefixes:
     uuid: da8b135f-025d-4d90-b0dc-21b193820e8f
     country_id: *se
     network_id: *se_backe_region
+  - id: 113194
+    prefix: '46621'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 65477f84-813e-4aae-9776-dd3d0243aca7
+    country_id: *se
+    network_id: *se_junsele_region
   - id: 117841
     prefix: '4663'
     number_min_length: 9
@@ -2014,27 +3117,6 @@ network_prefixes:
     uuid: b961c001-28b7-408d-9478-01b2a2c8fe8d
     country_id: *se
     network_id: *se_ostersund_region
-  - id: 123564
-    prefix: '46640'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: c7d4767a-4feb-4509-88d6-d76a5a60ea96
-    country_id: *se
-    network_id: *se_krokom_region
-  - id: 126599
-    prefix: '46650'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e007ef52-7c35-4063-bda2-0394ca68c9de
-    country_id: *se
-    network_id: *se_hudiksvall_region
-  - id: 128929
-    prefix: '46662'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 800ca474-54ca-48bb-b1df-9a4bdec2d189
-    country_id: *se
-    network_id: *se_bjorna_region
   - id: 133044
     prefix: '46642'
     number_min_length: 10
@@ -2056,13 +3138,6 @@ network_prefixes:
     uuid: 2d39c739-d28d-4fc3-8a02-5e108478a0ad
     country_id: *se
     network_id: *se_hammerdal_region
-  - id: 133967
-    prefix: '46645'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: bf67305b-0aa2-47a7-a929-649fb7cdd9e0
-    country_id: *se
-    network_id: *se_follinge_region
   - id: 134586
     prefix: '46647'
     number_min_length: 10
@@ -2070,6 +3145,27 @@ network_prefixes:
     uuid: 57924981-1620-4850-9280-6798c8307f84
     country_id: *se
     network_id: *se_are_jarpen_region
+  - id: 123564
+    prefix: '46640'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: c7d4767a-4feb-4509-88d6-d76a5a60ea96
+    country_id: *se
+    network_id: *se_krokom_region
+  - id: 133967
+    prefix: '46645'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: bf67305b-0aa2-47a7-a929-649fb7cdd9e0
+    country_id: *se
+    network_id: *se_follinge_region
+  - id: 126599
+    prefix: '46650'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e007ef52-7c35-4063-bda2-0394ca68c9de
+    country_id: *se
+    network_id: *se_hudiksvall_region
   - id: 136666
     prefix: '46651'
     number_min_length: 10
@@ -2077,20 +3173,6 @@ network_prefixes:
     uuid: 0aa2f8dc-b1be-4078-9bf6-24b472b72c9c
     country_id: *se
     network_id: *se_ljusdal_region
-  - id: 137194
-    prefix: '46652'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 23ce187e-ee3d-49e3-ac7b-d9ec1da04962
-    country_id: *se
-    network_id: *se_bergsjo_region
-  - id: 137261
-    prefix: '46653'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4302ca1e-96f3-4247-bd11-0e952c8ee775
-    country_id: *se
-    network_id: *se_delsbo_region
   - id: 137647
     prefix: '46657'
     number_min_length: 10
@@ -2098,1168 +3180,20 @@ network_prefixes:
     uuid: 9c20d1fe-1ca7-4066-954c-36a775c4c8bf
     country_id: *se
     network_id: *se_los_region
-  - id: 138944
-    prefix: '46660'
+  - id: 476599
+    prefix: '46921'
     number_min_length: 10
     number_max_length: 11
-    uuid: d3a001c6-4093-41c2-bbd9-7c18e0e3695f
+    uuid: 668e630f-e0ba-4ec3-b974-9502129bee42
     country_id: *se
-    network_id: *se_ornskoldsvik_region
-  - id: 139459
-    prefix: '46661'
+    network_id: *se_boden_region
+  - id: 477112
+    prefix: '46922'
     number_min_length: 10
     number_max_length: 11
-    uuid: 04f08991-1b7e-4452-91b5-3b4228aff1bb
+    uuid: 31186d07-bd2b-442d-940c-4c55e9d691c7
     country_id: *se
-    network_id: *se_bredbyn_region
-  - id: 139901
-    prefix: '46663'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 87e190a3-db53-4c0d-96c5-fd5fe35bc01c
-    country_id: *se
-    network_id: *se_husum_region
-  - id: 143788
-    prefix: '46670'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f6f8c14a-3ffa-476f-8634-2aac665d907b
-    country_id: *se
-    network_id: *se_stromsund_region
-  - id: 143869
-    prefix: '46671'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e328beed-3835-430d-947c-e22b7ae60b22
-    country_id: *se
-    network_id: *se_hoting_region
-  - id: 144069
-    prefix: '46672'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 509db0de-a5b1-4eb4-9ba2-637fbd2d7d41
-    country_id: *se
-    network_id: *se_gaddede_region
-  - id: 147968
-    prefix: '46687'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 3b8a49dd-ec3a-4108-87b2-011dc4cc341d
-    country_id: *se
-    network_id: *se_svenstavik_region
-  - id: 148823
-    prefix: '46690'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e80e1ffe-fac4-48ac-9970-d71dc24977eb
-    country_id: *se
-    network_id: *se_ange_region
-  - id: 148886
-    prefix: '46691'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 1e07bcf3-922e-492b-92b7-695df9bef86e
-    country_id: *se
-    network_id: *se_torpshammar_region
-  - id: 149041
-    prefix: '46692'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 15037890-9270-4088-ae93-c3fec748a8f5
-    country_id: *se
-    network_id: *se_liden_region
-  - id: 149053
-    prefix: '46693'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6ce64dc1-87b1-4a24-81a1-12d67c9390b4
-    country_id: *se
-    network_id: *se_bracke_gallo_region
-  - id: 151601
-    prefix: '46680'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 7823336d-2baa-4c20-9584-d69d0ae00528
-    country_id: *se
-    network_id: *se_sveg_region
-  - id: 152251
-    prefix: '46682'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 298d6b53-6201-4af4-a9ee-01e1ff63274d
-    country_id: *se
-    network_id: *se_ratan_region
-  - id: 152696
-    prefix: '46684'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: ad546875-df4e-4998-a577-3f8f3625b6b3
-    country_id: *se
-    network_id: *se_funasdalen_hede_region
-  - id: 153115
-    prefix: '46695'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d372acea-f501-4f19-be4a-443aa61c497f
-    country_id: *se
-    network_id: *se_stugun_region
-  - id: 153532
-    prefix: '46696'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f3ec065c-de5a-4067-a7a0-8191c1bb2631
-    country_id: *se
-    network_id: *se_hammarstrand_region
-  - id: 207518
-    prefix: '468'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 1ba8149a-6e27-4f8e-b63b-98a4b92c74b1
-    country_id: *se
-    network_id: *se_stockholm_region
-  - id: 212868
-    prefix: '46940'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: eff209f7-4953-4ee5-8079-f572ba4e3d51
-    country_id: *se
-    network_id: *se_vilhelmina_region
-  - id: 213366
-    prefix: '46941'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d365389e-8c3f-44b7-a805-15606ff65ba8
-    country_id: *se
-    network_id: *se_asele_region
-  - id: 213828
-    prefix: '46942'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cbec505a-1e34-4725-bbfb-c0a12c1d1ddf
-    country_id: *se
-    network_id: *se_dorotea_region
-  - id: 213852
-    prefix: '46943'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 635eb5bb-4fd5-4385-ac48-8dec4938bb29
-    country_id: *se
-    network_id: *se_fredrika_region
-  - id: 217417
-    prefix: '46950'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f6041b12-84bd-42e2-8e28-abf45db8e8d2
-    country_id: *se
-    network_id: *se_lycksele_region
-  - id: 217429
-    prefix: '46951'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 22da14f7-4e98-4673-94af-ed3f809dab06
-    country_id: *se
-    network_id: *se_storuman_region
-  - id: 219050
-    prefix: '46952'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fdd3a063-7da9-4b89-be5f-f2080bcaf0a2
-    country_id: *se
-    network_id: *se_sorsele_region
-  - id: 219428
-    prefix: '46953'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 722b16b3-580e-4ad9-8f08-35314043f837
-    country_id: *se
-    network_id: *se_mala_region
-  - id: 219983
-    prefix: '46954'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 163e9e34-a5d0-46d1-9b9e-69240c49c936
-    country_id: *se
-    network_id: *se_tarnaby_region
-  - id: 225112
-    prefix: '46960'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 52071748-fe59-4274-b0cb-4fad210d82f1
-    country_id: *se
-    network_id: *se_arvidsjaur_region
-  - id: 225135
-    prefix: '46961'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 33553153-5e24-45b8-b3eb-fd2149206583
-    country_id: *se
-    network_id: *se_arjeplog_region
-  - id: 228266
-    prefix: '46971'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 215d3abb-2dac-49b5-9fb2-d5c9f4c8809f
-    country_id: *se
-    network_id: *se_jokkmokk_region
-  - id: 229465
-    prefix: '46970'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 85f78eca-2750-4f7e-9be1-71d995d3723c
-    country_id: *se
-    network_id: *se_gallivare_region
-  - id: 230514
-    prefix: '46973'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 14779fe8-f657-405f-9bcd-573f64e5b92e
-    country_id: *se
-    network_id: *se_porjus_region
-  - id: 232322
-    prefix: '46980'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 7217143f-f50f-480f-a3de-e952b5f7b0db
-    country_id: *se
-    network_id: *se_kiruna_region
-  - id: 233336
-    prefix: '46975'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 789b26c9-a9a2-4598-94f3-e221d48a1db4
-    country_id: *se
-    network_id: *se_hakkas_region
-  - id: 233346
-    prefix: '46976'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cc1912cc-6260-47c5-822e-e9068cd1307c
-    country_id: *se
-    network_id: *se_vuollerim_region
-  - id: 233359
-    prefix: '46977'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 44bca00a-846d-42bd-a3e0-63854d7c3703
-    country_id: *se
-    network_id: *se_korpilombolo_region
-  - id: 233380
-    prefix: '46978'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4e41a69d-1136-4c29-867f-c3e33c3159a8
-    country_id: *se
-    network_id: *se_pajala_region
-  - id: 235048
-    prefix: '46981'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 9c3ea4dd-ef10-437e-a1ea-32b7e9e0e02b
-    country_id: *se
-    network_id: *se_vittangi_region
-  - id: 258820
-    prefix: '4611'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 0f7855ea-74fb-4cb3-86cd-b4b8933f8f80
-    country_id: *se
-    network_id: *se_norrkoping_region
-  - id: 259333
-    prefix: '46120'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4334daaf-2fd4-4a65-9b02-ce9ac5b928d0
-    country_id: *se
-    network_id: *se_atvidaberg_region
-  - id: 259347
-    prefix: '46121'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4576e178-d345-48d0-b4f1-13f545bd0a09
-    country_id: *se
-    network_id: *se_soderkoping_region
-  - id: 259351
-    prefix: '46122'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 190fcf3b-a2e3-4648-8b24-ca20469647b8
-    country_id: *se
-    network_id: *se_finspang_region
-  - id: 259363
-    prefix: '46123'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 49897220-f71f-423f-80b7-21e3d5fcf629
-    country_id: *se
-    network_id: *se_valdemarsvik_region
-  - id: 259403
-    prefix: '46125'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e268f10f-749a-49d3-9b70-8a82bc4f5b0a
-    country_id: *se
-    network_id: *se_vikbolandet_region
-  - id: 259513
-    prefix: '4613'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 6597adbe-738d-411d-a4ea-f441ec168c65
-    country_id: *se
-    network_id: *se_linkoping_region
-  - id: 260088
-    prefix: '46140'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 2c9279a5-b9fa-4412-ad67-4aa42668bc50
-    country_id: *se
-    network_id: *se_tranas_region
-  - id: 260100
-    prefix: '46141'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e3e1d28e-c2f0-442c-a27b-11d44b19f15a
-    country_id: *se
-    network_id: *se_motala_region
-  - id: 260104
-    prefix: '46142'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 69e42a10-ce11-4bc0-99d2-e552a67eac88
-    country_id: *se
-    network_id: *se_boxholm_mjolby_skanninge_region
-  - id: 260142
-    prefix: '46143'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4699fa87-a673-4874-8138-4e56f68a0cb1
-    country_id: *se
-    network_id: *se_vadstena_region
-  - id: 260195
-    prefix: '46144'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 38fee16d-6e9d-4cd3-b407-c3a656e80997
-    country_id: *se
-    network_id: *se_odeshog_region
-  - id: 260331
-    prefix: '46171'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b9554baf-0973-4928-b001-240238761dea
-    country_id: *se
-    network_id: *se_enkoping_region
-  - id: 260353
-    prefix: '46173'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4b7a7d8d-45bd-47f4-a4ab-5f882b399937
-    country_id: *se
-    network_id: *se_oregrund_osthammar_region
-  - id: 260376
-    prefix: '46174'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f27bc1b2-a457-44e7-af48-e93bc7d8a054
-    country_id: *se
-    network_id: *se_alunda_region
-  - id: 260409
-    prefix: '46175'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: eeb5b3c0-6ad1-4c19-8474-8bf1265d94e7
-    country_id: *se
-    network_id: *se_hallstavik_rimbo_region
-  - id: 260428
-    prefix: '46176'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e8e338c9-218f-4b1d-80d7-2a07b283c69a
-    country_id: *se
-    network_id: *se_norrtalje_region
-  - id: 260510
-    prefix: '4618'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: af8318d6-5ed5-47cf-a3d5-1012bdbc57c5
-    country_id: *se
-    network_id: *se_uppsala_region
-  - id: 260832
-    prefix: '4619'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fdc173ab-0ed0-400b-84f1-8a208947594f
-    country_id: *se
-    network_id: *se_kumla_orebro_region
-  - id: 266196
-    prefix: '46150'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6322f16d-f962-44ec-adef-f23015fbc4a9
-    country_id: *se
-    network_id: *se_katrineholm_region
-  - id: 266223
-    prefix: '46151'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cb452933-add2-4b82-be51-ae670618f979
-    country_id: *se
-    network_id: *se_vingaker_region
-  - id: 266244
-    prefix: '46152'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 5c07f12f-ebfd-4c23-94fd-70aeeabe5bea
-    country_id: *se
-    network_id: *se_strangnas_region
-  - id: 266367
-    prefix: '46155'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8b0dbdf9-5389-4610-abb1-3ee5dab38ffb
-    country_id: *se
-    network_id: *se_nykoping_oxelosund_region
-  - id: 266383
-    prefix: '46156'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 41f5fd00-7b05-428d-b6f4-48c0ae873e6d
-    country_id: *se
-    network_id: *se_trosa_vagnharad_region
-  - id: 266439
-    prefix: '46157'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fe989996-9226-4884-9dce-dd629b0eb9d7
-    country_id: *se
-    network_id: *se_flen_malmkoping_region
-  - id: 266458
-    prefix: '46158'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 56a262a8-5122-43c2-8442-5224afc74359
-    country_id: *se
-    network_id: *se_gnesta_region
-  - id: 266500
-    prefix: '46159'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a32cc691-3b75-465d-9a4b-27a32f110473
-    country_id: *se
-    network_id: *se_mariefred_region
-  - id: 266562
-    prefix: '4616'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 122d7b28-ac3b-4e12-abf6-f2068d885c9a
-    country_id: *se
-    network_id: *se_eskilstuna_torshalla_region
-  - id: 274244
-    prefix: '4621'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 28898e32-cddb-4aef-a72f-17b3966dead2
-    country_id: *se
-    network_id: *se_vasteras_region
-  - id: 278993
-    prefix: '46223'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a829f462-7900-4a52-abbb-5303a7654559
-    country_id: *se
-    network_id: *se_fagersta_norberg_region
-  - id: 279494
-    prefix: '46224'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 212c325a-d559-4220-baf5-4ed6bc878a7a
-    country_id: *se
-    network_id: *se_heby_sala_region
-  - id: 281107
-    prefix: '46227'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 99a7bf4c-5aaf-4f87-8587-941fa199d75c
-    country_id: *se
-    network_id: *se_kungsor_region
-  - id: 282995
-    prefix: '46220'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b8a6f86e-d6ae-4608-8e40-702d77047d2c
-    country_id: *se
-    network_id: *se_hallstahammar_surahammar_region
-  - id: 283234
-    prefix: '46221'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d1c463ed-160a-498e-8f96-888eeffdf31b
-    country_id: *se
-    network_id: *se_koping_region
-  - id: 283777
-    prefix: '46222'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 91f042ff-6af1-4efd-9edd-20a1035db0b7
-    country_id: *se
-    network_id: *se_skinnskatteberg_region
-  - id: 283949
-    prefix: '46225'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6a9f9550-8330-4a24-9282-2c4acf685517
-    country_id: *se
-    network_id: *se_hedemora_sater_region
-  - id: 284700
-    prefix: '46226'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 30c6cd3e-3918-4494-9b32-66975676d245
-    country_id: *se
-    network_id: *se_avesta_krylbo_region
-  - id: 286641
-    prefix: '4623'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 888cc17b-7cd1-4a5b-80d0-cce41f15a53f
-    country_id: *se
-    network_id: *se_falun_region
-  - id: 289571
-    prefix: '46241'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: dc6a1e58-2ddf-4adf-8b6c-a24b3cf77f2f
-    country_id: *se
-    network_id: *se_floda_gagnef_region
-  - id: 290178
-    prefix: '46246'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8fbc2c31-5deb-449c-b2e3-651e209acfd6
-    country_id: *se
-    network_id: *se_enviken_svardsjo_region
-  - id: 290919
-    prefix: '46247'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8d1649e2-4cd8-44a3-965e-e1a2ece6aedd
-    country_id: *se
-    network_id: *se_insjon_leksand_region
-  - id: 294490
-    prefix: '46240'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6575dce7-b159-4c8b-ae61-623b6147a4bb
-    country_id: *se
-    network_id: *se_ludvika_smedjebacken_region
-  - id: 294882
-    prefix: '46243'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 25bc9a20-a467-4b3f-86cd-d036e3e1e95d
-    country_id: *se
-    network_id: *se_borlange_region
-  - id: 295946
-    prefix: '46248'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cb805005-8719-4054-a631-9d58cfd981cc
-    country_id: *se
-    network_id: *se_rattvik_region
-  - id: 296843
-    prefix: '46250'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 0f685732-f835-4d00-8f70-70fd3f2134cb
-    country_id: *se
-    network_id: *se_mora_orsa_region
-  - id: 297633
-    prefix: '46251'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6617e635-3ff3-4860-9c4b-d48c3306e5fb
-    country_id: *se
-    network_id: *se_alvdalen_region
-  - id: 298798
-    prefix: '46255'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: d2339213-6f69-4003-b51e-e1b9154dae64
-    country_id: *se
-    network_id: *se_routing_voice_mail_voip_region
-  - id: 299702
-    prefix: '46258'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 83f28ad7-b6bf-439d-bd6a-4fa3df7d97a5
-    country_id: *se
-    network_id: *se_furudal_region
-  - id: 299807
-    prefix: '4626'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 49baea76-02b2-4711-a48e-7bf6d1c4081b
-    country_id: *se
-    network_id: *se_gavle_sandviken_region
-  - id: 301620
-    prefix: '46270'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 0386fb0e-ec99-4bdd-afec-5975e185f8cf
-    country_id: *se
-    network_id: *se_soderhamn_region
-  - id: 302698
-    prefix: '46253'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 05fa34cf-97cf-4dc6-95a0-63800b42e1e6
-    country_id: *se
-    network_id: *se_idre_sarna_region
-  - id: 303235
-    prefix: '46254'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 1e3125ba-73ed-4586-92f4-c6e4dbbe3796
-    country_id: *se
-    network_id: *se_routing_voice_mail_ip_centrex_region
-  - id: 305219
-    prefix: '46271'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 39814767-c984-4591-867a-42facd08c666
-    country_id: *se
-    network_id: *se_alfta_edsbyn_region
-  - id: 306710
-    prefix: '46278'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 9f0d65c0-26f7-4bdc-aee3-c561d5e7f60b
-    country_id: *se
-    network_id: *se_bollnas_region
-  - id: 308517
-    prefix: '46290'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: bbefc827-fd6d-4529-9d4d-72514ab70f23
-    country_id: *se
-    network_id: *se_hofors_storvik_region
-  - id: 308547
-    prefix: '46291'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fbf33e0c-d9ef-42a9-bddb-81bb01b3d150
-    country_id: *se
-    network_id: *se_hedesunda_osterfarnebo_region
-  - id: 308560
-    prefix: '46292'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 95fb1e62-4024-4492-a74c-97bc3c5969a6
-    country_id: *se
-    network_id: *se_ostervala_tarnsjo_region
-  - id: 308604
-    prefix: '46293'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 59bfaac9-47a8-4d3f-812b-1f0f69fdd1f4
-    country_id: *se
-    network_id: *se_soderfors_tierp_region
-  - id: 308648
-    prefix: '46294'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a48655c8-f9c2-4ac0-9eb6-8c0134280dd6
-    country_id: *se
-    network_id: *se_karlholmsbruk_skarplinge_region
-  - id: 309094
-    prefix: '46295'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8811c003-b02c-414a-b5f1-61a2d7e2e028
-    country_id: *se
-    network_id: *se_orbyhus_dannemora_region
-  - id: 309575
-    prefix: '46300'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 441fd378-a39a-4dde-8943-01c99c1ef66b
-    country_id: *se
-    network_id: *se_kungsbacka_region
-  - id: 309602
-    prefix: '46301'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 49a1a4a6-c570-4318-8ffb-52e7736d4489
-    country_id: *se
-    network_id: *se_hindas_region
-  - id: 310429
-    prefix: '46302'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 63745ceb-770c-4651-8fe1-0da7f0ce0000
-    country_id: *se
-    network_id: *se_lerum_region
-  - id: 313540
-    prefix: '46280'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 2a33f97c-6890-4132-8bb1-63170172bb45
-    country_id: *se
-    network_id: *se_malung_region
-  - id: 313559
-    prefix: '46281'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d8a8ff97-8669-4f02-b743-04db0c681514
-    country_id: *se
-    network_id: *se_vansbro_region
-  - id: 315552
-    prefix: '46297'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 52b0f4c4-28ea-4266-bd20-5c44b566cd69
-    country_id: *se
-    network_id: *se_hamrange_ockelbo_region
-  - id: 317567
-    prefix: '46303'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: ae0b0ef5-363a-4bbf-ac99-c5570b195d82
-    country_id: *se
-    network_id: *se_kungalv_region
-  - id: 318250
-    prefix: '46304'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 2461924b-6493-440e-9b5c-c88810f1e57a
-    country_id: *se
-    network_id: *se_orust_tjorn_region
-  - id: 321184
-    prefix: '4631'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 35146e48-c3d2-43ec-a132-d446b998086c
-    country_id: *se
-    network_id: *se_goteborg_region
-  - id: 327440
-    prefix: '46320'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 49330ffc-abfd-42a8-8e0f-47f51e721fe6
-    country_id: *se
-    network_id: *se_kinna_region
-  - id: 327970
-    prefix: '46321'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: c686da63-b1a6-4d0f-9be9-756ba4385a6c
-    country_id: *se
-    network_id: *se_ulricehamn_region
-  - id: 329243
-    prefix: '46325'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cd448bdc-1d6e-400b-a1eb-604c00643dab
-    country_id: *se
-    network_id: *se_svenljunga_tranemo_region
-  - id: 335403
-    prefix: '46322'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e2011fdc-5dd7-48a3-bf34-495f26a41c91
-    country_id: *se
-    network_id: *se_alingsas_vargarda_region
-  - id: 337296
-    prefix: '4633'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: b4f54141-adc3-4fdf-a4f7-da1a66b2a93e
-    country_id: *se
-    network_id: *se_boras_region
-  - id: 340692
-    prefix: '46340'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4f03be94-aef5-42d4-a90b-9b2e984871da
-    country_id: *se
-    network_id: *se_varberg_region
-  - id: 342384
-    prefix: '46345'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4fe0c649-90f2-41f4-98c2-92f3145e2b1b
-    country_id: *se
-    network_id: *se_hyltebruk_torup_region
-  - id: 342560
-    prefix: '46346'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 284368f6-0a54-4477-ac52-3c5e26cba28b
-    country_id: *se
-    network_id: *se_falkenberg_region
-  - id: 345951
-    prefix: '4636'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 5098dc01-8ec6-4ae6-a5b2-baa0b9f1175d
-    country_id: *se
-    network_id: *se_huskvarna_jonkoping_region
-  - id: 347287
-    prefix: '4637810'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 03472d3f-1e98-4fd0-a796-e496f9ab331f
-    country_id: *se
-    network_id: *se_machine_to_machine_m2m_services_region
-  - id: 347320
-    prefix: '4637811'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7e41d725-2eb1-4d21-9913-c557e3e11292
-    country_id: *se
-    network_id: *se_machine_to_machine_m2m_services_region
-  - id: 349898
-    prefix: '4640'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 64b6f489-2956-495d-bd99-95b23dd57caf
-    country_id: *se
-    network_id: *se_malmo_region
-  - id: 352247
-    prefix: '4635'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: e0df70cf-06d9-4618-a246-4636ab566bd4
-    country_id: *se
-    network_id: *se_halmstad_region
-  - id: 355975
-    prefix: '46370'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 407262a6-a42d-4838-a4e2-0cfe505c325c
-    country_id: *se
-    network_id: *se_varnamo_region
-  - id: 356097
-    prefix: '46371'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4e200b68-6379-4820-a148-d251778b36ad
-    country_id: *se
-    network_id: *se_anderstorp_gislaved_region
-  - id: 356158
-    prefix: '46372'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e4106946-cce3-4c86-a8b0-c4d30ad7ffb8
-    country_id: *se
-    network_id: *se_ljungby_region
-  - id: 356528
-    prefix: '46380'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 5367ad02-b5fe-4d5e-ab6e-a136e2e503d7
-    country_id: *se
-    network_id: *se_nassjo_region
-  - id: 356662
-    prefix: '46381'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a48fc927-84b6-4ebd-8dd0-aef098578521
-    country_id: *se
-    network_id: *se_eksjo_region
-  - id: 356721
-    prefix: '46382'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cc47954d-cca7-4b3d-ae52-b18f5476d59b
-    country_id: *se
-    network_id: *se_savsjo_region
-  - id: 356849
-    prefix: '46383'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fb493d64-2577-403f-a216-f47f014c2cb2
-    country_id: *se
-    network_id: *se_vetlanda_region
-  - id: 357551
-    prefix: '46390'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 9a2a5d45-0e29-4413-9af6-d356c867b14c
-    country_id: *se
-    network_id: *se_granna_region
-  - id: 357879
-    prefix: '46392'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 072bdaf9-254b-467c-9ded-388a45f683e4
-    country_id: *se
-    network_id: *se_mullsjo_region
-  - id: 358280
-    prefix: '46393'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 0a84e06b-1f22-426e-8334-722f1c83c1c1
-    country_id: *se
-    network_id: *se_vaggeryd_region
-  - id: 362653
-    prefix: '46410'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: c7eab419-520e-4e0f-b290-e43c11a206b8
-    country_id: *se
-    network_id: *se_trelleborg_region
-  - id: 363454
-    prefix: '46411'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 26bb7505-b27b-4268-9f96-64becd0ee5cc
-    country_id: *se
-    network_id: *se_ystad_region
-  - id: 363953
-    prefix: '46415'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f2d351ea-1451-43ee-9b9d-cab8ef3c157c
-    country_id: *se
-    network_id: *se_horby_region
-  - id: 368151
-    prefix: '46430'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 12c99d5f-1178-4fc1-abe8-424052cca9b8
-    country_id: *se
-    network_id: *se_laholm_region
-  - id: 368414
-    prefix: '46431'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 0b9a8b1f-5c6b-44e0-b5c5-653b76a9a688
-    country_id: *se
-    network_id: *se_angelholm_bastad_region
-  - id: 369356
-    prefix: '46435'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 38409740-0473-41ef-aeff-54d012b2b3f7
-    country_id: *se
-    network_id: *se_klippan_perstorp_region
-  - id: 370202
-    prefix: '4644'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: bc356418-d19e-400d-9c3c-c419882e2f45
-    country_id: *se
-    network_id: *se_kristianstad_region
-  - id: 372957
-    prefix: '46413'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 7eda9c86-6f50-473b-a015-5d0a8dfb9fb6
-    country_id: *se
-    network_id: *se_eslov_hoor_region
-  - id: 373764
-    prefix: '46414'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 77e2c4c2-94c4-49ec-a099-e51827a782c3
-    country_id: *se
-    network_id: *se_simrishamn_region
-  - id: 374507
-    prefix: '46416'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e72fa9f7-c9ce-4fba-9d8d-5730c517518a
-    country_id: *se
-    network_id: *se_sjobo_region
-  - id: 375179
-    prefix: '46417'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 599641ef-b20e-490e-8eb9-a44d1b8623d2
-    country_id: *se
-    network_id: *se_tomelilla_region
-  - id: 376185
-    prefix: '46418'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 3d70e05d-f2a9-4416-9238-681ab3cca54a
-    country_id: *se
-    network_id: *se_landskrona_svalov_region
-  - id: 377188
-    prefix: '4642'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 64d9766a-1937-44c9-822b-91d0c70898a5
-    country_id: *se
-    network_id: *se_helsingborg_hoganas_region
-  - id: 380265
-    prefix: '46433'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 02554da2-ed95-4ba7-808b-73f209c0ed5a
-    country_id: *se
-    network_id: *se_markaryd_stromsnasbruk_region
-  - id: 387514
-    prefix: '46451'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 73c28ceb-ca68-42dd-987f-4c76dadcb4b5
-    country_id: *se
-    network_id: *se_hassleholm_region
-  - id: 388476
-    prefix: '46459'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: eee55c6f-d959-411a-a39f-22e0b025bce3
-    country_id: *se
-    network_id: *se_ryd_region
-  - id: 388641
-    prefix: '4646'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 4b9a1707-2dc0-4ebf-91d8-945a4e4714a2
-    country_id: *se
-    network_id: *se_lund_region
-  - id: 393429
-    prefix: '46454'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b12c7162-76fc-4c3c-98aa-401a8c35c906
-    country_id: *se
-    network_id: *se_karlshamn_olofstrom_region
-  - id: 393485
-    prefix: '46455'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 45a674cf-2255-421a-88b3-c88f2407049b
-    country_id: *se
-    network_id: *se_karlskrona_region
-  - id: 393543
-    prefix: '46456'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6ef45c2b-2f9b-4122-b6f2-9b978f2fb906
-    country_id: *se
-    network_id: *se_bromolla_solvesborg_region
-  - id: 393865
-    prefix: '46457'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b285262e-67fe-461d-88e2-b25477280148
-    country_id: *se
-    network_id: *se_ronneby_region
-  - id: 396477
-    prefix: '46471'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 5e1832cb-c6bb-4449-92ae-8cca43181aac
-    country_id: *se
-    network_id: *se_emmaboda_region
-  - id: 396543
-    prefix: '46472'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 73ed1608-b474-4eaf-8358-82f05517c452
-    country_id: *se
-    network_id: *se_alvesta_rydaholm_region
-  - id: 397490
-    prefix: '46474'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 65959ad1-7a30-4f10-ad85-6c048eb1384f
-    country_id: *se
-    network_id: *se_aseda_lenhovda_region
-  - id: 397650
-    prefix: '46477'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4f3206f4-d899-41bb-ad9a-d93508ad0115
-    country_id: *se
-    network_id: *se_tingsryd_region
-  - id: 399609
-    prefix: '46470'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 81c729ff-e1e3-4d35-ba67-1b1c8895630a
-    country_id: *se
-    network_id: *se_vaxjo_region
-  - id: 401273
-    prefix: '46476'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d865bb3a-664a-4d15-9d13-0b0e5e2914c6
-    country_id: *se
-    network_id: *se_almhult_region
-  - id: 454113
-    prefix: '4690'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 82f432c7-c9f6-4c8a-8086-0c2849c47ab0
-    country_id: *se
-    network_id: *se_umea_region
-  - id: 458519
-    prefix: '46910'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 90481be6-4b55-48f1-980d-3db8aa0d0c40
-    country_id: *se
-    network_id: *se_skelleftea_region
-  - id: 460340
-    prefix: '46914'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 55d7de22-b877-448f-8e5a-614ef38380fc
-    country_id: *se
-    network_id: *se_burtrask_region
-  - id: 465124
-    prefix: '46911'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6361d87b-a4a2-4d2f-adda-198b76cbb632
-    country_id: *se
-    network_id: *se_pitea_region
-  - id: 465643
-    prefix: '46912'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 7ecb7132-b2b5-4dc5-bed6-78ed271452f3
-    country_id: *se
-    network_id: *se_byske_region
-  - id: 466317
-    prefix: '46913'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6e63ddde-6a60-4228-867a-b1bb1bfebe3e
-    country_id: *se
-    network_id: *se_lovanger_region
-  - id: 466840
-    prefix: '46915'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 80b9b1d1-3cac-4118-9535-60fbcd14bf4c
-    country_id: *se
-    network_id: *se_bastutrask_region
-  - id: 467207
-    prefix: '46916'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 7df4ba1d-6e7f-427a-8b21-d23fcefd07f9
-    country_id: *se
-    network_id: *se_jorn_region
-  - id: 467623
-    prefix: '46918'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 9fdeb491-2916-471d-b70a-29e53c67a7b4
-    country_id: *se
-    network_id: *se_norsjo_region
-  - id: 470618
-    prefix: '46920'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 276281b1-8be0-4e03-ac93-898258f02feb
-    country_id: *se
-    network_id: *se_lulea_region
+    network_id: *se_haparanda_region
   - id: 474430
     prefix: '46924'
     number_min_length: 10
@@ -3281,20 +3215,6 @@ network_prefixes:
     uuid: 6249fff3-2764-4b70-bc6c-a01445525e09
     country_id: *se
     network_id: *se_overkalix_region
-  - id: 476599
-    prefix: '46921'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 668e630f-e0ba-4ec3-b974-9502129bee42
-    country_id: *se
-    network_id: *se_boden_region
-  - id: 477112
-    prefix: '46922'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 31186d07-bd2b-442d-940c-4c55e9d691c7
-    country_id: *se
-    network_id: *se_haparanda_region
   - id: 478441
     prefix: '46923'
     number_min_length: 10
@@ -3302,20 +3222,6 @@ network_prefixes:
     uuid: 467a184d-65de-4610-8ae1-6fdabedd9741
     country_id: *se
     network_id: *se_kalix_region
-  - id: 481756
-    prefix: '46929'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4ca5caff-6d9c-4b93-8f08-1f781acf8e78
-    country_id: *se
-    network_id: *se_alvsbyn_region
-  - id: 482773
-    prefix: '46927'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 13ceff4a-87c0-49ef-aed1-cb8a2fa267a9
-    country_id: *se
-    network_id: *se_overtornea_region
   - id: 482788
     prefix: '46928'
     number_min_length: 10
@@ -3323,6 +3229,34 @@ network_prefixes:
     uuid: 279d735f-463f-48a3-91a8-626b70180bac
     country_id: *se
     network_id: *se_harads_region
+  - id: 482773
+    prefix: '46927'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 13ceff4a-87c0-49ef-aed1-cb8a2fa267a9
+    country_id: *se
+    network_id: *se_overtornea_region
+  - id: 481756
+    prefix: '46929'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4ca5caff-6d9c-4b93-8f08-1f781acf8e78
+    country_id: *se
+    network_id: *se_alvsbyn_region
+  - id: 490541
+    prefix: '46932'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 1e6d7bd3-0df4-4f33-b4d7-61e77e73026a
+    country_id: *se
+    network_id: *se_bjurholm_region
+  - id: 487059
+    prefix: '46934'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6315de39-4e8e-479e-9b7d-34310516308c
+    country_id: *se
+    network_id: *se_robertsfors_region
   - id: 485708
     prefix: '46930'
     number_min_length: 10
@@ -3337,20 +3271,6 @@ network_prefixes:
     uuid: 65d4c47c-405f-444d-926f-20d5d6d7a6cd
     country_id: *se
     network_id: *se_vindeln_region
-  - id: 487059
-    prefix: '46934'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6315de39-4e8e-479e-9b7d-34310516308c
-    country_id: *se
-    network_id: *se_robertsfors_region
-  - id: 490541
-    prefix: '46932'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 1e6d7bd3-0df4-4f33-b4d7-61e77e73026a
-    country_id: *se
-    network_id: *se_bjurholm_region
   - id: 493046
     prefix: '46935'
     number_min_length: 10
@@ -3358,21 +3278,98 @@ network_prefixes:
     uuid: 68342f1b-1f20-4147-a143-07e73615b2f3
     country_id: *se
     network_id: *se_vannas_region
+  - id: 212868
+    prefix: '46940'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: eff209f7-4953-4ee5-8079-f572ba4e3d51
+    country_id: *se
+    network_id: *se_vilhelmina_region
+  - id: 213366
+    prefix: '46941'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d365389e-8c3f-44b7-a805-15606ff65ba8
+    country_id: *se
+    network_id: *se_asele_region
+  - id: 217417
+    prefix: '46950'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f6041b12-84bd-42e2-8e28-abf45db8e8d2
+    country_id: *se
+    network_id: *se_lycksele_region
+  - id: 217429
+    prefix: '46951'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 22da14f7-4e98-4673-94af-ed3f809dab06
+    country_id: *se
+    network_id: *se_storuman_region
+  - id: 219050
+    prefix: '46952'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fdd3a063-7da9-4b89-be5f-f2080bcaf0a2
+    country_id: *se
+    network_id: *se_sorsele_region
+  - id: 213828
+    prefix: '46942'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cbec505a-1e34-4725-bbfb-c0a12c1d1ddf
+    country_id: *se
+    network_id: *se_dorotea_region
+  - id: 213852
+    prefix: '46943'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 635eb5bb-4fd5-4385-ac48-8dec4938bb29
+    country_id: *se
+    network_id: *se_fredrika_region
+  - id: 219428
+    prefix: '46953'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 722b16b3-580e-4ad9-8f08-35314043f837
+    country_id: *se
+    network_id: *se_mala_region
+  - id: 219983
+    prefix: '46954'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 163e9e34-a5d0-46d1-9b9e-69240c49c936
+    country_id: *se
+    network_id: *se_tarnaby_region
+  - id: 225135
+    prefix: '46961'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 33553153-5e24-45b8-b3eb-fd2149206583
+    country_id: *se
+    network_id: *se_arjeplog_region
+  - id: 225112
+    prefix: '46960'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 52071748-fe59-4274-b0cb-4fad210d82f1
+    country_id: *se
+    network_id: *se_arvidsjaur_region
+  - id: 228266
+    prefix: '46971'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 215d3abb-2dac-49b5-9fb2-d5c9f4c8809f
+    country_id: *se
+    network_id: *se_jokkmokk_region
+  - id: 229465
+    prefix: '46970'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 85f78eca-2750-4f7e-9be1-71d995d3723c
+    country_id: *se
+    network_id: *se_gallivare_region
 # Mobile Prefixes
-  - id: 144631
-    prefix: '46673'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 8e4d9a67-be2a-4838-bc42-3a97e4f98d25
-    country_id: *se
-    network_id: *se_telia_mobile
-  - id: 145390
-    prefix: '46674'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 8e3d41d5-6db5-4ad9-8bcc-a22bd6df5b55
-    country_id: *se
-    network_id: *se_telenor_mobile
   - id: 145460
     prefix: '46675'
     number_min_length: 14
@@ -3394,6 +3391,20 @@ network_prefixes:
     uuid: a984f8e3-b1eb-4b88-aba3-970f42801ea4
     country_id: *se
     network_id: *se_gotanet_mobile
+  - id: 144631
+    prefix: '46673'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 8e4d9a67-be2a-4838-bc42-3a97e4f98d25
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 145390
+    prefix: '46674'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 8e3d41d5-6db5-4ad9-8bcc-a22bd6df5b55
+    country_id: *se
+    network_id: *se_telenor_mobile
   - id: 150243
     prefix: '4670'
     number_min_length: 11
@@ -8112,6 +8123,615 @@ network_prefixes:
     uuid: 8015e988-0cff-4fd8-85a3-155356aa32b8
     country_id: *se
     network_id: *se_telenor_mobile
+  - id: 164014
+    prefix: '4671000000'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 9326e00a-5052-4f48-83c6-700824014cb1
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164015
+    prefix: '4671000001'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 2fc6d685-b5d2-48d1-8847-009bf8a01805
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164016
+    prefix: '4671000002'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 50f3b0a6-e6b1-4bd6-a33d-c428d71f819b
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164017
+    prefix: '4671000003'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 619f12e4-2def-46d0-8c2f-b8b12198bc2c
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164018
+    prefix: '4671000004'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 82c4d6de-71ac-4434-ad80-5ac32394b1a2
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164019
+    prefix: '4671000005'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 0a16ddc4-dd08-4c4f-a255-6a0fa1371221
+    country_id: *se
+    network_id: *se_bredband2_mobile
+  - id: 164020
+    prefix: '4671000006'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: ffd7fb67-de80-493b-8526-9c84cbfcc155
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164021
+    prefix: '46710000070'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b4e1c62d-7196-4527-8452-d413f6625109
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164022
+    prefix: '46710000071'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: c9390b61-217a-43e5-9985-5e44a4f921fe
+    country_id: *se
+    network_id: *se_bahnhof_mobile
+  - id: 164023
+    prefix: '46710000072'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 55994333-e127-48c5-9c0d-0d0ecbdc8a12
+    country_id: *se
+    network_id: *se_bm_sverige_mobile
+  - id: 164024
+    prefix: '467100000730'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: a4d98363-e473-4204-8804-68329269c5b9
+    country_id: *se
+    network_id: *se_fastighetskometen_mobile
+  - id: 164025
+    prefix: '467100000731'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 2e4a77da-ad32-4448-a35a-8a9b276f8333
+    country_id: *se
+    network_id: *se_fastighetskometen_mobile
+  - id: 164026
+    prefix: '467100000732'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 77707b89-aa7e-47c9-81bf-95a0ed317f88
+    country_id: *se
+    network_id: *se_fibio_mobile
+  - id: 164027
+    prefix: '467100000733'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 2c69e79c-0867-457b-b92b-08719e2d932c
+    country_id: *se
+    network_id: *se_bredbandsson_mobile
+  - id: 164028
+    prefix: '467100000734'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: d2dd2bb6-39a5-49c3-82a9-e31cd556db83
+    country_id: *se
+    network_id: *se_globalconnect_mobile
+  - id: 164029
+    prefix: '467100000735'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 9a4dd27e-b656-43f7-94b2-a67017267e80
+    country_id: *se
+    network_id: *se_globalconnect_mobile
+  - id: 164030
+    prefix: '4671000007360'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b7209ac7-7e39-4674-9457-983d9f49a503
+    country_id: *se
+    network_id: *se_bm_sverige_mobile
+  - id: 164031
+    prefix: '4671000007361'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 0c540d14-84c3-47f5-b47e-f4bc75da1226
+    country_id: *se
+    network_id: *se_bm_sverige_mobile
+  - id: 164032
+    prefix: '4671000007362'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 72a14db4-5816-4973-95ca-207921d19200
+    country_id: *se
+    network_id: *se_bm_sverige_mobile
+  - id: 164033
+    prefix: '4671000007363'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 8531ab72-b467-4fbd-8c2f-f190e1c28dd2
+    country_id: *se
+    network_id: *se_bm_sverige_mobile
+  - id: 164034
+    prefix: '4671000007364'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: e3a01e8f-42cd-4921-9d05-fbf315e3257a
+    country_id: *se
+    network_id: *se_bm_sverige_mobile
+  - id: 164035
+    prefix: '467100000738'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: a18fe04b-6059-4168-93aa-6cc79e4ffcd3
+    country_id: *se
+    network_id: *se_fibio_mobile
+  - id: 164036
+    prefix: '467100000739'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 00bcf60c-2486-4142-a639-1312c8af9ab2
+    country_id: *se
+    network_id: *se_telness_mobile
+  - id: 164037
+    prefix: '46710000074'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 25e01bab-db1a-496a-bfad-c2b381e1aa4c
+    country_id: *se
+    network_id: *se_bredband2_mobile
+  - id: 164038
+    prefix: '46710000075'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 0afb2ea7-27a1-4ade-af01-3aafe965bb54
+    country_id: *se
+    network_id: *se_verbal_mobile
+  - id: 164039
+    prefix: '46710000076'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 95b9d4eb-1d08-45cb-b110-f60a193fd086
+    country_id: *se
+    network_id: *se_dstny_mobile
+  - id: 164040
+    prefix: '46710000077'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f22794ab-8a56-4a42-83da-d216ef520a6c
+    country_id: *se
+    network_id: *se_fonia_mobile
+  - id: 164041
+    prefix: '46710000078'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b15f46c5-53a2-4a5e-8bd8-469e3388c5f7
+    country_id: *se
+    network_id: *se_globalconnect_mobile
+  - id: 164042
+    prefix: '46710000079'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 028e4003-9d97-4300-b09c-c2e0c3d09c8a
+    country_id: *se
+    network_id: *se_telavox_mobile
+  - id: 164043
+    prefix: '4671000008'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: e4ef378c-e69f-424d-8732-564ff17d4740
+    country_id: *se
+    network_id: *se_gotanet_mobile
+  - id: 164044
+    prefix: '46710000090'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f9d4e76c-2886-48a2-bf8e-9f87af3c7c16
+    country_id: *se
+    network_id: *se_enreach_mobile
+  - id: 164045
+    prefix: '46710000091'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 0e1ca894-8750-4815-8c2a-1489d0343b2e
+    country_id: *se
+    network_id: *se_enreach_mobile
+  - id: 164046
+    prefix: '46710000092'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 4ecbf005-f724-4ffa-9905-1f80ef8ce693
+    country_id: *se
+    network_id: *se_telavox_mobile
+  - id: 164047
+    prefix: '467100000930'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: a4295ad0-2c05-41d6-aeef-924b2a0f0838
+    country_id: *se
+    network_id: *se_lynes_technologies_mobile
+  - id: 164048
+    prefix: '467100000931'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: dc29d7f8-3057-420b-992e-7f7911af1456
+    country_id: *se
+    network_id: *se_fibio_mobile
+  - id: 164049
+    prefix: '467100000932'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 92ec8d78-79fb-4dcc-8c72-97e716c141d9
+    country_id: *se
+    network_id: *se_fibio_mobile
+  - id: 164050
+    prefix: '467100000933'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 213a8691-1072-4a6a-b550-df9d3978c2f9
+    country_id: *se
+    network_id: *se_my_beat_mobile
+  - id: 164051
+    prefix: '467100000934'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: aeed70d7-05b1-4c28-9756-26dda740181a
+    country_id: *se
+    network_id: *se_vobbiz_mobile
+  - id: 164052
+    prefix: '467100000935'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: ed4f0365-8317-4164-8930-81999d9ac1a7
+    country_id: *se
+    network_id: *se_techtell_mobile
+  - id: 164053
+    prefix: '467100000936'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: eb2ed3a7-e5ab-46e7-813e-e8b00d2f0351
+    country_id: *se
+    network_id: *se_telness_mobile
+  - id: 164054
+    prefix: '467100000937'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 10831e21-3f15-4f71-bb2d-69664d3e7c32
+    country_id: *se
+    network_id: *se_telness_mobile
+  - id: 164055
+    prefix: '467100000938'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 4d984496-f09d-4d22-b2b0-a2d6efd09f6e
+    country_id: *se
+    network_id: *se_telness_mobile
+  - id: 164056
+    prefix: '46710000094'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 25494eda-e301-46e4-921f-43e1a18432c8
+    country_id: *se
+    network_id: *se_telavox_mobile
+  - id: 164057
+    prefix: '46710000095'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: afd555f2-dc2c-4521-bd8e-fd964a0d3a0c
+    country_id: *se
+    network_id: *se_telavox_mobile
+  - id: 164058
+    prefix: '46710000096'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 8f877c7d-42c4-4e26-b5ff-13a8513302ea
+    country_id: *se
+    network_id: *se_wifise_mobile
+  - id: 164059
+    prefix: '46710000097'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 27f23813-d642-4cd6-8e7c-9195ef716f8b
+    country_id: *se
+    network_id: *se_fibio_mobile
+  - id: 164060
+    prefix: '46710000098'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 79be2497-ab1e-43d3-88e7-bcb4d86dc4eb
+    country_id: *se
+    network_id: *se_telenabler_mobile
+  - id: 164061
+    prefix: '46710000099'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 8beb9086-4c87-4c4f-a859-64d1fee75452
+    country_id: *se
+    network_id: *se_chilimobil_mobile
+  - id: 164062
+    prefix: '4671000010'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 39552ad8-0a8d-459a-86cb-eee432e37fb6
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164063
+    prefix: '4671000011'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 80126aa8-feea-43b6-b2fe-c60e0f09c60b
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164064
+    prefix: '4671000012'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 625e98bd-1ae0-4b5a-a212-9c4611eaa53c
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164065
+    prefix: '4671000013'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 45e1d903-f00b-4a6b-9d89-0b2f7260e8d2
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164066
+    prefix: '4671000014'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 49161f7e-da72-4e40-8fde-357f4a16adee
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164067
+    prefix: '4671000015'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: cc5b25a7-b91c-40bd-a70f-91e79d1f30f4
+    country_id: *se
+    network_id: *se_teracom_mobile
+  - id: 164068
+    prefix: '4671000016'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 6662043a-f929-455f-88fe-6c5b81fdedde
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164069
+    prefix: '4671000017'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 696f6429-2231-47ac-850d-506b7fb9daa4
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164070
+    prefix: '4671000018'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b1f611b5-7397-456c-a834-0c72eb8e9442
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164071
+    prefix: '4671000019'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: e0f9caa4-b4cc-4cb2-9e27-6131c250803c
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164072
+    prefix: '4671000020'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 684e2301-9e3e-464e-972a-5309efaeaba4
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164073
+    prefix: '4671000021'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 7e7bb6c1-cf77-4a35-b424-b46ec19c3125
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164074
+    prefix: '4671000022'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 2c2cd8f7-67a5-47e0-8524-a0dd490b2978
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164075
+    prefix: '4671000023'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b9a62989-7354-4133-82f0-a8cfeae09560
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164076
+    prefix: '46710000250'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 6810513b-66c5-4b2e-a0fe-672b712f81fa
+    country_id: *se
+    network_id: *se_inabler_mobile
+  - id: 164077
+    prefix: '4671000029'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 7872c4f4-2875-4e0b-b910-5bad42381804
+    country_id: *se
+    network_id: *se_svea_internet_mobile
+  - id: 164078
+    prefix: '4671000030'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 016300f1-c527-4102-9815-8a236be9cb8c
+    country_id: *se
+    network_id: *se_3_mobile
+  - id: 164079
+    prefix: '4671000031'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 7d33ed74-3145-4b74-883f-91e416ede258
+    country_id: *se
+    network_id: *se_3_mobile
+  - id: 164080
+    prefix: '4671000032'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 80b9231a-23e1-4677-aa9b-6eaf49a17b49
+    country_id: *se
+    network_id: *se_3_mobile
+  - id: 164081
+    prefix: '4671000033'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: c2c864e9-b289-428e-9172-6ab3ea6a192c
+    country_id: *se
+    network_id: *se_3_mobile
+  - id: 164082
+    prefix: '4671000034'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 06a4fc40-81f1-4244-9713-9b36cd582453
+    country_id: *se
+    network_id: *se_3_mobile
+  - id: 164083
+    prefix: '4671000035'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 146801ac-ba83-48b1-923c-10dca813a842
+    country_id: *se
+    network_id: *se_3_mobile
+  - id: 164084
+    prefix: '4671000040'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 1f6ba1f7-2104-4fb7-adc4-92cc00d314c3
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164085
+    prefix: '4671000041'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 887e34b0-3615-433a-ba9c-90cc9eed6e99
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164086
+    prefix: '4671000042'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 06b98852-27e1-484d-bbbe-880b8af09301
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164087
+    prefix: '4671000043'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 8a0251a4-d321-4912-8a10-f01d89ba280b
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164088
+    prefix: '4671000044'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: a482fb2b-748b-44ff-8ddb-549e28fb8248
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164089
+    prefix: '467100005'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 58bbab01-3cbe-4900-9feb-2e6593bb678e
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164127
+    prefix: '4671900000'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 5fb5e5b2-e402-4637-83ac-a13b79fe1938
+    country_id: *se
+    network_id: *se_maingate_mobile
+  - id: 164128
+    prefix: '4671900001'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: d86adb95-250b-45cb-874b-e2da32833850
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164129
+    prefix: '4671900002'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 62c00e4b-d301-455d-a0f5-c8856cce6ace
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164130
+    prefix: '4671900003'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 25f5cba2-431b-4124-9530-3143dd337718
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164131
+    prefix: '4671900004'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 323a4bb0-4952-44f7-b8c7-2fec1639a088
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164132
+    prefix: '4671900005'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 16fa5272-9533-4d10-b981-2f3710ff5572
+    country_id: *se
+    network_id: *se_telia_mobile
+  - id: 164133
+    prefix: '4671900006'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 874f64da-0587-4615-9a14-b1c79b50baca
+    country_id: *se
+    network_id: *se_svea_billing_services_mobile
+  - id: 164134
+    prefix: '4671900007'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 9171c224-f1f3-4fae-a8d3-e38137767878
+    country_id: *se
+    network_id: *se_gotanet_mobile
+  - id: 164135
+    prefix: '4671900008'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b932ca23-8b66-4471-ac96-e03359305c8f
+    country_id: *se
+    network_id: *se_tele2_mobile
+  - id: 164136
+    prefix: '467190001'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f0fe4e55-ba35-4d8c-99eb-b004f162bdee
+    country_id: *se
+    network_id: *se_telenor_mobile
+  - id: 164137
+    prefix: '4671900020'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 107c8233-1376-4d31-aa40-de47759f3cdb
+    country_id: *se
+    network_id: *se_telenor_mobile
   - id: 157629
     prefix: '4671900021'
     number_min_length: 15
@@ -8763,615 +9383,244 @@ network_prefixes:
     uuid: ae193e3b-3e89-42d3-87e7-d007f7e7ecec
     country_id: *se
     network_id: *se_tele2_mobile
-  - id: 164014
-    prefix: '4671000000'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 9326e00a-5052-4f48-83c6-700824014cb1
+  - id: 172538
+    prefix: '4672'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cbea207-d95d-4851-a5ea-c42656e05690
     country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164015
-    prefix: '4671000001'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 2fc6d685-b5d2-48d1-8847-009bf8a01805
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164016
-    prefix: '4671000002'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 50f3b0a6-e6b1-4bd6-a33d-c428d71f819b
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164017
-    prefix: '4671000003'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 619f12e4-2def-46d0-8c2f-b8b12198bc2c
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164018
-    prefix: '4671000004'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 82c4d6de-71ac-4434-ad80-5ac32394b1a2
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164019
-    prefix: '4671000005'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 0a16ddc4-dd08-4c4f-a255-6a0fa1371221
-    country_id: *se
-    network_id: *se_bredband2_mobile
-  - id: 164020
-    prefix: '4671000006'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: ffd7fb67-de80-493b-8526-9c84cbfcc155
+    network_id: *se_mobile
+  - id: 172545
+    prefix: '467200'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8c7b7d91-d4f4-4a81-9ca2-4d18d95def0c
     country_id: *se
     network_id: *se_tele2_mobile
-  - id: 164021
-    prefix: '46710000070'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b4e1c62d-7196-4527-8452-d413f6625109
+  - id: 172546
+    prefix: '467201'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fa3a85fa-5813-4556-b9de-33e9a356c47b
     country_id: *se
     network_id: *se_tele2_mobile
-  - id: 164022
-    prefix: '46710000071'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: c9390b61-217a-43e5-9985-5e44a4f921fe
+  - id: 172550
+    prefix: '467202'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65ea6df8-2cb3-484e-a148-d331dd6c4f24
     country_id: *se
-    network_id: *se_bahnhof_mobile
-  - id: 164023
-    prefix: '46710000072'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 55994333-e127-48c5-9c0d-0d0ecbdc8a12
+    network_id: *se_tele2_mobile
+  - id: 172554
+    prefix: '467203'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01380d65-bd9e-4ea7-834e-33d338454977
     country_id: *se
-    network_id: *se_bm_sverige_mobile
-  - id: 164024
-    prefix: '467100000730'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: a4d98363-e473-4204-8804-68329269c5b9
+    network_id: *se_tele2_mobile
+  - id: 172559
+    prefix: '467204'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e5dddef2-f7ec-4415-95eb-f1f2e3d4c47b
     country_id: *se
-    network_id: *se_fastighetskometen_mobile
-  - id: 164025
-    prefix: '467100000731'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 2e4a77da-ad32-4448-a35a-8a9b276f8333
+    network_id: *se_tele2_mobile
+  - id: 172561
+    prefix: '467205000'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68fa074f-d52d-4b68-b7ef-12d73cb42744
     country_id: *se
-    network_id: *se_fastighetskometen_mobile
-  - id: 164026
-    prefix: '467100000732'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 77707b89-aa7e-47c9-81bf-95a0ed317f88
+    network_id: *se_mobiweb_mobile
+  - id: 172562
+    prefix: '467205001'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba8b7833-ba18-4836-81b5-65542163f4b5
     country_id: *se
-    network_id: *se_fibio_mobile
-  - id: 164027
-    prefix: '467100000733'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 2c69e79c-0867-457b-b92b-08719e2d932c
+    network_id: *se_bsg_mobile
+  - id: 172563
+    prefix: '467205002'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ff32dc1-5852-4ee0-a883-36e06a988c84
     country_id: *se
-    network_id: *se_bredbandsson_mobile
-  - id: 164028
-    prefix: '467100000734'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: d2dd2bb6-39a5-49c3-82a9-e31cd556db83
+    network_id: *se_mi_carrier_services_mobile
+  - id: 172564
+    prefix: '467205003'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d28c31ce-8419-47ef-828c-608a37d03a74
     country_id: *se
-    network_id: *se_globalconnect_mobile
-  - id: 164029
-    prefix: '467100000735'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 9a4dd27e-b656-43f7-94b2-a67017267e80
+    network_id: *se_compatel_mobile
+  - id: 172565
+    prefix: '467205004'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ee1aa22c-7180-4295-be54-1cd3d87c0496
     country_id: *se
-    network_id: *se_globalconnect_mobile
-  - id: 164030
-    prefix: '4671000007360'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b7209ac7-7e39-4674-9457-983d9f49a503
-    country_id: *se
-    network_id: *se_bm_sverige_mobile
-  - id: 164031
-    prefix: '4671000007361'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 0c540d14-84c3-47f5-b47e-f4bc75da1226
-    country_id: *se
-    network_id: *se_bm_sverige_mobile
-  - id: 164032
-    prefix: '4671000007362'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 72a14db4-5816-4973-95ca-207921d19200
-    country_id: *se
-    network_id: *se_bm_sverige_mobile
-  - id: 164033
-    prefix: '4671000007363'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 8531ab72-b467-4fbd-8c2f-f190e1c28dd2
-    country_id: *se
-    network_id: *se_bm_sverige_mobile
-  - id: 164034
-    prefix: '4671000007364'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: e3a01e8f-42cd-4921-9d05-fbf315e3257a
-    country_id: *se
-    network_id: *se_bm_sverige_mobile
-  - id: 164035
-    prefix: '467100000738'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: a18fe04b-6059-4168-93aa-6cc79e4ffcd3
-    country_id: *se
-    network_id: *se_fibio_mobile
-  - id: 164036
-    prefix: '467100000739'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 00bcf60c-2486-4142-a639-1312c8af9ab2
-    country_id: *se
-    network_id: *se_telness_mobile
-  - id: 164037
-    prefix: '46710000074'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 25e01bab-db1a-496a-bfad-c2b381e1aa4c
-    country_id: *se
-    network_id: *se_bredband2_mobile
-  - id: 164038
-    prefix: '46710000075'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 0afb2ea7-27a1-4ade-af01-3aafe965bb54
-    country_id: *se
-    network_id: *se_verbal_mobile
-  - id: 164039
-    prefix: '46710000076'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 95b9d4eb-1d08-45cb-b110-f60a193fd086
-    country_id: *se
-    network_id: *se_dstny_mobile
-  - id: 164040
-    prefix: '46710000077'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: f22794ab-8a56-4a42-83da-d216ef520a6c
-    country_id: *se
-    network_id: *se_fonia_mobile
-  - id: 164041
-    prefix: '46710000078'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b15f46c5-53a2-4a5e-8bd8-469e3388c5f7
-    country_id: *se
-    network_id: *se_globalconnect_mobile
-  - id: 164042
-    prefix: '46710000079'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 028e4003-9d97-4300-b09c-c2e0c3d09c8a
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 164043
-    prefix: '4671000008'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: e4ef378c-e69f-424d-8732-564ff17d4740
-    country_id: *se
-    network_id: *se_gotanet_mobile
-  - id: 164044
-    prefix: '46710000090'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: f9d4e76c-2886-48a2-bf8e-9f87af3c7c16
-    country_id: *se
-    network_id: *se_enreach_mobile
-  - id: 164045
-    prefix: '46710000091'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 0e1ca894-8750-4815-8c2a-1489d0343b2e
-    country_id: *se
-    network_id: *se_enreach_mobile
-  - id: 164046
-    prefix: '46710000092'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 4ecbf005-f724-4ffa-9905-1f80ef8ce693
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 164047
-    prefix: '467100000930'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: a4295ad0-2c05-41d6-aeef-924b2a0f0838
+    network_id: *se_soatso_mobile
+  - id: 172566
+    prefix: '467205005'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ae6dbdf5-184f-44e5-839a-58bece4f1371
     country_id: *se
     network_id: *se_lynes_technologies_mobile
-  - id: 164048
-    prefix: '467100000931'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: dc29d7f8-3057-420b-992e-7f7911af1456
+  - id: 172567
+    prefix: '467205006'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8a3eef2b-3578-4b3a-a739-843f3c204ba4
     country_id: *se
-    network_id: *se_fibio_mobile
-  - id: 164049
-    prefix: '467100000932'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 92ec8d78-79fb-4dcc-8c72-97e716c141d9
+    network_id: *se_minitel_mobile
+  - id: 172568
+    prefix: '467205007'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 55d104b7-3165-42ef-8a1a-8a7bdb4a8459
     country_id: *se
-    network_id: *se_fibio_mobile
-  - id: 164050
-    prefix: '467100000933'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 213a8691-1072-4a6a-b550-df9d3978c2f9
+    network_id: *se_minitel_mobile
+  - id: 172569
+    prefix: '467205008'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d972483d-23fe-4046-b176-aa15081e122f
     country_id: *se
-    network_id: *se_my_beat_mobile
-  - id: 164051
-    prefix: '467100000934'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: aeed70d7-05b1-4c28-9756-26dda740181a
+    network_id: *se_twilio_mobile
+  - id: 172570
+    prefix: '467205009'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ef78164-3e82-4e81-93fd-2e19774aa85e
     country_id: *se
-    network_id: *se_vobbiz_mobile
-  - id: 164052
-    prefix: '467100000935'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: ed4f0365-8317-4164-8930-81999d9ac1a7
+    network_id: *se_twilio_mobile
+  - id: 172571
+    prefix: '46720501'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd0d64fc-9429-4c1a-a3f7-1235d10eb179
     country_id: *se
-    network_id: *se_techtell_mobile
-  - id: 164053
-    prefix: '467100000936'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: eb2ed3a7-e5ab-46e7-813e-e8b00d2f0351
-    country_id: *se
-    network_id: *se_telness_mobile
-  - id: 164054
-    prefix: '467100000937'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 10831e21-3f15-4f71-bb2d-69664d3e7c32
-    country_id: *se
-    network_id: *se_telness_mobile
-  - id: 164055
-    prefix: '467100000938'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 4d984496-f09d-4d22-b2b0-a2d6efd09f6e
-    country_id: *se
-    network_id: *se_telness_mobile
-  - id: 164056
-    prefix: '46710000094'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 25494eda-e301-46e4-921f-43e1a18432c8
+    network_id: *se_messit_minicall_mobile
+  - id: 172572
+    prefix: '46720502'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c6f7e95-fb5e-41f0-ae3c-76a2c796a557
     country_id: *se
     network_id: *se_telavox_mobile
-  - id: 164057
-    prefix: '46710000095'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: afd555f2-dc2c-4521-bd8e-fd964a0d3a0c
+  - id: 172573
+    prefix: '46720503'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: beaecc0a-d634-4263-a0e1-4c36bf467772
     country_id: *se
     network_id: *se_telavox_mobile
-  - id: 164058
-    prefix: '46710000096'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 8f877c7d-42c4-4e26-b5ff-13a8513302ea
+  - id: 172574
+    prefix: '46720504'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 187ba486-292a-4572-bad0-e57dadfad7a0
     country_id: *se
-    network_id: *se_wifise_mobile
-  - id: 164059
-    prefix: '46710000097'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 27f23813-d642-4cd6-8e7c-9195ef716f8b
+    network_id: *se_telavox_mobile
+  - id: 172575
+    prefix: '46720505'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1159aac2-068c-42af-9a2a-2321106b7fbd
     country_id: *se
-    network_id: *se_fibio_mobile
-  - id: 164060
-    prefix: '46710000098'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 79be2497-ab1e-43d3-88e7-bcb4d86dc4eb
+    network_id: *se_telavox_mobile
+  - id: 172576
+    prefix: '46720506'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 366d4be7-5799-40e7-a8f5-2ccb903fb49b
     country_id: *se
-    network_id: *se_telenabler_mobile
-  - id: 164061
-    prefix: '46710000099'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 8beb9086-4c87-4c4f-a859-64d1fee75452
+    network_id: *se_telavox_mobile
+  - id: 172577
+    prefix: '46720507'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 487b02a7-6578-4ace-9dbb-93868e9adfdd
     country_id: *se
-    network_id: *se_chilimobil_mobile
-  - id: 164062
-    prefix: '4671000010'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 39552ad8-0a8d-459a-86cb-eee432e37fb6
+    network_id: *se_telavox_mobile
+  - id: 172578
+    prefix: '46720509'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 48369743-9dcc-41a0-b4cc-4438536b92e5
     country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164063
-    prefix: '4671000011'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 80126aa8-feea-43b6-b2fe-c60e0f09c60b
+    network_id: *se_telavox_mobile
+  - id: 172579
+    prefix: '4672051'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ef4922b1-e8a7-4fda-a4cc-7cc2dfc66c98
     country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164064
-    prefix: '4671000012'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 625e98bd-1ae0-4b5a-a212-9c4611eaa53c
+    network_id: *se_wifog_mobile
+  - id: 172580
+    prefix: '4672052'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 43b9edb8-684f-4052-8340-8931da690e1c
     country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164065
-    prefix: '4671000013'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 45e1d903-f00b-4a6b-9d89-0b2f7260e8d2
+    network_id: *se_wifog_mobile
+  - id: 172581
+    prefix: '4672053'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 722a8a41-2397-436d-827d-982da07eb3bd
     country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164066
-    prefix: '4671000014'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 49161f7e-da72-4e40-8fde-357f4a16adee
+    network_id: *se_wifog_mobile
+  - id: 172582
+    prefix: '4672054'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec2e3348-a4f3-4c59-9042-515434dfc942
     country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164067
-    prefix: '4671000015'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: cc5b25a7-b91c-40bd-a70f-91e79d1f30f4
+    network_id: *se_wifog_mobile
+  - id: 172583
+    prefix: '4672055'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c40ba42f-bc18-4d87-89aa-45bd9e97319f
     country_id: *se
-    network_id: *se_teracom_mobile
-  - id: 164068
-    prefix: '4671000016'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 6662043a-f929-455f-88fe-6c5b81fdedde
+    network_id: *se_bahnhof_mobile
+  - id: 172584
+    prefix: '4672056'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa11125a-b837-4c91-9fd6-7669a95f2dce
     country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164069
-    prefix: '4671000017'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 696f6429-2231-47ac-850d-506b7fb9daa4
+    network_id: *se_bahnhof_mobile
+  - id: 172585
+    prefix: '4672057'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c3905eb2-9595-49a0-9849-c6d0a73824e8
     country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164070
-    prefix: '4671000018'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b1f611b5-7397-456c-a834-0c72eb8e9442
+    network_id: *se_wifog_mobile
+  - id: 172586
+    prefix: '46720580'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 421ab8e2-8d7f-4969-9e65-1e91bbcabeab
     country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164071
-    prefix: '4671000019'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: e0f9caa4-b4cc-4cb2-9e27-6131c250803c
+    network_id: *se_mi_carrier_services_mobile
+  - id: 172587
+    prefix: '46720581'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8443c39-76e9-459d-b683-f708aef6fcf5
     country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164072
-    prefix: '4671000020'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 684e2301-9e3e-464e-972a-5309efaeaba4
+    network_id: *se_twilio_mobile
+  - id: 172588
+    prefix: '46720582'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 214b8e66-74f8-457a-a80f-382127154b1c
     country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164073
-    prefix: '4671000021'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 7e7bb6c1-cf77-4a35-b424-b46ec19c3125
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164074
-    prefix: '4671000022'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 2c2cd8f7-67a5-47e0-8524-a0dd490b2978
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164075
-    prefix: '4671000023'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b9a62989-7354-4133-82f0-a8cfeae09560
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164076
-    prefix: '46710000250'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 6810513b-66c5-4b2e-a0fe-672b712f81fa
-    country_id: *se
-    network_id: *se_inabler_mobile
-  - id: 164077
-    prefix: '4671000029'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 7872c4f4-2875-4e0b-b910-5bad42381804
-    country_id: *se
-    network_id: *se_svea_internet_mobile
-  - id: 164078
-    prefix: '4671000030'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 016300f1-c527-4102-9815-8a236be9cb8c
-    country_id: *se
-    network_id: *se_3_mobile
-  - id: 164079
-    prefix: '4671000031'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 7d33ed74-3145-4b74-883f-91e416ede258
-    country_id: *se
-    network_id: *se_3_mobile
-  - id: 164080
-    prefix: '4671000032'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 80b9231a-23e1-4677-aa9b-6eaf49a17b49
-    country_id: *se
-    network_id: *se_3_mobile
-  - id: 164081
-    prefix: '4671000033'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: c2c864e9-b289-428e-9172-6ab3ea6a192c
-    country_id: *se
-    network_id: *se_3_mobile
-  - id: 164082
-    prefix: '4671000034'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 06a4fc40-81f1-4244-9713-9b36cd582453
-    country_id: *se
-    network_id: *se_3_mobile
-  - id: 164083
-    prefix: '4671000035'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 146801ac-ba83-48b1-923c-10dca813a842
-    country_id: *se
-    network_id: *se_3_mobile
-  - id: 164084
-    prefix: '4671000040'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 1f6ba1f7-2104-4fb7-adc4-92cc00d314c3
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164085
-    prefix: '4671000041'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 887e34b0-3615-433a-ba9c-90cc9eed6e99
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164086
-    prefix: '4671000042'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 06b98852-27e1-484d-bbbe-880b8af09301
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164087
-    prefix: '4671000043'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 8a0251a4-d321-4912-8a10-f01d89ba280b
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164088
-    prefix: '4671000044'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: a482fb2b-748b-44ff-8ddb-549e28fb8248
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164089
-    prefix: '467100005'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 58bbab01-3cbe-4900-9feb-2e6593bb678e
-    country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164127
-    prefix: '4671900000'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 5fb5e5b2-e402-4637-83ac-a13b79fe1938
-    country_id: *se
-    network_id: *se_maingate_mobile
-  - id: 164128
-    prefix: '4671900001'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: d86adb95-250b-45cb-874b-e2da32833850
-    country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164129
-    prefix: '4671900002'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 62c00e4b-d301-455d-a0f5-c8856cce6ace
-    country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164130
-    prefix: '4671900003'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 25f5cba2-431b-4124-9530-3143dd337718
-    country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164131
-    prefix: '4671900004'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 323a4bb0-4952-44f7-b8c7-2fec1639a088
-    country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164132
-    prefix: '4671900005'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 16fa5272-9533-4d10-b981-2f3710ff5572
-    country_id: *se
-    network_id: *se_telia_mobile
-  - id: 164133
-    prefix: '4671900006'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 874f64da-0587-4615-9a14-b1c79b50baca
-    country_id: *se
-    network_id: *se_svea_billing_services_mobile
-  - id: 164134
-    prefix: '4671900007'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 9171c224-f1f3-4fae-a8d3-e38137767878
-    country_id: *se
-    network_id: *se_gotanet_mobile
-  - id: 164135
-    prefix: '4671900008'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b932ca23-8b66-4471-ac96-e03359305c8f
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 164136
-    prefix: '467190001'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: f0fe4e55-ba35-4d8c-99eb-b004f162bdee
-    country_id: *se
-    network_id: *se_telenor_mobile
-  - id: 164137
-    prefix: '4671900020'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 107c8233-1376-4d31-aa40-de47759f3cdb
-    country_id: *se
-    network_id: *se_telenor_mobile
+    network_id: *se_telavox_mobile
   - id: 167774
     prefix: '46720583'
     number_min_length: 11
@@ -12998,244 +13247,6 @@ network_prefixes:
     uuid: 7befdc24-fe9f-48be-bb1f-3e6fd20554e8
     country_id: *se
     network_id: *se_telenor_mobile
-  - id: 172538
-    prefix: '4672'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1cbea207-d95d-4851-a5ea-c42656e05690
-    country_id: *se
-    network_id: *se_mobile
-  - id: 172545
-    prefix: '467200'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8c7b7d91-d4f4-4a81-9ca2-4d18d95def0c
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 172546
-    prefix: '467201'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fa3a85fa-5813-4556-b9de-33e9a356c47b
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 172550
-    prefix: '467202'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 65ea6df8-2cb3-484e-a148-d331dd6c4f24
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 172554
-    prefix: '467203'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 01380d65-bd9e-4ea7-834e-33d338454977
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 172559
-    prefix: '467204'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e5dddef2-f7ec-4415-95eb-f1f2e3d4c47b
-    country_id: *se
-    network_id: *se_tele2_mobile
-  - id: 172561
-    prefix: '467205000'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 68fa074f-d52d-4b68-b7ef-12d73cb42744
-    country_id: *se
-    network_id: *se_mobiweb_mobile
-  - id: 172562
-    prefix: '467205001'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba8b7833-ba18-4836-81b5-65542163f4b5
-    country_id: *se
-    network_id: *se_bsg_mobile
-  - id: 172563
-    prefix: '467205002'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4ff32dc1-5852-4ee0-a883-36e06a988c84
-    country_id: *se
-    network_id: *se_mi_carrier_services_mobile
-  - id: 172564
-    prefix: '467205003'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d28c31ce-8419-47ef-828c-608a37d03a74
-    country_id: *se
-    network_id: *se_compatel_mobile
-  - id: 172565
-    prefix: '467205004'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ee1aa22c-7180-4295-be54-1cd3d87c0496
-    country_id: *se
-    network_id: *se_soatso_mobile
-  - id: 172566
-    prefix: '467205005'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ae6dbdf5-184f-44e5-839a-58bece4f1371
-    country_id: *se
-    network_id: *se_lynes_technologies_mobile
-  - id: 172567
-    prefix: '467205006'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8a3eef2b-3578-4b3a-a739-843f3c204ba4
-    country_id: *se
-    network_id: *se_minitel_mobile
-  - id: 172568
-    prefix: '467205007'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 55d104b7-3165-42ef-8a1a-8a7bdb4a8459
-    country_id: *se
-    network_id: *se_minitel_mobile
-  - id: 172569
-    prefix: '467205008'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d972483d-23fe-4046-b176-aa15081e122f
-    country_id: *se
-    network_id: *se_twilio_mobile
-  - id: 172570
-    prefix: '467205009'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4ef78164-3e82-4e81-93fd-2e19774aa85e
-    country_id: *se
-    network_id: *se_twilio_mobile
-  - id: 172571
-    prefix: '46720501'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd0d64fc-9429-4c1a-a3f7-1235d10eb179
-    country_id: *se
-    network_id: *se_messit_minicall_mobile
-  - id: 172572
-    prefix: '46720502'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9c6f7e95-fb5e-41f0-ae3c-76a2c796a557
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 172573
-    prefix: '46720503'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: beaecc0a-d634-4263-a0e1-4c36bf467772
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 172574
-    prefix: '46720504'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 187ba486-292a-4572-bad0-e57dadfad7a0
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 172575
-    prefix: '46720505'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1159aac2-068c-42af-9a2a-2321106b7fbd
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 172576
-    prefix: '46720506'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 366d4be7-5799-40e7-a8f5-2ccb903fb49b
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 172577
-    prefix: '46720507'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 487b02a7-6578-4ace-9dbb-93868e9adfdd
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 172578
-    prefix: '46720509'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 48369743-9dcc-41a0-b4cc-4438536b92e5
-    country_id: *se
-    network_id: *se_telavox_mobile
-  - id: 172579
-    prefix: '4672051'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef4922b1-e8a7-4fda-a4cc-7cc2dfc66c98
-    country_id: *se
-    network_id: *se_wifog_mobile
-  - id: 172580
-    prefix: '4672052'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 43b9edb8-684f-4052-8340-8931da690e1c
-    country_id: *se
-    network_id: *se_wifog_mobile
-  - id: 172581
-    prefix: '4672053'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 722a8a41-2397-436d-827d-982da07eb3bd
-    country_id: *se
-    network_id: *se_wifog_mobile
-  - id: 172582
-    prefix: '4672054'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ec2e3348-a4f3-4c59-9042-515434dfc942
-    country_id: *se
-    network_id: *se_wifog_mobile
-  - id: 172583
-    prefix: '4672055'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c40ba42f-bc18-4d87-89aa-45bd9e97319f
-    country_id: *se
-    network_id: *se_bahnhof_mobile
-  - id: 172584
-    prefix: '4672056'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aa11125a-b837-4c91-9fd6-7669a95f2dce
-    country_id: *se
-    network_id: *se_bahnhof_mobile
-  - id: 172585
-    prefix: '4672057'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c3905eb2-9595-49a0-9849-c6d0a73824e8
-    country_id: *se
-    network_id: *se_wifog_mobile
-  - id: 172586
-    prefix: '46720580'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 421ab8e2-8d7f-4969-9e65-1e91bbcabeab
-    country_id: *se
-    network_id: *se_mi_carrier_services_mobile
-  - id: 172587
-    prefix: '46720581'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8443c39-76e9-459d-b683-f708aef6fcf5
-    country_id: *se
-    network_id: *se_twilio_mobile
-  - id: 172588
-    prefix: '46720582'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 214b8e66-74f8-457a-a80f-382127154b1c
-    country_id: *se
-    network_id: *se_telavox_mobile
   - id: 174950
     prefix: '4673'
     number_min_length: 11
@@ -20244,20 +20255,13 @@ network_prefixes:
     uuid: ee2cc89c-646c-48d5-8d31-d5e39773f813
     country_id: *se
     network_id: *se_network_operator_services
-  - id: 213945
-    prefix: '46944'
+  - id: 454587
+    prefix: '46900'
     number_min_length: 9
     number_max_length: 12
-    uuid: 4ffb76fe-2344-4671-948e-38e85ba6c87e
+    uuid: a00db610-d965-4200-a7cb-52f1e0028ec1
     country_id: *se
-    network_id: *se_entertainment_services
-  - id: 217226
-    prefix: '46939'
-    number_min_length: 9
-    number_max_length: 12
-    uuid: 6b21056b-0087-4505-8011-b3658fe779d3
-    country_id: *se
-    network_id: *se_premium_rate_services_non_information_services
+    network_id: *se_premium_rate_services_information_services
   - id: 239378
     prefix: '4699'
     number_min_length: 9
@@ -20293,14 +20297,42 @@ network_prefixes:
     uuid: 7027b8cc-edd9-4126-8f1c-a5045552f2b8
     country_id: *se
     network_id: *se_machine_to_machine_m2m_services
-  - id: 454587
-    prefix: '46900'
+  - id: 217226
+    prefix: '46939'
     number_min_length: 9
     number_max_length: 12
-    uuid: a00db610-d965-4200-a7cb-52f1e0028ec1
+    uuid: 6b21056b-0087-4505-8011-b3658fe779d3
     country_id: *se
-    network_id: *se_premium_rate_services_information_services
+    network_id: *se_premium_rate_services_non_information_services
+  - id: 213945
+    prefix: '46944'
+    number_min_length: 9
+    number_max_length: 12
+    uuid: 4ffb76fe-2344-4671-948e-38e85ba6c87e
+    country_id: *se
+    network_id: *se_entertainment_services
 # Paging Prefixes
+  - id: 183280
+    prefix: '467496'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c6c0089-64de-41c4-8217-6474006a101a
+    country_id: *se
+    network_id: *se_messit_minicall_paging
+  - id: 183292
+    prefix: '467498'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68552bb3-0b6d-495c-956d-97b0314510e0
+    country_id: *se
+    network_id: *se_messit_minicall_paging
+  - id: 183367
+    prefix: '467499'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e87e8be3-c690-498a-9b55-c22e60b46957
+    country_id: *se
+    network_id: *se_messit_minicall_paging
   - id: 182874
     prefix: '4674'
     number_min_length: 11
@@ -20343,32 +20375,3 @@ network_prefixes:
     uuid: bd320ec6-cb28-490d-bf16-a0a0a7b7688a
     country_id: *se
     network_id: *se_messit_minicall_paging
-  - id: 183280
-    prefix: '467496'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2c6c0089-64de-41c4-8217-6474006a101a
-    country_id: *se
-    network_id: *se_messit_minicall_paging
-  - id: 183292
-    prefix: '467498'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 68552bb3-0b6d-495c-956d-97b0314510e0
-    country_id: *se
-    network_id: *se_messit_minicall_paging
-  - id: 183367
-    prefix: '467499'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e87e8be3-c690-498a-9b55-c22e60b46957
-    country_id: *se
-    network_id: *se_messit_minicall_paging
-# Country code Prefixes
-  - id: 242109
-    prefix: '46'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: b4d686ce-17e7-4f65-94ae-d0eb6fe83800
-    country_id: *se
-    network_id: null

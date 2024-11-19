@@ -1,17 +1,18 @@
 country_id: &li 122
 networks:
+# Fixed Networks
+  - id: &li_fixed 22718
+    name: LI Fixed
+    uuid: b3032773-304a-4b81-8bda-4f7a49bec355
+    type_id: 2
 # Supplementary services Networks
   - id: &li_special_services 21436
     name: LI Special Services
     uuid: 95e98ee4-f0db-4246-905f-a990ffcfe514
     type_id: 13
-  - id: &li_freephone_services 23818
-    name: LI Freephone Services
-    uuid: 6ef5659a-c92a-43f5-a30a-d8e866eef100
-    type_id: 13
-  - id: &li_shared_cost_services 24004
-    name: LI Shared Cost Services
-    uuid: 029a8d74-5c32-43c0-bbc0-c87f3e0c85ea
+  - id: &li_fixed_cost_services 26103
+    name: LI Fixed Cost Services
+    uuid: 55814a04-4072-4c78-8a83-ba288eaf5f08
     type_id: 13
   - id: &li_personal_number_services 24376
     name: LI Personal Number Services
@@ -33,9 +34,13 @@ networks:
     name: LI Adults Entertainment Services
     uuid: 1becd2a5-9d38-4793-a5f9-aee0e925f4a3
     type_id: 13
-  - id: &li_fixed_cost_services 26103
-    name: LI Fixed Cost Services
-    uuid: 55814a04-4072-4c78-8a83-ba288eaf5f08
+  - id: &li_freephone_services 23818
+    name: LI Freephone Services
+    uuid: 6ef5659a-c92a-43f5-a30a-d8e866eef100
+    type_id: 13
+  - id: &li_shared_cost_services 24004
+    name: LI Shared Cost Services
+    uuid: 029a8d74-5c32-43c0-bbc0-c87f3e0c85ea
     type_id: 13
   - id: &li_routing_number_portability 26135
     name: LI Routing Number Portability
@@ -82,20 +87,29 @@ networks:
     name: LI 7Acht Mobile
     uuid: dd5b2cbd-7a24-46f5-93ad-a5986b3a22c4
     type_id: 3
-# Fixed Networks
-  - id: &li_fixed 22718
-    name: LI Fixed
-    uuid: b3032773-304a-4b81-8bda-4f7a49bec355
-    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 247414
+    prefix: '4232'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d7a8030f-dea8-4091-92e5-7e72d2bd89ac
+    country_id: *li
+    network_id: *li_fixed
   - id: 242038
     prefix: '423'
     number_min_length: 4
     number_max_length: 100
     uuid: 0d6f46e4-eec8-4250-9596-853715b9d9ae
     country_id: *li
-    network_id: null
+    network_id: *li_fixed
+  - id: 248906
+    prefix: '4233'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 35309e51-7a0b-4435-8cec-232b7d03e33f
+    country_id: *li
+    network_id: *li_fixed
 # Supplementary services Prefixes
   - id: 242433
     prefix: '4231'
@@ -104,20 +118,13 @@ network_prefixes:
     uuid: ecacc70b-a2cf-4d59-9c23-6bf9318b4b37
     country_id: *li
     network_id: *li_special_services
-  - id: 253125
-    prefix: '42380'
+  - id: 264008
+    prefix: '42387'
     number_min_length: 10
     number_max_length: 10
-    uuid: 953dd932-6d4b-4d13-9f79-a15cc48638bb
+    uuid: f7c501fb-93f4-4e28-acaf-78334f8061f3
     country_id: *li
-    network_id: *li_freephone_services
-  - id: 253721
-    prefix: '42384'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 07782d53-6442-411a-9928-d72dbeca435f
-    country_id: *li
-    network_id: *li_shared_cost_services
+    network_id: *li_fixed_cost_services
   - id: 257002
     prefix: '42389'
     number_min_length: 10
@@ -153,13 +160,20 @@ network_prefixes:
     uuid: cbfc0bff-d89c-4c43-8f8e-d284b190112b
     country_id: *li
     network_id: *li_adults_entertainment_services
-  - id: 264008
-    prefix: '42387'
+  - id: 253125
+    prefix: '42380'
     number_min_length: 10
     number_max_length: 10
-    uuid: f7c501fb-93f4-4e28-acaf-78334f8061f3
+    uuid: 953dd932-6d4b-4d13-9f79-a15cc48638bb
     country_id: *li
-    network_id: *li_fixed_cost_services
+    network_id: *li_freephone_services
+  - id: 253721
+    prefix: '42384'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 07782d53-6442-411a-9928-d72dbeca435f
+    country_id: *li
+    network_id: *li_shared_cost_services
   - id: 265016
     prefix: '423970'
     number_min_length: 8
@@ -173,6 +187,48 @@ network_prefixes:
     number_min_length: 12
     number_max_length: 12
     uuid: 8de958f7-257f-49c9-806a-e6274e3ef8e6
+    country_id: *li
+    network_id: *li_mobile
+  - id: 253987
+    prefix: '42361'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c7dbe195-0662-4bfd-9001-8ddcc45bcad6
+    country_id: *li
+    network_id: *li_mobile
+  - id: 254118
+    prefix: '42362'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c2df296d-fcf5-4832-aac0-d644566092bc
+    country_id: *li
+    network_id: *li_mobile
+  - id: 251740
+    prefix: '42371'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4b569d8f-5c7a-4225-8991-0a0025054e9e
+    country_id: *li
+    network_id: *li_mobile
+  - id: 251826
+    prefix: '42372'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e95e17a4-97bc-4d2a-8406-1dfc8a67cf35
+    country_id: *li
+    network_id: *li_mobile
+  - id: 252064
+    prefix: '42374'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5c1577b8-a727-44d8-b4d6-6aa981791fcb
+    country_id: *li
+    network_id: *li_mobile
+  - id: 252555
+    prefix: '42375'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e8849797-91c1-4cd1-9762-f321912e546b
     country_id: *li
     network_id: *li_mobile
   - id: 250661
@@ -224,13 +280,6 @@ network_prefixes:
     uuid: e97ca34d-5ad0-4fdc-aa78-5efb30f4b7a3
     country_id: *li
     network_id: *li_soracom_mobile
-  - id: 251241
-    prefix: '42365'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4fcf8266-3752-445c-9a7b-623e2e6c5882
-    country_id: *li
-    network_id: *li_mobile
   - id: 251250
     prefix: '423650'
     number_min_length: 12
@@ -280,6 +329,20 @@ network_prefixes:
     uuid: a3de31b2-9cdd-4dd3-8882-08da2bea148a
     country_id: *li
     network_id: *li_cubic_mobile
+  - id: 509663
+    prefix: '423657'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 29cd6664-6ccb-44ca-9bc9-f506aa25a203
+    country_id: *li
+    network_id: *li_cubic_mobile
+  - id: 509719
+    prefix: '423658'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d529f725-39b6-489a-8383-5a4157c9142a
+    country_id: *li
+    network_id: *li_cubic_mobile
   - id: 251526
     prefix: '423659'
     number_min_length: 12
@@ -287,48 +350,6 @@ network_prefixes:
     uuid: ae921adc-c38a-4853-be67-952d324d30a4
     country_id: *li
     network_id: *li_fl1_mobile
-  - id: 251740
-    prefix: '42371'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4b569d8f-5c7a-4225-8991-0a0025054e9e
-    country_id: *li
-    network_id: *li_mobile
-  - id: 251826
-    prefix: '42372'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e95e17a4-97bc-4d2a-8406-1dfc8a67cf35
-    country_id: *li
-    network_id: *li_mobile
-  - id: 252064
-    prefix: '42374'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5c1577b8-a727-44d8-b4d6-6aa981791fcb
-    country_id: *li
-    network_id: *li_mobile
-  - id: 252555
-    prefix: '42375'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e8849797-91c1-4cd1-9762-f321912e546b
-    country_id: *li
-    network_id: *li_mobile
-  - id: 253987
-    prefix: '42361'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c7dbe195-0662-4bfd-9001-8ddcc45bcad6
-    country_id: *li
-    network_id: *li_mobile
-  - id: 254118
-    prefix: '42362'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c2df296d-fcf5-4832-aac0-d644566092bc
-    country_id: *li
-    network_id: *li_mobile
   - id: 254293
     prefix: '42366'
     number_min_length: 12
@@ -553,18 +574,3 @@ network_prefixes:
     uuid: da7cd4c1-424f-4fce-880b-3fce4310e755
     country_id: *li
     network_id: *li_7acht_mobile
-# Fixed Prefixes
-  - id: 247414
-    prefix: '4232'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d7a8030f-dea8-4091-92e5-7e72d2bd89ac
-    country_id: *li
-    network_id: *li_fixed
-  - id: 248906
-    prefix: '4233'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 35309e51-7a0b-4435-8cec-232b7d03e33f
-    country_id: *li
-    network_id: *li_fixed

@@ -1,6 +1,14 @@
 country_id: &gm 78
 networks:
 # Supplementary services Networks
+  - id: &gm_special_services_shared_rate 21841
+    name: GM Special Services Shared Rate
+    uuid: 89b624cf-cdee-4bb7-9113-0c404296c347
+    type_id: 13
+  - id: &gm_special_services_premium_rate 22623
+    name: GM Special Services Premium Rate
+    uuid: 64c68d99-1910-48a1-b816-7692cc61486e
+    type_id: 13
   - id: &gm_special_services 21408
     name: GM Special Services
     uuid: d7d01ea8-c60b-47d6-9c4c-3645986d01f8
@@ -13,15 +21,28 @@ networks:
     name: GM Special Services Standard Rate
     uuid: d1f96a7a-9bd0-4520-9bbb-7a0d94958e4e
     type_id: 13
-  - id: &gm_special_services_shared_rate 21841
-    name: GM Special Services Shared Rate
-    uuid: 89b624cf-cdee-4bb7-9113-0c404296c347
-    type_id: 13
-  - id: &gm_special_services_premium_rate 22623
-    name: GM Special Services Premium Rate
-    uuid: 64c68d99-1910-48a1-b816-7692cc61486e
-    type_id: 13
+# Mobile Networks
+  - id: &gm_africell_mobile 22713
+    name: GM Africell Mobile
+    uuid: 12c08cde-0f43-4511-995b-4ad6c65db88a
+    type_id: 3
+  - id: &gm_qcell_mobile 22468
+    name: GM Qcell Mobile
+    uuid: 3887692f-f0d1-48fe-a3f8-535103f7642a
+    type_id: 3
+  - id: &gm_comium_mobile 22533
+    name: GM Comium Mobile
+    uuid: 6a3619ef-0bda-47f9-96f0-04eb7ad05e7f
+    type_id: 3
+  - id: &gm_gamcel_mobile 24396
+    name: GM Gamcel Mobile
+    uuid: 66992fd7-bb82-456b-8c0d-b688978e058d
+    type_id: 3
 # Fixed Networks
+  - id: &gm_fixed 23792
+    name: GM Fixed
+    uuid: 5409fa0a-8d26-49bf-aad4-3d154084ae6d
+    type_id: 2
   - id: &gm_banjul_region 22218
     name: GM Banjul Region
     uuid: 4eecad08-4433-40e2-a5d6-61fe60f206fc
@@ -210,37 +231,22 @@ networks:
     name: GM Kaur Region
     uuid: 1f5ccb3d-adcf-4cd4-ada3-26abd95f4841
     type_id: 2
-  - id: &gm_fixed 23792
-    name: GM Fixed
-    uuid: 5409fa0a-8d26-49bf-aad4-3d154084ae6d
-    type_id: 2
-# Mobile Networks
-  - id: &gm_qcell_mobile 22468
-    name: GM Qcell Mobile
-    uuid: 3887692f-f0d1-48fe-a3f8-535103f7642a
-    type_id: 3
-  - id: &gm_comium_mobile 22533
-    name: GM Comium Mobile
-    uuid: 6a3619ef-0bda-47f9-96f0-04eb7ad05e7f
-    type_id: 3
-  - id: &gm_africell_mobile 22713
-    name: GM Africell Mobile
-    uuid: 12c08cde-0f43-4511-995b-4ad6c65db88a
-    type_id: 3
-  - id: &gm_gamcel_mobile 24396
-    name: GM Gamcel Mobile
-    uuid: 66992fd7-bb82-456b-8c0d-b688978e058d
-    type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242004
-    prefix: '220'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: cd6c011b-ba83-4e0c-9633-deeed1b31319
-    country_id: *gm
-    network_id: null
 # Supplementary services Prefixes
+  - id: 243055
+    prefix: '22017'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: cda2c2ec-c8a3-480e-97ba-b5ede373d1ca
+    country_id: *gm
+    network_id: *gm_special_services_shared_rate
+  - id: 247273
+    prefix: '22018'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: f4ba6a58-bb69-4855-988f-0e0746c4a26f
+    country_id: *gm
+    network_id: *gm_special_services_premium_rate
   - id: 242404
     prefix: '2201'
     number_min_length: 6
@@ -297,21 +303,92 @@ network_prefixes:
     uuid: 4fdb6c0a-3047-4600-82d1-55300ba0147a
     country_id: *gm
     network_id: *gm_special_services_standard_rate
-  - id: 243055
-    prefix: '22017'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: cda2c2ec-c8a3-480e-97ba-b5ede373d1ca
+# Mobile Prefixes
+  - id: 247406
+    prefix: '2202'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc539f0c-7788-4015-b2fa-964be8110d2c
     country_id: *gm
-    network_id: *gm_special_services_shared_rate
-  - id: 247273
-    prefix: '22018'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: f4ba6a58-bb69-4855-988f-0e0746c4a26f
+    network_id: *gm_africell_mobile
+  - id: 245157
+    prefix: '22058'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6c80b925-b959-4aac-92ca-94c516b058f6
     country_id: *gm
-    network_id: *gm_special_services_premium_rate
+    network_id: *gm_qcell_mobile
+  - id: 245258
+    prefix: '22059'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4acfb066-b714-4c5c-b5ff-16959d44460c
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 245394
+    prefix: '2206'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2d26341d-818f-46eb-aa05-b7a331bde2c2
+    country_id: *gm
+    network_id: *gm_comium_mobile
+  - id: 257099
+    prefix: '2209'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 475073b6-3263-437d-823f-10ddc9049831
+    country_id: *gm
+    network_id: *gm_gamcel_mobile
+  - id: 248899
+    prefix: '2203'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d067bdef-b1a9-4803-bc53-ba97bdcaeed1
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 249621
+    prefix: '22050'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 02ab40ee-1114-4fbe-b098-2c0267019755
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 249697
+    prefix: '22051'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 529fbde2-5319-49fe-82c9-28ce0fb3dc0a
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 249766
+    prefix: '22052'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a5c68ba0-8682-4e5e-9151-fa444847e689
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 249925
+    prefix: '22053'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e4924ee6-fa9a-40a4-8b83-67d2faf72f3a
+    country_id: *gm
+    network_id: *gm_qcell_mobile
+  - id: 255252
+    prefix: '2207'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e31ec39-30ff-4a9c-ad15-9288f0e27834
+    country_id: *gm
+    network_id: *gm_africell_mobile
 # Fixed Prefixes
+  - id: 242004
+    prefix: '220'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: cd6c011b-ba83-4e0c-9633-deeed1b31319
+    country_id: *gm
+    network_id: *gm_fixed
   - id: 244234
     prefix: '22042'
     number_min_length: 10
@@ -648,81 +725,3 @@ network_prefixes:
     uuid: 60489ea1-5120-4d43-bb53-0bccd56dc4d5
     country_id: *gm
     network_id: *gm_fixed
-# Mobile Prefixes
-  - id: 245157
-    prefix: '22058'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6c80b925-b959-4aac-92ca-94c516b058f6
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 245258
-    prefix: '22059'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4acfb066-b714-4c5c-b5ff-16959d44460c
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 245394
-    prefix: '2206'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2d26341d-818f-46eb-aa05-b7a331bde2c2
-    country_id: *gm
-    network_id: *gm_comium_mobile
-  - id: 247406
-    prefix: '2202'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cc539f0c-7788-4015-b2fa-964be8110d2c
-    country_id: *gm
-    network_id: *gm_africell_mobile
-  - id: 248899
-    prefix: '2203'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d067bdef-b1a9-4803-bc53-ba97bdcaeed1
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 249621
-    prefix: '22050'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 02ab40ee-1114-4fbe-b098-2c0267019755
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 249697
-    prefix: '22051'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 529fbde2-5319-49fe-82c9-28ce0fb3dc0a
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 249766
-    prefix: '22052'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a5c68ba0-8682-4e5e-9151-fa444847e689
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 249925
-    prefix: '22053'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e4924ee6-fa9a-40a4-8b83-67d2faf72f3a
-    country_id: *gm
-    network_id: *gm_qcell_mobile
-  - id: 255252
-    prefix: '2207'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5e31ec39-30ff-4a9c-ad15-9288f0e27834
-    country_id: *gm
-    network_id: *gm_africell_mobile
-  - id: 257099
-    prefix: '2209'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 475073b6-3263-437d-823f-10ddc9049831
-    country_id: *gm
-    network_id: *gm_gamcel_mobile

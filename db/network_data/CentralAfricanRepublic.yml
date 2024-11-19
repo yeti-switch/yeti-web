@@ -1,5 +1,22 @@
 country_id: &cf 41
 networks:
+# Fixed Networks
+  - id: &cf_fixed 22707
+    name: CF Fixed
+    uuid: bb9e66b8-0aea-4743-bc27-e55d2ccbeabd
+    type_id: 2
+  - id: &cf_bangui_region 22791
+    name: CF Bangui Region
+    uuid: 5a06e0d7-835e-4d6c-97ad-789663dbb73b
+    type_id: 2
+  - id: &cf_voip_region 24389
+    name: CF Voip Region
+    uuid: 28ae7e2e-b3ad-4c33-9419-34722a738581
+    type_id: 2
+  - id: &cf_berberati_region 22835
+    name: CF Berberati Region
+    uuid: 4e087ae3-e667-4d5f-8390-07eb0147486d
+    type_id: 2
 # Supplementary services Networks
   - id: &cf_special_services 21375
     name: CF Special Services
@@ -13,23 +30,6 @@ networks:
     name: CF Internet Services
     uuid: 8f9f11d6-7b82-4741-bb9d-39e99f0676f6
     type_id: 13
-# Fixed Networks
-  - id: &cf_fixed 22707
-    name: CF Fixed
-    uuid: bb9e66b8-0aea-4743-bc27-e55d2ccbeabd
-    type_id: 2
-  - id: &cf_bangui_region 22791
-    name: CF Bangui Region
-    uuid: 5a06e0d7-835e-4d6c-97ad-789663dbb73b
-    type_id: 2
-  - id: &cf_berberati_region 22835
-    name: CF Berberati Region
-    uuid: 4e087ae3-e667-4d5f-8390-07eb0147486d
-    type_id: 2
-  - id: &cf_voip_region 24389
-    name: CF Voip Region
-    uuid: 28ae7e2e-b3ad-4c33-9419-34722a738581
-    type_id: 2
 # Mobile Networks
   - id: &cf_socatel_mobile 23564
     name: CF Socatel Mobile
@@ -56,14 +56,42 @@ networks:
     uuid: 3cdebd7c-b2cb-4243-bc8f-631ced0f24f8
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 247392
+    prefix: '2362'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a9fa7ab7-e16e-408d-a403-fc057821cea1
+    country_id: *cf
+    network_id: *cf_fixed
+  - id: 247620
+    prefix: '23621'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff1a5a3b-f55f-4499-863f-9b4de4689b5f
+    country_id: *cf
+    network_id: *cf_bangui_region
   - id: 241964
     prefix: '236'
     number_min_length: 4
     number_max_length: 100
     uuid: 30b5594a-3d42-4466-b75e-50f07698efe8
     country_id: *cf
-    network_id: null
+    network_id: *cf_fixed
+  - id: 257083
+    prefix: '2369'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b5680e63-e34c-4cee-9b76-be1832d40885
+    country_id: *cf
+    network_id: *cf_voip_region
+  - id: 247717
+    prefix: '23622'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b2754ea5-4c41-4335-9a97-5c2ea6a7ecd7
+    country_id: *cf
+    network_id: *cf_berberati_region
 # Supplementary services Prefixes
   - id: 242369
     prefix: '2361'
@@ -79,18 +107,18 @@ network_prefixes:
     uuid: a21dc717-0a62-4819-a11a-2864e5c55490
     country_id: *cf
     network_id: *cf_value_added_services
-  - id: 256664
-    prefix: '2368'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 76d357e1-3e7e-4cb3-800b-576be0b5d77a
-    country_id: *cf
-    network_id: *cf_value_added_services
   - id: 256784
     prefix: '236877'
     number_min_length: 11
     number_max_length: 11
     uuid: b0eedfaa-4b4c-4a18-8e18-3122e53882c6
+    country_id: *cf
+    network_id: *cf_value_added_services
+  - id: 256664
+    prefix: '2368'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 76d357e1-3e7e-4cb3-800b-576be0b5d77a
     country_id: *cf
     network_id: *cf_value_added_services
   - id: 263697
@@ -107,35 +135,6 @@ network_prefixes:
     uuid: 93f89d71-647d-4e83-a5ba-4208c7d49a9c
     country_id: *cf
     network_id: *cf_internet_services
-# Fixed Prefixes
-  - id: 247392
-    prefix: '2362'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a9fa7ab7-e16e-408d-a403-fc057821cea1
-    country_id: *cf
-    network_id: *cf_fixed
-  - id: 247620
-    prefix: '23621'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ff1a5a3b-f55f-4499-863f-9b4de4689b5f
-    country_id: *cf
-    network_id: *cf_bangui_region
-  - id: 247717
-    prefix: '23622'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b2754ea5-4c41-4335-9a97-5c2ea6a7ecd7
-    country_id: *cf
-    network_id: *cf_berberati_region
-  - id: 257083
-    prefix: '2369'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b5680e63-e34c-4cee-9b76-be1832d40885
-    country_id: *cf
-    network_id: *cf_voip_region
 # Mobile Prefixes
   - id: 251728
     prefix: '23671'

@@ -1,25 +1,83 @@
 country_id: &za 196
 networks:
+# Mobile Networks
+  - id: &za_mobile 10543
+    name: ZA Mobile
+    uuid: e9fc9489-f4ae-47ac-97ba-ed7a9cb7f865
+    type_id: 3
+  - id: &za_vodacom_mobile 10548
+    name: ZA Vodacom Mobile
+    uuid: 4fc0834e-51d3-4322-b608-82e8d97d9d2c
+    type_id: 3
+  - id: &za_mtn_mobile 10547
+    name: ZA Mtn Mobile
+    uuid: a4d561b4-5dcf-4da7-b7fd-ceb2bcc7db47
+    type_id: 3
+  - id: &za_cell_c_mobile 11090
+    name: ZA Cell C Mobile
+    uuid: 13e161f3-1585-47f3-8a3f-925666c4d0b6
+    type_id: 3
+  - id: &za_virgin_mobile_mobile 17641
+    name: ZA Virgin Mobile Mobile
+    uuid: 8dc38c7d-8463-4181-9e6d-42477f5e3284
+    type_id: 3
+  - id: &za_telkom_mobile 11816
+    name: ZA Telkom Mobile
+    uuid: 7741379c-b539-4137-b1b3-91457fa96895
+    type_id: 3
+  - id: &za_rain_mobile 39325
+    name: ZA Rain Mobile
+    uuid: 82f800b3-6d89-4daf-825d-a6f1f8c1754c
+    type_id: 3
+  - id: &za_lycamobile_mobile 12956
+    name: ZA Lycamobile Mobile
+    uuid: 3879da6f-a625-4a98-bd16-fe726f3d1a46
+    type_id: 3
+# Supplementary services Networks
+  - id: &za_freephone_services 19848
+    name: ZA Freephone Services
+    uuid: 18e6090d-379c-4cec-ba6b-bd52fe0b8fc4
+    type_id: 13
+  - id: &za_telkom_inbound_call_services 40541
+    name: ZA Telkom Inbound Call Services
+    uuid: bf877939-c61e-4760-9f02-848c175368b5
+    type_id: 13
+  - id: &za_mass_call_services 41980
+    name: ZA Mass Call Services
+    uuid: b00d0690-c551-41bf-9105-daef8861205f
+    type_id: 13
+  - id: &za_premium_rate_services 42059
+    name: ZA Premium Rate Services
+    uuid: d3cd39d5-1890-4783-bddc-68c307b9f5e6
+    type_id: 13
+  - id: &za_adult_entertainment_services 42060
+    name: ZA Adult Entertainment Services
+    uuid: a4dbf977-ba53-46ed-9291-56c890dcdae1
+    type_id: 13
+  - id: &za_telkom_virtual_fax_service 41567
+    name: ZA Telkom Virtual Fax Service
+    uuid: b2ecc813-4b5f-44b2-9a38-fc25721c87aa
+    type_id: 13
+  - id: &za_machine_to_machine_m2m_services 20461
+    name: ZA Machine To Machine M2M Services
+    uuid: 00d1c6f8-16f6-4244-ba6d-b1db54f3a7cb
+    type_id: 13
+  - id: &za_special_services 21516
+    name: ZA Special Services
+    uuid: 35dc69f5-9a71-4d74-b5f5-7f178a7a1567
+    type_id: 13
+  - id: &za_sms_mms_services 22153
+    name: ZA Sms_Mms Services
+    uuid: 2cf5c476-9e58-4a8b-9e14-874cf2284222
+    type_id: 13
 # Fixed Networks
-  - id: &za_eastern_cape_region 4208
-    name: ZA Eastern Cape Region
-    uuid: 510594f9-9014-4d74-82ed-bb9fe0ce3ae9
+  - id: &za_voip_region 41362
+    name: ZA Voip Region
+    uuid: 30613b01-6929-4c40-9bba-af82235e48b1
     type_id: 2
-  - id: &za_eastern_cape_free_state_region 5653
-    name: ZA Eastern Cape Free State Region
-    uuid: 7b92257b-1645-4c2f-8e02-3db0f6ccaef3
-    type_id: 2
-  - id: &za_gordonia_region 7194
-    name: ZA Gordonia Region
-    uuid: d141db9c-d8dd-41c6-992a-757d4ecd0a7c
-    type_id: 2
-  - id: &za_northern_cape_north_west_region 7584
-    name: ZA Northern Cape North West Region
-    uuid: 64a29452-c643-4478-ad37-1d021e743345
-    type_id: 2
-  - id: &za_free_state_region 9285
-    name: ZA Free State Region
-    uuid: e8e84630-9a6d-47b6-b8eb-0123c7f1b32a
+  - id: &za_fixed 43484
+    name: ZA Fixed
+    uuid: 60462bbc-93b8-43b2-84c0-b3b33eeffa18
     type_id: 2
   - id: &za_johannesburg_region 24812
     name: ZA Johannesburg Region
@@ -37,10 +95,6 @@ networks:
     name: ZA Limpopo North West Region
     uuid: 409a73df-d64e-4f43-8748-d8aa785c8ccb
     type_id: 2
-  - id: &za_north_west_region 25549
-    name: ZA North West Region
-    uuid: a5b0d4f6-c0dd-46ee-aaf9-6c0f8fc4387a
-    type_id: 2
   - id: &za_limpopo_region 26287
     name: ZA Limpopo Region
     uuid: 21c5e826-0d49-4808-8453-360e9dbcd4a5
@@ -48,6 +102,10 @@ networks:
   - id: &za_vaal_triangle_region 26517
     name: ZA Vaal Triangle Region
     uuid: 8469ceb8-a779-431a-b1d3-e4b51d19f3d3
+    type_id: 2
+  - id: &za_north_west_region 25549
+    name: ZA North West Region
+    uuid: a5b0d4f6-c0dd-46ee-aaf9-6c0f8fc4387a
     type_id: 2
   - id: &za_cape_town_region 27350
     name: ZA Cape Town Region
@@ -61,13 +119,13 @@ networks:
     name: ZA Karoo Region
     uuid: fade5245-7750-47e4-b787-5617bcfb87e4
     type_id: 2
-  - id: &za_namaqualand_region 29788
-    name: ZA Namaqualand Region
-    uuid: 493df0a4-ea2b-40bc-9bb5-3ac3b23497d5
-    type_id: 2
   - id: &za_western_cape_region 31081
     name: ZA Western Cape Region
     uuid: 71e24f37-6a4e-4352-b9f9-1d7898e2d436
+    type_id: 2
+  - id: &za_namaqualand_region 29788
+    name: ZA Namaqualand Region
+    uuid: 493df0a4-ea2b-40bc-9bb5-3ac3b23497d5
     type_id: 2
   - id: &za_durban_region 31767
     name: ZA Durban Region
@@ -77,14 +135,6 @@ networks:
     name: ZA Kwazulu Natal Region
     uuid: a99a6aae-69d6-41dd-b4b1-6a3882b132e8
     type_id: 2
-  - id: &za_drakensberg_region 33665
-    name: ZA Drakensberg Region
-    uuid: f87cc43f-fec9-424e-899a-4fea60f6168d
-    type_id: 2
-  - id: &za_bhisho_region 34321
-    name: ZA Bhisho Region
-    uuid: c7b86446-44ca-4671-86e2-86028afd6a6b
-    type_id: 2
   - id: &za_zululand_region 34650
     name: ZA Zululand Region
     uuid: 5b941d90-cb7d-478e-afb8-e526ada8c1ff
@@ -93,9 +143,21 @@ networks:
     name: ZA Kwazulu Natal Pondoland Region
     uuid: c49d9b08-77bc-4881-9aae-ff124a0ce5c4
     type_id: 2
+  - id: &za_bhisho_region 34321
+    name: ZA Bhisho Region
+    uuid: c7b86446-44ca-4671-86e2-86028afd6a6b
+    type_id: 2
+  - id: &za_drakensberg_region 33665
+    name: ZA Drakensberg Region
+    uuid: f87cc43f-fec9-424e-899a-4fea60f6168d
+    type_id: 2
   - id: &za_port_elizabeth_region 36252
     name: ZA Port Elizabeth Region
     uuid: cedbd8b4-098d-42c0-bee8-5596abe19c15
+    type_id: 2
+  - id: &za_eastern_cape_region 4208
+    name: ZA Eastern Cape Region
+    uuid: 510594f9-9014-4d74-82ed-bb9fe0ce3ae9
     type_id: 2
   - id: &za_east_london_region 36596
     name: ZA East London Region
@@ -105,643 +167,24 @@ networks:
     name: ZA Garden Route Region
     uuid: 4450aee8-564d-4466-b050-868dc1a494e0
     type_id: 2
-  - id: &za_voip_region 41362
-    name: ZA Voip Region
-    uuid: 30613b01-6929-4c40-9bba-af82235e48b1
+  - id: &za_eastern_cape_free_state_region 5653
+    name: ZA Eastern Cape Free State Region
+    uuid: 7b92257b-1645-4c2f-8e02-3db0f6ccaef3
     type_id: 2
-# Mobile Networks
-  - id: &za_mobile 10543
-    name: ZA Mobile
-    uuid: e9fc9489-f4ae-47ac-97ba-ed7a9cb7f865
-    type_id: 3
-  - id: &za_mtn_mobile 10547
-    name: ZA Mtn Mobile
-    uuid: a4d561b4-5dcf-4da7-b7fd-ceb2bcc7db47
-    type_id: 3
-  - id: &za_vodacom_mobile 10548
-    name: ZA Vodacom Mobile
-    uuid: 4fc0834e-51d3-4322-b608-82e8d97d9d2c
-    type_id: 3
-  - id: &za_cell_c_mobile 11090
-    name: ZA Cell C Mobile
-    uuid: 13e161f3-1585-47f3-8a3f-925666c4d0b6
-    type_id: 3
-  - id: &za_telkom_mobile 11816
-    name: ZA Telkom Mobile
-    uuid: 7741379c-b539-4137-b1b3-91457fa96895
-    type_id: 3
-  - id: &za_lycamobile_mobile 12956
-    name: ZA Lycamobile Mobile
-    uuid: 3879da6f-a625-4a98-bd16-fe726f3d1a46
-    type_id: 3
-  - id: &za_virgin_mobile_mobile 17641
-    name: ZA Virgin Mobile Mobile
-    uuid: 8dc38c7d-8463-4181-9e6d-42477f5e3284
-    type_id: 3
-  - id: &za_rain_mobile 39325
-    name: ZA Rain Mobile
-    uuid: 82f800b3-6d89-4daf-825d-a6f1f8c1754c
-    type_id: 3
-# Supplementary services Networks
-  - id: &za_freephone_services 19848
-    name: ZA Freephone Services
-    uuid: 18e6090d-379c-4cec-ba6b-bd52fe0b8fc4
-    type_id: 13
-  - id: &za_machine_to_machine_m2m_services 20461
-    name: ZA Machine To Machine M2M Services
-    uuid: 00d1c6f8-16f6-4244-ba6d-b1db54f3a7cb
-    type_id: 13
-  - id: &za_special_services 21516
-    name: ZA Special Services
-    uuid: 35dc69f5-9a71-4d74-b5f5-7f178a7a1567
-    type_id: 13
-  - id: &za_sms_mms_services 22153
-    name: ZA Sms_Mms Services
-    uuid: 2cf5c476-9e58-4a8b-9e14-874cf2284222
-    type_id: 13
-  - id: &za_telkom_inbound_call_services 40541
-    name: ZA Telkom Inbound Call Services
-    uuid: bf877939-c61e-4760-9f02-848c175368b5
-    type_id: 13
-  - id: &za_telkom_virtual_fax_service 41567
-    name: ZA Telkom Virtual Fax Service
-    uuid: b2ecc813-4b5f-44b2-9a38-fc25721c87aa
-    type_id: 13
-  - id: &za_mass_call_services 41980
-    name: ZA Mass Call Services
-    uuid: b00d0690-c551-41bf-9105-daef8861205f
-    type_id: 13
-  - id: &za_premium_rate_services 42059
-    name: ZA Premium Rate Services
-    uuid: d3cd39d5-1890-4783-bddc-68c307b9f5e6
-    type_id: 13
-  - id: &za_adult_entertainment_services 42060
-    name: ZA Adult Entertainment Services
-    uuid: a4dbf977-ba53-46ed-9291-56c890dcdae1
-    type_id: 13
+  - id: &za_northern_cape_north_west_region 7584
+    name: ZA Northern Cape North West Region
+    uuid: 64a29452-c643-4478-ad37-1d021e743345
+    type_id: 2
+  - id: &za_gordonia_region 7194
+    name: ZA Gordonia Region
+    uuid: d141db9c-d8dd-41c6-992a-757d4ecd0a7c
+    type_id: 2
+  - id: &za_free_state_region 9285
+    name: ZA Free State Region
+    uuid: e8e84630-9a6d-47b6-b8eb-0123c7f1b32a
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 51621
-    prefix: '2748'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5a2e7f69-a440-4493-850c-893b5cab1009
-    country_id: *za
-    network_id: *za_eastern_cape_region
-  - id: 58237
-    prefix: '2749'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1f527c12-683e-400e-bf36-17429b449749
-    country_id: *za
-    network_id: *za_eastern_cape_region
-  - id: 62620
-    prefix: '2751'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 39cdead3-b34c-49dd-9359-f9dd877572a0
-    country_id: *za
-    network_id: *za_eastern_cape_free_state_region
-  - id: 73214
-    prefix: '2754'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 164480c4-0418-452c-9f2a-6c05fa05eee1
-    country_id: *za
-    network_id: *za_gordonia_region
-  - id: 76561
-    prefix: '2753'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 61a0698e-f18e-4f53-a4ca-083f25abd6b0
-    country_id: *za
-    network_id: *za_northern_cape_north_west_region
-  - id: 87930
-    prefix: '2756'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 722d7b0f-b6b8-4100-8f85-38467dc20443
-    country_id: *za
-    network_id: *za_free_state_region
-  - id: 90279
-    prefix: '2757'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 96e68371-a0f4-443b-beb0-132f648deb1a
-    country_id: *za
-    network_id: *za_free_state_region
-  - id: 93105
-    prefix: '2758'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 121eb86d-5a37-4e74-a7b2-4282153a97dc
-    country_id: *za
-    network_id: *za_free_state_region
-  - id: 258629
-    prefix: '2710'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 034cf7a6-2a6d-4ab5-b7ff-1e6eed9118f9
-    country_id: *za
-    network_id: *za_johannesburg_region
-  - id: 258822
-    prefix: '2711'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ce55047c-b3b2-436e-8fac-864a02313a28
-    country_id: *za
-    network_id: *za_johannesburg_region
-  - id: 259235
-    prefix: '2712'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a7b9f5ca-52de-481d-9097-6aa0ab427b78
-    country_id: *za
-    network_id: *za_tshwane_region
-  - id: 259514
-    prefix: '2713'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: db90f42a-3d9e-425a-bf61-1feb6481c99f
-    country_id: *za
-    network_id: *za_mpumalanga_region
-  - id: 259949
-    prefix: '2714'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9aeda6ab-1fbc-4907-ba62-41a41549180f
-    country_id: *za
-    network_id: *za_limpopo_north_west_region
-  - id: 260512
-    prefix: '2718'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: da080a88-957d-41a8-8cbb-31a8ac08f77f
-    country_id: *za
-    network_id: *za_north_west_region
-  - id: 266075
-    prefix: '2715'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 89921976-4644-4092-af4f-f82839363ca5
-    country_id: *za
-    network_id: *za_limpopo_region
-  - id: 266565
-    prefix: '2716'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eae668a2-2c9e-435f-8420-50bfc6140726
-    country_id: *za
-    network_id: *za_vaal_triangle_region
-  - id: 266954
-    prefix: '2717'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f182b3e-6c62-4576-9750-47daac2f7567
-    country_id: *za
-    network_id: *za_mpumalanga_region
-  - id: 274247
-    prefix: '2721'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 601fb5c2-ffe4-4d82-a01b-f5b7f9046fe4
-    country_id: *za
-    network_id: *za_cape_town_region
-  - id: 282803
-    prefix: '2722'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f0709870-f4d8-4f76-a273-972524dd192a
-    country_id: *za
-    network_id: *za_boland_western_cape_region
-  - id: 286645
-    prefix: '2723'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3804f97a-dc8d-41c8-adfd-ccc856c5c74a
-    country_id: *za
-    network_id: *za_karoo_region
-  - id: 301434
-    prefix: '2727'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 150aa37e-da1f-4124-9697-e0c4404a9b13
-    country_id: *za
-    network_id: *za_namaqualand_region
-  - id: 313365
-    prefix: '2728'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ea40b87e-59dc-4e3c-9b71-56cd798fe6a6
-    country_id: *za
-    network_id: *za_western_cape_region
-  - id: 321189
-    prefix: '2731'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 645768cd-ba21-4b4a-b5ed-92888e8ffa35
-    country_id: *za
-    network_id: *za_durban_region
-  - id: 327293
-    prefix: '2732'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0c2cd1f1-3a2e-440b-938e-30cdabf61f6c
-    country_id: *za
-    network_id: *za_kwazulu_natal_region
-  - id: 337303
-    prefix: '2733'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0b02e820-b2c9-4878-8f94-a05b3df33f01
-    country_id: *za
-    network_id: *za_kwazulu_natal_region
-  - id: 340488
-    prefix: '2734'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a7f50b05-59af-4435-b4de-07b97825d403
-    country_id: *za
-    network_id: *za_kwazulu_natal_region
-  - id: 345956
-    prefix: '2736'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 585a00a4-8a6b-4a02-8b0c-7442bfe06531
-    country_id: *za
-    network_id: *za_drakensberg_region
-  - id: 349900
-    prefix: '2740'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 849e02a5-4b66-499d-b108-4e8a4bf00074
-    country_id: *za
-    network_id: *za_bhisho_region
-  - id: 352252
-    prefix: '2735'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07fb7908-91b0-4769-8649-3e8a7c801993
-    country_id: *za
-    network_id: *za_zululand_region
-  - id: 357543
-    prefix: '2739'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d3a374fa-684c-431d-95bf-d7bfac6d416a
-    country_id: *za
-    network_id: *za_kwazulu_natal_pondoland_region
-  - id: 362544
-    prefix: '2741'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 74146af2-8268-4475-9dc4-e5816c23137b
-    country_id: *za
-    network_id: *za_port_elizabeth_region
-  - id: 367954
-    prefix: '2743'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4384d1dd-9f21-4b70-bf7d-36f0c8f7bcc7
-    country_id: *za
-    network_id: *za_east_london_region
-  - id: 370205
-    prefix: '2744'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a3833eb9-5e95-48e4-96fd-7e88c59a3950
-    country_id: *za
-    network_id: *za_garden_route_region
-  - id: 377192
-    prefix: '2742'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b07e64f6-a486-4d35-ab67-3bd0614c7097
-    country_id: *za
-    network_id: *za_eastern_cape_region
-  - id: 388644
-    prefix: '2746'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a500352f-5d7f-4e76-9b61-b333cb0ca890
-    country_id: *za
-    network_id: *za_eastern_cape_region
-  - id: 392630
-    prefix: '2745'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3e00d1a8-51d8-40b4-9f46-da01e6c2ffbc
-    country_id: *za
-    network_id: *za_eastern_cape_region
-  - id: 399492
-    prefix: '2747'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d43d7aa3-e38c-47a3-abd1-457f6a060cee
-    country_id: *za
-    network_id: *za_eastern_cape_region
-  - id: 441117
-    prefix: '2787'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e3572e4-0692-461b-b58b-dc5989e0fc56
-    country_id: *za
-    network_id: *za_voip_region
 # Mobile Prefixes
-  - id: 95225
-    prefix: '2760'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 022e1bd6-4755-4aa7-bf4e-40fac5220cf4
-    country_id: *za
-    network_id: *za_mobile
-  - id: 95247
-    prefix: '27603'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3567466c-a182-4a8d-a2a2-7dbd7e9b296b
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 95249
-    prefix: '27604'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 72f8ad9e-133c-4f06-b868-9fde130567fb
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 95250
-    prefix: '27605'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 50cde2fb-0e9e-4baf-a634-af9f241faa57
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 95251
-    prefix: '27606'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2675494e-4037-48b1-bae4-bfe2df9fad19
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 95252
-    prefix: '27607'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2642fc0a-8de7-4f9d-b621-c0638702c06b
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 95254
-    prefix: '27608'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 959cb398-9b71-42ac-a1de-ccd52f1a1689
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 95257
-    prefix: '27609'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52df995d-687e-4451-8fb9-bbd5716f22ac
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 98946
-    prefix: '27618'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 864675c0-c1a8-41e1-be66-af07b8bf34d8
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 99025
-    prefix: '27619'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dcc948f8-b025-4a8d-9207-b70dc4da0759
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 108604
-    prefix: '27610'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6ace0b87-cad9-4dae-8e0a-bc8566e2e49e
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 108624
-    prefix: '27611'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fc2fa8e7-609c-4535-9cc8-adc6ce3170f2
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 108654
-    prefix: '27612'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 63af62ac-1fdd-414e-89a0-e267b0a1ac92
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 108667
-    prefix: '27613'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0cbe372a-4363-45f2-b4cf-d0ee991b6294
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 108674
-    prefix: '27614'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e4d1a4bd-a2a4-49ab-81ce-96ea38591c25
-    country_id: *za
-    network_id: *za_telkom_mobile
-  - id: 108692
-    prefix: '27615'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fb862423-e994-42a4-932c-44fc1f6dcaf9
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 108810
-    prefix: '27616'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d63743b5-bea3-4742-ad32-0ba651870af2
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 108920
-    prefix: '27617'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f81f3ca3-6f0e-4068-8fec-b8c8b599a34c
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 111479
-    prefix: '2762'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 05b6b176-88dc-43a1-83e0-113a1dbe2918
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 117844
-    prefix: '2763'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a84fc23a-6bb7-43e0-8ecb-3ce55d972bb3
-    country_id: *za
-    network_id: *za_mobile
-  - id: 117847
-    prefix: '27630'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2947df96-9d42-487c-af5a-5c4395fbf2c8
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 117939
-    prefix: '27631'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f2272166-a004-4934-b22c-c4120553bb15
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 118046
-    prefix: '27632'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 35442794-5841-48c9-93eb-1e66c916f556
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 118140
-    prefix: '27633'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7f15255a-c220-4c0d-b4c5-fdc819a11c81
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 118242
-    prefix: '27634'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4419d203-8aa0-47d8-bfe2-8096d73ef3a6
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 118327
-    prefix: '27635'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 79dafb13-6eac-4d67-9b0a-1f918b8a1a36
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 118427
-    prefix: '27636'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7180dac5-13c0-4b35-9664-ab8d02dd38fe
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 118515
-    prefix: '27637'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: efe542e4-8b7f-464a-b9bc-c822695045a1
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 122449
-    prefix: '27640'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aa77d07a-890e-4913-8c51-a0354be9354b
-    country_id: *za
-    network_id: *za_mtn_mobile
-  - id: 122553
-    prefix: '27641'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a13006ac-e662-486e-a2ac-ef991e46fdfe
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 122649
-    prefix: '27642'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f8a6429-f15d-43b9-b76e-5d1650d753a9
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 122753
-    prefix: '27643'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8e5283c9-728c-4960-b514-0d16350eb341
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 122832
-    prefix: '27644'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7ef93e83-e60f-4955-bbf0-881721f14646
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 122928
-    prefix: '27645'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 39b8ac55-a223-4132-93fa-d527ef3d2cf5
-    country_id: *za
-    network_id: *za_cell_c_mobile
-  - id: 123022
-    prefix: '27646'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 68c20305-f2cf-477c-a7b7-701815c34fc4
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 123116
-    prefix: '27647'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bc82b382-28bd-422d-bd7b-1c920688a3da
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 123212
-    prefix: '27648'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 481a32b7-2275-4cf0-a612-17afccefcbae
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 123307
-    prefix: '27649'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 32870b97-bd50-457e-ae94-5330810c3f60
-    country_id: *za
-    network_id: *za_vodacom_mobile
-  - id: 125933
-    prefix: '27654'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cbb87a8d-6c62-46da-952b-98a51e005b3c
-    country_id: *za
-    network_id: *za_lycamobile_mobile
-  - id: 126267
-    prefix: '27658'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e380a68f-6b95-425a-b787-669da1b32d75
-    country_id: *za
-    network_id: *za_telkom_mobile
-  - id: 126363
-    prefix: '27659'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07427cd8-97d3-406e-8942-6c05f92bc984
-    country_id: *za
-    network_id: *za_telkom_mobile
-  - id: 135929
-    prefix: '2765'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 26037310-6179-4679-bb6a-fff71d51424d
-    country_id: *za
-    network_id: *za_mobile
   - id: 138641
     prefix: '2766'
     number_min_length: 11
@@ -791,11 +234,11 @@ network_prefixes:
     uuid: 3e21478d-0fc5-4bcb-80cb-87f21ea8255e
     country_id: *za
     network_id: *za_vodacom_mobile
-  - id: 146828
-    prefix: '2768'
+  - id: 151435
+    prefix: '2767'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4ade76f5-89b1-4143-a71f-978f9b9407d7
+    uuid: d21a0dcf-d324-4d0c-9264-6af0a136c666
     country_id: *za
     network_id: *za_mobile
   - id: 148670
@@ -805,18 +248,18 @@ network_prefixes:
     uuid: 72c81b5f-f504-4aee-bae7-96b112733d99
     country_id: *za
     network_id: *za_mobile
+  - id: 146828
+    prefix: '2768'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ade76f5-89b1-4143-a71f-978f9b9407d7
+    country_id: *za
+    network_id: *za_mobile
   - id: 150249
     prefix: '2770'
     number_min_length: 11
     number_max_length: 11
     uuid: 162840e8-d28a-4c15-861f-415242ce4e4c
-    country_id: *za
-    network_id: *za_mobile
-  - id: 151435
-    prefix: '2767'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d21a0dcf-d324-4d0c-9264-6af0a136c666
     country_id: *za
     network_id: *za_mobile
   - id: 164013
@@ -1001,20 +444,6 @@ network_prefixes:
     uuid: e096385f-e3a0-4760-9838-02c5385f841d
     country_id: *za
     network_id: *za_vodacom_mobile
-  - id: 405477
-    prefix: '27812'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eb3ac81f-161c-4980-aa3c-ba3182c07f16
-    country_id: *za
-    network_id: *za_telkom_mobile
-  - id: 405979
-    prefix: '27813'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 00a5134d-090c-474c-8fd0-7cd587a228e2
-    country_id: *za
-    network_id: *za_telkom_mobile
   - id: 413684
     prefix: '2781'
     number_min_length: 11
@@ -1034,6 +463,13 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 11
     uuid: cd0ac31b-badd-4ea2-9a7a-d3e19a897391
+    country_id: *za
+    network_id: *za_telkom_mobile
+  - id: 405477
+    prefix: '27812'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb3ac81f-161c-4980-aa3c-ba3182c07f16
     country_id: *za
     network_id: *za_telkom_mobile
   - id: 414526
@@ -1071,6 +507,13 @@ network_prefixes:
     uuid: ab37ba6d-4428-4ab4-aff2-d1447c0cb6f7
     country_id: *za
     network_id: *za_vodacom_mobile
+  - id: 405979
+    prefix: '27813'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00a5134d-090c-474c-8fd0-7cd587a228e2
+    country_id: *za
+    network_id: *za_telkom_mobile
   - id: 418798
     prefix: '2782'
     number_min_length: 11
@@ -1092,6 +535,300 @@ network_prefixes:
     uuid: 2901492b-0f27-4c3e-bce1-42950bbde861
     country_id: *za
     network_id: *za_cell_c_mobile
+  - id: 95225
+    prefix: '2760'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 022e1bd6-4755-4aa7-bf4e-40fac5220cf4
+    country_id: *za
+    network_id: *za_mobile
+  - id: 95247
+    prefix: '27603'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3567466c-a182-4a8d-a2a2-7dbd7e9b296b
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 95249
+    prefix: '27604'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 72f8ad9e-133c-4f06-b868-9fde130567fb
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 95250
+    prefix: '27605'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50cde2fb-0e9e-4baf-a634-af9f241faa57
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 95251
+    prefix: '27606'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2675494e-4037-48b1-bae4-bfe2df9fad19
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 95252
+    prefix: '27607'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2642fc0a-8de7-4f9d-b621-c0638702c06b
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 95254
+    prefix: '27608'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 959cb398-9b71-42ac-a1de-ccd52f1a1689
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 95257
+    prefix: '27609'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52df995d-687e-4451-8fb9-bbd5716f22ac
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 108604
+    prefix: '27610'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ace0b87-cad9-4dae-8e0a-bc8566e2e49e
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 108624
+    prefix: '27611'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc2fa8e7-609c-4535-9cc8-adc6ce3170f2
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 108654
+    prefix: '27612'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 63af62ac-1fdd-414e-89a0-e267b0a1ac92
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 108667
+    prefix: '27613'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0cbe372a-4363-45f2-b4cf-d0ee991b6294
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 108674
+    prefix: '27614'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e4d1a4bd-a2a4-49ab-81ce-96ea38591c25
+    country_id: *za
+    network_id: *za_telkom_mobile
+  - id: 108692
+    prefix: '27615'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fb862423-e994-42a4-932c-44fc1f6dcaf9
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 108810
+    prefix: '27616'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d63743b5-bea3-4742-ad32-0ba651870af2
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 108920
+    prefix: '27617'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f81f3ca3-6f0e-4068-8fec-b8c8b599a34c
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 98946
+    prefix: '27618'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 864675c0-c1a8-41e1-be66-af07b8bf34d8
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 99025
+    prefix: '27619'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dcc948f8-b025-4a8d-9207-b70dc4da0759
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 111479
+    prefix: '2762'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05b6b176-88dc-43a1-83e0-113a1dbe2918
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 117844
+    prefix: '2763'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a84fc23a-6bb7-43e0-8ecb-3ce55d972bb3
+    country_id: *za
+    network_id: *za_mobile
+  - id: 117847
+    prefix: '27630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2947df96-9d42-487c-af5a-5c4395fbf2c8
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 117939
+    prefix: '27631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f2272166-a004-4934-b22c-c4120553bb15
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 118046
+    prefix: '27632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 35442794-5841-48c9-93eb-1e66c916f556
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 118140
+    prefix: '27633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f15255a-c220-4c0d-b4c5-fdc819a11c81
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 118242
+    prefix: '27634'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4419d203-8aa0-47d8-bfe2-8096d73ef3a6
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 122449
+    prefix: '27640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa77d07a-890e-4913-8c51-a0354be9354b
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 122553
+    prefix: '27641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a13006ac-e662-486e-a2ac-ef991e46fdfe
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 122649
+    prefix: '27642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f8a6429-f15d-43b9-b76e-5d1650d753a9
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 122753
+    prefix: '27643'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e5283c9-728c-4960-b514-0d16350eb341
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 122832
+    prefix: '27644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7ef93e83-e60f-4955-bbf0-881721f14646
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 125933
+    prefix: '27654'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cbb87a8d-6c62-46da-952b-98a51e005b3c
+    country_id: *za
+    network_id: *za_lycamobile_mobile
+  - id: 126267
+    prefix: '27658'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e380a68f-6b95-425a-b787-669da1b32d75
+    country_id: *za
+    network_id: *za_telkom_mobile
+  - id: 126363
+    prefix: '27659'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07427cd8-97d3-406e-8942-6c05f92bc984
+    country_id: *za
+    network_id: *za_telkom_mobile
+  - id: 118327
+    prefix: '27635'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 79dafb13-6eac-4d67-9b0a-1f918b8a1a36
+    country_id: *za
+    network_id: *za_mtn_mobile
+  - id: 118427
+    prefix: '27636'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7180dac5-13c0-4b35-9664-ab8d02dd38fe
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 118515
+    prefix: '27637'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: efe542e4-8b7f-464a-b9bc-c822695045a1
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 122928
+    prefix: '27645'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 39b8ac55-a223-4132-93fa-d527ef3d2cf5
+    country_id: *za
+    network_id: *za_cell_c_mobile
+  - id: 123022
+    prefix: '27646'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68c20305-f2cf-477c-a7b7-701815c34fc4
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 123116
+    prefix: '27647'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc82b382-28bd-422d-bd7b-1c920688a3da
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 123212
+    prefix: '27648'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 481a32b7-2275-4cf0-a612-17afccefcbae
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 123307
+    prefix: '27649'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 32870b97-bd50-457e-ae94-5330810c3f60
+    country_id: *za
+    network_id: *za_vodacom_mobile
+  - id: 135929
+    prefix: '2765'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 26037310-6179-4679-bb6a-fff71d51424d
+    country_id: *za
+    network_id: *za_mobile
 # Supplementary services Prefixes
   - id: 207799
     prefix: '2780'
@@ -1100,20 +837,48 @@ network_prefixes:
     uuid: 98c6918d-a37e-4a90-9d3b-72effedceef1
     country_id: *za
     network_id: *za_freephone_services
-  - id: 221956
-    prefix: '2796'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: a2185f00-4aea-423a-8641-c91d8af4bbfe
+  - id: 428710
+    prefix: '2786'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3afb05a4-3e73-4e7a-961a-069e7af46f93
     country_id: *za
-    network_id: *za_machine_to_machine_m2m_services
-  - id: 227372
-    prefix: '2797'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 83fc5c3b-97f2-46ee-a5e1-11c89ea73c83
+    network_id: *za_telkom_inbound_call_services
+  - id: 451416
+    prefix: '2789'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38cbf443-294e-4339-8119-d561400bca0d
     country_id: *za
-    network_id: *za_machine_to_machine_m2m_services
+    network_id: *za_mass_call_services
+  - id: 454116
+    prefix: '2790'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a1d075a-5bf0-46d4-aca7-09796b167f2b
+    country_id: *za
+    network_id: *za_premium_rate_services
+  - id: 454382
+    prefix: '27902'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 78d14fa8-1bae-465f-82bf-99be4ca3f2da
+    country_id: *za
+    network_id: *za_adult_entertainment_services
+  - id: 443801
+    prefix: '2788'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: ae4e34c0-e525-4395-ad1d-c5df8c5cfd81
+    country_id: *za
+    network_id: *za_telkom_virtual_fax_service
+  - id: 458163
+    prefix: '2791'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 62f5ba33-b818-4287-97a9-29c2339f4b9a
+    country_id: *za
+    network_id: *za_premium_rate_services
   - id: 231746
     prefix: '2798'
     number_min_length: 15
@@ -1142,48 +907,6 @@ network_prefixes:
     uuid: 855496f1-e009-4650-bdaa-98462f7f9bb9
     country_id: *za
     network_id: *za_sms_mms_services
-  - id: 428710
-    prefix: '2786'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3afb05a4-3e73-4e7a-961a-069e7af46f93
-    country_id: *za
-    network_id: *za_telkom_inbound_call_services
-  - id: 443801
-    prefix: '2788'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: ae4e34c0-e525-4395-ad1d-c5df8c5cfd81
-    country_id: *za
-    network_id: *za_telkom_virtual_fax_service
-  - id: 451416
-    prefix: '2789'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 38cbf443-294e-4339-8119-d561400bca0d
-    country_id: *za
-    network_id: *za_mass_call_services
-  - id: 454116
-    prefix: '2790'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1a1d075a-5bf0-46d4-aca7-09796b167f2b
-    country_id: *za
-    network_id: *za_premium_rate_services
-  - id: 454382
-    prefix: '27902'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 78d14fa8-1bae-465f-82bf-99be4ca3f2da
-    country_id: *za
-    network_id: *za_adult_entertainment_services
-  - id: 458163
-    prefix: '2791'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 62f5ba33-b818-4287-97a9-29c2339f4b9a
-    country_id: *za
-    network_id: *za_premium_rate_services
   - id: 468956
     prefix: '2792'
     number_min_length: 11
@@ -1191,11 +914,291 @@ network_prefixes:
     uuid: e92d009e-5fe3-4978-8f54-6d1c3185a06f
     country_id: *za
     network_id: *za_premium_rate_services
-# Country code Prefixes
+  - id: 221956
+    prefix: '2796'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: a2185f00-4aea-423a-8641-c91d8af4bbfe
+    country_id: *za
+    network_id: *za_machine_to_machine_m2m_services
+  - id: 227372
+    prefix: '2797'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 83fc5c3b-97f2-46ee-a5e1-11c89ea73c83
+    country_id: *za
+    network_id: *za_machine_to_machine_m2m_services
+# Fixed Prefixes
+  - id: 441117
+    prefix: '2787'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e3572e4-0692-461b-b58b-dc5989e0fc56
+    country_id: *za
+    network_id: *za_voip_region
   - id: 242136
     prefix: '27'
     number_min_length: 3
     number_max_length: 100
     uuid: 7f4f9b3d-c28e-4bf4-8be5-b28be68e5998
     country_id: *za
-    network_id: null
+    network_id: *za_fixed
+  - id: 258629
+    prefix: '2710'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 034cf7a6-2a6d-4ab5-b7ff-1e6eed9118f9
+    country_id: *za
+    network_id: *za_johannesburg_region
+  - id: 258822
+    prefix: '2711'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce55047c-b3b2-436e-8fac-864a02313a28
+    country_id: *za
+    network_id: *za_johannesburg_region
+  - id: 259235
+    prefix: '2712'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7b9f5ca-52de-481d-9097-6aa0ab427b78
+    country_id: *za
+    network_id: *za_tshwane_region
+  - id: 259514
+    prefix: '2713'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db90f42a-3d9e-425a-bf61-1feb6481c99f
+    country_id: *za
+    network_id: *za_mpumalanga_region
+  - id: 259949
+    prefix: '2714'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9aeda6ab-1fbc-4907-ba62-41a41549180f
+    country_id: *za
+    network_id: *za_limpopo_north_west_region
+  - id: 266075
+    prefix: '2715'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 89921976-4644-4092-af4f-f82839363ca5
+    country_id: *za
+    network_id: *za_limpopo_region
+  - id: 266565
+    prefix: '2716'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eae668a2-2c9e-435f-8420-50bfc6140726
+    country_id: *za
+    network_id: *za_vaal_triangle_region
+  - id: 266954
+    prefix: '2717'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f182b3e-6c62-4576-9750-47daac2f7567
+    country_id: *za
+    network_id: *za_mpumalanga_region
+  - id: 260512
+    prefix: '2718'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: da080a88-957d-41a8-8cbb-31a8ac08f77f
+    country_id: *za
+    network_id: *za_north_west_region
+  - id: 274247
+    prefix: '2721'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 601fb5c2-ffe4-4d82-a01b-f5b7f9046fe4
+    country_id: *za
+    network_id: *za_cape_town_region
+  - id: 282803
+    prefix: '2722'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f0709870-f4d8-4f76-a273-972524dd192a
+    country_id: *za
+    network_id: *za_boland_western_cape_region
+  - id: 286645
+    prefix: '2723'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3804f97a-dc8d-41c8-adfd-ccc856c5c74a
+    country_id: *za
+    network_id: *za_karoo_region
+  - id: 313365
+    prefix: '2728'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ea40b87e-59dc-4e3c-9b71-56cd798fe6a6
+    country_id: *za
+    network_id: *za_western_cape_region
+  - id: 301434
+    prefix: '2727'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 150aa37e-da1f-4124-9697-e0c4404a9b13
+    country_id: *za
+    network_id: *za_namaqualand_region
+  - id: 321189
+    prefix: '2731'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 645768cd-ba21-4b4a-b5ed-92888e8ffa35
+    country_id: *za
+    network_id: *za_durban_region
+  - id: 327293
+    prefix: '2732'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0c2cd1f1-3a2e-440b-938e-30cdabf61f6c
+    country_id: *za
+    network_id: *za_kwazulu_natal_region
+  - id: 337303
+    prefix: '2733'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b02e820-b2c9-4878-8f94-a05b3df33f01
+    country_id: *za
+    network_id: *za_kwazulu_natal_region
+  - id: 340488
+    prefix: '2734'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7f50b05-59af-4435-b4de-07b97825d403
+    country_id: *za
+    network_id: *za_kwazulu_natal_region
+  - id: 352252
+    prefix: '2735'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07fb7908-91b0-4769-8649-3e8a7c801993
+    country_id: *za
+    network_id: *za_zululand_region
+  - id: 357543
+    prefix: '2739'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3a374fa-684c-431d-95bf-d7bfac6d416a
+    country_id: *za
+    network_id: *za_kwazulu_natal_pondoland_region
+  - id: 349900
+    prefix: '2740'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 849e02a5-4b66-499d-b108-4e8a4bf00074
+    country_id: *za
+    network_id: *za_bhisho_region
+  - id: 345956
+    prefix: '2736'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 585a00a4-8a6b-4a02-8b0c-7442bfe06531
+    country_id: *za
+    network_id: *za_drakensberg_region
+  - id: 362544
+    prefix: '2741'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74146af2-8268-4475-9dc4-e5816c23137b
+    country_id: *za
+    network_id: *za_port_elizabeth_region
+  - id: 377192
+    prefix: '2742'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b07e64f6-a486-4d35-ab67-3bd0614c7097
+    country_id: *za
+    network_id: *za_eastern_cape_region
+  - id: 367954
+    prefix: '2743'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4384d1dd-9f21-4b70-bf7d-36f0c8f7bcc7
+    country_id: *za
+    network_id: *za_east_london_region
+  - id: 392630
+    prefix: '2745'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3e00d1a8-51d8-40b4-9f46-da01e6c2ffbc
+    country_id: *za
+    network_id: *za_eastern_cape_region
+  - id: 370205
+    prefix: '2744'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a3833eb9-5e95-48e4-96fd-7e88c59a3950
+    country_id: *za
+    network_id: *za_garden_route_region
+  - id: 388644
+    prefix: '2746'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a500352f-5d7f-4e76-9b61-b333cb0ca890
+    country_id: *za
+    network_id: *za_eastern_cape_region
+  - id: 51621
+    prefix: '2748'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5a2e7f69-a440-4493-850c-893b5cab1009
+    country_id: *za
+    network_id: *za_eastern_cape_region
+  - id: 399492
+    prefix: '2747'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d43d7aa3-e38c-47a3-abd1-457f6a060cee
+    country_id: *za
+    network_id: *za_eastern_cape_region
+  - id: 58237
+    prefix: '2749'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1f527c12-683e-400e-bf36-17429b449749
+    country_id: *za
+    network_id: *za_eastern_cape_region
+  - id: 62620
+    prefix: '2751'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 39cdead3-b34c-49dd-9359-f9dd877572a0
+    country_id: *za
+    network_id: *za_eastern_cape_free_state_region
+  - id: 76561
+    prefix: '2753'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 61a0698e-f18e-4f53-a4ca-083f25abd6b0
+    country_id: *za
+    network_id: *za_northern_cape_north_west_region
+  - id: 73214
+    prefix: '2754'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 164480c4-0418-452c-9f2a-6c05fa05eee1
+    country_id: *za
+    network_id: *za_gordonia_region
+  - id: 87930
+    prefix: '2756'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 722d7b0f-b6b8-4100-8f85-38467dc20443
+    country_id: *za
+    network_id: *za_free_state_region
+  - id: 90279
+    prefix: '2757'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96e68371-a0f4-443b-beb0-132f648deb1a
+    country_id: *za
+    network_id: *za_free_state_region
+  - id: 93105
+    prefix: '2758'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 121eb86d-5a37-4e74-a7b2-4282153a97dc
+    country_id: *za
+    network_id: *za_free_state_region

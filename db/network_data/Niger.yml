@@ -1,13 +1,21 @@
 country_id: &ne 155
 networks:
 # Supplementary services Networks
-  - id: &ne_routing 21296
-    name: NE Routing
-    uuid: cbe39255-2a73-4fff-9c87-dcfe5366a27c
+  - id: &ne_emergency_services_police 21844
+    name: NE Emergency Services Police
+    uuid: 1ccb86c5-7c14-4eaa-a4a7-06daeb1082de
+    type_id: 13
+  - id: &ne_emergency_services_fire 21686
+    name: NE Emergency Services Fire
+    uuid: f85232c5-f672-4a13-b209-82a910c0b899
     type_id: 13
   - id: &ne_special_services 21335
     name: NE Special Services
     uuid: 362cac86-e029-4ce1-a7e3-477fca9eb836
+    type_id: 13
+  - id: &ne_routing 21296
+    name: NE Routing
+    uuid: cbe39255-2a73-4fff-9c87-dcfe5366a27c
     type_id: 13
   - id: &ne_value_added_services 21347
     name: NE Value Added Services
@@ -21,17 +29,9 @@ networks:
     name: NE Voice Server
     uuid: 6365efe2-1832-4c58-9eb1-fcadd613b533
     type_id: 13
-  - id: &ne_emergency_services_fire 21686
-    name: NE Emergency Services Fire
-    uuid: f85232c5-f672-4a13-b209-82a910c0b899
-    type_id: 13
   - id: &ne_emergency_services_medical 21794
     name: NE Emergency Services Medical
     uuid: a20713a2-2d01-45b2-9249-db649f7b2543
-    type_id: 13
-  - id: &ne_emergency_services_police 21844
-    name: NE Emergency Services Police
-    uuid: 1ccb86c5-7c14-4eaa-a4a7-06daeb1082de
     type_id: 13
 # Fixed Networks
   - id: &ne_fixed 22746
@@ -95,6 +95,10 @@ networks:
     name: NE Moov Africa Mobile
     uuid: 1e34f9b6-0719-480e-8b9c-7b36b482bc11
     type_id: 3
+  - id: &ne_airtel_mobile 24337
+    name: NE Airtel Mobile
+    uuid: 150282bd-0c01-431f-bc2f-043a555ff30a
+    type_id: 3
   - id: &ne_orange_mobile 23821
     name: NE Orange Mobile
     uuid: 6acbaf17-aabd-40a2-adb4-40a3a2db86c7
@@ -103,20 +107,29 @@ networks:
     name: NE Niger Telecoms Mobile
     uuid: fd54e40a-57f2-4c31-916e-6365f9945488
     type_id: 3
-  - id: &ne_airtel_mobile 24337
-    name: NE Airtel Mobile
-    uuid: 150282bd-0c01-431f-bc2f-043a555ff30a
-    type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242066
-    prefix: '227'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 16bebbce-c047-4ef6-9e3d-9e9132f7a916
-    country_id: *ne
-    network_id: null
 # Supplementary services Prefixes
+  - id: 243062
+    prefix: '22717'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 109a049f-367e-44e6-af5c-819efa6d71b5
+    country_id: *ne
+    network_id: *ne_emergency_services_police
+  - id: 247279
+    prefix: '22718'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: e67c536b-b75c-432f-9c00-aa2dbcc65cbf
+    country_id: *ne
+    network_id: *ne_emergency_services_fire
+  - id: 247425
+    prefix: '2272'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: 5e674165-2571-42da-95cd-155d753bced8
+    country_id: *ne
+    network_id: *ne_special_services
   - id: 242167
     prefix: '22701'
     number_min_length: 5
@@ -215,13 +228,6 @@ network_prefixes:
     uuid: 4082714f-5e8e-4e6e-9766-cd11d6ea87cc
     country_id: *ne
     network_id: *ne_emergency_services_medical
-  - id: 243062
-    prefix: '22717'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 109a049f-367e-44e6-af5c-819efa6d71b5
-    country_id: *ne
-    network_id: *ne_emergency_services_police
   - id: 243951
     prefix: '2274'
     number_min_length: 5
@@ -234,20 +240,6 @@ network_prefixes:
     number_min_length: 5
     number_max_length: 7
     uuid: 81c3a00f-1b11-441b-9fc5-74c091028bdd
-    country_id: *ne
-    network_id: *ne_special_services
-  - id: 247279
-    prefix: '22718'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: e67c536b-b75c-432f-9c00-aa2dbcc65cbf
-    country_id: *ne
-    network_id: *ne_emergency_services_fire
-  - id: 247425
-    prefix: '2272'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: 5e674165-2571-42da-95cd-155d753bced8
     country_id: *ne
     network_id: *ne_special_services
 # Fixed Prefixes
@@ -433,6 +425,13 @@ network_prefixes:
     uuid: f51fed91-db06-4ad7-a945-5e47d5c22a04
     country_id: *ne
     network_id: *ne_fixed
+  - id: 242066
+    prefix: '227'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 16bebbce-c047-4ef6-9e3d-9e9132f7a916
+    country_id: *ne
+    network_id: *ne_fixed
   - id: 247923
     prefix: '22723'
     number_min_length: 11
@@ -448,48 +447,13 @@ network_prefixes:
     uuid: 80aeceb8-a00d-4a8e-8a5f-942aa56c3a6d
     country_id: *ne
     network_id: *ne_moov_africa_mobile
-  - id: 253129
-    prefix: '22780'
+  - id: 264012
+    prefix: '22787'
     number_min_length: 11
     number_max_length: 11
-    uuid: f93f696e-b171-47f8-ac08-13921e21401c
+    uuid: bbd698c9-c61d-4620-823b-6ae4525c1ab0
     country_id: *ne
-    network_id: *ne_orange_mobile
-  - id: 253325
-    prefix: '22781'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ecf14cc-633f-4f1d-a2c2-c717a4a98680
-    country_id: *ne
-    network_id: *ne_orange_mobile
-  - id: 253484
-    prefix: '22782'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 471e94e5-4432-463a-904e-6c78d1616b11
-    country_id: *ne
-    network_id: *ne_orange_mobile
-  - id: 253600
-    prefix: '22783'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c826a3cb-a953-43ac-91c6-b2406c0e576e
-    country_id: *ne
-    network_id: *ne_niger_telecoms_mobile
-  - id: 253725
-    prefix: '22784'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e1a2e5e0-1468-4752-a5bd-4c64ffc47112
-    country_id: *ne
-    network_id: *ne_moov_africa_mobile
-  - id: 255299
-    prefix: '22770'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d802005c-dadd-4631-aaa5-68f5887334f2
-    country_id: *ne
-    network_id: *ne_orange_mobile
+    network_id: *ne_airtel_mobile
   - id: 256844
     prefix: '22788'
     number_min_length: 11
@@ -525,13 +489,6 @@ network_prefixes:
     uuid: 55d6327d-4554-456a-a568-29e8c7b399f2
     country_id: *ne
     network_id: *ne_orange_mobile
-  - id: 257868
-    prefix: '22793'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 04b4a3bc-7522-451f-89ca-b92a970a77d7
-    country_id: *ne
-    network_id: *ne_niger_telecoms_mobile
   - id: 257967
     prefix: '22798'
     number_min_length: 11
@@ -546,6 +503,48 @@ network_prefixes:
     uuid: d31caa87-d03e-46c5-bb0e-236ddb7bb345
     country_id: *ne
     network_id: *ne_airtel_mobile
+  - id: 255299
+    prefix: '22770'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d802005c-dadd-4631-aaa5-68f5887334f2
+    country_id: *ne
+    network_id: *ne_orange_mobile
+  - id: 253129
+    prefix: '22780'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f93f696e-b171-47f8-ac08-13921e21401c
+    country_id: *ne
+    network_id: *ne_orange_mobile
+  - id: 253325
+    prefix: '22781'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ecf14cc-633f-4f1d-a2c2-c717a4a98680
+    country_id: *ne
+    network_id: *ne_orange_mobile
+  - id: 253484
+    prefix: '22782'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 471e94e5-4432-463a-904e-6c78d1616b11
+    country_id: *ne
+    network_id: *ne_orange_mobile
+  - id: 253600
+    prefix: '22783'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c826a3cb-a953-43ac-91c6-b2406c0e576e
+    country_id: *ne
+    network_id: *ne_niger_telecoms_mobile
+  - id: 253725
+    prefix: '22784'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1a2e5e0-1468-4752-a5bd-4c64ffc47112
+    country_id: *ne
+    network_id: *ne_moov_africa_mobile
   - id: 263711
     prefix: '22785'
     number_min_length: 11
@@ -560,13 +559,13 @@ network_prefixes:
     uuid: 7ff1e973-b943-48ca-a24c-aaa88ae9f166
     country_id: *ne
     network_id: *ne_airtel_mobile
-  - id: 264012
-    prefix: '22787'
+  - id: 257868
+    prefix: '22793'
     number_min_length: 11
     number_max_length: 11
-    uuid: bbd698c9-c61d-4620-823b-6ae4525c1ab0
+    uuid: 04b4a3bc-7522-451f-89ca-b92a970a77d7
     country_id: *ne
-    network_id: *ne_airtel_mobile
+    network_id: *ne_niger_telecoms_mobile
   - id: 264199
     prefix: '22794'
     number_min_length: 11

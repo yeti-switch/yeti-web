@@ -1,6 +1,10 @@
 country_id: &vi 233
 networks:
 # Fixed Networks
+  - id: &vi_fixed 43525
+    name: VI Fixed
+    uuid: 2d17f6c4-1f1b-4d36-8d92-55e13c05872f
+    type_id: 2
   - id: &vi_charlotte_amalie_st_thomas_region 32918
     name: VI Charlotte Amalie St Thomas Region
     uuid: 55c9212b-42c0-4ab3-85c5-8cdc13409248
@@ -39,15 +43,14 @@ networks:
     uuid: 12c33a57-f93b-422d-b137-9935c0d5b667
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 340694
-    prefix: '1340'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: bacdf96e-db7d-4a54-9b30-f3c05bd913aa
-    country_id: *vi
-    network_id: null
 # Fixed Prefixes
+  - id: 514460
+    prefix: '1340'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: 47eb7565-d21a-4319-857c-30bedb01e19b
+    country_id: *vi
+    network_id: *vi_fixed
   - id: 340699
     prefix: '1340200'
     number_min_length: 11
@@ -68,7 +71,7 @@ network_prefixes:
     number_max_length: 11
     uuid: a102c3e8-218a-49ed-9f44-7e354428cca4
     country_id: *vi
-    network_id: *vi_st_croix_region
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340716
     prefix: '1340249'
     number_min_length: 11

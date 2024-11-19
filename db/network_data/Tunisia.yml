@@ -1,6 +1,18 @@
 country_id: &tn 216
 networks:
 # Supplementary services Networks
+  - id: &tn_call_switching_and_telegram_services 21847
+    name: TN Call Switching And Telegram Services
+    uuid: e1941b52-f16a-430f-8f41-3ef42d1597d6
+    type_id: 13
+  - id: &tn_public_interest_services 22633
+    name: TN Public Interest Services
+    uuid: ed71d324-4d66-4a21-b8a3-29caf953e639
+    type_id: 13
+  - id: &tn_emergency_services 22677
+    name: TN Emergency Services
+    uuid: 935d5088-44fc-4023-b423-87418220f488
+    type_id: 13
   - id: &tn_special_services 21503
     name: TN Special Services
     uuid: d03c2655-fe22-416d-8b2e-903f929db59b
@@ -25,17 +37,9 @@ networks:
     name: TN Internet And Data Services
     uuid: 1e4ec0e5-daf8-4936-8b19-ab4542ea7d6f
     type_id: 13
-  - id: &tn_call_switching_and_telegram_services 21847
-    name: TN Call Switching And Telegram Services
-    uuid: e1941b52-f16a-430f-8f41-3ef42d1597d6
-    type_id: 13
-  - id: &tn_public_interest_services 22633
-    name: TN Public Interest Services
-    uuid: ed71d324-4d66-4a21-b8a3-29caf953e639
-    type_id: 13
-  - id: &tn_emergency_services 22677
-    name: TN Emergency Services
-    uuid: 935d5088-44fc-4023-b423-87418220f488
+  - id: &tn_audiotext 24341
+    name: TN Audiotext
+    uuid: 6911f159-2472-4964-913c-b1a7e01bd436
     type_id: 13
   - id: &tn_value_added_services 23808
     name: TN Value Added Services
@@ -57,14 +61,27 @@ networks:
     name: TN Unique Number Services
     uuid: 34010db0-9a31-43f2-a598-0bcab4465398
     type_id: 13
-  - id: &tn_audiotext 24341
-    name: TN Audiotext
-    uuid: 6911f159-2472-4964-913c-b1a7e01bd436
-    type_id: 13
   - id: &tn_sms_mms_services 26059
     name: TN Sms_Mms Services
     uuid: 19b66340-85d6-4119-96d9-954064bb0d9a
     type_id: 13
+# Mobile Networks
+  - id: &tn_ooredoo_mobile 22736
+    name: TN Ooredoo Mobile
+    uuid: 24490b7b-7ac1-479b-8f13-924d5e889397
+    type_id: 3
+  - id: &tn_orange_mobile 21920
+    name: TN Orange Mobile
+    uuid: fae06d12-3c1e-41ec-a190-b30568e47c55
+    type_id: 3
+  - id: &tn_tt_mobile_mobile 22162
+    name: TN Tt Mobile Mobile
+    uuid: d4ad3ade-6395-4a95-b0ae-1c8e7ac2f9a2
+    type_id: 3
+  - id: &tn_lycamobile_mobile 22248
+    name: TN Lycamobile Mobile
+    uuid: 328130f0-7f30-4cd1-91cf-92ec7daa01ca
+    type_id: 3
 # Fixed Networks
   - id: &tn_fixed 21913
     name: TN Fixed
@@ -102,33 +119,29 @@ networks:
     name: TN Kef Beja Jendouba Siliana Region
     uuid: 39a9adaf-60bf-45ae-9a0f-547f2b616ed0
     type_id: 2
-# Mobile Networks
-  - id: &tn_orange_mobile 21920
-    name: TN Orange Mobile
-    uuid: fae06d12-3c1e-41ec-a190-b30568e47c55
-    type_id: 3
-  - id: &tn_tt_mobile_mobile 22162
-    name: TN Tt Mobile Mobile
-    uuid: d4ad3ade-6395-4a95-b0ae-1c8e7ac2f9a2
-    type_id: 3
-  - id: &tn_lycamobile_mobile 22248
-    name: TN Lycamobile Mobile
-    uuid: 328130f0-7f30-4cd1-91cf-92ec7daa01ca
-    type_id: 3
-  - id: &tn_ooredoo_mobile 22736
-    name: TN Ooredoo Mobile
-    uuid: 24490b7b-7ac1-479b-8f13-924d5e889397
-    type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242121
-    prefix: '216'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 92ba9274-a9ec-4b32-999f-bbd3051a0554
-    country_id: *tn
-    network_id: null
 # Supplementary services Prefixes
+  - id: 243067
+    prefix: '21617'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 83c4defa-9f64-46b6-b39b-04edd1706a35
+    country_id: *tn
+    network_id: *tn_call_switching_and_telegram_services
+  - id: 247288
+    prefix: '21618'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 69d0f68e-cd23-4a0b-9849-1f1e762934c4
+    country_id: *tn
+    network_id: *tn_public_interest_services
+  - id: 247346
+    prefix: '21619'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 44d3801c-d30c-44c2-adb0-63f92b289a1f
+    country_id: *tn
+    network_id: *tn_emergency_services
   - id: 242509
     prefix: '2161'
     number_min_length: 6
@@ -178,27 +191,13 @@ network_prefixes:
     uuid: 0eaa406b-5c13-4a50-bdf6-99d5d24b39dd
     country_id: *tn
     network_id: *tn_internet_and_data_services
-  - id: 243067
-    prefix: '21617'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 83c4defa-9f64-46b6-b39b-04edd1706a35
+  - id: 256852
+    prefix: '21688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25f46e1d-fe07-420e-b394-9bb9743556bb
     country_id: *tn
-    network_id: *tn_call_switching_and_telegram_services
-  - id: 247288
-    prefix: '21618'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 69d0f68e-cd23-4a0b-9849-1f1e762934c4
-    country_id: *tn
-    network_id: *tn_public_interest_services
-  - id: 247346
-    prefix: '21619'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 44d3801c-d30c-44c2-adb0-63f92b289a1f
-    country_id: *tn
-    network_id: *tn_emergency_services
+    network_id: *tn_audiotext
   - id: 253113
     prefix: '2168'
     number_min_length: 11
@@ -234,13 +233,6 @@ network_prefixes:
     uuid: 3da5195e-4174-4799-bb99-ab750172be74
     country_id: *tn
     network_id: *tn_unique_number_services
-  - id: 256852
-    prefix: '21688'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 25f46e1d-fe07-420e-b394-9bb9743556bb
-    country_id: *tn
-    network_id: *tn_audiotext
   - id: 263716
     prefix: '21685'
     number_min_length: 8
@@ -248,113 +240,21 @@ network_prefixes:
     uuid: 3b751336-99b0-4b83-88d5-c2f2ab0cc246
     country_id: *tn
     network_id: *tn_sms_mms_services
-# Fixed Prefixes
-  - id: 243243
-    prefix: '21631'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 20b20e3c-8d83-42f5-9534-5d94f47e31a2
-    country_id: *tn
-    network_id: *tn_fixed
-  - id: 243382
-    prefix: '21632'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 30ce8b2a-841b-4557-af92-aaaadd9efe1a
-    country_id: *tn
-    network_id: *tn_fixed
-  - id: 243676
-    prefix: '21636'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a8640c4a-4c6e-43d9-8a37-0f5785b99c48
-    country_id: *tn
-    network_id: *tn_fixed
-  - id: 243915
-    prefix: '21639'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: df088f5e-7b16-4483-a2cf-235445f4b260
-    country_id: *tn
-    network_id: *tn_fixed
-  - id: 245429
-    prefix: '2166'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a18c663-e522-4b2c-b562-bf1386266f49
-    country_id: *tn
-    network_id: *tn_fixed
-  - id: 248943
-    prefix: '21630'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be327303-71fa-429c-ac84-cf4a56d5ed07
-    country_id: *tn
-    network_id: *tn_fixed
-  - id: 251746
-    prefix: '21671'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8ed35ef4-34f5-4d9f-be20-55e17099d7f6
-    country_id: *tn
-    network_id: *tn_tunis_ben_arous_ariana_manouba_region
-  - id: 251834
-    prefix: '21672'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6d6f3eac-6f77-4548-b1f0-e4c507634b5d
-    country_id: *tn
-    network_id: *tn_nabeul_bizerte_zaghouan_region
-  - id: 251886
-    prefix: '21673'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 226e1fb9-1ebd-48fc-a0ce-2ade34f7bf94
-    country_id: *tn
-    network_id: *tn_sousse_monastir_mahdia_region
-  - id: 252072
-    prefix: '21674'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f054cb95-a7d3-4aee-93af-77c936437316
-    country_id: *tn
-    network_id: *tn_sfax_region
-  - id: 252564
-    prefix: '21675'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8f14a07a-da44-4c05-b817-070b90223157
-    country_id: *tn
-    network_id: *tn_gabes_kebili_medenine_tatouine_region
-  - id: 255284
-    prefix: '2167'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 27e3e6ef-564d-492c-a5bf-746f85a3d8c9
-    country_id: *tn
-    network_id: *tn_fixed
-  - id: 255463
-    prefix: '21676'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3f816810-101c-436b-a3f5-c9913b30dbdb
-    country_id: *tn
-    network_id: *tn_gafsa_tozeur_sidi_bouzid_region
-  - id: 255645
-    prefix: '21677'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 50dcbf05-c37e-4c13-a443-995adece4e28
-    country_id: *tn
-    network_id: *tn_kairouan_kasserine_region
-  - id: 256101
-    prefix: '21678'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: adeb0b4d-e744-430f-872a-dabd749c1492
-    country_id: *tn
-    network_id: *tn_kef_beja_jendouba_siliana_region
 # Mobile Prefixes
+  - id: 247444
+    prefix: '2162'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c004c4b-48c1-43b5-9290-c88ada8d3513
+    country_id: *tn
+    network_id: *tn_ooredoo_mobile
+  - id: 248970
+    prefix: '2163001'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 694475d4-fd9f-459b-8471-8fe94904e1e1
+    country_id: *tn
+    network_id: *tn_orange_mobile
   - id: 243263
     prefix: '216311'
     number_min_length: 11
@@ -488,13 +388,62 @@ network_prefixes:
     uuid: 7307986c-63cf-40a6-862c-2f424d01bc20
     country_id: *tn
     network_id: *tn_orange_mobile
-  - id: 247444
-    prefix: '2162'
+  - id: 251581
+    prefix: '2167031'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1c004c4b-48c1-43b5-9290-c88ada8d3513
+    uuid: 05aaa7e1-6a60-493d-883e-418122e60025
     country_id: *tn
-    network_id: *tn_ooredoo_mobile
+    network_id: *tn_tt_mobile_mobile
+  - id: 251629
+    prefix: '2167065'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f7281e06-9597-43aa-b5da-32aa0b6ce222
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 257146
+    prefix: '2169'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 488674ce-098b-4fc1-9813-447fab14b2e9
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 257994
+    prefix: '2169801'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 895dc0dd-bc67-4dd4-bd1a-b1f36188e8ce
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 257996
+    prefix: '2169802'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 710f7001-c366-46e8-8323-165b094715bd
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 257998
+    prefix: '2169803'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0156b9a8-367e-4987-ba4a-dc412a995926
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 258000
+    prefix: '2169804'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b38c52fc-bfc7-43f9-928e-b5ae1acc6f75
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
+  - id: 258002
+    prefix: '2169805'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f182dbab-65d2-474a-8596-dda9d7e25e34
+    country_id: *tn
+    network_id: *tn_tt_mobile_mobile
   - id: 248816
     prefix: '2162890'
     number_min_length: 11
@@ -544,13 +493,6 @@ network_prefixes:
     uuid: b381c77b-7314-4abf-8fdf-691e3495ad1e
     country_id: *tn
     network_id: *tn_ooredoo_mobile
-  - id: 248970
-    prefix: '2163001'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 694475d4-fd9f-459b-8471-8fe94904e1e1
-    country_id: *tn
-    network_id: *tn_orange_mobile
   - id: 249093
     prefix: '216460'
     number_min_length: 11
@@ -705,20 +647,6 @@ network_prefixes:
     uuid: f9e713a0-eb89-46a7-8063-da5edb926a83
     country_id: *tn
     network_id: *tn_orange_mobile
-  - id: 251581
-    prefix: '2167031'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 05aaa7e1-6a60-493d-883e-418122e60025
-    country_id: *tn
-    network_id: *tn_tt_mobile_mobile
-  - id: 251629
-    prefix: '2167065'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f7281e06-9597-43aa-b5da-32aa0b6ce222
-    country_id: *tn
-    network_id: *tn_tt_mobile_mobile
   - id: 256591
     prefix: '216797'
     number_min_length: 11
@@ -726,45 +654,116 @@ network_prefixes:
     uuid: 7d6a6e32-c46b-4248-bc44-4000628f83e2
     country_id: *tn
     network_id: *tn_tt_mobile_mobile
-  - id: 257146
-    prefix: '2169'
+# Fixed Prefixes
+  - id: 242121
+    prefix: '216'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 92ba9274-a9ec-4b32-999f-bbd3051a0554
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 243243
+    prefix: '21631'
     number_min_length: 11
     number_max_length: 11
-    uuid: 488674ce-098b-4fc1-9813-447fab14b2e9
+    uuid: 20b20e3c-8d83-42f5-9534-5d94f47e31a2
     country_id: *tn
-    network_id: *tn_tt_mobile_mobile
-  - id: 257994
-    prefix: '2169801'
+    network_id: *tn_fixed
+  - id: 243382
+    prefix: '21632'
     number_min_length: 11
     number_max_length: 11
-    uuid: 895dc0dd-bc67-4dd4-bd1a-b1f36188e8ce
+    uuid: 30ce8b2a-841b-4557-af92-aaaadd9efe1a
     country_id: *tn
-    network_id: *tn_tt_mobile_mobile
-  - id: 257996
-    prefix: '2169802'
+    network_id: *tn_fixed
+  - id: 243676
+    prefix: '21636'
     number_min_length: 11
     number_max_length: 11
-    uuid: 710f7001-c366-46e8-8323-165b094715bd
+    uuid: a8640c4a-4c6e-43d9-8a37-0f5785b99c48
     country_id: *tn
-    network_id: *tn_tt_mobile_mobile
-  - id: 257998
-    prefix: '2169803'
+    network_id: *tn_fixed
+  - id: 243915
+    prefix: '21639'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0156b9a8-367e-4987-ba4a-dc412a995926
+    uuid: df088f5e-7b16-4483-a2cf-235445f4b260
     country_id: *tn
-    network_id: *tn_tt_mobile_mobile
-  - id: 258000
-    prefix: '2169804'
+    network_id: *tn_fixed
+  - id: 245429
+    prefix: '2166'
     number_min_length: 11
     number_max_length: 11
-    uuid: b38c52fc-bfc7-43f9-928e-b5ae1acc6f75
+    uuid: 9a18c663-e522-4b2c-b562-bf1386266f49
     country_id: *tn
-    network_id: *tn_tt_mobile_mobile
-  - id: 258002
-    prefix: '2169805'
+    network_id: *tn_fixed
+  - id: 251746
+    prefix: '21671'
     number_min_length: 11
     number_max_length: 11
-    uuid: f182dbab-65d2-474a-8596-dda9d7e25e34
+    uuid: 8ed35ef4-34f5-4d9f-be20-55e17099d7f6
     country_id: *tn
-    network_id: *tn_tt_mobile_mobile
+    network_id: *tn_tunis_ben_arous_ariana_manouba_region
+  - id: 251834
+    prefix: '21672'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6d6f3eac-6f77-4548-b1f0-e4c507634b5d
+    country_id: *tn
+    network_id: *tn_nabeul_bizerte_zaghouan_region
+  - id: 251886
+    prefix: '21673'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 226e1fb9-1ebd-48fc-a0ce-2ade34f7bf94
+    country_id: *tn
+    network_id: *tn_sousse_monastir_mahdia_region
+  - id: 252072
+    prefix: '21674'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f054cb95-a7d3-4aee-93af-77c936437316
+    country_id: *tn
+    network_id: *tn_sfax_region
+  - id: 252564
+    prefix: '21675'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f14a07a-da44-4c05-b817-070b90223157
+    country_id: *tn
+    network_id: *tn_gabes_kebili_medenine_tatouine_region
+  - id: 248943
+    prefix: '21630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be327303-71fa-429c-ac84-cf4a56d5ed07
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 255284
+    prefix: '2167'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 27e3e6ef-564d-492c-a5bf-746f85a3d8c9
+    country_id: *tn
+    network_id: *tn_fixed
+  - id: 255463
+    prefix: '21676'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f816810-101c-436b-a3f5-c9913b30dbdb
+    country_id: *tn
+    network_id: *tn_gafsa_tozeur_sidi_bouzid_region
+  - id: 255645
+    prefix: '21677'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50dcbf05-c37e-4c13-a443-995adece4e28
+    country_id: *tn
+    network_id: *tn_kairouan_kasserine_region
+  - id: 256101
+    prefix: '21678'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: adeb0b4d-e744-430f-872a-dabd749c1492
+    country_id: *tn
+    network_id: *tn_kef_beja_jendouba_siliana_region

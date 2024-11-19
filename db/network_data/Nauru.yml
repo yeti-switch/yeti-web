@@ -1,5 +1,10 @@
 country_id: &nr 148
 networks:
+# Fixed Networks
+  - id: &nr_fixed 43444
+    name: NR Fixed
+    uuid: 6f5989a1-4cf2-4a96-8bf3-e7b2eb94507e
+    type_id: 2
 # Supplementary services Networks
   - id: &nr_special_services 21468
     name: NR Special Services
@@ -11,14 +16,14 @@ networks:
     uuid: db63c3c5-f182-4805-8cbe-caaf57e9443f
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242073
     prefix: '674'
     number_min_length: 4
     number_max_length: 100
     uuid: c9365d98-fe08-43ae-875f-31afa7013378
     country_id: *nr
-    network_id: null
+    network_id: *nr_fixed
 # Supplementary services Prefixes
   - id: 242467
     prefix: '6741'

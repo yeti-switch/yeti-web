@@ -17,16 +17,11 @@ networks:
     name: SD Sudani Mobile
     uuid: 013e0a6f-12ed-4778-807e-5ee33b1bf05e
     type_id: 3
-# Supplementary services Networks
-  - id: &sd_special_services 21481
-    name: SD Special Services
-    uuid: a3063278-b19f-415c-bb75-8f1c6a8316ea
-    type_id: 13
-  - id: &sd_emergency_services 24537
-    name: SD Emergency Services
-    uuid: a4e2feaa-10c6-486b-aab6-2c09e0a60599
-    type_id: 13
 # Fixed Networks
+  - id: &sd_fixed 25830
+    name: SD Fixed
+    uuid: 9f52a547-d058-44fd-ae43-b9fd9d6957b7
+    type_id: 2
   - id: &sd_khartoum_region 25550
     name: SD Khartoum Region
     uuid: 986279c6-dfd8-48c1-8fb1-dce7196639ca
@@ -39,10 +34,15 @@ networks:
     name: SD Om Durman Region
     uuid: c174e33f-6d17-4123-b966-0c1f796366a9
     type_id: 2
-  - id: &sd_fixed 25830
-    name: SD Fixed
-    uuid: 9f52a547-d058-44fd-ae43-b9fd9d6957b7
-    type_id: 2
+# Supplementary services Networks
+  - id: &sd_special_services 21481
+    name: SD Special Services
+    uuid: a3063278-b19f-415c-bb75-8f1c6a8316ea
+    type_id: 13
+  - id: &sd_emergency_services 24537
+    name: SD Emergency Services
+    uuid: a4e2feaa-10c6-486b-aab6-2c09e0a60599
+    type_id: 13
 # Satellite Networks
   - id: &sd_sudani_satellite 26677
     name: SD Sudani Satellite
@@ -50,11 +50,18 @@ networks:
     type_id: 15
 network_prefixes:
 # Mobile Prefixes
-  - id: 221952
-    prefix: '24996'
+  - id: 454111
+    prefix: '24990'
     number_min_length: 12
     number_max_length: 12
-    uuid: 009571bf-1a9e-4b15-8043-19dec257dd16
+    uuid: 4743a571-5b43-4c6a-b124-a8763d898461
+    country_id: *sd
+    network_id: *sd_zain_mobile
+  - id: 458155
+    prefix: '24991'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d7abe192-25ff-40e7-9d32-960ecd41da97
     country_id: *sd
     network_id: *sd_zain_mobile
   - id: 239376
@@ -85,20 +92,6 @@ network_prefixes:
     uuid: e76dcd31-00b4-4329-90d6-11db718fb850
     country_id: *sd
     network_id: *sd_sudani_mobile
-  - id: 454111
-    prefix: '24990'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4743a571-5b43-4c6a-b124-a8763d898461
-    country_id: *sd
-    network_id: *sd_zain_mobile
-  - id: 458155
-    prefix: '24991'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d7abe192-25ff-40e7-9d32-960ecd41da97
-    country_id: *sd
-    network_id: *sd_zain_mobile
   - id: 468952
     prefix: '24992'
     number_min_length: 12
@@ -113,30 +106,28 @@ network_prefixes:
     uuid: bbff618a-7918-4ed7-830b-8df570dd14be
     country_id: *sd
     network_id: *sd_mtn_mobile
-# Country code Prefixes
+  - id: 221952
+    prefix: '24996'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 009571bf-1a9e-4b15-8043-19dec257dd16
+    country_id: *sd
+    network_id: *sd_zain_mobile
+# Fixed Prefixes
   - id: 242092
     prefix: '249'
     number_min_length: 4
     number_max_length: 100
     uuid: cdd14c85-c0a8-4de5-936c-b0493a8b7ecd
     country_id: *sd
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242484
-    prefix: '2491'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 8f727729-f602-471b-9fec-d947d5537b05
+    network_id: *sd_fixed
+  - id: 266072
+    prefix: '24915'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 53f92972-1bd1-461c-bfd3-fe4f5583dec3
     country_id: *sd
-    network_id: *sd_special_services
-  - id: 258195
-    prefix: '24999'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: ea7cc07b-73c9-43f8-9e8a-33d688752a17
-    country_id: *sd
-    network_id: *sd_emergency_services
-# Fixed Prefixes
+    network_id: *sd_fixed
   - id: 260517
     prefix: '249183'
     number_min_length: 12
@@ -165,13 +156,21 @@ network_prefixes:
     uuid: b5d1ab35-2988-44db-8331-50996cbcacf7
     country_id: *sd
     network_id: *sd_fixed
-  - id: 266072
-    prefix: '24915'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 53f92972-1bd1-461c-bfd3-fe4f5583dec3
+# Supplementary services Prefixes
+  - id: 242484
+    prefix: '2491'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 8f727729-f602-471b-9fec-d947d5537b05
     country_id: *sd
-    network_id: *sd_fixed
+    network_id: *sd_special_services
+  - id: 258195
+    prefix: '24999'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: ea7cc07b-73c9-43f8-9e8a-33d688752a17
+    country_id: *sd
+    network_id: *sd_emergency_services
 # Satellite Prefixes
   - id: 266967
     prefix: '249178'

@@ -1,42 +1,25 @@
 country_id: &dk 58
 networks:
-# Supplementary services Networks
-  - id: &dk_special_services 21392
-    name: DK Special Services
-    uuid: 1300b820-616a-43f6-adf2-fd344aa456be
-    type_id: 13
-  - id: &dk_directory_enquiry_services_international_calls 21599
-    name: DK Directory Enquiry Services International Calls
-    uuid: 94fd3148-f992-43a8-b793-6c01b141c52e
-    type_id: 13
-  - id: &dk_social_value_services 21625
-    name: DK Social Value Services
-    uuid: 0058222c-5228-4c61-8d73-b6e2d6d36558
-    type_id: 13
-  - id: &dk_directory_enquiry_services_national_calls 21671
-    name: DK Directory Enquiry Services National Calls
-    uuid: 367e9683-ed90-43f3-9247-1b5d2528fa1c
-    type_id: 13
-  - id: &dk_data_access_services 21820
-    name: DK Data Access Services
-    uuid: 9a7e45fa-89ea-4c23-b21e-bd55bb381c6f
-    type_id: 13
-  - id: &dk_machine_to_machine_m2m_services 22078
-    name: DK Machine To Machine M2M Services
-    uuid: 0b711643-117a-450b-bb92-489eaf402a1e
-    type_id: 13
-  - id: &dk_freephone_services 23813
-    name: DK Freephone Services
-    uuid: a173bcea-0786-476b-8eee-2cc35d4cfcf0
-    type_id: 13
-  - id: &dk_premium_rate_services 24419
-    name: DK Premium Rate Services
-    uuid: 5e0b7d40-f68e-4aa8-a6ea-905f7058e4fd
-    type_id: 13
 # Mobile Networks
+  - id: &dk_mobile 21900
+    name: DK Mobile
+    uuid: c8d20077-f8ee-47f8-ab60-f15ec9f2b8e1
+    type_id: 3
   - id: &dk_tdc_mobile 21865
     name: DK Tdc Mobile
     uuid: fb9c796f-a9ab-40bf-85c2-1909b0cb6399
+    type_id: 3
+  - id: &dk_greenwave_mobile 22051
+    name: DK Greenwave Mobile
+    uuid: 69b10847-8b38-4e90-bc6c-fbdc1d5e9d11
+    type_id: 3
+  - id: &dk_mifon_mobile 22774
+    name: DK Mifon Mobile
+    uuid: 2b75aeb1-7358-440a-baec-920ed46d8575
+    type_id: 3
+  - id: &dk_telenor_mobile 21927
+    name: DK Telenor Mobile
+    uuid: 1dcb4f0b-ec5f-445e-8cad-81e48545abf3
     type_id: 3
   - id: &dk_mobiweb_mobile 21873
     name: DK Mobiweb Mobile
@@ -50,10 +33,6 @@ networks:
     name: DK Onomondo Mobile
     uuid: 65786ab6-c555-494d-af6b-0feb5406ab57
     type_id: 3
-  - id: &dk_mobile 21900
-    name: DK Mobile
-    uuid: c8d20077-f8ee-47f8-ab60-f15ec9f2b8e1
-    type_id: 3
   - id: &dk_3_mobile 21918
     name: DK 3 Mobile
     uuid: b08903fe-93c1-4d5c-8d84-f83f3bc9baa4
@@ -66,10 +45,6 @@ networks:
     name: DK Lycamobile Mobile
     uuid: ba891ca3-099c-4cb3-8fd6-21d7a2625e3a
     type_id: 3
-  - id: &dk_telenor_mobile 21927
-    name: DK Telenor Mobile
-    uuid: 1dcb4f0b-ec5f-445e-8cad-81e48545abf3
-    type_id: 3
   - id: &dk_telenor_connexion_mobile 22005
     name: DK Telenor Connexion Mobile
     uuid: 52b86955-156f-4690-a23c-ff0ac6e5d2f1
@@ -77,10 +52,6 @@ networks:
   - id: &dk_simservice_mobile 22050
     name: DK Simservice Mobile
     uuid: 714fcab2-fccb-4283-8425-bbac8553564e
-    type_id: 3
-  - id: &dk_greenwave_mobile 22051
-    name: DK Greenwave Mobile
-    uuid: 69b10847-8b38-4e90-bc6c-fbdc1d5e9d11
     type_id: 3
   - id: &dk_telavox_mobile 22054
     name: DK Telavox Mobile
@@ -150,25 +121,85 @@ networks:
     name: DK Xplora Mobile
     uuid: ecff3802-12e1-40bd-b9a7-9f557802726e
     type_id: 3
-  - id: &dk_mifon_mobile 22774
-    name: DK Mifon Mobile
-    uuid: 2b75aeb1-7358-440a-baec-920ed46d8575
+  - id: &dk_syniverse_mobile 23333
+    name: DK Syniverse Mobile
+    uuid: 2ebf3645-cb0f-4f94-a040-46749aca3043
     type_id: 3
-  - id: &dk_link_mobility_mobile 23073
-    name: DK Link Mobility Mobile
-    uuid: fc99f6f8-18b8-45d3-a9e8-de24c4d53a80
+  - id: &dk_telecom_x_mobile 23587
+    name: DK Telecom X Mobile
+    uuid: 958b2d2a-f1ce-4bb8-8afa-b4332f6b8662
+    type_id: 3
+  - id: &dk_companymobile_mobile 24491
+    name: DK Companymobile Mobile
+    uuid: 559bc096-b9e4-4b58-b95b-07a6440901c9
+    type_id: 3
+  - id: &dk_tismi_mobile 24492
+    name: DK Tismi Mobile
+    uuid: 6d065436-f7c9-412f-9f3a-7e64669845b3
+    type_id: 3
+  - id: &dk_ipify_mobile 23366
+    name: DK Ipify Mobile
+    uuid: bcab718f-5aaa-4b9f-9a84-327c44372999
+    type_id: 3
+  - id: &dk_experience_cloud_mobile 24494
+    name: DK Experience Cloud Mobile
+    uuid: 8304a85e-1ce0-47e6-ab36-796b4bf1b000
+    type_id: 3
+  - id: &dk_bolignet_aarhus_mobile_mobile 24503
+    name: DK Bolignet Aarhus Mobile Mobile
+    uuid: 6e0b0dd4-d166-43b6-863e-8ed4ceb06c94
+    type_id: 3
+  - id: &dk_42_telecom_mobile 23076
+    name: DK 42 Telecom Mobile
+    uuid: d001f172-afa2-4bdd-b3cc-ec461b167ede
+    type_id: 3
+  - id: &dk_mobile_one_mobile 24504
+    name: DK Mobile One Mobile
+    uuid: ab4804c4-68fa-4425-85fc-9dc89c89a779
+    type_id: 3
+  - id: &dk_bsg_mobile 24068
+    name: DK Bsg Mobile
+    uuid: 11b3a184-1c3e-4c28-861e-7849b8aed1c0
+    type_id: 3
+  - id: &dk_twilio_mobile 24505
+    name: DK Twilio Mobile
+    uuid: 91af6094-e6dd-4ebd-87e7-7fd501dbd276
+    type_id: 3
+  - id: &dk_yateco_mobile 24506
+    name: DK Yateco Mobile
+    uuid: 2c592bff-06d2-4fb5-ae63-3760d0cf98de
+    type_id: 3
+  - id: &dk_odder_mobile 24507
+    name: DK Odder Mobile
+    uuid: 89a08925-05ed-4a97-a0ee-2f9a1a2acdb4
     type_id: 3
   - id: &dk_compatel_mobile 23074
     name: DK Compatel Mobile
     uuid: 3b60736c-a04e-4987-ab32-7bbe6dd4a40a
     type_id: 3
+  - id: &dk_net_1_mobile 24511
+    name: DK Net 1 Mobile
+    uuid: 2ca77b1b-dd8b-4f68-8022-5456e0e61056
+    type_id: 3
+  - id: &dk_thyfon_mobile 24512
+    name: DK Thyfon Mobile
+    uuid: 0b48e5bc-705d-458b-8eda-3ea4d5dc0c25
+    type_id: 3
+  - id: &dk_bandwidth_mobile 24513
+    name: DK Bandwidth Mobile
+    uuid: 65632300-ddf6-4b92-828b-402628fd6dc0
+    type_id: 3
+  - id: &dk_ipvision_mobile 23332
+    name: DK Ipvision Mobile
+    uuid: 5a45dbd8-8781-4277-9e33-bd1a09a6a128
+    type_id: 3
+  - id: &dk_link_mobility_mobile 23073
+    name: DK Link Mobility Mobile
+    uuid: fc99f6f8-18b8-45d3-a9e8-de24c4d53a80
+    type_id: 3
   - id: &dk_viptel_mobile 23075
     name: DK Viptel Mobile
     uuid: 8b6261bb-3601-4fa9-9f33-8f0455438f80
-    type_id: 3
-  - id: &dk_42_telecom_mobile 23076
-    name: DK 42 Telecom Mobile
-    uuid: d001f172-afa2-4bdd-b3cc-ec461b167ede
     type_id: 3
   - id: &dk_viahub_mobile 23077
     name: DK Viahub Mobile
@@ -186,21 +217,9 @@ networks:
     name: DK Nexconio Mobile
     uuid: 46614b15-a947-4429-9ab7-ad605a89842a
     type_id: 3
-  - id: &dk_ipvision_mobile 23332
-    name: DK Ipvision Mobile
-    uuid: 5a45dbd8-8781-4277-9e33-bd1a09a6a128
-    type_id: 3
-  - id: &dk_syniverse_mobile 23333
-    name: DK Syniverse Mobile
-    uuid: 2ebf3645-cb0f-4f94-a040-46749aca3043
-    type_id: 3
   - id: &dk_universe_mobile 23350
     name: DK Universe Mobile
     uuid: 60920f6b-f304-410d-990b-c64087571abb
-    type_id: 3
-  - id: &dk_ipify_mobile 23366
-    name: DK Ipify Mobile
-    uuid: bcab718f-5aaa-4b9f-9a84-327c44372999
     type_id: 3
   - id: &dk_inmobile_mobile 23373
     name: DK Inmobile Mobile
@@ -210,17 +229,21 @@ networks:
     name: DK Viber Mobile
     uuid: c8536152-17c8-405d-a435-e7b6c6a3f4cf
     type_id: 3
-  - id: &dk_telecom_x_mobile 23587
-    name: DK Telecom X Mobile
-    uuid: 958b2d2a-f1ce-4bb8-8afa-b4332f6b8662
-    type_id: 3
-  - id: &dk_evercall_mobile 23936
-    name: DK Evercall Mobile
-    uuid: d55ef960-4d59-4a79-a526-4f177d947c1d
+  - id: &dk_5tel_mobile 24066
+    name: DK 5Tel Mobile
+    uuid: 4ac95ebf-ef09-4902-babc-40d19a8f77b8
     type_id: 3
   - id: &dk_flexonet_mobile 23937
     name: DK Flexonet Mobile
     uuid: 7d6e5702-9309-4b47-86a9-54ab726556f9
+    type_id: 3
+  - id: &dk_bics_mobile 24069
+    name: DK Bics Mobile
+    uuid: f555661c-9577-4691-9af2-55fc446c52c0
+    type_id: 3
+  - id: &dk_evercall_mobile 23936
+    name: DK Evercall Mobile
+    uuid: d55ef960-4d59-4a79-a526-4f177d947c1d
     type_id: 3
   - id: &dk_sinch_mobile 23938
     name: DK Sinch Mobile
@@ -246,62 +269,6 @@ networks:
     name: DK Banedanmark Mobile
     uuid: 09e0f3c1-64ad-4cc3-8f77-1c0bfd380184
     type_id: 3
-  - id: &dk_5tel_mobile 24066
-    name: DK 5Tel Mobile
-    uuid: 4ac95ebf-ef09-4902-babc-40d19a8f77b8
-    type_id: 3
-  - id: &dk_bsg_mobile 24068
-    name: DK Bsg Mobile
-    uuid: 11b3a184-1c3e-4c28-861e-7849b8aed1c0
-    type_id: 3
-  - id: &dk_bics_mobile 24069
-    name: DK Bics Mobile
-    uuid: f555661c-9577-4691-9af2-55fc446c52c0
-    type_id: 3
-  - id: &dk_companymobile_mobile 24491
-    name: DK Companymobile Mobile
-    uuid: 559bc096-b9e4-4b58-b95b-07a6440901c9
-    type_id: 3
-  - id: &dk_tismi_mobile 24492
-    name: DK Tismi Mobile
-    uuid: 6d065436-f7c9-412f-9f3a-7e64669845b3
-    type_id: 3
-  - id: &dk_experience_cloud_mobile 24494
-    name: DK Experience Cloud Mobile
-    uuid: 8304a85e-1ce0-47e6-ab36-796b4bf1b000
-    type_id: 3
-  - id: &dk_bolignet_aarhus_mobile_mobile 24503
-    name: DK Bolignet Aarhus Mobile Mobile
-    uuid: 6e0b0dd4-d166-43b6-863e-8ed4ceb06c94
-    type_id: 3
-  - id: &dk_mobile_one_mobile 24504
-    name: DK Mobile One Mobile
-    uuid: ab4804c4-68fa-4425-85fc-9dc89c89a779
-    type_id: 3
-  - id: &dk_twilio_mobile 24505
-    name: DK Twilio Mobile
-    uuid: 91af6094-e6dd-4ebd-87e7-7fd501dbd276
-    type_id: 3
-  - id: &dk_yateco_mobile 24506
-    name: DK Yateco Mobile
-    uuid: 2c592bff-06d2-4fb5-ae63-3760d0cf98de
-    type_id: 3
-  - id: &dk_odder_mobile 24507
-    name: DK Odder Mobile
-    uuid: 89a08925-05ed-4a97-a0ee-2f9a1a2acdb4
-    type_id: 3
-  - id: &dk_net_1_mobile 24511
-    name: DK Net 1 Mobile
-    uuid: 2ca77b1b-dd8b-4f68-8022-5456e0e61056
-    type_id: 3
-  - id: &dk_thyfon_mobile 24512
-    name: DK Thyfon Mobile
-    uuid: 0b48e5bc-705d-458b-8eda-3ea4d5dc0c25
-    type_id: 3
-  - id: &dk_bandwidth_mobile 24513
-    name: DK Bandwidth Mobile
-    uuid: 65632300-ddf6-4b92-828b-402628fd6dc0
-    type_id: 3
   - id: &dk_benemen_mobile 24517
     name: DK Benemen Mobile
     uuid: fd573a14-be1a-4950-b6d1-fa1fa411d59c
@@ -319,73 +286,195 @@ networks:
     name: DK Fixed
     uuid: 91e3f2f3-3786-4499-8a49-76396d6f263d
     type_id: 2
+# Supplementary services Networks
+  - id: &dk_special_services 21392
+    name: DK Special Services
+    uuid: 1300b820-616a-43f6-adf2-fd344aa456be
+    type_id: 13
+  - id: &dk_directory_enquiry_services_international_calls 21599
+    name: DK Directory Enquiry Services International Calls
+    uuid: 94fd3148-f992-43a8-b793-6c01b141c52e
+    type_id: 13
+  - id: &dk_social_value_services 21625
+    name: DK Social Value Services
+    uuid: 0058222c-5228-4c61-8d73-b6e2d6d36558
+    type_id: 13
+  - id: &dk_directory_enquiry_services_national_calls 21671
+    name: DK Directory Enquiry Services National Calls
+    uuid: 367e9683-ed90-43f3-9247-1b5d2528fa1c
+    type_id: 13
+  - id: &dk_data_access_services 21820
+    name: DK Data Access Services
+    uuid: 9a7e45fa-89ea-4c23-b21e-bd55bb381c6f
+    type_id: 13
+  - id: &dk_machine_to_machine_m2m_services 22078
+    name: DK Machine To Machine M2M Services
+    uuid: 0b711643-117a-450b-bb92-489eaf402a1e
+    type_id: 13
+  - id: &dk_premium_rate_services 24419
+    name: DK Premium Rate Services
+    uuid: 5e0b7d40-f68e-4aa8-a6ea-905f7058e4fd
+    type_id: 13
+  - id: &dk_freephone_services 23813
+    name: DK Freephone Services
+    uuid: a173bcea-0786-476b-8eee-2cc35d4cfcf0
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
-  - id: 241983
-    prefix: '45'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: f3d401ca-b38f-4073-a7be-0e9c95c2b9bb
-    country_id: *dk
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242387
-    prefix: '451'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: 3973d069-83dc-4bdd-a10b-db20d93de470
-    country_id: *dk
-    network_id: *dk_special_services
-  - id: 242633
-    prefix: '45113'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 15f3d291-50a9-434f-8117-5f23b7f7a4e8
-    country_id: *dk
-    network_id: *dk_directory_enquiry_services_international_calls
-  - id: 242664
-    prefix: '45116'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: ca35b689-558c-4820-a57f-7c0df993dfcc
-    country_id: *dk
-    network_id: *dk_social_value_services
-  - id: 242716
-    prefix: '45118'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 32393d58-b2e9-46c7-b10a-f002ce1659bf
-    country_id: *dk
-    network_id: *dk_directory_enquiry_services_national_calls
-  - id: 243012
-    prefix: '4516'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 4dc3c3a8-80f2-47c0-8395-6e63413cda42
-    country_id: *dk
-    network_id: *dk_data_access_services
-  - id: 243709
-    prefix: '4537'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 8ce4f0d1-a14a-4af6-bf1d-a8de6492bf52
-    country_id: *dk
-    network_id: *dk_machine_to_machine_m2m_services
-  - id: 253120
-    prefix: '4580'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ee1a182c-b334-40e6-81be-85ef4cd0b9aa
-    country_id: *dk
-    network_id: *dk_freephone_services
-  - id: 257155
-    prefix: '4590'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3b0e4b1b-6f46-4a29-a41a-3a9c730ad9c0
-    country_id: *dk
-    network_id: *dk_premium_rate_services
 # Mobile Prefixes
+  - id: 247400
+    prefix: '452'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ede5ed07-9a95-4e20-9a4b-285ab6f46eb1
+    country_id: *dk
+    network_id: *dk_mobile
+  - id: 247470
+    prefix: '45201'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 49e38f20-1006-4d2a-ae66-031f9ae2b1f7
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 247487
+    prefix: '45202'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 27f1ee94-7559-43c5-97f9-83af77536195
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 247510
+    prefix: '45203'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ad7a4cb1-b306-4870-8b22-a98e20112691
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 247527
+    prefix: '4520381'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d294b451-8b5c-4813-9cd9-a7ae3e09d818
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 247528
+    prefix: '4520383'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 07a36e15-35f3-4658-981b-baf42d5c222b
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 247529
+    prefix: '4520384'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 84ccccd8-e79a-4b5b-b36d-9e0783c01655
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 247530
+    prefix: '4520389'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 43af8394-a1c4-40b4-bf83-6da2f14b0889
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 247532
+    prefix: '45204'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 25f2d88e-e7aa-4ba8-99a1-2a54706be47d
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 247541
+    prefix: '45205'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f968b028-70e0-41d8-bcc7-1023a94b2731
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 247546
+    prefix: '4520505'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 63347b03-5995-4446-9a2d-cf943d10a48b
+    country_id: *dk
+    network_id: *dk_mifon_mobile
+  - id: 247547
+    prefix: '4520506'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 41798675-ff85-4c0f-86a7-a9e2b4d08aad
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 247548
+    prefix: '4520509'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ad383287-5827-49c9-9cea-80e55c6e7855
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 247552
+    prefix: '45206'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9fdf0709-54f0-4554-b0b6-042c38b30826
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 247560
+    prefix: '45207'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2f671369-f706-403e-b08c-bfc48781051c
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 247583
+    prefix: '45208'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1cc814be-ee34-4cae-810d-fffeace56f12
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 247595
+    prefix: '45209'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b0f5fa86-d0b5-4519-aac6-68d0807adcb8
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 247644
+    prefix: '45211'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e70ed9cf-f649-4144-b7ae-9db3868e5301
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 247647
+    prefix: '45212'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9f3efc56-ae80-4b3f-8bbe-8b816c9e7bd2
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 247655
+    prefix: '45213'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ff0393a9-f24c-4cb1-b79f-c719422963c2
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 247669
+    prefix: '45214'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d9d38e93-8869-44e5-98bd-5a006ceb1ff1
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 249020
+    prefix: '45301'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0a087b02-5a34-4357-b1f3-593158f2f131
+    country_id: *dk
+    network_id: *dk_tdc_mobile
   - id: 243104
     prefix: '45302'
     number_min_length: 10
@@ -2437,153 +2526,1483 @@ network_prefixes:
     uuid: 932d85fe-0080-41bb-b94b-ba409f446070
     country_id: *dk
     network_id: *dk_telia_mobile
-  - id: 247400
-    prefix: '452'
+  - id: 253811
+    prefix: '45603'
     number_min_length: 10
     number_max_length: 10
-    uuid: ede5ed07-9a95-4e20-9a4b-285ab6f46eb1
+    uuid: 0de981d8-f748-489e-842b-217140758507
+    country_id: *dk
+    network_id: *dk_telia_mobile
+  - id: 253831
+    prefix: '45604'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 88568074-7957-4f6a-82e5-24103de08d8b
+    country_id: *dk
+    network_id: *dk_telia_mobile
+  - id: 253864
+    prefix: '456050'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0f6915ff-fdf1-48f4-9746-3b896596f8fe
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 253866
+    prefix: '456051'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f976dca9-da6a-4cce-9f86-8adf43c55839
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253868
+    prefix: '456052'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e8e3ffc-915b-43ed-a0ea-72e18ac9bf4c
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253870
+    prefix: '456053'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1888e859-1012-425f-a281-849bc8115bf6
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253872
+    prefix: '456054'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1a20a15f-6df3-4b95-99fc-f6b344c533c2
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253874
+    prefix: '456055'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d5b20ee2-70df-4ac4-a953-9ecf084c5e84
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253876
+    prefix: '456056'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ba7ef8b6-173b-418a-8b02-73033319867d
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253878
+    prefix: '456057'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0591b16c-cd2c-4ae3-beed-b20982bf1d1e
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253880
+    prefix: '456058'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 69c40f71-96ce-47ea-bb99-4ed7680ca2f1
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253882
+    prefix: '456059'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3a27aac9-74df-4690-8bdf-4f636ee07cb0
+    country_id: *dk
+    network_id: *dk_3_mobile
+  - id: 253887
+    prefix: '45606'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4071c6cf-53ef-4a00-8e48-0098ec1fb886
+    country_id: *dk
+    network_id: *dk_cbb_mobil_mobile
+  - id: 253908
+    prefix: '45607'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca3ffdab-08c0-4560-8d05-19b08d0a7871
+    country_id: *dk
+    network_id: *dk_cbb_mobil_mobile
+  - id: 253915
+    prefix: '45608'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0a48b22d-eeea-4c7b-96a6-33651157e70b
+    country_id: *dk
+    network_id: *dk_cbb_mobil_mobile
+  - id: 253926
+    prefix: '456090'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9fddeed7-ad9d-4b3c-bd17-5c4158408f5b
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 253927
+    prefix: '456091'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 05cead6c-8482-4aa4-999b-8dc522ec8fff
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 253929
+    prefix: '456092'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 501fa938-cb3a-4e6d-bddf-683178f01350
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 253969
+    prefix: '456093'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dea4cee6-9769-43af-aaff-6b18b4593ddd
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 253971
+    prefix: '456094'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4c3641d5-1aa0-4b8d-8b12-7e56503cbd42
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 253972
+    prefix: '456095'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 28b196cc-0323-4b63-a1ec-b53305c0ca37
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 253973
+    prefix: '456096'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8a10fa7e-90fc-4ce4-8b9d-625883068763
+    country_id: *dk
+    network_id: *dk_wireless_logic_mobile
+  - id: 253975
+    prefix: '456097'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9d4f4f00-cb59-441d-af18-e0ea9e431b04
+    country_id: *dk
+    network_id: *dk_wireless_logic_mobile
+  - id: 253976
+    prefix: '456098'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bbe94514-a94b-4496-a53b-1b7b0a46d2c2
+    country_id: *dk
+    network_id: *dk_telavox_mobile
+  - id: 253977
+    prefix: '456099'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8c80ebf3-c91e-4885-9b82-dcc687cb7832
+    country_id: *dk
+    network_id: *dk_syniverse_mobile
+  - id: 253982
+    prefix: '4561'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d6e3a4d4-c0b2-4332-a955-62d3c1368380
     country_id: *dk
     network_id: *dk_mobile
-  - id: 247470
-    prefix: '45201'
+  - id: 253998
+    prefix: '45611'
     number_min_length: 10
     number_max_length: 10
-    uuid: 49e38f20-1006-4d2a-ae66-031f9ae2b1f7
+    uuid: e361076d-f74c-4b66-b098-9278856bb2f7
     country_id: *dk
     network_id: *dk_tdc_mobile
-  - id: 247487
-    prefix: '45202'
+  - id: 254014
+    prefix: '45612'
     number_min_length: 10
     number_max_length: 10
-    uuid: 27f1ee94-7559-43c5-97f9-83af77536195
+    uuid: 7a16fd4b-c190-4d60-8ee4-7b64255ea77f
     country_id: *dk
     network_id: *dk_tdc_mobile
-  - id: 247510
-    prefix: '45203'
+  - id: 254021
+    prefix: '4561210'
     number_min_length: 10
     number_max_length: 10
-    uuid: ad7a4cb1-b306-4870-8b22-a98e20112691
+    uuid: 88ca37ee-4a44-4e9b-ab74-7cf1f757889e
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 254026
+    prefix: '45613'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f63a370f-cb9a-4f83-9461-e13f612beaee
     country_id: *dk
     network_id: *dk_tdc_mobile
-  - id: 247527
-    prefix: '4520381'
+  - id: 254046
+    prefix: '456140'
     number_min_length: 10
     number_max_length: 10
-    uuid: d294b451-8b5c-4813-9cd9-a7ae3e09d818
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 247528
-    prefix: '4520383'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 07a36e15-35f3-4658-981b-baf42d5c222b
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 247529
-    prefix: '4520384'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 84ccccd8-e79a-4b5b-b36d-9e0783c01655
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 247530
-    prefix: '4520389'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 43af8394-a1c4-40b4-bf83-6da2f14b0889
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 247532
-    prefix: '45204'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 25f2d88e-e7aa-4ba8-99a1-2a54706be47d
+    uuid: 17153764-403e-4547-a08c-a14e6ec8e67f
     country_id: *dk
     network_id: *dk_tdc_mobile
-  - id: 247541
-    prefix: '45205'
+  - id: 254047
+    prefix: '456141'
     number_min_length: 10
     number_max_length: 10
-    uuid: f968b028-70e0-41d8-bcc7-1023a94b2731
+    uuid: f7365f1e-c162-48ef-96d8-7f27d4526b7c
     country_id: *dk
     network_id: *dk_tdc_mobile
-  - id: 247546
-    prefix: '4520505'
+  - id: 254049
+    prefix: '456142'
     number_min_length: 10
     number_max_length: 10
-    uuid: 63347b03-5995-4446-9a2d-cf943d10a48b
+    uuid: ac25d90c-c888-4f1c-8457-001b3f7277e2
     country_id: *dk
-    network_id: *dk_mifon_mobile
-  - id: 247547
-    prefix: '4520506'
+    network_id: *dk_tdc_mobile
+  - id: 254051
+    prefix: '456143'
     number_min_length: 10
     number_max_length: 10
-    uuid: 41798675-ff85-4c0f-86a7-a9e2b4d08aad
+    uuid: 913fd4e3-a4f0-41ea-949b-6da9fa08b78b
     country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 247548
-    prefix: '4520509'
+    network_id: *dk_tdc_mobile
+  - id: 254053
+    prefix: '456144'
     number_min_length: 10
     number_max_length: 10
-    uuid: ad383287-5827-49c9-9cea-80e55c6e7855
+    uuid: bf58263d-94f9-487e-ab75-50f6af1703e9
     country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 247552
-    prefix: '45206'
+    network_id: *dk_tdc_mobile
+  - id: 254054
+    prefix: '456145'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9fdf0709-54f0-4554-b0b6-042c38b30826
+    uuid: e996fb2e-9306-435f-978d-8c211c54d06f
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 254055
+    prefix: '456146'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 54f515cd-e693-4115-b5f5-bbeb6f898926
+    country_id: *dk
+    network_id: *dk_telia_mobile
+  - id: 254056
+    prefix: '456147'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aef2fd71-a2f4-45ad-8ac3-a7031194f6ee
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 254057
+    prefix: '456148'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 73532268-e43d-4482-ae8d-30d56af0c1c5
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 254058
+    prefix: '4561492'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cf75eb4d-edbe-4c8a-9a5a-94bcee4863b2
+    country_id: *dk
+    network_id: *dk_mobilevalue_mobile
+  - id: 254059
+    prefix: '4561493'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d879e58f-30e5-43f0-849c-e37afd339d3d
+    country_id: *dk
+    network_id: *dk_mobilevalue_mobile
+  - id: 254060
+    prefix: '4561495'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b51c6f05-c345-4123-87eb-d8a25ce2c789
+    country_id: *dk
+    network_id: *dk_xplora_mobile
+  - id: 254061
+    prefix: '4561496'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c4f50a99-8227-4c08-ae26-ee06917b0800
+    country_id: *dk
+    network_id: *dk_xplora_mobile
+  - id: 254062
+    prefix: '4561497'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 33713906-8270-4c5e-b2d7-6ed3b9983266
+    country_id: *dk
+    network_id: *dk_mobiweb_mobile
+  - id: 254063
+    prefix: '4561498'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 845b81c7-a936-4ead-b4d9-ab4d39262826
+    country_id: *dk
+    network_id: *dk_xplora_mobile
+  - id: 254064
+    prefix: '4561499'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: daca6ffb-0b44-425b-a112-13bd099dba2c
+    country_id: *dk
+    network_id: *dk_xplora_mobile
+  - id: 254065
+    prefix: '45615'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2f3b2c41-4f02-4d0b-a7e8-7faa6057c987
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 254071
+    prefix: '4561520'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac62a773-1352-4f2b-b1ae-2292b15e9aa0
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 254072
+    prefix: '4561533'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 372a7c57-7547-49d6-889d-81c587adee8e
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 254073
+    prefix: '4561571'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a58bb49a-f12f-416b-8501-0229d40cff63
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 254074
+    prefix: '4561581'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ecd808fd-9ce1-42ac-bd70-2452c9d3f526
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 254075
+    prefix: '45616'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8c0644f9-bcfc-4509-afaf-851379d33246
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 254081
+    prefix: '45617'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d04ffc93-e429-4f8c-9afe-4e6888f760b2
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 254091
+    prefix: '45618'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 46835785-7d5a-4382-82be-90cc88fe75be
     country_id: *dk
     network_id: *dk_telenor_mobile
-  - id: 247560
-    prefix: '45207'
+  - id: 254096
+    prefix: '45619'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2f671369-f706-403e-b08c-bfc48781051c
+    uuid: 04d0c028-7109-4df5-92f1-766fd5af5b21
     country_id: *dk
     network_id: *dk_telenor_mobile
-  - id: 247583
-    prefix: '45208'
+  - id: 255397
+    prefix: '4570170'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1cc814be-ee34-4cae-810d-fffeace56f12
+    uuid: c2113b89-885e-4aec-9440-e68ddf12f265
+    country_id: *dk
+    network_id: *dk_telecom_x_mobile
+  - id: 255398
+    prefix: '4570180'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 72841237-7e6e-40ba-9f89-928a970f5544
+    country_id: *dk
+    network_id: *dk_telecom_x_mobile
+  - id: 251733
+    prefix: '4571'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e468ca3b-38da-4dd7-ba1f-ef260af627d5
+    country_id: *dk
+    network_id: *dk_mobile
+  - id: 251755
+    prefix: '45711'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac33e828-ebe9-45a6-ba31-b7dbde40e778
+    country_id: *dk
+    network_id: *dk_cbb_mobil_mobile
+  - id: 251774
+    prefix: '45712'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e41daa7-2ec4-4f57-bb64-3d3d755188d4
+    country_id: *dk
+    network_id: *dk_cbb_mobil_mobile
+  - id: 251778
+    prefix: '45713'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 742a79d0-dc56-4534-9f54-d5a91b5e4dea
+    country_id: *dk
+    network_id: *dk_lycamobile_mobile
+  - id: 251781
+    prefix: '45714'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: beac699c-6572-4a01-a2aa-18e034fd63b8
+    country_id: *dk
+    network_id: *dk_lycamobile_mobile
+  - id: 251783
+    prefix: '45715'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5334eaa8-4be1-48aa-8a67-9562c467a36b
+    country_id: *dk
+    network_id: *dk_lycamobile_mobile
+  - id: 251785
+    prefix: '45716'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9ce235b2-5533-43c7-b4b3-dd80a65ef30c
+    country_id: *dk
+    network_id: *dk_lycamobile_mobile
+  - id: 251789
+    prefix: '457170'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fc68a8ff-d779-4c9e-8b2f-6b75fbfbeea3
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 251791
+    prefix: '457171'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 63283650-925b-4f74-aa4a-03daee11948f
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 251793
+    prefix: '457172'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e7f9d26-0098-4365-b596-715cc0b37eaa
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 251794
+    prefix: '457173'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 90c8b878-ae9d-4eea-ac45-ed4daaed7602
+    country_id: *dk
+    network_id: *dk_cbb_mobil_mobile
+  - id: 251795
+    prefix: '457174'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 384fce12-5eeb-4dfb-9c7f-017420f22336
+    country_id: *dk
+    network_id: *dk_firmafon_mobile
+  - id: 251796
+    prefix: '457176'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 158f6e1a-09c8-426e-aaca-24d6e9a4ff69
     country_id: *dk
     network_id: *dk_telenor_mobile
-  - id: 247595
-    prefix: '45209'
+  - id: 251797
+    prefix: '457177'
     number_min_length: 10
     number_max_length: 10
-    uuid: b0f5fa86-d0b5-4519-aac6-68d0807adcb8
+    uuid: fb7a6d21-b683-4dd1-80da-634766d32392
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 251800
+    prefix: '457178'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3cf5fd56-b910-4122-87c3-b8781b00473a
     country_id: *dk
     network_id: *dk_telenor_mobile
-  - id: 247644
-    prefix: '45211'
+  - id: 251801
+    prefix: '457179'
     number_min_length: 10
     number_max_length: 10
-    uuid: e70ed9cf-f649-4144-b7ae-9db3868e5301
+    uuid: 48861faa-b658-4cde-9965-7598e11f4b8f
     country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 247647
-    prefix: '45212'
+    network_id: *dk_telenor_mobile
+  - id: 251802
+    prefix: '45718'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9f3efc56-ae80-4b3f-8bbe-8b816c9e7bd2
+    uuid: cc2f89ae-f8fc-45ca-bf8a-85b2dd17ea25
     country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 247655
-    prefix: '45213'
+    network_id: *dk_lycamobile_mobile
+  - id: 251805
+    prefix: '457190'
     number_min_length: 10
     number_max_length: 10
-    uuid: ff0393a9-f24c-4cb1-b79f-c719422963c2
+    uuid: 28c7a9d4-5342-4708-8d33-6a6509874be3
     country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 247669
-    prefix: '45214'
+    network_id: *dk_3_mobile
+  - id: 251806
+    prefix: '457191'
     number_min_length: 10
     number_max_length: 10
-    uuid: d9d38e93-8869-44e5-98bd-5a006ceb1ff1
+    uuid: 57066a83-1604-4373-be0d-64f18240517e
+    country_id: *dk
+    network_id: *dk_telecom_x_mobile
+  - id: 251807
+    prefix: '457192'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a33eaefa-bbd3-4134-be44-02d978b73413
     country_id: *dk
     network_id: *dk_tdc_mobile
+  - id: 251808
+    prefix: '457193'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8cf4a06c-3c15-46df-ac03-459d44f2a899
+    country_id: *dk
+    network_id: *dk_cbb_mobil_mobile
+  - id: 251809
+    prefix: '457196'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1aab4382-27cd-4938-bd5a-d58f5fbf451b
+    country_id: *dk
+    network_id: *dk_firmafon_mobile
+  - id: 251810
+    prefix: '457199'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e1633954-932a-48e6-a59d-ad9aa9003f74
+    country_id: *dk
+    network_id: *dk_firmafon_mobile
+  - id: 257358
+    prefix: '4591'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac1a1276-0108-4738-b25e-8ab24ce2fbb0
+    country_id: *dk
+    network_id: *dk_mobile
+  - id: 257399
+    prefix: '459110'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 80dd47f1-4d32-423c-a9b0-a6786365a8e1
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257400
+    prefix: '459111'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6ff443ea-a83d-4a76-b97b-2c3912af3c0a
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257401
+    prefix: '459112'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6e01084f-f2e6-4dca-bce6-5e516439f616
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257402
+    prefix: '459113'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e301df9-6e42-4af5-915b-73309866a690
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257403
+    prefix: '459114'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 61098784-312e-4e26-89ff-7463acaea199
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257404
+    prefix: '459115'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b1e7e9fc-c9bd-4b7f-99c4-e55d3fd71999
+    country_id: *dk
+    network_id: *dk_companymobile_mobile
+  - id: 257405
+    prefix: '459116'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc2212b1-e00f-41e3-86f1-fc850382bac9
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257406
+    prefix: '459117'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aea3ff03-65a5-4292-ad2b-396ec010b30e
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257407
+    prefix: '459118'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 833e9a51-1ca0-4cef-a530-3f5f565b0844
+    country_id: *dk
+    network_id: *dk_companymobile_mobile
+  - id: 257408
+    prefix: '459119'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8bede7a3-28ed-411c-ac35-fb6f43d4bc21
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257413
+    prefix: '459120'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3acbcf37-f5b6-4c0c-80b7-5a8e492fb9cc
+    country_id: *dk
+    network_id: *dk_tismi_mobile
+  - id: 257415
+    prefix: '459121'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c00a6da3-f1d4-4fad-8fcd-dcfe7b6ed5d6
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257417
+    prefix: '459122'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a8ad9f65-403c-40ba-af2b-d7b8d68efc8c
+    country_id: *dk
+    network_id: *dk_companymobile_mobile
+  - id: 257419
+    prefix: '459123'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 16d0e367-bd40-4613-a705-2aaed53109ff
+    country_id: *dk
+    network_id: *dk_companymobile_mobile
+  - id: 257421
+    prefix: '459124'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1ae6779b-f8e4-4f14-9edd-0bfada27b3c6
+    country_id: *dk
+    network_id: *dk_companymobile_mobile
+  - id: 257423
+    prefix: '459125'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0a02cfb2-5c9b-4c23-95f7-8020555d0cbc
+    country_id: *dk
+    network_id: *dk_companymobile_mobile
+  - id: 257434
+    prefix: '4591301'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3fda0815-a5d0-4cc2-80f7-d06b1c4beae7
+    country_id: *dk
+    network_id: *dk_mobiweb_mobile
+  - id: 257435
+    prefix: '4591302'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aa41a5ce-7087-4be0-a783-223aee3771f5
+    country_id: *dk
+    network_id: *dk_ipnordic_mobile
+  - id: 257436
+    prefix: '4591303'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9f114f99-6390-4d8d-89dc-ef1c80577d2d
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 257437
+    prefix: '4591304'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 22446428-c94d-47b9-8f30-25e70aa11669
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 257438
+    prefix: '4591305'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 889b5fa5-dd7d-4f58-a90a-6ec10bbab118
+    country_id: *dk
+    network_id: *dk_ipnordic_mobile
+  - id: 257439
+    prefix: '4591307'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4d8edce9-5dac-4d62-8e8d-c34504a51139
+    country_id: *dk
+    network_id: *dk_xplora_mobile
+  - id: 257440
+    prefix: '4591308'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40480206-a247-41e3-a34f-00fada5bcdba
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 257441
+    prefix: '4591309'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0f3054ad-8e1d-44bc-918d-6fdc6d62dbb6
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 257442
+    prefix: '459131'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dd237cd3-4696-4031-b8a9-ae261dc7da91
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257443
+    prefix: '459132'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 008b51eb-edb7-495f-8db8-2853afb523f5
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257444
+    prefix: '459133'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d9c78efb-3fde-4e2f-9496-4ec3f4bac817
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257445
+    prefix: '459134'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1210542a-f147-469c-b971-f3c726a5bdae
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257446
+    prefix: '459135'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20c4ceb6-c100-4a04-aa0b-e49dc79a583f
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257447
+    prefix: '459136'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 52c1f889-2cca-4834-9b6d-6e56385c8cd1
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257448
+    prefix: '459137'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c385553-dc7d-4048-85bd-1b1e172e1cf8
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257449
+    prefix: '459138'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f2c0a35f-855d-4018-9ee0-d0b90358873e
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257450
+    prefix: '459139'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3bc12829-5916-4d24-bf45-e2598a326576
+    country_id: *dk
+    network_id: *dk_telenor_mobile
+  - id: 257451
+    prefix: '45914'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fcb7e05a-5df2-4b3f-aad7-2c9b4a3b10bf
+    country_id: *dk
+    network_id: *dk_lycamobile_mobile
+  - id: 257461
+    prefix: '459150'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e4954c3b-a1e1-4b32-b304-9a9768e1cc04
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257463
+    prefix: '459151'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8caffc88-e3e5-4e4c-8164-21baff65d5a4
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257465
+    prefix: '459152'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 00bb41bd-7c9a-41d9-b708-eafd8e63ad93
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257467
+    prefix: '459153'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 21f221e5-a53e-4a80-b9ab-d1c3efb1f3aa
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257469
+    prefix: '459154'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b65ed16c-a563-4039-86b0-6bc3f7f94578
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257471
+    prefix: '459155'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 797b0577-707b-4d82-8d0a-489e10a8e59b
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257473
+    prefix: '459156'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8a78d759-b263-47c9-a82d-54b971bd0419
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257476
+    prefix: '459158'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 331f68f3-5658-456c-9a9c-20be03157bf2
+    country_id: *dk
+    network_id: *dk_ipify_mobile
+  - id: 257478
+    prefix: '459159'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8643bd71-f118-4d52-8afb-a5612cc26c19
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257480
+    prefix: '45916'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 37538267-aae2-40a8-8cdd-71bd5901bdf2
+    country_id: *dk
+    network_id: *dk_lycamobile_mobile
+  - id: 257486
+    prefix: '45917'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 441da7bf-ef9b-4622-b2f3-64c7188d82ed
+    country_id: *dk
+    network_id: *dk_lycamobile_mobile
+  - id: 257497
+    prefix: '459180'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b0d21aa1-5590-40e3-b6c8-3973f8e9edf1
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257498
+    prefix: '459181'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e4cb709-ee94-4b73-a3fe-a10dd683a600
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257499
+    prefix: '459182'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6e7b12cc-daec-4742-aa0e-41226373c50f
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257500
+    prefix: '459183'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9ee9af43-69fd-4287-9960-c0c143892bef
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257501
+    prefix: '459184'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bea52afd-dfff-4e43-884e-84b67c4b43a1
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257502
+    prefix: '459185'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 86d3e159-bc0b-435f-8f9e-b09f2645bb45
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257503
+    prefix: '459186'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 993cc17f-ab5b-4e7e-90e7-2dfd4e89c892
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257504
+    prefix: '459187'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ab17693-2544-4286-b76c-45f3b8a4217b
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257505
+    prefix: '459188'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 46e5cb8b-04b8-497e-b446-01adbe373e4f
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257506
+    prefix: '459189'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98484d54-84d0-4362-a776-ff40055c599e
+    country_id: *dk
+    network_id: *dk_uni_tel_mobile
+  - id: 257510
+    prefix: '459190'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7f5bc9f0-5677-4b12-9cfb-c252fb143aed
+    country_id: *dk
+    network_id: *dk_experience_cloud_mobile
+  - id: 257522
+    prefix: '459191'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8bc7ed6b-00cb-4fe7-abe1-b44b86f4f8c7
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 257534
+    prefix: '459192'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a27f7768-3ed8-423c-a9c0-62680e7ff1c1
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257546
+    prefix: '459193'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7ea60714-066e-4303-a005-b954604cb7fa
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257549
+    prefix: '459194'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4e4010c2-fd60-4389-9074-2dd5e41556c9
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257552
+    prefix: '459195'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4392ebf3-159d-47c0-a13e-f7d43535c9cc
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257555
+    prefix: '459196'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 35f9d968-8c93-4257-bc53-45ec90e96e6b
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257558
+    prefix: '459197'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 02f293cf-9da1-4cd3-97e1-d161c0821360
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257567
+    prefix: '459198'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 05a82ef0-d0da-43e0-b46f-017c72abec0c
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257570
+    prefix: '459199'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4854bcde-3b29-4761-97cb-519c0aa5d5b1
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 257584
+    prefix: '4592'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0260b55f-ee26-4ef4-ae67-603b51b7fb33
+    country_id: *dk
+    network_id: *dk_mobile
+  - id: 257627
+    prefix: '459210'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6f41f7e8-91b2-4d6f-8198-356bd9dc7ab0
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257630
+    prefix: '459211'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 492d858c-73ed-461b-ad38-579170a9fe7b
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257633
+    prefix: '459212'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9b64a207-d51a-46c0-b18e-65e22a9d9be9
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257635
+    prefix: '459213'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 853268e8-ee00-4e6e-aa65-8524a00c47de
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257637
+    prefix: '459214'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3a09b263-972d-44b1-9b83-c80a5f204079
+    country_id: *dk
+    network_id: *dk_companymobile_mobile
+  - id: 257639
+    prefix: '459215'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4a0f6baf-d09f-4c75-aaba-84f935a5cd95
+    country_id: *dk
+    network_id: *dk_companymobile_mobile
+  - id: 257641
+    prefix: '459216'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2dcb757a-1cbc-4c62-bbe7-d5ce72f36f94
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257643
+    prefix: '459217'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1cc53a4c-e127-47a2-8a1c-ccaa199b141c
+    country_id: *dk
+    network_id: *dk_experience_cloud_mobile
+  - id: 257645
+    prefix: '459218'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bc210420-57d9-463f-994e-8aa0753c329f
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257647
+    prefix: '459219'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 36b14f1b-60c6-4ca6-aa50-4ca65c6be25b
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257654
+    prefix: '459220'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 86816715-8d51-468c-b1a0-e5898c00d749
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257656
+    prefix: '459221'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b4501f82-d8c3-4745-9353-77eab51a0e45
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257658
+    prefix: '459222'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 136f8390-2d0d-4c4d-b557-c0385cf7273d
+    country_id: *dk
+    network_id: *dk_bolignet_aarhus_mobile_mobile
+  - id: 257660
+    prefix: '459223'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fcf5a41a-b0c2-4c2b-9be3-145dee4179a7
+    country_id: *dk
+    network_id: *dk_42_telecom_mobile
+  - id: 257661
+    prefix: '459224'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5eb0bc0f-d5fd-451a-9164-204693da4aad
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257662
+    prefix: '4592290'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fdf0b33d-561b-4963-b44e-dcf5a62fa786
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 257663
+    prefix: '4592291'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44207dec-72d1-4399-9a42-e46984524532
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 257664
+    prefix: '4592292'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6cecd7f5-229f-4661-8756-7c5383488387
+    country_id: *dk
+    network_id: *dk_mobile_one_mobile
+  - id: 257665
+    prefix: '4592293'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4337ee35-570c-42b3-999c-abc47284f554
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 257666
+    prefix: '4592294'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9e2e19d6-6740-44d4-b12e-23ac034258da
+    country_id: *dk
+    network_id: *dk_bsg_mobile
+  - id: 257667
+    prefix: '4592295'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6856eea2-7f80-41de-9a96-e300190b34f4
+    country_id: *dk
+    network_id: *dk_twilio_mobile
+  - id: 257668
+    prefix: '4592296'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7964ef18-e872-445b-bdde-a5056a3debe5
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 257669
+    prefix: '4592298'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7b6e2f77-e738-4b5f-b5d2-182a3457fb11
+    country_id: *dk
+    network_id: *dk_yateco_mobile
+  - id: 257670
+    prefix: '4592299'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4412c5c3-8283-4dc3-8f0d-613d21db13b0
+    country_id: *dk
+    network_id: *dk_odder_mobile
+  - id: 257671
+    prefix: '45923'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 53f06345-b23d-4d4c-8d65-da4f21219883
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257714
+    prefix: '459240'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1c8906bb-ed2c-47cc-9817-7418e8428f4d
+    country_id: *dk
+    network_id: *dk_greenwave_mobile
+  - id: 257715
+    prefix: '459243'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: da37e7ea-7973-43d7-a0d8-5509758908bd
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257716
+    prefix: '459244'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 737aecfb-b125-4535-8b6c-9878969db3a6
+    country_id: *dk
+    network_id: *dk_ipnordic_mobile
+  - id: 257717
+    prefix: '459245'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b7d87d6f-e5a8-4a07-8c32-b505cf779ab9
+    country_id: *dk
+    network_id: *dk_compatel_mobile
+  - id: 257718
+    prefix: '459246'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2d7901f7-767a-4971-b906-639983051b52
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257719
+    prefix: '459247'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fa721664-842a-4479-ba39-ddcf0ebd6aa6
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257720
+    prefix: '459248'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2a632839-8f4d-4633-9783-1bdd5dc0621f
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257721
+    prefix: '459249'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c76819b-fe77-45b3-baff-dbb9a19268bf
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257722
+    prefix: '45925'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6c26712d-266b-4383-8022-78d7c9fefd59
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257739
+    prefix: '45926'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6a806cc7-ff38-4aa1-93b6-7048481bdc17
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257770
+    prefix: '459270'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d5362616-e5ea-416b-ac8a-8580327bb19a
+    country_id: *dk
+    network_id: *dk_net_1_mobile
+  - id: 257773
+    prefix: '459271'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 01c5df63-fb23-4aab-871b-79e464ee8cfc
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257776
+    prefix: '459272'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40d11c5f-8bf9-45f0-9d4d-50a5fe3d4459
+    country_id: *dk
+    network_id: *dk_thyfon_mobile
+  - id: 257779
+    prefix: '459273'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e5bee0d9-733a-4cb6-a538-842d1b94f0e0
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257782
+    prefix: '459274'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9e7acdd0-ec08-4fb7-9679-2c87c481cd0b
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257785
+    prefix: '459275'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3c442dce-3617-4960-80d1-ff169657658f
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257788
+    prefix: '459276'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5894665a-45df-4b81-97e2-9a06c49764ab
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257791
+    prefix: '459277'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 289bb99e-7793-4067-8980-a3192ffb5a33
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257794
+    prefix: '459278'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f6eb318f-bfc1-4c0b-b86f-0efe1dd28af5
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257797
+    prefix: '459279'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c81b6be1-ebdf-4197-911c-5683d053cf28
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257806
+    prefix: '459280'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d8c06620-aa15-4b8d-9684-bae2cecfc79b
+    country_id: *dk
+    network_id: *dk_bandwidth_mobile
+  - id: 257809
+    prefix: '459282'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c5735225-5fb5-4528-96ca-c77a1a795a2b
+    country_id: *dk
+    network_id: *dk_flexfone_mobile
+  - id: 257810
+    prefix: '459284'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1da71422-c7b5-4e08-8a78-d3b05e30f7c3
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257811
+    prefix: '459285'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2a01a19d-f534-4e18-9abf-3e73d2d14be8
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257813
+    prefix: '459286'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66eaf024-2484-4820-8b41-f1a4c10b943a
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257814
+    prefix: '459287'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5b29b9f9-e610-4ddd-aecb-4e53d9f77e5c
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257815
+    prefix: '459288'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7e7f8a7e-6605-47a4-ac02-6e77e1f0469f
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257816
+    prefix: '459289'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 72120e59-a7fe-430f-8957-01b0c61c20bc
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257819
+    prefix: '459290'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3160db3d-1b3d-46b9-b22b-2750675fd7d7
+    country_id: *dk
+    network_id: *dk_tdc_mobile
+  - id: 257823
+    prefix: '459291'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b82cb6d7-5758-486a-a404-d0a76718cd39
+    country_id: *dk
+    network_id: *dk_telenor_connexion_mobile
+  - id: 257827
+    prefix: '459292'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ea7e377-03ff-48e4-a1a2-0ae50698bef2
+    country_id: *dk
+    network_id: *dk_ipnordic_mobile
+  - id: 257830
+    prefix: '459293'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d2f92afb-bce8-48a0-bf44-f3dd5f82e233
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257834
+    prefix: '459294'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 93294b3f-984b-4ec8-9098-9bd610e3680e
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257838
+    prefix: '459295'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: de180e98-35fe-4d50-94bd-93e3eacdefac
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257843
+    prefix: '459296'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 509d41ad-5725-470f-b5d5-72f89f02f586
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257847
+    prefix: '459297'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 682dda9a-b51d-4937-a51c-6e069ca772ce
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257851
+    prefix: '459298'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 52f5f781-5378-4513-b20c-3956b727c785
+    country_id: *dk
+    network_id: *dk_simservice_mobile
+  - id: 257855
+    prefix: '459299'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0df2421a-08d5-4c53-b3a0-327e6faa1fa5
+    country_id: *dk
+    network_id: *dk_ipvision_mobile
+  - id: 257861
+    prefix: '4593'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 77a89038-db8f-42c9-aee4-73d3ad26d085
+    country_id: *dk
+    network_id: *dk_mobile
   - id: 247672
     prefix: '45215'
     number_min_length: 10
@@ -3424,13 +4843,6 @@ network_prefixes:
     uuid: 0c8b3fee-9330-47ef-8a2d-cd3fa8b6accd
     country_id: *dk
     network_id: *dk_mobile
-  - id: 249020
-    prefix: '45301'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0a087b02-5a34-4357-b1f3-593158f2f131
-    country_id: *dk
-    network_id: *dk_tdc_mobile
   - id: 249152
     prefix: '454626'
     number_min_length: 10
@@ -5097,167 +6509,195 @@ network_prefixes:
     uuid: c2680dcf-76ba-428f-9f62-188e23bf90db
     country_id: *dk
     network_id: *dk_simservice_mobile
-  - id: 251733
-    prefix: '4571'
+  - id: 254360
+    prefix: '4566200'
     number_min_length: 10
     number_max_length: 10
-    uuid: e468ca3b-38da-4dd7-ba1f-ef260af627d5
+    uuid: 04e7cbd9-60b8-4647-a6b4-1be6e4b35f4e
     country_id: *dk
-    network_id: *dk_mobile
-  - id: 251755
-    prefix: '45711'
+    network_id: *dk_mifon_mobile
+  - id: 254361
+    prefix: '4566201'
     number_min_length: 10
     number_max_length: 10
-    uuid: ac33e828-ebe9-45a6-ba31-b7dbde40e778
-    country_id: *dk
-    network_id: *dk_cbb_mobil_mobile
-  - id: 251774
-    prefix: '45712'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5e41daa7-2ec4-4f57-bb64-3d3d755188d4
-    country_id: *dk
-    network_id: *dk_cbb_mobil_mobile
-  - id: 251778
-    prefix: '45713'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 742a79d0-dc56-4534-9f54-d5a91b5e4dea
-    country_id: *dk
-    network_id: *dk_lycamobile_mobile
-  - id: 251781
-    prefix: '45714'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: beac699c-6572-4a01-a2aa-18e034fd63b8
-    country_id: *dk
-    network_id: *dk_lycamobile_mobile
-  - id: 251783
-    prefix: '45715'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5334eaa8-4be1-48aa-8a67-9562c467a36b
-    country_id: *dk
-    network_id: *dk_lycamobile_mobile
-  - id: 251785
-    prefix: '45716'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9ce235b2-5533-43c7-b4b3-dd80a65ef30c
-    country_id: *dk
-    network_id: *dk_lycamobile_mobile
-  - id: 251789
-    prefix: '457170'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fc68a8ff-d779-4c9e-8b2f-6b75fbfbeea3
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 251791
-    prefix: '457171'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 63283650-925b-4f74-aa4a-03daee11948f
+    uuid: 75afb350-9be2-4922-879d-a0f0383a782a
     country_id: *dk
     network_id: *dk_maxteldk_mobile
-  - id: 251793
-    prefix: '457172'
+  - id: 254362
+    prefix: '4566202'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3e7f9d26-0098-4365-b596-715cc0b37eaa
+    uuid: d0fbd485-b912-4244-be2c-7098b2073ddb
     country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 251794
-    prefix: '457173'
+    network_id: *dk_mifon_mobile
+  - id: 254365
+    prefix: '4566220'
     number_min_length: 10
     number_max_length: 10
-    uuid: 90c8b878-ae9d-4eea-ac45-ed4daaed7602
+    uuid: ee641a52-c1ce-4963-aadc-d5533509de21
     country_id: *dk
-    network_id: *dk_cbb_mobil_mobile
-  - id: 251795
-    prefix: '457174'
+    network_id: *dk_maxteldk_mobile
+  - id: 254366
+    prefix: '4566222'
     number_min_length: 10
     number_max_length: 10
-    uuid: 384fce12-5eeb-4dfb-9c7f-017420f22336
+    uuid: dc52a6b5-afae-4e21-a2fc-d5b2fdaf3694
     country_id: *dk
-    network_id: *dk_firmafon_mobile
-  - id: 251796
-    prefix: '457176'
+    network_id: *dk_5tel_mobile
+  - id: 254385
+    prefix: '4566330'
     number_min_length: 10
     number_max_length: 10
-    uuid: 158f6e1a-09c8-426e-aaca-24d6e9a4ff69
+    uuid: ef4fdf33-f9f1-4599-8881-880af018bad8
     country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 251797
-    prefix: '457177'
+    network_id: *dk_bsg_mobile
+  - id: 254386
+    prefix: '4566332'
     number_min_length: 10
     number_max_length: 10
-    uuid: fb7a6d21-b683-4dd1-80da-634766d32392
+    uuid: 5c8ed0ce-d51f-4038-b92b-8c5576da7f62
     country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 251800
-    prefix: '457178'
+    network_id: *dk_maxteldk_mobile
+  - id: 254387
+    prefix: '4566333'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3cf5fd56-b910-4122-87c3-b8781b00473a
+    uuid: f5bbc604-1c64-42d1-af2c-936f3ed97a0f
     country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 251801
-    prefix: '457179'
+    network_id: *dk_flexonet_mobile
+  - id: 254388
+    prefix: '4566334'
     number_min_length: 10
     number_max_length: 10
-    uuid: 48861faa-b658-4cde-9965-7598e11f4b8f
+    uuid: 6f004cc1-8dc1-4a9d-b189-51c472022943
     country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 251802
-    prefix: '45718'
+    network_id: *dk_greenwave_mobile
+  - id: 254389
+    prefix: '4566335'
     number_min_length: 10
     number_max_length: 10
-    uuid: cc2f89ae-f8fc-45ca-bf8a-85b2dd17ea25
+    uuid: 5bfea2cb-22b2-49d3-81c5-7a1073889e5c
     country_id: *dk
-    network_id: *dk_lycamobile_mobile
-  - id: 251805
-    prefix: '457190'
+    network_id: *dk_greenwave_mobile
+  - id: 254390
+    prefix: '4566336'
     number_min_length: 10
     number_max_length: 10
-    uuid: 28c7a9d4-5342-4708-8d33-6a6509874be3
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 251806
-    prefix: '457191'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 57066a83-1604-4373-be0d-64f18240517e
+    uuid: 6be74e17-1158-485c-9776-b1bd8d5c156a
     country_id: *dk
     network_id: *dk_telecom_x_mobile
-  - id: 251807
-    prefix: '457192'
+  - id: 254391
+    prefix: '4566337'
     number_min_length: 10
     number_max_length: 10
-    uuid: a33eaefa-bbd3-4134-be44-02d978b73413
+    uuid: 0f13e384-721e-4e6f-8c7a-f08b50e09f8b
     country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 251808
-    prefix: '457193'
+    network_id: *dk_greenwave_mobile
+  - id: 254392
+    prefix: '4566338'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8cf4a06c-3c15-46df-ac03-459d44f2a899
+    uuid: ec5f7d97-a2d2-4f16-ba55-45ef682be0ad
     country_id: *dk
-    network_id: *dk_cbb_mobil_mobile
-  - id: 251809
-    prefix: '457196'
+    network_id: *dk_maxteldk_mobile
+  - id: 254393
+    prefix: '4566339'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1aab4382-27cd-4938-bd5a-d58f5fbf451b
+    uuid: 9a461609-dbdb-44a1-8341-3e912c3d96bf
     country_id: *dk
-    network_id: *dk_firmafon_mobile
-  - id: 251810
-    prefix: '457199'
+    network_id: *dk_bics_mobile
+  - id: 254412
+    prefix: '456640'
     number_min_length: 10
     number_max_length: 10
-    uuid: e1633954-932a-48e6-a59d-ad9aa9003f74
+    uuid: 0b318185-b21a-4b69-b86f-e53d10ff0e38
     country_id: *dk
-    network_id: *dk_firmafon_mobile
+    network_id: *dk_maxteldk_mobile
+  - id: 254419
+    prefix: '456644'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 63a397b4-c5fa-47d4-8f75-7f4a44643d66
+    country_id: *dk
+    network_id: *dk_ipnordic_mobile
+  - id: 254436
+    prefix: '456650'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: baed9e57-6dc5-4286-bf30-0b0befb58575
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 254487
+    prefix: '456677'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 15bb7450-7ea6-4e15-bd78-34d8fc7fe9bb
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 255728
+    prefix: '4577100'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8db5522f-aee0-42f5-a0f2-412b08fab3c1
+    country_id: *dk
+    network_id: *dk_mifon_mobile
+  - id: 255729
+    prefix: '4577101'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 81fd9a2d-2fca-4e52-8b61-e3f22b7f2435
+    country_id: *dk
+    network_id: *dk_mifon_mobile
+  - id: 255730
+    prefix: '4577102'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a502510d-d617-496d-aa2d-e09c2deb5bf6
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 255734
+    prefix: '4577110'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0dae93ab-1d6f-470e-aed3-4654ccc6ed4d
+    country_id: *dk
+    network_id: *dk_maxteldk_mobile
+  - id: 255736
+    prefix: '4577111'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f96900ca-4e84-49e2-912b-6782bf62f7c5
+    country_id: *dk
+    network_id: *dk_5tel_mobile
+  - id: 255774
+    prefix: '457717'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6e926f3f-d592-44c2-b72e-542727b84a71
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 255818
+    prefix: '457722'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40045c90-2b09-49b0-aad9-345d2374d8a4
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 256334
+    prefix: '457880'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0394a70e-5e89-4df2-9dce-56d8ab93b13e
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
+  - id: 256343
+    prefix: '457888'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 97bbb116-eb86-4320-87ff-c94206451621
+    country_id: *dk
+    network_id: *dk_lebara_mobile_mobile
   - id: 253311
     prefix: '4581'
     number_min_length: 10
@@ -5776,1511 +7216,6 @@ network_prefixes:
     uuid: 09b35f40-3fc8-4b6b-9c7a-eab420964819
     country_id: *dk
     network_id: *dk_banedanmark_mobile
-  - id: 253811
-    prefix: '45603'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0de981d8-f748-489e-842b-217140758507
-    country_id: *dk
-    network_id: *dk_telia_mobile
-  - id: 253831
-    prefix: '45604'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 88568074-7957-4f6a-82e5-24103de08d8b
-    country_id: *dk
-    network_id: *dk_telia_mobile
-  - id: 253864
-    prefix: '456050'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0f6915ff-fdf1-48f4-9746-3b896596f8fe
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 253866
-    prefix: '456051'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f976dca9-da6a-4cce-9f86-8adf43c55839
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253868
-    prefix: '456052'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5e8e3ffc-915b-43ed-a0ea-72e18ac9bf4c
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253870
-    prefix: '456053'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1888e859-1012-425f-a281-849bc8115bf6
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253872
-    prefix: '456054'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1a20a15f-6df3-4b95-99fc-f6b344c533c2
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253874
-    prefix: '456055'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d5b20ee2-70df-4ac4-a953-9ecf084c5e84
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253876
-    prefix: '456056'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ba7ef8b6-173b-418a-8b02-73033319867d
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253878
-    prefix: '456057'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0591b16c-cd2c-4ae3-beed-b20982bf1d1e
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253880
-    prefix: '456058'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 69c40f71-96ce-47ea-bb99-4ed7680ca2f1
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253882
-    prefix: '456059'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3a27aac9-74df-4690-8bdf-4f636ee07cb0
-    country_id: *dk
-    network_id: *dk_3_mobile
-  - id: 253887
-    prefix: '45606'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4071c6cf-53ef-4a00-8e48-0098ec1fb886
-    country_id: *dk
-    network_id: *dk_cbb_mobil_mobile
-  - id: 253908
-    prefix: '45607'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ca3ffdab-08c0-4560-8d05-19b08d0a7871
-    country_id: *dk
-    network_id: *dk_cbb_mobil_mobile
-  - id: 253915
-    prefix: '45608'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0a48b22d-eeea-4c7b-96a6-33651157e70b
-    country_id: *dk
-    network_id: *dk_cbb_mobil_mobile
-  - id: 253926
-    prefix: '456090'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9fddeed7-ad9d-4b3c-bd17-5c4158408f5b
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 253927
-    prefix: '456091'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 05cead6c-8482-4aa4-999b-8dc522ec8fff
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 253929
-    prefix: '456092'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 501fa938-cb3a-4e6d-bddf-683178f01350
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 253969
-    prefix: '456093'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dea4cee6-9769-43af-aaff-6b18b4593ddd
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 253971
-    prefix: '456094'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4c3641d5-1aa0-4b8d-8b12-7e56503cbd42
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 253972
-    prefix: '456095'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 28b196cc-0323-4b63-a1ec-b53305c0ca37
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 253973
-    prefix: '456096'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8a10fa7e-90fc-4ce4-8b9d-625883068763
-    country_id: *dk
-    network_id: *dk_wireless_logic_mobile
-  - id: 253975
-    prefix: '456097'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9d4f4f00-cb59-441d-af18-e0ea9e431b04
-    country_id: *dk
-    network_id: *dk_wireless_logic_mobile
-  - id: 253976
-    prefix: '456098'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bbe94514-a94b-4496-a53b-1b7b0a46d2c2
-    country_id: *dk
-    network_id: *dk_telavox_mobile
-  - id: 253977
-    prefix: '456099'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8c80ebf3-c91e-4885-9b82-dcc687cb7832
-    country_id: *dk
-    network_id: *dk_syniverse_mobile
-  - id: 253982
-    prefix: '4561'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d6e3a4d4-c0b2-4332-a955-62d3c1368380
-    country_id: *dk
-    network_id: *dk_mobile
-  - id: 253998
-    prefix: '45611'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e361076d-f74c-4b66-b098-9278856bb2f7
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254014
-    prefix: '45612'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7a16fd4b-c190-4d60-8ee4-7b64255ea77f
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254021
-    prefix: '4561210'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 88ca37ee-4a44-4e9b-ab74-7cf1f757889e
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254026
-    prefix: '45613'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f63a370f-cb9a-4f83-9461-e13f612beaee
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254046
-    prefix: '456140'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 17153764-403e-4547-a08c-a14e6ec8e67f
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254047
-    prefix: '456141'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f7365f1e-c162-48ef-96d8-7f27d4526b7c
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254049
-    prefix: '456142'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ac25d90c-c888-4f1c-8457-001b3f7277e2
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254051
-    prefix: '456143'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 913fd4e3-a4f0-41ea-949b-6da9fa08b78b
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254053
-    prefix: '456144'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bf58263d-94f9-487e-ab75-50f6af1703e9
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254054
-    prefix: '456145'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e996fb2e-9306-435f-978d-8c211c54d06f
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254055
-    prefix: '456146'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 54f515cd-e693-4115-b5f5-bbeb6f898926
-    country_id: *dk
-    network_id: *dk_telia_mobile
-  - id: 254056
-    prefix: '456147'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aef2fd71-a2f4-45ad-8ac3-a7031194f6ee
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254057
-    prefix: '456148'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 73532268-e43d-4482-ae8d-30d56af0c1c5
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254058
-    prefix: '4561492'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cf75eb4d-edbe-4c8a-9a5a-94bcee4863b2
-    country_id: *dk
-    network_id: *dk_mobilevalue_mobile
-  - id: 254059
-    prefix: '4561493'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d879e58f-30e5-43f0-849c-e37afd339d3d
-    country_id: *dk
-    network_id: *dk_mobilevalue_mobile
-  - id: 254060
-    prefix: '4561495'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b51c6f05-c345-4123-87eb-d8a25ce2c789
-    country_id: *dk
-    network_id: *dk_xplora_mobile
-  - id: 254061
-    prefix: '4561496'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c4f50a99-8227-4c08-ae26-ee06917b0800
-    country_id: *dk
-    network_id: *dk_xplora_mobile
-  - id: 254062
-    prefix: '4561497'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 33713906-8270-4c5e-b2d7-6ed3b9983266
-    country_id: *dk
-    network_id: *dk_mobiweb_mobile
-  - id: 254063
-    prefix: '4561498'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 845b81c7-a936-4ead-b4d9-ab4d39262826
-    country_id: *dk
-    network_id: *dk_xplora_mobile
-  - id: 254064
-    prefix: '4561499'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: daca6ffb-0b44-425b-a112-13bd099dba2c
-    country_id: *dk
-    network_id: *dk_xplora_mobile
-  - id: 254065
-    prefix: '45615'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2f3b2c41-4f02-4d0b-a7e8-7faa6057c987
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254071
-    prefix: '4561520'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ac62a773-1352-4f2b-b1ae-2292b15e9aa0
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254072
-    prefix: '4561533'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 372a7c57-7547-49d6-889d-81c587adee8e
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254073
-    prefix: '4561571'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a58bb49a-f12f-416b-8501-0229d40cff63
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254074
-    prefix: '4561581'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ecd808fd-9ce1-42ac-bd70-2452c9d3f526
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254075
-    prefix: '45616'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8c0644f9-bcfc-4509-afaf-851379d33246
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254081
-    prefix: '45617'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d04ffc93-e429-4f8c-9afe-4e6888f760b2
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 254091
-    prefix: '45618'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 46835785-7d5a-4382-82be-90cc88fe75be
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 254096
-    prefix: '45619'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 04d0c028-7109-4df5-92f1-766fd5af5b21
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 254360
-    prefix: '4566200'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 04e7cbd9-60b8-4647-a6b4-1be6e4b35f4e
-    country_id: *dk
-    network_id: *dk_mifon_mobile
-  - id: 254361
-    prefix: '4566201'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 75afb350-9be2-4922-879d-a0f0383a782a
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254362
-    prefix: '4566202'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d0fbd485-b912-4244-be2c-7098b2073ddb
-    country_id: *dk
-    network_id: *dk_mifon_mobile
-  - id: 254365
-    prefix: '4566220'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ee641a52-c1ce-4963-aadc-d5533509de21
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254366
-    prefix: '4566222'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dc52a6b5-afae-4e21-a2fc-d5b2fdaf3694
-    country_id: *dk
-    network_id: *dk_5tel_mobile
-  - id: 254385
-    prefix: '4566330'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ef4fdf33-f9f1-4599-8881-880af018bad8
-    country_id: *dk
-    network_id: *dk_bsg_mobile
-  - id: 254386
-    prefix: '4566332'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5c8ed0ce-d51f-4038-b92b-8c5576da7f62
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254387
-    prefix: '4566333'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f5bbc604-1c64-42d1-af2c-936f3ed97a0f
-    country_id: *dk
-    network_id: *dk_flexonet_mobile
-  - id: 254388
-    prefix: '4566334'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6f004cc1-8dc1-4a9d-b189-51c472022943
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 254389
-    prefix: '4566335'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5bfea2cb-22b2-49d3-81c5-7a1073889e5c
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 254390
-    prefix: '4566336'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6be74e17-1158-485c-9776-b1bd8d5c156a
-    country_id: *dk
-    network_id: *dk_telecom_x_mobile
-  - id: 254391
-    prefix: '4566337'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0f13e384-721e-4e6f-8c7a-f08b50e09f8b
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 254392
-    prefix: '4566338'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ec5f7d97-a2d2-4f16-ba55-45ef682be0ad
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254393
-    prefix: '4566339'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9a461609-dbdb-44a1-8341-3e912c3d96bf
-    country_id: *dk
-    network_id: *dk_bics_mobile
-  - id: 254412
-    prefix: '456640'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0b318185-b21a-4b69-b86f-e53d10ff0e38
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 254419
-    prefix: '456644'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 63a397b4-c5fa-47d4-8f75-7f4a44643d66
-    country_id: *dk
-    network_id: *dk_ipnordic_mobile
-  - id: 254436
-    prefix: '456650'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: baed9e57-6dc5-4286-bf30-0b0befb58575
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 254487
-    prefix: '456677'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 15bb7450-7ea6-4e15-bd78-34d8fc7fe9bb
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 255397
-    prefix: '4570170'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c2113b89-885e-4aec-9440-e68ddf12f265
-    country_id: *dk
-    network_id: *dk_telecom_x_mobile
-  - id: 255398
-    prefix: '4570180'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 72841237-7e6e-40ba-9f89-928a970f5544
-    country_id: *dk
-    network_id: *dk_telecom_x_mobile
-  - id: 255728
-    prefix: '4577100'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8db5522f-aee0-42f5-a0f2-412b08fab3c1
-    country_id: *dk
-    network_id: *dk_mifon_mobile
-  - id: 255729
-    prefix: '4577101'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 81fd9a2d-2fca-4e52-8b61-e3f22b7f2435
-    country_id: *dk
-    network_id: *dk_mifon_mobile
-  - id: 255730
-    prefix: '4577102'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a502510d-d617-496d-aa2d-e09c2deb5bf6
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 255734
-    prefix: '4577110'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0dae93ab-1d6f-470e-aed3-4654ccc6ed4d
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 255736
-    prefix: '4577111'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f96900ca-4e84-49e2-912b-6782bf62f7c5
-    country_id: *dk
-    network_id: *dk_5tel_mobile
-  - id: 255774
-    prefix: '457717'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6e926f3f-d592-44c2-b72e-542727b84a71
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 255818
-    prefix: '457722'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 40045c90-2b09-49b0-aad9-345d2374d8a4
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 256334
-    prefix: '457880'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0394a70e-5e89-4df2-9dce-56d8ab93b13e
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 256343
-    prefix: '457888'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 97bbb116-eb86-4320-87ff-c94206451621
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257358
-    prefix: '4591'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ac1a1276-0108-4738-b25e-8ab24ce2fbb0
-    country_id: *dk
-    network_id: *dk_mobile
-  - id: 257399
-    prefix: '459110'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 80dd47f1-4d32-423c-a9b0-a6786365a8e1
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257400
-    prefix: '459111'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6ff443ea-a83d-4a76-b97b-2c3912af3c0a
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257401
-    prefix: '459112'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6e01084f-f2e6-4dca-bce6-5e516439f616
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257402
-    prefix: '459113'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2e301df9-6e42-4af5-915b-73309866a690
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257403
-    prefix: '459114'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 61098784-312e-4e26-89ff-7463acaea199
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257404
-    prefix: '459115'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b1e7e9fc-c9bd-4b7f-99c4-e55d3fd71999
-    country_id: *dk
-    network_id: *dk_companymobile_mobile
-  - id: 257405
-    prefix: '459116'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cc2212b1-e00f-41e3-86f1-fc850382bac9
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257406
-    prefix: '459117'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aea3ff03-65a5-4292-ad2b-396ec010b30e
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257407
-    prefix: '459118'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 833e9a51-1ca0-4cef-a530-3f5f565b0844
-    country_id: *dk
-    network_id: *dk_companymobile_mobile
-  - id: 257408
-    prefix: '459119'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8bede7a3-28ed-411c-ac35-fb6f43d4bc21
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257413
-    prefix: '459120'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3acbcf37-f5b6-4c0c-80b7-5a8e492fb9cc
-    country_id: *dk
-    network_id: *dk_tismi_mobile
-  - id: 257415
-    prefix: '459121'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c00a6da3-f1d4-4fad-8fcd-dcfe7b6ed5d6
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257417
-    prefix: '459122'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a8ad9f65-403c-40ba-af2b-d7b8d68efc8c
-    country_id: *dk
-    network_id: *dk_companymobile_mobile
-  - id: 257419
-    prefix: '459123'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 16d0e367-bd40-4613-a705-2aaed53109ff
-    country_id: *dk
-    network_id: *dk_companymobile_mobile
-  - id: 257421
-    prefix: '459124'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1ae6779b-f8e4-4f14-9edd-0bfada27b3c6
-    country_id: *dk
-    network_id: *dk_companymobile_mobile
-  - id: 257423
-    prefix: '459125'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0a02cfb2-5c9b-4c23-95f7-8020555d0cbc
-    country_id: *dk
-    network_id: *dk_companymobile_mobile
-  - id: 257434
-    prefix: '4591301'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3fda0815-a5d0-4cc2-80f7-d06b1c4beae7
-    country_id: *dk
-    network_id: *dk_mobiweb_mobile
-  - id: 257435
-    prefix: '4591302'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aa41a5ce-7087-4be0-a783-223aee3771f5
-    country_id: *dk
-    network_id: *dk_ipnordic_mobile
-  - id: 257436
-    prefix: '4591303'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9f114f99-6390-4d8d-89dc-ef1c80577d2d
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 257437
-    prefix: '4591304'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 22446428-c94d-47b9-8f30-25e70aa11669
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 257438
-    prefix: '4591305'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 889b5fa5-dd7d-4f58-a90a-6ec10bbab118
-    country_id: *dk
-    network_id: *dk_ipnordic_mobile
-  - id: 257439
-    prefix: '4591307'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4d8edce9-5dac-4d62-8e8d-c34504a51139
-    country_id: *dk
-    network_id: *dk_xplora_mobile
-  - id: 257440
-    prefix: '4591308'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 40480206-a247-41e3-a34f-00fada5bcdba
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 257441
-    prefix: '4591309'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0f3054ad-8e1d-44bc-918d-6fdc6d62dbb6
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 257442
-    prefix: '459131'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dd237cd3-4696-4031-b8a9-ae261dc7da91
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257443
-    prefix: '459132'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 008b51eb-edb7-495f-8db8-2853afb523f5
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257444
-    prefix: '459133'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d9c78efb-3fde-4e2f-9496-4ec3f4bac817
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257445
-    prefix: '459134'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1210542a-f147-469c-b971-f3c726a5bdae
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257446
-    prefix: '459135'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 20c4ceb6-c100-4a04-aa0b-e49dc79a583f
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257447
-    prefix: '459136'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 52c1f889-2cca-4834-9b6d-6e56385c8cd1
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257448
-    prefix: '459137'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7c385553-dc7d-4048-85bd-1b1e172e1cf8
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257449
-    prefix: '459138'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f2c0a35f-855d-4018-9ee0-d0b90358873e
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257450
-    prefix: '459139'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3bc12829-5916-4d24-bf45-e2598a326576
-    country_id: *dk
-    network_id: *dk_telenor_mobile
-  - id: 257451
-    prefix: '45914'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fcb7e05a-5df2-4b3f-aad7-2c9b4a3b10bf
-    country_id: *dk
-    network_id: *dk_lycamobile_mobile
-  - id: 257461
-    prefix: '459150'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e4954c3b-a1e1-4b32-b304-9a9768e1cc04
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257463
-    prefix: '459151'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8caffc88-e3e5-4e4c-8164-21baff65d5a4
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257465
-    prefix: '459152'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 00bb41bd-7c9a-41d9-b708-eafd8e63ad93
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257467
-    prefix: '459153'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 21f221e5-a53e-4a80-b9ab-d1c3efb1f3aa
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257469
-    prefix: '459154'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b65ed16c-a563-4039-86b0-6bc3f7f94578
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257471
-    prefix: '459155'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 797b0577-707b-4d82-8d0a-489e10a8e59b
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257473
-    prefix: '459156'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8a78d759-b263-47c9-a82d-54b971bd0419
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257476
-    prefix: '459158'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 331f68f3-5658-456c-9a9c-20be03157bf2
-    country_id: *dk
-    network_id: *dk_ipify_mobile
-  - id: 257478
-    prefix: '459159'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8643bd71-f118-4d52-8afb-a5612cc26c19
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257480
-    prefix: '45916'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 37538267-aae2-40a8-8cdd-71bd5901bdf2
-    country_id: *dk
-    network_id: *dk_lycamobile_mobile
-  - id: 257486
-    prefix: '45917'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 441da7bf-ef9b-4622-b2f3-64c7188d82ed
-    country_id: *dk
-    network_id: *dk_lycamobile_mobile
-  - id: 257497
-    prefix: '459180'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b0d21aa1-5590-40e3-b6c8-3973f8e9edf1
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257498
-    prefix: '459181'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2e4cb709-ee94-4b73-a3fe-a10dd683a600
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257499
-    prefix: '459182'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6e7b12cc-daec-4742-aa0e-41226373c50f
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257500
-    prefix: '459183'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9ee9af43-69fd-4287-9960-c0c143892bef
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257501
-    prefix: '459184'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bea52afd-dfff-4e43-884e-84b67c4b43a1
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257502
-    prefix: '459185'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 86d3e159-bc0b-435f-8f9e-b09f2645bb45
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257503
-    prefix: '459186'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 993cc17f-ab5b-4e7e-90e7-2dfd4e89c892
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257504
-    prefix: '459187'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2ab17693-2544-4286-b76c-45f3b8a4217b
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257505
-    prefix: '459188'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 46e5cb8b-04b8-497e-b446-01adbe373e4f
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257506
-    prefix: '459189'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 98484d54-84d0-4362-a776-ff40055c599e
-    country_id: *dk
-    network_id: *dk_uni_tel_mobile
-  - id: 257510
-    prefix: '459190'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7f5bc9f0-5677-4b12-9cfb-c252fb143aed
-    country_id: *dk
-    network_id: *dk_experience_cloud_mobile
-  - id: 257522
-    prefix: '459191'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8bc7ed6b-00cb-4fe7-abe1-b44b86f4f8c7
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 257534
-    prefix: '459192'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a27f7768-3ed8-423c-a9c0-62680e7ff1c1
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257546
-    prefix: '459193'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7ea60714-066e-4303-a005-b954604cb7fa
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257549
-    prefix: '459194'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4e4010c2-fd60-4389-9074-2dd5e41556c9
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257552
-    prefix: '459195'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4392ebf3-159d-47c0-a13e-f7d43535c9cc
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257555
-    prefix: '459196'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 35f9d968-8c93-4257-bc53-45ec90e96e6b
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257558
-    prefix: '459197'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 02f293cf-9da1-4cd3-97e1-d161c0821360
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257567
-    prefix: '459198'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 05a82ef0-d0da-43e0-b46f-017c72abec0c
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257570
-    prefix: '459199'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4854bcde-3b29-4761-97cb-519c0aa5d5b1
-    country_id: *dk
-    network_id: *dk_lebara_mobile_mobile
-  - id: 257584
-    prefix: '4592'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0260b55f-ee26-4ef4-ae67-603b51b7fb33
-    country_id: *dk
-    network_id: *dk_mobile
-  - id: 257627
-    prefix: '459210'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6f41f7e8-91b2-4d6f-8198-356bd9dc7ab0
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257630
-    prefix: '459211'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 492d858c-73ed-461b-ad38-579170a9fe7b
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257633
-    prefix: '459212'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9b64a207-d51a-46c0-b18e-65e22a9d9be9
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257635
-    prefix: '459213'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 853268e8-ee00-4e6e-aa65-8524a00c47de
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257637
-    prefix: '459214'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3a09b263-972d-44b1-9b83-c80a5f204079
-    country_id: *dk
-    network_id: *dk_companymobile_mobile
-  - id: 257639
-    prefix: '459215'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4a0f6baf-d09f-4c75-aaba-84f935a5cd95
-    country_id: *dk
-    network_id: *dk_companymobile_mobile
-  - id: 257641
-    prefix: '459216'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2dcb757a-1cbc-4c62-bbe7-d5ce72f36f94
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257643
-    prefix: '459217'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1cc53a4c-e127-47a2-8a1c-ccaa199b141c
-    country_id: *dk
-    network_id: *dk_experience_cloud_mobile
-  - id: 257645
-    prefix: '459218'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bc210420-57d9-463f-994e-8aa0753c329f
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257647
-    prefix: '459219'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 36b14f1b-60c6-4ca6-aa50-4ca65c6be25b
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257654
-    prefix: '459220'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 86816715-8d51-468c-b1a0-e5898c00d749
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257656
-    prefix: '459221'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b4501f82-d8c3-4745-9353-77eab51a0e45
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257658
-    prefix: '459222'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 136f8390-2d0d-4c4d-b557-c0385cf7273d
-    country_id: *dk
-    network_id: *dk_bolignet_aarhus_mobile_mobile
-  - id: 257660
-    prefix: '459223'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fcf5a41a-b0c2-4c2b-9be3-145dee4179a7
-    country_id: *dk
-    network_id: *dk_42_telecom_mobile
-  - id: 257661
-    prefix: '459224'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5eb0bc0f-d5fd-451a-9164-204693da4aad
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257662
-    prefix: '4592290'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fdf0b33d-561b-4963-b44e-dcf5a62fa786
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 257663
-    prefix: '4592291'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 44207dec-72d1-4399-9a42-e46984524532
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 257664
-    prefix: '4592292'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6cecd7f5-229f-4661-8756-7c5383488387
-    country_id: *dk
-    network_id: *dk_mobile_one_mobile
-  - id: 257665
-    prefix: '4592293'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4337ee35-570c-42b3-999c-abc47284f554
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 257666
-    prefix: '4592294'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9e2e19d6-6740-44d4-b12e-23ac034258da
-    country_id: *dk
-    network_id: *dk_bsg_mobile
-  - id: 257667
-    prefix: '4592295'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6856eea2-7f80-41de-9a96-e300190b34f4
-    country_id: *dk
-    network_id: *dk_twilio_mobile
-  - id: 257668
-    prefix: '4592296'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7964ef18-e872-445b-bdde-a5056a3debe5
-    country_id: *dk
-    network_id: *dk_maxteldk_mobile
-  - id: 257669
-    prefix: '4592298'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7b6e2f77-e738-4b5f-b5d2-182a3457fb11
-    country_id: *dk
-    network_id: *dk_yateco_mobile
-  - id: 257670
-    prefix: '4592299'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4412c5c3-8283-4dc3-8f0d-613d21db13b0
-    country_id: *dk
-    network_id: *dk_odder_mobile
-  - id: 257671
-    prefix: '45923'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 53f06345-b23d-4d4c-8d65-da4f21219883
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257714
-    prefix: '459240'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1c8906bb-ed2c-47cc-9817-7418e8428f4d
-    country_id: *dk
-    network_id: *dk_greenwave_mobile
-  - id: 257715
-    prefix: '459243'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: da37e7ea-7973-43d7-a0d8-5509758908bd
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257716
-    prefix: '459244'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 737aecfb-b125-4535-8b6c-9878969db3a6
-    country_id: *dk
-    network_id: *dk_ipnordic_mobile
-  - id: 257717
-    prefix: '459245'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b7d87d6f-e5a8-4a07-8c32-b505cf779ab9
-    country_id: *dk
-    network_id: *dk_compatel_mobile
-  - id: 257718
-    prefix: '459246'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2d7901f7-767a-4971-b906-639983051b52
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257719
-    prefix: '459247'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fa721664-842a-4479-ba39-ddcf0ebd6aa6
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257720
-    prefix: '459248'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2a632839-8f4d-4633-9783-1bdd5dc0621f
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257721
-    prefix: '459249'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7c76819b-fe77-45b3-baff-dbb9a19268bf
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257722
-    prefix: '45925'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6c26712d-266b-4383-8022-78d7c9fefd59
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257739
-    prefix: '45926'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6a806cc7-ff38-4aa1-93b6-7048481bdc17
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257770
-    prefix: '459270'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d5362616-e5ea-416b-ac8a-8580327bb19a
-    country_id: *dk
-    network_id: *dk_net_1_mobile
-  - id: 257773
-    prefix: '459271'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 01c5df63-fb23-4aab-871b-79e464ee8cfc
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257776
-    prefix: '459272'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 40d11c5f-8bf9-45f0-9d4d-50a5fe3d4459
-    country_id: *dk
-    network_id: *dk_thyfon_mobile
-  - id: 257779
-    prefix: '459273'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e5bee0d9-733a-4cb6-a538-842d1b94f0e0
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257782
-    prefix: '459274'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9e7acdd0-ec08-4fb7-9679-2c87c481cd0b
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257785
-    prefix: '459275'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3c442dce-3617-4960-80d1-ff169657658f
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257788
-    prefix: '459276'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5894665a-45df-4b81-97e2-9a06c49764ab
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257791
-    prefix: '459277'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 289bb99e-7793-4067-8980-a3192ffb5a33
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257794
-    prefix: '459278'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f6eb318f-bfc1-4c0b-b86f-0efe1dd28af5
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257797
-    prefix: '459279'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c81b6be1-ebdf-4197-911c-5683d053cf28
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257806
-    prefix: '459280'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d8c06620-aa15-4b8d-9684-bae2cecfc79b
-    country_id: *dk
-    network_id: *dk_bandwidth_mobile
-  - id: 257809
-    prefix: '459282'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c5735225-5fb5-4528-96ca-c77a1a795a2b
-    country_id: *dk
-    network_id: *dk_flexfone_mobile
-  - id: 257810
-    prefix: '459284'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1da71422-c7b5-4e08-8a78-d3b05e30f7c3
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257811
-    prefix: '459285'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2a01a19d-f534-4e18-9abf-3e73d2d14be8
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257813
-    prefix: '459286'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 66eaf024-2484-4820-8b41-f1a4c10b943a
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257814
-    prefix: '459287'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5b29b9f9-e610-4ddd-aecb-4e53d9f77e5c
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257815
-    prefix: '459288'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7e7f8a7e-6605-47a4-ac02-6e77e1f0469f
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257816
-    prefix: '459289'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 72120e59-a7fe-430f-8957-01b0c61c20bc
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257819
-    prefix: '459290'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3160db3d-1b3d-46b9-b22b-2750675fd7d7
-    country_id: *dk
-    network_id: *dk_tdc_mobile
-  - id: 257823
-    prefix: '459291'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b82cb6d7-5758-486a-a404-d0a76718cd39
-    country_id: *dk
-    network_id: *dk_telenor_connexion_mobile
-  - id: 257827
-    prefix: '459292'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2ea7e377-03ff-48e4-a1a2-0ae50698bef2
-    country_id: *dk
-    network_id: *dk_ipnordic_mobile
-  - id: 257830
-    prefix: '459293'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d2f92afb-bce8-48a0-bf44-f3dd5f82e233
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257834
-    prefix: '459294'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 93294b3f-984b-4ec8-9098-9bd610e3680e
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257838
-    prefix: '459295'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: de180e98-35fe-4d50-94bd-93e3eacdefac
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257843
-    prefix: '459296'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 509d41ad-5725-470f-b5d5-72f89f02f586
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257847
-    prefix: '459297'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 682dda9a-b51d-4937-a51c-6e069ca772ce
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257851
-    prefix: '459298'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 52f5f781-5378-4513-b20c-3956b727c785
-    country_id: *dk
-    network_id: *dk_simservice_mobile
-  - id: 257855
-    prefix: '459299'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0df2421a-08d5-4c53-b3a0-327e6faa1fa5
-    country_id: *dk
-    network_id: *dk_ipvision_mobile
-  - id: 257861
-    prefix: '4593'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 77a89038-db8f-42c9-aee4-73d3ad26d085
-    country_id: *dk
-    network_id: *dk_mobile
   - id: 257885
     prefix: '459310'
     number_min_length: 10
@@ -7856,6 +7791,13 @@ network_prefixes:
     country_id: *dk
     network_id: *dk_3_mobile
 # Fixed Prefixes
+  - id: 241983
+    prefix: '45'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: f3d401ca-b38f-4073-a7be-0e9c95c2b9bb
+    country_id: *dk
+    network_id: *dk_fixed
   - id: 243362
     prefix: '4532'
     number_min_length: 10
@@ -7940,6 +7882,76 @@ network_prefixes:
     uuid: faff523a-be5e-46b1-a683-7d5a1b0ccfb5
     country_id: *dk
     network_id: *dk_fixed
+  - id: 254114
+    prefix: '4562'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: abc7dac4-9102-45b0-bd32-98cec1f96384
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 251820
+    prefix: '4572'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4a9f97ff-1f1f-4fd8-9671-6477aab10faf
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 251871
+    prefix: '4573'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 34465e76-63b3-459e-8756-3dcb0bfb2c12
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 252054
+    prefix: '4574'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ef864825-f87a-4f1a-854b-83a43786003e
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 252546
+    prefix: '4575'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b963208e-b0aa-46bd-a1e4-ebc18c3e92d9
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 264001
+    prefix: '4587'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f5ff0489-a980-475b-b734-93e192780f70
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 256835
+    prefix: '4588'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc6b8f88-5582-471f-9041-03330eaee615
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 256990
+    prefix: '4589'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4f9feb51-917c-436a-adb0-bad8ee9006b6
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 265264
+    prefix: '4598'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 277d4ba2-a0df-4b0e-a883-5764c2f6b45c
+    country_id: *dk
+    network_id: *dk_fixed
+  - id: 258179
+    prefix: '4599'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7489b69f-8ae4-4a7f-9bdd-b36b4f836e16
+    country_id: *dk
+    network_id: *dk_fixed
   - id: 249083
     prefix: '4546'
     number_min_length: 10
@@ -8017,55 +8029,6 @@ network_prefixes:
     uuid: cae54949-df48-409f-838f-1d00b425fcd7
     country_id: *dk
     network_id: *dk_fixed
-  - id: 251820
-    prefix: '4572'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4a9f97ff-1f1f-4fd8-9671-6477aab10faf
-    country_id: *dk
-    network_id: *dk_fixed
-  - id: 251871
-    prefix: '4573'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 34465e76-63b3-459e-8756-3dcb0bfb2c12
-    country_id: *dk
-    network_id: *dk_fixed
-  - id: 252054
-    prefix: '4574'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ef864825-f87a-4f1a-854b-83a43786003e
-    country_id: *dk
-    network_id: *dk_fixed
-  - id: 252546
-    prefix: '4575'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b963208e-b0aa-46bd-a1e4-ebc18c3e92d9
-    country_id: *dk
-    network_id: *dk_fixed
-  - id: 253186
-    prefix: '458001'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 90ea0572-44bd-4a1a-80c5-aa5663da5910
-    country_id: *dk
-    network_id: *dk_fixed
-  - id: 253471
-    prefix: '4582'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9b5807ad-1421-485a-bcdd-9117ae4f8d0b
-    country_id: *dk
-    network_id: *dk_fixed
-  - id: 254114
-    prefix: '4562'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: abc7dac4-9102-45b0-bd32-98cec1f96384
-    country_id: *dk
-    network_id: *dk_fixed
   - id: 254288
     prefix: '4566'
     number_min_length: 10
@@ -8115,25 +8078,18 @@ network_prefixes:
     uuid: 901b76f8-6fae-4507-ad9a-8d9112da368a
     country_id: *dk
     network_id: *dk_fixed
-  - id: 256835
-    prefix: '4588'
+  - id: 253186
+    prefix: '458001'
     number_min_length: 10
     number_max_length: 10
-    uuid: cc6b8f88-5582-471f-9041-03330eaee615
+    uuid: 90ea0572-44bd-4a1a-80c5-aa5663da5910
     country_id: *dk
     network_id: *dk_fixed
-  - id: 256990
-    prefix: '4589'
+  - id: 253471
+    prefix: '4582'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4f9feb51-917c-436a-adb0-bad8ee9006b6
-    country_id: *dk
-    network_id: *dk_fixed
-  - id: 258179
-    prefix: '4599'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7489b69f-8ae4-4a7f-9bdd-b36b4f836e16
+    uuid: 9b5807ad-1421-485a-bcdd-9117ae4f8d0b
     country_id: *dk
     network_id: *dk_fixed
   - id: 263847
@@ -8141,13 +8097,6 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: f8f3406e-26b6-425c-9704-7db4c88fefa1
-    country_id: *dk
-    network_id: *dk_fixed
-  - id: 264001
-    prefix: '4587'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f5ff0489-a980-475b-b734-93e192780f70
     country_id: *dk
     network_id: *dk_fixed
   - id: 264714
@@ -8164,10 +8113,60 @@ network_prefixes:
     uuid: 267eca3f-c490-4022-85fd-c9644fa2e44d
     country_id: *dk
     network_id: *dk_fixed
-  - id: 265264
-    prefix: '4598'
+# Supplementary services Prefixes
+  - id: 242387
+    prefix: '451'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: 3973d069-83dc-4bdd-a10b-db20d93de470
+    country_id: *dk
+    network_id: *dk_special_services
+  - id: 242633
+    prefix: '45113'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 15f3d291-50a9-434f-8117-5f23b7f7a4e8
+    country_id: *dk
+    network_id: *dk_directory_enquiry_services_international_calls
+  - id: 242664
+    prefix: '45116'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ca35b689-558c-4820-a57f-7c0df993dfcc
+    country_id: *dk
+    network_id: *dk_social_value_services
+  - id: 242716
+    prefix: '45118'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 32393d58-b2e9-46c7-b10a-f002ce1659bf
+    country_id: *dk
+    network_id: *dk_directory_enquiry_services_national_calls
+  - id: 243012
+    prefix: '4516'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 4dc3c3a8-80f2-47c0-8395-6e63413cda42
+    country_id: *dk
+    network_id: *dk_data_access_services
+  - id: 243709
+    prefix: '4537'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 8ce4f0d1-a14a-4af6-bf1d-a8de6492bf52
+    country_id: *dk
+    network_id: *dk_machine_to_machine_m2m_services
+  - id: 257155
+    prefix: '4590'
     number_min_length: 10
     number_max_length: 10
-    uuid: 277d4ba2-a0df-4b0e-a883-5764c2f6b45c
+    uuid: 3b0e4b1b-6f46-4a29-a41a-3a9c730ad9c0
     country_id: *dk
-    network_id: *dk_fixed
+    network_id: *dk_premium_rate_services
+  - id: 253120
+    prefix: '4580'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee1a182c-b334-40e6-81be-85ef4cd0b9aa
+    country_id: *dk
+    network_id: *dk_freephone_services

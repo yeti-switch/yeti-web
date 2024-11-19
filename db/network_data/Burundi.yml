@@ -108,15 +108,14 @@ networks:
     uuid: e3ed0f33-3890-46d1-b5c3-c1e589483dfb
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 241948
-    prefix: '257'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 6d0a73b3-c928-4615-97fa-4ea801031a13
-    country_id: *bi
-    network_id: null
 # Supplementary services Prefixes
+  - id: 247387
+    prefix: '2572'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 9ff4aecb-62bc-414f-9edb-23da1f1a4d7e
+    country_id: *bi
+    network_id: *bi_special_services
   - id: 242353
     prefix: '2571'
     number_min_length: 6
@@ -152,13 +151,6 @@ network_prefixes:
     uuid: 8c18fb9f-71f8-49df-8e52-3e19ecbc7094
     country_id: *bi
     network_id: *bi_special_services
-  - id: 247387
-    prefix: '2572'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 9ff4aecb-62bc-414f-9edb-23da1f1a4d7e
-    country_id: *bi
-    network_id: *bi_special_services
   - id: 249561
     prefix: '2575'
     number_min_length: 6
@@ -174,6 +166,13 @@ network_prefixes:
     country_id: *bi
     network_id: *bi_special_services
 # Fixed Prefixes
+  - id: 241948
+    prefix: '257'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 6d0a73b3-c928-4615-97fa-4ea801031a13
+    country_id: *bi
+    network_id: *bi_fixed
   - id: 243223
     prefix: '25731'
     number_min_length: 11
@@ -357,11 +356,18 @@ network_prefixes:
     country_id: *bi
     network_id: *bi_southern_region_region
 # Mobile Prefixes
-  - id: 251232
-    prefix: '25765'
+  - id: 253978
+    prefix: '25761'
     number_min_length: 11
     number_max_length: 11
-    uuid: 32e7404a-dc91-44e6-a7bf-7e918405f0de
+    uuid: de8d3e73-8234-4f95-b88c-06de1eb9c5c4
+    country_id: *bi
+    network_id: *bi_lumitel_mobile
+  - id: 254108
+    prefix: '25762'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c18e5331-3e6b-45d5-bbba-09c707d9661f
     country_id: *bi
     network_id: *bi_lumitel_mobile
   - id: 251724
@@ -378,18 +384,11 @@ network_prefixes:
     uuid: f543872f-82b0-4094-8e53-3cd92a9be9ea
     country_id: *bi
     network_id: *bi_econet_leo_mobile
-  - id: 253978
-    prefix: '25761'
+  - id: 251232
+    prefix: '25765'
     number_min_length: 11
     number_max_length: 11
-    uuid: de8d3e73-8234-4f95-b88c-06de1eb9c5c4
-    country_id: *bi
-    network_id: *bi_lumitel_mobile
-  - id: 254108
-    prefix: '25762'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c18e5331-3e6b-45d5-bbba-09c707d9661f
+    uuid: 32e7404a-dc91-44e6-a7bf-7e918405f0de
     country_id: *bi
     network_id: *bi_lumitel_mobile
   - id: 254302

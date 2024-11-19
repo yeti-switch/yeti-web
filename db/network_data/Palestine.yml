@@ -1,14 +1,5 @@
 country_id: &ps 164
 networks:
-# Mobile Networks
-  - id: &ps_jawwal_mobile 8817
-    name: PS Jawwal Mobile
-    uuid: 832cde1f-04ef-49ec-8bac-bb3410c3f4a2
-    type_id: 3
-  - id: &ps_ooredoo_mobile 9281
-    name: PS Ooredoo Mobile
-    uuid: 6d3b2259-6921-41d7-bfd1-0b7b627a2798
-    type_id: 3
 # Fixed Networks
   - id: &ps_khan_yunis_region 19791
     name: PS Khan Yunis Region
@@ -33,6 +24,26 @@ networks:
   - id: &ps_gaza_region 19800
     name: PS Gaza Region
     uuid: 0f55fcea-be07-47b3-8f50-afc838894cc0
+    type_id: 2
+  - id: &ps_nablus_region 41601
+    name: PS Nablus Region
+    uuid: c0e299d6-1641-40e3-a072-c95cb31c8f6b
+    type_id: 2
+  - id: &ps_salfit_tubas_region 41605
+    name: PS Salfit Tubas Region
+    uuid: dcabbdc5-c2db-4ea2-ab82-88ff7910c944
+    type_id: 2
+  - id: &ps_tulkarm_region 41606
+    name: PS Tulkarm Region
+    uuid: 17b7d704-e12d-4018-b65c-4b37e9824ad8
+    type_id: 2
+  - id: &ps_qalqilya_salfit_region 41611
+    name: PS Qalqilya Salfit Region
+    uuid: 46f4729e-d012-4147-ade6-0b4f6a207819
+    type_id: 2
+  - id: &ps_fixed 43456
+    name: PS Fixed
+    uuid: 7ff38cbf-9ae6-4152-865b-bee1b06cc980
     type_id: 2
   - id: &ps_hebron_region 25864
     name: PS Hebron Region
@@ -62,30 +73,14 @@ networks:
     name: PS Jenin Region
     uuid: 371e690f-76cb-4ce2-aaf6-aab29b5559be
     type_id: 2
-  - id: &ps_nablus_region 41601
-    name: PS Nablus Region
-    uuid: c0e299d6-1641-40e3-a072-c95cb31c8f6b
-    type_id: 2
-  - id: &ps_salfit_tubas_region 41605
-    name: PS Salfit Tubas Region
-    uuid: dcabbdc5-c2db-4ea2-ab82-88ff7910c944
-    type_id: 2
-  - id: &ps_tulkarm_region 41606
-    name: PS Tulkarm Region
-    uuid: 17b7d704-e12d-4018-b65c-4b37e9824ad8
-    type_id: 2
-  - id: &ps_qalqilya_salfit_region 41611
-    name: PS Qalqilya Salfit Region
-    uuid: 46f4729e-d012-4147-ade6-0b4f6a207819
-    type_id: 2
 # Supplementary services Networks
-  - id: &ps_special_services 21475
-    name: PS Special Services
-    uuid: 969134c1-01af-42f8-8b96-c75a73f72b55
-    type_id: 13
   - id: &ps_audiotext 22673
     name: PS Audiotext
     uuid: 9b585bae-1c8c-41e3-b7bb-f0746c0fa2d6
+    type_id: 13
+  - id: &ps_special_services 21475
+    name: PS Special Services
+    uuid: 969134c1-01af-42f8-8b96-c75a73f72b55
     type_id: 13
   - id: &ps_business_value_added_services 25394
     name: PS Business Value Added Services
@@ -95,22 +90,16 @@ networks:
     name: PS Freephone Services
     uuid: b81a445b-f3ee-494f-984b-30330738ba38
     type_id: 13
+# Mobile Networks
+  - id: &ps_ooredoo_mobile 9281
+    name: PS Ooredoo Mobile
+    uuid: 6d3b2259-6921-41d7-bfd1-0b7b627a2798
+    type_id: 3
+  - id: &ps_jawwal_mobile 8817
+    name: PS Jawwal Mobile
+    uuid: 832cde1f-04ef-49ec-8bac-bb3410c3f4a2
+    type_id: 3
 network_prefixes:
-# Mobile Prefixes
-  - id: 84417
-    prefix: '97059'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 48e1505a-5c07-4234-b79a-b0be626c0c6e
-    country_id: *ps
-    network_id: *ps_jawwal_mobile
-  - id: 87925
-    prefix: '97056'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ecb84781-f630-432c-9fbf-9a520bb8a4c5
-    country_id: *ps
-    network_id: *ps_ooredoo_mobile
 # Fixed Prefixes
   - id: 207521
     prefix: '970820'
@@ -154,6 +143,41 @@ network_prefixes:
     uuid: 1e607085-9b0e-4681-91b2-5642e7dea8d5
     country_id: *ps
     network_id: *ps_gaza_region
+  - id: 444821
+    prefix: '970923'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8a7a33ae-63a9-4e81-b166-0b68f86c752f
+    country_id: *ps
+    network_id: *ps_nablus_region
+  - id: 444864
+    prefix: '970925'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d9a9771e-f9f3-4df9-aa2b-e89ced29a091
+    country_id: *ps
+    network_id: *ps_salfit_tubas_region
+  - id: 444868
+    prefix: '970926'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec5331f6-f487-4fd6-be91-6ec0ceb3252b
+    country_id: *ps
+    network_id: *ps_tulkarm_region
+  - id: 444916
+    prefix: '970929'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff93e8db-9035-421f-912d-ddeb60389101
+    country_id: *ps
+    network_id: *ps_qalqilya_salfit_region
+  - id: 242086
+    prefix: '970'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 3a2b1b0c-9555-46cd-9d83-267bae913142
+    country_id: *ps
+    network_id: *ps_fixed
   - id: 261223
     prefix: '970222'
     number_min_length: 11
@@ -217,50 +241,7 @@ network_prefixes:
     uuid: 2814414f-19b6-4e29-a9ef-ccada3740399
     country_id: *ps
     network_id: *ps_jenin_region
-  - id: 444821
-    prefix: '970923'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8a7a33ae-63a9-4e81-b166-0b68f86c752f
-    country_id: *ps
-    network_id: *ps_nablus_region
-  - id: 444864
-    prefix: '970925'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d9a9771e-f9f3-4df9-aa2b-e89ced29a091
-    country_id: *ps
-    network_id: *ps_salfit_tubas_region
-  - id: 444868
-    prefix: '970926'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ec5331f6-f487-4fd6-be91-6ec0ceb3252b
-    country_id: *ps
-    network_id: *ps_tulkarm_region
-  - id: 444916
-    prefix: '970929'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ff93e8db-9035-421f-912d-ddeb60389101
-    country_id: *ps
-    network_id: *ps_qalqilya_salfit_region
-# Country code Prefixes
-  - id: 242086
-    prefix: '970'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 3a2b1b0c-9555-46cd-9d83-267bae913142
-    country_id: *ps
-    network_id: null
 # Supplementary services Prefixes
-  - id: 242477
-    prefix: '9701'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: df885cc0-976f-4f17-aad0-bbf2fa4ffb3d
-    country_id: *ps
-    network_id: *ps_special_services
   - id: 247341
     prefix: '97019'
     number_min_length: 8
@@ -268,6 +249,13 @@ network_prefixes:
     uuid: ae47b1cc-703e-454d-bd9f-6e4b6a02d12f
     country_id: *ps
     network_id: *ps_audiotext
+  - id: 242477
+    prefix: '9701'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: df885cc0-976f-4f17-aad0-bbf2fa4ffb3d
+    country_id: *ps
+    network_id: *ps_special_services
   - id: 260320
     prefix: '9701700'
     number_min_length: 13
@@ -282,3 +270,18 @@ network_prefixes:
     uuid: fb0c6742-cc17-428b-9c5c-f0dd1bd239ed
     country_id: *ps
     network_id: *ps_freephone_services
+# Mobile Prefixes
+  - id: 87925
+    prefix: '97056'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ecb84781-f630-432c-9fbf-9a520bb8a4c5
+    country_id: *ps
+    network_id: *ps_ooredoo_mobile
+  - id: 84417
+    prefix: '97059'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 48e1505a-5c07-4234-b79a-b0be626c0c6e
+    country_id: *ps
+    network_id: *ps_jawwal_mobile

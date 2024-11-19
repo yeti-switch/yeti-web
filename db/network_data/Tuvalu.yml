@@ -1,14 +1,13 @@
 country_id: &tv 220
 networks:
-# Supplementary services Networks
-  - id: &tv_special_services 21505
-    name: TV Special Services
-    uuid: 81afd296-6ff6-4dfc-b80f-fed5d9781246
-    type_id: 13
 # Fixed Networks
   - id: &tv_funafuti_region 22749
     name: TV Funafuti Region
     uuid: 7d9b77d0-d8b0-4152-b00b-606641fe5503
+    type_id: 2
+  - id: &tv_fixed 43476
+    name: TV Fixed
+    uuid: dde36c78-fdde-4974-a68a-d986ff6862cf
     type_id: 2
   - id: &tv_niulakita_region 22844
     name: TV Niulakita Region
@@ -42,28 +41,17 @@ networks:
     name: TV Vaitupu Region
     uuid: 7bde03d2-49a0-4834-aeb2-6243770657ec
     type_id: 2
+# Supplementary services Networks
+  - id: &tv_special_services 21505
+    name: TV Special Services
+    uuid: 81afd296-6ff6-4dfc-b80f-fed5d9781246
+    type_id: 13
 # Mobile Networks
   - id: &tv_tuvalu_telecom_mobile 23576
     name: TV Tuvalu Telecom Mobile
     uuid: e0e66155-900a-437e-875a-ec68ba09cc49
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242123
-    prefix: '688'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 667dc255-f1c8-4102-826b-ac7a71c5a9f9
-    country_id: *tv
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242511
-    prefix: '6881'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 4e31a6fb-fc6e-4b68-b675-5f287885429f
-    country_id: *tv
-    network_id: *tv_special_services
 # Fixed Prefixes
   - id: 247461
     prefix: '68820'
@@ -72,6 +60,13 @@ network_prefixes:
     uuid: ab0d01ab-84cf-4c91-8f42-c71ef9ed4aa8
     country_id: *tv
     network_id: *tv_funafuti_region
+  - id: 242123
+    prefix: '688'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 667dc255-f1c8-4102-826b-ac7a71c5a9f9
+    country_id: *tv
+    network_id: *tv_fixed
   - id: 247740
     prefix: '68822'
     number_min_length: 8
@@ -128,6 +123,14 @@ network_prefixes:
     uuid: a4a91c5e-6f3e-49bc-ab13-c6460a03af99
     country_id: *tv
     network_id: *tv_vaitupu_region
+# Supplementary services Prefixes
+  - id: 242511
+    prefix: '6881'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 4e31a6fb-fc6e-4b68-b675-5f287885429f
+    country_id: *tv
+    network_id: *tv_special_services
 # Mobile Prefixes
   - id: 251747
     prefix: '68871'
@@ -136,17 +139,17 @@ network_prefixes:
     uuid: 413048aa-50d9-48da-b124-3cd70c4583ee
     country_id: *tv
     network_id: *tv_tuvalu_telecom_mobile
-  - id: 255307
-    prefix: '68870'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5bddfda3-03a6-4c8d-9cce-2470988d8cff
-    country_id: *tv
-    network_id: *tv_tuvalu_telecom_mobile
   - id: 257170
     prefix: '68890'
     number_min_length: 9
     number_max_length: 9
     uuid: 376b3e30-7b1f-47b6-a952-7054e7acb8b4
+    country_id: *tv
+    network_id: *tv_tuvalu_telecom_mobile
+  - id: 255307
+    prefix: '68870'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5bddfda3-03a6-4c8d-9cce-2470988d8cff
     country_id: *tv
     network_id: *tv_tuvalu_telecom_mobile

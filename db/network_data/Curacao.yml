@@ -1,10 +1,5 @@
 country_id: &cw 276
 networks:
-# Supplementary services Networks
-  - id: &cw_value_added_services 24019
-    name: CW Value Added Services
-    uuid: a9faa162-6ee3-4718-839a-df0353fba8d4
-    type_id: 13
 # Fixed Networks
   - id: &cw_fixed 41617
     name: CW Fixed
@@ -23,29 +18,12 @@ networks:
     name: CW Digicel Mobile
     uuid: 4b8cb9c0-9e6d-410f-9473-6016a1a4712a
     type_id: 3
+# Supplementary services Networks
+  - id: &cw_value_added_services 24019
+    name: CW Value Added Services
+    uuid: a9faa162-6ee3-4718-839a-df0353fba8d4
+    type_id: 13
 network_prefixes:
-# Supplementary services Prefixes
-  - id: 253809
-    prefix: '599603'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bcd78eeb-0ccb-43dd-875e-4e7db6df2f74
-    country_id: *cw
-    network_id: *cw_value_added_services
-  - id: 253829
-    prefix: '599604'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3433e8fe-f6e2-4069-9a4f-15a431182c0f
-    country_id: *cw
-    network_id: *cw_value_added_services
-  - id: 253860
-    prefix: '599605'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 49557d7d-edca-4083-b628-47b23d71f06b
-    country_id: *cw
-    network_id: *cw_value_added_services
 # Fixed Prefixes
   - id: 445081
     prefix: '59994'
@@ -181,3 +159,25 @@ network_prefixes:
     uuid: b7e7d0d1-2942-4f50-8603-3f9800aeb750
     country_id: *cw
     network_id: *cw_digicel_mobile
+# Supplementary services Prefixes
+  - id: 253809
+    prefix: '599603'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bcd78eeb-0ccb-43dd-875e-4e7db6df2f74
+    country_id: *cw
+    network_id: *cw_value_added_services
+  - id: 253829
+    prefix: '599604'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3433e8fe-f6e2-4069-9a4f-15a431182c0f
+    country_id: *cw
+    network_id: *cw_value_added_services
+  - id: 253860
+    prefix: '599605'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 49557d7d-edca-4083-b628-47b23d71f06b
+    country_id: *cw
+    network_id: *cw_value_added_services

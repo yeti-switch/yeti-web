@@ -1,13 +1,13 @@
 country_id: &ky 40
 networks:
 # Fixed Networks
-  - id: &ky_george_town_grand_cayman_island_region 33159
-    name: KY George Town Grand Cayman Island Region
-    uuid: 9cace56c-ec05-4d5f-81e7-72683645801e
-    type_id: 2
   - id: &ky_fixed 33160
     name: KY Fixed
     uuid: 49cad974-2876-4850-89d6-da8fbe77a8a7
+    type_id: 2
+  - id: &ky_george_town_grand_cayman_island_region 33159
+    name: KY George Town Grand Cayman Island Region
+    uuid: 9cace56c-ec05-4d5f-81e7-72683645801e
     type_id: 2
   - id: &ky_government_region 33161
     name: KY Government Region
@@ -45,15 +45,14 @@ networks:
     uuid: 69f62d0e-08b2-49e6-9d19-877d5f874441
     type_id: 12
 network_prefixes:
-# Country code Prefixes
-  - id: 342375
-    prefix: '1345'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: f2aaeb30-3b21-4da2-a511-e545fbacafb6
-    country_id: *ky
-    network_id: null
 # Fixed Prefixes
+  - id: 514272
+    prefix: '1345'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: cb7c4b52-48fc-4536-98a6-1b6182f15142
+    country_id: *ky
+    network_id: *ky_fixed
   - id: 342418
     prefix: '1345222'
     number_min_length: 11

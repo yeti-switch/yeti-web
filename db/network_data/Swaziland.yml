@@ -1,43 +1,10 @@
 country_id: &sz 203
 networks:
-# Supplementary services Networks
-  - id: &sz_special_services 21497
-    name: SZ Special Services
-    uuid: 7a54408b-65c7-4218-8c90-19de25465219
-    type_id: 13
-  - id: &sz_freephone_services 23861
-    name: SZ Freephone Services
-    uuid: 45712447-c2b2-4c83-ad8f-5c9462a5dea0
-    type_id: 13
-  - id: &sz_internal_network_services 24428
-    name: SZ Internal Network Services
-    uuid: 4a74dbf0-7eb9-453d-8aeb-8a10e0940c15
-    type_id: 13
-  - id: &sz_premium_rate_services 24449
-    name: SZ Premium Rate Services
-    uuid: 812b9010-7b07-49dd-8621-caec1567ca3a
-    type_id: 13
-  - id: &sz_emergency_services 24540
-    name: SZ Emergency Services
-    uuid: 33fba819-85ba-4dce-b8e5-a02104fc4c4e
-    type_id: 13
-  - id: &sz_dial_up_internet_access 26086
-    name: SZ Dial Up Internet Access
-    uuid: 0cd380db-1f94-41a9-aa66-f8dc7f2400c1
-    type_id: 13
-  - id: &sz_call_center_services 26088
-    name: SZ Call Center Services
-    uuid: 5afd68db-fc4f-45be-ac56-79663dcbde5c
-    type_id: 13
-  - id: &sz_telebanking_services 26098
-    name: SZ Telebanking Services
-    uuid: a495f446-7824-4a8f-abd6-6738bc0953d8
-    type_id: 13
-  - id: &sz_mass_calling_services 26104
-    name: SZ Mass Calling Services
-    uuid: 5be54f1e-f613-40b7-b62d-7fda71a7d384
-    type_id: 13
 # Fixed Networks
+  - id: &sz_fixed 22732
+    name: SZ Fixed
+    uuid: 4fd98919-2d17-4b21-b80a-e82710e15914
+    type_id: 2
   - id: &sz_shiselweni_region_region 21942
     name: SZ Shiselweni Region Region
     uuid: f901b8c7-646b-4802-ac7d-8ea578261996
@@ -53,10 +20,6 @@ networks:
   - id: &sz_manzini_region_region 22034
     name: SZ Manzini Region Region
     uuid: 348aae2c-1fa6-430e-8370-05e3e0f3ee56
-    type_id: 2
-  - id: &sz_fixed 22732
-    name: SZ Fixed
-    uuid: 4fd98919-2d17-4b21-b80a-e82710e15914
     type_id: 2
   - id: &sz_virtual_telephony_region 22846
     name: SZ Virtual Telephony Region
@@ -210,6 +173,43 @@ networks:
     name: SZ Wireless Local Loop Region
     uuid: 6eab5f2d-16c6-49b5-8ef6-24c0ea1dd586
     type_id: 2
+# Supplementary services Networks
+  - id: &sz_special_services 21497
+    name: SZ Special Services
+    uuid: 7a54408b-65c7-4218-8c90-19de25465219
+    type_id: 13
+  - id: &sz_telebanking_services 26098
+    name: SZ Telebanking Services
+    uuid: a495f446-7824-4a8f-abd6-6738bc0953d8
+    type_id: 13
+  - id: &sz_mass_calling_services 26104
+    name: SZ Mass Calling Services
+    uuid: 5be54f1e-f613-40b7-b62d-7fda71a7d384
+    type_id: 13
+  - id: &sz_internal_network_services 24428
+    name: SZ Internal Network Services
+    uuid: 4a74dbf0-7eb9-453d-8aeb-8a10e0940c15
+    type_id: 13
+  - id: &sz_premium_rate_services 24449
+    name: SZ Premium Rate Services
+    uuid: 812b9010-7b07-49dd-8621-caec1567ca3a
+    type_id: 13
+  - id: &sz_emergency_services 24540
+    name: SZ Emergency Services
+    uuid: 33fba819-85ba-4dce-b8e5-a02104fc4c4e
+    type_id: 13
+  - id: &sz_freephone_services 23861
+    name: SZ Freephone Services
+    uuid: 45712447-c2b2-4c83-ad8f-5c9462a5dea0
+    type_id: 13
+  - id: &sz_dial_up_internet_access 26086
+    name: SZ Dial Up Internet Access
+    uuid: 0cd380db-1f94-41a9-aa66-f8dc7f2400c1
+    type_id: 13
+  - id: &sz_call_center_services 26088
+    name: SZ Call Center Services
+    uuid: 5afd68db-fc4f-45be-ac56-79663dcbde5c
+    type_id: 13
 # Mobile Networks
   - id: &sz_mobile 24155
     name: SZ Mobile
@@ -228,142 +228,21 @@ networks:
     uuid: 8da81ee5-b560-49ce-847c-a546cd3b8f3a
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 247440
+    prefix: '2682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2484dfa8-4a8d-4d79-8cb6-6a2a0b275ac5
+    country_id: *sz
+    network_id: *sz_fixed
   - id: 242110
     prefix: '268'
     number_min_length: 4
     number_max_length: 100
     uuid: d6729e3c-0046-46bd-b780-abd13a833485
     country_id: *sz
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242502
-    prefix: '2681'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: c9a12b72-25df-40d7-81f7-65e1b588f298
-    country_id: *sz
-    network_id: *sz_special_services
-  - id: 242822
-    prefix: '268120'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c1b71415-7f60-4334-9ef5-2173f0e998c9
-    country_id: *sz
-    network_id: *sz_special_services
-  - id: 253177
-    prefix: '268800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8073332f-05e7-4801-ae04-5f6fb47d1e3e
-    country_id: *sz
-    network_id: *sz_freephone_services
-  - id: 257167
-    prefix: '26890'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 9d3d7a1a-1b59-436e-bf1d-dd439fc2eab4
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 257194
-    prefix: '268900'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 38e01a2d-46d4-4cb6-94ba-f83bc4000d05
-    country_id: *sz
-    network_id: *sz_premium_rate_services
-  - id: 257374
-    prefix: '26891'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 682fc1d2-f2a3-4bb1-ba65-af5900316eee
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 257598
-    prefix: '26892'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 7f0bd5f0-a4c5-4493-93ee-bf1d7d30af11
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 257872
-    prefix: '26893'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 0d6718d8-326c-423d-9483-7017b7c50112
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 257975
-    prefix: '26898'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 5d48ecc9-0000-42b6-a783-7ffedefc9ed7
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 258201
-    prefix: '26899'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: d0c40137-36a2-406a-ba56-998d963d6852
-    country_id: *sz
-    network_id: *sz_emergency_services
-  - id: 263869
-    prefix: '268860'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 48339c96-c8c9-4532-95ef-7356b638d641
-    country_id: *sz
-    network_id: *sz_dial_up_internet_access
-  - id: 263884
-    prefix: '268861'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0a29d96d-3326-44f0-b6eb-22a9817225c2
-    country_id: *sz
-    network_id: *sz_call_center_services
-  - id: 263982
-    prefix: '268869'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4e73839-3418-4158-aa64-28e2ce3de28f
-    country_id: *sz
-    network_id: *sz_telebanking_services
-  - id: 264015
-    prefix: '26887'
-    number_min_length: 7
-    number_max_length: 9
-    uuid: f3b61b5b-a719-4e94-a1a2-0124f9baef5e
-    country_id: *sz
-    network_id: *sz_mass_calling_services
-  - id: 264204
-    prefix: '26894'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 77585ef7-bc6b-4a21-9835-619af635fafd
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 264450
-    prefix: '26895'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: afc1835d-d5c5-4bd7-a981-991f80f93eae
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 264730
-    prefix: '26896'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: b8b46d6f-9eb7-41d0-99c6-4d4f42b194a4
-    country_id: *sz
-    network_id: *sz_internal_network_services
-  - id: 265011
-    prefix: '26897'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: ffe96f79-796d-4212-9cf1-dd0dff90feea
-    country_id: *sz
-    network_id: *sz_internal_network_services
-# Fixed Prefixes
+    network_id: *sz_fixed
   - id: 243380
     prefix: '26832'
     number_min_length: 11
@@ -392,13 +271,6 @@ network_prefixes:
     uuid: d26fe0ff-11b1-41ca-8040-b6b3d7ca9216
     country_id: *sz
     network_id: *sz_manzini_region_region
-  - id: 247440
-    prefix: '2682'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2484dfa8-4a8d-4d79-8cb6-6a2a0b275ac5
-    country_id: *sz
-    network_id: *sz_fixed
   - id: 247736
     prefix: '26822'
     number_min_length: 11
@@ -784,6 +656,133 @@ network_prefixes:
     uuid: aae9b7bb-0703-4857-b1de-069acfafd2c8
     country_id: *sz
     network_id: *sz_fixed
+# Supplementary services Prefixes
+  - id: 242502
+    prefix: '2681'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: c9a12b72-25df-40d7-81f7-65e1b588f298
+    country_id: *sz
+    network_id: *sz_special_services
+  - id: 242822
+    prefix: '268120'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c1b71415-7f60-4334-9ef5-2173f0e998c9
+    country_id: *sz
+    network_id: *sz_special_services
+  - id: 263982
+    prefix: '268869'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4e73839-3418-4158-aa64-28e2ce3de28f
+    country_id: *sz
+    network_id: *sz_telebanking_services
+  - id: 264015
+    prefix: '26887'
+    number_min_length: 7
+    number_max_length: 9
+    uuid: f3b61b5b-a719-4e94-a1a2-0124f9baef5e
+    country_id: *sz
+    network_id: *sz_mass_calling_services
+  - id: 257167
+    prefix: '26890'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 9d3d7a1a-1b59-436e-bf1d-dd439fc2eab4
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 257194
+    prefix: '268900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 38e01a2d-46d4-4cb6-94ba-f83bc4000d05
+    country_id: *sz
+    network_id: *sz_premium_rate_services
+  - id: 257374
+    prefix: '26891'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 682fc1d2-f2a3-4bb1-ba65-af5900316eee
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 257598
+    prefix: '26892'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 7f0bd5f0-a4c5-4493-93ee-bf1d7d30af11
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 257975
+    prefix: '26898'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 5d48ecc9-0000-42b6-a783-7ffedefc9ed7
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 258201
+    prefix: '26899'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: d0c40137-36a2-406a-ba56-998d963d6852
+    country_id: *sz
+    network_id: *sz_emergency_services
+  - id: 253177
+    prefix: '268800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8073332f-05e7-4801-ae04-5f6fb47d1e3e
+    country_id: *sz
+    network_id: *sz_freephone_services
+  - id: 263869
+    prefix: '268860'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 48339c96-c8c9-4532-95ef-7356b638d641
+    country_id: *sz
+    network_id: *sz_dial_up_internet_access
+  - id: 263884
+    prefix: '268861'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0a29d96d-3326-44f0-b6eb-22a9817225c2
+    country_id: *sz
+    network_id: *sz_call_center_services
+  - id: 257872
+    prefix: '26893'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 0d6718d8-326c-423d-9483-7017b7c50112
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 264204
+    prefix: '26894'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 77585ef7-bc6b-4a21-9835-619af635fafd
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 264450
+    prefix: '26895'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: afc1835d-d5c5-4bd7-a981-991f80f93eae
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 264730
+    prefix: '26896'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: b8b46d6f-9eb7-41d0-99c6-4d4f42b194a4
+    country_id: *sz
+    network_id: *sz_internal_network_services
+  - id: 265011
+    prefix: '26897'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: ffe96f79-796d-4212-9cf1-dd0dff90feea
+    country_id: *sz
+    network_id: *sz_internal_network_services
 # Mobile Prefixes
   - id: 255280
     prefix: '2687'

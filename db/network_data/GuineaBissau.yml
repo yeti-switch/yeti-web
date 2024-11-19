@@ -94,6 +94,10 @@ networks:
     name: GW Mobile
     uuid: 6d417d5b-def5-43a4-9de1-f6ee70a0881a
     type_id: 3
+  - id: &gw_guinetel_mobile 26142
+    name: GW Guinetel Mobile
+    uuid: 04d8d3ad-d529-4e1d-9c35-bfe2e3702425
+    type_id: 3
   - id: &gw_orange_mobile 26125
     name: GW Orange Mobile
     uuid: 2d000369-4fc6-4252-adb8-417c1f1372e5
@@ -102,20 +106,15 @@ networks:
     name: GW Mtn Mobile
     uuid: 86ba030c-3018-4613-87a2-29c3de9c76d5
     type_id: 3
-  - id: &gw_guinetel_mobile 26142
-    name: GW Guinetel Mobile
-    uuid: 04d8d3ad-d529-4e1d-9c35-bfe2e3702425
-    type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242005
     prefix: '245'
     number_min_length: 4
     number_max_length: 100
     uuid: 6ffa3263-6a08-4b1b-9be3-e92776a28fef
     country_id: *gw
-    network_id: null
-# Fixed Prefixes
+    network_id: *gw_fixed
   - id: 243937
     prefix: '2454'
     number_min_length: 12
@@ -285,6 +284,13 @@ network_prefixes:
     uuid: 35263605-0614-45ad-9065-e9a0e6e577d3
     country_id: *gw
     network_id: *gw_mobile
+  - id: 265189
+    prefix: '245977'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af7140dd-0f57-4b8b-b11e-4d385d914f43
+    country_id: *gw
+    network_id: *gw_guinetel_mobile
   - id: 264582
     prefix: '245955'
     number_min_length: 12
@@ -362,10 +368,3 @@ network_prefixes:
     uuid: 1d3cb0e1-30a4-48e1-b625-8206904a88ef
     country_id: *gw
     network_id: *gw_mtn_mobile
-  - id: 265189
-    prefix: '245977'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: af7140dd-0f57-4b8b-b11e-4d385d914f43
-    country_id: *gw
-    network_id: *gw_guinetel_mobile

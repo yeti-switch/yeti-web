@@ -1,27 +1,10 @@
 country_id: &gn 89
 networks:
-# Supplementary services Networks
-  - id: &gn_special_services 21407
-    name: GN Special Services
-    uuid: 9a80ad32-5bde-4667-8014-dfa0eced3f7d
-    type_id: 13
-  - id: &gn_freephone_services 21564
-    name: GN Freephone Services
-    uuid: a07727ef-6199-4030-9a2d-f93419755bbe
-    type_id: 13
-  - id: &gn_directory_enquiry_services 21711
-    name: GN Directory Enquiry Services
-    uuid: 425fce2c-fdd1-4dfb-bfc5-eaaaeb9dcc70
-    type_id: 13
-  - id: &gn_value_addes_services 23791
-    name: GN Value Addes Services
-    uuid: 2a4bcd8e-d550-4542-897f-7203765569ad
-    type_id: 13
-  - id: &gn_internet_access_and_new_generation_networks 24145
-    name: GN Internet Access And New Generation Networks
-    uuid: 6ce5cd46-e694-4ded-a8da-b46941792ded
-    type_id: 13
 # Fixed Networks
+  - id: &gn_fixed 23204
+    name: GN Fixed
+    uuid: bb259ce4-fef3-43b2-870b-6b7c54d6eaed
+    type_id: 2
   - id: &gn_fria_region 21870
     name: GN Fria Region
     uuid: ace8adac-73c7-47df-a4a6-2ef26bec478f
@@ -102,26 +85,43 @@ networks:
     name: GN Government Internet Network Region
     uuid: 748e12f7-fa51-4647-8d8d-07146c95f1bb
     type_id: 2
-  - id: &gn_fixed 23204
-    name: GN Fixed
-    uuid: bb259ce4-fef3-43b2-870b-6b7c54d6eaed
-    type_id: 2
   - id: &gn_voip_region 24259
     name: GN Voip Region
     uuid: 6f88d3a2-dbf6-4227-abfc-a73579da20cd
     type_id: 2
+# Supplementary services Networks
+  - id: &gn_special_services 21407
+    name: GN Special Services
+    uuid: 9a80ad32-5bde-4667-8014-dfa0eced3f7d
+    type_id: 13
+  - id: &gn_freephone_services 21564
+    name: GN Freephone Services
+    uuid: a07727ef-6199-4030-9a2d-f93419755bbe
+    type_id: 13
+  - id: &gn_directory_enquiry_services 21711
+    name: GN Directory Enquiry Services
+    uuid: 425fce2c-fdd1-4dfb-bfc5-eaaaeb9dcc70
+    type_id: 13
+  - id: &gn_internet_access_and_new_generation_networks 24145
+    name: GN Internet Access And New Generation Networks
+    uuid: 6ce5cd46-e694-4ded-a8da-b46941792ded
+    type_id: 13
+  - id: &gn_value_addes_services 23791
+    name: GN Value Addes Services
+    uuid: 2a4bcd8e-d550-4542-897f-7203765569ad
+    type_id: 13
 # Mobile Networks
   - id: &gn_mobile 22532
     name: GN Mobile
     uuid: 73e1f25e-4d6e-4c25-b0cf-a59cb9ded5fa
     type_id: 3
-  - id: &gn_cellcom_mobile 23525
-    name: GN Cellcom Mobile
-    uuid: 6cea2333-002c-4f56-8c30-8e8f37133221
-    type_id: 3
   - id: &gn_orange_mobile 24039
     name: GN Orange Mobile
     uuid: ece5196f-48ae-4e2f-9f5e-383dda10f0fa
+    type_id: 3
+  - id: &gn_cellcom_mobile 23525
+    name: GN Cellcom Mobile
+    uuid: 6cea2333-002c-4f56-8c30-8e8f37133221
     type_id: 3
   - id: &gn_mtn_mobile 24062
     name: GN Mtn Mobile
@@ -133,51 +133,14 @@ networks:
     uuid: 9583048b-ead1-48f4-b1cc-93067687c493
     type_id: 15
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242002
     prefix: '224'
     number_min_length: 4
     number_max_length: 100
     uuid: 8f0454dd-30ae-40b4-8754-4ff4babca0b2
     country_id: *gn
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242403
-    prefix: '2241'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 1b527d17-ad79-4f9a-8246-71d78fa46994
-    country_id: *gn
-    network_id: *gn_special_services
-  - id: 242590
-    prefix: '22411'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 8e5a8c40-aad2-458b-80c9-9aeeb0bc58e3
-    country_id: *gn
-    network_id: *gn_freephone_services
-  - id: 242804
-    prefix: '22412'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 0a3c36c2-6bb3-4d00-a24d-47621322fb3b
-    country_id: *gn
-    network_id: *gn_directory_enquiry_services
-  - id: 253077
-    prefix: '2248'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 73f61f2e-dd5d-4c8c-892b-631ef27f5dff
-    country_id: *gn
-    network_id: *gn_value_addes_services
-  - id: 255251
-    prefix: '2247'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6d6a7836-0f42-452f-ad63-ad2e1fb8832d
-    country_id: *gn
-    network_id: *gn_internet_access_and_new_generation_networks
-# Fixed Prefixes
+    network_id: *gn_fixed
   - id: 243113
     prefix: '2243024'
     number_min_length: 11
@@ -353,6 +316,42 @@ network_prefixes:
     uuid: 64b98da8-edc8-4d74-a78e-b96733086e6d
     country_id: *gn
     network_id: *gn_voip_region
+# Supplementary services Prefixes
+  - id: 242403
+    prefix: '2241'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 1b527d17-ad79-4f9a-8246-71d78fa46994
+    country_id: *gn
+    network_id: *gn_special_services
+  - id: 242590
+    prefix: '22411'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 8e5a8c40-aad2-458b-80c9-9aeeb0bc58e3
+    country_id: *gn
+    network_id: *gn_freephone_services
+  - id: 242804
+    prefix: '22412'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 0a3c36c2-6bb3-4d00-a24d-47621322fb3b
+    country_id: *gn
+    network_id: *gn_directory_enquiry_services
+  - id: 255251
+    prefix: '2247'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6d6a7836-0f42-452f-ad63-ad2e1fb8832d
+    country_id: *gn
+    network_id: *gn_internet_access_and_new_generation_networks
+  - id: 253077
+    prefix: '2248'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73f61f2e-dd5d-4c8c-892b-631ef27f5dff
+    country_id: *gn
+    network_id: *gn_value_addes_services
 # Mobile Prefixes
   - id: 245393
     prefix: '2246'
@@ -361,6 +360,13 @@ network_prefixes:
     uuid: 6dbb8bb5-06c4-4117-b137-23ec6110b906
     country_id: *gn
     network_id: *gn_mobile
+  - id: 254116
+    prefix: '22462'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f15f5d27-ab71-4960-9a88-a14f585ef484
+    country_id: *gn
+    network_id: *gn_orange_mobile
   - id: 251317
     prefix: '224653'
     number_min_length: 12
@@ -396,13 +402,6 @@ network_prefixes:
     uuid: 4acd6cee-cdb6-4fd4-840a-87f074fc4e8c
     country_id: *gn
     network_id: *gn_cellcom_mobile
-  - id: 254116
-    prefix: '22462'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f15f5d27-ab71-4960-9a88-a14f585ef484
-    country_id: *gn
-    network_id: *gn_orange_mobile
   - id: 254305
     prefix: '224660'
     number_min_length: 12

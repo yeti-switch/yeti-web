@@ -1,15 +1,15 @@
 country_id: &dg 275
 networks:
-# Supplementary services Networks
-  - id: &dg_special_services 21390
-    name: DG Special Services
-    uuid: 2d9b123c-8d6d-4495-91cd-e86ef3668cb2
-    type_id: 13
 # Fixed Networks
   - id: &dg_fixed 22077
     name: DG Fixed
     uuid: 2c508c04-3f9d-4d1f-a0a3-0fe0ac3a4ffe
     type_id: 2
+# Supplementary services Networks
+  - id: &dg_special_services 21390
+    name: DG Special Services
+    uuid: 2d9b123c-8d6d-4495-91cd-e86ef3668cb2
+    type_id: 13
 # Paging Networks
   - id: &dg_paging 22085
     name: DG Paging
@@ -21,14 +21,21 @@ networks:
     uuid: d480898d-1461-48e8-9ac9-13f864de9021
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241981
     prefix: '246'
     number_min_length: 4
     number_max_length: 100
     uuid: 75be4ae8-205f-450d-a68e-7fd94cc4d971
     country_id: *dg
-    network_id: null
+    network_id: *dg_fixed
+  - id: 243708
+    prefix: '24637'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c1122edc-9a47-43fb-9650-9d636d904f3c
+    country_id: *dg
+    network_id: *dg_fixed
 # Supplementary services Prefixes
   - id: 242385
     prefix: '2461'
@@ -44,14 +51,6 @@ network_prefixes:
     uuid: 4eef080b-cd3c-4502-bdd0-3aa409c57b24
     country_id: *dg
     network_id: *dg_special_services
-# Fixed Prefixes
-  - id: 243708
-    prefix: '24637'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c1122edc-9a47-43fb-9650-9d636d904f3c
-    country_id: *dg
-    network_id: *dg_fixed
 # Paging Prefixes
   - id: 243724
     prefix: '2463709300'

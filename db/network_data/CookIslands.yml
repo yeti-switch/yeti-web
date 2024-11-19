@@ -1,15 +1,14 @@
 country_id: &ck 51
 networks:
-# Supplementary services Networks
-  - id: &ck_special_services 21271
-    name: CK Special Services
-    uuid: 87eb2d65-6e83-4d0c-82c4-37b3c4deee95
-    type_id: 13
-  - id: &ck_emergency_services 24544
-    name: CK Emergency Services
-    uuid: 401f358a-4f48-48d4-b014-069270d15b9c
-    type_id: 13
 # Fixed Networks
+  - id: &ck_rarotonga_region 22708
+    name: CK Rarotonga Region
+    uuid: b7187341-26a2-4f56-9bab-98b5c0fe1c53
+    type_id: 2
+  - id: &ck_fixed 43397
+    name: CK Fixed
+    uuid: 34628940-298f-473d-a15b-5f0eb8c83972
+    type_id: 2
   - id: &ck_aitutaki_region 21897
     name: CK Aitutaki Region
     uuid: 530c3280-03ee-414b-a206-78bb4186c800
@@ -58,47 +57,36 @@ networks:
     name: CK Voice Mail Region
     uuid: 898f68c6-dce7-4af0-9421-13a5cf4db1ad
     type_id: 2
-  - id: &ck_rarotonga_region 22708
-    name: CK Rarotonga Region
-    uuid: b7187341-26a2-4f56-9bab-98b5c0fe1c53
-    type_id: 2
+# Supplementary services Networks
+  - id: &ck_special_services 21271
+    name: CK Special Services
+    uuid: 87eb2d65-6e83-4d0c-82c4-37b3c4deee95
+    type_id: 13
+  - id: &ck_emergency_services 24544
+    name: CK Emergency Services
+    uuid: 401f358a-4f48-48d4-b014-069270d15b9c
+    type_id: 13
 # Mobile Networks
   - id: &ck_bluesky_mobile 22462
     name: CK Bluesky Mobile
     uuid: 3444181b-cf78-45d1-9007-f0f7a8ea673e
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 247394
+    prefix: '6822'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1fd87b6d-53be-4dc0-b449-5d7f096b7171
+    country_id: *ck
+    network_id: *ck_rarotonga_region
   - id: 241972
     prefix: '682'
     number_min_length: 4
     number_max_length: 100
     uuid: 6c6ff5eb-85d0-41a8-b00e-56def3ce3813
     country_id: *ck
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242142
-    prefix: '6820'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 150973ca-1f31-4d02-afdf-a7d3ff6315c8
-    country_id: *ck
-    network_id: *ck_special_services
-  - id: 242376
-    prefix: '6821'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 774f240a-592d-4a19-b44c-cabae4570ebd
-    country_id: *ck
-    network_id: *ck_special_services
-  - id: 258303
-    prefix: '682999'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 05fa1e44-3e5a-41d3-9f52-62fbef9a41d5
-    country_id: *ck
-    network_id: *ck_emergency_services
-# Fixed Prefixes
+    network_id: *ck_fixed
   - id: 243226
     prefix: '68231'
     number_min_length: 8
@@ -190,13 +178,6 @@ network_prefixes:
     uuid: 040ee4f8-d64b-4351-8069-968e42a7f294
     country_id: *ck
     network_id: *ck_voice_mail_region
-  - id: 247394
-    prefix: '6822'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 1fd87b6d-53be-4dc0-b449-5d7f096b7171
-    country_id: *ck
-    network_id: *ck_rarotonga_region
   - id: 250235
     prefix: '68257'
     number_min_length: 8
@@ -204,6 +185,28 @@ network_prefixes:
     uuid: 877cd738-bbf8-4269-b31e-ec1b65323722
     country_id: *ck
     network_id: *ck_voice_mail_region
+# Supplementary services Prefixes
+  - id: 242142
+    prefix: '6820'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 150973ca-1f31-4d02-afdf-a7d3ff6315c8
+    country_id: *ck
+    network_id: *ck_special_services
+  - id: 242376
+    prefix: '6821'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 774f240a-592d-4a19-b44c-cabae4570ebd
+    country_id: *ck
+    network_id: *ck_special_services
+  - id: 258303
+    prefix: '682999'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 05fa1e44-3e5a-41d3-9f52-62fbef9a41d5
+    country_id: *ck
+    network_id: *ck_emergency_services
 # Mobile Prefixes
   - id: 245149
     prefix: '68258'

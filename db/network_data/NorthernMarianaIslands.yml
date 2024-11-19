@@ -1,6 +1,10 @@
 country_id: &mp 159
 networks:
 # Fixed Networks
+  - id: &mp_fixed 43315
+    name: MP Fixed
+    uuid: c59a6575-2921-4be6-a9b3-b6a260c063c4
+    type_id: 2
   - id: &mp_saipan_region 13974
     name: MP Saipan Region
     uuid: 9487726e-189c-4de4-8b31-ffd6281d6f61
@@ -23,15 +27,14 @@ networks:
     uuid: 42e63a27-d2d5-46b0-95cd-09d71daca932
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 143787
-    prefix: '1670'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: 0b8a1cd2-0e24-40af-bbf4-705de18f55c8
-    country_id: *mp
-    network_id: null
 # Fixed Prefixes
+  - id: 503579
+    prefix: '1670'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: c5ed7798-1a41-429c-b895-cb944a7d5b1a
+    country_id: *mp
+    network_id: *mp_fixed
   - id: 143795
     prefix: '1670233'
     number_min_length: 11

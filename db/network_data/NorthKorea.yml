@@ -1,22 +1,6 @@
 country_id: &kp 263
 networks:
 # Fixed Networks
-  - id: &kp_kaesong_region 5029
-    name: KP Kaesong Region
-    uuid: 37649343-f332-4e67-b7d4-865316d8b1bc
-    type_id: 2
-  - id: &kp_hamhung_region 7580
-    name: KP Hamhung Region
-    uuid: 6b4d63e0-2bc8-4021-873f-aa847b4977dd
-    type_id: 2
-  - id: &kp_wonsan_region 9684
-    name: KP Wonsan Region
-    uuid: 663a8a7a-7991-46bf-924d-371f8a1a15d5
-    type_id: 2
-  - id: &kp_sinuiju_region 11797
-    name: KP Sinuiju Region
-    uuid: 1c7c78b0-be2a-43b9-bb4b-5037628c0ac6
-    type_id: 2
   - id: &kp_kanggye_region 14512
     name: KP Kanggye Region
     uuid: 8712a4e1-bbe6-45d0-8da7-ae2436894dd6
@@ -28,6 +12,14 @@ networks:
   - id: &kp_hyesan_region 19658
     name: KP Hyesan Region
     uuid: 40d04c58-a722-45ab-882a-086dc7aad8ff
+    type_id: 2
+  - id: &kp_rason_region 41030
+    name: KP Rason Region
+    uuid: 35391721-48c6-49cc-b06e-4fd3863df50c
+    type_id: 2
+  - id: &kp_fixed 43453
+    name: KP Fixed
+    uuid: 02c03e04-697b-4ec6-87b3-52fc78a9b198
     type_id: 2
   - id: &kp_pyongyang_region 25849
     name: KP Pyongyang Region
@@ -49,9 +41,21 @@ networks:
     name: KP Haeju Region
     uuid: d9e6f34d-1a98-474a-9cde-826597c7753d
     type_id: 2
-  - id: &kp_rason_region 41030
-    name: KP Rason Region
-    uuid: 35391721-48c6-49cc-b06e-4fd3863df50c
+  - id: &kp_kaesong_region 5029
+    name: KP Kaesong Region
+    uuid: 37649343-f332-4e67-b7d4-865316d8b1bc
+    type_id: 2
+  - id: &kp_hamhung_region 7580
+    name: KP Hamhung Region
+    uuid: 6b4d63e0-2bc8-4021-873f-aa847b4977dd
+    type_id: 2
+  - id: &kp_wonsan_region 9684
+    name: KP Wonsan Region
+    uuid: 663a8a7a-7991-46bf-924d-371f8a1a15d5
+    type_id: 2
+  - id: &kp_sinuiju_region 11797
+    name: KP Sinuiju Region
+    uuid: 1c7c78b0-be2a-43b9-bb4b-5037628c0ac6
     type_id: 2
 # Mobile Networks
   - id: &kp_koryolink_mobile 25715
@@ -64,34 +68,6 @@ networks:
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
-  - id: 58233
-    prefix: '85049'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e173abe4-2857-4ab4-a99b-1f189418f682
-    country_id: *kp
-    network_id: *kp_kaesong_region
-  - id: 76555
-    prefix: '85053'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b749d6e-ef62-4b33-a08a-19490be52b70
-    country_id: *kp
-    network_id: *kp_hamhung_region
-  - id: 90276
-    prefix: '85057'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: defeaedd-7ea6-43cc-a030-9cbe0ac5e15f
-    country_id: *kp
-    network_id: *kp_wonsan_region
-  - id: 108592
-    prefix: '85061'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a8da406e-fc68-400d-bc69-b8dfb047b8b7
-    country_id: *kp
-    network_id: *kp_sinuiju_region
   - id: 151431
     prefix: '85067'
     number_min_length: 11
@@ -113,34 +89,20 @@ network_prefixes:
     uuid: c48cedf9-91f2-4bb8-97ce-fdf87eeceb67
     country_id: *kp
     network_id: *kp_hyesan_region
-  - id: 261198
-    prefix: '8502'
-    number_min_length: 7
-    number_max_length: 13
-    uuid: af60f7f1-5d73-4658-bc4c-282eb02081d2
-    country_id: *kp
-    network_id: *kp_pyongyang_region
-  - id: 261205
-    prefix: '850218'
-    number_min_length: 7
-    number_max_length: 9
-    uuid: 7decee27-5f29-4813-b03e-737d356244fc
-    country_id: *kp
-    network_id: *kp_pyongyang_region
-  - id: 261206
-    prefix: '850218111'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 00671440-9a4a-4861-a738-0e4932c76c68
-    country_id: *kp
-    network_id: *kp_pyongyang_region
-  - id: 261295
-    prefix: '8502381'
+  - id: 435889
+    prefix: '85085'
     number_min_length: 11
     number_max_length: 11
-    uuid: f95b9127-4b8a-46d9-9d33-b68fdcd3492d
+    uuid: 0b46f3aa-5678-42db-abcc-e2205092f1ea
     country_id: *kp
-    network_id: *kp_pyongyang_region
+    network_id: *kp_rason_region
+  - id: 242083
+    prefix: '850'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: ffb71161-2c41-4413-b568-f72897854131
+    country_id: *kp
+    network_id: *kp_fixed
   - id: 261507
     prefix: '8502771'
     number_min_length: 11
@@ -190,6 +152,34 @@ network_prefixes:
     uuid: 1e3a788c-e381-4c1c-9809-8ffcc366d8c3
     country_id: *kp
     network_id: *kp_pyongyang_region
+  - id: 261198
+    prefix: '8502'
+    number_min_length: 7
+    number_max_length: 13
+    uuid: af60f7f1-5d73-4658-bc4c-282eb02081d2
+    country_id: *kp
+    network_id: *kp_pyongyang_region
+  - id: 261205
+    prefix: '850218'
+    number_min_length: 7
+    number_max_length: 9
+    uuid: 7decee27-5f29-4813-b03e-737d356244fc
+    country_id: *kp
+    network_id: *kp_pyongyang_region
+  - id: 261206
+    prefix: '850218111'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 00671440-9a4a-4861-a738-0e4932c76c68
+    country_id: *kp
+    network_id: *kp_pyongyang_region
+  - id: 261295
+    prefix: '8502381'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f95b9127-4b8a-46d9-9d33-b68fdcd3492d
+    country_id: *kp
+    network_id: *kp_pyongyang_region
   - id: 321179
     prefix: '85031'
     number_min_length: 11
@@ -218,21 +208,34 @@ network_prefixes:
     uuid: cd77990b-fbbf-421d-80e8-cc267e098aee
     country_id: *kp
     network_id: *kp_haeju_region
-  - id: 435889
-    prefix: '85085'
+  - id: 58233
+    prefix: '85049'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0b46f3aa-5678-42db-abcc-e2205092f1ea
+    uuid: e173abe4-2857-4ab4-a99b-1f189418f682
     country_id: *kp
-    network_id: *kp_rason_region
-# Country code Prefixes
-  - id: 242083
-    prefix: '850'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: ffb71161-2c41-4413-b568-f72897854131
+    network_id: *kp_kaesong_region
+  - id: 76555
+    prefix: '85053'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b749d6e-ef62-4b33-a08a-19490be52b70
     country_id: *kp
-    network_id: null
+    network_id: *kp_hamhung_region
+  - id: 90276
+    prefix: '85057'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: defeaedd-7ea6-43cc-a030-9cbe0ac5e15f
+    country_id: *kp
+    network_id: *kp_wonsan_region
+  - id: 108592
+    prefix: '85061'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a8da406e-fc68-400d-bc69-b8dfb047b8b7
+    country_id: *kp
+    network_id: *kp_sinuiju_region
 # Mobile Prefixes
   - id: 261018
     prefix: '8501912'

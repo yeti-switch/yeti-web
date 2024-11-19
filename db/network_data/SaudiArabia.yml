@@ -1,5 +1,83 @@
 country_id: &sa 187
 networks:
+# Supplementary services Networks
+  - id: &sa_premium_rate_services 14921
+    name: SA Premium Rate Services
+    uuid: eeea6bc1-ba1b-4435-9f27-7cd4c3d77955
+    type_id: 13
+  - id: &sa_national_freephone_services 38514
+    name: SA National Freephone Services
+    uuid: e24babea-ced5-44b3-b54d-baac25cd63a3
+    type_id: 13
+  - id: &sa_international_freephone_services 38524
+    name: SA International Freephone Services
+    uuid: e9ac10cf-cfb0-4d04-b1b1-5702c2c8d26f
+    type_id: 13
+  - id: &sa_machine_to_machine_m2m_services 40669
+    name: SA Machine To Machine M2M Services
+    uuid: b9d39cb6-5b51-4ff8-9f97-fdecb8de23e5
+    type_id: 13
+  - id: &sa_public_mobile_data_services 40753
+    name: SA Public Mobile Data Services
+    uuid: a4dc1369-5053-4a22-87b0-98459cc71126
+    type_id: 13
+  - id: &sa_universal_personal_telecommunications_upt 41990
+    name: SA Universal Personal Telecommunications Upt
+    uuid: 4f6130f3-8e47-4bd6-a418-4270f43f8dec
+    type_id: 13
+  - id: &sa_shared_cost_services 42824
+    name: SA Shared Cost Services
+    uuid: 62f678df-8e91-4312-a972-d912511d5377
+    type_id: 13
+  - id: &sa_home_country_direct 22645
+    name: SA Home Country Direct
+    uuid: ed1c6748-6227-4449-b23a-757f51446b3d
+    type_id: 13
+  - id: &sa_special_services 21480
+    name: SA Special Services
+    uuid: 07198666-66b5-4c4d-9201-36dc796c9a19
+    type_id: 13
+  - id: &sa_emergency_services 21596
+    name: SA Emergency Services
+    uuid: 8bee1739-9b72-48ae-8c24-e308e5863d0d
+    type_id: 13
+  - id: &sa_shared_revenue_services 42916
+    name: SA Shared Revenue Services
+    uuid: d19851bf-a53b-482e-be13-35428db2d5fd
+    type_id: 13
+# Fixed Networks
+  - id: &sa_voip_region 38672
+    name: SA Voip Region
+    uuid: 1ae18a24-583f-40e8-87c9-43187fc77ff2
+    type_id: 2
+  - id: &sa_fixed 43457
+    name: SA Fixed
+    uuid: d27c01f6-ffb9-400b-8421-30d4e7d99a84
+    type_id: 2
+  - id: &sa_riyadh_kharj_region 24836
+    name: SA Riyadh Kharj Region
+    uuid: 2d2cd72d-3a78-4bf1-8af8-e5eb5b27f669
+    type_id: 2
+  - id: &sa_makkah_jeddah_region 24867
+    name: SA Makkah Jeddah Region
+    uuid: ad3d4946-4c30-4aa7-8053-2e228d59ea33
+    type_id: 2
+  - id: &sa_dahran_dammam_khobar_region 25030
+    name: SA Dahran Dammam Khobar Region
+    uuid: 747ed408-7a16-4597-a696-1ffb2e86c77b
+    type_id: 2
+  - id: &sa_arar_madenah_tabuk_yanbu_region 25279
+    name: SA Arar Madenah Tabuk Yanbu Region
+    uuid: 1f99066a-972f-405a-be23-d8c6c39af5f6
+    type_id: 2
+  - id: &sa_hail_qasim_region 26513
+    name: SA Hail Qasim Region
+    uuid: fbc14f99-1dcf-46e2-bc83-2e1b14960869
+    type_id: 2
+  - id: &sa_abha_jezan_najran_region 26675
+    name: SA Abha Jezan Najran Region
+    uuid: 6cacc85e-6039-448e-8400-a81d1bd330dc
+    type_id: 2
 # Mobile Networks
   - id: &sa_mobile 4616
     name: SA Mobile
@@ -33,81 +111,184 @@ networks:
     name: SA Zain Mobile
     uuid: 8ffdf1b7-4283-449f-bdba-241600fc13cd
     type_id: 3
-# Supplementary services Networks
-  - id: &sa_premium_rate_services 14921
-    name: SA Premium Rate Services
-    uuid: eeea6bc1-ba1b-4435-9f27-7cd4c3d77955
-    type_id: 13
-  - id: &sa_special_services 21480
-    name: SA Special Services
-    uuid: 07198666-66b5-4c4d-9201-36dc796c9a19
-    type_id: 13
-  - id: &sa_emergency_services 21596
-    name: SA Emergency Services
-    uuid: 8bee1739-9b72-48ae-8c24-e308e5863d0d
-    type_id: 13
-  - id: &sa_home_country_direct 22645
-    name: SA Home Country Direct
-    uuid: ed1c6748-6227-4449-b23a-757f51446b3d
-    type_id: 13
-  - id: &sa_national_freephone_services 38514
-    name: SA National Freephone Services
-    uuid: e24babea-ced5-44b3-b54d-baac25cd63a3
-    type_id: 13
-  - id: &sa_international_freephone_services 38524
-    name: SA International Freephone Services
-    uuid: e9ac10cf-cfb0-4d04-b1b1-5702c2c8d26f
-    type_id: 13
-  - id: &sa_machine_to_machine_m2m_services 40669
-    name: SA Machine To Machine M2M Services
-    uuid: b9d39cb6-5b51-4ff8-9f97-fdecb8de23e5
-    type_id: 13
-  - id: &sa_public_mobile_data_services 40753
-    name: SA Public Mobile Data Services
-    uuid: a4dc1369-5053-4a22-87b0-98459cc71126
-    type_id: 13
-  - id: &sa_universal_personal_telecommunications_upt 41990
-    name: SA Universal Personal Telecommunications Upt
-    uuid: 4f6130f3-8e47-4bd6-a418-4270f43f8dec
-    type_id: 13
-  - id: &sa_shared_cost_services 42824
-    name: SA Shared Cost Services
-    uuid: 62f678df-8e91-4312-a972-d912511d5377
-    type_id: 13
-  - id: &sa_shared_revenue_services 42916
-    name: SA Shared Revenue Services
-    uuid: d19851bf-a53b-482e-be13-35428db2d5fd
-    type_id: 13
-# Fixed Networks
-  - id: &sa_riyadh_kharj_region 24836
-    name: SA Riyadh Kharj Region
-    uuid: 2d2cd72d-3a78-4bf1-8af8-e5eb5b27f669
-    type_id: 2
-  - id: &sa_makkah_jeddah_region 24867
-    name: SA Makkah Jeddah Region
-    uuid: ad3d4946-4c30-4aa7-8053-2e228d59ea33
-    type_id: 2
-  - id: &sa_dahran_dammam_khobar_region 25030
-    name: SA Dahran Dammam Khobar Region
-    uuid: 747ed408-7a16-4597-a696-1ffb2e86c77b
-    type_id: 2
-  - id: &sa_arar_madenah_tabuk_yanbu_region 25279
-    name: SA Arar Madenah Tabuk Yanbu Region
-    uuid: 1f99066a-972f-405a-be23-d8c6c39af5f6
-    type_id: 2
-  - id: &sa_hail_qasim_region 26513
-    name: SA Hail Qasim Region
-    uuid: fbc14f99-1dcf-46e2-bc83-2e1b14960869
-    type_id: 2
-  - id: &sa_abha_jezan_najran_region 26675
-    name: SA Abha Jezan Najran Region
-    uuid: 6cacc85e-6039-448e-8400-a81d1bd330dc
-    type_id: 2
-  - id: &sa_voip_region 38672
-    name: SA Voip Region
-    uuid: 1ae18a24-583f-40e8-87c9-43187fc77ff2
-    type_id: 2
 network_prefixes:
+# Supplementary services Prefixes
+  - id: 154409
+    prefix: '966700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 592b8708-db2b-44d8-84ed-c1b1561fc510
+    country_id: *sa
+    network_id: *sa_premium_rate_services
+  - id: 403490
+    prefix: '966800'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 430f2441-5a14-4e59-b595-0bd723a09caa
+    country_id: *sa
+    network_id: *sa_national_freephone_services
+  - id: 403501
+    prefix: '96680018'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5fa8d30f-9fec-4f84-acaa-2384dd36cfbf
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403502
+    prefix: '96680028'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 0aec1cbc-2156-4f0c-9672-9b2ec7232751
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403503
+    prefix: '96680038'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4d60abad-06e1-4ede-861a-bb293846eab1
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403505
+    prefix: '96680048'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 480c0ba6-cbd9-44ac-b6a0-24ed407101cc
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403507
+    prefix: '96680068'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b8118402-c5a0-4064-b58b-20844fd7f99b
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 403508
+    prefix: '96680078'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8c355f28-c816-491c-a435-4a0bcb1ad2a0
+    country_id: *sa
+    network_id: *sa_international_freephone_services
+  - id: 431067
+    prefix: '966830'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: edc60912-e720-4374-928e-e5936386eec0
+    country_id: *sa
+    network_id: *sa_machine_to_machine_m2m_services
+  - id: 431573
+    prefix: '966831'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: caae7b0d-f3a1-4f70-b002-e7d28c906ffd
+    country_id: *sa
+    network_id: *sa_public_mobile_data_services
+  - id: 451774
+    prefix: '966891'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: f9cf3ad9-e478-43e4-8044-80585f483eba
+    country_id: *sa
+    network_id: *sa_universal_personal_telecommunications_upt
+  - id: 470617
+    prefix: '966920'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 260139bb-e940-4ccf-a6cf-9cc10921f2ff
+    country_id: *sa
+    network_id: *sa_shared_cost_services
+  - id: 247302
+    prefix: '9661800'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: c1d4495d-b3bf-4cbf-9db4-69b885389239
+    country_id: *sa
+    network_id: *sa_home_country_direct
+  - id: 242483
+    prefix: '9661'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 8743805d-cacd-4857-835e-8ec0bf0665d9
+    country_id: *sa
+    network_id: *sa_special_services
+  - id: 242629
+    prefix: '966112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 18cd8a06-806f-4df2-860f-863cbae4cdce
+    country_id: *sa
+    network_id: *sa_emergency_services
+  - id: 257133
+    prefix: '9669'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 62e45fb8-adf7-4edc-b606-210074d36121
+    country_id: *sa
+    network_id: *sa_special_services
+  - id: 474671
+    prefix: '966925'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0fe67197-8cea-4247-914b-a511c9ab1b16
+    country_id: *sa
+    network_id: *sa_shared_revenue_services
+# Fixed Prefixes
+  - id: 406908
+    prefix: '966811'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: bd4f70d4-7b12-4a06-b2c1-d4cd561d1353
+    country_id: *sa
+    network_id: *sa_voip_region
+  - id: 242091
+    prefix: '966'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: da0a4064-8be9-48b7-b36e-579745a408e6
+    country_id: *sa
+    network_id: *sa_fixed
+  - id: 258817
+    prefix: '96611'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ae14b51a-3c93-43fb-811f-09e8d94766a9
+    country_id: *sa
+    network_id: *sa_riyadh_kharj_region
+  - id: 259230
+    prefix: '96612'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0a030e4a-7c43-423a-9a1d-e9b9f16226bc
+    country_id: *sa
+    network_id: *sa_makkah_jeddah_region
+  - id: 259511
+    prefix: '96613'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 270788df-f819-4a0d-96a5-18a132d9009e
+    country_id: *sa
+    network_id: *sa_dahran_dammam_khobar_region
+  - id: 259946
+    prefix: '96614'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c6d4276e-9d9b-4a1e-882b-b4b1de0be474
+    country_id: *sa
+    network_id: *sa_arar_madenah_tabuk_yanbu_region
+  - id: 266559
+    prefix: '96616'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c038c73f-b093-4a1d-944a-3514fb97e32b
+    country_id: *sa
+    network_id: *sa_hail_qasim_region
+  - id: 266951
+    prefix: '96617'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 03f4eb51-12de-4e79-b333-aa8be8df66c7
+    country_id: *sa
+    network_id: *sa_abha_jezan_najran_region
 # Mobile Prefixes
   - id: 54584
     prefix: '9665'
@@ -228,181 +409,3 @@ network_prefixes:
     uuid: 25e6d74d-4fa6-47bd-b364-f01bbed6273b
     country_id: *sa
     network_id: *sa_zain_mobile
-# Supplementary services Prefixes
-  - id: 154409
-    prefix: '966700'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 592b8708-db2b-44d8-84ed-c1b1561fc510
-    country_id: *sa
-    network_id: *sa_premium_rate_services
-  - id: 242483
-    prefix: '9661'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 8743805d-cacd-4857-835e-8ec0bf0665d9
-    country_id: *sa
-    network_id: *sa_special_services
-  - id: 242629
-    prefix: '966112'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 18cd8a06-806f-4df2-860f-863cbae4cdce
-    country_id: *sa
-    network_id: *sa_emergency_services
-  - id: 247302
-    prefix: '9661800'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: c1d4495d-b3bf-4cbf-9db4-69b885389239
-    country_id: *sa
-    network_id: *sa_home_country_direct
-  - id: 257133
-    prefix: '9669'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 62e45fb8-adf7-4edc-b606-210074d36121
-    country_id: *sa
-    network_id: *sa_special_services
-  - id: 403490
-    prefix: '966800'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 430f2441-5a14-4e59-b595-0bd723a09caa
-    country_id: *sa
-    network_id: *sa_national_freephone_services
-  - id: 403501
-    prefix: '96680018'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 5fa8d30f-9fec-4f84-acaa-2384dd36cfbf
-    country_id: *sa
-    network_id: *sa_international_freephone_services
-  - id: 403502
-    prefix: '96680028'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 0aec1cbc-2156-4f0c-9672-9b2ec7232751
-    country_id: *sa
-    network_id: *sa_international_freephone_services
-  - id: 403503
-    prefix: '96680038'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4d60abad-06e1-4ede-861a-bb293846eab1
-    country_id: *sa
-    network_id: *sa_international_freephone_services
-  - id: 403505
-    prefix: '96680048'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 480c0ba6-cbd9-44ac-b6a0-24ed407101cc
-    country_id: *sa
-    network_id: *sa_international_freephone_services
-  - id: 403507
-    prefix: '96680068'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: b8118402-c5a0-4064-b58b-20844fd7f99b
-    country_id: *sa
-    network_id: *sa_international_freephone_services
-  - id: 403508
-    prefix: '96680078'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 8c355f28-c816-491c-a435-4a0bcb1ad2a0
-    country_id: *sa
-    network_id: *sa_international_freephone_services
-  - id: 431067
-    prefix: '966830'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: edc60912-e720-4374-928e-e5936386eec0
-    country_id: *sa
-    network_id: *sa_machine_to_machine_m2m_services
-  - id: 431573
-    prefix: '966831'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: caae7b0d-f3a1-4f70-b002-e7d28c906ffd
-    country_id: *sa
-    network_id: *sa_public_mobile_data_services
-  - id: 451774
-    prefix: '966891'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: f9cf3ad9-e478-43e4-8044-80585f483eba
-    country_id: *sa
-    network_id: *sa_universal_personal_telecommunications_upt
-  - id: 470617
-    prefix: '966920'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 260139bb-e940-4ccf-a6cf-9cc10921f2ff
-    country_id: *sa
-    network_id: *sa_shared_cost_services
-  - id: 474671
-    prefix: '966925'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0fe67197-8cea-4247-914b-a511c9ab1b16
-    country_id: *sa
-    network_id: *sa_shared_revenue_services
-# Country code Prefixes
-  - id: 242091
-    prefix: '966'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: da0a4064-8be9-48b7-b36e-579745a408e6
-    country_id: *sa
-    network_id: null
-# Fixed Prefixes
-  - id: 258817
-    prefix: '96611'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ae14b51a-3c93-43fb-811f-09e8d94766a9
-    country_id: *sa
-    network_id: *sa_riyadh_kharj_region
-  - id: 259230
-    prefix: '96612'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0a030e4a-7c43-423a-9a1d-e9b9f16226bc
-    country_id: *sa
-    network_id: *sa_makkah_jeddah_region
-  - id: 259511
-    prefix: '96613'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 270788df-f819-4a0d-96a5-18a132d9009e
-    country_id: *sa
-    network_id: *sa_dahran_dammam_khobar_region
-  - id: 259946
-    prefix: '96614'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c6d4276e-9d9b-4a1e-882b-b4b1de0be474
-    country_id: *sa
-    network_id: *sa_arar_madenah_tabuk_yanbu_region
-  - id: 266559
-    prefix: '96616'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c038c73f-b093-4a1d-944a-3514fb97e32b
-    country_id: *sa
-    network_id: *sa_hail_qasim_region
-  - id: 266951
-    prefix: '96617'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 03f4eb51-12de-4e79-b333-aa8be8df66c7
-    country_id: *sa
-    network_id: *sa_abha_jezan_najran_region
-  - id: 406908
-    prefix: '966811'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: bd4f70d4-7b12-4a06-b2c1-d4cd561d1353
-    country_id: *sa
-    network_id: *sa_voip_region

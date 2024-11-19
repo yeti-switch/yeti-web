@@ -1,13 +1,42 @@
 country_id: &cd 264
 networks:
+# Mobile Networks
+  - id: &cd_mobile 9269
+    name: CD Mobile
+    uuid: 14b60ef6-cd5c-4121-9e6d-4da8d77c5b00
+    type_id: 3
+  - id: &cd_supercell_mobile 19834
+    name: CD Supercell Mobile
+    uuid: 4446f4d4-e9a3-4779-8a3f-c9558bedc8ba
+    type_id: 3
+  - id: &cd_vodacom_mobile 39306
+    name: CD Vodacom Mobile
+    uuid: af4c4d5d-98c3-4361-99fc-be98fe564505
+    type_id: 3
+  - id: &cd_orange_mobile 40845
+    name: CD Orange Mobile
+    uuid: b426a326-82a7-444f-a6f3-b04f50e4f342
+    type_id: 3
+  - id: &cd_tatem_mobile 41353
+    name: CD Tatem Mobile
+    uuid: 707c3cb5-090f-41c6-b8a6-daeb369dbc8f
+    type_id: 3
+  - id: &cd_africell_mobile 42052
+    name: CD Africell Mobile
+    uuid: ab10e315-1825-4f93-a453-d481004fb5fd
+    type_id: 3
+  - id: &cd_yozma_timeturns_mobile 41556
+    name: CD Yozma Timeturns Mobile
+    uuid: 7bddd687-ecec-4466-bb10-53130523f64f
+    type_id: 3
+  - id: &cd_airtel_mobile 20569
+    name: CD Airtel Mobile
+    uuid: dcf369a8-ae25-4da4-959a-59717cd36506
+    type_id: 3
 # Fixed Networks
-  - id: &cd_kisanga_mbandaka_region 7945
-    name: CD Kisanga Mbandaka Region
-    uuid: ef49cb79-d4a5-4292-a5b5-6b2bb3a535c8
-    type_id: 2
-  - id: &cd_maniema_nord_kivu_sud_kivu_region 13468
-    name: CD Maniema Nord Kivu Sud Kivu Region
-    uuid: ff39c9b4-1c79-4253-85de-9ac35aafaf32
+  - id: &cd_fixed 43396
+    name: CD Fixed
+    uuid: 5fa181bf-d503-4209-944d-61a64dd45f04
     type_id: 2
   - id: &cd_kinshasa_region 24872
     name: CD Kinshasa Region
@@ -25,119 +54,16 @@ networks:
     name: CD Kasai Region
     uuid: e0fd536e-9ad0-4f8c-b5e9-cd8e4e338a96
     type_id: 2
-# Mobile Networks
-  - id: &cd_mobile 9269
-    name: CD Mobile
-    uuid: 14b60ef6-cd5c-4121-9e6d-4da8d77c5b00
-    type_id: 3
-  - id: &cd_supercell_mobile 19834
-    name: CD Supercell Mobile
-    uuid: 4446f4d4-e9a3-4779-8a3f-c9558bedc8ba
-    type_id: 3
-  - id: &cd_airtel_mobile 20569
-    name: CD Airtel Mobile
-    uuid: dcf369a8-ae25-4da4-959a-59717cd36506
-    type_id: 3
-  - id: &cd_vodacom_mobile 39306
-    name: CD Vodacom Mobile
-    uuid: af4c4d5d-98c3-4361-99fc-be98fe564505
-    type_id: 3
-  - id: &cd_orange_mobile 40845
-    name: CD Orange Mobile
-    uuid: b426a326-82a7-444f-a6f3-b04f50e4f342
-    type_id: 3
-  - id: &cd_tatem_mobile 41353
-    name: CD Tatem Mobile
-    uuid: 707c3cb5-090f-41c6-b8a6-daeb369dbc8f
-    type_id: 3
-  - id: &cd_yozma_timeturns_mobile 41556
-    name: CD Yozma Timeturns Mobile
-    uuid: 7bddd687-ecec-4466-bb10-53130523f64f
-    type_id: 3
-  - id: &cd_africell_mobile 42052
-    name: CD Africell Mobile
-    uuid: ab10e315-1825-4f93-a453-d481004fb5fd
-    type_id: 3
+  - id: &cd_kisanga_mbandaka_region 7945
+    name: CD Kisanga Mbandaka Region
+    uuid: ef49cb79-d4a5-4292-a5b5-6b2bb3a535c8
+    type_id: 2
+  - id: &cd_maniema_nord_kivu_sud_kivu_region 13468
+    name: CD Maniema Nord Kivu Sud Kivu Region
+    uuid: ff39c9b4-1c79-4253-85de-9ac35aafaf32
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 78115
-    prefix: '24355'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f05a92f7-73d0-496b-85ee-de89920c68a0
-    country_id: *cd
-    network_id: *cd_kisanga_mbandaka_region
-  - id: 135909
-    prefix: '24365'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aebe3ef8-5a5d-46e7-a67d-1c1b1d7178f7
-    country_id: *cd
-    network_id: *cd_maniema_nord_kivu_sud_kivu_region
-  - id: 259236
-    prefix: '243120'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6d39c481-619b-4c4e-84e9-cd031158ba43
-    country_id: *cd
-    network_id: *cd_kinshasa_region
-  - id: 259237
-    prefix: '243121'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 89ff870d-473e-4afa-b67b-5a5a00c2627f
-    country_id: *cd
-    network_id: *cd_kinshasa_region
-  - id: 266065
-    prefix: '24315'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: caac158d-8ba3-4d05-b851-272855a773d4
-    country_id: *cd
-    network_id: *cd_kinshasa_region
-  - id: 301964
-    prefix: '24325'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d28ad908-4503-4577-85bb-223568eb2fb6
-    country_id: *cd
-    network_id: *cd_katanga_region
-  - id: 349443
-    prefix: '2434'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c15392d0-c438-43a4-bd92-b0f666dce621
-    country_id: *cd
-    network_id: *cd_kinshasa_region
-  - id: 352231
-    prefix: '24335'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d10986eb-4437-45cb-99f5-88eeaf61da01
-    country_id: *cd
-    network_id: *cd_bandundu_bas_congo_region
-  - id: 392612
-    prefix: '24345'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4546579b-cc85-4f7c-8b71-eb2c44f17a47
-    country_id: *cd
-    network_id: *cd_kasai_region
 # Mobile Prefixes
-  - id: 87910
-    prefix: '24356'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 741ceef0-e2f8-4253-804d-323ce54338f7
-    country_id: *cd
-    network_id: *cd_mobile
-  - id: 90289
-    prefix: '243573'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 07170ee8-a7bd-425e-bf1c-51d1384f45a9
-    country_id: *cd
-    network_id: *cd_mobile
   - id: 146938
     prefix: '243687'
     number_min_length: 10
@@ -159,13 +85,55 @@ network_prefixes:
     uuid: da225494-e56b-45d3-a7fc-ae21fe5a476d
     country_id: *cd
     network_id: *cd_supercell_mobile
-  - id: 227361
-    prefix: '24397'
+  - id: 413671
+    prefix: '24381'
     number_min_length: 12
     number_max_length: 12
-    uuid: c30dfe58-d600-4777-99eb-edecdbe7a672
+    uuid: 909aa54d-962e-4e3b-a81d-f032d9125ac8
     country_id: *cd
-    network_id: *cd_airtel_mobile
+    network_id: *cd_vodacom_mobile
+  - id: 418783
+    prefix: '24382'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a0a7f6e9-8754-470d-bdaa-a4ed9dc0dc6d
+    country_id: *cd
+    network_id: *cd_vodacom_mobile
+  - id: 433209
+    prefix: '24384'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 213b8e13-891a-4c3a-90bd-0543f74f25b9
+    country_id: *cd
+    network_id: *cd_orange_mobile
+  - id: 441102
+    prefix: '24387'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2f6f7e57-e31b-4269-befb-3831d658441f
+    country_id: *cd
+    network_id: *cd_tatem_mobile
+  - id: 451402
+    prefix: '24389'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c80aa8fd-1db7-415e-bbdf-bfe44a5683cc
+    country_id: *cd
+    network_id: *cd_orange_mobile
+  - id: 454102
+    prefix: '24390'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eefdd735-d0c0-4b3f-8e5f-00a0381aa712
+    country_id: *cd
+    network_id: *cd_africell_mobile
+  - id: 443784
+    prefix: '24388'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 58a61b2d-c9d6-47a5-b59e-108c4f977d2c
+    country_id: *cd
+    network_id: *cd_yozma_timeturns_mobile
   - id: 231730
     prefix: '24398'
     number_min_length: 12
@@ -250,13 +218,6 @@ network_prefixes:
     uuid: a18fa07e-b0b6-4aed-a6eb-29f19970abb2
     country_id: *cd
     network_id: *cd_mobile
-  - id: 370182
-    prefix: '24344'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5b16bd79-940d-46e6-a76a-2ec3266c0b89
-    country_id: *cd
-    network_id: *cd_mobile
   - id: 377227
     prefix: '243424'
     number_min_length: 10
@@ -264,60 +225,102 @@ network_prefixes:
     uuid: 99b7905f-1f1c-43ef-9de4-5ecc72d09fe9
     country_id: *cd
     network_id: *cd_mobile
-  - id: 413671
-    prefix: '24381'
+  - id: 370182
+    prefix: '24344'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5b16bd79-940d-46e6-a76a-2ec3266c0b89
+    country_id: *cd
+    network_id: *cd_mobile
+  - id: 87910
+    prefix: '24356'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 741ceef0-e2f8-4253-804d-323ce54338f7
+    country_id: *cd
+    network_id: *cd_mobile
+  - id: 90289
+    prefix: '243573'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 07170ee8-a7bd-425e-bf1c-51d1384f45a9
+    country_id: *cd
+    network_id: *cd_mobile
+  - id: 227361
+    prefix: '24397'
     number_min_length: 12
     number_max_length: 12
-    uuid: 909aa54d-962e-4e3b-a81d-f032d9125ac8
+    uuid: c30dfe58-d600-4777-99eb-edecdbe7a672
     country_id: *cd
-    network_id: *cd_vodacom_mobile
-  - id: 418783
-    prefix: '24382'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a0a7f6e9-8754-470d-bdaa-a4ed9dc0dc6d
-    country_id: *cd
-    network_id: *cd_vodacom_mobile
-  - id: 433209
-    prefix: '24384'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 213b8e13-891a-4c3a-90bd-0543f74f25b9
-    country_id: *cd
-    network_id: *cd_orange_mobile
-  - id: 441102
-    prefix: '24387'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2f6f7e57-e31b-4269-befb-3831d658441f
-    country_id: *cd
-    network_id: *cd_tatem_mobile
-  - id: 443784
-    prefix: '24388'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 58a61b2d-c9d6-47a5-b59e-108c4f977d2c
-    country_id: *cd
-    network_id: *cd_yozma_timeturns_mobile
-  - id: 451402
-    prefix: '24389'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c80aa8fd-1db7-415e-bbdf-bfe44a5683cc
-    country_id: *cd
-    network_id: *cd_orange_mobile
-  - id: 454102
-    prefix: '24390'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eefdd735-d0c0-4b3f-8e5f-00a0381aa712
-    country_id: *cd
-    network_id: *cd_africell_mobile
-# Country code Prefixes
+    network_id: *cd_airtel_mobile
+# Fixed Prefixes
   - id: 241970
     prefix: '243'
     number_min_length: 4
     number_max_length: 100
     uuid: e588b13c-65d1-4248-b648-577196c23b81
     country_id: *cd
-    network_id: null
+    network_id: *cd_fixed
+  - id: 259236
+    prefix: '243120'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6d39c481-619b-4c4e-84e9-cd031158ba43
+    country_id: *cd
+    network_id: *cd_kinshasa_region
+  - id: 259237
+    prefix: '243121'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 89ff870d-473e-4afa-b67b-5a5a00c2627f
+    country_id: *cd
+    network_id: *cd_kinshasa_region
+  - id: 266065
+    prefix: '24315'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: caac158d-8ba3-4d05-b851-272855a773d4
+    country_id: *cd
+    network_id: *cd_kinshasa_region
+  - id: 301964
+    prefix: '24325'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d28ad908-4503-4577-85bb-223568eb2fb6
+    country_id: *cd
+    network_id: *cd_katanga_region
+  - id: 352231
+    prefix: '24335'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d10986eb-4437-45cb-99f5-88eeaf61da01
+    country_id: *cd
+    network_id: *cd_bandundu_bas_congo_region
+  - id: 349443
+    prefix: '2434'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c15392d0-c438-43a4-bd92-b0f666dce621
+    country_id: *cd
+    network_id: *cd_kinshasa_region
+  - id: 392612
+    prefix: '24345'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4546579b-cc85-4f7c-8b71-eb2c44f17a47
+    country_id: *cd
+    network_id: *cd_kasai_region
+  - id: 78115
+    prefix: '24355'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f05a92f7-73d0-496b-85ee-de89920c68a0
+    country_id: *cd
+    network_id: *cd_kisanga_mbandaka_region
+  - id: 135909
+    prefix: '24365'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aebe3ef8-5a5d-46e7-a67d-1c1b1d7178f7
+    country_id: *cd
+    network_id: *cd_maniema_nord_kivu_sud_kivu_region

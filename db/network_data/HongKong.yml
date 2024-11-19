@@ -1,6 +1,19 @@
 country_id: &hk 96
 networks:
+# Fixed Networks
+  - id: &hk_fixed 22715
+    name: HK Fixed
+    uuid: 1281d467-58c4-4164-9dea-a9b1ddb8a6cb
+    type_id: 2
+  - id: &hk_voip_region 22469
+    name: HK Voip Region
+    uuid: 1e94c128-2dba-4f2c-8000-fbb34ed1ff07
+    type_id: 2
 # Supplementary services Networks
+  - id: &hk_calling_card_services 22743
+    name: HK Calling Card Services
+    uuid: 8f76a901-227e-4e7c-aec1-8cdc1f3a1602
+    type_id: 13
   - id: &hk_special_services 21413
     name: HK Special Services
     uuid: 3e80fab9-7219-4257-8df0-ea0da181144f
@@ -13,9 +26,13 @@ networks:
     name: HK Machine To Machine M2M Services
     uuid: a15b0bb5-67ff-48a0-9f42-a378b0a28e10
     type_id: 13
-  - id: &hk_calling_card_services 22743
-    name: HK Calling Card Services
-    uuid: 8f76a901-227e-4e7c-aec1-8cdc1f3a1602
+  - id: &hk_information_services 24437
+    name: HK Information Services
+    uuid: 6ba81b34-83ec-4d08-a501-55a571e8e35d
+    type_id: 13
+  - id: &hk_emergency_services 24535
+    name: HK Emergency Services
+    uuid: 7427155f-1c4f-42c9-a740-da3361ef5353
     type_id: 13
   - id: &hk_value_added_sms_mms_services_general_information 23328
     name: HK Value Added Sms_Mms Services General Information
@@ -32,14 +49,6 @@ networks:
   - id: &hk_personal_number_services 23923
     name: HK Personal Number Services
     uuid: c15cd3ef-4ee1-4750-8ab1-1f8a74264a14
-    type_id: 13
-  - id: &hk_information_services 24437
-    name: HK Information Services
-    uuid: 6ba81b34-83ec-4d08-a501-55a571e8e35d
-    type_id: 13
-  - id: &hk_emergency_services 24535
-    name: HK Emergency Services
-    uuid: 7427155f-1c4f-42c9-a740-da3361ef5353
     type_id: 13
 # Mobile Networks
   - id: &hk_china_mobile_mobile 22310
@@ -94,23 +103,14 @@ networks:
     name: HK Hkbn Mobile
     uuid: 72b605c2-31c7-4568-ae25-f27991c98c37
     type_id: 3
-  - id: &hk_chktl_mobile 23517
-    name: HK Chktl Mobile
-    uuid: 0a434f7b-31a9-4a54-a246-a4ad6e81bdfe
-    type_id: 3
   - id: &hk_webbing_mobile 24055
     name: HK Webbing Mobile
     uuid: 08afb937-d8c1-401a-be36-673dd8035fbd
     type_id: 3
-# Fixed Networks
-  - id: &hk_voip_region 22469
-    name: HK Voip Region
-    uuid: 1e94c128-2dba-4f2c-8000-fbb34ed1ff07
-    type_id: 2
-  - id: &hk_fixed 22715
-    name: HK Fixed
-    uuid: 1281d467-58c4-4164-9dea-a9b1ddb8a6cb
-    type_id: 2
+  - id: &hk_chktl_mobile 23517
+    name: HK Chktl Mobile
+    uuid: 0a434f7b-31a9-4a54-a246-a4ad6e81bdfe
+    type_id: 3
 # Paging Networks
   - id: &hk_telecom_digital_paging 23578
     name: HK Telecom Digital Paging
@@ -122,15 +122,43 @@ networks:
     uuid: 44bc8e30-5ba3-42ea-96a3-b44ed20117b5
     type_id: 14
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 247408
+    prefix: '8522'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3022c146-20f1-4946-a0e1-a914faf44332
+    country_id: *hk
+    network_id: *hk_fixed
   - id: 242012
     prefix: '852'
     number_min_length: 4
     number_max_length: 100
     uuid: bce0af70-a2e5-4a59-9760-4ec098f409cd
     country_id: *hk
-    network_id: null
+    network_id: *hk_fixed
+  - id: 245159
+    prefix: '85258'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 668163c5-cf0d-4ca0-b8ae-24adffa751a2
+    country_id: *hk
+    network_id: *hk_voip_region
+  - id: 248901
+    prefix: '8523'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 700bfb6b-e443-4f39-9bb4-eae88fc690e2
+    country_id: *hk
+    network_id: *hk_fixed
 # Supplementary services Prefixes
+  - id: 247453
+    prefix: '85220'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: f225a850-f560-45ec-a0e9-a169e4d6dabd
+    country_id: *hk
+    network_id: *hk_calling_card_services
   - id: 242410
     prefix: '8521'
     number_min_length: 6
@@ -152,13 +180,20 @@ network_prefixes:
     uuid: 49f3d553-cfea-4b0e-8e06-67d758322d73
     country_id: *hk
     network_id: *hk_machine_to_machine_m2m_services
-  - id: 247453
-    prefix: '85220'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: f225a850-f560-45ec-a0e9-a169e4d6dabd
+  - id: 257179
+    prefix: '852900'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 84e03803-077a-412b-90ca-0f5a86cb6223
     country_id: *hk
-    network_id: *hk_calling_card_services
+    network_id: *hk_information_services
+  - id: 258184
+    prefix: '85299'
+    number_min_length: 6
+    number_max_length: 11
+    uuid: 4ad69424-e5fe-42b7-8365-b93b48400205
+    country_id: *hk
+    network_id: *hk_emergency_services
   - id: 248763
     prefix: '8522808'
     number_min_length: 11
@@ -264,20 +299,6 @@ network_prefixes:
     uuid: dc83c52f-fc3c-48c1-a0ae-892ae19fcb34
     country_id: *hk
     network_id: *hk_personal_number_services
-  - id: 257179
-    prefix: '852900'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 84e03803-077a-412b-90ca-0f5a86cb6223
-    country_id: *hk
-    network_id: *hk_information_services
-  - id: 258184
-    prefix: '85299'
-    number_min_length: 6
-    number_max_length: 11
-    uuid: 4ad69424-e5fe-42b7-8365-b93b48400205
-    country_id: *hk
-    network_id: *hk_emergency_services
 # Mobile Prefixes
   - id: 244502
     prefix: '852440'
@@ -389,6 +410,13 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 11
     uuid: d9d3bd8a-f3da-45be-b17d-f4a4f615a7e6
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 507247
+    prefix: '852449'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 412efe0c-706d-489c-96b4-e1e26f55c93c
     country_id: *hk
     network_id: *hk_3_mobile
   - id: 244643
@@ -690,6 +718,629 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 11
     uuid: 6ee1e1fa-2ab6-463b-a9a5-6844523138ff
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 253813
+    prefix: '852603'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40de643d-c7fb-4cba-9cbc-a94db42d5aa2
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 253832
+    prefix: '852604'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b9250fdb-2e52-4662-b32b-7d0207d9ad25
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 253863
+    prefix: '852605'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 868b110a-0b0f-41e0-bd8d-0ca35dea013c
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 253890
+    prefix: '852606'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84b62a05-4eb2-4b86-8ed1-812d8ca54a12
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 253911
+    prefix: '852607'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8db6cfa8-68e5-4166-a6e5-d2e5119ba982
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 253918
+    prefix: '852608'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e12be13-fb8b-4056-b538-c91861d652b3
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 253924
+    prefix: '852609'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f1328247-e08b-47ea-b0f8-ffddaddb9cf1
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 253994
+    prefix: '852610'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e9d43b9-3a65-4de8-9460-da432d203f11
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 253999
+    prefix: '852611'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d57e1e02-1527-40fd-b58f-634c4d868653
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 254015
+    prefix: '852612'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f3d96865-60d0-4d8c-a499-e698979e3352
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 254027
+    prefix: '852613'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6cd795d9-9abc-4531-8cd5-96913a5224d1
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 254042
+    prefix: '852614'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f42c5b1a-6e2b-4e95-8508-0be88f25dc4e
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 254067
+    prefix: '852615'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f68bfa47-f00f-42fa-8248-f06b2e71a31c
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254077
+    prefix: '852616'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 04935167-0096-478e-8c35-5edfe610949b
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 254083
+    prefix: '852617'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 504afa7c-5764-47a9-bd86-a8e8b5f9c3b1
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 254093
+    prefix: '852618'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ead2d7e-be93-4475-92a2-1099185d3e79
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 254098
+    prefix: '852619'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2bded36-f166-41b2-a3a7-534ac2b7362c
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 254127
+    prefix: '852620'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3497d03-8c74-4670-a16c-00d1aa7b3056
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 254146
+    prefix: '852621'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52790557-df40-43dc-a76b-0d7297176ace
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254169
+    prefix: '852622'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b03e6c28-8ed6-4934-803d-eda214418d2b
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254180
+    prefix: '852623'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 42b9c8a3-27e5-470f-8779-55beadd7d822
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254229
+    prefix: '852625'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 941bea63-7b59-499b-a11f-e3a95dec3f33
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 255391
+    prefix: '852701'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1be51a7-93d7-4386-9150-b1241f48dcaa
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 255402
+    prefix: '852702'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0421258a-aeae-4c01-858d-5d2fc3beccdd
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 507406
+    prefix: '852703'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d09740f7-ca69-422d-bf0a-b22ff6d3d221
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 251644
+    prefix: '8527071'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8604ad93-0615-4a76-93bb-c1da2d9bca88
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 251654
+    prefix: '8527072'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84494e7e-9de3-4922-b82e-ea03055f9043
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 251656
+    prefix: '8527073'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f4742946-6012-43d6-b9d1-8186dbb7e71d
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 251667
+    prefix: '8527074'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b5d6c39b-560f-4b37-b8c8-8a0beab7ec78
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 251675
+    prefix: '8527075'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5acd8560-79cd-4988-ae67-47e36e5203bb
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 251676
+    prefix: '8527076'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c59da854-0ffe-48e7-9312-def4eed104c2
+    country_id: *hk
+    network_id: *hk_multibyte_mobile
+  - id: 251677
+    prefix: '8527077'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3abb9cc1-167e-4f4a-b28c-914142aa7db0
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 251678
+    prefix: '8527078'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07995634-6f27-4151-a5bf-c003e699acd5
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 251684
+    prefix: '8527080'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd8b8ba9-d1d3-42f5-83d0-69ce0c3357a6
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 251685
+    prefix: '8527081'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65b87cd3-39b4-4dde-8b83-713853ced83e
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 251686
+    prefix: '8527082'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b59023b4-a588-456b-8177-0d5eefc18fef
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 251687
+    prefix: '8527083'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 62501607-81d8-4827-b258-58ad58dd6a89
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 251688
+    prefix: '8527084'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8cb9e2fe-bfc8-4db5-9ce1-ac8ab316b0da
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 251706
+    prefix: '852709'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e865fd8-b15c-4f5a-ba3f-0969b95920f5
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 257104
+    prefix: '8529'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 23aee0e0-ec1e-45ad-8eff-bcc4e6bd7759
+    country_id: *hk
+    network_id: *hk_mobile
+  - id: 257212
+    prefix: '852901'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d051c3c7-378e-47da-afb7-b13bd6d392ba
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 257233
+    prefix: '852902'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0df8b44f-ddb0-4881-9e46-a17f946740a0
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257240
+    prefix: '852903'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: adbce6c4-007a-4d64-915c-ff6eed08372a
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257248
+    prefix: '852904'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 118d77fd-d76d-4b91-be36-4951e68166f1
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 257266
+    prefix: '852905'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2fcd3feb-5aaa-42fc-ba6f-2aa279fbdc3d
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 257293
+    prefix: '852906'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 214cf862-7d4d-4358-b043-8eb6ad9a73f1
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 257303
+    prefix: '852907'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 64188242-f2b6-4899-8958-c30ff557c1b5
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257317
+    prefix: '852908'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 72997fb0-152c-4293-80fa-af7b4864575d
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257344
+    prefix: '852909'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b02d664-5010-47fb-9482-1626b4e7b4fc
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257377
+    prefix: '852910'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cb044918-bfac-46d8-8b9f-670f7788e47d
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257409
+    prefix: '852912'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 112aa720-ecf7-4ac7-bb45-3651ee9a70bc
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 257429
+    prefix: '852913'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87238427-1e44-4780-8a0e-10d5d02c3d00
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 257452
+    prefix: '852914'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2693ba63-a771-4a04-a213-c09437b80f0f
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 257457
+    prefix: '852915'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c1430360-6146-4d85-8950-07fe94af172b
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257481
+    prefix: '852916'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0fb3219d-d60b-46fa-8633-7c152314520c
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 257487
+    prefix: '852917'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3d1deaf-8779-48f2-8df3-351ee1350ae5
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 257492
+    prefix: '852918'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0308fb2f-109b-478a-8873-670e53b849e6
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257507
+    prefix: '852919'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d511b58c-dd41-4ae3-affa-2b45e389fc94
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257602
+    prefix: '852920'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2cdda957-5535-46ed-a52f-00fc4ebc9756
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 257622
+    prefix: '852921'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e2b79ea6-3a29-4a51-ae7b-16717611d44b
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257650
+    prefix: '852922'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7be531d-ae30-4d13-b1ed-df43543079c8
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 257673
+    prefix: '852923'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e4c9544-dc10-4699-bed1-074415ab4c78
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257708
+    prefix: '852924'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ef0d5879-47f6-4208-82e0-02aef84b892a
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 257724
+    prefix: '852925'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0972c8e4-35ee-4f06-92c6-7b2aa4567c34
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257741
+    prefix: '852926'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 61e2cea5-b8ca-473c-ad01-9105d7527d38
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257766
+    prefix: '852927'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 872ad870-1c35-41ed-aa44-d8522c1ae1fb
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257801
+    prefix: '852928'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: de8b1c31-f3b9-4c6a-8dbe-4b7b41bb2014
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 257820
+    prefix: '8529290'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bd0c22e1-0751-4670-b766-778d99ecf06f
+    country_id: *hk
+    network_id: *hk_multibyte_mobile
+  - id: 257824
+    prefix: '8529291'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 37e97a60-4709-4cba-8cd2-63705b41fb9e
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257831
+    prefix: '8529293'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be16d9f4-f983-4234-9d8e-b40e4862de69
+    country_id: *hk
+    network_id: *hk_china_unicom_mobile
+  - id: 257835
+    prefix: '8529294'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a435cc89-2954-4ac8-9a28-7b177d8e39f9
+    country_id: *hk
+    network_id: *hk_china_unicom_mobile
+  - id: 257839
+    prefix: '8529295'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cbfd74b-c27a-4988-a6ff-9e6ba7cca173
+    country_id: *hk
+    network_id: *hk_china_unicom_mobile
+  - id: 257844
+    prefix: '8529296'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7068d861-4faa-4214-a536-92fcd851ca77
+    country_id: *hk
+    network_id: *hk_china_unicom_mobile
+  - id: 257848
+    prefix: '8529297'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cf20bdd-cb2c-48de-92dd-c9127f3a223a
+    country_id: *hk
+    network_id: *hk_china_unicom_mobile
+  - id: 257852
+    prefix: '8529298'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 60dd1f90-ee7b-4bfc-bf3e-498df701365f
+    country_id: *hk
+    network_id: *hk_china_unicom_mobile
+  - id: 257856
+    prefix: '8529299'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c3ca19c-bed5-4915-9676-b7e862d4c456
+    country_id: *hk
+    network_id: *hk_china_unicom_mobile
+  - id: 265190
+    prefix: '852977'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1ca6f43-9228-403b-a1bd-8c33e8c90ab4
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 265214
+    prefix: '852978'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 44bf11ba-e45b-4201-8b5a-6c03b077ffaa
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 265238
+    prefix: '852979'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3eee5dc8-15b3-4514-9865-5e4aee6a5f00
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 257979
+    prefix: '852980'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b8532c2-a517-4450-9ff0-32520f4017ca
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 258010
+    prefix: '852981'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cf366fe6-e27e-4f38-9401-e3ad436280cb
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 258038
+    prefix: '852982'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4463f91-e722-4e60-b016-442f94b337e7
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 258072
+    prefix: '852983'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 565b54a9-5d61-4aac-9831-33fcfee57c80
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 258096
+    prefix: '852984'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ec61d58-a301-4b30-bfce-f98c109d1c0b
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 258111
+    prefix: '852985'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8c3411a3-10fd-446e-8fae-eac38fcca970
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 258126
+    prefix: '852986'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ee850cd7-3b6e-4baa-8592-4608fc0f00ec
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 258131
+    prefix: '852987'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84d1ace1-8873-4536-8944-48670e237294
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 258140
+    prefix: '852988'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fb9de244-2175-4b52-b1ae-b02dcf6c4d9c
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 258168
+    prefix: '8529899'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65a848d2-ba04-4de8-9ffa-6fad8048171a
     country_id: *hk
     network_id: *hk_sun_mobile_mobile
   - id: 249094
@@ -1210,6 +1861,34 @@ network_prefixes:
     uuid: 2c3d84c0-a1a0-482e-9fd2-4c106dacb643
     country_id: *hk
     network_id: *hk_sct_mobile
+  - id: 509239
+    prefix: '852470'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c85c13e4-2628-42f0-be99-8381602777a8
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 509240
+    prefix: '8524740'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 695cff7e-ee6d-4a7b-965f-e83cd590c00b
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 509241
+    prefix: '8524741'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4fe40c93-bfab-4eb1-b1d5-e1143d9020aa
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 509242
+    prefix: '8524742'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6cddcac9-8172-42c0-84e8-7b4cb7861cbe
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
   - id: 249706
     prefix: '852510'
     number_min_length: 11
@@ -2092,6 +2771,55 @@ network_prefixes:
     uuid: e4cd14bd-3c6d-4d6d-8da3-30b43ed2f277
     country_id: *hk
     network_id: *hk_ctexcel_mobile
+  - id: 254255
+    prefix: '8526261'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6bc53ac1-adb4-4829-9a54-540544429f45
+    country_id: *hk
+    network_id: *hk_webbing_mobile
+  - id: 254260
+    prefix: '8526263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c59c0281-8f6f-4d8a-b8e9-849f94300677
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254263
+    prefix: '8526264'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c2c6342-1672-4457-b972-f32695e8fb16
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254266
+    prefix: '8526265'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a5c0873-e5e7-44c5-8713-40cc647dbd96
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254269
+    prefix: '8526266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b18df782-35ee-4855-baf2-316838d8366d
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254272
+    prefix: '8526267'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: da1c51ab-33ad-4199-b490-117714abe543
+    country_id: *hk
+    network_id: *hk_china_mobile_mobile
+  - id: 254274
+    prefix: '8526268'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1486d65d-e04d-433d-a087-6f7513ef60db
+    country_id: *hk
+    network_id: *hk_multibyte_mobile
   - id: 250548
     prefix: '852627'
     number_min_length: 11
@@ -2379,328 +3107,6 @@ network_prefixes:
     uuid: 96f9c4f7-a927-43e5-81fc-cad3f7e1739c
     country_id: *hk
     network_id: *hk_sun_mobile_mobile
-  - id: 251644
-    prefix: '8527071'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8604ad93-0615-4a76-93bb-c1da2d9bca88
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 251654
-    prefix: '8527072'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 84494e7e-9de3-4922-b82e-ea03055f9043
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 251656
-    prefix: '8527073'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f4742946-6012-43d6-b9d1-8186dbb7e71d
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 251667
-    prefix: '8527074'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b5d6c39b-560f-4b37-b8c8-8a0beab7ec78
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 251675
-    prefix: '8527075'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5acd8560-79cd-4988-ae67-47e36e5203bb
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 251676
-    prefix: '8527076'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c59da854-0ffe-48e7-9312-def4eed104c2
-    country_id: *hk
-    network_id: *hk_multibyte_mobile
-  - id: 251677
-    prefix: '8527077'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3abb9cc1-167e-4f4a-b28c-914142aa7db0
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 251678
-    prefix: '8527078'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07995634-6f27-4151-a5bf-c003e699acd5
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 251684
-    prefix: '8527080'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd8b8ba9-d1d3-42f5-83d0-69ce0c3357a6
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 251685
-    prefix: '8527081'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 65b87cd3-39b4-4dde-8b83-713853ced83e
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 251686
-    prefix: '8527082'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b59023b4-a588-456b-8177-0d5eefc18fef
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 251687
-    prefix: '8527083'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 62501607-81d8-4827-b258-58ad58dd6a89
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 251688
-    prefix: '8527084'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8cb9e2fe-bfc8-4db5-9ce1-ac8ab316b0da
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 251706
-    prefix: '852709'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e865fd8-b15c-4f5a-ba3f-0969b95920f5
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 253730
-    prefix: '852840'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 28ebb913-56d4-4a3c-bd4a-779af4041638
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 253745
-    prefix: '852841'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 70df4d15-b81d-473e-afe4-8bfac0467496
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 253761
-    prefix: '852842'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 22e778d2-8be0-4fff-a180-d541193b2385
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 253813
-    prefix: '852603'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 40de643d-c7fb-4cba-9cbc-a94db42d5aa2
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 253832
-    prefix: '852604'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b9250fdb-2e52-4662-b32b-7d0207d9ad25
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 253863
-    prefix: '852605'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 868b110a-0b0f-41e0-bd8d-0ca35dea013c
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 253890
-    prefix: '852606'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 84b62a05-4eb2-4b86-8ed1-812d8ca54a12
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 253911
-    prefix: '852607'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8db6cfa8-68e5-4166-a6e5-d2e5119ba982
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 253918
-    prefix: '852608'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e12be13-fb8b-4056-b538-c91861d652b3
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 253924
-    prefix: '852609'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f1328247-e08b-47ea-b0f8-ffddaddb9cf1
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 253994
-    prefix: '852610'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4e9d43b9-3a65-4de8-9460-da432d203f11
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 253999
-    prefix: '852611'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d57e1e02-1527-40fd-b58f-634c4d868653
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 254015
-    prefix: '852612'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f3d96865-60d0-4d8c-a499-e698979e3352
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 254027
-    prefix: '852613'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6cd795d9-9abc-4531-8cd5-96913a5224d1
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 254042
-    prefix: '852614'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f42c5b1a-6e2b-4e95-8508-0be88f25dc4e
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 254067
-    prefix: '852615'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f68bfa47-f00f-42fa-8248-f06b2e71a31c
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254077
-    prefix: '852616'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 04935167-0096-478e-8c35-5edfe610949b
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 254083
-    prefix: '852617'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 504afa7c-5764-47a9-bd86-a8e8b5f9c3b1
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 254093
-    prefix: '852618'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4ead2d7e-be93-4475-92a2-1099185d3e79
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 254098
-    prefix: '852619'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c2bded36-f166-41b2-a3a7-534ac2b7362c
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 254127
-    prefix: '852620'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d3497d03-8c74-4670-a16c-00d1aa7b3056
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 254146
-    prefix: '852621'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52790557-df40-43dc-a76b-0d7297176ace
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254169
-    prefix: '852622'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b03e6c28-8ed6-4934-803d-eda214418d2b
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254180
-    prefix: '852623'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 42b9c8a3-27e5-470f-8779-55beadd7d822
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254229
-    prefix: '852625'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 941bea63-7b59-499b-a11f-e3a95dec3f33
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 254255
-    prefix: '8526261'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6bc53ac1-adb4-4829-9a54-540544429f45
-    country_id: *hk
-    network_id: *hk_webbing_mobile
-  - id: 254260
-    prefix: '8526263'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c59c0281-8f6f-4d8a-b8e9-849f94300677
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254263
-    prefix: '8526264'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1c2c6342-1672-4457-b972-f32695e8fb16
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254266
-    prefix: '8526265'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6a5c0873-e5e7-44c5-8713-40cc647dbd96
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254269
-    prefix: '8526266'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b18df782-35ee-4855-baf2-316838d8366d
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254272
-    prefix: '8526267'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: da1c51ab-33ad-4199-b490-117714abe543
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-  - id: 254274
-    prefix: '8526268'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1486d65d-e04d-433d-a087-6f7513ef60db
-    country_id: *hk
-    network_id: *hk_multibyte_mobile
   - id: 254306
     prefix: '852660'
     number_min_length: 11
@@ -2967,377 +3373,55 @@ network_prefixes:
     uuid: 8e8647ad-973c-4f2e-9fd9-756ad0d4e4ba
     country_id: *hk
     network_id: *hk_china_mobile_mobile
-  - id: 255391
-    prefix: '852701'
+  - id: 253730
+    prefix: '852840'
     number_min_length: 11
     number_max_length: 11
-    uuid: e1be51a7-93d7-4386-9150-b1241f48dcaa
+    uuid: 28ebb913-56d4-4a3c-bd4a-779af4041638
     country_id: *hk
     network_id: *hk_china_mobile_mobile
-  - id: 255402
-    prefix: '852702'
+  - id: 253745
+    prefix: '852841'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0421258a-aeae-4c01-858d-5d2fc3beccdd
+    uuid: 70df4d15-b81d-473e-afe4-8bfac0467496
     country_id: *hk
     network_id: *hk_3_mobile
-  - id: 257104
-    prefix: '8529'
+  - id: 253761
+    prefix: '852842'
     number_min_length: 11
     number_max_length: 11
-    uuid: 23aee0e0-ec1e-45ad-8eff-bcc4e6bd7759
-    country_id: *hk
-    network_id: *hk_mobile
-  - id: 257212
-    prefix: '852901'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d051c3c7-378e-47da-afb7-b13bd6d392ba
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 257233
-    prefix: '852902'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0df8b44f-ddb0-4881-9e46-a17f946740a0
+    uuid: 22e778d2-8be0-4fff-a180-d541193b2385
     country_id: *hk
     network_id: *hk_sun_mobile_mobile
-  - id: 257240
-    prefix: '852903'
+  - id: 510941
+    prefix: '852843'
     number_min_length: 11
     number_max_length: 11
-    uuid: adbce6c4-007a-4d64-915c-ff6eed08372a
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257248
-    prefix: '852904'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 118d77fd-d76d-4b91-be36-4951e68166f1
+    uuid: b92f1bfa-299f-4b31-bf0e-6eccab6a39c2
     country_id: *hk
     network_id: *hk_3_mobile
-  - id: 257266
-    prefix: '852905'
+  - id: 510943
+    prefix: '8528440'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2fcd3feb-5aaa-42fc-ba6f-2aa279fbdc3d
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 257293
-    prefix: '852906'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 214cf862-7d4d-4358-b043-8eb6ad9a73f1
+    uuid: 358a9505-7e8a-4f89-9a8b-9da725860f15
     country_id: *hk
     network_id: *hk_china_mobile_mobile
-  - id: 257303
-    prefix: '852907'
+  - id: 510944
+    prefix: '8528441'
     number_min_length: 11
     number_max_length: 11
-    uuid: 64188242-f2b6-4899-8958-c30ff557c1b5
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257317
-    prefix: '852908'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 72997fb0-152c-4293-80fa-af7b4864575d
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257344
-    prefix: '852909'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b02d664-5010-47fb-9482-1626b4e7b4fc
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257377
-    prefix: '852910'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cb044918-bfac-46d8-8b9f-670f7788e47d
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257409
-    prefix: '852912'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 112aa720-ecf7-4ac7-bb45-3651ee9a70bc
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 257429
-    prefix: '852913'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 87238427-1e44-4780-8a0e-10d5d02c3d00
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 257452
-    prefix: '852914'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2693ba63-a771-4a04-a213-c09437b80f0f
+    uuid: 0af038c6-dad1-4147-b4a8-b62277737b4e
     country_id: *hk
     network_id: *hk_china_mobile_mobile
-  - id: 257457
-    prefix: '852915'
+  - id: 510945
+    prefix: '8528442'
     number_min_length: 11
     number_max_length: 11
-    uuid: c1430360-6146-4d85-8950-07fe94af172b
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257481
-    prefix: '852916'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0fb3219d-d60b-46fa-8633-7c152314520c
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 257487
-    prefix: '852917'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d3d1deaf-8779-48f2-8df3-351ee1350ae5
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 257492
-    prefix: '852918'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0308fb2f-109b-478a-8873-670e53b849e6
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257507
-    prefix: '852919'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d511b58c-dd41-4ae3-affa-2b45e389fc94
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257602
-    prefix: '852920'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2cdda957-5535-46ed-a52f-00fc4ebc9756
+    uuid: 9c7546a8-f01b-472d-a4ea-32800ca8e085
     country_id: *hk
     network_id: *hk_china_mobile_mobile
-  - id: 257622
-    prefix: '852921'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e2b79ea6-3a29-4a51-ae7b-16717611d44b
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257650
-    prefix: '852922'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d7be531d-ae30-4d13-b1ed-df43543079c8
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 257673
-    prefix: '852923'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e4c9544-dc10-4699-bed1-074415ab4c78
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257708
-    prefix: '852924'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef0d5879-47f6-4208-82e0-02aef84b892a
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 257724
-    prefix: '852925'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0972c8e4-35ee-4f06-92c6-7b2aa4567c34
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257741
-    prefix: '852926'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 61e2cea5-b8ca-473c-ad01-9105d7527d38
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257766
-    prefix: '852927'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 872ad870-1c35-41ed-aa44-d8522c1ae1fb
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257801
-    prefix: '852928'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: de8b1c31-f3b9-4c6a-8dbe-4b7b41bb2014
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 257820
-    prefix: '8529290'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bd0c22e1-0751-4670-b766-778d99ecf06f
-    country_id: *hk
-    network_id: *hk_multibyte_mobile
-  - id: 257824
-    prefix: '8529291'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 37e97a60-4709-4cba-8cd2-63705b41fb9e
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257831
-    prefix: '8529293'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be16d9f4-f983-4234-9d8e-b40e4862de69
-    country_id: *hk
-    network_id: *hk_china_unicom_mobile
-  - id: 257835
-    prefix: '8529294'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a435cc89-2954-4ac8-9a28-7b177d8e39f9
-    country_id: *hk
-    network_id: *hk_china_unicom_mobile
-  - id: 257839
-    prefix: '8529295'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1cbfd74b-c27a-4988-a6ff-9e6ba7cca173
-    country_id: *hk
-    network_id: *hk_china_unicom_mobile
-  - id: 257844
-    prefix: '8529296'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7068d861-4faa-4214-a536-92fcd851ca77
-    country_id: *hk
-    network_id: *hk_china_unicom_mobile
-  - id: 257848
-    prefix: '8529297'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1cf20bdd-cb2c-48de-92dd-c9127f3a223a
-    country_id: *hk
-    network_id: *hk_china_unicom_mobile
-  - id: 257852
-    prefix: '8529298'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 60dd1f90-ee7b-4bfc-bf3e-498df701365f
-    country_id: *hk
-    network_id: *hk_china_unicom_mobile
-  - id: 257856
-    prefix: '8529299'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9c3ca19c-bed5-4915-9676-b7e862d4c456
-    country_id: *hk
-    network_id: *hk_china_unicom_mobile
-  - id: 257876
-    prefix: '852930'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4a29154-7632-4bd8-9b56-ae36acb3ad7c
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257881
-    prefix: '852931'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e3873c6e-0a43-473d-8cfe-0308b9108ac9
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 257907
-    prefix: '852932'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b4200d3-5350-4130-a1fe-0032284107f5
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 257941
-    prefix: '852933'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cdd55da4-840e-4c94-8133-2db1c4a8275d
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 257979
-    prefix: '852980'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0b8532c2-a517-4450-9ff0-32520f4017ca
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 258010
-    prefix: '852981'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cf366fe6-e27e-4f38-9401-e3ad436280cb
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 258038
-    prefix: '852982'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4463f91-e722-4e60-b016-442f94b337e7
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 258072
-    prefix: '852983'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 565b54a9-5d61-4aac-9831-33fcfee57c80
-    country_id: *hk
-    network_id: *hk_3_mobile
-  - id: 258096
-    prefix: '852984'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6ec61d58-a301-4b30-bfce-f98c109d1c0b
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 258111
-    prefix: '852985'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8c3411a3-10fd-446e-8fae-eac38fcca970
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 258126
-    prefix: '852986'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ee850cd7-3b6e-4baa-8592-4608fc0f00ec
-    country_id: *hk
-    network_id: *hk_smartone_mobile
-  - id: 258131
-    prefix: '852987'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 84d1ace1-8873-4536-8944-48670e237294
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 258140
-    prefix: '852988'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fb9de244-2175-4b52-b1ae-b02dcf6c4d9c
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 258168
-    prefix: '8529899'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 65a848d2-ba04-4de8-9ffa-6fad8048171a
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
   - id: 263671
     prefix: '8528480'
     number_min_length: 11
@@ -3408,6 +3492,34 @@ network_prefixes:
     uuid: 1a07d1a9-0c8e-49dd-a74e-977a9fcd971a
     country_id: *hk
     network_id: *hk_china_mobile_mobile
+  - id: 257876
+    prefix: '852930'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4a29154-7632-4bd8-9b56-ae36acb3ad7c
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
+  - id: 257881
+    prefix: '852931'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e3873c6e-0a43-473d-8cfe-0308b9108ac9
+    country_id: *hk
+    network_id: *hk_smartone_mobile
+  - id: 257907
+    prefix: '852932'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b4200d3-5350-4130-a1fe-0032284107f5
+    country_id: *hk
+    network_id: *hk_3_mobile
+  - id: 257941
+    prefix: '852933'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cdd55da4-840e-4c94-8133-2db1c4a8275d
+    country_id: *hk
+    network_id: *hk_sun_mobile_mobile
   - id: 264033
     prefix: '852934'
     number_min_length: 11
@@ -3744,49 +3856,6 @@ network_prefixes:
     uuid: e74d231f-e838-4eab-86e6-6af7da1c4665
     country_id: *hk
     network_id: *hk_sun_mobile_mobile
-  - id: 265190
-    prefix: '852977'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e1ca6f43-9228-403b-a1bd-8c33e8c90ab4
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 265214
-    prefix: '852978'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 44bf11ba-e45b-4201-8b5a-6c03b077ffaa
-    country_id: *hk
-    network_id: *hk_sun_mobile_mobile
-  - id: 265238
-    prefix: '852979'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3eee5dc8-15b3-4514-9865-5e4aee6a5f00
-    country_id: *hk
-    network_id: *hk_china_mobile_mobile
-# Fixed Prefixes
-  - id: 245159
-    prefix: '85258'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 668163c5-cf0d-4ca0-b8ae-24adffa751a2
-    country_id: *hk
-    network_id: *hk_voip_region
-  - id: 247408
-    prefix: '8522'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3022c146-20f1-4946-a0e1-a914faf44332
-    country_id: *hk
-    network_id: *hk_fixed
-  - id: 248901
-    prefix: '8523'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 700bfb6b-e443-4f39-9bb4-eae88fc690e2
-    country_id: *hk
-    network_id: *hk_fixed
 # Paging Prefixes
   - id: 251750
     prefix: '8527100'

@@ -1,38 +1,13 @@
 country_id: &sb 194
 networks:
-# Supplementary services Networks
-  - id: &sb_special_services 21484
-    name: SB Special Services
-    uuid: 07e5f2df-62b0-4e6d-b8cf-b28c7014533b
-    type_id: 13
-  - id: &sb_freephone_services 21750
-    name: SB Freephone Services
-    uuid: 80cadfab-d2b7-440e-a864-4d639e31465f
-    type_id: 13
-  - id: &sb_postpaid_platform_services 23281
-    name: SB Postpaid Platform Services
-    uuid: a4e5360f-f8fd-4734-bfce-7ee4c2acc2bd
-    type_id: 13
-  - id: &sb_anz_banking_overseas 23991
-    name: SB Anz Banking Overseas
-    uuid: c854c000-cd88-438a-b42c-dedaceaf13a7
-    type_id: 13
-  - id: &sb_marketing_campaign_buzz_me_up 24252
-    name: SB Marketing Campaign Buzz Me Up
-    uuid: c46f98f2-8e2c-47f2-8f46-2e3b183692b9
-    type_id: 13
-  - id: &sb_emergency_services 24411
-    name: SB Emergency Services
-    uuid: 89c782b4-c770-4a87-9cb5-067b64aa433e
-    type_id: 13
-  - id: &sb_directory_enquiry_services_national 24456
-    name: SB Directory Enquiry Services National
-    uuid: 9172a993-9ff3-431b-9ff0-de07f3fb7568
-    type_id: 13
 # Fixed Networks
   - id: &sb_honiara_region 21774
     name: SB Honiara Region
     uuid: 811f72ae-fabe-424b-b5d6-c90c0f4a728d
+    type_id: 2
+  - id: &sb_fixed 43459
+    name: SB Fixed
+    uuid: ec772403-31ac-48aa-8d96-c9c70dcbe4b9
     type_id: 2
   - id: &sb_king_george_vi_high_school_kgvi_region 21910
     name: SB King George Vi High School Kgvi Region
@@ -106,6 +81,14 @@ networks:
     name: SB Gizo Region
     uuid: 3c7aa6ad-410a-4607-8712-9ddeec77e1e5
     type_id: 2
+  - id: &sb_noro_region 24034
+    name: SB Noro Region
+    uuid: 6fa22125-4daf-4f88-9795-a8748b05f3fa
+    type_id: 2
+  - id: &sb_munda_region 23426
+    name: SB Munda Region
+    uuid: f8c28ae7-e39b-4cd0-8bcc-bda3ac43d48c
+    type_id: 2
   - id: &sb_kira_kira_region 23323
     name: SB Kira Kira Region
     uuid: fc452bfa-2353-433a-b71f-fcf7b4b30154
@@ -118,17 +101,9 @@ networks:
     name: SB Lata Region
     uuid: cd39a534-7b1a-4087-9dcd-53234a5edb4b
     type_id: 2
-  - id: &sb_munda_region 23426
-    name: SB Munda Region
-    uuid: f8c28ae7-e39b-4cd0-8bcc-bda3ac43d48c
-    type_id: 2
   - id: &sb_taro_region 23442
     name: SB Taro Region
     uuid: 7354c359-d679-4f3d-9d1a-64fb4eb143ec
-    type_id: 2
-  - id: &sb_noro_region 24034
-    name: SB Noro Region
-    uuid: 6fa22125-4daf-4f88-9795-a8748b05f3fa
     type_id: 2
   - id: &sb_sasamunga_region 24087
     name: SB Sasamunga Region
@@ -146,6 +121,35 @@ networks:
     name: SB Ringgi Region
     uuid: 4e95ba84-ca26-4c1b-8f9e-ad71870b8360
     type_id: 2
+# Supplementary services Networks
+  - id: &sb_freephone_services 21750
+    name: SB Freephone Services
+    uuid: 80cadfab-d2b7-440e-a864-4d639e31465f
+    type_id: 13
+  - id: &sb_special_services 21484
+    name: SB Special Services
+    uuid: 07e5f2df-62b0-4e6d-b8cf-b28c7014533b
+    type_id: 13
+  - id: &sb_emergency_services 24411
+    name: SB Emergency Services
+    uuid: 89c782b4-c770-4a87-9cb5-067b64aa433e
+    type_id: 13
+  - id: &sb_directory_enquiry_services_national 24456
+    name: SB Directory Enquiry Services National
+    uuid: 9172a993-9ff3-431b-9ff0-de07f3fb7568
+    type_id: 13
+  - id: &sb_postpaid_platform_services 23281
+    name: SB Postpaid Platform Services
+    uuid: a4e5360f-f8fd-4734-bfce-7ee4c2acc2bd
+    type_id: 13
+  - id: &sb_marketing_campaign_buzz_me_up 24252
+    name: SB Marketing Campaign Buzz Me Up
+    uuid: c46f98f2-8e2c-47f2-8f46-2e3b183692b9
+    type_id: 13
+  - id: &sb_anz_banking_overseas 23991
+    name: SB Anz Banking Overseas
+    uuid: c854c000-cd88-438a-b42c-dedaceaf13a7
+    type_id: 13
 # Mobile Networks
   - id: &sb_breeze_mobile 23605
     name: SB Breeze Mobile
@@ -164,72 +168,35 @@ networks:
     uuid: c82686f2-d0a7-4928-9e97-92df6484c2f8
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 243065
+    prefix: '67717'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 3bce608f-0a2a-4db1-8128-3f41614ab3fb
+    country_id: *sb
+    network_id: *sb_honiara_region
+  - id: 247344
+    prefix: '67719'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 89e49044-52e1-40f8-b863-fe22d2174ef1
+    country_id: *sb
+    network_id: *sb_honiara_region
+  - id: 247435
+    prefix: '6772'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ecbb2ed3-9196-4258-8af7-390543f66df4
+    country_id: *sb
+    network_id: *sb_honiara_region
   - id: 242097
     prefix: '677'
     number_min_length: 4
     number_max_length: 100
     uuid: 0808dc1e-9ad8-4cd6-b347-81ac1d88b1e1
     country_id: *sb
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242489
-    prefix: '6771'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 4a1ab676-4c31-4642-b56e-f74c5f66e5b7
-    country_id: *sb
-    network_id: *sb_special_services
-  - id: 242861
-    prefix: '67713'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 6709b44b-1daa-4572-b18f-3482975a21f7
-    country_id: *sb
-    network_id: *sb_freephone_services
-  - id: 247286
-    prefix: '67718'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 92fef1d6-c9ac-4dde-a4b3-0d92a09a2c51
-    country_id: *sb
-    network_id: *sb_freephone_services
-  - id: 249430
-    prefix: '67748'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: b89e1cb5-ac9b-4805-ae1b-ac5e4a8ab2b2
-    country_id: *sb
-    network_id: *sb_postpaid_platform_services
-  - id: 253645
-    prefix: '677835'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 3a0bd8fb-e5b0-4209-a6ed-68c9661faff1
-    country_id: *sb
-    network_id: *sb_anz_banking_overseas
-  - id: 255965
-    prefix: '677777'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 808a9988-de6a-4606-b2c9-39ebbdc55ece
-    country_id: *sb
-    network_id: *sb_marketing_campaign_buzz_me_up
-  - id: 257138
-    prefix: '6779'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 259e624e-195b-4dd6-b6d5-9ddbec2ae020
-    country_id: *sb
-    network_id: *sb_emergency_services
-  - id: 257220
-    prefix: '677901'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 37b186aa-8be1-4a8d-bcec-88823ca24bf6
-    country_id: *sb
-    network_id: *sb_directory_enquiry_services_national
-# Fixed Prefixes
+    network_id: *sb_fixed
   - id: 242911
     prefix: '67714'
     number_min_length: 8
@@ -249,13 +216,6 @@ network_prefixes:
     number_min_length: 8
     number_max_length: 8
     uuid: 00cd6e78-7076-4978-8bf0-ca09ffff1083
-    country_id: *sb
-    network_id: *sb_honiara_region
-  - id: 243065
-    prefix: '67717'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 3bce608f-0a2a-4db1-8128-3f41614ab3fb
     country_id: *sb
     network_id: *sb_honiara_region
   - id: 243240
@@ -552,20 +512,48 @@ network_prefixes:
     uuid: b0b8f8a3-1e3b-43c5-8de2-2ffdb586caa0
     country_id: *sb
     network_id: *sb_gizo_region
-  - id: 247344
-    prefix: '67719'
+  - id: 253990
+    prefix: '67761'
     number_min_length: 8
     number_max_length: 8
-    uuid: 89e49044-52e1-40f8-b863-fe22d2174ef1
+    uuid: a71641a9-f433-4672-92a1-a0c4d1ea6da5
     country_id: *sb
-    network_id: *sb_honiara_region
-  - id: 247435
-    prefix: '6772'
+    network_id: *sb_noro_region
+  - id: 254151
+    prefix: '677621'
     number_min_length: 8
     number_max_length: 8
-    uuid: ecbb2ed3-9196-4258-8af7-390543f66df4
+    uuid: eb2d32da-85d0-40b7-aa0a-d75ef5a34f58
     country_id: *sb
-    network_id: *sb_honiara_region
+    network_id: *sb_munda_region
+  - id: 254174
+    prefix: '677622'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 604bcf12-4411-4697-b9cb-83570ef78926
+    country_id: *sb
+    network_id: *sb_munda_region
+  - id: 254184
+    prefix: '677623'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: a3eb7383-5e0b-4bcf-94f1-8f3023612016
+    country_id: *sb
+    network_id: *sb_munda_region
+  - id: 254215
+    prefix: '677624'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 88303d6a-8c26-4856-9137-dd83db3cf8a7
+    country_id: *sb
+    network_id: *sb_munda_region
+  - id: 254233
+    prefix: '677625'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f27a0606-2ac5-4843-89a5-9f8320a89608
+    country_id: *sb
+    network_id: *sb_munda_region
   - id: 248941
     prefix: '67730'
     number_min_length: 8
@@ -594,6 +582,13 @@ network_prefixes:
     uuid: 32ea00b9-3996-41e0-b724-177206ab579a
     country_id: *sb
     network_id: *sb_lata_region
+  - id: 254253
+    prefix: '677626'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 49389594-ba74-4185-9397-83851abc050f
+    country_id: *sb
+    network_id: *sb_munda_region
   - id: 250550
     prefix: '677627'
     number_min_length: 8
@@ -650,55 +645,6 @@ network_prefixes:
     uuid: 2fae2a29-c782-4b4b-8a8a-12637e0d8fdc
     country_id: *sb
     network_id: *sb_taro_region
-  - id: 253990
-    prefix: '67761'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: a71641a9-f433-4672-92a1-a0c4d1ea6da5
-    country_id: *sb
-    network_id: *sb_noro_region
-  - id: 254151
-    prefix: '677621'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: eb2d32da-85d0-40b7-aa0a-d75ef5a34f58
-    country_id: *sb
-    network_id: *sb_munda_region
-  - id: 254174
-    prefix: '677622'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 604bcf12-4411-4697-b9cb-83570ef78926
-    country_id: *sb
-    network_id: *sb_munda_region
-  - id: 254184
-    prefix: '677623'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: a3eb7383-5e0b-4bcf-94f1-8f3023612016
-    country_id: *sb
-    network_id: *sb_munda_region
-  - id: 254215
-    prefix: '677624'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 88303d6a-8c26-4856-9137-dd83db3cf8a7
-    country_id: *sb
-    network_id: *sb_munda_region
-  - id: 254233
-    prefix: '677625'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: f27a0606-2ac5-4843-89a5-9f8320a89608
-    country_id: *sb
-    network_id: *sb_munda_region
-  - id: 254253
-    prefix: '677626'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 49389594-ba74-4185-9397-83851abc050f
-    country_id: *sb
-    network_id: *sb_munda_region
   - id: 254634
     prefix: '677673'
     number_min_length: 8
@@ -783,6 +729,63 @@ network_prefixes:
     uuid: 50520867-d292-40e2-91de-26272ee96740
     country_id: *sb
     network_id: *sb_ringgi_region
+# Supplementary services Prefixes
+  - id: 247286
+    prefix: '67718'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 92fef1d6-c9ac-4dde-a4b3-0d92a09a2c51
+    country_id: *sb
+    network_id: *sb_freephone_services
+  - id: 242489
+    prefix: '6771'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 4a1ab676-4c31-4642-b56e-f74c5f66e5b7
+    country_id: *sb
+    network_id: *sb_special_services
+  - id: 242861
+    prefix: '67713'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 6709b44b-1daa-4572-b18f-3482975a21f7
+    country_id: *sb
+    network_id: *sb_freephone_services
+  - id: 257138
+    prefix: '6779'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 259e624e-195b-4dd6-b6d5-9ddbec2ae020
+    country_id: *sb
+    network_id: *sb_emergency_services
+  - id: 257220
+    prefix: '677901'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 37b186aa-8be1-4a8d-bcec-88823ca24bf6
+    country_id: *sb
+    network_id: *sb_directory_enquiry_services_national
+  - id: 249430
+    prefix: '67748'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b89e1cb5-ac9b-4805-ae1b-ac5e4a8ab2b2
+    country_id: *sb
+    network_id: *sb_postpaid_platform_services
+  - id: 255965
+    prefix: '677777'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 808a9988-de6a-4606-b2c9-39ebbdc55ece
+    country_id: *sb
+    network_id: *sb_marketing_campaign_buzz_me_up
+  - id: 253645
+    prefix: '677835'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 3a0bd8fb-e5b0-4209-a6ed-68c9661faff1
+    country_id: *sb
+    network_id: *sb_anz_banking_overseas
 # Mobile Prefixes
   - id: 251889
     prefix: '677730'
@@ -805,83 +808,13 @@ network_prefixes:
     uuid: ea5f549b-aefd-47b3-82f9-94221e9e6c06
     country_id: *sb
     network_id: *sb_breeze_mobile
-  - id: 253728
-    prefix: '67784'
+  - id: 264014
+    prefix: '67787'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9feae69e-9a63-4e29-bc27-2565da739d0f
+    uuid: 3e8b36d1-b7a7-4214-b68a-ca3374ee7e5d
     country_id: *sb
     network_id: *sb_bemobile_mobile
-  - id: 254684
-    prefix: '67768'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d1189fe8-0817-4e76-bf70-8e87d34ac9af
-    country_id: *sb
-    network_id: *sb_satsol_mobile
-  - id: 254874
-    prefix: '67769'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7d284a73-a256-4fbb-bc82-94d1777d19b1
-    country_id: *sb
-    network_id: *sb_satsol_mobile
-  - id: 255460
-    prefix: '67776'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 65f5a6a2-d875-40df-b7b1-db71231e5394
-    country_id: *sb
-    network_id: *sb_breeze_mobile
-  - id: 255642
-    prefix: '67777'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b5250f6f-e537-4e73-9dcf-c06973097518
-    country_id: *sb
-    network_id: *sb_breeze_mobile
-  - id: 256098
-    prefix: '67778'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 51335c32-ad2a-4bc2-81e3-b7f22e01d230
-    country_id: *sb
-    network_id: *sb_breeze_mobile
-  - id: 256402
-    prefix: '677790'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b1758ea8-3c70-444d-b821-3c959de35960
-    country_id: *sb
-    network_id: *sb_breeze_mobile
-  - id: 256452
-    prefix: '677791'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c8b00c99-c324-45f1-bd49-37a3e47c19f5
-    country_id: *sb
-    network_id: *sb_breeze_mobile
-  - id: 256480
-    prefix: '677792'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f44b353d-8f3e-4f6f-9f1b-109c387de456
-    country_id: *sb
-    network_id: *sb_breeze_mobile
-  - id: 256540
-    prefix: '677793'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 378ee05c-b494-4b98-882a-9e8a8c1f3c63
-    country_id: *sb
-    network_id: *sb_breeze_mobile
-  - id: 256556
-    prefix: '677794'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7492e052-6c86-4bbf-9781-b59b412f856e
-    country_id: *sb
-    network_id: *sb_breeze_mobile
   - id: 256850
     prefix: '67788'
     number_min_length: 10
@@ -1015,6 +948,111 @@ network_prefixes:
     uuid: b50ff8c3-74ba-4646-b693-68f466ac8b30
     country_id: *sb
     network_id: *sb_satsol_mobile
+  - id: 257971
+    prefix: '67798'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c89f160e-89c0-4bfd-8d11-c5c580258c31
+    country_id: *sb
+    network_id: *sb_smile_mobile
+  - id: 258197
+    prefix: '67799'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 23575ed0-4468-431e-86af-7bca1962c5e7
+    country_id: *sb
+    network_id: *sb_smile_mobile
+  - id: 254684
+    prefix: '67768'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1189fe8-0817-4e76-bf70-8e87d34ac9af
+    country_id: *sb
+    network_id: *sb_satsol_mobile
+  - id: 254874
+    prefix: '67769'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7d284a73-a256-4fbb-bc82-94d1777d19b1
+    country_id: *sb
+    network_id: *sb_satsol_mobile
+  - id: 255460
+    prefix: '67776'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 65f5a6a2-d875-40df-b7b1-db71231e5394
+    country_id: *sb
+    network_id: *sb_breeze_mobile
+  - id: 255642
+    prefix: '67777'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b5250f6f-e537-4e73-9dcf-c06973097518
+    country_id: *sb
+    network_id: *sb_breeze_mobile
+  - id: 256098
+    prefix: '67778'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 51335c32-ad2a-4bc2-81e3-b7f22e01d230
+    country_id: *sb
+    network_id: *sb_breeze_mobile
+  - id: 256402
+    prefix: '677790'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b1758ea8-3c70-444d-b821-3c959de35960
+    country_id: *sb
+    network_id: *sb_breeze_mobile
+  - id: 256452
+    prefix: '677791'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c8b00c99-c324-45f1-bd49-37a3e47c19f5
+    country_id: *sb
+    network_id: *sb_breeze_mobile
+  - id: 256480
+    prefix: '677792'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f44b353d-8f3e-4f6f-9f1b-109c387de456
+    country_id: *sb
+    network_id: *sb_breeze_mobile
+  - id: 256540
+    prefix: '677793'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 378ee05c-b494-4b98-882a-9e8a8c1f3c63
+    country_id: *sb
+    network_id: *sb_breeze_mobile
+  - id: 256556
+    prefix: '677794'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7492e052-6c86-4bbf-9781-b59b412f856e
+    country_id: *sb
+    network_id: *sb_breeze_mobile
+  - id: 253728
+    prefix: '67784'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9feae69e-9a63-4e29-bc27-2565da739d0f
+    country_id: *sb
+    network_id: *sb_bemobile_mobile
+  - id: 263713
+    prefix: '67785'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 838d3aa0-48b0-4cc4-8d5b-50c3f2b08c72
+    country_id: *sb
+    network_id: *sb_bemobile_mobile
+  - id: 263859
+    prefix: '67786'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3d33274d-f895-4ec6-9351-e5ca4cf1794c
+    country_id: *sb
+    network_id: *sb_bemobile_mobile
   - id: 257879
     prefix: '677930'
     number_min_length: 10
@@ -1036,41 +1074,6 @@ network_prefixes:
     uuid: fcbdfc2d-55d2-40b2-bfb5-7860511a722e
     country_id: *sb
     network_id: *sb_satsol_mobile
-  - id: 257971
-    prefix: '67798'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c89f160e-89c0-4bfd-8d11-c5c580258c31
-    country_id: *sb
-    network_id: *sb_smile_mobile
-  - id: 258197
-    prefix: '67799'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 23575ed0-4468-431e-86af-7bca1962c5e7
-    country_id: *sb
-    network_id: *sb_smile_mobile
-  - id: 263713
-    prefix: '67785'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 838d3aa0-48b0-4cc4-8d5b-50c3f2b08c72
-    country_id: *sb
-    network_id: *sb_bemobile_mobile
-  - id: 263859
-    prefix: '67786'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3d33274d-f895-4ec6-9351-e5ca4cf1794c
-    country_id: *sb
-    network_id: *sb_bemobile_mobile
-  - id: 264014
-    prefix: '67787'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3e8b36d1-b7a7-4214-b68a-ca3374ee7e5d
-    country_id: *sb
-    network_id: *sb_bemobile_mobile
   - id: 264202
     prefix: '67794'
     number_min_length: 10

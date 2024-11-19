@@ -1,27 +1,14 @@
 country_id: &mv 130
 networks:
-# Supplementary services Networks
-  - id: &mv_special_services 21447
-    name: MV Special Services
-    uuid: c422b5b2-7ef1-4572-973e-30bce185febc
-    type_id: 13
-  - id: &mv_public_special_services 21769
-    name: MV Public Special Services
-    uuid: 8a4595ef-a153-444d-958c-78ab3dcc39b5
-    type_id: 13
-  - id: &mv_private_special_services 21823
-    name: MV Private Special Services
-    uuid: 7d8d0f24-a46e-4912-bff5-ef629c55d20e
-    type_id: 13
-  - id: &mv_freephone_services 23848
-    name: MV Freephone Services
-    uuid: fc1d71c9-3ae2-46a0-b502-8aaa75815523
-    type_id: 13
-  - id: &mv_premium_rate_services 24441
-    name: MV Premium Rate Services
-    uuid: 4f128dfb-c3d2-4995-89c6-efac95a89aa5
-    type_id: 13
 # Fixed Networks
+  - id: &mv_fixed 22167
+    name: MV Fixed
+    uuid: 2c5fef05-958d-48d3-82f7-fda79e08f87a
+    type_id: 2
+  - id: &mv_aarah_hulhule_male_did_region 23216
+    name: MV Aarah Hulhule Male Did Region
+    uuid: 677c283a-851d-4234-8b82-516df2095f24
+    type_id: 2
   - id: &mv_male_region_did_region 21868
     name: MV Male Region Did Region
     uuid: e1202a03-aa46-451c-939e-d11faad4143d
@@ -37,14 +24,6 @@ networks:
   - id: &mv_villimale_region 21982
     name: MV Villimale Region
     uuid: 31061e23-d3ab-4919-8742-de692b335ef6
-    type_id: 2
-  - id: &mv_fixed 22167
-    name: MV Fixed
-    uuid: 2c5fef05-958d-48d3-82f7-fda79e08f87a
-    type_id: 2
-  - id: &mv_aarah_hulhule_male_did_region 23216
-    name: MV Aarah Hulhule Male Did Region
-    uuid: 677c283a-851d-4234-8b82-516df2095f24
     type_id: 2
   - id: &mv_haa_alifu_atoll_region 23512
     name: MV Haa Alifu Atoll Region
@@ -126,6 +105,27 @@ networks:
     name: MV Seenu Atoll Region
     uuid: e072cb30-42b1-4d7d-9e2d-a6df7b536889
     type_id: 2
+# Supplementary services Networks
+  - id: &mv_special_services 21447
+    name: MV Special Services
+    uuid: c422b5b2-7ef1-4572-973e-30bce185febc
+    type_id: 13
+  - id: &mv_public_special_services 21769
+    name: MV Public Special Services
+    uuid: 8a4595ef-a153-444d-958c-78ab3dcc39b5
+    type_id: 13
+  - id: &mv_private_special_services 21823
+    name: MV Private Special Services
+    uuid: 7d8d0f24-a46e-4912-bff5-ef629c55d20e
+    type_id: 13
+  - id: &mv_premium_rate_services 24441
+    name: MV Premium Rate Services
+    uuid: 4f128dfb-c3d2-4995-89c6-efac95a89aa5
+    type_id: 13
+  - id: &mv_freephone_services 23848
+    name: MV Freephone Services
+    uuid: fc1d71c9-3ae2-46a0-b502-8aaa75815523
+    type_id: 13
 # Mobile Networks
   - id: &mv_dhimobile_mobile 23590
     name: MV Dhimobile Mobile
@@ -136,58 +136,21 @@ networks:
     uuid: f4ee3244-1d72-404b-8128-fce7ae7d3833
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242049
     prefix: '960'
     number_min_length: 4
     number_max_length: 100
     uuid: 9c755352-b15a-4e0f-89c1-9a51ad7043ed
     country_id: *mv
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242444
-    prefix: '9601'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: b8f279bb-b163-4f0f-b9ff-46a733fd7203
+    network_id: *mv_fixed
+  - id: 249024
+    prefix: '960301'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b1577bb2-8329-402a-91cb-0462caede9fe
     country_id: *mv
-    network_id: *mv_special_services
-  - id: 242905
-    prefix: '96014'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 81cb8bf7-2cf0-45c1-91d6-8c56da114459
-    country_id: *mv
-    network_id: *mv_public_special_services
-  - id: 242942
-    prefix: '96015'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 0b5644e8-b324-4e8b-a61f-fa593c1560ea
-    country_id: *mv
-    network_id: *mv_public_special_services
-  - id: 243022
-    prefix: '96016'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 43397310-af34-43ae-b510-3bf93e0141de
-    country_id: *mv
-    network_id: *mv_private_special_services
-  - id: 253161
-    prefix: '9600800'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 60a4ea05-deab-4a26-b0ae-5d103fc54a99
-    country_id: *mv
-    network_id: *mv_freephone_services
-  - id: 257183
-    prefix: '9600900'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 3a6ff423-13d2-4171-9b45-23ecf0283fac
-    country_id: *mv
-    network_id: *mv_premium_rate_services
-# Fixed Prefixes
+    network_id: *mv_aarah_hulhule_male_did_region
   - id: 243108
     prefix: '960302'
     number_min_length: 10
@@ -272,13 +235,6 @@ network_prefixes:
     uuid: d7384762-b789-4b20-9fd9-bca50eab94be
     country_id: *mv
     network_id: *mv_aarah_hulhule_male_region
-  - id: 249024
-    prefix: '960301'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b1577bb2-8329-402a-91cb-0462caede9fe
-    country_id: *mv
-    network_id: *mv_aarah_hulhule_male_did_region
   - id: 251252
     prefix: '960650'
     number_min_length: 10
@@ -433,6 +389,49 @@ network_prefixes:
     uuid: a10423e1-674d-417a-b3f0-18f314927ec2
     country_id: *mv
     network_id: *mv_seenu_atoll_region
+# Supplementary services Prefixes
+  - id: 242444
+    prefix: '9601'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: b8f279bb-b163-4f0f-b9ff-46a733fd7203
+    country_id: *mv
+    network_id: *mv_special_services
+  - id: 242905
+    prefix: '96014'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 81cb8bf7-2cf0-45c1-91d6-8c56da114459
+    country_id: *mv
+    network_id: *mv_public_special_services
+  - id: 242942
+    prefix: '96015'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 0b5644e8-b324-4e8b-a61f-fa593c1560ea
+    country_id: *mv
+    network_id: *mv_public_special_services
+  - id: 243022
+    prefix: '96016'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 43397310-af34-43ae-b510-3bf93e0141de
+    country_id: *mv
+    network_id: *mv_private_special_services
+  - id: 508388
+    prefix: '960900'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5df4b71d-c025-4aed-b927-78f8a853c095
+    country_id: *mv
+    network_id: *mv_premium_rate_services
+  - id: 510862
+    prefix: '960800'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8b771db4-1055-4313-8de3-c16f65c544d5
+    country_id: *mv
+    network_id: *mv_freephone_services
 # Mobile Prefixes
   - id: 251827
     prefix: '96072'
@@ -462,6 +461,27 @@ network_prefixes:
     uuid: da67baa3-578c-44a3-85f7-4691b8ae5800
     country_id: *mv
     network_id: *mv_dhimobile_mobile
+  - id: 257366
+    prefix: '96091'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 75e0de3e-8263-43b0-b4b3-4aa9d827413e
+    country_id: *mv
+    network_id: *mv_ooredoo_mobile
+  - id: 265271
+    prefix: '96098'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cf48db92-bc73-4616-8fa5-713937fef6cb
+    country_id: *mv
+    network_id: *mv_ooredoo_mobile
+  - id: 258186
+    prefix: '96099'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 018a3bd6-5aa1-4a11-8f03-743c22fd8ad0
+    country_id: *mv
+    network_id: *mv_ooredoo_mobile
   - id: 255453
     prefix: '96076'
     number_min_length: 10
@@ -490,25 +510,11 @@ network_prefixes:
     uuid: b5a8feb0-904c-4e2a-b930-2f871ec6ac2a
     country_id: *mv
     network_id: *mv_dhimobile_mobile
-  - id: 257366
-    prefix: '96091'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 75e0de3e-8263-43b0-b4b3-4aa9d827413e
-    country_id: *mv
-    network_id: *mv_ooredoo_mobile
   - id: 257866
     prefix: '96093'
     number_min_length: 10
     number_max_length: 10
     uuid: 01e43f89-f833-40e9-972f-e3ef179bffd7
-    country_id: *mv
-    network_id: *mv_ooredoo_mobile
-  - id: 258186
-    prefix: '96099'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 018a3bd6-5aa1-4a11-8f03-743c22fd8ad0
     country_id: *mv
     network_id: *mv_ooredoo_mobile
   - id: 264197
@@ -537,12 +543,5 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: 66a902ef-144e-4f37-91c4-31ad7528ef7c
-    country_id: *mv
-    network_id: *mv_ooredoo_mobile
-  - id: 265271
-    prefix: '96098'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cf48db92-bc73-4616-8fa5-713937fef6cb
     country_id: *mv
     network_id: *mv_ooredoo_mobile

@@ -1,5 +1,14 @@
 country_id: &lu 124
 networks:
+# Fixed Networks
+  - id: &lu_voip_region 22744
+    name: LU Voip Region
+    uuid: 868b6101-2fdf-43ab-b2aa-5262205e903b
+    type_id: 2
+  - id: &lu_fixed 22133
+    name: LU Fixed
+    uuid: 107a50bc-658e-4e93-ad3e-d30b356d2c60
+    type_id: 2
 # Supplementary services Networks
   - id: &lu_routing_cross_net 21318
     name: LU Routing Cross Net
@@ -25,18 +34,6 @@ networks:
     name: LU Mass Call Services
     uuid: dde8e23e-393d-4e61-8ed4-ed9d0a7f26a5
     type_id: 13
-  - id: &lu_freephone_services 23847
-    name: LU Freephone Services
-    uuid: 25b3f91e-1aae-4ba3-82fb-2536dad6805d
-    type_id: 13
-  - id: &lu_shared_cost_services 23885
-    name: LU Shared Cost Services
-    uuid: a651cab8-9715-48c3-9f6e-349c5c4b0fb2
-    type_id: 13
-  - id: &lu_personal_number_services 24147
-    name: LU Personal Number Services
-    uuid: 470efb3a-19d1-4013-bad3-da9f3c0d70c6
-    type_id: 13
   - id: &lu_information_services 24440
     name: LU Information Services
     uuid: e05edf16-53ab-4ceb-8b3d-a0d30924a6ee
@@ -49,15 +46,18 @@ networks:
     name: LU Adults Entertainment Services
     uuid: b6ab3b5a-05d8-4a0b-968b-858403570d23
     type_id: 13
-# Fixed Networks
-  - id: &lu_fixed 22133
-    name: LU Fixed
-    uuid: 107a50bc-658e-4e93-ad3e-d30b356d2c60
-    type_id: 2
-  - id: &lu_voip_region 22744
-    name: LU Voip Region
-    uuid: 868b6101-2fdf-43ab-b2aa-5262205e903b
-    type_id: 2
+  - id: &lu_personal_number_services 24147
+    name: LU Personal Number Services
+    uuid: 470efb3a-19d1-4013-bad3-da9f3c0d70c6
+    type_id: 13
+  - id: &lu_freephone_services 23847
+    name: LU Freephone Services
+    uuid: 25b3f91e-1aae-4ba3-82fb-2536dad6805d
+    type_id: 13
+  - id: &lu_shared_cost_services 23885
+    name: LU Shared Cost Services
+    uuid: a651cab8-9715-48c3-9f6e-349c5c4b0fb2
+    type_id: 13
 # Mobile Networks
   - id: &lu_mobile 22557
     name: LU Mobile
@@ -79,14 +79,6 @@ networks:
     name: LU Post Mobile
     uuid: 01d64d12-2af4-4895-b060-9f93bc4153f9
     type_id: 3
-  - id: &lu_eltrona_mobile 23519
-    name: LU Eltrona Mobile
-    uuid: 1fd93837-c39f-4af3-9d81-2aef1ba54c5b
-    type_id: 3
-  - id: &lu_luxembourg_online_mobile 23536
-    name: LU Luxembourg Online Mobile
-    uuid: 7b47502f-6a42-424d-91e3-e04f60d9f150
-    type_id: 3
   - id: &lu_orange_mobile 24026
     name: LU Orange Mobile
     uuid: d084b6ca-fdbe-4aec-9b14-eb17b3c7dce8
@@ -95,112 +87,20 @@ networks:
     name: LU Bouygues Telecom Mobile
     uuid: 0f9657df-a705-433a-a249-93907727c6c3
     type_id: 3
+  - id: &lu_eltrona_mobile 23519
+    name: LU Eltrona Mobile
+    uuid: 1fd93837-c39f-4af3-9d81-2aef1ba54c5b
+    type_id: 3
+  - id: &lu_luxembourg_online_mobile 23536
+    name: LU Luxembourg Online Mobile
+    uuid: 7b47502f-6a42-424d-91e3-e04f60d9f150
+    type_id: 3
   - id: &lu_e_lux_mobile_mobile 24103
     name: LU E Lux Mobile Mobile
     uuid: 37c7cb06-f59c-4aac-aa27-46e4a2bee79e
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242042
-    prefix: '352'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: d1dc6d31-4ad2-4e58-ace5-e0798b7d6d58
-    country_id: *lu
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242247
-    prefix: '35204'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 4fe40b88-c44f-4097-982c-cfa697e39a2b
-    country_id: *lu
-    network_id: *lu_routing_cross_net
-  - id: 242437
-    prefix: '3521'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 31332bda-9fa4-4eb3-8a4c-6cd09b68f037
-    country_id: *lu
-    network_id: *lu_special_services
-  - id: 242678
-    prefix: '352116'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 760b9a8a-e592-40f2-93ce-7404b936a928
-    country_id: *lu
-    network_id: *lu_social_value_services
-  - id: 242725
-    prefix: '352118'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: c3a79442-39fd-4c48-83dc-06bb37143717
-    country_id: *lu
-    network_id: *lu_directory_enquiry_services
-  - id: 242810
-    prefix: '35212'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 7f302cbb-e1e5-4855-99f2-8faef701b776
-    country_id: *lu
-    network_id: *lu_internet_access_services
-  - id: 242854
-    prefix: '35213'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: f618baf8-9649-4275-9fdf-23c7d41e22ca
-    country_id: *lu
-    network_id: *lu_mass_call_services
-  - id: 253160
-    prefix: '352800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 630e124a-fa97-40ec-baa0-9b529a0ec394
-    country_id: *lu
-    network_id: *lu_freephone_services
-  - id: 253212
-    prefix: '352801'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c18d84a7-2610-4c4d-a3bd-efdea433d976
-    country_id: *lu
-    network_id: *lu_shared_cost_services
-  - id: 255258
-    prefix: '3527'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: 0a883e7d-65e1-46fe-be80-8159fa0e6338
-    country_id: *lu
-    network_id: *lu_personal_number_services
-  - id: 257182
-    prefix: '352900'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f5c05bef-02f7-40c9-b72e-4cf3f1ba3f61
-    country_id: *lu
-    network_id: *lu_information_services
-  - id: 257214
-    prefix: '352901'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e7e27d27-56dc-48ad-9085-e0d643f528e1
-    country_id: *lu
-    network_id: *lu_entertainment_services
-  - id: 257267
-    prefix: '352905'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 97b32ed7-e07a-432a-8880-80aebf0cb407
-    country_id: *lu
-    network_id: *lu_adults_entertainment_services
 # Fixed Prefixes
-  - id: 243944
-    prefix: '3524'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: 3757dd8a-e3cf-45f4-b935-20949bc0c8b8
-    country_id: *lu
-    network_id: *lu_fixed
   - id: 247454
     prefix: '35220'
     number_min_length: 11
@@ -208,6 +108,69 @@ network_prefixes:
     uuid: 28409956-5dd9-4d6f-ac4e-fe73483d8500
     country_id: *lu
     network_id: *lu_voip_region
+  - id: 242042
+    prefix: '352'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: d1dc6d31-4ad2-4e58-ace5-e0798b7d6d58
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 243944
+    prefix: '3524'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 3757dd8a-e3cf-45f4-b935-20949bc0c8b8
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 264009
+    prefix: '35287'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 1639185d-8334-4c24-a418-9b62b48b9c7e
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 256841
+    prefix: '35288'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: c7599fc6-84af-4e7a-b8dc-f70901bbffb8
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257003
+    prefix: '35289'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 079a0f92-3129-4739-8458-7a8a3d0cf330
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257318
+    prefix: '352908'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: e3c81825-e8a7-4057-bb0c-6fbda39628ba
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257346
+    prefix: '352909'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 71e49042-7acd-45f3-a124-ff6c6fe21a19
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 257590
+    prefix: '35292'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 6a51b180-7c56-4900-be2c-69254633ba12
+    country_id: *lu
+    network_id: *lu_fixed
+  - id: 258185
+    prefix: '35299'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: c318f9bc-8dbd-476b-9b0a-dad38c680422
+    country_id: *lu
+    network_id: *lu_fixed
   - id: 247725
     prefix: '35222'
     number_min_length: 7
@@ -355,55 +318,6 @@ network_prefixes:
     uuid: 9f46cfff-ba60-4a79-8d99-7a5d9768e62c
     country_id: *lu
     network_id: *lu_fixed
-  - id: 256841
-    prefix: '35288'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: c7599fc6-84af-4e7a-b8dc-f70901bbffb8
-    country_id: *lu
-    network_id: *lu_fixed
-  - id: 257003
-    prefix: '35289'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: 079a0f92-3129-4739-8458-7a8a3d0cf330
-    country_id: *lu
-    network_id: *lu_fixed
-  - id: 257318
-    prefix: '352908'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: e3c81825-e8a7-4057-bb0c-6fbda39628ba
-    country_id: *lu
-    network_id: *lu_fixed
-  - id: 257346
-    prefix: '352909'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: 71e49042-7acd-45f3-a124-ff6c6fe21a19
-    country_id: *lu
-    network_id: *lu_fixed
-  - id: 257590
-    prefix: '35292'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: 6a51b180-7c56-4900-be2c-69254633ba12
-    country_id: *lu
-    network_id: *lu_fixed
-  - id: 257865
-    prefix: '35293'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: f4bdc5b3-db6d-4482-a3ba-fd433728c34f
-    country_id: *lu
-    network_id: *lu_fixed
-  - id: 258185
-    prefix: '35299'
-    number_min_length: 7
-    number_max_length: 14
-    uuid: c318f9bc-8dbd-476b-9b0a-dad38c680422
-    country_id: *lu
-    network_id: *lu_fixed
   - id: 263708
     prefix: '35285'
     number_min_length: 7
@@ -418,11 +332,11 @@ network_prefixes:
     uuid: c5479324-5beb-4e94-846e-9812002f5123
     country_id: *lu
     network_id: *lu_fixed
-  - id: 264009
-    prefix: '35287'
+  - id: 257865
+    prefix: '35293'
     number_min_length: 7
     number_max_length: 14
-    uuid: 1639185d-8334-4c24-a418-9b62b48b9c7e
+    uuid: f4bdc5b3-db6d-4482-a3ba-fd433728c34f
     country_id: *lu
     network_id: *lu_fixed
   - id: 264196
@@ -446,6 +360,91 @@ network_prefixes:
     uuid: 2b5a4769-b555-46a6-b9c5-ca199c316789
     country_id: *lu
     network_id: *lu_fixed
+# Supplementary services Prefixes
+  - id: 242247
+    prefix: '35204'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 4fe40b88-c44f-4097-982c-cfa697e39a2b
+    country_id: *lu
+    network_id: *lu_routing_cross_net
+  - id: 242437
+    prefix: '3521'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 31332bda-9fa4-4eb3-8a4c-6cd09b68f037
+    country_id: *lu
+    network_id: *lu_special_services
+  - id: 242678
+    prefix: '352116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 760b9a8a-e592-40f2-93ce-7404b936a928
+    country_id: *lu
+    network_id: *lu_social_value_services
+  - id: 242725
+    prefix: '352118'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c3a79442-39fd-4c48-83dc-06bb37143717
+    country_id: *lu
+    network_id: *lu_directory_enquiry_services
+  - id: 242810
+    prefix: '35212'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7f302cbb-e1e5-4855-99f2-8faef701b776
+    country_id: *lu
+    network_id: *lu_internet_access_services
+  - id: 242854
+    prefix: '35213'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: f618baf8-9649-4275-9fdf-23c7d41e22ca
+    country_id: *lu
+    network_id: *lu_mass_call_services
+  - id: 257182
+    prefix: '352900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f5c05bef-02f7-40c9-b72e-4cf3f1ba3f61
+    country_id: *lu
+    network_id: *lu_information_services
+  - id: 257214
+    prefix: '352901'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e7e27d27-56dc-48ad-9085-e0d643f528e1
+    country_id: *lu
+    network_id: *lu_entertainment_services
+  - id: 257267
+    prefix: '352905'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 97b32ed7-e07a-432a-8880-80aebf0cb407
+    country_id: *lu
+    network_id: *lu_adults_entertainment_services
+  - id: 255258
+    prefix: '3527'
+    number_min_length: 7
+    number_max_length: 14
+    uuid: 0a883e7d-65e1-46fe-be80-8159fa0e6338
+    country_id: *lu
+    network_id: *lu_personal_number_services
+  - id: 253160
+    prefix: '352800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 630e124a-fa97-40ec-baa0-9b529a0ec394
+    country_id: *lu
+    network_id: *lu_freephone_services
+  - id: 253212
+    prefix: '352801'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c18d84a7-2610-4c4d-a3bd-efdea433d976
+    country_id: *lu
+    network_id: *lu_shared_cost_services
 # Mobile Prefixes
   - id: 245438
     prefix: '35260'
@@ -480,6 +479,27 @@ network_prefixes:
     number_min_length: 15
     number_max_length: 15
     uuid: 4de2ce6e-eab6-4cef-9283-878a7716e954
+    country_id: *lu
+    network_id: *lu_post_mobile
+  - id: 253892
+    prefix: '3526061'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f03356f7-0410-4a3c-b7f7-3f519ec4316e
+    country_id: *lu
+    network_id: *lu_orange_mobile
+  - id: 253903
+    prefix: '3526067'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: e3710f18-48cb-439e-b079-05590360a536
+    country_id: *lu
+    network_id: *lu_bouygues_telecom_mobile
+  - id: 254148
+    prefix: '352621'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cb63f5f1-46ab-46e9-b145-32fd02c650ea
     country_id: *lu
     network_id: *lu_post_mobile
   - id: 250572
@@ -517,27 +537,6 @@ network_prefixes:
     uuid: ea837c39-5178-4ff5-a632-f21f1eaa596b
     country_id: *lu
     network_id: *lu_eltrona_mobile
-  - id: 253892
-    prefix: '3526061'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: f03356f7-0410-4a3c-b7f7-3f519ec4316e
-    country_id: *lu
-    network_id: *lu_orange_mobile
-  - id: 253903
-    prefix: '3526067'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: e3710f18-48cb-439e-b079-05590360a536
-    country_id: *lu
-    network_id: *lu_bouygues_telecom_mobile
-  - id: 254148
-    prefix: '352621'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cb63f5f1-46ab-46e9-b145-32fd02c650ea
-    country_id: *lu
-    network_id: *lu_post_mobile
   - id: 254336
     prefix: '352661'
     number_min_length: 12

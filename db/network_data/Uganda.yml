@@ -1,74 +1,5 @@
 country_id: &ug 221
 networks:
-# Fixed Networks
-  - id: &ug_mbarara_region 4365
-    name: UG Mbarara Region
-    uuid: 4ec556e0-6b39-41b5-ba90-a1bcd0ef1129
-    type_id: 2
-  - id: &ug_rukungiri_region 4412
-    name: UG Rukungiri Region
-    uuid: 83918bd4-3f06-4e22-be41-6f52de54186a
-    type_id: 2
-  - id: &ug_kamuli_region 4524
-    name: UG Kamuli Region
-    uuid: 8d2d852b-8c13-4b00-84d4-ef8ec655781e
-    type_id: 2
-  - id: &ug_fixed 4606
-    name: UG Fixed
-    uuid: e37ea7af-f3ae-41ee-b638-3dee88be99d0
-    type_id: 2
-  - id: &ug_masaka_region 4829
-    name: UG Masaka Region
-    uuid: 88901236-391e-480d-b5e3-fd52ea3584cc
-    type_id: 2
-  - id: &ug_fort_portal_region 4921
-    name: UG Fort Portal Region
-    uuid: dc7b939f-de36-479e-8a8b-e852753c8e1c
-    type_id: 2
-  - id: &ug_kampala_region 31766
-    name: UG Kampala Region
-    uuid: 20109535-83e3-4e42-9918-fca2ab15c089
-    type_id: 2
-  - id: &ug_jinja_region 32571
-    name: UG Jinja Region
-    uuid: 00bf868c-1a3c-4575-bb91-8513dffe4ad3
-    type_id: 2
-  - id: &ug_masindi_region 33664
-    name: UG Masindi Region
-    uuid: 3798a97a-e4cf-4731-bcc5-c139fead06bf
-    type_id: 2
-  - id: &ug_fort_portal_kabale_masaka_mbarara_region 33853
-    name: UG Fort Portal Kabale Masaka Mbarara Region
-    uuid: 1242d96b-d5fb-44f0-91e7-4ca901b68933
-    type_id: 2
-  - id: &ug_mbale_region 34649
-    name: UG Mbale Region
-    uuid: c0d58d6d-8f1d-4d38-b5eb-4e92c2776b64
-    type_id: 2
-  - id: &ug_gulu_region 35241
-    name: UG Gulu Region
-    uuid: 1b618dde-ea5d-4119-8a0d-22d910be3035
-    type_id: 2
-  - id: &ug_entebbe_region 37241
-    name: UG Entebbe Region
-    uuid: 790b4f54-5919-4de5-a673-a34c6b05f178
-    type_id: 2
-  - id: &ug_mityana_region 37844
-    name: UG Mityana Region
-    uuid: 80635992-1925-433e-a704-97a7185103f9
-    type_id: 2
-  - id: &ug_mubende_region 38039
-    name: UG Mubende Region
-    uuid: 6a15e20e-16e2-4d14-b873-62bdabc9b590
-    type_id: 2
-  - id: &ug_lira_region 38173
-    name: UG Lira Region
-    uuid: 9358ea44-d1c8-44f5-a094-f763012436b7
-    type_id: 2
-  - id: &ug_arua_region 38397
-    name: UG Arua Region
-    uuid: 59904ca5-a511-49c8-ae07-9034b304312f
-    type_id: 2
 # Mobile Networks
   - id: &ug_airtel_mobile 14454
     name: UG Airtel Mobile
@@ -78,6 +9,10 @@ networks:
     name: UG Utel Mobile
     uuid: 3e362af1-809d-4591-a2ca-35576a4599f1
     type_id: 3
+  - id: &ug_smile_mobile 16889
+    name: UG Smile Mobile
+    uuid: fa42c391-ef42-4dd8-afe2-fe24136f38a7
+    type_id: 3
   - id: &ug_hamilton_telecom_mobile 16542
     name: UG Hamilton Telecom Mobile
     uuid: 5117598b-d2ea-4051-9e2b-df67e32fd672
@@ -86,23 +21,11 @@ networks:
     name: UG Lycamobile Mobile
     uuid: ea447170-82b2-4a9c-ae2b-d3e886b759b2
     type_id: 3
-  - id: &ug_smile_mobile 16889
-    name: UG Smile Mobile
-    uuid: fa42c391-ef42-4dd8-afe2-fe24136f38a7
-    type_id: 3
   - id: &ug_mtn_mobile 18180
     name: UG Mtn Mobile
     uuid: 428a6496-6e38-4fe1-b3e9-8ce713285fb1
     type_id: 3
 # Supplementary services Networks
-  - id: &ug_special_services 21507
-    name: UG Special Services
-    uuid: 3ab92c05-c359-4d31-9b8a-c4656b1f8273
-    type_id: 13
-  - id: &ug_sms_mms_services 22554
-    name: UG Sms_Mms Services
-    uuid: 970f1b95-1f77-4b2c-9893-777c5aec5626
-    type_id: 13
   - id: &ug_freephone_services 38519
     name: UG Freephone Services
     uuid: fba7ad0f-b97e-44b9-bf81-14f555a58ec6
@@ -119,176 +42,84 @@ networks:
     name: UG Premium Rate Services
     uuid: 6f1943b2-a501-49ee-92d3-1144cd3382ae
     type_id: 13
+  - id: &ug_special_services 21507
+    name: UG Special Services
+    uuid: 3ab92c05-c359-4d31-9b8a-c4656b1f8273
+    type_id: 13
+  - id: &ug_sms_mms_services 22554
+    name: UG Sms_Mms Services
+    uuid: 970f1b95-1f77-4b2c-9893-777c5aec5626
+    type_id: 13
+# Fixed Networks
+  - id: &ug_fixed 4606
+    name: UG Fixed
+    uuid: e37ea7af-f3ae-41ee-b638-3dee88be99d0
+    type_id: 2
+  - id: &ug_kampala_region 31766
+    name: UG Kampala Region
+    uuid: 20109535-83e3-4e42-9918-fca2ab15c089
+    type_id: 2
+  - id: &ug_jinja_region 32571
+    name: UG Jinja Region
+    uuid: 00bf868c-1a3c-4575-bb91-8513dffe4ad3
+    type_id: 2
+  - id: &ug_mbale_region 34649
+    name: UG Mbale Region
+    uuid: c0d58d6d-8f1d-4d38-b5eb-4e92c2776b64
+    type_id: 2
+  - id: &ug_gulu_region 35241
+    name: UG Gulu Region
+    uuid: 1b618dde-ea5d-4119-8a0d-22d910be3035
+    type_id: 2
+  - id: &ug_fort_portal_kabale_masaka_mbarara_region 33853
+    name: UG Fort Portal Kabale Masaka Mbarara Region
+    uuid: 1242d96b-d5fb-44f0-91e7-4ca901b68933
+    type_id: 2
+  - id: &ug_masindi_region 33664
+    name: UG Masindi Region
+    uuid: 3798a97a-e4cf-4731-bcc5-c139fead06bf
+    type_id: 2
+  - id: &ug_entebbe_region 37241
+    name: UG Entebbe Region
+    uuid: 790b4f54-5919-4de5-a673-a34c6b05f178
+    type_id: 2
+  - id: &ug_mubende_region 38039
+    name: UG Mubende Region
+    uuid: 6a15e20e-16e2-4d14-b873-62bdabc9b590
+    type_id: 2
+  - id: &ug_mityana_region 37844
+    name: UG Mityana Region
+    uuid: 80635992-1925-433e-a704-97a7185103f9
+    type_id: 2
+  - id: &ug_arua_region 38397
+    name: UG Arua Region
+    uuid: 59904ca5-a511-49c8-ae07-9034b304312f
+    type_id: 2
+  - id: &ug_lira_region 38173
+    name: UG Lira Region
+    uuid: 9358ea44-d1c8-44f5-a094-f763012436b7
+    type_id: 2
+  - id: &ug_masaka_region 4829
+    name: UG Masaka Region
+    uuid: 88901236-391e-480d-b5e3-fd52ea3584cc
+    type_id: 2
+  - id: &ug_fort_portal_region 4921
+    name: UG Fort Portal Region
+    uuid: dc7b939f-de36-479e-8a8b-e852753c8e1c
+    type_id: 2
+  - id: &ug_kamuli_region 4524
+    name: UG Kamuli Region
+    uuid: 8d2d852b-8c13-4b00-84d4-ef8ec655781e
+    type_id: 2
+  - id: &ug_mbarara_region 4365
+    name: UG Mbarara Region
+    uuid: 4ec556e0-6b39-41b5-ba90-a1bcd0ef1129
+    type_id: 2
+  - id: &ug_rukungiri_region 4412
+    name: UG Rukungiri Region
+    uuid: 83918bd4-3f06-4e22-be41-6f52de54186a
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 52980
-    prefix: '256485'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 46b31497-f039-49f4-bbc4-9bccd1d657dd
-    country_id: *ug
-    network_id: *ug_mbarara_region
-  - id: 53151
-    prefix: '256486'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8c8c30a8-3666-456d-922a-cfabb2d47d2a
-    country_id: *ug
-    network_id: *ug_rukungiri_region
-  - id: 53905
-    prefix: '256496'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e4a5ed80-815e-4a60-8cf2-5411faca9daa
-    country_id: *ug
-    network_id: *ug_kamuli_region
-  - id: 54573
-    prefix: '2564'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 079c8278-c0c8-4056-bbef-2d089ab830e3
-    country_id: *ug
-    network_id: *ug_fixed
-  - id: 56459
-    prefix: '256481'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5ce9991c-4b72-4f13-9e8f-43c6ccf8226f
-    country_id: *ug
-    network_id: *ug_masaka_region
-  - id: 57071
-    prefix: '256483'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 006a4337-1277-4eca-af4e-cf00bc5b1215
-    country_id: *ug
-    network_id: *ug_fort_portal_region
-  - id: 267150
-    prefix: '25620'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a4af97d6-66b5-45ed-95ab-62035af92a94
-    country_id: *ug
-    network_id: *ug_fixed
-  - id: 321187
-    prefix: '25631'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1d1c5ee3-398e-4ed5-b56b-88b1412547d0
-    country_id: *ug
-    network_id: *ug_kampala_region
-  - id: 337300
-    prefix: '25633'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d07a8472-b903-495f-a964-0d6ebd97cf39
-    country_id: *ug
-    network_id: *ug_jinja_region
-  - id: 345954
-    prefix: '25636'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f6a95ff7-d69c-4f84-9f5b-923672d7b25c
-    country_id: *ug
-    network_id: *ug_masindi_region
-  - id: 347713
-    prefix: '25638'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 66732ece-a497-4479-85b1-dd4b0caaa339
-    country_id: *ug
-    network_id: *ug_fort_portal_kabale_masaka_mbarara_region
-  - id: 349434
-    prefix: '2563'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cf6240e8-d174-497e-8dae-7f8c9e594f92
-    country_id: *ug
-    network_id: *ug_fixed
-  - id: 352250
-    prefix: '25635'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3b0c4acd-9e54-4c26-a4ea-291a54641c08
-    country_id: *ug
-    network_id: *ug_mbale_region
-  - id: 355767
-    prefix: '25637'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 06e0a99f-821a-4e50-a715-8c5603514668
-    country_id: *ug
-    network_id: *ug_gulu_region
-  - id: 362543
-    prefix: '25641'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6de94604-27cd-4bd8-a39f-0fb85cd4f692
-    country_id: *ug
-    network_id: *ug_kampala_region
-  - id: 367952
-    prefix: '25643'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d002967c-5985-4fa1-918d-3e9a01319b4a
-    country_id: *ug
-    network_id: *ug_jinja_region
-  - id: 377191
-    prefix: '25642'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9899f97f-539a-4d80-8105-961ca4daf1a7
-    country_id: *ug
-    network_id: *ug_entebbe_region
-  - id: 388642
-    prefix: '25646'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 15018e2d-afe2-4202-a741-dc10bade0382
-    country_id: *ug
-    network_id: *ug_mityana_region
-  - id: 392628
-    prefix: '25645'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c13df1b1-b863-49cd-acf0-40ec598048b7
-    country_id: *ug
-    network_id: *ug_mbale_region
-  - id: 395002
-    prefix: '256464'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8e69f9f5-4200-41f5-a012-42fc7247773b
-    country_id: *ug
-    network_id: *ug_mubende_region
-  - id: 396478
-    prefix: '256471'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1849b60d-4b34-47ba-aac2-942b6a04e8c8
-    country_id: *ug
-    network_id: *ug_gulu_region
-  - id: 396999
-    prefix: '256473'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d93b3121-f0ad-4d85-b5b0-6e8e700cb3c8
-    country_id: *ug
-    network_id: *ug_lira_region
-  - id: 398525
-    prefix: '256465'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 667a63ad-8a48-4469-ae80-c9d74262b253
-    country_id: *ug
-    network_id: *ug_masindi_region
-  - id: 401275
-    prefix: '256476'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 77161fea-b94a-4ae5-a5cf-b7d456268d81
-    country_id: *ug
-    network_id: *ug_arua_region
 # Mobile Prefixes
   - id: 150246
     prefix: '25670'
@@ -304,6 +135,13 @@ network_prefixes:
     uuid: 49450dd4-35f2-4bc0-a408-f446b2bc6db2
     country_id: *ug
     network_id: *ug_utel_mobile
+  - id: 172543
+    prefix: '256720'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e7d76db8-0bf9-4bbe-a8da-ff10841aba28
+    country_id: *ug
+    network_id: *ug_smile_mobile
   - id: 168126
     prefix: '2567240'
     number_min_length: 12
@@ -318,13 +156,6 @@ network_prefixes:
     uuid: bb6e43bd-54f3-4cf6-bcd2-6027db3349d1
     country_id: *ug
     network_id: *ug_lycamobile_mobile
-  - id: 172543
-    prefix: '256720'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e7d76db8-0bf9-4bbe-a8da-ff10841aba28
-    country_id: *ug
-    network_id: *ug_smile_mobile
   - id: 182880
     prefix: '256740'
     number_min_length: 12
@@ -458,50 +289,7 @@ network_prefixes:
     uuid: d6933049-6eeb-4bb5-af49-fd4c98d83a00
     country_id: *ug
     network_id: *ug_mtn_mobile
-# Country code Prefixes
-  - id: 242126
-    prefix: '256'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: f9ab5d1c-a632-4bb2-89b4-3e16ef9d7b29
-    country_id: *ug
-    network_id: null
 # Supplementary services Prefixes
-  - id: 242513
-    prefix: '2561'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: e79f22a5-f04b-49e9-8681-9fd2c56268c8
-    country_id: *ug
-    network_id: *ug_special_services
-  - id: 245430
-    prefix: '2566'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 4a30246e-90b9-4558-b79d-e40a6bc46412
-    country_id: *ug
-    network_id: *ug_sms_mms_services
-  - id: 253114
-    prefix: '2568'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 16abd182-0a48-4e67-90f0-b25efd878e07
-    country_id: *ug
-    network_id: *ug_sms_mms_services
-  - id: 255285
-    prefix: '2567'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 5011abbd-5fb8-43f0-817a-a3d823b8253f
-    country_id: *ug
-    network_id: *ug_sms_mms_services
-  - id: 257147
-    prefix: '2569'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 55a1b2cd-1e2a-4944-bab1-624dd3c96876
-    country_id: *ug
-    network_id: *ug_special_services
   - id: 403495
     prefix: '256800'
     number_min_length: 12
@@ -523,13 +311,6 @@ network_prefixes:
     uuid: 50627a66-26b8-4404-b66d-57df2dbe05bd
     country_id: *ug
     network_id: *ug_special_services_single_charge
-  - id: 447288
-    prefix: '256903'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 04842528-7eb7-43fc-8e0c-e6fbb5af7102
-    country_id: *ug
-    network_id: *ug_premium_rate_services
   - id: 454713
     prefix: '256901'
     number_min_length: 12
@@ -544,3 +325,221 @@ network_prefixes:
     uuid: 80d3bafd-4bbb-4f30-b59f-e4bdde4ca0de
     country_id: *ug
     network_id: *ug_premium_rate_services
+  - id: 447288
+    prefix: '256903'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 04842528-7eb7-43fc-8e0c-e6fbb5af7102
+    country_id: *ug
+    network_id: *ug_premium_rate_services
+  - id: 242513
+    prefix: '2561'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: e79f22a5-f04b-49e9-8681-9fd2c56268c8
+    country_id: *ug
+    network_id: *ug_special_services
+  - id: 245430
+    prefix: '2566'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 4a30246e-90b9-4558-b79d-e40a6bc46412
+    country_id: *ug
+    network_id: *ug_sms_mms_services
+  - id: 257147
+    prefix: '2569'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 55a1b2cd-1e2a-4944-bab1-624dd3c96876
+    country_id: *ug
+    network_id: *ug_special_services
+  - id: 255285
+    prefix: '2567'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 5011abbd-5fb8-43f0-817a-a3d823b8253f
+    country_id: *ug
+    network_id: *ug_sms_mms_services
+  - id: 253114
+    prefix: '2568'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 16abd182-0a48-4e67-90f0-b25efd878e07
+    country_id: *ug
+    network_id: *ug_sms_mms_services
+# Fixed Prefixes
+  - id: 242126
+    prefix: '256'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: f9ab5d1c-a632-4bb2-89b4-3e16ef9d7b29
+    country_id: *ug
+    network_id: *ug_fixed
+  - id: 267150
+    prefix: '25620'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a4af97d6-66b5-45ed-95ab-62035af92a94
+    country_id: *ug
+    network_id: *ug_fixed
+  - id: 321187
+    prefix: '25631'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1d1c5ee3-398e-4ed5-b56b-88b1412547d0
+    country_id: *ug
+    network_id: *ug_kampala_region
+  - id: 337300
+    prefix: '25633'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d07a8472-b903-495f-a964-0d6ebd97cf39
+    country_id: *ug
+    network_id: *ug_jinja_region
+  - id: 352250
+    prefix: '25635'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3b0c4acd-9e54-4c26-a4ea-291a54641c08
+    country_id: *ug
+    network_id: *ug_mbale_region
+  - id: 355767
+    prefix: '25637'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 06e0a99f-821a-4e50-a715-8c5603514668
+    country_id: *ug
+    network_id: *ug_gulu_region
+  - id: 347713
+    prefix: '25638'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 66732ece-a497-4479-85b1-dd4b0caaa339
+    country_id: *ug
+    network_id: *ug_fort_portal_kabale_masaka_mbarara_region
+  - id: 349434
+    prefix: '2563'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cf6240e8-d174-497e-8dae-7f8c9e594f92
+    country_id: *ug
+    network_id: *ug_fixed
+  - id: 345954
+    prefix: '25636'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f6a95ff7-d69c-4f84-9f5b-923672d7b25c
+    country_id: *ug
+    network_id: *ug_masindi_region
+  - id: 362543
+    prefix: '25641'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6de94604-27cd-4bd8-a39f-0fb85cd4f692
+    country_id: *ug
+    network_id: *ug_kampala_region
+  - id: 377191
+    prefix: '25642'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9899f97f-539a-4d80-8105-961ca4daf1a7
+    country_id: *ug
+    network_id: *ug_entebbe_region
+  - id: 367952
+    prefix: '25643'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d002967c-5985-4fa1-918d-3e9a01319b4a
+    country_id: *ug
+    network_id: *ug_jinja_region
+  - id: 392628
+    prefix: '25645'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c13df1b1-b863-49cd-acf0-40ec598048b7
+    country_id: *ug
+    network_id: *ug_mbale_region
+  - id: 395002
+    prefix: '256464'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8e69f9f5-4200-41f5-a012-42fc7247773b
+    country_id: *ug
+    network_id: *ug_mubende_region
+  - id: 388642
+    prefix: '25646'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 15018e2d-afe2-4202-a741-dc10bade0382
+    country_id: *ug
+    network_id: *ug_mityana_region
+  - id: 398525
+    prefix: '256465'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 667a63ad-8a48-4469-ae80-c9d74262b253
+    country_id: *ug
+    network_id: *ug_masindi_region
+  - id: 396478
+    prefix: '256471'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1849b60d-4b34-47ba-aac2-942b6a04e8c8
+    country_id: *ug
+    network_id: *ug_gulu_region
+  - id: 401275
+    prefix: '256476'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 77161fea-b94a-4ae5-a5cf-b7d456268d81
+    country_id: *ug
+    network_id: *ug_arua_region
+  - id: 396999
+    prefix: '256473'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d93b3121-f0ad-4d85-b5b0-6e8e700cb3c8
+    country_id: *ug
+    network_id: *ug_lira_region
+  - id: 56459
+    prefix: '256481'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5ce9991c-4b72-4f13-9e8f-43c6ccf8226f
+    country_id: *ug
+    network_id: *ug_masaka_region
+  - id: 57071
+    prefix: '256483'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 006a4337-1277-4eca-af4e-cf00bc5b1215
+    country_id: *ug
+    network_id: *ug_fort_portal_region
+  - id: 53905
+    prefix: '256496'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e4a5ed80-815e-4a60-8cf2-5411faca9daa
+    country_id: *ug
+    network_id: *ug_kamuli_region
+  - id: 54573
+    prefix: '2564'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 079c8278-c0c8-4056-bbef-2d089ab830e3
+    country_id: *ug
+    network_id: *ug_fixed
+  - id: 52980
+    prefix: '256485'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 46b31497-f039-49f4-bbc4-9bccd1d657dd
+    country_id: *ug
+    network_id: *ug_mbarara_region
+  - id: 53151
+    prefix: '256486'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8c8c30a8-3666-456d-922a-cfabb2d47d2a
+    country_id: *ug
+    network_id: *ug_rukungiri_region

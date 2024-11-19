@@ -1,6 +1,10 @@
 country_id: &cz 57
 networks:
 # Supplementary services Networks
+  - id: &cz_anti_corruption_hotline 22700
+    name: CZ Anti Corruption Hotline
+    uuid: 2e48996a-2aab-4728-b992-2fdd8096a5d2
+    type_id: 13
   - id: &cz_special_services 21388
     name: CZ Special Services
     uuid: c9946319-8c9d-4561-bbb2-2ed393ab5cd0
@@ -29,9 +33,25 @@ networks:
     name: CZ Routing
     uuid: 46672e0a-bb3c-4f2c-b582-510b0935855c
     type_id: 13
-  - id: &cz_anti_corruption_hotline 22700
-    name: CZ Anti Corruption Hotline
-    uuid: 2e48996a-2aab-4728-b992-2fdd8096a5d2
+  - id: &cz_universal_personal_telecommunications_upt 24173
+    name: CZ Universal Personal Telecommunications Upt
+    uuid: 344da3c7-10ae-4e50-80dc-013ae4f2a2f7
+    type_id: 13
+  - id: &cz_premium_rate_services 24434
+    name: CZ Premium Rate Services
+    uuid: 6e6d69b6-1fa3-4580-8291-a29f991eef9a
+    type_id: 13
+  - id: &cz_premium_rate_services_fixed_charge 24459
+    name: CZ Premium Rate Services Fixed Charge
+    uuid: 1d04fe56-7667-4218-9b0c-3e5e547d2c6f
+    type_id: 13
+  - id: &cz_adults_entertainment_services 24474
+    name: CZ Adults Entertainment Services
+    uuid: 58f2a38e-dbb0-4cc1-bb72-a1190445b358
+    type_id: 13
+  - id: &cz_virtual_private_network 24525
+    name: CZ Virtual Private Network
+    uuid: 9182f862-5c05-46c0-85d9-18e81b39df8e
     type_id: 13
   - id: &cz_freephone_services 23834
     name: CZ Freephone Services
@@ -53,26 +73,6 @@ networks:
     name: CZ Shared Cost Services Universal Access Number Uan
     uuid: 29553468-0498-42c2-b27f-2184f9310936
     type_id: 13
-  - id: &cz_universal_personal_telecommunications_upt 24173
-    name: CZ Universal Personal Telecommunications Upt
-    uuid: 344da3c7-10ae-4e50-80dc-013ae4f2a2f7
-    type_id: 13
-  - id: &cz_premium_rate_services 24434
-    name: CZ Premium Rate Services
-    uuid: 6e6d69b6-1fa3-4580-8291-a29f991eef9a
-    type_id: 13
-  - id: &cz_premium_rate_services_fixed_charge 24459
-    name: CZ Premium Rate Services Fixed Charge
-    uuid: 1d04fe56-7667-4218-9b0c-3e5e547d2c6f
-    type_id: 13
-  - id: &cz_adults_entertainment_services 24474
-    name: CZ Adults Entertainment Services
-    uuid: 58f2a38e-dbb0-4cc1-bb72-a1190445b358
-    type_id: 13
-  - id: &cz_virtual_private_network 24525
-    name: CZ Virtual Private Network
-    uuid: 9182f862-5c05-46c0-85d9-18e81b39df8e
-    type_id: 13
   - id: &cz_private_telephone_networks 26121
     name: CZ Private Telephone Networks
     uuid: d30ed396-c3ea-4d66-8122-01ba713328ee
@@ -90,6 +90,14 @@ networks:
     uuid: 894bcd2a-4d55-450a-9974-0bf50c4c5509
     type_id: 13
 # Fixed Networks
+  - id: &cz_praha_region 22711
+    name: CZ Praha Region
+    uuid: 50190725-cf71-4f07-9632-1fb1e927243a
+    type_id: 2
+  - id: &cz_fixed 43401
+    name: CZ Fixed
+    uuid: b8088572-a739-4528-b814-4982929e1809
+    type_id: 2
   - id: &cz_stredocesky_region 21899
     name: CZ Stredocesky Region
     uuid: ba78f9a3-9f29-43e6-8d53-ed6be9affba1
@@ -118,9 +126,13 @@ networks:
     name: CZ Moravskoslezsky Region
     uuid: 564a59e9-0a32-41de-bd1a-a0264de8295b
     type_id: 2
-  - id: &cz_praha_region 22711
-    name: CZ Praha Region
-    uuid: 50190725-cf71-4f07-9632-1fb1e927243a
+  - id: &cz_voip_region 24481
+    name: CZ Voip Region
+    uuid: 7e7e1d7d-c49f-4c17-8330-27d541446009
+    type_id: 2
+  - id: &cz_voice_mail_region 24515
+    name: CZ Voice Mail Region
+    uuid: ec4f7133-38ce-4606-a13f-f2102d6ca8e8
     type_id: 2
   - id: &cz_pardubicky_region 23231
     name: CZ Pardubicky Region
@@ -146,14 +158,6 @@ networks:
     name: CZ Zlinsky Region
     uuid: e544c837-9296-482d-8fe9-d7a2d0bd0db1
     type_id: 2
-  - id: &cz_voip_region 24481
-    name: CZ Voip Region
-    uuid: 7e7e1d7d-c49f-4c17-8330-27d541446009
-    type_id: 2
-  - id: &cz_voice_mail_region 24515
-    name: CZ Voice Mail Region
-    uuid: ec4f7133-38ce-4606-a13f-f2102d6ca8e8
-    type_id: 2
   - id: &cz_voip_access_code_region 26134
     name: CZ Voip Access Code Region
     uuid: 08eda36e-5a77-4fc5-86e6-ee3f274fea83
@@ -170,6 +174,14 @@ networks:
   - id: &cz_t_mobile_mobile 23543
     name: CZ T Mobile Mobile
     uuid: d3c45d9b-7263-4085-a9d2-5ec319ab17ff
+    type_id: 3
+  - id: &cz_vodafone_mobile 24029
+    name: CZ Vodafone Mobile
+    uuid: 10b176d5-09b9-4806-8206-c54c664c79af
+    type_id: 3
+  - id: &cz_tesco_mobile_mobile 24189
+    name: CZ Tesco Mobile Mobile
+    uuid: df0c6598-1ec3-434a-9a1b-65cd2df66ddc
     type_id: 3
   - id: &cz_fayn_mobile 23544
     name: CZ Fayn Mobile
@@ -202,14 +214,6 @@ networks:
   - id: &cz_compatel_mobile 23610
     name: CZ Compatel Mobile
     uuid: 5a47cce6-a226-4547-9947-eca0b7fac3e6
-    type_id: 3
-  - id: &cz_vodafone_mobile 24029
-    name: CZ Vodafone Mobile
-    uuid: 10b176d5-09b9-4806-8206-c54c664c79af
-    type_id: 3
-  - id: &cz_tesco_mobile_mobile 24189
-    name: CZ Tesco Mobile Mobile
-    uuid: df0c6598-1ec3-434a-9a1b-65cd2df66ddc
     type_id: 3
   - id: &cz_3ton_mobile 24230
     name: CZ 3Ton Mobile
@@ -276,15 +280,14 @@ networks:
     uuid: c9282e9c-858e-4620-b82e-e82555ab082a
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 241979
-    prefix: '420'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 0bbd7f74-1ffe-4112-8d9b-2f9b93602dc2
-    country_id: *cz
-    network_id: null
 # Supplementary services Prefixes
+  - id: 247379
+    prefix: '420199'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: e3b735bc-969b-4355-9949-e6a422366c33
+    country_id: *cz
+    network_id: *cz_anti_corruption_hotline
   - id: 242383
     prefix: '4201'
     number_min_length: 6
@@ -348,62 +351,6 @@ network_prefixes:
     uuid: 1c30b098-5638-4c09-8b49-3e8c4894b445
     country_id: *cz
     network_id: *cz_routing
-  - id: 247379
-    prefix: '420199'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: e3b735bc-969b-4355-9949-e6a422366c33
-    country_id: *cz
-    network_id: *cz_anti_corruption_hotline
-  - id: 253144
-    prefix: '420800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2433fcf9-2dcd-4cec-9a47-d0bc6af4dc12
-    country_id: *cz
-    network_id: *cz_freephone_services
-  - id: 253185
-    prefix: '42080000'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 797b5a82-97fe-44c8-84cb-2edff450810a
-    country_id: *cz
-    network_id: *cz_home_country_direct
-  - id: 253310
-    prefix: '42081'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: abd0bfd3-868c-4be1-a4e1-2d39cc90e025
-    country_id: *cz
-    network_id: *cz_shared_cost_services
-  - id: 253470
-    prefix: '42082'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a90496ac-d381-4893-92cf-ce5d651bb2b5
-    country_id: *cz
-    network_id: *cz_virtual_calling_card_services
-  - id: 253587
-    prefix: '42083'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 30c5f07b-2e05-4853-a233-e551961125da
-    country_id: *cz
-    network_id: *cz_shared_cost_services
-  - id: 253713
-    prefix: '42084'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 30398afa-82bf-4c08-a135-a026d0fb9c84
-    country_id: *cz
-    network_id: *cz_shared_cost_services_universal_access_number_uan
-  - id: 255314
-    prefix: '420700'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ef90efae-0052-4540-bc38-68990099c58c
-    country_id: *cz
-    network_id: *cz_universal_personal_telecommunications_upt
   - id: 255388
     prefix: '420701'
     number_min_length: 12
@@ -467,6 +414,55 @@ network_prefixes:
     uuid: 9a7f2a07-3206-43a3-a787-3d263d51dcfb
     country_id: *cz
     network_id: *cz_virtual_private_network
+  - id: 255314
+    prefix: '420700'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ef90efae-0052-4540-bc38-68990099c58c
+    country_id: *cz
+    network_id: *cz_universal_personal_telecommunications_upt
+  - id: 253144
+    prefix: '420800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2433fcf9-2dcd-4cec-9a47-d0bc6af4dc12
+    country_id: *cz
+    network_id: *cz_freephone_services
+  - id: 253185
+    prefix: '42080000'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 797b5a82-97fe-44c8-84cb-2edff450810a
+    country_id: *cz
+    network_id: *cz_home_country_direct
+  - id: 253310
+    prefix: '42081'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: abd0bfd3-868c-4be1-a4e1-2d39cc90e025
+    country_id: *cz
+    network_id: *cz_shared_cost_services
+  - id: 253470
+    prefix: '42082'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a90496ac-d381-4893-92cf-ce5d651bb2b5
+    country_id: *cz
+    network_id: *cz_virtual_calling_card_services
+  - id: 253587
+    prefix: '42083'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 30c5f07b-2e05-4853-a233-e551961125da
+    country_id: *cz
+    network_id: *cz_shared_cost_services
+  - id: 253713
+    prefix: '42084'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 30398afa-82bf-4c08-a135-a026d0fb9c84
+    country_id: *cz
+    network_id: *cz_shared_cost_services_universal_access_number_uan
   - id: 264436
     prefix: '42095'
     number_min_length: 12
@@ -517,6 +513,20 @@ network_prefixes:
     country_id: *cz
     network_id: *cz_public_data_networks_interactive_services_
 # Fixed Prefixes
+  - id: 247399
+    prefix: '4202'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f9b25844-62e9-41ed-82ff-66df7a3be9d5
+    country_id: *cz
+    network_id: *cz_praha_region
+  - id: 241979
+    prefix: '420'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 0bbd7f74-1ffe-4112-8d9b-2f9b93602dc2
+    country_id: *cz
+    network_id: *cz_fixed
   - id: 243228
     prefix: '42031'
     number_min_length: 12
@@ -580,13 +590,20 @@ network_prefixes:
     uuid: e094ac7a-1116-43c5-9119-db132c9b972c
     country_id: *cz
     network_id: *cz_moravskoslezsky_region
-  - id: 247399
-    prefix: '4202'
+  - id: 257376
+    prefix: '420910'
     number_min_length: 12
     number_max_length: 12
-    uuid: f9b25844-62e9-41ed-82ff-66df7a3be9d5
+    uuid: 50363110-48cc-4c88-a381-0d6f13ee70bd
     country_id: *cz
-    network_id: *cz_praha_region
+    network_id: *cz_voip_region
+  - id: 257860
+    prefix: '42093'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 1c62e8e6-afb0-49d7-82dc-e84873dabca2
+    country_id: *cz
+    network_id: *cz_voice_mail_region
   - id: 249082
     prefix: '42046'
     number_min_length: 12
@@ -657,20 +674,6 @@ network_prefixes:
     uuid: 31a4fb20-8242-4a0b-9de5-a543eae334f8
     country_id: *cz
     network_id: *cz_zlinsky_region
-  - id: 257376
-    prefix: '420910'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 50363110-48cc-4c88-a381-0d6f13ee70bd
-    country_id: *cz
-    network_id: *cz_voip_region
-  - id: 257860
-    prefix: '42093'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 1c62e8e6-afb0-49d7-82dc-e84873dabca2
-    country_id: *cz
-    network_id: *cz_voice_mail_region
   - id: 264713
     prefix: '42096'
     number_min_length: 12
@@ -707,6 +710,125 @@ network_prefixes:
     uuid: f86e7acf-7faf-45cc-b66e-ea3ab8f1d703
     country_id: *cz
     network_id: *cz_o2_mobile
+  - id: 253810
+    prefix: '420603'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7fb26dd5-22c0-4242-81fb-b3985125dbe2
+    country_id: *cz
+    network_id: *cz_t_mobile_mobile
+  - id: 253830
+    prefix: '420604'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 706bbbe3-a953-422d-abce-8218bd810bed
+    country_id: *cz
+    network_id: *cz_t_mobile_mobile
+  - id: 253861
+    prefix: '420605'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b724e493-d21d-43eb-a77e-9de119214afa
+    country_id: *cz
+    network_id: *cz_t_mobile_mobile
+  - id: 253886
+    prefix: '420606'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8994aa3b-3b7f-4b39-8cdd-338268a9a80b
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 253907
+    prefix: '420607'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 251c4e35-4ff9-4c52-8b44-d3d45ab7365c
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 253914
+    prefix: '420608'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9aef8feb-69aa-4baa-994d-93baa55369d8
+    country_id: *cz
+    network_id: *cz_vodafone_mobile
+  - id: 255408
+    prefix: '4207020'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f2dbebfa-8c21-47d1-be30-372833c6d00b
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 255409
+    prefix: '4207021'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f45ecf94-6e31-4c68-a2c7-e9d17c5f58f5
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 255410
+    prefix: '4207022'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ec748b53-d202-474d-a9f1-0cb88ce5d760
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 255411
+    prefix: '4207023'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2657f25d-631b-4fb3-88e4-803420f88a89
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 255412
+    prefix: '4207024'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5601ab54-1228-4f9d-844c-6dc6d3be70f3
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 255413
+    prefix: '4207025'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 536f97af-0692-476b-8ab2-10343bb438d7
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 255414
+    prefix: '4207026'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e820ce8d-3a1c-4ef0-b170-87e1116d1103
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 255415
+    prefix: '4207027'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a213d7b-2c24-42ce-8ec3-efb5d96cccbd
+    country_id: *cz
+    network_id: *cz_o2_mobile
+  - id: 255416
+    prefix: '4207028'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 85f1051e-2cb5-4b47-956e-5f69c7b8ac55
+    country_id: *cz
+    network_id: *cz_tesco_mobile_mobile
+  - id: 255417
+    prefix: '4207029'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6e021277-645d-4abe-af4f-ae96faa4241f
+    country_id: *cz
+    network_id: *cz_tesco_mobile_mobile
+  - id: 255419
+    prefix: '420703'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1a64ff48-b5d2-4404-b89c-b18d73abe092
+    country_id: *cz
+    network_id: *cz_mobile
   - id: 251579
     prefix: '42070300'
     number_min_length: 12
@@ -1127,130 +1249,11 @@ network_prefixes:
     uuid: 167aadd5-6ca9-4d6f-a5ea-a7873a2d9f80
     country_id: *cz
     network_id: *cz_t_mobile_mobile
-  - id: 253810
-    prefix: '420603'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7fb26dd5-22c0-4242-81fb-b3985125dbe2
-    country_id: *cz
-    network_id: *cz_t_mobile_mobile
-  - id: 253830
-    prefix: '420604'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 706bbbe3-a953-422d-abce-8218bd810bed
-    country_id: *cz
-    network_id: *cz_t_mobile_mobile
-  - id: 253861
-    prefix: '420605'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b724e493-d21d-43eb-a77e-9de119214afa
-    country_id: *cz
-    network_id: *cz_t_mobile_mobile
-  - id: 253886
-    prefix: '420606'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8994aa3b-3b7f-4b39-8cdd-338268a9a80b
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 253907
-    prefix: '420607'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 251c4e35-4ff9-4c52-8b44-d3d45ab7365c
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 253914
-    prefix: '420608'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9aef8feb-69aa-4baa-994d-93baa55369d8
-    country_id: *cz
-    network_id: *cz_vodafone_mobile
   - id: 255244
     prefix: '4207'
     number_min_length: 12
     number_max_length: 12
     uuid: d158f8b5-4613-46bf-b086-f3cb65d3291f
-    country_id: *cz
-    network_id: *cz_mobile
-  - id: 255408
-    prefix: '4207020'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f2dbebfa-8c21-47d1-be30-372833c6d00b
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 255409
-    prefix: '4207021'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f45ecf94-6e31-4c68-a2c7-e9d17c5f58f5
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 255410
-    prefix: '4207022'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ec748b53-d202-474d-a9f1-0cb88ce5d760
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 255411
-    prefix: '4207023'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2657f25d-631b-4fb3-88e4-803420f88a89
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 255412
-    prefix: '4207024'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5601ab54-1228-4f9d-844c-6dc6d3be70f3
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 255413
-    prefix: '4207025'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 536f97af-0692-476b-8ab2-10343bb438d7
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 255414
-    prefix: '4207026'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e820ce8d-3a1c-4ef0-b170-87e1116d1103
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 255415
-    prefix: '4207027'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5a213d7b-2c24-42ce-8ec3-efb5d96cccbd
-    country_id: *cz
-    network_id: *cz_o2_mobile
-  - id: 255416
-    prefix: '4207028'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 85f1051e-2cb5-4b47-956e-5f69c7b8ac55
-    country_id: *cz
-    network_id: *cz_tesco_mobile_mobile
-  - id: 255417
-    prefix: '4207029'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6e021277-645d-4abe-af4f-ae96faa4241f
-    country_id: *cz
-    network_id: *cz_tesco_mobile_mobile
-  - id: 255419
-    prefix: '420703'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1a64ff48-b5d2-4404-b89c-b18d73abe092
     country_id: *cz
     network_id: *cz_mobile
   - id: 255654

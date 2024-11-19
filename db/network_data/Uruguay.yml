@@ -1,9 +1,17 @@
 country_id: &uy 227
 networks:
 # Supplementary services Networks
+  - id: &uy_freephone_services 38520
+    name: UY Freephone Services
+    uuid: 3b8b9a20-96c7-4236-a37c-95f6f5046dde
+    type_id: 13
   - id: &uy_alternative_collection_services 19967
     name: UY Alternative Collection Services
     uuid: bdb6b8ce-d75e-4d0c-86ec-3a074153d633
+    type_id: 13
+  - id: &uy_value_added_services 41688
+    name: UY Value Added Services
+    uuid: df5417ca-09e5-46c2-af08-3cec094ab019
     type_id: 13
   - id: &uy_preselected_international_network_operator 21288
     name: UY Preselected International Network Operator
@@ -21,23 +29,7 @@ networks:
     name: UY Emergency Service
     uuid: d3f2d370-f3be-4106-89c7-8a945390ef1a
     type_id: 13
-  - id: &uy_freephone_services 38520
-    name: UY Freephone Services
-    uuid: 3b8b9a20-96c7-4236-a37c-95f6f5046dde
-    type_id: 13
-  - id: &uy_value_added_services 41688
-    name: UY Value Added Services
-    uuid: df5417ca-09e5-46c2-af08-3cec094ab019
-    type_id: 13
 # Mobile Networks
-  - id: &uy_movistar_mobile 20043
-    name: UY Movistar Mobile
-    uuid: ffe5aaad-f31f-4da7-a7f1-484dcc25e951
-    type_id: 3
-  - id: &uy_claro_mobile 20460
-    name: UY Claro Mobile
-    uuid: 949cb483-ef32-4e99-ae19-377171930166
-    type_id: 3
   - id: &uy_antel_movil_mobile 20793
     name: UY Antel Movil Mobile
     uuid: 13596192-43dd-41cd-870f-c9ded4a02eb6
@@ -46,7 +38,23 @@ networks:
     name: UY Mobile
     uuid: 8f7768b9-877b-401c-ab13-de5e148dfc16
     type_id: 3
+  - id: &uy_movistar_mobile 20043
+    name: UY Movistar Mobile
+    uuid: ffe5aaad-f31f-4da7-a7f1-484dcc25e951
+    type_id: 3
+  - id: &uy_claro_mobile 20460
+    name: UY Claro Mobile
+    uuid: 949cb483-ef32-4e99-ae19-377171930166
+    type_id: 3
 # Fixed Networks
+  - id: &uy_montevideo_area_metropolitana_amm_region 22737
+    name: UY Montevideo Area Metropolitana Amm Region
+    uuid: 2000f821-83f8-4cde-a1b3-b6c493562e5a
+    type_id: 2
+  - id: &uy_fixed 43478
+    name: UY Fixed
+    uuid: 5df7b232-1fa3-4755-bdb6-d8dad25a85fc
+    type_id: 2
   - id: &uy_interior_del_pais_region 22151
     name: UY Interior Del Pais Region
     uuid: 1bdc39e0-5616-43ce-8c1b-f7e01b404e41
@@ -371,10 +379,6 @@ networks:
     name: UY San Javier Region
     uuid: ba62a065-2ec9-4d44-a188-4fe5b3ae42e0
     type_id: 2
-  - id: &uy_montevideo_area_metropolitana_amm_region 22737
-    name: UY Montevideo Area Metropolitana Amm Region
-    uuid: 2000f821-83f8-4cde-a1b3-b6c493562e5a
-    type_id: 2
   - id: &uy_miguelete_region 23221
     name: UY Miguelete Region
     uuid: f604d965-e4dc-46f5-828b-ec677c646501
@@ -513,41 +517,6 @@ networks:
     type_id: 2
 network_prefixes:
 # Supplementary services Prefixes
-  - id: 209221
-    prefix: '598805'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 621b034b-185a-4197-ab38-6e2578970218
-    country_id: *uy
-    network_id: *uy_alternative_collection_services
-  - id: 242159
-    prefix: '598000'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: d7d6ff1b-0832-4c59-b990-988426e3d1fb
-    country_id: *uy
-    network_id: *uy_preselected_international_network_operator
-  - id: 242170
-    prefix: '59801'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2e24b473-ec2b-490b-b4cb-f8f81c7082fb
-    country_id: *uy
-    network_id: *uy_selected_international_network_operator
-  - id: 242514
-    prefix: '5981'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: b8205e44-a65a-48a0-9111-2e5ebe8518a7
-    country_id: *uy
-    network_id: *uy_special_services
-  - id: 257397
-    prefix: '598911'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 327b9779-6dbd-4111-91bf-98b110b3d243
-    country_id: *uy
-    network_id: *uy_emergency_service
   - id: 403496
     prefix: '598800'
     number_min_length: 10
@@ -555,13 +524,13 @@ network_prefixes:
     uuid: 03b24060-8c25-424f-bf5c-04afce53c786
     country_id: *uy
     network_id: *uy_freephone_services
-  - id: 447289
-    prefix: '598903'
+  - id: 209221
+    prefix: '598805'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0235ce8c-1d51-4a54-ae2a-3a6b16861787
+    uuid: 621b034b-185a-4197-ab38-6e2578970218
     country_id: *uy
-    network_id: *uy_value_added_services
+    network_id: *uy_alternative_collection_services
   - id: 454590
     prefix: '598900'
     number_min_length: 10
@@ -590,6 +559,27 @@ network_prefixes:
     uuid: 788003f8-2537-406f-9c13-bf045f5a5432
     country_id: *uy
     network_id: *uy_value_added_services
+  - id: 462752
+    prefix: '598906'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 42f298d3-2ec2-4c90-a9f0-84844bcb8e74
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 447289
+    prefix: '598903'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0235ce8c-1d51-4a54-ae2a-3a6b16861787
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 462681
+    prefix: '598905'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6a14d94c-6a71-4cd4-8c16-01c0ed6ce95a
+    country_id: *uy
+    network_id: *uy_value_added_services
   - id: 456601
     prefix: '598907'
     number_min_length: 10
@@ -604,77 +594,42 @@ network_prefixes:
     uuid: dffe74f4-60d5-4971-9cd9-43288679127a
     country_id: *uy
     network_id: *uy_value_added_services
-  - id: 462681
-    prefix: '598905'
+  - id: 242159
+    prefix: '598000'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: d7d6ff1b-0832-4c59-b990-988426e3d1fb
+    country_id: *uy
+    network_id: *uy_preselected_international_network_operator
+  - id: 242170
+    prefix: '59801'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6a14d94c-6a71-4cd4-8c16-01c0ed6ce95a
+    uuid: 2e24b473-ec2b-490b-b4cb-f8f81c7082fb
     country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 462752
-    prefix: '598906'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 42f298d3-2ec2-4c90-a9f0-84844bcb8e74
+    network_id: *uy_selected_international_network_operator
+  - id: 242514
+    prefix: '5981'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: b8205e44-a65a-48a0-9111-2e5ebe8518a7
     country_id: *uy
-    network_id: *uy_value_added_services
+    network_id: *uy_special_services
+  - id: 257397
+    prefix: '598911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 327b9779-6dbd-4111-91bf-98b110b3d243
+    country_id: *uy
+    network_id: *uy_emergency_service
 # Mobile Prefixes
-  - id: 212513
-    prefix: '59894'
+  - id: 458160
+    prefix: '59891'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1f0c98f3-f851-4ff2-8b65-c2fa7ddcdc16
+    uuid: 6f48a47e-248f-4726-9e91-171768fab3fd
     country_id: *uy
-    network_id: *uy_movistar_mobile
-  - id: 215155
-    prefix: '59895'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 014b02ea-d2a3-48d2-9868-bc17e598680a
-    country_id: *uy
-    network_id: *uy_movistar_mobile
-  - id: 221955
-    prefix: '59896'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a0bb0004-fa49-476c-a026-f6d0de68cb87
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 224445
-    prefix: '598971'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0e9aff0b-811a-459a-a299-975c2c013942
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 224546
-    prefix: '598972'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5905851b-a6c6-437e-b596-ed680f345cb8
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 224646
-    prefix: '598973'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 87be12a7-6db9-4ed4-a875-ec9cb116fe28
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 224747
-    prefix: '598974'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b18d2423-a679-429f-a535-0b25b66a645b
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 227375
-    prefix: '598970'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1b9b62e6-0602-47ac-8886-3b65683be168
-    country_id: *uy
-    network_id: *uy_claro_mobile
+    network_id: *uy_antel_movil_mobile
   - id: 231743
     prefix: '59898'
     number_min_length: 11
@@ -696,13 +651,6 @@ network_prefixes:
     uuid: 60bb6265-126f-4175-b124-3dd66fe4f53b
     country_id: *uy
     network_id: *uy_mobile
-  - id: 458160
-    prefix: '59891'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f48a47e-248f-4726-9e91-171768fab3fd
-    country_id: *uy
-    network_id: *uy_antel_movil_mobile
   - id: 468957
     prefix: '598920'
     number_min_length: 11
@@ -745,15 +693,77 @@ network_prefixes:
     uuid: f98d9a03-3191-451a-9e1b-6c5cd408e3ae
     country_id: *uy
     network_id: *uy_movistar_mobile
-# Country code Prefixes
+  - id: 212513
+    prefix: '59894'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1f0c98f3-f851-4ff2-8b65-c2fa7ddcdc16
+    country_id: *uy
+    network_id: *uy_movistar_mobile
+  - id: 215155
+    prefix: '59895'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 014b02ea-d2a3-48d2-9868-bc17e598680a
+    country_id: *uy
+    network_id: *uy_movistar_mobile
+  - id: 221955
+    prefix: '59896'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0bb0004-fa49-476c-a026-f6d0de68cb87
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 227375
+    prefix: '598970'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1b9b62e6-0602-47ac-8886-3b65683be168
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 224445
+    prefix: '598971'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0e9aff0b-811a-459a-a299-975c2c013942
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 224546
+    prefix: '598972'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5905851b-a6c6-437e-b596-ed680f345cb8
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 224646
+    prefix: '598973'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87be12a7-6db9-4ed4-a875-ec9cb116fe28
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 224747
+    prefix: '598974'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b18d2423-a679-429f-a535-0b25b66a645b
+    country_id: *uy
+    network_id: *uy_claro_mobile
+# Fixed Prefixes
+  - id: 247445
+    prefix: '5982'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f77a8a7-67cc-4c4c-88e3-00ab2fb1a3bc
+    country_id: *uy
+    network_id: *uy_montevideo_area_metropolitana_amm_region
   - id: 242127
     prefix: '598'
     number_min_length: 4
     number_max_length: 100
     uuid: 4d21eaa9-51ea-42bf-97d0-d64d9c071372
     country_id: *uy
-    network_id: null
-# Fixed Prefixes
+    network_id: *uy_fixed
   - id: 243969
     prefix: '5984'
     number_min_length: 11
@@ -1804,13 +1814,6 @@ network_prefixes:
     uuid: 597c695b-fb02-4305-8c7d-6c9f6f7a95e4
     country_id: *uy
     network_id: *uy_san_javier_region
-  - id: 247445
-    prefix: '5982'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7f77a8a7-67cc-4c4c-88e3-00ab2fb1a3bc
-    country_id: *uy
-    network_id: *uy_montevideo_area_metropolitana_amm_region
   - id: 249031
     prefix: '59845705'
     number_min_length: 11

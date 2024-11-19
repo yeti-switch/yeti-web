@@ -1,9 +1,69 @@
 country_id: &eg 63
 networks:
 # Fixed Networks
+  - id: &eg_port_said_region 13672
+    name: EG Port Said Region
+    uuid: 2954998b-16fe-480c-b358-baeb59f14de2
+    type_id: 2
+  - id: &eg_south_sinai_region 14296
+    name: EG South Sinai Region
+    uuid: 0070d3b3-1e6a-4bc4-95a0-0e7c493cfb19
+    type_id: 2
+  - id: &eg_north_sinai_region 14224
+    name: EG North Sinai Region
+    uuid: 7e2c2f48-0a52-4ef9-b8e9-a692f8d5cdaf
+    type_id: 2
+  - id: &eg_beni_suef_region 39687
+    name: EG Beni Suef Region
+    uuid: 18ddc96f-f637-4a30-9f19-7d5ee4f5c60a
+    type_id: 2
+  - id: &eg_elfayoum_region 40846
+    name: EG Elfayoum Region
+    uuid: 00b46a5f-fd72-427f-a847-96556946923f
+    type_id: 2
+  - id: &eg_elminia_region 40531
+    name: EG Elminia Region
+    uuid: 7efa798e-ac17-4181-ae9d-e4fe9c50d37f
+    type_id: 2
+  - id: &eg_assiut_region 41557
+    name: EG Assiut Region
+    uuid: 3965915d-1b9f-43b5-9fb1-f49eb36ef843
+    type_id: 2
+  - id: &eg_fixed 43406
+    name: EG Fixed
+    uuid: 03b2e623-20f7-499a-8029-f9877dd1bf3c
+    type_id: 2
+  - id: &eg_elqalubia_region 25025
+    name: EG Elqalubia Region
+    uuid: dd881888-cc34-422b-b938-1e42da318520
+    type_id: 2
+  - id: &eg_cairo_region 25840
+    name: EG Cairo Region
+    uuid: 47ade2ec-48d7-46a8-b2f3-3f441501e7db
+    type_id: 2
+  - id: &eg_alexandria_region 31288
+    name: EG Alexandria Region
+    uuid: 0c62aded-7c77-4055-8842-9f0ae1af333c
+    type_id: 2
+  - id: &eg_elgharbia_region 34311
+    name: EG Elgharbia Region
+    uuid: f963e6e4-92e0-40f4-8ab5-4cfbcbd0395d
+    type_id: 2
+  - id: &eg_elbehera_region 37890
+    name: EG Elbehera Region
+    uuid: 7f9d8918-4b60-44f2-b600-7f6c5e6e5255
+    type_id: 2
+  - id: &eg_mersa_matrouh_region 37829
+    name: EG Mersa Matrouh Region
+    uuid: 513c1fd1-a7c0-40ab-af0e-401d5649878d
+    type_id: 2
   - id: &eg_el_menufia_region 4195
     name: EG El Menufia Region
     uuid: 87eb1351-5c89-425a-8211-2e6e52b62488
+    type_id: 2
+  - id: &eg_kafr_el_sheikh_region 38304
+    name: EG Kafr El Sheikh Region
+    uuid: a80e7623-7181-4925-b434-f849c8ee5386
     type_id: 2
   - id: &eg_el_dakahlia_region 4662
     name: EG El Dakahlia Region
@@ -29,17 +89,13 @@ networks:
     name: EG El Red Sea Region
     uuid: 6df6f7b2-a802-421f-bf30-a3c6156d196e
     type_id: 2
-  - id: &eg_port_said_region 13672
-    name: EG Port Said Region
-    uuid: 2954998b-16fe-480c-b358-baeb59f14de2
+  - id: &eg_el_wadi_el_gadeed_region 42787
+    name: EG El Wadi El Gadeed Region
+    uuid: d1f65981-da46-47af-a67b-b87c654f774e
     type_id: 2
-  - id: &eg_north_sinai_region 14224
-    name: EG North Sinai Region
-    uuid: 7e2c2f48-0a52-4ef9-b8e9-a692f8d5cdaf
-    type_id: 2
-  - id: &eg_south_sinai_region 14296
-    name: EG South Sinai Region
-    uuid: 0070d3b3-1e6a-4bc4-95a0-0e7c493cfb19
+  - id: &eg_souhag_region 43090
+    name: EG Souhag Region
+    uuid: 916c9184-f5d9-4c0a-bb72-dd1e06b14e79
     type_id: 2
   - id: &eg_luxor_region 20268
     name: EG Luxor Region
@@ -53,59 +109,11 @@ networks:
     name: EG Aswan Region
     uuid: 7d890ce1-486a-411c-9eff-08974c2e70d1
     type_id: 2
-  - id: &eg_elqalubia_region 25025
-    name: EG Elqalubia Region
-    uuid: dd881888-cc34-422b-b938-1e42da318520
-    type_id: 2
-  - id: &eg_cairo_region 25840
-    name: EG Cairo Region
-    uuid: 47ade2ec-48d7-46a8-b2f3-3f441501e7db
-    type_id: 2
-  - id: &eg_alexandria_region 31288
-    name: EG Alexandria Region
-    uuid: 0c62aded-7c77-4055-8842-9f0ae1af333c
-    type_id: 2
-  - id: &eg_elgharbia_region 34311
-    name: EG Elgharbia Region
-    uuid: f963e6e4-92e0-40f4-8ab5-4cfbcbd0395d
-    type_id: 2
-  - id: &eg_mersa_matrouh_region 37829
-    name: EG Mersa Matrouh Region
-    uuid: 513c1fd1-a7c0-40ab-af0e-401d5649878d
-    type_id: 2
-  - id: &eg_elbehera_region 37890
-    name: EG Elbehera Region
-    uuid: 7f9d8918-4b60-44f2-b600-7f6c5e6e5255
-    type_id: 2
-  - id: &eg_kafr_el_sheikh_region 38304
-    name: EG Kafr El Sheikh Region
-    uuid: a80e7623-7181-4925-b434-f849c8ee5386
-    type_id: 2
-  - id: &eg_beni_suef_region 39687
-    name: EG Beni Suef Region
-    uuid: 18ddc96f-f637-4a30-9f19-7d5ee4f5c60a
-    type_id: 2
-  - id: &eg_elminia_region 40531
-    name: EG Elminia Region
-    uuid: 7efa798e-ac17-4181-ae9d-e4fe9c50d37f
-    type_id: 2
-  - id: &eg_elfayoum_region 40846
-    name: EG Elfayoum Region
-    uuid: 00b46a5f-fd72-427f-a847-96556946923f
-    type_id: 2
-  - id: &eg_assiut_region 41557
-    name: EG Assiut Region
-    uuid: 3965915d-1b9f-43b5-9fb1-f49eb36ef843
-    type_id: 2
-  - id: &eg_el_wadi_el_gadeed_region 42787
-    name: EG El Wadi El Gadeed Region
-    uuid: d1f65981-da46-47af-a67b-b87c654f774e
-    type_id: 2
-  - id: &eg_souhag_region 43090
-    name: EG Souhag Region
-    uuid: 916c9184-f5d9-4c0a-bb72-dd1e06b14e79
-    type_id: 2
 # Supplementary services Networks
+  - id: &eg_special_services 21821
+    name: EG Special Services
+    uuid: 23b08877-2086-43c8-8344-43e617790415
+    type_id: 13
   - id: &eg_free_internet_access 21332
     name: EG Free Internet Access
     uuid: c88dd732-5161-4656-926d-86fede483142
@@ -121,10 +129,6 @@ networks:
   - id: &eg_emergency_services 21395
     name: EG Emergency Services
     uuid: b6b7a367-4773-4a45-8cc9-577a58f05c11
-    type_id: 13
-  - id: &eg_special_services 21821
-    name: EG Special Services
-    uuid: 23b08877-2086-43c8-8344-43e617790415
     type_id: 13
 # Mobile Networks
   - id: &eg_vodafone_mobile 24804
@@ -145,6 +149,104 @@ networks:
     type_id: 3
 network_prefixes:
 # Fixed Prefixes
+  - id: 138618
+    prefix: '2066'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 63e8108d-62b2-4643-9894-587ce3d43893
+    country_id: *eg
+    network_id: *eg_port_said_region
+  - id: 148655
+    prefix: '2069'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6b58f7bd-3246-4827-bbdd-ff8cdf5bf0dc
+    country_id: *eg
+    network_id: *eg_south_sinai_region
+  - id: 146813
+    prefix: '2068'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 92ab1a50-5a6a-4273-8584-26cf124e06fb
+    country_id: *eg
+    network_id: *eg_north_sinai_region
+  - id: 418784
+    prefix: '2082'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0289a5f6-48d2-47b9-95c1-f3f062eff580
+    country_id: *eg
+    network_id: *eg_beni_suef_region
+  - id: 433210
+    prefix: '2084'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 522747bc-2b6d-47c1-86fb-914ba4fef29c
+    country_id: *eg
+    network_id: *eg_elfayoum_region
+  - id: 428695
+    prefix: '2086'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4220738b-48ed-4e43-94e5-f3cb8680aa29
+    country_id: *eg
+    network_id: *eg_elminia_region
+  - id: 443785
+    prefix: '2088'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8460f3b-d36e-4bdc-bc45-3ce648f1be52
+    country_id: *eg
+    network_id: *eg_assiut_region
+  - id: 241986
+    prefix: '20'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 0b84a9dd-f824-40eb-a8c4-b20bfca9939f
+    country_id: *eg
+    network_id: *eg_fixed
+  - id: 259504
+    prefix: '2013'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e3c5ef2d-82fd-4a11-9ed2-f046db83afa3
+    country_id: *eg
+    network_id: *eg_elqalubia_region
+  - id: 261188
+    prefix: '202'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 759f5de8-0096-4194-8e5b-dda959cb1b79
+    country_id: *eg
+    network_id: *eg_cairo_region
+  - id: 315866
+    prefix: '203'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7dc6fc6b-459b-49fe-87d2-6f67246d1c46
+    country_id: *eg
+    network_id: *eg_alexandria_region
+  - id: 349888
+    prefix: '2040'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e922f483-181c-43bd-b67c-b9e97b79378f
+    country_id: *eg
+    network_id: *eg_elgharbia_region
+  - id: 392614
+    prefix: '2045'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bfd8ddd2-e37b-40a3-97c1-d5fc314e6dfe
+    country_id: *eg
+    network_id: *eg_elbehera_region
+  - id: 388626
+    prefix: '2046'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b14d6476-d9e1-4bb8-b14d-8c546ef51d7a
+    country_id: *eg
+    network_id: *eg_mersa_matrouh_region
   - id: 51608
     prefix: '2048'
     number_min_length: 11
@@ -152,6 +254,13 @@ network_prefixes:
     uuid: 924951ac-3b01-4890-a3c4-aea517b9f502
     country_id: *eg
     network_id: *eg_el_menufia_region
+  - id: 399476
+    prefix: '2047'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e74b03e-6b14-4748-a04e-deda97ea629f
+    country_id: *eg
+    network_id: *eg_kafr_el_sheikh_region
   - id: 54916
     prefix: '2050'
     number_min_length: 11
@@ -194,27 +303,20 @@ network_prefixes:
     uuid: 24ee338a-90a8-4a3f-97c0-5bef4fa6e4c0
     country_id: *eg
     network_id: *eg_el_red_sea_region
-  - id: 138618
-    prefix: '2066'
+  - id: 468944
+    prefix: '2092'
     number_min_length: 11
     number_max_length: 11
-    uuid: 63e8108d-62b2-4643-9894-587ce3d43893
+    uuid: 3415fcdf-a2da-413e-bdb2-b27e18a6974e
     country_id: *eg
-    network_id: *eg_port_said_region
-  - id: 146813
-    prefix: '2068'
+    network_id: *eg_el_wadi_el_gadeed_region
+  - id: 485425
+    prefix: '2093'
     number_min_length: 11
     number_max_length: 11
-    uuid: 92ab1a50-5a6a-4273-8584-26cf124e06fb
+    uuid: 92f957ad-386d-459d-b384-e835c8da1828
     country_id: *eg
-    network_id: *eg_north_sinai_region
-  - id: 148655
-    prefix: '2069'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6b58f7bd-3246-4827-bbdd-ff8cdf5bf0dc
-    country_id: *eg
-    network_id: *eg_south_sinai_region
+    network_id: *eg_souhag_region
   - id: 215141
     prefix: '2095'
     number_min_length: 11
@@ -236,106 +338,14 @@ network_prefixes:
     uuid: 65f285e5-a312-4da1-b9ec-b0acffc86d46
     country_id: *eg
     network_id: *eg_aswan_region
-  - id: 259504
-    prefix: '2013'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e3c5ef2d-82fd-4a11-9ed2-f046db83afa3
-    country_id: *eg
-    network_id: *eg_elqalubia_region
-  - id: 261188
-    prefix: '202'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 759f5de8-0096-4194-8e5b-dda959cb1b79
-    country_id: *eg
-    network_id: *eg_cairo_region
-  - id: 315866
-    prefix: '203'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7dc6fc6b-459b-49fe-87d2-6f67246d1c46
-    country_id: *eg
-    network_id: *eg_alexandria_region
-  - id: 349888
-    prefix: '2040'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e922f483-181c-43bd-b67c-b9e97b79378f
-    country_id: *eg
-    network_id: *eg_elgharbia_region
-  - id: 388626
-    prefix: '2046'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b14d6476-d9e1-4bb8-b14d-8c546ef51d7a
-    country_id: *eg
-    network_id: *eg_mersa_matrouh_region
-  - id: 392614
-    prefix: '2045'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bfd8ddd2-e37b-40a3-97c1-d5fc314e6dfe
-    country_id: *eg
-    network_id: *eg_elbehera_region
-  - id: 399476
-    prefix: '2047'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e74b03e-6b14-4748-a04e-deda97ea629f
-    country_id: *eg
-    network_id: *eg_kafr_el_sheikh_region
-  - id: 418784
-    prefix: '2082'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0289a5f6-48d2-47b9-95c1-f3f062eff580
-    country_id: *eg
-    network_id: *eg_beni_suef_region
-  - id: 428695
-    prefix: '2086'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4220738b-48ed-4e43-94e5-f3cb8680aa29
-    country_id: *eg
-    network_id: *eg_elminia_region
-  - id: 433210
-    prefix: '2084'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 522747bc-2b6d-47c1-86fb-914ba4fef29c
-    country_id: *eg
-    network_id: *eg_elfayoum_region
-  - id: 443785
-    prefix: '2088'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d8460f3b-d36e-4bdc-bc45-3ce648f1be52
-    country_id: *eg
-    network_id: *eg_assiut_region
-  - id: 468944
-    prefix: '2092'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3415fcdf-a2da-413e-bdb2-b27e18a6974e
-    country_id: *eg
-    network_id: *eg_el_wadi_el_gadeed_region
-  - id: 485425
-    prefix: '2093'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 92f957ad-386d-459d-b384-e835c8da1828
-    country_id: *eg
-    network_id: *eg_souhag_region
-# Country code Prefixes
-  - id: 241986
-    prefix: '20'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 0b84a9dd-f824-40eb-a8c4-b20bfca9939f
-    country_id: *eg
-    network_id: null
 # Supplementary services Prefixes
+  - id: 247334
+    prefix: '2019'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 9eb29e34-369d-4f83-a401-37e43ba70294
+    country_id: *eg
+    network_id: *eg_special_services
   - id: 242292
     prefix: '200707'
     number_min_length: 10
@@ -376,13 +386,6 @@ network_prefixes:
     number_min_length: 7
     number_max_length: 7
     uuid: 25951dc8-7a2c-4d60-8142-05db810fad31
-    country_id: *eg
-    network_id: *eg_special_services
-  - id: 247334
-    prefix: '2019'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 9eb29e34-369d-4f83-a401-37e43ba70294
     country_id: *eg
     network_id: *eg_special_services
 # Mobile Prefixes

@@ -1,21 +1,43 @@
 country_id: &dz 3
 networks:
+# Mobile Networks
+  - id: &dz_mobilis_mobile 14367
+    name: DZ Mobilis Mobile
+    uuid: 4e6bce25-afef-4c01-ab93-fbf3121a7e30
+    type_id: 3
+  - id: &dz_djezzy_mobile 19773
+    name: DZ Djezzy Mobile
+    uuid: 4715bc49-b64b-4d65-8357-d938053e6caf
+    type_id: 3
+  - id: &dz_ooredoo_mobile 8965
+    name: DZ Ooredoo Mobile
+    uuid: cb762dcd-46f5-43f4-84fe-2d0cc8c73846
+    type_id: 3
+# Supplementary services Networks
+  - id: &dz_freephone_services 19851
+    name: DZ Freephone Services
+    uuid: bc2a1eaf-1265-4038-8c62-b18f5501c48b
+    type_id: 13
+  - id: &dz_value_added_services 38472
+    name: DZ Value Added Services
+    uuid: 9f209042-46d5-4069-b469-a6245b0818c2
+    type_id: 13
+  - id: &dz_value_added_services_games_and_competitions 38477
+    name: DZ Value Added Services Games And Competitions
+    uuid: f6dbf4fb-bf1d-4820-878a-30fa220f696d
+    type_id: 13
+  - id: &dz_special_services 20796
+    name: DZ Special Services
+    uuid: 5f704da5-effd-4c6a-afa8-3c3272fd118e
+    type_id: 13
 # Fixed Networks
-  - id: &dz_saida_sidi_bel_abbes_region 4194
-    name: DZ Saida Sidi Bel Abbes Region
-    uuid: 44c30798-af99-4684-bca2-822e437f729b
-    type_id: 2
-  - id: &dz_adrar_bechar_el_bayadh_naama_tindouf_region 5021
-    name: DZ Adrar Bechar El Bayadh Naama Tindouf Region
-    uuid: 6aa296e8-b089-45a2-b9e3-bb32189378d6
-    type_id: 2
   - id: &dz_voip_region 20798
     name: DZ Voip Region
     uuid: cda7b685-c256-41c5-b50a-0092616b4921
     type_id: 2
-  - id: &dz_lacom_cat___consortium_algerien_de_telecommunications_region 25829
-    name: DZ Lacom Cat   Consortium Algerien De Telecommunications Region
-    uuid: 5c651cdb-e332-4ae4-9975-857386ce011d
+  - id: &dz_fixed 43404
+    name: DZ Fixed
+    uuid: 88667691-5b42-40f2-aa0e-be97bd6d4fe7
     type_id: 2
   - id: &dz_wll_central_region_region 26705
     name: DZ Wll Central Region Region
@@ -73,9 +95,21 @@ networks:
     name: DZ Biskra Region
     uuid: eb1646a4-4395-491e-87bf-840d52376c96
     type_id: 2
+  - id: &dz_lacom_cat___consortium_algerien_de_telecommunications_region 25829
+    name: DZ Lacom Cat   Consortium Algerien De Telecommunications Region
+    uuid: 5c651cdb-e332-4ae4-9975-857386ce011d
+    type_id: 2
   - id: &dz_boumerdes_tipaza_region 28964
     name: DZ Boumerdes Tipaza Region
     uuid: b00fdaec-771a-474c-9f5b-7b99cf739056
+    type_id: 2
+  - id: &dz_ghardaia_illizi_laghouat_ouargla_tamanrasset_region 30649
+    name: DZ Ghardaia Illizi Laghouat Ouargla Tamanrasset Region
+    uuid: 95e48e6e-3f38-4dec-a022-d8cb926d9348
+    type_id: 2
+  - id: &dz_blida_medea_region 29828
+    name: DZ Blida Medea Region
+    uuid: afb23ab5-8ba1-4ab1-bee6-119f3c371b73
     type_id: 2
   - id: &dz_bouira_tizi_ouzou_region 29506
     name: DZ Bouira Tizi Ouzou Region
@@ -84,14 +118,6 @@ networks:
   - id: &dz_ain_defla_chlef_djelfa_region 29780
     name: DZ Ain Defla Chlef Djelfa Region
     uuid: e9a23590-7c01-4085-8a1e-19357ed6467d
-    type_id: 2
-  - id: &dz_blida_medea_region 29828
-    name: DZ Blida Medea Region
-    uuid: afb23ab5-8ba1-4ab1-bee6-119f3c371b73
-    type_id: 2
-  - id: &dz_ghardaia_illizi_laghouat_ouargla_tamanrasset_region 30649
-    name: DZ Ghardaia Illizi Laghouat Ouargla Tamanrasset Region
-    uuid: 95e48e6e-3f38-4dec-a022-d8cb926d9348
     type_id: 2
   - id: &dz_wll_eastern_region_region 30863
     name: DZ Wll Eastern Region Region
@@ -177,6 +203,14 @@ networks:
     name: DZ Bejaia Jijel Region
     uuid: a6d3a2c4-a0a1-4c18-b059-89b3483f0cad
     type_id: 2
+  - id: &dz_bordj_bou_arreridj_msila_region 34634
+    name: DZ Bordj Bou Arreridj Msila Region
+    uuid: 75d214ce-b56e-4996-92f2-0571bb8973c2
+    type_id: 2
+  - id: &dz_guelma_souk_ahras_tebessa_region 35231
+    name: DZ Guelma Souk Ahras Tebessa Region
+    uuid: eea8de5c-a681-4476-ac7e-326c7ab929e2
+    type_id: 2
   - id: &dz_annaba_el_tarf_skikda_region 33839
     name: DZ Annaba El Tarf Skikda Region
     uuid: f461da2a-a0bb-43b4-8a93-5000e1a00d45
@@ -261,60 +295,30 @@ networks:
     name: DZ Ain Temouchent Region
     uuid: fc320efd-20c5-4e95-ba61-751e4f9596ac
     type_id: 2
-  - id: &dz_bordj_bou_arreridj_msila_region 34634
-    name: DZ Bordj Bou Arreridj Msila Region
-    uuid: 75d214ce-b56e-4996-92f2-0571bb8973c2
-    type_id: 2
-  - id: &dz_guelma_souk_ahras_tebessa_region 35231
-    name: DZ Guelma Souk Ahras Tebessa Region
-    uuid: eea8de5c-a681-4476-ac7e-326c7ab929e2
-    type_id: 2
   - id: &dz_ain_temouchent_tlemcen_region 36580
     name: DZ Ain Temouchent Tlemcen Region
     uuid: 8078bc6f-4022-4d24-9631-b11685eef636
-    type_id: 2
-  - id: &dz_relizane_tiaret_tissemsilt_region 37828
-    name: DZ Relizane Tiaret Tissemsilt Region
-    uuid: 73ee313a-70c4-4e06-aed6-93b63bb746c8
     type_id: 2
   - id: &dz_mascara_mostaganem_region 37889
     name: DZ Mascara Mostaganem Region
     uuid: 59907440-5a05-4677-ade3-2d4e7366474e
     type_id: 2
+  - id: &dz_relizane_tiaret_tissemsilt_region 37828
+    name: DZ Relizane Tiaret Tissemsilt Region
+    uuid: 73ee313a-70c4-4e06-aed6-93b63bb746c8
+    type_id: 2
+  - id: &dz_saida_sidi_bel_abbes_region 4194
+    name: DZ Saida Sidi Bel Abbes Region
+    uuid: 44c30798-af99-4684-bca2-822e437f729b
+    type_id: 2
   - id: &dz_4g_region 38303
     name: DZ 4G Region
     uuid: 08bf8f1c-6a4a-4039-af26-9805db256c92
     type_id: 2
-# Mobile Networks
-  - id: &dz_ooredoo_mobile 8965
-    name: DZ Ooredoo Mobile
-    uuid: cb762dcd-46f5-43f4-84fe-2d0cc8c73846
-    type_id: 3
-  - id: &dz_mobilis_mobile 14367
-    name: DZ Mobilis Mobile
-    uuid: 4e6bce25-afef-4c01-ab93-fbf3121a7e30
-    type_id: 3
-  - id: &dz_djezzy_mobile 19773
-    name: DZ Djezzy Mobile
-    uuid: 4715bc49-b64b-4d65-8357-d938053e6caf
-    type_id: 3
-# Supplementary services Networks
-  - id: &dz_freephone_services 19851
-    name: DZ Freephone Services
-    uuid: bc2a1eaf-1265-4038-8c62-b18f5501c48b
-    type_id: 13
-  - id: &dz_special_services 20796
-    name: DZ Special Services
-    uuid: 5f704da5-effd-4c6a-afa8-3c3272fd118e
-    type_id: 13
-  - id: &dz_value_added_services 38472
-    name: DZ Value Added Services
-    uuid: 9f209042-46d5-4069-b469-a6245b0818c2
-    type_id: 13
-  - id: &dz_value_added_services_games_and_competitions 38477
-    name: DZ Value Added Services Games And Competitions
-    uuid: f6dbf4fb-bf1d-4820-878a-30fa220f696d
-    type_id: 13
+  - id: &dz_adrar_bechar_el_bayadh_naama_tindouf_region 5021
+    name: DZ Adrar Bechar El Bayadh Naama Tindouf Region
+    uuid: 6aa296e8-b089-45a2-b9e3-bb32189378d6
+    type_id: 2
 # Satellite Networks
   - id: &dz_ats_thuraya_satellite 20464
     name: DZ Ats Thuraya Satellite
@@ -325,21 +329,163 @@ networks:
     uuid: aea30cf7-3179-4c29-af17-39157730a16a
     type_id: 15
 network_prefixes:
+# Mobile Prefixes
+  - id: 149321
+    prefix: '2136'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 363ce15f-02ba-43e8-a34f-2e2b114c6efb
+    country_id: *dz
+    network_id: *dz_mobilis_mobile
+  - id: 207499
+    prefix: '2137'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e0f2b59f-fb7e-4bad-bc02-c924647b0bfb
+    country_id: *dz
+    network_id: *dz_djezzy_mobile
+  - id: 84931
+    prefix: '2135'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8e92d8c9-16a2-4fe7-816a-8088dd55f5f5
+    country_id: *dz
+    network_id: *dz_ooredoo_mobile
+# Supplementary services Prefixes
+  - id: 207806
+    prefix: '2138001'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c6fcef76-c632-4c5b-aa6a-a867e8fa9d67
+    country_id: *dz
+    network_id: *dz_freephone_services
+  - id: 402832
+    prefix: '2138011'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c5ad31f5-af43-411a-93f3-a30725f43ea7
+    country_id: *dz
+    network_id: *dz_value_added_services
+  - id: 403388
+    prefix: '2138081'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1e1476dd-54be-402f-89a5-138c7bd043c3
+    country_id: *dz
+    network_id: *dz_value_added_services_games_and_competitions
+  - id: 403425
+    prefix: '2138091'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 560ce551-8d80-40c8-b58f-44a954ecc7f2
+    country_id: *dz
+    network_id: *dz_value_added_services_games_and_competitions
+  - id: 402927
+    prefix: '2138021'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 33d2d6f1-9e9f-4daa-a27c-08d3e5242615
+    country_id: *dz
+    network_id: *dz_value_added_services
+  - id: 402931
+    prefix: '2138031'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 18751d31-7fda-4522-98ee-b5ed965fc1c0
+    country_id: *dz
+    network_id: *dz_value_added_services
+  - id: 402946
+    prefix: '2138041'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fc10ebb2-8794-43f2-9ab4-e19691859ed9
+    country_id: *dz
+    network_id: *dz_value_added_services
+  - id: 403041
+    prefix: '2138051'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 58f16894-3420-434e-ba05-41df2d607652
+    country_id: *dz
+    network_id: *dz_value_added_services
+  - id: 403144
+    prefix: '2138061'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3214effd-0b03-4e49-853a-ecc31b001c8b
+    country_id: *dz
+    network_id: *dz_value_added_services
+  - id: 231748
+    prefix: '213980'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 574f8daa-29c1-4fa2-be52-61a4db0ef573
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 247401
+    prefix: '2132'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 23077e6e-02aa-4800-a06a-c3f863e4c304
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 242389
+    prefix: '2131'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 5fa6e068-2b02-40e3-b1d5-b14b48ed1d63
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 243930
+    prefix: '2134'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 6e4d0fd9-fcfd-4ac6-82f6-f6ae33c56c42
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 245383
+    prefix: '2136'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 9644e235-9fb3-461d-9830-ee424734ce28
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 257091
+    prefix: '2139'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 9cb839b8-40cc-41cf-9867-17b007ac5124
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 248892
+    prefix: '2133'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 86600232-6bdf-4d7e-960d-76bf16067e08
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 249569
+    prefix: '2135'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 605c13c7-a950-4625-8c0d-ae6ddabe91d7
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 255245
+    prefix: '2137'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 48d44448-18af-40db-8696-412d1adf8f6c
+    country_id: *dz
+    network_id: *dz_special_services
+  - id: 253067
+    prefix: '2138'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 7bef692c-6916-4180-b43f-094c2fc91781
+    country_id: *dz
+    network_id: *dz_special_services
 # Fixed Prefixes
-  - id: 51607
-    prefix: '21348'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c1a5613b-b9e9-4f5c-ad12-1c555690d8b6
-    country_id: *dz
-    network_id: *dz_saida_sidi_bel_abbes_region
-  - id: 58225
-    prefix: '21349'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 822533c8-ea31-4936-958e-2ad1bf788a1e
-    country_id: *dz
-    network_id: *dz_adrar_bechar_el_bayadh_naama_tindouf_region
   - id: 231777
     prefix: '2139823'
     number_min_length: 12
@@ -361,13 +507,13 @@ network_prefixes:
     uuid: 648c3d20-f10a-4344-a0e9-7d5f346a75e7
     country_id: *dz
     network_id: *dz_voip_region
-  - id: 261175
-    prefix: '2131'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: baa91cbc-8368-4ad3-997c-c838b4505ed5
+  - id: 241984
+    prefix: '213'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 93ce61d1-9a47-48ee-b677-f5f6c4dc06b6
     country_id: *dz
-    network_id: *dz_lacom_cat___consortium_algerien_de_telecommunications_region
+    network_id: *dz_fixed
   - id: 267132
     prefix: '21320'
     number_min_length: 11
@@ -683,6 +829,13 @@ network_prefixes:
     uuid: 7941e281-2137-4062-b894-362922a28a70
     country_id: *dz
     network_id: *dz_biskra_region
+  - id: 261175
+    prefix: '2131'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: baa91cbc-8368-4ad3-997c-c838b4505ed5
+    country_id: *dz
+    network_id: *dz_lacom_cat___consortium_algerien_de_telecommunications_region
   - id: 274225
     prefix: '21321'
     number_min_length: 11
@@ -704,6 +857,20 @@ network_prefixes:
     uuid: 6b0d182c-5cdb-4cc1-ac49-ad83942e85e3
     country_id: *dz
     network_id: *dz_boumerdes_tipaza_region
+  - id: 308501
+    prefix: '21329'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3af14b3-30cf-4c43-b938-8dfd6850333e
+    country_id: *dz
+    network_id: *dz_ghardaia_illizi_laghouat_ouargla_tamanrasset_region
+  - id: 301965
+    prefix: '21325'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc2956bc-81e0-4922-80a7-d66b7f453051
+    country_id: *dz
+    network_id: *dz_blida_medea_region
   - id: 299792
     prefix: '21326'
     number_min_length: 11
@@ -718,20 +885,6 @@ network_prefixes:
     uuid: 007e1170-31c2-422a-806b-1f6b8e3ff172
     country_id: *dz
     network_id: *dz_ain_defla_chlef_djelfa_region
-  - id: 301965
-    prefix: '21325'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc2956bc-81e0-4922-80a7-d66b7f453051
-    country_id: *dz
-    network_id: *dz_blida_medea_region
-  - id: 308501
-    prefix: '21329'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b3af14b3-30cf-4c43-b938-8dfd6850333e
-    country_id: *dz
-    network_id: *dz_ghardaia_illizi_laghouat_ouargla_tamanrasset_region
   - id: 309464
     prefix: '21330'
     number_min_length: 11
@@ -1257,13 +1410,20 @@ network_prefixes:
     uuid: bd3a0195-18f2-433d-9804-355756c2bdfc
     country_id: *dz
     network_id: *dz_bejaia_jijel_region
-  - id: 345938
-    prefix: '21336'
+  - id: 352232
+    prefix: '21335'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b7bc89e-2629-46d2-8971-2936b0a97dbc
+    uuid: c77165db-e4e3-429f-a72a-68890f67ce38
     country_id: *dz
-    network_id: *dz_setif_region
+    network_id: *dz_bordj_bou_arreridj_msila_region
+  - id: 355753
+    prefix: '21337'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4f006aac-a44d-4c95-a0a3-2272f3f86e33
+    country_id: *dz
+    network_id: *dz_guelma_souk_ahras_tebessa_region
   - id: 347696
     prefix: '21338'
     number_min_length: 11
@@ -1824,20 +1984,13 @@ network_prefixes:
     uuid: 326c9c80-a287-4d8d-a629-5ca715d6557b
     country_id: *dz
     network_id: *dz_ain_temouchent_region
-  - id: 352232
-    prefix: '21335'
+  - id: 345938
+    prefix: '21336'
     number_min_length: 11
     number_max_length: 11
-    uuid: c77165db-e4e3-429f-a72a-68890f67ce38
+    uuid: 8b7bc89e-2629-46d2-8971-2936b0a97dbc
     country_id: *dz
-    network_id: *dz_bordj_bou_arreridj_msila_region
-  - id: 355753
-    prefix: '21337'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4f006aac-a44d-4c95-a0a3-2272f3f86e33
-    country_id: *dz
-    network_id: *dz_guelma_souk_ahras_tebessa_region
+    network_id: *dz_setif_region
   - id: 362521
     prefix: '21341'
     number_min_length: 11
@@ -1852,13 +2005,6 @@ network_prefixes:
     uuid: 0e977d1c-bd7a-47f4-82a3-d874a5c9aa09
     country_id: *dz
     network_id: *dz_ain_temouchent_tlemcen_region
-  - id: 388625
-    prefix: '21346'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 71a6b1b7-7fff-4123-9334-d808f43fed91
-    country_id: *dz
-    network_id: *dz_relizane_tiaret_tissemsilt_region
   - id: 392613
     prefix: '21345'
     number_min_length: 11
@@ -1866,6 +2012,20 @@ network_prefixes:
     uuid: 21c54a5d-c776-42a8-80f1-d52e96c117a0
     country_id: *dz
     network_id: *dz_mascara_mostaganem_region
+  - id: 388625
+    prefix: '21346'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 71a6b1b7-7fff-4123-9334-d808f43fed91
+    country_id: *dz
+    network_id: *dz_relizane_tiaret_tissemsilt_region
+  - id: 51607
+    prefix: '21348'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c1a5613b-b9e9-4f5c-ad12-1c555690d8b6
+    country_id: *dz
+    network_id: *dz_saida_sidi_bel_abbes_region
   - id: 399475
     prefix: '21347'
     number_min_length: 12
@@ -1873,162 +2033,13 @@ network_prefixes:
     uuid: f94ad02d-494e-42d2-8535-5608de61a48a
     country_id: *dz
     network_id: *dz_4g_region
-# Mobile Prefixes
-  - id: 84931
-    prefix: '2135'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8e92d8c9-16a2-4fe7-816a-8088dd55f5f5
+  - id: 58225
+    prefix: '21349'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 822533c8-ea31-4936-958e-2ad1bf788a1e
     country_id: *dz
-    network_id: *dz_ooredoo_mobile
-  - id: 149321
-    prefix: '2136'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 363ce15f-02ba-43e8-a34f-2e2b114c6efb
-    country_id: *dz
-    network_id: *dz_mobilis_mobile
-  - id: 207499
-    prefix: '2137'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e0f2b59f-fb7e-4bad-bc02-c924647b0bfb
-    country_id: *dz
-    network_id: *dz_djezzy_mobile
-# Supplementary services Prefixes
-  - id: 207806
-    prefix: '2138001'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c6fcef76-c632-4c5b-aa6a-a867e8fa9d67
-    country_id: *dz
-    network_id: *dz_freephone_services
-  - id: 231748
-    prefix: '213980'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 574f8daa-29c1-4fa2-be52-61a4db0ef573
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 242389
-    prefix: '2131'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 5fa6e068-2b02-40e3-b1d5-b14b48ed1d63
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 243930
-    prefix: '2134'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 6e4d0fd9-fcfd-4ac6-82f6-f6ae33c56c42
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 245383
-    prefix: '2136'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 9644e235-9fb3-461d-9830-ee424734ce28
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 247401
-    prefix: '2132'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 23077e6e-02aa-4800-a06a-c3f863e4c304
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 248892
-    prefix: '2133'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 86600232-6bdf-4d7e-960d-76bf16067e08
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 249569
-    prefix: '2135'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 605c13c7-a950-4625-8c0d-ae6ddabe91d7
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 253067
-    prefix: '2138'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 7bef692c-6916-4180-b43f-094c2fc91781
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 255245
-    prefix: '2137'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 48d44448-18af-40db-8696-412d1adf8f6c
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 257091
-    prefix: '2139'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 9cb839b8-40cc-41cf-9867-17b007ac5124
-    country_id: *dz
-    network_id: *dz_special_services
-  - id: 402832
-    prefix: '2138011'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c5ad31f5-af43-411a-93f3-a30725f43ea7
-    country_id: *dz
-    network_id: *dz_value_added_services
-  - id: 402927
-    prefix: '2138021'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 33d2d6f1-9e9f-4daa-a27c-08d3e5242615
-    country_id: *dz
-    network_id: *dz_value_added_services
-  - id: 402931
-    prefix: '2138031'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 18751d31-7fda-4522-98ee-b5ed965fc1c0
-    country_id: *dz
-    network_id: *dz_value_added_services
-  - id: 402946
-    prefix: '2138041'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fc10ebb2-8794-43f2-9ab4-e19691859ed9
-    country_id: *dz
-    network_id: *dz_value_added_services
-  - id: 403041
-    prefix: '2138051'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 58f16894-3420-434e-ba05-41df2d607652
-    country_id: *dz
-    network_id: *dz_value_added_services
-  - id: 403144
-    prefix: '2138061'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3214effd-0b03-4e49-853a-ecc31b001c8b
-    country_id: *dz
-    network_id: *dz_value_added_services
-  - id: 403388
-    prefix: '2138081'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1e1476dd-54be-402f-89a5-138c7bd043c3
-    country_id: *dz
-    network_id: *dz_value_added_services_games_and_competitions
-  - id: 403425
-    prefix: '2138091'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 560ce551-8d80-40c8-b58f-44a954ecc7f2
-    country_id: *dz
-    network_id: *dz_value_added_services_games_and_competitions
+    network_id: *dz_adrar_bechar_el_bayadh_naama_tindouf_region
 # Satellite Prefixes
   - id: 222000
     prefix: '21396190'
@@ -2044,11 +2055,3 @@ network_prefixes:
     uuid: 4b5edafd-007d-4226-ac79-4b67fa1d401d
     country_id: *dz
     network_id: *dz_djezzy_satellite
-# Country code Prefixes
-  - id: 241984
-    prefix: '213'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 93ce61d1-9a47-48ee-b677-f5f6c4dc06b6
-    country_id: *dz
-    network_id: null

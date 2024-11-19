@@ -1,47 +1,5 @@
 country_id: &cg 49
 networks:
-# Supplementary services Networks
-  - id: &cg_special_services 21381
-    name: CG Special Services
-    uuid: 963769b2-8ff4-4dce-abe3-ddd187c0f318
-    type_id: 13
-  - id: &cg_arpce_assistance_service 23330
-    name: CG Arpce Assistance Service
-    uuid: a1e51d6f-66e5-4744-977b-daf49a21c032
-    type_id: 13
-  - id: &cg_value_added_services 23830
-    name: CG Value Added Services
-    uuid: 5ccb9cce-a8d8-40be-a979-1cba5e08a8c9
-    type_id: 13
-  - id: &cg_shared_cost_services 23918
-    name: CG Shared Cost Services
-    uuid: 7329c61a-3677-4102-8cf5-6402934deb26
-    type_id: 13
-  - id: &cg_internet_access_services 23985
-    name: CG Internet Access Services
-    uuid: 1710aabc-8784-46f9-af1b-604420c7cee6
-    type_id: 13
-  - id: &cg_shared_revenue_services 24332
-    name: CG Shared Revenue Services
-    uuid: b63f21e5-e215-40da-9eef-722a64f69469
-    type_id: 13
-  - id: &cg_nomadic_and_convergent__services 24390
-    name: CG Nomadic And Convergent  Services
-    uuid: 84e4d4ea-6338-465d-8611-4a1cd8b1b95b
-    type_id: 13
-# Mobile Networks
-  - id: &cg_mobile 21993
-    name: CG Mobile
-    uuid: 516f78e1-da27-4a0f-85b1-e1e25a9beb4c
-    type_id: 3
-  - id: &cg_airtel_mobile 24610
-    name: CG Airtel Mobile
-    uuid: 854049f9-0c09-4f04-963f-fa409dc93999
-    type_id: 3
-  - id: &cg_mtn_mobile 24683
-    name: CG Mtn Mobile
-    uuid: 27156a15-bc3e-4362-baa2-ac09e51eb8de
-    type_id: 3
 # Fixed Networks
   - id: &cg_fixed 27809
     name: CG Fixed
@@ -75,144 +33,57 @@ networks:
     name: CG Pointe Noire Region
     uuid: 437ab4ae-49d1-45b3-b899-aa4397c8e220
     type_id: 2
+# Supplementary services Networks
+  - id: &cg_special_services 21381
+    name: CG Special Services
+    uuid: 963769b2-8ff4-4dce-abe3-ddd187c0f318
+    type_id: 13
+  - id: &cg_shared_revenue_services 24332
+    name: CG Shared Revenue Services
+    uuid: b63f21e5-e215-40da-9eef-722a64f69469
+    type_id: 13
+  - id: &cg_value_added_services 23830
+    name: CG Value Added Services
+    uuid: 5ccb9cce-a8d8-40be-a979-1cba5e08a8c9
+    type_id: 13
+  - id: &cg_nomadic_and_convergent__services 24390
+    name: CG Nomadic And Convergent  Services
+    uuid: 84e4d4ea-6338-465d-8611-4a1cd8b1b95b
+    type_id: 13
+  - id: &cg_arpce_assistance_service 23330
+    name: CG Arpce Assistance Service
+    uuid: a1e51d6f-66e5-4744-977b-daf49a21c032
+    type_id: 13
+  - id: &cg_shared_cost_services 23918
+    name: CG Shared Cost Services
+    uuid: 7329c61a-3677-4102-8cf5-6402934deb26
+    type_id: 13
+  - id: &cg_internet_access_services 23985
+    name: CG Internet Access Services
+    uuid: 1710aabc-8784-46f9-af1b-604420c7cee6
+    type_id: 13
+# Mobile Networks
+  - id: &cg_mobile 21993
+    name: CG Mobile
+    uuid: 516f78e1-da27-4a0f-85b1-e1e25a9beb4c
+    type_id: 3
+  - id: &cg_airtel_mobile 24610
+    name: CG Airtel Mobile
+    uuid: 854049f9-0c09-4f04-963f-fa409dc93999
+    type_id: 3
+  - id: &cg_mtn_mobile 24683
+    name: CG Mtn Mobile
+    uuid: 27156a15-bc3e-4362-baa2-ac09e51eb8de
+    type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241971
     prefix: '242'
     number_min_length: 4
     number_max_length: 100
     uuid: b9b20fde-057f-45e0-9bf7-5f5d9dbdad7e
     country_id: *cg
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242375
-    prefix: '2421'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 5db4d01e-15f4-4a0a-aa94-1b7b760864ee
-    country_id: *cg
-    network_id: *cg_special_services
-  - id: 249658
-    prefix: '2425050'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: c653bd69-82af-47a5-96da-bf1a6a0baee2
-    country_id: *cg
-    network_id: *cg_arpce_assistance_service
-  - id: 253140
-    prefix: '242800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 51e90913-a144-4f29-b8f9-ebada667376f
-    country_id: *cg
-    network_id: *cg_value_added_services
-  - id: 253207
-    prefix: '242801'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 251d7557-52f9-417b-b8d2-07ff527d73dc
-    country_id: *cg
-    network_id: *cg_value_added_services
-  - id: 253219
-    prefix: '242802'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a996bca1-12a7-4916-a1f7-2f7df078e97f
-    country_id: *cg
-    network_id: *cg_value_added_services
-  - id: 253309
-    prefix: '24281'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aa30d417-b3d7-4198-9a16-780c1a6b0b17
-    country_id: *cg
-    network_id: *cg_shared_cost_services
-  - id: 253610
-    prefix: '2428300'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6e3c7ca1-2151-4f48-aff3-b6de6e560662
-    country_id: *cg
-    network_id: *cg_internet_access_services
-  - id: 256833
-    prefix: '24288'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 24ef8cb0-5584-449b-a268-8362a1427c7b
-    country_id: *cg
-    network_id: *cg_shared_revenue_services
-  - id: 257015
-    prefix: '2428900'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 406d85b3-ec02-4b3d-8a09-5d1b49d5d507
-    country_id: *cg
-    network_id: *cg_value_added_services
-  - id: 257086
-    prefix: '2429'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 91c1c92c-b5b7-4378-9a10-7cb39a2bab49
-    country_id: *cg
-    network_id: *cg_nomadic_and_convergent__services
-# Mobile Prefixes
-  - id: 243482
-    prefix: '24234'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 392ebaf9-8610-43c8-83b2-b690d7277395
-    country_id: *cg
-    network_id: *cg_mobile
-  - id: 243659
-    prefix: '24236'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 5b438a79-d4b8-45a6-a755-81ed9a8e8f70
-    country_id: *cg
-    network_id: *cg_mobile
-  - id: 243856
-    prefix: '24238'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 9f04ad50-81b4-4291-93f5-92a4e7dc62ed
-    country_id: *cg
-    network_id: *cg_mobile
-  - id: 248887
-    prefix: '2423'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 25b73b43-0f83-4527-8279-e2ee4b824172
-    country_id: *cg
-    network_id: *cg_mobile
-  - id: 258380
-    prefix: '24204'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d1fb7832-d18a-4627-9871-efdfe23bdded
-    country_id: *cg
-    network_id: *cg_airtel_mobile
-  - id: 258416
-    prefix: '24205'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cce74b2a-ad00-4f6b-b0c9-76237c6291e1
-    country_id: *cg
-    network_id: *cg_airtel_mobile
-  - id: 258456
-    prefix: '24206'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4f297dec-b93f-494b-a398-74cc7a4822cb
-    country_id: *cg
-    network_id: *cg_mtn_mobile
-  - id: 258557
-    prefix: '2420'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b4cec63c-2b9e-419e-9a5d-5c7ad01a49e6
-    country_id: *cg
-    network_id: *cg_mobile
-# Fixed Prefixes
+    network_id: *cg_fixed
   - id: 277990
     prefix: '24222'
     number_min_length: 12
@@ -269,3 +140,131 @@ network_prefixes:
     uuid: 42b9de82-7d00-4b86-b19c-7100bb5cf258
     country_id: *cg
     network_id: *cg_pointe_noire_region
+# Supplementary services Prefixes
+  - id: 242375
+    prefix: '2421'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 5db4d01e-15f4-4a0a-aa94-1b7b760864ee
+    country_id: *cg
+    network_id: *cg_special_services
+  - id: 256833
+    prefix: '24288'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 24ef8cb0-5584-449b-a268-8362a1427c7b
+    country_id: *cg
+    network_id: *cg_shared_revenue_services
+  - id: 257015
+    prefix: '2428900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 406d85b3-ec02-4b3d-8a09-5d1b49d5d507
+    country_id: *cg
+    network_id: *cg_value_added_services
+  - id: 257086
+    prefix: '2429'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 91c1c92c-b5b7-4378-9a10-7cb39a2bab49
+    country_id: *cg
+    network_id: *cg_nomadic_and_convergent__services
+  - id: 249658
+    prefix: '2425050'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: c653bd69-82af-47a5-96da-bf1a6a0baee2
+    country_id: *cg
+    network_id: *cg_arpce_assistance_service
+  - id: 253140
+    prefix: '242800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 51e90913-a144-4f29-b8f9-ebada667376f
+    country_id: *cg
+    network_id: *cg_value_added_services
+  - id: 253207
+    prefix: '242801'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 251d7557-52f9-417b-b8d2-07ff527d73dc
+    country_id: *cg
+    network_id: *cg_value_added_services
+  - id: 253219
+    prefix: '242802'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a996bca1-12a7-4916-a1f7-2f7df078e97f
+    country_id: *cg
+    network_id: *cg_value_added_services
+  - id: 253309
+    prefix: '24281'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aa30d417-b3d7-4198-9a16-780c1a6b0b17
+    country_id: *cg
+    network_id: *cg_shared_cost_services
+  - id: 253610
+    prefix: '2428300'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6e3c7ca1-2151-4f48-aff3-b6de6e560662
+    country_id: *cg
+    network_id: *cg_internet_access_services
+# Mobile Prefixes
+  - id: 243482
+    prefix: '24234'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 392ebaf9-8610-43c8-83b2-b690d7277395
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 243659
+    prefix: '24236'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 5b438a79-d4b8-45a6-a755-81ed9a8e8f70
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 243856
+    prefix: '24238'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9f04ad50-81b4-4291-93f5-92a4e7dc62ed
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 258380
+    prefix: '24204'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1fb7832-d18a-4627-9871-efdfe23bdded
+    country_id: *cg
+    network_id: *cg_airtel_mobile
+  - id: 258416
+    prefix: '24205'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cce74b2a-ad00-4f6b-b0c9-76237c6291e1
+    country_id: *cg
+    network_id: *cg_airtel_mobile
+  - id: 258456
+    prefix: '24206'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4f297dec-b93f-494b-a398-74cc7a4822cb
+    country_id: *cg
+    network_id: *cg_mtn_mobile
+  - id: 258557
+    prefix: '2420'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b4cec63c-2b9e-419e-9a5d-5c7ad01a49e6
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 248887
+    prefix: '2423'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 25b73b43-0f83-4527-8279-e2ee4b824172
+    country_id: *cg
+    network_id: *cg_mobile

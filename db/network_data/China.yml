@@ -1,6 +1,942 @@
 country_id: &cn 44
 networks:
 # Fixed Networks
+  - id: &cn_yangjiang_region 13092
+    name: CN Yangjiang Region
+    uuid: fc6e677a-5ca4-4a84-9bb8-349a7d98e72c
+    type_id: 2
+  - id: &cn_shanwei_region 13716
+    name: CN Shanwei Region
+    uuid: d83603bc-00a3-4c72-b0da-91f1f96aef79
+    type_id: 2
+  - id: &cn_jieyang_region 13908
+    name: CN Jieyang Region
+    uuid: 30cf2b14-ae68-4a73-bf4f-c685ab02ecd1
+    type_id: 2
+  - id: &cn_maoming_region 13247
+    name: CN Maoming Region
+    uuid: 446470b5-67f2-4f92-afc1-9c732d2745d3
+    type_id: 2
+  - id: &cn_huanggang_region 15602
+    name: CN Huanggang Region
+    uuid: a11f1a21-707d-4333-a0e8-301cbe929f1c
+    type_id: 2
+  - id: &cn_huangshi_region 16291
+    name: CN Huangshi Region
+    uuid: 35b36dc2-fa44-47c2-a933-79605fa820d5
+    type_id: 2
+  - id: &cn_xishuangbanna_dai_autonomous_prefecture_region 14330
+    name: CN Xishuangbanna Dai Autonomous Prefecture Region
+    uuid: 69126680-bb49-4ef7-889c-5886254d76b0
+    type_id: 2
+  - id: &cn_dehong_dai_and_jingpo_autonomous_prefecture_region 14339
+    name: CN Dehong Dai And Jingpo Autonomous Prefecture Region
+    uuid: b7940ac9-0b74-464f-a4ce-fab123fb24b6
+    type_id: 2
+  - id: &cn_yingtan_region 14923
+    name: CN Yingtan Region
+    uuid: 6ac9b637-736a-4215-bde6-343c5a12ef51
+    type_id: 2
+  - id: &cn_xiangyang_region 15354
+    name: CN Xiangyang Region
+    uuid: 4d5d9a2e-73d5-4ee2-b731-688f42e5bec9
+    type_id: 2
+  - id: &cn_ezhou_region 15379
+    name: CN Ezhou Region
+    uuid: 2466880e-8ea3-44ae-9fbb-8e9dfd5ceff7
+    type_id: 2
+  - id: &cn_xiaogan_region 15411
+    name: CN Xiaogan Region
+    uuid: 92c24135-3227-45c5-a8d4-52ea5bf734bd
+    type_id: 2
+  - id: &cn_jingzhou_region 15749
+    name: CN Jingzhou Region
+    uuid: 00457752-9fdf-441b-b0a2-be855d9be7f7
+    type_id: 2
+  - id: &cn_yichang_region 16407
+    name: CN Yichang Region
+    uuid: c79e9bbd-a25c-4d2f-bbee-228a8e0a281b
+    type_id: 2
+  - id: &cn_jingmen_region 16985
+    name: CN Jingmen Region
+    uuid: 089f0754-bbe3-40a7-9267-0e73ce6cbf9b
+    type_id: 2
+  - id: &cn_qianjiang_tianmen_xiantao_region 17083
+    name: CN Qianjiang Tianmen Xiantao Region
+    uuid: 58528864-2b54-4e24-be11-ed09c8b7cf70
+    type_id: 2
+  - id: &cn_xianning_region 16337
+    name: CN Xianning Region
+    uuid: ae300b16-6828-4e3a-bd20-4c1ca7c3371a
+    type_id: 2
+  - id: &cn_enshi_tujia_and_miao_autonomous_prefecture_region 16492
+    name: CN Enshi Tujia And Miao Autonomous Prefecture Region
+    uuid: d2ba1c42-149a-4956-95eb-4fdb78df52c6
+    type_id: 2
+  - id: &cn_shennongjia_forestry_district_shiyan_region 16808
+    name: CN Shennongjia Forestry District Shiyan Region
+    uuid: a8dd2b83-a417-4535-b4af-b2860bca1de9
+    type_id: 2
+  - id: &cn_suizhou_region 16624
+    name: CN Suizhou Region
+    uuid: 31e82591-eeea-445b-88a6-e8e752454868
+    type_id: 2
+  - id: &cn_yueyang_region 17193
+    name: CN Yueyang Region
+    uuid: 19ba9074-9943-429a-8202-9e0085e12b35
+    type_id: 2
+  - id: &cn_changsha_xiangtan_zhuzhou_region 17205
+    name: CN Changsha Xiangtan Zhuzhou Region
+    uuid: 677b1e57-e86f-4924-a6f1-bdfac5544dd9
+    type_id: 2
+  - id: &cn_chenzhou_region 17324
+    name: CN Chenzhou Region
+    uuid: d3aa87ae-5aa9-45d9-94b9-883318d67ef6
+    type_id: 2
+  - id: &cn_yongzhou_region 17404
+    name: CN Yongzhou Region
+    uuid: f864c7cb-d84e-4e4c-9c15-4a68d329121e
+    type_id: 2
+  - id: &cn_shantou_region 18098
+    name: CN Shantou Region
+    uuid: c2f87c1d-238a-422a-8d99-3e32cd917f2f
+    type_id: 2
+  - id: &cn_hengyang_region 17572
+    name: CN Hengyang Region
+    uuid: 18a18109-1db1-4b84-bb66-ba3afef9f339
+    type_id: 2
+  - id: &cn_changde_region 17340
+    name: CN Changde Region
+    uuid: 2fc52f02-f6f0-4b53-a183-8808b4c62340
+    type_id: 2
+  - id: &cn_yiyang_region 17362
+    name: CN Yiyang Region
+    uuid: 9b05525c-e409-4fee-bccb-d0dd246b8228
+    type_id: 2
+  - id: &cn_loudi_region 17587
+    name: CN Loudi Region
+    uuid: 58f8347c-1786-408f-8271-4998f4291e1f
+    type_id: 2
+  - id: &cn_shaoyang_region 17601
+    name: CN Shaoyang Region
+    uuid: 64b6a17b-5d7c-4871-8c56-337368c09955
+    type_id: 2
+  - id: &cn_xiangxi_tujia_and_miao_autonomous_prefecture_region 17873
+    name: CN Xiangxi Tujia And Miao Autonomous Prefecture Region
+    uuid: 7693dbc9-bad7-4f7d-b51e-428c47ca813e
+    type_id: 2
+  - id: &cn_zhangjiajie_region 17932
+    name: CN Zhangjiajie Region
+    uuid: a96cb7a0-7be2-4c3c-ad57-4301e2e17f3f
+    type_id: 2
+  - id: &cn_huaihua_region 17381
+    name: CN Huaihua Region
+    uuid: 22b09e51-48bd-44e0-a2b6-0a95de4a2750
+    type_id: 2
+  - id: &cn_jiangmen_region 18040
+    name: CN Jiangmen Region
+    uuid: 1bb77e5b-9346-468e-95d3-280fe85249a4
+    type_id: 2
+  - id: &cn_shaoguan_region 18049
+    name: CN Shaoguan Region
+    uuid: 305570e6-d7c3-45dc-92d5-69a0d3a0c120
+    type_id: 2
+  - id: &cn_huizhou_region 18055
+    name: CN Huizhou Region
+    uuid: da34aa3f-5916-48f6-ae46-ed0fa95b0da9
+    type_id: 2
+  - id: &cn_meizhou_region 18081
+    name: CN Meizhou Region
+    uuid: e0c27afd-05bf-46a6-8e2e-3ab9293b460c
+    type_id: 2
+  - id: &cn_foshan_region 17494
+    name: CN Foshan Region
+    uuid: 0dfc99db-3f4b-4e45-94ff-582d97f44c57
+    type_id: 2
+  - id: &cn_zhaoqing_region 18128
+    name: CN Zhaoqing Region
+    uuid: 54e4bec7-3a49-46a8-85be-f5ba554b544c
+    type_id: 2
+  - id: &cn_zhanjiang_region 18154
+    name: CN Zhanjiang Region
+    uuid: 1c141af0-4c19-4a8d-8e74-e997311e2c27
+    type_id: 2
+  - id: &cn_zhongshan_region 18202
+    name: CN Zhongshan Region
+    uuid: 73c288ec-6266-4109-aa88-aaf0cd4aec85
+    type_id: 2
+  - id: &cn_fangchenggang_region 18522
+    name: CN Fangchenggang Region
+    uuid: 00da3459-5312-44b6-8091-90583939ed5f
+    type_id: 2
+  - id: &cn_shenzhen_region 17458
+    name: CN Shenzhen Region
+    uuid: cfbce64c-32f6-464d-8e74-9c6879d8d14a
+    type_id: 2
+  - id: &cn_zhuhai_region 17471
+    name: CN Zhuhai Region
+    uuid: c0f9c305-ae66-4394-932d-7c35745107ba
+    type_id: 2
+  - id: &cn_heyuan_region 18306
+    name: CN Heyuan Region
+    uuid: deede7f7-f92c-44f8-bfb2-a78b7eb45da1
+    type_id: 2
+  - id: &cn_qingyuan_region 18439
+    name: CN Qingyuan Region
+    uuid: 91b566aa-0253-48dc-90e8-61e62b52738d
+    type_id: 2
+  - id: &cn_yunfu_region 18387
+    name: CN Yunfu Region
+    uuid: bd3a8648-6767-49a1-954b-4387ec51fe41
+    type_id: 2
+  - id: &cn_chaozhou_region 19100
+    name: CN Chaozhou Region
+    uuid: f257fa40-6745-4f0a-816d-83ee89909b7d
+    type_id: 2
+  - id: &cn_dongguan_region 19124
+    name: CN Dongguan Region
+    uuid: 1f45c9e1-f117-4a6c-9304-6ffb817f428e
+    type_id: 2
+  - id: &cn_guilin_region 18606
+    name: CN Guilin Region
+    uuid: 8cf95546-b02f-4ec0-896a-03013d1060b9
+    type_id: 2
+  - id: &cn_baise_region 18715
+    name: CN Baise Region
+    uuid: 4e16ad0e-22ac-4a53-ab2f-eb3ee852d574
+    type_id: 2
+  - id: &cn_fuzhou_region 8841
+    name: CN Fuzhou Region
+    uuid: 2055ae53-be33-457b-8140-48f5e3d39cf1
+    type_id: 2
+  - id: &cn_yichun_region 19730
+    name: CN Yichun Region
+    uuid: f51cf10c-e592-45fa-ae62-a85f3f76796e
+    type_id: 2
+  - id: &cn_jian_region 19748
+    name: CN Jian Region
+    uuid: 4a9dd965-1a9c-4610-a6b0-38574835fff7
+    type_id: 2
+  - id: &cn_ganzhou_region 19758
+    name: CN Ganzhou Region
+    uuid: 3b13080a-df70-45db-a8cb-26dd2487e47d
+    type_id: 2
+  - id: &cn_jingdezhen_region 19768
+    name: CN Jingdezhen Region
+    uuid: dffdc011-aef1-438b-a3b3-684de85bac0d
+    type_id: 2
+  - id: &cn_pingxiang_region 19769
+    name: CN Pingxiang Region
+    uuid: 6819ea98-8c39-4e73-bdfb-f8353045f255
+    type_id: 2
+  - id: &cn_chongzuo_nanning_region 18544
+    name: CN Chongzuo Nanning Region
+    uuid: 382ddbad-ad56-4a35-8feb-9f94b78c7c65
+    type_id: 2
+  - id: &cn_laibin_liuzhou_region 18562
+    name: CN Laibin Liuzhou Region
+    uuid: be86cbd6-74cf-4c46-b556-46208205102a
+    type_id: 2
+  - id: &cn_hezhou_wuzhou_region 18640
+    name: CN Hezhou Wuzhou Region
+    uuid: 1450fcb6-3b36-4b01-9c77-2e3919ca8f9c
+    type_id: 2
+  - id: &cn_guigang_yulin_region 19151
+    name: CN Guigang Yulin Region
+    uuid: f137ff9c-617e-49bd-9950-2bb173eb270f
+    type_id: 2
+  - id: &cn_qinzhou_region 18739
+    name: CN Qinzhou Region
+    uuid: 676eaa06-822b-4e03-9165-220daa6cfdeb
+    type_id: 2
+  - id: &cn_hechi_region 19189
+    name: CN Hechi Region
+    uuid: 358de92e-3ae5-409f-bc49-f20e84a6c827
+    type_id: 2
+  - id: &cn_beihai_region 18765
+    name: CN Beihai Region
+    uuid: 970b6e76-a6e0-4c42-8676-afd4c7f2d63d
+    type_id: 2
+  - id: &cn_xinyu_region 19679
+    name: CN Xinyu Region
+    uuid: c680dca6-42a8-4619-b633-3ad3f063cdf8
+    type_id: 2
+  - id: &cn_nanchang_region 19691
+    name: CN Nanchang Region
+    uuid: f86e3fdf-7ac3-46da-94dc-fb8819868b8a
+    type_id: 2
+  - id: &cn_jiujiang_region 19696
+    name: CN Jiujiang Region
+    uuid: d9af9498-f3e1-489b-b33b-f13be7b882e0
+    type_id: 2
+  - id: &cn_shangrao_region 19699
+    name: CN Shangrao Region
+    uuid: 65d91af4-d918-4e5d-be39-57b995eacbde
+    type_id: 2
+  - id: &cn_nanchong_region 39484
+    name: CN Nanchong Region
+    uuid: 64c9a1a1-bf25-49b9-bca6-0d7cc325abac
+    type_id: 2
+  - id: &cn_suining_region 39020
+    name: CN Suining Region
+    uuid: 19aae66e-05d7-49a1-ab13-58a42ca49c2f
+    type_id: 2
+  - id: &cn_bazhong_region 39751
+    name: CN Bazhong Region
+    uuid: f147b0bf-c25e-4974-a5b5-e9e07f3be210
+    type_id: 2
+  - id: &cn_panzhihua_region 38704
+    name: CN Panzhihua Region
+    uuid: f0af836f-6338-4edc-8227-1006f4603372
+    type_id: 2
+  - id: &cn_zigong_region 39368
+    name: CN Zigong Region
+    uuid: fca173a7-5750-4d87-a245-5f53eb873432
+    type_id: 2
+  - id: &cn_mianyang_region 39421
+    name: CN Mianyang Region
+    uuid: 8b7b9e63-01ae-49ef-a4b9-c8b4374514a2
+    type_id: 2
+  - id: &cn_dazhou_region 38923
+    name: CN Dazhou Region
+    uuid: ab9d1e29-f284-41c2-8f4e-682d03b6f62c
+    type_id: 2
+  - id: &cn_guangan_region 39039
+    name: CN Guangan Region
+    uuid: 89000cd7-4600-43a3-b8ab-1659e75d25c0
+    type_id: 2
+  - id: &cn_luzhou_region 40668
+    name: CN Luzhou Region
+    uuid: b53922db-2e01-4a50-beb2-6e35fa6c44bf
+    type_id: 2
+  - id: &cn_neijiang_region 39866
+    name: CN Neijiang Region
+    uuid: 5434dd59-85b8-4303-8451-3a18e948e2b9
+    type_id: 2
+  - id: &cn_leshan_region 40771
+    name: CN Leshan Region
+    uuid: aa61a2d9-c2ee-4169-ae0c-50bc66b841d6
+    type_id: 2
+  - id: &cn_yaan_region 39937
+    name: CN Yaan Region
+    uuid: 160b77e5-f1a9-4602-8d22-5fdc59027c7b
+    type_id: 2
+  - id: &cn_ganzi_tibetan_autonomous_prefecture_region 39972
+    name: CN Ganzi Tibetan Autonomous Prefecture Region
+    uuid: 2b279642-f47c-49ee-ba4b-f8d206b3ff07
+    type_id: 2
+  - id: &cn_aba_tibetan_and_qiang_autonomous_prefecture_region 40001
+    name: CN Aba Tibetan And Qiang Autonomous Prefecture Region
+    uuid: fed396f0-9ab1-459e-80b1-51d7588d1ff6
+    type_id: 2
+  - id: &cn_deyang_region 40023
+    name: CN Deyang Region
+    uuid: 17325ff2-7384-4689-8a8f-b6ed20ec590a
+    type_id: 2
+  - id: &cn_guangyuan_region 40828
+    name: CN Guangyuan Region
+    uuid: 99f21dc5-7301-42aa-85b9-b637257b4ee5
+    type_id: 2
+  - id: &cn_bijie_region 41059
+    name: CN Bijie Region
+    uuid: 20e2ebce-362e-4d5e-99be-555fe3fc80eb
+    type_id: 2
+  - id: &cn_liupanshui_region 41073
+    name: CN Liupanshui Region
+    uuid: 67114d65-9b73-4d1d-a878-b97a7f414937
+    type_id: 2
+  - id: &cn_guizhou_south_buyi_and_miao_autonomous_prefecture_region 40504
+    name: CN Guizhou South Buyi And Miao Autonomous Prefecture Region
+    uuid: fd7f4fba-ad52-47a9-80ba-f80e9cc225ba
+    type_id: 2
+  - id: &cn_yibin_region 40748
+    name: CN Yibin Region
+    uuid: d4da2e07-5ae6-4488-b4ca-9bc6a6e51827
+    type_id: 2
+  - id: &cn_liangshan_yi_autonomous_prefecture_region 39895
+    name: CN Liangshan Yi Autonomous Prefecture Region
+    uuid: bbbf6c3e-cc3f-49b8-b708-69693eb42272
+    type_id: 2
+  - id: &cn_anshun_guiyang_zunyi_region 40341
+    name: CN Anshun Guiyang Zunyi Region
+    uuid: 928f6cc5-2266-43f8-aaca-91fc971bd9c7
+    type_id: 2
+  - id: &cn_qiannan_buyei_and_miao_autonomous_prefecture_region 40401
+    name: CN Qiannan Buyei And Miao Autonomous Prefecture Region
+    uuid: 6eb6e210-620e-4faf-972e-90acb2ac01ee
+    type_id: 2
+  - id: &cn_southeast_qian_autonomous_prefecture_of_miao_and_dong_region 40424
+    name: CN Southeast Qian Autonomous Prefecture Of Miao And Dong Region
+    uuid: 6a933b2d-7dd9-44c3-a1f9-07dd1c555fd9
+    type_id: 2
+  - id: &cn_tongren_region 40464
+    name: CN Tongren Region
+    uuid: 7320f601-7790-4285-a77a-3c87f564d1b4
+    type_id: 2
+  - id: &cn_zhaotong_region 41364
+    name: CN Zhaotong Region
+    uuid: fce839c6-bbed-40fb-9a0f-642653a4b5f0
+    type_id: 2
+  - id: &cn_kunming_region 41811
+    name: CN Kunming Region
+    uuid: d9a39d0d-2764-4166-8b4e-7d23932987ca
+    type_id: 2
+  - id: &cn_honghe_hani_and_yi_autonomous_prefecture_region 41529
+    name: CN Honghe Hani And Yi Autonomous Prefecture Region
+    uuid: fc399d1d-cbb4-4c65-ac03-e4bc8eece4f5
+    type_id: 2
+  - id: &cn_qujing_region 41832
+    name: CN Qujing Region
+    uuid: 7901caab-b604-4ac0-9c28-9274450ec06a
+    type_id: 2
+  - id: &cn_baoshan_region 41848
+    name: CN Baoshan Region
+    uuid: 36802dce-1013-4012-a57f-b4fbb9b972a0
+    type_id: 2
+  - id: &cn_wenshan_zhuang_and_miao_autonomous_prefecture_region 41858
+    name: CN Wenshan Zhuang And Miao Autonomous Prefecture Region
+    uuid: 908a578b-4b35-4efb-98f5-7041a23a28a3
+    type_id: 2
+  - id: &cn_yuxi_region 41871
+    name: CN Yuxi Region
+    uuid: 1a89e1cb-15f2-4151-9dba-888a786975bf
+    type_id: 2
+  - id: &cn_chuxiong_yi_autonomous_prefecture_region 41888
+    name: CN Chuxiong Yi Autonomous Prefecture Region
+    uuid: d70f483d-d2d5-4af5-9527-17065ec34ff1
+    type_id: 2
+  - id: &cn_lhasa_region 41987
+    name: CN Lhasa Region
+    uuid: fcf017ce-48e1-4407-9f18-d3ce4e16d38e
+    type_id: 2
+  - id: &cn_shigatse_region 41991
+    name: CN Shigatse Region
+    uuid: 813be9cf-6355-4a31-ae52-804d4d1542ab
+    type_id: 2
+  - id: &cn_shannan_region 41996
+    name: CN Shannan Region
+    uuid: 1b4e30f2-c991-464d-a331-5cd72b4dcfdf
+    type_id: 2
+  - id: &cn_nyingchi_region 42008
+    name: CN Nyingchi Region
+    uuid: 45cf6c67-9ed9-42ba-b1f5-a84d393a50bf
+    type_id: 2
+  - id: &cn_qamdo_region 42018
+    name: CN Qamdo Region
+    uuid: bda8995a-70bf-4477-b246-610223742663
+    type_id: 2
+  - id: &cn_nagqu_region 42022
+    name: CN Nagqu Region
+    uuid: 49ee894c-ab6a-4777-864b-70054f10c3d1
+    type_id: 2
+  - id: &cn_ali_region 42029
+    name: CN Ali Region
+    uuid: 9992e3e9-a6e7-4b23-9191-eebbc78b7af7
+    type_id: 2
+  - id: &cn_hainan_province_region 42033
+    name: CN Hainan Province Region
+    uuid: 9ecd86c1-9870-4749-8bb2-11fe2f0188a7
+    type_id: 2
+  - id: &cn_dali_bai_autonomous_prefecture_region 41492
+    name: CN Dali Bai Autonomous Prefecture Region
+    uuid: 8d71c53f-f0da-4a4f-a6d9-81d49e017630
+    type_id: 2
+  - id: &cn_puer_region 41543
+    name: CN Puer Region
+    uuid: c041000c-6695-400a-8d73-ef703fab5583
+    type_id: 2
+  - id: &cn_lincang_region 41920
+    name: CN Lincang Region
+    uuid: 8f1936ad-77eb-4f20-af4a-fad2e79fd6ec
+    type_id: 2
+  - id: &cn_nujiang_lisu_autonomous_prefecture_region 41947
+    name: CN Nujiang Lisu Autonomous Prefecture Region
+    uuid: 5cd62b78-786b-4641-bcc0-741a5b70047b
+    type_id: 2
+  - id: &cn_diqing_tibetan_autonomous_prefecture_region 41961
+    name: CN Diqing Tibetan Autonomous Prefecture Region
+    uuid: 936781eb-8aeb-463c-944d-98ac1bdd6852
+    type_id: 2
+  - id: &cn_lijiang_region 41966
+    name: CN Lijiang Region
+    uuid: d20af008-e548-4599-8f44-5e177c17dbc0
+    type_id: 2
+  - id: &cn_tacheng_region 42101
+    name: CN Tacheng Region
+    uuid: 73a04166-dcc1-4643-a23b-9688936c3822
+    type_id: 2
+  - id: &cn_hami_region 42112
+    name: CN Hami Region
+    uuid: e77840de-ca26-49a5-ab3c-c2f980e890dc
+    type_id: 2
+  - id: &cn_altay_beitun_tiemenguan_region 42540
+    name: CN Altay Beitun Tiemenguan Region
+    uuid: c4b2e947-648f-4789-ae2e-8d155810b5b0
+    type_id: 2
+  - id: &cn_hotan_region 41682
+    name: CN Hotan Region
+    uuid: 98ea5156-50f9-4f63-8bf1-ff015132b4e4
+    type_id: 2
+  - id: &cn_kizilsu_kirgiz_autonomous_prefecture_region 42394
+    name: CN Kizilsu Kirgiz Autonomous Prefecture Region
+    uuid: 0cd7946a-2f54-4bef-af15-0b217407535c
+    type_id: 2
+  - id: &cn_yulin_region 42646
+    name: CN Yulin Region
+    uuid: 0a57fb53-b954-434c-875e-a8e2ef64802c
+    type_id: 2
+  - id: &cn_shangluo_region 42494
+    name: CN Shangluo Region
+    uuid: 8d3bbc9f-221c-4d8c-9f76-0f58ff7cde9e
+    type_id: 2
+  - id: &cn_bortala_mongolian_autonomous_prefecture_region 42615
+    name: CN Bortala Mongolian Autonomous Prefecture Region
+    uuid: a2936369-0880-4841-8ed6-05bdd8962a8a
+    type_id: 2
+  - id: &cn_yanan_region 42635
+    name: CN Yanan Region
+    uuid: 8e998eac-bf76-4cba-8f49-3d97e9634afa
+    type_id: 2
+  - id: &cn_weinan_region 42696
+    name: CN Weinan Region
+    uuid: 7f3697e2-084b-49c1-9654-f1e1e561faab
+    type_id: 2
+  - id: &cn_ankang_region 42709
+    name: CN Ankang Region
+    uuid: 9c7e3481-473c-48e8-95a6-90f688bc6ac4
+    type_id: 2
+  - id: &cn_hanzhong_region 42728
+    name: CN Hanzhong Region
+    uuid: 94100fba-a573-4cb0-92c2-e2fb89bee690
+    type_id: 2
+  - id: &cn_baoji_region 42525
+    name: CN Baoji Region
+    uuid: 7591bf9d-78a4-46dc-b401-0de2e61d6b71
+    type_id: 2
+  - id: &cn_tongchuan_region 42819
+    name: CN Tongchuan Region
+    uuid: 11d1e89b-10a2-444d-8828-ef0e9d12bc7f
+    type_id: 2
+  - id: &cn_haidong_region 20687
+    name: CN Haidong Region
+    uuid: 5906c440-0441-4f35-9b3c-0b584fcfd61e
+    type_id: 2
+  - id: &cn_huangnan_tibetan_autonomous_prefecture_region 20705
+    name: CN Huangnan Tibetan Autonomous Prefecture Region
+    uuid: e94caa3f-c546-45bb-83ae-4c0181b5baa2
+    type_id: 2
+  - id: &cn_golmud_region 20746
+    name: CN Golmud Region
+    uuid: 2c65925c-2f42-4116-b1a9-faa6c38bda47
+    type_id: 2
+  - id: &cn_hainan_tibetan_autonomous_prefecture_region 20820
+    name: CN Hainan Tibetan Autonomous Prefecture Region
+    uuid: 3b456172-62ca-4364-ba45-3e8cefe3ebe6
+    type_id: 2
+  - id: &cn_guoluo_tibetan_autonomous_prefecture_region 20833
+    name: CN Guoluo Tibetan Autonomous Prefecture Region
+    uuid: 9e7d9a8a-6d9c-4613-9ff3-a7f153274258
+    type_id: 2
+  - id: &cn_yushu_tibetan_autonomous_prefecture_region 20837
+    name: CN Yushu Tibetan Autonomous Prefecture Region
+    uuid: 3f1361b0-9a75-47a0-856d-7fabe5d90cb7
+    type_id: 2
+  - id: &cn_haixi_mongol_and_tibetan_autonomous_prefecture_region 20845
+    name: CN Haixi Mongol And Tibetan Autonomous Prefecture Region
+    uuid: adeefb86-38a9-42f4-936e-c37b60617e9e
+    type_id: 2
+  - id: &cn_shawan_county_shihezi_region 21200
+    name: CN Shawan County Shihezi Region
+    uuid: 21272f1b-bb20-4819-8bb7-b8fd188f93dc
+    type_id: 2
+  - id: &cn_ili_kazakh_autonomous_prefecture_region 22607
+    name: CN Ili Kazakh Autonomous Prefecture Region
+    uuid: f7c9d513-30b6-4738-9f9a-13af37e7f0db
+    type_id: 2
+  - id: &cn_hoboksar_mongol_autonomous_county_karamay_region 21174
+    name: CN Hoboksar Mongol Autonomous County Karamay Region
+    uuid: 9b15a575-864d-4bbc-8885-25f54ccb6fe1
+    type_id: 2
+  - id: &cn_urumqi_region 21187
+    name: CN Urumqi Region
+    uuid: 4af2c0b0-a35f-422c-b88a-dbb93d7bc37e
+    type_id: 2
+  - id: &cn_dushanzi_kuitun_wusu_region 21208
+    name: CN Dushanzi Kuitun Wusu Region
+    uuid: c48b5bcd-ba5d-4e6a-a299-48e3b61c91de
+    type_id: 2
+  - id: &cn_changji_hui_autonomous_prefecture_wujiaqu_region 21218
+    name: CN Changji Hui Autonomous Prefecture Wujiaqu Region
+    uuid: 78a9f7ab-4e73-42f4-b78f-f18a7cee5956
+    type_id: 2
+  - id: &cn_turpan_region 21231
+    name: CN Turpan Region
+    uuid: 8ed9f296-351e-4e69-b8d1-e41607fc85e4
+    type_id: 2
+  - id: &cn_bayingolin_mongol_autonomous_prefecture_region 21242
+    name: CN Bayingolin Mongol Autonomous Prefecture Region
+    uuid: 15a31c38-68ce-44b7-bfea-a3577511a01b
+    type_id: 2
+  - id: &cn_aksu_akqi_county_alar_region 21253
+    name: CN Aksu Akqi County Alar Region
+    uuid: 2147c0a1-e371-4221-b662-1435176af298
+    type_id: 2
+  - id: &cn_kashi_tumxuk_region 22603
+    name: CN Kashi Tumxuk Region
+    uuid: 6c79bce1-1fe3-4d4d-a254-79813959310d
+    type_id: 2
+  - id: &cn_fixed 43393
+    name: CN Fixed
+    uuid: 019787c5-f30e-4844-af70-ce8945c998c6
+    type_id: 2
+  - id: &cn_beijing_region 24803
+    name: CN Beijing Region
+    uuid: f983a71b-6da9-4c5a-86d3-87b7fa9a6a77
+    type_id: 2
+  - id: &cn_guangzhou_region 26704
+    name: CN Guangzhou Region
+    uuid: c6278c15-1fc2-4182-911a-efebbf1b3fc8
+    type_id: 2
+  - id: &cn_shanghai_region 27332
+    name: CN Shanghai Region
+    uuid: 52b888ec-20ad-45d9-8ebe-ae99f1fd8e59
+    type_id: 2
+  - id: &cn_tianjin_region 27808
+    name: CN Tianjin Region
+    uuid: a06fdc44-dbc8-4c99-a575-42855476fa1b
+    type_id: 2
+  - id: &cn_chongqing_region 28293
+    name: CN Chongqing Region
+    uuid: 22b38755-a234-4232-adb0-d74ce073ccf1
+    type_id: 2
+  - id: &cn_benxi_fushun_shenyang_tieling_region 28963
+    name: CN Benxi Fushun Shenyang Tieling Region
+    uuid: fd58f605-836b-461d-a564-ffd5b42ca399
+    type_id: 2
+  - id: &cn_chengdu_meishan_ziyang_region 31072
+    name: CN Chengdu Meishan Ziyang Region
+    uuid: 2e21d615-61e4-42b9-a552-79b6e05deab8
+    type_id: 2
+  - id: &cn_xian_xianyang_region 30648
+    name: CN Xian Xianyang Region
+    uuid: 64fea178-952c-4ccc-9beb-b50840a33578
+    type_id: 2
+  - id: &cn_nanjing_region 29826
+    name: CN Nanjing Region
+    uuid: 783d6bf7-6661-42e0-931c-5f8c0af891ed
+    type_id: 2
+  - id: &cn_wuhan_region 29779
+    name: CN Wuhan Region
+    uuid: c7126acb-02cc-490b-87d1-a481c925698c
+    type_id: 2
+  - id: &cn_shijiazhuang_region 31811
+    name: CN Shijiazhuang Region
+    uuid: 7aaa59b8-be07-456b-80b9-fc65a42c21fc
+    type_id: 2
+  - id: &cn_baoding_region 31787
+    name: CN Baoding Region
+    uuid: d1000789-0faa-498b-a584-49f3d2d91fe1
+    type_id: 2
+  - id: &cn_zhangjiakou_region 31832
+    name: CN Zhangjiakou Region
+    uuid: 871fae92-6cb3-4f47-b3f1-7d0d3eea444c
+    type_id: 2
+  - id: &cn_tangshan_region 31849
+    name: CN Tangshan Region
+    uuid: 9c1cac64-db36-4021-a345-3622fc0d7472
+    type_id: 2
+  - id: &cn_handan_region 31796
+    name: CN Handan Region
+    uuid: 98ab822f-7bef-43bf-805a-feb52cedb271
+    type_id: 2
+  - id: &cn_chengde_region 32220
+    name: CN Chengde Region
+    uuid: 6927c594-7976-4802-aba7-0a7e986da86d
+    type_id: 2
+  - id: &cn_langfang_region 32274
+    name: CN Langfang Region
+    uuid: fcdca02a-54c6-41c8-821e-5e33c4989c18
+    type_id: 2
+  - id: &cn_cangzhou_region 31859
+    name: CN Cangzhou Region
+    uuid: 37fd7889-4c19-4644-ab11-b6018ce853d2
+    type_id: 2
+  - id: &cn_qinhuangdao_region 32166
+    name: CN Qinhuangdao Region
+    uuid: 164c3f1a-c776-48a7-ab65-c18f9efa6725
+    type_id: 2
+  - id: &cn_hengshui_region 31890
+    name: CN Hengshui Region
+    uuid: d1adbe0d-2850-42e0-8cc7-adce7d5f9491
+    type_id: 2
+  - id: &cn_xingtai_region 32341
+    name: CN Xingtai Region
+    uuid: f1dd81c3-996a-4d71-9ec0-65f675107e40
+    type_id: 2
+  - id: &cn_xinzhou_region 34660
+    name: CN Xinzhou Region
+    uuid: d495501f-489b-452c-b214-6beef35ddc43
+    type_id: 2
+  - id: &cn_taiyuan_region 34686
+    name: CN Taiyuan Region
+    uuid: 86160871-932b-42a0-a997-cc23f5e61608
+    type_id: 2
+  - id: &cn_yangquan_region 34760
+    name: CN Yangquan Region
+    uuid: adb6612c-bb43-420c-bbf9-cce9967e9b84
+    type_id: 2
+  - id: &cn_jinzhong_region 34837
+    name: CN Jinzhong Region
+    uuid: 90c0754c-e8e0-4ba4-9528-dba2fd1df0a9
+    type_id: 2
+  - id: &cn_changzhi_region 33473
+    name: CN Changzhi Region
+    uuid: af73d3bb-3b90-48f9-bf92-3d75d8e6b79e
+    type_id: 2
+  - id: &cn_jincheng_region 33486
+    name: CN Jincheng Region
+    uuid: 65478af5-e84d-435b-a075-02823b1f6691
+    type_id: 2
+  - id: &cn_linfen_region 33523
+    name: CN Linfen Region
+    uuid: baf12675-b688-4da8-8936-783324c33e51
+    type_id: 2
+  - id: &cn_luliang_region 33571
+    name: CN Luliang Region
+    uuid: fbb021b7-9d0d-40b5-9df9-5290913dbf14
+    type_id: 2
+  - id: &cn_xinyang_region 33763
+    name: CN Xinyang Region
+    uuid: 959d85d1-3ef9-434e-ab41-c82b1ed7ddb8
+    type_id: 2
+  - id: &cn_nanyang_region 33784
+    name: CN Nanyang Region
+    uuid: 00c1c7a0-3477-4382-907e-be2c8dc6816d
+    type_id: 2
+  - id: &cn_luoyang_region 33827
+    name: CN Luoyang Region
+    uuid: ffa11784-378d-4329-aa0c-42211fd14794
+    type_id: 2
+  - id: &cn_jiaozuo_jiyuan_region 35761
+    name: CN Jiaozuo Jiyuan Region
+    uuid: efe74f2c-a9e2-49fa-90d6-eeb0d1555fa5
+    type_id: 2
+  - id: &cn_hebi_region 35813
+    name: CN Hebi Region
+    uuid: ff96b301-8b6a-4e6a-a8e0-3268584d3572
+    type_id: 2
+  - id: &cn_sanmenxia_region 34175
+    name: CN Sanmenxia Region
+    uuid: c8885463-f3d6-4d59-9373-a985e18bfcc7
+    type_id: 2
+  - id: &cn_shuozhou_region 34575
+    name: CN Shuozhou Region
+    uuid: 386c4061-5507-4e26-9ae6-517ea7836d85
+    type_id: 2
+  - id: &cn_datong_region 33409
+    name: CN Datong Region
+    uuid: 95f3dc0f-944d-4905-a5cf-be363a0012d9
+    type_id: 2
+  - id: &cn_yuncheng_region 33620
+    name: CN Yuncheng Region
+    uuid: f11ae34f-280d-4599-a6bc-262a393eeade
+    type_id: 2
+  - id: &cn_shangqiu_region 35250
+    name: CN Shangqiu Region
+    uuid: 2c7771f5-d788-44fb-b47d-f0a7fde93f5d
+    type_id: 2
+  - id: &cn_kaifeng_zhengzhou_region 35261
+    name: CN Kaifeng Zhengzhou Region
+    uuid: 600cfe1b-3061-43ff-929a-3b708fe12636
+    type_id: 2
+  - id: &cn_anyang_region 35276
+    name: CN Anyang Region
+    uuid: f60d72f2-0c27-4e15-a201-f482da676154
+    type_id: 2
+  - id: &cn_xinxiang_region 35310
+    name: CN Xinxiang Region
+    uuid: f51b3c13-969b-4219-bf6f-666b9b082f31
+    type_id: 2
+  - id: &cn_xuchang_region 35357
+    name: CN Xuchang Region
+    uuid: cc9dcb65-c518-48f5-b1d9-736335f695e9
+    type_id: 2
+  - id: &cn_pingdingshan_region 33745
+    name: CN Pingdingshan Region
+    uuid: 034b26f9-de5f-4f2c-b60f-676f54841fd2
+    type_id: 2
+  - id: &cn_puyang_region 35866
+    name: CN Puyang Region
+    uuid: b5de9815-2515-49ff-b0fa-0ef425033326
+    type_id: 2
+  - id: &cn_zhoukou_region 35913
+    name: CN Zhoukou Region
+    uuid: e4c57865-58f1-48f6-80bd-5aa33cf964b0
+    type_id: 2
+  - id: &cn_luohe_region 35966
+    name: CN Luohe Region
+    uuid: f9f743c5-07df-495a-89d8-da8b905b2760
+    type_id: 2
+  - id: &cn_zhumadian_region 34122
+    name: CN Zhumadian Region
+    uuid: d9d4932c-b472-46cc-a24d-1ddf16722824
+    type_id: 2
+  - id: &cn_jinzhou_region 37060
+    name: CN Jinzhou Region
+    uuid: 7cf338df-6caa-4f76-a959-07ee941e6ce3
+    type_id: 2
+  - id: &cn_chaoyang_region 37279
+    name: CN Chaoyang Region
+    uuid: d4bbc06d-5ced-4483-a47f-2e3b8a85cd04
+    type_id: 2
+  - id: &cn_panjin_region 37412
+    name: CN Panjin Region
+    uuid: 740773dc-c6e8-48b2-a4e8-7bd08cb2272a
+    type_id: 2
+  - id: &cn_jilin_region 37426
+    name: CN Jilin Region
+    uuid: 28f9d196-3b0c-4b6c-9acc-9b69f4d80879
+    type_id: 2
+  - id: &cn_yanbian_korean_autonomous_prefecture_region 37493
+    name: CN Yanbian Korean Autonomous Prefecture Region
+    uuid: 87e277fb-e32b-48dd-9b84-2a96d0b0cb40
+    type_id: 2
+  - id: &cn_siping_region 36733
+    name: CN Siping Region
+    uuid: 041431f7-046c-4dc4-bbd7-8a3768c4ffd2
+    type_id: 2
+  - id: &cn_baicheng_region 37562
+    name: CN Baicheng Region
+    uuid: dd414e5c-0b6d-4181-b5d6-855de2a11aea
+    type_id: 2
+  - id: &cn_liaoyuan_region 37581
+    name: CN Liaoyuan Region
+    uuid: 6a90322f-11ef-4e7b-88f0-94cb41172ac7
+    type_id: 2
+  - id: &cn_songyuan_region 37590
+    name: CN Songyuan Region
+    uuid: 1cf04535-05e4-46d3-84ce-021f919525ba
+    type_id: 2
+  - id: &cn_baishan_region 36833
+    name: CN Baishan Region
+    uuid: 0958fd46-0e79-4721-a076-ad0676fe7f0a
+    type_id: 2
+  - id: &cn_dalian_region 36275
+    name: CN Dalian Region
+    uuid: 0db954f3-4e98-43e7-ae8c-1f819f685e52
+    type_id: 2
+  - id: &cn_anshan_region 36958
+    name: CN Anshan Region
+    uuid: 5b63d507-3c50-458f-a450-3fa012c9a0e2
+    type_id: 2
+  - id: &cn_dandong_region 36321
+    name: CN Dandong Region
+    uuid: 5d08eca4-983b-419d-ac05-55ce56bee60e
+    type_id: 2
+  - id: &cn_yingkou_region 37097
+    name: CN Yingkou Region
+    uuid: 403a10fa-ea5d-4fef-a3f7-9bbf478cf099
+    type_id: 2
+  - id: &cn_fuxin_region 37191
+    name: CN Fuxin Region
+    uuid: e7a74922-00d5-4ffe-b40c-b51e99b293bf
+    type_id: 2
+  - id: &cn_liaoyang_region 36371
+    name: CN Liaoyang Region
+    uuid: 1cbcad9b-be32-4dee-ab06-1f8e1adf4ec9
+    type_id: 2
+  - id: &cn_huludao_region 36561
+    name: CN Huludao Region
+    uuid: b54703be-dff5-403d-8eb2-0f7a02d5cb3a
+    type_id: 2
+  - id: &cn_changchun_region 36709
+    name: CN Changchun Region
+    uuid: 0d1af770-3ea0-48d8-a098-e060531e8029
+    type_id: 2
+  - id: &cn_tonghua_region 36794
+    name: CN Tonghua Region
+    uuid: 87da9d53-44e0-42ff-af83-2cc146d2abff
+    type_id: 2
+  - id: &cn_jiamusi_region 37918
+    name: CN Jiamusi Region
+    uuid: 644c40be-c01e-48a6-b98f-57f006af33d9
+    type_id: 2
+  - id: &cn_suihua_region 37939
+    name: CN Suihua Region
+    uuid: aa110d06-2b4c-4ce1-9e31-3b1ff1361510
+    type_id: 2
+  - id: &cn_heihe_region 37960
+    name: CN Heihe Region
+    uuid: 1196cd57-8c43-495d-8d8c-0afb341c04d5
+    type_id: 2
+  - id: &cn_daxinganling_jiagedaqi_region 37978
+    name: CN Daxinganling Jiagedaqi Region
+    uuid: 2fb267e5-4038-40a2-bc62-1dead5936611
+    type_id: 2
+  - id: &cn_daqing_region 37808
+    name: CN Daqing Region
+    uuid: 8519b518-96ba-40b2-809f-4b19067ffd0c
+    type_id: 2
+  - id: &cn_qitaihe_region 38034
+    name: CN Qitaihe Region
+    uuid: 977cf544-2d01-4808-9060-9cd4068bfc76
+    type_id: 2
+  - id: &cn_harbin_region 37775
+    name: CN Harbin Region
+    uuid: 39162a1e-c74f-40a7-b1b6-11a5dd6976c9
+    type_id: 2
+  - id: &cn_qiqihar_region 37786
+    name: CN Qiqihar Region
+    uuid: 39d61bc9-cdc7-4171-aa0f-1e36057eddc4
+    type_id: 2
+  - id: &cn_mudanjiang_region 37802
+    name: CN Mudanjiang Region
+    uuid: 0b92d6ac-21a7-4835-9642-3942fb59aa71
+    type_id: 2
+  - id: &cn_jixi_region 38288
+    name: CN Jixi Region
+    uuid: 2be8694b-c6f1-4cef-bb2a-fbc8b214cb0c
+    type_id: 2
+  - id: &cn_hegang_region 38296
+    name: CN Hegang Region
+    uuid: 8b347e0b-6d73-4e50-8c28-4932bb73efef
+    type_id: 2
+  - id: &cn_shuangyashan_region 38072
+    name: CN Shuangyashan Region
+    uuid: 8926fb73-7bf2-4ee5-95ef-0aaf418b8533
+    type_id: 2
+  - id: &cn_hulunbeier_region 38320
+    name: CN Hulunbeier Region
+    uuid: bdff7e0a-022d-48d0-b7a6-9f65619c2eb6
+    type_id: 2
+  - id: &cn_hohhot_region 38084
+    name: CN Hohhot Region
+    uuid: c4020790-0b7e-4fc1-ad73-1e7ef1966491
+    type_id: 2
+  - id: &cn_baotou_region 38127
+    name: CN Baotou Region
+    uuid: d24d70f8-5361-4175-8420-9205ff9d44af
+    type_id: 2
+  - id: &cn_tongliao_region 38352
+    name: CN Tongliao Region
+    uuid: 6755525c-983a-4761-81ba-19fa20bd1e54
+    type_id: 2
+  - id: &cn_chifeng_region 38392
+    name: CN Chifeng Region
+    uuid: 2d53df36-ba74-4db0-959a-c0dc97d92ea5
+    type_id: 2
+  - id: &cn_ordos_region 38251
+    name: CN Ordos Region
+    uuid: 1f8d1808-062f-498e-bf70-a432e08755c5
+    type_id: 2
+  - id: &cn_wuhai_region 38168
+    name: CN Wuhai Region
+    uuid: e5618560-eec2-482c-879f-cbf7ba75cb7c
+    type_id: 2
+  - id: &cn_wulanchabu_region 38229
+    name: CN Wulanchabu Region
+    uuid: d82572ff-ece8-4463-92ac-e8dd11831d20
+    type_id: 2
   - id: &cn_bayannaoer_region 4019
     name: CN Bayannaoer Region
     uuid: 69cd12f2-1e6f-4d37-b2fa-6c6570d59c52
@@ -33,6 +969,10 @@ networks:
     name: CN Lianyungang Region
     uuid: 6cd6755a-02ea-4847-a9e8-5d525f2e210c
     type_id: 2
+  - id: &cn_binzhou_region 7811
+    name: CN Binzhou Region
+    uuid: 956cebc2-6598-4277-991e-d1c626de7bfe
+    type_id: 2
   - id: &cn_zhenjiang_region 6112
     name: CN Zhenjiang Region
     uuid: 04d0ba5f-e03f-42b8-9a88-55beb9151d84
@@ -56,6 +996,14 @@ networks:
   - id: &cn_changzhou_region 6399
     name: CN Changzhou Region
     uuid: 3c8cc71b-ad8d-4a76-91e7-e6ea0360e564
+    type_id: 2
+  - id: &cn_taizhou_region 7405
+    name: CN Taizhou Region
+    uuid: 89f926f0-b2fa-404e-a5dd-d00354179be0
+    type_id: 2
+  - id: &cn_suqian_region 7502
+    name: CN Suqian Region
+    uuid: 172997d2-60ed-47bb-be2c-e17636037624
     type_id: 2
   - id: &cn_heze_region 6681
     name: CN Heze Region
@@ -97,25 +1045,13 @@ networks:
     name: CN Linyi Region
     uuid: f1cf5618-9b1a-49a2-b97c-21ab0870df5d
     type_id: 2
-  - id: &cn_taizhou_region 7405
-    name: CN Taizhou Region
-    uuid: 89f926f0-b2fa-404e-a5dd-d00354179be0
+  - id: &cn_xuancheng_region 9318
+    name: CN Xuancheng Region
+    uuid: 3df3084a-bff4-4da8-a2fb-90b9d07e36fc
     type_id: 2
-  - id: &cn_suqian_region 7502
-    name: CN Suqian Region
-    uuid: 172997d2-60ed-47bb-be2c-e17636037624
-    type_id: 2
-  - id: &cn_binzhou_region 7811
-    name: CN Binzhou Region
-    uuid: 956cebc2-6598-4277-991e-d1c626de7bfe
-    type_id: 2
-  - id: &cn_dongying_region 7874
-    name: CN Dongying Region
-    uuid: 9bd94168-3e49-4698-bc24-c4c9dc30acb8
-    type_id: 2
-  - id: &cn_huaibei_region 7991
-    name: CN Huaibei Region
-    uuid: 36bf2c77-7775-4389-ae61-b27ba6ad5da6
+  - id: &cn_luan_region 9419
+    name: CN Luan Region
+    uuid: caf973dd-e86d-460e-ab19-780a96aec546
     type_id: 2
   - id: &cn_huzhou_region 8025
     name: CN Huzhou Region
@@ -125,9 +1061,13 @@ networks:
     name: CN Jiaxing Region
     uuid: 95a34680-ed49-414b-8867-2d00ef847216
     type_id: 2
-  - id: &cn_fuzhou_region 8841
-    name: CN Fuzhou Region
-    uuid: 2055ae53-be33-457b-8140-48f5e3d39cf1
+  - id: &cn_ningbo_region 9904
+    name: CN Ningbo Region
+    uuid: 5001a1fb-732d-4363-858a-602a7c309fdb
+    type_id: 2
+  - id: &cn_shaoxing_region 9960
+    name: CN Shaoxing Region
+    uuid: 54b47287-c671-4038-9afc-83b8c76cfca2
     type_id: 2
   - id: &cn_xiamen_region 8847
     name: CN Xiamen Region
@@ -137,29 +1077,9 @@ networks:
     name: CN Ningde Region
     uuid: 476a23b7-d753-4bee-91c6-030ab53eae28
     type_id: 2
-  - id: &cn_putian_region 8878
-    name: CN Putian Region
-    uuid: 4a1ab1f9-986c-4420-a9c0-ab75c1923253
-    type_id: 2
-  - id: &cn_quanzhou_region 8907
-    name: CN Quanzhou Region
-    uuid: 85d4713b-ee4d-405f-bc29-daa7ffb36e46
-    type_id: 2
-  - id: &cn_zhangzhou_region 8925
-    name: CN Zhangzhou Region
-    uuid: 51fdd19d-eef7-4b82-a092-d8ad38c37ddf
-    type_id: 2
-  - id: &cn_longyan_region 8943
-    name: CN Longyan Region
-    uuid: 443bb990-f46f-4845-9cc3-7b0573d63b4f
-    type_id: 2
-  - id: &cn_sanming_region 8954
-    name: CN Sanming Region
-    uuid: e212a0bd-0766-45b4-bf9b-fccf3661246d
-    type_id: 2
-  - id: &cn_nanping_region 8958
-    name: CN Nanping Region
-    uuid: 0dd25115-43a2-44df-86ea-0ccf66576995
+  - id: &cn_dongying_region 7874
+    name: CN Dongying Region
+    uuid: 9bd94168-3e49-4698-bc24-c4c9dc30acb8
     type_id: 2
   - id: &cn_chuzhou_region 9025
     name: CN Chuzhou Region
@@ -197,17 +1117,13 @@ networks:
     name: CN Huangshan Region
     uuid: e044884d-3d7a-491b-9871-31a9bbcd7ad6
     type_id: 2
+  - id: &cn_huaibei_region 7991
+    name: CN Huaibei Region
+    uuid: 36bf2c77-7775-4389-ae61-b27ba6ad5da6
+    type_id: 2
   - id: &cn_tongling_region 9293
     name: CN Tongling Region
     uuid: bf455b6a-5747-45ff-918f-4a4c9e421ff4
-    type_id: 2
-  - id: &cn_xuancheng_region 9318
-    name: CN Xuancheng Region
-    uuid: 3df3084a-bff4-4da8-a2fb-90b9d07e36fc
-    type_id: 2
-  - id: &cn_luan_region 9419
-    name: CN Luan Region
-    uuid: caf973dd-e86d-460e-ab19-780a96aec546
     type_id: 2
   - id: &cn_chizhou_region 9501
     name: CN Chizhou Region
@@ -220,14 +1136,6 @@ networks:
   - id: &cn_hangzhou_region 9849
     name: CN Hangzhou Region
     uuid: 364513e8-7520-41a7-a8c4-b0e65d277567
-    type_id: 2
-  - id: &cn_ningbo_region 9904
-    name: CN Ningbo Region
-    uuid: 5001a1fb-732d-4363-858a-602a7c309fdb
-    type_id: 2
-  - id: &cn_shaoxing_region 9960
-    name: CN Shaoxing Region
-    uuid: 54b47287-c671-4038-9afc-83b8c76cfca2
     type_id: 2
   - id: &cn_wenzhou_region 10085
     name: CN Wenzhou Region
@@ -245,6 +1153,34 @@ networks:
     name: CN Zhoushan Region
     uuid: 4a133154-7e10-462e-9bdf-b2ad15ba4b1f
     type_id: 2
+  - id: &cn_putian_region 8878
+    name: CN Putian Region
+    uuid: 4a1ab1f9-986c-4420-a9c0-ab75c1923253
+    type_id: 2
+  - id: &cn_quanzhou_region 8907
+    name: CN Quanzhou Region
+    uuid: 85d4713b-ee4d-405f-bc29-daa7ffb36e46
+    type_id: 2
+  - id: &cn_zhangzhou_region 8925
+    name: CN Zhangzhou Region
+    uuid: 51fdd19d-eef7-4b82-a092-d8ad38c37ddf
+    type_id: 2
+  - id: &cn_longyan_region 8943
+    name: CN Longyan Region
+    uuid: 443bb990-f46f-4845-9cc3-7b0573d63b4f
+    type_id: 2
+  - id: &cn_sanming_region 8954
+    name: CN Sanming Region
+    uuid: e212a0bd-0766-45b4-bf9b-fccf3661246d
+    type_id: 2
+  - id: &cn_nanping_region 8958
+    name: CN Nanping Region
+    uuid: 0dd25115-43a2-44df-86ea-0ccf66576995
+    type_id: 2
+  - id: &cn_weihai_region 12513
+    name: CN Weihai Region
+    uuid: ce6f7071-a6b3-4c2b-a16f-611b026a6ec4
+    type_id: 2
   - id: &cn_zaozhuang_region 12301
     name: CN Zaozhuang Region
     uuid: 45b8cdf1-1283-46c8-b9a5-3e0d70d389e0
@@ -252,10 +1188,6 @@ networks:
   - id: &cn_rizhao_region 12329
     name: CN Rizhao Region
     uuid: 02e1a442-3401-4c77-bd5f-763860518198
-    type_id: 2
-  - id: &cn_weihai_region 12513
-    name: CN Weihai Region
-    uuid: ce6f7071-a6b3-4c2b-a16f-611b026a6ec4
     type_id: 2
   - id: &cn_laiwu_region 12878
     name: CN Laiwu Region
@@ -265,285 +1197,49 @@ networks:
     name: CN Liaocheng Region
     uuid: 05a21a62-2215-4bc8-a019-8f28b8c132d9
     type_id: 2
-  - id: &cn_yangjiang_region 13092
-    name: CN Yangjiang Region
-    uuid: fc6e677a-5ca4-4a84-9bb8-349a7d98e72c
-    type_id: 2
-  - id: &cn_maoming_region 13247
-    name: CN Maoming Region
-    uuid: 446470b5-67f2-4f92-afc1-9c732d2745d3
-    type_id: 2
-  - id: &cn_shanwei_region 13716
-    name: CN Shanwei Region
-    uuid: d83603bc-00a3-4c72-b0da-91f1f96aef79
-    type_id: 2
-  - id: &cn_jieyang_region 13908
-    name: CN Jieyang Region
-    uuid: 30cf2b14-ae68-4a73-bf4f-c685ab02ecd1
-    type_id: 2
-  - id: &cn_xishuangbanna_dai_autonomous_prefecture_region 14330
-    name: CN Xishuangbanna Dai Autonomous Prefecture Region
-    uuid: 69126680-bb49-4ef7-889c-5886254d76b0
-    type_id: 2
-  - id: &cn_dehong_dai_and_jingpo_autonomous_prefecture_region 14339
-    name: CN Dehong Dai And Jingpo Autonomous Prefecture Region
-    uuid: b7940ac9-0b74-464f-a4ce-fab123fb24b6
-    type_id: 2
-  - id: &cn_yingtan_region 14923
-    name: CN Yingtan Region
-    uuid: 6ac9b637-736a-4215-bde6-343c5a12ef51
-    type_id: 2
-  - id: &cn_xiangyang_region 15354
-    name: CN Xiangyang Region
-    uuid: 4d5d9a2e-73d5-4ee2-b731-688f42e5bec9
-    type_id: 2
-  - id: &cn_ezhou_region 15379
-    name: CN Ezhou Region
-    uuid: 2466880e-8ea3-44ae-9fbb-8e9dfd5ceff7
-    type_id: 2
-  - id: &cn_xiaogan_region 15411
-    name: CN Xiaogan Region
-    uuid: 92c24135-3227-45c5-a8d4-52ea5bf734bd
-    type_id: 2
-  - id: &cn_huanggang_region 15602
-    name: CN Huanggang Region
-    uuid: a11f1a21-707d-4333-a0e8-301cbe929f1c
-    type_id: 2
-  - id: &cn_jingzhou_region 15749
-    name: CN Jingzhou Region
-    uuid: 00457752-9fdf-441b-b0a2-be855d9be7f7
-    type_id: 2
-  - id: &cn_huangshi_region 16291
-    name: CN Huangshi Region
-    uuid: 35b36dc2-fa44-47c2-a933-79605fa820d5
-    type_id: 2
-  - id: &cn_xianning_region 16337
-    name: CN Xianning Region
-    uuid: ae300b16-6828-4e3a-bd20-4c1ca7c3371a
-    type_id: 2
-  - id: &cn_yichang_region 16407
-    name: CN Yichang Region
-    uuid: c79e9bbd-a25c-4d2f-bbee-228a8e0a281b
-    type_id: 2
-  - id: &cn_enshi_tujia_and_miao_autonomous_prefecture_region 16492
-    name: CN Enshi Tujia And Miao Autonomous Prefecture Region
-    uuid: d2ba1c42-149a-4956-95eb-4fdb78df52c6
-    type_id: 2
-  - id: &cn_suizhou_region 16624
-    name: CN Suizhou Region
-    uuid: 31e82591-eeea-445b-88a6-e8e752454868
-    type_id: 2
-  - id: &cn_shennongjia_forestry_district_shiyan_region 16808
-    name: CN Shennongjia Forestry District Shiyan Region
-    uuid: a8dd2b83-a417-4535-b4af-b2860bca1de9
-    type_id: 2
-  - id: &cn_jingmen_region 16985
-    name: CN Jingmen Region
-    uuid: 089f0754-bbe3-40a7-9267-0e73ce6cbf9b
-    type_id: 2
-  - id: &cn_qianjiang_tianmen_xiantao_region 17083
-    name: CN Qianjiang Tianmen Xiantao Region
-    uuid: 58528864-2b54-4e24-be11-ed09c8b7cf70
-    type_id: 2
-  - id: &cn_yueyang_region 17193
-    name: CN Yueyang Region
-    uuid: 19ba9074-9943-429a-8202-9e0085e12b35
-    type_id: 2
-  - id: &cn_changsha_xiangtan_zhuzhou_region 17205
-    name: CN Changsha Xiangtan Zhuzhou Region
-    uuid: 677b1e57-e86f-4924-a6f1-bdfac5544dd9
-    type_id: 2
-  - id: &cn_chenzhou_region 17324
-    name: CN Chenzhou Region
-    uuid: d3aa87ae-5aa9-45d9-94b9-883318d67ef6
-    type_id: 2
-  - id: &cn_changde_region 17340
-    name: CN Changde Region
-    uuid: 2fc52f02-f6f0-4b53-a183-8808b4c62340
-    type_id: 2
-  - id: &cn_yiyang_region 17362
-    name: CN Yiyang Region
-    uuid: 9b05525c-e409-4fee-bccb-d0dd246b8228
-    type_id: 2
-  - id: &cn_huaihua_region 17381
-    name: CN Huaihua Region
-    uuid: 22b09e51-48bd-44e0-a2b6-0a95de4a2750
-    type_id: 2
-  - id: &cn_yongzhou_region 17404
-    name: CN Yongzhou Region
-    uuid: f864c7cb-d84e-4e4c-9c15-4a68d329121e
-    type_id: 2
-  - id: &cn_shenzhen_region 17458
-    name: CN Shenzhen Region
-    uuid: cfbce64c-32f6-464d-8e74-9c6879d8d14a
-    type_id: 2
-  - id: &cn_zhuhai_region 17471
-    name: CN Zhuhai Region
-    uuid: c0f9c305-ae66-4394-932d-7c35745107ba
-    type_id: 2
-  - id: &cn_foshan_region 17494
-    name: CN Foshan Region
-    uuid: 0dfc99db-3f4b-4e45-94ff-582d97f44c57
-    type_id: 2
-  - id: &cn_hengyang_region 17572
-    name: CN Hengyang Region
-    uuid: 18a18109-1db1-4b84-bb66-ba3afef9f339
-    type_id: 2
-  - id: &cn_loudi_region 17587
-    name: CN Loudi Region
-    uuid: 58f8347c-1786-408f-8271-4998f4291e1f
-    type_id: 2
-  - id: &cn_shaoyang_region 17601
-    name: CN Shaoyang Region
-    uuid: 64b6a17b-5d7c-4871-8c56-337368c09955
-    type_id: 2
-  - id: &cn_xiangxi_tujia_and_miao_autonomous_prefecture_region 17873
-    name: CN Xiangxi Tujia And Miao Autonomous Prefecture Region
-    uuid: 7693dbc9-bad7-4f7d-b51e-428c47ca813e
-    type_id: 2
-  - id: &cn_zhangjiajie_region 17932
-    name: CN Zhangjiajie Region
-    uuid: a96cb7a0-7be2-4c3c-ad57-4301e2e17f3f
-    type_id: 2
-  - id: &cn_jiangmen_region 18040
-    name: CN Jiangmen Region
-    uuid: 1bb77e5b-9346-468e-95d3-280fe85249a4
-    type_id: 2
-  - id: &cn_shaoguan_region 18049
-    name: CN Shaoguan Region
-    uuid: 305570e6-d7c3-45dc-92d5-69a0d3a0c120
-    type_id: 2
-  - id: &cn_huizhou_region 18055
-    name: CN Huizhou Region
-    uuid: da34aa3f-5916-48f6-ae46-ed0fa95b0da9
-    type_id: 2
-  - id: &cn_meizhou_region 18081
-    name: CN Meizhou Region
-    uuid: e0c27afd-05bf-46a6-8e2e-3ab9293b460c
-    type_id: 2
-  - id: &cn_shantou_region 18098
-    name: CN Shantou Region
-    uuid: c2f87c1d-238a-422a-8d99-3e32cd917f2f
-    type_id: 2
-  - id: &cn_zhaoqing_region 18128
-    name: CN Zhaoqing Region
-    uuid: 54e4bec7-3a49-46a8-85be-f5ba554b544c
-    type_id: 2
-  - id: &cn_zhanjiang_region 18154
-    name: CN Zhanjiang Region
-    uuid: 1c141af0-4c19-4a8d-8e74-e997311e2c27
-    type_id: 2
-  - id: &cn_zhongshan_region 18202
-    name: CN Zhongshan Region
-    uuid: 73c288ec-6266-4109-aa88-aaf0cd4aec85
-    type_id: 2
-  - id: &cn_heyuan_region 18306
-    name: CN Heyuan Region
-    uuid: deede7f7-f92c-44f8-bfb2-a78b7eb45da1
-    type_id: 2
-  - id: &cn_yunfu_region 18387
-    name: CN Yunfu Region
-    uuid: bd3a8648-6767-49a1-954b-4387ec51fe41
-    type_id: 2
-  - id: &cn_qingyuan_region 18439
-    name: CN Qingyuan Region
-    uuid: 91b566aa-0253-48dc-90e8-61e62b52738d
-    type_id: 2
-  - id: &cn_fangchenggang_region 18522
-    name: CN Fangchenggang Region
-    uuid: 00da3459-5312-44b6-8091-90583939ed5f
-    type_id: 2
-  - id: &cn_chongzuo_nanning_region 18544
-    name: CN Chongzuo Nanning Region
-    uuid: 382ddbad-ad56-4a35-8feb-9f94b78c7c65
-    type_id: 2
-  - id: &cn_laibin_liuzhou_region 18562
-    name: CN Laibin Liuzhou Region
-    uuid: be86cbd6-74cf-4c46-b556-46208205102a
-    type_id: 2
-  - id: &cn_guilin_region 18606
-    name: CN Guilin Region
-    uuid: 8cf95546-b02f-4ec0-896a-03013d1060b9
-    type_id: 2
-  - id: &cn_hezhou_wuzhou_region 18640
-    name: CN Hezhou Wuzhou Region
-    uuid: 1450fcb6-3b36-4b01-9c77-2e3919ca8f9c
-    type_id: 2
-  - id: &cn_baise_region 18715
-    name: CN Baise Region
-    uuid: 4e16ad0e-22ac-4a53-ab2f-eb3ee852d574
-    type_id: 2
-  - id: &cn_qinzhou_region 18739
-    name: CN Qinzhou Region
-    uuid: 676eaa06-822b-4e03-9165-220daa6cfdeb
-    type_id: 2
-  - id: &cn_beihai_region 18765
-    name: CN Beihai Region
-    uuid: 970b6e76-a6e0-4c42-8676-afd4c7f2d63d
-    type_id: 2
-  - id: &cn_chaozhou_region 19100
-    name: CN Chaozhou Region
-    uuid: f257fa40-6745-4f0a-816d-83ee89909b7d
-    type_id: 2
-  - id: &cn_dongguan_region 19124
-    name: CN Dongguan Region
-    uuid: 1f45c9e1-f117-4a6c-9304-6ffb817f428e
-    type_id: 2
-  - id: &cn_guigang_yulin_region 19151
-    name: CN Guigang Yulin Region
-    uuid: f137ff9c-617e-49bd-9950-2bb173eb270f
-    type_id: 2
-  - id: &cn_hechi_region 19189
-    name: CN Hechi Region
-    uuid: 358de92e-3ae5-409f-bc49-f20e84a6c827
-    type_id: 2
-  - id: &cn_xinyu_region 19679
-    name: CN Xinyu Region
-    uuid: c680dca6-42a8-4619-b633-3ad3f063cdf8
-    type_id: 2
-  - id: &cn_nanchang_region 19691
-    name: CN Nanchang Region
-    uuid: f86e3fdf-7ac3-46da-94dc-fb8819868b8a
-    type_id: 2
-  - id: &cn_jiujiang_region 19696
-    name: CN Jiujiang Region
-    uuid: d9af9498-f3e1-489b-b33b-f13be7b882e0
-    type_id: 2
-  - id: &cn_shangrao_region 19699
-    name: CN Shangrao Region
-    uuid: 65d91af4-d918-4e5d-be39-57b995eacbde
-    type_id: 2
-  - id: &cn_yichun_region 19730
-    name: CN Yichun Region
-    uuid: f51cf10c-e592-45fa-ae62-a85f3f76796e
-    type_id: 2
-  - id: &cn_jian_region 19748
-    name: CN Jian Region
-    uuid: 4a9dd965-1a9c-4610-a6b0-38574835fff7
-    type_id: 2
-  - id: &cn_ganzhou_region 19758
-    name: CN Ganzhou Region
-    uuid: 3b13080a-df70-45db-a8cb-26dd2487e47d
-    type_id: 2
-  - id: &cn_jingdezhen_region 19768
-    name: CN Jingdezhen Region
-    uuid: dffdc011-aef1-438b-a3b3-684de85bac0d
-    type_id: 2
-  - id: &cn_pingxiang_region 19769
-    name: CN Pingxiang Region
-    uuid: 6819ea98-8c39-4e73-bdfb-f8353045f255
-    type_id: 2
-  - id: &cn_gannan_tibetan_autonomous_prefecture_region 20124
-    name: CN Gannan Tibetan Autonomous Prefecture Region
-    uuid: 42247009-271d-40cd-911c-c083c9bdb40f
-    type_id: 2
-  - id: &cn_baiyin_region 20157
-    name: CN Baiyin Region
-    uuid: 6fe83a8f-f5e8-4d41-a630-d7d014093259
+  - id: &cn_lanzhou_region 43133
+    name: CN Lanzhou Region
+    uuid: 353c98c2-1d92-4e33-9427-61929659c4c4
+    type_id: 2
+  - id: &cn_dingxi_region 43182
+    name: CN Dingxi Region
+    uuid: 24216365-abde-444c-9b2a-51b26d9d4d0f
+    type_id: 2
+  - id: &cn_qingyang_region 43120
+    name: CN Qingyang Region
+    uuid: bf1003d5-8bb2-4437-852c-988c5f48365a
+    type_id: 2
+  - id: &cn_linxia_hui_autonomous_prefecture_region 43095
+    name: CN Linxia Hui Autonomous Prefecture Region
+    uuid: c1d913ce-0651-41d1-9e28-a89abd2b22a2
+    type_id: 2
+  - id: &cn_pingliang_region 43107
+    name: CN Pingliang Region
+    uuid: 7746b5a2-6d6e-48cc-ada1-609fa7715d3d
+    type_id: 2
+  - id: &cn_jinchang_wuwei_region 43191
+    name: CN Jinchang Wuwei Region
+    uuid: 531ee323-c10f-4d92-8531-370a0091e059
+    type_id: 2
+  - id: &cn_zhangye_region 43283
+    name: CN Zhangye Region
+    uuid: 9300d234-61fc-4c6a-82c9-f534ee972ffa
+    type_id: 2
+  - id: &cn_jiayuguan_jiuquan_region 43289
+    name: CN Jiayuguan Jiuquan Region
+    uuid: 00bf2092-dff4-4978-a7a6-45becae559e4
+    type_id: 2
+  - id: &cn_tianshui_region 43298
+    name: CN Tianshui Region
+    uuid: f146d2f7-5764-4e87-9bc8-626e78f0833d
     type_id: 2
   - id: &cn_longnan_region 20330
     name: CN Longnan Region
     uuid: d257f4fa-aafc-40f8-bd52-71bc60b9ee02
+    type_id: 2
+  - id: &cn_gannan_tibetan_autonomous_prefecture_region 20124
+    name: CN Gannan Tibetan Autonomous Prefecture Region
+    uuid: 42247009-271d-40cd-911c-c083c9bdb40f
     type_id: 2
   - id: &cn_yinchuan_region 20344
     name: CN Yinchuan Region
@@ -552,6 +1248,10 @@ networks:
   - id: &cn_shizuishan_region 20365
     name: CN Shizuishan Region
     uuid: 660ab10e-5fcd-411a-80f6-21be5e5a7f22
+    type_id: 2
+  - id: &cn_baiyin_region 20157
+    name: CN Baiyin Region
+    uuid: 6fe83a8f-f5e8-4d41-a630-d7d014093259
     type_id: 2
   - id: &cn_wuzhong_region 20385
     name: CN Wuzhong Region
@@ -572,702 +1272,6 @@ networks:
   - id: &cn_haibei_tibetan_autonomous_prefecture_region 20677
     name: CN Haibei Tibetan Autonomous Prefecture Region
     uuid: 820d9a99-c837-4269-ad88-b8326ae85e62
-    type_id: 2
-  - id: &cn_haidong_region 20687
-    name: CN Haidong Region
-    uuid: 5906c440-0441-4f35-9b3c-0b584fcfd61e
-    type_id: 2
-  - id: &cn_huangnan_tibetan_autonomous_prefecture_region 20705
-    name: CN Huangnan Tibetan Autonomous Prefecture Region
-    uuid: e94caa3f-c546-45bb-83ae-4c0181b5baa2
-    type_id: 2
-  - id: &cn_golmud_region 20746
-    name: CN Golmud Region
-    uuid: 2c65925c-2f42-4116-b1a9-faa6c38bda47
-    type_id: 2
-  - id: &cn_hainan_tibetan_autonomous_prefecture_region 20820
-    name: CN Hainan Tibetan Autonomous Prefecture Region
-    uuid: 3b456172-62ca-4364-ba45-3e8cefe3ebe6
-    type_id: 2
-  - id: &cn_guoluo_tibetan_autonomous_prefecture_region 20833
-    name: CN Guoluo Tibetan Autonomous Prefecture Region
-    uuid: 9e7d9a8a-6d9c-4613-9ff3-a7f153274258
-    type_id: 2
-  - id: &cn_yushu_tibetan_autonomous_prefecture_region 20837
-    name: CN Yushu Tibetan Autonomous Prefecture Region
-    uuid: 3f1361b0-9a75-47a0-856d-7fabe5d90cb7
-    type_id: 2
-  - id: &cn_haixi_mongol_and_tibetan_autonomous_prefecture_region 20845
-    name: CN Haixi Mongol And Tibetan Autonomous Prefecture Region
-    uuid: adeefb86-38a9-42f4-936e-c37b60617e9e
-    type_id: 2
-  - id: &cn_hoboksar_mongol_autonomous_county_karamay_region 21174
-    name: CN Hoboksar Mongol Autonomous County Karamay Region
-    uuid: 9b15a575-864d-4bbc-8885-25f54ccb6fe1
-    type_id: 2
-  - id: &cn_urumqi_region 21187
-    name: CN Urumqi Region
-    uuid: 4af2c0b0-a35f-422c-b88a-dbb93d7bc37e
-    type_id: 2
-  - id: &cn_shawan_county_shihezi_region 21200
-    name: CN Shawan County Shihezi Region
-    uuid: 21272f1b-bb20-4819-8bb7-b8fd188f93dc
-    type_id: 2
-  - id: &cn_dushanzi_kuitun_wusu_region 21208
-    name: CN Dushanzi Kuitun Wusu Region
-    uuid: c48b5bcd-ba5d-4e6a-a299-48e3b61c91de
-    type_id: 2
-  - id: &cn_changji_hui_autonomous_prefecture_wujiaqu_region 21218
-    name: CN Changji Hui Autonomous Prefecture Wujiaqu Region
-    uuid: 78a9f7ab-4e73-42f4-b78f-f18a7cee5956
-    type_id: 2
-  - id: &cn_turpan_region 21231
-    name: CN Turpan Region
-    uuid: 8ed9f296-351e-4e69-b8d1-e41607fc85e4
-    type_id: 2
-  - id: &cn_bayingolin_mongol_autonomous_prefecture_region 21242
-    name: CN Bayingolin Mongol Autonomous Prefecture Region
-    uuid: 15a31c38-68ce-44b7-bfea-a3577511a01b
-    type_id: 2
-  - id: &cn_aksu_akqi_county_alar_region 21253
-    name: CN Aksu Akqi County Alar Region
-    uuid: 2147c0a1-e371-4221-b662-1435176af298
-    type_id: 2
-  - id: &cn_kashi_tumxuk_region 22603
-    name: CN Kashi Tumxuk Region
-    uuid: 6c79bce1-1fe3-4d4d-a254-79813959310d
-    type_id: 2
-  - id: &cn_ili_kazakh_autonomous_prefecture_region 22607
-    name: CN Ili Kazakh Autonomous Prefecture Region
-    uuid: f7c9d513-30b6-4738-9f9a-13af37e7f0db
-    type_id: 2
-  - id: &cn_beijing_region 24803
-    name: CN Beijing Region
-    uuid: f983a71b-6da9-4c5a-86d3-87b7fa9a6a77
-    type_id: 2
-  - id: &cn_guangzhou_region 26704
-    name: CN Guangzhou Region
-    uuid: c6278c15-1fc2-4182-911a-efebbf1b3fc8
-    type_id: 2
-  - id: &cn_shanghai_region 27332
-    name: CN Shanghai Region
-    uuid: 52b888ec-20ad-45d9-8ebe-ae99f1fd8e59
-    type_id: 2
-  - id: &cn_tianjin_region 27808
-    name: CN Tianjin Region
-    uuid: a06fdc44-dbc8-4c99-a575-42855476fa1b
-    type_id: 2
-  - id: &cn_chongqing_region 28293
-    name: CN Chongqing Region
-    uuid: 22b38755-a234-4232-adb0-d74ce073ccf1
-    type_id: 2
-  - id: &cn_benxi_fushun_shenyang_tieling_region 28963
-    name: CN Benxi Fushun Shenyang Tieling Region
-    uuid: fd58f605-836b-461d-a564-ffd5b42ca399
-    type_id: 2
-  - id: &cn_wuhan_region 29779
-    name: CN Wuhan Region
-    uuid: c7126acb-02cc-490b-87d1-a481c925698c
-    type_id: 2
-  - id: &cn_nanjing_region 29826
-    name: CN Nanjing Region
-    uuid: 783d6bf7-6661-42e0-931c-5f8c0af891ed
-    type_id: 2
-  - id: &cn_xian_xianyang_region 30648
-    name: CN Xian Xianyang Region
-    uuid: 64fea178-952c-4ccc-9beb-b50840a33578
-    type_id: 2
-  - id: &cn_chengdu_meishan_ziyang_region 31072
-    name: CN Chengdu Meishan Ziyang Region
-    uuid: 2e21d615-61e4-42b9-a552-79b6e05deab8
-    type_id: 2
-  - id: &cn_baoding_region 31787
-    name: CN Baoding Region
-    uuid: d1000789-0faa-498b-a584-49f3d2d91fe1
-    type_id: 2
-  - id: &cn_handan_region 31796
-    name: CN Handan Region
-    uuid: 98ab822f-7bef-43bf-805a-feb52cedb271
-    type_id: 2
-  - id: &cn_shijiazhuang_region 31811
-    name: CN Shijiazhuang Region
-    uuid: 7aaa59b8-be07-456b-80b9-fc65a42c21fc
-    type_id: 2
-  - id: &cn_zhangjiakou_region 31832
-    name: CN Zhangjiakou Region
-    uuid: 871fae92-6cb3-4f47-b3f1-7d0d3eea444c
-    type_id: 2
-  - id: &cn_tangshan_region 31849
-    name: CN Tangshan Region
-    uuid: 9c1cac64-db36-4021-a345-3622fc0d7472
-    type_id: 2
-  - id: &cn_cangzhou_region 31859
-    name: CN Cangzhou Region
-    uuid: 37fd7889-4c19-4644-ab11-b6018ce853d2
-    type_id: 2
-  - id: &cn_hengshui_region 31890
-    name: CN Hengshui Region
-    uuid: d1adbe0d-2850-42e0-8cc7-adce7d5f9491
-    type_id: 2
-  - id: &cn_qinhuangdao_region 32166
-    name: CN Qinhuangdao Region
-    uuid: 164c3f1a-c776-48a7-ab65-c18f9efa6725
-    type_id: 2
-  - id: &cn_chengde_region 32220
-    name: CN Chengde Region
-    uuid: 6927c594-7976-4802-aba7-0a7e986da86d
-    type_id: 2
-  - id: &cn_langfang_region 32274
-    name: CN Langfang Region
-    uuid: fcdca02a-54c6-41c8-821e-5e33c4989c18
-    type_id: 2
-  - id: &cn_xingtai_region 32341
-    name: CN Xingtai Region
-    uuid: f1dd81c3-996a-4d71-9ec0-65f675107e40
-    type_id: 2
-  - id: &cn_datong_region 33409
-    name: CN Datong Region
-    uuid: 95f3dc0f-944d-4905-a5cf-be363a0012d9
-    type_id: 2
-  - id: &cn_changzhi_region 33473
-    name: CN Changzhi Region
-    uuid: af73d3bb-3b90-48f9-bf92-3d75d8e6b79e
-    type_id: 2
-  - id: &cn_jincheng_region 33486
-    name: CN Jincheng Region
-    uuid: 65478af5-e84d-435b-a075-02823b1f6691
-    type_id: 2
-  - id: &cn_linfen_region 33523
-    name: CN Linfen Region
-    uuid: baf12675-b688-4da8-8936-783324c33e51
-    type_id: 2
-  - id: &cn_luliang_region 33571
-    name: CN Luliang Region
-    uuid: fbb021b7-9d0d-40b5-9df9-5290913dbf14
-    type_id: 2
-  - id: &cn_yuncheng_region 33620
-    name: CN Yuncheng Region
-    uuid: f11ae34f-280d-4599-a6bc-262a393eeade
-    type_id: 2
-  - id: &cn_pingdingshan_region 33745
-    name: CN Pingdingshan Region
-    uuid: 034b26f9-de5f-4f2c-b60f-676f54841fd2
-    type_id: 2
-  - id: &cn_xinyang_region 33763
-    name: CN Xinyang Region
-    uuid: 959d85d1-3ef9-434e-ab41-c82b1ed7ddb8
-    type_id: 2
-  - id: &cn_nanyang_region 33784
-    name: CN Nanyang Region
-    uuid: 00c1c7a0-3477-4382-907e-be2c8dc6816d
-    type_id: 2
-  - id: &cn_luoyang_region 33827
-    name: CN Luoyang Region
-    uuid: ffa11784-378d-4329-aa0c-42211fd14794
-    type_id: 2
-  - id: &cn_zhumadian_region 34122
-    name: CN Zhumadian Region
-    uuid: d9d4932c-b472-46cc-a24d-1ddf16722824
-    type_id: 2
-  - id: &cn_sanmenxia_region 34175
-    name: CN Sanmenxia Region
-    uuid: c8885463-f3d6-4d59-9373-a985e18bfcc7
-    type_id: 2
-  - id: &cn_shuozhou_region 34575
-    name: CN Shuozhou Region
-    uuid: 386c4061-5507-4e26-9ae6-517ea7836d85
-    type_id: 2
-  - id: &cn_xinzhou_region 34660
-    name: CN Xinzhou Region
-    uuid: d495501f-489b-452c-b214-6beef35ddc43
-    type_id: 2
-  - id: &cn_taiyuan_region 34686
-    name: CN Taiyuan Region
-    uuid: 86160871-932b-42a0-a997-cc23f5e61608
-    type_id: 2
-  - id: &cn_yangquan_region 34760
-    name: CN Yangquan Region
-    uuid: adb6612c-bb43-420c-bbf9-cce9967e9b84
-    type_id: 2
-  - id: &cn_jinzhong_region 34837
-    name: CN Jinzhong Region
-    uuid: 90c0754c-e8e0-4ba4-9528-dba2fd1df0a9
-    type_id: 2
-  - id: &cn_shangqiu_region 35250
-    name: CN Shangqiu Region
-    uuid: 2c7771f5-d788-44fb-b47d-f0a7fde93f5d
-    type_id: 2
-  - id: &cn_kaifeng_zhengzhou_region 35261
-    name: CN Kaifeng Zhengzhou Region
-    uuid: 600cfe1b-3061-43ff-929a-3b708fe12636
-    type_id: 2
-  - id: &cn_anyang_region 35276
-    name: CN Anyang Region
-    uuid: f60d72f2-0c27-4e15-a201-f482da676154
-    type_id: 2
-  - id: &cn_xinxiang_region 35310
-    name: CN Xinxiang Region
-    uuid: f51b3c13-969b-4219-bf6f-666b9b082f31
-    type_id: 2
-  - id: &cn_xuchang_region 35357
-    name: CN Xuchang Region
-    uuid: cc9dcb65-c518-48f5-b1d9-736335f695e9
-    type_id: 2
-  - id: &cn_jiaozuo_jiyuan_region 35761
-    name: CN Jiaozuo Jiyuan Region
-    uuid: efe74f2c-a9e2-49fa-90d6-eeb0d1555fa5
-    type_id: 2
-  - id: &cn_hebi_region 35813
-    name: CN Hebi Region
-    uuid: ff96b301-8b6a-4e6a-a8e0-3268584d3572
-    type_id: 2
-  - id: &cn_puyang_region 35866
-    name: CN Puyang Region
-    uuid: b5de9815-2515-49ff-b0fa-0ef425033326
-    type_id: 2
-  - id: &cn_zhoukou_region 35913
-    name: CN Zhoukou Region
-    uuid: e4c57865-58f1-48f6-80bd-5aa33cf964b0
-    type_id: 2
-  - id: &cn_luohe_region 35966
-    name: CN Luohe Region
-    uuid: f9f743c5-07df-495a-89d8-da8b905b2760
-    type_id: 2
-  - id: &cn_dalian_region 36275
-    name: CN Dalian Region
-    uuid: 0db954f3-4e98-43e7-ae8c-1f819f685e52
-    type_id: 2
-  - id: &cn_dandong_region 36321
-    name: CN Dandong Region
-    uuid: 5d08eca4-983b-419d-ac05-55ce56bee60e
-    type_id: 2
-  - id: &cn_liaoyang_region 36371
-    name: CN Liaoyang Region
-    uuid: 1cbcad9b-be32-4dee-ab06-1f8e1adf4ec9
-    type_id: 2
-  - id: &cn_huludao_region 36561
-    name: CN Huludao Region
-    uuid: b54703be-dff5-403d-8eb2-0f7a02d5cb3a
-    type_id: 2
-  - id: &cn_changchun_region 36709
-    name: CN Changchun Region
-    uuid: 0d1af770-3ea0-48d8-a098-e060531e8029
-    type_id: 2
-  - id: &cn_siping_region 36733
-    name: CN Siping Region
-    uuid: 041431f7-046c-4dc4-bbd7-8a3768c4ffd2
-    type_id: 2
-  - id: &cn_tonghua_region 36794
-    name: CN Tonghua Region
-    uuid: 87da9d53-44e0-42ff-af83-2cc146d2abff
-    type_id: 2
-  - id: &cn_baishan_region 36833
-    name: CN Baishan Region
-    uuid: 0958fd46-0e79-4721-a076-ad0676fe7f0a
-    type_id: 2
-  - id: &cn_anshan_region 36958
-    name: CN Anshan Region
-    uuid: 5b63d507-3c50-458f-a450-3fa012c9a0e2
-    type_id: 2
-  - id: &cn_jinzhou_region 37060
-    name: CN Jinzhou Region
-    uuid: 7cf338df-6caa-4f76-a959-07ee941e6ce3
-    type_id: 2
-  - id: &cn_yingkou_region 37097
-    name: CN Yingkou Region
-    uuid: 403a10fa-ea5d-4fef-a3f7-9bbf478cf099
-    type_id: 2
-  - id: &cn_fuxin_region 37191
-    name: CN Fuxin Region
-    uuid: e7a74922-00d5-4ffe-b40c-b51e99b293bf
-    type_id: 2
-  - id: &cn_chaoyang_region 37279
-    name: CN Chaoyang Region
-    uuid: d4bbc06d-5ced-4483-a47f-2e3b8a85cd04
-    type_id: 2
-  - id: &cn_panjin_region 37412
-    name: CN Panjin Region
-    uuid: 740773dc-c6e8-48b2-a4e8-7bd08cb2272a
-    type_id: 2
-  - id: &cn_jilin_region 37426
-    name: CN Jilin Region
-    uuid: 28f9d196-3b0c-4b6c-9acc-9b69f4d80879
-    type_id: 2
-  - id: &cn_yanbian_korean_autonomous_prefecture_region 37493
-    name: CN Yanbian Korean Autonomous Prefecture Region
-    uuid: 87e277fb-e32b-48dd-9b84-2a96d0b0cb40
-    type_id: 2
-  - id: &cn_baicheng_region 37562
-    name: CN Baicheng Region
-    uuid: dd414e5c-0b6d-4181-b5d6-855de2a11aea
-    type_id: 2
-  - id: &cn_liaoyuan_region 37581
-    name: CN Liaoyuan Region
-    uuid: 6a90322f-11ef-4e7b-88f0-94cb41172ac7
-    type_id: 2
-  - id: &cn_songyuan_region 37590
-    name: CN Songyuan Region
-    uuid: 1cf04535-05e4-46d3-84ce-021f919525ba
-    type_id: 2
-  - id: &cn_harbin_region 37775
-    name: CN Harbin Region
-    uuid: 39162a1e-c74f-40a7-b1b6-11a5dd6976c9
-    type_id: 2
-  - id: &cn_qiqihar_region 37786
-    name: CN Qiqihar Region
-    uuid: 39d61bc9-cdc7-4171-aa0f-1e36057eddc4
-    type_id: 2
-  - id: &cn_mudanjiang_region 37802
-    name: CN Mudanjiang Region
-    uuid: 0b92d6ac-21a7-4835-9642-3942fb59aa71
-    type_id: 2
-  - id: &cn_daqing_region 37808
-    name: CN Daqing Region
-    uuid: 8519b518-96ba-40b2-809f-4b19067ffd0c
-    type_id: 2
-  - id: &cn_jiamusi_region 37918
-    name: CN Jiamusi Region
-    uuid: 644c40be-c01e-48a6-b98f-57f006af33d9
-    type_id: 2
-  - id: &cn_suihua_region 37939
-    name: CN Suihua Region
-    uuid: aa110d06-2b4c-4ce1-9e31-3b1ff1361510
-    type_id: 2
-  - id: &cn_heihe_region 37960
-    name: CN Heihe Region
-    uuid: 1196cd57-8c43-495d-8d8c-0afb341c04d5
-    type_id: 2
-  - id: &cn_daxinganling_jiagedaqi_region 37978
-    name: CN Daxinganling Jiagedaqi Region
-    uuid: 2fb267e5-4038-40a2-bc62-1dead5936611
-    type_id: 2
-  - id: &cn_qitaihe_region 38034
-    name: CN Qitaihe Region
-    uuid: 977cf544-2d01-4808-9060-9cd4068bfc76
-    type_id: 2
-  - id: &cn_shuangyashan_region 38072
-    name: CN Shuangyashan Region
-    uuid: 8926fb73-7bf2-4ee5-95ef-0aaf418b8533
-    type_id: 2
-  - id: &cn_hohhot_region 38084
-    name: CN Hohhot Region
-    uuid: c4020790-0b7e-4fc1-ad73-1e7ef1966491
-    type_id: 2
-  - id: &cn_baotou_region 38127
-    name: CN Baotou Region
-    uuid: d24d70f8-5361-4175-8420-9205ff9d44af
-    type_id: 2
-  - id: &cn_wuhai_region 38168
-    name: CN Wuhai Region
-    uuid: e5618560-eec2-482c-879f-cbf7ba75cb7c
-    type_id: 2
-  - id: &cn_wulanchabu_region 38229
-    name: CN Wulanchabu Region
-    uuid: d82572ff-ece8-4463-92ac-e8dd11831d20
-    type_id: 2
-  - id: &cn_ordos_region 38251
-    name: CN Ordos Region
-    uuid: 1f8d1808-062f-498e-bf70-a432e08755c5
-    type_id: 2
-  - id: &cn_jixi_region 38288
-    name: CN Jixi Region
-    uuid: 2be8694b-c6f1-4cef-bb2a-fbc8b214cb0c
-    type_id: 2
-  - id: &cn_hegang_region 38296
-    name: CN Hegang Region
-    uuid: 8b347e0b-6d73-4e50-8c28-4932bb73efef
-    type_id: 2
-  - id: &cn_hulunbeier_region 38320
-    name: CN Hulunbeier Region
-    uuid: bdff7e0a-022d-48d0-b7a6-9f65619c2eb6
-    type_id: 2
-  - id: &cn_tongliao_region 38352
-    name: CN Tongliao Region
-    uuid: 6755525c-983a-4761-81ba-19fa20bd1e54
-    type_id: 2
-  - id: &cn_chifeng_region 38392
-    name: CN Chifeng Region
-    uuid: 2d53df36-ba74-4db0-959a-c0dc97d92ea5
-    type_id: 2
-  - id: &cn_panzhihua_region 38704
-    name: CN Panzhihua Region
-    uuid: f0af836f-6338-4edc-8227-1006f4603372
-    type_id: 2
-  - id: &cn_dazhou_region 38923
-    name: CN Dazhou Region
-    uuid: ab9d1e29-f284-41c2-8f4e-682d03b6f62c
-    type_id: 2
-  - id: &cn_suining_region 39020
-    name: CN Suining Region
-    uuid: 19aae66e-05d7-49a1-ab13-58a42ca49c2f
-    type_id: 2
-  - id: &cn_guangan_region 39039
-    name: CN Guangan Region
-    uuid: 89000cd7-4600-43a3-b8ab-1659e75d25c0
-    type_id: 2
-  - id: &cn_zigong_region 39368
-    name: CN Zigong Region
-    uuid: fca173a7-5750-4d87-a245-5f53eb873432
-    type_id: 2
-  - id: &cn_mianyang_region 39421
-    name: CN Mianyang Region
-    uuid: 8b7b9e63-01ae-49ef-a4b9-c8b4374514a2
-    type_id: 2
-  - id: &cn_nanchong_region 39484
-    name: CN Nanchong Region
-    uuid: 64c9a1a1-bf25-49b9-bca6-0d7cc325abac
-    type_id: 2
-  - id: &cn_bazhong_region 39751
-    name: CN Bazhong Region
-    uuid: f147b0bf-c25e-4974-a5b5-e9e07f3be210
-    type_id: 2
-  - id: &cn_neijiang_region 39866
-    name: CN Neijiang Region
-    uuid: 5434dd59-85b8-4303-8451-3a18e948e2b9
-    type_id: 2
-  - id: &cn_liangshan_yi_autonomous_prefecture_region 39895
-    name: CN Liangshan Yi Autonomous Prefecture Region
-    uuid: bbbf6c3e-cc3f-49b8-b708-69693eb42272
-    type_id: 2
-  - id: &cn_yaan_region 39937
-    name: CN Yaan Region
-    uuid: 160b77e5-f1a9-4602-8d22-5fdc59027c7b
-    type_id: 2
-  - id: &cn_ganzi_tibetan_autonomous_prefecture_region 39972
-    name: CN Ganzi Tibetan Autonomous Prefecture Region
-    uuid: 2b279642-f47c-49ee-ba4b-f8d206b3ff07
-    type_id: 2
-  - id: &cn_aba_tibetan_and_qiang_autonomous_prefecture_region 40001
-    name: CN Aba Tibetan And Qiang Autonomous Prefecture Region
-    uuid: fed396f0-9ab1-459e-80b1-51d7588d1ff6
-    type_id: 2
-  - id: &cn_deyang_region 40023
-    name: CN Deyang Region
-    uuid: 17325ff2-7384-4689-8a8f-b6ed20ec590a
-    type_id: 2
-  - id: &cn_anshun_guiyang_zunyi_region 40341
-    name: CN Anshun Guiyang Zunyi Region
-    uuid: 928f6cc5-2266-43f8-aaca-91fc971bd9c7
-    type_id: 2
-  - id: &cn_qiannan_buyei_and_miao_autonomous_prefecture_region 40401
-    name: CN Qiannan Buyei And Miao Autonomous Prefecture Region
-    uuid: 6eb6e210-620e-4faf-972e-90acb2ac01ee
-    type_id: 2
-  - id: &cn_southeast_qian_autonomous_prefecture_of_miao_and_dong_region 40424
-    name: CN Southeast Qian Autonomous Prefecture Of Miao And Dong Region
-    uuid: 6a933b2d-7dd9-44c3-a1f9-07dd1c555fd9
-    type_id: 2
-  - id: &cn_tongren_region 40464
-    name: CN Tongren Region
-    uuid: 7320f601-7790-4285-a77a-3c87f564d1b4
-    type_id: 2
-  - id: &cn_guizhou_south_buyi_and_miao_autonomous_prefecture_region 40504
-    name: CN Guizhou South Buyi And Miao Autonomous Prefecture Region
-    uuid: fd7f4fba-ad52-47a9-80ba-f80e9cc225ba
-    type_id: 2
-  - id: &cn_luzhou_region 40668
-    name: CN Luzhou Region
-    uuid: b53922db-2e01-4a50-beb2-6e35fa6c44bf
-    type_id: 2
-  - id: &cn_yibin_region 40748
-    name: CN Yibin Region
-    uuid: d4da2e07-5ae6-4488-b4ca-9bc6a6e51827
-    type_id: 2
-  - id: &cn_leshan_region 40771
-    name: CN Leshan Region
-    uuid: aa61a2d9-c2ee-4169-ae0c-50bc66b841d6
-    type_id: 2
-  - id: &cn_guangyuan_region 40828
-    name: CN Guangyuan Region
-    uuid: 99f21dc5-7301-42aa-85b9-b637257b4ee5
-    type_id: 2
-  - id: &cn_bijie_region 41059
-    name: CN Bijie Region
-    uuid: 20e2ebce-362e-4d5e-99be-555fe3fc80eb
-    type_id: 2
-  - id: &cn_liupanshui_region 41073
-    name: CN Liupanshui Region
-    uuid: 67114d65-9b73-4d1d-a878-b97a7f414937
-    type_id: 2
-  - id: &cn_zhaotong_region 41364
-    name: CN Zhaotong Region
-    uuid: fce839c6-bbed-40fb-9a0f-642653a4b5f0
-    type_id: 2
-  - id: &cn_dali_bai_autonomous_prefecture_region 41492
-    name: CN Dali Bai Autonomous Prefecture Region
-    uuid: 8d71c53f-f0da-4a4f-a6d9-81d49e017630
-    type_id: 2
-  - id: &cn_honghe_hani_and_yi_autonomous_prefecture_region 41529
-    name: CN Honghe Hani And Yi Autonomous Prefecture Region
-    uuid: fc399d1d-cbb4-4c65-ac03-e4bc8eece4f5
-    type_id: 2
-  - id: &cn_puer_region 41543
-    name: CN Puer Region
-    uuid: c041000c-6695-400a-8d73-ef703fab5583
-    type_id: 2
-  - id: &cn_hotan_region 41682
-    name: CN Hotan Region
-    uuid: 98ea5156-50f9-4f63-8bf1-ff015132b4e4
-    type_id: 2
-  - id: &cn_kunming_region 41811
-    name: CN Kunming Region
-    uuid: d9a39d0d-2764-4166-8b4e-7d23932987ca
-    type_id: 2
-  - id: &cn_qujing_region 41832
-    name: CN Qujing Region
-    uuid: 7901caab-b604-4ac0-9c28-9274450ec06a
-    type_id: 2
-  - id: &cn_baoshan_region 41848
-    name: CN Baoshan Region
-    uuid: 36802dce-1013-4012-a57f-b4fbb9b972a0
-    type_id: 2
-  - id: &cn_wenshan_zhuang_and_miao_autonomous_prefecture_region 41858
-    name: CN Wenshan Zhuang And Miao Autonomous Prefecture Region
-    uuid: 908a578b-4b35-4efb-98f5-7041a23a28a3
-    type_id: 2
-  - id: &cn_yuxi_region 41871
-    name: CN Yuxi Region
-    uuid: 1a89e1cb-15f2-4151-9dba-888a786975bf
-    type_id: 2
-  - id: &cn_chuxiong_yi_autonomous_prefecture_region 41888
-    name: CN Chuxiong Yi Autonomous Prefecture Region
-    uuid: d70f483d-d2d5-4af5-9527-17065ec34ff1
-    type_id: 2
-  - id: &cn_lincang_region 41920
-    name: CN Lincang Region
-    uuid: 8f1936ad-77eb-4f20-af4a-fad2e79fd6ec
-    type_id: 2
-  - id: &cn_nujiang_lisu_autonomous_prefecture_region 41947
-    name: CN Nujiang Lisu Autonomous Prefecture Region
-    uuid: 5cd62b78-786b-4641-bcc0-741a5b70047b
-    type_id: 2
-  - id: &cn_diqing_tibetan_autonomous_prefecture_region 41961
-    name: CN Diqing Tibetan Autonomous Prefecture Region
-    uuid: 936781eb-8aeb-463c-944d-98ac1bdd6852
-    type_id: 2
-  - id: &cn_lijiang_region 41966
-    name: CN Lijiang Region
-    uuid: d20af008-e548-4599-8f44-5e177c17dbc0
-    type_id: 2
-  - id: &cn_lhasa_region 41987
-    name: CN Lhasa Region
-    uuid: fcf017ce-48e1-4407-9f18-d3ce4e16d38e
-    type_id: 2
-  - id: &cn_shigatse_region 41991
-    name: CN Shigatse Region
-    uuid: 813be9cf-6355-4a31-ae52-804d4d1542ab
-    type_id: 2
-  - id: &cn_shannan_region 41996
-    name: CN Shannan Region
-    uuid: 1b4e30f2-c991-464d-a331-5cd72b4dcfdf
-    type_id: 2
-  - id: &cn_nyingchi_region 42008
-    name: CN Nyingchi Region
-    uuid: 45cf6c67-9ed9-42ba-b1f5-a84d393a50bf
-    type_id: 2
-  - id: &cn_qamdo_region 42018
-    name: CN Qamdo Region
-    uuid: bda8995a-70bf-4477-b246-610223742663
-    type_id: 2
-  - id: &cn_nagqu_region 42022
-    name: CN Nagqu Region
-    uuid: 49ee894c-ab6a-4777-864b-70054f10c3d1
-    type_id: 2
-  - id: &cn_ali_region 42029
-    name: CN Ali Region
-    uuid: 9992e3e9-a6e7-4b23-9191-eebbc78b7af7
-    type_id: 2
-  - id: &cn_hainan_province_region 42033
-    name: CN Hainan Province Region
-    uuid: 9ecd86c1-9870-4749-8bb2-11fe2f0188a7
-    type_id: 2
-  - id: &cn_tacheng_region 42101
-    name: CN Tacheng Region
-    uuid: 73a04166-dcc1-4643-a23b-9688936c3822
-    type_id: 2
-  - id: &cn_hami_region 42112
-    name: CN Hami Region
-    uuid: e77840de-ca26-49a5-ab3c-c2f980e890dc
-    type_id: 2
-  - id: &cn_kizilsu_kirgiz_autonomous_prefecture_region 42394
-    name: CN Kizilsu Kirgiz Autonomous Prefecture Region
-    uuid: 0cd7946a-2f54-4bef-af15-0b217407535c
-    type_id: 2
-  - id: &cn_shangluo_region 42494
-    name: CN Shangluo Region
-    uuid: 8d3bbc9f-221c-4d8c-9f76-0f58ff7cde9e
-    type_id: 2
-  - id: &cn_baoji_region 42525
-    name: CN Baoji Region
-    uuid: 7591bf9d-78a4-46dc-b401-0de2e61d6b71
-    type_id: 2
-  - id: &cn_altay_beitun_tiemenguan_region 42540
-    name: CN Altay Beitun Tiemenguan Region
-    uuid: c4b2e947-648f-4789-ae2e-8d155810b5b0
-    type_id: 2
-  - id: &cn_bortala_mongolian_autonomous_prefecture_region 42615
-    name: CN Bortala Mongolian Autonomous Prefecture Region
-    uuid: a2936369-0880-4841-8ed6-05bdd8962a8a
-    type_id: 2
-  - id: &cn_yanan_region 42635
-    name: CN Yanan Region
-    uuid: 8e998eac-bf76-4cba-8f49-3d97e9634afa
-    type_id: 2
-  - id: &cn_yulin_region 42646
-    name: CN Yulin Region
-    uuid: 0a57fb53-b954-434c-875e-a8e2ef64802c
-    type_id: 2
-  - id: &cn_weinan_region 42696
-    name: CN Weinan Region
-    uuid: 7f3697e2-084b-49c1-9654-f1e1e561faab
-    type_id: 2
-  - id: &cn_ankang_region 42709
-    name: CN Ankang Region
-    uuid: 9c7e3481-473c-48e8-95a6-90f688bc6ac4
-    type_id: 2
-  - id: &cn_hanzhong_region 42728
-    name: CN Hanzhong Region
-    uuid: 94100fba-a573-4cb0-92c2-e2fb89bee690
-    type_id: 2
-  - id: &cn_tongchuan_region 42819
-    name: CN Tongchuan Region
-    uuid: 11d1e89b-10a2-444d-8828-ef0e9d12bc7f
-    type_id: 2
-  - id: &cn_linxia_hui_autonomous_prefecture_region 43095
-    name: CN Linxia Hui Autonomous Prefecture Region
-    uuid: c1d913ce-0651-41d1-9e28-a89abd2b22a2
-    type_id: 2
-  - id: &cn_pingliang_region 43107
-    name: CN Pingliang Region
-    uuid: 7746b5a2-6d6e-48cc-ada1-609fa7715d3d
-    type_id: 2
-  - id: &cn_qingyang_region 43120
-    name: CN Qingyang Region
-    uuid: bf1003d5-8bb2-4437-852c-988c5f48365a
-    type_id: 2
-  - id: &cn_lanzhou_region 43133
-    name: CN Lanzhou Region
-    uuid: 353c98c2-1d92-4e33-9427-61929659c4c4
-    type_id: 2
-  - id: &cn_dingxi_region 43182
-    name: CN Dingxi Region
-    uuid: 24216365-abde-444c-9b2a-51b26d9d4d0f
-    type_id: 2
-  - id: &cn_jinchang_wuwei_region 43191
-    name: CN Jinchang Wuwei Region
-    uuid: 531ee323-c10f-4d92-8531-370a0091e059
-    type_id: 2
-  - id: &cn_zhangye_region 43283
-    name: CN Zhangye Region
-    uuid: 9300d234-61fc-4c6a-82c9-f534ee972ffa
-    type_id: 2
-  - id: &cn_jiayuguan_jiuquan_region 43289
-    name: CN Jiayuguan Jiuquan Region
-    uuid: 00bf2092-dff4-4978-a7a6-45becae559e4
-    type_id: 2
-  - id: &cn_tianshui_region 43298
-    name: CN Tianshui Region
-    uuid: f146d2f7-5764-4e87-9bc8-626e78f0833d
     type_id: 2
 # Supplementary services Networks
   - id: &cn_special_services 21378
@@ -1290,14 +1294,6 @@ networks:
     name: CN Virtual Private Network
     uuid: 8d973d2a-f06c-4204-9a59-1b3bf55c24d7
     type_id: 13
-  - id: &cn_freephone_services 23829
-    name: CN Freephone Services
-    uuid: 32a9a665-76f6-44f4-a1aa-c9b0a98b7acf
-    type_id: 13
-  - id: &cn_personal_communication_services 24171
-    name: CN Personal Communication Services
-    uuid: 66ea64a1-1b2d-4459-a92b-4bf4c505b4ab
-    type_id: 13
   - id: &cn_local_emergency_services 24541
     name: CN Local Emergency Services
     uuid: 778c129a-afda-4f2e-bd34-f195afb5d651
@@ -1305,6 +1301,14 @@ networks:
   - id: &cn_beijing_emergency_services 24543
     name: CN Beijing Emergency Services
     uuid: bc1093a2-976b-4c9f-8a5a-9363108aaccd
+    type_id: 13
+  - id: &cn_personal_communication_services 24171
+    name: CN Personal Communication Services
+    uuid: 66ea64a1-1b2d-4459-a92b-4bf4c505b4ab
+    type_id: 13
+  - id: &cn_freephone_services 23829
+    name: CN Freephone Services
+    uuid: 32a9a665-76f6-44f4-a1aa-c9b0a98b7acf
     type_id: 13
   - id: &cn_national_special_services 26120
     name: CN National Special Services
@@ -1338,6 +1342,1651 @@ networks:
     type_id: 15
 network_prefixes:
 # Fixed Prefixes
+  - id: 128925
+    prefix: '86662'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e7d3b7b8-12dd-48f4-977e-fd50b1de26d8
+    country_id: *cn
+    network_id: *cn_yangjiang_region
+  - id: 138940
+    prefix: '86660'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c08a8cab-d905-4c44-94ae-f542605a0cb4
+    country_id: *cn
+    network_id: *cn_shanwei_region
+  - id: 139897
+    prefix: '86663'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b99250e1-a3ff-4cf4-8ec4-edec210c3b81
+    country_id: *cn
+    network_id: *cn_jieyang_region
+  - id: 132170
+    prefix: '86668'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a1641960-bd30-44d0-9cdc-54ee8daf324f
+    country_id: *cn
+    network_id: *cn_maoming_region
+  - id: 159089
+    prefix: '86713'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 198581fd-1d81-4b48-83f3-c9947c870331
+    country_id: *cn
+    network_id: *cn_huanggang_region
+  - id: 164976
+    prefix: '86714'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b82333f9-9126-47f3-b01d-126c9750f516
+    country_id: *cn
+    network_id: *cn_huangshi_region
+  - id: 148882
+    prefix: '86691'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8f8be6b9-80ce-4f3e-9a4c-d6283e1eb04d
+    country_id: *cn
+    network_id: *cn_xishuangbanna_dai_autonomous_prefecture_region
+  - id: 149037
+    prefix: '86692'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7665f585-f777-430d-9867-b2464611c3b3
+    country_id: *cn
+    network_id: *cn_dehong_dai_and_jingpo_autonomous_prefecture_region
+  - id: 154412
+    prefix: '86701'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e9df7449-0c19-477d-9865-cee8c115065c
+    country_id: *cn
+    network_id: *cn_yingtan_region
+  - id: 157850
+    prefix: '86710'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 70b891c5-416a-4d96-aa11-94cb52653970
+    country_id: *cn
+    network_id: *cn_xiangyang_region
+  - id: 157876
+    prefix: '86711'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: db40a6a1-f474-49c9-b3e1-5caf336cd4b6
+    country_id: *cn
+    network_id: *cn_ezhou_region
+  - id: 157964
+    prefix: '86712'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4f666684-e48a-4cc3-9960-231cd0cbb6bb
+    country_id: *cn
+    network_id: *cn_xiaogan_region
+  - id: 160458
+    prefix: '86716'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a4a2a24e-97ad-4a45-a3a8-529d3a230d2f
+    country_id: *cn
+    network_id: *cn_jingzhou_region
+  - id: 166728
+    prefix: '86717'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b9b01974-8cd2-435e-a0a7-86fb96103686
+    country_id: *cn
+    network_id: *cn_yichang_region
+  - id: 173212
+    prefix: '86724'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7432d755-1fe0-4181-a8bb-fcc0cc5b959f
+    country_id: *cn
+    network_id: *cn_jingmen_region
+  - id: 174268
+    prefix: '86728'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5ceb9b42-47d9-4858-be53-e378707288f3
+    country_id: *cn
+    network_id: *cn_qianjiang_tianmen_xiantao_region
+  - id: 165862
+    prefix: '86715'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c7a613dc-45bf-4ae0-ac93-5cbc9ad89dee
+    country_id: *cn
+    network_id: *cn_xianning_region
+  - id: 167577
+    prefix: '86718'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 91b83d4b-eabf-4f84-9429-ef8d6ce0cb09
+    country_id: *cn
+    network_id: *cn_enshi_tujia_and_miao_autonomous_prefecture_region
+  - id: 171841
+    prefix: '86719'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4aa8b129-9140-47ca-8316-434bccf67cf3
+    country_id: *cn
+    network_id: *cn_shennongjia_forestry_district_shiyan_region
+  - id: 169650
+    prefix: '86722'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 895a8d36-2348-452c-a44c-620e818ad72b
+    country_id: *cn
+    network_id: *cn_suizhou_region
+  - id: 175897
+    prefix: '86730'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eb58a7f0-d4e4-4344-bcd5-924cdd815a11
+    country_id: *cn
+    network_id: *cn_yueyang_region
+  - id: 175955
+    prefix: '86731'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1a88684d-cb2c-4074-b77b-e72a94d1b317
+    country_id: *cn
+    network_id: *cn_changsha_xiangtan_zhuzhou_region
+  - id: 177844
+    prefix: '86735'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9e88d931-5fd7-49c6-8e23-1f86fe7e1234
+    country_id: *cn
+    network_id: *cn_chenzhou_region
+  - id: 179479
+    prefix: '86746'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0df29b55-9907-458c-9819-866c820aea45
+    country_id: *cn
+    network_id: *cn_yongzhou_region
+  - id: 186907
+    prefix: '86754'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b3d1b1e6-10e9-47e9-8636-69c6a8048f94
+    country_id: *cn
+    network_id: *cn_shantou_region
+  - id: 181479
+    prefix: '86734'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 564a6424-96a2-4772-b61d-b21547de3d31
+    country_id: *cn
+    network_id: *cn_hengyang_region
+  - id: 178472
+    prefix: '86736'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fb240a38-c924-4cf2-b64f-666216ea726e
+    country_id: *cn
+    network_id: *cn_changde_region
+  - id: 178586
+    prefix: '86737'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 01d09bde-a588-439d-a842-deebddc05726
+    country_id: *cn
+    network_id: *cn_yiyang_region
+  - id: 182707
+    prefix: '86738'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 67abe569-b577-4017-91f5-867569c9ea72
+    country_id: *cn
+    network_id: *cn_loudi_region
+  - id: 182765
+    prefix: '86739'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b388fe32-30ad-454e-8272-81ec66ea9657
+    country_id: *cn
+    network_id: *cn_shaoyang_region
+  - id: 184619
+    prefix: '86743'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: accdd79d-069e-4cb2-a045-03fdfecd026b
+    country_id: *cn
+    network_id: *cn_xiangxi_tujia_and_miao_autonomous_prefecture_region
+  - id: 184815
+    prefix: '86744'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2fc7c3a4-dc5c-4ca1-8791-6dedb2d986ff
+    country_id: *cn
+    network_id: *cn_zhangjiajie_region
+  - id: 179304
+    prefix: '86745'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8715b43b-7515-46d8-b5d9-94eb0544a07e
+    country_id: *cn
+    network_id: *cn_huaihua_region
+  - id: 186323
+    prefix: '86750'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: be88c199-73d4-4e5f-a6e8-c56316f5f3cd
+    country_id: *cn
+    network_id: *cn_jiangmen_region
+  - id: 186337
+    prefix: '86751'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 708f1c7a-7373-49c2-bf93-cf75ac329e93
+    country_id: *cn
+    network_id: *cn_shaoguan_region
+  - id: 186370
+    prefix: '86752'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 96359c04-af01-4079-94a1-65a68ec0f631
+    country_id: *cn
+    network_id: *cn_huizhou_region
+  - id: 186399
+    prefix: '86753'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b1f99904-9714-492a-bd65-1481ba8133d9
+    country_id: *cn
+    network_id: *cn_meizhou_region
+  - id: 180588
+    prefix: '86757'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c3564706-4af1-4160-b233-c3ea6bbc0087
+    country_id: *cn
+    network_id: *cn_foshan_region
+  - id: 187751
+    prefix: '86758'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9ad016dd-c672-4f32-a67c-40f94f0c3f76
+    country_id: *cn
+    network_id: *cn_zhaoqing_region
+  - id: 187884
+    prefix: '86759'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3ab817c3-5874-4eb1-bf41-0c4c5e3c1b17
+    country_id: *cn
+    network_id: *cn_zhanjiang_region
+  - id: 188699
+    prefix: '86760'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 76d1e726-4c36-4fbc-9870-7956c6cafd94
+    country_id: *cn
+    network_id: *cn_zhongshan_region
+  - id: 192569
+    prefix: '86770'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b09c6009-0c3b-4e02-8e2e-241ccc8c41cf
+    country_id: *cn
+    network_id: *cn_fangchenggang_region
+  - id: 179939
+    prefix: '86755'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d24bb6ce-2b8a-44a1-9913-74790dd7aa50
+    country_id: *cn
+    network_id: *cn_shenzhen_region
+  - id: 180276
+    prefix: '86756'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d74e40a7-18af-4f10-9acb-a38b53d9ea16
+    country_id: *cn
+    network_id: *cn_zhuhai_region
+  - id: 189548
+    prefix: '86762'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 56b84cd4-bb5d-4ba6-ae9e-3e0b970034d7
+    country_id: *cn
+    network_id: *cn_heyuan_region
+  - id: 191129
+    prefix: '86763'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1b20c76e-dde9-42c5-bd61-f199e17c08f6
+    country_id: *cn
+    network_id: *cn_qingyuan_region
+  - id: 190353
+    prefix: '86766'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0734f3bc-4679-4e93-b5a3-1b01f230eb5b
+    country_id: *cn
+    network_id: *cn_yunfu_region
+  - id: 200406
+    prefix: '86768'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6b9ea65d-5a42-4ea3-90e7-04b5cfc2d08f
+    country_id: *cn
+    network_id: *cn_chaozhou_region
+  - id: 200510
+    prefix: '86769'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 44e3be2b-65a2-4b65-8340-286542f4f846
+    country_id: *cn
+    network_id: *cn_dongguan_region
+  - id: 195005
+    prefix: '86773'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 548475db-f3ba-4f73-b35d-e61a134af294
+    country_id: *cn
+    network_id: *cn_guilin_region
+  - id: 196702
+    prefix: '86776'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ba2e321d-4abf-4950-94ee-6fed1810eb4a
+    country_id: *cn
+    network_id: *cn_baise_region
+  - id: 207249
+    prefix: '86794'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b566dd0e-63b6-472f-b762-b4ca7825e352
+    country_id: *cn
+    network_id: *cn_fuzhou_region
+  - id: 207271
+    prefix: '86795'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d173d48e-a249-4a8d-886f-ae179547f8a7
+    country_id: *cn
+    network_id: *cn_yichun_region
+  - id: 207300
+    prefix: '86796'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 96cfb76b-9160-4186-81a4-70066331dd5d
+    country_id: *cn
+    network_id: *cn_jian_region
+  - id: 207312
+    prefix: '86797'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9822552f-74b3-4127-a04f-1e0673cce6b0
+    country_id: *cn
+    network_id: *cn_ganzhou_region
+  - id: 207470
+    prefix: '86798'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2e6c6921-0f6d-4f07-91e3-14c47b6526dc
+    country_id: *cn
+    network_id: *cn_jingdezhen_region
+  - id: 207473
+    prefix: '86799'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7a7c8296-27b8-4f48-85b2-e8f76125c116
+    country_id: *cn
+    network_id: *cn_pingxiang_region
+  - id: 193381
+    prefix: '86771'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 36805fb8-5c59-43fe-a5e4-b09a7b0488cf
+    country_id: *cn
+    network_id: *cn_chongzuo_nanning_region
+  - id: 194422
+    prefix: '86772'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4449a858-0b24-43b0-b1b7-c15fcb08bcd3
+    country_id: *cn
+    network_id: *cn_laibin_liuzhou_region
+  - id: 196211
+    prefix: '86774'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ebbf53d0-df18-4b5c-b0cb-309d52e32151
+    country_id: *cn
+    network_id: *cn_hezhou_wuzhou_region
+  - id: 200896
+    prefix: '86775'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c67d0d11-2d3f-4fbd-9dba-b9999c753965
+    country_id: *cn
+    network_id: *cn_guigang_yulin_region
+  - id: 196999
+    prefix: '86777'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ceb3460b-7405-4b23-b3b1-62d5992df567
+    country_id: *cn
+    network_id: *cn_qinzhou_region
+  - id: 202438
+    prefix: '86778'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af28daab-855c-43cd-8622-498b7e8aff15
+    country_id: *cn
+    network_id: *cn_hechi_region
+  - id: 197895
+    prefix: '86779'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a5c2cb89-d82f-4a62-af22-8fa053e2194a
+    country_id: *cn
+    network_id: *cn_beihai_region
+  - id: 207028
+    prefix: '86790'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8dccf9ea-9ae9-4193-b91b-5f28ec3dba1d
+    country_id: *cn
+    network_id: *cn_xinyu_region
+  - id: 207043
+    prefix: '86791'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8ee8dec3-19cc-40ff-a49a-f3e58e10226f
+    country_id: *cn
+    network_id: *cn_nanchang_region
+  - id: 207224
+    prefix: '86792'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b0982f54-c882-46fd-acda-c25a9b84da26
+    country_id: *cn
+    network_id: *cn_jiujiang_region
+  - id: 207228
+    prefix: '86793'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6e6394ae-241b-4228-8c81-33a0a2fd897e
+    country_id: *cn
+    network_id: *cn_shangrao_region
+  - id: 417586
+    prefix: '86817'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: db59933f-87ce-495a-ab69-3779c5695415
+    country_id: *cn
+    network_id: *cn_nanchong_region
+  - id: 410223
+    prefix: '86825'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b0d10be7-b12d-41f9-840b-550f4138e045
+    country_id: *cn
+    network_id: *cn_suining_region
+  - id: 420496
+    prefix: '86827'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eaf35288-a457-4569-85fe-73bdfc3f69d6
+    country_id: *cn
+    network_id: *cn_bazhong_region
+  - id: 406940
+    prefix: '86812'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5dcbf051-d74e-4cc9-b75f-0f3d26384fee
+    country_id: *cn
+    network_id: *cn_panzhihua_region
+  - id: 415681
+    prefix: '86813'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aa61224f-2046-4f46-9b27-49ba3e4e6e6c
+    country_id: *cn
+    network_id: *cn_zigong_region
+  - id: 416782
+    prefix: '86816'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 88eca032-a886-43f2-a3f4-74f7e2063b50
+    country_id: *cn
+    network_id: *cn_mianyang_region
+  - id: 409343
+    prefix: '86818'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 27d5e5d5-36b0-47eb-b03a-265bbcbc42c5
+    country_id: *cn
+    network_id: *cn_dazhou_region
+  - id: 411013
+    prefix: '86826'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 42a8391c-1ab6-4d80-857d-03f68d5942b9
+    country_id: *cn
+    network_id: *cn_guangan_region
+  - id: 431066
+    prefix: '86830'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1d92c733-dd68-4a69-9932-a10962e2028b
+    country_id: *cn
+    network_id: *cn_luzhou_region
+  - id: 422637
+    prefix: '86832'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e61fb6b4-ff10-4d7d-a4af-a1ff8aa5fd98
+    country_id: *cn
+    network_id: *cn_neijiang_region
+  - id: 432161
+    prefix: '86833'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aefa496e-3c9b-4e76-964a-d5a67a24841b
+    country_id: *cn
+    network_id: *cn_leshan_region
+  - id: 424050
+    prefix: '86835'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 482ab6ad-2838-49cd-8c3e-36b35d6969c2
+    country_id: *cn
+    network_id: *cn_yaan_region
+  - id: 424181
+    prefix: '86836'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b6935337-8fce-466f-86f6-c4965bfe43a0
+    country_id: *cn
+    network_id: *cn_ganzi_tibetan_autonomous_prefecture_region
+  - id: 424282
+    prefix: '86837'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6e2bcda7-6efb-44d3-a81e-b3c3bd556646
+    country_id: *cn
+    network_id: *cn_aba_tibetan_and_qiang_autonomous_prefecture_region
+  - id: 424306
+    prefix: '86838'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 90a898c3-ee24-47d4-b045-6e522a1af973
+    country_id: *cn
+    network_id: *cn_deyang_region
+  - id: 433060
+    prefix: '86839'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f9e6e52d-544b-4389-8ff3-387601a406a4
+    country_id: *cn
+    network_id: *cn_guangyuan_region
+  - id: 436707
+    prefix: '86857'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 37899112-d7ca-45da-a93e-5b964cdca4fa
+    country_id: *cn
+    network_id: *cn_bijie_region
+  - id: 437068
+    prefix: '86858'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1e25c3c2-097d-413b-8c84-10d49ebcd3b6
+    country_id: *cn
+    network_id: *cn_liupanshui_region
+  - id: 428125
+    prefix: '86859'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 04c6755d-5741-4638-bd33-92dccff6135f
+    country_id: *cn
+    network_id: *cn_guizhou_south_buyi_and_miao_autonomous_prefecture_region
+  - id: 431567
+    prefix: '86831'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4a8a0c10-2602-4071-b216-ef71bced3f54
+    country_id: *cn
+    network_id: *cn_yibin_region
+  - id: 423367
+    prefix: '86834'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 391cec7c-5094-435a-b50c-f9877ce1bdfb
+    country_id: *cn
+    network_id: *cn_liangshan_yi_autonomous_prefecture_region
+  - id: 427507
+    prefix: '86851'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 90b23bb6-8f34-49ac-8903-5a16e33a6efd
+    country_id: *cn
+    network_id: *cn_anshun_guiyang_zunyi_region
+  - id: 427572
+    prefix: '86854'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 55405c50-c1ee-4c5d-ae4b-4042aeedb99b
+    country_id: *cn
+    network_id: *cn_qiannan_buyei_and_miao_autonomous_prefecture_region
+  - id: 427735
+    prefix: '86855'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 766b610f-9760-42fe-98eb-50613a997ea1
+    country_id: *cn
+    network_id: *cn_southeast_qian_autonomous_prefecture_of_miao_and_dong_region
+  - id: 427779
+    prefix: '86856'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c07d387d-d264-49e6-af31-1290297e3f2b
+    country_id: *cn
+    network_id: *cn_tongren_region
+  - id: 441405
+    prefix: '86870'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 069bccf8-77aa-4774-adfa-05791c1ff712
+    country_id: *cn
+    network_id: *cn_zhaotong_region
+  - id: 448899
+    prefix: '86871'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: be30a97b-8965-464d-8c7e-013c6cfbca54
+    country_id: *cn
+    network_id: *cn_kunming_region
+  - id: 443099
+    prefix: '86873'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8d44d7f0-ae22-4912-92a5-08ccbd022f72
+    country_id: *cn
+    network_id: *cn_honghe_hani_and_yi_autonomous_prefecture_region
+  - id: 450457
+    prefix: '86874'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eb7c55c6-f4dc-46ee-8fd0-d9eaf1aba2ca
+    country_id: *cn
+    network_id: *cn_qujing_region
+  - id: 450473
+    prefix: '86875'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2ed8b9b0-96a6-49c1-853b-a692bd20284c
+    country_id: *cn
+    network_id: *cn_baoshan_region
+  - id: 450484
+    prefix: '86876'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 445a196e-f753-4953-8505-0c1491fa07a6
+    country_id: *cn
+    network_id: *cn_wenshan_zhuang_and_miao_autonomous_prefecture_region
+  - id: 450702
+    prefix: '86877'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 29454a0b-fae0-4802-88b7-9ca58f6e9c5f
+    country_id: *cn
+    network_id: *cn_yuxi_region
+  - id: 451092
+    prefix: '86878'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1f08d51f-c41d-4323-ba94-4df82a5c9456
+    country_id: *cn
+    network_id: *cn_chuxiong_yi_autonomous_prefecture_region
+  - id: 451771
+    prefix: '86891'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 26749daf-a36c-444f-a1fc-78dca32c1ffd
+    country_id: *cn
+    network_id: *cn_lhasa_region
+  - id: 451909
+    prefix: '86892'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ebe39a4c-a9f4-490b-ab87-d86899d921b5
+    country_id: *cn
+    network_id: *cn_shigatse_region
+  - id: 451946
+    prefix: '86893'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4b0dc837-2540-4df0-9496-042f5af80316
+    country_id: *cn
+    network_id: *cn_shannan_region
+  - id: 451960
+    prefix: '86894'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8c945884-9bc6-47fa-ae1d-1c4f99da9548
+    country_id: *cn
+    network_id: *cn_nyingchi_region
+  - id: 452240
+    prefix: '86895'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a0057fc0-b3cd-49fd-9d4b-e7732c545b38
+    country_id: *cn
+    network_id: *cn_qamdo_region
+  - id: 452246
+    prefix: '86896'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1b668df3-f080-4b59-b5c4-c0aaf6cee46d
+    country_id: *cn
+    network_id: *cn_nagqu_region
+  - id: 452254
+    prefix: '86897'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 856401c7-c3cd-4b9a-ac95-f70133c4aab8
+    country_id: *cn
+    network_id: *cn_ali_region
+  - id: 452467
+    prefix: '86898'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2815f20e-2bb3-4287-8ab4-2c01949466ad
+    country_id: *cn
+    network_id: *cn_hainan_province_region
+  - id: 442239
+    prefix: '86872'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 03447cd9-65f0-473a-b18f-47dc411f2cb1
+    country_id: *cn
+    network_id: *cn_dali_bai_autonomous_prefecture_region
+  - id: 443761
+    prefix: '86879'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c148677a-b96e-4063-84b2-f155aadda889
+    country_id: *cn
+    network_id: *cn_puer_region
+  - id: 451301
+    prefix: '86883'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 02d8637e-469a-4291-955e-2d0a36044d24
+    country_id: *cn
+    network_id: *cn_lincang_region
+  - id: 451353
+    prefix: '86886'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6a296867-9a9e-4646-8687-c0fb64c58355
+    country_id: *cn
+    network_id: *cn_nujiang_lisu_autonomous_prefecture_region
+  - id: 451368
+    prefix: '86887'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5617a7d0-52af-4d8e-a447-b52482bf2fe2
+    country_id: *cn
+    network_id: *cn_diqing_tibetan_autonomous_prefecture_region
+  - id: 451381
+    prefix: '86888'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 18ebe454-a3a0-4e6b-a403-4c0d70786703
+    country_id: *cn
+    network_id: *cn_lijiang_region
+  - id: 454703
+    prefix: '86901'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f87ab0f6-ac36-4388-82f7-e8056be7de3f
+    country_id: *cn
+    network_id: *cn_tacheng_region
+  - id: 454949
+    prefix: '86902'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dad5abaa-8fd6-4edf-96ae-6b84e5702351
+    country_id: *cn
+    network_id: *cn_hami_region
+  - id: 462744
+    prefix: '86906'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7cd0b472-1170-4c47-9045-77513837ef19
+    country_id: *cn
+    network_id: *cn_altay_beitun_tiemenguan_region
+  - id: 447281
+    prefix: '86903'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 59662a1c-69bd-4a88-962d-bc1b57b566b2
+    country_id: *cn
+    network_id: *cn_hotan_region
+  - id: 457259
+    prefix: '86908'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 81c1eaa8-3efc-4370-8277-8110a0419948
+    country_id: *cn
+    network_id: *cn_kizilsu_kirgiz_autonomous_prefecture_region
+  - id: 465639
+    prefix: '86912'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 072397d1-bb06-4afb-8353-a7931ec77012
+    country_id: *cn
+    network_id: *cn_yulin_region
+  - id: 460336
+    prefix: '86914'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e78f4306-369f-4b03-ae6c-a0ba97a78069
+    country_id: *cn
+    network_id: *cn_shangluo_region
+  - id: 463572
+    prefix: '86909'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c560e4e0-1f44-4906-9537-232bc50e65b8
+    country_id: *cn
+    network_id: *cn_bortala_mongolian_autonomous_prefecture_region
+  - id: 465120
+    prefix: '86911'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1aed586e-e7b2-4f41-acc8-6fdb9c2dc10c
+    country_id: *cn
+    network_id: *cn_yanan_region
+  - id: 466314
+    prefix: '86913'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a60937fc-3ae9-45d4-ab94-1cf2e0d2c156
+    country_id: *cn
+    network_id: *cn_weinan_region
+  - id: 466836
+    prefix: '86915'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6c413c0f-d4db-490a-8705-23a3030008e4
+    country_id: *cn
+    network_id: *cn_ankang_region
+  - id: 467202
+    prefix: '86916'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e87468ec-45cf-491c-987b-ca286da0d652
+    country_id: *cn
+    network_id: *cn_hanzhong_region
+  - id: 461703
+    prefix: '86917'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b9be9a4b-e8af-4e5e-99e7-737afc6387b3
+    country_id: *cn
+    network_id: *cn_baoji_region
+  - id: 469802
+    prefix: '86919'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 67978870-6aaa-4f92-a752-72980fbba96a
+    country_id: *cn
+    network_id: *cn_tongchuan_region
+  - id: 229614
+    prefix: '86972'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b39c3299-7e70-4145-a5f1-1b8b091635fc
+    country_id: *cn
+    network_id: *cn_haidong_region
+  - id: 230512
+    prefix: '86973'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d64d61a2-ee6b-4fa7-a8f5-6f133b4ee2b3
+    country_id: *cn
+    network_id: *cn_huangnan_tibetan_autonomous_prefecture_region
+  - id: 231183
+    prefix: '86979'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ed287d2e-05ef-41ab-a1e1-c1691599289b
+    country_id: *cn
+    network_id: *cn_golmud_region
+  - id: 233312
+    prefix: '86974'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 41f2f028-7fa8-475d-9d22-e228bee96e8c
+    country_id: *cn
+    network_id: *cn_hainan_tibetan_autonomous_prefecture_region
+  - id: 233332
+    prefix: '86975'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8f45dd24-39a1-49b2-a15f-56237ee0fe61
+    country_id: *cn
+    network_id: *cn_guoluo_tibetan_autonomous_prefecture_region
+  - id: 233343
+    prefix: '86976'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: de8ed499-99b4-4a45-b77b-14ac537e697f
+    country_id: *cn
+    network_id: *cn_yushu_tibetan_autonomous_prefecture_region
+  - id: 233354
+    prefix: '86977'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0e0398a6-6a28-4623-aead-36d6670b5bb5
+    country_id: *cn
+    network_id: *cn_haixi_mongol_and_tibetan_autonomous_prefecture_region
+  - id: 240004
+    prefix: '86993'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 348c6533-1594-496d-8c23-edcb1a29d7f0
+    country_id: *cn
+    network_id: *cn_shawan_county_shihezi_region
+  - id: 246796
+    prefix: '86999'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d959c9ff-0f31-444f-b9bc-ce25c020c329
+    country_id: *cn
+    network_id: *cn_ili_kazakh_autonomous_prefecture_region
+  - id: 239776
+    prefix: '86990'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1d614ec5-0f4e-4889-8e7f-bbc68a7cf0b9
+    country_id: *cn
+    network_id: *cn_hoboksar_mongol_autonomous_county_karamay_region
+  - id: 239967
+    prefix: '86991'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0cf0481f-3a22-4fa4-ad0d-3268a7cc2968
+    country_id: *cn
+    network_id: *cn_urumqi_region
+  - id: 240748
+    prefix: '86992'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e33c363d-b891-442f-98c4-a201f1c21578
+    country_id: *cn
+    network_id: *cn_dushanzi_kuitun_wusu_region
+  - id: 240993
+    prefix: '86994'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3605b45b-7fa7-4954-851a-a6efbc7a2b72
+    country_id: *cn
+    network_id: *cn_changji_hui_autonomous_prefecture_wujiaqu_region
+  - id: 241081
+    prefix: '86995'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9f8bae52-89b2-45e2-a84f-e00919378e4d
+    country_id: *cn
+    network_id: *cn_turpan_region
+  - id: 241137
+    prefix: '86996'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6d9bcf44-edf8-4d60-8cf6-4ec1d2895bd1
+    country_id: *cn
+    network_id: *cn_bayingolin_mongol_autonomous_prefecture_region
+  - id: 241368
+    prefix: '86997'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f3f720c7-a1be-45c1-9306-bfe836ad819b
+    country_id: *cn
+    network_id: *cn_aksu_akqi_county_alar_region
+  - id: 245881
+    prefix: '86998'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8178b832-83ea-4d5e-a2bc-3122a1ebcb87
+    country_id: *cn
+    network_id: *cn_kashi_tumxuk_region
+  - id: 241967
+    prefix: '86'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 381126ac-ef1d-44e6-8987-19b61ce8ea59
+    country_id: *cn
+    network_id: *cn_fixed
+  - id: 258619
+    prefix: '8610'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 84a8dbd7-5617-4942-bdbf-93c5fca79940
+    country_id: *cn
+    network_id: *cn_beijing_region
+  - id: 267131
+    prefix: '8620'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5678f04d-dfdd-4551-b241-73d8023902ae
+    country_id: *cn
+    network_id: *cn_guangzhou_region
+  - id: 274224
+    prefix: '8621'
+    number_min_length: 12
+    number_max_length: 14
+    uuid: 1b13b581-1f38-4c15-8d4d-fb9e539a7665
+    country_id: *cn
+    network_id: *cn_shanghai_region
+  - id: 277989
+    prefix: '8622'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1485105b-405c-4dd4-be4b-c028b226e59f
+    country_id: *cn
+    network_id: *cn_tianjin_region
+  - id: 286622
+    prefix: '8623'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e6229d17-e43e-432e-9e51-242e2715b918
+    country_id: *cn
+    network_id: *cn_chongqing_region
+  - id: 294318
+    prefix: '8624'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fa0e6f9c-2e34-4f16-bc97-795a24066cf7
+    country_id: *cn
+    network_id: *cn_benxi_fushun_shenyang_tieling_region
+  - id: 313354
+    prefix: '8628'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 25a8c9fd-8442-4ee6-882b-76198ee6e687
+    country_id: *cn
+    network_id: *cn_chengdu_meishan_ziyang_region
+  - id: 308500
+    prefix: '8629'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 80257f79-98df-48e2-8ace-1ff0e9bce94b
+    country_id: *cn
+    network_id: *cn_xian_xianyang_region
+  - id: 301963
+    prefix: '8625'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3b820253-9263-4ddf-9280-c93520b342bd
+    country_id: *cn
+    network_id: *cn_nanjing_region
+  - id: 301422
+    prefix: '8627'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8f1ec1d0-175a-43df-a23f-0b8077fabe89
+    country_id: *cn
+    network_id: *cn_wuhan_region
+  - id: 323560
+    prefix: '86311'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 6272a21a-6714-493d-a517-184a5070d2e9
+    country_id: *cn
+    network_id: *cn_shijiazhuang_region
+  - id: 321798
+    prefix: '86312'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5c888bd3-b1c1-401a-bd93-5a2fcc07d352
+    country_id: *cn
+    network_id: *cn_baoding_region
+  - id: 324591
+    prefix: '86313'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2f6b7571-0675-4a4e-a603-b5522855c0cb
+    country_id: *cn
+    network_id: *cn_zhangjiakou_region
+  - id: 325883
+    prefix: '86315'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 02724ebb-a2f0-442e-9a86-bbbfa7a4dadd
+    country_id: *cn
+    network_id: *cn_tangshan_region
+  - id: 322776
+    prefix: '86310'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3906cb9b-60c0-44a7-af41-1eaf7233452a
+    country_id: *cn
+    network_id: *cn_handan_region
+  - id: 332506
+    prefix: '86314'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 58aeb442-7b93-4595-9a90-5fe7bd3d4fa3
+    country_id: *cn
+    network_id: *cn_chengde_region
+  - id: 333722
+    prefix: '86316'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 43b3c93b-a6ef-48d5-953b-f9190318d2f0
+    country_id: *cn
+    network_id: *cn_langfang_region
+  - id: 326140
+    prefix: '86317'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b33dc2ea-72a4-48a3-bfb1-3a7602ab457c
+    country_id: *cn
+    network_id: *cn_cangzhou_region
+  - id: 331708
+    prefix: '86335'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b8ef0c2d-9e46-4458-ac00-efea2f97346e
+    country_id: *cn
+    network_id: *cn_qinhuangdao_region
+  - id: 327073
+    prefix: '86318'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 506970b7-735d-4001-b164-4fa1d78c9afb
+    country_id: *cn
+    network_id: *cn_hengshui_region
+  - id: 334585
+    prefix: '86319'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 549c16f7-5659-4c9c-861f-daac168485a3
+    country_id: *cn
+    network_id: *cn_xingtai_region
+  - id: 352482
+    prefix: '86350'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f0da18a1-b709-4d76-bfcc-225566638aaf
+    country_id: *cn
+    network_id: *cn_xinzhou_region
+  - id: 352567
+    prefix: '86351'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 79f1af49-307a-4dcc-bb12-b0985cb83f10
+    country_id: *cn
+    network_id: *cn_taiyuan_region
+  - id: 353310
+    prefix: '86353'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 65836bd5-6f03-4d5d-ae06-6993d0a2cfed
+    country_id: *cn
+    network_id: *cn_yangquan_region
+  - id: 353748
+    prefix: '86354'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f024cc7-83a3-456b-a3c4-0739dcf66824
+    country_id: *cn
+    network_id: *cn_jinzhong_region
+  - id: 345579
+    prefix: '86355'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ed952ed5-a113-4ea4-8937-6f0e941d3e3c
+    country_id: *cn
+    network_id: *cn_changzhi_region
+  - id: 345618
+    prefix: '86356'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a09d9dd0-13f4-4622-91be-b8bc141c4f12
+    country_id: *cn
+    network_id: *cn_jincheng_region
+  - id: 345685
+    prefix: '86357'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9113e1af-2227-43c9-a598-f947d9f12778
+    country_id: *cn
+    network_id: *cn_linfen_region
+  - id: 345764
+    prefix: '86358'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 68801340-d17e-4b79-acc6-19bae323c168
+    country_id: *cn
+    network_id: *cn_luliang_region
+  - id: 347106
+    prefix: '86376'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ecd1b290-c68c-465e-be6a-3416c21b318d
+    country_id: *cn
+    network_id: *cn_xinyang_region
+  - id: 347228
+    prefix: '86377'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 32e48593-4bc3-4eb1-a303-ddc86ac44235
+    country_id: *cn
+    network_id: *cn_nanyang_region
+  - id: 347678
+    prefix: '86379'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e9166315-9c1f-4572-b482-4a5935bb5347
+    country_id: *cn
+    network_id: *cn_luoyang_region
+  - id: 357613
+    prefix: '86391'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2c97c8fe-acd7-492d-a33b-3ccc313a1467
+    country_id: *cn
+    network_id: *cn_jiaozuo_jiyuan_region
+  - id: 357876
+    prefix: '86392'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 63e90080-9bc9-4976-8a10-115644894643
+    country_id: *cn
+    network_id: *cn_hebi_region
+  - id: 349351
+    prefix: '86398'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ca547a51-87eb-4105-88cf-31f35b0012b9
+    country_id: *cn
+    network_id: *cn_sanmenxia_region
+  - id: 352134
+    prefix: '86349'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b83bcfc3-3aa4-42fd-9355-18e0a56d58ed
+    country_id: *cn
+    network_id: *cn_shuozhou_region
+  - id: 344848
+    prefix: '86352'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3afab040-6bbc-4acc-a86f-2bb2c7b6024d
+    country_id: *cn
+    network_id: *cn_datong_region
+  - id: 345880
+    prefix: '86359'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a1ccb8f-3a10-4953-86c6-50478a148818
+    country_id: *cn
+    network_id: *cn_yuncheng_region
+  - id: 355968
+    prefix: '86370'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9d32fa06-8b29-4e3f-938b-097bee1ef48d
+    country_id: *cn
+    network_id: *cn_shangqiu_region
+  - id: 356091
+    prefix: '86371'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b738c9fb-c6fa-4b1e-85ff-d698c0c9efce
+    country_id: *cn
+    network_id: *cn_kaifeng_zhengzhou_region
+  - id: 356151
+    prefix: '86372'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 14f28af3-4b9a-4ab8-aada-bcfcfa395245
+    country_id: *cn
+    network_id: *cn_anyang_region
+  - id: 356215
+    prefix: '86373'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 024c5fa2-43ba-4f67-aec7-13a25c7b4682
+    country_id: *cn
+    network_id: *cn_xinxiang_region
+  - id: 356388
+    prefix: '86374'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 16051280-1beb-4fdb-8bef-e676f2a5c221
+    country_id: *cn
+    network_id: *cn_xuchang_region
+  - id: 346850
+    prefix: '86375'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 055e09e5-c0ff-4c48-bb2d-c523d9a652c9
+    country_id: *cn
+    network_id: *cn_pingdingshan_region
+  - id: 358276
+    prefix: '86393'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8759aa4c-b382-4d5e-a0fc-ba4ea54fbd9a
+    country_id: *cn
+    network_id: *cn_puyang_region
+  - id: 358591
+    prefix: '86394'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c954f975-92e3-42be-b0b0-e91f56b9f002
+    country_id: *cn
+    network_id: *cn_zhoukou_region
+  - id: 358667
+    prefix: '86395'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3411ccb3-024f-4eab-b044-64a723080291
+    country_id: *cn
+    network_id: *cn_luohe_region
+  - id: 349296
+    prefix: '86396'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d4e1422a-91e2-4572-8b55-0001fe4ea57b
+    country_id: *cn
+    network_id: *cn_zhumadian_region
+  - id: 374502
+    prefix: '86416'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6d5172bb-c668-4420-8ddb-d2e47070f72f
+    country_id: *cn
+    network_id: *cn_jinzhou_region
+  - id: 377399
+    prefix: '86421'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8531f184-04b0-4a66-b868-8000aa47f8f0
+    country_id: *cn
+    network_id: *cn_chaoyang_region
+  - id: 378714
+    prefix: '86427'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cc7edf4f-7bbe-41c5-87fa-f2b985f0b766
+    country_id: *cn
+    network_id: *cn_panjin_region
+  - id: 379798
+    prefix: '86432'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 97c76400-e920-4c26-ab99-22116c45a1e3
+    country_id: *cn
+    network_id: *cn_jilin_region
+  - id: 380261
+    prefix: '86433'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9897b872-002f-40b3-93e7-c22fd582fcdb
+    country_id: *cn
+    network_id: *cn_yanbian_korean_autonomous_prefecture_region
+  - id: 368484
+    prefix: '86434'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ea1fa61d-5f38-4bcd-b465-a3bfca51eaac
+    country_id: *cn
+    network_id: *cn_siping_region
+  - id: 380670
+    prefix: '86436'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6913f19e-a7a8-41a1-beae-f4078090047a
+    country_id: *cn
+    network_id: *cn_baicheng_region
+  - id: 380921
+    prefix: '86437'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c349fb18-df7f-45d8-938a-5e15470865d3
+    country_id: *cn
+    network_id: *cn_liaoyuan_region
+  - id: 381394
+    prefix: '86438'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1a829419-6eea-4ab4-9721-8c4f353efd7b
+    country_id: *cn
+    network_id: *cn_songyuan_region
+  - id: 370167
+    prefix: '86439'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7ee41853-69e0-4210-aa80-af510ad962ce
+    country_id: *cn
+    network_id: *cn_baishan_region
+  - id: 363448
+    prefix: '86411'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: bc07351c-c23b-4c1e-bfe7-68b85f315bfd
+    country_id: *cn
+    network_id: *cn_dalian_region
+  - id: 371920
+    prefix: '86412'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5826a860-075c-43f9-be11-5910933496bd
+    country_id: *cn
+    network_id: *cn_anshan_region
+  - id: 363948
+    prefix: '86415'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 424bb63e-b35f-47c1-9072-4d718839c759
+    country_id: *cn
+    network_id: *cn_dandong_region
+  - id: 375175
+    prefix: '86417'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d137cf16-58c5-4aa1-b86f-a5d81586034a
+    country_id: *cn
+    network_id: *cn_yingkou_region
+  - id: 376179
+    prefix: '86418'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cb2829dc-3e14-4ea6-8815-c4f11615965b
+    country_id: *cn
+    network_id: *cn_fuxin_region
+  - id: 365480
+    prefix: '86419'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fdf5b731-3dc8-4e93-a58d-ccfcf1965af2
+    country_id: *cn
+    network_id: *cn_liaoyang_region
+  - id: 367668
+    prefix: '86429'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 061bab21-7327-44d8-bee2-99549f411832
+    country_id: *cn
+    network_id: *cn_huludao_region
+  - id: 368407
+    prefix: '86431'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 08c134a2-ce2e-46d8-a438-b4e03c85bbbc
+    country_id: *cn
+    network_id: *cn_changchun_region
+  - id: 369351
+    prefix: '86435'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f715457a-a0ed-48cf-8d8b-786383c15fe2
+    country_id: *cn
+    network_id: *cn_tonghua_region
+  - id: 393423
+    prefix: '86454'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0ea2bdc6-c26f-466b-b900-6cf53bbdb5ac
+    country_id: *cn
+    network_id: *cn_jiamusi_region
+  - id: 393482
+    prefix: '86455'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7849e461-7d7b-47c2-9326-f89225e703f6
+    country_id: *cn
+    network_id: *cn_suihua_region
+  - id: 393540
+    prefix: '86456'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1066d65d-b51b-4f91-8882-4796e9e3e0a4
+    country_id: *cn
+    network_id: *cn_heihe_region
+  - id: 393861
+    prefix: '86457'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4913cde2-1480-487c-a47d-68eb12e8d272
+    country_id: *cn
+    network_id: *cn_daxinganling_jiagedaqi_region
+  - id: 393928
+    prefix: '86458'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aebb6c0f-4f6f-4e61-988f-f32bd90ed21a
+    country_id: *cn
+    network_id: *cn_yichun_region
+  - id: 388472
+    prefix: '86459'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 918e60d1-6e17-4d15-b3c8-d4c80cab9d88
+    country_id: *cn
+    network_id: *cn_daqing_region
+  - id: 394997
+    prefix: '86464'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 49466e2a-1e7c-42e7-86d9-58a7ebbdb026
+    country_id: *cn
+    network_id: *cn_qitaihe_region
+  - id: 387507
+    prefix: '86451'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 171dd091-d9b1-4e43-9e5c-43bbdb3602e6
+    country_id: *cn
+    network_id: *cn_harbin_region
+  - id: 387556
+    prefix: '86452'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: daf0819f-7bc7-47c7-8b6b-667fab1a33a4
+    country_id: *cn
+    network_id: *cn_qiqihar_region
+  - id: 388171
+    prefix: '86453'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e33e3642-eaff-4980-9d47-84cf2eb657ff
+    country_id: *cn
+    network_id: *cn_mudanjiang_region
+  - id: 399111
+    prefix: '86467'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f848ea2f-9359-4794-b169-f094d0e8abfd
+    country_id: *cn
+    network_id: *cn_jixi_region
+  - id: 399162
+    prefix: '86468'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6bdca670-124e-46e9-9639-50e8b0b0cc4f
+    country_id: *cn
+    network_id: *cn_hegang_region
+  - id: 395418
+    prefix: '86469'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 20aeef09-a829-46d2-a65d-53bb41a8faf3
+    country_id: *cn
+    network_id: *cn_shuangyashan_region
+  - id: 399607
+    prefix: '86470'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ce396779-d6ec-4c9e-8d6c-2709b30d936f
+    country_id: *cn
+    network_id: *cn_hulunbeier_region
+  - id: 396470
+    prefix: '86471'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9797825d-18d8-4f39-8c14-914f81bd0e6f
+    country_id: *cn
+    network_id: *cn_hohhot_region
+  - id: 396538
+    prefix: '86472'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 664da9a4-e6f3-47de-9467-8ec41c8af4f7
+    country_id: *cn
+    network_id: *cn_baotou_region
+  - id: 400772
+    prefix: '86475'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0d26ab00-f821-4ee9-89c9-75c3b750b43b
+    country_id: *cn
+    network_id: *cn_tongliao_region
+  - id: 401269
+    prefix: '86476'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 48481752-4631-4fee-bfca-28ac9a4616a9
+    country_id: *cn
+    network_id: *cn_chifeng_region
+  - id: 397647
+    prefix: '86477'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 63bede3b-300d-4c2d-b517-eef619460b72
+    country_id: *cn
+    network_id: *cn_ordos_region
+  - id: 396992
+    prefix: '86473'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f2e699a5-5234-46ca-b6b6-62a026d28044
+    country_id: *cn
+    network_id: *cn_wuhai_region
+  - id: 397485
+    prefix: '86474'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2639de52-8548-481b-bde6-445ed46feb00
+    country_id: *cn
+    network_id: *cn_wulanchabu_region
   - id: 50180
     prefix: '86478'
     number_min_length: 12
@@ -1394,6 +3043,13 @@ network_prefixes:
     uuid: d1483997-703c-4970-8817-38b0fa2114f9
     country_id: *cn
     network_id: *cn_lianyungang_region
+  - id: 77522
+    prefix: '86543'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 65171750-112f-494c-93ba-2d8ea14fd9ea
+    country_id: *cn
+    network_id: *cn_binzhou_region
   - id: 68164
     prefix: '86511'
     number_min_length: 13
@@ -1436,6 +3092,20 @@ network_prefixes:
     uuid: d8d230c1-779e-4eea-8211-3d4255f78f77
     country_id: *cn
     network_id: *cn_changzhou_region
+  - id: 76365
+    prefix: '86523'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 9dddd7d3-6d7f-45cc-84aa-4d2ec88b6ed7
+    country_id: *cn
+    network_id: *cn_taizhou_region
+  - id: 76472
+    prefix: '86527'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 88f50045-fbfa-4ace-9cd5-843a733155e0
+    country_id: *cn
+    network_id: *cn_suqian_region
   - id: 71721
     prefix: '86530'
     number_min_length: 12
@@ -1506,41 +3176,20 @@ network_prefixes:
     uuid: 59086ab6-6944-4bec-b4a7-95eb9ff513f5
     country_id: *cn
     network_id: *cn_linyi_region
-  - id: 76365
-    prefix: '86523'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 9dddd7d3-6d7f-45cc-84aa-4d2ec88b6ed7
-    country_id: *cn
-    network_id: *cn_taizhou_region
-  - id: 76472
-    prefix: '86527'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 88f50045-fbfa-4ace-9cd5-843a733155e0
-    country_id: *cn
-    network_id: *cn_suqian_region
-  - id: 77522
-    prefix: '86543'
+  - id: 89282
+    prefix: '86563'
     number_min_length: 12
     number_max_length: 12
-    uuid: 65171750-112f-494c-93ba-2d8ea14fd9ea
+    uuid: 5564f228-bfdd-4dca-8e6a-39aa8d07d95a
     country_id: *cn
-    network_id: *cn_binzhou_region
-  - id: 77605
-    prefix: '86546'
+    network_id: *cn_xuancheng_region
+  - id: 89670
+    prefix: '86564'
     number_min_length: 12
     number_max_length: 12
-    uuid: 03165da0-1ba6-4424-bd95-7eca3afd8704
+    uuid: b2d1ec32-1ec1-4e56-99b2-6198bdf9483e
     country_id: *cn
-    network_id: *cn_dongying_region
-  - id: 80639
-    prefix: '86561'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0984d479-c9be-453f-b69e-0349183d86be
-    country_id: *cn
-    network_id: *cn_huaibei_region
+    network_id: *cn_luan_region
   - id: 81921
     prefix: '86572'
     number_min_length: 12
@@ -1555,6 +3204,20 @@ network_prefixes:
     uuid: cee5a5a7-afc6-4e9b-8b45-51daca328468
     country_id: *cn
     network_id: *cn_jiaxing_region
+  - id: 91453
+    prefix: '86574'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d8c4c8be-6e45-4cee-84eb-da6d281581f5
+    country_id: *cn
+    network_id: *cn_ningbo_region
+  - id: 91864
+    prefix: '86575'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: fcd03d2d-c698-4d73-8b93-1f8cbc559d77
+    country_id: *cn
+    network_id: *cn_shaoxing_region
   - id: 84452
     prefix: '86591'
     number_min_length: 13
@@ -1576,48 +3239,13 @@ network_prefixes:
     uuid: 430a3f7b-2dcd-4d08-bb54-ebe3b31fcf8b
     country_id: *cn
     network_id: *cn_ningde_region
-  - id: 84587
-    prefix: '86594'
+  - id: 77605
+    prefix: '86546'
     number_min_length: 12
     number_max_length: 12
-    uuid: 689e2091-7f1b-41af-a507-8a9b9078c039
+    uuid: 03165da0-1ba6-4424-bd95-7eca3afd8704
     country_id: *cn
-    network_id: *cn_putian_region
-  - id: 84643
-    prefix: '86595'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: e7fffc6f-e699-494b-8c91-006e22324670
-    country_id: *cn
-    network_id: *cn_quanzhou_region
-  - id: 84806
-    prefix: '86596'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 36adb55c-75bd-4636-8805-71ac825f9999
-    country_id: *cn
-    network_id: *cn_zhangzhou_region
-  - id: 84840
-    prefix: '86597'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fbd1ce09-1c5c-4849-a1b6-cc6d67cfc89c
-    country_id: *cn
-    network_id: *cn_longyan_region
-  - id: 84893
-    prefix: '86598'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aa8a7663-0e2c-41a2-9679-49d99982194d
-    country_id: *cn
-    network_id: *cn_sanming_region
-  - id: 84899
-    prefix: '86599'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 12b3f795-942f-439c-a0b9-ea811db26cd9
-    country_id: *cn
-    network_id: *cn_nanping_region
+    network_id: *cn_dongying_region
   - id: 86669
     prefix: '86550'
     number_min_length: 12
@@ -1688,6 +3316,13 @@ network_prefixes:
     uuid: 79594dda-788f-4a1d-a7a5-49c07022b263
     country_id: *cn
     network_id: *cn_huangshan_region
+  - id: 80639
+    prefix: '86561'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0984d479-c9be-453f-b69e-0349183d86be
+    country_id: *cn
+    network_id: *cn_huaibei_region
   - id: 88597
     prefix: '86562'
     number_min_length: 12
@@ -1695,20 +3330,6 @@ network_prefixes:
     uuid: 07a6b588-4ea5-4633-add1-e265cc3cdb90
     country_id: *cn
     network_id: *cn_tongling_region
-  - id: 89282
-    prefix: '86563'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5564f228-bfdd-4dca-8e6a-39aa8d07d95a
-    country_id: *cn
-    network_id: *cn_xuancheng_region
-  - id: 89670
-    prefix: '86564'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b2d1ec32-1ec1-4e56-99b2-6198bdf9483e
-    country_id: *cn
-    network_id: *cn_luan_region
   - id: 89814
     prefix: '86566'
     number_min_length: 12
@@ -1730,20 +3351,6 @@ network_prefixes:
     uuid: 1910635c-89a5-46ba-b163-a551544f2f80
     country_id: *cn
     network_id: *cn_hangzhou_region
-  - id: 91453
-    prefix: '86574'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d8c4c8be-6e45-4cee-84eb-da6d281581f5
-    country_id: *cn
-    network_id: *cn_ningbo_region
-  - id: 91864
-    prefix: '86575'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: fcd03d2d-c698-4d73-8b93-1f8cbc559d77
-    country_id: *cn
-    network_id: *cn_shaoxing_region
   - id: 92402
     prefix: '86576'
     number_min_length: 13
@@ -1779,6 +3386,55 @@ network_prefixes:
     uuid: 4668b665-66a9-4d6a-9633-ce027fce73c2
     country_id: *cn
     network_id: *cn_zhoushan_region
+  - id: 84587
+    prefix: '86594'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 689e2091-7f1b-41af-a507-8a9b9078c039
+    country_id: *cn
+    network_id: *cn_putian_region
+  - id: 84643
+    prefix: '86595'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e7fffc6f-e699-494b-8c91-006e22324670
+    country_id: *cn
+    network_id: *cn_quanzhou_region
+  - id: 84806
+    prefix: '86596'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 36adb55c-75bd-4636-8805-71ac825f9999
+    country_id: *cn
+    network_id: *cn_zhangzhou_region
+  - id: 84840
+    prefix: '86597'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fbd1ce09-1c5c-4849-a1b6-cc6d67cfc89c
+    country_id: *cn
+    network_id: *cn_longyan_region
+  - id: 84893
+    prefix: '86598'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aa8a7663-0e2c-41a2-9679-49d99982194d
+    country_id: *cn
+    network_id: *cn_sanming_region
+  - id: 84899
+    prefix: '86599'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 12b3f795-942f-439c-a0b9-ea811db26cd9
+    country_id: *cn
+    network_id: *cn_nanping_region
+  - id: 119675
+    prefix: '86631'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f2726f70-7d9a-4c0d-ad95-193e364ddf97
+    country_id: *cn
+    network_id: *cn_weihai_region
   - id: 114637
     prefix: '86632'
     number_min_length: 12
@@ -1793,13 +3449,6 @@ network_prefixes:
     uuid: edea821f-8984-4d9a-8b46-fcf8a9a3c5f3
     country_id: *cn
     network_id: *cn_rizhao_region
-  - id: 119675
-    prefix: '86631'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f2726f70-7d9a-4c0d-ad95-193e364ddf97
-    country_id: *cn
-    network_id: *cn_weihai_region
   - id: 124161
     prefix: '86634'
     number_min_length: 12
@@ -1814,496 +3463,69 @@ network_prefixes:
     uuid: e8d8d7ca-0070-474a-b2c3-071cf35b667c
     country_id: *cn
     network_id: *cn_liaocheng_region
-  - id: 128925
-    prefix: '86662'
+  - id: 490004
+    prefix: '86931'
     number_min_length: 12
     number_max_length: 12
-    uuid: e7d3b7b8-12dd-48f4-977e-fd50b1de26d8
+    uuid: aef2ae21-c50f-468e-ba8b-deb32a6e17d9
     country_id: *cn
-    network_id: *cn_yangjiang_region
-  - id: 132170
-    prefix: '86668'
+    network_id: *cn_lanzhou_region
+  - id: 490536
+    prefix: '86932'
     number_min_length: 12
     number_max_length: 12
-    uuid: a1641960-bd30-44d0-9cdc-54ee8daf324f
+    uuid: 9d41b635-dac5-429b-94ea-d7a9f93654fb
     country_id: *cn
-    network_id: *cn_maoming_region
-  - id: 138940
-    prefix: '86660'
+    network_id: *cn_dingxi_region
+  - id: 487056
+    prefix: '86934'
     number_min_length: 12
     number_max_length: 12
-    uuid: c08a8cab-d905-4c44-94ae-f542605a0cb4
+    uuid: 258d5c47-8271-4a3b-846e-91f1350d364a
     country_id: *cn
-    network_id: *cn_shanwei_region
-  - id: 139897
-    prefix: '86663'
+    network_id: *cn_qingyang_region
+  - id: 485704
+    prefix: '86930'
     number_min_length: 12
     number_max_length: 12
-    uuid: b99250e1-a3ff-4cf4-8ec4-edec210c3b81
+    uuid: 21dbe58c-cf53-4857-9b79-34757dc661a3
     country_id: *cn
-    network_id: *cn_jieyang_region
-  - id: 148882
-    prefix: '86691'
+    network_id: *cn_linxia_hui_autonomous_prefecture_region
+  - id: 486094
+    prefix: '86933'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8f8be6b9-80ce-4f3e-9a4c-d6283e1eb04d
+    uuid: 0b7a2a41-7652-4463-b860-eb9cc2bc20dc
     country_id: *cn
-    network_id: *cn_xishuangbanna_dai_autonomous_prefecture_region
-  - id: 149037
-    prefix: '86692'
+    network_id: *cn_pingliang_region
+  - id: 493043
+    prefix: '86935'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7665f585-f777-430d-9867-b2464611c3b3
+    uuid: 7db78296-86d1-4b29-a825-484c2d23eca9
     country_id: *cn
-    network_id: *cn_dehong_dai_and_jingpo_autonomous_prefecture_region
-  - id: 154412
-    prefix: '86701'
+    network_id: *cn_jinchang_wuwei_region
+  - id: 498641
+    prefix: '86936'
     number_min_length: 12
     number_max_length: 12
-    uuid: e9df7449-0c19-477d-9865-cee8c115065c
+    uuid: d96c2778-2be4-4907-a47f-e2f9f0720ad8
     country_id: *cn
-    network_id: *cn_yingtan_region
-  - id: 157850
-    prefix: '86710'
+    network_id: *cn_zhangye_region
+  - id: 498820
+    prefix: '86937'
     number_min_length: 12
     number_max_length: 12
-    uuid: 70b891c5-416a-4d96-aa11-94cb52653970
+    uuid: defa8131-e501-4bce-a6dd-f525581cbeb0
     country_id: *cn
-    network_id: *cn_xiangyang_region
-  - id: 157876
-    prefix: '86711'
+    network_id: *cn_jiayuguan_jiuquan_region
+  - id: 501487
+    prefix: '86938'
     number_min_length: 12
     number_max_length: 12
-    uuid: db40a6a1-f474-49c9-b3e1-5caf336cd4b6
+    uuid: 874b812f-3fc7-46c1-b0cc-e097de9c2cdb
     country_id: *cn
-    network_id: *cn_ezhou_region
-  - id: 157964
-    prefix: '86712'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4f666684-e48a-4cc3-9960-231cd0cbb6bb
-    country_id: *cn
-    network_id: *cn_xiaogan_region
-  - id: 159089
-    prefix: '86713'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 198581fd-1d81-4b48-83f3-c9947c870331
-    country_id: *cn
-    network_id: *cn_huanggang_region
-  - id: 160458
-    prefix: '86716'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a4a2a24e-97ad-4a45-a3a8-529d3a230d2f
-    country_id: *cn
-    network_id: *cn_jingzhou_region
-  - id: 164976
-    prefix: '86714'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b82333f9-9126-47f3-b01d-126c9750f516
-    country_id: *cn
-    network_id: *cn_huangshi_region
-  - id: 165862
-    prefix: '86715'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c7a613dc-45bf-4ae0-ac93-5cbc9ad89dee
-    country_id: *cn
-    network_id: *cn_xianning_region
-  - id: 166728
-    prefix: '86717'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b9b01974-8cd2-435e-a0a7-86fb96103686
-    country_id: *cn
-    network_id: *cn_yichang_region
-  - id: 167577
-    prefix: '86718'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 91b83d4b-eabf-4f84-9429-ef8d6ce0cb09
-    country_id: *cn
-    network_id: *cn_enshi_tujia_and_miao_autonomous_prefecture_region
-  - id: 169650
-    prefix: '86722'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 895a8d36-2348-452c-a44c-620e818ad72b
-    country_id: *cn
-    network_id: *cn_suizhou_region
-  - id: 171841
-    prefix: '86719'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4aa8b129-9140-47ca-8316-434bccf67cf3
-    country_id: *cn
-    network_id: *cn_shennongjia_forestry_district_shiyan_region
-  - id: 173212
-    prefix: '86724'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7432d755-1fe0-4181-a8bb-fcc0cc5b959f
-    country_id: *cn
-    network_id: *cn_jingmen_region
-  - id: 174268
-    prefix: '86728'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5ceb9b42-47d9-4858-be53-e378707288f3
-    country_id: *cn
-    network_id: *cn_qianjiang_tianmen_xiantao_region
-  - id: 175897
-    prefix: '86730'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eb58a7f0-d4e4-4344-bcd5-924cdd815a11
-    country_id: *cn
-    network_id: *cn_yueyang_region
-  - id: 175955
-    prefix: '86731'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 1a88684d-cb2c-4074-b77b-e72a94d1b317
-    country_id: *cn
-    network_id: *cn_changsha_xiangtan_zhuzhou_region
-  - id: 177844
-    prefix: '86735'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9e88d931-5fd7-49c6-8e23-1f86fe7e1234
-    country_id: *cn
-    network_id: *cn_chenzhou_region
-  - id: 178472
-    prefix: '86736'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fb240a38-c924-4cf2-b64f-666216ea726e
-    country_id: *cn
-    network_id: *cn_changde_region
-  - id: 178586
-    prefix: '86737'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 01d09bde-a588-439d-a842-deebddc05726
-    country_id: *cn
-    network_id: *cn_yiyang_region
-  - id: 179304
-    prefix: '86745'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8715b43b-7515-46d8-b5d9-94eb0544a07e
-    country_id: *cn
-    network_id: *cn_huaihua_region
-  - id: 179479
-    prefix: '86746'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0df29b55-9907-458c-9819-866c820aea45
-    country_id: *cn
-    network_id: *cn_yongzhou_region
-  - id: 179939
-    prefix: '86755'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d24bb6ce-2b8a-44a1-9913-74790dd7aa50
-    country_id: *cn
-    network_id: *cn_shenzhen_region
-  - id: 180276
-    prefix: '86756'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d74e40a7-18af-4f10-9acb-a38b53d9ea16
-    country_id: *cn
-    network_id: *cn_zhuhai_region
-  - id: 180588
-    prefix: '86757'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: c3564706-4af1-4160-b233-c3ea6bbc0087
-    country_id: *cn
-    network_id: *cn_foshan_region
-  - id: 181479
-    prefix: '86734'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 564a6424-96a2-4772-b61d-b21547de3d31
-    country_id: *cn
-    network_id: *cn_hengyang_region
-  - id: 182707
-    prefix: '86738'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 67abe569-b577-4017-91f5-867569c9ea72
-    country_id: *cn
-    network_id: *cn_loudi_region
-  - id: 182765
-    prefix: '86739'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b388fe32-30ad-454e-8272-81ec66ea9657
-    country_id: *cn
-    network_id: *cn_shaoyang_region
-  - id: 184619
-    prefix: '86743'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: accdd79d-069e-4cb2-a045-03fdfecd026b
-    country_id: *cn
-    network_id: *cn_xiangxi_tujia_and_miao_autonomous_prefecture_region
-  - id: 184815
-    prefix: '86744'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2fc7c3a4-dc5c-4ca1-8791-6dedb2d986ff
-    country_id: *cn
-    network_id: *cn_zhangjiajie_region
-  - id: 186323
-    prefix: '86750'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: be88c199-73d4-4e5f-a6e8-c56316f5f3cd
-    country_id: *cn
-    network_id: *cn_jiangmen_region
-  - id: 186337
-    prefix: '86751'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 708f1c7a-7373-49c2-bf93-cf75ac329e93
-    country_id: *cn
-    network_id: *cn_shaoguan_region
-  - id: 186370
-    prefix: '86752'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 96359c04-af01-4079-94a1-65a68ec0f631
-    country_id: *cn
-    network_id: *cn_huizhou_region
-  - id: 186399
-    prefix: '86753'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b1f99904-9714-492a-bd65-1481ba8133d9
-    country_id: *cn
-    network_id: *cn_meizhou_region
-  - id: 186907
-    prefix: '86754'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: b3d1b1e6-10e9-47e9-8636-69c6a8048f94
-    country_id: *cn
-    network_id: *cn_shantou_region
-  - id: 187751
-    prefix: '86758'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9ad016dd-c672-4f32-a67c-40f94f0c3f76
-    country_id: *cn
-    network_id: *cn_zhaoqing_region
-  - id: 187884
-    prefix: '86759'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3ab817c3-5874-4eb1-bf41-0c4c5e3c1b17
-    country_id: *cn
-    network_id: *cn_zhanjiang_region
-  - id: 188699
-    prefix: '86760'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 76d1e726-4c36-4fbc-9870-7956c6cafd94
-    country_id: *cn
-    network_id: *cn_zhongshan_region
-  - id: 189548
-    prefix: '86762'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 56b84cd4-bb5d-4ba6-ae9e-3e0b970034d7
-    country_id: *cn
-    network_id: *cn_heyuan_region
-  - id: 190353
-    prefix: '86766'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0734f3bc-4679-4e93-b5a3-1b01f230eb5b
-    country_id: *cn
-    network_id: *cn_yunfu_region
-  - id: 191129
-    prefix: '86763'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1b20c76e-dde9-42c5-bd61-f199e17c08f6
-    country_id: *cn
-    network_id: *cn_qingyuan_region
-  - id: 192569
-    prefix: '86770'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b09c6009-0c3b-4e02-8e2e-241ccc8c41cf
-    country_id: *cn
-    network_id: *cn_fangchenggang_region
-  - id: 193381
-    prefix: '86771'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 36805fb8-5c59-43fe-a5e4-b09a7b0488cf
-    country_id: *cn
-    network_id: *cn_chongzuo_nanning_region
-  - id: 194422
-    prefix: '86772'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4449a858-0b24-43b0-b1b7-c15fcb08bcd3
-    country_id: *cn
-    network_id: *cn_laibin_liuzhou_region
-  - id: 195005
-    prefix: '86773'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 548475db-f3ba-4f73-b35d-e61a134af294
-    country_id: *cn
-    network_id: *cn_guilin_region
-  - id: 196211
-    prefix: '86774'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ebbf53d0-df18-4b5c-b0cb-309d52e32151
-    country_id: *cn
-    network_id: *cn_hezhou_wuzhou_region
-  - id: 196702
-    prefix: '86776'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ba2e321d-4abf-4950-94ee-6fed1810eb4a
-    country_id: *cn
-    network_id: *cn_baise_region
-  - id: 196999
-    prefix: '86777'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ceb3460b-7405-4b23-b3b1-62d5992df567
-    country_id: *cn
-    network_id: *cn_qinzhou_region
-  - id: 197895
-    prefix: '86779'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a5c2cb89-d82f-4a62-af22-8fa053e2194a
-    country_id: *cn
-    network_id: *cn_beihai_region
-  - id: 200406
-    prefix: '86768'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6b9ea65d-5a42-4ea3-90e7-04b5cfc2d08f
-    country_id: *cn
-    network_id: *cn_chaozhou_region
-  - id: 200510
-    prefix: '86769'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 44e3be2b-65a2-4b65-8340-286542f4f846
-    country_id: *cn
-    network_id: *cn_dongguan_region
-  - id: 200896
-    prefix: '86775'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c67d0d11-2d3f-4fbd-9dba-b9999c753965
-    country_id: *cn
-    network_id: *cn_guigang_yulin_region
-  - id: 202438
-    prefix: '86778'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: af28daab-855c-43cd-8622-498b7e8aff15
-    country_id: *cn
-    network_id: *cn_hechi_region
-  - id: 207028
-    prefix: '86790'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8dccf9ea-9ae9-4193-b91b-5f28ec3dba1d
-    country_id: *cn
-    network_id: *cn_xinyu_region
-  - id: 207043
-    prefix: '86791'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 8ee8dec3-19cc-40ff-a49a-f3e58e10226f
-    country_id: *cn
-    network_id: *cn_nanchang_region
-  - id: 207224
-    prefix: '86792'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b0982f54-c882-46fd-acda-c25a9b84da26
-    country_id: *cn
-    network_id: *cn_jiujiang_region
-  - id: 207228
-    prefix: '86793'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6e6394ae-241b-4228-8c81-33a0a2fd897e
-    country_id: *cn
-    network_id: *cn_shangrao_region
-  - id: 207249
-    prefix: '86794'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b566dd0e-63b6-472f-b762-b4ca7825e352
-    country_id: *cn
-    network_id: *cn_fuzhou_region
-  - id: 207271
-    prefix: '86795'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d173d48e-a249-4a8d-886f-ae179547f8a7
-    country_id: *cn
-    network_id: *cn_yichun_region
-  - id: 207300
-    prefix: '86796'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 96cfb76b-9160-4186-81a4-70066331dd5d
-    country_id: *cn
-    network_id: *cn_jian_region
-  - id: 207312
-    prefix: '86797'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9822552f-74b3-4127-a04f-1e0673cce6b0
-    country_id: *cn
-    network_id: *cn_ganzhou_region
-  - id: 207470
-    prefix: '86798'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2e6c6921-0f6d-4f07-91e3-14c47b6526dc
-    country_id: *cn
-    network_id: *cn_jingdezhen_region
-  - id: 207473
-    prefix: '86799'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7a7c8296-27b8-4f48-85b2-e8f76125c116
-    country_id: *cn
-    network_id: *cn_pingxiang_region
-  - id: 213364
-    prefix: '86941'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: abd8f929-9d40-45ad-ba60-d29afebf8ea9
-    country_id: *cn
-    network_id: *cn_gannan_tibetan_autonomous_prefecture_region
-  - id: 213847
-    prefix: '86943'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 65ed03ab-d1d6-4b33-88a5-d31454038760
-    country_id: *cn
-    network_id: *cn_baiyin_region
+    network_id: *cn_tianshui_region
   - id: 217221
     prefix: '86939'
     number_min_length: 12
@@ -2311,6 +3533,13 @@ network_prefixes:
     uuid: 6f29cf9f-a1b5-491b-8804-1faa408b1bc0
     country_id: *cn
     network_id: *cn_longnan_region
+  - id: 213364
+    prefix: '86941'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: abd8f929-9d40-45ad-ba60-d29afebf8ea9
+    country_id: *cn
+    network_id: *cn_gannan_tibetan_autonomous_prefecture_region
   - id: 217423
     prefix: '86951'
     number_min_length: 12
@@ -2325,6 +3554,13 @@ network_prefixes:
     uuid: 17dcb398-785a-46ae-94ff-e8a6e8fe1be6
     country_id: *cn
     network_id: *cn_shizuishan_region
+  - id: 213847
+    prefix: '86943'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 65ed03ab-d1d6-4b33-88a5-d31454038760
+    country_id: *cn
+    network_id: *cn_baiyin_region
   - id: 219424
     prefix: '86953'
     number_min_length: 12
@@ -2360,1239 +3596,6 @@ network_prefixes:
     uuid: 02130676-9605-4531-9c24-518760127114
     country_id: *cn
     network_id: *cn_haibei_tibetan_autonomous_prefecture_region
-  - id: 229614
-    prefix: '86972'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b39c3299-7e70-4145-a5f1-1b8b091635fc
-    country_id: *cn
-    network_id: *cn_haidong_region
-  - id: 230512
-    prefix: '86973'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d64d61a2-ee6b-4fa7-a8f5-6f133b4ee2b3
-    country_id: *cn
-    network_id: *cn_huangnan_tibetan_autonomous_prefecture_region
-  - id: 231183
-    prefix: '86979'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ed287d2e-05ef-41ab-a1e1-c1691599289b
-    country_id: *cn
-    network_id: *cn_golmud_region
-  - id: 233312
-    prefix: '86974'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 41f2f028-7fa8-475d-9d22-e228bee96e8c
-    country_id: *cn
-    network_id: *cn_hainan_tibetan_autonomous_prefecture_region
-  - id: 233332
-    prefix: '86975'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8f45dd24-39a1-49b2-a15f-56237ee0fe61
-    country_id: *cn
-    network_id: *cn_guoluo_tibetan_autonomous_prefecture_region
-  - id: 233343
-    prefix: '86976'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: de8ed499-99b4-4a45-b77b-14ac537e697f
-    country_id: *cn
-    network_id: *cn_yushu_tibetan_autonomous_prefecture_region
-  - id: 233354
-    prefix: '86977'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0e0398a6-6a28-4623-aead-36d6670b5bb5
-    country_id: *cn
-    network_id: *cn_haixi_mongol_and_tibetan_autonomous_prefecture_region
-  - id: 239776
-    prefix: '86990'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1d614ec5-0f4e-4889-8e7f-bbc68a7cf0b9
-    country_id: *cn
-    network_id: *cn_hoboksar_mongol_autonomous_county_karamay_region
-  - id: 239967
-    prefix: '86991'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0cf0481f-3a22-4fa4-ad0d-3268a7cc2968
-    country_id: *cn
-    network_id: *cn_urumqi_region
-  - id: 240004
-    prefix: '86993'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 348c6533-1594-496d-8c23-edcb1a29d7f0
-    country_id: *cn
-    network_id: *cn_shawan_county_shihezi_region
-  - id: 240748
-    prefix: '86992'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e33c363d-b891-442f-98c4-a201f1c21578
-    country_id: *cn
-    network_id: *cn_dushanzi_kuitun_wusu_region
-  - id: 240993
-    prefix: '86994'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3605b45b-7fa7-4954-851a-a6efbc7a2b72
-    country_id: *cn
-    network_id: *cn_changji_hui_autonomous_prefecture_wujiaqu_region
-  - id: 241081
-    prefix: '86995'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9f8bae52-89b2-45e2-a84f-e00919378e4d
-    country_id: *cn
-    network_id: *cn_turpan_region
-  - id: 241137
-    prefix: '86996'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6d9bcf44-edf8-4d60-8cf6-4ec1d2895bd1
-    country_id: *cn
-    network_id: *cn_bayingolin_mongol_autonomous_prefecture_region
-  - id: 241368
-    prefix: '86997'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f3f720c7-a1be-45c1-9306-bfe836ad819b
-    country_id: *cn
-    network_id: *cn_aksu_akqi_county_alar_region
-  - id: 245881
-    prefix: '86998'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8178b832-83ea-4d5e-a2bc-3122a1ebcb87
-    country_id: *cn
-    network_id: *cn_kashi_tumxuk_region
-  - id: 246796
-    prefix: '86999'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d959c9ff-0f31-444f-b9bc-ce25c020c329
-    country_id: *cn
-    network_id: *cn_ili_kazakh_autonomous_prefecture_region
-  - id: 258619
-    prefix: '8610'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 84a8dbd7-5617-4942-bdbf-93c5fca79940
-    country_id: *cn
-    network_id: *cn_beijing_region
-  - id: 267131
-    prefix: '8620'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5678f04d-dfdd-4551-b241-73d8023902ae
-    country_id: *cn
-    network_id: *cn_guangzhou_region
-  - id: 274224
-    prefix: '8621'
-    number_min_length: 12
-    number_max_length: 14
-    uuid: 1b13b581-1f38-4c15-8d4d-fb9e539a7665
-    country_id: *cn
-    network_id: *cn_shanghai_region
-  - id: 277989
-    prefix: '8622'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1485105b-405c-4dd4-be4b-c028b226e59f
-    country_id: *cn
-    network_id: *cn_tianjin_region
-  - id: 286622
-    prefix: '8623'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e6229d17-e43e-432e-9e51-242e2715b918
-    country_id: *cn
-    network_id: *cn_chongqing_region
-  - id: 294318
-    prefix: '8624'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fa0e6f9c-2e34-4f16-bc97-795a24066cf7
-    country_id: *cn
-    network_id: *cn_benxi_fushun_shenyang_tieling_region
-  - id: 301422
-    prefix: '8627'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8f1ec1d0-175a-43df-a23f-0b8077fabe89
-    country_id: *cn
-    network_id: *cn_wuhan_region
-  - id: 301963
-    prefix: '8625'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3b820253-9263-4ddf-9280-c93520b342bd
-    country_id: *cn
-    network_id: *cn_nanjing_region
-  - id: 308500
-    prefix: '8629'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 80257f79-98df-48e2-8ace-1ff0e9bce94b
-    country_id: *cn
-    network_id: *cn_xian_xianyang_region
-  - id: 313354
-    prefix: '8628'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 25a8c9fd-8442-4ee6-882b-76198ee6e687
-    country_id: *cn
-    network_id: *cn_chengdu_meishan_ziyang_region
-  - id: 321798
-    prefix: '86312'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5c888bd3-b1c1-401a-bd93-5a2fcc07d352
-    country_id: *cn
-    network_id: *cn_baoding_region
-  - id: 322776
-    prefix: '86310'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3906cb9b-60c0-44a7-af41-1eaf7233452a
-    country_id: *cn
-    network_id: *cn_handan_region
-  - id: 323560
-    prefix: '86311'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 6272a21a-6714-493d-a517-184a5070d2e9
-    country_id: *cn
-    network_id: *cn_shijiazhuang_region
-  - id: 324591
-    prefix: '86313'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2f6b7571-0675-4a4e-a603-b5522855c0cb
-    country_id: *cn
-    network_id: *cn_zhangjiakou_region
-  - id: 325883
-    prefix: '86315'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 02724ebb-a2f0-442e-9a86-bbbfa7a4dadd
-    country_id: *cn
-    network_id: *cn_tangshan_region
-  - id: 326140
-    prefix: '86317'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b33dc2ea-72a4-48a3-bfb1-3a7602ab457c
-    country_id: *cn
-    network_id: *cn_cangzhou_region
-  - id: 327073
-    prefix: '86318'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 506970b7-735d-4001-b164-4fa1d78c9afb
-    country_id: *cn
-    network_id: *cn_hengshui_region
-  - id: 331708
-    prefix: '86335'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b8ef0c2d-9e46-4458-ac00-efea2f97346e
-    country_id: *cn
-    network_id: *cn_qinhuangdao_region
-  - id: 332506
-    prefix: '86314'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 58aeb442-7b93-4595-9a90-5fe7bd3d4fa3
-    country_id: *cn
-    network_id: *cn_chengde_region
-  - id: 333722
-    prefix: '86316'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 43b3c93b-a6ef-48d5-953b-f9190318d2f0
-    country_id: *cn
-    network_id: *cn_langfang_region
-  - id: 334585
-    prefix: '86319'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 549c16f7-5659-4c9c-861f-daac168485a3
-    country_id: *cn
-    network_id: *cn_xingtai_region
-  - id: 344848
-    prefix: '86352'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3afab040-6bbc-4acc-a86f-2bb2c7b6024d
-    country_id: *cn
-    network_id: *cn_datong_region
-  - id: 345579
-    prefix: '86355'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ed952ed5-a113-4ea4-8937-6f0e941d3e3c
-    country_id: *cn
-    network_id: *cn_changzhi_region
-  - id: 345618
-    prefix: '86356'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a09d9dd0-13f4-4622-91be-b8bc141c4f12
-    country_id: *cn
-    network_id: *cn_jincheng_region
-  - id: 345685
-    prefix: '86357'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9113e1af-2227-43c9-a598-f947d9f12778
-    country_id: *cn
-    network_id: *cn_linfen_region
-  - id: 345764
-    prefix: '86358'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 68801340-d17e-4b79-acc6-19bae323c168
-    country_id: *cn
-    network_id: *cn_luliang_region
-  - id: 345880
-    prefix: '86359'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5a1ccb8f-3a10-4953-86c6-50478a148818
-    country_id: *cn
-    network_id: *cn_yuncheng_region
-  - id: 346850
-    prefix: '86375'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 055e09e5-c0ff-4c48-bb2d-c523d9a652c9
-    country_id: *cn
-    network_id: *cn_pingdingshan_region
-  - id: 347106
-    prefix: '86376'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ecd1b290-c68c-465e-be6a-3416c21b318d
-    country_id: *cn
-    network_id: *cn_xinyang_region
-  - id: 347228
-    prefix: '86377'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 32e48593-4bc3-4eb1-a303-ddc86ac44235
-    country_id: *cn
-    network_id: *cn_nanyang_region
-  - id: 347678
-    prefix: '86379'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: e9166315-9c1f-4572-b482-4a5935bb5347
-    country_id: *cn
-    network_id: *cn_luoyang_region
-  - id: 349296
-    prefix: '86396'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d4e1422a-91e2-4572-8b55-0001fe4ea57b
-    country_id: *cn
-    network_id: *cn_zhumadian_region
-  - id: 349351
-    prefix: '86398'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ca547a51-87eb-4105-88cf-31f35b0012b9
-    country_id: *cn
-    network_id: *cn_sanmenxia_region
-  - id: 352134
-    prefix: '86349'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b83bcfc3-3aa4-42fd-9355-18e0a56d58ed
-    country_id: *cn
-    network_id: *cn_shuozhou_region
-  - id: 352482
-    prefix: '86350'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f0da18a1-b709-4d76-bfcc-225566638aaf
-    country_id: *cn
-    network_id: *cn_xinzhou_region
-  - id: 352567
-    prefix: '86351'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 79f1af49-307a-4dcc-bb12-b0985cb83f10
-    country_id: *cn
-    network_id: *cn_taiyuan_region
-  - id: 353310
-    prefix: '86353'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 65836bd5-6f03-4d5d-ae06-6993d0a2cfed
-    country_id: *cn
-    network_id: *cn_yangquan_region
-  - id: 353748
-    prefix: '86354'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7f024cc7-83a3-456b-a3c4-0739dcf66824
-    country_id: *cn
-    network_id: *cn_jinzhong_region
-  - id: 355968
-    prefix: '86370'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9d32fa06-8b29-4e3f-938b-097bee1ef48d
-    country_id: *cn
-    network_id: *cn_shangqiu_region
-  - id: 356091
-    prefix: '86371'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: b738c9fb-c6fa-4b1e-85ff-d698c0c9efce
-    country_id: *cn
-    network_id: *cn_kaifeng_zhengzhou_region
-  - id: 356151
-    prefix: '86372'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 14f28af3-4b9a-4ab8-aada-bcfcfa395245
-    country_id: *cn
-    network_id: *cn_anyang_region
-  - id: 356215
-    prefix: '86373'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 024c5fa2-43ba-4f67-aec7-13a25c7b4682
-    country_id: *cn
-    network_id: *cn_xinxiang_region
-  - id: 356388
-    prefix: '86374'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 16051280-1beb-4fdb-8bef-e676f2a5c221
-    country_id: *cn
-    network_id: *cn_xuchang_region
-  - id: 357613
-    prefix: '86391'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2c97c8fe-acd7-492d-a33b-3ccc313a1467
-    country_id: *cn
-    network_id: *cn_jiaozuo_jiyuan_region
-  - id: 357876
-    prefix: '86392'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 63e90080-9bc9-4976-8a10-115644894643
-    country_id: *cn
-    network_id: *cn_hebi_region
-  - id: 358276
-    prefix: '86393'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8759aa4c-b382-4d5e-a0fc-ba4ea54fbd9a
-    country_id: *cn
-    network_id: *cn_puyang_region
-  - id: 358591
-    prefix: '86394'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c954f975-92e3-42be-b0b0-e91f56b9f002
-    country_id: *cn
-    network_id: *cn_zhoukou_region
-  - id: 358667
-    prefix: '86395'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3411ccb3-024f-4eab-b044-64a723080291
-    country_id: *cn
-    network_id: *cn_luohe_region
-  - id: 363448
-    prefix: '86411'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: bc07351c-c23b-4c1e-bfe7-68b85f315bfd
-    country_id: *cn
-    network_id: *cn_dalian_region
-  - id: 363948
-    prefix: '86415'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 424bb63e-b35f-47c1-9072-4d718839c759
-    country_id: *cn
-    network_id: *cn_dandong_region
-  - id: 365480
-    prefix: '86419'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fdf5b731-3dc8-4e93-a58d-ccfcf1965af2
-    country_id: *cn
-    network_id: *cn_liaoyang_region
-  - id: 367668
-    prefix: '86429'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 061bab21-7327-44d8-bee2-99549f411832
-    country_id: *cn
-    network_id: *cn_huludao_region
-  - id: 368407
-    prefix: '86431'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 08c134a2-ce2e-46d8-a438-b4e03c85bbbc
-    country_id: *cn
-    network_id: *cn_changchun_region
-  - id: 368484
-    prefix: '86434'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ea1fa61d-5f38-4bcd-b465-a3bfca51eaac
-    country_id: *cn
-    network_id: *cn_siping_region
-  - id: 369351
-    prefix: '86435'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f715457a-a0ed-48cf-8d8b-786383c15fe2
-    country_id: *cn
-    network_id: *cn_tonghua_region
-  - id: 370167
-    prefix: '86439'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7ee41853-69e0-4210-aa80-af510ad962ce
-    country_id: *cn
-    network_id: *cn_baishan_region
-  - id: 371920
-    prefix: '86412'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5826a860-075c-43f9-be11-5910933496bd
-    country_id: *cn
-    network_id: *cn_anshan_region
-  - id: 374502
-    prefix: '86416'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6d5172bb-c668-4420-8ddb-d2e47070f72f
-    country_id: *cn
-    network_id: *cn_jinzhou_region
-  - id: 375175
-    prefix: '86417'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d137cf16-58c5-4aa1-b86f-a5d81586034a
-    country_id: *cn
-    network_id: *cn_yingkou_region
-  - id: 376179
-    prefix: '86418'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cb2829dc-3e14-4ea6-8815-c4f11615965b
-    country_id: *cn
-    network_id: *cn_fuxin_region
-  - id: 377399
-    prefix: '86421'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8531f184-04b0-4a66-b868-8000aa47f8f0
-    country_id: *cn
-    network_id: *cn_chaoyang_region
-  - id: 378714
-    prefix: '86427'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cc7edf4f-7bbe-41c5-87fa-f2b985f0b766
-    country_id: *cn
-    network_id: *cn_panjin_region
-  - id: 379798
-    prefix: '86432'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 97c76400-e920-4c26-ab99-22116c45a1e3
-    country_id: *cn
-    network_id: *cn_jilin_region
-  - id: 380261
-    prefix: '86433'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9897b872-002f-40b3-93e7-c22fd582fcdb
-    country_id: *cn
-    network_id: *cn_yanbian_korean_autonomous_prefecture_region
-  - id: 380670
-    prefix: '86436'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6913f19e-a7a8-41a1-beae-f4078090047a
-    country_id: *cn
-    network_id: *cn_baicheng_region
-  - id: 380921
-    prefix: '86437'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c349fb18-df7f-45d8-938a-5e15470865d3
-    country_id: *cn
-    network_id: *cn_liaoyuan_region
-  - id: 381394
-    prefix: '86438'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1a829419-6eea-4ab4-9721-8c4f353efd7b
-    country_id: *cn
-    network_id: *cn_songyuan_region
-  - id: 387507
-    prefix: '86451'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 171dd091-d9b1-4e43-9e5c-43bbdb3602e6
-    country_id: *cn
-    network_id: *cn_harbin_region
-  - id: 387556
-    prefix: '86452'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: daf0819f-7bc7-47c7-8b6b-667fab1a33a4
-    country_id: *cn
-    network_id: *cn_qiqihar_region
-  - id: 388171
-    prefix: '86453'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e33e3642-eaff-4980-9d47-84cf2eb657ff
-    country_id: *cn
-    network_id: *cn_mudanjiang_region
-  - id: 388472
-    prefix: '86459'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 918e60d1-6e17-4d15-b3c8-d4c80cab9d88
-    country_id: *cn
-    network_id: *cn_daqing_region
-  - id: 393423
-    prefix: '86454'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0ea2bdc6-c26f-466b-b900-6cf53bbdb5ac
-    country_id: *cn
-    network_id: *cn_jiamusi_region
-  - id: 393482
-    prefix: '86455'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7849e461-7d7b-47c2-9326-f89225e703f6
-    country_id: *cn
-    network_id: *cn_suihua_region
-  - id: 393540
-    prefix: '86456'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1066d65d-b51b-4f91-8882-4796e9e3e0a4
-    country_id: *cn
-    network_id: *cn_heihe_region
-  - id: 393861
-    prefix: '86457'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4913cde2-1480-487c-a47d-68eb12e8d272
-    country_id: *cn
-    network_id: *cn_daxinganling_jiagedaqi_region
-  - id: 393928
-    prefix: '86458'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aebb6c0f-4f6f-4e61-988f-f32bd90ed21a
-    country_id: *cn
-    network_id: *cn_yichun_region
-  - id: 394997
-    prefix: '86464'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 49466e2a-1e7c-42e7-86d9-58a7ebbdb026
-    country_id: *cn
-    network_id: *cn_qitaihe_region
-  - id: 395418
-    prefix: '86469'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 20aeef09-a829-46d2-a65d-53bb41a8faf3
-    country_id: *cn
-    network_id: *cn_shuangyashan_region
-  - id: 396470
-    prefix: '86471'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9797825d-18d8-4f39-8c14-914f81bd0e6f
-    country_id: *cn
-    network_id: *cn_hohhot_region
-  - id: 396538
-    prefix: '86472'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 664da9a4-e6f3-47de-9467-8ec41c8af4f7
-    country_id: *cn
-    network_id: *cn_baotou_region
-  - id: 396992
-    prefix: '86473'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f2e699a5-5234-46ca-b6b6-62a026d28044
-    country_id: *cn
-    network_id: *cn_wuhai_region
-  - id: 397485
-    prefix: '86474'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2639de52-8548-481b-bde6-445ed46feb00
-    country_id: *cn
-    network_id: *cn_wulanchabu_region
-  - id: 397647
-    prefix: '86477'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 63bede3b-300d-4c2d-b517-eef619460b72
-    country_id: *cn
-    network_id: *cn_ordos_region
-  - id: 399111
-    prefix: '86467'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f848ea2f-9359-4794-b169-f094d0e8abfd
-    country_id: *cn
-    network_id: *cn_jixi_region
-  - id: 399162
-    prefix: '86468'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6bdca670-124e-46e9-9639-50e8b0b0cc4f
-    country_id: *cn
-    network_id: *cn_hegang_region
-  - id: 399607
-    prefix: '86470'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ce396779-d6ec-4c9e-8d6c-2709b30d936f
-    country_id: *cn
-    network_id: *cn_hulunbeier_region
-  - id: 400772
-    prefix: '86475'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0d26ab00-f821-4ee9-89c9-75c3b750b43b
-    country_id: *cn
-    network_id: *cn_tongliao_region
-  - id: 401269
-    prefix: '86476'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 48481752-4631-4fee-bfca-28ac9a4616a9
-    country_id: *cn
-    network_id: *cn_chifeng_region
-  - id: 406940
-    prefix: '86812'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5dcbf051-d74e-4cc9-b75f-0f3d26384fee
-    country_id: *cn
-    network_id: *cn_panzhihua_region
-  - id: 409343
-    prefix: '86818'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 27d5e5d5-36b0-47eb-b03a-265bbcbc42c5
-    country_id: *cn
-    network_id: *cn_dazhou_region
-  - id: 410223
-    prefix: '86825'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b0d10be7-b12d-41f9-840b-550f4138e045
-    country_id: *cn
-    network_id: *cn_suining_region
-  - id: 411013
-    prefix: '86826'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 42a8391c-1ab6-4d80-857d-03f68d5942b9
-    country_id: *cn
-    network_id: *cn_guangan_region
-  - id: 415681
-    prefix: '86813'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aa61224f-2046-4f46-9b27-49ba3e4e6e6c
-    country_id: *cn
-    network_id: *cn_zigong_region
-  - id: 416782
-    prefix: '86816'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 88eca032-a886-43f2-a3f4-74f7e2063b50
-    country_id: *cn
-    network_id: *cn_mianyang_region
-  - id: 417586
-    prefix: '86817'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: db59933f-87ce-495a-ab69-3779c5695415
-    country_id: *cn
-    network_id: *cn_nanchong_region
-  - id: 420496
-    prefix: '86827'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eaf35288-a457-4569-85fe-73bdfc3f69d6
-    country_id: *cn
-    network_id: *cn_bazhong_region
-  - id: 422637
-    prefix: '86832'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e61fb6b4-ff10-4d7d-a4af-a1ff8aa5fd98
-    country_id: *cn
-    network_id: *cn_neijiang_region
-  - id: 423367
-    prefix: '86834'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 391cec7c-5094-435a-b50c-f9877ce1bdfb
-    country_id: *cn
-    network_id: *cn_liangshan_yi_autonomous_prefecture_region
-  - id: 424050
-    prefix: '86835'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 482ab6ad-2838-49cd-8c3e-36b35d6969c2
-    country_id: *cn
-    network_id: *cn_yaan_region
-  - id: 424181
-    prefix: '86836'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b6935337-8fce-466f-86f6-c4965bfe43a0
-    country_id: *cn
-    network_id: *cn_ganzi_tibetan_autonomous_prefecture_region
-  - id: 424282
-    prefix: '86837'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6e2bcda7-6efb-44d3-a81e-b3c3bd556646
-    country_id: *cn
-    network_id: *cn_aba_tibetan_and_qiang_autonomous_prefecture_region
-  - id: 424306
-    prefix: '86838'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 90a898c3-ee24-47d4-b045-6e522a1af973
-    country_id: *cn
-    network_id: *cn_deyang_region
-  - id: 427507
-    prefix: '86851'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 90b23bb6-8f34-49ac-8903-5a16e33a6efd
-    country_id: *cn
-    network_id: *cn_anshun_guiyang_zunyi_region
-  - id: 427572
-    prefix: '86854'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 55405c50-c1ee-4c5d-ae4b-4042aeedb99b
-    country_id: *cn
-    network_id: *cn_qiannan_buyei_and_miao_autonomous_prefecture_region
-  - id: 427735
-    prefix: '86855'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 766b610f-9760-42fe-98eb-50613a997ea1
-    country_id: *cn
-    network_id: *cn_southeast_qian_autonomous_prefecture_of_miao_and_dong_region
-  - id: 427779
-    prefix: '86856'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c07d387d-d264-49e6-af31-1290297e3f2b
-    country_id: *cn
-    network_id: *cn_tongren_region
-  - id: 428125
-    prefix: '86859'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 04c6755d-5741-4638-bd33-92dccff6135f
-    country_id: *cn
-    network_id: *cn_guizhou_south_buyi_and_miao_autonomous_prefecture_region
-  - id: 431066
-    prefix: '86830'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1d92c733-dd68-4a69-9932-a10962e2028b
-    country_id: *cn
-    network_id: *cn_luzhou_region
-  - id: 431567
-    prefix: '86831'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4a8a0c10-2602-4071-b216-ef71bced3f54
-    country_id: *cn
-    network_id: *cn_yibin_region
-  - id: 432161
-    prefix: '86833'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aefa496e-3c9b-4e76-964a-d5a67a24841b
-    country_id: *cn
-    network_id: *cn_leshan_region
-  - id: 433060
-    prefix: '86839'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f9e6e52d-544b-4389-8ff3-387601a406a4
-    country_id: *cn
-    network_id: *cn_guangyuan_region
-  - id: 436707
-    prefix: '86857'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 37899112-d7ca-45da-a93e-5b964cdca4fa
-    country_id: *cn
-    network_id: *cn_bijie_region
-  - id: 437068
-    prefix: '86858'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1e25c3c2-097d-413b-8c84-10d49ebcd3b6
-    country_id: *cn
-    network_id: *cn_liupanshui_region
-  - id: 441405
-    prefix: '86870'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 069bccf8-77aa-4774-adfa-05791c1ff712
-    country_id: *cn
-    network_id: *cn_zhaotong_region
-  - id: 442239
-    prefix: '86872'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 03447cd9-65f0-473a-b18f-47dc411f2cb1
-    country_id: *cn
-    network_id: *cn_dali_bai_autonomous_prefecture_region
-  - id: 443099
-    prefix: '86873'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8d44d7f0-ae22-4912-92a5-08ccbd022f72
-    country_id: *cn
-    network_id: *cn_honghe_hani_and_yi_autonomous_prefecture_region
-  - id: 443761
-    prefix: '86879'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c148677a-b96e-4063-84b2-f155aadda889
-    country_id: *cn
-    network_id: *cn_puer_region
-  - id: 447281
-    prefix: '86903'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 59662a1c-69bd-4a88-962d-bc1b57b566b2
-    country_id: *cn
-    network_id: *cn_hotan_region
-  - id: 448899
-    prefix: '86871'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: be30a97b-8965-464d-8c7e-013c6cfbca54
-    country_id: *cn
-    network_id: *cn_kunming_region
-  - id: 450457
-    prefix: '86874'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eb7c55c6-f4dc-46ee-8fd0-d9eaf1aba2ca
-    country_id: *cn
-    network_id: *cn_qujing_region
-  - id: 450473
-    prefix: '86875'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2ed8b9b0-96a6-49c1-853b-a692bd20284c
-    country_id: *cn
-    network_id: *cn_baoshan_region
-  - id: 450484
-    prefix: '86876'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 445a196e-f753-4953-8505-0c1491fa07a6
-    country_id: *cn
-    network_id: *cn_wenshan_zhuang_and_miao_autonomous_prefecture_region
-  - id: 450702
-    prefix: '86877'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 29454a0b-fae0-4802-88b7-9ca58f6e9c5f
-    country_id: *cn
-    network_id: *cn_yuxi_region
-  - id: 451092
-    prefix: '86878'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1f08d51f-c41d-4323-ba94-4df82a5c9456
-    country_id: *cn
-    network_id: *cn_chuxiong_yi_autonomous_prefecture_region
-  - id: 451301
-    prefix: '86883'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 02d8637e-469a-4291-955e-2d0a36044d24
-    country_id: *cn
-    network_id: *cn_lincang_region
-  - id: 451353
-    prefix: '86886'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6a296867-9a9e-4646-8687-c0fb64c58355
-    country_id: *cn
-    network_id: *cn_nujiang_lisu_autonomous_prefecture_region
-  - id: 451368
-    prefix: '86887'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5617a7d0-52af-4d8e-a447-b52482bf2fe2
-    country_id: *cn
-    network_id: *cn_diqing_tibetan_autonomous_prefecture_region
-  - id: 451381
-    prefix: '86888'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 18ebe454-a3a0-4e6b-a403-4c0d70786703
-    country_id: *cn
-    network_id: *cn_lijiang_region
-  - id: 451771
-    prefix: '86891'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 26749daf-a36c-444f-a1fc-78dca32c1ffd
-    country_id: *cn
-    network_id: *cn_lhasa_region
-  - id: 451909
-    prefix: '86892'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ebe39a4c-a9f4-490b-ab87-d86899d921b5
-    country_id: *cn
-    network_id: *cn_shigatse_region
-  - id: 451946
-    prefix: '86893'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4b0dc837-2540-4df0-9496-042f5af80316
-    country_id: *cn
-    network_id: *cn_shannan_region
-  - id: 451960
-    prefix: '86894'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8c945884-9bc6-47fa-ae1d-1c4f99da9548
-    country_id: *cn
-    network_id: *cn_nyingchi_region
-  - id: 452240
-    prefix: '86895'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a0057fc0-b3cd-49fd-9d4b-e7732c545b38
-    country_id: *cn
-    network_id: *cn_qamdo_region
-  - id: 452246
-    prefix: '86896'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1b668df3-f080-4b59-b5c4-c0aaf6cee46d
-    country_id: *cn
-    network_id: *cn_nagqu_region
-  - id: 452254
-    prefix: '86897'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 856401c7-c3cd-4b9a-ac95-f70133c4aab8
-    country_id: *cn
-    network_id: *cn_ali_region
-  - id: 452467
-    prefix: '86898'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2815f20e-2bb3-4287-8ab4-2c01949466ad
-    country_id: *cn
-    network_id: *cn_hainan_province_region
-  - id: 454703
-    prefix: '86901'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f87ab0f6-ac36-4388-82f7-e8056be7de3f
-    country_id: *cn
-    network_id: *cn_tacheng_region
-  - id: 454949
-    prefix: '86902'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dad5abaa-8fd6-4edf-96ae-6b84e5702351
-    country_id: *cn
-    network_id: *cn_hami_region
-  - id: 457259
-    prefix: '86908'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 81c1eaa8-3efc-4370-8277-8110a0419948
-    country_id: *cn
-    network_id: *cn_kizilsu_kirgiz_autonomous_prefecture_region
-  - id: 460336
-    prefix: '86914'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e78f4306-369f-4b03-ae6c-a0ba97a78069
-    country_id: *cn
-    network_id: *cn_shangluo_region
-  - id: 461703
-    prefix: '86917'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b9be9a4b-e8af-4e5e-99e7-737afc6387b3
-    country_id: *cn
-    network_id: *cn_baoji_region
-  - id: 462744
-    prefix: '86906'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7cd0b472-1170-4c47-9045-77513837ef19
-    country_id: *cn
-    network_id: *cn_altay_beitun_tiemenguan_region
-  - id: 463572
-    prefix: '86909'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c560e4e0-1f44-4906-9537-232bc50e65b8
-    country_id: *cn
-    network_id: *cn_bortala_mongolian_autonomous_prefecture_region
-  - id: 465120
-    prefix: '86911'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1aed586e-e7b2-4f41-acc8-6fdb9c2dc10c
-    country_id: *cn
-    network_id: *cn_yanan_region
-  - id: 465639
-    prefix: '86912'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 072397d1-bb06-4afb-8353-a7931ec77012
-    country_id: *cn
-    network_id: *cn_yulin_region
-  - id: 466314
-    prefix: '86913'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a60937fc-3ae9-45d4-ab94-1cf2e0d2c156
-    country_id: *cn
-    network_id: *cn_weinan_region
-  - id: 466836
-    prefix: '86915'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6c413c0f-d4db-490a-8705-23a3030008e4
-    country_id: *cn
-    network_id: *cn_ankang_region
-  - id: 467202
-    prefix: '86916'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e87468ec-45cf-491c-987b-ca286da0d652
-    country_id: *cn
-    network_id: *cn_hanzhong_region
-  - id: 469802
-    prefix: '86919'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 67978870-6aaa-4f92-a752-72980fbba96a
-    country_id: *cn
-    network_id: *cn_tongchuan_region
-  - id: 485704
-    prefix: '86930'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 21dbe58c-cf53-4857-9b79-34757dc661a3
-    country_id: *cn
-    network_id: *cn_linxia_hui_autonomous_prefecture_region
-  - id: 486094
-    prefix: '86933'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0b7a2a41-7652-4463-b860-eb9cc2bc20dc
-    country_id: *cn
-    network_id: *cn_pingliang_region
-  - id: 487056
-    prefix: '86934'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 258d5c47-8271-4a3b-846e-91f1350d364a
-    country_id: *cn
-    network_id: *cn_qingyang_region
-  - id: 490004
-    prefix: '86931'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aef2ae21-c50f-468e-ba8b-deb32a6e17d9
-    country_id: *cn
-    network_id: *cn_lanzhou_region
-  - id: 490536
-    prefix: '86932'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9d41b635-dac5-429b-94ea-d7a9f93654fb
-    country_id: *cn
-    network_id: *cn_dingxi_region
-  - id: 493043
-    prefix: '86935'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7db78296-86d1-4b29-a825-484c2d23eca9
-    country_id: *cn
-    network_id: *cn_jinchang_wuwei_region
-  - id: 498641
-    prefix: '86936'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d96c2778-2be4-4907-a47f-e2f9f0720ad8
-    country_id: *cn
-    network_id: *cn_zhangye_region
-  - id: 498820
-    prefix: '86937'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: defa8131-e501-4bce-a6dd-f525581cbeb0
-    country_id: *cn
-    network_id: *cn_jiayuguan_jiuquan_region
-  - id: 501487
-    prefix: '86938'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 874b812f-3fc7-46c1-b0cc-e097de9c2cdb
-    country_id: *cn
-    network_id: *cn_tianshui_region
-# Country code Prefixes
-  - id: 241967
-    prefix: '86'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 381126ac-ef1d-44e6-8987-19b61ce8ea59
-    country_id: *cn
-    network_id: null
 # Supplementary services Prefixes
   - id: 242372
     prefix: '861'
@@ -3629,20 +3632,6 @@ network_prefixes:
     uuid: 645258d2-1527-4766-b740-e9386ab07bef
     country_id: *cn
     network_id: *cn_virtual_private_network
-  - id: 253139
-    prefix: '86800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: accde6ee-97ee-43e1-9920-14bb81b39ce0
-    country_id: *cn
-    network_id: *cn_freephone_services
-  - id: 255312
-    prefix: '86700'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b37ae932-27fe-4111-825b-cef2b204c038
-    country_id: *cn
-    network_id: *cn_personal_communication_services
   - id: 258265
     prefix: '869977'
     number_min_length: 6
@@ -3657,6 +3646,20 @@ network_prefixes:
     uuid: 5e5c7a69-9de3-4e59-b854-5e5b0026694f
     country_id: *cn
     network_id: *cn_beijing_emergency_services
+  - id: 255312
+    prefix: '86700'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b37ae932-27fe-4111-825b-cef2b204c038
+    country_id: *cn
+    network_id: *cn_personal_communication_services
+  - id: 253139
+    prefix: '86800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: accde6ee-97ee-43e1-9920-14bb81b39ce0
+    country_id: *cn
+    network_id: *cn_freephone_services
   - id: 264431
     prefix: '8695'
     number_min_length: 7
@@ -3840,6 +3843,125 @@ network_prefixes:
     uuid: 05792aec-1f60-406f-9718-ef745a79f44f
     country_id: *cn
     network_id: *cn_china_mobile_mobile
+  - id: 265887
+    prefix: '86145'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 24234e2c-778f-42b7-9af8-33209fab6b01
+    country_id: *cn
+    network_id: *cn_china_unicom_mobile
+  - id: 265926
+    prefix: '86146'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: acb343e6-7ddc-43d0-84f6-973ce8037e32
+    country_id: *cn
+    network_id: *cn_china_unicom_mobile
+  - id: 265976
+    prefix: '86147'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4250d0d4-ec83-4d62-9c5c-8d36827cfb69
+    country_id: *cn
+    network_id: *cn_china_mobile_mobile
+  - id: 266004
+    prefix: '86148'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4ed046ad-c478-4810-a9f5-fb46d9b6018c
+    country_id: *cn
+    network_id: *cn_china_mobile_mobile
+  - id: 266042
+    prefix: '86149'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c944c028-faeb-4c71-9576-4a41d2d25b10
+    country_id: *cn
+    network_id: *cn_china_telecom_mobile
+  - id: 266195
+    prefix: '86150'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1ee721ee-6f8b-4b91-9e17-c0763c973a01
+    country_id: *cn
+    network_id: *cn_china_mobile_mobile
+  - id: 266219
+    prefix: '86151'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8eb05d79-edfc-441e-b35c-bd2591156c96
+    country_id: *cn
+    network_id: *cn_china_mobile_mobile
+  - id: 266243
+    prefix: '86152'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: db238563-bba2-4b3e-b75c-5028bae4ff0d
+    country_id: *cn
+    network_id: *cn_china_mobile_mobile
+  - id: 266284
+    prefix: '86153'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2ff625d8-6185-4c2c-89db-fe1142d0c5f5
+    country_id: *cn
+    network_id: *cn_china_telecom_mobile
+  - id: 266365
+    prefix: '86155'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 026dd665-8edc-4ce6-b06e-ae6ca037ccc5
+    country_id: *cn
+    network_id: *cn_china_unicom_mobile
+  - id: 266381
+    prefix: '86156'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ce8f9054-1b48-4a1e-a0d9-a9eedfc5573f
+    country_id: *cn
+    network_id: *cn_china_unicom_mobile
+  - id: 266437
+    prefix: '86157'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d8f37ad3-f552-417c-bf0c-6b793cdb38f6
+    country_id: *cn
+    network_id: *cn_china_mobile_mobile
+  - id: 266457
+    prefix: '86158'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ecae7690-ba75-453a-90af-ea7c30111574
+    country_id: *cn
+    network_id: *cn_china_mobile_mobile
+  - id: 266498
+    prefix: '86159'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a44fbe7c-9798-4bcc-93b9-142f987085e2
+    country_id: *cn
+    network_id: *cn_china_mobile_mobile
+  - id: 266785
+    prefix: '86162'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d394567a-7ecf-45e5-8cce-f79cb4b83ad5
+    country_id: *cn
+    network_id: *cn_china_telecom_mobile
+  - id: 266871
+    prefix: '86166'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: cbe9eb77-64cf-4711-8ffa-0d055a87404e
+    country_id: *cn
+    network_id: *cn_china_unicom_mobile
+  - id: 266889
+    prefix: '86167'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e1390f75-d757-43ec-9be5-b9132ff58c7a
+    country_id: *cn
+    network_id: *cn_china_unicom_mobile
   - id: 260308
     prefix: '861700'
     number_min_length: 13
@@ -4064,125 +4186,6 @@ network_prefixes:
     uuid: f441f237-ec2d-4263-a853-ef1c8d98a871
     country_id: *cn
     network_id: *cn_china_telecom_mobile
-  - id: 265887
-    prefix: '86145'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 24234e2c-778f-42b7-9af8-33209fab6b01
-    country_id: *cn
-    network_id: *cn_china_unicom_mobile
-  - id: 265926
-    prefix: '86146'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: acb343e6-7ddc-43d0-84f6-973ce8037e32
-    country_id: *cn
-    network_id: *cn_china_unicom_mobile
-  - id: 265976
-    prefix: '86147'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4250d0d4-ec83-4d62-9c5c-8d36827cfb69
-    country_id: *cn
-    network_id: *cn_china_mobile_mobile
-  - id: 266004
-    prefix: '86148'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4ed046ad-c478-4810-a9f5-fb46d9b6018c
-    country_id: *cn
-    network_id: *cn_china_mobile_mobile
-  - id: 266042
-    prefix: '86149'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: c944c028-faeb-4c71-9576-4a41d2d25b10
-    country_id: *cn
-    network_id: *cn_china_telecom_mobile
-  - id: 266195
-    prefix: '86150'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 1ee721ee-6f8b-4b91-9e17-c0763c973a01
-    country_id: *cn
-    network_id: *cn_china_mobile_mobile
-  - id: 266219
-    prefix: '86151'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 8eb05d79-edfc-441e-b35c-bd2591156c96
-    country_id: *cn
-    network_id: *cn_china_mobile_mobile
-  - id: 266243
-    prefix: '86152'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: db238563-bba2-4b3e-b75c-5028bae4ff0d
-    country_id: *cn
-    network_id: *cn_china_mobile_mobile
-  - id: 266284
-    prefix: '86153'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2ff625d8-6185-4c2c-89db-fe1142d0c5f5
-    country_id: *cn
-    network_id: *cn_china_telecom_mobile
-  - id: 266365
-    prefix: '86155'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 026dd665-8edc-4ce6-b06e-ae6ca037ccc5
-    country_id: *cn
-    network_id: *cn_china_unicom_mobile
-  - id: 266381
-    prefix: '86156'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ce8f9054-1b48-4a1e-a0d9-a9eedfc5573f
-    country_id: *cn
-    network_id: *cn_china_unicom_mobile
-  - id: 266437
-    prefix: '86157'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d8f37ad3-f552-417c-bf0c-6b793cdb38f6
-    country_id: *cn
-    network_id: *cn_china_mobile_mobile
-  - id: 266457
-    prefix: '86158'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ecae7690-ba75-453a-90af-ea7c30111574
-    country_id: *cn
-    network_id: *cn_china_mobile_mobile
-  - id: 266498
-    prefix: '86159'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: a44fbe7c-9798-4bcc-93b9-142f987085e2
-    country_id: *cn
-    network_id: *cn_china_mobile_mobile
-  - id: 266785
-    prefix: '86162'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d394567a-7ecf-45e5-8cce-f79cb4b83ad5
-    country_id: *cn
-    network_id: *cn_china_telecom_mobile
-  - id: 266871
-    prefix: '86166'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: cbe9eb77-64cf-4711-8ffa-0d055a87404e
-    country_id: *cn
-    network_id: *cn_china_unicom_mobile
-  - id: 266889
-    prefix: '86167'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: e1390f75-d757-43ec-9be5-b9132ff58c7a
-    country_id: *cn
-    network_id: *cn_china_unicom_mobile
 # Satellite Prefixes
   - id: 259753
     prefix: '861349'

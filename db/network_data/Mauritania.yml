@@ -1,22 +1,18 @@
 country_id: &mr 135
 networks:
-# Supplementary services Networks
-  - id: &mr_general_interest_services 21455
-    name: MR General Interest Services
-    uuid: ccaf4805-9cec-4684-ba8d-417866690892
-    type_id: 13
-  - id: &mr_customer_care_services 21456
-    name: MR Customer Care Services
-    uuid: 24ad6c72-b15e-4d54-aee6-d5471f721bc2
-    type_id: 13
-  - id: &mr_value_added_services 21457
-    name: MR Value Added Services
-    uuid: 106f2110-2c92-42bf-bc69-4c2b99c8d1e0
-    type_id: 13
-  - id: &mr_special_services 23799
-    name: MR Special Services
-    uuid: ef002a99-1150-4a9b-af78-cf3c03e2e2b1
-    type_id: 13
+# Mobile Networks
+  - id: &mr_zaki_mauritani_mobile 22723
+    name: MR Zaki Mauritani Mobile
+    uuid: f34fbf0a-187f-4af3-b7e6-383b76b98a09
+    type_id: 3
+  - id: &mr_moov_mauritel_mobile 22135
+    name: MR Moov Mauritel Mobile
+    uuid: 4c3a3bb7-f461-4f67-be20-8e4f3ded599a
+    type_id: 3
+  - id: &mr_mattel_mobile 23207
+    name: MR Mattel Mobile
+    uuid: e9481ac1-b982-483c-a37b-2b3f41631f7b
+    type_id: 3
 # Fixed Networks
   - id: &mr_fixed 22030
     name: MR Fixed
@@ -178,65 +174,54 @@ networks:
     name: MR Akjoujt Region
     uuid: 013e5563-5522-436a-b94a-675e38968295
     type_id: 2
-# Mobile Networks
-  - id: &mr_moov_mauritel_mobile 22135
-    name: MR Moov Mauritel Mobile
-    uuid: 4c3a3bb7-f461-4f67-be20-8e4f3ded599a
-    type_id: 3
-  - id: &mr_zaki_mauritani_mobile 22723
-    name: MR Zaki Mauritani Mobile
-    uuid: f34fbf0a-187f-4af3-b7e6-383b76b98a09
-    type_id: 3
-  - id: &mr_mattel_mobile 23207
-    name: MR Mattel Mobile
-    uuid: e9481ac1-b982-483c-a37b-2b3f41631f7b
-    type_id: 3
+# Supplementary services Networks
+  - id: &mr_general_interest_services 21455
+    name: MR General Interest Services
+    uuid: ccaf4805-9cec-4684-ba8d-417866690892
+    type_id: 13
+  - id: &mr_customer_care_services 21456
+    name: MR Customer Care Services
+    uuid: 24ad6c72-b15e-4d54-aee6-d5471f721bc2
+    type_id: 13
+  - id: &mr_value_added_services 21457
+    name: MR Value Added Services
+    uuid: 106f2110-2c92-42bf-bc69-4c2b99c8d1e0
+    type_id: 13
+  - id: &mr_special_services 23799
+    name: MR Special Services
+    uuid: ef002a99-1150-4a9b-af78-cf3c03e2e2b1
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Mobile Prefixes
+  - id: 247421
+    prefix: '2222'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6691ef74-ae3f-4e23-92b9-4397d00222b1
+    country_id: *mr
+    network_id: *mr_zaki_mauritani_mobile
+  - id: 243947
+    prefix: '2224'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 689eb017-f541-4c02-ad55-1de4193b72be
+    country_id: *mr
+    network_id: *mr_moov_mauritel_mobile
+  - id: 248911
+    prefix: '2223'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bbfa44dc-b87b-47cd-8d5e-b199c5b95f6f
+    country_id: *mr
+    network_id: *mr_mattel_mobile
+# Fixed Prefixes
   - id: 242059
     prefix: '222'
     number_min_length: 4
     number_max_length: 100
     uuid: 373abec7-cfbe-4c20-a5c9-7422fe565357
     country_id: *mr
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242452
-    prefix: '2221'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: cd8c15ea-9149-4ce2-8a8e-ad183b8bdc3c
-    country_id: *mr
-    network_id: *mr_general_interest_services
-  - id: 242453
-    prefix: '2221'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 67f303e7-a024-45c6-a6c8-06ce33ea3a35
-    country_id: *mr
-    network_id: *mr_customer_care_services
-  - id: 242454
-    prefix: '2221'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: bdb5462a-d6ea-472f-b78c-2fb7f5353b2c
-    country_id: *mr
-    network_id: *mr_value_added_services
-  - id: 253091
-    prefix: '2228'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ce28f35a-7a92-458a-8e78-9030e5581ade
-    country_id: *mr
-    network_id: *mr_special_services
-  - id: 253163
-    prefix: '222800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 222f594d-737d-4c28-9ad2-4434f24d573c
-    country_id: *mr
-    network_id: *mr_special_services
-# Fixed Prefixes
+    network_id: *mr_fixed
   - id: 243592
     prefix: '22235'
     number_min_length: 11
@@ -447,6 +432,13 @@ network_prefixes:
     uuid: e5429eaa-1736-4963-8d25-e61de3fa5223
     country_id: *mr
     network_id: *mr_chinguitti_region
+  - id: 248263
+    prefix: '22225'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc42afb6-f101-4029-9cce-ecc6a42fa833
+    country_id: *mr
+    network_id: *mr_fixed
   - id: 244726
     prefix: '22245440'
     number_min_length: 11
@@ -657,13 +649,6 @@ network_prefixes:
     uuid: 23078732-37b5-4d46-8333-591a2a2705ce
     country_id: *mr
     network_id: *mr_barkeol_kiffa_region
-  - id: 248263
-    prefix: '22225'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bc42afb6-f101-4029-9cce-ecc6a42fa833
-    country_id: *mr
-    network_id: *mr_fixed
   - id: 249026
     prefix: '22245697'
     number_min_length: 11
@@ -706,25 +691,39 @@ network_prefixes:
     uuid: 600bed4d-a78f-4fbd-90ae-2017a75489bc
     country_id: *mr
     network_id: *mr_nouadhibou_region
-# Mobile Prefixes
-  - id: 243947
-    prefix: '2224'
+# Supplementary services Prefixes
+  - id: 242452
+    prefix: '2221'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: cd8c15ea-9149-4ce2-8a8e-ad183b8bdc3c
+    country_id: *mr
+    network_id: *mr_general_interest_services
+  - id: 242453
+    prefix: '2221'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 67f303e7-a024-45c6-a6c8-06ce33ea3a35
+    country_id: *mr
+    network_id: *mr_customer_care_services
+  - id: 242454
+    prefix: '2221'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: bdb5462a-d6ea-472f-b78c-2fb7f5353b2c
+    country_id: *mr
+    network_id: *mr_value_added_services
+  - id: 253091
+    prefix: '2228'
     number_min_length: 11
     number_max_length: 11
-    uuid: 689eb017-f541-4c02-ad55-1de4193b72be
+    uuid: ce28f35a-7a92-458a-8e78-9030e5581ade
     country_id: *mr
-    network_id: *mr_moov_mauritel_mobile
-  - id: 247421
-    prefix: '2222'
+    network_id: *mr_special_services
+  - id: 253163
+    prefix: '222800'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6691ef74-ae3f-4e23-92b9-4397d00222b1
+    uuid: 222f594d-737d-4c28-9ad2-4434f24d573c
     country_id: *mr
-    network_id: *mr_zaki_mauritani_mobile
-  - id: 248911
-    prefix: '2223'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bbfa44dc-b87b-47cd-8d5e-b199c5b95f6f
-    country_id: *mr
-    network_id: *mr_mattel_mobile
+    network_id: *mr_special_services

@@ -1,18 +1,5 @@
 country_id: &td 42
 networks:
-# Mobile Networks
-  - id: &td_airtel_mobile 22552
-    name: TD Airtel Mobile
-    uuid: d38f5e75-f55e-4151-89da-14daec657a6c
-    type_id: 3
-  - id: &td_salam_mobile 24156
-    name: TD Salam Mobile
-    uuid: 5417e146-291b-4241-896d-6b8d3f744138
-    type_id: 3
-  - id: &td_moov_africa_mobile 24413
-    name: TD Moov Africa Mobile
-    uuid: 6fd0ee99-76d1-4b20-9054-ffcec771e0da
-    type_id: 3
 # Fixed Networks
   - id: &td_fixed 22734
     name: TD Fixed
@@ -86,69 +73,38 @@ networks:
     name: TD Tandjle Region
     uuid: 0d78474b-fc65-4572-bcaf-1cde7d68d712
     type_id: 2
+# Mobile Networks
+  - id: &td_airtel_mobile 22552
+    name: TD Airtel Mobile
+    uuid: d38f5e75-f55e-4151-89da-14daec657a6c
+    type_id: 3
+  - id: &td_moov_africa_mobile 24413
+    name: TD Moov Africa Mobile
+    uuid: 6fd0ee99-76d1-4b20-9054-ffcec771e0da
+    type_id: 3
+  - id: &td_salam_mobile 24156
+    name: TD Salam Mobile
+    uuid: 5417e146-291b-4241-896d-6b8d3f744138
+    type_id: 3
 # Supplementary services Networks
   - id: &td_value_added_services 23807
     name: TD Value Added Services
     uuid: bdb4a28b-b20b-439e-a02f-6196cbefb12d
     type_id: 13
 network_prefixes:
-# Country code Prefixes
-  - id: 242113
-    prefix: '235'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 3e27db63-3b57-47fa-8067-913a38ccf0f7
-    country_id: *td
-    network_id: null
-# Mobile Prefixes
-  - id: 245427
-    prefix: '2356'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2aaea922-a4b8-489a-ac22-f31a7a51c188
-    country_id: *td
-    network_id: *td_airtel_mobile
-  - id: 255281
-    prefix: '2357'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 20075eb8-c489-428a-bbca-5d329014a02f
-    country_id: *td
-    network_id: *td_salam_mobile
-  - id: 257143
-    prefix: '2359'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b08ab4d-f2a2-4caa-ac75-21004457475c
-    country_id: *td
-    network_id: *td_moov_africa_mobile
-  - id: 258314
-    prefix: '23599999902'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 304805e3-eb58-4d30-b55c-89db9626bd45
-    country_id: *td
-    network_id: *td_moov_africa_mobile
-  - id: 258315
-    prefix: '23599999905'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: c94f8b3e-2297-4386-bcae-e0211c7837f0
-    country_id: *td
-    network_id: *td_moov_africa_mobile
-  - id: 258316
-    prefix: '23599999906'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 18781f97-781d-48ca-a288-6aa8dc9865ae
-    country_id: *td
-    network_id: *td_moov_africa_mobile
 # Fixed Prefixes
   - id: 247442
     prefix: '2352'
     number_min_length: 11
     number_max_length: 11
     uuid: 817fc718-188d-452f-b3f1-aeaf1d0b245b
+    country_id: *td
+    network_id: *td_fixed
+  - id: 242113
+    prefix: '235'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 3e27db63-3b57-47fa-8067-913a38ccf0f7
     country_id: *td
     network_id: *td_fixed
   - id: 248279
@@ -571,6 +527,49 @@ network_prefixes:
     uuid: 02a6085d-4bc6-4b6a-bab0-5d6e82600659
     country_id: *td
     network_id: *td_mayo_kebbi_region
+# Mobile Prefixes
+  - id: 245427
+    prefix: '2356'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2aaea922-a4b8-489a-ac22-f31a7a51c188
+    country_id: *td
+    network_id: *td_airtel_mobile
+  - id: 257143
+    prefix: '2359'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b08ab4d-f2a2-4caa-ac75-21004457475c
+    country_id: *td
+    network_id: *td_moov_africa_mobile
+  - id: 258314
+    prefix: '23599999902'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 304805e3-eb58-4d30-b55c-89db9626bd45
+    country_id: *td
+    network_id: *td_moov_africa_mobile
+  - id: 258315
+    prefix: '23599999905'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: c94f8b3e-2297-4386-bcae-e0211c7837f0
+    country_id: *td
+    network_id: *td_moov_africa_mobile
+  - id: 258316
+    prefix: '23599999906'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 18781f97-781d-48ca-a288-6aa8dc9865ae
+    country_id: *td
+    network_id: *td_moov_africa_mobile
+  - id: 255281
+    prefix: '2357'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 20075eb8-c489-428a-bbca-5d329014a02f
+    country_id: *td
+    network_id: *td_salam_mobile
 # Supplementary services Prefixes
   - id: 253111
     prefix: '2358'

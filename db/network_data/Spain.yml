@@ -1,6 +1,10 @@
 country_id: &es 198
 networks:
 # Supplementary services Networks
+  - id: &es_sms_mms_services_free 22773
+    name: ES Sms_Mms Services Free
+    uuid: 583e1e8d-7f90-49e0-96d4-d4707dba973f
+    type_id: 13
   - id: &es_social_value_services 21272
     name: ES Social Value Services
     uuid: 414d783d-0c98-4fee-9527-0bde31db81b0
@@ -29,37 +33,9 @@ networks:
     name: ES Machine To Machine M2M Services
     uuid: 9336ce46-0d92-4ff7-a23e-2a43a0b9bae7
     type_id: 13
-  - id: &es_sms_mms_services_free 22773
-    name: ES Sms_Mms Services Free
-    uuid: 583e1e8d-7f90-49e0-96d4-d4707dba973f
-    type_id: 13
-  - id: &es_sms_mms_services_normal_rate 22822
-    name: ES Sms_Mms Services Normal Rate
-    uuid: d1069b83-7fe7-4987-8b57-b8c6de3977c7
-    type_id: 13
-  - id: &es_virtual_private_network 23319
-    name: ES Virtual Private Network
-    uuid: 0b3ba9e0-2d9a-45ac-a1fb-8e5444d7c8fb
-    type_id: 13
   - id: &es_freephone_services 23835
     name: ES Freephone Services
     uuid: 83b9cba9-cc9d-40a7-8d3c-cd064f65c37f
-    type_id: 13
-  - id: &es_adults_entertainment_services 23893
-    name: ES Adults Entertainment Services
-    uuid: 142eac5c-259d-420b-877e-8bdb005d2dbf
-    type_id: 13
-  - id: &es_entertainment_services 23897
-    name: ES Entertainment Services
-    uuid: 0d5c433e-7e8e-44ff-be5b-0a314716a8f4
-    type_id: 13
-  - id: &es_professional_services 23905
-    name: ES Professional Services
-    uuid: d0c7244a-ce9e-428f-a9c1-3f3fa795f39f
-    type_id: 13
-  - id: &es_personal_number_services 24161
-    name: ES Personal Number Services
-    uuid: 4835ada4-2e01-4a40-9454-c9d856184558
     type_id: 13
   - id: &es_shared_cost_services 24452
     name: ES Shared Cost Services
@@ -97,319 +73,58 @@ networks:
     name: ES Dial Up Internet Access
     uuid: 0e9ddc35-b130-4934-a459-0f0963b23ab6
     type_id: 13
-# Mobile Networks
-  - id: &es_telefonica_tech_ai_of_things_mobile 22498
-    name: ES Telefonica Tech Ai Of Things Mobile
-    uuid: bc410753-4a0b-4670-bf91-f92adef5ae5c
-    type_id: 3
-  - id: &es_movistar_mobile 22499
-    name: ES Movistar Mobile
-    uuid: 24e2fba7-11cf-4cab-9de7-ba377859eb52
-    type_id: 3
-  - id: &es_dialoga_mobile 22500
-    name: ES Dialoga Mobile
-    uuid: 4044fb90-a8ab-4809-b305-e98c7dfa124f
-    type_id: 3
-  - id: &es_alai_secure_mobile 22501
-    name: ES Alai Secure Mobile
-    uuid: ba650951-a315-4624-bfbf-46001c4fbb17
-    type_id: 3
-  - id: &es_suma_movil_mobile 22502
-    name: ES Suma Movil Mobile
-    uuid: 451c260d-8280-489f-bde2-0befb074a520
-    type_id: 3
-  - id: &es_gnet_mobile 22503
-    name: ES Gnet Mobile
-    uuid: 9bf037e5-0b17-4798-b8f2-e5abc072b827
-    type_id: 3
-  - id: &es_vodafone_mobile 22504
-    name: ES Vodafone Mobile
-    uuid: a01be809-ae63-4f56-8be1-dafb14dd023e
-    type_id: 3
-  - id: &es_yoigo_mobile 22505
-    name: ES Yoigo Mobile
-    uuid: 6af11df4-3003-4e3f-88c3-7e475534913b
-    type_id: 3
-  - id: &es_orange_mobile 22506
-    name: ES Orange Mobile
-    uuid: e981130b-2544-468f-a07b-9a51629142df
-    type_id: 3
-  - id: &es_mobil_r_telecable_movil_mobile 22507
-    name: ES Mobil R Telecable Movil Mobile
-    uuid: 51c0a3f0-23d2-44e5-b757-094ef37ac3cb
-    type_id: 3
-  - id: &es_cloudcomms_mobile 22508
-    name: ES Cloudcomms Mobile
-    uuid: f97c87b4-1d51-48be-a1e5-6be3b64e9eb7
-    type_id: 3
-  - id: &es_mobile 22526
-    name: ES Mobile
-    uuid: 9d3fde0c-df27-4692-b8b6-dffd11042a3f
-    type_id: 3
-  - id: &es_on_movil_mobile 22578
-    name: ES On Movil Mobile
-    uuid: 29b038a3-d8d6-4c9b-b24a-de0ee3ed8422
-    type_id: 3
-  - id: &es_enreach_mobile 22585
-    name: ES Enreach Mobile
-    uuid: 6105818e-fceb-45aa-a357-87c15591e673
-    type_id: 3
-  - id: &es_lemonvil_mobile 22586
-    name: ES Lemonvil Mobile
-    uuid: 951ef891-5bca-4e46-aea6-ef7855349bcb
-    type_id: 3
-  - id: &es_sewan_mobile 22590
-    name: ES Sewan Mobile
-    uuid: fec048e2-0072-4c6e-97cd-058f3de12896
-    type_id: 3
-  - id: &es_digimobil_mobile 23477
-    name: ES Digimobil Mobile
-    uuid: 1af79e3b-7c03-41f8-a045-e08d0056fda4
-    type_id: 3
-  - id: &es_simyo_mobile 23487
-    name: ES Simyo Mobile
-    uuid: c846a06c-2013-41ec-8fec-1b8fa8b89623
-    type_id: 3
-  - id: &es_lobster_mobile 23582
-    name: ES Lobster Mobile
-    uuid: f5a1e5da-2403-45f2-b9b5-cf64473fb5a5
-    type_id: 3
-  - id: &es_pepephone_mobile 23599
-    name: ES Pepephone Mobile
-    uuid: 8999eb0c-5e6b-4ba2-bfb5-852551b94c03
-    type_id: 3
-  - id: &es_jetnet_mobile 23711
-    name: ES Jetnet Mobile
-    uuid: a7a17a0d-b006-4690-8231-815ecda084b8
-    type_id: 3
-  - id: &es_ptv_telecom_movil_mobile 23712
-    name: ES Ptv Telecom Movil Mobile
-    uuid: af9bb5a9-b66c-4b62-8916-a92089ebb30d
-    type_id: 3
-  - id: &es_homespot_mobile 23713
-    name: ES Homespot Mobile
-    uuid: f2fc28cc-456a-489c-8f9e-cfd94f2672c0
-    type_id: 3
-  - id: &es_euskaltel_movil_mobile 23731
-    name: ES Euskaltel Movil Mobile
-    uuid: a73d5184-6353-4f86-9ae9-b2dcd9bd4020
-    type_id: 3
-  - id: &es_open_cable_mobile 23732
-    name: ES Open Cable Mobile
-    uuid: 90f9e709-3498-46e8-b9d0-b02f16d324e1
-    type_id: 3
-  - id: &es_avatel_movil_mobile 24020
-    name: ES Avatel Movil Mobile
-    uuid: d1a9027b-6c12-4928-9156-085a66221772
-    type_id: 3
-  - id: &es_suop_mobile 24021
-    name: ES Suop Mobile
-    uuid: cec1e737-ab32-4b72-9eb7-dce1273c9241
-    type_id: 3
-  - id: &es_dragonet_mobile 24022
-    name: ES Dragonet Mobile
-    uuid: 68ceaebe-af10-498d-842e-95c45968d8f5
-    type_id: 3
-  - id: &es_sarenet_movil_mobile 24023
-    name: ES Sarenet Movil Mobile
-    uuid: dffc58a4-5da4-4889-9886-9332ddc6583b
-    type_id: 3
-  - id: &es_vectone_mobile_mobile 24024
-    name: ES Vectone Mobile Mobile
-    uuid: 43d004f0-4fb2-447d-8bfc-865bcdf966c0
-    type_id: 3
-  - id: &es_footballerista_mobile_mobile 24037
-    name: ES Footballerista Mobile Mobile
-    uuid: c7789115-4cc0-446f-ba5f-e85a4c172691
-    type_id: 3
-  - id: &es_ion_mobile_mobile 24044
-    name: ES Ion Mobile Mobile
-    uuid: 4b0f8e9c-32fe-40e7-b365-faab629a939b
-    type_id: 3
-  - id: &es_cube_movil_mobile 24045
-    name: ES Cube Movil Mobile
-    uuid: 8a54be14-ea94-4941-9d89-0025d416f32e
-    type_id: 3
-  - id: &es_citelia_mobile 24046
-    name: ES Citelia Mobile
-    uuid: e4df80ca-0db8-455d-9953-716ec65f7e66
-    type_id: 3
-  - id: &es_quattre_mobile 24047
-    name: ES Quattre Mobile
-    uuid: bfd5041a-4853-4ca8-b47a-076f1ab633cf
-    type_id: 3
-  - id: &es_siptize_mobile 24048
-    name: ES Siptize Mobile
-    uuid: 4383c597-6dd2-47fd-b8f3-64fafbe2a756
-    type_id: 3
-  - id: &es_7play_mobile 24049
-    name: ES 7Play Mobile
-    uuid: 5de0b06c-74b5-423c-bafc-c5a2d639ccf4
-    type_id: 3
-  - id: &es_mas_ip_mobile 24050
-    name: ES Mas Ip Mobile
-    uuid: 730089d2-5a47-4294-a357-5375559b4080
-    type_id: 3
-  - id: &es_parlem_mobil_mobile 24052
-    name: ES Parlem Mobil Mobile
-    uuid: 4a8bcf48-bc32-4601-a49d-c25baf3f69e0
-    type_id: 3
-  - id: &es_fibracat_mobil_mobile 24054
-    name: ES Fibracat Mobil Mobile
-    uuid: 74f5afaf-b54f-41a3-862f-1aa99dbb86fc
-    type_id: 3
-  - id: &es_truphone_mobile 24078
-    name: ES Truphone Mobile
-    uuid: 5d370058-fb55-47fe-811b-3232a5ffcf7a
-    type_id: 3
-  - id: &es_olephone_mobile 24104
-    name: ES Olephone Mobile
-    uuid: 3332bc66-fcb4-4071-ab83-0d886662fdc6
-    type_id: 3
-  - id: &es_evolutio_mobile 24108
-    name: ES Evolutio Mobile
-    uuid: 194143b4-76e1-4f16-b83c-a07d56c05941
-    type_id: 3
-  - id: &es_you_mobile_mobile 24112
-    name: ES You Mobile Mobile
-    uuid: 783730bd-ae86-4e17-aad9-3641787e55c5
-    type_id: 3
+  - id: &es_sms_mms_services_normal_rate 22822
+    name: ES Sms_Mms Services Normal Rate
+    uuid: d1069b83-7fe7-4987-8b57-b8c6de3977c7
+    type_id: 13
+  - id: &es_virtual_private_network 23319
+    name: ES Virtual Private Network
+    uuid: 0b3ba9e0-2d9a-45ac-a1fb-8e5444d7c8fb
+    type_id: 13
+  - id: &es_personal_number_services 24161
+    name: ES Personal Number Services
+    uuid: 4835ada4-2e01-4a40-9454-c9d856184558
+    type_id: 13
+  - id: &es_adults_entertainment_services 23893
+    name: ES Adults Entertainment Services
+    uuid: 142eac5c-259d-420b-877e-8bdb005d2dbf
+    type_id: 13
+  - id: &es_entertainment_services 23897
+    name: ES Entertainment Services
+    uuid: 0d5c433e-7e8e-44ff-be5b-0a314716a8f4
+    type_id: 13
+  - id: &es_professional_services 23905
+    name: ES Professional Services
+    uuid: d0c7244a-ce9e-428f-a9c1-3f3fa795f39f
+    type_id: 13
 # Fixed Networks
-  - id: &es_voip_region 23339
-    name: ES Voip Region
-    uuid: 15f18484-d57d-4fd7-a6e0-20b94e1306a7
+  - id: &es_fixed 43407
+    name: ES Fixed
+    uuid: 38cbccdc-0d29-46fd-b025-c9f9ead6f712
     type_id: 2
-  - id: &es_pstn_and_voip_region 23787
-    name: ES Pstn And Voip Region
-    uuid: c88fcedf-f03a-4682-a749-74d30079b5b2
+  - id: &es_albacete_region 26093
+    name: ES Albacete Region
+    uuid: f6ac7468-6a19-4e64-84bd-dd8bf283d3d1
     type_id: 2
-  - id: &es_madrid_region 23920
-    name: ES Madrid Region
-    uuid: 6139b496-550f-4837-8c41-35339a108e02
+  - id: &es_albacete_voip_region 26094
+    name: ES Albacete Voip Region
+    uuid: c3daf6fb-f501-45bc-95e5-5d0eb96cbca7
     type_id: 2
-  - id: &es_madrid_voip_region 23929
-    name: ES Madrid Voip Region
-    uuid: 7acb8c96-1996-45c2-88fc-54e0c9fd1f09
+  - id: &es_murcia_region 26095
+    name: ES Murcia Region
+    uuid: 3d8e2183-b333-44e0-8050-5b518224534a
     type_id: 2
-  - id: &es_avila_region 23954
-    name: ES Avila Region
-    uuid: 29389dbd-6464-4923-bcc7-c9f08352d696
+  - id: &es_murcia_voip_region 26096
+    name: ES Murcia Voip Region
+    uuid: 9d13a592-a539-4647-8476-403c443b327d
     type_id: 2
-  - id: &es_avila_voip_region 23956
-    name: ES Avila Voip Region
-    uuid: 547e357a-fe7d-42d7-9f60-5c5064369bc6
+  - id: &es_cuenca_region 26097
+    name: ES Cuenca Region
+    uuid: a416e077-58fb-4259-87c2-2d1672bb9808
     type_id: 2
-  - id: &es_segovia_region 23957
-    name: ES Segovia Region
-    uuid: 7f36d5e0-d8b8-4439-9f4f-04108b646053
-    type_id: 2
-  - id: &es_segovia_voip_region 23958
-    name: ES Segovia Voip Region
-    uuid: cd4a2c60-7b42-4f9c-9b20-d3359d1b6702
-    type_id: 2
-  - id: &es_santa_cruz_de_tenerife_region 23960
-    name: ES Santa Cruz De Tenerife Region
-    uuid: 7e8a167b-e162-4193-bb51-be7efee1b2a9
-    type_id: 2
-  - id: &es_santa_cruz_de_tenerife_voip_region 23962
-    name: ES Santa Cruz De Tenerife Voip Region
-    uuid: f9e741c3-6743-43eb-ba1e-8263693aef27
-    type_id: 2
-  - id: &es_salamanca_region 23963
-    name: ES Salamanca Region
-    uuid: 37174ed7-a9ff-447f-b792-9535b76f6ee5
-    type_id: 2
-  - id: &es_salamanca_voip_region 23964
-    name: ES Salamanca Voip Region
-    uuid: 9c227c68-9303-452a-be39-7d29cf9f0c88
-    type_id: 2
-  - id: &es_badajoz_region 23965
-    name: ES Badajoz Region
-    uuid: 745ec316-1fe8-4900-bee0-c661ef2513ac
-    type_id: 2
-  - id: &es_badajoz_voip_region 23967
-    name: ES Badajoz Voip Region
-    uuid: 67e348bf-dad6-49b9-862c-e0f7c6545d87
-    type_id: 2
-  - id: &es_toledo_region 23968
-    name: ES Toledo Region
-    uuid: e4639e21-8f21-4c4e-837d-95516e9dc29d
-    type_id: 2
-  - id: &es_toledo_voip_region 23969
-    name: ES Toledo Voip Region
-    uuid: ebface7f-4cbb-4a6c-891a-23b92414750b
-    type_id: 2
-  - id: &es_ciudad_real_region 23970
-    name: ES Ciudad Real Region
-    uuid: a6e8104d-f0f1-4573-b64f-9e505047ba50
-    type_id: 2
-  - id: &es_ciudad_real_voip_region 23971
-    name: ES Ciudad Real Voip Region
-    uuid: 85d4bfe5-9f5a-4cb1-ab0b-c1a01512bea3
-    type_id: 2
-  - id: &es_caceres_region 23972
-    name: ES Caceres Region
-    uuid: 51aed316-9ee7-4b2f-9b61-cac51a59ef44
-    type_id: 2
-  - id: &es_caceres_voip_region 23973
-    name: ES Caceres Voip Region
-    uuid: 5d46d00b-44df-4975-935d-3c1228b26174
-    type_id: 2
-  - id: &es_las_palmas_region 23974
-    name: ES Las Palmas Region
-    uuid: 8f29f15a-a639-4c4d-beab-ff86227b0ffb
-    type_id: 2
-  - id: &es_las_palmas_voip_region 23975
-    name: ES Las Palmas Voip Region
-    uuid: 65724985-b79c-4e97-b9b8-e8bea1bfe8f2
-    type_id: 2
-  - id: &es_barcelona_region 23977
-    name: ES Barcelona Region
-    uuid: fbf78012-ab5b-44a7-857c-fbb980675def
-    type_id: 2
-  - id: &es_barcelona_voip_region 23983
-    name: ES Barcelona Voip Region
-    uuid: 17d40638-f54b-4af0-9e3c-1614c852878c
-    type_id: 2
-  - id: &es_la_rioja_region 24008
-    name: ES La Rioja Region
-    uuid: 3360c5d7-5e3c-4111-a402-5713b7808fc3
-    type_id: 2
-  - id: &es_la_rioja_voip_region 24009
-    name: ES La Rioja Voip Region
-    uuid: ec8864e4-9761-4bc6-b53c-bb655778382a
-    type_id: 2
-  - id: &es_cantabria_region 24010
-    name: ES Cantabria Region
-    uuid: ffa5024e-80bf-464f-bea8-af3c744c245e
-    type_id: 2
-  - id: &es_cantabria_voip_region 24011
-    name: ES Cantabria Voip Region
-    uuid: d978f220-34e0-4d16-97be-2db9d0efc92a
-    type_id: 2
-  - id: &es_guipuzcoa_region 24012
-    name: ES Guipuzcoa Region
-    uuid: 5db78eca-ea9a-4b84-a6b0-857c925f1282
-    type_id: 2
-  - id: &es_guipuzcoa_voip_region 24014
-    name: ES Guipuzcoa Voip Region
-    uuid: 3879babd-7cfb-44ad-9507-18759775ad3f
-    type_id: 2
-  - id: &es_vizcaya_region 24015
-    name: ES Vizcaya Region
-    uuid: 87ff07bf-2a05-4963-b85e-6dca033a09f7
-    type_id: 2
-  - id: &es_alava_region 24016
-    name: ES Alava Region
-    uuid: 60eed217-a7de-4f62-ad72-ad0d1f527829
-    type_id: 2
-  - id: &es_alava_voip_region 24017
-    name: ES Alava Voip Region
-    uuid: b7cfcb9e-30f6-4366-a526-11acb93d33e3
-    type_id: 2
-  - id: &es_vizcaya_voip_region 24018
-    name: ES Vizcaya Voip Region
-    uuid: b89a8816-ae65-4d12-9c04-d637afcdd315
+  - id: &es_cuenca_voip_region 26099
+    name: ES Cuenca Voip Region
+    uuid: 7e2331a1-3654-4b38-8c48-14f4bce22288
     type_id: 2
   - id: &es_illes_balears_region 24300
     name: ES Illes Balears Region
@@ -551,6 +266,142 @@ networks:
     name: ES Pstn And Special Services Region
     uuid: 09d8347f-4d71-4a49-b82c-113aaa418e3e
     type_id: 2
+  - id: &es_madrid_region 23920
+    name: ES Madrid Region
+    uuid: 6139b496-550f-4837-8c41-35339a108e02
+    type_id: 2
+  - id: &es_avila_region 23954
+    name: ES Avila Region
+    uuid: 29389dbd-6464-4923-bcc7-c9f08352d696
+    type_id: 2
+  - id: &es_segovia_region 23957
+    name: ES Segovia Region
+    uuid: 7f36d5e0-d8b8-4439-9f4f-04108b646053
+    type_id: 2
+  - id: &es_santa_cruz_de_tenerife_region 23960
+    name: ES Santa Cruz De Tenerife Region
+    uuid: 7e8a167b-e162-4193-bb51-be7efee1b2a9
+    type_id: 2
+  - id: &es_salamanca_region 23963
+    name: ES Salamanca Region
+    uuid: 37174ed7-a9ff-447f-b792-9535b76f6ee5
+    type_id: 2
+  - id: &es_badajoz_region 23965
+    name: ES Badajoz Region
+    uuid: 745ec316-1fe8-4900-bee0-c661ef2513ac
+    type_id: 2
+  - id: &es_toledo_region 23968
+    name: ES Toledo Region
+    uuid: e4639e21-8f21-4c4e-837d-95516e9dc29d
+    type_id: 2
+  - id: &es_ciudad_real_region 23970
+    name: ES Ciudad Real Region
+    uuid: a6e8104d-f0f1-4573-b64f-9e505047ba50
+    type_id: 2
+  - id: &es_caceres_region 23972
+    name: ES Caceres Region
+    uuid: 51aed316-9ee7-4b2f-9b61-cac51a59ef44
+    type_id: 2
+  - id: &es_las_palmas_region 23974
+    name: ES Las Palmas Region
+    uuid: 8f29f15a-a639-4c4d-beab-ff86227b0ffb
+    type_id: 2
+  - id: &es_voip_region 23339
+    name: ES Voip Region
+    uuid: 15f18484-d57d-4fd7-a6e0-20b94e1306a7
+    type_id: 2
+  - id: &es_pstn_and_voip_region 23787
+    name: ES Pstn And Voip Region
+    uuid: c88fcedf-f03a-4682-a749-74d30079b5b2
+    type_id: 2
+  - id: &es_madrid_voip_region 23929
+    name: ES Madrid Voip Region
+    uuid: 7acb8c96-1996-45c2-88fc-54e0c9fd1f09
+    type_id: 2
+  - id: &es_avila_voip_region 23956
+    name: ES Avila Voip Region
+    uuid: 547e357a-fe7d-42d7-9f60-5c5064369bc6
+    type_id: 2
+  - id: &es_segovia_voip_region 23958
+    name: ES Segovia Voip Region
+    uuid: cd4a2c60-7b42-4f9c-9b20-d3359d1b6702
+    type_id: 2
+  - id: &es_santa_cruz_de_tenerife_voip_region 23962
+    name: ES Santa Cruz De Tenerife Voip Region
+    uuid: f9e741c3-6743-43eb-ba1e-8263693aef27
+    type_id: 2
+  - id: &es_salamanca_voip_region 23964
+    name: ES Salamanca Voip Region
+    uuid: 9c227c68-9303-452a-be39-7d29cf9f0c88
+    type_id: 2
+  - id: &es_badajoz_voip_region 23967
+    name: ES Badajoz Voip Region
+    uuid: 67e348bf-dad6-49b9-862c-e0f7c6545d87
+    type_id: 2
+  - id: &es_toledo_voip_region 23969
+    name: ES Toledo Voip Region
+    uuid: ebface7f-4cbb-4a6c-891a-23b92414750b
+    type_id: 2
+  - id: &es_ciudad_real_voip_region 23971
+    name: ES Ciudad Real Voip Region
+    uuid: 85d4bfe5-9f5a-4cb1-ab0b-c1a01512bea3
+    type_id: 2
+  - id: &es_caceres_voip_region 23973
+    name: ES Caceres Voip Region
+    uuid: 5d46d00b-44df-4975-935d-3c1228b26174
+    type_id: 2
+  - id: &es_las_palmas_voip_region 23975
+    name: ES Las Palmas Voip Region
+    uuid: 65724985-b79c-4e97-b9b8-e8bea1bfe8f2
+    type_id: 2
+  - id: &es_barcelona_region 23977
+    name: ES Barcelona Region
+    uuid: fbf78012-ab5b-44a7-857c-fbb980675def
+    type_id: 2
+  - id: &es_barcelona_voip_region 23983
+    name: ES Barcelona Voip Region
+    uuid: 17d40638-f54b-4af0-9e3c-1614c852878c
+    type_id: 2
+  - id: &es_la_rioja_region 24008
+    name: ES La Rioja Region
+    uuid: 3360c5d7-5e3c-4111-a402-5713b7808fc3
+    type_id: 2
+  - id: &es_la_rioja_voip_region 24009
+    name: ES La Rioja Voip Region
+    uuid: ec8864e4-9761-4bc6-b53c-bb655778382a
+    type_id: 2
+  - id: &es_cantabria_region 24010
+    name: ES Cantabria Region
+    uuid: ffa5024e-80bf-464f-bea8-af3c744c245e
+    type_id: 2
+  - id: &es_cantabria_voip_region 24011
+    name: ES Cantabria Voip Region
+    uuid: d978f220-34e0-4d16-97be-2db9d0efc92a
+    type_id: 2
+  - id: &es_guipuzcoa_region 24012
+    name: ES Guipuzcoa Region
+    uuid: 5db78eca-ea9a-4b84-a6b0-857c925f1282
+    type_id: 2
+  - id: &es_guipuzcoa_voip_region 24014
+    name: ES Guipuzcoa Voip Region
+    uuid: 3879babd-7cfb-44ad-9507-18759775ad3f
+    type_id: 2
+  - id: &es_vizcaya_region 24015
+    name: ES Vizcaya Region
+    uuid: 87ff07bf-2a05-4963-b85e-6dca033a09f7
+    type_id: 2
+  - id: &es_alava_region 24016
+    name: ES Alava Region
+    uuid: 60eed217-a7de-4f62-ad72-ad0d1f527829
+    type_id: 2
+  - id: &es_alava_voip_region 24017
+    name: ES Alava Voip Region
+    uuid: b7cfcb9e-30f6-4366-a526-11acb93d33e3
+    type_id: 2
+  - id: &es_vizcaya_voip_region 24018
+    name: ES Vizcaya Voip Region
+    uuid: b89a8816-ae65-4d12-9c04-d637afcdd315
+    type_id: 2
   - id: &es_burgos_region 26046
     name: ES Burgos Region
     uuid: ed31bb22-2416-42aa-a8bf-7d598d4d638f
@@ -663,40 +514,199 @@ networks:
     name: ES Alicante Voip Region
     uuid: d2d90e03-1665-4210-8988-bbb6793730e6
     type_id: 2
-  - id: &es_albacete_region 26093
-    name: ES Albacete Region
-    uuid: f6ac7468-6a19-4e64-84bd-dd8bf283d3d1
-    type_id: 2
-  - id: &es_albacete_voip_region 26094
-    name: ES Albacete Voip Region
-    uuid: c3daf6fb-f501-45bc-95e5-5d0eb96cbca7
-    type_id: 2
-  - id: &es_murcia_region 26095
-    name: ES Murcia Region
-    uuid: 3d8e2183-b333-44e0-8050-5b518224534a
-    type_id: 2
-  - id: &es_murcia_voip_region 26096
-    name: ES Murcia Voip Region
-    uuid: 9d13a592-a539-4647-8476-403c443b327d
-    type_id: 2
-  - id: &es_cuenca_region 26097
-    name: ES Cuenca Region
-    uuid: a416e077-58fb-4259-87c2-2d1672bb9808
-    type_id: 2
-  - id: &es_cuenca_voip_region 26099
-    name: ES Cuenca Voip Region
-    uuid: 7e2331a1-3654-4b38-8c48-14f4bce22288
-    type_id: 2
+# Mobile Networks
+  - id: &es_telefonica_tech_ai_of_things_mobile 22498
+    name: ES Telefonica Tech Ai Of Things Mobile
+    uuid: bc410753-4a0b-4670-bf91-f92adef5ae5c
+    type_id: 3
+  - id: &es_movistar_mobile 22499
+    name: ES Movistar Mobile
+    uuid: 24e2fba7-11cf-4cab-9de7-ba377859eb52
+    type_id: 3
+  - id: &es_dialoga_mobile 22500
+    name: ES Dialoga Mobile
+    uuid: 4044fb90-a8ab-4809-b305-e98c7dfa124f
+    type_id: 3
+  - id: &es_alai_secure_mobile 22501
+    name: ES Alai Secure Mobile
+    uuid: ba650951-a315-4624-bfbf-46001c4fbb17
+    type_id: 3
+  - id: &es_suma_movil_mobile 22502
+    name: ES Suma Movil Mobile
+    uuid: 451c260d-8280-489f-bde2-0befb074a520
+    type_id: 3
+  - id: &es_gnet_mobile 22503
+    name: ES Gnet Mobile
+    uuid: 9bf037e5-0b17-4798-b8f2-e5abc072b827
+    type_id: 3
+  - id: &es_vodafone_mobile 22504
+    name: ES Vodafone Mobile
+    uuid: a01be809-ae63-4f56-8be1-dafb14dd023e
+    type_id: 3
+  - id: &es_yoigo_mobile 22505
+    name: ES Yoigo Mobile
+    uuid: 6af11df4-3003-4e3f-88c3-7e475534913b
+    type_id: 3
+  - id: &es_orange_mobile 22506
+    name: ES Orange Mobile
+    uuid: e981130b-2544-468f-a07b-9a51629142df
+    type_id: 3
+  - id: &es_mobil_r_telecable_movil_mobile 22507
+    name: ES Mobil R Telecable Movil Mobile
+    uuid: 51c0a3f0-23d2-44e5-b757-094ef37ac3cb
+    type_id: 3
+  - id: &es_cloudcomms_mobile 22508
+    name: ES Cloudcomms Mobile
+    uuid: f97c87b4-1d51-48be-a1e5-6be3b64e9eb7
+    type_id: 3
+  - id: &es_mobile 22526
+    name: ES Mobile
+    uuid: 9d3fde0c-df27-4692-b8b6-dffd11042a3f
+    type_id: 3
+  - id: &es_on_movil_mobile 22578
+    name: ES On Movil Mobile
+    uuid: 29b038a3-d8d6-4c9b-b24a-de0ee3ed8422
+    type_id: 3
+  - id: &es_enreach_mobile 22585
+    name: ES Enreach Mobile
+    uuid: 6105818e-fceb-45aa-a357-87c15591e673
+    type_id: 3
+  - id: &es_lemonvil_mobile 22586
+    name: ES Lemonvil Mobile
+    uuid: 951ef891-5bca-4e46-aea6-ef7855349bcb
+    type_id: 3
+  - id: &es_sewan_mobile 22590
+    name: ES Sewan Mobile
+    uuid: fec048e2-0072-4c6e-97cd-058f3de12896
+    type_id: 3
+  - id: &es_avatel_movil_mobile 24020
+    name: ES Avatel Movil Mobile
+    uuid: d1a9027b-6c12-4928-9156-085a66221772
+    type_id: 3
+  - id: &es_suop_mobile 24021
+    name: ES Suop Mobile
+    uuid: cec1e737-ab32-4b72-9eb7-dce1273c9241
+    type_id: 3
+  - id: &es_dragonet_mobile 24022
+    name: ES Dragonet Mobile
+    uuid: 68ceaebe-af10-498d-842e-95c45968d8f5
+    type_id: 3
+  - id: &es_sarenet_movil_mobile 24023
+    name: ES Sarenet Movil Mobile
+    uuid: dffc58a4-5da4-4889-9886-9332ddc6583b
+    type_id: 3
+  - id: &es_vectone_mobile_mobile 24024
+    name: ES Vectone Mobile Mobile
+    uuid: 43d004f0-4fb2-447d-8bfc-865bcdf966c0
+    type_id: 3
+  - id: &es_digimobil_mobile 23477
+    name: ES Digimobil Mobile
+    uuid: 1af79e3b-7c03-41f8-a045-e08d0056fda4
+    type_id: 3
+  - id: &es_simyo_mobile 23487
+    name: ES Simyo Mobile
+    uuid: c846a06c-2013-41ec-8fec-1b8fa8b89623
+    type_id: 3
+  - id: &es_footballerista_mobile_mobile 24037
+    name: ES Footballerista Mobile Mobile
+    uuid: c7789115-4cc0-446f-ba5f-e85a4c172691
+    type_id: 3
+  - id: &es_pepephone_mobile 23599
+    name: ES Pepephone Mobile
+    uuid: 8999eb0c-5e6b-4ba2-bfb5-852551b94c03
+    type_id: 3
+  - id: &es_ion_mobile_mobile 24044
+    name: ES Ion Mobile Mobile
+    uuid: 4b0f8e9c-32fe-40e7-b365-faab629a939b
+    type_id: 3
+  - id: &es_cube_movil_mobile 24045
+    name: ES Cube Movil Mobile
+    uuid: 8a54be14-ea94-4941-9d89-0025d416f32e
+    type_id: 3
+  - id: &es_citelia_mobile 24046
+    name: ES Citelia Mobile
+    uuid: e4df80ca-0db8-455d-9953-716ec65f7e66
+    type_id: 3
+  - id: &es_quattre_mobile 24047
+    name: ES Quattre Mobile
+    uuid: bfd5041a-4853-4ca8-b47a-076f1ab633cf
+    type_id: 3
+  - id: &es_siptize_mobile 24048
+    name: ES Siptize Mobile
+    uuid: 4383c597-6dd2-47fd-b8f3-64fafbe2a756
+    type_id: 3
+  - id: &es_7play_mobile 24049
+    name: ES 7Play Mobile
+    uuid: 5de0b06c-74b5-423c-bafc-c5a2d639ccf4
+    type_id: 3
+  - id: &es_mas_ip_mobile 24050
+    name: ES Mas Ip Mobile
+    uuid: 730089d2-5a47-4294-a357-5375559b4080
+    type_id: 3
+  - id: &es_parlem_mobil_mobile 24052
+    name: ES Parlem Mobil Mobile
+    uuid: 4a8bcf48-bc32-4601-a49d-c25baf3f69e0
+    type_id: 3
+  - id: &es_fibracat_mobil_mobile 24054
+    name: ES Fibracat Mobil Mobile
+    uuid: 74f5afaf-b54f-41a3-862f-1aa99dbb86fc
+    type_id: 3
+  - id: &es_lobster_mobile 23582
+    name: ES Lobster Mobile
+    uuid: f5a1e5da-2403-45f2-b9b5-cf64473fb5a5
+    type_id: 3
+  - id: &es_jetnet_mobile 23711
+    name: ES Jetnet Mobile
+    uuid: a7a17a0d-b006-4690-8231-815ecda084b8
+    type_id: 3
+  - id: &es_ptv_telecom_movil_mobile 23712
+    name: ES Ptv Telecom Movil Mobile
+    uuid: af9bb5a9-b66c-4b62-8916-a92089ebb30d
+    type_id: 3
+  - id: &es_homespot_mobile 23713
+    name: ES Homespot Mobile
+    uuid: f2fc28cc-456a-489c-8f9e-cfd94f2672c0
+    type_id: 3
+  - id: &es_euskaltel_movil_mobile 23731
+    name: ES Euskaltel Movil Mobile
+    uuid: a73d5184-6353-4f86-9ae9-b2dcd9bd4020
+    type_id: 3
+  - id: &es_open_cable_mobile 23732
+    name: ES Open Cable Mobile
+    uuid: 90f9e709-3498-46e8-b9d0-b02f16d324e1
+    type_id: 3
+  - id: &es_truphone_mobile 24078
+    name: ES Truphone Mobile
+    uuid: 5d370058-fb55-47fe-811b-3232a5ffcf7a
+    type_id: 3
+  - id: &es_olephone_mobile 24104
+    name: ES Olephone Mobile
+    uuid: 3332bc66-fcb4-4071-ab83-0d886662fdc6
+    type_id: 3
+  - id: &es_evolutio_mobile 24108
+    name: ES Evolutio Mobile
+    uuid: 194143b4-76e1-4f16-b83c-a07d56c05941
+    type_id: 3
+  - id: &es_you_mobile_mobile 24112
+    name: ES You Mobile Mobile
+    uuid: 783730bd-ae86-4e17-aad9-3641787e55c5
+    type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 241988
-    prefix: '34'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 0c988b8d-8e60-4ed5-9a80-42bc121c094f
-    country_id: *es
-    network_id: null
 # Supplementary services Prefixes
+  - id: 247542
+    prefix: '34205'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: d63566b3-6496-47c1-ad95-a2bd73cdeb43
+    country_id: *es
+    network_id: *es_sms_mms_services_free
+  - id: 247561
+    prefix: '34207'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f9889f24-7baa-4d8b-8415-e8cd53581587
+    country_id: *es
+    network_id: *es_sms_mms_services_free
   - id: 242143
     prefix: '340'
     number_min_length: 5
@@ -767,160 +777,6 @@ network_prefixes:
     uuid: 9f96b4b3-a9d4-455e-8701-342452de3099
     country_id: *es
     network_id: *es_machine_to_machine_m2m_services
-  - id: 247542
-    prefix: '34205'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: d63566b3-6496-47c1-ad95-a2bd73cdeb43
-    country_id: *es
-    network_id: *es_sms_mms_services_free
-  - id: 247561
-    prefix: '34207'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: f9889f24-7baa-4d8b-8415-e8cd53581587
-    country_id: *es
-    network_id: *es_sms_mms_services_free
-  - id: 247673
-    prefix: '34215'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 92a83895-17fd-4bb4-a781-5717a835df1e
-    country_id: *es
-    network_id: *es_sms_mms_services_normal_rate
-  - id: 247681
-    prefix: '34217'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: a2b22bd5-c40f-4221-a4bb-19e22c819e47
-    country_id: *es
-    network_id: *es_sms_mms_services_normal_rate
-  - id: 247915
-    prefix: '3423'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 25fd8117-6fae-4b12-a781-391cafa4668a
-    country_id: *es
-    network_id: *es_sms_mms_services_premium_rate
-  - id: 248255
-    prefix: '3425'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 22eb1bf4-8202-4f87-8dbc-794aa6ab713a
-    country_id: *es
-    network_id: *es_sms_mms_services_premium_rate
-  - id: 248609
-    prefix: '3427'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 222dc67f-a584-4893-88ab-b67cfdc3f06a
-    country_id: *es
-    network_id: *es_sms_mms_services_premium_rate
-  - id: 248761
-    prefix: '34280'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 1003fd78-b0c9-476c-88d0-1441c45240be
-    country_id: *es
-    network_id: *es_sms_mms_services_premium_rate
-  - id: 249619
-    prefix: '3450'
-    number_min_length: 7
-    number_max_length: 15
-    uuid: 39c3f177-d06e-468c-84e2-9166988607bb
-    country_id: *es
-    network_id: *es_virtual_private_network
-  - id: 249631
-    prefix: '34500'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 442a4d15-502a-4614-9733-f6534e690d67
-    country_id: *es
-    network_id: *es_virtual_private_network
-  - id: 249642
-    prefix: '34501'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 29999522-919f-4cae-86f5-7f95bc7097ce
-    country_id: *es
-    network_id: *es_virtual_private_network
-  - id: 249647
-    prefix: '34502'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 966ec05a-12db-46e3-bf2e-677a76f9d82b
-    country_id: *es
-    network_id: *es_virtual_private_network
-  - id: 249660
-    prefix: '34506'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f1a424c-33ae-4627-b7b8-52d1dc715cd5
-    country_id: *es
-    network_id: *es_virtual_private_network
-  - id: 249682
-    prefix: '34509'
-    number_min_length: 7
-    number_max_length: 15
-    uuid: 48b17c38-8984-41d4-a532-bd4a8639b1b7
-    country_id: *es
-    network_id: *es_virtual_private_network
-  - id: 253145
-    prefix: '34800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6b6dd1d5-e393-4bb4-9e93-2c5a9f42e2aa
-    country_id: *es
-    network_id: *es_freephone_services
-  - id: 253231
-    prefix: '34803'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 42554ca8-0194-4048-b416-b4e55d846080
-    country_id: *es
-    network_id: *es_adults_entertainment_services
-  - id: 253258
-    prefix: '34806'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 69b1778c-0b0d-4a1f-a57f-76728fa87185
-    country_id: *es
-    network_id: *es_entertainment_services
-  - id: 253268
-    prefix: '34807'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8de6cd4-65e8-4d36-9b19-da0285609afc
-    country_id: *es
-    network_id: *es_professional_services
-  - id: 255292
-    prefix: '3470'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ab5f358e-6e56-4ab8-96e5-b7fb31f4ca19
-    country_id: *es
-    network_id: *es_personal_number_services
-  - id: 256569
-    prefix: '34795'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 79048d06-7265-4689-8fd3-c0ea8bda2482
-    country_id: *es
-    network_id: *es_sms_mms_services_premium_rate
-  - id: 256588
-    prefix: '34797'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 93b9eb94-f5dd-406a-b4f3-cacdbb9958e2
-    country_id: *es
-    network_id: *es_sms_mms_services_premium_rate
-  - id: 256618
-    prefix: '347980'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 4a1489f8-0d13-4fbc-a7a7-995520175568
-    country_id: *es
-    network_id: *es_sms_mms_services_fundraising
   - id: 257176
     prefix: '34900'
     number_min_length: 11
@@ -1054,6 +910,1407 @@ network_prefixes:
     uuid: 08a895c9-3fdf-47ff-959b-1739c85e3e95
     country_id: *es
     network_id: *es_sms_mms_services_premium_rate
+  - id: 247673
+    prefix: '34215'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 92a83895-17fd-4bb4-a781-5717a835df1e
+    country_id: *es
+    network_id: *es_sms_mms_services_normal_rate
+  - id: 247681
+    prefix: '34217'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: a2b22bd5-c40f-4221-a4bb-19e22c819e47
+    country_id: *es
+    network_id: *es_sms_mms_services_normal_rate
+  - id: 247915
+    prefix: '3423'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 25fd8117-6fae-4b12-a781-391cafa4668a
+    country_id: *es
+    network_id: *es_sms_mms_services_premium_rate
+  - id: 248255
+    prefix: '3425'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 22eb1bf4-8202-4f87-8dbc-794aa6ab713a
+    country_id: *es
+    network_id: *es_sms_mms_services_premium_rate
+  - id: 248609
+    prefix: '3427'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 222dc67f-a584-4893-88ab-b67cfdc3f06a
+    country_id: *es
+    network_id: *es_sms_mms_services_premium_rate
+  - id: 248761
+    prefix: '34280'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 1003fd78-b0c9-476c-88d0-1441c45240be
+    country_id: *es
+    network_id: *es_sms_mms_services_premium_rate
+  - id: 249619
+    prefix: '3450'
+    number_min_length: 7
+    number_max_length: 15
+    uuid: 39c3f177-d06e-468c-84e2-9166988607bb
+    country_id: *es
+    network_id: *es_virtual_private_network
+  - id: 249631
+    prefix: '34500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 442a4d15-502a-4614-9733-f6534e690d67
+    country_id: *es
+    network_id: *es_virtual_private_network
+  - id: 249642
+    prefix: '34501'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 29999522-919f-4cae-86f5-7f95bc7097ce
+    country_id: *es
+    network_id: *es_virtual_private_network
+  - id: 249647
+    prefix: '34502'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 966ec05a-12db-46e3-bf2e-677a76f9d82b
+    country_id: *es
+    network_id: *es_virtual_private_network
+  - id: 249660
+    prefix: '34506'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f1a424c-33ae-4627-b7b8-52d1dc715cd5
+    country_id: *es
+    network_id: *es_virtual_private_network
+  - id: 249682
+    prefix: '34509'
+    number_min_length: 7
+    number_max_length: 15
+    uuid: 48b17c38-8984-41d4-a532-bd4a8639b1b7
+    country_id: *es
+    network_id: *es_virtual_private_network
+  - id: 255292
+    prefix: '3470'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ab5f358e-6e56-4ab8-96e5-b7fb31f4ca19
+    country_id: *es
+    network_id: *es_personal_number_services
+  - id: 256569
+    prefix: '34795'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 79048d06-7265-4689-8fd3-c0ea8bda2482
+    country_id: *es
+    network_id: *es_sms_mms_services_premium_rate
+  - id: 256588
+    prefix: '34797'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 93b9eb94-f5dd-406a-b4f3-cacdbb9958e2
+    country_id: *es
+    network_id: *es_sms_mms_services_premium_rate
+  - id: 256618
+    prefix: '347980'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 4a1489f8-0d13-4fbc-a7a7-995520175568
+    country_id: *es
+    network_id: *es_sms_mms_services_fundraising
+  - id: 253145
+    prefix: '34800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6b6dd1d5-e393-4bb4-9e93-2c5a9f42e2aa
+    country_id: *es
+    network_id: *es_freephone_services
+  - id: 253231
+    prefix: '34803'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 42554ca8-0194-4048-b416-b4e55d846080
+    country_id: *es
+    network_id: *es_adults_entertainment_services
+  - id: 253258
+    prefix: '34806'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 69b1778c-0b0d-4a1f-a57f-76728fa87185
+    country_id: *es
+    network_id: *es_entertainment_services
+  - id: 253268
+    prefix: '34807'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8de6cd4-65e8-4d36-9b19-da0285609afc
+    country_id: *es
+    network_id: *es_professional_services
+# Fixed Prefixes
+  - id: 241988
+    prefix: '34'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 0c988b8d-8e60-4ed5-9a80-42bc121c094f
+    country_id: *es
+    network_id: *es_fixed
+  - id: 263958
+    prefix: '34867'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f7d1959-966c-47e6-9cb8-acd6d482d7d2
+    country_id: *es
+    network_id: *es_albacete_region
+  - id: 263961
+    prefix: '348670'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c0ad5f52-780d-46e6-9e74-9f94e7e71523
+    country_id: *es
+    network_id: *es_albacete_voip_region
+  - id: 263962
+    prefix: '34868'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd5e5f36-8f2b-494d-ba37-aaa32d2ca5e6
+    country_id: *es
+    network_id: *es_murcia_region
+  - id: 263974
+    prefix: '348685'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 88e14f58-e024-49cc-8262-738e81555084
+    country_id: *es
+    network_id: *es_murcia_voip_region
+  - id: 263980
+    prefix: '34869'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4c99611c-9a7f-4042-b9d1-e027e2a59a02
+    country_id: *es
+    network_id: *es_cuenca_region
+  - id: 263983
+    prefix: '348690'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be93254b-24af-475f-a555-a363c779c5f8
+    country_id: *es
+    network_id: *es_cuenca_voip_region
+  - id: 256689
+    prefix: '34871'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b30ee79-6d70-4f70-9193-5cba55ff9728
+    country_id: *es
+    network_id: *es_illes_balears_region
+  - id: 256697
+    prefix: '348713'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 865c7014-f576-4c35-aa35-df7f5d9c9b36
+    country_id: *es
+    network_id: *es_illes_balears_voip_region
+  - id: 256699
+    prefix: '348714'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c16fd6f2-d02e-45be-a41b-48da4bd1d9b8
+    country_id: *es
+    network_id: *es_illes_balears_voip_region
+  - id: 256706
+    prefix: '34872'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3c3cb176-07ce-4a87-b28e-aa7adbfb6974
+    country_id: *es
+    network_id: *es_girona_region
+  - id: 256713
+    prefix: '348721'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 51ba77a5-a606-4706-a25c-922a9104ec23
+    country_id: *es
+    network_id: *es_girona_voip_region
+  - id: 256723
+    prefix: '34873'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28c2d188-9199-487e-b802-a16fcd2778b5
+    country_id: *es
+    network_id: *es_lleida_region
+  - id: 256728
+    prefix: '348730'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7dca5902-28ff-4bb0-b8d0-a6649fcbf8ba
+    country_id: *es
+    network_id: *es_lleida_voip_region
+  - id: 256739
+    prefix: '34874'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 70bac743-8fe9-4874-a177-9604bdb55790
+    country_id: *es
+    network_id: *es_huesca_region
+  - id: 256743
+    prefix: '348740'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3561658d-db18-49d6-8659-e156b698bd97
+    country_id: *es
+    network_id: *es_huesca_voip_region
+  - id: 256755
+    prefix: '34875'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db0a6f65-9619-4839-a59e-62fbee380e6c
+    country_id: *es
+    network_id: *es_soria_region
+  - id: 256758
+    prefix: '348750'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f90aded-01e6-49da-9ac6-c12e786dbfba
+    country_id: *es
+    network_id: *es_soria_voip_region
+  - id: 256769
+    prefix: '34876'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e825468a-886e-4902-a4ff-d3071bcbac51
+    country_id: *es
+    network_id: *es_zaragoza_region
+  - id: 256776
+    prefix: '348763'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bcb3434d-6e05-42cc-a369-885ba06074cd
+    country_id: *es
+    network_id: *es_zaragoza_voip_region
+  - id: 256785
+    prefix: '34877'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a42f1881-7bff-4ca1-9229-a0c64dbc9a58
+    country_id: *es
+    network_id: *es_tarragona_region
+  - id: 256789
+    prefix: '348771'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb423227-d70a-40e8-8579-bc86edac8630
+    country_id: *es
+    network_id: *es_tarragona_voip_region
+  - id: 256800
+    prefix: '34878'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ad1cfaa5-835b-4886-b28c-afcef7537cc7
+    country_id: *es
+    network_id: *es_teruel_region
+  - id: 256804
+    prefix: '348780'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7b3c213-8ca5-4bcf-9729-e38cf8021262
+    country_id: *es
+    network_id: *es_teruel_voip_region
+  - id: 256815
+    prefix: '34879'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c5186af7-0358-45f6-9e04-7e33409dcc2b
+    country_id: *es
+    network_id: *es_palencia_region
+  - id: 256819
+    prefix: '348790'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2f90562-9976-40d7-a10d-12bcd8c61ca3
+    country_id: *es
+    network_id: *es_palencia_voip_region
+  - id: 256854
+    prefix: '34880'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e468ed22-8971-495c-985e-095c597cd60e
+    country_id: *es
+    network_id: *es_zamora_region
+  - id: 256860
+    prefix: '348800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b8ef425c-c62b-4a2b-b7bb-bb6278b9dc15
+    country_id: *es
+    network_id: *es_zamora_voip_region
+  - id: 256872
+    prefix: '34881'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d031a205-c521-4c16-8ea6-78b563d368b8
+    country_id: *es
+    network_id: *es_a_coruna_region
+  - id: 256882
+    prefix: '348814'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 198d486f-c2ed-43a3-b1e5-c5d17c9cf2ca
+    country_id: *es
+    network_id: *es_a_coruna_voip_region
+  - id: 256889
+    prefix: '348817'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: afdac70e-1554-4ec9-8794-3443915cec96
+    country_id: *es
+    network_id: *es_a_coruna_voip_region
+  - id: 256896
+    prefix: '34882'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 134841a0-9b0c-482c-9b68-1c46a32a9795
+    country_id: *es
+    network_id: *es_lugo_region
+  - id: 256900
+    prefix: '348820'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 901cb825-65af-45a6-af10-04c628005b7e
+    country_id: *es
+    network_id: *es_lugo_voip_region
+  - id: 256913
+    prefix: '34883'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 21e1ed13-335b-46d3-9932-d439cee7a5cc
+    country_id: *es
+    network_id: *es_valladolid_region
+  - id: 256916
+    prefix: '348830'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ecbdfcaf-cebf-44d7-93d7-a6a6d4c31e19
+    country_id: *es
+    network_id: *es_valladolid_voip_region
+  - id: 256930
+    prefix: '34884'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e8047b6-ee4e-4af0-ac24-0a0cb3eece6b
+    country_id: *es
+    network_id: *es_asturias_region
+  - id: 256933
+    prefix: '348840'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f20d6eb7-7730-4f60-8b81-2ec00c7d7a53
+    country_id: *es
+    network_id: *es_asturias_voip_region
+  - id: 256935
+    prefix: '348841'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0306c4ff-a434-4933-ad91-b72163d65247
+    country_id: *es
+    network_id: *es_asturias_voip_region
+  - id: 256942
+    prefix: '34885'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b931a401-bec9-4a85-804d-d9266593697a
+    country_id: *es
+    network_id: *es_asturias_region
+  - id: 256950
+    prefix: '34886'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05442e10-9169-41df-8966-205b0eb95872
+    country_id: *es
+    network_id: *es_pontevedra_region
+  - id: 256956
+    prefix: '348865'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b7d045a-23dd-4398-9418-8cd8c29c77d8
+    country_id: *es
+    network_id: *es_pontevedra_voip_region
+  - id: 256958
+    prefix: '348867'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07aea001-5946-4598-b5e2-5e48e58a96c1
+    country_id: *es
+    network_id: *es_pontevedra_voip_region
+  - id: 256961
+    prefix: '34887'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cdaaded6-1fc8-4cd7-89e8-82e2efec8d72
+    country_id: *es
+    network_id: *es_leon_region
+  - id: 256965
+    prefix: '348870'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f5a6346-1fd2-4ef0-9dd5-8b499ab35721
+    country_id: *es
+    network_id: *es_leon_voip_region
+  - id: 256968
+    prefix: '34888'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f76fe01e-aff5-4607-8359-17fc837bcb13
+    country_id: *es
+    network_id: *es_ourense_region
+  - id: 256973
+    prefix: '348880'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34ffcde8-9533-4999-b048-436f4ec35b6f
+    country_id: *es
+    network_id: *es_ourense_voip_region
+  - id: 257093
+    prefix: '349'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5b9090e-7da4-4b14-b6a1-3806e6b40ac4
+    country_id: *es
+    network_id: *es_pstn_and_special_services_region
+  - id: 257359
+    prefix: '3491'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 53a40b31-603e-4716-a634-c54917ce89bd
+    country_id: *es
+    network_id: *es_madrid_region
+  - id: 257601
+    prefix: '34920'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5176513-356c-4ac9-9d66-2e9df0a28864
+    country_id: *es
+    network_id: *es_avila_region
+  - id: 257621
+    prefix: '34921'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c55e0f0-d08f-4ccf-83b2-a57f3ec3b0c6
+    country_id: *es
+    network_id: *es_segovia_region
+  - id: 257649
+    prefix: '34922'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b5b096e5-ac76-481b-bb8a-5fe73e4cd501
+    country_id: *es
+    network_id: *es_santa_cruz_de_tenerife_region
+  - id: 257672
+    prefix: '34923'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3fbc4e63-ece6-4047-baf6-8da01b2de950
+    country_id: *es
+    network_id: *es_salamanca_region
+  - id: 257707
+    prefix: '34924'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f013fa05-0738-42c8-a62b-20519c85c9c0
+    country_id: *es
+    network_id: *es_badajoz_region
+  - id: 257723
+    prefix: '34925'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8758c08e-64e2-4eaa-b567-4e1006b7419d
+    country_id: *es
+    network_id: *es_toledo_region
+  - id: 257740
+    prefix: '34926'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f2067618-7fae-4663-9a54-244f0c809dc6
+    country_id: *es
+    network_id: *es_ciudad_real_region
+  - id: 257765
+    prefix: '34927'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b973c9f3-968c-42b3-8db4-4d7219844774
+    country_id: *es
+    network_id: *es_caceres_region
+  - id: 257800
+    prefix: '34928'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 60ce1cb5-69dd-4b1e-a6e3-207c151bc406
+    country_id: *es
+    network_id: *es_las_palmas_region
+  - id: 265212
+    prefix: '34978'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eaacf2cd-16c9-4d02-b80f-dc70b71486dd
+    country_id: *es
+    network_id: *es_teruel_region
+  - id: 265236
+    prefix: '34979'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e31258d5-4706-49d1-8ee2-e01ed606b5d1
+    country_id: *es
+    network_id: *es_palencia_region
+  - id: 257978
+    prefix: '34980'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d798706f-2418-49e1-bd6e-583b5e4c0748
+    country_id: *es
+    network_id: *es_zamora_region
+  - id: 258009
+    prefix: '34981'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16ce5b8c-d8d1-4807-880f-c4804ba62438
+    country_id: *es
+    network_id: *es_a_coruna_region
+  - id: 258037
+    prefix: '34982'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6fb49f9d-4429-42b6-8b7a-fbd3b620b34f
+    country_id: *es
+    network_id: *es_lugo_region
+  - id: 258071
+    prefix: '34983'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5235995-8fd4-45be-b3a1-289ec214dc57
+    country_id: *es
+    network_id: *es_valladolid_region
+  - id: 258095
+    prefix: '34984'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2295bdaa-e047-4ae5-8c6b-a5ba3b277d16
+    country_id: *es
+    network_id: *es_asturias_region
+  - id: 258110
+    prefix: '34985'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2d0570dc-4400-4223-b600-c06063aaede6
+    country_id: *es
+    network_id: *es_asturias_region
+  - id: 258125
+    prefix: '34986'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b9cd970-c5da-4af4-96e6-428e1323d44b
+    country_id: *es
+    network_id: *es_pontevedra_region
+  - id: 258130
+    prefix: '34987'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ecf3dc02-2fac-4432-9e0e-b3118977e34e
+    country_id: *es
+    network_id: *es_leon_region
+  - id: 258139
+    prefix: '34988'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7902e4da-645a-47c6-9400-0c08b4a551d2
+    country_id: *es
+    network_id: *es_ourense_region
+  - id: 249695
+    prefix: '3451'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 32c8be64-2f6f-4719-b944-bc5f5337b69b
+    country_id: *es
+    network_id: *es_voip_region
+  - id: 253069
+    prefix: '348'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 048e4108-c719-41a1-8f19-3e8ceff7029b
+    country_id: *es
+    network_id: *es_pstn_and_voip_region
+  - id: 253312
+    prefix: '3481'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 80863ffe-1d2f-412a-be17-583737134c1d
+    country_id: *es
+    network_id: *es_madrid_region
+  - id: 253331
+    prefix: '34810'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d0a4840-b036-4817-83f5-b3764a7566bc
+    country_id: *es
+    network_id: *es_madrid_voip_region
+  - id: 253490
+    prefix: '34820'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 22351ec8-d7f8-4e08-af27-dd4192326e8f
+    country_id: *es
+    network_id: *es_avila_region
+  - id: 253494
+    prefix: '348200'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 785f078d-eb35-4802-a02d-d895c2ecb326
+    country_id: *es
+    network_id: *es_avila_voip_region
+  - id: 253495
+    prefix: '34821'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: afead8e3-10b8-476d-bc66-9c368b4e5f11
+    country_id: *es
+    network_id: *es_segovia_region
+  - id: 253497
+    prefix: '348210'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 89aad374-bb25-4fc2-8a55-0984baa5d017
+    country_id: *es
+    network_id: *es_segovia_voip_region
+  - id: 253508
+    prefix: '34822'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4d3fa24a-5b76-40ce-bfed-6d1bbb56ee9e
+    country_id: *es
+    network_id: *es_santa_cruz_de_tenerife_region
+  - id: 253515
+    prefix: '348224'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: edfb1c10-488f-40ed-8b77-4aadc48194c2
+    country_id: *es
+    network_id: *es_santa_cruz_de_tenerife_voip_region
+  - id: 253522
+    prefix: '34823'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b6195ebc-9df0-433f-8b9d-fa5c1213da7b
+    country_id: *es
+    network_id: *es_salamanca_region
+  - id: 253525
+    prefix: '348230'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4d24316e-0397-4754-a717-c2b12d9c1bbd
+    country_id: *es
+    network_id: *es_salamanca_voip_region
+  - id: 253526
+    prefix: '34824'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dfbccbea-009b-4e89-a75b-9b8bf701d8bd
+    country_id: *es
+    network_id: *es_badajoz_region
+  - id: 253530
+    prefix: '348240'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74eb7c8d-bb27-4efe-8c87-6a4b4a84c0d5
+    country_id: *es
+    network_id: *es_badajoz_voip_region
+  - id: 253531
+    prefix: '34825'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c564ddeb-a8f8-4dc1-aa4d-cf32687d8cd0
+    country_id: *es
+    network_id: *es_toledo_region
+  - id: 253534
+    prefix: '348250'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0fe75137-7d1b-4781-9d8d-12d601d307cd
+    country_id: *es
+    network_id: *es_toledo_voip_region
+  - id: 253535
+    prefix: '34826'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b518779-f005-462c-a1f2-82455e71b98f
+    country_id: *es
+    network_id: *es_ciudad_real_region
+  - id: 253537
+    prefix: '348260'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ed18d45-1090-4cbe-bd41-861630707f8b
+    country_id: *es
+    network_id: *es_ciudad_real_voip_region
+  - id: 253548
+    prefix: '34827'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a282c8ca-60ba-482d-a0c5-b7be80878c2f
+    country_id: *es
+    network_id: *es_caceres_region
+  - id: 253550
+    prefix: '348270'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73cf4b57-c466-44a8-ab64-27ec737660d3
+    country_id: *es
+    network_id: *es_caceres_voip_region
+  - id: 253559
+    prefix: '34828'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0735bcd-0db7-4842-bf59-8d03041e880a
+    country_id: *es
+    network_id: *es_las_palmas_region
+  - id: 253563
+    prefix: '348282'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e70bb45f-ce47-4dbf-86a3-d45cdb7bc499
+    country_id: *es
+    network_id: *es_las_palmas_voip_region
+  - id: 253588
+    prefix: '3483'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1f027a0f-79f4-4fea-a081-bb55d4970288
+    country_id: *es
+    network_id: *es_barcelona_region
+  - id: 253607
+    prefix: '34830'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8fedebf-cf9c-48d9-91a8-963c0d80f754
+    country_id: *es
+    network_id: *es_barcelona_voip_region
+  - id: 253744
+    prefix: '34841'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0a45f3b0-e120-4524-b80e-f8eb0ec4068a
+    country_id: *es
+    network_id: *es_la_rioja_region
+  - id: 253749
+    prefix: '348410'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db280697-55a0-4f56-8212-88d661f513ac
+    country_id: *es
+    network_id: *es_la_rioja_voip_region
+  - id: 253760
+    prefix: '34842'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2f799105-8d2f-4502-b821-db49337f9bf0
+    country_id: *es
+    network_id: *es_cantabria_region
+  - id: 253765
+    prefix: '348420'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0c6640de-6b88-48db-87fe-d8874f403472
+    country_id: *es
+    network_id: *es_cantabria_voip_region
+  - id: 253766
+    prefix: '34843'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fe5ebd2c-3573-42b7-8589-c1614e7a6779
+    country_id: *es
+    network_id: *es_guipuzcoa_region
+  - id: 253771
+    prefix: '348430'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8db37682-d042-4a3d-ae11-02dcd4b22bf0
+    country_id: *es
+    network_id: *es_guipuzcoa_voip_region
+  - id: 253772
+    prefix: '34844'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 284a6794-87a9-424c-906b-30977d87b51e
+    country_id: *es
+    network_id: *es_vizcaya_region
+  - id: 253777
+    prefix: '34845'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b198742b-5c87-4934-844e-af1feabdbeb3
+    country_id: *es
+    network_id: *es_alava_region
+  - id: 253780
+    prefix: '348450'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 47b27adb-eec7-4dc0-9da2-68e3736e8a7f
+    country_id: *es
+    network_id: *es_alava_voip_region
+  - id: 253791
+    prefix: '34846'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 609af76e-bcf1-4357-ab43-22d211b88a45
+    country_id: *es
+    network_id: *es_vizcaya_region
+  - id: 253793
+    prefix: '348460'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c93d35cb-08bf-4c75-b46b-66044bedcb99
+    country_id: *es
+    network_id: *es_vizcaya_voip_region
+  - id: 263651
+    prefix: '348461'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05d8ecaf-62ea-4136-8cba-609317729405
+    country_id: *es
+    network_id: *es_vizcaya_voip_region
+  - id: 263661
+    prefix: '34847'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2ea02e30-a9fb-4cb5-98fe-2174ad501bf7
+    country_id: *es
+    network_id: *es_burgos_region
+  - id: 263665
+    prefix: '348470'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 49e605c3-8819-4e8b-a504-9d1d1118e20a
+    country_id: *es
+    network_id: *es_burgos_voip_region
+  - id: 263666
+    prefix: '34848'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4cff8dd6-19f6-4786-9f63-009c52f8fdd9
+    country_id: *es
+    network_id: *es_navarra_region
+  - id: 263670
+    prefix: '348480'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6130b8ef-3a5a-4ae0-b69d-424f87f00311
+    country_id: *es
+    network_id: *es_navarra_voip_region
+  - id: 263680
+    prefix: '34849'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c1893b3c-ed6f-40cd-95fc-13e4bb234121
+    country_id: *es
+    network_id: *es_guadalajara_region
+  - id: 263683
+    prefix: '348490'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f599cf15-21b7-47a6-b744-836855293620
+    country_id: *es
+    network_id: *es_guadalajara_voip_region
+  - id: 263719
+    prefix: '34850'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6261cb52-d4f7-42a9-949e-bc7d8919c6af
+    country_id: *es
+    network_id: *es_almeria_region
+  - id: 263722
+    prefix: '348500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 33e028bd-6350-4e6b-a33b-47acf13abe3a
+    country_id: *es
+    network_id: *es_almeria_voip_region
+  - id: 263734
+    prefix: '34851'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00ef5b43-4a77-4038-9854-a37aee97c1a6
+    country_id: *es
+    network_id: *es_malaga_region
+  - id: 263737
+    prefix: '348510'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 142c757a-815b-4311-acf2-02eed28472fb
+    country_id: *es
+    network_id: *es_malaga_voip_region
+  - id: 263740
+    prefix: '348511'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f7df9083-8eb4-4fa1-bb53-30410c1125ce
+    country_id: *es
+    network_id: *es_malaga_voip_region
+  - id: 263753
+    prefix: '34852'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d42d83ea-b705-4154-9753-ff7522fea8e4
+    country_id: *es
+    network_id: *es_malaga_region
+  - id: 263768
+    prefix: '34853'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d2a38e8-d525-4273-80d7-ef39c7c1eb88
+    country_id: *es
+    network_id: *es_jaen_region
+  - id: 263771
+    prefix: '348530'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25a683bb-6ce1-475a-8cb2-9690c3ecdf03
+    country_id: *es
+    network_id: *es_jaen_voip_region
+  - id: 263782
+    prefix: '34854'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e05c2e1-53cb-4f3e-8ace-7f904bf2a166
+    country_id: *es
+    network_id: *es_sevilla_region
+  - id: 263786
+    prefix: '348540'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 06d0e01c-8a2e-4d98-9d3d-66eed30502ab
+    country_id: *es
+    network_id: *es_sevilla_voip_region
+  - id: 263787
+    prefix: '348541'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3b092e7-af65-496c-9b0f-8cb4410e8145
+    country_id: *es
+    network_id: *es_sevilla_voip_region
+  - id: 263788
+    prefix: '34855'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0c33e95d-e103-452a-8a75-9bbf0d2a544f
+    country_id: *es
+    network_id: *es_sevilla_region
+  - id: 263802
+    prefix: '34856'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a8019090-6c68-4e72-8fe1-e744803ab3a8
+    country_id: *es
+    network_id: *es_cadiz_region
+  - id: 263804
+    prefix: '348564'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 499b6225-1ae4-4358-88e5-4ff89aa8384c
+    country_id: *es
+    network_id: *es_cadiz_voip_region
+  - id: 263805
+    prefix: '348567'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7accb8a-315f-4905-97fb-d325e80228e6
+    country_id: *es
+    network_id: *es_cadiz_voip_region
+  - id: 263806
+    prefix: '34857'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e4965684-a9df-4168-9e0b-a92bb434580e
+    country_id: *es
+    network_id: *es_cordoba_region
+  - id: 263807
+    prefix: '348570'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 78071f31-e8d6-4748-bef3-4b6cd3a6a064
+    country_id: *es
+    network_id: *es_cordoba_voip_region
+  - id: 263818
+    prefix: '34858'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d111ec57-aacd-4112-ad36-972582c5e160
+    country_id: *es
+    network_id: *es_granada_region
+  - id: 263819
+    prefix: '348580'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be01cd42-780e-4860-8c2b-c68d5f3530c1
+    country_id: *es
+    network_id: *es_granada_voip_region
+  - id: 263830
+    prefix: '34859'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6e3e9b03-31b9-4a74-bb07-89a4f0441268
+    country_id: *es
+    network_id: *es_huelva_region
+  - id: 263832
+    prefix: '348590'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: af297474-d38f-4d03-ab30-9369591d7152
+    country_id: *es
+    network_id: *es_huelva_voip_region
+  - id: 263861
+    prefix: '34860'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e81b025-2d8b-4acd-92e3-d92a2ddda0df
+    country_id: *es
+    network_id: *es_valencia_region
+  - id: 263870
+    prefix: '348600'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05188a80-dedd-4f3a-9842-d53729dd32ea
+    country_id: *es
+    network_id: *es_valencia_voip_region
+  - id: 263872
+    prefix: '348601'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 957388b9-1782-4f73-a67c-ed9234e3bf28
+    country_id: *es
+    network_id: *es_valencia_voip_region
+  - id: 263882
+    prefix: '34861'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0162abd2-45d6-4003-a728-9990c17585d6
+    country_id: *es
+    network_id: *es_valencia_region
+  - id: 263895
+    prefix: '34862'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 59e54e89-19a0-418a-8d2b-6051e726f2a4
+    country_id: *es
+    network_id: *es_valencia_region
+  - id: 263907
+    prefix: '34863'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c380a538-94e2-41cd-8991-39ccb37522a6
+    country_id: *es
+    network_id: *es_valencia_region
+  - id: 263919
+    prefix: '34864'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 77e49ecd-a5e1-4e35-933b-498de5576c04
+    country_id: *es
+    network_id: *es_castellon_de_la_plana_region
+  - id: 263921
+    prefix: '348640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 72240c18-3906-456b-9d34-f2ff0c1be30e
+    country_id: *es
+    network_id: *es_castellon_de_la_plana_voip_region
+  - id: 263932
+    prefix: '34865'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e2c6e5f4-3c35-4f10-a0f6-241d4db166a7
+    country_id: *es
+    network_id: *es_alicante_region
+  - id: 263934
+    prefix: '348650'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 053f4db5-8959-4090-a041-d0bc92c68705
+    country_id: *es
+    network_id: *es_alicante_voip_region
+  - id: 263936
+    prefix: '348651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 541c8d55-c306-4bbe-a3d6-cc0a41a279ab
+    country_id: *es
+    network_id: *es_alicante_voip_region
+  - id: 263946
+    prefix: '34866'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e22bb437-9fe0-4123-823e-1b1886eba3f0
+    country_id: *es
+    network_id: *es_alicante_region
+  - id: 257862
+    prefix: '3493'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 90323ad4-ef24-4b45-91b0-ec0f6313ae5a
+    country_id: *es
+    network_id: *es_barcelona_region
+  - id: 264218
+    prefix: '34941'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a6b5344-5305-4bf1-bd39-6a81a3cd8b56
+    country_id: *es
+    network_id: *es_la_rioja_region
+  - id: 264241
+    prefix: '34942'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2be6aaaa-f442-4ffc-9048-be5916d35d63
+    country_id: *es
+    network_id: *es_cantabria_region
+  - id: 264255
+    prefix: '34943'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d6aa0845-b626-413e-9f9c-5391811fcd27
+    country_id: *es
+    network_id: *es_guipuzcoa_region
+  - id: 264279
+    prefix: '34944'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f84cc3ee-2cf7-4e9b-a179-950bcb455b9f
+    country_id: *es
+    network_id: *es_vizcaya_region
+  - id: 264302
+    prefix: '34945'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fbaec06d-b6db-48d6-92ab-411505d77a0b
+    country_id: *es
+    network_id: *es_alava_region
+  - id: 264311
+    prefix: '34946'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f70af0e-9ec5-4ffc-ac0d-4a31056612e0
+    country_id: *es
+    network_id: *es_vizcaya_region
+  - id: 264333
+    prefix: '34947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f70e03da-fdc7-4a2a-bc7d-12aca4ceb2da
+    country_id: *es
+    network_id: *es_burgos_region
+  - id: 264365
+    prefix: '34948'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b603988-bdf3-444d-95e4-cafbed27bc1f
+    country_id: *es
+    network_id: *es_navarra_region
+  - id: 264388
+    prefix: '34949'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3e4daed4-63e3-42a0-9ccb-3519f2412b7b
+    country_id: *es
+    network_id: *es_guadalajara_region
+  - id: 264452
+    prefix: '34950'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 27ad2aee-8886-44e1-8c3c-75473378a092
+    country_id: *es
+    network_id: *es_almeria_region
+  - id: 264474
+    prefix: '34951'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a65b249-384e-492e-bb0d-f2f036b491b8
+    country_id: *es
+    network_id: *es_malaga_region
+  - id: 264487
+    prefix: '34952'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 37a1cacb-08cc-4a73-b200-9dba56fdbf0d
+    country_id: *es
+    network_id: *es_malaga_region
+  - id: 264518
+    prefix: '34953'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3b23971a-9cfb-4ffd-93f4-ab7b779a12ff
+    country_id: *es
+    network_id: *es_jaen_region
+  - id: 264549
+    prefix: '34954'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dcf9d881-2b55-4cee-9624-3df9e27a78ac
+    country_id: *es
+    network_id: *es_sevilla_region
+  - id: 264581
+    prefix: '34955'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3246ebb3-fe9d-444a-bba2-c02b97819704
+    country_id: *es
+    network_id: *es_sevilla_region
+  - id: 264613
+    prefix: '34956'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7f240f3-e9c6-44cc-b562-2b65b3321cad
+    country_id: *es
+    network_id: *es_cadiz_region
+  - id: 264627
+    prefix: '34957'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 766332f5-f30f-42d5-a96b-25034d72e4b5
+    country_id: *es
+    network_id: *es_cordoba_region
+  - id: 264641
+    prefix: '34958'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cb44ac60-851e-40fe-9ce6-f97295cc0f37
+    country_id: *es
+    network_id: *es_granada_region
+  - id: 264683
+    prefix: '34959'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c3e96fe2-1988-491b-a9f4-ec02440e6e36
+    country_id: *es
+    network_id: *es_huelva_region
+  - id: 264733
+    prefix: '34960'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc2e4ca7-b797-4f5a-a283-3cc001890a5b
+    country_id: *es
+    network_id: *es_valencia_region
+  - id: 264760
+    prefix: '34961'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e4f60181-4b04-4583-bc72-6075fdfc47c4
+    country_id: *es
+    network_id: *es_valencia_region
+  - id: 264774
+    prefix: '34962'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3bb8a041-f35c-4815-86bd-3e5d74d0d2ca
+    country_id: *es
+    network_id: *es_valencia_region
+  - id: 264788
+    prefix: '34963'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5a98ac26-934e-4612-bac1-9b8a7802fe76
+    country_id: *es
+    network_id: *es_valencia_region
+  - id: 264820
+    prefix: '34964'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 619aad74-d5b2-4e98-846f-9982f9f33073
+    country_id: *es
+    network_id: *es_castellon_de_la_plana_region
+  - id: 264834
+    prefix: '34965'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3c08650-ee1c-44c5-bb30-e3d8cf694007
+    country_id: *es
+    network_id: *es_alicante_region
+  - id: 264852
+    prefix: '34966'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 90a1c2f0-7248-496f-97f2-0458a2299d88
+    country_id: *es
+    network_id: *es_alicante_region
+  - id: 264885
+    prefix: '34967'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01061188-d3d0-4fb4-87a9-a74c250cb5f8
+    country_id: *es
+    network_id: *es_albacete_region
+  - id: 264923
+    prefix: '34968'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38d5dcbe-4643-4a06-b058-83876f09f792
+    country_id: *es
+    network_id: *es_murcia_region
+  - id: 264964
+    prefix: '34969'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25698f22-69e6-4699-b0a4-6aeb6aecf503
+    country_id: *es
+    network_id: *es_cuenca_region
+  - id: 265042
+    prefix: '34971'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 13d55855-a32a-4e3d-b69d-c8a92692e6cf
+    country_id: *es
+    network_id: *es_illes_balears_region
+  - id: 265059
+    prefix: '34972'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff2b010f-1f9d-4d8c-a893-f3ae9495dc28
+    country_id: *es
+    network_id: *es_girona_region
+  - id: 265084
+    prefix: '34973'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 167c6699-a7fc-4529-b912-5cb6ac19a409
+    country_id: *es
+    network_id: *es_lleida_region
+  - id: 265110
+    prefix: '34974'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0a752010-61ad-49fa-b110-a684a8ce9176
+    country_id: *es
+    network_id: *es_huesca_region
+  - id: 265143
+    prefix: '34975'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c5f7fe0f-e13e-428f-b54a-2decd6e2b10b
+    country_id: *es
+    network_id: *es_soria_region
+  - id: 265151
+    prefix: '34976'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28524cf9-3c2c-4057-a2b7-d42dbf3fa670
+    country_id: *es
+    network_id: *es_zaragoza_region
+  - id: 265187
+    prefix: '34977'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c3b24b4-c6ea-4fad-98cf-e2704d484cbc
+    country_id: *es
+    network_id: *es_tarragona_region
 # Mobile Prefixes
   - id: 245273
     prefix: '34590100'
@@ -1496,594 +2753,6 @@ network_prefixes:
     uuid: e27e00b5-ce6f-4e3b-8358-e76493a97227
     country_id: *es
     network_id: *es_yoigo_mobile
-  - id: 250570
-    prefix: '34628'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 64bee73f-36c4-4c72-a66d-8ae1aa470ee8
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 250622
-    prefix: '34629'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a7919610-4625-4db8-ba0f-8f45bd231a94
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 250667
-    prefix: '34630'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2538293e-6aed-46b9-88fd-67be1f2123a3
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 250688
-    prefix: '34631'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f5755173-10b2-48ac-8365-ab81527d0ec1
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 250716
-    prefix: '34632'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 562f2cf6-82e0-4b22-b838-f3ee48516021
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 250733
-    prefix: '34633'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a183ac6b-35d7-45d9-a345-cd50081583eb
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 250753
-    prefix: '34634'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d6d5a36b-62fe-4763-a49b-bbc4c0d11169
-    country_id: *es
-    network_id: *es_vodafone_mobile
-  - id: 250758
-    prefix: '346340'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f3d9325-5d6f-4d5e-a6fa-f80dc89a5243
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 250762
-    prefix: '346341'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c196d43f-4e09-4613-a80a-dd843c5da059
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 250767
-    prefix: '346343'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: db927117-39b5-428d-be70-50351820e34c
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 250770
-    prefix: '346344'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9b66efe6-1d12-4e41-90a7-2297d3be06a5
-    country_id: *es
-    network_id: *es_vodafone_mobile
-  - id: 250774
-    prefix: '346345'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 35d483ce-7faa-4656-945a-1ec340546d78
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 250795
-    prefix: '34635'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8bd82249-cd99-4d4e-8332-5e39dd6e5b97
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 250821
-    prefix: '34636'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 972d1c73-7bfe-48be-b58d-1a5a3f8606fa
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 250846
-    prefix: '34637'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 84c7d8f0-361b-4144-aa3d-b4d89f532e18
-    country_id: *es
-    network_id: *es_vodafone_mobile
-  - id: 250868
-    prefix: '34638'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 04aadc5c-aa8e-4e06-a04f-91f13e1dd961
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 250900
-    prefix: '34639'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 89d8c966-a217-4bc5-9a0d-36b691239a1b
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 251038
-    prefix: '346400'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ca726590-de2b-4a1e-8e95-804ca3575720
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251066
-    prefix: '346401'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 28dc7713-08f5-4106-b0bd-d356816abac9
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251068
-    prefix: '346402'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52313c6a-f79a-44cc-872f-e8ee3a99c84e
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251070
-    prefix: '346403'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c4aba34d-cef8-46f3-9f7b-cf8b2efa0282
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251073
-    prefix: '346405'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b05351ac-b13d-4812-bce2-5aa81622746b
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251075
-    prefix: '346406'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b294bef3-8968-4997-8ff3-4a4e5d695922
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251077
-    prefix: '346407'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3f19b5f1-a72b-471c-aa4d-d62774faf1cf
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251079
-    prefix: '346408'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a6abfa1b-37b3-49d3-8af6-c8502945bf00
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251081
-    prefix: '346409'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 30fd9861-5681-41e7-87df-ed9f2e7ff53f
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251084
-    prefix: '34641'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ad758014-1429-4804-9486-209c5bfbf10d
-    country_id: *es
-    network_id: *es_digimobil_mobile
-  - id: 251115
-    prefix: '34642'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 25011dc5-e8f2-43b6-8574-c8dbf048ab55
-    country_id: *es
-    network_id: *es_digimobil_mobile
-  - id: 251121
-    prefix: '34643'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 98368392-1c2c-4631-9445-5f14292beaf7
-    country_id: *es
-    network_id: *es_digimobil_mobile
-  - id: 251128
-    prefix: '34644'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e025ebd3-cae9-4c1f-affa-e82feb6c91f6
-    country_id: *es
-    network_id: *es_simyo_mobile
-  - id: 251153
-    prefix: '34645'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 645b0640-8fde-42fd-a83e-87ce60d47549
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251159
-    prefix: '34646'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 35fa0217-df12-4312-af82-8ecc56297130
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 251167
-    prefix: '34647'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9dcec62d-37e7-4faf-bf1a-8f0de1d90a4b
-    country_id: *es
-    network_id: *es_vodafone_mobile
-  - id: 251173
-    prefix: '34648'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 395076a3-ce63-49cf-89b1-48feac932199
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 251180
-    prefix: '34649'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 02c2f1b8-7f34-4bc0-a4f3-1bcf90fd675d
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 251246
-    prefix: '34650'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 41f3903f-d9f8-4e95-8ffa-beb5301468b7
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 251273
-    prefix: '34651'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9c0fc0c6-d4e9-406a-8073-3ba951dc2ed9
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251293
-    prefix: '34652'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 468dd53a-5384-4e63-be09-28adc3097fa0
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251316
-    prefix: '34653'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0d86e849-9d8e-419d-90aa-fc6f271a10f9
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251345
-    prefix: '34654'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e31306f2-36b8-4527-b0ce-27bd3802aaa9
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251384
-    prefix: '34655'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f8d73f57-d68c-471a-aa5a-351f583ad4fe
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251406
-    prefix: '34656'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 86010fe8-8d17-4933-8b96-70343bec4a9e
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251434
-    prefix: '34657'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 010625e7-790f-46f6-be7a-1c537c5f2b5c
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251504
-    prefix: '34658'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94342c4e-c6e2-40a7-99e7-b87e2c69ae1b
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 251522
-    prefix: '34659'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 564e7a9c-e60b-48cc-a228-681d356c50a8
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 251734
-    prefix: '3471'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 09d20450-b5e6-4859-b82a-7a124fdfd31a
-    country_id: *es
-    network_id: *es_mobile
-  - id: 251758
-    prefix: '347110'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d1dadde2-2d00-46f7-9cd5-d8c582d55192
-    country_id: *es
-    network_id: *es_lobster_mobile
-  - id: 251760
-    prefix: '347111'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ab0601b9-bcb3-436d-af87-39a9887df1c7
-    country_id: *es
-    network_id: *es_vodafone_mobile
-  - id: 251771
-    prefix: '347117'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a6bc83f7-d61f-4cf5-ba0b-c86567e3437f
-    country_id: *es
-    network_id: *es_vodafone_mobile
-  - id: 251790
-    prefix: '347170'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8d086933-6986-425e-91f7-78f5d8388d10
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 251792
-    prefix: '347171'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cc01d878-60a7-4711-a4f4-18ba1ccec71b
-    country_id: *es
-    network_id: *es_vodafone_mobile
-  - id: 251798
-    prefix: '347177'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1c246bd0-a2d8-4f50-b6b2-fc11b5b5b418
-    country_id: *es
-    network_id: *es_movistar_mobile
-  - id: 251799
-    prefix: '3471773'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 42797b14-530b-4cb7-9eb2-d49102e6e2ec
-    country_id: *es
-    network_id: *es_telefonica_tech_ai_of_things_mobile
-  - id: 251821
-    prefix: '3472'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 457ce8c0-c8ed-4829-a645-4153fc1a8fb9
-    country_id: *es
-    network_id: *es_mobile
-  - id: 251847
-    prefix: '347221'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2b814274-8fc8-4d56-b792-c812488eda2c
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 251848
-    prefix: '347222'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7d3dab0c-5f0e-4a49-bd58-f73b60e7eca0
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 251850
-    prefix: '347223'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ca4158ad-7814-4d3d-a213-49a0ba6ff986
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 251851
-    prefix: '347224'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e3e2cc76-a3e0-47bc-bb6c-d71a61f8b5b2
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 251852
-    prefix: '347225'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52a36971-10bb-4436-90d2-5c42c80fd9e2
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 251854
-    prefix: '347226'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fceb444d-03db-49da-be18-26b4bdf09d6b
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 251855
-    prefix: '3472261'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b625f9a9-5a0e-4cf3-a6d4-efa07d871a88
-    country_id: *es
-    network_id: *es_pepephone_mobile
-  - id: 251856
-    prefix: '347227'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8773ae5f-5fe9-492d-8849-44a83112ca41
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 251857
-    prefix: '347228'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d9713cb2-2f14-4b4c-a3f4-7e5b0d4150e4
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 251861
-    prefix: '347277'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4cc9283a-67ee-4ebf-b676-5d7019aa97ef
-    country_id: *es
-    network_id: *es_vodafone_mobile
-  - id: 251872
-    prefix: '3473'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2f2117ae-471d-414d-8ce3-18c2847b7114
-    country_id: *es
-    network_id: *es_mobile
-  - id: 252055
-    prefix: '3474'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 41311495-83ee-4890-a92e-11d07594b88f
-    country_id: *es
-    network_id: *es_mobile
-  - id: 252325
-    prefix: '347443'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 759f7d22-a0a0-4afd-b1d8-68fb0df82870
-    country_id: *es
-    network_id: *es_alai_secure_mobile
-  - id: 252329
-    prefix: '347444'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e8a8a4bf-5455-4ffe-99b4-6f443279b46f
-    country_id: *es
-    network_id: *es_suma_movil_mobile
-  - id: 252332
-    prefix: '3474441'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a0af0015-e35c-4317-bf27-a4e6f0e775f2
-    country_id: *es
-    network_id: *es_alai_secure_mobile
-  - id: 252334
-    prefix: '3474442'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 964b55f1-f95c-4862-a250-fba95a860366
-    country_id: *es
-    network_id: *es_yoigo_mobile
-  - id: 252337
-    prefix: '3474444'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5c38ae30-0617-4346-bc30-feffe874f940
-    country_id: *es
-    network_id: *es_alai_secure_mobile
-  - id: 252339
-    prefix: '3474446'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a6edaf80-7389-4217-9b9b-19ffb6bc6905
-    country_id: *es
-    network_id: *es_alai_secure_mobile
-  - id: 252340
-    prefix: '3474447'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 723b25e6-d81b-4c49-9113-cd0bdcc5367d
-    country_id: *es
-    network_id: *es_jetnet_mobile
-  - id: 252342
-    prefix: '3474449'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4e670b60-7e83-41dd-8fa3-87e3f9a34742
-    country_id: *es
-    network_id: *es_alai_secure_mobile
-  - id: 252343
-    prefix: '347445'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bf6f9675-96e1-4318-9fd3-0744ce0c0ced
-    country_id: *es
-    network_id: *es_alai_secure_mobile
-  - id: 252346
-    prefix: '347446'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 406a2d7f-b635-47a0-abd6-9f94ed4880bb
-    country_id: *es
-    network_id: *es_ptv_telecom_movil_mobile
-  - id: 252349
-    prefix: '3474467'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a436d03f-766a-4564-9b20-eb3eb9c47038
-    country_id: *es
-    network_id: *es_jetnet_mobile
-  - id: 252350
-    prefix: '347447'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f23b87f0-a0db-46b5-835a-4fbbe747fcda
-    country_id: *es
-    network_id: *es_ptv_telecom_movil_mobile
-  - id: 252353
-    prefix: '3474476'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8667e73e-c59e-4c98-9654-b445b2932b47
-    country_id: *es
-    network_id: *es_homespot_mobile
-  - id: 252354
-    prefix: '347448'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a1833830-471c-4055-a6b1-134f0a0ca65b
-    country_id: *es
-    network_id: *es_alai_secure_mobile
-  - id: 252451
-    prefix: '347474'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 082d5d67-2620-4406-9364-2efed1d0ac9a
-    country_id: *es
-    network_id: *es_euskaltel_movil_mobile
-  - id: 252453
-    prefix: '3474746'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4805a9a0-42c0-4390-a029-55f85c5f93e4
-    country_id: *es
-    network_id: *es_open_cable_mobile
-  - id: 252456
-    prefix: '347477'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b0bae05-61fc-4621-a1bd-ffca501cab54
-    country_id: *es
-    network_id: *es_orange_mobile
-  - id: 252458
-    prefix: '347478'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cc50f727-0946-4606-b561-92f90a629416
-    country_id: *es
-    network_id: *es_orange_mobile
   - id: 253794
     prefix: '346025'
     number_min_length: 11
@@ -2861,6 +3530,279 @@ network_prefixes:
     uuid: 209e6512-0c0b-47a2-a3e2-3a376a7a2217
     country_id: *es
     network_id: *es_orange_mobile
+  - id: 251734
+    prefix: '3471'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 09d20450-b5e6-4859-b82a-7a124fdfd31a
+    country_id: *es
+    network_id: *es_mobile
+  - id: 251758
+    prefix: '347110'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d1dadde2-2d00-46f7-9cd5-d8c582d55192
+    country_id: *es
+    network_id: *es_lobster_mobile
+  - id: 251760
+    prefix: '347111'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ab0601b9-bcb3-436d-af87-39a9887df1c7
+    country_id: *es
+    network_id: *es_vodafone_mobile
+  - id: 251771
+    prefix: '347117'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6bc83f7-d61f-4cf5-ba0b-c86567e3437f
+    country_id: *es
+    network_id: *es_vodafone_mobile
+  - id: 251790
+    prefix: '347170'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8d086933-6986-425e-91f7-78f5d8388d10
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 251792
+    prefix: '347171'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc01d878-60a7-4711-a4f4-18ba1ccec71b
+    country_id: *es
+    network_id: *es_vodafone_mobile
+  - id: 251798
+    prefix: '347177'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c246bd0-a2d8-4f50-b6b2-fc11b5b5b418
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 251799
+    prefix: '3471773'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 42797b14-530b-4cb7-9eb2-d49102e6e2ec
+    country_id: *es
+    network_id: *es_telefonica_tech_ai_of_things_mobile
+  - id: 251821
+    prefix: '3472'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 457ce8c0-c8ed-4829-a645-4153fc1a8fb9
+    country_id: *es
+    network_id: *es_mobile
+  - id: 251847
+    prefix: '347221'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2b814274-8fc8-4d56-b792-c812488eda2c
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 251848
+    prefix: '347222'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7d3dab0c-5f0e-4a49-bd58-f73b60e7eca0
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 251850
+    prefix: '347223'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca4158ad-7814-4d3d-a213-49a0ba6ff986
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 251851
+    prefix: '347224'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e3e2cc76-a3e0-47bc-bb6c-d71a61f8b5b2
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 251852
+    prefix: '347225'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52a36971-10bb-4436-90d2-5c42c80fd9e2
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 251854
+    prefix: '347226'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fceb444d-03db-49da-be18-26b4bdf09d6b
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 251855
+    prefix: '3472261'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b625f9a9-5a0e-4cf3-a6d4-efa07d871a88
+    country_id: *es
+    network_id: *es_pepephone_mobile
+  - id: 251856
+    prefix: '347227'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8773ae5f-5fe9-492d-8849-44a83112ca41
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 251857
+    prefix: '347228'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d9713cb2-2f14-4b4c-a3f4-7e5b0d4150e4
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 251861
+    prefix: '347277'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4cc9283a-67ee-4ebf-b676-5d7019aa97ef
+    country_id: *es
+    network_id: *es_vodafone_mobile
+  - id: 251872
+    prefix: '3473'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2f2117ae-471d-414d-8ce3-18c2847b7114
+    country_id: *es
+    network_id: *es_mobile
+  - id: 252055
+    prefix: '3474'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 41311495-83ee-4890-a92e-11d07594b88f
+    country_id: *es
+    network_id: *es_mobile
+  - id: 252325
+    prefix: '347443'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 759f7d22-a0a0-4afd-b1d8-68fb0df82870
+    country_id: *es
+    network_id: *es_alai_secure_mobile
+  - id: 252329
+    prefix: '347444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e8a8a4bf-5455-4ffe-99b4-6f443279b46f
+    country_id: *es
+    network_id: *es_suma_movil_mobile
+  - id: 252332
+    prefix: '3474441'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0af0015-e35c-4317-bf27-a4e6f0e775f2
+    country_id: *es
+    network_id: *es_alai_secure_mobile
+  - id: 252334
+    prefix: '3474442'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 964b55f1-f95c-4862-a250-fba95a860366
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 252337
+    prefix: '3474444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5c38ae30-0617-4346-bc30-feffe874f940
+    country_id: *es
+    network_id: *es_alai_secure_mobile
+  - id: 252339
+    prefix: '3474446'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6edaf80-7389-4217-9b9b-19ffb6bc6905
+    country_id: *es
+    network_id: *es_alai_secure_mobile
+  - id: 252340
+    prefix: '3474447'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 723b25e6-d81b-4c49-9113-cd0bdcc5367d
+    country_id: *es
+    network_id: *es_jetnet_mobile
+  - id: 252342
+    prefix: '3474449'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e670b60-7e83-41dd-8fa3-87e3f9a34742
+    country_id: *es
+    network_id: *es_alai_secure_mobile
+  - id: 252343
+    prefix: '347445'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bf6f9675-96e1-4318-9fd3-0744ce0c0ced
+    country_id: *es
+    network_id: *es_alai_secure_mobile
+  - id: 252346
+    prefix: '347446'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 406a2d7f-b635-47a0-abd6-9f94ed4880bb
+    country_id: *es
+    network_id: *es_ptv_telecom_movil_mobile
+  - id: 252349
+    prefix: '3474467'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a436d03f-766a-4564-9b20-eb3eb9c47038
+    country_id: *es
+    network_id: *es_jetnet_mobile
+  - id: 252350
+    prefix: '347447'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f23b87f0-a0db-46b5-835a-4fbbe747fcda
+    country_id: *es
+    network_id: *es_ptv_telecom_movil_mobile
+  - id: 252353
+    prefix: '3474476'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8667e73e-c59e-4c98-9654-b445b2932b47
+    country_id: *es
+    network_id: *es_homespot_mobile
+  - id: 252354
+    prefix: '347448'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a1833830-471c-4055-a6b1-134f0a0ca65b
+    country_id: *es
+    network_id: *es_alai_secure_mobile
+  - id: 252451
+    prefix: '347474'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 082d5d67-2620-4406-9364-2efed1d0ac9a
+    country_id: *es
+    network_id: *es_euskaltel_movil_mobile
+  - id: 252453
+    prefix: '3474746'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4805a9a0-42c0-4390-a029-55f85c5f93e4
+    country_id: *es
+    network_id: *es_open_cable_mobile
+  - id: 252456
+    prefix: '347477'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b0bae05-61fc-4621-a1bd-ffca501cab54
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 252458
+    prefix: '347478'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc50f727-0946-4606-b561-92f90a629416
+    country_id: *es
+    network_id: *es_orange_mobile
   - id: 254249
     prefix: '34626'
     number_min_length: 11
@@ -2875,6 +3817,321 @@ network_prefixes:
     uuid: 45675d2d-06dc-4116-abd5-6018fbd76ff8
     country_id: *es
     network_id: *es_vodafone_mobile
+  - id: 250570
+    prefix: '34628'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 64bee73f-36c4-4c72-a66d-8ae1aa470ee8
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 250622
+    prefix: '34629'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a7919610-4625-4db8-ba0f-8f45bd231a94
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 250667
+    prefix: '34630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2538293e-6aed-46b9-88fd-67be1f2123a3
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 250688
+    prefix: '34631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f5755173-10b2-48ac-8365-ab81527d0ec1
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 250716
+    prefix: '34632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 562f2cf6-82e0-4b22-b838-f3ee48516021
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 250733
+    prefix: '34633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a183ac6b-35d7-45d9-a345-cd50081583eb
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 250753
+    prefix: '34634'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d6d5a36b-62fe-4763-a49b-bbc4c0d11169
+    country_id: *es
+    network_id: *es_vodafone_mobile
+  - id: 250758
+    prefix: '346340'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f3d9325-5d6f-4d5e-a6fa-f80dc89a5243
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 250762
+    prefix: '346341'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c196d43f-4e09-4613-a80a-dd843c5da059
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 250767
+    prefix: '346343'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db927117-39b5-428d-be70-50351820e34c
+    country_id: *es
+    network_id: *es_yoigo_mobile
+  - id: 250770
+    prefix: '346344'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9b66efe6-1d12-4e41-90a7-2297d3be06a5
+    country_id: *es
+    network_id: *es_vodafone_mobile
+  - id: 250774
+    prefix: '346345'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 35d483ce-7faa-4656-945a-1ec340546d78
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 250795
+    prefix: '34635'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8bd82249-cd99-4d4e-8332-5e39dd6e5b97
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 250821
+    prefix: '34636'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 972d1c73-7bfe-48be-b58d-1a5a3f8606fa
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 250846
+    prefix: '34637'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84c7d8f0-361b-4144-aa3d-b4d89f532e18
+    country_id: *es
+    network_id: *es_vodafone_mobile
+  - id: 250868
+    prefix: '34638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 04aadc5c-aa8e-4e06-a04f-91f13e1dd961
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 250900
+    prefix: '34639'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 89d8c966-a217-4bc5-9a0d-36b691239a1b
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 251038
+    prefix: '346400'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca726590-de2b-4a1e-8e95-804ca3575720
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251066
+    prefix: '346401'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28dc7713-08f5-4106-b0bd-d356816abac9
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251068
+    prefix: '346402'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52313c6a-f79a-44cc-872f-e8ee3a99c84e
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251070
+    prefix: '346403'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c4aba34d-cef8-46f3-9f7b-cf8b2efa0282
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251073
+    prefix: '346405'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b05351ac-b13d-4812-bce2-5aa81622746b
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251075
+    prefix: '346406'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b294bef3-8968-4997-8ff3-4a4e5d695922
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251077
+    prefix: '346407'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f19b5f1-a72b-471c-aa4d-d62774faf1cf
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251079
+    prefix: '346408'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6abfa1b-37b3-49d3-8af6-c8502945bf00
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251081
+    prefix: '346409'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30fd9861-5681-41e7-87df-ed9f2e7ff53f
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251084
+    prefix: '34641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ad758014-1429-4804-9486-209c5bfbf10d
+    country_id: *es
+    network_id: *es_digimobil_mobile
+  - id: 251115
+    prefix: '34642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25011dc5-e8f2-43b6-8574-c8dbf048ab55
+    country_id: *es
+    network_id: *es_digimobil_mobile
+  - id: 251121
+    prefix: '34643'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 98368392-1c2c-4631-9445-5f14292beaf7
+    country_id: *es
+    network_id: *es_digimobil_mobile
+  - id: 251128
+    prefix: '34644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e025ebd3-cae9-4c1f-affa-e82feb6c91f6
+    country_id: *es
+    network_id: *es_simyo_mobile
+  - id: 251153
+    prefix: '34645'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 645b0640-8fde-42fd-a83e-87ce60d47549
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251159
+    prefix: '34646'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 35fa0217-df12-4312-af82-8ecc56297130
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 251167
+    prefix: '34647'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9dcec62d-37e7-4faf-bf1a-8f0de1d90a4b
+    country_id: *es
+    network_id: *es_vodafone_mobile
+  - id: 251173
+    prefix: '34648'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 395076a3-ce63-49cf-89b1-48feac932199
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 251180
+    prefix: '34649'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 02c2f1b8-7f34-4bc0-a4f3-1bcf90fd675d
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 251246
+    prefix: '34650'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 41f3903f-d9f8-4e95-8ffa-beb5301468b7
+    country_id: *es
+    network_id: *es_movistar_mobile
+  - id: 251273
+    prefix: '34651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c0fc0c6-d4e9-406a-8073-3ba951dc2ed9
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251293
+    prefix: '34652'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 468dd53a-5384-4e63-be09-28adc3097fa0
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251316
+    prefix: '34653'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0d86e849-9d8e-419d-90aa-fc6f271a10f9
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251345
+    prefix: '34654'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e31306f2-36b8-4527-b0ce-27bd3802aaa9
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251384
+    prefix: '34655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8d73f57-d68c-471a-aa5a-351f583ad4fe
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251406
+    prefix: '34656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 86010fe8-8d17-4933-8b96-70343bec4a9e
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251434
+    prefix: '34657'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 010625e7-790f-46f6-be7a-1c537c5f2b5c
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251504
+    prefix: '34658'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94342c4e-c6e2-40a7-99e7-b87e2c69ae1b
+    country_id: *es
+    network_id: *es_orange_mobile
+  - id: 251522
+    prefix: '34659'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 564e7a9c-e60b-48cc-a228-681d356c50a8
+    country_id: *es
+    network_id: *es_movistar_mobile
   - id: 254303
     prefix: '34660'
     number_min_length: 11
@@ -3561,1257 +4818,3 @@ network_prefixes:
     uuid: e79dc41f-1f07-47ed-8b54-9b95950841c2
     country_id: *es
     network_id: *es_movistar_mobile
-# Fixed Prefixes
-  - id: 249695
-    prefix: '3451'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 32c8be64-2f6f-4719-b944-bc5f5337b69b
-    country_id: *es
-    network_id: *es_voip_region
-  - id: 253069
-    prefix: '348'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 048e4108-c719-41a1-8f19-3e8ceff7029b
-    country_id: *es
-    network_id: *es_pstn_and_voip_region
-  - id: 253312
-    prefix: '3481'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 80863ffe-1d2f-412a-be17-583737134c1d
-    country_id: *es
-    network_id: *es_madrid_region
-  - id: 253331
-    prefix: '34810'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5d0a4840-b036-4817-83f5-b3764a7566bc
-    country_id: *es
-    network_id: *es_madrid_voip_region
-  - id: 253490
-    prefix: '34820'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 22351ec8-d7f8-4e08-af27-dd4192326e8f
-    country_id: *es
-    network_id: *es_avila_region
-  - id: 253494
-    prefix: '348200'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 785f078d-eb35-4802-a02d-d895c2ecb326
-    country_id: *es
-    network_id: *es_avila_voip_region
-  - id: 253495
-    prefix: '34821'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: afead8e3-10b8-476d-bc66-9c368b4e5f11
-    country_id: *es
-    network_id: *es_segovia_region
-  - id: 253497
-    prefix: '348210'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 89aad374-bb25-4fc2-8a55-0984baa5d017
-    country_id: *es
-    network_id: *es_segovia_voip_region
-  - id: 253508
-    prefix: '34822'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4d3fa24a-5b76-40ce-bfed-6d1bbb56ee9e
-    country_id: *es
-    network_id: *es_santa_cruz_de_tenerife_region
-  - id: 253515
-    prefix: '348224'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: edfb1c10-488f-40ed-8b77-4aadc48194c2
-    country_id: *es
-    network_id: *es_santa_cruz_de_tenerife_voip_region
-  - id: 253522
-    prefix: '34823'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b6195ebc-9df0-433f-8b9d-fa5c1213da7b
-    country_id: *es
-    network_id: *es_salamanca_region
-  - id: 253525
-    prefix: '348230'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4d24316e-0397-4754-a717-c2b12d9c1bbd
-    country_id: *es
-    network_id: *es_salamanca_voip_region
-  - id: 253526
-    prefix: '34824'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dfbccbea-009b-4e89-a75b-9b8bf701d8bd
-    country_id: *es
-    network_id: *es_badajoz_region
-  - id: 253530
-    prefix: '348240'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 74eb7c8d-bb27-4efe-8c87-6a4b4a84c0d5
-    country_id: *es
-    network_id: *es_badajoz_voip_region
-  - id: 253531
-    prefix: '34825'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c564ddeb-a8f8-4dc1-aa4d-cf32687d8cd0
-    country_id: *es
-    network_id: *es_toledo_region
-  - id: 253534
-    prefix: '348250'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0fe75137-7d1b-4781-9d8d-12d601d307cd
-    country_id: *es
-    network_id: *es_toledo_voip_region
-  - id: 253535
-    prefix: '34826'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b518779-f005-462c-a1f2-82455e71b98f
-    country_id: *es
-    network_id: *es_ciudad_real_region
-  - id: 253537
-    prefix: '348260'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6ed18d45-1090-4cbe-bd41-861630707f8b
-    country_id: *es
-    network_id: *es_ciudad_real_voip_region
-  - id: 253548
-    prefix: '34827'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a282c8ca-60ba-482d-a0c5-b7be80878c2f
-    country_id: *es
-    network_id: *es_caceres_region
-  - id: 253550
-    prefix: '348270'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 73cf4b57-c466-44a8-ab64-27ec737660d3
-    country_id: *es
-    network_id: *es_caceres_voip_region
-  - id: 253559
-    prefix: '34828'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a0735bcd-0db7-4842-bf59-8d03041e880a
-    country_id: *es
-    network_id: *es_las_palmas_region
-  - id: 253563
-    prefix: '348282'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e70bb45f-ce47-4dbf-86a3-d45cdb7bc499
-    country_id: *es
-    network_id: *es_las_palmas_voip_region
-  - id: 253588
-    prefix: '3483'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1f027a0f-79f4-4fea-a081-bb55d4970288
-    country_id: *es
-    network_id: *es_barcelona_region
-  - id: 253607
-    prefix: '34830'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8fedebf-cf9c-48d9-91a8-963c0d80f754
-    country_id: *es
-    network_id: *es_barcelona_voip_region
-  - id: 253744
-    prefix: '34841'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0a45f3b0-e120-4524-b80e-f8eb0ec4068a
-    country_id: *es
-    network_id: *es_la_rioja_region
-  - id: 253749
-    prefix: '348410'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: db280697-55a0-4f56-8212-88d661f513ac
-    country_id: *es
-    network_id: *es_la_rioja_voip_region
-  - id: 253760
-    prefix: '34842'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2f799105-8d2f-4502-b821-db49337f9bf0
-    country_id: *es
-    network_id: *es_cantabria_region
-  - id: 253765
-    prefix: '348420'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0c6640de-6b88-48db-87fe-d8874f403472
-    country_id: *es
-    network_id: *es_cantabria_voip_region
-  - id: 253766
-    prefix: '34843'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fe5ebd2c-3573-42b7-8589-c1614e7a6779
-    country_id: *es
-    network_id: *es_guipuzcoa_region
-  - id: 253771
-    prefix: '348430'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8db37682-d042-4a3d-ae11-02dcd4b22bf0
-    country_id: *es
-    network_id: *es_guipuzcoa_voip_region
-  - id: 253772
-    prefix: '34844'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 284a6794-87a9-424c-906b-30977d87b51e
-    country_id: *es
-    network_id: *es_vizcaya_region
-  - id: 253777
-    prefix: '34845'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b198742b-5c87-4934-844e-af1feabdbeb3
-    country_id: *es
-    network_id: *es_alava_region
-  - id: 253780
-    prefix: '348450'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 47b27adb-eec7-4dc0-9da2-68e3736e8a7f
-    country_id: *es
-    network_id: *es_alava_voip_region
-  - id: 253791
-    prefix: '34846'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 609af76e-bcf1-4357-ab43-22d211b88a45
-    country_id: *es
-    network_id: *es_vizcaya_region
-  - id: 253793
-    prefix: '348460'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c93d35cb-08bf-4c75-b46b-66044bedcb99
-    country_id: *es
-    network_id: *es_vizcaya_voip_region
-  - id: 256689
-    prefix: '34871'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b30ee79-6d70-4f70-9193-5cba55ff9728
-    country_id: *es
-    network_id: *es_illes_balears_region
-  - id: 256697
-    prefix: '348713'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 865c7014-f576-4c35-aa35-df7f5d9c9b36
-    country_id: *es
-    network_id: *es_illes_balears_voip_region
-  - id: 256699
-    prefix: '348714'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c16fd6f2-d02e-45be-a41b-48da4bd1d9b8
-    country_id: *es
-    network_id: *es_illes_balears_voip_region
-  - id: 256706
-    prefix: '34872'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3c3cb176-07ce-4a87-b28e-aa7adbfb6974
-    country_id: *es
-    network_id: *es_girona_region
-  - id: 256713
-    prefix: '348721'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 51ba77a5-a606-4706-a25c-922a9104ec23
-    country_id: *es
-    network_id: *es_girona_voip_region
-  - id: 256723
-    prefix: '34873'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 28c2d188-9199-487e-b802-a16fcd2778b5
-    country_id: *es
-    network_id: *es_lleida_region
-  - id: 256728
-    prefix: '348730'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7dca5902-28ff-4bb0-b8d0-a6649fcbf8ba
-    country_id: *es
-    network_id: *es_lleida_voip_region
-  - id: 256739
-    prefix: '34874'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 70bac743-8fe9-4874-a177-9604bdb55790
-    country_id: *es
-    network_id: *es_huesca_region
-  - id: 256743
-    prefix: '348740'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3561658d-db18-49d6-8659-e156b698bd97
-    country_id: *es
-    network_id: *es_huesca_voip_region
-  - id: 256755
-    prefix: '34875'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: db0a6f65-9619-4839-a59e-62fbee380e6c
-    country_id: *es
-    network_id: *es_soria_region
-  - id: 256758
-    prefix: '348750'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0f90aded-01e6-49da-9ac6-c12e786dbfba
-    country_id: *es
-    network_id: *es_soria_voip_region
-  - id: 256769
-    prefix: '34876'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e825468a-886e-4902-a4ff-d3071bcbac51
-    country_id: *es
-    network_id: *es_zaragoza_region
-  - id: 256776
-    prefix: '348763'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bcb3434d-6e05-42cc-a369-885ba06074cd
-    country_id: *es
-    network_id: *es_zaragoza_voip_region
-  - id: 256785
-    prefix: '34877'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a42f1881-7bff-4ca1-9229-a0c64dbc9a58
-    country_id: *es
-    network_id: *es_tarragona_region
-  - id: 256789
-    prefix: '348771'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eb423227-d70a-40e8-8579-bc86edac8630
-    country_id: *es
-    network_id: *es_tarragona_voip_region
-  - id: 256800
-    prefix: '34878'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ad1cfaa5-835b-4886-b28c-afcef7537cc7
-    country_id: *es
-    network_id: *es_teruel_region
-  - id: 256804
-    prefix: '348780'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d7b3c213-8ca5-4bcf-9729-e38cf8021262
-    country_id: *es
-    network_id: *es_teruel_voip_region
-  - id: 256815
-    prefix: '34879'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c5186af7-0358-45f6-9e04-7e33409dcc2b
-    country_id: *es
-    network_id: *es_palencia_region
-  - id: 256819
-    prefix: '348790'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c2f90562-9976-40d7-a10d-12bcd8c61ca3
-    country_id: *es
-    network_id: *es_palencia_voip_region
-  - id: 256854
-    prefix: '34880'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e468ed22-8971-495c-985e-095c597cd60e
-    country_id: *es
-    network_id: *es_zamora_region
-  - id: 256860
-    prefix: '348800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8ef425c-c62b-4a2b-b7bb-bb6278b9dc15
-    country_id: *es
-    network_id: *es_zamora_voip_region
-  - id: 256872
-    prefix: '34881'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d031a205-c521-4c16-8ea6-78b563d368b8
-    country_id: *es
-    network_id: *es_a_coruna_region
-  - id: 256882
-    prefix: '348814'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 198d486f-c2ed-43a3-b1e5-c5d17c9cf2ca
-    country_id: *es
-    network_id: *es_a_coruna_voip_region
-  - id: 256889
-    prefix: '348817'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: afdac70e-1554-4ec9-8794-3443915cec96
-    country_id: *es
-    network_id: *es_a_coruna_voip_region
-  - id: 256896
-    prefix: '34882'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 134841a0-9b0c-482c-9b68-1c46a32a9795
-    country_id: *es
-    network_id: *es_lugo_region
-  - id: 256900
-    prefix: '348820'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 901cb825-65af-45a6-af10-04c628005b7e
-    country_id: *es
-    network_id: *es_lugo_voip_region
-  - id: 256913
-    prefix: '34883'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 21e1ed13-335b-46d3-9932-d439cee7a5cc
-    country_id: *es
-    network_id: *es_valladolid_region
-  - id: 256916
-    prefix: '348830'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ecbdfcaf-cebf-44d7-93d7-a6a6d4c31e19
-    country_id: *es
-    network_id: *es_valladolid_voip_region
-  - id: 256930
-    prefix: '34884'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e8047b6-ee4e-4af0-ac24-0a0cb3eece6b
-    country_id: *es
-    network_id: *es_asturias_region
-  - id: 256933
-    prefix: '348840'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f20d6eb7-7730-4f60-8b81-2ec00c7d7a53
-    country_id: *es
-    network_id: *es_asturias_voip_region
-  - id: 256935
-    prefix: '348841'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0306c4ff-a434-4933-ad91-b72163d65247
-    country_id: *es
-    network_id: *es_asturias_voip_region
-  - id: 256942
-    prefix: '34885'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b931a401-bec9-4a85-804d-d9266593697a
-    country_id: *es
-    network_id: *es_asturias_region
-  - id: 256950
-    prefix: '34886'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 05442e10-9169-41df-8966-205b0eb95872
-    country_id: *es
-    network_id: *es_pontevedra_region
-  - id: 256956
-    prefix: '348865'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b7d045a-23dd-4398-9418-8cd8c29c77d8
-    country_id: *es
-    network_id: *es_pontevedra_voip_region
-  - id: 256958
-    prefix: '348867'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07aea001-5946-4598-b5e2-5e48e58a96c1
-    country_id: *es
-    network_id: *es_pontevedra_voip_region
-  - id: 256961
-    prefix: '34887'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cdaaded6-1fc8-4cd7-89e8-82e2efec8d72
-    country_id: *es
-    network_id: *es_leon_region
-  - id: 256965
-    prefix: '348870'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f5a6346-1fd2-4ef0-9dd5-8b499ab35721
-    country_id: *es
-    network_id: *es_leon_voip_region
-  - id: 256968
-    prefix: '34888'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f76fe01e-aff5-4607-8359-17fc837bcb13
-    country_id: *es
-    network_id: *es_ourense_region
-  - id: 256973
-    prefix: '348880'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 34ffcde8-9533-4999-b048-436f4ec35b6f
-    country_id: *es
-    network_id: *es_ourense_voip_region
-  - id: 257093
-    prefix: '349'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a5b9090e-7da4-4b14-b6a1-3806e6b40ac4
-    country_id: *es
-    network_id: *es_pstn_and_special_services_region
-  - id: 257359
-    prefix: '3491'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 53a40b31-603e-4716-a634-c54917ce89bd
-    country_id: *es
-    network_id: *es_madrid_region
-  - id: 257601
-    prefix: '34920'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a5176513-356c-4ac9-9d66-2e9df0a28864
-    country_id: *es
-    network_id: *es_avila_region
-  - id: 257621
-    prefix: '34921'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2c55e0f0-d08f-4ccf-83b2-a57f3ec3b0c6
-    country_id: *es
-    network_id: *es_segovia_region
-  - id: 257649
-    prefix: '34922'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b5b096e5-ac76-481b-bb8a-5fe73e4cd501
-    country_id: *es
-    network_id: *es_santa_cruz_de_tenerife_region
-  - id: 257672
-    prefix: '34923'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3fbc4e63-ece6-4047-baf6-8da01b2de950
-    country_id: *es
-    network_id: *es_salamanca_region
-  - id: 257707
-    prefix: '34924'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f013fa05-0738-42c8-a62b-20519c85c9c0
-    country_id: *es
-    network_id: *es_badajoz_region
-  - id: 257723
-    prefix: '34925'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8758c08e-64e2-4eaa-b567-4e1006b7419d
-    country_id: *es
-    network_id: *es_toledo_region
-  - id: 257740
-    prefix: '34926'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f2067618-7fae-4663-9a54-244f0c809dc6
-    country_id: *es
-    network_id: *es_ciudad_real_region
-  - id: 257765
-    prefix: '34927'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b973c9f3-968c-42b3-8db4-4d7219844774
-    country_id: *es
-    network_id: *es_caceres_region
-  - id: 257800
-    prefix: '34928'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 60ce1cb5-69dd-4b1e-a6e3-207c151bc406
-    country_id: *es
-    network_id: *es_las_palmas_region
-  - id: 257862
-    prefix: '3493'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 90323ad4-ef24-4b45-91b0-ec0f6313ae5a
-    country_id: *es
-    network_id: *es_barcelona_region
-  - id: 257978
-    prefix: '34980'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d798706f-2418-49e1-bd6e-583b5e4c0748
-    country_id: *es
-    network_id: *es_zamora_region
-  - id: 258009
-    prefix: '34981'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 16ce5b8c-d8d1-4807-880f-c4804ba62438
-    country_id: *es
-    network_id: *es_a_coruna_region
-  - id: 258037
-    prefix: '34982'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6fb49f9d-4429-42b6-8b7a-fbd3b620b34f
-    country_id: *es
-    network_id: *es_lugo_region
-  - id: 258071
-    prefix: '34983'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a5235995-8fd4-45be-b3a1-289ec214dc57
-    country_id: *es
-    network_id: *es_valladolid_region
-  - id: 258095
-    prefix: '34984'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2295bdaa-e047-4ae5-8c6b-a5ba3b277d16
-    country_id: *es
-    network_id: *es_asturias_region
-  - id: 258110
-    prefix: '34985'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2d0570dc-4400-4223-b600-c06063aaede6
-    country_id: *es
-    network_id: *es_asturias_region
-  - id: 258125
-    prefix: '34986'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b9cd970-c5da-4af4-96e6-428e1323d44b
-    country_id: *es
-    network_id: *es_pontevedra_region
-  - id: 258130
-    prefix: '34987'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ecf3dc02-2fac-4432-9e0e-b3118977e34e
-    country_id: *es
-    network_id: *es_leon_region
-  - id: 258139
-    prefix: '34988'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7902e4da-645a-47c6-9400-0c08b4a551d2
-    country_id: *es
-    network_id: *es_ourense_region
-  - id: 263651
-    prefix: '348461'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 05d8ecaf-62ea-4136-8cba-609317729405
-    country_id: *es
-    network_id: *es_vizcaya_voip_region
-  - id: 263661
-    prefix: '34847'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2ea02e30-a9fb-4cb5-98fe-2174ad501bf7
-    country_id: *es
-    network_id: *es_burgos_region
-  - id: 263665
-    prefix: '348470'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 49e605c3-8819-4e8b-a504-9d1d1118e20a
-    country_id: *es
-    network_id: *es_burgos_voip_region
-  - id: 263666
-    prefix: '34848'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4cff8dd6-19f6-4786-9f63-009c52f8fdd9
-    country_id: *es
-    network_id: *es_navarra_region
-  - id: 263670
-    prefix: '348480'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6130b8ef-3a5a-4ae0-b69d-424f87f00311
-    country_id: *es
-    network_id: *es_navarra_voip_region
-  - id: 263680
-    prefix: '34849'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c1893b3c-ed6f-40cd-95fc-13e4bb234121
-    country_id: *es
-    network_id: *es_guadalajara_region
-  - id: 263683
-    prefix: '348490'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f599cf15-21b7-47a6-b744-836855293620
-    country_id: *es
-    network_id: *es_guadalajara_voip_region
-  - id: 263719
-    prefix: '34850'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6261cb52-d4f7-42a9-949e-bc7d8919c6af
-    country_id: *es
-    network_id: *es_almeria_region
-  - id: 263722
-    prefix: '348500'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 33e028bd-6350-4e6b-a33b-47acf13abe3a
-    country_id: *es
-    network_id: *es_almeria_voip_region
-  - id: 263734
-    prefix: '34851'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 00ef5b43-4a77-4038-9854-a37aee97c1a6
-    country_id: *es
-    network_id: *es_malaga_region
-  - id: 263737
-    prefix: '348510'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 142c757a-815b-4311-acf2-02eed28472fb
-    country_id: *es
-    network_id: *es_malaga_voip_region
-  - id: 263740
-    prefix: '348511'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f7df9083-8eb4-4fa1-bb53-30410c1125ce
-    country_id: *es
-    network_id: *es_malaga_voip_region
-  - id: 263753
-    prefix: '34852'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d42d83ea-b705-4154-9753-ff7522fea8e4
-    country_id: *es
-    network_id: *es_malaga_region
-  - id: 263768
-    prefix: '34853'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3d2a38e8-d525-4273-80d7-ef39c7c1eb88
-    country_id: *es
-    network_id: *es_jaen_region
-  - id: 263771
-    prefix: '348530'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 25a683bb-6ce1-475a-8cb2-9690c3ecdf03
-    country_id: *es
-    network_id: *es_jaen_voip_region
-  - id: 263782
-    prefix: '34854'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e05c2e1-53cb-4f3e-8ace-7f904bf2a166
-    country_id: *es
-    network_id: *es_sevilla_region
-  - id: 263786
-    prefix: '348540'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 06d0e01c-8a2e-4d98-9d3d-66eed30502ab
-    country_id: *es
-    network_id: *es_sevilla_voip_region
-  - id: 263787
-    prefix: '348541'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b3b092e7-af65-496c-9b0f-8cb4410e8145
-    country_id: *es
-    network_id: *es_sevilla_voip_region
-  - id: 263788
-    prefix: '34855'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0c33e95d-e103-452a-8a75-9bbf0d2a544f
-    country_id: *es
-    network_id: *es_sevilla_region
-  - id: 263802
-    prefix: '34856'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a8019090-6c68-4e72-8fe1-e744803ab3a8
-    country_id: *es
-    network_id: *es_cadiz_region
-  - id: 263804
-    prefix: '348564'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 499b6225-1ae4-4358-88e5-4ff89aa8384c
-    country_id: *es
-    network_id: *es_cadiz_voip_region
-  - id: 263805
-    prefix: '348567'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a7accb8a-315f-4905-97fb-d325e80228e6
-    country_id: *es
-    network_id: *es_cadiz_voip_region
-  - id: 263806
-    prefix: '34857'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e4965684-a9df-4168-9e0b-a92bb434580e
-    country_id: *es
-    network_id: *es_cordoba_region
-  - id: 263807
-    prefix: '348570'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 78071f31-e8d6-4748-bef3-4b6cd3a6a064
-    country_id: *es
-    network_id: *es_cordoba_voip_region
-  - id: 263818
-    prefix: '34858'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d111ec57-aacd-4112-ad36-972582c5e160
-    country_id: *es
-    network_id: *es_granada_region
-  - id: 263819
-    prefix: '348580'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be01cd42-780e-4860-8c2b-c68d5f3530c1
-    country_id: *es
-    network_id: *es_granada_voip_region
-  - id: 263830
-    prefix: '34859'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6e3e9b03-31b9-4a74-bb07-89a4f0441268
-    country_id: *es
-    network_id: *es_huelva_region
-  - id: 263832
-    prefix: '348590'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: af297474-d38f-4d03-ab30-9369591d7152
-    country_id: *es
-    network_id: *es_huelva_voip_region
-  - id: 263861
-    prefix: '34860'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e81b025-2d8b-4acd-92e3-d92a2ddda0df
-    country_id: *es
-    network_id: *es_valencia_region
-  - id: 263870
-    prefix: '348600'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 05188a80-dedd-4f3a-9842-d53729dd32ea
-    country_id: *es
-    network_id: *es_valencia_voip_region
-  - id: 263872
-    prefix: '348601'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 957388b9-1782-4f73-a67c-ed9234e3bf28
-    country_id: *es
-    network_id: *es_valencia_voip_region
-  - id: 263882
-    prefix: '34861'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0162abd2-45d6-4003-a728-9990c17585d6
-    country_id: *es
-    network_id: *es_valencia_region
-  - id: 263895
-    prefix: '34862'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 59e54e89-19a0-418a-8d2b-6051e726f2a4
-    country_id: *es
-    network_id: *es_valencia_region
-  - id: 263907
-    prefix: '34863'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c380a538-94e2-41cd-8991-39ccb37522a6
-    country_id: *es
-    network_id: *es_valencia_region
-  - id: 263919
-    prefix: '34864'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 77e49ecd-a5e1-4e35-933b-498de5576c04
-    country_id: *es
-    network_id: *es_castellon_de_la_plana_region
-  - id: 263921
-    prefix: '348640'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 72240c18-3906-456b-9d34-f2ff0c1be30e
-    country_id: *es
-    network_id: *es_castellon_de_la_plana_voip_region
-  - id: 263932
-    prefix: '34865'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e2c6e5f4-3c35-4f10-a0f6-241d4db166a7
-    country_id: *es
-    network_id: *es_alicante_region
-  - id: 263934
-    prefix: '348650'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 053f4db5-8959-4090-a041-d0bc92c68705
-    country_id: *es
-    network_id: *es_alicante_voip_region
-  - id: 263936
-    prefix: '348651'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 541c8d55-c306-4bbe-a3d6-cc0a41a279ab
-    country_id: *es
-    network_id: *es_alicante_voip_region
-  - id: 263946
-    prefix: '34866'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e22bb437-9fe0-4123-823e-1b1886eba3f0
-    country_id: *es
-    network_id: *es_alicante_region
-  - id: 263958
-    prefix: '34867'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f7d1959-966c-47e6-9cb8-acd6d482d7d2
-    country_id: *es
-    network_id: *es_albacete_region
-  - id: 263961
-    prefix: '348670'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c0ad5f52-780d-46e6-9e74-9f94e7e71523
-    country_id: *es
-    network_id: *es_albacete_voip_region
-  - id: 263962
-    prefix: '34868'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd5e5f36-8f2b-494d-ba37-aaa32d2ca5e6
-    country_id: *es
-    network_id: *es_murcia_region
-  - id: 263974
-    prefix: '348685'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 88e14f58-e024-49cc-8262-738e81555084
-    country_id: *es
-    network_id: *es_murcia_voip_region
-  - id: 263980
-    prefix: '34869'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4c99611c-9a7f-4042-b9d1-e027e2a59a02
-    country_id: *es
-    network_id: *es_cuenca_region
-  - id: 263983
-    prefix: '348690'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be93254b-24af-475f-a555-a363c779c5f8
-    country_id: *es
-    network_id: *es_cuenca_voip_region
-  - id: 264218
-    prefix: '34941'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1a6b5344-5305-4bf1-bd39-6a81a3cd8b56
-    country_id: *es
-    network_id: *es_la_rioja_region
-  - id: 264241
-    prefix: '34942'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2be6aaaa-f442-4ffc-9048-be5916d35d63
-    country_id: *es
-    network_id: *es_cantabria_region
-  - id: 264255
-    prefix: '34943'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d6aa0845-b626-413e-9f9c-5391811fcd27
-    country_id: *es
-    network_id: *es_guipuzcoa_region
-  - id: 264279
-    prefix: '34944'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f84cc3ee-2cf7-4e9b-a179-950bcb455b9f
-    country_id: *es
-    network_id: *es_vizcaya_region
-  - id: 264302
-    prefix: '34945'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fbaec06d-b6db-48d6-92ab-411505d77a0b
-    country_id: *es
-    network_id: *es_alava_region
-  - id: 264311
-    prefix: '34946'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0f70af0e-9ec5-4ffc-ac0d-4a31056612e0
-    country_id: *es
-    network_id: *es_vizcaya_region
-  - id: 264333
-    prefix: '34947'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f70e03da-fdc7-4a2a-bc7d-12aca4ceb2da
-    country_id: *es
-    network_id: *es_burgos_region
-  - id: 264365
-    prefix: '34948'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b603988-bdf3-444d-95e4-cafbed27bc1f
-    country_id: *es
-    network_id: *es_navarra_region
-  - id: 264388
-    prefix: '34949'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3e4daed4-63e3-42a0-9ccb-3519f2412b7b
-    country_id: *es
-    network_id: *es_guadalajara_region
-  - id: 264452
-    prefix: '34950'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 27ad2aee-8886-44e1-8c3c-75473378a092
-    country_id: *es
-    network_id: *es_almeria_region
-  - id: 264474
-    prefix: '34951'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6a65b249-384e-492e-bb0d-f2f036b491b8
-    country_id: *es
-    network_id: *es_malaga_region
-  - id: 264487
-    prefix: '34952'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 37a1cacb-08cc-4a73-b200-9dba56fdbf0d
-    country_id: *es
-    network_id: *es_malaga_region
-  - id: 264518
-    prefix: '34953'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b23971a-9cfb-4ffd-93f4-ab7b779a12ff
-    country_id: *es
-    network_id: *es_jaen_region
-  - id: 264549
-    prefix: '34954'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dcf9d881-2b55-4cee-9624-3df9e27a78ac
-    country_id: *es
-    network_id: *es_sevilla_region
-  - id: 264581
-    prefix: '34955'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3246ebb3-fe9d-444a-bba2-c02b97819704
-    country_id: *es
-    network_id: *es_sevilla_region
-  - id: 264613
-    prefix: '34956'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b7f240f3-e9c6-44cc-b562-2b65b3321cad
-    country_id: *es
-    network_id: *es_cadiz_region
-  - id: 264627
-    prefix: '34957'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 766332f5-f30f-42d5-a96b-25034d72e4b5
-    country_id: *es
-    network_id: *es_cordoba_region
-  - id: 264641
-    prefix: '34958'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cb44ac60-851e-40fe-9ce6-f97295cc0f37
-    country_id: *es
-    network_id: *es_granada_region
-  - id: 264683
-    prefix: '34959'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c3e96fe2-1988-491b-a9f4-ec02440e6e36
-    country_id: *es
-    network_id: *es_huelva_region
-  - id: 264733
-    prefix: '34960'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc2e4ca7-b797-4f5a-a283-3cc001890a5b
-    country_id: *es
-    network_id: *es_valencia_region
-  - id: 264760
-    prefix: '34961'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e4f60181-4b04-4583-bc72-6075fdfc47c4
-    country_id: *es
-    network_id: *es_valencia_region
-  - id: 264774
-    prefix: '34962'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3bb8a041-f35c-4815-86bd-3e5d74d0d2ca
-    country_id: *es
-    network_id: *es_valencia_region
-  - id: 264788
-    prefix: '34963'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5a98ac26-934e-4612-bac1-9b8a7802fe76
-    country_id: *es
-    network_id: *es_valencia_region
-  - id: 264820
-    prefix: '34964'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 619aad74-d5b2-4e98-846f-9982f9f33073
-    country_id: *es
-    network_id: *es_castellon_de_la_plana_region
-  - id: 264834
-    prefix: '34965'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d3c08650-ee1c-44c5-bb30-e3d8cf694007
-    country_id: *es
-    network_id: *es_alicante_region
-  - id: 264852
-    prefix: '34966'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 90a1c2f0-7248-496f-97f2-0458a2299d88
-    country_id: *es
-    network_id: *es_alicante_region
-  - id: 264885
-    prefix: '34967'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 01061188-d3d0-4fb4-87a9-a74c250cb5f8
-    country_id: *es
-    network_id: *es_albacete_region
-  - id: 264923
-    prefix: '34968'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 38d5dcbe-4643-4a06-b058-83876f09f792
-    country_id: *es
-    network_id: *es_murcia_region
-  - id: 264964
-    prefix: '34969'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 25698f22-69e6-4699-b0a4-6aeb6aecf503
-    country_id: *es
-    network_id: *es_cuenca_region
-  - id: 265042
-    prefix: '34971'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 13d55855-a32a-4e3d-b69d-c8a92692e6cf
-    country_id: *es
-    network_id: *es_illes_balears_region
-  - id: 265059
-    prefix: '34972'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ff2b010f-1f9d-4d8c-a893-f3ae9495dc28
-    country_id: *es
-    network_id: *es_girona_region
-  - id: 265084
-    prefix: '34973'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 167c6699-a7fc-4529-b912-5cb6ac19a409
-    country_id: *es
-    network_id: *es_lleida_region
-  - id: 265110
-    prefix: '34974'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0a752010-61ad-49fa-b110-a684a8ce9176
-    country_id: *es
-    network_id: *es_huesca_region
-  - id: 265143
-    prefix: '34975'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c5f7fe0f-e13e-428f-b54a-2decd6e2b10b
-    country_id: *es
-    network_id: *es_soria_region
-  - id: 265151
-    prefix: '34976'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 28524cf9-3c2c-4057-a2b7-d42dbf3fa670
-    country_id: *es
-    network_id: *es_zaragoza_region
-  - id: 265187
-    prefix: '34977'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2c3b24b4-c6ea-4fad-98cf-e2704d484cbc
-    country_id: *es
-    network_id: *es_tarragona_region
-  - id: 265212
-    prefix: '34978'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eaacf2cd-16c9-4d02-b80f-dc70b71486dd
-    country_id: *es
-    network_id: *es_teruel_region
-  - id: 265236
-    prefix: '34979'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e31258d5-4706-49d1-8ee2-e01ed606b5d1
-    country_id: *es
-    network_id: *es_palencia_region

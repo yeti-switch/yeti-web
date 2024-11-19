@@ -1,6 +1,10 @@
 country_id: &pr 173
 networks:
 # Fixed Networks
+  - id: &pr_fixed 43345
+    name: PR Fixed
+    uuid: 931eeefa-b59b-4815-bd11-2f0529a0dacd
+    type_id: 2
   - id: &pr_rio_piedras_region 19555
     name: PR Rio Piedras Region
     uuid: 154e954c-f344-4c0c-9dca-7bce565c8062
@@ -400,22 +404,14 @@ networks:
     uuid: 8b59abd5-43e2-4e67-9e97-b78098664589
     type_id: 12
 network_prefixes:
-# Country code Prefixes
-  - id: 205762
-    prefix: '1787'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: 3a1ea206-9b1d-4570-861b-51807eaa241d
-    country_id: *pr
-    network_id: null
-  - id: 217225
-    prefix: '1939'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: 850a3f51-dd88-4834-95e6-390c075fdef7
-    country_id: *pr
-    network_id: null
 # Fixed Prefixes
+  - id: 504785
+    prefix: '1787'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: b30458cc-29f5-461a-a204-dc8f7f673e5d
+    country_id: *pr
+    network_id: *pr_fixed
   - id: 205764
     prefix: '1787200'
     number_min_length: 11
@@ -3125,6 +3121,13 @@ network_prefixes:
     uuid: b6f22bf7-74d4-4d3b-879b-9b763bba9573
     country_id: *pr
     network_id: *pr_rio_piedras_region
+  - id: 518719
+    prefix: '1939'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: b30013c9-6112-4a36-9b72-b6b923e4add6
+    country_id: *pr
+    network_id: *pr_fixed
   - id: 212170
     prefix: '1939201'
     number_min_length: 11
@@ -3132,13 +3135,6 @@ network_prefixes:
     uuid: 728ffd68-e570-4969-8123-4bb1bb8292ee
     country_id: *pr
     network_id: *pr_adjuntas_region
-  - id: 212171
-    prefix: '1939202'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d0070fe7-e43e-49f9-accd-9629bfe2eec8
-    country_id: *pr
-    network_id: *pr_levittown_region
   - id: 212173
     prefix: '1939204'
     number_min_length: 11
@@ -3405,6 +3401,13 @@ network_prefixes:
     uuid: b6d2f98f-b54e-460f-8c2c-c1f8cf626aa0
     country_id: *pr
     network_id: *pr_levittown_region
+  - id: 518727
+    prefix: '1939427'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 04918b04-7900-43fd-9483-875d835f2ece
+    country_id: *pr
+    network_id: *pr_santurce_region
   - id: 212363
     prefix: '1939437'
     number_min_length: 11
@@ -6220,6 +6223,13 @@ network_prefixes:
     uuid: 8054e2f1-087b-4eaa-8d5c-db6460f08c23
     country_id: *pr
     network_id: *pr_t_mobile_mobile
+  - id: 212171
+    prefix: '1939202'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0070fe7-e43e-49f9-accd-9629bfe2eec8
+    country_id: *pr
+    network_id: *pr_liberty_mobile
   - id: 212172
     prefix: '1939203'
     number_min_length: 11
@@ -7130,6 +7140,13 @@ network_prefixes:
     uuid: 353cb0b4-cb34-4d8b-826c-91f51e589126
     country_id: *pr
     network_id: *pr_liberty_mobile
+  - id: 518720
+    prefix: '1939396'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a40d533b-3212-4daa-b8e9-e039651bb9a3
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
   - id: 212337
     prefix: '1939397'
     number_min_length: 11
@@ -7137,6 +7154,13 @@ network_prefixes:
     uuid: a9ea3a31-15a7-434d-a6e9-c00283bf8f89
     country_id: *pr
     network_id: *pr_liberty_mobile
+  - id: 518721
+    prefix: '1939398'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d2a4eb24-f3c9-4b02-abb7-f210b66855db
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
   - id: 212339
     prefix: '1939400'
     number_min_length: 11
@@ -7249,6 +7273,20 @@ network_prefixes:
     uuid: 94445f59-0a3f-413d-acaf-ba12f0808238
     country_id: *pr
     network_id: *pr_t_mobile_mobile
+  - id: 518722
+    prefix: '1939420'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f76c7590-7db2-43a0-ab48-46107d57106c
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
+  - id: 518723
+    prefix: '1939421'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0831e692-8ad4-46c6-840e-7dbb7ce35043
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
   - id: 212358
     prefix: '1939422'
     number_min_length: 11
@@ -7256,11 +7294,32 @@ network_prefixes:
     uuid: 7642f64d-4df5-493c-85e4-f7d16a347876
     country_id: *pr
     network_id: *pr_t_mobile_mobile
+  - id: 518724
+    prefix: '1939423'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa1f470e-89c3-4cce-84f6-8d768ac3ec0d
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
+  - id: 518725
+    prefix: '1939424'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b90f3c0a-84a9-4a58-aad4-7464a8d3f97a
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
   - id: 212359
     prefix: '1939425'
     number_min_length: 11
     number_max_length: 11
     uuid: ecbd7ac6-6cb5-4a3b-803b-98bd388fb121
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
+  - id: 518726
+    prefix: '1939426'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96c83c0b-aca9-443a-8344-e0136acc5a20
     country_id: *pr
     network_id: *pr_t_mobile_mobile
   - id: 212360
@@ -7275,6 +7334,34 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 11
     uuid: 8b9a37b8-4f13-4b35-a8b6-8eb04ed3f17c
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
+  - id: 518728
+    prefix: '1939430'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2bbacb80-2033-4163-a5ad-ba2dc4dc5834
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
+  - id: 518729
+    prefix: '1939431'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f3134a48-95b3-47a6-be56-af4d8cd8a01c
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
+  - id: 518730
+    prefix: '1939432'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ff916a0-26e5-45b4-b903-798fbca37af0
+    country_id: *pr
+    network_id: *pr_t_mobile_mobile
+  - id: 518731
+    prefix: '1939433'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: afbec3c3-72b9-426c-bac5-f1c805edf4d0
     country_id: *pr
     network_id: *pr_t_mobile_mobile
   - id: 212362

@@ -1,5 +1,10 @@
 country_id: &al 2
 networks:
+# Fixed Networks
+  - id: &al_fixed 21893
+    name: AL Fixed
+    uuid: 211724f3-505d-49d2-b095-320b129657e2
+    type_id: 2
 # Supplementary services Networks
   - id: &al_special_services 21354
     name: AL Special Services
@@ -17,10 +22,6 @@ networks:
     name: AL Enquiry Services
     uuid: 3df3d0d5-e980-4314-943d-355c6db7dd19
     type_id: 13
-  - id: &al_sms_mms_services 23299
-    name: AL Sms_Mms Services
-    uuid: cc130524-76ff-4f55-9cd6-e2832a5d7a61
-    type_id: 13
   - id: &al_internal_network_services 23581
     name: AL Internal Network Services
     uuid: 1216960d-010b-4241-98ce-06ea8224efac
@@ -37,6 +38,22 @@ networks:
     name: AL Dial Up Internet And Data Services
     uuid: 4d1367b9-33ff-4111-a02b-b895387f3687
     type_id: 13
+  - id: &al_shared_revenue_services 24431
+    name: AL Shared Revenue Services
+    uuid: 9dda9451-7964-4fe8-a77a-e64d700fb7b6
+    type_id: 13
+  - id: &al_routing 24531
+    name: AL Routing
+    uuid: aacb143b-7282-4b8d-b024-af3ac936531f
+    type_id: 13
+  - id: &al_sms_mms_services 23299
+    name: AL Sms_Mms Services
+    uuid: cc130524-76ff-4f55-9cd6-e2832a5d7a61
+    type_id: 13
+  - id: &al_personal_number_services 24168
+    name: AL Personal Number Services
+    uuid: 9ed10f88-fc80-4cf5-aae6-c3309fae87a8
+    type_id: 13
   - id: &al_freephone_services 23825
     name: AL Freephone Services
     uuid: edd147bf-3a20-40ca-9d55-86c61946ad44
@@ -49,23 +66,6 @@ networks:
     name: AL Shared Cost Services
     uuid: 56b1619f-002a-4362-a0c4-1b02c85aa1fe
     type_id: 13
-  - id: &al_personal_number_services 24168
-    name: AL Personal Number Services
-    uuid: 9ed10f88-fc80-4cf5-aae6-c3309fae87a8
-    type_id: 13
-  - id: &al_shared_revenue_services 24431
-    name: AL Shared Revenue Services
-    uuid: 9dda9451-7964-4fe8-a77a-e64d700fb7b6
-    type_id: 13
-  - id: &al_routing 24531
-    name: AL Routing
-    uuid: aacb143b-7282-4b8d-b024-af3ac936531f
-    type_id: 13
-# Fixed Networks
-  - id: &al_fixed 21893
-    name: AL Fixed
-    uuid: 211724f3-505d-49d2-b095-320b129657e2
-    type_id: 2
 # Mobile Networks
   - id: &al_albtelecom_mobile_mobile 24082
     name: AL Albtelecom Mobile Mobile
@@ -80,14 +80,322 @@ networks:
     uuid: 14163a3c-e739-49ce-a513-6e04b371ff61
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 506976
+    prefix: '35521'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cb1f6871-42b6-439c-8686-c0da1e0edbe4
+    country_id: *al
+    network_id: *al_fixed
   - id: 241940
     prefix: '355'
     number_min_length: 4
     number_max_length: 100
     uuid: 172c579b-0dcf-4cf9-b149-90d3c4013454
     country_id: *al
-    network_id: null
+    network_id: *al_fixed
+  - id: 507068
+    prefix: '35531'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b9485120-ad07-4299-8d18-d2d76cd0e0ba
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507087
+    prefix: '35532'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ab6880c4-7aed-4ab9-8bf2-2ba700b4b8f9
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507090
+    prefix: '35533'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8cd1f3d5-5ae4-441e-9dc3-4b334d33ed28
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507114
+    prefix: '35534'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 66dc514b-581c-462b-8bbe-fa5c3dfe7570
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507139
+    prefix: '35535'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4d4c8411-0b92-467a-936d-809ac14f2da0
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507163
+    prefix: '35536'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d76455d-76c5-49fd-9abf-a8f793925ce2
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507186
+    prefix: '35537'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fa533c9d-8d94-4c62-ad9a-5e1fc50b6ece
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507191
+    prefix: '35538'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f5d9092-4aee-4a6a-9905-9a35483caa33
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507196
+    prefix: '35539'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ad6a530-d8c9-4df7-9962-7fb356f07634
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507227
+    prefix: '35542'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c12a5a9d-6f97-4c5b-a5e1-8e9b6618d6d6
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507230
+    prefix: '35543'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dfd45acc-c28a-4e67-b704-3c1e8f6f7cd4
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507243
+    prefix: '35544'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2a5a39e5-63dd-4096-b039-04438c62622d
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507248
+    prefix: '35545'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 454ff484-54b1-49e0-af31-4c854d5f8348
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507258
+    prefix: '35558'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 57989159-0f2a-4961-8a4e-1842761fb05d
+    country_id: *al
+    network_id: *al_fixed
+  - id: 507262
+    prefix: '35559'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 029fa23f-3dc7-4afe-ad29-8e15b0d5ae01
+    country_id: *al
+    network_id: *al_fixed
+  - id: 508362
+    prefix: '35587'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e858f117-5b37-47c7-bd8f-287a2cbf7e3a
+    country_id: *al
+    network_id: *al_fixed
+  - id: 508369
+    prefix: '35588'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5eea54fe-24f5-4e5a-abc8-00caf74814d2
+    country_id: *al
+    network_id: *al_fixed
+  - id: 508373
+    prefix: '35589'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f7edbf0c-d2c2-4308-8a47-1e3e1ecfc410
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509091
+    prefix: '35522'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 67e8a2ff-a149-4986-be95-47bd2e9a6e39
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509094
+    prefix: '35523'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4c47491-5f5f-4ebc-b3b5-768db67d3a3e
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509117
+    prefix: '35524'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87cd90d8-2135-48ea-9b73-30ad7afdea6c
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509140
+    prefix: '35525'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 059b92ce-0239-47d0-a004-fe144700c5fb
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509162
+    prefix: '35526'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6001c47c-04c1-429a-ac03-dd14145a3702
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509195
+    prefix: '35527'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5ce34a0e-a57c-4371-af81-2a9a53a6ba08
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509198
+    prefix: '35528'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16642c07-cd2b-4d55-a67a-6715369a8f26
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509200
+    prefix: '35529'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a4e9d333-7351-45f4-b774-fcc04a7b7ced
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509234
+    prefix: '35546'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 103c2adb-af12-4313-9512-f437c02bcddd
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509237
+    prefix: '35547'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 56623563-705a-4835-9859-bf4737d5310d
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509243
+    prefix: '35548'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25fd7242-33fe-42ee-8768-07422912ea42
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509246
+    prefix: '35549'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c62a0599-29fa-4061-bd4e-aa174f8866da
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509259
+    prefix: '35551'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 491a53e3-b722-45d8-89e0-ce2d67252961
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509266
+    prefix: '35552'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 162718c0-cba2-4da5-bc6b-9b3a76edce91
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509274
+    prefix: '35553'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b1b3052a-7925-4706-b029-9b3ab5308942
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509284
+    prefix: '35554'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e4953e7-b64c-47b0-9181-6e708df1b8ed
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509286
+    prefix: '35555'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d8a4d83-67be-43f3-8212-60704f8bcfa7
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509295
+    prefix: '35556'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb66f6ed-b4f6-44ee-ab5f-42758e185665
+    country_id: *al
+    network_id: *al_fixed
+  - id: 509298
+    prefix: '35557'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cded4ca-0567-481c-9197-4dd22d76aabb
+    country_id: *al
+    network_id: *al_fixed
+  - id: 510910
+    prefix: '35581'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 823f9d62-29e7-4e99-ba1c-e4d083942632
+    country_id: *al
+    network_id: *al_fixed
+  - id: 510924
+    prefix: '35582'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d06f69d0-4607-4677-8ff5-dbc06ddc6595
+    country_id: *al
+    network_id: *al_fixed
+  - id: 510932
+    prefix: '35583'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0c52ae0-a805-4e2f-b1c9-c760f15036fb
+    country_id: *al
+    network_id: *al_fixed
+  - id: 510938
+    prefix: '35584'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68d2ad29-f4cf-4114-8943-aca0a174317c
+    country_id: *al
+    network_id: *al_fixed
+  - id: 510947
+    prefix: '35585'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b8f9d3b-b0a4-48a8-826f-a6c0ea5eaa8e
+    country_id: *al
+    network_id: *al_fixed
+  - id: 510951
+    prefix: '35586'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cf851c3f-d593-4210-acd3-8651749b9071
+    country_id: *al
+    network_id: *al_fixed
 # Supplementary services Prefixes
   - id: 242347
     prefix: '3551'
@@ -117,13 +425,6 @@ network_prefixes:
     uuid: 62d104f1-64ce-4e02-9ca0-e2d10f368f99
     country_id: *al
     network_id: *al_enquiry_services
-  - id: 249560
-    prefix: '3555'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: cba77406-2eae-42c6-a3c1-2cac128db89b
-    country_id: *al
-    network_id: *al_sms_mms_services
   - id: 251754
     prefix: '355711'
     number_min_length: 11
@@ -152,6 +453,34 @@ network_prefixes:
     uuid: 7d78db02-a025-4715-946d-bccd23c9aa8a
     country_id: *al
     network_id: *al_dial_up_internet_and_data_services
+  - id: 257172
+    prefix: '355900'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: e4f0a417-89e7-4817-9dfb-63c9551b8bd6
+    country_id: *al
+    network_id: *al_shared_revenue_services
+  - id: 258171
+    prefix: '35599'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 0d05ed69-22b4-4ffd-a5f9-77eaf45431d9
+    country_id: *al
+    network_id: *al_routing
+  - id: 249560
+    prefix: '3555'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: cba77406-2eae-42c6-a3c1-2cac128db89b
+    country_id: *al
+    network_id: *al_sms_mms_services
+  - id: 255309
+    prefix: '355700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4527006f-e1fd-4737-b6e9-96f689cb8c93
+    country_id: *al
+    network_id: *al_personal_number_services
   - id: 253135
     prefix: '355800'
     number_min_length: 10
@@ -173,355 +502,25 @@ network_prefixes:
     uuid: 48b85bb3-e07f-4dc9-a6f0-e388b61bf604
     country_id: *al
     network_id: *al_shared_cost_services
-  - id: 255309
-    prefix: '355700'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4527006f-e1fd-4737-b6e9-96f689cb8c93
-    country_id: *al
-    network_id: *al_personal_number_services
-  - id: 257172
-    prefix: '355900'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: e4f0a417-89e7-4817-9dfb-63c9551b8bd6
-    country_id: *al
-    network_id: *al_shared_revenue_services
-  - id: 258171
-    prefix: '35599'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 0d05ed69-22b4-4ffd-a5f9-77eaf45431d9
-    country_id: *al
-    network_id: *al_routing
-# Fixed Prefixes
-  - id: 243222
-    prefix: '355031'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 16ec2439-f762-48d6-aa87-857a6194a9f5
-    country_id: *al
-    network_id: *al_fixed
-  - id: 243357
-    prefix: '355032'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f1635b00-4823-430b-b9f3-840ab666333b
-    country_id: *al
-    network_id: *al_fixed
-  - id: 243403
-    prefix: '355033'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4def7fe5-3bc9-424f-a9d2-0b3a3723626e
-    country_id: *al
-    network_id: *al_fixed
-  - id: 243480
-    prefix: '355034'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: df885f97-9d01-4b83-a1e3-85edcca3b7b5
-    country_id: *al
-    network_id: *al_fixed
-  - id: 243579
-    prefix: '355035'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18e932c6-901d-4250-bd91-52ee805e5748
-    country_id: *al
-    network_id: *al_fixed
-  - id: 243656
-    prefix: '355036'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0003c79a-2579-4a37-8fd1-fbc6e44306a4
-    country_id: *al
-    network_id: *al_fixed
-  - id: 243703
-    prefix: '355037'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 00de90e9-f7fb-4178-a99b-22e1cc88c417
-    country_id: *al
-    network_id: *al_fixed
-  - id: 243854
-    prefix: '355038'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 82f82ab8-cd85-42b1-a5b4-e55f4bb5f3c5
-    country_id: *al
-    network_id: *al_fixed
-  - id: 243891
-    prefix: '355039'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 46bc0648-3de9-40a7-b713-cb3ba23dcce8
-    country_id: *al
-    network_id: *al_fixed
-  - id: 244226
-    prefix: '355042'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c39d8fa0-9308-49be-b720-386eb7d996eb
-    country_id: *al
-    network_id: *al_fixed
-  - id: 244326
-    prefix: '355043'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dfccc3b3-ad00-425d-b050-16bbb4f58edd
-    country_id: *al
-    network_id: *al_fixed
-  - id: 244480
-    prefix: '355044'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 75390f5d-16e4-4ff5-ae02-9c7a7d9f82dc
-    country_id: *al
-    network_id: *al_fixed
-  - id: 244625
-    prefix: '355045'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 67a3a021-198d-4de4-8e6f-0b74252830bf
-    country_id: *al
-    network_id: *al_fixed
-  - id: 245144
-    prefix: '355058'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07afc421-059d-4e5c-918f-5bfa46f953dd
-    country_id: *al
-    network_id: *al_fixed
-  - id: 245247
-    prefix: '355059'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94846904-95a0-484c-b8ef-112a535ac564
-    country_id: *al
-    network_id: *al_fixed
-  - id: 247618
-    prefix: '355021'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd87ef86-16ab-4d48-9c28-b466a2059008
-    country_id: *al
-    network_id: *al_fixed
-  - id: 247714
-    prefix: '355022'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1f777531-abd6-487e-aff8-f52706b90b33
-    country_id: *al
-    network_id: *al_fixed
-  - id: 247910
-    prefix: '355023'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 01e78490-ac79-4328-935a-542f51df1734
-    country_id: *al
-    network_id: *al_fixed
-  - id: 248102
-    prefix: '355024'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 37e6318c-6cc0-4421-94d8-caf5bc331cc8
-    country_id: *al
-    network_id: *al_fixed
-  - id: 248251
-    prefix: '355025'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bcefb074-6435-4c11-9100-e382c28e5583
-    country_id: *al
-    network_id: *al_fixed
-  - id: 248466
-    prefix: '355026'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d35bd47f-115c-4deb-b6f8-3c59841fb174
-    country_id: *al
-    network_id: *al_fixed
-  - id: 248606
-    prefix: '355027'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b5e30f6-0084-4a9d-bcf5-b570484b1607
-    country_id: *al
-    network_id: *al_fixed
-  - id: 248746
-    prefix: '355028'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5b71700c-9583-4277-a473-ac3e587a5800
-    country_id: *al
-    network_id: *al_fixed
-  - id: 248823
-    prefix: '355029'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bfef4c7e-ea19-4e76-963c-727d470b0199
-    country_id: *al
-    network_id: *al_fixed
-  - id: 249077
-    prefix: '355046'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9898ebcf-a8c7-45da-afe6-a3fcb55457c2
-    country_id: *al
-    network_id: *al_fixed
-  - id: 249295
-    prefix: '355047'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 97d02133-2de3-4f0b-9afa-ff91e7d5e583
-    country_id: *al
-    network_id: *al_fixed
-  - id: 249420
-    prefix: '355048'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f740c1dd-a7f5-425c-a67a-79d7e7668f26
-    country_id: *al
-    network_id: *al_fixed
-  - id: 249503
-    prefix: '355049'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a1587571-cc36-46be-ab1c-e02aa9e4d7b5
-    country_id: *al
-    network_id: *al_fixed
-  - id: 249686
-    prefix: '355051'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2bdb9a61-09f2-4dc5-9773-e21212530e3a
-    country_id: *al
-    network_id: *al_fixed
-  - id: 249757
-    prefix: '355052'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3947ce41-7da6-490c-88bc-fda417c23269
-    country_id: *al
-    network_id: *al_fixed
-  - id: 249914
-    prefix: '355053'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 87c26183-cd15-4bf7-af9f-7cd90b9789bc
-    country_id: *al
-    network_id: *al_fixed
-  - id: 250005
-    prefix: '355054'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2dafbdf6-143b-49b9-9629-691f10549a7a
-    country_id: *al
-    network_id: *al_fixed
-  - id: 250103
-    prefix: '355055'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e3387c9e-317e-4ee2-a472-25f46cf2915d
-    country_id: *al
-    network_id: *al_fixed
-  - id: 250189
-    prefix: '355056'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9239c5ea-1deb-441d-8fea-a101f89caa6d
-    country_id: *al
-    network_id: *al_fixed
-  - id: 250230
-    prefix: '355057'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 54f53e1f-f17a-49c2-b425-3fbd6e50d1fe
-    country_id: *al
-    network_id: *al_fixed
-  - id: 253305
-    prefix: '355081'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0f8d1a74-0160-45fe-abf7-ad0635408da7
-    country_id: *al
-    network_id: *al_fixed
-  - id: 253468
-    prefix: '355082'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 416a4c43-ebe8-4d7d-abce-5a8cc9c31744
-    country_id: *al
-    network_id: *al_fixed
-  - id: 253584
-    prefix: '355083'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 40659b8b-7462-42c8-b29e-96bac94f65b4
-    country_id: *al
-    network_id: *al_fixed
-  - id: 253709
-    prefix: '355084'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 703f575a-4f50-49ac-870c-70519fbb8b1b
-    country_id: *al
-    network_id: *al_fixed
-  - id: 256829
-    prefix: '355088'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b612c56-18d1-4d1a-b762-707f85f763e5
-    country_id: *al
-    network_id: *al_fixed
-  - id: 256985
-    prefix: '355089'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 80491614-23c5-4889-8e1c-be474d6e7457
-    country_id: *al
-    network_id: *al_fixed
-  - id: 263694
-    prefix: '355085'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b672c65a-5079-4d16-a8ba-0efb96b09bcf
-    country_id: *al
-    network_id: *al_fixed
-  - id: 263843
-    prefix: '355086'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2be68cbf-9f81-4094-8e82-bdad0911635a
-    country_id: *al
-    network_id: *al_fixed
-  - id: 263995
-    prefix: '355087'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c67c602f-d637-4f88-978c-7da3f44683f5
-    country_id: *al
-    network_id: *al_fixed
 # Mobile Prefixes
-  - id: 254599
-    prefix: '355067'
+  - id: 509742
+    prefix: '35567'
     number_min_length: 12
     number_max_length: 12
-    uuid: d1363f55-3dc3-4e20-8a4f-f92d49d0c3ed
+    uuid: 4d25bd97-ef79-41d3-a51f-fd0b2f8ff5b1
     country_id: *al
     network_id: *al_albtelecom_mobile_mobile
-  - id: 254672
-    prefix: '355068'
+  - id: 509745
+    prefix: '35568'
     number_min_length: 12
     number_max_length: 12
-    uuid: f6db0cbc-b065-4a90-a37b-dc44f77460b3
+    uuid: 5f3bdae4-952f-4705-bb40-4e32ca4f66c2
     country_id: *al
     network_id: *al_one_mobile
-  - id: 254860
-    prefix: '355069'
+  - id: 509749
+    prefix: '35569'
     number_min_length: 12
     number_max_length: 12
-    uuid: 9f0f56c6-a5ac-47f4-96dd-654eb4deccb3
+    uuid: 50bb5a7a-28d8-4d02-818e-62b55f020643
     country_id: *al
     network_id: *al_vodafone_mobile

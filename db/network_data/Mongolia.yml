@@ -1,434 +1,27 @@
 country_id: &mn 142
 networks:
+# Mobile Networks
+  - id: &mn_ondo_mobile 10535
+    name: MN Ondo Mobile
+    uuid: a0717a09-1b81-48b2-8147-3749ffd1a032
+    type_id: 3
+  - id: &mn_skytel_mobile 14302
+    name: MN Skytel Mobile
+    uuid: d23cfc87-7b86-461b-afd1-f32bd1e49188
+    type_id: 3
+  - id: &mn_unitel_mobile 19841
+    name: MN Unitel Mobile
+    uuid: df173677-cc2b-4890-8c44-02f18aa7cc53
+    type_id: 3
+  - id: &mn_g_mobile_mobile 20514
+    name: MN G Mobile Mobile
+    uuid: ca644015-5ff2-4635-875d-0f6f94b8d868
+    type_id: 3
+  - id: &mn_mobicom_mobile 20039
+    name: MN Mobicom Mobile
+    uuid: 4ae17049-2c5e-455e-9d41-cf3dcb804cb4
+    type_id: 3
 # Fixed Networks
-  - id: &mn_altai_region 4336
-    name: MN Altai Region
-    uuid: 62cc92dd-7a76-4376-b193-61162bae4286
-    type_id: 2
-  - id: &mn_bayan_uul_region 4339
-    name: MN Bayan Uul Region
-    uuid: 73c2fc6c-bab5-4b26-83aa-72b4eddb72c4
-    type_id: 2
-  - id: &mn_biger_region 4342
-    name: MN Biger Region
-    uuid: 0fab2bb9-bfa3-4d6c-ab3a-c0a2dab6b555
-    type_id: 2
-  - id: &mn_bugant_region 4344
-    name: MN Bugant Region
-    uuid: 253e7821-7745-4e18-bef8-cffe29897674
-    type_id: 2
-  - id: &mn_darvi_region 4346
-    name: MN Darvi Region
-    uuid: 98cea0b7-7503-49f7-9b9b-3d12a2b0e672
-    type_id: 2
-  - id: &mn_delger__guulin__region 4349
-    name: MN Delger _Guulin_ Region
-    uuid: 91291ce8-b496-4c7e-b99d-4b158ca8abaf
-    type_id: 2
-  - id: &mn_jargalan_region 4352
-    name: MN Jargalan Region
-    uuid: edaff401-606c-4b6f-ac7e-4e2fb408b26b
-    type_id: 2
-  - id: &mn_taishir_region 4355
-    name: MN Taishir Region
-    uuid: bcf1d88c-6188-4d8e-874c-1ad918ec5b5d
-    type_id: 2
-  - id: &mn_tonkhil_region 4357
-    name: MN Tonkhil Region
-    uuid: e2084f75-044f-4ab9-83da-81091351004a
-    type_id: 2
-  - id: &mn_tugrug_region 4384
-    name: MN Tugrug Region
-    uuid: adad85f0-20e8-46c7-a2df-611f07314d0b
-    type_id: 2
-  - id: &mn_khaluun_region 4388
-    name: MN Khaluun Region
-    uuid: 13899b84-dc64-4813-a430-51416ceb8578
-    type_id: 2
-  - id: &mn_khukhmorit_region 4392
-    name: MN Khukhmorit Region
-    uuid: c461aa67-06de-4793-b1e6-34059337ceef
-    type_id: 2
-  - id: &mn_tsogt_bayantooroi_region 4395
-    name: MN Tsogt Bayantooroi Region
-    uuid: c4b6e7f5-ae06-46ba-a46d-c2d9c41e32ef
-    type_id: 2
-  - id: &mn_tseel_region 4398
-    name: MN Tseel Region
-    uuid: 4e08aefc-2e23-4fca-a253-0da599d69c9e
-    type_id: 2
-  - id: &mn_chandmani__zeegt__region 4400
-    name: MN Chandmani _Zeegt_ Region
-    uuid: 15680b2a-c05a-4eb5-8545-a29e2e542ff3
-    type_id: 2
-  - id: &mn_sharga_region 4402
-    name: MN Sharga Region
-    uuid: 14530802-da67-4df8-8f1f-bd3141693734
-    type_id: 2
-  - id: &mn_erdene_region 4405
-    name: MN Erdene Region
-    uuid: 3814577c-9cbb-4928-b936-65f9da82429a
-    type_id: 2
-  - id: &mn_wireless_local_loop_wll_region 4673
-    name: MN Wireless Local Loop Wll Region
-    uuid: e106e471-693e-4a20-bc11-d823f5e088a3
-    type_id: 2
-  - id: &mn_altai_city_yesunbulag_region 4862
-    name: MN Altai City Yesunbulag Region
-    uuid: b34d5922-9a44-4e53-99f3-c436c638ccfd
-    type_id: 2
-  - id: &mn_baruun_urt_city_region 6128
-    name: MN Baruun Urt City Region
-    uuid: eba9c727-8a38-4041-a1be-dee8cdb0e26d
-    type_id: 2
-  - id: &mn_asgat_region 6177
-    name: MN Asgat Region
-    uuid: 504ccc56-9d37-4ed4-996c-7fd07613c405
-    type_id: 2
-  - id: &mn_bayandelger_region 6180
-    name: MN Bayandelger Region
-    uuid: eb87730d-6fc9-4b0d-8192-1e3c037f88c0
-    type_id: 2
-  - id: &mn_dariganga_region 6183
-    name: MN Dariganga Region
-    uuid: 134772b1-feab-440b-9ac3-40384a5e0d09
-    type_id: 2
-  - id: &mn_munkhkhaan_region 6186
-    name: MN Munkhkhaan Region
-    uuid: 8a2972ef-dff3-4e09-b6dd-7a82d0477f53
-    type_id: 2
-  - id: &mn_naran_region 6188
-    name: MN Naran Region
-    uuid: d640ed51-ec81-427f-9a68-415c0ea49c74
-    type_id: 2
-  - id: &mn_ongon_region 6190
-    name: MN Ongon Region
-    uuid: cf6f13b7-4d8c-4e73-9fde-0ed1a3a6c210
-    type_id: 2
-  - id: &mn_sukhbaatar_region 6192
-    name: MN Sukhbaatar Region
-    uuid: 1fda9626-b22c-4e2f-aeef-2b385099a777
-    type_id: 2
-  - id: &mn_tuvshin_shiree_region 6194
-    name: MN Tuvshin Shiree Region
-    uuid: 2f4547de-65c6-4caa-8390-32b1abf9c25c
-    type_id: 2
-  - id: &mn_tumentsogt_region 6196
-    name: MN Tumentsogt Region
-    uuid: 54729431-6556-4e50-acb3-558a76183acf
-    type_id: 2
-  - id: &mn_uulbayan_region 6290
-    name: MN Uulbayan Region
-    uuid: a2338ea5-2238-4866-9710-f37cb2b098e8
-    type_id: 2
-  - id: &mn_halzan_region 6292
-    name: MN Halzan Region
-    uuid: be1c5734-5917-4569-a1dd-014e68f3033e
-    type_id: 2
-  - id: &mn_erdenetsagaan_region 6294
-    name: MN Erdenetsagaan Region
-    uuid: aaf79e72-45f5-47f5-a9e7-2f0d35ba1324
-    type_id: 2
-  - id: &mn_dalanzadgad_region 6886
-    name: MN Dalanzadgad Region
-    uuid: 990cf0ee-d3d3-44b6-b457-37bd0a733ea6
-    type_id: 2
-  - id: &mn_bayandalai_region 6984
-    name: MN Bayandalai Region
-    uuid: eab9cf58-29d2-44fc-b3d7-94d2a1db97b1
-    type_id: 2
-  - id: &mn_bayan_ovoo_region 6986
-    name: MN Bayan Ovoo Region
-    uuid: 7fc4f0ae-808d-41e3-b2a1-f7257f3adce2
-    type_id: 2
-  - id: &mn_bulgan_region 6988
-    name: MN Bulgan Region
-    uuid: 1b0c8da2-7d54-4ec9-9436-a2e95bd501a9
-    type_id: 2
-  - id: &mn_gurvan_tes_region 6990
-    name: MN Gurvan Tes Region
-    uuid: 5aac330d-c7d0-410a-951d-74742ac08064
-    type_id: 2
-  - id: &mn_mandal_ovoo_region 6992
-    name: MN Mandal Ovoo Region
-    uuid: f9bb9bba-11fa-45f0-b26c-4ce7934bfc6f
-    type_id: 2
-  - id: &mn_manlai_region 6994
-    name: MN Manlai Region
-    uuid: 0c348389-0883-4430-823b-0b2d04e284c1
-    type_id: 2
-  - id: &mn_noyon_region 6996
-    name: MN Noyon Region
-    uuid: 3ed7b82a-1cf5-4aa4-8769-f44264e15146
-    type_id: 2
-  - id: &mn_nomgon_region 6997
-    name: MN Nomgon Region
-    uuid: 44ae3d7a-558f-4e96-9e0a-6a70c080773c
-    type_id: 2
-  - id: &mn_savrai_region 6998
-    name: MN Savrai Region
-    uuid: 13e3e866-2927-469e-8da4-ea814beaf123
-    type_id: 2
-  - id: &mn_khanbogd_region 7003
-    name: MN Khanbogd Region
-    uuid: 68efd7ee-4af3-4d27-a551-0163ca5459a3
-    type_id: 2
-  - id: &mn_khankhongor_region 7006
-    name: MN Khankhongor Region
-    uuid: dbe13869-89a6-4451-a690-9ffdddd33397
-    type_id: 2
-  - id: &mn_khurmen_region 7009
-    name: MN Khurmen Region
-    uuid: b328b7ef-135f-4e5e-a2f7-2037fb7844a4
-    type_id: 2
-  - id: &mn_tsogt_ovoo_region 7012
-    name: MN Tsogt Ovoo Region
-    uuid: 69a2186f-d971-41f8-be03-b7fd8a2ba395
-    type_id: 2
-  - id: &mn_tsogt_tsetsii__tavantolgoi__region 7015
-    name: MN Tsogt Tsetsii _Tavantolgoi_ Region
-    uuid: e9128dbc-91d9-400b-942e-bf9871904f15
-    type_id: 2
-  - id: &mn_sainshand_city_region 7383
-    name: MN Sainshand City Region
-    uuid: 995883d1-800d-418f-aa1e-3f148c8b047c
-    type_id: 2
-  - id: &mn_airag_region 7431
-    name: MN Airag Region
-    uuid: ed6b936e-6776-4c92-a607-f56d8d384937
-    type_id: 2
-  - id: &mn_altanshiree_region 7434
-    name: MN Altanshiree Region
-    uuid: 56efdc97-a458-47ec-a121-a9eddec1ec04
-    type_id: 2
-  - id: &mn_dalanjargalan_region 7436
-    name: MN Dalanjargalan Region
-    uuid: 05fdcc48-cab1-4cea-9640-47102becf831
-    type_id: 2
-  - id: &mn_delgerekh_region 7440
-    name: MN Delgerekh Region
-    uuid: 1d79c8fc-bcd6-423c-a21f-6a87fc6d8988
-    type_id: 2
-  - id: &mn_zamiin_uud_region 7443
-    name: MN Zamiin Uud Region
-    uuid: 35172da8-18aa-439b-a819-a234ae2042ab
-    type_id: 2
-  - id: &mn_ikh_khet__zulegtei_hajuu_ulaan__region 7446
-    name: MN Ikh Khet _Zulegtei Hajuu Ulaan_ Region
-    uuid: c6b7e230-39ba-4a5d-bbdc-6695e47f9694
-    type_id: 2
-  - id: &mn_mandakh_region 7448
-    name: MN Mandakh Region
-    uuid: 1df05425-f95a-4117-aa9d-c5ca3afbb51f
-    type_id: 2
-  - id: &mn_urgun_region 7452
-    name: MN Urgun Region
-    uuid: bc70ccba-c393-4b02-9f39-5abb83e70721
-    type_id: 2
-  - id: &mn_saikhandulaan_region 7453
-    name: MN Saikhandulaan Region
-    uuid: ac996e47-7caa-4a36-93ff-6b6f9767fc68
-    type_id: 2
-  - id: &mn_ulaanbadrakh_region 7462
-    name: MN Ulaanbadrakh Region
-    uuid: 1017bf34-8aed-4ed3-a150-5c1862223f5d
-    type_id: 2
-  - id: &mn_khatanbulag_region 7466
-    name: MN Khatanbulag Region
-    uuid: 99ede1c7-400f-4436-a731-43da831f9056
-    type_id: 2
-  - id: &mn_huvsgul_region 7470
-    name: MN Huvsgul Region
-    uuid: 6342019c-2c68-4324-a06a-977659b30076
-    type_id: 2
-  - id: &mn_choir_city_sumber_region 7792
-    name: MN Choir City Sumber Region
-    uuid: 9fa34d1f-2691-41e8-bbf8-a168c0cab727
-    type_id: 2
-  - id: &mn_bayantal_region 7833
-    name: MN Bayantal Region
-    uuid: ae20bbfa-904b-4a90-95c2-429b2479b78b
-    type_id: 2
-  - id: &mn_shivee_govi_region 7837
-    name: MN Shivee Govi Region
-    uuid: a582a11c-0cf2-454e-b89c-7120d78ce762
-    type_id: 2
-  - id: &mn_choibalsan_city_region 8509
-    name: MN Choibalsan City Region
-    uuid: 7eb13719-a91e-4e60-bad7-3310ac472919
-    type_id: 2
-  - id: &mn_bayandun_region 8621
-    name: MN Bayandun Region
-    uuid: 28021c6f-be9a-47d6-b750-9540aab4eaa6
-    type_id: 2
-  - id: &mn_bayantumen_region 8624
-    name: MN Bayantumen Region
-    uuid: 1f698753-5264-4630-b1b0-150487a34a60
-    type_id: 2
-  - id: &mn_bayan_uul__ereen__region 8627
-    name: MN Bayan Uul _Ereen_ Region
-    uuid: dad3bf33-8373-4be3-a6f5-15f4d25dfec8
-    type_id: 2
-  - id: &mn_gurvanzagal_region 8631
-    name: MN Gurvanzagal Region
-    uuid: 7e08ae59-793f-49f5-a141-0b0c5ab1395a
-    type_id: 2
-  - id: &mn_dashbalbar__erdes__region 8633
-    name: MN Dashbalbar _Erdes_ Region
-    uuid: a8618d44-4783-48b4-a907-f780bf077a1d
-    type_id: 2
-  - id: &mn_matad_region 8634
-    name: MN Matad Region
-    uuid: f6e73fe4-0a1f-47ed-8547-70aa32e8198f
-    type_id: 2
-  - id: &mn_sereglen_region 8636
-    name: MN Sereglen Region
-    uuid: d149d1d4-aa39-4249-8aa0-56e2a40e95c2
-    type_id: 2
-  - id: &mn_khalkh_gol_region 8638
-    name: MN Khalkh Gol Region
-    uuid: 3b72e2a5-80c6-45ea-ab72-7faefef6e185
-    type_id: 2
-  - id: &mn_mandalgovi_city_region 8849
-    name: MN Mandalgovi City Region
-    uuid: 4cc6555b-947f-4152-bfe4-6596b7b0ef40
-    type_id: 2
-  - id: &mn_adaatsag_region 8883
-    name: MN Adaatsag Region
-    uuid: f656573d-6ba8-4306-ad27-da14d608b452
-    type_id: 2
-  - id: &mn_bayanjargalan_region 8886
-    name: MN Bayanjargalan Region
-    uuid: 90aa6227-1c00-4a72-8995-92ab9fbf4d62
-    type_id: 2
-  - id: &mn_govi_ugtaal_region 8889
-    name: MN Govi Ugtaal Region
-    uuid: 3edb04d6-d21a-4cc5-a572-571db841df5e
-    type_id: 2
-  - id: &mn_gurvansaikhan_region 8892
-    name: MN Gurvansaikhan Region
-    uuid: 6c92468c-ee97-481f-b03c-52ef57e24409
-    type_id: 2
-  - id: &mn_delgerkhangai_region 8895
-    name: MN Delgerkhangai Region
-    uuid: 70c50254-5064-4502-8f28-1031a4b38c28
-    type_id: 2
-  - id: &mn_delgertsogt_region 8898
-    name: MN Delgertsogt Region
-    uuid: b9e3741b-addb-4d50-a655-c7722aaf34e2
-    type_id: 2
-  - id: &mn_deren_region 8901
-    name: MN Deren Region
-    uuid: 7dbde868-da03-4d9a-916a-9b7069b2876e
-    type_id: 2
-  - id: &mn_luus_region 8904
-    name: MN Luus Region
-    uuid: b7f55874-813b-47dd-9187-6a32302824a0
-    type_id: 2
-  - id: &mn_ulziit_region 8906
-    name: MN Ulziit Region
-    uuid: b1d240e4-8e66-4912-9d40-250b53975a2f
-    type_id: 2
-  - id: &mn_undurshil_region 8914
-    name: MN Undurshil Region
-    uuid: 047b0678-3711-4106-8be9-90709f9f4776
-    type_id: 2
-  - id: &mn_saikhan_ovoo_region 8916
-    name: MN Saikhan Ovoo Region
-    uuid: 3e899ec3-8136-4aae-924d-33402e40a808
-    type_id: 2
-  - id: &mn_khuld_region 8918
-    name: MN Khuld Region
-    uuid: 835899f7-86ea-400e-9dc4-33267968cd32
-    type_id: 2
-  - id: &mn_tsagaandelger_region 8920
-    name: MN Tsagaandelger Region
-    uuid: 74a39fa0-7609-42f4-aaab-bddcc96f4196
-    type_id: 2
-  - id: &mn_erdenedalai_region 8922
-    name: MN Erdenedalai Region
-    uuid: 77f1c1b2-bcbb-4bc9-af45-6ffe9719f6f0
-    type_id: 2
-  - id: &mn_undurkhaan_city_region 9297
-    name: MN Undurkhaan City Region
-    uuid: 5e2a5707-9e9a-42b4-8262-5122b70a7939
-    type_id: 2
-  - id: &mn_batnorov__berkh__region 9453
-    name: MN Batnorov _Berkh_ Region
-    uuid: b6a5e19b-d42b-494d-8957-d87acce21785
-    type_id: 2
-  - id: &mn_batshireet_region 9456
-    name: MN Batshireet Region
-    uuid: 3cd18886-cb50-40f3-bbf0-3a495b8b595b
-    type_id: 2
-  - id: &mn_bayan_adraga_region 9459
-    name: MN Bayan Adraga Region
-    uuid: 0bc17ad4-190f-46de-9471-20f04e048b43
-    type_id: 2
-  - id: &mn_bayanmunkh_region 9462
-    name: MN Bayanmunkh Region
-    uuid: 94992045-5527-46c3-a698-f79e27b66969
-    type_id: 2
-  - id: &mn_bayankhutagt_region 9467
-    name: MN Bayankhutagt Region
-    uuid: d8c94cd2-38e2-48f6-819e-ef9b2e076c61
-    type_id: 2
-  - id: &mn_binder_region 9470
-    name: MN Binder Region
-    uuid: d4cf90f8-c47d-47e7-a922-ca1a880f3757
-    type_id: 2
-  - id: &mn_galshir_region 9473
-    name: MN Galshir Region
-    uuid: 171846ec-68b9-4d54-a4e6-e9627be8d07a
-    type_id: 2
-  - id: &mn_dadal_region 9474
-    name: MN Dadal Region
-    uuid: 2ff0bd4c-4f7e-4a26-b578-248c4b839191
-    type_id: 2
-  - id: &mn_darkhan__bor_undur__region 9482
-    name: MN Darkhan _Bor Undur_ Region
-    uuid: 37a10f29-2527-41ae-82c8-14e838b7aee5
-    type_id: 2
-  - id: &mn_delgerkhaan_region 9485
-    name: MN Delgerkhaan Region
-    uuid: 8aed795e-0a75-4f44-a142-e06d6569b75d
-    type_id: 2
-  - id: &mn_jargalt_khaan_region 9488
-    name: MN Jargalt Khaan Region
-    uuid: d73c4a9a-cbc6-45cf-a1b5-0f8a80148106
-    type_id: 2
-  - id: &mn_murun__chandgana_tal__region 9491
-    name: MN Murun _Chandgana Tal_ Region
-    uuid: 80b18ffb-9dad-4a88-9afa-12ec4c962da9
-    type_id: 2
-  - id: &mn_norovlin_region 9494
-    name: MN Norovlin Region
-    uuid: 5ae250ec-bb99-4978-a062-9c706f5d7c6b
-    type_id: 2
-  - id: &mn_umnudelger_region 9496
-    name: MN Umnudelger Region
-    uuid: ccd47810-8f42-494f-987b-830713cdcad8
-    type_id: 2
-  - id: &mn_tsenkhermandal_region 9498
-    name: MN Tsenkhermandal Region
-    uuid: 0d555e3b-f2d4-406a-a6b4-ca7383598df1
-    type_id: 2
-  - id: &mn_khulunbuyir_region 10446
-    name: MN Khulunbuyir Region
-    uuid: b290f595-5014-4cc2-a277-24f830bbd984
-    type_id: 2
-  - id: &mn_tsagaan_ovoo_region 10449
-    name: MN Tsagaan Ovoo Region
-    uuid: 8a59ac2a-2403-4b3a-b557-dfbcc1e1aedf
-    type_id: 2
-  - id: &mn_choibalsan_region 10451
-    name: MN Choibalsan Region
-    uuid: 6f5f3e96-2e67-4f8f-bfb5-00d340350d69
-    type_id: 2
-  - id: &mn_chuluunkhoroot_region 10454
-    name: MN Chuluunkhoroot Region
-    uuid: 9bb8ec10-2a67-4b53-a34e-0a021fa8c5b8
-    type_id: 2
   - id: &mn_fixed 14457
     name: MN Fixed
     uuid: 2dbe9027-5d91-45c1-8feb-e86e47b552fd
@@ -477,6 +70,10 @@ networks:
     name: MN Bayan Region
     uuid: 010ea505-cd04-4937-99b6-570cb4e80347
     type_id: 2
+  - id: &mn_bayandelger_region 6180
+    name: MN Bayandelger Region
+    uuid: eb87730d-6fc9-4b0d-8192-1e3c037f88c0
+    type_id: 2
   - id: &mn_bayanjargal_region 24974
     name: MN Bayanjargal Region
     uuid: cb6fc943-ae2f-4255-8025-43f1bc1d9302
@@ -509,6 +106,10 @@ networks:
     name: MN Buren Region
     uuid: 8fea821b-7f09-47ba-842b-b4649317b293
     type_id: 2
+  - id: &mn_delgerkhaan_region 9485
+    name: MN Delgerkhaan Region
+    uuid: 8aed795e-0a75-4f44-a142-e06d6569b75d
+    type_id: 2
   - id: &mn_jargalant_region 24984
     name: MN Jargalant Region
     uuid: b6b0f6f0-ff50-4258-aee0-b82629c2f8a8
@@ -540,6 +141,10 @@ networks:
   - id: &mn_ugtaal__region 24993
     name: MN Ugtaal  Region
     uuid: 4c78ac01-ab56-4f65-8944-1073486fae3e
+    type_id: 2
+  - id: &mn_tseel_region 4398
+    name: MN Tseel Region
+    uuid: 4e08aefc-2e23-4fca-a253-0da599d69c9e
     type_id: 2
   - id: &mn_erdene__region 24994
     name: MN Erdene  Region
@@ -593,6 +198,10 @@ networks:
     name: MN Naariin Teel Region
     uuid: 814d10d0-b0b5-4d59-ba69-7c973e63464e
     type_id: 2
+  - id: &mn_ulziit_region 8906
+    name: MN Ulziit Region
+    uuid: b1d240e4-8e66-4912-9d40-250b53975a2f
+    type_id: 2
   - id: &mn_sant_region 25070
     name: MN Sant Region
     uuid: 83a07c16-c2d6-42f5-a201-05d2b6decded
@@ -600,6 +209,10 @@ networks:
   - id: &mn_taragt_region 25071
     name: MN Taragt Region
     uuid: e3040fe3-d2ad-44d7-9b6a-66b6c1ec97c3
+    type_id: 2
+  - id: &mn_tugrug_region 4384
+    name: MN Tugrug Region
+    uuid: adad85f0-20e8-46c7-a2df-611f07314d0b
     type_id: 2
   - id: &mn_uyanga_region 25072
     name: MN Uyanga Region
@@ -624,6 +237,10 @@ networks:
   - id: &mn_battsengel_region 25092
     name: MN Battsengel Region
     uuid: 4b805376-be83-4b3d-8f33-fc5bca96018f
+    type_id: 2
+  - id: &mn_bulgan_region 6988
+    name: MN Bulgan Region
+    uuid: 1b0c8da2-7d54-4ec9-9436-a2e95bd501a9
     type_id: 2
   - id: &mn_jargalant__region 25093
     name: MN Jargalant  Region
@@ -913,6 +530,10 @@ networks:
     name: MN Ulgii Khot Region
     uuid: 3308d492-a087-4ed9-80fa-5eb46f63e915
     type_id: 2
+  - id: &mn_altai_region 4336
+    name: MN Altai Region
+    uuid: 62cc92dd-7a76-4376-b193-61162bae4286
+    type_id: 2
   - id: &mn_altantsugts_region 25310
     name: MN Altantsugts Region
     uuid: 418e9a89-b061-4925-b838-6559c55e931c
@@ -952,6 +573,10 @@ networks:
   - id: &mn_altai__region 25343
     name: MN Altai  Region
     uuid: 4a1e9ac7-1c3e-4037-8275-044065d80f91
+    type_id: 2
+  - id: &mn_darvi_region 4346
+    name: MN Darvi Region
+    uuid: 98cea0b7-7503-49f7-9b9b-3d12a2b0e672
     type_id: 2
   - id: &mn_durgun_region 25344
     name: MN Durgun Region
@@ -1020,6 +645,10 @@ networks:
   - id: &mn_bayanlig_region 25378
     name: MN Bayanlig Region
     uuid: 34d7de65-2520-4e56-bd6a-92364b5cfd63
+    type_id: 2
+  - id: &mn_bayan_ovoo_region 6986
+    name: MN Bayan Ovoo Region
+    uuid: 7fc4f0ae-808d-41e3-b2a1-f7257f3adce2
     type_id: 2
   - id: &mn_bayan_undur__region 25379
     name: MN Bayan Undur  Region
@@ -1137,6 +766,10 @@ networks:
     name: MN Aldarkhaan Region
     uuid: b9c3ba2a-fd9c-4c9f-89aa-d3a4d70c24bd
     type_id: 2
+  - id: &mn_asgat_region 6177
+    name: MN Asgat Region
+    uuid: 504ccc56-9d37-4ed4-996c-7fd07613c405
+    type_id: 2
   - id: &mn_bayantest_region 26192
     name: MN Bayantest Region
     uuid: ee6cfe10-31a1-4617-a444-ea1568f7a42f
@@ -1217,29 +850,397 @@ networks:
     name: MN Yaruu Region
     uuid: 82be7431-3b61-4fa6-832e-bfc0dc914ed6
     type_id: 2
+  - id: &mn_altai_city_yesunbulag_region 4862
+    name: MN Altai City Yesunbulag Region
+    uuid: b34d5922-9a44-4e53-99f3-c436c638ccfd
+    type_id: 2
+  - id: &mn_bayan_uul_region 4339
+    name: MN Bayan Uul Region
+    uuid: 73c2fc6c-bab5-4b26-83aa-72b4eddb72c4
+    type_id: 2
+  - id: &mn_biger_region 4342
+    name: MN Biger Region
+    uuid: 0fab2bb9-bfa3-4d6c-ab3a-c0a2dab6b555
+    type_id: 2
+  - id: &mn_bugant_region 4344
+    name: MN Bugant Region
+    uuid: 253e7821-7745-4e18-bef8-cffe29897674
+    type_id: 2
+  - id: &mn_delger__guulin__region 4349
+    name: MN Delger _Guulin_ Region
+    uuid: 91291ce8-b496-4c7e-b99d-4b158ca8abaf
+    type_id: 2
+  - id: &mn_jargalan_region 4352
+    name: MN Jargalan Region
+    uuid: edaff401-606c-4b6f-ac7e-4e2fb408b26b
+    type_id: 2
+  - id: &mn_taishir_region 4355
+    name: MN Taishir Region
+    uuid: bcf1d88c-6188-4d8e-874c-1ad918ec5b5d
+    type_id: 2
+  - id: &mn_tonkhil_region 4357
+    name: MN Tonkhil Region
+    uuid: e2084f75-044f-4ab9-83da-81091351004a
+    type_id: 2
+  - id: &mn_khaluun_region 4388
+    name: MN Khaluun Region
+    uuid: 13899b84-dc64-4813-a430-51416ceb8578
+    type_id: 2
+  - id: &mn_khukhmorit_region 4392
+    name: MN Khukhmorit Region
+    uuid: c461aa67-06de-4793-b1e6-34059337ceef
+    type_id: 2
+  - id: &mn_tsogt_bayantooroi_region 4395
+    name: MN Tsogt Bayantooroi Region
+    uuid: c4b6e7f5-ae06-46ba-a46d-c2d9c41e32ef
+    type_id: 2
+  - id: &mn_chandmani__zeegt__region 4400
+    name: MN Chandmani _Zeegt_ Region
+    uuid: 15680b2a-c05a-4eb5-8545-a29e2e542ff3
+    type_id: 2
+  - id: &mn_sharga_region 4402
+    name: MN Sharga Region
+    uuid: 14530802-da67-4df8-8f1f-bd3141693734
+    type_id: 2
+  - id: &mn_erdene_region 4405
+    name: MN Erdene Region
+    uuid: 3814577c-9cbb-4928-b936-65f9da82429a
+    type_id: 2
+  - id: &mn_baruun_urt_city_region 6128
+    name: MN Baruun Urt City Region
+    uuid: eba9c727-8a38-4041-a1be-dee8cdb0e26d
+    type_id: 2
+  - id: &mn_dariganga_region 6183
+    name: MN Dariganga Region
+    uuid: 134772b1-feab-440b-9ac3-40384a5e0d09
+    type_id: 2
+  - id: &mn_munkhkhaan_region 6186
+    name: MN Munkhkhaan Region
+    uuid: 8a2972ef-dff3-4e09-b6dd-7a82d0477f53
+    type_id: 2
+  - id: &mn_naran_region 6188
+    name: MN Naran Region
+    uuid: d640ed51-ec81-427f-9a68-415c0ea49c74
+    type_id: 2
   - id: &mn_ongon__region 26331
     name: MN Ongon  Region
     uuid: 07c9a185-2c64-4f7a-a373-7a6ec4b66a55
+    type_id: 2
+  - id: &mn_sukhbaatar_region 6192
+    name: MN Sukhbaatar Region
+    uuid: 1fda9626-b22c-4e2f-aeef-2b385099a777
+    type_id: 2
+  - id: &mn_tuvshin_shiree_region 6194
+    name: MN Tuvshin Shiree Region
+    uuid: 2f4547de-65c6-4caa-8390-32b1abf9c25c
+    type_id: 2
+  - id: &mn_tumentsogt_region 6196
+    name: MN Tumentsogt Region
+    uuid: 54729431-6556-4e50-acb3-558a76183acf
+    type_id: 2
+  - id: &mn_uulbayan_region 6290
+    name: MN Uulbayan Region
+    uuid: a2338ea5-2238-4866-9710-f37cb2b098e8
+    type_id: 2
+  - id: &mn_halzan_region 6292
+    name: MN Halzan Region
+    uuid: be1c5734-5917-4569-a1dd-014e68f3033e
+    type_id: 2
+  - id: &mn_erdenetsagaan_region 6294
+    name: MN Erdenetsagaan Region
+    uuid: aaf79e72-45f5-47f5-a9e7-2f0d35ba1324
+    type_id: 2
+  - id: &mn_sainshand_city_region 7383
+    name: MN Sainshand City Region
+    uuid: 995883d1-800d-418f-aa1e-3f148c8b047c
+    type_id: 2
+  - id: &mn_airag_region 7431
+    name: MN Airag Region
+    uuid: ed6b936e-6776-4c92-a607-f56d8d384937
+    type_id: 2
+  - id: &mn_altanshiree_region 7434
+    name: MN Altanshiree Region
+    uuid: 56efdc97-a458-47ec-a121-a9eddec1ec04
+    type_id: 2
+  - id: &mn_dalanjargalan_region 7436
+    name: MN Dalanjargalan Region
+    uuid: 05fdcc48-cab1-4cea-9640-47102becf831
+    type_id: 2
+  - id: &mn_delgerekh_region 7440
+    name: MN Delgerekh Region
+    uuid: 1d79c8fc-bcd6-423c-a21f-6a87fc6d8988
+    type_id: 2
+  - id: &mn_zamiin_uud_region 7443
+    name: MN Zamiin Uud Region
+    uuid: 35172da8-18aa-439b-a819-a234ae2042ab
+    type_id: 2
+  - id: &mn_ikh_khet__zulegtei_hajuu_ulaan__region 7446
+    name: MN Ikh Khet _Zulegtei Hajuu Ulaan_ Region
+    uuid: c6b7e230-39ba-4a5d-bbdc-6695e47f9694
     type_id: 2
   - id: &mn_mandakh__region 26346
     name: MN Mandakh  Region
     uuid: fb1091ae-cd3d-4288-bb73-fab58d425864
     type_id: 2
+  - id: &mn_urgun_region 7452
+    name: MN Urgun Region
+    uuid: bc70ccba-c393-4b02-9f39-5abb83e70721
+    type_id: 2
+  - id: &mn_saikhandulaan_region 7453
+    name: MN Saikhandulaan Region
+    uuid: ac996e47-7caa-4a36-93ff-6b6f9767fc68
+    type_id: 2
+  - id: &mn_ulaanbadrakh_region 7462
+    name: MN Ulaanbadrakh Region
+    uuid: 1017bf34-8aed-4ed3-a150-5c1862223f5d
+    type_id: 2
+  - id: &mn_khatanbulag_region 7466
+    name: MN Khatanbulag Region
+    uuid: 99ede1c7-400f-4436-a731-43da831f9056
+    type_id: 2
+  - id: &mn_huvsgul_region 7470
+    name: MN Huvsgul Region
+    uuid: 6342019c-2c68-4324-a06a-977659b30076
+    type_id: 2
+  - id: &mn_dalanzadgad_region 6886
+    name: MN Dalanzadgad Region
+    uuid: 990cf0ee-d3d3-44b6-b457-37bd0a733ea6
+    type_id: 2
   - id: &mn_bayandalai__region 26368
     name: MN Bayandalai  Region
     uuid: b584c3ec-8218-48f5-86a0-9bbeac604fb1
+    type_id: 2
+  - id: &mn_gurvan_tes_region 6990
+    name: MN Gurvan Tes Region
+    uuid: 5aac330d-c7d0-410a-951d-74742ac08064
+    type_id: 2
+  - id: &mn_mandal_ovoo_region 6992
+    name: MN Mandal Ovoo Region
+    uuid: f9bb9bba-11fa-45f0-b26c-4ce7934bfc6f
+    type_id: 2
+  - id: &mn_manlai_region 6994
+    name: MN Manlai Region
+    uuid: 0c348389-0883-4430-823b-0b2d04e284c1
     type_id: 2
   - id: &mn_noyon__region 26369
     name: MN Noyon  Region
     uuid: 968e0c4f-d186-4b48-962c-ce3220d45362
     type_id: 2
+  - id: &mn_nomgon_region 6997
+    name: MN Nomgon Region
+    uuid: 44ae3d7a-558f-4e96-9e0a-6a70c080773c
+    type_id: 2
+  - id: &mn_savrai_region 6998
+    name: MN Savrai Region
+    uuid: 13e3e866-2927-469e-8da4-ea814beaf123
+    type_id: 2
+  - id: &mn_khanbogd_region 7003
+    name: MN Khanbogd Region
+    uuid: 68efd7ee-4af3-4d27-a551-0163ca5459a3
+    type_id: 2
+  - id: &mn_khankhongor_region 7006
+    name: MN Khankhongor Region
+    uuid: dbe13869-89a6-4451-a690-9ffdddd33397
+    type_id: 2
+  - id: &mn_khurmen_region 7009
+    name: MN Khurmen Region
+    uuid: b328b7ef-135f-4e5e-a2f7-2037fb7844a4
+    type_id: 2
+  - id: &mn_tsogt_ovoo_region 7012
+    name: MN Tsogt Ovoo Region
+    uuid: 69a2186f-d971-41f8-be03-b7fd8a2ba395
+    type_id: 2
+  - id: &mn_tsogt_tsetsii__tavantolgoi__region 7015
+    name: MN Tsogt Tsetsii _Tavantolgoi_ Region
+    uuid: e9128dbc-91d9-400b-942e-bf9871904f15
+    type_id: 2
+  - id: &mn_choir_city_sumber_region 7792
+    name: MN Choir City Sumber Region
+    uuid: 9fa34d1f-2691-41e8-bbf8-a168c0cab727
+    type_id: 2
+  - id: &mn_bayantal_region 7833
+    name: MN Bayantal Region
+    uuid: ae20bbfa-904b-4a90-95c2-429b2479b78b
+    type_id: 2
+  - id: &mn_shivee_govi_region 7837
+    name: MN Shivee Govi Region
+    uuid: a582a11c-0cf2-454e-b89c-7120d78ce762
+    type_id: 2
+  - id: &mn_undurkhaan_city_region 9297
+    name: MN Undurkhaan City Region
+    uuid: 5e2a5707-9e9a-42b4-8262-5122b70a7939
+    type_id: 2
+  - id: &mn_batnorov__berkh__region 9453
+    name: MN Batnorov _Berkh_ Region
+    uuid: b6a5e19b-d42b-494d-8957-d87acce21785
+    type_id: 2
+  - id: &mn_batshireet_region 9456
+    name: MN Batshireet Region
+    uuid: 3cd18886-cb50-40f3-bbf0-3a495b8b595b
+    type_id: 2
+  - id: &mn_bayan_adraga_region 9459
+    name: MN Bayan Adraga Region
+    uuid: 0bc17ad4-190f-46de-9471-20f04e048b43
+    type_id: 2
+  - id: &mn_bayanmunkh_region 9462
+    name: MN Bayanmunkh Region
+    uuid: 94992045-5527-46c3-a698-f79e27b66969
+    type_id: 2
+  - id: &mn_bayankhutagt_region 9467
+    name: MN Bayankhutagt Region
+    uuid: d8c94cd2-38e2-48f6-819e-ef9b2e076c61
+    type_id: 2
+  - id: &mn_binder_region 9470
+    name: MN Binder Region
+    uuid: d4cf90f8-c47d-47e7-a922-ca1a880f3757
+    type_id: 2
+  - id: &mn_galshir_region 9473
+    name: MN Galshir Region
+    uuid: 171846ec-68b9-4d54-a4e6-e9627be8d07a
+    type_id: 2
   - id: &mn_dadal__region 26430
     name: MN Dadal  Region
     uuid: 79c7d631-3ce2-4d60-9b74-519ce5c1478e
     type_id: 2
+  - id: &mn_darkhan__bor_undur__region 9482
+    name: MN Darkhan _Bor Undur_ Region
+    uuid: 37a10f29-2527-41ae-82c8-14e838b7aee5
+    type_id: 2
+  - id: &mn_jargalt_khaan_region 9488
+    name: MN Jargalt Khaan Region
+    uuid: d73c4a9a-cbc6-45cf-a1b5-0f8a80148106
+    type_id: 2
+  - id: &mn_murun__chandgana_tal__region 9491
+    name: MN Murun _Chandgana Tal_ Region
+    uuid: 80b18ffb-9dad-4a88-9afa-12ec4c962da9
+    type_id: 2
+  - id: &mn_norovlin_region 9494
+    name: MN Norovlin Region
+    uuid: 5ae250ec-bb99-4978-a062-9c706f5d7c6b
+    type_id: 2
+  - id: &mn_umnudelger_region 9496
+    name: MN Umnudelger Region
+    uuid: ccd47810-8f42-494f-987b-830713cdcad8
+    type_id: 2
+  - id: &mn_tsenkhermandal_region 9498
+    name: MN Tsenkhermandal Region
+    uuid: 0d555e3b-f2d4-406a-a6b4-ca7383598df1
+    type_id: 2
+  - id: &mn_choibalsan_city_region 8509
+    name: MN Choibalsan City Region
+    uuid: 7eb13719-a91e-4e60-bad7-3310ac472919
+    type_id: 2
+  - id: &mn_bayandun_region 8621
+    name: MN Bayandun Region
+    uuid: 28021c6f-be9a-47d6-b750-9540aab4eaa6
+    type_id: 2
+  - id: &mn_bayantumen_region 8624
+    name: MN Bayantumen Region
+    uuid: 1f698753-5264-4630-b1b0-150487a34a60
+    type_id: 2
+  - id: &mn_bayan_uul__ereen__region 8627
+    name: MN Bayan Uul _Ereen_ Region
+    uuid: dad3bf33-8373-4be3-a6f5-15f4d25dfec8
+    type_id: 2
+  - id: &mn_gurvanzagal_region 8631
+    name: MN Gurvanzagal Region
+    uuid: 7e08ae59-793f-49f5-a141-0b0c5ab1395a
+    type_id: 2
+  - id: &mn_dashbalbar__erdes__region 8633
+    name: MN Dashbalbar _Erdes_ Region
+    uuid: a8618d44-4783-48b4-a907-f780bf077a1d
+    type_id: 2
+  - id: &mn_matad_region 8634
+    name: MN Matad Region
+    uuid: f6e73fe4-0a1f-47ed-8547-70aa32e8198f
+    type_id: 2
+  - id: &mn_sereglen_region 8636
+    name: MN Sereglen Region
+    uuid: d149d1d4-aa39-4249-8aa0-56e2a40e95c2
+    type_id: 2
+  - id: &mn_khalkh_gol_region 8638
+    name: MN Khalkh Gol Region
+    uuid: 3b72e2a5-80c6-45ea-ab72-7faefef6e185
+    type_id: 2
+  - id: &mn_khulunbuyir_region 10446
+    name: MN Khulunbuyir Region
+    uuid: b290f595-5014-4cc2-a277-24f830bbd984
+    type_id: 2
+  - id: &mn_tsagaan_ovoo_region 10449
+    name: MN Tsagaan Ovoo Region
+    uuid: 8a59ac2a-2403-4b3a-b557-dfbcc1e1aedf
+    type_id: 2
+  - id: &mn_choibalsan_region 10451
+    name: MN Choibalsan Region
+    uuid: 6f5f3e96-2e67-4f8f-bfb5-00d340350d69
+    type_id: 2
+  - id: &mn_chuluunkhoroot_region 10454
+    name: MN Chuluunkhoroot Region
+    uuid: 9bb8ec10-2a67-4b53-a34e-0a021fa8c5b8
+    type_id: 2
+  - id: &mn_mandalgovi_city_region 8849
+    name: MN Mandalgovi City Region
+    uuid: 4cc6555b-947f-4152-bfe4-6596b7b0ef40
+    type_id: 2
+  - id: &mn_adaatsag_region 8883
+    name: MN Adaatsag Region
+    uuid: f656573d-6ba8-4306-ad27-da14d608b452
+    type_id: 2
+  - id: &mn_bayanjargalan_region 8886
+    name: MN Bayanjargalan Region
+    uuid: 90aa6227-1c00-4a72-8995-92ab9fbf4d62
+    type_id: 2
+  - id: &mn_govi_ugtaal_region 8889
+    name: MN Govi Ugtaal Region
+    uuid: 3edb04d6-d21a-4cc5-a572-571db841df5e
+    type_id: 2
+  - id: &mn_gurvansaikhan_region 8892
+    name: MN Gurvansaikhan Region
+    uuid: 6c92468c-ee97-481f-b03c-52ef57e24409
+    type_id: 2
+  - id: &mn_delgerkhangai_region 8895
+    name: MN Delgerkhangai Region
+    uuid: 70c50254-5064-4502-8f28-1031a4b38c28
+    type_id: 2
+  - id: &mn_delgertsogt_region 8898
+    name: MN Delgertsogt Region
+    uuid: b9e3741b-addb-4d50-a655-c7722aaf34e2
+    type_id: 2
   - id: &mn_deren__region 26496
     name: MN Deren  Region
     uuid: 87b16942-b732-4fe9-9e65-e472009f796e
+    type_id: 2
+  - id: &mn_luus_region 8904
+    name: MN Luus Region
+    uuid: b7f55874-813b-47dd-9187-6a32302824a0
+    type_id: 2
+  - id: &mn_undurshil_region 8914
+    name: MN Undurshil Region
+    uuid: 047b0678-3711-4106-8be9-90709f9f4776
+    type_id: 2
+  - id: &mn_saikhan_ovoo_region 8916
+    name: MN Saikhan Ovoo Region
+    uuid: 3e899ec3-8136-4aae-924d-33402e40a808
+    type_id: 2
+  - id: &mn_khuld_region 8918
+    name: MN Khuld Region
+    uuid: 835899f7-86ea-400e-9dc4-33267968cd32
+    type_id: 2
+  - id: &mn_tsagaandelger_region 8920
+    name: MN Tsagaandelger Region
+    uuid: 74a39fa0-7609-42f4-aaab-bddcc96f4196
+    type_id: 2
+  - id: &mn_erdenedalai_region 8922
+    name: MN Erdenedalai Region
+    uuid: 77f1c1b2-bcbb-4bc9-af45-6ffe9719f6f0
+    type_id: 2
+  - id: &mn_ich_tamir_region 28855
+    name: MN Ich Tamir Region
+    uuid: 82cf4b56-5683-4734-b85f-7ced0d61ff5e
+    type_id: 2
+  - id: &mn_ugii_nuur_region 28856
+    name: MN Ugii Nuur Region
+    uuid: 4e2729d4-ca2a-487c-b3a4-4e4f954b1b75
     type_id: 2
   - id: &mn_bayan__unjuul_region 28210
     name: MN Bayan  Unjuul Region
@@ -1253,25 +1254,9 @@ networks:
     name: MN Ugtaal Region
     uuid: a0ab5261-5d38-46a9-8073-565a45686a0b
     type_id: 2
-  - id: &mn_davst_region 28701
-    name: MN Davst Region
-    uuid: bde84804-4c32-47fd-9cce-00d9ecc642af
-    type_id: 2
-  - id: &mn_undurkhangai_region 28704
-    name: MN Undurkhangai Region
-    uuid: c17f5118-6070-4b31-8bae-8f65cd62222a
-    type_id: 2
   - id: &mn_baruun_bayan_ulaan_region 28817
     name: MN Baruun Bayan Ulaan Region
     uuid: 38e04ca5-5405-4abf-9f79-d0703316b057
-    type_id: 2
-  - id: &mn_ich_tamir_region 28855
-    name: MN Ich Tamir Region
-    uuid: 82cf4b56-5683-4734-b85f-7ced0d61ff5e
-    type_id: 2
-  - id: &mn_ugii_nuur_region 28856
-    name: MN Ugii Nuur Region
-    uuid: 4e2729d4-ca2a-487c-b3a4-4e4f954b1b75
     type_id: 2
   - id: &mn_khovd_city_jargalant_region 29067
     name: MN Khovd City Jargalant Region
@@ -1281,28 +1266,51 @@ networks:
     name: MN Baatsagaan Region
     uuid: cc122513-b393-4cc5-8fc6-abbfd6dd8272
     type_id: 2
-# Mobile Networks
-  - id: &mn_ondo_mobile 10535
-    name: MN Ondo Mobile
-    uuid: a0717a09-1b81-48b2-8147-3749ffd1a032
-    type_id: 3
-  - id: &mn_skytel_mobile 14302
-    name: MN Skytel Mobile
-    uuid: d23cfc87-7b86-461b-afd1-f32bd1e49188
-    type_id: 3
-  - id: &mn_unitel_mobile 19841
-    name: MN Unitel Mobile
-    uuid: df173677-cc2b-4890-8c44-02f18aa7cc53
-    type_id: 3
-  - id: &mn_mobicom_mobile 20039
-    name: MN Mobicom Mobile
-    uuid: 4ae17049-2c5e-455e-9d41-cf3dcb804cb4
-    type_id: 3
-  - id: &mn_g_mobile_mobile 20514
-    name: MN G Mobile Mobile
-    uuid: ca644015-5ff2-4635-875d-0f6f94b8d868
-    type_id: 3
+  - id: &mn_davst_region 28701
+    name: MN Davst Region
+    uuid: bde84804-4c32-47fd-9cce-00d9ecc642af
+    type_id: 2
+  - id: &mn_undurkhangai_region 28704
+    name: MN Undurkhangai Region
+    uuid: c17f5118-6070-4b31-8bae-8f65cd62222a
+    type_id: 2
+  - id: &mn_ongon_region 6190
+    name: MN Ongon Region
+    uuid: cf6f13b7-4d8c-4e73-9fde-0ed1a3a6c210
+    type_id: 2
+  - id: &mn_mandakh_region 7448
+    name: MN Mandakh Region
+    uuid: 1df05425-f95a-4117-aa9d-c5ca3afbb51f
+    type_id: 2
+  - id: &mn_bayandalai_region 6984
+    name: MN Bayandalai Region
+    uuid: eab9cf58-29d2-44fc-b3d7-94d2a1db97b1
+    type_id: 2
+  - id: &mn_noyon_region 6996
+    name: MN Noyon Region
+    uuid: 3ed7b82a-1cf5-4aa4-8769-f44264e15146
+    type_id: 2
+  - id: &mn_dadal_region 9474
+    name: MN Dadal Region
+    uuid: 2ff0bd4c-4f7e-4a26-b578-248c4b839191
+    type_id: 2
+  - id: &mn_deren_region 8901
+    name: MN Deren Region
+    uuid: 7dbde868-da03-4d9a-916a-9b7069b2876e
+    type_id: 2
+  - id: &mn_wireless_local_loop_wll_region 4673
+    name: MN Wireless Local Loop Wll Region
+    uuid: e106e471-693e-4a20-bc11-d823f5e088a3
+    type_id: 2
 # Supplementary services Networks
+  - id: &mn_freephone_services 22642
+    name: MN Freephone Services
+    uuid: d69c9111-8f98-43df-8ffa-606164375202
+    type_id: 13
+  - id: &mn_premium_rate_services 22686
+    name: MN Premium Rate Services
+    uuid: 654353d4-71d0-4dea-9372-9b675aa100e7
+    type_id: 13
   - id: &mn_special_services 21453
     name: MN Special Services
     uuid: 376ada61-ad7a-4272-b4a8-f412e1ff6ff4
@@ -1315,807 +1323,205 @@ networks:
     name: MN Sms Services
     uuid: 24ade675-fd93-4097-83b0-30df5d8ddc9e
     type_id: 13
-  - id: &mn_freephone_services 22642
-    name: MN Freephone Services
-    uuid: d69c9111-8f98-43df-8ffa-606164375202
-    type_id: 13
-  - id: &mn_premium_rate_services 22686
-    name: MN Premium Rate Services
-    uuid: 654353d4-71d0-4dea-9372-9b675aa100e7
-    type_id: 13
 network_prefixes:
+# Mobile Prefixes
+  - id: 138627
+    prefix: '97666'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2cfff8e1-b60a-4e5a-b4d8-ff7e0c988f89
+    country_id: *mn
+    network_id: *mn_ondo_mobile
+  - id: 148663
+    prefix: '97669'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e099ae7-ae76-4648-9921-6e3c6b1f72ae
+    country_id: *mn
+    network_id: *mn_skytel_mobile
+  - id: 207790
+    prefix: '97680'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7aa950d-dd55-4a97-9a77-71a3f2c5c7ce
+    country_id: *mn
+    network_id: *mn_unitel_mobile
+  - id: 413784
+    prefix: '9768111'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0ba0d7b-f542-48e8-b24a-ad0c9b93b43f
+    country_id: *mn
+    network_id: *mn_ondo_mobile
+  - id: 414886
+    prefix: '9768166'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b5254f77-160b-47ba-8035-88c25495aa2a
+    country_id: *mn
+    network_id: *mn_ondo_mobile
+  - id: 415029
+    prefix: '9768181'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bd437099-86c2-4444-8104-0b2eb08c28ef
+    country_id: *mn
+    network_id: *mn_ondo_mobile
+  - id: 406264
+    prefix: '9768188'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 642b1876-aa5e-477f-8d2e-abe911c4ed3a
+    country_id: *mn
+    network_id: *mn_ondo_mobile
+  - id: 422136
+    prefix: '976830'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4d2344c8-81e9-42c3-a2e5-00008892aebf
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 421194
+    prefix: '976831'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3301c095-db08-4f9b-b58c-104053b95d0d
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 435881
+    prefix: '97685'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1de820db-4cde-4dde-af0a-9f3858b623f1
+    country_id: *mn
+    network_id: *mn_mobicom_mobile
+  - id: 428701
+    prefix: '97686'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 606336e1-19d3-4fbc-8b26-0bc49fd5de48
+    country_id: *mn
+    network_id: *mn_unitel_mobile
+  - id: 451408
+    prefix: '97689'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4b9fd34b-35b7-43ef-87db-6f033916624a
+    country_id: *mn
+    network_id: *mn_unitel_mobile
+  - id: 454108
+    prefix: '97690'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c8d9663-70fe-4b03-92e1-61d9f6e2611a
+    country_id: *mn
+    network_id: *mn_skytel_mobile
+  - id: 443791
+    prefix: '97688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c083c8f-a6b9-4441-a408-1180c4973bd5
+    country_id: *mn
+    network_id: *mn_unitel_mobile
+  - id: 458150
+    prefix: '97691'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a87c9be-e637-4ae1-808e-1bfe536df3d1
+    country_id: *mn
+    network_id: *mn_skytel_mobile
+  - id: 231737
+    prefix: '97698'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5060ae61-25b8-42b7-8cfd-2aa541132cd9
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 239374
+    prefix: '97699'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dce330cb-edf5-48e8-9ae6-ce283787fc73
+    country_id: *mn
+    network_id: *mn_mobicom_mobile
+  - id: 95217
+    prefix: '97660'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40abd709-cc22-48f5-a147-ada939332bf1
+    country_id: *mn
+    network_id: *mn_ondo_mobile
+  - id: 485436
+    prefix: '976930'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff77db55-4946-4c19-9b67-52c48e797669
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 485456
+    prefix: '976931'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 79d4dc35-6ecc-437a-b8b3-32e632f25c78
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 485471
+    prefix: '976932'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 60c033a2-1e05-4cdf-a098-fc47b8c458b3
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 485484
+    prefix: '976933'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e056ccff-7c95-4089-a91c-0a5579752cda
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 485497
+    prefix: '976934'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e8ecfa27-098a-46d0-b52a-2dac791a97f4
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 212509
+    prefix: '97694'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f6a9057e-67f1-47d1-839a-3bb77c6606da
+    country_id: *mn
+    network_id: *mn_mobicom_mobile
+  - id: 215151
+    prefix: '97695'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b699c9a-b24a-470d-ac72-21e89da976cd
+    country_id: *mn
+    network_id: *mn_mobicom_mobile
+  - id: 221950
+    prefix: '97696'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2807c79b-6a2f-4d34-bce5-d8f1c2853758
+    country_id: *mn
+    network_id: *mn_skytel_mobile
+  - id: 227374
+    prefix: '976970'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4cbafe26-2141-4dd0-af9b-9948819978f7
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
+  - id: 224444
+    prefix: '976971'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e9e1b147-b84c-4635-b571-b2c8a9000cd1
+    country_id: *mn
+    network_id: *mn_g_mobile_mobile
 # Fixed Prefixes
-  - id: 52950
-    prefix: '9764841'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 80a885fe-ed88-4046-bc47-8b9a2d46d244
-    country_id: *mn
-    network_id: *mn_altai_region
-  - id: 52953
-    prefix: '9764842'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aa5124fc-9a18-4260-b97e-5090118b4888
-    country_id: *mn
-    network_id: *mn_bayan_uul_region
-  - id: 52956
-    prefix: '9764843'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4bdb8ae4-f0c1-4889-92bc-f225d9198011
-    country_id: *mn
-    network_id: *mn_biger_region
-  - id: 52958
-    prefix: '9764844'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 999212c1-13a2-4ff9-baa3-23ca2aa2cde2
-    country_id: *mn
-    network_id: *mn_bugant_region
-  - id: 52960
-    prefix: '9764845'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a2dd28f5-69ec-47dd-8e2d-73b5c0beee19
-    country_id: *mn
-    network_id: *mn_darvi_region
-  - id: 52963
-    prefix: '9764846'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b1e9861b-dd69-4080-9cf1-33ec0abfca7a
-    country_id: *mn
-    network_id: *mn_delger__guulin__region
-  - id: 52966
-    prefix: '9764847'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b07fe2bf-0594-4e48-bc99-9af01d450e59
-    country_id: *mn
-    network_id: *mn_jargalan_region
-  - id: 52969
-    prefix: '9764848'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 67e4cb09-0d2d-4e3a-a14c-90a4b768bcc0
-    country_id: *mn
-    network_id: *mn_taishir_region
-  - id: 52971
-    prefix: '9764849'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d3209674-e793-4659-8afe-4de37c8eac0d
-    country_id: *mn
-    network_id: *mn_tonkhil_region
-  - id: 53122
-    prefix: '9764851'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 87ab6226-f3d3-4f8e-baca-e3cd040e9492
-    country_id: *mn
-    network_id: *mn_tugrug_region
-  - id: 53126
-    prefix: '9764852'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f9c702b1-ad2f-4c54-aa59-e5cdfdc71359
-    country_id: *mn
-    network_id: *mn_khaluun_region
-  - id: 53130
-    prefix: '9764853'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 39644481-cd8e-4eb5-ba71-fd96f8ed4425
-    country_id: *mn
-    network_id: *mn_khukhmorit_region
-  - id: 53133
-    prefix: '9764854'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 60c679e6-65f9-424b-8fdb-1e6fc78f8fad
-    country_id: *mn
-    network_id: *mn_tsogt_bayantooroi_region
-  - id: 53136
-    prefix: '9764855'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 92167717-3260-435d-a098-a45e7b4dcea7
-    country_id: *mn
-    network_id: *mn_tseel_region
-  - id: 53138
-    prefix: '9764856'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e97d1443-56a2-4135-8a7c-c24c0798b29c
-    country_id: *mn
-    network_id: *mn_chandmani__zeegt__region
-  - id: 53140
-    prefix: '9764857'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2f9fc3a0-f90f-47bf-b495-a7bbde2fa4fc
-    country_id: *mn
-    network_id: *mn_sharga_region
-  - id: 53143
-    prefix: '9764858'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 30098c07-bb6d-443a-8031-522c5be778ba
-    country_id: *mn
-    network_id: *mn_erdene_region
-  - id: 54927
-    prefix: '97650'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e866a6d8-fa7d-4b7a-bd22-81a590296ae9
-    country_id: *mn
-    network_id: *mn_wireless_local_loop_wll_region
-  - id: 56896
-    prefix: '976482'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f4f035e1-5e85-43e5-82de-748d521796f0
-    country_id: *mn
-    network_id: *mn_altai_city_yesunbulag_region
-  - id: 68206
-    prefix: '976512'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e6581ce5-c0ad-4ddb-8ac3-fbb7f940d65d
-    country_id: *mn
-    network_id: *mn_baruun_urt_city_region
-  - id: 69268
-    prefix: '9765141'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0997ef31-98ab-49d8-88a0-f56a87861159
-    country_id: *mn
-    network_id: *mn_asgat_region
-  - id: 69271
-    prefix: '9765142'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a5eb5cc5-b502-4efa-9e5f-8cd629a1f312
-    country_id: *mn
-    network_id: *mn_bayandelger_region
-  - id: 69274
-    prefix: '9765143'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52d97936-9e7d-478e-b5ec-2a7d54bf6bd8
-    country_id: *mn
-    network_id: *mn_dariganga_region
-  - id: 69277
-    prefix: '9765144'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b0fbd5c-f6d3-45a1-a9a7-0158ed4009a0
-    country_id: *mn
-    network_id: *mn_munkhkhaan_region
-  - id: 69279
-    prefix: '9765145'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a63b14c4-fd25-442d-aa93-7f96ab4c5c0d
-    country_id: *mn
-    network_id: *mn_naran_region
-  - id: 69281
-    prefix: '9765146'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 86bf24e7-d498-432c-9819-2adcedafa0d4
-    country_id: *mn
-    network_id: *mn_ongon_region
-  - id: 69283
-    prefix: '9765147'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1ea843eb-a0f0-4a98-9900-495d128df2dc
-    country_id: *mn
-    network_id: *mn_sukhbaatar_region
-  - id: 69285
-    prefix: '9765148'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ad62fea3-2723-4c01-89a7-41566fa6f244
-    country_id: *mn
-    network_id: *mn_tuvshin_shiree_region
-  - id: 69287
-    prefix: '9765149'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9338a821-43c4-4f6b-bb4b-f71fa0eaae0e
-    country_id: *mn
-    network_id: *mn_tumentsogt_region
-  - id: 69842
-    prefix: '9765151'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c5c0e9bd-88df-4101-8967-f713784b851c
-    country_id: *mn
-    network_id: *mn_uulbayan_region
-  - id: 69844
-    prefix: '9765152'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ff36f7a1-d456-465f-ae57-eb4632c8d64d
-    country_id: *mn
-    network_id: *mn_halzan_region
-  - id: 69846
-    prefix: '9765153'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 54a3059b-c68d-4f4e-a7f2-f4a1ce0d7cff
-    country_id: *mn
-    network_id: *mn_erdenetsagaan_region
-  - id: 72733
-    prefix: '976532'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1adb6129-b69e-43c6-87ec-478b82c99157
-    country_id: *mn
-    network_id: *mn_dalanzadgad_region
-  - id: 72885
-    prefix: '9765341'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 438946bb-f13f-473a-aa7a-6fe162a46a91
-    country_id: *mn
-    network_id: *mn_bayandalai_region
-  - id: 72887
-    prefix: '9765342'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 683aaf41-7944-437f-87fb-381db61c9c53
-    country_id: *mn
-    network_id: *mn_bayan_ovoo_region
-  - id: 72889
-    prefix: '9765343'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9c471d0d-40b4-43fc-8249-4aa8b7b1a988
-    country_id: *mn
-    network_id: *mn_bulgan_region
-  - id: 72891
-    prefix: '9765344'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 17141988-c3c8-41a9-8dae-ebc4b586c59a
-    country_id: *mn
-    network_id: *mn_gurvan_tes_region
-  - id: 72893
-    prefix: '9765345'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f376f4cb-b13a-421e-b2ae-6b87473e0617
-    country_id: *mn
-    network_id: *mn_mandal_ovoo_region
-  - id: 72895
-    prefix: '9765346'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ee3317a8-6dd7-430b-baef-8defd6fa6267
-    country_id: *mn
-    network_id: *mn_manlai_region
-  - id: 72897
-    prefix: '9765347'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9004463d-b1c8-4412-907a-0cbe7227e896
-    country_id: *mn
-    network_id: *mn_noyon_region
-  - id: 72898
-    prefix: '9765348'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 80b52d3e-3065-440d-b6f2-13582385ad03
-    country_id: *mn
-    network_id: *mn_nomgon_region
-  - id: 72899
-    prefix: '9765349'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4781703-3887-49bc-ab2e-46788b83253a
-    country_id: *mn
-    network_id: *mn_savrai_region
-  - id: 72910
-    prefix: '9765351'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be9a0477-d8c7-46b9-8b64-65ae5838c745
-    country_id: *mn
-    network_id: *mn_khanbogd_region
-  - id: 72913
-    prefix: '9765352'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 344ec1d8-df0c-4bc0-ab0f-2d12aaa98264
-    country_id: *mn
-    network_id: *mn_khankhongor_region
-  - id: 72916
-    prefix: '9765353'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 36ffc28c-11e6-444a-bbb0-a0ab5510727c
-    country_id: *mn
-    network_id: *mn_khurmen_region
-  - id: 72919
-    prefix: '9765354'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c15c2dca-2285-48d5-9de0-048ca1fe1a84
-    country_id: *mn
-    network_id: *mn_tsogt_ovoo_region
-  - id: 72922
-    prefix: '9765355'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 615f2262-1042-4a6a-b4f7-90d3e03990a6
-    country_id: *mn
-    network_id: *mn_tsogt_tsetsii__tavantolgoi__region
-  - id: 76331
-    prefix: '976522'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e445801b-14d4-4305-bdee-e6d51355bebd
-    country_id: *mn
-    network_id: *mn_sainshand_city_region
-  - id: 76392
-    prefix: '9765241'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07855e7a-5e3f-4060-89ed-b3fc7cdb8e0c
-    country_id: *mn
-    network_id: *mn_airag_region
-  - id: 76395
-    prefix: '9765242'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba1143df-7172-4310-8101-a6608524af12
-    country_id: *mn
-    network_id: *mn_altanshiree_region
-  - id: 76397
-    prefix: '9765243'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e02f5b50-ebcc-4f7a-b1a7-ed2dc1e21dbe
-    country_id: *mn
-    network_id: *mn_dalanjargalan_region
-  - id: 76401
-    prefix: '9765244'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2afb7a80-d84c-457d-a46e-a043aaa92156
-    country_id: *mn
-    network_id: *mn_delgerekh_region
-  - id: 76404
-    prefix: '9765245'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 753d82b2-e78c-4771-bd53-cdbe38266888
-    country_id: *mn
-    network_id: *mn_zamiin_uud_region
-  - id: 76407
-    prefix: '9765246'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c6de29d5-6040-44be-8237-68f55f75842d
-    country_id: *mn
-    network_id: *mn_ikh_khet__zulegtei_hajuu_ulaan__region
-  - id: 76409
-    prefix: '9765247'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f2892163-59e1-4609-8768-95d386e662b5
-    country_id: *mn
-    network_id: *mn_mandakh_region
-  - id: 76413
-    prefix: '9765248'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 117bb31c-01ca-40be-8548-9cc07be6849b
-    country_id: *mn
-    network_id: *mn_urgun_region
-  - id: 76414
-    prefix: '9765249'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 09120fcc-5136-4d40-994b-930916eb552b
-    country_id: *mn
-    network_id: *mn_saikhandulaan_region
-  - id: 76429
-    prefix: '9765251'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 467d96ea-76ce-499a-a5ac-396391e4ad47
-    country_id: *mn
-    network_id: *mn_ulaanbadrakh_region
-  - id: 76433
-    prefix: '9765252'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a2c22bcb-8258-48fc-a81b-b9d2be01322f
-    country_id: *mn
-    network_id: *mn_khatanbulag_region
-  - id: 76437
-    prefix: '9765253'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07b16e61-203d-436d-aca1-50b713ca9bc3
-    country_id: *mn
-    network_id: *mn_huvsgul_region
-  - id: 76441
-    prefix: '9765254'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6fac1d4c-dcbf-49f4-9d27-458d1332a49e
-    country_id: *mn
-    network_id: *mn_erdene_region
-  - id: 77502
-    prefix: '976542'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0a5a1622-c254-44f8-af8f-1e9fbe070099
-    country_id: *mn
-    network_id: *mn_choir_city_sumber_region
-  - id: 77558
-    prefix: '9765441'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4fd862dd-c580-42f8-b033-2ee96d1edcd3
-    country_id: *mn
-    network_id: *mn_bayantal_region
-  - id: 77562
-    prefix: '9765442'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e1af9ca9-feda-4271-becd-d4237a0d904c
-    country_id: *mn
-    network_id: *mn_shivee_govi_region
-  - id: 78126
-    prefix: '97655'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fb15b10f-620d-439e-9c2c-23307c307567
-    country_id: *mn
-    network_id: *mn_wireless_local_loop_wll_region
-  - id: 83330
-    prefix: '976582'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94e77965-2044-484a-8954-2996a3ae0bea
-    country_id: *mn
-    network_id: *mn_choibalsan_city_region
-  - id: 83514
-    prefix: '9765841'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5c3b866f-77b0-4182-9a3b-3ef5ed5f2294
-    country_id: *mn
-    network_id: *mn_bayandun_region
-  - id: 83517
-    prefix: '9765842'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a3ee3d92-965f-4e42-a752-dba8da92f195
-    country_id: *mn
-    network_id: *mn_bayantumen_region
-  - id: 83520
-    prefix: '9765843'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 602d4e2c-4434-4d6c-a58e-732e46c110d2
-    country_id: *mn
-    network_id: *mn_bayan_uul__ereen__region
-  - id: 83523
-    prefix: '9765844'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0c92dfc8-680b-4393-a270-d84b637096a4
-    country_id: *mn
-    network_id: *mn_bulgan_region
-  - id: 83525
-    prefix: '9765845'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9fdd5ee4-1240-4d40-8a3c-982f53218906
-    country_id: *mn
-    network_id: *mn_gurvanzagal_region
-  - id: 83527
-    prefix: '9765846'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3614b52c-7398-4fa2-b87d-1caaa894511c
-    country_id: *mn
-    network_id: *mn_dashbalbar__erdes__region
-  - id: 83528
-    prefix: '9765847'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 06a5cea1-f645-4a29-a5cd-28cdefdbccaf
-    country_id: *mn
-    network_id: *mn_matad_region
-  - id: 83530
-    prefix: '9765848'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 68d8922e-b1d0-4bb4-95ac-46d2d225a17d
-    country_id: *mn
-    network_id: *mn_sereglen_region
-  - id: 83532
-    prefix: '9765849'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8e455aed-962a-4f39-816a-94b4dd2373a7
-    country_id: *mn
-    network_id: *mn_khalkh_gol_region
-  - id: 84487
-    prefix: '976592'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 565b8a7f-00d1-413a-a3d0-d55345800a21
-    country_id: *mn
-    network_id: *mn_mandalgovi_city_region
-  - id: 84619
-    prefix: '9765941'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 74ff765b-54ce-4735-8f0a-afa92a4b9b81
-    country_id: *mn
-    network_id: *mn_adaatsag_region
-  - id: 84622
-    prefix: '9765942'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 30cba9a0-3d5d-4a53-9c80-6ce0ef8e7089
-    country_id: *mn
-    network_id: *mn_bayanjargalan_region
-  - id: 84625
-    prefix: '9765943'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: acad48a5-185c-4064-a174-a4a0b6e75a80
-    country_id: *mn
-    network_id: *mn_govi_ugtaal_region
-  - id: 84628
-    prefix: '9765944'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eb312222-2990-40ec-b33b-2bcd0caea0d9
-    country_id: *mn
-    network_id: *mn_gurvansaikhan_region
-  - id: 84631
-    prefix: '9765945'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc176ac7-0167-4830-8979-3c9c6dc74f3f
-    country_id: *mn
-    network_id: *mn_delgerkhangai_region
-  - id: 84634
-    prefix: '9765946'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef714b8d-564a-45f2-93cd-474e2775bef5
-    country_id: *mn
-    network_id: *mn_delgertsogt_region
-  - id: 84637
-    prefix: '9765947'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 43d5755c-2005-452c-b9fc-efed44bb337b
-    country_id: *mn
-    network_id: *mn_deren_region
-  - id: 84640
-    prefix: '9765948'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 04846a5e-7a3c-491b-a941-3db4269aa85f
-    country_id: *mn
-    network_id: *mn_luus_region
-  - id: 84642
-    prefix: '9765949'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8c23b7c7-66dd-4b01-9b6a-0cd1b0b5425c
-    country_id: *mn
-    network_id: *mn_ulziit_region
-  - id: 84795
-    prefix: '9765951'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4ac0747b-858a-4ad0-a3c3-6f47d4046ac7
-    country_id: *mn
-    network_id: *mn_undurshil_region
-  - id: 84797
-    prefix: '9765952'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18eb2a04-6e77-477f-8beb-1e4c14e487de
-    country_id: *mn
-    network_id: *mn_saikhan_ovoo_region
-  - id: 84799
-    prefix: '9765953'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 90befecf-6cb4-4257-a2c6-9b605d700bde
-    country_id: *mn
-    network_id: *mn_khuld_region
-  - id: 84801
-    prefix: '9765954'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f9fdb1d-b7e9-4962-a5aa-bf15d59bbe71
-    country_id: *mn
-    network_id: *mn_tsagaandelger_region
-  - id: 84803
-    prefix: '9765955'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bc5684cc-4f12-46d4-b187-560547e36c07
-    country_id: *mn
-    network_id: *mn_erdenedalai_region
-  - id: 87918
-    prefix: '97656'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ed7e079d-5710-4145-8b6e-b8d4b683f9a7
-    country_id: *mn
-    network_id: *mn_wireless_local_loop_wll_region
-  - id: 88601
-    prefix: '976562'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 978d0955-0cf2-4a4e-a7f3-4634e9e588d1
-    country_id: *mn
-    network_id: *mn_undurkhaan_city_region
-  - id: 89764
-    prefix: '9765641'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c72fead3-92c1-43d0-badd-535dfa878d63
-    country_id: *mn
-    network_id: *mn_batnorov__berkh__region
-  - id: 89767
-    prefix: '9765642'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 57baf01c-0495-4e77-b93a-84875621e46c
-    country_id: *mn
-    network_id: *mn_batshireet_region
-  - id: 89770
-    prefix: '9765643'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a35fcdbc-b19b-41dd-bb98-eadcc3184203
-    country_id: *mn
-    network_id: *mn_bayan_adraga_region
-  - id: 89773
-    prefix: '9765644'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f4f08c8b-4cf8-477e-a287-a913801b9f54
-    country_id: *mn
-    network_id: *mn_bayanmunkh_region
-  - id: 89776
-    prefix: '9765645'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4b0ba403-aa9d-4cd8-a915-26b8e3f493d1
-    country_id: *mn
-    network_id: *mn_bayan_ovoo_region
-  - id: 89779
-    prefix: '9765646'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cde0ffe7-7a4e-41e3-9133-0883ffe2b9e2
-    country_id: *mn
-    network_id: *mn_bayankhutagt_region
-  - id: 89782
-    prefix: '9765647'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 00c32879-8c6d-4cbb-9f18-c5df55ee2bed
-    country_id: *mn
-    network_id: *mn_binder_region
-  - id: 89785
-    prefix: '9765648'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 72d144dc-a7c7-468f-be50-88bcb03ada70
-    country_id: *mn
-    network_id: *mn_galshir_region
-  - id: 89786
-    prefix: '9765649'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f5c9e72-600f-4e1a-a09e-1e5c12954dca
-    country_id: *mn
-    network_id: *mn_dadal_region
-  - id: 89794
-    prefix: '9765651'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6ef78dae-6852-49ef-bfb2-107a1b94ea91
-    country_id: *mn
-    network_id: *mn_darkhan__bor_undur__region
-  - id: 89797
-    prefix: '9765652'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 27765756-32e9-4cc1-acef-c5beedc339cc
-    country_id: *mn
-    network_id: *mn_delgerkhaan_region
-  - id: 89800
-    prefix: '9765653'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 336082a6-d248-4ebd-8e39-8601499eeae9
-    country_id: *mn
-    network_id: *mn_jargalt_khaan_region
-  - id: 89803
-    prefix: '9765654'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cea10495-ebdb-4318-9e57-b20beb1efc0c
-    country_id: *mn
-    network_id: *mn_murun__chandgana_tal__region
-  - id: 89806
-    prefix: '9765655'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: de702790-09d0-4245-b3d3-42bd9170cc8d
-    country_id: *mn
-    network_id: *mn_norovlin_region
-  - id: 89808
-    prefix: '9765656'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f6b180ea-a28c-48fb-80a8-e3b0f79c8444
-    country_id: *mn
-    network_id: *mn_umnudelger_region
-  - id: 89810
-    prefix: '9765657'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 22b82560-a44b-44b2-b6ce-5146a438c315
-    country_id: *mn
-    network_id: *mn_tsenkhermandal_region
-  - id: 93098
-    prefix: '97658'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 05f50733-fc79-4afa-bafa-eaefa0f08276
-    country_id: *mn
-    network_id: *mn_wireless_local_loop_wll_region
-  - id: 94007
-    prefix: '9765851'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 61e8fb70-1eee-4828-a1c9-1d77f0ab318b
-    country_id: *mn
-    network_id: *mn_khulunbuyir_region
-  - id: 94010
-    prefix: '9765852'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef5c3238-db92-47ec-a407-0ecd9063bf7b
-    country_id: *mn
-    network_id: *mn_tsagaan_ovoo_region
-  - id: 94013
-    prefix: '9765853'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8840f490-7409-4f61-ad66-7318dff55f67
-    country_id: *mn
-    network_id: *mn_choibalsan_region
-  - id: 94016
-    prefix: '9765854'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 45f58f95-6f2e-415d-9058-aa79be91582a
-    country_id: *mn
-    network_id: *mn_chuluunkhoroot_region
   - id: 150250
     prefix: '976700'
     number_min_length: 11
@@ -2172,6 +1578,13 @@ network_prefixes:
     uuid: adcf2de2-4824-442d-b5eb-f7eea33846aa
     country_id: *mn
     network_id: *mn_voip_region
+  - id: 242057
+    prefix: '976'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 64457139-eadf-47a8-ab92-e00a56b4ae30
+    country_id: *mn
+    network_id: *mn_fixed
   - id: 258566
     prefix: '9761'
     number_min_length: 10
@@ -4531,27 +3944,6 @@ network_prefixes:
     uuid: 54eb07c3-e731-41c7-acb1-931c9377cda4
     country_id: *mn
     network_id: *mn_ulaanbaatar_region
-  - id: 278001
-    prefix: '97622'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 0ef6175a-4f43-47e3-9770-dfccf88b79a5
-    country_id: *mn
-    network_id: *mn_bagakhangai_region
-  - id: 278991
-    prefix: '976223'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 33a8cc45-65ef-48e2-b155-498f73a5892f
-    country_id: *mn
-    network_id: *mn_nalaikh_region
-  - id: 283233
-    prefix: '976221'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: fa8cf824-ef9d-4965-a219-491c4307be7b
-    country_id: *mn
-    network_id: *mn_baganuur_region
   - id: 283775
     prefix: '976222'
     number_min_length: 11
@@ -4559,6 +3951,286 @@ network_prefixes:
     uuid: 1dc1c1fc-6fc5-4bec-9241-4821e66aa018
     country_id: *mn
     network_id: *mn_bagakhangai_region
+  - id: 278001
+    prefix: '97622'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 0ef6175a-4f43-47e3-9770-dfccf88b79a5
+    country_id: *mn
+    network_id: *mn_bagakhangai_region
+  - id: 283233
+    prefix: '976221'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: fa8cf824-ef9d-4965-a219-491c4307be7b
+    country_id: *mn
+    network_id: *mn_baganuur_region
+  - id: 278991
+    prefix: '976223'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 33a8cc45-65ef-48e2-b155-498f73a5892f
+    country_id: *mn
+    network_id: *mn_nalaikh_region
+  - id: 286635
+    prefix: '97623'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b4a212fc-3dcb-42c0-8813-5aa53017b541
+    country_id: *mn
+    network_id: *mn_nalaikh_region
+  - id: 293082
+    prefix: '97623341'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ee3a1856-2acc-4027-950e-8616e01f910e
+    country_id: *mn
+    network_id: *mn_battsengel_region
+  - id: 293083
+    prefix: '97623342'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 74eac560-7191-4ffd-907d-871aef71da35
+    country_id: *mn
+    network_id: *mn_bulgan_region
+  - id: 293084
+    prefix: '97623343'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ed104232-7d9d-484d-8f72-85e707147621
+    country_id: *mn
+    network_id: *mn_jargalant_region
+  - id: 293085
+    prefix: '97623344'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ad97ef17-7c6a-47eb-b0f7-6c20f87fd6dc
+    country_id: *mn
+    network_id: *mn_ich_tamir_region
+  - id: 293086
+    prefix: '97623345'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 143b352d-952f-4da9-be32-a93d8e31f7bb
+    country_id: *mn
+    network_id: *mn_ugii_nuur_region
+  - id: 293087
+    prefix: '97623346'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6460f4a8-efac-4abf-8c3c-bda65936116e
+    country_id: *mn
+    network_id: *mn_ulziit_region
+  - id: 293088
+    prefix: '97623347'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1dfce93f-f72c-42e8-9c81-ca3a1c94a315
+    country_id: *mn
+    network_id: *mn_undur_ulaan_region
+  - id: 293089
+    prefix: '97623348'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9279420e-6f1d-4cf3-ade4-a44bac65f4dd
+    country_id: *mn
+    network_id: *mn_tariat_region
+  - id: 293090
+    prefix: '97623349'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b39b5e64-9cf2-4e77-803a-b42d4bddcb00
+    country_id: *mn
+    network_id: *mn_tuvshruulekh_region
+  - id: 293094
+    prefix: '97623351'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 93382e1c-b934-49c0-9ed4-39029e08d194
+    country_id: *mn
+    network_id: *mn_khairkhan_region
+  - id: 293095
+    prefix: '97623352'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 86805d79-8208-4a72-9ecc-b59541a78d87
+    country_id: *mn
+    network_id: *mn_khahgai_region
+  - id: 293096
+    prefix: '97623353'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4a3572b3-e2b6-4443-a916-def1b3976078
+    country_id: *mn
+    network_id: *mn_khashaat_region
+  - id: 293097
+    prefix: '97623354'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a03aa5fc-0b0f-4d80-8966-389e9f069004
+    country_id: *mn
+    network_id: *mn_khotont_region
+  - id: 293098
+    prefix: '97623355'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7bc69fb1-1c05-496e-bc81-2f7958f725c5
+    country_id: *mn
+    network_id: *mn_tsakhirt_region
+  - id: 293099
+    prefix: '97623356'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9542a460-5861-44ab-868c-31e5134358fd
+    country_id: *mn
+    network_id: *mn_tsenkher_region
+  - id: 293100
+    prefix: '97623357'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4144a28c-d58c-4b29-abf4-dae7994e34c0
+    country_id: *mn
+    network_id: *mn_tsetserleg_region
+  - id: 293101
+    prefix: '97623358'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 338b2ba2-c7d3-4433-9ce1-8cd1c61ae188
+    country_id: *mn
+    network_id: *mn_chuluut_region
+  - id: 293102
+    prefix: '97623359'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a01f0fb-5b5b-4a65-8ed4-bd56bd97c0ec
+    country_id: *mn
+    network_id: *mn_erdenemandal_region
+  - id: 287456
+    prefix: '9762342'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2a0bc94b-830d-4953-898b-d58497586520
+    country_id: *mn
+    network_id: *mn_bulgan_city_region
+  - id: 287465
+    prefix: '97623441'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d67914c8-832d-45a4-8215-ddb3736e3b43
+    country_id: *mn
+    network_id: *mn_bayanagt_region
+  - id: 287466
+    prefix: '97623442'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ec631500-e0b2-4692-bcc3-65a51c309065
+    country_id: *mn
+    network_id: *mn_bayannuur_region
+  - id: 287467
+    prefix: '97623443'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 85dad8a4-e7d1-4378-97b8-a684c5f182c8
+    country_id: *mn
+    network_id: *mn_bugat_region
+  - id: 287468
+    prefix: '97623444'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2156abef-1c49-40f5-99c5-366282b137b7
+    country_id: *mn
+    network_id: *mn_buregkhangai_region
+  - id: 287469
+    prefix: '97623445'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b40be0dc-731d-4c05-b848-6f9db6cf6eb9
+    country_id: *mn
+    network_id: *mn_gurvanbulag_region
+  - id: 287470
+    prefix: '97623446'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 896f2d16-8d67-42b1-8586-f7f0a2c21d8b
+    country_id: *mn
+    network_id: *mn_dashinchilen_region
+  - id: 287471
+    prefix: '97623447'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d93b5366-8f4a-45d4-a276-901ed75c1115
+    country_id: *mn
+    network_id: *mn_mogod_region
+  - id: 287472
+    prefix: '97623448'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 28a08dcf-a89e-46d4-9b43-bb09b9d8432f
+    country_id: *mn
+    network_id: *mn_orkhon_region
+  - id: 287473
+    prefix: '97623449'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3174cf04-f885-4628-8972-cb4fe2b906dd
+    country_id: *mn
+    network_id: *mn_rashaant_region
+  - id: 287478
+    prefix: '97623451'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6e9f908e-8ddd-4312-ae5f-0e50b749b721
+    country_id: *mn
+    network_id: *mn_saikhan__saikhanovoo__region
+  - id: 287479
+    prefix: '97623452'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2ea6c4c0-284b-4f84-a94e-1c7ee0581c4d
+    country_id: *mn
+    network_id: *mn_selenge__khyalganat__region
+  - id: 287480
+    prefix: '97623453'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f7b6a7e8-8324-46f1-af0a-272cf8693413
+    country_id: *mn
+    network_id: *mn_teshig_region
+  - id: 287481
+    prefix: '97623454'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2ec1a644-2e40-40f2-8a9d-0770770f394f
+    country_id: *mn
+    network_id: *mn_khangal_region
+  - id: 287482
+    prefix: '97623455'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2480741b-3654-4224-ab27-b87856446a47
+    country_id: *mn
+    network_id: *mn_khishig_undur_region
+  - id: 287483
+    prefix: '97623456'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b41af449-da27-4ff9-9125-69462131ccba
+    country_id: *mn
+    network_id: *mn_khutag_undur_region
+  - id: 287648
+    prefix: '9762352'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d06ad351-6b49-4e64-8dd0-6b5e2f624b36
+    country_id: *mn
+    network_id: *mn_erdenet_city_bayan_undur_region
+  - id: 287660
+    prefix: '97623541'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 16d3860f-014d-41ea-a29e-3c00bc24f135
+    country_id: *mn
+    network_id: *mn_jargalant_region
   - id: 285076
     prefix: '9762272'
     number_min_length: 12
@@ -4748,139 +4420,146 @@ network_prefixes:
     uuid: b5783a79-f693-46c6-8051-f915b1fded06
     country_id: *mn
     network_id: *mn_erdenesant_region
-  - id: 286635
-    prefix: '97623'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b4a212fc-3dcb-42c0-8813-5aa53017b541
-    country_id: *mn
-    network_id: *mn_nalaikh_region
-  - id: 287456
-    prefix: '9762342'
+  - id: 292894
+    prefix: '9762322'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2a0bc94b-830d-4953-898b-d58497586520
+    uuid: b710e4db-d9e4-4895-8e79-e329392e1a52
     country_id: *mn
-    network_id: *mn_bulgan_city_region
-  - id: 287465
-    prefix: '97623441'
+    network_id: *mn_arvaikheer_city_region
+  - id: 292905
+    prefix: '97623241'
     number_min_length: 12
     number_max_length: 12
-    uuid: d67914c8-832d-45a4-8215-ddb3736e3b43
+    uuid: ee5899d6-c695-4c1b-8fc4-6f414d4844b8
     country_id: *mn
-    network_id: *mn_bayanagt_region
-  - id: 287466
-    prefix: '97623442'
+    network_id: *mn_baruun_bayan_ulaan_region
+  - id: 292906
+    prefix: '97623242'
     number_min_length: 12
     number_max_length: 12
-    uuid: ec631500-e0b2-4692-bcc3-65a51c309065
+    uuid: c91744e0-df07-4a9a-aea8-780c6751a8cc
     country_id: *mn
-    network_id: *mn_bayannuur_region
-  - id: 287467
-    prefix: '97623443'
+    network_id: *mn_batulzii_region
+  - id: 292907
+    prefix: '97623243'
     number_min_length: 12
     number_max_length: 12
-    uuid: 85dad8a4-e7d1-4378-97b8-a684c5f182c8
+    uuid: c5f96033-75fb-41a1-b9cb-e534d4d44bc8
     country_id: *mn
-    network_id: *mn_bugat_region
-  - id: 287468
-    prefix: '97623444'
+    network_id: *mn_bayangol_region
+  - id: 292908
+    prefix: '97623244'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2156abef-1c49-40f5-99c5-366282b137b7
+    uuid: 7089b046-6ce5-4651-90f3-ba61509b0691
     country_id: *mn
-    network_id: *mn_buregkhangai_region
-  - id: 287469
-    prefix: '97623445'
+    network_id: *mn_bayan_undur_region
+  - id: 292909
+    prefix: '97623245'
     number_min_length: 12
     number_max_length: 12
-    uuid: b40be0dc-731d-4c05-b848-6f9db6cf6eb9
+    uuid: 81b3d653-9328-4368-bfa5-616ab3254ef6
     country_id: *mn
-    network_id: *mn_gurvanbulag_region
-  - id: 287470
-    prefix: '97623446'
+    network_id: *mn_bogd_region
+  - id: 292910
+    prefix: '97623246'
     number_min_length: 12
     number_max_length: 12
-    uuid: 896f2d16-8d67-42b1-8586-f7f0a2c21d8b
+    uuid: 2b4d0440-4ef5-4925-a69b-dd26bfa01120
     country_id: *mn
-    network_id: *mn_dashinchilen_region
-  - id: 287471
-    prefix: '97623447'
+    network_id: *mn_burd_region
+  - id: 292911
+    prefix: '97623247'
     number_min_length: 12
     number_max_length: 12
-    uuid: d93b5366-8f4a-45d4-a276-901ed75c1115
+    uuid: d0ae588d-2ae7-4608-a967-73cdaf327156
     country_id: *mn
-    network_id: *mn_mogod_region
-  - id: 287472
-    prefix: '97623448'
+    network_id: *mn_guchin_us_region
+  - id: 292912
+    prefix: '97623248'
     number_min_length: 12
     number_max_length: 12
-    uuid: 28a08dcf-a89e-46d4-9b43-bb09b9d8432f
+    uuid: 7a21c88d-59ec-4cc7-bbc4-313b0e198b82
     country_id: *mn
-    network_id: *mn_orkhon_region
-  - id: 287473
-    prefix: '97623449'
+    network_id: *mn_zuil_region
+  - id: 292913
+    prefix: '97623249'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3174cf04-f885-4628-8972-cb4fe2b906dd
+    uuid: 42d1f309-d223-4ab6-aa45-45669f7d5989
     country_id: *mn
-    network_id: *mn_rashaant_region
-  - id: 287478
-    prefix: '97623451'
+    network_id: *mn_zuun_bayan_ulaan_region
+  - id: 292919
+    prefix: '97623251'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6e9f908e-8ddd-4312-ae5f-0e50b749b721
+    uuid: 26919268-48a0-4b04-9bb5-8e86949ee0ef
     country_id: *mn
-    network_id: *mn_saikhan__saikhanovoo__region
-  - id: 287479
-    prefix: '97623452'
+    network_id: *mn_naariin_teel_region
+  - id: 292920
+    prefix: '97623252'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ea6c4c0-284b-4f84-a94e-1c7ee0581c4d
+    uuid: cd225a77-90b7-4e4d-9cd1-92344ae1a9fa
     country_id: *mn
-    network_id: *mn_selenge__khyalganat__region
-  - id: 287480
-    prefix: '97623453'
+    network_id: *mn_ulziit_region
+  - id: 292921
+    prefix: '97623253'
     number_min_length: 12
     number_max_length: 12
-    uuid: f7b6a7e8-8324-46f1-af0a-272cf8693413
+    uuid: 09201039-194c-42ee-a8b1-477df7024aab
     country_id: *mn
-    network_id: *mn_teshig_region
-  - id: 287481
-    prefix: '97623454'
+    network_id: *mn_sant_region
+  - id: 292922
+    prefix: '97623254'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2ec1a644-2e40-40f2-8a9d-0770770f394f
+    uuid: 31616d98-df94-4489-bb0e-3fe764a18d76
     country_id: *mn
-    network_id: *mn_khangal_region
-  - id: 287482
-    prefix: '97623455'
+    network_id: *mn_taragt_region
+  - id: 292923
+    prefix: '97623255'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2480741b-3654-4224-ab27-b87856446a47
+    uuid: 5a5bf173-4278-469e-8ca0-c9ca92fd2144
     country_id: *mn
-    network_id: *mn_khishig_undur_region
-  - id: 287483
-    prefix: '97623456'
+    network_id: *mn_tugrug_region
+  - id: 292924
+    prefix: '97623256'
     number_min_length: 12
     number_max_length: 12
-    uuid: b41af449-da27-4ff9-9125-69462131ccba
+    uuid: e89f301f-925b-4925-8d42-8d92d4f24b92
     country_id: *mn
-    network_id: *mn_khutag_undur_region
-  - id: 287648
-    prefix: '9762352'
+    network_id: *mn_uyanga_region
+  - id: 292925
+    prefix: '97623257'
     number_min_length: 12
     number_max_length: 12
-    uuid: d06ad351-6b49-4e64-8dd0-6b5e2f624b36
+    uuid: d38a1a70-662b-4eb6-92bf-c3eae81d105e
     country_id: *mn
-    network_id: *mn_erdenet_city_bayan_undur_region
-  - id: 287660
-    prefix: '97623541'
+    network_id: *mn_hairkhandulaan_region
+  - id: 292926
+    prefix: '97623258'
     number_min_length: 12
     number_max_length: 12
-    uuid: 16d3860f-014d-41ea-a29e-3c00bc24f135
+    uuid: feca98d1-05d1-4d64-a968-c03f66b109e5
     country_id: *mn
-    network_id: *mn_jargalant_region
+    network_id: *mn_kharkhorin_region
+  - id: 292927
+    prefix: '97623259'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ebd5ce3f-50fb-4e14-9e87-7a076bffcb90
+    country_id: *mn
+    network_id: *mn_khujirt_region
+  - id: 293072
+    prefix: '9762332'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 481037c4-4063-4e14-870d-72c01107d372
+    country_id: *mn
+    network_id: *mn_tsetserleg_city_erdenebulgan_region
   - id: 288483
     prefix: '9762362'
     number_min_length: 12
@@ -5028,699 +4707,6 @@ network_prefixes:
     uuid: 3d837f35-fe2e-4ed1-9221-1c2a7f3b8ca4
     country_id: *mn
     network_id: *mn_sharin_gol_region
-  - id: 290145
-    prefix: '9762452'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9f15d7ae-49dc-4e56-8a8b-d176f7ca0051
-    country_id: *mn
-    network_id: *mn_ulaangom_city_region
-  - id: 290150
-    prefix: '97624541'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1e044189-bec7-41e6-8056-e375a958a4ec
-    country_id: *mn
-    network_id: *mn_baruun_turuun_region
-  - id: 290151
-    prefix: '97624542'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c18d4bb9-a2d4-40b0-bc4a-7d9db62ffd14
-    country_id: *mn
-    network_id: *mn_bukhmurun_region
-  - id: 290152
-    prefix: '97624543'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0ab4479b-c005-4c2e-a31b-2dc93a229133
-    country_id: *mn
-    network_id: *mn_davst_region
-  - id: 290153
-    prefix: '97624544'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 357e3434-2721-4e79-92b6-a6b771feac33
-    country_id: *mn
-    network_id: *mn_zavkhan_region
-  - id: 290154
-    prefix: '97624545'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bd6ac2f4-8d40-45c3-9821-f9f825f2412e
-    country_id: *mn
-    network_id: *mn_zuungovi_region
-  - id: 290155
-    prefix: '97624546'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1f6e2889-f0a1-4f42-bbf6-1a851d61451a
-    country_id: *mn
-    network_id: *mn_zuunkhangai_region
-  - id: 290156
-    prefix: '97624547'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bc482722-32b4-472c-833d-1dc48ee204a8
-    country_id: *mn
-    network_id: *mn_malchin_region
-  - id: 290157
-    prefix: '97624548'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c1d87203-3ce3-4083-86be-b4b1a2163190
-    country_id: *mn
-    network_id: *mn_naranbulag_region
-  - id: 290158
-    prefix: '97624549'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ce96c507-fea9-495b-b504-065e5216fdf2
-    country_id: *mn
-    network_id: *mn_ulgii_region
-  - id: 290161
-    prefix: '97624551'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f3cda48b-a9a9-4344-b75a-0f72147fbded
-    country_id: *mn
-    network_id: *mn_umnugovi_region
-  - id: 290162
-    prefix: '97624552'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 948aa62a-1dcb-4cb1-97df-7c5870528a66
-    country_id: *mn
-    network_id: *mn_undurkhangai_region
-  - id: 290163
-    prefix: '97624553'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 462b0c0f-8a86-4f16-90ec-cd324d886b46
-    country_id: *mn
-    network_id: *mn_sagili_region
-  - id: 290164
-    prefix: '97624554'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4fac5dad-41bf-49f8-a92d-ba57ce66d0a5
-    country_id: *mn
-    network_id: *mn_tarialan__khar_tarvagatai__region
-  - id: 290165
-    prefix: '97624555'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 86d0e2ec-b10e-4f5d-9c61-0aa58532846d
-    country_id: *mn
-    network_id: *mn_turgen_region
-  - id: 290166
-    prefix: '97624556'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 96e475ec-8212-43de-993f-d5f674613e60
-    country_id: *mn
-    network_id: *mn_tes_region
-  - id: 290167
-    prefix: '97624557'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 620d14df-d50f-417e-b25c-dc14769283e0
-    country_id: *mn
-    network_id: *mn_khovd_region
-  - id: 290168
-    prefix: '97624558'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e64c9b4e-93b1-4fd3-9fa9-30eb9d0b1ae7
-    country_id: *mn
-    network_id: *mn_khyargas_region
-  - id: 290169
-    prefix: '97624559'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 774a8822-c608-4538-90b5-8b282287c309
-    country_id: *mn
-    network_id: *mn_tsagaankhairkhan_region
-  - id: 290879
-    prefix: '9762462'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: af9d4a0d-77b4-4b58-af1e-4d3da54b9475
-    country_id: *mn
-    network_id: *mn_uliastal_city_region
-  - id: 290885
-    prefix: '97624641'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d9cd7bab-6152-426f-a049-db3616420adf
-    country_id: *mn
-    network_id: *mn_aldarkhaan_region
-  - id: 290886
-    prefix: '97624642'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f23d2e83-46d5-4ede-9269-bce5bbab3c57
-    country_id: *mn
-    network_id: *mn_asgat_region
-  - id: 290887
-    prefix: '97624643'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 45a42435-0aa3-4a5e-b050-96f27aa6c71e
-    country_id: *mn
-    network_id: *mn_bayantest_region
-  - id: 290888
-    prefix: '97624644'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 939eafb8-8687-418c-9ece-78451877cef7
-    country_id: *mn
-    network_id: *mn_bayankhairkhan_region
-  - id: 290889
-    prefix: '97624645'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8f0eb6f8-055f-4333-b96a-bdf0416241db
-    country_id: *mn
-    network_id: *mn_bulnai__tosontsengel__region
-  - id: 290890
-    prefix: '97624646'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2efe34bb-18fa-4c79-b103-8efd79f583fc
-    country_id: *mn
-    network_id: *mn_durvuljin_region
-  - id: 290891
-    prefix: '97624647'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 277320d9-0392-44ec-99d7-508867420386
-    country_id: *mn
-    network_id: *mn_zavkhanmandal_region
-  - id: 290892
-    prefix: '97624648'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c7686979-bb53-4707-855e-3ae5142c907a
-    country_id: *mn
-    network_id: *mn_ider_region
-  - id: 290893
-    prefix: '97624649'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 55596059-7359-4e28-8f24-2451bbd2b018
-    country_id: *mn
-    network_id: *mn_ikh_uul_region
-  - id: 290897
-    prefix: '97624651'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e86551a9-ec66-4035-9ec7-f391def2bca9
-    country_id: *mn
-    network_id: *mn_numrug_region
-  - id: 290898
-    prefix: '97624652'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c1d4fb78-ef40-4e0c-bebc-051d46a246d3
-    country_id: *mn
-    network_id: *mn_otgon_region
-  - id: 290899
-    prefix: '97624653'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 39f6761e-e703-495e-8aea-52bedf16090b
-    country_id: *mn
-    network_id: *mn_santmargad_region
-  - id: 290900
-    prefix: '97624654'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2654643c-5d61-40a7-a145-228a067140fa
-    country_id: *mn
-    network_id: *mn_songino_region
-  - id: 290901
-    prefix: '97624655'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: da8b2ec0-8544-49ea-b041-4f959541c3eb
-    country_id: *mn
-    network_id: *mn_tudevtei_region
-  - id: 290902
-    prefix: '97624656'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9a982433-6038-4ca9-a7dc-0cfd9fd6ff91
-    country_id: *mn
-    network_id: *mn_telmen_region
-  - id: 290903
-    prefix: '97624657'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aadd30fc-1a40-4342-8cb2-8bae6bb67513
-    country_id: *mn
-    network_id: *mn_tes_region
-  - id: 290904
-    prefix: '97624658'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d354d1a4-175a-42b1-ae95-6b143ea0075f
-    country_id: *mn
-    network_id: *mn_urgamal_region
-  - id: 290905
-    prefix: '97624659'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 26d2eb1f-8f16-43bb-8383-100676eefe90
-    country_id: *mn
-    network_id: *mn_tsegeenkhairkhan_region
-  - id: 290907
-    prefix: '97624661'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e45a8bb1-6fb6-494f-aa7f-0888ec145b36
-    country_id: *mn
-    network_id: *mn_tsagaanchuluut_region
-  - id: 290908
-    prefix: '97624662'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 35381f36-6211-48c2-8ee3-1850d30df108
-    country_id: *mn
-    network_id: *mn_tsetsen_uul_region
-  - id: 290909
-    prefix: '97624663'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 74a564b7-f38b-4b4b-b887-c60e42b7eab6
-    country_id: *mn
-    network_id: *mn_shiluustei_region
-  - id: 290910
-    prefix: '97624664'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e5905086-b2bd-47c4-b727-981641d15f78
-    country_id: *mn
-    network_id: *mn_erdenekhaijkhan_region
-  - id: 290911
-    prefix: '97624665'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 236b58d4-87f5-4119-9a01-09c6b01aebc0
-    country_id: *mn
-    network_id: *mn_yaruu_region
-  - id: 291328
-    prefix: '9762482'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fbd16b38-ee3a-42ef-8e08-546e25779b10
-    country_id: *mn
-    network_id: *mn_altai_city_yesunbulag_region
-  - id: 291332
-    prefix: '97624841'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f7613f79-1853-4f68-a560-340d0327a9b5
-    country_id: *mn
-    network_id: *mn_altai_region
-  - id: 291333
-    prefix: '97624842'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9e940043-85b5-44ad-b95a-213fa6856590
-    country_id: *mn
-    network_id: *mn_bayan_uul_region
-  - id: 291334
-    prefix: '97624843'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3407960a-a469-4620-a566-dbc5581690ad
-    country_id: *mn
-    network_id: *mn_biger_region
-  - id: 291335
-    prefix: '97624844'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2a739740-7b08-476e-a024-7b6b6ca89dd2
-    country_id: *mn
-    network_id: *mn_bugant_region
-  - id: 291336
-    prefix: '97624845'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f6cfd81e-9173-4af4-b0b4-17ce4f1d4d72
-    country_id: *mn
-    network_id: *mn_darvi_region
-  - id: 291337
-    prefix: '97624846'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6da20df6-a973-4052-a774-e38fa3d86dde
-    country_id: *mn
-    network_id: *mn_delger__guulin__region
-  - id: 291338
-    prefix: '97624847'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bc9aa703-ffd7-44e1-bbd6-55cd60316df9
-    country_id: *mn
-    network_id: *mn_jargalan_region
-  - id: 291339
-    prefix: '97624848'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 803789f5-f4fa-4dfd-88c2-aaddf04e4688
-    country_id: *mn
-    network_id: *mn_taishir_region
-  - id: 291340
-    prefix: '97624849'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 507d8ee8-3ab8-4408-b703-fc0921e06f1e
-    country_id: *mn
-    network_id: *mn_tonkhil_region
-  - id: 291343
-    prefix: '97624851'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 029497b7-973c-4cf3-9f73-3a479ac6693c
-    country_id: *mn
-    network_id: *mn_tugrug_region
-  - id: 291344
-    prefix: '97624852'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2a7a4dee-f233-49bb-8827-20072ce98918
-    country_id: *mn
-    network_id: *mn_khaluun_region
-  - id: 291345
-    prefix: '97624853'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ebab39d2-828f-406b-b066-b90161d16193
-    country_id: *mn
-    network_id: *mn_khukhmorit_region
-  - id: 291346
-    prefix: '97624854'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0a4763ca-23fe-40e6-a394-05d3a397ac8b
-    country_id: *mn
-    network_id: *mn_tsogt_bayantooroi_region
-  - id: 291347
-    prefix: '97624855'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6918de49-1fa5-46cd-898e-9fbd578692b6
-    country_id: *mn
-    network_id: *mn_tseel_region
-  - id: 291348
-    prefix: '97624856'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7b4a9e70-3f11-40db-b09f-bce88f9403b1
-    country_id: *mn
-    network_id: *mn_chandmani__zeegt__region
-  - id: 291349
-    prefix: '97624857'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: db9d2070-80e9-407d-987a-b9fefb5ce4f7
-    country_id: *mn
-    network_id: *mn_sharga_region
-  - id: 291350
-    prefix: '97624858'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a98937dc-9a19-434d-90cd-cfe2abe28bd5
-    country_id: *mn
-    network_id: *mn_erdene_region
-  - id: 292894
-    prefix: '9762322'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b710e4db-d9e4-4895-8e79-e329392e1a52
-    country_id: *mn
-    network_id: *mn_arvaikheer_city_region
-  - id: 292905
-    prefix: '97623241'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ee5899d6-c695-4c1b-8fc4-6f414d4844b8
-    country_id: *mn
-    network_id: *mn_baruun_bayan_ulaan_region
-  - id: 292906
-    prefix: '97623242'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c91744e0-df07-4a9a-aea8-780c6751a8cc
-    country_id: *mn
-    network_id: *mn_batulzii_region
-  - id: 292907
-    prefix: '97623243'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c5f96033-75fb-41a1-b9cb-e534d4d44bc8
-    country_id: *mn
-    network_id: *mn_bayangol_region
-  - id: 292908
-    prefix: '97623244'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7089b046-6ce5-4651-90f3-ba61509b0691
-    country_id: *mn
-    network_id: *mn_bayan_undur_region
-  - id: 292909
-    prefix: '97623245'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 81b3d653-9328-4368-bfa5-616ab3254ef6
-    country_id: *mn
-    network_id: *mn_bogd_region
-  - id: 292910
-    prefix: '97623246'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2b4d0440-4ef5-4925-a69b-dd26bfa01120
-    country_id: *mn
-    network_id: *mn_burd_region
-  - id: 292911
-    prefix: '97623247'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d0ae588d-2ae7-4608-a967-73cdaf327156
-    country_id: *mn
-    network_id: *mn_guchin_us_region
-  - id: 292912
-    prefix: '97623248'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7a21c88d-59ec-4cc7-bbc4-313b0e198b82
-    country_id: *mn
-    network_id: *mn_zuil_region
-  - id: 292913
-    prefix: '97623249'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 42d1f309-d223-4ab6-aa45-45669f7d5989
-    country_id: *mn
-    network_id: *mn_zuun_bayan_ulaan_region
-  - id: 292919
-    prefix: '97623251'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 26919268-48a0-4b04-9bb5-8e86949ee0ef
-    country_id: *mn
-    network_id: *mn_naariin_teel_region
-  - id: 292920
-    prefix: '97623252'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cd225a77-90b7-4e4d-9cd1-92344ae1a9fa
-    country_id: *mn
-    network_id: *mn_ulziit_region
-  - id: 292921
-    prefix: '97623253'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 09201039-194c-42ee-a8b1-477df7024aab
-    country_id: *mn
-    network_id: *mn_sant_region
-  - id: 292922
-    prefix: '97623254'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 31616d98-df94-4489-bb0e-3fe764a18d76
-    country_id: *mn
-    network_id: *mn_taragt_region
-  - id: 292923
-    prefix: '97623255'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5a5bf173-4278-469e-8ca0-c9ca92fd2144
-    country_id: *mn
-    network_id: *mn_tugrug_region
-  - id: 292924
-    prefix: '97623256'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e89f301f-925b-4925-8d42-8d92d4f24b92
-    country_id: *mn
-    network_id: *mn_uyanga_region
-  - id: 292925
-    prefix: '97623257'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d38a1a70-662b-4eb6-92bf-c3eae81d105e
-    country_id: *mn
-    network_id: *mn_hairkhandulaan_region
-  - id: 292926
-    prefix: '97623258'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: feca98d1-05d1-4d64-a968-c03f66b109e5
-    country_id: *mn
-    network_id: *mn_kharkhorin_region
-  - id: 292927
-    prefix: '97623259'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ebd5ce3f-50fb-4e14-9e87-7a076bffcb90
-    country_id: *mn
-    network_id: *mn_khujirt_region
-  - id: 293072
-    prefix: '9762332'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 481037c4-4063-4e14-870d-72c01107d372
-    country_id: *mn
-    network_id: *mn_tsetserleg_city_erdenebulgan_region
-  - id: 293082
-    prefix: '97623341'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ee3a1856-2acc-4027-950e-8616e01f910e
-    country_id: *mn
-    network_id: *mn_battsengel_region
-  - id: 293083
-    prefix: '97623342'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 74eac560-7191-4ffd-907d-871aef71da35
-    country_id: *mn
-    network_id: *mn_bulgan_region
-  - id: 293084
-    prefix: '97623343'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ed104232-7d9d-484d-8f72-85e707147621
-    country_id: *mn
-    network_id: *mn_jargalant_region
-  - id: 293085
-    prefix: '97623344'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ad97ef17-7c6a-47eb-b0f7-6c20f87fd6dc
-    country_id: *mn
-    network_id: *mn_ich_tamir_region
-  - id: 293086
-    prefix: '97623345'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 143b352d-952f-4da9-be32-a93d8e31f7bb
-    country_id: *mn
-    network_id: *mn_ugii_nuur_region
-  - id: 293087
-    prefix: '97623346'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6460f4a8-efac-4abf-8c3c-bda65936116e
-    country_id: *mn
-    network_id: *mn_ulziit_region
-  - id: 293088
-    prefix: '97623347'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1dfce93f-f72c-42e8-9c81-ca3a1c94a315
-    country_id: *mn
-    network_id: *mn_undur_ulaan_region
-  - id: 293089
-    prefix: '97623348'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9279420e-6f1d-4cf3-ade4-a44bac65f4dd
-    country_id: *mn
-    network_id: *mn_tariat_region
-  - id: 293090
-    prefix: '97623349'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b39b5e64-9cf2-4e77-803a-b42d4bddcb00
-    country_id: *mn
-    network_id: *mn_tuvshruulekh_region
-  - id: 293094
-    prefix: '97623351'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 93382e1c-b934-49c0-9ed4-39029e08d194
-    country_id: *mn
-    network_id: *mn_khairkhan_region
-  - id: 293095
-    prefix: '97623352'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 86805d79-8208-4a72-9ecc-b59541a78d87
-    country_id: *mn
-    network_id: *mn_khahgai_region
-  - id: 293096
-    prefix: '97623353'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4a3572b3-e2b6-4443-a916-def1b3976078
-    country_id: *mn
-    network_id: *mn_khashaat_region
-  - id: 293097
-    prefix: '97623354'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a03aa5fc-0b0f-4d80-8966-389e9f069004
-    country_id: *mn
-    network_id: *mn_khotont_region
-  - id: 293098
-    prefix: '97623355'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7bc69fb1-1c05-496e-bc81-2f7958f725c5
-    country_id: *mn
-    network_id: *mn_tsakhirt_region
-  - id: 293099
-    prefix: '97623356'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9542a460-5861-44ab-868c-31e5134358fd
-    country_id: *mn
-    network_id: *mn_tsenkher_region
-  - id: 293100
-    prefix: '97623357'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4144a28c-d58c-4b29-abf4-dae7994e34c0
-    country_id: *mn
-    network_id: *mn_tsetserleg_region
-  - id: 293101
-    prefix: '97623358'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 338b2ba2-c7d3-4433-9ce1-8cd1c61ae188
-    country_id: *mn
-    network_id: *mn_chuluut_region
-  - id: 293102
-    prefix: '97623359'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5a01f0fb-5b5b-4a65-8ed4-bd56bd97c0ec
-    country_id: *mn
-    network_id: *mn_erdenemandal_region
   - id: 293774
     prefix: '9762382'
     number_min_length: 12
@@ -6099,6 +5085,174 @@ network_prefixes:
     uuid: c0e5019d-0aeb-4785-bc62-5022cff0c877
     country_id: *mn
     network_id: *mn_erdeneburen_region
+  - id: 290879
+    prefix: '9762462'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af9d4a0d-77b4-4b58-af1e-4d3da54b9475
+    country_id: *mn
+    network_id: *mn_uliastal_city_region
+  - id: 290885
+    prefix: '97624641'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d9cd7bab-6152-426f-a049-db3616420adf
+    country_id: *mn
+    network_id: *mn_aldarkhaan_region
+  - id: 290886
+    prefix: '97624642'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f23d2e83-46d5-4ede-9269-bce5bbab3c57
+    country_id: *mn
+    network_id: *mn_asgat_region
+  - id: 290887
+    prefix: '97624643'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 45a42435-0aa3-4a5e-b050-96f27aa6c71e
+    country_id: *mn
+    network_id: *mn_bayantest_region
+  - id: 290888
+    prefix: '97624644'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 939eafb8-8687-418c-9ece-78451877cef7
+    country_id: *mn
+    network_id: *mn_bayankhairkhan_region
+  - id: 290889
+    prefix: '97624645'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8f0eb6f8-055f-4333-b96a-bdf0416241db
+    country_id: *mn
+    network_id: *mn_bulnai__tosontsengel__region
+  - id: 290890
+    prefix: '97624646'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2efe34bb-18fa-4c79-b103-8efd79f583fc
+    country_id: *mn
+    network_id: *mn_durvuljin_region
+  - id: 290891
+    prefix: '97624647'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 277320d9-0392-44ec-99d7-508867420386
+    country_id: *mn
+    network_id: *mn_zavkhanmandal_region
+  - id: 290892
+    prefix: '97624648'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c7686979-bb53-4707-855e-3ae5142c907a
+    country_id: *mn
+    network_id: *mn_ider_region
+  - id: 290893
+    prefix: '97624649'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 55596059-7359-4e28-8f24-2451bbd2b018
+    country_id: *mn
+    network_id: *mn_ikh_uul_region
+  - id: 290897
+    prefix: '97624651'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e86551a9-ec66-4035-9ec7-f391def2bca9
+    country_id: *mn
+    network_id: *mn_numrug_region
+  - id: 290898
+    prefix: '97624652'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c1d4fb78-ef40-4e0c-bebc-051d46a246d3
+    country_id: *mn
+    network_id: *mn_otgon_region
+  - id: 290899
+    prefix: '97624653'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 39f6761e-e703-495e-8aea-52bedf16090b
+    country_id: *mn
+    network_id: *mn_santmargad_region
+  - id: 290900
+    prefix: '97624654'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2654643c-5d61-40a7-a145-228a067140fa
+    country_id: *mn
+    network_id: *mn_songino_region
+  - id: 290901
+    prefix: '97624655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: da8b2ec0-8544-49ea-b041-4f959541c3eb
+    country_id: *mn
+    network_id: *mn_tudevtei_region
+  - id: 290902
+    prefix: '97624656'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9a982433-6038-4ca9-a7dc-0cfd9fd6ff91
+    country_id: *mn
+    network_id: *mn_telmen_region
+  - id: 290903
+    prefix: '97624657'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aadd30fc-1a40-4342-8cb2-8bae6bb67513
+    country_id: *mn
+    network_id: *mn_tes_region
+  - id: 290904
+    prefix: '97624658'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d354d1a4-175a-42b1-ae95-6b143ea0075f
+    country_id: *mn
+    network_id: *mn_urgamal_region
+  - id: 290905
+    prefix: '97624659'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 26d2eb1f-8f16-43bb-8383-100676eefe90
+    country_id: *mn
+    network_id: *mn_tsegeenkhairkhan_region
+  - id: 290907
+    prefix: '97624661'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e45a8bb1-6fb6-494f-aa7f-0888ec145b36
+    country_id: *mn
+    network_id: *mn_tsagaanchuluut_region
+  - id: 290908
+    prefix: '97624662'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 35381f36-6211-48c2-8ee3-1850d30df108
+    country_id: *mn
+    network_id: *mn_tsetsen_uul_region
+  - id: 290909
+    prefix: '97624663'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 74a564b7-f38b-4b4b-b887-c60e42b7eab6
+    country_id: *mn
+    network_id: *mn_shiluustei_region
+  - id: 290910
+    prefix: '97624664'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e5905086-b2bd-47c4-b727-981641d15f78
+    country_id: *mn
+    network_id: *mn_erdenekhaijkhan_region
+  - id: 290911
+    prefix: '97624665'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 236b58d4-87f5-4119-9a01-09c6b01aebc0
+    country_id: *mn
+    network_id: *mn_yaruu_region
   - id: 295617
     prefix: '9762442'
     number_min_length: 12
@@ -6239,6 +5393,265 @@ network_prefixes:
     uuid: ddc307d8-8d92-4e3b-b763-a69359c2d47a
     country_id: *mn
     network_id: *mn_erdenetsogt__shajgaljuut__region
+  - id: 290145
+    prefix: '9762452'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9f15d7ae-49dc-4e56-8a8b-d176f7ca0051
+    country_id: *mn
+    network_id: *mn_ulaangom_city_region
+  - id: 290150
+    prefix: '97624541'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1e044189-bec7-41e6-8056-e375a958a4ec
+    country_id: *mn
+    network_id: *mn_baruun_turuun_region
+  - id: 290151
+    prefix: '97624542'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c18d4bb9-a2d4-40b0-bc4a-7d9db62ffd14
+    country_id: *mn
+    network_id: *mn_bukhmurun_region
+  - id: 290152
+    prefix: '97624543'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0ab4479b-c005-4c2e-a31b-2dc93a229133
+    country_id: *mn
+    network_id: *mn_davst_region
+  - id: 290153
+    prefix: '97624544'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 357e3434-2721-4e79-92b6-a6b771feac33
+    country_id: *mn
+    network_id: *mn_zavkhan_region
+  - id: 290154
+    prefix: '97624545'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bd6ac2f4-8d40-45c3-9821-f9f825f2412e
+    country_id: *mn
+    network_id: *mn_zuungovi_region
+  - id: 290155
+    prefix: '97624546'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1f6e2889-f0a1-4f42-bbf6-1a851d61451a
+    country_id: *mn
+    network_id: *mn_zuunkhangai_region
+  - id: 290156
+    prefix: '97624547'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bc482722-32b4-472c-833d-1dc48ee204a8
+    country_id: *mn
+    network_id: *mn_malchin_region
+  - id: 290157
+    prefix: '97624548'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c1d87203-3ce3-4083-86be-b4b1a2163190
+    country_id: *mn
+    network_id: *mn_naranbulag_region
+  - id: 290158
+    prefix: '97624549'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ce96c507-fea9-495b-b504-065e5216fdf2
+    country_id: *mn
+    network_id: *mn_ulgii_region
+  - id: 290161
+    prefix: '97624551'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f3cda48b-a9a9-4344-b75a-0f72147fbded
+    country_id: *mn
+    network_id: *mn_umnugovi_region
+  - id: 290162
+    prefix: '97624552'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 948aa62a-1dcb-4cb1-97df-7c5870528a66
+    country_id: *mn
+    network_id: *mn_undurkhangai_region
+  - id: 290163
+    prefix: '97624553'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 462b0c0f-8a86-4f16-90ec-cd324d886b46
+    country_id: *mn
+    network_id: *mn_sagili_region
+  - id: 290164
+    prefix: '97624554'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4fac5dad-41bf-49f8-a92d-ba57ce66d0a5
+    country_id: *mn
+    network_id: *mn_tarialan__khar_tarvagatai__region
+  - id: 290165
+    prefix: '97624555'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 86d0e2ec-b10e-4f5d-9c61-0aa58532846d
+    country_id: *mn
+    network_id: *mn_turgen_region
+  - id: 290166
+    prefix: '97624556'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 96e475ec-8212-43de-993f-d5f674613e60
+    country_id: *mn
+    network_id: *mn_tes_region
+  - id: 290167
+    prefix: '97624557'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 620d14df-d50f-417e-b25c-dc14769283e0
+    country_id: *mn
+    network_id: *mn_khovd_region
+  - id: 290168
+    prefix: '97624558'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e64c9b4e-93b1-4fd3-9fa9-30eb9d0b1ae7
+    country_id: *mn
+    network_id: *mn_khyargas_region
+  - id: 290169
+    prefix: '97624559'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 774a8822-c608-4538-90b5-8b282287c309
+    country_id: *mn
+    network_id: *mn_tsagaankhairkhan_region
+  - id: 291328
+    prefix: '9762482'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fbd16b38-ee3a-42ef-8e08-546e25779b10
+    country_id: *mn
+    network_id: *mn_altai_city_yesunbulag_region
+  - id: 291332
+    prefix: '97624841'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f7613f79-1853-4f68-a560-340d0327a9b5
+    country_id: *mn
+    network_id: *mn_altai_region
+  - id: 291333
+    prefix: '97624842'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9e940043-85b5-44ad-b95a-213fa6856590
+    country_id: *mn
+    network_id: *mn_bayan_uul_region
+  - id: 291334
+    prefix: '97624843'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3407960a-a469-4620-a566-dbc5581690ad
+    country_id: *mn
+    network_id: *mn_biger_region
+  - id: 291335
+    prefix: '97624844'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2a739740-7b08-476e-a024-7b6b6ca89dd2
+    country_id: *mn
+    network_id: *mn_bugant_region
+  - id: 291336
+    prefix: '97624845'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f6cfd81e-9173-4af4-b0b4-17ce4f1d4d72
+    country_id: *mn
+    network_id: *mn_darvi_region
+  - id: 291337
+    prefix: '97624846'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6da20df6-a973-4052-a774-e38fa3d86dde
+    country_id: *mn
+    network_id: *mn_delger__guulin__region
+  - id: 291338
+    prefix: '97624847'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bc9aa703-ffd7-44e1-bbd6-55cd60316df9
+    country_id: *mn
+    network_id: *mn_jargalan_region
+  - id: 291339
+    prefix: '97624848'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 803789f5-f4fa-4dfd-88c2-aaddf04e4688
+    country_id: *mn
+    network_id: *mn_taishir_region
+  - id: 291340
+    prefix: '97624849'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 507d8ee8-3ab8-4408-b703-fc0921e06f1e
+    country_id: *mn
+    network_id: *mn_tonkhil_region
+  - id: 291343
+    prefix: '97624851'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 029497b7-973c-4cf3-9f73-3a479ac6693c
+    country_id: *mn
+    network_id: *mn_tugrug_region
+  - id: 291344
+    prefix: '97624852'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2a7a4dee-f233-49bb-8827-20072ce98918
+    country_id: *mn
+    network_id: *mn_khaluun_region
+  - id: 291345
+    prefix: '97624853'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ebab39d2-828f-406b-b066-b90161d16193
+    country_id: *mn
+    network_id: *mn_khukhmorit_region
+  - id: 291346
+    prefix: '97624854'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0a4763ca-23fe-40e6-a394-05d3a397ac8b
+    country_id: *mn
+    network_id: *mn_tsogt_bayantooroi_region
+  - id: 291347
+    prefix: '97624855'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6918de49-1fa5-46cd-898e-9fbd578692b6
+    country_id: *mn
+    network_id: *mn_tseel_region
+  - id: 291348
+    prefix: '97624856'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7b4a9e70-3f11-40db-b09f-bce88f9403b1
+    country_id: *mn
+    network_id: *mn_chandmani__zeegt__region
+  - id: 291349
+    prefix: '97624857'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: db9d2070-80e9-407d-987a-b9fefb5ce4f7
+    country_id: *mn
+    network_id: *mn_sharga_region
+  - id: 291350
+    prefix: '97624858'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a98937dc-9a19-434d-90cd-cfe2abe28bd5
+    country_id: *mn
+    network_id: *mn_erdene_region
   - id: 298131
     prefix: '9762512'
     number_min_length: 12
@@ -6330,6 +5743,265 @@ network_prefixes:
     uuid: b38c9904-1dc8-4fc1-9007-36dc5bd931e7
     country_id: *mn
     network_id: *mn_erdenetsagaan_region
+  - id: 302660
+    prefix: '9762522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 824943b0-25a9-4708-b9f1-506177adfb37
+    country_id: *mn
+    network_id: *mn_sainshand_city_region
+  - id: 302668
+    prefix: '97625241'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6b7dfe3c-05d6-4f41-89b8-3ba261001282
+    country_id: *mn
+    network_id: *mn_airag_region
+  - id: 302669
+    prefix: '97625242'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3ca4b6be-2ffd-42c4-a15c-85bb3ee379a6
+    country_id: *mn
+    network_id: *mn_altanshiree_region
+  - id: 302670
+    prefix: '97625243'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f177db27-65b2-40f2-9cfd-344b84cd0aba
+    country_id: *mn
+    network_id: *mn_dalanjargalan_region
+  - id: 302671
+    prefix: '97625244'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2bb17342-fb8b-4984-9692-d34392d7da6e
+    country_id: *mn
+    network_id: *mn_delgerekh_region
+  - id: 302672
+    prefix: '97625245'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c4787656-7152-4077-9862-0a6d810b7aad
+    country_id: *mn
+    network_id: *mn_zamiin_uud_region
+  - id: 302673
+    prefix: '97625246'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af749786-c9d0-4afe-a23e-aa6cf10d830c
+    country_id: *mn
+    network_id: *mn_ikh_khet__zulegtei_hajuu_ulaan__region
+  - id: 302674
+    prefix: '97625247'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: acea9f6a-2b2a-4a82-9ad9-44a66228a078
+    country_id: *mn
+    network_id: *mn_mandakh_region
+  - id: 302675
+    prefix: '97625248'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d9dd1c03-7b91-4f92-9c2c-ca2f34a66140
+    country_id: *mn
+    network_id: *mn_urgun_region
+  - id: 302676
+    prefix: '97625249'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e4509e05-2c2e-4830-b53d-53fac1fbf798
+    country_id: *mn
+    network_id: *mn_saikhandulaan_region
+  - id: 302680
+    prefix: '97625251'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d2cc482b-a6cf-49fc-97f2-3940eaf75d22
+    country_id: *mn
+    network_id: *mn_ulaanbadrakh_region
+  - id: 302681
+    prefix: '97625252'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d186163-89da-4d92-b34c-e09013774591
+    country_id: *mn
+    network_id: *mn_khatanbulag_region
+  - id: 302682
+    prefix: '97625253'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 333abd84-0713-49d8-98fd-838c7116fae0
+    country_id: *mn
+    network_id: *mn_huvsgul_region
+  - id: 302683
+    prefix: '97625254'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8c9df439-9c31-4a65-a57f-5899ece52000
+    country_id: *mn
+    network_id: *mn_erdene_region
+  - id: 306648
+    prefix: '9762761'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f71c880-1f26-4f35-a994-21e161f24602
+    country_id: *mn
+    network_id: *mn_mungunmorit_region
+  - id: 306652
+    prefix: '9762762'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 67e717ca-9053-421e-9200-90f394cd81ec
+    country_id: *mn
+    network_id: *mn_undurshereet_region
+  - id: 306657
+    prefix: '9762763'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8ba46495-fbf6-4c8f-80b7-1bd475be1209
+    country_id: *mn
+    network_id: *mn_sumber_region
+  - id: 306661
+    prefix: '9762764'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3afb6d46-1e6c-437a-a2db-18b3c6b4c5e2
+    country_id: *mn
+    network_id: *mn_sergelen_region
+  - id: 306665
+    prefix: '9762765'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94fa7663-b68e-41aa-bb2e-40d3f0206efc
+    country_id: *mn
+    network_id: *mn_ugtaal_region
+  - id: 306668
+    prefix: '9762766'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aef3efc7-44fd-4b5a-b4e0-5cbc9aa52414
+    country_id: *mn
+    network_id: *mn_tseel_region
+  - id: 306671
+    prefix: '9762767'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a9a22cbf-78f7-45cb-ac85-be7677d21e90
+    country_id: *mn
+    network_id: *mn_erdene_region
+  - id: 306673
+    prefix: '9762768'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 149781ad-a8da-49ac-b67b-57f0d01a6df6
+    country_id: *mn
+    network_id: *mn_erdenesant_region
+  - id: 303203
+    prefix: '9762532'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0280c072-bfaa-4210-9c9e-267e81bc3338
+    country_id: *mn
+    network_id: *mn_dalanzadgad_region
+  - id: 303210
+    prefix: '97625341'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b487db78-74d8-4c90-a965-d7e6db5853af
+    country_id: *mn
+    network_id: *mn_bayandalai_region
+  - id: 303211
+    prefix: '97625342'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 44f01cb9-b740-49c1-be23-883075f4e73b
+    country_id: *mn
+    network_id: *mn_bayan_ovoo_region
+  - id: 303212
+    prefix: '97625343'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f382948d-1aed-4641-8e5c-1b37c1337c12
+    country_id: *mn
+    network_id: *mn_bulgan_region
+  - id: 303213
+    prefix: '97625344'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 791abbba-8540-430b-b151-d0650193b601
+    country_id: *mn
+    network_id: *mn_gurvan_tes_region
+  - id: 303214
+    prefix: '97625345'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3e848ab5-21e3-432d-8717-fab54358cab3
+    country_id: *mn
+    network_id: *mn_mandal_ovoo_region
+  - id: 303215
+    prefix: '97625346'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c162180c-1d86-4b4a-86c1-bfcac7206866
+    country_id: *mn
+    network_id: *mn_manlai_region
+  - id: 303216
+    prefix: '97625347'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 950d6fd2-54a1-4814-9cd2-2d530f8132d9
+    country_id: *mn
+    network_id: *mn_noyon_region
+  - id: 303217
+    prefix: '97625348'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0446f8c0-5a78-4bfa-b4dd-cabd832e4f21
+    country_id: *mn
+    network_id: *mn_nomgon_region
+  - id: 303218
+    prefix: '97625349'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 519c47d0-94a4-4fbe-9a72-b7bc692a4bc0
+    country_id: *mn
+    network_id: *mn_savrai_region
+  - id: 303222
+    prefix: '97625351'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cf758bbe-c7ad-4c53-a7f4-d720bb8a00a4
+    country_id: *mn
+    network_id: *mn_khanbogd_region
+  - id: 303223
+    prefix: '97625352'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 250c727e-9fa1-46ad-b84a-63b30adffa1c
+    country_id: *mn
+    network_id: *mn_khankhongor_region
+  - id: 303224
+    prefix: '97625353'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a8e58c5b-2bd8-4c0c-b362-d452a76266c1
+    country_id: *mn
+    network_id: *mn_khurmen_region
+  - id: 303225
+    prefix: '97625354'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d0ea047e-9978-4d79-aed3-cfa28a481eda
+    country_id: *mn
+    network_id: *mn_tsogt_ovoo_region
+  - id: 303226
+    prefix: '97625355'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 477b7be6-51a3-4915-871f-0fcdc0da2bd0
+    country_id: *mn
+    network_id: *mn_tsogt_tsetsii__tavantolgoi__region
   - id: 298786
     prefix: '9762542'
     number_min_length: 12
@@ -6673,209 +6345,6 @@ network_prefixes:
     uuid: 25dbf849-48f0-4ae9-8ad6-91878deb9786
     country_id: *mn
     network_id: *mn_erdenedalai_region
-  - id: 302660
-    prefix: '9762522'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 824943b0-25a9-4708-b9f1-506177adfb37
-    country_id: *mn
-    network_id: *mn_sainshand_city_region
-  - id: 302668
-    prefix: '97625241'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6b7dfe3c-05d6-4f41-89b8-3ba261001282
-    country_id: *mn
-    network_id: *mn_airag_region
-  - id: 302669
-    prefix: '97625242'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3ca4b6be-2ffd-42c4-a15c-85bb3ee379a6
-    country_id: *mn
-    network_id: *mn_altanshiree_region
-  - id: 302670
-    prefix: '97625243'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f177db27-65b2-40f2-9cfd-344b84cd0aba
-    country_id: *mn
-    network_id: *mn_dalanjargalan_region
-  - id: 302671
-    prefix: '97625244'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2bb17342-fb8b-4984-9692-d34392d7da6e
-    country_id: *mn
-    network_id: *mn_delgerekh_region
-  - id: 302672
-    prefix: '97625245'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c4787656-7152-4077-9862-0a6d810b7aad
-    country_id: *mn
-    network_id: *mn_zamiin_uud_region
-  - id: 302673
-    prefix: '97625246'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: af749786-c9d0-4afe-a23e-aa6cf10d830c
-    country_id: *mn
-    network_id: *mn_ikh_khet__zulegtei_hajuu_ulaan__region
-  - id: 302674
-    prefix: '97625247'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: acea9f6a-2b2a-4a82-9ad9-44a66228a078
-    country_id: *mn
-    network_id: *mn_mandakh_region
-  - id: 302675
-    prefix: '97625248'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d9dd1c03-7b91-4f92-9c2c-ca2f34a66140
-    country_id: *mn
-    network_id: *mn_urgun_region
-  - id: 302676
-    prefix: '97625249'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e4509e05-2c2e-4830-b53d-53fac1fbf798
-    country_id: *mn
-    network_id: *mn_saikhandulaan_region
-  - id: 302680
-    prefix: '97625251'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d2cc482b-a6cf-49fc-97f2-3940eaf75d22
-    country_id: *mn
-    network_id: *mn_ulaanbadrakh_region
-  - id: 302681
-    prefix: '97625252'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2d186163-89da-4d92-b34c-e09013774591
-    country_id: *mn
-    network_id: *mn_khatanbulag_region
-  - id: 302682
-    prefix: '97625253'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 333abd84-0713-49d8-98fd-838c7116fae0
-    country_id: *mn
-    network_id: *mn_huvsgul_region
-  - id: 302683
-    prefix: '97625254'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8c9df439-9c31-4a65-a57f-5899ece52000
-    country_id: *mn
-    network_id: *mn_erdene_region
-  - id: 303203
-    prefix: '9762532'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0280c072-bfaa-4210-9c9e-267e81bc3338
-    country_id: *mn
-    network_id: *mn_dalanzadgad_region
-  - id: 303210
-    prefix: '97625341'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b487db78-74d8-4c90-a965-d7e6db5853af
-    country_id: *mn
-    network_id: *mn_bayandalai_region
-  - id: 303211
-    prefix: '97625342'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 44f01cb9-b740-49c1-be23-883075f4e73b
-    country_id: *mn
-    network_id: *mn_bayan_ovoo_region
-  - id: 303212
-    prefix: '97625343'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f382948d-1aed-4641-8e5c-1b37c1337c12
-    country_id: *mn
-    network_id: *mn_bulgan_region
-  - id: 303213
-    prefix: '97625344'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 791abbba-8540-430b-b151-d0650193b601
-    country_id: *mn
-    network_id: *mn_gurvan_tes_region
-  - id: 303214
-    prefix: '97625345'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3e848ab5-21e3-432d-8717-fab54358cab3
-    country_id: *mn
-    network_id: *mn_mandal_ovoo_region
-  - id: 303215
-    prefix: '97625346'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c162180c-1d86-4b4a-86c1-bfcac7206866
-    country_id: *mn
-    network_id: *mn_manlai_region
-  - id: 303216
-    prefix: '97625347'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 950d6fd2-54a1-4814-9cd2-2d530f8132d9
-    country_id: *mn
-    network_id: *mn_noyon_region
-  - id: 303217
-    prefix: '97625348'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0446f8c0-5a78-4bfa-b4dd-cabd832e4f21
-    country_id: *mn
-    network_id: *mn_nomgon_region
-  - id: 303218
-    prefix: '97625349'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 519c47d0-94a4-4fbe-9a72-b7bc692a4bc0
-    country_id: *mn
-    network_id: *mn_savrai_region
-  - id: 303222
-    prefix: '97625351'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cf758bbe-c7ad-4c53-a7f4-d720bb8a00a4
-    country_id: *mn
-    network_id: *mn_khanbogd_region
-  - id: 303223
-    prefix: '97625352'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 250c727e-9fa1-46ad-b84a-63b30adffa1c
-    country_id: *mn
-    network_id: *mn_khankhongor_region
-  - id: 303224
-    prefix: '97625353'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a8e58c5b-2bd8-4c0c-b362-d452a76266c1
-    country_id: *mn
-    network_id: *mn_khurmen_region
-  - id: 303225
-    prefix: '97625354'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d0ea047e-9978-4d79-aed3-cfa28a481eda
-    country_id: *mn
-    network_id: *mn_tsogt_ovoo_region
-  - id: 303226
-    prefix: '97625355'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 477b7be6-51a3-4915-871f-0fcdc0da2bd0
-    country_id: *mn
-    network_id: *mn_tsogt_tsetsii__tavantolgoi__region
   - id: 305717
     prefix: '976272'
     number_min_length: 11
@@ -7009,62 +6478,13 @@ network_prefixes:
     uuid: bbaa499c-fddb-4670-873e-19dc40587b42
     country_id: *mn
     network_id: *mn_lun_region
-  - id: 306648
-    prefix: '9762761'
+  - id: 335402
+    prefix: '976322'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0f71c880-1f26-4f35-a994-21e161f24602
+    uuid: c414c922-73c7-433b-8699-676be1a6ec7e
     country_id: *mn
-    network_id: *mn_mungunmorit_region
-  - id: 306652
-    prefix: '9762762'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 67e717ca-9053-421e-9200-90f394cd81ec
-    country_id: *mn
-    network_id: *mn_undurshereet_region
-  - id: 306657
-    prefix: '9762763'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8ba46495-fbf6-4c8f-80b7-1bd475be1209
-    country_id: *mn
-    network_id: *mn_sumber_region
-  - id: 306661
-    prefix: '9762764'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3afb6d46-1e6c-437a-a2db-18b3c6b4c5e2
-    country_id: *mn
-    network_id: *mn_sergelen_region
-  - id: 306665
-    prefix: '9762765'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94fa7663-b68e-41aa-bb2e-40d3f0206efc
-    country_id: *mn
-    network_id: *mn_ugtaal_region
-  - id: 306668
-    prefix: '9762766'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aef3efc7-44fd-4b5a-b4e0-5cbc9aa52414
-    country_id: *mn
-    network_id: *mn_tseel_region
-  - id: 306671
-    prefix: '9762767'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a9a22cbf-78f7-45cb-ac85-be7677d21e90
-    country_id: *mn
-    network_id: *mn_erdene_region
-  - id: 306673
-    prefix: '9762768'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 149781ad-a8da-49ac-b67b-57f0d01a6df6
-    country_id: *mn
-    network_id: *mn_erdenesant_region
+    network_id: *mn_arvaikheer_city_region
   - id: 329221
     prefix: '9763241'
     number_min_length: 11
@@ -7128,6 +6548,69 @@ network_prefixes:
     uuid: c956a62a-0231-4e07-bf85-4b8e41b490b7
     country_id: *mn
     network_id: *mn_zuun_bayan_ulaan_region
+  - id: 336854
+    prefix: '9763251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 95178bb6-42ef-41d0-970f-d044f7ebb812
+    country_id: *mn
+    network_id: *mn_naariin_teel_region
+  - id: 336857
+    prefix: '9763252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a9608e3a-051b-49c8-a1db-7d7d13f40e67
+    country_id: *mn
+    network_id: *mn_ulziit_region
+  - id: 336860
+    prefix: '9763253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f7f31f6d-3791-4bec-94aa-c45e0ddd70a8
+    country_id: *mn
+    network_id: *mn_sant_region
+  - id: 336862
+    prefix: '9763254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 37f76e2a-14e6-44a8-997e-a7130b46fdb8
+    country_id: *mn
+    network_id: *mn_taragt_region
+  - id: 336863
+    prefix: '9763255'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d09b3dbf-f86a-49a9-b312-eba8a183b4cd
+    country_id: *mn
+    network_id: *mn_tugrug_region
+  - id: 336864
+    prefix: '9763256'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4f336295-ae4c-4cb3-9be4-c1037a95b0db
+    country_id: *mn
+    network_id: *mn_uyanga_region
+  - id: 336865
+    prefix: '9763257'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e28ad81-750b-46f9-b82d-c0d77990ee66
+    country_id: *mn
+    network_id: *mn_hairkhandulaan_region
+  - id: 336866
+    prefix: '9763258'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 29554c1f-0382-4d56-a294-c272e3828bf8
+    country_id: *mn
+    network_id: *mn_kharkhorin_region
+  - id: 336867
+    prefix: '9763259'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 429dae7f-8791-4e74-955a-d9fb2dfc8439
+    country_id: *mn
+    network_id: *mn_khujirt_region
   - id: 331672
     prefix: '9763341'
     number_min_length: 11
@@ -7254,76 +6737,6 @@ network_prefixes:
     uuid: 5451f1f4-4ea8-4ec7-8b5a-1b39f5acee87
     country_id: *mn
     network_id: *mn_erdenemandal_region
-  - id: 335402
-    prefix: '976322'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c414c922-73c7-433b-8699-676be1a6ec7e
-    country_id: *mn
-    network_id: *mn_arvaikheer_city_region
-  - id: 336854
-    prefix: '9763251'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 95178bb6-42ef-41d0-970f-d044f7ebb812
-    country_id: *mn
-    network_id: *mn_naariin_teel_region
-  - id: 336857
-    prefix: '9763252'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a9608e3a-051b-49c8-a1db-7d7d13f40e67
-    country_id: *mn
-    network_id: *mn_ulziit_region
-  - id: 336860
-    prefix: '9763253'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f7f31f6d-3791-4bec-94aa-c45e0ddd70a8
-    country_id: *mn
-    network_id: *mn_sant_region
-  - id: 336862
-    prefix: '9763254'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 37f76e2a-14e6-44a8-997e-a7130b46fdb8
-    country_id: *mn
-    network_id: *mn_taragt_region
-  - id: 336863
-    prefix: '9763255'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d09b3dbf-f86a-49a9-b312-eba8a183b4cd
-    country_id: *mn
-    network_id: *mn_tugrug_region
-  - id: 336864
-    prefix: '9763256'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4f336295-ae4c-4cb3-9be4-c1037a95b0db
-    country_id: *mn
-    network_id: *mn_uyanga_region
-  - id: 336865
-    prefix: '9763257'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5e28ad81-750b-46f9-b82d-c0d77990ee66
-    country_id: *mn
-    network_id: *mn_hairkhandulaan_region
-  - id: 336866
-    prefix: '9763258'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 29554c1f-0382-4d56-a294-c272e3828bf8
-    country_id: *mn
-    network_id: *mn_kharkhorin_region
-  - id: 336867
-    prefix: '9763259'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 429dae7f-8791-4e74-955a-d9fb2dfc8439
-    country_id: *mn
-    network_id: *mn_khujirt_region
   - id: 338873
     prefix: '976332'
     number_min_length: 11
@@ -7331,13 +6744,6 @@ network_prefixes:
     uuid: dee09a25-eefb-45a3-a2c5-ef3ab368a00a
     country_id: *mn
     network_id: *mn_tsetserleg_city_erdenebulgan_region
-  - id: 341358
-    prefix: '976342'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ab8e5884-3806-4b1f-a259-d067a4d615ab
-    country_id: *mn
-    network_id: *mn_bulgan_city_region
   - id: 342320
     prefix: '9763441'
     number_min_length: 11
@@ -7443,13 +6849,13 @@ network_prefixes:
     uuid: 1f064647-b4e7-4a0d-8439-b34722d7c3d4
     country_id: *mn
     network_id: *mn_khutag_undur_region
-  - id: 344853
-    prefix: '976352'
+  - id: 341358
+    prefix: '976342'
     number_min_length: 11
     number_max_length: 11
-    uuid: c42b1be5-f520-4c0d-97bb-5bcad7a7863f
+    uuid: ab8e5884-3806-4b1f-a259-d067a4d615ab
     country_id: *mn
-    network_id: *mn_erdenet_city_bayan_undur_region
+    network_id: *mn_bulgan_city_region
   - id: 345542
     prefix: '9763541'
     number_min_length: 11
@@ -7457,125 +6863,6 @@ network_prefixes:
     uuid: 059f57e4-591e-49f9-a935-8100080bc96f
     country_id: *mn
     network_id: *mn_jargalant_region
-  - id: 346816
-    prefix: '9763741'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 14cf25a3-f6f4-42b7-9e8c-0bbd10e7d1e2
-    country_id: *mn
-    network_id: *mn_orkhon_region
-  - id: 346818
-    prefix: '9763742'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e4befb6a-c0a7-4f01-8a85-35bbd98bcba3
-    country_id: *mn
-    network_id: *mn_khongor__salkhit__region
-  - id: 346824
-    prefix: '9763743'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0783a2ae-3ea0-40d6-810a-112f97246596
-    country_id: *mn
-    network_id: *mn_sharin_gol_region
-  - id: 348037
-    prefix: '9763851'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5c5ee965-9d29-4871-bd6d-5bc914363067
-    country_id: *mn
-    network_id: *mn_tarialan_region
-  - id: 348039
-    prefix: '9763852'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0f00a15d-b610-4a61-8b37-53e6fda3b8ef
-    country_id: *mn
-    network_id: *mn_tosontsengel_region
-  - id: 348041
-    prefix: '9763853'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 071247b7-7c1f-4b2c-a5fd-4ffcff3c8ba1
-    country_id: *mn
-    network_id: *mn_tumurbulag_region
-  - id: 348045
-    prefix: '9763854'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bbf34278-e5e3-45bd-8661-d65f222dd092
-    country_id: *mn
-    network_id: *mn_tunel_region
-  - id: 348049
-    prefix: '9763855'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bed57065-2740-496c-a993-e4b629f06642
-    country_id: *mn
-    network_id: *mn_ulaan_uul_region
-  - id: 348053
-    prefix: '9763856'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 97e9de87-4834-487d-8788-9b22963d42c7
-    country_id: *mn
-    network_id: *mn_khankh_region
-  - id: 348057
-    prefix: '9763857'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 50938ea7-5cb9-40b3-9780-597481822e6d
-    country_id: *mn
-    network_id: *mn_khatgal_region
-  - id: 348061
-    prefix: '9763858'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 11b38bfb-2963-491c-8fdf-a0aa93963ae6
-    country_id: *mn
-    network_id: *mn_tsagaannuur_region
-  - id: 348063
-    prefix: '9763859'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 48378710-e32d-467f-9311-d9e51c696cc1
-    country_id: *mn
-    network_id: *mn_tsagaan_uul_region
-  - id: 348608
-    prefix: '9763861'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f9251f67-2fbe-43f0-aac7-c493a3c13781
-    country_id: *mn
-    network_id: *mn_tsagaan_uur_region
-  - id: 348613
-    prefix: '9763862'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: daf85c6d-d5ff-465f-a9e3-4b008baa5f97
-    country_id: *mn
-    network_id: *mn_tsetserleg__mogoin_gol__region
-  - id: 348619
-    prefix: '9763863'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 06d57ed0-5059-4c52-82be-4c6ab400ad13
-    country_id: *mn
-    network_id: *mn_chaandmani__undur_region
-  - id: 348621
-    prefix: '9763864'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: de6f5680-30c9-4f8d-8862-c196ce4087c2
-    country_id: *mn
-    network_id: *mn_shine_ider_region
-  - id: 348627
-    prefix: '9763865'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 20363b14-9af6-4e6a-8cfa-6d4e6c00e98d
-    country_id: *mn
-    network_id: *mn_erdenebulgan_region
   - id: 354536
     prefix: '976362'
     number_min_length: 11
@@ -7695,13 +6982,6 @@ network_prefixes:
     uuid: 79767353-a106-404d-96a7-b554f7c802cb
     country_id: *mn
     network_id: *mn_shaamar__dulaankhaan__region
-  - id: 356157
-    prefix: '976372'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ed1cbbb0-efb1-4432-93cb-211703b64e72
-    country_id: *mn
-    network_id: *mn_darkhan_city_region
   - id: 356719
     prefix: '976382'
     number_min_length: 11
@@ -7709,6 +6989,76 @@ network_prefixes:
     uuid: 4e9a14a7-2faa-4ce3-903a-7d6985497abc
     country_id: *mn
     network_id: *mn_murun_city_region
+  - id: 348608
+    prefix: '9763861'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f9251f67-2fbe-43f0-aac7-c493a3c13781
+    country_id: *mn
+    network_id: *mn_tsagaan_uur_region
+  - id: 348613
+    prefix: '9763862'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: daf85c6d-d5ff-465f-a9e3-4b008baa5f97
+    country_id: *mn
+    network_id: *mn_tsetserleg__mogoin_gol__region
+  - id: 348619
+    prefix: '9763863'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 06d57ed0-5059-4c52-82be-4c6ab400ad13
+    country_id: *mn
+    network_id: *mn_chaandmani__undur_region
+  - id: 348621
+    prefix: '9763864'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: de6f5680-30c9-4f8d-8862-c196ce4087c2
+    country_id: *mn
+    network_id: *mn_shine_ider_region
+  - id: 348627
+    prefix: '9763865'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 20363b14-9af6-4e6a-8cfa-6d4e6c00e98d
+    country_id: *mn
+    network_id: *mn_erdenebulgan_region
+  - id: 344853
+    prefix: '976352'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c42b1be5-f520-4c0d-97bb-5bcad7a7863f
+    country_id: *mn
+    network_id: *mn_erdenet_city_bayan_undur_region
+  - id: 356157
+    prefix: '976372'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ed1cbbb0-efb1-4432-93cb-211703b64e72
+    country_id: *mn
+    network_id: *mn_darkhan_city_region
+  - id: 346816
+    prefix: '9763741'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 14cf25a3-f6f4-42b7-9e8c-0bbd10e7d1e2
+    country_id: *mn
+    network_id: *mn_orkhon_region
+  - id: 346818
+    prefix: '9763742'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e4befb6a-c0a7-4f01-8a85-35bbd98bcba3
+    country_id: *mn
+    network_id: *mn_khongor__salkhit__region
+  - id: 346824
+    prefix: '9763743'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0783a2ae-3ea0-40d6-810a-112f97246596
+    country_id: *mn
+    network_id: *mn_sharin_gol_region
   - id: 357192
     prefix: '9763841'
     number_min_length: 11
@@ -7772,6 +7122,125 @@ network_prefixes:
     uuid: bf5bb3e8-909a-4167-b9cd-1d99f907a4ae
     country_id: *mn
     network_id: *mn_renchinlkhumbe_region
+  - id: 348037
+    prefix: '9763851'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5c5ee965-9d29-4871-bd6d-5bc914363067
+    country_id: *mn
+    network_id: *mn_tarialan_region
+  - id: 348039
+    prefix: '9763852'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f00a15d-b610-4a61-8b37-53e6fda3b8ef
+    country_id: *mn
+    network_id: *mn_tosontsengel_region
+  - id: 348041
+    prefix: '9763853'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 071247b7-7c1f-4b2c-a5fd-4ffcff3c8ba1
+    country_id: *mn
+    network_id: *mn_tumurbulag_region
+  - id: 348045
+    prefix: '9763854'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bbf34278-e5e3-45bd-8661-d65f222dd092
+    country_id: *mn
+    network_id: *mn_tunel_region
+  - id: 348049
+    prefix: '9763855'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bed57065-2740-496c-a993-e4b629f06642
+    country_id: *mn
+    network_id: *mn_ulaan_uul_region
+  - id: 348053
+    prefix: '9763856'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 97e9de87-4834-487d-8788-9b22963d42c7
+    country_id: *mn
+    network_id: *mn_khankh_region
+  - id: 348057
+    prefix: '9763857'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50938ea7-5cb9-40b3-9780-597481822e6d
+    country_id: *mn
+    network_id: *mn_khatgal_region
+  - id: 348061
+    prefix: '9763858'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 11b38bfb-2963-491c-8fdf-a0aa93963ae6
+    country_id: *mn
+    network_id: *mn_tsagaannuur_region
+  - id: 348063
+    prefix: '9763859'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 48378710-e32d-467f-9311-d9e51c696cc1
+    country_id: *mn
+    network_id: *mn_tsagaan_uul_region
+  - id: 377514
+    prefix: '976422'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 10c26488-55a1-4412-b0eb-3938f52d1856
+    country_id: *mn
+    network_id: *mn_ulgii_khot_region
+  - id: 378633
+    prefix: '9764251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7172affc-1b7e-4ad5-873e-bffacdc8cb93
+    country_id: *mn
+    network_id: *mn_tolbo_region
+  - id: 378637
+    prefix: '9764252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 85539944-14a2-4cf2-a86a-191a78be1cba
+    country_id: *mn
+    network_id: *mn_ulaankhus_region
+  - id: 378641
+    prefix: '9764253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 09013387-9437-45e2-b48b-9197eb408347
+    country_id: *mn
+    network_id: *mn_tsengel_region
+  - id: 379802
+    prefix: '976432'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e47181bf-f51e-4f73-b624-d7690b42a652
+    country_id: *mn
+    network_id: *mn_khovd_city_jargalant_region
+  - id: 380659
+    prefix: '9764355'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 53afc5a8-89b9-41d4-9012-988aee34c91f
+    country_id: *mn
+    network_id: *mn_tsetseg__khushuut__region
+  - id: 380662
+    prefix: '9764356'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45ba7f3e-1765-46ff-9a36-46a23d914652
+    country_id: *mn
+    network_id: *mn_chandmani_region
+  - id: 380665
+    prefix: '9764357'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a8eb5c8e-1bfb-4a36-a29f-a7d95bcdf1e5
+    country_id: *mn
+    network_id: *mn_erdeneburen_region
   - id: 367155
     prefix: '9764241'
     number_min_length: 11
@@ -7898,41 +7367,6 @@ network_prefixes:
     uuid: c791e2e9-5c61-4110-91c9-f4a9c5c0b439
     country_id: *mn
     network_id: *mn_munkhkhairkhan_region
-  - id: 377514
-    prefix: '976422'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 10c26488-55a1-4412-b0eb-3938f52d1856
-    country_id: *mn
-    network_id: *mn_ulgii_khot_region
-  - id: 378633
-    prefix: '9764251'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7172affc-1b7e-4ad5-873e-bffacdc8cb93
-    country_id: *mn
-    network_id: *mn_tolbo_region
-  - id: 378637
-    prefix: '9764252'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 85539944-14a2-4cf2-a86a-191a78be1cba
-    country_id: *mn
-    network_id: *mn_ulaankhus_region
-  - id: 378641
-    prefix: '9764253'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 09013387-9437-45e2-b48b-9197eb408347
-    country_id: *mn
-    network_id: *mn_tsengel_region
-  - id: 379802
-    prefix: '976432'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e47181bf-f51e-4f73-b624-d7690b42a652
-    country_id: *mn
-    network_id: *mn_khovd_city_jargalant_region
   - id: 380647
     prefix: '9764351'
     number_min_length: 11
@@ -7961,90 +7395,13 @@ network_prefixes:
     uuid: c2b307e3-987f-45e3-bc7c-565b137e9e27
     country_id: *mn
     network_id: *mn_khovd_region
-  - id: 380659
-    prefix: '9764355'
+  - id: 389937
+    prefix: '976442'
     number_min_length: 11
     number_max_length: 11
-    uuid: 53afc5a8-89b9-41d4-9012-988aee34c91f
+    uuid: e9d3fe9e-1c3e-49ec-8349-10c50ed5dea3
     country_id: *mn
-    network_id: *mn_tsetseg__khushuut__region
-  - id: 380662
-    prefix: '9764356'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 45ba7f3e-1765-46ff-9a36-46a23d914652
-    country_id: *mn
-    network_id: *mn_chandmani_region
-  - id: 380665
-    prefix: '9764357'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a8eb5c8e-1bfb-4a36-a29f-a7d95bcdf1e5
-    country_id: *mn
-    network_id: *mn_erdeneburen_region
-  - id: 384963
-    prefix: '9764441'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5ad5b7fe-afd4-4aa8-885a-d7e7fc04963e
-    country_id: *mn
-    network_id: *mn_baatsagaan_region
-  - id: 384965
-    prefix: '9764442'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ca4d61c4-432f-4bfd-a9db-db19e9ff1896
-    country_id: *mn
-    network_id: *mn_bayanbulag_region
-  - id: 384967
-    prefix: '9764443'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 69768ebb-47ee-435e-9aff-be0138af5ce0
-    country_id: *mn
-    network_id: *mn_bayangovi_region
-  - id: 384969
-    prefix: '9764444'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0007b699-2589-4c6b-b7bc-3e01aed7b553
-    country_id: *mn
-    network_id: *mn_bayanlig_region
-  - id: 384971
-    prefix: '9764445'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e0945f9-b059-4870-a596-94adb91f5376
-    country_id: *mn
-    network_id: *mn_bayan_ovoo_region
-  - id: 384973
-    prefix: '9764446'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 39f468dd-a9fc-4029-8791-7547604442a5
-    country_id: *mn
-    network_id: *mn_bayan_undur_region
-  - id: 384975
-    prefix: '9764447'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f04a4114-bbf5-491b-8a09-578b9758be47
-    country_id: *mn
-    network_id: *mn_bayantsagaan_region
-  - id: 384976
-    prefix: '9764448'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 16a43a05-0044-42a5-a432-13e59c614a11
-    country_id: *mn
-    network_id: *mn_bogd_region
-  - id: 384977
-    prefix: '9764449'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e746adc7-bb44-49fc-9a51-b85bd80d2688
-    country_id: *mn
-    network_id: *mn_bumbugur_region
+    network_id: *mn_bayankhongor_city_region
   - id: 385451
     prefix: '9764451'
     number_min_length: 11
@@ -8115,20 +7472,6 @@ network_prefixes:
     uuid: 6897a4b3-8ecd-416d-bde0-262e08af9a41
     country_id: *mn
     network_id: *mn_erdenetsogt__shajgaljuut__region
-  - id: 387561
-    prefix: '976452'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0d3c6cce-5350-490d-bb15-30cd5e77ab98
-    country_id: *mn
-    network_id: *mn_ulaangom_city_region
-  - id: 389937
-    prefix: '976442'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e9d3fe9e-1c3e-49ec-8349-10c50ed5dea3
-    country_id: *mn
-    network_id: *mn_bayankhongor_city_region
   - id: 393460
     prefix: '9764541'
     number_min_length: 11
@@ -8255,6 +7598,76 @@ network_prefixes:
     uuid: bbcfaf21-c27b-439f-9b37-9803ce6f807e
     country_id: *mn
     network_id: *mn_tsagaankhairkhan_region
+  - id: 384963
+    prefix: '9764441'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5ad5b7fe-afd4-4aa8-885a-d7e7fc04963e
+    country_id: *mn
+    network_id: *mn_baatsagaan_region
+  - id: 384965
+    prefix: '9764442'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca4d61c4-432f-4bfd-a9db-db19e9ff1896
+    country_id: *mn
+    network_id: *mn_bayanbulag_region
+  - id: 384967
+    prefix: '9764443'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 69768ebb-47ee-435e-9aff-be0138af5ce0
+    country_id: *mn
+    network_id: *mn_bayangovi_region
+  - id: 384969
+    prefix: '9764444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0007b699-2589-4c6b-b7bc-3e01aed7b553
+    country_id: *mn
+    network_id: *mn_bayanlig_region
+  - id: 384971
+    prefix: '9764445'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e0945f9-b059-4870-a596-94adb91f5376
+    country_id: *mn
+    network_id: *mn_bayan_ovoo_region
+  - id: 384973
+    prefix: '9764446'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 39f468dd-a9fc-4029-8791-7547604442a5
+    country_id: *mn
+    network_id: *mn_bayan_undur_region
+  - id: 384975
+    prefix: '9764447'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f04a4114-bbf5-491b-8a09-578b9758be47
+    country_id: *mn
+    network_id: *mn_bayantsagaan_region
+  - id: 384976
+    prefix: '9764448'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16a43a05-0044-42a5-a432-13e59c614a11
+    country_id: *mn
+    network_id: *mn_bogd_region
+  - id: 384977
+    prefix: '9764449'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e746adc7-bb44-49fc-9a51-b85bd80d2688
+    country_id: *mn
+    network_id: *mn_bumbugur_region
+  - id: 387561
+    prefix: '976452'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0d3c6cce-5350-490d-bb15-30cd5e77ab98
+    country_id: *mn
+    network_id: *mn_ulaangom_city_region
   - id: 394180
     prefix: '976462'
     number_min_length: 11
@@ -8423,212 +7836,812 @@ network_prefixes:
     uuid: c1a90a59-8bc5-42d3-9bd6-16d48d63eb04
     country_id: *mn
     network_id: *mn_yaruu_region
-# Mobile Prefixes
-  - id: 95217
-    prefix: '97660'
+  - id: 56896
+    prefix: '976482'
     number_min_length: 11
     number_max_length: 11
-    uuid: 40abd709-cc22-48f5-a147-ada939332bf1
+    uuid: f4f035e1-5e85-43e5-82de-748d521796f0
     country_id: *mn
-    network_id: *mn_ondo_mobile
-  - id: 138627
-    prefix: '97666'
+    network_id: *mn_altai_city_yesunbulag_region
+  - id: 54927
+    prefix: '97650'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2cfff8e1-b60a-4e5a-b4d8-ff7e0c988f89
+    uuid: e866a6d8-fa7d-4b7a-bd22-81a590296ae9
     country_id: *mn
-    network_id: *mn_ondo_mobile
-  - id: 148663
-    prefix: '97669'
+    network_id: *mn_wireless_local_loop_wll_region
+  - id: 52950
+    prefix: '9764841'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7e099ae7-ae76-4648-9921-6e3c6b1f72ae
+    uuid: 80a885fe-ed88-4046-bc47-8b9a2d46d244
     country_id: *mn
-    network_id: *mn_skytel_mobile
-  - id: 207790
-    prefix: '97680'
+    network_id: *mn_altai_region
+  - id: 52953
+    prefix: '9764842'
     number_min_length: 11
     number_max_length: 11
-    uuid: d7aa950d-dd55-4a97-9a77-71a3f2c5c7ce
+    uuid: aa5124fc-9a18-4260-b97e-5090118b4888
     country_id: *mn
-    network_id: *mn_unitel_mobile
-  - id: 212509
-    prefix: '97694'
+    network_id: *mn_bayan_uul_region
+  - id: 52956
+    prefix: '9764843'
     number_min_length: 11
     number_max_length: 11
-    uuid: f6a9057e-67f1-47d1-839a-3bb77c6606da
+    uuid: 4bdb8ae4-f0c1-4889-92bc-f225d9198011
     country_id: *mn
-    network_id: *mn_mobicom_mobile
-  - id: 215151
-    prefix: '97695'
+    network_id: *mn_biger_region
+  - id: 52958
+    prefix: '9764844'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0b699c9a-b24a-470d-ac72-21e89da976cd
+    uuid: 999212c1-13a2-4ff9-baa3-23ca2aa2cde2
     country_id: *mn
-    network_id: *mn_mobicom_mobile
-  - id: 221950
-    prefix: '97696'
+    network_id: *mn_bugant_region
+  - id: 52960
+    prefix: '9764845'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2807c79b-6a2f-4d34-bce5-d8f1c2853758
+    uuid: a2dd28f5-69ec-47dd-8e2d-73b5c0beee19
     country_id: *mn
-    network_id: *mn_skytel_mobile
-  - id: 224444
-    prefix: '976971'
+    network_id: *mn_darvi_region
+  - id: 52963
+    prefix: '9764846'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9e1b147-b84c-4635-b571-b2c8a9000cd1
+    uuid: b1e9861b-dd69-4080-9cf1-33ec0abfca7a
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 227374
-    prefix: '976970'
+    network_id: *mn_delger__guulin__region
+  - id: 52966
+    prefix: '9764847'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4cbafe26-2141-4dd0-af9b-9948819978f7
+    uuid: b07fe2bf-0594-4e48-bc99-9af01d450e59
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 231737
-    prefix: '97698'
+    network_id: *mn_jargalan_region
+  - id: 52969
+    prefix: '9764848'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5060ae61-25b8-42b7-8cfd-2aa541132cd9
+    uuid: 67e4cb09-0d2d-4e3a-a14c-90a4b768bcc0
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 239374
-    prefix: '97699'
+    network_id: *mn_taishir_region
+  - id: 52971
+    prefix: '9764849'
     number_min_length: 11
     number_max_length: 11
-    uuid: dce330cb-edf5-48e8-9ae6-ce283787fc73
+    uuid: d3209674-e793-4659-8afe-4de37c8eac0d
     country_id: *mn
-    network_id: *mn_mobicom_mobile
-  - id: 406264
-    prefix: '9768188'
+    network_id: *mn_tonkhil_region
+  - id: 53122
+    prefix: '9764851'
     number_min_length: 11
     number_max_length: 11
-    uuid: 642b1876-aa5e-477f-8d2e-abe911c4ed3a
+    uuid: 87ab6226-f3d3-4f8e-baca-e3cd040e9492
     country_id: *mn
-    network_id: *mn_ondo_mobile
-  - id: 413784
-    prefix: '9768111'
+    network_id: *mn_tugrug_region
+  - id: 53126
+    prefix: '9764852'
     number_min_length: 11
     number_max_length: 11
-    uuid: a0ba0d7b-f542-48e8-b24a-ad0c9b93b43f
+    uuid: f9c702b1-ad2f-4c54-aa59-e5cdfdc71359
     country_id: *mn
-    network_id: *mn_ondo_mobile
-  - id: 414886
-    prefix: '9768166'
+    network_id: *mn_khaluun_region
+  - id: 53130
+    prefix: '9764853'
     number_min_length: 11
     number_max_length: 11
-    uuid: b5254f77-160b-47ba-8035-88c25495aa2a
+    uuid: 39644481-cd8e-4eb5-ba71-fd96f8ed4425
     country_id: *mn
-    network_id: *mn_ondo_mobile
-  - id: 415029
-    prefix: '9768181'
+    network_id: *mn_khukhmorit_region
+  - id: 53133
+    prefix: '9764854'
     number_min_length: 11
     number_max_length: 11
-    uuid: bd437099-86c2-4444-8104-0b2eb08c28ef
+    uuid: 60c679e6-65f9-424b-8fdb-1e6fc78f8fad
     country_id: *mn
-    network_id: *mn_ondo_mobile
-  - id: 421194
-    prefix: '976831'
+    network_id: *mn_tsogt_bayantooroi_region
+  - id: 53136
+    prefix: '9764855'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3301c095-db08-4f9b-b58c-104053b95d0d
+    uuid: 92167717-3260-435d-a098-a45e7b4dcea7
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 422136
-    prefix: '976830'
+    network_id: *mn_tseel_region
+  - id: 53138
+    prefix: '9764856'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4d2344c8-81e9-42c3-a2e5-00008892aebf
+    uuid: e97d1443-56a2-4135-8a7c-c24c0798b29c
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 428701
-    prefix: '97686'
+    network_id: *mn_chandmani__zeegt__region
+  - id: 53140
+    prefix: '9764857'
     number_min_length: 11
     number_max_length: 11
-    uuid: 606336e1-19d3-4fbc-8b26-0bc49fd5de48
+    uuid: 2f9fc3a0-f90f-47bf-b495-a7bbde2fa4fc
     country_id: *mn
-    network_id: *mn_unitel_mobile
-  - id: 435881
-    prefix: '97685'
+    network_id: *mn_sharga_region
+  - id: 53143
+    prefix: '9764858'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1de820db-4cde-4dde-af0a-9f3858b623f1
+    uuid: 30098c07-bb6d-443a-8031-522c5be778ba
     country_id: *mn
-    network_id: *mn_mobicom_mobile
-  - id: 443791
-    prefix: '97688'
+    network_id: *mn_erdene_region
+  - id: 77502
+    prefix: '976542'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1c083c8f-a6b9-4441-a408-1180c4973bd5
+    uuid: 0a5a1622-c254-44f8-af8f-1e9fbe070099
     country_id: *mn
-    network_id: *mn_unitel_mobile
-  - id: 451408
-    prefix: '97689'
+    network_id: *mn_choir_city_sumber_region
+  - id: 77558
+    prefix: '9765441'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b9fd34b-35b7-43ef-87db-6f033916624a
+    uuid: 4fd862dd-c580-42f8-b033-2ee96d1edcd3
     country_id: *mn
-    network_id: *mn_unitel_mobile
-  - id: 454108
-    prefix: '97690'
+    network_id: *mn_bayantal_region
+  - id: 77562
+    prefix: '9765442'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9c8d9663-70fe-4b03-92e1-61d9f6e2611a
+    uuid: e1af9ca9-feda-4271-becd-d4237a0d904c
     country_id: *mn
-    network_id: *mn_skytel_mobile
-  - id: 458150
-    prefix: '97691'
+    network_id: *mn_shivee_govi_region
+  - id: 68206
+    prefix: '976512'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9a87c9be-e637-4ae1-808e-1bfe536df3d1
+    uuid: e6581ce5-c0ad-4ddb-8ac3-fbb7f940d65d
     country_id: *mn
-    network_id: *mn_skytel_mobile
-  - id: 485436
-    prefix: '976930'
+    network_id: *mn_baruun_urt_city_region
+  - id: 69268
+    prefix: '9765141'
     number_min_length: 11
     number_max_length: 11
-    uuid: ff77db55-4946-4c19-9b67-52c48e797669
+    uuid: 0997ef31-98ab-49d8-88a0-f56a87861159
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 485456
-    prefix: '976931'
+    network_id: *mn_asgat_region
+  - id: 69271
+    prefix: '9765142'
     number_min_length: 11
     number_max_length: 11
-    uuid: 79d4dc35-6ecc-437a-b8b3-32e632f25c78
+    uuid: a5eb5cc5-b502-4efa-9e5f-8cd629a1f312
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 485471
-    prefix: '976932'
+    network_id: *mn_bayandelger_region
+  - id: 69274
+    prefix: '9765143'
     number_min_length: 11
     number_max_length: 11
-    uuid: 60c033a2-1e05-4cdf-a098-fc47b8c458b3
+    uuid: 52d97936-9e7d-478e-b5ec-2a7d54bf6bd8
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 485484
-    prefix: '976933'
+    network_id: *mn_dariganga_region
+  - id: 69277
+    prefix: '9765144'
     number_min_length: 11
     number_max_length: 11
-    uuid: e056ccff-7c95-4089-a91c-0a5579752cda
+    uuid: 8b0fbd5c-f6d3-45a1-a9a7-0158ed4009a0
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-  - id: 485497
-    prefix: '976934'
+    network_id: *mn_munkhkhaan_region
+  - id: 69279
+    prefix: '9765145'
     number_min_length: 11
     number_max_length: 11
-    uuid: e8ecfa27-098a-46d0-b52a-2dac791a97f4
+    uuid: a63b14c4-fd25-442d-aa93-7f96ab4c5c0d
     country_id: *mn
-    network_id: *mn_g_mobile_mobile
-# Country code Prefixes
-  - id: 242057
-    prefix: '976'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 64457139-eadf-47a8-ab92-e00a56b4ae30
+    network_id: *mn_naran_region
+  - id: 69281
+    prefix: '9765146'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 86bf24e7-d498-432c-9819-2adcedafa0d4
     country_id: *mn
-    network_id: null
+    network_id: *mn_ongon_region
+  - id: 69283
+    prefix: '9765147'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1ea843eb-a0f0-4a98-9900-495d128df2dc
+    country_id: *mn
+    network_id: *mn_sukhbaatar_region
+  - id: 69285
+    prefix: '9765148'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ad62fea3-2723-4c01-89a7-41566fa6f244
+    country_id: *mn
+    network_id: *mn_tuvshin_shiree_region
+  - id: 69287
+    prefix: '9765149'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9338a821-43c4-4f6b-bb4b-f71fa0eaae0e
+    country_id: *mn
+    network_id: *mn_tumentsogt_region
+  - id: 69842
+    prefix: '9765151'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c5c0e9bd-88df-4101-8967-f713784b851c
+    country_id: *mn
+    network_id: *mn_uulbayan_region
+  - id: 69844
+    prefix: '9765152'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff36f7a1-d456-465f-ae57-eb4632c8d64d
+    country_id: *mn
+    network_id: *mn_halzan_region
+  - id: 69846
+    prefix: '9765153'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 54a3059b-c68d-4f4e-a7f2-f4a1ce0d7cff
+    country_id: *mn
+    network_id: *mn_erdenetsagaan_region
+  - id: 76331
+    prefix: '976522'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e445801b-14d4-4305-bdee-e6d51355bebd
+    country_id: *mn
+    network_id: *mn_sainshand_city_region
+  - id: 76392
+    prefix: '9765241'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07855e7a-5e3f-4060-89ed-b3fc7cdb8e0c
+    country_id: *mn
+    network_id: *mn_airag_region
+  - id: 76395
+    prefix: '9765242'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba1143df-7172-4310-8101-a6608524af12
+    country_id: *mn
+    network_id: *mn_altanshiree_region
+  - id: 76397
+    prefix: '9765243'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e02f5b50-ebcc-4f7a-b1a7-ed2dc1e21dbe
+    country_id: *mn
+    network_id: *mn_dalanjargalan_region
+  - id: 76401
+    prefix: '9765244'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2afb7a80-d84c-457d-a46e-a043aaa92156
+    country_id: *mn
+    network_id: *mn_delgerekh_region
+  - id: 76404
+    prefix: '9765245'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 753d82b2-e78c-4771-bd53-cdbe38266888
+    country_id: *mn
+    network_id: *mn_zamiin_uud_region
+  - id: 76407
+    prefix: '9765246'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c6de29d5-6040-44be-8237-68f55f75842d
+    country_id: *mn
+    network_id: *mn_ikh_khet__zulegtei_hajuu_ulaan__region
+  - id: 76409
+    prefix: '9765247'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f2892163-59e1-4609-8768-95d386e662b5
+    country_id: *mn
+    network_id: *mn_mandakh_region
+  - id: 76413
+    prefix: '9765248'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 117bb31c-01ca-40be-8548-9cc07be6849b
+    country_id: *mn
+    network_id: *mn_urgun_region
+  - id: 76414
+    prefix: '9765249'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 09120fcc-5136-4d40-994b-930916eb552b
+    country_id: *mn
+    network_id: *mn_saikhandulaan_region
+  - id: 76429
+    prefix: '9765251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 467d96ea-76ce-499a-a5ac-396391e4ad47
+    country_id: *mn
+    network_id: *mn_ulaanbadrakh_region
+  - id: 76433
+    prefix: '9765252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a2c22bcb-8258-48fc-a81b-b9d2be01322f
+    country_id: *mn
+    network_id: *mn_khatanbulag_region
+  - id: 76437
+    prefix: '9765253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07b16e61-203d-436d-aca1-50b713ca9bc3
+    country_id: *mn
+    network_id: *mn_huvsgul_region
+  - id: 76441
+    prefix: '9765254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6fac1d4c-dcbf-49f4-9d27-458d1332a49e
+    country_id: *mn
+    network_id: *mn_erdene_region
+  - id: 72733
+    prefix: '976532'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1adb6129-b69e-43c6-87ec-478b82c99157
+    country_id: *mn
+    network_id: *mn_dalanzadgad_region
+  - id: 72885
+    prefix: '9765341'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 438946bb-f13f-473a-aa7a-6fe162a46a91
+    country_id: *mn
+    network_id: *mn_bayandalai_region
+  - id: 72887
+    prefix: '9765342'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 683aaf41-7944-437f-87fb-381db61c9c53
+    country_id: *mn
+    network_id: *mn_bayan_ovoo_region
+  - id: 72889
+    prefix: '9765343'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9c471d0d-40b4-43fc-8249-4aa8b7b1a988
+    country_id: *mn
+    network_id: *mn_bulgan_region
+  - id: 72891
+    prefix: '9765344'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 17141988-c3c8-41a9-8dae-ebc4b586c59a
+    country_id: *mn
+    network_id: *mn_gurvan_tes_region
+  - id: 72893
+    prefix: '9765345'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f376f4cb-b13a-421e-b2ae-6b87473e0617
+    country_id: *mn
+    network_id: *mn_mandal_ovoo_region
+  - id: 72895
+    prefix: '9765346'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ee3317a8-6dd7-430b-baef-8defd6fa6267
+    country_id: *mn
+    network_id: *mn_manlai_region
+  - id: 72897
+    prefix: '9765347'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9004463d-b1c8-4412-907a-0cbe7227e896
+    country_id: *mn
+    network_id: *mn_noyon_region
+  - id: 72898
+    prefix: '9765348'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 80b52d3e-3065-440d-b6f2-13582385ad03
+    country_id: *mn
+    network_id: *mn_nomgon_region
+  - id: 72899
+    prefix: '9765349'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4781703-3887-49bc-ab2e-46788b83253a
+    country_id: *mn
+    network_id: *mn_savrai_region
+  - id: 72910
+    prefix: '9765351'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be9a0477-d8c7-46b9-8b64-65ae5838c745
+    country_id: *mn
+    network_id: *mn_khanbogd_region
+  - id: 72913
+    prefix: '9765352'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 344ec1d8-df0c-4bc0-ab0f-2d12aaa98264
+    country_id: *mn
+    network_id: *mn_khankhongor_region
+  - id: 72916
+    prefix: '9765353'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 36ffc28c-11e6-444a-bbb0-a0ab5510727c
+    country_id: *mn
+    network_id: *mn_khurmen_region
+  - id: 72919
+    prefix: '9765354'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c15c2dca-2285-48d5-9de0-048ca1fe1a84
+    country_id: *mn
+    network_id: *mn_tsogt_ovoo_region
+  - id: 72922
+    prefix: '9765355'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 615f2262-1042-4a6a-b4f7-90d3e03990a6
+    country_id: *mn
+    network_id: *mn_tsogt_tsetsii__tavantolgoi__region
+  - id: 87918
+    prefix: '97656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ed7e079d-5710-4145-8b6e-b8d4b683f9a7
+    country_id: *mn
+    network_id: *mn_wireless_local_loop_wll_region
+  - id: 89764
+    prefix: '9765641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c72fead3-92c1-43d0-badd-535dfa878d63
+    country_id: *mn
+    network_id: *mn_batnorov__berkh__region
+  - id: 89767
+    prefix: '9765642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 57baf01c-0495-4e77-b93a-84875621e46c
+    country_id: *mn
+    network_id: *mn_batshireet_region
+  - id: 89770
+    prefix: '9765643'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a35fcdbc-b19b-41dd-bb98-eadcc3184203
+    country_id: *mn
+    network_id: *mn_bayan_adraga_region
+  - id: 89773
+    prefix: '9765644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f4f08c8b-4cf8-477e-a287-a913801b9f54
+    country_id: *mn
+    network_id: *mn_bayanmunkh_region
+  - id: 89776
+    prefix: '9765645'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4b0ba403-aa9d-4cd8-a915-26b8e3f493d1
+    country_id: *mn
+    network_id: *mn_bayan_ovoo_region
+  - id: 89779
+    prefix: '9765646'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cde0ffe7-7a4e-41e3-9133-0883ffe2b9e2
+    country_id: *mn
+    network_id: *mn_bayankhutagt_region
+  - id: 89782
+    prefix: '9765647'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00c32879-8c6d-4cbb-9f18-c5df55ee2bed
+    country_id: *mn
+    network_id: *mn_binder_region
+  - id: 89785
+    prefix: '9765648'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 72d144dc-a7c7-468f-be50-88bcb03ada70
+    country_id: *mn
+    network_id: *mn_galshir_region
+  - id: 83330
+    prefix: '976582'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94e77965-2044-484a-8954-2996a3ae0bea
+    country_id: *mn
+    network_id: *mn_choibalsan_city_region
+  - id: 83514
+    prefix: '9765841'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5c3b866f-77b0-4182-9a3b-3ef5ed5f2294
+    country_id: *mn
+    network_id: *mn_bayandun_region
+  - id: 83517
+    prefix: '9765842'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a3ee3d92-965f-4e42-a752-dba8da92f195
+    country_id: *mn
+    network_id: *mn_bayantumen_region
+  - id: 83520
+    prefix: '9765843'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 602d4e2c-4434-4d6c-a58e-732e46c110d2
+    country_id: *mn
+    network_id: *mn_bayan_uul__ereen__region
+  - id: 83523
+    prefix: '9765844'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0c92dfc8-680b-4393-a270-d84b637096a4
+    country_id: *mn
+    network_id: *mn_bulgan_region
+  - id: 83525
+    prefix: '9765845'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9fdd5ee4-1240-4d40-8a3c-982f53218906
+    country_id: *mn
+    network_id: *mn_gurvanzagal_region
+  - id: 83527
+    prefix: '9765846'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3614b52c-7398-4fa2-b87d-1caaa894511c
+    country_id: *mn
+    network_id: *mn_dashbalbar__erdes__region
+  - id: 83528
+    prefix: '9765847'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 06a5cea1-f645-4a29-a5cd-28cdefdbccaf
+    country_id: *mn
+    network_id: *mn_matad_region
+  - id: 83530
+    prefix: '9765848'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68d8922e-b1d0-4bb4-95ac-46d2d225a17d
+    country_id: *mn
+    network_id: *mn_sereglen_region
+  - id: 83532
+    prefix: '9765849'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e455aed-962a-4f39-816a-94b4dd2373a7
+    country_id: *mn
+    network_id: *mn_khalkh_gol_region
+  - id: 84487
+    prefix: '976592'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 565b8a7f-00d1-413a-a3d0-d55345800a21
+    country_id: *mn
+    network_id: *mn_mandalgovi_city_region
+  - id: 78126
+    prefix: '97655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fb15b10f-620d-439e-9c2c-23307c307567
+    country_id: *mn
+    network_id: *mn_wireless_local_loop_wll_region
+  - id: 88601
+    prefix: '976562'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 978d0955-0cf2-4a4e-a7f3-4634e9e588d1
+    country_id: *mn
+    network_id: *mn_undurkhaan_city_region
+  - id: 89786
+    prefix: '9765649'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f5c9e72-600f-4e1a-a09e-1e5c12954dca
+    country_id: *mn
+    network_id: *mn_dadal_region
+  - id: 89794
+    prefix: '9765651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ef78dae-6852-49ef-bfb2-107a1b94ea91
+    country_id: *mn
+    network_id: *mn_darkhan__bor_undur__region
+  - id: 89797
+    prefix: '9765652'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 27765756-32e9-4cc1-acef-c5beedc339cc
+    country_id: *mn
+    network_id: *mn_delgerkhaan_region
+  - id: 89800
+    prefix: '9765653'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 336082a6-d248-4ebd-8e39-8601499eeae9
+    country_id: *mn
+    network_id: *mn_jargalt_khaan_region
+  - id: 89803
+    prefix: '9765654'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cea10495-ebdb-4318-9e57-b20beb1efc0c
+    country_id: *mn
+    network_id: *mn_murun__chandgana_tal__region
+  - id: 89806
+    prefix: '9765655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: de702790-09d0-4245-b3d3-42bd9170cc8d
+    country_id: *mn
+    network_id: *mn_norovlin_region
+  - id: 89808
+    prefix: '9765656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f6b180ea-a28c-48fb-80a8-e3b0f79c8444
+    country_id: *mn
+    network_id: *mn_umnudelger_region
+  - id: 89810
+    prefix: '9765657'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 22b82560-a44b-44b2-b6ce-5146a438c315
+    country_id: *mn
+    network_id: *mn_tsenkhermandal_region
+  - id: 93098
+    prefix: '97658'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05f50733-fc79-4afa-bafa-eaefa0f08276
+    country_id: *mn
+    network_id: *mn_wireless_local_loop_wll_region
+  - id: 94007
+    prefix: '9765851'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 61e8fb70-1eee-4828-a1c9-1d77f0ab318b
+    country_id: *mn
+    network_id: *mn_khulunbuyir_region
+  - id: 94010
+    prefix: '9765852'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ef5c3238-db92-47ec-a407-0ecd9063bf7b
+    country_id: *mn
+    network_id: *mn_tsagaan_ovoo_region
+  - id: 94013
+    prefix: '9765853'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8840f490-7409-4f61-ad66-7318dff55f67
+    country_id: *mn
+    network_id: *mn_choibalsan_region
+  - id: 94016
+    prefix: '9765854'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45f58f95-6f2e-415d-9058-aa79be91582a
+    country_id: *mn
+    network_id: *mn_chuluunkhoroot_region
+  - id: 84619
+    prefix: '9765941'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74ff765b-54ce-4735-8f0a-afa92a4b9b81
+    country_id: *mn
+    network_id: *mn_adaatsag_region
+  - id: 84622
+    prefix: '9765942'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30cba9a0-3d5d-4a53-9c80-6ce0ef8e7089
+    country_id: *mn
+    network_id: *mn_bayanjargalan_region
+  - id: 84625
+    prefix: '9765943'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: acad48a5-185c-4064-a174-a4a0b6e75a80
+    country_id: *mn
+    network_id: *mn_govi_ugtaal_region
+  - id: 84628
+    prefix: '9765944'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb312222-2990-40ec-b33b-2bcd0caea0d9
+    country_id: *mn
+    network_id: *mn_gurvansaikhan_region
+  - id: 84631
+    prefix: '9765945'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc176ac7-0167-4830-8979-3c9c6dc74f3f
+    country_id: *mn
+    network_id: *mn_delgerkhangai_region
+  - id: 84634
+    prefix: '9765946'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ef714b8d-564a-45f2-93cd-474e2775bef5
+    country_id: *mn
+    network_id: *mn_delgertsogt_region
+  - id: 84637
+    prefix: '9765947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 43d5755c-2005-452c-b9fc-efed44bb337b
+    country_id: *mn
+    network_id: *mn_deren_region
+  - id: 84640
+    prefix: '9765948'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 04846a5e-7a3c-491b-a941-3db4269aa85f
+    country_id: *mn
+    network_id: *mn_luus_region
+  - id: 84642
+    prefix: '9765949'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8c23b7c7-66dd-4b01-9b6a-0cd1b0b5425c
+    country_id: *mn
+    network_id: *mn_ulziit_region
+  - id: 84795
+    prefix: '9765951'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ac0747b-858a-4ad0-a3c3-6f47d4046ac7
+    country_id: *mn
+    network_id: *mn_undurshil_region
+  - id: 84797
+    prefix: '9765952'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 18eb2a04-6e77-477f-8beb-1e4c14e487de
+    country_id: *mn
+    network_id: *mn_saikhan_ovoo_region
+  - id: 84799
+    prefix: '9765953'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 90befecf-6cb4-4257-a2c6-9b605d700bde
+    country_id: *mn
+    network_id: *mn_khuld_region
+  - id: 84801
+    prefix: '9765954'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f9fdb1d-b7e9-4962-a5aa-bf15d59bbe71
+    country_id: *mn
+    network_id: *mn_tsagaandelger_region
+  - id: 84803
+    prefix: '9765955'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc5684cc-4f12-46d4-b187-560547e36c07
+    country_id: *mn
+    network_id: *mn_erdenedalai_region
 # Supplementary services Prefixes
+  - id: 247299
+    prefix: '9761800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 434b470b-b65c-4fcb-bc34-4efada36ddbc
+    country_id: *mn
+    network_id: *mn_freephone_services
+  - id: 247355
+    prefix: '9761900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bdcdf538-d989-4521-93a3-dde59f08cc4e
+    country_id: *mn
+    network_id: *mn_premium_rate_services
   - id: 242450
     prefix: '9761'
     number_min_length: 6
@@ -8664,17 +8677,3 @@ network_prefixes:
     uuid: 68d4baf2-d453-4c45-be2c-44b639d1398d
     country_id: *mn
     network_id: *mn_sms_services
-  - id: 247299
-    prefix: '9761800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 434b470b-b65c-4fcb-bc34-4efada36ddbc
-    country_id: *mn
-    network_id: *mn_freephone_services
-  - id: 247355
-    prefix: '9761900'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bdcdf538-d989-4521-93a3-dde59f08cc4e
-    country_id: *mn
-    network_id: *mn_premium_rate_services

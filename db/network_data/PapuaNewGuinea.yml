@@ -1,6 +1,26 @@
 country_id: &pg 166
 networks:
 # Supplementary services Networks
+  - id: &pg_national_freephone_services 22635
+    name: PG National Freephone Services
+    uuid: a286af48-ed50-4f03-bdea-2ee3b59e438d
+    type_id: 13
+  - id: &pg_international_freephone_services_ifs 22653
+    name: PG International Freephone Services Ifs
+    uuid: 64af8e0d-617d-4138-9085-40875670f48f
+    type_id: 13
+  - id: &pg_home_country_direct_hcd 22654
+    name: PG Home Country Direct Hcd
+    uuid: c88a2bf6-15a4-4eef-ba94-09ae832c7610
+    type_id: 13
+  - id: &pg_premium_rate_services_prs 22682
+    name: PG Premium Rate Services Prs
+    uuid: de8b882b-2137-444b-85f5-20c4a83633ae
+    type_id: 13
+  - id: &pg_voip 22752
+    name: PG Voip
+    uuid: 1d94e587-b76e-4a84-a9ce-f2f3739e18ce
+    type_id: 13
   - id: &pg_special_services 21280
     name: PG Special Services
     uuid: a223142d-d38e-4c66-92c8-479fd91144bd
@@ -33,27 +53,11 @@ networks:
     name: PG Sms Services
     uuid: aaf6aff9-0406-48dd-919b-e48a8872aef1
     type_id: 13
-  - id: &pg_national_freephone_services 22635
-    name: PG National Freephone Services
-    uuid: a286af48-ed50-4f03-bdea-2ee3b59e438d
-    type_id: 13
-  - id: &pg_international_freephone_services_ifs 22653
-    name: PG International Freephone Services Ifs
-    uuid: 64af8e0d-617d-4138-9085-40875670f48f
-    type_id: 13
-  - id: &pg_home_country_direct_hcd 22654
-    name: PG Home Country Direct Hcd
-    uuid: c88a2bf6-15a4-4eef-ba94-09ae832c7610
-    type_id: 13
-  - id: &pg_premium_rate_services_prs 22682
-    name: PG Premium Rate Services Prs
-    uuid: de8b882b-2137-444b-85f5-20c4a83633ae
-    type_id: 13
-  - id: &pg_voip 22752
-    name: PG Voip
-    uuid: 1d94e587-b76e-4a84-a9ce-f2f3739e18ce
-    type_id: 13
 # Fixed Networks
+  - id: &pg_fixed 43451
+    name: PG Fixed
+    uuid: cd3fa98f-14a0-46da-838a-609c59aea969
+    type_id: 2
   - id: &pg_port_moresby_region 21908
     name: PG Port Moresby Region
     uuid: 567fe079-e664-4d56-a85f-73057b40f0e9
@@ -77,6 +81,22 @@ networks:
   - id: &pg_southern_region_region 22547
     name: PG Southern Region Region
     uuid: 266451aa-fa49-42db-8d72-81ea9a8646ff
+    type_id: 2
+  - id: &pg_islands_region_region 24248
+    name: PG Islands Region Region
+    uuid: 598390a8-563c-42f8-98a3-4bc12ec69a39
+    type_id: 2
+  - id: &pg_east_new_britain_region 24526
+    name: PG East New Britain Region
+    uuid: 6099cefb-24bf-461f-be55-1ce177e3d73f
+    type_id: 2
+  - id: &pg_new_ireland_region 24527
+    name: PG New Ireland Region
+    uuid: f3d5b285-0c4b-4588-926c-52c54f583663
+    type_id: 2
+  - id: &pg_west_new_britain_region 24528
+    name: PG West New Britain Region
+    uuid: a397b5d5-6187-47b3-b3ac-626a83cc2257
     type_id: 2
   - id: &pg_national_capital_district_region 23208
     name: PG National Capital District Region
@@ -130,22 +150,6 @@ networks:
     name: PG Kiunga Tabubil Region
     uuid: 8a78b7df-4b54-4978-abce-780d6934e048
     type_id: 2
-  - id: &pg_islands_region_region 24248
-    name: PG Islands Region Region
-    uuid: 598390a8-563c-42f8-98a3-4bc12ec69a39
-    type_id: 2
-  - id: &pg_east_new_britain_region 24526
-    name: PG East New Britain Region
-    uuid: 6099cefb-24bf-461f-be55-1ce177e3d73f
-    type_id: 2
-  - id: &pg_new_ireland_region 24527
-    name: PG New Ireland Region
-    uuid: f3d5b285-0c4b-4588-926c-52c54f583663
-    type_id: 2
-  - id: &pg_west_new_britain_region 24528
-    name: PG West New Britain Region
-    uuid: a397b5d5-6187-47b3-b3ac-626a83cc2257
-    type_id: 2
   - id: &pg_manus_region 26136
     name: PG Manus Region
     uuid: e9d15796-997b-4117-80a1-b34d84b0ae29
@@ -154,6 +158,23 @@ networks:
     name: PG North Solomons Region
     uuid: 302b6bf5-dc9e-4081-a4bb-91bc7e55ef39
     type_id: 2
+# Mobile Networks
+  - id: &pg_digicel_mobile 23573
+    name: PG Digicel Mobile
+    uuid: a5b19703-5f6d-4026-abea-cc85b333a34c
+    type_id: 3
+  - id: &pg_bemobile_vodafone_mobile 23745
+    name: PG Bemobile Vodafone Mobile
+    uuid: 01580f51-a46a-4829-bda3-bf2429f914d6
+    type_id: 3
+  - id: &pg_citifon_mobile 24249
+    name: PG Citifon Mobile
+    uuid: 1d01dce9-c743-4b09-ad1d-ad42f48a4320
+    type_id: 3
+  - id: &pg_digivoip_mobile 23926
+    name: PG Digivoip Mobile
+    uuid: 01933c00-19b0-4831-9158-0fda5990ad9d
+    type_id: 3
 # Paging Networks
   - id: &pg_telikom_paging 23126
     name: PG Telikom Paging
@@ -168,96 +189,8 @@ networks:
     name: PG Satellite
     uuid: c81817c8-ad28-48ee-8c3f-3a160ec4515c
     type_id: 15
-# Mobile Networks
-  - id: &pg_digicel_mobile 23573
-    name: PG Digicel Mobile
-    uuid: a5b19703-5f6d-4026-abea-cc85b333a34c
-    type_id: 3
-  - id: &pg_bemobile_vodafone_mobile 23745
-    name: PG Bemobile Vodafone Mobile
-    uuid: 01580f51-a46a-4829-bda3-bf2429f914d6
-    type_id: 3
-  - id: &pg_digivoip_mobile 23926
-    name: PG Digivoip Mobile
-    uuid: 01933c00-19b0-4831-9158-0fda5990ad9d
-    type_id: 3
-  - id: &pg_citifon_mobile 24249
-    name: PG Citifon Mobile
-    uuid: 1d01dce9-c743-4b09-ad1d-ad42f48a4320
-    type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242081
-    prefix: '675'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 75ba56fc-2de0-4a7b-b06d-eb7566a469c3
-    country_id: *pg
-    network_id: null
 # Supplementary services Prefixes
-  - id: 242151
-    prefix: '6750'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: bb3c4fa9-87d6-4fa5-8259-a9be390c291c
-    country_id: *pg
-    network_id: *pg_special_services
-  - id: 242473
-    prefix: '6751'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 06671399-c4d4-4efc-b7f8-76ec6a1ea70c
-    country_id: *pg
-    network_id: *pg_special_services
-  - id: 242539
-    prefix: '67510'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 9f45b4df-fc29-4b41-9f79-7c53b4d28b1d
-    country_id: *pg
-    network_id: *pg_testing_services
-  - id: 242596
-    prefix: '67511'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: f346caba-af22-446a-994d-3a2a9c49258c
-    country_id: *pg
-    network_id: *pg_emergency_services
-  - id: 242635
-    prefix: '675113'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 15d330f8-26f4-4dba-95b6-0a283cafc211
-    country_id: *pg
-    network_id: *pg_universal_access_number_uan
-  - id: 242815
-    prefix: '67512'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: c69794ae-a76f-4290-8e74-b9ed929243bd
-    country_id: *pg
-    network_id: *pg_voice_mail_and_calling_card_services
-  - id: 242859
-    prefix: '67513'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 47bc405e-5c2e-4be3-a611-d0d69e4f7bce
-    country_id: *pg
-    network_id: *pg_universal_access_codes
-  - id: 242945
-    prefix: '67515'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 35e391a9-99c7-48d6-a004-38f9365fb0cd
-    country_id: *pg
-    network_id: *pg_customer_care_services
-  - id: 243023
-    prefix: '67516'
-    number_min_length: 7
-    number_max_length: 10
-    uuid: 08b50dff-7297-44e5-8d38-7fc2858e57a4
-    country_id: *pg
-    network_id: *pg_sms_services
   - id: 247291
     prefix: '675180'
     number_min_length: 10
@@ -335,7 +268,77 @@ network_prefixes:
     uuid: e6f95cd3-43e4-4f7d-ae05-43b55c5dada4
     country_id: *pg
     network_id: *pg_voip
+  - id: 242151
+    prefix: '6750'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: bb3c4fa9-87d6-4fa5-8259-a9be390c291c
+    country_id: *pg
+    network_id: *pg_special_services
+  - id: 242473
+    prefix: '6751'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 06671399-c4d4-4efc-b7f8-76ec6a1ea70c
+    country_id: *pg
+    network_id: *pg_special_services
+  - id: 242539
+    prefix: '67510'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 9f45b4df-fc29-4b41-9f79-7c53b4d28b1d
+    country_id: *pg
+    network_id: *pg_testing_services
+  - id: 242596
+    prefix: '67511'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: f346caba-af22-446a-994d-3a2a9c49258c
+    country_id: *pg
+    network_id: *pg_emergency_services
+  - id: 242635
+    prefix: '675113'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 15d330f8-26f4-4dba-95b6-0a283cafc211
+    country_id: *pg
+    network_id: *pg_universal_access_number_uan
+  - id: 242815
+    prefix: '67512'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: c69794ae-a76f-4290-8e74-b9ed929243bd
+    country_id: *pg
+    network_id: *pg_voice_mail_and_calling_card_services
+  - id: 242859
+    prefix: '67513'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 47bc405e-5c2e-4be3-a611-d0d69e4f7bce
+    country_id: *pg
+    network_id: *pg_universal_access_codes
+  - id: 242945
+    prefix: '67515'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 35e391a9-99c7-48d6-a004-38f9365fb0cd
+    country_id: *pg
+    network_id: *pg_customer_care_services
+  - id: 243023
+    prefix: '67516'
+    number_min_length: 7
+    number_max_length: 10
+    uuid: 08b50dff-7297-44e5-8d38-7fc2858e57a4
+    country_id: *pg
+    network_id: *pg_sms_services
 # Fixed Prefixes
+  - id: 242081
+    prefix: '675'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 75ba56fc-2de0-4a7b-b06d-eb7566a469c3
+    country_id: *pg
+    network_id: *pg_fixed
   - id: 243238
     prefix: '67531'
     number_min_length: 10
@@ -392,13 +395,6 @@ network_prefixes:
     uuid: 83b38316-be61-4596-b569-7786b3ecf401
     country_id: *pg
     network_id: *pg_east_sepik_region
-  - id: 244779
-    prefix: '675456'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a64e9e59-cb07-45d6-a9dc-e277f9f681dc
-    country_id: *pg
-    network_id: *pg_east_sepik_region
   - id: 245419
     prefix: '6756'
     number_min_length: 10
@@ -406,6 +402,69 @@ network_prefixes:
     uuid: 964565c2-e3fd-4d20-a0e2-09789a4c6d73
     country_id: *pg
     network_id: *pg_southern_region_region
+  - id: 257128
+    prefix: '6759'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 427935bc-0a93-43da-bc50-1e683bc2b1b2
+    country_id: *pg
+    network_id: *pg_islands_region_region
+  - id: 257981
+    prefix: '675980'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e329a800-d392-4bba-8192-5e3952f5704e
+    country_id: *pg
+    network_id: *pg_east_new_britain_region
+  - id: 258013
+    prefix: '675981'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 635a687e-32c6-42be-b56c-af14320f2168
+    country_id: *pg
+    network_id: *pg_east_new_britain_region
+  - id: 258040
+    prefix: '675982'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3d2a42b2-0cfa-42f4-a82c-856334ba1ff5
+    country_id: *pg
+    network_id: *pg_east_new_britain_region
+  - id: 258073
+    prefix: '675983'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c93cd132-54b0-46a5-8fcc-bf609049d144
+    country_id: *pg
+    network_id: *pg_new_ireland_region
+  - id: 258098
+    prefix: '675984'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fa7aa311-cbed-4f2d-b412-5174cb578188
+    country_id: *pg
+    network_id: *pg_west_new_britain_region
+  - id: 258113
+    prefix: '675985'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0024efb2-deb0-4407-a698-f5adf9671f21
+    country_id: *pg
+    network_id: *pg_east_new_britain_region
+  - id: 258133
+    prefix: '675987'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1c5e5dd8-358f-48b0-aa08-8617602aad9d
+    country_id: *pg
+    network_id: *pg_east_new_britain_region
+  - id: 258156
+    prefix: '675989'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b685cad9-501c-449f-a4c0-aee11dc5e7ee
+    country_id: *pg
+    network_id: *pg_east_new_britain_region
   - id: 248916
     prefix: '6753'
     number_min_length: 10
@@ -420,6 +479,13 @@ network_prefixes:
     uuid: 55ef5b8a-22aa-4a6c-adf0-008909a3562f
     country_id: *pg
     network_id: *pg_port_moresby_region
+  - id: 244779
+    prefix: '675456'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a64e9e59-cb07-45d6-a9dc-e277f9f681dc
+    country_id: *pg
+    network_id: *pg_east_sepik_region
   - id: 249029
     prefix: '675457'
     number_min_length: 10
@@ -616,69 +682,6 @@ network_prefixes:
     uuid: 897b0a2d-d81f-4875-a65f-55a58f02ce21
     country_id: *pg
     network_id: *pg_islands_region_region
-  - id: 257128
-    prefix: '6759'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 427935bc-0a93-43da-bc50-1e683bc2b1b2
-    country_id: *pg
-    network_id: *pg_islands_region_region
-  - id: 257981
-    prefix: '675980'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e329a800-d392-4bba-8192-5e3952f5704e
-    country_id: *pg
-    network_id: *pg_east_new_britain_region
-  - id: 258013
-    prefix: '675981'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 635a687e-32c6-42be-b56c-af14320f2168
-    country_id: *pg
-    network_id: *pg_east_new_britain_region
-  - id: 258040
-    prefix: '675982'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3d2a42b2-0cfa-42f4-a82c-856334ba1ff5
-    country_id: *pg
-    network_id: *pg_east_new_britain_region
-  - id: 258073
-    prefix: '675983'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c93cd132-54b0-46a5-8fcc-bf609049d144
-    country_id: *pg
-    network_id: *pg_new_ireland_region
-  - id: 258098
-    prefix: '675984'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fa7aa311-cbed-4f2d-b412-5174cb578188
-    country_id: *pg
-    network_id: *pg_west_new_britain_region
-  - id: 258113
-    prefix: '675985'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0024efb2-deb0-4407-a698-f5adf9671f21
-    country_id: *pg
-    network_id: *pg_east_new_britain_region
-  - id: 258133
-    prefix: '675987'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1c5e5dd8-358f-48b0-aa08-8617602aad9d
-    country_id: *pg
-    network_id: *pg_east_new_britain_region
-  - id: 258156
-    prefix: '675989'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b685cad9-501c-449f-a4c0-aee11dc5e7ee
-    country_id: *pg
-    network_id: *pg_east_new_britain_region
   - id: 265018
     prefix: '675970'
     number_min_length: 10
@@ -707,6 +710,91 @@ network_prefixes:
     uuid: bded945a-266d-4024-a102-ae48db5916ce
     country_id: *pg
     network_id: *pg_north_solomons_region
+# Mobile Prefixes
+  - id: 251743
+    prefix: '67571'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ddfbc4db-8610-4dfc-89f8-33de39554b6c
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 251830
+    prefix: '67572'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 54236fde-c14f-4fd8-ab58-ab165a489b65
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 251881
+    prefix: '67573'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a4e01557-7368-430c-89d4-4b911ff09b94
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 252068
+    prefix: '67574'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9b238639-b6b1-48da-9dd0-e5caeb30100a
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 252559
+    prefix: '67575'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b667751-2375-4527-a30b-c2711d0296f1
+    country_id: *pg
+    network_id: *pg_bemobile_vodafone_mobile
+  - id: 256846
+    prefix: '67588'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 289744a3-de20-4ae6-bc67-3e830edf1729
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 255301
+    prefix: '67570'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f9cfcfd-1732-4853-9a14-2d5897227228
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 255457
+    prefix: '67576'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2536e62e-f905-4a4f-9f36-e2ebf8bbd8a8
+    country_id: *pg
+    network_id: *pg_bemobile_vodafone_mobile
+  - id: 255909
+    prefix: '675775'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4bbb6476-94be-4928-9593-abfdb7f3302e
+    country_id: *pg
+    network_id: *pg_citifon_mobile
+  - id: 256095
+    prefix: '67578'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 106ad69a-b225-4afa-83c4-d2236451dcb2
+    country_id: *pg
+    network_id: *pg_citifon_mobile
+  - id: 256393
+    prefix: '67579'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c58f6fcf-0ac4-47b0-9787-fdec9b90524a
+    country_id: *pg
+    network_id: *pg_digicel_mobile
+  - id: 253326
+    prefix: '67581'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b9e223c2-b944-419d-b17c-6fe346b1d51c
+    country_id: *pg
+    network_id: *pg_digivoip_mobile
 # Paging Prefixes
   - id: 248627
     prefix: '675270'
@@ -751,88 +839,3 @@ network_prefixes:
     uuid: b0186f50-c49f-4b4c-a708-5f56bcc71265
     country_id: *pg
     network_id: *pg_satellite
-# Mobile Prefixes
-  - id: 251743
-    prefix: '67571'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ddfbc4db-8610-4dfc-89f8-33de39554b6c
-    country_id: *pg
-    network_id: *pg_digicel_mobile
-  - id: 251830
-    prefix: '67572'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 54236fde-c14f-4fd8-ab58-ab165a489b65
-    country_id: *pg
-    network_id: *pg_digicel_mobile
-  - id: 251881
-    prefix: '67573'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a4e01557-7368-430c-89d4-4b911ff09b94
-    country_id: *pg
-    network_id: *pg_digicel_mobile
-  - id: 252068
-    prefix: '67574'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9b238639-b6b1-48da-9dd0-e5caeb30100a
-    country_id: *pg
-    network_id: *pg_digicel_mobile
-  - id: 252559
-    prefix: '67575'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b667751-2375-4527-a30b-c2711d0296f1
-    country_id: *pg
-    network_id: *pg_bemobile_vodafone_mobile
-  - id: 253326
-    prefix: '67581'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b9e223c2-b944-419d-b17c-6fe346b1d51c
-    country_id: *pg
-    network_id: *pg_digivoip_mobile
-  - id: 255301
-    prefix: '67570'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8f9cfcfd-1732-4853-9a14-2d5897227228
-    country_id: *pg
-    network_id: *pg_digicel_mobile
-  - id: 255457
-    prefix: '67576'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2536e62e-f905-4a4f-9f36-e2ebf8bbd8a8
-    country_id: *pg
-    network_id: *pg_bemobile_vodafone_mobile
-  - id: 255909
-    prefix: '675775'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4bbb6476-94be-4928-9593-abfdb7f3302e
-    country_id: *pg
-    network_id: *pg_citifon_mobile
-  - id: 256095
-    prefix: '67578'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 106ad69a-b225-4afa-83c4-d2236451dcb2
-    country_id: *pg
-    network_id: *pg_citifon_mobile
-  - id: 256393
-    prefix: '67579'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c58f6fcf-0ac4-47b0-9787-fdec9b90524a
-    country_id: *pg
-    network_id: *pg_digicel_mobile
-  - id: 256846
-    prefix: '67588'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 289744a3-de20-4ae6-bc67-3e830edf1729
-    country_id: *pg
-    network_id: *pg_digicel_mobile

@@ -1,10 +1,5 @@
 country_id: &st 186
 networks:
-# Supplementary services Networks
-  - id: &st_special_services 21492
-    name: ST Special Services
-    uuid: 3d22819e-b716-4e4a-a81d-c0340681c179
-    type_id: 13
 # Fixed Networks
   - id: &st_fixed 22730
     name: ST Fixed
@@ -46,6 +41,11 @@ networks:
     name: ST Madalena Region
     uuid: 1c683dbd-826f-40a0-b7bc-dd4bc277c355
     type_id: 2
+# Supplementary services Networks
+  - id: &st_special_services 21492
+    name: ST Special Services
+    uuid: 3d22819e-b716-4e4a-a81d-c0340681c179
+    type_id: 13
 # Mobile Networks
   - id: &st_mobile 24412
     name: ST Mobile
@@ -60,56 +60,19 @@ networks:
     uuid: 4532a88e-cbe3-4e90-9632-e2e2ba190dce
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242105
-    prefix: '239'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: f4332ef6-8c78-4dd7-94fd-c7faae0fc06c
-    country_id: *st
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242497
-    prefix: '2391'
-    number_min_length: 5
-    number_max_length: 8
-    uuid: f314feae-bf89-4cac-8f4b-8b80787723cb
-    country_id: *st
-    network_id: *st_special_services
-  - id: 245426
-    prefix: '2396'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fffaf73e-0a9a-4165-9ca6-d97e4e191cd3
-    country_id: *st
-    network_id: *st_special_services
-  - id: 253110
-    prefix: '2398'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 29d159cf-31ff-49ba-b486-e5dee77ae12b
-    country_id: *st
-    network_id: *st_special_services
-  - id: 254216
-    prefix: '239624'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8a3bc041-06d5-4b09-8d70-c9e5e839f7fe
-    country_id: *st
-    network_id: *st_special_services
-  - id: 255279
-    prefix: '2397'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2a258139-b045-4e55-8cba-284c79eadaed
-    country_id: *st
-    network_id: *st_special_services
 # Fixed Prefixes
   - id: 247438
     prefix: '2392'
     number_min_length: 10
     number_max_length: 10
     uuid: 0334a3ec-3442-451b-aec3-e0d0cbda9120
+    country_id: *st
+    network_id: *st_fixed
+  - id: 242105
+    prefix: '239'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: f4332ef6-8c78-4dd7-94fd-c7faae0fc06c
     country_id: *st
     network_id: *st_fixed
   - id: 247765
@@ -315,6 +278,42 @@ network_prefixes:
     uuid: 9685369f-093f-41c6-b7c5-c0ed72bbe05c
     country_id: *st
     network_id: *st_agua_grande_region
+# Supplementary services Prefixes
+  - id: 242497
+    prefix: '2391'
+    number_min_length: 5
+    number_max_length: 8
+    uuid: f314feae-bf89-4cac-8f4b-8b80787723cb
+    country_id: *st
+    network_id: *st_special_services
+  - id: 245426
+    prefix: '2396'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fffaf73e-0a9a-4165-9ca6-d97e4e191cd3
+    country_id: *st
+    network_id: *st_special_services
+  - id: 254216
+    prefix: '239624'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8a3bc041-06d5-4b09-8d70-c9e5e839f7fe
+    country_id: *st
+    network_id: *st_special_services
+  - id: 255279
+    prefix: '2397'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2a258139-b045-4e55-8cba-284c79eadaed
+    country_id: *st
+    network_id: *st_special_services
+  - id: 253110
+    prefix: '2398'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 29d159cf-31ff-49ba-b486-e5dee77ae12b
+    country_id: *st
+    network_id: *st_special_services
 # Mobile Prefixes
   - id: 257142
     prefix: '2399'

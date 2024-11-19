@@ -1,5 +1,10 @@
 country_id: &as 4
 networks:
+# Fixed Networks
+  - id: &as_fixed 14816
+    name: AS Fixed
+    uuid: 1b9f2dc6-dfab-4934-a306-40b9cfab4edf
+    type_id: 2
 # Mobile Networks
   - id: &as_bluesky_mobile 14814
     name: AS Bluesky Mobile
@@ -14,20 +19,71 @@ networks:
     name: AS Information Services
     uuid: 10c9bcb2-958a-4335-87ff-27b6478e0a25
     type_id: 13
-# Fixed Networks
-  - id: &as_fixed 14816
-    name: AS Fixed
-    uuid: 1b9f2dc6-dfab-4934-a306-40b9cfab4edf
-    type_id: 2
 network_prefixes:
-# Country code Prefixes
-  - id: 152693
+# Fixed Prefixes
+  - id: 503828
     prefix: '1684'
-    number_min_length: 2
+    number_min_length: 5
     number_max_length: 100
-    uuid: 8dcd4bfc-3374-46c2-9055-840016f48cf3
+    uuid: b7861122-d54b-45bb-840b-ac554e347050
     country_id: *as
-    network_id: null
+    network_id: *as_fixed
+  - id: 152707
+    prefix: '1684622'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 110f21d3-8f71-47bc-8430-c847e218f755
+    country_id: *as
+    network_id: *as_fixed
+  - id: 152708
+    prefix: '1684633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce4c29f6-9681-45ce-b2e2-2982fa8821c9
+    country_id: *as
+    network_id: *as_fixed
+  - id: 152709
+    prefix: '1684644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4433a4e6-ecc0-4ba9-b79f-9921772878a6
+    country_id: *as
+    network_id: *as_fixed
+  - id: 152710
+    prefix: '1684655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e873d1d-efff-4e17-9048-a368dc23f4ff
+    country_id: *as
+    network_id: *as_fixed
+  - id: 152711
+    prefix: '1684677'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1562b173-e24d-4700-9734-3ce54545651d
+    country_id: *as
+    network_id: *as_fixed
+  - id: 152712
+    prefix: '1684688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 23145a35-b32f-4f11-9117-232e43423ab0
+    country_id: *as
+    network_id: *as_fixed
+  - id: 152713
+    prefix: '1684691'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c7d8fbb4-971f-43b7-a56c-f629651b2851
+    country_id: *as
+    network_id: *as_fixed
+  - id: 152714
+    prefix: '1684699'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b40c405-ae9c-4692-8f54-c56ad02ea64c
+    country_id: *as
+    network_id: *as_fixed
 # Mobile Prefixes
   - id: 152697
     prefix: '1684248'
@@ -128,60 +184,3 @@ network_prefixes:
     uuid: 7d0bea59-05c6-44d7-b470-947f141e3e3c
     country_id: *as
     network_id: *as_information_services
-# Fixed Prefixes
-  - id: 152707
-    prefix: '1684622'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 110f21d3-8f71-47bc-8430-c847e218f755
-    country_id: *as
-    network_id: *as_fixed
-  - id: 152708
-    prefix: '1684633'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ce4c29f6-9681-45ce-b2e2-2982fa8821c9
-    country_id: *as
-    network_id: *as_fixed
-  - id: 152709
-    prefix: '1684644'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4433a4e6-ecc0-4ba9-b79f-9921772878a6
-    country_id: *as
-    network_id: *as_fixed
-  - id: 152710
-    prefix: '1684655'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e873d1d-efff-4e17-9048-a368dc23f4ff
-    country_id: *as
-    network_id: *as_fixed
-  - id: 152711
-    prefix: '1684677'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1562b173-e24d-4700-9734-3ce54545651d
-    country_id: *as
-    network_id: *as_fixed
-  - id: 152712
-    prefix: '1684688'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 23145a35-b32f-4f11-9117-232e43423ab0
-    country_id: *as
-    network_id: *as_fixed
-  - id: 152713
-    prefix: '1684691'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c7d8fbb4-971f-43b7-a56c-f629651b2851
-    country_id: *as
-    network_id: *as_fixed
-  - id: 152714
-    prefix: '1684699'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b40c405-ae9c-4692-8f54-c56ad02ea64c
-    country_id: *as
-    network_id: *as_fixed

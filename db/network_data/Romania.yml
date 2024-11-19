@@ -1,6 +1,10 @@
 country_id: &ro 176
 networks:
 # Supplementary services Networks
+  - id: &ro_public_interest_services 22674
+    name: RO Public Interest Services
+    uuid: 90c3db2d-17e1-4e71-add2-6b4f1209d387
+    type_id: 13
   - id: &ro_special_services 21478
     name: RO Special Services
     uuid: 54ef82ed-64fb-43df-80b6-828a2f7da3d5
@@ -13,33 +17,13 @@ networks:
     name: RO Directory Enquiry Services
     uuid: 26ef6987-ffab-452b-913e-21294d2f2135
     type_id: 13
-  - id: &ro_public_interest_services 22674
-    name: RO Public Interest Services
-    uuid: 90c3db2d-17e1-4e71-add2-6b4f1209d387
-    type_id: 13
-  - id: &ro_freephone_services 23856
-    name: RO Freephone Services
-    uuid: 886e556f-4a52-4428-80d7-d13498d108d7
-    type_id: 13
-  - id: &ro_shared_cost_and_universal_access_services 23887
-    name: RO Shared Cost And Universal Access Services
-    uuid: 4a31579f-5d2e-47ef-b383-9f5a9824dd4a
-    type_id: 13
-  - id: &ro_mass_call_services 23896
-    name: RO Mass Call Services
-    uuid: 0023f5e1-c8fc-49d1-a15c-141616732029
-    type_id: 13
-  - id: &ro_home_country_direct_virtual_and_prepaid_cards_services 23910
-    name: RO Home Country Direct Virtual And Prepaid Cards Services
-    uuid: bad29dc8-9032-42ec-97f3-bfb92ddf7ba5
+  - id: &ro_data_network_and_dial_up_internet_access_services 24299
+    name: RO Data Network And Dial Up Internet Access Services
+    uuid: 52451724-4804-4fb8-afa6-6eedbb026716
     type_id: 13
   - id: &ro_value_added_services_internal_network_services 23980
     name: RO Value Added Services Internal Network Services
     uuid: 7520effd-080b-4b7d-86b0-f7bbdb2a6ec0
-    type_id: 13
-  - id: &ro_data_network_and_dial_up_internet_access_services 24299
-    name: RO Data Network And Dial Up Internet Access Services
-    uuid: 52451724-4804-4fb8-afa6-6eedbb026716
     type_id: 13
   - id: &ro_premium_rate_services 24408
     name: RO Premium Rate Services
@@ -57,7 +41,27 @@ networks:
     name: RO Adults Entertainment Services
     uuid: 8446cab9-6b86-4bcb-982a-3680e9df5a94
     type_id: 13
+  - id: &ro_freephone_services 23856
+    name: RO Freephone Services
+    uuid: 886e556f-4a52-4428-80d7-d13498d108d7
+    type_id: 13
+  - id: &ro_shared_cost_and_universal_access_services 23887
+    name: RO Shared Cost And Universal Access Services
+    uuid: 4a31579f-5d2e-47ef-b383-9f5a9824dd4a
+    type_id: 13
+  - id: &ro_mass_call_services 23896
+    name: RO Mass Call Services
+    uuid: 0023f5e1-c8fc-49d1-a15c-141616732029
+    type_id: 13
+  - id: &ro_home_country_direct_virtual_and_prepaid_cards_services 23910
+    name: RO Home Country Direct Virtual And Prepaid Cards Services
+    uuid: bad29dc8-9032-42ec-97f3-bfb92ddf7ba5
+    type_id: 13
 # Fixed Networks
+  - id: &ro_fixed 22727
+    name: RO Fixed
+    uuid: 1dd1a609-92d6-4221-8f1e-ef5281b43e08
+    type_id: 2
   - id: &ro_bucuresti_bucharest_region 21909
     name: RO Bucuresti Bucharest Region
     uuid: 3321864c-7108-4ec8-86d9-08f8ae84cc46
@@ -226,10 +230,6 @@ networks:
     name: RO Voip Region
     uuid: 976892c1-c31c-469f-bd18-4a2a484764d9
     type_id: 2
-  - id: &ro_fixed 22727
-    name: RO Fixed
-    uuid: 1dd1a609-92d6-4221-8f1e-ef5281b43e08
-    type_id: 2
 # Mobile Networks
   - id: &ro_mobile 22549
     name: RO Mobile
@@ -239,32 +239,31 @@ networks:
     name: RO Telekom Mobile
     uuid: 7e99e3be-112f-42b4-9665-dc3b75d773c0
     type_id: 3
-  - id: &ro_digi_mobil_mobile 23440
-    name: RO Digi Mobil Mobile
-    uuid: ee525a63-4b44-401e-b60a-9fe1a580824d
-    type_id: 3
-  - id: &ro_orange_mobile 23475
-    name: RO Orange Mobile
-    uuid: 6b770504-7dae-4b0f-b232-24191605780a
+  - id: &ro_vodafone_mobile 23592
+    name: RO Vodafone Mobile
+    uuid: c584692b-ba9a-447c-ae02-38225abae5c0
     type_id: 3
   - id: &ro_iristel_mobile 23552
     name: RO Iristel Mobile
     uuid: c57409f3-4d6f-4195-83b7-1e31c2b6a870
     type_id: 3
-  - id: &ro_vodafone_mobile 23592
-    name: RO Vodafone Mobile
-    uuid: c584692b-ba9a-447c-ae02-38225abae5c0
+  - id: &ro_orange_mobile 23475
+    name: RO Orange Mobile
+    uuid: 6b770504-7dae-4b0f-b232-24191605780a
+    type_id: 3
+  - id: &ro_digi_mobil_mobile 23440
+    name: RO Digi Mobil Mobile
+    uuid: ee525a63-4b44-401e-b60a-9fe1a580824d
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242089
-    prefix: '40'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: eaf33f21-eff4-49c0-b04c-26fd11de011b
-    country_id: *ro
-    network_id: null
 # Supplementary services Prefixes
+  - id: 247342
+    prefix: '4019'
+    number_min_length: 5
+    number_max_length: 8
+    uuid: 49e1747b-2970-4f03-b54b-09daec28b161
+    country_id: *ro
+    network_id: *ro_public_interest_services
   - id: 242480
     prefix: '401'
     number_min_length: 5
@@ -286,74 +285,11 @@ network_prefixes:
     uuid: 032e5637-f31a-407c-b10f-cc47a4b649d2
     country_id: *ro
     network_id: *ro_directory_enquiry_services
-  - id: 247342
-    prefix: '4019'
-    number_min_length: 5
-    number_max_length: 8
-    uuid: 49e1747b-2970-4f03-b54b-09daec28b161
-    country_id: *ro
-    network_id: *ro_public_interest_services
-  - id: 253103
-    prefix: '4008'
+  - id: 508365
+    prefix: '40870'
     number_min_length: 11
     number_max_length: 11
-    uuid: f341a14c-34c9-413d-a41c-3f437e9c2847
-    country_id: *ro
-    network_id: *ro_special_services
-  - id: 253171
-    prefix: '400800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f53d3b9c-e0e9-46e5-847d-f9e98436f27e
-    country_id: *ro
-    network_id: *ro_freephone_services
-  - id: 253216
-    prefix: '400801'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: af540103-aea9-4f07-9bf8-647cbd537038
-    country_id: *ro
-    network_id: *ro_shared_cost_and_universal_access_services
-  - id: 253239
-    prefix: '400803'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1a50f333-2395-4a75-824b-062cbf3c63ce
-    country_id: *ro
-    network_id: *ro_shared_cost_and_universal_access_services
-  - id: 253256
-    prefix: '400805'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 72e8fb06-4424-49b6-a7a6-0d78d7948a9b
-    country_id: *ro
-    network_id: *ro_mass_call_services
-  - id: 253287
-    prefix: '400808'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 862316f9-a9ab-4188-be3f-e61b0e64feae
-    country_id: *ro
-    network_id: *ro_home_country_direct_virtual_and_prepaid_cards_services
-  - id: 253602
-    prefix: '4083'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: f5163ddb-c60e-442d-bccd-455c455f18fa
-    country_id: *ro
-    network_id: *ro_value_added_services_internal_network_services
-  - id: 253727
-    prefix: '4084'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: e43d84ed-9ee2-409f-92e0-a9d1f9fc574d
-    country_id: *ro
-    network_id: *ro_value_added_services_internal_network_services
-  - id: 256678
-    prefix: '400870'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: edb5f351-273f-4233-aea1-38e1c8157ac3
+    uuid: c332baf8-2ac5-468b-89f1-b9c36ceba2e0
     country_id: *ro
     network_id: *ro_data_network_and_dial_up_internet_access_services
   - id: 256848
@@ -363,32 +299,32 @@ network_prefixes:
     uuid: f25215eb-0bf0-4f55-909f-8a8d1015d5f6
     country_id: *ro
     network_id: *ro_value_added_services_internal_network_services
-  - id: 257132
-    prefix: '4009'
+  - id: 508384
+    prefix: '409'
     number_min_length: 11
     number_max_length: 11
-    uuid: 692dba86-7290-46e7-ad68-2e4917d7bee3
+    uuid: b5e5d552-660a-4339-8a6c-563a67bafbb5
     country_id: *ro
     network_id: *ro_premium_rate_services
-  - id: 257190
-    prefix: '400900'
+  - id: 508389
+    prefix: '40900'
     number_min_length: 11
     number_max_length: 11
-    uuid: c321e1b4-0f32-466d-8aee-5cae441801b7
+    uuid: 6ba349ae-edd6-48f3-875c-c730d885895c
     country_id: *ro
     network_id: *ro_entertainment_games_and_contests_services
-  - id: 257245
-    prefix: '400903'
+  - id: 508406
+    prefix: '40903'
     number_min_length: 11
     number_max_length: 11
-    uuid: 265b8ea5-4153-4ab5-8ac3-9b972e4ad137
+    uuid: dbf13d60-2c67-43e2-8e35-1aade8731a1a
     country_id: *ro
     network_id: *ro_information_entertainment_games_and_contests_services
-  - id: 257299
-    prefix: '400906'
+  - id: 508410
+    prefix: '40906'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae9364af-d723-4e75-acc4-a88bbc801cbe
+    uuid: 973795c9-5a92-44de-9ef3-9acb6c8bbab0
     country_id: *ro
     network_id: *ro_adults_entertainment_services
   - id: 257970
@@ -403,6 +339,62 @@ network_prefixes:
     number_min_length: 6
     number_max_length: 7
     uuid: d20937e9-ad0a-4123-aa0f-51b5c4d2732d
+    country_id: *ro
+    network_id: *ro_value_added_services_internal_network_services
+  - id: 510854
+    prefix: '408'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b655f0f4-4778-4919-a3f5-c96b51829cd8
+    country_id: *ro
+    network_id: *ro_special_services
+  - id: 510864
+    prefix: '40800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1ce65144-fd72-447d-817c-087d669ed7c0
+    country_id: *ro
+    network_id: *ro_freephone_services
+  - id: 510873
+    prefix: '40801'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bf590b99-7788-4369-bae1-05783d9d038a
+    country_id: *ro
+    network_id: *ro_shared_cost_and_universal_access_services
+  - id: 510882
+    prefix: '40803'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4516d67-8ad3-4d0a-8258-214ac4fefb6a
+    country_id: *ro
+    network_id: *ro_shared_cost_and_universal_access_services
+  - id: 510891
+    prefix: '40805'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac0fc2f6-f487-4477-be2d-64b7a2343fb5
+    country_id: *ro
+    network_id: *ro_mass_call_services
+  - id: 510905
+    prefix: '40808'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 64034b9a-579b-4a78-b60b-7004c45f938c
+    country_id: *ro
+    network_id: *ro_home_country_direct_virtual_and_prepaid_cards_services
+  - id: 253602
+    prefix: '4083'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: f5163ddb-c60e-442d-bccd-455c455f18fa
+    country_id: *ro
+    network_id: *ro_value_added_services_internal_network_services
+  - id: 253727
+    prefix: '4084'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: e43d84ed-9ee2-409f-92e0-a9d1f9fc574d
     country_id: *ro
     network_id: *ro_value_added_services_internal_network_services
   - id: 264727
@@ -420,1523 +412,1530 @@ network_prefixes:
     country_id: *ro
     network_id: *ro_value_added_services_internal_network_services
 # Fixed Prefixes
-  - id: 243239
-    prefix: '40031'
+  - id: 506947
+    prefix: '402'
     number_min_length: 11
     number_max_length: 11
-    uuid: fe55151a-970d-4ef5-8ccf-fb726852d391
-    country_id: *ro
-    network_id: *ro_bucuresti_bucharest_region
-  - id: 243349
-    prefix: '400319'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 304a37e9-1ae7-41d3-b6ed-9ea7edfde0d1
-    country_id: *ro
-    network_id: *ro_bucuresti_bucharest_region
-  - id: 243426
-    prefix: '400330'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 73d8373a-da4d-4737-ab35-94abeb0b56b3
-    country_id: *ro
-    network_id: *ro_suceava_region
-  - id: 243428
-    prefix: '4003309'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 4ae9edc8-9b68-4930-a1aa-85b4dc3993a2
-    country_id: *ro
-    network_id: *ro_suceava_region
-  - id: 243430
-    prefix: '400331'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 81dd1f0e-5714-4f1e-9002-533458048bcb
-    country_id: *ro
-    network_id: *ro_botosani_region
-  - id: 243433
-    prefix: '4003319'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 9064cdeb-68eb-4528-a433-d52fdce9508c
-    country_id: *ro
-    network_id: *ro_botosani_region
-  - id: 243435
-    prefix: '400332'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 06dc54b3-9236-4a21-b9d5-54388f4f9044
-    country_id: *ro
-    network_id: *ro_iasi_region
-  - id: 243437
-    prefix: '4003329'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 45a752ff-4640-4b66-afe4-658b659a7a00
-    country_id: *ro
-    network_id: *ro_iasi_region
-  - id: 243439
-    prefix: '400333'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3ff5b21b-f227-4d7e-b471-f9ce2de51cfd
-    country_id: *ro
-    network_id: *ro_neamt_region
-  - id: 243445
-    prefix: '4003339'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: e6333bba-afd6-4ff7-8ba6-0edabe2c1a4d
-    country_id: *ro
-    network_id: *ro_neamt_region
-  - id: 243447
-    prefix: '400334'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bf0c7ace-0dd0-4df2-b8d1-50c06649878a
-    country_id: *ro
-    network_id: *ro_bacau_region
-  - id: 243450
-    prefix: '4003349'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 0947caa0-3f9c-4655-b6d5-251358d786be
-    country_id: *ro
-    network_id: *ro_bacau_region
-  - id: 243452
-    prefix: '400335'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1bfd9b1c-272c-4bed-bc94-783cfbf4c036
-    country_id: *ro
-    network_id: *ro_vaslui_region
-  - id: 243453
-    prefix: '4003359'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: a417b57a-eaa1-4387-91c3-43d405e8e725
-    country_id: *ro
-    network_id: *ro_vaslui_region
-  - id: 243454
-    prefix: '400336'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f56c79e-4191-4f01-9d75-4ee13076e02a
-    country_id: *ro
-    network_id: *ro_galati_region
-  - id: 243455
-    prefix: '4003369'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 94aeeb33-145a-4909-b649-6a597c9729c2
-    country_id: *ro
-    network_id: *ro_galati_region
-  - id: 243456
-    prefix: '400337'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b4b9a57-c828-4399-ae7d-962410ca4876
-    country_id: *ro
-    network_id: *ro_vrancea_region
-  - id: 243457
-    prefix: '4003379'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 99089f46-04fd-4c44-b61d-395d5f2ce527
-    country_id: *ro
-    network_id: *ro_vrancea_region
-  - id: 243458
-    prefix: '400338'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: de4873b8-2592-463b-a419-581a81691908
-    country_id: *ro
-    network_id: *ro_buzau_region
-  - id: 243467
-    prefix: '4003389'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 4e7a1790-49fc-43f6-9d2b-65fd0869cbb1
-    country_id: *ro
-    network_id: *ro_buzau_region
-  - id: 243470
-    prefix: '400339'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2cf545fa-c4fb-4228-b479-0fa63b929e4c
-    country_id: *ro
-    network_id: *ro_braila_region
-  - id: 243478
-    prefix: '4003399'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 943921b8-8177-440a-9c08-206b3fdcb282
-    country_id: *ro
-    network_id: *ro_braila_region
-  - id: 243500
-    prefix: '400340'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a5209899-bf6e-443e-9499-887eeab117bc
-    country_id: *ro
-    network_id: *ro_tulcea_region
-  - id: 243504
-    prefix: '4003409'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: d16a4bc7-6eb8-4b32-a951-3d86e27e7a6f
-    country_id: *ro
-    network_id: *ro_tulcea_region
-  - id: 243507
-    prefix: '400341'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7d97c248-5f3f-488a-9a6e-25cf266cf583
-    country_id: *ro
-    network_id: *ro_constanta_region
-  - id: 243514
-    prefix: '4003419'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 329da9ba-c27c-4f1d-9fd2-6a043230e741
-    country_id: *ro
-    network_id: *ro_constanta_region
-  - id: 243518
-    prefix: '400342'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 099b5972-f14a-4c54-b2e5-e3027037b11f
-    country_id: *ro
-    network_id: *ro_calarasi_region
-  - id: 243521
-    prefix: '4003429'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 01458a03-4fa9-4306-b180-2a34fdafdd54
-    country_id: *ro
-    network_id: *ro_calarasi_region
-  - id: 243524
-    prefix: '400343'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1c8418af-961c-4444-a9e7-411c5f79cc60
-    country_id: *ro
-    network_id: *ro_ialomita_region
-  - id: 243529
-    prefix: '4003439'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 071c816e-d818-496c-a6fe-21367dcc83ca
-    country_id: *ro
-    network_id: *ro_ialomita_region
-  - id: 243533
-    prefix: '400344'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 72dc6734-fcd6-4998-b930-b3f3d471472d
-    country_id: *ro
-    network_id: *ro_prahova_region
-  - id: 243536
-    prefix: '4003449'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 1bcbad57-5806-4395-921f-d29def7cce6a
-    country_id: *ro
-    network_id: *ro_prahova_region
-  - id: 243541
-    prefix: '400345'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4bd568f7-7310-41d9-9e59-ca1fffccefb8
-    country_id: *ro
-    network_id: *ro_dambovita_region
-  - id: 243547
-    prefix: '4003459'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 119d55b9-8171-457e-b586-f8645f7b20fe
-    country_id: *ro
-    network_id: *ro_dambovita_region
-  - id: 243551
-    prefix: '400346'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cddd05e3-0ec5-4133-b179-e09b3230a012
-    country_id: *ro
-    network_id: *ro_giurgiu_region
-  - id: 243554
-    prefix: '4003469'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 235992c8-d4f4-418e-8ca1-08458f2589e2
-    country_id: *ro
-    network_id: *ro_giurgiu_region
-  - id: 243557
-    prefix: '400347'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 018ab01a-aa7b-47d0-87fd-b938c0a5c2b6
-    country_id: *ro
-    network_id: *ro_teleorman_region
-  - id: 243566
-    prefix: '4003479'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 75601eb4-81f7-481d-b2c2-0cde19ce63b2
-    country_id: *ro
-    network_id: *ro_teleorman_region
-  - id: 243569
-    prefix: '400348'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0d9d3064-a932-4dce-813d-e3725ae5fa09
-    country_id: *ro
-    network_id: *ro_arges_region
-  - id: 243571
-    prefix: '4003489'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: cf3a721c-272a-40fd-ab78-91bbd4810f7c
-    country_id: *ro
-    network_id: *ro_arges_region
-  - id: 243574
-    prefix: '400349'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5709b7ae-db57-466e-b775-8234e0ea9b71
-    country_id: *ro
-    network_id: *ro_olt_region
-  - id: 243577
-    prefix: '4003499'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 851daee4-c606-4089-bcc1-cd8f0c8b226a
-    country_id: *ro
-    network_id: *ro_olt_region
-  - id: 243601
-    prefix: '400350'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4e24471a-9194-44c7-b872-53484e4e8751
-    country_id: *ro
-    network_id: *ro_valcea_region
-  - id: 243605
-    prefix: '4003509'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 77e6966e-3855-434a-b688-b34abe8215ff
-    country_id: *ro
-    network_id: *ro_valcea_region
-  - id: 243607
-    prefix: '400351'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8fbffaeb-7058-408e-b13f-724199ddf70c
-    country_id: *ro
-    network_id: *ro_dolj_region
-  - id: 243610
-    prefix: '4003519'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 26e4d2d5-c2f8-4ca8-96d1-72e6d55a7370
-    country_id: *ro
-    network_id: *ro_dolj_region
-  - id: 243612
-    prefix: '400352'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9376fe79-a2a4-4338-97fd-1c8e6caac5ab
-    country_id: *ro
-    network_id: *ro_mehedinti_region
-  - id: 243616
-    prefix: '4003529'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: de8fe1f8-88aa-4d20-a87d-3609d6db39f0
-    country_id: *ro
-    network_id: *ro_mehedinti_region
-  - id: 243618
-    prefix: '400353'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1ddfe39c-5079-403f-8325-766335d41ec7
-    country_id: *ro
-    network_id: *ro_gorj_region
-  - id: 243620
-    prefix: '4003539'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 7371fe5c-04c6-4048-a539-fc0e890222d5
-    country_id: *ro
-    network_id: *ro_gorj_region
-  - id: 243622
-    prefix: '400354'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3cb73d66-a76b-425d-a76a-9156a5dece6e
-    country_id: *ro
-    network_id: *ro_hunedoara_region
-  - id: 243625
-    prefix: '4003549'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 407bd535-7ab0-446c-a608-355f5a16c223
-    country_id: *ro
-    network_id: *ro_hunedoara_region
-  - id: 243627
-    prefix: '400355'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a1680cf-1076-4844-b3a6-54b1e56e1bca
-    country_id: *ro
-    network_id: *ro_caras_severin_region
-  - id: 243630
-    prefix: '4003559'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 5a48d230-bbd6-4091-80ee-741706045a52
-    country_id: *ro
-    network_id: *ro_caras_severin_region
-  - id: 243633
-    prefix: '400356'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6bcf2c1c-1352-4007-8845-04854586d088
-    country_id: *ro
-    network_id: *ro_timis_region
-  - id: 243635
-    prefix: '4003569'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: bdea57b2-eece-4cc4-ad15-921ad7db07a9
-    country_id: *ro
-    network_id: *ro_timis_region
-  - id: 243636
-    prefix: '400357'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9fa52c30-98aa-483b-be5b-c5b09db080f6
-    country_id: *ro
-    network_id: *ro_arad_region
-  - id: 243644
-    prefix: '4003579'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 6ebf73e5-70af-419c-a56b-0738c506254c
-    country_id: *ro
-    network_id: *ro_arad_region
-  - id: 243645
-    prefix: '400358'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d896b392-0623-4a85-89f5-3685054ac1d3
-    country_id: *ro
-    network_id: *ro_alba_region
-  - id: 243646
-    prefix: '4003589'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 5052e657-02d5-43eb-a9ab-65a355a07659
-    country_id: *ro
-    network_id: *ro_alba_region
-  - id: 243648
-    prefix: '400359'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bac1a633-cd1c-48e6-8ff5-4e0f93deae1e
-    country_id: *ro
-    network_id: *ro_bihor_region
-  - id: 243655
-    prefix: '4003599'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 92431335-fa4f-4e3a-9b54-1ad4aff4ea28
-    country_id: *ro
-    network_id: *ro_bihor_region
-  - id: 243678
-    prefix: '400360'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8bc69dd3-9764-4739-aa30-f78c979b1346
-    country_id: *ro
-    network_id: *ro_salaj_region
-  - id: 243679
-    prefix: '4003609'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 95528f7f-79c1-470f-9b55-517d3efb5da9
-    country_id: *ro
-    network_id: *ro_salaj_region
-  - id: 243680
-    prefix: '400361'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c18d9d86-c52d-46ae-9d1d-2b658eed00d8
-    country_id: *ro
-    network_id: *ro_satu_mare_region
-  - id: 243682
-    prefix: '4003619'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 346209fd-e2df-4719-b8a3-1410538f2ec4
-    country_id: *ro
-    network_id: *ro_satu_mare_region
-  - id: 243683
-    prefix: '400362'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 84b66337-4774-4b22-8ad4-063c0d327f99
-    country_id: *ro
-    network_id: *ro_maramures_region
-  - id: 243685
-    prefix: '4003629'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 4c863b98-fb80-427c-96f6-91e8f0f8f404
-    country_id: *ro
-    network_id: *ro_maramures_region
-  - id: 243686
-    prefix: '400363'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: add4fc7e-5277-4d1e-a0d3-db2eebec1838
-    country_id: *ro
-    network_id: *ro_bistrita_nasaud_region
-  - id: 243687
-    prefix: '4003639'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 0577277c-8f77-4777-93c9-b64d9fec4b7d
-    country_id: *ro
-    network_id: *ro_bistrita_nasaud_region
-  - id: 243688
-    prefix: '400364'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e4e9d4c4-3918-4d2d-8f4a-c6eaa16cafd2
-    country_id: *ro
-    network_id: *ro_cluj_region
-  - id: 243689
-    prefix: '4003649'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 0ab3fc30-54f8-4eaf-ab6c-7ff4ab8fb634
-    country_id: *ro
-    network_id: *ro_cluj_region
-  - id: 243690
-    prefix: '400365'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2f2b179c-240a-45a8-b500-29026e4bb95e
-    country_id: *ro
-    network_id: *ro_mures_region
-  - id: 243692
-    prefix: '4003659'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 95321d6c-5c84-4431-8b1f-53086eb3341e
-    country_id: *ro
-    network_id: *ro_mures_region
-  - id: 243693
-    prefix: '400366'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8573a00b-a9f3-4fad-b909-ebdd6ee5e259
-    country_id: *ro
-    network_id: *ro_harghita_region
-  - id: 243696
-    prefix: '4003669'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 74bcab7f-26fb-44da-b0bd-aa81599d1b7d
-    country_id: *ro
-    network_id: *ro_harghita_region
-  - id: 243697
-    prefix: '400367'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e8ff661d-f688-4d60-89d4-888fae80b94e
-    country_id: *ro
-    network_id: *ro_covasna_region
-  - id: 243698
-    prefix: '4003679'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 7589831f-60c3-4304-a042-0a580429090b
-    country_id: *ro
-    network_id: *ro_covasna_region
-  - id: 243699
-    prefix: '400368'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f6f9018a-4e92-4cf3-a62b-a624fd26b479
-    country_id: *ro
-    network_id: *ro_brasov_region
-  - id: 243700
-    prefix: '4003689'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 6f9aac95-1757-4eec-96ec-780794ba213e
-    country_id: *ro
-    network_id: *ro_brasov_region
-  - id: 243701
-    prefix: '400369'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 36f14e9b-0b08-4697-87a9-0f534f3a5bfc
-    country_id: *ro
-    network_id: *ro_sibiu_region
-  - id: 243702
-    prefix: '4003699'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: ae88de70-8e69-4f00-9106-824d8c96d5aa
-    country_id: *ro
-    network_id: *ro_sibiu_region
-  - id: 243718
-    prefix: '40037'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 44c2f8b2-754c-4b12-8174-ef0433bdb35a
-    country_id: *ro
-    network_id: *ro_voip_region
-  - id: 243868
-    prefix: '40038'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 478c6963-1021-433f-8a65-9eb338f7205b
-    country_id: *ro
-    network_id: *ro_voip_region
-  - id: 243910
-    prefix: '40039'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4c9ad15-f2ac-4653-bcf0-19f79c761d30
-    country_id: *ro
-    network_id: *ro_voip_region
-  - id: 247432
-    prefix: '4002'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 81d9b742-940d-4ddf-818b-ecb2d6a16db3
+    uuid: e996eb95-e4f8-4b16-aca7-6c5a0a5b2b37
     country_id: *ro
     network_id: *ro_fixed
-  - id: 247635
-    prefix: '40021'
+  - id: 506978
+    prefix: '4021'
     number_min_length: 11
     number_max_length: 11
-    uuid: 87cd76db-fd94-4c2c-a892-e8ab7a6bb28a
+    uuid: 8c525142-7130-4a35-b9ca-450caeec05d7
     country_id: *ro
     network_id: *ro_bucuresti_bucharest_region
-  - id: 247713
-    prefix: '400219'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 80cbabb9-5bf7-46e3-908b-ba1e50ba98e1
+  - id: 242089
+    prefix: '40'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: eaf33f21-eff4-49c0-b04c-26fd11de011b
+    country_id: *ro
+    network_id: *ro_fixed
+  - id: 507072
+    prefix: '4031'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7352b283-6b6d-4374-97d0-117621946a03
     country_id: *ro
     network_id: *ro_bucuresti_bucharest_region
-  - id: 247937
-    prefix: '400230'
+  - id: 507080
+    prefix: '40319'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ba2b6be1-ce7c-4a34-a3f7-9a2309e434f0
+    country_id: *ro
+    network_id: *ro_bucuresti_bucharest_region
+  - id: 507094
+    prefix: '40330'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6d23e405-27ba-42be-b040-a613a8ad794d
+    uuid: 9a2dde1b-29b7-4498-8102-c369e5a72835
     country_id: *ro
     network_id: *ro_suceava_region
-  - id: 247943
-    prefix: '4002309'
+  - id: 507095
+    prefix: '403309'
     number_min_length: 8
     number_max_length: 8
-    uuid: bfb1345d-9815-48fe-a02f-f252b6b5c847
+    uuid: 6944aef5-96d6-420e-b4be-3959b1ebfb13
     country_id: *ro
     network_id: *ro_suceava_region
-  - id: 247947
-    prefix: '400231'
+  - id: 507096
+    prefix: '40331'
     number_min_length: 11
     number_max_length: 11
-    uuid: a4b96f5d-29d1-4bca-930e-d36ca2d93635
+    uuid: 3947e55a-bf8e-43c7-b6d5-81ebc0074388
     country_id: *ro
     network_id: *ro_botosani_region
-  - id: 247954
-    prefix: '4002319'
+  - id: 507097
+    prefix: '403319'
     number_min_length: 8
     number_max_length: 8
-    uuid: 5f9073da-2ef0-4c33-9f12-4ba2d5f23595
+    uuid: c0c50f4d-e66f-4bfc-80ab-60969571374b
     country_id: *ro
     network_id: *ro_botosani_region
-  - id: 247958
-    prefix: '400232'
+  - id: 507098
+    prefix: '40332'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b154083-8507-43dd-b3bd-66d5688314ca
+    uuid: 752f79ca-ccc9-4d8e-be30-0113cd8c61ad
     country_id: *ro
     network_id: *ro_iasi_region
-  - id: 247969
-    prefix: '4002329'
+  - id: 507099
+    prefix: '403329'
     number_min_length: 8
     number_max_length: 8
-    uuid: b11bca80-8e93-4f7e-a429-7e28fe2c9be6
+    uuid: 6f65a932-263d-4ba5-9f55-24553be38e84
     country_id: *ro
     network_id: *ro_iasi_region
-  - id: 247973
-    prefix: '400233'
+  - id: 507100
+    prefix: '40333'
     number_min_length: 11
     number_max_length: 11
-    uuid: a899b612-5106-427b-a8a2-9d555c36b20d
+    uuid: 5c9589e8-e9e5-4d81-a5ba-13e95c513877
     country_id: *ro
     network_id: *ro_neamt_region
-  - id: 248020
-    prefix: '4002339'
+  - id: 507101
+    prefix: '403339'
     number_min_length: 8
     number_max_length: 8
-    uuid: 6c1fb648-5f9f-496b-9473-5ce29bbac0dd
+    uuid: ac3ee28b-477f-485d-be3d-e744273f99be
     country_id: *ro
     network_id: *ro_neamt_region
-  - id: 248023
-    prefix: '400234'
+  - id: 507102
+    prefix: '40334'
     number_min_length: 11
     number_max_length: 11
-    uuid: 714b3e9b-5d46-4f21-acf4-4c278db70cd5
+    uuid: b7e35837-b397-4136-84ae-61b8cc0693c2
     country_id: *ro
     network_id: *ro_bacau_region
-  - id: 248039
-    prefix: '4002349'
+  - id: 507103
+    prefix: '403349'
     number_min_length: 8
     number_max_length: 8
-    uuid: 6c8dc74d-8a08-4343-8619-17b1076fe043
+    uuid: 6ea3cc47-d1ca-47ed-983f-02bf607e5ff3
     country_id: *ro
     network_id: *ro_bacau_region
-  - id: 248044
-    prefix: '400235'
+  - id: 507104
+    prefix: '40335'
     number_min_length: 11
     number_max_length: 11
-    uuid: b3c304a1-d639-47f1-a698-7070f29f2656
+    uuid: 9bbe36a6-6958-4100-b0d3-e5bcab9e61a9
     country_id: *ro
     network_id: *ro_vaslui_region
-  - id: 248051
-    prefix: '4002359'
+  - id: 507105
+    prefix: '403359'
     number_min_length: 8
     number_max_length: 8
-    uuid: 427b8583-dfc6-4826-ad49-f0a56c1ece7c
+    uuid: acc0ef6b-b242-4070-b16d-e44826c804a0
     country_id: *ro
     network_id: *ro_vaslui_region
-  - id: 248055
-    prefix: '400236'
+  - id: 507106
+    prefix: '40336'
     number_min_length: 11
     number_max_length: 11
-    uuid: 988508ff-4c2a-4513-b37a-510ccb2614db
+    uuid: b85f924d-19c1-46d3-8cce-53bd78ce9ece
     country_id: *ro
     network_id: *ro_galati_region
-  - id: 248065
-    prefix: '4002369'
+  - id: 507107
+    prefix: '403369'
     number_min_length: 8
     number_max_length: 8
-    uuid: 8dc9d651-539e-4f1d-b9f6-54c02cb3275f
+    uuid: 80e03802-993b-471c-b19c-52d58c3cca56
     country_id: *ro
     network_id: *ro_galati_region
-  - id: 248068
-    prefix: '400237'
+  - id: 507108
+    prefix: '40337'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6881c10a-03a8-4f66-8681-8da46b9bffbe
+    uuid: a628fdde-a57c-4b2b-b1d6-d2f9c480fc60
     country_id: *ro
     network_id: *ro_vrancea_region
-  - id: 248073
-    prefix: '4002379'
+  - id: 507109
+    prefix: '403379'
     number_min_length: 8
     number_max_length: 8
-    uuid: 6cfa6316-fcae-4bbb-b181-60c37be0477b
+    uuid: 907dd458-7206-4f75-8b25-9a6763068795
     country_id: *ro
     network_id: *ro_vrancea_region
-  - id: 248077
-    prefix: '400238'
+  - id: 507110
+    prefix: '40338'
     number_min_length: 11
     number_max_length: 11
-    uuid: 08fb859e-e4c1-4f7e-a10b-4466d9b2dd8e
+    uuid: d9fe9dc2-4fbc-46fe-b0dc-aec0e32c9ead
     country_id: *ro
     network_id: *ro_buzau_region
-  - id: 248086
-    prefix: '4002389'
+  - id: 507111
+    prefix: '403389'
     number_min_length: 8
     number_max_length: 8
-    uuid: de22badb-dc08-46d2-af7b-c4ecf9548973
+    uuid: 0faa5a0a-84aa-4297-a8f3-17595c2f544c
     country_id: *ro
     network_id: *ro_buzau_region
-  - id: 248088
-    prefix: '400239'
+  - id: 507112
+    prefix: '40339'
     number_min_length: 11
     number_max_length: 11
-    uuid: eef68a24-062d-4216-93c6-5785e3aec7f9
+    uuid: 80c8678e-1881-4a0c-b987-d8d22e25df3d
     country_id: *ro
     network_id: *ro_braila_region
-  - id: 248101
-    prefix: '4002399'
+  - id: 507113
+    prefix: '403399'
     number_min_length: 8
     number_max_length: 8
-    uuid: 389334d1-107e-453d-b906-14efd8a55fc6
+    uuid: 94a9d4d0-7634-4cd8-a237-5c95139e81fc
     country_id: *ro
     network_id: *ro_braila_region
-  - id: 248128
-    prefix: '400240'
+  - id: 507118
+    prefix: '40340'
     number_min_length: 11
     number_max_length: 11
-    uuid: 316a9bbb-7d30-4855-8c27-1bebe7edabd8
+    uuid: a470aa13-cc98-40b3-93cf-f469623b0030
     country_id: *ro
     network_id: *ro_tulcea_region
-  - id: 248134
-    prefix: '4002409'
+  - id: 507119
+    prefix: '403409'
     number_min_length: 8
     number_max_length: 8
-    uuid: 14b47714-45f6-4335-8847-8b238b95f657
+    uuid: cf4e211a-0b41-4dbe-9cd4-e857492aa10b
     country_id: *ro
     network_id: *ro_tulcea_region
-  - id: 248140
-    prefix: '400241'
+  - id: 507120
+    prefix: '40341'
     number_min_length: 11
     number_max_length: 11
-    uuid: a60450fc-e6b2-4f9f-afe5-3d3ec0e1b40f
+    uuid: 92da1d9a-d8fd-434f-bbd9-370cd1e3139f
     country_id: *ro
     network_id: *ro_constanta_region
-  - id: 248143
-    prefix: '4002419'
+  - id: 507121
+    prefix: '403419'
     number_min_length: 8
     number_max_length: 8
-    uuid: 1287de7e-da0c-49ae-8a8e-d1df10f1e791
+    uuid: c632dbae-3f57-49ab-8565-4123ad2c987a
     country_id: *ro
     network_id: *ro_constanta_region
-  - id: 248150
-    prefix: '400242'
+  - id: 507122
+    prefix: '40342'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8c433095-2c42-471b-9b8b-68e1bfabd7e8
+    uuid: 2c6a28aa-4aaf-4679-9a32-3e2095194005
     country_id: *ro
     network_id: *ro_calarasi_region
-  - id: 248156
-    prefix: '4002429'
+  - id: 507123
+    prefix: '403429'
     number_min_length: 8
     number_max_length: 8
-    uuid: 60838223-11d4-4fbe-8804-f6b0d272cdeb
+    uuid: c573f9f2-aa73-44c2-931d-2683f6b2f844
     country_id: *ro
     network_id: *ro_calarasi_region
-  - id: 248160
-    prefix: '400243'
+  - id: 507124
+    prefix: '40343'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3f7c56bb-f262-46c0-b369-18873fa89db3
+    uuid: 7342515e-3b17-46b2-ad98-dd0ec1661472
     country_id: *ro
     network_id: *ro_ialomita_region
-  - id: 248170
-    prefix: '4002439'
+  - id: 507125
+    prefix: '403439'
     number_min_length: 8
     number_max_length: 8
-    uuid: bb0b4191-e0c3-412e-9910-9f822475419a
+    uuid: f1f63b0b-3eaa-4926-af59-f03ff553f889
     country_id: *ro
     network_id: *ro_ialomita_region
-  - id: 248173
-    prefix: '400244'
+  - id: 507126
+    prefix: '40344'
     number_min_length: 11
     number_max_length: 11
-    uuid: dfb92ffb-674b-4c05-9bc1-47382c738f3d
+    uuid: bb32c41c-c484-492f-87f4-9fcf9dafe4a9
     country_id: *ro
     network_id: *ro_prahova_region
-  - id: 248180
-    prefix: '4002449'
+  - id: 507127
+    prefix: '403449'
     number_min_length: 8
     number_max_length: 8
-    uuid: 4b647059-d49f-4957-8669-f2530a2f1f75
+    uuid: f121dde2-9d57-43a1-9bc8-a0fda0df6fad
     country_id: *ro
     network_id: *ro_prahova_region
-  - id: 248183
-    prefix: '400245'
+  - id: 507128
+    prefix: '40345'
     number_min_length: 11
     number_max_length: 11
-    uuid: 12bc0d8c-5f99-4ee0-be93-1852c6120158
+    uuid: 08020043-7f21-4dae-8eb8-cf114dace9c9
     country_id: *ro
     network_id: *ro_dambovita_region
-  - id: 248195
-    prefix: '4002459'
+  - id: 507129
+    prefix: '403459'
     number_min_length: 8
     number_max_length: 8
-    uuid: f418b0ea-9bb5-44ba-8f06-359a762b3efe
+    uuid: dd906cf6-cf42-4728-88da-cb52fe3e7072
     country_id: *ro
     network_id: *ro_dambovita_region
-  - id: 248197
-    prefix: '400246'
+  - id: 507130
+    prefix: '40346'
     number_min_length: 11
     number_max_length: 11
-    uuid: b99003ee-edde-47b2-9d11-622d2e4bc830
+    uuid: fb726f29-c4f9-4301-a352-faffb65cbafc
     country_id: *ro
     network_id: *ro_giurgiu_region
-  - id: 248201
-    prefix: '4002469'
+  - id: 507131
+    prefix: '403469'
     number_min_length: 8
     number_max_length: 8
-    uuid: 7ba14f31-7847-4a9d-acba-844b7865175a
+    uuid: e323fa67-7a5b-4da1-949e-2561bc7d35a8
     country_id: *ro
     network_id: *ro_giurgiu_region
-  - id: 248204
-    prefix: '400247'
+  - id: 507132
+    prefix: '40347'
     number_min_length: 11
     number_max_length: 11
-    uuid: b8d303a6-d0bb-4395-b95d-ef8e1ad54322
+    uuid: 50679add-fd73-4b42-b982-237afccb38d9
     country_id: *ro
     network_id: *ro_teleorman_region
-  - id: 248218
-    prefix: '4002479'
+  - id: 507133
+    prefix: '403479'
     number_min_length: 8
     number_max_length: 8
-    uuid: 7fbd7687-c03f-4528-ae48-72a1268ed4f9
+    uuid: 5b528a7d-5e6b-4afc-9146-f9a6f8a09a46
     country_id: *ro
     network_id: *ro_teleorman_region
-  - id: 248221
-    prefix: '400248'
+  - id: 507134
+    prefix: '40348'
     number_min_length: 11
     number_max_length: 11
-    uuid: cd33e140-a9f7-43f3-931f-b4f5a929f452
+    uuid: 61a8624f-62bb-4bc5-b373-7fbe157bfb6d
     country_id: *ro
     network_id: *ro_arges_region
-  - id: 248233
-    prefix: '4002489'
+  - id: 507135
+    prefix: '403489'
     number_min_length: 8
     number_max_length: 8
-    uuid: 95eed723-bee4-4519-8d8c-7c5c4bdfd990
+    uuid: 56ad789f-2634-481f-a8a7-0df04913e59f
     country_id: *ro
     network_id: *ro_arges_region
-  - id: 248236
-    prefix: '400249'
+  - id: 507136
+    prefix: '40349'
     number_min_length: 11
     number_max_length: 11
-    uuid: 829f0c2a-173d-4678-a6fc-9efd2ab7f9f0
+    uuid: 8bd450c2-70c0-4b16-a4e9-d2d54db5f082
     country_id: *ro
     network_id: *ro_olt_region
-  - id: 248250
-    prefix: '4002499'
+  - id: 507137
+    prefix: '403499'
     number_min_length: 8
     number_max_length: 8
-    uuid: ac187899-c3fa-4405-8166-143580481246
+    uuid: 88ba3e94-e944-4c60-bf61-254c63d1446a
     country_id: *ro
     network_id: *ro_olt_region
-  - id: 248276
-    prefix: '400250'
+  - id: 507143
+    prefix: '40350'
     number_min_length: 11
     number_max_length: 11
-    uuid: 165d1bb1-1712-4492-a3a3-2efe97cb380e
+    uuid: fdec2d50-2ca9-4c13-a7a8-32f545c630f6
     country_id: *ro
     network_id: *ro_valcea_region
-  - id: 248301
-    prefix: '4002509'
+  - id: 507144
+    prefix: '403509'
     number_min_length: 8
     number_max_length: 8
-    uuid: 23e3dba9-ccda-4fb9-aa7a-5c3f4ab869d6
+    uuid: ea49a86c-9eb3-4fc0-8d7b-5759e95909a0
     country_id: *ro
     network_id: *ro_valcea_region
-  - id: 248307
-    prefix: '400251'
+  - id: 507145
+    prefix: '40351'
     number_min_length: 11
     number_max_length: 11
-    uuid: 31d6bc7b-b7c4-4d3c-aa88-939a6d14f90e
+    uuid: 496d449d-ae54-42b3-90e1-5d7442c63008
     country_id: *ro
     network_id: *ro_dolj_region
-  - id: 248318
-    prefix: '4002519'
+  - id: 507146
+    prefix: '403519'
     number_min_length: 8
     number_max_length: 8
-    uuid: f8743f56-49b6-4c05-a228-74bc0bc2a188
+    uuid: bc3eca26-53ba-459c-a5eb-29408d3668db
     country_id: *ro
     network_id: *ro_dolj_region
-  - id: 248325
-    prefix: '400252'
+  - id: 507147
+    prefix: '40352'
     number_min_length: 11
     number_max_length: 11
-    uuid: 327a4e42-0c87-48c4-8327-cad9f0540603
+    uuid: 07d11782-887f-4e78-bd53-8caa339fdf89
     country_id: *ro
     network_id: *ro_mehedinti_region
-  - id: 248335
-    prefix: '4002529'
+  - id: 507148
+    prefix: '403529'
     number_min_length: 8
     number_max_length: 8
-    uuid: 3f638935-6438-425d-8217-61b4dd97c669
+    uuid: 60df8a44-1e17-4411-b954-885b97324595
     country_id: *ro
     network_id: *ro_mehedinti_region
-  - id: 248340
-    prefix: '400253'
+  - id: 507149
+    prefix: '40353'
     number_min_length: 11
     number_max_length: 11
-    uuid: 91de0720-b033-48c9-b698-0d39fb300fd3
+    uuid: e8094549-b5e4-4ae5-879f-46e3e38026a0
     country_id: *ro
     network_id: *ro_gorj_region
-  - id: 248354
-    prefix: '4002539'
+  - id: 507150
+    prefix: '403539'
     number_min_length: 8
     number_max_length: 8
-    uuid: d331472e-d57a-4f7f-84d5-1f8609f419e1
+    uuid: 5ea033c3-a088-44ac-97df-ca7473ae603d
     country_id: *ro
     network_id: *ro_gorj_region
-  - id: 248358
-    prefix: '400254'
+  - id: 507151
+    prefix: '40354'
     number_min_length: 11
     number_max_length: 11
-    uuid: 68ef42a3-e6de-4fe9-bddc-ba09052636e6
+    uuid: 33a3a85c-29e8-4c18-b9e6-3a5a5e528404
     country_id: *ro
     network_id: *ro_hunedoara_region
-  - id: 248381
-    prefix: '4002549'
+  - id: 507152
+    prefix: '403549'
     number_min_length: 8
     number_max_length: 8
-    uuid: adfcaf8e-5926-43e7-a3ec-1efeebd61def
+    uuid: 02a5b5b3-107b-4069-8326-49c68174d66d
     country_id: *ro
     network_id: *ro_hunedoara_region
-  - id: 248387
-    prefix: '400255'
+  - id: 507153
+    prefix: '40355'
     number_min_length: 11
     number_max_length: 11
-    uuid: bcb9aa52-aece-4e76-888c-fe6ceca9217e
+    uuid: 52a21697-aa60-4e75-96c8-8236f327ab60
     country_id: *ro
     network_id: *ro_caras_severin_region
-  - id: 248407
-    prefix: '4002559'
+  - id: 507154
+    prefix: '403559'
     number_min_length: 8
     number_max_length: 8
-    uuid: 30c9803e-82a0-4291-bba2-5e662e47fe28
+    uuid: ca03a371-7384-4ad3-89a8-e2809bdb99f7
     country_id: *ro
     network_id: *ro_caras_severin_region
-  - id: 248412
-    prefix: '400256'
+  - id: 507155
+    prefix: '40356'
     number_min_length: 11
     number_max_length: 11
-    uuid: e990b4b7-8454-4704-b3e7-4aa38e223fbe
+    uuid: 0fd298e2-0e7d-4e3f-b052-ccc1f8d89da8
     country_id: *ro
     network_id: *ro_timis_region
-  - id: 248418
-    prefix: '4002569'
+  - id: 507156
+    prefix: '403569'
     number_min_length: 8
     number_max_length: 8
-    uuid: 1f0e47be-f58c-4e0f-8b13-7b7690e11de6
+    uuid: 4b57c5ca-9605-430c-bdc1-a09d9196f730
     country_id: *ro
     network_id: *ro_timis_region
-  - id: 248422
-    prefix: '400257'
+  - id: 507157
+    prefix: '40357'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6295fc8d-8ca1-43f0-b10a-77b9431a7688
+    uuid: 22f5e7f4-47c6-474f-aad4-7466997a2559
     country_id: *ro
     network_id: *ro_arad_region
-  - id: 248427
-    prefix: '4002579'
+  - id: 507158
+    prefix: '403579'
     number_min_length: 8
     number_max_length: 8
-    uuid: 027abe84-d93a-429b-a643-984eabed10f7
+    uuid: 80c2004e-1164-4498-8795-8211eb6fa26c
     country_id: *ro
     network_id: *ro_arad_region
-  - id: 248430
-    prefix: '400258'
+  - id: 507159
+    prefix: '40358'
     number_min_length: 11
     number_max_length: 11
-    uuid: ff1cdeb2-be79-40dd-99a4-553bc6e7c22d
+    uuid: a169a4ed-cfb4-4c03-821b-caf5f310ff71
     country_id: *ro
     network_id: *ro_alba_region
-  - id: 248442
-    prefix: '4002589'
+  - id: 507160
+    prefix: '403589'
     number_min_length: 8
     number_max_length: 8
-    uuid: bf7d3fad-367b-4697-a3aa-af89342bc405
+    uuid: 7c1769b6-f93e-432b-ade7-a731604f2abe
     country_id: *ro
     network_id: *ro_alba_region
-  - id: 248445
-    prefix: '400259'
+  - id: 507161
+    prefix: '40359'
     number_min_length: 11
     number_max_length: 11
-    uuid: c478839e-5ce1-4bcd-9486-26280ce6905d
+    uuid: c139120e-4b6a-4392-890e-b126ea8cb858
     country_id: *ro
     network_id: *ro_bihor_region
-  - id: 248465
-    prefix: '4002599'
+  - id: 507162
+    prefix: '403599'
     number_min_length: 8
     number_max_length: 8
-    uuid: f939907a-2a94-4f05-b1d1-78d7e5453d84
+    uuid: dd4ce25e-4336-4cd4-9d6d-0dc84cfed0f9
     country_id: *ro
     network_id: *ro_bihor_region
-  - id: 248487
-    prefix: '400260'
+  - id: 507166
+    prefix: '40360'
     number_min_length: 11
     number_max_length: 11
-    uuid: 543289a6-9ead-49cb-8606-3eed84c3fa91
+    uuid: b449f126-c15b-48ef-a62a-392ffd97a36f
     country_id: *ro
     network_id: *ro_salaj_region
-  - id: 248489
-    prefix: '4002609'
+  - id: 507167
+    prefix: '403609'
     number_min_length: 8
     number_max_length: 8
-    uuid: 10acbe09-19ef-4b19-8f1b-231852225b30
+    uuid: 9f1af629-3f6a-43fe-994b-e4c394ac7661
     country_id: *ro
     network_id: *ro_salaj_region
-  - id: 248496
-    prefix: '400261'
+  - id: 507168
+    prefix: '40361'
     number_min_length: 11
     number_max_length: 11
-    uuid: a62347c7-1f9c-4f38-9599-436420266612
+    uuid: 7f23234f-cf44-4cf2-be17-5e2cd4fbc6bf
     country_id: *ro
     network_id: *ro_satu_mare_region
-  - id: 248498
-    prefix: '4002619'
+  - id: 507169
+    prefix: '403619'
     number_min_length: 8
     number_max_length: 8
-    uuid: 5e0c1136-d15c-4e31-b4df-3d7f612e0830
+    uuid: 9a1e69a0-b741-4c61-9e25-8e324b629c39
     country_id: *ro
     network_id: *ro_satu_mare_region
-  - id: 248505
-    prefix: '400262'
+  - id: 507170
+    prefix: '40362'
     number_min_length: 11
     number_max_length: 11
-    uuid: e2eed44d-3946-4596-a4a9-f89ea5c2b57c
+    uuid: 5a3ebf4f-e6d3-4cf2-9c10-700b0aabb26c
     country_id: *ro
     network_id: *ro_maramures_region
-  - id: 248512
-    prefix: '4002629'
+  - id: 507171
+    prefix: '403629'
     number_min_length: 8
     number_max_length: 8
-    uuid: 90545903-ec0d-43da-aee5-766b26f8853a
+    uuid: 7ca11484-003d-4355-a53f-c64e99394f52
     country_id: *ro
     network_id: *ro_maramures_region
-  - id: 248520
-    prefix: '400263'
+  - id: 507172
+    prefix: '40363'
     number_min_length: 11
     number_max_length: 11
-    uuid: e391afc7-b358-4fc2-aeb1-7650e884662c
+    uuid: 37a0e011-2854-4dee-911b-7e9978865057
     country_id: *ro
     network_id: *ro_bistrita_nasaud_region
-  - id: 248522
-    prefix: '4002639'
+  - id: 507173
+    prefix: '403639'
     number_min_length: 8
     number_max_length: 8
-    uuid: f47a8abe-06f2-46af-923c-722f1068a239
+    uuid: 7854257b-bd03-47e2-9dd7-2b3072ec3c98
     country_id: *ro
     network_id: *ro_bistrita_nasaud_region
-  - id: 248526
-    prefix: '400264'
+  - id: 507174
+    prefix: '40364'
     number_min_length: 11
     number_max_length: 11
-    uuid: 265b7bf7-cbbd-445f-b2f1-172a72568266
+    uuid: 35c9c452-d2f5-4393-b66d-92bcf148ae14
     country_id: *ro
     network_id: *ro_cluj_region
-  - id: 248532
-    prefix: '4002649'
+  - id: 507175
+    prefix: '403649'
     number_min_length: 8
     number_max_length: 8
-    uuid: 56dca4e4-f6fc-4ab4-a2c6-e819bbb080c2
+    uuid: 8047db2d-1baf-4d44-8b36-51d2b0e05ee5
     country_id: *ro
     network_id: *ro_cluj_region
-  - id: 248538
-    prefix: '400265'
+  - id: 507176
+    prefix: '40365'
     number_min_length: 11
     number_max_length: 11
-    uuid: b54cbd1b-d918-499d-aabf-713ed40537ad
+    uuid: 44162ab0-2977-4b10-a925-9da267df15f0
     country_id: *ro
     network_id: *ro_mures_region
-  - id: 248543
-    prefix: '4002659'
+  - id: 507177
+    prefix: '403659'
     number_min_length: 8
     number_max_length: 8
-    uuid: 0ade5235-163f-42d8-ad15-94986292bfd2
+    uuid: 526ff36a-5ae2-471e-8b00-520603a8eca3
     country_id: *ro
     network_id: *ro_mures_region
-  - id: 248549
-    prefix: '400266'
+  - id: 507178
+    prefix: '40366'
     number_min_length: 11
     number_max_length: 11
-    uuid: cfbcde1e-de3d-49c9-8f17-2034c71aa6ee
+    uuid: 13761f0e-9f63-458d-933c-0c8ef882542e
     country_id: *ro
     network_id: *ro_harghita_region
-  - id: 248557
-    prefix: '4002669'
+  - id: 507179
+    prefix: '403669'
     number_min_length: 8
     number_max_length: 8
-    uuid: a5e5c3b1-37ca-4003-ab91-4005861e5e92
+    uuid: 9806c42f-8f62-4e26-a02b-dc7917aa32a0
     country_id: *ro
     network_id: *ro_harghita_region
-  - id: 248562
-    prefix: '400267'
+  - id: 507180
+    prefix: '40367'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5e18ea25-633b-4e64-9783-4a0d5a53d72e
+    uuid: 89bcd653-8bb7-4110-b471-a498d60f5035
     country_id: *ro
     network_id: *ro_covasna_region
-  - id: 248563
-    prefix: '4002679'
+  - id: 507181
+    prefix: '403679'
     number_min_length: 8
     number_max_length: 8
-    uuid: 2f47e20b-70d8-4bd2-9daa-57d85025b284
+    uuid: e73507ef-a894-4302-8a1b-eec3ba49168c
     country_id: *ro
     network_id: *ro_covasna_region
-  - id: 248568
-    prefix: '400268'
+  - id: 507182
+    prefix: '40368'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a0dc9a5-38a4-400d-92c4-8193463a9ca1
+    uuid: f2f75873-24e2-4ed4-b7a2-562a28534d76
     country_id: *ro
     network_id: *ro_brasov_region
-  - id: 248583
-    prefix: '4002689'
+  - id: 507183
+    prefix: '403689'
     number_min_length: 8
     number_max_length: 8
-    uuid: f6952ddf-c190-4101-9a8f-a70e15abfb29
+    uuid: dd6a5fe0-0300-4ad5-a49a-1aac825fcea2
     country_id: *ro
     network_id: *ro_brasov_region
-  - id: 248591
-    prefix: '400269'
+  - id: 507184
+    prefix: '40369'
     number_min_length: 11
     number_max_length: 11
-    uuid: ba7b4f46-5705-4442-a0ee-9ac6d0866831
+    uuid: 8c8f8fbf-76b7-4702-9256-4e0236015b55
     country_id: *ro
     network_id: *ro_sibiu_region
-  - id: 248601
-    prefix: '4002699'
+  - id: 507185
+    prefix: '403699'
     number_min_length: 8
     number_max_length: 8
-    uuid: e8c4d2c6-6d10-4449-a149-4c23d4f576bc
+    uuid: 745bbc5b-e1ee-4be8-81fc-a5766d26ce2b
     country_id: *ro
     network_id: *ro_sibiu_region
-  - id: 248919
-    prefix: '4003'
+  - id: 507190
+    prefix: '4037'
     number_min_length: 11
     number_max_length: 11
-    uuid: 65a77bf1-2325-4776-ace4-d58c83de5945
+    uuid: 0a354eaa-1d17-481e-9cc0-59b06cf9b9d5
+    country_id: *ro
+    network_id: *ro_voip_region
+  - id: 507195
+    prefix: '4038'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 69c6fec9-4088-42d1-bdb4-6006f4b305f7
+    country_id: *ro
+    network_id: *ro_voip_region
+  - id: 507201
+    prefix: '4039'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 83e55ec4-74bb-4318-9b4f-26584822fe4c
+    country_id: *ro
+    network_id: *ro_voip_region
+  - id: 509090
+    prefix: '40219'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 34b4a78b-2411-4558-a834-609a596239de
+    country_id: *ro
+    network_id: *ro_bucuresti_bucharest_region
+  - id: 509096
+    prefix: '40230'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a6749d9-3843-4ecd-b61f-d230fd9c16ff
+    country_id: *ro
+    network_id: *ro_suceava_region
+  - id: 509097
+    prefix: '402309'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 009f3200-1ed0-4cbc-8b55-b74912bede85
+    country_id: *ro
+    network_id: *ro_suceava_region
+  - id: 509098
+    prefix: '40231'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e931ce4-703b-463f-a811-aeae96203ee2
+    country_id: *ro
+    network_id: *ro_botosani_region
+  - id: 509099
+    prefix: '402319'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f37479e7-e076-4503-800a-ea63ebc9be25
+    country_id: *ro
+    network_id: *ro_botosani_region
+  - id: 509100
+    prefix: '40232'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 82542ffa-0558-4b6b-a2af-7b6a2b9ac17e
+    country_id: *ro
+    network_id: *ro_iasi_region
+  - id: 509101
+    prefix: '402329'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 8c0e54fa-4697-4378-81dc-3dbe4955839f
+    country_id: *ro
+    network_id: *ro_iasi_region
+  - id: 509102
+    prefix: '40233'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58bf5494-1748-40a2-b11f-c2ead791f259
+    country_id: *ro
+    network_id: *ro_neamt_region
+  - id: 509103
+    prefix: '402339'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: a0daea1e-324d-4c57-aeb0-39d454d017cb
+    country_id: *ro
+    network_id: *ro_neamt_region
+  - id: 509104
+    prefix: '40234'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b07eef97-2917-46c2-9a12-422e99af65a6
+    country_id: *ro
+    network_id: *ro_bacau_region
+  - id: 509105
+    prefix: '402349'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 488a1940-8489-4f5c-a159-a855b449c473
+    country_id: *ro
+    network_id: *ro_bacau_region
+  - id: 509106
+    prefix: '40235'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a8d5d9ea-b48f-405f-bf7e-5415e72977ea
+    country_id: *ro
+    network_id: *ro_vaslui_region
+  - id: 509107
+    prefix: '402359'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9864c1dd-83f5-42d1-8769-f7e78b2ce723
+    country_id: *ro
+    network_id: *ro_vaslui_region
+  - id: 509108
+    prefix: '40236'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7417043a-7ae0-455c-8222-52b35e09a574
+    country_id: *ro
+    network_id: *ro_galati_region
+  - id: 509109
+    prefix: '402369'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: b36a3879-c22a-4d6e-9734-c22a48de4542
+    country_id: *ro
+    network_id: *ro_galati_region
+  - id: 509110
+    prefix: '40237'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8ae855d1-156f-42e0-846d-9d55bff968a7
+    country_id: *ro
+    network_id: *ro_vrancea_region
+  - id: 509112
+    prefix: '402379'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 0ca41ce2-3e54-4fc2-ae91-5dd98020c341
+    country_id: *ro
+    network_id: *ro_vrancea_region
+  - id: 509113
+    prefix: '40238'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 368abf73-be87-47d3-b8c9-ca80035ca18f
+    country_id: *ro
+    network_id: *ro_buzau_region
+  - id: 509114
+    prefix: '402389'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: eee4aa38-ab41-43aa-90da-d2b5660af709
+    country_id: *ro
+    network_id: *ro_buzau_region
+  - id: 509115
+    prefix: '40239'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ceacc556-b3ac-40b0-8ca2-d18e1c8721a2
+    country_id: *ro
+    network_id: *ro_braila_region
+  - id: 509116
+    prefix: '402399'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: a58eae46-d938-486a-bd6d-5948c273c282
+    country_id: *ro
+    network_id: *ro_braila_region
+  - id: 509120
+    prefix: '40240'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2fd092dd-305a-4246-b549-38b8ca793da1
+    country_id: *ro
+    network_id: *ro_tulcea_region
+  - id: 509121
+    prefix: '402409'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 36526122-da3c-48c0-bc1c-f2f7c387b24d
+    country_id: *ro
+    network_id: *ro_tulcea_region
+  - id: 509122
+    prefix: '40241'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e0aba244-20ea-4f9a-9462-20f0d7d55136
+    country_id: *ro
+    network_id: *ro_constanta_region
+  - id: 509123
+    prefix: '402419'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 0a1d3953-0d9c-439a-a68e-c5481c3de025
+    country_id: *ro
+    network_id: *ro_constanta_region
+  - id: 509124
+    prefix: '40242'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73014aa0-5db4-4d17-84bf-b54467fd7c6c
+    country_id: *ro
+    network_id: *ro_calarasi_region
+  - id: 509125
+    prefix: '402429'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c38bebbc-4669-448a-adad-9bdbb4955c35
+    country_id: *ro
+    network_id: *ro_calarasi_region
+  - id: 509126
+    prefix: '40243'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 100bca4c-c2c6-4825-9523-7f7faf0a8d09
+    country_id: *ro
+    network_id: *ro_ialomita_region
+  - id: 509127
+    prefix: '402439'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 85dd7565-7a5a-49bf-b347-626aa3e78efc
+    country_id: *ro
+    network_id: *ro_ialomita_region
+  - id: 509128
+    prefix: '40244'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0efb4b8a-f03e-4336-a930-9271da9d0ce7
+    country_id: *ro
+    network_id: *ro_prahova_region
+  - id: 509129
+    prefix: '402449'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 146370cb-d4ba-472a-a018-cd5942ac2f3e
+    country_id: *ro
+    network_id: *ro_prahova_region
+  - id: 509130
+    prefix: '40245'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 133a369b-b109-49f3-8e57-34506632bb97
+    country_id: *ro
+    network_id: *ro_dambovita_region
+  - id: 509131
+    prefix: '402459'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 87016855-798e-4d2a-a77c-98255267aa0a
+    country_id: *ro
+    network_id: *ro_dambovita_region
+  - id: 509132
+    prefix: '40246'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3eaa8ee9-0ffc-4660-ba21-894c7879ad59
+    country_id: *ro
+    network_id: *ro_giurgiu_region
+  - id: 509133
+    prefix: '402469'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 2e989804-9c37-49c8-910f-29887749cad7
+    country_id: *ro
+    network_id: *ro_giurgiu_region
+  - id: 509134
+    prefix: '40247'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8cca3343-0f65-47f1-9493-b532078491f3
+    country_id: *ro
+    network_id: *ro_teleorman_region
+  - id: 509135
+    prefix: '402479'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: fc2f4994-be0e-4dfa-ab3a-8a658a02a6cb
+    country_id: *ro
+    network_id: *ro_teleorman_region
+  - id: 509136
+    prefix: '40248'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b308f435-c260-4bd1-af9f-bcb8fc0bccc3
+    country_id: *ro
+    network_id: *ro_arges_region
+  - id: 509137
+    prefix: '402489'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: ddbd1962-cf4b-459d-8e1c-16afd1ebe99c
+    country_id: *ro
+    network_id: *ro_arges_region
+  - id: 509138
+    prefix: '40249'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ead44609-eef4-491c-b36c-9c68e324c9d2
+    country_id: *ro
+    network_id: *ro_olt_region
+  - id: 509139
+    prefix: '402499'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 4ef918f6-0559-4365-b83a-057b339f0a4f
+    country_id: *ro
+    network_id: *ro_olt_region
+  - id: 509142
+    prefix: '40250'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 51ce21e2-5ea9-4289-9694-40ffd0d93f49
+    country_id: *ro
+    network_id: *ro_valcea_region
+  - id: 509143
+    prefix: '402509'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9fe2b99e-c59e-4eb7-b864-b45f2296f2d7
+    country_id: *ro
+    network_id: *ro_valcea_region
+  - id: 509144
+    prefix: '40251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e59e1da-c146-4d02-91e3-7b0fd271cfbf
+    country_id: *ro
+    network_id: *ro_dolj_region
+  - id: 509145
+    prefix: '402519'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 93555680-4d96-4b80-8cca-5b3b48c29a25
+    country_id: *ro
+    network_id: *ro_dolj_region
+  - id: 509146
+    prefix: '40252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cdfdc188-273e-4e67-af3c-faac61b4909d
+    country_id: *ro
+    network_id: *ro_mehedinti_region
+  - id: 509147
+    prefix: '402529'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: fab5089d-cc48-431b-91a8-601111b2828e
+    country_id: *ro
+    network_id: *ro_mehedinti_region
+  - id: 509148
+    prefix: '40253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16b17b8c-3ca1-402c-b83a-186eabc19be1
+    country_id: *ro
+    network_id: *ro_gorj_region
+  - id: 509149
+    prefix: '402539'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 73737b9c-83c2-406d-97a0-e6af82b1a875
+    country_id: *ro
+    network_id: *ro_gorj_region
+  - id: 509150
+    prefix: '40254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3e455e9c-3943-416f-83d2-c1be6110f442
+    country_id: *ro
+    network_id: *ro_hunedoara_region
+  - id: 509151
+    prefix: '402549'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 82971f77-0a02-4121-b996-00277a06b85f
+    country_id: *ro
+    network_id: *ro_hunedoara_region
+  - id: 509152
+    prefix: '40255'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0bfb84c8-e05a-48f8-b676-3a2efc5a9beb
+    country_id: *ro
+    network_id: *ro_caras_severin_region
+  - id: 509153
+    prefix: '402559'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 0493a462-6c24-47ff-aa1c-d58bc4e167f4
+    country_id: *ro
+    network_id: *ro_caras_severin_region
+  - id: 509154
+    prefix: '40256'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 987fcf8d-3574-4516-9c21-d6e18b63342f
+    country_id: *ro
+    network_id: *ro_timis_region
+  - id: 509155
+    prefix: '402569'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: eceb76ad-b3af-4d95-8045-3f0e6c0f9e6b
+    country_id: *ro
+    network_id: *ro_timis_region
+  - id: 509156
+    prefix: '40257'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f53647e8-8d61-4d07-9fc2-41fa35940fc4
+    country_id: *ro
+    network_id: *ro_arad_region
+  - id: 509157
+    prefix: '402579'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e508b9b9-f806-4d18-ae4e-a89b0b996d29
+    country_id: *ro
+    network_id: *ro_arad_region
+  - id: 509158
+    prefix: '40258'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ad71c704-8ef9-4de7-a83d-b28a562b41f2
+    country_id: *ro
+    network_id: *ro_alba_region
+  - id: 509159
+    prefix: '402589'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 0ac8b74b-0a85-4a6b-8433-d08171c3f4a3
+    country_id: *ro
+    network_id: *ro_alba_region
+  - id: 509160
+    prefix: '40259'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8197e5e9-8e33-4a83-8041-8514e8c8755c
+    country_id: *ro
+    network_id: *ro_bihor_region
+  - id: 509161
+    prefix: '402599'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9fa0f9a9-9474-4922-ac41-e80b57dbac4e
+    country_id: *ro
+    network_id: *ro_bihor_region
+  - id: 509164
+    prefix: '40260'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a062533d-f956-4ad1-96e3-9341bbc200fc
+    country_id: *ro
+    network_id: *ro_salaj_region
+  - id: 509165
+    prefix: '402609'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c1ecbe89-1ddd-40e4-ae2c-2e283e028c07
+    country_id: *ro
+    network_id: *ro_salaj_region
+  - id: 509167
+    prefix: '40261'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 21a40697-092a-40e4-96ba-389b0d8c8ead
+    country_id: *ro
+    network_id: *ro_satu_mare_region
+  - id: 509168
+    prefix: '402619'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 662414ef-a84a-411c-bcde-d0f46772c0d6
+    country_id: *ro
+    network_id: *ro_satu_mare_region
+  - id: 509171
+    prefix: '40262'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b061866f-0f77-4e09-9ce0-3d374a4f0a10
+    country_id: *ro
+    network_id: *ro_maramures_region
+  - id: 509173
+    prefix: '402629'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7ae6a242-714a-4e81-bf25-8ff12eb1fd12
+    country_id: *ro
+    network_id: *ro_maramures_region
+  - id: 509176
+    prefix: '40263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: acb4ad42-b294-4c8e-b0e0-c55bd3e582c6
+    country_id: *ro
+    network_id: *ro_bistrita_nasaud_region
+  - id: 509177
+    prefix: '402639'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: bdaf6807-b0fb-4b81-9de2-82c358d78123
+    country_id: *ro
+    network_id: *ro_bistrita_nasaud_region
+  - id: 509178
+    prefix: '40264'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e6b0398a-1c79-43ee-bac4-35845666aa4f
+    country_id: *ro
+    network_id: *ro_cluj_region
+  - id: 509179
+    prefix: '402649'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1479fca7-fef8-490a-925e-2d83c35d659f
+    country_id: *ro
+    network_id: *ro_cluj_region
+  - id: 509181
+    prefix: '40265'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25a23ad4-d6a5-496a-9627-de2ccac4472d
+    country_id: *ro
+    network_id: *ro_mures_region
+  - id: 509182
+    prefix: '402659'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: c9bab3ca-2e59-4f11-b705-2ee9aef2f402
+    country_id: *ro
+    network_id: *ro_mures_region
+  - id: 509184
+    prefix: '40266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 15659615-b63a-45e1-b462-951ca0fba246
+    country_id: *ro
+    network_id: *ro_harghita_region
+  - id: 509185
+    prefix: '402669'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 77dc6074-2860-4751-b52d-4081d475c150
+    country_id: *ro
+    network_id: *ro_harghita_region
+  - id: 509187
+    prefix: '40267'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c71de418-20de-4b9c-8d21-148ace6b8e85
+    country_id: *ro
+    network_id: *ro_covasna_region
+  - id: 509188
+    prefix: '402679'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: bd7a999d-534f-4e52-b104-d3279805bc88
+    country_id: *ro
+    network_id: *ro_covasna_region
+  - id: 509189
+    prefix: '40268'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f57d55a-4fd6-446f-b65d-1bae05e6b245
+    country_id: *ro
+    network_id: *ro_brasov_region
+  - id: 509190
+    prefix: '402689'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 821b7638-3230-478f-82da-ae6c3cabd847
+    country_id: *ro
+    network_id: *ro_brasov_region
+  - id: 509193
+    prefix: '40269'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4f1dc46b-74f0-4c44-973a-4c8cf46163d0
+    country_id: *ro
+    network_id: *ro_sibiu_region
+  - id: 509194
+    prefix: '402699'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 56d55648-83b6-4f43-8f79-c6898eca2783
+    country_id: *ro
+    network_id: *ro_sibiu_region
+  - id: 509208
+    prefix: '403'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b17eaab7-4e3a-402b-92d5-bbf49fce1595
     country_id: *ro
     network_id: *ro_fixed
 # Mobile Prefixes
-  - id: 245422
-    prefix: '4006'
+  - id: 507276
+    prefix: '406'
     number_min_length: 11
     number_max_length: 11
-    uuid: 99d9d799-e6cb-41c1-a2b8-26ce7ac54bf8
+    uuid: 0f9ec658-19d3-4ae2-a5b7-631bca5feb26
     country_id: *ro
     network_id: *ro_mobile
-  - id: 245440
-    prefix: '40060'
+  - id: 507278
+    prefix: '4060'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4a7e96f2-fd64-41fb-acf6-a001aa3ea59d
+    uuid: c6ea2325-bdfd-443f-b161-9899e72153aa
     country_id: *ro
     network_id: *ro_mobile
-  - id: 245452
-    prefix: '4006000'
+  - id: 507281
+    prefix: '406000'
     number_min_length: 11
     number_max_length: 11
-    uuid: 51c07e68-ddc8-4d4f-8162-e153a64fe75b
+    uuid: d7d83b8a-a5a6-4c1b-afc4-e30fa8cb020c
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 250677
-    prefix: '4006300'
+  - id: 507369
+    prefix: '40620'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3941bf0c-acc6-4ba2-a290-701bf05d7b48
+    uuid: dd5fef8d-5321-4592-aed9-f59327120bf1
     country_id: *ro
-    network_id: *ro_digi_mobil_mobile
-  - id: 251037
-    prefix: '400640'
+    network_id: *ro_vodafone_mobile
+  - id: 507410
+    prefix: '407050'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0359c58c-ff18-4aed-9c25-af9329448371
-    country_id: *ro
-    network_id: *ro_orange_mobile
-  - id: 251617
-    prefix: '4007050'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 92cc47b5-b3ec-4a73-b06e-cde95007c7dc
+    uuid: aa50f434-5bce-4741-a58e-66c4c61bc5fe
     country_id: *ro
     network_id: *ro_iristel_mobile
-  - id: 251757
-    prefix: '400711'
+  - id: 507437
+    prefix: '40711'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9272bd04-bcae-49fe-b596-738fbeb3743b
+    uuid: f90f768f-b338-4fa8-ae1f-d871b8274a76
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 251776
-    prefix: '400712'
+  - id: 507439
+    prefix: '40712'
     number_min_length: 11
     number_max_length: 11
-    uuid: 686ce173-1e23-450a-a97c-df6fa89b232d
+    uuid: ca7edbde-70ed-4f8e-839b-ca6635e0aacc
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 251780
-    prefix: '400713'
+  - id: 507441
+    prefix: '40713'
     number_min_length: 11
     number_max_length: 11
-    uuid: 2fea2353-66be-48cb-b18a-80f5208ecef3
+    uuid: 93fa3b8f-30c7-47f5-8d33-347354848894
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 251831
-    prefix: '40072'
+  - id: 507449
+    prefix: '4072'
     number_min_length: 11
     number_max_length: 11
-    uuid: ef0b9599-6021-4499-beae-033abeb63754
+    uuid: 00884383-00e2-450d-bea1-b4cac695bbca
     country_id: *ro
     network_id: *ro_vodafone_mobile
-  - id: 251846
-    prefix: '4007220'
+  - id: 507451
+    prefix: '407220'
     number_min_length: 11
     number_max_length: 11
-    uuid: 0c343f1e-e201-48ed-9604-17d20fc311f1
+    uuid: 71b14b4b-8837-46e6-9401-6fac6fe69c5a
     country_id: *ro
     network_id: *ro_vodafone_mobile
-  - id: 251882
-    prefix: '40073'
+  - id: 507455
+    prefix: '4073'
     number_min_length: 11
     number_max_length: 11
-    uuid: 592c19a5-54fe-4d01-a9fc-ef2680f5e1c7
+    uuid: 1addcc1c-2aac-471d-ab5f-6ae034e3a4f1
     country_id: *ro
     network_id: *ro_vodafone_mobile
-  - id: 252069
-    prefix: '40074'
+  - id: 507574
+    prefix: '4074'
     number_min_length: 11
     number_max_length: 11
-    uuid: ddb18abf-fd8a-4268-9f23-f1bd148f0c5a
+    uuid: fad3c222-855c-4e4f-8e72-5bf403c282c1
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 252299
-    prefix: '4007440'
+  - id: 507775
+    prefix: '407440'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5313bab4-f361-4fbb-8b9f-219508d4443b
+    uuid: 3ef8dc5f-5f7c-4bca-8f8d-016cb9980cdd
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 252560
-    prefix: '40075'
+  - id: 507985
+    prefix: '4075'
     number_min_length: 11
     number_max_length: 11
-    uuid: aec285fe-c598-4bd1-a7a5-44a3d3ee6855
+    uuid: 75541f73-f25e-451d-b9c7-ed81fb81c694
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 254130
-    prefix: '400620'
+  - id: 509370
+    prefix: '406300'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4384c5a9-5439-41c7-a71f-a31130ab192f
-    country_id: *ro
-    network_id: *ro_vodafone_mobile
-  - id: 255273
-    prefix: '4007'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4fdcbf81-d2e6-48f8-ba86-1ce0ca198384
-    country_id: *ro
-    network_id: *ro_mobile
-  - id: 255302
-    prefix: '40070'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7f30ca9a-5806-4d26-b7d9-cbc623bbfa24
-    country_id: *ro
-    network_id: *ro_mobile
-  - id: 255458
-    prefix: '40076'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 20cdbca0-7c11-4c3c-89b4-2cfe95356f11
-    country_id: *ro
-    network_id: *ro_telekom_mobile
-  - id: 255505
-    prefix: '40076300'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a3c6d153-f35b-4301-87aa-1aee17a2b2bc
-    country_id: *ro
-    network_id: *ro_telekom_mobile
-  - id: 255542
-    prefix: '40076600'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 92fea572-a20c-4860-a843-9db6b2d9a25f
-    country_id: *ro
-    network_id: *ro_telekom_mobile
-  - id: 255640
-    prefix: '40077'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ad15be2c-a862-4a0f-838a-f0197f993788
+    uuid: 50d92153-18db-4453-90d6-6219e5ba29aa
     country_id: *ro
     network_id: *ro_digi_mobil_mobile
-  - id: 255658
-    prefix: '40077001'
+  - id: 509494
+    prefix: '40640'
     number_min_length: 11
     number_max_length: 11
-    uuid: aba20b3b-4aae-419e-8284-db1f0d0329fa
+    uuid: 520fd7f0-8618-4b86-9168-cbf1db8ed78f
+    country_id: *ro
+    network_id: *ro_orange_mobile
+  - id: 510039
+    prefix: '407'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e7df65ad-dbfa-4263-a836-576d03984977
+    country_id: *ro
+    network_id: *ro_mobile
+  - id: 510042
+    prefix: '4070'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01a52fe6-9817-4b69-8871-bd7d0dae5403
+    country_id: *ro
+    network_id: *ro_mobile
+  - id: 510185
+    prefix: '4076'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 99cf3dc0-1062-473b-a8da-99da37e3f148
+    country_id: *ro
+    network_id: *ro_telekom_mobile
+  - id: 510213
+    prefix: '4076300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b1ce2eb-f8e3-48c9-b5e9-a63c8220b36c
+    country_id: *ro
+    network_id: *ro_telekom_mobile
+  - id: 510244
+    prefix: '4076600'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 02e5b496-8640-466a-b39b-cfca00a979ca
+    country_id: *ro
+    network_id: *ro_telekom_mobile
+  - id: 510290
+    prefix: '4077'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e834e54f-be9b-4048-a348-c354288ade7d
     country_id: *ro
     network_id: *ro_digi_mobil_mobile
-  - id: 256104
-    prefix: '400780'
+  - id: 510295
+    prefix: '4077001'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4f391c15-cff9-42c0-b2d7-603b1ebc83b8
+    uuid: 0d61faea-e9db-4260-a799-9f4086347771
+    country_id: *ro
+    network_id: *ro_digi_mobil_mobile
+  - id: 510529
+    prefix: '40780'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e2a642e-c2fc-4450-a3ad-a6003be8332b
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 256184
-    prefix: '400783'
+  - id: 510583
+    prefix: '40783'
     number_min_length: 11
     number_max_length: 11
-    uuid: 942a46c7-37da-4227-819e-4f88410877b8
+    uuid: 5da4607a-f1e9-4a81-967c-08ea7acef484
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 256187
-    prefix: '4007830'
+  - id: 510585
+    prefix: '407830'
     number_min_length: 11
     number_max_length: 11
-    uuid: a9c46ca9-d2e5-48e8-b99f-71f7b41aaece
+    uuid: 3e29824c-a223-43c4-862c-1c9fe8e3b5b5
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256189
-    prefix: '4007831'
+  - id: 510587
+    prefix: '407831'
     number_min_length: 11
     number_max_length: 11
-    uuid: a6fe83fb-5a97-4275-bcc6-90422f40cd93
+    uuid: 00493a74-a8d1-4d69-ac37-10a8f8840d25
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256191
-    prefix: '4007832'
+  - id: 510589
+    prefix: '407832'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4ca1ab28-5860-4099-8e47-4a91f38765a1
+    uuid: 050511e3-b835-478b-bcfd-88a1ee20301d
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256193
-    prefix: '4007833'
+  - id: 510591
+    prefix: '407833'
     number_min_length: 11
     number_max_length: 11
-    uuid: 586dd95a-bed6-4a1d-9145-36c96cf7bf20
+    uuid: b4c792c1-9052-4952-9402-6f2291f136d9
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256206
-    prefix: '400784'
+  - id: 510602
+    prefix: '40784'
     number_min_length: 11
     number_max_length: 11
-    uuid: a20c305c-d283-4361-8a62-d1d0cea2bc90
+    uuid: 7100ef80-5cf7-42fa-b415-8f4a6e3e1490
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 256241
-    prefix: '400785'
+  - id: 510625
+    prefix: '40785'
     number_min_length: 11
     number_max_length: 11
-    uuid: 83116d68-4e78-4fc4-aa73-3bd7f3a25498
+    uuid: ae47bb91-c6c5-48b1-a3d7-634a4d574d98
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 256257
-    prefix: '400786'
+  - id: 510638
+    prefix: '40786'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5c19a113-e1f4-4218-a6f0-c1cfe600e64b
+    uuid: 875ecef9-96c7-480a-b61b-3552c789dfc6
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 256284
-    prefix: '4007870'
+  - id: 510660
+    prefix: '407870'
     number_min_length: 11
     number_max_length: 11
-    uuid: 895fa3f4-f9fd-4343-ae4e-a0a3dd739029
+    uuid: 9421a638-7d3c-4224-9a75-e3792dfe3f17
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 256286
-    prefix: '4007871'
+  - id: 510662
+    prefix: '407871'
     number_min_length: 11
     number_max_length: 11
-    uuid: 290916b5-122c-4a0b-8d39-3a5eac76467f
+    uuid: dd07422b-769f-4887-adf0-bac52ab8bf9a
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 256287
-    prefix: '4007872'
+  - id: 510663
+    prefix: '407872'
     number_min_length: 11
     number_max_length: 11
-    uuid: ce4957d2-7e41-45b2-a21f-e8ca236f2d24
+    uuid: b6746abc-4b4b-4613-9e36-1182b4112385
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256298
-    prefix: '4007873'
+  - id: 510674
+    prefix: '407873'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6a26e107-4d24-432c-95cb-512c2945e8f0
+    uuid: e16bbe71-b987-4d22-ad1c-be64e2fa7c86
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256309
-    prefix: '4007874'
+  - id: 510685
+    prefix: '407874'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3eaf2055-378d-4f38-9d03-e6e9c2acca54
+    uuid: ce11f2f9-a3d9-4daa-9049-e26015c1181b
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256320
-    prefix: '4007875'
+  - id: 510696
+    prefix: '407875'
     number_min_length: 11
     number_max_length: 11
-    uuid: a0ad063d-99ee-4c2d-bcf6-d17f23c31996
+    uuid: e4dd460e-cbb5-4e56-9bb9-e09dca48a834
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256322
-    prefix: '4007876'
+  - id: 510698
+    prefix: '407876'
     number_min_length: 11
     number_max_length: 11
-    uuid: ff35c632-1ec2-4ee7-a034-d80ed8efbac9
+    uuid: 70613be2-44cb-486e-a10c-e309ad4603a3
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256324
-    prefix: '4007877'
+  - id: 510700
+    prefix: '407877'
     number_min_length: 11
     number_max_length: 11
-    uuid: 24b56d2e-9ff6-45f7-8175-65fc98b60a9c
+    uuid: c80a5751-4faa-49fc-8a5d-91b4a7acb73f
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256326
-    prefix: '4007878'
+  - id: 510702
+    prefix: '407878'
     number_min_length: 11
     number_max_length: 11
-    uuid: 083fcfda-a91e-4a63-889a-a6a0b4ae8396
+    uuid: a2a7c089-ff6d-4621-8164-529978bb25e6
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256328
-    prefix: '4007879'
+  - id: 510704
+    prefix: '407879'
     number_min_length: 11
     number_max_length: 11
-    uuid: e59f67d9-c30d-4666-910c-09425d0dcc7d
+    uuid: be369de6-bb78-47a3-9db4-b3c323633407
     country_id: *ro
     network_id: *ro_orange_mobile
-  - id: 256332
-    prefix: '400788'
+  - id: 510707
+    prefix: '40788'
     number_min_length: 11
     number_max_length: 11
-    uuid: a3e50c84-2e08-4153-8fc7-d0aabe3ce295
+    uuid: 42dedd75-967d-467b-9306-5307a74ce422
     country_id: *ro
     network_id: *ro_telekom_mobile
-  - id: 256400
-    prefix: '400790'
+  - id: 510749
+    prefix: '40790'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7c7d114e-e11c-49fe-b30f-2367b6e51a23
+    uuid: 078bf2a0-a694-4424-a0b5-b5b8e9e3706a
     country_id: *ro
     network_id: *ro_vodafone_mobile
-  - id: 256451
-    prefix: '400791'
+  - id: 510761
+    prefix: '40791'
     number_min_length: 11
     number_max_length: 11
-    uuid: a710eb02-7872-426b-982f-ad4a98d3108e
+    uuid: b80442e5-df93-481d-8662-a2656665498b
     country_id: *ro
     network_id: *ro_vodafone_mobile
-  - id: 256479
-    prefix: '400792'
+  - id: 510777
+    prefix: '40792'
     number_min_length: 11
     number_max_length: 11
-    uuid: 755f10e9-ddf0-45ce-939d-822b2bd9a91f
+    uuid: a1954755-8c39-4675-a905-a018613a3577
     country_id: *ro
     network_id: *ro_vodafone_mobile
-  - id: 256539
-    prefix: '400793'
+  - id: 510797
+    prefix: '40793'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6e9b4489-8e51-410a-a56a-b8bd389d28fb
+    uuid: e991a284-c151-402c-baca-19d3037e9348
     country_id: *ro
     network_id: *ro_vodafone_mobile
-  - id: 256639
-    prefix: '400799'
+  - id: 510847
+    prefix: '40799'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8b4f5574-9ff8-4a71-b40d-af1e504eaec8
+    uuid: 9b2108ec-e8fa-46f9-b22a-26a534dc5a69
     country_id: *ro
     network_id: *ro_vodafone_mobile

@@ -1,51 +1,34 @@
 country_id: &az 15
 networks:
 # Mobile Networks
-  - id: &az_azercell_mobile 4659
-    name: AZ Azercell Mobile
-    uuid: 91460428-fe2b-48fa-a799-e6dd48eb6ba7
+  - id: &az_nar_mobile_mobile 14439
+    name: AZ Nar Mobile Mobile
+    uuid: fc6a2695-4adb-4a88-be8e-04ee4b70f11e
     type_id: 3
   - id: &az_bakcell_mobile 7939
     name: AZ Bakcell Mobile
     uuid: 09f6f850-40bc-4885-9a74-9d29e40cb8cf
     type_id: 3
-  - id: &az_naxtel_mobile 10523
-    name: AZ Naxtel Mobile
-    uuid: 4f6ecf82-732a-4c36-8582-b9534ae7be63
-    type_id: 3
-  - id: &az_nar_mobile_mobile 14439
-    name: AZ Nar Mobile Mobile
-    uuid: fc6a2695-4adb-4a88-be8e-04ee4b70f11e
+  - id: &az_azercell_mobile 4659
+    name: AZ Azercell Mobile
+    uuid: 91460428-fe2b-48fa-a799-e6dd48eb6ba7
     type_id: 3
   - id: &az_fonex_mobile 34308
     name: AZ Fonex Mobile
     uuid: 187b0acc-dad9-4b8a-9c93-c8408e136865
     type_id: 3
-# Supplementary services Networks
-  - id: &az_special_services 21359
-    name: AZ Special Services
-    uuid: cd1918db-f10d-48fa-b994-0efc3e83ca31
-    type_id: 13
-  - id: &az_operator_assistance_service 21554
-    name: AZ Operator Assistance Service
-    uuid: 47180c38-3d21-4178-85a5-6f8aa25936fe
-    type_id: 13
-  - id: &az_information_services 24873
-    name: AZ Information Services
-    uuid: 4473aacd-9ac2-46b3-be4e-358c1f2058eb
-    type_id: 13
-  - id: &az_interactive_calls 42085
-    name: AZ Interactive Calls
-    uuid: 3c727558-32d0-4984-a311-58ebdf43654b
-    type_id: 13
+  - id: &az_naxtel_mobile 10523
+    name: AZ Naxtel Mobile
+    uuid: 4f6ecf82-732a-4c36-8582-b9534ae7be63
+    type_id: 3
 # Fixed Networks
   - id: &az_baku_region 24862
     name: AZ Baku Region
     uuid: 483ab45d-01c4-4bbb-b156-6e1f71acd014
     type_id: 2
-  - id: &az_sumgayit_region 25541
-    name: AZ Sumgayit Region
-    uuid: b253ca07-d7f8-41d2-a923-45349a01b38e
+  - id: &az_fixed 37826
+    name: AZ Fixed
+    uuid: 23e5e5ab-02b9-41a1-a886-ed7106fcd05b
     type_id: 2
   - id: &az_barda_region 26726
     name: AZ Barda Region
@@ -86,6 +69,10 @@ networks:
   - id: &az_zardab_region 26735
     name: AZ Zardab Region
     uuid: 20f63156-770a-44bd-afb5-6d5ebc89bd3e
+    type_id: 2
+  - id: &az_sumgayit_region 25541
+    name: AZ Sumgayit Region
+    uuid: b253ca07-d7f8-41d2-a923-45349a01b38e
     type_id: 2
   - id: &az_hajigabul_region 27352
     name: AZ Hajigabul Region
@@ -231,6 +218,10 @@ networks:
     name: AZ Balakan Region
     uuid: d1358f09-d2c8-4cb5-8207-518b3d241a83
     type_id: 2
+  - id: &az_yardimli_region 29845
+    name: AZ Yardimli Region
+    uuid: af138d7d-7db9-4411-b207-6d223e6f3825
+    type_id: 2
   - id: &az_masalli_region 29131
     name: AZ Masalli Region
     uuid: bf884630-7dc1-4176-bfb7-2e11753412e1
@@ -283,6 +274,10 @@ networks:
     name: AZ Kalbajar Region
     uuid: 8fc9df33-de2c-4064-bb0b-445b9f98281e
     type_id: 2
+  - id: &az_aghdara_region 43520
+    name: AZ Aghdara Region
+    uuid: 727317fc-70f3-4e53-acdb-5141f1e5d972
+    type_id: 2
   - id: &az_khojavand_region 29531
     name: AZ Khojavand Region
     uuid: ed854bba-93cd-4b7a-a119-7509592336e0
@@ -298,10 +293,6 @@ networks:
   - id: &az_jabrayil_region 29534
     name: AZ Jabrayil Region
     uuid: 44d26597-c969-4108-a739-e2282fa116fa
-    type_id: 2
-  - id: &az_yardimli_region 29845
-    name: AZ Yardimli Region
-    uuid: af138d7d-7db9-4411-b207-6d223e6f3825
     type_id: 2
   - id: &az_nakhchivan_autonomous_republic_region 33648
     name: AZ Nakhchivan Autonomous Republic Region
@@ -343,40 +334,25 @@ networks:
     name: AZ Regions Region
     uuid: 26df0d3d-f2af-44ad-a6aa-d740b8a2ff1f
     type_id: 2
-  - id: &az_fixed 37826
-    name: AZ Fixed
-    uuid: 23e5e5ab-02b9-41a1-a886-ed7106fcd05b
-    type_id: 2
+# Supplementary services Networks
+  - id: &az_interactive_calls 42085
+    name: AZ Interactive Calls
+    uuid: 3c727558-32d0-4984-a311-58ebdf43654b
+    type_id: 13
+  - id: &az_special_services 21359
+    name: AZ Special Services
+    uuid: cd1918db-f10d-48fa-b994-0efc3e83ca31
+    type_id: 13
+  - id: &az_operator_assistance_service 21554
+    name: AZ Operator Assistance Service
+    uuid: 47180c38-3d21-4178-85a5-6f8aa25936fe
+    type_id: 13
+  - id: &az_information_services 24873
+    name: AZ Information Services
+    uuid: 4473aacd-9ac2-46b3-be4e-358c1f2058eb
+    type_id: 13
 network_prefixes:
 # Mobile Prefixes
-  - id: 54913
-    prefix: '99450'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ab467ff2-9efb-44dd-8643-47d30c76caab
-    country_id: *az
-    network_id: *az_azercell_mobile
-  - id: 62593
-    prefix: '99451'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6c53446b-29c1-42c8-9a59-6d714b3ac310
-    country_id: *az
-    network_id: *az_azercell_mobile
-  - id: 78108
-    prefix: '99455'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3381202e-1aa0-47d8-8689-d17878726993
-    country_id: *az
-    network_id: *az_bakcell_mobile
-  - id: 95204
-    prefix: '99460'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2ddc8c94-94cf-44ae-8577-571ed2690c2d
-    country_id: *az
-    network_id: *az_naxtel_mobile
   - id: 150228
     prefix: '99470'
     number_min_length: 12
@@ -412,51 +388,49 @@ network_prefixes:
     uuid: 005d68e7-5ed1-4dff-8242-e5ec3b1cf66d
     country_id: *az
     network_id: *az_fonex_mobile
-# Country code Prefixes
+  - id: 54913
+    prefix: '99450'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ab467ff2-9efb-44dd-8643-47d30c76caab
+    country_id: *az
+    network_id: *az_azercell_mobile
+  - id: 62593
+    prefix: '99451'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6c53446b-29c1-42c8-9a59-6d714b3ac310
+    country_id: *az
+    network_id: *az_azercell_mobile
+  - id: 78108
+    prefix: '99455'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3381202e-1aa0-47d8-8689-d17878726993
+    country_id: *az
+    network_id: *az_bakcell_mobile
+  - id: 95204
+    prefix: '99460'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2ddc8c94-94cf-44ae-8577-571ed2690c2d
+    country_id: *az
+    network_id: *az_naxtel_mobile
+# Fixed Prefixes
+  - id: 443780
+    prefix: '99488'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8f9c7e52-11fd-47dd-8640-6f44b10ac46f
+    country_id: *az
+    network_id: *az_baku_region
   - id: 241947
     prefix: '994'
     number_min_length: 4
     number_max_length: 100
     uuid: d0e5e30f-3dd2-4df9-95c3-28fb2ceee748
     country_id: *az
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242352
-    prefix: '9941'
-    number_min_length: 5
-    number_max_length: 6
-    uuid: eaed0d28-ffcd-462e-a9e2-6899e76b9ccf
-    country_id: *az
-    network_id: *az_special_services
-  - id: 242579
-    prefix: '99411'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: f6775334-2d7f-48a3-a479-fd9f6ee0b878
-    country_id: *az
-    network_id: *az_operator_assistance_service
-  - id: 257077
-    prefix: '9949'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 61d4d7e4-14cb-44a7-89b1-a27a9474b8f4
-    country_id: *az
-    network_id: *az_special_services
-  - id: 259238
-    prefix: '99412109'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0f6c866a-0ba5-49f9-887f-4027cb17ecd5
-    country_id: *az
-    network_id: *az_information_services
-  - id: 454600
-    prefix: '994900200'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7beebb43-4edf-4bc3-94cf-91ba4a3134e0
-    country_id: *az
-    network_id: *az_interactive_calls
-# Fixed Prefixes
+    network_id: *az_fixed
   - id: 259221
     prefix: '99412'
     number_min_length: 12
@@ -464,13 +438,6 @@ network_prefixes:
     uuid: ea2b71bf-307c-4fe5-8ced-77e8d42a3723
     country_id: *az
     network_id: *az_baku_region
-  - id: 260500
-    prefix: '99418'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 03e7ae7a-853c-4a08-89fe-120734009a33
-    country_id: *az
-    network_id: *az_sumgayit_region
   - id: 267170
     prefix: '9942020'
     number_min_length: 12
@@ -541,6 +508,13 @@ network_prefixes:
     uuid: 81b6d47d-7948-44e7-a0cb-b106f49e88e0
     country_id: *az
     network_id: *az_zardab_region
+  - id: 260500
+    prefix: '99418'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 03e7ae7a-853c-4a08-89fe-120734009a33
+    country_id: *az
+    network_id: *az_sumgayit_region
   - id: 274250
     prefix: '9942120'
     number_min_length: 12
@@ -807,6 +781,13 @@ network_prefixes:
     uuid: 0673d212-20df-44f9-a32a-435291a558f6
     country_id: *az
     network_id: *az_balakan_region
+  - id: 301985
+    prefix: '9942520'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5de2df2b-6b40-4047-8d57-027ccbfe11c9
+    country_id: *az
+    network_id: *az_yardimli_region
   - id: 296808
     prefix: '9942521'
     number_min_length: 12
@@ -898,6 +879,13 @@ network_prefixes:
     uuid: 69bcd804-f94e-4678-b763-9ea285537e32
     country_id: *az
     network_id: *az_kalbajar_region
+  - id: 513208
+    prefix: '9942628'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 430b41d3-848e-4481-9012-9f5e04ac78b2
+    country_id: *az
+    network_id: *az_aghdara_region
   - id: 299821
     prefix: '9942629'
     number_min_length: 12
@@ -926,13 +914,6 @@ network_prefixes:
     uuid: 88d4b2df-476a-4bb9-abbc-dfe524089d45
     country_id: *az
     network_id: *az_jabrayil_region
-  - id: 301985
-    prefix: '9942520'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5de2df2b-6b40-4047-8d57-027ccbfe11c9
-    country_id: *az
-    network_id: *az_yardimli_region
   - id: 345935
     prefix: '99436'
     number_min_length: 12
@@ -1031,10 +1012,39 @@ network_prefixes:
     uuid: a1aeaad3-a918-4449-af93-700946820d61
     country_id: *az
     network_id: *az_fixed
-  - id: 443780
-    prefix: '99488'
+# Supplementary services Prefixes
+  - id: 454600
+    prefix: '994900200'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8f9c7e52-11fd-47dd-8640-6f44b10ac46f
+    uuid: 7beebb43-4edf-4bc3-94cf-91ba4a3134e0
     country_id: *az
-    network_id: *az_baku_region
+    network_id: *az_interactive_calls
+  - id: 242352
+    prefix: '9941'
+    number_min_length: 5
+    number_max_length: 6
+    uuid: eaed0d28-ffcd-462e-a9e2-6899e76b9ccf
+    country_id: *az
+    network_id: *az_special_services
+  - id: 242579
+    prefix: '99411'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: f6775334-2d7f-48a3-a479-fd9f6ee0b878
+    country_id: *az
+    network_id: *az_operator_assistance_service
+  - id: 257077
+    prefix: '9949'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 61d4d7e4-14cb-44a7-89b1-a27a9474b8f4
+    country_id: *az
+    network_id: *az_special_services
+  - id: 259238
+    prefix: '99412109'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0f6c866a-0ba5-49f9-887f-4027cb17ecd5
+    country_id: *az
+    network_id: *az_information_services

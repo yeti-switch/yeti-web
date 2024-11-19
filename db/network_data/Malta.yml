@@ -1,13 +1,13 @@
 country_id: &mt 132
 networks:
 # Supplementary services Networks
-  - id: &mt_routing_number_portability 21322
-    name: MT Routing Number Portability
-    uuid: c78575ef-19fd-478e-9ccf-8de3e0f243e0
-    type_id: 13
   - id: &mt_special_services 21450
     name: MT Special Services
     uuid: 271f8be4-d50d-4f70-b234-c77d62304e80
+    type_id: 13
+  - id: &mt_routing_number_portability 21322
+    name: MT Routing Number Portability
+    uuid: c78575ef-19fd-478e-9ccf-8de3e0f243e0
     type_id: 13
   - id: &mt_operator_assistance_services 21611
     name: MT Operator Assistance Services
@@ -50,6 +50,15 @@ networks:
     name: MT Home Country Direct
     uuid: bd5b0174-bad0-42ec-996d-7a87fecfa21f
     type_id: 13
+# Fixed Networks
+  - id: &mt_fixed 22745
+    name: MT Fixed
+    uuid: 60b640a9-7fb7-462c-b009-af630e6314b8
+    type_id: 2
+  - id: &mt_internet_access_region 22832
+    name: MT Internet Access Region
+    uuid: 019327bb-77b7-4d5c-a029-8137535af54f
+    type_id: 2
 # Mobile Networks
   - id: &mt_melita_mobile_mobile 22170
     name: MT Melita Mobile Mobile
@@ -67,30 +76,20 @@ networks:
     name: MT Mobile
     uuid: 496812ee-7267-47de-9a92-45c0366fb5b0
     type_id: 3
-# Fixed Networks
-  - id: &mt_fixed 22745
-    name: MT Fixed
-    uuid: 60b640a9-7fb7-462c-b009-af630e6314b8
-    type_id: 2
-  - id: &mt_internet_access_region 22832
-    name: MT Internet Access Region
-    uuid: 019327bb-77b7-4d5c-a029-8137535af54f
-    type_id: 2
 # Paging Networks
   - id: &mt_paging 23583
     name: MT Paging
     uuid: d9a6f916-cdc8-4146-81bd-c5ac8ba93032
     type_id: 12
 network_prefixes:
-# Country code Prefixes
-  - id: 242054
-    prefix: '356'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: c6700c03-ecdf-4641-8645-156bf4a183a1
-    country_id: *mt
-    network_id: null
 # Supplementary services Prefixes
+  - id: 247420
+    prefix: '3562'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 9c03cfdb-997b-4911-9ea4-eccdfd6a39b8
+    country_id: *mt
+    network_id: *mt_special_services
   - id: 242253
     prefix: '35605'
     number_min_length: 7
@@ -147,13 +146,6 @@ network_prefixes:
     uuid: de9d8a93-2263-40e1-819a-f5080663f874
     country_id: *mt
     network_id: *mt_machine_to_machine_m2m___internet_of_things_iot___non_interpersonal_communications_services_non_ics_services
-  - id: 247420
-    prefix: '3562'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 9c03cfdb-997b-4911-9ea4-eccdfd6a39b8
-    country_id: *mt
-    network_id: *mt_special_services
   - id: 249624
     prefix: '35650'
     number_min_length: 11
@@ -217,6 +209,77 @@ network_prefixes:
     uuid: 03fa817d-7382-4ebf-98dc-f3f9e15e3f08
     country_id: *mt
     network_id: *mt_home_country_direct
+# Fixed Prefixes
+  - id: 247455
+    prefix: '35620'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 55ddc7e5-294d-4895-b238-deb8df28523a
+    country_id: *mt
+    network_id: *mt_fixed
+  - id: 247630
+    prefix: '35621'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f7a10bc-c902-4504-8d02-3ae957207a0b
+    country_id: *mt
+    network_id: *mt_fixed
+  - id: 242054
+    prefix: '356'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: c6700c03-ecdf-4641-8645-156bf4a183a1
+    country_id: *mt
+    network_id: *mt_fixed
+  - id: 247706
+    prefix: '3562186'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e741f94f-9394-4f38-8857-f72a1072398d
+    country_id: *mt
+    network_id: *mt_internet_access_region
+  - id: 247707
+    prefix: '3562188'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0c0771ab-4051-40ea-806a-d2e2594edb41
+    country_id: *mt
+    network_id: *mt_internet_access_region
+  - id: 247726
+    prefix: '35622'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c4848a2-98cc-40de-90a3-08bf6bb5ec39
+    country_id: *mt
+    network_id: *mt_fixed
+  - id: 247921
+    prefix: '35623'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b57b8f68-e2ed-4cc1-be2c-5afe58e19d83
+    country_id: *mt
+    network_id: *mt_fixed
+  - id: 248262
+    prefix: '35625'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 177ce594-7513-4d14-8871-7e7aecb169da
+    country_id: *mt
+    network_id: *mt_fixed
+  - id: 248473
+    prefix: '35626'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e39c0d4a-b853-4ff3-8d39-7724678b400d
+    country_id: *mt
+    network_id: *mt_fixed
+  - id: 248616
+    prefix: '35627'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58db9eb7-5cd7-4ae6-89bc-5f8b6459df47
+    country_id: *mt
+    network_id: *mt_fixed
 # Mobile Prefixes
   - id: 243995
     prefix: '35640001'
@@ -281,46 +344,53 @@ network_prefixes:
     uuid: c6e4ebb2-10c5-4441-8c56-41abf38f7a9a
     country_id: *mt
     network_id: *mt_melita_mobile_mobile
-  - id: 244005
-    prefix: '35640010'
+  - id: 507210
+    prefix: '3564001'
     number_min_length: 13
     number_max_length: 13
-    uuid: 7b69efac-518b-46f8-942c-cb592edb8c88
+    uuid: f3995aab-1361-4193-9789-75f5d1911a98
     country_id: *mt
     network_id: *mt_melita_mobile_mobile
-  - id: 244006
-    prefix: '35640011'
+  - id: 507211
+    prefix: '35640020'
     number_min_length: 13
     number_max_length: 13
-    uuid: 483f5290-c5b7-48d2-bfbe-99db69607a2e
+    uuid: 8306f87a-9759-4a4c-8b00-f5da232288b0
     country_id: *mt
     network_id: *mt_melita_mobile_mobile
-  - id: 244007
-    prefix: '35640012'
+  - id: 507212
+    prefix: '35640021'
     number_min_length: 13
     number_max_length: 13
-    uuid: 43627c35-33c4-48fc-b105-25e891e38b0b
+    uuid: e802c96a-ae5f-4d93-a813-b823b83db0ea
     country_id: *mt
     network_id: *mt_melita_mobile_mobile
-  - id: 244008
-    prefix: '35640013'
+  - id: 507213
+    prefix: '35640022'
     number_min_length: 13
     number_max_length: 13
-    uuid: 0b1e51ae-e9a2-4797-9d98-c462c7671d69
+    uuid: f4237e30-5306-48bc-9072-8aaa2fa50d08
     country_id: *mt
     network_id: *mt_melita_mobile_mobile
-  - id: 244009
-    prefix: '35640014'
+  - id: 507214
+    prefix: '35640023'
     number_min_length: 13
     number_max_length: 13
-    uuid: d5036aa2-4767-4719-a77b-a55bc1398197
+    uuid: fd6e9462-dc87-4d37-ac47-6c0b130b6a8c
     country_id: *mt
     network_id: *mt_melita_mobile_mobile
-  - id: 244010
-    prefix: '35640015'
+  - id: 507215
+    prefix: '35640024'
     number_min_length: 13
     number_max_length: 13
-    uuid: 26f4e84a-eed2-4c49-a315-19cc35f6a067
+    uuid: 5efd129b-731e-4f3f-8530-873a32eed34e
+    country_id: *mt
+    network_id: *mt_melita_mobile_mobile
+  - id: 507216
+    prefix: '35640025'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f62afec1-be2c-4ae4-990e-c3acd843a0a7
     country_id: *mt
     network_id: *mt_melita_mobile_mobile
   - id: 244017
@@ -337,41 +407,6 @@ network_prefixes:
     uuid: 11979bce-d2f5-4c37-a766-09a57e4941bd
     country_id: *mt
     network_id: *mt_epic_mobile
-  - id: 249637
-    prefix: '35650037'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7658dd11-b2ed-41d3-8901-276575e004bc
-    country_id: *mt
-    network_id: *mt_melita_mobile_mobile
-  - id: 249662
-    prefix: '356506'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 48ce82a2-899b-4b00-90b6-0d0f2f02d840
-    country_id: *mt
-    network_id: *mt_mobile
-  - id: 249676
-    prefix: '3565070'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 00de50b0-5c92-4e34-9824-6ad173a46d7a
-    country_id: *mt
-    network_id: *mt_go_mobile_mobile
-  - id: 249684
-    prefix: '3565090'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e21ee70d-ca06-4d60-9239-03a4cb0507ca
-    country_id: *mt
-    network_id: *mt_epic_mobile
-  - id: 249685
-    prefix: '3565091'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a32eed65-07d5-4ea7-822b-953d64df27ea
-    country_id: *mt
-    network_id: *mt_epic_mobile
   - id: 251841
     prefix: '356721'
     number_min_length: 11
@@ -384,20 +419,6 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 11
     uuid: efd241be-e2d3-4051-b328-cbb943074174
-    country_id: *mt
-    network_id: *mt_go_mobile_mobile
-  - id: 255637
-    prefix: '35677'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 024a8686-4077-406f-9948-4814457b278a
-    country_id: *mt
-    network_id: *mt_melita_mobile_mobile
-  - id: 256389
-    prefix: '35679'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f8e278e6-056b-4c1a-a134-6c6380a1eeaf
     country_id: *mt
     network_id: *mt_go_mobile_mobile
   - id: 257347
@@ -498,6 +519,55 @@ network_prefixes:
     uuid: a435ce39-4aa8-4ff5-95cd-77714c5952e4
     country_id: *mt
     network_id: *mt_epic_mobile
+  - id: 249637
+    prefix: '35650037'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7658dd11-b2ed-41d3-8901-276575e004bc
+    country_id: *mt
+    network_id: *mt_melita_mobile_mobile
+  - id: 249662
+    prefix: '356506'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 48ce82a2-899b-4b00-90b6-0d0f2f02d840
+    country_id: *mt
+    network_id: *mt_mobile
+  - id: 249676
+    prefix: '3565070'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00de50b0-5c92-4e34-9824-6ad173a46d7a
+    country_id: *mt
+    network_id: *mt_go_mobile_mobile
+  - id: 249684
+    prefix: '3565090'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e21ee70d-ca06-4d60-9239-03a4cb0507ca
+    country_id: *mt
+    network_id: *mt_epic_mobile
+  - id: 249685
+    prefix: '3565091'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a32eed65-07d5-4ea7-822b-953d64df27ea
+    country_id: *mt
+    network_id: *mt_epic_mobile
+  - id: 255637
+    prefix: '35677'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 024a8686-4077-406f-9948-4814457b278a
+    country_id: *mt
+    network_id: *mt_melita_mobile_mobile
+  - id: 256389
+    prefix: '35679'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8e278e6-056b-4c1a-a134-6c6380a1eeaf
+    country_id: *mt
+    network_id: *mt_go_mobile_mobile
   - id: 264722
     prefix: '35696'
     number_min_length: 11
@@ -512,70 +582,6 @@ network_prefixes:
     uuid: 0d2ef6c3-83fc-456d-810b-db1c6a75d410
     country_id: *mt
     network_id: *mt_epic_mobile
-# Fixed Prefixes
-  - id: 247455
-    prefix: '35620'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 55ddc7e5-294d-4895-b238-deb8df28523a
-    country_id: *mt
-    network_id: *mt_fixed
-  - id: 247630
-    prefix: '35621'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0f7a10bc-c902-4504-8d02-3ae957207a0b
-    country_id: *mt
-    network_id: *mt_fixed
-  - id: 247706
-    prefix: '3562186'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e741f94f-9394-4f38-8857-f72a1072398d
-    country_id: *mt
-    network_id: *mt_internet_access_region
-  - id: 247707
-    prefix: '3562188'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0c0771ab-4051-40ea-806a-d2e2594edb41
-    country_id: *mt
-    network_id: *mt_internet_access_region
-  - id: 247726
-    prefix: '35622'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1c4848a2-98cc-40de-90a3-08bf6bb5ec39
-    country_id: *mt
-    network_id: *mt_fixed
-  - id: 247921
-    prefix: '35623'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b57b8f68-e2ed-4cc1-be2c-5afe58e19d83
-    country_id: *mt
-    network_id: *mt_fixed
-  - id: 248262
-    prefix: '35625'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 177ce594-7513-4d14-8871-7e7aecb169da
-    country_id: *mt
-    network_id: *mt_fixed
-  - id: 248473
-    prefix: '35626'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e39c0d4a-b853-4ff3-8d39-7724678b400d
-    country_id: *mt
-    network_id: *mt_fixed
-  - id: 248616
-    prefix: '35627'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 58db9eb7-5cd7-4ae6-89bc-5f8b6459df47
-    country_id: *mt
-    network_id: *mt_fixed
 # Paging Prefixes
   - id: 251772
     prefix: '3567117'

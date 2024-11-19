@@ -1,6 +1,10 @@
 country_id: &cu 55
 networks:
 # Supplementary services Networks
+  - id: &cu_internal_network_services 22742
+    name: CU Internal Network Services
+    uuid: 1638c8d7-56de-4063-9e9d-920708d91aa6
+    type_id: 13
   - id: &cu_national_operator 21303
     name: CU National Operator
     uuid: 6be392d5-9b89-47ee-9840-97874a9074fa
@@ -29,9 +33,9 @@ networks:
     name: CU Data Services And Internet Access
     uuid: a3852178-cc34-4e97-900c-362fe0c5c5c3
     type_id: 13
-  - id: &cu_internal_network_services 22742
-    name: CU Internal Network Services
-    uuid: 1638c8d7-56de-4063-9e9d-920708d91aa6
+  - id: &cu_personal_telecommunications_services 24323
+    name: CU Personal Telecommunications Services
+    uuid: 24cda956-52f8-4841-ba2e-9ea3dda69388
     type_id: 13
   - id: &cu_freephone_services 23832
     name: CU Freephone Services
@@ -53,11 +57,15 @@ networks:
     name: CU Shared Cost Services
     uuid: e212b367-205e-4ac1-b69d-732969a8d168
     type_id: 13
-  - id: &cu_personal_telecommunications_services 24323
-    name: CU Personal Telecommunications Services
-    uuid: 24cda956-52f8-4841-ba2e-9ea3dda69388
-    type_id: 13
 # Fixed Networks
+  - id: &cu_guantanamo_region 22793
+    name: CU Guantanamo Region
+    uuid: 26431ce3-21ab-4fc5-aa27-d5bf174fa5cf
+    type_id: 2
+  - id: &cu_fixed 43399
+    name: CU Fixed
+    uuid: b57b5f8b-06f0-4040-845d-63d5d0ae979a
+    type_id: 2
   - id: &cu_las_tunas_region 21898
     name: CU Las Tunas Region
     uuid: 47965856-3e56-4073-9d72-de3f3a8e14df
@@ -86,9 +94,9 @@ networks:
     name: CU Matanzas Region
     uuid: 11c1e197-10e1-4f35-b8ec-afd09a5093ff
     type_id: 2
-  - id: &cu_guantanamo_region 22793
-    name: CU Guantanamo Region
-    uuid: 26431ce3-21ab-4fc5-aa27-d5bf174fa5cf
+  - id: &cu_guantanamo_bay_usa_territory_region 24532
+    name: CU Guantanamo Bay Usa Territory Region
+    uuid: 7974d889-adc5-4ad8-b8b8-406fdfe4cc85
     type_id: 2
   - id: &cu_santiago_de_cuba_region 22836
     name: CU Santiago De Cuba Region
@@ -122,10 +130,6 @@ networks:
     name: CU La Habana Region
     uuid: 671fca0b-ade2-4585-a169-201e727f1b2f
     type_id: 2
-  - id: &cu_guantanamo_bay_usa_territory_region 24532
-    name: CU Guantanamo Bay Usa Territory Region
-    uuid: 7974d889-adc5-4ad8-b8b8-406fdfe4cc85
-    type_id: 2
 # Mobile Networks
   - id: &cu_mobile 22459
     name: CU Mobile
@@ -140,15 +144,14 @@ networks:
     uuid: 61535286-ae7d-4e45-b7e9-62dbe045aabd
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 241977
-    prefix: '53'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 8a8a3370-5790-43a2-89ac-7cade543aa06
-    country_id: *cu
-    network_id: null
 # Supplementary services Prefixes
+  - id: 247451
+    prefix: '5320'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dc154bf8-2d84-46d2-a91f-541f98b31218
+    country_id: *cu
+    network_id: *cu_internal_network_services
   - id: 242177
     prefix: '53011'
     number_min_length: 5
@@ -198,13 +201,13 @@ network_prefixes:
     uuid: 8c22ca1d-a652-44fa-a17e-8790d128d7c9
     country_id: *cu
     network_id: *cu_data_services_and_internet_access
-  - id: 247451
-    prefix: '5320'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dc154bf8-2d84-46d2-a91f-541f98b31218
+  - id: 256799
+    prefix: '53878'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 704f8dfb-b92a-4a82-9621-2f6e4830b30d
     country_id: *cu
-    network_id: *cu_internal_network_services
+    network_id: *cu_personal_telecommunications_services
   - id: 253142
     prefix: '53800'
     number_min_length: 12
@@ -240,14 +243,21 @@ network_prefixes:
     uuid: 932696c5-4f61-481b-acd9-0154bc2f1369
     country_id: *cu
     network_id: *cu_shared_cost_services
-  - id: 256799
-    prefix: '53878'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 704f8dfb-b92a-4a82-9621-2f6e4830b30d
-    country_id: *cu
-    network_id: *cu_personal_telecommunications_services
 # Fixed Prefixes
+  - id: 247622
+    prefix: '5321'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b47a6fdf-8516-408c-bd06-a702e593dbff
+    country_id: *cu
+    network_id: *cu_guantanamo_region
+  - id: 241977
+    prefix: '53'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 8a8a3370-5790-43a2-89ac-7cade543aa06
+    country_id: *cu
+    network_id: *cu_fixed
   - id: 243227
     prefix: '5331'
     number_min_length: 10
@@ -297,13 +307,13 @@ network_prefixes:
     uuid: 3e5ba49d-bb53-438a-b6d2-12408d6c1a75
     country_id: *cu
     network_id: *cu_matanzas_region
-  - id: 247622
-    prefix: '5321'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b47a6fdf-8516-408c-bd06-a702e593dbff
+  - id: 258177
+    prefix: '5399'
+    number_min_length: 8
+    number_max_length: 9
+    uuid: a6196839-bf36-4563-97f9-d66ef7a9e72f
     country_id: *cu
-    network_id: *cu_guantanamo_region
+    network_id: *cu_guantanamo_bay_usa_territory_region
   - id: 247719
     prefix: '5322'
     number_min_length: 10
@@ -360,13 +370,6 @@ network_prefixes:
     uuid: 8d24c0d1-c191-44ee-871f-543f6745f298
     country_id: *cu
     network_id: *cu_la_habana_region
-  - id: 258177
-    prefix: '5399'
-    number_min_length: 8
-    number_max_length: 9
-    uuid: a6196839-bf36-4563-97f9-d66ef7a9e72f
-    country_id: *cu
-    network_id: *cu_guantanamo_bay_usa_territory_region
 # Mobile Prefixes
   - id: 245143
     prefix: '535799'
@@ -387,6 +390,13 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: 9a303847-67cd-488c-b303-aa0128b04d95
+    country_id: *cu
+    network_id: *cu_cubacel_mobile
+  - id: 254113
+    prefix: '5362'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 041e27f8-08b0-46c9-ae3a-256dace20ce1
     country_id: *cu
     network_id: *cu_cubacel_mobile
   - id: 249616
@@ -555,12 +565,5 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: 39eb0a6f-311f-4a1c-be5f-f68e1db6b014
-    country_id: *cu
-    network_id: *cu_cubacel_mobile
-  - id: 254113
-    prefix: '5362'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 041e27f8-08b0-46c9-ae3a-256dace20ce1
     country_id: *cu
     network_id: *cu_cubacel_mobile

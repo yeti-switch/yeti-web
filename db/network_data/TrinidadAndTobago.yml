@@ -1,56 +1,6 @@
 country_id: &tt 215
 networks:
-# Mobile Networks
-  - id: &tt_bmobile_mobile 41311
-    name: TT Bmobile Mobile
-    uuid: 9ea810f9-4ab5-4156-8f00-645325eed69e
-    type_id: 3
-  - id: &tt_digicel_mobile 41744
-    name: TT Digicel Mobile
-    uuid: 874a3aad-ca5d-459d-ba79-f2886b22c212
-    type_id: 3
-# Supplementary services Networks
-  - id: &tt_national_freephone_services 41313
-    name: TT National Freephone Services
-    uuid: 206630f4-8cd1-4142-8da7-727d63b87c82
-    type_id: 13
-  - id: &tt_ambulance 41314
-    name: TT Ambulance
-    uuid: 749b4ec1-724d-4308-95e1-5d8133839ed7
-    type_id: 13
-  - id: &tt_audiotext_services 41317
-    name: TT Audiotext Services
-    uuid: 0a1c1838-6ef0-46e2-9e99-a7c5bcca9555
-    type_id: 13
-  - id: &tt_calling_card_helpdesk_services 41318
-    name: TT Calling Card Helpdesk Services
-    uuid: c115ade8-6632-4914-8d83-24eb6661ce30
-    type_id: 13
-  - id: &tt_emergency_services 41319
-    name: TT Emergency Services
-    uuid: bf593d1c-b24e-4257-82f0-ab77dfc79f46
-    type_id: 13
-  - id: &tt_premium_rate_services 41320
-    name: TT Premium Rate Services
-    uuid: 7dbdf8bf-250b-4ca5-9281-fbd7960d9412
-    type_id: 13
-  - id: &tt_information_services 41321
-    name: TT Information Services
-    uuid: c882e9f7-090c-4349-9165-6c99ed2bd67c
-    type_id: 13
-  - id: &tt_automatic_number_announcement_services 41322
-    name: TT Automatic Number Announcement Services
-    uuid: 364719ad-7299-4dee-a2b2-64995bba8951
-    type_id: 13
-  - id: &tt_national_directory_assistance 41759
-    name: TT National Directory Assistance
-    uuid: ca2b25eb-5aa6-4f2e-860e-ce3c886183be
-    type_id: 13
 # Fixed Networks
-  - id: &tt_did_region 41315
-    name: TT Did Region
-    uuid: 54b02319-70f8-4b3f-bb0d-ca919970eaea
-    type_id: 2
   - id: &tt_fixed 41316
     name: TT Fixed
     uuid: d6bebd3a-946c-45f5-91c6-a3fd03d4bb2a
@@ -231,610 +181,63 @@ networks:
     name: TT Toruba St Clement Region
     uuid: 8ae8c1ac-6a30-40b2-a541-c2e173c091dc
     type_id: 2
+  - id: &tt_did_region 41315
+    name: TT Did Region
+    uuid: 54b02319-70f8-4b3f-bb0d-ca919970eaea
+    type_id: 2
+# Mobile Networks
+  - id: &tt_digicel_mobile 41744
+    name: TT Digicel Mobile
+    uuid: 874a3aad-ca5d-459d-ba79-f2886b22c212
+    type_id: 3
+  - id: &tt_bmobile_mobile 41311
+    name: TT Bmobile Mobile
+    uuid: 9ea810f9-4ab5-4156-8f00-645325eed69e
+    type_id: 3
+# Supplementary services Networks
+  - id: &tt_national_directory_assistance 41759
+    name: TT National Directory Assistance
+    uuid: ca2b25eb-5aa6-4f2e-860e-ce3c886183be
+    type_id: 13
+  - id: &tt_national_freephone_services 41313
+    name: TT National Freephone Services
+    uuid: 206630f4-8cd1-4142-8da7-727d63b87c82
+    type_id: 13
+  - id: &tt_ambulance 41314
+    name: TT Ambulance
+    uuid: 749b4ec1-724d-4308-95e1-5d8133839ed7
+    type_id: 13
+  - id: &tt_audiotext_services 41317
+    name: TT Audiotext Services
+    uuid: 0a1c1838-6ef0-46e2-9e99-a7c5bcca9555
+    type_id: 13
+  - id: &tt_calling_card_helpdesk_services 41318
+    name: TT Calling Card Helpdesk Services
+    uuid: c115ade8-6632-4914-8d83-24eb6661ce30
+    type_id: 13
+  - id: &tt_emergency_services 41319
+    name: TT Emergency Services
+    uuid: bf593d1c-b24e-4257-82f0-ab77dfc79f46
+    type_id: 13
+  - id: &tt_premium_rate_services 41320
+    name: TT Premium Rate Services
+    uuid: 7dbdf8bf-250b-4ca5-9281-fbd7960d9412
+    type_id: 13
+  - id: &tt_information_services 41321
+    name: TT Information Services
+    uuid: c882e9f7-090c-4349-9165-6c99ed2bd67c
+    type_id: 13
+  - id: &tt_automatic_number_announcement_services 41322
+    name: TT Automatic Number Announcement Services
+    uuid: 364719ad-7299-4dee-a2b2-64995bba8951
+    type_id: 13
 network_prefixes:
-# Mobile Prefixes
-  - id: 440861
-    prefix: '1868702'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1411c9ea-b1ce-41af-8c4d-66e6e3aa7022
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440862
-    prefix: '1868703'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b7b61023-b4f7-454c-b0ed-3413d35aea33
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440863
-    prefix: '1868704'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 02ab3c19-0abf-458b-951f-38845c0b7520
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440864
-    prefix: '1868705'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2a97f106-3af2-4695-ad48-c0051e3126fd
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440865
-    prefix: '1868706'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 721802c2-88f4-4bd4-8b0b-e4e0eb281818
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440866
-    prefix: '1868707'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8787aec4-417d-4e66-9908-69c2f4f01516
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440867
-    prefix: '1868708'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e14c20ed-6b98-4b23-928c-a19efa97e065
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440868
-    prefix: '1868709'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e9e0ba7-c289-4a1a-a348-5e4cc27b07d8
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440869
-    prefix: '1868710'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 35b9d215-13c3-4c09-ab8e-f59f1c42fed4
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440870
-    prefix: '1868712'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2e5148d9-af19-452f-ba69-dde3f08a6096
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440871
-    prefix: '1868713'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8cdfcc3b-bdfe-40cb-aac2-858335a7b464
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440872
-    prefix: '1868714'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 985f84cd-1392-4c51-8309-9e5dd687f83f
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440873
-    prefix: '1868715'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d8367df1-4905-4ef8-b2a3-1984fc0e6285
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440874
-    prefix: '1868716'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a0fc0406-f5e3-412e-9aea-b6b8b84191e2
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440875
-    prefix: '1868717'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c1616e28-c57a-49c8-a156-0be83ce37d6d
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440876
-    prefix: '1868718'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7ae57fdc-b226-4cf8-a041-74b659a82688
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440877
-    prefix: '1868719'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be8634ff-a0c8-4e7c-a7c2-7d8ef1e7278b
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440878
-    prefix: '186872'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4e7b767d-1605-45a2-8d90-d1ed1c98987a
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440879
-    prefix: '186873'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4ca6d387-c27f-453a-aae8-2f3d5a144023
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440880
-    prefix: '186874'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 80f9fc98-a5d5-41d0-b734-697a4c0fcfa9
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440881
-    prefix: '186875'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e7834f5e-d474-434f-bbc8-49a2448048bf
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440882
-    prefix: '186876'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9420c115-0082-49ec-93ba-e4ed1916c9ba
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440883
-    prefix: '186877'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c79963f9-7788-4910-8cff-78d5097a9772
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440884
-    prefix: '186878'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6a7cb339-778e-45af-82d6-66d351fe4ff0
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 440885
-    prefix: '186879'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 197438a5-a40c-4018-9baf-880d6eef0f50
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 448217
-    prefix: '186825'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5b6f4bd6-73d8-4f78-b7b8-cb6c7160168a
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448227
-    prefix: '186826'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1712a5f0-f874-42a7-8301-bdf796d9f6c3
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448236
-    prefix: '186827'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a0c8e30d-0f58-40c6-9683-af675a856ede
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448247
-    prefix: '186828'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 64614aad-b929-49f9-94be-aea576872d60
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448248
-    prefix: '186829'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fdd2af27-9da4-4edf-82cd-045916e3b0c5
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448268
-    prefix: '1868301'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 394a730d-ee67-4e29-913d-ebf556520e7b
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448270
-    prefix: '1868302'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4c877ae4-e214-42a4-9c45-b27477e0d69d
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448272
-    prefix: '1868303'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd3e2b41-8a5d-40ce-bd64-764eb4494766
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448274
-    prefix: '1868304'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 97242f63-6257-4ae9-ba19-6d2d887ca2ea
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448276
-    prefix: '1868305'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c47bcefe-3d5d-4683-8f38-81a285704621
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448278
-    prefix: '1868306'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 68396f11-e3c7-485e-ac23-697bf2b50b5f
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448280
-    prefix: '1868307'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8d1ecd34-f575-4f93-b1c9-c8bef187548a
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448282
-    prefix: '1868308'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b00cffe3-1086-4067-bd5d-71da25290cb3
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448284
-    prefix: '1868309'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ec730416-4978-4d9b-bbc0-e76f80399138
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448286
-    prefix: '1868310'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e2f948b6-35cf-42f5-84cf-9ab2be2246fc
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448289
-    prefix: '1868312'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2ad9be4d-7e0d-4814-b096-84591ab99ae6
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448291
-    prefix: '1868313'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 023734d4-42ad-435e-b2d6-9207491a3b93
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448293
-    prefix: '1868314'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94624f94-f23a-4e7e-ae63-aa3f38cf8d2c
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448295
-    prefix: '1868315'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 44ab9585-3a65-4686-b5f1-745eaaab2491
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448297
-    prefix: '1868316'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4943e381-191e-4914-8987-9fa52b7ccca9
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448299
-    prefix: '1868317'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f4cda7fa-eda2-4a5d-a834-e3db025f83e7
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448301
-    prefix: '1868318'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 067aecd8-374b-4e6b-93e9-eeb3e3e2234e
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448303
-    prefix: '1868319'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fc0a80bc-2eea-40d8-a8d3-ce80709c4882
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448305
-    prefix: '186832'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 78bf4b71-f2cd-4479-a7f2-15bd00c92b11
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448306
-    prefix: '186833'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 991be40a-efd6-4374-b11d-657a4caec6b6
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448316
-    prefix: '186834'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8e6de1e8-8eef-49ba-930a-e619b4753cf2
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448321
-    prefix: '186835'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d2789c6d-835b-450e-b91e-d045663ef0fe
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448339
-    prefix: '186836'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 46acbeb2-a363-4502-a5d0-89b5040d2762
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448360
-    prefix: '186837'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 006e5769-e093-4ddf-9ab5-e8c318474ed3
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448371
-    prefix: '186838'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 67c2d54c-4907-4aa5-a7d2-c3f6f7eda837
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448390
-    prefix: '186839'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 101cf1c4-c6dd-4a1b-a837-29fd2f40c8e5
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448459
-    prefix: '1868430'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 551efb71-fa5b-4091-a564-23766457197f
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448462
-    prefix: '1868431'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8aa583d5-02ce-417d-b11d-4541079fdf04
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448464
-    prefix: '1868432'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 434b6b09-d012-406a-9893-7e494bc16dea
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448466
-    prefix: '1868433'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 34f619a6-f259-4016-8205-583bb891cee1
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448468
-    prefix: '1868434'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 09dcb94c-fdea-4865-a89c-92ac0fdf43f6
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448470
-    prefix: '1868435'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 175f6e54-6619-4f2b-822c-0a9cee394a86
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448472
-    prefix: '1868436'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4e8812a0-4dca-43d1-9833-cb1d112374ed
-    country_id: *tt
-    network_id: *tt_digicel_mobile
-  - id: 448522
-    prefix: '186846'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e43f7bb5-2a7a-4777-862a-02125b51c68c
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 448542
-    prefix: '186847'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a64d56dc-932d-4f3c-9f92-302c00baf6b4
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 448551
-    prefix: '186848'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 51d792b2-84ff-467e-b42f-3ee66ca2a7d2
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 448561
-    prefix: '186849'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 84c31c32-0897-41e8-8fc7-539719d53e85
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 448654
-    prefix: '1868620'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f27a868f-77cd-4fb2-95d4-873631f7b9bd
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 448712
-    prefix: '1868678'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c3233e7e-3899-45aa-8a6b-bebff8f91f8b
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 448714
-    prefix: '186868'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 88495c1a-dcb8-4e8c-bcb8-11c917ff5a3a
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-  - id: 448726
-    prefix: '1868701'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 13cbe29e-0385-4340-b2c5-36bda02220f2
-    country_id: *tt
-    network_id: *tt_bmobile_mobile
-# Supplementary services Prefixes
-  - id: 440898
-    prefix: '1868800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d677fe09-2eca-4869-a26b-3b7aeffebb52
-    country_id: *tt
-    network_id: *tt_national_freephone_services
-  - id: 440899
-    prefix: '1868811'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: a8f6f1d4-564a-40b5-b369-bd60d65b3c19
-    country_id: *tt
-    network_id: *tt_ambulance
-  - id: 440966
-    prefix: '1868848'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 817d291f-8281-4479-96e3-545693c78ac0
-    country_id: *tt
-    network_id: *tt_audiotext_services
-  - id: 440970
-    prefix: '1868866'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 324b036c-b3f3-4018-9d61-302ff5d45bdf
-    country_id: *tt
-    network_id: *tt_national_freephone_services
-  - id: 440971
-    prefix: '1868874'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 919a4838-c840-494e-82b6-079b751cd72c
-    country_id: *tt
-    network_id: *tt_audiotext_services
-  - id: 440972
-    prefix: '1868877'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dce4ff03-6741-4d07-801a-6c9a569f4fb7
-    country_id: *tt
-    network_id: *tt_national_freephone_services
-  - id: 440975
-    prefix: '1868888'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f6b4d49a-c1c6-4d8a-8676-2b55288e8053
-    country_id: *tt
-    network_id: *tt_calling_card_helpdesk_services
-  - id: 440977
-    prefix: '18689'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 1d5f9901-7fb9-4455-8bdc-36cc94ec1618
-    country_id: *tt
-    network_id: *tt_emergency_services
-  - id: 440978
-    prefix: '1868900'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4bbfe0b0-cb06-47f2-903b-9267c11dd80a
-    country_id: *tt
-    network_id: *tt_premium_rate_services
-  - id: 440991
-    prefix: '1868976'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5894a7e5-1920-4835-847f-fe35a6dc9fa6
-    country_id: *tt
-    network_id: *tt_information_services
-  - id: 440992
-    prefix: '1868998'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: b4325479-2383-4b96-adaa-ae7a9080ea65
-    country_id: *tt
-    network_id: *tt_automatic_number_announcement_services
-  - id: 448676
-    prefix: '18686411'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 23de4233-03b1-46ef-bef2-e1b3cac38e17
-    country_id: *tt
-    network_id: *tt_national_directory_assistance
 # Fixed Prefixes
-  - id: 440903
-    prefix: '1868821'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cf0dac74-e411-45dd-8fa0-a60747a47f6e
-    country_id: *tt
-    network_id: *tt_did_region
-  - id: 440904
-    prefix: '1868822'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 30e6aff4-94d7-4ab2-8798-8f17f72782b0
-    country_id: *tt
-    network_id: *tt_did_region
-  - id: 440915
-    prefix: '1868824'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 79734aed-38e5-4006-85fb-f54e66cd677e
+  - id: 506000
+    prefix: '1868'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: 946ece2f-46e9-41d5-a84e-ec247f6cc773
     country_id: *tt
     network_id: *tt_fixed
   - id: 448172
@@ -1460,11 +863,607 @@ network_prefixes:
     uuid: 50b1fc75-c2ca-4908-9103-30ddf1628043
     country_id: *tt
     network_id: *tt_fixed
-# Country code Prefixes
-  - id: 448043
-    prefix: '1868'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: da8f181d-4979-48e6-9939-c17095c4cefe
+  - id: 440903
+    prefix: '1868821'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cf0dac74-e411-45dd-8fa0-a60747a47f6e
     country_id: *tt
-    network_id: null
+    network_id: *tt_did_region
+  - id: 440904
+    prefix: '1868822'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30e6aff4-94d7-4ab2-8798-8f17f72782b0
+    country_id: *tt
+    network_id: *tt_did_region
+  - id: 440915
+    prefix: '1868824'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 79734aed-38e5-4006-85fb-f54e66cd677e
+    country_id: *tt
+    network_id: *tt_fixed
+# Mobile Prefixes
+  - id: 448217
+    prefix: '186825'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5b6f4bd6-73d8-4f78-b7b8-cb6c7160168a
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448227
+    prefix: '186826'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1712a5f0-f874-42a7-8301-bdf796d9f6c3
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448236
+    prefix: '186827'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0c8e30d-0f58-40c6-9683-af675a856ede
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448247
+    prefix: '186828'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 64614aad-b929-49f9-94be-aea576872d60
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448248
+    prefix: '186829'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fdd2af27-9da4-4edf-82cd-045916e3b0c5
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448268
+    prefix: '1868301'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 394a730d-ee67-4e29-913d-ebf556520e7b
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448270
+    prefix: '1868302'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4c877ae4-e214-42a4-9c45-b27477e0d69d
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448272
+    prefix: '1868303'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd3e2b41-8a5d-40ce-bd64-764eb4494766
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448274
+    prefix: '1868304'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 97242f63-6257-4ae9-ba19-6d2d887ca2ea
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448276
+    prefix: '1868305'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c47bcefe-3d5d-4683-8f38-81a285704621
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448278
+    prefix: '1868306'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68396f11-e3c7-485e-ac23-697bf2b50b5f
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448280
+    prefix: '1868307'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8d1ecd34-f575-4f93-b1c9-c8bef187548a
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448282
+    prefix: '1868308'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b00cffe3-1086-4067-bd5d-71da25290cb3
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448284
+    prefix: '1868309'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec730416-4978-4d9b-bbc0-e76f80399138
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448286
+    prefix: '1868310'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e2f948b6-35cf-42f5-84cf-9ab2be2246fc
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448289
+    prefix: '1868312'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2ad9be4d-7e0d-4814-b096-84591ab99ae6
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448291
+    prefix: '1868313'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 023734d4-42ad-435e-b2d6-9207491a3b93
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448293
+    prefix: '1868314'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94624f94-f23a-4e7e-ae63-aa3f38cf8d2c
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448295
+    prefix: '1868315'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 44ab9585-3a65-4686-b5f1-745eaaab2491
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448297
+    prefix: '1868316'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4943e381-191e-4914-8987-9fa52b7ccca9
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448299
+    prefix: '1868317'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f4cda7fa-eda2-4a5d-a834-e3db025f83e7
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448301
+    prefix: '1868318'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 067aecd8-374b-4e6b-93e9-eeb3e3e2234e
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448303
+    prefix: '1868319'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc0a80bc-2eea-40d8-a8d3-ce80709c4882
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448305
+    prefix: '186832'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 78bf4b71-f2cd-4479-a7f2-15bd00c92b11
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448306
+    prefix: '186833'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 991be40a-efd6-4374-b11d-657a4caec6b6
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448316
+    prefix: '186834'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e6de1e8-8eef-49ba-930a-e619b4753cf2
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448321
+    prefix: '186835'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d2789c6d-835b-450e-b91e-d045663ef0fe
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448339
+    prefix: '186836'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 46acbeb2-a363-4502-a5d0-89b5040d2762
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448360
+    prefix: '186837'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 006e5769-e093-4ddf-9ab5-e8c318474ed3
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448371
+    prefix: '186838'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 67c2d54c-4907-4aa5-a7d2-c3f6f7eda837
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448390
+    prefix: '186839'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 101cf1c4-c6dd-4a1b-a837-29fd2f40c8e5
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448459
+    prefix: '1868430'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 551efb71-fa5b-4091-a564-23766457197f
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448462
+    prefix: '1868431'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8aa583d5-02ce-417d-b11d-4541079fdf04
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448464
+    prefix: '1868432'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 434b6b09-d012-406a-9893-7e494bc16dea
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448466
+    prefix: '1868433'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34f619a6-f259-4016-8205-583bb891cee1
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448468
+    prefix: '1868434'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 09dcb94c-fdea-4865-a89c-92ac0fdf43f6
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448470
+    prefix: '1868435'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 175f6e54-6619-4f2b-822c-0a9cee394a86
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448472
+    prefix: '1868436'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e8812a0-4dca-43d1-9833-cb1d112374ed
+    country_id: *tt
+    network_id: *tt_digicel_mobile
+  - id: 448522
+    prefix: '186846'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e43f7bb5-2a7a-4777-862a-02125b51c68c
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 448542
+    prefix: '186847'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a64d56dc-932d-4f3c-9f92-302c00baf6b4
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 448551
+    prefix: '186848'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 51d792b2-84ff-467e-b42f-3ee66ca2a7d2
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 448561
+    prefix: '186849'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84c31c32-0897-41e8-8fc7-539719d53e85
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 448654
+    prefix: '1868620'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f27a868f-77cd-4fb2-95d4-873631f7b9bd
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 448712
+    prefix: '1868678'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c3233e7e-3899-45aa-8a6b-bebff8f91f8b
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 448714
+    prefix: '186868'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 88495c1a-dcb8-4e8c-bcb8-11c917ff5a3a
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 448726
+    prefix: '1868701'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 13cbe29e-0385-4340-b2c5-36bda02220f2
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440861
+    prefix: '1868702'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1411c9ea-b1ce-41af-8c4d-66e6e3aa7022
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440862
+    prefix: '1868703'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7b61023-b4f7-454c-b0ed-3413d35aea33
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440863
+    prefix: '1868704'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 02ab3c19-0abf-458b-951f-38845c0b7520
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440864
+    prefix: '1868705'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2a97f106-3af2-4695-ad48-c0051e3126fd
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440865
+    prefix: '1868706'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 721802c2-88f4-4bd4-8b0b-e4e0eb281818
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440866
+    prefix: '1868707'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8787aec4-417d-4e66-9908-69c2f4f01516
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440867
+    prefix: '1868708'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e14c20ed-6b98-4b23-928c-a19efa97e065
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440868
+    prefix: '1868709'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e9e0ba7-c289-4a1a-a348-5e4cc27b07d8
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440869
+    prefix: '1868710'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 35b9d215-13c3-4c09-ab8e-f59f1c42fed4
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440870
+    prefix: '1868712'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e5148d9-af19-452f-ba69-dde3f08a6096
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440871
+    prefix: '1868713'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8cdfcc3b-bdfe-40cb-aac2-858335a7b464
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440872
+    prefix: '1868714'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 985f84cd-1392-4c51-8309-9e5dd687f83f
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440873
+    prefix: '1868715'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8367df1-4905-4ef8-b2a3-1984fc0e6285
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440874
+    prefix: '1868716'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0fc0406-f5e3-412e-9aea-b6b8b84191e2
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440875
+    prefix: '1868717'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c1616e28-c57a-49c8-a156-0be83ce37d6d
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440876
+    prefix: '1868718'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7ae57fdc-b226-4cf8-a041-74b659a82688
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440877
+    prefix: '1868719'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be8634ff-a0c8-4e7c-a7c2-7d8ef1e7278b
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440878
+    prefix: '186872'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e7b767d-1605-45a2-8d90-d1ed1c98987a
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440879
+    prefix: '186873'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ca6d387-c27f-453a-aae8-2f3d5a144023
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440880
+    prefix: '186874'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 80f9fc98-a5d5-41d0-b734-697a4c0fcfa9
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440881
+    prefix: '186875'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e7834f5e-d474-434f-bbc8-49a2448048bf
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440882
+    prefix: '186876'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9420c115-0082-49ec-93ba-e4ed1916c9ba
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440883
+    prefix: '186877'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c79963f9-7788-4910-8cff-78d5097a9772
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440884
+    prefix: '186878'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a7cb339-778e-45af-82d6-66d351fe4ff0
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+  - id: 440885
+    prefix: '186879'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 197438a5-a40c-4018-9baf-880d6eef0f50
+    country_id: *tt
+    network_id: *tt_bmobile_mobile
+# Supplementary services Prefixes
+  - id: 448676
+    prefix: '18686411'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 23de4233-03b1-46ef-bef2-e1b3cac38e17
+    country_id: *tt
+    network_id: *tt_national_directory_assistance
+  - id: 440898
+    prefix: '1868800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d677fe09-2eca-4869-a26b-3b7aeffebb52
+    country_id: *tt
+    network_id: *tt_national_freephone_services
+  - id: 440899
+    prefix: '1868811'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: a8f6f1d4-564a-40b5-b369-bd60d65b3c19
+    country_id: *tt
+    network_id: *tt_ambulance
+  - id: 440966
+    prefix: '1868848'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 817d291f-8281-4479-96e3-545693c78ac0
+    country_id: *tt
+    network_id: *tt_audiotext_services
+  - id: 440970
+    prefix: '1868866'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 324b036c-b3f3-4018-9d61-302ff5d45bdf
+    country_id: *tt
+    network_id: *tt_national_freephone_services
+  - id: 440971
+    prefix: '1868874'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 919a4838-c840-494e-82b6-079b751cd72c
+    country_id: *tt
+    network_id: *tt_audiotext_services
+  - id: 440972
+    prefix: '1868877'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dce4ff03-6741-4d07-801a-6c9a569f4fb7
+    country_id: *tt
+    network_id: *tt_national_freephone_services
+  - id: 440975
+    prefix: '1868888'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f6b4d49a-c1c6-4d8a-8676-2b55288e8053
+    country_id: *tt
+    network_id: *tt_calling_card_helpdesk_services
+  - id: 440977
+    prefix: '18689'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 1d5f9901-7fb9-4455-8bdc-36cc94ec1618
+    country_id: *tt
+    network_id: *tt_emergency_services
+  - id: 440978
+    prefix: '1868900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4bbfe0b0-cb06-47f2-903b-9267c11dd80a
+    country_id: *tt
+    network_id: *tt_premium_rate_services
+  - id: 440991
+    prefix: '1868976'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5894a7e5-1920-4835-847f-fe35a6dc9fa6
+    country_id: *tt
+    network_id: *tt_information_services
+  - id: 440992
+    prefix: '1868998'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: b4325479-2383-4b96-adaa-ae7a9080ea65
+    country_id: *tt
+    network_id: *tt_automatic_number_announcement_services

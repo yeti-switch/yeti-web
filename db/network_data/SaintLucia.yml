@@ -1,5 +1,10 @@
 country_id: &lc 181
 networks:
+# Fixed Networks
+  - id: &lc_fixed 18133
+    name: LC Fixed
+    uuid: 25904b8a-b6d3-4e3f-bddc-220eea14b5ee
+    type_id: 2
 # Supplementary services Networks
   - id: &lc_special_services 18131
     name: LC Special Services
@@ -14,20 +19,85 @@ networks:
     name: LC Digicel Mobile
     uuid: 20e7bb87-da0f-434e-892a-091bd9d42abd
     type_id: 3
-# Fixed Networks
-  - id: &lc_fixed 18133
-    name: LC Fixed
-    uuid: 25904b8a-b6d3-4e3f-bddc-220eea14b5ee
-    type_id: 2
 network_prefixes:
-# Country code Prefixes
-  - id: 187755
+# Fixed Prefixes
+  - id: 504597
     prefix: '1758'
-    number_min_length: 2
+    number_min_length: 5
     number_max_length: 100
-    uuid: 064708b1-ad5c-4179-a3bf-2e4a080d3307
+    uuid: 2d66748d-0bc5-4391-8d49-f396c5a3a6bc
     country_id: *lc
-    network_id: null
+    network_id: *lc_fixed
+  - id: 187824
+    prefix: '175845'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5041957c-00f2-4b03-92aa-b5437b70aa01
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187827
+    prefix: '1758462'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 69ea7d63-d0d2-4988-863e-0b9ea5f102a6
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187828
+    prefix: '1758467'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3b007b27-f7dd-43db-84e3-b8f71f31bc38
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187829
+    prefix: '1758468'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2b657147-3283-4cfe-834a-b563728049c9
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187830
+    prefix: '1758481'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d5dc61f0-e4d1-4ea2-90ad-655f8862c08b
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187841
+    prefix: '1758570'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6dfe18cd-85f4-463e-bf97-4661f5a30135
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187842
+    prefix: '1758571'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6b168a3f-8d82-4aa4-aeee-8d92d40e319d
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187843
+    prefix: '1758572'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8c02e53-baf0-4f5d-97f3-1c7f87496ad1
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187858
+    prefix: '1758758'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2143e65b-c9e7-4404-980f-d46235a3ad49
+    country_id: *lc
+    network_id: *lc_fixed
+  - id: 187862
+    prefix: '1758932'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9814206b-a6b7-4037-aba7-7e7c02d21968
+    country_id: *lc
+    network_id: *lc_fixed
 # Supplementary services Prefixes
   - id: 187757
     prefix: '17581'
@@ -303,74 +373,3 @@ network_prefixes:
     uuid: dfd2ce6c-ae31-42d0-a51b-78d816f41c8b
     country_id: *lc
     network_id: *lc_digicel_mobile
-# Fixed Prefixes
-  - id: 187824
-    prefix: '175845'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5041957c-00f2-4b03-92aa-b5437b70aa01
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187827
-    prefix: '1758462'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 69ea7d63-d0d2-4988-863e-0b9ea5f102a6
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187828
-    prefix: '1758467'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b007b27-f7dd-43db-84e3-b8f71f31bc38
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187829
-    prefix: '1758468'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2b657147-3283-4cfe-834a-b563728049c9
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187830
-    prefix: '1758481'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d5dc61f0-e4d1-4ea2-90ad-655f8862c08b
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187841
-    prefix: '1758570'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6dfe18cd-85f4-463e-bf97-4661f5a30135
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187842
-    prefix: '1758571'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6b168a3f-8d82-4aa4-aeee-8d92d40e319d
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187843
-    prefix: '1758572'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8c02e53-baf0-4f5d-97f3-1c7f87496ad1
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187858
-    prefix: '1758758'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2143e65b-c9e7-4404-980f-d46235a3ad49
-    country_id: *lc
-    network_id: *lc_fixed
-  - id: 187862
-    prefix: '1758932'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9814206b-a6b7-4037-aba7-7e7c02d21968
-    country_id: *lc
-    network_id: *lc_fixed

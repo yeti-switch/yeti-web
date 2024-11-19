@@ -1,19 +1,18 @@
 country_id: &sr 201
 networks:
-# Supplementary services Networks
-  - id: &sr_special_services 21493
-    name: SR Special Services
-    uuid: 9c081fc3-12d5-4b56-b5cc-8244d06f2619
-    type_id: 13
-  - id: &sr_freephone_services 23822
-    name: SR Freephone Services
-    uuid: 09f7615e-1296-4b58-a2ae-cdd8d474cf64
-    type_id: 13
-  - id: &sr_value_addes_services 24448
-    name: SR Value Addes Services
-    uuid: c5d2f42b-28e0-4723-a1bf-e1477c25a842
-    type_id: 13
 # Fixed Networks
+  - id: &sr_west_suriname_region 22731
+    name: SR West Suriname Region
+    uuid: a634d45c-2d78-4a74-9973-22c3cd6a9584
+    type_id: 2
+  - id: &sr_nieuw_nickerie_region 22802
+    name: SR Nieuw Nickerie Region
+    uuid: 9964b05e-334d-408b-8148-8f951d04a751
+    type_id: 2
+  - id: &sr_fixed 43463
+    name: SR Fixed
+    uuid: db813599-09ad-45e9-9621-c218ee64ea15
+    type_id: 2
   - id: &sr_lelydorp_region 21881
     name: SR Lelydorp Region
     uuid: 7b78ff89-2771-49b8-ab41-9244af902bc4
@@ -106,14 +105,6 @@ networks:
     name: SR Hannas Lust Region
     uuid: 0d64b383-9ec7-42a1-b354-e94b74e91df6
     type_id: 2
-  - id: &sr_west_suriname_region 22731
-    name: SR West Suriname Region
-    uuid: a634d45c-2d78-4a74-9973-22c3cd6a9584
-    type_id: 2
-  - id: &sr_nieuw_nickerie_region 22802
-    name: SR Nieuw Nickerie Region
-    uuid: 9964b05e-334d-408b-8148-8f951d04a751
-    type_id: 2
   - id: &sr_nickerie_wageningen_region 22927
     name: SR Nickerie Wageningen Region
     uuid: 9d431fdf-e1ce-410c-9e1b-b71a6886dc83
@@ -146,38 +137,42 @@ networks:
     name: SR Wireless Local Loop Region
     uuid: 10f85cd0-1397-4b8b-9b76-de4c65705ef1
     type_id: 2
+# Supplementary services Networks
+  - id: &sr_special_services 21493
+    name: SR Special Services
+    uuid: 9c081fc3-12d5-4b56-b5cc-8244d06f2619
+    type_id: 13
+  - id: &sr_value_addes_services 24448
+    name: SR Value Addes Services
+    uuid: c5d2f42b-28e0-4723-a1bf-e1477c25a842
+    type_id: 13
+  - id: &sr_freephone_services 23822
+    name: SR Freephone Services
+    uuid: 09f7615e-1296-4b58-a2ae-cdd8d474cf64
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 247439
+    prefix: '5972'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 5ce53498-9f3f-466f-b318-8a042b653fb2
+    country_id: *sr
+    network_id: *sr_west_suriname_region
+  - id: 247639
+    prefix: '59721'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 92d4c8ca-e5cd-4da9-b296-efa58f3f624c
+    country_id: *sr
+    network_id: *sr_nieuw_nickerie_region
   - id: 242106
     prefix: '597'
     number_min_length: 4
     number_max_length: 100
     uuid: 2fc2f813-1ca7-4e44-b314-efd2a13fe3ce
     country_id: *sr
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242498
-    prefix: '5971'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: c5b82187-1d3c-431f-9e6d-801cd9a5d65c
-    country_id: *sr
-    network_id: *sr_special_services
-  - id: 253131
-    prefix: '59780'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a2ff8f27-4e23-446e-b093-e4cf12ab8500
-    country_id: *sr
-    network_id: *sr_freephone_services
-  - id: 257193
-    prefix: '597900'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e09aef24-f676-4560-b67d-5d2f075b09a5
-    country_id: *sr
-    network_id: *sr_value_addes_services
-# Fixed Prefixes
+    network_id: *sr_fixed
   - id: 243174
     prefix: '597306'
     number_min_length: 9
@@ -451,20 +446,6 @@ network_prefixes:
     uuid: ca168ef7-8319-4dd4-a276-1f8389b1501a
     country_id: *sr
     network_id: *sr_hannas_lust_region
-  - id: 247439
-    prefix: '5972'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 5ce53498-9f3f-466f-b318-8a042b653fb2
-    country_id: *sr
-    network_id: *sr_west_suriname_region
-  - id: 247639
-    prefix: '59721'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 92d4c8ca-e5cd-4da9-b296-efa58f3f624c
-    country_id: *sr
-    network_id: *sr_nieuw_nickerie_region
   - id: 247735
     prefix: '59722'
     number_min_length: 9
@@ -626,3 +607,25 @@ network_prefixes:
     uuid: 383dfeb4-3b8b-4f5e-9b1b-dc8e7a6e82f3
     country_id: *sr
     network_id: *sr_wireless_local_loop_region
+# Supplementary services Prefixes
+  - id: 242498
+    prefix: '5971'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: c5b82187-1d3c-431f-9e6d-801cd9a5d65c
+    country_id: *sr
+    network_id: *sr_special_services
+  - id: 257193
+    prefix: '597900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e09aef24-f676-4560-b67d-5d2f075b09a5
+    country_id: *sr
+    network_id: *sr_value_addes_services
+  - id: 253131
+    prefix: '59780'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a2ff8f27-4e23-446e-b093-e4cf12ab8500
+    country_id: *sr
+    network_id: *sr_freephone_services

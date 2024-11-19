@@ -1,9 +1,22 @@
 country_id: &ht 92
 networks:
+# Fixed Networks
+  - id: &ht_fixed 22716
+    name: HT Fixed
+    uuid: 868b1b65-4300-4bec-8012-8b0d83724398
+    type_id: 2
+  - id: &ht_voip_region 24400
+    name: HT Voip Region
+    uuid: b7bee372-4a4d-49c0-b9ad-f08e4ef9f6c1
+    type_id: 2
 # Supplementary services Networks
   - id: &ht_special_services 21416
     name: HT Special Services
     uuid: f5d88a3f-b007-4c2f-8e23-95cb57076c2d
+    type_id: 13
+  - id: &ht_emergency_services 24486
+    name: HT Emergency Services
+    uuid: 6e9541b9-1e16-4fff-9497-38859f03c19c
     type_id: 13
   - id: &ht_value_added_services 23795
     name: HT Value Added Services
@@ -12,10 +25,6 @@ networks:
   - id: &ht_freephone_services 23843
     name: HT Freephone Services
     uuid: 99a63a62-94c6-4c7e-a46c-941835e144c1
-    type_id: 13
-  - id: &ht_emergency_services 24486
-    name: HT Emergency Services
-    uuid: 6e9541b9-1e16-4fff-9497-38859f03c19c
     type_id: 13
 # Mobile Networks
   - id: &ht_digicel_mobile 21903
@@ -30,24 +39,29 @@ networks:
     name: HT Mobile
     uuid: e4aa4096-c60f-4c29-a111-1b3fadcb087f
     type_id: 3
-# Fixed Networks
-  - id: &ht_fixed 22716
-    name: HT Fixed
-    uuid: 868b1b65-4300-4bec-8012-8b0d83724398
-    type_id: 2
-  - id: &ht_voip_region 24400
-    name: HT Voip Region
-    uuid: b7bee372-4a4d-49c0-b9ad-f08e4ef9f6c1
-    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
+  - id: 247409
+    prefix: '5092'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 437bee47-c401-45ee-9681-9ee24ad866e5
+    country_id: *ht
+    network_id: *ht_fixed
   - id: 242015
     prefix: '509'
     number_min_length: 4
     number_max_length: 100
     uuid: 1775d852-061a-4c76-abdb-2d67f8b1eb7e
     country_id: *ht
-    network_id: null
+    network_id: *ht_fixed
+  - id: 257105
+    prefix: '5099'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3384b35e-59be-4f86-8331-51606a984ab0
+    country_id: *ht
+    network_id: *ht_voip_region
 # Supplementary services Prefixes
   - id: 242413
     prefix: '5091'
@@ -56,6 +70,13 @@ network_prefixes:
     uuid: 7da5c87f-618f-4944-a34c-671f414eed11
     country_id: *ht
     network_id: *ht_special_services
+  - id: 257391
+    prefix: '509911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 942ba3eb-8e38-4de1-9d89-1bd7708130b6
+    country_id: *ht
+    network_id: *ht_emergency_services
   - id: 253082
     prefix: '5098'
     number_min_length: 7
@@ -70,13 +91,6 @@ network_prefixes:
     uuid: 2fae69cd-2c3d-40b5-84c8-ef25065ff2da
     country_id: *ht
     network_id: *ht_freephone_services
-  - id: 257391
-    prefix: '509911'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 942ba3eb-8e38-4de1-9d89-1bd7708130b6
-    country_id: *ht
-    network_id: *ht_emergency_services
 # Mobile Prefixes
   - id: 243233
     prefix: '50931'
@@ -218,18 +232,3 @@ network_prefixes:
     uuid: f921550a-e63d-4a74-a0ea-e392f00831a8
     country_id: *ht
     network_id: *ht_digicel_mobile
-# Fixed Prefixes
-  - id: 247409
-    prefix: '5092'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 437bee47-c401-45ee-9681-9ee24ad866e5
-    country_id: *ht
-    network_id: *ht_fixed
-  - id: 257105
-    prefix: '5099'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3384b35e-59be-4f86-8331-51606a984ab0
-    country_id: *ht
-    network_id: *ht_voip_region

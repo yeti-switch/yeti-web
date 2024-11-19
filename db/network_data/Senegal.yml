@@ -1,10 +1,6 @@
 country_id: &sn 188
 networks:
 # Supplementary services Networks
-  - id: &sn_special_services 21482
-    name: SN Special Services
-    uuid: 0974b92b-7802-4603-b656-1038138f6c9b
-    type_id: 13
   - id: &sn_police 21845
     name: SN Police
     uuid: 9a16abbc-c4ff-4232-b935-85c2d8984d0a
@@ -28,6 +24,18 @@ networks:
   - id: &sn_value_added_services_free 22800
     name: SN Value Added Services Free
     uuid: 3978b10c-1dab-4cb6-b402-28e62f964d76
+    type_id: 13
+  - id: &sn_special_services 21482
+    name: SN Special Services
+    uuid: 0974b92b-7802-4603-b656-1038138f6c9b
+    type_id: 13
+  - id: &sn_shared_revenue_services 24340
+    name: SN Shared Revenue Services
+    uuid: 14e63fc2-fdee-47de-9e85-a5910fb7427a
+    type_id: 13
+  - id: &sn_voip_and_convergent_services 24409
+    name: SN Voip And Convergent Services
+    uuid: 925522d6-afaf-445c-b79a-67b92e276ef3
     type_id: 13
   - id: &sn_sms_mms_services 22841
     name: SN Sms_Mms Services
@@ -68,14 +76,6 @@ networks:
   - id: &sn_internet_access_outside_dakar 23999
     name: SN Internet Access Outside Dakar
     uuid: d848acc1-6488-4db7-9813-0f64d2b9d8ab
-    type_id: 13
-  - id: &sn_shared_revenue_services 24340
-    name: SN Shared Revenue Services
-    uuid: 14e63fc2-fdee-47de-9e85-a5910fb7427a
-    type_id: 13
-  - id: &sn_voip_and_convergent_services 24409
-    name: SN Voip And Convergent Services
-    uuid: 925522d6-afaf-445c-b79a-67b92e276ef3
     type_id: 13
 # Fixed Networks
   - id: &sn_fixed 21940
@@ -169,22 +169,7 @@ networks:
     uuid: 8e365414-4c90-4cba-83da-8289e9f7473c
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 242093
-    prefix: '221'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 8a1c44f5-1c4a-469a-a670-87559ec602b7
-    country_id: *sn
-    network_id: null
 # Supplementary services Prefixes
-  - id: 242485
-    prefix: '2211'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: 41d99241-5035-447b-87ae-b4e1cebc4e61
-    country_id: *sn
-    network_id: *sn_special_services
   - id: 243063
     prefix: '22117'
     number_min_length: 5
@@ -227,6 +212,27 @@ network_prefixes:
     uuid: 27ac0fcc-059d-42a7-b398-a1eeb3f9770c
     country_id: *sn
     network_id: *sn_value_added_services_free
+  - id: 242485
+    prefix: '2211'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: 41d99241-5035-447b-87ae-b4e1cebc4e61
+    country_id: *sn
+    network_id: *sn_special_services
+  - id: 256849
+    prefix: '22188'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c61917e2-3f19-4768-aba5-fcea896e912f
+    country_id: *sn
+    network_id: *sn_shared_revenue_services
+  - id: 257134
+    prefix: '2219'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f40a32ca-f29e-4a3f-96a0-5f9d9c101eb8
+    country_id: *sn
+    network_id: *sn_voip_and_convergent_services
   - id: 247732
     prefix: '22122'
     number_min_length: 8
@@ -325,21 +331,14 @@ network_prefixes:
     uuid: 6f7f6fb6-43dc-4b23-9fef-3bd1640cee66
     country_id: *sn
     network_id: *sn_internet_access_outside_dakar
-  - id: 256849
-    prefix: '22188'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c61917e2-3f19-4768-aba5-fcea896e912f
-    country_id: *sn
-    network_id: *sn_shared_revenue_services
-  - id: 257134
-    prefix: '2219'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f40a32ca-f29e-4a3f-96a0-5f9d9c101eb8
-    country_id: *sn
-    network_id: *sn_voip_and_convergent_services
 # Fixed Prefixes
+  - id: 242093
+    prefix: '221'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 8a1c44f5-1c4a-469a-a670-87559ec602b7
+    country_id: *sn
+    network_id: *sn_fixed
   - id: 243377
     prefix: '22132'
     number_min_length: 12
@@ -601,13 +600,6 @@ network_prefixes:
     uuid: b5fcdba7-fa0f-4d5e-99a0-68b03ee77f58
     country_id: *sn
     network_id: *sn_promobile_mobile
-  - id: 253043
-    prefix: '2217583'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 41ca39e1-ea57-4bf1-ae0d-5ea961871103
-    country_id: *sn
-    network_id: *sn_promobile_mobile
   - id: 255275
     prefix: '2217'
     number_min_length: 12
@@ -622,6 +614,13 @@ network_prefixes:
     uuid: c1a0fce3-d820-400e-aacd-5a86cf188562
     country_id: *sn
     network_id: *sn_expresso_mobile
+  - id: 253043
+    prefix: '2217583'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 41ca39e1-ea57-4bf1-ae0d-5ea961871103
+    country_id: *sn
+    network_id: *sn_promobile_mobile
   - id: 255459
     prefix: '22176'
     number_min_length: 12

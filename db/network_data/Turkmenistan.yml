@@ -1,49 +1,22 @@
 country_id: &tm 218
 networks:
+# Mobile Networks
+  - id: &tm_mts_mobile 13687
+    name: TM Mts Mobile
+    uuid: 7150b7d3-7ef6-4e4c-8f64-88632a99a046
+    type_id: 3
+  - id: &tm_mobile 14371
+    name: TM Mobile
+    uuid: 593c2aff-b22a-4cab-a87c-eadea9630df4
+    type_id: 3
+  - id: &tm_tmcell_mobile 12470
+    name: TM Tmcell Mobile
+    uuid: 59f1041b-5b84-4e9f-93d9-4e85a269ced8
+    type_id: 3
 # Fixed Networks
-  - id: &tm_mary_region 7387
-    name: TM Mary Region
-    uuid: 6511d362-f8a1-4d43-8d74-39539f7ed48b
-    type_id: 2
-  - id: &tm_yoloten_region 7980
-    name: TM Yoloten Region
-    uuid: 73af1e77-2420-4606-b0e7-de7777dadf10
-    type_id: 2
-  - id: &tm_gushgy_region 7996
-    name: TM Gushgy Region
-    uuid: edc20d54-319e-4ef5-856c-5c2c1c5a2390
-    type_id: 2
-  - id: &tm_yagti_yol_region 9172
-    name: TM Yagti Yol Region
-    uuid: b78b7360-6302-4b2c-9893-cb71342dc9f1
-    type_id: 2
-  - id: &tm_mollanepes_region 9192
-    name: TM Mollanepes Region
-    uuid: e8bc927f-6cc3-4437-ac1b-dafaf7e86c3f
-    type_id: 2
-  - id: &tm_gulanly_region 9203
-    name: TM Gulanly Region
-    uuid: 3c8af1ef-5f56-488d-84d6-ea49d4fc6417
-    type_id: 2
-  - id: &tm_bayramaly_region 9423
-    name: TM Bayramaly Region
-    uuid: 0d62f00c-5a53-430d-a14d-92404858a14c
-    type_id: 2
-  - id: &tm_murgap_region 9479
-    name: TM Murgap Region
-    uuid: e8f69f4d-3cc7-4458-90fa-171294b1c2ac
-    type_id: 2
-  - id: &tm_sakarcage_region 9504
-    name: TM Sakarcage Region
-    uuid: 5d77111f-f970-43e7-bd8d-b2470900229e
-    type_id: 2
-  - id: &tm_tagtabazar_region 9646
-    name: TM Tagtabazar Region
-    uuid: 14b3aa99-236e-4b8e-8a47-f100b8d4add6
-    type_id: 2
-  - id: &tm_turkmengala_region 9658
-    name: TM Turkmengala Region
-    uuid: f21c6093-ccfa-468a-9723-9fe60612a4b9
+  - id: &tm_fixed 43472
+    name: TM Fixed
+    uuid: e5e7b760-3a6d-4c6d-8155-627fb4a62f19
     type_id: 2
   - id: &tm_ashgabat_region 24870
     name: TM Ashgabat Region
@@ -97,18 +70,6 @@ networks:
     name: TM Gumdag Region
     uuid: 4e4e7952-55a0-427e-950b-ee375fa94a0b
     type_id: 2
-  - id: &tm_esenguly_region 28692
-    name: TM Esenguly Region
-    uuid: 62ec93da-4ea3-4932-a238-9775d9cdf92b
-    type_id: 2
-  - id: &tm_serdar_region 28713
-    name: TM Serdar Region
-    uuid: e117c803-d669-47bf-830f-e2c0bd689ef2
-    type_id: 2
-  - id: &tm_bereket_region 28760
-    name: TM Bereket Region
-    uuid: 4f4e64c3-391b-44c2-bb5e-e435859b4dd3
-    type_id: 2
   - id: &tm_gyzyletrek_region 29001
     name: TM Gyzyletrek Region
     uuid: a76a3c2e-05f3-420f-b038-a4bb8b5ee756
@@ -117,29 +78,25 @@ networks:
     name: TM Turkmenbasy Region
     uuid: 0566bfdc-20eb-4b1c-9a31-4dde3c652e41
     type_id: 2
+  - id: &tm_bereket_region 28760
+    name: TM Bereket Region
+    uuid: 4f4e64c3-391b-44c2-bb5e-e435859b4dd3
+    type_id: 2
   - id: &tm_garrygala_region 29128
     name: TM Garrygala Region
     uuid: 5314d937-d2f7-4880-8242-e41fa857550d
     type_id: 2
+  - id: &tm_esenguly_region 28692
+    name: TM Esenguly Region
+    uuid: 62ec93da-4ea3-4932-a238-9775d9cdf92b
+    type_id: 2
+  - id: &tm_serdar_region 28713
+    name: TM Serdar Region
+    uuid: e117c803-d669-47bf-830f-e2c0bd689ef2
+    type_id: 2
   - id: &tm_dasoguz_region 32403
     name: TM Dasoguz Region
     uuid: d78def03-12d6-4926-b800-e7190aa094a4
-    type_id: 2
-  - id: &tm_tagta_region 32917
-    name: TM Tagta Region
-    uuid: becf1c29-aeed-4102-a464-225852611a04
-    type_id: 2
-  - id: &tm_gubadag_region 33154
-    name: TM Gubadag Region
-    uuid: ca0f3fe5-2cb7-4af9-94ff-eabcda3c88ae
-    type_id: 2
-  - id: &tm_boldumsaz_region 33217
-    name: TM Boldumsaz Region
-    uuid: e9b3338c-09a7-45ae-b849-28ff951dc553
-    type_id: 2
-  - id: &tm_koneurgenc_region 33297
-    name: TM Koneurgenc Region
-    uuid: 7093ed64-25a0-4a78-b3ff-96edc89d3b38
     type_id: 2
   - id: &tm_yylanly_region 34457
     name: TM Yylanly Region
@@ -149,13 +106,25 @@ networks:
     name: TM Akdepe Region
     uuid: ccaafa9e-dd0c-41e6-a2fb-abff6c63bf6e
     type_id: 2
+  - id: &tm_gubadag_region 33154
+    name: TM Gubadag Region
+    uuid: ca0f3fe5-2cb7-4af9-94ff-eabcda3c88ae
+    type_id: 2
+  - id: &tm_boldumsaz_region 33217
+    name: TM Boldumsaz Region
+    uuid: e9b3338c-09a7-45ae-b849-28ff951dc553
+    type_id: 2
+  - id: &tm_tagta_region 32917
+    name: TM Tagta Region
+    uuid: becf1c29-aeed-4102-a464-225852611a04
+    type_id: 2
+  - id: &tm_koneurgenc_region 33297
+    name: TM Koneurgenc Region
+    uuid: 7093ed64-25a0-4a78-b3ff-96edc89d3b38
+    type_id: 2
   - id: &tm_nyyazow_region 34565
     name: TM Nyyazow Region
     uuid: 76b14b45-e0ad-4a2b-a5de-f88db00ca3f0
-    type_id: 2
-  - id: &tm_gowurdak_region 36717
-    name: TM Gowurdak Region
-    uuid: 8a794fee-0635-4ff9-b38d-ec05da7c4f40
     type_id: 2
   - id: &tm_turkmenabat_region 37309
     name: TM Turkmenabat Region
@@ -165,21 +134,21 @@ networks:
     name: TM Gazojak Region
     uuid: 5461d8bf-90d8-4e34-9913-923547da3f3c
     type_id: 2
+  - id: &tm_gowurdak_region 36717
+    name: TM Gowurdak Region
+    uuid: 8a794fee-0635-4ff9-b38d-ec05da7c4f40
+    type_id: 2
   - id: &tm_halac_region 37643
     name: TM Halac Region
     uuid: 3aa49196-aa88-41aa-a554-f67ad054e9d1
     type_id: 2
+  - id: &tm_hojambaz_region 37874
+    name: TM Hojambaz Region
+    uuid: fc650c47-dd48-4bd4-91e6-aaa84b28aec1
+    type_id: 2
   - id: &tm_garabekewul_region 37662
     name: TM Garabekewul Region
     uuid: 50881f50-22cd-4b62-bdec-1a1d235e424f
-    type_id: 2
-  - id: &tm_kerki_region 37673
-    name: TM Kerki Region
-    uuid: 622b0269-ac62-47bd-8318-d7727fa8e5f2
-    type_id: 2
-  - id: &tm_darganata_region 37688
-    name: TM Darganata Region
-    uuid: ce0fe3e1-d606-4c32-83b2-0af3413beca9
     type_id: 2
   - id: &tm_danew_region 37700
     name: TM Danew Region
@@ -188,6 +157,18 @@ networks:
   - id: &tm_sayat_region 37714
     name: TM Sayat Region
     uuid: 876f3e81-123b-4b69-87f8-c7e6ec856e5d
+    type_id: 2
+  - id: &tm_carsanny_region 37868
+    name: TM Carsanny Region
+    uuid: 45bb3400-5f01-4021-9e07-88e9b3733f79
+    type_id: 2
+  - id: &tm_kerki_region 37673
+    name: TM Kerki Region
+    uuid: 622b0269-ac62-47bd-8318-d7727fa8e5f2
+    type_id: 2
+  - id: &tm_darganata_region 37688
+    name: TM Darganata Region
+    uuid: ce0fe3e1-d606-4c32-83b2-0af3413beca9
     type_id: 2
   - id: &tm_farap_region 37727
     name: TM Farap Region
@@ -201,115 +182,125 @@ networks:
     name: TM Seydi Region
     uuid: 19fd0738-483a-44b5-a722-81b3fec9a59b
     type_id: 2
-  - id: &tm_carsanny_region 37868
-    name: TM Carsanny Region
-    uuid: 45bb3400-5f01-4021-9e07-88e9b3733f79
-    type_id: 2
-  - id: &tm_hojambaz_region 37874
-    name: TM Hojambaz Region
-    uuid: fc650c47-dd48-4bd4-91e6-aaa84b28aec1
-    type_id: 2
   - id: &tm_dostluk_region 38262
     name: TM Dostluk Region
     uuid: 67a2edce-1a12-4d20-a5f0-a7b945cea39f
     type_id: 2
-# Mobile Networks
-  - id: &tm_tmcell_mobile 12470
-    name: TM Tmcell Mobile
-    uuid: 59f1041b-5b84-4e9f-93d9-4e85a269ced8
-    type_id: 3
-  - id: &tm_mts_mobile 13687
-    name: TM Mts Mobile
-    uuid: 7150b7d3-7ef6-4e4c-8f64-88632a99a046
-    type_id: 3
-  - id: &tm_mobile 14371
-    name: TM Mobile
-    uuid: 593c2aff-b22a-4cab-a87c-eadea9630df4
-    type_id: 3
+  - id: &tm_mary_region 7387
+    name: TM Mary Region
+    uuid: 6511d362-f8a1-4d43-8d74-39539f7ed48b
+    type_id: 2
+  - id: &tm_bayramaly_region 9423
+    name: TM Bayramaly Region
+    uuid: 0d62f00c-5a53-430d-a14d-92404858a14c
+    type_id: 2
+  - id: &tm_yagti_yol_region 9172
+    name: TM Yagti Yol Region
+    uuid: b78b7360-6302-4b2c-9893-cb71342dc9f1
+    type_id: 2
+  - id: &tm_mollanepes_region 9192
+    name: TM Mollanepes Region
+    uuid: e8bc927f-6cc3-4437-ac1b-dafaf7e86c3f
+    type_id: 2
+  - id: &tm_gulanly_region 9203
+    name: TM Gulanly Region
+    uuid: 3c8af1ef-5f56-488d-84d6-ea49d4fc6417
+    type_id: 2
+  - id: &tm_yoloten_region 7980
+    name: TM Yoloten Region
+    uuid: 73af1e77-2420-4606-b0e7-de7777dadf10
+    type_id: 2
+  - id: &tm_gushgy_region 7996
+    name: TM Gushgy Region
+    uuid: edc20d54-319e-4ef5-856c-5c2c1c5a2390
+    type_id: 2
+  - id: &tm_murgap_region 9479
+    name: TM Murgap Region
+    uuid: e8f69f4d-3cc7-4458-90fa-171294b1c2ac
+    type_id: 2
+  - id: &tm_sakarcage_region 9504
+    name: TM Sakarcage Region
+    uuid: 5d77111f-f970-43e7-bd8d-b2470900229e
+    type_id: 2
+  - id: &tm_tagtabazar_region 9646
+    name: TM Tagtabazar Region
+    uuid: 14b3aa99-236e-4b8e-8a47-f100b8d4add6
+    type_id: 2
+  - id: &tm_turkmengala_region 9658
+    name: TM Turkmengala Region
+    uuid: f21c6093-ccfa-468a-9723-9fe60612a4b9
+    type_id: 2
 # Supplementary services Networks
   - id: &tm_special_services 21285
     name: TM Special Services
     uuid: 91f69451-47af-4af7-89da-bb96b39e90d7
     type_id: 13
 network_prefixes:
+# Mobile Prefixes
+  - id: 138637
+    prefix: '99366'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7cacd1be-0e26-4105-a8d1-222e0794ce02
+    country_id: *tm
+    network_id: *tm_mts_mobile
+  - id: 151432
+    prefix: '99367'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3354dfea-d909-4ab6-9d4a-3ac1b2b8c875
+    country_id: *tm
+    network_id: *tm_mts_mobile
+  - id: 149325
+    prefix: '9936'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c46ee5d6-5e91-400b-811e-fe441e0d53a1
+    country_id: *tm
+    network_id: *tm_mobile
+  - id: 146826
+    prefix: '99368'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 883cb59f-c09b-49f3-93d0-f4ff0fa0ce12
+    country_id: *tm
+    network_id: *tm_mts_mobile
+  - id: 164005
+    prefix: '99371'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9cea4933-ab32-4475-92f3-9e13da1d33bd
+    country_id: *tm
+    network_id: *tm_tmcell_mobile
+  - id: 117843
+    prefix: '99363'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 356022e0-3acf-4af1-9fa1-76b6be7a5f0e
+    country_id: *tm
+    network_id: *tm_tmcell_mobile
+  - id: 122446
+    prefix: '99364'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 058e830c-98ff-4513-9780-c354fd422fc4
+    country_id: *tm
+    network_id: *tm_tmcell_mobile
+  - id: 135925
+    prefix: '99365'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 444cf128-25cf-49d4-97e5-7ff5252f13cb
+    country_id: *tm
+    network_id: *tm_tmcell_mobile
 # Fixed Prefixes
-  - id: 76335
-    prefix: '993522'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 51bc33bf-d1d1-4743-a9b5-6e1a82cba961
+  - id: 242118
+    prefix: '993'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: f62a0d0e-115e-4030-90db-4062ae129ba0
     country_id: *tm
-    network_id: *tm_mary_region
-  - id: 80628
-    prefix: '993560'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c4f7c275-08bb-4113-b066-98bc96718570
-    country_id: *tm
-    network_id: *tm_yoloten_region
-  - id: 80644
-    prefix: '993561'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8f71dd3-47df-4ade-b0bf-ed28d2a7ddc1
-    country_id: *tm
-    network_id: *tm_gushgy_region
-  - id: 87095
-    prefix: '993557'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 517f6bb1-4e98-4ac3-b7ad-cfc3e37e6bd2
-    country_id: *tm
-    network_id: *tm_yagti_yol_region
-  - id: 87149
-    prefix: '993558'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7c6e25f8-5984-4de7-86ac-1edf1269e13d
-    country_id: *tm
-    network_id: *tm_mollanepes_region
-  - id: 87163
-    prefix: '993559'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e31725bd-7a2d-4cbd-93b1-5384c05fb7c7
-    country_id: *tm
-    network_id: *tm_gulanly_region
-  - id: 89674
-    prefix: '993564'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8a5f9e40-5e32-405e-bc12-63695c3380a9
-    country_id: *tm
-    network_id: *tm_bayramaly_region
-  - id: 89791
-    prefix: '993565'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 89dac240-d907-4f95-bf34-43d94149b504
-    country_id: *tm
-    network_id: *tm_murgap_region
-  - id: 89817
-    prefix: '993566'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3131a218-1387-4b63-951b-f8c5ccdb2ba3
-    country_id: *tm
-    network_id: *tm_sakarcage_region
-  - id: 90235
-    prefix: '993568'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0beb36b9-28a7-4eeb-9572-d963583ca143
-    country_id: *tm
-    network_id: *tm_tagtabazar_region
-  - id: 90247
-    prefix: '993569'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9fde1fe9-4116-4213-a604-5c22bd488644
-    country_id: *tm
-    network_id: *tm_turkmengala_region
+    network_id: *tm_fixed
   - id: 259234
     prefix: '99312'
     number_min_length: 11
@@ -401,27 +392,6 @@ network_prefixes:
     uuid: dba3cb7c-bd59-40ad-b42c-3fa233430a9f
     country_id: *tm
     network_id: *tm_gumdag_region
-  - id: 289854
-    prefix: '993245'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d94d9804-cb5b-4935-9765-5ff3f3ec59c0
-    country_id: *tm
-    network_id: *tm_esenguly_region
-  - id: 290179
-    prefix: '993246'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a6294668-4d89-4b78-bf51-4c08bda16b0e
-    country_id: *tm
-    network_id: *tm_serdar_region
-  - id: 290920
-    prefix: '993247'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8bdd3545-e32e-4455-933e-4a461a8ec92c
-    country_id: *tm
-    network_id: *tm_bereket_region
   - id: 294654
     prefix: '993242'
     number_min_length: 11
@@ -436,6 +406,13 @@ network_prefixes:
     uuid: 185c53d4-fc7d-4ee6-b45f-a971ef7ae6f7
     country_id: *tm
     network_id: *tm_turkmenbasy_region
+  - id: 290920
+    prefix: '993247'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8bdd3545-e32e-4455-933e-4a461a8ec92c
+    country_id: *tm
+    network_id: *tm_bereket_region
   - id: 295947
     prefix: '993248'
     number_min_length: 11
@@ -443,6 +420,20 @@ network_prefixes:
     uuid: f98b794f-46a7-438a-b10a-28f97410f3ea
     country_id: *tm
     network_id: *tm_garrygala_region
+  - id: 289854
+    prefix: '993245'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d94d9804-cb5b-4935-9765-5ff3f3ec59c0
+    country_id: *tm
+    network_id: *tm_esenguly_region
+  - id: 290179
+    prefix: '993246'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6294668-4d89-4b78-bf51-4c08bda16b0e
+    country_id: *tm
+    network_id: *tm_serdar_region
   - id: 335404
     prefix: '993322'
     number_min_length: 11
@@ -450,34 +441,6 @@ network_prefixes:
     uuid: 2377966e-add6-4fd8-a387-6c2d4a77007d
     country_id: *tm
     network_id: *tm_dasoguz_region
-  - id: 340693
-    prefix: '993340'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ef2a376-e66a-41e7-b739-166001d6e823
-    country_id: *tm
-    network_id: *tm_tagta_region
-  - id: 342385
-    prefix: '993345'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1eefba84-ade3-427f-bd69-8e17eaa817e5
-    country_id: *tm
-    network_id: *tm_gubadag_region
-  - id: 342561
-    prefix: '993346'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aaf8028d-9bc4-4426-bcc1-0edf14e5ddbc
-    country_id: *tm
-    network_id: *tm_boldumsaz_region
-  - id: 343343
-    prefix: '993347'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18e1aa50-a1c5-41fa-afc0-8872f055baa2
-    country_id: *tm
-    network_id: *tm_koneurgenc_region
   - id: 350986
     prefix: '993343'
     number_min_length: 11
@@ -492,6 +455,34 @@ network_prefixes:
     uuid: 21bd6c92-0659-485b-85f5-ece4584e35f2
     country_id: *tm
     network_id: *tm_akdepe_region
+  - id: 342385
+    prefix: '993345'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1eefba84-ade3-427f-bd69-8e17eaa817e5
+    country_id: *tm
+    network_id: *tm_gubadag_region
+  - id: 342561
+    prefix: '993346'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aaf8028d-9bc4-4426-bcc1-0edf14e5ddbc
+    country_id: *tm
+    network_id: *tm_boldumsaz_region
+  - id: 340693
+    prefix: '993340'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ef2a376-e66a-41e7-b739-166001d6e823
+    country_id: *tm
+    network_id: *tm_tagta_region
+  - id: 343343
+    prefix: '993347'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 18e1aa50-a1c5-41fa-afc0-8872f055baa2
+    country_id: *tm
+    network_id: *tm_koneurgenc_region
   - id: 351747
     prefix: '993348'
     number_min_length: 11
@@ -506,13 +497,6 @@ network_prefixes:
     uuid: fd7d4afe-a8b4-41d9-adf2-b235e771d73b
     country_id: *tm
     network_id: *tm_turkmenbasy_region
-  - id: 368415
-    prefix: '993431'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1411c411-4806-4003-a160-f765dd3e7980
-    country_id: *tm
-    network_id: *tm_gowurdak_region
   - id: 377515
     prefix: '993422'
     number_min_length: 11
@@ -534,6 +518,13 @@ network_prefixes:
     uuid: 4834b977-c414-4062-84fc-2efc91c644f8
     country_id: *tm
     network_id: *tm_gazojak_region
+  - id: 368415
+    prefix: '993431'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1411c411-4806-4003-a160-f765dd3e7980
+    country_id: *tm
+    network_id: *tm_gowurdak_region
   - id: 382085
     prefix: '993441'
     number_min_length: 11
@@ -541,6 +532,13 @@ network_prefixes:
     uuid: 8c64fadf-c039-455d-a344-278789421c31
     country_id: *tm
     network_id: *tm_halac_region
+  - id: 389938
+    prefix: '993442'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 33801dee-f33c-4a1c-b2ea-64f6631a5984
+    country_id: *tm
+    network_id: *tm_hojambaz_region
   - id: 382975
     prefix: '993443'
     number_min_length: 11
@@ -548,20 +546,6 @@ network_prefixes:
     uuid: eb78f1f9-2d7a-4b54-8ddf-f60e5da14323
     country_id: *tm
     network_id: *tm_garabekewul_region
-  - id: 384113
-    prefix: '993444'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 35647901-dbbb-49de-841e-5ffe57cd21bc
-    country_id: *tm
-    network_id: *tm_kerki_region
-  - id: 384983
-    prefix: '993445'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eb83b5b8-598e-46a6-b23a-b3f557c26df9
-    country_id: *tm
-    network_id: *tm_darganata_region
   - id: 385470
     prefix: '993446'
     number_min_length: 11
@@ -576,6 +560,27 @@ network_prefixes:
     uuid: 2f9da532-6c9d-4de3-96a6-5accad5bb62a
     country_id: *tm
     network_id: *tm_sayat_region
+  - id: 389555
+    prefix: '993440'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fe9837f1-63ad-4b95-a039-dd0c5388ad1b
+    country_id: *tm
+    network_id: *tm_carsanny_region
+  - id: 384113
+    prefix: '993444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 35647901-dbbb-49de-841e-5ffe57cd21bc
+    country_id: *tm
+    network_id: *tm_kerki_region
+  - id: 384983
+    prefix: '993445'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb83b5b8-598e-46a6-b23a-b3f557c26df9
+    country_id: *tm
+    network_id: *tm_darganata_region
   - id: 386200
     prefix: '993448'
     number_min_length: 11
@@ -597,20 +602,6 @@ network_prefixes:
     uuid: 76d78ec8-a3c4-4c30-966e-dda8aa89bb5e
     country_id: *tm
     network_id: *tm_seydi_region
-  - id: 389555
-    prefix: '993440'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fe9837f1-63ad-4b95-a039-dd0c5388ad1b
-    country_id: *tm
-    network_id: *tm_carsanny_region
-  - id: 389938
-    prefix: '993442'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 33801dee-f33c-4a1c-b2ea-64f6631a5984
-    country_id: *tm
-    network_id: *tm_hojambaz_region
   - id: 398523
     prefix: '993465'
     number_min_length: 11
@@ -618,71 +609,83 @@ network_prefixes:
     uuid: 983ef81b-73d3-49be-8a1c-6126bf483fed
     country_id: *tm
     network_id: *tm_dostluk_region
-# Mobile Prefixes
-  - id: 117843
-    prefix: '99363'
+  - id: 76335
+    prefix: '993522'
     number_min_length: 11
     number_max_length: 11
-    uuid: 356022e0-3acf-4af1-9fa1-76b6be7a5f0e
+    uuid: 51bc33bf-d1d1-4743-a9b5-6e1a82cba961
     country_id: *tm
-    network_id: *tm_tmcell_mobile
-  - id: 122446
-    prefix: '99364'
+    network_id: *tm_mary_region
+  - id: 89674
+    prefix: '993564'
     number_min_length: 11
     number_max_length: 11
-    uuid: 058e830c-98ff-4513-9780-c354fd422fc4
+    uuid: 8a5f9e40-5e32-405e-bc12-63695c3380a9
     country_id: *tm
-    network_id: *tm_tmcell_mobile
-  - id: 135925
-    prefix: '99365'
+    network_id: *tm_bayramaly_region
+  - id: 87095
+    prefix: '993557'
     number_min_length: 11
     number_max_length: 11
-    uuid: 444cf128-25cf-49d4-97e5-7ff5252f13cb
+    uuid: 517f6bb1-4e98-4ac3-b7ad-cfc3e37e6bd2
     country_id: *tm
-    network_id: *tm_tmcell_mobile
-  - id: 138637
-    prefix: '99366'
+    network_id: *tm_yagti_yol_region
+  - id: 87149
+    prefix: '993558'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7cacd1be-0e26-4105-a8d1-222e0794ce02
+    uuid: 7c6e25f8-5984-4de7-86ac-1edf1269e13d
     country_id: *tm
-    network_id: *tm_mts_mobile
-  - id: 146826
-    prefix: '99368'
+    network_id: *tm_mollanepes_region
+  - id: 87163
+    prefix: '993559'
     number_min_length: 11
     number_max_length: 11
-    uuid: 883cb59f-c09b-49f3-93d0-f4ff0fa0ce12
+    uuid: e31725bd-7a2d-4cbd-93b1-5384c05fb7c7
     country_id: *tm
-    network_id: *tm_mts_mobile
-  - id: 149325
-    prefix: '9936'
+    network_id: *tm_gulanly_region
+  - id: 80628
+    prefix: '993560'
     number_min_length: 11
     number_max_length: 11
-    uuid: c46ee5d6-5e91-400b-811e-fe441e0d53a1
+    uuid: c4f7c275-08bb-4113-b066-98bc96718570
     country_id: *tm
-    network_id: *tm_mobile
-  - id: 151432
-    prefix: '99367'
+    network_id: *tm_yoloten_region
+  - id: 80644
+    prefix: '993561'
     number_min_length: 11
     number_max_length: 11
-    uuid: 3354dfea-d909-4ab6-9d4a-3ac1b2b8c875
+    uuid: b8f71dd3-47df-4ade-b0bf-ed28d2a7ddc1
     country_id: *tm
-    network_id: *tm_mts_mobile
-  - id: 164005
-    prefix: '99371'
+    network_id: *tm_gushgy_region
+  - id: 89791
+    prefix: '993565'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9cea4933-ab32-4475-92f3-9e13da1d33bd
+    uuid: 89dac240-d907-4f95-bf34-43d94149b504
     country_id: *tm
-    network_id: *tm_tmcell_mobile
-# Country code Prefixes
-  - id: 242118
-    prefix: '993'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: f62a0d0e-115e-4030-90db-4062ae129ba0
+    network_id: *tm_murgap_region
+  - id: 89817
+    prefix: '993566'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3131a218-1387-4b63-951b-f8c5ccdb2ba3
     country_id: *tm
-    network_id: null
+    network_id: *tm_sakarcage_region
+  - id: 90235
+    prefix: '993568'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0beb36b9-28a7-4eeb-9572-d963583ca143
+    country_id: *tm
+    network_id: *tm_tagtabazar_region
+  - id: 90247
+    prefix: '993569'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9fde1fe9-4116-4213-a604-5c22bd488644
+    country_id: *tm
+    network_id: *tm_turkmengala_region
 # Supplementary services Prefixes
   - id: 242156
     prefix: '9930'

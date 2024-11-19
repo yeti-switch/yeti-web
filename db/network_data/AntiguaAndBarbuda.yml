@@ -1,5 +1,18 @@
 country_id: &ag 9
 networks:
+# Fixed Networks
+  - id: &ag_fixed 29682
+    name: AG Fixed
+    uuid: 58ee8e35-8bcf-4c75-8090-bed4e3a1c098
+    type_id: 2
+  - id: &ag_centrex_region 29684
+    name: AG Centrex Region
+    uuid: aa3ad0a0-f3c6-4cb7-87f6-33eee3db29b1
+    type_id: 2
+  - id: &ag_did_region 29685
+    name: AG Did Region
+    uuid: 94e81acf-6853-4b0a-a002-f3aff8124a20
+    type_id: 2
 # Supplementary services Networks
   - id: &ag_special_services 29677
     name: AG Special Services
@@ -26,19 +39,6 @@ networks:
     name: AG Paging
     uuid: 4904db5c-98b1-402b-a275-d9ef2149ccde
     type_id: 12
-# Fixed Networks
-  - id: &ag_fixed 29682
-    name: AG Fixed
-    uuid: 58ee8e35-8bcf-4c75-8090-bed4e3a1c098
-    type_id: 2
-  - id: &ag_centrex_region 29684
-    name: AG Centrex Region
-    uuid: aa3ad0a0-f3c6-4cb7-87f6-33eee3db29b1
-    type_id: 2
-  - id: &ag_did_region 29685
-    name: AG Did Region
-    uuid: 94e81acf-6853-4b0a-a002-f3aff8124a20
-    type_id: 2
 # Mobile Networks
   - id: &ag_flow_mobile 29683
     name: AG Flow Mobile
@@ -53,14 +53,84 @@ networks:
     uuid: 619c94d5-7884-4bba-9083-507cd1164f74
     type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 300767
+# Fixed Prefixes
+  - id: 513237
     prefix: '1268'
-    number_min_length: 2
+    number_min_length: 5
     number_max_length: 100
-    uuid: 555666e3-7573-45d4-a085-f686b08499e9
+    uuid: 9c72a045-2cda-4b74-8e22-7cb785b17924
     country_id: *ag
-    network_id: null
+    network_id: *ag_fixed
+  - id: 300784
+    prefix: '1268460'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 79a115cb-7ae9-4b2f-bd27-09b6704749ca
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 300785
+    prefix: '1268461'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 54b32055-b529-4a49-bdb9-80798cd5b4d7
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 300786
+    prefix: '1268462'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f302f919-71a9-4524-8c99-e372b34d4f8e
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 300787
+    prefix: '1268463'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e05116cb-13fb-450d-9d9f-2e6b905f1b06
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 300789
+    prefix: '1268480'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7d31befc-4448-47bf-be19-d8f4f55c2c60
+    country_id: *ag
+    network_id: *ag_centrex_region
+  - id: 300790
+    prefix: '1268481'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 37731b8d-8883-4d75-95b5-22c093685b39
+    country_id: *ag
+    network_id: *ag_centrex_region
+  - id: 300791
+    prefix: '1268484'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0595e7c3-4db8-4cb9-82cc-601c68e411eb
+    country_id: *ag
+    network_id: *ag_did_region
+  - id: 300794
+    prefix: '1268560'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 443fbb1e-7eb6-48c5-ba97-3bcbf7fc4229
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 300795
+    prefix: '1268561'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d036947b-517b-40a8-92ab-f033d0eafd2a
+    country_id: *ag
+    network_id: *ag_fixed
+  - id: 300796
+    prefix: '1268562'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fd36dd3d-6194-4fe6-b0c9-5ae510661ab3
+    country_id: *ag
+    network_id: *ag_fixed
 # Supplementary services Prefixes
   - id: 300773
     prefix: '1268092'
@@ -140,77 +210,6 @@ network_prefixes:
     uuid: 7234edfc-0d95-4e43-89e0-f67293cca911
     country_id: *ag
     network_id: *ag_flow_paging
-# Fixed Prefixes
-  - id: 300784
-    prefix: '1268460'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 79a115cb-7ae9-4b2f-bd27-09b6704749ca
-    country_id: *ag
-    network_id: *ag_fixed
-  - id: 300785
-    prefix: '1268461'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 54b32055-b529-4a49-bdb9-80798cd5b4d7
-    country_id: *ag
-    network_id: *ag_fixed
-  - id: 300786
-    prefix: '1268462'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f302f919-71a9-4524-8c99-e372b34d4f8e
-    country_id: *ag
-    network_id: *ag_fixed
-  - id: 300787
-    prefix: '1268463'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e05116cb-13fb-450d-9d9f-2e6b905f1b06
-    country_id: *ag
-    network_id: *ag_fixed
-  - id: 300789
-    prefix: '1268480'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7d31befc-4448-47bf-be19-d8f4f55c2c60
-    country_id: *ag
-    network_id: *ag_centrex_region
-  - id: 300790
-    prefix: '1268481'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 37731b8d-8883-4d75-95b5-22c093685b39
-    country_id: *ag
-    network_id: *ag_centrex_region
-  - id: 300791
-    prefix: '1268484'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0595e7c3-4db8-4cb9-82cc-601c68e411eb
-    country_id: *ag
-    network_id: *ag_did_region
-  - id: 300794
-    prefix: '1268560'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 443fbb1e-7eb6-48c5-ba97-3bcbf7fc4229
-    country_id: *ag
-    network_id: *ag_fixed
-  - id: 300795
-    prefix: '1268561'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d036947b-517b-40a8-92ab-f033d0eafd2a
-    country_id: *ag
-    network_id: *ag_fixed
-  - id: 300796
-    prefix: '1268562'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fd36dd3d-6194-4fe6-b0c9-5ae510661ab3
-    country_id: *ag
-    network_id: *ag_fixed
 # Mobile Prefixes
   - id: 300788
     prefix: '1268464'
