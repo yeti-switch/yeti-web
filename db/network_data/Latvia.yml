@@ -21,35 +21,39 @@ networks:
     name: LV Directory Enquiry Services
     uuid: db9b388c-d196-46e8-83f3-378f6c168a4c
     type_id: 13
-  - id: &lv_freephone_services 23819
-    name: LV Freephone Services
-    uuid: 1618ebde-fe4c-4a6d-80e7-959c8e071220
-    type_id: 13
-  - id: &lv_shared_cost_services 23925
-    name: LV Shared Cost Services
-    uuid: b8d5fe40-34b8-4ba5-84d6-189af576215c
-    type_id: 13
-  - id: &lv_virtual_private_network_public_radio_network 24267
-    name: LV Virtual Private Network Public Radio Network
-    uuid: 9291e2f3-f0b1-4686-81a2-e6e1ca6b3200
-    type_id: 13
-  - id: &lv_electronic_communications_services 24268
-    name: LV Electronic Communications Services
-    uuid: 5f02cf9c-e07a-40eb-bf57-6c55279018b2
-    type_id: 13
-  - id: &lv_public_telephones_virtual_mail 24272
-    name: LV Public Telephones Virtual Mail
-    uuid: cf4fadb3-df3c-4268-a583-31597dab64ed
-    type_id: 13
-  - id: &lv_premium_rate_services 24425
-    name: LV Premium Rate Services
-    uuid: eb8331e6-35f4-4104-b484-51fedb2b390d
-    type_id: 13
-# Fixed Networks
   - id: &lv_fixed 22540
     name: LV Fixed
     uuid: 3121c274-863f-449d-9288-7c6212673463
     type_id: 2
+  - id: &lv_mobile 22720
+    name: LV Mobile
+    uuid: 0c177ad0-a27c-4fd8-a084-1b55a71db88f
+    type_id: 3
+  - id: &lv_tele2_mobile 22751
+    name: LV Tele2 Mobile
+    uuid: 54447d23-41ac-4a1f-968b-9f796e3aa666
+    type_id: 3
+  - id: &lv_bite_mobile 22757
+    name: LV Bite Mobile
+    uuid: 44ba6a38-8099-48f4-8eee-d76650bc2899
+    type_id: 3
+  - id: &lv_lmt_mobile 22759
+    name: LV Lmt Mobile
+    uuid: a2978f31-4616-4f37-b5c9-4bd4c3e08b02
+    type_id: 3
+  - id: &lv_triatel_mobile 22787
+    name: LV Triatel Mobile
+    uuid: 94b6d230-bc90-46d3-93d2-bf6aa7814cc0
+    type_id: 3
+# Mobile Networks
+  - id: &lv_xomobile_mobile 22797
+    name: LV Xomobile Mobile
+    uuid: 847a0560-2d29-4b82-ab7c-b5171488d4f8
+    type_id: 3
+  - id: &lv_venta_mobile_mobile 22903
+    name: LV Venta Mobile Mobile
+    uuid: 5913bdca-30b6-4d60-a439-eb6f22e7fd7b
+    type_id: 3
   - id: &lv_valka_region 23425
     name: LV Valka Region
     uuid: eee8d411-59bf-4d0f-9b8a-ec7106a5da4d
@@ -70,6 +74,7 @@ networks:
     name: LV Tukums Region
     uuid: 356770a8-db53-4839-a589-5f1af55a342e
     type_id: 2
+# Fixed Networks
   - id: &lv_talsi_region 23443
     name: LV Talsi Region
     uuid: 49e07d4b-259f-4469-a3e4-3080d61a67a5
@@ -150,49 +155,43 @@ networks:
     name: LV Ludza Region
     uuid: bec1feac-9b3e-488a-bfbd-33651d54c4ac
     type_id: 2
+  - id: &lv_freephone_services 23819
+    name: LV Freephone Services
+    uuid: 1618ebde-fe4c-4a6d-80e7-959c8e071220
+    type_id: 13
+  - id: &lv_shared_cost_services 23925
+    name: LV Shared Cost Services
+    uuid: b8d5fe40-34b8-4ba5-84d6-189af576215c
+    type_id: 13
   - id: &lv_riga_region 24059
     name: LV Riga Region
     uuid: 9bb94c8f-0bbc-48f9-8cdb-892eb97a39f4
     type_id: 2
-# Mobile Networks
-  - id: &lv_mobile 22720
-    name: LV Mobile
-    uuid: 0c177ad0-a27c-4fd8-a084-1b55a71db88f
-    type_id: 3
-  - id: &lv_tele2_mobile 22751
-    name: LV Tele2 Mobile
-    uuid: 54447d23-41ac-4a1f-968b-9f796e3aa666
-    type_id: 3
-  - id: &lv_bite_mobile 22757
-    name: LV Bite Mobile
-    uuid: 44ba6a38-8099-48f4-8eee-d76650bc2899
-    type_id: 3
-  - id: &lv_lmt_mobile 22759
-    name: LV Lmt Mobile
-    uuid: a2978f31-4616-4f37-b5c9-4bd4c3e08b02
-    type_id: 3
-  - id: &lv_triatel_mobile 22787
-    name: LV Triatel Mobile
-    uuid: 94b6d230-bc90-46d3-93d2-bf6aa7814cc0
-    type_id: 3
-  - id: &lv_xomobile_mobile 22797
-    name: LV Xomobile Mobile
-    uuid: 847a0560-2d29-4b82-ab7c-b5171488d4f8
-    type_id: 3
-  - id: &lv_venta_mobile_mobile 22903
-    name: LV Venta Mobile Mobile
-    uuid: 5913bdca-30b6-4d60-a439-eb6f22e7fd7b
-    type_id: 3
+  - id: &lv_virtual_private_network_public_radio_network 24267
+    name: LV Virtual Private Network Public Radio Network
+    uuid: 9291e2f3-f0b1-4686-81a2-e6e1ca6b3200
+    type_id: 13
+  - id: &lv_electronic_communications_services 24268
+    name: LV Electronic Communications Services
+    uuid: 5f02cf9c-e07a-40eb-bf57-6c55279018b2
+    type_id: 13
+  - id: &lv_public_telephones_virtual_mail 24272
+    name: LV Public Telephones Virtual Mail
+    uuid: cf4fadb3-df3c-4268-a583-31597dab64ed
+    type_id: 13
+  - id: &lv_premium_rate_services 24425
+    name: LV Premium Rate Services
+    uuid: eb8331e6-35f4-4104-b484-51fedb2b390d
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Supplementary services Prefixes
   - id: 242043
     prefix: '371'
     number_min_length: 4
     number_max_length: 100
     uuid: 1f8f728b-5277-4e8f-90ca-b6ca817394d7
     country_id: *lv
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *lv_fixed
   - id: 242146
     prefix: '3710'
     number_min_length: 5
@@ -284,519 +283,6 @@ network_prefixes:
     uuid: cb8217ac-f146-405a-a240-ec6db58b5515
     country_id: *lv
     network_id: *lv_operator_services
-  - id: 253126
-    prefix: '37180'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18a41d9a-9be6-40af-b5a3-bc24ef54a2ed
-    country_id: *lv
-    network_id: *lv_freephone_services
-  - id: 253322
-    prefix: '37181'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e1d8866a-3de2-494b-861a-05afa699b861
-    country_id: *lv
-    network_id: *lv_shared_cost_services
-  - id: 253480
-    prefix: '37182'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: cd425ff5-673d-47e3-928e-522a9bc0d919
-    country_id: *lv
-    network_id: *lv_operator_services
-  - id: 253596
-    prefix: '37183'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 8ed13ceb-978d-4057-8d4e-5283ea2fdf02
-    country_id: *lv
-    network_id: *lv_operator_services
-  - id: 253723
-    prefix: '37184'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 429ba450-0f9a-427f-8bb1-f0c44f6d08fb
-    country_id: *lv
-    network_id: *lv_operator_services
-  - id: 256146
-    prefix: '371781'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f86a5fd4-c55e-4149-be20-765cd958ebc1
-    country_id: *lv
-    network_id: *lv_special_services
-  - id: 256161
-    prefix: '371782'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 311cf759-239b-41cb-89b6-5a1daba3190e
-    country_id: *lv
-    network_id: *lv_special_services
-  - id: 256183
-    prefix: '371783'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 73dadfa4-bb67-42a8-87b8-a0fa148d7f6a
-    country_id: *lv
-    network_id: *lv_special_services
-  - id: 256205
-    prefix: '371784'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 850d7348-5d58-4233-be60-f6a1ba46eee2
-    country_id: *lv
-    network_id: *lv_special_services
-  - id: 256240
-    prefix: '371785'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bcfd1a62-485a-4225-bbb6-2ac0e73a7532
-    country_id: *lv
-    network_id: *lv_virtual_private_network_public_radio_network
-  - id: 256256
-    prefix: '371786'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cfb4d293-b025-428b-8067-0e3a2a912df1
-    country_id: *lv
-    network_id: *lv_electronic_communications_services
-  - id: 256280
-    prefix: '371787'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 01a8e31d-5537-41a5-8ddc-20b46ffe16aa
-    country_id: *lv
-    network_id: *lv_electronic_communications_services
-  - id: 256331
-    prefix: '371788'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e78715d6-9930-41cd-b608-c3cfd26d371b
-    country_id: *lv
-    network_id: *lv_electronic_communications_services
-  - id: 256348
-    prefix: '371789'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a99f60dd-a676-4e4f-989c-1c201c581071
-    country_id: *lv
-    network_id: *lv_public_telephones_virtual_mail
-  - id: 256842
-    prefix: '37188'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: eb9f3d21-2ee9-4415-84a8-459084914d5f
-    country_id: *lv
-    network_id: *lv_operator_services
-  - id: 257004
-    prefix: '37189'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 0e9b3e48-2dde-4ae1-8f73-8836c41e2f38
-    country_id: *lv
-    network_id: *lv_operator_services
-  - id: 257162
-    prefix: '37190'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc4ff038-f054-4478-ac38-faf4e6542300
-    country_id: *lv
-    network_id: *lv_premium_rate_services
-  - id: 263709
-    prefix: '37185'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: e89634b6-1ee8-400c-b850-34d5f779eddb
-    country_id: *lv
-    network_id: *lv_operator_services
-  - id: 263856
-    prefix: '37186'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: d6eeee28-f37d-45de-a7f5-b3e09d483ace
-    country_id: *lv
-    network_id: *lv_operator_services
-  - id: 264010
-    prefix: '37187'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 25ae8133-eeab-4219-ab1a-aa47707a835d
-    country_id: *lv
-    network_id: *lv_operator_services
-# Fixed Prefixes
-  - id: 245406
-    prefix: '3716'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5bc751ba-4b99-496b-8c6d-777a68a8e25d
-    country_id: *lv
-    network_id: *lv_fixed
-  - id: 250549
-    prefix: '371627'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3cfffd9d-c5b6-43e0-b213-0441b2e43593
-    country_id: *lv
-    network_id: *lv_valka_region
-  - id: 250573
-    prefix: '371628'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 27f228dd-a99c-4662-bacd-2390d750b33f
-    country_id: *lv
-    network_id: *lv_saldus_region
-  - id: 250624
-    prefix: '371629'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a681612d-a8ba-4358-a335-6f1e7115e722
-    country_id: *lv
-    network_id: *lv_bauska_region
-  - id: 250671
-    prefix: '371630'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 609fac88-d8f1-45b4-bcbe-dcab78258a1c
-    country_id: *lv
-    network_id: *lv_jelgava_region
-  - id: 250691
-    prefix: '371631'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1d0b29f3-eccb-4eb8-a41a-e2e756cc470a
-    country_id: *lv
-    network_id: *lv_tukums_region
-  - id: 250720
-    prefix: '371632'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d8cdd9d0-a3bc-4441-b302-28aba66f2c5e
-    country_id: *lv
-    network_id: *lv_talsi_region
-  - id: 250736
-    prefix: '371633'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7dc51de7-72be-46c3-8df9-46e1969d9afd
-    country_id: *lv
-    network_id: *lv_kuldiga_region
-  - id: 250755
-    prefix: '371634'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d8f4a10c-d9ff-4f81-b3c1-52d28d2bedf2
-    country_id: *lv
-    network_id: *lv_liepaja_region
-  - id: 250797
-    prefix: '371635'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 95c62053-47fd-49ba-8c63-90ec1e27d287
-    country_id: *lv
-    network_id: *lv_ventspils_region
-  - id: 250824
-    prefix: '371636'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fa4dd20f-bfa0-42ae-a389-94ddf7b3fe28
-    country_id: *lv
-    network_id: *lv_ventspils_region
-  - id: 250850
-    prefix: '371637'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3d3d0e17-9914-4f20-89e4-d4ee535e3042
-    country_id: *lv
-    network_id: *lv_dobele_region
-  - id: 250871
-    prefix: '371638'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5f212303-7a2b-48f7-96da-c56609532a25
-    country_id: *lv
-    network_id: *lv_saldus_region
-  - id: 250904
-    prefix: '371639'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d4064c0f-6255-486a-acb5-9999c4e2734b
-    country_id: *lv
-    network_id: *lv_bauska_region
-  - id: 251036
-    prefix: '371640'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cf33c8af-1a43-4ccd-9d68-26833017113f
-    country_id: *lv
-    network_id: *lv_limbazi_region
-  - id: 251087
-    prefix: '371641'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ffcca721-ae92-4a29-a87f-50e62577379c
-    country_id: *lv
-    network_id: *lv_cesis_region
-  - id: 251118
-    prefix: '371642'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8f6ce9ab-27e8-40f6-a4c8-a8f8c633f786
-    country_id: *lv
-    network_id: *lv_valmiera_region
-  - id: 251124
-    prefix: '371643'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0563651f-d1bd-4ad0-9b90-66ca9ca585f9
-    country_id: *lv
-    network_id: *lv_aluksne_region
-  - id: 251131
-    prefix: '371644'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b6993ac6-f07f-42b8-a80e-adb730d992d7
-    country_id: *lv
-    network_id: *lv_gulbene_region
-  - id: 251157
-    prefix: '371645'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6fe11d75-e542-4318-9ef9-ac382201e668
-    country_id: *lv
-    network_id: *lv_balvi_region
-  - id: 251164
-    prefix: '371646'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e94e4aa0-2048-4c9d-80d3-2b62bd81f62b
-    country_id: *lv
-    network_id: *lv_rezekne_region
-  - id: 251172
-    prefix: '371647'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8cf8bff2-708f-40cb-8399-2b1f61acb193
-    country_id: *lv
-    network_id: *lv_valka_region
-  - id: 251177
-    prefix: '371648'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 17a2e800-0a28-443c-a81a-9aab11ea4492
-    country_id: *lv
-    network_id: *lv_madona_region
-  - id: 251184
-    prefix: '371649'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5b729bb7-dc9e-48ef-93c3-a251bd60547e
-    country_id: *lv
-    network_id: *lv_aizkraukle_region
-  - id: 251251
-    prefix: '371650'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 753c1f95-f359-47e0-9a8b-d76833416b4f
-    country_id: *lv
-    network_id: *lv_ogre_region
-  - id: 251279
-    prefix: '371651'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d0c43324-4cde-43dc-bbc0-991fc215e7c9
-    country_id: *lv
-    network_id: *lv_aizkraukle_region
-  - id: 251297
-    prefix: '371652'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7daf9616-0c79-49ec-8367-a83c15867916
-    country_id: *lv
-    network_id: *lv_jekabpils_region
-  - id: 251320
-    prefix: '371653'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c4adc7aa-4022-482c-9f87-aa97b5ce0d45
-    country_id: *lv
-    network_id: *lv_preili_region
-  - id: 251350
-    prefix: '371654'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e5e4a5aa-962e-4b95-94a9-3396ca0b019d
-    country_id: *lv
-    network_id: *lv_daugavpils_region
-  - id: 251391
-    prefix: '371655'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 88a734cf-dccd-4fa3-a737-bf1f1741eb27
-    country_id: *lv
-    network_id: *lv_ogre_region
-  - id: 251411
-    prefix: '371656'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 47c386b4-cce6-4dd7-89c1-ec8ec98ebf32
-    country_id: *lv
-    network_id: *lv_kraslava_region
-  - id: 251437
-    prefix: '371657'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3894a956-b1a6-4f45-8973-41384aa14b8b
-    country_id: *lv
-    network_id: *lv_ludza_region
-  - id: 251508
-    prefix: '371658'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a664448-f556-4592-b762-d6282abe8605
-    country_id: *lv
-    network_id: *lv_daugavpils_region
-  - id: 251527
-    prefix: '371659'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2ba765cb-2db6-4d17-8904-c2e63f2a71fb
-    country_id: *lv
-    network_id: *lv_cesis_region
-  - id: 254029
-    prefix: '371613'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eb3e364d-bc35-4331-87f1-56d731e3e673
-    country_id: *lv
-    network_id: *lv_preili_region
-  - id: 254079
-    prefix: '371616'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c565254b-ee33-43cb-8520-5513df2eb940
-    country_id: *lv
-    network_id: *lv_kraslava_region
-  - id: 254085
-    prefix: '371617'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 769fdff3-5fda-48bc-82e1-81fefeca1c36
-    country_id: *lv
-    network_id: *lv_ludza_region
-  - id: 254129
-    prefix: '371620'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18d9bfda-4791-46a2-bfd6-48fc2db04992
-    country_id: *lv
-    network_id: *lv_limbazi_region
-  - id: 254149
-    prefix: '371621'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c86533f2-5e59-4a7e-aca0-b5a2b0ebdf85
-    country_id: *lv
-    network_id: *lv_tukums_region
-  - id: 254171
-    prefix: '371622'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6627fc45-cad5-4fd1-9430-f7d10917d67b
-    country_id: *lv
-    network_id: *lv_talsi_region
-  - id: 254182
-    prefix: '371623'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e2aec812-2500-4568-b6bb-b34a41195597
-    country_id: *lv
-    network_id: *lv_kuldiga_region
-  - id: 254214
-    prefix: '371624'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 78426a3b-e5ee-4a33-842c-9757c3b7a0e6
-    country_id: *lv
-    network_id: *lv_gulbene_region
-  - id: 254231
-    prefix: '371625'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3e3e6643-ac0c-492b-9127-3471eaec417a
-    country_id: *lv
-    network_id: *lv_balvi_region
-  - id: 254252
-    prefix: '371626'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7341e056-122c-4ef8-9a33-ac7c1c05f335
-    country_id: *lv
-    network_id: *lv_rezekne_region
-  - id: 254294
-    prefix: '37166'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f3d5e705-bece-414e-b80b-ba0f3851bd9d
-    country_id: *lv
-    network_id: *lv_riga_region
-  - id: 254608
-    prefix: '37167'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6e985556-20d4-4608-9b19-2df62bd37424
-    country_id: *lv
-    network_id: *lv_riga_region
-  - id: 254690
-    prefix: '371680'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6aaa636e-ccb1-42c8-8b3c-5ed115d97df4
-    country_id: *lv
-    network_id: *lv_aluksne_region
-  - id: 254737
-    prefix: '371682'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3e650f14-8184-40ec-a5db-b71f0c982b54
-    country_id: *lv
-    network_id: *lv_valmiera_region
-  - id: 254747
-    prefix: '371683'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ea42ea1-3b59-4c8e-81ee-ce61d70c46db
-    country_id: *lv
-    network_id: *lv_jekabpils_region
-  - id: 254756
-    prefix: '371684'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a3f84c85-afb1-4736-aef3-da07d796bbcf
-    country_id: *lv
-    network_id: *lv_liepaja_region
-  - id: 254801
-    prefix: '371686'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9cf5bdd5-b952-400e-b512-a10cf7aa2500
-    country_id: *lv
-    network_id: *lv_jelgava_region
-  - id: 254809
-    prefix: '371687'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 050729f3-31bc-4cd2-9fc6-f785b31b81dd
-    country_id: *lv
-    network_id: *lv_dobele_region
-  - id: 254823
-    prefix: '371688'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c870f391-8896-4ad7-a243-bb68b9368d73
-    country_id: *lv
-    network_id: *lv_madona_region
-# Mobile Prefixes
   - id: 247416
     prefix: '3712'
     number_min_length: 11
@@ -930,6 +416,7 @@ network_prefixes:
     uuid: 91a9278e-2e79-4644-9660-7b00d7da6ca9
     country_id: *lv
     network_id: *lv_bite_mobile
+# Mobile Prefixes
   - id: 247588
     prefix: '3712082'
     number_min_length: 11
@@ -2505,3 +1992,515 @@ network_prefixes:
     uuid: 6cfbe8f2-9fc3-4db2-b63d-9520e1707ec1
     country_id: *lv
     network_id: *lv_bite_mobile
+  - id: 245406
+    prefix: '3716'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5bc751ba-4b99-496b-8c6d-777a68a8e25d
+    country_id: *lv
+    network_id: *lv_fixed
+  - id: 254029
+    prefix: '371613'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb3e364d-bc35-4331-87f1-56d731e3e673
+    country_id: *lv
+    network_id: *lv_preili_region
+  - id: 254079
+    prefix: '371616'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c565254b-ee33-43cb-8520-5513df2eb940
+    country_id: *lv
+    network_id: *lv_kraslava_region
+  - id: 254085
+    prefix: '371617'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 769fdff3-5fda-48bc-82e1-81fefeca1c36
+    country_id: *lv
+    network_id: *lv_ludza_region
+  - id: 254129
+    prefix: '371620'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 18d9bfda-4791-46a2-bfd6-48fc2db04992
+    country_id: *lv
+    network_id: *lv_limbazi_region
+  - id: 254149
+    prefix: '371621'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c86533f2-5e59-4a7e-aca0-b5a2b0ebdf85
+    country_id: *lv
+    network_id: *lv_tukums_region
+  - id: 254171
+    prefix: '371622'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6627fc45-cad5-4fd1-9430-f7d10917d67b
+    country_id: *lv
+    network_id: *lv_talsi_region
+  - id: 254182
+    prefix: '371623'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e2aec812-2500-4568-b6bb-b34a41195597
+    country_id: *lv
+    network_id: *lv_kuldiga_region
+  - id: 254214
+    prefix: '371624'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 78426a3b-e5ee-4a33-842c-9757c3b7a0e6
+    country_id: *lv
+    network_id: *lv_gulbene_region
+  - id: 254231
+    prefix: '371625'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3e3e6643-ac0c-492b-9127-3471eaec417a
+    country_id: *lv
+    network_id: *lv_balvi_region
+  - id: 254252
+    prefix: '371626'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7341e056-122c-4ef8-9a33-ac7c1c05f335
+    country_id: *lv
+    network_id: *lv_rezekne_region
+  - id: 250549
+    prefix: '371627'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3cfffd9d-c5b6-43e0-b213-0441b2e43593
+    country_id: *lv
+    network_id: *lv_valka_region
+  - id: 250573
+    prefix: '371628'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 27f228dd-a99c-4662-bacd-2390d750b33f
+    country_id: *lv
+    network_id: *lv_saldus_region
+  - id: 250624
+    prefix: '371629'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a681612d-a8ba-4358-a335-6f1e7115e722
+    country_id: *lv
+    network_id: *lv_bauska_region
+  - id: 250671
+    prefix: '371630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 609fac88-d8f1-45b4-bcbe-dcab78258a1c
+    country_id: *lv
+    network_id: *lv_jelgava_region
+  - id: 250691
+    prefix: '371631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1d0b29f3-eccb-4eb8-a41a-e2e756cc470a
+    country_id: *lv
+    network_id: *lv_tukums_region
+  - id: 250720
+    prefix: '371632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8cdd9d0-a3bc-4441-b302-28aba66f2c5e
+    country_id: *lv
+    network_id: *lv_talsi_region
+  - id: 250736
+    prefix: '371633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7dc51de7-72be-46c3-8df9-46e1969d9afd
+    country_id: *lv
+    network_id: *lv_kuldiga_region
+  - id: 250755
+    prefix: '371634'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8f4a10c-d9ff-4f81-b3c1-52d28d2bedf2
+    country_id: *lv
+    network_id: *lv_liepaja_region
+# Fixed Prefixes
+  - id: 250797
+    prefix: '371635'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 95c62053-47fd-49ba-8c63-90ec1e27d287
+    country_id: *lv
+    network_id: *lv_ventspils_region
+  - id: 250824
+    prefix: '371636'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fa4dd20f-bfa0-42ae-a389-94ddf7b3fe28
+    country_id: *lv
+    network_id: *lv_ventspils_region
+  - id: 250850
+    prefix: '371637'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d3d0e17-9914-4f20-89e4-d4ee535e3042
+    country_id: *lv
+    network_id: *lv_dobele_region
+  - id: 250871
+    prefix: '371638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5f212303-7a2b-48f7-96da-c56609532a25
+    country_id: *lv
+    network_id: *lv_saldus_region
+  - id: 250904
+    prefix: '371639'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d4064c0f-6255-486a-acb5-9999c4e2734b
+    country_id: *lv
+    network_id: *lv_bauska_region
+  - id: 251036
+    prefix: '371640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cf33c8af-1a43-4ccd-9d68-26833017113f
+    country_id: *lv
+    network_id: *lv_limbazi_region
+  - id: 251087
+    prefix: '371641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ffcca721-ae92-4a29-a87f-50e62577379c
+    country_id: *lv
+    network_id: *lv_cesis_region
+  - id: 251118
+    prefix: '371642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f6ce9ab-27e8-40f6-a4c8-a8f8c633f786
+    country_id: *lv
+    network_id: *lv_valmiera_region
+  - id: 251124
+    prefix: '371643'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0563651f-d1bd-4ad0-9b90-66ca9ca585f9
+    country_id: *lv
+    network_id: *lv_aluksne_region
+  - id: 251131
+    prefix: '371644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b6993ac6-f07f-42b8-a80e-adb730d992d7
+    country_id: *lv
+    network_id: *lv_gulbene_region
+  - id: 251157
+    prefix: '371645'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6fe11d75-e542-4318-9ef9-ac382201e668
+    country_id: *lv
+    network_id: *lv_balvi_region
+  - id: 251164
+    prefix: '371646'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e94e4aa0-2048-4c9d-80d3-2b62bd81f62b
+    country_id: *lv
+    network_id: *lv_rezekne_region
+  - id: 251172
+    prefix: '371647'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8cf8bff2-708f-40cb-8399-2b1f61acb193
+    country_id: *lv
+    network_id: *lv_valka_region
+  - id: 251177
+    prefix: '371648'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 17a2e800-0a28-443c-a81a-9aab11ea4492
+    country_id: *lv
+    network_id: *lv_madona_region
+  - id: 251184
+    prefix: '371649'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5b729bb7-dc9e-48ef-93c3-a251bd60547e
+    country_id: *lv
+    network_id: *lv_aizkraukle_region
+  - id: 251251
+    prefix: '371650'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 753c1f95-f359-47e0-9a8b-d76833416b4f
+    country_id: *lv
+    network_id: *lv_ogre_region
+  - id: 251279
+    prefix: '371651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0c43324-4cde-43dc-bbc0-991fc215e7c9
+    country_id: *lv
+    network_id: *lv_aizkraukle_region
+  - id: 251297
+    prefix: '371652'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7daf9616-0c79-49ec-8367-a83c15867916
+    country_id: *lv
+    network_id: *lv_jekabpils_region
+  - id: 251320
+    prefix: '371653'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c4adc7aa-4022-482c-9f87-aa97b5ce0d45
+    country_id: *lv
+    network_id: *lv_preili_region
+  - id: 251350
+    prefix: '371654'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e5e4a5aa-962e-4b95-94a9-3396ca0b019d
+    country_id: *lv
+    network_id: *lv_daugavpils_region
+  - id: 251391
+    prefix: '371655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 88a734cf-dccd-4fa3-a737-bf1f1741eb27
+    country_id: *lv
+    network_id: *lv_ogre_region
+  - id: 251411
+    prefix: '371656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 47c386b4-cce6-4dd7-89c1-ec8ec98ebf32
+    country_id: *lv
+    network_id: *lv_kraslava_region
+  - id: 251437
+    prefix: '371657'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3894a956-b1a6-4f45-8973-41384aa14b8b
+    country_id: *lv
+    network_id: *lv_ludza_region
+  - id: 251508
+    prefix: '371658'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a664448-f556-4592-b762-d6282abe8605
+    country_id: *lv
+    network_id: *lv_daugavpils_region
+  - id: 251527
+    prefix: '371659'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2ba765cb-2db6-4d17-8904-c2e63f2a71fb
+    country_id: *lv
+    network_id: *lv_cesis_region
+  - id: 254294
+    prefix: '37166'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f3d5e705-bece-414e-b80b-ba0f3851bd9d
+    country_id: *lv
+    network_id: *lv_riga_region
+  - id: 254608
+    prefix: '37167'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6e985556-20d4-4608-9b19-2df62bd37424
+    country_id: *lv
+    network_id: *lv_riga_region
+  - id: 254690
+    prefix: '371680'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6aaa636e-ccb1-42c8-8b3c-5ed115d97df4
+    country_id: *lv
+    network_id: *lv_aluksne_region
+  - id: 254737
+    prefix: '371682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3e650f14-8184-40ec-a5db-b71f0c982b54
+    country_id: *lv
+    network_id: *lv_valmiera_region
+  - id: 254747
+    prefix: '371683'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ea42ea1-3b59-4c8e-81ee-ce61d70c46db
+    country_id: *lv
+    network_id: *lv_jekabpils_region
+  - id: 254756
+    prefix: '371684'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a3f84c85-afb1-4736-aef3-da07d796bbcf
+    country_id: *lv
+    network_id: *lv_liepaja_region
+  - id: 254801
+    prefix: '371686'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9cf5bdd5-b952-400e-b512-a10cf7aa2500
+    country_id: *lv
+    network_id: *lv_jelgava_region
+  - id: 254809
+    prefix: '371687'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 050729f3-31bc-4cd2-9fc6-f785b31b81dd
+    country_id: *lv
+    network_id: *lv_dobele_region
+  - id: 254823
+    prefix: '371688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c870f391-8896-4ad7-a243-bb68b9368d73
+    country_id: *lv
+    network_id: *lv_madona_region
+  - id: 256146
+    prefix: '371781'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f86a5fd4-c55e-4149-be20-765cd958ebc1
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 256161
+    prefix: '371782'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 311cf759-239b-41cb-89b6-5a1daba3190e
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 256183
+    prefix: '371783'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73dadfa4-bb67-42a8-87b8-a0fa148d7f6a
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 256205
+    prefix: '371784'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 850d7348-5d58-4233-be60-f6a1ba46eee2
+    country_id: *lv
+    network_id: *lv_special_services
+  - id: 256240
+    prefix: '371785'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bcfd1a62-485a-4225-bbb6-2ac0e73a7532
+    country_id: *lv
+    network_id: *lv_virtual_private_network_public_radio_network
+  - id: 256256
+    prefix: '371786'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cfb4d293-b025-428b-8067-0e3a2a912df1
+    country_id: *lv
+    network_id: *lv_electronic_communications_services
+  - id: 256280
+    prefix: '371787'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01a8e31d-5537-41a5-8ddc-20b46ffe16aa
+    country_id: *lv
+    network_id: *lv_electronic_communications_services
+  - id: 256331
+    prefix: '371788'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e78715d6-9930-41cd-b608-c3cfd26d371b
+    country_id: *lv
+    network_id: *lv_electronic_communications_services
+  - id: 256348
+    prefix: '371789'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a99f60dd-a676-4e4f-989c-1c201c581071
+    country_id: *lv
+    network_id: *lv_public_telephones_virtual_mail
+  - id: 253126
+    prefix: '37180'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 18a41d9a-9be6-40af-b5a3-bc24ef54a2ed
+    country_id: *lv
+    network_id: *lv_freephone_services
+  - id: 253322
+    prefix: '37181'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1d8866a-3de2-494b-861a-05afa699b861
+    country_id: *lv
+    network_id: *lv_shared_cost_services
+  - id: 253480
+    prefix: '37182'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: cd425ff5-673d-47e3-928e-522a9bc0d919
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 253596
+    prefix: '37183'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 8ed13ceb-978d-4057-8d4e-5283ea2fdf02
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 253723
+    prefix: '37184'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 429ba450-0f9a-427f-8bb1-f0c44f6d08fb
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 263709
+    prefix: '37185'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e89634b6-1ee8-400c-b850-34d5f779eddb
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 263856
+    prefix: '37186'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: d6eeee28-f37d-45de-a7f5-b3e09d483ace
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 264010
+    prefix: '37187'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 25ae8133-eeab-4219-ab1a-aa47707a835d
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 256842
+    prefix: '37188'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: eb9f3d21-2ee9-4415-84a8-459084914d5f
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 257004
+    prefix: '37189'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 0e9b3e48-2dde-4ae1-8f73-8836c41e2f38
+    country_id: *lv
+    network_id: *lv_operator_services
+  - id: 257162
+    prefix: '37190'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc4ff038-f054-4478-ac38-faf4e6542300
+    country_id: *lv
+    network_id: *lv_premium_rate_services

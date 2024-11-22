@@ -1,6 +1,6 @@
 country_id: &bw 28
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &bw_shared_calls_services 21333
     name: BW Shared Calls Services
     uuid: 4da9671d-71cb-4082-aa0e-32eae542736d
@@ -17,7 +17,6 @@ networks:
     name: BW Emergency Services
     uuid: 9f7d17c2-af09-4112-bc5f-9d9d089857b1
     type_id: 13
-# Fixed Networks
   - id: &bw_jwaneng_region 22461
     name: BW Jwaneng Region
     uuid: d77e9868-e562-4d6e-9732-c1716b85c572
@@ -70,19 +69,7 @@ networks:
     name: BW Ghanzi Kgalagadi Region
     uuid: 48c0a1f1-a09f-4d47-8259-ccd6e702d10c
     type_id: 2
-  - id: &bw_kasane_region 24038
-    name: BW Kasane Region
-    uuid: c3079a43-1f66-4fb0-b1c5-338f21291aef
-    type_id: 2
-  - id: &bw_maun_region 24097
-    name: BW Maun Region
-    uuid: 692c8e60-9447-4b68-913c-0e40f18fe6e5
-    type_id: 2
-  - id: &bw_voip_region 24276
-    name: BW Voip Region
-    uuid: 61185054-6dd7-45f7-b2d1-a80d70bbb7db
-    type_id: 2
-# Mobile Networks
+# Supplementary services Networks
   - id: &bw_mascom_mobile 23563
     name: BW Mascom Mobile
     uuid: d9d4ecf1-43cb-4f38-9404-479fbedd8882
@@ -95,20 +82,36 @@ networks:
     name: BW Btc Mobile Mobile
     uuid: 283e1ea4-7ebf-4084-844b-f23f0e94d13e
     type_id: 3
+  - id: &bw_kasane_region 24038
+    name: BW Kasane Region
+    uuid: c3079a43-1f66-4fb0-b1c5-338f21291aef
+    type_id: 2
+# Mobile Networks
+  - id: &bw_maun_region 24097
+    name: BW Maun Region
+    uuid: 692c8e60-9447-4b68-913c-0e40f18fe6e5
+    type_id: 2
   - id: &bw_mobile 24142
     name: BW Mobile
     uuid: 3d4f71d5-8012-4171-a2ef-3dd8615e1eae
     type_id: 3
+  - id: &bw_voip_region 24276
+    name: BW Voip Region
+    uuid: 61185054-6dd7-45f7-b2d1-a80d70bbb7db
+    type_id: 2
+  - id: &bw_fixed 43392
+    name: BW Fixed
+    uuid: 21528fde-9b7a-42c3-9c63-276bad7f9e49
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241963
     prefix: '267'
     number_min_length: 4
     number_max_length: 100
     uuid: cae476d6-d3a3-477c-858a-a94ef0da35fb
     country_id: *bw
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *bw_fixed
   - id: 242313
     prefix: '26708'
     number_min_length: 13
@@ -179,42 +182,6 @@ network_prefixes:
     uuid: 682bc013-ed97-4c7e-bae7-fc746cfed74b
     country_id: *bw
     network_id: *bw_emergency_services
-  - id: 257356
-    prefix: '26791'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 6f5a56a6-af84-402c-8e98-aad5b5ef163c
-    country_id: *bw
-    network_id: *bw_emergency_services
-  - id: 257582
-    prefix: '26792'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 7e99354f-0988-485a-b74e-106b0e7d2e1f
-    country_id: *bw
-    network_id: *bw_emergency_services
-  - id: 258174
-    prefix: '26799'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 086a0318-a938-413b-9a98-37f3ff0e4ff1
-    country_id: *bw
-    network_id: *bw_emergency_services
-# Fixed Prefixes
-  - id: 245147
-    prefix: '26758'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0665c1c0-5a81-40fc-a7c6-e1f43cd39727
-    country_id: *bw
-    network_id: *bw_jwaneng_region
-  - id: 245249
-    prefix: '26759'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c2fd8535-bbd2-4371-98cd-fc02742e8808
-    country_id: *bw
-    network_id: *bw_molepolole_region
   - id: 248105
     prefix: '26724'
     number_min_length: 10
@@ -257,6 +224,7 @@ network_prefixes:
     uuid: eca46d22-7793-4015-a434-d8a77eb4fbba
     country_id: *bw
     network_id: *bw_mahalapye_region
+# Supplementary services Prefixes
   - id: 249504
     prefix: '26749'
     number_min_length: 10
@@ -285,13 +253,20 @@ network_prefixes:
     uuid: 326f74f0-c29e-4c0a-bc4c-d7bfc930304f
     country_id: *bw
     network_id: *bw_mochudi_region
-  - id: 251235
-    prefix: '26765'
+  - id: 245147
+    prefix: '26758'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9447e0d9-bcb3-4d68-8d42-c531bbe2fc56
+    uuid: 0665c1c0-5a81-40fc-a7c6-e1f43cd39727
     country_id: *bw
-    network_id: *bw_ghanzi_kgalagadi_region
+    network_id: *bw_jwaneng_region
+  - id: 245249
+    prefix: '26759'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c2fd8535-bbd2-4371-98cd-fc02742e8808
+    country_id: *bw
+    network_id: *bw_molepolole_region
   - id: 254111
     prefix: '26762'
     number_min_length: 10
@@ -299,6 +274,13 @@ network_prefixes:
     uuid: 360b821b-8b5c-499a-9981-9abd195c852a
     country_id: *bw
     network_id: *bw_kasane_region
+  - id: 251235
+    prefix: '26765'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9447e0d9-bcb3-4d68-8d42-c531bbe2fc56
+    country_id: *bw
+    network_id: *bw_ghanzi_kgalagadi_region
   - id: 254676
     prefix: '26768'
     number_min_length: 10
@@ -306,14 +288,13 @@ network_prefixes:
     uuid: 404cd49f-5f84-4055-8946-312940d620ac
     country_id: *bw
     network_id: *bw_maun_region
-  - id: 256379
-    prefix: '26779'
+  - id: 255237
+    prefix: '2677'
     number_min_length: 11
     number_max_length: 11
-    uuid: c3b8f006-de3e-4959-9db4-e1c5d6ff8ff9
+    uuid: ac324883-54d8-4c46-8f7d-e76be7cc9495
     country_id: *bw
-    network_id: *bw_voip_region
-# Mobile Prefixes
+    network_id: *bw_mobile
   - id: 251727
     prefix: '26771'
     number_min_length: 11
@@ -335,6 +316,7 @@ network_prefixes:
     uuid: 6e5b6344-5c3a-45d0-996e-a20b5692f615
     country_id: *bw
     network_id: *bw_btc_mobile_mobile
+# Mobile Prefixes
   - id: 252074
     prefix: '267740'
     number_min_length: 11
@@ -475,13 +457,6 @@ network_prefixes:
     uuid: cd817b94-dacc-4bd0-aaf0-126564a3d0d1
     country_id: *bw
     network_id: *bw_mascom_mobile
-  - id: 255237
-    prefix: '2677'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac324883-54d8-4c46-8f7d-e76be7cc9495
-    country_id: *bw
-    network_id: *bw_mobile
   - id: 255466
     prefix: '267760'
     number_min_length: 11
@@ -678,6 +653,13 @@ network_prefixes:
     uuid: 82ea32f5-59c7-4b91-a004-5f8fb37a2a5e
     country_id: *bw
     network_id: *bw_orange_mobile
+  - id: 256379
+    prefix: '26779'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c3b8f006-de3e-4959-9db4-e1c5d6ff8ff9
+    country_id: *bw
+    network_id: *bw_voip_region
   - id: 257016
     prefix: '267890000'
     number_min_length: 13
@@ -895,3 +877,24 @@ network_prefixes:
     uuid: 930cecd1-1487-4005-9bf7-a6ee1f91120f
     country_id: *bw
     network_id: *bw_btc_mobile_mobile
+  - id: 257356
+    prefix: '26791'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 6f5a56a6-af84-402c-8e98-aad5b5ef163c
+    country_id: *bw
+    network_id: *bw_emergency_services
+  - id: 257582
+    prefix: '26792'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 7e99354f-0988-485a-b74e-106b0e7d2e1f
+    country_id: *bw
+    network_id: *bw_emergency_services
+  - id: 258174
+    prefix: '26799'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 086a0318-a938-413b-9a98-37f3ff0e4ff1
+    country_id: *bw
+    network_id: *bw_emergency_services

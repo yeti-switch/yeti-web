@@ -1,6 +1,6 @@
 country_id: &sl 190
 networks:
-# Fixed Networks
+# Mobile Networks
   - id: &sl_koidu_region 7190
     name: SL Koidu Region
     uuid: a1d8e201-38cf-475c-983e-85ab74e93b5a
@@ -9,11 +9,6 @@ networks:
     name: SL Magburaka Region
     uuid: 7f9c8a63-5482-4544-bda0-f29845f53bc1
     type_id: 2
-  - id: &sl_freetown_region 27821
-    name: SL Freetown Region
-    uuid: 5a1fa49d-4502-4067-b8f1-7c6273f9791e
-    type_id: 2
-# Mobile Networks
   - id: &sl_onlime_mobile 13685
     name: SL Onlime Mobile
     uuid: 31bb098d-215f-4170-b4d3-6b95ec5143c9
@@ -26,6 +21,15 @@ networks:
     name: SL Africell Mobile
     uuid: 08d530a6-5318-48dd-abf2-7c45d03c280b
     type_id: 3
+  - id: &sl_special_services 21485
+    name: SL Special Services
+    uuid: d9c16f5b-7430-4e8d-8662-4ebada975041
+    type_id: 13
+# Fixed Networks
+  - id: &sl_freetown_region 27821
+    name: SL Freetown Region
+    uuid: 5a1fa49d-4502-4067-b8f1-7c6273f9791e
+    type_id: 2
   - id: &sl_sierratel_mobile 29842
     name: SL Sierratel Mobile
     uuid: a61f95bf-7400-47ee-ad9b-6c0e55c6d1ab
@@ -39,26 +43,26 @@ networks:
     uuid: 6577a4cf-8b83-4ac5-8bb4-44126ca38bf4
     type_id: 3
 # Supplementary services Networks
-  - id: &sl_special_services 21485
-    name: SL Special Services
-    uuid: d9c16f5b-7430-4e8d-8662-4ebada975041
-    type_id: 13
+  - id: &sl_fixed 43462
+    name: SL Fixed
+    uuid: 11253c77-ee4a-4b63-9ee6-1bec7d99ae8f
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 73209
-    prefix: '23254'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1465989e-97d8-4a10-a607-b813b742fb6d
+# Mobile Prefixes
+  - id: 242098
+    prefix: '232'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 41aed52a-292d-4669-83cd-dcc40d702245
     country_id: *sl
-    network_id: *sl_koidu_region
-  - id: 76556
-    prefix: '23253'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8fb8df57-ef54-4715-8989-2d9ab313aa15
+    network_id: *sl_fixed
+  - id: 242490
+    prefix: '2321'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 6295eedd-415b-4205-88d7-56bb9a9fb93f
     country_id: *sl
-    network_id: *sl_magburaka_region
+    network_id: *sl_special_services
   - id: 278005
     prefix: '23222'
     number_min_length: 11
@@ -66,77 +70,6 @@ network_prefixes:
     uuid: c6af0c36-fb5f-453d-a886-a250a067c74d
     country_id: *sl
     network_id: *sl_freetown_region
-# Mobile Prefixes
-  - id: 138633
-    prefix: '23266'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 25612a09-9336-4947-8eef-9b9086f2a192
-    country_id: *sl
-    network_id: *sl_onlime_mobile
-  - id: 172536
-    prefix: '23272'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f7cbe797-1571-465e-9519-051e64a9d27f
-    country_id: *sl
-    network_id: *sl_orange_mobile
-  - id: 174949
-    prefix: '23273'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5861143c-7fc1-4271-b74f-050fca0b9318
-    country_id: *sl
-    network_id: *sl_orange_mobile
-  - id: 182873
-    prefix: '23274'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 29dca0ea-2df1-41ce-98a4-7dd73fef4648
-    country_id: *sl
-    network_id: *sl_orange_mobile
-  - id: 185882
-    prefix: '23275'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d1ba2891-90b2-4fde-bbd1-a0bd81415dbb
-    country_id: *sl
-    network_id: *sl_orange_mobile
-  - id: 187996
-    prefix: '23276'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 00d4873f-3b43-4315-a927-52eb0cb794b9
-    country_id: *sl
-    network_id: *sl_orange_mobile
-  - id: 192102
-    prefix: '23277'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b2f40ed9-ec89-4573-a779-956bdd54072d
-    country_id: *sl
-    network_id: *sl_africell_mobile
-  - id: 198402
-    prefix: '23278'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef322dca-97b2-4a1f-8711-c5adc58c0f5a
-    country_id: *sl
-    network_id: *sl_orange_mobile
-  - id: 206666
-    prefix: '23279'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0a756169-e018-4769-a164-94410c0b6b7c
-    country_id: *sl
-    network_id: *sl_orange_mobile
-  - id: 239377
-    prefix: '23299'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 35b86204-9a8a-49c8-8e91-a4ba556a116b
-    country_id: *sl
-    network_id: *sl_africell_mobile
   - id: 301979
     prefix: '23225'
     number_min_length: 11
@@ -179,6 +112,84 @@ network_prefixes:
     uuid: 500aa9e3-5842-4fa5-beb4-4bb3ac5c4ed5
     country_id: *sl
     network_id: *sl_iptel_mobile
+  - id: 76556
+    prefix: '23253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8fb8df57-ef54-4715-8989-2d9ab313aa15
+    country_id: *sl
+    network_id: *sl_magburaka_region
+  - id: 73209
+    prefix: '23254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1465989e-97d8-4a10-a607-b813b742fb6d
+    country_id: *sl
+    network_id: *sl_koidu_region
+  - id: 138633
+    prefix: '23266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25612a09-9336-4947-8eef-9b9086f2a192
+    country_id: *sl
+    network_id: *sl_onlime_mobile
+  - id: 172536
+    prefix: '23272'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f7cbe797-1571-465e-9519-051e64a9d27f
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 174949
+    prefix: '23273'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5861143c-7fc1-4271-b74f-050fca0b9318
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 182873
+    prefix: '23274'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 29dca0ea-2df1-41ce-98a4-7dd73fef4648
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 185882
+    prefix: '23275'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d1ba2891-90b2-4fde-bbd1-a0bd81415dbb
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 187996
+    prefix: '23276'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00d4873f-3b43-4315-a927-52eb0cb794b9
+    country_id: *sl
+    network_id: *sl_orange_mobile
+# Fixed Prefixes
+  - id: 192102
+    prefix: '23277'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b2f40ed9-ec89-4573-a779-956bdd54072d
+    country_id: *sl
+    network_id: *sl_africell_mobile
+  - id: 198402
+    prefix: '23278'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ef322dca-97b2-4a1f-8711-c5adc58c0f5a
+    country_id: *sl
+    network_id: *sl_orange_mobile
+  - id: 206666
+    prefix: '23279'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0a756169-e018-4769-a164-94410c0b6b7c
+    country_id: *sl
+    network_id: *sl_orange_mobile
   - id: 443798
     prefix: '23288'
     number_min_length: 11
@@ -186,19 +197,11 @@ network_prefixes:
     uuid: fe52ce5d-6675-4267-983f-b816c727ca4f
     country_id: *sl
     network_id: *sl_africell_mobile
-# Country code Prefixes
-  - id: 242098
-    prefix: '232'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 41aed52a-292d-4669-83cd-dcc40d702245
-    country_id: *sl
-    network_id: null
 # Supplementary services Prefixes
-  - id: 242490
-    prefix: '2321'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 6295eedd-415b-4205-88d7-56bb9a9fb93f
+  - id: 239377
+    prefix: '23299'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 35b86204-9a8a-49c8-8e91-a4ba556a116b
     country_id: *sl
-    network_id: *sl_special_services
+    network_id: *sl_africell_mobile

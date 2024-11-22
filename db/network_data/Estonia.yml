@@ -1,6 +1,6 @@
 country_id: &ee 254
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &ee_special_services 21397
     name: EE Special Services
     uuid: 9c3c3840-1a87-4ec7-8761-a8d705654857
@@ -13,47 +13,6 @@ networks:
     name: EE Directory Enquiry Services
     uuid: 0123d8b7-ff7f-4bd9-951d-5ce3bcf89d2f
     type_id: 13
-  - id: &ee_e_fax_services 22154
-    name: EE E Fax Services
-    uuid: f937b534-396c-48e5-a98e-959dcb22f3fe
-    type_id: 13
-  - id: &ee_freephone_services 23836
-    name: EE Freephone Services
-    uuid: fb601bfa-1f81-4038-850a-d1c240e6ec36
-    type_id: 13
-  - id: &ee_international_freephone_services 23865
-    name: EE International Freephone Services
-    uuid: fdfe4ef0-1767-42b8-a917-eee1feb076fb
-    type_id: 13
-  - id: &ee_electronic_communication_services 24118
-    name: EE Electronic Communication Services
-    uuid: 87736fde-dd2a-45cb-8d01-a0a4a303c37b
-    type_id: 13
-  - id: &ee_personal_number_services 24174
-    name: EE Personal Number Services
-    uuid: acfca5fe-3629-4086-bfe4-4f86e298a8b4
-    type_id: 13
-  - id: &ee_premium_rate_services 24435
-    name: EE Premium Rate Services
-    uuid: f233fbd8-c49c-4520-8c03-35e6668bb0d3
-    type_id: 13
-  - id: &ee_internet_access_services 24453
-    name: EE Internet Access Services
-    uuid: 04068694-857f-419a-90da-ff43aa799252
-    type_id: 13
-  - id: &ee_user_group_special_services 24477
-    name: EE User Group Special Services
-    uuid: 6ce5664d-438d-44b1-ac95-254294e2bc1c
-    type_id: 13
-  - id: &ee_on_net_special_services 26122
-    name: EE On Net Special Services
-    uuid: b1dd0d04-a1f8-49b8-a1a7-a39a041b9c89
-    type_id: 13
-  - id: &ee_routing 26144
-    name: EE Routing
-    uuid: dd291b50-b06f-45a3-93ce-c5c654a2aa5a
-    type_id: 13
-# Fixed Networks
   - id: &ee_rakvere_region 21932
     name: EE Rakvere Region
     uuid: 938691ec-cad8-4e56-b8c7-fa5772abe488
@@ -74,6 +33,10 @@ networks:
     name: EE Sillamae Region
     uuid: c8bad012-4b3a-42e2-90dd-210c28bc6c9a
     type_id: 2
+  - id: &ee_e_fax_services 22154
+    name: EE E Fax Services
+    uuid: f937b534-396c-48e5-a98e-959dcb22f3fe
+    type_id: 13
   - id: &ee_viljandi_region 22243
     name: EE Viljandi Region
     uuid: b3ef8af7-a3a7-41ee-a587-f15765103e2a
@@ -86,6 +49,14 @@ networks:
     name: EE Kuressaare Region
     uuid: 3a7efbc5-fce6-4a03-b8ad-8c4f8a6890ce
     type_id: 2
+  - id: &ee_tele2_mobile 22466
+    name: EE Tele2 Mobile
+    uuid: d3e0bc0e-f0db-4cb8-b6a3-20ca9194d1f5
+    type_id: 3
+  - id: &ee_telia_mobile 22491
+    name: EE Telia Mobile
+    uuid: b87ac9a1-4b3e-491b-a7a2-e0e8288598f4
+    type_id: 3
   - id: &ee_tallinn_region 22527
     name: EE Tallinn Region
     uuid: 565d2488-1a3c-454f-8372-2a5bd80bed4d
@@ -102,10 +73,39 @@ networks:
     name: EE Rapla Region
     uuid: a923f94c-502d-4bcc-b92b-642c3e73ff1c
     type_id: 2
+# Supplementary services Networks
+  - id: &ee_elisa_mobile 23368
+    name: EE Elisa Mobile
+    uuid: d775024e-8ad4-4b17-9959-cc7c9310151e
+    type_id: 3
+  - id: &ee_travelsim_mobile 23409
+    name: EE Travelsim Mobile
+    uuid: f12be021-b838-4d6e-9bc0-08863a1d2904
+    type_id: 3
   - id: &ee_tartu_region 23567
     name: EE Tartu Region
     uuid: 980530f0-1add-4a72-85b9-fff3ee02001d
     type_id: 2
+  - id: &ee_freephone_services 23836
+    name: EE Freephone Services
+    uuid: fb601bfa-1f81-4038-850a-d1c240e6ec36
+    type_id: 13
+  - id: &ee_international_freephone_services 23865
+    name: EE International Freephone Services
+    uuid: fdfe4ef0-1767-42b8-a917-eee1feb076fb
+    type_id: 13
+  - id: &ee_mobile 23921
+    name: EE Mobile
+    uuid: 71ccfef7-8709-4f95-bd14-5d7655bf1554
+    type_id: 3
+  - id: &ee_electronic_communication_services 24118
+    name: EE Electronic Communication Services
+    uuid: 87736fde-dd2a-45cb-8d01-a0a4a303c37b
+    type_id: 13
+  - id: &ee_personal_number_services 24174
+    name: EE Personal Number Services
+    uuid: acfca5fe-3629-4086-bfe4-4f86e298a8b4
+    type_id: 13
   - id: &ee_valga_region 24191
     name: EE Valga Region
     uuid: 798b7670-8a37-447d-9cd9-18f1e1351a17
@@ -127,36 +127,35 @@ networks:
     uuid: ba126e2f-089b-4e38-b2e9-a2081cc87e17
     type_id: 2
 # Mobile Networks
-  - id: &ee_tele2_mobile 22466
-    name: EE Tele2 Mobile
-    uuid: d3e0bc0e-f0db-4cb8-b6a3-20ca9194d1f5
-    type_id: 3
-  - id: &ee_telia_mobile 22491
-    name: EE Telia Mobile
-    uuid: b87ac9a1-4b3e-491b-a7a2-e0e8288598f4
-    type_id: 3
-  - id: &ee_elisa_mobile 23368
-    name: EE Elisa Mobile
-    uuid: d775024e-8ad4-4b17-9959-cc7c9310151e
-    type_id: 3
-  - id: &ee_travelsim_mobile 23409
-    name: EE Travelsim Mobile
-    uuid: f12be021-b838-4d6e-9bc0-08863a1d2904
-    type_id: 3
-  - id: &ee_mobile 23921
-    name: EE Mobile
-    uuid: 71ccfef7-8709-4f95-bd14-5d7655bf1554
-    type_id: 3
+  - id: &ee_premium_rate_services 24435
+    name: EE Premium Rate Services
+    uuid: f233fbd8-c49c-4520-8c03-35e6668bb0d3
+    type_id: 13
+  - id: &ee_internet_access_services 24453
+    name: EE Internet Access Services
+    uuid: 04068694-857f-419a-90da-ff43aa799252
+    type_id: 13
+  - id: &ee_user_group_special_services 24477
+    name: EE User Group Special Services
+    uuid: 6ce5664d-438d-44b1-ac95-254294e2bc1c
+    type_id: 13
+  - id: &ee_on_net_special_services 26122
+    name: EE On Net Special Services
+    uuid: b1dd0d04-a1f8-49b8-a1a7-a39a041b9c89
+    type_id: 13
+  - id: &ee_routing 26144
+    name: EE Routing
+    uuid: dd291b50-b06f-45a3-93ce-c5c654a2aa5a
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241989
     prefix: '372'
     number_min_length: 4
     number_max_length: 100
     uuid: 7196322a-cdad-4947-b62c-e4283af1033b
     country_id: *ee
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *ee_fixed
   - id: 242393
     prefix: '3721'
     number_min_length: 6
@@ -178,6 +177,41 @@ network_prefixes:
     uuid: a4279764-da39-4b23-83d3-6ac78c98574f
     country_id: *ee
     network_id: *ee_directory_enquiry_services
+  - id: 243363
+    prefix: '37232'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c3d82495-666d-4999-a3db-88fe524e0ab3
+    country_id: *ee
+    network_id: *ee_rakvere_region
+  - id: 243410
+    prefix: '37233'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 47d2bc83-e4a3-4d12-877e-2114150f8fea
+    country_id: *ee
+    network_id: *ee_kohtla_jarve_region
+  - id: 243586
+    prefix: '37235'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ac723251-8f28-4709-b8e6-bc2e195e8dff
+    country_id: *ee
+    network_id: *ee_narva_region
+  - id: 243860
+    prefix: '37238'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dab905b9-88b1-481f-b8d5-3d9b82e8fcb2
+    country_id: *ee
+    network_id: *ee_paide_region
+  - id: 243897
+    prefix: '37239'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: def8efaf-165e-4249-b141-f62d7f72b34f
+    country_id: *ee
+    network_id: *ee_sillamae_region
   - id: 243977
     prefix: '37240'
     number_min_length: 11
@@ -185,27 +219,126 @@ network_prefixes:
     uuid: e64c2855-4548-40eb-9345-d5cb9a6a56bc
     country_id: *ee
     network_id: *ee_e_fax_services
-  - id: 253146
-    prefix: '372800'
+  - id: 244332
+    prefix: '37243'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6d7f3b6d-939e-40f2-aa74-04dbf28c34b4
+    uuid: 6df5b7d0-c86b-4f74-9498-ef89ea279840
     country_id: *ee
-    network_id: *ee_freephone_services
-  - id: 253181
-    prefix: '3728000'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 07ce6450-08f4-4d96-a315-b656a12b4cb0
+    network_id: *ee_viljandi_region
+  - id: 244485
+    prefix: '37244'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b3c0b987-8ab4-4940-9fbf-067c6765c481
     country_id: *ee
-    network_id: *ee_international_freephone_services
-  - id: 253187
-    prefix: '3728001'
+    network_id: *ee_parnu_region
+  - id: 244631
+    prefix: '37245'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 80b1d23c-9072-4609-aad8-16050d2ec019
+    country_id: *ee
+    network_id: *ee_kuressaare_region
+  - id: 249084
+    prefix: '37246'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4d4fb7dd-c912-4f65-b30e-a461ba220c21
+    country_id: *ee
+    network_id: *ee_kardla_region
+  - id: 249302
+    prefix: '37247'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b63a00aa-78b8-4e62-aae0-0d3eacff5efd
+    country_id: *ee
+    network_id: *ee_haapsalu_region
+  - id: 249425
+    prefix: '37248'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0d0a5040-fd19-49f3-b783-20404127d535
+    country_id: *ee
+    network_id: *ee_rapla_region
+  - id: 249620
+    prefix: '37250'
     number_min_length: 11
     number_max_length: 11
-    uuid: f05bec5d-538e-4e02-9ce6-dc28bf237d8d
+    uuid: 3f3f6a22-8506-462c-a96c-817cc65c02dd
     country_id: *ee
-    network_id: *ee_international_freephone_services
+    network_id: *ee_telia_mobile
+  - id: 249696
+    prefix: '37251'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2a4622c8-adfe-4bed-9f63-fdeb172d3bf9
+    country_id: *ee
+    network_id: *ee_telia_mobile
+  - id: 249765
+    prefix: '37252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cc9a5af2-baad-4090-a088-e4289d10ca7d
+    country_id: *ee
+    network_id: *ee_telia_mobile
+  - id: 249924
+    prefix: '37253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 562cae06-fed1-4606-8f74-43271687d04b
+    country_id: *ee
+    network_id: *ee_telia_mobile
+  - id: 250015
+    prefix: '37254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 371acc3d-86ea-4061-84ff-edf908905762
+    country_id: *ee
+    network_id: *ee_elisa_mobile
+  - id: 250112
+    prefix: '37255'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7ab601a-f6d5-4c2a-8087-2c177266e4fd
+    country_id: *ee
+    network_id: *ee_tele2_mobile
+  - id: 250197
+    prefix: '37256'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3c789363-f176-4549-810d-099abe917aaf
+    country_id: *ee
+    network_id: *ee_elisa_mobile
+# Supplementary services Prefixes
+  - id: 250240
+    prefix: '37257'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a3aa909-0777-43db-adbf-af3f52f8339a
+    country_id: *ee
+    network_id: *ee_travelsim_mobile
+  - id: 245154
+    prefix: '37258'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 951024b6-8f1a-45de-a086-ee18b5ae8f50
+    country_id: *ee
+    network_id: *ee_tele2_mobile
+  - id: 245257
+    prefix: '37259'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6192b812-293b-4cc0-9df9-f9f51848402d
+    country_id: *ee
+    network_id: *ee_telia_mobile
+  - id: 245386
+    prefix: '3726'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: db5996cb-d254-4b99-8f02-1695cc66bbca
+    country_id: *ee
+    network_id: *ee_tallinn_region
   - id: 254880
     prefix: '372690'
     number_min_length: 10
@@ -276,133 +409,6 @@ network_prefixes:
     uuid: 87ac5590-4ea9-4cff-9826-19188d155d11
     country_id: *ee
     network_id: *ee_personal_number_services
-  - id: 257177
-    prefix: '372900'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 221be3a7-5431-4c6b-be9d-6664c9d8b797
-    country_id: *ee
-    network_id: *ee_premium_rate_services
-  - id: 257211
-    prefix: '372901'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f3569a7c-472d-42b7-9897-58ee309aa257
-    country_id: *ee
-    network_id: *ee_internet_access_services
-  - id: 257360
-    prefix: '37291'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: f0350134-3283-466c-9841-28643a2f11bf
-    country_id: *ee
-    network_id: *ee_user_group_special_services
-  - id: 257585
-    prefix: '37292'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: 6f024f87-3c00-4175-8827-007026809f6e
-    country_id: *ee
-    network_id: *ee_special_services
-  - id: 264437
-    prefix: '37295'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: fb1e0c7e-c9e8-481f-8c7b-e11ddb6954d4
-    country_id: *ee
-    network_id: *ee_on_net_special_services
-  - id: 265265
-    prefix: '37298'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 6f6e415c-f503-42f1-806e-c7ad9e363b1d
-    country_id: *ee
-    network_id: *ee_routing
-# Fixed Prefixes
-  - id: 243363
-    prefix: '37232'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c3d82495-666d-4999-a3db-88fe524e0ab3
-    country_id: *ee
-    network_id: *ee_rakvere_region
-  - id: 243410
-    prefix: '37233'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 47d2bc83-e4a3-4d12-877e-2114150f8fea
-    country_id: *ee
-    network_id: *ee_kohtla_jarve_region
-  - id: 243586
-    prefix: '37235'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ac723251-8f28-4709-b8e6-bc2e195e8dff
-    country_id: *ee
-    network_id: *ee_narva_region
-  - id: 243860
-    prefix: '37238'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dab905b9-88b1-481f-b8d5-3d9b82e8fcb2
-    country_id: *ee
-    network_id: *ee_paide_region
-  - id: 243897
-    prefix: '37239'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: def8efaf-165e-4249-b141-f62d7f72b34f
-    country_id: *ee
-    network_id: *ee_sillamae_region
-  - id: 244332
-    prefix: '37243'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6df5b7d0-c86b-4f74-9498-ef89ea279840
-    country_id: *ee
-    network_id: *ee_viljandi_region
-  - id: 244485
-    prefix: '37244'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b3c0b987-8ab4-4940-9fbf-067c6765c481
-    country_id: *ee
-    network_id: *ee_parnu_region
-  - id: 244631
-    prefix: '37245'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 80b1d23c-9072-4609-aad8-16050d2ec019
-    country_id: *ee
-    network_id: *ee_kuressaare_region
-  - id: 245386
-    prefix: '3726'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: db5996cb-d254-4b99-8f02-1695cc66bbca
-    country_id: *ee
-    network_id: *ee_tallinn_region
-  - id: 249084
-    prefix: '37246'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4d4fb7dd-c912-4f65-b30e-a461ba220c21
-    country_id: *ee
-    network_id: *ee_kardla_region
-  - id: 249302
-    prefix: '37247'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b63a00aa-78b8-4e62-aae0-0d3eacff5efd
-    country_id: *ee
-    network_id: *ee_haapsalu_region
-  - id: 249425
-    prefix: '37248'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0d0a5040-fd19-49f3-b783-20404127d535
-    country_id: *ee
-    network_id: *ee_rapla_region
   - id: 251735
     prefix: '37271'
     number_min_length: 10
@@ -466,84 +472,28 @@ network_prefixes:
     uuid: a7dbc314-67c9-484a-a418-cdeb58304b17
     country_id: *ee
     network_id: *ee_polva_region
-  - id: 256836
-    prefix: '37288'
+# Mobile Prefixes
+  - id: 253146
+    prefix: '372800'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8a10b0ab-9c66-4498-86c0-67310c0499e8
+    uuid: 6d7f3b6d-939e-40f2-aa74-04dbf28c34b4
     country_id: *ee
-    network_id: *ee_fixed
-# Mobile Prefixes
-  - id: 245154
-    prefix: '37258'
+    network_id: *ee_freephone_services
+  - id: 253181
+    prefix: '3728000'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 07ce6450-08f4-4d96-a315-b656a12b4cb0
+    country_id: *ee
+    network_id: *ee_international_freephone_services
+  - id: 253187
+    prefix: '3728001'
     number_min_length: 11
     number_max_length: 11
-    uuid: 951024b6-8f1a-45de-a086-ee18b5ae8f50
+    uuid: f05bec5d-538e-4e02-9ce6-dc28bf237d8d
     country_id: *ee
-    network_id: *ee_tele2_mobile
-  - id: 245257
-    prefix: '37259'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6192b812-293b-4cc0-9df9-f9f51848402d
-    country_id: *ee
-    network_id: *ee_telia_mobile
-  - id: 249620
-    prefix: '37250'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3f3f6a22-8506-462c-a96c-817cc65c02dd
-    country_id: *ee
-    network_id: *ee_telia_mobile
-  - id: 249696
-    prefix: '37251'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2a4622c8-adfe-4bed-9f63-fdeb172d3bf9
-    country_id: *ee
-    network_id: *ee_telia_mobile
-  - id: 249765
-    prefix: '37252'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cc9a5af2-baad-4090-a088-e4289d10ca7d
-    country_id: *ee
-    network_id: *ee_telia_mobile
-  - id: 249924
-    prefix: '37253'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 562cae06-fed1-4606-8f74-43271687d04b
-    country_id: *ee
-    network_id: *ee_telia_mobile
-  - id: 250015
-    prefix: '37254'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 371acc3d-86ea-4061-84ff-edf908905762
-    country_id: *ee
-    network_id: *ee_elisa_mobile
-  - id: 250112
-    prefix: '37255'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b7ab601a-f6d5-4c2a-8087-2c177266e4fd
-    country_id: *ee
-    network_id: *ee_tele2_mobile
-  - id: 250197
-    prefix: '37256'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3c789363-f176-4549-810d-099abe917aaf
-    country_id: *ee
-    network_id: *ee_elisa_mobile
-  - id: 250240
-    prefix: '37257'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1a3aa909-0777-43db-adbf-af3f52f8339a
-    country_id: *ee
-    network_id: *ee_travelsim_mobile
+    network_id: *ee_international_freephone_services
   - id: 253313
     prefix: '37281'
     number_min_length: 11
@@ -572,34 +522,6 @@ network_prefixes:
     uuid: 68df6ac8-61a3-4539-b8a0-1e40e10e4675
     country_id: *ee
     network_id: *ee_mobile
-  - id: 256707
-    prefix: '372872'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: f9676504-a136-4e5d-8a1e-82f3e0400fb1
-    country_id: *ee
-    network_id: *ee_mobile
-  - id: 256724
-    prefix: '372873'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 0a942cf6-8cbf-4bb3-a5ef-cf64fcda2147
-    country_id: *ee
-    network_id: *ee_mobile
-  - id: 256740
-    prefix: '372874'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: e58a6e6e-a4a8-44d3-9b9e-aa75f99e5d38
-    country_id: *ee
-    network_id: *ee_mobile
-  - id: 256991
-    prefix: '37289'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eb8d5603-0cc3-4fc0-a59f-1d0c554d285f
-    country_id: *ee
-    network_id: *ee_mobile
   - id: 263701
     prefix: '37285'
     number_min_length: 11
@@ -621,3 +543,80 @@ network_prefixes:
     uuid: 43ecb629-044d-4b7f-8661-6973431ef7be
     country_id: *ee
     network_id: *ee_mobile
+  - id: 256707
+    prefix: '372872'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f9676504-a136-4e5d-8a1e-82f3e0400fb1
+    country_id: *ee
+    network_id: *ee_mobile
+  - id: 256724
+    prefix: '372873'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 0a942cf6-8cbf-4bb3-a5ef-cf64fcda2147
+    country_id: *ee
+    network_id: *ee_mobile
+  - id: 256740
+    prefix: '372874'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e58a6e6e-a4a8-44d3-9b9e-aa75f99e5d38
+    country_id: *ee
+    network_id: *ee_mobile
+  - id: 256836
+    prefix: '37288'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8a10b0ab-9c66-4498-86c0-67310c0499e8
+    country_id: *ee
+    network_id: *ee_fixed
+  - id: 256991
+    prefix: '37289'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb8d5603-0cc3-4fc0-a59f-1d0c554d285f
+    country_id: *ee
+    network_id: *ee_mobile
+  - id: 257177
+    prefix: '372900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 221be3a7-5431-4c6b-be9d-6664c9d8b797
+    country_id: *ee
+    network_id: *ee_premium_rate_services
+  - id: 257211
+    prefix: '372901'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f3569a7c-472d-42b7-9897-58ee309aa257
+    country_id: *ee
+    network_id: *ee_internet_access_services
+  - id: 257360
+    prefix: '37291'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: f0350134-3283-466c-9841-28643a2f11bf
+    country_id: *ee
+    network_id: *ee_user_group_special_services
+  - id: 257585
+    prefix: '37292'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: 6f024f87-3c00-4175-8827-007026809f6e
+    country_id: *ee
+    network_id: *ee_special_services
+  - id: 264437
+    prefix: '37295'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: fb1e0c7e-c9e8-481f-8c7b-e11ddb6954d4
+    country_id: *ee
+    network_id: *ee_on_net_special_services
+  - id: 265265
+    prefix: '37298'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 6f6e415c-f503-42f1-806e-c7ad9e363b1d
+    country_id: *ee
+    network_id: *ee_routing

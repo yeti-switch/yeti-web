@@ -1,6 +1,6 @@
 country_id: &be 21
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &be_proximus_mobile 4191
     name: BE Proximus Mobile
     uuid: 850a070d-950e-4236-abbf-102966371ef0
@@ -33,6 +33,10 @@ networks:
     name: BE Orange Mobile
     uuid: ccc320b7-9235-477a-ade4-f4f87a18c76e
     type_id: 3
+  - id: &be_brugge_region 4660
+    name: BE Brugge Region
+    uuid: 062dbd45-0099-4067-ad0d-14fa580d0b77
+    type_id: 2
   - id: &be_ericsson_mobile 4814
     name: BE Ericsson Mobile
     uuid: 6bfc29ee-f188-4f65-a734-d175f7d54da4
@@ -45,71 +49,6 @@ networks:
     name: BE Mobile
     uuid: d07e80c2-de00-4899-8a1a-d44e5230e3e5
     type_id: 3
-  - id: &be_bics_mobile 18516
-    name: BE Bics Mobile
-    uuid: 2c602085-8fb1-48ca-bc47-9953da6e5e19
-    type_id: 3
-  - id: &be_cwave_mobile 18517
-    name: BE Cwave Mobile
-    uuid: c6e76bfe-28f5-4f4b-b99a-7b2fad9c4b46
-    type_id: 3
-  - id: &be_febo_mobile 18518
-    name: BE Febo Mobile
-    uuid: 0cd8a08d-5491-474c-a8d0-08a44965bcee
-    type_id: 3
-  - id: &be_digi_mobile 37783
-    name: BE Digi Mobile
-    uuid: 9751fe0e-ec08-4de9-b344-a5a9da6305e9
-    type_id: 3
-  - id: &be_voomobile_mobile 37938
-    name: BE Voomobile Mobile
-    uuid: d34b3427-7424-4e7e-b4da-438e6fabe91b
-    type_id: 3
-  - id: &be_isea_mobile 37983
-    name: BE Isea Mobile
-    uuid: 46a050f3-8878-4ade-917e-c58922d8c83c
-    type_id: 3
-  - id: &be_infrabel_mobile 37992
-    name: BE Infrabel Mobile
-    uuid: 144ef29c-9298-4d9f-b26a-5d76075b0e6c
-    type_id: 3
-  - id: &be_dust_mobile_mobile 37997
-    name: BE Dust Mobile Mobile
-    uuid: c9624423-7192-48d5-9cf4-465bea1d6ddd
-    type_id: 3
-  - id: &be_lancelot_mobile 38014
-    name: BE Lancelot Mobile
-    uuid: aaa5e52f-56e7-4573-8fc2-ab85a375d3c0
-    type_id: 3
-  - id: &be_giancom_mobile 38040
-    name: BE Giancom Mobile
-    uuid: 42be8fad-d380-454b-b763-3b084eedfce5
-    type_id: 3
-  - id: &be_onoff_mobile 38057
-    name: BE Onoff Mobile
-    uuid: f25cccc8-8d24-419c-b124-dda1186df211
-    type_id: 3
-  - id: &be_lycamobile_mobile 38263
-    name: BE Lycamobile Mobile
-    uuid: 3823cbd1-b184-4e58-87fb-b421a485c387
-    type_id: 3
-  - id: &be_vectone_mobile_mobile 38277
-    name: BE Vectone Mobile Mobile
-    uuid: 5e40ecf4-73db-4994-8cfb-7b56a4e776f1
-    type_id: 3
-  - id: &be_bandwidth_mobile 38278
-    name: BE Bandwidth Mobile
-    uuid: 52424e22-29c6-4f64-bced-bebdad0d987b
-    type_id: 3
-  - id: &be_idm_mobile 38290
-    name: BE Idm Mobile
-    uuid: 6dd05868-1065-4f42-b41f-8e93ef70356c
-    type_id: 3
-# Fixed Networks
-  - id: &be_brugge_region 4660
-    name: BE Brugge Region
-    uuid: 062dbd45-0099-4067-ad0d-14fa580d0b77
-    type_id: 2
   - id: &be_roeselare_region 5627
     name: BE Roeselare Region
     uuid: bc98a833-aeb6-4f3c-94b8-7e626b98013f
@@ -174,6 +113,10 @@ networks:
     name: BE Tournai Region
     uuid: 1bfdf218-b340-435a-bce5-ea257a36e87c
     type_id: 2
+  - id: &be_premium_rate_services 14440
+    name: BE Premium Rate Services
+    uuid: 9a19374e-c1c0-4779-b032-77de24c08421
+    type_id: 13
   - id: &be_nivelles_region 14498
     name: BE Nivelles Region
     uuid: 7a82f4fe-7598-4f20-8c18-64c593d475e2
@@ -182,6 +125,67 @@ networks:
     name: BE Charleroi Region
     uuid: 29c96ead-aa0c-4185-a33e-204ca4beb53b
     type_id: 2
+  - id: &be_internet_of_things_iot_services_ecall_services 18495
+    name: BE Internet Of Things Iot Services Ecall Services
+    uuid: 4be4c1bf-bcbd-43a8-b036-dad2d2aba671
+    type_id: 13
+  - id: &be_bics_mobile 18516
+    name: BE Bics Mobile
+    uuid: 2c602085-8fb1-48ca-bc47-9953da6e5e19
+    type_id: 3
+  - id: &be_cwave_mobile 18517
+    name: BE Cwave Mobile
+    uuid: c6e76bfe-28f5-4f4b-b99a-7b2fad9c4b46
+    type_id: 3
+  - id: &be_febo_mobile 18518
+    name: BE Febo Mobile
+    uuid: 0cd8a08d-5491-474c-a8d0-08a44965bcee
+    type_id: 3
+  - id: &be_national_rate_services 18838
+    name: BE National Rate Services
+    uuid: c977cb34-71c9-4189-859e-c6014b2845e4
+    type_id: 13
+  - id: &be_virtual_private_network 20785
+    name: BE Virtual Private Network
+    uuid: ac2240af-2fe8-4f14-b0be-abd630b3abea
+    type_id: 13
+  - id: &be_sms_mms_services_and_other_special_services 21361
+    name: BE Sms_Mms Services And Other Special Services
+    uuid: 10d91f54-e07d-4ca2-b093-f743de8fe42c
+    type_id: 13
+  - id: &be_social_value_services 21618
+    name: BE Social Value Services
+    uuid: ab62f414-ff30-4139-bcaf-bb93c08da5eb
+    type_id: 13
+  - id: &be_social_interest_services 21840
+    name: BE Social Interest Services
+    uuid: 0b353dc1-6f48-47e6-b5ed-ebc81cc5f06e
+    type_id: 13
+  - id: &be_sms_mms_services_value_added_services 22118
+    name: BE Sms_Mms Services Value Added Services
+    uuid: 6727a149-4765-4d3d-90c6-a5f5c584be3c
+    type_id: 13
+# Supplementary services Networks
+  - id: &be_sms_mms_services_enterntainment_services 22522
+    name: BE Sms_Mms Services Enterntainment Services
+    uuid: 8cdebde7-7fd9-4e21-9a2c-ecb31fd520cf
+    type_id: 13
+  - id: &be_sms_mms_services 22705
+    name: BE Sms_Mms Services
+    uuid: faf8b4ea-36b9-450e-8f18-63cdd0a22599
+    type_id: 13
+  - id: &be_sms_mms_services_adult_content 24139
+    name: BE Sms_Mms Services Adult Content
+    uuid: 6a1df33e-a690-4acd-926d-a80d9b910da8
+    type_id: 13
+  - id: &be_sms_mms_services_free 24292
+    name: BE Sms_Mms Services Free
+    uuid: f1dad115-ed73-456f-bfdf-dcc2c81e079f
+    type_id: 13
+  - id: &be_sms_mms_services_subscription_services 24385
+    name: BE Sms_Mms Services Subscription Services
+    uuid: 969867cd-2387-4cbe-8ffb-ef1953007ff3
+    type_id: 13
   - id: &be_wavre__region 24802
     name: BE Wavre  Region
     uuid: 7cb511b5-e052-4b1c-b71b-ad5c0f3dcb36
@@ -226,10 +230,63 @@ networks:
     name: BE Liege Region
     uuid: 8279de30-f2fe-4103-84a1-9c2895534c10
     type_id: 2
+# Mobile Networks
+  - id: &be_digi_mobile 37783
+    name: BE Digi Mobile
+    uuid: 9751fe0e-ec08-4de9-b344-a5a9da6305e9
+    type_id: 3
+  - id: &be_voomobile_mobile 37938
+    name: BE Voomobile Mobile
+    uuid: d34b3427-7424-4e7e-b4da-438e6fabe91b
+    type_id: 3
+  - id: &be_isea_mobile 37983
+    name: BE Isea Mobile
+    uuid: 46a050f3-8878-4ade-917e-c58922d8c83c
+    type_id: 3
+  - id: &be_infrabel_mobile 37992
+    name: BE Infrabel Mobile
+    uuid: 144ef29c-9298-4d9f-b26a-5d76075b0e6c
+    type_id: 3
+  - id: &be_dust_mobile_mobile 37997
+    name: BE Dust Mobile Mobile
+    uuid: c9624423-7192-48d5-9cf4-465bea1d6ddd
+    type_id: 3
+  - id: &be_lancelot_mobile 38014
+    name: BE Lancelot Mobile
+    uuid: aaa5e52f-56e7-4573-8fc2-ab85a375d3c0
+    type_id: 3
+  - id: &be_giancom_mobile 38040
+    name: BE Giancom Mobile
+    uuid: 42be8fad-d380-454b-b763-3b084eedfce5
+    type_id: 3
+  - id: &be_onoff_mobile 38057
+    name: BE Onoff Mobile
+    uuid: f25cccc8-8d24-419c-b124-dda1186df211
+    type_id: 3
+  - id: &be_lycamobile_mobile 38263
+    name: BE Lycamobile Mobile
+    uuid: 3823cbd1-b184-4e58-87fb-b421a485c387
+    type_id: 3
+  - id: &be_vectone_mobile_mobile 38277
+    name: BE Vectone Mobile Mobile
+    uuid: 5e40ecf4-73db-4994-8cfb-7b56a4e776f1
+    type_id: 3
+  - id: &be_bandwidth_mobile 38278
+    name: BE Bandwidth Mobile
+    uuid: 52424e22-29c6-4f64-bced-bebdad0d987b
+    type_id: 3
+  - id: &be_idm_mobile 38290
+    name: BE Idm Mobile
+    uuid: 6dd05868-1065-4f42-b41f-8e93ef70356c
+    type_id: 3
   - id: &be_stavelot_region 38473
     name: BE Stavelot Region
     uuid: 517bbe5a-d465-4988-aaf9-9c7f72329200
     type_id: 2
+  - id: &be_freephone_services 38486
+    name: BE Freephone Services
+    uuid: 9e349793-06bc-44b9-9791-f9f8622995f7
+    type_id: 13
   - id: &be_namur_region 39300
     name: BE Namur Region
     uuid: 77a03174-bc88-49c6-9485-40f27a36b5d3
@@ -266,63 +323,6 @@ networks:
     name: BE Genk Region
     uuid: d7f51a9b-0184-4628-ab96-a282f78b00d5
     type_id: 2
-# Supplementary services Networks
-  - id: &be_premium_rate_services 14440
-    name: BE Premium Rate Services
-    uuid: 9a19374e-c1c0-4779-b032-77de24c08421
-    type_id: 13
-  - id: &be_internet_of_things_iot_services_ecall_services 18495
-    name: BE Internet Of Things Iot Services Ecall Services
-    uuid: 4be4c1bf-bcbd-43a8-b036-dad2d2aba671
-    type_id: 13
-  - id: &be_national_rate_services 18838
-    name: BE National Rate Services
-    uuid: c977cb34-71c9-4189-859e-c6014b2845e4
-    type_id: 13
-  - id: &be_virtual_private_network 20785
-    name: BE Virtual Private Network
-    uuid: ac2240af-2fe8-4f14-b0be-abd630b3abea
-    type_id: 13
-  - id: &be_sms_mms_services_and_other_special_services 21361
-    name: BE Sms_Mms Services And Other Special Services
-    uuid: 10d91f54-e07d-4ca2-b093-f743de8fe42c
-    type_id: 13
-  - id: &be_social_value_services 21618
-    name: BE Social Value Services
-    uuid: ab62f414-ff30-4139-bcaf-bb93c08da5eb
-    type_id: 13
-  - id: &be_social_interest_services 21840
-    name: BE Social Interest Services
-    uuid: 0b353dc1-6f48-47e6-b5ed-ebc81cc5f06e
-    type_id: 13
-  - id: &be_sms_mms_services_value_added_services 22118
-    name: BE Sms_Mms Services Value Added Services
-    uuid: 6727a149-4765-4d3d-90c6-a5f5c584be3c
-    type_id: 13
-  - id: &be_sms_mms_services_enterntainment_services 22522
-    name: BE Sms_Mms Services Enterntainment Services
-    uuid: 8cdebde7-7fd9-4e21-9a2c-ecb31fd520cf
-    type_id: 13
-  - id: &be_sms_mms_services 22705
-    name: BE Sms_Mms Services
-    uuid: faf8b4ea-36b9-450e-8f18-63cdd0a22599
-    type_id: 13
-  - id: &be_sms_mms_services_adult_content 24139
-    name: BE Sms_Mms Services Adult Content
-    uuid: 6a1df33e-a690-4acd-926d-a80d9b910da8
-    type_id: 13
-  - id: &be_sms_mms_services_free 24292
-    name: BE Sms_Mms Services Free
-    uuid: f1dad115-ed73-456f-bfdf-dcc2c81e079f
-    type_id: 13
-  - id: &be_sms_mms_services_subscription_services 24385
-    name: BE Sms_Mms Services Subscription Services
-    uuid: 969867cd-2387-4cbe-8ffb-ef1953007ff3
-    type_id: 13
-  - id: &be_freephone_services 38486
-    name: BE Freephone Services
-    uuid: 9e349793-06bc-44b9-9791-f9f8622995f7
-    type_id: 13
   - id: &be_adults_entertainment_services 42163
     name: BE Adults Entertainment Services
     uuid: b8b5d3e6-3710-4f5d-9f0f-b7c2f237d7dc
@@ -331,239 +331,236 @@ networks:
     name: BE Entertainment Services
     uuid: b9e881dd-6b3a-4e00-906f-403c678c27a8
     type_id: 13
+  - id: &be_fixed 43381
+    name: BE Fixed
+    uuid: dee66ab5-786f-44bc-93d9-f28eb33ed65a
+    type_id: 2
 network_prefixes:
-# Mobile Prefixes
-  - id: 51604
-    prefix: '3247'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f03db7fd-1040-4865-b80a-64a34e4c7c44
+# Fixed Prefixes
+  - id: 241949
+    prefix: '32'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: e79c0d88-9648-49ce-9c6a-c40b904aab61
     country_id: *be
-    network_id: *be_proximus_mobile
-  - id: 51754
-    prefix: '324801'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3df1dc81-e53b-4838-9cfb-097c5e188d2a
+    network_id: *be_fixed
+  - id: 242354
+    prefix: '321'
+    number_min_length: 5
+    number_max_length: 8
+    uuid: 34765137-6a08-45d3-b259-a516903fe19a
     country_id: *be
-    network_id: *be_legos_mobile
-  - id: 51755
-    prefix: '324802'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c115358c-52f9-4199-8aba-36d019d0df9e
+    network_id: *be_sms_mms_services_and_other_special_services
+  - id: 258618
+    prefix: '3210'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f6952817-0083-42f2-9a26-60c82dacd994
     country_id: *be
-    network_id: *be_tismi_mobile
-  - id: 51853
-    prefix: '324803'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4327b396-15fd-4cc9-95b8-f2769d8deaf0
+    network_id: *be_wavre__region
+  - id: 258803
+    prefix: '3211'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3d1272ac-b751-4e37-addc-124ace6245d1
     country_id: *be
-    network_id: *be_premium_routing_mobile
-  - id: 51953
-    prefix: '324804'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c62a3479-9378-44d4-86c0-82c1030560a7
+    network_id: *be_hasselt_region
+  - id: 242655
+    prefix: '32116'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 753fb6f5-cd79-4fca-9892-3750ade63a5e
     country_id: *be
-    network_id: *be_l_mobi_mobile
-  - id: 52044
-    prefix: '324805'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8acb89cc-597c-4876-83c0-e10dec71c5ca
+    network_id: *be_social_value_services
+  - id: 259222
+    prefix: '3212'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 315fb955-b661-42b1-afba-5894d8a7c457
     country_id: *be
-    network_id: *be_dense_air_mobile
-  - id: 52144
-    prefix: '324806'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fecd4b14-9483-4398-b948-c9ac565897fa
+    network_id: *be_tongeren_region
+  - id: 259501
+    prefix: '3213'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 37badf9a-1e1c-4b6c-948e-b46b5f368d23
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 52972
-    prefix: '32485'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc6798d5-9c84-4963-8dd7-6739d1d7db74
+    network_id: *be_diest_region
+  - id: 259939
+    prefix: '3214'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a69dc9fb-d62e-42eb-8151-574c75fbedee
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 53145
-    prefix: '32486'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 442bdb1f-b452-414f-8b7b-9dd6e3ced802
+    network_id: *be_herentals_region
+  - id: 266062
+    prefix: '3215'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0d660268-dcef-4d6e-a7a1-3292ed88fbc6
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 53233
-    prefix: '32487'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 69f5d9d8-fffb-4afa-8332-501f970d391c
+    network_id: *be_mechelen_region
+  - id: 266550
+    prefix: '3216'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 495ec458-a0b9-4ffb-a5ba-837ff3972c1d
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 54570
-    prefix: '3249'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 747a32dd-f592-4914-8792-d972fd4e0b30
+    network_id: *be_leuven_region
+  - id: 243049
+    prefix: '3217'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: c4361f2f-1291-457c-bc3d-a9ac7e604baa
     country_id: *be
-    network_id: *be_orange_mobile
-  - id: 56352
-    prefix: '324809'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9ddf0973-a767-418a-8ace-f042f922d84e
+    network_id: *be_social_interest_services
+  - id: 247268
+    prefix: '3218'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: d5e7d3ff-55f3-4136-8f42-51bd81abdf06
     country_id: *be
-    network_id: *be_ericsson_mobile
-  - id: 56460
-    prefix: '324810'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2e65ccbb-6a5c-4186-8c3d-9dd31e82855e
+    network_id: *be_social_interest_services
+  - id: 260821
+    prefix: '3219'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 660d0ab7-0034-4a73-b992-5a69454a4974
     country_id: *be
-    network_id: *be_nord_connect_mobile
-  - id: 57065
-    prefix: '32483'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6855e025-3666-41bf-ba7d-06a9fa1a7439
+    network_id: *be_waremme_region
+  - id: 247388
+    prefix: '322'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 98df633a-acc4-4e03-a1f1-5e6a507626bc
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 57218
-    prefix: '32484'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7f3f6c64-2298-4ca4-9339-10c05e1d95ca
+    network_id: *be_sms_mms_services
+  - id: 261209
+    prefix: '3222'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1a20e3bd-a3e3-4fa3-9740-97c33823af1d
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 57420
-    prefix: '32488'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1cb62a40-a612-451b-9a5d-b9aa4a9826bc
+    network_id: *be_brussels_region
+  - id: 261261
+    prefix: '3223'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 764e9a41-2e2c-431d-a3de-a1995e5ee333
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 57855
-    prefix: '32489'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ca7d2ffe-73c4-4563-bde8-87f59abf1141
+    network_id: *be_brussels_region
+  - id: 261298
+    prefix: '3224'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d78c0f58-c183-4fbf-90b3-4c7bc1080e03
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 58221
-    prefix: '3248'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2c44c6fe-1cf1-4a1d-85ad-c843d28e97ca
+    network_id: *be_brussels_region
+  - id: 261349
+    prefix: '3225'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e6c22ac0-0dfd-43ef-8f70-d1ce95c03878
     country_id: *be
-    network_id: *be_mobile
-  - id: 192114
-    prefix: '32770001'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 6873b2bb-1d62-44b3-84ed-b5b10a733fb8
+    network_id: *be_brussels_region
+  - id: 261391
+    prefix: '3226'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f3f8a63f-b4f8-406c-8f69-1abf48fb7c25
     country_id: *be
-    network_id: *be_proximus_mobile
-  - id: 192115
-    prefix: '327700020'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: f64f49f5-b1d3-474e-8cd2-3275e04e880e
+    network_id: *be_brussels_region
+  - id: 261481
+    prefix: '3227'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 92727009-24de-4ccc-ae47-6a75e4cb61b2
     country_id: *be
-    network_id: *be_base_mobile
-  - id: 192116
-    prefix: '327700040'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 44c8c6b4-a02b-4eb6-ae9c-f0962385c3e0
+    network_id: *be_brussels_region
+  - id: 261523
+    prefix: '3228'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 345c01e6-d217-48fb-b8f3-99bbced98750
     country_id: *be
-    network_id: *be_bics_mobile
-  - id: 192117
-    prefix: '327700041'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b1d01b87-4185-4261-a9e5-99d41c326eb2
+    network_id: *be_brussels_region
+  - id: 248880
+    prefix: '323'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 0b1c7802-f7fb-41ad-b803-e4d3ae08d03e
     country_id: *be
-    network_id: *be_bics_mobile
-  - id: 192118
-    prefix: '327700042'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 85385702-02f6-47fe-b71c-f8dc98d5bd8d
+    network_id: *be_sms_mms_services
+  - id: 315879
+    prefix: '3232'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 73327f34-426d-41b7-aad7-9ce85fd1d2c4
     country_id: *be
-    network_id: *be_bics_mobile
-  - id: 192119
-    prefix: '327700050'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 10702f98-e9dd-4151-980a-d92b655feac0
+    network_id: *be_antwerp_region
+  - id: 316176
+    prefix: '3233'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1d190fc8-2874-4d77-957e-3c1b3d193696
     country_id: *be
-    network_id: *be_orange_mobile
-  - id: 192120
-    prefix: '327700051'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: f7001de9-a8e1-45e5-ae08-dfd3fa4aa7bf
+    network_id: *be_antwerp_region
+  - id: 316278
+    prefix: '3234'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ce3984f1-2b0f-4fea-83bc-736a96316725
     country_id: *be
-    network_id: *be_orange_mobile
-  - id: 192121
-    prefix: '327700052'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: c7e917b2-fd44-4151-886e-29eae102b57b
+    network_id: *be_antwerp_region
+  - id: 316436
+    prefix: '3235'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 43a834c7-c7ac-4f4f-b9f8-da2bbb8c92db
     country_id: *be
-    network_id: *be_orange_mobile
-  - id: 192122
-    prefix: '327700053'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 296ca08e-0646-40ec-b348-19e715a37075
+    network_id: *be_antwerp_region
+  - id: 316638
+    prefix: '3236'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3649a7c7-16ee-40e1-9bca-92d30095cbee
     country_id: *be
-    network_id: *be_orange_mobile
-  - id: 192123
-    prefix: '327700054'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 31dd2223-bfd7-4b14-9a5d-1495b9bf88e5
+    network_id: *be_antwerp_region
+  - id: 316832
+    prefix: '3237'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: de1b0fb5-b0f4-42a3-ab2a-62211fddf310
     country_id: *be
-    network_id: *be_orange_mobile
-  - id: 192124
-    prefix: '327700075'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: baa92449-c4d2-40b3-8a70-b84f375c30d5
+    network_id: *be_antwerp_region
+  - id: 316940
+    prefix: '3238'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 399e8744-627e-4235-a7c6-f73d5b23b66f
     country_id: *be
-    network_id: *be_tismi_mobile
-  - id: 192125
-    prefix: '327700080'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 4a6079bf-f6a3-4ea4-9a0b-d47878679f1c
+    network_id: *be_antwerp_region
+  - id: 243920
+    prefix: '324'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 5b037fb0-f7c0-4275-a7cd-f9e2f18ff7dd
     country_id: *be
-    network_id: *be_premium_routing_mobile
-  - id: 192126
-    prefix: '327700085'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: f83377ff-8bd6-4ea5-8596-bde448ec0b2f
+    network_id: *be_sms_mms_services_value_added_services
+  - id: 349453
+    prefix: '3242'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4ff05616-f7b6-4ec9-a1d2-eb4260860cb5
     country_id: *be
-    network_id: *be_cwave_mobile
-  - id: 192127
-    prefix: '327700090'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: e6f24f8c-906c-40e6-b1a2-b53569ac2e6c
+    network_id: *be_liege_region
+  - id: 349525
+    prefix: '3243'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f961b466-db43-46fa-9506-d88e9b1010d4
     country_id: *be
-    network_id: *be_febo_mobile
-  - id: 387515
-    prefix: '324510'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac2fc2d9-b19d-4e4b-a50c-381ea02626a5
-    country_id: *be
-    network_id: *be_digi_mobile
+    network_id: *be_liege_region
   - id: 388620
     prefix: '3245'
     number_min_length: 11
@@ -571,13 +568,6 @@ network_prefixes:
     uuid: cd44ec4d-ecc8-44c2-8e23-aad33c7aba7b
     country_id: *be
     network_id: *be_mobile
-  - id: 388721
-    prefix: '32460'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 64b0bb32-3d7e-45e9-ad96-08500f614247
-    country_id: *be
-    network_id: *be_proximus_mobile
   - id: 392767
     prefix: '324500'
     number_min_length: 11
@@ -585,6 +575,13 @@ network_prefixes:
     uuid: b2b991f9-a5c3-461e-83b7-e8a0f4d2bc3c
     country_id: *be
     network_id: *be_mobile
+  - id: 387515
+    prefix: '324510'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac2fc2d9-b19d-4e4b-a50c-381ea02626a5
+    country_id: *be
+    network_id: *be_digi_mobile
   - id: 393481
     prefix: '32455'
     number_min_length: 11
@@ -613,6 +610,20 @@ network_prefixes:
     uuid: 2226d0ac-8568-433d-847a-39b1e3e2728c
     country_id: *be
     network_id: *be_cwave_mobile
+  - id: 399471
+    prefix: '3246'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e5371280-d63a-406e-9e96-fdbac7a50d48
+    country_id: *be
+    network_id: *be_mobile
+  - id: 388721
+    prefix: '32460'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 64b0bb32-3d7e-45e9-ad96-08500f614247
+    country_id: *be
+    network_id: *be_proximus_mobile
   - id: 394176
     prefix: '324618'
     number_min_length: 11
@@ -641,62 +652,6 @@ network_prefixes:
     uuid: 142ebffe-5819-4e3f-a890-5704640fadcf
     country_id: *be
     network_id: *be_giancom_mobile
-  - id: 395316
-    prefix: '324683'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3d0ab2e7-f557-4ea7-98e7-20b688655af5
-    country_id: *be
-    network_id: *be_base_mobile
-  - id: 395323
-    prefix: '324684'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f771033a-525d-4a4d-8d0e-bae731bfc22e
-    country_id: *be
-    network_id: *be_base_mobile
-  - id: 395329
-    prefix: '324685'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: af2cb944-5df4-4a1f-b568-82c63d1b664e
-    country_id: *be
-    network_id: *be_base_mobile
-  - id: 395343
-    prefix: '324686'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 974e0b50-c127-491a-add2-aae61c535e2b
-    country_id: *be
-    network_id: *be_onoff_mobile
-  - id: 395399
-    prefix: '324687'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 63817017-d5b7-4bf6-a1a1-7c44e117137d
-    country_id: *be
-    network_id: *be_premium_routing_mobile
-  - id: 395403
-    prefix: '324688'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94138b42-26c5-490c-85bf-144913cfea8d
-    country_id: *be
-    network_id: *be_premium_routing_mobile
-  - id: 395408
-    prefix: '324689'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d8ae004c-bd22-480c-b1bc-d4de8b5b40c9
-    country_id: *be
-    network_id: *be_febo_mobile
-  - id: 395417
-    prefix: '32469'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 314ba9e2-8427-4509-8d72-2fbbf828d0a4
-    country_id: *be
-    network_id: *be_base_mobile
   - id: 398526
     prefix: '324650'
     number_min_length: 11
@@ -816,6 +771,7 @@ network_prefixes:
     uuid: 9f5c4c88-35bc-49b3-9aff-97c4d2138847
     country_id: *be
     network_id: *be_vectone_mobile_mobile
+# Supplementary services Prefixes
   - id: 399095
     prefix: '324667'
     number_min_length: 11
@@ -907,14 +863,196 @@ network_prefixes:
     uuid: e89b677d-580d-4e8a-960f-8b787edeac88
     country_id: *be
     network_id: *be_base_mobile
-  - id: 399471
-    prefix: '3246'
+  - id: 395316
+    prefix: '324683'
     number_min_length: 11
     number_max_length: 11
-    uuid: e5371280-d63a-406e-9e96-fdbac7a50d48
+    uuid: 3d0ab2e7-f557-4ea7-98e7-20b688655af5
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 395323
+    prefix: '324684'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f771033a-525d-4a4d-8d0e-bae731bfc22e
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 395329
+    prefix: '324685'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: af2cb944-5df4-4a1f-b568-82c63d1b664e
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 395343
+    prefix: '324686'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 974e0b50-c127-491a-add2-aae61c535e2b
+    country_id: *be
+    network_id: *be_onoff_mobile
+  - id: 395399
+    prefix: '324687'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 63817017-d5b7-4bf6-a1a1-7c44e117137d
+    country_id: *be
+    network_id: *be_premium_routing_mobile
+  - id: 395403
+    prefix: '324688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94138b42-26c5-490c-85bf-144913cfea8d
+    country_id: *be
+    network_id: *be_premium_routing_mobile
+  - id: 395408
+    prefix: '324689'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8ae004c-bd22-480c-b1bc-d4de8b5b40c9
+    country_id: *be
+    network_id: *be_febo_mobile
+  - id: 395417
+    prefix: '32469'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 314ba9e2-8427-4509-8d72-2fbbf828d0a4
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 51604
+    prefix: '3247'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f03db7fd-1040-4865-b80a-64a34e4c7c44
+    country_id: *be
+    network_id: *be_proximus_mobile
+  - id: 58221
+    prefix: '3248'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c44c6fe-1cf1-4a1d-85ad-c843d28e97ca
     country_id: *be
     network_id: *be_mobile
-# Fixed Prefixes
+  - id: 51754
+    prefix: '324801'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3df1dc81-e53b-4838-9cfb-097c5e188d2a
+    country_id: *be
+    network_id: *be_legos_mobile
+  - id: 51755
+    prefix: '324802'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c115358c-52f9-4199-8aba-36d019d0df9e
+    country_id: *be
+    network_id: *be_tismi_mobile
+  - id: 51853
+    prefix: '324803'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4327b396-15fd-4cc9-95b8-f2769d8deaf0
+    country_id: *be
+    network_id: *be_premium_routing_mobile
+  - id: 51953
+    prefix: '324804'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c62a3479-9378-44d4-86c0-82c1030560a7
+    country_id: *be
+    network_id: *be_l_mobi_mobile
+  - id: 52044
+    prefix: '324805'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8acb89cc-597c-4876-83c0-e10dec71c5ca
+    country_id: *be
+    network_id: *be_dense_air_mobile
+# Mobile Prefixes
+  - id: 52144
+    prefix: '324806'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fecd4b14-9483-4398-b948-c9ac565897fa
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 56352
+    prefix: '324809'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ddf0973-a767-418a-8ace-f042f922d84e
+    country_id: *be
+    network_id: *be_ericsson_mobile
+  - id: 56460
+    prefix: '324810'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e65ccbb-6a5c-4186-8c3d-9dd31e82855e
+    country_id: *be
+    network_id: *be_nord_connect_mobile
+  - id: 57065
+    prefix: '32483'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6855e025-3666-41bf-ba7d-06a9fa1a7439
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 57218
+    prefix: '32484'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f3f6c64-2298-4ca4-9339-10c05e1d95ca
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 52972
+    prefix: '32485'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc6798d5-9c84-4963-8dd7-6739d1d7db74
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 53145
+    prefix: '32486'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 442bdb1f-b452-414f-8b7b-9dd6e3ced802
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 53233
+    prefix: '32487'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 69f5d9d8-fffb-4afa-8332-501f970d391c
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 57420
+    prefix: '32488'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cb62a40-a612-451b-9a5d-b9aa4a9826bc
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 57855
+    prefix: '32489'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca7d2ffe-73c4-4563-bde8-87f59abf1141
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 54570
+    prefix: '3249'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 747a32dd-f592-4914-8792-d972fd4e0b30
+    country_id: *be
+    network_id: *be_orange_mobile
+  - id: 249562
+    prefix: '325'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: f8b2db01-aa41-4591-ae3e-cb36b49c3729
+    country_id: *be
+    network_id: *be_sms_mms_services_enterntainment_services
   - id: 54914
     prefix: '3250'
     number_min_length: 10
@@ -936,13 +1074,6 @@ network_prefixes:
     uuid: 7c73fbf0-b761-4bf8-8ec3-5794c512038d
     country_id: *be
     network_id: *be_dendermonde_region
-  - id: 73190
-    prefix: '3254'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 51227632-987c-4d8c-806e-29c2daaf119c
-    country_id: *be
-    network_id: *be_ninove_region
   - id: 76533
     prefix: '3253'
     number_min_length: 10
@@ -950,6 +1081,13 @@ network_prefixes:
     uuid: e26dbeb7-42f5-49c9-9b2e-7e95aea491d9
     country_id: *be
     network_id: *be_aalst_region
+  - id: 73190
+    prefix: '3254'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 51227632-987c-4d8c-806e-29c2daaf119c
+    country_id: *be
+    network_id: *be_ninove_region
   - id: 78109
     prefix: '3255'
     number_min_length: 10
@@ -957,13 +1095,6 @@ network_prefixes:
     uuid: 6b63a1ee-0878-4137-a31c-e927b47569c2
     country_id: *be
     network_id: *be_ronse_region
-  - id: 84406
-    prefix: '3259'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f6cfa7ee-b0a5-40c7-bb64-a97eb675a232
-    country_id: *be
-    network_id: *be_oostende_region
   - id: 87906
     prefix: '3256'
     number_min_length: 10
@@ -985,6 +1116,20 @@ network_prefixes:
     uuid: 37155e01-4ba3-4e49-a729-6777ebbadcf8
     country_id: *be
     network_id: *be_veurne_region
+  - id: 84406
+    prefix: '3259'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f6cfa7ee-b0a5-40c7-bb64-a97eb675a232
+    country_id: *be
+    network_id: *be_oostende_region
+  - id: 245374
+    prefix: '326'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 6d59bb35-b03b-46b5-9514-4873213593de
+    country_id: *be
+    network_id: *be_sms_mms_services_enterntainment_services
   - id: 95205
     prefix: '3260'
     number_min_length: 10
@@ -1020,6 +1165,13 @@ network_prefixes:
     uuid: bce0c699-86cd-4840-995e-b2d1648abb3d
     country_id: *be
     network_id: *be_mons_region
+  - id: 151414
+    prefix: '3267'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 21bd183e-bc7e-4168-8121-57bf2b1944c5
+    country_id: *be
+    network_id: *be_nivelles_region
   - id: 146810
     prefix: '3268'
     number_min_length: 10
@@ -1034,13 +1186,20 @@ network_prefixes:
     uuid: c7cbf21d-63e7-462b-9701-1d106a423135
     country_id: *be
     network_id: *be_tournai_region
-  - id: 151414
-    prefix: '3267'
+  - id: 255232
+    prefix: '327'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 0695b398-5a2e-48ce-a885-f2c9a3df2523
+    country_id: *be
+    network_id: *be_sms_mms_services_adult_content
+  - id: 150229
+    prefix: '3270'
     number_min_length: 10
     number_max_length: 10
-    uuid: 21bd183e-bc7e-4168-8121-57bf2b1944c5
+    uuid: cae3e6fd-8459-4402-ac5f-ef62fc10e2a8
     country_id: *be
-    network_id: *be_nivelles_region
+    network_id: *be_premium_rate_services
   - id: 163979
     prefix: '3271'
     number_min_length: 10
@@ -1048,174 +1207,132 @@ network_prefixes:
     uuid: abff0df0-65c6-451a-bc0a-72870a6723ad
     country_id: *be
     network_id: *be_charleroi_region
-  - id: 258618
-    prefix: '3210'
+  - id: 192081
+    prefix: '3277'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: fa56f37f-49e0-41a7-90e7-73ab78c99545
+    country_id: *be
+    network_id: *be_internet_of_things_iot_services_ecall_services
+  - id: 192114
+    prefix: '32770001'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 6873b2bb-1d62-44b3-84ed-b5b10a733fb8
+    country_id: *be
+    network_id: *be_proximus_mobile
+  - id: 192115
+    prefix: '327700020'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f64f49f5-b1d3-474e-8cd2-3275e04e880e
+    country_id: *be
+    network_id: *be_base_mobile
+  - id: 192116
+    prefix: '327700040'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 44c8c6b4-a02b-4eb6-ae9c-f0962385c3e0
+    country_id: *be
+    network_id: *be_bics_mobile
+  - id: 192117
+    prefix: '327700041'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b1d01b87-4185-4261-a9e5-99d41c326eb2
+    country_id: *be
+    network_id: *be_bics_mobile
+  - id: 192118
+    prefix: '327700042'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 85385702-02f6-47fe-b71c-f8dc98d5bd8d
+    country_id: *be
+    network_id: *be_bics_mobile
+  - id: 192119
+    prefix: '327700050'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 10702f98-e9dd-4151-980a-d92b655feac0
+    country_id: *be
+    network_id: *be_orange_mobile
+  - id: 192120
+    prefix: '327700051'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f7001de9-a8e1-45e5-ae08-dfd3fa4aa7bf
+    country_id: *be
+    network_id: *be_orange_mobile
+  - id: 192121
+    prefix: '327700052'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: c7e917b2-fd44-4151-886e-29eae102b57b
+    country_id: *be
+    network_id: *be_orange_mobile
+  - id: 192122
+    prefix: '327700053'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 296ca08e-0646-40ec-b348-19e715a37075
+    country_id: *be
+    network_id: *be_orange_mobile
+  - id: 192123
+    prefix: '327700054'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 31dd2223-bfd7-4b14-9a5d-1495b9bf88e5
+    country_id: *be
+    network_id: *be_orange_mobile
+  - id: 192124
+    prefix: '327700075'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: baa92449-c4d2-40b3-8a70-b84f375c30d5
+    country_id: *be
+    network_id: *be_tismi_mobile
+  - id: 192125
+    prefix: '327700080'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 4a6079bf-f6a3-4ea4-9a0b-d47878679f1c
+    country_id: *be
+    network_id: *be_premium_routing_mobile
+  - id: 192126
+    prefix: '327700085'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: f83377ff-8bd6-4ea5-8596-bde448ec0b2f
+    country_id: *be
+    network_id: *be_cwave_mobile
+  - id: 192127
+    prefix: '327700090'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: e6f24f8c-906c-40e6-b1a2-b53569ac2e6c
+    country_id: *be
+    network_id: *be_febo_mobile
+  - id: 198388
+    prefix: '3278'
     number_min_length: 10
     number_max_length: 10
-    uuid: f6952817-0083-42f2-9a26-60c82dacd994
+    uuid: 8911771b-f40f-482f-8c40-3b5b3e7ab510
     country_id: *be
-    network_id: *be_wavre__region
-  - id: 258803
-    prefix: '3211'
+    network_id: *be_national_rate_services
+  - id: 256659
+    prefix: '328'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 14bac3e4-4918-4087-bf7b-0ef2221a90c1
+    country_id: *be
+    network_id: *be_sms_mms_services_free
+  - id: 403461
+    prefix: '32800'
     number_min_length: 10
     number_max_length: 10
-    uuid: 3d1272ac-b751-4e37-addc-124ace6245d1
+    uuid: d1a7877e-9028-436b-a464-c60bae6f2316
     country_id: *be
-    network_id: *be_hasselt_region
-  - id: 259222
-    prefix: '3212'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 315fb955-b661-42b1-afba-5894d8a7c457
-    country_id: *be
-    network_id: *be_tongeren_region
-  - id: 259501
-    prefix: '3213'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 37badf9a-1e1c-4b6c-948e-b46b5f368d23
-    country_id: *be
-    network_id: *be_diest_region
-  - id: 259939
-    prefix: '3214'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a69dc9fb-d62e-42eb-8151-574c75fbedee
-    country_id: *be
-    network_id: *be_herentals_region
-  - id: 260821
-    prefix: '3219'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 660d0ab7-0034-4a73-b992-5a69454a4974
-    country_id: *be
-    network_id: *be_waremme_region
-  - id: 261209
-    prefix: '3222'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1a20e3bd-a3e3-4fa3-9740-97c33823af1d
-    country_id: *be
-    network_id: *be_brussels_region
-  - id: 261261
-    prefix: '3223'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 764e9a41-2e2c-431d-a3de-a1995e5ee333
-    country_id: *be
-    network_id: *be_brussels_region
-  - id: 261298
-    prefix: '3224'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d78c0f58-c183-4fbf-90b3-4c7bc1080e03
-    country_id: *be
-    network_id: *be_brussels_region
-  - id: 261349
-    prefix: '3225'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e6c22ac0-0dfd-43ef-8f70-d1ce95c03878
-    country_id: *be
-    network_id: *be_brussels_region
-  - id: 261391
-    prefix: '3226'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f3f8a63f-b4f8-406c-8f69-1abf48fb7c25
-    country_id: *be
-    network_id: *be_brussels_region
-  - id: 261481
-    prefix: '3227'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 92727009-24de-4ccc-ae47-6a75e4cb61b2
-    country_id: *be
-    network_id: *be_brussels_region
-  - id: 261523
-    prefix: '3228'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 345c01e6-d217-48fb-b8f3-99bbced98750
-    country_id: *be
-    network_id: *be_brussels_region
-  - id: 266062
-    prefix: '3215'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0d660268-dcef-4d6e-a7a1-3292ed88fbc6
-    country_id: *be
-    network_id: *be_mechelen_region
-  - id: 266550
-    prefix: '3216'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 495ec458-a0b9-4ffb-a5ba-837ff3972c1d
-    country_id: *be
-    network_id: *be_leuven_region
-  - id: 315879
-    prefix: '3232'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 73327f34-426d-41b7-aad7-9ce85fd1d2c4
-    country_id: *be
-    network_id: *be_antwerp_region
-  - id: 316176
-    prefix: '3233'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1d190fc8-2874-4d77-957e-3c1b3d193696
-    country_id: *be
-    network_id: *be_antwerp_region
-  - id: 316278
-    prefix: '3234'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ce3984f1-2b0f-4fea-83bc-736a96316725
-    country_id: *be
-    network_id: *be_antwerp_region
-  - id: 316436
-    prefix: '3235'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 43a834c7-c7ac-4f4f-b9f8-da2bbb8c92db
-    country_id: *be
-    network_id: *be_antwerp_region
-  - id: 316638
-    prefix: '3236'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3649a7c7-16ee-40e1-9bca-92d30095cbee
-    country_id: *be
-    network_id: *be_antwerp_region
-  - id: 316832
-    prefix: '3237'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: de1b0fb5-b0f4-42a3-ab2a-62211fddf310
-    country_id: *be
-    network_id: *be_antwerp_region
-  - id: 316940
-    prefix: '3238'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 399e8744-627e-4235-a7c6-f73d5b23b66f
-    country_id: *be
-    network_id: *be_antwerp_region
-  - id: 349453
-    prefix: '3242'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4ff05616-f7b6-4ec9-a1d2-eb4260860cb5
-    country_id: *be
-    network_id: *be_liege_region
-  - id: 349525
-    prefix: '3243'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f961b466-db43-46fa-9506-d88e9b1010d4
-    country_id: *be
-    network_id: *be_liege_region
+    network_id: *be_freephone_services
   - id: 402923
     prefix: '32802'
     number_min_length: 10
@@ -1286,13 +1403,6 @@ network_prefixes:
     uuid: 821147f3-fc2e-41dd-b617-cc36bc7cc5fc
     country_id: *be
     network_id: *be_ciney_region
-  - id: 428692
-    prefix: '3286'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 38c2d2d5-d081-45c0-b9d2-d7df9c9b1879
-    country_id: *be
-    network_id: *be_durbuy_region
   - id: 433206
     prefix: '3284'
     number_min_length: 10
@@ -1307,6 +1417,13 @@ network_prefixes:
     uuid: dae6223e-359c-46fe-b685-4226731f6070
     country_id: *be
     network_id: *be_huy_region
+  - id: 428692
+    prefix: '3286'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 38c2d2d5-d081-45c0-b9d2-d7df9c9b1879
+    country_id: *be
+    network_id: *be_durbuy_region
   - id: 441099
     prefix: '3287'
     number_min_length: 10
@@ -1314,154 +1431,6 @@ network_prefixes:
     uuid: 6d3e2b25-d86b-48aa-beba-d29f82792ef3
     country_id: *be
     network_id: *be_verviers_region
-  - id: 444759
-    prefix: '3292'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cc81e6a7-e7f8-4a50-926e-888a8ec3b443
-    country_id: *be
-    network_id: *be_gent_region
-  - id: 444925
-    prefix: '3293'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5d2daee5-9cde-4c86-b0d0-8a659584eafb
-    country_id: *be
-    network_id: *be_gent_region
-  - id: 445080
-    prefix: '3294'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2d381278-3673-44b4-93c3-3e229a9d8b26
-    country_id: *be
-    network_id: *be_gent_region
-  - id: 451399
-    prefix: '3289'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7d879ee4-4b5e-470e-9194-d55aa2642f31
-    country_id: *be
-    network_id: *be_genk_region
-# Supplementary services Prefixes
-  - id: 150229
-    prefix: '3270'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cae3e6fd-8459-4402-ac5f-ef62fc10e2a8
-    country_id: *be
-    network_id: *be_premium_rate_services
-  - id: 192081
-    prefix: '3277'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: fa56f37f-49e0-41a7-90e7-73ab78c99545
-    country_id: *be
-    network_id: *be_internet_of_things_iot_services_ecall_services
-  - id: 198388
-    prefix: '3278'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8911771b-f40f-482f-8c40-3b5b3e7ab510
-    country_id: *be
-    network_id: *be_national_rate_services
-  - id: 231727
-    prefix: '3298'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3435817f-82d7-4a38-8319-de40c702aa69
-    country_id: *be
-    network_id: *be_virtual_private_network
-  - id: 242354
-    prefix: '321'
-    number_min_length: 5
-    number_max_length: 8
-    uuid: 34765137-6a08-45d3-b259-a516903fe19a
-    country_id: *be
-    network_id: *be_sms_mms_services_and_other_special_services
-  - id: 242655
-    prefix: '32116'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 753fb6f5-cd79-4fca-9892-3750ade63a5e
-    country_id: *be
-    network_id: *be_social_value_services
-  - id: 243049
-    prefix: '3217'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: c4361f2f-1291-457c-bc3d-a9ac7e604baa
-    country_id: *be
-    network_id: *be_social_interest_services
-  - id: 243920
-    prefix: '324'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 5b037fb0-f7c0-4275-a7cd-f9e2f18ff7dd
-    country_id: *be
-    network_id: *be_sms_mms_services_value_added_services
-  - id: 245374
-    prefix: '326'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 6d59bb35-b03b-46b5-9514-4873213593de
-    country_id: *be
-    network_id: *be_sms_mms_services_enterntainment_services
-  - id: 247268
-    prefix: '3218'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: d5e7d3ff-55f3-4136-8f42-51bd81abdf06
-    country_id: *be
-    network_id: *be_social_interest_services
-  - id: 247388
-    prefix: '322'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 98df633a-acc4-4e03-a1f1-5e6a507626bc
-    country_id: *be
-    network_id: *be_sms_mms_services
-  - id: 248880
-    prefix: '323'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 0b1c7802-f7fb-41ad-b803-e4d3ae08d03e
-    country_id: *be
-    network_id: *be_sms_mms_services
-  - id: 249562
-    prefix: '325'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: f8b2db01-aa41-4591-ae3e-cb36b49c3729
-    country_id: *be
-    network_id: *be_sms_mms_services_enterntainment_services
-  - id: 255232
-    prefix: '327'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 0695b398-5a2e-48ce-a885-f2c9a3df2523
-    country_id: *be
-    network_id: *be_sms_mms_services_adult_content
-  - id: 256659
-    prefix: '328'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 14bac3e4-4918-4087-bf7b-0ef2221a90c1
-    country_id: *be
-    network_id: *be_sms_mms_services_free
-  - id: 257078
-    prefix: '329'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 2c9c623c-7c09-4cec-bca4-dec6962a1a12
-    country_id: *be
-    network_id: *be_sms_mms_services_subscription_services
-  - id: 403461
-    prefix: '32800'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d1a7877e-9028-436b-a464-c60bae6f2316
-    country_id: *be
-    network_id: *be_freephone_services
   - id: 443781
     prefix: '3288'
     number_min_length: 10
@@ -1469,13 +1438,20 @@ network_prefixes:
     uuid: 7463fac8-5c41-4b19-b1b6-fa9b167de55d
     country_id: *be
     network_id: *be_virtual_private_network
-  - id: 447280
-    prefix: '32903'
+  - id: 451399
+    prefix: '3289'
     number_min_length: 10
     number_max_length: 10
-    uuid: 7c919173-ced1-4fd4-996d-d1fa15ade791
+    uuid: 7d879ee4-4b5e-470e-9194-d55aa2642f31
     country_id: *be
-    network_id: *be_premium_rate_services
+    network_id: *be_genk_region
+  - id: 257078
+    prefix: '329'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 2c9c623c-7c09-4cec-bca4-dec6962a1a12
+    country_id: *be
+    network_id: *be_sms_mms_services_subscription_services
   - id: 454570
     prefix: '32900'
     number_min_length: 10
@@ -1497,25 +1473,18 @@ network_prefixes:
     uuid: 748450be-d3e2-4690-82fb-93e5860ac3a3
     country_id: *be
     network_id: *be_premium_rate_services
+  - id: 447280
+    prefix: '32903'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c919173-ced1-4fd4-996d-d1fa15ade791
+    country_id: *be
+    network_id: *be_premium_rate_services
   - id: 455868
     prefix: '32904'
     number_min_length: 10
     number_max_length: 10
     uuid: 2c2c853d-03a8-412b-a4a9-bf1c9674f3a9
-    country_id: *be
-    network_id: *be_premium_rate_services
-  - id: 456597
-    prefix: '32907'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 442346db-e291-491c-9135-1761aa38fc86
-    country_id: *be
-    network_id: *be_adults_entertainment_services
-  - id: 457258
-    prefix: '32908'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a48f4f82-b7d8-4034-9e77-e488c7e137e9
     country_id: *be
     network_id: *be_premium_rate_services
   - id: 462672
@@ -1532,6 +1501,20 @@ network_prefixes:
     uuid: a9da1120-a1fc-4927-99d6-a690749670f8
     country_id: *be
     network_id: *be_adults_entertainment_services
+  - id: 456597
+    prefix: '32907'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 442346db-e291-491c-9135-1761aa38fc86
+    country_id: *be
+    network_id: *be_adults_entertainment_services
+  - id: 457258
+    prefix: '32908'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a48f4f82-b7d8-4034-9e77-e488c7e137e9
+    country_id: *be
+    network_id: *be_premium_rate_services
   - id: 463571
     prefix: '32909'
     number_min_length: 10
@@ -1539,11 +1522,31 @@ network_prefixes:
     uuid: bf0f41ad-03cc-42b3-963b-f2f677edbc12
     country_id: *be
     network_id: *be_premium_rate_services
-# Country code Prefixes
-  - id: 241949
-    prefix: '32'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: e79c0d88-9648-49ce-9c6a-c40b904aab61
+  - id: 444759
+    prefix: '3292'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc81e6a7-e7f8-4a50-926e-888a8ec3b443
     country_id: *be
-    network_id: null
+    network_id: *be_gent_region
+  - id: 444925
+    prefix: '3293'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5d2daee5-9cde-4c86-b0d0-8a659584eafb
+    country_id: *be
+    network_id: *be_gent_region
+  - id: 445080
+    prefix: '3294'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2d381278-3673-44b4-93c3-3e229a9d8b26
+    country_id: *be
+    network_id: *be_gent_region
+  - id: 231727
+    prefix: '3298'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3435817f-82d7-4a38-8319-de40c702aa69
+    country_id: *be
+    network_id: *be_virtual_private_network

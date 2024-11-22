@@ -1,6 +1,6 @@
 country_id: &gr 83
 networks:
-# Supplementary services Networks
+# Mobile Networks
   - id: &gr_virtual_private_network 5624
     name: GR Virtual Private Network
     uuid: 7e997919-292b-4a84-b5b1-ab96530382c6
@@ -9,52 +9,10 @@ networks:
     name: GR Sms Services
     uuid: 23702a24-8702-4b73-832e-c790dea86ca9
     type_id: 13
-  - id: &gr_personal_number_services 16195
-    name: GR Personal Number Services
-    uuid: 303d2f59-3c96-41a2-894b-71a78cf2dd7b
-    type_id: 13
-  - id: &gr_special_services 21411
-    name: GR Special Services
-    uuid: 8b6c6459-eab7-4ae7-b517-f34323d3961b
-    type_id: 13
-  - id: &gr_social_value_services 21631
-    name: GR Social Value Services
-    uuid: 8bcc3b56-f33e-44ac-9c96-d305bc6bbf6f
-    type_id: 13
-  - id: &gr_value_added_services 38408
-    name: GR Value Added Services
-    uuid: e7a6bf70-5371-486d-a2d0-9085891cc846
-    type_id: 13
-  - id: &gr_freephone_services 38496
-    name: GR Freephone Services
-    uuid: 8a70a8b8-7a7f-4864-b3ff-df31a6d0d2fb
-    type_id: 13
-  - id: &gr_shared_cost_services 38532
-    name: GR Shared Cost Services
-    uuid: 824d545e-dc2c-4180-9199-bc7f12e7828c
-    type_id: 13
-  - id: &gr_virtual_calling_cards_services 39171
-    name: GR Virtual Calling Cards Services
-    uuid: 69061f96-af54-4962-9a30-fc0b8f029d62
-    type_id: 13
-  - id: &gr_data_services 42023
-    name: GR Data Services
-    uuid: 2b78c690-98f2-485f-b9d9-cc0b459658bf
-    type_id: 13
-  - id: &gr_premium_rate_services 42103
-    name: GR Premium Rate Services
-    uuid: 1cd488c4-31ee-465c-bae9-2514b3676a3f
-    type_id: 13
-  - id: &gr_adults_entertainment_services 42617
-    name: GR Adults Entertainment Services
-    uuid: 3529ec64-2684-4ea0-a084-d6c109475860
-    type_id: 13
-# Satellite Networks
   - id: &gr_satellite 10554
     name: GR Satellite
     uuid: 76542edd-cdec-41f2-8afd-0fa6398d71fb
     type_id: 15
-# Mobile Networks
   - id: &gr_bws_mobile 14262
     name: GR Bws Mobile
     uuid: 03141c5e-e3bf-44fc-ae11-86bd856db2fc
@@ -99,10 +57,19 @@ networks:
     name: GR Ose Mobile
     uuid: 4da639a6-5729-4057-ac0e-d7a651c85eaf
     type_id: 3
+  - id: &gr_premium_net_paging 14341
+    name: GR Premium Net Paging
+    uuid: fa7c9a72-0787-4274-8fd0-c25e64b463c5
+    type_id: 12
+  - id: &gr_netbalt_paging 14342
+    name: GR Netbalt Paging
+    uuid: 0ee37907-ab82-4059-9a0d-9405465fa705
+    type_id: 12
   - id: &gr_yuboto_mobile 14354
     name: GR Yuboto Mobile
     uuid: fbb73e15-e050-4c22-a940-9ce23e399877
     type_id: 3
+# Paging Networks
   - id: &gr_premium_net_mobile 14355
     name: GR Premium Net Mobile
     uuid: d8e1da67-56f0-42f0-b3ec-0303301eecb9
@@ -111,6 +78,7 @@ networks:
     name: GR Apifon Mobile
     uuid: 43e6f8f9-1906-4376-957e-ffb56adbe134
     type_id: 3
+# Supplementary services Networks
   - id: &gr_omninet_mobile 14856
     name: GR Omninet Mobile
     uuid: 87fe8f81-1700-4842-8849-2df86060032f
@@ -123,16 +91,18 @@ networks:
     name: GR Cosmote Mobile
     uuid: e3441e1d-0b21-4145-931a-68cff703cd3c
     type_id: 3
-# Paging Networks
-  - id: &gr_premium_net_paging 14341
-    name: GR Premium Net Paging
-    uuid: fa7c9a72-0787-4274-8fd0-c25e64b463c5
-    type_id: 12
-  - id: &gr_netbalt_paging 14342
-    name: GR Netbalt Paging
-    uuid: 0ee37907-ab82-4059-9a0d-9405465fa705
-    type_id: 12
-# Fixed Networks
+  - id: &gr_personal_number_services 16195
+    name: GR Personal Number Services
+    uuid: 303d2f59-3c96-41a2-894b-71a78cf2dd7b
+    type_id: 13
+  - id: &gr_special_services 21411
+    name: GR Special Services
+    uuid: 8b6c6459-eab7-4ae7-b517-f34323d3961b
+    type_id: 13
+  - id: &gr_social_value_services 21631
+    name: GR Social Value Services
+    uuid: 8bcc3b56-f33e-44ac-9c96-d305bc6bbf6f
+    type_id: 13
   - id: &gr_athens_region 27333
     name: GR Athens Region
     uuid: f3b60088-42b9-4dc4-91ce-b2642aedb1c5
@@ -157,6 +127,7 @@ networks:
     name: GR Loutra Aidipsou Region
     uuid: 47cab1aa-d9c8-456f-8b3b-40b8118d5369
     type_id: 2
+# Fixed Networks
   - id: &gr_mantoudi_region 27840
     name: GR Mantoudi Region
     uuid: ff715907-c559-497b-b43a-27bcf82b2ca9
@@ -1101,29 +1072,48 @@ networks:
     name: GR Iraklion Region
     uuid: 5f3c3cf0-8874-4797-bdb0-0c71366538f9
     type_id: 2
+  - id: &gr_value_added_services 38408
+    name: GR Value Added Services
+    uuid: e7a6bf70-5371-486d-a2d0-9085891cc846
+    type_id: 13
+  - id: &gr_freephone_services 38496
+    name: GR Freephone Services
+    uuid: 8a70a8b8-7a7f-4864-b3ff-df31a6d0d2fb
+    type_id: 13
+  - id: &gr_shared_cost_services 38532
+    name: GR Shared Cost Services
+    uuid: 824d545e-dc2c-4180-9199-bc7f12e7828c
+    type_id: 13
+  - id: &gr_virtual_calling_cards_services 39171
+    name: GR Virtual Calling Cards Services
+    uuid: 69061f96-af54-4962-9a30-fc0b8f029d62
+    type_id: 13
+  - id: &gr_data_services 42023
+    name: GR Data Services
+    uuid: 2b78c690-98f2-485f-b9d9-cc0b459658bf
+    type_id: 13
+  - id: &gr_premium_rate_services 42103
+    name: GR Premium Rate Services
+    uuid: 1cd488c4-31ee-465c-bae9-2514b3676a3f
+    type_id: 13
+  - id: &gr_adults_entertainment_services 42617
+    name: GR Adults Entertainment Services
+    uuid: 3529ec64-2684-4ea0-a084-d6c109475860
+    type_id: 13
+# Satellite Networks
+  - id: &gr_fixed 43415
+    name: GR Fixed
+    uuid: 67744689-87b7-4e5a-bcc5-1653a85d53b5
+    type_id: 2
 network_prefixes:
-# Supplementary services Prefixes
-  - id: 62590
-    prefix: '3050'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 52eed65a-d63a-493f-8af7-a8c286302aef
+# Mobile Prefixes
+  - id: 242007
+    prefix: '30'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 3e94b6c6-06d3-41af-ab38-a3729cc9c7d9
     country_id: *gr
-    network_id: *gr_virtual_private_network
-  - id: 78102
-    prefix: '3054'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d389f237-9f8a-4d34-9d4a-9c15ccf54acb
-    country_id: *gr
-    network_id: *gr_sms_services
-  - id: 163974
-    prefix: '3070'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cbab90d7-016b-4425-a9a4-e7d6622c124f
-    country_id: *gr
-    network_id: *gr_personal_number_services
+    network_id: *gr_fixed
   - id: 242407
     prefix: '301'
     number_min_length: 5
@@ -1138,91 +1128,1724 @@ network_prefixes:
     uuid: c85828f1-320b-47ce-a1e5-881fcfed9e26
     country_id: *gr
     network_id: *gr_social_value_services
-  - id: 401748
-    prefix: '30806'
+  - id: 274226
+    prefix: '3021'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4b7ce959-367e-4994-b9d8-5821dd869b14
+    uuid: c2b5a169-27b2-477b-b3a5-41cf1723127c
     country_id: *gr
-    network_id: *gr_value_added_services
-  - id: 403471
-    prefix: '30800'
+    network_id: *gr_athens_region
+  - id: 278959
+    prefix: '302221'
     number_min_length: 12
     number_max_length: 12
-    uuid: bdc9d9e4-ed16-402e-b162-9fd95d339d08
+    uuid: d7eb80aa-cecf-42e6-b865-c50ea9c0a8cf
     country_id: *gr
-    network_id: *gr_freephone_services
-  - id: 403515
-    prefix: '30801'
+    network_id: *gr_halkida_region
+  - id: 278961
+    prefix: '302222'
     number_min_length: 12
     number_max_length: 12
-    uuid: 62d7b7b1-4502-4a60-82dd-bebfdf9046d7
+    uuid: 1137a7ba-3c62-456f-b5e0-3ad10a88c249
     country_id: *gr
-    network_id: *gr_shared_cost_services
-  - id: 406941
-    prefix: '30812'
+    network_id: *gr_kymi_region
+  - id: 278965
+    prefix: '302223'
     number_min_length: 12
     number_max_length: 12
-    uuid: 49b7a7eb-8c9f-44f1-9bce-0aa99c28d146
+    uuid: 3134366c-985f-40d9-8222-532f1c8c15ea
     country_id: *gr
-    network_id: *gr_value_added_services
-  - id: 410224
-    prefix: '30825'
+    network_id: *gr_aliveri_region
+  - id: 278969
+    prefix: '302224'
     number_min_length: 12
     number_max_length: 12
-    uuid: 812ce92a-d15a-47a9-9de7-70006e830f0d
+    uuid: 5132f5f0-d6f0-4699-ba17-6b13a18099d7
     country_id: *gr
-    network_id: *gr_value_added_services
-  - id: 412066
-    prefix: '30807'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 43b78210-42a4-4f9c-8e48-7c9b7ce40022
-    country_id: *gr
-    network_id: *gr_virtual_calling_cards_services
-  - id: 436266
-    prefix: '30850'
+    network_id: *gr_karystos_region
+  - id: 278976
+    prefix: '302226'
     number_min_length: 12
     number_max_length: 12
-    uuid: 631ccd92-01d8-4b64-8d50-d1e6796d3735
+    uuid: cdb2a50c-1ee7-41d0-b2fe-aab0a79b111a
     country_id: *gr
-    network_id: *gr_value_added_services
-  - id: 450474
-    prefix: '30875'
+    network_id: *gr_loutra_aidipsou_region
+  - id: 278980
+    prefix: '302227'
     number_min_length: 12
     number_max_length: 12
-    uuid: 01e193b7-c854-4e40-9552-5dc70a15d9a7
+    uuid: 73737127-6061-4a02-a47c-b67c9bdfa5ac
     country_id: *gr
-    network_id: *gr_value_added_services
-  - id: 452247
-    prefix: '30896'
+    network_id: *gr_mantoudi_region
+  - id: 278982
+    prefix: '302228'
     number_min_length: 12
     number_max_length: 12
-    uuid: 643a55a4-4b2d-4d39-b819-239c550db946
+    uuid: 9d185cde-39df-41f9-bd6b-16aae7410405
     country_id: *gr
-    network_id: *gr_data_services
-  - id: 452471
-    prefix: '30899'
+    network_id: *gr_psachna_region
+  - id: 278985
+    prefix: '302229'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7e5bc14e-67d6-4776-b8f0-565d773f470f
+    uuid: 29c5ec9b-c6ee-4a0a-ba75-55d32b678422
     country_id: *gr
-    network_id: *gr_data_services
-  - id: 454706
-    prefix: '30901'
+    network_id: *gr_eretria_region
+  - id: 279458
+    prefix: '302231'
     number_min_length: 12
     number_max_length: 12
-    uuid: f719c6f5-d0e4-4b49-808d-bac9b9732ced
+    uuid: a4eabd9b-8283-4038-b503-899a433648b8
     country_id: *gr
-    network_id: *gr_premium_rate_services
-  - id: 463574
-    prefix: '30909'
+    network_id: *gr_lamia_region
+  - id: 279462
+    prefix: '302232'
     number_min_length: 12
     number_max_length: 12
-    uuid: e4ba9f38-51fb-4aa0-bc17-a92d78809970
+    uuid: 81aaa45c-25c8-4228-a6d4-b09630c61f78
     country_id: *gr
-    network_id: *gr_adults_entertainment_services
-# Satellite Prefixes
+    network_id: *gr_domokos_region
+  - id: 279466
+    prefix: '302233'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b73aa001-394e-4c69-a72a-2ae738c3ed58
+    country_id: *gr
+    network_id: *gr_atalanti_region
+  - id: 279470
+    prefix: '302234'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5e3ed0c0-3552-46fe-bd54-2fa679b9a783
+    country_id: *gr
+    network_id: *gr_amfikleia_region
+  - id: 279474
+    prefix: '302235'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b20e9c1b-06a2-4174-b13c-c4f94d8cc67e
+    country_id: *gr
+    network_id: *gr_kamena_vourla_region
+  - id: 279478
+    prefix: '302236'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 361b9d1d-7c75-41d7-9870-a1a73cb40358
+    country_id: *gr
+    network_id: *gr_makrakomi_region
+  - id: 279482
+    prefix: '302237'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 651c143d-e096-4575-af83-0730ccdc8860
+    country_id: *gr
+    network_id: *gr_karpenisi_region
+  - id: 279486
+    prefix: '302238'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6113d39a-e6fa-470a-b79e-ce5650409fa6
+    country_id: *gr
+    network_id: *gr_stilida_region
+  - id: 283905
+    prefix: '302241'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 62f20d83-e3f5-4702-9515-82e8fcca15f1
+    country_id: *gr
+    network_id: *gr_rhodes_region
+  - id: 283911
+    prefix: '302242'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6a79fae6-f0fc-46ea-a638-72195d561728
+    country_id: *gr
+    network_id: *gr_kos_region
+  - id: 283917
+    prefix: '302243'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f05c0b30-bbfe-4d98-9459-b66ac6cddac5
+    country_id: *gr
+    network_id: *gr_kalimnos_region
+  - id: 283923
+    prefix: '302244'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1858e5fc-b236-4282-bb3f-d2b28e70835b
+    country_id: *gr
+    network_id: *gr_archagelos_region
+  - id: 283929
+    prefix: '302245'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2680d97e-3c32-438d-866e-5caf132f9dd6
+    country_id: *gr
+    network_id: *gr_karpathos_region
+  - id: 283935
+    prefix: '302246'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 93541c8d-6126-49d0-bb7f-182675fc5196
+    country_id: *gr
+    network_id: *gr_salakos_region
+  - id: 283939
+    prefix: '302247'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 90bacfe2-f411-453f-aaf5-1cb38272a812
+    country_id: *gr
+    network_id: *gr_leros_region
+  - id: 284667
+    prefix: '302251'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 834e8c7f-0c73-4e2b-9aed-f120d24ea2a1
+    country_id: *gr
+    network_id: *gr_mitilini_region
+  - id: 284672
+    prefix: '302252'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 77acab64-c7cc-4b65-a865-685478d51669
+    country_id: *gr
+    network_id: *gr_agiasos_region
+  - id: 284675
+    prefix: '302253'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4dbbc538-cebd-4cc0-9c4d-3c39c9c64f50
+    country_id: *gr
+    network_id: *gr_kalloni_region
+  - id: 284680
+    prefix: '302254'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7e2b03b8-040b-46a1-83c6-c28c54d56713
+    country_id: *gr
+    network_id: *gr_mirina_region
+  - id: 281068
+    prefix: '302261'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f2312547-0224-4794-9706-a4339f8fb6eb
+    country_id: *gr
+    network_id: *gr_livadeia_region
+  - id: 281073
+    prefix: '302262'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 80956384-0d32-4db4-bb0b-c9075f64da3e
+    country_id: *gr
+    network_id: *gr_thiva_region
+  - id: 281076
+    prefix: '302263'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 25bf0b5e-4a45-4dbf-a32d-ba4fd83d9952
+    country_id: *gr
+    network_id: *gr_vilia_region
+  - id: 281081
+    prefix: '302264'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cb152928-d468-4e86-89d8-4d6fad954a4d
+    country_id: *gr
+    network_id: *gr_domvrena_region
+  - id: 281086
+    prefix: '302265'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 136aa0a4-f03c-4beb-8d56-93f2bb53e4b1
+    country_id: *gr
+    network_id: *gr_amfissa_region
+  - id: 281091
+    prefix: '302266'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d88a064e-d6c3-4ff0-99a9-23ae6961e10f
+    country_id: *gr
+    network_id: *gr_lidoriki_region
+  - id: 281096
+    prefix: '302267'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 29c346c0-798c-4a3a-bbe8-db78026e0933
+    country_id: *gr
+    network_id: *gr_distomo_region
+  - id: 281101
+    prefix: '302268'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4c2152e7-934f-47a1-acfc-ddf89a26c0ce
+    country_id: *gr
+    network_id: *gr_aliartos_region
+  - id: 285070
+    prefix: '302271'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c0d1cc8e-e1be-48a6-9619-d5fcd79ff803
+    country_id: *gr
+    network_id: *gr_chios_region
+  - id: 285075
+    prefix: '302272'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 75e5bfed-5036-4afe-be21-82139086ebf4
+    country_id: *gr
+    network_id: *gr_kardamila_region
+  - id: 285081
+    prefix: '302273'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5811e26b-7c55-473e-bfd5-366ac9f973f7
+    country_id: *gr
+    network_id: *gr_samos_region
+  - id: 285086
+    prefix: '302274'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b62b4721-4212-4d4c-bd94-5f31d1b3b5b7
+    country_id: *gr
+    network_id: *gr_volissos_region
+  - id: 285098
+    prefix: '302275'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6958270c-85ce-44a2-a749-8d2fae3dd7a8
+    country_id: *gr
+    network_id: *gr_agios_kirikos_region
+  - id: 286158
+    prefix: '302281'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2daccc1f-c5f2-4c15-bd0d-45e1a5e2b534
+    country_id: *gr
+    network_id: *gr_siros_region
+  - id: 286160
+    prefix: '302282'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a06cf14a-a577-4fd4-ad72-4ff597fdb356
+    country_id: *gr
+    network_id: *gr_andros_region
+  - id: 286164
+    prefix: '302283'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: df37c3ac-a2b4-46f0-bddd-d146318ceaf3
+    country_id: *gr
+    network_id: *gr_tinos_region
+  - id: 286168
+    prefix: '302284'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4b3945f8-d367-465e-95d3-6ad5d34f700d
+    country_id: *gr
+    network_id: *gr_paros_region
+  - id: 286172
+    prefix: '302285'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a68b376d-a154-42e4-abba-43a5609efe9a
+    country_id: *gr
+    network_id: *gr_naxos_region
+  - id: 286176
+    prefix: '302286'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9928ddbf-6fbc-4338-8d0b-12e2fb31a24b
+    country_id: *gr
+    network_id: *gr_thira_region
+  - id: 286178
+    prefix: '302287'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6982e687-b677-4413-aa2f-0c5aa74a0109
+    country_id: *gr
+    network_id: *gr_milos_region
+  - id: 286180
+    prefix: '302288'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f428450-e386-4e60-ada2-20363f092da5
+    country_id: *gr
+    network_id: *gr_kea_region
+  - id: 286182
+    prefix: '302289'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7b65e482-f921-4003-ab23-c1d2557557b0
+    country_id: *gr
+    network_id: *gr_mikonos_region
+  - id: 286598
+    prefix: '302291'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c3e2ea33-e079-488e-87e8-fafd1e8fcf7e
+    country_id: *gr
+    network_id: *gr_lagonisi_region
+  - id: 286602
+    prefix: '302292'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5864b0b9-920a-4869-ab3e-8f6a84537490
+    country_id: *gr
+    network_id: *gr_lavrion_region
+  - id: 286604
+    prefix: '302293'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ef683cc5-de0a-45ec-9d27-6d6500f2011f
+    country_id: *gr
+    network_id: *gr_agia_sotira_region
+  - id: 286606
+    prefix: '302294'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2f9a0fe4-8d72-4be6-9373-4300f0cff07c
+    country_id: *gr
+    network_id: *gr_rafina_region
+  - id: 286608
+    prefix: '302295'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ce17fb5b-596a-4174-a807-d9711d8e9e38
+    country_id: *gr
+    network_id: *gr_afidnes_region
+  - id: 286612
+    prefix: '302296'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fb40fc69-4b34-46a6-aeb7-370cb2df7297
+    country_id: *gr
+    network_id: *gr_megara_region
+  - id: 286616
+    prefix: '302297'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 512a4fdc-2de1-40b9-9573-2de10c7ee329
+    country_id: *gr
+    network_id: *gr_aegina_region
+  - id: 286617
+    prefix: '302298'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2488225b-9934-402b-b5e6-1100122ed52d
+    country_id: *gr
+    network_id: *gr_poros_region
+  - id: 286618
+    prefix: '302299'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f0cb7fb0-0628-4faf-b157-c8c9a2f6731d
+    country_id: *gr
+    network_id: *gr_markopoulo_region
+  - id: 286674
+    prefix: '30231'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c7106471-374a-425d-af4a-43b77f066a9e
+    country_id: *gr
+    network_id: *gr_thessaloniki_region
+  - id: 292890
+    prefix: '302321'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5245451d-db27-40f2-a4d3-4b0603efa2a1
+    country_id: *gr
+    network_id: *gr_serres_region
+  - id: 292892
+    prefix: '302322'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a0b053fd-20bf-4f11-b5a6-d2ba15d70fa4
+    country_id: *gr
+    network_id: *gr_nigrita_region
+  - id: 292898
+    prefix: '302323'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f9f70a01-e4a5-4613-9f22-f47799e64f58
+    country_id: *gr
+    network_id: *gr_sidirokastro_region
+  - id: 292903
+    prefix: '302324'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 80ec5206-fd95-4df0-9957-682dbabbe29b
+    country_id: *gr
+    network_id: *gr_nea_zichni_region
+  - id: 292917
+    prefix: '302325'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2490d73c-ec30-4dbc-aa03-239dd246d6ba
+    country_id: *gr
+    network_id: *gr_herakleia_region
+  - id: 292932
+    prefix: '302327'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9aa6da28-00be-4968-a031-8f7c073db031
+    country_id: *gr
+    network_id: *gr_rodopoli_region
+  - id: 293068
+    prefix: '302331'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b3d4165c-4944-4dbf-890d-1c387161ad2b
+    country_id: *gr
+    network_id: *gr_veroia_region
+  - id: 293071
+    prefix: '302332'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7d85c6d7-4c94-475f-8f81-81ab2e440597
+    country_id: *gr
+    network_id: *gr_naousa_region
+  - id: 293077
+    prefix: '302333'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4adffa50-5717-4d5d-a0b7-36b70225b3c4
+    country_id: *gr
+    network_id: *gr_alexandria_region
+  - id: 287450
+    prefix: '302341'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 07bf107e-b0b9-4313-a899-1372dacc9aea
+    country_id: *gr
+    network_id: *gr_kilkis_region
+  - id: 287459
+    prefix: '302343'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 93bc0250-3ff6-4bc2-9769-6b02f4266cc6
+    country_id: *gr
+    network_id: *gr_polikastro_region
+  - id: 287641
+    prefix: '302351'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7d4acfca-1a5a-41d7-9dfb-e777bdb08421
+    country_id: *gr
+    network_id: *gr_katerini_region
+  - id: 287646
+    prefix: '302352'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8542b6a4-aa9a-468f-b3dd-f162143366a6
+    country_id: *gr
+    network_id: *gr_plaka_region
+  - id: 287653
+    prefix: '302353'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2ced624f-8983-4248-8b1f-47d5f682a3eb
+    country_id: *gr
+    network_id: *gr_aeginio_region
+  - id: 288609
+    prefix: '302371'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 465a822f-7ce9-4d2e-be6b-cb7ba991badb
+    country_id: *gr
+    network_id: *gr_polygyros_region
+  - id: 288612
+    prefix: '302372'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 95fb79b8-b4d3-4966-ab50-33f428b9a09c
+    country_id: *gr
+    network_id: *gr_arnea_region
+  - id: 288616
+    prefix: '302373'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ee14cba7-e018-44ed-bffe-04842366e276
+    country_id: *gr
+    network_id: *gr_nea_moudania_region
+  - id: 288619
+    prefix: '302374'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fd68a9b6-58b1-49cf-b04d-4255b46000eb
+    country_id: *gr
+    network_id: *gr_kassandreia_region
+  - id: 288624
+    prefix: '302375'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 30e97c5a-c038-4555-9e36-64dde56531c1
+    country_id: *gr
+    network_id: *gr_nikitas_region
+  - id: 288626
+    prefix: '302376'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fd85767d-dca1-4463-949e-dc7ec5617e33
+    country_id: *gr
+    network_id: *gr_stratoni_region
+  - id: 288628
+    prefix: '302377'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9b78f509-070b-4c9c-a2f5-1db7fa0f6c56
+    country_id: *gr
+    network_id: *gr_ierissos_region
+  - id: 293769
+    prefix: '302381'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 82aadaca-2e9a-485d-9891-feee44efa9af
+    country_id: *gr
+    network_id: *gr_edessa_region
+  - id: 293772
+    prefix: '302382'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ba5ced06-a028-4e0a-a933-3b26969fe243
+    country_id: *gr
+    network_id: *gr_giannitsa_region
+  - id: 293778
+    prefix: '302384'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 13246d17-ffd8-480a-b3eb-3c1537df86d5
+    country_id: *gr
+    network_id: *gr_aridea_region
+  - id: 293790
+    prefix: '302385'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5f434294-18f9-46c1-8e9d-b80f90ea8d93
+    country_id: *gr
+    network_id: *gr_florina_region
+  - id: 293801
+    prefix: '302386'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c6e4af90-b9a3-40aa-a8bf-1228c710c573
+    country_id: *gr
+    network_id: *gr_amynteo_region
+  - id: 294291
+    prefix: '302391'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f3a98a9c-a69a-4553-a91e-471661410bda
+    country_id: *gr
+    network_id: *gr_chlkidona_region
+  - id: 294295
+    prefix: '302392'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7485c1d9-63d6-441f-af67-94996e5c35a2
+    country_id: *gr
+    network_id: *gr_perea_region
+  - id: 294299
+    prefix: '302393'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d9be3a00-0d12-4ec3-834c-74cf8d9062f2
+    country_id: *gr
+    network_id: *gr_lagadikia_region
+  - id: 294303
+    prefix: '302394'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a550a93c-d6a3-41ca-b43b-9d592199dea5
+    country_id: *gr
+    network_id: *gr_lagadas_region
+  - id: 294307
+    prefix: '302395'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a724258c-3115-40e3-a7bf-317466eb5cbd
+    country_id: *gr
+    network_id: *gr_sochos_region
+  - id: 294310
+    prefix: '302396'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cbba4a92-e1ba-464b-87aa-46504d9f135e
+    country_id: *gr
+    network_id: *gr_vasilika_region
+  - id: 294311
+    prefix: '302397'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9319c9de-0000-4e97-ad85-7594e6cc4528
+    country_id: *gr
+    network_id: *gr_asprovalta_region
+  - id: 294312
+    prefix: '302399'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7a1e265d-e9f1-47b7-9aee-76d344bd5dde
+    country_id: *gr
+    network_id: *gr_nea_kallikrateia_region
+  - id: 289567
+    prefix: '30241'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 159e81c0-84bd-46b5-9db9-d88690581d73
+    country_id: *gr
+    network_id: *gr_larissa_region
+  - id: 294839
+    prefix: '302421'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e9673400-209a-49fe-81f4-f07088ca2804
+    country_id: *gr
+    network_id: *gr_volos_region
+  - id: 294842
+    prefix: '302422'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d6ba7d7e-bc4c-4d8a-8e51-a582443c409c
+    country_id: *gr
+    network_id: *gr_almyros_region
+  - id: 294846
+    prefix: '302423'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 57d62aff-f4b7-4a04-a9fd-947721db7688
+    country_id: *gr
+    network_id: *gr_kala_nera_region
+  - id: 294849
+    prefix: '302424'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7d0e41bf-b4f3-45fc-9c66-f39d1f57eea2
+    country_id: *gr
+    network_id: *gr_skopelos_region
+  - id: 294861
+    prefix: '302425'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2cf6be64-ef5c-491d-afdd-4aef7eb6aa50
+    country_id: *gr
+    network_id: *gr_velestino_region
+  - id: 294867
+    prefix: '302426'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0b834f45-2f1c-4282-9d15-8ccc1de3f132
+    country_id: *gr
+    network_id: *gr_zagora_region
+  - id: 294870
+    prefix: '302427'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3edb5655-c50f-4dfb-9540-408555ac277d
+    country_id: *gr
+    network_id: *gr_skiathos_region
+  - id: 294873
+    prefix: '302428'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ff2c831e-e4a1-4901-8385-ad6ca74161ad
+    country_id: *gr
+    network_id: *gr_volos_region
+  - id: 295154
+    prefix: '302431'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fa787bfd-73c4-4ba2-a1a8-0268b98371ea
+    country_id: *gr
+    network_id: *gr_trikala_region
+  - id: 295157
+    prefix: '302432'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b55e37fe-610d-4fdf-beca-af9b8f5657a1
+    country_id: *gr
+    network_id: *gr_kalabaka_region
+  - id: 295160
+    prefix: '302433'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 543e30b0-ef7d-40bf-a598-eb35213d2932
+    country_id: *gr
+    network_id: *gr_farkadona_region
+  - id: 295163
+    prefix: '302434'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3176e6d3-77db-4ceb-a89f-801221802403
+    country_id: *gr
+    network_id: *gr_pyli_region
+# Paging Prefixes
+  - id: 295614
+    prefix: '302441'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4278d2eb-fb87-42ed-a157-ff71ba86a2c8
+    country_id: *gr
+    network_id: *gr_karditsa_region
+  - id: 295619
+    prefix: '302443'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ef72f935-ed45-44de-8ce7-5b9deb8188b6
+    country_id: *gr
+    network_id: *gr_sofades_region
+  - id: 295622
+    prefix: '302444'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e89fccdf-ceb1-4a27-b42e-426985ff87a3
+    country_id: *gr
+    network_id: *gr_palamas_region
+# Supplementary services Prefixes
+  - id: 295634
+    prefix: '302445'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0e7dd330-7436-473c-874d-d501ede3732b
+    country_id: *gr
+    network_id: *gr_mouzaki_region
+  - id: 290874
+    prefix: '302461'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fa13e4fb-96f0-4f6b-9fe3-36193e04b0fc
+    country_id: *gr
+    network_id: *gr_kozani_region
+  - id: 290877
+    prefix: '302462'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 83a39eef-0cf5-4079-aee9-9b3717f88820
+    country_id: *gr
+    network_id: *gr_grevena_region
+  - id: 290881
+    prefix: '302463'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b27dfe5c-40f7-40f6-9042-0583e178c49a
+    country_id: *gr
+    network_id: *gr_ptolemaida_region
+  - id: 290884
+    prefix: '302464'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 26fada2c-3937-4be9-a1b1-61525ea8b406
+    country_id: *gr
+    network_id: *gr_servia_region
+  - id: 290895
+    prefix: '302465'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 901ad872-2217-4b43-bea7-519e3b2be331
+    country_id: *gr
+    network_id: *gr_siatista_region
+  - id: 290912
+    prefix: '302467'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 41e07632-60bc-4f7d-b811-447b46cc2f53
+    country_id: *gr
+    network_id: *gr_kastoria_region
+  - id: 290914
+    prefix: '302468'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b9c98613-6d8a-4dc1-9b43-2f5b83917321
+    country_id: *gr
+    network_id: *gr_neapoli_kozanis_region
+  - id: 301956
+    prefix: '302491'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dd9357c2-cff0-48c4-b64c-ab20be8c0c52
+    country_id: *gr
+    network_id: *gr_farsala_region
+  - id: 301957
+    prefix: '302492'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 92d557be-f3a0-4fdc-a0c0-7f8e679993fd
+    country_id: *gr
+    network_id: *gr_tyrnavos_region
+  - id: 301958
+    prefix: '302493'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a52a0a4c-9e43-4418-bf28-abedb967a82a
+    country_id: *gr
+    network_id: *gr_elassona_region
+  - id: 301959
+    prefix: '302494'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 80d7b888-5e98-47b1-8bec-ee8b841bebec
+    country_id: *gr
+    network_id: *gr_agia_region
+  - id: 301960
+    prefix: '302495'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 13a19bbc-df0c-47b1-b8dd-44c6b8fa5281
+    country_id: *gr
+    network_id: *gr_makrychori_region
+  - id: 297627
+    prefix: '30251'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dd756569-fdba-4d06-89f3-41dfcad4460b
+    country_id: *gr
+    network_id: *gr_kavala_region
+  - id: 302654
+    prefix: '302521'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 24cb52de-35eb-44a7-b44e-e7c3d5a3be27
+    country_id: *gr
+    network_id: *gr_drama_region
+  - id: 302658
+    prefix: '302522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 58e52533-70f7-4d01-aae2-24c7de5b078f
+    country_id: *gr
+    network_id: *gr_prosotsani_region
+  - id: 302663
+    prefix: '302523'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7d9928eb-ebbe-4f82-95b5-20e5f989079f
+    country_id: *gr
+    network_id: *gr_kato_nevrokopi_region
+# Fixed Prefixes
+  - id: 302666
+    prefix: '302524'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 29ee7a12-24b4-4877-8d87-3e32e764430d
+    country_id: *gr
+    network_id: *gr_paranesti_region
+  - id: 303199
+    prefix: '302531'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6d458490-4004-4853-8bf6-f50e1e84dbd2
+    country_id: *gr
+    network_id: *gr_komotini_region
+  - id: 303202
+    prefix: '302532'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 66d01457-a0cf-4a05-a6fb-fb0641a43600
+    country_id: *gr
+    network_id: *gr_sapes_region
+  - id: 303206
+    prefix: '302533'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1d9969f6-a98a-4c3b-a0cf-f89ed5a2670a
+    country_id: *gr
+    network_id: *gr_xylagani_region
+  - id: 303209
+    prefix: '302534'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c6037899-6085-4697-9e98-11c5838efebf
+    country_id: *gr
+    network_id: *gr_iasmos_region
+  - id: 303221
+    prefix: '302535'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9b39d309-13c9-47ac-8a6f-d8b61e896bd0
+    country_id: *gr
+    network_id: *gr_kallisti_region
+  - id: 298783
+    prefix: '302541'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 20f0599f-d98b-46bc-8c29-5056da598891
+    country_id: *gr
+    network_id: *gr_xanthi_region
+  - id: 298785
+    prefix: '302542'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 461c44e0-629a-4911-9d1e-104347e88aa8
+    country_id: *gr
+    network_id: *gr_stavroupoli_region
+  - id: 298788
+    prefix: '302544'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8cc85df4-67f8-4b66-a078-e8ecc8f04315
+    country_id: *gr
+    network_id: *gr_echinos_region
+  - id: 298808
+    prefix: '302551'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fadd57f4-3288-4df1-8c14-bbe465b656df
+    country_id: *gr
+    network_id: *gr_alexandroupoli_region
+  - id: 298812
+    prefix: '302552'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 467a5acd-8106-4e28-8251-fa3b111223da
+    country_id: *gr
+    network_id: *gr_orestiada_region
+  - id: 298815
+    prefix: '302553'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6980101a-c83e-460e-a854-16a165a9ef77
+    country_id: *gr
+    network_id: *gr_didymoticho_region
+  - id: 298819
+    prefix: '302554'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f495b22e-ab89-4966-9816-82a19a94c70c
+    country_id: *gr
+    network_id: *gr_soufli_region
+  - id: 298823
+    prefix: '302555'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5517510a-7f06-4496-908d-358c6a748e13
+    country_id: *gr
+    network_id: *gr_feres_region
+  - id: 298827
+    prefix: '302556'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f4121abc-0978-4b48-a0d1-54790c94d56f
+    country_id: *gr
+    network_id: *gr_kyprinos_region
+  - id: 299754
+    prefix: '302591'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 01158eb7-092a-48ba-bd2f-82ac6ec45654
+    country_id: *gr
+    network_id: *gr_chrysoupoli_region
+  - id: 299757
+    prefix: '302592'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 885e949c-147e-48f0-93cc-4260a66eb992
+    country_id: *gr
+    network_id: *gr_eleftheroupoli_region
+  - id: 299761
+    prefix: '302593'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fe88adb7-0c63-47d3-8382-2caa748adc23
+    country_id: *gr
+    network_id: *gr_limenari_region
+  - id: 299764
+    prefix: '302594'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 47ad04cb-31b4-48b5-8bdb-15275f0025fe
+    country_id: *gr
+    network_id: *gr_nea_peramos_region
+  - id: 300279
+    prefix: '30261'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4c7c89f7-1bb9-481d-a8c7-73a272047496
+    country_id: *gr
+    network_id: *gr_patra_region
+  - id: 303508
+    prefix: '302621'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f04d6870-07a8-4054-b63b-ec811590d0af
+    country_id: *gr
+    network_id: *gr_pyrgos_region
+  - id: 303514
+    prefix: '302622'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 10205365-64fb-4bc3-bc91-0acbcd6b8782
+    country_id: *gr
+    network_id: *gr_amaliada_region
+  - id: 303518
+    prefix: '302623'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4be90b3c-50b1-48c0-be67-0d073f8bcbc7
+    country_id: *gr
+    network_id: *gr_lechena_region
+  - id: 303524
+    prefix: '302624'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bf62957e-044f-4bf2-a7d4-1070107e8145
+    country_id: *gr
+    network_id: *gr_ancient_olympia_region
+  - id: 303530
+    prefix: '302625'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3e447ee2-b3ec-444b-8ae5-4cfa4719b40e
+    country_id: *gr
+    network_id: *gr_krestena_region
+  - id: 303536
+    prefix: '302626'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 057edb8d-eb9a-4ba1-9643-1e2ab0e76f3c
+    country_id: *gr
+    network_id: *gr_andritsena_region
+  - id: 303604
+    prefix: '302631'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ef325160-8098-468e-b97e-a186f870560f
+    country_id: *gr
+    network_id: *gr_messologi_region
+  - id: 303608
+    prefix: '302632'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9ef427f8-4ccf-498d-89a7-6310220a9247
+    country_id: *gr
+    network_id: *gr_aitoliko_region
+  - id: 303615
+    prefix: '302634'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2cebfbc1-a9fb-4f3e-b2b8-e292ab354f4a
+    country_id: *gr
+    network_id: *gr_nafpaktos_region
+  - id: 303619
+    prefix: '302635'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c8a00d53-b40f-4e08-9654-bec58c297a2d
+    country_id: *gr
+    network_id: *gr_mataraga_region
+  - id: 303664
+    prefix: '302641'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2b6d1fb5-b002-4849-83eb-8da281b24fe4
+    country_id: *gr
+    network_id: *gr_agrinio_region
+  - id: 303668
+    prefix: '302642'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b55b64b9-87b9-4c7e-b5dd-0eb7b130f847
+    country_id: *gr
+    network_id: *gr_amfilochia_region
+  - id: 303672
+    prefix: '302643'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6394a185-0aa0-4f2b-8e73-c72d5b9ed587
+    country_id: *gr
+    network_id: *gr_vonitsa_region
+  - id: 303676
+    prefix: '302644'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 62f38cb8-ea6c-45cc-92c6-fc6a09c19219
+    country_id: *gr
+    network_id: *gr_thermo_region
+  - id: 303680
+    prefix: '302645'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 868a551e-a64a-44aa-8e1a-c3d5c68ca1a0
+    country_id: *gr
+    network_id: *gr_lefkada_region
+  - id: 303686
+    prefix: '302646'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e8dcc670-4525-4759-81b6-755a84de1fa5
+    country_id: *gr
+    network_id: *gr_fyties_region
+  - id: 303692
+    prefix: '302647'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eacbd9ee-eb26-4686-8b22-ced57ee0a13d
+    country_id: *gr
+    network_id: *gr_neo_chalkiopoulo_region
+  - id: 303725
+    prefix: '302651'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 20f3d701-bb9d-497e-82b8-4e9e5e6b643b
+    country_id: *gr
+    network_id: *gr_ioannina_region
+  - id: 303728
+    prefix: '302653'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5990cc72-4c06-44ba-a218-fb13eb79026d
+    country_id: *gr
+    network_id: *gr_karies_region
+  - id: 303730
+    prefix: '302654'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9e6a7faa-6134-4aa9-a1b4-22f9e7c772b2
+    country_id: *gr
+    network_id: *gr_perdika_region
+  - id: 303734
+    prefix: '302655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2a64ff00-751e-4615-9b3d-2df3207ff30c
+    country_id: *gr
+    network_id: *gr_konitsa_region
+  - id: 303738
+    prefix: '302656'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fadf10c8-3d4a-4660-8124-99a6a5b1fcfd
+    country_id: *gr
+    network_id: *gr_tampouria_region
+  - id: 303742
+    prefix: '302657'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 306f57c5-f25f-48f7-bb32-c30117d4b381
+    country_id: *gr
+    network_id: *gr_delvinaki_region
+  - id: 303745
+    prefix: '302658'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cea9f9ee-9cb0-4286-9735-0772fcc97718
+    country_id: *gr
+    network_id: *gr_zitsa_region
+  - id: 303746
+    prefix: '302659'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0369efa5-b6ff-4c41-a3d4-a65a0c2ac12b
+    country_id: *gr
+    network_id: *gr_kalentzi_region
+  - id: 303763
+    prefix: '302661'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 88ceea03-4be0-4821-a75b-8d24f73d5441
+    country_id: *gr
+    network_id: *gr_corfu_region
+  - id: 303767
+    prefix: '302662'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 834abd73-4c20-4997-b088-642b350100f8
+    country_id: *gr
+    network_id: *gr_lefkimi_region
+  - id: 303771
+    prefix: '302663'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5eec5a13-fd2c-40f9-bc82-b6729afaf3f6
+    country_id: *gr
+    network_id: *gr_skripero_region
+  - id: 303775
+    prefix: '302664'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1d3b9af-3c26-4657-aedf-013e101af620
+    country_id: *gr
+    network_id: *gr_filiates_region
+  - id: 303778
+    prefix: '302665'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9c61d9e1-eaf6-4c8c-a3db-0ef83e32b02c
+    country_id: *gr
+    network_id: *gr_igoumenitsa_region
+  - id: 303782
+    prefix: '302666'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b1fa8357-1722-48f2-9f6e-15de977eeda2
+    country_id: *gr
+    network_id: *gr_paramythia_region
+  - id: 300746
+    prefix: '302671'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2fe21cc7-df6f-4439-ae5f-6009635c9d36
+    country_id: *gr
+    network_id: *gr_argostoli_region
+  - id: 300755
+    prefix: '302674'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 004452c0-33f6-4012-af09-5fc60488466a
+    country_id: *gr
+    network_id: *gr_sami_region
+  - id: 300830
+    prefix: '302681'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cbe29d0a-47cf-4f67-b5ba-de96169bcd06
+    country_id: *gr
+    network_id: *gr_arta_region
+  - id: 300833
+    prefix: '302682'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 60397f60-91ce-4251-93b7-4310a89f9cfd
+    country_id: *gr
+    network_id: *gr_preveza_region
+  - id: 300836
+    prefix: '302683'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 97f74070-3ae2-407d-9492-47e3ccdb4823
+    country_id: *gr
+    network_id: *gr_philippiada_region
+  - id: 300839
+    prefix: '302684'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c2a6a240-a78e-4608-b857-1407f4983be7
+    country_id: *gr
+    network_id: *gr_kanalaki_region
+  - id: 300842
+    prefix: '302685'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cccfc0ed-d60d-4782-a651-cd04c0d44fd3
+    country_id: *gr
+    network_id: *gr_voulgareli_region
+  - id: 301400
+    prefix: '302691'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 13287903-b7f8-4414-ba56-00db15f46941
+    country_id: *gr
+    network_id: *gr_aegio_region
+  - id: 301403
+    prefix: '302692'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cac88a26-c9d4-47e0-871d-23bba0a468cc
+    country_id: *gr
+    network_id: *gr_kalavrita_region
+  - id: 301406
+    prefix: '302693'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6a7387ec-baf4-4d1e-8d71-df0f20ca757c
+    country_id: *gr
+    network_id: *gr_kato_achaia_region
+  - id: 301408
+    prefix: '302694'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f45f7463-efcb-4bf0-b0df-7cd2b1eba6aa
+    country_id: *gr
+    network_id: *gr_chalandritsa_region
+  - id: 301411
+    prefix: '302695'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 79882ce0-5e54-4dfd-8944-ba022aaeaed3
+    country_id: *gr
+    network_id: *gr_zakynthos_region
+  - id: 301413
+    prefix: '302696'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 15296071-226e-46f7-a603-6f07fb8d6ca0
+    country_id: *gr
+    network_id: *gr_akrata_region
+  - id: 305212
+    prefix: '30271'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 97fe1fc1-8e92-452b-b201-66fc572dcf68
+    country_id: *gr
+    network_id: *gr_tripoli_region
+  - id: 312746
+    prefix: '302721'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 227c3079-b67f-4acd-9b60-521c3c4b8d3d
+    country_id: *gr
+    network_id: *gr_kalamata_region
+  - id: 312749
+    prefix: '302722'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cb15056d-c958-44a9-8359-2edde03fc766
+    country_id: *gr
+    network_id: *gr_messini_region
+  - id: 312752
+    prefix: '302723'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 65521bdd-dd69-4d5a-b3ee-e19a58abd011
+    country_id: *gr
+    network_id: *gr_pylos_region
+  - id: 312755
+    prefix: '302724'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 292c9cf3-474e-4b88-9d7c-7739f2ee38ab
+    country_id: *gr
+    network_id: *gr_meligalas_region
+  - id: 312758
+    prefix: '302725'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5e624648-7f86-4329-9c60-124c4e7aa25a
+    country_id: *gr
+    network_id: *gr_koroni_region
+  - id: 313000
+    prefix: '302731'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fc867081-d459-4c7e-a78d-4683ed43846d
+    country_id: *gr
+    network_id: *gr_sparti_region
+  - id: 313003
+    prefix: '302732'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c35f5185-e4f7-4c66-8141-5a074b194e69
+    country_id: *gr
+    network_id: *gr_molaoi_region
+  - id: 313006
+    prefix: '302733'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 51833bfa-0e56-4df8-b828-01d2d4841071
+    country_id: *gr
+    network_id: *gr_gytheio_region
+  - id: 313010
+    prefix: '302734'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 22bd7b19-05df-40fd-a24f-9b0ac8886b25
+    country_id: *gr
+    network_id: *gr_neapoli_lakonias_region
+  - id: 313014
+    prefix: '302735'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 647400ce-91bf-455a-ba5a-d0722cc0b89e
+    country_id: *gr
+    network_id: *gr_skala_region
+  - id: 313018
+    prefix: '302736'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c88fd41d-3fd8-476e-a198-a6426848320d
+    country_id: *gr
+    network_id: *gr_kythira_region
+  - id: 305969
+    prefix: '302741'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cb0add34-c9d3-41dc-a83e-fc3755cb06ea
+    country_id: *gr
+    network_id: *gr_korinthos_region
+  - id: 305973
+    prefix: '302742'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 185ce4b7-ad70-4840-b468-aa91dcb22bd2
+    country_id: *gr
+    network_id: *gr_kiato_region
+  - id: 305978
+    prefix: '302743'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 76fa85a3-7885-4e80-9d89-637a805329f8
+    country_id: *gr
+    network_id: *gr_xylokastro_region
+  - id: 305982
+    prefix: '302744'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 207eb8ae-a99e-4f5e-bad0-028834e96fb4
+    country_id: *gr
+    network_id: *gr_loutraki_region
+  - id: 305989
+    prefix: '302746'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f68ec2ba-faa5-4ad9-a72b-2b22f81377be
+    country_id: *gr
+    network_id: *gr_nemea_region
+  - id: 305994
+    prefix: '302747'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aaf8de3c-48a3-4cf9-8eaa-bd1e0ab8a027
+    country_id: *gr
+    network_id: *gr_kalianoi_region
+  - id: 306090
+    prefix: '302751'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 41a9e3aa-5fc0-438b-820f-e838384a6848
+    country_id: *gr
+    network_id: *gr_argos_region
+  - id: 306095
+    prefix: '302752'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 95e9f8ab-9bb2-4c8c-9dbf-5cfb3682814e
+    country_id: *gr
+    network_id: *gr_nafplion_region
+  - id: 306100
+    prefix: '302753'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e6decf02-376f-4eba-9e8a-b14360e0a78f
+    country_id: *gr
+    network_id: *gr_lygourgio_region
+  - id: 306105
+    prefix: '302754'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7495d687-2ace-48c5-9db3-333d87198d8c
+    country_id: *gr
+    network_id: *gr_kranidi_region
+  - id: 306110
+    prefix: '302755'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a8b1e5a8-5d92-445d-a637-074c7c2ad372
+    country_id: *gr
+    network_id: *gr_astros_region
+  - id: 306117
+    prefix: '302757'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a8a227b-497e-4d19-98cd-66b02d7d3bd8
+    country_id: *gr
+    network_id: *gr_leonidio_region
+  - id: 306646
+    prefix: '302761'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f8a76651-49c7-447b-a27c-50285e15cef5
+    country_id: *gr
+    network_id: *gr_kyparissia_region
+  - id: 306655
+    prefix: '302763'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0bf8be37-c3dd-458a-b504-11ba8989c87c
+    country_id: *gr
+    network_id: *gr_gargalianoi_region
+  - id: 306663
+    prefix: '302765'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 21543dc3-0ea3-446c-90f1-40280ba0ace3
+    country_id: *gr
+    network_id: *gr_kopanaki_region
+  - id: 313340
+    prefix: '302791'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d8fb5b7-40d6-4751-8865-103cc0aee0f6
+    country_id: *gr
+    network_id: *gr_megalopoli_region
+  - id: 313342
+    prefix: '302792'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5e90317c-3dd8-4774-a3a3-9e6f2eabb9b0
+    country_id: *gr
+    network_id: *gr_kastri_region
+  - id: 313346
+    prefix: '302795'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 093a9c7b-2300-42e4-9f5d-cf4745a62a17
+    country_id: *gr
+    network_id: *gr_vitina_region
+  - id: 313348
+    prefix: '302796'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0e39861a-0a9a-4a3a-91c3-bdd9258e0267
+    country_id: *gr
+    network_id: *gr_levidi_region
+  - id: 313350
+    prefix: '302797'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0190dc22-fe0e-4518-bdb1-e94c0d48fa25
+    country_id: *gr
+    network_id: *gr_tropea_region
+  - id: 313553
+    prefix: '30281'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4bd8907d-4a83-4d86-b3e0-90c5eb09583e
+    country_id: *gr
+    network_id: *gr_iraklion_region
+  - id: 307462
+    prefix: '302821'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f1f9ee38-f3a5-4606-be91-ab9796da1e60
+    country_id: *gr
+    network_id: *gr_chania_region
+  - id: 307466
+    prefix: '302822'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 771947a4-72fc-498e-aba0-a8b6af32de92
+    country_id: *gr
+    network_id: *gr_kissamos_region
+  - id: 307470
+    prefix: '302823'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dff67f59-320d-4c80-8c23-0a07c58413bd
+    country_id: *gr
+    network_id: *gr_kantanos_region
+  - id: 307474
+    prefix: '302824'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3245dae2-f351-4a36-b5c2-5f39d79572ca
+    country_id: *gr
+    network_id: *gr_kolympari_region
+  - id: 307478
+    prefix: '302825'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3d838bcb-d1b8-49b1-9cec-840632bd0876
+    country_id: *gr
+    network_id: *gr_vamos_region
+  - id: 307675
+    prefix: '302831'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 74c9b177-b1e8-43ec-9206-c567fa2afdf1
+    country_id: *gr
+    network_id: *gr_rethymno_region
+  - id: 307678
+    prefix: '302832'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 29b00f5c-335e-4856-a608-f4309859ae90
+    country_id: *gr
+    network_id: *gr_spili_region
+  - id: 307681
+    prefix: '302833'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3ff7e626-7f17-477b-bfdc-e9cf4c5b5f9c
+    country_id: *gr
+    network_id: *gr_amari_region
+  - id: 307684
+    prefix: '302834'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b2c96d2e-9d31-45e0-b5eb-4ea997563e05
+    country_id: *gr
+    network_id: *gr_perama_region
+  - id: 307844
+    prefix: '302841'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5e86a11c-f227-4e22-9d6e-4c4e55e07606
+    country_id: *gr
+    network_id: *gr_agios_nikolaos_region
+  - id: 307848
+    prefix: '302842'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1cb0d8e-f2ca-415c-9c5e-3c6ce13d700b
+    country_id: *gr
+    network_id: *gr_ierapetra_region
+  - id: 307852
+    prefix: '302843'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2e6036b8-cbef-4e0e-b34d-1c3e538c364d
+    country_id: *gr
+    network_id: *gr_sitia_region
+  - id: 307856
+    prefix: '302844'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 65e08f91-e731-40f1-84aa-257784b75577
+    country_id: *gr
+    network_id: *gr_tzermiades_region
+  - id: 308485
+    prefix: '302891'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 814905e2-8cf1-4890-ba90-9d516789a466
+    country_id: *gr
+    network_id: *gr_arkalochori_region
+  - id: 308487
+    prefix: '302892'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f63e848c-e583-4cd1-bacc-530e49be046c
+    country_id: *gr
+    network_id: *gr_moires_region
+  - id: 308489
+    prefix: '302893'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9bda2c57-c246-4c74-a297-42ced4274580
+    country_id: *gr
+    network_id: *gr_pyrgos_creta_region
+  - id: 308491
+    prefix: '302894'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5e31f396-6917-4e40-9dc9-e850747ba709
+    country_id: *gr
+    network_id: *gr_agia_varvara_region
+  - id: 308493
+    prefix: '302895'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 43c5a627-043e-43b0-9498-4172f147209d
+    country_id: *gr
+    network_id: *gr_ano_viannos_region
+  - id: 308496
+    prefix: '302897'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3507a563-2542-4709-b59b-3d344744ffc7
+    country_id: *gr
+    network_id: *gr_limin_chersonisou_region
+  - id: 62590
+    prefix: '3050'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 52eed65a-d63a-493f-8af7-a8c286302aef
+    country_id: *gr
+    network_id: *gr_virtual_private_network
+  - id: 78102
+    prefix: '3054'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d389f237-9f8a-4d34-9d4a-9c15ccf54acb
+    country_id: *gr
+    network_id: *gr_sms_services
   - id: 95261
     prefix: '30600'
     number_min_length: 12
@@ -1230,7 +2853,69 @@ network_prefixes:
     uuid: 4809f9ad-d4a1-47a5-9ac8-bcc57ebde6e8
     country_id: *gr
     network_id: *gr_satellite
-# Mobile Prefixes
+  - id: 148649
+    prefix: '3068'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 16c3faa2-3227-4094-886f-371ec906edb3
+    country_id: *gr
+    network_id: *gr_mobile
+  - id: 152740
+    prefix: '30685185'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 76408ffc-6581-461e-8922-5dae98c54dc9
+    country_id: *gr
+    network_id: *gr_vodafone_mobile
+  - id: 152741
+    prefix: '3068519'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3ee34293-4b8e-43c2-9781-01ea7a522bbf
+    country_id: *gr
+    network_id: *gr_vodafone_mobile
+  - id: 152742
+    prefix: '30685500'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d00744ea-4a6a-4448-be42-a97f16ccc428
+    country_id: *gr
+    network_id: *gr_vodafone_mobile
+  - id: 152743
+    prefix: '30685501'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 11632992-7a91-4781-a66e-0428d78df29e
+    country_id: *gr
+    network_id: *gr_bws_mobile
+  - id: 152744
+    prefix: '30685505'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c23f3948-b1f7-4dc8-8a70-81f39652a675
+    country_id: *gr
+    network_id: *gr_vodafone_mobile
+  - id: 152745
+    prefix: '30685550'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b94c2beb-944b-4bab-a068-5738026dab97
+    country_id: *gr
+    network_id: *gr_vodafone_mobile
+  - id: 152746
+    prefix: '30685555'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3e1cc7ea-c6d3-4236-ab8d-2551054296bd
+    country_id: *gr
+    network_id: *gr_vodafone_mobile
+  - id: 152747
+    prefix: '30685585'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0357f444-c7a1-4c67-8ec8-e2caf9c563e7
+    country_id: *gr
+    network_id: *gr_vodafone_mobile
   - id: 148354
     prefix: '30687500'
     number_min_length: 12
@@ -1252,13 +2937,6 @@ network_prefixes:
     uuid: f0a42159-3755-456f-be67-93a525d4ff74
     country_id: *gr
     network_id: *gr_oteglobe_mobile
-  - id: 148649
-    prefix: '3068'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 16c3faa2-3227-4094-886f-371ec906edb3
-    country_id: *gr
-    network_id: *gr_mobile
   - id: 148826
     prefix: '30690000'
     number_min_length: 12
@@ -1511,6 +3189,27 @@ network_prefixes:
     uuid: e7d1d2d8-7b3a-4d63-b02e-3664d13a64b0
     country_id: *gr
     network_id: *gr_ose_mobile
+  - id: 149042
+    prefix: '30692354'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 58113971-562f-4b1d-876a-b2c0e2b2482c
+    country_id: *gr
+    network_id: *gr_premium_net_paging
+  - id: 149043
+    prefix: '30692356'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 88906d3a-e76e-4da9-942b-69069f69400a
+    country_id: *gr
+    network_id: *gr_netbalt_paging
+  - id: 149044
+    prefix: '30692428'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4d3c32dd-3af7-494a-a214-4e7e0868a16d
+    country_id: *gr
+    network_id: *gr_premium_net_paging
   - id: 149054
     prefix: '306930'
     number_min_length: 12
@@ -1642,174 +3341,6 @@ network_prefixes:
     number_min_length: 12
     number_max_length: 12
     uuid: e9574818-d0c3-4a07-811e-0c16f2c43980
-    country_id: *gr
-    network_id: *gr_vodafone_mobile
-  - id: 149230
-    prefix: '3069900'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 73578ad9-d86c-4e24-ad86-7daa57669aa1
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149233
-    prefix: '30699010'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 428f3fc7-dbdd-4a58-8679-892f1a9023de
-    country_id: *gr
-    network_id: *gr_bws_mobile
-  - id: 149235
-    prefix: '30699022'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 52910bda-8a77-46e5-9134-4835a015a512
-    country_id: *gr
-    network_id: *gr_yuboto_mobile
-  - id: 149236
-    prefix: '3069903'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e9f15c0d-d14d-4796-9904-6c1b6234ed4a
-    country_id: *gr
-    network_id: *gr_vodafone_mobile
-  - id: 149239
-    prefix: '30699046'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4c743465-6a0c-4c1d-86c5-0321cb18a934
-    country_id: *gr
-    network_id: *gr_premium_net_mobile
-  - id: 149240
-    prefix: '30699048'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 26f4679b-4445-4d97-9930-7155e2920a3e
-    country_id: *gr
-    network_id: *gr_amd_telecom_mobile
-  - id: 149246
-    prefix: '30699099'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fdface4f-c8f2-4e2e-a5ef-308a9f536835
-    country_id: *gr
-    network_id: *gr_bws_mobile
-  - id: 149248
-    prefix: '306991'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d668d896-c985-4a8e-8c5e-3763b35606d2
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149251
-    prefix: '306992'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a30843be-9522-4617-af7c-0d608511c354
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149263
-    prefix: '306993'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1ebaa197-9113-4607-8a59-0a202737ee65
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149266
-    prefix: '306994'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 57c5da4f-ceb5-4b7a-9e63-9a4c866ce5c2
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149269
-    prefix: '306995'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d8cbf447-d3b9-476f-9fcb-5ef53de96874
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149281
-    prefix: '306996'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4168a335-ada0-45ee-8066-4f95002d9690
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149293
-    prefix: '306997'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9efd790e-4123-41cf-995b-816a0a27acad
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149304
-    prefix: '306998'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d2968997-e38b-4bde-9189-913106847bd2
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 149317
-    prefix: '306999'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3f6ee89c-a299-4f53-972e-a0e5d609a8ea
-    country_id: *gr
-    network_id: *gr_wind_mobile
-  - id: 152740
-    prefix: '30685185'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 76408ffc-6581-461e-8922-5dae98c54dc9
-    country_id: *gr
-    network_id: *gr_vodafone_mobile
-  - id: 152741
-    prefix: '3068519'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3ee34293-4b8e-43c2-9781-01ea7a522bbf
-    country_id: *gr
-    network_id: *gr_vodafone_mobile
-  - id: 152742
-    prefix: '30685500'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d00744ea-4a6a-4448-be42-a97f16ccc428
-    country_id: *gr
-    network_id: *gr_vodafone_mobile
-  - id: 152743
-    prefix: '30685501'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 11632992-7a91-4781-a66e-0428d78df29e
-    country_id: *gr
-    network_id: *gr_bws_mobile
-  - id: 152744
-    prefix: '30685505'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c23f3948-b1f7-4dc8-8a70-81f39652a675
-    country_id: *gr
-    network_id: *gr_vodafone_mobile
-  - id: 152745
-    prefix: '30685550'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b94c2beb-944b-4bab-a068-5738026dab97
-    country_id: *gr
-    network_id: *gr_vodafone_mobile
-  - id: 152746
-    prefix: '30685555'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3e1cc7ea-c6d3-4236-ab8d-2551054296bd
-    country_id: *gr
-    network_id: *gr_vodafone_mobile
-  - id: 152747
-    prefix: '30685585'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0357f444-c7a1-4c67-8ec8-e2caf9c563e7
     country_id: *gr
     network_id: *gr_vodafone_mobile
   - id: 153116
@@ -2001,1735 +3532,207 @@ network_prefixes:
     uuid: dd5acadf-ce5b-44d8-acf8-15e787160d1a
     country_id: *gr
     network_id: *gr_cosmote_mobile
-# Paging Prefixes
-  - id: 149042
-    prefix: '30692354'
+  - id: 149230
+    prefix: '3069900'
     number_min_length: 12
     number_max_length: 12
-    uuid: 58113971-562f-4b1d-876a-b2c0e2b2482c
+    uuid: 73578ad9-d86c-4e24-ad86-7daa57669aa1
     country_id: *gr
-    network_id: *gr_premium_net_paging
-  - id: 149043
-    prefix: '30692356'
+    network_id: *gr_wind_mobile
+  - id: 149233
+    prefix: '30699010'
     number_min_length: 12
     number_max_length: 12
-    uuid: 88906d3a-e76e-4da9-942b-69069f69400a
+    uuid: 428f3fc7-dbdd-4a58-8679-892f1a9023de
     country_id: *gr
-    network_id: *gr_netbalt_paging
-  - id: 149044
-    prefix: '30692428'
+    network_id: *gr_bws_mobile
+  - id: 149235
+    prefix: '30699022'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4d3c32dd-3af7-494a-a214-4e7e0868a16d
+    uuid: 52910bda-8a77-46e5-9134-4835a015a512
     country_id: *gr
-    network_id: *gr_premium_net_paging
-# Country code Prefixes
-  - id: 242007
-    prefix: '30'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 3e94b6c6-06d3-41af-ab38-a3729cc9c7d9
-    country_id: *gr
-    network_id: null
-# Fixed Prefixes
-  - id: 274226
-    prefix: '3021'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c2b5a169-27b2-477b-b3a5-41cf1723127c
-    country_id: *gr
-    network_id: *gr_athens_region
-  - id: 278959
-    prefix: '302221'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d7eb80aa-cecf-42e6-b865-c50ea9c0a8cf
-    country_id: *gr
-    network_id: *gr_halkida_region
-  - id: 278961
-    prefix: '302222'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1137a7ba-3c62-456f-b5e0-3ad10a88c249
-    country_id: *gr
-    network_id: *gr_kymi_region
-  - id: 278965
-    prefix: '302223'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3134366c-985f-40d9-8222-532f1c8c15ea
-    country_id: *gr
-    network_id: *gr_aliveri_region
-  - id: 278969
-    prefix: '302224'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5132f5f0-d6f0-4699-ba17-6b13a18099d7
-    country_id: *gr
-    network_id: *gr_karystos_region
-  - id: 278976
-    prefix: '302226'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cdb2a50c-1ee7-41d0-b2fe-aab0a79b111a
-    country_id: *gr
-    network_id: *gr_loutra_aidipsou_region
-  - id: 278980
-    prefix: '302227'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 73737127-6061-4a02-a47c-b67c9bdfa5ac
-    country_id: *gr
-    network_id: *gr_mantoudi_region
-  - id: 278982
-    prefix: '302228'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9d185cde-39df-41f9-bd6b-16aae7410405
-    country_id: *gr
-    network_id: *gr_psachna_region
-  - id: 278985
-    prefix: '302229'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 29c5ec9b-c6ee-4a0a-ba75-55d32b678422
-    country_id: *gr
-    network_id: *gr_eretria_region
-  - id: 279458
-    prefix: '302231'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a4eabd9b-8283-4038-b503-899a433648b8
-    country_id: *gr
-    network_id: *gr_lamia_region
-  - id: 279462
-    prefix: '302232'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 81aaa45c-25c8-4228-a6d4-b09630c61f78
-    country_id: *gr
-    network_id: *gr_domokos_region
-  - id: 279466
-    prefix: '302233'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b73aa001-394e-4c69-a72a-2ae738c3ed58
-    country_id: *gr
-    network_id: *gr_atalanti_region
-  - id: 279470
-    prefix: '302234'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5e3ed0c0-3552-46fe-bd54-2fa679b9a783
-    country_id: *gr
-    network_id: *gr_amfikleia_region
-  - id: 279474
-    prefix: '302235'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b20e9c1b-06a2-4174-b13c-c4f94d8cc67e
-    country_id: *gr
-    network_id: *gr_kamena_vourla_region
-  - id: 279478
-    prefix: '302236'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 361b9d1d-7c75-41d7-9870-a1a73cb40358
-    country_id: *gr
-    network_id: *gr_makrakomi_region
-  - id: 279482
-    prefix: '302237'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 651c143d-e096-4575-af83-0730ccdc8860
-    country_id: *gr
-    network_id: *gr_karpenisi_region
-  - id: 279486
-    prefix: '302238'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6113d39a-e6fa-470a-b79e-ce5650409fa6
-    country_id: *gr
-    network_id: *gr_stilida_region
-  - id: 281068
-    prefix: '302261'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f2312547-0224-4794-9706-a4339f8fb6eb
-    country_id: *gr
-    network_id: *gr_livadeia_region
-  - id: 281073
-    prefix: '302262'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 80956384-0d32-4db4-bb0b-c9075f64da3e
-    country_id: *gr
-    network_id: *gr_thiva_region
-  - id: 281076
-    prefix: '302263'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 25bf0b5e-4a45-4dbf-a32d-ba4fd83d9952
-    country_id: *gr
-    network_id: *gr_vilia_region
-  - id: 281081
-    prefix: '302264'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cb152928-d468-4e86-89d8-4d6fad954a4d
-    country_id: *gr
-    network_id: *gr_domvrena_region
-  - id: 281086
-    prefix: '302265'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 136aa0a4-f03c-4beb-8d56-93f2bb53e4b1
-    country_id: *gr
-    network_id: *gr_amfissa_region
-  - id: 281091
-    prefix: '302266'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d88a064e-d6c3-4ff0-99a9-23ae6961e10f
-    country_id: *gr
-    network_id: *gr_lidoriki_region
-  - id: 281096
-    prefix: '302267'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 29c346c0-798c-4a3a-bbe8-db78026e0933
-    country_id: *gr
-    network_id: *gr_distomo_region
-  - id: 281101
-    prefix: '302268'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4c2152e7-934f-47a1-acfc-ddf89a26c0ce
-    country_id: *gr
-    network_id: *gr_aliartos_region
-  - id: 283905
-    prefix: '302241'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 62f20d83-e3f5-4702-9515-82e8fcca15f1
-    country_id: *gr
-    network_id: *gr_rhodes_region
-  - id: 283911
-    prefix: '302242'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6a79fae6-f0fc-46ea-a638-72195d561728
-    country_id: *gr
-    network_id: *gr_kos_region
-  - id: 283917
-    prefix: '302243'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f05c0b30-bbfe-4d98-9459-b66ac6cddac5
-    country_id: *gr
-    network_id: *gr_kalimnos_region
-  - id: 283923
-    prefix: '302244'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1858e5fc-b236-4282-bb3f-d2b28e70835b
-    country_id: *gr
-    network_id: *gr_archagelos_region
-  - id: 283929
-    prefix: '302245'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2680d97e-3c32-438d-866e-5caf132f9dd6
-    country_id: *gr
-    network_id: *gr_karpathos_region
-  - id: 283935
-    prefix: '302246'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 93541c8d-6126-49d0-bb7f-182675fc5196
-    country_id: *gr
-    network_id: *gr_salakos_region
-  - id: 283939
-    prefix: '302247'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 90bacfe2-f411-453f-aaf5-1cb38272a812
-    country_id: *gr
-    network_id: *gr_leros_region
-  - id: 284667
-    prefix: '302251'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 834e8c7f-0c73-4e2b-9aed-f120d24ea2a1
-    country_id: *gr
-    network_id: *gr_mitilini_region
-  - id: 284672
-    prefix: '302252'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 77acab64-c7cc-4b65-a865-685478d51669
-    country_id: *gr
-    network_id: *gr_agiasos_region
-  - id: 284675
-    prefix: '302253'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4dbbc538-cebd-4cc0-9c4d-3c39c9c64f50
-    country_id: *gr
-    network_id: *gr_kalloni_region
-  - id: 284680
-    prefix: '302254'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7e2b03b8-040b-46a1-83c6-c28c54d56713
-    country_id: *gr
-    network_id: *gr_mirina_region
-  - id: 285070
-    prefix: '302271'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c0d1cc8e-e1be-48a6-9619-d5fcd79ff803
-    country_id: *gr
-    network_id: *gr_chios_region
-  - id: 285075
-    prefix: '302272'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 75e5bfed-5036-4afe-be21-82139086ebf4
-    country_id: *gr
-    network_id: *gr_kardamila_region
-  - id: 285081
-    prefix: '302273'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5811e26b-7c55-473e-bfd5-366ac9f973f7
-    country_id: *gr
-    network_id: *gr_samos_region
-  - id: 285086
-    prefix: '302274'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b62b4721-4212-4d4c-bd94-5f31d1b3b5b7
-    country_id: *gr
-    network_id: *gr_volissos_region
-  - id: 285098
-    prefix: '302275'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6958270c-85ce-44a2-a749-8d2fae3dd7a8
-    country_id: *gr
-    network_id: *gr_agios_kirikos_region
-  - id: 286158
-    prefix: '302281'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2daccc1f-c5f2-4c15-bd0d-45e1a5e2b534
-    country_id: *gr
-    network_id: *gr_siros_region
-  - id: 286160
-    prefix: '302282'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a06cf14a-a577-4fd4-ad72-4ff597fdb356
-    country_id: *gr
-    network_id: *gr_andros_region
-  - id: 286164
-    prefix: '302283'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: df37c3ac-a2b4-46f0-bddd-d146318ceaf3
-    country_id: *gr
-    network_id: *gr_tinos_region
-  - id: 286168
-    prefix: '302284'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4b3945f8-d367-465e-95d3-6ad5d34f700d
-    country_id: *gr
-    network_id: *gr_paros_region
-  - id: 286172
-    prefix: '302285'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a68b376d-a154-42e4-abba-43a5609efe9a
-    country_id: *gr
-    network_id: *gr_naxos_region
-  - id: 286176
-    prefix: '302286'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9928ddbf-6fbc-4338-8d0b-12e2fb31a24b
-    country_id: *gr
-    network_id: *gr_thira_region
-  - id: 286178
-    prefix: '302287'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6982e687-b677-4413-aa2f-0c5aa74a0109
-    country_id: *gr
-    network_id: *gr_milos_region
-  - id: 286180
-    prefix: '302288'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7f428450-e386-4e60-ada2-20363f092da5
-    country_id: *gr
-    network_id: *gr_kea_region
-  - id: 286182
-    prefix: '302289'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7b65e482-f921-4003-ab23-c1d2557557b0
-    country_id: *gr
-    network_id: *gr_mikonos_region
-  - id: 286598
-    prefix: '302291'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c3e2ea33-e079-488e-87e8-fafd1e8fcf7e
-    country_id: *gr
-    network_id: *gr_lagonisi_region
-  - id: 286602
-    prefix: '302292'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5864b0b9-920a-4869-ab3e-8f6a84537490
-    country_id: *gr
-    network_id: *gr_lavrion_region
-  - id: 286604
-    prefix: '302293'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ef683cc5-de0a-45ec-9d27-6d6500f2011f
-    country_id: *gr
-    network_id: *gr_agia_sotira_region
-  - id: 286606
-    prefix: '302294'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2f9a0fe4-8d72-4be6-9373-4300f0cff07c
-    country_id: *gr
-    network_id: *gr_rafina_region
-  - id: 286608
-    prefix: '302295'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ce17fb5b-596a-4174-a807-d9711d8e9e38
-    country_id: *gr
-    network_id: *gr_afidnes_region
-  - id: 286612
-    prefix: '302296'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fb40fc69-4b34-46a6-aeb7-370cb2df7297
-    country_id: *gr
-    network_id: *gr_megara_region
-  - id: 286616
-    prefix: '302297'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 512a4fdc-2de1-40b9-9573-2de10c7ee329
-    country_id: *gr
-    network_id: *gr_aegina_region
-  - id: 286617
-    prefix: '302298'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2488225b-9934-402b-b5e6-1100122ed52d
-    country_id: *gr
-    network_id: *gr_poros_region
-  - id: 286618
-    prefix: '302299'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f0cb7fb0-0628-4faf-b157-c8c9a2f6731d
-    country_id: *gr
-    network_id: *gr_markopoulo_region
-  - id: 286674
-    prefix: '30231'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c7106471-374a-425d-af4a-43b77f066a9e
-    country_id: *gr
-    network_id: *gr_thessaloniki_region
-  - id: 287450
-    prefix: '302341'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 07bf107e-b0b9-4313-a899-1372dacc9aea
-    country_id: *gr
-    network_id: *gr_kilkis_region
-  - id: 287459
-    prefix: '302343'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 93bc0250-3ff6-4bc2-9769-6b02f4266cc6
-    country_id: *gr
-    network_id: *gr_polikastro_region
-  - id: 287641
-    prefix: '302351'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7d4acfca-1a5a-41d7-9dfb-e777bdb08421
-    country_id: *gr
-    network_id: *gr_katerini_region
-  - id: 287646
-    prefix: '302352'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8542b6a4-aa9a-468f-b3dd-f162143366a6
-    country_id: *gr
-    network_id: *gr_plaka_region
-  - id: 287653
-    prefix: '302353'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2ced624f-8983-4248-8b1f-47d5f682a3eb
-    country_id: *gr
-    network_id: *gr_aeginio_region
-  - id: 288609
-    prefix: '302371'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 465a822f-7ce9-4d2e-be6b-cb7ba991badb
-    country_id: *gr
-    network_id: *gr_polygyros_region
-  - id: 288612
-    prefix: '302372'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 95fb79b8-b4d3-4966-ab50-33f428b9a09c
-    country_id: *gr
-    network_id: *gr_arnea_region
-  - id: 288616
-    prefix: '302373'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ee14cba7-e018-44ed-bffe-04842366e276
-    country_id: *gr
-    network_id: *gr_nea_moudania_region
-  - id: 288619
-    prefix: '302374'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fd68a9b6-58b1-49cf-b04d-4255b46000eb
-    country_id: *gr
-    network_id: *gr_kassandreia_region
-  - id: 288624
-    prefix: '302375'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 30e97c5a-c038-4555-9e36-64dde56531c1
-    country_id: *gr
-    network_id: *gr_nikitas_region
-  - id: 288626
-    prefix: '302376'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fd85767d-dca1-4463-949e-dc7ec5617e33
-    country_id: *gr
-    network_id: *gr_stratoni_region
-  - id: 288628
-    prefix: '302377'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9b78f509-070b-4c9c-a2f5-1db7fa0f6c56
-    country_id: *gr
-    network_id: *gr_ierissos_region
-  - id: 289567
-    prefix: '30241'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 159e81c0-84bd-46b5-9db9-d88690581d73
-    country_id: *gr
-    network_id: *gr_larissa_region
-  - id: 290874
-    prefix: '302461'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fa13e4fb-96f0-4f6b-9fe3-36193e04b0fc
-    country_id: *gr
-    network_id: *gr_kozani_region
-  - id: 290877
-    prefix: '302462'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 83a39eef-0cf5-4079-aee9-9b3717f88820
-    country_id: *gr
-    network_id: *gr_grevena_region
-  - id: 290881
-    prefix: '302463'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b27dfe5c-40f7-40f6-9042-0583e178c49a
-    country_id: *gr
-    network_id: *gr_ptolemaida_region
-  - id: 290884
-    prefix: '302464'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 26fada2c-3937-4be9-a1b1-61525ea8b406
-    country_id: *gr
-    network_id: *gr_servia_region
-  - id: 290895
-    prefix: '302465'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 901ad872-2217-4b43-bea7-519e3b2be331
-    country_id: *gr
-    network_id: *gr_siatista_region
-  - id: 290912
-    prefix: '302467'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 41e07632-60bc-4f7d-b811-447b46cc2f53
-    country_id: *gr
-    network_id: *gr_kastoria_region
-  - id: 290914
-    prefix: '302468'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b9c98613-6d8a-4dc1-9b43-2f5b83917321
-    country_id: *gr
-    network_id: *gr_neapoli_kozanis_region
-  - id: 292890
-    prefix: '302321'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5245451d-db27-40f2-a4d3-4b0603efa2a1
-    country_id: *gr
-    network_id: *gr_serres_region
-  - id: 292892
-    prefix: '302322'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a0b053fd-20bf-4f11-b5a6-d2ba15d70fa4
-    country_id: *gr
-    network_id: *gr_nigrita_region
-  - id: 292898
-    prefix: '302323'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f9f70a01-e4a5-4613-9f22-f47799e64f58
-    country_id: *gr
-    network_id: *gr_sidirokastro_region
-  - id: 292903
-    prefix: '302324'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 80ec5206-fd95-4df0-9957-682dbabbe29b
-    country_id: *gr
-    network_id: *gr_nea_zichni_region
-  - id: 292917
-    prefix: '302325'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2490d73c-ec30-4dbc-aa03-239dd246d6ba
-    country_id: *gr
-    network_id: *gr_herakleia_region
-  - id: 292932
-    prefix: '302327'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9aa6da28-00be-4968-a031-8f7c073db031
-    country_id: *gr
-    network_id: *gr_rodopoli_region
-  - id: 293068
-    prefix: '302331'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b3d4165c-4944-4dbf-890d-1c387161ad2b
-    country_id: *gr
-    network_id: *gr_veroia_region
-  - id: 293071
-    prefix: '302332'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7d85c6d7-4c94-475f-8f81-81ab2e440597
-    country_id: *gr
-    network_id: *gr_naousa_region
-  - id: 293077
-    prefix: '302333'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4adffa50-5717-4d5d-a0b7-36b70225b3c4
-    country_id: *gr
-    network_id: *gr_alexandria_region
-  - id: 293769
-    prefix: '302381'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 82aadaca-2e9a-485d-9891-feee44efa9af
-    country_id: *gr
-    network_id: *gr_edessa_region
-  - id: 293772
-    prefix: '302382'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ba5ced06-a028-4e0a-a933-3b26969fe243
-    country_id: *gr
-    network_id: *gr_giannitsa_region
-  - id: 293778
-    prefix: '302384'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 13246d17-ffd8-480a-b3eb-3c1537df86d5
-    country_id: *gr
-    network_id: *gr_aridea_region
-  - id: 293790
-    prefix: '302385'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5f434294-18f9-46c1-8e9d-b80f90ea8d93
-    country_id: *gr
-    network_id: *gr_florina_region
-  - id: 293801
-    prefix: '302386'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c6e4af90-b9a3-40aa-a8bf-1228c710c573
-    country_id: *gr
-    network_id: *gr_amynteo_region
-  - id: 294291
-    prefix: '302391'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f3a98a9c-a69a-4553-a91e-471661410bda
-    country_id: *gr
-    network_id: *gr_chlkidona_region
-  - id: 294295
-    prefix: '302392'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7485c1d9-63d6-441f-af67-94996e5c35a2
-    country_id: *gr
-    network_id: *gr_perea_region
-  - id: 294299
-    prefix: '302393'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d9be3a00-0d12-4ec3-834c-74cf8d9062f2
-    country_id: *gr
-    network_id: *gr_lagadikia_region
-  - id: 294303
-    prefix: '302394'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a550a93c-d6a3-41ca-b43b-9d592199dea5
-    country_id: *gr
-    network_id: *gr_lagadas_region
-  - id: 294307
-    prefix: '302395'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a724258c-3115-40e3-a7bf-317466eb5cbd
-    country_id: *gr
-    network_id: *gr_sochos_region
-  - id: 294310
-    prefix: '302396'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cbba4a92-e1ba-464b-87aa-46504d9f135e
-    country_id: *gr
-    network_id: *gr_vasilika_region
-  - id: 294311
-    prefix: '302397'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9319c9de-0000-4e97-ad85-7594e6cc4528
-    country_id: *gr
-    network_id: *gr_asprovalta_region
-  - id: 294312
-    prefix: '302399'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7a1e265d-e9f1-47b7-9aee-76d344bd5dde
-    country_id: *gr
-    network_id: *gr_nea_kallikrateia_region
-  - id: 294839
-    prefix: '302421'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e9673400-209a-49fe-81f4-f07088ca2804
-    country_id: *gr
-    network_id: *gr_volos_region
-  - id: 294842
-    prefix: '302422'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d6ba7d7e-bc4c-4d8a-8e51-a582443c409c
-    country_id: *gr
-    network_id: *gr_almyros_region
-  - id: 294846
-    prefix: '302423'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 57d62aff-f4b7-4a04-a9fd-947721db7688
-    country_id: *gr
-    network_id: *gr_kala_nera_region
-  - id: 294849
-    prefix: '302424'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7d0e41bf-b4f3-45fc-9c66-f39d1f57eea2
-    country_id: *gr
-    network_id: *gr_skopelos_region
-  - id: 294861
-    prefix: '302425'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2cf6be64-ef5c-491d-afdd-4aef7eb6aa50
-    country_id: *gr
-    network_id: *gr_velestino_region
-  - id: 294867
-    prefix: '302426'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0b834f45-2f1c-4282-9d15-8ccc1de3f132
-    country_id: *gr
-    network_id: *gr_zagora_region
-  - id: 294870
-    prefix: '302427'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3edb5655-c50f-4dfb-9540-408555ac277d
-    country_id: *gr
-    network_id: *gr_skiathos_region
-  - id: 294873
-    prefix: '302428'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ff2c831e-e4a1-4901-8385-ad6ca74161ad
-    country_id: *gr
-    network_id: *gr_volos_region
-  - id: 295154
-    prefix: '302431'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fa787bfd-73c4-4ba2-a1a8-0268b98371ea
-    country_id: *gr
-    network_id: *gr_trikala_region
-  - id: 295157
-    prefix: '302432'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b55e37fe-610d-4fdf-beca-af9b8f5657a1
-    country_id: *gr
-    network_id: *gr_kalabaka_region
-  - id: 295160
-    prefix: '302433'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 543e30b0-ef7d-40bf-a598-eb35213d2932
-    country_id: *gr
-    network_id: *gr_farkadona_region
-  - id: 295163
-    prefix: '302434'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3176e6d3-77db-4ceb-a89f-801221802403
-    country_id: *gr
-    network_id: *gr_pyli_region
-  - id: 295614
-    prefix: '302441'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4278d2eb-fb87-42ed-a157-ff71ba86a2c8
-    country_id: *gr
-    network_id: *gr_karditsa_region
-  - id: 295619
-    prefix: '302443'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ef72f935-ed45-44de-8ce7-5b9deb8188b6
-    country_id: *gr
-    network_id: *gr_sofades_region
-  - id: 295622
-    prefix: '302444'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e89fccdf-ceb1-4a27-b42e-426985ff87a3
-    country_id: *gr
-    network_id: *gr_palamas_region
-  - id: 295634
-    prefix: '302445'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0e7dd330-7436-473c-874d-d501ede3732b
-    country_id: *gr
-    network_id: *gr_mouzaki_region
-  - id: 297627
-    prefix: '30251'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dd756569-fdba-4d06-89f3-41dfcad4460b
-    country_id: *gr
-    network_id: *gr_kavala_region
-  - id: 298783
-    prefix: '302541'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 20f0599f-d98b-46bc-8c29-5056da598891
-    country_id: *gr
-    network_id: *gr_xanthi_region
-  - id: 298785
-    prefix: '302542'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 461c44e0-629a-4911-9d1e-104347e88aa8
-    country_id: *gr
-    network_id: *gr_stavroupoli_region
-  - id: 298788
-    prefix: '302544'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8cc85df4-67f8-4b66-a078-e8ecc8f04315
-    country_id: *gr
-    network_id: *gr_echinos_region
-  - id: 298808
-    prefix: '302551'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fadd57f4-3288-4df1-8c14-bbe465b656df
-    country_id: *gr
-    network_id: *gr_alexandroupoli_region
-  - id: 298812
-    prefix: '302552'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 467a5acd-8106-4e28-8251-fa3b111223da
-    country_id: *gr
-    network_id: *gr_orestiada_region
-  - id: 298815
-    prefix: '302553'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6980101a-c83e-460e-a854-16a165a9ef77
-    country_id: *gr
-    network_id: *gr_didymoticho_region
-  - id: 298819
-    prefix: '302554'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f495b22e-ab89-4966-9816-82a19a94c70c
-    country_id: *gr
-    network_id: *gr_soufli_region
-  - id: 298823
-    prefix: '302555'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5517510a-7f06-4496-908d-358c6a748e13
-    country_id: *gr
-    network_id: *gr_feres_region
-  - id: 298827
-    prefix: '302556'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f4121abc-0978-4b48-a0d1-54790c94d56f
-    country_id: *gr
-    network_id: *gr_kyprinos_region
-  - id: 299754
-    prefix: '302591'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 01158eb7-092a-48ba-bd2f-82ac6ec45654
-    country_id: *gr
-    network_id: *gr_chrysoupoli_region
-  - id: 299757
-    prefix: '302592'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 885e949c-147e-48f0-93cc-4260a66eb992
-    country_id: *gr
-    network_id: *gr_eleftheroupoli_region
-  - id: 299761
-    prefix: '302593'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fe88adb7-0c63-47d3-8382-2caa748adc23
-    country_id: *gr
-    network_id: *gr_limenari_region
-  - id: 299764
-    prefix: '302594'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 47ad04cb-31b4-48b5-8bdb-15275f0025fe
-    country_id: *gr
-    network_id: *gr_nea_peramos_region
-  - id: 300279
-    prefix: '30261'
+    network_id: *gr_yuboto_mobile
+  - id: 149236
+    prefix: '3069903'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4c7c89f7-1bb9-481d-a8c7-73a272047496
+    uuid: e9f15c0d-d14d-4796-9904-6c1b6234ed4a
     country_id: *gr
-    network_id: *gr_patra_region
-  - id: 300746
-    prefix: '302671'
+    network_id: *gr_vodafone_mobile
+  - id: 149239
+    prefix: '30699046'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2fe21cc7-df6f-4439-ae5f-6009635c9d36
+    uuid: 4c743465-6a0c-4c1d-86c5-0321cb18a934
     country_id: *gr
-    network_id: *gr_argostoli_region
-  - id: 300755
-    prefix: '302674'
+    network_id: *gr_premium_net_mobile
+  - id: 149240
+    prefix: '30699048'
     number_min_length: 12
     number_max_length: 12
-    uuid: 004452c0-33f6-4012-af09-5fc60488466a
+    uuid: 26f4679b-4445-4d97-9930-7155e2920a3e
     country_id: *gr
-    network_id: *gr_sami_region
-  - id: 300830
-    prefix: '302681'
+    network_id: *gr_amd_telecom_mobile
+  - id: 149246
+    prefix: '30699099'
     number_min_length: 12
     number_max_length: 12
-    uuid: cbe29d0a-47cf-4f67-b5ba-de96169bcd06
+    uuid: fdface4f-c8f2-4e2e-a5ef-308a9f536835
     country_id: *gr
-    network_id: *gr_arta_region
-  - id: 300833
-    prefix: '302682'
+    network_id: *gr_bws_mobile
+  - id: 149248
+    prefix: '306991'
     number_min_length: 12
     number_max_length: 12
-    uuid: 60397f60-91ce-4251-93b7-4310a89f9cfd
+    uuid: d668d896-c985-4a8e-8c5e-3763b35606d2
     country_id: *gr
-    network_id: *gr_preveza_region
-  - id: 300836
-    prefix: '302683'
+    network_id: *gr_wind_mobile
+  - id: 149251
+    prefix: '306992'
     number_min_length: 12
     number_max_length: 12
-    uuid: 97f74070-3ae2-407d-9492-47e3ccdb4823
+    uuid: a30843be-9522-4617-af7c-0d608511c354
     country_id: *gr
-    network_id: *gr_philippiada_region
-  - id: 300839
-    prefix: '302684'
+    network_id: *gr_wind_mobile
+  - id: 149263
+    prefix: '306993'
     number_min_length: 12
     number_max_length: 12
-    uuid: c2a6a240-a78e-4608-b857-1407f4983be7
+    uuid: 1ebaa197-9113-4607-8a59-0a202737ee65
     country_id: *gr
-    network_id: *gr_kanalaki_region
-  - id: 300842
-    prefix: '302685'
+    network_id: *gr_wind_mobile
+  - id: 149266
+    prefix: '306994'
     number_min_length: 12
     number_max_length: 12
-    uuid: cccfc0ed-d60d-4782-a651-cd04c0d44fd3
+    uuid: 57c5da4f-ceb5-4b7a-9e63-9a4c866ce5c2
     country_id: *gr
-    network_id: *gr_voulgareli_region
-  - id: 301400
-    prefix: '302691'
+    network_id: *gr_wind_mobile
+  - id: 149269
+    prefix: '306995'
     number_min_length: 12
     number_max_length: 12
-    uuid: 13287903-b7f8-4414-ba56-00db15f46941
+    uuid: d8cbf447-d3b9-476f-9fcb-5ef53de96874
     country_id: *gr
-    network_id: *gr_aegio_region
-  - id: 301403
-    prefix: '302692'
+    network_id: *gr_wind_mobile
+  - id: 149281
+    prefix: '306996'
     number_min_length: 12
     number_max_length: 12
-    uuid: cac88a26-c9d4-47e0-871d-23bba0a468cc
+    uuid: 4168a335-ada0-45ee-8066-4f95002d9690
     country_id: *gr
-    network_id: *gr_kalavrita_region
-  - id: 301406
-    prefix: '302693'
+    network_id: *gr_wind_mobile
+  - id: 149293
+    prefix: '306997'
     number_min_length: 12
     number_max_length: 12
-    uuid: 6a7387ec-baf4-4d1e-8d71-df0f20ca757c
+    uuid: 9efd790e-4123-41cf-995b-816a0a27acad
     country_id: *gr
-    network_id: *gr_kato_achaia_region
-  - id: 301408
-    prefix: '302694'
+    network_id: *gr_wind_mobile
+  - id: 149304
+    prefix: '306998'
     number_min_length: 12
     number_max_length: 12
-    uuid: f45f7463-efcb-4bf0-b0df-7cd2b1eba6aa
+    uuid: d2968997-e38b-4bde-9189-913106847bd2
     country_id: *gr
-    network_id: *gr_chalandritsa_region
-  - id: 301411
-    prefix: '302695'
+    network_id: *gr_wind_mobile
+  - id: 149317
+    prefix: '306999'
     number_min_length: 12
     number_max_length: 12
-    uuid: 79882ce0-5e54-4dfd-8944-ba022aaeaed3
+    uuid: 3f6ee89c-a299-4f53-972e-a0e5d609a8ea
     country_id: *gr
-    network_id: *gr_zakynthos_region
-  - id: 301413
-    prefix: '302696'
+    network_id: *gr_wind_mobile
+  - id: 163974
+    prefix: '3070'
     number_min_length: 12
     number_max_length: 12
-    uuid: 15296071-226e-46f7-a603-6f07fb8d6ca0
+    uuid: cbab90d7-016b-4425-a9a4-e7d6622c124f
     country_id: *gr
-    network_id: *gr_akrata_region
-  - id: 301956
-    prefix: '302491'
+    network_id: *gr_personal_number_services
+  - id: 403471
+    prefix: '30800'
     number_min_length: 12
     number_max_length: 12
-    uuid: dd9357c2-cff0-48c4-b64c-ab20be8c0c52
+    uuid: bdc9d9e4-ed16-402e-b162-9fd95d339d08
     country_id: *gr
-    network_id: *gr_farsala_region
-  - id: 301957
-    prefix: '302492'
+    network_id: *gr_freephone_services
+  - id: 403515
+    prefix: '30801'
     number_min_length: 12
     number_max_length: 12
-    uuid: 92d557be-f3a0-4fdc-a0c0-7f8e679993fd
+    uuid: 62d7b7b1-4502-4a60-82dd-bebfdf9046d7
     country_id: *gr
-    network_id: *gr_tyrnavos_region
-  - id: 301958
-    prefix: '302493'
+    network_id: *gr_shared_cost_services
+  - id: 401748
+    prefix: '30806'
     number_min_length: 12
     number_max_length: 12
-    uuid: a52a0a4c-9e43-4418-bf28-abedb967a82a
+    uuid: 4b7ce959-367e-4994-b9d8-5821dd869b14
     country_id: *gr
-    network_id: *gr_elassona_region
-  - id: 301959
-    prefix: '302494'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 80d7b888-5e98-47b1-8bec-ee8b841bebec
-    country_id: *gr
-    network_id: *gr_agia_region
-  - id: 301960
-    prefix: '302495'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 13a19bbc-df0c-47b1-b8dd-44c6b8fa5281
-    country_id: *gr
-    network_id: *gr_makrychori_region
-  - id: 302654
-    prefix: '302521'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 24cb52de-35eb-44a7-b44e-e7c3d5a3be27
-    country_id: *gr
-    network_id: *gr_drama_region
-  - id: 302658
-    prefix: '302522'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 58e52533-70f7-4d01-aae2-24c7de5b078f
-    country_id: *gr
-    network_id: *gr_prosotsani_region
-  - id: 302663
-    prefix: '302523'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7d9928eb-ebbe-4f82-95b5-20e5f989079f
-    country_id: *gr
-    network_id: *gr_kato_nevrokopi_region
-  - id: 302666
-    prefix: '302524'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 29ee7a12-24b4-4877-8d87-3e32e764430d
-    country_id: *gr
-    network_id: *gr_paranesti_region
-  - id: 303199
-    prefix: '302531'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6d458490-4004-4853-8bf6-f50e1e84dbd2
-    country_id: *gr
-    network_id: *gr_komotini_region
-  - id: 303202
-    prefix: '302532'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 66d01457-a0cf-4a05-a6fb-fb0641a43600
-    country_id: *gr
-    network_id: *gr_sapes_region
-  - id: 303206
-    prefix: '302533'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1d9969f6-a98a-4c3b-a0cf-f89ed5a2670a
-    country_id: *gr
-    network_id: *gr_xylagani_region
-  - id: 303209
-    prefix: '302534'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c6037899-6085-4697-9e98-11c5838efebf
-    country_id: *gr
-    network_id: *gr_iasmos_region
-  - id: 303221
-    prefix: '302535'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9b39d309-13c9-47ac-8a6f-d8b61e896bd0
-    country_id: *gr
-    network_id: *gr_kallisti_region
-  - id: 303508
-    prefix: '302621'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f04d6870-07a8-4054-b63b-ec811590d0af
-    country_id: *gr
-    network_id: *gr_pyrgos_region
-  - id: 303514
-    prefix: '302622'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 10205365-64fb-4bc3-bc91-0acbcd6b8782
-    country_id: *gr
-    network_id: *gr_amaliada_region
-  - id: 303518
-    prefix: '302623'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4be90b3c-50b1-48c0-be67-0d073f8bcbc7
-    country_id: *gr
-    network_id: *gr_lechena_region
-  - id: 303524
-    prefix: '302624'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bf62957e-044f-4bf2-a7d4-1070107e8145
-    country_id: *gr
-    network_id: *gr_ancient_olympia_region
-  - id: 303530
-    prefix: '302625'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3e447ee2-b3ec-444b-8ae5-4cfa4719b40e
-    country_id: *gr
-    network_id: *gr_krestena_region
-  - id: 303536
-    prefix: '302626'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 057edb8d-eb9a-4ba1-9643-1e2ab0e76f3c
-    country_id: *gr
-    network_id: *gr_andritsena_region
-  - id: 303604
-    prefix: '302631'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ef325160-8098-468e-b97e-a186f870560f
-    country_id: *gr
-    network_id: *gr_messologi_region
-  - id: 303608
-    prefix: '302632'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9ef427f8-4ccf-498d-89a7-6310220a9247
-    country_id: *gr
-    network_id: *gr_aitoliko_region
-  - id: 303615
-    prefix: '302634'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2cebfbc1-a9fb-4f3e-b2b8-e292ab354f4a
-    country_id: *gr
-    network_id: *gr_nafpaktos_region
-  - id: 303619
-    prefix: '302635'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c8a00d53-b40f-4e08-9654-bec58c297a2d
-    country_id: *gr
-    network_id: *gr_mataraga_region
-  - id: 303664
-    prefix: '302641'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2b6d1fb5-b002-4849-83eb-8da281b24fe4
-    country_id: *gr
-    network_id: *gr_agrinio_region
-  - id: 303668
-    prefix: '302642'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b55b64b9-87b9-4c7e-b5dd-0eb7b130f847
-    country_id: *gr
-    network_id: *gr_amfilochia_region
-  - id: 303672
-    prefix: '302643'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6394a185-0aa0-4f2b-8e73-c72d5b9ed587
-    country_id: *gr
-    network_id: *gr_vonitsa_region
-  - id: 303676
-    prefix: '302644'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 62f38cb8-ea6c-45cc-92c6-fc6a09c19219
-    country_id: *gr
-    network_id: *gr_thermo_region
-  - id: 303680
-    prefix: '302645'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 868a551e-a64a-44aa-8e1a-c3d5c68ca1a0
-    country_id: *gr
-    network_id: *gr_lefkada_region
-  - id: 303686
-    prefix: '302646'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e8dcc670-4525-4759-81b6-755a84de1fa5
-    country_id: *gr
-    network_id: *gr_fyties_region
-  - id: 303692
-    prefix: '302647'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eacbd9ee-eb26-4686-8b22-ced57ee0a13d
-    country_id: *gr
-    network_id: *gr_neo_chalkiopoulo_region
-  - id: 303725
-    prefix: '302651'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 20f3d701-bb9d-497e-82b8-4e9e5e6b643b
-    country_id: *gr
-    network_id: *gr_ioannina_region
-  - id: 303728
-    prefix: '302653'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5990cc72-4c06-44ba-a218-fb13eb79026d
-    country_id: *gr
-    network_id: *gr_karies_region
-  - id: 303730
-    prefix: '302654'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9e6a7faa-6134-4aa9-a1b4-22f9e7c772b2
-    country_id: *gr
-    network_id: *gr_perdika_region
-  - id: 303734
-    prefix: '302655'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2a64ff00-751e-4615-9b3d-2df3207ff30c
-    country_id: *gr
-    network_id: *gr_konitsa_region
-  - id: 303738
-    prefix: '302656'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fadf10c8-3d4a-4660-8124-99a6a5b1fcfd
-    country_id: *gr
-    network_id: *gr_tampouria_region
-  - id: 303742
-    prefix: '302657'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 306f57c5-f25f-48f7-bb32-c30117d4b381
-    country_id: *gr
-    network_id: *gr_delvinaki_region
-  - id: 303745
-    prefix: '302658'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cea9f9ee-9cb0-4286-9735-0772fcc97718
-    country_id: *gr
-    network_id: *gr_zitsa_region
-  - id: 303746
-    prefix: '302659'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0369efa5-b6ff-4c41-a3d4-a65a0c2ac12b
-    country_id: *gr
-    network_id: *gr_kalentzi_region
-  - id: 303763
-    prefix: '302661'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 88ceea03-4be0-4821-a75b-8d24f73d5441
-    country_id: *gr
-    network_id: *gr_corfu_region
-  - id: 303767
-    prefix: '302662'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 834abd73-4c20-4997-b088-642b350100f8
-    country_id: *gr
-    network_id: *gr_lefkimi_region
-  - id: 303771
-    prefix: '302663'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5eec5a13-fd2c-40f9-bc82-b6729afaf3f6
-    country_id: *gr
-    network_id: *gr_skripero_region
-  - id: 303775
-    prefix: '302664'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d1d3b9af-3c26-4657-aedf-013e101af620
-    country_id: *gr
-    network_id: *gr_filiates_region
-  - id: 303778
-    prefix: '302665'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9c61d9e1-eaf6-4c8c-a3db-0ef83e32b02c
-    country_id: *gr
-    network_id: *gr_igoumenitsa_region
-  - id: 303782
-    prefix: '302666'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b1fa8357-1722-48f2-9f6e-15de977eeda2
-    country_id: *gr
-    network_id: *gr_paramythia_region
-  - id: 305212
-    prefix: '30271'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 97fe1fc1-8e92-452b-b201-66fc572dcf68
-    country_id: *gr
-    network_id: *gr_tripoli_region
-  - id: 305969
-    prefix: '302741'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cb0add34-c9d3-41dc-a83e-fc3755cb06ea
-    country_id: *gr
-    network_id: *gr_korinthos_region
-  - id: 305973
-    prefix: '302742'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 185ce4b7-ad70-4840-b468-aa91dcb22bd2
-    country_id: *gr
-    network_id: *gr_kiato_region
-  - id: 305978
-    prefix: '302743'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 76fa85a3-7885-4e80-9d89-637a805329f8
-    country_id: *gr
-    network_id: *gr_xylokastro_region
-  - id: 305982
-    prefix: '302744'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 207eb8ae-a99e-4f5e-bad0-028834e96fb4
-    country_id: *gr
-    network_id: *gr_loutraki_region
-  - id: 305989
-    prefix: '302746'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f68ec2ba-faa5-4ad9-a72b-2b22f81377be
-    country_id: *gr
-    network_id: *gr_nemea_region
-  - id: 305994
-    prefix: '302747'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aaf8de3c-48a3-4cf9-8eaa-bd1e0ab8a027
-    country_id: *gr
-    network_id: *gr_kalianoi_region
-  - id: 306090
-    prefix: '302751'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 41a9e3aa-5fc0-438b-820f-e838384a6848
-    country_id: *gr
-    network_id: *gr_argos_region
-  - id: 306095
-    prefix: '302752'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 95e9f8ab-9bb2-4c8c-9dbf-5cfb3682814e
-    country_id: *gr
-    network_id: *gr_nafplion_region
-  - id: 306100
-    prefix: '302753'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e6decf02-376f-4eba-9e8a-b14360e0a78f
-    country_id: *gr
-    network_id: *gr_lygourgio_region
-  - id: 306105
-    prefix: '302754'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7495d687-2ace-48c5-9db3-333d87198d8c
-    country_id: *gr
-    network_id: *gr_kranidi_region
-  - id: 306110
-    prefix: '302755'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a8b1e5a8-5d92-445d-a637-074c7c2ad372
-    country_id: *gr
-    network_id: *gr_astros_region
-  - id: 306117
-    prefix: '302757'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5a8a227b-497e-4d19-98cd-66b02d7d3bd8
-    country_id: *gr
-    network_id: *gr_leonidio_region
-  - id: 306646
-    prefix: '302761'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f8a76651-49c7-447b-a27c-50285e15cef5
-    country_id: *gr
-    network_id: *gr_kyparissia_region
-  - id: 306655
-    prefix: '302763'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0bf8be37-c3dd-458a-b504-11ba8989c87c
-    country_id: *gr
-    network_id: *gr_gargalianoi_region
-  - id: 306663
-    prefix: '302765'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 21543dc3-0ea3-446c-90f1-40280ba0ace3
-    country_id: *gr
-    network_id: *gr_kopanaki_region
-  - id: 307462
-    prefix: '302821'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f1f9ee38-f3a5-4606-be91-ab9796da1e60
-    country_id: *gr
-    network_id: *gr_chania_region
-  - id: 307466
-    prefix: '302822'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 771947a4-72fc-498e-aba0-a8b6af32de92
-    country_id: *gr
-    network_id: *gr_kissamos_region
-  - id: 307470
-    prefix: '302823'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dff67f59-320d-4c80-8c23-0a07c58413bd
-    country_id: *gr
-    network_id: *gr_kantanos_region
-  - id: 307474
-    prefix: '302824'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3245dae2-f351-4a36-b5c2-5f39d79572ca
-    country_id: *gr
-    network_id: *gr_kolympari_region
-  - id: 307478
-    prefix: '302825'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3d838bcb-d1b8-49b1-9cec-840632bd0876
-    country_id: *gr
-    network_id: *gr_vamos_region
-  - id: 307675
-    prefix: '302831'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 74c9b177-b1e8-43ec-9206-c567fa2afdf1
-    country_id: *gr
-    network_id: *gr_rethymno_region
-  - id: 307678
-    prefix: '302832'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 29b00f5c-335e-4856-a608-f4309859ae90
-    country_id: *gr
-    network_id: *gr_spili_region
-  - id: 307681
-    prefix: '302833'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3ff7e626-7f17-477b-bfdc-e9cf4c5b5f9c
-    country_id: *gr
-    network_id: *gr_amari_region
-  - id: 307684
-    prefix: '302834'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b2c96d2e-9d31-45e0-b5eb-4ea997563e05
-    country_id: *gr
-    network_id: *gr_perama_region
-  - id: 307844
-    prefix: '302841'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5e86a11c-f227-4e22-9d6e-4c4e55e07606
-    country_id: *gr
-    network_id: *gr_agios_nikolaos_region
-  - id: 307848
-    prefix: '302842'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d1cb0d8e-f2ca-415c-9c5e-3c6ce13d700b
-    country_id: *gr
-    network_id: *gr_ierapetra_region
-  - id: 307852
-    prefix: '302843'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2e6036b8-cbef-4e0e-b34d-1c3e538c364d
-    country_id: *gr
-    network_id: *gr_sitia_region
-  - id: 307856
-    prefix: '302844'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 65e08f91-e731-40f1-84aa-257784b75577
-    country_id: *gr
-    network_id: *gr_tzermiades_region
-  - id: 308485
-    prefix: '302891'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 814905e2-8cf1-4890-ba90-9d516789a466
-    country_id: *gr
-    network_id: *gr_arkalochori_region
-  - id: 308487
-    prefix: '302892'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f63e848c-e583-4cd1-bacc-530e49be046c
-    country_id: *gr
-    network_id: *gr_moires_region
-  - id: 308489
-    prefix: '302893'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9bda2c57-c246-4c74-a297-42ced4274580
-    country_id: *gr
-    network_id: *gr_pyrgos_creta_region
-  - id: 308491
-    prefix: '302894'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5e31f396-6917-4e40-9dc9-e850747ba709
-    country_id: *gr
-    network_id: *gr_agia_varvara_region
-  - id: 308493
-    prefix: '302895'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 43c5a627-043e-43b0-9498-4172f147209d
-    country_id: *gr
-    network_id: *gr_ano_viannos_region
-  - id: 308496
-    prefix: '302897'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3507a563-2542-4709-b59b-3d344744ffc7
-    country_id: *gr
-    network_id: *gr_limin_chersonisou_region
-  - id: 312746
-    prefix: '302721'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 227c3079-b67f-4acd-9b60-521c3c4b8d3d
-    country_id: *gr
-    network_id: *gr_kalamata_region
-  - id: 312749
-    prefix: '302722'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cb15056d-c958-44a9-8359-2edde03fc766
-    country_id: *gr
-    network_id: *gr_messini_region
-  - id: 312752
-    prefix: '302723'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 65521bdd-dd69-4d5a-b3ee-e19a58abd011
-    country_id: *gr
-    network_id: *gr_pylos_region
-  - id: 312755
-    prefix: '302724'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 292c9cf3-474e-4b88-9d7c-7739f2ee38ab
-    country_id: *gr
-    network_id: *gr_meligalas_region
-  - id: 312758
-    prefix: '302725'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5e624648-7f86-4329-9c60-124c4e7aa25a
-    country_id: *gr
-    network_id: *gr_koroni_region
-  - id: 313000
-    prefix: '302731'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fc867081-d459-4c7e-a78d-4683ed43846d
-    country_id: *gr
-    network_id: *gr_sparti_region
-  - id: 313003
-    prefix: '302732'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c35f5185-e4f7-4c66-8141-5a074b194e69
-    country_id: *gr
-    network_id: *gr_molaoi_region
-  - id: 313006
-    prefix: '302733'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 51833bfa-0e56-4df8-b828-01d2d4841071
-    country_id: *gr
-    network_id: *gr_gytheio_region
-  - id: 313010
-    prefix: '302734'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 22bd7b19-05df-40fd-a24f-9b0ac8886b25
+    network_id: *gr_value_added_services
+  - id: 412066
+    prefix: '30807'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 43b78210-42a4-4f9c-8e48-7c9b7ce40022
     country_id: *gr
-    network_id: *gr_neapoli_lakonias_region
-  - id: 313014
-    prefix: '302735'
+    network_id: *gr_virtual_calling_cards_services
+  - id: 406941
+    prefix: '30812'
     number_min_length: 12
     number_max_length: 12
-    uuid: 647400ce-91bf-455a-ba5a-d0722cc0b89e
+    uuid: 49b7a7eb-8c9f-44f1-9bce-0aa99c28d146
     country_id: *gr
-    network_id: *gr_skala_region
-  - id: 313018
-    prefix: '302736'
+    network_id: *gr_value_added_services
+  - id: 410224
+    prefix: '30825'
     number_min_length: 12
     number_max_length: 12
-    uuid: c88fd41d-3fd8-476e-a198-a6426848320d
+    uuid: 812ce92a-d15a-47a9-9de7-70006e830f0d
     country_id: *gr
-    network_id: *gr_kythira_region
-  - id: 313340
-    prefix: '302791'
+    network_id: *gr_value_added_services
+  - id: 436266
+    prefix: '30850'
     number_min_length: 12
     number_max_length: 12
-    uuid: 2d8fb5b7-40d6-4751-8865-103cc0aee0f6
+    uuid: 631ccd92-01d8-4b64-8d50-d1e6796d3735
     country_id: *gr
-    network_id: *gr_megalopoli_region
-  - id: 313342
-    prefix: '302792'
+    network_id: *gr_value_added_services
+  - id: 450474
+    prefix: '30875'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5e90317c-3dd8-4774-a3a3-9e6f2eabb9b0
+    uuid: 01e193b7-c854-4e40-9552-5dc70a15d9a7
     country_id: *gr
-    network_id: *gr_kastri_region
-  - id: 313346
-    prefix: '302795'
+    network_id: *gr_value_added_services
+  - id: 452247
+    prefix: '30896'
     number_min_length: 12
     number_max_length: 12
-    uuid: 093a9c7b-2300-42e4-9f5d-cf4745a62a17
+    uuid: 643a55a4-4b2d-4d39-b819-239c550db946
     country_id: *gr
-    network_id: *gr_vitina_region
-  - id: 313348
-    prefix: '302796'
+    network_id: *gr_data_services
+  - id: 452471
+    prefix: '30899'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0e39861a-0a9a-4a3a-91c3-bdd9258e0267
+    uuid: 7e5bc14e-67d6-4776-b8f0-565d773f470f
     country_id: *gr
-    network_id: *gr_levidi_region
-  - id: 313350
-    prefix: '302797'
+    network_id: *gr_data_services
+  - id: 454706
+    prefix: '30901'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0190dc22-fe0e-4518-bdb1-e94c0d48fa25
+    uuid: f719c6f5-d0e4-4b49-808d-bac9b9732ced
     country_id: *gr
-    network_id: *gr_tropea_region
-  - id: 313553
-    prefix: '30281'
+    network_id: *gr_premium_rate_services
+# Satellite Prefixes
+  - id: 463574
+    prefix: '30909'
     number_min_length: 12
     number_max_length: 12
-    uuid: 4bd8907d-4a83-4d86-b3e0-90c5eb09583e
+    uuid: e4ba9f38-51fb-4aa0-bc17-a92d78809970
     country_id: *gr
-    network_id: *gr_iraklion_region
+    network_id: *gr_adults_entertainment_services

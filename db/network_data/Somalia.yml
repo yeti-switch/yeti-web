@@ -5,26 +5,9 @@ networks:
     name: SO Special Services
     uuid: c48bd77a-ecc5-4e4a-a1be-ec520e48835b
     type_id: 13
-  - id: &so_premium_rate_services 22160
-    name: SO Premium Rate Services
-    uuid: be5dbc55-76dc-400c-9024-3730df3318c5
-    type_id: 13
-# Fixed Networks
   - id: &so_mogadishu_region 21488
     name: SO Mogadishu Region
     uuid: d6029101-e0b6-4336-998e-013c779dde0d
-    type_id: 2
-  - id: &so_garowe_region 22147
-    name: SO Garowe Region
-    uuid: 5cdd9e05-277d-4df8-9fea-c0fd81c33f3d
-    type_id: 2
-  - id: &so_fixed 22472
-    name: SO Fixed
-    uuid: 2f7dad7f-5efa-4a22-88ec-c50998ff2da0
-    type_id: 2
-  - id: &so_hargeisa_region 23210
-    name: SO Hargeisa Region
-    uuid: 5061d2a9-018d-4a23-8d2d-f4d5c5fee965
     type_id: 2
 # Mobile Networks
   - id: &so_hormuud_mobile 21798
@@ -35,6 +18,18 @@ networks:
     name: SO Airsom Mobile
     uuid: 78075e63-e898-4c1e-9c76-bf7fd01347f7
     type_id: 3
+  - id: &so_garowe_region 22147
+    name: SO Garowe Region
+    uuid: 5cdd9e05-277d-4df8-9fea-c0fd81c33f3d
+    type_id: 2
+  - id: &so_premium_rate_services 22160
+    name: SO Premium Rate Services
+    uuid: be5dbc55-76dc-400c-9024-3730df3318c5
+    type_id: 13
+  - id: &so_fixed 22472
+    name: SO Fixed
+    uuid: 2f7dad7f-5efa-4a22-88ec-c50998ff2da0
+    type_id: 2
   - id: &so_nationlink_mobile 22517
     name: SO Nationlink Mobile
     uuid: 7aa84cdc-634a-4854-a123-cfa21b0cbf95
@@ -55,10 +50,15 @@ networks:
     name: SO Telesom Mobile
     uuid: 26e64c12-80a7-494c-a9ec-8e61fc9cd05c
     type_id: 3
+  - id: &so_hargeisa_region 23210
+    name: SO Hargeisa Region
+    uuid: 5061d2a9-018d-4a23-8d2d-f4d5c5fee965
+    type_id: 2
   - id: &so_netco_mobile 23354
     name: SO Netco Mobile
     uuid: fb7d5f86-63cd-440f-9f40-dfdf2a1d788c
     type_id: 3
+# Fixed Networks
   - id: &so_somnetworks_mobile 23473
     name: SO Somnetworks Mobile
     uuid: bbe67dad-0de2-4c98-a806-b6983f4e57f6
@@ -76,15 +76,14 @@ networks:
     uuid: c75d6667-89ae-479f-a05c-14128a452314
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Supplementary services Prefixes
   - id: 242101
     prefix: '252'
     number_min_length: 4
     number_max_length: 100
     uuid: 33940df0-d73f-438a-bf40-3b68d295a285
     country_id: *so
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *so_fixed
   - id: 242492
     prefix: '2521'
     number_min_length: 6
@@ -92,13 +91,20 @@ network_prefixes:
     uuid: e5e09cfb-f40a-4a1d-a630-3af08031a87c
     country_id: *so
     network_id: *so_special_services
-  - id: 243985
-    prefix: '252040'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2518359f-56d7-41f9-80a6-180781a6fee0
+  - id: 506992
+    prefix: '2521'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 527a49fe-be54-401e-9ad1-8ebc8f7cd4e0
     country_id: *so
-    network_id: *so_premium_rate_services
+    network_id: *so_mogadishu_region
+  - id: 507057
+    prefix: '25215'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c87121b7-5362-479e-ae72-60a0ae525d0e
+    country_id: *so
+    network_id: *so_hormuud_mobile
   - id: 247436
     prefix: '2522'
     number_min_length: 6
@@ -106,6 +112,224 @@ network_prefixes:
     uuid: 06cb175e-4fa7-4355-bcf5-205531cfa066
     country_id: *so
     network_id: *so_special_services
+# Mobile Prefixes
+  - id: 506980
+    prefix: '252214'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7b149dee-2035-49ef-8452-9ab725d6af4e
+    country_id: *so
+    network_id: *so_stg_mobile
+  - id: 509093
+    prefix: '2522220'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 55fd9c29-dc22-4471-94cd-8fca323a3c89
+    country_id: *so
+    network_id: *so_stg_mobile
+  - id: 509111
+    prefix: '252237'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bcf4e603-adfa-4329-bf54-b5ce54ba5458
+    country_id: *so
+    network_id: *so_telcom_mobile_mobile
+  - id: 509119
+    prefix: '25224'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 08eee86a-1da8-4eef-977c-c34dd30b9349
+    country_id: *so
+    network_id: *so_telesom_mobile
+  - id: 509197
+    prefix: '25227'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b3e58d2b-2b04-4186-9178-81f162aba2b9
+    country_id: *so
+    network_id: *so_telcom_mobile_mobile
+  - id: 509209
+    prefix: '2523'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 13bbfce7-b581-453c-8f7a-88a6ebf3b0de
+    country_id: *so
+    network_id: *so_hargeisa_region
+  - id: 507142
+    prefix: '25235'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f6291838-b7d0-4ade-8604-1028d0b52c86
+    country_id: *so
+    network_id: *so_airsom_mobile
+  - id: 507202
+    prefix: '25239'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0cfcfbad-face-41ae-a0f0-db22ec490a34
+    country_id: *so
+    network_id: *so_airsom_mobile
+  - id: 507207
+    prefix: '2524'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 2b4f6317-9f90-4e47-a957-adad1d472eea
+    country_id: *so
+    network_id: *so_garowe_region
+  - id: 507209
+    prefix: '25240'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 00409eb7-78f8-489a-8d74-29143667d3f1
+    country_id: *so
+    network_id: *so_premium_rate_services
+  - id: 509245
+    prefix: '25248'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 384bc6f0-5246-47ff-9246-a0bcbc81cd0f
+    country_id: *so
+    network_id: *so_airsom_mobile
+  - id: 509249
+    prefix: '25249'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 48a676f7-fcac-4c00-85ee-be7ceef0632a
+    country_id: *so
+    network_id: *so_airsom_mobile
+  - id: 509257
+    prefix: '252504'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 38b54d27-2abc-4509-b5de-28e18265d5d8
+    country_id: *so
+    network_id: *so_nationlink_mobile
+  - id: 509261
+    prefix: '2525158'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 90ed9901-ad1b-4ed6-85d4-fad40f9cb3ff
+    country_id: *so
+    network_id: *so_nationlink_mobile
+  - id: 509273
+    prefix: '252525'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a52f4304-b0df-42e6-9d41-1ac96fd109d1
+    country_id: *so
+    network_id: *so_netco_mobile
+  - id: 509289
+    prefix: '25255'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee73e263-0136-4fff-b386-19583b4cd6ff
+    country_id: *so
+    network_id: *so_fixed
+  - id: 509300
+    prefix: '25257'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 59842a4b-0227-47a3-9bcb-32be9127ccf8
+    country_id: *so
+    network_id: *so_fixed
+  - id: 507261
+    prefix: '25258'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: db3e569d-514f-4a18-addb-12fc710af5e4
+    country_id: *so
+    network_id: *so_fixed
+  - id: 507270
+    prefix: '252596'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ada9b67f-3773-4769-83b5-ce7bb95b404a
+    country_id: *so
+    network_id: *so_nationlink_mobile
+  - id: 507279
+    prefix: '25260'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6e763aca-6062-4055-88e5-210821a0bfa9
+    country_id: *so
+    network_id: *so_somafone_mobile
+  - id: 507364
+    prefix: '25261'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 04b2e1f4-7205-4fe0-af93-bf2a507253db
+    country_id: *so
+    network_id: *so_hormuud_mobile
+  - id: 507367
+    prefix: '25262'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b7d9e225-bdac-4664-9c51-268f7687e0ab
+    country_id: *so
+    network_id: *so_somtel_mobile
+  - id: 509368
+    prefix: '25263'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d22d8e0-1415-4061-99ea-c745677d5822
+    country_id: *so
+    network_id: *so_telesom_mobile
+  - id: 509493
+    prefix: '25264'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d8cc97e9-3d4d-4e3b-a118-bbd1401242e8
+    country_id: *so
+    network_id: *so_somnetworks_mobile
+  - id: 509629
+    prefix: '25265'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 819bd750-bbb7-44a7-ab16-4cf148a6a297
+    country_id: *so
+    network_id: *so_somtel_mobile
+  - id: 509722
+    prefix: '25266'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 093ebb72-3457-4465-bfbb-df7b3c4ae0b7
+    country_id: *so
+    network_id: *so_somtel_mobile
+  - id: 509744
+    prefix: '25267'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b3f92359-6210-4ed3-a922-64cea03d8860
+    country_id: *so
+    network_id: *so_nationlink_mobile
+  - id: 509748
+    prefix: '25268'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a05f0500-ed1a-444b-b4d3-832330ed506c
+    country_id: *so
+    network_id: *so_nationlink_mobile
+  - id: 509751
+    prefix: '25269'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 321ff879-c0ae-47f2-933e-c31009583a58
+    country_id: *so
+    network_id: *so_nationlink_mobile
+  - id: 510043
+    prefix: '25270'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c7c608bc-faca-4733-ba4b-20f2abfb0a16
+    country_id: *so
+    network_id: *so_onkod_mobile
+  - id: 510747
+    prefix: '25279'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cae01d43-4373-4188-be9c-bf32bde29bf9
+    country_id: *so
+    network_id: *so_somtel_mobile
   - id: 253109
     prefix: '2528'
     number_min_length: 6
@@ -113,6 +337,41 @@ network_prefixes:
     uuid: 0e709266-a95f-461a-926a-543a4c6f55da
     country_id: *so
     network_id: *so_special_services
+  - id: 510855
+    prefix: '25280'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 153e727c-6d9e-4044-8536-892c960f5537
+    country_id: *so
+    network_id: *so_somnetworks_mobile
+  - id: 510915
+    prefix: '25281'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 6ff62972-8126-47a2-a9c3-0a3e8dd253a9
+    country_id: *so
+    network_id: *so_fixed
+  - id: 510931
+    prefix: '25282'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 4455c840-4599-4aae-9b06-a9ca5a4ef31b
+    country_id: *so
+    network_id: *so_fixed
+  - id: 510950
+    prefix: '25285'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 7fd3a6c3-6876-415a-9ba3-d6be99c7b355
+    country_id: *so
+    network_id: *so_fixed
+  - id: 508371
+    prefix: '25288'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e1062171-13e3-4613-986b-b099160cfd73
+    country_id: *so
+    network_id: *so_somnetworks_mobile
   - id: 257141
     prefix: '2529'
     number_min_length: 6
@@ -121,333 +380,73 @@ network_prefixes:
     country_id: *so
     network_id: *so_special_services
 # Fixed Prefixes
-  - id: 242493
-    prefix: '25201'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 66ecf248-f811-4078-ae0f-6464a9e0da46
-    country_id: *so
-    network_id: *so_mogadishu_region
-  - id: 243965
-    prefix: '25204'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 52094b52-5c57-40c7-bfc0-9524ae83a561
-    country_id: *so
-    network_id: *so_garowe_region
-  - id: 245164
-    prefix: '252058'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: baadd396-c4ad-4e3e-9c63-b245219a0f67
-    country_id: *so
-    network_id: *so_fixed
-  - id: 248922
-    prefix: '25203'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 5f11a157-92f5-4d1a-aefd-df1ac2f9e3d3
-    country_id: *so
-    network_id: *so_hargeisa_region
-  - id: 250121
-    prefix: '252055'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 70e292e1-6104-4b70-9e32-ff3ee31b9132
-    country_id: *so
-    network_id: *so_fixed
-  - id: 250249
-    prefix: '252057'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4a915da9-b11e-4c8b-9f5a-7ed3564ba491
-    country_id: *so
-    network_id: *so_fixed
-  - id: 253328
-    prefix: '252081'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 5ce0bde3-ed4c-4aab-8d8b-72374939cc11
-    country_id: *so
-    network_id: *so_fixed
-  - id: 253486
-    prefix: '252082'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: ffced474-88b0-4e05-ae81-0fe65929cbd0
-    country_id: *so
-    network_id: *so_fixed
-  - id: 263714
-    prefix: '252085'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: dcf6efdf-cb9e-4b7c-830a-afe6d5eae6f7
-    country_id: *so
-    network_id: *so_fixed
-# Mobile Prefixes
-  - id: 242949
-    prefix: '252015'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b538757e-45ad-49b7-82f5-0416187c6f1d
-    country_id: *so
-    network_id: *so_hormuud_mobile
-  - id: 243595
-    prefix: '252035'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0b46b45a-450b-464e-847d-498144aa578f
-    country_id: *so
-    network_id: *so_airsom_mobile
-  - id: 243912
-    prefix: '252039'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f39d2cac-642c-47d7-ad4a-9897718b4299
-    country_id: *so
-    network_id: *so_airsom_mobile
-  - id: 245358
-    prefix: '2520596'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2c78e153-812e-4f2d-8107-14e5b9ec2d4f
-    country_id: *so
-    network_id: *so_nationlink_mobile
-  - id: 245442
-    prefix: '252060'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 88b7c650-c44b-4d21-a6d1-622bf80225f2
-    country_id: *so
-    network_id: *so_somafone_mobile
-  - id: 247671
-    prefix: '2520214'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e71865e3-2aba-488d-b788-7fe865df5fb1
-    country_id: *so
-    network_id: *so_stg_mobile
-  - id: 247764
-    prefix: '25202220'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c6ab9452-39e7-4a7d-a844-a48eaa835692
-    country_id: *so
-    network_id: *so_stg_mobile
-  - id: 248069
-    prefix: '2520237'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7278b954-cd77-4249-9fb5-8ae67fc4bef5
-    country_id: *so
-    network_id: *so_telcom_mobile_mobile
-  - id: 248121
-    prefix: '252024'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e3ce56bd-4ec1-43ff-bcb4-b0c0829f64f7
-    country_id: *so
-    network_id: *so_telesom_mobile
-  - id: 248621
-    prefix: '252027'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7f742c51-599f-4dbd-b49f-c4f5a66888ae
-    country_id: *so
-    network_id: *so_telcom_mobile_mobile
-  - id: 249431
-    prefix: '252048'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f5bcc0a0-b893-4f76-9a39-406cb2d8c2da
-    country_id: *so
-    network_id: *so_airsom_mobile
-  - id: 249515
-    prefix: '252049'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0dc1eefd-e93b-4b54-8835-49ef835b6693
-    country_id: *so
-    network_id: *so_airsom_mobile
-  - id: 249654
-    prefix: '2520504'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0ddd4195-5ad0-4e11-b48d-b32499415adc
-    country_id: *so
-    network_id: *so_nationlink_mobile
-  - id: 249730
-    prefix: '25205158'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ca1b4517-cfe7-4553-923a-1598d64813c7
-    country_id: *so
-    network_id: *so_nationlink_mobile
-  - id: 249837
-    prefix: '2520525'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fdcd380b-2681-4384-8349-d66e78be14ce
-    country_id: *so
-    network_id: *so_netco_mobile
-  - id: 250664
-    prefix: '252063'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 904bc435-6e2c-47f5-91d5-5f06a4333bad
-    country_id: *so
-    network_id: *so_telesom_mobile
-  - id: 251030
-    prefix: '252064'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9f84122a-0820-403d-8d6d-cf44c48da96a
-    country_id: *so
-    network_id: *so_somnetworks_mobile
-  - id: 251243
-    prefix: '252065'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b48b5f2d-f6b7-4915-976b-f0b7d8ff2270
-    country_id: *so
-    network_id: *so_somtel_mobile
-  - id: 253130
-    prefix: '252080'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 68eaa7bd-fa86-47d8-b4cd-7d4bcfb77a5a
-    country_id: *so
-    network_id: *so_somnetworks_mobile
-  - id: 253991
-    prefix: '252061'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 86c5a55f-24bf-42bd-be3f-380d05fe64f0
-    country_id: *so
-    network_id: *so_hormuud_mobile
-  - id: 254123
-    prefix: '252062'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9895724f-5375-4811-b34d-e73643bac859
-    country_id: *so
-    network_id: *so_somtel_mobile
-  - id: 254299
-    prefix: '252066'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 105515ad-7b1c-4df2-ae97-51ef638cd00d
-    country_id: *so
-    network_id: *so_somtel_mobile
-  - id: 254613
-    prefix: '252067'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 73654393-7c0d-4ba5-85e7-b99d8e37d7cf
-    country_id: *so
-    network_id: *so_nationlink_mobile
-  - id: 254685
-    prefix: '252068'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 72ab3465-02ea-4ddc-b9b7-b8ac118f6468
-    country_id: *so
-    network_id: *so_nationlink_mobile
-  - id: 254875
-    prefix: '252069'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: ce93742d-fe9f-4c8c-a626-665babdbdda8
-    country_id: *so
-    network_id: *so_nationlink_mobile
-  - id: 255304
-    prefix: '252070'
+  - id: 508386
+    prefix: '25290'
     number_min_length: 11
     number_max_length: 11
-    uuid: 769f13d4-2443-4e44-8d60-5e92a041ad6c
-    country_id: *so
-    network_id: *so_onkod_mobile
-  - id: 256395
-    prefix: '252079'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e3042148-bffe-4e1c-95df-9bcc4e7357c6
-    country_id: *so
-    network_id: *so_somtel_mobile
-  - id: 256851
-    prefix: '252088'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b5793085-d16c-49ef-a9fb-f42ba9ff562b
-    country_id: *so
-    network_id: *so_somnetworks_mobile
-  - id: 257165
-    prefix: '252090'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c153d93e-a6bd-4042-81f9-6e77cbe5ecc3
+    uuid: d5e40621-1275-4577-bbc4-2aa46169e541
     country_id: *so
     network_id: *so_golis_mobile
-  - id: 257373
-    prefix: '252091'
+  - id: 508418
+    prefix: '25291'
     number_min_length: 11
     number_max_length: 11
-    uuid: bbf5bc6e-a4bc-4159-ac41-082d995a5c4b
+    uuid: 28f5f60a-0656-412b-bb1c-59cec129aa87
     country_id: *so
     network_id: *so_golis_mobile
-  - id: 257597
-    prefix: '252092'
+  - id: 508421
+    prefix: '25292'
     number_min_length: 11
     number_max_length: 11
-    uuid: 73890c92-a293-412a-aaab-06df0e1a121b
+    uuid: ca41614d-0d31-4e9b-a4c4-bacdbf294777
     country_id: *so
     network_id: *so_stg_mobile
-  - id: 257871
-    prefix: '252093'
+  - id: 510957
+    prefix: '25293'
     number_min_length: 11
     number_max_length: 11
-    uuid: f535b402-d375-4885-88fa-f9cbc31a8af2
+    uuid: dfb5d927-6fe7-490f-aebb-836a6604bb9d
     country_id: *so
     network_id: *so_stg_mobile
-  - id: 257972
-    prefix: '252098'
+  - id: 510984
+    prefix: '25294'
     number_min_length: 11
     number_max_length: 11
-    uuid: f3ed6d84-2568-4bef-9adf-ce5040811bd7
+    uuid: 7d7252a4-2e99-4b40-bf20-2df0319baccc
     country_id: *so
     network_id: *so_stg_mobile
-  - id: 258198
-    prefix: '252099'
+  - id: 510996
+    prefix: '25295'
     number_min_length: 11
     number_max_length: 11
-    uuid: 57eb608d-84f9-49f0-954c-90e67d6d9244
+    uuid: f3beeee8-7dc6-43e3-b86b-11c383df55c1
     country_id: *so
     network_id: *so_stg_mobile
-  - id: 264203
-    prefix: '252094'
+  - id: 510998
+    prefix: '25296'
     number_min_length: 11
     number_max_length: 11
-    uuid: 72482ba5-b460-4e16-aab8-f74e8507329c
+    uuid: 2e783bf7-9c1e-41cc-b6cb-06c0509fa943
     country_id: *so
     network_id: *so_stg_mobile
-  - id: 264449
-    prefix: '252095'
+  - id: 510999
+    prefix: '25297'
     number_min_length: 11
     number_max_length: 11
-    uuid: d159e657-d3e0-46f6-8d8d-25515daf057e
+    uuid: c6b38116-707a-4d25-b87f-c494a0ccb2fc
     country_id: *so
     network_id: *so_stg_mobile
-  - id: 264729
-    prefix: '252096'
+  - id: 508427
+    prefix: '25298'
     number_min_length: 11
     number_max_length: 11
-    uuid: d11eb02b-d40a-4bac-a1e4-5dfb5f5b0a7c
+    uuid: fbb11b17-df70-4781-bca9-1dcdd932461e
     country_id: *so
     network_id: *so_stg_mobile
-  - id: 265010
-    prefix: '252097'
+  - id: 508429
+    prefix: '25299'
     number_min_length: 11
     number_max_length: 11
-    uuid: e90f536f-1ccc-4241-b041-69719fa32186
+    uuid: e1dbbf15-ffb1-4d46-acda-6bdcaf1fc10c
     country_id: *so
     network_id: *so_stg_mobile

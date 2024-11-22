@@ -1,18 +1,13 @@
 country_id: &cw 276
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &cw_value_added_services 24019
     name: CW Value Added Services
     uuid: a9faa162-6ee3-4718-839a-df0353fba8d4
     type_id: 13
-# Fixed Networks
   - id: &cw_fixed 41617
     name: CW Fixed
     uuid: 1ee52d8a-73cd-4cb0-9991-7facf39ae6ca
-    type_id: 2
-  - id: &cw_long_distance_service_region 42043
-    name: CW Long Distance Service Region
-    uuid: 80432f12-afac-484e-92c7-299c0456d91f
     type_id: 2
 # Mobile Networks
   - id: &cw_chippie_mobile 41624
@@ -23,8 +18,13 @@ networks:
     name: CW Digicel Mobile
     uuid: 4b8cb9c0-9e6d-410f-9473-6016a1a4712a
     type_id: 3
+# Supplementary services Networks
+  - id: &cw_long_distance_service_region 42043
+    name: CW Long Distance Service Region
+    uuid: 80432f12-afac-484e-92c7-299c0456d91f
+    type_id: 2
 network_prefixes:
-# Supplementary services Prefixes
+# Fixed Prefixes
   - id: 253809
     prefix: '599603'
     number_min_length: 10
@@ -46,7 +46,6 @@ network_prefixes:
     uuid: 49557d7d-edca-4083-b628-47b23d71f06b
     country_id: *cw
     network_id: *cw_value_added_services
-# Fixed Prefixes
   - id: 445081
     prefix: '59994'
     number_min_length: 11
@@ -61,42 +60,6 @@ network_prefixes:
     uuid: 86a81f93-8a03-43c6-9a3a-e7ba5e68d63d
     country_id: *cw
     network_id: *cw_fixed
-  - id: 453357
-    prefix: '59997'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aa872d1e-f69b-4734-9446-dc956d57daa2
-    country_id: *cw
-    network_id: *cw_fixed
-  - id: 453371
-    prefix: '5999720'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ad6e0d0b-5a1c-4f72-ae01-284d12c8b6db
-    country_id: *cw
-    network_id: *cw_long_distance_service_region
-  - id: 453372
-    prefix: '5999721'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 48440143-3039-4ec8-849f-cb6b8d6d5ea6
-    country_id: *cw
-    network_id: *cw_long_distance_service_region
-  - id: 453373
-    prefix: '5999724'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dca4db86-00d2-4673-9f84-380467cc0d12
-    country_id: *cw
-    network_id: *cw_long_distance_service_region
-  - id: 453464
-    prefix: '59998'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c39dc85a-1544-4b9c-90f4-0667afe0a016
-    country_id: *cw
-    network_id: *cw_fixed
-# Mobile Prefixes
   - id: 445204
     prefix: '599951'
     number_min_length: 11
@@ -111,6 +74,7 @@ network_prefixes:
     uuid: e4cc1d81-a0af-4e67-a832-5db5a0d33da1
     country_id: *cw
     network_id: *cw_chippie_mobile
+# Mobile Prefixes
   - id: 445229
     prefix: '5999530'
     number_min_length: 11
@@ -181,3 +145,39 @@ network_prefixes:
     uuid: b7e7d0d1-2942-4f50-8603-3f9800aeb750
     country_id: *cw
     network_id: *cw_digicel_mobile
+  - id: 453357
+    prefix: '59997'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa872d1e-f69b-4734-9446-dc956d57daa2
+    country_id: *cw
+    network_id: *cw_fixed
+  - id: 453371
+    prefix: '5999720'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ad6e0d0b-5a1c-4f72-ae01-284d12c8b6db
+    country_id: *cw
+    network_id: *cw_long_distance_service_region
+# Supplementary services Prefixes
+  - id: 453372
+    prefix: '5999721'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 48440143-3039-4ec8-849f-cb6b8d6d5ea6
+    country_id: *cw
+    network_id: *cw_long_distance_service_region
+  - id: 453373
+    prefix: '5999724'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dca4db86-00d2-4673-9f84-380467cc0d12
+    country_id: *cw
+    network_id: *cw_long_distance_service_region
+  - id: 453464
+    prefix: '59998'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c39dc85a-1544-4b9c-90f4-0667afe0a016
+    country_id: *cw
+    network_id: *cw_fixed

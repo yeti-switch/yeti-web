@@ -1,6 +1,6 @@
 country_id: &fj 71
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &fj_special_services 21273
     name: FJ Special Services
     uuid: 57a773b1-2d75-4f56-9fd3-10b13e8727b8
@@ -33,6 +33,10 @@ networks:
     name: FJ Collect Calls To Usa
     uuid: e3a1584d-55e8-427d-8f28-e276e99f2df2
     type_id: 13
+  - id: &fj_voip_region 21331
+    name: FJ Voip Region
+    uuid: 89657a04-0812-438e-bf9f-ab67e24aeb8a
+    type_id: 2
   - id: &fj_freephone_services 21341
     name: FJ Freephone Services
     uuid: d1128d82-5244-4e17-9fad-325d81034acc
@@ -45,15 +49,6 @@ networks:
     name: FJ Shared Cost Services
     uuid: 2009e938-d2e0-434e-8399-2515612ead1a
     type_id: 13
-  - id: &fj_emergency_services 24393
-    name: FJ Emergency Services
-    uuid: 4a63d20a-8125-401d-81c4-2cec6f69f605
-    type_id: 13
-# Fixed Networks
-  - id: &fj_voip_region 21331
-    name: FJ Voip Region
-    uuid: 89657a04-0812-438e-bf9f-ab67e24aeb8a
-    type_id: 2
   - id: &fj_suva_region 21933
     name: FJ Suva Region
     uuid: fc95038e-0f4c-4abe-90e5-b86190b323a4
@@ -123,10 +118,22 @@ networks:
     name: FJ Malomalo Region
     uuid: c436efc4-3773-460e-b4b2-f5463e71c8ed
     type_id: 2
+  - id: &fj_digicel_mobile 23568
+    name: FJ Digicel Mobile
+    uuid: e4bcd503-068c-4f62-8053-b58e7064edef
+    type_id: 3
   - id: &fj_northern_division_region 23788
     name: FJ Northern Division Region
     uuid: 82b2e803-c7ef-4280-98e1-e5701ff50f44
     type_id: 2
+  - id: &fj_vodafone_mobile 23814
+    name: FJ Vodafone Mobile
+    uuid: bf3c08e4-c5e9-4137-a0e6-46e3ace7272a
+    type_id: 3
+  - id: &fj_inkk_mobile_mobile 24002
+    name: FJ Inkk Mobile Mobile
+    uuid: 79dccd81-95a3-4552-8808-198519facf21
+    type_id: 3
   - id: &fj_lautoka_region 24072
     name: FJ Lautoka Region
     uuid: 4ca1ff26-8518-4abe-b672-1091126a3c87
@@ -151,6 +158,7 @@ networks:
     name: FJ Nadi Namaka Region
     uuid: 7ae70841-6c8f-45c9-9d40-3acef28aa71f
     type_id: 2
+# Supplementary services Networks
   - id: &fj_denarau_region 24089
     name: FJ Denarau Region
     uuid: e49fec51-4c92-4dff-b766-32e8093e64a9
@@ -199,33 +207,28 @@ networks:
     name: FJ Lau Moala Region
     uuid: eb188cdd-acb4-448f-91de-825fa851a463
     type_id: 2
+# Mobile Networks
+  - id: &fj_emergency_services 24393
+    name: FJ Emergency Services
+    uuid: 4a63d20a-8125-401d-81c4-2cec6f69f605
+    type_id: 13
   - id: &fj_labasa_matei_nabouwalu_savusavu_seaqaqa_waiyevo_region 26065
     name: FJ Labasa Matei Nabouwalu Savusavu Seaqaqa Waiyevo Region
     uuid: 7f2ecb2b-ee00-4a3a-abf6-a576984dda91
     type_id: 2
-# Mobile Networks
-  - id: &fj_digicel_mobile 23568
-    name: FJ Digicel Mobile
-    uuid: e4bcd503-068c-4f62-8053-b58e7064edef
-    type_id: 3
-  - id: &fj_vodafone_mobile 23814
-    name: FJ Vodafone Mobile
-    uuid: bf3c08e4-c5e9-4137-a0e6-46e3ace7272a
-    type_id: 3
-  - id: &fj_inkk_mobile_mobile 24002
-    name: FJ Inkk Mobile Mobile
-    uuid: 79dccd81-95a3-4552-8808-198519facf21
-    type_id: 3
+  - id: &fj_fixed 43412
+    name: FJ Fixed
+    uuid: af69cd03-01e2-4805-a256-f2e4a1b6af29
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241992
     prefix: '679'
     number_min_length: 4
     number_max_length: 100
     uuid: 63b31bba-56bd-41b5-8743-805558fc3522
     country_id: *fj
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *fj_fixed
   - id: 242144
     prefix: '6790'
     number_min_length: 6
@@ -282,6 +285,13 @@ network_prefixes:
     uuid: caa70fe2-bb12-4bae-92e1-ed3499a21262
     country_id: *fj
     network_id: *fj_collect_calls_to_usa
+  - id: 242290
+    prefix: '6790700'
+    number_min_length: 12
+    number_max_length: 14
+    uuid: 77b3c7e8-f471-44e0-af3e-6526129d2980
+    country_id: *fj
+    network_id: *fj_voip_region
   - id: 242322
     prefix: '6790800'
     number_min_length: 14
@@ -303,21 +313,13 @@ network_prefixes:
     uuid: 231a21d1-6b9e-47bc-995d-639e53350717
     country_id: *fj
     network_id: *fj_shared_cost_services
-  - id: 257095
-    prefix: '6799'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 74e9c0cb-b24c-42cf-971d-05d640fd7567
+  - id: 248894
+    prefix: '6793'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2eef5850-90e4-40c5-8d39-b25bfdb19244
     country_id: *fj
-    network_id: *fj_emergency_services
-# Fixed Prefixes
-  - id: 242290
-    prefix: '6790700'
-    number_min_length: 12
-    number_max_length: 14
-    uuid: 77b3c7e8-f471-44e0-af3e-6526129d2980
-    country_id: *fj
-    network_id: *fj_voip_region
+    network_id: *fj_central_and_eastern_division_region
   - id: 243364
     prefix: '67932'
     number_min_length: 10
@@ -556,13 +558,6 @@ network_prefixes:
     uuid: 9c770d2a-0b81-4a62-b0a6-09c2f45bbb63
     country_id: *fj
     network_id: *fj_western_division_region
-  - id: 248894
-    prefix: '6793'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2eef5850-90e4-40c5-8d39-b25bfdb19244
-    country_id: *fj
-    network_id: *fj_central_and_eastern_division_region
   - id: 251255
     prefix: '6796500'
     number_min_length: 10
@@ -647,13 +642,6 @@ network_prefixes:
     uuid: cf558e80-3224-4603-8099-5e0318bfb6a6
     country_id: *fj
     network_id: *fj_malomalo_region
-  - id: 253070
-    prefix: '6798'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 309d5ec3-a56c-4914-81df-e9e6f4ede3af
-    country_id: *fj
-    network_id: *fj_northern_division_region
   - id: 254413
     prefix: '6796640'
     number_min_length: 10
@@ -780,6 +768,125 @@ network_prefixes:
     uuid: a89879a7-c7ad-4e12-94af-f39c1d6b1ad0
     country_id: *fj
     network_id: *fj_denarau_region
+  - id: 255293
+    prefix: '67970'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: faca5f63-eafd-4116-bc27-25c3bbe0fbb6
+    country_id: *fj
+    network_id: *fj_digicel_mobile
+  - id: 251736
+    prefix: '67971'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 21c72111-5812-4d7a-b745-97bfeb9a9ce9
+    country_id: *fj
+    network_id: *fj_digicel_mobile
+  - id: 251823
+    prefix: '67972'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ef7f954c-14c2-48b0-84ba-f2a27ec4c77b
+    country_id: *fj
+    network_id: *fj_digicel_mobile
+  - id: 251874
+    prefix: '67973'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ec1d8abc-daf9-40a8-9a20-1a5fa02cb565
+    country_id: *fj
+    network_id: *fj_digicel_mobile
+  - id: 252057
+    prefix: '67974'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 13184c56-ae21-4ebb-8d3f-2c4332afbd7e
+    country_id: *fj
+    network_id: *fj_digicel_mobile
+  - id: 252548
+    prefix: '67975'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cf44c272-149b-49a9-b187-6504bb2b8d97
+    country_id: *fj
+    network_id: *fj_digicel_mobile
+  - id: 255447
+    prefix: '67976'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d8330c91-4068-4a08-be4a-aa0fd924dc75
+    country_id: *fj
+    network_id: *fj_digicel_mobile
+  - id: 255626
+    prefix: '67977'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e966f247-3f2b-4abb-a60e-c518fadec6cc
+    country_id: *fj
+    network_id: *fj_digicel_mobile
+  - id: 253070
+    prefix: '6798'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 309d5ec3-a56c-4914-81df-e9e6f4ede3af
+    country_id: *fj
+    network_id: *fj_northern_division_region
+  - id: 253121
+    prefix: '67980'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc2b7cdb-52e9-48d5-a582-483e9203e1f5
+    country_id: *fj
+    network_id: *fj_vodafone_mobile
+  - id: 253590
+    prefix: '67983'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 18b632ec-dca0-4e02-aed1-3f4994776055
+    country_id: *fj
+    network_id: *fj_vodafone_mobile
+  - id: 253715
+    prefix: '67984'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 90933c47-7a27-45ec-a369-9095686534c3
+    country_id: *fj
+    network_id: *fj_inkk_mobile_mobile
+  - id: 263738
+    prefix: '6798510'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f68d503e-356f-424e-b796-d977596b0dee
+    country_id: *fj
+    network_id: *fj_labasa_matei_nabouwalu_savusavu_seaqaqa_waiyevo_region
+  - id: 263741
+    prefix: '6798511'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4934d5d1-5892-401e-ab80-d5ce056639ce
+    country_id: *fj
+    network_id: *fj_labasa_matei_nabouwalu_savusavu_seaqaqa_waiyevo_region
+  - id: 263743
+    prefix: '6798512'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f647855c-9811-409b-89fc-2c20b175d452
+    country_id: *fj
+    network_id: *fj_labasa_matei_nabouwalu_savusavu_seaqaqa_waiyevo_region
+  - id: 263849
+    prefix: '67986'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ea14b07f-56bc-4fe8-8d06-9463795af206
+    country_id: *fj
+    network_id: *fj_vodafone_mobile
+  - id: 264003
+    prefix: '67987'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c99ef358-c84f-4aac-a560-6a7e1158f8f8
+    country_id: *fj
+    network_id: *fj_inkk_mobile_mobile
   - id: 256870
     prefix: '6798809'
     number_min_length: 10
@@ -794,6 +901,7 @@ network_prefixes:
     uuid: 59f50991-5ed6-40ae-b531-723e7905efc8
     country_id: *fj
     network_id: *fj_labasa_region
+# Supplementary services Prefixes
   - id: 256878
     prefix: '6798812'
     number_min_length: 10
@@ -878,6 +986,7 @@ network_prefixes:
     uuid: dec9f91d-01f8-47ee-b796-014d111df521
     country_id: *fj
     network_id: *fj_soasoa_region
+# Mobile Prefixes
   - id: 256925
     prefix: '6798836'
     number_min_length: 10
@@ -962,105 +1071,6 @@ network_prefixes:
     uuid: f422bbe3-3e18-40f9-805e-5830f6529f2b
     country_id: *fj
     network_id: *fj_lau_moala_region
-  - id: 263738
-    prefix: '6798510'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f68d503e-356f-424e-b796-d977596b0dee
-    country_id: *fj
-    network_id: *fj_labasa_matei_nabouwalu_savusavu_seaqaqa_waiyevo_region
-  - id: 263741
-    prefix: '6798511'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4934d5d1-5892-401e-ab80-d5ce056639ce
-    country_id: *fj
-    network_id: *fj_labasa_matei_nabouwalu_savusavu_seaqaqa_waiyevo_region
-  - id: 263743
-    prefix: '6798512'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f647855c-9811-409b-89fc-2c20b175d452
-    country_id: *fj
-    network_id: *fj_labasa_matei_nabouwalu_savusavu_seaqaqa_waiyevo_region
-# Mobile Prefixes
-  - id: 251736
-    prefix: '67971'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 21c72111-5812-4d7a-b745-97bfeb9a9ce9
-    country_id: *fj
-    network_id: *fj_digicel_mobile
-  - id: 251823
-    prefix: '67972'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ef7f954c-14c2-48b0-84ba-f2a27ec4c77b
-    country_id: *fj
-    network_id: *fj_digicel_mobile
-  - id: 251874
-    prefix: '67973'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ec1d8abc-daf9-40a8-9a20-1a5fa02cb565
-    country_id: *fj
-    network_id: *fj_digicel_mobile
-  - id: 252057
-    prefix: '67974'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 13184c56-ae21-4ebb-8d3f-2c4332afbd7e
-    country_id: *fj
-    network_id: *fj_digicel_mobile
-  - id: 252548
-    prefix: '67975'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cf44c272-149b-49a9-b187-6504bb2b8d97
-    country_id: *fj
-    network_id: *fj_digicel_mobile
-  - id: 253121
-    prefix: '67980'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cc2b7cdb-52e9-48d5-a582-483e9203e1f5
-    country_id: *fj
-    network_id: *fj_vodafone_mobile
-  - id: 253590
-    prefix: '67983'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 18b632ec-dca0-4e02-aed1-3f4994776055
-    country_id: *fj
-    network_id: *fj_vodafone_mobile
-  - id: 253715
-    prefix: '67984'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 90933c47-7a27-45ec-a369-9095686534c3
-    country_id: *fj
-    network_id: *fj_inkk_mobile_mobile
-  - id: 255293
-    prefix: '67970'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: faca5f63-eafd-4116-bc27-25c3bbe0fbb6
-    country_id: *fj
-    network_id: *fj_digicel_mobile
-  - id: 255447
-    prefix: '67976'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d8330c91-4068-4a08-be4a-aa0fd924dc75
-    country_id: *fj
-    network_id: *fj_digicel_mobile
-  - id: 255626
-    prefix: '67977'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e966f247-3f2b-4abb-a60e-c518fadec6cc
-    country_id: *fj
-    network_id: *fj_digicel_mobile
   - id: 256992
     prefix: '67989'
     number_min_length: 10
@@ -1068,6 +1078,13 @@ network_prefixes:
     uuid: eb694992-3f1f-41d1-aaf7-feac01c5499c
     country_id: *fj
     network_id: *fj_vodafone_mobile
+  - id: 257095
+    prefix: '6799'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 74e9c0cb-b24c-42cf-971d-05d640fd7567
+    country_id: *fj
+    network_id: *fj_emergency_services
   - id: 257156
     prefix: '67990'
     number_min_length: 10
@@ -1096,27 +1113,6 @@ network_prefixes:
     uuid: db750a37-a2a9-4cf6-835e-f1ee7e888e94
     country_id: *fj
     network_id: *fj_vodafone_mobile
-  - id: 258180
-    prefix: '67999'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 765b5ac2-0b83-43c7-864b-1f751ecaca0f
-    country_id: *fj
-    network_id: *fj_vodafone_mobile
-  - id: 263849
-    prefix: '67986'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ea14b07f-56bc-4fe8-8d06-9463795af206
-    country_id: *fj
-    network_id: *fj_vodafone_mobile
-  - id: 264003
-    prefix: '67987'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c99ef358-c84f-4aac-a560-6a7e1158f8f8
-    country_id: *fj
-    network_id: *fj_inkk_mobile_mobile
   - id: 264192
     prefix: '67994'
     number_min_length: 10
@@ -1152,3 +1148,10 @@ network_prefixes:
     uuid: ee26f02c-243e-40e4-808d-b5b6ab298bc5
     country_id: *fj
     network_id: *fj_inkk_mobile_mobile
+  - id: 258180
+    prefix: '67999'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 765b5ac2-0b83-43c7-864b-1f751ecaca0f
+    country_id: *fj
+    network_id: *fj_vodafone_mobile

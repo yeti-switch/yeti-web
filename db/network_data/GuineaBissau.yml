@@ -107,15 +107,14 @@ networks:
     uuid: 04d8d3ad-d529-4e1d-9c35-bfe2e3702425
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242005
     prefix: '245'
     number_min_length: 4
     number_max_length: 100
     uuid: 6ffa3263-6a08-4b1b-9be3-e92776a28fef
     country_id: *gw
-    network_id: null
-# Fixed Prefixes
+    network_id: *gw_fixed
   - id: 243937
     prefix: '2454'
     number_min_length: 12

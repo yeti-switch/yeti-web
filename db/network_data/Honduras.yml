@@ -9,15 +9,11 @@ networks:
     name: HN Claro Mobile
     uuid: 7f9f5dd5-5b5b-4c15-a5ca-a407540e1f54
     type_id: 3
-  - id: &hn_tigo_mobile 41577
-    name: HN Tigo Mobile
-    uuid: 39983787-1bbf-49b6-8907-3f006aaa2852
-    type_id: 3
-# Supplementary services Networks
   - id: &hn_special_services 21414
     name: HN Special Services
     uuid: 41869cbb-9d10-495f-ab47-ab277e37b4d0
     type_id: 13
+# Fixed Networks
   - id: &hn_freephone_services 23841
     name: HN Freephone Services
     uuid: 3fb5a655-c899-46d3-9cef-4d20589af068
@@ -30,7 +26,6 @@ networks:
     name: HN Emergency Services
     uuid: 19ae5d5a-30f1-4359-afbf-95880af08702
     type_id: 13
-# Fixed Networks
   - id: &hn_fixed 25843
     name: HN Fixed
     uuid: fff52ce9-eea6-4940-a298-bc1ebd62e58c
@@ -431,6 +426,7 @@ networks:
     name: HN Amapala Nacaome Region
     uuid: ba1e4b96-349b-41d3-943c-54cb88544840
     type_id: 2
+# Supplementary services Networks
   - id: &hn_san_francisco_de_becerra_region 26698
     name: HN San Francisco De Becerra Region
     uuid: 16e99e65-5272-43e4-a126-273c6c2180d9
@@ -443,45 +439,19 @@ networks:
     name: HN Catacamas Region
     uuid: e6c22e38-6cb6-439f-8e54-14e038aa704b
     type_id: 2
+  - id: &hn_tigo_mobile 41577
+    name: HN Tigo Mobile
+    uuid: 39983787-1bbf-49b6-8907-3f006aaa2852
+    type_id: 3
 network_prefixes:
 # Mobile Prefixes
-  - id: 149335
-    prefix: '5047'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 49ef469f-f6d7-4059-9342-25c8c0c248dc
-    country_id: *hn
-    network_id: *hn_hondutel_mobile
-  - id: 207516
-    prefix: '5048'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 65f51df4-24a2-4ea1-beaf-9e3bf7d1c34b
-    country_id: *hn
-    network_id: *hn_claro_mobile
-  - id: 315869
-    prefix: '5043'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8f8be43c-7dbb-402a-9c34-1212ca0673fc
-    country_id: *hn
-    network_id: *hn_claro_mobile
-  - id: 444751
-    prefix: '5049'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 021b24b5-8514-4b62-80d2-93fb10d234fa
-    country_id: *hn
-    network_id: *hn_tigo_mobile
-# Country code Prefixes
   - id: 242013
     prefix: '504'
     number_min_length: 4
     number_max_length: 100
     uuid: ddf4d7d1-de0b-489b-9936-d2c1e15ab88b
     country_id: *hn
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *hn_fixed
   - id: 242411
     prefix: '5041'
     number_min_length: 6
@@ -489,28 +459,6 @@ network_prefixes:
     uuid: eba2267f-5500-4ba4-ae82-507540ca081f
     country_id: *hn
     network_id: *hn_special_services
-  - id: 253154
-    prefix: '504800'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 4306e4e8-41c4-4f31-8d8b-b4493deb1976
-    country_id: *hn
-    network_id: *hn_freephone_services
-  - id: 257180
-    prefix: '504900'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: e42fa625-cb94-4914-af6c-a1107cd58d81
-    country_id: *hn
-    network_id: *hn_advisory_services
-  - id: 257390
-    prefix: '504911'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: f8763a5a-345e-4f8e-9466-948746f0e278
-    country_id: *hn
-    network_id: *hn_emergency_services
-# Fixed Prefixes
   - id: 261191
     prefix: '5042'
     number_min_length: 11
@@ -525,6 +473,7 @@ network_prefixes:
     uuid: f9409ac8-ad64-4dd5-90c1-f0b0736c163d
     country_id: *hn
     network_id: *hn_polo_paz_region
+# Fixed Prefixes
   - id: 261215
     prefix: '5042201'
     number_min_length: 11
@@ -1568,3 +1517,53 @@ network_prefixes:
     uuid: 1bdebf30-60b4-41a4-b5b3-460614c4f5be
     country_id: *hn
     network_id: *hn_catacamas_region
+  - id: 315869
+    prefix: '5043'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f8be43c-7dbb-402a-9c34-1212ca0673fc
+    country_id: *hn
+    network_id: *hn_claro_mobile
+  - id: 149335
+    prefix: '5047'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 49ef469f-f6d7-4059-9342-25c8c0c248dc
+    country_id: *hn
+    network_id: *hn_hondutel_mobile
+  - id: 207516
+    prefix: '5048'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65f51df4-24a2-4ea1-beaf-9e3bf7d1c34b
+    country_id: *hn
+    network_id: *hn_claro_mobile
+# Supplementary services Prefixes
+  - id: 253154
+    prefix: '504800'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 4306e4e8-41c4-4f31-8d8b-b4493deb1976
+    country_id: *hn
+    network_id: *hn_freephone_services
+  - id: 444751
+    prefix: '5049'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 021b24b5-8514-4b62-80d2-93fb10d234fa
+    country_id: *hn
+    network_id: *hn_tigo_mobile
+  - id: 257180
+    prefix: '504900'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: e42fa625-cb94-4914-af6c-a1107cd58d81
+    country_id: *hn
+    network_id: *hn_advisory_services
+  - id: 257390
+    prefix: '504911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: f8763a5a-345e-4f8e-9466-948746f0e278
+    country_id: *hn
+    network_id: *hn_emergency_services

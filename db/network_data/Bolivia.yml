@@ -17,7 +17,7 @@ networks:
     name: BO Tigo Mobile
     uuid: cd480bbf-cc74-4d87-97d3-5b1466f27d47
     type_id: 3
-# Supplementary services Networks
+# Fixed Networks
   - id: &bo_special_services 21370
     name: BO Special Services
     uuid: a6b20e4f-bc6a-4dce-adb8-193a831c41de
@@ -42,7 +42,6 @@ networks:
     name: BO Emergency Services
     uuid: bf20a8b2-a03b-49ed-a1f8-fd7e5afe8238
     type_id: 13
-# Fixed Networks
   - id: &bo_la_paz_potosi_and_oruro_departments_region 25835
     name: BO La Paz Potosi And Oruro Departments Region
     uuid: f6ea0da6-0d32-46f3-953c-f1dd4ea10674
@@ -223,6 +222,7 @@ networks:
     name: BO Sucre Region
     uuid: 91cc1e21-d377-481c-84b9-1ebb1b5ab1f3
     type_id: 2
+# Supplementary services Networks
   - id: &bo_monteagudo_region 34297
     name: BO Monteagudo Region
     uuid: e552e6ba-dc53-4b4e-9c2c-2445ecd6b21d
@@ -243,8 +243,446 @@ networks:
     name: BO Bermejo Region
     uuid: 2f9b7acb-0152-417d-9aab-3b5f4b47b506
     type_id: 2
+  - id: &bo_fixed 43388
+    name: BO Fixed
+    uuid: 5e0a0f58-9f8f-4782-90bb-3170cd5e8202
+    type_id: 2
 network_prefixes:
 # Mobile Prefixes
+  - id: 241959
+    prefix: '591'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 9cae10f6-f1c5-4604-8650-6921d747c925
+    country_id: *bo
+    network_id: *bo_fixed
+  - id: 242364
+    prefix: '5911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 8a5f9def-34d0-4b77-b7a3-4a01068a28b4
+    country_id: *bo
+    network_id: *bo_special_services
+  - id: 261183
+    prefix: '5912'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 99cf25d3-d9ae-4c65-b0af-29d26646422d
+    country_id: *bo
+    network_id: *bo_la_paz_potosi_and_oruro_departments_region
+  - id: 261210
+    prefix: '59122'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 592725b1-b016-4ed5-bc42-0addd65ff9d2
+    country_id: *bo
+    network_id: *bo_la_paz_region
+  - id: 261357
+    prefix: '591252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ea0c245-98e2-4db7-ada1-00413fa05c48
+    country_id: *bo
+    network_id: *bo_oruro_region
+  - id: 261360
+    prefix: '591253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5799a1e-7302-49cf-aa0f-368b95a72270
+    country_id: *bo
+    network_id: *bo_oruro_rural_telephony_region
+  - id: 261368
+    prefix: '591255'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 20785362-702f-49d3-9033-f6d382114296
+    country_id: *bo
+    network_id: *bo_huanuni_region
+  - id: 261376
+    prefix: '5912557'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce52f6f2-2d67-47a1-86a2-59220793d51b
+    country_id: *bo
+    network_id: *bo_challapata_region
+  - id: 261381
+    prefix: '591256'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e836bfc6-8fcf-40bd-afcd-6b506843c45e
+    country_id: *bo
+    network_id: *bo_oruro_rural_telephony_region
+  - id: 261387
+    prefix: '591258'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40d1f8c5-ebbf-4afe-a4ad-d77890e9ba58
+    country_id: *bo
+    network_id: *bo_llallagua_region
+  - id: 261390
+    prefix: '5912596'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 15a2c802-65ad-4885-b8b1-a8815199c57c
+    country_id: *bo
+    network_id: *bo_villazn_region
+  - id: 261399
+    prefix: '591262'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a47e1ea4-bd98-4da1-a046-e909b58382d2
+    country_id: *bo
+    network_id: *bo_potosi_region
+  - id: 261402
+    prefix: '591263'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2b7d7fc-76f4-4c78-8b2e-c4efef8eebf7
+    country_id: *bo
+    network_id: *bo_potosi_rural_telephony_region
+  - id: 261405
+    prefix: '591264'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f15ef2a-c56d-4cf1-866d-c9b72c37fc8e
+    country_id: *bo
+    network_id: *bo_potosi_rural_telephony_region
+  - id: 261478
+    prefix: '5912693'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bde178a8-85f3-4fb5-af05-7a0cd94cccb4
+    country_id: *bo
+    network_id: *bo_uyuni_region
+  - id: 261480
+    prefix: '5912694'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 595c6dfe-0b5e-48ed-87f1-441a834e4a59
+    country_id: *bo
+    network_id: *bo_tupiza_region
+  - id: 267078
+    prefix: '5912823'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 08b02ed2-c3f3-409d-86e7-e5e20ba38948
+    country_id: *bo
+    network_id: *bo_caranavi_region
+  - id: 267080
+    prefix: '5912839'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f496aa94-bbb8-4ce4-9dd5-7667aad36c70
+    country_id: *bo
+    network_id: *bo_patacamaya_region
+  - id: 267089
+    prefix: '5912862'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5ef26972-38d3-4b64-8222-23e260dbb3bc
+    country_id: *bo
+    network_id: *bo_copacabana_region
+  - id: 267091
+    prefix: '591287'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dbb9ff87-9587-47eb-90c1-540e8167d24a
+    country_id: *bo
+    network_id: *bo_la_paz_rural_telephony_region
+  - id: 267096
+    prefix: '591288'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f312558-8b5e-41b6-ba20-ce55d1197771
+    country_id: *bo
+    network_id: *bo_la_paz_rural_telephony_region
+  - id: 315862
+    prefix: '5913'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 104fd50e-db11-41f8-85b1-500590a7c12e
+    country_id: *bo
+    network_id: *bo_santa_cruz_beni_and_pando_departments_region
+  - id: 316177
+    prefix: '59133'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0a1b7d12-1868-49cf-a737-810c7abe7d85
+    country_id: *bo
+    network_id: *bo_santa_cruz_region
+  - id: 316402
+    prefix: '591346'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a83212e1-5b90-447b-a156-07540efb73bc
+    country_id: *bo
+    network_id: *bo_trinidad_region
+  - id: 316411
+    prefix: '591347'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 473631c9-953f-4c95-9288-055ceb7ae6a5
+    country_id: *bo
+    network_id: *bo_beni_rural_telephony_region
+  - id: 316415
+    prefix: '5913482'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cb04f77a-af30-4bc0-a0c8-abdebc3b4e61
+    country_id: *bo
+    network_id: *bo_san_ignacio_de_moxos_region
+  - id: 316417
+    prefix: '5913484'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3fa15c43-b44f-41bb-9cad-5a20ef4b514b
+    country_id: *bo
+    network_id: *bo_santa_ana_region
+  - id: 316425
+    prefix: '591349'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34c6c6a2-a83d-4384-9d3a-6e15b9241f50
+    country_id: *bo
+    network_id: *bo_beni_rural_telephony_region
+  - id: 316945
+    prefix: '5913825'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd0a7a7d-24f3-4048-a0e8-a599786b12fd
+    country_id: *bo
+    network_id: *bo_reyes_region
+  - id: 316947
+    prefix: '591383'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 042063dd-b866-4f38-a7e0-d0204cb7556a
+    country_id: *bo
+    network_id: *bo_pando_rural_telephony_region
+  - id: 316949
+    prefix: '5913842'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e942715a-f740-493e-91a4-e25f4462210f
+    country_id: *bo
+    network_id: *bo_cobija_region
+  - id: 316951
+    prefix: '5913852'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 15cb081a-4c73-411b-94d8-862b436c8a43
+    country_id: *bo
+    network_id: *bo_riberalta_region
+  - id: 316952
+    prefix: '5913855'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 685550a4-6c4f-46f7-9d14-49c74241c627
+    country_id: *bo
+    network_id: *bo_guayaramerin_region
+  - id: 316954
+    prefix: '591386'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2027a9aa-4a6d-48a8-8988-c32645d12272
+    country_id: *bo
+    network_id: *bo_pando_rural_telephony_region
+  - id: 316957
+    prefix: '5913886'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b242be4e-a6c1-436a-bf2b-86e1a2998c73
+    country_id: *bo
+    network_id: *bo_magdalena_region
+  - id: 316959
+    prefix: '5913892'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8aefaf7d-64c8-4d48-89e5-cf7374b8ff26
+    country_id: *bo
+    network_id: *bo_rurrenabaque_san_buenaventura_region
+  - id: 316960
+    prefix: '5913895'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2a282cc6-1527-4ce6-8b37-dbc8b9701b0c
+    country_id: *bo
+    network_id: *bo_san_borja_region
+  - id: 317134
+    prefix: '5913952'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3bb57ea-4f49-47ce-b9a0-9ce5fc4c2fa4
+    country_id: *bo
+    network_id: *bo_camiri_region
+  - id: 317152
+    prefix: '5913954'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b468c1b9-f5d6-48fb-9e64-95dae19f5f2c
+    country_id: *bo
+    network_id: *bo_gutierrez_charagua_region
+  - id: 317187
+    prefix: '5913972'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a8c4cf08-8cd2-4f40-a779-ff5c66ec891a
+    country_id: *bo
+    network_id: *bo_san_jose_de_chiquitos_region
+  - id: 317208
+    prefix: '5913974'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 775fc9ad-e897-4df5-8319-6c9f7f321a8f
+    country_id: *bo
+    network_id: *bo_robore_region
+  - id: 317229
+    prefix: '5913976'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 35683b06-972d-4809-b38b-3f1c9581f3b9
+    country_id: *bo
+    network_id: *bo_puerto_suarez_region
+  - id: 317242
+    prefix: '5913979'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: af85f298-f9dc-4769-a540-7b85ba68e05a
+    country_id: *bo
+    network_id: *bo_san_matias_region
+  - id: 309420
+    prefix: '591398'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 06e2618e-669d-4780-8223-d91e7d7c89cb
+    country_id: *bo
+    network_id: *bo_santa_cruz_rural_telephony_region
+  - id: 309459
+    prefix: '591399'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9661ef08-08db-4ae0-b10f-dd0f2e7f9fb0
+    country_id: *bo
+    network_id: *bo_santa_cruz_rural_telephony_region
+  - id: 349440
+    prefix: '5914'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1816c1de-e46a-42ab-b7dc-ae95e5188260
+    country_id: *bo
+    network_id: *bo_cochabamba_chuquisaca_and_tarija_departments_region
+  - id: 349559
+    prefix: '59144'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 66d0e72c-4513-4dd3-85ed-8a04e312fbb5
+    country_id: *bo
+    network_id: *bo_cochabamba_region
+  - id: 349567
+    prefix: '5914438'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 877c8283-9aa9-4c94-8738-fc3f1b80c1a3
+    country_id: *bo
+    network_id: *bo_capinota_region
+  - id: 349602
+    prefix: '591449'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc4413e2-3db7-4b02-87ff-459813d08021
+    country_id: *bo
+    network_id: *bo_cochabamba_rural_telephony_region
+  - id: 349613
+    prefix: '591450'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9bb27214-4420-4a46-93cf-fd03859ea5aa
+    country_id: *bo
+    network_id: *bo_cochabamba_rural_telephony_region
+  - id: 349614
+    prefix: '591451'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8cf4586f-dc1a-4011-9126-1293815268ca
+    country_id: *bo
+    network_id: *bo_chuquisaca_rural_telephony_region
+  - id: 349615
+    prefix: '591452'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc33a4f1-955f-43ce-b860-f2da88db5c62
+    country_id: *bo
+    network_id: *bo_tarija_rural_telephony_region
+  - id: 349667
+    prefix: '5914629'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2dc0802a-6ca0-4bc9-a1d8-bd7aa274d844
+    country_id: *bo
+    network_id: *bo_camargo_region
+  - id: 349668
+    prefix: '591463'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a292bdb6-d02d-41c7-a756-665c53600b5c
+    country_id: *bo
+    network_id: *bo_chuquisaca_rural_telephony_region
+  - id: 349669
+    prefix: '591464'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7c49f61f-00a7-4e78-bcbf-cd73c2570a37
+    country_id: *bo
+    network_id: *bo_sucre_region
+  - id: 349672
+    prefix: '5914647'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e30df939-a854-4bf5-a178-d3bdea66f55c
+    country_id: *bo
+    network_id: *bo_monteagudo_region
+  - id: 349673
+    prefix: '591465'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc9e8515-7d28-4b75-bf23-e1e3a52e0950
+    country_id: *bo
+    network_id: *bo_tarija_rural_telephony_region
+  - id: 349685
+    prefix: '591466'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db9d3b15-361c-4433-bb4e-0b767d299628
+    country_id: *bo
+    network_id: *bo_tarija_region
+  - id: 349687
+    prefix: '5914672'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7236e730-f0a7-4d6d-8112-b77fd83745e3
+    country_id: *bo
+    network_id: *bo_villamontes_region
+  - id: 349688
+    prefix: '591468'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a10dacc-6763-46e5-9b7a-166d08dc9013
+    country_id: *bo
+    network_id: *bo_yacuiba_region
+  - id: 349689
+    prefix: '591469'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65e0d0bf-1752-4548-ad00-3524cd96fdfd
+    country_id: *bo
+    network_id: *bo_bermejo_region
+  - id: 249613
+    prefix: '59150'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1ec30984-1b55-4e39-ae40-d76061fac132
+    country_id: *bo
+    network_id: *bo_voip
   - id: 84939
     prefix: '5916'
     number_min_length: 11
@@ -406,6 +844,7 @@ network_prefixes:
     uuid: 8ddf75ec-94b5-4523-8b8c-fc3a85896bf2
     country_id: *bo
     network_id: *bo_entel_movil_mobile
+# Fixed Prefixes
   - id: 149651
     prefix: '5917423'
     number_min_length: 11
@@ -826,6 +1265,7 @@ network_prefixes:
     uuid: cac98939-2f43-482f-a0a8-fa546bc395a5
     country_id: *bo
     network_id: *bo_tigo_mobile
+# Supplementary services Prefixes
   - id: 149879
     prefix: '59178'
     number_min_length: 11
@@ -840,29 +1280,6 @@ network_prefixes:
     uuid: 624398bc-9d92-427e-9e06-772564b65c37
     country_id: *bo
     network_id: *bo_viva_mobile
-# Country code Prefixes
-  - id: 241959
-    prefix: '591'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 9cae10f6-f1c5-4604-8650-6921d747c925
-    country_id: *bo
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242364
-    prefix: '5911'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 8a5f9def-34d0-4b77-b7a3-4a01068a28b4
-    country_id: *bo
-    network_id: *bo_special_services
-  - id: 249613
-    prefix: '59150'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1ec30984-1b55-4e39-ae40-d76061fac132
-    country_id: *bo
-    network_id: *bo_voip
   - id: 253136
     prefix: '591800'
     number_min_length: 12
@@ -891,417 +1308,3 @@ network_prefixes:
     uuid: d81d9493-63ef-4856-99af-d9680b84991b
     country_id: *bo
     network_id: *bo_emergency_services
-# Fixed Prefixes
-  - id: 261183
-    prefix: '5912'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 99cf25d3-d9ae-4c65-b0af-29d26646422d
-    country_id: *bo
-    network_id: *bo_la_paz_potosi_and_oruro_departments_region
-  - id: 261210
-    prefix: '59122'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 592725b1-b016-4ed5-bc42-0addd65ff9d2
-    country_id: *bo
-    network_id: *bo_la_paz_region
-  - id: 261357
-    prefix: '591252'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ea0c245-98e2-4db7-ada1-00413fa05c48
-    country_id: *bo
-    network_id: *bo_oruro_region
-  - id: 261360
-    prefix: '591253'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a5799a1e-7302-49cf-aa0f-368b95a72270
-    country_id: *bo
-    network_id: *bo_oruro_rural_telephony_region
-  - id: 261368
-    prefix: '591255'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 20785362-702f-49d3-9033-f6d382114296
-    country_id: *bo
-    network_id: *bo_huanuni_region
-  - id: 261376
-    prefix: '5912557'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ce52f6f2-2d67-47a1-86a2-59220793d51b
-    country_id: *bo
-    network_id: *bo_challapata_region
-  - id: 261381
-    prefix: '591256'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e836bfc6-8fcf-40bd-afcd-6b506843c45e
-    country_id: *bo
-    network_id: *bo_oruro_rural_telephony_region
-  - id: 261387
-    prefix: '591258'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 40d1f8c5-ebbf-4afe-a4ad-d77890e9ba58
-    country_id: *bo
-    network_id: *bo_llallagua_region
-  - id: 261390
-    prefix: '5912596'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 15a2c802-65ad-4885-b8b1-a8815199c57c
-    country_id: *bo
-    network_id: *bo_villazn_region
-  - id: 261399
-    prefix: '591262'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a47e1ea4-bd98-4da1-a046-e909b58382d2
-    country_id: *bo
-    network_id: *bo_potosi_region
-  - id: 261402
-    prefix: '591263'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c2b7d7fc-76f4-4c78-8b2e-c4efef8eebf7
-    country_id: *bo
-    network_id: *bo_potosi_rural_telephony_region
-  - id: 261405
-    prefix: '591264'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f15ef2a-c56d-4cf1-866d-c9b72c37fc8e
-    country_id: *bo
-    network_id: *bo_potosi_rural_telephony_region
-  - id: 261478
-    prefix: '5912693'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bde178a8-85f3-4fb5-af05-7a0cd94cccb4
-    country_id: *bo
-    network_id: *bo_uyuni_region
-  - id: 261480
-    prefix: '5912694'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 595c6dfe-0b5e-48ed-87f1-441a834e4a59
-    country_id: *bo
-    network_id: *bo_tupiza_region
-  - id: 267078
-    prefix: '5912823'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 08b02ed2-c3f3-409d-86e7-e5e20ba38948
-    country_id: *bo
-    network_id: *bo_caranavi_region
-  - id: 267080
-    prefix: '5912839'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f496aa94-bbb8-4ce4-9dd5-7667aad36c70
-    country_id: *bo
-    network_id: *bo_patacamaya_region
-  - id: 267089
-    prefix: '5912862'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5ef26972-38d3-4b64-8222-23e260dbb3bc
-    country_id: *bo
-    network_id: *bo_copacabana_region
-  - id: 267091
-    prefix: '591287'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dbb9ff87-9587-47eb-90c1-540e8167d24a
-    country_id: *bo
-    network_id: *bo_la_paz_rural_telephony_region
-  - id: 267096
-    prefix: '591288'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8f312558-8b5e-41b6-ba20-ce55d1197771
-    country_id: *bo
-    network_id: *bo_la_paz_rural_telephony_region
-  - id: 309420
-    prefix: '591398'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 06e2618e-669d-4780-8223-d91e7d7c89cb
-    country_id: *bo
-    network_id: *bo_santa_cruz_rural_telephony_region
-  - id: 309459
-    prefix: '591399'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9661ef08-08db-4ae0-b10f-dd0f2e7f9fb0
-    country_id: *bo
-    network_id: *bo_santa_cruz_rural_telephony_region
-  - id: 315862
-    prefix: '5913'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 104fd50e-db11-41f8-85b1-500590a7c12e
-    country_id: *bo
-    network_id: *bo_santa_cruz_beni_and_pando_departments_region
-  - id: 316177
-    prefix: '59133'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0a1b7d12-1868-49cf-a737-810c7abe7d85
-    country_id: *bo
-    network_id: *bo_santa_cruz_region
-  - id: 316402
-    prefix: '591346'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a83212e1-5b90-447b-a156-07540efb73bc
-    country_id: *bo
-    network_id: *bo_trinidad_region
-  - id: 316411
-    prefix: '591347'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 473631c9-953f-4c95-9288-055ceb7ae6a5
-    country_id: *bo
-    network_id: *bo_beni_rural_telephony_region
-  - id: 316415
-    prefix: '5913482'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cb04f77a-af30-4bc0-a0c8-abdebc3b4e61
-    country_id: *bo
-    network_id: *bo_san_ignacio_de_moxos_region
-  - id: 316417
-    prefix: '5913484'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3fa15c43-b44f-41bb-9cad-5a20ef4b514b
-    country_id: *bo
-    network_id: *bo_santa_ana_region
-  - id: 316425
-    prefix: '591349'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 34c6c6a2-a83d-4384-9d3a-6e15b9241f50
-    country_id: *bo
-    network_id: *bo_beni_rural_telephony_region
-  - id: 316945
-    prefix: '5913825'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd0a7a7d-24f3-4048-a0e8-a599786b12fd
-    country_id: *bo
-    network_id: *bo_reyes_region
-  - id: 316947
-    prefix: '591383'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 042063dd-b866-4f38-a7e0-d0204cb7556a
-    country_id: *bo
-    network_id: *bo_pando_rural_telephony_region
-  - id: 316949
-    prefix: '5913842'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e942715a-f740-493e-91a4-e25f4462210f
-    country_id: *bo
-    network_id: *bo_cobija_region
-  - id: 316951
-    prefix: '5913852'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 15cb081a-4c73-411b-94d8-862b436c8a43
-    country_id: *bo
-    network_id: *bo_riberalta_region
-  - id: 316952
-    prefix: '5913855'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 685550a4-6c4f-46f7-9d14-49c74241c627
-    country_id: *bo
-    network_id: *bo_guayaramerin_region
-  - id: 316954
-    prefix: '591386'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2027a9aa-4a6d-48a8-8988-c32645d12272
-    country_id: *bo
-    network_id: *bo_pando_rural_telephony_region
-  - id: 316957
-    prefix: '5913886'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b242be4e-a6c1-436a-bf2b-86e1a2998c73
-    country_id: *bo
-    network_id: *bo_magdalena_region
-  - id: 316959
-    prefix: '5913892'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8aefaf7d-64c8-4d48-89e5-cf7374b8ff26
-    country_id: *bo
-    network_id: *bo_rurrenabaque_san_buenaventura_region
-  - id: 316960
-    prefix: '5913895'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2a282cc6-1527-4ce6-8b37-dbc8b9701b0c
-    country_id: *bo
-    network_id: *bo_san_borja_region
-  - id: 317134
-    prefix: '5913952'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b3bb57ea-4f49-47ce-b9a0-9ce5fc4c2fa4
-    country_id: *bo
-    network_id: *bo_camiri_region
-  - id: 317152
-    prefix: '5913954'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b468c1b9-f5d6-48fb-9e64-95dae19f5f2c
-    country_id: *bo
-    network_id: *bo_gutierrez_charagua_region
-  - id: 317187
-    prefix: '5913972'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a8c4cf08-8cd2-4f40-a779-ff5c66ec891a
-    country_id: *bo
-    network_id: *bo_san_jose_de_chiquitos_region
-  - id: 317208
-    prefix: '5913974'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 775fc9ad-e897-4df5-8319-6c9f7f321a8f
-    country_id: *bo
-    network_id: *bo_robore_region
-  - id: 317229
-    prefix: '5913976'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 35683b06-972d-4809-b38b-3f1c9581f3b9
-    country_id: *bo
-    network_id: *bo_puerto_suarez_region
-  - id: 317242
-    prefix: '5913979'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: af85f298-f9dc-4769-a540-7b85ba68e05a
-    country_id: *bo
-    network_id: *bo_san_matias_region
-  - id: 349440
-    prefix: '5914'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1816c1de-e46a-42ab-b7dc-ae95e5188260
-    country_id: *bo
-    network_id: *bo_cochabamba_chuquisaca_and_tarija_departments_region
-  - id: 349559
-    prefix: '59144'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 66d0e72c-4513-4dd3-85ed-8a04e312fbb5
-    country_id: *bo
-    network_id: *bo_cochabamba_region
-  - id: 349567
-    prefix: '5914438'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 877c8283-9aa9-4c94-8738-fc3f1b80c1a3
-    country_id: *bo
-    network_id: *bo_capinota_region
-  - id: 349602
-    prefix: '591449'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc4413e2-3db7-4b02-87ff-459813d08021
-    country_id: *bo
-    network_id: *bo_cochabamba_rural_telephony_region
-  - id: 349613
-    prefix: '591450'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9bb27214-4420-4a46-93cf-fd03859ea5aa
-    country_id: *bo
-    network_id: *bo_cochabamba_rural_telephony_region
-  - id: 349614
-    prefix: '591451'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8cf4586f-dc1a-4011-9126-1293815268ca
-    country_id: *bo
-    network_id: *bo_chuquisaca_rural_telephony_region
-  - id: 349615
-    prefix: '591452'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bc33a4f1-955f-43ce-b860-f2da88db5c62
-    country_id: *bo
-    network_id: *bo_tarija_rural_telephony_region
-  - id: 349667
-    prefix: '5914629'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2dc0802a-6ca0-4bc9-a1d8-bd7aa274d844
-    country_id: *bo
-    network_id: *bo_camargo_region
-  - id: 349668
-    prefix: '591463'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a292bdb6-d02d-41c7-a756-665c53600b5c
-    country_id: *bo
-    network_id: *bo_chuquisaca_rural_telephony_region
-  - id: 349669
-    prefix: '591464'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7c49f61f-00a7-4e78-bcbf-cd73c2570a37
-    country_id: *bo
-    network_id: *bo_sucre_region
-  - id: 349672
-    prefix: '5914647'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e30df939-a854-4bf5-a178-d3bdea66f55c
-    country_id: *bo
-    network_id: *bo_monteagudo_region
-  - id: 349673
-    prefix: '591465'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc9e8515-7d28-4b75-bf23-e1e3a52e0950
-    country_id: *bo
-    network_id: *bo_tarija_rural_telephony_region
-  - id: 349685
-    prefix: '591466'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: db9d3b15-361c-4433-bb4e-0b767d299628
-    country_id: *bo
-    network_id: *bo_tarija_region
-  - id: 349687
-    prefix: '5914672'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7236e730-f0a7-4d6d-8112-b77fd83745e3
-    country_id: *bo
-    network_id: *bo_villamontes_region
-  - id: 349688
-    prefix: '591468'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4a10dacc-6763-46e5-9b7a-166d08dc9013
-    country_id: *bo
-    network_id: *bo_yacuiba_region
-  - id: 349689
-    prefix: '591469'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 65e0d0bf-1752-4548-ad00-3524cd96fdfd
-    country_id: *bo
-    network_id: *bo_bermejo_region

@@ -5,31 +5,6 @@ networks:
     name: UY Alternative Collection Services
     uuid: bdb6b8ce-d75e-4d0c-86ec-3a074153d633
     type_id: 13
-  - id: &uy_preselected_international_network_operator 21288
-    name: UY Preselected International Network Operator
-    uuid: 8b1a962f-e8b3-4492-bc59-99982be5ced0
-    type_id: 13
-  - id: &uy_selected_international_network_operator 21299
-    name: UY Selected International Network Operator
-    uuid: cbd059c0-5077-4eaf-8997-2746dd65dd3f
-    type_id: 13
-  - id: &uy_special_services 21508
-    name: UY Special Services
-    uuid: 5f02ea8a-2266-4a72-8a7f-c7cd408de73f
-    type_id: 13
-  - id: &uy_emergency_service 24490
-    name: UY Emergency Service
-    uuid: d3f2d370-f3be-4106-89c7-8a945390ef1a
-    type_id: 13
-  - id: &uy_freephone_services 38520
-    name: UY Freephone Services
-    uuid: 3b8b9a20-96c7-4236-a37c-95f6f5046dde
-    type_id: 13
-  - id: &uy_value_added_services 41688
-    name: UY Value Added Services
-    uuid: df5417ca-09e5-46c2-af08-3cec094ab019
-    type_id: 13
-# Mobile Networks
   - id: &uy_movistar_mobile 20043
     name: UY Movistar Mobile
     uuid: ffe5aaad-f31f-4da7-a7f1-484dcc25e951
@@ -46,7 +21,19 @@ networks:
     name: UY Mobile
     uuid: 8f7768b9-877b-401c-ab13-de5e148dfc16
     type_id: 3
-# Fixed Networks
+  - id: &uy_preselected_international_network_operator 21288
+    name: UY Preselected International Network Operator
+    uuid: 8b1a962f-e8b3-4492-bc59-99982be5ced0
+    type_id: 13
+  - id: &uy_selected_international_network_operator 21299
+    name: UY Selected International Network Operator
+    uuid: cbd059c0-5077-4eaf-8997-2746dd65dd3f
+    type_id: 13
+# Mobile Networks
+  - id: &uy_special_services 21508
+    name: UY Special Services
+    uuid: 5f02ea8a-2266-4a72-8a7f-c7cd408de73f
+    type_id: 13
   - id: &uy_interior_del_pais_region 22151
     name: UY Interior Del Pais Region
     uuid: 1bdc39e0-5616-43ce-8c1b-f7e01b404e41
@@ -59,6 +46,7 @@ networks:
     name: UY Casupa Region
     uuid: 542aa6c6-6d62-4f72-8c18-9f2565c0692e
     type_id: 2
+# Fixed Networks
   - id: &uy_san_ramon_region 22250
     name: UY San Ramon Region
     uuid: e6fd044b-0449-43db-a280-5f2f109850b8
@@ -511,15 +499,31 @@ networks:
     name: UY Bella Union Region
     uuid: b4f0f3b7-7c55-4c70-a0c0-165a5bb1d388
     type_id: 2
+  - id: &uy_emergency_service 24490
+    name: UY Emergency Service
+    uuid: d3f2d370-f3be-4106-89c7-8a945390ef1a
+    type_id: 13
+  - id: &uy_freephone_services 38520
+    name: UY Freephone Services
+    uuid: 3b8b9a20-96c7-4236-a37c-95f6f5046dde
+    type_id: 13
+  - id: &uy_value_added_services 41688
+    name: UY Value Added Services
+    uuid: df5417ca-09e5-46c2-af08-3cec094ab019
+    type_id: 13
+  - id: &uy_fixed 43480
+    name: UY Fixed
+    uuid: 22a21e08-543e-4a66-931c-9d06784e283f
+    type_id: 2
 network_prefixes:
 # Supplementary services Prefixes
-  - id: 209221
-    prefix: '598805'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 621b034b-185a-4197-ab38-6e2578970218
+  - id: 242127
+    prefix: '598'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 4d21eaa9-51ea-42bf-97d0-d64d9c071372
     country_id: *uy
-    network_id: *uy_alternative_collection_services
+    network_id: *uy_fixed
   - id: 242159
     prefix: '598000'
     number_min_length: 6
@@ -541,219 +545,13 @@ network_prefixes:
     uuid: b8205e44-a65a-48a0-9111-2e5ebe8518a7
     country_id: *uy
     network_id: *uy_special_services
-  - id: 257397
-    prefix: '598911'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 327b9779-6dbd-4111-91bf-98b110b3d243
-    country_id: *uy
-    network_id: *uy_emergency_service
-  - id: 403496
-    prefix: '598800'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 03b24060-8c25-424f-bf5c-04afce53c786
-    country_id: *uy
-    network_id: *uy_freephone_services
-  - id: 447289
-    prefix: '598903'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0235ce8c-1d51-4a54-ae2a-3a6b16861787
-    country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 454590
-    prefix: '598900'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0fb42526-cbab-4b4a-8764-a1257132de96
-    country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 454714
-    prefix: '598901'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ffdf5a78-2e1d-4311-bebd-1dab1d433ad9
-    country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 454957
-    prefix: '598902'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dd701180-8081-4c19-822b-b290433fb945
-    country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 455872
-    prefix: '598904'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 788003f8-2537-406f-9c13-bf045f5a5432
-    country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 456601
-    prefix: '598907'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: eca01c61-3948-43cf-86f4-1d177bf1bc10
-    country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 457263
-    prefix: '598908'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dffe74f4-60d5-4971-9cd9-43288679127a
-    country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 462681
-    prefix: '598905'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6a14d94c-6a71-4cd4-8c16-01c0ed6ce95a
-    country_id: *uy
-    network_id: *uy_value_added_services
-  - id: 462752
-    prefix: '598906'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 42f298d3-2ec2-4c90-a9f0-84844bcb8e74
-    country_id: *uy
-    network_id: *uy_value_added_services
-# Mobile Prefixes
-  - id: 212513
-    prefix: '59894'
+  - id: 247445
+    prefix: '5982'
     number_min_length: 11
     number_max_length: 11
-    uuid: 1f0c98f3-f851-4ff2-8b65-c2fa7ddcdc16
+    uuid: 7f77a8a7-67cc-4c4c-88e3-00ab2fb1a3bc
     country_id: *uy
-    network_id: *uy_movistar_mobile
-  - id: 215155
-    prefix: '59895'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 014b02ea-d2a3-48d2-9868-bc17e598680a
-    country_id: *uy
-    network_id: *uy_movistar_mobile
-  - id: 221955
-    prefix: '59896'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a0bb0004-fa49-476c-a026-f6d0de68cb87
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 224445
-    prefix: '598971'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0e9aff0b-811a-459a-a299-975c2c013942
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 224546
-    prefix: '598972'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5905851b-a6c6-437e-b596-ed680f345cb8
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 224646
-    prefix: '598973'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 87be12a7-6db9-4ed4-a875-ec9cb116fe28
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 224747
-    prefix: '598974'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b18d2423-a679-429f-a535-0b25b66a645b
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 227375
-    prefix: '598970'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1b9b62e6-0602-47ac-8886-3b65683be168
-    country_id: *uy
-    network_id: *uy_claro_mobile
-  - id: 231743
-    prefix: '59898'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 93a6701b-b61f-4a6b-9f9f-732549dae1ad
-    country_id: *uy
-    network_id: *uy_antel_movil_mobile
-  - id: 239381
-    prefix: '59899'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3ffb821f-fb5e-4c80-b560-a0c5d650898d
-    country_id: *uy
-    network_id: *uy_antel_movil_mobile
-  - id: 241928
-    prefix: '5989'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 60bb6265-126f-4175-b124-3dd66fe4f53b
-    country_id: *uy
-    network_id: *uy_mobile
-  - id: 458160
-    prefix: '59891'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f48a47e-248f-4726-9e91-171768fab3fd
-    country_id: *uy
-    network_id: *uy_antel_movil_mobile
-  - id: 468957
-    prefix: '598920'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e0cf474b-249d-41e1-b766-5fa7880f91b2
-    country_id: *uy
-    network_id: *uy_antel_movil_mobile
-  - id: 469083
-    prefix: '598921'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5f406c11-0262-4c2a-83c9-05fe9be41577
-    country_id: *uy
-    network_id: *uy_antel_movil_mobile
-  - id: 476297
-    prefix: '598922'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 73be08e0-accc-4a75-906f-3bb845fa18a4
-    country_id: *uy
-    network_id: *uy_antel_movil_mobile
-  - id: 485535
-    prefix: '598937'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3c667fbb-5c2d-43e7-8ee5-34ff7ae798bc
-    country_id: *uy
-    network_id: *uy_movistar_mobile
-  - id: 485570
-    prefix: '598938'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a97018f8-8f79-457d-987b-0286e2ffd47e
-    country_id: *uy
-    network_id: *uy_movistar_mobile
-  - id: 485614
-    prefix: '598939'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f98d9a03-3191-451a-9e1b-6c5cd408e3ae
-    country_id: *uy
-    network_id: *uy_movistar_mobile
-# Country code Prefixes
-  - id: 242127
-    prefix: '598'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 4d21eaa9-51ea-42bf-97d0-d64d9c071372
-    country_id: *uy
-    network_id: null
-# Fixed Prefixes
+    network_id: *uy_montevideo_area_metropolitana_amm_region
   - id: 243969
     prefix: '5984'
     number_min_length: 11
@@ -824,6 +622,7 @@ network_prefixes:
     uuid: c636a598-1b26-4685-b4af-39e2fc5c6e07
     country_id: *uy
     network_id: *uy_casupa_region
+# Mobile Prefixes
   - id: 244351
     prefix: '59843102'
     number_min_length: 11
@@ -950,6 +749,7 @@ network_prefixes:
     uuid: e64067c1-cf1a-45be-87c5-097dbe1fe656
     country_id: *uy
     network_id: *uy_25_de_mayo_region
+# Fixed Prefixes
   - id: 244386
     prefix: '5984338'
     number_min_length: 11
@@ -1804,13 +1604,6 @@ network_prefixes:
     uuid: 597c695b-fb02-4305-8c7d-6c9f6f7a95e4
     country_id: *uy
     network_id: *uy_san_javier_region
-  - id: 247445
-    prefix: '5982'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7f77a8a7-67cc-4c4c-88e3-00ab2fb1a3bc
-    country_id: *uy
-    network_id: *uy_montevideo_area_metropolitana_amm_region
   - id: 249031
     prefix: '59845705'
     number_min_length: 11
@@ -2245,3 +2038,213 @@ network_prefixes:
     uuid: 005a15a2-7513-4b52-858c-afb55c9a22d0
     country_id: *uy
     network_id: *uy_bella_union_region
+  - id: 403496
+    prefix: '598800'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 03b24060-8c25-424f-bf5c-04afce53c786
+    country_id: *uy
+    network_id: *uy_freephone_services
+  - id: 209221
+    prefix: '598805'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 621b034b-185a-4197-ab38-6e2578970218
+    country_id: *uy
+    network_id: *uy_alternative_collection_services
+  - id: 241928
+    prefix: '5989'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 60bb6265-126f-4175-b124-3dd66fe4f53b
+    country_id: *uy
+    network_id: *uy_mobile
+  - id: 454590
+    prefix: '598900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0fb42526-cbab-4b4a-8764-a1257132de96
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 454714
+    prefix: '598901'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ffdf5a78-2e1d-4311-bebd-1dab1d433ad9
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 454957
+    prefix: '598902'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dd701180-8081-4c19-822b-b290433fb945
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 447289
+    prefix: '598903'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0235ce8c-1d51-4a54-ae2a-3a6b16861787
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 455872
+    prefix: '598904'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 788003f8-2537-406f-9c13-bf045f5a5432
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 462681
+    prefix: '598905'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6a14d94c-6a71-4cd4-8c16-01c0ed6ce95a
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 462752
+    prefix: '598906'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 42f298d3-2ec2-4c90-a9f0-84844bcb8e74
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 456601
+    prefix: '598907'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eca01c61-3948-43cf-86f4-1d177bf1bc10
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 457263
+    prefix: '598908'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dffe74f4-60d5-4971-9cd9-43288679127a
+    country_id: *uy
+    network_id: *uy_value_added_services
+  - id: 458160
+    prefix: '59891'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f48a47e-248f-4726-9e91-171768fab3fd
+    country_id: *uy
+    network_id: *uy_antel_movil_mobile
+  - id: 257397
+    prefix: '598911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 327b9779-6dbd-4111-91bf-98b110b3d243
+    country_id: *uy
+    network_id: *uy_emergency_service
+  - id: 468957
+    prefix: '598920'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e0cf474b-249d-41e1-b766-5fa7880f91b2
+    country_id: *uy
+    network_id: *uy_antel_movil_mobile
+  - id: 469083
+    prefix: '598921'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5f406c11-0262-4c2a-83c9-05fe9be41577
+    country_id: *uy
+    network_id: *uy_antel_movil_mobile
+  - id: 476297
+    prefix: '598922'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 73be08e0-accc-4a75-906f-3bb845fa18a4
+    country_id: *uy
+    network_id: *uy_antel_movil_mobile
+  - id: 485535
+    prefix: '598937'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3c667fbb-5c2d-43e7-8ee5-34ff7ae798bc
+    country_id: *uy
+    network_id: *uy_movistar_mobile
+  - id: 485570
+    prefix: '598938'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a97018f8-8f79-457d-987b-0286e2ffd47e
+    country_id: *uy
+    network_id: *uy_movistar_mobile
+  - id: 485614
+    prefix: '598939'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f98d9a03-3191-451a-9e1b-6c5cd408e3ae
+    country_id: *uy
+    network_id: *uy_movistar_mobile
+  - id: 212513
+    prefix: '59894'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1f0c98f3-f851-4ff2-8b65-c2fa7ddcdc16
+    country_id: *uy
+    network_id: *uy_movistar_mobile
+  - id: 215155
+    prefix: '59895'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 014b02ea-d2a3-48d2-9868-bc17e598680a
+    country_id: *uy
+    network_id: *uy_movistar_mobile
+  - id: 221955
+    prefix: '59896'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0bb0004-fa49-476c-a026-f6d0de68cb87
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 227375
+    prefix: '598970'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1b9b62e6-0602-47ac-8886-3b65683be168
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 224445
+    prefix: '598971'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0e9aff0b-811a-459a-a299-975c2c013942
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 224546
+    prefix: '598972'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5905851b-a6c6-437e-b596-ed680f345cb8
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 224646
+    prefix: '598973'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87be12a7-6db9-4ed4-a875-ec9cb116fe28
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 224747
+    prefix: '598974'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b18d2423-a679-429f-a535-0b25b66a645b
+    country_id: *uy
+    network_id: *uy_claro_mobile
+  - id: 231743
+    prefix: '59898'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 93a6701b-b61f-4a6b-9f9f-732549dae1ad
+    country_id: *uy
+    network_id: *uy_antel_movil_mobile
+  - id: 239381
+    prefix: '59899'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3ffb821f-fb5e-4c80-b560-a0c5d650898d
+    country_id: *uy
+    network_id: *uy_antel_movil_mobile

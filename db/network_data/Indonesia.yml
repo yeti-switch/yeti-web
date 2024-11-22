@@ -609,6 +609,14 @@ networks:
     name: ID Sekupang Batam Region
     uuid: 8a01c95e-638c-4f8c-baf8-a510ba7c5938
     type_id: 2
+  - id: &id_shared_cost_services 19921
+    name: ID Shared Cost Services
+    uuid: 56770c7f-444d-41cb-9613-2613ccdcb103
+    type_id: 13
+  - id: &id_virtual_private_network 19964
+    name: ID Virtual Private Network
+    uuid: 0d8cbdbc-0ac0-4d53-93f8-ea569b98a261
+    type_id: 13
   - id: &id_kaimana_region 20318
     name: ID Kaimana Region
     uuid: 5ba76bc6-a2aa-4f87-af17-02e800922794
@@ -741,6 +749,34 @@ networks:
     name: ID Numfor Region
     uuid: fdebfcb6-b3b2-4eb2-a26e-76fefe530277
     type_id: 2
+  - id: &id_special_services 21418
+    name: ID Special Services
+    uuid: 4330843b-bd2b-4cbc-aa18-de0b88ec4b41
+    type_id: 13
+  - id: &id_emergency_services 21566
+    name: ID Emergency Services
+    uuid: 33f743e2-9782-4892-8a5e-70ad7370ba86
+    type_id: 13
+  - id: &id_callling_card_services 21725
+    name: ID Callling Card Services
+    uuid: f9c9c199-10e0-43ca-96bc-60e5d932d3d1
+    type_id: 13
+  - id: &id_customer_care_services 21777
+    name: ID Customer Care Services
+    uuid: f1f486e7-f83e-473b-8693-891519b0e70c
+    type_id: 13
+  - id: &id_voip_services 21850
+    name: ID Voip Services
+    uuid: 89d9a057-e377-412a-b3b9-9c5783cd6ed2
+    type_id: 13
+  - id: &id_community_service_centers 22702
+    name: ID Community Service Centers
+    uuid: 3cc51bab-7c8f-4e9a-bbae-0b533717fad9
+    type_id: 13
+  - id: &id_special_and_sms_services 24401
+    name: ID Special And Sms Services
+    uuid: 6668e95b-32ca-4e1f-abef-72de33498528
+    type_id: 13
   - id: &id_jakarta_region 27336
     name: ID Jakarta Region
     uuid: 1b4306bd-7080-495e-9977-abfa01cb5e6c
@@ -1321,10 +1357,50 @@ networks:
     name: ID Soroako Region
     uuid: 04f2bd51-8a40-406f-adb8-1f428922c5b5
     type_id: 2
+  - id: &id_mass_calling_services 38409
+    name: ID Mass Calling Services
+    uuid: 652986da-0dcc-4b95-bfef-8852b242eb1d
+    type_id: 13
+  - id: &id_freephone_services 38498
+    name: ID Freephone Services
+    uuid: 953a1fb0-3a48-46d0-9b83-924fb0644ab8
+    type_id: 13
+  - id: &id_universal_personal_telecommunications_upt 38534
+    name: ID Universal Personal Telecommunications Upt
+    uuid: 5d2ee8a2-affb-48c0-b2d4-92a892127d2c
+    type_id: 13
+  - id: &id_telkomsel_mobile 38670
+    name: ID Telkomsel Mobile
+    uuid: 48ec45f2-03ed-40af-b820-d2bdefa47f7a
+    type_id: 3
+  - id: &id_indosat_ooredoo_hutchison_mobile 38759
+    name: ID Indosat Ooredoo Hutchison Mobile
+    uuid: 9ad384ec-0e5b-4224-842f-2fd48a4009f8
+    type_id: 3
+  - id: &id_xl_mobile 38924
+    name: ID Xl Mobile
+    uuid: 3477e999-3e37-4110-8cd9-e403822e3ff4
+    type_id: 3
+  - id: &id_universal_access_number_uan 39172
+    name: ID Universal Access Number Uan
+    uuid: d4a38092-a6d6-484e-98ee-2f4cab92473f
+    type_id: 13
+  - id: &id_credit_account_card_calling_services 39263
+    name: ID Credit_Account Card Calling Services
+    uuid: f46dab86-3ba4-491f-a985-e6fb3aea00f6
+    type_id: 13
+  - id: &id_premium_rate_services 39285
+    name: ID Premium Rate Services
+    uuid: 70bc31a7-ec30-425e-ba3d-770572f85fe9
+    type_id: 13
   - id: &id_enarotali_region 41684
     name: ID Enarotali Region
     uuid: abb2a941-4091-43ce-8c6e-c381e9e57b50
     type_id: 2
+  - id: &id_smartfren_mobile 41906
+    name: ID Smartfren Mobile
+    uuid: 2b2e827f-8bd1-4b64-8aed-b163f089aba0
+    type_id: 3
   - id: &id_timika_region 42104
     name: ID Timika Region
     uuid: 9270993d-5584-46ee-aff2-9d693566cea3
@@ -1345,6 +1421,7 @@ networks:
     name: ID Masohi Region
     uuid: 24248edc-9612-48ba-8e92-bf4e30361703
     type_id: 2
+# Supplementary services Networks
   - id: &id_dobo_region 42526
     name: ID Dobo Region
     uuid: c88c164a-249c-4d4a-887a-18037b220e3e
@@ -1405,6 +1482,7 @@ networks:
     name: ID Sanana Region
     uuid: 76666d36-fd00-4f48-9436-6c063a1acc59
     type_id: 2
+# Mobile Networks
   - id: &id_labuha_region 43021
     name: ID Labuha Region
     uuid: 6009088b-edae-4bd6-896f-fb80c04118c2
@@ -1417,1381 +1495,82 @@ networks:
     name: ID Saparua Region
     uuid: 2c72a0de-2491-448b-a964-f42bb40745d9
     type_id: 2
-# Supplementary services Networks
-  - id: &id_shared_cost_services 19921
-    name: ID Shared Cost Services
-    uuid: 56770c7f-444d-41cb-9613-2613ccdcb103
-    type_id: 13
-  - id: &id_virtual_private_network 19964
-    name: ID Virtual Private Network
-    uuid: 0d8cbdbc-0ac0-4d53-93f8-ea569b98a261
-    type_id: 13
-  - id: &id_special_services 21418
-    name: ID Special Services
-    uuid: 4330843b-bd2b-4cbc-aa18-de0b88ec4b41
-    type_id: 13
-  - id: &id_emergency_services 21566
-    name: ID Emergency Services
-    uuid: 33f743e2-9782-4892-8a5e-70ad7370ba86
-    type_id: 13
-  - id: &id_callling_card_services 21725
-    name: ID Callling Card Services
-    uuid: f9c9c199-10e0-43ca-96bc-60e5d932d3d1
-    type_id: 13
-  - id: &id_customer_care_services 21777
-    name: ID Customer Care Services
-    uuid: f1f486e7-f83e-473b-8693-891519b0e70c
-    type_id: 13
-  - id: &id_voip_services 21850
-    name: ID Voip Services
-    uuid: 89d9a057-e377-412a-b3b9-9c5783cd6ed2
-    type_id: 13
-  - id: &id_community_service_centers 22702
-    name: ID Community Service Centers
-    uuid: 3cc51bab-7c8f-4e9a-bbae-0b533717fad9
-    type_id: 13
-  - id: &id_special_and_sms_services 24401
-    name: ID Special And Sms Services
-    uuid: 6668e95b-32ca-4e1f-abef-72de33498528
-    type_id: 13
-  - id: &id_mass_calling_services 38409
-    name: ID Mass Calling Services
-    uuid: 652986da-0dcc-4b95-bfef-8852b242eb1d
-    type_id: 13
-  - id: &id_freephone_services 38498
-    name: ID Freephone Services
-    uuid: 953a1fb0-3a48-46d0-9b83-924fb0644ab8
-    type_id: 13
-  - id: &id_universal_personal_telecommunications_upt 38534
-    name: ID Universal Personal Telecommunications Upt
-    uuid: 5d2ee8a2-affb-48c0-b2d4-92a892127d2c
-    type_id: 13
-  - id: &id_universal_access_number_uan 39172
-    name: ID Universal Access Number Uan
-    uuid: d4a38092-a6d6-484e-98ee-2f4cab92473f
-    type_id: 13
-  - id: &id_credit_account_card_calling_services 39263
-    name: ID Credit_Account Card Calling Services
-    uuid: f46dab86-3ba4-491f-a985-e6fb3aea00f6
-    type_id: 13
-  - id: &id_premium_rate_services 39285
-    name: ID Premium Rate Services
-    uuid: 70bc31a7-ec30-425e-ba3d-770572f85fe9
-    type_id: 13
-# Mobile Networks
-  - id: &id_telkomsel_mobile 38670
-    name: ID Telkomsel Mobile
-    uuid: 48ec45f2-03ed-40af-b820-d2bdefa47f7a
-    type_id: 3
-  - id: &id_indosat_ooredoo_hutchison_mobile 38759
-    name: ID Indosat Ooredoo Hutchison Mobile
-    uuid: 9ad384ec-0e5b-4224-842f-2fd48a4009f8
-    type_id: 3
-  - id: &id_xl_mobile 38924
-    name: ID Xl Mobile
-    uuid: 3477e999-3e37-4110-8cd9-e403822e3ff4
-    type_id: 3
-  - id: &id_smartfren_mobile 41906
-    name: ID Smartfren Mobile
-    uuid: 2b2e827f-8bd1-4b64-8aed-b163f089aba0
-    type_id: 3
+  - id: &id_fixed 43420
+    name: ID Fixed
+    uuid: 17b9f4be-e0ae-4972-8e80-d9d142701608
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
-  - id: 52973
-    prefix: '62485'
+  - id: 242017
+    prefix: '62'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 882aa51d-41d6-4481-902e-0415ccb07fdf
+    country_id: *id
+    network_id: *id_fixed
+  - id: 242415
+    prefix: '621'
+    number_min_length: 5
+    number_max_length: 7
+    uuid: b05028ee-8e09-42ed-ab8c-61efc6a4e5d2
+    country_id: *id
+    network_id: *id_special_services
+  - id: 242593
+    prefix: '6211'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 8c05cda0-2af2-41b8-a036-601baf256073
+    country_id: *id
+    network_id: *id_emergency_services
+  - id: 242821
+    prefix: '62120'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 6e1bdecd-db48-436a-83d3-835be7c98e90
+    country_id: *id
+    network_id: *id_callling_card_services
+  - id: 242916
+    prefix: '62140'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: c4c02a13-6e42-4539-8be1-cbf6cd588a3f
+    country_id: *id
+    network_id: *id_customer_care_services
+  - id: 242954
+    prefix: '62150'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 788e88ea-3ce6-4387-aa76-032a82f38cbe
+    country_id: *id
+    network_id: *id_customer_care_services
+  - id: 242958
+    prefix: '621500'
     number_min_length: 9
-    number_max_length: 11
-    uuid: 9c8dec28-49b4-4ee2-8961-14d88a852d77
-    country_id: *id
-    network_id: *id_sengkang_region
-  - id: 56452
-    prefix: '62481'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 28308016-85cf-4118-98d0-af8668b5c472
-    country_id: *id
-    network_id: *id_watampone_region
-  - id: 56893
-    prefix: '62482'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: d2ee31ed-f30c-4c76-afe0-1045e3aaac24
-    country_id: *id
-    network_id: *id_sinjai_region
-  - id: 57219
-    prefix: '62484'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 567a97d4-50bb-4a3a-9679-0338da10381d
-    country_id: *id
-    network_id: *id_watansopeng_region
-  - id: 64871
-    prefix: '62517'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: f2c2f25c-edbc-4835-a1e7-137fbdb0000c
-    country_id: *id
-    network_id: *id_kandangan_region
-  - id: 65507
-    prefix: '62518'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 1f34a240-a877-4ea7-ab16-0b57676e5171
-    country_id: *id
-    network_id: *id_batu_licin_kotabaru_region
-  - id: 68166
-    prefix: '62511'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 0078ca11-5905-4687-9c84-1d7677401142
-    country_id: *id
-    network_id: *id_banjarmasin_marabahan_region
-  - id: 68204
-    prefix: '62512'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 6584279e-fb22-4431-b886-0e0e36e5eddc
-    country_id: *id
-    network_id: *id_pleihari_region
-  - id: 68996
-    prefix: '62513'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 29c69f54-dce3-4f0a-8e11-680008abc88e
-    country_id: *id
-    network_id: *id_kuala_kapuas_region
-  - id: 70852
-    prefix: '62519'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 0dc80d19-0837-4cb5-bebd-1f630531b464
-    country_id: *id
-    network_id: *id_muarateweh_region
-  - id: 72511
-    prefix: '62531'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 1cd6723c-de76-4684-9ebe-071d1f782834
-    country_id: *id
-    network_id: *id_sampit_region
-  - id: 72730
-    prefix: '62532'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: e56575bf-c52f-41be-a5a8-de2b5cf3531e
-    country_id: *id
-    network_id: *id_pangkalan_bun_region
-  - id: 72758
-    prefix: '62533'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 7df6f8e5-affa-4a02-b8e7-fa0ebf299907
-    country_id: *id
-    network_id: *id_tumbang_samba_region
-  - id: 72801
-    prefix: '62534'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: f6684fea-4e59-49ef-9934-d07281c6593f
-    country_id: *id
-    network_id: *id_ketapang_region
-  - id: 72931
-    prefix: '62536'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 7e8f8b43-0ea0-4678-8216-b084f80d88ea
-    country_id: *id
-    network_id: *id_palangkaraya_region
-  - id: 72960
-    prefix: '62537'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 5954b34a-67b2-4dbe-98ca-e69a054796a5
-    country_id: *id
-    network_id: *id_kuala_kurun_region
-  - id: 72979
-    prefix: '62538'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: c3386301-8355-49eb-97d3-a398ad72ee69
-    country_id: *id
-    network_id: *id_kuala_pembuang_region
-  - id: 72988
-    prefix: '62539'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 004042d9-ea65-489b-97a9-9c58c97defc7
-    country_id: *id
-    network_id: *id_kuala_kuayan_region
-  - id: 74121
-    prefix: '62541'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 4db2198f-a0fc-46c6-8ac2-b07fb2d3d6e8
-    country_id: *id
-    network_id: *id_samarinda_region
-  - id: 76328
-    prefix: '62522'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: a30af884-ac8e-4964-b1fa-a135ad26b9a4
-    country_id: *id
-    network_id: *id_ampah_region
-  - id: 76416
-    prefix: '62525'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 963a46f0-5d17-46cd-8c8e-faef059b0d3b
-    country_id: *id
-    network_id: *id_buntok_region
-  - id: 76450
-    prefix: '62526'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: d224b93a-0a29-4dae-9dfa-37a53f1a6126
-    country_id: *id
-    network_id: *id_tanjung_tabalong_region
-  - id: 76473
-    prefix: '62527'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: b96cc730-9dbd-40c3-ada4-335d827f7463
-    country_id: *id
-    network_id: *id_amuntai_region
-  - id: 76498
-    prefix: '62528'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 8c85983d-90dd-4fd2-afe4-7fd36478819f
-    country_id: *id
-    network_id: *id_purukcahu_region
-  - id: 77500
-    prefix: '62542'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: cea7872a-f095-4f10-9d1b-63fa9f63b6cf
-    country_id: *id
-    network_id: *id_balikpapan_region
-  - id: 77523
-    prefix: '62543'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: d5c61437-a7a3-440f-af0d-3792e8109e7e
-    country_id: *id
-    network_id: *id_tanah_grogot_region
-  - id: 77538
-    prefix: '62544'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 132a7878-ff5d-43d8-9960-485e095f015b
-    country_id: *id
-    network_id: *id_tiongohang_region
-  - id: 77581
-    prefix: '62545'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: a95c468f-07ed-4678-b77a-5fecbefe05a3
-    country_id: *id
-    network_id: *id_longiram_region
-  - id: 77606
-    prefix: '62546'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: aac9c31b-fcad-4a62-8eb5-a39b1245bc1f
-    country_id: *id
-    network_id: *id_tabang_region
-  - id: 77625
-    prefix: '62547'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 0cce0f4a-7de1-4e8a-b125-4c4e125b5dab
-    country_id: *id
-    network_id: *id_sangkulirang_region
-  - id: 77644
-    prefix: '62548'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: b187b4f8-3f0e-4063-8a7f-57d04841e301
-    country_id: *id
-    network_id: *id_bontang_region
-  - id: 78087
-    prefix: '62549'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 2157ec9c-c5af-45e8-9627-03adebb408c7
-    country_id: *id
-    network_id: *id_sangatta_region
-  - id: 80641
-    prefix: '62561'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 43ab5791-5c73-4dfe-8cbc-04188e4c80b8
-    country_id: *id
-    network_id: *id_mempawah_pontianak_region
-  - id: 82011
-    prefix: '62573'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 406a0c25-a8ce-4df5-ac12-08c71c8d34e4
-    country_id: *id
-    network_id: *id_sukadana_region
-  - id: 83328
-    prefix: '62582'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 778feba2-49e3-46b4-b81e-dc9316af7b3a
-    country_id: *id
-    network_id: *id_semitau_region
-  - id: 86694
-    prefix: '62551'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: a68beeac-034d-4f2b-a764-e8886c0ad9cb
-    country_id: *id
-    network_id: *id_tarakan_region
-  - id: 86970
-    prefix: '62552'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: f3b8e7b7-588b-48a3-ba46-1211625cd0cc
-    country_id: *id
-    network_id: *id_tanjung_selor_region
-  - id: 87007
-    prefix: '62553'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: e37ce23e-d4aa-4393-908b-6bdb6fc7091c
-    country_id: *id
-    network_id: *id_malinau_region
-  - id: 87026
-    prefix: '62554'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: a7ee5c9e-c0ad-4e64-989c-6ca764d6b625
-    country_id: *id
-    network_id: *id_tanjungredep_region
-  - id: 87054
-    prefix: '62555'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: fa5c852d-36df-4ebd-89a3-123227413748
-    country_id: *id
-    network_id: *id_longnawang_region
-  - id: 87076
-    prefix: '62556'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 21efc409-e746-4c25-abd5-981026c52694
-    country_id: *id
-    network_id: *id_nunukan_region
-  - id: 88598
-    prefix: '62562'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 4a667e85-5f03-44e7-98ff-a3645fc66b43
-    country_id: *id
-    network_id: *id_singkawang_region
-  - id: 89283
-    prefix: '62563'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: f3eecc4c-a81d-474a-b579-1b4942233b6f
-    country_id: *id
-    network_id: *id_ngabang_region
-  - id: 89671
-    prefix: '62564'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 903fff0f-10db-4bdc-9fa3-4abab49e3ed5
-    country_id: *id
-    network_id: *id_balai_karangan_sanggau_region
-  - id: 89787
-    prefix: '62565'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: cee49f6b-2feb-49de-aa02-39d5975ab200
-    country_id: *id
-    network_id: *id_sintang_region
-  - id: 89826
-    prefix: '62567'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 89016b2d-126f-411a-93b6-efefebf467e9
-    country_id: *id
-    network_id: *id_putussibau_region
-  - id: 90233
-    prefix: '62568'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 0a8f8a9b-b01f-4507-b7e9-3ee8a9127d06
-    country_id: *id
-    network_id: *id_nangapinoh_sambas_region
-  - id: 91455
-    prefix: '62574'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 3cd99090-aad2-4383-b249-b021f5755377
-    country_id: *id
-    network_id: *id_nangatayap_region
-  - id: 91865
-    prefix: '62575'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: b3ea0ccb-44f0-4236-b057-5f05f81dd4d3
-    country_id: *id
-    network_id: *id_padang_karimata_region
-  - id: 108579
-    prefix: '6261'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cf2587f2-9463-4070-bfff-9043025b4146
-    country_id: *id
-    network_id: *id_medan_region
-  - id: 112484
-    prefix: '62620'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 917f16c1-da65-4b15-9f8b-3765c5c97042
-    country_id: *id
-    network_id: *id_pangkalan_brandan_region
-  - id: 113191
-    prefix: '62621'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cd56cea9-b31a-47ea-a65b-5f33611f9d68
-    country_id: *id
-    network_id: *id_tebingtinggi_region
-  - id: 113227
-    prefix: '62622'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f2e2bfbe-4ec8-4cde-b6ea-915cdf052327
-    country_id: *id
-    network_id: *id_pematang_siantar_region
-  - id: 113851
-    prefix: '62627'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 1c1f6be5-91b0-4d8e-9a7c-b7c29518217f
-    country_id: *id
-    network_id: *id_sidikalang_region
-  - id: 114217
-    prefix: '62628'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 444a3ea8-1324-435f-b518-463eedaed568
-    country_id: *id
-    network_id: *id_kabanjahe_region
-  - id: 114430
-    prefix: '62629'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a1106106-85d6-4843-b40d-19546a137978
-    country_id: *id
-    network_id: *id_kutacane_region
-  - id: 114639
-    prefix: '62632'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 9cfc87e1-d8b3-490c-8f1a-e383b37ccefa
-    country_id: *id
-    network_id: *id_balige_region
-  - id: 114799
-    prefix: '62633'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 55b2975d-5e48-47b7-a255-782c622284e8
-    country_id: *id
-    network_id: *id_tarutung_region
-  - id: 115572
-    prefix: '62623'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 78649937-6717-4c29-8238-50bdd1427d67
-    country_id: *id
-    network_id: *id_kisaran_region
-  - id: 115958
-    prefix: '62624'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 9617b002-6a68-4800-9410-d4a10a7b94af
-    country_id: *id
-    network_id: *id_rantau_prapat_region
-  - id: 116798
-    prefix: '62625'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: bbe8228e-182a-4acf-9b9e-25af12bdb888
-    country_id: *id
-    network_id: *id_parapat_region
-  - id: 117147
-    prefix: '62626'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: ba6adfa4-2675-41cb-9bfe-9912824a204d
-    country_id: *id
-    network_id: *id_pangururan_region
-  - id: 118879
-    prefix: '62630'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 90a8f39f-3899-4856-961a-aac806723a1c
-    country_id: *id
-    network_id: *id_teluk_dalam_region
-  - id: 119678
-    prefix: '62631'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 4532c23d-e9fe-4aaf-9852-2ad16f1e7405
-    country_id: *id
-    network_id: *id_sibolga_region
-  - id: 120990
-    prefix: '62638'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 51fddc7b-7da4-4d5e-863a-661f4e08c675
-    country_id: *id
-    network_id: *id_barus_region
-  - id: 121269
-    prefix: '62639'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6d957f11-108d-4079-92d9-58e11884d4fd
-    country_id: *id
-    network_id: *id_gunung_sitoli_region
-  - id: 123659
-    prefix: '62641'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b4d6e5b4-c40f-4198-b4da-885980e2c15d
-    country_id: *id
-    network_id: *id_langsa_region
-  - id: 124163
-    prefix: '62634'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 76a5e0b2-ecf0-4b46-892a-613dc604635a
-    country_id: *id
-    network_id: *id_padang_sidempuan_region
-  - id: 124254
-    prefix: '62635'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 56924f73-603b-424d-89fd-ffa327ed5a7f
-    country_id: *id
-    network_id: *id_gunungtua_region
-  - id: 124336
-    prefix: '62636'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 2c4761e0-0e1c-464f-95ae-2adf1829ad6d
-    country_id: *id
-    network_id: *id_natal_panyabungan_region
-  - id: 124952
-    prefix: '62646'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: ba02b7bd-653b-471c-a707-63f7b5f5a2d2
-    country_id: *id
-    network_id: *id_idi_region
-  - id: 126596
-    prefix: '62650'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 002b2003-8954-48b3-aeb9-a2dba510ca78
-    country_id: *id
-    network_id: *id_sinabang_region
-  - id: 127134
-    prefix: '62654'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 90ea440d-9fa0-4c0c-b68e-36910d48d9ab
-    country_id: *id
-    network_id: *id_calang_region
-  - id: 127162
-    prefix: '62655'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 5cffad0b-75a1-4b59-8ae2-75013b22e3b4
-    country_id: *id
-    network_id: *id_meulaboh_region
-  - id: 127188
-    prefix: '62656'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 0cf4de14-46ac-47f8-bd52-0d7d5e922727
-    country_id: *id
-    network_id: *id_tapaktuan_region
-  - id: 133041
-    prefix: '62642'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 3769d170-2e02-4e77-a7f3-096c058509f9
-    country_id: *id
-    network_id: *id_blangkejeren_region
-  - id: 133401
-    prefix: '62643'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a930376a-e31a-4378-bba2-720e91210a11
-    country_id: *id
-    network_id: *id_takengon_region
-  - id: 133452
-    prefix: '62644'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: bb06702f-5985-4a65-a018-1ce232ef0753
-    country_id: *id
-    network_id: *id_bireun_region
-  - id: 133964
-    prefix: '62645'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 2430aba0-f914-4941-81bf-9d81b7573917
-    country_id: *id
-    network_id: *id_lhok_seumawe_region
-  - id: 136661
-    prefix: '62651'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 3d0fcfdd-73af-4a36-a9ad-839968a196c0
-    country_id: *id
-    network_id: *id_banda_aceh_region
-  - id: 137190
-    prefix: '62652'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 658e4537-3f20-4fea-823d-e06abc273b90
-    country_id: *id
-    network_id: *id_sabang_region
-  - id: 137257
-    prefix: '62653'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 9a2ec610-7fc6-40cb-9643-2e2326c4cd7a
-    country_id: *id
-    network_id: *id_sigli_region
-  - id: 137643
-    prefix: '62657'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 20c9caf1-11b2-4d71-a127-41b8059501a9
-    country_id: *id
-    network_id: *id_bakongan_region
-  - id: 138343
-    prefix: '62658'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 079aa0dd-05f9-4149-9a48-9a9a1572a6d8
-    country_id: *id
-    network_id: *id_singkil_region
-  - id: 138403
-    prefix: '62659'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 5be55cfa-d8bf-4653-b263-33173264f365
-    country_id: *id
-    network_id: *id_blang_pidie_region
-  - id: 150701
-    prefix: '62702'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6da0d07e-2852-4de0-80f3-177985560a7f
-    country_id: *id
-    network_id: *id_tebing_tinggi_region
-  - id: 157878
-    prefix: '62711'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 166ea2a5-f2ff-4ff5-a874-c439dbe85e25
-    country_id: *id
-    network_id: *id_palembang_region
-  - id: 157965
-    prefix: '62712'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8d09aa60-5828-4dd5-ab32-5eeecadf63d9
-    country_id: *id
-    network_id: *id_kayu_agung_region
-  - id: 159090
-    prefix: '62713'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 60ca864c-d8af-4597-9c1c-9f7173d84a59
-    country_id: *id
-    network_id: *id_prabumulih_region
-  - id: 160459
-    prefix: '62716'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fd4a3340-373d-4b9b-9dda-969c9ed7bb69
-    country_id: *id
-    network_id: *id_mentok_region
-  - id: 164977
-    prefix: '62714'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 402bb59a-5610-4f24-93c5-12f2786c082e
-    country_id: *id
-    network_id: *id_sekayu_region
-  - id: 165863
-    prefix: '62715'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b02109cb-37c0-43c5-b600-486eab83973a
-    country_id: *id
-    network_id: *id_belinyu_region
-  - id: 166729
-    prefix: '62717'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 51f96e26-8071-455a-922b-21c7edb2e2b6
-    country_id: *id
-    network_id: *id_pangkal_pinang_region
-  - id: 167578
-    prefix: '62718'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8b520bcf-d8dc-48a7-9783-26cac29e9e00
-    country_id: *id
-    network_id: *id_koba_region
-  - id: 169517
-    prefix: '62721'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 898a6c7a-9cce-4df0-89e3-85612013ae8d
-    country_id: *id
-    network_id: *id_bandar_lampung_pringsewu_region
-  - id: 169652
-    prefix: '62722'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a614e5be-74d5-4a0f-a74f-d4667f4b9e8a
-    country_id: *id
-    network_id: *id_kota_agung_region
-  - id: 170425
-    prefix: '62725'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 38984e85-190a-470a-919b-7fb887341d31
-    country_id: *id
-    network_id: *id_bandar_jaya_metro_region
-  - id: 170693
-    prefix: '62726'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f85b7540-6928-48f0-bb08-4a530def09a7
-    country_id: *id
-    network_id: *id_manggala_region
-  - id: 171842
-    prefix: '62719'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6b8f3939-6483-4e13-8416-2b0ed1cfb755
-    country_id: *id
-    network_id: *id_tanjung_pandan_region
-  - id: 173122
-    prefix: '62723'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 86c4d538-78bb-4008-9fa9-f29255529c92
-    country_id: *id
-    network_id: *id_blambangan_umpu_region
-  - id: 173214
-    prefix: '62724'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e71fc9c2-d1b7-40f2-8ac8-be4b089b499e
-    country_id: *id
-    network_id: *id_kotabumi_region
-  - id: 174270
-    prefix: '62728'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a8750b1d-aa11-4767-a4b4-3de569876f93
-    country_id: *id
-    network_id: *id_krui_liwa_region
-  - id: 174387
-    prefix: '62729'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 3a583bf2-e86c-4fd5-b514-37eec7794a9a
-    country_id: *id
-    network_id: *id_pringsewu_region
-  - id: 175898
-    prefix: '62730'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: c20a8b4d-354f-4f58-8351-a3d27896823d
-    country_id: *id
-    network_id: *id_pagaralam_region
-  - id: 175957
-    prefix: '62731'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f10c3af5-4af1-4f73-9a6b-a185ec79fe6d
-    country_id: *id
-    network_id: *id_lahat_region
-  - id: 176374
-    prefix: '62732'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: dc1c48dc-c2f7-4080-a335-d723be3be90b
-    country_id: *id
-    network_id: *id_curup_region
-  - id: 177335
-    prefix: '62733'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fb2bf3c2-1a64-4aca-911a-5565ae466209
-    country_id: *id
-    network_id: *id_lubuk_linggau_region
-  - id: 177845
-    prefix: '62735'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 91441907-ff8c-490e-98f7-a6cd27a41edc
-    country_id: *id
-    network_id: *id_baturaja_region
-  - id: 178473
-    prefix: '62736'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 97b8fbac-97d3-4d34-a439-7ce9f4462a14
-    country_id: *id
-    network_id: *id_bengkulu_region
-  - id: 178587
-    prefix: '62737'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 40abf832-4786-46b9-ace7-449f01d93566
-    country_id: *id
-    network_id: *id_argamakmur_region
-  - id: 179306
-    prefix: '62745'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 23b73f95-4731-4dbd-a2f8-a6c51d4aa24b
-    country_id: *id
-    network_id: *id_sarolangun_region
-  - id: 179481
-    prefix: '62746'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8faf9164-5bec-4764-b432-f7ab95fed0bd
-    country_id: *id
-    network_id: *id_bangko_region
-  - id: 179653
-    prefix: '62747'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 20e29113-593b-4a5d-ac21-d60d67b691eb
-    country_id: *id
-    network_id: *id_muarabungo_region
-  - id: 179941
-    prefix: '62755'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 2639ba6c-9e7a-4410-9c82-4f002b00ec8b
-    country_id: *id
-    network_id: *id_solok_region
-  - id: 180278
-    prefix: '62756'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: dfdf12a5-aed0-4f5c-8755-2f60e5dedc53
-    country_id: *id
-    network_id: *id_painan_region
-  - id: 180590
-    prefix: '62757'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: c4a6efa5-f6ec-4bbd-adcb-fb5db99ef16a
-    country_id: *id
-    network_id: *id_balaisalasa_region
-  - id: 181109
-    prefix: '62727'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b9d0b31d-6ffc-4241-8a45-34bc230641d9
-    country_id: *id
-    network_id: *id_kalianda_region
-  - id: 181480
-    prefix: '62734'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 95fe48b3-4cfd-48f0-81b9-4220c2449346
-    country_id: *id
-    network_id: *id_muaraenim_region
-  - id: 182708
-    prefix: '62738'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: c11962be-3003-45e1-a7e2-0246031b7536
-    country_id: *id
-    network_id: *id_muara_aman_region
-  - id: 182766
-    prefix: '62739'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: ba787633-ba76-4d55-858e-e4be3181771e
-    country_id: *id
-    network_id: *id_manna_region
-  - id: 183423
-    prefix: '62740'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a65e628c-ea9d-4e9a-8952-a465156e39f8
-    country_id: *id
-    network_id: *id_mendara_pangkalan_bulian_region
-  - id: 184220
-    prefix: '62741'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d1238c18-ff3f-4b6a-acf4-473cee969caa
-    country_id: *id
-    network_id: *id_jambi_region
-  - id: 184386
-    prefix: '62742'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 58bdaeaa-99d7-4316-b2b7-1bfc4afe7e92
-    country_id: *id
-    network_id: *id_kuala_tungkal_region
-  - id: 184621
-    prefix: '62743'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 116a880b-9ec7-4a8b-9eb0-0f6de6c10ca7
-    country_id: *id
-    network_id: *id_muarabulian_region
-  - id: 184817
-    prefix: '62744'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 180307f4-4533-4f62-ac2f-f2914ff707e7
-    country_id: *id
-    network_id: *id_muaratebo_region
-  - id: 185531
-    prefix: '62748'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 54cae9b6-c2f1-45be-9741-d8c070054070
-    country_id: *id
-    network_id: *id_sungai_penuh_region
-  - id: 186340
-    prefix: '62751'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d0396d24-8a3f-4030-8788-19fc601fd416
-    country_id: *id
-    network_id: *id_padang_region
-  - id: 186372
-    prefix: '62752'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 791a0d46-5e5e-4679-904d-ca475f7834eb
-    country_id: *id
-    network_id: *id_bukittinggi_region
-  - id: 186401
-    prefix: '62753'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 1637be23-aac9-4a0f-b395-dfc5c0a52a69
-    country_id: *id
-    network_id: *id_lubuk_sikaping_region
-  - id: 186909
-    prefix: '62754'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 5b4913b1-3278-4cfc-bb66-ddc048339f54
-    country_id: *id
-    network_id: *id_sijunjung_region
-  - id: 187753
-    prefix: '62758'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 14a27289-4830-42e1-be14-150b37a09fa2
-    country_id: *id
-    network_id: *id_matobe_region
-  - id: 187886
-    prefix: '62759'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 660071be-872f-4ea4-be17-08dddd4a273d
-    country_id: *id
-    network_id: *id_muara_siberut_region
-  - id: 188700
-    prefix: '62760'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 5da94f48-2640-489e-a55b-b504c0b781af
-    country_id: *id
-    network_id: *id_teluk_kuantan_region
-  - id: 189501
-    prefix: '62761'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 78bf9175-0a64-49f7-9319-2f91b62137cf
-    country_id: *id
-    network_id: *id_pekanbaru_region
-  - id: 189549
-    prefix: '62762'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 1f7210f5-ad84-45af-be3c-af1a88efdb1e
-    country_id: *id
-    network_id: *id_bangkinang_region
-  - id: 190354
-    prefix: '62766'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b5247880-cea0-49fe-a115-0ccb98bca7c4
-    country_id: *id
-    network_id: *id_bengkalis_region
-  - id: 190556
-    prefix: '62767'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: b1746d17-14de-42e8-9e29-3be37e671c63
-    country_id: *id
-    network_id: *id_bagan_siapiapi_region
-  - id: 191130
-    prefix: '62763'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8a8cc500-86b9-4b5d-b815-c615ffa62fb7
-    country_id: *id
-    network_id: *id_selat_panjang_region
-  - id: 191540
-    prefix: '62764'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 50a1f57c-09ed-4b27-9346-01e7f792bb40
-    country_id: *id
-    network_id: *id_siak_sriindrapura_region
-  - id: 191689
-    prefix: '62765'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: f1080617-ed75-4b52-ab52-bda0616b7e10
-    country_id: *id
-    network_id: *id_dumai_region
-  - id: 192570
-    prefix: '62770'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 71d5291b-478c-4f94-bdf9-037c64401928
-    country_id: *id
-    network_id: *id_kawasan_khusus_batam___bintan_region
-  - id: 193383
-    prefix: '62771'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: db51ad19-2626-4718-b54b-4c67424a9f52
-    country_id: *id
-    network_id: *id_tanjung_pinang_region
-  - id: 194423
-    prefix: '62772'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: baa540f1-6cb7-4640-a423-4099c51892e7
-    country_id: *id
-    network_id: *id_terempa_region
-  - id: 195006
-    prefix: '62773'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 2f05eecd-4335-40bd-94f2-a6ccf3e953de
-    country_id: *id
-    network_id: *id_ranai_region
-  - id: 196212
-    prefix: '62774'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 814b8972-b16e-49a6-90c1-56d8218a1793
-    country_id: *id
-    network_id: *id_natuna_selatan_region
-  - id: 196703
-    prefix: '62776'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: df809796-583f-4256-8da1-6dc1214264fb
-    country_id: *id
-    network_id: *id_dabosingkep_region
-  - id: 197000
-    prefix: '62777'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 50c539dc-80b8-4994-8b12-8aeb029abc1a
-    country_id: *id
-    network_id: *id_karimun_tanjungbalai_region
-  - id: 197896
-    prefix: '62779'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fa78626e-97c5-448b-8b42-fe604feaac43
-    country_id: *id
-    network_id: *id_tanjung_batu_region
-  - id: 200407
-    prefix: '62768'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a7ceabe3-ac7b-4e8f-bd5c-7c3e3d19a1f1
-    country_id: *id
-    network_id: *id_tembilahan_region
-  - id: 200511
-    prefix: '62769'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: fdfd9cec-3ff7-464c-a166-49094bba11ed
-    country_id: *id
-    network_id: *id_rengat_region
-  - id: 200897
-    prefix: '62775'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d8325288-de1c-437d-b642-52dfbbeb6f7e
-    country_id: *id
-    network_id: *id_p_tembelan_region
-  - id: 202439
-    prefix: '62778'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 18aec027-752f-4bb1-b764-aad7a6856e38
-    country_id: *id
-    network_id: *id_sekupang_batam_region
-  - id: 216353
-    prefix: '62957'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 26ade422-a140-49e3-a812-aac3cca8d897
-    country_id: *id
-    network_id: *id_kaimana_region
-  - id: 216365
-    prefix: '62958'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 5ee72516-8f41-4f92-8dc3-bc2686c3d1af
-    country_id: *id
-    network_id: *id_makbon_region
-  - id: 217412
-    prefix: '62950'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: e8f28098-9d19-4f9e-b002-e3be2aedc87e
-    country_id: *id
-    network_id: *id_babo_region
-  - id: 217425
-    prefix: '62951'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 0610545e-2586-4f0f-8e51-5a1f283995f7
-    country_id: *id
-    network_id: *id_sorong_region
-  - id: 219046
-    prefix: '62952'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 81de8085-0efc-4a44-9adb-16935a9e3691
-    country_id: *id
-    network_id: *id_teminabuan_region
-  - id: 219425
-    prefix: '62953'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 3b3520c1-3b8b-443a-b764-2f7d6f931e91
-    country_id: *id
-    network_id: *id_kabare_region
-  - id: 221100
-    prefix: '62955'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 7d1e75a2-0891-4751-acf8-adc46425ec54
-    country_id: *id
-    network_id: *id_bintuni_region
-  - id: 221114
-    prefix: '62956'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: c415a051-fc34-4f2d-a70c-99146ff6c058
-    country_id: *id
-    network_id: *id_fak_fak_region
-  - id: 221786
-    prefix: '62959'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 6ce7c5b8-86e7-44a4-9604-106dfaa54f56
-    country_id: *id
-    network_id: *id_seget_region
-  - id: 223345
-    prefix: '62963'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 420d96e7-416e-4bce-bf58-be27eb5cece8
-    country_id: *id
-    network_id: *id_bokondini_region
-  - id: 223457
-    prefix: '62964'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 666193f4-9b44-4dd2-99cc-68031ca55445
-    country_id: *id
-    network_id: *id_genyem_region
-  - id: 223701
-    prefix: '62965'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 5f17b8fe-e0d1-4e0f-a8e0-244cec02ff81
-    country_id: *id
-    network_id: *id_senggi_region
-  - id: 225109
-    prefix: '62960'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: b131b10f-39eb-428d-a49f-7c7107319f83
-    country_id: *id
-    network_id: *id_tiom_region
-  - id: 225371
-    prefix: '62962'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 243f368d-4ade-46b1-b765-ab2f73651d49
-    country_id: *id
-    network_id: *id_ilaga_region
-  - id: 226306
-    prefix: '62966'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 0bbbd6f4-16b7-49e5-9cb2-f6df7bea8ed3
-    country_id: *id
-    network_id: *id_sarmi_region
-  - id: 226683
-    prefix: '62967'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 9217a5bf-3986-4c40-b511-22aabd0cd74b
-    country_id: *id
-    network_id: *id_jayapura_region
-  - id: 227304
-    prefix: '62969'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 7787bcde-2fbb-494f-a2ce-04e3b70bf705
-    country_id: *id
-    network_id: *id_wamena_region
-  - id: 228262
-    prefix: '62971'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 453dfdf1-7d98-4a33-be4b-11809cd8ab2f
-    country_id: *id
-    network_id: *id_kimaan_merauke_region
-  - id: 229615
-    prefix: '62972'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 3c8ebda9-2cd8-464c-936a-f644c2a70c2c
-    country_id: *id
-    network_id: *id_okaba_region
-  - id: 231185
-    prefix: '62979'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 3c8d040f-baaa-4491-8585-3fd0994851ce
-    country_id: *id
-    network_id: *id_senggo_region
-  - id: 232319
-    prefix: '62980'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 68140b40-8159-490f-8fbc-b84cc7a7c18e
-    country_id: *id
-    network_id: *id_ransiki_region
-  - id: 232898
-    prefix: '62982'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 0f4225d8-081a-4073-86ab-f2e224f11d1f
-    country_id: *id
-    network_id: *id_waren_region
-  - id: 233313
-    prefix: '62974'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 8daeb058-1de1-4931-9325-bcf3a6813539
-    country_id: *id
-    network_id: *id_bade_region
-  - id: 233333
-    prefix: '62975'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: be3cb48e-67b3-4b7e-a8ec-11a28d1fb939
-    country_id: *id
-    network_id: *id_tanah_merah_region
-  - id: 233356
-    prefix: '62977'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: ff2f7dbb-d915-4065-acc2-40c6b61355d9
-    country_id: *id
-    network_id: *id_kamur_region
-  - id: 233377
-    prefix: '62978'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: a504a9c5-431f-49a5-ad28-421e1ac94c27
-    country_id: *id
-    network_id: *id_waropko_region
-  - id: 234735
-    prefix: '62983'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 75649804-f171-479f-814c-373e857a135e
-    country_id: *id
-    network_id: *id_serui_region
-  - id: 235044
-    prefix: '62981'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 5f55a7f4-f656-4363-a587-e8ab079c3784
-    country_id: *id
-    network_id: *id_biak_region
-  - id: 235717
-    prefix: '62984'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: dcbc9f9c-3498-42d7-9ea5-443d7bc57e82
-    country_id: *id
-    network_id: *id_nabire_region
-  - id: 237095
-    prefix: '62986'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 05e65211-b661-4280-80aa-73fb8e6fd69e
-    country_id: *id
-    network_id: *id_manokwari_region
-  - id: 237630
-    prefix: '62987'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 49bcf1b9-80f0-4c2b-9c22-055ae20fe0d7
-    country_id: *id
-    network_id: *id_korido_region
-  - id: 238094
-    prefix: '62989'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: b0ec7869-df19-4043-b656-ad746a3d7da3
-    country_id: *id
-    network_id: *id_windesi_region
-  - id: 238278
-    prefix: '62988'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: edb53054-6517-4fa3-bad0-5fb29396f4fa
-    country_id: *id
-    network_id: *id_numfor_region
+    number_max_length: 9
+    uuid: 50a366aa-a9fc-4e8e-b7b3-1428f954e0f1
+    country_id: *id
+    network_id: *id_customer_care_services
+  - id: 243071
+    prefix: '62170'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 4a101d59-1a35-4081-b693-453018835486
+    country_id: *id
+    network_id: *id_voip_services
+  - id: 247381
+    prefix: '62199'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: c75c6151-ee80-4426-a761-7a200bdfb228
+    country_id: *id
+    network_id: *id_community_service_centers
+  - id: 247410
+    prefix: '622'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 8c1766f5-02c5-4e1c-9b5d-6cb074470e74
+    country_id: *id
+    network_id: *id_special_services
   - id: 274229
     prefix: '6221'
     number_min_length: 9
@@ -2855,6 +1634,20 @@ network_prefixes:
     uuid: 8ae784ca-5853-4d93-969c-bd38398a1046
     country_id: *id
     network_id: *id_rangkasbitung_region
+  - id: 302696
+    prefix: '62253'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 23d4b61c-7d83-4ede-96f1-1e0d185b3722
+    country_id: *id
+    network_id: *id_pandeglang_region
+  - id: 303233
+    prefix: '62254'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: a18a0ed5-3b82-4a6e-a4b7-a2793fa29e7a
+    country_id: *id
+    network_id: *id_serang_region
   - id: 299832
     prefix: '62260'
     number_min_length: 9
@@ -2876,20 +1669,6 @@ network_prefixes:
     uuid: 3e18a490-efb3-419c-a04a-b43b50ce7dd6
     country_id: *id
     network_id: *id_garut_pameungpeuk_region
-  - id: 302696
-    prefix: '62253'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 23d4b61c-7d83-4ede-96f1-1e0d185b3722
-    country_id: *id
-    network_id: *id_pandeglang_region
-  - id: 303233
-    prefix: '62254'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: a18a0ed5-3b82-4a6e-a4b7-a2793fa29e7a
-    country_id: *id
-    network_id: *id_serang_region
   - id: 303549
     prefix: '62263'
     number_min_length: 9
@@ -2939,6 +1718,20 @@ network_prefixes:
     uuid: b0904122-6b64-4084-a0d7-bb55cadd852e
     country_id: *id
     network_id: *id_klaten_region
+  - id: 312761
+    prefix: '62273'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 2918d7fc-ee99-48b8-b581-68883955b35d
+    country_id: *id
+    network_id: *id_wonogiri_region
+  - id: 313027
+    prefix: '62274'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 3899a6d0-b7eb-4894-b397-2311391f6f03
+    country_id: *id
+    network_id: *id_yogyakarta_region
   - id: 306003
     prefix: '62275'
     number_min_length: 9
@@ -2953,6 +1746,20 @@ network_prefixes:
     uuid: 944b120d-62c7-480b-9048-5b568a628360
     country_id: *id
     network_id: *id_boyolali_region
+  - id: 313537
+    prefix: '62280'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 175600be-c6ef-4186-9963-95d37ef08fc3
+    country_id: *id
+    network_id: *id_majenang_region
+  - id: 313554
+    prefix: '62281'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 56f4dcde-fb75-4a1a-b5be-67cf00fbe31d
+    country_id: *id
+    network_id: *id_purwokerto_region
   - id: 307240
     prefix: '62282'
     number_min_length: 9
@@ -2995,6 +1802,13 @@ network_prefixes:
     uuid: 44fb1ccd-32e9-47e2-b096-d5b30ff561bf
     country_id: *id
     network_id: *id_kebumen_region
+  - id: 315043
+    prefix: '62289'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 15965891-e733-4168-ba70-f075d3e8e985
+    country_id: *id
+    network_id: *id_bumiayu_region
   - id: 308543
     prefix: '62291'
     number_min_length: 9
@@ -3037,41 +1851,6 @@ network_prefixes:
     uuid: e4137413-6e41-4a19-85a8-5b279885aa35
     country_id: *id
     network_id: *id_blora_region
-  - id: 312761
-    prefix: '62273'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 2918d7fc-ee99-48b8-b581-68883955b35d
-    country_id: *id
-    network_id: *id_wonogiri_region
-  - id: 313027
-    prefix: '62274'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 3899a6d0-b7eb-4894-b397-2311391f6f03
-    country_id: *id
-    network_id: *id_yogyakarta_region
-  - id: 313537
-    prefix: '62280'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 175600be-c6ef-4186-9963-95d37ef08fc3
-    country_id: *id
-    network_id: *id_majenang_region
-  - id: 313554
-    prefix: '62281'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 56f4dcde-fb75-4a1a-b5be-67cf00fbe31d
-    country_id: *id
-    network_id: *id_purwokerto_region
-  - id: 315043
-    prefix: '62289'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 15965891-e733-4168-ba70-f075d3e8e985
-    country_id: *id
-    network_id: *id_bumiayu_region
   - id: 315547
     prefix: '62297'
     number_min_length: 9
@@ -3086,6 +1865,13 @@ network_prefixes:
     uuid: 8e30d539-dd7e-49c3-992b-199775b394ae
     country_id: *id
     network_id: *id_salatiga_region
+  - id: 248902
+    prefix: '623'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: e4e132a9-7dba-4468-b21d-301b12801ee8
+    country_id: *id
+    network_id: *id_special_services
   - id: 321167
     prefix: '6231'
     number_min_length: 9
@@ -3100,41 +1886,6 @@ network_prefixes:
     uuid: fff28c09-28e5-46f1-a8b6-abfa3522a9f5
     country_id: *id
     network_id: *id_mojokerto_region
-  - id: 329006
-    prefix: '62324'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: a9077a70-8921-4f4e-a64a-1c12fbbe7aa5
-    country_id: *id
-    network_id: *id_pamekasan_region
-  - id: 329240
-    prefix: '62325'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 5029e231-8a56-4101-9d91-dc849b32e9de
-    country_id: *id
-    network_id: *id_sangkapura_region
-  - id: 331584
-    prefix: '62331'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 11c35ddb-a0ca-4eee-b60a-1310411b4498
-    country_id: *id
-    network_id: *id_jember_region
-  - id: 331710
-    prefix: '62335'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 33c7a6fe-26f4-4cdf-b823-b16ca12be252
-    country_id: *id
-    network_id: *id_probolinggo_region
-  - id: 331748
-    prefix: '62336'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 0d91fc08-71b1-4769-ae8c-b56dd62c1ab5
-    country_id: *id
-    network_id: *id_tanggul_region
   - id: 335398
     prefix: '62322'
     number_min_length: 9
@@ -3149,6 +1900,20 @@ network_prefixes:
     uuid: e980ca5e-0e43-452a-abef-8534c28e7311
     country_id: *id
     network_id: *id_sampang_region
+  - id: 329006
+    prefix: '62324'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: a9077a70-8921-4f4e-a64a-1c12fbbe7aa5
+    country_id: *id
+    network_id: *id_pamekasan_region
+  - id: 329240
+    prefix: '62325'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 5029e231-8a56-4101-9d91-dc849b32e9de
+    country_id: *id
+    network_id: *id_sangkapura_region
   - id: 336961
     prefix: '62327'
     number_min_length: 9
@@ -3163,6 +1928,13 @@ network_prefixes:
     uuid: cb342f3f-c0f1-4f39-90d7-22d760e8eefc
     country_id: *id
     network_id: *id_sumenep_region
+  - id: 331584
+    prefix: '62331'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 11c35ddb-a0ca-4eee-b60a-1310411b4498
+    country_id: *id
+    network_id: *id_jember_region
   - id: 338872
     prefix: '62332'
     number_min_length: 9
@@ -3184,6 +1956,20 @@ network_prefixes:
     uuid: fb820c94-3e1d-4e00-8377-d247465d34bb
     country_id: *id
     network_id: *id_lumajang_region
+  - id: 331710
+    prefix: '62335'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 33c7a6fe-26f4-4cdf-b823-b16ca12be252
+    country_id: *id
+    network_id: *id_probolinggo_region
+  - id: 331748
+    prefix: '62336'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 0d91fc08-71b1-4769-ae8c-b56dd62c1ab5
+    country_id: *id
+    network_id: *id_tanggul_region
   - id: 340254
     prefix: '62338'
     number_min_length: 9
@@ -3205,6 +1991,20 @@ network_prefixes:
     uuid: 4f6eeeb4-cb21-4b33-9f43-b6b4564e483a
     country_id: *id
     network_id: *id_blitar_region
+  - id: 350977
+    prefix: '62343'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: f98b214e-9630-4f40-b606-067107409208
+    country_id: *id
+    network_id: *id_pasuruan_region
+  - id: 352570
+    prefix: '62351'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: db747e1f-7d78-464c-a111-ee8709ae38b0
+    country_id: *id
+    network_id: *id_madiun_region
   - id: 344850
     prefix: '62352'
     number_min_length: 9
@@ -3212,6 +2012,20 @@ network_prefixes:
     uuid: d816f26f-138c-4bcc-8a1a-ef974aa5161e
     country_id: *id
     network_id: *id_ponorogo_region
+  - id: 353312
+    prefix: '62353'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: f80bca92-1415-4ced-8476-a68a0e8eccf1
+    country_id: *id
+    network_id: *id_bojonegoro_region
+  - id: 353750
+    prefix: '62354'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: eaa18d3a-327b-4605-93bc-1822a74dbcfc
+    country_id: *id
+    network_id: *id_kediri_region
   - id: 345582
     prefix: '62355'
     number_min_length: 9
@@ -3240,83 +2054,6 @@ network_prefixes:
     uuid: f05bf9c0-3c77-4fc6-ad14-655d5727e4eb
     country_id: *id
     network_id: *id_nganjuk_region
-  - id: 347107
-    prefix: '62376'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 937b6fe8-93ad-4341-9f78-0718432b7873
-    country_id: *id
-    network_id: *id_selong_region
-  - id: 348064
-    prefix: '62386'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: cfffba03-0ee5-48b3-aa59-ff1f81fd3bf2
-    country_id: *id
-    network_id: *id_kalabahi_region
-  - id: 348646
-    prefix: '62387'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 9f69a991-be47-4235-a2e0-59fb6af012ad
-    country_id: *id
-    network_id: *id_waikabubak_waingapu_region
-  - id: 348743
-    prefix: '62388'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 53406136-7342-4f03-9ca6-02a4606e5ccd
-    country_id: *id
-    network_id: *id_kefamenanu_soe_region
-  - id: 348872
-    prefix: '62389'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 64402f22-cfc6-4b06-b1f8-7a683e927afc
-    country_id: *id
-    network_id: *id_atambua_region
-  - id: 349996
-    prefix: '62401'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 9eaaa01f-9b41-470d-a376-3fe53e177c52
-    country_id: *id
-    network_id: *id_kendari_region
-  - id: 350764
-    prefix: '62404'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 7d2da7e5-c846-487a-b122-4a008aff545c
-    country_id: *id
-    network_id: *id_wanci_region
-  - id: 350977
-    prefix: '62343'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: f98b214e-9630-4f40-b606-067107409208
-    country_id: *id
-    network_id: *id_pasuruan_region
-  - id: 352570
-    prefix: '62351'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: db747e1f-7d78-464c-a111-ee8709ae38b0
-    country_id: *id
-    network_id: *id_madiun_region
-  - id: 353312
-    prefix: '62353'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: f80bca92-1415-4ced-8476-a68a0e8eccf1
-    country_id: *id
-    network_id: *id_bojonegoro_region
-  - id: 353750
-    prefix: '62354'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: eaa18d3a-327b-4605-93bc-1822a74dbcfc
-    country_id: *id
-    network_id: *id_kediri_region
   - id: 354015
     prefix: '62361'
     number_min_length: 9
@@ -3394,6 +2131,13 @@ network_prefixes:
     uuid: 5c191325-bf38-4059-a2a7-2c17883419e7
     country_id: *id
     network_id: *id_bima_region
+  - id: 347107
+    prefix: '62376'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 937b6fe8-93ad-4341-9f78-0718432b7873
+    country_id: *id
+    network_id: *id_selong_region
   - id: 356525
     prefix: '62380'
     number_min_length: 9
@@ -3436,6 +2180,48 @@ network_prefixes:
     uuid: d6f2556b-26cf-4af8-ae3a-533216216c97
     country_id: *id
     network_id: *id_ruteng_region
+  - id: 348064
+    prefix: '62386'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: cfffba03-0ee5-48b3-aa59-ff1f81fd3bf2
+    country_id: *id
+    network_id: *id_kalabahi_region
+  - id: 348646
+    prefix: '62387'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 9f69a991-be47-4235-a2e0-59fb6af012ad
+    country_id: *id
+    network_id: *id_waikabubak_waingapu_region
+  - id: 348743
+    prefix: '62388'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 53406136-7342-4f03-9ca6-02a4606e5ccd
+    country_id: *id
+    network_id: *id_kefamenanu_soe_region
+  - id: 348872
+    prefix: '62389'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 64402f22-cfc6-4b06-b1f8-7a683e927afc
+    country_id: *id
+    network_id: *id_atambua_region
+  - id: 243940
+    prefix: '624'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: ca514f61-f6cd-4699-9220-7f170d4d1251
+    country_id: *id
+    network_id: *id_special_services
+  - id: 349996
+    prefix: '62401'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 9eaaa01f-9b41-470d-a376-3fe53e177c52
+    country_id: *id
+    network_id: *id_kendari_region
   - id: 358917
     prefix: '62402'
     number_min_length: 9
@@ -3450,6 +2236,13 @@ network_prefixes:
     uuid: 69734b08-9929-4460-84c5-82904c9a9a00
     country_id: *id
     network_id: *id_raha_region
+  - id: 350764
+    prefix: '62404'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 7d2da7e5-c846-487a-b122-4a008aff545c
+    country_id: *id
+    network_id: *id_wanci_region
   - id: 360066
     prefix: '62405'
     number_min_length: 9
@@ -3457,83 +2250,6 @@ network_prefixes:
     uuid: 6402e0da-6b05-42ca-8c19-4ac618dbe46f
     country_id: *id
     network_id: *id_kolaka_region
-  - id: 361784
-    prefix: '62407'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 90ac7dc2-6c80-495f-8ba1-364b469f9673
-    country_id: *id
-    network_id: *id_waweheo_region
-  - id: 362652
-    prefix: '62410'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 0a09c353-1c1b-4a32-a2d3-5db952352e07
-    country_id: *id
-    network_id: *id_pangkep_region
-  - id: 363450
-    prefix: '62411'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: f826cb64-eef2-4871-9b42-5f33b1b99854
-    country_id: *id
-    network_id: *id_ujung_pandang_region
-  - id: 363950
-    prefix: '62415'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 001dfb31-1d5a-4465-b9ba-5dfff751009c
-    country_id: *id
-    network_id: *id_tanah_jampea_region
-  - id: 365482
-    prefix: '62419'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: d1d01220-0c96-4ae0-83d9-4bd58bb03664
-    country_id: *id
-    network_id: *id_jeneponto_region
-  - id: 367372
-    prefix: '62428'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 01b84fcd-76dc-4572-9b86-055d0c7697c0
-    country_id: *id
-    network_id: *id_polewali_region
-  - id: 367669
-    prefix: '62429'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 7d7c8fb2-e732-4439-9d19-77b6e4019cd7
-    country_id: *id
-    network_id: *id_karosa_region
-  - id: 368150
-    prefix: '62430'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 998e9ea1-37ab-4c64-8150-2b37308130af
-    country_id: *id
-    network_id: *id_amurang_region
-  - id: 368410
-    prefix: '62431'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: c57134c1-1b7b-432d-9722-a4a8bf1bb9cb
-    country_id: *id
-    network_id: *id_manado_region
-  - id: 368486
-    prefix: '62434'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 70724078-e143-4222-8754-3b7f4e5453e3
-    country_id: *id
-    network_id: *id_kotamobagu_region
-  - id: 369353
-    prefix: '62435'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 9bc94e77-59d9-4c07-ae41-4a0c427b4372
-    country_id: *id
-    network_id: *id_gorontalo_region
   - id: 370352
     prefix: '62406'
     number_min_length: 9
@@ -3541,6 +2257,13 @@ network_prefixes:
     uuid: 7c0db8c0-39aa-41cc-b652-89675b6a5359
     country_id: *id
     network_id: *id_malamala_region
+  - id: 361784
+    prefix: '62407'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 90ac7dc2-6c80-495f-8ba1-364b469f9673
+    country_id: *id
+    network_id: *id_waweheo_region
   - id: 370715
     prefix: '62408'
     number_min_length: 9
@@ -3555,6 +2278,20 @@ network_prefixes:
     uuid: 3620366b-9c13-4035-8d69-6411b5825521
     country_id: *id
     network_id: *id_bungku_region
+  - id: 362652
+    prefix: '62410'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 0a09c353-1c1b-4a32-a2d3-5db952352e07
+    country_id: *id
+    network_id: *id_pangkep_region
+  - id: 363450
+    prefix: '62411'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: f826cb64-eef2-4871-9b42-5f33b1b99854
+    country_id: *id
+    network_id: *id_ujung_pandang_region
   - id: 372952
     prefix: '62413'
     number_min_length: 9
@@ -3569,6 +2306,13 @@ network_prefixes:
     uuid: 13ed48e6-2899-4b71-a741-4e54727d59ab
     country_id: *id
     network_id: *id_benteng_region
+  - id: 363950
+    prefix: '62415'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 001dfb31-1d5a-4465-b9ba-5dfff751009c
+    country_id: *id
+    network_id: *id_tanah_jampea_region
   - id: 375177
     prefix: '62417'
     number_min_length: 9
@@ -3583,6 +2327,13 @@ network_prefixes:
     uuid: 080a7734-201e-45ad-9231-e545c311153b
     country_id: *id
     network_id: *id_takalar_region
+  - id: 365482
+    prefix: '62419'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: d1d01220-0c96-4ae0-83d9-4bd58bb03664
+    country_id: *id
+    network_id: *id_jeneponto_region
   - id: 377386
     prefix: '62420'
     number_min_length: 9
@@ -3625,6 +2376,34 @@ network_prefixes:
     uuid: 0b1bf56c-eca2-4bab-82e9-f9d46a38e04e
     country_id: *id
     network_id: *id_barru_region
+  - id: 367372
+    prefix: '62428'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 01b84fcd-76dc-4572-9b86-055d0c7697c0
+    country_id: *id
+    network_id: *id_polewali_region
+  - id: 367669
+    prefix: '62429'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 7d7c8fb2-e732-4439-9d19-77b6e4019cd7
+    country_id: *id
+    network_id: *id_karosa_region
+  - id: 368150
+    prefix: '62430'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 998e9ea1-37ab-4c64-8150-2b37308130af
+    country_id: *id
+    network_id: *id_amurang_region
+  - id: 368410
+    prefix: '62431'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: c57134c1-1b7b-432d-9722-a4a8bf1bb9cb
+    country_id: *id
+    network_id: *id_manado_region
   - id: 379800
     prefix: '62432'
     number_min_length: 9
@@ -3639,6 +2418,20 @@ network_prefixes:
     uuid: 9550b83b-521f-43f1-acbb-9c6bc8193fdc
     country_id: *id
     network_id: *id_beo_region
+  - id: 368486
+    prefix: '62434'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 70724078-e143-4222-8754-3b7f4e5453e3
+    country_id: *id
+    network_id: *id_kotamobagu_region
+  - id: 369353
+    prefix: '62435'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 9bc94e77-59d9-4c07-ae41-4a0c427b4372
+    country_id: *id
+    network_id: *id_gorontalo_region
   - id: 381395
     prefix: '62438'
     number_min_length: 9
@@ -3646,6 +2439,13 @@ network_prefixes:
     uuid: 1d8fa83b-b1cb-4fa4-b797-8646c476b08d
     country_id: *id
     network_id: *id_bitung_region
+  - id: 389935
+    prefix: '62442'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 4bf00e5b-6fab-4d6b-ba70-ed4574fe266a
+    country_id: *id
+    network_id: *id_kwandang_region
   - id: 382972
     prefix: '62443'
     number_min_length: 9
@@ -3667,6 +2467,13 @@ network_prefixes:
     uuid: e33c2eb4-01f5-46fa-87d3-c8a0c3dc8557
     country_id: *id
     network_id: *id_buol_paleleh_region
+  - id: 392764
+    prefix: '62450'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 04427aab-45c5-4ad6-8f42-c0119f899ca0
+    country_id: *id
+    network_id: *id_parigi_region
   - id: 387509
     prefix: '62451'
     number_min_length: 9
@@ -3688,27 +2495,6 @@ network_prefixes:
     uuid: 4070f742-1c26-46ba-aeda-dfcec7e4f54f
     country_id: *id
     network_id: *id_toli_toli_region
-  - id: 388734
-    prefix: '62461'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 7289fb2c-6960-49b6-a6f8-7548cb6f131b
-    country_id: *id
-    network_id: *id_luwuk_region
-  - id: 389935
-    prefix: '62442'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 4bf00e5b-6fab-4d6b-ba70-ed4574fe266a
-    country_id: *id
-    network_id: *id_kwandang_region
-  - id: 392764
-    prefix: '62450'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 04427aab-45c5-4ad6-8f42-c0119f899ca0
-    country_id: *id
-    network_id: *id_parigi_region
   - id: 393424
     prefix: '62454'
     number_min_length: 9
@@ -3744,6 +2530,13 @@ network_prefixes:
     uuid: b8b2ed95-4f7f-4af3-be56-334c8d5fd66b
     country_id: *id
     network_id: *id_tentena_region
+  - id: 388734
+    prefix: '62461'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 7289fb2c-6960-49b6-a6f8-7548cb6f131b
+    country_id: *id
+    network_id: *id_luwuk_region
   - id: 394177
     prefix: '62462'
     number_min_length: 9
@@ -3765,6 +2558,13 @@ network_prefixes:
     uuid: a40304ae-df6c-40e7-a2d2-ef89135d5c7c
     country_id: *id
     network_id: *id_ampana_region
+  - id: 398520
+    prefix: '62465'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 54017f88-6360-4fa9-bd36-734246256c49
+    country_id: *id
+    network_id: *id_kolonedale_region
   - id: 396472
     prefix: '62471'
     number_min_length: 9
@@ -3793,13 +2593,6 @@ network_prefixes:
     uuid: 1f7ddac7-0230-4999-ba00-09651b1cf8c9
     country_id: *id
     network_id: *id_malili_region
-  - id: 398520
-    prefix: '62465'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 54017f88-6360-4fa9-bd36-734246256c49
-    country_id: *id
-    network_id: *id_kolonedale_region
   - id: 400773
     prefix: '62475'
     number_min_length: 9
@@ -3807,273 +2600,34 @@ network_prefixes:
     uuid: dfd5a8cd-233d-4a10-a5e1-f63f4b3c7019
     country_id: *id
     network_id: *id_soroako_region
-  - id: 447283
-    prefix: '62903'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 8a51689f-dee7-4e06-8524-ad9215e95dec
-    country_id: *id
-    network_id: *id_enarotali_region
-  - id: 454707
-    prefix: '62901'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: ef7f158c-f3ae-49c9-9635-eecccf4aa133
-    country_id: *id
-    network_id: *id_timika_region
-  - id: 454951
-    prefix: '62902'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: c0d8ffe7-57a7-4cf8-b507-3a0bd3a01019
-    country_id: *id
-    network_id: *id_agat_region
-  - id: 455869
-    prefix: '62904'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 595aa159-c217-4c58-b518-bb911a72ba30
-    country_id: *id
-    network_id: *id_semini_region
-  - id: 458515
-    prefix: '62910'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: dd9ab730-824a-41ed-839a-b712b3b26ca4
-    country_id: *id
-    network_id: *id_bandaneira_region
-  - id: 460337
-    prefix: '62914'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 05466cdf-2f56-4a18-b666-f0c87a975e09
-    country_id: *id
-    network_id: *id_masohi_region
-  - id: 461704
-    prefix: '62917'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: bd04479b-afee-4d31-8903-df23664bb1c7
-    country_id: *id
-    network_id: *id_dobo_region
-  - id: 465122
-    prefix: '62911'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: b28be9af-aed2-415b-8770-d98b7f5d212f
-    country_id: *id
-    network_id: *id_ambon_region
-  - id: 465640
-    prefix: '62912'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 5a6db62b-f305-42b2-a03b-73f66b1fff39
-    country_id: *id
-    network_id: *id_piru_region
-  - id: 466315
-    prefix: '62913'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 91d4422e-de01-4519-9187-ce0790a3b324
-    country_id: *id
-    network_id: *id_namlea_region
-  - id: 466837
-    prefix: '62915'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 8e8d0d6e-678c-419d-a309-2da110467b94
-    country_id: *id
-    network_id: *id_bula_region
-  - id: 467203
-    prefix: '62916'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 3e3f7268-cdf4-495e-a697-55c63f5791cf
-    country_id: *id
-    network_id: *id_tual_region
-  - id: 467619
-    prefix: '62918'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 306e2030-dc02-4065-8dfd-873685781663
-    country_id: *id
-    network_id: *id_saumlaki_region
-  - id: 469803
-    prefix: '62919'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 8b9b21b8-d4bc-4b66-adc3-d02f18e91dc3
-    country_id: *id
-    network_id: *id_tepa_region
-  - id: 474427
-    prefix: '62924'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: cd7c9bb8-8989-42b9-9862-76ff6198d06a
-    country_id: *id
-    network_id: *id_tobelo_region
-  - id: 474668
-    prefix: '62925'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: d08d7962-68d1-42ea-b543-7dcfe0f45ce7
-    country_id: *id
-    network_id: *id_weda_region
-  - id: 475297
-    prefix: '62926'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 6d32b5ba-2865-4f26-9c5d-02c29e1e43b2
-    country_id: *id
-    network_id: *id_umera_region
-  - id: 476595
-    prefix: '62921'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 126dc72e-234e-4a0a-9d8f-16a90c9ad9ed
-    country_id: *id
-    network_id: *id_soasiu_ternate_region
-  - id: 477107
-    prefix: '62922'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 17fca599-aa1c-45d4-bdcc-900c8f917c6b
-    country_id: *id
-    network_id: *id_jailolo_region
-  - id: 478436
-    prefix: '62923'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: c1efe000-6018-4ac8-8155-6fe82bcef1b1
-    country_id: *id
-    network_id: *id_pitu_morotai_region
-  - id: 481754
-    prefix: '62929'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 54260234-cab3-43d5-b3c8-1252cede591a
-    country_id: *id
-    network_id: *id_sanana_region
-  - id: 482770
-    prefix: '62927'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 74856e2c-8984-4a14-ac6c-54f0932c29c3
-    country_id: *id
-    network_id: *id_labuha_region
-  - id: 482785
-    prefix: '62928'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 23959a7c-0417-42f3-8e85-e67aade289f1
-    country_id: *id
-    network_id: *id_laiwui_region
-  - id: 490006
-    prefix: '62931'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 7a605671-9ffa-4157-bca4-86dc7ca10680
-    country_id: *id
-    network_id: *id_saparua_region
-# Supplementary services Prefixes
-  - id: 208450
-    prefix: '62804'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c4cb1adc-3ba5-410c-aeb7-37c87eaf1220
-    country_id: *id
-    network_id: *id_shared_cost_services
-  - id: 209218
-    prefix: '62805'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e0f06891-d1b6-4b80-a59b-68701afeac06
-    country_id: *id
-    network_id: *id_virtual_private_network
-  - id: 242415
-    prefix: '621'
-    number_min_length: 5
-    number_max_length: 7
-    uuid: b05028ee-8e09-42ed-ab8c-61efc6a4e5d2
-    country_id: *id
-    network_id: *id_special_services
-  - id: 242593
-    prefix: '6211'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 8c05cda0-2af2-41b8-a036-601baf256073
-    country_id: *id
-    network_id: *id_emergency_services
-  - id: 242821
-    prefix: '62120'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 6e1bdecd-db48-436a-83d3-835be7c98e90
-    country_id: *id
-    network_id: *id_callling_card_services
-  - id: 242916
-    prefix: '62140'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: c4c02a13-6e42-4539-8be1-cbf6cd588a3f
-    country_id: *id
-    network_id: *id_customer_care_services
-  - id: 242954
-    prefix: '62150'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 788e88ea-3ce6-4387-aa76-032a82f38cbe
-    country_id: *id
-    network_id: *id_customer_care_services
-  - id: 242958
-    prefix: '621500'
+  - id: 56452
+    prefix: '62481'
     number_min_length: 9
-    number_max_length: 9
-    uuid: 50a366aa-a9fc-4e8e-b7b3-1428f954e0f1
+    number_max_length: 11
+    uuid: 28308016-85cf-4118-98d0-af8668b5c472
     country_id: *id
-    network_id: *id_customer_care_services
-  - id: 243071
-    prefix: '62170'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 4a101d59-1a35-4081-b693-453018835486
+    network_id: *id_watampone_region
+  - id: 56893
+    prefix: '62482'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: d2ee31ed-f30c-4c76-afe0-1045e3aaac24
     country_id: *id
-    network_id: *id_voip_services
-  - id: 243940
-    prefix: '624'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: ca514f61-f6cd-4699-9220-7f170d4d1251
+    network_id: *id_sinjai_region
+  - id: 57219
+    prefix: '62484'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 567a97d4-50bb-4a3a-9679-0338da10381d
     country_id: *id
-    network_id: *id_special_services
-  - id: 245399
-    prefix: '626'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: d8ec2b3c-ac20-4a43-b908-575b1b760436
+    network_id: *id_watansopeng_region
+  - id: 52973
+    prefix: '62485'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 9c8dec28-49b4-4ee2-8961-14d88a852d77
     country_id: *id
-    network_id: *id_special_services
-  - id: 247381
-    prefix: '62199'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: c75c6151-ee80-4426-a761-7a200bdfb228
-    country_id: *id
-    network_id: *id_community_service_centers
-  - id: 247410
-    prefix: '622'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 8c1766f5-02c5-4e1c-9b5d-6cb074470e74
-    country_id: *id
-    network_id: *id_special_services
-  - id: 248902
-    prefix: '623'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: e4e132a9-7dba-4468-b21d-301b12801ee8
-    country_id: *id
-    network_id: *id_special_services
+    network_id: *id_sengkang_region
   - id: 249576
     prefix: '625'
     number_min_length: 6
@@ -4081,13 +2635,580 @@ network_prefixes:
     uuid: 5d575104-6001-4568-9e62-f75b9d7d93fa
     country_id: *id
     network_id: *id_special_services
-  - id: 253083
-    prefix: '628'
+  - id: 68166
+    prefix: '62511'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 0078ca11-5905-4687-9c84-1d7677401142
+    country_id: *id
+    network_id: *id_banjarmasin_marabahan_region
+  - id: 68204
+    prefix: '62512'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 6584279e-fb22-4431-b886-0e0e36e5eddc
+    country_id: *id
+    network_id: *id_pleihari_region
+  - id: 68996
+    prefix: '62513'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 29c69f54-dce3-4f0a-8e11-680008abc88e
+    country_id: *id
+    network_id: *id_kuala_kapuas_region
+  - id: 64871
+    prefix: '62517'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: f2c2f25c-edbc-4835-a1e7-137fbdb0000c
+    country_id: *id
+    network_id: *id_kandangan_region
+  - id: 65507
+    prefix: '62518'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 1f34a240-a877-4ea7-ab16-0b57676e5171
+    country_id: *id
+    network_id: *id_batu_licin_kotabaru_region
+  - id: 70852
+    prefix: '62519'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 0dc80d19-0837-4cb5-bebd-1f630531b464
+    country_id: *id
+    network_id: *id_muarateweh_region
+  - id: 76328
+    prefix: '62522'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: a30af884-ac8e-4964-b1fa-a135ad26b9a4
+    country_id: *id
+    network_id: *id_ampah_region
+  - id: 76416
+    prefix: '62525'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 963a46f0-5d17-46cd-8c8e-faef059b0d3b
+    country_id: *id
+    network_id: *id_buntok_region
+  - id: 76450
+    prefix: '62526'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: d224b93a-0a29-4dae-9dfa-37a53f1a6126
+    country_id: *id
+    network_id: *id_tanjung_tabalong_region
+  - id: 76473
+    prefix: '62527'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: b96cc730-9dbd-40c3-ada4-335d827f7463
+    country_id: *id
+    network_id: *id_amuntai_region
+  - id: 76498
+    prefix: '62528'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 8c85983d-90dd-4fd2-afe4-7fd36478819f
+    country_id: *id
+    network_id: *id_purukcahu_region
+  - id: 72511
+    prefix: '62531'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 1cd6723c-de76-4684-9ebe-071d1f782834
+    country_id: *id
+    network_id: *id_sampit_region
+  - id: 72730
+    prefix: '62532'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: e56575bf-c52f-41be-a5a8-de2b5cf3531e
+    country_id: *id
+    network_id: *id_pangkalan_bun_region
+  - id: 72758
+    prefix: '62533'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 7df6f8e5-affa-4a02-b8e7-fa0ebf299907
+    country_id: *id
+    network_id: *id_tumbang_samba_region
+  - id: 72801
+    prefix: '62534'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: f6684fea-4e59-49ef-9934-d07281c6593f
+    country_id: *id
+    network_id: *id_ketapang_region
+  - id: 72931
+    prefix: '62536'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 7e8f8b43-0ea0-4678-8216-b084f80d88ea
+    country_id: *id
+    network_id: *id_palangkaraya_region
+  - id: 72960
+    prefix: '62537'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 5954b34a-67b2-4dbe-98ca-e69a054796a5
+    country_id: *id
+    network_id: *id_kuala_kurun_region
+  - id: 72979
+    prefix: '62538'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: c3386301-8355-49eb-97d3-a398ad72ee69
+    country_id: *id
+    network_id: *id_kuala_pembuang_region
+  - id: 72988
+    prefix: '62539'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 004042d9-ea65-489b-97a9-9c58c97defc7
+    country_id: *id
+    network_id: *id_kuala_kuayan_region
+  - id: 74121
+    prefix: '62541'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 4db2198f-a0fc-46c6-8ac2-b07fb2d3d6e8
+    country_id: *id
+    network_id: *id_samarinda_region
+  - id: 77500
+    prefix: '62542'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: cea7872a-f095-4f10-9d1b-63fa9f63b6cf
+    country_id: *id
+    network_id: *id_balikpapan_region
+  - id: 77523
+    prefix: '62543'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: d5c61437-a7a3-440f-af0d-3792e8109e7e
+    country_id: *id
+    network_id: *id_tanah_grogot_region
+  - id: 77538
+    prefix: '62544'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 132a7878-ff5d-43d8-9960-485e095f015b
+    country_id: *id
+    network_id: *id_tiongohang_region
+  - id: 77581
+    prefix: '62545'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: a95c468f-07ed-4678-b77a-5fecbefe05a3
+    country_id: *id
+    network_id: *id_longiram_region
+  - id: 77606
+    prefix: '62546'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: aac9c31b-fcad-4a62-8eb5-a39b1245bc1f
+    country_id: *id
+    network_id: *id_tabang_region
+  - id: 77625
+    prefix: '62547'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 0cce0f4a-7de1-4e8a-b125-4c4e125b5dab
+    country_id: *id
+    network_id: *id_sangkulirang_region
+  - id: 77644
+    prefix: '62548'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: b187b4f8-3f0e-4063-8a7f-57d04841e301
+    country_id: *id
+    network_id: *id_bontang_region
+  - id: 78087
+    prefix: '62549'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 2157ec9c-c5af-45e8-9627-03adebb408c7
+    country_id: *id
+    network_id: *id_sangatta_region
+  - id: 86694
+    prefix: '62551'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: a68beeac-034d-4f2b-a764-e8886c0ad9cb
+    country_id: *id
+    network_id: *id_tarakan_region
+  - id: 86970
+    prefix: '62552'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: f3b8e7b7-588b-48a3-ba46-1211625cd0cc
+    country_id: *id
+    network_id: *id_tanjung_selor_region
+  - id: 87007
+    prefix: '62553'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: e37ce23e-d4aa-4393-908b-6bdb6fc7091c
+    country_id: *id
+    network_id: *id_malinau_region
+  - id: 87026
+    prefix: '62554'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: a7ee5c9e-c0ad-4e64-989c-6ca764d6b625
+    country_id: *id
+    network_id: *id_tanjungredep_region
+  - id: 87054
+    prefix: '62555'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: fa5c852d-36df-4ebd-89a3-123227413748
+    country_id: *id
+    network_id: *id_longnawang_region
+  - id: 87076
+    prefix: '62556'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 21efc409-e746-4c25-abd5-981026c52694
+    country_id: *id
+    network_id: *id_nunukan_region
+  - id: 80641
+    prefix: '62561'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 43ab5791-5c73-4dfe-8cbc-04188e4c80b8
+    country_id: *id
+    network_id: *id_mempawah_pontianak_region
+  - id: 88598
+    prefix: '62562'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 4a667e85-5f03-44e7-98ff-a3645fc66b43
+    country_id: *id
+    network_id: *id_singkawang_region
+  - id: 89283
+    prefix: '62563'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: f3eecc4c-a81d-474a-b579-1b4942233b6f
+    country_id: *id
+    network_id: *id_ngabang_region
+  - id: 89671
+    prefix: '62564'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 903fff0f-10db-4bdc-9fa3-4abab49e3ed5
+    country_id: *id
+    network_id: *id_balai_karangan_sanggau_region
+  - id: 89787
+    prefix: '62565'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: cee49f6b-2feb-49de-aa02-39d5975ab200
+    country_id: *id
+    network_id: *id_sintang_region
+  - id: 89826
+    prefix: '62567'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 89016b2d-126f-411a-93b6-efefebf467e9
+    country_id: *id
+    network_id: *id_putussibau_region
+  - id: 90233
+    prefix: '62568'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 0a8f8a9b-b01f-4507-b7e9-3ee8a9127d06
+    country_id: *id
+    network_id: *id_nangapinoh_sambas_region
+  - id: 82011
+    prefix: '62573'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 406a0c25-a8ce-4df5-ac12-08c71c8d34e4
+    country_id: *id
+    network_id: *id_sukadana_region
+  - id: 91455
+    prefix: '62574'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 3cd99090-aad2-4383-b249-b021f5755377
+    country_id: *id
+    network_id: *id_nangatayap_region
+  - id: 91865
+    prefix: '62575'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: b3ea0ccb-44f0-4236-b057-5f05f81dd4d3
+    country_id: *id
+    network_id: *id_padang_karimata_region
+  - id: 83328
+    prefix: '62582'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 778feba2-49e3-46b4-b81e-dc9316af7b3a
+    country_id: *id
+    network_id: *id_semitau_region
+  - id: 245399
+    prefix: '626'
     number_min_length: 6
     number_max_length: 7
-    uuid: 18769c67-09b3-47e1-83db-e70a2400b95e
+    uuid: d8ec2b3c-ac20-4a43-b908-575b1b760436
     country_id: *id
     network_id: *id_special_services
+  - id: 108579
+    prefix: '6261'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cf2587f2-9463-4070-bfff-9043025b4146
+    country_id: *id
+    network_id: *id_medan_region
+  - id: 112484
+    prefix: '62620'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 917f16c1-da65-4b15-9f8b-3765c5c97042
+    country_id: *id
+    network_id: *id_pangkalan_brandan_region
+  - id: 113191
+    prefix: '62621'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cd56cea9-b31a-47ea-a65b-5f33611f9d68
+    country_id: *id
+    network_id: *id_tebingtinggi_region
+  - id: 113227
+    prefix: '62622'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f2e2bfbe-4ec8-4cde-b6ea-915cdf052327
+    country_id: *id
+    network_id: *id_pematang_siantar_region
+  - id: 115572
+    prefix: '62623'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 78649937-6717-4c29-8238-50bdd1427d67
+    country_id: *id
+    network_id: *id_kisaran_region
+  - id: 115958
+    prefix: '62624'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 9617b002-6a68-4800-9410-d4a10a7b94af
+    country_id: *id
+    network_id: *id_rantau_prapat_region
+  - id: 116798
+    prefix: '62625'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: bbe8228e-182a-4acf-9b9e-25af12bdb888
+    country_id: *id
+    network_id: *id_parapat_region
+  - id: 117147
+    prefix: '62626'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: ba6adfa4-2675-41cb-9bfe-9912824a204d
+    country_id: *id
+    network_id: *id_pangururan_region
+  - id: 113851
+    prefix: '62627'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 1c1f6be5-91b0-4d8e-9a7c-b7c29518217f
+    country_id: *id
+    network_id: *id_sidikalang_region
+  - id: 114217
+    prefix: '62628'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 444a3ea8-1324-435f-b518-463eedaed568
+    country_id: *id
+    network_id: *id_kabanjahe_region
+  - id: 114430
+    prefix: '62629'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a1106106-85d6-4843-b40d-19546a137978
+    country_id: *id
+    network_id: *id_kutacane_region
+  - id: 118879
+    prefix: '62630'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 90a8f39f-3899-4856-961a-aac806723a1c
+    country_id: *id
+    network_id: *id_teluk_dalam_region
+  - id: 119678
+    prefix: '62631'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 4532c23d-e9fe-4aaf-9852-2ad16f1e7405
+    country_id: *id
+    network_id: *id_sibolga_region
+  - id: 114639
+    prefix: '62632'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 9cfc87e1-d8b3-490c-8f1a-e383b37ccefa
+    country_id: *id
+    network_id: *id_balige_region
+  - id: 114799
+    prefix: '62633'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 55b2975d-5e48-47b7-a255-782c622284e8
+    country_id: *id
+    network_id: *id_tarutung_region
+  - id: 124163
+    prefix: '62634'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 76a5e0b2-ecf0-4b46-892a-613dc604635a
+    country_id: *id
+    network_id: *id_padang_sidempuan_region
+  - id: 124254
+    prefix: '62635'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 56924f73-603b-424d-89fd-ffa327ed5a7f
+    country_id: *id
+    network_id: *id_gunungtua_region
+  - id: 124336
+    prefix: '62636'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 2c4761e0-0e1c-464f-95ae-2adf1829ad6d
+    country_id: *id
+    network_id: *id_natal_panyabungan_region
+  - id: 120990
+    prefix: '62638'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 51fddc7b-7da4-4d5e-863a-661f4e08c675
+    country_id: *id
+    network_id: *id_barus_region
+  - id: 121269
+    prefix: '62639'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6d957f11-108d-4079-92d9-58e11884d4fd
+    country_id: *id
+    network_id: *id_gunung_sitoli_region
+  - id: 123659
+    prefix: '62641'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b4d6e5b4-c40f-4198-b4da-885980e2c15d
+    country_id: *id
+    network_id: *id_langsa_region
+  - id: 133041
+    prefix: '62642'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 3769d170-2e02-4e77-a7f3-096c058509f9
+    country_id: *id
+    network_id: *id_blangkejeren_region
+  - id: 133401
+    prefix: '62643'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a930376a-e31a-4378-bba2-720e91210a11
+    country_id: *id
+    network_id: *id_takengon_region
+  - id: 133452
+    prefix: '62644'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: bb06702f-5985-4a65-a018-1ce232ef0753
+    country_id: *id
+    network_id: *id_bireun_region
+  - id: 133964
+    prefix: '62645'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 2430aba0-f914-4941-81bf-9d81b7573917
+    country_id: *id
+    network_id: *id_lhok_seumawe_region
+  - id: 124952
+    prefix: '62646'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: ba02b7bd-653b-471c-a707-63f7b5f5a2d2
+    country_id: *id
+    network_id: *id_idi_region
+  - id: 126596
+    prefix: '62650'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 002b2003-8954-48b3-aeb9-a2dba510ca78
+    country_id: *id
+    network_id: *id_sinabang_region
+  - id: 136661
+    prefix: '62651'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 3d0fcfdd-73af-4a36-a9ad-839968a196c0
+    country_id: *id
+    network_id: *id_banda_aceh_region
+  - id: 137190
+    prefix: '62652'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 658e4537-3f20-4fea-823d-e06abc273b90
+    country_id: *id
+    network_id: *id_sabang_region
+  - id: 137257
+    prefix: '62653'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 9a2ec610-7fc6-40cb-9643-2e2326c4cd7a
+    country_id: *id
+    network_id: *id_sigli_region
+  - id: 127134
+    prefix: '62654'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 90ea440d-9fa0-4c0c-b68e-36910d48d9ab
+    country_id: *id
+    network_id: *id_calang_region
+  - id: 127162
+    prefix: '62655'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 5cffad0b-75a1-4b59-8ae2-75013b22e3b4
+    country_id: *id
+    network_id: *id_meulaboh_region
+  - id: 127188
+    prefix: '62656'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 0cf4de14-46ac-47f8-bd52-0d7d5e922727
+    country_id: *id
+    network_id: *id_tapaktuan_region
+  - id: 137643
+    prefix: '62657'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 20c9caf1-11b2-4d71-a127-41b8059501a9
+    country_id: *id
+    network_id: *id_bakongan_region
+  - id: 138343
+    prefix: '62658'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 079aa0dd-05f9-4149-9a48-9a9a1572a6d8
+    country_id: *id
+    network_id: *id_singkil_region
+  - id: 138403
+    prefix: '62659'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 5be55cfa-d8bf-4653-b263-33173264f365
+    country_id: *id
+    network_id: *id_blang_pidie_region
   - id: 255255
     prefix: '627'
     number_min_length: 6
@@ -4095,20 +3216,482 @@ network_prefixes:
     uuid: 61086bc4-c4e4-462d-b762-7b7b0d40d84d
     country_id: *id
     network_id: *id_special_services
-  - id: 257106
-    prefix: '629'
+  - id: 150701
+    prefix: '62702'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6da0d07e-2852-4de0-80f3-177985560a7f
+    country_id: *id
+    network_id: *id_tebing_tinggi_region
+  - id: 157878
+    prefix: '62711'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 166ea2a5-f2ff-4ff5-a874-c439dbe85e25
+    country_id: *id
+    network_id: *id_palembang_region
+  - id: 157965
+    prefix: '62712'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8d09aa60-5828-4dd5-ab32-5eeecadf63d9
+    country_id: *id
+    network_id: *id_kayu_agung_region
+  - id: 159090
+    prefix: '62713'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 60ca864c-d8af-4597-9c1c-9f7173d84a59
+    country_id: *id
+    network_id: *id_prabumulih_region
+  - id: 164977
+    prefix: '62714'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 402bb59a-5610-4f24-93c5-12f2786c082e
+    country_id: *id
+    network_id: *id_sekayu_region
+  - id: 165863
+    prefix: '62715'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b02109cb-37c0-43c5-b600-486eab83973a
+    country_id: *id
+    network_id: *id_belinyu_region
+  - id: 160459
+    prefix: '62716'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fd4a3340-373d-4b9b-9dda-969c9ed7bb69
+    country_id: *id
+    network_id: *id_mentok_region
+  - id: 166729
+    prefix: '62717'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 51f96e26-8071-455a-922b-21c7edb2e2b6
+    country_id: *id
+    network_id: *id_pangkal_pinang_region
+  - id: 167578
+    prefix: '62718'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8b520bcf-d8dc-48a7-9783-26cac29e9e00
+    country_id: *id
+    network_id: *id_koba_region
+  - id: 171842
+    prefix: '62719'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6b8f3939-6483-4e13-8416-2b0ed1cfb755
+    country_id: *id
+    network_id: *id_tanjung_pandan_region
+  - id: 169517
+    prefix: '62721'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 898a6c7a-9cce-4df0-89e3-85612013ae8d
+    country_id: *id
+    network_id: *id_bandar_lampung_pringsewu_region
+  - id: 169652
+    prefix: '62722'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a614e5be-74d5-4a0f-a74f-d4667f4b9e8a
+    country_id: *id
+    network_id: *id_kota_agung_region
+  - id: 173122
+    prefix: '62723'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 86c4d538-78bb-4008-9fa9-f29255529c92
+    country_id: *id
+    network_id: *id_blambangan_umpu_region
+  - id: 173214
+    prefix: '62724'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e71fc9c2-d1b7-40f2-8ac8-be4b089b499e
+    country_id: *id
+    network_id: *id_kotabumi_region
+  - id: 170425
+    prefix: '62725'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 38984e85-190a-470a-919b-7fb887341d31
+    country_id: *id
+    network_id: *id_bandar_jaya_metro_region
+  - id: 170693
+    prefix: '62726'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f85b7540-6928-48f0-bb08-4a530def09a7
+    country_id: *id
+    network_id: *id_manggala_region
+  - id: 181109
+    prefix: '62727'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b9d0b31d-6ffc-4241-8a45-34bc230641d9
+    country_id: *id
+    network_id: *id_kalianda_region
+  - id: 174270
+    prefix: '62728'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a8750b1d-aa11-4767-a4b4-3de569876f93
+    country_id: *id
+    network_id: *id_krui_liwa_region
+  - id: 174387
+    prefix: '62729'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 3a583bf2-e86c-4fd5-b514-37eec7794a9a
+    country_id: *id
+    network_id: *id_pringsewu_region
+  - id: 175898
+    prefix: '62730'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: c20a8b4d-354f-4f58-8351-a3d27896823d
+    country_id: *id
+    network_id: *id_pagaralam_region
+  - id: 175957
+    prefix: '62731'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f10c3af5-4af1-4f73-9a6b-a185ec79fe6d
+    country_id: *id
+    network_id: *id_lahat_region
+  - id: 176374
+    prefix: '62732'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: dc1c48dc-c2f7-4080-a335-d723be3be90b
+    country_id: *id
+    network_id: *id_curup_region
+  - id: 177335
+    prefix: '62733'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fb2bf3c2-1a64-4aca-911a-5565ae466209
+    country_id: *id
+    network_id: *id_lubuk_linggau_region
+  - id: 181480
+    prefix: '62734'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 95fe48b3-4cfd-48f0-81b9-4220c2449346
+    country_id: *id
+    network_id: *id_muaraenim_region
+  - id: 177845
+    prefix: '62735'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 91441907-ff8c-490e-98f7-a6cd27a41edc
+    country_id: *id
+    network_id: *id_baturaja_region
+  - id: 178473
+    prefix: '62736'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 97b8fbac-97d3-4d34-a439-7ce9f4462a14
+    country_id: *id
+    network_id: *id_bengkulu_region
+  - id: 178587
+    prefix: '62737'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 40abf832-4786-46b9-ace7-449f01d93566
+    country_id: *id
+    network_id: *id_argamakmur_region
+  - id: 182708
+    prefix: '62738'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: c11962be-3003-45e1-a7e2-0246031b7536
+    country_id: *id
+    network_id: *id_muara_aman_region
+  - id: 182766
+    prefix: '62739'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: ba787633-ba76-4d55-858e-e4be3181771e
+    country_id: *id
+    network_id: *id_manna_region
+  - id: 183423
+    prefix: '62740'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a65e628c-ea9d-4e9a-8952-a465156e39f8
+    country_id: *id
+    network_id: *id_mendara_pangkalan_bulian_region
+  - id: 184220
+    prefix: '62741'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d1238c18-ff3f-4b6a-acf4-473cee969caa
+    country_id: *id
+    network_id: *id_jambi_region
+  - id: 184386
+    prefix: '62742'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 58bdaeaa-99d7-4316-b2b7-1bfc4afe7e92
+    country_id: *id
+    network_id: *id_kuala_tungkal_region
+  - id: 184621
+    prefix: '62743'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 116a880b-9ec7-4a8b-9eb0-0f6de6c10ca7
+    country_id: *id
+    network_id: *id_muarabulian_region
+  - id: 184817
+    prefix: '62744'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 180307f4-4533-4f62-ac2f-f2914ff707e7
+    country_id: *id
+    network_id: *id_muaratebo_region
+  - id: 179306
+    prefix: '62745'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 23b73f95-4731-4dbd-a2f8-a6c51d4aa24b
+    country_id: *id
+    network_id: *id_sarolangun_region
+  - id: 179481
+    prefix: '62746'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8faf9164-5bec-4764-b432-f7ab95fed0bd
+    country_id: *id
+    network_id: *id_bangko_region
+  - id: 179653
+    prefix: '62747'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 20e29113-593b-4a5d-ac21-d60d67b691eb
+    country_id: *id
+    network_id: *id_muarabungo_region
+  - id: 185531
+    prefix: '62748'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 54cae9b6-c2f1-45be-9741-d8c070054070
+    country_id: *id
+    network_id: *id_sungai_penuh_region
+  - id: 186340
+    prefix: '62751'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d0396d24-8a3f-4030-8788-19fc601fd416
+    country_id: *id
+    network_id: *id_padang_region
+  - id: 186372
+    prefix: '62752'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 791a0d46-5e5e-4679-904d-ca475f7834eb
+    country_id: *id
+    network_id: *id_bukittinggi_region
+  - id: 186401
+    prefix: '62753'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 1637be23-aac9-4a0f-b395-dfc5c0a52a69
+    country_id: *id
+    network_id: *id_lubuk_sikaping_region
+  - id: 186909
+    prefix: '62754'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 5b4913b1-3278-4cfc-bb66-ddc048339f54
+    country_id: *id
+    network_id: *id_sijunjung_region
+  - id: 179941
+    prefix: '62755'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 2639ba6c-9e7a-4410-9c82-4f002b00ec8b
+    country_id: *id
+    network_id: *id_solok_region
+  - id: 180278
+    prefix: '62756'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: dfdf12a5-aed0-4f5c-8755-2f60e5dedc53
+    country_id: *id
+    network_id: *id_painan_region
+  - id: 180590
+    prefix: '62757'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: c4a6efa5-f6ec-4bbd-adcb-fb5db99ef16a
+    country_id: *id
+    network_id: *id_balaisalasa_region
+  - id: 187753
+    prefix: '62758'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 14a27289-4830-42e1-be14-150b37a09fa2
+    country_id: *id
+    network_id: *id_matobe_region
+  - id: 187886
+    prefix: '62759'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 660071be-872f-4ea4-be17-08dddd4a273d
+    country_id: *id
+    network_id: *id_muara_siberut_region
+  - id: 188700
+    prefix: '62760'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 5da94f48-2640-489e-a55b-b504c0b781af
+    country_id: *id
+    network_id: *id_teluk_kuantan_region
+  - id: 189501
+    prefix: '62761'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 78bf9175-0a64-49f7-9319-2f91b62137cf
+    country_id: *id
+    network_id: *id_pekanbaru_region
+  - id: 189549
+    prefix: '62762'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 1f7210f5-ad84-45af-be3c-af1a88efdb1e
+    country_id: *id
+    network_id: *id_bangkinang_region
+  - id: 191130
+    prefix: '62763'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8a8cc500-86b9-4b5d-b815-c615ffa62fb7
+    country_id: *id
+    network_id: *id_selat_panjang_region
+  - id: 191540
+    prefix: '62764'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 50a1f57c-09ed-4b27-9346-01e7f792bb40
+    country_id: *id
+    network_id: *id_siak_sriindrapura_region
+  - id: 191689
+    prefix: '62765'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: f1080617-ed75-4b52-ab52-bda0616b7e10
+    country_id: *id
+    network_id: *id_dumai_region
+  - id: 190354
+    prefix: '62766'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b5247880-cea0-49fe-a115-0ccb98bca7c4
+    country_id: *id
+    network_id: *id_bengkalis_region
+  - id: 190556
+    prefix: '62767'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: b1746d17-14de-42e8-9e29-3be37e671c63
+    country_id: *id
+    network_id: *id_bagan_siapiapi_region
+  - id: 200407
+    prefix: '62768'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a7ceabe3-ac7b-4e8f-bd5c-7c3e3d19a1f1
+    country_id: *id
+    network_id: *id_tembilahan_region
+  - id: 200511
+    prefix: '62769'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fdfd9cec-3ff7-464c-a166-49094bba11ed
+    country_id: *id
+    network_id: *id_rengat_region
+  - id: 192570
+    prefix: '62770'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 71d5291b-478c-4f94-bdf9-037c64401928
+    country_id: *id
+    network_id: *id_kawasan_khusus_batam___bintan_region
+  - id: 193383
+    prefix: '62771'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: db51ad19-2626-4718-b54b-4c67424a9f52
+    country_id: *id
+    network_id: *id_tanjung_pinang_region
+  - id: 194423
+    prefix: '62772'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: baa540f1-6cb7-4640-a423-4099c51892e7
+    country_id: *id
+    network_id: *id_terempa_region
+  - id: 195006
+    prefix: '62773'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 2f05eecd-4335-40bd-94f2-a6ccf3e953de
+    country_id: *id
+    network_id: *id_ranai_region
+  - id: 196212
+    prefix: '62774'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 814b8972-b16e-49a6-90c1-56d8218a1793
+    country_id: *id
+    network_id: *id_natuna_selatan_region
+  - id: 200897
+    prefix: '62775'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d8325288-de1c-437d-b642-52dfbbeb6f7e
+    country_id: *id
+    network_id: *id_p_tembelan_region
+  - id: 196703
+    prefix: '62776'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: df809796-583f-4256-8da1-6dc1214264fb
+    country_id: *id
+    network_id: *id_dabosingkep_region
+  - id: 197000
+    prefix: '62777'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 50c539dc-80b8-4994-8b12-8aeb029abc1a
+    country_id: *id
+    network_id: *id_karimun_tanjungbalai_region
+  - id: 202439
+    prefix: '62778'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 18aec027-752f-4bb1-b764-aad7a6856e38
+    country_id: *id
+    network_id: *id_sekupang_batam_region
+  - id: 197896
+    prefix: '62779'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: fa78626e-97c5-448b-8b42-fe604feaac43
+    country_id: *id
+    network_id: *id_tanjung_batu_region
+  - id: 253083
+    prefix: '628'
     number_min_length: 6
     number_max_length: 7
-    uuid: c391114a-35ba-480a-8097-de48b401054a
+    uuid: 18769c67-09b3-47e1-83db-e70a2400b95e
     country_id: *id
-    network_id: *id_special_and_sms_services
-  - id: 401749
-    prefix: '62806'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 428c055c-5324-4719-90a2-fda7028a4487
-    country_id: *id
-    network_id: *id_mass_calling_services
+    network_id: *id_special_services
   - id: 403473
     prefix: '62800'
     number_min_length: 12
@@ -4123,6 +3706,27 @@ network_prefixes:
     uuid: d3f3a8a9-3386-456a-bfef-8676b9df025d
     country_id: *id
     network_id: *id_universal_personal_telecommunications_upt
+  - id: 208450
+    prefix: '62804'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c4cb1adc-3ba5-410c-aeb7-37c87eaf1220
+    country_id: *id
+    network_id: *id_shared_cost_services
+  - id: 209218
+    prefix: '62805'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e0f06891-d1b6-4b80-a59b-68701afeac06
+    country_id: *id
+    network_id: *id_virtual_private_network
+  - id: 401749
+    prefix: '62806'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 428c055c-5324-4719-90a2-fda7028a4487
+    country_id: *id
+    network_id: *id_mass_calling_services
   - id: 412067
     prefix: '62807'
     number_min_length: 12
@@ -4144,15 +3748,6 @@ network_prefixes:
     uuid: d6301f14-e9ed-4a86-9b29-80dd020cff73
     country_id: *id
     network_id: *id_premium_rate_services
-# Country code Prefixes
-  - id: 242017
-    prefix: '62'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 882aa51d-41d6-4481-902e-0415ccb07fdf
-    country_id: *id
-    network_id: null
-# Mobile Prefixes
   - id: 406906
     prefix: '62811'
     number_min_length: 11
@@ -4165,6 +3760,13 @@ network_prefixes:
     number_min_length: 12
     number_max_length: 13
     uuid: 062cb586-60d5-416b-b976-20df2e8979b6
+    country_id: *id
+    network_id: *id_telkomsel_mobile
+  - id: 415682
+    prefix: '62813'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 7d364929-a7d5-4c8a-b544-a97689ab5019
     country_id: *id
     network_id: *id_telkomsel_mobile
   - id: 407396
@@ -4181,34 +3783,6 @@ network_prefixes:
     uuid: d909b859-ae4b-4873-80f0-e45e7db54532
     country_id: *id
     network_id: *id_indosat_ooredoo_hutchison_mobile
-  - id: 409344
-    prefix: '62818'
-    number_min_length: 11
-    number_max_length: 13
-    uuid: 198f9809-166f-4263-88dc-3e5d5ed9fef7
-    country_id: *id
-    network_id: *id_xl_mobile
-  - id: 409899
-    prefix: '62822'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 295240bc-d7e6-4404-a58a-4855bb475122
-    country_id: *id
-    network_id: *id_telkomsel_mobile
-  - id: 409926
-    prefix: '62823'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: b39b8739-e772-43c1-b26b-f5ae7c505279
-    country_id: *id
-    network_id: *id_telkomsel_mobile
-  - id: 415682
-    prefix: '62813'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 7d364929-a7d5-4c8a-b544-a97689ab5019
-    country_id: *id
-    network_id: *id_telkomsel_mobile
   - id: 416783
     prefix: '62816'
     number_min_length: 11
@@ -4221,6 +3795,13 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 13
     uuid: acb6ec71-815d-4b29-b29a-178adf069843
+    country_id: *id
+    network_id: *id_xl_mobile
+  - id: 409344
+    prefix: '62818'
+    number_min_length: 11
+    number_max_length: 13
+    uuid: 198f9809-166f-4263-88dc-3e5d5ed9fef7
     country_id: *id
     network_id: *id_xl_mobile
   - id: 417999
@@ -4237,6 +3818,27 @@ network_prefixes:
     uuid: dd65f4b7-2719-4fe9-8002-05b34e6d5d6c
     country_id: *id
     network_id: *id_telkomsel_mobile
+  - id: 409899
+    prefix: '62822'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 295240bc-d7e6-4404-a58a-4855bb475122
+    country_id: *id
+    network_id: *id_telkomsel_mobile
+  - id: 409926
+    prefix: '62823'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b39b8739-e772-43c1-b26b-f5ae7c505279
+    country_id: *id
+    network_id: *id_telkomsel_mobile
+  - id: 431569
+    prefix: '62831'
+    number_min_length: 12
+    number_max_length: 13
+    uuid: f761319c-601f-40ac-b7a7-16c5a8e73afe
+    country_id: *id
+    network_id: *id_xl_mobile
   - id: 424307
     prefix: '62838'
     number_min_length: 12
@@ -4279,20 +3881,6 @@ network_prefixes:
     uuid: 7daea4aa-13a9-4eab-bc52-0c88166e3f61
     country_id: *id
     network_id: *id_indosat_ooredoo_hutchison_mobile
-  - id: 428126
-    prefix: '62859'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 676ad974-ed5a-417f-97f0-be9349e4ceb8
-    country_id: *id
-    network_id: *id_xl_mobile
-  - id: 431569
-    prefix: '62831'
-    number_min_length: 12
-    number_max_length: 13
-    uuid: f761319c-601f-40ac-b7a7-16c5a8e73afe
-    country_id: *id
-    network_id: *id_xl_mobile
   - id: 436708
     prefix: '62857'
     number_min_length: 13
@@ -4307,6 +3895,13 @@ network_prefixes:
     uuid: 45dadab5-db2b-45b3-bcfe-5f4ae898688f
     country_id: *id
     network_id: *id_indosat_ooredoo_hutchison_mobile
+  - id: 428126
+    prefix: '62859'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 676ad974-ed5a-417f-97f0-be9349e4ceb8
+    country_id: *id
+    network_id: *id_xl_mobile
   - id: 450703
     prefix: '62877'
     number_min_length: 13
@@ -4391,3 +3986,411 @@ network_prefixes:
     uuid: 729d215d-ffbb-4275-bf48-e9943489d0c7
     country_id: *id
     network_id: *id_indosat_ooredoo_hutchison_mobile
+# Supplementary services Prefixes
+  - id: 257106
+    prefix: '629'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: c391114a-35ba-480a-8097-de48b401054a
+    country_id: *id
+    network_id: *id_special_and_sms_services
+  - id: 454707
+    prefix: '62901'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: ef7f158c-f3ae-49c9-9635-eecccf4aa133
+    country_id: *id
+    network_id: *id_timika_region
+  - id: 454951
+    prefix: '62902'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: c0d8ffe7-57a7-4cf8-b507-3a0bd3a01019
+    country_id: *id
+    network_id: *id_agat_region
+  - id: 447283
+    prefix: '62903'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 8a51689f-dee7-4e06-8524-ad9215e95dec
+    country_id: *id
+    network_id: *id_enarotali_region
+  - id: 455869
+    prefix: '62904'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 595aa159-c217-4c58-b518-bb911a72ba30
+    country_id: *id
+    network_id: *id_semini_region
+  - id: 458515
+    prefix: '62910'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: dd9ab730-824a-41ed-839a-b712b3b26ca4
+    country_id: *id
+    network_id: *id_bandaneira_region
+  - id: 465122
+    prefix: '62911'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: b28be9af-aed2-415b-8770-d98b7f5d212f
+    country_id: *id
+    network_id: *id_ambon_region
+  - id: 465640
+    prefix: '62912'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 5a6db62b-f305-42b2-a03b-73f66b1fff39
+    country_id: *id
+    network_id: *id_piru_region
+  - id: 466315
+    prefix: '62913'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 91d4422e-de01-4519-9187-ce0790a3b324
+    country_id: *id
+    network_id: *id_namlea_region
+  - id: 460337
+    prefix: '62914'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 05466cdf-2f56-4a18-b666-f0c87a975e09
+    country_id: *id
+    network_id: *id_masohi_region
+  - id: 466837
+    prefix: '62915'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 8e8d0d6e-678c-419d-a309-2da110467b94
+    country_id: *id
+    network_id: *id_bula_region
+  - id: 467203
+    prefix: '62916'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 3e3f7268-cdf4-495e-a697-55c63f5791cf
+    country_id: *id
+    network_id: *id_tual_region
+  - id: 461704
+    prefix: '62917'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: bd04479b-afee-4d31-8903-df23664bb1c7
+    country_id: *id
+    network_id: *id_dobo_region
+  - id: 467619
+    prefix: '62918'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 306e2030-dc02-4065-8dfd-873685781663
+    country_id: *id
+    network_id: *id_saumlaki_region
+  - id: 469803
+    prefix: '62919'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 8b9b21b8-d4bc-4b66-adc3-d02f18e91dc3
+    country_id: *id
+    network_id: *id_tepa_region
+  - id: 476595
+    prefix: '62921'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 126dc72e-234e-4a0a-9d8f-16a90c9ad9ed
+    country_id: *id
+    network_id: *id_soasiu_ternate_region
+  - id: 477107
+    prefix: '62922'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 17fca599-aa1c-45d4-bdcc-900c8f917c6b
+    country_id: *id
+    network_id: *id_jailolo_region
+  - id: 478436
+    prefix: '62923'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: c1efe000-6018-4ac8-8155-6fe82bcef1b1
+    country_id: *id
+    network_id: *id_pitu_morotai_region
+  - id: 474427
+    prefix: '62924'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: cd7c9bb8-8989-42b9-9862-76ff6198d06a
+    country_id: *id
+    network_id: *id_tobelo_region
+  - id: 474668
+    prefix: '62925'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: d08d7962-68d1-42ea-b543-7dcfe0f45ce7
+    country_id: *id
+    network_id: *id_weda_region
+  - id: 475297
+    prefix: '62926'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 6d32b5ba-2865-4f26-9c5d-02c29e1e43b2
+    country_id: *id
+    network_id: *id_umera_region
+  - id: 482770
+    prefix: '62927'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 74856e2c-8984-4a14-ac6c-54f0932c29c3
+    country_id: *id
+    network_id: *id_labuha_region
+  - id: 482785
+    prefix: '62928'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 23959a7c-0417-42f3-8e85-e67aade289f1
+    country_id: *id
+    network_id: *id_laiwui_region
+  - id: 481754
+    prefix: '62929'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 54260234-cab3-43d5-b3c8-1252cede591a
+    country_id: *id
+    network_id: *id_sanana_region
+# Mobile Prefixes
+  - id: 490006
+    prefix: '62931'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 7a605671-9ffa-4157-bca4-86dc7ca10680
+    country_id: *id
+    network_id: *id_saparua_region
+  - id: 217412
+    prefix: '62950'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: e8f28098-9d19-4f9e-b002-e3be2aedc87e
+    country_id: *id
+    network_id: *id_babo_region
+  - id: 217425
+    prefix: '62951'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 0610545e-2586-4f0f-8e51-5a1f283995f7
+    country_id: *id
+    network_id: *id_sorong_region
+  - id: 219046
+    prefix: '62952'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 81de8085-0efc-4a44-9adb-16935a9e3691
+    country_id: *id
+    network_id: *id_teminabuan_region
+  - id: 219425
+    prefix: '62953'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 3b3520c1-3b8b-443a-b764-2f7d6f931e91
+    country_id: *id
+    network_id: *id_kabare_region
+  - id: 221100
+    prefix: '62955'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 7d1e75a2-0891-4751-acf8-adc46425ec54
+    country_id: *id
+    network_id: *id_bintuni_region
+  - id: 221114
+    prefix: '62956'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: c415a051-fc34-4f2d-a70c-99146ff6c058
+    country_id: *id
+    network_id: *id_fak_fak_region
+  - id: 216353
+    prefix: '62957'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 26ade422-a140-49e3-a812-aac3cca8d897
+    country_id: *id
+    network_id: *id_kaimana_region
+  - id: 216365
+    prefix: '62958'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 5ee72516-8f41-4f92-8dc3-bc2686c3d1af
+    country_id: *id
+    network_id: *id_makbon_region
+  - id: 221786
+    prefix: '62959'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 6ce7c5b8-86e7-44a4-9604-106dfaa54f56
+    country_id: *id
+    network_id: *id_seget_region
+  - id: 225109
+    prefix: '62960'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: b131b10f-39eb-428d-a49f-7c7107319f83
+    country_id: *id
+    network_id: *id_tiom_region
+  - id: 225371
+    prefix: '62962'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 243f368d-4ade-46b1-b765-ab2f73651d49
+    country_id: *id
+    network_id: *id_ilaga_region
+  - id: 223345
+    prefix: '62963'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 420d96e7-416e-4bce-bf58-be27eb5cece8
+    country_id: *id
+    network_id: *id_bokondini_region
+  - id: 223457
+    prefix: '62964'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 666193f4-9b44-4dd2-99cc-68031ca55445
+    country_id: *id
+    network_id: *id_genyem_region
+  - id: 223701
+    prefix: '62965'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 5f17b8fe-e0d1-4e0f-a8e0-244cec02ff81
+    country_id: *id
+    network_id: *id_senggi_region
+  - id: 226306
+    prefix: '62966'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 0bbbd6f4-16b7-49e5-9cb2-f6df7bea8ed3
+    country_id: *id
+    network_id: *id_sarmi_region
+  - id: 226683
+    prefix: '62967'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 9217a5bf-3986-4c40-b511-22aabd0cd74b
+    country_id: *id
+    network_id: *id_jayapura_region
+  - id: 227304
+    prefix: '62969'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 7787bcde-2fbb-494f-a2ce-04e3b70bf705
+    country_id: *id
+    network_id: *id_wamena_region
+  - id: 228262
+    prefix: '62971'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 453dfdf1-7d98-4a33-be4b-11809cd8ab2f
+    country_id: *id
+    network_id: *id_kimaan_merauke_region
+  - id: 229615
+    prefix: '62972'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 3c8ebda9-2cd8-464c-936a-f644c2a70c2c
+    country_id: *id
+    network_id: *id_okaba_region
+  - id: 233313
+    prefix: '62974'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 8daeb058-1de1-4931-9325-bcf3a6813539
+    country_id: *id
+    network_id: *id_bade_region
+  - id: 233333
+    prefix: '62975'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: be3cb48e-67b3-4b7e-a8ec-11a28d1fb939
+    country_id: *id
+    network_id: *id_tanah_merah_region
+  - id: 233356
+    prefix: '62977'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: ff2f7dbb-d915-4065-acc2-40c6b61355d9
+    country_id: *id
+    network_id: *id_kamur_region
+  - id: 233377
+    prefix: '62978'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: a504a9c5-431f-49a5-ad28-421e1ac94c27
+    country_id: *id
+    network_id: *id_waropko_region
+  - id: 231185
+    prefix: '62979'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 3c8d040f-baaa-4491-8585-3fd0994851ce
+    country_id: *id
+    network_id: *id_senggo_region
+  - id: 232319
+    prefix: '62980'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 68140b40-8159-490f-8fbc-b84cc7a7c18e
+    country_id: *id
+    network_id: *id_ransiki_region
+  - id: 235044
+    prefix: '62981'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 5f55a7f4-f656-4363-a587-e8ab079c3784
+    country_id: *id
+    network_id: *id_biak_region
+  - id: 232898
+    prefix: '62982'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 0f4225d8-081a-4073-86ab-f2e224f11d1f
+    country_id: *id
+    network_id: *id_waren_region
+  - id: 234735
+    prefix: '62983'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 75649804-f171-479f-814c-373e857a135e
+    country_id: *id
+    network_id: *id_serui_region
+  - id: 235717
+    prefix: '62984'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: dcbc9f9c-3498-42d7-9ea5-443d7bc57e82
+    country_id: *id
+    network_id: *id_nabire_region
+  - id: 237095
+    prefix: '62986'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 05e65211-b661-4280-80aa-73fb8e6fd69e
+    country_id: *id
+    network_id: *id_manokwari_region
+  - id: 237630
+    prefix: '62987'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 49bcf1b9-80f0-4c2b-9c22-055ae20fe0d7
+    country_id: *id
+    network_id: *id_korido_region
+  - id: 238278
+    prefix: '62988'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: edb53054-6517-4fa3-bad0-5fb29396f4fa
+    country_id: *id
+    network_id: *id_numfor_region
+  - id: 238094
+    prefix: '62989'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: b0ec7869-df19-4043-b656-ad746a3d7da3
+    country_id: *id
+    network_id: *id_windesi_region

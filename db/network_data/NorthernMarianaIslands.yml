@@ -5,33 +5,36 @@ networks:
     name: MP Saipan Region
     uuid: 9487726e-189c-4de4-8b31-ffd6281d6f61
     type_id: 2
-  - id: &mp_tinian_region 13976
-    name: MP Tinian Region
-    uuid: c56c05de-8363-4315-a370-bcbc4ac1263e
-    type_id: 2
-  - id: &mp_rota_region 13978
-    name: MP Rota Region
-    uuid: abd0b082-af15-4378-8150-13d0672f8a84
-    type_id: 2
-# Mobile Networks
   - id: &mp_ite_mobile 13975
     name: MP Ite Mobile
     uuid: f7c99927-753b-497c-b308-396f48bd9c68
     type_id: 3
+  - id: &mp_tinian_region 13976
+    name: MP Tinian Region
+    uuid: c56c05de-8363-4315-a370-bcbc4ac1263e
+    type_id: 2
   - id: &mp_docomo_pacific_mobile 13977
     name: MP Docomo Pacific Mobile
     uuid: 42e63a27-d2d5-46b0-95cd-09d71daca932
     type_id: 3
+# Mobile Networks
+  - id: &mp_rota_region 13978
+    name: MP Rota Region
+    uuid: abd0b082-af15-4378-8150-13d0672f8a84
+    type_id: 2
+  - id: &mp_fixed 43315
+    name: MP Fixed
+    uuid: 7acf0865-a28c-4c4b-8b9a-aee79a262834
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
-  - id: 143787
-    prefix: '1670'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: 0b8a1cd2-0e24-40af-bbf4-705de18f55c8
-    country_id: *mp
-    network_id: null
 # Fixed Prefixes
+  - id: 503579
+    prefix: '1670'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: 38798a8c-88be-4562-98ba-643125b881a3
+    country_id: *mp
+    network_id: *mp_fixed
   - id: 143795
     prefix: '1670233'
     number_min_length: 11
@@ -74,6 +77,34 @@ network_prefixes:
     uuid: 78be70ed-9be3-4b9c-acbf-6190574e079a
     country_id: *mp
     network_id: *mp_saipan_region
+  - id: 143802
+    prefix: '1670284'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d2a37ae-6f06-400c-a035-d5b8fbaaf68e
+    country_id: *mp
+    network_id: *mp_ite_mobile
+  - id: 143803
+    prefix: '1670285'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38258365-7a7a-4bc6-a57b-419173f4c121
+    country_id: *mp
+    network_id: *mp_ite_mobile
+  - id: 143804
+    prefix: '1670286'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 85c81f1f-fcba-4a6f-a80d-26a329e907cd
+    country_id: *mp
+    network_id: *mp_ite_mobile
+  - id: 143805
+    prefix: '1670287'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a3ac8f1-7081-43bd-bd9b-434e5b698e9e
+    country_id: *mp
+    network_id: *mp_ite_mobile
   - id: 143806
     prefix: '1670288'
     number_min_length: 11
@@ -109,6 +140,7 @@ network_prefixes:
     uuid: d11d8671-d081-4358-a07e-8a0ed4636f07
     country_id: *mp
     network_id: *mp_saipan_region
+# Mobile Prefixes
   - id: 143814
     prefix: '1670433'
     number_min_length: 11
@@ -116,56 +148,6 @@ network_prefixes:
     uuid: d3fc8052-7027-4b50-a831-ac630e68ec50
     country_id: *mp
     network_id: *mp_tinian_region
-  - id: 143820
-    prefix: '1670532'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6c9828a0-64ac-4e5f-89ee-8bfa80b0d6ca
-    country_id: *mp
-    network_id: *mp_rota_region
-  - id: 143825
-    prefix: '1670664'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fc3b744f-fefc-4f7b-abc3-3bbc0d5a10ee
-    country_id: *mp
-    network_id: *mp_saipan_region
-  - id: 143827
-    prefix: '1670682'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a1977f99-7dc5-49e0-a4f2-cfbe1169c800
-    country_id: *mp
-    network_id: *mp_saipan_region
-# Mobile Prefixes
-  - id: 143802
-    prefix: '1670284'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5d2a37ae-6f06-400c-a035-d5b8fbaaf68e
-    country_id: *mp
-    network_id: *mp_ite_mobile
-  - id: 143803
-    prefix: '1670285'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 38258365-7a7a-4bc6-a57b-419173f4c121
-    country_id: *mp
-    network_id: *mp_ite_mobile
-  - id: 143804
-    prefix: '1670286'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 85c81f1f-fcba-4a6f-a80d-26a329e907cd
-    country_id: *mp
-    network_id: *mp_ite_mobile
-  - id: 143805
-    prefix: '1670287'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a3ac8f1-7081-43bd-bd9b-434e5b698e9e
-    country_id: *mp
-    network_id: *mp_ite_mobile
   - id: 143815
     prefix: '1670483'
     number_min_length: 11
@@ -194,6 +176,13 @@ network_prefixes:
     uuid: 0cf24cda-4c9c-47e0-916c-071abdaafc4c
     country_id: *mp
     network_id: *mp_docomo_pacific_mobile
+  - id: 143820
+    prefix: '1670532'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6c9828a0-64ac-4e5f-89ee-8bfa80b0d6ca
+    country_id: *mp
+    network_id: *mp_rota_region
   - id: 143822
     prefix: '1670588'
     number_min_length: 11
@@ -201,6 +190,20 @@ network_prefixes:
     uuid: 2914f4e8-4002-4a7f-8a7b-10a4cc82f17d
     country_id: *mp
     network_id: *mp_docomo_pacific_mobile
+  - id: 143825
+    prefix: '1670664'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc3b744f-fefc-4f7b-abc3-3bbc0d5a10ee
+    country_id: *mp
+    network_id: *mp_saipan_region
+  - id: 143827
+    prefix: '1670682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a1977f99-7dc5-49e0-a4f2-cfbe1169c800
+    country_id: *mp
+    network_id: *mp_saipan_region
   - id: 143830
     prefix: '1670783'
     number_min_length: 11

@@ -1,19 +1,10 @@
 country_id: &fo 70
 networks:
-# Fixed Networks
+# Supplementary services Networks
   - id: &fo_fixed_network_prefixes_region 21401
     name: FO Fixed Network Prefixes Region
     uuid: 964fe2ef-4e54-47d6-8355-db3fb549c05e
     type_id: 2
-  - id: &fo_fixed 22126
-    name: FO Fixed
-    uuid: 80de31e1-9967-4e07-9766-abfa99611bcf
-    type_id: 2
-  - id: &fo_voip_region 22531
-    name: FO Voip Region
-    uuid: 00604440-f7e6-4617-be16-9f534617ea11
-    type_id: 2
-# Supplementary services Networks
   - id: &fo_special_services 21562
     name: FO Special Services
     uuid: 35a89777-6352-4a32-b9dd-f40bdfaf9c53
@@ -30,23 +21,19 @@ networks:
     name: FO Datanet Access
     uuid: 920d4869-15ad-46cf-b7d8-cacb35385984
     type_id: 13
+  - id: &fo_fixed 22126
+    name: FO Fixed
+    uuid: 80de31e1-9967-4e07-9766-abfa99611bcf
+    type_id: 2
+  - id: &fo_voip_region 22531
+    name: FO Voip Region
+    uuid: 00604440-f7e6-4617-be16-9f534617ea11
+    type_id: 2
   - id: &fo_universal_services 22622
     name: FO Universal Services
     uuid: 4626c881-78c3-4610-b2a9-1f43f16a4df9
     type_id: 13
-  - id: &fo_freephone_services 23815
-    name: FO Freephone Services
-    uuid: 6e3a75e3-7201-4a29-ad13-ff954e317dd2
-    type_id: 13
-  - id: &fo_shared_cost_services 24162
-    name: FO Shared Cost Services
-    uuid: 6e47be1e-8859-4d32-8f46-87e0a3a61de3
-    type_id: 13
-  - id: &fo_900_services 24420
-    name: FO 900 Services
-    uuid: e9fc9f63-ae58-407d-b50a-886235e32b45
-    type_id: 13
-# Mobile Networks
+# Fixed Networks
   - id: &fo_ft_mobile 22795
     name: FO Ft Mobile
     uuid: d47761c1-b897-486c-b3db-e7f0fdaacba3
@@ -55,20 +42,32 @@ networks:
     name: FO Hey Mobile
     uuid: ea3fe476-947e-4264-9398-b1dc0d832c7f
     type_id: 3
+  - id: &fo_freephone_services 23815
+    name: FO Freephone Services
+    uuid: 6e3a75e3-7201-4a29-ad13-ff954e317dd2
+    type_id: 13
+# Mobile Networks
+  - id: &fo_shared_cost_services 24162
+    name: FO Shared Cost Services
+    uuid: 6e47be1e-8859-4d32-8f46-87e0a3a61de3
+    type_id: 13
+  - id: &fo_900_services 24420
+    name: FO 900 Services
+    uuid: e9fc9f63-ae58-407d-b50a-886235e32b45
+    type_id: 13
   - id: &fo_mobile 24498
     name: FO Mobile
     uuid: b625212d-e5e2-492b-9195-ab80706d55f1
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Supplementary services Prefixes
   - id: 241995
     prefix: '298'
     number_min_length: 4
     number_max_length: 100
     uuid: c4ceb5de-6a2f-4fab-890c-148328fe1714
     country_id: *fo
-    network_id: null
-# Fixed Prefixes
+    network_id: *fo_fixed
   - id: 242397
     prefix: '2981'
     number_min_length: 7
@@ -76,98 +75,6 @@ network_prefixes:
     uuid: a4efe21f-0f2f-4772-a63f-1614f835b372
     country_id: *fo
     network_id: *fo_fixed_network_prefixes_region
-  - id: 243934
-    prefix: '2984'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 198f6792-8d35-44fd-97c0-6c1d244fdd6d
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 245390
-    prefix: '2986'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 6de08cb2-a365-40b5-b2bb-b20180a1dd9f
-    country_id: *fo
-    network_id: *fo_voip_region
-  - id: 247452
-    prefix: '29820'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 9e7cc060-0910-4af0-a944-c9eb5ab676a9
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 248896
-    prefix: '2983'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 87b0576e-11a0-4e56-8bd8-de4a113b37c1
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 253315
-    prefix: '29881'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 9639ff51-afb1-4f11-9042-c16537540f00
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 253474
-    prefix: '29882'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 811bc90e-dae1-45d9-ae81-48cba0b417f7
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 253591
-    prefix: '29883'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 1f9cef4a-6657-4005-b2ee-e698abb136d4
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 253716
-    prefix: '29884'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 31ea6ad2-0ca6-496a-a6ca-408f6c140297
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 256837
-    prefix: '29888'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 65141252-3a74-4822-97f5-be87e8263813
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 256994
-    prefix: '29889'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 27396b9b-46fd-49d6-839f-68cd060f607a
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 263703
-    prefix: '29885'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 0e425d78-34dc-4503-8a29-616ed66d5c1b
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 263850
-    prefix: '29886'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 692d8d8d-fb8a-41df-a04a-b33225f1debe
-    country_id: *fo
-    network_id: *fo_fixed
-  - id: 264004
-    prefix: '29887'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 764d504f-7501-4b72-98f9-5412e2b72827
-    country_id: *fo
-    network_id: *fo_fixed
-# Supplementary services Prefixes
   - id: 242588
     prefix: '29811'
     number_min_length: 6
@@ -231,28 +138,14 @@ network_prefixes:
     uuid: e49236d5-cf47-4f49-9e58-837040fc5083
     country_id: *fo
     network_id: *fo_sms_mms_services
-  - id: 253122
-    prefix: '29880'
+  - id: 247452
+    prefix: '29820'
     number_min_length: 9
     number_max_length: 9
-    uuid: f358eb3c-61dd-4905-a31f-21ef1d0a68f0
+    uuid: 9e7cc060-0910-4af0-a944-c9eb5ab676a9
     country_id: *fo
-    network_id: *fo_freephone_services
-  - id: 255294
-    prefix: '29870'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 28c85520-a19c-4685-ab9a-9c6acc74c344
-    country_id: *fo
-    network_id: *fo_shared_cost_services
-  - id: 257157
-    prefix: '29890'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 72a80ec4-08ca-4616-88c7-2bc49b651945
-    country_id: *fo
-    network_id: *fo_900_services
-# Mobile Prefixes
+    network_id: *fo_fixed
+# Fixed Prefixes
   - id: 247625
     prefix: '29821'
     number_min_length: 9
@@ -316,6 +209,20 @@ network_prefixes:
     uuid: 9973a145-2b07-4e38-a9fb-9e6efec65f44
     country_id: *fo
     network_id: *fo_ft_mobile
+  - id: 248896
+    prefix: '2983'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 87b0576e-11a0-4e56-8bd8-de4a113b37c1
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 243934
+    prefix: '2984'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 198f6792-8d35-44fd-97c0-6c1d244fdd6d
+    country_id: *fo
+    network_id: *fo_fixed
   - id: 249572
     prefix: '2985'
     number_min_length: 9
@@ -323,6 +230,20 @@ network_prefixes:
     uuid: 60bedb8a-e56a-4412-ac83-c79865c46dc5
     country_id: *fo
     network_id: *fo_hey_mobile
+  - id: 245390
+    prefix: '2986'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 6de08cb2-a365-40b5-b2bb-b20180a1dd9f
+    country_id: *fo
+    network_id: *fo_voip_region
+  - id: 255294
+    prefix: '29870'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 28c85520-a19c-4685-ab9a-9c6acc74c344
+    country_id: *fo
+    network_id: *fo_shared_cost_services
   - id: 251737
     prefix: '29871'
     number_min_length: 9
@@ -330,6 +251,7 @@ network_prefixes:
     uuid: b3799836-2adc-4fbc-b829-13ee62dace5e
     country_id: *fo
     network_id: *fo_hey_mobile
+# Mobile Prefixes
   - id: 251824
     prefix: '29872'
     number_min_length: 9
@@ -386,6 +308,83 @@ network_prefixes:
     uuid: 6e7b9534-2053-4fcb-8df5-977eacd2f3e3
     country_id: *fo
     network_id: *fo_ft_mobile
+  - id: 253122
+    prefix: '29880'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: f358eb3c-61dd-4905-a31f-21ef1d0a68f0
+    country_id: *fo
+    network_id: *fo_freephone_services
+  - id: 253315
+    prefix: '29881'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 9639ff51-afb1-4f11-9042-c16537540f00
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 253474
+    prefix: '29882'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 811bc90e-dae1-45d9-ae81-48cba0b417f7
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 253591
+    prefix: '29883'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 1f9cef4a-6657-4005-b2ee-e698abb136d4
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 253716
+    prefix: '29884'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 31ea6ad2-0ca6-496a-a6ca-408f6c140297
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 263703
+    prefix: '29885'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 0e425d78-34dc-4503-8a29-616ed66d5c1b
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 263850
+    prefix: '29886'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 692d8d8d-fb8a-41df-a04a-b33225f1debe
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 264004
+    prefix: '29887'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 764d504f-7501-4b72-98f9-5412e2b72827
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 256837
+    prefix: '29888'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 65141252-3a74-4822-97f5-be87e8263813
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 256994
+    prefix: '29889'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 27396b9b-46fd-49d6-839f-68cd060f607a
+    country_id: *fo
+    network_id: *fo_fixed
+  - id: 257157
+    prefix: '29890'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 72a80ec4-08ca-4616-88c7-2bc49b651945
+    country_id: *fo
+    network_id: *fo_900_services
   - id: 257363
     prefix: '29891'
     number_min_length: 9
@@ -405,13 +404,6 @@ network_prefixes:
     number_min_length: 9
     number_max_length: 9
     uuid: dd8c72d0-74e5-45ad-af37-e9064df70d31
-    country_id: *fo
-    network_id: *fo_mobile
-  - id: 258182
-    prefix: '29899'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: f0d91f74-4195-4656-af36-cff55796e323
     country_id: *fo
     network_id: *fo_mobile
   - id: 264194
@@ -447,5 +439,12 @@ network_prefixes:
     number_min_length: 9
     number_max_length: 9
     uuid: 30807d90-7ecf-4a42-8d8f-a1e50f963c90
+    country_id: *fo
+    network_id: *fo_mobile
+  - id: 258182
+    prefix: '29899'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: f0d91f74-4195-4656-af36-cff55796e323
     country_id: *fo
     network_id: *fo_mobile

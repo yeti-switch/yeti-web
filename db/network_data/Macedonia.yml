@@ -1,10 +1,79 @@
 country_id: &mk 126
 networks:
-# Fixed Networks
+# Mobile Networks
   - id: &mk_krusevo_prilep_region 4199
     name: MK Krusevo Prilep Region
     uuid: c13b32b4-dd47-4409-af81-bf2f68a78368
     type_id: 2
+  - id: &mk_adults_entertainment_services 4687
+    name: MK Adults Entertainment Services
+    uuid: c4308717-4ed6-4cd4-a751-65ef8dd3b244
+    type_id: 13
+  - id: &mk_premium_rate_services_per_event_rates 6625
+    name: MK Premium Rate Services Per Event Rates
+    uuid: 803a6145-aff2-45cb-8d60-02209665e0cf
+    type_id: 13
+  - id: &mk_premium_rate_services_per_duration_rates 8808
+    name: MK Premium Rate Services Per Duration Rates
+    uuid: 1b0eb8ee-bd4b-4d6c-a4d7-de99a3ce716c
+    type_id: 13
+  - id: &mk_dial_up_internet_access 9263
+    name: MK Dial Up Internet Access
+    uuid: d83d1e87-556a-454a-b6a2-eff3c0fab336
+    type_id: 13
+  - id: &mk_telekom_mobile 14445
+    name: MK Telekom Mobile
+    uuid: a8bd4fe2-626c-4d5e-bd26-bd8e3a0b723d
+    type_id: 3
+# Supplementary services Networks
+  - id: &mk_a1_mobile 16537
+    name: MK A1 Mobile
+    uuid: ed18ee67-9d4a-4390-bf0d-ad8b7901118c
+    type_id: 3
+  - id: &mk_telekabel_mobile 17643
+    name: MK Telekabel Mobile
+    uuid: 9c570764-abe9-4c82-9776-78397d0a832d
+    type_id: 3
+  - id: &mk_mobik_telekomunikacii_mobile 17644
+    name: MK Mobik Telekomunikacii Mobile
+    uuid: bad31c81-ce47-4787-bbcc-58af11271260
+    type_id: 3
+  - id: &mk_lycamobile_mobile 19654
+    name: MK Lycamobile Mobile
+    uuid: 90b1bbc1-685d-40fe-b5e1-a5a500be7af6
+    type_id: 3
+  - id: &mk_mobile 19777
+    name: MK Mobile
+    uuid: faaf3d85-4e08-47c5-a986-025e6eae23f6
+    type_id: 3
+  - id: &mk_special_services 21448
+    name: MK Special Services
+    uuid: 436e11f4-982d-4374-b3c6-75b00095958e
+    type_id: 13
+  - id: &mk_social_value_services 21641
+    name: MK Social Value Services
+    uuid: 616e5128-7b33-4722-adad-877c13674585
+    type_id: 13
+  - id: &mk_directory_enquiry_services 21683
+    name: MK Directory Enquiry Services
+    uuid: d51073bb-cf05-419b-ab2d-acf774b4f88d
+    type_id: 13
+  - id: &mk_customer_care_services 21716
+    name: MK Customer Care Services
+    uuid: 30db2e9f-822b-43a3-8100-f37d698d6b9d
+    type_id: 13
+  - id: &mk_internal_network_services 21746
+    name: MK Internal Network Services
+    uuid: 187934b7-5808-44ff-be47-1d1e660d499b
+    type_id: 13
+  - id: &mk_home_network_special_services 21770
+    name: MK Home Network Special Services
+    uuid: 832ac0ba-b39a-4752-8c0d-8ebb8d9176bd
+    type_id: 13
+  - id: &mk_public_utility_services 22672
+    name: MK Public Utility Services
+    uuid: 97de603f-d985-4ffc-a5bd-55be466dfc08
+    type_id: 13
   - id: &mk_skopje_region 25846
     name: MK Skopje Region
     uuid: dd4202be-fd7d-4fa8-b809-a9662337075c
@@ -13,6 +82,7 @@ networks:
     name: MK Kratovo Kriva Palanka Kumanovo Region
     uuid: 20ab4c18-a9d3-4cbb-9ed0-433edb6afb78
     type_id: 2
+# Fixed Networks
   - id: &mk_probistip_radovis_stip_sveti_nikole_region 31938
     name: MK Probistip Radovis Stip Sveti Nikole Region
     uuid: dcf1657e-4004-45b3-9df7-6fadb583d333
@@ -49,51 +119,6 @@ networks:
     name: MK Bitola Demir Hisar Resen Region
     uuid: a20beb20-a82b-4771-bc51-4a5dcecb69f6
     type_id: 2
-# Supplementary services Networks
-  - id: &mk_adults_entertainment_services 4687
-    name: MK Adults Entertainment Services
-    uuid: c4308717-4ed6-4cd4-a751-65ef8dd3b244
-    type_id: 13
-  - id: &mk_premium_rate_services_per_event_rates 6625
-    name: MK Premium Rate Services Per Event Rates
-    uuid: 803a6145-aff2-45cb-8d60-02209665e0cf
-    type_id: 13
-  - id: &mk_premium_rate_services_per_duration_rates 8808
-    name: MK Premium Rate Services Per Duration Rates
-    uuid: 1b0eb8ee-bd4b-4d6c-a4d7-de99a3ce716c
-    type_id: 13
-  - id: &mk_dial_up_internet_access 9263
-    name: MK Dial Up Internet Access
-    uuid: d83d1e87-556a-454a-b6a2-eff3c0fab336
-    type_id: 13
-  - id: &mk_special_services 21448
-    name: MK Special Services
-    uuid: 436e11f4-982d-4374-b3c6-75b00095958e
-    type_id: 13
-  - id: &mk_social_value_services 21641
-    name: MK Social Value Services
-    uuid: 616e5128-7b33-4722-adad-877c13674585
-    type_id: 13
-  - id: &mk_directory_enquiry_services 21683
-    name: MK Directory Enquiry Services
-    uuid: d51073bb-cf05-419b-ab2d-acf774b4f88d
-    type_id: 13
-  - id: &mk_customer_care_services 21716
-    name: MK Customer Care Services
-    uuid: 30db2e9f-822b-43a3-8100-f37d698d6b9d
-    type_id: 13
-  - id: &mk_internal_network_services 21746
-    name: MK Internal Network Services
-    uuid: 187934b7-5808-44ff-be47-1d1e660d499b
-    type_id: 13
-  - id: &mk_home_network_special_services 21770
-    name: MK Home Network Special Services
-    uuid: 832ac0ba-b39a-4752-8c0d-8ebb8d9176bd
-    type_id: 13
-  - id: &mk_public_utility_services 22672
-    name: MK Public Utility Services
-    uuid: 97de603f-d985-4ffc-a5bd-55be466dfc08
-    type_id: 13
   - id: &mk_freephone_service 38506
     name: MK Freephone Service
     uuid: a1401abe-a867-4d80-b210-b4794f59745e
@@ -106,188 +131,19 @@ networks:
     name: MK Shared Cost Services
     uuid: 8a75c36e-00a3-478e-b5fa-a9637a19738a
     type_id: 13
-# Mobile Networks
-  - id: &mk_telekom_mobile 14445
-    name: MK Telekom Mobile
-    uuid: a8bd4fe2-626c-4d5e-bd26-bd8e3a0b723d
-    type_id: 3
-  - id: &mk_a1_mobile 16537
-    name: MK A1 Mobile
-    uuid: ed18ee67-9d4a-4390-bf0d-ad8b7901118c
-    type_id: 3
-  - id: &mk_telekabel_mobile 17643
-    name: MK Telekabel Mobile
-    uuid: 9c570764-abe9-4c82-9776-78397d0a832d
-    type_id: 3
-  - id: &mk_mobik_telekomunikacii_mobile 17644
-    name: MK Mobik Telekomunikacii Mobile
-    uuid: bad31c81-ce47-4787-bbcc-58af11271260
-    type_id: 3
-  - id: &mk_lycamobile_mobile 19654
-    name: MK Lycamobile Mobile
-    uuid: 90b1bbc1-685d-40fe-b5e1-a5a500be7af6
-    type_id: 3
-  - id: &mk_mobile 19777
-    name: MK Mobile
-    uuid: faaf3d85-4e08-47c5-a986-025e6eae23f6
-    type_id: 3
+  - id: &mk_fixed 43437
+    name: MK Fixed
+    uuid: 7ec233dc-65cb-4807-a2f1-2cea3e432aaa
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 51612
-    prefix: '38948'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 68d7d48a-f27e-43d5-8670-a3549c9e6e1e
+# Mobile Prefixes
+  - id: 242052
+    prefix: '389'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 1bca5fa4-bbe7-455c-952a-2da53f3866c3
     country_id: *mk
-    network_id: *mk_krusevo_prilep_region
-  - id: 261194
-    prefix: '3892'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 75b2b7ab-3774-4fae-992d-696df38bae88
-    country_id: *mk
-    network_id: *mk_skopje_region
-  - id: 321174
-    prefix: '38931'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d09ed503-1e8c-44fc-8124-2c87c6ed5c3e
-    country_id: *mk
-    network_id: *mk_kratovo_kriva_palanka_kumanovo_region
-  - id: 327281
-    prefix: '38932'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 017ffd3b-c122-4307-bd97-b0bc8a706873
-    country_id: *mk
-    network_id: *mk_probistip_radovis_stip_sveti_nikole_region
-  - id: 337286
-    prefix: '38933'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a2c22346-0db0-436d-90c6-9145bf09288e
-    country_id: *mk
-    network_id: *mk_berovo_delcevo_kocani_vinica_region
-  - id: 340477
-    prefix: '38934'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 24b0a09a-79d0-40e7-a45c-12557e2f1ad4
-    country_id: *mk
-    network_id: *mk_dojran_gevgelija_strumica_valandovo_region
-  - id: 367941
-    prefix: '38943'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6403bbb2-c426-43d8-a503-93d51c0a4938
-    country_id: *mk
-    network_id: *mk_kavadarci_negotino_veles_region
-  - id: 370192
-    prefix: '38944'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8a0400be-c8c0-4fcc-bea6-42136cc795b2
-    country_id: *mk
-    network_id: *mk_tetovo_region
-  - id: 377181
-    prefix: '38942'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aed13778-60cf-4049-8810-1dc9d4041699
-    country_id: *mk
-    network_id: *mk_gostivar_region
-  - id: 388632
-    prefix: '38946'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5d04ebd0-554d-4303-8c19-6b42209937b1
-    country_id: *mk
-    network_id: *mk_debar_ohrid_struga_region
-  - id: 392621
-    prefix: '38945'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 27c14d91-1a93-494b-a429-c7ee8195439a
-    country_id: *mk
-    network_id: *mk_kicevo_makedonski_brod_region
-  - id: 399484
-    prefix: '38947'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f55e6c54-2485-4472-b3f2-95fc8ab84171
-    country_id: *mk
-    network_id: *mk_bitola_demir_hisar_resen_region
-# Supplementary services Prefixes
-  - id: 54945
-    prefix: '389500'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8559c6f-d8be-4fec-98ee-d81cdbebad7f
-    country_id: *mk
-    network_id: *mk_adults_entertainment_services
-  - id: 71642
-    prefix: '38951'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8d4e0af4-6d02-48ed-988e-b817237da3fb
-    country_id: *mk
-    network_id: *mk_premium_rate_services_per_event_rates
-  - id: 73187
-    prefix: '38953'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3de9647d-05c5-4908-b41a-e640909ce172
-    country_id: *mk
-    network_id: *mk_premium_rate_services_per_event_rates
-  - id: 76531
-    prefix: '38952'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d8cec0ab-46a7-4a5a-8ad5-f2fc6a69e19f
-    country_id: *mk
-    network_id: *mk_premium_rate_services_per_event_rates
-  - id: 78103
-    prefix: '38954'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 056ef8ba-be0f-4bbd-8f6c-3f8f2b556f04
-    country_id: *mk
-    network_id: *mk_premium_rate_services_per_event_rates
-  - id: 84404
-    prefix: '38958'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f881b89-e0d3-4a17-9594-030e4e52c76c
-    country_id: *mk
-    network_id: *mk_premium_rate_services_per_duration_rates
-  - id: 84928
-    prefix: '38959'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d3a0550e-6021-4c57-b22c-76f13769a799
-    country_id: *mk
-    network_id: *mk_premium_rate_services_per_duration_rates
-  - id: 87903
-    prefix: '38955'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 615b2aeb-9ee3-4279-90fc-e736be7960f3
-    country_id: *mk
-    network_id: *mk_dial_up_internet_access
-  - id: 90258
-    prefix: '38956'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a77c13f7-6fa4-48b2-b52d-844ac32a7d54
-    country_id: *mk
-    network_id: *mk_premium_rate_services_per_duration_rates
-  - id: 93085
-    prefix: '38957'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aef3f1f2-4626-4289-adc8-31650e71d931
-    country_id: *mk
-    network_id: *mk_premium_rate_services_per_duration_rates
+    network_id: *mk_fixed
   - id: 242445
     prefix: '3891'
     number_min_length: 6
@@ -351,6 +207,13 @@ network_prefixes:
     uuid: 4008b70c-c692-4bb7-aa88-aea0c59dfb01
     country_id: *mk
     network_id: *mk_public_utility_services
+  - id: 261194
+    prefix: '3892'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 75b2b7ab-3774-4fae-992d-696df38bae88
+    country_id: *mk
+    network_id: *mk_skopje_region
   - id: 261203
     prefix: '389213'
     number_min_length: 9
@@ -365,28 +228,161 @@ network_prefixes:
     uuid: 6f821ca0-5181-4a5b-87f1-803e1ec5041c
     country_id: *mk
     network_id: *mk_special_services
-  - id: 403482
-    prefix: '389800'
+  - id: 321174
+    prefix: '38931'
     number_min_length: 11
     number_max_length: 11
-    uuid: ae4f2dc7-8e01-4522-84b3-3c35e3799485
+    uuid: d09ed503-1e8c-44fc-8124-2c87c6ed5c3e
     country_id: *mk
-    network_id: *mk_freephone_service
-  - id: 403512
-    prefix: '3898009'
+    network_id: *mk_kratovo_kriva_palanka_kumanovo_region
+  - id: 327281
+    prefix: '38932'
     number_min_length: 11
     number_max_length: 11
-    uuid: 27c1ba84-6594-4aa3-a334-a590c963433d
+    uuid: 017ffd3b-c122-4307-bd97-b0bc8a706873
     country_id: *mk
-    network_id: *mk_home_country_direct_virtual_cards
-  - id: 444743
-    prefix: '3898'
+    network_id: *mk_probistip_radovis_stip_sveti_nikole_region
+  - id: 337286
+    prefix: '38933'
     number_min_length: 11
     number_max_length: 11
-    uuid: cc2e6155-08a7-49a8-8d31-328e40aa3aa9
+    uuid: a2c22346-0db0-436d-90c6-9145bf09288e
     country_id: *mk
-    network_id: *mk_shared_cost_services
-# Mobile Prefixes
+    network_id: *mk_berovo_delcevo_kocani_vinica_region
+  - id: 340477
+    prefix: '38934'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 24b0a09a-79d0-40e7-a45c-12557e2f1ad4
+    country_id: *mk
+    network_id: *mk_dojran_gevgelija_strumica_valandovo_region
+  - id: 377181
+    prefix: '38942'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aed13778-60cf-4049-8810-1dc9d4041699
+    country_id: *mk
+    network_id: *mk_gostivar_region
+  - id: 367941
+    prefix: '38943'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6403bbb2-c426-43d8-a503-93d51c0a4938
+    country_id: *mk
+    network_id: *mk_kavadarci_negotino_veles_region
+  - id: 370192
+    prefix: '38944'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8a0400be-c8c0-4fcc-bea6-42136cc795b2
+    country_id: *mk
+    network_id: *mk_tetovo_region
+  - id: 392621
+    prefix: '38945'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 27c14d91-1a93-494b-a429-c7ee8195439a
+    country_id: *mk
+    network_id: *mk_kicevo_makedonski_brod_region
+  - id: 388632
+    prefix: '38946'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d04ebd0-554d-4303-8c19-6b42209937b1
+    country_id: *mk
+    network_id: *mk_debar_ohrid_struga_region
+  - id: 399484
+    prefix: '38947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f55e6c54-2485-4472-b3f2-95fc8ab84171
+    country_id: *mk
+    network_id: *mk_bitola_demir_hisar_resen_region
+  - id: 51612
+    prefix: '38948'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 68d7d48a-f27e-43d5-8670-a3549c9e6e1e
+    country_id: *mk
+    network_id: *mk_krusevo_prilep_region
+  - id: 54945
+    prefix: '389500'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8559c6f-d8be-4fec-98ee-d81cdbebad7f
+    country_id: *mk
+    network_id: *mk_adults_entertainment_services
+  - id: 71642
+    prefix: '38951'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8d4e0af4-6d02-48ed-988e-b817237da3fb
+    country_id: *mk
+    network_id: *mk_premium_rate_services_per_event_rates
+  - id: 76531
+    prefix: '38952'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8cec0ab-46a7-4a5a-8ad5-f2fc6a69e19f
+    country_id: *mk
+    network_id: *mk_premium_rate_services_per_event_rates
+  - id: 73187
+    prefix: '38953'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3de9647d-05c5-4908-b41a-e640909ce172
+    country_id: *mk
+    network_id: *mk_premium_rate_services_per_event_rates
+  - id: 78103
+    prefix: '38954'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 056ef8ba-be0f-4bbd-8f6c-3f8f2b556f04
+    country_id: *mk
+    network_id: *mk_premium_rate_services_per_event_rates
+  - id: 87903
+    prefix: '38955'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 615b2aeb-9ee3-4279-90fc-e736be7960f3
+    country_id: *mk
+    network_id: *mk_dial_up_internet_access
+  - id: 90258
+    prefix: '38956'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a77c13f7-6fa4-48b2-b52d-844ac32a7d54
+    country_id: *mk
+    network_id: *mk_premium_rate_services_per_duration_rates
+  - id: 93085
+    prefix: '38957'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aef3f1f2-4626-4289-adc8-31650e71d931
+    country_id: *mk
+    network_id: *mk_premium_rate_services_per_duration_rates
+# Supplementary services Prefixes
+  - id: 84404
+    prefix: '38958'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f881b89-e0d3-4a17-9594-030e4e52c76c
+    country_id: *mk
+    network_id: *mk_premium_rate_services_per_duration_rates
+  - id: 84928
+    prefix: '38959'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3a0550e-6021-4c57-b22c-76f13769a799
+    country_id: *mk
+    network_id: *mk_premium_rate_services_per_duration_rates
+  - id: 207504
+    prefix: '3897'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96b1cbae-83af-48b2-b815-dbd8c8840a8d
+    country_id: *mk
+    network_id: *mk_mobile
   - id: 150237
     prefix: '38970'
     number_min_length: 11
@@ -399,6 +395,13 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 11
     uuid: 322e5560-cbae-4ccd-aafd-a0e90c34c01a
+    country_id: *mk
+    network_id: *mk_telekom_mobile
+  - id: 172529
+    prefix: '38972'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c115a1e2-55cd-409f-acc7-776e9feb43bd
     country_id: *mk
     network_id: *mk_telekom_mobile
   - id: 168100
@@ -450,13 +453,6 @@ network_prefixes:
     uuid: 7e730d03-8e29-44f4-a525-56a97568295c
     country_id: *mk
     network_id: *mk_a1_mobile
-  - id: 172529
-    prefix: '38972'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c115a1e2-55cd-409f-acc7-776e9feb43bd
-    country_id: *mk
-    network_id: *mk_telekom_mobile
   - id: 174943
     prefix: '38973'
     number_min_length: 11
@@ -534,6 +530,7 @@ network_prefixes:
     uuid: 131f2aa4-b17e-41d0-a1d0-25656d294e10
     country_id: *mk
     network_id: *mk_telekabel_mobile
+# Fixed Prefixes
   - id: 182997
     prefix: '3897427'
     number_min_length: 11
@@ -604,18 +601,24 @@ network_prefixes:
     uuid: fd78ce8d-5818-4690-9ece-45f0df5de60a
     country_id: *mk
     network_id: *mk_lycamobile_mobile
-  - id: 207504
-    prefix: '3897'
+  - id: 444743
+    prefix: '3898'
     number_min_length: 11
     number_max_length: 11
-    uuid: 96b1cbae-83af-48b2-b815-dbd8c8840a8d
+    uuid: cc2e6155-08a7-49a8-8d31-328e40aa3aa9
     country_id: *mk
-    network_id: *mk_mobile
-# Country code Prefixes
-  - id: 242052
-    prefix: '389'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 1bca5fa4-bbe7-455c-952a-2da53f3866c3
+    network_id: *mk_shared_cost_services
+  - id: 403482
+    prefix: '389800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ae4f2dc7-8e01-4522-84b3-3c35e3799485
     country_id: *mk
-    network_id: null
+    network_id: *mk_freephone_service
+  - id: 403512
+    prefix: '3898009'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 27c1ba84-6594-4aa3-a334-a590c963433d
+    country_id: *mk
+    network_id: *mk_home_country_direct_virtual_cards

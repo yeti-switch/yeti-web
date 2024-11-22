@@ -113,6 +113,34 @@ networks:
     name: CL Curico Rural Telephony Region
     uuid: 057bb7c0-cd03-4d13-8cee-8e1dc81ecb5f
     type_id: 2
+  - id: &cl_special_services 21377
+    name: CL Special Services
+    uuid: 3b6e4d03-1e7d-4314-b968-a7faf1fe82a6
+    type_id: 13
+  - id: &cl_emergency_services 21523
+    name: CL Emergency Services
+    uuid: 44d7bf67-27b7-48e0-a8c6-5760fe4b6c04
+    type_id: 13
+  - id: &cl_shared_cost_services 22562
+    name: CL Shared Cost Services
+    uuid: 9819b3e9-233a-4981-bb38-fa89fea7f656
+    type_id: 13
+  - id: &cl_voice_mail_services 23215
+    name: CL Voice Mail Services
+    uuid: 69c27e6e-e072-4d4a-b911-3d90202f5a1f
+    type_id: 13
+  - id: &cl_freephone_services 23828
+    name: CL Freephone Services
+    uuid: 52168710-dce8-476a-867f-77e77e29fda2
+    type_id: 13
+  - id: &cl_internet_access 24025
+    name: CL Internet Access
+    uuid: 6bb41f1c-9f0e-4792-b5f9-b481fd4b7091
+    type_id: 13
+  - id: &cl_information_and_entertainment_services 24170
+    name: CL Information And Entertainment Services
+    uuid: cc43f88b-2b09-4bad-aed1-cde841de0ea4
+    type_id: 13
   - id: &cl_santiago_region 25838
     name: CL Santiago Region
     uuid: 0966ad4c-0dad-422c-90ec-62289eb43ec7
@@ -165,6 +193,7 @@ networks:
     name: CL Los Angeles Region
     uuid: 8a1094eb-2b6d-4a96-b97e-9820827267e0
     type_id: 2
+# Mobile Networks
   - id: &cl_los_angeles_rural_telephony_region 36597
     name: CL Los Angeles Rural Telephony Region
     uuid: eea6d152-d5ac-41ed-854d-419ba52f7046
@@ -189,36 +218,6 @@ networks:
     name: CL Temuco Rural Telephony Region
     uuid: 93901a5e-a25a-4679-9a06-13e0bfca8a1c
     type_id: 2
-# Supplementary services Networks
-  - id: &cl_special_services 21377
-    name: CL Special Services
-    uuid: 3b6e4d03-1e7d-4314-b968-a7faf1fe82a6
-    type_id: 13
-  - id: &cl_emergency_services 21523
-    name: CL Emergency Services
-    uuid: 44d7bf67-27b7-48e0-a8c6-5760fe4b6c04
-    type_id: 13
-  - id: &cl_shared_cost_services 22562
-    name: CL Shared Cost Services
-    uuid: 9819b3e9-233a-4981-bb38-fa89fea7f656
-    type_id: 13
-  - id: &cl_voice_mail_services 23215
-    name: CL Voice Mail Services
-    uuid: 69c27e6e-e072-4d4a-b911-3d90202f5a1f
-    type_id: 13
-  - id: &cl_freephone_services 23828
-    name: CL Freephone Services
-    uuid: 52168710-dce8-476a-867f-77e77e29fda2
-    type_id: 13
-  - id: &cl_internet_access 24025
-    name: CL Internet Access
-    uuid: 6bb41f1c-9f0e-4792-b5f9-b481fd4b7091
-    type_id: 13
-  - id: &cl_information_and_entertainment_services 24170
-    name: CL Information And Entertainment Services
-    uuid: cc43f88b-2b09-4bad-aed1-cde841de0ea4
-    type_id: 13
-# Mobile Networks
   - id: &cl_mobile 41575
     name: CL Mobile
     uuid: 49472c7f-a13a-4b6f-8da5-fda510773f0f
@@ -359,10 +358,12 @@ networks:
     name: CL Television Interactiva Mobile
     uuid: 576bd510-9709-486a-b936-456ee9154fb9
     type_id: 3
+# Satellite Networks
   - id: &cl_netuno_mobile 42038
     name: CL Netuno Mobile
     uuid: ba1be44a-e6c5-4daf-9459-9ae66f6ec142
     type_id: 3
+# Supplementary services Networks
   - id: &cl_innet_mobile 42039
     name: CL Innet Mobile
     uuid: 45470d7a-a3fe-4e27-b197-310a43335139
@@ -383,13 +384,247 @@ networks:
     name: CL Mobilink Mobile
     uuid: fd762275-189d-4b63-8473-a5f278befbb7
     type_id: 3
-# Satellite Networks
   - id: &cl_globalstar_satellite 42050
     name: CL Globalstar Satellite
     uuid: 174c292c-1a2c-4cab-a0ec-3af9297e8724
     type_id: 15
+  - id: &cl_fixed 43394
+    name: CL Fixed
+    uuid: 94d6d240-9f5e-4c4f-b1a3-4d952a57781a
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
+  - id: 241966
+    prefix: '56'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 9ee90e80-3b56-47f4-8167-d31af9d40151
+    country_id: *cl
+    network_id: *cl_fixed
+  - id: 242371
+    prefix: '561'
+    number_min_length: 5
+    number_max_length: 6
+    uuid: a1433beb-6159-42c4-80b1-c2074de7b4a7
+    country_id: *cl
+    network_id: *cl_special_services
+  - id: 242530
+    prefix: '5610'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: eb90b009-4026-46a6-9242-928d344dc7f1
+    country_id: *cl
+    network_id: *cl_emergency_services
+  - id: 242844
+    prefix: '5613'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 253a3466-53e8-4356-9c14-4093152ef812
+    country_id: *cl
+    network_id: *cl_emergency_services
+  - id: 242890
+    prefix: '5614'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: d254d426-4cea-44ca-bb05-d9e84810536d
+    country_id: *cl
+    network_id: *cl_emergency_services
+  - id: 261186
+    prefix: '562'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6a292e12-e3b7-453b-a9ce-f930fccb814a
+    country_id: *cl
+    network_id: *cl_santiago_region
+  - id: 247393
+    prefix: '562'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 5ea55d82-fc2e-4507-813c-9a792d3f20ee
+    country_id: *cl
+    network_id: *cl_special_services
+  - id: 261207
+    prefix: '562196'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2b8cdda7-47c4-4008-bda0-c5ae7e465b68
+    country_id: *cl
+    network_id: *cl_santiago_rural_telephony_region
+  - id: 261208
+    prefix: '562198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 03f2d0cc-86ca-4372-a606-1445f04004a1
+    country_id: *cl
+    network_id: *cl_santiago_rural_telephony_region
+  - id: 248886
+    prefix: '563'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: a4e51ba3-267d-4ecd-bc49-64cfcd9df74b
+    country_id: *cl
+    network_id: *cl_special_services
+  - id: 248945
+    prefix: '56300'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: a40e8495-2c11-4612-99de-bfe7419e61c8
+    country_id: *cl
+    network_id: *cl_voice_mail_services
+  - id: 327268
+    prefix: '5632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3b683527-2929-4774-84f6-534c66cac5cd
+    country_id: *cl
+    network_id: *cl_valparaiso_region
+  - id: 327295
+    prefix: '5632198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7196be94-5288-4eb0-a413-6764b7387364
+    country_id: *cl
+    network_id: *cl_valparaiso_rural_telephony_region
+  - id: 337273
+    prefix: '5633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f49310ee-ba00-4313-8a90-98e2b23efb42
+    country_id: *cl
+    network_id: *cl_quillota_region
+  - id: 329947
+    prefix: '5633198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8e4a876e-91be-4473-ae17-570701de9a52
+    country_id: *cl
+    network_id: *cl_quillota_rural_telephony_region
+  - id: 340466
+    prefix: '5634'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e5ee5d63-4a96-47db-8ba6-eda788443eaa
+    country_id: *cl
+    network_id: *cl_los_andes_region
+  - id: 340490
+    prefix: '5634198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96ae0439-fb72-4db9-b216-7785003817fe
+    country_id: *cl
+    network_id: *cl_los_andes_rural_telephony_region
+  - id: 352230
+    prefix: '5635'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 852522ca-d335-4f46-8a1e-f9f5d4a096aa
+    country_id: *cl
+    network_id: *cl_san_antonio_region
+  - id: 352253
+    prefix: '5635198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c6c988f8-5406-48c8-9caa-fae2189da110
+    country_id: *cl
+    network_id: *cl_san_antonio_rural_telephony_region
+  - id: 243924
+    prefix: '564'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 8d01aa00-27e1-4c1e-a381-4a13f235bef5
+    country_id: *cl
+    network_id: *cl_special_services
+  - id: 362520
+    prefix: '5641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5870e867-f1d7-4ea4-b8e2-f320eb557953
+    country_id: *cl
+    network_id: *cl_concepcion_region
+  - id: 362548
+    prefix: '5641197'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 971d3b7e-41dd-43ef-843d-6096df3382c5
+    country_id: *cl
+    network_id: *cl_concepcion_rural_telephony_region
+  - id: 377173
+    prefix: '5642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 71986039-d69c-49fe-bc79-4bfa7346d0e0
+    country_id: *cl
+    network_id: *cl_chillan_region
+  - id: 377210
+    prefix: '5642197'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c0029f5f-8af0-445f-95de-29deed3e13ff
+    country_id: *cl
+    network_id: *cl_chillan_rural_telephony_region
+  - id: 377211
+    prefix: '5642198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4473af37-38ad-4906-9c71-72acd83c6670
+    country_id: *cl
+    network_id: *cl_chillan_rural_telephony_region
+  - id: 367932
+    prefix: '5643'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 56cdd8c0-8344-4929-8fff-948f9889248f
+    country_id: *cl
+    network_id: *cl_los_angeles_region
+  - id: 367958
+    prefix: '5643197'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5dec8e07-c369-479b-816b-43bb92a2d80f
+    country_id: *cl
+    network_id: *cl_los_angeles_rural_telephony_region
+  - id: 367959
+    prefix: '5643198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07693d03-1c8e-424d-9da5-e77418b56b5b
+    country_id: *cl
+    network_id: *cl_los_angeles_rural_telephony_region
+  - id: 370181
+    prefix: '5644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a99ae10-96d4-4c25-8e6c-29f12916a580
+    country_id: *cl
+    network_id: *cl_voip_region
+  - id: 392611
+    prefix: '5645'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a1f6acd-a889-4a6e-9882-54d4bb4d66bf
+    country_id: *cl
+    network_id: *cl_temuco_region
+  - id: 392633
+    prefix: '5645197'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aa328710-41b7-47c3-8772-a64580a689ae
+    country_id: *cl
+    network_id: *cl_temuco_rural_telephony_region
+  - id: 392634
+    prefix: '5645198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1e7949a7-d932-4568-b27f-0fe75947e651
+    country_id: *cl
+    network_id: *cl_temuco_rural_telephony_region
+  - id: 249564
+    prefix: '565'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: f6a312d9-6f0f-4653-bc5e-305cb264d5fe
+    country_id: *cl
+    network_id: *cl_special_services
   - id: 62600
     prefix: '5651'
     number_min_length: 11
@@ -425,13 +660,6 @@ network_prefixes:
     uuid: 9919ec3b-0adf-4cee-bb6f-4851452b0d3a
     country_id: *cl
     network_id: *cl_copiapo_rural_telephony_region
-  - id: 74789
-    prefix: '5655198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6227c2c3-948c-4fc8-a05b-2028e0a9c79f
-    country_id: *cl
-    network_id: *cl_antofagasta_rural_telephony_region
   - id: 76537
     prefix: '5653'
     number_min_length: 11
@@ -453,6 +681,13 @@ network_prefixes:
     uuid: e1eca03d-07a9-4a0e-a790-a755ff7faf6b
     country_id: *cl
     network_id: *cl_antofagasta_region
+  - id: 74789
+    prefix: '5655198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6227c2c3-948c-4fc8-a05b-2028e0a9c79f
+    country_id: *cl
+    network_id: *cl_antofagasta_rural_telephony_region
   - id: 90264
     prefix: '5657'
     number_min_length: 11
@@ -467,6 +702,34 @@ network_prefixes:
     uuid: a17558bb-0711-4c8e-ae64-2156c1f49d87
     country_id: *cl
     network_id: *cl_arica_region
+  - id: 245377
+    prefix: '566'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: ad9ebad7-22c9-4b6b-8c92-9b70cae93dfc
+    country_id: *cl
+    network_id: *cl_special_services
+  - id: 245444
+    prefix: '56600'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 53820668-b3a9-4d82-abfb-1c8701e371ce
+    country_id: *cl
+    network_id: *cl_shared_cost_services
+  - id: 253884
+    prefix: '56606'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e176388e-fd0d-48da-8f95-7583d0e305f2
+    country_id: *cl
+    network_id: *cl_internet_access
+  - id: 253920
+    prefix: '56609'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d4b438b-afdf-418f-8283-9a7c391f838b
+    country_id: *cl
+    network_id: *cl_internet_access
   - id: 108577
     prefix: '5661'
     number_min_length: 11
@@ -530,6 +793,7 @@ network_prefixes:
     uuid: e645bb6c-5ac9-4c1c-9965-ab5c98449cc6
     country_id: *cl
     network_id: *cl_puerto_montt_rural_telephony_region
+# Mobile Prefixes
   - id: 151418
     prefix: '5667'
     number_min_length: 11
@@ -544,6 +808,20 @@ network_prefixes:
     uuid: 0bcc332b-4abf-49ef-a0bc-40614597527a
     country_id: *cl
     network_id: *cl_coyhaique_rural_telephony_region
+  - id: 255239
+    prefix: '567'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: f8138c4f-e3c3-4091-a416-c5b77fc0e25a
+    country_id: *cl
+    network_id: *cl_special_services
+  - id: 255311
+    prefix: '56700'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 73e899d0-cee7-41be-bc95-def44b8f1a0f
+    country_id: *cl
+    network_id: *cl_information_and_entertainment_services
   - id: 163984
     prefix: '5671'
     number_min_length: 11
@@ -565,13 +843,6 @@ network_prefixes:
     uuid: 4d1ac61f-4b84-43ae-91a4-cc968f31a588
     country_id: *cl
     network_id: *cl_talca_rural_telephony_region
-  - id: 167953
-    prefix: '5672198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0089d83f-68d1-4b1b-8671-c5db510226ec
-    country_id: *cl
-    network_id: *cl_rancagua_rural_telephony_region
   - id: 172523
     prefix: '5672'
     number_min_length: 11
@@ -579,6 +850,13 @@ network_prefixes:
     uuid: 6f0db4d4-d195-4832-aabf-26a7f106bf23
     country_id: *cl
     network_id: *cl_rancagua_region
+  - id: 167953
+    prefix: '5672198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0089d83f-68d1-4b1b-8671-c5db510226ec
+    country_id: *cl
+    network_id: *cl_rancagua_rural_telephony_region
   - id: 174937
     prefix: '5673'
     number_min_length: 11
@@ -621,251 +899,11 @@ network_prefixes:
     uuid: 0bd551e3-8ee6-46b9-aa31-d0f6576b6271
     country_id: *cl
     network_id: *cl_curico_rural_telephony_region
-  - id: 261186
-    prefix: '562'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6a292e12-e3b7-453b-a9ce-f930fccb814a
-    country_id: *cl
-    network_id: *cl_santiago_region
-  - id: 261207
-    prefix: '562196'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2b8cdda7-47c4-4008-bda0-c5ae7e465b68
-    country_id: *cl
-    network_id: *cl_santiago_rural_telephony_region
-  - id: 261208
-    prefix: '562198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 03f2d0cc-86ca-4372-a606-1445f04004a1
-    country_id: *cl
-    network_id: *cl_santiago_rural_telephony_region
-  - id: 327268
-    prefix: '5632'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b683527-2929-4774-84f6-534c66cac5cd
-    country_id: *cl
-    network_id: *cl_valparaiso_region
-  - id: 327295
-    prefix: '5632198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7196be94-5288-4eb0-a413-6764b7387364
-    country_id: *cl
-    network_id: *cl_valparaiso_rural_telephony_region
-  - id: 329947
-    prefix: '5633198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8e4a876e-91be-4473-ae17-570701de9a52
-    country_id: *cl
-    network_id: *cl_quillota_rural_telephony_region
-  - id: 337273
-    prefix: '5633'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f49310ee-ba00-4313-8a90-98e2b23efb42
-    country_id: *cl
-    network_id: *cl_quillota_region
-  - id: 340466
-    prefix: '5634'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e5ee5d63-4a96-47db-8ba6-eda788443eaa
-    country_id: *cl
-    network_id: *cl_los_andes_region
-  - id: 340490
-    prefix: '5634198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 96ae0439-fb72-4db9-b216-7785003817fe
-    country_id: *cl
-    network_id: *cl_los_andes_rural_telephony_region
-  - id: 352230
-    prefix: '5635'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 852522ca-d335-4f46-8a1e-f9f5d4a096aa
-    country_id: *cl
-    network_id: *cl_san_antonio_region
-  - id: 352253
-    prefix: '5635198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c6c988f8-5406-48c8-9caa-fae2189da110
-    country_id: *cl
-    network_id: *cl_san_antonio_rural_telephony_region
-  - id: 362520
-    prefix: '5641'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5870e867-f1d7-4ea4-b8e2-f320eb557953
-    country_id: *cl
-    network_id: *cl_concepcion_region
-  - id: 362548
-    prefix: '5641197'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 971d3b7e-41dd-43ef-843d-6096df3382c5
-    country_id: *cl
-    network_id: *cl_concepcion_rural_telephony_region
-  - id: 367932
-    prefix: '5643'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 56cdd8c0-8344-4929-8fff-948f9889248f
-    country_id: *cl
-    network_id: *cl_los_angeles_region
-  - id: 367958
-    prefix: '5643197'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5dec8e07-c369-479b-816b-43bb92a2d80f
-    country_id: *cl
-    network_id: *cl_los_angeles_rural_telephony_region
-  - id: 367959
-    prefix: '5643198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07693d03-1c8e-424d-9da5-e77418b56b5b
-    country_id: *cl
-    network_id: *cl_los_angeles_rural_telephony_region
-  - id: 370181
-    prefix: '5644'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1a99ae10-96d4-4c25-8e6c-29f12916a580
-    country_id: *cl
-    network_id: *cl_voip_region
-  - id: 377173
-    prefix: '5642'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 71986039-d69c-49fe-bc79-4bfa7346d0e0
-    country_id: *cl
-    network_id: *cl_chillan_region
-  - id: 377210
-    prefix: '5642197'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c0029f5f-8af0-445f-95de-29deed3e13ff
-    country_id: *cl
-    network_id: *cl_chillan_rural_telephony_region
-  - id: 377211
-    prefix: '5642198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4473af37-38ad-4906-9c71-72acd83c6670
-    country_id: *cl
-    network_id: *cl_chillan_rural_telephony_region
-  - id: 392611
-    prefix: '5645'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a1f6acd-a889-4a6e-9882-54d4bb4d66bf
-    country_id: *cl
-    network_id: *cl_temuco_region
-  - id: 392633
-    prefix: '5645197'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aa328710-41b7-47c3-8772-a64580a689ae
-    country_id: *cl
-    network_id: *cl_temuco_rural_telephony_region
-  - id: 392634
-    prefix: '5645198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1e7949a7-d932-4568-b27f-0fe75947e651
-    country_id: *cl
-    network_id: *cl_temuco_rural_telephony_region
-# Country code Prefixes
-  - id: 241966
-    prefix: '56'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 9ee90e80-3b56-47f4-8167-d31af9d40151
-    country_id: *cl
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242371
-    prefix: '561'
-    number_min_length: 5
-    number_max_length: 6
-    uuid: a1433beb-6159-42c4-80b1-c2074de7b4a7
-    country_id: *cl
-    network_id: *cl_special_services
-  - id: 242530
-    prefix: '5610'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: eb90b009-4026-46a6-9242-928d344dc7f1
-    country_id: *cl
-    network_id: *cl_emergency_services
-  - id: 242844
-    prefix: '5613'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 253a3466-53e8-4356-9c14-4093152ef812
-    country_id: *cl
-    network_id: *cl_emergency_services
-  - id: 242890
-    prefix: '5614'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: d254d426-4cea-44ca-bb05-d9e84810536d
-    country_id: *cl
-    network_id: *cl_emergency_services
-  - id: 243924
-    prefix: '564'
+  - id: 256665
+    prefix: '568'
     number_min_length: 6
     number_max_length: 8
-    uuid: 8d01aa00-27e1-4c1e-a381-4a13f235bef5
-    country_id: *cl
-    network_id: *cl_special_services
-  - id: 245377
-    prefix: '566'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: ad9ebad7-22c9-4b6b-8c92-9b70cae93dfc
-    country_id: *cl
-    network_id: *cl_special_services
-  - id: 245444
-    prefix: '56600'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 53820668-b3a9-4d82-abfb-1c8701e371ce
-    country_id: *cl
-    network_id: *cl_shared_cost_services
-  - id: 247393
-    prefix: '562'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 5ea55d82-fc2e-4507-813c-9a792d3f20ee
-    country_id: *cl
-    network_id: *cl_special_services
-  - id: 248886
-    prefix: '563'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: a4e51ba3-267d-4ecd-bc49-64cfcd9df74b
-    country_id: *cl
-    network_id: *cl_special_services
-  - id: 248945
-    prefix: '56300'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: a40e8495-2c11-4612-99de-bfe7419e61c8
-    country_id: *cl
-    network_id: *cl_voice_mail_services
-  - id: 249564
-    prefix: '565'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: f6a312d9-6f0f-4653-bc5e-305cb264d5fe
+    uuid: 75253dc5-bee2-4cfb-b3a8-0f586604a1f2
     country_id: *cl
     network_id: *cl_special_services
   - id: 253138
@@ -875,49 +913,6 @@ network_prefixes:
     uuid: 54526a02-cd0a-4c61-8002-18b1cb932d37
     country_id: *cl
     network_id: *cl_freephone_services
-  - id: 253884
-    prefix: '56606'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e176388e-fd0d-48da-8f95-7583d0e305f2
-    country_id: *cl
-    network_id: *cl_internet_access
-  - id: 253920
-    prefix: '56609'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2d4b438b-afdf-418f-8283-9a7c391f838b
-    country_id: *cl
-    network_id: *cl_internet_access
-  - id: 255239
-    prefix: '567'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: f8138c4f-e3c3-4091-a416-c5b77fc0e25a
-    country_id: *cl
-    network_id: *cl_special_services
-  - id: 255311
-    prefix: '56700'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 73e899d0-cee7-41be-bc95-def44b8f1a0f
-    country_id: *cl
-    network_id: *cl_information_and_entertainment_services
-  - id: 256665
-    prefix: '568'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 75253dc5-bee2-4cfb-b3a8-0f586604a1f2
-    country_id: *cl
-    network_id: *cl_special_services
-  - id: 257084
-    prefix: '569'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 2ac5557b-bd73-4a25-9202-c78f884ec1b4
-    country_id: *cl
-    network_id: *cl_special_services
-# Mobile Prefixes
   - id: 444749
     prefix: '569'
     number_min_length: 11
@@ -925,6 +920,13 @@ network_prefixes:
     uuid: e3233ac0-564e-49ac-8638-5b8a1cab9476
     country_id: *cl
     network_id: *cl_mobile
+  - id: 257084
+    prefix: '569'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 2ac5557b-bd73-4a25-9202-c78f884ec1b4
+    country_id: *cl
+    network_id: *cl_special_services
   - id: 444760
     prefix: '56920'
     number_min_length: 11
@@ -5853,6 +5855,7 @@ network_prefixes:
     uuid: 578acdbd-f91f-40b0-b7eb-eb018cd46551
     country_id: *cl
     network_id: *cl_movistar_mobile
+# Satellite Prefixes
   - id: 454082
     prefix: '5699972'
     number_min_length: 11
@@ -5860,6 +5863,7 @@ network_prefixes:
     uuid: 92314c78-b56a-4e0e-91cf-1d8d25c7c098
     country_id: *cl
     network_id: *cl_movistar_mobile
+# Supplementary services Prefixes
   - id: 454083
     prefix: '5699973'
     number_min_length: 11
@@ -5916,6 +5920,13 @@ network_prefixes:
     uuid: 106908d6-d077-42a3-8ccd-1b90fdb677d4
     country_id: *cl
     network_id: *cl_claro_mobile
+  - id: 454091
+    prefix: '5699990'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8acb0ebf-5098-446a-8f8e-e23c4928beaa
+    country_id: *cl
+    network_id: *cl_globalstar_satellite
   - id: 454092
     prefix: '5699991'
     number_min_length: 11
@@ -5979,11 +5990,3 @@ network_prefixes:
     uuid: 1047f606-9e57-422c-8f3c-c10609aa2b58
     country_id: *cl
     network_id: *cl_entel_mobile
-# Satellite Prefixes
-  - id: 454091
-    prefix: '5699990'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8acb0ebf-5098-446a-8f8e-e23c4928beaa
-    country_id: *cl
-    network_id: *cl_globalstar_satellite

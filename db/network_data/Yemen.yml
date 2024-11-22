@@ -49,6 +49,22 @@ networks:
     name: YE Amran Region
     uuid: eb46d12b-33a8-4896-8642-8f4dcb871943
     type_id: 2
+  - id: &ye_y_mobile 14456
+    name: YE Y Mobile
+    uuid: efc57fb6-e19f-47c5-86aa-4624fe9ccd6b
+    type_id: 3
+  - id: &ye_sabafon_gsm_mobile 16220
+    name: YE Sabafon Gsm Mobile
+    uuid: f0c0db8d-314b-4795-97d1-b9b80300d27e
+    type_id: 3
+  - id: &ye_spacetel_mobile 17161
+    name: YE Spacetel Mobile
+    uuid: 4a266629-9f5b-4c4f-82de-ca9534d3284d
+    type_id: 3
+  - id: &ye_yemen_mobile_mobile 18513
+    name: YE Yemen Mobile Mobile
+    uuid: 13121c0d-225e-431a-aa16-906823bbbfe3
+    type_id: 3
   - id: &ye_sanaa_region 24797
     name: YE Sanaa Region
     uuid: c884144a-8aef-42bf-9f0e-a6efb397ab65
@@ -69,6 +85,7 @@ networks:
     name: YE Abyan Region
     uuid: 386bab8b-62c7-48a2-9ac7-895ff3dda2a0
     type_id: 2
+# Mobile Networks
   - id: &ye_hodaidah_region 31296
     name: YE Hodaidah Region
     uuid: 635b5baf-e661-417f-b29b-9c69a6fb7377
@@ -81,25 +98,201 @@ networks:
     name: YE Ibb Region
     uuid: f4e86e3d-0685-4ecf-88ac-822955fc28a4
     type_id: 2
-# Mobile Networks
-  - id: &ye_y_mobile 14456
-    name: YE Y Mobile
-    uuid: efc57fb6-e19f-47c5-86aa-4624fe9ccd6b
-    type_id: 3
-  - id: &ye_sabafon_gsm_mobile 16220
-    name: YE Sabafon Gsm Mobile
-    uuid: f0c0db8d-314b-4795-97d1-b9b80300d27e
-    type_id: 3
-  - id: &ye_spacetel_mobile 17161
-    name: YE Spacetel Mobile
-    uuid: 4a266629-9f5b-4c4f-82de-ca9534d3284d
-    type_id: 3
-  - id: &ye_yemen_mobile_mobile 18513
-    name: YE Yemen Mobile Mobile
-    uuid: 13121c0d-225e-431a-aa16-906823bbbfe3
-    type_id: 3
+  - id: &ye_fixed 43485
+    name: YE Fixed
+    uuid: 4b6e86a5-9a3a-4113-b167-be4091a6346d
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
+  - id: 242135
+    prefix: '967'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 9d2d1558-7ac9-4019-82ef-ad3c74558cdd
+    country_id: *ye
+    network_id: *ye_fixed
+  - id: 258571
+    prefix: '9671'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bd1f7e99-d785-4bc8-8159-72fdd614d249
+    country_id: *ye
+    network_id: *ye_sanaa_region
+  - id: 258578
+    prefix: '967175'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0750725e-0508-4a71-aeab-20df1dbfa256
+    country_id: *ye
+    network_id: *ye_sanaa_region
+  - id: 261212
+    prefix: '96722'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: beb024f3-4e99-4632-915f-51cb642fed6e
+    country_id: *ye
+    network_id: *ye_aden_region
+  - id: 261263
+    prefix: '96723'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9d434ee0-b44a-452f-93c5-aa4e586b16ba
+    country_id: *ye
+    network_id: *ye_aden_region
+  - id: 261300
+    prefix: '96724'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5355f79b-a6c3-49f3-8e9a-a078e821c293
+    country_id: *ye
+    network_id: *ye_dhalea_region
+  - id: 261353
+    prefix: '96725'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8ae9497c-6b61-4fc0-a311-57401fb1c674
+    country_id: *ye
+    network_id: *ye_lahj_region
+  - id: 261394
+    prefix: '96726'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0e8e9967-ac9e-4d3f-a35c-ddc673dfa008
+    country_id: *ye
+    network_id: *ye_abyan_region
+  - id: 267077
+    prefix: '967282'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 202ddc48-fa61-4b82-880b-ad869c3672f7
+    country_id: *ye
+    network_id: *ye_aden_region
+  - id: 267082
+    prefix: '9672840'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 96d7cf56-561f-40b9-afed-87c396801a96
+    country_id: *ye
+    network_id: *ye_aden_region
+  - id: 267083
+    prefix: '9672841'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 97eb1e76-907b-4000-bce9-d8fa5ded34df
+    country_id: *ye
+    network_id: *ye_dhalea_region
+  - id: 267084
+    prefix: '9672842'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aa9c33ba-8a91-43d9-8419-bb467d613b71
+    country_id: *ye
+    network_id: *ye_dhalea_region
+  - id: 267086
+    prefix: '967285'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ec9ec48d-449e-4251-a9ab-c90bc29f77f8
+    country_id: *ye
+    network_id: *ye_lahj_region
+  - id: 267088
+    prefix: '967286'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c505d2c4-e28d-4302-88b2-31f50cc2d1f7
+    country_id: *ye
+    network_id: *ye_abyan_region
+  - id: 315876
+    prefix: '9673'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0b8eca4e-2c82-4089-b8d9-3dc5b1e1ebef
+    country_id: *ye
+    network_id: *ye_hodaidah_region
+  - id: 349456
+    prefix: '96742'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 59e74b75-4a7b-4b0f-9dc7-99ea24fabbd2
+    country_id: *ye
+    network_id: *ye_taiz_region
+  - id: 349528
+    prefix: '96743'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40fa39f7-f978-4bb6-b049-80aaf23ab0ea
+    country_id: *ye
+    network_id: *ye_taiz_region
+  - id: 349529
+    prefix: '967433'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f91922f2-ad41-4c78-afa3-cd3da570b2a5
+    country_id: *ye
+    network_id: *ye_ibb_region
+  - id: 349560
+    prefix: '96744'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3a548ff3-2dea-45c8-aff8-57acbd2972f6
+    country_id: *ye
+    network_id: *ye_ibb_region
+  - id: 349612
+    prefix: '96745'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dec3600f-af87-48e3-abd7-2f2b981ca0d1
+    country_id: *ye
+    network_id: *ye_ibb_region
+  - id: 349742
+    prefix: '967483'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f54f1536-881e-4221-84ef-86193aeb6881
+    country_id: *ye
+    network_id: *ye_taiz_region
+  - id: 349753
+    prefix: '967484'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1ed1fb8e-1192-4469-a3bd-0be37ad7fa89
+    country_id: *ye
+    network_id: *ye_ibb_region
+  - id: 349754
+    prefix: '9674840'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f49dcf7b-9e84-4ab5-83ba-e66b20af476e
+    country_id: *ye
+    network_id: *ye_taiz_region
+  - id: 349755
+    prefix: '9674841'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b8cfa858-9765-4e78-83db-7aace075b9c3
+    country_id: *ye
+    network_id: *ye_taiz_region
+  - id: 349756
+    prefix: '9674842'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c2e2daa2-a32c-440d-8d3f-2a84ced04e38
+    country_id: *ye
+    network_id: *ye_taiz_region
+  - id: 349757
+    prefix: '9674843'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6a56c3a9-ab3f-4f7e-b624-5423bafff82f
+    country_id: *ye
+    network_id: *ye_taiz_region
+  - id: 349758
+    prefix: '967485'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e4f7d355-68e8-4c7a-a340-0d08da61b2ca
+    country_id: *ye
+    network_id: *ye_ibb_region
   - id: 54611
     prefix: '96752'
     number_min_length: 10
@@ -359,6 +552,20 @@ network_prefixes:
     uuid: bf896985-4a17-4609-b23f-b4f971076a87
     country_id: *ye
     network_id: *ye_al_baidha_region
+  - id: 150248
+    prefix: '96770'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 323e0c62-65ed-4b08-a6ee-6843501ed76d
+    country_id: *ye
+    network_id: *ye_y_mobile
+  - id: 164010
+    prefix: '96771'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fd567433-8368-40e6-943c-215dd791a86c
+    country_id: *ye
+    network_id: *ye_sabafon_gsm_mobile
   - id: 149344
     prefix: '96772'
     number_min_length: 10
@@ -366,6 +573,13 @@ network_prefixes:
     uuid: cd03ee16-ad7a-4742-8e9c-f1eebb3f4316
     country_id: *ye
     network_id: *ye_hajjah_region
+  - id: 174954
+    prefix: '96773'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 54827073-6f22-4f89-94ef-37147b5fb9eb
+    country_id: *ye
+    network_id: *ye_spacetel_mobile
   - id: 149636
     prefix: '96774'
     number_min_length: 10
@@ -387,6 +601,13 @@ network_prefixes:
     uuid: ae6b6ee4-b007-4a60-9199-7e7298c61335
     country_id: *ye
     network_id: *ye_amran_region
+  - id: 192108
+    prefix: '96777'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 87c22c6d-3022-4566-889c-e18500485f31
+    country_id: *ye
+    network_id: *ye_yemen_mobile_mobile
   - id: 149972
     prefix: '9677845'
     number_min_length: 10
@@ -450,6 +671,7 @@ network_prefixes:
     uuid: 275916cf-df93-45e5-8804-34d678d557c8
     country_id: *ye
     network_id: *ye_saadah_region
+# Mobile Prefixes
   - id: 150029
     prefix: '9677876'
     number_min_length: 10
@@ -478,222 +700,3 @@ network_prefixes:
     uuid: 1e1aecbf-194c-4b62-9ca7-d2b197032aa4
     country_id: *ye
     network_id: *ye_al_mahweet_region
-  - id: 258571
-    prefix: '9671'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bd1f7e99-d785-4bc8-8159-72fdd614d249
-    country_id: *ye
-    network_id: *ye_sanaa_region
-  - id: 258578
-    prefix: '967175'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0750725e-0508-4a71-aeab-20df1dbfa256
-    country_id: *ye
-    network_id: *ye_sanaa_region
-  - id: 261212
-    prefix: '96722'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: beb024f3-4e99-4632-915f-51cb642fed6e
-    country_id: *ye
-    network_id: *ye_aden_region
-  - id: 261263
-    prefix: '96723'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9d434ee0-b44a-452f-93c5-aa4e586b16ba
-    country_id: *ye
-    network_id: *ye_aden_region
-  - id: 261300
-    prefix: '96724'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5355f79b-a6c3-49f3-8e9a-a078e821c293
-    country_id: *ye
-    network_id: *ye_dhalea_region
-  - id: 261353
-    prefix: '96725'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8ae9497c-6b61-4fc0-a311-57401fb1c674
-    country_id: *ye
-    network_id: *ye_lahj_region
-  - id: 261394
-    prefix: '96726'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0e8e9967-ac9e-4d3f-a35c-ddc673dfa008
-    country_id: *ye
-    network_id: *ye_abyan_region
-  - id: 267077
-    prefix: '967282'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 202ddc48-fa61-4b82-880b-ad869c3672f7
-    country_id: *ye
-    network_id: *ye_aden_region
-  - id: 267082
-    prefix: '9672840'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 96d7cf56-561f-40b9-afed-87c396801a96
-    country_id: *ye
-    network_id: *ye_aden_region
-  - id: 267083
-    prefix: '9672841'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 97eb1e76-907b-4000-bce9-d8fa5ded34df
-    country_id: *ye
-    network_id: *ye_dhalea_region
-  - id: 267084
-    prefix: '9672842'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aa9c33ba-8a91-43d9-8419-bb467d613b71
-    country_id: *ye
-    network_id: *ye_dhalea_region
-  - id: 267086
-    prefix: '967285'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ec9ec48d-449e-4251-a9ab-c90bc29f77f8
-    country_id: *ye
-    network_id: *ye_lahj_region
-  - id: 267088
-    prefix: '967286'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c505d2c4-e28d-4302-88b2-31f50cc2d1f7
-    country_id: *ye
-    network_id: *ye_abyan_region
-  - id: 315876
-    prefix: '9673'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0b8eca4e-2c82-4089-b8d9-3dc5b1e1ebef
-    country_id: *ye
-    network_id: *ye_hodaidah_region
-  - id: 349456
-    prefix: '96742'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 59e74b75-4a7b-4b0f-9dc7-99ea24fabbd2
-    country_id: *ye
-    network_id: *ye_taiz_region
-  - id: 349528
-    prefix: '96743'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 40fa39f7-f978-4bb6-b049-80aaf23ab0ea
-    country_id: *ye
-    network_id: *ye_taiz_region
-  - id: 349529
-    prefix: '967433'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f91922f2-ad41-4c78-afa3-cd3da570b2a5
-    country_id: *ye
-    network_id: *ye_ibb_region
-  - id: 349560
-    prefix: '96744'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3a548ff3-2dea-45c8-aff8-57acbd2972f6
-    country_id: *ye
-    network_id: *ye_ibb_region
-  - id: 349612
-    prefix: '96745'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dec3600f-af87-48e3-abd7-2f2b981ca0d1
-    country_id: *ye
-    network_id: *ye_ibb_region
-  - id: 349742
-    prefix: '967483'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f54f1536-881e-4221-84ef-86193aeb6881
-    country_id: *ye
-    network_id: *ye_taiz_region
-  - id: 349753
-    prefix: '967484'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1ed1fb8e-1192-4469-a3bd-0be37ad7fa89
-    country_id: *ye
-    network_id: *ye_ibb_region
-  - id: 349754
-    prefix: '9674840'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f49dcf7b-9e84-4ab5-83ba-e66b20af476e
-    country_id: *ye
-    network_id: *ye_taiz_region
-  - id: 349755
-    prefix: '9674841'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b8cfa858-9765-4e78-83db-7aace075b9c3
-    country_id: *ye
-    network_id: *ye_taiz_region
-  - id: 349756
-    prefix: '9674842'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c2e2daa2-a32c-440d-8d3f-2a84ced04e38
-    country_id: *ye
-    network_id: *ye_taiz_region
-  - id: 349757
-    prefix: '9674843'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6a56c3a9-ab3f-4f7e-b624-5423bafff82f
-    country_id: *ye
-    network_id: *ye_taiz_region
-  - id: 349758
-    prefix: '967485'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e4f7d355-68e8-4c7a-a340-0d08da61b2ca
-    country_id: *ye
-    network_id: *ye_ibb_region
-# Mobile Prefixes
-  - id: 150248
-    prefix: '96770'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 323e0c62-65ed-4b08-a6ee-6843501ed76d
-    country_id: *ye
-    network_id: *ye_y_mobile
-  - id: 164010
-    prefix: '96771'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fd567433-8368-40e6-943c-215dd791a86c
-    country_id: *ye
-    network_id: *ye_sabafon_gsm_mobile
-  - id: 174954
-    prefix: '96773'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 54827073-6f22-4f89-94ef-37147b5fb9eb
-    country_id: *ye
-    network_id: *ye_spacetel_mobile
-  - id: 192108
-    prefix: '96777'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 87c22c6d-3022-4566-889c-e18500485f31
-    country_id: *ye
-    network_id: *ye_yemen_mobile_mobile
-# Country code Prefixes
-  - id: 242135
-    prefix: '967'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 9d2d1558-7ac9-4019-82ef-ad3c74558cdd
-    country_id: *ye
-    network_id: null

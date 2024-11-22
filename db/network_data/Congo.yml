@@ -1,10 +1,14 @@
 country_id: &cg 49
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &cg_special_services 21381
     name: CG Special Services
     uuid: 963769b2-8ff4-4dce-abe3-ddd187c0f318
     type_id: 13
+  - id: &cg_mobile 21993
+    name: CG Mobile
+    uuid: 516f78e1-da27-4a0f-85b1-e1e25a9beb4c
+    type_id: 3
   - id: &cg_arpce_assistance_service 23330
     name: CG Arpce Assistance Service
     uuid: a1e51d6f-66e5-4744-977b-daf49a21c032
@@ -29,11 +33,7 @@ networks:
     name: CG Nomadic And Convergent  Services
     uuid: 84e4d4ea-6338-465d-8611-4a1cd8b1b95b
     type_id: 13
-# Mobile Networks
-  - id: &cg_mobile 21993
-    name: CG Mobile
-    uuid: 516f78e1-da27-4a0f-85b1-e1e25a9beb4c
-    type_id: 3
+# Supplementary services Networks
   - id: &cg_airtel_mobile 24610
     name: CG Airtel Mobile
     uuid: 854049f9-0c09-4f04-963f-fa409dc93999
@@ -42,7 +42,6 @@ networks:
     name: CG Mtn Mobile
     uuid: 27156a15-bc3e-4362-baa2-ac09e51eb8de
     type_id: 3
-# Fixed Networks
   - id: &cg_fixed 27809
     name: CG Fixed
     uuid: e0a947cf-feca-4ea9-b6e5-b959b6bafa76
@@ -63,6 +62,7 @@ networks:
     name: CG Plateau Region
     uuid: 8938f0bb-07bf-4e0f-a08e-375c89b94d59
     type_id: 2
+# Mobile Networks
   - id: &cg_bouenza_lekoumou_niari_region 28052
     name: CG Bouenza Lekoumou Niari Region
     uuid: 2a65b220-5b36-40f9-aea8-2eec7806bb99
@@ -76,15 +76,42 @@ networks:
     uuid: 437ab4ae-49d1-45b3-b899-aa4397c8e220
     type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241971
     prefix: '242'
     number_min_length: 4
     number_max_length: 100
     uuid: b9b20fde-057f-45e0-9bf7-5f5d9dbdad7e
     country_id: *cg
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *cg_fixed
+  - id: 258557
+    prefix: '2420'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b4cec63c-2b9e-419e-9a5d-5c7ad01a49e6
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 258380
+    prefix: '24204'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1fb7832-d18a-4627-9871-efdfe23bdded
+    country_id: *cg
+    network_id: *cg_airtel_mobile
+  - id: 258416
+    prefix: '24205'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cce74b2a-ad00-4f6b-b0c9-76237c6291e1
+    country_id: *cg
+    network_id: *cg_airtel_mobile
+  - id: 258456
+    prefix: '24206'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4f297dec-b93f-494b-a398-74cc7a4822cb
+    country_id: *cg
+    network_id: *cg_mtn_mobile
   - id: 242375
     prefix: '2421'
     number_min_length: 6
@@ -92,6 +119,91 @@ network_prefixes:
     uuid: 5db4d01e-15f4-4a0a-aa94-1b7b760864ee
     country_id: *cg
     network_id: *cg_special_services
+  - id: 277990
+    prefix: '24222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 752a3436-6b07-4d96-a6cc-82ebed30c5a8
+    country_id: *cg
+    network_id: *cg_fixed
+  - id: 282807
+    prefix: '2422221'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 70b08b64-588b-4ccc-aa9d-71ede39ea66a
+    country_id: *cg
+    network_id: *cg_basin_west_basin_region
+  - id: 282809
+    prefix: '2422222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3da69c7c-75fb-4587-897e-c7c7849e8d8c
+    country_id: *cg
+    network_id: *cg_likouala_sangha_region
+# Supplementary services Prefixes
+  - id: 282811
+    prefix: '2422223'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 20c5dd36-749f-4580-9e3e-8948bba8ee93
+    country_id: *cg
+    network_id: *cg_pool_region
+  - id: 282813
+    prefix: '2422224'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f042d8e7-c583-4754-910f-4164e919fe40
+    country_id: *cg
+    network_id: *cg_plateau_region
+  - id: 282815
+    prefix: '2422225'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 28cf8201-d764-4394-b6c3-e47e71aadd76
+    country_id: *cg
+    network_id: *cg_bouenza_lekoumou_niari_region
+  - id: 282818
+    prefix: '2422228'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f8998cc1-0382-42f4-b483-c471ab02962b
+    country_id: *cg
+    network_id: *cg_brazzaville_region
+  - id: 282820
+    prefix: '2422229'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 42b9de82-7d00-4b86-b19c-7100bb5cf258
+    country_id: *cg
+    network_id: *cg_pointe_noire_region
+  - id: 248887
+    prefix: '2423'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 25b73b43-0f83-4527-8279-e2ee4b824172
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 243482
+    prefix: '24234'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 392ebaf9-8610-43c8-83b2-b690d7277395
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 243659
+    prefix: '24236'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 5b438a79-d4b8-45a6-a755-81ed9a8e8f70
+    country_id: *cg
+    network_id: *cg_mobile
+  - id: 243856
+    prefix: '24238'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9f04ad50-81b4-4291-93f5-92a4e7dc62ed
+    country_id: *cg
+    network_id: *cg_mobile
   - id: 249658
     prefix: '2425050'
     number_min_length: 7
@@ -99,6 +211,7 @@ network_prefixes:
     uuid: c653bd69-82af-47a5-96da-bf1a6a0baee2
     country_id: *cg
     network_id: *cg_arpce_assistance_service
+# Mobile Prefixes
   - id: 253140
     prefix: '242800'
     number_min_length: 12
@@ -155,117 +268,3 @@ network_prefixes:
     uuid: 91c1c92c-b5b7-4378-9a10-7cb39a2bab49
     country_id: *cg
     network_id: *cg_nomadic_and_convergent__services
-# Mobile Prefixes
-  - id: 243482
-    prefix: '24234'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 392ebaf9-8610-43c8-83b2-b690d7277395
-    country_id: *cg
-    network_id: *cg_mobile
-  - id: 243659
-    prefix: '24236'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 5b438a79-d4b8-45a6-a755-81ed9a8e8f70
-    country_id: *cg
-    network_id: *cg_mobile
-  - id: 243856
-    prefix: '24238'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 9f04ad50-81b4-4291-93f5-92a4e7dc62ed
-    country_id: *cg
-    network_id: *cg_mobile
-  - id: 248887
-    prefix: '2423'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 25b73b43-0f83-4527-8279-e2ee4b824172
-    country_id: *cg
-    network_id: *cg_mobile
-  - id: 258380
-    prefix: '24204'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d1fb7832-d18a-4627-9871-efdfe23bdded
-    country_id: *cg
-    network_id: *cg_airtel_mobile
-  - id: 258416
-    prefix: '24205'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cce74b2a-ad00-4f6b-b0c9-76237c6291e1
-    country_id: *cg
-    network_id: *cg_airtel_mobile
-  - id: 258456
-    prefix: '24206'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4f297dec-b93f-494b-a398-74cc7a4822cb
-    country_id: *cg
-    network_id: *cg_mtn_mobile
-  - id: 258557
-    prefix: '2420'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b4cec63c-2b9e-419e-9a5d-5c7ad01a49e6
-    country_id: *cg
-    network_id: *cg_mobile
-# Fixed Prefixes
-  - id: 277990
-    prefix: '24222'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 752a3436-6b07-4d96-a6cc-82ebed30c5a8
-    country_id: *cg
-    network_id: *cg_fixed
-  - id: 282807
-    prefix: '2422221'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 70b08b64-588b-4ccc-aa9d-71ede39ea66a
-    country_id: *cg
-    network_id: *cg_basin_west_basin_region
-  - id: 282809
-    prefix: '2422222'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3da69c7c-75fb-4587-897e-c7c7849e8d8c
-    country_id: *cg
-    network_id: *cg_likouala_sangha_region
-  - id: 282811
-    prefix: '2422223'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 20c5dd36-749f-4580-9e3e-8948bba8ee93
-    country_id: *cg
-    network_id: *cg_pool_region
-  - id: 282813
-    prefix: '2422224'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f042d8e7-c583-4754-910f-4164e919fe40
-    country_id: *cg
-    network_id: *cg_plateau_region
-  - id: 282815
-    prefix: '2422225'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 28cf8201-d764-4394-b6c3-e47e71aadd76
-    country_id: *cg
-    network_id: *cg_bouenza_lekoumou_niari_region
-  - id: 282818
-    prefix: '2422228'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f8998cc1-0382-42f4-b483-c471ab02962b
-    country_id: *cg
-    network_id: *cg_brazzaville_region
-  - id: 282820
-    prefix: '2422229'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 42b9de82-7d00-4b86-b19c-7100bb5cf258
-    country_id: *cg
-    network_id: *cg_pointe_noire_region

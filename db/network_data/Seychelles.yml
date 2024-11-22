@@ -1,35 +1,10 @@
 country_id: &sc 189
 networks:
-# Supplementary services Networks
+# Mobile Networks
   - id: &sc_special_services 21498
     name: SC Special Services
     uuid: 49ad82b9-aa90-418d-a2ba-46aaf3f0e715
     type_id: 13
-  - id: &sc_freephone_services 23862
-    name: SC Freephone Services
-    uuid: c532a375-7c0c-40d3-8ae0-0059b03f6636
-    type_id: 13
-  - id: &sc_emergency_services 24546
-    name: SC Emergency Services
-    uuid: 228f5ef0-4485-49d1-8a58-137911588c9c
-    type_id: 13
-  - id: &sc_international_premium_services 26058
-    name: SC International Premium Services
-    uuid: 03139749-3126-4dbf-9a9e-9c54e0b90ae0
-    type_id: 13
-  - id: &sc_international_audiotext 26124
-    name: SC International Audiotext
-    uuid: ba86739e-b959-455d-a20b-101cda7cab7c
-    type_id: 13
-  - id: &sc_vas_sms_mms_services 26130
-    name: SC Vas Sms_Mms Services
-    uuid: 7874c30b-33cb-4bee-aeb8-69441683fec4
-    type_id: 13
-  - id: &sc_audiotext 26138
-    name: SC Audiotext
-    uuid: 965295a9-447a-4f7b-9504-3b8320f80e4a
-    type_id: 13
-# Fixed Networks
   - id: &sc_fixed 22149
     name: SC Fixed
     uuid: 778b1201-b6b6-4a77-a5f6-5278339a4c90
@@ -42,6 +17,7 @@ networks:
     name: SC Port Victoria Region
     uuid: 6090afd5-e5dd-459f-b44d-435ee282ceb0
     type_id: 2
+# Fixed Networks
   - id: &sc_outer_islands_region 22228
     name: SC Outer Islands Region
     uuid: 5ac39217-e7d5-4570-a64c-8d6d0e8e7c69
@@ -114,27 +90,6 @@ networks:
     name: SC Helvetia Region
     uuid: f23abfca-a54d-4243-882c-dbd3bf747f30
     type_id: 2
-  - id: &sc_providence_region 23234
-    name: SC Providence Region
-    uuid: b70874bf-a84b-4856-9020-c8d9ff088eac
-    type_id: 2
-  - id: &sc_dsl_region 23235
-    name: SC Dsl Region
-    uuid: 770bf57e-2980-482e-b1ce-fecf8c428e68
-    type_id: 2
-  - id: &sc_voip_region 23246
-    name: SC Voip Region
-    uuid: c341332c-c026-41ef-9972-23748ea0e0bc
-    type_id: 2
-  - id: &sc_gran_anse_praslin_region 23251
-    name: SC Gran Anse Praslin Region
-    uuid: e5d3fb69-107d-4e26-b7ca-62d970c20dcd
-    type_id: 2
-  - id: &sc_did_services_region 23253
-    name: SC Did Services Region
-    uuid: fdc09b4b-4ae6-4a66-b2fc-497da04b9416
-    type_id: 2
-# Mobile Networks
   - id: &sc_mobile 22733
     name: SC Mobile
     uuid: e2a56fe8-e005-4d86-81e7-e56b418ba767
@@ -151,16 +106,60 @@ networks:
     name: SC Airtel Mobile
     uuid: 3a7fe404-8802-4518-b6b3-2059a7eecf34
     type_id: 3
+  - id: &sc_providence_region 23234
+    name: SC Providence Region
+    uuid: b70874bf-a84b-4856-9020-c8d9ff088eac
+    type_id: 2
+  - id: &sc_dsl_region 23235
+    name: SC Dsl Region
+    uuid: 770bf57e-2980-482e-b1ce-fecf8c428e68
+    type_id: 2
+  - id: &sc_voip_region 23246
+    name: SC Voip Region
+    uuid: c341332c-c026-41ef-9972-23748ea0e0bc
+    type_id: 2
+  - id: &sc_gran_anse_praslin_region 23251
+    name: SC Gran Anse Praslin Region
+    uuid: e5d3fb69-107d-4e26-b7ca-62d970c20dcd
+    type_id: 2
+# Supplementary services Networks
+  - id: &sc_did_services_region 23253
+    name: SC Did Services Region
+    uuid: fdc09b4b-4ae6-4a66-b2fc-497da04b9416
+    type_id: 2
+  - id: &sc_freephone_services 23862
+    name: SC Freephone Services
+    uuid: c532a375-7c0c-40d3-8ae0-0059b03f6636
+    type_id: 13
+  - id: &sc_emergency_services 24546
+    name: SC Emergency Services
+    uuid: 228f5ef0-4485-49d1-8a58-137911588c9c
+    type_id: 13
+  - id: &sc_international_premium_services 26058
+    name: SC International Premium Services
+    uuid: 03139749-3126-4dbf-9a9e-9c54e0b90ae0
+    type_id: 13
+  - id: &sc_international_audiotext 26124
+    name: SC International Audiotext
+    uuid: ba86739e-b959-455d-a20b-101cda7cab7c
+    type_id: 13
+  - id: &sc_vas_sms_mms_services 26130
+    name: SC Vas Sms_Mms Services
+    uuid: 7874c30b-33cb-4bee-aeb8-69441683fec4
+    type_id: 13
+  - id: &sc_audiotext 26138
+    name: SC Audiotext
+    uuid: 965295a9-447a-4f7b-9504-3b8320f80e4a
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Mobile Prefixes
   - id: 242111
     prefix: '248'
     number_min_length: 4
     number_max_length: 100
     uuid: 311131fd-337f-401b-af9c-8b09111edf20
     country_id: *sc
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *sc_fixed
   - id: 242503
     prefix: '2481'
     number_min_length: 6
@@ -168,49 +167,119 @@ network_prefixes:
     uuid: 78d5b358-1663-4673-bdf6-c6026081910d
     country_id: *sc
     network_id: *sc_special_services
-  - id: 253178
-    prefix: '248800'
+  - id: 247441
+    prefix: '2482'
     number_min_length: 10
     number_max_length: 10
-    uuid: e9fc9d0a-67a7-4e54-8b50-ccb8c48fd67b
+    uuid: 0e3fcace-9b1c-4d1f-ab64-c22a55b1baa4
     country_id: *sc
-    network_id: *sc_freephone_services
-  - id: 258309
-    prefix: '248999'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 51a051f3-1926-4583-a9f1-91c59c63655d
-    country_id: *sc
-    network_id: *sc_emergency_services
-  - id: 263715
-    prefix: '24885'
+    network_id: *sc_mobile
+  - id: 247640
+    prefix: '24821'
     number_min_length: 10
     number_max_length: 10
-    uuid: 8a6f17fe-0f62-4c12-839c-24eb594b2ead
+    uuid: 72008361-008f-42ff-ae2d-41d0e833eb2b
     country_id: *sc
-    network_id: *sc_international_premium_services
-  - id: 264451
-    prefix: '24895'
+    network_id: *sc_intelvision_mobile
+  - id: 247737
+    prefix: '24822'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5a2ea429-e09e-4ca6-acca-4b5d799b6d75
+    uuid: 584ea116-7bd2-4320-9c33-ccbf74504921
     country_id: *sc
-    network_id: *sc_international_audiotext
-  - id: 264731
-    prefix: '24896'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: d1a1b285-b131-4195-9c59-da21e11c9b75
-    country_id: *sc
-    network_id: *sc_vas_sms_mms_services
-  - id: 265047
-    prefix: '248971'
+    network_id: *sc_intelvision_mobile
+  - id: 248271
+    prefix: '24825'
     number_min_length: 10
     number_max_length: 10
-    uuid: 75656d60-a98c-42b8-9549-ecf72e37a64f
+    uuid: 39f78fb8-59b4-48dc-8e95-49c144c38b97
     country_id: *sc
-    network_id: *sc_audiotext
+    network_id: *sc_cable__wireless_mobile
+  - id: 248391
+    prefix: '2482550'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a9a88d15-3841-4792-89e9-190d6f1d96f7
+    country_id: *sc
+    network_id: *sc_fixed
 # Fixed Prefixes
+  - id: 248394
+    prefix: '2482551'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 99d5e6a2-9004-4526-b7cb-ac614bd6456d
+    country_id: *sc
+    network_id: *sc_fixed
+  - id: 248396
+    prefix: '2482552'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4c6d1ff8-e3b3-40af-9f4d-7c083b632e20
+    country_id: *sc
+    network_id: *sc_fixed
+  - id: 248398
+    prefix: '2482553'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aa709a8d-72a0-4b0e-b3d8-c6d33f4a44ed
+    country_id: *sc
+    network_id: *sc_fixed
+  - id: 248400
+    prefix: '2482554'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 576629c7-b3dc-4087-8fe5-6be00d9d453c
+    country_id: *sc
+    network_id: *sc_fixed
+  - id: 248402
+    prefix: '2482555'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e3b8ce4-3829-436f-ba48-fd47ae1f9757
+    country_id: *sc
+    network_id: *sc_fixed
+  - id: 248480
+    prefix: '24826'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1968479e-591b-4dac-8448-86da7ba09318
+    country_id: *sc
+    network_id: *sc_cable__wireless_mobile
+  - id: 248622
+    prefix: '24827'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 052c8d6b-e42f-4569-bea7-e2a9289de98b
+    country_id: *sc
+    network_id: *sc_airtel_mobile
+  - id: 248731
+    prefix: '2482780'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: edcceeee-a1ee-4824-ab9e-b0b84c85d2a1
+    country_id: *sc
+    network_id: *sc_fixed
+  - id: 248732
+    prefix: '2482781'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9dcad112-9bd8-476e-a495-5a9de7b0ea69
+    country_id: *sc
+    network_id: *sc_fixed
+  - id: 248734
+    prefix: '2482783'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7bb8c078-5e5c-42a5-bfcf-cd9bafb9c675
+    country_id: *sc
+    network_id: *sc_fixed
+  - id: 248758
+    prefix: '24828'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4612a2d5-3269-409e-b192-ce5a240be3c7
+    country_id: *sc
+    network_id: *sc_airtel_mobile
   - id: 243967
     prefix: '2484'
     number_min_length: 10
@@ -617,69 +686,6 @@ network_prefixes:
     uuid: 1a09fa67-6e6b-447d-b7a8-9789f8361e52
     country_id: *sc
     network_id: *sc_fixed
-  - id: 248391
-    prefix: '2482550'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a9a88d15-3841-4792-89e9-190d6f1d96f7
-    country_id: *sc
-    network_id: *sc_fixed
-  - id: 248394
-    prefix: '2482551'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 99d5e6a2-9004-4526-b7cb-ac614bd6456d
-    country_id: *sc
-    network_id: *sc_fixed
-  - id: 248396
-    prefix: '2482552'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4c6d1ff8-e3b3-40af-9f4d-7c083b632e20
-    country_id: *sc
-    network_id: *sc_fixed
-  - id: 248398
-    prefix: '2482553'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aa709a8d-72a0-4b0e-b3d8-c6d33f4a44ed
-    country_id: *sc
-    network_id: *sc_fixed
-  - id: 248400
-    prefix: '2482554'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 576629c7-b3dc-4087-8fe5-6be00d9d453c
-    country_id: *sc
-    network_id: *sc_fixed
-  - id: 248402
-    prefix: '2482555'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2e3b8ce4-3829-436f-ba48-fd47ae1f9757
-    country_id: *sc
-    network_id: *sc_fixed
-  - id: 248731
-    prefix: '2482780'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: edcceeee-a1ee-4824-ab9e-b0b84c85d2a1
-    country_id: *sc
-    network_id: *sc_fixed
-  - id: 248732
-    prefix: '2482781'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9dcad112-9bd8-476e-a495-5a9de7b0ea69
-    country_id: *sc
-    network_id: *sc_fixed
-  - id: 248734
-    prefix: '2482783'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7bb8c078-5e5c-42a5-bfcf-cd9bafb9c675
-    country_id: *sc
-    network_id: *sc_fixed
   - id: 249095
     prefix: '2484600'
     number_min_length: 10
@@ -883,6 +889,7 @@ network_prefixes:
     uuid: b2420ba9-37dc-4ea5-a9c0-b33f4175b52d
     country_id: *sc
     network_id: *sc_did_services_region
+# Supplementary services Prefixes
   - id: 251031
     prefix: '24864'
     number_min_length: 10
@@ -890,53 +897,45 @@ network_prefixes:
     uuid: 9d9eb19b-d499-4a22-ae33-78935a868f9a
     country_id: *sc
     network_id: *sc_voip_region
-# Mobile Prefixes
-  - id: 247441
-    prefix: '2482'
+  - id: 253178
+    prefix: '248800'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0e3fcace-9b1c-4d1f-ab64-c22a55b1baa4
+    uuid: e9fc9d0a-67a7-4e54-8b50-ccb8c48fd67b
     country_id: *sc
-    network_id: *sc_mobile
-  - id: 247640
-    prefix: '24821'
+    network_id: *sc_freephone_services
+  - id: 263715
+    prefix: '24885'
     number_min_length: 10
     number_max_length: 10
-    uuid: 72008361-008f-42ff-ae2d-41d0e833eb2b
+    uuid: 8a6f17fe-0f62-4c12-839c-24eb594b2ead
     country_id: *sc
-    network_id: *sc_intelvision_mobile
-  - id: 247737
-    prefix: '24822'
+    network_id: *sc_international_premium_services
+  - id: 264451
+    prefix: '24895'
     number_min_length: 10
     number_max_length: 10
-    uuid: 584ea116-7bd2-4320-9c33-ccbf74504921
+    uuid: 5a2ea429-e09e-4ca6-acca-4b5d799b6d75
     country_id: *sc
-    network_id: *sc_intelvision_mobile
-  - id: 248271
-    prefix: '24825'
+    network_id: *sc_international_audiotext
+  - id: 264731
+    prefix: '24896'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: d1a1b285-b131-4195-9c59-da21e11c9b75
+    country_id: *sc
+    network_id: *sc_vas_sms_mms_services
+  - id: 265047
+    prefix: '248971'
     number_min_length: 10
     number_max_length: 10
-    uuid: 39f78fb8-59b4-48dc-8e95-49c144c38b97
+    uuid: 75656d60-a98c-42b8-9549-ecf72e37a64f
     country_id: *sc
-    network_id: *sc_cable__wireless_mobile
-  - id: 248480
-    prefix: '24826'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1968479e-591b-4dac-8448-86da7ba09318
+    network_id: *sc_audiotext
+  - id: 258309
+    prefix: '248999'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 51a051f3-1926-4583-a9f1-91c59c63655d
     country_id: *sc
-    network_id: *sc_cable__wireless_mobile
-  - id: 248622
-    prefix: '24827'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 052c8d6b-e42f-4569-bea7-e2a9289de98b
-    country_id: *sc
-    network_id: *sc_airtel_mobile
-  - id: 248758
-    prefix: '24828'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4612a2d5-3269-409e-b192-ce5a240be3c7
-    country_id: *sc
-    network_id: *sc_airtel_mobile
+    network_id: *sc_emergency_services

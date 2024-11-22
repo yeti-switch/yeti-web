@@ -1,6 +1,6 @@
 country_id: &tz 209
 networks:
-# Supplementary services Networks
+# Mobile Networks
   - id: &tz_corporate_services 4605
     name: TZ Corporate Services
     uuid: c72cb7ad-5611-4dff-af2c-4f6d9b1f5b31
@@ -13,6 +13,35 @@ networks:
     name: TZ Corporate Public Data Networks
     uuid: a792517d-2924-480e-bf08-5c8c14ce67ea
     type_id: 13
+  - id: &tz_halotel_mobile 11801
+    name: TZ Halotel Mobile
+    uuid: 08d55e6d-5458-4092-a21b-7d614879a5a6
+    type_id: 3
+  - id: &tz_tigo_mobile 13482
+    name: TZ Tigo Mobile
+    uuid: 270eb372-ba07-4f94-b63a-5b4fbc2a22d3
+    type_id: 3
+  - id: &tz_smile_mobile 13688
+    name: TZ Smile Mobile
+    uuid: a84a7cf5-aa9e-491c-be63-7b11b2eff413
+    type_id: 3
+  - id: &tz_airtel_mobile 14233
+    name: TZ Airtel Mobile
+    uuid: 24432a67-55b7-4c0b-8473-de5dd9ba6ec3
+    type_id: 3
+# Supplementary services Networks
+  - id: &tz_mobile 14372
+    name: TZ Mobile
+    uuid: 02c16e75-3bd1-49e1-a64e-4497572136ca
+    type_id: 3
+  - id: &tz_ttcl_mobile_mobile 17159
+    name: TZ Ttcl Mobile Mobile
+    uuid: a103797b-0410-429c-b95e-5cc923e18538
+    type_id: 3
+  - id: &tz_vodacom_mobile 17637
+    name: TZ Vodacom Mobile
+    uuid: 135f8b5d-19f9-4022-9c2e-6ed4bcd7fe98
+    type_id: 3
   - id: &tz_customer_care_services 21537
     name: TZ Customer Care Services
     uuid: 10b672d3-f857-476c-93bf-514d5d4d4568
@@ -81,14 +110,51 @@ networks:
     name: TZ Credit Card Calling Services
     uuid: 41f4b2cb-2227-425d-96aa-93feffae702a
     type_id: 13
+  - id: &tz_dar_es_salaam_region_region 28040
+    name: TZ Dar Es Salaam Region Region
+    uuid: d6ffc2c1-41eb-45f2-a7c2-a9542ea4045b
+    type_id: 2
+  - id: &tz_coast_lindi_morogoro_and_mtwara_regions_region 28312
+    name: TZ Coast Lindi Morogoro And Mtwara Regions Region
+    uuid: 615565a5-69be-4981-8ed6-840b5e813e98
+    type_id: 2
+  - id: &tz_zanzibar_including_pemba_and_unguja_region_region 28979
+    name: TZ Zanzibar Including Pemba And Unguja Region Region
+    uuid: be0e1396-1567-431d-a467-4d317c2769d5
+    type_id: 2
+  - id: &tz_dodoma_iringa_njombe_singida_and_tabora_regions_region 29521
+    name: TZ Dodoma Iringa Njombe Singida And Tabora Regions Region
+    uuid: 7aa98180-5467-4f33-965b-b247cb73d131
+    type_id: 2
+  - id: &tz_arusha_kilimanjaro_manyara_and_tanga_regions_region 29787
+    name: TZ Arusha Kilimanjaro Manyara And Tanga Regions Region
+    uuid: 398a5313-5b2e-4644-8e36-d1a089c096c8
+    type_id: 2
+  - id: &tz_katavi_mbeya_rukwa_ruvuma_and_songwe_regions_region 29844
+    name: TZ Katavi Mbeya Rukwa Ruvuma And Songwe Regions Region
+    uuid: 5aa099e0-175c-4cf0-944f-ba17c4986d9a
+    type_id: 2
   - id: &tz_machine_to_machine_m2m_services 30896
     name: TZ Machine To Machine M2M Services
     uuid: dabddf93-caf4-4ace-b736-fde3dcdb1f7c
     type_id: 13
+  - id: &tz_geita_kagera_kigoma_mara_mwanza_shinyanga_and_simiyu_regions_region 31078
+    name: TZ Geita Kagera Kigoma Mara Mwanza Shinyanga And Simiyu Regions Region
+    uuid: cc9f5904-d9c7-4c23-a902-4c5559c6cc09
+    type_id: 2
+  - id: &tz_fixed 31279
+    name: TZ Fixed
+    uuid: 3b35fefa-dad7-4ece-bd79-99bddd42b23f
+    type_id: 2
+  - id: &tz_voip_region 36251
+    name: TZ Voip Region
+    uuid: f3384ea2-a5c3-4597-a4a5-9f71fbf6dfa6
+    type_id: 2
   - id: &tz_national_freephone_services 38518
     name: TZ National Freephone Services
     uuid: 98f6a981-daa3-4d51-b734-318f67caafb9
     type_id: 13
+# Fixed Networks
   - id: &tz_international_special_rate_services 39272
     name: TZ International Special Rate Services
     uuid: a232883d-b790-4025-b0b0-7d1c2768261f
@@ -125,137 +191,15 @@ networks:
     name: TZ Premium Rate Services
     uuid: 315be8b4-72b8-4fac-9347-af64a24403b0
     type_id: 13
-# Mobile Networks
-  - id: &tz_halotel_mobile 11801
-    name: TZ Halotel Mobile
-    uuid: 08d55e6d-5458-4092-a21b-7d614879a5a6
-    type_id: 3
-  - id: &tz_tigo_mobile 13482
-    name: TZ Tigo Mobile
-    uuid: 270eb372-ba07-4f94-b63a-5b4fbc2a22d3
-    type_id: 3
-  - id: &tz_smile_mobile 13688
-    name: TZ Smile Mobile
-    uuid: a84a7cf5-aa9e-491c-be63-7b11b2eff413
-    type_id: 3
-  - id: &tz_airtel_mobile 14233
-    name: TZ Airtel Mobile
-    uuid: 24432a67-55b7-4c0b-8473-de5dd9ba6ec3
-    type_id: 3
-  - id: &tz_mobile 14372
-    name: TZ Mobile
-    uuid: 02c16e75-3bd1-49e1-a64e-4497572136ca
-    type_id: 3
-  - id: &tz_ttcl_mobile_mobile 17159
-    name: TZ Ttcl Mobile Mobile
-    uuid: a103797b-0410-429c-b95e-5cc923e18538
-    type_id: 3
-  - id: &tz_vodacom_mobile 17637
-    name: TZ Vodacom Mobile
-    uuid: 135f8b5d-19f9-4022-9c2e-6ed4bcd7fe98
-    type_id: 3
-# Fixed Networks
-  - id: &tz_dar_es_salaam_region_region 28040
-    name: TZ Dar Es Salaam Region Region
-    uuid: d6ffc2c1-41eb-45f2-a7c2-a9542ea4045b
-    type_id: 2
-  - id: &tz_coast_lindi_morogoro_and_mtwara_regions_region 28312
-    name: TZ Coast Lindi Morogoro And Mtwara Regions Region
-    uuid: 615565a5-69be-4981-8ed6-840b5e813e98
-    type_id: 2
-  - id: &tz_zanzibar_including_pemba_and_unguja_region_region 28979
-    name: TZ Zanzibar Including Pemba And Unguja Region Region
-    uuid: be0e1396-1567-431d-a467-4d317c2769d5
-    type_id: 2
-  - id: &tz_dodoma_iringa_njombe_singida_and_tabora_regions_region 29521
-    name: TZ Dodoma Iringa Njombe Singida And Tabora Regions Region
-    uuid: 7aa98180-5467-4f33-965b-b247cb73d131
-    type_id: 2
-  - id: &tz_arusha_kilimanjaro_manyara_and_tanga_regions_region 29787
-    name: TZ Arusha Kilimanjaro Manyara And Tanga Regions Region
-    uuid: 398a5313-5b2e-4644-8e36-d1a089c096c8
-    type_id: 2
-  - id: &tz_katavi_mbeya_rukwa_ruvuma_and_songwe_regions_region 29844
-    name: TZ Katavi Mbeya Rukwa Ruvuma And Songwe Regions Region
-    uuid: 5aa099e0-175c-4cf0-944f-ba17c4986d9a
-    type_id: 2
-  - id: &tz_geita_kagera_kigoma_mara_mwanza_shinyanga_and_simiyu_regions_region 31078
-    name: TZ Geita Kagera Kigoma Mara Mwanza Shinyanga And Simiyu Regions Region
-    uuid: cc9f5904-d9c7-4c23-a902-4c5559c6cc09
-    type_id: 2
-  - id: &tz_fixed 31279
-    name: TZ Fixed
-    uuid: 3b35fefa-dad7-4ece-bd79-99bddd42b23f
-    type_id: 2
-  - id: &tz_voip_region 36251
-    name: TZ Voip Region
-    uuid: f3384ea2-a5c3-4597-a4a5-9f71fbf6dfa6
-    type_id: 2
 network_prefixes:
-# Supplementary services Prefixes
-  - id: 54572
-    prefix: '2554'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3084a1a9-217e-4046-b8e6-70986bdcae88
+# Mobile Prefixes
+  - id: 242125
+    prefix: '255'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: d85a0c53-2712-4624-9d73-33286225d823
     country_id: *tz
-    network_id: *tz_corporate_services
-  - id: 62619
-    prefix: '25551'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4af8ad25-efba-44d4-a63f-c81fa6a8f107
-    country_id: *tz
-    network_id: *tz_corporate_private_data_networks
-  - id: 71670
-    prefix: '25552'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cffe6299-ef3b-4d1b-abf8-d7c910c6c343
-    country_id: *tz
-    network_id: *tz_corporate_private_data_networks
-  - id: 73213
-    prefix: '25554'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 73fd974d-4051-412e-b5f6-64b2677c4afe
-    country_id: *tz
-    network_id: *tz_corporate_private_data_networks
-  - id: 76560
-    prefix: '25553'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8b9a342c-e12c-4b9f-baa6-b001e6fafd77
-    country_id: *tz
-    network_id: *tz_corporate_private_data_networks
-  - id: 78136
-    prefix: '25555'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0db58e16-4342-453a-a9f4-870599ac5af7
-    country_id: *tz
-    network_id: *tz_corporate_private_data_networks
-  - id: 87928
-    prefix: '25556'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ddba610e-07f5-4209-bde6-de3b036a9f6f
-    country_id: *tz
-    network_id: *tz_corporate_public_data_networks
-  - id: 90278
-    prefix: '25557'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 929b7271-7a91-4eaf-aab7-2b352c30b8d8
-    country_id: *tz
-    network_id: *tz_corporate_public_data_networks
-  - id: 93103
-    prefix: '25558'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 73919098-11a7-4740-80fe-b4f60d3ef94a
-    country_id: *tz
-    network_id: *tz_corporate_public_data_networks
+    network_id: *tz_fixed
   - id: 242544
     prefix: '25510'
     number_min_length: 6
@@ -361,41 +305,63 @@ network_prefixes:
     uuid: f87ddb48-aaef-41bc-9d9c-2317c79ec666
     country_id: *tz
     network_id: *tz_carrier_preselection_services
-  - id: 253190
-    prefix: '2558001'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: b920d19a-a9b0-4ecc-9ad2-957e1f47137b
+  - id: 315857
+    prefix: '2552'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5b4d3b85-ecb2-49ef-9eea-440d0b430179
     country_id: *tz
-    network_id: *tz_prepaid_account_calling_services
-  - id: 253192
-    prefix: '2558002'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: b4f15774-4ef7-4da5-a9e9-e7f3434c7428
+    network_id: *tz_fixed
+  - id: 282802
+    prefix: '25522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 62f6d3ee-1bf5-4640-aae2-287397b120fb
     country_id: *tz
-    network_id: *tz_prepaid_account_calling_services
-  - id: 253193
-    prefix: '2558003'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 1ec98a4d-571d-40b9-92fd-1541b92ed1b6
+    network_id: *tz_dar_es_salaam_region_region
+  - id: 286644
+    prefix: '25523'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ff58c340-76fc-477a-98ae-9503246385f8
     country_id: *tz
-    network_id: *tz_account_card_calling_services
-  - id: 253194
-    prefix: '2558004'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: e08ac2cb-6956-487a-b7b3-6efce1e89457
+    network_id: *tz_coast_lindi_morogoro_and_mtwara_regions_region
+  - id: 294336
+    prefix: '25524'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 027cacaf-f4f7-490d-a2c5-9a3326797c58
     country_id: *tz
-    network_id: *tz_prepaid_card_calling_services
-  - id: 253195
-    prefix: '2558005'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 507bb968-f02a-4b94-8a87-925c2b95a6de
+    network_id: *tz_zanzibar_including_pemba_and_unguja_region_region
+  - id: 301982
+    prefix: '25525'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 711aa973-d6a3-46d9-b67c-a32dbc868c09
     country_id: *tz
-    network_id: *tz_credit_card_calling_services
+    network_id: *tz_katavi_mbeya_rukwa_ruvuma_and_songwe_regions_region
+  - id: 299809
+    prefix: '25526'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 94235858-ce85-459a-8439-57a7d2daa456
+    country_id: *tz
+    network_id: *tz_dodoma_iringa_njombe_singida_and_tabora_regions_region
+# Supplementary services Prefixes
+  - id: 301433
+    prefix: '25527'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e0cf5b32-0d21-43b0-a31c-f34614c09ef3
+    country_id: *tz
+    network_id: *tz_arusha_kilimanjaro_manyara_and_tanga_regions_region
+  - id: 313362
+    prefix: '25528'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d93df768-109f-4a58-87d7-af11e959b253
+    country_id: *tz
+    network_id: *tz_geita_kagera_kigoma_mara_mwanza_shinyanga_and_simiyu_regions_region
   - id: 309576
     prefix: '255300'
     number_min_length: 15
@@ -403,77 +369,125 @@ network_prefixes:
     uuid: 0c199d1d-3055-4dcf-8bd8-dbbd40a9c3ad
     country_id: *tz
     network_id: *tz_machine_to_machine_m2m_services
-  - id: 403494
-    prefix: '255800'
+  - id: 309577
+    prefix: '25530000'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 970fff5b-4376-4afb-9e42-581c39a8d8cb
+    country_id: *tz
+    network_id: *tz_tigo_mobile
+  - id: 309578
+    prefix: '25530001'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: d43b120b-6ef0-44b1-8943-f90430369abe
+    country_id: *tz
+    network_id: *tz_airtel_mobile
+  - id: 309579
+    prefix: '25530002'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: b552d5da-4b13-440d-bb86-68839520b64d
+    country_id: *tz
+    network_id: *tz_halotel_mobile
+  - id: 309580
+    prefix: '25530003'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: bc670a95-4a6d-455c-8335-864795f4a7c0
+    country_id: *tz
+    network_id: *tz_vodacom_mobile
+  - id: 309581
+    prefix: '25530004'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: e488e7b5-83ce-4ee5-a075-4eaef38d34a4
+    country_id: *tz
+    network_id: *tz_tigo_mobile
+  - id: 309582
+    prefix: '25530005'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 89b45b94-5f44-4f97-a4f2-e5c0b6f88dcb
+    country_id: *tz
+    network_id: *tz_ttcl_mobile_mobile
+  - id: 54572
+    prefix: '2554'
     number_min_length: 12
     number_max_length: 12
-    uuid: 280cc45e-631b-4882-8796-5669208453c2
+    uuid: 3084a1a9-217e-4046-b8e6-70986bdcae88
     country_id: *tz
-    network_id: *tz_national_freephone_services
-  - id: 412366
-    prefix: '255808'
+    network_id: *tz_corporate_services
+  - id: 362542
+    prefix: '25541'
     number_min_length: 12
     number_max_length: 12
-    uuid: 8af62fc3-b794-4900-9dd8-35c395798921
+    uuid: 6f8a87ee-6be7-421b-95a2-3722d3db8944
     country_id: *tz
-    network_id: *tz_international_special_rate_services
-  - id: 429046
-    prefix: '255860'
+    network_id: *tz_voip_region
+  - id: 62619
+    prefix: '25551'
     number_min_length: 12
     number_max_length: 12
-    uuid: 108ae276-f3b1-4031-b54e-5cf6abdb2dd9
+    uuid: 4af8ad25-efba-44d4-a63f-c81fa6a8f107
     country_id: *tz
-    network_id: *tz_national_rate_services
-  - id: 433666
-    prefix: '255840'
+    network_id: *tz_corporate_private_data_networks
+  - id: 71670
+    prefix: '25552'
     number_min_length: 12
     number_max_length: 12
-    uuid: 7b81f9fc-be4a-472f-a8fd-89935bddc750
+    uuid: cffe6299-ef3b-4d1b-abf8-d7c910c6c343
     country_id: *tz
-    network_id: *tz_shared_cost_services
-  - id: 438146
-    prefix: '255861'
+    network_id: *tz_corporate_private_data_networks
+  - id: 76560
+    prefix: '25553'
     number_min_length: 12
     number_max_length: 12
-    uuid: f215aceb-5b23-4141-a478-b46e99e6db3b
+    uuid: 8b9a342c-e12c-4b9f-baa6-b001e6fafd77
     country_id: *tz
-    network_id: *tz_special_rate_services
-  - id: 444746
-    prefix: '2558'
+    network_id: *tz_corporate_private_data_networks
+  - id: 73213
+    prefix: '25554'
     number_min_length: 12
     number_max_length: 12
-    uuid: 185d1b34-b27a-4f58-aa4e-e4e7407e214b
+    uuid: 73fd974d-4051-412e-b5f6-64b2677c4afe
     country_id: *tz
-    network_id: *tz_special_services
-  - id: 454589
-    prefix: '255900'
+    network_id: *tz_corporate_private_data_networks
+  - id: 78136
+    prefix: '25555'
     number_min_length: 12
     number_max_length: 12
-    uuid: eb7dc39a-7c22-47aa-bd87-771f219a6894
+    uuid: 0db58e16-4342-453a-a9f4-870599ac5af7
     country_id: *tz
-    network_id: *tz_information_services
-  - id: 454712
-    prefix: '255901'
+    network_id: *tz_corporate_private_data_networks
+  - id: 87928
+    prefix: '25556'
     number_min_length: 12
     number_max_length: 12
-    uuid: b11df1e4-a838-4e99-a51a-1b48a50e078c
+    uuid: ddba610e-07f5-4209-bde6-de3b036a9f6f
     country_id: *tz
-    network_id: *tz_entertainment_services
-  - id: 454955
-    prefix: '255902'
+    network_id: *tz_corporate_public_data_networks
+  - id: 90278
+    prefix: '25557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 650580f6-2db8-4728-b3dc-0edd5f7470c9
+    uuid: 929b7271-7a91-4eaf-aab7-2b352c30b8d8
     country_id: *tz
-    network_id: *tz_competitions_and_televoting_services
-  - id: 458134
-    prefix: '25590'
+    network_id: *tz_corporate_public_data_networks
+  - id: 93103
+    prefix: '25558'
     number_min_length: 12
     number_max_length: 12
-    uuid: 08b5e50b-6a67-48b3-824d-2aa88c3ac1c2
+    uuid: 73919098-11a7-4740-80fe-b4f60d3ef94a
     country_id: *tz
-    network_id: *tz_premium_rate_services
-# Mobile Prefixes
+    network_id: *tz_corporate_public_data_networks
+  - id: 149326
+    prefix: '2556'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 61605aa3-000d-4f7f-8022-2052207bc868
+    country_id: *tz
+    network_id: *tz_mobile
   - id: 108598
     prefix: '25561'
     number_min_length: 12
@@ -502,6 +516,13 @@ network_prefixes:
     uuid: 795f00c3-7056-4c9e-9f12-22bb141447c5
     country_id: *tz
     network_id: *tz_smile_mobile
+  - id: 151433
+    prefix: '25567'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bd37b4bc-5bfd-44b5-a5b6-d089a0f6e032
+    country_id: *tz
+    network_id: *tz_tigo_mobile
   - id: 146827
     prefix: '25568'
     number_min_length: 12
@@ -516,20 +537,13 @@ network_prefixes:
     uuid: 27cff293-e1b4-496c-90fe-b727f1757018
     country_id: *tz
     network_id: *tz_airtel_mobile
-  - id: 149326
-    prefix: '2556'
+  - id: 207507
+    prefix: '2557'
     number_min_length: 12
     number_max_length: 12
-    uuid: 61605aa3-000d-4f7f-8022-2052207bc868
+    uuid: c97964c1-112c-4d02-93a0-98281009d177
     country_id: *tz
     network_id: *tz_mobile
-  - id: 151433
-    prefix: '25567'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bd37b4bc-5bfd-44b5-a5b6-d089a0f6e032
-    country_id: *tz
-    network_id: *tz_tigo_mobile
   - id: 164007
     prefix: '25571'
     number_min_length: 12
@@ -579,124 +593,109 @@ network_prefixes:
     uuid: b35a7cec-4a6b-4abb-a41b-2fc244b3aa3b
     country_id: *tz
     network_id: *tz_airtel_mobile
-  - id: 207507
-    prefix: '2557'
+  - id: 444746
+    prefix: '2558'
     number_min_length: 12
     number_max_length: 12
-    uuid: c97964c1-112c-4d02-93a0-98281009d177
+    uuid: 185d1b34-b27a-4f58-aa4e-e4e7407e214b
     country_id: *tz
-    network_id: *tz_mobile
-  - id: 309577
-    prefix: '25530000'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 970fff5b-4376-4afb-9e42-581c39a8d8cb
+    network_id: *tz_special_services
+  - id: 403494
+    prefix: '255800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 280cc45e-631b-4882-8796-5669208453c2
     country_id: *tz
-    network_id: *tz_tigo_mobile
-  - id: 309578
-    prefix: '25530001'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: d43b120b-6ef0-44b1-8943-f90430369abe
+    network_id: *tz_national_freephone_services
+  - id: 253190
+    prefix: '2558001'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: b920d19a-a9b0-4ecc-9ad2-957e1f47137b
     country_id: *tz
-    network_id: *tz_airtel_mobile
-  - id: 309579
-    prefix: '25530002'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: b552d5da-4b13-440d-bb86-68839520b64d
+    network_id: *tz_prepaid_account_calling_services
+  - id: 253192
+    prefix: '2558002'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: b4f15774-4ef7-4da5-a9e9-e7f3434c7428
     country_id: *tz
-    network_id: *tz_halotel_mobile
-  - id: 309580
-    prefix: '25530003'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: bc670a95-4a6d-455c-8335-864795f4a7c0
+    network_id: *tz_prepaid_account_calling_services
+  - id: 253193
+    prefix: '2558003'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 1ec98a4d-571d-40b9-92fd-1541b92ed1b6
     country_id: *tz
-    network_id: *tz_vodacom_mobile
-  - id: 309581
-    prefix: '25530004'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: e488e7b5-83ce-4ee5-a075-4eaef38d34a4
-    country_id: *tz
-    network_id: *tz_tigo_mobile
-  - id: 309582
-    prefix: '25530005'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 89b45b94-5f44-4f97-a4f2-e5c0b6f88dcb
-    country_id: *tz
-    network_id: *tz_ttcl_mobile_mobile
-# Country code Prefixes
-  - id: 242125
-    prefix: '255'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: d85a0c53-2712-4624-9d73-33286225d823
-    country_id: *tz
-    network_id: null
+    network_id: *tz_account_card_calling_services
 # Fixed Prefixes
-  - id: 282802
-    prefix: '25522'
+  - id: 253194
+    prefix: '2558004'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: e08ac2cb-6956-487a-b7b3-6efce1e89457
+    country_id: *tz
+    network_id: *tz_prepaid_card_calling_services
+  - id: 253195
+    prefix: '2558005'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 507bb968-f02a-4b94-8a87-925c2b95a6de
+    country_id: *tz
+    network_id: *tz_credit_card_calling_services
+  - id: 412366
+    prefix: '255808'
     number_min_length: 12
     number_max_length: 12
-    uuid: 62f6d3ee-1bf5-4640-aae2-287397b120fb
+    uuid: 8af62fc3-b794-4900-9dd8-35c395798921
     country_id: *tz
-    network_id: *tz_dar_es_salaam_region_region
-  - id: 286644
-    prefix: '25523'
+    network_id: *tz_international_special_rate_services
+  - id: 433666
+    prefix: '255840'
     number_min_length: 12
     number_max_length: 12
-    uuid: ff58c340-76fc-477a-98ae-9503246385f8
+    uuid: 7b81f9fc-be4a-472f-a8fd-89935bddc750
     country_id: *tz
-    network_id: *tz_coast_lindi_morogoro_and_mtwara_regions_region
-  - id: 294336
-    prefix: '25524'
+    network_id: *tz_shared_cost_services
+  - id: 429046
+    prefix: '255860'
     number_min_length: 12
     number_max_length: 12
-    uuid: 027cacaf-f4f7-490d-a2c5-9a3326797c58
+    uuid: 108ae276-f3b1-4031-b54e-5cf6abdb2dd9
     country_id: *tz
-    network_id: *tz_zanzibar_including_pemba_and_unguja_region_region
-  - id: 299809
-    prefix: '25526'
+    network_id: *tz_national_rate_services
+  - id: 438146
+    prefix: '255861'
     number_min_length: 12
     number_max_length: 12
-    uuid: 94235858-ce85-459a-8439-57a7d2daa456
+    uuid: f215aceb-5b23-4141-a478-b46e99e6db3b
     country_id: *tz
-    network_id: *tz_dodoma_iringa_njombe_singida_and_tabora_regions_region
-  - id: 301433
-    prefix: '25527'
+    network_id: *tz_special_rate_services
+  - id: 458134
+    prefix: '25590'
     number_min_length: 12
     number_max_length: 12
-    uuid: e0cf5b32-0d21-43b0-a31c-f34614c09ef3
+    uuid: 08b5e50b-6a67-48b3-824d-2aa88c3ac1c2
     country_id: *tz
-    network_id: *tz_arusha_kilimanjaro_manyara_and_tanga_regions_region
-  - id: 301982
-    prefix: '25525'
+    network_id: *tz_premium_rate_services
+  - id: 454589
+    prefix: '255900'
     number_min_length: 12
     number_max_length: 12
-    uuid: 711aa973-d6a3-46d9-b67c-a32dbc868c09
+    uuid: eb7dc39a-7c22-47aa-bd87-771f219a6894
     country_id: *tz
-    network_id: *tz_katavi_mbeya_rukwa_ruvuma_and_songwe_regions_region
-  - id: 313362
-    prefix: '25528'
+    network_id: *tz_information_services
+  - id: 454712
+    prefix: '255901'
     number_min_length: 12
     number_max_length: 12
-    uuid: d93df768-109f-4a58-87d7-af11e959b253
+    uuid: b11df1e4-a838-4e99-a51a-1b48a50e078c
     country_id: *tz
-    network_id: *tz_geita_kagera_kigoma_mara_mwanza_shinyanga_and_simiyu_regions_region
-  - id: 315857
-    prefix: '2552'
+    network_id: *tz_entertainment_services
+  - id: 454955
+    prefix: '255902'
     number_min_length: 12
     number_max_length: 12
-    uuid: 5b4d3b85-ecb2-49ef-9eea-440d0b430179
+    uuid: 650580f6-2db8-4728-b3dc-0edd5f7470c9
     country_id: *tz
-    network_id: *tz_fixed
-  - id: 362542
-    prefix: '25541'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6f8a87ee-6be7-421b-95a2-3722d3db8944
-    country_id: *tz
-    network_id: *tz_voip_region
+    network_id: *tz_competitions_and_televoting_services

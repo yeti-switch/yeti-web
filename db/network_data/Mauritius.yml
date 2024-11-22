@@ -1,6 +1,6 @@
 country_id: &mu 136
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &mu_home_country_direct 21295
     name: MU Home Country Direct
     uuid: 6d2fe674-3ba3-4e94-bd87-3fcd14174095
@@ -25,43 +25,14 @@ networks:
     name: MU Sms Value Added Services
     uuid: 3b9229c0-d30e-4c7f-a5a7-d65d247f9316
     type_id: 13
-  - id: &mu_virtual_telephony_virtual_fax_and_fax_to_email_services 22114
-    name: MU Virtual Telephony Virtual Fax And Fax To Email Services
-    uuid: c5501a32-20fb-4328-afdc-9743abb75b44
-    type_id: 13
-  - id: &mu_premium_rate_services 23213
-    name: MU Premium Rate Services
-    uuid: 3e66ae03-0bb5-4688-a800-40b54190c719
-    type_id: 13
-  - id: &mu_special_services_on_net 23800
-    name: MU Special Services On Net
-    uuid: 9fa65ccc-49b2-4b03-b62b-a3abbb71289c
-    type_id: 13
-  - id: &mu_national_freephone_services 23850
-    name: MU National Freephone Services
-    uuid: be1ab837-762d-446f-b4d4-2e100637e7fc
-    type_id: 13
-  - id: &mu_international_freephone_services_inbound 23886
-    name: MU International Freephone Services Inbound
-    uuid: a71d9da9-3061-4e9e-a4e4-08290518ac80
-    type_id: 13
-  - id: &mu_international_freephone_services_outbound 23890
-    name: MU International Freephone Services Outbound
-    uuid: 82ce77ab-8555-4138-b238-c468bdaf3a75
-    type_id: 13
-  - id: &mu_special_services_cross_net 24377
-    name: MU Special Services Cross Net
-    uuid: 9a733a33-ffe1-4eea-b4e3-a292ad62f59b
-    type_id: 13
-  - id: &mu_emergency_services 24536
-    name: MU Emergency Services
-    uuid: 4f2b59ba-03ec-4e15-a346-073ec8e9c823
-    type_id: 13
-# Fixed Networks
   - id: &mu_voip_region 21944
     name: MU Voip Region
     uuid: 53cca1d2-6868-4a3a-bac7-4dec9bd4529b
     type_id: 2
+  - id: &mu_virtual_telephony_virtual_fax_and_fax_to_email_services 22114
+    name: MU Virtual Telephony Virtual Fax And Fax To Email Services
+    uuid: c5501a32-20fb-4328-afdc-9743abb75b44
+    type_id: 13
   - id: &mu_central_region_region 22136
     name: MU Central Region Region
     uuid: 02a417af-999e-4020-a0e4-650431549502
@@ -154,10 +125,22 @@ networks:
     name: MU Riviere Des Anguilles Region
     uuid: 4a0d93fd-6715-4248-84e9-7a2d57741870
     type_id: 2
+  - id: &mu_myt_mobile_mobile 22455
+    name: MU Myt Mobile Mobile
+    uuid: a15fd905-145d-48bf-abe3-492d15cd903e
+    type_id: 3
   - id: &mu_nouvelle_france_region 22457
     name: MU Nouvelle France Region
     uuid: dc2e701c-f600-4865-8fed-80d4e9419337
     type_id: 2
+  - id: &mu_emtel_mobile 22483
+    name: MU Emtel Mobile
+    uuid: 70501441-545b-4b60-ae4b-30251a8b0ab9
+    type_id: 3
+  - id: &mu_mtml_cdma_chili_mobile 22484
+    name: MU Mtml Cdma Chili Mobile
+    uuid: e0745d69-3d0c-428c-ad33-342a1b620011
+    type_id: 3
   - id: &mu_floreal_region 22485
     name: MU Floreal Region
     uuid: a34a7158-6931-43b2-9417-315b687da185
@@ -214,6 +197,10 @@ networks:
     name: MU Signal Mountain Region
     uuid: 9e22f711-0477-40c6-87d8-8ef9d1f159d1
     type_id: 2
+  - id: &mu_paging 22833
+    name: MU Paging
+    uuid: 8c05ad8a-7bef-421d-b3d8-c72210d07688
+    type_id: 12
   - id: &mu_coromandel_region 22928
     name: MU Coromandel Region
     uuid: 849c1d67-dda3-48c0-b700-ab23024615c7
@@ -274,10 +261,18 @@ networks:
     name: MU Fixed
     uuid: 593fc6dc-31c2-4f9c-9b41-63e30c1ede6c
     type_id: 2
+  - id: &mu_premium_rate_services 23213
+    name: MU Premium Rate Services
+    uuid: 3e66ae03-0bb5-4688-a800-40b54190c719
+    type_id: 13
   - id: &mu_tamarin_region 23282
     name: MU Tamarin Region
     uuid: e78c813b-a1b6-4052-a563-6390d2fe9116
     type_id: 2
+  - id: &mu_mobile 23311
+    name: MU Mobile
+    uuid: 3adb627e-aba0-4470-a2f1-9f2ff3a4f404
+    type_id: 3
   - id: &mu_grand_bois_region 23334
     name: MU Grand Bois Region
     uuid: 2d5fb833-cf29-4f66-9a53-374a371a76d3
@@ -310,6 +305,7 @@ networks:
     name: MU Forest Side Region
     uuid: 4097b70a-acf4-4bfc-88a0-0743e7a1e4ad
     type_id: 2
+# Supplementary services Networks
   - id: &mu_beau_bassin_region 23421
     name: MU Beau Bassin Region
     uuid: cba0830e-0a28-4b2c-ae51-d28e861014e5
@@ -322,6 +318,22 @@ networks:
     name: MU Lescalier Region
     uuid: 2b5e5d2e-e1b0-4aa6-a2cb-d1fcdbafe28b
     type_id: 2
+  - id: &mu_special_services_on_net 23800
+    name: MU Special Services On Net
+    uuid: 9fa65ccc-49b2-4b03-b62b-a3abbb71289c
+    type_id: 13
+  - id: &mu_national_freephone_services 23850
+    name: MU National Freephone Services
+    uuid: be1ab837-762d-446f-b4d4-2e100637e7fc
+    type_id: 13
+  - id: &mu_international_freephone_services_inbound 23886
+    name: MU International Freephone Services Inbound
+    uuid: a71d9da9-3061-4e9e-a4e4-08290518ac80
+    type_id: 13
+  - id: &mu_international_freephone_services_outbound 23890
+    name: MU International Freephone Services Outbound
+    uuid: 82ce77ab-8555-4138-b238-c468bdaf3a75
+    type_id: 13
   - id: &mu_agalega_region 23943
     name: MU Agalega Region
     uuid: b919e30b-afe8-4ab1-ab9b-0e9221d26127
@@ -350,6 +362,7 @@ networks:
     name: MU La Ferme Region
     uuid: fe6c51c8-d8e8-4c72-867e-23a6f594b108
     type_id: 2
+# Mobile Networks
   - id: &mu_la_prairie_region 24043
     name: MU La Prairie Region
     uuid: 4fff70fe-bb23-4276-814d-0c6aa8308cc6
@@ -362,38 +375,24 @@ networks:
     name: MU Glen Park Region
     uuid: 7afef6b0-f59b-481b-96f5-6b772c6aa2c8
     type_id: 2
-# Mobile Networks
-  - id: &mu_myt_mobile_mobile 22455
-    name: MU Myt Mobile Mobile
-    uuid: a15fd905-145d-48bf-abe3-492d15cd903e
-    type_id: 3
-  - id: &mu_emtel_mobile 22483
-    name: MU Emtel Mobile
-    uuid: 70501441-545b-4b60-ae4b-30251a8b0ab9
-    type_id: 3
-  - id: &mu_mtml_cdma_chili_mobile 22484
-    name: MU Mtml Cdma Chili Mobile
-    uuid: e0745d69-3d0c-428c-ad33-342a1b620011
-    type_id: 3
-  - id: &mu_mobile 23311
-    name: MU Mobile
-    uuid: 3adb627e-aba0-4470-a2f1-9f2ff3a4f404
-    type_id: 3
+  - id: &mu_special_services_cross_net 24377
+    name: MU Special Services Cross Net
+    uuid: 9a733a33-ffe1-4eea-b4e3-a292ad62f59b
+    type_id: 13
 # Paging Networks
-  - id: &mu_paging 22833
-    name: MU Paging
-    uuid: 8c05ad8a-7bef-421d-b3d8-c72210d07688
-    type_id: 12
+  - id: &mu_emergency_services 24536
+    name: MU Emergency Services
+    uuid: 4f2b59ba-03ec-4e15-a346-073ec8e9c823
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242061
     prefix: '230'
     number_min_length: 4
     number_max_length: 100
     uuid: 1305eea0-a329-4c0e-aca0-dd15cebb3aed
     country_id: *mu
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *mu_fixed
   - id: 242166
     prefix: '23001'
     number_min_length: 7
@@ -408,658 +407,6 @@ network_prefixes:
     uuid: 88c85587-2fa1-4f52-95cb-353e7acfd656
     country_id: *mu
     network_id: *mu_special_services
-  - id: 243269
-    prefix: '230312'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 957be99a-c7f7-4dba-912d-5c18cefd3aaf
-    country_id: *mu
-    network_id: *mu_internet_access_analogue
-  - id: 243313
-    prefix: '230315'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 18f6de26-5a4a-440c-85eb-87864db69273
-    country_id: *mu
-    network_id: *mu_internet_access_isdn
-  - id: 243331
-    prefix: '230318'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: daae56f2-b6f5-42fd-92d6-269814422bf9
-    country_id: *mu
-    network_id: *mu_internet_access_remote
-  - id: 243346
-    prefix: '230319'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2443a3a2-eba8-439c-bcc1-7a49ae4edc21
-    country_id: *mu
-    network_id: *mu_sms_value_added_services
-  - id: 243909
-    prefix: '23039'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a9d8d1c3-ff11-4277-9302-a4a9783e61f7
-    country_id: *mu
-    network_id: *mu_virtual_telephony_virtual_fax_and_fax_to_email_services
-  - id: 248936
-    prefix: '23030'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e4e22baa-5e4a-4ee8-b4e5-a88e413080c6
-    country_id: *mu
-    network_id: *mu_premium_rate_services
-  - id: 253092
-    prefix: '2308'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: dab4c265-a18d-4aa3-929b-018095f4f425
-    country_id: *mu
-    network_id: *mu_special_services_on_net
-  - id: 253165
-    prefix: '230800'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f2af49b1-43dc-4647-bf6c-27bd5205031e
-    country_id: *mu
-    network_id: *mu_national_freephone_services
-  - id: 253214
-    prefix: '230801'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a2bad174-7402-4467-865b-12f3d170e288
-    country_id: *mu
-    network_id: *mu_international_freephone_services_inbound
-  - id: 253227
-    prefix: '230802'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3ad7d717-4c88-43e4-914a-529f549fd660
-    country_id: *mu
-    network_id: *mu_international_freephone_services_outbound
-  - id: 257007
-    prefix: '23089'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: a2153126-5b03-42ed-b65c-4df562414b20
-    country_id: *mu
-    network_id: *mu_special_services_cross_net
-  - id: 258190
-    prefix: '23099'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 43458842-bd01-4c70-bcf6-03272de1f9e4
-    country_id: *mu
-    network_id: *mu_emergency_services
-# Fixed Prefixes
-  - id: 243384
-    prefix: '230320'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e17ed4e5-295b-4653-88b1-71d22d5fd7f5
-    country_id: *mu
-    network_id: *mu_voip_region
-  - id: 243948
-    prefix: '2304'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f95ebe9c-79b7-4d4c-badd-72712935cfa3
-    country_id: *mu
-    network_id: *mu_central_region_region
-  - id: 244024
-    prefix: '2304011'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ca6c420a-30f0-40fb-bad6-c1ae5815906a
-    country_id: *mu
-    network_id: *mu_flacq_region
-  - id: 244026
-    prefix: '2304012'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5f875a0e-3786-4bcc-95d4-234ffe085c08
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 244029
-    prefix: '2304014'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8603fd75-b359-4945-a9ca-044c54b1bd56
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 244031
-    prefix: '2304015'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8930dc8b-de4c-46a2-a5e1-283a460aff82
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 244033
-    prefix: '2304016'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 76ebbdf9-9e0c-4611-af3a-10915f4b26e8
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 244035
-    prefix: '2304017'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7aa0eb2e-b69f-4ed6-8be1-158df7962f1d
-    country_id: *mu
-    network_id: *mu_flacq_region
-  - id: 244037
-    prefix: '2304018'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1f2a717d-9ead-4cd0-a732-e90170dafb76
-    country_id: *mu
-    network_id: *mu_flacq_region
-  - id: 244039
-    prefix: '2304019'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e41da6d5-2b75-4eee-8d53-cfb532c8ec7e
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 244044
-    prefix: '2304021'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 970cef99-ac82-4af5-a59f-f6bd126fba35
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 244046
-    prefix: '2304022'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: efd9f5d2-b903-47be-babb-6bcf85886684
-    country_id: *mu
-    network_id: *mu_flacq_region
-  - id: 244052
-    prefix: '2304027'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 05df729d-de72-4278-857e-cd5420896a0a
-    country_id: *mu
-    network_id: *mu_trou_deau_douce_region
-  - id: 244059
-    prefix: '2304031'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 27c7d819-9cba-4b3e-b1fe-722d89a2c95a
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 244060
-    prefix: '2304032'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 886b22aa-a523-4f89-a374-2c8baf75736a
-    country_id: *mu
-    network_id: *mu_moka_region
-  - id: 244061
-    prefix: '2304036'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1aee234d-8ebc-4a60-a936-8e49bef8bb9a
-    country_id: *mu
-    network_id: *mu_flic_en_flac_region
-  - id: 244062
-    prefix: '2304038'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3e83e495-5b6b-43e8-8773-747bc40d1193
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 244149
-    prefix: '2304105'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8a5194b2-4a68-41a9-b71c-9061807f64df
-    country_id: *mu
-    network_id: *mu_poste_lafayette_region
-  - id: 244164
-    prefix: '2304115'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 32ed69ec-5109-4061-8875-bd63c4b947fb
-    country_id: *mu
-    network_id: *mu_roches_noires_region
-  - id: 244166
-    prefix: '2304116'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0dca5fb3-0323-437b-a89b-41000dd3a266
-    country_id: *mu
-    network_id: *mu_roches_noires_region
-  - id: 244172
-    prefix: '230412'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5ecc1a1c-0cf6-4a34-97c0-27a07ba50562
-    country_id: *mu
-    network_id: *mu_riviere_du_rempart_region
-  - id: 244176
-    prefix: '230413'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f38d1d78-397f-4d78-9374-a021ac1ba558
-    country_id: *mu
-    network_id: *mu_flacq_region
-  - id: 244182
-    prefix: '2304145'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1781ac98-1fac-40e8-8696-09f0af128be8
-    country_id: *mu
-    network_id: *mu_olivia_region
-  - id: 244186
-    prefix: '2304151'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3edba48d-1ab2-4a78-a70a-aea2e37f5966
-    country_id: *mu
-    network_id: *mu_belle_mare_region
-  - id: 244187
-    prefix: '2304152'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 69e965c4-09c6-43e7-85e7-65db6779a27d
-    country_id: *mu
-    network_id: *mu_belle_mare_region
-  - id: 244188
-    prefix: '2304155'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4cf62559-7027-4218-830a-91b2d46444d2
-    country_id: *mu
-    network_id: *mu_belle_mare_region
-  - id: 244195
-    prefix: '2304165'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a4c69858-d29c-4984-9b62-62df6d48c164
-    country_id: *mu
-    network_id: *mu_camp_de_masque_region
-  - id: 244197
-    prefix: '2304166'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 16c90559-9067-423d-9f5e-63afa587e4da
-    country_id: *mu
-    network_id: *mu_camp_de_masque_region
-  - id: 244199
-    prefix: '2304167'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1226b18e-d566-4fcd-96fe-bc777a853fc6
-    country_id: *mu
-    network_id: *mu_camp_de_masque_region
-  - id: 244201
-    prefix: '2304168'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 07cb5435-6eb2-4964-850b-67008c4ca7ee
-    country_id: *mu
-    network_id: *mu_camp_de_masque_region
-  - id: 244203
-    prefix: '2304169'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 40367d0d-bdf6-426c-879a-952d60f02a0c
-    country_id: *mu
-    network_id: *mu_camp_de_masque_region
-  - id: 244208
-    prefix: '2304175'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cd1d10d8-9cea-4191-a1bb-947728379b35
-    country_id: *mu
-    network_id: *mu_quatre_soeurs_region
-  - id: 244209
-    prefix: '2304176'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c7149074-4fa6-4c0e-9fa9-88d90fbbf2b1
-    country_id: *mu
-    network_id: *mu_quatre_soeurs_region
-  - id: 244211
-    prefix: '230418'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 573669d5-f267-4c90-88d4-69cbfd777f9f
-    country_id: *mu
-    network_id: *mu_brisee_verdiere_region
-  - id: 244218
-    prefix: '2304191'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 92896e60-08a8-4e93-94f9-04cf741a8257
-    country_id: *mu
-    network_id: *mu_bel_air_region
-  - id: 244219
-    prefix: '2304192'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d1d7126a-d860-4cf4-801d-a29cf91dfdcc
-    country_id: *mu
-    network_id: *mu_bel_air_region
-  - id: 244220
-    prefix: '2304193'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 52c201ac-c035-4fee-b933-fc46fb1eea1e
-    country_id: *mu
-    network_id: *mu_bel_air_region
-  - id: 244221
-    prefix: '2304194'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b8aae3b9-b4f2-4e71-a9d0-d7c1709eb44c
-    country_id: *mu
-    network_id: *mu_bel_air_region
-  - id: 244222
-    prefix: '2304195'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7de4002f-94e5-4fa2-8898-66c8d4ffd3b0
-    country_id: *mu
-    network_id: *mu_bel_air_region
-  - id: 244223
-    prefix: '2304196'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e94e2b4a-f60d-40d6-9620-4a92490535af
-    country_id: *mu
-    network_id: *mu_bel_air_region
-  - id: 244224
-    prefix: '2304197'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 03f19569-3dad-48b6-a55b-e12e4896f934
-    country_id: *mu
-    network_id: *mu_bel_air_region
-  - id: 244225
-    prefix: '2304198'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c3d0e59d-95bb-4c94-bf0c-3cead4b3454e
-    country_id: *mu
-    network_id: *mu_bel_air_region
-  - id: 244263
-    prefix: '230424'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c07c0756-86a9-4adc-8b79-645c64ba6516
-    country_id: *mu
-    network_id: *mu_candos_region
-  - id: 244273
-    prefix: '230425'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9d82700d-7fdd-4001-9719-c6c2ea3810bf
-    country_id: *mu
-    network_id: *mu_candos_region
-  - id: 244275
-    prefix: '230426'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 40f76a19-acc9-4ed0-9e78-6df1a926d4c0
-    country_id: *mu
-    network_id: *mu_candos_region
-  - id: 244290
-    prefix: '230427'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6ec19583-e605-4a81-8e7b-c531979eee5e
-    country_id: *mu
-    network_id: *mu_candos_region
-  - id: 244361
-    prefix: '2304315'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ff3d887f-ba08-4cc1-9828-668029cea292
-    country_id: *mu
-    network_id: *mu_ripailles_region
-  - id: 244380
-    prefix: '230433'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3410f204-2e58-4005-ae6b-ba11ff1c1e45
-    country_id: *mu
-    network_id: *mu_moka_region
-  - id: 244412
-    prefix: '2304355'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2e62ce7a-0c0e-4c5f-a99f-062982a4df0c
-    country_id: *mu
-    network_id: *mu_quartier_militaire_region
-  - id: 244414
-    prefix: '2304356'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c2080c20-7ae5-42ea-a913-d45ed787f724
-    country_id: *mu
-    network_id: *mu_quartier_militaire_region
-  - id: 244415
-    prefix: '2304357'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 353a6013-0cbc-4b93-a77e-4c1bd58394dd
-    country_id: *mu
-    network_id: *mu_quartier_militaire_region
-  - id: 244443
-    prefix: '2304372'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 682c62f4-b94e-40ab-9867-97da101ec137
-    country_id: *mu
-    network_id: *mu_montagne_blanche_region
-  - id: 244445
-    prefix: '2304373'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 96d9a3b8-82ad-455f-b55f-a750f83af630
-    country_id: *mu
-    network_id: *mu_montagne_blanche_region
-  - id: 244447
-    prefix: '2304374'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 461d269a-ffaf-4d0c-ba13-55a8ae2cf946
-    country_id: *mu
-    network_id: *mu_montagne_blanche_region
-  - id: 244449
-    prefix: '2304375'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f589cb9c-f092-41bc-be4e-63b4792f3856
-    country_id: *mu
-    network_id: *mu_montagne_blanche_region
-  - id: 244648
-    prefix: '2304504'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a5398c05-e043-4214-b842-66a091c1636b
-    country_id: *mu
-    network_id: *mu_le_morne_region
-  - id: 244649
-    prefix: '2304505'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1b181193-baa9-4811-be66-d5e4aae512d4
-    country_id: *mu
-    network_id: *mu_le_morne_region
-  - id: 244657
-    prefix: '2304515'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9e2724ca-7ec6-449a-b1e3-21c275d50036
-    country_id: *mu
-    network_id: *mu_la_gaulette_region
-  - id: 244666
-    prefix: '2304520'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a6d61275-2ce8-4d5b-a423-0e7c7a6836da
-    country_id: *mu
-    network_id: *mu_bambous_region
-  - id: 244671
-    prefix: '2304521'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1a83e5ba-a576-4d0d-9630-809e15c2a1f0
-    country_id: *mu
-    network_id: *mu_bambous_region
-  - id: 244673
-    prefix: '2304522'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 439bf77f-cbb8-4d10-902f-c6a618a0f429
-    country_id: *mu
-    network_id: *mu_bambous_region
-  - id: 244677
-    prefix: '2304525'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b20304b0-4484-48c2-9931-a1a0642add00
-    country_id: *mu
-    network_id: *mu_bambous_region
-  - id: 244704
-    prefix: '2304535'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cb75ca67-d615-4503-a570-326f9af8fc0b
-    country_id: *mu
-    network_id: *mu_flic_en_flac_region
-  - id: 244710
-    prefix: '2304538'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f0786c77-44a6-4f63-b593-019a81ee2c6f
-    country_id: *mu
-    network_id: *mu_flic_en_flac_region
-  - id: 244713
-    prefix: '2304539'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1695f013-cdbe-4460-ba4f-5b047d973a8d
-    country_id: *mu
-    network_id: *mu_flic_en_flac_region
-  - id: 244716
-    prefix: '230454'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 55b6b8dd-c21f-47e9-8156-782a32c234fa
-    country_id: *mu
-    network_id: *mu_rose_hill_region
-  - id: 245124
-    prefix: '230576'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 131c20a3-35f9-430e-b1ef-c9b803527784
-    country_id: *mu
-    network_id: *mu_riviere_des_anguilles_region
-  - id: 245135
-    prefix: '230577'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6a9f419f-6fb6-4839-8255-4d8d7bcafb88
-    country_id: *mu
-    network_id: *mu_nouvelle_france_region
-  - id: 245237
-    prefix: '230587'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c4439c2b-6275-4ce9-8efb-f63a9225a754
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 245314
-    prefix: '230591'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8085e288-b7a2-4b4f-b4a4-4f06f4939bb6
-    country_id: *mu
-    network_id: *mu_poste_lafayette___roches_noires_region
-  - id: 245321
-    prefix: '230593'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7ecbc65f-e72e-4128-b524-88e3d5160aa2
-    country_id: *mu
-    network_id: *mu_riche_en_eau_region
-  - id: 245330
-    prefix: '230594'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 01a3f36f-8282-48d9-9653-a26dd2cb1953
-    country_id: *mu
-    network_id: *mu_vieux_grand_port_region
-  - id: 245342
-    prefix: '230595'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 91d1159b-a0de-4a31-b109-898a695161ce
-    country_id: *mu
-    network_id: *mu_dubreuil_region
-  - id: 245363
-    prefix: '230597'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d5322747-5185-4614-92d8-7c5109290085
-    country_id: *mu
-    network_id: *mu_plaisance_region
-  - id: 245411
-    prefix: '2306'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 38f88cc2-1d97-4a57-bc53-7e785513c490
-    country_id: *mu
-    network_id: *mu_south_region_region
-  - id: 245487
-    prefix: '2306011'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b5c667af-b9b7-4e78-9eb9-eb7e3ef7949c
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 245490
-    prefix: '2306012'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 09c5c4c8-a53e-41fe-a3de-275959d79d14
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 245493
-    prefix: '2306013'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 18b5b23e-1b40-403b-9c64-9484b23273a6
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 245521
-    prefix: '2306018'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6dbbc7aa-5459-43fd-a853-0e26962d151a
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 245550
-    prefix: '2306021'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 96d6e09a-057c-436b-83bb-8a9f2fbbe0f2
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 245558
-    prefix: '2306023'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8468fea0-b65d-4a1e-ab60-6b3b34c263a6
-    country_id: *mu
-    network_id: *mu_floreal_region
   - id: 247422
     prefix: '2302'
     number_min_length: 10
@@ -1256,6 +603,27 @@ network_prefixes:
     uuid: b495652b-5c7a-4ab7-81dd-f331bcb0cb0d
     country_id: *mu
     network_id: *mu_signal_mountain_region
+  - id: 247708
+    prefix: '2302189'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2d3b1ba3-37b2-4f2c-9448-94e098c0fce7
+    country_id: *mu
+    network_id: *mu_paging
+  - id: 247711
+    prefix: '230219'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bbb74fbd-b5fc-4daa-955b-b7b141231cb5
+    country_id: *mu
+    network_id: *mu_paging
+  - id: 247727
+    prefix: '23022'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ea1f574c-39a2-40b1-8acf-4ab0ce7390df
+    country_id: *mu
+    network_id: *mu_paging
   - id: 247976
     prefix: '2302330'
     number_min_length: 10
@@ -1809,6 +1177,510 @@ network_prefixes:
     uuid: dfe9a62d-90ab-48cd-81ba-64ffdb2d3230
     country_id: *mu
     network_id: *mu_fixed
+  - id: 248936
+    prefix: '23030'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e4e22baa-5e4a-4ee8-b4e5-a88e413080c6
+    country_id: *mu
+    network_id: *mu_premium_rate_services
+  - id: 243269
+    prefix: '230312'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 957be99a-c7f7-4dba-912d-5c18cefd3aaf
+    country_id: *mu
+    network_id: *mu_internet_access_analogue
+  - id: 243313
+    prefix: '230315'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 18f6de26-5a4a-440c-85eb-87864db69273
+    country_id: *mu
+    network_id: *mu_internet_access_isdn
+  - id: 243331
+    prefix: '230318'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: daae56f2-b6f5-42fd-92d6-269814422bf9
+    country_id: *mu
+    network_id: *mu_internet_access_remote
+  - id: 243346
+    prefix: '230319'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2443a3a2-eba8-439c-bcc1-7a49ae4edc21
+    country_id: *mu
+    network_id: *mu_sms_value_added_services
+  - id: 243384
+    prefix: '230320'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e17ed4e5-295b-4653-88b1-71d22d5fd7f5
+    country_id: *mu
+    network_id: *mu_voip_region
+  - id: 243909
+    prefix: '23039'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a9d8d1c3-ff11-4277-9302-a4a9783e61f7
+    country_id: *mu
+    network_id: *mu_virtual_telephony_virtual_fax_and_fax_to_email_services
+  - id: 243948
+    prefix: '2304'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f95ebe9c-79b7-4d4c-badd-72712935cfa3
+    country_id: *mu
+    network_id: *mu_central_region_region
+  - id: 244024
+    prefix: '2304011'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca6c420a-30f0-40fb-bad6-c1ae5815906a
+    country_id: *mu
+    network_id: *mu_flacq_region
+  - id: 244026
+    prefix: '2304012'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f875a0e-3786-4bcc-95d4-234ffe085c08
+    country_id: *mu
+    network_id: *mu_rose_hill_region
+  - id: 244029
+    prefix: '2304014'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8603fd75-b359-4945-a9ca-044c54b1bd56
+    country_id: *mu
+    network_id: *mu_rose_hill_region
+  - id: 244031
+    prefix: '2304015'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8930dc8b-de4c-46a2-a5e1-283a460aff82
+    country_id: *mu
+    network_id: *mu_rose_hill_region
+  - id: 244033
+    prefix: '2304016'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 76ebbdf9-9e0c-4611-af3a-10915f4b26e8
+    country_id: *mu
+    network_id: *mu_rose_hill_region
+  - id: 244035
+    prefix: '2304017'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7aa0eb2e-b69f-4ed6-8be1-158df7962f1d
+    country_id: *mu
+    network_id: *mu_flacq_region
+  - id: 244037
+    prefix: '2304018'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1f2a717d-9ead-4cd0-a732-e90170dafb76
+    country_id: *mu
+    network_id: *mu_flacq_region
+  - id: 244039
+    prefix: '2304019'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e41da6d5-2b75-4eee-8d53-cfb532c8ec7e
+    country_id: *mu
+    network_id: *mu_rose_hill_region
+  - id: 244044
+    prefix: '2304021'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 970cef99-ac82-4af5-a59f-f6bd126fba35
+    country_id: *mu
+    network_id: *mu_rose_hill_region
+  - id: 244046
+    prefix: '2304022'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: efd9f5d2-b903-47be-babb-6bcf85886684
+    country_id: *mu
+    network_id: *mu_flacq_region
+  - id: 244052
+    prefix: '2304027'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 05df729d-de72-4278-857e-cd5420896a0a
+    country_id: *mu
+    network_id: *mu_trou_deau_douce_region
+  - id: 244059
+    prefix: '2304031'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 27c7d819-9cba-4b3e-b1fe-722d89a2c95a
+    country_id: *mu
+    network_id: *mu_rose_hill_region
+  - id: 244060
+    prefix: '2304032'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 886b22aa-a523-4f89-a374-2c8baf75736a
+    country_id: *mu
+    network_id: *mu_moka_region
+  - id: 244061
+    prefix: '2304036'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1aee234d-8ebc-4a60-a936-8e49bef8bb9a
+    country_id: *mu
+    network_id: *mu_flic_en_flac_region
+  - id: 244062
+    prefix: '2304038'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e83e495-5b6b-43e8-8773-747bc40d1193
+    country_id: *mu
+    network_id: *mu_rose_hill_region
+  - id: 244149
+    prefix: '2304105'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8a5194b2-4a68-41a9-b71c-9061807f64df
+    country_id: *mu
+    network_id: *mu_poste_lafayette_region
+  - id: 244164
+    prefix: '2304115'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 32ed69ec-5109-4061-8875-bd63c4b947fb
+    country_id: *mu
+    network_id: *mu_roches_noires_region
+  - id: 244166
+    prefix: '2304116'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0dca5fb3-0323-437b-a89b-41000dd3a266
+    country_id: *mu
+    network_id: *mu_roches_noires_region
+  - id: 244172
+    prefix: '230412'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5ecc1a1c-0cf6-4a34-97c0-27a07ba50562
+    country_id: *mu
+    network_id: *mu_riviere_du_rempart_region
+  - id: 244176
+    prefix: '230413'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f38d1d78-397f-4d78-9374-a021ac1ba558
+    country_id: *mu
+    network_id: *mu_flacq_region
+  - id: 244182
+    prefix: '2304145'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1781ac98-1fac-40e8-8696-09f0af128be8
+    country_id: *mu
+    network_id: *mu_olivia_region
+  - id: 244186
+    prefix: '2304151'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3edba48d-1ab2-4a78-a70a-aea2e37f5966
+    country_id: *mu
+    network_id: *mu_belle_mare_region
+  - id: 244187
+    prefix: '2304152'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 69e965c4-09c6-43e7-85e7-65db6779a27d
+    country_id: *mu
+    network_id: *mu_belle_mare_region
+  - id: 244188
+    prefix: '2304155'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4cf62559-7027-4218-830a-91b2d46444d2
+    country_id: *mu
+    network_id: *mu_belle_mare_region
+  - id: 244195
+    prefix: '2304165'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a4c69858-d29c-4984-9b62-62df6d48c164
+    country_id: *mu
+    network_id: *mu_camp_de_masque_region
+  - id: 244197
+    prefix: '2304166'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 16c90559-9067-423d-9f5e-63afa587e4da
+    country_id: *mu
+    network_id: *mu_camp_de_masque_region
+  - id: 244199
+    prefix: '2304167'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1226b18e-d566-4fcd-96fe-bc777a853fc6
+    country_id: *mu
+    network_id: *mu_camp_de_masque_region
+  - id: 244201
+    prefix: '2304168'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 07cb5435-6eb2-4964-850b-67008c4ca7ee
+    country_id: *mu
+    network_id: *mu_camp_de_masque_region
+  - id: 244203
+    prefix: '2304169'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40367d0d-bdf6-426c-879a-952d60f02a0c
+    country_id: *mu
+    network_id: *mu_camp_de_masque_region
+  - id: 244208
+    prefix: '2304175'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cd1d10d8-9cea-4191-a1bb-947728379b35
+    country_id: *mu
+    network_id: *mu_quatre_soeurs_region
+  - id: 244209
+    prefix: '2304176'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c7149074-4fa6-4c0e-9fa9-88d90fbbf2b1
+    country_id: *mu
+    network_id: *mu_quatre_soeurs_region
+  - id: 244211
+    prefix: '230418'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 573669d5-f267-4c90-88d4-69cbfd777f9f
+    country_id: *mu
+    network_id: *mu_brisee_verdiere_region
+  - id: 244218
+    prefix: '2304191'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 92896e60-08a8-4e93-94f9-04cf741a8257
+    country_id: *mu
+    network_id: *mu_bel_air_region
+  - id: 244219
+    prefix: '2304192'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1d7126a-d860-4cf4-801d-a29cf91dfdcc
+    country_id: *mu
+    network_id: *mu_bel_air_region
+  - id: 244220
+    prefix: '2304193'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 52c201ac-c035-4fee-b933-fc46fb1eea1e
+    country_id: *mu
+    network_id: *mu_bel_air_region
+  - id: 244221
+    prefix: '2304194'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b8aae3b9-b4f2-4e71-a9d0-d7c1709eb44c
+    country_id: *mu
+    network_id: *mu_bel_air_region
+  - id: 244222
+    prefix: '2304195'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7de4002f-94e5-4fa2-8898-66c8d4ffd3b0
+    country_id: *mu
+    network_id: *mu_bel_air_region
+  - id: 244223
+    prefix: '2304196'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e94e2b4a-f60d-40d6-9620-4a92490535af
+    country_id: *mu
+    network_id: *mu_bel_air_region
+  - id: 244224
+    prefix: '2304197'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 03f19569-3dad-48b6-a55b-e12e4896f934
+    country_id: *mu
+    network_id: *mu_bel_air_region
+  - id: 244225
+    prefix: '2304198'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c3d0e59d-95bb-4c94-bf0c-3cead4b3454e
+    country_id: *mu
+    network_id: *mu_bel_air_region
+  - id: 244263
+    prefix: '230424'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c07c0756-86a9-4adc-8b79-645c64ba6516
+    country_id: *mu
+    network_id: *mu_candos_region
+  - id: 244273
+    prefix: '230425'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9d82700d-7fdd-4001-9719-c6c2ea3810bf
+    country_id: *mu
+    network_id: *mu_candos_region
+  - id: 244275
+    prefix: '230426'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40f76a19-acc9-4ed0-9e78-6df1a926d4c0
+    country_id: *mu
+    network_id: *mu_candos_region
+  - id: 244290
+    prefix: '230427'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6ec19583-e605-4a81-8e7b-c531979eee5e
+    country_id: *mu
+    network_id: *mu_candos_region
+  - id: 244361
+    prefix: '2304315'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ff3d887f-ba08-4cc1-9828-668029cea292
+    country_id: *mu
+    network_id: *mu_ripailles_region
+  - id: 244380
+    prefix: '230433'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3410f204-2e58-4005-ae6b-ba11ff1c1e45
+    country_id: *mu
+    network_id: *mu_moka_region
+  - id: 244412
+    prefix: '2304355'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e62ce7a-0c0e-4c5f-a99f-062982a4df0c
+    country_id: *mu
+    network_id: *mu_quartier_militaire_region
+  - id: 244414
+    prefix: '2304356'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c2080c20-7ae5-42ea-a913-d45ed787f724
+    country_id: *mu
+    network_id: *mu_quartier_militaire_region
+  - id: 244415
+    prefix: '2304357'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 353a6013-0cbc-4b93-a77e-4c1bd58394dd
+    country_id: *mu
+    network_id: *mu_quartier_militaire_region
+  - id: 244443
+    prefix: '2304372'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 682c62f4-b94e-40ab-9867-97da101ec137
+    country_id: *mu
+    network_id: *mu_montagne_blanche_region
+  - id: 244445
+    prefix: '2304373'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 96d9a3b8-82ad-455f-b55f-a750f83af630
+    country_id: *mu
+    network_id: *mu_montagne_blanche_region
+  - id: 244447
+    prefix: '2304374'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 461d269a-ffaf-4d0c-ba13-55a8ae2cf946
+    country_id: *mu
+    network_id: *mu_montagne_blanche_region
+  - id: 244449
+    prefix: '2304375'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f589cb9c-f092-41bc-be4e-63b4792f3856
+    country_id: *mu
+    network_id: *mu_montagne_blanche_region
+  - id: 244648
+    prefix: '2304504'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a5398c05-e043-4214-b842-66a091c1636b
+    country_id: *mu
+    network_id: *mu_le_morne_region
+  - id: 244649
+    prefix: '2304505'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1b181193-baa9-4811-be66-d5e4aae512d4
+    country_id: *mu
+    network_id: *mu_le_morne_region
+  - id: 244657
+    prefix: '2304515'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9e2724ca-7ec6-449a-b1e3-21c275d50036
+    country_id: *mu
+    network_id: *mu_la_gaulette_region
+  - id: 244666
+    prefix: '2304520'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a6d61275-2ce8-4d5b-a423-0e7c7a6836da
+    country_id: *mu
+    network_id: *mu_bambous_region
+  - id: 244671
+    prefix: '2304521'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1a83e5ba-a576-4d0d-9630-809e15c2a1f0
+    country_id: *mu
+    network_id: *mu_bambous_region
+  - id: 244673
+    prefix: '2304522'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 439bf77f-cbb8-4d10-902f-c6a618a0f429
+    country_id: *mu
+    network_id: *mu_bambous_region
+  - id: 244677
+    prefix: '2304525'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b20304b0-4484-48c2-9931-a1a0642add00
+    country_id: *mu
+    network_id: *mu_bambous_region
+  - id: 244704
+    prefix: '2304535'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cb75ca67-d615-4503-a570-326f9af8fc0b
+    country_id: *mu
+    network_id: *mu_flic_en_flac_region
+  - id: 244710
+    prefix: '2304538'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f0786c77-44a6-4f63-b593-019a81ee2c6f
+    country_id: *mu
+    network_id: *mu_flic_en_flac_region
+  - id: 244713
+    prefix: '2304539'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1695f013-cdbe-4460-ba4f-5b047d973a8d
+    country_id: *mu
+    network_id: *mu_flic_en_flac_region
+  - id: 244716
+    prefix: '230454'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 55b6b8dd-c21f-47e9-8156-782a32c234fa
+    country_id: *mu
+    network_id: *mu_rose_hill_region
   - id: 249172
     prefix: '230464'
     number_min_length: 10
@@ -1900,6 +1772,13 @@ network_prefixes:
     uuid: 0a8822cd-b8d6-4d85-b1c0-51af4bc282c5
     country_id: *mu
     network_id: *mu_fixed
+  - id: 249591
+    prefix: '2305'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eadc3615-623c-41de-8f46-5096edfa353c
+    country_id: *mu
+    network_id: *mu_mobile
   - id: 249645
     prefix: '230501'
     number_min_length: 10
@@ -2026,6 +1905,13 @@ network_prefixes:
     uuid: 171b10d1-c9e2-4c5c-9a96-957204679139
     country_id: *mu
     network_id: *mu_souillac_region
+  - id: 249836
+    prefix: '230525'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01f34be1-36d2-48b5-acb5-b3aeb643a8aa
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
   - id: 249855
     prefix: '230526'
     number_min_length: 10
@@ -2033,6 +1919,13 @@ network_prefixes:
     uuid: 243a3e4a-8131-418f-a96f-3300ee9efa35
     country_id: *mu
     network_id: *mu_candos_region
+  - id: 249856
+    prefix: '230526'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e676842-5c30-4123-a528-13565fd932e5
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
   - id: 249868
     prefix: '230527'
     number_min_length: 10
@@ -2040,6 +1933,13 @@ network_prefixes:
     uuid: cf92d871-3ef6-44d0-8579-24ebab86f8bb
     country_id: *mu
     network_id: *mu_candos_region
+  - id: 249869
+    prefix: '230527'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bfab117f-a66b-441b-bf62-899f96c8d0c8
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
   - id: 249881
     prefix: '230528'
     number_min_length: 10
@@ -2047,6 +1947,20 @@ network_prefixes:
     uuid: 1457c62e-37d2-4df7-867a-c6e2603e288d
     country_id: *mu
     network_id: *mu_candos_region
+  - id: 249882
+    prefix: '230528'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b274969c-c74b-4d04-a197-9e68ae7aa5d9
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
+  - id: 249903
+    prefix: '230529'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8dc6702-74da-4834-9eb8-3c3209de377b
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
   - id: 249938
     prefix: '230531'
     number_min_length: 10
@@ -2110,6 +2024,41 @@ network_prefixes:
     uuid: 75affe9c-2297-4850-91c2-66cbbfb797d2
     country_id: *mu
     network_id: *mu_plaine_verte_region
+  - id: 250033
+    prefix: '2305421'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 449bc6d2-d57c-46f2-b082-3de49ed03f2e
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250034
+    prefix: '2305422'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 99ded381-2f4a-4b06-9f69-8680daef35ac
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250035
+    prefix: '2305423'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6d780d78-e796-4cf8-8aa5-694cfa82919b
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250036
+    prefix: '2305428'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f4e46ad-6f55-46ff-a13f-d27ea9f0fb01
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250037
+    prefix: '2305429'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c9f02a7d-4cec-4648-b7f5-95c681f5a6f2
+    country_id: *mu
+    network_id: *mu_emtel_mobile
   - id: 250039
     prefix: '230543'
     number_min_length: 10
@@ -2117,6 +2066,20 @@ network_prefixes:
     uuid: 0eea3a82-c60e-4cb0-a40d-81b188a8bc5e
     country_id: *mu
     network_id: *mu_pamplemousses_region
+  - id: 250040
+    prefix: '230543'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c250200b-85c9-41ba-8eb9-7bd9e8adaa6a
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250048
+    prefix: '230544'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 15709a06-0f02-468b-ba7f-6c9f03865b07
+    country_id: *mu
+    network_id: *mu_emtel_mobile
   - id: 250050
     prefix: '230545'
     number_min_length: 10
@@ -2124,6 +2087,20 @@ network_prefixes:
     uuid: d7292301-29b5-485c-9dcf-bfd81d8c8e52
     country_id: *mu
     network_id: *mu_long_mountain_region
+  - id: 250051
+    prefix: '230545'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4d3197c1-bc56-40c5-91ac-62da1c4a641f
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250069
+    prefix: '230546'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b8f31b5f-6f6e-4023-81b0-253fc81ebcfb
+    country_id: *mu
+    network_id: *mu_emtel_mobile
   - id: 250072
     prefix: '230547'
     number_min_length: 10
@@ -2131,6 +2108,76 @@ network_prefixes:
     uuid: 233f3307-0c37-45df-bcea-a2dbbcab8d1b
     country_id: *mu
     network_id: *mu_tombeau_bay_region
+  - id: 250074
+    prefix: '2305471'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9774fdcf-efb4-412e-9414-03dc28e10b26
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 250075
+    prefix: '2305472'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 168ad523-ff51-4bde-a266-d4cecb24576e
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250076
+    prefix: '2305473'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3b093751-ff12-444a-8ad7-85173701a928
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250077
+    prefix: '2305474'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 564e2ad0-d491-450b-b3ec-8e8c53cf6bdb
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250078
+    prefix: '2305475'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d570c39e-c471-42b2-8b8c-6f2e83f232e8
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250079
+    prefix: '2305476'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 85c4de43-6f12-4721-975a-405d2b7c8428
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250080
+    prefix: '2305477'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 32a7ada7-0acd-43de-95c6-cca420a71c37
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250081
+    prefix: '2305478'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07119010-f56e-43fd-9d69-7f5ee7e835b5
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250082
+    prefix: '2305479'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a840aefb-1192-4e09-b977-59c3384b6edf
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250084
+    prefix: '230548'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3e740657-8fbd-4aab-996f-ef58e69e29df
+    country_id: *mu
+    network_id: *mu_emtel_mobile
   - id: 250086
     prefix: '230549'
     number_min_length: 10
@@ -2138,6 +2185,20 @@ network_prefixes:
     uuid: 6ab68139-fab9-4f67-a3bb-f12f93f6084b
     country_id: *mu
     network_id: *mu_terre_rouge_region
+  - id: 250087
+    prefix: '230549'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dbc61ecb-1006-45c2-9d12-582cbf364370
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250127
+    prefix: '230550'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a9e0b51b-e90a-4680-8503-7c8d2ad8fcbe
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
   - id: 250130
     prefix: '230551'
     number_min_length: 10
@@ -2145,6 +2206,13 @@ network_prefixes:
     uuid: da77af58-2ddf-43db-b498-11f15fe96a25
     country_id: *mu
     network_id: *mu_la_gaulette___le_morne_region
+  - id: 250131
+    prefix: '230551'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8abb579e-5d1a-44e1-8b50-af214161e726
+    country_id: *mu
+    network_id: *mu_emtel_mobile
   - id: 250133
     prefix: '230552'
     number_min_length: 10
@@ -2152,6 +2220,13 @@ network_prefixes:
     uuid: a84886d7-f692-4588-b21f-527759e92ed1
     country_id: *mu
     network_id: *mu_bambous_region
+  - id: 250134
+    prefix: '230552'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fee7a28b-2ade-4be7-90dc-4ed6df2ff091
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
   - id: 250145
     prefix: '230553'
     number_min_length: 10
@@ -2159,6 +2234,13 @@ network_prefixes:
     uuid: 12091032-cde6-4d30-8e63-710de09ef899
     country_id: *mu
     network_id: *mu_flic_en_flac_region
+  - id: 250146
+    prefix: '230553'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 504e9b23-cdd9-4420-9c8e-d8563732db3a
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
   - id: 250147
     prefix: '230554'
     number_min_length: 10
@@ -2243,6 +2325,13 @@ network_prefixes:
     uuid: 7772dd4a-d302-4212-beb1-0ea9979eac23
     country_id: *mu
     network_id: *mu_forest_side_region
+  - id: 250252
+    prefix: '230570'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 61c2375e-51cc-4307-8e25-8fc13e308934
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
   - id: 250264
     prefix: '230571'
     number_min_length: 10
@@ -2250,6 +2339,13 @@ network_prefixes:
     uuid: 934a5895-d54d-4f00-97db-b3f7375c7a26
     country_id: *mu
     network_id: *mu_forest_side_region
+  - id: 250265
+    prefix: '230571'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 343370b8-224b-4303-b95c-e1c099937f29
+    country_id: *mu
+    network_id: *mu_emtel_mobile
   - id: 250280
     prefix: '230572'
     number_min_length: 10
@@ -2257,6 +2353,13 @@ network_prefixes:
     uuid: 390187ab-6d9b-477f-a4d8-1ebcba05754d
     country_id: *mu
     network_id: *mu_forest_side_region
+  - id: 250281
+    prefix: '230572'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45a68489-6fb4-4c48-905b-a45d12eb6eaf
+    country_id: *mu
+    network_id: *mu_emtel_mobile
   - id: 250286
     prefix: '230573'
     number_min_length: 10
@@ -2264,6 +2367,13 @@ network_prefixes:
     uuid: 6bca0e3e-79db-48c4-b96b-96d15411b4a1
     country_id: *mu
     network_id: *mu_beau_bassin_region
+  - id: 250287
+    prefix: '230573'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fdc89f8c-74c5-435a-b94a-3fdfe3bed753
+    country_id: *mu
+    network_id: *mu_emtel_mobile
   - id: 250297
     prefix: '230574'
     number_min_length: 10
@@ -2271,6 +2381,511 @@ network_prefixes:
     uuid: eb80007c-96ef-4b8a-b2be-cfea4bc3af89
     country_id: *mu
     network_id: *mu_beau_bassin_region
+  - id: 250298
+    prefix: '230574'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3aea5695-0b5a-4e55-83b4-f07034466fc6
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 250312
+    prefix: '230575'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a5cba613-7e0e-419c-99a0-2e6d4f8047e8
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245124
+    prefix: '230576'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 131c20a3-35f9-430e-b1ef-c9b803527784
+    country_id: *mu
+    network_id: *mu_riviere_des_anguilles_region
+  - id: 245125
+    prefix: '230576'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 02affe0a-4706-4bfa-80ae-5b036e4e53db
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245135
+    prefix: '230577'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6a9f419f-6fb6-4839-8255-4d8d7bcafb88
+    country_id: *mu
+    network_id: *mu_nouvelle_france_region
+  - id: 245136
+    prefix: '230577'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01cca228-9538-43f0-8c09-8016a92bef97
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245138
+    prefix: '230578'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 699bcedc-af50-404a-b43f-ccbc8b6b24b9
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245142
+    prefix: '230579'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4960fd93-89f4-4fef-9e9a-20614fccdfd5
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245167
+    prefix: '230580'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c578ebef-b638-482a-9e7f-fe79a10326e6
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245223
+    prefix: '230581'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8f4eb831-4031-412e-a15b-695ff88cd7e1
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245225
+    prefix: '230582'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7eff9d7f-800b-4a41-b5d8-59f367e660f9
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245227
+    prefix: '230583'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd61ef11-8096-48c8-9f44-5520b5eb2908
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245229
+    prefix: '230584'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec8c4e42-2260-4853-bc09-3ef647154208
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 245231
+    prefix: '230585'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3097e3c8-ea2e-466c-b7ea-17925613f87c
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 245236
+    prefix: '230586'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40d9cd22-ba1f-4ff6-91a8-a0da34f5574c
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
+  - id: 245237
+    prefix: '230587'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c4439c2b-6275-4ce9-8efb-f63a9225a754
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 245239
+    prefix: '2305871'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ff430f30-fc47-4ea7-ae2e-3504800df154
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
+  - id: 245240
+    prefix: '2305875'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b03e9b92-c8fb-4897-8efb-e3e269898c90
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245241
+    prefix: '2305876'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8a5bb04-279d-42cd-95ce-eb771f106004
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245242
+    prefix: '2305877'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52fd5324-53f5-4ff0-8fe6-46269aa8edd0
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245243
+    prefix: '2305878'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 75245629-b91c-4b0e-886e-35cbefb93086
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245244
+    prefix: '230588'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc56356f-e7ab-4a7c-9efd-35fb1737f6ec
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
+  - id: 245245
+    prefix: '230589'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3103817d-fcf6-450b-93db-7db51106e6b8
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
+  - id: 245268
+    prefix: '230590'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 546a1496-fe08-4ce3-8842-9c82c5b51ac1
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245314
+    prefix: '230591'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8085e288-b7a2-4b4f-b4a4-4f06f4939bb6
+    country_id: *mu
+    network_id: *mu_poste_lafayette___roches_noires_region
+  - id: 245315
+    prefix: '230591'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b5bc087e-4c76-432f-9552-b89eb5969bfa
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245318
+    prefix: '230592'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0e29ccf-e6df-415a-93d7-1f217836b646
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245321
+    prefix: '230593'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7ecbc65f-e72e-4128-b524-88e3d5160aa2
+    country_id: *mu
+    network_id: *mu_riche_en_eau_region
+  - id: 245322
+    prefix: '230593'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 48e9b840-0d66-4654-8cdd-8d8958fd8cd4
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 245330
+    prefix: '230594'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 01a3f36f-8282-48d9-9653-a26dd2cb1953
+    country_id: *mu
+    network_id: *mu_vieux_grand_port_region
+  - id: 245331
+    prefix: '230594'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 838ae68f-c489-44bc-97b5-1960038e677c
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 245342
+    prefix: '230595'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 91d1159b-a0de-4a31-b109-898a695161ce
+    country_id: *mu
+    network_id: *mu_dubreuil_region
+  - id: 245343
+    prefix: '230595'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84615c69-1df6-4948-bd5a-a996fcf99e86
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
+  - id: 245357
+    prefix: '230596'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2754d980-12f1-40be-bdd6-02c1338e9184
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
+  - id: 245363
+    prefix: '230597'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d5322747-5185-4614-92d8-7c5109290085
+    country_id: *mu
+    network_id: *mu_plaisance_region
+  - id: 245364
+    prefix: '230597'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4195b773-d453-408f-897e-e8a2985f67f3
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 245367
+    prefix: '230598'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: caa8ede4-d2bc-4ac3-b54f-7f4c355d1f4d
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 245411
+    prefix: '2306'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 38f88cc2-1d97-4a57-bc53-7e785513c490
+    country_id: *mu
+    network_id: *mu_south_region_region
+  - id: 245487
+    prefix: '2306011'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b5c667af-b9b7-4e78-9eb9-eb7e3ef7949c
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 245490
+    prefix: '2306012'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 09c5c4c8-a53e-41fe-a3de-275959d79d14
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 245493
+    prefix: '2306013'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 18b5b23e-1b40-403b-9c64-9484b23273a6
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 245521
+    prefix: '2306018'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6dbbc7aa-5459-43fd-a853-0e26962d151a
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 245550
+    prefix: '2306021'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 96d6e09a-057c-436b-83bb-8a9f2fbbe0f2
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 245558
+    prefix: '2306023'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8468fea0-b65d-4a1e-ab60-6b3b34c263a6
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 253807
+    prefix: '2306029'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6aab6c38-6e59-428f-aa41-a709e1e392d7
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 253817
+    prefix: '2306032'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 46a653f5-a631-4dde-96b1-a8182feef6c9
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 253819
+    prefix: '2306033'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee646948-ff1f-4885-bf39-aa628168c2de
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 253821
+    prefix: '2306034'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2fcc03f1-f090-4576-a86d-847ed101ec99
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 253824
+    prefix: '2306036'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee6cdfb6-c686-4988-a307-5cc16a5f547a
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 253837
+    prefix: '2306041'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 97fff256-eaf8-463f-80b8-ef0ee06e7d6e
+    country_id: *mu
+    network_id: *mu_floreal_region
+  - id: 254087
+    prefix: '2306174'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5c9b3941-dab5-4f3f-be42-5feb0154aa9b
+    country_id: *mu
+    network_id: *mu_grand_bois_region
+  - id: 254088
+    prefix: '2306175'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f7b1c71-85ca-4836-9390-183c159b2cfe
+    country_id: *mu
+    network_id: *mu_grand_bois_region
+  - id: 254089
+    prefix: '2306178'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 753693aa-f43e-4874-93ac-eb6b77c572e2
+    country_id: *mu
+    network_id: *mu_grand_bois_region
+  - id: 254090
+    prefix: '2306179'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b8badb6b-43e9-47d3-8b62-715ba5ec3fab
+    country_id: *mu
+    network_id: *mu_grand_bois_region
+  - id: 254140
+    prefix: '2306205'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b752beb8-145d-4dc4-a05e-35f07a9480eb
+    country_id: *mu
+    network_id: *mu_la_prairie_region
+  - id: 254160
+    prefix: '2306215'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aba579ca-0396-47c2-9103-f382aff31519
+    country_id: *mu
+    network_id: *mu_baie_du_cap_region
+  - id: 254175
+    prefix: '2306225'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 687df85b-1c02-48f7-8506-070209fe6279
+    country_id: *mu
+    network_id: *mu_chemin_grenier_region
+  - id: 254176
+    prefix: '2306226'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 116fb5a7-f9dd-4ad8-b9d9-0364d3faa295
+    country_id: *mu
+    network_id: *mu_chemin_grenier_region
+  - id: 254177
+    prefix: '2306227'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0e3a338c-5072-451d-bf9d-c31e585e9585
+    country_id: *mu
+    network_id: *mu_chemin_grenier_region
+  - id: 254178
+    prefix: '2306228'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9be08ae4-1e9e-4e01-bd79-255e1a4450b1
+    country_id: *mu
+    network_id: *mu_chemin_grenier_region
+  - id: 254201
+    prefix: '2306235'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d0f5c759-dbe2-4519-8796-eb161b533503
+    country_id: *mu
+    network_id: *mu_bel_ombre_region
+# Supplementary services Prefixes
+  - id: 254239
+    prefix: '2306254'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: af0af2e9-a034-4514-9979-8e617ff06561
+    country_id: *mu
+    network_id: *mu_souillac_region
+  - id: 254241
+    prefix: '2306255'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 50ffbbea-8e2b-4d59-ab09-99ac29ba4717
+    country_id: *mu
+    network_id: *mu_souillac_region
+  - id: 254243
+    prefix: '2306256'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9ff18acb-86c6-4352-a2a7-ca7a38756987
+    country_id: *mu
+    network_id: *mu_souillac_region
+  - id: 254245
+    prefix: '2306257'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6ed85410-a8db-405a-9a1a-f86dee82f154
+    country_id: *mu
+    network_id: *mu_souillac_region
+  - id: 254247
+    prefix: '2306258'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f461f4da-d125-49ad-8f50-95a8a5930c88
+    country_id: *mu
+    network_id: *mu_souillac_region
+  - id: 254257
+    prefix: '2306261'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 61a3df77-4440-4a5c-b602-20f4034ad8db
+    country_id: *mu
+    network_id: *mu_riviere_des_anguilles_region
+  - id: 254259
+    prefix: '2306262'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 58f60445-6851-4065-abfe-c328e3cf4767
+    country_id: *mu
+    network_id: *mu_riviere_des_anguilles_region
+  - id: 254262
+    prefix: '2306263'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a50055b7-3088-4b66-87e1-b90a62df3b04
+    country_id: *mu
+    network_id: *mu_riviere_des_anguilles_region
+  - id: 254265
+    prefix: '2306264'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98332bf7-a5cc-416c-ac2f-1a8204f763eb
+    country_id: *mu
+    network_id: *mu_riviere_des_anguilles_region
+  - id: 254268
+    prefix: '2306265'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 456cfd7c-58fa-4975-8dcf-d6f11f909515
+    country_id: *mu
+    network_id: *mu_riviere_des_anguilles_region
+  - id: 254271
+    prefix: '2306266'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 656e52ea-3087-481b-a46a-bb8dc662448c
+    country_id: *mu
+    network_id: *mu_riviere_des_anguilles_region
   - id: 250552
     prefix: '2306270'
     number_min_length: 10
@@ -2292,6 +2907,7 @@ network_prefixes:
     uuid: 6443434b-f555-4db5-80e1-05719c1b0958
     country_id: *mu
     network_id: *mu_rose_belle_region
+# Mobile Prefixes
   - id: 250558
     prefix: '2306273'
     number_min_length: 10
@@ -2523,258 +3139,6 @@ network_prefixes:
     uuid: aca4cc0e-0e2d-4b94-998a-24442980888f
     country_id: *mu
     network_id: *mu_fixed
-  - id: 253379
-    prefix: '230814'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 57bbc14c-4e27-479b-873d-2f50c00fed9c
-    country_id: *mu
-    network_id: *mu_agalega_region
-  - id: 253598
-    prefix: '23083'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0252e3b6-8c58-46ee-b025-72986919c8b3
-    country_id: *mu
-    network_id: *mu_rodrigues_region
-  - id: 253613
-    prefix: '2308318'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ebe40df8-5d94-4ace-a335-9d08168f7490
-    country_id: *mu
-    network_id: *mu_roche_bon_dieu_region
-  - id: 253614
-    prefix: '2308319'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0abf3acc-4c7c-4605-8c31-6fd3b97b2497
-    country_id: *mu
-    network_id: *mu_riviere_coco_region
-  - id: 253617
-    prefix: '2308320'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 63f85564-32f8-4198-bead-7cff814581b3
-    country_id: *mu
-    network_id: *mu_mont_venus_region
-  - id: 253623
-    prefix: '2308325'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 74f5b9cc-8513-45a5-88bc-748f76e73fe8
-    country_id: *mu
-    network_id: *mu_mont_lubin_region
-  - id: 253626
-    prefix: '2308327'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 439a3027-a555-4649-aafc-b463ee4b332d
-    country_id: *mu
-    network_id: *mu_la_ferme_region
-  - id: 253696
-    prefix: '230839'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e7991c64-c469-40f2-b6c9-c22b44a7d2e1
-    country_id: *mu
-    network_id: *mu_fixed
-  - id: 253807
-    prefix: '2306029'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6aab6c38-6e59-428f-aa41-a709e1e392d7
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 253817
-    prefix: '2306032'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 46a653f5-a631-4dde-96b1-a8182feef6c9
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 253819
-    prefix: '2306033'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ee646948-ff1f-4885-bf39-aa628168c2de
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 253821
-    prefix: '2306034'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2fcc03f1-f090-4576-a86d-847ed101ec99
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 253824
-    prefix: '2306036'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ee6cdfb6-c686-4988-a307-5cc16a5f547a
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 253837
-    prefix: '2306041'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 97fff256-eaf8-463f-80b8-ef0ee06e7d6e
-    country_id: *mu
-    network_id: *mu_floreal_region
-  - id: 254087
-    prefix: '2306174'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5c9b3941-dab5-4f3f-be42-5feb0154aa9b
-    country_id: *mu
-    network_id: *mu_grand_bois_region
-  - id: 254088
-    prefix: '2306175'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5f7b1c71-85ca-4836-9390-183c159b2cfe
-    country_id: *mu
-    network_id: *mu_grand_bois_region
-  - id: 254089
-    prefix: '2306178'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 753693aa-f43e-4874-93ac-eb6b77c572e2
-    country_id: *mu
-    network_id: *mu_grand_bois_region
-  - id: 254090
-    prefix: '2306179'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b8badb6b-43e9-47d3-8b62-715ba5ec3fab
-    country_id: *mu
-    network_id: *mu_grand_bois_region
-  - id: 254140
-    prefix: '2306205'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b752beb8-145d-4dc4-a05e-35f07a9480eb
-    country_id: *mu
-    network_id: *mu_la_prairie_region
-  - id: 254160
-    prefix: '2306215'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aba579ca-0396-47c2-9103-f382aff31519
-    country_id: *mu
-    network_id: *mu_baie_du_cap_region
-  - id: 254175
-    prefix: '2306225'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 687df85b-1c02-48f7-8506-070209fe6279
-    country_id: *mu
-    network_id: *mu_chemin_grenier_region
-  - id: 254176
-    prefix: '2306226'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 116fb5a7-f9dd-4ad8-b9d9-0364d3faa295
-    country_id: *mu
-    network_id: *mu_chemin_grenier_region
-  - id: 254177
-    prefix: '2306227'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0e3a338c-5072-451d-bf9d-c31e585e9585
-    country_id: *mu
-    network_id: *mu_chemin_grenier_region
-  - id: 254178
-    prefix: '2306228'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9be08ae4-1e9e-4e01-bd79-255e1a4450b1
-    country_id: *mu
-    network_id: *mu_chemin_grenier_region
-  - id: 254201
-    prefix: '2306235'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d0f5c759-dbe2-4519-8796-eb161b533503
-    country_id: *mu
-    network_id: *mu_bel_ombre_region
-  - id: 254239
-    prefix: '2306254'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: af0af2e9-a034-4514-9979-8e617ff06561
-    country_id: *mu
-    network_id: *mu_souillac_region
-  - id: 254241
-    prefix: '2306255'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 50ffbbea-8e2b-4d59-ab09-99ac29ba4717
-    country_id: *mu
-    network_id: *mu_souillac_region
-  - id: 254243
-    prefix: '2306256'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9ff18acb-86c6-4352-a2a7-ca7a38756987
-    country_id: *mu
-    network_id: *mu_souillac_region
-  - id: 254245
-    prefix: '2306257'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6ed85410-a8db-405a-9a1a-f86dee82f154
-    country_id: *mu
-    network_id: *mu_souillac_region
-  - id: 254247
-    prefix: '2306258'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f461f4da-d125-49ad-8f50-95a8a5930c88
-    country_id: *mu
-    network_id: *mu_souillac_region
-  - id: 254257
-    prefix: '2306261'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 61a3df77-4440-4a5c-b602-20f4034ad8db
-    country_id: *mu
-    network_id: *mu_riviere_des_anguilles_region
-  - id: 254259
-    prefix: '2306262'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 58f60445-6851-4065-abfe-c328e3cf4767
-    country_id: *mu
-    network_id: *mu_riviere_des_anguilles_region
-  - id: 254262
-    prefix: '2306263'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a50055b7-3088-4b66-87e1-b90a62df3b04
-    country_id: *mu
-    network_id: *mu_riviere_des_anguilles_region
-  - id: 254265
-    prefix: '2306264'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 98332bf7-a5cc-416c-ac2f-1a8204f763eb
-    country_id: *mu
-    network_id: *mu_riviere_des_anguilles_region
-  - id: 254268
-    prefix: '2306265'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 456cfd7c-58fa-4975-8dcf-d6f11f909515
-    country_id: *mu
-    network_id: *mu_riviere_des_anguilles_region
-  - id: 254271
-    prefix: '2306266'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 656e52ea-3087-481b-a46a-bb8dc662448c
-    country_id: *mu
-    network_id: *mu_riviere_des_anguilles_region
   - id: 254415
     prefix: '2306640'
     number_min_length: 10
@@ -2908,476 +3272,6 @@ network_prefixes:
     uuid: 80dd7b90-c44a-4ede-9b01-6a0a2e0914e1
     country_id: *mu
     network_id: *mu_floreal_region
-# Mobile Prefixes
-  - id: 245125
-    prefix: '230576'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 02affe0a-4706-4bfa-80ae-5b036e4e53db
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245136
-    prefix: '230577'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 01cca228-9538-43f0-8c09-8016a92bef97
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245138
-    prefix: '230578'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 699bcedc-af50-404a-b43f-ccbc8b6b24b9
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245142
-    prefix: '230579'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4960fd93-89f4-4fef-9e9a-20614fccdfd5
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245167
-    prefix: '230580'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c578ebef-b638-482a-9e7f-fe79a10326e6
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245223
-    prefix: '230581'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8f4eb831-4031-412e-a15b-695ff88cd7e1
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245225
-    prefix: '230582'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7eff9d7f-800b-4a41-b5d8-59f367e660f9
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245227
-    prefix: '230583'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd61ef11-8096-48c8-9f44-5520b5eb2908
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245229
-    prefix: '230584'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ec8c4e42-2260-4853-bc09-3ef647154208
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 245231
-    prefix: '230585'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3097e3c8-ea2e-466c-b7ea-17925613f87c
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 245236
-    prefix: '230586'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 40d9cd22-ba1f-4ff6-91a8-a0da34f5574c
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 245239
-    prefix: '2305871'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ff430f30-fc47-4ea7-ae2e-3504800df154
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 245240
-    prefix: '2305875'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b03e9b92-c8fb-4897-8efb-e3e269898c90
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245241
-    prefix: '2305876'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8a5bb04-279d-42cd-95ce-eb771f106004
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245242
-    prefix: '2305877'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52fd5324-53f5-4ff0-8fe6-46269aa8edd0
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245243
-    prefix: '2305878'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 75245629-b91c-4b0e-886e-35cbefb93086
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245244
-    prefix: '230588'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc56356f-e7ab-4a7c-9efd-35fb1737f6ec
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 245245
-    prefix: '230589'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3103817d-fcf6-450b-93db-7db51106e6b8
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 245268
-    prefix: '230590'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 546a1496-fe08-4ce3-8842-9c82c5b51ac1
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245315
-    prefix: '230591'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b5bc087e-4c76-432f-9552-b89eb5969bfa
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245318
-    prefix: '230592'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d0e29ccf-e6df-415a-93d7-1f217836b646
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245322
-    prefix: '230593'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 48e9b840-0d66-4654-8cdd-8d8958fd8cd4
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 245331
-    prefix: '230594'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 838ae68f-c489-44bc-97b5-1960038e677c
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 245343
-    prefix: '230595'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 84615c69-1df6-4948-bd5a-a996fcf99e86
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 245357
-    prefix: '230596'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2754d980-12f1-40be-bdd6-02c1338e9184
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 245364
-    prefix: '230597'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4195b773-d453-408f-897e-e8a2985f67f3
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 245367
-    prefix: '230598'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: caa8ede4-d2bc-4ac3-b54f-7f4c355d1f4d
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 249591
-    prefix: '2305'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eadc3615-623c-41de-8f46-5096edfa353c
-    country_id: *mu
-    network_id: *mu_mobile
-  - id: 249836
-    prefix: '230525'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 01f34be1-36d2-48b5-acb5-b3aeb643a8aa
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 249856
-    prefix: '230526'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4e676842-5c30-4123-a528-13565fd932e5
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 249869
-    prefix: '230527'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bfab117f-a66b-441b-bf62-899f96c8d0c8
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 249882
-    prefix: '230528'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b274969c-c74b-4d04-a197-9e68ae7aa5d9
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 249903
-    prefix: '230529'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d8dc6702-74da-4834-9eb8-3c3209de377b
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 250033
-    prefix: '2305421'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 449bc6d2-d57c-46f2-b082-3de49ed03f2e
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250034
-    prefix: '2305422'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 99ded381-2f4a-4b06-9f69-8680daef35ac
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250035
-    prefix: '2305423'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6d780d78-e796-4cf8-8aa5-694cfa82919b
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250036
-    prefix: '2305428'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f4e46ad-6f55-46ff-a13f-d27ea9f0fb01
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250037
-    prefix: '2305429'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c9f02a7d-4cec-4648-b7f5-95c681f5a6f2
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250040
-    prefix: '230543'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c250200b-85c9-41ba-8eb9-7bd9e8adaa6a
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250048
-    prefix: '230544'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 15709a06-0f02-468b-ba7f-6c9f03865b07
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250051
-    prefix: '230545'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4d3197c1-bc56-40c5-91ac-62da1c4a641f
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250069
-    prefix: '230546'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8f31b5f-6f6e-4023-81b0-253fc81ebcfb
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250074
-    prefix: '2305471'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9774fdcf-efb4-412e-9414-03dc28e10b26
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 250075
-    prefix: '2305472'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 168ad523-ff51-4bde-a266-d4cecb24576e
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250076
-    prefix: '2305473'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b093751-ff12-444a-8ad7-85173701a928
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250077
-    prefix: '2305474'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 564e2ad0-d491-450b-b3ec-8e8c53cf6bdb
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250078
-    prefix: '2305475'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d570c39e-c471-42b2-8b8c-6f2e83f232e8
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250079
-    prefix: '2305476'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 85c4de43-6f12-4721-975a-405d2b7c8428
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250080
-    prefix: '2305477'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 32a7ada7-0acd-43de-95c6-cca420a71c37
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250081
-    prefix: '2305478'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07119010-f56e-43fd-9d69-7f5ee7e835b5
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250082
-    prefix: '2305479'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a840aefb-1192-4e09-b977-59c3384b6edf
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250084
-    prefix: '230548'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3e740657-8fbd-4aab-996f-ef58e69e29df
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250087
-    prefix: '230549'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dbc61ecb-1006-45c2-9d12-582cbf364370
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250127
-    prefix: '230550'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a9e0b51b-e90a-4680-8503-7c8d2ad8fcbe
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 250131
-    prefix: '230551'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8abb579e-5d1a-44e1-8b50-af214161e726
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250134
-    prefix: '230552'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fee7a28b-2ade-4be7-90dc-4ed6df2ff091
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 250146
-    prefix: '230553'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 504e9b23-cdd9-4420-9c8e-d8563732db3a
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 250252
-    prefix: '230570'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 61c2375e-51cc-4307-8e25-8fc13e308934
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 250265
-    prefix: '230571'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 343370b8-224b-4303-b95c-e1c099937f29
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250281
-    prefix: '230572'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 45a68489-6fb4-4c48-905b-a45d12eb6eaf
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250287
-    prefix: '230573'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fdc89f8c-74c5-435a-b94a-3fdfe3bed753
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250298
-    prefix: '230574'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3aea5695-0b5a-4e55-83b4-f07034466fc6
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 250312
-    prefix: '230575'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a5cba613-7e0e-419c-99a0-2e6d4f8047e8
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
-  - id: 251596
-    prefix: '230704'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 585657ef-1c5d-4758-9fb8-2f1ef3f0e1e2
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 251888
-    prefix: '230730'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fc71f011-1497-4c3a-9ba4-a1243f3cae7a
-    country_id: *mu
-    network_id: *mu_emtel_mobile
-  - id: 251929
-    prefix: '230731'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 20a0b7bc-b578-4022-a9d0-27e04b22d4a1
-    country_id: *mu
-    network_id: *mu_mtml_cdma_chili_mobile
-  - id: 251941
-    prefix: '230733'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6dcb3874-a115-4274-8a49-7c2234164c45
-    country_id: *mu
-    network_id: *mu_myt_mobile_mobile
   - id: 255319
     prefix: '230700'
     number_min_length: 11
@@ -3406,25 +3300,130 @@ network_prefixes:
     uuid: 40a74f37-90ba-4059-8138-863871cca7a8
     country_id: *mu
     network_id: *mu_emtel_mobile
+  - id: 251596
+    prefix: '230704'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 585657ef-1c5d-4758-9fb8-2f1ef3f0e1e2
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 251888
+    prefix: '230730'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc71f011-1497-4c3a-9ba4-a1243f3cae7a
+    country_id: *mu
+    network_id: *mu_emtel_mobile
+  - id: 251929
+    prefix: '230731'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 20a0b7bc-b578-4022-a9d0-27e04b22d4a1
+    country_id: *mu
+    network_id: *mu_mtml_cdma_chili_mobile
+  - id: 251941
+    prefix: '230733'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6dcb3874-a115-4274-8a49-7c2234164c45
+    country_id: *mu
+    network_id: *mu_myt_mobile_mobile
+  - id: 253092
+    prefix: '2308'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: dab4c265-a18d-4aa3-929b-018095f4f425
+    country_id: *mu
+    network_id: *mu_special_services_on_net
+  - id: 253165
+    prefix: '230800'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f2af49b1-43dc-4647-bf6c-27bd5205031e
+    country_id: *mu
+    network_id: *mu_national_freephone_services
+  - id: 253214
+    prefix: '230801'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a2bad174-7402-4467-865b-12f3d170e288
+    country_id: *mu
+    network_id: *mu_international_freephone_services_inbound
+  - id: 253227
+    prefix: '230802'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3ad7d717-4c88-43e4-914a-529f549fd660
+    country_id: *mu
+    network_id: *mu_international_freephone_services_outbound
+  - id: 253379
+    prefix: '230814'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 57bbc14c-4e27-479b-873d-2f50c00fed9c
+    country_id: *mu
+    network_id: *mu_agalega_region
+  - id: 253598
+    prefix: '23083'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0252e3b6-8c58-46ee-b025-72986919c8b3
+    country_id: *mu
+    network_id: *mu_rodrigues_region
+  - id: 253613
+    prefix: '2308318'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ebe40df8-5d94-4ace-a335-9d08168f7490
+    country_id: *mu
+    network_id: *mu_roche_bon_dieu_region
+  - id: 253614
+    prefix: '2308319'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0abf3acc-4c7c-4605-8c31-6fd3b97b2497
+    country_id: *mu
+    network_id: *mu_riviere_coco_region
+  - id: 253617
+    prefix: '2308320'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 63f85564-32f8-4198-bead-7cff814581b3
+    country_id: *mu
+    network_id: *mu_mont_venus_region
+  - id: 253623
+    prefix: '2308325'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 74f5b9cc-8513-45a5-88bc-748f76e73fe8
+    country_id: *mu
+    network_id: *mu_mont_lubin_region
+  - id: 253626
+    prefix: '2308327'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 439a3027-a555-4649-aafc-b463ee4b332d
+    country_id: *mu
+    network_id: *mu_la_ferme_region
 # Paging Prefixes
-  - id: 247708
-    prefix: '2302189'
+  - id: 253696
+    prefix: '230839'
     number_min_length: 10
     number_max_length: 10
-    uuid: 2d3b1ba3-37b2-4f2c-9448-94e098c0fce7
+    uuid: e7991c64-c469-40f2-b6c9-c22b44a7d2e1
     country_id: *mu
-    network_id: *mu_paging
-  - id: 247711
-    prefix: '230219'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bbb74fbd-b5fc-4daa-955b-b7b141231cb5
+    network_id: *mu_fixed
+  - id: 257007
+    prefix: '23089'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: a2153126-5b03-42ed-b65c-4df562414b20
     country_id: *mu
-    network_id: *mu_paging
-  - id: 247727
-    prefix: '23022'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ea1f574c-39a2-40b1-8acf-4ab0ce7390df
+    network_id: *mu_special_services_cross_net
+  - id: 258190
+    prefix: '23099'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 43458842-bd01-4c70-bcf6-03272de1f9e4
     country_id: *mu
-    network_id: *mu_paging
+    network_id: *mu_emergency_services

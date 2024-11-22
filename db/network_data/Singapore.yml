@@ -25,6 +25,18 @@ networks:
     name: SG Machine To Machine M2M Services
     uuid: 66d59f02-9507-4c66-9167-25d13fbc8409
     type_id: 13
+  - id: &sg_singtel_mobile 21783
+    name: SG Singtel Mobile
+    uuid: cde58c6b-1db0-4e65-a178-162fd2917e95
+    type_id: 3
+  - id: &sg_starhub_mobile 21784
+    name: SG Starhub Mobile
+    uuid: 7f329e80-8071-4c52-98db-48262d33acb5
+    type_id: 3
+  - id: &sg_m1_mobile 21785
+    name: SG M1 Mobile
+    uuid: 6b250204-24b3-4070-bd51-a22c70a265b8
+    type_id: 3
   - id: &sg_international_simple_resale_isr_services 21797
     name: SG International Simple Resale Isr Services
     uuid: b812ae55-baf7-4dfc-b0a0-57a9c21b388d
@@ -41,6 +53,10 @@ networks:
     name: SG Time Announcement Service
     uuid: 1698b0b8-6f95-46a8-bd95-e5f13e2dd158
     type_id: 13
+  - id: &sg_pstn_and_voip_region 22550
+    name: SG Pstn And Voip Region
+    uuid: 93a3acbd-d1bf-4425-ae7a-732be03163aa
+    type_id: 2
   - id: &sg_national_freephone_services 22646
     name: SG National Freephone Services
     uuid: 57f9d039-44d3-4abc-8561-e34c9ec3b85e
@@ -53,39 +69,24 @@ networks:
     name: SG Premium Rate Services
     uuid: a64f0723-cd94-44fb-a2e4-74afd6b9ec43
     type_id: 13
+# Fixed Networks
   - id: &sg_televoting_services 22690
     name: SG Televoting Services
     uuid: 21a3f6ff-76dd-4a9f-bc6a-478d76915a3d
     type_id: 13
-  - id: &sg_international_freephone_and_home_country_direct_services 23859
-    name: SG International Freephone And Home Country Direct Services
-    uuid: 611938e4-75cc-45d1-916b-dfa4f0979d98
-    type_id: 13
-  - id: &sg_messaging_services 24153
-    name: SG Messaging Services
-    uuid: 6ec4bc53-1b48-4fd9-b6be-835a347ed3f7
-    type_id: 13
-  - id: &sg_emergency_services 24538
-    name: SG Emergency Services
-    uuid: bb5c0183-2564-4397-9454-9a7c1de1ea0f
-    type_id: 13
-# Mobile Networks
-  - id: &sg_singtel_mobile 21783
-    name: SG Singtel Mobile
-    uuid: cde58c6b-1db0-4e65-a178-162fd2917e95
-    type_id: 3
-  - id: &sg_starhub_mobile 21784
-    name: SG Starhub Mobile
-    uuid: 7f329e80-8071-4c52-98db-48262d33acb5
-    type_id: 3
-  - id: &sg_m1_mobile 21785
-    name: SG M1 Mobile
-    uuid: 6b250204-24b3-4070-bd51-a22c70a265b8
-    type_id: 3
+  - id: &sg_user_centric_data_only_ucdo_service_and_voip_region 23209
+    name: SG User Centric Data Only Ucdo Service And Voip Region
+    uuid: 43aed99f-01cb-44fa-a8a9-4932c367429a
+    type_id: 2
   - id: &sg_mobile 23805
     name: SG Mobile
     uuid: d4eddce7-6e9f-44e9-829a-ac9a6c6cba30
     type_id: 3
+# Mobile Networks
+  - id: &sg_international_freephone_and_home_country_direct_services 23859
+    name: SG International Freephone And Home Country Direct Services
+    uuid: 611938e4-75cc-45d1-916b-dfa4f0979d98
+    type_id: 13
   - id: &sg_grid_mobile 23944
     name: SG Grid Mobile
     uuid: 4f278597-7bdc-4691-b614-51180c05b76c
@@ -94,6 +95,10 @@ networks:
     name: SG Smart Pinoy Mobile
     uuid: f6cb6b95-9794-4852-a93b-5b992efa9fb2
     type_id: 3
+  - id: &sg_messaging_services 24153
+    name: SG Messaging Services
+    uuid: 6ec4bc53-1b48-4fd9-b6be-835a347ed3f7
+    type_id: 13
   - id: &sg_circleslife_mobile 24310
     name: SG Circleslife Mobile
     uuid: e88cd84d-e1ef-494a-a2e8-a21a4c2c943a
@@ -122,25 +127,23 @@ networks:
     name: SG Nexwave Mobile
     uuid: 50391e00-5c1e-4c47-8dd0-fc05fc28da27
     type_id: 3
-# Fixed Networks
-  - id: &sg_pstn_and_voip_region 22550
-    name: SG Pstn And Voip Region
-    uuid: 93a3acbd-d1bf-4425-ae7a-732be03163aa
-    type_id: 2
-  - id: &sg_user_centric_data_only_ucdo_service_and_voip_region 23209
-    name: SG User Centric Data Only Ucdo Service And Voip Region
-    uuid: 43aed99f-01cb-44fa-a8a9-4932c367429a
+  - id: &sg_emergency_services 24538
+    name: SG Emergency Services
+    uuid: bb5c0183-2564-4397-9454-9a7c1de1ea0f
+    type_id: 13
+  - id: &sg_fixed 43460
+    name: SG Fixed
+    uuid: 475c8f5a-e721-42a0-b951-6c6c8eb27562
     type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Supplementary services Prefixes
   - id: 242094
     prefix: '65'
     number_min_length: 3
     number_max_length: 100
     uuid: 03490319-e58a-4e58-921a-9003dad45d10
     country_id: *sg
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *sg_fixed
   - id: 242486
     prefix: '651'
     number_min_length: 6
@@ -183,6 +186,34 @@ network_prefixes:
     uuid: 4ff1e322-dda5-487c-82c0-47633c641109
     country_id: *sg
     network_id: *sg_machine_to_machine_m2m_services
+  - id: 242923
+    prefix: '6514400'
+    number_min_length: 7
+    number_max_length: 15
+    uuid: a7e2262a-0033-48ef-836c-e9639b1ed9db
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 242924
+    prefix: '6514409'
+    number_min_length: 7
+    number_max_length: 15
+    uuid: bacd4e7d-7002-4945-80e7-e66a03ceecbc
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 242925
+    prefix: '6514410'
+    number_min_length: 7
+    number_max_length: 15
+    uuid: d9662c21-87c1-4705-88e8-3997d17a171a
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 242926
+    prefix: '6514420'
+    number_min_length: 7
+    number_max_length: 15
+    uuid: d31a6272-b8e5-4a66-a67c-fc0c0e52ee6a
+    country_id: *sg
+    network_id: *sg_m1_mobile
   - id: 242947
     prefix: '6515'
     number_min_length: 6
@@ -225,6 +256,7 @@ network_prefixes:
     uuid: 7f174b29-6b60-46d4-9db8-b4f08d4b6a52
     country_id: *sg
     network_id: *sg_internal_network_services
+# Fixed Prefixes
   - id: 247358
     prefix: '651900'
     number_min_length: 13
@@ -239,13 +271,21 @@ network_prefixes:
     uuid: 8a93bebe-fa57-4e95-8765-84ffbd281456
     country_id: *sg
     network_id: *sg_televoting_services
-  - id: 253174
-    prefix: '65800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 50039007-5e9b-473f-b7b7-8a601115ef87
+  - id: 248921
+    prefix: '653'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e710e4f9-547d-4d39-91c0-b081047fc303
     country_id: *sg
-    network_id: *sg_international_freephone_and_home_country_direct_services
+    network_id: *sg_user_centric_data_only_ucdo_service_and_voip_region
+# Mobile Prefixes
+  - id: 245423
+    prefix: '656'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eedbf9aa-b86a-4039-b00c-709313352d7d
+    country_id: *sg
+    network_id: *sg_pstn_and_voip_region
   - id: 255276
     prefix: '657'
     number_min_length: 10
@@ -253,42 +293,6 @@ network_prefixes:
     uuid: 8096d709-de64-4665-b824-505bf92a02f3
     country_id: *sg
     network_id: *sg_messaging_services
-  - id: 258196
-    prefix: '6599'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: ca629085-c073-4301-a8ca-44bf54f7882c
-    country_id: *sg
-    network_id: *sg_emergency_services
-# Mobile Prefixes
-  - id: 242923
-    prefix: '6514400'
-    number_min_length: 7
-    number_max_length: 15
-    uuid: a7e2262a-0033-48ef-836c-e9639b1ed9db
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 242924
-    prefix: '6514409'
-    number_min_length: 7
-    number_max_length: 15
-    uuid: bacd4e7d-7002-4945-80e7-e66a03ceecbc
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 242925
-    prefix: '6514410'
-    number_min_length: 7
-    number_max_length: 15
-    uuid: d9662c21-87c1-4705-88e8-3997d17a171a
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 242926
-    prefix: '6514420'
-    number_min_length: 7
-    number_max_length: 15
-    uuid: d31a6272-b8e5-4a66-a67c-fc0c0e52ee6a
-    country_id: *sg
-    network_id: *sg_m1_mobile
   - id: 253105
     prefix: '658'
     number_min_length: 10
@@ -296,6 +300,13 @@ network_prefixes:
     uuid: f0cd3b9d-0e36-44c8-99cd-c8ce3db9d043
     country_id: *sg
     network_id: *sg_mobile
+  - id: 253174
+    prefix: '65800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 50039007-5e9b-473f-b7b7-8a601115ef87
+    country_id: *sg
+    network_id: *sg_international_freephone_and_home_country_direct_services
   - id: 253334
     prefix: '65810'
     number_min_length: 10
@@ -1724,6 +1735,1371 @@ network_prefixes:
     uuid: 430ec6a5-ad29-4fd9-9b5c-426fa1391ac1
     country_id: *sg
     network_id: *sg_singtel_mobile
+  - id: 263650
+    prefix: '658460'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ed6a1fcf-c928-4435-aafb-f1956e3addc4
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263652
+    prefix: '658461'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d10ea812-0c95-47a6-9cf6-1c60ccc9d26b
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263653
+    prefix: '658462'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8e1bcd03-5996-49f9-82a3-51b5a718aefb
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263654
+    prefix: '658463'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cecb2c16-a80c-4071-84cd-23e2effae705
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263655
+    prefix: '658464'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f3b69356-018d-4cdd-9238-7148bfd2998a
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263656
+    prefix: '658465'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4e072a38-2207-49ee-a814-0e6cd2c4b428
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263657
+    prefix: '658466'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1daef4d1-503d-4eeb-9c51-047e0504edf1
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263658
+    prefix: '658467'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7eb5979f-e108-4bfd-9950-8fd4ba353a4b
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263659
+    prefix: '658468'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8d203a00-1bfb-4069-a35c-d0c57ad01999
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263660
+    prefix: '658469'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 18828b29-008c-47e5-a553-4e616a4ab219
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263664
+    prefix: '65847'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 88043435-a191-42cb-a95a-014b5f35e23d
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263669
+    prefix: '65848'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40f11e6b-fedb-45eb-b482-554304af5ed7
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263684
+    prefix: '658490'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8884a22c-bd15-4b24-8e4e-e53400a39abd
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263685
+    prefix: '658491'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 06bbc6d6-9df0-4e09-a97c-42c5d1baa904
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263686
+    prefix: '658492'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 607df22b-1ee4-42dc-8290-a090169a4905
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263687
+    prefix: '658493'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e189ae05-ca0b-4ecc-9768-de2101dd21f8
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263688
+    prefix: '658494'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4e49fe7a-cdb6-4a30-9fc5-8d9133f1a4cb
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263689
+    prefix: '658495'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a33b827d-d6da-44d4-a6a0-fdbd5601920a
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263690
+    prefix: '658496'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d18f24f3-c5ce-472a-a925-c9f04d4f0b36
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263691
+    prefix: '658497'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 052ee535-8e4b-4a08-b776-89190c5a52f5
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263692
+    prefix: '658498'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 80c585f0-96b9-4aa1-bc79-332e2c947e55
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263693
+    prefix: '658499'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1f098eb8-d549-4e4e-ae93-168c60bc545e
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263723
+    prefix: '658500'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a0d57d67-d74f-4d0a-a82e-ea58f164a9ee
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263724
+    prefix: '658501'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f28ed4bf-967a-45ec-82ee-dc28c93ea65d
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263725
+    prefix: '658502'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 94602b88-8cb0-4d25-9ece-b1e13109f48e
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263726
+    prefix: '658503'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 484b001b-b10f-4b37-b7e7-97af3f493c5f
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263727
+    prefix: '658504'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20e51b44-6ce5-45a2-a34a-4770fe5bff22
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263728
+    prefix: '658505'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: da42e35f-11ce-4faf-a790-038fa8608603
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263729
+    prefix: '658506'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 96d68c14-c081-4c3c-9ace-b8196a5098c8
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263730
+    prefix: '658507'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dead4b0e-76d9-4f1e-8b07-ea7876f5942e
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263731
+    prefix: '658508'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e08afdab-a6f4-43d3-85c9-715b4bb024e1
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263732
+    prefix: '658509'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0a981f4e-63ea-4962-8c3f-7cee689788e1
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263739
+    prefix: '658510'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 78a1f73a-2b2a-4078-9d56-1ab7351027b7
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263742
+    prefix: '658511'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1047c1c3-3164-4b0b-9c34-f715b6eeaada
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263744
+    prefix: '658512'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a730b4a4-27f2-447a-a33a-db2bc26ec52c
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263745
+    prefix: '658513'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d150548d-3614-43b6-89da-142f382778b0
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263746
+    prefix: '658514'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2126bef6-10b0-4465-8f47-67f46cfeb9ca
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263747
+    prefix: '658515'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 907b7960-f467-44bb-a390-ab7c25e35f44
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263748
+    prefix: '658516'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c2646b34-a438-4a8c-964e-41a213c5e507
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263749
+    prefix: '658517'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c420759f-9281-4494-ba51-f56ace2c9e19
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263750
+    prefix: '658518'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5760b467-97c3-4f16-abb5-84409247aa63
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263751
+    prefix: '658519'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 868f1f25-9197-4338-9d29-194152de6873
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263756
+    prefix: '658520'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 384ca6b5-2068-470c-beb7-ffbbee176eba
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263757
+    prefix: '658521'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: de7b129c-33a6-47cc-a5f4-bb06fbe60d93
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263759
+    prefix: '658522'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 452a8ea7-1161-420c-a4f2-157ac40270d2
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263760
+    prefix: '658523'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 34a97614-0430-4b2e-922c-1f9209d80beb
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263761
+    prefix: '658524'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bd6a16a5-5898-4c76-bb14-02af342d576c
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263762
+    prefix: '658525'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eafd475f-3b66-43b8-8954-ca966f77b79c
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263763
+    prefix: '658526'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 55defc29-2403-4a42-a074-1ffcefd4f945
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263764
+    prefix: '658527'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c5b6bf98-32fb-421c-824d-3f68f787de25
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263765
+    prefix: '658528'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 069c73bb-fade-4279-aa2d-6ac06e68c169
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263766
+    prefix: '658529'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7807e22c-cbce-4d6b-8e90-a35e831eb5b0
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263772
+    prefix: '658530'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2b92047a-b463-481a-989d-047f1bad6f1a
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263773
+    prefix: '658531'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e348a0b-22e1-41fd-be50-a893dd1ab84f
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263774
+    prefix: '658532'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98d4ba2e-6178-4176-9abc-f64e677ed2b8
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263775
+    prefix: '658533'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 71699393-c614-4164-afa2-784360c89358
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263776
+    prefix: '658534'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a241af60-dd11-4a55-a186-2e4e4da877b3
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263777
+    prefix: '658535'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d58187eb-160e-4d94-bab8-09b75294618a
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263778
+    prefix: '658536'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 591e079f-4c7f-4f68-8210-ce62fe8e3958
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263779
+    prefix: '658537'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c107fba8-1b3b-4c55-9c17-1ed1a5618438
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263780
+    prefix: '658538'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4f058cd5-e2fc-4496-bf79-1d158afb0958
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263781
+    prefix: '658539'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b0de1822-39a9-44a7-a38a-7605ae18acce
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263785
+    prefix: '65854'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0d8da47e-2f41-4495-bced-ca372bc6c4d7
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263792
+    prefix: '658550'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 33fdbba4-906d-41df-8d70-f3feccac863f
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263793
+    prefix: '658551'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6bc1d152-e5e6-4aa6-b76f-250fad431c29
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263794
+    prefix: '658552'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9371e401-03d4-49c9-9648-85222345fec9
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263795
+    prefix: '658553'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: de6b4958-237b-4dc0-b66e-a4836c276bfc
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263796
+    prefix: '658554'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0efac839-70d7-4c80-9526-b03d9b9d4c6f
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263797
+    prefix: '658555'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a3b30381-ab14-41d4-a092-3dc973b02ab4
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263798
+    prefix: '658556'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 458029bd-7e5f-4aed-9df8-153cb382a663
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263799
+    prefix: '658557'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 52e810a7-1d16-4f4e-b9f5-679dafff4091
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263800
+    prefix: '658558'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cbc8250b-a218-4ebf-9e10-aa76eae40cba
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263801
+    prefix: '658559'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 53557bbf-98fe-492a-8837-ebaa4b749538
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263803
+    prefix: '65856'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dcdf9ea4-87e2-4664-b0ff-f41503f3771e
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263808
+    prefix: '658570'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0ec10576-c781-4b44-984c-866838ba1387
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263809
+    prefix: '658571'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1628a0cb-855e-426e-91dc-f98b31aa07b9
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263810
+    prefix: '658572'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 19bd5169-becc-435d-8455-39740b3bbf23
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263811
+    prefix: '658573'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7b5020c1-6c43-42a3-92dc-55e69e65c29b
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263812
+    prefix: '658574'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 46032777-8cb6-4a23-bc20-1817d3584387
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263813
+    prefix: '658575'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8a7f0229-7555-4f34-9973-8bd19d16c8be
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263814
+    prefix: '658576'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0ccab490-0f16-405f-a7ec-a29790e74c5c
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263815
+    prefix: '658577'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 15cc665a-3763-4544-8f0e-afc75f35ba96
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263816
+    prefix: '658578'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a34ef621-ade7-47c9-bff8-7d0976e6d086
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263817
+    prefix: '658579'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ee879eb2-e34b-4fd8-883c-8e78ffe279df
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263820
+    prefix: '658580'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2fd44bad-faa4-4d7d-a454-3b6777cd0021
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263821
+    prefix: '658581'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8f00373d-6fe0-4a57-807f-b2f7e3917c86
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263822
+    prefix: '658582'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fe7af9ba-52ff-4f3c-b44f-179f64947bf1
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263823
+    prefix: '658583'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 843a557d-5a4b-423e-9e48-7419e5c27201
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263824
+    prefix: '658584'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cf19540d-6f72-4437-928f-ed0da8c32363
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263825
+    prefix: '658585'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e2c126c-4620-4f23-9bb3-cc26d17bdf74
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263826
+    prefix: '658586'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 520eaf03-5a58-4dd7-9033-bd79baf4cda8
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263827
+    prefix: '658587'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6ab4c6ee-dc7f-4439-9788-4adfb5165616
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263828
+    prefix: '658588'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6b9b3952-4d1b-439c-b095-3ec6bc3669a5
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263829
+    prefix: '658589'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6182d273-1525-45cf-9b3e-8d129e85103a
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263833
+    prefix: '658590'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7dc2a5b2-6e7a-442c-9bb9-a17d2de85b9c
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263834
+    prefix: '658591'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0c3fce36-af87-4870-aa7d-763e63d52130
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263835
+    prefix: '658592'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fc0fd4a0-ac12-432e-862b-44f605a1cff1
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263836
+    prefix: '658593'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3a38297d-9fa5-41a3-932d-64c7e8535f5c
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263837
+    prefix: '658594'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3ba1b899-d783-419c-9a01-d4a0f0299dd8
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263838
+    prefix: '658595'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a10aef33-7b81-424b-8004-1dcf7ffd8ea7
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263839
+    prefix: '658596'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9f377afb-6b4c-41ea-aa5a-1edded712ed1
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263840
+    prefix: '658597'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3c46461a-f69c-452d-8575-aca90fa7a0f5
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263841
+    prefix: '658598'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3ab76bfd-6b5c-4ea7-9d37-138e185c679b
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263842
+    prefix: '658599'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7b13f826-5de2-404a-8d65-81759c3919ba
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263871
+    prefix: '658600'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca243191-4d3b-44f4-8d82-1bd177a8542f
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263873
+    prefix: '658601'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b96ab769-b7b5-447d-97fb-0d95ffc378b2
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263874
+    prefix: '658602'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f86c2a2-b8ea-4d2c-a480-024ef5b26b04
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263875
+    prefix: '658603'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca15ec8d-bb71-460a-a673-b4f0c5c6e5b1
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263876
+    prefix: '658604'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e81575d9-2973-42d5-a5f5-01585276f23a
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263877
+    prefix: '658605'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7d1db60e-20da-48d1-9720-41eec696ba13
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263878
+    prefix: '658606'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6a5f8ffa-97eb-4845-baf5-6df2932ab6da
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263879
+    prefix: '658607'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bbc36582-349d-428d-ab0e-a2b113f89ed5
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263880
+    prefix: '658608'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4a03fe3b-c922-403a-a9d3-54fd85657bef
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263881
+    prefix: '658609'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 328cbb76-1cd9-4b7d-aeb4-d7dba765c637
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263885
+    prefix: '658610'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cfbba1d6-1ca0-45b1-a6da-57b028e79f87
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263886
+    prefix: '658611'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3f266cb8-4765-4b6a-a025-50dc7603f4c1
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263887
+    prefix: '658612'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 74fbbb33-170a-40c3-8d22-d100b428ea73
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263888
+    prefix: '658613'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0f135d5f-c4a2-48f4-9cb0-a043277b3651
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263889
+    prefix: '658614'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7d6f047c-6933-4796-b1d9-29440957969b
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263890
+    prefix: '658615'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3391c507-e0cf-4560-84da-7ec9a865daa4
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263891
+    prefix: '658616'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1663a5a7-8d8e-4c37-b03d-47c10805161d
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263892
+    prefix: '658617'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bd1b3492-11de-44d7-b011-cf4a4f91a287
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263893
+    prefix: '658618'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d2e872ba-dccf-428f-bfb0-0c33b0c74c39
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263894
+    prefix: '658619'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 18113a45-496a-4554-a7f7-601f76954628
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263897
+    prefix: '658620'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f6954795-1df1-43ff-ab43-c19749d45096
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263898
+    prefix: '658621'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9621459e-2872-4e89-a8a7-f1edfe695181
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263899
+    prefix: '658622'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d12ea33f-bb5c-41a3-96ab-1cb6f6d25eb5
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263900
+    prefix: '658623'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 80b2ef6f-5170-4793-a94d-9af7e4268acf
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263901
+    prefix: '658624'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 28173804-dd08-4b7c-a121-ea6c29ddd064
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263902
+    prefix: '658625'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1e194e9d-246e-4b33-91be-4e46690c2df6
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263903
+    prefix: '658626'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f69b0cfd-ad6e-4181-8e65-3f90ddda69b1
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263904
+    prefix: '658627'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 15f032e3-9630-4897-b329-b86a729fcf6a
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263905
+    prefix: '658628'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d04ec902-a6e0-4cfc-a220-7e1fddd8e950
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263906
+    prefix: '658629'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 35270b38-1e68-46c6-9e3e-1e5572772ddf
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263909
+    prefix: '658630'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b11284ad-caf1-4119-b5c5-d2538670cc10
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263910
+    prefix: '658631'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7aaee96c-fda1-4a15-a2d2-b8f4542c4677
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263911
+    prefix: '658632'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98d47108-efdd-4c19-8628-1bdaa54a3ac5
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263912
+    prefix: '658633'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98f39d8c-6e42-4ce4-abb2-8f24d44a6b26
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263913
+    prefix: '658634'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a598e4df-5021-4997-9286-409212d2c505
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263914
+    prefix: '658635'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 00a39627-8f15-4ca5-a8e2-5627e3eb73e2
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263915
+    prefix: '658636'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66d9fd11-cc19-418a-89cf-07793b68875e
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263916
+    prefix: '658637'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2bc09d3f-154d-4c26-a04a-bbf19a33cf22
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263917
+    prefix: '658638'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 162e710d-24d0-4b1f-967a-802e344af42c
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263918
+    prefix: '658639'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 358a0540-a773-4d43-a15f-e26c9eefcc9b
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263922
+    prefix: '658640'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a2d66ab4-c6ec-46f1-9bd8-4ab4cfb68780
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263923
+    prefix: '658641'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5a89f116-3539-462e-9a26-c0c4caf35f44
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263924
+    prefix: '658642'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d2186cb8-cc62-410c-9c95-38d5e65f5d72
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263925
+    prefix: '658643'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 58d6cf62-4e5c-46f1-a637-80d4f3c9fc33
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263926
+    prefix: '658644'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b51adefa-1380-40ab-8f6b-98543d1db9ff
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263927
+    prefix: '658645'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f9bc994b-0d6d-45b8-becc-c8938ceea345
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263928
+    prefix: '658646'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c21223ea-9a28-409f-a58d-d54e65c2f88a
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263929
+    prefix: '658647'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 916b2828-b06f-492c-b952-506ea71735f5
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263930
+    prefix: '658648'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3be3acdc-c75c-42c9-8271-53370a20cf1b
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263931
+    prefix: '658649'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a878b618-81db-4a81-8cc1-bdbefd93fa1c
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263935
+    prefix: '658650'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f6024531-1bbc-44a6-ba09-3d90d894f56c
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263937
+    prefix: '658651'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e96b3127-782e-4aca-8c71-ab117b56db8e
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263938
+    prefix: '658652'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 20e387a6-5b69-478e-a646-bbd68a6a6cfa
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263939
+    prefix: '658653'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 118ad22e-b2a2-4152-8393-ecbd35b0c749
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263940
+    prefix: '658654'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bc091cc5-ad42-4599-8126-0e8a76463b60
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263941
+    prefix: '658655'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8e93947c-569c-49ac-ac53-a27ca1c2a49b
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263942
+    prefix: '658656'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 961c3e18-5c8c-43d7-84c7-2627d74936eb
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263943
+    prefix: '658657'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a4e52a50-3119-4e2e-8704-6ca83bdd9ed3
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263944
+    prefix: '658658'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4fca4d6e-6482-4a64-9670-d9a07bf7ff94
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263945
+    prefix: '658659'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5014cdde-4fd1-4210-acad-37cf32b4ed47
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263948
+    prefix: '658660'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fb4b6b96-2235-4a45-b421-973be4cad809
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263949
+    prefix: '658661'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1da5e6f8-609d-4aef-8f23-de160d37cf53
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263950
+    prefix: '658662'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eaa21c1d-b9cb-4a5d-b185-09f7114a9734
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263951
+    prefix: '658663'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4c9fe6a1-8331-4a88-a208-7393e5fecbd3
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263952
+    prefix: '658664'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7a6cd108-c8fc-4375-87f9-ded8b0ead87f
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263953
+    prefix: '658665'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6f276177-c399-4453-ad01-34574a1cb09f
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263954
+    prefix: '658666'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f65bb81b-d5c1-4d22-9ab8-2d378f9b689b
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263955
+    prefix: '658667'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 77bc0ab1-406d-4ea6-9d88-68ff029ae410
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263956
+    prefix: '658668'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: df36e37c-5734-4d00-a250-08b1e1c5a00f
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263957
+    prefix: '658669'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ccbbaaa8-28f2-46b6-b806-a74161888cbc
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263960
+    prefix: '65867'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 893c1482-a273-45cf-869e-014c2b3adc09
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263969
+    prefix: '658680'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6e432bd-1f3c-4b51-bad3-424b92d6b742
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263970
+    prefix: '658681'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f1fdcde9-e008-43cb-b93d-fc8dd8916bf3
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263971
+    prefix: '658682'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8625e6c8-d509-4aec-863b-e33006d4009b
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263972
+    prefix: '658683'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 703d41a3-e246-41ed-81f5-4d4104a07d77
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263973
+    prefix: '658684'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8de659c8-92e2-47ec-a839-9cd5133d1a16
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263975
+    prefix: '658685'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b36361df-09e4-4e33-8adf-d923ce5578b0
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263976
+    prefix: '658686'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 843d402c-40e4-4c05-b65a-7005ef0ba64a
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263977
+    prefix: '658687'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 89c48178-ec47-47a1-b957-466022639915
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263978
+    prefix: '658688'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f9dd8ac8-70da-4384-ba0b-b2a010d0d82c
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263979
+    prefix: '658689'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ccb1c70a-01a8-46e4-b341-9f909e457810
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263984
+    prefix: '658690'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7bed5c0c-983d-42eb-b2cc-2a6503e9d5f3
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 263985
+    prefix: '658691'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f0a9bfa4-0b4a-48b8-96e3-7c8c45572702
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263986
+    prefix: '658692'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 42f1c763-e025-4d01-b545-b84cfd0ee9f6
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263987
+    prefix: '658693'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5f7e3192-3e9e-4af9-bb3d-87493e500ba6
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 263988
+    prefix: '658694'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b87a870e-ebf8-4939-9942-9b38c1f45fe9
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263989
+    prefix: '658695'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2961a51c-7e7e-422b-b40e-12b2a5d5a100
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263990
+    prefix: '658696'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cf6a1e16-31c8-426b-9672-58c963ac86e4
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263991
+    prefix: '658697'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 488b72d3-9a67-481c-a656-d0bfe2268480
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263992
+    prefix: '658698'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 21be2a5a-f91c-4910-a5e2-68600cf713c6
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 263993
+    prefix: '658699'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1cf92dfb-6b1b-43df-9f38-187d14598700
+    country_id: *sg
+    network_id: *sg_m1_mobile
   - id: 256679
     prefix: '658700'
     number_min_length: 10
@@ -3376,1581 +4752,6 @@ network_prefixes:
     uuid: 9835279a-1ce9-442c-8787-802ffb290d7b
     country_id: *sg
     network_id: *sg_nexwave_mobile
-  - id: 257982
-    prefix: '659800'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 731fa165-03f5-4add-90fe-392c937ecb70
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258004
-    prefix: '659806'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3f9e49de-d39a-423c-bde6-91cb5ecab843
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258006
-    prefix: '659807'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e69e7ff8-1fcd-4e2d-af2c-bf18298dd227
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258015
-    prefix: '659810'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a94b79b2-8fee-4382-818f-5a5ad6bdb009
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258018
-    prefix: '659811'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d41d2613-1eb7-4c60-9329-40f03f697190
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258021
-    prefix: '659812'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 66ebd316-fe44-44d0-abf9-375e8ef6fa61
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258024
-    prefix: '659813'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 723fa36d-6a38-4da2-a84e-ce96483df754
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258026
-    prefix: '659814'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a2ed38bc-ae62-4895-909b-191800178b4d
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258028
-    prefix: '659815'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: eb0f042a-ab4f-4138-b612-7522c307950e
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258030
-    prefix: '659816'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a7e04c7b-cd13-47ed-bb3a-73c7bf72c613
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258032
-    prefix: '659817'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cab88723-61f0-4280-b7b0-6f5ebbb6e220
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258034
-    prefix: '659818'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8b6786b8-9df5-42c6-bb9f-6fd6e6544d43
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258036
-    prefix: '659819'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d671dc71-17e9-4d72-bd8f-570831de1986
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258041
-    prefix: '65982'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ba91c683-8831-4684-aec8-204444430e7d
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258074
-    prefix: '65983'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ba9993a5-9fd1-4635-8180-e31e71e7758c
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258099
-    prefix: '65984'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7519dfee-8dfb-48f3-b8f2-b48e1767d05c
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 258114
-    prefix: '65985'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c80de9c8-eb4e-4a1c-865f-4b9475a3d79f
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258129
-    prefix: '65986'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 545c93a5-8848-443c-87aa-fb9cf2b511a3
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258134
-    prefix: '65987'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4cef29c3-c45b-4d33-8f19-567fe17ab85c
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 258143
-    prefix: '659880'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2ec2c8e3-0634-4c51-b3bc-c00567f84b11
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258144
-    prefix: '659881'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5acb07db-e763-47dc-8f73-528a8b0aced4
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258145
-    prefix: '659882'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fb151728-6dfb-4802-bc20-c50d25bd7064
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258146
-    prefix: '659883'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 269cf8aa-c9cc-4eb9-8349-ff6e8d38022c
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258147
-    prefix: '659884'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5c192380-e533-4a42-ade6-4dcdba468f21
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258148
-    prefix: '659885'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 07c0e9b1-7385-4d14-8f3f-3bc7ad4e640c
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258149
-    prefix: '659886'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fb48c83e-7d00-4bbe-b841-581f02e7398a
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258150
-    prefix: '659887'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cffb8900-bb99-4389-b667-7e87b1a576c5
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 258151
-    prefix: '659888'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8122edd5-8fff-4510-8cab-88917216a2e6
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 258153
-    prefix: '659889'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7ac952b3-f822-48e8-a466-574bfaa2ae9b
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 258157
-    prefix: '65989'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 027438b3-30fe-4be9-8774-d342e378ea81
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263650
-    prefix: '658460'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ed6a1fcf-c928-4435-aafb-f1956e3addc4
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263652
-    prefix: '658461'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d10ea812-0c95-47a6-9cf6-1c60ccc9d26b
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263653
-    prefix: '658462'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8e1bcd03-5996-49f9-82a3-51b5a718aefb
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263654
-    prefix: '658463'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cecb2c16-a80c-4071-84cd-23e2effae705
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263655
-    prefix: '658464'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f3b69356-018d-4cdd-9238-7148bfd2998a
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263656
-    prefix: '658465'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4e072a38-2207-49ee-a814-0e6cd2c4b428
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263657
-    prefix: '658466'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1daef4d1-503d-4eeb-9c51-047e0504edf1
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263658
-    prefix: '658467'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7eb5979f-e108-4bfd-9950-8fd4ba353a4b
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263659
-    prefix: '658468'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8d203a00-1bfb-4069-a35c-d0c57ad01999
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263660
-    prefix: '658469'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 18828b29-008c-47e5-a553-4e616a4ab219
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263664
-    prefix: '65847'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 88043435-a191-42cb-a95a-014b5f35e23d
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263669
-    prefix: '65848'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 40f11e6b-fedb-45eb-b482-554304af5ed7
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263684
-    prefix: '658490'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8884a22c-bd15-4b24-8e4e-e53400a39abd
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263685
-    prefix: '658491'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 06bbc6d6-9df0-4e09-a97c-42c5d1baa904
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263686
-    prefix: '658492'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 607df22b-1ee4-42dc-8290-a090169a4905
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263687
-    prefix: '658493'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e189ae05-ca0b-4ecc-9768-de2101dd21f8
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263688
-    prefix: '658494'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4e49fe7a-cdb6-4a30-9fc5-8d9133f1a4cb
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263689
-    prefix: '658495'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a33b827d-d6da-44d4-a6a0-fdbd5601920a
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263690
-    prefix: '658496'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d18f24f3-c5ce-472a-a925-c9f04d4f0b36
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263691
-    prefix: '658497'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 052ee535-8e4b-4a08-b776-89190c5a52f5
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263692
-    prefix: '658498'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 80c585f0-96b9-4aa1-bc79-332e2c947e55
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263693
-    prefix: '658499'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1f098eb8-d549-4e4e-ae93-168c60bc545e
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263723
-    prefix: '658500'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a0d57d67-d74f-4d0a-a82e-ea58f164a9ee
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263724
-    prefix: '658501'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f28ed4bf-967a-45ec-82ee-dc28c93ea65d
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263725
-    prefix: '658502'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 94602b88-8cb0-4d25-9ece-b1e13109f48e
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263726
-    prefix: '658503'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 484b001b-b10f-4b37-b7e7-97af3f493c5f
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263727
-    prefix: '658504'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 20e51b44-6ce5-45a2-a34a-4770fe5bff22
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263728
-    prefix: '658505'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: da42e35f-11ce-4faf-a790-038fa8608603
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263729
-    prefix: '658506'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 96d68c14-c081-4c3c-9ace-b8196a5098c8
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263730
-    prefix: '658507'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dead4b0e-76d9-4f1e-8b07-ea7876f5942e
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263731
-    prefix: '658508'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e08afdab-a6f4-43d3-85c9-715b4bb024e1
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263732
-    prefix: '658509'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0a981f4e-63ea-4962-8c3f-7cee689788e1
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263739
-    prefix: '658510'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 78a1f73a-2b2a-4078-9d56-1ab7351027b7
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263742
-    prefix: '658511'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1047c1c3-3164-4b0b-9c34-f715b6eeaada
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263744
-    prefix: '658512'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a730b4a4-27f2-447a-a33a-db2bc26ec52c
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263745
-    prefix: '658513'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d150548d-3614-43b6-89da-142f382778b0
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263746
-    prefix: '658514'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2126bef6-10b0-4465-8f47-67f46cfeb9ca
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263747
-    prefix: '658515'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 907b7960-f467-44bb-a390-ab7c25e35f44
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263748
-    prefix: '658516'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c2646b34-a438-4a8c-964e-41a213c5e507
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263749
-    prefix: '658517'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c420759f-9281-4494-ba51-f56ace2c9e19
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263750
-    prefix: '658518'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5760b467-97c3-4f16-abb5-84409247aa63
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263751
-    prefix: '658519'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 868f1f25-9197-4338-9d29-194152de6873
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263756
-    prefix: '658520'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 384ca6b5-2068-470c-beb7-ffbbee176eba
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263757
-    prefix: '658521'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: de7b129c-33a6-47cc-a5f4-bb06fbe60d93
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263759
-    prefix: '658522'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 452a8ea7-1161-420c-a4f2-157ac40270d2
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263760
-    prefix: '658523'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 34a97614-0430-4b2e-922c-1f9209d80beb
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263761
-    prefix: '658524'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bd6a16a5-5898-4c76-bb14-02af342d576c
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263762
-    prefix: '658525'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: eafd475f-3b66-43b8-8954-ca966f77b79c
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263763
-    prefix: '658526'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 55defc29-2403-4a42-a074-1ffcefd4f945
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263764
-    prefix: '658527'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c5b6bf98-32fb-421c-824d-3f68f787de25
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263765
-    prefix: '658528'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 069c73bb-fade-4279-aa2d-6ac06e68c169
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263766
-    prefix: '658529'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7807e22c-cbce-4d6b-8e90-a35e831eb5b0
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263772
-    prefix: '658530'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2b92047a-b463-481a-989d-047f1bad6f1a
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263773
-    prefix: '658531'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2e348a0b-22e1-41fd-be50-a893dd1ab84f
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263774
-    prefix: '658532'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 98d4ba2e-6178-4176-9abc-f64e677ed2b8
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263775
-    prefix: '658533'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 71699393-c614-4164-afa2-784360c89358
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263776
-    prefix: '658534'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a241af60-dd11-4a55-a186-2e4e4da877b3
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263777
-    prefix: '658535'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d58187eb-160e-4d94-bab8-09b75294618a
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263778
-    prefix: '658536'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 591e079f-4c7f-4f68-8210-ce62fe8e3958
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263779
-    prefix: '658537'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c107fba8-1b3b-4c55-9c17-1ed1a5618438
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263780
-    prefix: '658538'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4f058cd5-e2fc-4496-bf79-1d158afb0958
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263781
-    prefix: '658539'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b0de1822-39a9-44a7-a38a-7605ae18acce
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263785
-    prefix: '65854'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0d8da47e-2f41-4495-bced-ca372bc6c4d7
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263792
-    prefix: '658550'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 33fdbba4-906d-41df-8d70-f3feccac863f
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263793
-    prefix: '658551'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6bc1d152-e5e6-4aa6-b76f-250fad431c29
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263794
-    prefix: '658552'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9371e401-03d4-49c9-9648-85222345fec9
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263795
-    prefix: '658553'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: de6b4958-237b-4dc0-b66e-a4836c276bfc
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263796
-    prefix: '658554'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0efac839-70d7-4c80-9526-b03d9b9d4c6f
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263797
-    prefix: '658555'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a3b30381-ab14-41d4-a092-3dc973b02ab4
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263798
-    prefix: '658556'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 458029bd-7e5f-4aed-9df8-153cb382a663
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263799
-    prefix: '658557'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 52e810a7-1d16-4f4e-b9f5-679dafff4091
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263800
-    prefix: '658558'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cbc8250b-a218-4ebf-9e10-aa76eae40cba
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263801
-    prefix: '658559'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 53557bbf-98fe-492a-8837-ebaa4b749538
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263803
-    prefix: '65856'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dcdf9ea4-87e2-4664-b0ff-f41503f3771e
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263808
-    prefix: '658570'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0ec10576-c781-4b44-984c-866838ba1387
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263809
-    prefix: '658571'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1628a0cb-855e-426e-91dc-f98b31aa07b9
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263810
-    prefix: '658572'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 19bd5169-becc-435d-8455-39740b3bbf23
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263811
-    prefix: '658573'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7b5020c1-6c43-42a3-92dc-55e69e65c29b
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263812
-    prefix: '658574'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 46032777-8cb6-4a23-bc20-1817d3584387
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263813
-    prefix: '658575'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8a7f0229-7555-4f34-9973-8bd19d16c8be
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263814
-    prefix: '658576'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0ccab490-0f16-405f-a7ec-a29790e74c5c
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263815
-    prefix: '658577'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 15cc665a-3763-4544-8f0e-afc75f35ba96
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263816
-    prefix: '658578'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a34ef621-ade7-47c9-bff8-7d0976e6d086
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263817
-    prefix: '658579'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ee879eb2-e34b-4fd8-883c-8e78ffe279df
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263820
-    prefix: '658580'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2fd44bad-faa4-4d7d-a454-3b6777cd0021
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263821
-    prefix: '658581'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8f00373d-6fe0-4a57-807f-b2f7e3917c86
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263822
-    prefix: '658582'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fe7af9ba-52ff-4f3c-b44f-179f64947bf1
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263823
-    prefix: '658583'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 843a557d-5a4b-423e-9e48-7419e5c27201
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263824
-    prefix: '658584'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cf19540d-6f72-4437-928f-ed0da8c32363
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263825
-    prefix: '658585'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3e2c126c-4620-4f23-9bb3-cc26d17bdf74
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263826
-    prefix: '658586'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 520eaf03-5a58-4dd7-9033-bd79baf4cda8
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263827
-    prefix: '658587'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6ab4c6ee-dc7f-4439-9788-4adfb5165616
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263828
-    prefix: '658588'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6b9b3952-4d1b-439c-b095-3ec6bc3669a5
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263829
-    prefix: '658589'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6182d273-1525-45cf-9b3e-8d129e85103a
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263833
-    prefix: '658590'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7dc2a5b2-6e7a-442c-9bb9-a17d2de85b9c
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263834
-    prefix: '658591'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0c3fce36-af87-4870-aa7d-763e63d52130
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263835
-    prefix: '658592'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fc0fd4a0-ac12-432e-862b-44f605a1cff1
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263836
-    prefix: '658593'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3a38297d-9fa5-41a3-932d-64c7e8535f5c
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263837
-    prefix: '658594'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3ba1b899-d783-419c-9a01-d4a0f0299dd8
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263838
-    prefix: '658595'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a10aef33-7b81-424b-8004-1dcf7ffd8ea7
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263839
-    prefix: '658596'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9f377afb-6b4c-41ea-aa5a-1edded712ed1
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263840
-    prefix: '658597'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3c46461a-f69c-452d-8575-aca90fa7a0f5
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263841
-    prefix: '658598'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3ab76bfd-6b5c-4ea7-9d37-138e185c679b
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263842
-    prefix: '658599'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7b13f826-5de2-404a-8d65-81759c3919ba
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263871
-    prefix: '658600'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ca243191-4d3b-44f4-8d82-1bd177a8542f
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263873
-    prefix: '658601'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b96ab769-b7b5-447d-97fb-0d95ffc378b2
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263874
-    prefix: '658602'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5f86c2a2-b8ea-4d2c-a480-024ef5b26b04
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263875
-    prefix: '658603'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ca15ec8d-bb71-460a-a673-b4f0c5c6e5b1
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263876
-    prefix: '658604'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e81575d9-2973-42d5-a5f5-01585276f23a
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263877
-    prefix: '658605'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7d1db60e-20da-48d1-9720-41eec696ba13
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263878
-    prefix: '658606'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6a5f8ffa-97eb-4845-baf5-6df2932ab6da
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263879
-    prefix: '658607'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bbc36582-349d-428d-ab0e-a2b113f89ed5
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263880
-    prefix: '658608'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4a03fe3b-c922-403a-a9d3-54fd85657bef
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263881
-    prefix: '658609'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 328cbb76-1cd9-4b7d-aeb4-d7dba765c637
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263885
-    prefix: '658610'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cfbba1d6-1ca0-45b1-a6da-57b028e79f87
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263886
-    prefix: '658611'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3f266cb8-4765-4b6a-a025-50dc7603f4c1
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263887
-    prefix: '658612'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 74fbbb33-170a-40c3-8d22-d100b428ea73
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263888
-    prefix: '658613'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0f135d5f-c4a2-48f4-9cb0-a043277b3651
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263889
-    prefix: '658614'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7d6f047c-6933-4796-b1d9-29440957969b
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263890
-    prefix: '658615'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3391c507-e0cf-4560-84da-7ec9a865daa4
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263891
-    prefix: '658616'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1663a5a7-8d8e-4c37-b03d-47c10805161d
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263892
-    prefix: '658617'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bd1b3492-11de-44d7-b011-cf4a4f91a287
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263893
-    prefix: '658618'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d2e872ba-dccf-428f-bfb0-0c33b0c74c39
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263894
-    prefix: '658619'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 18113a45-496a-4554-a7f7-601f76954628
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263897
-    prefix: '658620'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f6954795-1df1-43ff-ab43-c19749d45096
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263898
-    prefix: '658621'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9621459e-2872-4e89-a8a7-f1edfe695181
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263899
-    prefix: '658622'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d12ea33f-bb5c-41a3-96ab-1cb6f6d25eb5
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263900
-    prefix: '658623'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 80b2ef6f-5170-4793-a94d-9af7e4268acf
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263901
-    prefix: '658624'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 28173804-dd08-4b7c-a121-ea6c29ddd064
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263902
-    prefix: '658625'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1e194e9d-246e-4b33-91be-4e46690c2df6
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263903
-    prefix: '658626'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f69b0cfd-ad6e-4181-8e65-3f90ddda69b1
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263904
-    prefix: '658627'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 15f032e3-9630-4897-b329-b86a729fcf6a
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263905
-    prefix: '658628'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d04ec902-a6e0-4cfc-a220-7e1fddd8e950
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263906
-    prefix: '658629'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 35270b38-1e68-46c6-9e3e-1e5572772ddf
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263909
-    prefix: '658630'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b11284ad-caf1-4119-b5c5-d2538670cc10
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263910
-    prefix: '658631'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7aaee96c-fda1-4a15-a2d2-b8f4542c4677
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263911
-    prefix: '658632'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 98d47108-efdd-4c19-8628-1bdaa54a3ac5
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263912
-    prefix: '658633'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 98f39d8c-6e42-4ce4-abb2-8f24d44a6b26
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263913
-    prefix: '658634'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a598e4df-5021-4997-9286-409212d2c505
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263914
-    prefix: '658635'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 00a39627-8f15-4ca5-a8e2-5627e3eb73e2
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263915
-    prefix: '658636'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 66d9fd11-cc19-418a-89cf-07793b68875e
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263916
-    prefix: '658637'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2bc09d3f-154d-4c26-a04a-bbf19a33cf22
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263917
-    prefix: '658638'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 162e710d-24d0-4b1f-967a-802e344af42c
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263918
-    prefix: '658639'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 358a0540-a773-4d43-a15f-e26c9eefcc9b
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263922
-    prefix: '658640'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a2d66ab4-c6ec-46f1-9bd8-4ab4cfb68780
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263923
-    prefix: '658641'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5a89f116-3539-462e-9a26-c0c4caf35f44
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263924
-    prefix: '658642'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d2186cb8-cc62-410c-9c95-38d5e65f5d72
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263925
-    prefix: '658643'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 58d6cf62-4e5c-46f1-a637-80d4f3c9fc33
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263926
-    prefix: '658644'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b51adefa-1380-40ab-8f6b-98543d1db9ff
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263927
-    prefix: '658645'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f9bc994b-0d6d-45b8-becc-c8938ceea345
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263928
-    prefix: '658646'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c21223ea-9a28-409f-a58d-d54e65c2f88a
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263929
-    prefix: '658647'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 916b2828-b06f-492c-b952-506ea71735f5
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263930
-    prefix: '658648'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3be3acdc-c75c-42c9-8271-53370a20cf1b
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263931
-    prefix: '658649'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a878b618-81db-4a81-8cc1-bdbefd93fa1c
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263935
-    prefix: '658650'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f6024531-1bbc-44a6-ba09-3d90d894f56c
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263937
-    prefix: '658651'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e96b3127-782e-4aca-8c71-ab117b56db8e
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263938
-    prefix: '658652'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 20e387a6-5b69-478e-a646-bbd68a6a6cfa
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263939
-    prefix: '658653'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 118ad22e-b2a2-4152-8393-ecbd35b0c749
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263940
-    prefix: '658654'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bc091cc5-ad42-4599-8126-0e8a76463b60
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263941
-    prefix: '658655'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8e93947c-569c-49ac-ac53-a27ca1c2a49b
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263942
-    prefix: '658656'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 961c3e18-5c8c-43d7-84c7-2627d74936eb
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263943
-    prefix: '658657'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a4e52a50-3119-4e2e-8704-6ca83bdd9ed3
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263944
-    prefix: '658658'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4fca4d6e-6482-4a64-9670-d9a07bf7ff94
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263945
-    prefix: '658659'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5014cdde-4fd1-4210-acad-37cf32b4ed47
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263948
-    prefix: '658660'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fb4b6b96-2235-4a45-b421-973be4cad809
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263949
-    prefix: '658661'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1da5e6f8-609d-4aef-8f23-de160d37cf53
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263950
-    prefix: '658662'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: eaa21c1d-b9cb-4a5d-b185-09f7114a9734
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263951
-    prefix: '658663'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4c9fe6a1-8331-4a88-a208-7393e5fecbd3
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263952
-    prefix: '658664'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7a6cd108-c8fc-4375-87f9-ded8b0ead87f
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263953
-    prefix: '658665'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6f276177-c399-4453-ad01-34574a1cb09f
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263954
-    prefix: '658666'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f65bb81b-d5c1-4d22-9ab8-2d378f9b689b
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263955
-    prefix: '658667'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 77bc0ab1-406d-4ea6-9d88-68ff029ae410
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263956
-    prefix: '658668'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: df36e37c-5734-4d00-a250-08b1e1c5a00f
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263957
-    prefix: '658669'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ccbbaaa8-28f2-46b6-b806-a74161888cbc
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263960
-    prefix: '65867'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 893c1482-a273-45cf-869e-014c2b3adc09
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263969
-    prefix: '658680'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b6e432bd-1f3c-4b51-bad3-424b92d6b742
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263970
-    prefix: '658681'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f1fdcde9-e008-43cb-b93d-fc8dd8916bf3
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263971
-    prefix: '658682'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8625e6c8-d509-4aec-863b-e33006d4009b
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263972
-    prefix: '658683'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 703d41a3-e246-41ed-81f5-4d4104a07d77
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263973
-    prefix: '658684'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8de659c8-92e2-47ec-a839-9cd5133d1a16
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263975
-    prefix: '658685'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b36361df-09e4-4e33-8adf-d923ce5578b0
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263976
-    prefix: '658686'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 843d402c-40e4-4c05-b65a-7005ef0ba64a
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263977
-    prefix: '658687'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 89c48178-ec47-47a1-b957-466022639915
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263978
-    prefix: '658688'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f9dd8ac8-70da-4384-ba0b-b2a010d0d82c
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263979
-    prefix: '658689'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ccb1c70a-01a8-46e4-b341-9f909e457810
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263984
-    prefix: '658690'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7bed5c0c-983d-42eb-b2cc-2a6503e9d5f3
-    country_id: *sg
-    network_id: *sg_starhub_mobile
-  - id: 263985
-    prefix: '658691'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f0a9bfa4-0b4a-48b8-96e3-7c8c45572702
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263986
-    prefix: '658692'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 42f1c763-e025-4d01-b545-b84cfd0ee9f6
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263987
-    prefix: '658693'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5f7e3192-3e9e-4af9-bb3d-87493e500ba6
-    country_id: *sg
-    network_id: *sg_m1_mobile
-  - id: 263988
-    prefix: '658694'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b87a870e-ebf8-4939-9942-9b38c1f45fe9
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263989
-    prefix: '658695'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2961a51c-7e7e-422b-b40e-12b2a5d5a100
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263990
-    prefix: '658696'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cf6a1e16-31c8-426b-9672-58c963ac86e4
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263991
-    prefix: '658697'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 488b72d3-9a67-481c-a656-d0bfe2268480
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263992
-    prefix: '658698'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 21be2a5a-f91c-4910-a5e2-68600cf713c6
-    country_id: *sg
-    network_id: *sg_singtel_mobile
-  - id: 263993
-    prefix: '658699'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1cf92dfb-6b1b-43df-9f38-187d14598700
-    country_id: *sg
-    network_id: *sg_m1_mobile
   - id: 264016
     prefix: '659334'
     number_min_length: 10
@@ -5280,18 +5081,220 @@ network_prefixes:
     uuid: 671bb4ba-3521-4e08-bd89-2f24002f7ab5
     country_id: *sg
     network_id: *sg_m1_mobile
-# Fixed Prefixes
-  - id: 245423
-    prefix: '656'
+  - id: 257982
+    prefix: '659800'
     number_min_length: 10
     number_max_length: 10
-    uuid: eedbf9aa-b86a-4039-b00c-709313352d7d
+    uuid: 731fa165-03f5-4add-90fe-392c937ecb70
     country_id: *sg
-    network_id: *sg_pstn_and_voip_region
-  - id: 248921
-    prefix: '653'
+    network_id: *sg_starhub_mobile
+  - id: 258004
+    prefix: '659806'
     number_min_length: 10
     number_max_length: 10
-    uuid: e710e4f9-547d-4d39-91c0-b081047fc303
+    uuid: 3f9e49de-d39a-423c-bde6-91cb5ecab843
     country_id: *sg
-    network_id: *sg_user_centric_data_only_ucdo_service_and_voip_region
+    network_id: *sg_singtel_mobile
+  - id: 258006
+    prefix: '659807'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e69e7ff8-1fcd-4e2d-af2c-bf18298dd227
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258015
+    prefix: '659810'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a94b79b2-8fee-4382-818f-5a5ad6bdb009
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258018
+    prefix: '659811'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d41d2613-1eb7-4c60-9329-40f03f697190
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258021
+    prefix: '659812'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66ebd316-fe44-44d0-abf9-375e8ef6fa61
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258024
+    prefix: '659813'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 723fa36d-6a38-4da2-a84e-ce96483df754
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258026
+    prefix: '659814'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a2ed38bc-ae62-4895-909b-191800178b4d
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258028
+    prefix: '659815'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: eb0f042a-ab4f-4138-b612-7522c307950e
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258030
+    prefix: '659816'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a7e04c7b-cd13-47ed-bb3a-73c7bf72c613
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258032
+    prefix: '659817'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cab88723-61f0-4280-b7b0-6f5ebbb6e220
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258034
+    prefix: '659818'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8b6786b8-9df5-42c6-bb9f-6fd6e6544d43
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258036
+    prefix: '659819'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d671dc71-17e9-4d72-bd8f-570831de1986
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258041
+    prefix: '65982'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ba91c683-8831-4684-aec8-204444430e7d
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258074
+    prefix: '65983'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ba9993a5-9fd1-4635-8180-e31e71e7758c
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258099
+    prefix: '65984'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7519dfee-8dfb-48f3-b8f2-b48e1767d05c
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 258114
+    prefix: '65985'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c80de9c8-eb4e-4a1c-865f-4b9475a3d79f
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258129
+    prefix: '65986'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 545c93a5-8848-443c-87aa-fb9cf2b511a3
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258134
+    prefix: '65987'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4cef29c3-c45b-4d33-8f19-567fe17ab85c
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 258143
+    prefix: '659880'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ec2c8e3-0634-4c51-b3bc-c00567f84b11
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258144
+    prefix: '659881'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5acb07db-e763-47dc-8f73-528a8b0aced4
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258145
+    prefix: '659882'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fb151728-6dfb-4802-bc20-c50d25bd7064
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258146
+    prefix: '659883'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 269cf8aa-c9cc-4eb9-8349-ff6e8d38022c
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258147
+    prefix: '659884'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5c192380-e533-4a42-ade6-4dcdba468f21
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258148
+    prefix: '659885'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 07c0e9b1-7385-4d14-8f3f-3bc7ad4e640c
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258149
+    prefix: '659886'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fb48c83e-7d00-4bbe-b841-581f02e7398a
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258150
+    prefix: '659887'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cffb8900-bb99-4389-b667-7e87b1a576c5
+    country_id: *sg
+    network_id: *sg_starhub_mobile
+  - id: 258151
+    prefix: '659888'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8122edd5-8fff-4510-8cab-88917216a2e6
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258153
+    prefix: '659889'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7ac952b3-f822-48e8-a466-574bfaa2ae9b
+    country_id: *sg
+    network_id: *sg_m1_mobile
+  - id: 258157
+    prefix: '65989'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 027438b3-30fe-4be9-8774-d342e378ea81
+    country_id: *sg
+    network_id: *sg_singtel_mobile
+  - id: 258196
+    prefix: '6599'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: ca629085-c073-4301-a8ca-44bf54f7882c
+    country_id: *sg
+    network_id: *sg_emergency_services

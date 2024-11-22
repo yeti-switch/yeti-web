@@ -10,38 +10,37 @@ networks:
     name: GD Special Services
     uuid: 6f3a270d-e0db-495d-8fda-0476ec6a68d2
     type_id: 13
-  - id: &gd_audiotext 38210
-    name: GD Audiotext
-    uuid: 7c74bbcb-b540-4db4-8b75-6438f795c51e
-    type_id: 13
-# Mobile Networks
   - id: &gd_spice_mobile_mobile 38178
     name: GD Spice Mobile Mobile
     uuid: 54ddd9f2-6ed9-4748-93c2-31176a40e97f
     type_id: 3
+# Mobile Networks
   - id: &gd_flow_mobile 38179
     name: GD Flow Mobile
     uuid: b1105241-5e31-4517-ac8c-c33faf5376d9
     type_id: 3
+  - id: &gd_flow_paging 38180
+    name: GD Flow Paging
+    uuid: c30cb3b8-9634-4361-a006-11a865f3bd4e
+    type_id: 12
   - id: &gd_digicel_mobile 38182
     name: GD Digicel Mobile
     uuid: 206273dd-223c-4a3f-80bb-bbceeee70aa3
     type_id: 3
 # Paging Networks
-  - id: &gd_flow_paging 38180
-    name: GD Flow Paging
-    uuid: c30cb3b8-9634-4361-a006-11a865f3bd4e
-    type_id: 12
+  - id: &gd_audiotext 38210
+    name: GD Audiotext
+    uuid: 7c74bbcb-b540-4db4-8b75-6438f795c51e
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
-  - id: 396994
-    prefix: '1473'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: 66c8bdd2-bd38-4188-b1be-27975ede8053
-    country_id: *gd
-    network_id: null
 # Fixed Prefixes
+  - id: 516477
+    prefix: '1473'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: 8f3556df-08ac-44df-aa8b-f5e51681a2a4
+    country_id: *gd
+    network_id: *gd_fixed
   - id: 397190
     prefix: '1473230'
     number_min_length: 11
@@ -63,84 +62,6 @@ network_prefixes:
     uuid: 5deb1480-9ed6-447e-b815-801b02d73a77
     country_id: *gd
     network_id: *gd_fixed
-  - id: 397368
-    prefix: '1473435'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0b0540a0-232f-4465-8ea5-647d5534e349
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397369
-    prefix: '1473436'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: db08e2cf-e6af-4c9a-bd9e-478162eb9e66
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397370
-    prefix: '1473437'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 67a5e9dc-115c-4f37-ab36-d925bb0a0dfb
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397371
-    prefix: '1473438'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7526a0c7-a11b-49d0-82fb-d67720d0b475
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397372
-    prefix: '1473439'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ed351afc-71fa-4a8c-aed5-2b9263e25ed4
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397374
-    prefix: '1473440'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 07df0585-3222-42cd-b442-061362eebb44
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397375
-    prefix: '1473441'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a2300f3-2d65-4b67-81b2-b05a6d4dea02
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397376
-    prefix: '1473442'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e1118852-d22c-4fab-84b0-036f8025efb2
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397377
-    prefix: '1473443'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8feab104-2016-45cc-b28e-23e3f339ebf6
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397378
-    prefix: '1473444'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d0ffba14-0c44-441c-85f2-29df557ad1c3
-    country_id: *gd
-    network_id: *gd_fixed
-  - id: 397463
-    prefix: '1473800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 395b0607-1318-4dd1-b7c5-f7ce140d4309
-    country_id: *gd
-    network_id: *gd_fixed
-# Supplementary services Prefixes
   - id: 397243
     prefix: '1473269'
     number_min_length: 11
@@ -169,105 +90,6 @@ network_prefixes:
     uuid: 3483faaa-37f6-4690-ac22-3dfff4f55a1b
     country_id: *gd
     network_id: *gd_special_services
-  - id: 397379
-    prefix: '1473449'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a0197d6e-9191-4144-ad53-b0b4b82bf4b6
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397381
-    prefix: '1473455'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3168ca08-4336-4c3e-bea0-e0312323ac0f
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397382
-    prefix: '1473456'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7c49746f-994d-46cb-88e1-3c044fef9aba
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397383
-    prefix: '1473457'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6cf5f1d0-a436-43db-a2aa-573590785b33
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397385
-    prefix: '1473459'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5452707d-fe1f-42b4-850a-ee74490e1431
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397388
-    prefix: '1473468'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c72ef019-0057-45f2-be75-88faedee6732
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397390
-    prefix: '1473473'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3ecd8600-19a1-4a3b-b264-89dd4f94db80
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397392
-    prefix: '1473490'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ec2e39b1-34a2-403a-82a2-ec5dc4e3b224
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397423
-    prefix: '1473636'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b7da220f-1d4f-4a71-8807-b18119a280e3
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397424
-    prefix: '1473638'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5755718b-cdfa-4129-bf0b-6633616b53b1
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397460
-    prefix: '1473758'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fdb5a0bc-641b-4c62-9ebe-7d038044829e
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397462
-    prefix: '1473784'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d5031006-cd16-4e05-a6eb-32b1e704d4c0
-    country_id: *gd
-    network_id: *gd_special_services
-  - id: 397464
-    prefix: '1473901'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac6fab29-bc4c-4611-b7e8-eb179116a749
-    country_id: *gd
-    network_id: *gd_audiotext
-  - id: 397466
-    prefix: '1473938'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b3aaab4-f7c4-45cf-b77d-99b21e21fd8f
-    country_id: *gd
-    network_id: *gd_special_services
-# Mobile Prefixes
   - id: 397349
     prefix: '1473402'
     number_min_length: 11
@@ -310,6 +132,14 @@ network_prefixes:
     uuid: c1fbca9b-5be8-43b1-8e8b-466b484ff3db
     country_id: *gd
     network_id: *gd_flow_mobile
+  - id: 397355
+    prefix: '1473408'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d56ec3d3-d480-4de9-908e-86e50a8e05ff
+    country_id: *gd
+    network_id: *gd_flow_paging
+# Supplementary services Prefixes
   - id: 397356
     prefix: '1473409'
     number_min_length: 11
@@ -373,6 +203,105 @@ network_prefixes:
     uuid: c288b6f2-850c-4831-a431-9bcba657a116
     country_id: *gd
     network_id: *gd_digicel_mobile
+  - id: 397368
+    prefix: '1473435'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b0540a0-232f-4465-8ea5-647d5534e349
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397369
+    prefix: '1473436'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db08e2cf-e6af-4c9a-bd9e-478162eb9e66
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397370
+    prefix: '1473437'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 67a5e9dc-115c-4f37-ab36-d925bb0a0dfb
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397371
+    prefix: '1473438'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7526a0c7-a11b-49d0-82fb-d67720d0b475
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397372
+    prefix: '1473439'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ed351afc-71fa-4a8c-aed5-2b9263e25ed4
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397374
+    prefix: '1473440'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 07df0585-3222-42cd-b442-061362eebb44
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397375
+    prefix: '1473441'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a2300f3-2d65-4b67-81b2-b05a6d4dea02
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397376
+    prefix: '1473442'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1118852-d22c-4fab-84b0-036f8025efb2
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397377
+    prefix: '1473443'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8feab104-2016-45cc-b28e-23e3f339ebf6
+    country_id: *gd
+    network_id: *gd_fixed
+# Mobile Prefixes
+  - id: 397378
+    prefix: '1473444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d0ffba14-0c44-441c-85f2-29df557ad1c3
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397379
+    prefix: '1473449'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a0197d6e-9191-4144-ad53-b0b4b82bf4b6
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397381
+    prefix: '1473455'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3168ca08-4336-4c3e-bea0-e0312323ac0f
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397382
+    prefix: '1473456'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7c49746f-994d-46cb-88e1-3c044fef9aba
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397383
+    prefix: '1473457'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6cf5f1d0-a436-43db-a2aa-573590785b33
+    country_id: *gd
+    network_id: *gd_special_services
   - id: 397384
     prefix: '1473458'
     number_min_length: 11
@@ -380,6 +309,34 @@ network_prefixes:
     uuid: 887c74b3-a285-4f60-89fb-e005fbd1d28d
     country_id: *gd
     network_id: *gd_flow_mobile
+  - id: 397385
+    prefix: '1473459'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5452707d-fe1f-42b4-850a-ee74490e1431
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397388
+    prefix: '1473468'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c72ef019-0057-45f2-be75-88faedee6732
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397390
+    prefix: '1473473'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3ecd8600-19a1-4a3b-b264-89dd4f94db80
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397392
+    prefix: '1473490'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ec2e39b1-34a2-403a-82a2-ec5dc4e3b224
+    country_id: *gd
+    network_id: *gd_special_services
   - id: 397395
     prefix: '1473520'
     number_min_length: 11
@@ -436,11 +393,53 @@ network_prefixes:
     uuid: 08974e75-6c29-43fc-a69e-ac935d13b98b
     country_id: *gd
     network_id: *gd_digicel_mobile
-# Paging Prefixes
-  - id: 397355
-    prefix: '1473408'
+  - id: 397423
+    prefix: '1473636'
     number_min_length: 11
     number_max_length: 11
-    uuid: d56ec3d3-d480-4de9-908e-86e50a8e05ff
+    uuid: b7da220f-1d4f-4a71-8807-b18119a280e3
     country_id: *gd
-    network_id: *gd_flow_paging
+    network_id: *gd_special_services
+  - id: 397424
+    prefix: '1473638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5755718b-cdfa-4129-bf0b-6633616b53b1
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397460
+    prefix: '1473758'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fdb5a0bc-641b-4c62-9ebe-7d038044829e
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397462
+    prefix: '1473784'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d5031006-cd16-4e05-a6eb-32b1e704d4c0
+    country_id: *gd
+    network_id: *gd_special_services
+  - id: 397463
+    prefix: '1473800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 395b0607-1318-4dd1-b7c5-f7ce140d4309
+    country_id: *gd
+    network_id: *gd_fixed
+  - id: 397464
+    prefix: '1473901'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac6fab29-bc4c-4611-b7e8-eb179116a749
+    country_id: *gd
+    network_id: *gd_audiotext
+# Paging Prefixes
+  - id: 397466
+    prefix: '1473938'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b3aaab4-f7c4-45cf-b77d-99b21e21fd8f
+    country_id: *gd
+    network_id: *gd_special_services

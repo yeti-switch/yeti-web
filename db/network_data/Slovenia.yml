@@ -1,35 +1,10 @@
 country_id: &si 193
 networks:
-# Fixed Networks
+# Mobile Networks
   - id: &si_nova_gorica_koper_postojna_region 4617
     name: SI Nova Gorica Koper Postojna Region
     uuid: d5838300-649f-4b60-84b1-63c71b57b488
     type_id: 2
-  - id: &si_voip_region 8963
-    name: SI Voip Region
-    uuid: d46db0b3-5d5d-4f8a-956a-0462687f2cfa
-    type_id: 2
-  - id: &si_novo_mesto_krsko_region 14385
-    name: SI Novo Mesto Krsko Region
-    uuid: c5b09258-1e33-48ec-962e-b18ae054c90d
-    type_id: 2
-  - id: &si_ljubljana_region 24796
-    name: SI Ljubljana Region
-    uuid: f015ff85-dd72-4fca-8c87-ed49fff296da
-    type_id: 2
-  - id: &si_maribor_ravne_na_koroskem_murska_sobota_region 25851
-    name: SI Maribor Ravne Na Koroskem Murska Sobota Region
-    uuid: ac4d5181-ce02-443c-b4a5-8dea7039c738
-    type_id: 2
-  - id: &si_celje_trbovlje_region 31295
-    name: SI Celje Trbovlje Region
-    uuid: 569ad063-fcf3-44f0-8ce7-444d9f12baad
-    type_id: 2
-  - id: &si_kranj_region 34266
-    name: SI Kranj Region
-    uuid: ce253ff0-7e9d-40d1-895b-937b5fa4d4ee
-    type_id: 2
-# Mobile Networks
   - id: &si_ipko_mobile 5030
     name: SI Ipko Mobile
     uuid: a6f739e5-fe65-44a6-877d-089cc57e07f1
@@ -38,6 +13,10 @@ networks:
     name: SI Mobitel Mobile
     uuid: 608a0235-19a0-4ded-86ab-cf34ff6508d0
     type_id: 3
+  - id: &si_voip_region 8963
+    name: SI Voip Region
+    uuid: d46db0b3-5d5d-4f8a-956a-0462687f2cfa
+    type_id: 2
   - id: &si_t_2_mobile 12731
     name: SI T 2 Mobile
     uuid: 9c5078ba-9710-46c9-a069-6ce080234125
@@ -74,19 +53,15 @@ networks:
     name: SI Hot Mobil Mobile
     uuid: 4473c3ac-714e-44cd-8ac7-b7fcf3f60c5d
     type_id: 3
+  - id: &si_novo_mesto_krsko_region 14385
+    name: SI Novo Mesto Krsko Region
+    uuid: c5b09258-1e33-48ec-962e-b18ae054c90d
+    type_id: 2
+# Fixed Networks
   - id: &si_telemach_mobil_mobile 14450
     name: SI Telemach Mobil Mobile
     uuid: 65fc65e5-6292-45c9-b1b1-e4d9f42c305c
     type_id: 3
-  - id: &si_d3_mobile_mobile 36598
-    name: SI D3 Mobile Mobile
-    uuid: 6cd9cee5-5f47-4f36-9481-9002a49d2af6
-    type_id: 3
-  - id: &si_elektro_gorenjska_mobile 42622
-    name: SI Elektro Gorenjska Mobile
-    uuid: c5fa094a-de6d-41d1-9ca0-5be02b680c4d
-    type_id: 3
-# Supplementary services Networks
   - id: &si_freephone_services 19844
     name: SI Freephone Services
     uuid: 09bc3f21-7700-4f4c-b25d-bcd39e055309
@@ -103,6 +78,27 @@ networks:
     name: SI Number Portability Routing
     uuid: 25aa9d4a-cd37-4f37-976c-cc8ab3a255bc
     type_id: 13
+  - id: &si_ljubljana_region 24796
+    name: SI Ljubljana Region
+    uuid: f015ff85-dd72-4fca-8c87-ed49fff296da
+    type_id: 2
+  - id: &si_maribor_ravne_na_koroskem_murska_sobota_region 25851
+    name: SI Maribor Ravne Na Koroskem Murska Sobota Region
+    uuid: ac4d5181-ce02-443c-b4a5-8dea7039c738
+    type_id: 2
+  - id: &si_celje_trbovlje_region 31295
+    name: SI Celje Trbovlje Region
+    uuid: 569ad063-fcf3-44f0-8ce7-444d9f12baad
+    type_id: 2
+# Supplementary services Networks
+  - id: &si_kranj_region 34266
+    name: SI Kranj Region
+    uuid: ce253ff0-7e9d-40d1-895b-937b5fa4d4ee
+    type_id: 2
+  - id: &si_d3_mobile_mobile 36598
+    name: SI D3 Mobile Mobile
+    uuid: 6cd9cee5-5f47-4f36-9481-9002a49d2af6
+    type_id: 3
   - id: &si_special_networks_access_services 41566
     name: SI Special Networks Access Services
     uuid: 235e87f3-3bec-4fc7-86f4-ba66730e4c51
@@ -115,29 +111,23 @@ networks:
     name: SI Machine To Machine M2M _ Internet Of Things Iot Services
     uuid: bb0bfac9-166a-4a32-9318-e7808f7809f7
     type_id: 13
+  - id: &si_elektro_gorenjska_mobile 42622
+    name: SI Elektro Gorenjska Mobile
+    uuid: c5fa094a-de6d-41d1-9ca0-5be02b680c4d
+    type_id: 3
+  - id: &si_fixed 43467
+    name: SI Fixed
+    uuid: 293be1d9-d9a9-404d-818a-9ed8bf90e99d
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 54585
-    prefix: '3865'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18c6ca79-6788-425b-b9b0-9cba51b878b6
+# Mobile Prefixes
+  - id: 242108
+    prefix: '386'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 134cb2ab-2cff-474f-97a3-6a7247601782
     country_id: *si
-    network_id: *si_nova_gorica_koper_postojna_region
-  - id: 84929
-    prefix: '38659'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f26998ca-1777-42fc-a7d3-6bfe19a0e23f
-    country_id: *si
-    network_id: *si_voip_region
-  - id: 149339
-    prefix: '3867'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 757aeaa9-0d03-4920-ad1f-90e3c84d8b04
-    country_id: *si
-    network_id: *si_novo_mesto_krsko_region
+    network_id: *si_fixed
   - id: 258570
     prefix: '3861'
     number_min_length: 11
@@ -145,6 +135,20 @@ network_prefixes:
     uuid: 19a88708-77d9-4cdc-8b48-46e41a0e1a24
     country_id: *si
     network_id: *si_ljubljana_region
+  - id: 242500
+    prefix: '3861'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 29cad125-b211-4f7c-b44b-fc1abab69d25
+    country_id: *si
+    network_id: *si_special_services
+  - id: 242690
+    prefix: '386116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: e0d5860a-3875-4a0c-a09b-30a8641d6c3c
+    country_id: *si
+    network_id: *si_social_value_services
   - id: 261200
     prefix: '3862'
     number_min_length: 11
@@ -159,6 +163,20 @@ network_prefixes:
     uuid: 40b5e17f-5d64-436c-8405-ef7e66818f90
     country_id: *si
     network_id: *si_celje_trbovlje_region
+  - id: 309477
+    prefix: '38630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 83d99253-3d1e-4246-91f1-9c98149fa331
+    country_id: *si
+    network_id: *si_a1_mobile
+  - id: 321183
+    prefix: '38631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 32c70097-c8b1-4e9c-90f2-4b49e9c5a368
+    country_id: *si
+    network_id: *si_mobitel_mobile
   - id: 349450
     prefix: '3864'
     number_min_length: 11
@@ -166,49 +184,48 @@ network_prefixes:
     uuid: 533f69e5-f82a-4405-b5b0-4744f5ee064e
     country_id: *si
     network_id: *si_kranj_region
-  - id: 409924
-    prefix: '386822'
+  - id: 349897
+    prefix: '38640'
     number_min_length: 11
     number_max_length: 11
-    uuid: 5259fe09-4bf1-4505-a2b4-d87c015ad59e
+    uuid: 28adc894-324b-4b36-83db-1ca4ba89b22d
     country_id: *si
-    network_id: *si_voip_region
-  - id: 417997
-    prefix: '386818'
+    network_id: *si_a1_mobile
+  - id: 362539
+    prefix: '38641'
     number_min_length: 11
     number_max_length: 11
-    uuid: 530ac980-734d-4423-b5f2-bf17ae732fc2
+    uuid: 6c729146-c8e7-4e63-9f67-09de92101b55
     country_id: *si
-    network_id: *si_voip_region
-  - id: 418778
-    prefix: '38681'
+    network_id: *si_mobitel_mobile
+  - id: 367948
+    prefix: '38643'
     number_min_length: 11
     number_max_length: 11
-    uuid: 59a1c760-710c-4bf3-8499-ef0384f94fc6
+    uuid: da6f52f8-d2d3-4070-aa0c-71721668b54d
     country_id: *si
-    network_id: *si_voip_region
-  - id: 421394
-    prefix: '386828'
+    network_id: *si_ipko_mobile
+  - id: 367961
+    prefix: '386432'
     number_min_length: 11
     number_max_length: 11
-    uuid: 897e7d37-3725-42eb-923e-e16e4c5bb915
+    uuid: e4946529-1651-4d81-8796-b64c625b43a4
     country_id: *si
-    network_id: *si_voip_region
-  - id: 422114
-    prefix: '38682'
+    network_id: *si_d3_mobile_mobile
+  - id: 367976
+    prefix: '386433'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9ac4483d-fff1-470b-9ad1-ba0c7085b067
+    uuid: e813b3d9-d930-4b61-a0cf-f5ddbefd92cc
     country_id: *si
-    network_id: *si_voip_region
-  - id: 433205
-    prefix: '38683'
+    network_id: *si_d3_mobile_mobile
+  - id: 367979
+    prefix: '386434'
     number_min_length: 11
     number_max_length: 11
-    uuid: e9c73e00-5d67-477d-8d05-6c5b9ec9f4ac
+    uuid: bddc27ea-0718-4d08-b89c-0992400fc548
     country_id: *si
-    network_id: *si_voip_region
-# Mobile Prefixes
+    network_id: *si_d3_mobile_mobile
   - id: 58234
     prefix: '38649'
     number_min_length: 11
@@ -216,6 +233,13 @@ network_prefixes:
     uuid: 402d659a-9e39-468c-a378-49f15a502594
     country_id: *si
     network_id: *si_ipko_mobile
+  - id: 54585
+    prefix: '3865'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 18c6ca79-6788-425b-b9b0-9cba51b878b6
+    country_id: *si
+    network_id: *si_nova_gorica_koper_postojna_region
   - id: 62617
     prefix: '38651'
     number_min_length: 11
@@ -223,6 +247,13 @@ network_prefixes:
     uuid: e383f0a2-df87-4d97-8952-ba2a66471e70
     country_id: *si
     network_id: *si_mobitel_mobile
+  - id: 84929
+    prefix: '38659'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f26998ca-1777-42fc-a7d3-6bfe19a0e23f
+    country_id: *si
+    network_id: *si_voip_region
   - id: 122504
     prefix: '3866406'
     number_min_length: 11
@@ -244,6 +275,13 @@ network_prefixes:
     uuid: 54e1569d-0692-448a-95bc-b0d852bab9b6
     country_id: *si
     network_id: *si_t_2_mobile
+  - id: 136665
+    prefix: '386651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b7828eb9-88e5-4ccf-bb96-e0c34c2d4fec
+    country_id: *si
+    network_id: *si_slovenske_zeleznice_mobile
   - id: 127177
     prefix: '3866555'
     number_min_length: 11
@@ -258,13 +296,6 @@ network_prefixes:
     uuid: 1b27a155-b055-40aa-acf5-1001673a9f74
     country_id: *si
     network_id: *si_me2_mobile
-  - id: 136665
-    prefix: '386651'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b7828eb9-88e5-4ccf-bb96-e0c34c2d4fec
-    country_id: *si
-    network_id: *si_slovenske_zeleznice_mobile
   - id: 137617
     prefix: '3866560'
     number_min_length: 11
@@ -321,6 +352,7 @@ network_prefixes:
     uuid: 7f57939f-0c1a-4276-8356-eb5bf5ce3000
     country_id: *si
     network_id: *si_compatel_mobile
+# Fixed Prefixes
   - id: 149036
     prefix: '3866919'
     number_min_length: 11
@@ -328,20 +360,6 @@ network_prefixes:
     uuid: 748e33d7-370a-460a-8522-a18e84198029
     country_id: *si
     network_id: *si_mobile_one_mobile
-  - id: 149228
-    prefix: '386699'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 31b7eb13-cb64-49a8-b7eb-1bf4cae5b558
-    country_id: *si
-    network_id: *si_hot_mobil_mobile
-  - id: 150242
-    prefix: '38670'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7944bf40-2cae-48cc-a71c-e0cd88dd0f9f
-    country_id: *si
-    network_id: *si_telemach_mobil_mobile
   - id: 153114
     prefix: '386695'
     number_min_length: 11
@@ -370,6 +388,27 @@ network_prefixes:
     uuid: c1ffe4cd-a7c2-45e8-afd2-418ed7ec0b98
     country_id: *si
     network_id: *si_hot_mobil_mobile
+  - id: 149228
+    prefix: '386699'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 31b7eb13-cb64-49a8-b7eb-1bf4cae5b558
+    country_id: *si
+    network_id: *si_hot_mobil_mobile
+  - id: 149339
+    prefix: '3867'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 757aeaa9-0d03-4920-ad1f-90e3c84d8b04
+    country_id: *si
+    network_id: *si_novo_mesto_krsko_region
+  - id: 150242
+    prefix: '38670'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7944bf40-2cae-48cc-a71c-e0cd88dd0f9f
+    country_id: *si
+    network_id: *si_telemach_mobil_mobile
   - id: 164004
     prefix: '38671'
     number_min_length: 11
@@ -377,70 +416,6 @@ network_prefixes:
     uuid: 4f5e4a77-41c1-4943-bcf4-1777fd18e0a5
     country_id: *si
     network_id: *si_telemach_mobil_mobile
-  - id: 309477
-    prefix: '38630'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 83d99253-3d1e-4246-91f1-9c98149fa331
-    country_id: *si
-    network_id: *si_a1_mobile
-  - id: 321183
-    prefix: '38631'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 32c70097-c8b1-4e9c-90f2-4b49e9c5a368
-    country_id: *si
-    network_id: *si_mobitel_mobile
-  - id: 349897
-    prefix: '38640'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 28adc894-324b-4b36-83db-1ca4ba89b22d
-    country_id: *si
-    network_id: *si_a1_mobile
-  - id: 362539
-    prefix: '38641'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6c729146-c8e7-4e63-9f67-09de92101b55
-    country_id: *si
-    network_id: *si_mobitel_mobile
-  - id: 367948
-    prefix: '38643'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: da6f52f8-d2d3-4070-aa0c-71721668b54d
-    country_id: *si
-    network_id: *si_ipko_mobile
-  - id: 367961
-    prefix: '386432'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e4946529-1651-4d81-8796-b64c625b43a4
-    country_id: *si
-    network_id: *si_d3_mobile_mobile
-  - id: 367976
-    prefix: '386433'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e813b3d9-d930-4b61-a0cf-f5ddbefd92cc
-    country_id: *si
-    network_id: *si_d3_mobile_mobile
-  - id: 367979
-    prefix: '386434'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bddc27ea-0718-4d08-b89c-0992400fc548
-    country_id: *si
-    network_id: *si_d3_mobile_mobile
-  - id: 464704
-    prefix: '38691900000'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: fa3a2cad-6678-46e5-9043-cf0b65841c96
-    country_id: *si
-    network_id: *si_elektro_gorenjska_mobile
-# Supplementary services Prefixes
   - id: 207795
     prefix: '38680'
     number_min_length: 9
@@ -448,27 +423,49 @@ network_prefixes:
     uuid: b27dd25d-c4a4-4280-800a-304185c30a59
     country_id: *si
     network_id: *si_freephone_services
-  - id: 242500
-    prefix: '3861'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 29cad125-b211-4f7c-b44b-fc1abab69d25
+  - id: 418778
+    prefix: '38681'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 59a1c760-710c-4bf3-8499-ef0384f94fc6
     country_id: *si
-    network_id: *si_special_services
-  - id: 242690
-    prefix: '386116'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: e0d5860a-3875-4a0c-a09b-30a8641d6c3c
+    network_id: *si_voip_region
+  - id: 417997
+    prefix: '386818'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 530ac980-734d-4423-b5f2-bf17ae732fc2
     country_id: *si
-    network_id: *si_social_value_services
-  - id: 257974
-    prefix: '38698'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 449b8dac-80ad-4745-b92a-b1d38ac4445e
+    network_id: *si_voip_region
+  - id: 422114
+    prefix: '38682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ac4483d-fff1-470b-9ad1-ba0c7085b067
     country_id: *si
-    network_id: *si_number_portability_routing
+    network_id: *si_voip_region
+  - id: 409924
+    prefix: '386822'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5259fe09-4bf1-4505-a2b4-d87c015ad59e
+    country_id: *si
+    network_id: *si_voip_region
+# Supplementary services Prefixes
+  - id: 421394
+    prefix: '386828'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 897e7d37-3725-42eb-923e-e16e4c5bb915
+    country_id: *si
+    network_id: *si_voip_region
+  - id: 433205
+    prefix: '38683'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e9c73e00-5d67-477d-8d05-6c5b9ec9f4ac
+    country_id: *si
+    network_id: *si_voip_region
   - id: 443799
     prefix: '38688'
     number_min_length: 11
@@ -511,11 +508,17 @@ network_prefixes:
     uuid: e1d0b18d-ff34-404e-a24e-298809473d83
     country_id: *si
     network_id: *si_machine_to_machine_m2m___internet_of_things_iot_services
-# Country code Prefixes
-  - id: 242108
-    prefix: '386'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 134cb2ab-2cff-474f-97a3-6a7247601782
+  - id: 464704
+    prefix: '38691900000'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: fa3a2cad-6678-46e5-9043-cf0b65841c96
     country_id: *si
-    network_id: null
+    network_id: *si_elektro_gorenjska_mobile
+  - id: 257974
+    prefix: '38698'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 449b8dac-80ad-4745-b92a-b1d38ac4445e
+    country_id: *si
+    network_id: *si_number_portability_routing
