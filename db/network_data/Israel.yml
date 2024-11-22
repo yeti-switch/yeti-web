@@ -1,6 +1,6 @@
 country_id: &il 104
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &il_pelephone_mobile 4668
     name: IL Pelephone Mobile
     uuid: 475031be-9dba-491b-a44e-50da9b820e08
@@ -25,6 +25,7 @@ networks:
     name: IL Home Cellular Mobile
     uuid: 4bc08a7b-fe5e-4f14-82b7-cc76087cd311
     type_id: 3
+# Supplementary services Networks
   - id: &il_hot_mobile_mobile 7568
     name: IL Hot Mobile Mobile
     uuid: 96fa72e7-33f1-4d8b-a3bf-3f1182495b9a
@@ -61,6 +62,7 @@ networks:
     name: IL Cellact Mobile
     uuid: 38801313-8759-4ed8-b093-a6b577c015c0
     type_id: 3
+# Mobile Networks
   - id: &il_bynet_mobile 7973
     name: IL Bynet Mobile
     uuid: 1951963a-d54d-4cc2-be7e-5f887bacb438
@@ -81,7 +83,6 @@ networks:
     name: IL Golan Telecom Mobile
     uuid: d13f2928-b303-423b-885a-6094e6c0cf24
     type_id: 3
-# Fixed Networks
   - id: &il_fixed 19775
     name: IL Fixed
     uuid: b9c5c3f4-957d-4935-9a3d-59123c13eb70
@@ -90,23 +91,6 @@ networks:
     name: IL Hashfela And South Regions Region
     uuid: b82a098d-726b-4f67-8d5e-9ba1674e5cb7
     type_id: 2
-  - id: &il_jerusalem_region_region 25844
-    name: IL Jerusalem Region Region
-    uuid: 4ad85e80-5ec4-4476-8744-d5556a116953
-    type_id: 2
-  - id: &il_tel_aviv_region_region 31290
-    name: IL Tel Aviv Region Region
-    uuid: 9b679782-5b5a-4ef4-8571-6f797517514c
-    type_id: 2
-  - id: &il_haifa_and_north_regions_region 34262
-    name: IL Haifa And North Regions Region
-    uuid: 847089e8-61ca-46b7-b736-d10347583b1e
-    type_id: 2
-  - id: &il_hasharon_region_region 41578
-    name: IL Hasharon Region Region
-    uuid: 4207612c-75c5-4f06-a873-3be7c73645bf
-    type_id: 2
-# Supplementary services Networks
   - id: &il_special_services 21424
     name: IL Special Services
     uuid: 7f1f0424-1254-4095-8b27-96cd00901547
@@ -131,6 +115,10 @@ networks:
     name: IL Premium Rate Services
     uuid: 456582cc-ca84-4ad7-b9c7-ad1a11f11d4b
     type_id: 13
+  - id: &il_jerusalem_region_region 25844
+    name: IL Jerusalem Region Region
+    uuid: 4ad85e80-5ec4-4476-8744-d5556a116953
+    type_id: 2
   - id: &il_voice_mail 26325
     name: IL Voice Mail
     uuid: f6fdaa95-723b-4908-8cdb-0fd1bf974296
@@ -143,8 +131,140 @@ networks:
     name: IL Interactive Voice Mail
     uuid: 2a0782fb-39a4-4c15-b6c3-828ce3f6aa64
     type_id: 13
+  - id: &il_tel_aviv_region_region 31290
+    name: IL Tel Aviv Region Region
+    uuid: 9b679782-5b5a-4ef4-8571-6f797517514c
+    type_id: 2
+  - id: &il_haifa_and_north_regions_region 34262
+    name: IL Haifa And North Regions Region
+    uuid: 847089e8-61ca-46b7-b736-d10347583b1e
+    type_id: 2
+  - id: &il_hasharon_region_region 41578
+    name: IL Hasharon Region Region
+    uuid: 4207612c-75c5-4f06-a873-3be7c73645bf
+    type_id: 2
 network_prefixes:
-# Mobile Prefixes
+# Fixed Prefixes
+  - id: 242024
+    prefix: '972'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: d47d8da3-7e22-4ce5-9a50-06091552ed67
+    country_id: *il
+    network_id: *il_fixed
+  - id: 242421
+    prefix: '9721'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: ed8fe22b-83f9-4042-877d-34a4159c7677
+    country_id: *il
+    network_id: *il_special_services
+  - id: 259335
+    prefix: '9721200'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2422cda2-51c2-46eb-b617-c32ef0d55f41
+    country_id: *il
+    network_id: *il_televoting_services
+  - id: 259348
+    prefix: '9721212'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b0de1afd-6e8b-41da-b36b-8f7876121a8c
+    country_id: *il
+    network_id: *il_televoting_services
+  - id: 259415
+    prefix: '9721255'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 460b25aa-6c25-40dd-99f7-211f60b144ab
+    country_id: *il
+    network_id: *il_hospital_information_center
+  - id: 266222
+    prefix: '972151'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: fdc29d2d-1c40-4521-91ea-4f7ff96ef730
+    country_id: *il
+    network_id: *il_voice_mail
+  - id: 266285
+    prefix: '972153'
+    number_min_length: 14
+    number_max_length: 15
+    uuid: 982e8854-99d0-47d9-aa89-a959652a1646
+    country_id: *il
+    network_id: *il_fax_mail
+# Supplementary services Prefixes
+  - id: 266548
+    prefix: '9721599'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 6d3033cb-8714-4bb1-939e-3df64aec3bc4
+    country_id: *il
+    network_id: *il_interactive_voice_mail
+  - id: 260319
+    prefix: '9721700'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 08cc101b-dc16-4356-bdf6-0a17c62665d3
+    country_id: *il
+    network_id: *il_discounted_calls
+  - id: 260660
+    prefix: '9721800'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4e1a17cf-6a22-4b00-8776-f4d1ab655fa8
+    country_id: *il
+    network_id: *il_freephone_services
+  - id: 260666
+    prefix: '9721801'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 45aefdf8-296f-4c27-aac7-900bdf98c241
+    country_id: *il
+    network_id: *il_freephone_services
+  - id: 260673
+    prefix: '9721809'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5f6bca39-50dc-4213-907e-d51bceffcdf2
+    country_id: *il
+    network_id: *il_discounted_calls
+  - id: 261012
+    prefix: '972190'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4d722cb3-7622-4dde-821b-348747ab4bd8
+    country_id: *il
+    network_id: *il_premium_rate_services
+  - id: 261192
+    prefix: '9722'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 42a867ad-660d-49a5-af7d-2a81b319ca28
+    country_id: *il
+    network_id: *il_jerusalem_region_region
+  - id: 315870
+    prefix: '9723'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 92665bfd-ceb0-413f-9044-0ddbc31679ec
+    country_id: *il
+    network_id: *il_tel_aviv_region_region
+  - id: 349446
+    prefix: '9724'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8b3f0f7a-6536-41ae-9f93-8c84615b184e
+    country_id: *il
+    network_id: *il_haifa_and_north_regions_region
+  - id: 84932
+    prefix: '9725'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2713af02-1e4a-4c2f-8468-e8cb2c1b3413
+    country_id: *il
+    network_id: *il_mobile
   - id: 54922
     prefix: '97250'
     number_min_length: 12
@@ -159,6 +279,7 @@ network_prefixes:
     uuid: 1df7f1c2-aff9-40e6-b95b-0953870f3928
     country_id: *il
     network_id: *il_pelephone_mobile
+# Mobile Prefixes
   - id: 62604
     prefix: '97251'
     number_min_length: 12
@@ -180,6 +301,13 @@ network_prefixes:
     uuid: 0a3d0472-b253-4541-add3-8c841d04e7e5
     country_id: *il
     network_id: *il_cellcom_mobile
+  - id: 76543
+    prefix: '97253'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eba8240e-7379-4180-b2d8-e462c0a3381d
+    country_id: *il
+    network_id: *il_hot_mobile_mobile
   - id: 73197
     prefix: '97254'
     number_min_length: 12
@@ -194,6 +322,20 @@ network_prefixes:
     uuid: 16dc3ebf-3d1a-4c9c-878d-e3dbe908efd9
     country_id: *il
     network_id: *il_partner_mobile
+  - id: 78119
+    prefix: '97255'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0ca3b587-9c9a-442a-9109-19676c78c8fe
+    country_id: *il
+    network_id: *il_mobile
+  - id: 78140
+    prefix: '9725501'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e2910f1b-dabe-4daa-93f3-375c9e5e3dfa
+    country_id: *il
+    network_id: *il_beezz_mobile
   - id: 74766
     prefix: '9725519'
     number_min_length: 12
@@ -257,27 +399,27 @@ network_prefixes:
     uuid: 3985f8ba-7d1d-4c2e-aba0-8c4d7f899a7c
     country_id: *il
     network_id: *il_019_mobile_mobile
-  - id: 76543
-    prefix: '97253'
+  - id: 85779
+    prefix: '9725532'
     number_min_length: 12
     number_max_length: 12
-    uuid: eba8240e-7379-4180-b2d8-e462c0a3381d
+    uuid: 8db771ba-d076-4d6e-91f1-5e1a49a3a35b
     country_id: *il
-    network_id: *il_hot_mobile_mobile
-  - id: 78119
-    prefix: '97255'
+    network_id: *il_free_telecom_mobile
+  - id: 85830
+    prefix: '9725533'
     number_min_length: 12
     number_max_length: 12
-    uuid: 0ca3b587-9c9a-442a-9109-19676c78c8fe
+    uuid: 63149edc-bc7d-47ce-9710-44f7d7df3dcd
     country_id: *il
-    network_id: *il_mobile
-  - id: 78140
-    prefix: '9725501'
+    network_id: *il_free_telecom_mobile
+  - id: 86240
+    prefix: '9725543'
     number_min_length: 12
     number_max_length: 12
-    uuid: e2910f1b-dabe-4daa-93f3-375c9e5e3dfa
+    uuid: 0578cc91-db10-4655-84b3-f7aa0b373db1
     country_id: *il
-    network_id: *il_beezz_mobile
+    network_id: *il_maskyoo_mobile
   - id: 78254
     prefix: '9725544'
     number_min_length: 12
@@ -397,41 +539,6 @@ network_prefixes:
     uuid: bcb3f8e4-9cc7-40ed-863a-f25f8b255e03
     country_id: *il
     network_id: *il_bynet_mobile
-  - id: 84412
-    prefix: '97259'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 82fa7a1a-c786-414f-8ac1-bf9dd42b13a4
-    country_id: *il
-    network_id: *il_mobile
-  - id: 84932
-    prefix: '9725'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2713af02-1e4a-4c2f-8468-e8cb2c1b3413
-    country_id: *il
-    network_id: *il_mobile
-  - id: 85779
-    prefix: '9725532'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8db771ba-d076-4d6e-91f1-5e1a49a3a35b
-    country_id: *il
-    network_id: *il_free_telecom_mobile
-  - id: 85830
-    prefix: '9725533'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 63149edc-bc7d-47ce-9710-44f7d7df3dcd
-    country_id: *il
-    network_id: *il_free_telecom_mobile
-  - id: 86240
-    prefix: '9725543'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0578cc91-db10-4655-84b3-f7aa0b373db1
-    country_id: *il
-    network_id: *il_maskyoo_mobile
   - id: 86266
     prefix: '9725587'
     number_min_length: 12
@@ -530,7 +637,13 @@ network_prefixes:
     uuid: 27b9a59c-c2bd-4ba5-9ef2-a8896dea8d9f
     country_id: *il
     network_id: *il_golan_telecom_mobile
-# Fixed Prefixes
+  - id: 84412
+    prefix: '97259'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 82fa7a1a-c786-414f-8ac1-bf9dd42b13a4
+    country_id: *il
+    network_id: *il_mobile
   - id: 207501
     prefix: '9727'
     number_min_length: 12
@@ -545,27 +658,6 @@ network_prefixes:
     uuid: e1e75287-0f31-48b4-8353-1837034caeb0
     country_id: *il
     network_id: *il_hashfela_and_south_regions_region
-  - id: 261192
-    prefix: '9722'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 42a867ad-660d-49a5-af7d-2a81b319ca28
-    country_id: *il
-    network_id: *il_jerusalem_region_region
-  - id: 315870
-    prefix: '9723'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 92665bfd-ceb0-413f-9044-0ddbc31679ec
-    country_id: *il
-    network_id: *il_tel_aviv_region_region
-  - id: 349446
-    prefix: '9724'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8b3f0f7a-6536-41ae-9f93-8c84615b184e
-    country_id: *il
-    network_id: *il_haifa_and_north_regions_region
   - id: 444752
     prefix: '9729'
     number_min_length: 11
@@ -573,96 +665,3 @@ network_prefixes:
     uuid: 6822f75c-ce11-4116-96fe-909b6b0b6a10
     country_id: *il
     network_id: *il_hasharon_region_region
-# Country code Prefixes
-  - id: 242024
-    prefix: '972'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: d47d8da3-7e22-4ce5-9a50-06091552ed67
-    country_id: *il
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242421
-    prefix: '9721'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: ed8fe22b-83f9-4042-877d-34a4159c7677
-    country_id: *il
-    network_id: *il_special_services
-  - id: 259335
-    prefix: '9721200'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2422cda2-51c2-46eb-b617-c32ef0d55f41
-    country_id: *il
-    network_id: *il_televoting_services
-  - id: 259348
-    prefix: '9721212'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b0de1afd-6e8b-41da-b36b-8f7876121a8c
-    country_id: *il
-    network_id: *il_televoting_services
-  - id: 259415
-    prefix: '9721255'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 460b25aa-6c25-40dd-99f7-211f60b144ab
-    country_id: *il
-    network_id: *il_hospital_information_center
-  - id: 260319
-    prefix: '9721700'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 08cc101b-dc16-4356-bdf6-0a17c62665d3
-    country_id: *il
-    network_id: *il_discounted_calls
-  - id: 260660
-    prefix: '9721800'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4e1a17cf-6a22-4b00-8776-f4d1ab655fa8
-    country_id: *il
-    network_id: *il_freephone_services
-  - id: 260666
-    prefix: '9721801'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 45aefdf8-296f-4c27-aac7-900bdf98c241
-    country_id: *il
-    network_id: *il_freephone_services
-  - id: 260673
-    prefix: '9721809'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 5f6bca39-50dc-4213-907e-d51bceffcdf2
-    country_id: *il
-    network_id: *il_discounted_calls
-  - id: 261012
-    prefix: '972190'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4d722cb3-7622-4dde-821b-348747ab4bd8
-    country_id: *il
-    network_id: *il_premium_rate_services
-  - id: 266222
-    prefix: '972151'
-    number_min_length: 14
-    number_max_length: 15
-    uuid: fdc29d2d-1c40-4521-91ea-4f7ff96ef730
-    country_id: *il
-    network_id: *il_voice_mail
-  - id: 266285
-    prefix: '972153'
-    number_min_length: 14
-    number_max_length: 15
-    uuid: 982e8854-99d0-47d9-aa89-a959652a1646
-    country_id: *il
-    network_id: *il_fax_mail
-  - id: 266548
-    prefix: '9721599'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 6d3033cb-8714-4bb1-939e-3df64aec3bc4
-    country_id: *il
-    network_id: *il_interactive_voice_mail

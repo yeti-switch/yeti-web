@@ -1,6 +1,6 @@
 country_id: &km 48
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &km_special_services 21383
     name: KM Special Services
     uuid: 7c4ffae2-ddb7-4c91-9f9c-c32d432413f8
@@ -9,11 +9,6 @@ networks:
     name: KM Emergency Services
     uuid: ca6a7c3d-d8e0-4ce1-b43b-f315005c758c
     type_id: 13
-  - id: &km_value_added_services 24295
-    name: KM Value Added Services
-    uuid: 05525b61-3d5c-46a3-bdf9-68ee0322c532
-    type_id: 13
-# Mobile Networks
   - id: &km_telma_mobile 22121
     name: KM Telma Mobile
     uuid: f7c3fd0e-c732-47d0-93e4-431fb479c03e
@@ -22,7 +17,6 @@ networks:
     name: KM Huri Mobile
     uuid: 368454e6-f15b-4e8f-acf3-5e7ac406c920
     type_id: 3
-# Fixed Networks
   - id: &km_fixed 23565
     name: KM Fixed
     uuid: a6c8b944-535a-47cb-837c-7558de887e04
@@ -59,6 +53,7 @@ networks:
     name: KM Wanani Region
     uuid: b9c4c433-bc4c-4d24-9928-f4f84bc24d08
     type_id: 2
+# Supplementary services Networks
   - id: &km_moroni_region 24247
     name: KM Moroni Region
     uuid: e988a81e-7053-404b-b82c-cd71863fbf63
@@ -71,20 +66,24 @@ networks:
     name: KM Mitsamiouli Region
     uuid: 2f29e303-efc9-4c1d-8ffa-4b4be657d21c
     type_id: 2
+# Mobile Networks
   - id: &km_foumbouni_region 24255
     name: KM Foumbouni Region
     uuid: e32d482e-de0a-4edc-83f8-bf4719b46b27
     type_id: 2
+  - id: &km_value_added_services 24295
+    name: KM Value Added Services
+    uuid: 05525b61-3d5c-46a3-bdf9-68ee0322c532
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241974
     prefix: '269'
     number_min_length: 4
     number_max_length: 100
     uuid: 2456df39-111b-4435-8c63-81e888a85c14
     country_id: *km
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *km_fixed
   - id: 242378
     prefix: '2691'
     number_min_length: 6
@@ -99,28 +98,6 @@ network_prefixes:
     uuid: 2fa4d963-d667-4884-b5f8-fb19cc42709d
     country_id: *km
     network_id: *km_emergency_services
-  - id: 249565
-    prefix: '2695'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 60225cc5-b4eb-4a88-a4bc-d9086a076588
-    country_id: *km
-    network_id: *km_special_services
-  - id: 256669
-    prefix: '2698'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 491ac9bb-34fd-4163-8fb0-a97fdb2965b1
-    country_id: *km
-    network_id: *km_value_added_services
-# Mobile Prefixes
-  - id: 243925
-    prefix: '2694'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1282f209-6d68-4055-8a94-8ca58de8959d
-    country_id: *km
-    network_id: *km_telma_mobile
   - id: 248888
     prefix: '2693'
     number_min_length: 10
@@ -128,7 +105,20 @@ network_prefixes:
     uuid: 51a0871c-857f-43ef-8f3a-c035e35ee463
     country_id: *km
     network_id: *km_huri_mobile
-# Fixed Prefixes
+  - id: 243925
+    prefix: '2694'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1282f209-6d68-4055-8a94-8ca58de8959d
+    country_id: *km
+    network_id: *km_telma_mobile
+  - id: 249565
+    prefix: '2695'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 60225cc5-b4eb-4a88-a4bc-d9086a076588
+    country_id: *km
+    network_id: *km_special_services
   - id: 251730
     prefix: '26971'
     number_min_length: 10
@@ -311,6 +301,7 @@ network_prefixes:
     uuid: 66ff9fb1-751b-4b2a-9f80-7620420a0177
     country_id: *km
     network_id: *km_wanani_region
+# Supplementary services Prefixes
   - id: 255862
     prefix: '269773'
     number_min_length: 10
@@ -339,6 +330,7 @@ network_prefixes:
     uuid: 1f52b075-8018-47c4-8b05-4b48beafde78
     country_id: *km
     network_id: *km_mitsamiouli_region
+# Mobile Prefixes
   - id: 256048
     prefix: '269779'
     number_min_length: 10
@@ -346,3 +338,10 @@ network_prefixes:
     uuid: 3dd0f109-9bbe-4e82-8a95-f8e88e134c4f
     country_id: *km
     network_id: *km_foumbouni_region
+  - id: 256669
+    prefix: '2698'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 491ac9bb-34fd-4163-8fb0-a97fdb2965b1
+    country_id: *km
+    network_id: *km_value_added_services

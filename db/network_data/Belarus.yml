@@ -17,31 +17,6 @@ networks:
     name: BY Special Services
     uuid: fbe04950-f19f-44e9-9409-0a017562baf0
     type_id: 13
-  - id: &by_home_country_direct_ 38488
-    name: 'BY Home Country Direct '
-    uuid: c42fc32b-6a49-4938-b590-e7e8a2a05d29
-    type_id: 13
-  - id: &by_freephone_services 38531
-    name: BY Freephone Services
-    uuid: 9abdc52a-ce95-40ce-a827-db4c60892d42
-    type_id: 13
-  - id: &by_interactive_polling_services_free 38620
-    name: BY Interactive Polling Services Free
-    uuid: 3b01f59e-7915-4852-b4ab-1306ea6ecc56
-    type_id: 13
-  - id: &by_interactive_polling_services_paid 38637
-    name: BY Interactive Polling Services Paid
-    uuid: 68e8739d-dcb5-4a3a-9678-0bbb85df8b18
-    type_id: 13
-  - id: &by_international_free_services 39713
-    name: BY International Free Services
-    uuid: 347d5110-23a4-4d38-8ec3-6300e4440a13
-    type_id: 13
-  - id: &by_premium_rate_services 42111
-    name: BY Premium Rate Services
-    uuid: c8aacfd8-59ef-43f9-82f0-28a62092f84c
-    type_id: 13
-# Fixed Networks
   - id: &by_maryina_gorka_region 25405
     name: BY Maryina Gorka Region
     uuid: 3c68d84a-5492-4d81-8b3c-4ac68742c33f
@@ -66,6 +41,7 @@ networks:
     name: BY Uzda Region
     uuid: 0ae095f7-5fa7-4c16-a213-0a469ef92075
     type_id: 2
+# Fixed Networks
   - id: &by_kopyl_region 25411
     name: BY Kopyl Region
     uuid: f5d746c6-2dca-4b59-baec-cbd0b67db263
@@ -522,29 +498,43 @@ networks:
     name: BY Data Network Access Services Region
     uuid: 119fc546-f114-40a7-aa34-88fa29e71bbc
     type_id: 2
+  - id: &by_home_country_direct_ 38488
+    name: 'BY Home Country Direct '
+    uuid: c42fc32b-6a49-4938-b590-e7e8a2a05d29
+    type_id: 13
+  - id: &by_freephone_services 38531
+    name: BY Freephone Services
+    uuid: 9abdc52a-ce95-40ce-a827-db4c60892d42
+    type_id: 13
+  - id: &by_interactive_polling_services_free 38620
+    name: BY Interactive Polling Services Free
+    uuid: 3b01f59e-7915-4852-b4ab-1306ea6ecc56
+    type_id: 13
+  - id: &by_interactive_polling_services_paid 38637
+    name: BY Interactive Polling Services Paid
+    uuid: 68e8739d-dcb5-4a3a-9678-0bbb85df8b18
+    type_id: 13
+  - id: &by_international_free_services 39713
+    name: BY International Free Services
+    uuid: 347d5110-23a4-4d38-8ec3-6300e4440a13
+    type_id: 13
+  - id: &by_premium_rate_services 42111
+    name: BY Premium Rate Services
+    uuid: c8aacfd8-59ef-43f9-82f0-28a62092f84c
+    type_id: 13
+  - id: &by_fixed 43386
+    name: BY Fixed
+    uuid: 8ec0aa9b-7be3-47e0-9f5f-cbb9427e03c7
+    type_id: 2
 network_prefixes:
 # Supplementary services Prefixes
-  - id: 96135
-    prefix: '375602'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 63069cdd-7f9f-4745-b74c-2a7cf94cb2d8
+  - id: 241957
+    prefix: '375'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 7923c92b-e166-486c-a1f8-cf3ad0224b98
     country_id: *by
-    network_id: *by_telematic_services
-  - id: 183421
-    prefix: '375740'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 86a8b008-d96e-4cd2-ab3e-141e6b277c5c
-    country_id: *by
-    network_id: *by_national_traffic_exchange_center
-  - id: 209216
-    prefix: '375805'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2f83ee89-5fe9-4cca-b0fd-b7b84f3df4e5
-    country_id: *by
-    network_id: *by_intelligent_network_services
+    network_id: *by_fixed
   - id: 242362
     prefix: '3751'
     number_min_length: 6
@@ -552,211 +542,6 @@ network_prefixes:
     uuid: ac4dfe02-7206-4c76-b46f-ed4b45440b19
     country_id: *by
     network_id: *by_special_services
-  - id: 403463
-    prefix: '375800'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 0d941065-5654-4f6a-ad9c-71ffe07a1652
-    country_id: *by
-    network_id: *by_home_country_direct_
-  - id: 403514
-    prefix: '375801'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 3dc360a9-8f93-4fe3-a9e1-539df9082d07
-    country_id: *by
-    network_id: *by_freephone_services
-  - id: 404888
-    prefix: '375803'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4caed6ba-23a4-4c66-921d-c5ce7f2c3841
-    country_id: *by
-    network_id: *by_interactive_polling_services_free
-  - id: 406402
-    prefix: '375810'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: b2dafd50-d848-4ef5-97e0-d5e12bf248fd
-    country_id: *by
-    network_id: *by_interactive_polling_services_paid
-  - id: 419596
-    prefix: '375820'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 2b7194dd-a196-4378-9b7e-ef0cced00543
-    country_id: *by
-    network_id: *by_international_free_services
-  - id: 454947
-    prefix: '375902'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 61cf32fa-d779-43ae-b40c-4ac3c4fee68c
-    country_id: *by
-    network_id: *by_premium_rate_services
-# Country code Prefixes
-  - id: 241957
-    prefix: '375'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 7923c92b-e166-486c-a1f8-cf3ad0224b98
-    country_id: *by
-    network_id: null
-# Fixed Prefixes
-  - id: 260332
-    prefix: '3751713'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9f778462-9d41-4cdf-bd9d-513089fdc773
-    country_id: *by
-    network_id: *by_maryina_gorka_region
-  - id: 260333
-    prefix: '3751714'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 11096b15-4246-4626-b1d6-07e793933d23
-    country_id: *by
-    network_id: *by_cherven_region
-  - id: 260334
-    prefix: '3751715'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 532cc188-b965-44bb-8984-d21ee70f8bb0
-    country_id: *by
-    network_id: *by_berezino_region
-  - id: 260335
-    prefix: '3751716'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 47f77f05-5962-4641-b021-8e19031f47cc
-    country_id: *by
-    network_id: *by_dzerzhinsk_region
-  - id: 260336
-    prefix: '3751717'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ea337017-366a-4382-94a4-859b11cf33d6
-    country_id: *by
-    network_id: *by_stolbtsy_region
-  - id: 260337
-    prefix: '3751718'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4497963a-e249-49f7-9f93-97afc4a9f469
-    country_id: *by
-    network_id: *by_uzda_region
-  - id: 260338
-    prefix: '3751719'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f6f8742f-d87f-43a8-9ca7-f3a08a2c129d
-    country_id: *by
-    network_id: *by_kopyl_region
-  - id: 260373
-    prefix: '375174'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dd2218eb-f9fe-46f2-b709-f7ea6c485fcd
-    country_id: *by
-    network_id: *by_soligorsk_region
-  - id: 260425
-    prefix: '375176'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1c36a48a-a16d-4b44-94ab-234ea39b655f
-    country_id: *by
-    network_id: *by_molodechno_region
-  - id: 260446
-    prefix: '375177'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7b22d688-66cf-4b36-98e0-f8363f50767b
-    country_id: *by
-    network_id: *by_borisov_region
-  - id: 260450
-    prefix: '3751770'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d851b210-473f-49bf-9e79-febc98ea20f6
-    country_id: *by
-    network_id: *by_nesvizh_region
-  - id: 260452
-    prefix: '3751771'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5bb75398-4c48-46c4-8626-cca802995cfe
-    country_id: *by
-    network_id: *by_vileyka_region
-  - id: 260454
-    prefix: '3751772'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7f834e28-aae5-4f2b-bf4b-e311c26e0e96
-    country_id: *by
-    network_id: *by_volozhin_region
-  - id: 260457
-    prefix: '3751774'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0a1d159f-2506-4b55-b688-91a70e96dfc8
-    country_id: *by
-    network_id: *by_logoysk_region
-  - id: 260458
-    prefix: '3751775'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7d57cad0-fc7e-4de3-8e1b-a1943d94afcc
-    country_id: *by
-    network_id: *by_zhodino_region
-  - id: 260460
-    prefix: '3751776'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 086ec92e-9f1c-44d8-bb38-a20fddff98a6
-    country_id: *by
-    network_id: *by_smolevichi_region
-  - id: 260482
-    prefix: '3751792'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9047acda-8977-4c17-b218-923932deedda
-    country_id: *by
-    network_id: *by_starye_dorogi_region
-  - id: 260485
-    prefix: '3751793'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 99808c75-df1d-4061-b22b-f69698b6b601
-    country_id: *by
-    network_id: *by_kletsk_region
-  - id: 260487
-    prefix: '3751794'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c073fb44-27ec-4491-9139-295702ac15dc
-    country_id: *by
-    network_id: *by_lyuban_region
-  - id: 260489
-    prefix: '3751795'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 888f7e7b-bc95-4b8d-8d1a-2a11d441d57f
-    country_id: *by
-    network_id: *by_slutsk_region
-  - id: 260492
-    prefix: '3751796'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b30876b3-1fde-4be7-86d3-2408c00c2a9f
-    country_id: *by
-    network_id: *by_krupki_region
-  - id: 260495
-    prefix: '3751797'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a3d2a0db-0f0d-46aa-a743-4f1db002f0d7
-    country_id: *by
-    network_id: *by_myadel_region
   - id: 266224
     prefix: '3751511'
     number_min_length: 12
@@ -813,6 +598,7 @@ network_prefixes:
     uuid: 5712ed79-af57-4e7e-82f6-2c2caba0abc5
     country_id: *by
     network_id: *by_slonim_region
+# Fixed Prefixes
   - id: 266404
     prefix: '3751563'
     number_min_length: 12
@@ -995,6 +781,160 @@ network_prefixes:
     uuid: 7b960878-6d49-4208-94e6-d7f1a1b25155
     country_id: *by
     network_id: *by_minsk_region
+  - id: 260332
+    prefix: '3751713'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9f778462-9d41-4cdf-bd9d-513089fdc773
+    country_id: *by
+    network_id: *by_maryina_gorka_region
+  - id: 260333
+    prefix: '3751714'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 11096b15-4246-4626-b1d6-07e793933d23
+    country_id: *by
+    network_id: *by_cherven_region
+  - id: 260334
+    prefix: '3751715'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 532cc188-b965-44bb-8984-d21ee70f8bb0
+    country_id: *by
+    network_id: *by_berezino_region
+  - id: 260335
+    prefix: '3751716'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 47f77f05-5962-4641-b021-8e19031f47cc
+    country_id: *by
+    network_id: *by_dzerzhinsk_region
+  - id: 260336
+    prefix: '3751717'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ea337017-366a-4382-94a4-859b11cf33d6
+    country_id: *by
+    network_id: *by_stolbtsy_region
+  - id: 260337
+    prefix: '3751718'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4497963a-e249-49f7-9f93-97afc4a9f469
+    country_id: *by
+    network_id: *by_uzda_region
+  - id: 260338
+    prefix: '3751719'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f6f8742f-d87f-43a8-9ca7-f3a08a2c129d
+    country_id: *by
+    network_id: *by_kopyl_region
+  - id: 260373
+    prefix: '375174'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dd2218eb-f9fe-46f2-b709-f7ea6c485fcd
+    country_id: *by
+    network_id: *by_soligorsk_region
+  - id: 260425
+    prefix: '375176'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1c36a48a-a16d-4b44-94ab-234ea39b655f
+    country_id: *by
+    network_id: *by_molodechno_region
+  - id: 260446
+    prefix: '375177'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7b22d688-66cf-4b36-98e0-f8363f50767b
+    country_id: *by
+    network_id: *by_borisov_region
+  - id: 260450
+    prefix: '3751770'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d851b210-473f-49bf-9e79-febc98ea20f6
+    country_id: *by
+    network_id: *by_nesvizh_region
+  - id: 260452
+    prefix: '3751771'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5bb75398-4c48-46c4-8626-cca802995cfe
+    country_id: *by
+    network_id: *by_vileyka_region
+  - id: 260454
+    prefix: '3751772'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f834e28-aae5-4f2b-bf4b-e311c26e0e96
+    country_id: *by
+    network_id: *by_volozhin_region
+  - id: 260457
+    prefix: '3751774'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0a1d159f-2506-4b55-b688-91a70e96dfc8
+    country_id: *by
+    network_id: *by_logoysk_region
+  - id: 260458
+    prefix: '3751775'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7d57cad0-fc7e-4de3-8e1b-a1943d94afcc
+    country_id: *by
+    network_id: *by_zhodino_region
+  - id: 260460
+    prefix: '3751776'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 086ec92e-9f1c-44d8-bb38-a20fddff98a6
+    country_id: *by
+    network_id: *by_smolevichi_region
+  - id: 260482
+    prefix: '3751792'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9047acda-8977-4c17-b218-923932deedda
+    country_id: *by
+    network_id: *by_starye_dorogi_region
+  - id: 260485
+    prefix: '3751793'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 99808c75-df1d-4061-b22b-f69698b6b601
+    country_id: *by
+    network_id: *by_kletsk_region
+  - id: 260487
+    prefix: '3751794'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c073fb44-27ec-4491-9139-295702ac15dc
+    country_id: *by
+    network_id: *by_lyuban_region
+  - id: 260489
+    prefix: '3751795'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 888f7e7b-bc95-4b8d-8d1a-2a11d441d57f
+    country_id: *by
+    network_id: *by_slutsk_region
+  - id: 260492
+    prefix: '3751796'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b30876b3-1fde-4be7-86d3-2408c00c2a9f
+    country_id: *by
+    network_id: *by_krupki_region
+  - id: 260495
+    prefix: '3751797'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a3d2a0db-0f0d-46aa-a743-4f1db002f0d7
+    country_id: *by
+    network_id: *by_myadel_region
   - id: 271754
     prefix: '375212'
     number_min_length: 12
@@ -1072,76 +1012,6 @@ network_prefixes:
     uuid: 3380a6bd-9dc1-415a-8e59-779d01cbbe8f
     country_id: *by
     network_id: *by_polotsk_region
-  - id: 279455
-    prefix: '3752230'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8419b6e7-eb02-4d45-8280-704b0c78e1ca
-    country_id: *by
-    network_id: *by_glusk_region
-  - id: 279457
-    prefix: '3752231'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3360fac8-c3db-427e-9322-8679d8da44d6
-    country_id: *by
-    network_id: *by_byhov_region
-  - id: 279460
-    prefix: '3752232'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eee36856-42ad-448c-9387-3b8e72f5cbf5
-    country_id: *by
-    network_id: *by_belynichi_region
-  - id: 279464
-    prefix: '3752233'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a746e580-2b40-4fcc-862c-a7145283bfc4
-    country_id: *by
-    network_id: *by_gorki_region
-  - id: 279468
-    prefix: '3752234'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0a9052e1-34f5-4711-bd20-5343872ddee8
-    country_id: *by
-    network_id: *by_krugloye_region
-  - id: 279472
-    prefix: '3752235'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9d2f51bc-8e83-44f5-b973-58d03a58276b
-    country_id: *by
-    network_id: *by_osipovichi_region
-  - id: 279476
-    prefix: '3752236'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 68718234-1d6c-43f2-8e5c-7ce7ad198e32
-    country_id: *by
-    network_id: *by_klichev_region
-  - id: 279480
-    prefix: '3752237'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c30b4e66-251f-4c29-99dc-593ac2d7a879
-    country_id: *by
-    network_id: *by_kirovsk_region
-  - id: 279484
-    prefix: '3752238'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f4df4156-329e-4324-b699-54f016706e6f
-    country_id: *by
-    network_id: *by_krasnopolye_region
-  - id: 279488
-    prefix: '3752239'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4f3dce8e-b9d2-4668-b465-d2ce2af1be56
-    country_id: *by
-    network_id: *by_shklov_region
   - id: 282692
     prefix: '3752151'
     number_min_length: 12
@@ -1219,6 +1089,76 @@ network_prefixes:
     uuid: 72ddadaa-995e-47db-aefb-5f77e3145dac
     country_id: *by
     network_id: *by_mogilev_region
+  - id: 279455
+    prefix: '3752230'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8419b6e7-eb02-4d45-8280-704b0c78e1ca
+    country_id: *by
+    network_id: *by_glusk_region
+  - id: 279457
+    prefix: '3752231'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3360fac8-c3db-427e-9322-8679d8da44d6
+    country_id: *by
+    network_id: *by_byhov_region
+  - id: 279460
+    prefix: '3752232'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eee36856-42ad-448c-9387-3b8e72f5cbf5
+    country_id: *by
+    network_id: *by_belynichi_region
+  - id: 279464
+    prefix: '3752233'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a746e580-2b40-4fcc-862c-a7145283bfc4
+    country_id: *by
+    network_id: *by_gorki_region
+  - id: 279468
+    prefix: '3752234'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0a9052e1-34f5-4711-bd20-5343872ddee8
+    country_id: *by
+    network_id: *by_krugloye_region
+  - id: 279472
+    prefix: '3752235'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9d2f51bc-8e83-44f5-b973-58d03a58276b
+    country_id: *by
+    network_id: *by_osipovichi_region
+  - id: 279476
+    prefix: '3752236'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 68718234-1d6c-43f2-8e5c-7ce7ad198e32
+    country_id: *by
+    network_id: *by_klichev_region
+  - id: 279480
+    prefix: '3752237'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c30b4e66-251f-4c29-99dc-593ac2d7a879
+    country_id: *by
+    network_id: *by_kirovsk_region
+  - id: 279484
+    prefix: '3752238'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f4df4156-329e-4324-b699-54f016706e6f
+    country_id: *by
+    network_id: *by_krasnopolye_region
+  - id: 279488
+    prefix: '3752239'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4f3dce8e-b9d2-4668-b465-d2ce2af1be56
+    country_id: *by
+    network_id: *by_shklov_region
   - id: 283900
     prefix: '3752240'
     number_min_length: 12
@@ -1289,6 +1229,62 @@ network_prefixes:
     uuid: 8060827d-7c4f-49e9-bca3-cd56a613bdd0
     country_id: *by
     network_id: *by_bobruysk_region
+  - id: 292489
+    prefix: '375232'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ec4f2b86-f4a8-40ee-aa00-e18a33b61f79
+    country_id: *by
+    network_id: *by_gomel_region
+  - id: 293063
+    prefix: '3752330'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 79068fa3-2793-4b63-852a-09ef12f7e845
+    country_id: *by
+    network_id: *by_vetka_region
+  - id: 293069
+    prefix: '3752332'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: aaf75c13-1bd7-4cc7-b798-345cb7f3b5c3
+    country_id: *by
+    network_id: *by_chechersk_region
+  - id: 293075
+    prefix: '3752333'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c26cc50c-02ba-45f8-896a-7c1300fcdf12
+    country_id: *by
+    network_id: *by_dobrush_region
+  - id: 293080
+    prefix: '3752334'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f5f0a062-91a9-488e-9c1d-c2716d071219
+    country_id: *by
+    network_id: *by_zhlobin_region
+  - id: 293105
+    prefix: '3752336'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6027b41a-bfe9-42f5-89c3-fab49f0f38d4
+    country_id: *by
+    network_id: *by_budo_koshelevo_region
+  - id: 293109
+    prefix: '3752337'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b6265601-faca-42cb-a23d-50e13f4818b2
+    country_id: *by
+    network_id: *by_korma_region
+  - id: 293114
+    prefix: '3752339'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0757a5d4-d86e-4792-8e84-245d94638a84
+    country_id: *by
+    network_id: *by_rogachev_region
   - id: 287449
     prefix: '3752340'
     number_min_length: 12
@@ -1380,62 +1376,6 @@ network_prefixes:
     uuid: d4e78030-2244-4162-9113-8cd865d5d99b
     country_id: *by
     network_id: *by_mozyr_region
-  - id: 292489
-    prefix: '375232'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ec4f2b86-f4a8-40ee-aa00-e18a33b61f79
-    country_id: *by
-    network_id: *by_gomel_region
-  - id: 293063
-    prefix: '3752330'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 79068fa3-2793-4b63-852a-09ef12f7e845
-    country_id: *by
-    network_id: *by_vetka_region
-  - id: 293069
-    prefix: '3752332'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: aaf75c13-1bd7-4cc7-b798-345cb7f3b5c3
-    country_id: *by
-    network_id: *by_chechersk_region
-  - id: 293075
-    prefix: '3752333'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c26cc50c-02ba-45f8-896a-7c1300fcdf12
-    country_id: *by
-    network_id: *by_dobrush_region
-  - id: 293080
-    prefix: '3752334'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f5f0a062-91a9-488e-9c1d-c2716d071219
-    country_id: *by
-    network_id: *by_zhlobin_region
-  - id: 293105
-    prefix: '3752336'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6027b41a-bfe9-42f5-89c3-fab49f0f38d4
-    country_id: *by
-    network_id: *by_budo_koshelevo_region
-  - id: 293109
-    prefix: '3752337'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b6265601-faca-42cb-a23d-50e13f4818b2
-    country_id: *by
-    network_id: *by_korma_region
-  - id: 293114
-    prefix: '3752339'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0757a5d4-d86e-4792-8e84-245d94638a84
-    country_id: *by
-    network_id: *by_rogachev_region
   - id: 294315
     prefix: '37524'
     number_min_length: 12
@@ -1443,3 +1383,66 @@ network_prefixes:
     uuid: bd976eef-b94c-47f5-a978-925c8e709703
     country_id: *by
     network_id: *by_data_network_access_services_region
+  - id: 96135
+    prefix: '375602'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 63069cdd-7f9f-4745-b74c-2a7cf94cb2d8
+    country_id: *by
+    network_id: *by_telematic_services
+  - id: 183421
+    prefix: '375740'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 86a8b008-d96e-4cd2-ab3e-141e6b277c5c
+    country_id: *by
+    network_id: *by_national_traffic_exchange_center
+  - id: 403463
+    prefix: '375800'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 0d941065-5654-4f6a-ad9c-71ffe07a1652
+    country_id: *by
+    network_id: *by_home_country_direct_
+  - id: 403514
+    prefix: '375801'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3dc360a9-8f93-4fe3-a9e1-539df9082d07
+    country_id: *by
+    network_id: *by_freephone_services
+  - id: 404888
+    prefix: '375803'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4caed6ba-23a4-4c66-921d-c5ce7f2c3841
+    country_id: *by
+    network_id: *by_interactive_polling_services_free
+  - id: 209216
+    prefix: '375805'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2f83ee89-5fe9-4cca-b0fd-b7b84f3df4e5
+    country_id: *by
+    network_id: *by_intelligent_network_services
+  - id: 406402
+    prefix: '375810'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b2dafd50-d848-4ef5-97e0-d5e12bf248fd
+    country_id: *by
+    network_id: *by_interactive_polling_services_paid
+  - id: 419596
+    prefix: '375820'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 2b7194dd-a196-4378-9b7e-ef0cced00543
+    country_id: *by
+    network_id: *by_international_free_services
+  - id: 454947
+    prefix: '375902'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 61cf32fa-d779-43ae-b40c-4ac3c4fee68c
+    country_id: *by
+    network_id: *by_premium_rate_services

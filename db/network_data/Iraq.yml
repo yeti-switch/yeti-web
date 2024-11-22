@@ -21,10 +21,30 @@ networks:
     name: IQ Erbil Region
     uuid: 3de8966c-adaa-491b-8866-87ab76e5cbd5
     type_id: 2
+  - id: &iq_mobitel_mobile 17657
+    name: IQ Mobitel Mobile
+    uuid: 6934b99d-00a2-4cf9-bed6-b6e03aba1192
+    type_id: 3
   - id: &iq_fixed 18002
     name: IQ Fixed
     uuid: ed70d0c1-3056-4fbe-b3ad-757e383db9f4
     type_id: 2
+  - id: &iq_korek_mobile 18006
+    name: IQ Korek Mobile
+    uuid: 617267e5-677a-4076-9b15-a90e2e181bdf
+    type_id: 3
+  - id: &iq_asiacell_mobile 18500
+    name: IQ Asiacell Mobile
+    uuid: d1981900-7f77-48c4-ada6-452e05aa8963
+    type_id: 3
+  - id: &iq_zain_mobile 18841
+    name: IQ Zain Mobile
+    uuid: b3c7626f-921d-40d3-927f-1f70e2d558fe
+    type_id: 3
+  - id: &iq_special_services 21422
+    name: IQ Special Services
+    uuid: b91990d8-c533-455b-9e95-e48062065b9b
+    type_id: 13
   - id: &iq_baghdad_region 24790
     name: IQ Baghdad Region
     uuid: 74f1dbb4-b1db-433b-9cfd-4641a297e2a1
@@ -57,6 +77,7 @@ networks:
     name: IQ Najaf Region
     uuid: a75c6f34-3704-4cc9-b620-a9d0fa6f10eb
     type_id: 2
+# Mobile Networks
   - id: &iq_diwaniya_region 33653
     name: IQ Diwaniya Region
     uuid: ffd8c9de-9945-47d3-aad7-64f24509ef0f
@@ -73,32 +94,11 @@ networks:
     name: IQ Amara Region
     uuid: abf4b7b2-69ec-41f4-ac16-222d3f82b25e
     type_id: 2
+# Supplementary services Networks
   - id: &iq_nasiriyah_region 37230
     name: IQ Nasiriyah Region
     uuid: a6504c7e-3d85-4a79-bb2f-cf3d333756d4
     type_id: 2
-# Mobile Networks
-  - id: &iq_mobitel_mobile 17657
-    name: IQ Mobitel Mobile
-    uuid: 6934b99d-00a2-4cf9-bed6-b6e03aba1192
-    type_id: 3
-  - id: &iq_korek_mobile 18006
-    name: IQ Korek Mobile
-    uuid: 617267e5-677a-4076-9b15-a90e2e181bdf
-    type_id: 3
-  - id: &iq_asiacell_mobile 18500
-    name: IQ Asiacell Mobile
-    uuid: d1981900-7f77-48c4-ada6-452e05aa8963
-    type_id: 3
-  - id: &iq_zain_mobile 18841
-    name: IQ Zain Mobile
-    uuid: b3c7626f-921d-40d3-927f-1f70e2d558fe
-    type_id: 3
-# Supplementary services Networks
-  - id: &iq_special_services 21422
-    name: IQ Special Services
-    uuid: b91990d8-c533-455b-9e95-e48062065b9b
-    type_id: 13
   - id: &iq_freephone_services 38499
     name: IQ Freephone Services
     uuid: fc4ef92b-e0c2-49c8-9683-f9482ccf472e
@@ -113,46 +113,11 @@ networks:
     type_id: 13
 network_prefixes:
 # Fixed Prefixes
-  - id: 54921
-    prefix: '96450'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 874e68e7-d10a-4c69-804d-03fc389cb9f5
-    country_id: *iq
-    network_id: *iq_kirkuk_region
-  - id: 76542
-    prefix: '96453'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b44c4ee9-bbc7-460b-9dba-f2a79f6e6325
-    country_id: *iq
-    network_id: *iq_sulaimaniya_region
-  - id: 95210
-    prefix: '96460'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 383f6323-cbc0-43d8-9d1f-e4b389a9e651
-    country_id: *iq
-    network_id: *iq_mosul_region
-  - id: 111464
-    prefix: '96462'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d7239424-3b33-4425-a97b-0962df74a004
-    country_id: *iq
-    network_id: *iq_duhok_region
-  - id: 138622
-    prefix: '96466'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f8e1b6f3-9ffd-40fe-9065-59a3b2854db2
-    country_id: *iq
-    network_id: *iq_erbil_region
-  - id: 185865
-    prefix: '96474'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: f40d69d0-de19-4f6d-8dc8-05eeae612d83
+  - id: 242022
+    prefix: '964'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 3cfd5c6e-a938-40c6-b630-5acb74e96d47
     country_id: *iq
     network_id: *iq_fixed
   - id: 258564
@@ -162,6 +127,20 @@ network_prefixes:
     uuid: 89ac4d22-21ce-4ae0-b3b5-8e0f24ad99b9
     country_id: *iq
     network_id: *iq_baghdad_region
+  - id: 242419
+    prefix: '9641'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 592653dd-5b25-46d5-8ff4-d6f480512077
+    country_id: *iq
+    network_id: *iq_special_services
+  - id: 247411
+    prefix: '9642'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: bf74ca2f-bdf5-4f59-ad5a-51367332f830
+    country_id: *iq
+    network_id: *iq_special_services
   - id: 274232
     prefix: '96421'
     number_min_length: 11
@@ -190,6 +169,13 @@ network_prefixes:
     uuid: 78c6ad26-8bb9-4343-9652-028d32cbb044
     country_id: *iq
     network_id: *iq_baquba_region
+  - id: 248904
+    prefix: '9643'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 10df1f3b-a153-40dd-8adb-d309466ed90b
+    country_id: *iq
+    network_id: *iq_special_services
   - id: 309468
     prefix: '96430'
     number_min_length: 11
@@ -218,13 +204,6 @@ network_prefixes:
     uuid: ad5a1165-f498-44d2-b559-849d1dc3589d
     country_id: *iq
     network_id: *iq_diwaniya_region
-  - id: 349892
-    prefix: '96440'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5c3e4bbd-3564-4f83-88d6-44ec27552572
-    country_id: *iq
-    network_id: *iq_basrah_region
   - id: 355756
     prefix: '96437'
     number_min_length: 11
@@ -232,13 +211,20 @@ network_prefixes:
     uuid: 694e97ce-1254-47c6-b6cd-dc39512beee3
     country_id: *iq
     network_id: *iq_samawa_region
-  - id: 367936
-    prefix: '96443'
+  - id: 243941
+    prefix: '9644'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 2da02c84-560d-49ce-b9f8-fd9f562eeff6
+    country_id: *iq
+    network_id: *iq_special_services
+  - id: 349892
+    prefix: '96440'
     number_min_length: 11
     number_max_length: 11
-    uuid: e0b6b435-2687-4ca1-887b-54f508da8b7c
+    uuid: 5c3e4bbd-3564-4f83-88d6-44ec27552572
     country_id: *iq
-    network_id: *iq_amara_region
+    network_id: *iq_basrah_region
   - id: 377177
     prefix: '96442'
     number_min_length: 11
@@ -246,7 +232,78 @@ network_prefixes:
     uuid: 18b066b8-687a-4510-b3d5-8685d4cc4191
     country_id: *iq
     network_id: *iq_nasiriyah_region
+  - id: 367936
+    prefix: '96443'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e0b6b435-2687-4ca1-887b-54f508da8b7c
+    country_id: *iq
+    network_id: *iq_amara_region
+  - id: 249580
+    prefix: '9645'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 92670b78-748e-4693-9793-f395b1036a35
+    country_id: *iq
+    network_id: *iq_special_services
+  - id: 54921
+    prefix: '96450'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 874e68e7-d10a-4c69-804d-03fc389cb9f5
+    country_id: *iq
+    network_id: *iq_kirkuk_region
 # Mobile Prefixes
+  - id: 76542
+    prefix: '96453'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b44c4ee9-bbc7-460b-9dba-f2a79f6e6325
+    country_id: *iq
+    network_id: *iq_sulaimaniya_region
+  - id: 245401
+    prefix: '9646'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 1a5e3a81-9c9d-45c9-93a3-86d2cf4dec83
+    country_id: *iq
+    network_id: *iq_special_services
+  - id: 95210
+    prefix: '96460'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 383f6323-cbc0-43d8-9d1f-e4b389a9e651
+    country_id: *iq
+    network_id: *iq_mosul_region
+  - id: 111464
+    prefix: '96462'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7239424-3b33-4425-a97b-0962df74a004
+    country_id: *iq
+    network_id: *iq_duhok_region
+  - id: 138622
+    prefix: '96466'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8e1b6f3-9ffd-40fe-9065-59a3b2854db2
+    country_id: *iq
+    network_id: *iq_erbil_region
+  - id: 255256
+    prefix: '9647'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 9857bead-2166-4bee-9f8c-5d2eb6e0be88
+    country_id: *iq
+    network_id: *iq_special_services
+# Supplementary services Prefixes
+  - id: 185865
+    prefix: '96474'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f40d69d0-de19-4f6d-8dc8-05eeae612d83
+    country_id: *iq
+    network_id: *iq_fixed
   - id: 183064
     prefix: '9647444'
     number_min_length: 13
@@ -289,76 +346,11 @@ network_prefixes:
     uuid: 8eb3ac23-c6f9-4ca1-885d-5b46f627c904
     country_id: *iq
     network_id: *iq_zain_mobile
-# Country code Prefixes
-  - id: 242022
-    prefix: '964'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 3cfd5c6e-a938-40c6-b630-5acb74e96d47
-    country_id: *iq
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242419
-    prefix: '9641'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 592653dd-5b25-46d5-8ff4-d6f480512077
-    country_id: *iq
-    network_id: *iq_special_services
-  - id: 243941
-    prefix: '9644'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 2da02c84-560d-49ce-b9f8-fd9f562eeff6
-    country_id: *iq
-    network_id: *iq_special_services
-  - id: 245401
-    prefix: '9646'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 1a5e3a81-9c9d-45c9-93a3-86d2cf4dec83
-    country_id: *iq
-    network_id: *iq_special_services
-  - id: 247411
-    prefix: '9642'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: bf74ca2f-bdf5-4f59-ad5a-51367332f830
-    country_id: *iq
-    network_id: *iq_special_services
-  - id: 248904
-    prefix: '9643'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 10df1f3b-a153-40dd-8adb-d309466ed90b
-    country_id: *iq
-    network_id: *iq_special_services
-  - id: 249580
-    prefix: '9645'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 92670b78-748e-4693-9793-f395b1036a35
-    country_id: *iq
-    network_id: *iq_special_services
   - id: 253084
     prefix: '9648'
     number_min_length: 6
     number_max_length: 7
     uuid: aa6a9d18-bc99-43c8-8598-a1df81e6de54
-    country_id: *iq
-    network_id: *iq_special_services
-  - id: 255256
-    prefix: '9647'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 9857bead-2166-4bee-9f8c-5d2eb6e0be88
-    country_id: *iq
-    network_id: *iq_special_services
-  - id: 257107
-    prefix: '9649'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 880e6a8e-cd4f-47ec-8d5d-2a9ee2899743
     country_id: *iq
     network_id: *iq_special_services
   - id: 403474
@@ -375,6 +367,13 @@ network_prefixes:
     uuid: fbe1c8af-4078-49b0-87c5-2084ebe5d23f
     country_id: *iq
     network_id: *iq_shared_cost_services
+  - id: 257107
+    prefix: '9649'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 880e6a8e-cd4f-47ec-8d5d-2a9ee2899743
+    country_id: *iq
+    network_id: *iq_special_services
   - id: 454577
     prefix: '964900'
     number_min_length: 11

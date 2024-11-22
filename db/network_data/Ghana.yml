@@ -1,6 +1,6 @@
 country_id: &gh 81
 networks:
-# Mobile Networks
+# Supplementary services Networks
   - id: &gh_telecel_mobile 4664
     name: GH Telecel Mobile
     uuid: fb82c6ac-916e-4b6d-ba81-a80135f879e0
@@ -13,6 +13,35 @@ networks:
     name: GH Airteltigo Mobile
     uuid: 9cc534fc-3427-48a4-bc21-63a12d17c7d6
     type_id: 3
+  - id: &gh_special_services 21405
+    name: GH Special Services
+    uuid: 3bf42026-2b13-4ef9-82f9-f0a97bf21546
+    type_id: 13
+  - id: &gh_sim_registration_verification_services 22166
+    name: GH Sim Registration Verification Services
+    uuid: 5fe1c3f7-4954-49d9-97e1-5323ce78f04f
+    type_id: 13
+  - id: &gh_sim_fraud_report_services 22213
+    name: GH Sim Fraud Report Services
+    uuid: 21424a75-124f-4742-847d-bb3c453ddae5
+    type_id: 13
+  - id: &gh_mnp_services 22565
+    name: GH Mnp Services
+    uuid: e326fc77-94ec-4da8-8584-ad94b406eb49
+    type_id: 13
+# Fixed Networks
+  - id: &gh_freephone_services 23839
+    name: GH Freephone Services
+    uuid: fc5c7c5e-bf92-42ce-b57c-8f0b85cac6c2
+    type_id: 13
+  - id: &gh_shared_cost_services 24344
+    name: GH Shared Cost Services
+    uuid: 62080bb7-7137-4745-a6ca-b99d56334bcf
+    type_id: 13
+  - id: &gh_premium_rate_services 24436
+    name: GH Premium Rate Services
+    uuid: 699c9160-f596-4a47-97df-a0283f02f116
+    type_id: 13
   - id: &gh_glo_mobile 28294
     name: GH Glo Mobile
     uuid: a85f7e4e-2041-4f00-a1cb-d3403a862643
@@ -33,36 +62,6 @@ networks:
     name: GH National Security Mobile
     uuid: d7dd7118-7b88-4381-8aa5-1d8770f233c6
     type_id: 3
-# Supplementary services Networks
-  - id: &gh_special_services 21405
-    name: GH Special Services
-    uuid: 3bf42026-2b13-4ef9-82f9-f0a97bf21546
-    type_id: 13
-  - id: &gh_sim_registration_verification_services 22166
-    name: GH Sim Registration Verification Services
-    uuid: 5fe1c3f7-4954-49d9-97e1-5323ce78f04f
-    type_id: 13
-  - id: &gh_sim_fraud_report_services 22213
-    name: GH Sim Fraud Report Services
-    uuid: 21424a75-124f-4742-847d-bb3c453ddae5
-    type_id: 13
-  - id: &gh_mnp_services 22565
-    name: GH Mnp Services
-    uuid: e326fc77-94ec-4da8-8584-ad94b406eb49
-    type_id: 13
-  - id: &gh_freephone_services 23839
-    name: GH Freephone Services
-    uuid: fc5c7c5e-bf92-42ce-b57c-8f0b85cac6c2
-    type_id: 13
-  - id: &gh_shared_cost_services 24344
-    name: GH Shared Cost Services
-    uuid: 62080bb7-7137-4745-a6ca-b99d56334bcf
-    type_id: 13
-  - id: &gh_premium_rate_services 24436
-    name: GH Premium Rate Services
-    uuid: 699c9160-f596-4a47-97df-a0283f02f116
-    type_id: 13
-# Fixed Networks
   - id: &gh_greater_accra_region_region 30864
     name: GH Greater Accra Region Region
     uuid: 3bd1cc9d-4489-4e45-95b1-f60a37930860
@@ -303,6 +302,7 @@ networks:
     name: GH Tamale Region
     uuid: 5600a746-dc47-4458-b8bb-8daa86454400
     type_id: 2
+# Mobile Networks
   - id: &gh_walewale_region 35243
     name: GH Walewale Region
     uuid: 73725f12-73d5-4f81-a857-cdbf6b9e9a74
@@ -336,56 +336,28 @@ networks:
     uuid: 6c9ce535-ba82-4c22-9244-f6b8749340a8
     type_id: 2
 network_prefixes:
-# Mobile Prefixes
-  - id: 54918
-    prefix: '23350'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dc8b8ec3-02c8-4960-a3a3-725b5ed4e70c
+# Supplementary services Prefixes
+  - id: 242000
+    prefix: '233'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: b7a27873-0127-4d34-a1dd-b4bcb9f32703
     country_id: *gh
-    network_id: *gh_telecel_mobile
-  - id: 73194
-    prefix: '23354'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 037df4a3-92fb-459f-a065-b9286cb5dba0
+    network_id: *gh_fixed
+  - id: 242401
+    prefix: '2331'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 35f8a308-2430-4198-af56-2cc1e9209cab
     country_id: *gh
-    network_id: *gh_mtn_mobile
-  - id: 76538
-    prefix: '23353'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 95c8050c-cfb2-4c3f-92e8-49bfb8070339
+    network_id: *gh_special_services
+  - id: 247404
+    prefix: '2332'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 44ca3639-7107-482c-9aac-cce41d1c7acb
     country_id: *gh
-    network_id: *gh_mtn_mobile
-  - id: 78117
-    prefix: '23355'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f4d17d21-de75-4cf7-9926-2c8538bd0480
-    country_id: *gh
-    network_id: *gh_mtn_mobile
-  - id: 84409
-    prefix: '23359'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 959583db-2fef-41a4-b8b5-cadac8aa50a6
-    country_id: *gh
-    network_id: *gh_mtn_mobile
-  - id: 87911
-    prefix: '23356'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b2675d9d-ab81-43df-89fb-5941aa21e13b
-    country_id: *gh
-    network_id: *gh_airteltigo_mobile
-  - id: 90267
-    prefix: '23357'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6b0b130b-a629-4ae6-bb49-8d285bfa48db
-    country_id: *gh
-    network_id: *gh_airteltigo_mobile
+    network_id: *gh_special_services
   - id: 267134
     prefix: '23320'
     number_min_length: 12
@@ -407,6 +379,13 @@ network_prefixes:
     uuid: b2f41544-ba64-40c2-abbb-7ef3c7e2da46
     country_id: *gh
     network_id: *gh_mtn_mobile
+  - id: 301967
+    prefix: '23325'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 639ef3a4-332f-485a-aca8-cea94899eaf2
+    country_id: *gh
+    network_id: *gh_mobile
   - id: 296815
     prefix: '2332540'
     number_min_length: 12
@@ -449,13 +428,6 @@ network_prefixes:
     uuid: cea79fcd-994c-4c7c-8191-d471353013f9
     country_id: *gh
     network_id: *gh_airteltigo_mobile
-  - id: 301967
-    prefix: '23325'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 639ef3a4-332f-485a-aca8-cea94899eaf2
-    country_id: *gh
-    network_id: *gh_mobile
   - id: 308503
     prefix: '23329'
     number_min_length: 12
@@ -463,64 +435,7 @@ network_prefixes:
     uuid: a8460795-d9ee-4593-b92b-817d46aed8ca
     country_id: *gh
     network_id: *gh_national_security_mobile
-# Country code Prefixes
-  - id: 242000
-    prefix: '233'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: b7a27873-0127-4d34-a1dd-b4bcb9f32703
-    country_id: *gh
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242401
-    prefix: '2331'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 35f8a308-2430-4198-af56-2cc1e9209cab
-    country_id: *gh
-    network_id: *gh_special_services
-  - id: 243936
-    prefix: '2334'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: abd21ad3-440f-47cf-9de2-0ad514e26afb
-    country_id: *gh
-    network_id: *gh_special_services
-  - id: 243991
-    prefix: '233400'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 96595606-699a-496e-a340-a0b16ebddccd
-    country_id: *gh
-    network_id: *gh_sim_registration_verification_services
-  - id: 244215
-    prefix: '233419'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 83a1c187-73a4-4419-b160-a2d41087caa8
-    country_id: *gh
-    network_id: *gh_sim_fraud_report_services
-  - id: 245392
-    prefix: '2336'
-    number_min_length: 7
-    number_max_length: 8
-    uuid: 871195cb-2cb6-4fdf-ad20-2a4bcc832ad1
-    country_id: *gh
-    network_id: *gh_special_services
-  - id: 245448
-    prefix: '233600'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 76f145e8-a21d-44d5-8c8d-28510b9f730b
-    country_id: *gh
-    network_id: *gh_mnp_services
-  - id: 247404
-    prefix: '2332'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 44ca3639-7107-482c-9aac-cce41d1c7acb
-    country_id: *gh
-    network_id: *gh_special_services
+# Fixed Prefixes
   - id: 248897
     prefix: '2333'
     number_min_length: 6
@@ -528,49 +443,6 @@ network_prefixes:
     uuid: 24e67204-64f2-4bc6-bf66-a005db24090b
     country_id: *gh
     network_id: *gh_special_services
-  - id: 253075
-    prefix: '2338'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 372bded7-f124-4e2b-9d11-e181f844b32b
-    country_id: *gh
-    network_id: *gh_special_services
-  - id: 253150
-    prefix: '2330800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 85870fd9-adbe-4615-a2eb-184adee3b9f7
-    country_id: *gh
-    network_id: *gh_freephone_services
-  - id: 255250
-    prefix: '2337'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 5e6327a9-86de-443c-a6a0-79b2941b00f9
-    country_id: *gh
-    network_id: *gh_special_services
-  - id: 256855
-    prefix: '2330880'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8dc45180-8d7f-488b-aeb2-ed406b7b9e5e
-    country_id: *gh
-    network_id: *gh_shared_cost_services
-  - id: 257098
-    prefix: '2339'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 7f086bb3-7f20-4515-a97b-921d114537c7
-    country_id: *gh
-    network_id: *gh_special_services
-  - id: 257178
-    prefix: '2330900'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 351d8b6a-99f1-451a-96a1-d1e4b0278c24
-    country_id: *gh
-    network_id: *gh_premium_rate_services
-# Fixed Prefixes
   - id: 309465
     prefix: '23330'
     number_min_length: 12
@@ -725,34 +597,6 @@ network_prefixes:
     uuid: 6818335e-d803-4c21-bd54-8ed33a4e8a23
     country_id: *gh
     network_id: *gh_fixed
-  - id: 312041
-    prefix: '23331800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 463e45f9-99b2-4276-acaf-6354f521898c
-    country_id: *gh
-    network_id: *gh_takoradi_region
-  - id: 312042
-    prefix: '23331801'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 36e259ae-5017-468f-9f79-5960d843c261
-    country_id: *gh
-    network_id: *gh_fixed
-  - id: 312043
-    prefix: '23331802'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1236c620-66c3-45c5-abd8-03d3edfee25c
-    country_id: *gh
-    network_id: *gh_fixed
-  - id: 312044
-    prefix: '23331803'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 577d2425-caf0-4b80-8b5f-10b028bcb8e0
-    country_id: *gh
-    network_id: *gh_fixed
   - id: 321164
     prefix: '23331'
     number_min_length: 12
@@ -816,6 +660,34 @@ network_prefixes:
     uuid: 6d4cdd4f-4236-47fa-823e-bade9af0712d
     country_id: *gh
     network_id: *gh_takoradi_region
+  - id: 312041
+    prefix: '23331800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 463e45f9-99b2-4276-acaf-6354f521898c
+    country_id: *gh
+    network_id: *gh_takoradi_region
+  - id: 312042
+    prefix: '23331801'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 36e259ae-5017-468f-9f79-5960d843c261
+    country_id: *gh
+    network_id: *gh_fixed
+  - id: 312043
+    prefix: '23331802'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1236c620-66c3-45c5-abd8-03d3edfee25c
+    country_id: *gh
+    network_id: *gh_fixed
+  - id: 312044
+    prefix: '23331803'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 577d2425-caf0-4b80-8b5f-10b028bcb8e0
+    country_id: *gh
+    network_id: *gh_fixed
   - id: 327272
     prefix: '23332'
     number_min_length: 12
@@ -907,6 +779,13 @@ network_prefixes:
     uuid: 4ff97a40-2a95-4490-b287-87a0b2eb0d20
     country_id: *gh
     network_id: *gh_fixed
+  - id: 337276
+    prefix: '23333'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1b1d63ed-e5c9-4946-bbbe-0df3f73699f4
+    country_id: *gh
+    network_id: *gh_central_region_region
   - id: 329955
     prefix: '2333320'
     number_min_length: 12
@@ -949,13 +828,6 @@ network_prefixes:
     uuid: 235a1874-31dd-4770-9cb9-e2cd7728eb4a
     country_id: *gh
     network_id: *gh_cape_coast_region
-  - id: 337276
-    prefix: '23333'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1b1d63ed-e5c9-4946-bbbe-0df3f73699f4
-    country_id: *gh
-    network_id: *gh_central_region_region
   - id: 340469
     prefix: '23334'
     number_min_length: 12
@@ -1054,118 +926,6 @@ network_prefixes:
     uuid: 15cbbcc6-ee46-45e0-9652-7fb0ea5a2a26
     country_id: *gh
     network_id: *gh_koforidua_region
-  - id: 345939
-    prefix: '23336'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a23e7985-06e1-4cd6-9190-00cafb95a900
-    country_id: *gh
-    network_id: *gh_volta_region_region
-  - id: 345957
-    prefix: '2333620'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a0f87599-eb71-4292-94c7-1caa52071754
-    country_id: *gh
-    network_id: *gh_ho_region
-  - id: 345958
-    prefix: '2333621'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4aca4494-dadf-4833-8626-b747a8bf82f2
-    country_id: *gh
-    network_id: *gh_amedzofe_region
-  - id: 345959
-    prefix: '2333622'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 669dc5d2-3554-4764-9aa8-01b1ee571038
-    country_id: *gh
-    network_id: *gh_hohoe_region
-  - id: 345960
-    prefix: '2333623'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b3eb3c93-dbf9-4a21-9895-6fcd56742f24
-    country_id: *gh
-    network_id: *gh_kpandu_region
-  - id: 345961
-    prefix: '2333624'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eeb4ea1a-24e9-4032-ad5d-3736bd1a2395
-    country_id: *gh
-    network_id: *gh_kete_krachi_region
-  - id: 345962
-    prefix: '2333625'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 52670cb3-1045-4e79-ad40-a528d02d05cb
-    country_id: *gh
-    network_id: *gh_aflao_denu_region
-  - id: 345963
-    prefix: '2333626'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b6e171d2-d20e-4309-beb8-d9505a8ad696
-    country_id: *gh
-    network_id: *gh_akatsi_keta_region
-  - id: 345975
-    prefix: '2333670'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e337bae3-9e87-4eb6-a791-7110c3f5def0
-    country_id: *gh
-    network_id: *gh_sunyani_region
-  - id: 345976
-    prefix: '23336800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 13d7c124-1ade-4634-9741-b7fa62d2dae1
-    country_id: *gh
-    network_id: *gh_sunyani_region
-  - id: 347697
-    prefix: '23338'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 67f6df64-2930-4eea-b1a4-77aab6d6294f
-    country_id: *gh
-    network_id: *gh_upper_east_region_region
-  - id: 347716
-    prefix: '2333820'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bf56efc8-f395-461f-bd1d-03f9934b5c04
-    country_id: *gh
-    network_id: *gh_bolgatanga_region
-  - id: 347717
-    prefix: '2333821'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 852254c8-7e22-43ab-8591-dfc750454171
-    country_id: *gh
-    network_id: *gh_navrongo_region
-  - id: 347718
-    prefix: '2333822'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7fa58d78-05dc-454a-9ba0-840d9156a027
-    country_id: *gh
-    network_id: *gh_bawku_region
-  - id: 347720
-    prefix: '2333870'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e9ce9c07-f539-4edc-a3b8-f52c83f0c27c
-    country_id: *gh
-    network_id: *gh_bolgatanga_region
-  - id: 347721
-    prefix: '23338800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c92c4ce9-2145-44ec-8562-5346764795d0
-    country_id: *gh
-    network_id: *gh_bolgatanga_region
   - id: 352233
     prefix: '23335'
     number_min_length: 12
@@ -1243,6 +1003,76 @@ network_prefixes:
     uuid: 069ab8f9-fb72-44bf-bb0d-de26516523ff
     country_id: *gh
     network_id: *gh_sunyani_region
+  - id: 345939
+    prefix: '23336'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a23e7985-06e1-4cd6-9190-00cafb95a900
+    country_id: *gh
+    network_id: *gh_volta_region_region
+  - id: 345957
+    prefix: '2333620'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a0f87599-eb71-4292-94c7-1caa52071754
+    country_id: *gh
+    network_id: *gh_ho_region
+  - id: 345958
+    prefix: '2333621'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4aca4494-dadf-4833-8626-b747a8bf82f2
+    country_id: *gh
+    network_id: *gh_amedzofe_region
+  - id: 345959
+    prefix: '2333622'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 669dc5d2-3554-4764-9aa8-01b1ee571038
+    country_id: *gh
+    network_id: *gh_hohoe_region
+  - id: 345960
+    prefix: '2333623'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b3eb3c93-dbf9-4a21-9895-6fcd56742f24
+    country_id: *gh
+    network_id: *gh_kpandu_region
+  - id: 345961
+    prefix: '2333624'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eeb4ea1a-24e9-4032-ad5d-3736bd1a2395
+    country_id: *gh
+    network_id: *gh_kete_krachi_region
+  - id: 345962
+    prefix: '2333625'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 52670cb3-1045-4e79-ad40-a528d02d05cb
+    country_id: *gh
+    network_id: *gh_aflao_denu_region
+  - id: 345963
+    prefix: '2333626'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b6e171d2-d20e-4309-beb8-d9505a8ad696
+    country_id: *gh
+    network_id: *gh_akatsi_keta_region
+  - id: 345975
+    prefix: '2333670'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e337bae3-9e87-4eb6-a791-7110c3f5def0
+    country_id: *gh
+    network_id: *gh_sunyani_region
+  - id: 345976
+    prefix: '23336800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 13d7c124-1ade-4634-9741-b7fa62d2dae1
+    country_id: *gh
+    network_id: *gh_sunyani_region
   - id: 355754
     prefix: '23337'
     number_min_length: 12
@@ -1313,6 +1143,48 @@ network_prefixes:
     uuid: 6999f06e-d81d-4566-992f-12c458f537f4
     country_id: *gh
     network_id: *gh_tamale_region
+  - id: 347697
+    prefix: '23338'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 67f6df64-2930-4eea-b1a4-77aab6d6294f
+    country_id: *gh
+    network_id: *gh_upper_east_region_region
+  - id: 347716
+    prefix: '2333820'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bf56efc8-f395-461f-bd1d-03f9934b5c04
+    country_id: *gh
+    network_id: *gh_bolgatanga_region
+  - id: 347717
+    prefix: '2333821'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 852254c8-7e22-43ab-8591-dfc750454171
+    country_id: *gh
+    network_id: *gh_navrongo_region
+  - id: 347718
+    prefix: '2333822'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7fa58d78-05dc-454a-9ba0-840d9156a027
+    country_id: *gh
+    network_id: *gh_bawku_region
+  - id: 347720
+    prefix: '2333870'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e9ce9c07-f539-4edc-a3b8-f52c83f0c27c
+    country_id: *gh
+    network_id: *gh_bolgatanga_region
+  - id: 347721
+    prefix: '23338800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c92c4ce9-2145-44ec-8562-5346764795d0
+    country_id: *gh
+    network_id: *gh_bolgatanga_region
   - id: 357533
     prefix: '23339'
     number_min_length: 12
@@ -1341,3 +1213,130 @@ network_prefixes:
     uuid: baee41df-3972-4828-86e6-751c9eb6ad3b
     country_id: *gh
     network_id: *gh_wa_region
+# Mobile Prefixes
+  - id: 243936
+    prefix: '2334'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: abd21ad3-440f-47cf-9de2-0ad514e26afb
+    country_id: *gh
+    network_id: *gh_special_services
+  - id: 243991
+    prefix: '233400'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 96595606-699a-496e-a340-a0b16ebddccd
+    country_id: *gh
+    network_id: *gh_sim_registration_verification_services
+  - id: 244215
+    prefix: '233419'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 83a1c187-73a4-4419-b160-a2d41087caa8
+    country_id: *gh
+    network_id: *gh_sim_fraud_report_services
+  - id: 54918
+    prefix: '23350'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dc8b8ec3-02c8-4960-a3a3-725b5ed4e70c
+    country_id: *gh
+    network_id: *gh_telecel_mobile
+  - id: 76538
+    prefix: '23353'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 95c8050c-cfb2-4c3f-92e8-49bfb8070339
+    country_id: *gh
+    network_id: *gh_mtn_mobile
+  - id: 73194
+    prefix: '23354'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 037df4a3-92fb-459f-a065-b9286cb5dba0
+    country_id: *gh
+    network_id: *gh_mtn_mobile
+  - id: 78117
+    prefix: '23355'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f4d17d21-de75-4cf7-9926-2c8538bd0480
+    country_id: *gh
+    network_id: *gh_mtn_mobile
+  - id: 87911
+    prefix: '23356'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b2675d9d-ab81-43df-89fb-5941aa21e13b
+    country_id: *gh
+    network_id: *gh_airteltigo_mobile
+  - id: 90267
+    prefix: '23357'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6b0b130b-a629-4ae6-bb49-8d285bfa48db
+    country_id: *gh
+    network_id: *gh_airteltigo_mobile
+  - id: 84409
+    prefix: '23359'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 959583db-2fef-41a4-b8b5-cadac8aa50a6
+    country_id: *gh
+    network_id: *gh_mtn_mobile
+  - id: 245392
+    prefix: '2336'
+    number_min_length: 7
+    number_max_length: 8
+    uuid: 871195cb-2cb6-4fdf-ad20-2a4bcc832ad1
+    country_id: *gh
+    network_id: *gh_special_services
+  - id: 245448
+    prefix: '233600'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 76f145e8-a21d-44d5-8c8d-28510b9f730b
+    country_id: *gh
+    network_id: *gh_mnp_services
+  - id: 255250
+    prefix: '2337'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 5e6327a9-86de-443c-a6a0-79b2941b00f9
+    country_id: *gh
+    network_id: *gh_special_services
+  - id: 253075
+    prefix: '2338'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 372bded7-f124-4e2b-9d11-e181f844b32b
+    country_id: *gh
+    network_id: *gh_special_services
+  - id: 510859
+    prefix: '233800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d42f8215-aeaa-4d64-9a6a-be16608162a4
+    country_id: *gh
+    network_id: *gh_freephone_services
+  - id: 508372
+    prefix: '233880'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2f989777-7de1-496d-8811-f2b49099f3fa
+    country_id: *gh
+    network_id: *gh_shared_cost_services
+  - id: 257098
+    prefix: '2339'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 7f086bb3-7f20-4515-a97b-921d114537c7
+    country_id: *gh
+    network_id: *gh_special_services
+  - id: 508387
+    prefix: '233900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 59b242e2-e597-4049-851c-17d20f250842
+    country_id: *gh
+    network_id: *gh_premium_rate_services

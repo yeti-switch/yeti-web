@@ -25,15 +25,11 @@ networks:
     name: VU Government And Ngo Information Services
     uuid: 12b901fc-0c0d-44d4-acbd-49d18e52fa3e
     type_id: 13
-  - id: &vu_directory_and_customer_care_services 22678
-    name: VU Directory And Customer Care Services
-    uuid: c8faab7f-4fb2-4aef-81a3-fc16597f3f1c
-    type_id: 13
-# Fixed Networks
   - id: &vu_government_region 21961
     name: VU Government Region
     uuid: 9ee4dc07-6ffc-4126-a9aa-88b16c13be69
     type_id: 2
+# Fixed Networks
   - id: &vu_fixed 21997
     name: VU Fixed
     uuid: 4c1621ca-f39b-4100-95da-520e39625d5f
@@ -50,6 +46,10 @@ networks:
     name: VU Penama And Torba Provinces Region
     uuid: 91c22737-0287-4a04-be33-933880d310c2
     type_id: 2
+  - id: &vu_directory_and_customer_care_services 22678
+    name: VU Directory And Customer Care Services
+    uuid: c8faab7f-4fb2-4aef-81a3-fc16597f3f1c
+    type_id: 13
   - id: &vu_shefa_province_and_port_vila_areas_region 22750
     name: VU Shefa Province And Port Vila Areas Region
     uuid: deb77814-dc78-4aa1-9e0a-f3f16e834190
@@ -58,15 +58,6 @@ networks:
     name: VU Malampa Province Region
     uuid: cf378ab0-d4c2-41d7-bc67-79b29506db5c
     type_id: 2
-  - id: &vu_tafea_province_region 24342
-    name: VU Tafea Province Region
-    uuid: 7d633cef-8ed5-49dc-9a17-5f4b792c86ec
-    type_id: 2
-  - id: &vu_voip_region 24430
-    name: VU Voip Region
-    uuid: b0aa0534-1f17-4715-a42c-924630439da0
-    type_id: 2
-# Mobile Networks
   - id: &vu_digicel_mobile 23314
     name: VU Digicel Mobile
     uuid: f622cd72-f01b-4766-9af0-544cc0035f09
@@ -75,20 +66,28 @@ networks:
     name: VU Smile Mobile
     uuid: 5800ae16-8337-489d-a9e2-0dd385090f8f
     type_id: 3
+# Mobile Networks
   - id: &vu_mobile 24159
     name: VU Mobile
     uuid: af0f927b-ee18-48d7-be33-794e26d4ec55
     type_id: 3
+  - id: &vu_tafea_province_region 24342
+    name: VU Tafea Province Region
+    uuid: 7d633cef-8ed5-49dc-9a17-5f4b792c86ec
+    type_id: 2
+  - id: &vu_voip_region 24430
+    name: VU Voip Region
+    uuid: b0aa0534-1f17-4715-a42c-924630439da0
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Supplementary services Prefixes
   - id: 242131
     prefix: '678'
     number_min_length: 4
     number_max_length: 100
     uuid: eb6749c3-5148-4ec8-827d-bcc1ab1c3b01
     country_id: *vu
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *vu_fixed
   - id: 242326
     prefix: '6780811'
     number_min_length: 9
@@ -173,6 +172,70 @@ network_prefixes:
     uuid: 19cbdd72-ed9c-48c0-a8e3-3195b61abcaf
     country_id: *vu
     network_id: *vu_directory_and_customer_care_services
+# Fixed Prefixes
+  - id: 247462
+    prefix: '67820'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: fe10be4b-51a2-427a-a1ea-d90863c5eec3
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
+  - id: 247741
+    prefix: '67822'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 8a2755ea-f654-42b0-b094-e773286884cc
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
+  - id: 247935
+    prefix: '67823'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: bce9903b-d8e4-4c0e-98be-887288bb8e3a
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
+  - id: 248126
+    prefix: '67824'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 08ca8dd5-a41c-4f84-8e2b-c18cbe96ff49
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
+  - id: 248275
+    prefix: '67825'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: f1b0e0c2-ace7-4da0-8450-2aa71cd1daad
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
+  - id: 248483
+    prefix: '67826'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: cf895bb1-52e7-492f-b5aa-41a7f4855150
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
+  - id: 248625
+    prefix: '67827'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 6475605a-0f5d-47a7-9850-def30c6cbe10
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
+  - id: 248760
+    prefix: '67828'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 34e92716-e70a-461b-bada-63b5732a9585
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
+  - id: 248839
+    prefix: '67829'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 8c7a1f18-e1a5-459e-99eb-d2f1f6334681
+    country_id: *vu
+    network_id: *vu_shefa_province_and_port_vila_areas_region
   - id: 248944
     prefix: '67830'
     number_min_length: 8
@@ -180,7 +243,6 @@ network_prefixes:
     uuid: cd8ebca6-d72e-4ffb-9cc5-36b6c45e8d3f
     country_id: *vu
     network_id: *vu_special_services
-# Fixed Prefixes
   - id: 243423
     prefix: '67833'
     number_min_length: 8
@@ -279,69 +341,6 @@ network_prefixes:
     uuid: 511a4f6c-3c8d-4f90-a9e5-834334978ae7
     country_id: *vu
     network_id: *vu_penama_and_torba_provinces_region
-  - id: 247462
-    prefix: '67820'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: fe10be4b-51a2-427a-a1ea-d90863c5eec3
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
-  - id: 247741
-    prefix: '67822'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 8a2755ea-f654-42b0-b094-e773286884cc
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
-  - id: 247935
-    prefix: '67823'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: bce9903b-d8e4-4c0e-98be-887288bb8e3a
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
-  - id: 248126
-    prefix: '67824'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 08ca8dd5-a41c-4f84-8e2b-c18cbe96ff49
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
-  - id: 248275
-    prefix: '67825'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: f1b0e0c2-ace7-4da0-8450-2aa71cd1daad
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
-  - id: 248483
-    prefix: '67826'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: cf895bb1-52e7-492f-b5aa-41a7f4855150
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
-  - id: 248625
-    prefix: '67827'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 6475605a-0f5d-47a7-9850-def30c6cbe10
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
-  - id: 248760
-    prefix: '67828'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 34e92716-e70a-461b-bada-63b5732a9585
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
-  - id: 248839
-    prefix: '67829'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 8c7a1f18-e1a5-459e-99eb-d2f1f6334681
-    country_id: *vu
-    network_id: *vu_shefa_province_and_port_vila_areas_region
   - id: 249451
     prefix: '678484'
     number_min_length: 8
@@ -384,6 +383,70 @@ network_prefixes:
     uuid: c3e4e5e1-755b-497d-b6c9-4f67105df94e
     country_id: *vu
     network_id: *vu_malampa_province_region
+  - id: 249607
+    prefix: '6785'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bdef7271-55b5-4599-8780-e93474f4d7c6
+    country_id: *vu
+    network_id: *vu_digicel_mobile
+  - id: 255286
+    prefix: '6787'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 505b81de-2b62-4238-99bf-cb2e6e22cb3b
+    country_id: *vu
+    network_id: *vu_mobile
+  - id: 255308
+    prefix: '67870'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 96c95c12-8683-4be7-b291-6cf817f1c0be
+    country_id: *vu
+    network_id: *vu_smile_mobile
+  - id: 251748
+    prefix: '67871'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aff8c8a7-e1f8-4955-a187-cb623fe82eee
+    country_id: *vu
+    network_id: *vu_smile_mobile
+# Mobile Prefixes
+  - id: 251887
+    prefix: '67873'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0bdcb8ad-bd7a-4172-8f6d-6eb1ecd085e4
+    country_id: *vu
+    network_id: *vu_smile_mobile
+  - id: 252073
+    prefix: '67874'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d3496ab5-5758-43d1-a52b-630bad44a1d8
+    country_id: *vu
+    network_id: *vu_smile_mobile
+  - id: 252565
+    prefix: '67875'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0980b56f-e224-494a-921e-2823a512393c
+    country_id: *vu
+    network_id: *vu_smile_mobile
+  - id: 255464
+    prefix: '67876'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bfe7d6d0-bd36-4543-8f3e-645fbac4a15e
+    country_id: *vu
+    network_id: *vu_smile_mobile
+  - id: 255646
+    prefix: '67877'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3468900e-d846-405b-a76d-4598000227ca
+    country_id: *vu
+    network_id: *vu_smile_mobile
   - id: 256853
     prefix: '67888'
     number_min_length: 8
@@ -412,67 +475,3 @@ network_prefixes:
     uuid: 95becbee-fae6-4335-b3b3-e46d0b99b2ac
     country_id: *vu
     network_id: *vu_voip_region
-# Mobile Prefixes
-  - id: 249607
-    prefix: '6785'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bdef7271-55b5-4599-8780-e93474f4d7c6
-    country_id: *vu
-    network_id: *vu_digicel_mobile
-  - id: 251748
-    prefix: '67871'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aff8c8a7-e1f8-4955-a187-cb623fe82eee
-    country_id: *vu
-    network_id: *vu_smile_mobile
-  - id: 251887
-    prefix: '67873'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0bdcb8ad-bd7a-4172-8f6d-6eb1ecd085e4
-    country_id: *vu
-    network_id: *vu_smile_mobile
-  - id: 252073
-    prefix: '67874'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d3496ab5-5758-43d1-a52b-630bad44a1d8
-    country_id: *vu
-    network_id: *vu_smile_mobile
-  - id: 252565
-    prefix: '67875'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0980b56f-e224-494a-921e-2823a512393c
-    country_id: *vu
-    network_id: *vu_smile_mobile
-  - id: 255286
-    prefix: '6787'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 505b81de-2b62-4238-99bf-cb2e6e22cb3b
-    country_id: *vu
-    network_id: *vu_mobile
-  - id: 255308
-    prefix: '67870'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 96c95c12-8683-4be7-b291-6cf817f1c0be
-    country_id: *vu
-    network_id: *vu_smile_mobile
-  - id: 255464
-    prefix: '67876'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bfe7d6d0-bd36-4543-8f3e-645fbac4a15e
-    country_id: *vu
-    network_id: *vu_smile_mobile
-  - id: 255646
-    prefix: '67877'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3468900e-d846-405b-a76d-4598000227ca
-    country_id: *vu
-    network_id: *vu_smile_mobile

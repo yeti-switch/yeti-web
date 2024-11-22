@@ -73,6 +73,34 @@ networks:
     name: NG Zaria Region
     uuid: 42af5604-1e0c-47c5-9e9e-31a1788d7096
     type_id: 2
+  - id: &ng_mobile 14447
+    name: NG Mobile
+    uuid: 7f40958c-2e11-4beb-896a-48ef15e89635
+    type_id: 3
+  - id: &ng_alpha_technologies_mobile 14458
+    name: NG Alpha Technologies Mobile
+    uuid: ccceb43d-c79e-4c56-b588-cf3721a597b9
+    type_id: 3
+  - id: &ng_airtel_mobile 14459
+    name: NG Airtel Mobile
+    uuid: 578adada-f44c-4eb7-b7e8-412f7151659a
+    type_id: 3
+  - id: &ng_smile_mobile 14880
+    name: NG Smile Mobile
+    uuid: 47123703-e056-4146-99c8-1cb4ebf4e27a
+    type_id: 3
+  - id: &ng_icn_mobile 14881
+    name: NG Icn Mobile
+    uuid: 596c1286-99b2-4d4c-831e-83812c8912c4
+    type_id: 3
+  - id: &ng_mtn_mobile 14882
+    name: NG Mtn Mobile
+    uuid: 07347a5e-09f4-4d69-8140-3e20fd43dcb1
+    type_id: 3
+  - id: &ng_glo_mobile_mobile 14887
+    name: NG Glo Mobile Mobile
+    uuid: c425e920-50c0-4824-aa02-d16a9f3b2720
+    type_id: 3
   - id: &ng_azare_region 16212
     name: NG Azare Region
     uuid: fa1400d7-d472-4e5f-9204-a65478073985
@@ -105,6 +133,14 @@ networks:
     name: NG Jalingo Region
     uuid: d6c3f8c2-10af-4966-9e75-86910f01ed3c
     type_id: 2
+  - id: &ng_special_services 21464
+    name: NG Special Services
+    uuid: 84852786-abd3-499d-8a3b-1d156a5ca6a6
+    type_id: 13
+  - id: &ng_emergency_services 21592
+    name: NG Emergency Services
+    uuid: b2961fe7-54ab-45f0-8bd7-72ad1513f5f1
+    type_id: 13
   - id: &ng_lagos_region 24793
     name: NG Lagos Region
     uuid: 9da077cb-c9b2-4630-b5f3-94ebff723b95
@@ -181,6 +217,7 @@ networks:
     name: NG Aba Region
     uuid: 3c806aa6-42bd-4639-828c-f4c1dfc830ab
     type_id: 2
+# Mobile Networks
   - id: &ng_owerri_region 27280
     name: NG Owerri Region
     uuid: 7e8ce5ef-8d5c-46c6-9030-6e7491800bee
@@ -213,35 +250,6 @@ networks:
     name: NG Abuja Region
     uuid: a1e5a8a8-c742-42c1-ba2c-0a2fcbafc518
     type_id: 2
-# Mobile Networks
-  - id: &ng_mobile 14447
-    name: NG Mobile
-    uuid: 7f40958c-2e11-4beb-896a-48ef15e89635
-    type_id: 3
-  - id: &ng_alpha_technologies_mobile 14458
-    name: NG Alpha Technologies Mobile
-    uuid: ccceb43d-c79e-4c56-b588-cf3721a597b9
-    type_id: 3
-  - id: &ng_airtel_mobile 14459
-    name: NG Airtel Mobile
-    uuid: 578adada-f44c-4eb7-b7e8-412f7151659a
-    type_id: 3
-  - id: &ng_smile_mobile 14880
-    name: NG Smile Mobile
-    uuid: 47123703-e056-4146-99c8-1cb4ebf4e27a
-    type_id: 3
-  - id: &ng_icn_mobile 14881
-    name: NG Icn Mobile
-    uuid: 596c1286-99b2-4d4c-831e-83812c8912c4
-    type_id: 3
-  - id: &ng_mtn_mobile 14882
-    name: NG Mtn Mobile
-    uuid: 07347a5e-09f4-4d69-8140-3e20fd43dcb1
-    type_id: 3
-  - id: &ng_glo_mobile_mobile 14887
-    name: NG Glo Mobile Mobile
-    uuid: c425e920-50c0-4824-aa02-d16a9f3b2720
-    type_id: 3
   - id: &ng_mcom_mobile 38470
     name: NG Mcom Mobile
     uuid: 0c10203a-7149-4a88-a7da-94c392ab2ee3
@@ -250,203 +258,24 @@ networks:
     name: NG Ntel Mobile
     uuid: 5edf412e-c951-4d3c-8095-63eee7caee78
     type_id: 3
+# Supplementary services Networks
   - id: &ng_9mobile_mobile 38480
     name: NG 9Mobile Mobile
     uuid: 6a6434b9-58d1-4ad6-88d1-1ede14ef9c70
     type_id: 3
-# Supplementary services Networks
-  - id: &ng_special_services 21464
-    name: NG Special Services
-    uuid: 84852786-abd3-499d-8a3b-1d156a5ca6a6
-    type_id: 13
-  - id: &ng_emergency_services 21592
-    name: NG Emergency Services
-    uuid: b2961fe7-54ab-45f0-8bd7-72ad1513f5f1
-    type_id: 13
+  - id: &ng_fixed 43442
+    name: NG Fixed
+    uuid: 544152d5-0032-4f8d-824e-0042d8af1cc2
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
-  - id: 51613
-    prefix: '23448'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a10f8fbe-ab15-4f0c-81cf-17b2827ce1d4
+  - id: 242067
+    prefix: '234'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: ee168886-0660-4723-885b-92b6d349799a
     country_id: *ng
-    network_id: *ng_awka_region
-  - id: 54928
-    prefix: '23450'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fa95490b-3657-41b0-a256-9bb7a52e4678
-    country_id: *ng
-    network_id: *ng_ikare_region
-  - id: 62611
-    prefix: '23451'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6c42541f-e9d0-4187-a32a-127d14a85523
-    country_id: *ng
-    network_id: *ng_owo_region
-  - id: 71662
-    prefix: '23452'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 70282825-f567-4a92-81b8-0fe97d634841
-    country_id: *ng
-    network_id: *ng_benin_city_region
-  - id: 73205
-    prefix: '23454'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: d913d616-1642-44f0-bfaa-3cfa7cd1e667
-    country_id: *ng
-    network_id: *ng_sapele_region
-  - id: 76549
-    prefix: '23453'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c9463475-b540-489e-a6ec-dfd950e0788b
-    country_id: *ng
-    network_id: *ng_warri_region
-  - id: 78127
-    prefix: '23455'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: befecfc2-c13f-4d0c-b1ad-bcbca8e978c8
-    country_id: *ng
-    network_id: *ng_agbor_region
-  - id: 84415
-    prefix: '23459'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a00db788-3502-4581-b83a-a22b5c9f06a6
-    country_id: *ng
-    network_id: *ng_okitipupa_region
-  - id: 87919
-    prefix: '23456'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 458f6ce0-4c32-4ad7-9512-a5c0bd6f4939
-    country_id: *ng
-    network_id: *ng_asaba_region
-  - id: 90273
-    prefix: '23457'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 59ffc8da-bf8e-4040-9fca-209c02681930
-    country_id: *ng
-    network_id: *ng_auchi_region
-  - id: 93099
-    prefix: '23458'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e8d03319-24bc-4d61-8076-d16a6f9766ef
-    country_id: *ng
-    network_id: *ng_lokoja_region
-  - id: 95219
-    prefix: '23460'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c1ff8f1f-7a29-4cf2-b1f1-070f516cd3c8
-    country_id: *ng
-    network_id: *ng_sokoto_region
-  - id: 111469
-    prefix: '23462'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ccd197c-71ee-4b08-9010-11839d844138
-    country_id: *ng
-    network_id: *ng_kaduna_region
-  - id: 122439
-    prefix: '23464'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0f222cbf-c5d8-4466-be69-650d3bfedf4b
-    country_id: *ng
-    network_id: *ng_kano_region
-  - id: 135917
-    prefix: '23465'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: cf3060e7-37f0-4100-b33c-b1d8f83c50ca
-    country_id: *ng
-    network_id: *ng_katsina_region
-  - id: 138629
-    prefix: '23466'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 075e662e-1ec8-43d8-b337-08bf2d8a4c0a
-    country_id: *ng
-    network_id: *ng_minna_region
-  - id: 146820
-    prefix: '23468'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: e94b62bd-245b-449e-a828-0abbc799d589
-    country_id: *ng
-    network_id: *ng_birnin_kebbi_region
-  - id: 148664
-    prefix: '23469'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a90ee760-f716-4fa2-b3ee-e231fa8308a0
-    country_id: *ng
-    network_id: *ng_zaria_region
-  - id: 163997
-    prefix: '23471'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 6e48c1d9-dd42-46e1-bb39-2d9a79a9964a
-    country_id: *ng
-    network_id: *ng_azare_region
-  - id: 172530
-    prefix: '23472'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8d80cb67-d2f5-407b-a460-201d97835283
-    country_id: *ng
-    network_id: *ng_gombe_region
-  - id: 174944
-    prefix: '23473'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: a4889ebe-75d4-4da0-b5c7-b7788977e677
-    country_id: *ng
-    network_id: *ng_jos_region
-  - id: 182867
-    prefix: '23474'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3152180d-6830-4ab2-8f75-d066d14c8a4d
-    country_id: *ng
-    network_id: *ng_damaturu_region
-  - id: 185877
-    prefix: '23475'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 8521009c-ad8c-407b-842c-65b47c3b2824
-    country_id: *ng
-    network_id: *ng_yola_region
-  - id: 187991
-    prefix: '23476'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: acdaacfb-4a87-410b-bf5f-30601cb6b42a
-    country_id: *ng
-    network_id: *ng_maiduguri_region
-  - id: 192097
-    prefix: '23477'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: bacfb0c6-8f63-4d72-99b3-4c3ea6b18c66
-    country_id: *ng
-    network_id: *ng_bauchi_region
-  - id: 206662
-    prefix: '23479'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 25a9f04d-d31e-45cd-ad53-1a18c64e5eb7
-    country_id: *ng
-    network_id: *ng_jalingo_region
+    network_id: *ng_fixed
   - id: 258567
     prefix: '2341'
     number_min_length: 10
@@ -454,6 +283,20 @@ network_prefixes:
     uuid: 775b359b-49d8-445f-9e6d-f8a33432c500
     country_id: *ng
     network_id: *ng_lagos_region
+  - id: 242462
+    prefix: '2341'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 2542a040-12e4-486e-a192-e2ee8e5bcb6e
+    country_id: *ng
+    network_id: *ng_special_services
+  - id: 242625
+    prefix: '234112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 18b995ef-c3f6-4b80-997d-6c2f09bdab7e
+    country_id: *ng
+    network_id: *ng_emergency_services
   - id: 261196
     prefix: '2342'
     number_min_length: 10
@@ -461,76 +304,6 @@ network_prefixes:
     uuid: 0a52eae9-3ea3-465f-a94d-44d6c06bd46e
     country_id: *ng
     network_id: *ng_ibadan_region
-  - id: 263202
-    prefix: '2342050'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 12fa0fe9-77a0-4037-9617-39a9d4e821aa
-    country_id: *ng
-    network_id: *ng_ikare_region
-  - id: 263204
-    prefix: '2342051'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 1407d359-4f74-4d5a-94ef-9a698c57c875
-    country_id: *ng
-    network_id: *ng_owo_region
-  - id: 263206
-    prefix: '2342052'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: c1172609-9c29-4438-b03e-41b5060223d5
-    country_id: *ng
-    network_id: *ng_benin_city_region
-  - id: 263208
-    prefix: '2342053'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: bf29b988-dcff-4dcf-9566-8a589267148e
-    country_id: *ng
-    network_id: *ng_warri_region
-  - id: 263210
-    prefix: '2342054'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: dcdbf9b2-7e54-4a93-807e-7b265541a74f
-    country_id: *ng
-    network_id: *ng_sapele_region
-  - id: 263211
-    prefix: '2342055'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: cb05d1ad-798f-4ddd-a277-2cf631377f57
-    country_id: *ng
-    network_id: *ng_agbor_region
-  - id: 263213
-    prefix: '2342056'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 5f70ed1b-347c-4c4e-917d-cec2b5fe0844
-    country_id: *ng
-    network_id: *ng_asaba_region
-  - id: 263214
-    prefix: '2342057'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4679f34b-1adf-4dbd-afe3-9f419815fadb
-    country_id: *ng
-    network_id: *ng_auchi_region
-  - id: 263216
-    prefix: '2342058'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: b1158118-2bfe-4932-9f69-4f691b3ccb78
-    country_id: *ng
-    network_id: *ng_lokoja_region
-  - id: 263217
-    prefix: '2342059'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ba075a1f-0b69-4b31-89e8-2596deae4ad9
-    country_id: *ng
-    network_id: *ng_okitipupa_region
   - id: 267379
     prefix: '234201'
     number_min_length: 13
@@ -664,6 +437,76 @@ network_prefixes:
     uuid: 37d80de0-aa4f-4309-8045-c7ef10dc98ba
     country_id: *ng
     network_id: *ng_awka_region
+  - id: 263202
+    prefix: '2342050'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 12fa0fe9-77a0-4037-9617-39a9d4e821aa
+    country_id: *ng
+    network_id: *ng_ikare_region
+  - id: 263204
+    prefix: '2342051'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 1407d359-4f74-4d5a-94ef-9a698c57c875
+    country_id: *ng
+    network_id: *ng_owo_region
+  - id: 263206
+    prefix: '2342052'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c1172609-9c29-4438-b03e-41b5060223d5
+    country_id: *ng
+    network_id: *ng_benin_city_region
+  - id: 263208
+    prefix: '2342053'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: bf29b988-dcff-4dcf-9566-8a589267148e
+    country_id: *ng
+    network_id: *ng_warri_region
+  - id: 263210
+    prefix: '2342054'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: dcdbf9b2-7e54-4a93-807e-7b265541a74f
+    country_id: *ng
+    network_id: *ng_sapele_region
+  - id: 263211
+    prefix: '2342055'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: cb05d1ad-798f-4ddd-a277-2cf631377f57
+    country_id: *ng
+    network_id: *ng_agbor_region
+  - id: 263213
+    prefix: '2342056'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5f70ed1b-347c-4c4e-917d-cec2b5fe0844
+    country_id: *ng
+    network_id: *ng_asaba_region
+  - id: 263214
+    prefix: '2342057'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4679f34b-1adf-4dbd-afe3-9f419815fadb
+    country_id: *ng
+    network_id: *ng_auchi_region
+  - id: 263216
+    prefix: '2342058'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: b1158118-2bfe-4932-9f69-4f691b3ccb78
+    country_id: *ng
+    network_id: *ng_lokoja_region
+  - id: 263217
+    prefix: '2342059'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ba075a1f-0b69-4b31-89e8-2596deae4ad9
+    country_id: *ng
+    network_id: *ng_okitipupa_region
   - id: 269602
     prefix: '2342060'
     number_min_length: 13
@@ -860,20 +703,6 @@ network_prefixes:
     uuid: cfd964d0-81b1-47bf-b9ae-c83a1764c790
     country_id: *ng
     network_id: *ng_akure_region
-  - id: 345945
-    prefix: '23436'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a43a8302-7dc2-4f59-b92b-0aec3800a8da
-    country_id: *ng
-    network_id: *ng_ile_ife_region
-  - id: 347704
-    prefix: '23438'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c7ae9bb0-8bb3-42b9-996f-91dc13471c94
-    country_id: *ng
-    network_id: *ng_oyo_region
   - id: 352239
     prefix: '23435'
     number_min_length: 11
@@ -881,6 +710,13 @@ network_prefixes:
     uuid: a8f468b4-527a-4088-9ab7-731a00f97d00
     country_id: *ng
     network_id: *ng_osogbo_region
+  - id: 345945
+    prefix: '23436'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a43a8302-7dc2-4f59-b92b-0aec3800a8da
+    country_id: *ng
+    network_id: *ng_ile_ife_region
   - id: 355760
     prefix: '23437'
     number_min_length: 11
@@ -888,6 +724,13 @@ network_prefixes:
     uuid: f23edefb-d932-40f9-9595-b3b4f975325f
     country_id: *ng
     network_id: *ng_ijebu_ode_region
+  - id: 347704
+    prefix: '23438'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c7ae9bb0-8bb3-42b9-996f-91dc13471c94
+    country_id: *ng
+    network_id: *ng_oyo_region
   - id: 357535
     prefix: '23439'
     number_min_length: 11
@@ -902,6 +745,13 @@ network_prefixes:
     uuid: 232e814e-ee63-4e64-bb4d-c825bae1315a
     country_id: *ng
     network_id: *ng_wukari_region
+  - id: 377182
+    prefix: '23442'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 47bca75d-6637-4e03-97a0-141684ba0039
+    country_id: *ng
+    network_id: *ng_enugu_region
   - id: 367942
     prefix: '23443'
     number_min_length: 11
@@ -916,20 +766,6 @@ network_prefixes:
     uuid: 4998ec1e-238b-46a4-bca8-c9cb45b1dfd7
     country_id: *ng
     network_id: *ng_makurdi_region
-  - id: 377182
-    prefix: '23442'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 47bca75d-6637-4e03-97a0-141684ba0039
-    country_id: *ng
-    network_id: *ng_enugu_region
-  - id: 388633
-    prefix: '23446'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a6ec185c-9aa8-4e04-8216-531bb55f0dc8
-    country_id: *ng
-    network_id: *ng_onitsha_region
   - id: 392622
     prefix: '23445'
     number_min_length: 11
@@ -937,6 +773,13 @@ network_prefixes:
     uuid: 27e5515e-e9be-4faf-980b-ae98a64e5b06
     country_id: *ng
     network_id: *ng_ogoja_region
+  - id: 388633
+    prefix: '23446'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6ec185c-9aa8-4e04-8216-531bb55f0dc8
+    country_id: *ng
+    network_id: *ng_onitsha_region
   - id: 399485
     prefix: '23447'
     number_min_length: 10
@@ -944,70 +787,132 @@ network_prefixes:
     uuid: 11abdc66-fe15-4b41-aff3-e4bec50b78b1
     country_id: *ng
     network_id: *ng_lafia_region
-  - id: 418790
-    prefix: '23482'
+  - id: 51613
+    prefix: '23448'
     number_min_length: 11
     number_max_length: 11
-    uuid: f8e42f02-15e7-465c-a1d6-25d0a652c30d
+    uuid: a10f8fbe-ab15-4f0c-81cf-17b2827ce1d4
     country_id: *ng
-    network_id: *ng_aba_region
-  - id: 422126
-    prefix: '23483'
+    network_id: *ng_awka_region
+  - id: 54928
+    prefix: '23450'
     number_min_length: 11
     number_max_length: 11
-    uuid: af6e2ef7-2382-4643-ad84-86cd6be6f069
+    uuid: fa95490b-3657-41b0-a256-9bb7a52e4678
     country_id: *ng
-    network_id: *ng_owerri_region
-  - id: 428704
-    prefix: '23486'
+    network_id: *ng_ikare_region
+  - id: 62611
+    prefix: '23451'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6c42541f-e9d0-4187-a32a-127d14a85523
+    country_id: *ng
+    network_id: *ng_owo_region
+  - id: 71662
+    prefix: '23452'
     number_min_length: 11
     number_max_length: 11
-    uuid: 4b46c3a3-2aae-4618-a90b-30cdf30ab3e5
+    uuid: 70282825-f567-4a92-81b8-0fe97d634841
     country_id: *ng
-    network_id: *ng_ahoada_region
-  - id: 433219
-    prefix: '23484'
+    network_id: *ng_benin_city_region
+  - id: 76549
+    prefix: '23453'
     number_min_length: 11
     number_max_length: 11
-    uuid: 7d65d8f0-e5b9-4366-828e-f1e2b325c727
+    uuid: c9463475-b540-489e-a6ec-dfd950e0788b
     country_id: *ng
-    network_id: *ng_port_harcourt_region
-  - id: 435884
-    prefix: '23485'
+    network_id: *ng_warri_region
+  - id: 73205
+    prefix: '23454'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: d913d616-1642-44f0-bfaa-3cfa7cd1e667
+    country_id: *ng
+    network_id: *ng_sapele_region
+  - id: 78127
+    prefix: '23455'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: befecfc2-c13f-4d0c-b1ad-bcbca8e978c8
+    country_id: *ng
+    network_id: *ng_agbor_region
+  - id: 87919
+    prefix: '23456'
     number_min_length: 11
     number_max_length: 11
-    uuid: d5f6bd39-ff58-4386-b616-343ddbad278a
+    uuid: 458f6ce0-4c32-4ad7-9512-a5c0bd6f4939
     country_id: *ng
-    network_id: *ng_uyo_region
-  - id: 441110
-    prefix: '23487'
+    network_id: *ng_asaba_region
+  - id: 90273
+    prefix: '23457'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 59ffc8da-bf8e-4040-9fca-209c02681930
+    country_id: *ng
+    network_id: *ng_auchi_region
+  - id: 93099
+    prefix: '23458'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6bfceb9e-5600-4c92-8976-2657712a58e3
+    uuid: e8d03319-24bc-4d61-8076-d16a6f9766ef
     country_id: *ng
-    network_id: *ng_calabar_region
-  - id: 443794
-    prefix: '23488'
+    network_id: *ng_lokoja_region
+  - id: 84415
+    prefix: '23459'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a00db788-3502-4581-b83a-a22b5c9f06a6
+    country_id: *ng
+    network_id: *ng_okitipupa_region
+  - id: 95219
+    prefix: '23460'
     number_min_length: 11
     number_max_length: 11
-    uuid: c42c1988-2547-4d5f-a007-ae6a9333b8f7
+    uuid: c1ff8f1f-7a29-4cf2-b1f1-070f516cd3c8
     country_id: *ng
-    network_id: *ng_umuahia_region
-  - id: 444756
-    prefix: '2349'
+    network_id: *ng_sokoto_region
+  - id: 111469
+    prefix: '23462'
     number_min_length: 11
     number_max_length: 11
-    uuid: 9bf9e88d-1604-4714-aafe-5710a8565489
+    uuid: 0ccd197c-71ee-4b08-9010-11839d844138
     country_id: *ng
-    network_id: *ng_abuja_region
-  - id: 451412
-    prefix: '23489'
+    network_id: *ng_kaduna_region
+  - id: 122439
+    prefix: '23464'
     number_min_length: 11
     number_max_length: 11
-    uuid: 21a9eb9b-dbe1-4317-9e3a-6bb422feb533
+    uuid: 0f222cbf-c5d8-4466-be69-650d3bfedf4b
     country_id: *ng
-    network_id: *ng_yenagoa_region
-# Mobile Prefixes
+    network_id: *ng_kano_region
+  - id: 135917
+    prefix: '23465'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: cf3060e7-37f0-4100-b33c-b1d8f83c50ca
+    country_id: *ng
+    network_id: *ng_katsina_region
+  - id: 138629
+    prefix: '23466'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 075e662e-1ec8-43d8-b337-08bf2d8a4c0a
+    country_id: *ng
+    network_id: *ng_minna_region
+  - id: 146820
+    prefix: '23468'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: e94b62bd-245b-449e-a828-0abbc799d589
+    country_id: *ng
+    network_id: *ng_birnin_kebbi_region
+  - id: 148664
+    prefix: '23469'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a90ee760-f716-4fa2-b3ee-e231fa8308a0
+    country_id: *ng
+    network_id: *ng_zaria_region
   - id: 150239
     prefix: '23470'
     number_min_length: 13
@@ -1092,6 +997,13 @@ network_prefixes:
     uuid: 3a156bc2-9970-4f1c-bf78-deffb11887fb
     country_id: *ng
     network_id: *ng_airtel_mobile
+  - id: 163997
+    prefix: '23471'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 6e48c1d9-dd42-46e1-bb39-2d9a79a9964a
+    country_id: *ng
+    network_id: *ng_azare_region
   - id: 163998
     prefix: '23471'
     number_min_length: 13
@@ -1099,6 +1011,14 @@ network_prefixes:
     uuid: 7cb401b6-f25e-45ae-8968-d6fcdb2d6bcb
     country_id: *ng
     network_id: *ng_mobile
+  - id: 172530
+    prefix: '23472'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8d80cb67-d2f5-407b-a460-201d97835283
+    country_id: *ng
+    network_id: *ng_gombe_region
+# Mobile Prefixes
   - id: 172531
     prefix: '23472'
     number_min_length: 13
@@ -1106,6 +1026,48 @@ network_prefixes:
     uuid: 13f38088-aafe-4c63-b4af-b75f95a08782
     country_id: *ng
     network_id: *ng_mobile
+  - id: 174944
+    prefix: '23473'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: a4889ebe-75d4-4da0-b5c7-b7788977e677
+    country_id: *ng
+    network_id: *ng_jos_region
+  - id: 182867
+    prefix: '23474'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3152180d-6830-4ab2-8f75-d066d14c8a4d
+    country_id: *ng
+    network_id: *ng_damaturu_region
+  - id: 185877
+    prefix: '23475'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 8521009c-ad8c-407b-842c-65b47c3b2824
+    country_id: *ng
+    network_id: *ng_yola_region
+  - id: 187991
+    prefix: '23476'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: acdaacfb-4a87-410b-bf5f-30601cb6b42a
+    country_id: *ng
+    network_id: *ng_maiduguri_region
+  - id: 192097
+    prefix: '23477'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: bacfb0c6-8f63-4d72-99b3-4c3ea6b18c66
+    country_id: *ng
+    network_id: *ng_bauchi_region
+  - id: 206662
+    prefix: '23479'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 25a9f04d-d31e-45cd-ad53-1a18c64e5eb7
+    country_id: *ng
+    network_id: *ng_jalingo_region
   - id: 207792
     prefix: '23480'
     number_min_length: 13
@@ -1183,20 +1145,6 @@ network_prefixes:
     uuid: 0bd880c8-c64d-4c10-a531-f75c7e5d35e3
     country_id: *ng
     network_id: *ng_9mobile_mobile
-  - id: 405476
-    prefix: '234812'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d3d2c8a5-1118-4219-a6bf-2acd2d22e272
-    country_id: *ng
-    network_id: *ng_airtel_mobile
-  - id: 405978
-    prefix: '234813'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ac0ed5de-1f26-4c64-aba0-d8d0e28eead8
-    country_id: *ng
-    network_id: *ng_mtn_mobile
   - id: 413678
     prefix: '23481'
     number_min_length: 13
@@ -1218,6 +1166,20 @@ network_prefixes:
     uuid: 21e5d48e-5308-4cc6-92d6-0373ecb05350
     country_id: *ng
     network_id: *ng_glo_mobile_mobile
+  - id: 405476
+    prefix: '234812'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d3d2c8a5-1118-4219-a6bf-2acd2d22e272
+    country_id: *ng
+    network_id: *ng_airtel_mobile
+  - id: 405978
+    prefix: '234813'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ac0ed5de-1f26-4c64-aba0-d8d0e28eead8
+    country_id: *ng
+    network_id: *ng_mtn_mobile
   - id: 414525
     prefix: '234814'
     number_min_length: 13
@@ -1253,6 +1215,90 @@ network_prefixes:
     uuid: 4a534b52-012c-4e4c-9c97-97a762fcb2f2
     country_id: *ng
     network_id: *ng_9mobile_mobile
+  - id: 418790
+    prefix: '23482'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8e42f02-15e7-465c-a1d6-25d0a652c30d
+    country_id: *ng
+    network_id: *ng_aba_region
+  - id: 422126
+    prefix: '23483'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: af6e2ef7-2382-4643-ad84-86cd6be6f069
+    country_id: *ng
+    network_id: *ng_owerri_region
+  - id: 433219
+    prefix: '23484'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7d65d8f0-e5b9-4366-828e-f1e2b325c727
+    country_id: *ng
+    network_id: *ng_port_harcourt_region
+  - id: 435884
+    prefix: '23485'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d5f6bd39-ff58-4386-b616-343ddbad278a
+    country_id: *ng
+    network_id: *ng_uyo_region
+  - id: 428704
+    prefix: '23486'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4b46c3a3-2aae-4618-a90b-30cdf30ab3e5
+    country_id: *ng
+    network_id: *ng_ahoada_region
+  - id: 441110
+    prefix: '23487'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6bfceb9e-5600-4c92-8976-2657712a58e3
+    country_id: *ng
+    network_id: *ng_calabar_region
+  - id: 443794
+    prefix: '23488'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c42c1988-2547-4d5f-a007-ae6a9333b8f7
+    country_id: *ng
+    network_id: *ng_umuahia_region
+  - id: 451412
+    prefix: '23489'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 21a9eb9b-dbe1-4317-9e3a-6bb422feb533
+    country_id: *ng
+    network_id: *ng_yenagoa_region
+  - id: 444756
+    prefix: '2349'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9bf9e88d-1604-4714-aafe-5710a8565489
+    country_id: *ng
+    network_id: *ng_abuja_region
+  - id: 454109
+    prefix: '23490'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 89506c63-f49a-414a-a166-43620efba94a
+    country_id: *ng
+    network_id: *ng_mobile
+  - id: 454230
+    prefix: '234901'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 0e327e1d-e5ff-4cbd-8bd4-4865603c6165
+    country_id: *ng
+    network_id: *ng_airtel_mobile
+  - id: 454380
+    prefix: '234902'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 10b8d0a2-0901-41f7-9d4a-50b9f16be09f
+    country_id: *ng
+    network_id: *ng_airtel_mobile
   - id: 445505
     prefix: '234903'
     number_min_length: 13
@@ -1302,27 +1348,6 @@ network_prefixes:
     uuid: 0bf8eebe-364f-4d98-96af-a840f2b21431
     country_id: *ng
     network_id: *ng_9mobile_mobile
-  - id: 454109
-    prefix: '23490'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 89506c63-f49a-414a-a166-43620efba94a
-    country_id: *ng
-    network_id: *ng_mobile
-  - id: 454230
-    prefix: '234901'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 0e327e1d-e5ff-4cbd-8bd4-4865603c6165
-    country_id: *ng
-    network_id: *ng_airtel_mobile
-  - id: 454380
-    prefix: '234902'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 10b8d0a2-0901-41f7-9d4a-50b9f16be09f
-    country_id: *ng
-    network_id: *ng_airtel_mobile
   - id: 463767
     prefix: '234911'
     number_min_length: 13
@@ -1351,6 +1376,7 @@ network_prefixes:
     uuid: 898c7615-3dd9-4737-a0e0-930f5e37d87d
     country_id: *ng
     network_id: *ng_mobile
+# Supplementary services Prefixes
   - id: 464279
     prefix: '234915'
     number_min_length: 13
@@ -1365,26 +1391,3 @@ network_prefixes:
     uuid: ef8c5858-b95b-473d-ad36-19cbd8925362
     country_id: *ng
     network_id: *ng_mtn_mobile
-# Country code Prefixes
-  - id: 242067
-    prefix: '234'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: ee168886-0660-4723-885b-92b6d349799a
-    country_id: *ng
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242462
-    prefix: '2341'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 2542a040-12e4-486e-a192-e2ee8e5bcb6e
-    country_id: *ng
-    network_id: *ng_special_services
-  - id: 242625
-    prefix: '234112'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 18b995ef-c3f6-4b80-997d-6c2f09bdab7e
-    country_id: *ng
-    network_id: *ng_emergency_services

@@ -13,19 +13,6 @@ networks:
     name: EC Azuay Canar El Oro Loja Morona Santiago Zamora Chinchipe Region
     uuid: e839182d-d086-4359-af4b-c68b9f2ffab6
     type_id: 2
-  - id: &ec_pichincha_region 25839
-    name: EC Pichincha Region
-    uuid: ce4f7c95-d4cd-4001-a778-866105067bae
-    type_id: 2
-  - id: &ec_bolivar_chimborazo_cotopaxi_pastaza_tungurahua_region 31287
-    name: EC Bolivar Chimborazo Cotopaxi Pastaza Tungurahua Region
-    uuid: 9c80d751-6ed8-4701-b932-b419a3e8f438
-    type_id: 2
-  - id: &ec_guayas_region 34261
-    name: EC Guayas Region
-    uuid: fa678fbe-b4ce-44cb-85be-0845e33d861e
-    type_id: 2
-# Supplementary services Networks
   - id: &ec_universal_personal_number 14474
     name: EC Universal Personal Number
     uuid: cdf3c59d-54c6-4b60-940f-8dabbb05ac31
@@ -38,35 +25,11 @@ networks:
     name: EC Televoting Services
     uuid: cb67da97-4685-40de-9487-0d947736fb11
     type_id: 13
-  - id: &ec_voice_mail_services 21175
-    name: EC Voice Mail Services
-    uuid: a8232679-3b2c-4cf0-b97b-546025e850b8
-    type_id: 13
-  - id: &ec_special_services 21394
-    name: EC Special Services
-    uuid: 51a87380-e077-4a70-802b-6f3eeef3d322
-    type_id: 13
-  - id: &ec_country_direct_services 22608
-    name: EC Country Direct Services
-    uuid: 742ffdde-9d6a-43d2-9dcf-37856b3db908
-    type_id: 13
-  - id: &ec_freephone_services 38494
-    name: EC Freephone Services
-    uuid: 84ce6f41-2e76-4ed0-87a0-4cf7d8ca7140
-    type_id: 13
-  - id: &ec_shared_cost_services 38621
-    name: EC Shared Cost Services
-    uuid: 3887570d-2388-460d-9f1f-325c06b7e6e9
-    type_id: 13
-  - id: &ec_information_services 42066
-    name: EC Information Services
-    uuid: 5ce09bcf-caa8-40a3-9808-0e2d55a9d020
-    type_id: 13
-# Mobile Networks
   - id: &ec_mobile 20033
     name: EC Mobile
     uuid: bbef4350-cf2e-4140-8886-403e3b02eeb9
     type_id: 3
+# Supplementary services Networks
   - id: &ec_movistar_mobile 20278
     name: EC Movistar Mobile
     uuid: e861aead-c6f7-42df-8f59-d1b4184395a9
@@ -79,29 +42,59 @@ networks:
     name: EC Cnt Movil Mobile
     uuid: 6af05703-43c2-4fce-80aa-a80da89e1ebe
     type_id: 3
+  - id: &ec_special_services 21394
+    name: EC Special Services
+    uuid: 51a87380-e077-4a70-802b-6f3eeef3d322
+    type_id: 13
+  - id: &ec_country_direct_services 22608
+    name: EC Country Direct Services
+    uuid: 742ffdde-9d6a-43d2-9dcf-37856b3db908
+    type_id: 13
+  - id: &ec_pichincha_region 25839
+    name: EC Pichincha Region
+    uuid: ce4f7c95-d4cd-4001-a778-866105067bae
+    type_id: 2
+  - id: &ec_bolivar_chimborazo_cotopaxi_pastaza_tungurahua_region 31287
+    name: EC Bolivar Chimborazo Cotopaxi Pastaza Tungurahua Region
+    uuid: 9c80d751-6ed8-4701-b932-b419a3e8f438
+    type_id: 2
+  - id: &ec_guayas_region 34261
+    name: EC Guayas Region
+    uuid: fa678fbe-b4ce-44cb-85be-0845e33d861e
+    type_id: 2
+# Mobile Networks
+  - id: &ec_freephone_services 38494
+    name: EC Freephone Services
+    uuid: 84ce6f41-2e76-4ed0-87a0-4cf7d8ca7140
+    type_id: 13
+  - id: &ec_shared_cost_services 38621
+    name: EC Shared Cost Services
+    uuid: 3887570d-2388-460d-9f1f-325c06b7e6e9
+    type_id: 13
+  - id: &ec_information_services 42066
+    name: EC Information Services
+    uuid: 5ce09bcf-caa8-40a3-9808-0e2d55a9d020
+    type_id: 13
+  - id: &ec_fixed 43407
+    name: EC Fixed
+    uuid: b88cd540-44c0-4b26-bfbf-6931e1f5766a
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
-  - id: 54579
-    prefix: '5935'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 23691a3b-62e0-4372-a884-808b4537e71d
+  - id: 241985
+    prefix: '593'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 75ee8461-069c-4dfc-847c-86d798629515
     country_id: *ec
-    network_id: *ec_galapagos_los_rios_manabi_region
-  - id: 84941
-    prefix: '5936'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5e30fb21-3abc-487b-af43-e04702c43d95
+    network_id: *ec_fixed
+  - id: 242390
+    prefix: '5931'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 5707167e-8fcc-4973-b5dd-cd7cc0700cea
     country_id: *ec
-    network_id: *ec_carchi_esmeraldas_imbabura_napo_orellana_sucumbios_region
-  - id: 149332
-    prefix: '5937'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: acc5eeec-5e6a-46c9-a59d-e1fc5debe334
-    country_id: *ec
-    network_id: *ec_azuay_canar_el_oro_loja_morona_santiago_zamora_chinchipe_region
+    network_id: *ec_special_services
   - id: 261187
     prefix: '5932'
     number_min_length: 11
@@ -109,6 +102,13 @@ network_prefixes:
     uuid: 6bd881b6-77c1-4a95-b158-9aca7f014176
     country_id: *ec
     network_id: *ec_pichincha_region
+  - id: 247402
+    prefix: '5932'
+    number_min_length: 5
+    number_max_length: 9
+    uuid: 138bfd74-0eaf-4263-b401-d504f890b6cc
+    country_id: *ec
+    network_id: *ec_special_services
   - id: 315865
     prefix: '5933'
     number_min_length: 11
@@ -116,6 +116,13 @@ network_prefixes:
     uuid: 5ca57476-c618-4021-b5be-e286f94a72df
     country_id: *ec
     network_id: *ec_bolivar_chimborazo_cotopaxi_pastaza_tungurahua_region
+  - id: 248893
+    prefix: '5933'
+    number_min_length: 5
+    number_max_length: 9
+    uuid: 11116128-66d4-416a-b18a-24128495a517
+    country_id: *ec
+    network_id: *ec_special_services
   - id: 349444
     prefix: '5934'
     number_min_length: 11
@@ -124,41 +131,6 @@ network_prefixes:
     country_id: *ec
     network_id: *ec_guayas_region
 # Supplementary services Prefixes
-  - id: 150699
-    prefix: '593702'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fb0a1f88-0cf6-4a48-9336-bd2cd0353279
-    country_id: *ec
-    network_id: *ec_universal_personal_number
-  - id: 154402
-    prefix: '593700'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3d0059e7-8361-4cd5-85e1-8e6f9bb4a211
-    country_id: *ec
-    network_id: *ec_universal_access_services
-  - id: 209217
-    prefix: '593805'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 95d06054-358e-4060-8eeb-3edc959692d1
-    country_id: *ec
-    network_id: *ec_televoting_services
-#  - id: 239383
-#    prefix: '593990'
-#    number_min_length: 12
-#    number_max_length: 12
-#    uuid: ee881bd5-80f0-447b-b036-7a2e7418bf42
-#    country_id: *ec
-#    network_id: *ec_voice_mail_services
-  - id: 242390
-    prefix: '5931'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 5707167e-8fcc-4973-b5dd-cd7cc0700cea
-    country_id: *ec
-    network_id: *ec_special_services
   - id: 243931
     prefix: '5934'
     number_min_length: 6
@@ -166,34 +138,13 @@ network_prefixes:
     uuid: c78da030-5912-4087-be40-3b02f72ef7c8
     country_id: *ec
     network_id: *ec_special_services
-  - id: 245384
-    prefix: '5936'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 669f00fc-4466-4610-80d7-0ae7b334fcef
+  - id: 54579
+    prefix: '5935'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 23691a3b-62e0-4372-a884-808b4537e71d
     country_id: *ec
-    network_id: *ec_special_services
-  - id: 246797
-    prefix: '593999'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bf630c38-7f22-4bdc-8822-103455d15617
-    country_id: *ec
-    network_id: *ec_country_direct_services
-  - id: 247402
-    prefix: '5932'
-    number_min_length: 5
-    number_max_length: 9
-    uuid: 138bfd74-0eaf-4263-b401-d504f890b6cc
-    country_id: *ec
-    network_id: *ec_special_services
-  - id: 248893
-    prefix: '5933'
-    number_min_length: 5
-    number_max_length: 9
-    uuid: 11116128-66d4-416a-b18a-24128495a517
-    country_id: *ec
-    network_id: *ec_special_services
+    network_id: *ec_galapagos_los_rios_manabi_region
   - id: 249570
     prefix: '5935'
     number_min_length: 6
@@ -201,13 +152,27 @@ network_prefixes:
     uuid: 5bdd879d-0468-4a76-82f9-2f47df44dc8a
     country_id: *ec
     network_id: *ec_special_services
-  - id: 253068
-    prefix: '5938'
+  - id: 84941
+    prefix: '5936'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e30fb21-3abc-487b-af43-e04702c43d95
+    country_id: *ec
+    network_id: *ec_carchi_esmeraldas_imbabura_napo_orellana_sucumbios_region
+  - id: 245384
+    prefix: '5936'
     number_min_length: 6
     number_max_length: 8
-    uuid: bc928452-fbcc-4880-9a9b-68f9531fddbb
+    uuid: 669f00fc-4466-4610-80d7-0ae7b334fcef
     country_id: *ec
     network_id: *ec_special_services
+  - id: 149332
+    prefix: '5937'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: acc5eeec-5e6a-46c9-a59d-e1fc5debe334
+    country_id: *ec
+    network_id: *ec_azuay_canar_el_oro_loja_morona_santiago_zamora_chinchipe_region
   - id: 255246
     prefix: '5937'
     number_min_length: 5
@@ -215,11 +180,25 @@ network_prefixes:
     uuid: 4c0ad4b1-06e1-44aa-9808-8229a22126f0
     country_id: *ec
     network_id: *ec_special_services
-  - id: 257092
-    prefix: '5939'
-    number_min_length: 5
-    number_max_length: 9
-    uuid: a686ab3f-7777-41df-8a8f-9ddd7f35d72a
+  - id: 154402
+    prefix: '593700'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3d0059e7-8361-4cd5-85e1-8e6f9bb4a211
+    country_id: *ec
+    network_id: *ec_universal_access_services
+  - id: 150699
+    prefix: '593702'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fb0a1f88-0cf6-4a48-9336-bd2cd0353279
+    country_id: *ec
+    network_id: *ec_universal_personal_number
+  - id: 253068
+    prefix: '5938'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: bc928452-fbcc-4880-9a9b-68f9531fddbb
     country_id: *ec
     network_id: *ec_special_services
   - id: 403469
@@ -236,6 +215,20 @@ network_prefixes:
     uuid: e342a31e-56d9-43af-b3c4-3b52d97f7ed3
     country_id: *ec
     network_id: *ec_shared_cost_services
+  - id: 209217
+    prefix: '593805'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 95d06054-358e-4060-8eeb-3edc959692d1
+    country_id: *ec
+    network_id: *ec_televoting_services
+  - id: 257092
+    prefix: '5939'
+    number_min_length: 5
+    number_max_length: 9
+    uuid: a686ab3f-7777-41df-8a8f-9ddd7f35d72a
+    country_id: *ec
+    network_id: *ec_special_services
   - id: 454574
     prefix: '593900'
     number_min_length: 12
@@ -243,7 +236,28 @@ network_prefixes:
     uuid: 7b4c601e-7666-485b-8ef5-c36a7916b4d6
     country_id: *ec
     network_id: *ec_information_services
+  - id: 468943
+    prefix: '59392'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 126fd841-57bd-4da1-903b-ee2d4edfd41e
+    country_id: *ec
+    network_id: *ec_mobile
 # Mobile Prefixes
+  - id: 485424
+    prefix: '59393'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3e52aaa7-0b0f-4043-b71c-7658b07c1d3f
+    country_id: *ec
+    network_id: *ec_mobile
+  - id: 485611
+    prefix: '593939'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9dd02899-bc87-48b7-a899-18f741faba8d
+    country_id: *ec
+    network_id: *ec_claro_mobile
   - id: 212502
     prefix: '59394'
     number_min_length: 12
@@ -804,6 +818,69 @@ network_prefixes:
     uuid: 2fb36baf-f6a1-4773-80eb-f7b6e050ea65
     country_id: *ec
     network_id: *ec_claro_mobile
+  - id: 239367
+    prefix: '59399'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 228f1925-ed1f-4f13-865b-ac84b57b2553
+    country_id: *ec
+    network_id: *ec_mobile
+  - id: 239383
+    prefix: '593990'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ee881bd5-80f0-447b-b036-7a2e7418bf42
+    country_id: *ec
+    network_id: *ec_claro_mobile
+  - id: 239413
+    prefix: '593991'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 063fb3ba-dd00-4dba-8784-5536834fcc9b
+    country_id: *ec
+    network_id: *ec_claro_mobile
+  - id: 239426
+    prefix: '5939920'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7d846ef3-ed20-4ff5-8503-8bf6f04c5ac0
+    country_id: *ec
+    network_id: *ec_claro_mobile
+  - id: 239428
+    prefix: '5939921'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 207dcc9b-02df-453f-add8-df1ae6c3a24f
+    country_id: *ec
+    network_id: *ec_claro_mobile
+  - id: 239430
+    prefix: '5939922'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8ec5b472-8d38-4d99-b1dd-f3f367a4985b
+    country_id: *ec
+    network_id: *ec_claro_mobile
+  - id: 239432
+    prefix: '5939923'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 81f9b37f-6ab5-4a65-beba-f15da0473942
+    country_id: *ec
+    network_id: *ec_claro_mobile
+  - id: 239434
+    prefix: '5939924'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9b98acb5-0764-4bc3-bb3a-b5504b9a4481
+    country_id: *ec
+    network_id: *ec_claro_mobile
+  - id: 239436
+    prefix: '5939925'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 224b102e-585d-4209-b3ad-86c77055ce71
+    country_id: *ec
+    network_id: *ec_movistar_mobile
   - id: 238836
     prefix: '5939926'
     number_min_length: 12
@@ -874,69 +951,13 @@ network_prefixes:
     uuid: a89c46a4-fd7e-4032-9a3b-7c39fa45fc05
     country_id: *ec
     network_id: *ec_movistar_mobile
-  - id: 239367
-    prefix: '59399'
+  - id: 246797
+    prefix: '593999'
     number_min_length: 12
     number_max_length: 12
-    uuid: 228f1925-ed1f-4f13-865b-ac84b57b2553
+    uuid: bf630c38-7f22-4bdc-8822-103455d15617
     country_id: *ec
-    network_id: *ec_mobile
-  - id: 239383
-    prefix: '593990'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ee881bd5-80f0-447b-b036-7a2e7418bf42
-    country_id: *ec
-    network_id: *ec_claro_mobile
-  - id: 239413
-    prefix: '593991'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 063fb3ba-dd00-4dba-8784-5536834fcc9b
-    country_id: *ec
-    network_id: *ec_claro_mobile
-  - id: 239426
-    prefix: '5939920'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7d846ef3-ed20-4ff5-8503-8bf6f04c5ac0
-    country_id: *ec
-    network_id: *ec_claro_mobile
-  - id: 239428
-    prefix: '5939921'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 207dcc9b-02df-453f-add8-df1ae6c3a24f
-    country_id: *ec
-    network_id: *ec_claro_mobile
-  - id: 239430
-    prefix: '5939922'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8ec5b472-8d38-4d99-b1dd-f3f367a4985b
-    country_id: *ec
-    network_id: *ec_claro_mobile
-  - id: 239432
-    prefix: '5939923'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 81f9b37f-6ab5-4a65-beba-f15da0473942
-    country_id: *ec
-    network_id: *ec_claro_mobile
-  - id: 239434
-    prefix: '5939924'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9b98acb5-0764-4bc3-bb3a-b5504b9a4481
-    country_id: *ec
-    network_id: *ec_claro_mobile
-  - id: 239436
-    prefix: '5939925'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 224b102e-585d-4209-b3ad-86c77055ce71
-    country_id: *ec
-    network_id: *ec_movistar_mobile
+    network_id: *ec_country_direct_services
   - id: 239499
     prefix: '5939990'
     number_min_length: 12
@@ -1007,32 +1028,3 @@ network_prefixes:
     uuid: ef67e27e-c078-4c31-b66b-8a65fd470e9d
     country_id: *ec
     network_id: *ec_movistar_mobile
-  - id: 468943
-    prefix: '59392'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 126fd841-57bd-4da1-903b-ee2d4edfd41e
-    country_id: *ec
-    network_id: *ec_mobile
-  - id: 485424
-    prefix: '59393'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3e52aaa7-0b0f-4043-b71c-7658b07c1d3f
-    country_id: *ec
-    network_id: *ec_mobile
-  - id: 485611
-    prefix: '593939'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9dd02899-bc87-48b7-a899-18f741faba8d
-    country_id: *ec
-    network_id: *ec_claro_mobile
-# Country code Prefixes
-  - id: 241985
-    prefix: '593'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 75ee8461-069c-4dfc-847c-86d798629515
-    country_id: *ec
-    network_id: null

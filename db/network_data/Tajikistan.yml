@@ -1,14 +1,23 @@
 country_id: &tj 208
 networks:
-# Fixed Networks
+# Mobile Networks
   - id: &tj_local_fixed_communication_services_region 4218
     name: TJ Local Fixed Communication Services Region
     uuid: b5782c33-eb3f-4f23-9f93-6590cc34473a
     type_id: 2
+  - id: &tj_babilon_mobile_mobile 20792
+    name: TJ Babilon Mobile Mobile
+    uuid: b1940009-cf04-44bb-b372-a212ad5357cd
+    type_id: 3
+  - id: &tj_special_services 21284
+    name: TJ Special Services
+    uuid: 14f68ad0-1fcb-44ba-96fe-57d88600415e
+    type_id: 13
   - id: &tj_dushanbe_operator_service_region 22100
     name: TJ Dushanbe Operator Service Region
     uuid: 4ecadc82-f931-46cc-bdeb-7c0f5680fbf5
     type_id: 2
+# Fixed Networks
   - id: &tj_yavan_region 31840
     name: TJ Yavan Region
     uuid: 55f19207-4af6-4af5-9b6b-d1f533799f3e
@@ -249,11 +258,6 @@ networks:
     name: TJ Dushanbe Region
     uuid: 5fe81b29-fa90-4983-8cad-0148c80ca4ef
     type_id: 2
-# Mobile Networks
-  - id: &tj_babilon_mobile_mobile 20792
-    name: TJ Babilon Mobile Mobile
-    uuid: b1940009-cf04-44bb-b372-a212ad5357cd
-    type_id: 3
   - id: &tj_megafon_mobile 42057
     name: TJ Megafon Mobile
     uuid: 4f4244ea-19dd-4a1f-9dc9-bd19eca6bd5a
@@ -267,26 +271,104 @@ networks:
     uuid: f34428d6-4467-4c67-b1c6-3e0a55599852
     type_id: 3
 # Supplementary services Networks
-  - id: &tj_special_services 21284
-    name: TJ Special Services
-    uuid: 14f68ad0-1fcb-44ba-96fe-57d88600415e
-    type_id: 13
+  - id: &tj_fixed 43472
+    name: TJ Fixed
+    uuid: e845d588-2a8b-4875-ad2b-fa6fe8452e2c
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 51661
-    prefix: '992487'
+# Mobile Prefixes
+  - id: 242116
+    prefix: '992'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 2a9eac51-c614-4c5e-8872-450a273bc1a6
+    country_id: *tj
+    network_id: *tj_fixed
+  - id: 242155
+    prefix: '9920'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: a5a81fae-67a5-4774-a70d-ade407131408
+    country_id: *tj
+    network_id: *tj_special_services
+  - id: 242507
+    prefix: '9921'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: fbbacd53-c49a-4de3-a807-2a062bb22134
+    country_id: *tj
+    network_id: *tj_special_services
+  - id: 332482
+    prefix: '9923130'
     number_min_length: 12
     number_max_length: 12
-    uuid: 81ac23af-fc89-4159-8fd8-85f0c5f94fc4
+    uuid: 76b9b9a6-b19c-4dbf-be6b-f8bbd543bf8b
     country_id: *tj
-    network_id: *tj_local_fixed_communication_services_region
-  - id: 243853
-    prefix: '9923782'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 048c0030-d5fc-4f70-aaa1-b140765750a2
+    network_id: *tj_tursunzade_region
+  - id: 332484
+    prefix: '9923131'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c1c36970-92dd-4cce-a703-6e86e4cb2ff9
     country_id: *tj
-    network_id: *tj_dushanbe_operator_service_region
+    network_id: *tj_rasht_region
+  - id: 332487
+    prefix: '9923132'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7e170e85-d25e-4a09-99b6-86d94df240a2
+    country_id: *tj
+    network_id: *tj_jirgital_region
+# Fixed Prefixes
+  - id: 332490
+    prefix: '9923133'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d94fbce5-c87b-4b0e-a7dc-545e676386e6
+    country_id: *tj
+    network_id: *tj_nurobod_region
+  - id: 332493
+    prefix: '9923134'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6d0bdc25-9b70-4308-8158-3dfe5eaff144
+    country_id: *tj
+    network_id: *tj_rogun_region
+  - id: 332496
+    prefix: '9923135'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e09ded45-d72c-4c18-90d7-97bdbbd42618
+    country_id: *tj
+    network_id: *tj_fayzabad_region
+  - id: 332498
+    prefix: '9923136'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 59a4eed8-1777-462b-829f-99002bd7a649
+    country_id: *tj
+    network_id: *tj_vakhdat_region
+  - id: 332501
+    prefix: '9923137'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d09a136c-15d6-4746-ac18-9e332810e23d
+    country_id: *tj
+    network_id: *tj_rudaki_region
+  - id: 332503
+    prefix: '9923138'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0491c4e9-f9c9-4cc9-9093-170ce8e8c9b2
+    country_id: *tj
+    network_id: *tj_nurek_region
+  - id: 332505
+    prefix: '9923139'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5c219cbc-acc8-48b5-ba21-e4d617d91429
+    country_id: *tj
+    network_id: *tj_hissar_region
   - id: 325874
     prefix: '9923141'
     number_min_length: 12
@@ -294,6 +376,41 @@ network_prefixes:
     uuid: 781ce476-a41f-412a-8f65-d24aeb276cc5
     country_id: *tj
     network_id: *tj_yavan_region
+  - id: 333713
+    prefix: '9923153'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 95a8c1af-7562-4a5a-8103-7b5da118d297
+    country_id: *tj
+    network_id: *tj_varzob_region
+  - id: 333714
+    prefix: '9923154'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 56108ab6-d47f-47f3-90e2-250d891cbc54
+    country_id: *tj
+    network_id: *tj_tadjikabad_region
+  - id: 333716
+    prefix: '9923155'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 060c07a1-a2bd-49b5-b47d-0723c5b41d08
+    country_id: *tj
+    network_id: *tj_shakhrinav_region
+  - id: 333717
+    prefix: '9923156'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 31295bd9-f6fe-4bae-b491-a983df09d190
+    country_id: *tj
+    network_id: *tj_tavildara_region
+  - id: 335939
+    prefix: '9923222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: db4c7530-35ab-4e68-8919-3340f5f77796
+    country_id: *tj
+    network_id: *tj_kurgan_tube_region
   - id: 329219
     prefix: '9923240'
     number_min_length: 12
@@ -350,111 +467,6 @@ network_prefixes:
     uuid: 355b5c56-9045-4fd1-a9f6-cdbc4ef96db3
     country_id: *tj
     network_id: *tj_kumsangir_region
-  - id: 332482
-    prefix: '9923130'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 76b9b9a6-b19c-4dbf-be6b-f8bbd543bf8b
-    country_id: *tj
-    network_id: *tj_tursunzade_region
-  - id: 332484
-    prefix: '9923131'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c1c36970-92dd-4cce-a703-6e86e4cb2ff9
-    country_id: *tj
-    network_id: *tj_rasht_region
-  - id: 332487
-    prefix: '9923132'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7e170e85-d25e-4a09-99b6-86d94df240a2
-    country_id: *tj
-    network_id: *tj_jirgital_region
-  - id: 332490
-    prefix: '9923133'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d94fbce5-c87b-4b0e-a7dc-545e676386e6
-    country_id: *tj
-    network_id: *tj_nurobod_region
-  - id: 332493
-    prefix: '9923134'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6d0bdc25-9b70-4308-8158-3dfe5eaff144
-    country_id: *tj
-    network_id: *tj_rogun_region
-  - id: 332496
-    prefix: '9923135'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e09ded45-d72c-4c18-90d7-97bdbbd42618
-    country_id: *tj
-    network_id: *tj_fayzabad_region
-  - id: 332498
-    prefix: '9923136'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 59a4eed8-1777-462b-829f-99002bd7a649
-    country_id: *tj
-    network_id: *tj_vakhdat_region
-  - id: 332501
-    prefix: '9923137'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d09a136c-15d6-4746-ac18-9e332810e23d
-    country_id: *tj
-    network_id: *tj_rudaki_region
-  - id: 332503
-    prefix: '9923138'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0491c4e9-f9c9-4cc9-9093-170ce8e8c9b2
-    country_id: *tj
-    network_id: *tj_nurek_region
-  - id: 332505
-    prefix: '9923139'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5c219cbc-acc8-48b5-ba21-e4d617d91429
-    country_id: *tj
-    network_id: *tj_hissar_region
-  - id: 333713
-    prefix: '9923153'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 95a8c1af-7562-4a5a-8103-7b5da118d297
-    country_id: *tj
-    network_id: *tj_varzob_region
-  - id: 333714
-    prefix: '9923154'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 56108ab6-d47f-47f3-90e2-250d891cbc54
-    country_id: *tj
-    network_id: *tj_tadjikabad_region
-  - id: 333716
-    prefix: '9923155'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 060c07a1-a2bd-49b5-b47d-0723c5b41d08
-    country_id: *tj
-    network_id: *tj_shakhrinav_region
-  - id: 333717
-    prefix: '9923156'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 31295bd9-f6fe-4bae-b491-a983df09d190
-    country_id: *tj
-    network_id: *tj_tavildara_region
-  - id: 335939
-    prefix: '9923222'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: db4c7530-35ab-4e68-8919-3340f5f77796
-    country_id: *tj
-    network_id: *tj_kurgan_tube_region
   - id: 336852
     prefix: '9923250'
     number_min_length: 12
@@ -637,6 +649,27 @@ network_prefixes:
     uuid: d9d5b242-8c25-4e9f-8f5e-c5fda679d902
     country_id: *tj
     network_id: *tj_kanibadam_region
+  - id: 351722
+    prefix: '9923475'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a3eb8a73-d343-46df-adcb-d5b919e62728
+    country_id: *tj
+    network_id: *tj_pendjikent_region
+  - id: 351739
+    prefix: '9923479'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 989a93ae-2611-47c3-96ff-cb8d968d9560
+    country_id: *tj
+    network_id: *tj_ayni_region
+  - id: 353278
+    prefix: '9923522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 97877959-6bf1-4bda-b64f-a53f2bc64d69
+    country_id: *tj
+    network_id: *tj_khorog_region
   - id: 345611
     prefix: '9923551'
     number_min_length: 12
@@ -679,27 +712,6 @@ network_prefixes:
     uuid: 03e47ba6-9b5f-4ee7-a863-bca2616ffa08
     country_id: *tj
     network_id: *tj_rushan_region
-  - id: 351722
-    prefix: '9923475'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a3eb8a73-d343-46df-adcb-d5b919e62728
-    country_id: *tj
-    network_id: *tj_pendjikent_region
-  - id: 351739
-    prefix: '9923479'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 989a93ae-2611-47c3-96ff-cb8d968d9560
-    country_id: *tj
-    network_id: *tj_ayni_region
-  - id: 353278
-    prefix: '9923522'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 97877959-6bf1-4bda-b64f-a53f2bc64d69
-    country_id: *tj
-    network_id: *tj_khorog_region
   - id: 356159
     prefix: '992372'
     number_min_length: 12
@@ -707,6 +719,13 @@ network_prefixes:
     uuid: 2b325591-0a4c-4c0d-a1f6-33a35327bb08
     country_id: *tj
     network_id: *tj_dushanbe_region
+  - id: 243853
+    prefix: '9923782'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 048c0030-d5fc-4f70-aaa1-b140765750a2
+    country_id: *tj
+    network_id: *tj_dushanbe_operator_service_region
   - id: 370213
     prefix: '992446'
     number_min_length: 12
@@ -721,14 +740,13 @@ network_prefixes:
     uuid: b974f814-6a09-4a9d-951b-87f119e9323c
     country_id: *tj
     network_id: *tj_local_fixed_communication_services_region
-# Mobile Prefixes
-  - id: 231742
-    prefix: '99298'
+  - id: 51661
+    prefix: '992487'
     number_min_length: 12
     number_max_length: 12
-    uuid: 06c559b4-1070-4ccf-86cc-98e6cacb474b
+    uuid: 81ac23af-fc89-4159-8fd8-85f0c5f94fc4
     country_id: *tj
-    network_id: *tj_babilon_mobile_mobile
+    network_id: *tj_local_fixed_communication_services_region
   - id: 454114
     prefix: '99290'
     number_min_length: 12
@@ -757,6 +775,7 @@ network_prefixes:
     uuid: 3c5870d9-d9a1-4b78-b626-c0719166c1f3
     country_id: *tj
     network_id: *tj_tcell_mobile
+# Supplementary services Prefixes
   - id: 485434
     prefix: '99293'
     number_min_length: 12
@@ -764,26 +783,10 @@ network_prefixes:
     uuid: 6c2bb85c-8688-4876-bca2-fcfd417fbd11
     country_id: *tj
     network_id: *tj_tcell_mobile
-# Country code Prefixes
-  - id: 242116
-    prefix: '992'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 2a9eac51-c614-4c5e-8872-450a273bc1a6
+  - id: 231742
+    prefix: '99298'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 06c559b4-1070-4ccf-86cc-98e6cacb474b
     country_id: *tj
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242155
-    prefix: '9920'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: a5a81fae-67a5-4774-a70d-ade407131408
-    country_id: *tj
-    network_id: *tj_special_services
-  - id: 242507
-    prefix: '9921'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: fbbacd53-c49a-4de3-a807-2a062bb22134
-    country_id: *tj
-    network_id: *tj_special_services
+    network_id: *tj_babilon_mobile_mobile

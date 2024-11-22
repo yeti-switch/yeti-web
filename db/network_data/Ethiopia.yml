@@ -1,6 +1,6 @@
 country_id: &et 68
 networks:
-# Fixed Networks
+# Mobile Networks
   - id: &et_west_region_region 9675
     name: ET West Region Region
     uuid: 988d5b0c-559e-4562-9f5e-2c44682c0295
@@ -9,6 +9,24 @@ networks:
     name: ET North West Region Region
     uuid: 603fcdb3-8012-42c8-9c81-77ce0476bd12
     type_id: 2
+# Satellite Networks
+  - id: &et_safaricom_mobile 19774
+    name: ET Safaricom Mobile
+    uuid: 5178d519-4165-4491-a0f6-462cccb27b11
+    type_id: 3
+# Fixed Networks
+  - id: &et_ethio_mobile_satellite 20797
+    name: ET Ethio Mobile Satellite
+    uuid: e4ba8923-29a0-4808-b695-3a2a83c14912
+    type_id: 15
+  - id: &et_ethio_mobile_mobile 21260
+    name: ET Ethio Mobile Mobile
+    uuid: be4f97f0-a8ef-4e70-a09e-b35260d3061c
+    type_id: 3
+  - id: &et_special_services 24392
+    name: ET Special Services
+    uuid: 3fd33ce8-bc77-42bc-bf32-b09d038da0b0
+    type_id: 13
   - id: &et_addis_ababa_region_region 24829
     name: ET Addis Ababa Region Region
     uuid: a58c3e91-a986-4a62-b452-d6d8a7cb5151
@@ -37,41 +55,20 @@ networks:
     name: ET South West Region Region
     uuid: 51614623-6d84-457a-8db2-6fb52d17a66b
     type_id: 2
-# Mobile Networks
-  - id: &et_safaricom_mobile 19774
-    name: ET Safaricom Mobile
-    uuid: 5178d519-4165-4491-a0f6-462cccb27b11
-    type_id: 3
-  - id: &et_ethio_mobile_mobile 21260
-    name: ET Ethio Mobile Mobile
-    uuid: be4f97f0-a8ef-4e70-a09e-b35260d3061c
-    type_id: 3
-# Satellite Networks
-  - id: &et_ethio_mobile_satellite 20797
-    name: ET Ethio Mobile Satellite
-    uuid: e4ba8923-29a0-4808-b695-3a2a83c14912
-    type_id: 15
 # Supplementary services Networks
-  - id: &et_special_services 24392
-    name: ET Special Services
-    uuid: 3fd33ce8-bc77-42bc-bf32-b09d038da0b0
-    type_id: 13
+  - id: &et_fixed 43410
+    name: ET Fixed
+    uuid: 31056bd1-ba95-439c-b668-492b010108e9
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 90266
-    prefix: '25157'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0766262c-f694-4ad7-82e1-8eaa464ebb53
+# Mobile Prefixes
+  - id: 241990
+    prefix: '251'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: f49f4299-6389-4466-8cd8-1f9d3b514f67
     country_id: *et
-    network_id: *et_west_region_region
-  - id: 93092
-    prefix: '25158'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a3e82c5c-fce1-446c-8b28-ce9e6454d1bc
-    country_id: *et
-    network_id: *et_north_west_region_region
+    network_id: *et_fixed
   - id: 258806
     prefix: '25111'
     number_min_length: 12
@@ -79,6 +76,7 @@ network_prefixes:
     uuid: 7d9e61b7-0815-4af6-9455-56feb4ec88db
     country_id: *et
     network_id: *et_addis_ababa_region_region
+# Satellite Prefixes
   - id: 277991
     prefix: '25122'
     number_min_length: 12
@@ -93,6 +91,7 @@ network_prefixes:
     uuid: 799b10a1-d88b-4295-9eb2-ccfc4754a1fe
     country_id: *et
     network_id: *et_east_region_region
+# Fixed Prefixes
   - id: 337275
     prefix: '25133'
     number_min_length: 12
@@ -121,7 +120,20 @@ network_prefixes:
     uuid: 8d8894e2-b62c-4a28-8b5b-202e44989e2c
     country_id: *et
     network_id: *et_south_west_region_region
-# Mobile Prefixes
+  - id: 90266
+    prefix: '25157'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0766262c-f694-4ad7-82e1-8eaa464ebb53
+    country_id: *et
+    network_id: *et_west_region_region
+  - id: 93092
+    prefix: '25158'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a3e82c5c-fce1-446c-8b28-ce9e6454d1bc
+    country_id: *et
+    network_id: *et_north_west_region_region
   - id: 207500
     prefix: '2517'
     number_min_length: 12
@@ -136,30 +148,6 @@ network_prefixes:
     uuid: 3fb325ae-72f9-405a-b742-788a1565122e
     country_id: *et
     network_id: *et_ethio_mobile_mobile
-# Satellite Prefixes
-  - id: 231761
-    prefix: '25198111'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 884b5724-15ee-4d2a-9af3-489f65728380
-    country_id: *et
-    network_id: *et_ethio_mobile_satellite
-  - id: 231762
-    prefix: '25198119'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 87adae4e-085f-420b-9d68-d56ab5e83319
-    country_id: *et
-    network_id: *et_ethio_mobile_satellite
-# Country code Prefixes
-  - id: 241990
-    prefix: '251'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: f49f4299-6389-4466-8cd8-1f9d3b514f67
-    country_id: *et
-    network_id: null
-# Supplementary services Prefixes
   - id: 257094
     prefix: '2519'
     number_min_length: 6
@@ -167,3 +155,18 @@ network_prefixes:
     uuid: 9fe4e5c1-fbb0-4fa0-87f5-d816a43bb789
     country_id: *et
     network_id: *et_special_services
+  - id: 231761
+    prefix: '25198111'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 884b5724-15ee-4d2a-9af3-489f65728380
+    country_id: *et
+    network_id: *et_ethio_mobile_satellite
+# Supplementary services Prefixes
+  - id: 231762
+    prefix: '25198119'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 87adae4e-085f-420b-9d68-d56ab5e83319
+    country_id: *et
+    network_id: *et_ethio_mobile_satellite

@@ -1,6 +1,6 @@
 country_id: &cv 39
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &cv_special_services 21384
     name: CV Special Services
     uuid: cea29c7b-3d6b-4f8e-966e-d7e38a253174
@@ -9,32 +9,14 @@ networks:
     name: CV Voip Nomadic
     uuid: 900dbfdd-1b0c-4cea-b676-c6074a05dc70
     type_id: 13
-  - id: &cv_value_added_services 22524
-    name: CV Value Added Services
-    uuid: 02efe517-b59f-43f2-8bf2-64786b0e39ca
-    type_id: 13
-  - id: &cv_freephone_services 23831
-    name: CV Freephone Services
-    uuid: baba80cd-6c79-48e8-8475-92a1c2eac765
-    type_id: 13
-  - id: &cv_shared_cost_services 23907
-    name: CV Shared Cost Services
-    uuid: bad0bf19-be02-46a5-a199-a04b720eebf5
-    type_id: 13
-# Mobile Networks
   - id: &cv_cvmovel_mobile 22463
     name: CV Cvmovel Mobile
     uuid: 7d80e49d-35fb-4af9-8d77-74df319b86d6
     type_id: 3
-  - id: &cv_mobile 23300
-    name: CV Mobile
-    uuid: 11eb563e-7ca4-42a5-a3ce-18b154a4ef84
-    type_id: 3
-  - id: &cv_unitel_t_mobile 23337
-    name: CV Unitel T Mobile
-    uuid: d63b7fc6-db11-4e2c-b1f1-5440bb8af3a8
-    type_id: 3
-# Fixed Networks
+  - id: &cv_value_added_services 22524
+    name: CV Value Added Services
+    uuid: 02efe517-b59f-43f2-8bf2-64786b0e39ca
+    type_id: 13
   - id: &cv_fixed 22709
     name: CV Fixed
     uuid: 816f4b24-19b5-4d78-a963-9c5bda9ac75f
@@ -155,6 +137,7 @@ networks:
     name: CV Cova Figueira Region
     uuid: d2f6150d-b3b4-4440-bfca-fc6c0b905a2c
     type_id: 2
+# Supplementary services Networks
   - id: &cv_mosteiros_region 23172
     name: CV Mosteiros Region
     uuid: e41ba0bb-5615-4cf7-924c-9a21b3c37910
@@ -171,16 +154,32 @@ networks:
     name: CV Voip Region
     uuid: 5d1a8e3b-6793-4a7d-8c2b-808155261cb4
     type_id: 2
+  - id: &cv_mobile 23300
+    name: CV Mobile
+    uuid: 11eb563e-7ca4-42a5-a3ce-18b154a4ef84
+    type_id: 3
+# Mobile Networks
+  - id: &cv_unitel_t_mobile 23337
+    name: CV Unitel T Mobile
+    uuid: d63b7fc6-db11-4e2c-b1f1-5440bb8af3a8
+    type_id: 3
+  - id: &cv_freephone_services 23831
+    name: CV Freephone Services
+    uuid: baba80cd-6c79-48e8-8475-92a1c2eac765
+    type_id: 13
+  - id: &cv_shared_cost_services 23907
+    name: CV Shared Cost Services
+    uuid: bad0bf19-be02-46a5-a199-a04b720eebf5
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241975
     prefix: '238'
     number_min_length: 4
     number_max_length: 100
     uuid: c3c26bb0-281b-4f47-98d5-7bfa772e6973
     country_id: *cv
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *cv_fixed
   - id: 242379
     prefix: '2381'
     number_min_length: 6
@@ -188,141 +187,6 @@ network_prefixes:
     uuid: aff27cdf-24a2-49a3-9411-58c450c4d806
     country_id: *cv
     network_id: *cv_special_services
-  - id: 243926
-    prefix: '2384'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3386c69b-f808-4599-b049-514add5c8522
-    country_id: *cv
-    network_id: *cv_voip_nomadic
-  - id: 245379
-    prefix: '2386'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7075f1c2-613c-43b2-ab21-f5b4f09c76f3
-    country_id: *cv
-    network_id: *cv_value_added_services
-  - id: 253141
-    prefix: '238800'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 383fa805-a154-450d-9369-ff63b0e2bfc2
-    country_id: *cv
-    network_id: *cv_freephone_services
-  - id: 253277
-    prefix: '238808'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a682a876-a35a-4d79-9b0b-276e9f293326
-    country_id: *cv
-    network_id: *cv_shared_cost_services
-  - id: 256670
-    prefix: '2388'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: be685fed-039e-427e-a391-81ac41cca3d5
-    country_id: *cv
-    network_id: *cv_special_services
-# Mobile Prefixes
-  - id: 245150
-    prefix: '23858'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 66b854ee-fc81-4c55-8405-3582e797ef01
-    country_id: *cv
-    network_id: *cv_cvmovel_mobile
-  - id: 245253
-    prefix: '23859'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8096d936-1bee-408b-80f5-70ef17a7a255
-    country_id: *cv
-    network_id: *cv_cvmovel_mobile
-  - id: 249566
-    prefix: '2385'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f69a77ec-a749-48d8-bf13-dfe3a3f2d629
-    country_id: *cv
-    network_id: *cv_mobile
-  - id: 249691
-    prefix: '23851'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e0b11fbf-05a0-4427-a9c4-7db1b7ad36eb
-    country_id: *cv
-    network_id: *cv_unitel_t_mobile
-  - id: 249762
-    prefix: '23852'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 98d6291f-9f18-4ad0-a5b7-7a75b1590f08
-    country_id: *cv
-    network_id: *cv_unitel_t_mobile
-  - id: 249920
-    prefix: '23853'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8dbe4f2a-b144-4819-bb7a-d348833bbdb5
-    country_id: *cv
-    network_id: *cv_unitel_t_mobile
-  - id: 257087
-    prefix: '2389'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c7cdc0e1-207d-44bc-80c1-7173339def86
-    country_id: *cv
-    network_id: *cv_mobile
-  - id: 257357
-    prefix: '23891'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cc3b8e8c-a407-42a5-be33-303771ebb48c
-    country_id: *cv
-    network_id: *cv_unitel_t_mobile
-  - id: 257583
-    prefix: '23892'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e1d8f0ca-8274-46da-b1da-26075fd9e0bd
-    country_id: *cv
-    network_id: *cv_unitel_t_mobile
-  - id: 257859
-    prefix: '23893'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2ae649b1-393b-4516-9477-9eb3212addc9
-    country_id: *cv
-    network_id: *cv_unitel_t_mobile
-  - id: 258176
-    prefix: '23899'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f1a5a83a-ef72-418d-bfa9-77fdf8f34019
-    country_id: *cv
-    network_id: *cv_cvmovel_mobile
-  - id: 264434
-    prefix: '23895'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7f475fc9-d67e-46ff-aaca-d2d802199add
-    country_id: *cv
-    network_id: *cv_cvmovel_mobile
-  - id: 264995
-    prefix: '23897'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 42f31492-d12a-4bbd-81f1-8e474d36b54e
-    country_id: *cv
-    network_id: *cv_cvmovel_mobile
-  - id: 265263
-    prefix: '23898'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e49a4f92-7767-4eb2-91ba-810d7228ce9a
-    country_id: *cv
-    network_id: *cv_cvmovel_mobile
-# Fixed Prefixes
   - id: 247395
     prefix: '2382'
     number_min_length: 10
@@ -596,6 +460,7 @@ network_prefixes:
     uuid: 38812069-e821-4f4d-99b5-795317c3be38
     country_id: *cv
     network_id: *cv_nova_sintra_region
+# Supplementary services Prefixes
   - id: 248889
     prefix: '2383'
     number_min_length: 10
@@ -603,3 +468,137 @@ network_prefixes:
     uuid: f73f935c-a8be-47fe-b84d-22efb961a27e
     country_id: *cv
     network_id: *cv_voip_region
+  - id: 243926
+    prefix: '2384'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3386c69b-f808-4599-b049-514add5c8522
+    country_id: *cv
+    network_id: *cv_voip_nomadic
+  - id: 249566
+    prefix: '2385'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f69a77ec-a749-48d8-bf13-dfe3a3f2d629
+    country_id: *cv
+    network_id: *cv_mobile
+  - id: 249691
+    prefix: '23851'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e0b11fbf-05a0-4427-a9c4-7db1b7ad36eb
+    country_id: *cv
+    network_id: *cv_unitel_t_mobile
+  - id: 249762
+    prefix: '23852'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98d6291f-9f18-4ad0-a5b7-7a75b1590f08
+    country_id: *cv
+    network_id: *cv_unitel_t_mobile
+  - id: 249920
+    prefix: '23853'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8dbe4f2a-b144-4819-bb7a-d348833bbdb5
+    country_id: *cv
+    network_id: *cv_unitel_t_mobile
+# Mobile Prefixes
+  - id: 245150
+    prefix: '23858'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 66b854ee-fc81-4c55-8405-3582e797ef01
+    country_id: *cv
+    network_id: *cv_cvmovel_mobile
+  - id: 245253
+    prefix: '23859'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8096d936-1bee-408b-80f5-70ef17a7a255
+    country_id: *cv
+    network_id: *cv_cvmovel_mobile
+  - id: 245379
+    prefix: '2386'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7075f1c2-613c-43b2-ab21-f5b4f09c76f3
+    country_id: *cv
+    network_id: *cv_value_added_services
+  - id: 256670
+    prefix: '2388'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: be685fed-039e-427e-a391-81ac41cca3d5
+    country_id: *cv
+    network_id: *cv_special_services
+  - id: 253141
+    prefix: '238800'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 383fa805-a154-450d-9369-ff63b0e2bfc2
+    country_id: *cv
+    network_id: *cv_freephone_services
+  - id: 253277
+    prefix: '238808'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a682a876-a35a-4d79-9b0b-276e9f293326
+    country_id: *cv
+    network_id: *cv_shared_cost_services
+  - id: 257087
+    prefix: '2389'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c7cdc0e1-207d-44bc-80c1-7173339def86
+    country_id: *cv
+    network_id: *cv_mobile
+  - id: 257357
+    prefix: '23891'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc3b8e8c-a407-42a5-be33-303771ebb48c
+    country_id: *cv
+    network_id: *cv_unitel_t_mobile
+  - id: 257583
+    prefix: '23892'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e1d8f0ca-8274-46da-b1da-26075fd9e0bd
+    country_id: *cv
+    network_id: *cv_unitel_t_mobile
+  - id: 257859
+    prefix: '23893'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2ae649b1-393b-4516-9477-9eb3212addc9
+    country_id: *cv
+    network_id: *cv_unitel_t_mobile
+  - id: 264434
+    prefix: '23895'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7f475fc9-d67e-46ff-aaca-d2d802199add
+    country_id: *cv
+    network_id: *cv_cvmovel_mobile
+  - id: 264995
+    prefix: '23897'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 42f31492-d12a-4bbd-81f1-8e474d36b54e
+    country_id: *cv
+    network_id: *cv_cvmovel_mobile
+  - id: 265263
+    prefix: '23898'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e49a4f92-7767-4eb2-91ba-810d7228ce9a
+    country_id: *cv
+    network_id: *cv_cvmovel_mobile
+  - id: 258176
+    prefix: '23899'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f1a5a83a-ef72-418d-bfa9-77fdf8f34019
+    country_id: *cv
+    network_id: *cv_cvmovel_mobile

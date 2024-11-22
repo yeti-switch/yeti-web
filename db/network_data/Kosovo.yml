@@ -1,56 +1,14 @@
 country_id: &xk 273
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &xk_ipko_mobile 4207
     name: XK Ipko Mobile
     uuid: 891cdac8-7204-4e10-9658-29caae2cb522
     type_id: 3
-  - id: &xk_d3_mobile_mobile 36599
-    name: XK D3 Mobile Mobile
-    uuid: 7e79e5a0-a9aa-4edd-ba2a-b1edd9297d2c
-    type_id: 3
-  - id: &xk_vala_mobile 36863
-    name: XK Vala Mobile
-    uuid: 92e89d7e-34a2-4358-81f3-e6ab85003043
-    type_id: 3
-  - id: &xk_mts_mobile 38318
-    name: XK Mts Mobile
-    uuid: 56e0d085-ac9b-402b-ab99-4ed88afbb258
-    type_id: 3
-# Fixed Networks
   - id: &xk_voip_region 19779
     name: XK Voip Region
     uuid: c1f70a99-3591-48e5-9a10-e8639aa18bfb
     type_id: 2
-  - id: &xk_prizreni_region 30659
-    name: XK Prizreni Region
-    uuid: 582961fe-cd0b-4528-8dc5-29cb3657d734
-    type_id: 2
-  - id: &xk_ferizaj_region 30665
-    name: XK Ferizaj Region
-    uuid: e2ac3352-854c-45c8-b63a-af79045d790c
-    type_id: 2
-  - id: &xk_mitrovica_region 31080
-    name: XK Mitrovica Region
-    uuid: be4bb57f-8cd9-4d1e-bc04-74d0dfdf56dd
-    type_id: 2
-  - id: &xk_gjilani_region 31126
-    name: XK Gjilani Region
-    uuid: a0901ea3-1069-41e3-b2c2-26ebd48c35ca
-    type_id: 2
-  - id: &xk_prishtina_region 33854
-    name: XK Prishtina Region
-    uuid: 53fc8855-6480-4861-9870-964af797e118
-    type_id: 2
-  - id: &xk_peja_region 35694
-    name: XK Peja Region
-    uuid: 16d39902-48bd-4915-9b9b-9cef5a628044
-    type_id: 2
-  - id: &xk_gjakova_region 35700
-    name: XK Gjakova Region
-    uuid: c19228c8-ddf2-4fdf-b23f-7a5c18bd1ad1
-    type_id: 2
-# Supplementary services Networks
   - id: &xk_premium_rate_services_adults_entertainment 20519
     name: XK Premium Rate Services Adults Entertainment
     uuid: d1c7b676-0efd-4424-9532-61f3ef07e645
@@ -79,6 +37,7 @@ networks:
     name: XK Sms_Mms Services Standard Rate
     uuid: df330832-beee-47ad-a3c4-fa4a8ac52614
     type_id: 13
+# Supplementary services Networks
   - id: &xk_sms_mms_services_medium_rate 23360
     name: XK Sms_Mms Services Medium Rate
     uuid: ee167df4-c19c-4b78-a31d-b5faa810379e
@@ -87,6 +46,47 @@ networks:
     name: XK Sms_Mms Services High Rate
     uuid: ee09d6b7-2c1a-4683-a333-3a7a818759e2
     type_id: 13
+  - id: &xk_prizreni_region 30659
+    name: XK Prizreni Region
+    uuid: 582961fe-cd0b-4528-8dc5-29cb3657d734
+    type_id: 2
+  - id: &xk_ferizaj_region 30665
+    name: XK Ferizaj Region
+    uuid: e2ac3352-854c-45c8-b63a-af79045d790c
+    type_id: 2
+  - id: &xk_mitrovica_region 31080
+    name: XK Mitrovica Region
+    uuid: be4bb57f-8cd9-4d1e-bc04-74d0dfdf56dd
+    type_id: 2
+  - id: &xk_gjilani_region 31126
+    name: XK Gjilani Region
+    uuid: a0901ea3-1069-41e3-b2c2-26ebd48c35ca
+    type_id: 2
+  - id: &xk_prishtina_region 33854
+    name: XK Prishtina Region
+    uuid: 53fc8855-6480-4861-9870-964af797e118
+    type_id: 2
+  - id: &xk_peja_region 35694
+    name: XK Peja Region
+    uuid: 16d39902-48bd-4915-9b9b-9cef5a628044
+    type_id: 2
+  - id: &xk_gjakova_region 35700
+    name: XK Gjakova Region
+    uuid: c19228c8-ddf2-4fdf-b23f-7a5c18bd1ad1
+    type_id: 2
+  - id: &xk_d3_mobile_mobile 36599
+    name: XK D3 Mobile Mobile
+    uuid: 7e79e5a0-a9aa-4edd-ba2a-b1edd9297d2c
+    type_id: 3
+  - id: &xk_vala_mobile 36863
+    name: XK Vala Mobile
+    uuid: 92e89d7e-34a2-4358-81f3-e6ab85003043
+    type_id: 3
+  - id: &xk_mts_mobile 38318
+    name: XK Mts Mobile
+    uuid: 56e0d085-ac9b-402b-ab99-4ed88afbb258
+    type_id: 3
+# Mobile Networks
   - id: &xk_freephone_services 38522
     name: XK Freephone Services
     uuid: 3c0960a1-6e4d-4fe7-8c78-7e241b9064ad
@@ -99,22 +99,83 @@ networks:
     name: XK Premium Rate Services
     uuid: 8af28cf1-177d-4501-8a10-fe335a8183c3
     type_id: 13
+  - id: &xk_fixed 43484
+    name: XK Fixed
+    uuid: 75462124-68d5-45d2-a9cc-5b85d65fb8bd
+    type_id: 2
 network_prefixes:
-# Mobile Prefixes
-  - id: 51620
-    prefix: '38348'
+# Fixed Prefixes
+  - id: 242134
+    prefix: '383'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 1d3eb725-dfd1-4bb5-b5bc-1099501302de
+    country_id: *xk
+    network_id: *xk_fixed
+  - id: 242521
+    prefix: '3831'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 0860a9dc-79e6-4377-9d06-e890dc292f68
+    country_id: *xk
+    network_id: *xk_special_services
+  - id: 242630
+    prefix: '383112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 6c76bba5-5741-44f2-981e-546bda73b076
+    country_id: *xk
+    network_id: *xk_emergency_services
+  - id: 313364
+    prefix: '38328'
     number_min_length: 11
     number_max_length: 11
-    uuid: e65c6928-7682-4932-87d8-da791f3c62b8
+    uuid: f793d152-58e9-4500-95a4-9c7116b0276c
     country_id: *xk
-    network_id: *xk_ipko_mobile
-  - id: 58236
-    prefix: '38349'
+    network_id: *xk_mitrovica_region
+  - id: 313541
+    prefix: '383280'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: c67039ba-cc8d-4415-93af-24e357dc5159
+    country_id: *xk
+    network_id: *xk_gjilani_region
+  - id: 308512
+    prefix: '38329'
     number_min_length: 11
     number_max_length: 11
-    uuid: c9e7e62e-5fab-43af-88ae-c6320f550faa
+    uuid: f6cce0f2-c1be-4dde-8c5e-72075a8b65a2
     country_id: *xk
-    network_id: *xk_ipko_mobile
+    network_id: *xk_prizreni_region
+  - id: 308519
+    prefix: '383290'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: b99aafe4-4e75-49c1-aff2-608a0db2303a
+    country_id: *xk
+    network_id: *xk_ferizaj_region
+  - id: 347715
+    prefix: '38338'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 03723060-9652-4175-a570-e7d3d729c0df
+    country_id: *xk
+    network_id: *xk_prishtina_region
+  - id: 357542
+    prefix: '38339'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bd45e6f3-4fd8-4057-94ed-e4e33ee94396
+    country_id: *xk
+    network_id: *xk_peja_region
+# Supplementary services Prefixes
+  - id: 357552
+    prefix: '383390'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: d4fb7045-f7ae-4a82-8757-621d8bf8ac49
+    country_id: *xk
+    network_id: *xk_gjakova_region
   - id: 367953
     prefix: '38343'
     number_min_length: 11
@@ -150,18 +211,18 @@ network_prefixes:
     uuid: 13aef638-6065-4835-990e-808884b77f84
     country_id: *xk
     network_id: *xk_vala_mobile
-  - id: 388643
-    prefix: '38346'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 245f1888-844a-4d0b-a444-ff0a7032464f
-    country_id: *xk
-    network_id: *xk_vala_mobile
   - id: 392629
     prefix: '38345'
     number_min_length: 11
     number_max_length: 11
     uuid: 0ce9e716-676d-456d-9c04-ec3afa1619f8
+    country_id: *xk
+    network_id: *xk_vala_mobile
+  - id: 388643
+    prefix: '38346'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 245f1888-844a-4d0b-a444-ff0a7032464f
     country_id: *xk
     network_id: *xk_vala_mobile
   - id: 399501
@@ -199,6 +260,7 @@ network_prefixes:
     uuid: cbcd5b7d-bc42-4aeb-8af6-f9f1a04e4c77
     country_id: *xk
     network_id: *xk_mts_mobile
+# Mobile Prefixes
   - id: 399506
     prefix: '3834715'
     number_min_length: 11
@@ -206,92 +268,20 @@ network_prefixes:
     uuid: 3c3816a9-3cf9-4747-b786-ab1259818531
     country_id: *xk
     network_id: *xk_mts_mobile
-# Fixed Prefixes
-  - id: 207508
-    prefix: '3837'
+  - id: 51620
+    prefix: '38348'
     number_min_length: 11
     number_max_length: 11
-    uuid: 439ad2ef-18bf-46be-9b95-7d1af85c42a3
+    uuid: e65c6928-7682-4932-87d8-da791f3c62b8
     country_id: *xk
-    network_id: *xk_voip_region
-  - id: 308512
-    prefix: '38329'
+    network_id: *xk_ipko_mobile
+  - id: 58236
+    prefix: '38349'
     number_min_length: 11
     number_max_length: 11
-    uuid: f6cce0f2-c1be-4dde-8c5e-72075a8b65a2
+    uuid: c9e7e62e-5fab-43af-88ae-c6320f550faa
     country_id: *xk
-    network_id: *xk_prizreni_region
-  - id: 308519
-    prefix: '383290'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: b99aafe4-4e75-49c1-aff2-608a0db2303a
-    country_id: *xk
-    network_id: *xk_ferizaj_region
-  - id: 313364
-    prefix: '38328'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f793d152-58e9-4500-95a4-9c7116b0276c
-    country_id: *xk
-    network_id: *xk_mitrovica_region
-  - id: 313541
-    prefix: '383280'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: c67039ba-cc8d-4415-93af-24e357dc5159
-    country_id: *xk
-    network_id: *xk_gjilani_region
-  - id: 347715
-    prefix: '38338'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 03723060-9652-4175-a570-e7d3d729c0df
-    country_id: *xk
-    network_id: *xk_prishtina_region
-  - id: 357542
-    prefix: '38339'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bd45e6f3-4fd8-4057-94ed-e4e33ee94396
-    country_id: *xk
-    network_id: *xk_peja_region
-  - id: 357552
-    prefix: '383390'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: d4fb7045-f7ae-4a82-8757-621d8bf8ac49
-    country_id: *xk
-    network_id: *xk_gjakova_region
-# Supplementary services Prefixes
-  - id: 225113
-    prefix: '383960'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: baa86d11-ca3f-43ad-8d32-9d8e80f7ee2a
-    country_id: *xk
-    network_id: *xk_premium_rate_services_adults_entertainment
-  - id: 242521
-    prefix: '3831'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 0860a9dc-79e6-4377-9d06-e890dc292f68
-    country_id: *xk
-    network_id: *xk_special_services
-  - id: 242630
-    prefix: '383112'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 6c76bba5-5741-44f2-981e-546bda73b076
-    country_id: *xk
-    network_id: *xk_emergency_services
-  - id: 245264
-    prefix: '38359'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 1ca66939-3bf9-431e-b0ed-94dfedb232ce
-    country_id: *xk
-    network_id: *xk_sms_mms_services_adults_entertainment
+    network_id: *xk_ipko_mobile
   - id: 249610
     prefix: '3835'
     number_min_length: 8
@@ -327,6 +317,20 @@ network_prefixes:
     uuid: 5dfff4cf-7971-482d-b5d5-9c02b41f7b91
     country_id: *xk
     network_id: *xk_sms_mms_services_high_rate
+  - id: 245264
+    prefix: '38359'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 1ca66939-3bf9-431e-b0ed-94dfedb232ce
+    country_id: *xk
+    network_id: *xk_sms_mms_services_adults_entertainment
+  - id: 207508
+    prefix: '3837'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 439ad2ef-18bf-46be-9b95-7d1af85c42a3
+    country_id: *xk
+    network_id: *xk_voip_region
   - id: 403498
     prefix: '383800'
     number_min_length: 11
@@ -355,11 +359,10 @@ network_prefixes:
     uuid: 983c79c9-2d5b-4a54-b9cb-e7a05b8e2f1b
     country_id: *xk
     network_id: *xk_premium_rate_services
-# Country code Prefixes
-  - id: 242134
-    prefix: '383'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 1d3eb725-dfd1-4bb5-b5bc-1099501302de
+  - id: 225113
+    prefix: '383960'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: baa86d11-ca3f-43ad-8d32-9d8e80f7ee2a
     country_id: *xk
-    network_id: null
+    network_id: *xk_premium_rate_services_adults_entertainment

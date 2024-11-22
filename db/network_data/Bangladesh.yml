@@ -357,6 +357,10 @@ networks:
     name: BD Zajira Region
     uuid: 0524c788-506e-485c-b748-1371d2d731f9
     type_id: 2
+  - id: &bd_broadband_wireless_access_bwa_services 11967
+    name: BD Broadband Wireless Access Bwa Services
+    uuid: bf6ab448-fbd3-41a8-bd73-2d015e836143
+    type_id: 13
   - id: &bd_narsingdi_region 12240
     name: BD Narsingdi Region
     uuid: 7e7fc46e-7c1f-4cf4-ae2b-2f437db269ce
@@ -933,10 +937,54 @@ networks:
     name: BD Jamalpur Region
     uuid: 0f1cbb3e-d0ef-4d9c-abfe-cc720dd8e8d2
     type_id: 2
+  - id: &bd_international_freephone_services 21289
+    name: BD International Freephone Services
+    uuid: 9d682f0e-eee1-41c2-8e72-b63f71b52523
+    type_id: 13
+  - id: &bd_value_added_services 21300
+    name: BD Value Added Services
+    uuid: ab33c03c-e07d-4b71-9e0e-36a4a0f18092
+    type_id: 13
+  - id: &bd_freephone_services 21338
+    name: BD Freephone Services
+    uuid: ba8a2658-90be-4900-981a-49972012a342
+    type_id: 13
+  - id: &bd_virtual_card_calling_vcc 21343
+    name: BD Virtual Card Calling Vcc
+    uuid: 57a57d31-2a91-45b3-ae06-930093dd0528
+    type_id: 13
+  - id: &bd_special_services 21365
+    name: BD Special Services
+    uuid: 7d81edf6-1fe5-476d-a418-662c8b54be0e
+    type_id: 13
+  - id: &bd_emergency_services 21522
+    name: BD Emergency Services
+    uuid: 218d2057-879a-4a7e-ad9d-e7772a7c1245
+    type_id: 13
+  - id: &bd_internal_network_services 22706
+    name: BD Internal Network Services
+    uuid: 678e06a7-7299-41d8-9631-8e4bb95ffce1
+    type_id: 13
+  - id: &bd_grameenphone_mobile 25024
+    name: BD Grameenphone Mobile
+    uuid: 021aa5a0-d720-49c7-bf96-a82165741731
+    type_id: 3
+  - id: &bd_banglalink_mobile 25276
+    name: BD Banglalink Mobile
+    uuid: 007fe653-2550-4dbd-9bd2-af179bc23ba1
+    type_id: 3
+  - id: &bd_robi_airtel_mobile 25542
+    name: BD Robi Airtel Mobile
+    uuid: 9e638bf8-867b-465b-8758-b585a04529a8
+    type_id: 3
   - id: &bd_dhaka_region 25833
     name: BD Dhaka Region
     uuid: 98d4ed81-3156-4e83-9d8e-045b1ed907d9
     type_id: 2
+  - id: &bd_teletalk_mobile 26279
+    name: BD Teletalk Mobile
+    uuid: 88c3a395-afd3-40d1-bfc9-a60c1de4d6fe
+    type_id: 3
   - id: &bd_central_zone_region 27806
     name: BD Central Zone Region
     uuid: 19ffd0c6-102c-47bf-b3d5-a648cc4be329
@@ -1617,6 +1665,7 @@ networks:
     name: BD Sakhipur Region
     uuid: a9b827a7-d235-47c5-896f-bdc5fad5ffdf
     type_id: 2
+# Supplementary services Networks
   - id: &bd_dhanbari_region 42909
     name: BD Dhanbari Region
     uuid: 9e68b413-25fb-4c04-822c-2e30a3853fdf
@@ -1649,6 +1698,7 @@ networks:
     name: BD Jhenaigati Region
     uuid: 8ba108d6-5e0c-4cbe-894f-ab1b95591873
     type_id: 2
+# Mobile Networks
   - id: &bd_nokla_region 43100
     name: BD Nokla Region
     uuid: 763133e0-d28a-4989-9585-65a2c71c40ad
@@ -1661,58 +1711,943 @@ networks:
     name: BD Sreebordi Region
     uuid: c037b8a5-02b1-4665-b2d8-daeccdc33820
     type_id: 2
-# Supplementary services Networks
-  - id: &bd_broadband_wireless_access_bwa_services 11967
-    name: BD Broadband Wireless Access Bwa Services
-    uuid: bf6ab448-fbd3-41a8-bd73-2d015e836143
-    type_id: 13
-  - id: &bd_international_freephone_services 21289
-    name: BD International Freephone Services
-    uuid: 9d682f0e-eee1-41c2-8e72-b63f71b52523
-    type_id: 13
-  - id: &bd_value_added_services 21300
-    name: BD Value Added Services
-    uuid: ab33c03c-e07d-4b71-9e0e-36a4a0f18092
-    type_id: 13
-  - id: &bd_freephone_services 21338
-    name: BD Freephone Services
-    uuid: ba8a2658-90be-4900-981a-49972012a342
-    type_id: 13
-  - id: &bd_virtual_card_calling_vcc 21343
-    name: BD Virtual Card Calling Vcc
-    uuid: 57a57d31-2a91-45b3-ae06-930093dd0528
-    type_id: 13
-  - id: &bd_special_services 21365
-    name: BD Special Services
-    uuid: 7d81edf6-1fe5-476d-a418-662c8b54be0e
-    type_id: 13
-  - id: &bd_emergency_services 21522
-    name: BD Emergency Services
-    uuid: 218d2057-879a-4a7e-ad9d-e7772a7c1245
-    type_id: 13
-  - id: &bd_internal_network_services 22706
-    name: BD Internal Network Services
-    uuid: 678e06a7-7299-41d8-9631-8e4bb95ffce1
-    type_id: 13
-# Mobile Networks
-  - id: &bd_grameenphone_mobile 25024
-    name: BD Grameenphone Mobile
-    uuid: 021aa5a0-d720-49c7-bf96-a82165741731
-    type_id: 3
-  - id: &bd_banglalink_mobile 25276
-    name: BD Banglalink Mobile
-    uuid: 007fe653-2550-4dbd-9bd2-af179bc23ba1
-    type_id: 3
-  - id: &bd_robi_airtel_mobile 25542
-    name: BD Robi Airtel Mobile
-    uuid: 9e638bf8-867b-465b-8758-b585a04529a8
-    type_id: 3
-  - id: &bd_teletalk_mobile 26279
-    name: BD Teletalk Mobile
-    uuid: 88c3a395-afd3-40d1-bfc9-a60c1de4d6fe
-    type_id: 3
+  - id: &bd_fixed 43383
+    name: BD Fixed
+    uuid: 7217ab94-c5bb-4a4f-8226-55611aef7ca3
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
+  - id: 241953
+    prefix: '880'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: d57fc52f-c1bc-425c-9ef8-1afde05cc6f2
+    country_id: *bd
+    network_id: *bd_fixed
+  - id: 242160
+    prefix: '880000800'
+    number_min_length: 13
+    number_max_length: 15
+    uuid: 54fa155c-d41a-4a48-9ff2-649993d93fa6
+    country_id: *bd
+    network_id: *bd_international_freephone_services
+  - id: 242171
+    prefix: '880010'
+    number_min_length: 9
+    number_max_length: 10
+    uuid: 90bf6a40-69bc-4661-9c67-188aa7319762
+    country_id: *bd
+    network_id: *bd_value_added_services
+  - id: 242319
+    prefix: '8800800'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 7195c533-8dcf-4aa3-9aba-46f473898ee8
+    country_id: *bd
+    network_id: *bd_freephone_services
+  - id: 242324
+    prefix: '8800802'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 005ed0eb-2f77-4130-8a34-64c4882e7067
+    country_id: *bd
+    network_id: *bd_virtual_card_calling_vcc
+  - id: 242335
+    prefix: '8800888'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 0ae393de-4f0d-4166-b3ac-2f0897191822
+    country_id: *bd
+    network_id: *bd_international_freephone_services
+  - id: 242358
+    prefix: '8801'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: fd12912e-5ef8-45a7-ac72-b3156621155c
+    country_id: *bd
+    network_id: *bd_special_services
+  - id: 242528
+    prefix: '88010'
+    number_min_length: 6
+    number_max_length: 8
+    uuid: 46710ed0-7309-4316-8e5c-f5db342f4bf1
+    country_id: *bd
+    network_id: *bd_emergency_services
+  - id: 259502
+    prefix: '88013'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: c88aee2a-18ed-4881-b9d7-b40484e6e251
+    country_id: *bd
+    network_id: *bd_grameenphone_mobile
+  - id: 259940
+    prefix: '88014'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 638ca746-0afa-4afb-bf2f-562dcf579ca2
+    country_id: *bd
+    network_id: *bd_banglalink_mobile
+  - id: 266063
+    prefix: '88015'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 474de53b-9ab2-497d-a71d-9858489041ec
+    country_id: *bd
+    network_id: *bd_teletalk_mobile
+  - id: 266551
+    prefix: '88016'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 65349a3c-03f0-4613-9d36-2cc61f701b2e
+    country_id: *bd
+    network_id: *bd_robi_airtel_mobile
+  - id: 266939
+    prefix: '88017'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5c4ce129-0e64-4129-b69c-3faf25a2d7bd
+    country_id: *bd
+    network_id: *bd_grameenphone_mobile
+  - id: 260501
+    prefix: '88018'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 150ae412-d539-4360-9b2d-19d9124a6925
+    country_id: *bd
+    network_id: *bd_robi_airtel_mobile
+  - id: 260822
+    prefix: '88019'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 5ed2506a-4aa5-492b-8b6d-041c83df4139
+    country_id: *bd
+    network_id: *bd_banglalink_mobile
+  - id: 261181
+    prefix: '8802'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cdb8f300-8de4-4a46-8f6d-a19b4f33b153
+    country_id: *bd
+    network_id: *bd_dhaka_region
+  - id: 247390
+    prefix: '8802'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: e840a8e8-1166-47ba-99ec-2254125935c0
+    country_id: *bd
+    network_id: *bd_internal_network_services
+  - id: 277986
+    prefix: '88022'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3132a8ca-0090-43c1-a6f9-788ca147c284
+    country_id: *bd
+    network_id: *bd_central_zone_region
+  - id: 286621
+    prefix: '88023'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e14380bd-002b-4d8f-bf48-9baca366c681
+    country_id: *bd
+    network_id: *bd_south_east_zone_region
+  - id: 294314
+    prefix: '88024'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: dddcc24f-6375-4d4e-b235-c01b98cf7336
+    country_id: *bd
+    network_id: *bd_south_west_zone_region
+  - id: 301962
+    prefix: '88025'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d957d44e-2eb7-45f5-8d64-88dca7e91112
+    country_id: *bd
+    network_id: *bd_north_west_zone_region
+  - id: 308499
+    prefix: '88029'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e0ce35ba-dbc7-4a49-b985-d90f73b9ee00
+    country_id: *bd
+    network_id: *bd_north_east_zone_region
+  - id: 310427
+    prefix: '880302'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2a73dad4-d1b8-4cb0-addd-6695cec39fa0
+    country_id: *bd
+    network_id: *bd_central_zone_region
+  - id: 317558
+    prefix: '8803022'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8860f0c-e059-4387-b78f-31a048b384cd
+    country_id: *bd
+    network_id: *bd_fatikchari_region
+  - id: 317559
+    prefix: '8803023'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 2e38d81a-8535-47ed-ac3f-c6aa7a89f6aa
+    country_id: *bd
+    network_id: *bd_hathazari_region
+  - id: 317560
+    prefix: '8803024'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 44f23098-71cd-4c47-a2c6-12f288d0f696
+    country_id: *bd
+    network_id: *bd_mirsharai_region
+  - id: 317561
+    prefix: '8803025'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9fc4e52f-e1f7-4988-935f-dc87084df14d
+    country_id: *bd
+    network_id: *bd_rangunia_region
+  - id: 317562
+    prefix: '8803026'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0de03e40-6259-4b69-83d8-534c6d2b01a0
+    country_id: *bd
+    network_id: *bd_raozan_region
+  - id: 317563
+    prefix: '8803027'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8e9b3b2-241b-4893-8467-3cb1df2b6be6
+    country_id: *bd
+    network_id: *bd_sandwip_region
+  - id: 317564
+    prefix: '8803028'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: ed2a6afa-6187-479f-8858-39ecfdbcd8c0
+    country_id: *bd
+    network_id: *bd_sitakunda_region
+  - id: 317565
+    prefix: '8803029'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: b051eb8b-7658-4e19-8254-72d1f17442bd
+    country_id: *bd
+    network_id: *bd_anwara_region
+  - id: 318245
+    prefix: '8803032'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 90569e82-9748-4e65-a774-6144a2b0fcb0
+    country_id: *bd
+    network_id: *bd_boalkhali_region
+  - id: 318246
+    prefix: '8803033'
+    number_min_length: 11
+    number_max_length: 13
+    uuid: 775579c3-7105-4842-9891-da140be1ae42
+    country_id: *bd
+    network_id: *bd_chandanaish_region
+  - id: 318247
+    prefix: '8803034'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 4fa3b42f-2efb-4477-a289-89eb23a5c9e0
+    country_id: *bd
+    network_id: *bd_lohagara_region
+  - id: 318248
+    prefix: '8803035'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: d6a7e3d9-b7c5-4e71-83c1-42a452197d23
+    country_id: *bd
+    network_id: *bd_patiya_region
+  - id: 318249
+    prefix: '8803036'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: a4e423b2-3d11-45f4-a53f-3a8053723a0e
+    country_id: *bd
+    network_id: *bd_satkania_region
+  - id: 321158
+    prefix: '88031'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: b33b2a97-13eb-426c-aa07-7b892cf19821
+    country_id: *bd
+    network_id: *bd_chittagong_region
+  - id: 324590
+    prefix: '880313'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 534be103-56d6-4ef0-aee3-eff62667a951
+    country_id: *bd
+    network_id: *bd_south_east_zone_region
+  - id: 327966
+    prefix: '880321'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 72fbff47-74f1-464f-8aee-476c9506a572
+    country_id: *bd
+    network_id: *bd_noakhali_region
+  - id: 335934
+    prefix: '8803221'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 1b517f59-91ed-4289-8d54-65803f122cd6
+    country_id: *bd
+    network_id: *bd_begumganj_region
+  - id: 335936
+    prefix: '8803222'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 1b47d09f-3898-4ac5-a9d9-060814df1f90
+    country_id: *bd
+    network_id: *bd_chatkhil_region
+  - id: 335940
+    prefix: '8803223'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: aeef207d-8051-4fe1-847c-b8b8ecaeb36b
+    country_id: *bd
+    network_id: *bd_companiganj_region
+  - id: 335942
+    prefix: '8803224'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2b6393a8-8729-4502-84ef-e1e8ec2fe8ae
+    country_id: *bd
+    network_id: *bd_hatiya_region
+  - id: 335944
+    prefix: '8803225'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 7ec15fed-0f91-4c01-9f6b-1abd919dba43
+    country_id: *bd
+    network_id: *bd_senbagh_region
+  - id: 331582
+    prefix: '880331'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 2a84090c-2bd8-4984-b5bf-a0aa6d05750f
+    country_id: *bd
+    network_id: *bd_feni_region
+  - id: 339015
+    prefix: '8803322'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: f26a50b5-fed5-403a-9df0-c173f74b4dec
+    country_id: *bd
+    network_id: *bd_chhagalnaiya_region
+  - id: 339019
+    prefix: '8803323'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 8b2b1beb-3fd6-46de-a6e3-9f8e96828eff
+    country_id: *bd
+    network_id: *bd_daganbhuiyan_region
+  - id: 339030
+    prefix: '8803324'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 12858fc4-9ade-4921-a55e-d4fbdbf289fa
+    country_id: *bd
+    network_id: *bd_parshuram_region
+  - id: 339032
+    prefix: '8803325'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 205e6f78-5eaa-4445-bdc0-eaffe4e799f2
+    country_id: *bd
+    network_id: *bd_sonagazi_region
+  - id: 339034
+    prefix: '8803326'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: f34c904a-d305-4663-8fbc-3fb840ba2920
+    country_id: *bd
+    network_id: *bd_fulgazi_region
+  - id: 331707
+    prefix: '880335'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f88c4ed4-f381-4c2e-ae7b-9736541cf204
+    country_id: *bd
+    network_id: *bd_nort_west_zone_region
+  - id: 340777
+    prefix: '880341'
+    number_min_length: 9
+    number_max_length: 11
+    uuid: 54221717-007f-4c65-8eea-8dcd3dda7c9d
+    country_id: *bd
+    network_id: *bd_coxs_bazar_region
+  - id: 341452
+    prefix: '8803422'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: eec32e86-9a06-45de-ab0a-64bc2c542166
+    country_id: *bd
+    network_id: *bd_chakaria_region
+  - id: 341460
+    prefix: '8803424'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: d8309484-1c90-42f0-b39c-fafd817b3230
+    country_id: *bd
+    network_id: *bd_maheshkhali_region
+  - id: 341465
+    prefix: '8803425'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 06ebec76-a629-45d4-9029-28609ee63b81
+    country_id: *bd
+    network_id: *bd_ramu_region
+  - id: 341470
+    prefix: '8803427'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 553e7470-fc91-4c3f-b412-f0fd4fdea08c
+    country_id: *bd
+    network_id: *bd_ukhiya_region
+  - id: 352566
+    prefix: '880351'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1809c486-3e5b-4f7b-907d-e5bcedf1e204
+    country_id: *bd
+    network_id: *bd_rangamati_region
+  - id: 353306
+    prefix: '8803529'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f452a50a-61e6-434b-b765-c683dde226b4
+    country_id: *bd
+    network_id: *bd_kaptai_region
+  - id: 345879
+    prefix: '880359'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 2b7c0046-5c8d-4c6a-9a6f-2657c2eb1b80
+    country_id: *bd
+    network_id: *bd_north_east_zone_region
+  - id: 354012
+    prefix: '880361'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c81c54ed-76b3-411b-8a26-03492e8f1aed
+    country_id: *bd
+    network_id: *bd_bandarban_region
+  - id: 354569
+    prefix: '880363'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: aec1ee49-a7df-4f9c-9166-61c722fb7c76
+    country_id: *bd
+    network_id: *bd_south_east_zone_region
+  - id: 354622
+    prefix: '880364'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 4c13e74f-e29a-47b8-8540-feb80c5e6ee7
+    country_id: *bd
+    network_id: *bd_south_west_zone_region
+  - id: 354728
+    prefix: '880365'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 9ee8bb12-d10c-4f60-8c91-1f7874bb0ba4
+    country_id: *bd
+    network_id: *bd_north_west_zone_region
+  - id: 356090
+    prefix: '880371'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 114a1553-c3b9-4327-b73a-0fad88afd8c8
+    country_id: *bd
+    network_id: *bd_khagrachhari_region
+  - id: 356214
+    prefix: '880373'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 839ccbdc-78f6-4046-803f-70baf606e0fe
+    country_id: *bd
+    network_id: *bd_south_east_zone_region
+  - id: 356387
+    prefix: '880374'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ccbf6803-ceb4-4d5c-a9e1-80462765a8ff
+    country_id: *bd
+    network_id: *bd_south_west_zone_region
+  - id: 346849
+    prefix: '880375'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: f4c95f89-c55e-45e7-a9ff-19399c8ff2b1
+    country_id: *bd
+    network_id: *bd_north_west_zone_region
+  - id: 347677
+    prefix: '880379'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: d26e534b-3bdb-43da-a382-d992aeeea716
+    country_id: *bd
+    network_id: *bd_north_east_zone_region
+  - id: 356654
+    prefix: '880381'
+    number_min_length: 10
+    number_max_length: 12
+    uuid: 2a0b3c21-b3f6-456b-9752-4e0316aa7cc6
+    country_id: *bd
+    network_id: *bd_lakshmipur_region
+  - id: 356808
+    prefix: '8803822'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 997904db-e440-4b4c-a6ca-89f38c9c6484
+    country_id: *bd
+    network_id: *bd_raipur_region
+  - id: 356820
+    prefix: '8803823'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3747b46d-cccb-47f6-b8dc-2b8aa89c159d
+    country_id: *bd
+    network_id: *bd_ramgati_char_alexander_region
+  - id: 356826
+    prefix: '8803824'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c7ea433d-e8e8-40fa-b680-9c70a7228496
+    country_id: *bd
+    network_id: *bd_ramganj_region
+  - id: 358275
+    prefix: '880393'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8e94c882-daeb-4087-9449-ce66155cd149
+    country_id: *bd
+    network_id: *bd_south_east_zone_region
+  - id: 359702
+    prefix: '8804027'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: a525da9b-4a17-4b07-8f35-d70300a6a6a3
+    country_id: *bd
+    network_id: *bd_paikgachha_region
+  - id: 359703
+    prefix: '8804028'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 49db8d57-a900-47a2-927b-a9e1cec1701c
+    country_id: *bd
+    network_id: *bd_phultala_region
+  - id: 359704
+    prefix: '8804029'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: e5c589c9-5c04-46eb-9158-d4b02eb1ddb0
+    country_id: *bd
+    network_id: *bd_terokhada_region
+  - id: 371495
+    prefix: '880409'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 06d06aee-2688-47b7-9a40-c79bd8f5675f
+    country_id: *bd
+    network_id: *bd_north_east_zone_region
+  - id: 362516
+    prefix: '88041'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: faa6e2e3-f83c-498f-95d4-c7a2ab4ac589
+    country_id: *bd
+    network_id: *bd_khulna_region
+  - id: 372950
+    prefix: '880413'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 392998e8-0e61-4693-996d-8bf268cb5251
+    country_id: *bd
+    network_id: *bd_south_east_zone_region
+  - id: 377398
+    prefix: '880421'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9697ebd1-baee-43b6-8378-9ac09e68b644
+    country_id: *bd
+    network_id: *bd_jessore_region
+  - id: 377546
+    prefix: '8804222'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: e4f5c1c9-1234-4556-ae2a-2100677fac38
+    country_id: *bd
+    network_id: *bd_abhaynagar_region
+  - id: 377549
+    prefix: '8804223'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: fc37851b-eed5-4811-936d-acb24baed3ba
+    country_id: *bd
+    network_id: *bd_bagherpara_region
+  - id: 377552
+    prefix: '8804224'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 910b010d-5105-4a59-ba9b-74179069115b
+    country_id: *bd
+    network_id: *bd_chaugachha_region
+  - id: 377555
+    prefix: '8804225'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 1896288b-7ddd-4121-85b3-cfb44377862b
+    country_id: *bd
+    network_id: *bd_jhikargacha_region
+  - id: 377557
+    prefix: '8804226'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: acf95edc-7824-4266-a909-c8dd64bc4307
+    country_id: *bd
+    network_id: *bd_keshabpur_region
+  - id: 377559
+    prefix: '8804227'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 855a9c09-e87e-4864-b18e-f803a6338601
+    country_id: *bd
+    network_id: *bd_manirampur_region
+  - id: 377561
+    prefix: '8804228'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 06c58cac-8184-403e-9c8d-7e438a8ff3dd
+    country_id: *bd
+    network_id: *bd_sharsha_region
+  - id: 377563
+    prefix: '880423'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 0c7503e8-b6e4-4979-afd5-3109f03dbcfd
+    country_id: *bd
+    network_id: *bd_south_east_zone_region
+  - id: 366683
+    prefix: '880424'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 3a2de0eb-228e-4b05-b149-492af5f66e64
+    country_id: *bd
+    network_id: *bd_south_west_zone_region
+  - id: 367179
+    prefix: '880425'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: e434f435-5514-4485-b328-cf98cef6a09a
+    country_id: *bd
+    network_id: *bd_north_west_zone_region
+  - id: 368404
+    prefix: '880431'
+    number_min_length: 11
+    number_max_length: 13
+    uuid: 0df4f215-7ad0-4605-a2d2-9b7291be397f
+    country_id: *bd
+    network_id: *bd_barisal_region
+  - id: 380239
+    prefix: '8804322'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 185bcfde-f67e-4446-b6d1-070c57a7cebe
+    country_id: *bd
+    network_id: *bd_gournadi_region
+  - id: 380242
+    prefix: '8804323'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 214fd7e1-81eb-49d0-bc70-4882fee15695
+    country_id: *bd
+    network_id: *bd_agailjhara_region
+  - id: 380245
+    prefix: '8804324'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c243012d-952a-4834-bce0-7913f77c4b04
+    country_id: *bd
+    network_id: *bd_hizla_region
+  - id: 380248
+    prefix: '8804325'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9465b6fd-00ea-48c7-93f5-b25c104b79ca
+    country_id: *bd
+    network_id: *bd_mehendiganj_region
+  - id: 380249
+    prefix: '8804326'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: fedd8d53-182f-444f-9278-9d747932fe7a
+    country_id: *bd
+    network_id: *bd_muladi_region
+  - id: 380252
+    prefix: '8804327'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: f13aa0ae-88eb-428f-b83a-23dd46080d5a
+    country_id: *bd
+    network_id: *bd_babuganj_region
+  - id: 380255
+    prefix: '8804328'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 898353cc-3ef9-4cea-b988-21df6e4630b4
+    country_id: *bd
+    network_id: *bd_bakerganj_region
+  - id: 368471
+    prefix: '8804332'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6bfad528-8340-4226-8a1d-1216139f8268
+    country_id: *bd
+    network_id: *bd_banaripara_region
+  - id: 382080
+    prefix: '880441'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3d0e1932-e0c3-4c81-b3aa-e461703017e5
+    country_id: *bd
+    network_id: *bd_patuakhali_region
+  - id: 382961
+    prefix: '8804422'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f46c57fe-5e9c-4e4c-b71d-340a1b77dd10
+    country_id: *bd
+    network_id: *bd_bauphal_region
+  - id: 382963
+    prefix: '8804423'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eaf1ebff-3e0f-4309-8576-f648081782f8
+    country_id: *bd
+    network_id: *bd_dashmina_region
+  - id: 382965
+    prefix: '8804424'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e8a8c259-1fac-4ff9-bb49-fdbae34b63c8
+    country_id: *bd
+    network_id: *bd_galachipa_region
+  - id: 382966
+    prefix: '8804425'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e79054f0-a504-4981-8f4f-02c84c8b7ca2
+    country_id: *bd
+    network_id: *bd_khepurpara_region
+  - id: 382968
+    prefix: '8804426'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e05aa7ad-9992-4f95-9cb0-0e7b756c450f
+    country_id: *bd
+    network_id: *bd_mirzaganj_region
+  - id: 382970
+    prefix: '880443'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: ab695fcc-dc2c-4744-b12d-11f11dd54f02
+    country_id: *bd
+    network_id: *bd_south_east_zone_region
+  - id: 384108
+    prefix: '880444'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 78bf3fe6-0d04-490b-bce6-1482833913f6
+    country_id: *bd
+    network_id: *bd_south_west_zone_region
+  - id: 384978
+    prefix: '880445'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 82ff86cb-ec39-4461-86d7-e03879cd154f
+    country_id: *bd
+    network_id: *bd_north_west_zone_region
+  - id: 385458
+    prefix: '8804455'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5e89c9c2-fef1-4b97-bc4e-357e8bded061
+    country_id: *bd
+    network_id: *bd_patharghata_region
+  - id: 386196
+    prefix: '880448'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 642bd4cd-f968-4405-bf10-b09d97d04279
+    country_id: *bd
+    network_id: *bd_barguna_region
+  - id: 386655
+    prefix: '880449'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: aa4175e4-2bb0-4223-b4d4-c5cc9bccf3d1
+    country_id: *bd
+    network_id: *bd_north_east_zone_region
+  - id: 387506
+    prefix: '880451'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b0898ee-c965-4230-971a-7eecd87cf49b
+    country_id: *bd
+    network_id: *bd_jhenaidah_region
+  - id: 388162
+    prefix: '8804523'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6e769336-a6a1-42c7-899f-91713d9c3d36
+    country_id: *bd
+    network_id: *bd_kaliganj_region
+  - id: 388165
+    prefix: '8804525'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 9bc2a3d2-4514-4d34-b03d-3b3e95831ac6
+    country_id: *bd
+    network_id: *bd_maheshpur_region
+  - id: 388732
+    prefix: '880461'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f33ab505-d9fe-4a50-a21e-177afa70b268
+    country_id: *bd
+    network_id: *bd_pirojpur_region
+  - id: 394750
+    prefix: '8804623'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 87ed96b9-83b2-4abf-9cd2-a0edbe6f9ce4
+    country_id: *bd
+    network_id: *bd_bhandaria_region
+  - id: 394752
+    prefix: '8804624'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: d7c4a472-0206-4160-b46b-4736ea4f2a00
+    country_id: *bd
+    network_id: *bd_kawkhali_region
+  - id: 394754
+    prefix: '8804625'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c25fab20-cf37-4f0a-b529-c566bd96972c
+    country_id: *bd
+    network_id: *bd_mathbaria_region
+  - id: 394756
+    prefix: '8804626'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 08fbaee7-04e2-4b62-a6b9-705f3dd66244
+    country_id: *bd
+    network_id: *bd_nazirpur_region
+  - id: 394758
+    prefix: '8804627'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: fbe8faf0-7477-4022-9ee6-a14660bd62ec
+    country_id: *bd
+    network_id: *bd_nesarabad_swarupkathi_region
+  - id: 398753
+    prefix: '8804652'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: a8de1f5a-ab04-476b-b721-665f28fb0e83
+    country_id: *bd
+    network_id: *bd_chitalmari_region
+  - id: 398756
+    prefix: '8804653'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: df5518a6-9db4-42bd-918d-aa2942f328a4
+    country_id: *bd
+    network_id: *bd_fakirhat_region
+  - id: 398758
+    prefix: '8804654'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 33d81111-781b-40dc-b97e-4b9bdd8e73ee
+    country_id: *bd
+    network_id: *bd_kachua_region
+  - id: 398760
+    prefix: '8804655'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: b0efe7a9-7b7e-4030-a0a5-cad3079ec9e7
+    country_id: *bd
+    network_id: *bd_mollahat_region
+  - id: 398762
+    prefix: '8804656'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2dbbae98-2c52-4484-9057-0a5e3e489557
+    country_id: *bd
+    network_id: *bd_morrelganj_region
+  - id: 398764
+    prefix: '8804657'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a024d6a-1791-46d8-944d-ac4fca78688d
+    country_id: *bd
+    network_id: *bd_rampal_region
+  - id: 398766
+    prefix: '8804658'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 002890c1-31e8-43fb-bcde-d836a76f4151
+    country_id: *bd
+    network_id: *bd_mongla_region
+  - id: 399099
+    prefix: '8804662'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 40f26356-dfd1-4523-aa37-c13deb7e2ed0
+    country_id: *bd
+    network_id: *bd_mongla_port_region
+  - id: 399160
+    prefix: '880468'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 3642d46e-583d-45fa-a966-9d36236006c8
+    country_id: *bd
+    network_id: *bd_bagerhat_region
+  - id: 396469
+    prefix: '880471'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 77bdf508-46ae-4e07-90e2-de9a8b0281b4
+    country_id: *bd
+    network_id: *bd_satkhira_region
+  - id: 396988
+    prefix: '8804724'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d2ba7c0d-13e7-49ad-83f5-4e36d81f588c
+    country_id: *bd
+    network_id: *bd_kalaroa_region
+  - id: 56450
+    prefix: '880481'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7978abcf-c32a-454d-b515-c81d3943a4b1
+    country_id: *bd
+    network_id: *bd_narail_region
+  - id: 57052
+    prefix: '8804823'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7fcbf6ca-a6b2-4bb8-958e-ae292a0f6381
+    country_id: *bd
+    network_id: *bd_lohagara_region
   - id: 53124
     prefix: '8804852'
     number_min_length: 12
@@ -1734,48 +2669,6 @@ network_prefixes:
     uuid: 35d214c5-1bc5-41d8-8a9e-3aac4fe55a44
     country_id: *bd
     network_id: *bd_sreepur_region
-  - id: 53892
-    prefix: '8804953'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: af454586-7114-446c-ba21-a544e2f62058
-    country_id: *bd
-    network_id: *bd_nalchity_region
-  - id: 54284
-    prefix: '880498'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4095cfd-b948-4c32-8f07-09ef60f31885
-    country_id: *bd
-    network_id: *bd_jhalakathi_region
-  - id: 55861
-    prefix: '8805032'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 401c9df5-c4a2-464f-a8d6-6355ace7132c
-    country_id: *bd
-    network_id: *bd_sonatala_region
-  - id: 55863
-    prefix: '8805033'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9cf2b456-9f76-47fa-a6fd-b0b9c47fd0ff
-    country_id: *bd
-    network_id: *bd_shibganj_region
-  - id: 56450
-    prefix: '880481'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7978abcf-c32a-454d-b515-c81d3943a4b1
-    country_id: *bd
-    network_id: *bd_narail_region
-  - id: 57052
-    prefix: '8804823'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7fcbf6ca-a6b2-4bb8-958e-ae292a0f6381
-    country_id: *bd
-    network_id: *bd_lohagara_region
   - id: 57421
     prefix: '880488'
     number_min_length: 11
@@ -1811,6 +2704,20 @@ network_prefixes:
     uuid: 3bf8524d-9e21-466e-a1fa-cedce4c5b762
     country_id: *bd
     network_id: *bd_lalmohan_region
+  - id: 53892
+    prefix: '8804953'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: af454586-7114-446c-ba21-a544e2f62058
+    country_id: *bd
+    network_id: *bd_nalchity_region
+  - id: 54284
+    prefix: '880498'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b4095cfd-b948-4c32-8f07-09ef60f31885
+    country_id: *bd
+    network_id: *bd_jhalakathi_region
   - id: 60044
     prefix: '8805020'
     number_min_length: 12
@@ -1867,6 +2774,20 @@ network_prefixes:
     uuid: b3f436ad-60ae-4481-ad80-f3b4e116a20f
     country_id: *bd
     network_id: *bd_sherpur_region
+  - id: 55861
+    prefix: '8805032'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 401c9df5-c4a2-464f-a8d6-6355ace7132c
+    country_id: *bd
+    network_id: *bd_sonatala_region
+  - id: 55863
+    prefix: '8805033'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9cf2b456-9f76-47fa-a6fd-b0b9c47fd0ff
+    country_id: *bd
+    network_id: *bd_shibganj_region
   - id: 62595
     prefix: '88051'
     number_min_length: 9
@@ -1874,6 +2795,62 @@ network_prefixes:
     uuid: 361b9d35-1063-4d7d-b00d-e84a815295cc
     country_id: *bd
     network_id: *bd_bogra_region
+  - id: 76317
+    prefix: '880521'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58c7d6c2-c993-49df-960d-ff70ccd4df02
+    country_id: *bd
+    network_id: *bd_rangpur_region
+  - id: 76347
+    prefix: '8805222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8d696e9f-09fc-4285-a8e3-4881bcf7c2be
+    country_id: *bd
+    network_id: *bd_badargonj_region
+  - id: 76350
+    prefix: '8805223'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 236c57b8-7d9c-4f77-9260-29cea05f27d6
+    country_id: *bd
+    network_id: *bd_gangachara_region
+  - id: 76353
+    prefix: '8805224'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5679ef50-0ce3-459f-8a1b-39509720978d
+    country_id: *bd
+    network_id: *bd_kaunia_region
+  - id: 76356
+    prefix: '8805225'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 20c349b6-0bb5-45e8-9399-03346b0a40a5
+    country_id: *bd
+    network_id: *bd_mithapukur_region
+  - id: 76359
+    prefix: '8805226'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 561a76a4-2296-4982-b366-d8fc11df279b
+    country_id: *bd
+    network_id: *bd_pirgacha_region
+  - id: 76361
+    prefix: '8805227'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 33de8303-ed99-4be8-bb37-b490a1c2d067
+    country_id: *bd
+    network_id: *bd_pirgonj_region
+  - id: 76362
+    prefix: '8805228'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1bc5e5e4-6058-4655-9272-08b79894e77d
+    country_id: *bd
+    network_id: *bd_taragonj_region
   - id: 72508
     prefix: '880531'
     number_min_length: 11
@@ -1972,62 +2949,6 @@ network_prefixes:
     uuid: d345cc22-9571-4f9e-8191-5c5abd205b98
     country_id: *bd
     network_id: *bd_gaibandha_region
-  - id: 76317
-    prefix: '880521'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 58c7d6c2-c993-49df-960d-ff70ccd4df02
-    country_id: *bd
-    network_id: *bd_rangpur_region
-  - id: 76347
-    prefix: '8805222'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8d696e9f-09fc-4285-a8e3-4881bcf7c2be
-    country_id: *bd
-    network_id: *bd_badargonj_region
-  - id: 76350
-    prefix: '8805223'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 236c57b8-7d9c-4f77-9260-29cea05f27d6
-    country_id: *bd
-    network_id: *bd_gangachara_region
-  - id: 76353
-    prefix: '8805224'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5679ef50-0ce3-459f-8a1b-39509720978d
-    country_id: *bd
-    network_id: *bd_kaunia_region
-  - id: 76356
-    prefix: '8805225'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 20c349b6-0bb5-45e8-9399-03346b0a40a5
-    country_id: *bd
-    network_id: *bd_mithapukur_region
-  - id: 76359
-    prefix: '8805226'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 561a76a4-2296-4982-b366-d8fc11df279b
-    country_id: *bd
-    network_id: *bd_pirgacha_region
-  - id: 76361
-    prefix: '8805227'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 33de8303-ed99-4be8-bb37-b490a1c2d067
-    country_id: *bd
-    network_id: *bd_pirgonj_region
-  - id: 76362
-    prefix: '8805228'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1bc5e5e4-6058-4655-9272-08b79894e77d
-    country_id: *bd
-    network_id: *bd_taragonj_region
   - id: 77508
     prefix: '8805422'
     number_min_length: 12
@@ -2070,6 +2991,48 @@ network_prefixes:
     uuid: 50604767-3047-4800-a38b-037477c5f6a9
     country_id: *bd
     network_id: *bd_sundarganj_region
+  - id: 86690
+    prefix: '880551'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 36728006-45f1-4ca2-a43f-aeebb3e72960
+    country_id: *bd
+    network_id: *bd_nilphamari_region
+  - id: 86986
+    prefix: '8805522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fc9d7e5c-d9f3-483c-8b7c-b2aec43bee44
+    country_id: *bd
+    network_id: *bd_dimla_region
+  - id: 86990
+    prefix: '8805523'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: db0d45f5-cf3f-43ba-942c-2cf49190f99d
+    country_id: *bd
+    network_id: *bd_domar_region
+  - id: 86994
+    prefix: '8805524'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3892a91c-f2dd-4135-97ce-e25e44a80b55
+    country_id: *bd
+    network_id: *bd_jaldhaka_region
+  - id: 86998
+    prefix: '8805525'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eaa58cf9-5d8c-450d-b47f-f95eb0867b92
+    country_id: *bd
+    network_id: *bd_kishorganj_region
+  - id: 87002
+    prefix: '8805526'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3fd9a900-b004-438c-870b-06e26e04301b
+    country_id: *bd
+    network_id: *bd_syedpur_region
   - id: 80638
     prefix: '880561'
     number_min_length: 11
@@ -2077,6 +3040,76 @@ network_prefixes:
     uuid: b19a835e-f032-4ff4-bb71-91983d2b21c1
     country_id: *bd
     network_id: *bd_thakurgaon_region
+  - id: 89273
+    prefix: '8805622'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f2e05f35-2c1e-496f-a4cb-d03420f71f9b
+    country_id: *bd
+    network_id: *bd_baliadangi_region
+  - id: 89275
+    prefix: '8805623'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bbb8c213-a1d4-41bb-813a-7851806b90f3
+    country_id: *bd
+    network_id: *bd_haripur_region
+  - id: 89277
+    prefix: '8805624'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 41fd05c7-a86a-4a95-aa8a-761cd41238b6
+    country_id: *bd
+    network_id: *bd_pirganj_region
+  - id: 89279
+    prefix: '8805625'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f09540a7-64c9-4355-85c5-41a66b1d58be
+    country_id: *bd
+    network_id: *bd_ranisankail_region
+  - id: 89795
+    prefix: '8805652'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e268c19d-2cfe-41e6-9386-c03ffbd7e8ef
+    country_id: *bd
+    network_id: *bd_atwari_region
+  - id: 89798
+    prefix: '8805653'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f0f05f4b-e009-48be-a005-ad302b31396f
+    country_id: *bd
+    network_id: *bd_boda_region
+  - id: 89801
+    prefix: '8805654'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 11581f1f-1237-4bf3-a5d7-5834a9502f56
+    country_id: *bd
+    network_id: *bd_debiganj_region
+  - id: 89804
+    prefix: '8805655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 46d5c766-47b9-40d4-8fcb-eeb20e061dd8
+    country_id: *bd
+    network_id: *bd_tetulia_region
+  - id: 90231
+    prefix: '880568'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4b6cadd8-6011-474f-9a5a-58816b9a5ba7
+    country_id: *bd
+    network_id: *bd_panchagarh_region
+  - id: 91089
+    prefix: '880571'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fcea366d-bb70-4b05-8427-24e2421fec62
+    country_id: *bd
+    network_id: *bd_joypurhat_region
   - id: 81998
     prefix: '8805722'
     number_min_length: 12
@@ -2203,118 +3236,6 @@ network_prefixes:
     uuid: 70daa8de-1a51-4f1b-9b52-9675b14f7679
     country_id: *bd
     network_id: *bd_patgram_region
-  - id: 86690
-    prefix: '880551'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 36728006-45f1-4ca2-a43f-aeebb3e72960
-    country_id: *bd
-    network_id: *bd_nilphamari_region
-  - id: 86986
-    prefix: '8805522'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fc9d7e5c-d9f3-483c-8b7c-b2aec43bee44
-    country_id: *bd
-    network_id: *bd_dimla_region
-  - id: 86990
-    prefix: '8805523'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: db0d45f5-cf3f-43ba-942c-2cf49190f99d
-    country_id: *bd
-    network_id: *bd_domar_region
-  - id: 86994
-    prefix: '8805524'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3892a91c-f2dd-4135-97ce-e25e44a80b55
-    country_id: *bd
-    network_id: *bd_jaldhaka_region
-  - id: 86998
-    prefix: '8805525'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eaa58cf9-5d8c-450d-b47f-f95eb0867b92
-    country_id: *bd
-    network_id: *bd_kishorganj_region
-  - id: 87002
-    prefix: '8805526'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3fd9a900-b004-438c-870b-06e26e04301b
-    country_id: *bd
-    network_id: *bd_syedpur_region
-  - id: 89273
-    prefix: '8805622'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f2e05f35-2c1e-496f-a4cb-d03420f71f9b
-    country_id: *bd
-    network_id: *bd_baliadangi_region
-  - id: 89275
-    prefix: '8805623'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bbb8c213-a1d4-41bb-813a-7851806b90f3
-    country_id: *bd
-    network_id: *bd_haripur_region
-  - id: 89277
-    prefix: '8805624'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 41fd05c7-a86a-4a95-aa8a-761cd41238b6
-    country_id: *bd
-    network_id: *bd_pirganj_region
-  - id: 89279
-    prefix: '8805625'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f09540a7-64c9-4355-85c5-41a66b1d58be
-    country_id: *bd
-    network_id: *bd_ranisankail_region
-  - id: 89795
-    prefix: '8805652'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e268c19d-2cfe-41e6-9386-c03ffbd7e8ef
-    country_id: *bd
-    network_id: *bd_atwari_region
-  - id: 89798
-    prefix: '8805653'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f0f05f4b-e009-48be-a005-ad302b31396f
-    country_id: *bd
-    network_id: *bd_boda_region
-  - id: 89801
-    prefix: '8805654'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 11581f1f-1237-4bf3-a5d7-5834a9502f56
-    country_id: *bd
-    network_id: *bd_debiganj_region
-  - id: 89804
-    prefix: '8805655'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 46d5c766-47b9-40d4-8fcb-eeb20e061dd8
-    country_id: *bd
-    network_id: *bd_tetulia_region
-  - id: 90231
-    prefix: '880568'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4b6cadd8-6011-474f-9a5a-58816b9a5ba7
-    country_id: *bd
-    network_id: *bd_panchagarh_region
-  - id: 91089
-    prefix: '880571'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fcea366d-bb70-4b05-8427-24e2421fec62
-    country_id: *bd
-    network_id: *bd_joypurhat_region
   - id: 95273
     prefix: '880601'
     number_min_length: 11
@@ -2343,62 +3264,13 @@ network_prefixes:
     uuid: 8e9c760b-c412-4209-a47f-7ef271209cd3
     country_id: *bd
     network_id: *bd_zajira_region
-  - id: 114216
-    prefix: '880628'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 49284fc8-fb58-4a0c-bb86-10b3eff96dd3
+  - id: 111452
+    prefix: '88061'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: dc0899de-1bdc-4ebf-8a05-4e9f5e15613f
     country_id: *bd
-    network_id: *bd_narsingdi_region
-  - id: 114774
-    prefix: '8806322'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c14a1e78-5db1-4ea5-af34-aa2bc9482aaf
-    country_id: *bd
-    network_id: *bd_alfadanga_region
-  - id: 114777
-    prefix: '8806323'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 51a2c204-3dac-4f4b-aa9f-13c649c20c15
-    country_id: *bd
-    network_id: *bd_bhanga_region
-  - id: 114780
-    prefix: '8806324'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bd384e11-28b8-48a0-98aa-b410a30f3ea5
-    country_id: *bd
-    network_id: *bd_boalmari_region
-  - id: 114783
-    prefix: '8806325'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f40cd9fb-a1b5-41bc-8664-384d603c2391
-    country_id: *bd
-    network_id: *bd_charbhadrasan_region
-  - id: 114786
-    prefix: '8806326'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3d35bd2b-3c0f-4d80-b0ac-15b55a87407e
-    country_id: *bd
-    network_id: *bd_madhukhali_region
-  - id: 114789
-    prefix: '8806327'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9925d7be-cb03-4ea0-bf71-ff7a4cf99413
-    country_id: *bd
-    network_id: *bd_nagarkanda_region
-  - id: 114792
-    prefix: '8806328'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0b2e886f-1382-42c0-8be2-284723172862
-    country_id: *bd
-    network_id: *bd_sadarpur_region
+    network_id: *bd_broadband_wireless_access_bwa_services
   - id: 115547
     prefix: '8806222'
     number_min_length: 12
@@ -2462,6 +3334,13 @@ network_prefixes:
     uuid: f54641b1-24e4-42ad-a6c4-1fe373b49f94
     country_id: *bd
     network_id: *bd_madhabdi_region
+  - id: 114216
+    prefix: '880628'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 49284fc8-fb58-4a0c-bb86-10b3eff96dd3
+    country_id: *bd
+    network_id: *bd_narsingdi_region
   - id: 119674
     prefix: '880631'
     number_min_length: 11
@@ -2469,6 +3348,55 @@ network_prefixes:
     uuid: d7c9db00-bd4a-4dfc-a2cd-809d5765b696
     country_id: *bd
     network_id: *bd_faridpur_region
+  - id: 114774
+    prefix: '8806322'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c14a1e78-5db1-4ea5-af34-aa2bc9482aaf
+    country_id: *bd
+    network_id: *bd_alfadanga_region
+  - id: 114777
+    prefix: '8806323'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 51a2c204-3dac-4f4b-aa9f-13c649c20c15
+    country_id: *bd
+    network_id: *bd_bhanga_region
+  - id: 114780
+    prefix: '8806324'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bd384e11-28b8-48a0-98aa-b410a30f3ea5
+    country_id: *bd
+    network_id: *bd_boalmari_region
+  - id: 114783
+    prefix: '8806325'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f40cd9fb-a1b5-41bc-8664-384d603c2391
+    country_id: *bd
+    network_id: *bd_charbhadrasan_region
+  - id: 114786
+    prefix: '8806326'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3d35bd2b-3c0f-4d80-b0ac-15b55a87407e
+    country_id: *bd
+    network_id: *bd_madhukhali_region
+  - id: 114789
+    prefix: '8806327'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9925d7be-cb03-4ea0-bf71-ff7a4cf99413
+    country_id: *bd
+    network_id: *bd_nagarkanda_region
+  - id: 114792
+    prefix: '8806328'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0b2e886f-1382-42c0-8be2-284723172862
+    country_id: *bd
+    network_id: *bd_sadarpur_region
   - id: 123657
     prefix: '880641'
     number_min_length: 11
@@ -2476,13 +3404,6 @@ network_prefixes:
     uuid: fbb57976-832c-4f64-a4d7-3b0085c9970d
     country_id: *bd
     network_id: *bd_rajbari_region
-  - id: 132169
-    prefix: '880668'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5d42171d-cb26-4f2e-86f4-c08c4c5a962c
-    country_id: *bd
-    network_id: *bd_gopalganj_region
   - id: 133382
     prefix: '8806422'
     number_min_length: 12
@@ -2581,6 +3502,13 @@ network_prefixes:
     uuid: 12737ef9-2435-4fb1-8fb6-1232f92b64a2
     country_id: *bd
     network_id: *bd_tungipara_region
+  - id: 132169
+    prefix: '880668'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d42171d-cb26-4f2e-86f4-c08c4c5a962c
+    country_id: *bd
+    network_id: *bd_gopalganj_region
   - id: 143863
     prefix: '880671'
     number_min_length: 11
@@ -2616,6 +3544,41 @@ network_prefixes:
     uuid: e7dfc4c3-b34c-4b7a-ae84-798ac1b9fa0d
     country_id: *bd
     network_id: *bd_rupganj_region
+  - id: 151797
+    prefix: '880681'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ef9bc0ec-85aa-450e-a00b-ab16cd1ec949
+    country_id: *bd
+    network_id: *bd_gazipur_region
+  - id: 152619
+    prefix: '8806822'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 549dff76-3bee-4d9d-8fc1-d23bf84327a8
+    country_id: *bd
+    network_id: *bd_kaliakair_region
+  - id: 152621
+    prefix: '8806823'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e5970448-35cb-4d45-b327-18a320444855
+    country_id: *bd
+    network_id: *bd_kaliganj_region
+  - id: 152622
+    prefix: '8806824'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 34898469-3d6b-4c9a-9431-cee105c1eb18
+    country_id: *bd
+    network_id: *bd_kapasia_region
+  - id: 152624
+    prefix: '8806825'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 023cee16-90b3-4d20-8727-7aa9429ce7e6
+    country_id: *bd
+    network_id: *bd_sreepur_region
   - id: 148881
     prefix: '880691'
     number_min_length: 11
@@ -2658,41 +3621,6 @@ network_prefixes:
     uuid: ce2c670f-d373-47c5-8651-12e9ee127729
     country_id: *bd
     network_id: *bd_tongibari_region
-  - id: 151797
-    prefix: '880681'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef9bc0ec-85aa-450e-a00b-ab16cd1ec949
-    country_id: *bd
-    network_id: *bd_gazipur_region
-  - id: 152619
-    prefix: '8806822'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 549dff76-3bee-4d9d-8fc1-d23bf84327a8
-    country_id: *bd
-    network_id: *bd_kaliakair_region
-  - id: 152621
-    prefix: '8806823'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e5970448-35cb-4d45-b327-18a320444855
-    country_id: *bd
-    network_id: *bd_kaliganj_region
-  - id: 152622
-    prefix: '8806824'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 34898469-3d6b-4c9a-9431-cee105c1eb18
-    country_id: *bd
-    network_id: *bd_kapasia_region
-  - id: 152624
-    prefix: '8806825'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 023cee16-90b3-4d20-8727-7aa9429ce7e6
-    country_id: *bd
-    network_id: *bd_sreepur_region
   - id: 161106
     prefix: '8807022'
     number_min_length: 10
@@ -3085,6 +4013,13 @@ network_prefixes:
     uuid: 99dfd87b-ed09-4fc9-b555-9a25ac06cef1
     country_id: *bd
     network_id: *bd_naldanga_region
+  - id: 203609
+    prefix: '880781'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6de856ea-2ae6-4f16-983d-176d960b4d37
+    country_id: *bd
+    network_id: *bd_chapai_nawabganj_region
   - id: 199870
     prefix: '8807822'
     number_min_length: 12
@@ -3113,13 +4048,6 @@ network_prefixes:
     uuid: 85f11587-d23b-4c54-b2f0-3ec5c6039a46
     country_id: *bd
     network_id: *bd_shibganj_region
-  - id: 203609
-    prefix: '880781'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6de856ea-2ae6-4f16-983d-176d960b4d37
-    country_id: *bd
-    network_id: *bd_chapai_nawabganj_region
   - id: 207042
     prefix: '880791'
     number_min_length: 11
@@ -3141,1063 +4069,6 @@ network_prefixes:
     uuid: 41178184-4044-4512-b320-e04705e28c6e
     country_id: *bd
     network_id: *bd_mujibnagar_region
-  - id: 208436
-    prefix: '8808032'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 1753abde-e22d-4b68-ae97-b7e36b8963b4
-    country_id: *bd
-    network_id: *bd_laksam_region
-  - id: 208438
-    prefix: '8808033'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 097b3bf7-5d4a-4825-99e9-b5e2f0b6ddcc
-    country_id: *bd
-    network_id: *bd_nangalkot_region
-  - id: 208440
-    prefix: '8808034'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 6ba37724-aa8e-4b76-ae38-50d598de1eaa
-    country_id: *bd
-    network_id: *bd_chaidyagram_region
-  - id: 208442
-    prefix: '8808035'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c684a21d-9a4f-4087-b952-d17c31f5f8ad
-    country_id: *bd
-    network_id: *bd_meghna_region
-  - id: 208444
-    prefix: '8808036'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7feed2b0-281e-4cdd-9a8d-7857ca398307
-    country_id: *bd
-    network_id: *bd_titas_region
-  - id: 213363
-    prefix: '880941'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1c2f3787-7b21-4af7-969a-669d8f12f717
-    country_id: *bd
-    network_id: *bd_kishoreganj_region
-  - id: 213832
-    prefix: '8809422'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4c50b60f-3f5f-4ed4-825e-b226fad522b2
-    country_id: *bd
-    network_id: *bd_austagram_region
-  - id: 213834
-    prefix: '8809423'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 03a80311-de69-4894-bb3c-495274f1a046
-    country_id: *bd
-    network_id: *bd_bajitpur_region
-  - id: 213836
-    prefix: '8809424'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a225d056-3872-4a7a-b3fb-8053234ccf08
-    country_id: *bd
-    network_id: *bd_bhairab_region
-  - id: 213838
-    prefix: '8809425'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f08a0b07-2d97-4400-a192-a93db031062d
-    country_id: *bd
-    network_id: *bd_hossainpur_region
-  - id: 213839
-    prefix: '8809426'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b732752e-d884-45a9-b871-c89ea0ea3242
-    country_id: *bd
-    network_id: *bd_itna_region
-  - id: 213841
-    prefix: '8809427'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e0037276-5efc-49cb-a18e-813c475e06bf
-    country_id: *bd
-    network_id: *bd_karimgonj_region
-  - id: 213843
-    prefix: '8809428'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c9437198-153d-4a73-83f4-a8a008325729
-    country_id: *bd
-    network_id: *bd_katiadi_region
-  - id: 213845
-    prefix: '8809429'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1ec8ff05-4017-4e95-ad13-938d4a52a7bb
-    country_id: *bd
-    network_id: *bd_kuliarchar_region
-  - id: 213931
-    prefix: '8809432'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e06c1249-a6f5-4469-b604-6c4a74829471
-    country_id: *bd
-    network_id: *bd_nikli_region
-  - id: 213932
-    prefix: '8809433'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dbb094aa-bd66-4a20-9a7b-ba0f5f11e6e4
-    country_id: *bd
-    network_id: *bd_pakundia_region
-  - id: 213934
-    prefix: '8809434'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 76e02448-b8e3-4ef4-a52b-718385a2d9d9
-    country_id: *bd
-    network_id: *bd_tarail_region
-  - id: 213936
-    prefix: '8809435'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ab1b07c4-522e-4828-a286-1f8245b1d5f2
-    country_id: *bd
-    network_id: *bd_mithamoin_region
-  - id: 217422
-    prefix: '880951'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: aeffb210-062b-47d4-ac28-99e069ea770f
-    country_id: *bd
-    network_id: *bd_netrokona_region
-  - id: 219409
-    prefix: '8809522'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1fb94107-152f-4f9e-9f72-2e9ea5163f1e
-    country_id: *bd
-    network_id: *bd_atpara_region
-  - id: 219412
-    prefix: '8809524'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8620f3f7-0854-4b19-9c76-1cc335cce1ce
-    country_id: *bd
-    network_id: *bd_mohongonj_region
-  - id: 219414
-    prefix: '8809525'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5f952e1f-afb6-47b9-abba-5163c5524069
-    country_id: *bd
-    network_id: *bd_durgapur_region
-  - id: 219416
-    prefix: '8809526'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0d2e49a0-5505-4f7c-9910-1fafe2fb23f9
-    country_id: *bd
-    network_id: *bd_khaliajuri_region
-  - id: 219418
-    prefix: '8809527'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 980a0ce8-e93c-4542-96de-a1631fdcdc97
-    country_id: *bd
-    network_id: *bd_kalmakanda_region
-  - id: 219420
-    prefix: '8809528'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a4e92e6c-68a7-49a5-95ce-931f7cc1561e
-    country_id: *bd
-    network_id: *bd_kendua_region
-  - id: 219422
-    prefix: '8809529'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: be847035-7c91-4b6b-8e1c-786c438afb77
-    country_id: *bd
-    network_id: *bd_madan_region
-  - id: 219972
-    prefix: '8809532'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cbf75b37-9129-432a-a1e7-283193871e82
-    country_id: *bd
-    network_id: *bd_purbadhala_region
-  - id: 219976
-    prefix: '8809535'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8d0b1475-fa3a-4531-872c-fda39a45b861
-    country_id: *bd
-    network_id: *bd_barhatta_region
-  - id: 227356
-    prefix: '88096'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 1e406e02-5b54-4dc0-898a-68c3ba5e8117
-    country_id: *bd
-    network_id: *bd_voip_region
-  - id: 234720
-    prefix: '8809822'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5c6a4e3d-f8f1-4729-946e-3171c7f179a3
-    country_id: *bd
-    network_id: *bd_bokshiganj_region
-  - id: 234722
-    prefix: '8809823'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bcec2f3b-9059-4560-8e3c-10f1cf618f22
-    country_id: *bd
-    network_id: *bd_dewangonj_region
-  - id: 234724
-    prefix: '8809824'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a002c3c2-7e39-4858-a830-1bc58521b28d
-    country_id: *bd
-    network_id: *bd_islampur_region
-  - id: 234726
-    prefix: '8809825'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f86852f4-81b1-4b99-8509-1aef41319f22
-    country_id: *bd
-    network_id: *bd_madarganj_region
-  - id: 234728
-    prefix: '8809826'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e2fb94e1-782e-4305-b01e-c903efd98bfb
-    country_id: *bd
-    network_id: *bd_melandah_region
-  - id: 234730
-    prefix: '8809827'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1c1b6ed5-eed6-4891-95ed-f4767b8b5807
-    country_id: *bd
-    network_id: *bd_sarishabari_region
-  - id: 235042
-    prefix: '880981'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9d2b6e3f-738a-448d-82fc-ca95789c7756
-    country_id: *bd
-    network_id: *bd_jamalpur_region
-  - id: 261181
-    prefix: '8802'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cdb8f300-8de4-4a46-8f6d-a19b4f33b153
-    country_id: *bd
-    network_id: *bd_dhaka_region
-  - id: 277986
-    prefix: '88022'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 3132a8ca-0090-43c1-a6f9-788ca147c284
-    country_id: *bd
-    network_id: *bd_central_zone_region
-  - id: 286621
-    prefix: '88023'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: e14380bd-002b-4d8f-bf48-9baca366c681
-    country_id: *bd
-    network_id: *bd_south_east_zone_region
-  - id: 294314
-    prefix: '88024'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: dddcc24f-6375-4d4e-b235-c01b98cf7336
-    country_id: *bd
-    network_id: *bd_south_west_zone_region
-  - id: 301962
-    prefix: '88025'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d957d44e-2eb7-45f5-8d64-88dca7e91112
-    country_id: *bd
-    network_id: *bd_north_west_zone_region
-  - id: 308499
-    prefix: '88029'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: e0ce35ba-dbc7-4a49-b985-d90f73b9ee00
-    country_id: *bd
-    network_id: *bd_north_east_zone_region
-  - id: 310427
-    prefix: '880302'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2a73dad4-d1b8-4cb0-addd-6695cec39fa0
-    country_id: *bd
-    network_id: *bd_central_zone_region
-  - id: 317558
-    prefix: '8803022'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8860f0c-e059-4387-b78f-31a048b384cd
-    country_id: *bd
-    network_id: *bd_fatikchari_region
-  - id: 317559
-    prefix: '8803023'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 2e38d81a-8535-47ed-ac3f-c6aa7a89f6aa
-    country_id: *bd
-    network_id: *bd_hathazari_region
-  - id: 317560
-    prefix: '8803024'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 44f23098-71cd-4c47-a2c6-12f288d0f696
-    country_id: *bd
-    network_id: *bd_mirsharai_region
-  - id: 317561
-    prefix: '8803025'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9fc4e52f-e1f7-4988-935f-dc87084df14d
-    country_id: *bd
-    network_id: *bd_rangunia_region
-  - id: 317562
-    prefix: '8803026'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0de03e40-6259-4b69-83d8-534c6d2b01a0
-    country_id: *bd
-    network_id: *bd_raozan_region
-  - id: 317563
-    prefix: '8803027'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8e9b3b2-241b-4893-8467-3cb1df2b6be6
-    country_id: *bd
-    network_id: *bd_sandwip_region
-  - id: 317564
-    prefix: '8803028'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: ed2a6afa-6187-479f-8858-39ecfdbcd8c0
-    country_id: *bd
-    network_id: *bd_sitakunda_region
-  - id: 317565
-    prefix: '8803029'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: b051eb8b-7658-4e19-8254-72d1f17442bd
-    country_id: *bd
-    network_id: *bd_anwara_region
-  - id: 318245
-    prefix: '8803032'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 90569e82-9748-4e65-a774-6144a2b0fcb0
-    country_id: *bd
-    network_id: *bd_boalkhali_region
-  - id: 318246
-    prefix: '8803033'
-    number_min_length: 11
-    number_max_length: 13
-    uuid: 775579c3-7105-4842-9891-da140be1ae42
-    country_id: *bd
-    network_id: *bd_chandanaish_region
-  - id: 318247
-    prefix: '8803034'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 4fa3b42f-2efb-4477-a289-89eb23a5c9e0
-    country_id: *bd
-    network_id: *bd_lohagara_region
-  - id: 318248
-    prefix: '8803035'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: d6a7e3d9-b7c5-4e71-83c1-42a452197d23
-    country_id: *bd
-    network_id: *bd_patiya_region
-  - id: 318249
-    prefix: '8803036'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: a4e423b2-3d11-45f4-a53f-3a8053723a0e
-    country_id: *bd
-    network_id: *bd_satkania_region
-  - id: 321158
-    prefix: '88031'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: b33b2a97-13eb-426c-aa07-7b892cf19821
-    country_id: *bd
-    network_id: *bd_chittagong_region
-  - id: 324590
-    prefix: '880313'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 534be103-56d6-4ef0-aee3-eff62667a951
-    country_id: *bd
-    network_id: *bd_south_east_zone_region
-  - id: 327966
-    prefix: '880321'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 72fbff47-74f1-464f-8aee-476c9506a572
-    country_id: *bd
-    network_id: *bd_noakhali_region
-  - id: 331582
-    prefix: '880331'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 2a84090c-2bd8-4984-b5bf-a0aa6d05750f
-    country_id: *bd
-    network_id: *bd_feni_region
-  - id: 331707
-    prefix: '880335'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: f88c4ed4-f381-4c2e-ae7b-9736541cf204
-    country_id: *bd
-    network_id: *bd_nort_west_zone_region
-  - id: 335934
-    prefix: '8803221'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 1b517f59-91ed-4289-8d54-65803f122cd6
-    country_id: *bd
-    network_id: *bd_begumganj_region
-  - id: 335936
-    prefix: '8803222'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 1b47d09f-3898-4ac5-a9d9-060814df1f90
-    country_id: *bd
-    network_id: *bd_chatkhil_region
-  - id: 335940
-    prefix: '8803223'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: aeef207d-8051-4fe1-847c-b8b8ecaeb36b
-    country_id: *bd
-    network_id: *bd_companiganj_region
-  - id: 335942
-    prefix: '8803224'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2b6393a8-8729-4502-84ef-e1e8ec2fe8ae
-    country_id: *bd
-    network_id: *bd_hatiya_region
-  - id: 335944
-    prefix: '8803225'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 7ec15fed-0f91-4c01-9f6b-1abd919dba43
-    country_id: *bd
-    network_id: *bd_senbagh_region
-  - id: 339015
-    prefix: '8803322'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: f26a50b5-fed5-403a-9df0-c173f74b4dec
-    country_id: *bd
-    network_id: *bd_chhagalnaiya_region
-  - id: 339019
-    prefix: '8803323'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 8b2b1beb-3fd6-46de-a6e3-9f8e96828eff
-    country_id: *bd
-    network_id: *bd_daganbhuiyan_region
-  - id: 339030
-    prefix: '8803324'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 12858fc4-9ade-4921-a55e-d4fbdbf289fa
-    country_id: *bd
-    network_id: *bd_parshuram_region
-  - id: 339032
-    prefix: '8803325'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 205e6f78-5eaa-4445-bdc0-eaffe4e799f2
-    country_id: *bd
-    network_id: *bd_sonagazi_region
-  - id: 339034
-    prefix: '8803326'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: f34c904a-d305-4663-8fbc-3fb840ba2920
-    country_id: *bd
-    network_id: *bd_fulgazi_region
-  - id: 340777
-    prefix: '880341'
-    number_min_length: 9
-    number_max_length: 11
-    uuid: 54221717-007f-4c65-8eea-8dcd3dda7c9d
-    country_id: *bd
-    network_id: *bd_coxs_bazar_region
-  - id: 341452
-    prefix: '8803422'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: eec32e86-9a06-45de-ab0a-64bc2c542166
-    country_id: *bd
-    network_id: *bd_chakaria_region
-  - id: 341460
-    prefix: '8803424'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: d8309484-1c90-42f0-b39c-fafd817b3230
-    country_id: *bd
-    network_id: *bd_maheshkhali_region
-  - id: 341465
-    prefix: '8803425'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 06ebec76-a629-45d4-9029-28609ee63b81
-    country_id: *bd
-    network_id: *bd_ramu_region
-  - id: 341470
-    prefix: '8803427'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 553e7470-fc91-4c3f-b412-f0fd4fdea08c
-    country_id: *bd
-    network_id: *bd_ukhiya_region
-  - id: 345879
-    prefix: '880359'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 2b7c0046-5c8d-4c6a-9a6f-2657c2eb1b80
-    country_id: *bd
-    network_id: *bd_north_east_zone_region
-  - id: 346849
-    prefix: '880375'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: f4c95f89-c55e-45e7-a9ff-19399c8ff2b1
-    country_id: *bd
-    network_id: *bd_north_west_zone_region
-  - id: 347677
-    prefix: '880379'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: d26e534b-3bdb-43da-a382-d992aeeea716
-    country_id: *bd
-    network_id: *bd_north_east_zone_region
-  - id: 352566
-    prefix: '880351'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1809c486-3e5b-4f7b-907d-e5bcedf1e204
-    country_id: *bd
-    network_id: *bd_rangamati_region
-  - id: 353306
-    prefix: '8803529'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f452a50a-61e6-434b-b765-c683dde226b4
-    country_id: *bd
-    network_id: *bd_kaptai_region
-  - id: 354012
-    prefix: '880361'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c81c54ed-76b3-411b-8a26-03492e8f1aed
-    country_id: *bd
-    network_id: *bd_bandarban_region
-  - id: 354569
-    prefix: '880363'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: aec1ee49-a7df-4f9c-9166-61c722fb7c76
-    country_id: *bd
-    network_id: *bd_south_east_zone_region
-  - id: 354622
-    prefix: '880364'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 4c13e74f-e29a-47b8-8540-feb80c5e6ee7
-    country_id: *bd
-    network_id: *bd_south_west_zone_region
-  - id: 354728
-    prefix: '880365'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 9ee8bb12-d10c-4f60-8c91-1f7874bb0ba4
-    country_id: *bd
-    network_id: *bd_north_west_zone_region
-  - id: 356090
-    prefix: '880371'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 114a1553-c3b9-4327-b73a-0fad88afd8c8
-    country_id: *bd
-    network_id: *bd_khagrachhari_region
-  - id: 356214
-    prefix: '880373'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 839ccbdc-78f6-4046-803f-70baf606e0fe
-    country_id: *bd
-    network_id: *bd_south_east_zone_region
-  - id: 356387
-    prefix: '880374'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ccbf6803-ceb4-4d5c-a9e1-80462765a8ff
-    country_id: *bd
-    network_id: *bd_south_west_zone_region
-  - id: 356654
-    prefix: '880381'
-    number_min_length: 10
-    number_max_length: 12
-    uuid: 2a0b3c21-b3f6-456b-9752-4e0316aa7cc6
-    country_id: *bd
-    network_id: *bd_lakshmipur_region
-  - id: 356808
-    prefix: '8803822'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 997904db-e440-4b4c-a6ca-89f38c9c6484
-    country_id: *bd
-    network_id: *bd_raipur_region
-  - id: 356820
-    prefix: '8803823'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3747b46d-cccb-47f6-b8dc-2b8aa89c159d
-    country_id: *bd
-    network_id: *bd_ramgati_char_alexander_region
-  - id: 356826
-    prefix: '8803824'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c7ea433d-e8e8-40fa-b680-9c70a7228496
-    country_id: *bd
-    network_id: *bd_ramganj_region
-  - id: 358275
-    prefix: '880393'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 8e94c882-daeb-4087-9449-ce66155cd149
-    country_id: *bd
-    network_id: *bd_south_east_zone_region
-  - id: 359702
-    prefix: '8804027'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: a525da9b-4a17-4b07-8f35-d70300a6a6a3
-    country_id: *bd
-    network_id: *bd_paikgachha_region
-  - id: 359703
-    prefix: '8804028'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 49db8d57-a900-47a2-927b-a9e1cec1701c
-    country_id: *bd
-    network_id: *bd_phultala_region
-  - id: 359704
-    prefix: '8804029'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: e5c589c9-5c04-46eb-9158-d4b02eb1ddb0
-    country_id: *bd
-    network_id: *bd_terokhada_region
-  - id: 362516
-    prefix: '88041'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: faa6e2e3-f83c-498f-95d4-c7a2ab4ac589
-    country_id: *bd
-    network_id: *bd_khulna_region
-  - id: 366683
-    prefix: '880424'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 3a2de0eb-228e-4b05-b149-492af5f66e64
-    country_id: *bd
-    network_id: *bd_south_west_zone_region
-  - id: 367179
-    prefix: '880425'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: e434f435-5514-4485-b328-cf98cef6a09a
-    country_id: *bd
-    network_id: *bd_north_west_zone_region
-  - id: 368404
-    prefix: '880431'
-    number_min_length: 11
-    number_max_length: 13
-    uuid: 0df4f215-7ad0-4605-a2d2-9b7291be397f
-    country_id: *bd
-    network_id: *bd_barisal_region
-  - id: 368471
-    prefix: '8804332'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6bfad528-8340-4226-8a1d-1216139f8268
-    country_id: *bd
-    network_id: *bd_banaripara_region
-  - id: 371495
-    prefix: '880409'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 06d06aee-2688-47b7-9a40-c79bd8f5675f
-    country_id: *bd
-    network_id: *bd_north_east_zone_region
-  - id: 372950
-    prefix: '880413'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 392998e8-0e61-4693-996d-8bf268cb5251
-    country_id: *bd
-    network_id: *bd_south_east_zone_region
-  - id: 377398
-    prefix: '880421'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9697ebd1-baee-43b6-8378-9ac09e68b644
-    country_id: *bd
-    network_id: *bd_jessore_region
-  - id: 377546
-    prefix: '8804222'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: e4f5c1c9-1234-4556-ae2a-2100677fac38
-    country_id: *bd
-    network_id: *bd_abhaynagar_region
-  - id: 377549
-    prefix: '8804223'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: fc37851b-eed5-4811-936d-acb24baed3ba
-    country_id: *bd
-    network_id: *bd_bagherpara_region
-  - id: 377552
-    prefix: '8804224'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 910b010d-5105-4a59-ba9b-74179069115b
-    country_id: *bd
-    network_id: *bd_chaugachha_region
-  - id: 377555
-    prefix: '8804225'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 1896288b-7ddd-4121-85b3-cfb44377862b
-    country_id: *bd
-    network_id: *bd_jhikargacha_region
-  - id: 377557
-    prefix: '8804226'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: acf95edc-7824-4266-a909-c8dd64bc4307
-    country_id: *bd
-    network_id: *bd_keshabpur_region
-  - id: 377559
-    prefix: '8804227'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 855a9c09-e87e-4864-b18e-f803a6338601
-    country_id: *bd
-    network_id: *bd_manirampur_region
-  - id: 377561
-    prefix: '8804228'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 06c58cac-8184-403e-9c8d-7e438a8ff3dd
-    country_id: *bd
-    network_id: *bd_sharsha_region
-  - id: 377563
-    prefix: '880423'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 0c7503e8-b6e4-4979-afd5-3109f03dbcfd
-    country_id: *bd
-    network_id: *bd_south_east_zone_region
-  - id: 380239
-    prefix: '8804322'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 185bcfde-f67e-4446-b6d1-070c57a7cebe
-    country_id: *bd
-    network_id: *bd_gournadi_region
-  - id: 380242
-    prefix: '8804323'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 214fd7e1-81eb-49d0-bc70-4882fee15695
-    country_id: *bd
-    network_id: *bd_agailjhara_region
-  - id: 380245
-    prefix: '8804324'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c243012d-952a-4834-bce0-7913f77c4b04
-    country_id: *bd
-    network_id: *bd_hizla_region
-  - id: 380248
-    prefix: '8804325'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9465b6fd-00ea-48c7-93f5-b25c104b79ca
-    country_id: *bd
-    network_id: *bd_mehendiganj_region
-  - id: 380249
-    prefix: '8804326'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: fedd8d53-182f-444f-9278-9d747932fe7a
-    country_id: *bd
-    network_id: *bd_muladi_region
-  - id: 380252
-    prefix: '8804327'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: f13aa0ae-88eb-428f-b83a-23dd46080d5a
-    country_id: *bd
-    network_id: *bd_babuganj_region
-  - id: 380255
-    prefix: '8804328'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 898353cc-3ef9-4cea-b988-21df6e4630b4
-    country_id: *bd
-    network_id: *bd_bakerganj_region
-  - id: 382080
-    prefix: '880441'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3d0e1932-e0c3-4c81-b3aa-e461703017e5
-    country_id: *bd
-    network_id: *bd_patuakhali_region
-  - id: 382961
-    prefix: '8804422'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f46c57fe-5e9c-4e4c-b71d-340a1b77dd10
-    country_id: *bd
-    network_id: *bd_bauphal_region
-  - id: 382963
-    prefix: '8804423'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eaf1ebff-3e0f-4309-8576-f648081782f8
-    country_id: *bd
-    network_id: *bd_dashmina_region
-  - id: 382965
-    prefix: '8804424'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e8a8c259-1fac-4ff9-bb49-fdbae34b63c8
-    country_id: *bd
-    network_id: *bd_galachipa_region
-  - id: 382966
-    prefix: '8804425'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e79054f0-a504-4981-8f4f-02c84c8b7ca2
-    country_id: *bd
-    network_id: *bd_khepurpara_region
-  - id: 382968
-    prefix: '8804426'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e05aa7ad-9992-4f95-9cb0-0e7b756c450f
-    country_id: *bd
-    network_id: *bd_mirzaganj_region
-  - id: 382970
-    prefix: '880443'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: ab695fcc-dc2c-4744-b12d-11f11dd54f02
-    country_id: *bd
-    network_id: *bd_south_east_zone_region
-  - id: 384108
-    prefix: '880444'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 78bf3fe6-0d04-490b-bce6-1482833913f6
-    country_id: *bd
-    network_id: *bd_south_west_zone_region
-  - id: 384978
-    prefix: '880445'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 82ff86cb-ec39-4461-86d7-e03879cd154f
-    country_id: *bd
-    network_id: *bd_north_west_zone_region
-  - id: 385458
-    prefix: '8804455'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5e89c9c2-fef1-4b97-bc4e-357e8bded061
-    country_id: *bd
-    network_id: *bd_patharghata_region
-  - id: 386196
-    prefix: '880448'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 642bd4cd-f968-4405-bf10-b09d97d04279
-    country_id: *bd
-    network_id: *bd_barguna_region
-  - id: 386655
-    prefix: '880449'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: aa4175e4-2bb0-4223-b4d4-c5cc9bccf3d1
-    country_id: *bd
-    network_id: *bd_north_east_zone_region
-  - id: 387506
-    prefix: '880451'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b0898ee-c965-4230-971a-7eecd87cf49b
-    country_id: *bd
-    network_id: *bd_jhenaidah_region
-  - id: 388162
-    prefix: '8804523'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 6e769336-a6a1-42c7-899f-91713d9c3d36
-    country_id: *bd
-    network_id: *bd_kaliganj_region
-  - id: 388165
-    prefix: '8804525'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 9bc2a3d2-4514-4d34-b03d-3b3e95831ac6
-    country_id: *bd
-    network_id: *bd_maheshpur_region
-  - id: 388732
-    prefix: '880461'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f33ab505-d9fe-4a50-a21e-177afa70b268
-    country_id: *bd
-    network_id: *bd_pirojpur_region
-  - id: 394750
-    prefix: '8804623'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 87ed96b9-83b2-4abf-9cd2-a0edbe6f9ce4
-    country_id: *bd
-    network_id: *bd_bhandaria_region
-  - id: 394752
-    prefix: '8804624'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: d7c4a472-0206-4160-b46b-4736ea4f2a00
-    country_id: *bd
-    network_id: *bd_kawkhali_region
-  - id: 394754
-    prefix: '8804625'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c25fab20-cf37-4f0a-b529-c566bd96972c
-    country_id: *bd
-    network_id: *bd_mathbaria_region
-  - id: 394756
-    prefix: '8804626'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 08fbaee7-04e2-4b62-a6b9-705f3dd66244
-    country_id: *bd
-    network_id: *bd_nazirpur_region
-  - id: 394758
-    prefix: '8804627'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: fbe8faf0-7477-4022-9ee6-a14660bd62ec
-    country_id: *bd
-    network_id: *bd_nesarabad_swarupkathi_region
-  - id: 396469
-    prefix: '880471'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 77bdf508-46ae-4e07-90e2-de9a8b0281b4
-    country_id: *bd
-    network_id: *bd_satkhira_region
-  - id: 396988
-    prefix: '8804724'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d2ba7c0d-13e7-49ad-83f5-4e36d81f588c
-    country_id: *bd
-    network_id: *bd_kalaroa_region
-  - id: 398753
-    prefix: '8804652'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: a8de1f5a-ab04-476b-b721-665f28fb0e83
-    country_id: *bd
-    network_id: *bd_chitalmari_region
-  - id: 398756
-    prefix: '8804653'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: df5518a6-9db4-42bd-918d-aa2942f328a4
-    country_id: *bd
-    network_id: *bd_fakirhat_region
-  - id: 398758
-    prefix: '8804654'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 33d81111-781b-40dc-b97e-4b9bdd8e73ee
-    country_id: *bd
-    network_id: *bd_kachua_region
-  - id: 398760
-    prefix: '8804655'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: b0efe7a9-7b7e-4030-a0a5-cad3079ec9e7
-    country_id: *bd
-    network_id: *bd_mollahat_region
-  - id: 398762
-    prefix: '8804656'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2dbbae98-2c52-4484-9057-0a5e3e489557
-    country_id: *bd
-    network_id: *bd_morrelganj_region
-  - id: 398764
-    prefix: '8804657'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5a024d6a-1791-46d8-944d-ac4fca78688d
-    country_id: *bd
-    network_id: *bd_rampal_region
-  - id: 398766
-    prefix: '8804658'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 002890c1-31e8-43fb-bcde-d836a76f4151
-    country_id: *bd
-    network_id: *bd_mongla_region
-  - id: 399099
-    prefix: '8804662'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 40f26356-dfd1-4523-aa37-c13deb7e2ed0
-    country_id: *bd
-    network_id: *bd_mongla_port_region
-  - id: 399160
-    prefix: '880468'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 3642d46e-583d-45fa-a966-9d36236006c8
-    country_id: *bd
-    network_id: *bd_bagerhat_region
   - id: 404868
     prefix: '8808020'
     number_min_length: 11
@@ -4261,6 +4132,55 @@ network_prefixes:
     uuid: 217dc2b0-d286-430a-aab7-91618810d57e
     country_id: *bd
     network_id: *bd_burichang_region
+  - id: 208436
+    prefix: '8808032'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 1753abde-e22d-4b68-ae97-b7e36b8963b4
+    country_id: *bd
+    network_id: *bd_laksam_region
+  - id: 208438
+    prefix: '8808033'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 097b3bf7-5d4a-4825-99e9-b5e2f0b6ddcc
+    country_id: *bd
+    network_id: *bd_nangalkot_region
+  - id: 208440
+    prefix: '8808034'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 6ba37724-aa8e-4b76-ae38-50d598de1eaa
+    country_id: *bd
+    network_id: *bd_chaidyagram_region
+  - id: 208442
+    prefix: '8808035'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c684a21d-9a4f-4087-b952-d17c31f5f8ad
+    country_id: *bd
+    network_id: *bd_meghna_region
+  - id: 208444
+    prefix: '8808036'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7feed2b0-281e-4cdd-9a8d-7857ca398307
+    country_id: *bd
+    network_id: *bd_titas_region
+  - id: 413666
+    prefix: '88081'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 39900490-fa5e-4162-900c-9c5237144c71
+    country_id: *bd
+    network_id: *bd_comilla_region
+  - id: 419680
+    prefix: '880821'
+    number_min_length: 12
+    number_max_length: 13
+    uuid: 120275e6-a859-4ac5-b86e-8ad97b4012d5
+    country_id: *bd
+    network_id: *bd_sylhet_region
   - id: 409904
     prefix: '8808222'
     number_min_length: 12
@@ -4331,20 +4251,69 @@ network_prefixes:
     uuid: dc372b44-e962-489a-8a42-7dda6ebdbc5b
     country_id: *bd
     network_id: *bd_osmani_nagar_region
-  - id: 413666
-    prefix: '88081'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 39900490-fa5e-4162-900c-9c5237144c71
+  - id: 431566
+    prefix: '880831'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 60d0f3a2-8b7b-48c0-bc20-9ab88a766f14
     country_id: *bd
-    network_id: *bd_comilla_region
-  - id: 419680
-    prefix: '880821'
+    network_id: *bd_habiganj_region
+  - id: 432146
+    prefix: '8808322'
     number_min_length: 12
-    number_max_length: 13
-    uuid: 120275e6-a859-4ac5-b86e-8ad97b4012d5
+    number_max_length: 12
+    uuid: ef0dc82e-4f06-4584-b398-d162c9540d02
     country_id: *bd
-    network_id: *bd_sylhet_region
+    network_id: *bd_ajmiriganj_region
+  - id: 432148
+    prefix: '8808323'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 86dd60b6-d7d1-419b-8c6a-1fa1249b9579
+    country_id: *bd
+    network_id: *bd_bahubal_region
+  - id: 432150
+    prefix: '8808324'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 62a0caa6-fbe5-4052-aeae-69b8beeb2cd7
+    country_id: *bd
+    network_id: *bd_baniachong_region
+  - id: 432152
+    prefix: '8808325'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 67458315-7ee4-48cf-a079-f38db7f3a768
+    country_id: *bd
+    network_id: *bd_chunarughat_region
+  - id: 432154
+    prefix: '8808326'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f66a1fdd-d2c1-4f02-952b-ca31bff919f3
+    country_id: *bd
+    network_id: *bd_lakhai_region
+  - id: 432156
+    prefix: '8808327'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8d9d2921-f24c-46c3-b3b2-a9d11138ea78
+    country_id: *bd
+    network_id: *bd_madhabpur_region
+  - id: 432158
+    prefix: '8808328'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3fc69812-8962-4f99-9519-3da95878abf3
+    country_id: *bd
+    network_id: *bd_nabiganj_region
+  - id: 433766
+    prefix: '880841'
+    number_min_length: 10
+    number_max_length: 11
+    uuid: 94bdeb51-dcdc-4e40-94e1-11f44923eca2
+    country_id: *bd
+    network_id: *bd_chandpur_region
   - id: 424502
     prefix: '8808422'
     number_min_length: 11
@@ -4450,6 +4419,13 @@ network_prefixes:
     uuid: d4f77696-2806-49b1-81db-a7ffc6e2d406
     country_id: *bd
     network_id: *bd_ashuganj_region
+  - id: 438140
+    prefix: '880861'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d53b5332-7a91-418b-9ce1-5674f3295e67
+    country_id: *bd
+    network_id: *bd_moulvibazar_region
   - id: 429548
     prefix: '8808622'
     number_min_length: 12
@@ -4492,76 +4468,13 @@ network_prefixes:
     uuid: 563dafc4-194a-429f-a753-06d0841c5f83
     country_id: *bd
     network_id: *bd_juri_region
-  - id: 431566
-    prefix: '880831'
+  - id: 448898
+    prefix: '880871'
     number_min_length: 11
     number_max_length: 11
-    uuid: 60d0f3a2-8b7b-48c0-bc20-9ab88a766f14
+    uuid: be4c7bea-7c29-4b11-98b9-e2fdb0c49739
     country_id: *bd
-    network_id: *bd_habiganj_region
-  - id: 432146
-    prefix: '8808322'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ef0dc82e-4f06-4584-b398-d162c9540d02
-    country_id: *bd
-    network_id: *bd_ajmiriganj_region
-  - id: 432148
-    prefix: '8808323'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 86dd60b6-d7d1-419b-8c6a-1fa1249b9579
-    country_id: *bd
-    network_id: *bd_bahubal_region
-  - id: 432150
-    prefix: '8808324'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 62a0caa6-fbe5-4052-aeae-69b8beeb2cd7
-    country_id: *bd
-    network_id: *bd_baniachong_region
-  - id: 432152
-    prefix: '8808325'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 67458315-7ee4-48cf-a079-f38db7f3a768
-    country_id: *bd
-    network_id: *bd_chunarughat_region
-  - id: 432154
-    prefix: '8808326'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f66a1fdd-d2c1-4f02-952b-ca31bff919f3
-    country_id: *bd
-    network_id: *bd_lakhai_region
-  - id: 432156
-    prefix: '8808327'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8d9d2921-f24c-46c3-b3b2-a9d11138ea78
-    country_id: *bd
-    network_id: *bd_madhabpur_region
-  - id: 432158
-    prefix: '8808328'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3fc69812-8962-4f99-9519-3da95878abf3
-    country_id: *bd
-    network_id: *bd_nabiganj_region
-  - id: 433766
-    prefix: '880841'
-    number_min_length: 10
-    number_max_length: 11
-    uuid: 94bdeb51-dcdc-4e40-94e1-11f44923eca2
-    country_id: *bd
-    network_id: *bd_chandpur_region
-  - id: 438140
-    prefix: '880861'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d53b5332-7a91-418b-9ce1-5674f3295e67
-    country_id: *bd
-    network_id: *bd_moulvibazar_region
+    network_id: *bd_sunamganj_region
   - id: 443073
     prefix: '8808720'
     number_min_length: 12
@@ -4681,13 +4594,6 @@ network_prefixes:
     uuid: 8c7909cf-91d3-49d3-9074-ff6fdbdca316
     country_id: *bd
     network_id: *bd_nandail_region
-  - id: 448898
-    prefix: '880871'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be4c7bea-7c29-4b11-98b9-e2fdb0c49739
-    country_id: *bd
-    network_id: *bd_sunamganj_region
   - id: 455865
     prefix: '8809032'
     number_min_length: 12
@@ -4709,13 +4615,6 @@ network_prefixes:
     uuid: abb5a9b3-8d5a-4256-9535-bac3e9fcd628
     country_id: *bd
     network_id: *bd_dhobaura_region
-  - id: 458137
-    prefix: '88091'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 32594dea-262d-46c5-bb70-6d00e6c98119
-    country_id: *bd
-    network_id: *bd_mymensingh_region
   - id: 462670
     prefix: '8809042'
     number_min_length: 12
@@ -4723,48 +4622,13 @@ network_prefixes:
     uuid: afff197d-3da5-4133-80c5-030f4cacaf6d
     country_id: *bd
     network_id: *bd_tarakanda_region
-  - id: 471907
-    prefix: '8809222'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 56070e81-b0a6-4cfb-9f04-b6e3984e7faf
+  - id: 458137
+    prefix: '88091'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 32594dea-262d-46c5-bb70-6d00e6c98119
     country_id: *bd
-    network_id: *bd_basail_region
-  - id: 472316
-    prefix: '8809226'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7f577e13-6413-46da-a12f-d879da68930b
-    country_id: *bd
-    network_id: *bd_gopalpur_region
-  - id: 472701
-    prefix: '8809227'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c92eff25-9ab5-474a-891c-704bcd17eb1e
-    country_id: *bd
-    network_id: *bd_kalihati_region
-  - id: 472804
-    prefix: '8809228'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f2f45a4f-c95e-4403-a1e4-c8d8a2ee5739
-    country_id: *bd
-    network_id: *bd_madhupur_region
-  - id: 473499
-    prefix: '8809232'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 109724f9-7ff9-494b-9e82-d719730886d1
-    country_id: *bd
-    network_id: *bd_sakhipur_region
-  - id: 474181
-    prefix: '8809239'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fecfd0d9-6c08-437c-b2fd-1769503d694c
-    country_id: *bd
-    network_id: *bd_dhanbari_region
+    network_id: *bd_mymensingh_region
   - id: 476593
     prefix: '880921'
     number_min_length: 11
@@ -4772,6 +4636,13 @@ network_prefixes:
     uuid: 19098483-56f0-4ade-8cea-a3bf8f90875a
     country_id: *bd
     network_id: *bd_tangail_region
+  - id: 471907
+    prefix: '8809222'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 56070e81-b0a6-4cfb-9f04-b6e3984e7faf
+    country_id: *bd
+    network_id: *bd_basail_region
   - id: 477521
     prefix: '8809223'
     number_min_length: 12
@@ -4793,6 +4664,27 @@ network_prefixes:
     uuid: 6d0e92be-ce5a-4612-a352-64d746bd1102
     country_id: *bd
     network_id: *bd_ghatail_region
+  - id: 472316
+    prefix: '8809226'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f577e13-6413-46da-a12f-d879da68930b
+    country_id: *bd
+    network_id: *bd_gopalpur_region
+  - id: 472701
+    prefix: '8809227'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c92eff25-9ab5-474a-891c-704bcd17eb1e
+    country_id: *bd
+    network_id: *bd_kalihati_region
+  - id: 472804
+    prefix: '8809228'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f2f45a4f-c95e-4403-a1e4-c8d8a2ee5739
+    country_id: *bd
+    network_id: *bd_madhupur_region
   - id: 478303
     prefix: '8809229'
     number_min_length: 12
@@ -4800,6 +4692,13 @@ network_prefixes:
     uuid: 1718e6a5-d2d8-4116-b769-af6e9388dad3
     country_id: *bd
     network_id: *bd_mirzapur_region
+  - id: 473499
+    prefix: '8809232'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 109724f9-7ff9-494b-9e82-d719730886d1
+    country_id: *bd
+    network_id: *bd_sakhipur_region
   - id: 479337
     prefix: '8809233'
     number_min_length: 12
@@ -4807,6 +4706,20 @@ network_prefixes:
     uuid: a35c9e81-7cf0-45c5-a115-48a8a18467a2
     country_id: *bd
     network_id: *bd_nagarpur_region
+  - id: 474181
+    prefix: '8809239'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fecfd0d9-6c08-437c-b2fd-1769503d694c
+    country_id: *bd
+    network_id: *bd_dhanbari_region
+  - id: 490003
+    prefix: '880931'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 13b2b7f2-26bc-4c80-8d87-c83f066a4e2d
+    country_id: *bd
+    network_id: *bd_sherpur_region
   - id: 486086
     prefix: '8809322'
     number_min_length: 12
@@ -4835,77 +4748,225 @@ network_prefixes:
     uuid: 56f19c0c-eec3-4771-b6bd-69a68dbf0477
     country_id: *bd
     network_id: *bd_sreebordi_region
-  - id: 490003
-    prefix: '880931'
+  - id: 213363
+    prefix: '880941'
     number_min_length: 11
     number_max_length: 11
-    uuid: 13b2b7f2-26bc-4c80-8d87-c83f066a4e2d
+    uuid: 1c2f3787-7b21-4af7-969a-669d8f12f717
     country_id: *bd
-    network_id: *bd_sherpur_region
+    network_id: *bd_kishoreganj_region
+  - id: 213832
+    prefix: '8809422'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4c50b60f-3f5f-4ed4-825e-b226fad522b2
+    country_id: *bd
+    network_id: *bd_austagram_region
+  - id: 213834
+    prefix: '8809423'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 03a80311-de69-4894-bb3c-495274f1a046
+    country_id: *bd
+    network_id: *bd_bajitpur_region
+  - id: 213836
+    prefix: '8809424'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a225d056-3872-4a7a-b3fb-8053234ccf08
+    country_id: *bd
+    network_id: *bd_bhairab_region
+  - id: 213838
+    prefix: '8809425'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f08a0b07-2d97-4400-a192-a93db031062d
+    country_id: *bd
+    network_id: *bd_hossainpur_region
+  - id: 213839
+    prefix: '8809426'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b732752e-d884-45a9-b871-c89ea0ea3242
+    country_id: *bd
+    network_id: *bd_itna_region
+  - id: 213841
+    prefix: '8809427'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e0037276-5efc-49cb-a18e-813c475e06bf
+    country_id: *bd
+    network_id: *bd_karimgonj_region
+  - id: 213843
+    prefix: '8809428'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c9437198-153d-4a73-83f4-a8a008325729
+    country_id: *bd
+    network_id: *bd_katiadi_region
+  - id: 213845
+    prefix: '8809429'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1ec8ff05-4017-4e95-ad13-938d4a52a7bb
+    country_id: *bd
+    network_id: *bd_kuliarchar_region
+  - id: 213931
+    prefix: '8809432'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e06c1249-a6f5-4469-b604-6c4a74829471
+    country_id: *bd
+    network_id: *bd_nikli_region
+  - id: 213932
+    prefix: '8809433'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dbb094aa-bd66-4a20-9a7b-ba0f5f11e6e4
+    country_id: *bd
+    network_id: *bd_pakundia_region
+  - id: 213934
+    prefix: '8809434'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 76e02448-b8e3-4ef4-a52b-718385a2d9d9
+    country_id: *bd
+    network_id: *bd_tarail_region
+  - id: 213936
+    prefix: '8809435'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ab1b07c4-522e-4828-a286-1f8245b1d5f2
+    country_id: *bd
+    network_id: *bd_mithamoin_region
+  - id: 217422
+    prefix: '880951'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: aeffb210-062b-47d4-ac28-99e069ea770f
+    country_id: *bd
+    network_id: *bd_netrokona_region
+  - id: 219409
+    prefix: '8809522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1fb94107-152f-4f9e-9f72-2e9ea5163f1e
+    country_id: *bd
+    network_id: *bd_atpara_region
 # Supplementary services Prefixes
-  - id: 111452
-    prefix: '88061'
+  - id: 219412
+    prefix: '8809524'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8620f3f7-0854-4b19-9c76-1cc335cce1ce
+    country_id: *bd
+    network_id: *bd_mohongonj_region
+  - id: 219414
+    prefix: '8809525'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5f952e1f-afb6-47b9-abba-5163c5524069
+    country_id: *bd
+    network_id: *bd_durgapur_region
+  - id: 219416
+    prefix: '8809526'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0d2e49a0-5505-4f7c-9910-1fafe2fb23f9
+    country_id: *bd
+    network_id: *bd_khaliajuri_region
+  - id: 219418
+    prefix: '8809527'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 980a0ce8-e93c-4542-96de-a1631fdcdc97
+    country_id: *bd
+    network_id: *bd_kalmakanda_region
+  - id: 219420
+    prefix: '8809528'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a4e92e6c-68a7-49a5-95ce-931f7cc1561e
+    country_id: *bd
+    network_id: *bd_kendua_region
+  - id: 219422
+    prefix: '8809529'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: be847035-7c91-4b6b-8e1c-786c438afb77
+    country_id: *bd
+    network_id: *bd_madan_region
+  - id: 219972
+    prefix: '8809532'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cbf75b37-9129-432a-a1e7-283193871e82
+    country_id: *bd
+    network_id: *bd_purbadhala_region
+  - id: 219976
+    prefix: '8809535'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8d0b1475-fa3a-4531-872c-fda39a45b861
+    country_id: *bd
+    network_id: *bd_barhatta_region
+  - id: 227356
+    prefix: '88096'
     number_min_length: 13
     number_max_length: 13
-    uuid: dc0899de-1bdc-4ebf-8a05-4e9f5e15613f
+    uuid: 1e406e02-5b54-4dc0-898a-68c3ba5e8117
     country_id: *bd
-    network_id: *bd_broadband_wireless_access_bwa_services
-  - id: 242160
-    prefix: '880000800'
-    number_min_length: 13
-    number_max_length: 15
-    uuid: 54fa155c-d41a-4a48-9ff2-649993d93fa6
+    network_id: *bd_voip_region
+  - id: 235042
+    prefix: '880981'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9d2b6e3f-738a-448d-82fc-ca95789c7756
     country_id: *bd
-    network_id: *bd_international_freephone_services
-  - id: 242171
-    prefix: '880010'
-    number_min_length: 9
-    number_max_length: 10
-    uuid: 90bf6a40-69bc-4661-9c67-188aa7319762
+    network_id: *bd_jamalpur_region
+# Mobile Prefixes
+  - id: 234720
+    prefix: '8809822'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5c6a4e3d-f8f1-4729-946e-3171c7f179a3
     country_id: *bd
-    network_id: *bd_value_added_services
-  - id: 242319
-    prefix: '8800800'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 7195c533-8dcf-4aa3-9aba-46f473898ee8
+    network_id: *bd_bokshiganj_region
+  - id: 234722
+    prefix: '8809823'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bcec2f3b-9059-4560-8e3c-10f1cf618f22
     country_id: *bd
-    network_id: *bd_freephone_services
-  - id: 242324
-    prefix: '8800802'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 005ed0eb-2f77-4130-8a34-64c4882e7067
+    network_id: *bd_dewangonj_region
+  - id: 234724
+    prefix: '8809824'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a002c3c2-7e39-4858-a830-1bc58521b28d
     country_id: *bd
-    network_id: *bd_virtual_card_calling_vcc
-  - id: 242335
-    prefix: '8800888'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 0ae393de-4f0d-4166-b3ac-2f0897191822
+    network_id: *bd_islampur_region
+  - id: 234726
+    prefix: '8809825'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f86852f4-81b1-4b99-8509-1aef41319f22
     country_id: *bd
-    network_id: *bd_international_freephone_services
-  - id: 242358
-    prefix: '8801'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: fd12912e-5ef8-45a7-ac72-b3156621155c
+    network_id: *bd_madarganj_region
+  - id: 234728
+    prefix: '8809826'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e2fb94e1-782e-4305-b01e-c903efd98bfb
     country_id: *bd
-    network_id: *bd_special_services
-  - id: 242528
-    prefix: '88010'
-    number_min_length: 6
-    number_max_length: 8
-    uuid: 46710ed0-7309-4316-8e5c-f5db342f4bf1
+    network_id: *bd_melandah_region
+  - id: 234730
+    prefix: '8809827'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1c1b6ed5-eed6-4891-95ed-f4767b8b5807
     country_id: *bd
-    network_id: *bd_emergency_services
-  - id: 247390
-    prefix: '8802'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: e840a8e8-1166-47ba-99ec-2254125935c0
-    country_id: *bd
-    network_id: *bd_internal_network_services
+    network_id: *bd_sarishabari_region
   - id: 258301
     prefix: '880999'
     number_min_length: 6
@@ -4913,61 +4974,3 @@ network_prefixes:
     uuid: f7b414ae-f005-4f85-8a02-6b23b792bef6
     country_id: *bd
     network_id: *bd_emergency_services
-# Country code Prefixes
-  - id: 241953
-    prefix: '880'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: d57fc52f-c1bc-425c-9ef8-1afde05cc6f2
-    country_id: *bd
-    network_id: null
-# Mobile Prefixes
-  - id: 259502
-    prefix: '88013'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: c88aee2a-18ed-4881-b9d7-b40484e6e251
-    country_id: *bd
-    network_id: *bd_grameenphone_mobile
-  - id: 259940
-    prefix: '88014'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 638ca746-0afa-4afb-bf2f-562dcf579ca2
-    country_id: *bd
-    network_id: *bd_banglalink_mobile
-  - id: 260501
-    prefix: '88018'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 150ae412-d539-4360-9b2d-19d9124a6925
-    country_id: *bd
-    network_id: *bd_robi_airtel_mobile
-  - id: 260822
-    prefix: '88019'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 5ed2506a-4aa5-492b-8b6d-041c83df4139
-    country_id: *bd
-    network_id: *bd_banglalink_mobile
-  - id: 266063
-    prefix: '88015'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 474de53b-9ab2-497d-a71d-9858489041ec
-    country_id: *bd
-    network_id: *bd_teletalk_mobile
-  - id: 266551
-    prefix: '88016'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 65349a3c-03f0-4613-9d36-2cc61f701b2e
-    country_id: *bd
-    network_id: *bd_robi_airtel_mobile
-  - id: 266939
-    prefix: '88017'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 5c4ce129-0e64-4129-b69c-3faf25a2d7bd
-    country_id: *bd
-    network_id: *bd_grameenphone_mobile

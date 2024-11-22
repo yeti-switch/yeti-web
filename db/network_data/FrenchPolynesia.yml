@@ -1,6 +1,6 @@
 country_id: &pf 75
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &pf_emergency_services 21476
     name: PF Emergency Services
     uuid: 6c295876-ca3d-463e-a66b-65514c2275e4
@@ -9,11 +9,6 @@ networks:
     name: PF Special Services
     uuid: 927f38fe-d6f0-47ba-81a4-5f663b16b0c3
     type_id: 13
-  - id: &pf_audiotext 22308
-    name: PF Audiotext
-    uuid: 89e8c4d8-6c3f-4395-9d7c-196cb321c5bb
-    type_id: 13
-# Fixed Networks
   - id: &pf_fixed 22158
     name: PF Fixed
     uuid: 4e02cf78-b8f1-4ed3-a81c-8b1e6410433a
@@ -34,6 +29,11 @@ networks:
     name: PF Remote Archipelago Vinibox Service Region
     uuid: 91e74c1e-3764-4afa-8139-8a980a4b83a8
     type_id: 2
+# Supplementary services Networks
+  - id: &pf_audiotext 22308
+    name: PF Audiotext
+    uuid: 89e8c4d8-6c3f-4395-9d7c-196cb321c5bb
+    type_id: 13
   - id: &pf_voip_region 23291
     name: PF Voip Region
     uuid: b8075094-57e1-4a8b-bb0d-3d300dc25c00
@@ -56,15 +56,14 @@ networks:
     uuid: 0127f43b-58c9-4d18-a61e-81c818b9f89e
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242087
     prefix: '689'
     number_min_length: 4
     number_max_length: 100
     uuid: 0a7d4681-9cb6-424c-bddd-d52835d29593
     country_id: *pf
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *pf_fixed
   - id: 242478
     prefix: '6891'
     number_min_length: 5
@@ -79,14 +78,6 @@ network_prefixes:
     uuid: 1b875bbd-267a-44af-bf6c-b8487cfe0e0f
     country_id: *pf
     network_id: *pf_special_services
-  - id: 244497
-    prefix: '68944'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 3317c2ad-cfdf-4ed3-9dab-f4a8649242fd
-    country_id: *pf
-    network_id: *pf_audiotext
-# Fixed Prefixes
   - id: 243983
     prefix: '68940'
     number_min_length: 11
@@ -136,6 +127,13 @@ network_prefixes:
     uuid: 220aa69e-194e-4d97-9887-f4a028285fd3
     country_id: *pf
     network_id: *pf_remote_archipelago_vinibox_service_region
+  - id: 244497
+    prefix: '68944'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 3317c2ad-cfdf-4ed3-9dab-f4a8649242fd
+    country_id: *pf
+    network_id: *pf_audiotext
   - id: 249518
     prefix: '689494'
     number_min_length: 11
@@ -150,6 +148,7 @@ network_prefixes:
     uuid: ff0dc8e5-36f0-45f7-a16d-fcf0445821f3
     country_id: *pf
     network_id: *pf_voip_region
+# Supplementary services Prefixes
   - id: 249541
     prefix: '689496'
     number_min_length: 11
@@ -172,6 +171,13 @@ network_prefixes:
     country_id: *pf
     network_id: *pf_vinibox_service_region
 # Mobile Prefixes
+  - id: 264013
+    prefix: '68987'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 41e6bba8-b6ab-4ae9-b405-27308d88e2a7
+    country_id: *pf
+    network_id: *pf_vini_mobile
   - id: 256746
     prefix: '68987411'
     number_min_length: 11
@@ -207,10 +213,3 @@ network_prefixes:
     uuid: 97b8d0ca-cf6f-408d-9962-862f246e89e8
     country_id: *pf
     network_id: *pf_vodafone_mobile
-  - id: 264013
-    prefix: '68987'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 41e6bba8-b6ab-4ae9-b405-27308d88e2a7
-    country_id: *pf
-    network_id: *pf_vini_mobile

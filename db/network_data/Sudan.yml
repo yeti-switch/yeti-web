@@ -13,20 +13,19 @@ networks:
     name: SD Mobile
     uuid: f4a262b8-6c20-4c89-9e6e-8589d9f8f580
     type_id: 3
-  - id: &sd_sudani_mobile 24837
-    name: SD Sudani Mobile
-    uuid: 013e0a6f-12ed-4778-807e-5ee33b1bf05e
-    type_id: 3
-# Supplementary services Networks
   - id: &sd_special_services 21481
     name: SD Special Services
     uuid: a3063278-b19f-415c-bb75-8f1c6a8316ea
     type_id: 13
+# Fixed Networks
   - id: &sd_emergency_services 24537
     name: SD Emergency Services
     uuid: a4e2feaa-10c6-486b-aab6-2c09e0a60599
     type_id: 13
-# Fixed Networks
+  - id: &sd_sudani_mobile 24837
+    name: SD Sudani Mobile
+    uuid: 013e0a6f-12ed-4778-807e-5ee33b1bf05e
+    type_id: 3
   - id: &sd_khartoum_region 25550
     name: SD Khartoum Region
     uuid: 986279c6-dfd8-48c1-8fb1-dce7196639ca
@@ -35,6 +34,7 @@ networks:
     name: SD Bahari Region
     uuid: 1ac0c21f-1775-49c1-883c-d01aeaa5a4ce
     type_id: 2
+# Supplementary services Networks
   - id: &sd_om_durman_region 25552
     name: SD Om Durman Region
     uuid: c174e33f-6d17-4123-b966-0c1f796366a9
@@ -50,27 +50,27 @@ networks:
     type_id: 15
 network_prefixes:
 # Mobile Prefixes
-  - id: 221952
-    prefix: '24996'
+  - id: 242092
+    prefix: '249'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: cdd14c85-c0a8-4de5-936c-b0493a8b7ecd
+    country_id: *sd
+    network_id: *sd_fixed
+  - id: 261176
+    prefix: '2491'
     number_min_length: 12
     number_max_length: 12
-    uuid: 009571bf-1a9e-4b15-8043-19dec257dd16
+    uuid: b5d1ab35-2988-44db-8331-50996cbcacf7
     country_id: *sd
-    network_id: *sd_zain_mobile
-  - id: 239376
-    prefix: '24999'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 388c54fc-b25c-4e66-9309-f71baba82fd3
+    network_id: *sd_fixed
+  - id: 242484
+    prefix: '2491'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 8f727729-f602-471b-9fec-d947d5537b05
     country_id: *sd
-    network_id: *sd_mtn_mobile
-  - id: 241925
-    prefix: '2499'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c43a313d-cc69-4941-8c0a-8f6f56e7ba77
-    country_id: *sd
-    network_id: *sd_mobile
+    network_id: *sd_special_services
   - id: 258818
     prefix: '24911'
     number_min_length: 12
@@ -85,6 +85,49 @@ network_prefixes:
     uuid: e76dcd31-00b4-4329-90d6-11db718fb850
     country_id: *sd
     network_id: *sd_sudani_mobile
+  - id: 266072
+    prefix: '24915'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 53f92972-1bd1-461c-bfd3-fe4f5583dec3
+    country_id: *sd
+    network_id: *sd_fixed
+  - id: 266967
+    prefix: '249178'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d0cebf00-0c34-465a-bd9b-e425e3dfab80
+    country_id: *sd
+    network_id: *sd_sudani_satellite
+  - id: 260517
+    prefix: '249183'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4d0f096d-8c50-4a7f-bbeb-accb360cb686
+    country_id: *sd
+    network_id: *sd_khartoum_region
+  - id: 260535
+    prefix: '249185'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 536b3f62-729f-47a9-bac7-3c8586c61cf4
+    country_id: *sd
+    network_id: *sd_bahari_region
+# Fixed Prefixes
+  - id: 260550
+    prefix: '249187'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a78e6510-1caa-4f66-9c8e-e81abc788d1d
+    country_id: *sd
+    network_id: *sd_om_durman_region
+  - id: 241925
+    prefix: '2499'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c43a313d-cc69-4941-8c0a-8f6f56e7ba77
+    country_id: *sd
+    network_id: *sd_mobile
   - id: 454111
     prefix: '24990'
     number_min_length: 12
@@ -113,22 +156,22 @@ network_prefixes:
     uuid: bbff618a-7918-4ed7-830b-8df570dd14be
     country_id: *sd
     network_id: *sd_mtn_mobile
-# Country code Prefixes
-  - id: 242092
-    prefix: '249'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: cdd14c85-c0a8-4de5-936c-b0493a8b7ecd
-    country_id: *sd
-    network_id: null
 # Supplementary services Prefixes
-  - id: 242484
-    prefix: '2491'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 8f727729-f602-471b-9fec-d947d5537b05
+  - id: 221952
+    prefix: '24996'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 009571bf-1a9e-4b15-8043-19dec257dd16
     country_id: *sd
-    network_id: *sd_special_services
+    network_id: *sd_zain_mobile
+  - id: 239376
+    prefix: '24999'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 388c54fc-b25c-4e66-9309-f71baba82fd3
+    country_id: *sd
+    network_id: *sd_mtn_mobile
+# Satellite Prefixes
   - id: 258195
     prefix: '24999'
     number_min_length: 6
@@ -136,47 +179,3 @@ network_prefixes:
     uuid: ea7cc07b-73c9-43f8-9e8a-33d688752a17
     country_id: *sd
     network_id: *sd_emergency_services
-# Fixed Prefixes
-  - id: 260517
-    prefix: '249183'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4d0f096d-8c50-4a7f-bbeb-accb360cb686
-    country_id: *sd
-    network_id: *sd_khartoum_region
-  - id: 260535
-    prefix: '249185'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 536b3f62-729f-47a9-bac7-3c8586c61cf4
-    country_id: *sd
-    network_id: *sd_bahari_region
-  - id: 260550
-    prefix: '249187'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a78e6510-1caa-4f66-9c8e-e81abc788d1d
-    country_id: *sd
-    network_id: *sd_om_durman_region
-  - id: 261176
-    prefix: '2491'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b5d1ab35-2988-44db-8331-50996cbcacf7
-    country_id: *sd
-    network_id: *sd_fixed
-  - id: 266072
-    prefix: '24915'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 53f92972-1bd1-461c-bfd3-fe4f5583dec3
-    country_id: *sd
-    network_id: *sd_fixed
-# Satellite Prefixes
-  - id: 266967
-    prefix: '249178'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d0cebf00-0c34-465a-bd9b-e425e3dfab80
-    country_id: *sd
-    network_id: *sd_sudani_satellite

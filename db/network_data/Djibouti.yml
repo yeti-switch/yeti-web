@@ -1,11 +1,10 @@
 country_id: &dj 59
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &dj_special_services 21391
     name: DJ Special Services
     uuid: 06a6b119-9c7a-48d7-8cfd-c93acaecc8e8
     type_id: 13
-# Fixed Networks
   - id: &dj_djibouti_ville_region 22794
     name: DJ Djibouti Ville Region
     uuid: c9f53f18-82e8-42d7-896a-c811c6ef6fc9
@@ -38,21 +37,25 @@ networks:
     name: DJ Obock Region
     uuid: 8dcf3f3d-f190-4576-9f61-bcbbd6e19705
     type_id: 2
-# Mobile Networks
+# Supplementary services Networks
   - id: &dj_evatis_mobile 24219
     name: DJ Evatis Mobile
     uuid: e78df2d9-1a2b-4a0d-a062-4275eb351e06
     type_id: 3
+# Mobile Networks
+  - id: &dj_fixed 43405
+    name: DJ Fixed
+    uuid: 29275600-38ab-4beb-be87-ced270a4e10f
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241982
     prefix: '253'
     number_min_length: 4
     number_max_length: 100
     uuid: 0e0b5229-e5e2-43d1-a8a7-a24d1162a8d4
     country_id: *dj
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *dj_fixed
   - id: 242386
     prefix: '2531'
     number_min_length: 5
@@ -60,7 +63,6 @@ network_prefixes:
     uuid: 839102b6-c841-46e0-b751-4d747b2b46ef
     country_id: *dj
     network_id: *dj_special_services
-# Fixed Prefixes
   - id: 247623
     prefix: '25321'
     number_min_length: 11
@@ -173,6 +175,7 @@ network_prefixes:
     uuid: 0f9249df-4f84-4cb5-85de-a0e626b7a531
     country_id: *dj
     network_id: *dj_ali_sabieh_region
+# Supplementary services Prefixes
   - id: 248694
     prefix: '2532754'
     number_min_length: 11

@@ -5,23 +5,39 @@ networks:
     name: AM Ucom Mobile
     uuid: 1cec42e2-37c2-4c14-8505-127edac19eaf
     type_id: 3
-  - id: &am_viva_mts_mobile 18494
-    name: AM Viva Mts Mobile
-    uuid: fa46e20a-c345-48ac-8f1c-3211eed27e3c
-    type_id: 3
-  - id: &am_team_mobile 20448
-    name: AM Team Mobile
-    uuid: 4a36e709-cba6-4403-b4a2-20e6a132a3eb
-    type_id: 3
-# Fixed Networks
   - id: &am_voip_region 10522
     name: AM Voip Region
     uuid: 9556af09-cfc8-4c19-9637-91a3ca5fcbfc
     type_id: 2
+  - id: &am_viva_mts_mobile 18494
+    name: AM Viva Mts Mobile
+    uuid: fa46e20a-c345-48ac-8f1c-3211eed27e3c
+    type_id: 3
+# Supplementary services Networks
+  - id: &am_shared_cost_services_national_rate 19920
+    name: AM Shared Cost Services National Rate
+    uuid: 49f93fda-2448-4b2a-90fc-598e5d962b05
+    type_id: 13
+  - id: &am_team_mobile 20448
+    name: AM Team Mobile
+    uuid: 4a36e709-cba6-4403-b4a2-20e6a132a3eb
+    type_id: 3
+  - id: &am_special_services 21357
+    name: AM Special Services
+    uuid: 3d7f332d-309e-44ed-adb0-fbf864aee437
+    type_id: 13
+  - id: &am_emergency_services 24483
+    name: AM Emergency Services
+    uuid: 24715684-2bc3-47ac-a84c-0ceba0e0b9cd
+    type_id: 13
   - id: &am_yerevan_region 24801
     name: AM Yerevan Region
     uuid: 9a6da925-0e48-46fc-a401-8bfadf2e27f7
     type_id: 2
+  - id: &am_paging 24818
+    name: AM Paging
+    uuid: c42298eb-4c38-4f6b-a736-246106d8fa25
+    type_id: 12
   - id: &am_hrazdan_region 27846
     name: AM Hrazdan Region
     uuid: d99587f3-dcb4-4fd0-bb56-09ba778a3ab9
@@ -38,6 +54,7 @@ networks:
     name: AM Charentsavan Region
     uuid: 527c3d70-1fd0-4cb1-a88e-71abb8d8eba0
     type_id: 2
+# Fixed Networks
   - id: &am_echmiadzin_region 28337
     name: AM Echmiadzin Region
     uuid: 10a539b0-d992-46ea-bb7b-7c6e2d042274
@@ -186,19 +203,6 @@ networks:
     name: AM Vanadzor Region
     uuid: 2c150e83-bb5b-465a-b319-8020d9442c09
     type_id: 2
-# Supplementary services Networks
-  - id: &am_shared_cost_services_national_rate 19920
-    name: AM Shared Cost Services National Rate
-    uuid: 49f93fda-2448-4b2a-90fc-598e5d962b05
-    type_id: 13
-  - id: &am_special_services 21357
-    name: AM Special Services
-    uuid: 3d7f332d-309e-44ed-adb0-fbf864aee437
-    type_id: 13
-  - id: &am_emergency_services 24483
-    name: AM Emergency Services
-    uuid: 24715684-2bc3-47ac-a84c-0ceba0e0b9cd
-    type_id: 13
   - id: &am_freephone_services 38484
     name: AM Freephone Services
     uuid: 17d0caff-1466-4233-ad8b-a3339d16f60b
@@ -228,125 +232,26 @@ networks:
     uuid: 0ba07953-784f-499f-9f2e-8b77a2ce6944
     type_id: 13
 # Paging Networks
-  - id: &am_paging 24818
-    name: AM Paging
-    uuid: c42298eb-4c38-4f6b-a736-246106d8fa25
-    type_id: 12
+  - id: &am_fixed 43378
+    name: AM Fixed
+    uuid: 079735c8-42c6-4578-bce8-a2c9d5f6c1e0
+    type_id: 2
 network_prefixes:
 # Mobile Prefixes
-  - id: 78107
-    prefix: '37455'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b9688ff7-a7bf-45a3-aa68-30f01608ddef
+  - id: 241944
+    prefix: '374'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 7ff21c80-a12d-445f-980e-37734886a191
     country_id: *am
-    network_id: *am_ucom_mobile
-  - id: 192079
-    prefix: '37477'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 774eca00-bb76-42d1-aa17-0a013f96e723
+    network_id: *am_fixed
+  - id: 242350
+    prefix: '3741'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 404c8c6f-c63c-4e41-8c7c-3e32c98896e9
     country_id: *am
-    network_id: *am_viva_mts_mobile
-  - id: 212498
-    prefix: '37494'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7784be59-af01-4061-bc40-8f6eb94da77c
-    country_id: *am
-    network_id: *am_viva_mts_mobile
-  - id: 215137
-    prefix: '37495'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 29de5645-e110-4d04-b694-322909d3b8a6
-    country_id: *am
-    network_id: *am_ucom_mobile
-  - id: 221938
-    prefix: '37496'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be7b5309-0752-4a9c-ac07-a20ac777fae1
-    country_id: *am
-    network_id: *am_team_mobile
-  - id: 227357
-    prefix: '37497'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9956c41b-5923-4d55-a890-a6f7241c55c6
-    country_id: *am
-    network_id: *am_team_mobile
-  - id: 231726
-    prefix: '37498'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 66c7614c-a40f-4723-8968-306f73255c27
-    country_id: *am
-    network_id: *am_viva_mts_mobile
-  - id: 239363
-    prefix: '37499'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9bc66656-be8b-4b92-8e46-285d93551b83
-    country_id: *am
-    network_id: *am_team_mobile
-  - id: 337268
-    prefix: '37433'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 062c2e6c-5849-45c5-88d8-c3ea63c2cb6a
-    country_id: *am
-    network_id: *am_team_mobile
-  - id: 367929
-    prefix: '37443'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5edff100-3ae1-476e-9b1b-07a038b69da2
-    country_id: *am
-    network_id: *am_team_mobile
-  - id: 370175
-    prefix: '37444'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 05f5e16f-d472-41a1-b4e4-7737f3c5f3f3
-    country_id: *am
-    network_id: *am_ucom_mobile
-  - id: 371910
-    prefix: '37441'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4bee2079-9a06-44f9-ad18-999957df3007
-    country_id: *am
-    network_id: *am_ucom_mobile
-  - id: 443779
-    prefix: '37488'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cacc0896-b783-4747-9363-fe9102e40517
-    country_id: *am
-    network_id: *am_viva_mts_mobile
-  - id: 458136
-    prefix: '37491'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: da25d944-af42-4198-9398-035e1df436f7
-    country_id: *am
-    network_id: *am_team_mobile
-  - id: 485421
-    prefix: '37493'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b17f74eb-222f-4a8e-b4d8-845e72f4776c
-    country_id: *am
-    network_id: *am_viva_mts_mobile
-# Fixed Prefixes
-  - id: 95203
-    prefix: '37460'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fb56eb4a-f1eb-4872-838e-7c8eae5d0f6c
-    country_id: *am
-    network_id: *am_voip_region
+    network_id: *am_special_services
   - id: 258616
     prefix: '37410'
     number_min_length: 11
@@ -354,6 +259,13 @@ network_prefixes:
     uuid: 9de468f7-da6a-477a-b9a8-6323eb9f6446
     country_id: *am
     network_id: *am_yerevan_region
+  - id: 258645
+    prefix: '37410289131'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 458f23b4-5a13-4c3d-9f4e-d0a3ac19c2da
+    country_id: *am
+    network_id: *am_paging
   - id: 258802
     prefix: '37411'
     number_min_length: 11
@@ -375,6 +287,13 @@ network_prefixes:
     uuid: b14b1f64-1686-440b-abd8-c3321792344b
     country_id: *am
     network_id: *am_yerevan_region
+  - id: 283771
+    prefix: '374222'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16bbecef-e25e-40f1-98b0-3bd52a5c864a
+    country_id: *am
+    network_id: *am_abovyan_region
   - id: 278988
     prefix: '374223'
     number_min_length: 11
@@ -389,13 +308,6 @@ network_prefixes:
     uuid: 9c66d91c-72fc-4d93-bc94-93670076f9f1
     country_id: *am
     network_id: *am_eghvard_nor_hachn_region
-  - id: 283771
-    prefix: '374222'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 16bbecef-e25e-40f1-98b0-3bd52a5c864a
-    country_id: *am
-    network_id: *am_abovyan_region
   - id: 284693
     prefix: '374226'
     number_min_length: 11
@@ -410,41 +322,6 @@ network_prefixes:
     uuid: 57bd8a5b-40b9-44ac-b7a2-704acf680356
     country_id: *am
     network_id: *am_echmiadzin_region
-  - id: 287491
-    prefix: '374235'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ed21bb90-8ecf-4034-b747-cf944c1bd390
-    country_id: *am
-    network_id: *am_artashat_region
-  - id: 287684
-    prefix: '374236'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: da33e3d8-9b5b-4612-8546-401ab6bd3fe5
-    country_id: *am
-    network_id: *am_masis_region
-  - id: 288514
-    prefix: '374237'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e300abc1-4fb9-4236-a49f-9ed6c5009f25
-    country_id: *am
-    network_id: *am_armavir_region
-  - id: 290173
-    prefix: '374246'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 813603fa-b1d3-41e1-9ce3-8ee4c4a649d3
-    country_id: *am
-    network_id: *am_amasia_region
-  - id: 291358
-    prefix: '374249'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3f6013fb-02c4-415a-8242-dbf0f7fb24a8
-    country_id: *am
-    network_id: *am_talin_region
   - id: 292488
     prefix: '374232'
     number_min_length: 11
@@ -466,6 +343,28 @@ network_prefixes:
     uuid: b8889f3a-64e6-48ab-9724-330e94006b38
     country_id: *am
     network_id: *am_ararat_vedi_region
+# Supplementary services Prefixes
+  - id: 287491
+    prefix: '374235'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ed21bb90-8ecf-4034-b747-cf944c1bd390
+    country_id: *am
+    network_id: *am_artashat_region
+  - id: 287684
+    prefix: '374236'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: da33e3d8-9b5b-4612-8546-401ab6bd3fe5
+    country_id: *am
+    network_id: *am_masis_region
+  - id: 288514
+    prefix: '374237'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e300abc1-4fb9-4236-a49f-9ed6c5009f25
+    country_id: *am
+    network_id: *am_armavir_region
   - id: 294649
     prefix: '374242'
     number_min_length: 11
@@ -494,6 +393,20 @@ network_prefixes:
     uuid: 2ca32bba-7579-4d01-bf65-37d34eeb04a1
     country_id: *am
     network_id: *am_ashotsk_region
+  - id: 290173
+    prefix: '374246'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 813603fa-b1d3-41e1-9ce3-8ee4c4a649d3
+    country_id: *am
+    network_id: *am_amasia_region
+  - id: 291358
+    prefix: '374249'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f6013fb-02c4-415a-8242-dbf0f7fb24a8
+    country_id: *am
+    network_id: *am_talin_region
   - id: 298145
     prefix: '374252'
     number_min_length: 11
@@ -501,6 +414,21 @@ network_prefixes:
     uuid: 5682ef51-5577-402a-91bb-db4f1d33921d
     country_id: *am
     network_id: *am_aparan_region
+# Fixed Prefixes
+  - id: 302695
+    prefix: '374253'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e6682160-d466-440f-a188-99a4ecbe4c7f
+    country_id: *am
+    network_id: *am_alaverdi_region
+  - id: 303232
+    prefix: '374254'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b08602f3-d4c6-49f2-9488-2f9739895f57
+    country_id: *am
+    network_id: *am_tashir_region
   - id: 298795
     prefix: '374255'
     number_min_length: 11
@@ -536,34 +464,6 @@ network_prefixes:
     uuid: 9a81c777-49fb-43da-8a93-7af4be8bd610
     country_id: *am
     network_id: *am_martuni_region
-  - id: 300766
-    prefix: '374268'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a79cdc7e-d78e-406a-bac4-a4db005d7544
-    country_id: *am
-    network_id: *am_dilijan_region
-  - id: 300851
-    prefix: '374269'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7619b421-7e7b-4c48-8b08-d2f285c4f9a7
-    country_id: *am
-    network_id: *am_vardenis_region
-  - id: 302695
-    prefix: '374253'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e6682160-d466-440f-a188-99a4ecbe4c7f
-    country_id: *am
-    network_id: *am_alaverdi_region
-  - id: 303232
-    prefix: '374254'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b08602f3-d4c6-49f2-9488-2f9739895f57
-    country_id: *am
-    network_id: *am_tashir_region
   - id: 303547
     prefix: '374263'
     number_min_length: 11
@@ -599,6 +499,27 @@ network_prefixes:
     uuid: 5d2659f3-1826-4e8e-9648-7bebe52b70c2
     country_id: *am
     network_id: *am_berd_region
+  - id: 300766
+    prefix: '374268'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a79cdc7e-d78e-406a-bac4-a4db005d7544
+    country_id: *am
+    network_id: *am_dilijan_region
+  - id: 300851
+    prefix: '374269'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7619b421-7e7b-4c48-8b08-d2f285c4f9a7
+    country_id: *am
+    network_id: *am_vardenis_region
+  - id: 313551
+    prefix: '374281'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 55e4d3f1-a75b-48e1-9d9b-e1de98cbad5e
+    country_id: *am
+    network_id: *am_yeghegnadzor_region
   - id: 307239
     prefix: '374282'
     number_min_length: 11
@@ -641,13 +562,6 @@ network_prefixes:
     uuid: d674f75f-2f04-40f6-94cb-93323c482c8a
     country_id: *am
     network_id: *am_jermuk_region
-  - id: 313551
-    prefix: '374281'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 55e4d3f1-a75b-48e1-9d9b-e1de98cbad5e
-    country_id: *am
-    network_id: *am_yeghegnadzor_region
   - id: 321797
     prefix: '374312'
     number_min_length: 11
@@ -662,28 +576,55 @@ network_prefixes:
     uuid: 3a801191-6f2e-4e6c-9bb6-2f654d99ba45
     country_id: *am
     network_id: *am_vanadzor_region
-# Supplementary services Prefixes
-  - id: 208448
-    prefix: '374804'
+  - id: 337268
+    prefix: '37433'
     number_min_length: 11
     number_max_length: 11
-    uuid: 16fe3939-4f67-4824-b80a-5cfaa162973b
+    uuid: 062c2e6c-5849-45c5-88d8-c3ea63c2cb6a
     country_id: *am
-    network_id: *am_shared_cost_services_national_rate
-  - id: 242350
-    prefix: '3741'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 404c8c6f-c63c-4e41-8c7c-3e32c98896e9
+    network_id: *am_team_mobile
+  - id: 371910
+    prefix: '37441'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4bee2079-9a06-44f9-ad18-999957df3007
     country_id: *am
-    network_id: *am_special_services
-  - id: 257385
-    prefix: '374911'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 6a5189c3-0135-4877-848f-84ec36f9cf5e
+    network_id: *am_ucom_mobile
+  - id: 367929
+    prefix: '37443'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5edff100-3ae1-476e-9b1b-07a038b69da2
     country_id: *am
-    network_id: *am_emergency_services
+    network_id: *am_team_mobile
+  - id: 370175
+    prefix: '37444'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05f5e16f-d472-41a1-b4e4-7737f3c5f3f3
+    country_id: *am
+    network_id: *am_ucom_mobile
+  - id: 78107
+    prefix: '37455'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b9688ff7-a7bf-45a3-aa68-30f01608ddef
+    country_id: *am
+    network_id: *am_ucom_mobile
+  - id: 95203
+    prefix: '37460'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fb56eb4a-f1eb-4872-838e-7c8eae5d0f6c
+    country_id: *am
+    network_id: *am_voip_region
+  - id: 192079
+    prefix: '37477'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 774eca00-bb76-42d1-aa17-0a013f96e723
+    country_id: *am
+    network_id: *am_viva_mts_mobile
   - id: 403459
     prefix: '374800'
     number_min_length: 11
@@ -712,6 +653,20 @@ network_prefixes:
     uuid: 88637908-892e-4518-a061-3163b986ab5e
     country_id: *am
     network_id: *am_shared_cost_services_rate_no_2
+  - id: 208448
+    prefix: '374804'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16fe3939-4f67-4824-b80a-5cfaa162973b
+    country_id: *am
+    network_id: *am_shared_cost_services_national_rate
+  - id: 443779
+    prefix: '37488'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cacc0896-b783-4747-9363-fe9102e40517
+    country_id: *am
+    network_id: *am_viva_mts_mobile
   - id: 454568
     prefix: '374900'
     number_min_length: 11
@@ -733,19 +688,67 @@ network_prefixes:
     uuid: db624ca4-bef4-47c2-aac8-be0706da9428
     country_id: *am
     network_id: *am_adults_entertainment_services
-# Country code Prefixes
-  - id: 241944
-    prefix: '374'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 7ff21c80-a12d-445f-980e-37734886a191
-    country_id: *am
-    network_id: null
-# Paging Prefixes
-  - id: 258645
-    prefix: '37410289131'
+  - id: 458136
+    prefix: '37491'
     number_min_length: 11
     number_max_length: 11
-    uuid: 458f23b4-5a13-4c3d-9f4e-d0a3ac19c2da
+    uuid: da25d944-af42-4198-9398-035e1df436f7
     country_id: *am
-    network_id: *am_paging
+    network_id: *am_team_mobile
+  - id: 257385
+    prefix: '374911'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 6a5189c3-0135-4877-848f-84ec36f9cf5e
+    country_id: *am
+    network_id: *am_emergency_services
+  - id: 485421
+    prefix: '37493'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b17f74eb-222f-4a8e-b4d8-845e72f4776c
+    country_id: *am
+    network_id: *am_viva_mts_mobile
+  - id: 212498
+    prefix: '37494'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7784be59-af01-4061-bc40-8f6eb94da77c
+    country_id: *am
+    network_id: *am_viva_mts_mobile
+  - id: 215137
+    prefix: '37495'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 29de5645-e110-4d04-b694-322909d3b8a6
+    country_id: *am
+    network_id: *am_ucom_mobile
+  - id: 221938
+    prefix: '37496'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be7b5309-0752-4a9c-ac07-a20ac777fae1
+    country_id: *am
+    network_id: *am_team_mobile
+  - id: 227357
+    prefix: '37497'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9956c41b-5923-4d55-a890-a6f7241c55c6
+    country_id: *am
+    network_id: *am_team_mobile
+  - id: 231726
+    prefix: '37498'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 66c7614c-a40f-4723-8968-306f73255c27
+    country_id: *am
+    network_id: *am_viva_mts_mobile
+# Paging Prefixes
+  - id: 239363
+    prefix: '37499'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9bc66656-be8b-4b92-8e46-285d93551b83
+    country_id: *am
+    network_id: *am_team_mobile

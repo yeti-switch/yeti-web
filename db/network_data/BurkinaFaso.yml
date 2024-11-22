@@ -1,6 +1,6 @@
 country_id: &bf 34
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &bf_moov_africa_mobile 21292
     name: BF Moov Africa Mobile
     uuid: 6f050c6e-eb27-4e0c-80b1-bde72c941a1f
@@ -9,28 +9,14 @@ networks:
     name: BF Orange Mobile
     uuid: c1b873c9-a348-4f93-9b8b-a7f10cca13f5
     type_id: 3
-  - id: &bf_telecel_mobile 22460
-    name: BF Telecel Mobile
-    uuid: 5eebc17b-01bd-482d-8974-1d6b74b2b403
-    type_id: 3
-# Supplementary services Networks
   - id: &bf_special_services 21364
     name: BF Special Services
     uuid: 1953188a-7fca-463c-9d40-0bcd9065b6aa
     type_id: 13
-  - id: &bf_freephone_services 23864
-    name: BF Freephone Services
-    uuid: 533b4023-529a-417d-9062-ed7e95cbc00a
-    type_id: 13
-  - id: &bf_internet_access 23912
-    name: BF Internet Access
-    uuid: 9cc14b7c-6c78-47ed-a526-557ce8e9fe3a
-    type_id: 13
-  - id: &bf_data_network_access 23914
-    name: BF Data Network Access
-    uuid: 93bab193-bb21-4ffd-aa96-e9d2ec9a472e
-    type_id: 13
-# Fixed Networks
+  - id: &bf_telecel_mobile 22460
+    name: BF Telecel Mobile
+    uuid: 5eebc17b-01bd-482d-8974-1d6b74b2b403
+    type_id: 3
   - id: &bf_west_region_region 22740
     name: BF West Region Region
     uuid: d1dc9948-638c-4dfa-9650-a1c1c0e4d09c
@@ -91,6 +77,7 @@ networks:
     name: BF Manga Po Kombissiri Sapone Koubri Region
     uuid: e9295cc4-b839-47e2-a8fa-b6218fd82d1e
     type_id: 2
+# Mobile Networks
   - id: &bf_leo_tabou_sapouy_bieha_bourra_region 23047
     name: BF Leo Tabou Sapouy Bieha Bourra Region
     uuid: 8f74d5fc-6197-4067-96ce-4f67cb48c7de
@@ -103,20 +90,32 @@ networks:
     name: BF Kaya Region
     uuid: 2e1c00d1-8cc3-41ed-8659-4baf81d26b1b
     type_id: 2
+# Supplementary services Networks
   - id: &bf_fixed 23052
     name: BF Fixed
     uuid: 13ddd46e-9f97-498d-9c88-cc5eafd0e7c5
     type_id: 2
+  - id: &bf_freephone_services 23864
+    name: BF Freephone Services
+    uuid: 533b4023-529a-417d-9062-ed7e95cbc00a
+    type_id: 13
+  - id: &bf_internet_access 23912
+    name: BF Internet Access
+    uuid: 9cc14b7c-6c78-47ed-a526-557ce8e9fe3a
+    type_id: 13
+  - id: &bf_data_network_access 23914
+    name: BF Data Network Access
+    uuid: 93bab193-bb21-4ffd-aa96-e9d2ec9a472e
+    type_id: 13
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241952
     prefix: '226'
     number_min_length: 4
     number_max_length: 100
     uuid: ba5979c8-4e21-488d-90be-a3fc7bc32e43
     country_id: *bf
-    network_id: null
-# Mobile Prefixes
+    network_id: *bf_fixed
   - id: 242163
     prefix: '22601'
     number_min_length: 11
@@ -159,203 +158,6 @@ network_prefixes:
     uuid: 5342df6b-541c-4c95-989d-545ba79a79d0
     country_id: *bf
     network_id: *bf_orange_mobile
-  - id: 245146
-    prefix: '22658'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2b20f3a8-9f13-49bc-a81b-2668e566cbaf
-    country_id: *bf
-    network_id: *bf_telecel_mobile
-  - id: 245433
-    prefix: '22660'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a07622bf-f953-4796-8d6d-d977c4c067ce
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 249612
-    prefix: '22650'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4eddb1b7-15fe-4494-8274-93238f393737
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 249688
-    prefix: '22651'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9fac0292-5865-4f91-bcd0-6bf34cd49fe6
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 249759
-    prefix: '22652'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 306b0707-9631-44e0-97d3-febcdd756ec2
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 250007
-    prefix: '22654'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b9ad81dd-5779-47a0-89ac-5b49c3bcfc3c
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 250105
-    prefix: '22655'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c8a9c4e0-80ac-478f-b4e2-379538440207
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 250191
-    prefix: '22656'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bc1edd5a-1996-4d6f-ab53-2693a504038e
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 250232
-    prefix: '22657'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c263d1a6-fb07-4ecb-b632-b5b00ac97820
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 250656
-    prefix: '22663'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e74c3374-ddb0-45ff-99ef-160be6eb64de
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 251018
-    prefix: '22664'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c20c5ce4-04e5-4706-a88d-8aebdd6c8e9a
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 251234
-    prefix: '22665'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 34a2a38f-0caf-4672-bb05-20adbc3ba3d0
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 251725
-    prefix: '22671'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1932a7aa-7e6f-40e9-b424-1380e0de4aa8
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 251812
-    prefix: '22672'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 129f8380-20fd-4796-86eb-f4ec29fd9e7d
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 251866
-    prefix: '22673'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 75ea4268-492d-417b-983c-c349bfb51794
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 252050
-    prefix: '22674'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 53e94d3f-bc25-43bb-9017-26ee84b20755
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 252541
-    prefix: '22675'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 08daf052-dc50-484f-bc89-b70832499456
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 253980
-    prefix: '22661'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e74926b3-c5d7-4689-ae24-48a68afe7181
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 254110
-    prefix: '22662'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b2294c52-7e1b-4187-952b-377189d0b2d0
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 254285
-    prefix: '22666'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e8b3e7de-02bc-44bc-8338-414afa89c342
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 254602
-    prefix: '22667'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8ba6d39d-6d57-48ac-b707-909d3a72c600
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 254675
-    prefix: '22668'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc8f660d-fa07-42ed-82be-7f3daeb5db49
-    country_id: *bf
-    network_id: *bf_telecel_mobile
-  - id: 254863
-    prefix: '22669'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 38dfae67-6b5a-48fd-8c26-e3d6b62b9842
-    country_id: *bf
-    network_id: *bf_telecel_mobile
-  - id: 255288
-    prefix: '22670'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2ea6a473-02b0-4a02-a49e-f489b253e0cc
-    country_id: *bf
-    network_id: *bf_moov_africa_mobile
-  - id: 255441
-    prefix: '22676'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd02e769-8c44-464c-8950-54930c715842
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 255617
-    prefix: '22677'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 62729990-facf-4f90-9466-d7e7a5efc0dd
-    country_id: *bf
-    network_id: *bf_orange_mobile
-  - id: 256080
-    prefix: '22678'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba147e29-fb9f-46d1-88b0-b4c16cc07d22
-    country_id: *bf
-    network_id: *bf_telecel_mobile
-  - id: 256378
-    prefix: '22679'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 841c3072-e013-4c21-a41d-1683f0b2b3c5
-    country_id: *bf
-    network_id: *bf_telecel_mobile
-# Supplementary services Prefixes
   - id: 242357
     prefix: '2261'
     number_min_length: 5
@@ -363,28 +165,6 @@ network_prefixes:
     uuid: b20fafe4-a737-453a-ab41-3986cf7b6dc3
     country_id: *bf
     network_id: *bf_special_services
-  - id: 253180
-    prefix: '2268000'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6633fa1f-138c-479c-971c-c34da267a472
-    country_id: *bf
-    network_id: *bf_freephone_services
-  - id: 253300
-    prefix: '2268090'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8021f16e-cb9c-4ece-bcde-32c5d93bee64
-    country_id: *bf
-    network_id: *bf_internet_access
-  - id: 253303
-    prefix: '2268091'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c80219a6-9a8c-4b89-a030-c3e67540e437
-    country_id: *bf
-    network_id: *bf_data_network_access
-# Fixed Prefixes
   - id: 247449
     prefix: '22620'
     number_min_length: 11
@@ -525,6 +305,7 @@ network_prefixes:
     uuid: d667eada-5174-4983-b9d1-151800109aa3
     country_id: *bf
     network_id: *bf_ouagadougou_region
+# Mobile Prefixes
   - id: 248374
     prefix: '2262543'
     number_min_length: 11
@@ -574,3 +355,221 @@ network_prefixes:
     uuid: 3972fb26-98f8-4821-9ae8-bb8a0302e685
     country_id: *bf
     network_id: *bf_ouagadougou_region
+  - id: 249612
+    prefix: '22650'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4eddb1b7-15fe-4494-8274-93238f393737
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 249688
+    prefix: '22651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9fac0292-5865-4f91-bcd0-6bf34cd49fe6
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 249759
+    prefix: '22652'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 306b0707-9631-44e0-97d3-febcdd756ec2
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 250007
+    prefix: '22654'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b9ad81dd-5779-47a0-89ac-5b49c3bcfc3c
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 250105
+    prefix: '22655'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c8a9c4e0-80ac-478f-b4e2-379538440207
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 250191
+    prefix: '22656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bc1edd5a-1996-4d6f-ab53-2693a504038e
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 250232
+    prefix: '22657'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c263d1a6-fb07-4ecb-b632-b5b00ac97820
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 245146
+    prefix: '22658'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2b20f3a8-9f13-49bc-a81b-2668e566cbaf
+    country_id: *bf
+    network_id: *bf_telecel_mobile
+  - id: 245433
+    prefix: '22660'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a07622bf-f953-4796-8d6d-d977c4c067ce
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 253980
+    prefix: '22661'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e74926b3-c5d7-4689-ae24-48a68afe7181
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 254110
+    prefix: '22662'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b2294c52-7e1b-4187-952b-377189d0b2d0
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 250656
+    prefix: '22663'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e74c3374-ddb0-45ff-99ef-160be6eb64de
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 251018
+    prefix: '22664'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c20c5ce4-04e5-4706-a88d-8aebdd6c8e9a
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 251234
+    prefix: '22665'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 34a2a38f-0caf-4672-bb05-20adbc3ba3d0
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 254285
+    prefix: '22666'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e8b3e7de-02bc-44bc-8338-414afa89c342
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 254602
+    prefix: '22667'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8ba6d39d-6d57-48ac-b707-909d3a72c600
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 254675
+    prefix: '22668'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc8f660d-fa07-42ed-82be-7f3daeb5db49
+    country_id: *bf
+    network_id: *bf_telecel_mobile
+  - id: 254863
+    prefix: '22669'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 38dfae67-6b5a-48fd-8c26-e3d6b62b9842
+    country_id: *bf
+    network_id: *bf_telecel_mobile
+  - id: 255288
+    prefix: '22670'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2ea6a473-02b0-4a02-a49e-f489b253e0cc
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 251725
+    prefix: '22671'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1932a7aa-7e6f-40e9-b424-1380e0de4aa8
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 251812
+    prefix: '22672'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 129f8380-20fd-4796-86eb-f4ec29fd9e7d
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 251866
+    prefix: '22673'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 75ea4268-492d-417b-983c-c349bfb51794
+    country_id: *bf
+    network_id: *bf_moov_africa_mobile
+  - id: 252050
+    prefix: '22674'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 53e94d3f-bc25-43bb-9017-26ee84b20755
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 252541
+    prefix: '22675'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 08daf052-dc50-484f-bc89-b70832499456
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 255441
+    prefix: '22676'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd02e769-8c44-464c-8950-54930c715842
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 255617
+    prefix: '22677'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 62729990-facf-4f90-9466-d7e7a5efc0dd
+    country_id: *bf
+    network_id: *bf_orange_mobile
+  - id: 256080
+    prefix: '22678'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba147e29-fb9f-46d1-88b0-b4c16cc07d22
+    country_id: *bf
+    network_id: *bf_telecel_mobile
+# Supplementary services Prefixes
+  - id: 256378
+    prefix: '22679'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 841c3072-e013-4c21-a41d-1683f0b2b3c5
+    country_id: *bf
+    network_id: *bf_telecel_mobile
+  - id: 253180
+    prefix: '2268000'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6633fa1f-138c-479c-971c-c34da267a472
+    country_id: *bf
+    network_id: *bf_freephone_services
+  - id: 253300
+    prefix: '2268090'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8021f16e-cb9c-4ece-bcde-32c5d93bee64
+    country_id: *bf
+    network_id: *bf_internet_access
+  - id: 253303
+    prefix: '2268091'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c80219a6-9a8c-4b89-a030-c3e67540e437
+    country_id: *bf
+    network_id: *bf_data_network_access

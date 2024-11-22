@@ -25,6 +25,30 @@ networks:
     name: LA Xaignabouli Region
     uuid: ff19ec67-988c-46ab-a6d6-8c5f7d583ed4
     type_id: 2
+  - id: &la_special_services 21432
+    name: LA Special Services
+    uuid: ceccf25a-3c84-4360-a4a5-12a81275709d
+    type_id: 13
+  - id: &la_etl_mobile 26724
+    name: LA Etl Mobile
+    uuid: f557b6d4-d360-431f-bad4-0f9e63c67f21
+    type_id: 3
+  - id: &la_lao_telecom_mobile 26740
+    name: LA Lao Telecom Mobile
+    uuid: 37ab7119-1090-49f3-b102-479e9e7a896f
+    type_id: 3
+  - id: &la_tplus_mobile 26752
+    name: LA Tplus Mobile
+    uuid: ea7637f4-f595-4282-bede-a9ffa6923a2e
+    type_id: 3
+  - id: &la_best_mobile 26759
+    name: LA Best Mobile
+    uuid: 6fa87ce1-9fd8-4c14-ba4d-f60c5c2ad535
+    type_id: 3
+  - id: &la_unitel_mobile 26769
+    name: LA Unitel Mobile
+    uuid: d819ed83-dc50-4bb0-9d41-f64251dc8dab
+    type_id: 3
   - id: &la_vientiane_capital_region 27340
     name: LA Vientiane Capital Region
     uuid: 56b5b181-72ab-4b4a-95e7-cd3ca2d63502
@@ -49,10 +73,12 @@ networks:
     name: LA Xekong Region
     uuid: 65b0d02b-1e8d-4dc4-8291-30581744058a
     type_id: 2
+# Supplementary services Networks
   - id: &la_savannakhet_region 36237
     name: LA Savannakhet Region
     uuid: 1317ed55-5676-4683-a929-a4c1ce395687
     type_id: 2
+# Mobile Networks
   - id: &la_oudomxay_region 39308
     name: LA Oudomxay Region
     uuid: 46601000-9343-4637-9f1a-a0cb8ea6b1ea
@@ -69,76 +95,61 @@ networks:
     name: LA Phongsaly Region
     uuid: 6cff7b9e-44fb-472a-9353-e7bf7fc8fdc5
     type_id: 2
-# Supplementary services Networks
-  - id: &la_special_services 21432
-    name: LA Special Services
-    uuid: ceccf25a-3c84-4360-a4a5-12a81275709d
-    type_id: 13
-# Mobile Networks
-  - id: &la_etl_mobile 26724
-    name: LA Etl Mobile
-    uuid: f557b6d4-d360-431f-bad4-0f9e63c67f21
-    type_id: 3
-  - id: &la_lao_telecom_mobile 26740
-    name: LA Lao Telecom Mobile
-    uuid: 37ab7119-1090-49f3-b102-479e9e7a896f
-    type_id: 3
-  - id: &la_tplus_mobile 26752
-    name: LA Tplus Mobile
-    uuid: ea7637f4-f595-4282-bede-a9ffa6923a2e
-    type_id: 3
-  - id: &la_best_mobile 26759
-    name: LA Best Mobile
-    uuid: 6fa87ce1-9fd8-4c14-ba4d-f60c5c2ad535
-    type_id: 3
-  - id: &la_unitel_mobile 26769
-    name: LA Unitel Mobile
-    uuid: d819ed83-dc50-4bb0-9d41-f64251dc8dab
-    type_id: 3
+  - id: &la_fixed 43429
+    name: LA Fixed
+    uuid: cf8d46e4-d5f9-46b2-80ab-effb11592476
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
-  - id: 62607
-    prefix: '85651'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 622af4cc-63da-4e71-92ca-b2920075a4db
+  - id: 242034
+    prefix: '856'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 6d2ea57e-a271-4736-bcd3-f38fbfeae301
     country_id: *la
-    network_id: *la_khammouane_region
-  - id: 73202
-    prefix: '85654'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 12337ae6-1250-4a44-9846-2fed125d39a1
+    network_id: *la_fixed
+  - id: 242429
+    prefix: '8561'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 27c94396-3597-4ba8-9885-98e696a68e83
     country_id: *la
-    network_id: *la_bolikhamxay_region
-  - id: 108585
-    prefix: '85661'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d7ef8f7c-f4c8-4e72-977f-349448cc58f5
+    network_id: *la_special_services
+  - id: 267167
+    prefix: '856202'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: dffc6672-9890-4f24-95f2-2fedf5626bd4
     country_id: *la
-    network_id: *la_xiengkhouang_region
-  - id: 122436
-    prefix: '85664'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f8724280-02c1-49e2-8620-763bcef07450
+    network_id: *la_etl_mobile
+  - id: 267234
+    prefix: '856205'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a7c7f0fc-200a-4bf1-a2bf-3ce86a1750b9
     country_id: *la
-    network_id: *la_houaphan_region
-  - id: 163990
-    prefix: '85671'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e56fbe5f-6a1d-478c-83a3-5f927ea7c977
+    network_id: *la_lao_telecom_mobile
+  - id: 267279
+    prefix: '856207'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: a6be3af9-c448-4c12-ab04-67575eefe93a
     country_id: *la
-    network_id: *la_louangphabang_region
-  - id: 182865
-    prefix: '85674'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 997cf237-0971-4d10-9369-bffe879251e3
+    network_id: *la_tplus_mobile
+  - id: 267301
+    prefix: '856208'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: 8e17199a-20c4-4f67-859b-c68c0edc61ae
     country_id: *la
-    network_id: *la_xaignabouli_region
+    network_id: *la_best_mobile
+  - id: 267325
+    prefix: '856209'
+    number_min_length: 13
+    number_max_length: 13
+    uuid: edc26e50-fa46-4eb1-a826-07fb1173930d
+    country_id: *la
+    network_id: *la_unitel_mobile
   - id: 274233
     prefix: '85621'
     number_min_length: 11
@@ -188,6 +199,50 @@ network_prefixes:
     uuid: 5b7f522b-2e2a-432c-aa1f-a0223da3eb14
     country_id: *la
     network_id: *la_savannakhet_region
+  - id: 62607
+    prefix: '85651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 622af4cc-63da-4e71-92ca-b2920075a4db
+    country_id: *la
+    network_id: *la_khammouane_region
+  - id: 73202
+    prefix: '85654'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 12337ae6-1250-4a44-9846-2fed125d39a1
+    country_id: *la
+    network_id: *la_bolikhamxay_region
+  - id: 108585
+    prefix: '85661'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7ef8f7c-f4c8-4e72-977f-349448cc58f5
+    country_id: *la
+    network_id: *la_xiengkhouang_region
+  - id: 122436
+    prefix: '85664'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f8724280-02c1-49e2-8620-763bcef07450
+    country_id: *la
+    network_id: *la_houaphan_region
+# Supplementary services Prefixes
+  - id: 163990
+    prefix: '85671'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e56fbe5f-6a1d-478c-83a3-5f927ea7c977
+    country_id: *la
+    network_id: *la_louangphabang_region
+# Mobile Prefixes
+  - id: 182865
+    prefix: '85674'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 997cf237-0971-4d10-9369-bffe879251e3
+    country_id: *la
+    network_id: *la_xaignabouli_region
   - id: 413674
     prefix: '85681'
     number_min_length: 11
@@ -195,13 +250,6 @@ network_prefixes:
     uuid: 9408a080-81ef-4dc7-ae3b-931b54a48ecb
     country_id: *la
     network_id: *la_oudomxay_region
-  - id: 428700
-    prefix: '85686'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac6b6ecc-640d-44b4-9557-4b325018f29d
-    country_id: *la
-    network_id: *la_louangnamtha_region
   - id: 433215
     prefix: '85684'
     number_min_length: 11
@@ -209,6 +257,13 @@ network_prefixes:
     uuid: 1721b304-f0be-4f77-85b3-a0782c13daa0
     country_id: *la
     network_id: *la_bokeo_region
+  - id: 428700
+    prefix: '85686'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac6b6ecc-640d-44b4-9557-4b325018f29d
+    country_id: *la
+    network_id: *la_louangnamtha_region
   - id: 443790
     prefix: '85688'
     number_min_length: 11
@@ -216,55 +271,3 @@ network_prefixes:
     uuid: 8643f830-5388-4461-911e-3473a36b6317
     country_id: *la
     network_id: *la_phongsaly_region
-# Country code Prefixes
-  - id: 242034
-    prefix: '856'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 6d2ea57e-a271-4736-bcd3-f38fbfeae301
-    country_id: *la
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242429
-    prefix: '8561'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 27c94396-3597-4ba8-9885-98e696a68e83
-    country_id: *la
-    network_id: *la_special_services
-# Mobile Prefixes
-  - id: 267167
-    prefix: '856202'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: dffc6672-9890-4f24-95f2-2fedf5626bd4
-    country_id: *la
-    network_id: *la_etl_mobile
-  - id: 267234
-    prefix: '856205'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: a7c7f0fc-200a-4bf1-a2bf-3ce86a1750b9
-    country_id: *la
-    network_id: *la_lao_telecom_mobile
-  - id: 267279
-    prefix: '856207'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: a6be3af9-c448-4c12-ab04-67575eefe93a
-    country_id: *la
-    network_id: *la_tplus_mobile
-  - id: 267301
-    prefix: '856208'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: 8e17199a-20c4-4f67-859b-c68c0edc61ae
-    country_id: *la
-    network_id: *la_best_mobile
-  - id: 267325
-    prefix: '856209'
-    number_min_length: 13
-    number_max_length: 13
-    uuid: edc26e50-fa46-4eb1-a826-07fb1173930d
-    country_id: *la
-    network_id: *la_unitel_mobile

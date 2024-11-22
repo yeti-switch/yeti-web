@@ -9,75 +9,6 @@ networks:
     name: SN Police
     uuid: 9a16abbc-c4ff-4232-b935-85c2d8984d0a
     type_id: 13
-  - id: &sn_fire_service 22631
-    name: SN Fire Service
-    uuid: c95cf31a-2aab-4576-91fd-26f47faffb33
-    type_id: 13
-  - id: &sn_value_added_services 22729
-    name: SN Value Added Services
-    uuid: 13c0a626-7dc4-4c05-bea9-76037c7b1e57
-    type_id: 13
-  - id: &sn_value_added_services_vocal 22747
-    name: SN Value Added Services Vocal
-    uuid: 85a589f6-378c-4e3d-98fc-2714bc4c4b6e
-    type_id: 13
-  - id: &sn_value_added_services_vocal_free 22753
-    name: SN Value Added Services Vocal Free
-    uuid: 7c902c46-cfe3-4a39-b6f9-95a234e177c8
-    type_id: 13
-  - id: &sn_value_added_services_free 22800
-    name: SN Value Added Services Free
-    uuid: 3978b10c-1dab-4cb6-b402-28e62f964d76
-    type_id: 13
-  - id: &sn_sms_mms_services 22841
-    name: SN Sms_Mms Services
-    uuid: 4ee27747-02bf-409c-b658-94909331fc3d
-    type_id: 13
-  - id: &sn_freephone_services 23858
-    name: SN Freephone Services
-    uuid: 34ada109-ae14-4370-998f-cf60ada0bada
-    type_id: 13
-  - id: &sn_personal_number_services 23892
-    name: SN Personal Number Services
-    uuid: eb57a36c-d76d-4de9-ada3-1085efedbabe
-    type_id: 13
-  - id: &sn_virtual_private_network 23894
-    name: SN Virtual Private Network
-    uuid: a5f15536-b65b-424c-9907-c361562cc471
-    type_id: 13
-  - id: &sn_prepaid_cards 23911
-    name: SN Prepaid Cards
-    uuid: b0f723bd-e5a9-4ef3-907a-d5e35a7b96c6
-    type_id: 13
-  - id: &sn_shared_cost_services 23927
-    name: SN Shared Cost Services
-    uuid: 00d78a40-f5af-42f9-8292-53a83e6f6c5b
-    type_id: 13
-  - id: &sn_internet_access_services 23981
-    name: SN Internet Access Services
-    uuid: fa627c91-8d01-45a7-b446-a0ef6e9acf40
-    type_id: 13
-  - id: &sn_wap 23996
-    name: SN Wap
-    uuid: b5f57342-1daa-4bc1-9448-7388f4eb0dca
-    type_id: 13
-  - id: &sn_internet_access_in_dakar 23998
-    name: SN Internet Access In Dakar
-    uuid: 17ce3b01-0227-4c0c-b940-4b5293a8c14a
-    type_id: 13
-  - id: &sn_internet_access_outside_dakar 23999
-    name: SN Internet Access Outside Dakar
-    uuid: d848acc1-6488-4db7-9813-0f64d2b9d8ab
-    type_id: 13
-  - id: &sn_shared_revenue_services 24340
-    name: SN Shared Revenue Services
-    uuid: 14e63fc2-fdee-47de-9e85-a5910fb7427a
-    type_id: 13
-  - id: &sn_voip_and_convergent_services 24409
-    name: SN Voip And Convergent Services
-    uuid: 925522d6-afaf-445c-b79a-67b92e276ef3
-    type_id: 13
-# Fixed Networks
   - id: &sn_fixed 21940
     name: SN Fixed
     uuid: c91b18ae-0cc0-42e9-9a02-047b7fe0b4b1
@@ -90,6 +21,10 @@ networks:
     name: SN Dakar Region
     uuid: 98242792-35fe-49a0-b63b-fa39a5dc65cf
     type_id: 2
+  - id: &sn_orange_satellite 21984
+    name: SN Orange Satellite
+    uuid: eec587e7-339f-4165-92b9-26de888a8347
+    type_id: 15
   - id: &sn_other_regions_not_dakar_region 21985
     name: SN Other Regions Not Dakar Region
     uuid: 6ff363dd-5394-42b4-af0e-06c813c732df
@@ -126,16 +61,31 @@ networks:
     name: SN Voip Pabx And Ipbx Region
     uuid: bb4b7129-3f24-4d8b-afac-e0f072ae87c8
     type_id: 2
-  - id: &sn_voip_region 24520
-    name: SN Voip Region
-    uuid: 6540b3a8-2a62-4601-909a-7168ceac8548
-    type_id: 2
-# Satellite Networks
-  - id: &sn_orange_satellite 21984
-    name: SN Orange Satellite
-    uuid: eec587e7-339f-4165-92b9-26de888a8347
-    type_id: 15
-# Mobile Networks
+  - id: &sn_fire_service 22631
+    name: SN Fire Service
+    uuid: c95cf31a-2aab-4576-91fd-26f47faffb33
+    type_id: 13
+  - id: &sn_value_added_services 22729
+    name: SN Value Added Services
+    uuid: 13c0a626-7dc4-4c05-bea9-76037c7b1e57
+    type_id: 13
+  - id: &sn_value_added_services_vocal 22747
+    name: SN Value Added Services Vocal
+    uuid: 85a589f6-378c-4e3d-98fc-2714bc4c4b6e
+    type_id: 13
+  - id: &sn_value_added_services_vocal_free 22753
+    name: SN Value Added Services Vocal Free
+    uuid: 7c902c46-cfe3-4a39-b6f9-95a234e177c8
+    type_id: 13
+# Fixed Networks
+  - id: &sn_value_added_services_free 22800
+    name: SN Value Added Services Free
+    uuid: 3978b10c-1dab-4cb6-b402-28e62f964d76
+    type_id: 13
+  - id: &sn_sms_mms_services 22841
+    name: SN Sms_Mms Services
+    uuid: 4ee27747-02bf-409c-b658-94909331fc3d
+    type_id: 13
   - id: &sn_hayo_mobile 23597
     name: SN Hayo Mobile
     uuid: e7605fbe-d02c-4178-a63c-ade9ab7e4621
@@ -148,6 +98,44 @@ networks:
     name: SN 2S Mobile Mobile
     uuid: 173933b0-94ff-455a-aba5-42f2ec20187c
     type_id: 3
+  - id: &sn_freephone_services 23858
+    name: SN Freephone Services
+    uuid: 34ada109-ae14-4370-998f-cf60ada0bada
+    type_id: 13
+  - id: &sn_personal_number_services 23892
+    name: SN Personal Number Services
+    uuid: eb57a36c-d76d-4de9-ada3-1085efedbabe
+    type_id: 13
+  - id: &sn_virtual_private_network 23894
+    name: SN Virtual Private Network
+    uuid: a5f15536-b65b-424c-9907-c361562cc471
+    type_id: 13
+  - id: &sn_prepaid_cards 23911
+    name: SN Prepaid Cards
+    uuid: b0f723bd-e5a9-4ef3-907a-d5e35a7b96c6
+    type_id: 13
+  - id: &sn_shared_cost_services 23927
+    name: SN Shared Cost Services
+    uuid: 00d78a40-f5af-42f9-8292-53a83e6f6c5b
+    type_id: 13
+  - id: &sn_internet_access_services 23981
+    name: SN Internet Access Services
+    uuid: fa627c91-8d01-45a7-b446-a0ef6e9acf40
+    type_id: 13
+  - id: &sn_wap 23996
+    name: SN Wap
+    uuid: b5f57342-1daa-4bc1-9448-7388f4eb0dca
+    type_id: 13
+  - id: &sn_internet_access_in_dakar 23998
+    name: SN Internet Access In Dakar
+    uuid: 17ce3b01-0227-4c0c-b940-4b5293a8c14a
+    type_id: 13
+# Satellite Networks
+  - id: &sn_internet_access_outside_dakar 23999
+    name: SN Internet Access Outside Dakar
+    uuid: d848acc1-6488-4db7-9813-0f64d2b9d8ab
+    type_id: 13
+# Mobile Networks
   - id: &sn_mobile 24152
     name: SN Mobile
     uuid: b8f71ec0-9f62-4ac5-b401-53b6b0808738
@@ -168,16 +156,27 @@ networks:
     name: SN Adie Mobile
     uuid: 8e365414-4c90-4cba-83da-8289e9f7473c
     type_id: 3
+  - id: &sn_shared_revenue_services 24340
+    name: SN Shared Revenue Services
+    uuid: 14e63fc2-fdee-47de-9e85-a5910fb7427a
+    type_id: 13
+  - id: &sn_voip_and_convergent_services 24409
+    name: SN Voip And Convergent Services
+    uuid: 925522d6-afaf-445c-b79a-67b92e276ef3
+    type_id: 13
+  - id: &sn_voip_region 24520
+    name: SN Voip Region
+    uuid: 6540b3a8-2a62-4601-909a-7168ceac8548
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Supplementary services Prefixes
   - id: 242093
     prefix: '221'
     number_min_length: 4
     number_max_length: 100
     uuid: 8a1c44f5-1c4a-469a-a670-87559ec602b7
     country_id: *sn
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *sn_fixed
   - id: 242485
     prefix: '2211'
     number_min_length: 5
@@ -255,6 +254,296 @@ network_prefixes:
     uuid: 5492cada-4d5b-464d-858d-ad56f99f3d70
     country_id: *sn
     network_id: *sn_sms_mms_services
+  - id: 248920
+    prefix: '2213'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 01f4fed4-917a-4c14-977d-e6d15084d25b
+    country_id: *sn
+    network_id: *sn_fixed
+  - id: 248940
+    prefix: '22130'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1613b707-f6e0-4b84-9f51-13f06816eccb
+    country_id: *sn
+    network_id: *sn_fixed
+  - id: 243377
+    prefix: '22132'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3df3269c-c151-4f8f-a827-2d736af5bfdc
+    country_id: *sn
+    network_id: *sn_fixed
+  - id: 243431
+    prefix: '221331'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4047999c-0043-4cb1-b5b7-232a5f7e8862
+    country_id: *sn
+    network_id: *sn_government_intranet_region
+  - id: 243459
+    prefix: '2213381'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6a463eab-0d15-4480-8505-10b8c0b8cad2
+    country_id: *sn
+    network_id: *sn_dakar_region
+  - id: 243460
+    prefix: '2213382'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3651a180-7754-45a7-8405-6c2e7ad1a237
+    country_id: *sn
+    network_id: *sn_dakar_region
+  - id: 243461
+    prefix: '2213383'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1177ce24-618d-457e-9601-657a1d9db477
+    country_id: *sn
+    network_id: *sn_dakar_region
+  - id: 243462
+    prefix: '2213384'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c2b81077-f9b7-4559-a712-e9f2d02b7dc3
+    country_id: *sn
+    network_id: *sn_dakar_region
+  - id: 243463
+    prefix: '2213385'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7c22d73b-16b3-4157-ae26-8696aec2dc5f
+    country_id: *sn
+    network_id: *sn_dakar_region
+  - id: 243464
+    prefix: '2213386'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 729cec85-cfc7-4285-9248-f4e2cbb54815
+    country_id: *sn
+    network_id: *sn_dakar_region
+  - id: 243465
+    prefix: '2213387'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 569dbd0b-627d-4c73-870a-3e4d19adeeac
+    country_id: *sn
+    network_id: *sn_dakar_region
+# Fixed Prefixes
+  - id: 243466
+    prefix: '2213388'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a1b9d3f6-a3d7-414e-ab02-bf064e3d847e
+    country_id: *sn
+    network_id: *sn_dakar_region
+  - id: 243468
+    prefix: '2213389'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 105ecb53-57c9-4f22-8e78-d10c41591994
+    country_id: *sn
+    network_id: *sn_dakar_region
+  - id: 243471
+    prefix: '2213392'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2b2c3f9a-abea-4361-91e7-8c8d8d1b926d
+    country_id: *sn
+    network_id: *sn_orange_satellite
+  - id: 243472
+    prefix: '2213393'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 74d0dc9a-9b0a-40d7-91df-9d92f889a961
+    country_id: *sn
+    network_id: *sn_other_regions_not_dakar_region
+  - id: 243473
+    prefix: '2213394'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ee304df3-9316-47fb-a389-170520d26e85
+    country_id: *sn
+    network_id: *sn_fatick_kaolack_region
+  - id: 243474
+    prefix: '2213395'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1f3ac8eb-69e8-4ac8-94bd-7192d10297e8
+    country_id: *sn
+    network_id: *sn_thies_region
+  - id: 243475
+    prefix: '2213396'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8c34f615-ceda-45ae-aa95-6f5af6adf921
+    country_id: *sn
+    network_id: *sn_louga_matam_saint_louis_region
+  - id: 243476
+    prefix: '2213397'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 572bdb8a-b999-4673-a2b1-9980502ff0b2
+    country_id: *sn
+    network_id: *sn_diourbel_region
+  - id: 243477
+    prefix: '2213398'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f4ec77a7-c896-4fff-83d4-4aaf7927369a
+    country_id: *sn
+    network_id: *sn_tambacounda_region
+  - id: 243479
+    prefix: '2213399'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3e540117-2f0e-4b7a-a7b0-28118f00c5e8
+    country_id: *sn
+    network_id: *sn_kolda_ziguinchor_region
+  - id: 243681
+    prefix: '2213611'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 15aba54c-6beb-4e6e-9016-2c46ad86cc4a
+    country_id: *sn
+    network_id: *sn_regional_universal_service_region
+  - id: 243916
+    prefix: '221390'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0bd582c5-a88d-4943-b8ca-86601097290f
+    country_id: *sn
+    network_id: *sn_voip_pabx_and_ipbx_region
+  - id: 243917
+    prefix: '221391'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2c2cb612-40df-4e65-8d64-818678b849ce
+    country_id: *sn
+    network_id: *sn_voip_pabx_and_ipbx_region
+  - id: 255275
+    prefix: '2217'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 65756bab-af36-478e-a4d9-4cd05ec4a175
+    country_id: *sn
+    network_id: *sn_mobile
+  - id: 255303
+    prefix: '22170'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c1a0fce3-d820-400e-aacd-5a86cf188562
+    country_id: *sn
+    network_id: *sn_expresso_mobile
+  - id: 251843
+    prefix: '2217211'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ae587c21-8b63-4d85-9556-7e3d4474cb84
+    country_id: *sn
+    network_id: *sn_hayo_mobile
+  - id: 252573
+    prefix: '2217501'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d028085e-00e7-4ab7-9b26-4d7269336ee1
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 252629
+    prefix: '2217510'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 13da7510-8ba7-4de5-b9fd-b115747e87c1
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 252699
+    prefix: '2217533'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 69bdd710-a48a-4637-8f6a-cdbd4b6108be
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 252731
+    prefix: '2217544'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c9b79b8f-c431-4302-bbbe-604e6d51c58d
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 252744
+    prefix: '2217552'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ebf0d729-3676-4382-9e90-007623a1af6f
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 252884
+    prefix: '2217563'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 649192d2-2bb8-4702-8ca2-9a09e59d1e49
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 252904
+    prefix: '2217565'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5692b7fc-c7f7-4d03-bf0e-7fe224d821f3
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 252912
+    prefix: '2217570'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8d4134ea-cb2e-4b69-92f6-62ea2c795dfe
+    country_id: *sn
+    network_id: *sn_2s_mobile_mobile
+  - id: 252936
+    prefix: '2217574'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b5fcdba7-fa0f-4d5e-99a0-68b03ee77f58
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 253043
+    prefix: '2217583'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 41ca39e1-ea57-4bf1-ae0d-5ea961871103
+    country_id: *sn
+    network_id: *sn_promobile_mobile
+  - id: 255459
+    prefix: '22176'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 38bf1e48-be99-4f79-943f-ae84f48b1fe9
+    country_id: *sn
+    network_id: *sn_free_mobile
+# Satellite Prefixes
+  - id: 255641
+    prefix: '22177'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1bf5d64b-1c97-4bc2-a8a1-521c5f9ee3ae
+    country_id: *sn
+    network_id: *sn_orange_mobile
+# Mobile Prefixes
+  - id: 256097
+    prefix: '22178'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0ec001a1-a7bb-454f-b018-f7f72faea1f4
+    country_id: *sn
+    network_id: *sn_orange_mobile
+  - id: 256401
+    prefix: '221790'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 953a1f61-9b71-4673-b4fc-bf63606979dd
+    country_id: *sn
+    network_id: *sn_adie_mobile
   - id: 253104
     prefix: '2218'
     number_min_length: 12
@@ -339,168 +628,6 @@ network_prefixes:
     uuid: f40a32ca-f29e-4a3f-96a0-5f9d9c101eb8
     country_id: *sn
     network_id: *sn_voip_and_convergent_services
-# Fixed Prefixes
-  - id: 243377
-    prefix: '22132'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3df3269c-c151-4f8f-a827-2d736af5bfdc
-    country_id: *sn
-    network_id: *sn_fixed
-  - id: 243431
-    prefix: '221331'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4047999c-0043-4cb1-b5b7-232a5f7e8862
-    country_id: *sn
-    network_id: *sn_government_intranet_region
-  - id: 243459
-    prefix: '2213381'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6a463eab-0d15-4480-8505-10b8c0b8cad2
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243460
-    prefix: '2213382'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3651a180-7754-45a7-8405-6c2e7ad1a237
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243461
-    prefix: '2213383'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1177ce24-618d-457e-9601-657a1d9db477
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243462
-    prefix: '2213384'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c2b81077-f9b7-4559-a712-e9f2d02b7dc3
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243463
-    prefix: '2213385'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7c22d73b-16b3-4157-ae26-8696aec2dc5f
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243464
-    prefix: '2213386'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 729cec85-cfc7-4285-9248-f4e2cbb54815
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243465
-    prefix: '2213387'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 569dbd0b-627d-4c73-870a-3e4d19adeeac
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243466
-    prefix: '2213388'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a1b9d3f6-a3d7-414e-ab02-bf064e3d847e
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243468
-    prefix: '2213389'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 105ecb53-57c9-4f22-8e78-d10c41591994
-    country_id: *sn
-    network_id: *sn_dakar_region
-  - id: 243472
-    prefix: '2213393'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 74d0dc9a-9b0a-40d7-91df-9d92f889a961
-    country_id: *sn
-    network_id: *sn_other_regions_not_dakar_region
-  - id: 243473
-    prefix: '2213394'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ee304df3-9316-47fb-a389-170520d26e85
-    country_id: *sn
-    network_id: *sn_fatick_kaolack_region
-  - id: 243474
-    prefix: '2213395'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1f3ac8eb-69e8-4ac8-94bd-7192d10297e8
-    country_id: *sn
-    network_id: *sn_thies_region
-  - id: 243475
-    prefix: '2213396'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8c34f615-ceda-45ae-aa95-6f5af6adf921
-    country_id: *sn
-    network_id: *sn_louga_matam_saint_louis_region
-  - id: 243476
-    prefix: '2213397'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 572bdb8a-b999-4673-a2b1-9980502ff0b2
-    country_id: *sn
-    network_id: *sn_diourbel_region
-  - id: 243477
-    prefix: '2213398'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f4ec77a7-c896-4fff-83d4-4aaf7927369a
-    country_id: *sn
-    network_id: *sn_tambacounda_region
-  - id: 243479
-    prefix: '2213399'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3e540117-2f0e-4b7a-a7b0-28118f00c5e8
-    country_id: *sn
-    network_id: *sn_kolda_ziguinchor_region
-  - id: 243681
-    prefix: '2213611'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 15aba54c-6beb-4e6e-9016-2c46ad86cc4a
-    country_id: *sn
-    network_id: *sn_regional_universal_service_region
-  - id: 243916
-    prefix: '221390'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0bd582c5-a88d-4943-b8ca-86601097290f
-    country_id: *sn
-    network_id: *sn_voip_pabx_and_ipbx_region
-  - id: 243917
-    prefix: '221391'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2c2cb612-40df-4e65-8d64-818678b849ce
-    country_id: *sn
-    network_id: *sn_voip_pabx_and_ipbx_region
-  - id: 248920
-    prefix: '2213'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 01f4fed4-917a-4c14-977d-e6d15084d25b
-    country_id: *sn
-    network_id: *sn_fixed
-  - id: 248940
-    prefix: '22130'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1613b707-f6e0-4b84-9f51-13f06816eccb
-    country_id: *sn
-    network_id: *sn_fixed
   - id: 257950
     prefix: '22193310'
     number_min_length: 12
@@ -522,131 +649,3 @@ network_prefixes:
     uuid: 09ab7f7b-0433-4baf-8852-fadb7a37baaa
     country_id: *sn
     network_id: *sn_voip_region
-# Satellite Prefixes
-  - id: 243471
-    prefix: '2213392'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2b2c3f9a-abea-4361-91e7-8c8d8d1b926d
-    country_id: *sn
-    network_id: *sn_orange_satellite
-# Mobile Prefixes
-  - id: 251843
-    prefix: '2217211'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ae587c21-8b63-4d85-9556-7e3d4474cb84
-    country_id: *sn
-    network_id: *sn_hayo_mobile
-  - id: 252573
-    prefix: '2217501'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d028085e-00e7-4ab7-9b26-4d7269336ee1
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 252629
-    prefix: '2217510'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 13da7510-8ba7-4de5-b9fd-b115747e87c1
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 252699
-    prefix: '2217533'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 69bdd710-a48a-4637-8f6a-cdbd4b6108be
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 252731
-    prefix: '2217544'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c9b79b8f-c431-4302-bbbe-604e6d51c58d
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 252744
-    prefix: '2217552'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ebf0d729-3676-4382-9e90-007623a1af6f
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 252884
-    prefix: '2217563'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 649192d2-2bb8-4702-8ca2-9a09e59d1e49
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 252904
-    prefix: '2217565'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5692b7fc-c7f7-4d03-bf0e-7fe224d821f3
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 252912
-    prefix: '2217570'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8d4134ea-cb2e-4b69-92f6-62ea2c795dfe
-    country_id: *sn
-    network_id: *sn_2s_mobile_mobile
-  - id: 252936
-    prefix: '2217574'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b5fcdba7-fa0f-4d5e-99a0-68b03ee77f58
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 253043
-    prefix: '2217583'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 41ca39e1-ea57-4bf1-ae0d-5ea961871103
-    country_id: *sn
-    network_id: *sn_promobile_mobile
-  - id: 255275
-    prefix: '2217'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 65756bab-af36-478e-a4d9-4cd05ec4a175
-    country_id: *sn
-    network_id: *sn_mobile
-  - id: 255303
-    prefix: '22170'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c1a0fce3-d820-400e-aacd-5a86cf188562
-    country_id: *sn
-    network_id: *sn_expresso_mobile
-  - id: 255459
-    prefix: '22176'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 38bf1e48-be99-4f79-943f-ae84f48b1fe9
-    country_id: *sn
-    network_id: *sn_free_mobile
-  - id: 255641
-    prefix: '22177'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1bf5d64b-1c97-4bc2-a8a1-521c5f9ee3ae
-    country_id: *sn
-    network_id: *sn_orange_mobile
-  - id: 256097
-    prefix: '22178'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0ec001a1-a7bb-454f-b018-f7f72faea1f4
-    country_id: *sn
-    network_id: *sn_orange_mobile
-  - id: 256401
-    prefix: '221790'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 953a1f61-9b71-4673-b4fc-bf63606979dd
-    country_id: *sn
-    network_id: *sn_adie_mobile

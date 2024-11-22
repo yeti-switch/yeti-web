@@ -1,10 +1,15 @@
 country_id: &gu 87
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &gu_gta_mobile 13993
     name: GU Gta Mobile
     uuid: bf11fc78-3bb7-493e-8542-c4dbbe5727b4
     type_id: 3
+  - id: &gu_agana_region 13994
+    name: GU Agana Region
+    uuid: 69eb971e-d870-47d6-aff1-3a3dd0a51ff3
+    type_id: 2
+# Mobile Networks
   - id: &gu_ite_mobile 13995
     name: GU Ite Mobile
     uuid: 08d50dc3-5107-4420-91fa-af1fe8f184b9
@@ -13,21 +18,19 @@ networks:
     name: GU Docomo Pacific Mobile
     uuid: c0c4f208-7b5f-4c2e-8db3-ea954f2b73a4
     type_id: 3
-# Fixed Networks
-  - id: &gu_agana_region 13994
-    name: GU Agana Region
-    uuid: 69eb971e-d870-47d6-aff1-3a3dd0a51ff3
+  - id: &gu_fixed 43316
+    name: GU Fixed
+    uuid: b082b1a5-3ae2-4e54-b05f-c81f65fea9f2
     type_id: 2
 network_prefixes:
-# Country code Prefixes
-  - id: 143865
+# Fixed Prefixes
+  - id: 503580
     prefix: '1671'
-    number_min_length: 2
+    number_min_length: 5
     number_max_length: 100
-    uuid: 38bed243-07bf-4113-b090-a1ca642c175d
+    uuid: d8a13a82-0d13-49e3-be70-777dc131d9ef
     country_id: *gu
-    network_id: null
-# Mobile Prefixes
+    network_id: *gu_fixed
   - id: 143948
     prefix: '1671201'
     number_min_length: 11
@@ -35,6 +38,76 @@ network_prefixes:
     uuid: 00bad5be-cb46-4170-96dc-445407867581
     country_id: *gu
     network_id: *gu_gta_mobile
+  - id: 143949
+    prefix: '1671300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 63e60cec-7c23-4a7e-93b7-0326701a6bb6
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143950
+    prefix: '1671333'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ded37032-4d48-4f8a-b82c-abcddbba14c2
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143951
+    prefix: '1671339'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c017b19b-c7b0-4890-bc77-2c85c1b194b6
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143952
+    prefix: '1671343'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b69edd79-6034-4db1-8af4-8a96dbccbc96
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143953
+    prefix: '1671344'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0f7287f3-a088-462f-8bef-1bf59960ded5
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143954
+    prefix: '1671349'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 10bb61da-f116-40aa-8be8-bae690ec85da
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143955
+    prefix: '1671355'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: de7562ad-950c-4843-a319-98af891eee24
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143956
+    prefix: '1671362'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74524dc3-10f2-4de9-820e-3750a1426181
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143957
+    prefix: '1671366'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d67bc81c-186f-4c33-a1c2-999fc9c4a25a
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143958
+    prefix: '1671400'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1d86212d-1337-4a83-b3a8-6d47d2bd1058
+    country_id: *gu
+    network_id: *gu_agana_region
   - id: 143959
     prefix: '1671456'
     number_min_length: 11
@@ -42,6 +115,62 @@ network_prefixes:
     uuid: 0c783603-9e77-4f1f-9a15-e9e8506fd260
     country_id: *gu
     network_id: *gu_ite_mobile
+  - id: 143960
+    prefix: '1671471'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 621f9f1a-af8c-4fe2-a49f-d9aa1a6ab9e0
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143961
+    prefix: '1671472'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1f601630-d62e-489d-82e6-fbad8b8e6fe7
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143962
+    prefix: '1671473'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 19fb909d-e92f-4112-bc97-c944bb868342
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143963
+    prefix: '1671474'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e022f93-526a-45ab-9fd0-54a088e0e959
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143964
+    prefix: '1671475'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a68e7388-d40d-4879-bc3a-b7b353ec9702
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143965
+    prefix: '1671477'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6cd7b23-0fcf-4e5e-a847-ef3fdc908a27
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143966
+    prefix: '1671478'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ec7887b-cb63-441b-b954-0dc3bf5509b7
+    country_id: *gu
+    network_id: *gu_agana_region
+  - id: 143967
+    prefix: '1671479'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f72726be-1856-4065-9e64-4471dda7f392
+    country_id: *gu
+    network_id: *gu_agana_region
   - id: 143968
     prefix: '1671480'
     number_min_length: 11
@@ -203,385 +332,6 @@ network_prefixes:
     uuid: 546de401-d2a8-4c86-81f4-d962c62fea26
     country_id: *gu
     network_id: *gu_gta_mobile
-  - id: 144011
-    prefix: '1671678'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4540e3dd-fef0-491e-b70d-35cf6d4f7347
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144012
-    prefix: '1671682'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9478bf22-8e12-44e0-8c50-43ef481bc5a7
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144013
-    prefix: '1671683'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a9f414e0-e7b4-4395-b352-b2e95c69d0eb
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144014
-    prefix: '167168307'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: effacaa0-c743-4551-be25-9e4dc11a864c
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144015
-    prefix: '167168308'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5d6a18bc-1571-4d43-96ee-14c8e49407c1
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144016
-    prefix: '1671685'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 20b0a9ec-25c8-4683-8889-103f08ec86c1
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144017
-    prefix: '1671686'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6cf8e859-5e7f-4759-ac64-7b7c7965625f
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144018
-    prefix: '1671687'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b1e18993-69fd-4ef1-8f30-2ba289e51472
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144019
-    prefix: '1671688'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a89084ca-0507-434f-bfd5-d32f79511457
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144020
-    prefix: '1671689'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 75eb69d6-41f9-4396-acba-be0d1710c540
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144021
-    prefix: '1671707'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 634c697d-1796-4561-a65e-50a4233b46a8
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144023
-    prefix: '1671727'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 96f0d208-7355-4d77-8c27-b902fe9bae20
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144026
-    prefix: '1671747'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 28550cd4-323b-4b12-a93b-94f044a30e97
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144037
-    prefix: '1671777'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 726bf2c1-391c-4e13-b319-55d2f653de96
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144038
-    prefix: '1671787'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c11b74c6-e4a3-4978-a8bd-bded528f96d7
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144039
-    prefix: '1671788'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94b07532-e193-4490-859e-779543f1a404
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144041
-    prefix: '1671797'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ca8160da-bbef-467f-8555-349440d7f325
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144043
-    prefix: '1671838'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4b671af7-0e92-4b08-8466-c6844f660875
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144044
-    prefix: '1671848'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 92606153-eb12-40d8-b77c-421a59542150
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144045
-    prefix: '1671858'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52a1a5f9-afe7-4e28-a4a6-4e6eed2d14c0
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144046
-    prefix: '1671864'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9ce0d289-4345-485a-a961-4c1c2bf9e9cf
-    country_id: *gu
-    network_id: *gu_gta_mobile
-  - id: 144047
-    prefix: '1671868'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 306c4716-d145-4da9-9356-72e757da3472
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144048
-    prefix: '1671878'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 41b28df6-e5f8-418d-a767-c265ce84f51f
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144049
-    prefix: '1671888'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 31e2c2e1-4ce1-4162-bf9b-ae43dc2212d9
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144050
-    prefix: '1671898'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1e760f80-ad27-4b16-804f-9e8357b84c0d
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144052
-    prefix: '1671929'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f486f302-c8c4-409e-b78a-147516bec8bf
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144053
-    prefix: '1671967'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 241ac216-7caf-4472-9e49-fe3e724409c9
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144055
-    prefix: '1671971'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2159d700-cd0c-4621-a823-bcdc5d87d93d
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144056
-    prefix: '1671972'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c4a8218e-0707-4242-9a6e-33c7f194d95a
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144057
-    prefix: '1671977'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c3466f9e-5147-4daf-8473-0d919f10c5b2
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144059
-    prefix: '1671987'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 87dbed8d-588b-4acc-916c-28e19bcdf79f
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144060
-    prefix: '1671988'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 36d76913-3424-4574-8380-6767cf3e8a14
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144061
-    prefix: '167198805'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e1ae1b5f-d2ee-4eb1-a469-f774166e1024
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144062
-    prefix: '167198806'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac7dec22-321f-4b72-885d-a6a2871fc674
-    country_id: *gu
-    network_id: *gu_docomo_pacific_mobile
-  - id: 144064
-    prefix: '1671997'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5e75dd7c-d15a-42a6-be10-76bcd7af06dd
-    country_id: *gu
-    network_id: *gu_ite_mobile
-  - id: 144065
-    prefix: '1671998'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 16c0dd58-cf93-41d5-9f2b-a4112731fbaa
-    country_id: *gu
-    network_id: *gu_ite_mobile
-# Fixed Prefixes
-  - id: 143949
-    prefix: '1671300'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 63e60cec-7c23-4a7e-93b7-0326701a6bb6
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143950
-    prefix: '1671333'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ded37032-4d48-4f8a-b82c-abcddbba14c2
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143951
-    prefix: '1671339'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c017b19b-c7b0-4890-bc77-2c85c1b194b6
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143952
-    prefix: '1671343'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b69edd79-6034-4db1-8af4-8a96dbccbc96
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143953
-    prefix: '1671344'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0f7287f3-a088-462f-8bef-1bf59960ded5
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143954
-    prefix: '1671349'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 10bb61da-f116-40aa-8be8-bae690ec85da
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143955
-    prefix: '1671355'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: de7562ad-950c-4843-a319-98af891eee24
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143956
-    prefix: '1671362'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 74524dc3-10f2-4de9-820e-3750a1426181
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143957
-    prefix: '1671366'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d67bc81c-186f-4c33-a1c2-999fc9c4a25a
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143958
-    prefix: '1671400'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1d86212d-1337-4a83-b3a8-6d47d2bd1058
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143960
-    prefix: '1671471'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 621f9f1a-af8c-4fe2-a49f-d9aa1a6ab9e0
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143961
-    prefix: '1671472'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1f601630-d62e-489d-82e6-fbad8b8e6fe7
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143962
-    prefix: '1671473'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 19fb909d-e92f-4112-bc97-c944bb868342
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143963
-    prefix: '1671474'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e022f93-526a-45ab-9fd0-54a088e0e959
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143964
-    prefix: '1671475'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a68e7388-d40d-4879-bc3a-b7b353ec9702
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143965
-    prefix: '1671477'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a6cd7b23-0fcf-4e5e-a847-ef3fdc908a27
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143966
-    prefix: '1671478'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ec7887b-cb63-441b-b954-0dc3bf5509b7
-    country_id: *gu
-    network_id: *gu_agana_region
-  - id: 143967
-    prefix: '1671479'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f72726be-1856-4065-9e64-4471dda7f392
-    country_id: *gu
-    network_id: *gu_agana_region
   - id: 143991
     prefix: '1671562'
     number_min_length: 11
@@ -610,6 +360,7 @@ network_prefixes:
     uuid: 55ec20f9-ae2d-4dbf-bc69-f826d4cb75d6
     country_id: *gu
     network_id: *gu_agana_region
+# Mobile Prefixes
   - id: 143995
     prefix: '1671588'
     number_min_length: 11
@@ -722,6 +473,83 @@ network_prefixes:
     uuid: 085d2c55-5a17-48c6-8df5-1f7bb9a67542
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144011
+    prefix: '1671678'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4540e3dd-fef0-491e-b70d-35cf6d4f7347
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144012
+    prefix: '1671682'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9478bf22-8e12-44e0-8c50-43ef481bc5a7
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144013
+    prefix: '1671683'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a9f414e0-e7b4-4395-b352-b2e95c69d0eb
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144014
+    prefix: '167168307'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: effacaa0-c743-4551-be25-9e4dc11a864c
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144015
+    prefix: '167168308'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d6a18bc-1571-4d43-96ee-14c8e49407c1
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144016
+    prefix: '1671685'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 20b0a9ec-25c8-4683-8889-103f08ec86c1
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144017
+    prefix: '1671686'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6cf8e859-5e7f-4759-ac64-7b7c7965625f
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144018
+    prefix: '1671687'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b1e18993-69fd-4ef1-8f30-2ba289e51472
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144019
+    prefix: '1671688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a89084ca-0507-434f-bfd5-d32f79511457
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144020
+    prefix: '1671689'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 75eb69d6-41f9-4396-acba-be0d1710c540
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144021
+    prefix: '1671707'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 634c697d-1796-4561-a65e-50a4233b46a8
+    country_id: *gu
+    network_id: *gu_ite_mobile
   - id: 144022
     prefix: '1671726'
     number_min_length: 11
@@ -729,6 +557,13 @@ network_prefixes:
     uuid: 06efe87c-d67d-4733-b990-a50e1bf658cc
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144023
+    prefix: '1671727'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 96f0d208-7355-4d77-8c27-b902fe9bae20
+    country_id: *gu
+    network_id: *gu_ite_mobile
   - id: 144024
     prefix: '1671734'
     number_min_length: 11
@@ -743,6 +578,34 @@ network_prefixes:
     uuid: 1b6f3417-b071-4a07-84be-0bc38e217e74
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144026
+    prefix: '1671747'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 28550cd4-323b-4b12-a93b-94f044a30e97
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144037
+    prefix: '1671777'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 726bf2c1-391c-4e13-b319-55d2f653de96
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144038
+    prefix: '1671787'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c11b74c6-e4a3-4978-a8bd-bded528f96d7
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144039
+    prefix: '1671788'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94b07532-e193-4490-859e-779543f1a404
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
   - id: 144040
     prefix: '1671789'
     number_min_length: 11
@@ -750,6 +613,13 @@ network_prefixes:
     uuid: 12c3c3ce-9aee-43ff-8eac-b996effa0213
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144041
+    prefix: '1671797'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca8160da-bbef-467f-8555-349440d7f325
+    country_id: *gu
+    network_id: *gu_ite_mobile
   - id: 144042
     prefix: '1671828'
     number_min_length: 11
@@ -757,6 +627,69 @@ network_prefixes:
     uuid: 8943cb4b-6e60-4fd6-bb0f-8eeb3d3ce933
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144043
+    prefix: '1671838'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4b671af7-0e92-4b08-8466-c6844f660875
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144044
+    prefix: '1671848'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 92606153-eb12-40d8-b77c-421a59542150
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144045
+    prefix: '1671858'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52a1a5f9-afe7-4e28-a4a6-4e6eed2d14c0
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144046
+    prefix: '1671864'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ce0d289-4345-485a-a961-4c1c2bf9e9cf
+    country_id: *gu
+    network_id: *gu_gta_mobile
+  - id: 503581
+    prefix: '1671867'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 036e2c54-b5c2-4aaf-beb6-a092e20a3f97
+    country_id: *gu
+    network_id: *gu_gta_mobile
+  - id: 144047
+    prefix: '1671868'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 306c4716-d145-4da9-9356-72e757da3472
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144048
+    prefix: '1671878'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 41b28df6-e5f8-418d-a767-c265ce84f51f
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144049
+    prefix: '1671888'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 31e2c2e1-4ce1-4162-bf9b-ae43dc2212d9
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144050
+    prefix: '1671898'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1e760f80-ad27-4b16-804f-9e8357b84c0d
+    country_id: *gu
+    network_id: *gu_ite_mobile
   - id: 144051
     prefix: '1671922'
     number_min_length: 11
@@ -764,6 +697,20 @@ network_prefixes:
     uuid: d93aa13b-11c4-41ea-9cfc-8ac6d2274d59
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144052
+    prefix: '1671929'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f486f302-c8c4-409e-b78a-147516bec8bf
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144053
+    prefix: '1671967'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 241ac216-7caf-4472-9e49-fe3e724409c9
+    country_id: *gu
+    network_id: *gu_ite_mobile
   - id: 144054
     prefix: '1671969'
     number_min_length: 11
@@ -771,6 +718,27 @@ network_prefixes:
     uuid: a4449435-6537-424f-a1ac-ef2109317cf7
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144055
+    prefix: '1671971'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2159d700-cd0c-4621-a823-bcdc5d87d93d
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144056
+    prefix: '1671972'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c4a8218e-0707-4242-9a6e-33c7f194d95a
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144057
+    prefix: '1671977'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c3466f9e-5147-4daf-8473-0d919f10c5b2
+    country_id: *gu
+    network_id: *gu_ite_mobile
   - id: 144058
     prefix: '1671979'
     number_min_length: 11
@@ -778,6 +746,34 @@ network_prefixes:
     uuid: 1a95f152-23c4-4e79-a0fa-f105e17e7095
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144059
+    prefix: '1671987'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87dbed8d-588b-4acc-916c-28e19bcdf79f
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144060
+    prefix: '1671988'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 36d76913-3424-4574-8380-6767cf3e8a14
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144061
+    prefix: '167198805'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1ae1b5f-d2ee-4eb1-a469-f774166e1024
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
+  - id: 144062
+    prefix: '167198806'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac7dec22-321f-4b72-885d-a6a2871fc674
+    country_id: *gu
+    network_id: *gu_docomo_pacific_mobile
   - id: 144063
     prefix: '1671989'
     number_min_length: 11
@@ -785,3 +781,17 @@ network_prefixes:
     uuid: fe4f1874-35eb-4e76-8af6-96f9922bdef8
     country_id: *gu
     network_id: *gu_agana_region
+  - id: 144064
+    prefix: '1671997'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e75dd7c-d15a-42a6-be10-76bcd7af06dd
+    country_id: *gu
+    network_id: *gu_ite_mobile
+  - id: 144065
+    prefix: '1671998'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 16c0dd58-cf93-41d5-9f2b-a4112731fbaa
+    country_id: *gu
+    network_id: *gu_ite_mobile

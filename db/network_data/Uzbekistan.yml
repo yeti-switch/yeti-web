@@ -1,48 +1,14 @@
 country_id: &uz 228
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &uz_ucell_mobile 4679
     name: UZ Ucell Mobile
     uuid: 1bd49a1c-8b81-41e5-98d7-a417e83f46ab
     type_id: 3
-  - id: &uz_uzmobile_mobile 18512
-    name: UZ Uzmobile Mobile
-    uuid: 946b21f2-37dd-45d5-8bd1-1a7c75f60a19
-    type_id: 3
-  - id: &uz_mobiuz_mobile 20575
-    name: UZ Mobiuz Mobile
-    uuid: d68c913c-a521-4c0c-9479-259ec84bb6c2
-    type_id: 3
-  - id: &uz_perfectum_mobile_mobile 20794
-    name: UZ Perfectum Mobile Mobile
-    uuid: 69079879-5038-417a-b303-2abe32bda216
-    type_id: 3
-  - id: &uz_mobile 21264
-    name: UZ Mobile
-    uuid: 7da5a547-8801-4c34-b4fc-683e1b0bc48a
-    type_id: 3
-  - id: &uz_humans_mobile 32572
-    name: UZ Humans Mobile
-    uuid: 246dba0c-34bd-47f3-af5c-177e0e8630ce
-    type_id: 3
-  - id: &uz_beeline_mobile 42058
-    name: UZ Beeline Mobile
-    uuid: b14d457a-811a-49b1-8958-df1592a377c2
-    type_id: 3
-# Supplementary services Networks
   - id: &uz_voip 7964
     name: UZ Voip
     uuid: f6c436ab-ae93-4cd0-a9aa-d28d937de002
     type_id: 13
-  - id: &uz_special_services 21509
-    name: UZ Special Services
-    uuid: b1f21f61-694f-48ce-bb01-c9c767deb5b2
-    type_id: 13
-  - id: &uz_emergency_and_information_services 21538
-    name: UZ Emergency And Information Services
-    uuid: 286250fb-ba6d-42da-80f2-74535bcd9835
-    type_id: 13
-# Fixed Networks
   - id: &uz_karakalpakstan_republic_region 11802
     name: UZ Karakalpakstan Republic Region
     uuid: f3d133fa-3f5c-4faa-bcc9-6ade273fbc1f
@@ -807,6 +773,10 @@ networks:
     name: UZ Sariassia Region
     uuid: c97dcae4-2745-442a-9d38-5bf0b4d8e94c
     type_id: 2
+  - id: &uz_uzmobile_mobile 18512
+    name: UZ Uzmobile Mobile
+    uuid: 946b21f2-37dd-45d5-8bd1-1a7c75f60a19
+    type_id: 3
   - id: &uz_fixed 18848
     name: UZ Fixed
     uuid: 64d1d622-a155-4b37-b9d2-b713a8ee029a
@@ -843,6 +813,7 @@ networks:
     name: UZ Navbakhor Region
     uuid: 5e65e1d1-00aa-4dc5-b980-1c6fdc342452
     type_id: 2
+# Mobile Networks
   - id: &uz_zarafshon_region 19672
     name: UZ Zarafshon Region
     uuid: 56febb80-003b-4e01-ac54-2490ab3d2c01
@@ -855,107 +826,44 @@ networks:
     name: UZ Uchkuduk Region
     uuid: c7d6b622-201d-4c53-9ec6-bae0a4c8415d
     type_id: 2
+  - id: &uz_mobiuz_mobile 20575
+    name: UZ Mobiuz Mobile
+    uuid: d68c913c-a521-4c0c-9479-259ec84bb6c2
+    type_id: 3
+  - id: &uz_perfectum_mobile_mobile 20794
+    name: UZ Perfectum Mobile Mobile
+    uuid: 69079879-5038-417a-b303-2abe32bda216
+    type_id: 3
+  - id: &uz_mobile 21264
+    name: UZ Mobile
+    uuid: 7da5a547-8801-4c34-b4fc-683e1b0bc48a
+    type_id: 3
+  - id: &uz_special_services 21509
+    name: UZ Special Services
+    uuid: b1f21f61-694f-48ce-bb01-c9c767deb5b2
+    type_id: 13
+# Supplementary services Networks
+  - id: &uz_emergency_and_information_services 21538
+    name: UZ Emergency And Information Services
+    uuid: 286250fb-ba6d-42da-80f2-74535bcd9835
+    type_id: 13
+  - id: &uz_humans_mobile 32572
+    name: UZ Humans Mobile
+    uuid: 246dba0c-34bd-47f3-af5c-177e0e8630ce
+    type_id: 3
+  - id: &uz_beeline_mobile 42058
+    name: UZ Beeline Mobile
+    uuid: b14d457a-811a-49b1-8958-df1592a377c2
+    type_id: 3
 network_prefixes:
-# Mobile Prefixes
-  - id: 54933
-    prefix: '99850'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4eddef0c-85c2-40cc-aa1a-d3f34d83c076
+# Fixed Prefixes
+  - id: 242128
+    prefix: '998'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: e9ecf643-f0bc-4f56-814f-fd37b3861777
     country_id: *uz
-    network_id: *uz_ucell_mobile
-  - id: 192107
-    prefix: '99877'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 33d1b7cc-ae54-4388-9293-da751f78bf9d
-    country_id: *uz
-    network_id: *uz_uzmobile_mobile
-  - id: 212514
-    prefix: '99894'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7acaee99-990b-4873-9a12-7da020240ad4
-    country_id: *uz
-    network_id: *uz_ucell_mobile
-  - id: 215156
-    prefix: '99895'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: da16e585-bd83-45f8-9964-c4db5a8d64f0
-    country_id: *uz
-    network_id: *uz_uzmobile_mobile
-  - id: 227370
-    prefix: '99897'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c75f0d5a-2eff-41be-a8d7-cd91d7abb052
-    country_id: *uz
-    network_id: *uz_mobiuz_mobile
-  - id: 231744
-    prefix: '99898'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 527613bf-aaee-4bc1-bba7-a4ee3cfea270
-    country_id: *uz
-    network_id: *uz_perfectum_mobile_mobile
-  - id: 239382
-    prefix: '99899'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cbf5acc1-dbb6-498f-ae86-b00cc166a05b
-    country_id: *uz
-    network_id: *uz_uzmobile_mobile
-  - id: 241929
-    prefix: '9989'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7326f32d-b4a8-4b62-b403-30affbd83bbb
-    country_id: *uz
-    network_id: *uz_mobile
-  - id: 337301
-    prefix: '99833'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 45364497-0f7d-4343-8713-fa45ec67ba20
-    country_id: *uz
-    network_id: *uz_humans_mobile
-  - id: 443800
-    prefix: '99888'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1badbbfc-5cd2-4839-a81c-570aa06c4823
-    country_id: *uz
-    network_id: *uz_mobiuz_mobile
-  - id: 454115
-    prefix: '99890'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a30bd701-9931-4de8-9fa7-4a9623c15004
-    country_id: *uz
-    network_id: *uz_beeline_mobile
-  - id: 458161
-    prefix: '99891'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0c7f5ebb-6f28-4933-9b0b-76629fc2b553
-    country_id: *uz
-    network_id: *uz_beeline_mobile
-  - id: 485435
-    prefix: '99893'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d875446a-d425-452b-8394-97a7d40ff268
-    country_id: *uz
-    network_id: *uz_ucell_mobile
-# Supplementary services Prefixes
-  - id: 78137
-    prefix: '99855'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d06a220c-3bb7-4aa7-8333-e279428d1f86
-    country_id: *uz
-    network_id: *uz_voip
+    network_id: *uz_fixed
   - id: 242515
     prefix: '9981'
     number_min_length: 6
@@ -970,7 +878,27 @@ network_prefixes:
     uuid: 2a153917-6d48-44b8-a4b9-641168624505
     country_id: *uz
     network_id: *uz_emergency_and_information_services
-# Fixed Prefixes
+  - id: 337301
+    prefix: '99833'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 45364497-0f7d-4343-8713-fa45ec67ba20
+    country_id: *uz
+    network_id: *uz_humans_mobile
+  - id: 54933
+    prefix: '99850'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4eddef0c-85c2-40cc-aa1a-d3f34d83c076
+    country_id: *uz
+    network_id: *uz_ucell_mobile
+  - id: 78137
+    prefix: '99855'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d06a220c-3bb7-4aa7-8333-e279428d1f86
+    country_id: *uz
+    network_id: *uz_voip
   - id: 108599
     prefix: '99861'
     number_min_length: 12
@@ -1167,6 +1095,20 @@ network_prefixes:
     uuid: 39ee2a70-75a6-4049-b0df-eef43435371c
     country_id: *uz
     network_id: *uz_yangibazar_region
+  - id: 135927
+    prefix: '99865'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3dbedeb4-a8c2-4036-b2e2-390cdbffcb64
+    country_id: *uz
+    network_id: *uz_bukhara_province_region
+  - id: 136064
+    prefix: '9986522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f66616c2-84e1-4021-bc40-3cb1486d6e04
+    country_id: *uz
+    network_id: *uz_bukhara_region
   - id: 125873
     prefix: '9986533'
     number_min_length: 12
@@ -1251,20 +1193,6 @@ network_prefixes:
     uuid: 296e1896-2738-4dbb-8184-303daf868941
     country_id: *uz
     network_id: *uz_jondor_region
-  - id: 135927
-    prefix: '99865'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3dbedeb4-a8c2-4036-b2e2-390cdbffcb64
-    country_id: *uz
-    network_id: *uz_bukhara_province_region
-  - id: 136064
-    prefix: '9986522'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f66616c2-84e1-4021-bc40-3cb1486d6e04
-    country_id: *uz
-    network_id: *uz_bukhara_region
   - id: 138639
     prefix: '99866'
     number_min_length: 12
@@ -1398,6 +1326,90 @@ network_prefixes:
     uuid: 54d48d0e-3d39-40a4-a380-7e580e3cfa3f
     country_id: *uz
     network_id: *uz_chelek_region
+  - id: 151434
+    prefix: '99867'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 76a852ff-3d34-4253-8b68-0496f9161c9f
+    country_id: *uz
+    network_id: *uz_sirdarya_province_region
+  - id: 151443
+    prefix: '998672'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6c4ed447-961a-4273-a009-315b7ce5a541
+    country_id: *uz
+    network_id: *uz_gulistan_region
+  - id: 151449
+    prefix: '9986724'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ebd4385b-83a2-4259-b77e-9c1a029b2a8e
+    country_id: *uz
+    network_id: *uz_sardoba_region
+  - id: 151455
+    prefix: '998673'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ffd44f51-3a1a-438b-8d6d-2b30a48750ee
+    country_id: *uz
+    network_id: *uz_bakht_region
+  - id: 151457
+    prefix: '9986733'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c162716c-55aa-48d2-96cb-ab63e84dd642
+    country_id: *uz
+    network_id: *uz_saykhun_region
+  - id: 151458
+    prefix: '9986734'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 705fd7ba-1ee6-41db-b1af-28decd00a61e
+    country_id: *uz
+    network_id: *uz_navruz_pakhtaabad_region
+  - id: 151478
+    prefix: '9986735'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fc6a62f2-853b-4234-b24c-1ef0fc948be0
+    country_id: *uz
+    network_id: *uz_sirdarya_region
+  - id: 151479
+    prefix: '9986736'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a43e8219-1b4c-4723-8824-f44f036e4a87
+    country_id: *uz
+    network_id: *uz_farkhad_region
+  - id: 151480
+    prefix: '9986737'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1fe3e95c-73aa-4c19-ad1f-49c91fd23c70
+    country_id: *uz
+    network_id: *uz_khovos_yangier_region
+  - id: 151481
+    prefix: '9986739'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 77fd5feb-d017-4fef-bb2d-9111ce06faa1
+    country_id: *uz
+    network_id: *uz_kakhraman_region
+  - id: 151501
+    prefix: '9986776'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d2b0694-3eaf-4599-9e78-48bf8f56e60c
+    country_id: *uz
+    network_id: *uz_baevut_shirin_region
+  - id: 151502
+    prefix: '9986779'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 34dbec1b-cb0a-4cbb-88a5-7b7e43f3c085
+    country_id: *uz
+    network_id: *uz_dekhkanabad_region
   - id: 148669
     prefix: '99869'
     number_min_length: 12
@@ -1496,90 +1508,6 @@ network_prefixes:
     uuid: 56bf1982-5746-4a4a-a261-bea039e67f55
     country_id: *uz
     network_id: *uz_tashkent_province_region
-  - id: 151434
-    prefix: '99867'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 76a852ff-3d34-4253-8b68-0496f9161c9f
-    country_id: *uz
-    network_id: *uz_sirdarya_province_region
-  - id: 151443
-    prefix: '998672'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6c4ed447-961a-4273-a009-315b7ce5a541
-    country_id: *uz
-    network_id: *uz_gulistan_region
-  - id: 151449
-    prefix: '9986724'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ebd4385b-83a2-4259-b77e-9c1a029b2a8e
-    country_id: *uz
-    network_id: *uz_sardoba_region
-  - id: 151455
-    prefix: '998673'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ffd44f51-3a1a-438b-8d6d-2b30a48750ee
-    country_id: *uz
-    network_id: *uz_bakht_region
-  - id: 151457
-    prefix: '9986733'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c162716c-55aa-48d2-96cb-ab63e84dd642
-    country_id: *uz
-    network_id: *uz_saykhun_region
-  - id: 151458
-    prefix: '9986734'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 705fd7ba-1ee6-41db-b1af-28decd00a61e
-    country_id: *uz
-    network_id: *uz_navruz_pakhtaabad_region
-  - id: 151478
-    prefix: '9986735'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fc6a62f2-853b-4234-b24c-1ef0fc948be0
-    country_id: *uz
-    network_id: *uz_sirdarya_region
-  - id: 151479
-    prefix: '9986736'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a43e8219-1b4c-4723-8824-f44f036e4a87
-    country_id: *uz
-    network_id: *uz_farkhad_region
-  - id: 151480
-    prefix: '9986737'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1fe3e95c-73aa-4c19-ad1f-49c91fd23c70
-    country_id: *uz
-    network_id: *uz_khovos_yangier_region
-  - id: 151481
-    prefix: '9986739'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 77fd5feb-d017-4fef-bb2d-9111ce06faa1
-    country_id: *uz
-    network_id: *uz_kakhraman_region
-  - id: 151501
-    prefix: '9986776'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2d2b0694-3eaf-4599-9e78-48bf8f56e60c
-    country_id: *uz
-    network_id: *uz_baevut_shirin_region
-  - id: 151502
-    prefix: '9986779'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 34dbec1b-cb0a-4cbb-88a5-7b7e43f3c085
-    country_id: *uz
-    network_id: *uz_dekhkanabad_region
   - id: 154219
     prefix: '9987054'
     number_min_length: 12
@@ -1734,6 +1662,13 @@ network_prefixes:
     uuid: 2d0d5c87-3ee5-4891-8c68-638970503251
     country_id: *uz
     network_id: *uz_tashkent_region
+  - id: 172540
+    prefix: '99872'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fad99938-b402-4c9b-b994-cc6fafebc40b
+    country_id: *uz
+    network_id: *uz_jizzakh_province_region
   - id: 167966
     prefix: '9987222'
     number_min_length: 12
@@ -1846,13 +1781,6 @@ network_prefixes:
     uuid: ad7b5c59-97ec-4eb8-8ac9-7044ee8427d1
     country_id: *uz
     network_id: *uz_yangiobod_region
-  - id: 172540
-    prefix: '99872'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fad99938-b402-4c9b-b994-cc6fafebc40b
-    country_id: *uz
-    network_id: *uz_jizzakh_province_region
   - id: 174953
     prefix: '99873'
     number_min_length: 12
@@ -2322,6 +2250,13 @@ network_prefixes:
     uuid: e087d16c-dcbd-4c0e-af8a-3adfff36ac67
     country_id: *uz
     network_id: *uz_sariassia_region
+  - id: 192107
+    prefix: '99877'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 33d1b7cc-ae54-4388-9293-da751f78bf9d
+    country_id: *uz
+    network_id: *uz_uzmobile_mobile
   - id: 198406
     prefix: '99878'
     number_min_length: 12
@@ -2364,6 +2299,7 @@ network_prefixes:
     uuid: 08e5d160-1c31-4e6f-b586-10653a204de4
     country_id: *uz
     network_id: *uz_karmana_region
+# Mobile Prefixes
   - id: 206790
     prefix: '9987954'
     number_min_length: 12
@@ -2406,11 +2342,74 @@ network_prefixes:
     uuid: fbebd8e9-ef4a-4da3-879c-a3fe2b777030
     country_id: *uz
     network_id: *uz_uchkuduk_region
-# Country code Prefixes
-  - id: 242128
-    prefix: '998'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: e9ecf643-f0bc-4f56-814f-fd37b3861777
+  - id: 443800
+    prefix: '99888'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1badbbfc-5cd2-4839-a81c-570aa06c4823
     country_id: *uz
-    network_id: null
+    network_id: *uz_mobiuz_mobile
+  - id: 241929
+    prefix: '9989'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7326f32d-b4a8-4b62-b403-30affbd83bbb
+    country_id: *uz
+    network_id: *uz_mobile
+  - id: 454115
+    prefix: '99890'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a30bd701-9931-4de8-9fa7-4a9623c15004
+    country_id: *uz
+    network_id: *uz_beeline_mobile
+  - id: 458161
+    prefix: '99891'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0c7f5ebb-6f28-4933-9b0b-76629fc2b553
+    country_id: *uz
+    network_id: *uz_beeline_mobile
+  - id: 485435
+    prefix: '99893'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d875446a-d425-452b-8394-97a7d40ff268
+    country_id: *uz
+    network_id: *uz_ucell_mobile
+  - id: 212514
+    prefix: '99894'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7acaee99-990b-4873-9a12-7da020240ad4
+    country_id: *uz
+    network_id: *uz_ucell_mobile
+  - id: 215156
+    prefix: '99895'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: da16e585-bd83-45f8-9964-c4db5a8d64f0
+    country_id: *uz
+    network_id: *uz_uzmobile_mobile
+# Supplementary services Prefixes
+  - id: 227370
+    prefix: '99897'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c75f0d5a-2eff-41be-a8d7-cd91d7abb052
+    country_id: *uz
+    network_id: *uz_mobiuz_mobile
+  - id: 231744
+    prefix: '99898'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 527613bf-aaee-4bc1-bba7-a4ee3cfea270
+    country_id: *uz
+    network_id: *uz_perfectum_mobile_mobile
+  - id: 239382
+    prefix: '99899'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cbf5acc1-dbb6-498f-ae86-b00cc166a05b
+    country_id: *uz
+    network_id: *uz_uzmobile_mobile

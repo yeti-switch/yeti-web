@@ -5,6 +5,10 @@ networks:
     name: CH Corporate Networks Region
     uuid: 958da1ab-502e-465e-9175-0c15f856cd1a
     type_id: 2
+  - id: &ch_sbb_mobile 5655
+    name: CH Sbb Mobile
+    uuid: 7a12e04b-fffe-4997-9889-402cf3499dc5
+    type_id: 3
   - id: &ch_winterthur_region 6631
     name: CH Winterthur Region
     uuid: 5d015a3c-f81b-4f4b-9140-b46b371f8783
@@ -29,67 +33,22 @@ networks:
     name: CH St Gallen Region
     uuid: 4eb997e1-f9fe-4149-b670-1c184bafa6a9
     type_id: 2
-  - id: &ch_lausanne_region 27331
-    name: CH Lausanne Region
-    uuid: f23f414f-2964-4a4c-869a-bc89c606df72
-    type_id: 2
-  - id: &ch_geneva_region 27807
-    name: CH Geneva Region
-    uuid: 34b5b95c-edbb-454b-a9b4-e075c0293107
-    type_id: 2
-  - id: &ch_yverdon_aigle_region 28962
-    name: CH Yverdon Aigle Region
-    uuid: dbbd31bf-7656-40b4-b68e-4951971b7020
-    type_id: 2
-  - id: &ch_fribourg_region 29505
-    name: CH Fribourg Region
-    uuid: ccdc79cd-8dc8-49f9-8b94-56f7465e7671
-    type_id: 2
-  - id: &ch_sion_region 29778
-    name: CH Sion Region
-    uuid: 738cf5ff-e3f9-4706-9fc3-a6ad87053f1d
-    type_id: 2
-  - id: &ch_berne_region 31745
-    name: CH Berne Region
-    uuid: 72fa3d26-0450-47c8-ada0-b7a6095ecf05
-    type_id: 2
-  - id: &ch_bienne_neuchatel_soleure_jura_region 31925
-    name: CH Bienne Neuchatel Soleure Jura Region
-    uuid: fb8545e7-ab86-467e-8fc8-b0fc73a32e22
-    type_id: 2
-  - id: &ch_thun_region 32545
-    name: CH Thun Region
-    uuid: d8e9a5f3-e295-414c-be8e-fb4f2e964c3d
-    type_id: 2
-  - id: &ch_burgdorf_langnau_ie_region 32883
-    name: CH Burgdorf Langnau Ie Region
-    uuid: 5238704f-48a5-4eff-b43f-e283f26641ad
-    type_id: 2
-  - id: &ch_lucerne_region 36231
-    name: CH Lucerne Region
-    uuid: 38811e62-e30a-41b3-87f2-a8c304c4f32f
-    type_id: 2
-  - id: &ch_zurich_region 36578
-    name: CH Zurich Region
-    uuid: 5cf23ef4-4089-4014-991f-a6313ef9ff16
-    type_id: 2
-  - id: &ch_chur_region 39305
-    name: CH Chur Region
-    uuid: 44e348f4-8275-47e9-8dea-89b967b1600a
-    type_id: 2
-  - id: &ch_bellinzona_region 42419
-    name: CH Bellinzona Region
-    uuid: b812d249-721c-4237-9fc7-b7d1a0095126
-    type_id: 2
-# Mobile Networks
-  - id: &ch_sbb_mobile 5655
-    name: CH Sbb Mobile
-    uuid: 7a12e04b-fffe-4997-9889-402cf3499dc5
-    type_id: 3
   - id: &ch_mobile 17147
     name: CH Mobile
     uuid: 45db6f58-150a-48ea-95f4-a1a7710b7fb2
     type_id: 3
+  - id: &ch_paging 17621
+    name: CH Paging
+    uuid: 2a3ebd55-d54f-45f2-afbc-b928ede9d197
+    type_id: 12
+  - id: &ch_swissphone_paging 17640
+    name: CH Swissphone Paging
+    uuid: 7b46f648-9d54-41b5-8a0a-d54f03ef0aa2
+    type_id: 12
+  - id: &ch_relario_paging 17649
+    name: CH Relario Paging
+    uuid: 7aa4fb42-4140-4bdc-bbad-9e73f3d8cf8d
+    type_id: 12
   - id: &ch_swisscom_mobile 18019
     name: CH Swisscom Mobile
     uuid: 4c68df10-37cf-45c7-9843-bdd82f32eb1f
@@ -126,6 +85,7 @@ networks:
     name: CH Mtel Mobile
     uuid: c0b67071-5931-45f2-b7dd-de3601765b14
     type_id: 3
+# Mobile Networks
   - id: &ch_nexphone_mobile 18853
     name: CH Nexphone Mobile
     uuid: 634eda6b-b562-463d-a219-89cf90ba4a4f
@@ -142,20 +102,6 @@ networks:
     name: CH Comfone Mobile
     uuid: cb479e59-aca0-4460-abb3-e0296ad19539
     type_id: 3
-# Paging Networks
-  - id: &ch_paging 17621
-    name: CH Paging
-    uuid: 2a3ebd55-d54f-45f2-afbc-b928ede9d197
-    type_id: 12
-  - id: &ch_swissphone_paging 17640
-    name: CH Swissphone Paging
-    uuid: 7b46f648-9d54-41b5-8a0a-d54f03ef0aa2
-    type_id: 12
-  - id: &ch_relario_paging 17649
-    name: CH Relario Paging
-    uuid: 7aa4fb42-4140-4bdc-bbad-9e73f3d8cf8d
-    type_id: 12
-# Supplementary services Networks
   - id: &ch_routing 20787
     name: CH Routing
     uuid: aed6c5ae-46bd-4410-8e47-5e2abfe787eb
@@ -164,10 +110,60 @@ networks:
     name: CH Special Services
     uuid: c98aba3e-5646-440b-ab6c-5900a99b7b03
     type_id: 13
+  - id: &ch_lausanne_region 27331
+    name: CH Lausanne Region
+    uuid: f23f414f-2964-4a4c-869a-bc89c606df72
+    type_id: 2
+  - id: &ch_geneva_region 27807
+    name: CH Geneva Region
+    uuid: 34b5b95c-edbb-454b-a9b4-e075c0293107
+    type_id: 2
+  - id: &ch_yverdon_aigle_region 28962
+    name: CH Yverdon Aigle Region
+    uuid: dbbd31bf-7656-40b4-b68e-4951971b7020
+    type_id: 2
+  - id: &ch_fribourg_region 29505
+    name: CH Fribourg Region
+    uuid: ccdc79cd-8dc8-49f9-8b94-56f7465e7671
+    type_id: 2
+  - id: &ch_sion_region 29778
+    name: CH Sion Region
+    uuid: 738cf5ff-e3f9-4706-9fc3-a6ad87053f1d
+    type_id: 2
+  - id: &ch_berne_region 31745
+    name: CH Berne Region
+    uuid: 72fa3d26-0450-47c8-ada0-b7a6095ecf05
+    type_id: 2
+  - id: &ch_bienne_neuchatel_soleure_jura_region 31925
+    name: CH Bienne Neuchatel Soleure Jura Region
+    uuid: fb8545e7-ab86-467e-8fc8-b0fc73a32e22
+    type_id: 2
+  - id: &ch_thun_region 32545
+    name: CH Thun Region
+    uuid: d8e9a5f3-e295-414c-be8e-fb4f2e964c3d
+    type_id: 2
+  - id: &ch_burgdorf_langnau_ie_region 32883
+    name: CH Burgdorf Langnau Ie Region
+    uuid: 5238704f-48a5-4eff-b43f-e283f26641ad
+    type_id: 2
+# Paging Networks
+  - id: &ch_lucerne_region 36231
+    name: CH Lucerne Region
+    uuid: 38811e62-e30a-41b3-87f2-a8c304c4f32f
+    type_id: 2
+  - id: &ch_zurich_region 36578
+    name: CH Zurich Region
+    uuid: 5cf23ef4-4089-4014-991f-a6313ef9ff16
+    type_id: 2
   - id: &ch_freephone_services 38490
     name: CH Freephone Services
     uuid: 3832abe8-2b41-4324-91ba-5db255455f39
     type_id: 13
+# Supplementary services Networks
+  - id: &ch_chur_region 39305
+    name: CH Chur Region
+    uuid: 44e348f4-8275-47e9-8dea-89b967b1600a
+    type_id: 2
   - id: &ch_shared_cost_services 40153
     name: CH Shared Cost Services
     uuid: e2465556-7434-4480-acd4-ae881bac3a1c
@@ -188,68 +184,34 @@ networks:
     name: CH Premium Rate Services
     uuid: 08e322d9-55e1-4114-b26f-45b102b874c4
     type_id: 13
+  - id: &ch_bellinzona_region 42419
+    name: CH Bellinzona Region
+    uuid: b812d249-721c-4237-9fc7-b7d1a0095126
+    type_id: 2
   - id: &ch_adults_entertainment_services 42539
     name: CH Adults Entertainment Services
     uuid: 3fc030d6-4ed4-4e17-ad89-84599b961b72
     type_id: 13
+  - id: &ch_fixed 43393
+    name: CH Fixed
+    uuid: 691e499e-4335-4fa8-9e9c-09fc2722ac29
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
-  - id: 62599
-    prefix: '4151'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4b70a59-36b4-40c4-b601-aa52f3e8da3e
+  - id: 241965
+    prefix: '41'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: c028344d-0a27-414f-8aaa-ed143200bc92
     country_id: *ch
-    network_id: *ch_corporate_networks_region
-  - id: 71649
-    prefix: '4152'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 41d316ef-18e1-4afa-b65d-5dbe780b45ca
+    network_id: *ch_fixed
+  - id: 242370
+    prefix: '411'
+    number_min_length: 5
+    number_max_length: 8
+    uuid: 734914cd-3691-4ae3-b278-411857d15a35
     country_id: *ch
-    network_id: *ch_winterthur_region
-  - id: 78113
-    prefix: '4155'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3dc04e09-b847-419d-a791-c091ce821a47
-    country_id: *ch
-    network_id: *ch_rapperswil_region
-  - id: 87909
-    prefix: '4156'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b3e97577-f509-4c47-9d7e-771564717c06
-    country_id: *ch
-    network_id: *ch_baden_region
-  - id: 93090
-    prefix: '4158'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc75d1e4-9a32-4daa-9314-c94371b698da
-    country_id: *ch
-    network_id: *ch_corporate_networks_region
-  - id: 108576
-    prefix: '4161'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 044cec18-f1d8-4d6e-ae07-e0aade02d397
-    country_id: *ch
-    network_id: *ch_basel_region
-  - id: 111459
-    prefix: '4162'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e7ca89ba-67f8-4eda-b0b8-b39cd65def29
-    country_id: *ch
-    network_id: *ch_olten_region
-  - id: 163983
-    prefix: '4171'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bf907fe9-68e0-4481-88a6-6a720d32461f
-    country_id: *ch
-    network_id: *ch_st_gallen_region
+    network_id: *ch_special_services
   - id: 274223
     prefix: '4121'
     number_min_length: 11
@@ -334,21 +296,13 @@ network_prefixes:
     uuid: 93b107cb-c75d-4bd8-bc77-77611fd5461e
     country_id: *ch
     network_id: *ch_zurich_region
-  - id: 413670
-    prefix: '4181'
+  - id: 62599
+    prefix: '4151'
     number_min_length: 11
     number_max_length: 11
-    uuid: 92baa4cd-2940-4a60-9184-d3ab93a0d712
+    uuid: b4b70a59-36b4-40c4-b601-aa52f3e8da3e
     country_id: *ch
-    network_id: *ch_chur_region
-  - id: 458141
-    prefix: '4191'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e5dc0980-337d-4730-bb99-fbd11ee72a90
-    country_id: *ch
-    network_id: *ch_bellinzona_region
-# Mobile Prefixes
+    network_id: *ch_corporate_networks_region
   - id: 62623
     prefix: '41512'
     number_min_length: 11
@@ -356,6 +310,56 @@ network_prefixes:
     uuid: 6bdb86f2-9b2d-4f05-99de-74be44cac098
     country_id: *ch
     network_id: *ch_sbb_mobile
+  - id: 71649
+    prefix: '4152'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 41d316ef-18e1-4afa-b65d-5dbe780b45ca
+    country_id: *ch
+    network_id: *ch_winterthur_region
+  - id: 78113
+    prefix: '4155'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3dc04e09-b847-419d-a791-c091ce821a47
+    country_id: *ch
+    network_id: *ch_rapperswil_region
+  - id: 87909
+    prefix: '4156'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3e97577-f509-4c47-9d7e-771564717c06
+    country_id: *ch
+    network_id: *ch_baden_region
+  - id: 93090
+    prefix: '4158'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc75d1e4-9a32-4daa-9314-c94371b698da
+    country_id: *ch
+    network_id: *ch_corporate_networks_region
+  - id: 108576
+    prefix: '4161'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 044cec18-f1d8-4d6e-ae07-e0aade02d397
+    country_id: *ch
+    network_id: *ch_basel_region
+  - id: 111459
+    prefix: '4162'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e7ca89ba-67f8-4eda-b0b8-b39cd65def29
+    country_id: *ch
+    network_id: *ch_olten_region
+  - id: 163983
+    prefix: '4171'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bf907fe9-68e0-4481-88a6-6a720d32461f
+    country_id: *ch
+    network_id: *ch_st_gallen_region
+# Mobile Prefixes
   - id: 174936
     prefix: '4173'
     number_min_length: 11
@@ -363,6 +367,384 @@ network_prefixes:
     uuid: 8db86ffd-88e9-40b1-a563-f5f4bd5e5142
     country_id: *ch
     network_id: *ch_mobile
+  - id: 182859
+    prefix: '4174'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3041eefe-8619-41e4-adba-988bf46a24be
+    country_id: *ch
+    network_id: *ch_paging
+  - id: 182894
+    prefix: '4174022'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1d6c1dd0-47e5-4955-b254-e14e076fe15c
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182895
+    prefix: '4174023'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94b7af2b-518c-4b51-b293-1c4f985c5d06
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182896
+    prefix: '4174024'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f0e7cc5-472b-4786-91e7-bbd38ffe8795
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182897
+    prefix: '4174025'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8187b358-2bb9-40ee-8ac3-78972580ab67
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182898
+    prefix: '4174026'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 979f1d27-7b62-4b1e-80b0-a5df1bf3946a
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182899
+    prefix: '4174027'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b700bb7e-627f-4e5d-b751-5cd2135e89ed
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182900
+    prefix: '4174028'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c3659edf-9aa0-4f9c-a327-5d37c8448aa7
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182901
+    prefix: '4174029'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8612d127-506c-4d91-a3af-1f18d1f08207
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182903
+    prefix: '4174030'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4639c8c0-f181-44b9-82a9-85886c9c70e5
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182904
+    prefix: '4174032'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: caa1d58a-f659-4d20-8caf-6e9f28b14c43
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182905
+    prefix: '4174033'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3cb6c75c-faae-4ef7-b6ec-f6c233f84ae5
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182906
+    prefix: '4174034'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b050f809-9818-4dbf-9305-2d3a514776b6
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182907
+    prefix: '4174035'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a6ae5b6-d016-4da8-a329-9497a5623325
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182908
+    prefix: '4174036'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 01cfd1f0-530e-4419-b736-ab8df0e8b65b
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182909
+    prefix: '4174037'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c6fecf3d-c24c-4167-9c14-a33edf33a0a8
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182910
+    prefix: '4174038'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e5abd796-8575-49ec-a665-e9d07b4c1356
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182911
+    prefix: '4174039'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bed81917-8326-4c27-a7f0-cd7b0ab84a1a
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182914
+    prefix: '4174052'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a53d333a-1518-4ac4-be54-77c4b3f0462e
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182915
+    prefix: '4174053'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1fa1a992-20f6-42a9-97b6-881813beb371
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182916
+    prefix: '4174054'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a2470815-f40b-4faa-a22c-d2b9860ec618
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182917
+    prefix: '4174055'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3aead558-e5e3-453a-b7d3-28ebb124aaf7
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182918
+    prefix: '4174056'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dea15542-ea79-4010-8096-9e82be36ff1f
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182919
+    prefix: '4174057'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b25081bd-59e1-4942-92ad-85544538f8de
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182920
+    prefix: '4174058'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f3a850c4-1096-4093-8bb9-ce9ed33fbf1c
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182921
+    prefix: '4174059'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eab3d01a-1b79-44f1-8b50-f32a228da9a3
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182924
+    prefix: '4174078'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45582f8e-9be5-472f-8b27-58066494ec6c
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182925
+    prefix: '4174079'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f3a925f-41c8-4647-8d3e-98647694a8c2
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182927
+    prefix: '4174089'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e5976997-5331-4377-8b89-f29f0cafe575
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182928
+    prefix: '417409'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e3ec1a29-56d8-4b64-ad54-3a5b6a58a286
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182966
+    prefix: '4174220'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 41659e49-d64d-4f4d-9d9d-ac7d5373a0e1
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182968
+    prefix: '4174221'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 328d98c0-dd2e-48ca-93b2-cf47ffec1e61
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 182969
+    prefix: '4174222'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e1f407da-c7fd-4773-82f7-58580774df51
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183000
+    prefix: '4174279'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a08978a0-4910-4ec9-aec1-251350d5962e
+    country_id: *ch
+    network_id: *ch_relario_paging
+  - id: 183045
+    prefix: '4174400'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ef63d6ce-855b-4ca6-9cd7-4d3ec0e721bc
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183048
+    prefix: '4174402'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0fb8341a-4ec8-4ec4-a89b-ca4a1d6d3a07
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183050
+    prefix: '4174403'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 21dbd3ab-88d3-4451-9cfe-2c621be0383e
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183052
+    prefix: '4174404'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d7c608da-9a3c-40f2-88da-54f4222d16d3
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183054
+    prefix: '4174405'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6de69b72-5ede-4090-a8fd-575c24fcd8d6
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183057
+    prefix: '4174407'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7ec2d81b-a80c-4599-9254-0787f4cc862b
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183059
+    prefix: '4174408'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40c271e0-cf7f-44c4-84fd-5aceb05676f9
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183061
+    prefix: '4174409'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c2ee2660-92a7-46a5-b65a-5b6a2aac9c21
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183074
+    prefix: '4174480'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e51255f-be5a-4843-9ce9-d1739b7bdba2
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183076
+    prefix: '4174481'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9adf7ce5-2c95-4c3b-90a0-d5eab358a139
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183086
+    prefix: '4174490'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a1cd067-0a88-4ffb-829e-67423a0e5612
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183089
+    prefix: '4174492'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 08c86825-baf0-4b0e-aa22-656060ed380d
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183091
+    prefix: '4174493'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d21b42e9-4e59-4cbc-9da6-a2b2fba78b98
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183093
+    prefix: '4174494'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a60192c3-261e-450b-85e9-0f849b85399d
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183095
+    prefix: '4174495'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d93da669-76b2-48db-9706-c2e16e84def9
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183097
+    prefix: '4174496'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ed3e45b8-8483-4a75-b384-8512dbe5dcc5
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183099
+    prefix: '4174497'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 05a18793-8519-4b23-81d2-0980a9387c16
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183101
+    prefix: '4174498'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0eb682a0-416a-42ba-a87c-2b49c9fdaf64
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183103
+    prefix: '4174499'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e2dfed3-33e4-4ae3-8992-7c796c517897
+    country_id: *ch
+    network_id: *ch_swissphone_paging
+  - id: 183226
+    prefix: '4174811'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a385ec21-9193-4c8e-bd44-2f79470a7258
+    country_id: *ch
+    network_id: *ch_swissphone_paging
   - id: 185868
     prefix: '4175'
     number_min_length: 11
@@ -930,6 +1312,7 @@ network_prefixes:
     uuid: 3bfff933-f129-4ee9-bd9b-b7db5b86aeb1
     country_id: *ch
     network_id: *ch_salt_mobile
+# Paging Prefixes
   - id: 198515
     prefix: '4178352'
     number_min_length: 11
@@ -1301,400 +1684,6 @@ network_prefixes:
     uuid: d356aed1-eca7-4978-9012-68e6decf5fc4
     country_id: *ch
     network_id: *ch_comfone_mobile
-# Paging Prefixes
-  - id: 182859
-    prefix: '4174'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3041eefe-8619-41e4-adba-988bf46a24be
-    country_id: *ch
-    network_id: *ch_paging
-  - id: 182894
-    prefix: '4174022'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1d6c1dd0-47e5-4955-b254-e14e076fe15c
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182895
-    prefix: '4174023'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94b7af2b-518c-4b51-b293-1c4f985c5d06
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182896
-    prefix: '4174024'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f0e7cc5-472b-4786-91e7-bbd38ffe8795
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182897
-    prefix: '4174025'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8187b358-2bb9-40ee-8ac3-78972580ab67
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182898
-    prefix: '4174026'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 979f1d27-7b62-4b1e-80b0-a5df1bf3946a
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182899
-    prefix: '4174027'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b700bb7e-627f-4e5d-b751-5cd2135e89ed
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182900
-    prefix: '4174028'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c3659edf-9aa0-4f9c-a327-5d37c8448aa7
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182901
-    prefix: '4174029'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8612d127-506c-4d91-a3af-1f18d1f08207
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182903
-    prefix: '4174030'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4639c8c0-f181-44b9-82a9-85886c9c70e5
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182904
-    prefix: '4174032'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: caa1d58a-f659-4d20-8caf-6e9f28b14c43
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182905
-    prefix: '4174033'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3cb6c75c-faae-4ef7-b6ec-f6c233f84ae5
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182906
-    prefix: '4174034'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b050f809-9818-4dbf-9305-2d3a514776b6
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182907
-    prefix: '4174035'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1a6ae5b6-d016-4da8-a329-9497a5623325
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182908
-    prefix: '4174036'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 01cfd1f0-530e-4419-b736-ab8df0e8b65b
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182909
-    prefix: '4174037'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c6fecf3d-c24c-4167-9c14-a33edf33a0a8
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182910
-    prefix: '4174038'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e5abd796-8575-49ec-a665-e9d07b4c1356
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182911
-    prefix: '4174039'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bed81917-8326-4c27-a7f0-cd7b0ab84a1a
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182914
-    prefix: '4174052'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a53d333a-1518-4ac4-be54-77c4b3f0462e
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182915
-    prefix: '4174053'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1fa1a992-20f6-42a9-97b6-881813beb371
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182916
-    prefix: '4174054'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a2470815-f40b-4faa-a22c-d2b9860ec618
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182917
-    prefix: '4174055'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3aead558-e5e3-453a-b7d3-28ebb124aaf7
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182918
-    prefix: '4174056'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dea15542-ea79-4010-8096-9e82be36ff1f
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182919
-    prefix: '4174057'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b25081bd-59e1-4942-92ad-85544538f8de
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182920
-    prefix: '4174058'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f3a850c4-1096-4093-8bb9-ce9ed33fbf1c
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182921
-    prefix: '4174059'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eab3d01a-1b79-44f1-8b50-f32a228da9a3
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182924
-    prefix: '4174078'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 45582f8e-9be5-472f-8b27-58066494ec6c
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182925
-    prefix: '4174079'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7f3a925f-41c8-4647-8d3e-98647694a8c2
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182927
-    prefix: '4174089'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e5976997-5331-4377-8b89-f29f0cafe575
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182928
-    prefix: '417409'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e3ec1a29-56d8-4b64-ad54-3a5b6a58a286
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182966
-    prefix: '4174220'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 41659e49-d64d-4f4d-9d9d-ac7d5373a0e1
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182968
-    prefix: '4174221'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 328d98c0-dd2e-48ca-93b2-cf47ffec1e61
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 182969
-    prefix: '4174222'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e1f407da-c7fd-4773-82f7-58580774df51
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183000
-    prefix: '4174279'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a08978a0-4910-4ec9-aec1-251350d5962e
-    country_id: *ch
-    network_id: *ch_relario_paging
-  - id: 183045
-    prefix: '4174400'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef63d6ce-855b-4ca6-9cd7-4d3ec0e721bc
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183048
-    prefix: '4174402'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0fb8341a-4ec8-4ec4-a89b-ca4a1d6d3a07
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183050
-    prefix: '4174403'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 21dbd3ab-88d3-4451-9cfe-2c621be0383e
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183052
-    prefix: '4174404'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d7c608da-9a3c-40f2-88da-54f4222d16d3
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183054
-    prefix: '4174405'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6de69b72-5ede-4090-a8fd-575c24fcd8d6
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183057
-    prefix: '4174407'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7ec2d81b-a80c-4599-9254-0787f4cc862b
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183059
-    prefix: '4174408'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 40c271e0-cf7f-44c4-84fd-5aceb05676f9
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183061
-    prefix: '4174409'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c2ee2660-92a7-46a5-b65a-5b6a2aac9c21
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183074
-    prefix: '4174480'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e51255f-be5a-4843-9ce9-d1739b7bdba2
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183076
-    prefix: '4174481'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9adf7ce5-2c95-4c3b-90a0-d5eab358a139
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183086
-    prefix: '4174490'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a1cd067-0a88-4ffb-829e-67423a0e5612
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183089
-    prefix: '4174492'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 08c86825-baf0-4b0e-aa22-656060ed380d
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183091
-    prefix: '4174493'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d21b42e9-4e59-4cbc-9da6-a2b2fba78b98
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183093
-    prefix: '4174494'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a60192c3-261e-450b-85e9-0f849b85399d
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183095
-    prefix: '4174495'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d93da669-76b2-48db-9706-c2e16e84def9
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183097
-    prefix: '4174496'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ed3e45b8-8483-4a75-b384-8512dbe5dcc5
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183099
-    prefix: '4174497'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 05a18793-8519-4b23-81d2-0980a9387c16
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183101
-    prefix: '4174498'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0eb682a0-416a-42ba-a87c-2b49c9fdaf64
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183103
-    prefix: '4174499'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4e2dfed3-33e4-4ae3-8992-7c796c517897
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-  - id: 183226
-    prefix: '4174811'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a385ec21-9193-4c8e-bd44-2f79470a7258
-    country_id: *ch
-    network_id: *ch_swissphone_paging
-# Supplementary services Prefixes
-  - id: 231729
-    prefix: '4198'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 95a94419-65e7-4a02-af2a-0be85ef54dce
-    country_id: *ch
-    network_id: *ch_routing
-  - id: 242370
-    prefix: '411'
-    number_min_length: 5
-    number_max_length: 8
-    uuid: 734914cd-3691-4ae3-b278-411857d15a35
-    country_id: *ch
-    network_id: *ch_special_services
   - id: 403465
     prefix: '41800'
     number_min_length: 11
@@ -1702,13 +1691,14 @@ network_prefixes:
     uuid: b73db9e4-f4fc-4336-9577-045d6d5c544e
     country_id: *ch
     network_id: *ch_freephone_services
-  - id: 425336
-    prefix: '41844'
+# Supplementary services Prefixes
+  - id: 413670
+    prefix: '4181'
     number_min_length: 11
     number_max_length: 11
-    uuid: a792716e-bd7a-4a4e-b9b3-d2ade10163f5
+    uuid: 92baa4cd-2940-4a60-9184-d3ab93a0d712
     country_id: *ch
-    network_id: *ch_shared_cost_services
+    network_id: *ch_chur_region
   - id: 433663
     prefix: '41840'
     number_min_length: 11
@@ -1721,6 +1711,13 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 11
     uuid: 697cac04-4ae9-416e-941b-b2d1837df9b7
+    country_id: *ch
+    network_id: *ch_shared_cost_services
+  - id: 425336
+    prefix: '41844'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a792716e-bd7a-4a4e-b9b3-d2ade10163f5
     country_id: *ch
     network_id: *ch_shared_cost_services
   - id: 435327
@@ -1737,13 +1734,6 @@ network_prefixes:
     uuid: b8c5b864-159c-4aa6-b98e-d266c8ae66b7
     country_id: *ch
     network_id: *ch_test_numbers
-  - id: 441007
-    prefix: '41869'
-    number_min_length: 8
-    number_max_length: 15
-    uuid: 256c1f27-14bb-40e1-ae23-a6b0a5b8f812
-    country_id: *ch
-    network_id: *ch_virtual_private_network
   - id: 448040
     prefix: '41868'
     number_min_length: 11
@@ -1751,6 +1741,13 @@ network_prefixes:
     uuid: 8e8952e0-ed2a-4d31-8c93-f6999b02164a
     country_id: *ch
     network_id: *ch_test_numbers
+  - id: 441007
+    prefix: '41869'
+    number_min_length: 8
+    number_max_length: 15
+    uuid: 256c1f27-14bb-40e1-ae23-a6b0a5b8f812
+    country_id: *ch
+    network_id: *ch_virtual_private_network
   - id: 451091
     prefix: '41878'
     number_min_length: 11
@@ -1779,11 +1776,17 @@ network_prefixes:
     uuid: 96700a96-5bcc-4f9e-8b6e-398cb65b46de
     country_id: *ch
     network_id: *ch_adults_entertainment_services
-# Country code Prefixes
-  - id: 241965
-    prefix: '41'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: c028344d-0a27-414f-8aaa-ed143200bc92
+  - id: 458141
+    prefix: '4191'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e5dc0980-337d-4730-bb99-fbd11ee72a90
     country_id: *ch
-    network_id: null
+    network_id: *ch_bellinzona_region
+  - id: 231729
+    prefix: '4198'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 95a94419-65e7-4a02-af2a-0be85ef54dce
+    country_id: *ch
+    network_id: *ch_routing

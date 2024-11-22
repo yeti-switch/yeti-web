@@ -1,11 +1,10 @@
 country_id: &mg 127
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &mg_special_services 21446
     name: MG Special Services
     uuid: b8870aa6-b091-4115-a134-3f25f9f0414f
     type_id: 13
-# Fixed Networks
   - id: &mg_fixed 26711
     name: MG Fixed
     uuid: 485b191a-e651-4499-a8f6-f6eebc36e180
@@ -78,6 +77,7 @@ networks:
     name: MG Toliara Region
     uuid: 2cc68700-7953-4b72-beb3-a47e82a96608
     type_id: 2
+# Supplementary services Networks
   - id: &mg_morondava_region 26775
     name: MG Morondava Region
     uuid: 69e07813-e078-4f7e-929d-b5323d5e98ea
@@ -105,15 +105,14 @@ networks:
     uuid: 77f9426b-2c0f-4f09-a8da-2af6294abcd4
     type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242048
     prefix: '261'
     number_min_length: 4
     number_max_length: 100
     uuid: cecbcdc3-f102-43a7-b9e9-eb3c6b9a42c4
     country_id: *mg
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *mg_fixed
   - id: 242443
     prefix: '2611'
     number_min_length: 5
@@ -121,7 +120,6 @@ network_prefixes:
     uuid: 9abdac63-596d-44ae-b764-48e8e065d63d
     country_id: *mg
     network_id: *mg_special_services
-# Fixed Prefixes
   - id: 267141
     prefix: '26120'
     number_min_length: 12
@@ -248,6 +246,7 @@ network_prefixes:
     uuid: 9eb3485a-3a5a-4353-97f7-63173c5dbc20
     country_id: *mg
     network_id: *mg_toliara_region
+# Supplementary services Prefixes
   - id: 267336
     prefix: '2612095'
     number_min_length: 12
@@ -285,13 +284,6 @@ network_prefixes:
     uuid: dfc95c7a-bf8c-4991-82ee-f68a9e192b80
     country_id: *mg
     network_id: *mg_telma_mobile
-  - id: 347703
-    prefix: '26138'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d1900ce2-16d1-437b-8d07-278bbb9135e8
-    country_id: *mg
-    network_id: *mg_telma_mobile
   - id: 355759
     prefix: '26137'
     number_min_length: 12
@@ -299,6 +291,13 @@ network_prefixes:
     uuid: 9e6adced-0a24-44f0-a252-9c8ddaf7fd00
     country_id: *mg
     network_id: *mg_orange_mobile
+  - id: 347703
+    prefix: '26138'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1900ce2-16d1-437b-8d07-278bbb9135e8
+    country_id: *mg
+    network_id: *mg_telma_mobile
   - id: 357534
     prefix: '26139'
     number_min_length: 12

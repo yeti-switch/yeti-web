@@ -16,13 +16,20 @@ networks:
     type_id: 2
 network_prefixes:
 # Mobile Prefixes
-  - id: 149333
-    prefix: '2917'
+  - id: 241987
+    prefix: '291'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: e6519c6f-5915-41b5-87ce-3f939747bc6a
+    country_id: *er
+    network_id: *er_fixed
+  - id: 258560
+    prefix: '2911'
     number_min_length: 10
     number_max_length: 10
-    uuid: c46d8bc5-9e44-45df-8893-53ea123fe8ff
+    uuid: 301c296d-3d77-4b78-ae5a-f7856f76f9fc
     country_id: *er
-    network_id: *er_eritel_mobile
+    network_id: *er_asmara_region
   - id: 258574
     prefix: '291171'
     number_min_length: 10
@@ -37,6 +44,7 @@ network_prefixes:
     uuid: 1bfda203-f6b0-4905-a2ad-bc83464c20f0
     country_id: *er
     network_id: *er_eritel_mobile
+# Fixed Prefixes
   - id: 258577
     prefix: '291173'
     number_min_length: 10
@@ -44,7 +52,13 @@ network_prefixes:
     uuid: d369cc5e-2160-46da-a32e-a1fc5fa4ca7f
     country_id: *er
     network_id: *er_eritel_mobile
-# Fixed Prefixes
+  - id: 149333
+    prefix: '2917'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c46d8bc5-9e44-45df-8893-53ea123fe8ff
+    country_id: *er
+    network_id: *er_eritel_mobile
   - id: 207514
     prefix: '2918'
     number_min_length: 10
@@ -52,18 +66,3 @@ network_prefixes:
     uuid: 17f10bc3-54da-4bc6-8985-77e3350d596f
     country_id: *er
     network_id: *er_fixed
-  - id: 258560
-    prefix: '2911'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 301c296d-3d77-4b78-ae5a-f7856f76f9fc
-    country_id: *er
-    network_id: *er_asmara_region
-# Country code Prefixes
-  - id: 241987
-    prefix: '291'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: e6519c6f-5915-41b5-87ce-3f939747bc6a
-    country_id: *er
-    network_id: null

@@ -1,6 +1,6 @@
 country_id: &cm 37
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &cm_special_services 21380
     name: CM Special Services
     uuid: 437645d0-9d18-48c7-8efe-b56d2029966a
@@ -9,28 +9,10 @@ networks:
     name: CM Emergency Services
     uuid: fbb658ea-3fa4-4d0d-abb0-6b027dedded9
     type_id: 13
-  - id: &cm_value_added_services 24294
-    name: CM Value Added Services
-    uuid: 5ba538a5-cc86-43a5-9951-7ead8a17d5de
-    type_id: 13
-# Mobile Networks
   - id: &cm_mobile 22523
     name: CM Mobile
     uuid: 61e25582-5a59-4184-b034-a611a2fd557e
     type_id: 3
-  - id: &cm_mtn_mobile 23509
-    name: CM Mtn Mobile
-    uuid: a2e19f77-bd0e-418f-8121-449580301a75
-    type_id: 3
-  - id: &cm_orange_mobile 23533
-    name: CM Orange Mobile
-    uuid: 3c893011-a404-4438-879f-0bcf9581fd14
-    type_id: 3
-  - id: &cm_nexttel_mobile 24056
-    name: CM Nexttel Mobile
-    uuid: 3cce5dac-c42c-4d69-adab-110e544c9541
-    type_id: 3
-# Fixed Networks
   - id: &cm_adamawa_centre_east_far_north_north_and_south_regions_region 22850
     name: CM Adamawa Centre East Far North North And South Regions Region
     uuid: 210a3d0b-8cc3-4a95-a187-63f5bb6c47ba
@@ -71,6 +53,7 @@ networks:
     name: CM West Region Region
     uuid: cce6897b-608b-4f8b-a45b-4981caa3046f
     type_id: 2
+# Supplementary services Networks
   - id: &cm_littoral_region_region 22933
     name: CM Littoral Region Region
     uuid: d26947a9-a7b6-4dd2-bd92-8ac524bcef9f
@@ -79,16 +62,36 @@ networks:
     name: CM Southwest Region Region
     uuid: 4fe01024-3add-4dab-a23a-98869d57d6a0
     type_id: 2
+  - id: &cm_mtn_mobile 23509
+    name: CM Mtn Mobile
+    uuid: a2e19f77-bd0e-418f-8121-449580301a75
+    type_id: 3
+# Mobile Networks
+  - id: &cm_orange_mobile 23533
+    name: CM Orange Mobile
+    uuid: 3c893011-a404-4438-879f-0bcf9581fd14
+    type_id: 3
+  - id: &cm_nexttel_mobile 24056
+    name: CM Nexttel Mobile
+    uuid: 3cce5dac-c42c-4d69-adab-110e544c9541
+    type_id: 3
+  - id: &cm_value_added_services 24294
+    name: CM Value Added Services
+    uuid: 5ba538a5-cc86-43a5-9951-7ead8a17d5de
+    type_id: 13
+  - id: &cm_fixed 43397
+    name: CM Fixed
+    uuid: deb3423f-0aeb-4465-90db-4bfb0b3c4a1d
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 241969
     prefix: '237'
     number_min_length: 4
     number_max_length: 100
     uuid: f0005518-5448-4b8f-b324-ac8cf17d3ad4
     country_id: *cm
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *cm_fixed
   - id: 242374
     prefix: '2371'
     number_min_length: 6
@@ -103,113 +106,6 @@ network_prefixes:
     uuid: 7133ff88-8f3f-4c14-bc6e-7fcac8f0ae59
     country_id: *cm
     network_id: *cm_emergency_services
-  - id: 256667
-    prefix: '2378'
-    number_min_length: 6
-    number_max_length: 11
-    uuid: caa0c9e9-e59f-4d96-9661-6d6cdc2ede21
-    country_id: *cm
-    network_id: *cm_value_added_services
-# Mobile Prefixes
-  - id: 245378
-    prefix: '2376'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 253e64ae-b187-4a3a-b2aa-9c314430245b
-    country_id: *cm
-    network_id: *cm_mobile
-  - id: 251245
-    prefix: '237650'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2858bed6-e0ed-4813-b8a7-87647c32271d
-    country_id: *cm
-    network_id: *cm_mtn_mobile
-  - id: 251272
-    prefix: '237651'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6dd2910b-3dda-4fae-8625-9cd41a9a11b6
-    country_id: *cm
-    network_id: *cm_mtn_mobile
-  - id: 251292
-    prefix: '237652'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 54bbdea7-1fae-4baa-b338-ec7ed3add5ea
-    country_id: *cm
-    network_id: *cm_mtn_mobile
-  - id: 251315
-    prefix: '237653'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bbb4ed45-2296-49cf-835b-d12cb1fb580f
-    country_id: *cm
-    network_id: *cm_mtn_mobile
-  - id: 251344
-    prefix: '237654'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 09b741c3-4e2f-40fc-a00f-25fc33ff7145
-    country_id: *cm
-    network_id: *cm_mtn_mobile
-  - id: 251383
-    prefix: '237655'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4a3a3d18-d260-41c7-ab48-130a831d230d
-    country_id: *cm
-    network_id: *cm_orange_mobile
-  - id: 251405
-    prefix: '237656'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 898c2dd7-63d7-4685-8ba5-27e35640d65a
-    country_id: *cm
-    network_id: *cm_orange_mobile
-  - id: 251433
-    prefix: '237657'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6f705281-d5f8-4091-8ff4-74f9964b2838
-    country_id: *cm
-    network_id: *cm_orange_mobile
-  - id: 251503
-    prefix: '237658'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5064961f-c8b9-461d-a996-2e0aba604db7
-    country_id: *cm
-    network_id: *cm_orange_mobile
-  - id: 251521
-    prefix: '237659'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 058f7f5a-ef55-4f96-b80f-06690e7477f8
-    country_id: *cm
-    network_id: *cm_orange_mobile
-  - id: 254287
-    prefix: '23766'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cf2d255a-37cb-4efe-8d43-8114a614ef75
-    country_id: *cm
-    network_id: *cm_nexttel_mobile
-  - id: 254604
-    prefix: '23767'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b2af9931-9152-4ba0-8566-39ffb2d017ed
-    country_id: *cm
-    network_id: *cm_mtn_mobile
-  - id: 254865
-    prefix: '23769'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1552833f-ed8a-4f24-ac1f-0f80e8eb3940
-    country_id: *cm
-    network_id: *cm_orange_mobile
-# Fixed Prefixes
   - id: 247759
     prefix: '237222'
     number_min_length: 12
@@ -693,6 +589,7 @@ network_prefixes:
     uuid: 8c1485f3-ca8d-4f21-8063-14f8a24b49f1
     country_id: *cm
     network_id: *cm_littoral_region_region
+# Supplementary services Prefixes
   - id: 248144
     prefix: '237242'
     number_min_length: 12
@@ -707,3 +604,109 @@ network_prefixes:
     uuid: c70488ce-be97-4d7a-ab2d-51853f21cdb5
     country_id: *cm
     network_id: *cm_littoral_northwest_southwest_and_west_regions_region
+  - id: 245378
+    prefix: '2376'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 253e64ae-b187-4a3a-b2aa-9c314430245b
+    country_id: *cm
+    network_id: *cm_mobile
+# Mobile Prefixes
+  - id: 251245
+    prefix: '237650'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2858bed6-e0ed-4813-b8a7-87647c32271d
+    country_id: *cm
+    network_id: *cm_mtn_mobile
+  - id: 251272
+    prefix: '237651'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6dd2910b-3dda-4fae-8625-9cd41a9a11b6
+    country_id: *cm
+    network_id: *cm_mtn_mobile
+  - id: 251292
+    prefix: '237652'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 54bbdea7-1fae-4baa-b338-ec7ed3add5ea
+    country_id: *cm
+    network_id: *cm_mtn_mobile
+  - id: 251315
+    prefix: '237653'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bbb4ed45-2296-49cf-835b-d12cb1fb580f
+    country_id: *cm
+    network_id: *cm_mtn_mobile
+  - id: 251344
+    prefix: '237654'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 09b741c3-4e2f-40fc-a00f-25fc33ff7145
+    country_id: *cm
+    network_id: *cm_mtn_mobile
+  - id: 251383
+    prefix: '237655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4a3a3d18-d260-41c7-ab48-130a831d230d
+    country_id: *cm
+    network_id: *cm_orange_mobile
+  - id: 251405
+    prefix: '237656'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 898c2dd7-63d7-4685-8ba5-27e35640d65a
+    country_id: *cm
+    network_id: *cm_orange_mobile
+  - id: 251433
+    prefix: '237657'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6f705281-d5f8-4091-8ff4-74f9964b2838
+    country_id: *cm
+    network_id: *cm_orange_mobile
+  - id: 251503
+    prefix: '237658'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5064961f-c8b9-461d-a996-2e0aba604db7
+    country_id: *cm
+    network_id: *cm_orange_mobile
+  - id: 251521
+    prefix: '237659'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 058f7f5a-ef55-4f96-b80f-06690e7477f8
+    country_id: *cm
+    network_id: *cm_orange_mobile
+  - id: 254287
+    prefix: '23766'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cf2d255a-37cb-4efe-8d43-8114a614ef75
+    country_id: *cm
+    network_id: *cm_nexttel_mobile
+  - id: 254604
+    prefix: '23767'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b2af9931-9152-4ba0-8566-39ffb2d017ed
+    country_id: *cm
+    network_id: *cm_mtn_mobile
+  - id: 254865
+    prefix: '23769'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1552833f-ed8a-4f24-ac1f-0f80e8eb3940
+    country_id: *cm
+    network_id: *cm_orange_mobile
+  - id: 256667
+    prefix: '2378'
+    number_min_length: 6
+    number_max_length: 11
+    uuid: caa0c9e9-e59f-4d96-9661-6d6cdc2ede21
+    country_id: *cm
+    network_id: *cm_value_added_services
