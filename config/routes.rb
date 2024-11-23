@@ -141,8 +141,8 @@ Rails.application.routes.draw do
           jsonapi_resources :registrations
           jsonapi_resources :sip_options_probers
 
-          jsonapi_resources :accounting_profiles
-          jsonapi_resources :auth_profiles
+          jsonapi_resources :radius_accounting_profiles
+          jsonapi_resources :radius_auth_profiles
 
           jsonapi_resources :areas
           jsonapi_resources :area_prefixes

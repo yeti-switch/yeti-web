@@ -2,15 +2,15 @@
 
 require 'rspec_api_documentation/dsl'
 
-RSpec.resource 'Accounting profiles' do
+RSpec.resource 'Radius Accounting profiles' do
   include_context :acceptance_admin_user
-  let(:type) { 'accounting-profiles' }
+  let(:type) { 'radius-accounting-profiles' }
 
   required_params = %i[name server port secret timeout attempts]
   optional_params = %i[enable-start-accounting enable-interim-accounting interim-accounting-interval enable-stop-accounting]
 
-  get '/api/rest/admin/accounting-profiles' do
-    jsonapi_filters Api::Rest::Admin::AccountingProfileResource._allowed_filters
+  get '/api/rest/admin/radius-accounting-profiles' do
+    jsonapi_filters Api::Rest::Admin::RadiusAccountingProfileResource._allowed_filters
 
     before { create_list(:accounting_profile, 2) }
 
@@ -19,7 +19,7 @@ RSpec.resource 'Accounting profiles' do
     end
   end
 
-  get '/api/rest/admin/accounting-profiles/:id' do
+  get '/api/rest/admin/radius-accounting-profiles/:id' do
     let(:id) { create(:accounting_profile).id }
 
     example_request 'get specific entry' do
@@ -27,8 +27,8 @@ RSpec.resource 'Accounting profiles' do
     end
   end
 
-  post '/api/rest/admin/accounting-profiles' do
-    parameter :type, 'Resource type (accounting_profiles)', scope: :data, required: true
+  post '/api/rest/admin/radius-accounting-profiles' do
+    parameter :type, 'Resource type (radius-accounting-profiles)', scope: :data, required: true
 
     jsonapi_attributes(required_params, optional_params)
 
@@ -44,8 +44,8 @@ RSpec.resource 'Accounting profiles' do
     end
   end
 
-  put '/api/rest/admin/accounting-profiles/:id' do
-    parameter :type, 'Resource type (accounting_profiles)', scope: :data, required: true
+  put '/api/rest/admin/radius-accounting-profiles/:id' do
+    parameter :type, 'Resource type (radius-accounting-profiles)', scope: :data, required: true
     parameter :id, 'Accounting profile ID', scope: :data, required: true
 
     jsonapi_attributes(required_params, optional_params)
@@ -58,7 +58,7 @@ RSpec.resource 'Accounting profiles' do
     end
   end
 
-  delete '/api/rest/admin/accounting-profiles/:id' do
+  delete '/api/rest/admin/radius-accounting-profiles/:id' do
     let(:id) { create(:accounting_profile).id }
 
     example_request 'delete entry' do

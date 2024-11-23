@@ -2,15 +2,15 @@
 
 require 'rspec_api_documentation/dsl'
 
-RSpec.resource 'Auth profiles' do
+RSpec.resource 'Radius Auth profiles' do
   include_context :acceptance_admin_user
-  let(:type) { 'auth-profiles' }
+  let(:type) { 'radius-auth-profiles' }
 
   required_params = %i[name server port secret timeout attempts]
   optional_params = %i[enable-start-accounting enable-interim-accounting interim-accounting-interval enable-stop-accounting]
 
-  get '/api/rest/admin/auth-profiles' do
-    jsonapi_filters Api::Rest::Admin::AuthProfileResource._allowed_filters
+  get '/api/rest/admin/radius-auth-profiles' do
+    jsonapi_filters Api::Rest::Admin::RadiusAuthProfileResource._allowed_filters
 
     before { create_list(:auth_profile, 2) }
 
@@ -19,7 +19,7 @@ RSpec.resource 'Auth profiles' do
     end
   end
 
-  get '/api/rest/admin/auth-profiles/:id' do
+  get '/api/rest/admin/radius-auth-profiles/:id' do
     let(:id) { create(:auth_profile).id }
 
     example_request 'get specific entry' do
@@ -27,8 +27,8 @@ RSpec.resource 'Auth profiles' do
     end
   end
 
-  post '/api/rest/admin/auth-profiles' do
-    parameter :type, 'Resource type (auth-profiles)', scope: :data, required: true
+  post '/api/rest/admin/radius-auth-profiles' do
+    parameter :type, 'Resource type (radius-auth-profiles)', scope: :data, required: true
 
     jsonapi_attributes(required_params, optional_params)
 
@@ -44,8 +44,8 @@ RSpec.resource 'Auth profiles' do
     end
   end
 
-  put '/api/rest/admin/auth-profiles/:id' do
-    parameter :type, 'Resource type (auth-profiles)', scope: :data, required: true
+  put '/api/rest/admin/radius-auth-profiles/:id' do
+    parameter :type, 'Resource type (radius-auth-profiles)', scope: :data, required: true
     parameter :id, 'Auth profile ID', scope: :data, required: true
 
     jsonapi_attributes(required_params, optional_params)
@@ -58,7 +58,7 @@ RSpec.resource 'Auth profiles' do
     end
   end
 
-  delete '/api/rest/admin/auth-profiles/:id' do
+  delete '/api/rest/admin/radius-auth-profiles/:id' do
     let(:id) { create(:auth_profile).id }
 
     example_request 'delete entry' do
