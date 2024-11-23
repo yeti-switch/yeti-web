@@ -23,9 +23,8 @@ RSpec.describe Api::Rest::Admin::BalanceController, type: :controller do
       it 'should change balance' do
         expect { subject }.to change { account.reload.balance }.from(balance).to(attributes[:balance])
       end
-      it 'should skip audit log' do
-        expect { subject }.not_to change { AuditLogItem.count }
-      end
+
+      include_examples :does_not_create_audit_log
 
       context 'response' do
         before { subject }
