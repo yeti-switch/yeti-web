@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Api::Rest::Admin::AccountingProfilesController, type: :request do
-  include_context :json_api_admin_helpers, type: :'accounting-profiles'
+RSpec.describe Api::Rest::Admin::RadiusAccountingProfilesController, type: :request do
+  include_context :json_api_admin_helpers, type: :'radius-accounting-profiles'
 
-  describe 'GET /api/rest/admin/accounting-profiles' do
+  describe 'GET /api/rest/admin/radius-accounting-profiles' do
     subject do
       get json_api_request_path, params: nil, headers: json_api_request_headers
     end

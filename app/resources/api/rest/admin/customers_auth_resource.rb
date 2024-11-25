@@ -23,8 +23,8 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   has_one :dst_numberlist, class_name: 'Numberlist', always_include_linkage_data: true
   has_one :src_numberlist, class_name: 'Numberlist', always_include_linkage_data: true
   has_one :tag_action, class_name: 'TagAction', always_include_linkage_data: true
-  has_one :radius_auth_profile, class_name: 'AuthProfile', always_include_linkage_data: true
-  has_one :radius_accounting_profile, class_name: 'AccountingProfile', always_include_linkage_data: true
+  has_one :radius_auth_profile, class_name: 'RadiusAuthProfile', always_include_linkage_data: true
+  has_one :radius_accounting_profile, class_name: 'RadiusAccountingProfile', always_include_linkage_data: true
   has_one :transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
 
   filter :name

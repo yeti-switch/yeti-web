@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Rest::Admin::AccountingProfileResource < ::BaseResource
+class Api::Rest::Admin::RadiusAccountingProfileResource < ::BaseResource
   model_name 'Equipment::Radius::AccountingProfile'
 
   attributes :name, :server, :port, :secret, :timeout, :attempts, :enable_start_accounting,
