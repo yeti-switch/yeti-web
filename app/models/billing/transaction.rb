@@ -37,11 +37,11 @@ class Billing::Transaction < ApplicationRecord
   before_create :charge_account
 
   scope :today, lambda {
-    where('created_at >= ? ', Time.now.at_beginning_of_day)
+    where(created_at: ...Time.now.at_beginning_of_day)
   }
 
   scope :yesterday, lambda {
-    where('created_at >= ? and created_at < ?', 1.day.ago.at_beginning_of_day, Time.now.at_beginning_of_day)
+    where(created_at: 1.day.ago.at_beginning_of_day...Time.now.at_beginning_of_day)
   }
 
   def display_name
