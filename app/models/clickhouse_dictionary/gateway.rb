@@ -12,6 +12,9 @@ module ClickhouseDictionary
                :allow_origination,
                :allow_termination,
                :origination_capacity,
-               :termination_capacity
+               :termination_capacity,
+               :asr_limit,
+               :acd_limit,
+               :short_calls_limit
   end
 end
