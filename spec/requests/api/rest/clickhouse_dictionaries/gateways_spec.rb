@@ -22,7 +22,10 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::GatewaysController do
             enabled: record.enabled,
             gateway_group_id: record.gateway_group_id,
             allow_origination: record.allow_origination,
-            allow_termination: record.allow_termination
+            allow_termination: record.allow_termination,
+            asr_limit: record.asr_limit,
+            acd_limit: record.acd_limit,
+            short_calls_limit: record.short_calls_limit
           }
         end
       end
