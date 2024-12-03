@@ -17,11 +17,13 @@ ActiveAdmin.register Billing::Transaction, as: 'Transactions' do
   includes :account, :service
 
   filter :id
-  filter :created_at
+  filter :created_at, as: :date_time_range
   account_filter :account_id_eq
   filter :service_id, label: 'Service ID'
+  filter :service, input_html: { class: 'chosen' }
   filter :amount
   filter :description
+  filter :uuid_equals, label: 'UUID'
 
   scope :today
   scope :yesterday
