@@ -1,6 +1,6 @@
 country_id: &af 1
 networks:
-# Fixed Networks
+# Mobile Networks
   - id: &af_balkh_region 4657
     name: AF Balkh Region
     uuid: 58059b36-092a-4e4a-87bf-0eb68dbc73c8
@@ -21,6 +21,7 @@ networks:
     name: AF Takhar Region
     uuid: 0547d9a7-a53d-4124-9453-4dac8536a973
     type_id: 2
+# Fixed Networks
   - id: &af_samangan_region 7937
     name: AF Samangan Region
     uuid: b7813651-63ff-4802-8a0a-689a993b44dd
@@ -61,6 +62,26 @@ networks:
     name: AF Paktika Region
     uuid: c2dc5106-c043-4ed0-9924-7f2fb5799cf9
     type_id: 2
+  - id: &af_awcc_mobile 14438
+    name: AF Awcc Mobile
+    uuid: 9ae8a70a-4796-405c-9ac4-2de251ac27f8
+    type_id: 3
+  - id: &af_roshan_mobile 16875
+    name: AF Roshan Mobile
+    uuid: f7eea32a-eb64-433b-b990-547d5422a37e
+    type_id: 3
+  - id: &af_etisalat_mobile 17145
+    name: AF Etisalat Mobile
+    uuid: 7d0467c8-0438-41d6-a210-ce6eb8edab20
+    type_id: 3
+  - id: &af_mobifone_salaam_mobile 17619
+    name: AF Mobifone Salaam Mobile
+    uuid: 7d11db94-879f-4de9-ae78-4c5ad5dcab3b
+    type_id: 3
+  - id: &af_mtn_mobile 18164
+    name: AF Mtn Mobile
+    uuid: b7359731-2edc-41fb-9947-bdc83909a55d
+    type_id: 3
   - id: &af_kabul_region 26703
     name: AF Kabul Region
     uuid: e4521184-f168-4f7e-89a0-74d4fea0232e
@@ -137,29 +158,153 @@ networks:
     name: AF Ghowr Region
     uuid: aa5f9cd1-50d7-42bc-aedf-0039c8143315
     type_id: 2
-# Mobile Networks
-  - id: &af_awcc_mobile 14438
-    name: AF Awcc Mobile
-    uuid: 9ae8a70a-4796-405c-9ac4-2de251ac27f8
-    type_id: 3
-  - id: &af_roshan_mobile 16875
-    name: AF Roshan Mobile
-    uuid: f7eea32a-eb64-433b-b990-547d5422a37e
-    type_id: 3
-  - id: &af_etisalat_mobile 17145
-    name: AF Etisalat Mobile
-    uuid: 7d0467c8-0438-41d6-a210-ce6eb8edab20
-    type_id: 3
-  - id: &af_mobifone_salaam_mobile 17619
-    name: AF Mobifone Salaam Mobile
-    uuid: 7d11db94-879f-4de9-ae78-4c5ad5dcab3b
-    type_id: 3
-  - id: &af_mtn_mobile 18164
-    name: AF Mtn Mobile
-    uuid: b7359731-2edc-41fb-9947-bdc83909a55d
-    type_id: 3
+  - id: &af_fixed 43374
+    name: AF Fixed
+    uuid: f6d1ca7c-c982-40f7-b522-afaa740b7d84
+    type_id: 2
 network_prefixes:
+# Mobile Prefixes
+  - id: 241938
+    prefix: '93'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 17050a57-228b-4aca-a07b-9b3aa9b88506
+    country_id: *af
+    network_id: *af_fixed
+  - id: 267130
+    prefix: '9320'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7eeac294-2d05-4a0f-9530-bb8e1c0dfbbc
+    country_id: *af
+    network_id: *af_kabul_region
+  - id: 274221
+    prefix: '9321'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e02f3d1-8eb3-4711-97e1-df92e68a01c7
+    country_id: *af
+    network_id: *af_parwan_region
+  - id: 277984
+    prefix: '9322'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b31bb7d7-287a-4272-ad01-37f3eea4e81f
+    country_id: *af
+    network_id: *af_kapisa_region
+  - id: 286620
+    prefix: '9323'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 18e6a135-d326-4c00-9418-984cdef936af
+    country_id: *af
+    network_id: *af_bamian_region
+  - id: 294313
+    prefix: '9324'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c426c6e4-db05-483e-991d-97ef3ac97684
+    country_id: *af
+    network_id: *af_wardak_region
+  - id: 301961
+    prefix: '9325'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2b3b7571-6636-49cc-94d2-57f02469fef2
+    country_id: *af
+    network_id: *af_logar_region
+  - id: 299790
+    prefix: '9326'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 11027b5c-9367-4e70-8632-6e0f559997e2
+    country_id: *af
+    network_id: *af_dorkondi_region
+  - id: 301419
+    prefix: '9327'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8121a297-2a77-4243-bdc0-8fda8e17a155
+    country_id: *af
+    network_id: *af_khost_region
 # Fixed Prefixes
+  - id: 313352
+    prefix: '9328'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 875a23e0-98a1-45d9-831e-2e9926df8953
+    country_id: *af
+    network_id: *af_panjshar_region
+  - id: 309460
+    prefix: '9330'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 44ebd445-ac41-4670-9efb-814e5a16fcde
+    country_id: *af
+    network_id: *af_kandahar_region
+  - id: 321157
+    prefix: '9331'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2259512f-9538-45ed-9624-91c1ea559b1f
+    country_id: *af
+    network_id: *af_ghazni_region
+  - id: 327263
+    prefix: '9332'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 292baacb-49b7-458d-9026-fee072dd8b1c
+    country_id: *af
+    network_id: *af_uruzgan_region
+  - id: 337267
+    prefix: '9333'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7289b869-6d90-4ccb-90dc-352e8929162d
+    country_id: *af
+    network_id: *af_zabol_region
+  - id: 340461
+    prefix: '9334'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ec788a5-f304-48a8-a420-fc1c1af2d4cf
+    country_id: *af
+    network_id: *af_helmand_region
+  - id: 349884
+    prefix: '9340'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c9169d3d-f97e-463a-b946-128a9def3556
+    country_id: *af
+    network_id: *af_heart_region
+  - id: 371909
+    prefix: '9341'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f3fa63d5-0f0c-4604-96da-5006aa367db1
+    country_id: *af
+    network_id: *af_badghis_region
+  - id: 377169
+    prefix: '9342'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1802340f-d98d-4b55-bd1e-738a08620f35
+    country_id: *af
+    network_id: *af_ghowr_region
+  - id: 367928
+    prefix: '9343'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 315a73be-78ce-4898-ae55-503f628ce525
+    country_id: *af
+    network_id: *af_farah_region
+  - id: 370174
+    prefix: '9344'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7c65738d-66a5-4c89-a67f-0300ec40e522
+    country_id: *af
+    network_id: *af_nimroz_region
   - id: 54911
     prefix: '9350'
     number_min_length: 11
@@ -181,13 +326,6 @@ network_prefixes:
     uuid: 5d1cf48d-1d55-4399-9b43-64d574253a60
     country_id: *af
     network_id: *af_badkhshan_region
-  - id: 73189
-    prefix: '9354'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 64b499bd-feda-47b7-8d5c-ac34978cb79d
-    country_id: *af
-    network_id: *af_jowzjan_region
   - id: 76532
     prefix: '9353'
     number_min_length: 11
@@ -195,6 +333,13 @@ network_prefixes:
     uuid: 3761782a-5e79-48d5-8fb4-5ee34132ab62
     country_id: *af
     network_id: *af_takhar_region
+  - id: 73189
+    prefix: '9354'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 64b499bd-feda-47b7-8d5c-ac34978cb79d
+    country_id: *af
+    network_id: *af_jowzjan_region
   - id: 78105
     prefix: '9355'
     number_min_length: 11
@@ -265,140 +410,6 @@ network_prefixes:
     uuid: 85c454f1-9771-4715-a2c9-c54d530b024b
     country_id: *af
     network_id: *af_paktika_region
-  - id: 267130
-    prefix: '9320'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7eeac294-2d05-4a0f-9530-bb8e1c0dfbbc
-    country_id: *af
-    network_id: *af_kabul_region
-  - id: 274221
-    prefix: '9321'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2e02f3d1-8eb3-4711-97e1-df92e68a01c7
-    country_id: *af
-    network_id: *af_parwan_region
-  - id: 277984
-    prefix: '9322'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b31bb7d7-287a-4272-ad01-37f3eea4e81f
-    country_id: *af
-    network_id: *af_kapisa_region
-  - id: 286620
-    prefix: '9323'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 18e6a135-d326-4c00-9418-984cdef936af
-    country_id: *af
-    network_id: *af_bamian_region
-  - id: 294313
-    prefix: '9324'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c426c6e4-db05-483e-991d-97ef3ac97684
-    country_id: *af
-    network_id: *af_wardak_region
-  - id: 299790
-    prefix: '9326'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 11027b5c-9367-4e70-8632-6e0f559997e2
-    country_id: *af
-    network_id: *af_dorkondi_region
-  - id: 301419
-    prefix: '9327'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8121a297-2a77-4243-bdc0-8fda8e17a155
-    country_id: *af
-    network_id: *af_khost_region
-  - id: 301961
-    prefix: '9325'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2b3b7571-6636-49cc-94d2-57f02469fef2
-    country_id: *af
-    network_id: *af_logar_region
-  - id: 309460
-    prefix: '9330'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 44ebd445-ac41-4670-9efb-814e5a16fcde
-    country_id: *af
-    network_id: *af_kandahar_region
-  - id: 313352
-    prefix: '9328'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 875a23e0-98a1-45d9-831e-2e9926df8953
-    country_id: *af
-    network_id: *af_panjshar_region
-  - id: 321157
-    prefix: '9331'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2259512f-9538-45ed-9624-91c1ea559b1f
-    country_id: *af
-    network_id: *af_ghazni_region
-  - id: 327263
-    prefix: '9332'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 292baacb-49b7-458d-9026-fee072dd8b1c
-    country_id: *af
-    network_id: *af_uruzgan_region
-  - id: 337267
-    prefix: '9333'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7289b869-6d90-4ccb-90dc-352e8929162d
-    country_id: *af
-    network_id: *af_zabol_region
-  - id: 340461
-    prefix: '9334'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6ec788a5-f304-48a8-a420-fc1c1af2d4cf
-    country_id: *af
-    network_id: *af_helmand_region
-  - id: 349884
-    prefix: '9340'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c9169d3d-f97e-463a-b946-128a9def3556
-    country_id: *af
-    network_id: *af_heart_region
-  - id: 367928
-    prefix: '9343'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 315a73be-78ce-4898-ae55-503f628ce525
-    country_id: *af
-    network_id: *af_farah_region
-  - id: 370174
-    prefix: '9344'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7c65738d-66a5-4c89-a67f-0300ec40e522
-    country_id: *af
-    network_id: *af_nimroz_region
-  - id: 371909
-    prefix: '9341'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f3fa63d5-0f0c-4604-96da-5006aa367db1
-    country_id: *af
-    network_id: *af_badghis_region
-  - id: 377169
-    prefix: '9342'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1802340f-d98d-4b55-bd1e-738a08620f35
-    country_id: *af
-    network_id: *af_ghowr_region
-# Mobile Prefixes
   - id: 150227
     prefix: '9370'
     number_min_length: 11
@@ -462,11 +473,3 @@ network_prefixes:
     uuid: 583e244e-e65f-4f06-be23-9c02ca29ef13
     country_id: *af
     network_id: *af_roshan_mobile
-# Country code Prefixes
-  - id: 241938
-    prefix: '93'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 17050a57-228b-4aca-a07b-9b3aa9b88506
-    country_id: *af
-    network_id: null

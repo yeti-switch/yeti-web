@@ -21,19 +21,27 @@ networks:
     name: KG Saima Mobile
     uuid: bb8d576f-051a-4819-b6cc-02e0219b55d4
     type_id: 3
-  - id: &kg_citysoft_mobile 12372
-    name: KG Citysoft Mobile
-    uuid: 03d0788c-a325-4511-a563-b4fa809ee932
-    type_id: 3
-  - id: &kg_kt_mobile_mobile 41892
-    name: KG Kt Mobile Mobile
-    uuid: 8aeed3b1-d163-4446-a3c2-e7ff52187d20
-    type_id: 3
-# Fixed Networks
   - id: &kg_fixed 12197
     name: KG Fixed
     uuid: ec7cf719-b567-46b6-a5c7-51d33a0e0d32
     type_id: 2
+  - id: &kg_citysoft_mobile 12372
+    name: KG Citysoft Mobile
+    uuid: 03d0788c-a325-4511-a563-b4fa809ee932
+    type_id: 3
+# Supplementary services Networks
+  - id: &kg_national_long_distance_operators 21550
+    name: KG National Long Distance Operators
+    uuid: cae02b86-6c3e-430b-8174-8c11838e21c2
+    type_id: 13
+  - id: &kg_international_operator_center 22806
+    name: KG International Operator Center
+    uuid: 7247eafa-b222-4aee-9eb3-72ee5f8cb00c
+    type_id: 13
+  - id: &kg_home_country_direct 23846
+    name: KG Home Country Direct
+    uuid: 36e0200a-404c-4b8e-84d9-16bace5ceb1f
+    type_id: 13
   - id: &kg_bishkek_region 31788
     name: KG Bishkek Region
     uuid: 77842a2e-5434-4b72-9ac8-ed856a87fdc5
@@ -66,6 +74,7 @@ networks:
     name: KG Kara Kulja Region
     uuid: 380253ef-7821-4cfa-a09b-d70e5d8ecae7
     type_id: 2
+# Fixed Networks
   - id: &kg_belovodskoe_region 32197
     name: KG Belovodskoe Region
     uuid: 8918e5bb-5877-46d5-bacd-0ad8fdf3d816
@@ -266,19 +275,6 @@ networks:
     name: KG Ak Suu Region
     uuid: fb50b49a-d09e-4809-bcee-ac63f799da8c
     type_id: 2
-# Supplementary services Networks
-  - id: &kg_national_long_distance_operators 21550
-    name: KG National Long Distance Operators
-    uuid: cae02b86-6c3e-430b-8174-8c11838e21c2
-    type_id: 13
-  - id: &kg_international_operator_center 22806
-    name: KG International Operator Center
-    uuid: 7247eafa-b222-4aee-9eb3-72ee5f8cb00c
-    type_id: 13
-  - id: &kg_home_country_direct 23846
-    name: KG Home Country Direct
-    uuid: 36e0200a-404c-4b8e-84d9-16bace5ceb1f
-    type_id: 13
   - id: &kg_freephone_services 38501
     name: KG Freephone Services
     uuid: 4ef0912a-1db0-411c-9e5b-567911fe2156
@@ -311,183 +307,33 @@ networks:
     name: KG Financial Information
     uuid: d82cb402-2a77-4fa3-8087-37fddc531a12
     type_id: 13
+  - id: &kg_kt_mobile_mobile 41892
+    name: KG Kt Mobile Mobile
+    uuid: 8aeed3b1-d163-4446-a3c2-e7ff52187d20
+    type_id: 3
 network_prefixes:
 # Mobile Prefixes
-  - id: 54943
-    prefix: '996500'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d1e47032-c8b9-413a-b3eb-86cce1fac289
+  - id: 242029
+    prefix: '996'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 2a28832f-5615-4e98-a792-626c276b7154
     country_id: *kg
-    network_id: *kg_o_mobile
-  - id: 55001
-    prefix: '996501'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 100610e6-da8d-4faf-bf53-8c5e35756863
+    network_id: *kg_fixed
+  - id: 242568
+    prefix: '996107'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: a908da2b-db09-46d5-ae58-9a595915f9b2
     country_id: *kg
-    network_id: *kg_o_mobile
-  - id: 55607
-    prefix: '996502'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 376afb2e-c745-4cc0-80e0-7c17fb1ecb8f
+    network_id: *kg_national_long_distance_operators
+  - id: 247645
+    prefix: '996211'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 039b8f66-8989-489f-aad6-300debb1eabc
     country_id: *kg
-    network_id: *kg_o_mobile
-  - id: 55872
-    prefix: '996504'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 12682f48-bfed-4e07-acba-1bed62b92d03
-    country_id: *kg
-    network_id: *kg_sem_mobile_mobile
-  - id: 60062
-    prefix: '996503'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 21db43ec-b7a5-4df9-81bd-4153e8ec5bb8
-    country_id: *kg
-    network_id: *kg_sem_mobile_mobile
-  - id: 61668
-    prefix: '996507'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: eea89d91-eae0-40a0-b11e-c5c04416adab
-    country_id: *kg
-    network_id: *kg_o_mobile
-  - id: 66080
-    prefix: '996505'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2346cab4-9206-4750-ab8f-ab0c16116645
-    country_id: *kg
-    network_id: *kg_o_mobile
-  - id: 66834
-    prefix: '996508'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 45c6183f-41d0-4f3e-a11a-d303b4bbd5c6
-    country_id: *kg
-    network_id: *kg_o_mobile
-  - id: 67581
-    prefix: '996509'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d6cde93b-470d-4309-9f33-34b4ae3dcb46
-    country_id: *kg
-    network_id: *kg_o_mobile
-  - id: 87902
-    prefix: '99655'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5d143f89-b835-4c13-9113-78e675c6f537
-    country_id: *kg
-    network_id: *kg_megacom_mobile
-  - id: 95263
-    prefix: '996600'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 740ffa01-35c1-4e23-b133-761228069b1d
-    country_id: *kg
-    network_id: *kg_beeline_mobile
-  - id: 100130
-    prefix: '99661190'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b113e8f9-2ea7-4c48-9890-c9f64c4ef6c1
-    country_id: *kg
-    network_id: *kg_saima_mobile
-  - id: 101099
-    prefix: '9966126'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9191d851-bb7c-4d79-9ebb-aa92261eb2fd
-    country_id: *kg
-    network_id: *kg_saima_mobile
-  - id: 115624
-    prefix: '9966232'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 63ee9f05-a339-427b-968a-b4632e8f4590
-    country_id: *kg
-    network_id: *kg_citysoft_mobile
-  - id: 115733
-    prefix: '9966233'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 488e9b90-ba53-4615-bce7-683da6a8fe2a
-    country_id: *kg
-    network_id: *kg_citysoft_mobile
-  - id: 115783
-    prefix: '9966234'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7b346521-6846-4f82-a57a-b375b2ac299f
-    country_id: *kg
-    network_id: *kg_citysoft_mobile
-  - id: 163976
-    prefix: '99670'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 486e9009-a20b-41bd-927e-aa8282063438
-    country_id: *kg
-    network_id: *kg_o_mobile
-  - id: 179944
-    prefix: '996755'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4ef1b62c-2d18-447f-806f-1d09d4913246
-    country_id: *kg
-    network_id: *kg_megacom_mobile
-  - id: 198386
-    prefix: '99677'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 79096a91-e9c9-4ea3-b749-3315925b5715
-    country_id: *kg
-    network_id: *kg_beeline_mobile
-  - id: 239779
-    prefix: '996990'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b5922cfb-2e3e-4cf0-89ca-48716f321dba
-    country_id: *kg
-    network_id: *kg_megacom_mobile
-  - id: 241083
-    prefix: '996995'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 48c7d3c7-455e-4b16-ab7b-1b7775e601fc
-    country_id: *kg
-    network_id: *kg_megacom_mobile
-  - id: 241140
-    prefix: '996996'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 49b906af-48bd-4ba0-9828-b8986a9fe398
-    country_id: *kg
-    network_id: *kg_beeline_mobile
-  - id: 241370
-    prefix: '996997'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 93df7a43-0e60-4037-93c7-a49de1eb27b3
-    country_id: *kg
-    network_id: *kg_megacom_mobile
-  - id: 245882
-    prefix: '996998'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ff7f0441-b8da-4c20-8b2e-483bbcb632b3
-    country_id: *kg
-    network_id: *kg_megacom_mobile
-  - id: 246798
-    prefix: '996999'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: da9fe09f-4793-427c-8ae3-3af4c6819668
-    country_id: *kg
-    network_id: *kg_megacom_mobile
+    network_id: *kg_international_operator_center
   - id: 286619
     prefix: '99622'
     number_min_length: 12
@@ -495,49 +341,6 @@ network_prefixes:
     uuid: 816913a0-2be7-4977-93c2-cdb6cad28a16
     country_id: *kg
     network_id: *kg_beeline_mobile
-  - id: 451247
-    prefix: '996880'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a4212769-7820-4589-846b-cf2c1e709d12
-    country_id: *kg
-    network_id: *kg_kt_mobile_mobile
-  - id: 451250
-    prefix: '9968801'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d4c2a6d4-2600-4bc7-9276-44efb665616c
-    country_id: *kg
-    network_id: *kg_megacom_mobile
-  - id: 451370
-    prefix: '996887'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 859802f4-a890-4132-a2e1-65afba0010f8
-    country_id: *kg
-    network_id: *kg_kt_mobile_mobile
-  - id: 451383
-    prefix: '996888'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3f80c884-5c90-481b-ab6e-0067d13db74f
-    country_id: *kg
-    network_id: *kg_kt_mobile_mobile
-  - id: 451390
-    prefix: '996889'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b2e898a5-df92-4554-9e58-3ae279d88240
-    country_id: *kg
-    network_id: *kg_kt_mobile_mobile
-# Fixed Prefixes
-  - id: 113228
-    prefix: '996622'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2135e01f-d021-4f8d-b49b-9acff396387d
-    country_id: *kg
-    network_id: *kg_fixed
   - id: 321799
     prefix: '996312'
     number_min_length: 12
@@ -545,62 +348,6 @@ network_prefixes:
     uuid: de338949-39d5-4729-afd2-7db53957f134
     country_id: *kg
     network_id: *kg_bishkek_region
-  - id: 325884
-    prefix: '996315'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 59f534da-418d-4c34-a334-8d7c3378d8aa
-    country_id: *kg
-    network_id: *kg_bishkek_region
-  - id: 328999
-    prefix: '9963230'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bf865b05-7568-4ed5-a968-b2f27e28e525
-    country_id: *kg
-    network_id: *kg_eski_nookat_region
-  - id: 329000
-    prefix: '9963231'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 87322a49-171f-4f6f-86a4-2ee08d3912bf
-    country_id: *kg
-    network_id: *kg_aravan_region
-  - id: 329001
-    prefix: '9963232'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 822e9d24-74e9-46f5-a8a7-648e07551ed1
-    country_id: *kg
-    network_id: *kg_kara_suu_region
-  - id: 329002
-    prefix: '9963233'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 93cc3663-482e-4765-a3df-ca264beba768
-    country_id: *kg
-    network_id: *kg_uzgen_region
-  - id: 329003
-    prefix: '9963234'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c59aafe0-372c-4cb6-89eb-4e8c570b121d
-    country_id: *kg
-    network_id: *kg_gulcha_region
-  - id: 329004
-    prefix: '9963237'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 172be37e-d9ff-4935-8603-1f9fc8a3cb06
-    country_id: *kg
-    network_id: *kg_daroot_korgon_region
-  - id: 329005
-    prefix: '9963239'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8e8d04ef-678b-410c-bc8d-c956fa4954b7
-    country_id: *kg
-    network_id: *kg_kara_kulja_region
   - id: 332483
     prefix: '9963131'
     number_min_length: 12
@@ -657,6 +404,13 @@ network_prefixes:
     uuid: ae23f570-f0f5-487d-a535-953209d59e08
     country_id: *kg
     network_id: *kg_lebedinovka_region
+  - id: 325884
+    prefix: '996315'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 59f534da-418d-4c34-a334-8d7c3378d8aa
+    country_id: *kg
+    network_id: *kg_bishkek_region
   - id: 333724
     prefix: '996316'
     number_min_length: 12
@@ -671,6 +425,55 @@ network_prefixes:
     uuid: 72351f8b-0d98-41e4-aa43-402d765aadb8
     country_id: *kg
     network_id: *kg_osh_region
+  - id: 328999
+    prefix: '9963230'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bf865b05-7568-4ed5-a968-b2f27e28e525
+    country_id: *kg
+    network_id: *kg_eski_nookat_region
+  - id: 329000
+    prefix: '9963231'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 87322a49-171f-4f6f-86a4-2ee08d3912bf
+    country_id: *kg
+    network_id: *kg_aravan_region
+  - id: 329001
+    prefix: '9963232'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 822e9d24-74e9-46f5-a8a7-648e07551ed1
+    country_id: *kg
+    network_id: *kg_kara_suu_region
+  - id: 329002
+    prefix: '9963233'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 93cc3663-482e-4765-a3df-ca264beba768
+    country_id: *kg
+    network_id: *kg_uzgen_region
+  - id: 329003
+    prefix: '9963234'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c59aafe0-372c-4cb6-89eb-4e8c570b121d
+    country_id: *kg
+    network_id: *kg_gulcha_region
+  - id: 329004
+    prefix: '9963237'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 172be37e-d9ff-4935-8603-1f9fc8a3cb06
+    country_id: *kg
+    network_id: *kg_daroot_korgon_region
+  - id: 329005
+    prefix: '9963239'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8e8d04ef-678b-410c-bc8d-c956fa4954b7
+    country_id: *kg
+    network_id: *kg_kara_kulja_region
   - id: 341453
     prefix: '9963422'
     number_min_length: 12
@@ -713,6 +516,42 @@ network_prefixes:
     uuid: a6c0fc44-f7b3-4d6f-b9a1-8fa7108bf531
     country_id: *kg
     network_id: *kg_talas_region_region
+  - id: 353277
+    prefix: '9963522'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8ef234e3-fb6e-4685-8c2c-91b3da770bb8
+    country_id: *kg
+    network_id: *kg_naryn_region
+  - id: 353721
+    prefix: '9963534'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7a351a8e-9c5b-42a0-97d0-fc2ded7e642d
+    country_id: *kg
+    network_id: *kg_at_bashy_region
+# Supplementary services Prefixes
+  - id: 353727
+    prefix: '9963535'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d6db7e64-be8d-45c7-812e-ec3ef1ad5b62
+    country_id: *kg
+    network_id: *kg_kochkor_region
+  - id: 353729
+    prefix: '9963536'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c57d4ff2-d7bc-4de8-b4ca-8b95ee166514
+    country_id: *kg
+    network_id: *kg_chaek_minkush_region
+  - id: 353739
+    prefix: '9963537'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6c0b8f73-2800-4bb3-b1bf-2d60fc29e174
+    country_id: *kg
+    network_id: *kg_baetov_region
   - id: 345621
     prefix: '996356'
     number_min_length: 12
@@ -720,6 +559,77 @@ network_prefixes:
     uuid: 67f958a8-a4f0-41c5-805f-f2fdc2488e64
     country_id: *kg
     network_id: *kg_naryn_region_region
+  - id: 354552
+    prefix: '9963622'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dfb14788-c64e-4f87-8905-675447d32ece
+    country_id: *kg
+    network_id: *kg_batken_region
+  - id: 355383
+    prefix: '9963653'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cd2f8ab3-2e0f-4a12-8673-9afdfa6b357b
+    country_id: *kg
+    network_id: *kg_sulukta_region
+  - id: 355388
+    prefix: '9963655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d84c56e0-e05c-43de-8682-7814f6f0be00
+    country_id: *kg
+    network_id: *kg_pulgon_region
+  - id: 355391
+    prefix: '9963656'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a796462-3c60-42cc-8ddc-dea82a7af922
+    country_id: *kg
+    network_id: *kg_isfana_region
+  - id: 355394
+    prefix: '9963657'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1c9059d0-2a01-4441-a750-c0f6f9c06460
+    country_id: *kg
+    network_id: *kg_kyzylkia_region
+  - id: 355401
+    prefix: '996366'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0d0c74a2-4561-40a4-a23f-bff73c743e0e
+    country_id: *kg
+    network_id: *kg_batken_region_region
+# Fixed Prefixes
+  - id: 356198
+    prefix: '9963722'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ca8887b1-66d1-4d88-9f6b-4ee024c5c5f7
+    country_id: *kg
+    network_id: *kg_jalal_abat_region
+  - id: 356358
+    prefix: '9963734'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 943c2419-80b2-4d83-907e-f4013c3ad746
+    country_id: *kg
+    network_id: *kg_kochkor_ata_massy_region
+  - id: 356370
+    prefix: '9963736'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1aa4ee92-8cb9-4351-bc19-4a002b9a7aac
+    country_id: *kg
+    network_id: *kg_bazarkorgon_region
+  - id: 356382
+    prefix: '9963738'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b85f8771-1786-4183-a122-533e8e3fb82d
+    country_id: *kg
+    network_id: *kg_kazarman_region
   - id: 346815
     prefix: '9963741'
     number_min_length: 12
@@ -790,118 +700,6 @@ network_prefixes:
     uuid: 2368b04e-05d2-4758-93bd-55f4d0b94a1e
     country_id: *kg
     network_id: *kg_jalal_abat_region_region
-  - id: 349297
-    prefix: '996396'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 104ade4b-96be-4774-8c71-6a34f4416cf3
-    country_id: *kg
-    network_id: *kg_issyk_kol_region_region
-  - id: 353277
-    prefix: '9963522'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8ef234e3-fb6e-4685-8c2c-91b3da770bb8
-    country_id: *kg
-    network_id: *kg_naryn_region
-  - id: 353721
-    prefix: '9963534'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7a351a8e-9c5b-42a0-97d0-fc2ded7e642d
-    country_id: *kg
-    network_id: *kg_at_bashy_region
-  - id: 353727
-    prefix: '9963535'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d6db7e64-be8d-45c7-812e-ec3ef1ad5b62
-    country_id: *kg
-    network_id: *kg_kochkor_region
-  - id: 353729
-    prefix: '9963536'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c57d4ff2-d7bc-4de8-b4ca-8b95ee166514
-    country_id: *kg
-    network_id: *kg_chaek_minkush_region
-  - id: 353739
-    prefix: '9963537'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6c0b8f73-2800-4bb3-b1bf-2d60fc29e174
-    country_id: *kg
-    network_id: *kg_baetov_region
-  - id: 354552
-    prefix: '9963622'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dfb14788-c64e-4f87-8905-675447d32ece
-    country_id: *kg
-    network_id: *kg_batken_region
-  - id: 355383
-    prefix: '9963653'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cd2f8ab3-2e0f-4a12-8673-9afdfa6b357b
-    country_id: *kg
-    network_id: *kg_sulukta_region
-  - id: 355388
-    prefix: '9963655'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d84c56e0-e05c-43de-8682-7814f6f0be00
-    country_id: *kg
-    network_id: *kg_pulgon_region
-  - id: 355391
-    prefix: '9963656'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5a796462-3c60-42cc-8ddc-dea82a7af922
-    country_id: *kg
-    network_id: *kg_isfana_region
-  - id: 355394
-    prefix: '9963657'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1c9059d0-2a01-4441-a750-c0f6f9c06460
-    country_id: *kg
-    network_id: *kg_kyzylkia_region
-  - id: 355401
-    prefix: '996366'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0d0c74a2-4561-40a4-a23f-bff73c743e0e
-    country_id: *kg
-    network_id: *kg_batken_region_region
-  - id: 356198
-    prefix: '9963722'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ca8887b1-66d1-4d88-9f6b-4ee024c5c5f7
-    country_id: *kg
-    network_id: *kg_jalal_abat_region
-  - id: 356358
-    prefix: '9963734'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 943c2419-80b2-4d83-907e-f4013c3ad746
-    country_id: *kg
-    network_id: *kg_kochkor_ata_massy_region
-  - id: 356370
-    prefix: '9963736'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1aa4ee92-8cb9-4351-bc19-4a002b9a7aac
-    country_id: *kg
-    network_id: *kg_bazarkorgon_region
-  - id: 356382
-    prefix: '9963738'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b85f8771-1786-4183-a122-533e8e3fb82d
-    country_id: *kg
-    network_id: *kg_kazarman_region
   - id: 358242
     prefix: '9963922'
     number_min_length: 12
@@ -958,36 +756,153 @@ network_prefixes:
     uuid: fb65794e-4215-4731-a48f-6f5801ae34a2
     country_id: *kg
     network_id: *kg_ak_suu_region
-# Country code Prefixes
-  - id: 242029
-    prefix: '996'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 2a28832f-5615-4e98-a792-626c276b7154
+  - id: 349297
+    prefix: '996396'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 104ade4b-96be-4774-8c71-6a34f4416cf3
     country_id: *kg
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242568
-    prefix: '996107'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: a908da2b-db09-46d5-ae58-9a595915f9b2
+    network_id: *kg_issyk_kol_region_region
+  - id: 54943
+    prefix: '996500'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1e47032-c8b9-413a-b3eb-86cce1fac289
     country_id: *kg
-    network_id: *kg_national_long_distance_operators
-  - id: 247645
-    prefix: '996211'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 039b8f66-8989-489f-aad6-300debb1eabc
+    network_id: *kg_o_mobile
+  - id: 55001
+    prefix: '996501'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 100610e6-da8d-4faf-bf53-8c5e35756863
     country_id: *kg
-    network_id: *kg_international_operator_center
-  - id: 253159
-    prefix: '996800'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 23d5b658-e21f-4afa-9d3e-3de1ce8f9a1d
+    network_id: *kg_o_mobile
+  - id: 55607
+    prefix: '996502'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 376afb2e-c745-4cc0-80e0-7c17fb1ecb8f
     country_id: *kg
-    network_id: *kg_home_country_direct
+    network_id: *kg_o_mobile
+  - id: 60062
+    prefix: '996503'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 21db43ec-b7a5-4df9-81bd-4153e8ec5bb8
+    country_id: *kg
+    network_id: *kg_sem_mobile_mobile
+  - id: 55872
+    prefix: '996504'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 12682f48-bfed-4e07-acba-1bed62b92d03
+    country_id: *kg
+    network_id: *kg_sem_mobile_mobile
+  - id: 66080
+    prefix: '996505'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2346cab4-9206-4750-ab8f-ab0c16116645
+    country_id: *kg
+    network_id: *kg_o_mobile
+  - id: 61668
+    prefix: '996507'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: eea89d91-eae0-40a0-b11e-c5c04416adab
+    country_id: *kg
+    network_id: *kg_o_mobile
+  - id: 66834
+    prefix: '996508'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 45c6183f-41d0-4f3e-a11a-d303b4bbd5c6
+    country_id: *kg
+    network_id: *kg_o_mobile
+  - id: 67581
+    prefix: '996509'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d6cde93b-470d-4309-9f33-34b4ae3dcb46
+    country_id: *kg
+    network_id: *kg_o_mobile
+  - id: 87902
+    prefix: '99655'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5d143f89-b835-4c13-9113-78e675c6f537
+    country_id: *kg
+    network_id: *kg_megacom_mobile
+  - id: 95263
+    prefix: '996600'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 740ffa01-35c1-4e23-b133-761228069b1d
+    country_id: *kg
+    network_id: *kg_beeline_mobile
+  - id: 100130
+    prefix: '99661190'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b113e8f9-2ea7-4c48-9890-c9f64c4ef6c1
+    country_id: *kg
+    network_id: *kg_saima_mobile
+  - id: 101099
+    prefix: '9966126'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9191d851-bb7c-4d79-9ebb-aa92261eb2fd
+    country_id: *kg
+    network_id: *kg_saima_mobile
+  - id: 113228
+    prefix: '996622'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2135e01f-d021-4f8d-b49b-9acff396387d
+    country_id: *kg
+    network_id: *kg_fixed
+  - id: 115624
+    prefix: '9966232'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 63ee9f05-a339-427b-968a-b4632e8f4590
+    country_id: *kg
+    network_id: *kg_citysoft_mobile
+  - id: 115733
+    prefix: '9966233'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 488e9b90-ba53-4615-bce7-683da6a8fe2a
+    country_id: *kg
+    network_id: *kg_citysoft_mobile
+  - id: 115783
+    prefix: '9966234'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7b346521-6846-4f82-a57a-b375b2ac299f
+    country_id: *kg
+    network_id: *kg_citysoft_mobile
+  - id: 163976
+    prefix: '99670'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 486e9009-a20b-41bd-927e-aa8282063438
+    country_id: *kg
+    network_id: *kg_o_mobile
+  - id: 179944
+    prefix: '996755'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4ef1b62c-2d18-447f-806f-1d09d4913246
+    country_id: *kg
+    network_id: *kg_megacom_mobile
+  - id: 198386
+    prefix: '99677'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 79096a91-e9c9-4ea3-b749-3315925b5715
+    country_id: *kg
+    network_id: *kg_beeline_mobile
   - id: 403477
     prefix: '996800'
     number_min_length: 12
@@ -995,6 +910,13 @@ network_prefixes:
     uuid: 4a865a1a-f5e4-4a2d-a1d4-e69a38463b26
     country_id: *kg
     network_id: *kg_freephone_services
+  - id: 253159
+    prefix: '996800'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 23d5b658-e21f-4afa-9d3e-3de1ce8f9a1d
+    country_id: *kg
+    network_id: *kg_home_country_direct
   - id: 404890
     prefix: '996803'
     number_min_length: 12
@@ -1044,3 +966,80 @@ network_prefixes:
     uuid: 0f32e535-43b5-42d8-be27-7915f571f02b
     country_id: *kg
     network_id: *kg_financial_information
+  - id: 451247
+    prefix: '996880'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a4212769-7820-4589-846b-cf2c1e709d12
+    country_id: *kg
+    network_id: *kg_kt_mobile_mobile
+  - id: 451250
+    prefix: '9968801'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d4c2a6d4-2600-4bc7-9276-44efb665616c
+    country_id: *kg
+    network_id: *kg_megacom_mobile
+  - id: 451370
+    prefix: '996887'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 859802f4-a890-4132-a2e1-65afba0010f8
+    country_id: *kg
+    network_id: *kg_kt_mobile_mobile
+  - id: 451383
+    prefix: '996888'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3f80c884-5c90-481b-ab6e-0067d13db74f
+    country_id: *kg
+    network_id: *kg_kt_mobile_mobile
+  - id: 451390
+    prefix: '996889'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b2e898a5-df92-4554-9e58-3ae279d88240
+    country_id: *kg
+    network_id: *kg_kt_mobile_mobile
+  - id: 239779
+    prefix: '996990'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b5922cfb-2e3e-4cf0-89ca-48716f321dba
+    country_id: *kg
+    network_id: *kg_megacom_mobile
+  - id: 241083
+    prefix: '996995'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 48c7d3c7-455e-4b16-ab7b-1b7775e601fc
+    country_id: *kg
+    network_id: *kg_megacom_mobile
+  - id: 241140
+    prefix: '996996'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 49b906af-48bd-4ba0-9828-b8986a9fe398
+    country_id: *kg
+    network_id: *kg_beeline_mobile
+  - id: 241370
+    prefix: '996997'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 93df7a43-0e60-4037-93c7-a49de1eb27b3
+    country_id: *kg
+    network_id: *kg_megacom_mobile
+  - id: 245882
+    prefix: '996998'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ff7f0441-b8da-4c20-8b2e-483bbcb632b3
+    country_id: *kg
+    network_id: *kg_megacom_mobile
+  - id: 246798
+    prefix: '996999'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: da9fe09f-4793-427c-8ae3-3af4c6819668
+    country_id: *kg
+    network_id: *kg_megacom_mobile

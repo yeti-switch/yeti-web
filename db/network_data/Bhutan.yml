@@ -93,6 +93,10 @@ networks:
     name: BT Nganglam Region
     uuid: 85ab1ea0-81d0-4e88-a773-330fa4c05a5d
     type_id: 2
+  - id: &bt_tashicell_mobile 18497
+    name: BT Tashicell Mobile
+    uuid: 8557d149-740a-485b-82e5-78f2df7bd46a
+    type_id: 3
   - id: &bt_chapcha_haa_paro_tsimasham_wangkha_region 19783
     name: BT Chapcha Haa Paro Tsimasham Wangkha Region
     uuid: 888ae5fe-6d08-4610-9c88-a80b4643dd8b
@@ -113,6 +117,14 @@ networks:
     name: BT Haa Region
     uuid: 19bffe0c-d7ad-465b-afe8-dc56e416caec
     type_id: 2
+  - id: &bt_special_services 21373
+    name: BT Special Services
+    uuid: 26ca63a0-bacc-4bca-902c-30cb8e905a44
+    type_id: 13
+  - id: &bt_b_mobile_mobile 25685
+    name: BT B Mobile Mobile
+    uuid: 96103ab9-5509-4c23-80da-b71ba02b8939
+    type_id: 3
   - id: &bt_gasa_punakha_thimphu_wangduephodrang_region 25837
     name: BT Gasa Punakha Thimphu Wangduephodrang Region
     uuid: 9d4962d6-9e35-4563-80ab-c8b724996dd9
@@ -249,6 +261,7 @@ networks:
     name: BT Mongar Region
     uuid: ab27e1ca-ff77-443e-b39d-615985e4f9df
     type_id: 2
+# Mobile Networks
   - id: &bt_gelpoyshing_region 34305
     name: BT Gelpoyshing Region
     uuid: 0093ee20-b08d-4d8d-bcc8-adf7e46bf59e
@@ -257,582 +270,41 @@ networks:
     name: BT Trashiyangtse Region
     uuid: 00f468fc-d6e9-4257-82a5-5532aa507fb9
     type_id: 2
-# Mobile Networks
-  - id: &bt_tashicell_mobile 18497
-    name: BT Tashicell Mobile
-    uuid: 8557d149-740a-485b-82e5-78f2df7bd46a
-    type_id: 3
-  - id: &bt_b_mobile_mobile 25685
-    name: BT B Mobile Mobile
-    uuid: 96103ab9-5509-4c23-80da-b71ba02b8939
-    type_id: 3
 # Supplementary services Networks
-  - id: &bt_special_services 21373
-    name: BT Special Services
-    uuid: 26ca63a0-bacc-4bca-902c-30cb8e905a44
-    type_id: 13
+  - id: &bt_fixed 43391
+    name: BT Fixed
+    uuid: ea16c15a-b3e0-4ad1-bc3d-49a2338e80e7
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
-  - id: 54578
-    prefix: '9755'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f26a5e35-ebb2-4bf4-8d4c-a441d6ebf317
-    country_id: *bt
-    network_id: *bt_chhukha_lhamoizingkha_samtse_region
-  - id: 54647
-    prefix: '9755250'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6cae978e-05d5-463a-9782-4bcfe41a5c63
-    country_id: *bt
-    network_id: *bt_phuntsholing_region
-  - id: 54648
-    prefix: '9755251'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 43649f45-0836-4231-b769-f53dc689646d
-    country_id: *bt
-    network_id: *bt_phuntsholing_region
-  - id: 54649
-    prefix: '9755252'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2dce0922-2b5c-41fb-b181-ce2b5366dd81
-    country_id: *bt
-    network_id: *bt_phuntsholing_region
-  - id: 54650
-    prefix: '9755253'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4d3738d2-09b2-4ba4-984a-139234d153b6
-    country_id: *bt
-    network_id: *bt_phuntsholing_region
-  - id: 54651
-    prefix: '9755254'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: de887573-471a-44fd-bc02-30f4f5a76abb
-    country_id: *bt
-    network_id: *bt_phuntsholing_region
-  - id: 54652
-    prefix: '9755258'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 11d618ce-80d5-429f-b335-912928d3612d
-    country_id: *bt
-    network_id: *bt_phuntsholing_region
-  - id: 54653
-    prefix: '9755259'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1dc7daba-e7d3-4f29-9363-3e4803aa8a2f
-    country_id: *bt
-    network_id: *bt_phuntsholing_region
-  - id: 54657
-    prefix: '9755260'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 22ddf588-4037-41dc-a2b1-97230d4b840d
-    country_id: *bt
-    network_id: *bt_pasakha_region
-  - id: 54658
-    prefix: '9755261'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b9cbfbf4-f797-4c6e-a665-3b83c18d38fb
-    country_id: *bt
-    network_id: *bt_pasakha_region
-  - id: 54659
-    prefix: '9755262'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ec8964b1-5eba-460f-b822-f4c4cb6b2b9a
-    country_id: *bt
-    network_id: *bt_pasakha_region
-  - id: 54660
-    prefix: '9755263'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d7962f42-4a3a-43c3-a74f-8ea4f3a38b4b
-    country_id: *bt
-    network_id: *bt_pasakha_region
-  - id: 54661
-    prefix: '9755264'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 061105ae-76c6-4a1d-9627-5c5604590127
-    country_id: *bt
-    network_id: *bt_pasakha_region
-  - id: 54666
-    prefix: '9755280'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d7ffa2ae-2179-41a9-bdab-842fcbd00ff6
-    country_id: *bt
-    network_id: *bt_gedu_region
-  - id: 54667
-    prefix: '9755281'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 44f12588-5ac2-4625-aae6-4af7a4f34093
-    country_id: *bt
-    network_id: *bt_gedu_region
-  - id: 54668
-    prefix: '9755282'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cb51d51e-9e87-4b3f-9877-7aa19fbe9f42
-    country_id: *bt
-    network_id: *bt_gedu_region
-  - id: 54670
-    prefix: '97552900'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 05b73f48-4d59-416c-92bb-4f65c094a281
-    country_id: *bt
-    network_id: *bt_tsimasham_region
-  - id: 54671
-    prefix: '97552901'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 42d6433d-24cd-4ca3-80ad-e53bd14cf7bf
-    country_id: *bt
-    network_id: *bt_tsimasham_region
-  - id: 54672
-    prefix: '97552904'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 74c88185-631a-4d2c-90aa-8bdc0e089b76
-    country_id: *bt
-    network_id: *bt_wangkha_region
-  - id: 54673
-    prefix: '975529060'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 82357a82-078e-43e1-a881-a79b26d2e6a9
-    country_id: *bt
-    network_id: *bt_trashigatshel_region
-  - id: 54674
-    prefix: '975529061'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e25e7d1b-6f58-4f72-8ec8-ca5284a73063
-    country_id: *bt
-    network_id: *bt_trashigatshel_region
-  - id: 54675
-    prefix: '975529062'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 49c9c358-2aa6-4992-9dbe-e94f8b732035
-    country_id: *bt
-    network_id: *bt_trashigatshel_region
-  - id: 54676
-    prefix: '975529063'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6710cc9f-c0b1-491e-b520-004265df3755
-    country_id: *bt
-    network_id: *bt_trashigatshel_region
-  - id: 54677
-    prefix: '975529064'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: adf85a1d-9f1f-4d5b-91e8-543647eb6152
-    country_id: *bt
-    network_id: *bt_trashigatshel_region
-  - id: 54711
-    prefix: '9755365'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f4aa5c41-5ab5-4e34-9d45-ced0bffec92f
-    country_id: *bt
-    network_id: *bt_samtse_region
-  - id: 54712
-    prefix: '9755366'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 844e635d-bba7-4f1b-b198-7f1f31ff6ec2
-    country_id: *bt
-    network_id: *bt_samtse_region
-  - id: 54715
-    prefix: '9755370'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 223645d8-9229-4159-8485-2a5da73be973
-    country_id: *bt
-    network_id: *bt_gomtu_region
-  - id: 54716
-    prefix: '9755371'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 450c33b8-d603-4092-9d6e-19e5ad612e31
-    country_id: *bt
-    network_id: *bt_gomtu_region
-  - id: 54717
-    prefix: '9755372'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ca835ac5-e6aa-48b6-ac2a-311c9048ac92
-    country_id: *bt
-    network_id: *bt_gomtu_region
-  - id: 54718
-    prefix: '9755373'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6bb09640-4463-4bad-9c85-a7153d9432d5
-    country_id: *bt
-    network_id: *bt_gomtu_region
-  - id: 54721
-    prefix: '9755380'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 592c640d-74a8-42ef-885d-90dba55cd1db
-    country_id: *bt
-    network_id: *bt_chargary_region
-  - id: 54722
-    prefix: '9755381'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 44f4f3ee-4ca2-4871-99ef-77f78949a1e1
-    country_id: *bt
-    network_id: *bt_chargary_region
-  - id: 54723
-    prefix: '9755382'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 55c346ee-c6fc-4262-b24e-15afcb2031ae
-    country_id: *bt
-    network_id: *bt_sibsoo_region
-  - id: 84940
-    prefix: '9756'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2c3a16d3-dc0c-4abd-ad2c-7fa29776926e
-    country_id: *bt
-    network_id: *bt_dagana_gelephu_sarpang_tsirang_region
-  - id: 85082
-    prefix: '9756250'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0fe96933-59c7-4395-a1d3-f3578c74ec24
-    country_id: *bt
-    network_id: *bt_gelephu_region
-  - id: 85083
-    prefix: '9756251'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4a382914-6c46-4008-953c-ec4352e91766
-    country_id: *bt
-    network_id: *bt_gelephu_region
-  - id: 85084
-    prefix: '9756252'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4e69dec7-f968-4dae-bc4d-3d1c63398019
-    country_id: *bt
-    network_id: *bt_gelephu_region
-  - id: 85085
-    prefix: '9756253'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7c65a83f-acfa-491c-975d-4cc5e5417f2f
-    country_id: *bt
-    network_id: *bt_gelephu_region
-  - id: 85086
-    prefix: '9756254'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6ee8e721-19c2-4b5a-845a-a8a19e847cd5
-    country_id: *bt
-    network_id: *bt_gelephu_region
-  - id: 85087
-    prefix: '9756255'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 18907830-6fbf-42eb-86f8-3e352bc890e7
-    country_id: *bt
-    network_id: *bt_suray_region
-  - id: 85177
-    prefix: '9756365'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c38b1859-296f-451d-b941-1cad6b008246
-    country_id: *bt
-    network_id: *bt_sarpang_region
-  - id: 85241
-    prefix: '9756470'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7e3b704b-2e1b-4cee-80f5-7a7ec792a8bc
-    country_id: *bt
-    network_id: *bt_tsirang_damphu_region
-  - id: 85242
-    prefix: '9756471'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 49039020-85c9-4bf3-85f2-45da4a015bd0
-    country_id: *bt
-    network_id: *bt_tsirang_damphu_region
-  - id: 85243
-    prefix: '9756472'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 97d7c997-9527-4284-9789-a28aedeff3c1
-    country_id: *bt
-    network_id: *bt_tsirang_damphu_region
-  - id: 85244
-    prefix: '9756473'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a92a8bfd-0659-40b5-ae24-2a829f5d1d0e
-    country_id: *bt
-    network_id: *bt_tsirang_damphu_region
-  - id: 85245
-    prefix: '9756474'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e45cab7e-9af5-4d9f-84d7-71a98e761461
-    country_id: *bt
-    network_id: *bt_tsirang_damphu_region
-  - id: 85246
-    prefix: '9756487'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1c67e0e3-7050-4016-8b70-ace1bd70993c
-    country_id: *bt
-    network_id: *bt_drujegang_region
-  - id: 85247
-    prefix: '9756488'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2b041846-6461-4a3f-b57f-1f0ca22e4be6
-    country_id: *bt
-    network_id: *bt_drujegang_region
-  - id: 149331
-    prefix: '9757'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4f10c40e-0570-4301-90e9-89ec1bbcac33
-    country_id: *bt
-    network_id: *bt_pemagatshel_samdrupjongkhar_region
-  - id: 149457
-    prefix: '9757250'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e28576a6-9824-4cbb-b0cd-ec966094ba06
-    country_id: *bt
-    network_id: *bt_samdrup_jongkhar_region
-  - id: 149458
-    prefix: '9757251'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3b355eb9-ce9a-437a-b313-5f8d1966c15b
-    country_id: *bt
-    network_id: *bt_samdrup_jongkhar_region
-  - id: 149459
-    prefix: '9757252'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c99a5363-8d41-4057-b906-1c130023bdba
-    country_id: *bt
-    network_id: *bt_samdrup_jongkhar_region
-  - id: 149461
-    prefix: '9757260'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 16a10849-86f5-4808-9137-0ab89ae34b26
-    country_id: *bt
-    network_id: *bt_deothang_region
-  - id: 149472
-    prefix: '9757261'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0bdd27ef-29ad-4256-8eaf-1601ab26b068
-    country_id: *bt
-    network_id: *bt_deothang_region
-  - id: 149480
-    prefix: '9757262'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 221bf2c1-a829-43bf-85a5-7783e88f366e
-    country_id: *bt
-    network_id: *bt_deothang_region
-  - id: 149491
-    prefix: '97572640'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e8b73a85-a284-4e84-877e-4edf81e1886a
-    country_id: *bt
-    network_id: *bt_daifam_jomotshangkha_region
-  - id: 149492
-    prefix: '97572641'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 38d75822-6e01-4c6b-9333-04799a02d66b
-    country_id: *bt
-    network_id: *bt_daifam_jomotshangkha_region
-  - id: 149730
-    prefix: '9757470'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 88ee32da-5d30-4d06-a959-d8453f62bcac
-    country_id: *bt
-    network_id: *bt_pema_gatshel_region
-  - id: 149732
-    prefix: '9757471'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b42a4c14-9388-4a03-9342-2093827128c4
-    country_id: *bt
-    network_id: *bt_pema_gatshel_region
-  - id: 149734
-    prefix: '9757472'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 720d1db4-429b-4f09-8718-9c3a8486bf13
-    country_id: *bt
-    network_id: *bt_pema_gatshel_region
-  - id: 149735
-    prefix: '9757473'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: caad93bd-3eb1-40c1-b437-33d3212bf002
-    country_id: *bt
-    network_id: *bt_pema_gatshel_region
-  - id: 149737
-    prefix: '9757474'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cda55a3c-9804-483c-81a5-9f182fe49c2f
-    country_id: *bt
-    network_id: *bt_pema_gatshel_region
-  - id: 149739
-    prefix: '9757475'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d9321236-ac50-4dad-9f0f-709cb1a21776
-    country_id: *bt
-    network_id: *bt_pema_gatshel_region
-  - id: 149746
-    prefix: '9757480'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9acd530a-df9c-4190-9151-1e4e9f08a283
-    country_id: *bt
-    network_id: *bt_nganglam_region
-  - id: 149759
-    prefix: '97574810'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 93027c7d-881e-45bf-8d48-61f8c4a27f4a
-    country_id: *bt
-    network_id: *bt_nganglam_region
-  - id: 149760
-    prefix: '97574811'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 33031d14-48e6-47b5-a2b0-e5adbdf171c2
-    country_id: *bt
-    network_id: *bt_nganglam_region
-  - id: 149761
-    prefix: '97574812'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f94518de-fac2-4630-a8c8-6f1ec3bb9892
-    country_id: *bt
-    network_id: *bt_nganglam_region
-  - id: 149762
-    prefix: '97574813'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 011c7906-ca92-40a0-881d-098815d22a93
-    country_id: *bt
-    network_id: *bt_nganglam_region
-  - id: 149763
-    prefix: '97574814'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 81d727f8-3686-4c64-a69b-69e3fb7842b1
-    country_id: *bt
-    network_id: *bt_nganglam_region
-  - id: 149764
-    prefix: '97574815'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 960b2701-2abb-45ce-9538-c8f6d44d630b
-    country_id: *bt
-    network_id: *bt_nganglam_region
-  - id: 207513
-    prefix: '9758'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 57da0c79-6d9c-42ba-a169-898e4850d422
-    country_id: *bt
-    network_id: *bt_chapcha_haa_paro_tsimasham_wangkha_region
-  - id: 207524
-    prefix: '97582407'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1ba58e3a-db85-4a23-b7f1-312caa090a73
-    country_id: *bt
-    network_id: *bt_chapcha_region
-  - id: 207529
-    prefix: '9758270'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 790654e8-9108-4c63-9948-de7c2bbb9805
-    country_id: *bt
-    network_id: *bt_paro_region
-  - id: 207530
-    prefix: '9758271'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d635601d-dbe9-4b26-a678-7cb745ffdd2b
-    country_id: *bt
-    network_id: *bt_paro_region
-  - id: 207543
-    prefix: '9758371'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4616f111-00ca-43ce-9705-e77aaf22977e
-    country_id: *bt
-    network_id: *bt_haa_damthang_region
-  - id: 207544
-    prefix: '9758373'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e3eab090-2e66-4c7d-a377-1288be1edd34
-    country_id: *bt
-    network_id: *bt_haa_region
-  - id: 207545
-    prefix: '9758375'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b6472754-9b77-482b-b8fb-4db4550def01
-    country_id: *bt
-    network_id: *bt_haa_region
-  - id: 207546
-    prefix: '9758376'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ab6df1d3-7ee5-4fff-b40f-7630ffcbfa29
-    country_id: *bt
-    network_id: *bt_haa_region
-  - id: 207550
-    prefix: '9758471'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f61cd37e-15bd-4f99-838a-df51ebbd9c60
-    country_id: *bt
-    network_id: *bt_chapcha_region
-  - id: 207551
-    prefix: '9758478'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cde3d633-9376-4db6-8018-7fd9bddc5b96
-    country_id: *bt
-    network_id: *bt_tsimasham_region
+  - id: 241962
+    prefix: '975'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 4b5830db-151a-4af7-8328-6b4ba539c31d
+    country_id: *bt
+    network_id: *bt_fixed
+  - id: 242367
+    prefix: '9751'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 7ba3c208-80dc-4080-b692-152699d0ca80
+    country_id: *bt
+    network_id: *bt_special_services
+  - id: 266942
+    prefix: '97517'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 45fc2663-ec6f-4fb5-a257-a17798666be6
+    country_id: *bt
+    network_id: *bt_b_mobile_mobile
+  - id: 260824
+    prefix: '97519'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 3674a721-788b-4f0e-8a9e-f27cf4844816
+    country_id: *bt
+    network_id: *bt_b_mobile_mobile
   - id: 261185
     prefix: '9752'
     number_min_length: 10
@@ -840,6 +312,13 @@ network_prefixes:
     uuid: 0e26e29f-2524-4f2c-9ce9-9953888392fd
     country_id: *bt
     network_id: *bt_gasa_punakha_thimphu_wangduephodrang_region
+  - id: 247391
+    prefix: '9752'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 88a91bef-271a-433b-9dbb-e782c094ad04
+    country_id: *bt
+    network_id: *bt_special_services
   - id: 261266
     prefix: '975232'
     number_min_length: 10
@@ -1064,6 +543,13 @@ network_prefixes:
     uuid: 66f8bf8d-a987-4cd1-8e2f-d856136dae70
     country_id: *bt
     network_id: *bt_bumthang_trongsa_zhemgang_region
+  - id: 248884
+    prefix: '9753'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: b788d5bd-f300-45e3-b3da-f443b9dbd4d3
+    country_id: *bt
+    network_id: *bt_special_services
   - id: 316444
     prefix: '9753520'
     number_min_length: 10
@@ -1330,6 +816,13 @@ network_prefixes:
     uuid: 40ff183e-bc77-48d5-ab16-de377ec19f40
     country_id: *bt
     network_id: *bt_lhuntse_mongar_trashigang_trashiyangtse_region
+  - id: 243922
+    prefix: '9754'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: b4a7b0e1-6a3c-4e61-a8f1-e9399d4bdc7e
+    country_id: *bt
+    network_id: *bt_special_services
   - id: 349616
     prefix: '9754520'
     number_min_length: 10
@@ -1533,79 +1026,13 @@ network_prefixes:
     uuid: 1c8b1800-72fd-4cac-a2c0-08b2c717c93c
     country_id: *bt
     network_id: *bt_trashiyangtse_region
-# Mobile Prefixes
-  - id: 192084
-    prefix: '97577'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 14955190-0c6e-4c77-9fb2-2d92b2aa75ff
+  - id: 54578
+    prefix: '9755'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f26a5e35-ebb2-4bf4-8d4c-a441d6ebf317
     country_id: *bt
-    network_id: *bt_tashicell_mobile
-  - id: 206653
-    prefix: '97579'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 628814e3-1401-45ae-9de8-9bd0a7c42738
-    country_id: *bt
-    network_id: *bt_tashicell_mobile
-  - id: 260824
-    prefix: '97519'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 3674a721-788b-4f0e-8a9e-f27cf4844816
-    country_id: *bt
-    network_id: *bt_b_mobile_mobile
-  - id: 266942
-    prefix: '97517'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 45fc2663-ec6f-4fb5-a257-a17798666be6
-    country_id: *bt
-    network_id: *bt_b_mobile_mobile
-# Country code Prefixes
-  - id: 241962
-    prefix: '975'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 4b5830db-151a-4af7-8328-6b4ba539c31d
-    country_id: *bt
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242367
-    prefix: '9751'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 7ba3c208-80dc-4080-b692-152699d0ca80
-    country_id: *bt
-    network_id: *bt_special_services
-  - id: 243922
-    prefix: '9754'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: b4a7b0e1-6a3c-4e61-a8f1-e9399d4bdc7e
-    country_id: *bt
-    network_id: *bt_special_services
-  - id: 245376
-    prefix: '9756'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 58785e0b-1cf7-4345-8bfc-b3f1a7181d43
-    country_id: *bt
-    network_id: *bt_special_services
-  - id: 247391
-    prefix: '9752'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 88a91bef-271a-433b-9dbb-e782c094ad04
-    country_id: *bt
-    network_id: *bt_special_services
-  - id: 248884
-    prefix: '9753'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: b788d5bd-f300-45e3-b3da-f443b9dbd4d3
-    country_id: *bt
-    network_id: *bt_special_services
+    network_id: *bt_chhukha_lhamoizingkha_samtse_region
   - id: 249563
     prefix: '9755'
     number_min_length: 6
@@ -1613,6 +1040,349 @@ network_prefixes:
     uuid: 7b48b00c-8238-49b2-8d14-cfb95f751ceb
     country_id: *bt
     network_id: *bt_special_services
+  - id: 54647
+    prefix: '9755250'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6cae978e-05d5-463a-9782-4bcfe41a5c63
+    country_id: *bt
+    network_id: *bt_phuntsholing_region
+  - id: 54648
+    prefix: '9755251'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 43649f45-0836-4231-b769-f53dc689646d
+    country_id: *bt
+    network_id: *bt_phuntsholing_region
+  - id: 54649
+    prefix: '9755252'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2dce0922-2b5c-41fb-b181-ce2b5366dd81
+    country_id: *bt
+    network_id: *bt_phuntsholing_region
+  - id: 54650
+    prefix: '9755253'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4d3738d2-09b2-4ba4-984a-139234d153b6
+    country_id: *bt
+    network_id: *bt_phuntsholing_region
+  - id: 54651
+    prefix: '9755254'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: de887573-471a-44fd-bc02-30f4f5a76abb
+    country_id: *bt
+    network_id: *bt_phuntsholing_region
+  - id: 54652
+    prefix: '9755258'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 11d618ce-80d5-429f-b335-912928d3612d
+    country_id: *bt
+    network_id: *bt_phuntsholing_region
+  - id: 54653
+    prefix: '9755259'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1dc7daba-e7d3-4f29-9363-3e4803aa8a2f
+    country_id: *bt
+    network_id: *bt_phuntsholing_region
+  - id: 54657
+    prefix: '9755260'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 22ddf588-4037-41dc-a2b1-97230d4b840d
+    country_id: *bt
+    network_id: *bt_pasakha_region
+  - id: 54658
+    prefix: '9755261'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b9cbfbf4-f797-4c6e-a665-3b83c18d38fb
+    country_id: *bt
+    network_id: *bt_pasakha_region
+  - id: 54659
+    prefix: '9755262'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ec8964b1-5eba-460f-b822-f4c4cb6b2b9a
+    country_id: *bt
+    network_id: *bt_pasakha_region
+  - id: 54660
+    prefix: '9755263'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d7962f42-4a3a-43c3-a74f-8ea4f3a38b4b
+    country_id: *bt
+    network_id: *bt_pasakha_region
+  - id: 54661
+    prefix: '9755264'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 061105ae-76c6-4a1d-9627-5c5604590127
+    country_id: *bt
+    network_id: *bt_pasakha_region
+  - id: 54666
+    prefix: '9755280'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d7ffa2ae-2179-41a9-bdab-842fcbd00ff6
+    country_id: *bt
+    network_id: *bt_gedu_region
+  - id: 54667
+    prefix: '9755281'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44f12588-5ac2-4625-aae6-4af7a4f34093
+    country_id: *bt
+    network_id: *bt_gedu_region
+  - id: 54668
+    prefix: '9755282'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cb51d51e-9e87-4b3f-9877-7aa19fbe9f42
+    country_id: *bt
+    network_id: *bt_gedu_region
+  - id: 54670
+    prefix: '97552900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 05b73f48-4d59-416c-92bb-4f65c094a281
+    country_id: *bt
+    network_id: *bt_tsimasham_region
+  - id: 54671
+    prefix: '97552901'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 42d6433d-24cd-4ca3-80ad-e53bd14cf7bf
+    country_id: *bt
+    network_id: *bt_tsimasham_region
+  - id: 54672
+    prefix: '97552904'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 74c88185-631a-4d2c-90aa-8bdc0e089b76
+    country_id: *bt
+    network_id: *bt_wangkha_region
+  - id: 54673
+    prefix: '975529060'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 82357a82-078e-43e1-a881-a79b26d2e6a9
+    country_id: *bt
+    network_id: *bt_trashigatshel_region
+  - id: 54674
+    prefix: '975529061'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e25e7d1b-6f58-4f72-8ec8-ca5284a73063
+    country_id: *bt
+    network_id: *bt_trashigatshel_region
+  - id: 54675
+    prefix: '975529062'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 49c9c358-2aa6-4992-9dbe-e94f8b732035
+    country_id: *bt
+    network_id: *bt_trashigatshel_region
+  - id: 54676
+    prefix: '975529063'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6710cc9f-c0b1-491e-b520-004265df3755
+    country_id: *bt
+    network_id: *bt_trashigatshel_region
+  - id: 54677
+    prefix: '975529064'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: adf85a1d-9f1f-4d5b-91e8-543647eb6152
+    country_id: *bt
+    network_id: *bt_trashigatshel_region
+  - id: 54711
+    prefix: '9755365'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f4aa5c41-5ab5-4e34-9d45-ced0bffec92f
+    country_id: *bt
+    network_id: *bt_samtse_region
+  - id: 54712
+    prefix: '9755366'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 844e635d-bba7-4f1b-b198-7f1f31ff6ec2
+    country_id: *bt
+    network_id: *bt_samtse_region
+  - id: 54715
+    prefix: '9755370'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 223645d8-9229-4159-8485-2a5da73be973
+    country_id: *bt
+    network_id: *bt_gomtu_region
+  - id: 54716
+    prefix: '9755371'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 450c33b8-d603-4092-9d6e-19e5ad612e31
+    country_id: *bt
+    network_id: *bt_gomtu_region
+  - id: 54717
+    prefix: '9755372'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca835ac5-e6aa-48b6-ac2a-311c9048ac92
+    country_id: *bt
+    network_id: *bt_gomtu_region
+  - id: 54718
+    prefix: '9755373'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6bb09640-4463-4bad-9c85-a7153d9432d5
+    country_id: *bt
+    network_id: *bt_gomtu_region
+  - id: 54721
+    prefix: '9755380'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 592c640d-74a8-42ef-885d-90dba55cd1db
+    country_id: *bt
+    network_id: *bt_chargary_region
+  - id: 54722
+    prefix: '9755381'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44f4f3ee-4ca2-4871-99ef-77f78949a1e1
+    country_id: *bt
+    network_id: *bt_chargary_region
+  - id: 54723
+    prefix: '9755382'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 55c346ee-c6fc-4262-b24e-15afcb2031ae
+    country_id: *bt
+    network_id: *bt_sibsoo_region
+  - id: 84940
+    prefix: '9756'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2c3a16d3-dc0c-4abd-ad2c-7fa29776926e
+    country_id: *bt
+    network_id: *bt_dagana_gelephu_sarpang_tsirang_region
+  - id: 245376
+    prefix: '9756'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 58785e0b-1cf7-4345-8bfc-b3f1a7181d43
+    country_id: *bt
+    network_id: *bt_special_services
+  - id: 85082
+    prefix: '9756250'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0fe96933-59c7-4395-a1d3-f3578c74ec24
+    country_id: *bt
+    network_id: *bt_gelephu_region
+  - id: 85083
+    prefix: '9756251'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4a382914-6c46-4008-953c-ec4352e91766
+    country_id: *bt
+    network_id: *bt_gelephu_region
+  - id: 85084
+    prefix: '9756252'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4e69dec7-f968-4dae-bc4d-3d1c63398019
+    country_id: *bt
+    network_id: *bt_gelephu_region
+  - id: 85085
+    prefix: '9756253'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c65a83f-acfa-491c-975d-4cc5e5417f2f
+    country_id: *bt
+    network_id: *bt_gelephu_region
+  - id: 85086
+    prefix: '9756254'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6ee8e721-19c2-4b5a-845a-a8a19e847cd5
+    country_id: *bt
+    network_id: *bt_gelephu_region
+  - id: 85087
+    prefix: '9756255'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 18907830-6fbf-42eb-86f8-3e352bc890e7
+    country_id: *bt
+    network_id: *bt_suray_region
+  - id: 85177
+    prefix: '9756365'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c38b1859-296f-451d-b941-1cad6b008246
+    country_id: *bt
+    network_id: *bt_sarpang_region
+  - id: 85241
+    prefix: '9756470'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7e3b704b-2e1b-4cee-80f5-7a7ec792a8bc
+    country_id: *bt
+    network_id: *bt_tsirang_damphu_region
+  - id: 85242
+    prefix: '9756471'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 49039020-85c9-4bf3-85f2-45da4a015bd0
+    country_id: *bt
+    network_id: *bt_tsirang_damphu_region
+  - id: 85243
+    prefix: '9756472'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 97d7c997-9527-4284-9789-a28aedeff3c1
+    country_id: *bt
+    network_id: *bt_tsirang_damphu_region
+  - id: 85244
+    prefix: '9756473'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a92a8bfd-0659-40b5-ae24-2a829f5d1d0e
+    country_id: *bt
+    network_id: *bt_tsirang_damphu_region
+  - id: 85245
+    prefix: '9756474'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e45cab7e-9af5-4d9f-84d7-71a98e761461
+    country_id: *bt
+    network_id: *bt_tsirang_damphu_region
+  - id: 85246
+    prefix: '9756487'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1c67e0e3-7050-4016-8b70-ace1bd70993c
+    country_id: *bt
+    network_id: *bt_drujegang_region
+  - id: 85247
+    prefix: '9756488'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2b041846-6461-4a3f-b57f-1f0ca22e4be6
+    country_id: *bt
+    network_id: *bt_drujegang_region
+  - id: 149331
+    prefix: '9757'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4f10c40e-0570-4301-90e9-89ec1bbcac33
+    country_id: *bt
+    network_id: *bt_pemagatshel_samdrupjongkhar_region
   - id: 255236
     prefix: '9757'
     number_min_length: 6
@@ -1620,6 +1390,175 @@ network_prefixes:
     uuid: 6df34af6-1017-4a9e-8d46-b17f8d943d65
     country_id: *bt
     network_id: *bt_special_services
+  - id: 149457
+    prefix: '9757250'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e28576a6-9824-4cbb-b0cd-ec966094ba06
+    country_id: *bt
+    network_id: *bt_samdrup_jongkhar_region
+  - id: 149458
+    prefix: '9757251'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3b355eb9-ce9a-437a-b313-5f8d1966c15b
+    country_id: *bt
+    network_id: *bt_samdrup_jongkhar_region
+  - id: 149459
+    prefix: '9757252'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c99a5363-8d41-4057-b906-1c130023bdba
+    country_id: *bt
+    network_id: *bt_samdrup_jongkhar_region
+  - id: 149461
+    prefix: '9757260'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 16a10849-86f5-4808-9137-0ab89ae34b26
+    country_id: *bt
+    network_id: *bt_deothang_region
+  - id: 149472
+    prefix: '9757261'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0bdd27ef-29ad-4256-8eaf-1601ab26b068
+    country_id: *bt
+    network_id: *bt_deothang_region
+  - id: 149480
+    prefix: '9757262'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 221bf2c1-a829-43bf-85a5-7783e88f366e
+    country_id: *bt
+    network_id: *bt_deothang_region
+  - id: 149491
+    prefix: '97572640'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e8b73a85-a284-4e84-877e-4edf81e1886a
+    country_id: *bt
+    network_id: *bt_daifam_jomotshangkha_region
+  - id: 149492
+    prefix: '97572641'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 38d75822-6e01-4c6b-9333-04799a02d66b
+    country_id: *bt
+    network_id: *bt_daifam_jomotshangkha_region
+  - id: 149730
+    prefix: '9757470'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 88ee32da-5d30-4d06-a959-d8453f62bcac
+    country_id: *bt
+    network_id: *bt_pema_gatshel_region
+  - id: 149732
+    prefix: '9757471'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b42a4c14-9388-4a03-9342-2093827128c4
+    country_id: *bt
+    network_id: *bt_pema_gatshel_region
+  - id: 149734
+    prefix: '9757472'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 720d1db4-429b-4f09-8718-9c3a8486bf13
+    country_id: *bt
+    network_id: *bt_pema_gatshel_region
+  - id: 149735
+    prefix: '9757473'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: caad93bd-3eb1-40c1-b437-33d3212bf002
+    country_id: *bt
+    network_id: *bt_pema_gatshel_region
+  - id: 149737
+    prefix: '9757474'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cda55a3c-9804-483c-81a5-9f182fe49c2f
+    country_id: *bt
+    network_id: *bt_pema_gatshel_region
+  - id: 149739
+    prefix: '9757475'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d9321236-ac50-4dad-9f0f-709cb1a21776
+    country_id: *bt
+    network_id: *bt_pema_gatshel_region
+  - id: 149746
+    prefix: '9757480'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9acd530a-df9c-4190-9151-1e4e9f08a283
+    country_id: *bt
+    network_id: *bt_nganglam_region
+  - id: 149759
+    prefix: '97574810'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 93027c7d-881e-45bf-8d48-61f8c4a27f4a
+    country_id: *bt
+    network_id: *bt_nganglam_region
+  - id: 149760
+    prefix: '97574811'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 33031d14-48e6-47b5-a2b0-e5adbdf171c2
+    country_id: *bt
+    network_id: *bt_nganglam_region
+  - id: 149761
+    prefix: '97574812'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f94518de-fac2-4630-a8c8-6f1ec3bb9892
+    country_id: *bt
+    network_id: *bt_nganglam_region
+  - id: 149762
+    prefix: '97574813'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 011c7906-ca92-40a0-881d-098815d22a93
+    country_id: *bt
+    network_id: *bt_nganglam_region
+  - id: 149763
+    prefix: '97574814'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 81d727f8-3686-4c64-a69b-69e3fb7842b1
+    country_id: *bt
+    network_id: *bt_nganglam_region
+  - id: 149764
+    prefix: '97574815'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 960b2701-2abb-45ce-9538-c8f6d44d630b
+    country_id: *bt
+    network_id: *bt_nganglam_region
+  - id: 192084
+    prefix: '97577'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 14955190-0c6e-4c77-9fb2-2d92b2aa75ff
+    country_id: *bt
+    network_id: *bt_tashicell_mobile
+# Mobile Prefixes
+  - id: 206653
+    prefix: '97579'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 628814e3-1401-45ae-9de8-9bd0a7c42738
+    country_id: *bt
+    network_id: *bt_tashicell_mobile
+  - id: 207513
+    prefix: '9758'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 57da0c79-6d9c-42ba-a169-898e4850d422
+    country_id: *bt
+    network_id: *bt_chapcha_haa_paro_tsimasham_wangkha_region
   - id: 256663
     prefix: '9758'
     number_min_length: 6
@@ -1627,6 +1566,70 @@ network_prefixes:
     uuid: 6fffea9c-d48a-42a5-8dcc-214e0ae9ad60
     country_id: *bt
     network_id: *bt_special_services
+  - id: 207524
+    prefix: '97582407'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1ba58e3a-db85-4a23-b7f1-312caa090a73
+    country_id: *bt
+    network_id: *bt_chapcha_region
+# Supplementary services Prefixes
+  - id: 207529
+    prefix: '9758270'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 790654e8-9108-4c63-9948-de7c2bbb9805
+    country_id: *bt
+    network_id: *bt_paro_region
+  - id: 207530
+    prefix: '9758271'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d635601d-dbe9-4b26-a678-7cb745ffdd2b
+    country_id: *bt
+    network_id: *bt_paro_region
+  - id: 207543
+    prefix: '9758371'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4616f111-00ca-43ce-9705-e77aaf22977e
+    country_id: *bt
+    network_id: *bt_haa_damthang_region
+  - id: 207544
+    prefix: '9758373'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e3eab090-2e66-4c7d-a377-1288be1edd34
+    country_id: *bt
+    network_id: *bt_haa_region
+  - id: 207545
+    prefix: '9758375'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6472754-9b77-482b-b8fb-4db4550def01
+    country_id: *bt
+    network_id: *bt_haa_region
+  - id: 207546
+    prefix: '9758376'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ab6df1d3-7ee5-4fff-b40f-7630ffcbfa29
+    country_id: *bt
+    network_id: *bt_haa_region
+  - id: 207550
+    prefix: '9758471'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f61cd37e-15bd-4f99-838a-df51ebbd9c60
+    country_id: *bt
+    network_id: *bt_chapcha_region
+  - id: 207551
+    prefix: '9758478'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cde3d633-9376-4db6-8018-7fd9bddc5b96
+    country_id: *bt
+    network_id: *bt_tsimasham_region
   - id: 257082
     prefix: '9759'
     number_min_length: 6

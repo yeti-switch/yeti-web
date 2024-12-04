@@ -1,6 +1,6 @@
 country_id: &bn 32
 networks:
-# Fixed Networks
+# Supplementary services Networks
   - id: &bn_temburong_district_region 4609
     name: BN Temburong District Region
     uuid: 751012b5-8f0a-45a1-9106-b7afa3567696
@@ -29,6 +29,51 @@ networks:
     name: BN Selapon Region
     uuid: b0e79258-5aea-4885-8ef4-26fce84027ce
     type_id: 2
+  - id: &bn_special_services 21372
+    name: BN Special Services
+    uuid: bca1b97f-bb46-48e9-8e60-43cb0ca8b6c8
+    type_id: 13
+# Fixed Networks
+  - id: &bn_sms_services 22101
+    name: BN Sms Services
+    uuid: 0081cb1e-6036-4b9c-a8d5-ba4ad873f648
+    type_id: 13
+  - id: &bn_freephone_services 22638
+    name: BN Freephone Services
+    uuid: 7f2de17f-9f35-4488-8e0d-76f01573dc7a
+    type_id: 13
+  - id: &bn_premium_rate_services 22684
+    name: BN Premium Rate Services
+    uuid: 8930a09c-2d99-4bbb-b2bd-916fa010f0a2
+    type_id: 13
+  - id: &bn_voip 23355
+    name: BN Voip
+    uuid: a5b1cc06-817f-4ecc-a2bb-e7014c6206cc
+    type_id: 13
+  - id: &bn_dst_mobile 23562
+    name: BN Dst Mobile
+    uuid: 4be812f7-54cb-4f36-9332-4896ad6ff3f3
+    type_id: 3
+  - id: &bn_home_country_direct_services 23827
+    name: BN Home Country Direct Services
+    uuid: 63302065-564c-41bb-a48d-bdb2a1001c45
+    type_id: 13
+  - id: &bn_international_freephone_services 23883
+    name: BN International Freephone Services
+    uuid: b6e63735-cdbf-47e0-93c9-757a94899b09
+    type_id: 13
+  - id: &bn_progresif_mobile 23917
+    name: BN Progresif Mobile
+    uuid: cac6ef0a-02a6-4552-9f31-4745fbb73b73
+    type_id: 3
+  - id: &bn_mobile 24141
+    name: BN Mobile
+    uuid: 257e0bb9-5a37-47be-a4c5-9f35b05e8098
+    type_id: 3
+  - id: &bn_emergency_services 24388
+    name: BN Emergency Services
+    uuid: 6091fa6f-5084-411d-87a6-f40f5cc0c192
+    type_id: 13
   - id: &bn_brunei_muara_district_region 25836
     name: BN Brunei Muara District Region
     uuid: f2c9e619-5bb4-40fb-b312-339017e3ca03
@@ -117,6 +162,10 @@ networks:
     name: BN Salar Region
     uuid: a1afe81f-4bb0-403a-8882-871b5df6206a
     type_id: 2
+  - id: &bn_imagine_paging 26060
+    name: BN Imagine Paging
+    uuid: 8b5471fa-506b-4cc4-be48-7fccf65d65c7
+    type_id: 12
   - id: &bn_belait_district_region 31285
     name: BN Belait District Region
     uuid: 74991a61-6650-40e2-a959-aad731429c45
@@ -173,6 +222,7 @@ networks:
     name: BN Sinaut Region
     uuid: 883e3d58-b158-41cf-8f96-8d790009692b
     type_id: 2
+# Mobile Networks
   - id: &bn_tanjong_maya_region 34278
     name: BN Tanjong Maya Region
     uuid: 239a2bf1-fc95-4fe4-adf2-60e19340c5ee
@@ -185,108 +235,55 @@ networks:
     name: BN Bt Beruang Region
     uuid: 9cc8b259-ed73-479d-ac0d-42798906bf4b
     type_id: 2
-# Supplementary services Networks
-  - id: &bn_special_services 21372
-    name: BN Special Services
-    uuid: bca1b97f-bb46-48e9-8e60-43cb0ca8b6c8
-    type_id: 13
-  - id: &bn_sms_services 22101
-    name: BN Sms Services
-    uuid: 0081cb1e-6036-4b9c-a8d5-ba4ad873f648
-    type_id: 13
-  - id: &bn_freephone_services 22638
-    name: BN Freephone Services
-    uuid: 7f2de17f-9f35-4488-8e0d-76f01573dc7a
-    type_id: 13
-  - id: &bn_premium_rate_services 22684
-    name: BN Premium Rate Services
-    uuid: 8930a09c-2d99-4bbb-b2bd-916fa010f0a2
-    type_id: 13
-  - id: &bn_voip 23355
-    name: BN Voip
-    uuid: a5b1cc06-817f-4ecc-a2bb-e7014c6206cc
-    type_id: 13
-  - id: &bn_home_country_direct_services 23827
-    name: BN Home Country Direct Services
-    uuid: 63302065-564c-41bb-a48d-bdb2a1001c45
-    type_id: 13
-  - id: &bn_international_freephone_services 23883
-    name: BN International Freephone Services
-    uuid: b6e63735-cdbf-47e0-93c9-757a94899b09
-    type_id: 13
-  - id: &bn_emergency_services 24388
-    name: BN Emergency Services
-    uuid: 6091fa6f-5084-411d-87a6-f40f5cc0c192
-    type_id: 13
-# Mobile Networks
-  - id: &bn_dst_mobile 23562
-    name: BN Dst Mobile
-    uuid: 4be812f7-54cb-4f36-9332-4896ad6ff3f3
-    type_id: 3
-  - id: &bn_progresif_mobile 23917
-    name: BN Progresif Mobile
-    uuid: cac6ef0a-02a6-4552-9f31-4745fbb73b73
-    type_id: 3
-  - id: &bn_mobile 24141
-    name: BN Mobile
-    uuid: 257e0bb9-5a37-47be-a4c5-9f35b05e8098
-    type_id: 3
 # Paging Networks
-  - id: &bn_imagine_paging 26060
-    name: BN Imagine Paging
-    uuid: 8b5471fa-506b-4cc4-be48-7fccf65d65c7
-    type_id: 12
+  - id: &bn_fixed 43390
+    name: BN Fixed
+    uuid: a643abd6-13e7-42e7-856f-a721bf6a359b
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 54577
-    prefix: '6735'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4e916789-43e5-4f8c-a30b-3e3f823e9b08
+# Supplementary services Prefixes
+  - id: 241961
+    prefix: '673'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 49651145-ea78-4461-8335-ce77272fba1c
     country_id: *bn
-    network_id: *bn_temburong_district_region
-  - id: 54616
-    prefix: '673522'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b626b2fb-df87-4a78-95ea-7563a76b9a35
+    network_id: *bn_fixed
+  - id: 242366
+    prefix: '6731'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: c0787226-dce7-4a09-a995-a8db6acae681
     country_id: *bn
-    network_id: *bn_bangar_region
-  - id: 54619
-    prefix: '673523'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d19f2222-78ce-49db-b2db-79c50e24baa2
+    network_id: *bn_special_services
+  - id: 242658
+    prefix: '673116'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 7e1975bd-74a0-40a2-a1a3-df2d0c58eaf8
     country_id: *bn
-    network_id: *bn_rataie_region
-  - id: 54622
-    prefix: '673524'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f60aee9a-a88c-4c88-881e-844945dec365
+    network_id: *bn_special_services
+  - id: 243009
+    prefix: '67316'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 2880e5f3-c7ca-4f02-b3f7-ff100777ac12
     country_id: *bn
-    network_id: *bn_labu_region
-  - id: 54644
-    prefix: '673525'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 138ff01d-974a-4965-9745-3b2c95e865c7
+    network_id: *bn_special_services
+  - id: 247295
+    prefix: '6731800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b8fa6cec-b462-4190-98ef-b5a7b8b538c7
     country_id: *bn
-    network_id: *bn_sumbiling_region
-  - id: 54654
-    prefix: '673526'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a7aeeba6-5bdd-4abd-bf80-84a0fb3a0fe0
+    network_id: *bn_freephone_services
+  - id: 247353
+    prefix: '6731900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5375a81b-bf15-4224-94ec-2633f89d78b0
     country_id: *bn
-    network_id: *bn_lepong_baru_region
-  - id: 54662
-    prefix: '673527'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c495c299-1391-4291-86da-f269e3e12e4e
-    country_id: *bn
-    network_id: *bn_selapon_region
+    network_id: *bn_premium_rate_services
   - id: 261184
     prefix: '6732'
     number_min_length: 10
@@ -329,6 +326,7 @@ network_prefixes:
     uuid: a5726ded-4802-4048-82c6-19738e7a383d
     country_id: *bn
     network_id: *bn_central_region
+# Fixed Prefixes
   - id: 261251
     prefix: '673225'
     number_min_length: 10
@@ -343,6 +341,20 @@ network_prefixes:
     uuid: f063b006-5d4c-4484-8da7-7f8d7f2d2b5b
     country_id: *bn
     network_id: *bn_subok_region
+  - id: 261256
+    prefix: '673228'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a5d3f965-eb2c-4044-9658-126969a036ae
+    country_id: *bn
+    network_id: *bn_dst_mobile
+  - id: 261257
+    prefix: '673229'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8c52dd65-a198-4845-8c6d-de865db4427a
+    country_id: *bn
+    network_id: *bn_dst_mobile
   - id: 261264
     prefix: '673231'
     number_min_length: 10
@@ -637,6 +649,20 @@ network_prefixes:
     uuid: 90a53848-fef7-45ff-ab2b-920e115d9a41
     country_id: *bn
     network_id: *bn_mumong_region
+  - id: 243855
+    prefix: '67338'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 85e6991c-cadc-4d17-a5ff-703aff58eb36
+    country_id: *bn
+    network_id: *bn_sms_services
+  - id: 243893
+    prefix: '67339'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 36299df2-24c3-4cc0-81fb-54007ea0aa79
+    country_id: *bn
+    network_id: *bn_sms_services
   - id: 349441
     prefix: '6734'
     number_min_length: 10
@@ -707,64 +733,55 @@ network_prefixes:
     uuid: 4083b514-2c2b-4419-9ce9-b1b300999a6b
     country_id: *bn
     network_id: *bn_tutong_region
-# Country code Prefixes
-  - id: 241961
-    prefix: '673'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 49651145-ea78-4461-8335-ce77272fba1c
+  - id: 54577
+    prefix: '6735'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4e916789-43e5-4f8c-a30b-3e3f823e9b08
     country_id: *bn
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242366
-    prefix: '6731'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: c0787226-dce7-4a09-a995-a8db6acae681
+    network_id: *bn_temburong_district_region
+  - id: 54616
+    prefix: '673522'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b626b2fb-df87-4a78-95ea-7563a76b9a35
     country_id: *bn
-    network_id: *bn_special_services
-  - id: 242658
-    prefix: '673116'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 7e1975bd-74a0-40a2-a1a3-df2d0c58eaf8
+    network_id: *bn_bangar_region
+  - id: 54619
+    prefix: '673523'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d19f2222-78ce-49db-b2db-79c50e24baa2
     country_id: *bn
-    network_id: *bn_special_services
-  - id: 243009
-    prefix: '67316'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 2880e5f3-c7ca-4f02-b3f7-ff100777ac12
+    network_id: *bn_rataie_region
+  - id: 54622
+    prefix: '673524'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f60aee9a-a88c-4c88-881e-844945dec365
     country_id: *bn
-    network_id: *bn_special_services
-  - id: 243855
-    prefix: '67338'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 85e6991c-cadc-4d17-a5ff-703aff58eb36
+    network_id: *bn_labu_region
+  - id: 54644
+    prefix: '673525'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 138ff01d-974a-4965-9745-3b2c95e865c7
     country_id: *bn
-    network_id: *bn_sms_services
-  - id: 243893
-    prefix: '67339'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 36299df2-24c3-4cc0-81fb-54007ea0aa79
+    network_id: *bn_sumbiling_region
+  - id: 54654
+    prefix: '673526'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a7aeeba6-5bdd-4abd-bf80-84a0fb3a0fe0
     country_id: *bn
-    network_id: *bn_sms_services
-  - id: 247295
-    prefix: '6731800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8fa6cec-b462-4190-98ef-b5a7b8b538c7
+    network_id: *bn_lepong_baru_region
+  - id: 54662
+    prefix: '673527'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c495c299-1391-4291-86da-f269e3e12e4e
     country_id: *bn
-    network_id: *bn_freephone_services
-  - id: 247353
-    prefix: '6731900'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5375a81b-bf15-4224-94ec-2633f89d78b0
-    country_id: *bn
-    network_id: *bn_premium_rate_services
+    network_id: *bn_selapon_region
   - id: 249916
     prefix: '67353'
     number_min_length: 10
@@ -779,27 +796,13 @@ network_prefixes:
     uuid: 23910e4f-1082-4559-958c-c016755c4b52
     country_id: *bn
     network_id: *bn_voip
-  - id: 253137
-    prefix: '673800'
-    number_min_length: 9
-    number_max_length: 10
-    uuid: eacdecb0-16ae-4818-bab6-8c51913bb18a
-    country_id: *bn
-    network_id: *bn_home_country_direct_services
-  - id: 253206
-    prefix: '673801'
+  - id: 255235
+    prefix: '6737'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5d0d767a-9cfa-4af1-86a8-0ea6b53e9078
+    uuid: 096d717a-e304-4668-bf75-9daf9f7e9d6c
     country_id: *bn
-    network_id: *bn_international_freephone_services
-  - id: 257081
-    prefix: '6739'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 86b7a785-ad16-4dfc-9fb0-63e1f693b716
-    country_id: *bn
-    network_id: *bn_emergency_services
+    network_id: *bn_mobile
 # Mobile Prefixes
   - id: 251726
     prefix: '67371'
@@ -829,6 +832,27 @@ network_prefixes:
     uuid: 01fc38c3-e6b3-4f94-b5e7-92330ad8981e
     country_id: *bn
     network_id: *bn_dst_mobile
+  - id: 256662
+    prefix: '6738'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d43c76dd-0fd3-4a48-bb25-9ff4cab4b5b8
+    country_id: *bn
+    network_id: *bn_mobile
+  - id: 253137
+    prefix: '673800'
+    number_min_length: 9
+    number_max_length: 10
+    uuid: eacdecb0-16ae-4818-bab6-8c51913bb18a
+    country_id: *bn
+    network_id: *bn_home_country_direct_services
+  - id: 253206
+    prefix: '673801'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5d0d767a-9cfa-4af1-86a8-0ea6b53e9078
+    country_id: *bn
+    network_id: *bn_international_freephone_services
   - id: 253308
     prefix: '67381'
     number_min_length: 10
@@ -850,63 +874,6 @@ network_prefixes:
     uuid: 8df30d8e-cc83-419f-8e66-85b5d05c1d43
     country_id: *bn
     network_id: *bn_progresif_mobile
-  - id: 255235
-    prefix: '6737'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 096d717a-e304-4668-bf75-9daf9f7e9d6c
-    country_id: *bn
-    network_id: *bn_mobile
-  - id: 256662
-    prefix: '6738'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d43c76dd-0fd3-4a48-bb25-9ff4cab4b5b8
-    country_id: *bn
-    network_id: *bn_mobile
-  - id: 256831
-    prefix: '67388'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cf4e73e2-9dc8-4a04-9592-8bf048bfb866
-    country_id: *bn
-    network_id: *bn_dst_mobile
-  - id: 256986
-    prefix: '67389'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 67eeaea2-f4a2-4c3d-a00e-da8b05bb1c7a
-    country_id: *bn
-    network_id: *bn_dst_mobile
-  - id: 261256
-    prefix: '673228'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a5d3f965-eb2c-4044-9658-126969a036ae
-    country_id: *bn
-    network_id: *bn_dst_mobile
-  - id: 261257
-    prefix: '673229'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8c52dd65-a198-4845-8c6d-de865db4427a
-    country_id: *bn
-    network_id: *bn_dst_mobile
-  - id: 263844
-    prefix: '67386'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 93995bb9-eb22-4cbb-a1a3-27e343a4c5bf
-    country_id: *bn
-    network_id: *bn_dst_mobile
-  - id: 263997
-    prefix: '67387'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: fdfe11bc-5956-44d6-bf25-23aac1b03ade
-    country_id: *bn
-    network_id: *bn_dst_mobile
-# Paging Prefixes
   - id: 263718
     prefix: '673850'
     number_min_length: 10
@@ -935,3 +902,39 @@ network_prefixes:
     uuid: 940df4f3-29d8-4150-8708-5f36ad298f67
     country_id: *bn
     network_id: *bn_imagine_paging
+  - id: 263844
+    prefix: '67386'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 93995bb9-eb22-4cbb-a1a3-27e343a4c5bf
+    country_id: *bn
+    network_id: *bn_dst_mobile
+# Paging Prefixes
+  - id: 263997
+    prefix: '67387'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: fdfe11bc-5956-44d6-bf25-23aac1b03ade
+    country_id: *bn
+    network_id: *bn_dst_mobile
+  - id: 256831
+    prefix: '67388'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cf4e73e2-9dc8-4a04-9592-8bf048bfb866
+    country_id: *bn
+    network_id: *bn_dst_mobile
+  - id: 256986
+    prefix: '67389'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 67eeaea2-f4a2-4c3d-a00e-da8b05bb1c7a
+    country_id: *bn
+    network_id: *bn_dst_mobile
+  - id: 257081
+    prefix: '6739'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 86b7a785-ad16-4dfc-9fb0-63e1f693b716
+    country_id: *bn
+    network_id: *bn_emergency_services

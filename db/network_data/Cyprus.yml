@@ -17,6 +17,47 @@ networks:
     name: CY Inquiry Services
     uuid: 622e80ab-b9ea-4d01-91eb-9554ed958925
     type_id: 13
+  - id: &cy_epic_mobile 21726
+    name: CY Epic Mobile
+    uuid: 0e8a5518-406c-443a-aeab-9deba2f48b04
+    type_id: 3
+  - id: &cy_primetel_mobile_mobile 21729
+    name: CY Primetel Mobile Mobile
+    uuid: 18e31da8-9f5e-4351-81ac-3280ee453cf7
+    type_id: 3
+  - id: &cy_voice_mail_region 21730
+    name: CY Voice Mail Region
+    uuid: f2d6dfad-d4a0-4c0a-a405-b4767a1e1d9b
+    type_id: 2
+  - id: &cy_cablenet_mobile_mobile 21731
+    name: CY Cablenet Mobile Mobile
+    uuid: 909c0f84-c552-4efe-901d-76193f4ccce3
+    type_id: 3
+  - id: &cy_cytamobile_vodafone_mobile 21732
+    name: CY Cytamobile Vodafone Mobile
+    uuid: c1a3b766-10ca-4fd4-9233-14a7f65cd016
+    type_id: 3
+  - id: &cy_nicosia_region 22837
+    name: CY Nicosia Region
+    uuid: abf6d82d-0ed2-4c7f-accc-47cc93cf2f27
+    type_id: 2
+  - id: &cy_famagusta_region 22906
+    name: CY Famagusta Region
+    uuid: 173dec60-2d10-4711-a193-43bba538f4c4
+    type_id: 2
+  - id: &cy_larnaca_region 22968
+    name: CY Larnaca Region
+    uuid: c9d178b1-5d26-4cd0-84d1-9fa6fb18473d
+    type_id: 2
+  - id: &cy_limassol_region 23006
+    name: CY Limassol Region
+    uuid: 796e8b57-8852-44c2-8938-95b24556f7eb
+    type_id: 2
+  - id: &cy_paphos_region 23080
+    name: CY Paphos Region
+    uuid: 4aa1fa52-f349-4f1c-9f81-d8b7115e61bd
+    type_id: 2
+# Fixed Networks
   - id: &cy_virtual_private_network_corporate_networks 23318
     name: CY Virtual Private Network Corporate Networks
     uuid: ad8bec52-8c3d-4982-8c11-d2464995661a
@@ -45,6 +86,7 @@ networks:
     name: CY Universal Access Services
     uuid: 9732fc87-3b72-4587-b437-b17b686ad8a0
     type_id: 13
+# Mobile Networks
   - id: &cy_premium_rate_services 24418
     name: CY Premium Rate Services
     uuid: c8c2f757-e22d-43d0-a281-f5a98340bf3c
@@ -57,58 +99,19 @@ networks:
     name: CY Business Informational Or Non Profit Services
     uuid: 165aa03a-b8fa-4eaf-a4cc-ee9906fc6daa
     type_id: 13
-# Mobile Networks
-  - id: &cy_epic_mobile 21726
-    name: CY Epic Mobile
-    uuid: 0e8a5518-406c-443a-aeab-9deba2f48b04
-    type_id: 3
-  - id: &cy_primetel_mobile_mobile 21729
-    name: CY Primetel Mobile Mobile
-    uuid: 18e31da8-9f5e-4351-81ac-3280ee453cf7
-    type_id: 3
-  - id: &cy_cablenet_mobile_mobile 21731
-    name: CY Cablenet Mobile Mobile
-    uuid: 909c0f84-c552-4efe-901d-76193f4ccce3
-    type_id: 3
-  - id: &cy_cytamobile_vodafone_mobile 21732
-    name: CY Cytamobile Vodafone Mobile
-    uuid: c1a3b766-10ca-4fd4-9233-14a7f65cd016
-    type_id: 3
-# Fixed Networks
-  - id: &cy_voice_mail_region 21730
-    name: CY Voice Mail Region
-    uuid: f2d6dfad-d4a0-4c0a-a405-b4767a1e1d9b
-    type_id: 2
-  - id: &cy_nicosia_region 22837
-    name: CY Nicosia Region
-    uuid: abf6d82d-0ed2-4c7f-accc-47cc93cf2f27
-    type_id: 2
-  - id: &cy_famagusta_region 22906
-    name: CY Famagusta Region
-    uuid: 173dec60-2d10-4711-a193-43bba538f4c4
-    type_id: 2
-  - id: &cy_larnaca_region 22968
-    name: CY Larnaca Region
-    uuid: c9d178b1-5d26-4cd0-84d1-9fa6fb18473d
-    type_id: 2
-  - id: &cy_limassol_region 23006
-    name: CY Limassol Region
-    uuid: 796e8b57-8852-44c2-8938-95b24556f7eb
-    type_id: 2
-  - id: &cy_paphos_region 23080
-    name: CY Paphos Region
-    uuid: 4aa1fa52-f349-4f1c-9f81-d8b7115e61bd
+  - id: &cy_fixed 43402
+    name: CY Fixed
+    uuid: a3fbdf7b-f005-49ce-ba48-bf680e88bc44
     type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Supplementary services Prefixes
   - id: 241978
     prefix: '357'
     number_min_length: 4
     number_max_length: 100
     uuid: bd2f0731-e57c-4bdb-b545-73f249f62ead
     country_id: *cy
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *cy_fixed
   - id: 242382
     prefix: '3571'
     number_min_length: 7
@@ -144,6 +147,48 @@ network_prefixes:
     uuid: a0da2ba7-da2f-427d-86b4-97862c279782
     country_id: *cy
     network_id: *cy_special_services
+  - id: 242823
+    prefix: '35712196'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 54264047-a216-45a5-a7e5-b64a93280af3
+    country_id: *cy
+    network_id: *cy_epic_mobile
+  - id: 242827
+    prefix: '35712295'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b0c72e35-3bd5-416a-ac60-e563c8e10ec9
+    country_id: *cy
+    network_id: *cy_primetel_mobile_mobile
+  - id: 242829
+    prefix: '3571232'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: b9f6fcd9-abd6-4129-bdb4-87c271659e43
+    country_id: *cy
+    network_id: *cy_voice_mail_region
+  - id: 242830
+    prefix: '357123940'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 2f9b1da9-d7e8-442d-87f9-38438c6f6e33
+    country_id: *cy
+    network_id: *cy_cablenet_mobile_mobile
+  - id: 242831
+    prefix: '35712397'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 7ffff661-ecbe-4138-a976-67891a3ffdc9
+    country_id: *cy
+    network_id: *cy_cytamobile_vodafone_mobile
+  - id: 242832
+    prefix: '35712399'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 5a135e44-a3e0-4368-a7bd-0de91495a5c7
+    country_id: *cy
+    network_id: *cy_cytamobile_vodafone_mobile
   - id: 242845
     prefix: '35713'
     number_min_length: 6
@@ -179,20 +224,6 @@ network_prefixes:
     uuid: 9027308a-7674-4975-9528-0d97a3bbc2bc
     country_id: *cy
     network_id: *cy_special_services
-  - id: 243929
-    prefix: '3574'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 5c3f121a-ee07-46d3-b18e-5ed1fc569946
-    country_id: *cy
-    network_id: *cy_sms_mms_services
-  - id: 245381
-    prefix: '3576'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 76f8a8ac-fc02-4a9d-b04a-7331e985899b
-    country_id: *cy
-    network_id: *cy_sms_mms_services
   - id: 247269
     prefix: '35718'
     number_min_length: 7
@@ -214,11 +245,53 @@ network_prefixes:
     uuid: bb59360d-097c-4a80-ad4b-ae805bc867e6
     country_id: *cy
     network_id: *cy_sms_mms_services
+  - id: 247720
+    prefix: '35722'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ea54036-c486-4e98-aa7f-26eeb5ed35bd
+    country_id: *cy
+    network_id: *cy_nicosia_region
+  - id: 247914
+    prefix: '35723'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bb23f542-99d1-4242-b0b3-d4d7af6f19b6
+    country_id: *cy
+    network_id: *cy_famagusta_region
+  - id: 248108
+    prefix: '35724'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 42154598-891b-4c4d-88a7-d240729faa9d
+    country_id: *cy
+    network_id: *cy_larnaca_region
+  - id: 248254
+    prefix: '35725'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 585f06f3-8e1f-4c08-80a5-acc2b1b0da90
+    country_id: *cy
+    network_id: *cy_limassol_region
+  - id: 248468
+    prefix: '35726'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cd177dc5-8259-4a7b-99ff-9fe62c208bd5
+    country_id: *cy
+    network_id: *cy_paphos_region
   - id: 248891
     prefix: '3573'
     number_min_length: 7
     number_max_length: 7
     uuid: 5fd7a645-5c1f-4345-8bd2-d16ed990ce6b
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 243929
+    prefix: '3574'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 5c3f121a-ee07-46d3-b18e-5ed1fc569946
     country_id: *cy
     network_id: *cy_sms_mms_services
   - id: 249568
@@ -235,6 +308,27 @@ network_prefixes:
     uuid: a954819c-ca01-43f3-99e5-26ccc1f67b7c
     country_id: *cy
     network_id: *cy_virtual_private_network_corporate_networks
+  - id: 245381
+    prefix: '3576'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 76f8a8ac-fc02-4a9d-b04a-7331e985899b
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 255243
+    prefix: '3577'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 3c26bc70-1323-473f-a738-04a5fe3cde8b
+    country_id: *cy
+    network_id: *cy_sms_mms_services
+  - id: 255313
+    prefix: '357700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 353bfe8e-af3f-4e98-89f0-1bc5cc007c73
+    country_id: *cy
+    network_id: *cy_personal_number_services
   - id: 251732
     prefix: '35771'
     number_min_length: 11
@@ -268,6 +362,35 @@ network_prefixes:
     number_min_length: 11
     number_max_length: 11
     uuid: 003fc14d-3296-4031-b31f-361e68976349
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 255444
+    prefix: '35776'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 58136747-5c4c-4c15-a434-d6c462d550d9
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 255622
+    prefix: '35777'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5027e797-5356-4ee2-a5d7-3152e8b29e40
+    country_id: *cy
+    network_id: *cy_universal_access_services
+# Fixed Prefixes
+  - id: 256082
+    prefix: '35778'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6cb985ba-d24f-4cc7-b0c7-4e9ff03ca909
+    country_id: *cy
+    network_id: *cy_intelligent_network_services
+  - id: 256381
+    prefix: '35779'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e8a55fd-7219-4ab3-974f-b0204a9e58af
     country_id: *cy
     network_id: *cy_intelligent_network_services
   - id: 253066
@@ -305,48 +428,7 @@ network_prefixes:
     uuid: df0ee08a-a8a4-4f31-9e5c-67c1529336c2
     country_id: *cy
     network_id: *cy_internet_services
-  - id: 255243
-    prefix: '3577'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 3c26bc70-1323-473f-a738-04a5fe3cde8b
-    country_id: *cy
-    network_id: *cy_sms_mms_services
-  - id: 255313
-    prefix: '357700'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 353bfe8e-af3f-4e98-89f0-1bc5cc007c73
-    country_id: *cy
-    network_id: *cy_personal_number_services
-  - id: 255444
-    prefix: '35776'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 58136747-5c4c-4c15-a434-d6c462d550d9
-    country_id: *cy
-    network_id: *cy_intelligent_network_services
-  - id: 255622
-    prefix: '35777'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5027e797-5356-4ee2-a5d7-3152e8b29e40
-    country_id: *cy
-    network_id: *cy_universal_access_services
-  - id: 256082
-    prefix: '35778'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6cb985ba-d24f-4cc7-b0c7-4e9ff03ca909
-    country_id: *cy
-    network_id: *cy_intelligent_network_services
-  - id: 256381
-    prefix: '35779'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e8a55fd-7219-4ab3-974f-b0204a9e58af
-    country_id: *cy
-    network_id: *cy_intelligent_network_services
+# Mobile Prefixes
   - id: 257089
     prefix: '3579'
     number_min_length: 7
@@ -382,49 +464,6 @@ network_prefixes:
     uuid: 5c67f191-0772-4215-9dce-31ffa6cd0f55
     country_id: *cy
     network_id: *cy_internet_services
-# Mobile Prefixes
-  - id: 242823
-    prefix: '35712196'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 54264047-a216-45a5-a7e5-b64a93280af3
-    country_id: *cy
-    network_id: *cy_epic_mobile
-  - id: 242827
-    prefix: '35712295'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: b0c72e35-3bd5-416a-ac60-e563c8e10ec9
-    country_id: *cy
-    network_id: *cy_primetel_mobile_mobile
-  - id: 242830
-    prefix: '357123940'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 2f9b1da9-d7e8-442d-87f9-38438c6f6e33
-    country_id: *cy
-    network_id: *cy_cablenet_mobile_mobile
-  - id: 242831
-    prefix: '35712397'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 7ffff661-ecbe-4138-a976-67891a3ffdc9
-    country_id: *cy
-    network_id: *cy_cytamobile_vodafone_mobile
-  - id: 242832
-    prefix: '35712399'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 5a135e44-a3e0-4368-a7bd-0de91495a5c7
-    country_id: *cy
-    network_id: *cy_cytamobile_vodafone_mobile
-  - id: 258178
-    prefix: '35799'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3cfefc5b-2a5e-41fe-bc8f-3f1171b54bf3
-    country_id: *cy
-    network_id: *cy_cytamobile_vodafone_mobile
   - id: 264205
     prefix: '357940'
     number_min_length: 11
@@ -467,46 +506,10 @@ network_prefixes:
     uuid: 1926c0c4-53df-4e5f-bca2-0d3d502c5418
     country_id: *cy
     network_id: *cy_cytamobile_vodafone_mobile
-# Fixed Prefixes
-  - id: 242829
-    prefix: '3571232'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: b9f6fcd9-abd6-4129-bdb4-87c271659e43
-    country_id: *cy
-    network_id: *cy_voice_mail_region
-  - id: 247720
-    prefix: '35722'
+  - id: 258178
+    prefix: '35799'
     number_min_length: 11
     number_max_length: 11
-    uuid: 6ea54036-c486-4e98-aa7f-26eeb5ed35bd
+    uuid: 3cfefc5b-2a5e-41fe-bc8f-3f1171b54bf3
     country_id: *cy
-    network_id: *cy_nicosia_region
-  - id: 247914
-    prefix: '35723'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bb23f542-99d1-4242-b0b3-d4d7af6f19b6
-    country_id: *cy
-    network_id: *cy_famagusta_region
-  - id: 248108
-    prefix: '35724'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 42154598-891b-4c4d-88a7-d240729faa9d
-    country_id: *cy
-    network_id: *cy_larnaca_region
-  - id: 248254
-    prefix: '35725'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 585f06f3-8e1f-4c08-80a5-acc2b1b0da90
-    country_id: *cy
-    network_id: *cy_limassol_region
-  - id: 248468
-    prefix: '35726'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cd177dc5-8259-4a7b-99ff-9fe62c208bd5
-    country_id: *cy
-    network_id: *cy_paphos_region
+    network_id: *cy_cytamobile_vodafone_mobile

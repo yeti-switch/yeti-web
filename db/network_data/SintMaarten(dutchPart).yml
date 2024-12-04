@@ -1,15 +1,10 @@
 country_id: &sx 277
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &sx_telcell_mobile 16600
     name: SX Telcell Mobile
     uuid: ff1d1c68-18db-4475-93d4-38d5e9219ace
     type_id: 3
-  - id: &sx_chippie_mobile 16611
-    name: SX Chippie Mobile
-    uuid: 6fb14913-d059-442d-ae0c-551cb05b94f8
-    type_id: 3
-# Fixed Networks
   - id: &sx_fixed 16601
     name: SX Fixed
     uuid: 3fbf7947-9fd2-43ae-a9ff-0829f13b8985
@@ -38,6 +33,11 @@ networks:
     name: SX Bettys Estate Cul De Sac Ebenezer Saunders South Reward Region
     uuid: 3a605b8f-77bf-4f2f-bc92-4b75120ffbe2
     type_id: 2
+  - id: &sx_chippie_mobile 16611
+    name: SX Chippie Mobile
+    uuid: 6fb14913-d059-442d-ae0c-551cb05b94f8
+    type_id: 3
+# Mobile Networks
   - id: &sx_antelecom_international_services_region 16612
     name: SX Antelecom International Services Region
     uuid: 1f394031-b9fd-4daf-8877-db82c6f43390
@@ -47,15 +47,14 @@ networks:
     uuid: 6feaa21e-0756-4029-88fa-4bc3cd7c08ea
     type_id: 2
 network_prefixes:
-# Country code Prefixes
-  - id: 169524
+# Fixed Prefixes
+  - id: 504117
     prefix: '1721'
-    number_min_length: 2
+    number_min_length: 5
     number_max_length: 100
-    uuid: 57c44d2e-f4ca-4057-a0af-bfb683475606
+    uuid: 836f0d84-1605-4835-a7dc-59124d95e8cb
     country_id: *sx
-    network_id: null
-# Mobile Prefixes
+    network_id: *sx_fixed
   - id: 169600
     prefix: '1721520'
     number_min_length: 11
@@ -91,6 +90,13 @@ network_prefixes:
     uuid: ef8fea90-427b-4850-8b10-c711af72f995
     country_id: *sx
     network_id: *sx_telcell_mobile
+  - id: 169605
+    prefix: '1721525'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d6f43361-a751-4102-a562-7b3928955082
+    country_id: *sx
+    network_id: *sx_fixed
   - id: 169606
     prefix: '1721526'
     number_min_length: 11
@@ -119,6 +125,63 @@ network_prefixes:
     uuid: 34c3084f-5540-40f8-9a53-40695423fdb2
     country_id: *sx
     network_id: *sx_telcell_mobile
+  - id: 169612
+    prefix: '172154'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ddf8413a-bba7-44b5-9629-2a5fe54b5bd4
+    country_id: *sx
+    network_id: *sx_fixed
+  - id: 169613
+    prefix: '1721542'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3ab5c55-57bb-41c9-8cdb-3a382987659c
+    country_id: *sx
+    network_id: *sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_region
+# Mobile Prefixes
+  - id: 169614
+    prefix: '1721543'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3c8610a-e69a-4354-8fac-0ada3e39db4d
+    country_id: *sx
+    network_id: *sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_region
+  - id: 169615
+    prefix: '1721544'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 693acf04-248e-4848-b71a-b4795463b47c
+    country_id: *sx
+    network_id: *sx_caybay_colebay_pelican_region
+  - id: 169616
+    prefix: '1721545'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f4976839-8771-4a41-a82b-715cecc5902a
+    country_id: *sx
+    network_id: *sx_beacon_hill_cupecoy_maho_simpson_bay_region
+  - id: 169617
+    prefix: '1721546'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e4b6894-0c81-48c8-a9c4-58d324c7bdfb
+    country_id: *sx
+    network_id: *sx_did_region
+  - id: 169618
+    prefix: '1721547'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3b4aa86f-f387-4394-b26d-d3ffd862f684
+    country_id: *sx
+    network_id: *sx_belvedere_dutch_quarter_middle_region_region
+  - id: 169619
+    prefix: '1721548'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a06bfad0-544a-459a-9540-89eee8152127
+    country_id: *sx
+    network_id: *sx_bettys_estate_cul_de_sac_ebenezer_saunders_south_reward_region
   - id: 169620
     prefix: '1721550'
     number_min_length: 11
@@ -196,70 +259,6 @@ network_prefixes:
     uuid: 3f642a8a-c584-43b2-b3c5-778da84fe0e8
     country_id: *sx
     network_id: *sx_chippie_mobile
-# Fixed Prefixes
-  - id: 169605
-    prefix: '1721525'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d6f43361-a751-4102-a562-7b3928955082
-    country_id: *sx
-    network_id: *sx_fixed
-  - id: 169612
-    prefix: '172154'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ddf8413a-bba7-44b5-9629-2a5fe54b5bd4
-    country_id: *sx
-    network_id: *sx_fixed
-  - id: 169613
-    prefix: '1721542'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b3ab5c55-57bb-41c9-8cdb-3a382987659c
-    country_id: *sx
-    network_id: *sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_region
-  - id: 169614
-    prefix: '1721543'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b3c8610a-e69a-4354-8fac-0ada3e39db4d
-    country_id: *sx
-    network_id: *sx_guana_bay_oyster_pond_philipsburg_pointe_blanche_region
-  - id: 169615
-    prefix: '1721544'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 693acf04-248e-4848-b71a-b4795463b47c
-    country_id: *sx
-    network_id: *sx_caybay_colebay_pelican_region
-  - id: 169616
-    prefix: '1721545'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f4976839-8771-4a41-a82b-715cecc5902a
-    country_id: *sx
-    network_id: *sx_beacon_hill_cupecoy_maho_simpson_bay_region
-  - id: 169617
-    prefix: '1721546'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5e4b6894-0c81-48c8-a9c4-58d324c7bdfb
-    country_id: *sx
-    network_id: *sx_did_region
-  - id: 169618
-    prefix: '1721547'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3b4aa86f-f387-4394-b26d-d3ffd862f684
-    country_id: *sx
-    network_id: *sx_belvedere_dutch_quarter_middle_region_region
-  - id: 169619
-    prefix: '1721548'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a06bfad0-544a-459a-9540-89eee8152127
-    country_id: *sx
-    network_id: *sx_bettys_estate_cul_de_sac_ebenezer_saunders_south_reward_region
   - id: 169632
     prefix: '1721590'
     number_min_length: 11

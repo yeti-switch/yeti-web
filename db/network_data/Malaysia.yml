@@ -13,27 +13,6 @@ networks:
     name: MY Johor Region
     uuid: 2e27f6b5-848f-4032-a598-58c547d40b8a
     type_id: 2
-  - id: &my_kuala_lumpur_putrajaya_selangor_region 31293
-    name: MY Kuala Lumpur Putrajaya Selangor Region
-    uuid: 13a0f16c-2936-4a8d-bc04-e557c35a6e94
-    type_id: 2
-  - id: &my_kedah_penang_perlis_region 34264
-    name: MY Kedah Penang Perlis Region
-    uuid: 6aaa45cd-c451-4486-88f5-7148b2807da8
-    type_id: 2
-  - id: &my_sarawak_region 39692
-    name: MY Sarawak Region
-    uuid: 20ae7263-9859-4822-bf10-1237af4984cb
-    type_id: 2
-  - id: &my_sabah_region 41357
-    name: MY Sabah Region
-    uuid: 87cd60da-42b9-4d46-8076-d12394281d7d
-    type_id: 2
-  - id: &my_kelantan_pahang_terengganu_region 41581
-    name: MY Kelantan Pahang Terengganu Region
-    uuid: 277d29ec-e372-418c-a94b-3239137f3330
-    type_id: 2
-# Supplementary services Networks
   - id: &my_special_services 21461
     name: MY Special Services
     uuid: 18af1b24-86a2-408e-a37b-84959d470bb9
@@ -58,6 +37,7 @@ networks:
     name: MY Internationally Accessible Information Services
     uuid: 66f8aa48-61e1-4360-9968-38ec4fd65342
     type_id: 13
+# Supplementary services Networks
   - id: &my_calling_party_pay_cpp_messaging_services 21805
     name: MY Calling Party Pay Cpp Messaging Services
     uuid: 8438a080-f2ad-4638-8fe0-b1dc522bf5b3
@@ -94,7 +74,6 @@ networks:
     name: MY Emergency Services
     uuid: 65d9160b-d632-4775-814c-3669cea9b76a
     type_id: 13
-# Mobile Networks
   - id: &my_mobile 24805
     name: MY Mobile
     uuid: c7f2d27b-c5cd-44f7-868c-ae54b90d8bf6
@@ -119,6 +98,7 @@ networks:
     name: MY Maxis Mobile
     uuid: 0d1db570-6cd8-48b3-af1f-bae660703afb
     type_id: 3
+# Mobile Networks
   - id: &my_tune_talk_mobile 24823
     name: MY Tune Talk Mobile
     uuid: 0a615ce9-358b-46b9-b066-86f57114cfa4
@@ -167,115 +147,39 @@ networks:
     name: MY Mkn Mobile
     uuid: 4ef913f6-981f-4c26-b0ff-173eee5de894
     type_id: 3
+  - id: &my_kuala_lumpur_putrajaya_selangor_region 31293
+    name: MY Kuala Lumpur Putrajaya Selangor Region
+    uuid: 13a0f16c-2936-4a8d-bc04-e557c35a6e94
+    type_id: 2
+  - id: &my_kedah_penang_perlis_region 34264
+    name: MY Kedah Penang Perlis Region
+    uuid: 6aaa45cd-c451-4486-88f5-7148b2807da8
+    type_id: 2
+  - id: &my_sarawak_region 39692
+    name: MY Sarawak Region
+    uuid: 20ae7263-9859-4822-bf10-1237af4984cb
+    type_id: 2
+  - id: &my_sabah_region 41357
+    name: MY Sabah Region
+    uuid: 87cd60da-42b9-4d46-8076-d12394281d7d
+    type_id: 2
+  - id: &my_kelantan_pahang_terengganu_region 41581
+    name: MY Kelantan Pahang Terengganu Region
+    uuid: 277d29ec-e372-418c-a94b-3239137f3330
+    type_id: 2
+  - id: &my_fixed 43441
+    name: MY Fixed
+    uuid: ad7907d4-5605-4f4f-8054-10f8f174fcf6
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
-  - id: 54583
-    prefix: '605'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 12bb401a-c379-40fc-b70d-dc696d0b38dc
-    country_id: *my
-    network_id: *my_perak_region
-  - id: 84946
-    prefix: '606'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 44dca0d3-80d0-42b5-8e55-bdad37697b1e
-    country_id: *my
-    network_id: *my_melaka_negeri_sembilan_region
-  - id: 149337
-    prefix: '607'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6d21658a-8264-435f-b6b6-73878f89eda8
-    country_id: *my
-    network_id: *my_johor_region
-  - id: 315873
-    prefix: '603'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b4913c3c-e0c7-407a-b6c4-87e31fdc2a43
-    country_id: *my
-    network_id: *my_kuala_lumpur_putrajaya_selangor_region
-  - id: 349448
-    prefix: '604'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5970bba0-a92f-4fd3-9af7-063c3f9f1b5c
-    country_id: *my
-    network_id: *my_kedah_penang_perlis_region
-  - id: 418789
-    prefix: '6082'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f2aa6760-215d-41b4-9b7f-7bbf595a3f4b
-    country_id: *my
-    network_id: *my_sarawak_region
-  - id: 422125
-    prefix: '6083'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e2f96bf9-fc84-4235-8199-c73e8feeb370
-    country_id: *my
-    network_id: *my_sarawak_region
-  - id: 428703
-    prefix: '6086'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ec8e76e7-06e1-47cc-8312-0e1e95d3294f
-    country_id: *my
-    network_id: *my_sarawak_region
-  - id: 433218
-    prefix: '6084'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6c372e6b-a499-4a5e-a589-412035a7182e
-    country_id: *my
-    network_id: *my_sarawak_region
-  - id: 435883
-    prefix: '6085'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a7013125-09fd-4343-ba2e-28ed6a35a80b
-    country_id: *my
-    network_id: *my_sarawak_region
-  - id: 441109
-    prefix: '6087'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ec84a631-a106-4585-a652-1b735069b0fa
-    country_id: *my
-    network_id: *my_sabah_region
-  - id: 443793
-    prefix: '6088'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8808d169-1e4b-481f-aef8-b36547212c16
-    country_id: *my
-    network_id: *my_sabah_region
-  - id: 444755
-    prefix: '609'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 027e136c-7274-4d52-900d-9dc41d8b8733
-    country_id: *my
-    network_id: *my_kelantan_pahang_terengganu_region
-  - id: 451410
-    prefix: '6089'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b81f46be-216b-4025-8b70-d2e2a0c314e8
-    country_id: *my
-    network_id: *my_sabah_region
-# Country code Prefixes
   - id: 242063
     prefix: '60'
     number_min_length: 3
     number_max_length: 100
     uuid: d6bc952c-7bf2-4b7c-8e49-8ba5354ecbc3
     country_id: *my
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *my_fixed
   - id: 242458
     prefix: '601'
     number_min_length: 5
@@ -283,280 +187,6 @@ network_prefixes:
     uuid: a9e9ccb6-bd97-48dd-bf68-9fb7924cbb15
     country_id: *my
     network_id: *my_special_services
-  - id: 242557
-    prefix: '60105'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 42ce6157-118a-4d07-8970-ca56c66880b5
-    country_id: *my
-    network_id: *my_information_services
-  - id: 242561
-    prefix: '60106'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 46a1f60b-9db1-4d2e-ae59-15b023678298
-    country_id: *my
-    network_id: *my_information_services
-  - id: 242569
-    prefix: '60107'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 58898a76-bdc5-4f08-ac20-7494162e8bb3
-    country_id: *my
-    network_id: *my_information_services
-  - id: 242571
-    prefix: '60108'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 061cb178-77c1-4579-a44c-a0180da96fda
-    country_id: *my
-    network_id: *my_information_services
-  - id: 242574
-    prefix: '60109'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 7835473c-6076-45e8-a281-a245c0545e27
-    country_id: *my
-    network_id: *my_information_services
-  - id: 242867
-    prefix: '601300'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c6fc435f-6736-4b4d-9cf7-29eafab05433
-    country_id: *my
-    network_id: *my_toll_free_services
-  - id: 242869
-    prefix: '60131'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 015ce166-cd27-45c7-be59-d3dcbf9693d7
-    country_id: *my
-    network_id: *my_internal_network_services
-  - id: 242873
-    prefix: '60132'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 8a850a87-7304-430c-97d6-9e9b372367c8
-    country_id: *my
-    network_id: *my_internal_network_services
-  - id: 242876
-    prefix: '60133'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: eaff43fb-aedf-48c3-bdd7-6405123d50a3
-    country_id: *my
-    network_id: *my_internal_network_services
-  - id: 242878
-    prefix: '60134'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 7de7f421-a6df-4629-8577-908cf6fad557
-    country_id: *my
-    network_id: *my_mass_calling_services
-  - id: 242881
-    prefix: '60135'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: db74cebd-8261-45c0-b8c2-64c4f9bf41f8
-    country_id: *my
-    network_id: *my_mass_calling_services
-  - id: 242883
-    prefix: '60136'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: a7c2bbda-f8dd-4c35-8889-a6c91488b80d
-    country_id: *my
-    network_id: *my_mass_calling_services
-  - id: 242885
-    prefix: '60137'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 84c9560f-3fd4-4f2d-927a-65e193f73eec
-    country_id: *my
-    network_id: *my_mass_calling_services
-  - id: 242886
-    prefix: '60138'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 037b02aa-dac9-4672-b30d-3f8c4b8282fd
-    country_id: *my
-    network_id: *my_mass_calling_services
-  - id: 242887
-    prefix: '60139'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 2761bd50-d05f-4be5-9837-fa34014f1122
-    country_id: *my
-    network_id: *my_mass_calling_services
-  - id: 242920
-    prefix: '60141'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 457d5a63-f919-4157-9fe6-6670c804cc2c
-    country_id: *my
-    network_id: *my_internationally_accessible_information_services
-  - id: 242959
-    prefix: '601500'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 33ad6eb0-31fe-46f8-b5e3-65c02d573efe
-    country_id: *my
-    network_id: *my_calling_party_pay_cpp_messaging_services
-  - id: 242960
-    prefix: '601508'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5ad70053-2580-4cee-9d1a-cbd65f3c428e
-    country_id: *my
-    network_id: *my_dial_up_internet_access
-  - id: 242965
-    prefix: '60151'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 85f32971-9ee3-4e57-ba2b-1308baaa94e9
-    country_id: *my
-    network_id: *my_dial_up_internet_access
-  - id: 242976
-    prefix: '60152'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: f20b6529-ade4-4d0b-b605-fea74407680d
-    country_id: *my
-    network_id: *my_dial_up_internet_access
-  - id: 242981
-    prefix: '60153'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 3317da94-63b2-40e5-99fb-5ba5168636be
-    country_id: *my
-    network_id: *my_assistance_services
-  - id: 242986
-    prefix: '60154'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 528bfe0d-d813-4749-8d8e-585631abc8e2
-    country_id: *my
-    network_id: *my_assistance_services
-  - id: 242991
-    prefix: '60155'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 98242f4c-b319-4c52-8bbc-cee944ea7811
-    country_id: *my
-    network_id: *my_assistance_services
-  - id: 242994
-    prefix: '60156'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: dd83678b-93a7-4445-bb86-841fa2998b86
-    country_id: *my
-    network_id: *my_assistance_services
-  - id: 242997
-    prefix: '60157'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 088e3dc5-4eac-4a49-89d4-7f54081a4c24
-    country_id: *my
-    network_id: *my_assistance_services
-  - id: 243000
-    prefix: '60158'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 0a991ebb-fd8e-44b2-96a8-ecc37fcd4f7c
-    country_id: *my
-    network_id: *my_assistance_services
-  - id: 243002
-    prefix: '60159'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 57fe2950-cada-4dce-b4a2-848a25f0b775
-    country_id: *my
-    network_id: *my_assistance_services
-  - id: 243033
-    prefix: '601600'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e531b502-a3e3-4035-8324-78896ab31343
-    country_id: *my
-    network_id: *my_premium_rate_services
-  - id: 243074
-    prefix: '601700'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e69bd25f-4286-49d6-aa35-878a51e28bdf
-    country_id: *my
-    network_id: *my_forwarding_services
-  - id: 243950
-    prefix: '604'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: a9642872-dd6b-470d-b680-44a6924b553e
-    country_id: *my
-    network_id: *my_sms_mms_services
-  - id: 245412
-    prefix: '606'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 235c673c-b319-4e79-893e-fe1620464e5e
-    country_id: *my
-    network_id: *my_sms_mms_services
-  - id: 247300
-    prefix: '601800'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 4ca11c8b-1a4f-421d-9e22-a316af5c25ad
-    country_id: *my
-    network_id: *my_freephone_services
-  - id: 247356
-    prefix: '601900'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d7dda186-5c38-4292-917c-5a2ff4890eea
-    country_id: *my
-    network_id: *my_multimedia_services
-  - id: 247424
-    prefix: '602'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 850cb15f-c9e1-4c34-ad08-d28fcd04bec2
-    country_id: *my
-    network_id: *my_sms_mms_services
-  - id: 248912
-    prefix: '603'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 946209ff-cddd-4a61-87c1-946a1bfb01a4
-    country_id: *my
-    network_id: *my_sms_mms_services
-  - id: 249593
-    prefix: '605'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 8ea5ee51-d60f-442b-aa9c-8944713f813f
-    country_id: *my
-    network_id: *my_sms_mms_services
-  - id: 253094
-    prefix: '608'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 232bbdc7-4e7e-4f6c-bdc2-8726ab3c220c
-    country_id: *my
-    network_id: *my_sms_mms_services
-  - id: 255263
-    prefix: '607'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 305f1f36-9e0a-4ebe-bc61-4bdad13d985d
-    country_id: *my
-    network_id: *my_sms_mms_services
-  - id: 257118
-    prefix: '609'
-    number_min_length: 5
-    number_max_length: 5
-    uuid: 36eb69a9-a406-4c52-b1aa-55244fe517eb
-    country_id: *my
-    network_id: *my_emergency_services
-# Mobile Prefixes
   - id: 258622
     prefix: '6010'
     number_min_length: 11
@@ -648,6 +278,7 @@ network_prefixes:
     uuid: 21ea8610-c457-4a36-89d0-994b5d8f46a0
     country_id: *my
     network_id: *my_celcom_mobile
+# Supplementary services Prefixes
   - id: 258685
     prefix: '601041'
     number_min_length: 11
@@ -690,6 +321,13 @@ network_prefixes:
     uuid: d6e475d1-fb8c-4303-8f25-07c572f50378
     country_id: *my
     network_id: *my_digi_mobile
+  - id: 242557
+    prefix: '60105'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 42ce6157-118a-4d07-8970-ca56c66880b5
+    country_id: *my
+    network_id: *my_information_services
   - id: 258700
     prefix: '601050'
     number_min_length: 11
@@ -760,6 +398,13 @@ network_prefixes:
     uuid: 753c5af8-0c14-4c74-a74a-28b9730f0a17
     country_id: *my
     network_id: *my_celcom_mobile
+  - id: 242561
+    prefix: '60106'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 46a1f60b-9db1-4d2e-ae59-15b023678298
+    country_id: *my
+    network_id: *my_information_services
   - id: 258727
     prefix: '601065'
     number_min_length: 11
@@ -774,6 +419,13 @@ network_prefixes:
     uuid: f47ad572-bff5-4ecf-9330-7a1305a96aab
     country_id: *my
     network_id: *my_digi_mobile
+  - id: 242569
+    prefix: '60107'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 58898a76-bdc5-4f08-ac20-7494162e8bb3
+    country_id: *my
+    network_id: *my_information_services
   - id: 258732
     prefix: '601070'
     number_min_length: 11
@@ -816,6 +468,13 @@ network_prefixes:
     uuid: 7c029b94-8859-4c60-98d3-86b49c1bf3b3
     country_id: *my
     network_id: *my_tune_talk_mobile
+  - id: 242571
+    prefix: '60108'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 061cb178-77c1-4579-a44c-a0180da96fda
+    country_id: *my
+    network_id: *my_information_services
   - id: 258746
     prefix: '601080'
     number_min_length: 11
@@ -886,6 +545,13 @@ network_prefixes:
     uuid: 233424e3-cb2b-4fe8-9ede-7054786d83f2
     country_id: *my
     network_id: *my_maxis_mobile
+  - id: 242574
+    prefix: '60109'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 7835473c-6076-45e8-a281-a245c0545e27
+    country_id: *my
+    network_id: *my_information_services
   - id: 258766
     prefix: '6010900'
     number_min_length: 11
@@ -893,6 +559,7 @@ network_prefixes:
     uuid: 29790e3f-e06d-4ad4-91d4-a78ad939ee57
     country_id: *my
     network_id: *my_digi_mobile
+# Mobile Prefixes
   - id: 258767
     prefix: '6010901'
     number_min_length: 11
@@ -2475,6 +2142,83 @@ network_prefixes:
     uuid: 50d974b2-9001-444f-a619-0045841b619a
     country_id: *my
     network_id: *my_celcom_mobile
+  - id: 242867
+    prefix: '601300'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c6fc435f-6736-4b4d-9cf7-29eafab05433
+    country_id: *my
+    network_id: *my_toll_free_services
+  - id: 242869
+    prefix: '60131'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 015ce166-cd27-45c7-be59-d3dcbf9693d7
+    country_id: *my
+    network_id: *my_internal_network_services
+  - id: 242873
+    prefix: '60132'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 8a850a87-7304-430c-97d6-9e9b372367c8
+    country_id: *my
+    network_id: *my_internal_network_services
+  - id: 242876
+    prefix: '60133'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: eaff43fb-aedf-48c3-bdd7-6405123d50a3
+    country_id: *my
+    network_id: *my_internal_network_services
+  - id: 242878
+    prefix: '60134'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 7de7f421-a6df-4629-8577-908cf6fad557
+    country_id: *my
+    network_id: *my_mass_calling_services
+  - id: 242881
+    prefix: '60135'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: db74cebd-8261-45c0-b8c2-64c4f9bf41f8
+    country_id: *my
+    network_id: *my_mass_calling_services
+  - id: 242883
+    prefix: '60136'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: a7c2bbda-f8dd-4c35-8889-a6c91488b80d
+    country_id: *my
+    network_id: *my_mass_calling_services
+  - id: 242885
+    prefix: '60137'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 84c9560f-3fd4-4f2d-927a-65e193f73eec
+    country_id: *my
+    network_id: *my_mass_calling_services
+  - id: 242886
+    prefix: '60138'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 037b02aa-dac9-4672-b30d-3f8c4b8282fd
+    country_id: *my
+    network_id: *my_mass_calling_services
+  - id: 242887
+    prefix: '60139'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 2761bd50-d05f-4be5-9837-fa34014f1122
+    country_id: *my
+    network_id: *my_mass_calling_services
+  - id: 242920
+    prefix: '60141'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 457d5a63-f919-4157-9fe6-6670c804cc2c
+    country_id: *my
+    network_id: *my_internationally_accessible_information_services
   - id: 259951
     prefix: '60142'
     number_min_length: 11
@@ -2531,6 +2275,377 @@ network_prefixes:
     uuid: 68c89349-8eac-4a03-8e94-f92f1e0299ba
     country_id: *my
     network_id: *my_digi_mobile
+  - id: 242959
+    prefix: '601500'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 33ad6eb0-31fe-46f8-b5e3-65c02d573efe
+    country_id: *my
+    network_id: *my_calling_party_pay_cpp_messaging_services
+  - id: 242960
+    prefix: '601508'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5ad70053-2580-4cee-9d1a-cbd65f3c428e
+    country_id: *my
+    network_id: *my_dial_up_internet_access
+  - id: 242965
+    prefix: '60151'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 85f32971-9ee3-4e57-ba2b-1308baaa94e9
+    country_id: *my
+    network_id: *my_dial_up_internet_access
+  - id: 242976
+    prefix: '60152'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: f20b6529-ade4-4d0b-b605-fea74407680d
+    country_id: *my
+    network_id: *my_dial_up_internet_access
+  - id: 242981
+    prefix: '60153'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 3317da94-63b2-40e5-99fb-5ba5168636be
+    country_id: *my
+    network_id: *my_assistance_services
+  - id: 242986
+    prefix: '60154'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 528bfe0d-d813-4749-8d8e-585631abc8e2
+    country_id: *my
+    network_id: *my_assistance_services
+  - id: 266331
+    prefix: '60154'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 33e201e5-1214-43e6-a262-f6dc083717c6
+    country_id: *my
+    network_id: *my_mobile
+  - id: 266333
+    prefix: '6015460'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e82f0ca0-4149-444d-82a6-3731e68e6eb6
+    country_id: *my
+    network_id: *my_atur_450_mobile
+  - id: 266334
+    prefix: '60154610'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e052d99e-66c1-4773-90b2-d48dd30534ad
+    country_id: *my
+    network_id: *my_atur_450_mobile
+  - id: 266335
+    prefix: '60154611'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fa35e596-eacc-41b4-9d5b-e1e88255d37e
+    country_id: *my
+    network_id: *my_atur_450_mobile
+  - id: 266336
+    prefix: '60154612'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3d3d07ae-ace7-45f4-93a6-db41dd10ea65
+    country_id: *my
+    network_id: *my_atur_450_mobile
+  - id: 266337
+    prefix: '60154613'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fe50fb7f-39de-4656-8f83-8302eef8afb7
+    country_id: *my
+    network_id: *my_atur_450_mobile
+  - id: 266338
+    prefix: '60154821'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9446ce74-5681-4f82-a79c-a12799cd122f
+    country_id: *my
+    network_id: *my_tt_dotcom_mobile
+  - id: 266339
+    prefix: '60154840'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f06d49d-2489-46f3-8b1c-aaad8865dbd2
+    country_id: *my
+    network_id: *my_redtone_mobile
+  - id: 266340
+    prefix: '60154841'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 074512d7-b1ba-48d9-b379-14c78a77ed6e
+    country_id: *my
+    network_id: *my_y_max_mobile
+  - id: 266341
+    prefix: '60154848'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fa4cb3a9-f38a-4e0c-8d08-9549668e7c89
+    country_id: *my
+    network_id: *my_unifi_mobile
+  - id: 266342
+    prefix: '60154849'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bcc2eda9-d902-4e1c-81fd-5a94237502ad
+    country_id: *my
+    network_id: *my_unifi_mobile
+  - id: 266343
+    prefix: '60154851'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 875367c1-5636-458d-a466-cd04434741c7
+    country_id: *my
+    network_id: *my_maxis_broadband_mobile
+  - id: 266344
+    prefix: '60154870'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 915663c5-1945-4642-9bc6-a1a24992d22f
+    country_id: *my
+    network_id: *my_ocesb_mobile
+  - id: 266345
+    prefix: '60154871'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 508c4db6-d483-4a24-954c-c37033940ffb
+    country_id: *my
+    network_id: *my_redtone_mobile
+  - id: 266346
+    prefix: '60154872'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 91e90d3e-6359-4de9-b6e0-d7af807e7291
+    country_id: *my
+    network_id: *my_redtone_mobile
+  - id: 266347
+    prefix: '60154873'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 8c911442-d397-4e58-8f13-fba1deba7b9e
+    country_id: *my
+    network_id: *my_redtone_mobile
+  - id: 266348
+    prefix: '60154874'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d5fcac5e-f969-468c-a6eb-3a99b21dc8c5
+    country_id: *my
+    network_id: *my_redtone_mobile
+  - id: 266349
+    prefix: '60154876'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3ee73ec5-3775-4f35-941d-846cbb2ade97
+    country_id: *my
+    network_id: *my_redtone_mobile
+  - id: 266350
+    prefix: '60154877'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: bd8b5c99-89e3-4f9a-a3f2-2a4343ead427
+    country_id: *my
+    network_id: *my_redtone_mobile
+  - id: 266351
+    prefix: '60154879'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7a585b14-f18c-4b88-93d4-ce6c6c84dad0
+    country_id: *my
+    network_id: *my_redtone_mobile
+  - id: 242991
+    prefix: '60155'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 98242f4c-b319-4c52-8bbc-cee944ea7811
+    country_id: *my
+    network_id: *my_assistance_services
+  - id: 242994
+    prefix: '60156'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: dd83678b-93a7-4445-bb86-841fa2998b86
+    country_id: *my
+    network_id: *my_assistance_services
+  - id: 266382
+    prefix: '60156'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 01654aac-aee8-464c-a777-b79714bd146a
+    country_id: *my
+    network_id: *my_mobile
+  - id: 266387
+    prefix: '60156320'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 02d6492a-d0ba-4661-9cb2-6afc26287e08
+    country_id: *my
+    network_id: *my_mkn_mobile
+  - id: 266388
+    prefix: '60156321'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 67dc61de-f3aa-40b7-9b87-69dc442c081a
+    country_id: *my
+    network_id: *my_mkn_mobile
+  - id: 266389
+    prefix: '60156322'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b18cab7f-eb06-4c0c-90c1-d2a5830e2ed2
+    country_id: *my
+    network_id: *my_mkn_mobile
+  - id: 266390
+    prefix: '60156323'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 61cf15b8-d398-4df6-a2e0-51f2fa207744
+    country_id: *my
+    network_id: *my_mkn_mobile
+  - id: 266391
+    prefix: '60156324'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c9aba059-e9d7-4ba6-9fe7-483af602503c
+    country_id: *my
+    network_id: *my_mkn_mobile
+  - id: 266392
+    prefix: '60156325'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5a1f9ffd-b95f-412d-995a-03c824fa342b
+    country_id: *my
+    network_id: *my_mkn_mobile
+  - id: 266393
+    prefix: '60156326'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 17a7a54c-567d-4df4-8554-910ffd4c81db
+    country_id: *my
+    network_id: *my_mkn_mobile
+  - id: 242997
+    prefix: '60157'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 088e3dc5-4eac-4a49-89d4-7f54081a4c24
+    country_id: *my
+    network_id: *my_assistance_services
+  - id: 243000
+    prefix: '60158'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 0a991ebb-fd8e-44b2-96a8-ecc37fcd4f7c
+    country_id: *my
+    network_id: *my_assistance_services
+  - id: 243002
+    prefix: '60159'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 57fe2950-cada-4dce-b4a2-848a25f0b775
+    country_id: *my
+    network_id: *my_assistance_services
+  - id: 266499
+    prefix: '60159'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 589dec80-1238-4c2a-8ccd-3d05caf5e739
+    country_id: *my
+    network_id: *my_mobile
+  - id: 266501
+    prefix: '601591'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 00c515f1-8d9d-483e-9da8-1a4747dd5fda
+    country_id: *my
+    network_id: *my_digi_mobile
+  - id: 266502
+    prefix: '601592'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 60f3223a-aa2b-4c59-a81c-fa0fb3d98ff0
+    country_id: *my
+    network_id: *my_celcom_mobile
+  - id: 266503
+    prefix: '6015960'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b74b8639-3462-4fd3-86da-85ecc5f170ac
+    country_id: *my
+    network_id: *my_digi_mobile
+  - id: 266504
+    prefix: '6015961'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d98d621-2730-444a-8d3e-aa1f7155747e
+    country_id: *my
+    network_id: *my_digi_mobile
+  - id: 266505
+    prefix: '6015962'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 64ebcee1-7536-447c-ac82-f82e51158667
+    country_id: *my
+    network_id: *my_digi_mobile
+  - id: 266506
+    prefix: '6015963'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7d0139a0-82c1-49b0-8b43-2e5a64e3cc20
+    country_id: *my
+    network_id: *my_digi_mobile
+  - id: 266507
+    prefix: '6015964'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 47182d30-1796-4a7b-bd21-4cca103432ba
+    country_id: *my
+    network_id: *my_digi_mobile
+  - id: 266557
+    prefix: '6016'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce9e2f34-116a-44e3-86a4-b54d15ca4473
+    country_id: *my
+    network_id: *my_digi_mobile
+  - id: 243033
+    prefix: '601600'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e531b502-a3e3-4035-8324-78896ab31343
+    country_id: *my
+    network_id: *my_premium_rate_services
+  - id: 266949
+    prefix: '6017'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 449cf995-4cd0-4be1-878d-5a7d810989cd
+    country_id: *my
+    network_id: *my_maxis_mobile
+  - id: 266956
+    prefix: '60170'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 230fe12a-2ff1-41e6-930e-30f4c2fba0c3
+    country_id: *my
+    network_id: *my_maxis_mobile
+  - id: 243074
+    prefix: '601700'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e69bd25f-4286-49d6-aa35-878a51e28bdf
+    country_id: *my
+    network_id: *my_forwarding_services
+  - id: 247300
+    prefix: '601800'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 4ca11c8b-1a4f-421d-9e22-a316af5c25ad
+    country_id: *my
+    network_id: *my_freephone_services
   - id: 260514
     prefix: '601811'
     number_min_length: 11
@@ -3014,6 +3129,13 @@ network_prefixes:
     uuid: 0e0e706b-bbc6-4ff2-a886-dd78155bfb22
     country_id: *my
     network_id: *my_celcom_mobile
+  - id: 247356
+    prefix: '601900'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d7dda186-5c38-4292-917c-5a2ff4890eea
+    country_id: *my
+    network_id: *my_multimedia_services
   - id: 260835
     prefix: '6019020'
     number_min_length: 11
@@ -3203,276 +3325,157 @@ network_prefixes:
     uuid: b6604aba-691a-430e-a257-64681fc7455f
     country_id: *my
     network_id: *my_celcom_mobile
-  - id: 266331
-    prefix: '60154'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 33e201e5-1214-43e6-a262-f6dc083717c6
+  - id: 247424
+    prefix: '602'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 850cb15f-c9e1-4c34-ad08-d28fcd04bec2
     country_id: *my
-    network_id: *my_mobile
-  - id: 266333
-    prefix: '6015460'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e82f0ca0-4149-444d-82a6-3731e68e6eb6
-    country_id: *my
-    network_id: *my_atur_450_mobile
-  - id: 266334
-    prefix: '60154610'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e052d99e-66c1-4773-90b2-d48dd30534ad
-    country_id: *my
-    network_id: *my_atur_450_mobile
-  - id: 266335
-    prefix: '60154611'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fa35e596-eacc-41b4-9d5b-e1e88255d37e
-    country_id: *my
-    network_id: *my_atur_450_mobile
-  - id: 266336
-    prefix: '60154612'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3d3d07ae-ace7-45f4-93a6-db41dd10ea65
-    country_id: *my
-    network_id: *my_atur_450_mobile
-  - id: 266337
-    prefix: '60154613'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fe50fb7f-39de-4656-8f83-8302eef8afb7
-    country_id: *my
-    network_id: *my_atur_450_mobile
-  - id: 266338
-    prefix: '60154821'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9446ce74-5681-4f82-a79c-a12799cd122f
-    country_id: *my
-    network_id: *my_tt_dotcom_mobile
-  - id: 266339
-    prefix: '60154840'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7f06d49d-2489-46f3-8b1c-aaad8865dbd2
-    country_id: *my
-    network_id: *my_redtone_mobile
-  - id: 266340
-    prefix: '60154841'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 074512d7-b1ba-48d9-b379-14c78a77ed6e
-    country_id: *my
-    network_id: *my_y_max_mobile
-  - id: 266341
-    prefix: '60154848'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fa4cb3a9-f38a-4e0c-8d08-9549668e7c89
-    country_id: *my
-    network_id: *my_unifi_mobile
-  - id: 266342
-    prefix: '60154849'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bcc2eda9-d902-4e1c-81fd-5a94237502ad
-    country_id: *my
-    network_id: *my_unifi_mobile
-  - id: 266343
-    prefix: '60154851'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 875367c1-5636-458d-a466-cd04434741c7
-    country_id: *my
-    network_id: *my_maxis_broadband_mobile
-  - id: 266344
-    prefix: '60154870'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 915663c5-1945-4642-9bc6-a1a24992d22f
-    country_id: *my
-    network_id: *my_ocesb_mobile
-  - id: 266345
-    prefix: '60154871'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 508c4db6-d483-4a24-954c-c37033940ffb
-    country_id: *my
-    network_id: *my_redtone_mobile
-  - id: 266346
-    prefix: '60154872'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 91e90d3e-6359-4de9-b6e0-d7af807e7291
-    country_id: *my
-    network_id: *my_redtone_mobile
-  - id: 266347
-    prefix: '60154873'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 8c911442-d397-4e58-8f13-fba1deba7b9e
-    country_id: *my
-    network_id: *my_redtone_mobile
-  - id: 266348
-    prefix: '60154874'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d5fcac5e-f969-468c-a6eb-3a99b21dc8c5
-    country_id: *my
-    network_id: *my_redtone_mobile
-  - id: 266349
-    prefix: '60154876'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3ee73ec5-3775-4f35-941d-846cbb2ade97
-    country_id: *my
-    network_id: *my_redtone_mobile
-  - id: 266350
-    prefix: '60154877'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: bd8b5c99-89e3-4f9a-a3f2-2a4343ead427
-    country_id: *my
-    network_id: *my_redtone_mobile
-  - id: 266351
-    prefix: '60154879'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7a585b14-f18c-4b88-93d4-ce6c6c84dad0
-    country_id: *my
-    network_id: *my_redtone_mobile
-  - id: 266382
-    prefix: '60156'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 01654aac-aee8-464c-a777-b79714bd146a
-    country_id: *my
-    network_id: *my_mobile
-  - id: 266387
-    prefix: '60156320'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 02d6492a-d0ba-4661-9cb2-6afc26287e08
-    country_id: *my
-    network_id: *my_mkn_mobile
-  - id: 266388
-    prefix: '60156321'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 67dc61de-f3aa-40b7-9b87-69dc442c081a
-    country_id: *my
-    network_id: *my_mkn_mobile
-  - id: 266389
-    prefix: '60156322'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b18cab7f-eb06-4c0c-90c1-d2a5830e2ed2
-    country_id: *my
-    network_id: *my_mkn_mobile
-  - id: 266390
-    prefix: '60156323'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 61cf15b8-d398-4df6-a2e0-51f2fa207744
-    country_id: *my
-    network_id: *my_mkn_mobile
-  - id: 266391
-    prefix: '60156324'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c9aba059-e9d7-4ba6-9fe7-483af602503c
-    country_id: *my
-    network_id: *my_mkn_mobile
-  - id: 266392
-    prefix: '60156325'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5a1f9ffd-b95f-412d-995a-03c824fa342b
-    country_id: *my
-    network_id: *my_mkn_mobile
-  - id: 266393
-    prefix: '60156326'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 17a7a54c-567d-4df4-8554-910ffd4c81db
-    country_id: *my
-    network_id: *my_mkn_mobile
-  - id: 266499
-    prefix: '60159'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 589dec80-1238-4c2a-8ccd-3d05caf5e739
-    country_id: *my
-    network_id: *my_mobile
-  - id: 266501
-    prefix: '601591'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 00c515f1-8d9d-483e-9da8-1a4747dd5fda
-    country_id: *my
-    network_id: *my_digi_mobile
-  - id: 266502
-    prefix: '601592'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 60f3223a-aa2b-4c59-a81c-fa0fb3d98ff0
-    country_id: *my
-    network_id: *my_celcom_mobile
-  - id: 266503
-    prefix: '6015960'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b74b8639-3462-4fd3-86da-85ecc5f170ac
-    country_id: *my
-    network_id: *my_digi_mobile
-  - id: 266504
-    prefix: '6015961'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2d98d621-2730-444a-8d3e-aa1f7155747e
-    country_id: *my
-    network_id: *my_digi_mobile
-  - id: 266505
-    prefix: '6015962'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 64ebcee1-7536-447c-ac82-f82e51158667
-    country_id: *my
-    network_id: *my_digi_mobile
-  - id: 266506
-    prefix: '6015963'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7d0139a0-82c1-49b0-8b43-2e5a64e3cc20
-    country_id: *my
-    network_id: *my_digi_mobile
-  - id: 266507
-    prefix: '6015964'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 47182d30-1796-4a7b-bd21-4cca103432ba
-    country_id: *my
-    network_id: *my_digi_mobile
-  - id: 266557
-    prefix: '6016'
+    network_id: *my_sms_mms_services
+  - id: 315873
+    prefix: '603'
     number_min_length: 11
     number_max_length: 11
-    uuid: ce9e2f34-116a-44e3-86a4-b54d15ca4473
+    uuid: b4913c3c-e0c7-407a-b6c4-87e31fdc2a43
     country_id: *my
-    network_id: *my_digi_mobile
-  - id: 266949
-    prefix: '6017'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 449cf995-4cd0-4be1-878d-5a7d810989cd
+    network_id: *my_kuala_lumpur_putrajaya_selangor_region
+  - id: 248912
+    prefix: '603'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 946209ff-cddd-4a61-87c1-946a1bfb01a4
     country_id: *my
-    network_id: *my_maxis_mobile
-  - id: 266956
-    prefix: '60170'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 230fe12a-2ff1-41e6-930e-30f4c2fba0c3
+    network_id: *my_sms_mms_services
+  - id: 349448
+    prefix: '604'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5970bba0-a92f-4fd3-9af7-063c3f9f1b5c
     country_id: *my
-    network_id: *my_maxis_mobile
+    network_id: *my_kedah_penang_perlis_region
+  - id: 243950
+    prefix: '604'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: a9642872-dd6b-470d-b680-44a6924b553e
+    country_id: *my
+    network_id: *my_sms_mms_services
+  - id: 54583
+    prefix: '605'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 12bb401a-c379-40fc-b70d-dc696d0b38dc
+    country_id: *my
+    network_id: *my_perak_region
+  - id: 249593
+    prefix: '605'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 8ea5ee51-d60f-442b-aa9c-8944713f813f
+    country_id: *my
+    network_id: *my_sms_mms_services
+  - id: 84946
+    prefix: '606'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 44dca0d3-80d0-42b5-8e55-bdad37697b1e
+    country_id: *my
+    network_id: *my_melaka_negeri_sembilan_region
+  - id: 245412
+    prefix: '606'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 235c673c-b319-4e79-893e-fe1620464e5e
+    country_id: *my
+    network_id: *my_sms_mms_services
+  - id: 149337
+    prefix: '607'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6d21658a-8264-435f-b6b6-73878f89eda8
+    country_id: *my
+    network_id: *my_johor_region
+  - id: 255263
+    prefix: '607'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 305f1f36-9e0a-4ebe-bc61-4bdad13d985d
+    country_id: *my
+    network_id: *my_sms_mms_services
+  - id: 253094
+    prefix: '608'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 232bbdc7-4e7e-4f6c-bdc2-8726ab3c220c
+    country_id: *my
+    network_id: *my_sms_mms_services
+  - id: 418789
+    prefix: '6082'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f2aa6760-215d-41b4-9b7f-7bbf595a3f4b
+    country_id: *my
+    network_id: *my_sarawak_region
+  - id: 422125
+    prefix: '6083'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e2f96bf9-fc84-4235-8199-c73e8feeb370
+    country_id: *my
+    network_id: *my_sarawak_region
+  - id: 433218
+    prefix: '6084'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6c372e6b-a499-4a5e-a589-412035a7182e
+    country_id: *my
+    network_id: *my_sarawak_region
+  - id: 435883
+    prefix: '6085'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a7013125-09fd-4343-ba2e-28ed6a35a80b
+    country_id: *my
+    network_id: *my_sarawak_region
+  - id: 428703
+    prefix: '6086'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ec8e76e7-06e1-47cc-8312-0e1e95d3294f
+    country_id: *my
+    network_id: *my_sarawak_region
+  - id: 441109
+    prefix: '6087'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ec84a631-a106-4585-a652-1b735069b0fa
+    country_id: *my
+    network_id: *my_sabah_region
+  - id: 443793
+    prefix: '6088'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8808d169-1e4b-481f-aef8-b36547212c16
+    country_id: *my
+    network_id: *my_sabah_region
+  - id: 451410
+    prefix: '6089'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b81f46be-216b-4025-8b70-d2e2a0c314e8
+    country_id: *my
+    network_id: *my_sabah_region
+  - id: 444755
+    prefix: '609'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 027e136c-7274-4d52-900d-9dc41d8b8733
+    country_id: *my
+    network_id: *my_kelantan_pahang_terengganu_region
+  - id: 257118
+    prefix: '609'
+    number_min_length: 5
+    number_max_length: 5
+    uuid: 36eb69a9-a406-4c52-b1aa-55244fe517eb
+    country_id: *my
+    network_id: *my_emergency_services

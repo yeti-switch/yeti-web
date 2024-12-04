@@ -1,6 +1,6 @@
 country_id: &tl 211
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &tl_virtual_private_network 21324
     name: TL Virtual Private Network
     uuid: 4f80b66f-d4ee-4117-b1e3-c4baf7f52af0
@@ -9,19 +9,6 @@ networks:
     name: TL Special Services
     uuid: 3aa7a5c9-2023-4227-b34a-387c9cf74737
     type_id: 13
-  - id: &tl_freephone_services 23823
-    name: TL Freephone Services
-    uuid: d0f791bb-f77e-48a3-a4ee-00182608b4af
-    type_id: 13
-  - id: &tl_personal_number_services 24167
-    name: TL Personal Number Services
-    uuid: fc8807b2-f53b-4f48-819d-e8088bb7421f
-    type_id: 13
-  - id: &tl_premium_rate_services 24429
-    name: TL Premium Rate Services
-    uuid: 8a423507-9ffe-4898-9e43-26e234f55ee3
-    type_id: 13
-# Fixed Networks
   - id: &tl_dili_district_region 21912
     name: TL Dili District Region
     uuid: d891e83a-9ad5-4062-a846-6839e9603472
@@ -82,11 +69,11 @@ networks:
     name: TL Western Region Region
     uuid: 4c45dc26-a919-402f-bc74-ae206ea12264
     type_id: 2
+# Supplementary services Networks
   - id: &tl_eastern_region_region 23290
     name: TL Eastern Region Region
     uuid: df52d126-ca60-492c-8f1b-09d15389dfd3
     type_id: 2
-# Mobile Networks
   - id: &tl_telkomcel_mobile 23603
     name: TL Telkomcel Mobile
     uuid: d4582b1c-f846-4660-a445-30af5dbf46ca
@@ -95,25 +82,41 @@ networks:
     name: TL Telemor Mobile
     uuid: d6cbc753-66a7-45c2-a4ca-dcebcf0f3d57
     type_id: 3
+  - id: &tl_freephone_services 23823
+    name: TL Freephone Services
+    uuid: d0f791bb-f77e-48a3-a4ee-00182608b4af
+    type_id: 13
+  - id: &tl_personal_number_services 24167
+    name: TL Personal Number Services
+    uuid: fc8807b2-f53b-4f48-819d-e8088bb7421f
+    type_id: 13
+# Mobile Networks
   - id: &tl_timor_telecom_mobile 24226
     name: TL Timor Telecom Mobile
     uuid: 43a79d98-a105-4bd6-8bcc-dbc433c0b742
     type_id: 3
-# Paging Networks
   - id: &tl_paging 24281
     name: TL Paging
     uuid: 20c51f3c-dc7b-4dc6-9e79-844bedde5d34
     type_id: 12
+  - id: &tl_premium_rate_services 24429
+    name: TL Premium Rate Services
+    uuid: 8a423507-9ffe-4898-9e43-26e234f55ee3
+    type_id: 13
+# Paging Networks
+  - id: &tl_fixed 43475
+    name: TL Fixed
+    uuid: aa6a76e8-202e-4990-b882-c7949e531187
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242119
     prefix: '670'
     number_min_length: 4
     number_max_length: 100
     uuid: e79eafcf-943f-4684-be7b-1eb49ebfe09c
     country_id: *tl
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *tl_fixed
   - id: 242256
     prefix: '67005'
     number_min_length: 10
@@ -128,28 +131,48 @@ network_prefixes:
     uuid: b85711cf-dca9-47f4-ac55-8868c39b1551
     country_id: *tl
     network_id: *tl_special_services
-  - id: 253132
-    prefix: '67080'
-    number_min_length: 8
-    number_max_length: 10
-    uuid: a147fdb2-ecc4-4c43-b004-fff2a2c9d232
-    country_id: *tl
-    network_id: *tl_freephone_services
-  - id: 255306
-    prefix: '67070'
+  - id: 247641
+    prefix: '67021'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9b6c07a4-8e76-46c9-86ea-ac4950c5992a
+    uuid: ec411f8e-0de7-4b43-a0e1-b4c4771666fd
     country_id: *tl
-    network_id: *tl_personal_number_services
-  - id: 257169
-    prefix: '67090'
-    number_min_length: 8
+    network_id: *tl_manufahi_district_region
+  - id: 247739
+    prefix: '67022'
+    number_min_length: 10
     number_max_length: 10
-    uuid: 3296ee1a-7744-44d1-8dde-a0f2f70e3a13
+    uuid: 19cd5f61-047f-44ce-ba93-76f7e48d90cd
     country_id: *tl
-    network_id: *tl_premium_rate_services
-# Fixed Prefixes
+    network_id: *tl_cova_lima_district_region
+  - id: 247933
+    prefix: '67023'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d1f8c04c-336e-4203-a32c-4a04cba341e7
+    country_id: *tl
+    network_id: *tl_bobonaro_district_region
+  - id: 248124
+    prefix: '67024'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: afbe3654-c6bc-494f-962c-87abc70ed457
+    country_id: *tl
+    network_id: *tl_ainaro_district_region
+  - id: 248273
+    prefix: '67025'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 067c4f62-ae53-4c33-9b1e-0f205a92cfba
+    country_id: *tl
+    network_id: *tl_oekusi_district_region
+  - id: 248837
+    prefix: '67029'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d409603a-cd1e-4223-bd6b-54cadfc3449a
+    country_id: *tl
+    network_id: *tl_western_region_region
   - id: 243242
     prefix: '67031'
     number_min_length: 10
@@ -220,6 +243,7 @@ network_prefixes:
     uuid: 0611143f-e749-46d4-ab79-25ba7b1fdf8d
     country_id: *tl
     network_id: *tl_viqueque_district_region
+# Supplementary services Prefixes
   - id: 244500
     prefix: '67044'
     number_min_length: 10
@@ -227,48 +251,6 @@ network_prefixes:
     uuid: 3cdc9322-c238-4ec6-9620-ad81f875ff49
     country_id: *tl
     network_id: *tl_lautem_district_region
-  - id: 247641
-    prefix: '67021'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ec411f8e-0de7-4b43-a0e1-b4c4771666fd
-    country_id: *tl
-    network_id: *tl_manufahi_district_region
-  - id: 247739
-    prefix: '67022'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 19cd5f61-047f-44ce-ba93-76f7e48d90cd
-    country_id: *tl
-    network_id: *tl_cova_lima_district_region
-  - id: 247933
-    prefix: '67023'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d1f8c04c-336e-4203-a32c-4a04cba341e7
-    country_id: *tl
-    network_id: *tl_bobonaro_district_region
-  - id: 248124
-    prefix: '67024'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: afbe3654-c6bc-494f-962c-87abc70ed457
-    country_id: *tl
-    network_id: *tl_ainaro_district_region
-  - id: 248273
-    prefix: '67025'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 067c4f62-ae53-4c33-9b1e-0f205a92cfba
-    country_id: *tl
-    network_id: *tl_oekusi_district_region
-  - id: 248837
-    prefix: '67029'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d409603a-cd1e-4223-bd6b-54cadfc3449a
-    country_id: *tl
-    network_id: *tl_western_region_region
   - id: 249516
     prefix: '67049'
     number_min_length: 10
@@ -276,7 +258,13 @@ network_prefixes:
     uuid: 5212c908-37c5-412c-91f1-b77e3d83de1e
     country_id: *tl
     network_id: *tl_eastern_region_region
-# Mobile Prefixes
+  - id: 255306
+    prefix: '67070'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9b6c07a4-8e76-46c9-86ea-ac4950c5992a
+    country_id: *tl
+    network_id: *tl_personal_number_services
   - id: 251885
     prefix: '67073'
     number_min_length: 11
@@ -291,6 +279,7 @@ network_prefixes:
     uuid: 0d9100e0-9a1d-4539-982f-e4a52ea02ca2
     country_id: *tl
     network_id: *tl_telkomcel_mobile
+# Mobile Prefixes
   - id: 252563
     prefix: '67075'
     number_min_length: 11
@@ -319,7 +308,6 @@ network_prefixes:
     uuid: d0660ce1-8fb1-4ea4-aa54-c0044af20dd3
     country_id: *tl
     network_id: *tl_timor_telecom_mobile
-# Paging Prefixes
   - id: 256397
     prefix: '67079'
     number_min_length: 10
@@ -327,3 +315,18 @@ network_prefixes:
     uuid: 241365e5-bbab-4537-9ff7-cefa58efe8a2
     country_id: *tl
     network_id: *tl_paging
+  - id: 253132
+    prefix: '67080'
+    number_min_length: 8
+    number_max_length: 10
+    uuid: a147fdb2-ecc4-4c43-b004-fff2a2c9d232
+    country_id: *tl
+    network_id: *tl_freephone_services
+# Paging Prefixes
+  - id: 257169
+    prefix: '67090'
+    number_min_length: 8
+    number_max_length: 10
+    uuid: 3296ee1a-7744-44d1-8dde-a0f2f70e3a13
+    country_id: *tl
+    network_id: *tl_premium_rate_services

@@ -5,19 +5,24 @@ networks:
     name: KW Special Services
     uuid: 78b3eb36-bc72-4743-85e6-64e8fc667d26
     type_id: 13
-  - id: &kw_corporate_numbers 22626
-    name: KW Corporate Numbers
-    uuid: cf101f3d-14a3-48b5-99ca-ade5fdd0c42d
-    type_id: 13
-# Mobile Networks
   - id: &kw_virgin_mobile_mobile 22191
     name: KW Virgin Mobile Mobile
     uuid: 2f6249c1-2278-48c5-884b-7775217afd9c
     type_id: 3
+# Fixed Networks
   - id: &kw_ooredoo_mobile 22537
     name: KW Ooredoo Mobile
     uuid: 1ebc86c1-76d5-4b75-8ff3-e0b7a99be407
     type_id: 3
+# Mobile Networks
+  - id: &kw_corporate_numbers 22626
+    name: KW Corporate Numbers
+    uuid: cf101f3d-14a3-48b5-99ca-ade5fdd0c42d
+    type_id: 13
+  - id: &kw_fixed 22717
+    name: KW Fixed
+    uuid: 55f6caed-5de1-4d86-ae40-3cdad57ff763
+    type_id: 2
   - id: &kw_stc_mobile 23308
     name: KW Stc Mobile
     uuid: e8c697ef-7afc-498a-b41d-c2c329fcb901
@@ -26,21 +31,15 @@ networks:
     name: KW Zain Mobile
     uuid: 91e068e9-23e4-42df-8543-bff4a3382255
     type_id: 3
-# Fixed Networks
-  - id: &kw_fixed 22717
-    name: KW Fixed
-    uuid: 55f6caed-5de1-4d86-ae40-3cdad57ff763
-    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Supplementary services Prefixes
   - id: 242033
     prefix: '965'
     number_min_length: 4
     number_max_length: 100
     uuid: 891b3101-9214-4602-9755-e8f1bf88d4ee
     country_id: *kw
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *kw_fixed
   - id: 242535
     prefix: '96510'
     number_min_length: 6
@@ -97,6 +96,7 @@ network_prefixes:
     uuid: 091fcd2c-a99b-47fd-ade9-1fdf3aabb1a1
     country_id: *kw
     network_id: *kw_special_services
+# Fixed Prefixes
   - id: 247276
     prefix: '96518'
     number_min_length: 10
@@ -104,6 +104,13 @@ network_prefixes:
     uuid: f6b7e478-fd94-4bec-ae95-016db97f24d9
     country_id: *kw
     network_id: *kw_corporate_numbers
+  - id: 247413
+    prefix: '9652'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b1469f20-47e2-401e-9b05-0c640f92d69f
+    country_id: *kw
+    network_id: *kw_fixed
 # Mobile Prefixes
   - id: 244137
     prefix: '96541'
@@ -112,13 +119,6 @@ network_prefixes:
     uuid: 6a1669e0-f9df-4533-a217-b86771f465c7
     country_id: *kw
     network_id: *kw_virgin_mobile_mobile
-  - id: 245403
-    prefix: '9656'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c35e890d-5953-4bd3-ba9e-476f2cb57c5d
-    country_id: *kw
-    network_id: *kw_ooredoo_mobile
   - id: 249584
     prefix: '9655'
     number_min_length: 11
@@ -126,6 +126,13 @@ network_prefixes:
     uuid: 493aa57f-e8de-481e-a70b-dd0d8e361784
     country_id: *kw
     network_id: *kw_stc_mobile
+  - id: 245403
+    prefix: '9656'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c35e890d-5953-4bd3-ba9e-476f2cb57c5d
+    country_id: *kw
+    network_id: *kw_ooredoo_mobile
   - id: 257110
     prefix: '9659'
     number_min_length: 11
@@ -133,11 +140,3 @@ network_prefixes:
     uuid: 505ec838-a63e-4865-b350-290a3cd3a1e4
     country_id: *kw
     network_id: *kw_zain_mobile
-# Fixed Prefixes
-  - id: 247413
-    prefix: '9652'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b1469f20-47e2-401e-9b05-0c640f92d69f
-    country_id: *kw
-    network_id: *kw_fixed

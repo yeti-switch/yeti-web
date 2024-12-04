@@ -1,6 +1,6 @@
 country_id: &pm 182
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &pm_special_services 21489
     name: PM Special Services
     uuid: 110255fd-9d5d-4497-8408-779876ef352e
@@ -9,6 +9,7 @@ networks:
     name: PM Directory Enquiry Services
     uuid: 11dcf496-d5e9-46db-86b3-483aa8cbbff3
     type_id: 13
+# Supplementary services Networks
   - id: &pm_freephone_services 21863
     name: PM Freephone Services
     uuid: 0fc6f6f1-a970-4d8c-a1be-87ab212e5858
@@ -17,6 +18,31 @@ networks:
     name: PM Premium Rate Services
     uuid: a8ed6e54-ef42-45a8-8326-9d013969a041
     type_id: 13
+  - id: &pm_globaltel_mobile 22161
+    name: PM Globaltel Mobile
+    uuid: 7e1a9e4b-02d6-4d1a-9c4b-ebcc34c11133
+    type_id: 3
+  - id: &pm_fixed 22192
+    name: PM Fixed
+    uuid: 875c725a-bca7-42c3-819d-d4a8e67e36a6
+    type_id: 2
+  - id: &pm_voip_region 23324
+    name: PM Voip Region
+    uuid: d8223df2-a653-4af9-87b0-933c812e0136
+    type_id: 2
+  - id: &pm_iovox_mobile 23344
+    name: PM Iovox Mobile
+    uuid: 80ed2c5f-f47c-4a97-8614-5ff28ac640b9
+    type_id: 3
+  - id: &pm_ameris_mobile 23379
+    name: PM Ameris Mobile
+    uuid: ae65289d-5ddf-4390-ac52-15e657427bad
+    type_id: 3
+# Mobile Networks
+  - id: &pm_mobile 23555
+    name: PM Mobile
+    uuid: e550568a-c39a-4f89-8dfd-2beef972ed09
+    type_id: 3
   - id: &pm_standard_rate_services 23902
     name: PM Standard Rate Services
     uuid: 43a8b74d-f80c-4312-9107-e8ed44ec12e5
@@ -29,42 +55,15 @@ networks:
     name: PM Dial Up Internet Access
     uuid: 218ed961-58ea-44c0-a8b5-d49c6179c7bf
     type_id: 13
-# Mobile Networks
-  - id: &pm_globaltel_mobile 22161
-    name: PM Globaltel Mobile
-    uuid: 7e1a9e4b-02d6-4d1a-9c4b-ebcc34c11133
-    type_id: 3
-  - id: &pm_iovox_mobile 23344
-    name: PM Iovox Mobile
-    uuid: 80ed2c5f-f47c-4a97-8614-5ff28ac640b9
-    type_id: 3
-  - id: &pm_ameris_mobile 23379
-    name: PM Ameris Mobile
-    uuid: ae65289d-5ddf-4390-ac52-15e657427bad
-    type_id: 3
-  - id: &pm_mobile 23555
-    name: PM Mobile
-    uuid: e550568a-c39a-4f89-8dfd-2beef972ed09
-    type_id: 3
-# Fixed Networks
-  - id: &pm_fixed 22192
-    name: PM Fixed
-    uuid: 875c725a-bca7-42c3-819d-d4a8e67e36a6
-    type_id: 2
-  - id: &pm_voip_region 23324
-    name: PM Voip Region
-    uuid: d8223df2-a653-4af9-87b0-933c812e0136
-    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242102
     prefix: '508'
     number_min_length: 4
     number_max_length: 100
     uuid: 196f83e4-fe21-434c-9eff-d10af71d19cd
     country_id: *pm
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *pm_fixed
   - id: 242494
     prefix: '5081'
     number_min_length: 5
@@ -93,6 +92,7 @@ network_prefixes:
     uuid: 4ffe035b-637e-4688-a8ee-1d054e3b6d67
     country_id: *pm
     network_id: *pm_directory_enquiry_services
+# Supplementary services Prefixes
   - id: 242760
     prefix: '5081184'
     number_min_length: 9
@@ -135,6 +135,69 @@ network_prefixes:
     uuid: 64b68135-5036-4407-886b-663918c4e5c1
     country_id: *pm
     network_id: *pm_directory_enquiry_services
+  - id: 248955
+    prefix: '5083000'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: cd447846-216b-40d3-9d8a-e5e85ddcc3f6
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 248969
+    prefix: '5083001'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 7c4307d4-565b-4fac-94eb-8f81cb78bccc
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 248977
+    prefix: '5083002'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 8ed6f848-c075-4748-95f1-d528d440fdaf
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 248984
+    prefix: '5083003'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e664a40d-06dd-46c5-8b63-7a50038eb05f
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 248991
+    prefix: '5083004'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 6e3c4a53-c28e-4139-a0cf-3ba27866d398
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 248998
+    prefix: '5083005'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: dc8ab66e-9552-4ebb-bf7e-61bca220ef5e
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 249005
+    prefix: '5083006'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 0df19e7b-102b-4ec0-819f-f59fdbe70091
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 249012
+    prefix: '5083007'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 3352aa4f-3523-439d-bb9b-bc03dc74c0e9
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 249019
+    prefix: '5083009'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: e1f2f3b3-a454-4e05-9abb-02f353665ea8
+    country_id: *pm
+    network_id: *pm_freephone_services
   - id: 243093
     prefix: '508301'
     number_min_length: 7
@@ -289,182 +352,6 @@ network_prefixes:
     uuid: c9cba55a-8caa-4cc9-990b-49c47dcd2bf7
     country_id: *pm
     network_id: *pm_premium_rate_services
-  - id: 248955
-    prefix: '5083000'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: cd447846-216b-40d3-9d8a-e5e85ddcc3f6
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 248969
-    prefix: '5083001'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 7c4307d4-565b-4fac-94eb-8f81cb78bccc
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 248977
-    prefix: '5083002'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 8ed6f848-c075-4748-95f1-d528d440fdaf
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 248984
-    prefix: '5083003'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: e664a40d-06dd-46c5-8b63-7a50038eb05f
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 248991
-    prefix: '5083004'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 6e3c4a53-c28e-4139-a0cf-3ba27866d398
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 248998
-    prefix: '5083005'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: dc8ab66e-9552-4ebb-bf7e-61bca220ef5e
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 249005
-    prefix: '5083006'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 0df19e7b-102b-4ec0-819f-f59fdbe70091
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 249012
-    prefix: '5083007'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 3352aa4f-3523-439d-bb9b-bc03dc74c0e9
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 249019
-    prefix: '5083009'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: e1f2f3b3-a454-4e05-9abb-02f353665ea8
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 253176
-    prefix: '508800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 713a5b34-463b-4e20-bf60-b6da76a6640b
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 253218
-    prefix: '508801'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 647ec43a-2a80-4e42-bbcb-657b8d2562b8
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 253230
-    prefix: '508802'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 1a085f42-dcd2-46c0-980d-9eba46c08069
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 253241
-    prefix: '508803'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 839a39ca-8404-4f0f-9fd0-934ed9557ec0
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 253248
-    prefix: '508804'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6bb4c1bb-e25b-470e-9126-481136363c51
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 253257
-    prefix: '508805'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ba10f774-9f77-4af6-a94f-014fe6a8489d
-    country_id: *pm
-    network_id: *pm_freephone_services
-  - id: 253265
-    prefix: '508806'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9a58b58f-35f4-41d4-86c6-57da27c3ca46
-    country_id: *pm
-    network_id: *pm_standard_rate_services
-  - id: 253275
-    prefix: '508807'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 295ddfca-91d2-4884-a4ae-149918c22638
-    country_id: *pm
-    network_id: *pm_standard_rate_services
-  - id: 253289
-    prefix: '508808'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: dfe0091e-1450-4bae-a3d6-69fbaab33d04
-    country_id: *pm
-    network_id: *pm_standard_rate_services
-  - id: 253299
-    prefix: '508809'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f1e48821-6150-4ed5-ac5b-f30ad44cff4c
-    country_id: *pm
-    network_id: *pm_standard_rate_services
-  - id: 253329
-    prefix: '50881'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c280e775-0c0b-45f1-981c-6524babca4e2
-    country_id: *pm
-    network_id: *pm_premium_rate_services
-  - id: 253487
-    prefix: '50882'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 155f9cee-4766-4e67-9d8c-f533b1e9e7e4
-    country_id: *pm
-    network_id: *pm_premium_rate_services
-  - id: 253662
-    prefix: '508836'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 826d99c9-90cd-4433-9e72-8fa9b45351b2
-    country_id: *pm
-    network_id: *pm_data_services
-  - id: 257012
-    prefix: '50889'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9b4c7f38-3379-492e-bd1e-83e967e34df4
-    country_id: *pm
-    network_id: *pm_premium_rate_services
-  - id: 263868
-    prefix: '508860'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 13f65eaa-2ae6-4445-9495-5347ff09004b
-    country_id: *pm
-    network_id: *pm_dial_up_internet_access
-  - id: 263968
-    prefix: '508868'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5c883e54-1d1f-44dc-b770-cf374df3d12a
-    country_id: *pm
-    network_id: *pm_dial_up_internet_access
-# Mobile Prefixes
   - id: 243986
     prefix: '50840'
     number_min_length: 9
@@ -472,6 +359,27 @@ network_prefixes:
     uuid: da3aa911-1cd7-44db-ac8f-fc3504821a55
     country_id: *pm
     network_id: *pm_globaltel_mobile
+  - id: 244140
+    prefix: '50841'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 255e3961-0e66-400e-944b-13f0099f2d29
+    country_id: *pm
+    network_id: *pm_fixed
+  - id: 244243
+    prefix: '50842'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 9a85b5e0-57ef-4b43-9e82-588367dba882
+    country_id: *pm
+    network_id: *pm_fixed
+  - id: 244341
+    prefix: '50843'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 4617668e-8862-4a2b-b96e-f187f1c8ff05
+    country_id: *pm
+    network_id: *pm_fixed
   - id: 244498
     prefix: '50844'
     number_min_length: 9
@@ -479,6 +387,13 @@ network_prefixes:
     uuid: 0e04af59-690a-4b3a-941b-8ea2548989f9
     country_id: *pm
     network_id: *pm_globaltel_mobile
+  - id: 249627
+    prefix: '50850'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: d2c4317e-1a95-4b63-855c-ed16de70b79c
+    country_id: *pm
+    network_id: *pm_voip_region
   - id: 249708
     prefix: '508510'
     number_min_length: 9
@@ -577,6 +492,7 @@ network_prefixes:
     uuid: d1e53812-a99a-4f47-8bd4-f430789f9025
     country_id: *pm
     network_id: *pm_mobile
+# Mobile Prefixes
   - id: 251701
     prefix: '50870856'
     number_min_length: 12
@@ -605,32 +521,115 @@ network_prefixes:
     uuid: 8fcc4088-3603-4ce5-bf98-a9a9973e610c
     country_id: *pm
     network_id: *pm_mobile
-# Fixed Prefixes
-  - id: 244140
-    prefix: '50841'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 255e3961-0e66-400e-944b-13f0099f2d29
+  - id: 253176
+    prefix: '508800'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 713a5b34-463b-4e20-bf60-b6da76a6640b
     country_id: *pm
-    network_id: *pm_fixed
-  - id: 244243
-    prefix: '50842'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 9a85b5e0-57ef-4b43-9e82-588367dba882
+    network_id: *pm_freephone_services
+  - id: 253218
+    prefix: '508801'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 647ec43a-2a80-4e42-bbcb-657b8d2562b8
     country_id: *pm
-    network_id: *pm_fixed
-  - id: 244341
-    prefix: '50843'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 4617668e-8862-4a2b-b96e-f187f1c8ff05
+    network_id: *pm_freephone_services
+  - id: 253230
+    prefix: '508802'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1a085f42-dcd2-46c0-980d-9eba46c08069
     country_id: *pm
-    network_id: *pm_fixed
-  - id: 249627
-    prefix: '50850'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: d2c4317e-1a95-4b63-855c-ed16de70b79c
+    network_id: *pm_freephone_services
+  - id: 253241
+    prefix: '508803'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 839a39ca-8404-4f0f-9fd0-934ed9557ec0
     country_id: *pm
-    network_id: *pm_voip_region
+    network_id: *pm_freephone_services
+  - id: 253248
+    prefix: '508804'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6bb4c1bb-e25b-470e-9126-481136363c51
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 253257
+    prefix: '508805'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ba10f774-9f77-4af6-a94f-014fe6a8489d
+    country_id: *pm
+    network_id: *pm_freephone_services
+  - id: 253265
+    prefix: '508806'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9a58b58f-35f4-41d4-86c6-57da27c3ca46
+    country_id: *pm
+    network_id: *pm_standard_rate_services
+  - id: 253275
+    prefix: '508807'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 295ddfca-91d2-4884-a4ae-149918c22638
+    country_id: *pm
+    network_id: *pm_standard_rate_services
+  - id: 253289
+    prefix: '508808'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: dfe0091e-1450-4bae-a3d6-69fbaab33d04
+    country_id: *pm
+    network_id: *pm_standard_rate_services
+  - id: 253299
+    prefix: '508809'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f1e48821-6150-4ed5-ac5b-f30ad44cff4c
+    country_id: *pm
+    network_id: *pm_standard_rate_services
+  - id: 253329
+    prefix: '50881'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c280e775-0c0b-45f1-981c-6524babca4e2
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 253487
+    prefix: '50882'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 155f9cee-4766-4e67-9d8c-f533b1e9e7e4
+    country_id: *pm
+    network_id: *pm_premium_rate_services
+  - id: 253662
+    prefix: '508836'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 826d99c9-90cd-4433-9e72-8fa9b45351b2
+    country_id: *pm
+    network_id: *pm_data_services
+  - id: 263868
+    prefix: '508860'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 13f65eaa-2ae6-4445-9495-5347ff09004b
+    country_id: *pm
+    network_id: *pm_dial_up_internet_access
+  - id: 263968
+    prefix: '508868'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5c883e54-1d1f-44dc-b770-cf374df3d12a
+    country_id: *pm
+    network_id: *pm_dial_up_internet_access
+  - id: 257012
+    prefix: '50889'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9b4c7f38-3379-492e-bd1e-83e967e34df4
+    country_id: *pm
+    network_id: *pm_premium_rate_services

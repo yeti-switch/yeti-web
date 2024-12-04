@@ -221,6 +221,10 @@ networks:
     name: PY Paraguari Region
     uuid: 8419198e-2564-42d9-ab38-9350c1583b76
     type_id: 2
+  - id: &py_internet_access 10557
+    name: PY Internet Access
+    uuid: d295183b-8b36-4be4-9c58-d2414d42da1a
+    type_id: 13
   - id: &py_ciudad_del_este_minga_guazu_km21_presidente_franco_region 11798
     name: PY Ciudad Del Este Minga Guazu Km21 Presidente Franco Region
     uuid: 8dd6fb27-905a-4890-a0d2-7db4f982b8bc
@@ -385,6 +389,14 @@ networks:
     name: PY Misiones Region
     uuid: 7cb206dd-14f8-46d5-9f89-784c79f10508
     type_id: 2
+  - id: &py_special_and_sms_mms_services 21474
+    name: PY Special And Sms_Mms Services
+    uuid: e00f9151-0f82-41ee-8262-f27243de603e
+    type_id: 13
+  - id: &py_sms_mms_services 22143
+    name: PY Sms_Mms Services
+    uuid: 0bc8a4e3-fee9-4b6f-bd5d-cb301313475d
+    type_id: 13
   - id: &py_voip_region 23804
     name: PY Voip Region
     uuid: dc51e496-699d-4d0e-b2aa-e1d3f7875314
@@ -557,6 +569,11 @@ networks:
     name: PY Katuete La Paloma Region
     uuid: a4d80e39-47d5-4264-87d8-c0dbe7a03d92
     type_id: 2
+  - id: &py_freephone_services 38512
+    name: PY Freephone Services
+    uuid: f8900635-5686-4016-94c6-1c675634ea63
+    type_id: 13
+# Supplementary services Networks
   - id: &py_san_juan_bautista_region 39315
     name: PY San Juan Bautista Region
     uuid: c754188d-8a74-4886-bbd1-b73a86f986d4
@@ -569,28 +586,6 @@ networks:
     name: PY Santa Rosa Region
     uuid: af2c55e3-5289-45e5-8734-dba66587fa07
     type_id: 2
-# Supplementary services Networks
-  - id: &py_internet_access 10557
-    name: PY Internet Access
-    uuid: d295183b-8b36-4be4-9c58-d2414d42da1a
-    type_id: 13
-  - id: &py_special_and_sms_mms_services 21474
-    name: PY Special And Sms_Mms Services
-    uuid: e00f9151-0f82-41ee-8262-f27243de603e
-    type_id: 13
-  - id: &py_sms_mms_services 22143
-    name: PY Sms_Mms Services
-    uuid: 0bc8a4e3-fee9-4b6f-bd5d-cb301313475d
-    type_id: 13
-  - id: &py_freephone_services 38512
-    name: PY Freephone Services
-    uuid: f8900635-5686-4016-94c6-1c675634ea63
-    type_id: 13
-  - id: &py_audiotext 42413
-    name: PY Audiotext
-    uuid: 85f3cc3b-0533-4735-9844-6f23f7ae92b4
-    type_id: 13
-# Mobile Networks
   - id: &py_mobile 41583
     name: PY Mobile
     uuid: 762fb0d0-a2e9-480a-b69f-1bc0879ab824
@@ -599,6 +594,7 @@ networks:
     name: PY Vox Mobile
     uuid: 3b3949f2-6a79-48d7-a2c3-523c28a8ea4f
     type_id: 3
+# Mobile Networks
   - id: &py_personal_mobile 42041
     name: PY Personal Mobile
     uuid: 180cf7f4-9be4-448f-b7be-a676934929f6
@@ -611,8 +607,345 @@ networks:
     name: PY Claro Mobile
     uuid: f5a7da72-14a1-4180-b092-bc82c2ec1b11
     type_id: 3
+  - id: &py_audiotext 42413
+    name: PY Audiotext
+    uuid: 85f3cc3b-0533-4735-9844-6f23f7ae92b4
+    type_id: 13
+  - id: &py_fixed 43457
+    name: PY Fixed
+    uuid: 722a641d-7635-44a4-b970-62ea20fad675
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
+  - id: 242085
+    prefix: '595'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 79b50e53-c077-43f5-aab8-1cb07bb586e0
+    country_id: *py
+    network_id: *py_fixed
+  - id: 242476
+    prefix: '5951'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 1ae8a769-d761-497d-ac4e-54b143271bf7
+    country_id: *py
+    network_id: *py_special_and_sms_mms_services
+  - id: 247431
+    prefix: '5952'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 8cd05419-a2ee-4882-8015-f67af241880d
+    country_id: *py
+    network_id: *py_sms_mms_services
+  - id: 274242
+    prefix: '59521'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3ed8ddf3-9d38-412a-a6de-4f227a8def49
+    country_id: *py
+    network_id: *py_asuncion_region
+  - id: 282994
+    prefix: '595220'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 667d8508-8ef3-4199-9386-36c27862cf98
+    country_id: *py
+    network_id: *py_central_region
+  - id: 279493
+    prefix: '595224'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 9ac8aa13-6ed2-482e-8ae8-109de0ed2da7
+    country_id: *py
+    network_id: *py_ita_region
+  - id: 283948
+    prefix: '595225'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d781563e-185e-4d73-8d3b-ae292b3e04f9
+    country_id: *py
+    network_id: *py_villeta_region
+  - id: 284699
+    prefix: '595226'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fd75f65a-16f5-46d2-a790-ac6eaae0af10
+    country_id: *py
+    network_id: *py_villa_hayes_region
+  - id: 285124
+    prefix: '595228'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 28410d0b-1a67-41d5-b336-1023441cfa33
+    country_id: *py
+    network_id: *py_capiata_region
+  - id: 305218
+    prefix: '595271'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b27f9dc5-ac84-4e08-8f65-67d76718581d
+    country_id: *py
+    network_id: *py_benjamin__aceval_region
+  - id: 306006
+    prefix: '595275'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e04710cf-cfcc-4750-93b5-2276efc2b1af
+    country_id: *py
+    network_id: *py_ypane_region
+  - id: 308546
+    prefix: '595291'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e07bbb1f-2fb7-47d5-a313-a37967448dcc
+    country_id: *py
+    network_id: *py_aregua_region
+  - id: 308559
+    prefix: '595292'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ed3fa9aa-db81-443b-a4ce-b26c857cd1fc
+    country_id: *py
+    network_id: *py_nueva_italia_region
+  - id: 308603
+    prefix: '595293'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d14df2d-3465-48a9-9955-5daa996221fa
+    country_id: *py
+    network_id: *py_guarambare_region
+  - id: 308647
+    prefix: '595294'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 846362ab-1087-4d7f-b800-611ae768fc8f
+    country_id: *py
+    network_id: *py_itaugua_region
+  - id: 309093
+    prefix: '595295'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 926625fe-0d38-4a9c-92fd-1daef33f8af1
+    country_id: *py
+    network_id: *py_jose_augusto_saldivar_region
+  - id: 248917
+    prefix: '5953'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 9bd72af6-bbbe-4b6d-8c88-ad13900d79c7
+    country_id: *py
+    network_id: *py_sms_mms_services
+  - id: 327076
+    prefix: '595318'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4ef9f7a9-ed26-4e13-9738-68547aab3948
+    country_id: *py
+    network_id: *py_frieslam_region
+  - id: 327286
+    prefix: '59532'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac76f96c-1a47-420e-9328-d2c660cc66b9
+    country_id: *py
+    network_id: *py_horqueta_region
+  - id: 330756
+    prefix: '595330'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5718ac4a-271b-4ddf-93aa-1526ec50cacb
+    country_id: *py
+    network_id: *py_concepcion_region
+  - id: 331587
+    prefix: '595331'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e111a82b-a2d6-4c4f-bb68-9603de1f1fa3
+    country_id: *py
+    network_id: *py_belen_concepcion_loreto_region
+  - id: 331751
+    prefix: '595336'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 22943093-84a4-4812-8684-9a974b60cbd6
+    country_id: *py
+    network_id: *py_pedro_juan_caballero_region
+  - id: 342094
+    prefix: '595337'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3cf56b2f-2f34-432a-941d-73a8e746d006
+    country_id: *py
+    network_id: *py_capitan_bado_region
+  - id: 341360
+    prefix: '595342'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3c79f605-f839-4511-8da7-80b43fbe0e78
+    country_id: *py
+    network_id: *py_san_pedro_de_ycuamandyu_region
+  - id: 350984
+    prefix: '595343'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 97f5908c-44b6-4707-bc4a-3ae2fa21f391
+    country_id: *py
+    network_id: *py_san_estanislao_region
+  - id: 342382
+    prefix: '595345'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: b5b2a690-e961-44f7-a6be-612d479ea231
+    country_id: *py
+    network_id: *py_corpus_christi_region
+  - id: 343341
+    prefix: '595347'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a04573cd-cf16-4be6-8dfe-840d7ebc9345
+    country_id: *py
+    network_id: *py_villa_ygatimi_region
+  - id: 352487
+    prefix: '595350'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: c8cf4ccc-b7ca-43a3-84e8-ae566836a268
+    country_id: *py
+    network_id: *py_san_pedro_region
+  - id: 352573
+    prefix: '595351'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fa173eb4-74eb-4e3d-9efd-7a8a7cc8b7d8
+    country_id: *py
+    network_id: *py_vallemi_region
+  - id: 345980
+    prefix: '595360'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4d1c653f-70f0-4801-af9d-96490a7b6fc0
+    country_id: *py
+    network_id: *py_amambay_region
+  - id: 355974
+    prefix: '595370'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 60d8be43-e000-4cbc-a991-fa4859af277b
+    country_id: *py
+    network_id: *py_canindeyu_region
+  - id: 347708
+    prefix: '59538'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5a3d947f-9742-4e3b-8176-8065d4aa378a
+    country_id: *py
+    network_id: *py_bella_vista_norte_region
+  - id: 357538
+    prefix: '59539'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7694e61b-33b7-4d7c-95f0-bf3da0c9c6af
+    country_id: *py
+    network_id: *py_yby_yau_region
+  - id: 243960
+    prefix: '5954'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 75943341-659d-4d74-9602-7f1de38b6ba1
+    country_id: *py
+    network_id: *py_sms_mms_services
+  - id: 362537
+    prefix: '59541'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 80012550-c594-4800-b24d-76d58ff0b788
+    country_id: *py
+    network_id: *py_itacurubi_del_rosario_region
+  - id: 376184
+    prefix: '595418'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 47781b3f-f462-4cd7-8f4a-cd3dd7f89af1
+    country_id: *py
+    network_id: *py_general__elizardo_aquino_region
+  - id: 377387
+    prefix: '595420'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2a504f2c-388f-49ff-8550-9e4069cacd67
+    country_id: *py
+    network_id: *py_chaco_region
+  - id: 366687
+    prefix: '595424'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2edd5256-c974-4ae0-b3b8-ac5241b11e1a
+    country_id: *py
+    network_id: *py_lolita_region
+  - id: 367184
+    prefix: '595425'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0ac10766-e567-4fb9-9207-fb07b272f58f
+    country_id: *py
+    network_id: *py_paratodo_region
+  - id: 368413
+    prefix: '595431'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 181a2463-8994-4288-828b-0163a2699090
+    country_id: *py
+    network_id: *py_cruce_liberacion_guayaybi_region
+  - id: 379803
+    prefix: '595432'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 576384d0-0fba-4d28-8356-b8ab1bd2c3ae
+    country_id: *py
+    network_id: *py_chore_region
+  - id: 370200
+    prefix: '59544'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 922b039c-980a-472c-8c32-a28a16c00365
+    country_id: *py
+    network_id: *py_villa_del_rosario_region
+  - id: 387513
+    prefix: '595451'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 5220eee2-e457-4bf6-90a5-7c056864b4ba
+    country_id: *py
+    network_id: *py_chore_colonia_volendam_santa_rosa_region
+  - id: 388177
+    prefix: '595453'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 999bc2f5-36ec-477e-8b03-38a0070cdf7c
+    country_id: *py
+    network_id: *py_capiibary_region
+  - id: 388639
+    prefix: '59546'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8bbc77a4-70e6-4eba-a928-b509a7f00b13
+    country_id: *py
+    network_id: *py_saltos_del_guaira_region
+  - id: 395000
+    prefix: '595464'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 458843cb-a1f0-4e1c-bf83-bddcb3c1dd42
+    country_id: *py
+    network_id: *py_colonia_nueva_esperanza_region
+  - id: 396475
+    prefix: '595471'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: db181e9b-21cc-412f-9041-8e0082dd513e
+    country_id: *py
+    network_id: *py_katuete_la_paloma_region
   - id: 51618
     prefix: '59548'
     number_min_length: 11
@@ -620,13 +953,6 @@ network_prefixes:
     uuid: b97b5539-2b87-40ad-b30d-13c28c5f3452
     country_id: *py
     network_id: *py_curuguaty_region
-  - id: 54276
-    prefix: '595497'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 287323c3-80e9-43dc-a47e-53e9cc5321e2
-    country_id: *py
-    network_id: *py_fuerte_olimpo_region
   - id: 58333
     prefix: '595491'
     number_min_length: 12
@@ -655,6 +981,20 @@ network_prefixes:
     uuid: 5d971b46-c07e-4072-81fb-afaf02259d5e
     country_id: *py
     network_id: *py_mariscal_estigarribia_region
+  - id: 54276
+    prefix: '595497'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 287323c3-80e9-43dc-a47e-53e9cc5321e2
+    country_id: *py
+    network_id: *py_fuerte_olimpo_region
+  - id: 249601
+    prefix: '5955'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 20ebc423-d8ba-44e1-81b8-e38177a95432
+    country_id: *py
+    network_id: *py_sms_mms_services
   - id: 62731
     prefix: '595510'
     number_min_length: 12
@@ -662,34 +1002,6 @@ network_prefixes:
     uuid: 4f36102e-af39-44da-93ef-b9447aea3f92
     country_id: *py
     network_id: *py_arroyos_y_esteros_region
-  - id: 64004
-    prefix: '595514'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e3636265-64ba-45e9-af78-a587701a5b5f
-    country_id: *py
-    network_id: *py_eusebio_ayala_region
-  - id: 64873
-    prefix: '595517'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ce9b56ea-eb6a-431e-9c58-fb36898ab4b1
-    country_id: *py
-    network_id: *py_caraguatay_region
-  - id: 65509
-    prefix: '595518'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 74cfebbd-f8b7-445a-a4b7-2e524d7f767f
-    country_id: *py
-    network_id: *py_itacurubi_de_las_cordilleras_region
-  - id: 65700
-    prefix: '595520'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3da12805-1761-491a-a2dd-c785c03f2481
-    country_id: *py
-    network_id: *py_atyra_region
   - id: 68168
     prefix: '595511'
     number_min_length: 12
@@ -711,6 +1023,13 @@ network_prefixes:
     uuid: 317c9a16-c98e-4750-a1e9-2d5e0cdff208
     country_id: *py
     network_id: *py_ypacarai_region
+  - id: 64004
+    prefix: '595514'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e3636265-64ba-45e9-af78-a587701a5b5f
+    country_id: *py
+    network_id: *py_eusebio_ayala_region
   - id: 69292
     prefix: '595515'
     number_min_length: 12
@@ -725,6 +1044,20 @@ network_prefixes:
     uuid: 11efae63-2384-437c-a302-41c106cca4c3
     country_id: *py
     network_id: *py_curupayty_santa_elena_tobati_region
+  - id: 64873
+    prefix: '595517'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ce9b56ea-eb6a-431e-9c58-fb36898ab4b1
+    country_id: *py
+    network_id: *py_caraguatay_region
+  - id: 65509
+    prefix: '595518'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74cfebbd-f8b7-445a-a4b7-2e524d7f767f
+    country_id: *py
+    network_id: *py_itacurubi_de_las_cordilleras_region
   - id: 70854
     prefix: '595519'
     number_min_length: 11
@@ -732,6 +1065,76 @@ network_prefixes:
     uuid: 923540ea-8b85-4a3d-bc19-7bfbe0990a13
     country_id: *py
     network_id: *py_pirayu_region
+  - id: 65700
+    prefix: '595520'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3da12805-1761-491a-a2dd-c785c03f2481
+    country_id: *py
+    network_id: *py_atyra_region
+  - id: 76321
+    prefix: '595521'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d2345767-f80e-4dc2-9d31-e6be62af9787
+    country_id: *py
+    network_id: *py_coronel_oviedo_region
+  - id: 76333
+    prefix: '595522'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 9275f33a-1eaa-4b11-bd7f-e4761a0f0439
+    country_id: *py
+    network_id: *py_caaguazu_repatriacion_region
+  - id: 76368
+    prefix: '595523'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f0a0afc5-ccf3-4fa7-bc75-7c868d66f18e
+    country_id: *py
+    network_id: *py_san_jose_de_los_arroyos_region
+  - id: 76387
+    prefix: '595524'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3f539bd5-f1d7-405e-823d-84bae9094f1e
+    country_id: *py
+    network_id: *py_juan_manuel_frutos_region
+  - id: 76418
+    prefix: '595525'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fe0c4f4e-8294-4576-9e25-fd328be49547
+    country_id: *py
+    network_id: *py_isla_pucu_region
+  - id: 76452
+    prefix: '595526'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: cb4c0908-ae20-4f7d-8950-280927f1a1c9
+    country_id: *py
+    network_id: *py_general_bernardino_caballero_region
+  - id: 76475
+    prefix: '595527'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3653d81d-70e1-43e0-93d4-08b72cbe5d1b
+    country_id: *py
+    network_id: *py_jose_domingo_ocampos_region
+  - id: 76501
+    prefix: '595528'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7f188903-7a63-49f1-a4e2-77e7951f0d58
+    country_id: *py
+    network_id: *py_juan_eulogio_estigarribia_region
+  - id: 76526
+    prefix: '595529'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a17cecc6-2178-4957-af44-c0a0e1d87ea7
+    country_id: *py
+    network_id: *py_emboscada__region
   - id: 71723
     prefix: '595530'
     number_min_length: 12
@@ -816,69 +1219,6 @@ network_prefixes:
     uuid: 02f5ebd5-4955-4066-b65c-1a6f7cc3a86b
     country_id: *py
     network_id: *py_mbocayaty_del_guaira_villarrica_region
-  - id: 76321
-    prefix: '595521'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d2345767-f80e-4dc2-9d31-e6be62af9787
-    country_id: *py
-    network_id: *py_coronel_oviedo_region
-  - id: 76333
-    prefix: '595522'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: 9275f33a-1eaa-4b11-bd7f-e4761a0f0439
-    country_id: *py
-    network_id: *py_caaguazu_repatriacion_region
-  - id: 76368
-    prefix: '595523'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f0a0afc5-ccf3-4fa7-bc75-7c868d66f18e
-    country_id: *py
-    network_id: *py_san_jose_de_los_arroyos_region
-  - id: 76387
-    prefix: '595524'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3f539bd5-f1d7-405e-823d-84bae9094f1e
-    country_id: *py
-    network_id: *py_juan_manuel_frutos_region
-  - id: 76418
-    prefix: '595525'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fe0c4f4e-8294-4576-9e25-fd328be49547
-    country_id: *py
-    network_id: *py_isla_pucu_region
-  - id: 76452
-    prefix: '595526'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: cb4c0908-ae20-4f7d-8950-280927f1a1c9
-    country_id: *py
-    network_id: *py_general_bernardino_caballero_region
-  - id: 76475
-    prefix: '595527'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3653d81d-70e1-43e0-93d4-08b72cbe5d1b
-    country_id: *py
-    network_id: *py_jose_domingo_ocampos_region
-  - id: 76501
-    prefix: '595528'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7f188903-7a63-49f1-a4e2-77e7951f0d58
-    country_id: *py
-    network_id: *py_juan_eulogio_estigarribia_region
-  - id: 76526
-    prefix: '595529'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a17cecc6-2178-4957-af44-c0a0e1d87ea7
-    country_id: *py
-    network_id: *py_emboscada__region
   - id: 77504
     prefix: '595542'
     number_min_length: 12
@@ -935,20 +1275,6 @@ network_prefixes:
     uuid: 371f653a-3c0b-4bde-a0c0-48e2e52d2a1c
     country_id: *py
     network_id: *py_yataity_region
-  - id: 81925
-    prefix: '595572'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fbfd73db-7571-4603-ac0d-45c831ec24d9
-    country_id: *py
-    network_id: *py_caaguazu_region
-  - id: 82014
-    prefix: '595573'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0c195983-bb97-41fd-912a-becddef74693
-    country_id: *py
-    network_id: *py_caazapa_region
   - id: 86671
     prefix: '595550'
     number_min_length: 11
@@ -991,6 +1317,20 @@ network_prefixes:
     uuid: 1bc56f12-8d87-45f9-91b7-751b5e010f89
     country_id: *py
     network_id: *py_guaira_region
+  - id: 81925
+    prefix: '595572'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fbfd73db-7571-4603-ac0d-45c831ec24d9
+    country_id: *py
+    network_id: *py_caaguazu_region
+  - id: 82014
+    prefix: '595573'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0c195983-bb97-41fd-912a-becddef74693
+    country_id: *py
+    network_id: *py_caazapa_region
   - id: 93114
     prefix: '595580'
     number_min_length: 12
@@ -998,6 +1338,20 @@ network_prefixes:
     uuid: b5971bbf-055a-474f-9049-4eda8d133fc0
     country_id: *py
     network_id: *py_paraguari_region
+  - id: 245420
+    prefix: '5956'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 4562922c-e837-4a7e-aa17-f92957f68383
+    country_id: *py
+    network_id: *py_sms_mms_services
+  - id: 95265
+    prefix: '595600'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 2d0a2697-784d-426b-85d8-3ca23a8072ac
+    country_id: *py
+    network_id: *py_internet_access
   - id: 108593
     prefix: '59561'
     number_min_length: 11
@@ -1005,6 +1359,13 @@ network_prefixes:
     uuid: 64c4a2b5-243d-41c5-9258-98c4d30da665
     country_id: *py
     network_id: *py_ciudad_del_este_minga_guazu_km21_presidente_franco_region
+  - id: 119681
+    prefix: '595631'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: a6c74a61-59f0-4eba-83a6-47fe286876e9
+    country_id: *py
+    network_id: *py_hernandarias_region
   - id: 114641
     prefix: '595632'
     number_min_length: 11
@@ -1019,13 +1380,6 @@ network_prefixes:
     uuid: bcaa3ac8-c68e-42ea-b95f-ad00f314c572
     country_id: *py
     network_id: *py_cedrales_region
-  - id: 119681
-    prefix: '595631'
-    number_min_length: 11
-    number_max_length: 12
-    uuid: a6c74a61-59f0-4eba-83a6-47fe286876e9
-    country_id: *py
-    network_id: *py_hernandarias_region
   - id: 133455
     prefix: '595644'
     number_min_length: 11
@@ -1089,6 +1443,13 @@ network_prefixes:
     uuid: f01bc2d4-7b78-4a81-abb0-f059e63ac1cc
     country_id: *py
     network_id: *py_santa_rosa_del_monday_region
+  - id: 255271
+    prefix: '5957'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: cf8bc43c-c233-46fe-95a8-5957d15e0c95
+    country_id: *py
+    network_id: *py_sms_mms_services
   - id: 164003
     prefix: '59571'
     number_min_length: 11
@@ -1166,13 +1527,6 @@ network_prefixes:
     uuid: 746c896b-b6d6-4151-bf7a-04ba01efb48b
     country_id: *py
     network_id: *py_carmen_del_parana_region
-  - id: 190560
-    prefix: '595767'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 31338e9c-2c18-4d89-a7ee-f8f11808c009
-    country_id: *py
-    network_id: *py_bella_vista_sur_region
   - id: 191135
     prefix: '595763'
     number_min_length: 11
@@ -1194,6 +1548,20 @@ network_prefixes:
     uuid: 9d6d2ec8-cf90-4156-8575-6dcbc4cc446f
     country_id: *py
     network_id: *py_natalio_region
+  - id: 190560
+    prefix: '595767'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 31338e9c-2c18-4d89-a7ee-f8f11808c009
+    country_id: *py
+    network_id: *py_bella_vista_sur_region
+  - id: 200411
+    prefix: '595768'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 54f7a736-0d16-4def-8458-eae11e866bc0
+    country_id: *py
+    network_id: *py_kaarendi_pirapo_region
   - id: 192573
     prefix: '595770'
     number_min_length: 12
@@ -1201,6 +1569,13 @@ network_prefixes:
     uuid: ff3c82ad-7e7f-4f89-9936-417b49fb40ec
     country_id: *py
     network_id: *py_itapua_region
+  - id: 200900
+    prefix: '595775'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 33b9ed40-fc6b-4be3-8369-9b5fd316aed9
+    country_id: *py
+    network_id: *py_hohenau_region
   - id: 198702
     prefix: '595780'
     number_min_length: 12
@@ -1208,6 +1583,13 @@ network_prefixes:
     uuid: 0c580f57-f9d5-41da-be2e-d68ae33a947b
     country_id: *py
     network_id: *py_alberdi_region
+  - id: 203613
+    prefix: '595781'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0749ac67-b8a7-4ee0-8a06-732319da5e64
+    country_id: *py
+    network_id: *py_santa_maria_region
   - id: 198962
     prefix: '595782'
     number_min_length: 11
@@ -1222,34 +1604,6 @@ network_prefixes:
     uuid: 243fb3b2-3dff-4e14-9e33-fb6f757ecb73
     country_id: *py
     network_id: *py_san_miguel_region
-  - id: 200153
-    prefix: '595786'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e9cd80ea-1990-4329-adff-0242c504ced9
-    country_id: *py
-    network_id: *py_pilar_region
-  - id: 200411
-    prefix: '595768'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 54f7a736-0d16-4def-8458-eae11e866bc0
-    country_id: *py
-    network_id: *py_kaarendi_pirapo_region
-  - id: 200900
-    prefix: '595775'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 33b9ed40-fc6b-4be3-8369-9b5fd316aed9
-    country_id: *py
-    network_id: *py_hohenau_region
-  - id: 203613
-    prefix: '595781'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0749ac67-b8a7-4ee0-8a06-732319da5e64
-    country_id: *py
-    network_id: *py_santa_maria_region
   - id: 204504
     prefix: '595784'
     number_min_length: 12
@@ -1264,6 +1618,14 @@ network_prefixes:
     uuid: a27255f9-bbe3-413c-9828-fc24586931fc
     country_id: *py
     network_id: *py_paso_de_patria_region
+# Supplementary services Prefixes
+  - id: 200153
+    prefix: '595786'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e9cd80ea-1990-4329-adff-0242c504ced9
+    country_id: *py
+    network_id: *py_pilar_region
   - id: 205763
     prefix: '595787'
     number_min_length: 12
@@ -1292,300 +1654,20 @@ network_prefixes:
     uuid: 3c2f0d57-329d-431a-bd1c-a8f9acc6012d
     country_id: *py
     network_id: *py_voip_region
-  - id: 274242
-    prefix: '59521'
+  - id: 253101
+    prefix: '5958'
+    number_min_length: 6
+    number_max_length: 10
+    uuid: 431307cc-69dd-4425-8902-bc275c2ac483
+    country_id: *py
+    network_id: *py_sms_mms_services
+  - id: 403488
+    prefix: '595800'
     number_min_length: 12
     number_max_length: 12
-    uuid: 3ed8ddf3-9d38-412a-a6de-4f227a8def49
+    uuid: 0ddf1736-8967-4f58-a42e-2a4e036c0775
     country_id: *py
-    network_id: *py_asuncion_region
-  - id: 279493
-    prefix: '595224'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 9ac8aa13-6ed2-482e-8ae8-109de0ed2da7
-    country_id: *py
-    network_id: *py_ita_region
-  - id: 282994
-    prefix: '595220'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 667d8508-8ef3-4199-9386-36c27862cf98
-    country_id: *py
-    network_id: *py_central_region
-  - id: 283948
-    prefix: '595225'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d781563e-185e-4d73-8d3b-ae292b3e04f9
-    country_id: *py
-    network_id: *py_villeta_region
-  - id: 284699
-    prefix: '595226'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fd75f65a-16f5-46d2-a790-ac6eaae0af10
-    country_id: *py
-    network_id: *py_villa_hayes_region
-  - id: 285124
-    prefix: '595228'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 28410d0b-1a67-41d5-b336-1023441cfa33
-    country_id: *py
-    network_id: *py_capiata_region
-  - id: 305218
-    prefix: '595271'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b27f9dc5-ac84-4e08-8f65-67d76718581d
-    country_id: *py
-    network_id: *py_benjamin__aceval_region
-  - id: 306006
-    prefix: '595275'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e04710cf-cfcc-4750-93b5-2276efc2b1af
-    country_id: *py
-    network_id: *py_ypane_region
-  - id: 308546
-    prefix: '595291'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e07bbb1f-2fb7-47d5-a313-a37967448dcc
-    country_id: *py
-    network_id: *py_aregua_region
-  - id: 308559
-    prefix: '595292'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: ed3fa9aa-db81-443b-a4ce-b26c857cd1fc
-    country_id: *py
-    network_id: *py_nueva_italia_region
-  - id: 308603
-    prefix: '595293'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2d14df2d-3465-48a9-9955-5daa996221fa
-    country_id: *py
-    network_id: *py_guarambare_region
-  - id: 308647
-    prefix: '595294'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 846362ab-1087-4d7f-b800-611ae768fc8f
-    country_id: *py
-    network_id: *py_itaugua_region
-  - id: 309093
-    prefix: '595295'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 926625fe-0d38-4a9c-92fd-1daef33f8af1
-    country_id: *py
-    network_id: *py_jose_augusto_saldivar_region
-  - id: 327076
-    prefix: '595318'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4ef9f7a9-ed26-4e13-9738-68547aab3948
-    country_id: *py
-    network_id: *py_frieslam_region
-  - id: 327286
-    prefix: '59532'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac76f96c-1a47-420e-9328-d2c660cc66b9
-    country_id: *py
-    network_id: *py_horqueta_region
-  - id: 330756
-    prefix: '595330'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5718ac4a-271b-4ddf-93aa-1526ec50cacb
-    country_id: *py
-    network_id: *py_concepcion_region
-  - id: 331587
-    prefix: '595331'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e111a82b-a2d6-4c4f-bb68-9603de1f1fa3
-    country_id: *py
-    network_id: *py_belen_concepcion_loreto_region
-  - id: 331751
-    prefix: '595336'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 22943093-84a4-4812-8684-9a974b60cbd6
-    country_id: *py
-    network_id: *py_pedro_juan_caballero_region
-  - id: 341360
-    prefix: '595342'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3c79f605-f839-4511-8da7-80b43fbe0e78
-    country_id: *py
-    network_id: *py_san_pedro_de_ycuamandyu_region
-  - id: 342094
-    prefix: '595337'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3cf56b2f-2f34-432a-941d-73a8e746d006
-    country_id: *py
-    network_id: *py_capitan_bado_region
-  - id: 342382
-    prefix: '595345'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: b5b2a690-e961-44f7-a6be-612d479ea231
-    country_id: *py
-    network_id: *py_corpus_christi_region
-  - id: 343341
-    prefix: '595347'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a04573cd-cf16-4be6-8dfe-840d7ebc9345
-    country_id: *py
-    network_id: *py_villa_ygatimi_region
-  - id: 345980
-    prefix: '595360'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 4d1c653f-70f0-4801-af9d-96490a7b6fc0
-    country_id: *py
-    network_id: *py_amambay_region
-  - id: 347708
-    prefix: '59538'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5a3d947f-9742-4e3b-8176-8065d4aa378a
-    country_id: *py
-    network_id: *py_bella_vista_norte_region
-  - id: 350984
-    prefix: '595343'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 97f5908c-44b6-4707-bc4a-3ae2fa21f391
-    country_id: *py
-    network_id: *py_san_estanislao_region
-  - id: 352487
-    prefix: '595350'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: c8cf4ccc-b7ca-43a3-84e8-ae566836a268
-    country_id: *py
-    network_id: *py_san_pedro_region
-  - id: 352573
-    prefix: '595351'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fa173eb4-74eb-4e3d-9efd-7a8a7cc8b7d8
-    country_id: *py
-    network_id: *py_vallemi_region
-  - id: 355974
-    prefix: '595370'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 60d8be43-e000-4cbc-a991-fa4859af277b
-    country_id: *py
-    network_id: *py_canindeyu_region
-  - id: 357538
-    prefix: '59539'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7694e61b-33b7-4d7c-95f0-bf3da0c9c6af
-    country_id: *py
-    network_id: *py_yby_yau_region
-  - id: 362537
-    prefix: '59541'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 80012550-c594-4800-b24d-76d58ff0b788
-    country_id: *py
-    network_id: *py_itacurubi_del_rosario_region
-  - id: 366687
-    prefix: '595424'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2edd5256-c974-4ae0-b3b8-ac5241b11e1a
-    country_id: *py
-    network_id: *py_lolita_region
-  - id: 367184
-    prefix: '595425'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0ac10766-e567-4fb9-9207-fb07b272f58f
-    country_id: *py
-    network_id: *py_paratodo_region
-  - id: 368413
-    prefix: '595431'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 181a2463-8994-4288-828b-0163a2699090
-    country_id: *py
-    network_id: *py_cruce_liberacion_guayaybi_region
-  - id: 370200
-    prefix: '59544'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 922b039c-980a-472c-8c32-a28a16c00365
-    country_id: *py
-    network_id: *py_villa_del_rosario_region
-  - id: 376184
-    prefix: '595418'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 47781b3f-f462-4cd7-8f4a-cd3dd7f89af1
-    country_id: *py
-    network_id: *py_general__elizardo_aquino_region
-  - id: 377387
-    prefix: '595420'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2a504f2c-388f-49ff-8550-9e4069cacd67
-    country_id: *py
-    network_id: *py_chaco_region
-  - id: 379803
-    prefix: '595432'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 576384d0-0fba-4d28-8356-b8ab1bd2c3ae
-    country_id: *py
-    network_id: *py_chore_region
-  - id: 387513
-    prefix: '595451'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 5220eee2-e457-4bf6-90a5-7c056864b4ba
-    country_id: *py
-    network_id: *py_chore_colonia_volendam_santa_rosa_region
-  - id: 388177
-    prefix: '595453'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 999bc2f5-36ec-477e-8b03-38a0070cdf7c
-    country_id: *py
-    network_id: *py_capiibary_region
-  - id: 388639
-    prefix: '59546'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8bbc77a4-70e6-4eba-a928-b509a7f00b13
-    country_id: *py
-    network_id: *py_saltos_del_guaira_region
-  - id: 395000
-    prefix: '595464'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 458843cb-a1f0-4e1c-bf83-bddcb3c1dd42
-    country_id: *py
-    network_id: *py_colonia_nueva_esperanza_region
-  - id: 396475
-    prefix: '595471'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: db181e9b-21cc-412f-9041-8e0082dd513e
-    country_id: *py
-    network_id: *py_katuete_la_paloma_region
+    network_id: *py_freephone_services
   - id: 413682
     prefix: '59581'
     number_min_length: 11
@@ -1607,70 +1689,6 @@ network_prefixes:
     uuid: 30806055-cb20-45a7-8294-2ef9868af772
     country_id: *py
     network_id: *py_santa_rosa_region
-# Supplementary services Prefixes
-  - id: 95265
-    prefix: '595600'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 2d0a2697-784d-426b-85d8-3ca23a8072ac
-    country_id: *py
-    network_id: *py_internet_access
-  - id: 242476
-    prefix: '5951'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 1ae8a769-d761-497d-ac4e-54b143271bf7
-    country_id: *py
-    network_id: *py_special_and_sms_mms_services
-  - id: 243960
-    prefix: '5954'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 75943341-659d-4d74-9602-7f1de38b6ba1
-    country_id: *py
-    network_id: *py_sms_mms_services
-  - id: 245420
-    prefix: '5956'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 4562922c-e837-4a7e-aa17-f92957f68383
-    country_id: *py
-    network_id: *py_sms_mms_services
-  - id: 247431
-    prefix: '5952'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 8cd05419-a2ee-4882-8015-f67af241880d
-    country_id: *py
-    network_id: *py_sms_mms_services
-  - id: 248917
-    prefix: '5953'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 9bd72af6-bbbe-4b6d-8c88-ad13900d79c7
-    country_id: *py
-    network_id: *py_sms_mms_services
-  - id: 249601
-    prefix: '5955'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 20ebc423-d8ba-44e1-81b8-e38177a95432
-    country_id: *py
-    network_id: *py_sms_mms_services
-  - id: 253101
-    prefix: '5958'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: 431307cc-69dd-4425-8902-bc275c2ac483
-    country_id: *py
-    network_id: *py_sms_mms_services
-  - id: 255271
-    prefix: '5957'
-    number_min_length: 6
-    number_max_length: 10
-    uuid: cf8bc43c-c233-46fe-95a8-5957d15e0c95
-    country_id: *py
-    network_id: *py_sms_mms_services
   - id: 257131
     prefix: '5959'
     number_min_length: 6
@@ -1678,29 +1696,6 @@ network_prefixes:
     uuid: 56f64364-01e7-4ecd-80f1-0864b9121b03
     country_id: *py
     network_id: *py_sms_mms_services
-  - id: 403488
-    prefix: '595800'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0ddf1736-8967-4f58-a42e-2a4e036c0775
-    country_id: *py
-    network_id: *py_freephone_services
-  - id: 458132
-    prefix: '59590'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6d1f457a-e359-46b0-a573-d9c60a42e3a2
-    country_id: *py
-    network_id: *py_audiotext
-# Country code Prefixes
-  - id: 242085
-    prefix: '595'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 79b50e53-c077-43f5-aab8-1cb07bb586e0
-    country_id: *py
-    network_id: null
-# Mobile Prefixes
   - id: 444758
     prefix: '5959'
     number_min_length: 12
@@ -1708,6 +1703,14 @@ network_prefixes:
     uuid: 71bf84cc-93a2-4a0e-a44f-84027f5437a1
     country_id: *py
     network_id: *py_mobile
+# Mobile Prefixes
+  - id: 458132
+    prefix: '59590'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6d1f457a-e359-46b0-a573-d9c60a42e3a2
+    country_id: *py
+    network_id: *py_audiotext
   - id: 445329
     prefix: '595961'
     number_min_length: 12

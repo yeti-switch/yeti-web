@@ -5,23 +5,14 @@ networks:
     name: VI Charlotte Amalie St Thomas Region
     uuid: 55c9212b-42c0-4ab3-85c5-8cdc13409248
     type_id: 2
-  - id: &vi_st_croix_region 32920
-    name: VI St Croix Region
-    uuid: 753d216b-464b-428c-a1d5-7932db18b415
-    type_id: 2
-  - id: &vi_christiansted_st_croix_region 32924
-    name: VI Christiansted St Croix Region
-    uuid: db8e9583-c763-410c-95db-f2cdae77cf92
-    type_id: 2
-  - id: &vi_frederiksted_st_croix_region 32925
-    name: VI Frederiksted St Croix Region
-    uuid: 07ec5f35-3677-4f0a-a84c-d932ccfebead
-    type_id: 2
-# Mobile Networks
   - id: &vi_liberty_mobile 32919
     name: VI Liberty Mobile
     uuid: d4e38204-9ef9-47ec-b553-6e2d4b158bd0
     type_id: 3
+  - id: &vi_st_croix_region 32920
+    name: VI St Croix Region
+    uuid: 753d216b-464b-428c-a1d5-7932db18b415
+    type_id: 2
   - id: &vi_t_mobile_mobile 32921
     name: VI T Mobile Mobile
     uuid: 19b61e4a-d9c4-4b49-bbeb-93967218bf22
@@ -30,24 +21,36 @@ networks:
     name: VI Viya Mobile
     uuid: f2eade2f-ce61-4e13-ba92-7132f1479412
     type_id: 3
+# Mobile Networks
   - id: &vi_gigsky_mobile_mobile 32923
     name: VI Gigsky Mobile Mobile
     uuid: b53b5049-5a81-4790-9111-2c67cee3dd13
     type_id: 3
+  - id: &vi_christiansted_st_croix_region 32924
+    name: VI Christiansted St Croix Region
+    uuid: db8e9583-c763-410c-95db-f2cdae77cf92
+    type_id: 2
+  - id: &vi_frederiksted_st_croix_region 32925
+    name: VI Frederiksted St Croix Region
+    uuid: 07ec5f35-3677-4f0a-a84c-d932ccfebead
+    type_id: 2
   - id: &vi_windkeeper_mobile 32926
     name: VI Windkeeper Mobile
     uuid: 12c33a57-f93b-422d-b137-9935c0d5b667
     type_id: 3
+  - id: &vi_fixed 43527
+    name: VI Fixed
+    uuid: 4ea9ee75-5826-4673-8d45-d726c617ac7d
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
-  - id: 340694
-    prefix: '1340'
-    number_min_length: 2
-    number_max_length: 100
-    uuid: bacdf96e-db7d-4a54-9b30-f3c05bd913aa
-    country_id: *vi
-    network_id: null
 # Fixed Prefixes
+  - id: 514460
+    prefix: '1340'
+    number_min_length: 5
+    number_max_length: 100
+    uuid: ff422ff9-bd36-4e07-a39f-81dedd73c475
+    country_id: *vi
+    network_id: *vi_fixed
   - id: 340699
     prefix: '1340200'
     number_min_length: 11
@@ -55,161 +58,6 @@ network_prefixes:
     uuid: bc8f7e66-452c-4b37-8db2-9fba90768c81
     country_id: *vi
     network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340701
-    prefix: '1340202'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6e5645aa-5453-498e-9514-aa1667026f1a
-    country_id: *vi
-    network_id: *vi_st_croix_region
-  - id: 340710
-    prefix: '1340212'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a102c3e8-218a-49ed-9f44-7e354428cca4
-    country_id: *vi
-    network_id: *vi_st_croix_region
-  - id: 340716
-    prefix: '1340249'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 367f7409-1cfc-4405-80b1-fb78a7ff91a1
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340725
-    prefix: '1340489'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4d0ed772-b69f-4c10-8ea7-49b239cf097a
-    country_id: *vi
-    network_id: *vi_christiansted_st_croix_region
-  - id: 340728
-    prefix: '1340625'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 65c1a5c0-f5ae-4e06-8ed8-5065ff61834e
-    country_id: *vi
-    network_id: *vi_frederiksted_st_croix_region
-  - id: 340734
-    prefix: '1340692'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f94d167c-360a-437e-8bea-f1d815a4e50e
-    country_id: *vi
-    network_id: *vi_st_croix_region
-  - id: 340735
-    prefix: '1340693'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f9fe2978-9c92-4758-8367-e80bd9902717
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340736
-    prefix: '1340712'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 50489be3-cf9a-4419-84ae-10fdd93fae8c
-    country_id: *vi
-    network_id: *vi_christiansted_st_croix_region
-  - id: 340737
-    prefix: '1340713'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba32765c-c790-4ca3-85f0-7fc8269bdba1
-    country_id: *vi
-    network_id: *vi_christiansted_st_croix_region
-  - id: 340738
-    prefix: '1340714'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c101deb2-2d50-4364-a163-59ed76830530
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340739
-    prefix: '1340715'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d72bcab8-db82-4b6b-a765-3922f8dad6eb
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340741
-    prefix: '1340718'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fec0c9eb-d5b8-4c16-9356-5c8c6dec4fe1
-    country_id: *vi
-    network_id: *vi_christiansted_st_croix_region
-  - id: 340742
-    prefix: '1340719'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3ab8754e-f78f-485f-8395-42a600989aad
-    country_id: *vi
-    network_id: *vi_christiansted_st_croix_region
-  - id: 340745
-    prefix: '1340770'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b3fb2c0b-d42d-48a0-b5e1-4b4b9c1d3fce
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340747
-    prefix: '1340772'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 775bacf6-59ae-47db-9f82-79199c6140b1
-    country_id: *vi
-    network_id: *vi_frederiksted_st_croix_region
-  - id: 340748
-    prefix: '1340773'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 365cf5b4-fdc0-4a79-9e47-af9d180f1ac4
-    country_id: *vi
-    network_id: *vi_christiansted_st_croix_region
-  - id: 340749
-    prefix: '1340774'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 350b4f6d-3ae7-4d47-ba3a-5af567527e70
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340750
-    prefix: '1340775'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e8a5bfe7-4cea-4581-933b-59abf0fc2e21
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340751
-    prefix: '1340776'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a17dc59f-9433-4d29-975a-7fd59d314530
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340752
-    prefix: '1340777'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1c5688b8-7df2-4a08-a647-043aba310287
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340753
-    prefix: '1340778'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ab80a682-1978-4ada-852d-0e836e667fd5
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-  - id: 340754
-    prefix: '1340779'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4a56369f-df0c-4519-a7da-cdd736485542
-    country_id: *vi
-    network_id: *vi_charlotte_amalie_st_thomas_region
-# Mobile Prefixes
   - id: 340700
     prefix: '1340201'
     number_min_length: 11
@@ -217,6 +65,13 @@ network_prefixes:
     uuid: bd912279-1eac-4b3c-a990-2aff6269d85d
     country_id: *vi
     network_id: *vi_liberty_mobile
+  - id: 340701
+    prefix: '1340202'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6e5645aa-5453-498e-9514-aa1667026f1a
+    country_id: *vi
+    network_id: *vi_st_croix_region
   - id: 340702
     prefix: '1340203'
     number_min_length: 11
@@ -273,6 +128,13 @@ network_prefixes:
     uuid: 8fbcc76f-39b1-4b42-b695-cc7c8a3a08ee
     country_id: *vi
     network_id: *vi_liberty_mobile
+  - id: 340710
+    prefix: '1340212'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a102c3e8-218a-49ed-9f44-7e354428cca4
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340711
     prefix: '1340220'
     number_min_length: 11
@@ -308,6 +170,13 @@ network_prefixes:
     uuid: 97852943-f763-4be1-a7eb-2cd240622eee
     country_id: *vi
     network_id: *vi_liberty_mobile
+  - id: 340716
+    prefix: '1340249'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 367f7409-1cfc-4405-80b1-fb78a7ff91a1
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340717
     prefix: '1340277'
     number_min_length: 11
@@ -343,6 +212,7 @@ network_prefixes:
     uuid: b407b632-b292-4aef-8a12-7f207569f5e3
     country_id: *vi
     network_id: *vi_viya_mobile
+# Mobile Prefixes
   - id: 340722
     prefix: '1340444'
     number_min_length: 11
@@ -364,6 +234,13 @@ network_prefixes:
     uuid: bb2a8f12-57f9-4872-b898-1cd08c04c5e1
     country_id: *vi
     network_id: *vi_liberty_mobile
+  - id: 340725
+    prefix: '1340489'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4d0ed772-b69f-4c10-8ea7-49b239cf097a
+    country_id: *vi
+    network_id: *vi_christiansted_st_croix_region
   - id: 340726
     prefix: '1340513'
     number_min_length: 11
@@ -378,6 +255,13 @@ network_prefixes:
     uuid: 038b7e6f-36d5-452f-adbd-0c2b1d2203a0
     country_id: *vi
     network_id: *vi_liberty_mobile
+  - id: 340728
+    prefix: '1340625'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65c1a5c0-f5ae-4e06-8ed8-5065ff61834e
+    country_id: *vi
+    network_id: *vi_frederiksted_st_croix_region
   - id: 340729
     prefix: '1340626'
     number_min_length: 11
@@ -413,6 +297,48 @@ network_prefixes:
     uuid: 20559822-0c78-4e5a-b647-eead9535366c
     country_id: *vi
     network_id: *vi_liberty_mobile
+  - id: 340734
+    prefix: '1340692'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f94d167c-360a-437e-8bea-f1d815a4e50e
+    country_id: *vi
+    network_id: *vi_st_croix_region
+  - id: 340735
+    prefix: '1340693'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f9fe2978-9c92-4758-8367-e80bd9902717
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
+  - id: 340736
+    prefix: '1340712'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50489be3-cf9a-4419-84ae-10fdd93fae8c
+    country_id: *vi
+    network_id: *vi_christiansted_st_croix_region
+  - id: 340737
+    prefix: '1340713'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba32765c-c790-4ca3-85f0-7fc8269bdba1
+    country_id: *vi
+    network_id: *vi_christiansted_st_croix_region
+  - id: 340738
+    prefix: '1340714'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c101deb2-2d50-4364-a163-59ed76830530
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
+  - id: 340739
+    prefix: '1340715'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d72bcab8-db82-4b6b-a765-3922f8dad6eb
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340740
     prefix: '1340717'
     number_min_length: 11
@@ -420,6 +346,20 @@ network_prefixes:
     uuid: 35ea0e4f-5574-435e-a07f-df7893a583e0
     country_id: *vi
     network_id: *vi_viya_mobile
+  - id: 340741
+    prefix: '1340718'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fec0c9eb-d5b8-4c16-9356-5c8c6dec4fe1
+    country_id: *vi
+    network_id: *vi_christiansted_st_croix_region
+  - id: 340742
+    prefix: '1340719'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3ab8754e-f78f-485f-8395-42a600989aad
+    country_id: *vi
+    network_id: *vi_christiansted_st_croix_region
   - id: 340743
     prefix: '1340725'
     number_min_length: 11
@@ -434,6 +374,13 @@ network_prefixes:
     uuid: 128fca9e-0cb7-4b0c-b343-7dc2a4c12e3b
     country_id: *vi
     network_id: *vi_viya_mobile
+  - id: 340745
+    prefix: '1340770'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b3fb2c0b-d42d-48a0-b5e1-4b4b9c1d3fce
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340746
     prefix: '1340771'
     number_min_length: 11
@@ -441,6 +388,62 @@ network_prefixes:
     uuid: 117f3c9f-d26d-426b-a50a-05ced1326cf6
     country_id: *vi
     network_id: *vi_viya_mobile
+  - id: 340747
+    prefix: '1340772'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 775bacf6-59ae-47db-9f82-79199c6140b1
+    country_id: *vi
+    network_id: *vi_frederiksted_st_croix_region
+  - id: 340748
+    prefix: '1340773'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 365cf5b4-fdc0-4a79-9e47-af9d180f1ac4
+    country_id: *vi
+    network_id: *vi_christiansted_st_croix_region
+  - id: 340749
+    prefix: '1340774'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 350b4f6d-3ae7-4d47-ba3a-5af567527e70
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
+  - id: 340750
+    prefix: '1340775'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e8a5bfe7-4cea-4581-933b-59abf0fc2e21
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
+  - id: 340751
+    prefix: '1340776'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a17dc59f-9433-4d29-975a-7fd59d314530
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
+  - id: 340752
+    prefix: '1340777'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c5688b8-7df2-4a08-a647-043aba310287
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
+  - id: 340753
+    prefix: '1340778'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ab80a682-1978-4ada-852d-0e836e667fd5
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
+  - id: 340754
+    prefix: '1340779'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a56369f-df0c-4519-a7da-cdd736485542
+    country_id: *vi
+    network_id: *vi_charlotte_amalie_st_thomas_region
   - id: 340755
     prefix: '1340884'
     number_min_length: 11

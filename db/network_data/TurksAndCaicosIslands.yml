@@ -1,19 +1,22 @@
 country_id: &tc 219
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &tc_flow_mobile 13445
     name: TC Flow Mobile
     uuid: a0b30afd-b6b9-427e-8d2a-816341cde331
     type_id: 3
-  - id: &tc_digicel_mobile 13447
-    name: TC Digicel Mobile
-    uuid: 4cb72a8c-6a48-49f3-951c-fd3557bad6e3
-    type_id: 3
-# Fixed Networks
   - id: &tc_dial_up_internet_access_region 13446
     name: TC Dial Up Internet Access Region
     uuid: 3f182a39-d965-4e32-97f6-aba375b636f0
     type_id: 2
+  - id: &tc_digicel_mobile 13447
+    name: TC Digicel Mobile
+    uuid: 4cb72a8c-6a48-49f3-951c-fd3557bad6e3
+    type_id: 3
+  - id: &tc_audiotext 13448
+    name: TC Audiotext
+    uuid: f8c59b41-0920-4286-8aaf-7f5a3b20f7ea
+    type_id: 13
   - id: &tc_fixed 13449
     name: TC Fixed
     uuid: 83d0ea74-3f05-46bd-9cc2-440f2e00ccd8
@@ -54,6 +57,7 @@ networks:
     name: TC North Caicos Region
     uuid: f9c9be8b-be40-40fa-b322-779b7f64921c
     type_id: 2
+# Mobile Networks
   - id: &tc_pine_cay_region 13459
     name: TC Pine Cay Region
     uuid: 4504d3ce-c3b4-4d7b-81a4-5787ab427c6d
@@ -62,25 +66,20 @@ networks:
     name: TC Parrot Cay Region
     uuid: 8c01bee6-eb98-4c43-873d-94dc02a42ea9
     type_id: 2
+# Supplementary services Networks
   - id: &tc_west_caicos_region 13461
     name: TC West Caicos Region
     uuid: 2f9a27e2-9938-4f07-a85b-af36ca7d44bd
     type_id: 2
-# Supplementary services Networks
-  - id: &tc_audiotext 13448
-    name: TC Audiotext
-    uuid: f8c59b41-0920-4286-8aaf-7f5a3b20f7ea
-    type_id: 13
 network_prefixes:
-# Country code Prefixes
-  - id: 135776
+# Fixed Prefixes
+  - id: 518455
     prefix: '1649'
-    number_min_length: 2
+    number_min_length: 5
     number_max_length: 100
-    uuid: dbb5ccbe-03dc-4345-b396-0a3239d1ee00
+    uuid: bfd4884e-2da0-4ea1-ac70-0ad6fedc8e6f
     country_id: *tc
-    network_id: null
-# Mobile Prefixes
+    network_id: *tc_fixed
   - id: 135845
     prefix: '1649231'
     number_min_length: 11
@@ -151,6 +150,13 @@ network_prefixes:
     uuid: 2c7eee61-3151-4299-975b-9c2334c19c9f
     country_id: *tc
     network_id: *tc_flow_mobile
+  - id: 135855
+    prefix: '1649266'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 672930c2-11af-4364-a923-05b103b7b130
+    country_id: *tc
+    network_id: *tc_dial_up_internet_access_region
   - id: 135856
     prefix: '1649331'
     number_min_length: 11
@@ -186,6 +192,7 @@ network_prefixes:
     uuid: 28c20594-43e1-48fb-8cb0-6bc3d7257bdd
     country_id: *tc
     network_id: *tc_digicel_mobile
+# Mobile Prefixes
   - id: 135861
     prefix: '1649341'
     number_min_length: 11
@@ -277,14 +284,27 @@ network_prefixes:
     uuid: 55e1f563-5bf0-4d87-85d3-a63db494dc67
     country_id: *tc
     network_id: *tc_flow_mobile
-# Fixed Prefixes
-  - id: 135855
-    prefix: '1649266'
+  - id: 135884
+    prefix: '1649444'
     number_min_length: 11
     number_max_length: 11
-    uuid: 672930c2-11af-4364-a923-05b103b7b130
+    uuid: bdc82371-6077-4d3a-ab98-7899a80ed4ea
     country_id: *tc
-    network_id: *tc_dial_up_internet_access_region
+    network_id: *tc_audiotext
+  - id: 135885
+    prefix: '1649445'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2aa59782-a6d4-495e-ba2b-7ac1a96a8e00
+    country_id: *tc
+    network_id: *tc_audiotext
+  - id: 135886
+    prefix: '1649446'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 32b05e20-cc9b-4218-bd2b-226d4a7bcdd0
+    country_id: *tc
+    network_id: *tc_audiotext
   - id: 135887
     prefix: '1649710'
     number_min_length: 11
@@ -369,6 +389,7 @@ network_prefixes:
     uuid: 8a013d35-a8f5-4e5b-8f24-5f019225ba66
     country_id: *tc
     network_id: *tc_pine_cay_region
+# Supplementary services Prefixes
   - id: 135899
     prefix: '1649949'
     number_min_length: 11
@@ -390,25 +411,3 @@ network_prefixes:
     uuid: a6c2a52f-e209-4591-a8ac-af6caee0414a
     country_id: *tc
     network_id: *tc_voip_region
-# Supplementary services Prefixes
-  - id: 135884
-    prefix: '1649444'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bdc82371-6077-4d3a-ab98-7899a80ed4ea
-    country_id: *tc
-    network_id: *tc_audiotext
-  - id: 135885
-    prefix: '1649445'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2aa59782-a6d4-495e-ba2b-7ac1a96a8e00
-    country_id: *tc
-    network_id: *tc_audiotext
-  - id: 135886
-    prefix: '1649446'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 32b05e20-cc9b-4218-bd2b-226d4a7bcdd0
-    country_id: *tc
-    network_id: *tc_audiotext

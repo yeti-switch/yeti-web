@@ -17,7 +17,7 @@ networks:
     name: ZM Zedmobile Mobile
     uuid: 2a526ab0-ca15-45d0-97ae-030cd10d759d
     type_id: 3
-# Supplementary services Networks
+# Fixed Networks
   - id: &zm_special_services 21517
     name: ZM Special Services
     uuid: f2773ca6-1dd7-4a50-93a3-c8ea38379a3b
@@ -26,7 +26,6 @@ networks:
     name: ZM Emergency Services
     uuid: 96a44c22-87fe-4995-b60f-218fe33ab04e
     type_id: 13
-# Fixed Networks
   - id: &zm_lusaka_region 27202
     name: ZM Lusaka Region
     uuid: 0ff32624-be60-4cdb-b547-215b4dd32254
@@ -55,12 +54,109 @@ networks:
     name: ZM Mongu Region
     uuid: 291d4237-d315-4966-a93f-998eab938bef
     type_id: 2
+# Supplementary services Networks
   - id: &zm_chipata_region 28037
     name: ZM Chipata Region
     uuid: cca0af1c-592f-44d8-9e37-8c198993d04c
     type_id: 2
+  - id: &zm_fixed 43487
+    name: ZM Fixed
+    uuid: 4135d77e-2bcc-4c46-9c26-839875ae26a7
+    type_id: 2
 network_prefixes:
 # Mobile Prefixes
+  - id: 242137
+    prefix: '260'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: e10a5739-0d22-40bb-9767-fbe302da5fbf
+    country_id: *zm
+    network_id: *zm_fixed
+  - id: 242523
+    prefix: '2601'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 301d7512-01d6-4eef-90cf-9b1c74f8801f
+    country_id: *zm
+    network_id: *zm_special_services
+  - id: 242631
+    prefix: '260112'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: e59f7c61-5a96-42eb-af2d-9da9927fcc1a
+    country_id: *zm
+    network_id: *zm_emergency_services
+  - id: 271733
+    prefix: '260211'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2d61f968-f5fc-4a99-b8f4-4990cc8647b9
+    country_id: *zm
+    network_id: *zm_lusaka_region
+  - id: 271761
+    prefix: '260212'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 59fce45b-60bb-48a1-8e3e-eca5004404d4
+    country_id: *zm
+    network_id: *zm_copperbelt_region
+  - id: 274343
+    prefix: '260213'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 92812815-07a3-4f93-81b4-d3145de840ed
+    country_id: *zm
+    network_id: *zm_livingstone_region
+  - id: 275049
+    prefix: '260214'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 578c0cf2-b73a-4c82-8c07-5e5d1c93f812
+    country_id: *zm
+    network_id: *zm_kasama_region
+# Fixed Prefixes
+  - id: 272273
+    prefix: '260215'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d16edee8-8ae9-49a2-a167-96ece7931d8e
+    country_id: *zm
+    network_id: *zm_kabwe_region
+  - id: 282715
+    prefix: '260216'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: be9c3cfb-7a9c-4625-a60e-de9de682ad12
+    country_id: *zm
+    network_id: *zm_chipata_region
+  - id: 276002
+    prefix: '260217'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6e9e5ff9-34dd-434a-b1d5-dbcd88bdb0c0
+    country_id: *zm
+    network_id: *zm_solwezi_region
+  - id: 276805
+    prefix: '260218'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f4482e43-1929-440d-966e-802c4a1709fc
+    country_id: *zm
+    network_id: *zm_mongu_region
+  - id: 248928
+    prefix: '2603'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 0e991dc3-4689-4510-9401-bddcfeb4d3e9
+    country_id: *zm
+    network_id: *zm_special_services
+  - id: 243973
+    prefix: '2604'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: 1718b5f3-69e5-49ad-95ba-02a6092024cc
+    country_id: *zm
+    network_id: *zm_special_services
   - id: 185889
     prefix: '26075'
     number_min_length: 12
@@ -82,6 +178,14 @@ network_prefixes:
     uuid: 632dc043-cb32-420b-8cad-f0dc6550d253
     country_id: *zm
     network_id: *zm_airtel_mobile
+# Supplementary services Prefixes
+  - id: 257149
+    prefix: '2609'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: af069310-3df7-46a1-9b58-2909f701985f
+    country_id: *zm
+    network_id: *zm_emergency_services
   - id: 215158
     prefix: '26095'
     number_min_length: 12
@@ -110,104 +214,3 @@ network_prefixes:
     uuid: 5dd3e70d-0522-4b8e-ad18-15f10846a34b
     country_id: *zm
     network_id: *zm_zedmobile_mobile
-# Country code Prefixes
-  - id: 242137
-    prefix: '260'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: e10a5739-0d22-40bb-9767-fbe302da5fbf
-    country_id: *zm
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242523
-    prefix: '2601'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 301d7512-01d6-4eef-90cf-9b1c74f8801f
-    country_id: *zm
-    network_id: *zm_special_services
-  - id: 242631
-    prefix: '260112'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: e59f7c61-5a96-42eb-af2d-9da9927fcc1a
-    country_id: *zm
-    network_id: *zm_emergency_services
-  - id: 243973
-    prefix: '2604'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 1718b5f3-69e5-49ad-95ba-02a6092024cc
-    country_id: *zm
-    network_id: *zm_special_services
-  - id: 248928
-    prefix: '2603'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: 0e991dc3-4689-4510-9401-bddcfeb4d3e9
-    country_id: *zm
-    network_id: *zm_special_services
-  - id: 257149
-    prefix: '2609'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: af069310-3df7-46a1-9b58-2909f701985f
-    country_id: *zm
-    network_id: *zm_emergency_services
-# Fixed Prefixes
-  - id: 271733
-    prefix: '260211'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2d61f968-f5fc-4a99-b8f4-4990cc8647b9
-    country_id: *zm
-    network_id: *zm_lusaka_region
-  - id: 271761
-    prefix: '260212'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 59fce45b-60bb-48a1-8e3e-eca5004404d4
-    country_id: *zm
-    network_id: *zm_copperbelt_region
-  - id: 272273
-    prefix: '260215'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d16edee8-8ae9-49a2-a167-96ece7931d8e
-    country_id: *zm
-    network_id: *zm_kabwe_region
-  - id: 274343
-    prefix: '260213'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 92812815-07a3-4f93-81b4-d3145de840ed
-    country_id: *zm
-    network_id: *zm_livingstone_region
-  - id: 275049
-    prefix: '260214'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 578c0cf2-b73a-4c82-8c07-5e5d1c93f812
-    country_id: *zm
-    network_id: *zm_kasama_region
-  - id: 276002
-    prefix: '260217'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 6e9e5ff9-34dd-434a-b1d5-dbcd88bdb0c0
-    country_id: *zm
-    network_id: *zm_solwezi_region
-  - id: 276805
-    prefix: '260218'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f4482e43-1929-440d-966e-802c4a1709fc
-    country_id: *zm
-    network_id: *zm_mongu_region
-  - id: 282715
-    prefix: '260216'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: be9c3cfb-7a9c-4625-a60e-de9de682ad12
-    country_id: *zm
-    network_id: *zm_chipata_region

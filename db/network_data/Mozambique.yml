@@ -1,27 +1,32 @@
 country_id: &mz 145
 networks:
-# Supplementary services Networks
+# Mobile Networks
   - id: &mz_special_services 21454
     name: MZ Special Services
     uuid: a7698bd2-e194-4934-9a49-f6ce51775d23
     type_id: 13
-  - id: &mz_fax2mail_service 27351
-    name: MZ Fax2Mail Service
-    uuid: 540940f7-b0e7-4d25-ad98-da538cf326f9
-    type_id: 13
-# Fixed Networks
   - id: &mz_maputo_region 27343
     name: MZ Maputo Region
     uuid: 5100b695-afe7-4800-9f50-8364300adc41
     type_id: 2
+  - id: &mz_fax2mail_service 27351
+    name: MZ Fax2Mail Service
+    uuid: 540940f7-b0e7-4d25-ad98-da538cf326f9
+    type_id: 13
   - id: &mz_beira_region 28305
     name: MZ Beira Region
     uuid: bcc527a4-7168-41d3-88f8-dad9e5d69156
     type_id: 2
+# Satellite Networks
   - id: &mz_quelimane_region 28974
     name: MZ Quelimane Region
     uuid: 569e1afc-70e5-4d4f-87de-1368a11ede99
     type_id: 2
+# Fixed Networks
+  - id: &mz_satellite 29148
+    name: MZ Satellite
+    uuid: 1404f900-d143-470d-b809-eb3bae0840a7
+    type_id: 15
   - id: &mz_manica_region 29191
     name: MZ Manica Region
     uuid: 0fc9cd2e-bc42-43bf-ab05-6486941bd044
@@ -54,12 +59,6 @@ networks:
     name: MZ Chokwe Region
     uuid: 7395b894-7a0b-4b67-b06f-6d6def7b4c4f
     type_id: 2
-# Satellite Networks
-  - id: &mz_satellite 29148
-    name: MZ Satellite
-    uuid: 1404f900-d143-470d-b809-eb3bae0840a7
-    type_id: 15
-# Mobile Networks
   - id: &mz_tmcel_mobile 39691
     name: MZ Tmcel Mobile
     uuid: 523b4e32-161f-48f4-9cb5-ed9ebe42499c
@@ -72,20 +71,24 @@ networks:
     name: MZ Vodacom Mobile
     uuid: c4ffe292-9d44-4a44-9194-af9aa02887eb
     type_id: 3
+# Supplementary services Networks
   - id: &mz_mobile 41562
     name: MZ Mobile
     uuid: b426f5fb-4110-4cc9-8f77-8731f66752bb
     type_id: 3
+  - id: &mz_fixed 43440
+    name: MZ Fixed
+    uuid: 5adabe44-8571-43ba-b08d-894ce3d99ae5
+    type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Mobile Prefixes
   - id: 242058
     prefix: '258'
     number_min_length: 4
     number_max_length: 100
     uuid: 6ab90571-3065-4bcd-b7f2-00efebd67c64
     country_id: *mz
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *mz_fixed
   - id: 242451
     prefix: '2581'
     number_min_length: 7
@@ -93,6 +96,13 @@ network_prefixes:
     uuid: 347f62de-1d14-4319-97aa-44963e73a286
     country_id: *mz
     network_id: *mz_special_services
+  - id: 274238
+    prefix: '25821'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a584afc7-1faf-472e-b9dd-203c57340575
+    country_id: *mz
+    network_id: *mz_maputo_region
   - id: 274248
     prefix: '2582101'
     number_min_length: 11
@@ -107,14 +117,6 @@ network_prefixes:
     uuid: ac8c8874-93f0-4c5f-839b-0acd67f5a5b1
     country_id: *mz
     network_id: *mz_fax2mail_service
-# Fixed Prefixes
-  - id: 274238
-    prefix: '25821'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a584afc7-1faf-472e-b9dd-203c57340575
-    country_id: *mz
-    network_id: *mz_maputo_region
   - id: 286636
     prefix: '25823'
     number_min_length: 11
@@ -129,6 +131,14 @@ network_prefixes:
     uuid: a180c9b1-a825-456b-9387-897b529c7388
     country_id: *mz
     network_id: *mz_quelimane_region
+# Satellite Prefixes
+  - id: 296842
+    prefix: '258250'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4a2e26b3-9b7e-44c2-9352-7695af58b921
+    country_id: *mz
+    network_id: *mz_satellite
   - id: 297631
     prefix: '258251'
     number_min_length: 11
@@ -136,6 +146,7 @@ network_prefixes:
     uuid: 03bad065-8b04-4512-b80a-60ba17bb344f
     country_id: *mz
     network_id: *mz_manica_region
+# Fixed Prefixes
   - id: 298149
     prefix: '258252'
     number_min_length: 11
@@ -164,6 +175,13 @@ network_prefixes:
     uuid: 95bcbee5-8380-456b-8d39-fc16a822222c
     country_id: *mz
     network_id: *mz_pemba_region
+  - id: 313558
+    prefix: '258281'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8bcb4074-9953-4897-9d73-5b89ac5880a4
+    country_id: *mz
+    network_id: *mz_chokwe_region
   - id: 307244
     prefix: '258282'
     number_min_length: 11
@@ -178,29 +196,6 @@ network_prefixes:
     uuid: e67067c7-84b3-401b-ac86-568df7795abc
     country_id: *mz
     network_id: *mz_inhambane_region
-  - id: 313558
-    prefix: '258281'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8bcb4074-9953-4897-9d73-5b89ac5880a4
-    country_id: *mz
-    network_id: *mz_chokwe_region
-# Satellite Prefixes
-  - id: 296842
-    prefix: '258250'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4a2e26b3-9b7e-44c2-9352-7695af58b921
-    country_id: *mz
-    network_id: *mz_satellite
-  - id: 451409
-    prefix: '25889'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 524db735-4454-44ca-be41-ff2f5aee4a04
-    country_id: *mz
-    network_id: *mz_satellite
-# Mobile Prefixes
   - id: 418788
     prefix: '25882'
     number_min_length: 12
@@ -215,13 +210,6 @@ network_prefixes:
     uuid: 1a4628b8-e0d0-44d2-acab-e3ccf06bbb09
     country_id: *mz
     network_id: *mz_tmcel_mobile
-  - id: 428702
-    prefix: '25886'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3f53a446-7274-4611-a0cc-af0c0f0e6cdc
-    country_id: *mz
-    network_id: *mz_movitel_mobile
   - id: 433217
     prefix: '25884'
     number_min_length: 12
@@ -236,6 +224,14 @@ network_prefixes:
     uuid: 1e11c57a-c882-4484-b015-e0094fd01ffe
     country_id: *mz
     network_id: *mz_vodacom_mobile
+  - id: 428702
+    prefix: '25886'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3f53a446-7274-4611-a0cc-af0c0f0e6cdc
+    country_id: *mz
+    network_id: *mz_movitel_mobile
+# Supplementary services Prefixes
   - id: 441108
     prefix: '25887'
     number_min_length: 12
@@ -250,3 +246,10 @@ network_prefixes:
     uuid: 1b2462f2-d5c8-4177-bbe7-16569a851bed
     country_id: *mz
     network_id: *mz_mobile
+  - id: 451409
+    prefix: '25889'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 524db735-4454-44ca-be41-ff2f5aee4a04
+    country_id: *mz
+    network_id: *mz_satellite

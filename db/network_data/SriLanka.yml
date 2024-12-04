@@ -33,14 +33,42 @@ networks:
     name: LK Matale Region
     uuid: 6402b592-248e-4efc-8678-04d1ed5de168
     type_id: 2
+  - id: &lk_slt_mobitel_mobile 14444
+    name: LK Slt Mobitel Mobile
+    uuid: 4dec58ac-22b6-4fea-8143-1718b51f46f1
+    type_id: 3
   - id: &lk_kalmunai_region 14505
     name: LK Kalmunai Region
     uuid: 38c2dc78-dc51-4cc8-975a-1451516976b8
     type_id: 2
+  - id: &lk_hutch_mobile 16880
+    name: LK Hutch Mobile
+    uuid: a77e7c93-be95-4e10-b848-e251f51e7a89
+    type_id: 3
+  - id: &lk_dialog_mobile 17628
+    name: LK Dialog Mobile
+    uuid: 29b40fe0-ce64-4c1b-bf28-0e69ba02aa50
+    type_id: 3
+  - id: &lk_airtel_mobile 18009
+    name: LK Airtel Mobile
+    uuid: 6ec9e934-0366-44aa-af0c-3439ad1ab156
+    type_id: 3
+  - id: &lk_mobile 19776
+    name: LK Mobile
+    uuid: e559186b-ae97-43e8-a8c9-1325559075d8
+    type_id: 3
+  - id: &lk_special_services 21437
+    name: LK Special Services
+    uuid: 3beafa96-102e-4102-957d-ec0341a4afed
+    type_id: 13
   - id: &lk_colombo_region 24833
     name: LK Colombo Region
     uuid: b9290e71-84ed-4ca3-81b7-890d1d019302
     type_id: 2
+  - id: &lk_virtual_private_network 25688
+    name: LK Virtual Private Network
+    uuid: 34017e52-6c4c-4226-854e-24fa1967d490
+    type_id: 13
   - id: &lk_jaffna_region 27342
     name: LK Jaffna Region
     uuid: dce019ee-a807-4af4-8067-e1b15c8403ed
@@ -93,6 +121,7 @@ networks:
     name: LK Kegalle Region
     uuid: d78673fa-9676-4d94-a9b6-8a3c5346bfb6
     type_id: 2
+# Mobile Networks
   - id: &lk_kurunegala_region 35235
     name: LK Kurunegala Region
     uuid: 35954160-a3fd-48f1-aa99-ec1008632bf3
@@ -113,42 +142,164 @@ networks:
     name: LK Kandy  Region
     uuid: 09262c5e-7e16-4010-8a31-54dafa6bdf88
     type_id: 2
+# Supplementary services Networks
   - id: &lk_galle_region 42424
     name: LK Galle Region
     uuid: 192d147f-005f-4f78-bb70-0e9a67d8dc92
     type_id: 2
-# Mobile Networks
-  - id: &lk_slt_mobitel_mobile 14444
-    name: LK Slt Mobitel Mobile
-    uuid: 4dec58ac-22b6-4fea-8143-1718b51f46f1
-    type_id: 3
-  - id: &lk_hutch_mobile 16880
-    name: LK Hutch Mobile
-    uuid: a77e7c93-be95-4e10-b848-e251f51e7a89
-    type_id: 3
-  - id: &lk_dialog_mobile 17628
-    name: LK Dialog Mobile
-    uuid: 29b40fe0-ce64-4c1b-bf28-0e69ba02aa50
-    type_id: 3
-  - id: &lk_airtel_mobile 18009
-    name: LK Airtel Mobile
-    uuid: 6ec9e934-0366-44aa-af0c-3439ad1ab156
-    type_id: 3
-  - id: &lk_mobile 19776
-    name: LK Mobile
-    uuid: e559186b-ae97-43e8-a8c9-1325559075d8
-    type_id: 3
-# Supplementary services Networks
-  - id: &lk_special_services 21437
-    name: LK Special Services
-    uuid: 3beafa96-102e-4102-957d-ec0341a4afed
-    type_id: 13
-  - id: &lk_virtual_private_network 25688
-    name: LK Virtual Private Network
-    uuid: 34017e52-6c4c-4226-854e-24fa1967d490
-    type_id: 13
+  - id: &lk_fixed 43432
+    name: LK Fixed
+    uuid: 4f10b2bf-ee8e-4039-a9ea-a5a712136d6a
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
+  - id: 242039
+    prefix: '94'
+    number_min_length: 3
+    number_max_length: 100
+    uuid: 6f67ba62-8ec2-4d2d-ad0d-fb333798b404
+    country_id: *lk
+    network_id: *lk_fixed
+  - id: 242434
+    prefix: '941'
+    number_min_length: 5
+    number_max_length: 6
+    uuid: 34beec61-91d7-43b9-8c72-92672a7d9f3b
+    country_id: *lk
+    network_id: *lk_special_services
+  - id: 258812
+    prefix: '9411'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8373369e-eb82-4376-b1a9-0f548186351e
+    country_id: *lk
+    network_id: *lk_colombo_region
+  - id: 260828
+    prefix: '9419'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8984b5a6-126f-41c6-a1ab-d464ebe60e18
+    country_id: *lk
+    network_id: *lk_virtual_private_network
+  - id: 274235
+    prefix: '9421'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c5b135d0-7350-4c67-b972-cf8c98749533
+    country_id: *lk
+    network_id: *lk_jaffna_region
+  - id: 286634
+    prefix: '9423'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d53c7966-e5a8-4ba2-8288-f333f7789fad
+    country_id: *lk
+    network_id: *lk_mannar_region
+  - id: 294329
+    prefix: '9424'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c882987b-1b67-4d47-a828-f356d07e8ecc
+    country_id: *lk
+    network_id: *lk_vavuniya_region
+  - id: 301975
+    prefix: '9425'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1121a163-66ff-428b-9e7f-ce36add51b91
+    country_id: *lk
+    network_id: *lk_anuradhapura_region
+  - id: 299800
+    prefix: '9426'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 84b94091-be8e-4d85-a664-a61d02ddee92
+    country_id: *lk
+    network_id: *lk_trincomalee_region
+  - id: 301428
+    prefix: '9427'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: be01c704-7b87-4c30-a2f8-f0e44ccf3fd7
+    country_id: *lk
+    network_id: *lk_polonnaruwa_region
+  - id: 321173
+    prefix: '9431'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a0364be-3870-4efe-a88a-006c1a91b992
+    country_id: *lk
+    network_id: *lk_negombo_region
+  - id: 327278
+    prefix: '9432'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f4d1800e-9289-4f5e-bfbf-438411192173
+    country_id: *lk
+    network_id: *lk_chilaw_region
+  - id: 337283
+    prefix: '9433'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8dd8ef86-2abc-4fd0-876f-6ece8a26e29e
+    country_id: *lk
+    network_id: *lk_gampaha_region
+  - id: 340475
+    prefix: '9434'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 320ea606-dc58-4f86-9881-f074a6170db3
+    country_id: *lk
+    network_id: *lk_kalutara_region
+  - id: 352238
+    prefix: '9435'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b6370efa-c3ef-4803-aed4-d3c38e60d88e
+    country_id: *lk
+    network_id: *lk_kegalle_region
+  - id: 345944
+    prefix: '9436'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 925bb919-fd6b-4066-b160-ccc9b8e8d972
+    country_id: *lk
+    network_id: *lk_avissawella_region
+  - id: 355757
+    prefix: '9437'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52f9ac5d-7b49-44ad-815e-6693603c6c70
+    country_id: *lk
+    network_id: *lk_kurunegala_region
+  - id: 347702
+    prefix: '9438'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 370bde37-89a8-4ac8-984f-fbbeabc37306
+    country_id: *lk
+    network_id: *lk_panadura__region
+  - id: 362528
+    prefix: '9441'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8a854b1c-0183-4699-ac09-3020530a7022
+    country_id: *lk
+    network_id: *lk_matara_region
+  - id: 392620
+    prefix: '9445'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8c67d2b2-5fbe-4422-a7a7-e5458bbf41a5
+    country_id: *lk
+    network_id: *lk_ratnapura_region
+  - id: 399483
+    prefix: '9447'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0b0d4a99-bb37-4205-8b57-ccd730384b91
+    country_id: *lk
+    network_id: *lk_hambantota_region
   - id: 62609
     prefix: '9451'
     number_min_length: 11
@@ -212,147 +363,14 @@ network_prefixes:
     uuid: a80129e2-f0f5-474c-ac46-405c5070043f
     country_id: *lk
     network_id: *lk_kalmunai_region
-  - id: 258812
-    prefix: '9411'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8373369e-eb82-4376-b1a9-0f548186351e
-    country_id: *lk
-    network_id: *lk_colombo_region
-  - id: 274235
-    prefix: '9421'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c5b135d0-7350-4c67-b972-cf8c98749533
-    country_id: *lk
-    network_id: *lk_jaffna_region
-  - id: 286634
-    prefix: '9423'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d53c7966-e5a8-4ba2-8288-f333f7789fad
-    country_id: *lk
-    network_id: *lk_mannar_region
-  - id: 294329
-    prefix: '9424'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c882987b-1b67-4d47-a828-f356d07e8ecc
-    country_id: *lk
-    network_id: *lk_vavuniya_region
-  - id: 299800
-    prefix: '9426'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 84b94091-be8e-4d85-a664-a61d02ddee92
-    country_id: *lk
-    network_id: *lk_trincomalee_region
-  - id: 301428
-    prefix: '9427'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: be01c704-7b87-4c30-a2f8-f0e44ccf3fd7
-    country_id: *lk
-    network_id: *lk_polonnaruwa_region
-  - id: 301975
-    prefix: '9425'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1121a163-66ff-428b-9e7f-ce36add51b91
-    country_id: *lk
-    network_id: *lk_anuradhapura_region
-  - id: 321173
-    prefix: '9431'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a0364be-3870-4efe-a88a-006c1a91b992
-    country_id: *lk
-    network_id: *lk_negombo_region
-  - id: 327278
-    prefix: '9432'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f4d1800e-9289-4f5e-bfbf-438411192173
-    country_id: *lk
-    network_id: *lk_chilaw_region
-  - id: 337283
-    prefix: '9433'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8dd8ef86-2abc-4fd0-876f-6ece8a26e29e
-    country_id: *lk
-    network_id: *lk_gampaha_region
-  - id: 340475
-    prefix: '9434'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 320ea606-dc58-4f86-9881-f074a6170db3
-    country_id: *lk
-    network_id: *lk_kalutara_region
-  - id: 345944
-    prefix: '9436'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 925bb919-fd6b-4066-b160-ccc9b8e8d972
-    country_id: *lk
-    network_id: *lk_avissawella_region
-  - id: 347702
-    prefix: '9438'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 370bde37-89a8-4ac8-984f-fbbeabc37306
-    country_id: *lk
-    network_id: *lk_panadura__region
-  - id: 352238
-    prefix: '9435'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b6370efa-c3ef-4803-aed4-d3c38e60d88e
-    country_id: *lk
-    network_id: *lk_kegalle_region
-  - id: 355757
-    prefix: '9437'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52f9ac5d-7b49-44ad-815e-6693603c6c70
-    country_id: *lk
-    network_id: *lk_kurunegala_region
-  - id: 362528
-    prefix: '9441'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8a854b1c-0183-4699-ac09-3020530a7022
-    country_id: *lk
-    network_id: *lk_matara_region
-  - id: 392620
-    prefix: '9445'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8c67d2b2-5fbe-4422-a7a7-e5458bbf41a5
-    country_id: *lk
-    network_id: *lk_ratnapura_region
-  - id: 399483
-    prefix: '9447'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0b0d4a99-bb37-4205-8b57-ccd730384b91
-    country_id: *lk
-    network_id: *lk_hambantota_region
-  - id: 413676
-    prefix: '9481'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0bd65121-3462-44c2-b2dc-4151e00724d8
-    country_id: *lk
-    network_id: *lk_kandy__region
-  - id: 458149
-    prefix: '9491'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 72445f31-d60f-4987-b35e-35cadc8704a6
-    country_id: *lk
-    network_id: *lk_galle_region
 # Mobile Prefixes
+  - id: 207502
+    prefix: '947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 54da5f69-0f8b-4ca1-9360-5a09a7dfc1fd
+    country_id: *lk
+    network_id: *lk_mobile
   - id: 150235
     prefix: '9470'
     number_min_length: 11
@@ -409,33 +427,18 @@ network_prefixes:
     uuid: 9338cf41-d831-4da5-8b38-ca5ff86c0130
     country_id: *lk
     network_id: *lk_hutch_mobile
-  - id: 207502
-    prefix: '947'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 54da5f69-0f8b-4ca1-9360-5a09a7dfc1fd
-    country_id: *lk
-    network_id: *lk_mobile
-# Country code Prefixes
-  - id: 242039
-    prefix: '94'
-    number_min_length: 3
-    number_max_length: 100
-    uuid: 6f67ba62-8ec2-4d2d-ad0d-fb333798b404
-    country_id: *lk
-    network_id: null
 # Supplementary services Prefixes
-  - id: 242434
-    prefix: '941'
-    number_min_length: 5
-    number_max_length: 6
-    uuid: 34beec61-91d7-43b9-8c72-92672a7d9f3b
-    country_id: *lk
-    network_id: *lk_special_services
-  - id: 260828
-    prefix: '9419'
+  - id: 413676
+    prefix: '9481'
     number_min_length: 11
     number_max_length: 11
-    uuid: 8984b5a6-126f-41c6-a1ab-d464ebe60e18
+    uuid: 0bd65121-3462-44c2-b2dc-4151e00724d8
     country_id: *lk
-    network_id: *lk_virtual_private_network
+    network_id: *lk_kandy__region
+  - id: 458149
+    prefix: '9491'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 72445f31-d60f-4987-b35e-35cadc8704a6
+    country_id: *lk
+    network_id: *lk_galle_region

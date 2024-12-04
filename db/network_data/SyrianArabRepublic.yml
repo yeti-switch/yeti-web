@@ -1,6 +1,6 @@
 country_id: &sy 206
 networks:
-# Fixed Networks
+# Mobile Networks
   - id: &sy_deir_elzzour_region 5651
     name: SY Deir Elzzour Region
     uuid: 2a622bd7-044d-4cef-8a84-59c9175029e6
@@ -9,6 +9,19 @@ networks:
     name: SY Al Hasakeh Region
     uuid: 37e5dbca-9f0f-438b-8f13-4acd3d802c4a
     type_id: 2
+  - id: &sy_mtn_mobile 20042
+    name: SY Mtn Mobile
+    uuid: 40c80b35-91ad-4eac-85e4-121cba5b0569
+    type_id: 3
+# Fixed Networks
+  - id: &sy_syriatel_mobile 20791
+    name: SY Syriatel Mobile
+    uuid: f44a3a8c-de7a-495a-b6e4-9a358f4797d8
+    type_id: 3
+  - id: &sy_special_services 21499
+    name: SY Special Services
+    uuid: cac345ec-0430-40c5-acae-e34487765411
+    type_id: 13
   - id: &sy_damascus__region 24840
     name: SY Damascus  Region
     uuid: 8b09949b-b9a7-4979-b78f-78f7fae290dd
@@ -53,40 +66,31 @@ networks:
     name: SY Tartous Region
     uuid: 6fa46e9d-73b7-4c57-a1c6-88f929a1a163
     type_id: 2
-# Mobile Networks
-  - id: &sy_mtn_mobile 20042
-    name: SY Mtn Mobile
-    uuid: 40c80b35-91ad-4eac-85e4-121cba5b0569
-    type_id: 3
-  - id: &sy_syriatel_mobile 20791
-    name: SY Syriatel Mobile
-    uuid: f44a3a8c-de7a-495a-b6e4-9a358f4797d8
-    type_id: 3
   - id: &sy_wafa_mobile 42431
     name: SY Wafa Mobile
     uuid: 329d22e1-0073-4097-8626-18eadb2ab775
     type_id: 3
 # Supplementary services Networks
-  - id: &sy_special_services 21499
-    name: SY Special Services
-    uuid: cac345ec-0430-40c5-acae-e34487765411
-    type_id: 13
+  - id: &sy_fixed 43469
+    name: SY Fixed
+    uuid: da6aab48-56d3-4763-a82f-4a991a860b7c
+    type_id: 2
 network_prefixes:
-# Fixed Prefixes
-  - id: 62618
-    prefix: '96351'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5a623e47-d132-413d-ba15-624fd94debbc
+# Mobile Prefixes
+  - id: 242112
+    prefix: '963'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: f2201aea-e7a0-4db1-9e90-20d555d42436
     country_id: *sy
-    network_id: *sy_deir_elzzour_region
-  - id: 71668
-    prefix: '96352'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a87e9277-ae6d-4bc1-b708-13dfadefd1db
+    network_id: *sy_fixed
+  - id: 242504
+    prefix: '9631'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 8dad7c5c-16a2-4df1-8e15-e47b95bc1c1e
     country_id: *sy
-    network_id: *sy_al_hasakeh_region
+    network_id: *sy_special_services
   - id: 258821
     prefix: '96311'
     number_min_length: 12
@@ -129,6 +133,7 @@ network_prefixes:
     uuid: 8eef54e3-4e3b-41ef-9091-0e86d8d8bbde
     country_id: *sy
     network_id: *sy_al_rakkah_region
+# Fixed Prefixes
   - id: 286642
     prefix: '96323'
     number_min_length: 11
@@ -164,7 +169,41 @@ network_prefixes:
     uuid: 5928f142-d0fd-4309-889d-3969f1d34357
     country_id: *sy
     network_id: *sy_tartous_region
-# Mobile Prefixes
+  - id: 62618
+    prefix: '96351'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5a623e47-d132-413d-ba15-624fd94debbc
+    country_id: *sy
+    network_id: *sy_deir_elzzour_region
+  - id: 71668
+    prefix: '96352'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a87e9277-ae6d-4bc1-b708-13dfadefd1db
+    country_id: *sy
+    network_id: *sy_al_hasakeh_region
+  - id: 458158
+    prefix: '96391'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 05d8a7a7-e4fa-4f32-84ed-b0151470e029
+    country_id: *sy
+    network_id: *sy_wafa_mobile
+  - id: 468954
+    prefix: '96392'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 2ee28c20-e51f-48d1-9e29-cfd83e4f59ba
+    country_id: *sy
+    network_id: *sy_wafa_mobile
+  - id: 485433
+    prefix: '96393'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: d1a63151-ae25-4741-a7e0-9f3b671d2df5
+    country_id: *sy
+    network_id: *sy_syriatel_mobile
   - id: 212512
     prefix: '96394'
     number_min_length: 12
@@ -193,6 +232,7 @@ network_prefixes:
     uuid: d50cc5b7-bc2a-49d1-98d6-15b230db57f7
     country_id: *sy
     network_id: *sy_syriatel_mobile
+# Supplementary services Prefixes
   - id: 239379
     prefix: '96399'
     number_min_length: 12
@@ -200,40 +240,3 @@ network_prefixes:
     uuid: 8b5236de-95a4-438f-a93f-415811c2388e
     country_id: *sy
     network_id: *sy_syriatel_mobile
-  - id: 458158
-    prefix: '96391'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 05d8a7a7-e4fa-4f32-84ed-b0151470e029
-    country_id: *sy
-    network_id: *sy_wafa_mobile
-  - id: 468954
-    prefix: '96392'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 2ee28c20-e51f-48d1-9e29-cfd83e4f59ba
-    country_id: *sy
-    network_id: *sy_wafa_mobile
-  - id: 485433
-    prefix: '96393'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: d1a63151-ae25-4741-a7e0-9f3b671d2df5
-    country_id: *sy
-    network_id: *sy_syriatel_mobile
-# Country code Prefixes
-  - id: 242112
-    prefix: '963'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: f2201aea-e7a0-4db1-9e90-20d555d42436
-    country_id: *sy
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242504
-    prefix: '9631'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 8dad7c5c-16a2-4df1-8e15-e47b95bc1c1e
-    country_id: *sy
-    network_id: *sy_special_services

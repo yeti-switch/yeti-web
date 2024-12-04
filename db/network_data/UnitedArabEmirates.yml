@@ -1,10 +1,14 @@
 country_id: &ae 223
 networks:
-# Mobile Networks
+# Fixed Networks
   - id: &ae_e_etisalat_and_mobile 4658
     name: AE E Etisalat And Mobile
     uuid: c612cfde-5502-4c16-b5bf-be7174628e63
     type_id: 3
+  - id: &ae_value_added_services 4682
+    name: AE Value Added Services
+    uuid: 65e3fb71-17c9-4883-8cc1-d9bbce647419
+    type_id: 13
   - id: &ae_du_mobile 6627
     name: AE Du Mobile
     uuid: ccd3d25f-0319-4116-8819-6f5386ce4a85
@@ -13,11 +17,10 @@ networks:
     name: AE Mobile
     uuid: 0a232183-84f5-46ce-b28f-ec0a96234dd5
     type_id: 3
-# Supplementary services Networks
-  - id: &ae_value_added_services 4682
-    name: AE Value Added Services
-    uuid: 65e3fb71-17c9-4883-8cc1-d9bbce647419
-    type_id: 13
+  - id: &ae_west_coast_ajman_sharjah_umm_al_qaiwain_region 8967
+    name: AE West Coast Ajman Sharjah Umm Al Qaiwain Region
+    uuid: 96223398-3397-4a6b-be36-f06d7ccaf9c8
+    type_id: 2
   - id: &ae_fixed_cost_services 10551
     name: AE Fixed Cost Services
     uuid: 1782e015-7ba8-43d7-8500-feb7ac65ae83
@@ -26,6 +29,11 @@ networks:
     name: AE Fixed Cost Data Services
     uuid: e10219af-5737-44e8-a5ca-6ec123a93ec9
     type_id: 13
+# Supplementary services Networks
+  - id: &ae_ras_al_khaimah_region 14375
+    name: AE Ras Al Khaimah Region
+    uuid: ab1897e7-2969-4d8a-a115-b40fb69d1d4e
+    type_id: 2
   - id: &ae_shared_cost_services 14912
     name: AE Shared Cost Services
     uuid: 9bae82ee-27d5-4f00-8818-a46f08a43155
@@ -34,6 +42,18 @@ networks:
     name: AE Special Shared Cost Services
     uuid: c34139fd-0929-4885-b651-56e539b2f7b2
     type_id: 13
+  - id: &ae_abu_dhabi_region 25831
+    name: AE Abu Dhabi Region
+    uuid: 6913d39b-0825-462f-b1e5-a00c4fbc6ce4
+    type_id: 2
+  - id: &ae_al_ain_region 31282
+    name: AE Al Ain Region
+    uuid: 6e0e097d-b63b-44e3-addb-0554d91ed698
+    type_id: 2
+  - id: &ae_dubai_region 34257
+    name: AE Dubai Region
+    uuid: a6ed148a-7464-4a84-b112-25c511035cf6
+    type_id: 2
   - id: &ae_free_access_services 34342
     name: AE Free Access Services
     uuid: c236724d-18c1-4aa6-8c11-640793628358
@@ -50,6 +70,11 @@ networks:
     name: AE International Toll Free Services Itfs
     uuid: 5dd8feda-cb32-47b0-8f15-75a60d15f90a
     type_id: 13
+  - id: &ae_east_coast_fujairah_region 41574
+    name: AE East Coast Fujairah Region
+    uuid: 9b1b6964-d848-4b5b-a401-fe9cb1d4898e
+    type_id: 2
+# Mobile Networks
   - id: &ae_premium_rate_services_shared_revenue_services 42062
     name: AE Premium Rate Services Shared Revenue Services
     uuid: a742068e-35a7-4068-be01-3314eac33f9c
@@ -58,33 +83,76 @@ networks:
     name: AE Premium Rate Data Services Shared Revenue Data Services
     uuid: 0be430b1-fb25-451b-8cf0-2f97f07a7857
     type_id: 13
-# Fixed Networks
-  - id: &ae_west_coast_ajman_sharjah_umm_al_qaiwain_region 8967
-    name: AE West Coast Ajman Sharjah Umm Al Qaiwain Region
-    uuid: 96223398-3397-4a6b-be36-f06d7ccaf9c8
-    type_id: 2
-  - id: &ae_ras_al_khaimah_region 14375
-    name: AE Ras Al Khaimah Region
-    uuid: ab1897e7-2969-4d8a-a115-b40fb69d1d4e
-    type_id: 2
-  - id: &ae_abu_dhabi_region 25831
-    name: AE Abu Dhabi Region
-    uuid: 6913d39b-0825-462f-b1e5-a00c4fbc6ce4
-    type_id: 2
-  - id: &ae_al_ain_region 31282
-    name: AE Al Ain Region
-    uuid: 6e0e097d-b63b-44e3-addb-0554d91ed698
-    type_id: 2
-  - id: &ae_dubai_region 34257
-    name: AE Dubai Region
-    uuid: a6ed148a-7464-4a84-b112-25c511035cf6
-    type_id: 2
-  - id: &ae_east_coast_fujairah_region 41574
-    name: AE East Coast Fujairah Region
-    uuid: 9b1b6964-d848-4b5b-a401-fe9cb1d4898e
+  - id: &ae_fixed 43376
+    name: AE Fixed
+    uuid: 0f5bb8af-f3e2-46e9-b64e-25e1798c129a
     type_id: 2
 network_prefixes:
-# Mobile Prefixes
+# Fixed Prefixes
+  - id: 241942
+    prefix: '971'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: c13cef80-3c45-46fe-9e97-aa1342c954c6
+    country_id: *ae
+    network_id: *ae_fixed
+  - id: 261179
+    prefix: '9712'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e69dfedc-c766-4b1b-80ab-62a1071fcdd9
+    country_id: *ae
+    network_id: *ae_abu_dhabi_region
+  - id: 267340
+    prefix: '971200'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 46b09826-0c3d-489c-a66c-bb5fc79f77cb
+    country_id: *ae
+    network_id: *ae_value_added_services
+  - id: 315860
+    prefix: '9713'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ca2dabdf-756e-46c0-85c2-d1368f3a5afc
+    country_id: *ae
+    network_id: *ae_al_ain_region
+  - id: 309572
+    prefix: '971300'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 3e8419d6-3ffd-4ad3-aeda-cb469a80a2f0
+    country_id: *ae
+    network_id: *ae_value_added_services
+  - id: 349439
+    prefix: '9714'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a6c714a7-dbde-45f6-a649-de889666e575
+    country_id: *ae
+    network_id: *ae_dubai_region
+  - id: 349989
+    prefix: '971400'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: e06cd457-7a75-4c70-b7c4-998e8f9ec21d
+    country_id: *ae
+    network_id: *ae_free_access_services
+# Supplementary services Prefixes
+  - id: 349991
+    prefix: '9714002'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a91f99e4-98e4-4ed7-afd1-c9313ccd46ff
+    country_id: *ae
+    network_id: *ae_free_access_data_services
+  - id: 84930
+    prefix: '9715'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: f9be1a28-ee63-44ad-a6dd-3e42fe9dd1c9
+    country_id: *ae
+    network_id: *ae_mobile
   - id: 54912
     prefix: '97150'
     number_min_length: 12
@@ -92,6 +160,13 @@ network_prefixes:
     uuid: 35a79a94-ffd3-4dc1-bea2-4e398fc0c9d6
     country_id: *ae
     network_id: *ae_e_etisalat_and_mobile
+  - id: 54940
+    prefix: '971500'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a5752e17-0aea-4028-8fb7-a25836618c17
+    country_id: *ae
+    network_id: *ae_value_added_services
   - id: 71645
     prefix: '97152'
     number_min_length: 12
@@ -106,13 +181,6 @@ network_prefixes:
     uuid: f3dae052-053d-4e92-93b3-e26737113e52
     country_id: *ae
     network_id: *ae_du_mobile
-  - id: 84930
-    prefix: '9715'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: f9be1a28-ee63-44ad-a6dd-3e42fe9dd1c9
-    country_id: *ae
-    network_id: *ae_mobile
   - id: 87905
     prefix: '97156'
     number_min_length: 12
@@ -120,14 +188,13 @@ network_prefixes:
     uuid: ee0465f7-69be-480e-9158-e1f73edbbced
     country_id: *ae
     network_id: *ae_e_etisalat_and_mobile
-# Supplementary services Prefixes
-  - id: 54940
-    prefix: '971500'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a5752e17-0aea-4028-8fb7-a25836618c17
+  - id: 84937
+    prefix: '9716'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba1fe537-4af2-4d19-8a64-c7e98ad2b139
     country_id: *ae
-    network_id: *ae_value_added_services
+    network_id: *ae_west_coast_ajman_sharjah_umm_al_qaiwain_region
   - id: 95258
     prefix: '971600'
     number_min_length: 12
@@ -142,6 +209,13 @@ network_prefixes:
     uuid: d93c6ca7-421d-4bd9-b13d-0cafa95acf32
     country_id: *ae
     network_id: *ae_fixed_cost_data_services
+  - id: 149329
+    prefix: '9717'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1fad2580-ed1d-4aad-8118-10ea31f978ff
+    country_id: *ae
+    network_id: *ae_ras_al_khaimah_region
   - id: 154399
     prefix: '971700'
     number_min_length: 12
@@ -156,34 +230,7 @@ network_prefixes:
     uuid: 1dfd3488-4360-45e5-b46a-fb8b9e9c850e
     country_id: *ae
     network_id: *ae_special_shared_cost_services
-  - id: 267340
-    prefix: '971200'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 46b09826-0c3d-489c-a66c-bb5fc79f77cb
-    country_id: *ae
-    network_id: *ae_value_added_services
-  - id: 309572
-    prefix: '971300'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 3e8419d6-3ffd-4ad3-aeda-cb469a80a2f0
-    country_id: *ae
-    network_id: *ae_value_added_services
-  - id: 349989
-    prefix: '971400'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: e06cd457-7a75-4c70-b7c4-998e8f9ec21d
-    country_id: *ae
-    network_id: *ae_free_access_services
-  - id: 349991
-    prefix: '9714002'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: a91f99e4-98e4-4ed7-afd1-c9313ccd46ff
-    country_id: *ae
-    network_id: *ae_free_access_data_services
+# Mobile Prefixes
   - id: 403457
     prefix: '971800'
     number_min_length: 8
@@ -198,6 +245,13 @@ network_prefixes:
     uuid: aa7c8a74-90a4-4866-88a1-0ccf318070e0
     country_id: *ae
     network_id: *ae_international_toll_free_services_itfs
+  - id: 444747
+    prefix: '9719'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2e6e76fa-c9a8-43d8-a1f8-318342297d19
+    country_id: *ae
+    network_id: *ae_east_coast_fujairah_region
   - id: 454567
     prefix: '971900'
     number_min_length: 12
@@ -212,54 +266,3 @@ network_prefixes:
     uuid: a3127ef4-e3a0-42d2-9eac-cec54971d9f7
     country_id: *ae
     network_id: *ae_premium_rate_data_services_shared_revenue_data_services
-# Fixed Prefixes
-  - id: 84937
-    prefix: '9716'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba1fe537-4af2-4d19-8a64-c7e98ad2b139
-    country_id: *ae
-    network_id: *ae_west_coast_ajman_sharjah_umm_al_qaiwain_region
-  - id: 149329
-    prefix: '9717'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1fad2580-ed1d-4aad-8118-10ea31f978ff
-    country_id: *ae
-    network_id: *ae_ras_al_khaimah_region
-  - id: 261179
-    prefix: '9712'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e69dfedc-c766-4b1b-80ab-62a1071fcdd9
-    country_id: *ae
-    network_id: *ae_abu_dhabi_region
-  - id: 315860
-    prefix: '9713'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ca2dabdf-756e-46c0-85c2-d1368f3a5afc
-    country_id: *ae
-    network_id: *ae_al_ain_region
-  - id: 349439
-    prefix: '9714'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a6c714a7-dbde-45f6-a649-de889666e575
-    country_id: *ae
-    network_id: *ae_dubai_region
-  - id: 444747
-    prefix: '9719'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2e6e76fa-c9a8-43d8-a1f8-318342297d19
-    country_id: *ae
-    network_id: *ae_east_coast_fujairah_region
-# Country code Prefixes
-  - id: 241942
-    prefix: '971'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: c13cef80-3c45-46fe-9e97-aa1342c954c6
-    country_id: *ae
-    network_id: null

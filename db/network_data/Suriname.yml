@@ -1,19 +1,10 @@
 country_id: &sr 201
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &sr_special_services 21493
     name: SR Special Services
     uuid: 9c081fc3-12d5-4b56-b5cc-8244d06f2619
     type_id: 13
-  - id: &sr_freephone_services 23822
-    name: SR Freephone Services
-    uuid: 09f7615e-1296-4b58-a2ae-cdd8d474cf64
-    type_id: 13
-  - id: &sr_value_addes_services 24448
-    name: SR Value Addes Services
-    uuid: c5d2f42b-28e0-4723-a1bf-e1477c25a842
-    type_id: 13
-# Fixed Networks
   - id: &sr_lelydorp_region 21881
     name: SR Lelydorp Region
     uuid: 7b78ff89-2771-49b8-ab41-9244af902bc4
@@ -142,20 +133,41 @@ networks:
     name: SR Voip Region
     uuid: f0dfee61-ef9b-431c-9195-a703f03d0360
     type_id: 2
+  - id: &sr_freephone_services 23822
+    name: SR Freephone Services
+    uuid: 09f7615e-1296-4b58-a2ae-cdd8d474cf64
+    type_id: 13
+# Supplementary services Networks
   - id: &sr_wireless_local_loop_region 24102
     name: SR Wireless Local Loop Region
     uuid: 10f85cd0-1397-4b8b-9b76-de4c65705ef1
     type_id: 2
+  - id: &sr_value_addes_services 24448
+    name: SR Value Addes Services
+    uuid: c5d2f42b-28e0-4723-a1bf-e1477c25a842
+    type_id: 13
+  - id: &sr_fixed 43465
+    name: SR Fixed
+    uuid: b027f0c6-9e5c-4061-ad15-6961c072a3fb
+    type_id: 2
+# Mobile Networks
+  - id: &sr_digicel_mobile 43625
+    name: SR Digicel Mobile
+    uuid: 8dd9f7b9-c0ba-4fa5-a15f-be54ba7a060e
+    type_id: 3
+  - id: &sr_teleg_mobile 43626
+    name: SR Teleg Mobile
+    uuid: c99441fb-ed71-42aa-b2a7-61b136a21b73
+    type_id: 3
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242106
     prefix: '597'
     number_min_length: 4
     number_max_length: 100
     uuid: 2fc2f813-1ca7-4e44-b314-efd2a13fe3ce
     country_id: *sr
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *sr_fixed
   - id: 242498
     prefix: '5971'
     number_min_length: 6
@@ -163,21 +175,69 @@ network_prefixes:
     uuid: c5b82187-1d3c-431f-9e6d-801cd9a5d65c
     country_id: *sr
     network_id: *sr_special_services
-  - id: 253131
-    prefix: '59780'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a2ff8f27-4e23-446e-b093-e4cf12ab8500
+  - id: 247439
+    prefix: '5972'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 5ce53498-9f3f-466f-b318-8a042b653fb2
     country_id: *sr
-    network_id: *sr_freephone_services
-  - id: 257193
-    prefix: '597900'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e09aef24-f676-4560-b67d-5d2f075b09a5
+    network_id: *sr_west_suriname_region
+  - id: 247639
+    prefix: '59721'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 92d4c8ca-e5cd-4da9-b296-efa58f3f624c
     country_id: *sr
-    network_id: *sr_value_addes_services
-# Fixed Prefixes
+    network_id: *sr_nieuw_nickerie_region
+  - id: 247735
+    prefix: '59722'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: ec576696-b886-4d34-9013-6ccd65f7fe29
+    country_id: *sr
+    network_id: *sr_nieuw_nickerie_region
+  - id: 247930
+    prefix: '59723'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 3412206b-35e6-403e-9cbd-c06aa0d126cf
+    country_id: *sr
+    network_id: *sr_nieuw_nickerie_region
+  - id: 247974
+    prefix: '597233'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: e2ab9eda-853e-4980-bdf9-d38805a47b93
+    country_id: *sr
+    network_id: *sr_nickerie_wageningen_region
+  - id: 248024
+    prefix: '597234'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 956efeb5-4c10-493a-a8ed-5857f8a2b165
+    country_id: *sr
+    network_id: *sr_nickerie_henar_region
+  - id: 248045
+    prefix: '597235'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: e6504fe3-531c-4450-a72c-1c819b73cdfa
+    country_id: *sr
+    network_id: *sr_coronie_region
+  - id: 248056
+    prefix: '597236'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: d00da826-04f6-42cd-9a9b-2049ae56ad88
+    country_id: *sr
+    network_id: *sr_nickerie_paradise_region
+  - id: 248942
+    prefix: '59730'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 68462e82-eff1-481c-a4d6-6aa725d60604
+    country_id: *sr
+    network_id: *sr_mid_and_east_suriname_region
   - id: 243174
     prefix: '597306'
     number_min_length: 9
@@ -437,83 +497,6 @@ network_prefixes:
     uuid: 1829238d-41c4-4558-9922-7f88ce1ab185
     country_id: *sr
     network_id: *sr_beniespark_region
-  - id: 245165
-    prefix: '59758'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 50239648-e53b-422e-bd4b-b0effa35c0e5
-    country_id: *sr
-    network_id: *sr_paramaribo_region
-  - id: 245169
-    prefix: '597580'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: ca168ef7-8319-4dd4-a276-1f8389b1501a
-    country_id: *sr
-    network_id: *sr_hannas_lust_region
-  - id: 247439
-    prefix: '5972'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 5ce53498-9f3f-466f-b318-8a042b653fb2
-    country_id: *sr
-    network_id: *sr_west_suriname_region
-  - id: 247639
-    prefix: '59721'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 92d4c8ca-e5cd-4da9-b296-efa58f3f624c
-    country_id: *sr
-    network_id: *sr_nieuw_nickerie_region
-  - id: 247735
-    prefix: '59722'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: ec576696-b886-4d34-9013-6ccd65f7fe29
-    country_id: *sr
-    network_id: *sr_nieuw_nickerie_region
-  - id: 247930
-    prefix: '59723'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 3412206b-35e6-403e-9cbd-c06aa0d126cf
-    country_id: *sr
-    network_id: *sr_nieuw_nickerie_region
-  - id: 247974
-    prefix: '597233'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: e2ab9eda-853e-4980-bdf9-d38805a47b93
-    country_id: *sr
-    network_id: *sr_nickerie_wageningen_region
-  - id: 248024
-    prefix: '597234'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 956efeb5-4c10-493a-a8ed-5857f8a2b165
-    country_id: *sr
-    network_id: *sr_nickerie_henar_region
-  - id: 248045
-    prefix: '597235'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: e6504fe3-531c-4450-a72c-1c819b73cdfa
-    country_id: *sr
-    network_id: *sr_coronie_region
-  - id: 248056
-    prefix: '597236'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: d00da826-04f6-42cd-9a9b-2049ae56ad88
-    country_id: *sr
-    network_id: *sr_nickerie_paradise_region
-  - id: 248942
-    prefix: '59730'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: 68462e82-eff1-481c-a4d6-6aa725d60604
-    country_id: *sr
-    network_id: *sr_mid_and_east_suriname_region
   - id: 249772
     prefix: '59752'
     number_min_length: 9
@@ -591,6 +574,20 @@ network_prefixes:
     uuid: f3f2ef01-1c06-46c5-9656-28f036bf296e
     country_id: *sr
     network_id: *sr_voip_region
+  - id: 245165
+    prefix: '59758'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 50239648-e53b-422e-bd4b-b0effa35c0e5
+    country_id: *sr
+    network_id: *sr_paramaribo_region
+  - id: 245169
+    prefix: '597580'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: ca168ef7-8319-4dd4-a276-1f8389b1501a
+    country_id: *sr
+    network_id: *sr_hannas_lust_region
   - id: 254693
     prefix: '597680'
     number_min_length: 10
@@ -619,6 +616,7 @@ network_prefixes:
     uuid: 424f574e-dfdd-4614-8d3f-d14799fcb85f
     country_id: *sr
     network_id: *sr_wireless_local_loop_region
+# Supplementary services Prefixes
   - id: 254760
     prefix: '597684'
     number_min_length: 10
@@ -626,3 +624,137 @@ network_prefixes:
     uuid: 383dfeb4-3b8b-4f5e-9b1b-dc8e7a6e82f3
     country_id: *sr
     network_id: *sr_wireless_local_loop_region
+  - id: 535401
+    prefix: '59771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6bcd539-6256-4674-a65f-e785375492e0
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535402
+    prefix: '59772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 866bdd51-4d53-4a7e-a6e0-fd9c806b0d61
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+# Mobile Prefixes
+  - id: 535403
+    prefix: '59774'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f6c58d14-00a0-41dd-a58f-9e6e4da4ea53
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535404
+    prefix: '59775'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8c8e4205-da95-4360-a11a-28eedc6f2ba3
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535459
+    prefix: '59776'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a3adcf6e-db08-4efd-a9a3-946123f7522a
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535461
+    prefix: '597770'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a07c2dd5-56a3-4ed1-af15-69212a3b05aa
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535462
+    prefix: '597771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e40a3d14-00ba-483c-a7c9-6c93969479ae
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535463
+    prefix: '597772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ad8f643f-4fb1-4194-a1db-cc92def9d265
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535464
+    prefix: '597773'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e924a5d-c06a-4054-84ba-858887083da9
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535465
+    prefix: '597774'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 37b2ab16-93c9-40eb-9be1-3eef08cb93c8
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 253131
+    prefix: '59780'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a2ff8f27-4e23-446e-b093-e4cf12ab8500
+    country_id: *sr
+    network_id: *sr_freephone_services
+  - id: 535478
+    prefix: '59781'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5ed22023-74c0-4365-93f2-e7e6e4eea621
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535480
+    prefix: '59782'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dc06b9bb-a7a4-4e2e-a8e4-2ea1aa80f6be
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535482
+    prefix: '59785'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 403ab4ee-2b8b-4510-9d0e-3d20fd6fc204
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535483
+    prefix: '59786'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c390c9a-1031-43ab-8d37-5bf3e7f5b8f1
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535406
+    prefix: '59787'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e54b1653-83d3-4859-8bc8-b460de6f6841
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535407
+    prefix: '59788'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2052d1e2-3c7e-4090-865b-c3b91a8cf6ae
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535409
+    prefix: '59789'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 99fd7b29-c4ea-4baf-b6da-e444dd0d190a
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 257193
+    prefix: '597900'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e09aef24-f676-4560-b67d-5d2f075b09a5
+    country_id: *sr
+    network_id: *sr_value_addes_services

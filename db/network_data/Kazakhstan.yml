@@ -13,15 +13,11 @@ networks:
     name: KZ Beeline Mobile
     uuid: 100d5a08-196b-44a9-b5b7-b81e8a8db05d
     type_id: 3
-  - id: &kz_arna_mobile 18442
-    name: KZ Arna Mobile
-    uuid: 26c7c248-03e2-439d-aca4-8d7476ff4730
-    type_id: 3
-# Fixed Networks
   - id: &kz_karagandy_region 15355
     name: KZ Karagandy Region
     uuid: 5d60f882-cac6-422f-83b1-7bbf4c81a17d
     type_id: 2
+# Fixed Networks
   - id: &kz_zhezkazgan_region 15356
     name: KZ Zhezkazgan Region
     uuid: f9cd741a-84b3-4d88-a90e-8a028a03234d
@@ -170,6 +166,10 @@ networks:
     name: KZ Customs Oral Samara Region
     uuid: 3b02e422-93e9-4434-a37c-91a68c153c5b
     type_id: 2
+  - id: &kz_satellite 15404
+    name: KZ Satellite
+    uuid: 7d8ebcf4-05dd-4bdd-b50d-afb75a1f981b
+    type_id: 15
   - id: &kz_atyrau_region 15414
     name: KZ Atyrau Region
     uuid: f88521c3-05f1-4d1d-9780-b671e5f8ad40
@@ -1186,33 +1186,34 @@ networks:
     name: KZ Office Of Prime Minister Region
     uuid: a3d6dfe1-e13f-42cd-bd9e-eaf91827e681
     type_id: 2
-  - id: &kz_transtelecom_jsc_corporate_network_region 19682
-    name: KZ Transtelecom Jsc Corporate Network Region
-    uuid: 34d10e34-95f6-4cbd-892c-a5926959864b
-    type_id: 2
-# Satellite Networks
-  - id: &kz_satellite 15404
-    name: KZ Satellite
-    uuid: 7d8ebcf4-05dd-4bdd-b50d-afb75a1f981b
-    type_id: 15
   - id: &kz_kulan_satellite 18204
     name: KZ Kulan Satellite
     uuid: 6902428d-5d77-49cc-bd77-f3476c19b42e
     type_id: 15
-# Supplementary services Networks
+  - id: &kz_arna_mobile 18442
+    name: KZ Arna Mobile
+    uuid: 26c7c248-03e2-439d-aca4-8d7476ff4730
+    type_id: 3
   - id: &kz_premium_rate_services 19420
     name: KZ Premium Rate Services
     uuid: f124f606-ec5d-4cd9-87ad-029d1e918030
     type_id: 13
+# Satellite Networks
+  - id: &kz_transtelecom_jsc_corporate_network_region 19682
+    name: KZ Transtelecom Jsc Corporate Network Region
+    uuid: 34d10e34-95f6-4cbd-892c-a5926959864b
+    type_id: 2
+  - id: &kz__region 43694
+    name: KZ  Region
+    uuid: 00d107dc-4059-4118-9f46-799d136c5f34
+    type_id: 2
+# Supplementary services Networks
+  - id: &kz_overlay_networks_region 43695
+    name: KZ Overlay Networks Region
+    uuid: f166ab38-8668-40bb-8742-c812c51fe3de
+    type_id: 2
 network_prefixes:
 # Mobile Prefixes
-  - id: 150702
-    prefix: '7702'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 352356c9-4f2d-446e-8ddc-e4c3f6265d00
-    country_id: *kz
-    network_id: *kz_kcell_mobile
   - id: 154405
     prefix: '7700'
     number_min_length: 11
@@ -1227,11 +1228,25 @@ network_prefixes:
     uuid: 30a53ac6-d8aa-4e3e-bf88-48d8ca44512f
     country_id: *kz
     network_id: *kz_kcell_mobile
+  - id: 150702
+    prefix: '7702'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 352356c9-4f2d-446e-8ddc-e4c3f6265d00
+    country_id: *kz
+    network_id: *kz_kcell_mobile
   - id: 156267
     prefix: '7705'
     number_min_length: 11
     number_max_length: 11
     uuid: dfea37b5-59c4-45bd-bfec-f9f5c5383619
+    country_id: *kz
+    network_id: *kz_beeline_mobile
+  - id: 162179
+    prefix: '7706'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40a996f0-5567-4cf7-870b-586d975010bb
     country_id: *kz
     network_id: *kz_beeline_mobile
   - id: 156532
@@ -1248,63 +1263,13 @@ network_prefixes:
     uuid: c3c4191d-0e3f-4763-8da6-ccc98532d587
     country_id: *kz
     network_id: *kz_altel_tele2_mobile
-  - id: 162179
-    prefix: '7706'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 40a996f0-5567-4cf7-870b-586d975010bb
+  - id: 550753
+    prefix: '771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5528b5a9-3f76-4087-9ec2-6f5c6300ea48
     country_id: *kz
-    network_id: *kz_beeline_mobile
-  - id: 179656
-    prefix: '7747'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 59937d5a-343b-478b-99f5-de1e0f77b3cf
-    country_id: *kz
-    network_id: *kz_altel_tele2_mobile
-  - id: 191132
-    prefix: '7763'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3cea2de2-569b-4e04-a41f-06d5eafb4888
-    country_id: *kz
-    network_id: *kz_arna_mobile
-  - id: 193386
-    prefix: '7771'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7dc2731f-0a36-438c-9c7e-6e775c35b1cf
-    country_id: *kz
-    network_id: *kz_beeline_mobile
-  - id: 196705
-    prefix: '7776'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6cb1dc01-51e1-4129-accd-4e8ba1336b91
-    country_id: *kz
-    network_id: *kz_beeline_mobile
-  - id: 197001
-    prefix: '7777'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 659d9043-d6cb-4bbe-b6b8-dce524546019
-    country_id: *kz
-    network_id: *kz_beeline_mobile
-  - id: 200898
-    prefix: '7775'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1d8b1f9f-5cb3-4725-8580-ce56fc7c516a
-    country_id: *kz
-    network_id: *kz_kcell_mobile
-  - id: 202441
-    prefix: '7778'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3174973f-ea06-469d-9c52-a6776269b103
-    country_id: *kz
-    network_id: *kz_kcell_mobile
-# Fixed Prefixes
+    network_id: *kz__region
   - id: 157851
     prefix: '7710'
     number_min_length: 11
@@ -1347,6 +1312,7 @@ network_prefixes:
     uuid: 51b02071-f53c-42cc-a2d1-2c54cbdaaead
     country_id: *kz
     network_id: *kz_agadyr_region
+# Fixed Prefixes
   - id: 157857
     prefix: '771034'
     number_min_length: 11
@@ -1578,6 +1544,13 @@ network_prefixes:
     uuid: 9b7e25ad-bfad-45b9-a9d6-0446cd4d4c90
     country_id: *kz
     network_id: *kz_customs_oral_samara_region
+  - id: 157957
+    prefix: '771159'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fd68b6e8-f2ac-46b7-9894-93fbca7609e5
+    country_id: *kz
+    network_id: *kz_satellite
   - id: 157967
     prefix: '7712'
     number_min_length: 11
@@ -1711,167 +1684,6 @@ network_prefixes:
     uuid: 533d2b47-2d08-4c6d-b19c-3049b74f43b3
     country_id: *kz
     network_id: *kz_embi_region
-  - id: 159867
-    prefix: '771542'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2a8e5fed-a209-41e3-95a3-5f65d8842357
-    country_id: *kz
-    network_id: *kz_kishkenekol_region
-  - id: 159878
-    prefix: '771543'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 87ce0ece-22c7-4ec8-840b-a69ee1974fd8
-    country_id: *kz
-    network_id: *kz_yavlenka_region
-  - id: 159889
-    prefix: '771544'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b6f0d0a0-946d-4df3-9696-66493eaf9b83
-    country_id: *kz
-    network_id: *kz_presnovka_region
-  - id: 159900
-    prefix: '771545'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 676bb483-f723-4d60-ba20-63335484c940
-    country_id: *kz
-    network_id: *kz_andreyevka_region
-  - id: 159911
-    prefix: '771546'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3ed71a78-bc57-4c17-a379-2425434c2e63
-    country_id: *kz
-    network_id: *kz_talshik_region
-  - id: 159922
-    prefix: '771547'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fda3b5c7-201d-4e2f-96a1-0498ec8c91a7
-    country_id: *kz
-    network_id: *kz_tselinnoye_region
-  - id: 160041
-    prefix: '771559'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b8eaf35c-5a2b-49ca-8a3b-bbb4fe8bea76
-    country_id: *kz
-    network_id: *kz_gorkovskoye_region
-  - id: 160460
-    prefix: '7716'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5ed9c625-6c99-498d-aa62-afc406dbdbcb
-    country_id: *kz
-    network_id: *kz_aqmola_region
-  - id: 160492
-    prefix: '77162'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 88f4f0d8-ded3-4ef2-a99e-13526f6f71b2
-    country_id: *kz
-    network_id: *kz_kokshetau_region
-  - id: 160592
-    prefix: '771630'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 860e386d-691a-4dd4-b0bd-6d5faa58dedc
-    country_id: *kz
-    network_id: *kz_burabay_region
-  - id: 160603
-    prefix: '771631'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e170abb8-f5a2-427f-b98f-fef44c7146ad
-    country_id: *kz
-    network_id: *kz_shortandy_region
-  - id: 160613
-    prefix: '771632'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0cdc2e10-8a61-4676-9cf5-ef4c3b5bae3b
-    country_id: *kz
-    network_id: *kz_zerendi_region
-  - id: 160624
-    prefix: '771633'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 443ea2cc-56bf-4142-b45f-fa8844730325
-    country_id: *kz
-    network_id: *kz_ereimentau_region
-  - id: 160635
-    prefix: '771634'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: af6f75be-8a26-4c17-add9-741cadfec510
-    country_id: *kz
-    network_id: *kz_kusep_region
-  - id: 160646
-    prefix: '771635'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e190572a-81a2-44f8-9ced-9ea577d0923b
-    country_id: *kz
-    network_id: *kz_zhaksy_region
-  - id: 160657
-    prefix: '771636'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 03f80f24-b41f-4cfd-bd87-faeed21a4de3
-    country_id: *kz
-    network_id: *kz_shuchinsk_region
-  - id: 160668
-    prefix: '771637'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b075c986-3771-44e0-b378-54c6f96913ab
-    country_id: *kz
-    network_id: *kz_korgalzhyn_region
-  - id: 160679
-    prefix: '771638'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1122f4e3-2d50-4948-88c8-1e2eb4ed474c
-    country_id: *kz
-    network_id: *kz_akkol_region
-  - id: 160690
-    prefix: '771639'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c0ab3ed5-c7a8-4b82-85fd-5379361f095f
-    country_id: *kz
-    network_id: *kz_stepnyak_region
-  - id: 160701
-    prefix: '771640'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f86d6873-1f95-4e47-952d-aabe37ee8ef3
-    country_id: *kz
-    network_id: *kz_balkashino_region
-  - id: 160712
-    prefix: '771641'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e08dfa84-49cb-443b-94c3-032094fdb8c1
-    country_id: *kz
-    network_id: *kz_astrakhanka_region
-  - id: 160722
-    prefix: '771642'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5f823cf0-2a39-4d40-9745-6020c6a6bfaa
-    country_id: *kz
-    network_id: *kz_egindikol_region
-  - id: 160733
-    prefix: '771643'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3dba5b07-1859-470a-a1d0-76c63790ace6
-    country_id: *kz
-    network_id: *kz_atbasar_region
   - id: 164166
     prefix: '771335'
     number_min_length: 11
@@ -2264,6 +2076,223 @@ network_prefixes:
     uuid: 0d67dad7-8523-4397-b037-d9d31d60b793
     country_id: *kz
     network_id: *kz_mamlyutka_region
+  - id: 159867
+    prefix: '771542'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2a8e5fed-a209-41e3-95a3-5f65d8842357
+    country_id: *kz
+    network_id: *kz_kishkenekol_region
+  - id: 159878
+    prefix: '771543'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 87ce0ece-22c7-4ec8-840b-a69ee1974fd8
+    country_id: *kz
+    network_id: *kz_yavlenka_region
+  - id: 159889
+    prefix: '771544'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b6f0d0a0-946d-4df3-9696-66493eaf9b83
+    country_id: *kz
+    network_id: *kz_presnovka_region
+  - id: 159900
+    prefix: '771545'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 676bb483-f723-4d60-ba20-63335484c940
+    country_id: *kz
+    network_id: *kz_andreyevka_region
+  - id: 159911
+    prefix: '771546'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3ed71a78-bc57-4c17-a379-2425434c2e63
+    country_id: *kz
+    network_id: *kz_talshik_region
+  - id: 159922
+    prefix: '771547'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fda3b5c7-201d-4e2f-96a1-0498ec8c91a7
+    country_id: *kz
+    network_id: *kz_tselinnoye_region
+  - id: 160041
+    prefix: '771559'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b8eaf35c-5a2b-49ca-8a3b-bbb4fe8bea76
+    country_id: *kz
+    network_id: *kz_gorkovskoye_region
+  - id: 160460
+    prefix: '7716'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5ed9c625-6c99-498d-aa62-afc406dbdbcb
+    country_id: *kz
+    network_id: *kz_aqmola_region
+  - id: 160492
+    prefix: '77162'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 88f4f0d8-ded3-4ef2-a99e-13526f6f71b2
+    country_id: *kz
+    network_id: *kz_kokshetau_region
+  - id: 160592
+    prefix: '771630'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 860e386d-691a-4dd4-b0bd-6d5faa58dedc
+    country_id: *kz
+    network_id: *kz_burabay_region
+  - id: 160603
+    prefix: '771631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e170abb8-f5a2-427f-b98f-fef44c7146ad
+    country_id: *kz
+    network_id: *kz_shortandy_region
+  - id: 160613
+    prefix: '771632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0cdc2e10-8a61-4676-9cf5-ef4c3b5bae3b
+    country_id: *kz
+    network_id: *kz_zerendi_region
+  - id: 160624
+    prefix: '771633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 443ea2cc-56bf-4142-b45f-fa8844730325
+    country_id: *kz
+    network_id: *kz_ereimentau_region
+  - id: 160635
+    prefix: '771634'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: af6f75be-8a26-4c17-add9-741cadfec510
+    country_id: *kz
+    network_id: *kz_kusep_region
+  - id: 160646
+    prefix: '771635'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e190572a-81a2-44f8-9ced-9ea577d0923b
+    country_id: *kz
+    network_id: *kz_zhaksy_region
+  - id: 160657
+    prefix: '771636'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 03f80f24-b41f-4cfd-bd87-faeed21a4de3
+    country_id: *kz
+    network_id: *kz_shuchinsk_region
+  - id: 160668
+    prefix: '771637'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b075c986-3771-44e0-b378-54c6f96913ab
+    country_id: *kz
+    network_id: *kz_korgalzhyn_region
+  - id: 160679
+    prefix: '771638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1122f4e3-2d50-4948-88c8-1e2eb4ed474c
+    country_id: *kz
+    network_id: *kz_akkol_region
+  - id: 160690
+    prefix: '771639'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c0ab3ed5-c7a8-4b82-85fd-5379361f095f
+    country_id: *kz
+    network_id: *kz_stepnyak_region
+  - id: 160701
+    prefix: '771640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f86d6873-1f95-4e47-952d-aabe37ee8ef3
+    country_id: *kz
+    network_id: *kz_balkashino_region
+  - id: 160712
+    prefix: '771641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e08dfa84-49cb-443b-94c3-032094fdb8c1
+    country_id: *kz
+    network_id: *kz_astrakhanka_region
+  - id: 160722
+    prefix: '771642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5f823cf0-2a39-4d40-9745-6020c6a6bfaa
+    country_id: *kz
+    network_id: *kz_egindikol_region
+  - id: 160733
+    prefix: '771643'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3dba5b07-1859-470a-a1d0-76c63790ace6
+    country_id: *kz
+    network_id: *kz_atbasar_region
+  - id: 170897
+    prefix: '771644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a793eccc-e68d-4404-8bb2-df03f6d1a247
+    country_id: *kz
+    network_id: *kz_arshaly_region
+  - id: 170908
+    prefix: '771645'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 66b5611d-602a-403c-89d7-d93bdd9a7e4a
+    country_id: *kz
+    network_id: *kz_stepnogorsk_region
+  - id: 170919
+    prefix: '771646'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ffff7ca-fd86-48a3-8290-73109de648bb
+    country_id: *kz
+    network_id: *kz_makinsk_region
+  - id: 170930
+    prefix: '771647'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac29c945-5417-4d4f-be02-e95896d6c679
+    country_id: *kz
+    network_id: *kz_esil_region
+  - id: 170941
+    prefix: '771648'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 697a4487-c410-424e-a306-636048f64c7d
+    country_id: *kz
+    network_id: *kz_derzhavinsk_region
+  - id: 170952
+    prefix: '771649'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8531d140-2578-409a-b6c7-e1e625e20228
+    country_id: *kz
+    network_id: *kz_aqsu_region
+  - id: 170973
+    prefix: '771651'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 026cc496-1c61-434b-875d-1144bcf25560
+    country_id: *kz
+    network_id: *kz_manshuk_region
+  - id: 171052
+    prefix: '771659'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 75a967d3-e3d8-4ab9-bb2a-4c611627e746
+    country_id: *kz
+    network_id: *kz_aqqaiyn_region
   - id: 166730
     prefix: '7717'
     number_min_length: 11
@@ -2327,6 +2356,97 @@ network_prefixes:
     uuid: fa39a464-c53d-422b-a3a9-a08872c21b7e
     country_id: *kz
     network_id: *kz_ekibastuz_region
+  - id: 171192
+    prefix: '771836'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7606c390-7a4f-4730-a77d-2e3b79390fcd
+    country_id: *kz
+    network_id: *kz_sharbakty_region
+  - id: 171203
+    prefix: '771837'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 51e82da1-d56c-4f73-85e7-5850cbd28a90
+    country_id: *kz
+    network_id: *kz_aksu_region
+  - id: 171214
+    prefix: '771838'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 341ee2b5-f748-4970-a24b-bb597a33269c
+    country_id: *kz
+    network_id: *kz_koktobe_region
+  - id: 171225
+    prefix: '771839'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 425a2f51-02d2-4744-8be2-7ab5c5d7e3ec
+    country_id: *kz
+    network_id: *kz_akku_region
+  - id: 171236
+    prefix: '771840'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 624b3d6f-6b42-4597-938d-cde468ded737
+    country_id: *kz
+    network_id: *kz_bayanaul_region
+  - id: 171247
+    prefix: '771841'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7fb9826f-63b6-4b80-9813-9b60bf1d3b61
+    country_id: *kz
+    network_id: *kz_aktogai_region
+  - id: 171257
+    prefix: '771842'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c324786-806f-447f-ac79-5beee019da19
+    country_id: *kz
+    network_id: *kz_koktobe_region
+  - id: 171268
+    prefix: '771843'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7e222914-44d6-4ade-a852-9ccf3fcbd8c0
+    country_id: *kz
+    network_id: *kz_ozernoye_region
+  - id: 171279
+    prefix: '771844'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d8643354-9963-4f32-90ba-32d81a717e34
+    country_id: *kz
+    network_id: *kz_toqty_region
+  - id: 171290
+    prefix: '771845'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 93cc305d-14ef-4161-a249-ffa510d378fc
+    country_id: *kz
+    network_id: *kz_chernoretskoye_region
+  - id: 171430
+    prefix: '771859'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac0e8ec1-1f38-4354-8b9f-6d19c6fec14d
+    country_id: *kz
+    network_id: *kz_shaldai_region
+  - id: 171539
+    prefix: '77187'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2f581201-5153-42fa-b480-9fbf22ed1e7b
+    country_id: *kz
+    network_id: *kz_ekibastuz_region
+  - id: 550754
+    prefix: '772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 412d2c28-d9a1-48be-83f8-0a3eb7a20acb
+    country_id: *kz
+    network_id: *kz__region
   - id: 169520
     prefix: '7721'
     number_min_length: 11
@@ -2481,314 +2601,6 @@ network_prefixes:
     uuid: d64be701-c693-452d-a684-77a21f712f23
     country_id: *kz
     network_id: *kz_barshatas_region
-  - id: 170427
-    prefix: '7725'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e8268cb9-a159-45fe-905b-f88f6123bb1b
-    country_id: *kz
-    network_id: *kz_shymkent_turkistan_region
-  - id: 170459
-    prefix: '77252'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1b269d39-8afd-4b25-be75-35259dedde59
-    country_id: *kz
-    network_id: *kz_shymkent_region
-  - id: 170559
-    prefix: '772530'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 11cf343f-35d6-42dd-838e-ab8d753faac5
-    country_id: *kz
-    network_id: *kz_temirlan_region
-  - id: 170570
-    prefix: '772531'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 372dfaed-6267-4fc8-952c-992be58e81ef
-    country_id: *kz
-    network_id: *kz_aqsukent_region
-  - id: 170580
-    prefix: '772532'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 162b819d-5fde-49a2-bf13-fbc65fa4d150
-    country_id: *kz
-    network_id: *kz_abai_region
-  - id: 170590
-    prefix: '772533'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 74b054cc-0745-4748-819e-eda33cb8752c
-    country_id: *kz
-    network_id: *kz_turkistan_region
-  - id: 170593
-    prefix: '772534'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f47b722-b7d1-4d00-bb92-b4b25139669c
-    country_id: *kz
-    network_id: *kz_zhetisai_region
-  - id: 170596
-    prefix: '772535'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fccf6aef-1f7c-43dc-aaa4-ab6e8a1710fa
-    country_id: *kz
-    network_id: *kz_shardara_region
-  - id: 170598
-    prefix: '772536'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c702c7b1-5d96-4096-b987-49ca2a4de622
-    country_id: *kz
-    network_id: *kz_kentau_region
-  - id: 170599
-    prefix: '772537'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0e396864-3911-4b54-a349-a54c3c5e52ad
-    country_id: *kz
-    network_id: *kz_saryagash_region
-  - id: 170602
-    prefix: '772538'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 15bd5248-3881-4cf7-be48-3982c0d49791
-    country_id: *kz
-    network_id: *kz_turar_ryskulov_region
-  - id: 170603
-    prefix: '772539'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 52c70414-ea2b-4144-8c19-dbd777d23c7b
-    country_id: *kz
-    network_id: *kz_qazygurt_region
-  - id: 170604
-    prefix: '772540'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 30b59ab9-9a1d-46d9-a95f-a2fdb7be3b4c
-    country_id: *kz
-    network_id: *kz_arys_region
-  - id: 170606
-    prefix: '772541'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5ae43b9c-ee01-4c91-a920-76bca2eb1244
-    country_id: *kz
-    network_id: *kz_myrzakent_region
-  - id: 170607
-    prefix: '772542'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9a919dfb-d82d-4439-9cb5-d1c47360f4d0
-    country_id: *kz
-    network_id: *kz_asyqata_region
-  - id: 170608
-    prefix: '772543'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 759b852b-8478-4ee4-b49b-1f21d15a31ab
-    country_id: *kz
-    network_id: *kz_aqsumbe_region
-  - id: 170610
-    prefix: '772544'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5c90feaa-dd34-4f03-b53b-86b3a7a143a9
-    country_id: *kz
-    network_id: *kz_shauildir_region
-  - id: 170612
-    prefix: '772545'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3c19873f-22f9-4ca7-b852-850c4c739e9e
-    country_id: *kz
-    network_id: *kz_ikan_region
-  - id: 170613
-    prefix: '772546'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c91eb0ed-534c-4d77-9381-5b87243b3751
-    country_id: *kz
-    network_id: *kz_sholaqqorgan_region
-  - id: 170615
-    prefix: '772547'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6da9a2f4-935b-412b-84eb-52a88c4740f7
-    country_id: *kz
-    network_id: *kz_lenger_region
-  - id: 170616
-    prefix: '772548'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 46c37cf2-e926-4e30-83c2-39d6cbe09d18
-    country_id: *kz
-    network_id: *kz_shayan_region
-  - id: 170628
-    prefix: '772559'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0bc3593c-55e9-4c68-92a4-3ea5a9df2924
-    country_id: *kz
-    network_id: *kz_qyzemshek_region
-  - id: 170694
-    prefix: '7726'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7b10bf37-d847-49e8-af7c-ffd2e42dde6b
-    country_id: *kz
-    network_id: *kz_zhambyl_region
-  - id: 170888
-    prefix: '77262'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 17cdcd16-1adb-444a-bebc-b3c6cc9c3bfc
-    country_id: *kz
-    network_id: *kz_taraz_region
-  - id: 170897
-    prefix: '771644'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a793eccc-e68d-4404-8bb2-df03f6d1a247
-    country_id: *kz
-    network_id: *kz_arshaly_region
-  - id: 170908
-    prefix: '771645'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 66b5611d-602a-403c-89d7-d93bdd9a7e4a
-    country_id: *kz
-    network_id: *kz_stepnogorsk_region
-  - id: 170919
-    prefix: '771646'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9ffff7ca-fd86-48a3-8290-73109de648bb
-    country_id: *kz
-    network_id: *kz_makinsk_region
-  - id: 170930
-    prefix: '771647'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac29c945-5417-4d4f-be02-e95896d6c679
-    country_id: *kz
-    network_id: *kz_esil_region
-  - id: 170941
-    prefix: '771648'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 697a4487-c410-424e-a306-636048f64c7d
-    country_id: *kz
-    network_id: *kz_derzhavinsk_region
-  - id: 170952
-    prefix: '771649'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8531d140-2578-409a-b6c7-e1e625e20228
-    country_id: *kz
-    network_id: *kz_aqsu_region
-  - id: 170973
-    prefix: '771651'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 026cc496-1c61-434b-875d-1144bcf25560
-    country_id: *kz
-    network_id: *kz_manshuk_region
-  - id: 171052
-    prefix: '771659'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 75a967d3-e3d8-4ab9-bb2a-4c611627e746
-    country_id: *kz
-    network_id: *kz_aqqaiyn_region
-  - id: 171192
-    prefix: '771836'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7606c390-7a4f-4730-a77d-2e3b79390fcd
-    country_id: *kz
-    network_id: *kz_sharbakty_region
-  - id: 171203
-    prefix: '771837'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 51e82da1-d56c-4f73-85e7-5850cbd28a90
-    country_id: *kz
-    network_id: *kz_aksu_region
-  - id: 171214
-    prefix: '771838'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 341ee2b5-f748-4970-a24b-bb597a33269c
-    country_id: *kz
-    network_id: *kz_koktobe_region
-  - id: 171225
-    prefix: '771839'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 425a2f51-02d2-4744-8be2-7ab5c5d7e3ec
-    country_id: *kz
-    network_id: *kz_akku_region
-  - id: 171236
-    prefix: '771840'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 624b3d6f-6b42-4597-938d-cde468ded737
-    country_id: *kz
-    network_id: *kz_bayanaul_region
-  - id: 171247
-    prefix: '771841'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7fb9826f-63b6-4b80-9813-9b60bf1d3b61
-    country_id: *kz
-    network_id: *kz_aktogai_region
-  - id: 171257
-    prefix: '771842'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2c324786-806f-447f-ac79-5beee019da19
-    country_id: *kz
-    network_id: *kz_koktobe_region
-  - id: 171268
-    prefix: '771843'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7e222914-44d6-4ade-a852-9ccf3fcbd8c0
-    country_id: *kz
-    network_id: *kz_ozernoye_region
-  - id: 171279
-    prefix: '771844'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d8643354-9963-4f32-90ba-32d81a717e34
-    country_id: *kz
-    network_id: *kz_toqty_region
-  - id: 171290
-    prefix: '771845'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 93cc305d-14ef-4161-a249-ffa510d378fc
-    country_id: *kz
-    network_id: *kz_chernoretskoye_region
-  - id: 171430
-    prefix: '771859'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac0e8ec1-1f38-4354-8b9f-6d19c6fec14d
-    country_id: *kz
-    network_id: *kz_shaldai_region
-  - id: 171539
-    prefix: '77187'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2f581201-5153-42fa-b480-9fbf22ed1e7b
-    country_id: *kz
-    network_id: *kz_ekibastuz_region
   - id: 172622
     prefix: '772251'
     number_min_length: 11
@@ -3069,6 +2881,328 @@ network_prefixes:
     uuid: 993cabce-e5fc-4f7c-b0c2-f8240ea68f1e
     country_id: *kz
     network_id: *kz_azhar_region
+  - id: 170427
+    prefix: '7725'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e8268cb9-a159-45fe-905b-f88f6123bb1b
+    country_id: *kz
+    network_id: *kz_shymkent_turkistan_region
+  - id: 170459
+    prefix: '77252'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1b269d39-8afd-4b25-be75-35259dedde59
+    country_id: *kz
+    network_id: *kz_shymkent_region
+  - id: 170559
+    prefix: '772530'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 11cf343f-35d6-42dd-838e-ab8d753faac5
+    country_id: *kz
+    network_id: *kz_temirlan_region
+  - id: 170570
+    prefix: '772531'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 372dfaed-6267-4fc8-952c-992be58e81ef
+    country_id: *kz
+    network_id: *kz_aqsukent_region
+  - id: 170580
+    prefix: '772532'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 162b819d-5fde-49a2-bf13-fbc65fa4d150
+    country_id: *kz
+    network_id: *kz_abai_region
+  - id: 170590
+    prefix: '772533'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74b054cc-0745-4748-819e-eda33cb8752c
+    country_id: *kz
+    network_id: *kz_turkistan_region
+  - id: 170593
+    prefix: '772534'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f47b722-b7d1-4d00-bb92-b4b25139669c
+    country_id: *kz
+    network_id: *kz_zhetisai_region
+  - id: 170596
+    prefix: '772535'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fccf6aef-1f7c-43dc-aaa4-ab6e8a1710fa
+    country_id: *kz
+    network_id: *kz_shardara_region
+  - id: 170598
+    prefix: '772536'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c702c7b1-5d96-4096-b987-49ca2a4de622
+    country_id: *kz
+    network_id: *kz_kentau_region
+  - id: 170599
+    prefix: '772537'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0e396864-3911-4b54-a349-a54c3c5e52ad
+    country_id: *kz
+    network_id: *kz_saryagash_region
+  - id: 170602
+    prefix: '772538'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 15bd5248-3881-4cf7-be48-3982c0d49791
+    country_id: *kz
+    network_id: *kz_turar_ryskulov_region
+  - id: 170603
+    prefix: '772539'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 52c70414-ea2b-4144-8c19-dbd777d23c7b
+    country_id: *kz
+    network_id: *kz_qazygurt_region
+  - id: 170604
+    prefix: '772540'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 30b59ab9-9a1d-46d9-a95f-a2fdb7be3b4c
+    country_id: *kz
+    network_id: *kz_arys_region
+  - id: 170606
+    prefix: '772541'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5ae43b9c-ee01-4c91-a920-76bca2eb1244
+    country_id: *kz
+    network_id: *kz_myrzakent_region
+  - id: 170607
+    prefix: '772542'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9a919dfb-d82d-4439-9cb5-d1c47360f4d0
+    country_id: *kz
+    network_id: *kz_asyqata_region
+  - id: 170608
+    prefix: '772543'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 759b852b-8478-4ee4-b49b-1f21d15a31ab
+    country_id: *kz
+    network_id: *kz_aqsumbe_region
+  - id: 170610
+    prefix: '772544'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5c90feaa-dd34-4f03-b53b-86b3a7a143a9
+    country_id: *kz
+    network_id: *kz_shauildir_region
+  - id: 170612
+    prefix: '772545'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3c19873f-22f9-4ca7-b852-850c4c739e9e
+    country_id: *kz
+    network_id: *kz_ikan_region
+  - id: 170613
+    prefix: '772546'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c91eb0ed-534c-4d77-9381-5b87243b3751
+    country_id: *kz
+    network_id: *kz_sholaqqorgan_region
+  - id: 170615
+    prefix: '772547'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6da9a2f4-935b-412b-84eb-52a88c4740f7
+    country_id: *kz
+    network_id: *kz_lenger_region
+  - id: 170616
+    prefix: '772548'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 46c37cf2-e926-4e30-83c2-39d6cbe09d18
+    country_id: *kz
+    network_id: *kz_shayan_region
+  - id: 170628
+    prefix: '772559'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0bc3593c-55e9-4c68-92a4-3ea5a9df2924
+    country_id: *kz
+    network_id: *kz_qyzemshek_region
+  - id: 170694
+    prefix: '7726'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7b10bf37-d847-49e8-af7c-ffd2e42dde6b
+    country_id: *kz
+    network_id: *kz_zhambyl_region
+  - id: 170888
+    prefix: '77262'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 17cdcd16-1adb-444a-bebc-b3c6cc9c3bfc
+    country_id: *kz
+    network_id: *kz_taraz_region
+  - id: 181032
+    prefix: '772631'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d217c44b-fe61-4f0d-8c97-9b6bde1ac83e
+    country_id: *kz
+    network_id: *kz_qulan_region
+  - id: 181033
+    prefix: '772632'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c91947ea-0a31-4218-9506-05836abbbaf0
+    country_id: *kz
+    network_id: *kz_merki_region
+  - id: 181034
+    prefix: '772633'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 382aa772-a6a3-41bc-8923-3de2da69a253
+    country_id: *kz
+    network_id: *kz_assa_region
+  - id: 181037
+    prefix: '772634'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5b45a047-2f2e-4f17-ab56-48bf339897d8
+    country_id: *kz
+    network_id: *kz_zhanatas_region
+  - id: 181039
+    prefix: '772635'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dc83fa81-4e4d-450e-a9e7-d0d03186d9ad
+    country_id: *kz
+    network_id: *kz_bauyrzhan_momyshuly_region
+  - id: 181040
+    prefix: '772636'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e5bab31-1d8b-42c0-9bc6-517f87b848f0
+    country_id: *kz
+    network_id: *kz_qordai_region
+  - id: 181041
+    prefix: '772637'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b0172eaa-2231-4704-acec-02999b50037a
+    country_id: *kz
+    network_id: *kz_sarykemer_region
+  - id: 181042
+    prefix: '772638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cbbf03cb-cc59-4536-82bf-a827e75cc37c
+    country_id: *kz
+    network_id: *kz_tole_bi_region
+  - id: 181043
+    prefix: '772639'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4e8719d4-824f-44ff-b408-422114074022
+    country_id: *kz
+    network_id: *kz_saudakent_region
+  - id: 181044
+    prefix: '772640'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8479f10b-cd49-4ce8-8da8-65423f5d205e
+    country_id: *kz
+    network_id: *kz_mirnyi_region
+  - id: 181046
+    prefix: '772641'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 457df0ae-cae8-4f43-9005-6c6a0ba7108e
+    country_id: *kz
+    network_id: *kz_akkol_region
+  - id: 181047
+    prefix: '772642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9ad14fb2-a4ef-4db8-8fa6-44d563574328
+    country_id: *kz
+    network_id: *kz_moiynqum_region
+  - id: 181048
+    prefix: '772643'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ac5c65c-2bfb-4361-a748-f5ab09ef7b5d
+    country_id: *kz
+    network_id: *kz_shu_region
+  - id: 181050
+    prefix: '772644'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: df958252-60d5-4cf9-9c22-04ac662d47c9
+    country_id: *kz
+    network_id: *kz_qaratau_region
+  - id: 181056
+    prefix: '772659'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5b7766af-0bd5-4f4b-9f6b-59ec25040eca
+    country_id: *kz
+    network_id: *kz_mynaral_region
+  - id: 181110
+    prefix: '7727'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 117338fd-3280-40a7-8d85-10cc31a6a731
+    country_id: *kz
+    network_id: *kz_almaty_region
+  - id: 181193
+    prefix: '77272'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3ec7e06a-54ee-4f81-a1b8-7a41c6edb8a0
+    country_id: *kz
+    network_id: *kz_almaty_region
+  - id: 181246
+    prefix: '77272517'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e4e4caa-01fc-46ad-abb4-51fa8ff962a5
+    country_id: *kz
+    network_id: *kz_otegen_batyr_region
+  - id: 181291
+    prefix: '77272956'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b304a94f-fec2-4d2a-87f9-f2d520820ec0
+    country_id: *kz
+    network_id: *kz_talgar_region
+  - id: 181295
+    prefix: '77272983'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce090fb3-713e-4d37-99f6-fcc1ed45680a
+    country_id: *kz
+    network_id: *kz_qaskelen_region
+  - id: 181297
+    prefix: '77273'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6cb53a12-286b-46bd-ae5a-280c2acd1eba
+    country_id: *kz
+    network_id: *kz_almaty_region
+  - id: 181397
+    prefix: '772740'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db58f03f-5ff4-42c5-aebd-fbf0a7b35dbb
+    country_id: *kz
+    network_id: *kz_qaratogan_region
   - id: 173934
     prefix: '772752'
     number_min_length: 11
@@ -3342,160 +3476,13 @@ network_prefixes:
     uuid: ab29d074-7950-4e64-8008-43f460ac4f59
     country_id: *kz
     network_id: *kz_aqqudyq_region
-  - id: 181032
-    prefix: '772631'
+  - id: 179656
+    prefix: '7747'
     number_min_length: 11
     number_max_length: 11
-    uuid: d217c44b-fe61-4f0d-8c97-9b6bde1ac83e
+    uuid: 59937d5a-343b-478b-99f5-de1e0f77b3cf
     country_id: *kz
-    network_id: *kz_qulan_region
-  - id: 181033
-    prefix: '772632'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c91947ea-0a31-4218-9506-05836abbbaf0
-    country_id: *kz
-    network_id: *kz_merki_region
-  - id: 181034
-    prefix: '772633'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 382aa772-a6a3-41bc-8923-3de2da69a253
-    country_id: *kz
-    network_id: *kz_assa_region
-  - id: 181037
-    prefix: '772634'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5b45a047-2f2e-4f17-ab56-48bf339897d8
-    country_id: *kz
-    network_id: *kz_zhanatas_region
-  - id: 181039
-    prefix: '772635'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dc83fa81-4e4d-450e-a9e7-d0d03186d9ad
-    country_id: *kz
-    network_id: *kz_bauyrzhan_momyshuly_region
-  - id: 181040
-    prefix: '772636'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5e5bab31-1d8b-42c0-9bc6-517f87b848f0
-    country_id: *kz
-    network_id: *kz_qordai_region
-  - id: 181041
-    prefix: '772637'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b0172eaa-2231-4704-acec-02999b50037a
-    country_id: *kz
-    network_id: *kz_sarykemer_region
-  - id: 181042
-    prefix: '772638'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: cbbf03cb-cc59-4536-82bf-a827e75cc37c
-    country_id: *kz
-    network_id: *kz_tole_bi_region
-  - id: 181043
-    prefix: '772639'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4e8719d4-824f-44ff-b408-422114074022
-    country_id: *kz
-    network_id: *kz_saudakent_region
-  - id: 181044
-    prefix: '772640'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8479f10b-cd49-4ce8-8da8-65423f5d205e
-    country_id: *kz
-    network_id: *kz_mirnyi_region
-  - id: 181046
-    prefix: '772641'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 457df0ae-cae8-4f43-9005-6c6a0ba7108e
-    country_id: *kz
-    network_id: *kz_akkol_region
-  - id: 181047
-    prefix: '772642'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9ad14fb2-a4ef-4db8-8fa6-44d563574328
-    country_id: *kz
-    network_id: *kz_moiynqum_region
-  - id: 181048
-    prefix: '772643'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6ac5c65c-2bfb-4361-a748-f5ab09ef7b5d
-    country_id: *kz
-    network_id: *kz_shu_region
-  - id: 181050
-    prefix: '772644'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: df958252-60d5-4cf9-9c22-04ac662d47c9
-    country_id: *kz
-    network_id: *kz_qaratau_region
-  - id: 181056
-    prefix: '772659'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5b7766af-0bd5-4f4b-9f6b-59ec25040eca
-    country_id: *kz
-    network_id: *kz_mynaral_region
-  - id: 181110
-    prefix: '7727'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 117338fd-3280-40a7-8d85-10cc31a6a731
-    country_id: *kz
-    network_id: *kz_almaty_region
-  - id: 181193
-    prefix: '77272'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3ec7e06a-54ee-4f81-a1b8-7a41c6edb8a0
-    country_id: *kz
-    network_id: *kz_almaty_region
-  - id: 181246
-    prefix: '77272517'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e4e4caa-01fc-46ad-abb4-51fa8ff962a5
-    country_id: *kz
-    network_id: *kz_otegen_batyr_region
-  - id: 181291
-    prefix: '77272956'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b304a94f-fec2-4d2a-87f9-f2d520820ec0
-    country_id: *kz
-    network_id: *kz_talgar_region
-  - id: 181295
-    prefix: '77272983'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ce090fb3-713e-4d37-99f6-fcc1ed45680a
-    country_id: *kz
-    network_id: *kz_qaskelen_region
-  - id: 181297
-    prefix: '77273'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6cb53a12-286b-46bd-ae5a-280c2acd1eba
-    country_id: *kz
-    network_id: *kz_almaty_region
-  - id: 181397
-    prefix: '772740'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: db58f03f-5ff4-42c5-aebd-fbf0a7b35dbb
-    country_id: *kz
-    network_id: *kz_qaratogan_region
+    network_id: *kz_altel_tele2_mobile
   - id: 186326
     prefix: '7750'
     number_min_length: 11
@@ -3517,21 +3504,6 @@ network_prefixes:
     uuid: 5fa90c4b-f144-47f1-9104-1f6c8594b83b
     country_id: *kz
     network_id: *kz_office_of_prime_minister_region
-  - id: 207031
-    prefix: '7790'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4b889aa3-4cf6-4857-982d-f34b1362bc63
-    country_id: *kz
-    network_id: *kz_transtelecom_jsc_corporate_network_region
-# Satellite Prefixes
-  - id: 157957
-    prefix: '771159'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fd68b6e8-f2ac-46b7-9894-93fbca7609e5
-    country_id: *kz
-    network_id: *kz_satellite
   - id: 188701
     prefix: '7760'
     number_min_length: 11
@@ -3539,7 +3511,63 @@ network_prefixes:
     uuid: f2b7f32a-fb69-4902-b574-78423cc2f933
     country_id: *kz
     network_id: *kz_kulan_satellite
-# Supplementary services Prefixes
+  - id: 550755
+    prefix: '7762'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bdd306b0-f4d5-47bd-9194-120347512c56
+    country_id: *kz
+    network_id: *kz_overlay_networks_region
+  - id: 191132
+    prefix: '7763'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3cea2de2-569b-4e04-a41f-06d5eafb4888
+    country_id: *kz
+    network_id: *kz_arna_mobile
+  - id: 550756
+    prefix: '7764'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d9bbf8b-ffdf-443f-b676-797319bf59e3
+    country_id: *kz
+    network_id: *kz_overlay_networks_region
+  - id: 193386
+    prefix: '7771'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7dc2731f-0a36-438c-9c7e-6e775c35b1cf
+    country_id: *kz
+    network_id: *kz_beeline_mobile
+  - id: 200898
+    prefix: '7775'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1d8b1f9f-5cb3-4725-8580-ce56fc7c516a
+    country_id: *kz
+    network_id: *kz_kcell_mobile
+  - id: 196705
+    prefix: '7776'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6cb1dc01-51e1-4129-accd-4e8ba1336b91
+    country_id: *kz
+    network_id: *kz_beeline_mobile
+  - id: 197001
+    prefix: '7777'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 659d9043-d6cb-4bbe-b6b8-dce524546019
+    country_id: *kz
+    network_id: *kz_beeline_mobile
+# Satellite Prefixes
+  - id: 202441
+    prefix: '7778'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3174973f-ea06-469d-9c52-a6776269b103
+    country_id: *kz
+    network_id: *kz_kcell_mobile
   - id: 204886
     prefix: '7785'
     number_min_length: 11
@@ -3547,3 +3575,11 @@ network_prefixes:
     uuid: a11279c5-60bf-4597-b33c-a8333fc04e38
     country_id: *kz
     network_id: *kz_premium_rate_services
+# Supplementary services Prefixes
+  - id: 207031
+    prefix: '7790'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4b889aa3-4cf6-4857-982d-f34b1362bc63
+    country_id: *kz
+    network_id: *kz_transtelecom_jsc_corporate_network_region

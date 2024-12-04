@@ -1,10 +1,43 @@
 country_id: &gy 91
 networks:
-# Fixed Networks
+# Mobile Networks
   - id: &gy_fixed 4684
     name: GY Fixed
     uuid: d82d23fb-533f-4f55-8872-c5c2e9754211
     type_id: 2
+  - id: &gy_digicel_mobile 10555
+    name: GY Digicel Mobile
+    uuid: 84515621-c2fe-413d-ab3f-a266087d9a05
+    type_id: 3
+  - id: &gy_quark_communications_mobile 10762
+    name: GY Quark Communications Mobile
+    uuid: 859ed314-4037-48e0-bc60-f469a6347c3c
+    type_id: 3
+  - id: &gy_dna_enterprise_mobile 10763
+    name: GY Dna Enterprise Mobile
+    uuid: 7ed911bf-d5c2-4cad-a83a-2a78dcb6202a
+    type_id: 3
+  - id: &gy_cellink_mobile 11071
+    name: GY Cellink Mobile
+    uuid: 2b7bb427-4f8d-47fb-bb84-107cfc11ce80
+    type_id: 3
+  - id: &gy_egovernment_mobile 11651
+    name: GY Egovernment Mobile
+    uuid: cfa49207-7ede-4a41-b230-8a4179f0e363
+    type_id: 3
+  - id: &gy_gg_cell_mobile 12515
+    name: GY Gg Cell Mobile
+    uuid: 7963e49e-e9c4-48b9-a6dd-1904c22fda78
+    type_id: 3
+  - id: &gy_enet_mobile_mobile 12900
+    name: GY Enet Mobile Mobile
+    uuid: 4e779055-9926-4d96-8420-3207d3f2d3f3
+    type_id: 3
+# Fixed Networks
+  - id: &gy_mobile 14373
+    name: GY Mobile
+    uuid: 78d03b55-580b-404b-a035-2192c4549d0d
+    type_id: 3
   - id: &gy_charity_region 18550
     name: GY Charity Region
     uuid: cac5ae8a-df94-4fde-8e8d-5423761118a4
@@ -41,6 +74,14 @@ networks:
     name: GY Matthews Ridge Region
     uuid: f3ad85dc-9a17-4b49-87a1-9f0746dace7e
     type_id: 2
+  - id: &gy_special_services 21274
+    name: GY Special Services
+    uuid: 589ac7c8-8124-4380-8bcb-5164397973da
+    type_id: 13
+  - id: &gy_emergency_services 24399
+    name: GY Emergency Services
+    uuid: 171f88e3-b421-45ce-be2e-383d393b316b
+    type_id: 13
   - id: &gy_mocha_region 27434
     name: GY Mocha Region
     uuid: 3966a8b1-22a3-4eea-8249-8457de2eb0af
@@ -257,6 +298,10 @@ networks:
     name: GY Good Hope Region
     uuid: 74a6202b-3101-4ef7-bd01-3615a9efee2e
     type_id: 2
+  - id: &gy_data_services 31011
+    name: GY Data Services
+    uuid: 77700788-1199-4624-9eda-3239edc0ddad
+    type_id: 13
   - id: &gy_vigilance_region 31046
     name: GY Vigilance Region
     uuid: b4a0dc3d-37fe-42ed-80ea-370bc113689a
@@ -265,6 +310,10 @@ networks:
     name: GY Stanleytown Region
     uuid: 484c42fd-ddff-4f9f-b770-b8f2cd74e10b
     type_id: 2
+  - id: &gy_international_freephone_services 31174
+    name: GY International Freephone Services
+    uuid: 856b9422-995c-40b0-896d-d3a8cca8e1b2
+    type_id: 13
   - id: &gy_mibikuri_region 32078
     name: GY Mibikuri Region
     uuid: 2b4fe159-0216-437c-9738-10b0589fb4a3
@@ -429,6 +478,7 @@ networks:
     name: GY Kwakwani Region
     uuid: 560ddb5b-f609-4be9-9d2b-2228222c2fbe
     type_id: 2
+# Supplementary services Networks
   - id: &gy_christianburg_region 37875
     name: GY Christianburg Region
     uuid: 43caa179-1274-4a40-a265-fab6eba37edf
@@ -445,338 +495,36 @@ networks:
     name: GY Mahdia Region
     uuid: 540d27ae-2d28-41a6-80cc-6b820743d9bf
     type_id: 2
-# Mobile Networks
-  - id: &gy_digicel_mobile 10555
-    name: GY Digicel Mobile
-    uuid: 84515621-c2fe-413d-ab3f-a266087d9a05
-    type_id: 3
-  - id: &gy_quark_communications_mobile 10762
-    name: GY Quark Communications Mobile
-    uuid: 859ed314-4037-48e0-bc60-f469a6347c3c
-    type_id: 3
-  - id: &gy_dna_enterprise_mobile 10763
-    name: GY Dna Enterprise Mobile
-    uuid: 7ed911bf-d5c2-4cad-a83a-2a78dcb6202a
-    type_id: 3
-  - id: &gy_cellink_mobile 11071
-    name: GY Cellink Mobile
-    uuid: 2b7bb427-4f8d-47fb-bb84-107cfc11ce80
-    type_id: 3
-  - id: &gy_egovernment_mobile 11651
-    name: GY Egovernment Mobile
-    uuid: cfa49207-7ede-4a41-b230-8a4179f0e363
-    type_id: 3
-  - id: &gy_gg_cell_mobile 12515
-    name: GY Gg Cell Mobile
-    uuid: 7963e49e-e9c4-48b9-a6dd-1904c22fda78
-    type_id: 3
-  - id: &gy_enet_mobile_mobile 12900
-    name: GY Enet Mobile Mobile
-    uuid: 4e779055-9926-4d96-8420-3207d3f2d3f3
-    type_id: 3
-  - id: &gy_mobile 14373
-    name: GY Mobile
-    uuid: 78d03b55-580b-404b-a035-2192c4549d0d
-    type_id: 3
-# Supplementary services Networks
-  - id: &gy_special_services 21274
-    name: GY Special Services
-    uuid: 589ac7c8-8124-4380-8bcb-5164397973da
-    type_id: 13
-  - id: &gy_emergency_services 24399
-    name: GY Emergency Services
-    uuid: 171f88e3-b421-45ce-be2e-383d393b316b
-    type_id: 13
-  - id: &gy_data_services 31011
-    name: GY Data Services
-    uuid: 77700788-1199-4624-9eda-3239edc0ddad
-    type_id: 13
-  - id: &gy_international_freephone_services 31174
-    name: GY International Freephone Services
-    uuid: 856b9422-995c-40b0-896d-d3a8cca8e1b2
-    type_id: 13
 network_prefixes:
-# Fixed Prefixes
-  - id: 54942
-    prefix: '592500'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e30b879a-c635-4979-9c6d-9bb487c8f4ab
+# Mobile Prefixes
+  - id: 242011
+    prefix: '592'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 9f888add-e278-4271-aa68-9e1481282f74
     country_id: *gy
     network_id: *gy_fixed
-  - id: 55000
-    prefix: '592501'
+  - id: 242145
+    prefix: '5920'
+    number_min_length: 6
+    number_max_length: 7
+    uuid: 4f72404c-fde5-443e-aeb6-708ecca8ed68
+    country_id: *gy
+    network_id: *gy_special_services
+  - id: 242409
+    prefix: '5921'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 4ff6f922-7168-4d59-bbaf-b693ce5465aa
+    country_id: *gy
+    network_id: *gy_special_services
+  - id: 282710
+    prefix: '592216'
     number_min_length: 10
     number_max_length: 10
-    uuid: 30a54091-a7d1-4ee6-8c66-9645b47c0932
+    uuid: f5ac350e-8339-4cc2-ab59-a1450b948da8
     country_id: *gy
-    network_id: *gy_fixed
-  - id: 55606
-    prefix: '592502'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 12e653bc-e2df-41f4-913b-efb825bd1d66
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 55870
-    prefix: '592504'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 856cb3c5-ef79-4274-b748-f1303b5405f5
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 60061
-    prefix: '592503'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9837d9c3-92bb-4768-a7da-6ad7082572fb
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 60993
-    prefix: '592506'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a8efc2f8-d586-4615-b693-deec0715b275
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 62730
-    prefix: '592510'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1e8242cb-5b54-4a44-a5fc-3a4fc4902ee2
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 66078
-    prefix: '592505'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 33ae2f05-b465-4e27-a5f0-eea19fad7883
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 69289
-    prefix: '592515'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f271e5fa-4963-4b88-ad61-41ee19cc0b9a
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 193389
-    prefix: '5927710'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 328198f9-c17f-4abd-ba80-5ae09fb47a4e
-    country_id: *gy
-    network_id: *gy_charity_region
-  - id: 193390
-    prefix: '5927711'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 918096c8-72de-4cb2-9b84-2a0be36d806b
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 193480
-    prefix: '5927712'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6ae1bd48-a720-4c12-8876-0099c0273692
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 193699
-    prefix: '5927714'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7deb18b7-4a2c-43e5-b3fc-a49f1de00b76
-    country_id: *gy
-    network_id: *gy_anna_regina_region
-  - id: 193856
-    prefix: '5927715'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e81d3fec-5606-47a6-98e8-bd3ec6c04db7
-    country_id: *gy
-    network_id: *gy_anna_regina_region
-  - id: 194427
-    prefix: '5927720'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7f57387b-79d6-45dd-b38c-d908ed06590b
-    country_id: *gy
-    network_id: *gy_lethem_region
-  - id: 194428
-    prefix: '5927721'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 05629c47-a389-4764-9405-c11de1e53a47
-    country_id: *gy
-    network_id: *gy_lethem_region
-  - id: 194581
-    prefix: '5927722'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1f56adb5-4608-40a6-b2c9-7e8b6bbc9a6f
-    country_id: *gy
-    network_id: *gy_lethem_region
-  - id: 194743
-    prefix: '5927723'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 116ba9d3-1972-4e7d-90f4-300097b20556
-    country_id: *gy
-    network_id: *gy_lethem_region
-  - id: 195010
-    prefix: '5927730'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 485104d5-1729-4778-bd7a-5bb22423daae
-    country_id: *gy
-    network_id: *gy_aishalton_region
-  - id: 195011
-    prefix: '5927731'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 424659b5-f6db-4292-b9ce-159eccf3e20d
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 195165
-    prefix: '5927732'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 26722c7f-ab32-4f73-b307-4f84178f55ff
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 196216
-    prefix: '5927740'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0acbf381-65f0-4b4b-9dac-a31954dc571f
-    country_id: *gy
-    network_id: *gy_friendship_region
-  - id: 196217
-    prefix: '5927741'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aa2f4224-f8d4-4ec2-8faf-24121a705530
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 196252
-    prefix: '5927742'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0aece7e3-d38c-45fd-9654-0ff56cdf0c19
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 197003
-    prefix: '5927770'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e133d520-c942-492f-b8ad-2ff72b0b1e03
-    country_id: *gy
-    network_id: *gy_port_kaituma_region
-  - id: 197004
-    prefix: '5927771'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 15a1703f-5c44-4c51-bb2b-98b9ab2cb36f
-    country_id: *gy
-    network_id: *gy_port_kaituma_region
-  - id: 197127
-    prefix: '5927772'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5903b6ee-e861-4bbd-8138-5cc2fbc13246
-    country_id: *gy
-    network_id: *gy_port_kaituma_region
-  - id: 197225
-    prefix: '5927773'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 565c4692-6f9a-47cd-9c93-923231e9743f
-    country_id: *gy
-    network_id: *gy_port_kaituma_region
-  - id: 197360
-    prefix: '5927774'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c407ab7a-52a9-46f6-b922-822dbe3c409e
-    country_id: *gy
-    network_id: *gy_port_kaituma_region
-  - id: 197482
-    prefix: '5927775'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 751cc0c8-b095-4a6c-95c7-434e23965518
-    country_id: *gy
-    network_id: *gy_mabaruma_region
-  - id: 200561
-    prefix: '5927744'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3f262134-6378-44be-a1c9-750bbdce8d59
-    country_id: *gy
-    network_id: *gy_suddie_region
-  - id: 200659
-    prefix: '5927745'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 741bbec9-04a2-477c-a5fa-39a0e3433a1b
-    country_id: *gy
-    network_id: *gy_suddie_region
-  - id: 200902
-    prefix: '5927750'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4506e6a1-9d16-4e7c-946b-002b63472fe0
-    country_id: *gy
-    network_id: *gy_matthews_ridge_region
-  - id: 200903
-    prefix: '5927751'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c2c6bf9a-aea0-4b78-be33-636c2814c148
-    country_id: *gy
-    network_id: *gy_matthews_ridge_region
-  - id: 201012
-    prefix: '5927752'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1b8af9d9-a734-41aa-a29b-ba560995a1cf
-    country_id: *gy
-    network_id: *gy_matthews_ridge_region
-  - id: 201281
-    prefix: '5927753'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 47d67bd4-d984-483d-b803-ac7774892953
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 201773
-    prefix: '5927776'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 46357af8-b966-452a-9104-d7e9b4af8cd7
-    country_id: *gy
-    network_id: *gy_mabaruma_region
-  - id: 201947
-    prefix: '5927777'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d3e575c0-5cdb-4ed1-9b3c-6c6714e6faa1
-    country_id: *gy
-    network_id: *gy_mabaruma_region
-  - id: 202092
-    prefix: '5927778'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cc1f525d-0a31-47ce-997c-4afdee81505c
-    country_id: *gy
-    network_id: *gy_mabaruma_region
-  - id: 202228
-    prefix: '5927779'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aabb0470-3b4f-43f3-b1f2-b1c42d34e484
-    country_id: *gy
-    network_id: *gy_mabaruma_region
+    network_id: *gy_diamond_grove_region
   - id: 276003
     prefix: '5922170'
     number_min_length: 10
@@ -805,62 +553,6 @@ network_prefixes:
     uuid: 64bc23d5-256c-45cf-a9cc-f67bca421589
     country_id: *gy
     network_id: *gy_fixed
-  - id: 278989
-    prefix: '592223'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5361fd70-c61c-438a-9128-2789e4172fac
-    country_id: *gy
-    network_id: *gy_georgetown_region
-  - id: 281104
-    prefix: '592227'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 739ab725-6ff1-4ef1-b444-44c44d0f580c
-    country_id: *gy
-    network_id: *gy_georgetown_region
-  - id: 281524
-    prefix: '5922292'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f94d7ec8-3d52-4f81-81ab-435913495c42
-    country_id: *gy
-    network_id: *gy_cove__john_region
-  - id: 281709
-    prefix: '5922293'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e0e58c82-0974-4262-a8e9-41907778bff4
-    country_id: *gy
-    network_id: *gy_cove__john_region
-  - id: 281943
-    prefix: '5922294'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bf35682f-dea9-4827-8113-b2f87b778d3b
-    country_id: *gy
-    network_id: *gy_cove__john_region
-  - id: 282198
-    prefix: '5922295'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6fe56fe4-3a3d-4490-9a8c-15b7d29d703d
-    country_id: *gy
-    network_id: *gy_cove__john_region
-  - id: 282403
-    prefix: '5922296'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f2404896-c2b7-45e9-8e59-75cb667c1aee
-    country_id: *gy
-    network_id: *gy_enterprise_region
-  - id: 282710
-    prefix: '592216'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f5ac350e-8339-4cc2-ab59-a1450b948da8
-    country_id: *gy
-    network_id: *gy_diamond_grove_region
   - id: 282991
     prefix: '592220'
     number_min_length: 10
@@ -896,6 +588,13 @@ network_prefixes:
     uuid: 97bff39c-84d0-4eb3-a019-3af0580cfb27
     country_id: *gy
     network_id: *gy_b_v_west_region
+  - id: 278989
+    prefix: '592223'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5361fd70-c61c-438a-9128-2789e4172fac
+    country_id: *gy
+    network_id: *gy_georgetown_region
   - id: 283945
     prefix: '592225'
     number_min_length: 10
@@ -908,6 +607,13 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: e8e6870f-63d0-41ae-9969-59b58ebab129
+    country_id: *gy
+    network_id: *gy_georgetown_region
+  - id: 281104
+    prefix: '592227'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 739ab725-6ff1-4ef1-b444-44c44d0f580c
     country_id: *gy
     network_id: *gy_georgetown_region
   - id: 285128
@@ -959,6 +665,41 @@ network_prefixes:
     uuid: b543d48a-c83a-4a2a-be6d-5b918911dcf7
     country_id: *gy
     network_id: *gy_cove__john_region
+  - id: 281524
+    prefix: '5922292'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f94d7ec8-3d52-4f81-81ab-435913495c42
+    country_id: *gy
+    network_id: *gy_cove__john_region
+  - id: 281709
+    prefix: '5922293'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e0e58c82-0974-4262-a8e9-41907778bff4
+    country_id: *gy
+    network_id: *gy_cove__john_region
+  - id: 281943
+    prefix: '5922294'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bf35682f-dea9-4827-8113-b2f87b778d3b
+    country_id: *gy
+    network_id: *gy_cove__john_region
+  - id: 282198
+    prefix: '5922295'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6fe56fe4-3a3d-4490-9a8c-15b7d29d703d
+    country_id: *gy
+    network_id: *gy_cove__john_region
+  - id: 282403
+    prefix: '5922296'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f2404896-c2b7-45e9-8e59-75cb667c1aee
+    country_id: *gy
+    network_id: *gy_enterprise_region
   - id: 286271
     prefix: '5922297'
     number_min_length: 10
@@ -1078,6 +819,69 @@ network_prefixes:
     uuid: 996c5994-18db-4b57-8018-1da26bff1e9d
     country_id: *gy
     network_id: *gy_b_v_central_region
+  - id: 302702
+    prefix: '5922530'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 30649b09-d0cf-41a8-bff1-7fb87ff6c1f3
+    country_id: *gy
+    network_id: *gy_la_grange_region
+  - id: 302703
+    prefix: '5922531'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1bcd1399-16dc-48a2-a0c0-6fa83a138978
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 302704
+    prefix: '5922532'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 26581353-d19d-49e8-8724-332aa2da298f
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 302802
+    prefix: '5922533'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c27df28-337f-4a4d-9a56-6da1e0c90834
+    country_id: *gy
+    network_id: *gy_goed_fortuin_region
+  - id: 302901
+    prefix: '5922534'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 87a6df1b-9166-4d71-b4c3-982053f0f5a6
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 302961
+    prefix: '5922535'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cea50ede-4566-4c32-8424-b4938146619d
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 303239
+    prefix: '5922540'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2c2a34ef-dc18-43cc-b197-bb0654dde7be
+    country_id: *gy
+    network_id: *gy_best_new_road_region
+  - id: 303240
+    prefix: '5922541'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5358eb4b-d1b5-4e4d-a1c9-13ae2e9a5b1b
+    country_id: *gy
+    network_id: *gy_best_new_road_region
+  - id: 303241
+    prefix: '5922542'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1566f46b-a432-4b57-9914-5a9b362724f0
+    country_id: *gy
+    network_id: *gy_best_new_road_region
   - id: 298801
     prefix: '5922550'
     number_min_length: 10
@@ -1260,6 +1064,7 @@ network_prefixes:
     uuid: c1c07286-cbb9-4c40-8f5b-69aa7d5a483a
     country_id: *gy
     network_id: *gy_fixed
+# Fixed Prefixes
   - id: 299837
     prefix: '5922600'
     number_min_length: 10
@@ -1400,167 +1205,6 @@ network_prefixes:
     uuid: 0a37fc9f-c4bb-4316-b894-f57be1ea51e1
     country_id: *gy
     network_id: *gy_fixed
-  - id: 300772
-    prefix: '5922680'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: aab471d9-7d8c-4061-b7f2-750291526876
-    country_id: *gy
-    network_id: *gy_leonora_region
-  - id: 300774
-    prefix: '5922681'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b0cc619b-3bc5-48d1-9756-f908a1ea1740
-    country_id: *gy
-    network_id: *gy_leonora_region
-  - id: 300775
-    prefix: '5922682'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ceba8fe8-534c-42dc-92ad-acd12432c81d
-    country_id: *gy
-    network_id: *gy_leonora_region
-  - id: 300778
-    prefix: '5922683'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 63410f54-e313-4745-a571-6a74f9817478
-    country_id: *gy
-    network_id: *gy_leonora_region
-  - id: 300780
-    prefix: '5922684'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d8096125-ef42-42d7-bd9e-dc1063b47532
-    country_id: *gy
-    network_id: *gy_leonora_region
-  - id: 300792
-    prefix: '5922685'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c7fcbc9e-34ac-41e4-bb3e-795712c737f5
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 300856
-    prefix: '5922690'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4dc26b65-1216-46fe-83bf-e4ef12170a3e
-    country_id: *gy
-    network_id: *gy_windsor_forest_region
-  - id: 300857
-    prefix: '5922691'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a91c3890-2014-487c-b7f9-87adef71b9be
-    country_id: *gy
-    network_id: *gy_windsor_forest_region
-  - id: 300858
-    prefix: '5922692'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4fd85324-dd7c-4200-ae47-9c73d885f792
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 301623
-    prefix: '5922700'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f53cb40f-5bd7-44ec-b743-f140f860e711
-    country_id: *gy
-    network_id: *gy_melanie_region
-  - id: 301624
-    prefix: '5922701'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a75517ef-79e6-4502-9262-99976a5b1bce
-    country_id: *gy
-    network_id: *gy_melanie_region
-  - id: 301625
-    prefix: '5922702'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 0a255539-1988-4c3e-b058-9ff673ac6efb
-    country_id: *gy
-    network_id: *gy_melanie_region
-  - id: 301725
-    prefix: '5922703'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9d700228-6556-43f0-89d4-3a43e27b9e14
-    country_id: *gy
-    network_id: *gy_melanie_region
-  - id: 301830
-    prefix: '5922722'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 98347299-421e-4789-a51c-b466c5870a95
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 302702
-    prefix: '5922530'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 30649b09-d0cf-41a8-bff1-7fb87ff6c1f3
-    country_id: *gy
-    network_id: *gy_la_grange_region
-  - id: 302703
-    prefix: '5922531'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1bcd1399-16dc-48a2-a0c0-6fa83a138978
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 302704
-    prefix: '5922532'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 26581353-d19d-49e8-8724-332aa2da298f
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 302802
-    prefix: '5922533'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7c27df28-337f-4a4d-9a56-6da1e0c90834
-    country_id: *gy
-    network_id: *gy_goed_fortuin_region
-  - id: 302901
-    prefix: '5922534'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 87a6df1b-9166-4d71-b4c3-982053f0f5a6
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 302961
-    prefix: '5922535'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: cea50ede-4566-4c32-8424-b4938146619d
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 303239
-    prefix: '5922540'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2c2a34ef-dc18-43cc-b197-bb0654dde7be
-    country_id: *gy
-    network_id: *gy_best_new_road_region
-  - id: 303240
-    prefix: '5922541'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5358eb4b-d1b5-4e4d-a1c9-13ae2e9a5b1b
-    country_id: *gy
-    network_id: *gy_best_new_road_region
-  - id: 303241
-    prefix: '5922542'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1566f46b-a432-4b57-9914-5a9b362724f0
-    country_id: *gy
-    network_id: *gy_best_new_road_region
   - id: 303555
     prefix: '5922630'
     number_min_length: 10
@@ -1799,6 +1443,97 @@ network_prefixes:
     uuid: 4a40ae76-40e3-41cc-8626-a5d6e2eb7197
     country_id: *gy
     network_id: *gy_fixed
+  - id: 300772
+    prefix: '5922680'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aab471d9-7d8c-4061-b7f2-750291526876
+    country_id: *gy
+    network_id: *gy_leonora_region
+  - id: 300774
+    prefix: '5922681'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b0cc619b-3bc5-48d1-9756-f908a1ea1740
+    country_id: *gy
+    network_id: *gy_leonora_region
+  - id: 300775
+    prefix: '5922682'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ceba8fe8-534c-42dc-92ad-acd12432c81d
+    country_id: *gy
+    network_id: *gy_leonora_region
+  - id: 300778
+    prefix: '5922683'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 63410f54-e313-4745-a571-6a74f9817478
+    country_id: *gy
+    network_id: *gy_leonora_region
+  - id: 300780
+    prefix: '5922684'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d8096125-ef42-42d7-bd9e-dc1063b47532
+    country_id: *gy
+    network_id: *gy_leonora_region
+  - id: 300792
+    prefix: '5922685'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c7fcbc9e-34ac-41e4-bb3e-795712c737f5
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 300856
+    prefix: '5922690'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4dc26b65-1216-46fe-83bf-e4ef12170a3e
+    country_id: *gy
+    network_id: *gy_windsor_forest_region
+  - id: 300857
+    prefix: '5922691'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a91c3890-2014-487c-b7f9-87adef71b9be
+    country_id: *gy
+    network_id: *gy_windsor_forest_region
+  - id: 300858
+    prefix: '5922692'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4fd85324-dd7c-4200-ae47-9c73d885f792
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 301623
+    prefix: '5922700'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f53cb40f-5bd7-44ec-b743-f140f860e711
+    country_id: *gy
+    network_id: *gy_melanie_region
+  - id: 301624
+    prefix: '5922701'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a75517ef-79e6-4502-9262-99976a5b1bce
+    country_id: *gy
+    network_id: *gy_melanie_region
+  - id: 301625
+    prefix: '5922702'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0a255539-1988-4c3e-b058-9ff673ac6efb
+    country_id: *gy
+    network_id: *gy_melanie_region
+  - id: 301725
+    prefix: '5922703'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9d700228-6556-43f0-89d4-3a43e27b9e14
+    country_id: *gy
+    network_id: *gy_melanie_region
   - id: 304619
     prefix: '5922704'
     number_min_length: 10
@@ -1925,6 +1660,34 @@ network_prefixes:
     uuid: 72a889b7-976f-4921-83ce-46596a91dec2
     country_id: *gy
     network_id: *gy_fixed
+  - id: 301830
+    prefix: '5922722'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 98347299-421e-4789-a51c-b466c5870a95
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 312767
+    prefix: '5922731'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e06e98ac-b98a-4410-a16d-5eef4bdb3226
+    country_id: *gy
+    network_id: *gy_data_services
+  - id: 313035
+    prefix: '5922740'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d4dc9377-7dc2-439e-99de-8d7e37044066
+    country_id: *gy
+    network_id: *gy_vigilance_region
+  - id: 313036
+    prefix: '5922741'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d6d31178-c906-461d-a9e0-68df6c869e55
+    country_id: *gy
+    network_id: *gy_vigilance_region
   - id: 305863
     prefix: '5922742'
     number_min_length: 10
@@ -2051,20 +1814,6 @@ network_prefixes:
     uuid: a29997d5-7470-4933-ac6d-6d79c4759094
     country_id: *gy
     network_id: *gy_fixed
-  - id: 313035
-    prefix: '5922740'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d4dc9377-7dc2-439e-99de-8d7e37044066
-    country_id: *gy
-    network_id: *gy_vigilance_region
-  - id: 313036
-    prefix: '5922741'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d6d31178-c906-461d-a9e0-68df6c869e55
-    country_id: *gy
-    network_id: *gy_vigilance_region
   - id: 313222
     prefix: '5922792'
     number_min_length: 10
@@ -2086,104 +1835,13 @@ network_prefixes:
     uuid: f4f4e22d-1305-45d8-9e80-f5721d3c6898
     country_id: *gy
     network_id: *gy_fixed
-  - id: 329246
-    prefix: '5923250'
+  - id: 315042
+    prefix: '592289'
     number_min_length: 10
     number_max_length: 10
-    uuid: e17691cb-d903-4541-a4ff-4f5b7e7c6e06
+    uuid: 6cd7b83b-6d1e-485b-b89a-c4c7a6b25e5c
     country_id: *gy
-    network_id: *gy_mibikuri_region
-  - id: 329247
-    prefix: '5923251'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a93a332e-c249-4ef2-8716-ff3e8a04e04d
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 330758
-    prefix: '5923300'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f300e3ac-c4d4-40f6-948b-b10f12b01581
-    country_id: *gy
-    network_id: *gy_rosignol_region
-  - id: 330759
-    prefix: '5923301'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e43d0ac0-e245-4f24-ace0-8eada0cb62c7
-    country_id: *gy
-    network_id: *gy_rosignol_region
-  - id: 330760
-    prefix: '5923302'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 747bbc1b-9188-4d1c-b382-1f349d1874d6
-    country_id: *gy
-    network_id: *gy_rosignol_region
-  - id: 330861
-    prefix: '5923303'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f1b855c2-b3d9-4ae4-84b2-e58081932d95
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 330962
-    prefix: '5923304'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ed064b29-57c0-4d7d-aaa8-f6d27908d0af
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 331589
-    prefix: '5923310'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c6059d41-224e-445a-aa45-a39653cbf5f8
-    country_id: *gy
-    network_id: *gy_adventure_region
-  - id: 331590
-    prefix: '5923311'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c8423550-e73e-4908-b5c0-aa7d7a7daaf2
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 331592
-    prefix: '5923312'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5ac07d98-7eec-47d7-afe9-410bf1a4a4a6
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 331712
-    prefix: '5923350'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4bca21d1-44e2-4d46-b2da-0f3693e42e31
-    country_id: *gy
-    network_id: *gy_crabwood_creek_region
-  - id: 331713
-    prefix: '5923351'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 7c2b299d-2fac-467e-a8b2-fd73932f54d0
-    country_id: *gy
-    network_id: *gy_crabwood_creek_region
-  - id: 331716
-    prefix: '5923353'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d6bce210-faf1-4c8d-95a9-91d980837a9c
-    country_id: *gy
-    network_id: *gy_no_76_region
-  - id: 331718
-    prefix: '5923354'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4d85a3f4-8520-4adf-9592-8a69292d088d
-    country_id: *gy
-    network_id: *gy_no_76_region
+    network_id: *gy_international_freephone_services
   - id: 335406
     prefix: '5923220'
     number_min_length: 10
@@ -2231,6 +1889,20 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: fb9c39aa-03e4-4f50-b23e-8795ce42252a
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 329246
+    prefix: '5923250'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e17691cb-d903-4541-a4ff-4f5b7e7c6e06
+    country_id: *gy
+    network_id: *gy_mibikuri_region
+  - id: 329247
+    prefix: '5923251'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a93a332e-c249-4ef2-8716-ff3e8a04e04d
     country_id: *gy
     network_id: *gy_fixed
   - id: 336370
@@ -2464,6 +2136,62 @@ network_prefixes:
     uuid: 885ed2bf-a474-44da-8595-5d7fe482dda1
     country_id: *gy
     network_id: *gy_fixed
+  - id: 330758
+    prefix: '5923300'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f300e3ac-c4d4-40f6-948b-b10f12b01581
+    country_id: *gy
+    network_id: *gy_rosignol_region
+  - id: 330759
+    prefix: '5923301'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e43d0ac0-e245-4f24-ace0-8eada0cb62c7
+    country_id: *gy
+    network_id: *gy_rosignol_region
+  - id: 330760
+    prefix: '5923302'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 747bbc1b-9188-4d1c-b382-1f349d1874d6
+    country_id: *gy
+    network_id: *gy_rosignol_region
+  - id: 330861
+    prefix: '5923303'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f1b855c2-b3d9-4ae4-84b2-e58081932d95
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 330962
+    prefix: '5923304'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ed064b29-57c0-4d7d-aaa8-f6d27908d0af
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 331589
+    prefix: '5923310'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c6059d41-224e-445a-aa45-a39653cbf5f8
+    country_id: *gy
+    network_id: *gy_adventure_region
+  - id: 331590
+    prefix: '5923311'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c8423550-e73e-4908-b5c0-aa7d7a7daaf2
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 331592
+    prefix: '5923312'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5ac07d98-7eec-47d7-afe9-410bf1a4a4a6
+    country_id: *gy
+    network_id: *gy_fixed
   - id: 338752
     prefix: '5923313'
     number_min_length: 10
@@ -2541,6 +2269,97 @@ network_prefixes:
     uuid: a38ad70e-aeae-4d8f-9d1c-230079d376ac
     country_id: *gy
     network_id: *gy_fixed
+  - id: 331712
+    prefix: '5923350'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4bca21d1-44e2-4d46-b2da-0f3693e42e31
+    country_id: *gy
+    network_id: *gy_crabwood_creek_region
+  - id: 331713
+    prefix: '5923351'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c2b299d-2fac-467e-a8b2-fd73932f54d0
+    country_id: *gy
+    network_id: *gy_crabwood_creek_region
+  - id: 331716
+    prefix: '5923353'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d6bce210-faf1-4c8d-95a9-91d980837a9c
+    country_id: *gy
+    network_id: *gy_no_76_region
+  - id: 331718
+    prefix: '5923354'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4d85a3f4-8520-4adf-9592-8a69292d088d
+    country_id: *gy
+    network_id: *gy_no_76_region
+  - id: 341552
+    prefix: '5923365'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1d9fdd0e-dcc0-489e-819c-2f5747a8dc6b
+    country_id: *gy
+    network_id: *gy_edinburg_region
+  - id: 341653
+    prefix: '5923366'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 9845a5a8-5bef-4827-8b53-42ce8afb5054
+    country_id: *gy
+    network_id: *gy_port_mourant_region
+  - id: 341754
+    prefix: '5923367'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a7681ab1-73a1-4cdb-9f6f-a9bc0cb853f0
+    country_id: *gy
+    network_id: *gy_port_mourant_region
+  - id: 341854
+    prefix: '5923368'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b860f596-7916-4988-ab3c-3c9983fb2720
+    country_id: *gy
+    network_id: *gy_port_mourant_region
+  - id: 341955
+    prefix: '5923369'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6d823148-8577-48e0-abb5-35bae150f654
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 342096
+    prefix: '5923370'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: bb0dda36-5bd6-4502-9719-05b39b749590
+    country_id: *gy
+    network_id: *gy_no_40_region
+  - id: 342097
+    prefix: '5923371'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3d84e9f3-0802-4ef4-9e21-44b6b617be0d
+    country_id: *gy
+    network_id: *gy_whim_bloomfield_region
+  - id: 342098
+    prefix: '5923372'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: efcf2833-1520-473e-975d-d23c75cc8576
+    country_id: *gy
+    network_id: *gy_whim_bloomfield_region
+  - id: 342197
+    prefix: '5923373'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3b0f5b29-6748-43fd-b136-984f86823a61
+    country_id: *gy
+    network_id: *gy_liverpool_region
   - id: 339817
     prefix: '5923374'
     number_min_length: 10
@@ -2646,69 +2465,34 @@ network_prefixes:
     uuid: c772f037-6495-4ed2-9d6c-93447c4a038d
     country_id: *gy
     network_id: *gy_fixed
-  - id: 341552
-    prefix: '5923365'
+  - id: 389557
+    prefix: '5924400'
     number_min_length: 10
     number_max_length: 10
-    uuid: 1d9fdd0e-dcc0-489e-819c-2f5747a8dc6b
+    uuid: dffa9c4e-ff71-42db-b7da-967a0106590e
     country_id: *gy
-    network_id: *gy_edinburg_region
-  - id: 341653
-    prefix: '5923366'
+    network_id: *gy_kwakwani_region
+  - id: 389558
+    prefix: '5924401'
     number_min_length: 10
     number_max_length: 10
-    uuid: 9845a5a8-5bef-4827-8b53-42ce8afb5054
+    uuid: 35ec42ba-e418-48bb-a482-5ef781487f33
     country_id: *gy
-    network_id: *gy_port_mourant_region
-  - id: 341754
-    prefix: '5923367'
+    network_id: *gy_kwakwani_region
+  - id: 389630
+    prefix: '5924402'
     number_min_length: 10
     number_max_length: 10
-    uuid: a7681ab1-73a1-4cdb-9f6f-a9bc0cb853f0
+    uuid: 9508d67e-b868-4b2f-ba53-47358fe3e6f3
     country_id: *gy
-    network_id: *gy_port_mourant_region
-  - id: 341854
-    prefix: '5923368'
+    network_id: *gy_kwakwani_region
+  - id: 389752
+    prefix: '5924403'
     number_min_length: 10
     number_max_length: 10
-    uuid: b860f596-7916-4988-ab3c-3c9983fb2720
-    country_id: *gy
-    network_id: *gy_port_mourant_region
-  - id: 341955
-    prefix: '5923369'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6d823148-8577-48e0-abb5-35bae150f654
+    uuid: 02b4a7d8-3f65-4451-bd8e-0cae37f1abab
     country_id: *gy
     network_id: *gy_fixed
-  - id: 342096
-    prefix: '5923370'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: bb0dda36-5bd6-4502-9719-05b39b749590
-    country_id: *gy
-    network_id: *gy_no_40_region
-  - id: 342097
-    prefix: '5923371'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3d84e9f3-0802-4ef4-9e21-44b6b617be0d
-    country_id: *gy
-    network_id: *gy_whim_bloomfield_region
-  - id: 342098
-    prefix: '5923372'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: efcf2833-1520-473e-975d-d23c75cc8576
-    country_id: *gy
-    network_id: *gy_whim_bloomfield_region
-  - id: 342197
-    prefix: '5923373'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3b0f5b29-6748-43fd-b136-984f86823a61
-    country_id: *gy
-    network_id: *gy_liverpool_region
   - id: 382086
     prefix: '5924410'
     number_min_length: 10
@@ -2737,6 +2521,41 @@ network_prefixes:
     uuid: c252ae7d-3cf6-4397-b485-b60554361b27
     country_id: *gy
     network_id: *gy_fixed
+  - id: 389941
+    prefix: '5924420'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6a240000-6e93-49a9-aa8b-a5f406b87432
+    country_id: *gy
+    network_id: *gy_christianburg_region
+  - id: 389942
+    prefix: '5924421'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4a3d801b-1207-46ed-b46b-ca5268529f69
+    country_id: *gy
+    network_id: *gy_christianburg_region
+  - id: 390048
+    prefix: '5924422'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 37b00eca-7bda-45c0-8197-514fa069a2c9
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 390277
+    prefix: '5924423'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f9cef9c5-ea95-4a15-a5b1-94565b68e2d9
+    country_id: *gy
+    network_id: *gy_amelias_ward_region
+  - id: 390490
+    prefix: '5924424'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ccfba626-f645-48be-bbc6-1d99b2db59c9
+    country_id: *gy
+    network_id: *gy_amelias_ward_region
   - id: 384114
     prefix: '5924440'
     number_min_length: 10
@@ -2807,69 +2626,6 @@ network_prefixes:
     uuid: 5d243822-c0c1-40b8-b32a-0292c9da0e40
     country_id: *gy
     network_id: *gy_canvas_city_region
-  - id: 389557
-    prefix: '5924400'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: dffa9c4e-ff71-42db-b7da-967a0106590e
-    country_id: *gy
-    network_id: *gy_kwakwani_region
-  - id: 389558
-    prefix: '5924401'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 35ec42ba-e418-48bb-a482-5ef781487f33
-    country_id: *gy
-    network_id: *gy_kwakwani_region
-  - id: 389630
-    prefix: '5924402'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 9508d67e-b868-4b2f-ba53-47358fe3e6f3
-    country_id: *gy
-    network_id: *gy_kwakwani_region
-  - id: 389752
-    prefix: '5924403'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 02b4a7d8-3f65-4451-bd8e-0cae37f1abab
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 389941
-    prefix: '5924420'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6a240000-6e93-49a9-aa8b-a5f406b87432
-    country_id: *gy
-    network_id: *gy_christianburg_region
-  - id: 389942
-    prefix: '5924421'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4a3d801b-1207-46ed-b46b-ca5268529f69
-    country_id: *gy
-    network_id: *gy_christianburg_region
-  - id: 390048
-    prefix: '5924422'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 37b00eca-7bda-45c0-8197-514fa069a2c9
-    country_id: *gy
-    network_id: *gy_fixed
-  - id: 390277
-    prefix: '5924423'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f9cef9c5-ea95-4a15-a5b1-94565b68e2d9
-    country_id: *gy
-    network_id: *gy_amelias_ward_region
-  - id: 390490
-    prefix: '5924424'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ccfba626-f645-48be-bbc6-1d99b2db59c9
-    country_id: *gy
-    network_id: *gy_amelias_ward_region
   - id: 393487
     prefix: '5924550'
     number_min_length: 10
@@ -2919,49 +2675,76 @@ network_prefixes:
     uuid: ec0e4ece-48b4-4747-b0ea-4b7ac3866285
     country_id: *gy
     network_id: *gy_fixed
-  - id: 403500
-    prefix: '592800000'
+  - id: 54942
+    prefix: '592500'
     number_min_length: 10
     number_max_length: 10
-    uuid: 89e8178d-a767-45d7-b3eb-f77e749b4fa2
+    uuid: e30b879a-c635-4979-9c6d-9bb487c8f4ab
     country_id: *gy
     network_id: *gy_fixed
-  - id: 448044
-    prefix: '5928680'
+  - id: 55000
+    prefix: '592501'
     number_min_length: 10
     number_max_length: 10
-    uuid: a6b97c02-acff-4707-8043-7bbce40ae117
+    uuid: 30a54091-a7d1-4ee6-8c66-9645b47c0932
     country_id: *gy
     network_id: *gy_fixed
-  - id: 448045
-    prefix: '5928681'
+  - id: 55606
+    prefix: '592502'
     number_min_length: 10
     number_max_length: 10
-    uuid: 40494e8e-2601-4b38-925f-84327dd9d43b
+    uuid: 12e653bc-e2df-41f4-913b-efb825bd1d66
     country_id: *gy
     network_id: *gy_fixed
-  - id: 448169
-    prefix: '5928682'
+  - id: 60061
+    prefix: '592503'
     number_min_length: 10
     number_max_length: 10
-    uuid: 4c2a001b-5c0c-4893-b575-25fde6ac742c
+    uuid: 9837d9c3-92bb-4768-a7da-6ad7082572fb
     country_id: *gy
     network_id: *gy_fixed
-  - id: 448264
-    prefix: '5928683'
+  - id: 55870
+    prefix: '592504'
     number_min_length: 10
     number_max_length: 10
-    uuid: ca2a1afd-7f78-4df4-9396-7b328c57109e
+    uuid: 856cb3c5-ef79-4274-b748-f1303b5405f5
     country_id: *gy
     network_id: *gy_fixed
-  - id: 452472
-    prefix: '592899'
+  - id: 66078
+    prefix: '592505'
     number_min_length: 10
     number_max_length: 10
-    uuid: 5e7f472a-674f-481e-94e2-771db7e0ffc9
+    uuid: 33ae2f05-b465-4e27-a5f0-eea19fad7883
     country_id: *gy
     network_id: *gy_fixed
-# Mobile Prefixes
+  - id: 60993
+    prefix: '592506'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a8efc2f8-d586-4615-b693-deec0715b275
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 62730
+    prefix: '592510'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1e8242cb-5b54-4a44-a5fc-3a4fc4902ee2
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 69289
+    prefix: '592515'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f271e5fa-4963-4b88-ad61-41ee19cc0b9a
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 149327
+    prefix: '5926'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c35bfeef-d132-4ec5-96e6-3ac1324ad067
+    country_id: *gy
+    network_id: *gy_mobile
   - id: 95262
     prefix: '592600'
     number_min_length: 10
@@ -2981,6 +2764,13 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: 896ca6c4-2278-4cc5-a86b-0e76e1289829
+    country_id: *gy
+    network_id: *gy_digicel_mobile
+  - id: 106087
+    prefix: '592603'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5b430f37-5dc7-4055-8b62-50017b9b716b
     country_id: *gy
     network_id: *gy_digicel_mobile
   - id: 96474
@@ -3011,6 +2801,13 @@ network_prefixes:
     uuid: cac060a7-a19b-48a4-aab5-f57f83adcd5b
     country_id: *gy
     network_id: *gy_dna_enterprise_mobile
+  - id: 107080
+    prefix: '5926060'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3e287e05-2cb7-4c46-80bf-7c8281c7e36f
+    country_id: *gy
+    network_id: *gy_egovernment_mobile
   - id: 98026
     prefix: '5926080'
     number_min_length: 10
@@ -3025,20 +2822,6 @@ network_prefixes:
     uuid: 3db06b13-c50c-4fd7-a104-10043719eb46
     country_id: *gy
     network_id: *gy_cellink_mobile
-  - id: 106087
-    prefix: '592603'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 5b430f37-5dc7-4055-8b62-50017b9b716b
-    country_id: *gy
-    network_id: *gy_digicel_mobile
-  - id: 107080
-    prefix: '5926060'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3e287e05-2cb7-4c46-80bf-7c8281c7e36f
-    country_id: *gy
-    network_id: *gy_egovernment_mobile
   - id: 111453
     prefix: '59261'
     number_min_length: 10
@@ -3046,20 +2829,6 @@ network_prefixes:
     uuid: 4a263570-ed64-4113-b9f1-e88fdf2fd57c
     country_id: *gy
     network_id: *gy_cellink_mobile
-  - id: 114638
-    prefix: '592632'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 51e1873a-9c2a-4347-b429-1fe56d3a1948
-    country_id: *gy
-    network_id: *gy_digicel_mobile
-  - id: 114798
-    prefix: '592633'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 4259c926-b8bd-410c-b7f5-a43484e827da
-    country_id: *gy
-    network_id: *gy_digicel_mobile
   - id: 117818
     prefix: '59262'
     number_min_length: 10
@@ -3081,27 +2850,20 @@ network_prefixes:
     uuid: 01b859e2-2191-401c-86dc-d0a485f7522f
     country_id: *gy
     network_id: *gy_gg_cell_mobile
-  - id: 120836
-    prefix: '592637'
+  - id: 114638
+    prefix: '592632'
     number_min_length: 10
     number_max_length: 10
-    uuid: e39821e4-6c68-44ef-9ed8-c3d95b8a9d60
+    uuid: 51e1873a-9c2a-4347-b429-1fe56d3a1948
     country_id: *gy
     network_id: *gy_digicel_mobile
-  - id: 120989
-    prefix: '592638'
+  - id: 114798
+    prefix: '592633'
     number_min_length: 10
     number_max_length: 10
-    uuid: c608b727-9dff-4280-8e8a-84c52fd9c32b
+    uuid: 4259c926-b8bd-410c-b7f5-a43484e827da
     country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 121268
-    prefix: '592639'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ebcd6e56-a1cc-415b-98c9-572c041cfe5f
-    country_id: *gy
-    network_id: *gy_cellink_mobile
+    network_id: *gy_digicel_mobile
   - id: 124162
     prefix: '592634'
     number_min_length: 10
@@ -3123,32 +2885,25 @@ network_prefixes:
     uuid: aad79ea7-0dd1-4d6c-aa37-1002df955c66
     country_id: *gy
     network_id: *gy_digicel_mobile
-  - id: 126595
-    prefix: '592650'
+  - id: 120836
+    prefix: '592637'
     number_min_length: 10
     number_max_length: 10
-    uuid: 832c906b-671e-4a71-8250-dd57720539e4
+    uuid: e39821e4-6c68-44ef-9ed8-c3d95b8a9d60
+    country_id: *gy
+    network_id: *gy_digicel_mobile
+  - id: 120989
+    prefix: '592638'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c608b727-9dff-4280-8e8a-84c52fd9c32b
     country_id: *gy
     network_id: *gy_cellink_mobile
-  - id: 127133
-    prefix: '592654'
+  - id: 121268
+    prefix: '592639'
     number_min_length: 10
     number_max_length: 10
-    uuid: 0116a06d-9ed3-4b5e-80c0-942417e57bee
-    country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 127161
-    prefix: '592655'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 1b64c3cb-0b79-4ec8-8f88-df0e9a6ddbe9
-    country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 127187
-    prefix: '592656'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ceeb9a25-279a-4602-9224-b9dcf45466e7
+    uuid: ebcd6e56-a1cc-415b-98c9-572c041cfe5f
     country_id: *gy
     network_id: *gy_cellink_mobile
   - id: 135902
@@ -3156,6 +2911,13 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: cfd2e6a6-0275-47d9-bfb3-4926b344dcc7
+    country_id: *gy
+    network_id: *gy_cellink_mobile
+  - id: 126595
+    prefix: '592650'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 832c906b-671e-4a71-8250-dd57720539e4
     country_id: *gy
     network_id: *gy_cellink_mobile
   - id: 136660
@@ -3179,6 +2941,27 @@ network_prefixes:
     uuid: 84f8023e-d309-4f44-81b2-108133303524
     country_id: *gy
     network_id: *gy_cellink_mobile
+  - id: 127133
+    prefix: '592654'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0116a06d-9ed3-4b5e-80c0-942417e57bee
+    country_id: *gy
+    network_id: *gy_cellink_mobile
+  - id: 127161
+    prefix: '592655'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1b64c3cb-0b79-4ec8-8f88-df0e9a6ddbe9
+    country_id: *gy
+    network_id: *gy_cellink_mobile
+  - id: 127187
+    prefix: '592656'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ceeb9a25-279a-4602-9224-b9dcf45466e7
+    country_id: *gy
+    network_id: *gy_cellink_mobile
   - id: 137642
     prefix: '592657'
     number_min_length: 10
@@ -3198,6 +2981,13 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: 90805300-bf22-4bcd-abc3-56baa2a7055b
+    country_id: *gy
+    network_id: *gy_digicel_mobile
+  - id: 151413
+    prefix: '59266'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 248dc009-1dc9-4bcd-83f2-f08bbacd1376
     country_id: *gy
     network_id: *gy_digicel_mobile
   - id: 146807
@@ -3221,27 +3011,6 @@ network_prefixes:
     uuid: 1ca527ed-7e7e-4ced-8a3d-3be1fa409974
     country_id: *gy
     network_id: *gy_digicel_mobile
-  - id: 149327
-    prefix: '5926'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: c35bfeef-d132-4ec5-96e6-3ac1324ad067
-    country_id: *gy
-    network_id: *gy_mobile
-  - id: 150700
-    prefix: '592702'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 41697883-9cbe-4462-9341-0a3bfd288569
-    country_id: *gy
-    network_id: *gy_digicel_mobile
-  - id: 151413
-    prefix: '59266'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 248dc009-1dc9-4bcd-83f2-f08bbacd1376
-    country_id: *gy
-    network_id: *gy_digicel_mobile
   - id: 154403
     prefix: '592700'
     number_min_length: 10
@@ -3254,6 +3023,20 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: 4f333e43-f59f-4bc7-b617-354b7ea6e84a
+    country_id: *gy
+    network_id: *gy_digicel_mobile
+  - id: 150700
+    prefix: '592702'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 41697883-9cbe-4462-9341-0a3bfd288569
+    country_id: *gy
+    network_id: *gy_digicel_mobile
+  - id: 161117
+    prefix: '592703'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8a9fb75d-9d88-4221-96ba-27bb8c7cf606
     country_id: *gy
     network_id: *gy_digicel_mobile
   - id: 155489
@@ -3270,6 +3053,13 @@ network_prefixes:
     uuid: 69e24d73-dfae-4480-959d-89f1c6f23389
     country_id: *gy
     network_id: *gy_cellink_mobile
+  - id: 162178
+    prefix: '592706'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6c8cbc7e-1f84-4fda-bdf3-d8c220957a5a
+    country_id: *gy
+    network_id: *gy_cellink_mobile
   - id: 156531
     prefix: '592707'
     number_min_length: 10
@@ -3284,20 +3074,6 @@ network_prefixes:
     uuid: 135203c2-4b59-48fe-8961-1ee7f3c13d38
     country_id: *gy
     network_id: *gy_cellink_mobile
-  - id: 161117
-    prefix: '592703'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 8a9fb75d-9d88-4221-96ba-27bb8c7cf606
-    country_id: *gy
-    network_id: *gy_digicel_mobile
-  - id: 162178
-    prefix: '592706'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 6c8cbc7e-1f84-4fda-bdf3-d8c220957a5a
-    country_id: *gy
-    network_id: *gy_cellink_mobile
   - id: 163363
     prefix: '592709'
     number_min_length: 10
@@ -3305,6 +3081,13 @@ network_prefixes:
     uuid: f736c349-463d-4dae-a2bf-13c8f3af0955
     country_id: *gy
     network_id: *gy_cellink_mobile
+  - id: 172519
+    prefix: '59271'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2e81745e-98c6-41f7-8edb-ad1a2b3e02b4
+    country_id: *gy
+    network_id: *gy_enet_mobile_mobile
   - id: 168585
     prefix: '592720'
     number_min_length: 10
@@ -3326,27 +3109,6 @@ network_prefixes:
     uuid: 9c6d260b-0a70-400f-a234-3135f3710919
     country_id: *gy
     network_id: *gy_digicel_mobile
-  - id: 170424
-    prefix: '592725'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a16886da-2fcb-4cd8-9349-9e19f1ffbda3
-    country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 170692
-    prefix: '592726'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 046edd93-58b1-42d1-b54b-66d30d205b47
-    country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 172519
-    prefix: '59271'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 2e81745e-98c6-41f7-8edb-ad1a2b3e02b4
-    country_id: *gy
-    network_id: *gy_enet_mobile_mobile
   - id: 173121
     prefix: '592723'
     number_min_length: 10
@@ -3361,6 +3123,27 @@ network_prefixes:
     uuid: 0a693bab-4348-4005-b806-c2e930cbb8ab
     country_id: *gy
     network_id: *gy_digicel_mobile
+  - id: 170424
+    prefix: '592725'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a16886da-2fcb-4cd8-9349-9e19f1ffbda3
+    country_id: *gy
+    network_id: *gy_cellink_mobile
+  - id: 170692
+    prefix: '592726'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 046edd93-58b1-42d1-b54b-66d30d205b47
+    country_id: *gy
+    network_id: *gy_cellink_mobile
+  - id: 181108
+    prefix: '592727'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f9355b9c-fd42-441d-aac5-d298d1f8e629
+    country_id: *gy
+    network_id: *gy_cellink_mobile
   - id: 174269
     prefix: '592728'
     number_min_length: 10
@@ -3373,55 +3156,6 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: 8024c84d-5ca7-4d7c-afcc-93ab5c9af5f1
-    country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 179305
-    prefix: '592745'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e9498233-db36-4bb6-9c2c-ac43b39e31bb
-    country_id: *gy
-    network_id: *gy_digicel_mobile
-  - id: 179480
-    prefix: '592746'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: a505ad91-de85-4934-8bc9-1fe5d5cd6f78
-    country_id: *gy
-    network_id: *gy_digicel_mobile
-  - id: 179652
-    prefix: '592747'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: e9876223-0180-4054-b231-2ba5d96a4a6d
-    country_id: *gy
-    network_id: *gy_digicel_mobile
-  - id: 179940
-    prefix: '592755'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 21f2ad7e-46d6-49ce-ab9f-e45919a70c14
-    country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 180277
-    prefix: '592756'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 3bb3d40b-f371-4921-b058-63455e684179
-    country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 180589
-    prefix: '592757'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: b6d62296-2a90-47f7-9512-1cddd84a5117
-    country_id: *gy
-    network_id: *gy_cellink_mobile
-  - id: 181108
-    prefix: '592727'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: f9355b9c-fd42-441d-aac5-d298d1f8e629
     country_id: *gy
     network_id: *gy_cellink_mobile
   - id: 182854
@@ -3464,6 +3198,27 @@ network_prefixes:
     number_min_length: 10
     number_max_length: 10
     uuid: da609956-c04b-4427-bf52-8b257af306aa
+    country_id: *gy
+    network_id: *gy_digicel_mobile
+  - id: 179305
+    prefix: '592745'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e9498233-db36-4bb6-9c2c-ac43b39e31bb
+    country_id: *gy
+    network_id: *gy_digicel_mobile
+  - id: 179480
+    prefix: '592746'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a505ad91-de85-4934-8bc9-1fe5d5cd6f78
+    country_id: *gy
+    network_id: *gy_digicel_mobile
+  - id: 179652
+    prefix: '592747'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e9876223-0180-4054-b231-2ba5d96a4a6d
     country_id: *gy
     network_id: *gy_digicel_mobile
   - id: 185530
@@ -3515,6 +3270,27 @@ network_prefixes:
     uuid: ca9ae5d4-56de-446f-8e15-2d7141ea89a3
     country_id: *gy
     network_id: *gy_cellink_mobile
+  - id: 179940
+    prefix: '592755'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 21f2ad7e-46d6-49ce-ab9f-e45919a70c14
+    country_id: *gy
+    network_id: *gy_cellink_mobile
+  - id: 180277
+    prefix: '592756'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3bb3d40b-f371-4921-b058-63455e684179
+    country_id: *gy
+    network_id: *gy_cellink_mobile
+  - id: 180589
+    prefix: '592757'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6d62296-2a90-47f7-9512-1cddd84a5117
+    country_id: *gy
+    network_id: *gy_cellink_mobile
   - id: 187752
     prefix: '592758'
     number_min_length: 10
@@ -3529,50 +3305,230 @@ network_prefixes:
     uuid: 23cbd290-9985-4889-b78f-0059dcb84f88
     country_id: *gy
     network_id: *gy_cellink_mobile
-# Country code Prefixes
-  - id: 242011
-    prefix: '592'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: 9f888add-e278-4271-aa68-9e1481282f74
-    country_id: *gy
-    network_id: null
-# Supplementary services Prefixes
-  - id: 242145
-    prefix: '5920'
-    number_min_length: 6
-    number_max_length: 7
-    uuid: 4f72404c-fde5-443e-aeb6-708ecca8ed68
-    country_id: *gy
-    network_id: *gy_special_services
-  - id: 242409
-    prefix: '5921'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 4ff6f922-7168-4d59-bbaf-b693ce5465aa
-    country_id: *gy
-    network_id: *gy_special_services
-  - id: 257103
-    prefix: '5929'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: aa48342b-de76-4ddc-94e2-fc8ec17ae49e
-    country_id: *gy
-    network_id: *gy_emergency_services
-  - id: 312767
-    prefix: '5922731'
+  - id: 193389
+    prefix: '5927710'
     number_min_length: 10
     number_max_length: 10
-    uuid: e06e98ac-b98a-4410-a16d-5eef4bdb3226
+    uuid: 328198f9-c17f-4abd-ba80-5ae09fb47a4e
     country_id: *gy
-    network_id: *gy_data_services
-  - id: 315042
-    prefix: '592289'
+    network_id: *gy_charity_region
+  - id: 193390
+    prefix: '5927711'
     number_min_length: 10
     number_max_length: 10
-    uuid: 6cd7b83b-6d1e-485b-b89a-c4c7a6b25e5c
+    uuid: 918096c8-72de-4cb2-9b84-2a0be36d806b
     country_id: *gy
-    network_id: *gy_international_freephone_services
+    network_id: *gy_fixed
+  - id: 193480
+    prefix: '5927712'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 6ae1bd48-a720-4c12-8876-0099c0273692
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 193699
+    prefix: '5927714'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7deb18b7-4a2c-43e5-b3fc-a49f1de00b76
+    country_id: *gy
+    network_id: *gy_anna_regina_region
+  - id: 193856
+    prefix: '5927715'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e81d3fec-5606-47a6-98e8-bd3ec6c04db7
+    country_id: *gy
+    network_id: *gy_anna_regina_region
+  - id: 194427
+    prefix: '5927720'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7f57387b-79d6-45dd-b38c-d908ed06590b
+    country_id: *gy
+    network_id: *gy_lethem_region
+  - id: 194428
+    prefix: '5927721'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 05629c47-a389-4764-9405-c11de1e53a47
+    country_id: *gy
+    network_id: *gy_lethem_region
+  - id: 194581
+    prefix: '5927722'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1f56adb5-4608-40a6-b2c9-7e8b6bbc9a6f
+    country_id: *gy
+    network_id: *gy_lethem_region
+  - id: 194743
+    prefix: '5927723'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 116ba9d3-1972-4e7d-90f4-300097b20556
+    country_id: *gy
+    network_id: *gy_lethem_region
+  - id: 195010
+    prefix: '5927730'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 485104d5-1729-4778-bd7a-5bb22423daae
+    country_id: *gy
+    network_id: *gy_aishalton_region
+  - id: 195011
+    prefix: '5927731'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 424659b5-f6db-4292-b9ce-159eccf3e20d
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 195165
+    prefix: '5927732'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 26722c7f-ab32-4f73-b307-4f84178f55ff
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 196216
+    prefix: '5927740'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0acbf381-65f0-4b4b-9dac-a31954dc571f
+    country_id: *gy
+    network_id: *gy_friendship_region
+  - id: 196217
+    prefix: '5927741'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aa2f4224-f8d4-4ec2-8faf-24121a705530
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 196252
+    prefix: '5927742'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 0aece7e3-d38c-45fd-9654-0ff56cdf0c19
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 200561
+    prefix: '5927744'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 3f262134-6378-44be-a1c9-750bbdce8d59
+    country_id: *gy
+    network_id: *gy_suddie_region
+  - id: 200659
+    prefix: '5927745'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 741bbec9-04a2-477c-a5fa-39a0e3433a1b
+    country_id: *gy
+    network_id: *gy_suddie_region
+  - id: 200902
+    prefix: '5927750'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4506e6a1-9d16-4e7c-946b-002b63472fe0
+    country_id: *gy
+    network_id: *gy_matthews_ridge_region
+  - id: 200903
+    prefix: '5927751'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c2c6bf9a-aea0-4b78-be33-636c2814c148
+    country_id: *gy
+    network_id: *gy_matthews_ridge_region
+  - id: 201012
+    prefix: '5927752'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 1b8af9d9-a734-41aa-a29b-ba560995a1cf
+    country_id: *gy
+    network_id: *gy_matthews_ridge_region
+  - id: 201281
+    prefix: '5927753'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 47d67bd4-d984-483d-b803-ac7774892953
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 197003
+    prefix: '5927770'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e133d520-c942-492f-b8ad-2ff72b0b1e03
+    country_id: *gy
+    network_id: *gy_port_kaituma_region
+  - id: 197004
+    prefix: '5927771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 15a1703f-5c44-4c51-bb2b-98b9ab2cb36f
+    country_id: *gy
+    network_id: *gy_port_kaituma_region
+  - id: 197127
+    prefix: '5927772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5903b6ee-e861-4bbd-8138-5cc2fbc13246
+    country_id: *gy
+    network_id: *gy_port_kaituma_region
+  - id: 197225
+    prefix: '5927773'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 565c4692-6f9a-47cd-9c93-923231e9743f
+    country_id: *gy
+    network_id: *gy_port_kaituma_region
+  - id: 197360
+    prefix: '5927774'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: c407ab7a-52a9-46f6-b922-822dbe3c409e
+    country_id: *gy
+    network_id: *gy_port_kaituma_region
+  - id: 197482
+    prefix: '5927775'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 751cc0c8-b095-4a6c-95c7-434e23965518
+    country_id: *gy
+    network_id: *gy_mabaruma_region
+  - id: 201773
+    prefix: '5927776'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 46357af8-b966-452a-9104-d7e9b4af8cd7
+    country_id: *gy
+    network_id: *gy_mabaruma_region
+  - id: 201947
+    prefix: '5927777'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d3e575c0-5cdb-4ed1-9b3c-6c6714e6faa1
+    country_id: *gy
+    network_id: *gy_mabaruma_region
+  - id: 202092
+    prefix: '5927778'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: cc1f525d-0a31-47ce-997c-4afdee81505c
+    country_id: *gy
+    network_id: *gy_mabaruma_region
+  - id: 202228
+    prefix: '5927779'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: aabb0470-3b4f-43f3-b1f2-b1c42d34e484
+    country_id: *gy
+    network_id: *gy_mabaruma_region
+  - id: 403500
+    prefix: '592800000'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 89e8178d-a767-45d7-b3eb-f77e749b4fa2
+    country_id: *gy
+    network_id: *gy_fixed
   - id: 438570
     prefix: '5928621'
     number_min_length: 10
@@ -3580,6 +3536,35 @@ network_prefixes:
     uuid: cde53cd4-1203-4a60-a633-20cecd693ba2
     country_id: *gy
     network_id: *gy_international_freephone_services
+# Supplementary services Prefixes
+  - id: 448044
+    prefix: '5928680'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a6b97c02-acff-4707-8043-7bbce40ae117
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 448045
+    prefix: '5928681'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 40494e8e-2601-4b38-925f-84327dd9d43b
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 448169
+    prefix: '5928682'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 4c2a001b-5c0c-4893-b575-25fde6ac742c
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 448264
+    prefix: '5928683'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ca2a1afd-7f78-4df4-9396-7b328c57109e
+    country_id: *gy
+    network_id: *gy_fixed
   - id: 451388
     prefix: '5928888888'
     number_min_length: 10
@@ -3587,6 +3572,20 @@ network_prefixes:
     uuid: 2d39f432-9422-41e6-b247-0c77c169bab9
     country_id: *gy
     network_id: *gy_special_services
+  - id: 452472
+    prefix: '592899'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e7f472a-674f-481e-94e2-771db7e0ffc9
+    country_id: *gy
+    network_id: *gy_fixed
+  - id: 257103
+    prefix: '5929'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: aa48342b-de76-4ddc-94e2-fc8ec17ae49e
+    country_id: *gy
+    network_id: *gy_emergency_services
   - id: 454664
     prefix: '5929008'
     number_min_length: 10

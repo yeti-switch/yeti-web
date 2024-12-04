@@ -1,6 +1,6 @@
 country_id: &bs 16
 networks:
-# Fixed Networks
+# Supplementary services Networks
   - id: &bs_new_providence_island_did_region 29003
     name: BS New Providence Island Did Region
     uuid: b7d0100b-569f-44a0-98df-3c0376ea43bf
@@ -9,10 +9,15 @@ networks:
     name: BS Vanity Code Region
     uuid: f6d22d5c-b019-4739-be51-86da24129b37
     type_id: 2
+  - id: &bs_national_freephone_services 29005
+    name: BS National Freephone Services
+    uuid: 2384e98b-cf8e-4908-bf3c-e4c607216bb4
+    type_id: 13
   - id: &bs_new_providence_island_region 29006
     name: BS New Providence Island Region
     uuid: 9fe49810-61e2-4d97-918f-c38c8fe110c1
     type_id: 2
+# Fixed Networks
   - id: &bs_andros_island_region 29007
     name: BS Andros Island Region
     uuid: 9b9db34d-e791-4b4b-9c19-48cb5e8b0c46
@@ -73,23 +78,27 @@ networks:
     name: BS Exuma Cays Region
     uuid: 8058a013-d362-4934-8ede-2d71a15fbf41
     type_id: 2
+  - id: &bs_cybercell_mobile 29022
+    name: BS Cybercell Mobile
+    uuid: 02e5299e-1643-469b-a477-d690b9db66ff
+    type_id: 3
   - id: &bs_abaco_island_region 29023
     name: BS Abaco Island Region
     uuid: 9ea4ff14-ac88-42f9-968c-f2fe0ba7a5d5
     type_id: 2
-  - id: &bs_fixed 29025
-    name: BS Fixed
-    uuid: d6605704-315e-49ee-a79a-3d9771b5fe27
-    type_id: 2
-# Supplementary services Networks
-  - id: &bs_national_freephone_services 29005
-    name: BS National Freephone Services
-    uuid: 2384e98b-cf8e-4908-bf3c-e4c607216bb4
-    type_id: 13
   - id: &bs_information_services 29024
     name: BS Information Services
     uuid: f0cbd62f-bbd5-4ce4-958d-04c64beb15cd
     type_id: 13
+  - id: &bs_fixed 29025
+    name: BS Fixed
+    uuid: d6605704-315e-49ee-a79a-3d9771b5fe27
+    type_id: 2
+  - id: &bs_aliv_mobile 29026
+    name: BS Aliv Mobile
+    uuid: 8083c3ee-4ad8-4273-a3d3-f9cbd716c64a
+    type_id: 3
+# Mobile Networks
   - id: &bs_special_services 29027
     name: BS Special Services
     uuid: 4aad2a9c-3825-49e8-9128-dce93bcd2cd0
@@ -98,25 +107,15 @@ networks:
     name: BS International Freephone Services
     uuid: 42156487-e0a3-4d7c-b1c6-e2142b709eab
     type_id: 13
-# Mobile Networks
-  - id: &bs_cybercell_mobile 29022
-    name: BS Cybercell Mobile
-    uuid: 02e5299e-1643-469b-a477-d690b9db66ff
-    type_id: 3
-  - id: &bs_aliv_mobile 29026
-    name: BS Aliv Mobile
-    uuid: 8083c3ee-4ad8-4273-a3d3-f9cbd716c64a
-    type_id: 3
 network_prefixes:
-# Country code Prefixes
-  - id: 294650
+# Supplementary services Prefixes
+  - id: 512945
     prefix: '1242'
-    number_min_length: 2
+    number_min_length: 5
     number_max_length: 100
-    uuid: a9da03a5-7b08-420a-86bb-d273ba08ca68
+    uuid: caa3570e-bf0e-4581-87ac-a28f0055a59a
     country_id: *bs
-    network_id: null
-# Fixed Prefixes
+    network_id: *bs_fixed
   - id: 294657
     prefix: '1242225'
     number_min_length: 11
@@ -131,6 +130,14 @@ network_prefixes:
     uuid: 7a21f6f3-d1e1-468a-85e4-7d46d5abf312
     country_id: *bs
     network_id: *bs_vanity_code_region
+  - id: 294659
+    prefix: '1242300'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 91a8572d-84b7-4016-8e8e-465f4ec4a62c
+    country_id: *bs
+    network_id: *bs_national_freephone_services
+# Fixed Prefixes
   - id: 294660
     prefix: '1242302'
     number_min_length: 11
@@ -418,6 +425,13 @@ network_prefixes:
     uuid: 04bd74ca-29eb-4ae2-8da1-754dc9eb5209
     country_id: *bs
     network_id: *bs_new_providence_island_region
+  - id: 294701
+    prefix: '1242357'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 92e19638-6663-499b-943f-698543a4b0ca
+    country_id: *bs
+    network_id: *bs_cybercell_mobile
   - id: 294702
     prefix: '1242358'
     number_min_length: 11
@@ -425,6 +439,13 @@ network_prefixes:
     uuid: 316668db-a1b1-4534-afb8-afa6e3c51258
     country_id: *bs
     network_id: *bs_exuma_island_region
+  - id: 294703
+    prefix: '1242359'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 442cc178-d0c8-47f1-904a-86ae1d2ba40b
+    country_id: *bs
+    network_id: *bs_cybercell_mobile
   - id: 294704
     prefix: '1242361'
     number_min_length: 11
@@ -502,6 +523,20 @@ network_prefixes:
     uuid: 619b5f90-32bb-4cc0-891b-27b449d91cf4
     country_id: *bs
     network_id: *bs_grand_bahama_island_region
+  - id: 294715
+    prefix: '1242375'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4ac4ec15-7156-4d53-8c0e-4d090d9840ce
+    country_id: *bs
+    network_id: *bs_cybercell_mobile
+  - id: 294716
+    prefix: '1242376'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 196298bf-6f37-4682-90f7-e78e6daacf71
+    country_id: *bs
+    network_id: *bs_cybercell_mobile
   - id: 294717
     prefix: '1242377'
     number_min_length: 11
@@ -565,6 +600,13 @@ network_prefixes:
     uuid: 96005cd1-2c79-4eb7-89b0-11ae158c9c23
     country_id: *bs
     network_id: *bs_new_providence_island_region
+  - id: 294726
+    prefix: '1242395'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f1ae9405-eb01-4bc7-8d6a-8192a0880621
+    country_id: *bs
+    network_id: *bs_cybercell_mobile
   - id: 294727
     prefix: '1242396'
     number_min_length: 11
@@ -579,246 +621,6 @@ network_prefixes:
     uuid: b1b9f925-1f00-4fb4-be9f-7ac70fe21994
     country_id: *bs
     network_id: *bs_new_providence_island_region
-  - id: 294763
-    prefix: '1242461'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 15d204c4-cf54-42a3-b7d4-dfceabd3c798
-    country_id: *bs
-    network_id: *bs_new_providence_island_region
-  - id: 294773
-    prefix: '1242502'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2c993fab-7c24-4630-bffa-247eb1ce8363
-    country_id: *bs
-    network_id: *bs_new_providence_island_region
-  - id: 294790
-    prefix: '1242601'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5855f670-d9e2-4e02-9b17-ad4078a98f55
-    country_id: *bs
-    network_id: *bs_new_providence_island_region
-  - id: 294791
-    prefix: '1242602'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f14eae27-9d69-495b-9478-3862c1ae410a
-    country_id: *bs
-    network_id: *bs_grand_bahama_island_region
-  - id: 294792
-    prefix: '1242603'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ef7e8207-1c51-42cd-8cef-c63d4d9ce4a5
-    country_id: *bs
-    network_id: *bs_fixed
-  - id: 294793
-    prefix: '1242604'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a3f9f810-3b9a-428f-96ad-7802853e696d
-    country_id: *bs
-    network_id: *bs_fixed
-  - id: 294794
-    prefix: '1242612'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: edc09ec9-5740-463c-aea7-3acdd1bc508c
-    country_id: *bs
-    network_id: *bs_fixed
-  - id: 294795
-    prefix: '1242620'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f266f9ce-b097-4b15-8c68-c1c19f3a6eed
-    country_id: *bs
-    network_id: *bs_fixed
-  - id: 294796
-    prefix: '1242621'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2f7af025-a76a-435f-94dc-3751d3a831eb
-    country_id: *bs
-    network_id: *bs_fixed
-  - id: 294797
-    prefix: '1242623'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 380a5f9f-4a54-4692-aeec-d43fd34583eb
-    country_id: *bs
-    network_id: *bs_fixed
-  - id: 294800
-    prefix: '1242650'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f53e39a3-035c-40ea-a090-677475e57da6
-    country_id: *bs
-    network_id: *bs_fixed
-  - id: 294801
-    prefix: '1242676'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dd1bc364-8731-497e-973d-7baa98f453af
-    country_id: *bs
-    network_id: *bs_new_providence_island_region
-  - id: 294802
-    prefix: '1242677'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a3baaf31-0a8f-45a5-a787-56bb08bb5131
-    country_id: *bs
-    network_id: *bs_new_providence_island_region
-  - id: 294803
-    prefix: '1242687'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ebda26d8-d138-4f3e-a048-0f785d15d8ce
-    country_id: *bs
-    network_id: *bs_grand_bahama_island_region
-  - id: 294804
-    prefix: '1242688'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a19a24d8-9988-4f7d-81fd-fbb4d917eb7a
-    country_id: *bs
-    network_id: *bs_grand_bahama_island_region
-  - id: 294805
-    prefix: '1242698'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 747c7c03-e764-4558-bee9-be95671f8426
-    country_id: *bs
-    network_id: *bs_new_providence_island_region
-  - id: 294806
-    prefix: '12426990'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a50e2ecc-859c-4104-b333-cff3e3de10cf
-    country_id: *bs
-    network_id: *bs_abaco_island_region
-  - id: 294807
-    prefix: '12426991'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2042547d-be2b-4a3c-b7ea-4231acd5c5af
-    country_id: *bs
-    network_id: *bs_abaco_island_region
-  - id: 294808
-    prefix: '12426992'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 016ec2c5-2cc1-46a2-9a38-97ceda4c20bd
-    country_id: *bs
-    network_id: *bs_abaco_island_region
-  - id: 294809
-    prefix: '12426993'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 88f9ec19-92ee-4e05-a7d1-524b15957125
-    country_id: *bs
-    network_id: *bs_abaco_island_region
-  - id: 294810
-    prefix: '12426994'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: db4ff091-8d9c-4e79-91f7-542d816a18c0
-    country_id: *bs
-    network_id: *bs_abaco_island_region
-  - id: 294811
-    prefix: '12426995'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 40cbe7c0-bd0e-4965-8ca4-8168a4bdde74
-    country_id: *bs
-    network_id: *bs_eleuthera_island_region
-  - id: 294812
-    prefix: '12426996'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5e5a92fe-006c-42e8-8dfb-c01f30887ebb
-    country_id: *bs
-    network_id: *bs_eleuthera_island_region
-  - id: 294813
-    prefix: '1242702'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c1ec2045-668f-40ae-abfa-16c9cdbc3afc
-    country_id: *bs
-    network_id: *bs_new_providence_island_region
-  - id: 294816
-    prefix: '1242788'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3daf3b8e-45ef-4a68-968a-7a9b704b5214
-    country_id: *bs
-    network_id: *bs_fixed
-# Supplementary services Prefixes
-  - id: 294659
-    prefix: '1242300'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 91a8572d-84b7-4016-8e8e-465f4ec4a62c
-    country_id: *bs
-    network_id: *bs_national_freephone_services
-  - id: 294783
-    prefix: '1242555'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba77d733-0bd1-4504-8329-2eed91d8adfc
-    country_id: *bs
-    network_id: *bs_information_services
-  - id: 294837
-    prefix: '12429'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: bce4a4ce-de95-475e-9f03-5bcf9f5cba67
-    country_id: *bs
-    network_id: *bs_special_services
-  - id: 403504
-    prefix: '1800389'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1c82328b-3a41-4fed-b4dd-82e828763619
-    country_id: *bs
-    network_id: *bs_international_freephone_services
-# Mobile Prefixes
-  - id: 294701
-    prefix: '1242357'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 92e19638-6663-499b-943f-698543a4b0ca
-    country_id: *bs
-    network_id: *bs_cybercell_mobile
-  - id: 294703
-    prefix: '1242359'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 442cc178-d0c8-47f1-904a-86ae1d2ba40b
-    country_id: *bs
-    network_id: *bs_cybercell_mobile
-  - id: 294715
-    prefix: '1242375'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4ac4ec15-7156-4d53-8c0e-4d090d9840ce
-    country_id: *bs
-    network_id: *bs_cybercell_mobile
-  - id: 294716
-    prefix: '1242376'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 196298bf-6f37-4682-90f7-e78e6daacf71
-    country_id: *bs
-    network_id: *bs_cybercell_mobile
-  - id: 294726
-    prefix: '1242395'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f1ae9405-eb01-4bc7-8d6a-8192a0880621
-    country_id: *bs
-    network_id: *bs_cybercell_mobile
   - id: 294729
     prefix: '1242421'
     number_min_length: 11
@@ -980,6 +782,7 @@ network_prefixes:
     uuid: 3262b6e9-4497-4e40-a6b2-eef899c68530
     country_id: *bs
     network_id: *bs_cybercell_mobile
+# Mobile Prefixes
   - id: 294752
     prefix: '1242447'
     number_min_length: 11
@@ -1057,6 +860,13 @@ network_prefixes:
     uuid: 3d229655-01fc-40d4-84e1-58e33da09d52
     country_id: *bs
     network_id: *bs_cybercell_mobile
+  - id: 294763
+    prefix: '1242461'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 15d204c4-cf54-42a3-b7d4-dfceabd3c798
+    country_id: *bs
+    network_id: *bs_new_providence_island_region
   - id: 294764
     prefix: '1242462'
     number_min_length: 11
@@ -1120,6 +930,13 @@ network_prefixes:
     uuid: 7fd867a3-3e9d-40b8-a282-cd5799fab6d2
     country_id: *bs
     network_id: *bs_cybercell_mobile
+  - id: 294773
+    prefix: '1242502'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c993fab-7c24-4630-bffa-247eb1ce8363
+    country_id: *bs
+    network_id: *bs_new_providence_island_region
   - id: 294774
     prefix: '1242524'
     number_min_length: 11
@@ -1183,6 +1000,13 @@ network_prefixes:
     uuid: 36f10ac1-4ba0-4afb-b041-6857cdb5f3dd
     country_id: *bs
     network_id: *bs_cybercell_mobile
+  - id: 294783
+    prefix: '1242555'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba77d733-0bd1-4504-8329-2eed91d8adfc
+    country_id: *bs
+    network_id: *bs_information_services
   - id: 294784
     prefix: '1242556'
     number_min_length: 11
@@ -1225,6 +1049,62 @@ network_prefixes:
     uuid: 4e69fa07-a188-4360-bff1-fec43bd8c59e
     country_id: *bs
     network_id: *bs_cybercell_mobile
+  - id: 294790
+    prefix: '1242601'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5855f670-d9e2-4e02-9b17-ad4078a98f55
+    country_id: *bs
+    network_id: *bs_new_providence_island_region
+  - id: 294791
+    prefix: '1242602'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f14eae27-9d69-495b-9478-3862c1ae410a
+    country_id: *bs
+    network_id: *bs_grand_bahama_island_region
+  - id: 294792
+    prefix: '1242603'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ef7e8207-1c51-42cd-8cef-c63d4d9ce4a5
+    country_id: *bs
+    network_id: *bs_fixed
+  - id: 294793
+    prefix: '1242604'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a3f9f810-3b9a-428f-96ad-7802853e696d
+    country_id: *bs
+    network_id: *bs_fixed
+  - id: 294794
+    prefix: '1242612'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: edc09ec9-5740-463c-aea7-3acdd1bc508c
+    country_id: *bs
+    network_id: *bs_fixed
+  - id: 294795
+    prefix: '1242620'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f266f9ce-b097-4b15-8c68-c1c19f3a6eed
+    country_id: *bs
+    network_id: *bs_fixed
+  - id: 294796
+    prefix: '1242621'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2f7af025-a76a-435f-94dc-3751d3a831eb
+    country_id: *bs
+    network_id: *bs_fixed
+  - id: 294797
+    prefix: '1242623'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 380a5f9f-4a54-4692-aeec-d43fd34583eb
+    country_id: *bs
+    network_id: *bs_fixed
   - id: 294798
     prefix: '1242636'
     number_min_length: 11
@@ -1239,6 +1119,104 @@ network_prefixes:
     uuid: 1e53b9b2-dde1-4119-b5b4-bdb4a08a01da
     country_id: *bs
     network_id: *bs_cybercell_mobile
+  - id: 294800
+    prefix: '1242650'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f53e39a3-035c-40ea-a090-677475e57da6
+    country_id: *bs
+    network_id: *bs_fixed
+  - id: 294801
+    prefix: '1242676'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dd1bc364-8731-497e-973d-7baa98f453af
+    country_id: *bs
+    network_id: *bs_new_providence_island_region
+  - id: 294802
+    prefix: '1242677'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a3baaf31-0a8f-45a5-a787-56bb08bb5131
+    country_id: *bs
+    network_id: *bs_new_providence_island_region
+  - id: 294803
+    prefix: '1242687'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ebda26d8-d138-4f3e-a048-0f785d15d8ce
+    country_id: *bs
+    network_id: *bs_grand_bahama_island_region
+  - id: 294804
+    prefix: '1242688'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a19a24d8-9988-4f7d-81fd-fbb4d917eb7a
+    country_id: *bs
+    network_id: *bs_grand_bahama_island_region
+  - id: 294805
+    prefix: '1242698'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 747c7c03-e764-4558-bee9-be95671f8426
+    country_id: *bs
+    network_id: *bs_new_providence_island_region
+  - id: 294806
+    prefix: '12426990'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a50e2ecc-859c-4104-b333-cff3e3de10cf
+    country_id: *bs
+    network_id: *bs_abaco_island_region
+  - id: 294807
+    prefix: '12426991'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2042547d-be2b-4a3c-b7ea-4231acd5c5af
+    country_id: *bs
+    network_id: *bs_abaco_island_region
+  - id: 294808
+    prefix: '12426992'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 016ec2c5-2cc1-46a2-9a38-97ceda4c20bd
+    country_id: *bs
+    network_id: *bs_abaco_island_region
+  - id: 294809
+    prefix: '12426993'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 88f9ec19-92ee-4e05-a7d1-524b15957125
+    country_id: *bs
+    network_id: *bs_abaco_island_region
+  - id: 294810
+    prefix: '12426994'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: db4ff091-8d9c-4e79-91f7-542d816a18c0
+    country_id: *bs
+    network_id: *bs_abaco_island_region
+  - id: 294811
+    prefix: '12426995'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 40cbe7c0-bd0e-4965-8ca4-8168a4bdde74
+    country_id: *bs
+    network_id: *bs_eleuthera_island_region
+  - id: 294812
+    prefix: '12426996'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5e5a92fe-006c-42e8-8dfb-c01f30887ebb
+    country_id: *bs
+    network_id: *bs_eleuthera_island_region
+  - id: 294813
+    prefix: '1242702'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c1ec2045-668f-40ae-abfa-16c9cdbc3afc
+    country_id: *bs
+    network_id: *bs_new_providence_island_region
   - id: 294814
     prefix: '1242727'
     number_min_length: 11
@@ -1253,6 +1231,13 @@ network_prefixes:
     uuid: 6a7308b4-77dd-4a9a-8692-b958d207595f
     country_id: *bs
     network_id: *bs_aliv_mobile
+  - id: 294816
+    prefix: '1242788'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3daf3b8e-45ef-4a68-968a-7a9b704b5214
+    country_id: *bs
+    network_id: *bs_fixed
   - id: 294817
     prefix: '1242801'
     number_min_length: 11
@@ -1393,3 +1378,17 @@ network_prefixes:
     uuid: f8c35b50-9767-4644-bab6-c8819fdea30d
     country_id: *bs
     network_id: *bs_aliv_mobile
+  - id: 294837
+    prefix: '12429'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: bce4a4ce-de95-475e-9f03-5bcf9f5cba67
+    country_id: *bs
+    network_id: *bs_special_services
+  - id: 403504
+    prefix: '1800389'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1c82328b-3a41-4fed-b4dd-82e828763619
+    country_id: *bs
+    network_id: *bs_international_freephone_services

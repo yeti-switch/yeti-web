@@ -1,35 +1,10 @@
 country_id: &sv 64
 networks:
-# Supplementary services Networks
+# Fixed Networks
   - id: &sv_special_services 21486
     name: SV Special Services
     uuid: 9066548a-633e-4da6-9131-6d07e3a6f70d
     type_id: 13
-  - id: &sv_freephone_services 23860
-    name: SV Freephone Services
-    uuid: 194dea72-e31e-4aa4-9fcf-42e549e6b704
-    type_id: 13
-  - id: &sv_international_freephone_services 23866
-    name: SV International Freephone Services
-    uuid: abf7490c-687d-45f7-ab82-aa4e57be19fc
-    type_id: 13
-  - id: &sv_international_freephone_services_with_foreign_operator_assistance 23870
-    name: SV International Freephone Services With Foreign Operator Assistance
-    uuid: 96f6027c-835b-4e94-ad53-f6305a66aded
-    type_id: 13
-  - id: &sv_semiautomatic_prepaid_call_services 23888
-    name: SV Semiautomatic Prepaid Call Services
-    uuid: b8ed5936-c549-4748-934e-c4b50d9fe333
-    type_id: 13
-  - id: &sv_premium_rate_services 24447
-    name: SV Premium Rate Services
-    uuid: d7c4fa88-7f97-4bc7-982a-638ac2eacb91
-    type_id: 13
-  - id: &sv_international_premium_rate_services 24450
-    name: SV International Premium Rate Services
-    uuid: 924b8a11-e1de-4a99-903d-51707c61c0fd
-    type_id: 13
-# Mobile Networks
   - id: &sv_mobile 22551
     name: SV Mobile
     uuid: dd36492f-9210-47d1-8f42-9c78836fad71
@@ -38,6 +13,23 @@ networks:
     name: SV Tigo Mobile
     uuid: f7fd8d6a-91da-4245-9da3-ca7ff61f1dbd
     type_id: 3
+  - id: &sv_metropolitan_region_region 22801
+    name: SV Metropolitan Region Region
+    uuid: cd16d71c-1393-47ab-83f0-4fb94327c4a5
+    type_id: 2
+  - id: &sv_central_region_region 22911
+    name: SV Central Region Region
+    uuid: 2390af7a-fd12-42b2-abd5-a7fd558e1f4a
+    type_id: 2
+# Supplementary services Networks
+  - id: &sv_west_region_region 22970
+    name: SV West Region Region
+    uuid: 26c83560-e57e-4593-9f5b-9ac14a6dd35f
+    type_id: 2
+  - id: &sv_east_region_region 23083
+    name: SV East Region Region
+    uuid: 62c3d324-59e5-4eac-9bf7-b004b0b887f0
+    type_id: 2
   - id: &sv_claro_mobile 23438
     name: SV Claro Mobile
     uuid: 31095d22-597e-46c4-b305-bad9fc9251b1
@@ -50,37 +42,48 @@ networks:
     name: SV Digicel Mobile
     uuid: 055ca002-cdcc-48a5-9307-6f0d124dfa8c
     type_id: 3
+  - id: &sv_freephone_services 23860
+    name: SV Freephone Services
+    uuid: 194dea72-e31e-4aa4-9fcf-42e549e6b704
+    type_id: 13
+  - id: &sv_international_freephone_services 23866
+    name: SV International Freephone Services
+    uuid: abf7490c-687d-45f7-ab82-aa4e57be19fc
+    type_id: 13
+# Mobile Networks
+  - id: &sv_international_freephone_services_with_foreign_operator_assistance 23870
+    name: SV International Freephone Services With Foreign Operator Assistance
+    uuid: 96f6027c-835b-4e94-ad53-f6305a66aded
+    type_id: 13
+  - id: &sv_semiautomatic_prepaid_call_services 23888
+    name: SV Semiautomatic Prepaid Call Services
+    uuid: b8ed5936-c549-4748-934e-c4b50d9fe333
+    type_id: 13
   - id: &sv_red_mobile 24289
     name: SV Red Mobile
     uuid: a0576599-d301-45f6-86e8-bb263f2eee46
     type_id: 3
-# Fixed Networks
-  - id: &sv_metropolitan_region_region 22801
-    name: SV Metropolitan Region Region
-    uuid: cd16d71c-1393-47ab-83f0-4fb94327c4a5
-    type_id: 2
-  - id: &sv_central_region_region 22911
-    name: SV Central Region Region
-    uuid: 2390af7a-fd12-42b2-abd5-a7fd558e1f4a
-    type_id: 2
-  - id: &sv_west_region_region 22970
-    name: SV West Region Region
-    uuid: 26c83560-e57e-4593-9f5b-9ac14a6dd35f
-    type_id: 2
-  - id: &sv_east_region_region 23083
-    name: SV East Region Region
-    uuid: 62c3d324-59e5-4eac-9bf7-b004b0b887f0
+  - id: &sv_premium_rate_services 24447
+    name: SV Premium Rate Services
+    uuid: d7c4fa88-7f97-4bc7-982a-638ac2eacb91
+    type_id: 13
+  - id: &sv_international_premium_rate_services 24450
+    name: SV International Premium Rate Services
+    uuid: 924b8a11-e1de-4a99-903d-51707c61c0fd
+    type_id: 13
+  - id: &sv_fixed 43463
+    name: SV Fixed
+    uuid: 7f6be4c8-4105-4c36-a760-17d580524804
     type_id: 2
 network_prefixes:
-# Country code Prefixes
+# Fixed Prefixes
   - id: 242099
     prefix: '503'
     number_min_length: 4
     number_max_length: 100
     uuid: 1246f4c3-d18b-45f8-940e-944055f51f4f
     country_id: *sv
-    network_id: null
-# Supplementary services Prefixes
+    network_id: *sv_fixed
   - id: 242491
     prefix: '5031'
     number_min_length: 6
@@ -88,70 +91,70 @@ network_prefixes:
     uuid: 525ac37b-b235-4bf4-bad6-af0b9c06f671
     country_id: *sv
     network_id: *sv_special_services
-  - id: 253175
-    prefix: '503800'
-    number_min_length: 10
-    number_max_length: 14
-    uuid: d1ac43ec-4a5e-4cc4-b577-99f89105ab19
+  - id: 247638
+    prefix: '50321'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1bc33a11-b117-4790-8f91-037ea434e9cd
     country_id: *sv
-    network_id: *sv_freephone_services
-  - id: 253183
-    prefix: '5038000'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 879fc175-ee62-4d43-8cdd-c5e681abd2bf
+    network_id: *sv_metropolitan_region_region
+  - id: 247734
+    prefix: '50322'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9e0b9913-563b-4e21-9532-cb918310bebb
     country_id: *sv
-    network_id: *sv_international_freephone_services
-  - id: 253189
-    prefix: '5038001'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: ed62d202-f22c-496c-b231-a87f6c7bfdaa
+    network_id: *sv_metropolitan_region_region
+  - id: 247929
+    prefix: '50323'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 65c0cc64-6e2e-46a3-bae1-384da2374a06
     country_id: *sv
-    network_id: *sv_international_freephone_services_with_foreign_operator_assistance
-  - id: 253197
-    prefix: '5038006'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 16cf7741-86ec-44ad-9881-0e3c05e66dca
+    network_id: *sv_central_region_region
+  - id: 248120
+    prefix: '50324'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1cb73022-10e8-4888-b2c8-98544b6e66e3
     country_id: *sv
-    network_id: *sv_international_freephone_services
-  - id: 253217
-    prefix: '503801'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: d288e56a-d51d-4994-92e2-9470443c5064
+    network_id: *sv_west_region_region
+  - id: 248269
+    prefix: '50325'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9fc8b3c8-fb1f-4aaf-8c48-4cd84b28c392
     country_id: *sv
-    network_id: *sv_semiautomatic_prepaid_call_services
-  - id: 257139
-    prefix: '5039'
-    number_min_length: 6
-    number_max_length: 6
-    uuid: 971fe1d9-37e5-477d-b689-cfa9312a0d83
+    network_id: *sv_metropolitan_region_region
+  - id: 248479
+    prefix: '50326'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8fa83f2b-c762-496d-a0d9-e2ecb34a1eea
     country_id: *sv
-    network_id: *sv_special_services
-  - id: 257192
-    prefix: '503900'
-    number_min_length: 10
-    number_max_length: 14
-    uuid: 95977240-e920-4ba1-afdb-c03ebdb1092b
+    network_id: *sv_east_region_region
+  - id: 248620
+    prefix: '50327'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a13db703-75d1-4e9c-bd0f-4d3c0a9ebbc7
     country_id: *sv
-    network_id: *sv_premium_rate_services
-  - id: 257195
-    prefix: '5039000'
-    number_min_length: 14
-    number_max_length: 14
-    uuid: 24770aaf-d242-40db-9f70-4a0f8f9915e9
+    network_id: *sv_east_region_region
+  - id: 248757
+    prefix: '50328'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 60791780-b57b-41f9-ba28-38b5964394e4
     country_id: *sv
-    network_id: *sv_international_premium_rate_services
-  - id: 257202
-    prefix: '5039006'
-    number_min_length: 10
-    number_max_length: 10
-    uuid: 368018b7-858a-41ab-8144-7557054e8a8b
+    network_id: *sv_west_region_region
+# Supplementary services Prefixes
+  - id: 248836
+    prefix: '50329'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 979dc66d-2730-477e-9bde-36dea3274ba7
     country_id: *sv
-    network_id: *sv_international_premium_rate_services
-# Mobile Prefixes
+    network_id: *sv_central_region_region
   - id: 245425
     prefix: '5036'
     number_min_length: 11
@@ -180,6 +183,140 @@ network_prefixes:
     uuid: 8da4346d-6dee-415c-96ff-0100d8bfa230
     country_id: *sv
     network_id: *sv_tigo_mobile
+  - id: 253996
+    prefix: '503610'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 74d9a034-0e25-4cb3-8b88-edbf4156e44a
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254003
+    prefix: '503611'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bcb90d1e-136b-4d01-a85f-2ed114f6528f
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254018
+    prefix: '503612'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f758f40a-0902-47c0-8131-18cfa7b60a96
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254031
+    prefix: '503613'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7184c311-a8ee-45ff-885f-59b4f9f624d5
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254045
+    prefix: '503614'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 90e0996f-64fa-43a1-a3e3-36ebcb3a6a98
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+# Mobile Prefixes
+  - id: 254070
+    prefix: '503615'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 31a61d47-66b9-45eb-a05e-5c69be3ba531
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254080
+    prefix: '503616'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1a12c107-49ce-43c4-8f33-302f50f5d5b3
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254086
+    prefix: '503617'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f0449b6-2c85-4ab7-b909-7b761ab92af0
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254095
+    prefix: '503618'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: c82c2136-b0f4-493b-ac48-64a77aff1404
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254099
+    prefix: '5036190'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 94276a50-1f99-422c-b755-6ab6800a02ab
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254100
+    prefix: '5036191'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ae1cbf29-fb20-4932-a6ce-83f90808107f
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254101
+    prefix: '5036192'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 85417b2e-d620-4524-b060-b0667db083fa
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254102
+    prefix: '5036193'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 89dde2cb-5603-402a-8c17-4146f7c65d2c
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254103
+    prefix: '5036194'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 50ad1a33-02fb-4e50-aa92-38e3e0bc9b96
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254104
+    prefix: '5036195'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0ec65fcc-6d2e-4db0-b545-8cf3259d5468
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254105
+    prefix: '5036196'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a9bcced3-13e4-450b-8585-fe46c55aa741
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254106
+    prefix: '5036197'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9355c964-e90b-4915-9e8f-38eda49337cd
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254107
+    prefix: '5036198'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 86e658a9-bb31-4f55-9b69-7491f6ce2f2b
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 254131
+    prefix: '503620'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac5d8390-3f91-4587-a324-507bca02d914
+    country_id: *sv
+    network_id: *sv_digicel_mobile
   - id: 250673
     prefix: '503630'
     number_min_length: 11
@@ -292,6 +429,41 @@ network_prefixes:
     uuid: e005c399-64b6-49de-983e-10219b7a4642
     country_id: *sv
     network_id: *sv_movistar_mobile
+  - id: 254341
+    prefix: '50366116'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6f9a65e7-63da-47b2-8c1b-840786e86e65
+    country_id: *sv
+    network_id: *sv_movistar_mobile
+  - id: 255277
+    prefix: '5037'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ac6c5515-836d-4b85-916e-3c78859dcb1c
+    country_id: *sv
+    network_id: *sv_mobile
+  - id: 255320
+    prefix: '503700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b79470a9-45d5-43d3-ac26-20c74b6dc178
+    country_id: *sv
+    network_id: *sv_claro_mobile
+  - id: 255395
+    prefix: '503701'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 11c603eb-28cd-4b1a-9531-53902079eb71
+    country_id: *sv
+    network_id: *sv_claro_mobile
+  - id: 255406
+    prefix: '503702'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8d147501-7c4b-4a11-80c1-3082d5f0c73c
+    country_id: *sv
+    network_id: *sv_claro_mobile
   - id: 251577
     prefix: '503703'
     number_min_length: 11
@@ -691,174 +863,6 @@ network_prefixes:
     uuid: 7b4d71c0-05e3-4360-b89d-b9c51f13718d
     country_id: *sv
     network_id: *sv_tigo_mobile
-  - id: 253996
-    prefix: '503610'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 74d9a034-0e25-4cb3-8b88-edbf4156e44a
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254003
-    prefix: '503611'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bcb90d1e-136b-4d01-a85f-2ed114f6528f
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254018
-    prefix: '503612'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f758f40a-0902-47c0-8131-18cfa7b60a96
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254031
-    prefix: '503613'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7184c311-a8ee-45ff-885f-59b4f9f624d5
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254045
-    prefix: '503614'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 90e0996f-64fa-43a1-a3e3-36ebcb3a6a98
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254070
-    prefix: '503615'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 31a61d47-66b9-45eb-a05e-5c69be3ba531
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254080
-    prefix: '503616'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1a12c107-49ce-43c4-8f33-302f50f5d5b3
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254086
-    prefix: '503617'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f0449b6-2c85-4ab7-b909-7b761ab92af0
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254095
-    prefix: '503618'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: c82c2136-b0f4-493b-ac48-64a77aff1404
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254099
-    prefix: '5036190'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 94276a50-1f99-422c-b755-6ab6800a02ab
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254100
-    prefix: '5036191'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ae1cbf29-fb20-4932-a6ce-83f90808107f
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254101
-    prefix: '5036192'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 85417b2e-d620-4524-b060-b0667db083fa
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254102
-    prefix: '5036193'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 89dde2cb-5603-402a-8c17-4146f7c65d2c
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254103
-    prefix: '5036194'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 50ad1a33-02fb-4e50-aa92-38e3e0bc9b96
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254104
-    prefix: '5036195'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0ec65fcc-6d2e-4db0-b545-8cf3259d5468
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254105
-    prefix: '5036196'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a9bcced3-13e4-450b-8585-fe46c55aa741
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254106
-    prefix: '5036197'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9355c964-e90b-4915-9e8f-38eda49337cd
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254107
-    prefix: '5036198'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 86e658a9-bb31-4f55-9b69-7491f6ce2f2b
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 254131
-    prefix: '503620'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac5d8390-3f91-4587-a324-507bca02d914
-    country_id: *sv
-    network_id: *sv_digicel_mobile
-  - id: 254341
-    prefix: '50366116'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6f9a65e7-63da-47b2-8c1b-840786e86e65
-    country_id: *sv
-    network_id: *sv_movistar_mobile
-  - id: 255277
-    prefix: '5037'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ac6c5515-836d-4b85-916e-3c78859dcb1c
-    country_id: *sv
-    network_id: *sv_mobile
-  - id: 255320
-    prefix: '503700'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b79470a9-45d5-43d3-ac26-20c74b6dc178
-    country_id: *sv
-    network_id: *sv_claro_mobile
-  - id: 255395
-    prefix: '503701'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 11c603eb-28cd-4b1a-9531-53902079eb71
-    country_id: *sv
-    network_id: *sv_claro_mobile
-  - id: 255406
-    prefix: '503702'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8d147501-7c4b-4a11-80c1-3082d5f0c73c
-    country_id: *sv
-    network_id: *sv_claro_mobile
   - id: 255470
     prefix: '503760'
     number_min_length: 11
@@ -1699,67 +1703,66 @@ network_prefixes:
     uuid: e1028d0c-6541-4c0a-b323-f69256d3750f
     country_id: *sv
     network_id: *sv_movistar_mobile
-# Fixed Prefixes
-  - id: 247638
-    prefix: '50321'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1bc33a11-b117-4790-8f91-037ea434e9cd
+  - id: 253175
+    prefix: '503800'
+    number_min_length: 10
+    number_max_length: 14
+    uuid: d1ac43ec-4a5e-4cc4-b577-99f89105ab19
     country_id: *sv
-    network_id: *sv_metropolitan_region_region
-  - id: 247734
-    prefix: '50322'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9e0b9913-563b-4e21-9532-cb918310bebb
+    network_id: *sv_freephone_services
+  - id: 253183
+    prefix: '5038000'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 879fc175-ee62-4d43-8cdd-c5e681abd2bf
     country_id: *sv
-    network_id: *sv_metropolitan_region_region
-  - id: 247929
-    prefix: '50323'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 65c0cc64-6e2e-46a3-bae1-384da2374a06
+    network_id: *sv_international_freephone_services
+  - id: 253189
+    prefix: '5038001'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ed62d202-f22c-496c-b231-a87f6c7bfdaa
     country_id: *sv
-    network_id: *sv_central_region_region
-  - id: 248120
-    prefix: '50324'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1cb73022-10e8-4888-b2c8-98544b6e66e3
+    network_id: *sv_international_freephone_services_with_foreign_operator_assistance
+  - id: 253197
+    prefix: '5038006'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 16cf7741-86ec-44ad-9881-0e3c05e66dca
     country_id: *sv
-    network_id: *sv_west_region_region
-  - id: 248269
-    prefix: '50325'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9fc8b3c8-fb1f-4aaf-8c48-4cd84b28c392
+    network_id: *sv_international_freephone_services
+  - id: 253217
+    prefix: '503801'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: d288e56a-d51d-4994-92e2-9470443c5064
     country_id: *sv
-    network_id: *sv_metropolitan_region_region
-  - id: 248479
-    prefix: '50326'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8fa83f2b-c762-496d-a0d9-e2ecb34a1eea
+    network_id: *sv_semiautomatic_prepaid_call_services
+  - id: 257139
+    prefix: '5039'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 971fe1d9-37e5-477d-b689-cfa9312a0d83
     country_id: *sv
-    network_id: *sv_east_region_region
-  - id: 248620
-    prefix: '50327'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a13db703-75d1-4e9c-bd0f-4d3c0a9ebbc7
+    network_id: *sv_special_services
+  - id: 257192
+    prefix: '503900'
+    number_min_length: 10
+    number_max_length: 14
+    uuid: 95977240-e920-4ba1-afdb-c03ebdb1092b
     country_id: *sv
-    network_id: *sv_east_region_region
-  - id: 248757
-    prefix: '50328'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 60791780-b57b-41f9-ba28-38b5964394e4
+    network_id: *sv_premium_rate_services
+  - id: 257195
+    prefix: '5039000'
+    number_min_length: 14
+    number_max_length: 14
+    uuid: 24770aaf-d242-40db-9f70-4a0f8f9915e9
     country_id: *sv
-    network_id: *sv_west_region_region
-  - id: 248836
-    prefix: '50329'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 979dc66d-2730-477e-9bde-36dea3274ba7
+    network_id: *sv_international_premium_rate_services
+  - id: 257202
+    prefix: '5039006'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 368018b7-858a-41ab-8144-7557054e8a8b
     country_id: *sv
-    network_id: *sv_central_region_region
+    network_id: *sv_international_premium_rate_services

@@ -77,6 +77,10 @@ networks:
     name: BG Gabrovo Region Lovech Region Region
     uuid: 94c04ed6-a442-4486-8e9c-bd4b7bbd0ba2
     type_id: 2
+  - id: &bg_personal_number_services 14913
+    name: BG Personal Number Services
+    uuid: f4325512-9f3d-4ff6-9960-f0df0cfcca6d
+    type_id: 13
   - id: &bg_sofia_region_region 16200
     name: BG Sofia Region Region
     uuid: 8112fa0a-4b34-48c0-ba0a-9baa5d9437f0
@@ -121,6 +125,34 @@ networks:
     name: BG Montana Region Vratsa Region Region
     uuid: e375bb95-f7d0-41e2-a190-f2740e87ee79
     type_id: 2
+  - id: &bg_mobile 20807
+    name: BG Mobile
+    uuid: db0b1624-3953-4bcb-b200-ba57d4d69218
+    type_id: 3
+  - id: &bg_a1_mobile 21072
+    name: BG A1 Mobile
+    uuid: 07ce0f01-c7ec-4740-ba02-b5ff70668b67
+    type_id: 3
+  - id: &bg_broadband_wireless_access_bwa_and_fixed_wireless_access_fwa_networks 21259
+    name: BG Broadband Wireless Access Bwa And Fixed Wireless Access Fwa Networks
+    uuid: 62a0b320-2454-4a3c-b34e-0a91603f2120
+    type_id: 13
+  - id: &bg_special_services 21366
+    name: BG Special Services
+    uuid: 947e3ada-4fac-4c34-be3a-7ca2fbd3e3d7
+    type_id: 13
+  - id: &bg_social_value_services 21619
+    name: BG Social Value Services
+    uuid: 84ed3681-63ec-42b7-a66c-5c81c634e8f1
+    type_id: 13
+  - id: &bg_directory_enquiry_services 21666
+    name: BG Directory Enquiry Services
+    uuid: fe1173b0-f969-4286-9140-48d530a889af
+    type_id: 13
+  - id: &bg_dial_up_internet_access 21757
+    name: BG Dial Up Internet Access
+    uuid: e5a8b975-d946-4f50-803d-36dc799819dc
+    type_id: 13
   - id: &bg_sofia_region 25834
     name: BG Sofia Region
     uuid: e015b59d-0843-4554-a9e6-c9b3c0d44d30
@@ -161,6 +193,18 @@ networks:
     name: BG Stara Zagora Region Region
     uuid: 24b53962-2ab1-406d-9a9f-5b5695b76e6a
     type_id: 2
+  - id: &bg_machine_to_machine_m2m_services 36621
+    name: BG Machine To Machine M2M Services
+    uuid: 43d8ec88-6b58-4667-961c-62e8c459ff86
+    type_id: 13
+  - id: &bg_vivacom_mobile 36696
+    name: BG Vivacom Mobile
+    uuid: 5b4c22d1-109c-4066-966d-6e06fb12814c
+    type_id: 3
+  - id: &bg_yettel_mobile 36699
+    name: BG Yettel Mobile
+    uuid: 81d94451-554e-41c1-ac89-4034ec73c7dd
+    type_id: 3
   - id: &bg_sliven_region 36842
     name: BG Sliven Region
     uuid: b1a2499d-1b96-4f49-890f-24dc464ee97b
@@ -169,6 +213,7 @@ networks:
     name: BG Stara Zagora Region
     uuid: 72c74fa7-2ea3-4521-a1d0-3d86b264a645
     type_id: 2
+# Supplementary services Networks
   - id: &bg_yambol_region 37827
     name: BG Yambol Region
     uuid: 43c0de48-1b4f-40dd-8a8f-3a9de575f5c3
@@ -181,6 +226,10 @@ networks:
     name: BG Yambol Region Haskovo Region Region
     uuid: ee5a0b75-5be0-4a14-8584-9f5eac5c49c6
     type_id: 2
+  - id: &bg_freephone_services 38487
+    name: BG Freephone Services
+    uuid: bb2f48d2-aadb-4e67-be8f-986ade4b5a4b
+    type_id: 13
   - id: &bg_ruse_region_region 39302
     name: BG Ruse Region Region
     uuid: 42ed2268-dabb-417e-9613-47dcb0e377ee
@@ -197,6 +246,11 @@ networks:
     name: BG Razgrad Razgrad Region Region
     uuid: e063bd2f-25cd-4089-abdc-1cc114db02e3
     type_id: 2
+  - id: &bg_premium_rate_services 41639
+    name: BG Premium Rate Services
+    uuid: d5c3d20e-8936-4159-82b0-4e1eb27e470b
+    type_id: 13
+# Mobile Networks
   - id: &bg_vratsa_region_region 42417
     name: BG Vratsa Region Region
     uuid: 1ed363b1-38a0-4dfb-a438-9ab6b99893fc
@@ -209,62 +263,271 @@ networks:
     name: BG Vidin Region Region
     uuid: 97f9bbef-50a9-4f4e-9df8-971317e960b9
     type_id: 2
-# Supplementary services Networks
-  - id: &bg_personal_number_services 14913
-    name: BG Personal Number Services
-    uuid: f4325512-9f3d-4ff6-9960-f0df0cfcca6d
-    type_id: 13
-  - id: &bg_broadband_wireless_access_bwa_and_fixed_wireless_access_fwa_networks 21259
-    name: BG Broadband Wireless Access Bwa And Fixed Wireless Access Fwa Networks
-    uuid: 62a0b320-2454-4a3c-b34e-0a91603f2120
-    type_id: 13
-  - id: &bg_special_services 21366
-    name: BG Special Services
-    uuid: 947e3ada-4fac-4c34-be3a-7ca2fbd3e3d7
-    type_id: 13
-  - id: &bg_social_value_services 21619
-    name: BG Social Value Services
-    uuid: 84ed3681-63ec-42b7-a66c-5c81c634e8f1
-    type_id: 13
-  - id: &bg_directory_enquiry_services 21666
-    name: BG Directory Enquiry Services
-    uuid: fe1173b0-f969-4286-9140-48d530a889af
-    type_id: 13
-  - id: &bg_dial_up_internet_access 21757
-    name: BG Dial Up Internet Access
-    uuid: e5a8b975-d946-4f50-803d-36dc799819dc
-    type_id: 13
-  - id: &bg_machine_to_machine_m2m_services 36621
-    name: BG Machine To Machine M2M Services
-    uuid: 43d8ec88-6b58-4667-961c-62e8c459ff86
-    type_id: 13
-  - id: &bg_freephone_services 38487
-    name: BG Freephone Services
-    uuid: bb2f48d2-aadb-4e67-be8f-986ade4b5a4b
-    type_id: 13
-  - id: &bg_premium_rate_services 41639
-    name: BG Premium Rate Services
-    uuid: d5c3d20e-8936-4159-82b0-4e1eb27e470b
-    type_id: 13
-# Mobile Networks
-  - id: &bg_mobile 20807
-    name: BG Mobile
-    uuid: db0b1624-3953-4bcb-b200-ba57d4d69218
-    type_id: 3
-  - id: &bg_a1_mobile 21072
-    name: BG A1 Mobile
-    uuid: 07ce0f01-c7ec-4740-ba02-b5ff70668b67
-    type_id: 3
-  - id: &bg_vivacom_mobile 36696
-    name: BG Vivacom Mobile
-    uuid: 5b4c22d1-109c-4066-966d-6e06fb12814c
-    type_id: 3
-  - id: &bg_yettel_mobile 36699
-    name: BG Yettel Mobile
-    uuid: 81d94451-554e-41c1-ac89-4034ec73c7dd
-    type_id: 3
+  - id: &bg_fixed 43384
+    name: BG Fixed
+    uuid: 05d7b035-5b13-42b7-972b-d0fc83572fd2
+    type_id: 2
 network_prefixes:
 # Fixed Prefixes
+  - id: 241954
+    prefix: '359'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: ab5c4934-0c1b-4c82-ba01-f066743dc35c
+    country_id: *bg
+    network_id: *bg_fixed
+  - id: 242359
+    prefix: '3591'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 898f8a63-e2e2-4831-a0ea-1c593a9c63d6
+    country_id: *bg
+    network_id: *bg_special_services
+  - id: 242656
+    prefix: '359116'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: b0893db9-8049-484e-a19f-f3e6dd6bbd72
+    country_id: *bg
+    network_id: *bg_social_value_services
+  - id: 242711
+    prefix: '359118'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 902dc5e8-920b-4ff7-b821-81c3976be3d3
+    country_id: *bg
+    network_id: *bg_directory_enquiry_services
+  - id: 242871
+    prefix: '359132'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9ed260ae-8f2f-47f6-93e9-d849386c20a7
+    country_id: *bg
+    network_id: *bg_dial_up_internet_access
+  - id: 242874
+    prefix: '359133'
+    number_min_length: 7
+    number_max_length: 7
+    uuid: eda4b0a9-6fa6-4029-a149-9065a488075e
+    country_id: *bg
+    network_id: *bg_dial_up_internet_access
+  - id: 242877
+    prefix: '359134'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: c31899a9-733f-4bd8-b600-0972cd46509b
+    country_id: *bg
+    network_id: *bg_dial_up_internet_access
+  - id: 261182
+    prefix: '3592'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 1990054c-6517-4d21-b19c-0e6ab77cdd4e
+    country_id: *bg
+    network_id: *bg_sofia_region
+  - id: 309461
+    prefix: '35930'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e28d9dd0-c42d-499a-a884-d16dc0cbf7be
+    country_id: *bg
+    network_id: *bg_smolyan_smolyan_region_plovdiv_region_region
+  - id: 321159
+    prefix: '35931'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: eb866855-6a95-4028-8cbd-c0f25dd68133
+    country_id: *bg
+    network_id: *bg_plovdiv_region_region
+  - id: 327264
+    prefix: '35932'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 187d91cb-bb23-46ba-a80d-f36f531bad2f
+    country_id: *bg
+    network_id: *bg_plovdiv_region
+  - id: 337269
+    prefix: '35933'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d3b9ded9-76f3-4578-9e59-b57c9145f80d
+    country_id: *bg
+    network_id: *bg_plovdiv_region_region
+  - id: 340462
+    prefix: '35934'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3abc6ec5-ad5f-475d-9a1d-6b00d83c2e3b
+    country_id: *bg
+    network_id: *bg_pazardzhik_region
+  - id: 352227
+    prefix: '35935'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 0926cf04-640d-48d8-af7e-c9d0b89c83b6
+    country_id: *bg
+    network_id: *bg_pazardzhik_region_region
+  - id: 345936
+    prefix: '35936'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 57742f6f-ec6e-464d-8664-aa7e278f80c4
+    country_id: *bg
+    network_id: *bg_kardzhali_kardzhali_region_haskovo_region_region
+  - id: 355750
+    prefix: '35937'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a4362f19-562c-4c67-8dae-ba267673c5f0
+    country_id: *bg
+    network_id: *bg_haskovo_region_region
+  - id: 347693
+    prefix: '35938'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9d621047-dd08-4924-962b-452ea0484044
+    country_id: *bg
+    network_id: *bg_haskovo_region
+  - id: 357531
+    prefix: '35939'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a77e2d9b-960c-4636-8ec6-ad8ddb19e15b
+    country_id: *bg
+    network_id: *bg_haskovo_region_region
+  - id: 362517
+    prefix: '35941'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3f4b31b5-c9c5-44ec-ab1e-97392c55bbc0
+    country_id: *bg
+    network_id: *bg_stara_zagora_region_region
+  - id: 377171
+    prefix: '35942'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2fb8933e-6458-46d1-83e4-92ffe44162ab
+    country_id: *bg
+    network_id: *bg_stara_zagora_region
+  - id: 368149
+    prefix: '359430'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 619ee214-1a85-4f60-a6a9-80de8ab09de8
+    country_id: *bg
+    network_id: *bg_machine_to_machine_m2m_services
+  - id: 368384
+    prefix: '3594308777'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 343a6c0f-1cf6-4866-9c7d-eb46a9fef4bb
+    country_id: *bg
+    network_id: *bg_vivacom_mobile
+  - id: 368386
+    prefix: '3594308888'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: d8445cfb-ae67-4d67-b4ac-4a927e149bb2
+    country_id: *bg
+    network_id: *bg_a1_mobile
+  - id: 368390
+    prefix: '3594308999'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: 803505c4-2307-40e0-8d65-f7897e755560
+    country_id: *bg
+    network_id: *bg_yettel_mobile
+  - id: 368405
+    prefix: '359431'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: da626d90-e03a-4781-b021-e8e3a35c394b
+    country_id: *bg
+    network_id: *bg_stara_zagora_region_region
+  - id: 379797
+    prefix: '359432'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: a4010ec3-0cdd-4a63-ac5d-7c3472725f64
+    country_id: *bg
+    network_id: *bg_stara_zagora_region_region
+  - id: 380260
+    prefix: '359433'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 3193ee7d-818e-4236-8d70-7d2306fd7471
+    country_id: *bg
+    network_id: *bg_stara_zagora_region_region
+  - id: 368483
+    prefix: '359434'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5a8355a3-fa87-48aa-ac0b-a00da9751aa3
+    country_id: *bg
+    network_id: *bg_stara_zagora_region_region
+  - id: 369350
+    prefix: '359435'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7f474ee9-e158-4ea6-b282-9996521ea7bd
+    country_id: *bg
+    network_id: *bg_stara_zagora_region_region
+  - id: 380669
+    prefix: '359436'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4148dca5-fa33-4adb-93e8-f0fb486081d2
+    country_id: *bg
+    network_id: *bg_stara_zagora_region_region
+  - id: 380919
+    prefix: '359437'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6e7e8271-f807-40be-acde-120e1feb5f40
+    country_id: *bg
+    network_id: *bg_mobile
+  - id: 381392
+    prefix: '359438'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b90dfb8e-5d2b-4e83-abf2-f3413156251d
+    country_id: *bg
+    network_id: *bg_mobile
+  - id: 370166
+    prefix: '359439'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bde68dbe-d3c8-4331-aa07-fc2dd9c3a064
+    country_id: *bg
+    network_id: *bg_mobile
+  - id: 370178
+    prefix: '35944'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 93380381-11cc-4660-af1c-39319a71a53d
+    country_id: *bg
+    network_id: *bg_sliven_region
+  - id: 392609
+    prefix: '35945'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc935278-dc44-4206-8125-9e55fafe8e18
+    country_id: *bg
+    network_id: *bg_sliven_region_region
+  - id: 388623
+    prefix: '35946'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 728485d1-07b5-432b-b1cc-eebafaf9c8ad
+    country_id: *bg
+    network_id: *bg_yambol_region
+  - id: 399473
+    prefix: '35947'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: d32cf658-7e9f-4c9f-a29c-568aee4c8747
+    country_id: *bg
+    network_id: *bg_yambol_region_haskovo_region_region
   - id: 62596
     prefix: '35951'
     number_min_length: 11
@@ -279,13 +542,6 @@ network_prefixes:
     uuid: 4af3b56a-4dee-4dc2-914b-94bbcfd181b6
     country_id: *bg
     network_id: *bg_varna_region
-  - id: 73191
-    prefix: '35954'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 774df07f-2cee-493b-8954-ecea7c943446
-    country_id: *bg
-    network_id: *bg_shumen_region
   - id: 76534
     prefix: '35953'
     number_min_length: 11
@@ -293,18 +549,18 @@ network_prefixes:
     uuid: cefbf463-d19f-4c5a-a4e2-a88653e1ff49
     country_id: *bg
     network_id: *bg_shumen_region_region
+  - id: 73191
+    prefix: '35954'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 774df07f-2cee-493b-8954-ecea7c943446
+    country_id: *bg
+    network_id: *bg_shumen_region
   - id: 78110
     prefix: '35955'
     number_min_length: 11
     number_max_length: 11
     uuid: e0b77e35-de99-4a11-b165-698c9077dffd
-    country_id: *bg
-    network_id: *bg_burgas_region_region
-  - id: 84407
-    prefix: '35959'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: f75cce04-924e-44b3-89e3-b80a1c7ace4e
     country_id: *bg
     network_id: *bg_burgas_region_region
   - id: 87907
@@ -328,6 +584,13 @@ network_prefixes:
     uuid: d82c807c-9717-4aa2-87e0-3ad44b457135
     country_id: *bg
     network_id: *bg_dobrich_region
+  - id: 84407
+    prefix: '35959'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f75cce04-924e-44b3-89e3-b80a1c7ace4e
+    country_id: *bg
+    network_id: *bg_burgas_region_region
   - id: 95206
     prefix: '35960'
     number_min_length: 11
@@ -377,6 +640,13 @@ network_prefixes:
     uuid: 3d965409-4695-4650-94d6-b5d4c83cf01d
     country_id: *bg
     network_id: *bg_gabrovo_region
+  - id: 151415
+    prefix: '35967'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5286d85f-410d-421e-96ed-6da85b0788a6
+    country_id: *bg
+    network_id: *bg_gabrovo_region_lovech_region_region
   - id: 146811
     prefix: '35968'
     number_min_length: 11
@@ -391,6 +661,20 @@ network_prefixes:
     uuid: 38ca6c3e-28a8-4b41-847d-eef9142b5105
     country_id: *bg
     network_id: *bg_lovech_region_region
+  - id: 154400
+    prefix: '359700'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ba53256f-734f-4d6d-8e3d-26b894cad3c9
+    country_id: *bg
+    network_id: *bg_personal_number_services
+  - id: 154411
+    prefix: '359701'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 225c4207-2ca0-4172-8294-030d87601291
+    country_id: *bg
+    network_id: *bg_kyustendil_region_region
   - id: 150698
     prefix: '359702'
     number_min_length: 12
@@ -398,18 +682,11 @@ network_prefixes:
     uuid: 2a2eef6c-d12a-4746-93e7-8e5502a289f2
     country_id: *bg
     network_id: *bg_kyustendil_region_region
-  - id: 151415
-    prefix: '35967'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5286d85f-410d-421e-96ed-6da85b0788a6
-    country_id: *bg
-    network_id: *bg_gabrovo_region_lovech_region_region
-  - id: 154411
-    prefix: '359701'
+  - id: 161116
+    prefix: '359703'
     number_min_length: 12
     number_max_length: 12
-    uuid: 225c4207-2ca0-4172-8294-030d87601291
+    uuid: 04ae9ca2-79c4-412e-9176-7c0c8981fe0b
     country_id: *bg
     network_id: *bg_kyustendil_region_region
   - id: 155488
@@ -426,25 +703,18 @@ network_prefixes:
     uuid: ebeaf0f5-4f4a-439e-b057-fdcac827182d
     country_id: *bg
     network_id: *bg_kyustendil_region_region
-  - id: 156529
-    prefix: '359707'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 30f53391-510d-4e86-b615-0de2c34a19f9
-    country_id: *bg
-    network_id: *bg_kyustendil_region_region
-  - id: 161116
-    prefix: '359703'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 04ae9ca2-79c4-412e-9176-7c0c8981fe0b
-    country_id: *bg
-    network_id: *bg_kyustendil_region_region
   - id: 162176
     prefix: '359706'
     number_min_length: 12
     number_max_length: 12
     uuid: e8046f22-d078-4eda-94e8-c653ab476674
+    country_id: *bg
+    network_id: *bg_kyustendil_region_region
+  - id: 156529
+    prefix: '359707'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 30f53391-510d-4e86-b615-0de2c34a19f9
     country_id: *bg
     network_id: *bg_kyustendil_region_region
   - id: 163981
@@ -489,6 +759,7 @@ network_prefixes:
     uuid: 09bf271a-453a-4514-b6a2-cbec32201fc8
     country_id: *bg
     network_id: *bg_pernik_region
+# Supplementary services Prefixes
   - id: 192082
     prefix: '35977'
     number_min_length: 11
@@ -510,6 +781,112 @@ network_prefixes:
     uuid: 828f3f99-d74a-4b15-8ad3-84a58d8ad1d2
     country_id: *bg
     network_id: *bg_kyustendil_region_region
+  - id: 403462
+    prefix: '359800'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2c8d83e5-f059-4d3a-ba89-17f5b7805eb0
+    country_id: *bg
+    network_id: *bg_freephone_services
+  - id: 413667
+    prefix: '35981'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 585face1-5dbe-4662-84fc-5b5bddfecbbe
+    country_id: *bg
+    network_id: *bg_ruse_region_region
+  - id: 418780
+    prefix: '35982'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b2359224-5018-4051-80de-fc821380e53e
+    country_id: *bg
+    network_id: *bg_ruse_region
+  - id: 433207
+    prefix: '35984'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: dcb148ef-261c-4ba0-82b4-728409907467
+    country_id: *bg
+    network_id: *bg_razgrad_razgrad_region_region
+  - id: 428693
+    prefix: '35986'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fb75a59f-87c3-4d89-aeac-fcc7b8ab8087
+    country_id: *bg
+    network_id: *bg_silistra_silistra_region_region
+  - id: 441100
+    prefix: '35987'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 72dc55d2-6d59-46a5-beb8-b256c816ffa3
+    country_id: *bg
+    network_id: *bg_vivacom_mobile
+  - id: 443782
+    prefix: '35988'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 590ea5b0-1fcd-4896-a0d9-d6b8c139c109
+    country_id: *bg
+    network_id: *bg_a1_mobile
+  - id: 451400
+    prefix: '35989'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 7bd7e4a4-51ab-4229-9180-45791c6708eb
+    country_id: *bg
+    network_id: *bg_yettel_mobile
+  - id: 454117
+    prefix: '359900'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 893dd519-2b6b-4cf2-b2f3-8f0d81c667a7
+    country_id: *bg
+    network_id: *bg_premium_rate_services
+  - id: 454229
+    prefix: '359901'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 8388eb97-ee6b-4fb4-bd20-a2d2c6578f94
+    country_id: *bg
+    network_id: *bg_premium_rate_services
+  - id: 454379
+    prefix: '359902'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: da1959ef-de49-4dd2-93c4-28c763c0bca0
+    country_id: *bg
+    network_id: *bg_premium_rate_services
+# Mobile Prefixes
+  - id: 445504
+    prefix: '359903'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 9f5bd52e-50c3-4c41-8500-59ac75098283
+    country_id: *bg
+    network_id: *bg_premium_rate_services
+  - id: 458138
+    prefix: '35991'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fc7b7da7-8df4-48a4-8029-4b9cebe29389
+    country_id: *bg
+    network_id: *bg_vratsa_region_region
+  - id: 468940
+    prefix: '35992'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6b8ccda9-1531-4a25-a438-8630b248a08b
+    country_id: *bg
+    network_id: *bg_vratsa_region
+  - id: 485422
+    prefix: '35993'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 237626e8-5a36-4f67-93ac-7c64da52e123
+    country_id: *bg
+    network_id: *bg_vidin_region_region
   - id: 212499
     prefix: '35994'
     number_min_length: 11
@@ -538,316 +915,13 @@ network_prefixes:
     uuid: 290e33b2-aa71-425a-bfd9-8903668fb059
     country_id: *bg
     network_id: *bg_montana_region_vratsa_region_region
-  - id: 261182
-    prefix: '3592'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 1990054c-6517-4d21-b19c-0e6ab77cdd4e
-    country_id: *bg
-    network_id: *bg_sofia_region
-  - id: 309461
-    prefix: '35930'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: e28d9dd0-c42d-499a-a884-d16dc0cbf7be
-    country_id: *bg
-    network_id: *bg_smolyan_smolyan_region_plovdiv_region_region
-  - id: 321159
-    prefix: '35931'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: eb866855-6a95-4028-8cbd-c0f25dd68133
-    country_id: *bg
-    network_id: *bg_plovdiv_region_region
-  - id: 327264
-    prefix: '35932'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 187d91cb-bb23-46ba-a80d-f36f531bad2f
-    country_id: *bg
-    network_id: *bg_plovdiv_region
-  - id: 337269
-    prefix: '35933'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d3b9ded9-76f3-4578-9e59-b57c9145f80d
-    country_id: *bg
-    network_id: *bg_plovdiv_region_region
-  - id: 340462
-    prefix: '35934'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3abc6ec5-ad5f-475d-9a1d-6b00d83c2e3b
-    country_id: *bg
-    network_id: *bg_pazardzhik_region
-  - id: 345936
-    prefix: '35936'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 57742f6f-ec6e-464d-8664-aa7e278f80c4
-    country_id: *bg
-    network_id: *bg_kardzhali_kardzhali_region_haskovo_region_region
-  - id: 347693
-    prefix: '35938'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9d621047-dd08-4924-962b-452ea0484044
-    country_id: *bg
-    network_id: *bg_haskovo_region
-  - id: 352227
-    prefix: '35935'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 0926cf04-640d-48d8-af7e-c9d0b89c83b6
-    country_id: *bg
-    network_id: *bg_pazardzhik_region_region
-  - id: 355750
-    prefix: '35937'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a4362f19-562c-4c67-8dae-ba267673c5f0
-    country_id: *bg
-    network_id: *bg_haskovo_region_region
-  - id: 357531
-    prefix: '35939'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a77e2d9b-960c-4636-8ec6-ad8ddb19e15b
-    country_id: *bg
-    network_id: *bg_haskovo_region_region
-  - id: 362517
-    prefix: '35941'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3f4b31b5-c9c5-44ec-ab1e-97392c55bbc0
-    country_id: *bg
-    network_id: *bg_stara_zagora_region_region
-  - id: 368405
-    prefix: '359431'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: da626d90-e03a-4781-b021-e8e3a35c394b
-    country_id: *bg
-    network_id: *bg_stara_zagora_region_region
-  - id: 368483
-    prefix: '359434'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 5a8355a3-fa87-48aa-ac0b-a00da9751aa3
-    country_id: *bg
-    network_id: *bg_stara_zagora_region_region
-  - id: 369350
-    prefix: '359435'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 7f474ee9-e158-4ea6-b282-9996521ea7bd
-    country_id: *bg
-    network_id: *bg_stara_zagora_region_region
-  - id: 370178
-    prefix: '35944'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 93380381-11cc-4660-af1c-39319a71a53d
-    country_id: *bg
-    network_id: *bg_sliven_region
-  - id: 377171
-    prefix: '35942'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2fb8933e-6458-46d1-83e4-92ffe44162ab
-    country_id: *bg
-    network_id: *bg_stara_zagora_region
-  - id: 379797
-    prefix: '359432'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: a4010ec3-0cdd-4a63-ac5d-7c3472725f64
-    country_id: *bg
-    network_id: *bg_stara_zagora_region_region
-  - id: 380260
-    prefix: '359433'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 3193ee7d-818e-4236-8d70-7d2306fd7471
-    country_id: *bg
-    network_id: *bg_stara_zagora_region_region
-  - id: 380669
-    prefix: '359436'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 4148dca5-fa33-4adb-93e8-f0fb486081d2
-    country_id: *bg
-    network_id: *bg_stara_zagora_region_region
-  - id: 388623
-    prefix: '35946'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 728485d1-07b5-432b-b1cc-eebafaf9c8ad
-    country_id: *bg
-    network_id: *bg_yambol_region
-  - id: 392609
-    prefix: '35945'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fc935278-dc44-4206-8125-9e55fafe8e18
-    country_id: *bg
-    network_id: *bg_sliven_region_region
-  - id: 399473
-    prefix: '35947'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: d32cf658-7e9f-4c9f-a29c-568aee4c8747
-    country_id: *bg
-    network_id: *bg_yambol_region_haskovo_region_region
-  - id: 413667
-    prefix: '35981'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 585face1-5dbe-4662-84fc-5b5bddfecbbe
-    country_id: *bg
-    network_id: *bg_ruse_region_region
-  - id: 418780
-    prefix: '35982'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b2359224-5018-4051-80de-fc821380e53e
-    country_id: *bg
-    network_id: *bg_ruse_region
-  - id: 428693
-    prefix: '35986'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fb75a59f-87c3-4d89-aeac-fcc7b8ab8087
-    country_id: *bg
-    network_id: *bg_silistra_silistra_region_region
-  - id: 433207
-    prefix: '35984'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: dcb148ef-261c-4ba0-82b4-728409907467
-    country_id: *bg
-    network_id: *bg_razgrad_razgrad_region_region
-  - id: 458138
-    prefix: '35991'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: fc7b7da7-8df4-48a4-8029-4b9cebe29389
-    country_id: *bg
-    network_id: *bg_vratsa_region_region
-  - id: 468940
-    prefix: '35992'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6b8ccda9-1531-4a25-a438-8630b248a08b
-    country_id: *bg
-    network_id: *bg_vratsa_region
-  - id: 485422
-    prefix: '35993'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 237626e8-5a36-4f67-93ac-7c64da52e123
-    country_id: *bg
-    network_id: *bg_vidin_region_region
-# Supplementary services Prefixes
-  - id: 154400
-    prefix: '359700'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: ba53256f-734f-4d6d-8e3d-26b894cad3c9
-    country_id: *bg
-    network_id: *bg_personal_number_services
-  - id: 241923
-    prefix: '35999'
+  - id: 235041
+    prefix: '359980'
     number_min_length: 12
     number_max_length: 12
-    uuid: fe91e9a7-a6cd-47d4-8121-2e176ad440dc
+    uuid: fa12e596-cf43-4efb-a3ce-f329cc032baa
     country_id: *bg
-    network_id: *bg_broadband_wireless_access_bwa_and_fixed_wireless_access_fwa_networks
-  - id: 242359
-    prefix: '3591'
-    number_min_length: 6
-    number_max_length: 9
-    uuid: 898f8a63-e2e2-4831-a0ea-1c593a9c63d6
-    country_id: *bg
-    network_id: *bg_special_services
-  - id: 242656
-    prefix: '359116'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: b0893db9-8049-484e-a19f-f3e6dd6bbd72
-    country_id: *bg
-    network_id: *bg_social_value_services
-  - id: 242711
-    prefix: '359118'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 902dc5e8-920b-4ff7-b821-81c3976be3d3
-    country_id: *bg
-    network_id: *bg_directory_enquiry_services
-  - id: 242871
-    prefix: '359132'
-    number_min_length: 8
-    number_max_length: 8
-    uuid: 9ed260ae-8f2f-47f6-93e9-d849386c20a7
-    country_id: *bg
-    network_id: *bg_dial_up_internet_access
-  - id: 242874
-    prefix: '359133'
-    number_min_length: 7
-    number_max_length: 7
-    uuid: eda4b0a9-6fa6-4029-a149-9065a488075e
-    country_id: *bg
-    network_id: *bg_dial_up_internet_access
-  - id: 242877
-    prefix: '359134'
-    number_min_length: 9
-    number_max_length: 9
-    uuid: c31899a9-733f-4bd8-b600-0972cd46509b
-    country_id: *bg
-    network_id: *bg_dial_up_internet_access
-  - id: 368149
-    prefix: '359430'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 619ee214-1a85-4f60-a6a9-80de8ab09de8
-    country_id: *bg
-    network_id: *bg_machine_to_machine_m2m_services
-  - id: 403462
-    prefix: '359800'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 2c8d83e5-f059-4d3a-ba89-17f5b7805eb0
-    country_id: *bg
-    network_id: *bg_freephone_services
-  - id: 445504
-    prefix: '359903'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 9f5bd52e-50c3-4c41-8500-59ac75098283
-    country_id: *bg
-    network_id: *bg_premium_rate_services
-  - id: 454117
-    prefix: '359900'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 893dd519-2b6b-4cf2-b2f3-8f0d81c667a7
-    country_id: *bg
-    network_id: *bg_premium_rate_services
-  - id: 454229
-    prefix: '359901'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 8388eb97-ee6b-4fb4-bd20-a2d2c6578f94
-    country_id: *bg
-    network_id: *bg_premium_rate_services
-  - id: 454379
-    prefix: '359902'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: da1959ef-de49-4dd2-93c4-28c763c0bca0
-    country_id: *bg
-    network_id: *bg_premium_rate_services
-# Mobile Prefixes
+    network_id: *bg_mobile
   - id: 232897
     prefix: '359981'
     number_min_length: 12
@@ -860,13 +934,6 @@ network_prefixes:
     number_min_length: 12
     number_max_length: 12
     uuid: c94be830-6e1a-4cb3-9c00-39dc5a1c9183
-    country_id: *bg
-    network_id: *bg_mobile
-  - id: 235041
-    prefix: '359980'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: fa12e596-cf43-4efb-a3ce-f329cc032baa
     country_id: *bg
     network_id: *bg_mobile
   - id: 235715
@@ -904,13 +971,6 @@ network_prefixes:
     uuid: c5c6ea6a-c2f9-476a-9e61-999b6633d170
     country_id: *bg
     network_id: *bg_mobile
-  - id: 238093
-    prefix: '359989'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 0ac137d9-25d5-46e3-8857-479f5a952118
-    country_id: *bg
-    network_id: *bg_a1_mobile
   - id: 238277
     prefix: '359988'
     number_min_length: 12
@@ -918,6 +978,20 @@ network_prefixes:
     uuid: f18ebe7b-83b3-42ed-9cfe-9f6650ca02b8
     country_id: *bg
     network_id: *bg_a1_mobile
+  - id: 238093
+    prefix: '359989'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0ac137d9-25d5-46e3-8857-479f5a952118
+    country_id: *bg
+    network_id: *bg_a1_mobile
+  - id: 241923
+    prefix: '35999'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fe91e9a7-a6cd-47d4-8121-2e176ad440dc
+    country_id: *bg
+    network_id: *bg_broadband_wireless_access_bwa_and_fixed_wireless_access_fwa_networks
   - id: 241136
     prefix: '359996'
     number_min_length: 12
@@ -932,74 +1006,3 @@ network_prefixes:
     uuid: f0487dce-61e2-4257-9900-8548a71896a8
     country_id: *bg
     network_id: *bg_mobile
-  - id: 368384
-    prefix: '3594308777'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 343a6c0f-1cf6-4866-9c7d-eb46a9fef4bb
-    country_id: *bg
-    network_id: *bg_vivacom_mobile
-  - id: 368386
-    prefix: '3594308888'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: d8445cfb-ae67-4d67-b4ac-4a927e149bb2
-    country_id: *bg
-    network_id: *bg_a1_mobile
-  - id: 368390
-    prefix: '3594308999'
-    number_min_length: 15
-    number_max_length: 15
-    uuid: 803505c4-2307-40e0-8d65-f7897e755560
-    country_id: *bg
-    network_id: *bg_yettel_mobile
-  - id: 370166
-    prefix: '359439'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: bde68dbe-d3c8-4331-aa07-fc2dd9c3a064
-    country_id: *bg
-    network_id: *bg_mobile
-  - id: 380919
-    prefix: '359437'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: 6e7e8271-f807-40be-acde-120e1feb5f40
-    country_id: *bg
-    network_id: *bg_mobile
-  - id: 381392
-    prefix: '359438'
-    number_min_length: 11
-    number_max_length: 11
-    uuid: b90dfb8e-5d2b-4e83-abf2-f3413156251d
-    country_id: *bg
-    network_id: *bg_mobile
-  - id: 441100
-    prefix: '35987'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 72dc55d2-6d59-46a5-beb8-b256c816ffa3
-    country_id: *bg
-    network_id: *bg_vivacom_mobile
-  - id: 443782
-    prefix: '35988'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 590ea5b0-1fcd-4896-a0d9-d6b8c139c109
-    country_id: *bg
-    network_id: *bg_a1_mobile
-  - id: 451400
-    prefix: '35989'
-    number_min_length: 12
-    number_max_length: 12
-    uuid: 7bd7e4a4-51ab-4229-9180-45791c6708eb
-    country_id: *bg
-    network_id: *bg_yettel_mobile
-# Country code Prefixes
-  - id: 241954
-    prefix: '359'
-    number_min_length: 4
-    number_max_length: 100
-    uuid: ab5c4934-0c1b-4c82-ba01-f066743dc35c
-    country_id: *bg
-    network_id: null
