@@ -191,7 +191,7 @@ Rails.application.routes.draw do
             jsonapi_resources :countries, only: %i[index show]
             jsonapi_resources :services, only: %i[index show]
             jsonapi_resources :transactions, only: %i[index show]
-            jsonapi_resource :phone_systems_sessions, only: %i[create]
+            jsonapi_resources :phone_systems_sessions, only: %i[create]
           end
         end
 
