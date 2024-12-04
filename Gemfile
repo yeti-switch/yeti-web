@@ -67,7 +67,7 @@ gem 'jquery-rails'
 gem 'jquery-tablesorter'
 gem 'jquery-ui-rails', github: 'jquery-ui-rails/jquery-ui-rails', tag: 'v7.0.0'
 gem 'mini_racer'
-gem 'rails-html-sanitizer', '~> 1.0'
+gem 'rails-html-sanitizer', '>= 1.6.1'
 gem 'sass-globbing'
 gem 'uglifier', '>= 1.3'
 

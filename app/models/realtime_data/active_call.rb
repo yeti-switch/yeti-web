@@ -33,6 +33,8 @@ class RealtimeData::ActiveCall < YetiResource
   attribute :src_prefix_out
   attribute :diversion_in
   attribute :diversion_out
+  attribute :src_country_id, :integer
+  attribute :src_network_id, :integer
   attribute :dst_country_id, :integer
   attribute :dst_network_id, :integer
   attribute :customer_id, :integer
@@ -44,6 +46,7 @@ class RealtimeData::ActiveCall < YetiResource
   attribute :dialpeer_id, :integer
   attribute :orig_gw_id, :integer
   attribute :term_gw_id, :integer
+  attribute :routing_plan_id, :integer
   attribute :routing_group_id, :integer
   attribute :rateplan_id, :integer
   attribute :destination_initial_rate
@@ -81,7 +84,10 @@ class RealtimeData::ActiveCall < YetiResource
   has_one :orig_gw, class_name: 'Gateway', foreign_key: :orig_gw_id
   has_one :term_gw, class_name: 'Gateway', foreign_key: :term_gw_id
   has_one :routing_group, class_name: 'Routing::RoutingGroup', foreign_key: :routing_group_id
+  has_one :routing_plan, class_name: 'Routing::RoutingPlan', foreign_key: :routing_plan_id
   has_one :rateplan, class_name: 'Routing::Rateplan', foreign_key: :rateplan_id
+  has_one :src_country, class_name: 'System::Country', foreign_key: :src_country_id
+  has_one :src_network, class_name: 'System::Network', foreign_key: :src_network_id
   has_one :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id
   has_one :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id
   has_one :node, class_name: 'Node', foreign_key: :node_id
