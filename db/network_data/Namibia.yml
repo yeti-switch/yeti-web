@@ -1,0 +1,280 @@
+country_id: &na 147
+networks:
+# Fixed Networks
+  - id: &na_katima_mulilo_rundu_region 43552
+    name: NA Katima Mulilo Rundu Region
+    uuid: 788d2d2f-48cc-45fb-a233-4836d2529005
+    type_id: 2
+  - id: &na_satellite 43553
+    name: NA Satellite
+    uuid: 8aa1af70-83c1-4b37-a681-cbc59a1f046f
+    type_id: 15
+  - id: &na_maltahohe_namgorab_region 43554
+    name: NA Maltahohe Namgorab Region
+    uuid: 1cbac934-d915-4b82-925e-a4499a996b21
+    type_id: 2
+  - id: &na_kalahariplaas_region 43555
+    name: NA Kalahariplaas Region
+    uuid: 17701861-07e1-48a9-83b2-23e192f0b8df
+    type_id: 2
+  - id: &na_omuthiya_otjiwarongo_region 43556
+    name: NA Omuthiya Otjiwarongo Region
+    uuid: 7c3fd6e9-9377-4dda-8138-dd6d98e46812
+    type_id: 2
+  - id: &na_freephone_services 43557
+    name: NA Freephone Services
+    uuid: f1cb1570-a904-4fb8-b977-d88362df219f
+    type_id: 13
+  - id: &na_premium_rate_services 43558
+    name: NA Premium Rate Services
+    uuid: 0d1bda84-2b5a-45bd-b3f2-36db28a568f2
+    type_id: 13
+  - id: &na_machine_to_machine_m2m_services 43559
+    name: NA Machine To Machine M2M Services
+    uuid: 1d4fc424-2069-46a1-aab4-944eda3d3093
+    type_id: 13
+  - id: &na_virtual_telephony_services 43566
+    name: NA Virtual Telephony Services
+    uuid: d54be883-355c-40ce-9edb-d6ccced6eb56
+    type_id: 13
+  - id: &na_fixed 43611
+    name: NA Fixed
+    uuid: 84d96933-045f-4b2a-a6f1-c694ab38d357
+    type_id: 2
+  - id: &na_special_services 43613
+    name: NA Special Services
+    uuid: 33d610df-7d6d-4e7b-b8f5-7b68831db247
+    type_id: 13
+# Satellite Networks
+  - id: &na_emergency_services 43629
+    name: NA Emergency Services
+    uuid: 4d95ca6b-f5be-4440-873e-299247da1154
+    type_id: 13
+# Supplementary services Networks
+  - id: &na_g4s_security_services 43636
+    name: NA G4S Security Services
+    uuid: f3835935-1ab2-4475-89ce-ddcfc819f3e9
+    type_id: 13
+  - id: &na_tn_mobile_mobile 43645
+    name: NA Tn Mobile Mobile
+    uuid: b9985768-6237-4660-884f-01ae86a055d2
+    type_id: 3
+  - id: &na_windhoek_region 43646
+    name: NA Windhoek Region
+    uuid: c7ecff9a-85c2-4ed0-93ce-0171cb5f0e40
+    type_id: 2
+  - id: &na_gobabis_region 43647
+    name: NA Gobabis Region
+    uuid: 695bfabb-deba-46dc-8bcf-cc94684315d6
+    type_id: 2
+  - id: &na_keetmanshoop_region 43648
+    name: NA Keetmanshoop Region
+    uuid: aa600275-2198-4a7e-8909-304c2b2e1231
+    type_id: 2
+  - id: &na_helmeringhausen_region 43649
+    name: NA Helmeringhausen Region
+    uuid: 65b7f38e-cd0c-4ad6-9e2a-4d16709d220e
+    type_id: 2
+  - id: &na_mariental__swakopmund_region 43650
+    name: NA Mariental  Swakopmund Region
+    uuid: a4dbabda-8a75-4d0f-b319-56ef00abee3a
+    type_id: 2
+# Mobile Networks
+  - id: &na_eenhana_oshakati_outapi_region 43651
+    name: NA Eenhana Oshakati Outapi Region
+    uuid: f9b23fe0-4040-4def-9b92-3cfa6b054ae0
+    type_id: 2
+network_prefixes:
+# Fixed Prefixes
+  - id: 535345
+    prefix: '264'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 0d516db1-0795-4364-b23d-dd057d53cfd8
+    country_id: *na
+    network_id: *na_fixed
+  - id: 535348
+    prefix: '2641'
+    number_min_length: 6
+    number_max_length: 9
+    uuid: 03763495-1b48-4105-9b53-36c7c369072d
+    country_id: *na
+    network_id: *na_special_services
+  - id: 535519
+    prefix: '26460'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: abfad662-a8be-4b4b-96de-a97f81375c1d
+    country_id: *na
+    network_id: *na_tn_mobile_mobile
+  - id: 535520
+    prefix: '26461'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: c4bdd9fb-ba3f-40fc-906d-c56c6e38cd78
+    country_id: *na
+    network_id: *na_windhoek_region
+  - id: 535521
+    prefix: '26461691'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 720075dd-9158-4cc7-8f5b-744d9e169238
+    country_id: *na
+    network_id: *na_satellite
+  - id: 535523
+    prefix: '26462'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 4b71552b-a92b-4fcc-9ae8-e3029b4ae5f2
+    country_id: *na
+    network_id: *na_gobabis_region
+  - id: 535522
+    prefix: '26462692'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5324e4ed-f0b5-4df5-8628-b3040e9e0b0b
+    country_id: *na
+    network_id: *na_satellite
+  - id: 535524
+    prefix: '26463'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 153dc734-48cf-4270-84e4-05aee1f076b3
+    country_id: *na
+    network_id: *na_keetmanshoop_region
+  - id: 535525
+    prefix: '2646362'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: cf2fe2fe-593a-4319-99fa-9462a9c47eec
+    country_id: *na
+    network_id: *na_helmeringhausen_region
+  - id: 535529
+    prefix: '26463693'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: fb07b671-db43-4b08-aa6f-dfda185b06f3
+    country_id: *na
+    network_id: *na_satellite
+  - id: 535526
+    prefix: '264638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 2fcf8832-a51d-438f-9bfa-d3d86b6c730d
+    country_id: *na
+    network_id: *na_keetmanshoop_region
+  - id: 535527
+    prefix: '26464'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 1aff9fc4-ed2d-4b50-9842-9a7c7815e627
+    country_id: *na
+    network_id: *na_mariental__swakopmund_region
+# Satellite Prefixes
+  - id: 535530
+    prefix: '26464694'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: f2824599-c4aa-465b-9e08-2d5d8cd9b7e2
+    country_id: *na
+    network_id: *na_satellite
+  - id: 535531
+    prefix: '26465'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 418d6efd-83d8-46a0-9645-daa4e420fa1b
+    country_id: *na
+    network_id: *na_eenhana_oshakati_outapi_region
+  - id: 535528
+    prefix: '26465695'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: e29dc446-80ad-4a51-a2b7-6558d03a14e7
+    country_id: *na
+    network_id: *na_satellite
+  - id: 519198
+    prefix: '26466'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: e2cc3c33-4172-42ef-bbab-7d320cf9fb2a
+    country_id: *na
+    network_id: *na_katima_mulilo_rundu_region
+  - id: 519200
+    prefix: '2646638'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 7d60a143-1855-4a09-81a2-62a0d8ffb20d
+    country_id: *na
+    network_id: *na_maltahohe_namgorab_region
+  - id: 519201
+    prefix: '2646642'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 35f9c5cf-5142-42f2-91a6-e560d828a25c
+    country_id: *na
+    network_id: *na_kalahariplaas_region
+  - id: 519199
+    prefix: '26466696'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: b067e846-5f02-420a-aa7c-23a7841ce249
+    country_id: *na
+    network_id: *na_satellite
+# Supplementary services Prefixes
+  - id: 519202
+    prefix: '26467'
+    number_min_length: 11
+    number_max_length: 12
+    uuid: 68d9fe29-9bee-491c-9b4a-1a1ff38a1559
+    country_id: *na
+    network_id: *na_omuthiya_otjiwarongo_region
+  - id: 519203
+    prefix: '26467697'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 6ecdeeef-f1e5-4ce7-859a-f31d048cf4ec
+    country_id: *na
+    network_id: *na_satellite
+  - id: 519204
+    prefix: '26480'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 4a8aa040-d84d-47cb-81bf-08278add69b7
+    country_id: *na
+    network_id: *na_freephone_services
+  - id: 519205
+    prefix: '264870'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 74f30e63-d491-49e7-a350-78390752c8f7
+    country_id: *na
+    network_id: *na_premium_rate_services
+  - id: 519494
+    prefix: '264886'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: ce197038-bf57-4ddb-bf24-3342f52be386
+    country_id: *na
+    network_id: *na_virtual_telephony_services
+  - id: 519207
+    prefix: '26489'
+    number_min_length: 15
+    number_max_length: 15
+    uuid: a7cbc053-44ed-4415-ae23-94606e454c72
+    country_id: *na
+    network_id: *na_machine_to_machine_m2m_services
+  - id: 535411
+    prefix: '2649'
+    number_min_length: 6
+    number_max_length: 6
+    uuid: 85e7cf7c-f97e-485d-b893-a23517442126
+    country_id: *na
+    network_id: *na_emergency_services
+# Mobile Prefixes
+  - id: 535485
+    prefix: '26493111'
+    number_min_length: 8
+    number_max_length: 8
+    uuid: 9f0c0ed8-f23e-4fb8-9df3-ae5d925f515d
+    country_id: *na
+    network_id: *na_g4s_security_services
