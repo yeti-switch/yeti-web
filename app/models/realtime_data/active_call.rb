@@ -33,6 +33,8 @@ class RealtimeData::ActiveCall < YetiResource
   attribute :src_prefix_out
   attribute :diversion_in
   attribute :diversion_out
+  attribute :src_country_id, :integer
+  attribute :src_network_id, :integer
   attribute :dst_country_id, :integer
   attribute :dst_network_id, :integer
   attribute :customer_id, :integer
@@ -44,6 +46,7 @@ class RealtimeData::ActiveCall < YetiResource
   attribute :dialpeer_id, :integer
   attribute :orig_gw_id, :integer
   attribute :term_gw_id, :integer
+  attribute :routing_plan_id, :integer
   attribute :routing_group_id, :integer
   attribute :rateplan_id, :integer
   attribute :destination_initial_rate

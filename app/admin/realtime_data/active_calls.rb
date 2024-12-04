@@ -164,15 +164,20 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
       row :connect_time
       row :duration
       row :time_limit
+
+      row :src_prefix_in
+      row :src_prefix_routing
+      row :src_prefix_out
+
       row :dst_prefix_in
       row :dst_prefix_routing
       row :lrn
       row :dst_prefix_out
-      row :src_prefix_in
-      row :src_prefix_routing
-      row :src_prefix_out
+
       row :diversion_in
       row :diversion_out
+      row :src_country, &:src_country_link
+      row :src_network, &:src_network_link
       row :dst_country, &:dst_country_link
       row :dst_network, &:dst_network_link
       row :customer, &:customer_link
@@ -180,12 +185,17 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
       row :customer_acc, &:customer_acc_link
       row :vendor_acc, &:vendor_acc_link
       row :customer_auth, &:customer_auth_link
-      row :destination, &:destination_link
-      row :dialpeer, &:dialpeer_link
+
       row :orig_gw, &:orig_gw_link
       row :term_gw, &:term_gw_link
-      row :routing_group, &:routing_group_link
+
       row :rateplan, &:rateplan_link
+      row :destination, &:destination_link
+
+      row :routing_plan, &:routing_plan_link
+      row :routing_group, &:routing_group_link
+      row :dialpeer, &:dialpeer_link
+
       row :destination_initial_rate
       row :destination_next_rate
       row :destination_initial_interval
@@ -237,15 +247,20 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     column :connect_time
     column :duration
     column :time_limit
+
+    column :src_prefix_in
+    column :src_prefix_routing
+    column :src_prefix_out
+
     column :dst_prefix_in
     column :dst_prefix_routing
     column :lrn
     column :dst_prefix_out
-    column :src_prefix_in
-    column :src_prefix_routing
-    column :src_prefix_out
+
     column :diversion_in
     column :diversion_out
+    column :src_country, :src_country_link
+    column :src_network, :src_network_link
     column :dst_country, :dst_country_link
     column :dst_network, :dst_network_link
     column :customer, :customer_link
@@ -253,12 +268,17 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     column :customer_acc, :customer_acc_link
     column :vendor_acc, :vendor_acc_link
     column :customer_auth, :customer_auth_link
-    column :destination, :destination_link
-    column :dialpeer, :dialpeer_link
+
     column :orig_gw, :orig_gw_link
     column :term_gw, :term_gw_link
-    column :routing_group, :routing_group_link
+
     column :rateplan, :rateplan_link
+    column :destination, :destination_link
+
+    column :routing_plan, :routing_plan_link
+    column :routing_group, :routing_group_link
+    column :dialpeer, :dialpeer_link
+
     column :destination_initial_rate
     column :destination_next_rate
     column :destination_initial_interval
