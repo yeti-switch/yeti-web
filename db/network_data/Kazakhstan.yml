@@ -1190,7 +1190,6 @@ networks:
     name: KZ Kulan Satellite
     uuid: 6902428d-5d77-49cc-bd77-f3476c19b42e
     type_id: 15
-# Satellite Networks
   - id: &kz_arna_mobile 18442
     name: KZ Arna Mobile
     uuid: 26c7c248-03e2-439d-aca4-8d7476ff4730
@@ -1199,10 +1198,19 @@ networks:
     name: KZ Premium Rate Services
     uuid: f124f606-ec5d-4cd9-87ad-029d1e918030
     type_id: 13
-# Supplementary services Networks
+# Satellite Networks
   - id: &kz_transtelecom_jsc_corporate_network_region 19682
     name: KZ Transtelecom Jsc Corporate Network Region
     uuid: 34d10e34-95f6-4cbd-892c-a5926959864b
+    type_id: 2
+  - id: &kz__region 43694
+    name: KZ  Region
+    uuid: 00d107dc-4059-4118-9f46-799d136c5f34
+    type_id: 2
+# Supplementary services Networks
+  - id: &kz_overlay_networks_region 43695
+    name: KZ Overlay Networks Region
+    uuid: f166ab38-8668-40bb-8742-c812c51fe3de
     type_id: 2
 network_prefixes:
 # Mobile Prefixes
@@ -1255,6 +1263,13 @@ network_prefixes:
     uuid: c3c4191d-0e3f-4763-8da6-ccc98532d587
     country_id: *kz
     network_id: *kz_altel_tele2_mobile
+  - id: 550753
+    prefix: '771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5528b5a9-3f76-4087-9ec2-6f5c6300ea48
+    country_id: *kz
+    network_id: *kz__region
   - id: 157851
     prefix: '7710'
     number_min_length: 11
@@ -1297,6 +1312,7 @@ network_prefixes:
     uuid: 51b02071-f53c-42cc-a2d1-2c54cbdaaead
     country_id: *kz
     network_id: *kz_agadyr_region
+# Fixed Prefixes
   - id: 157857
     prefix: '771034'
     number_min_length: 11
@@ -1304,7 +1320,6 @@ network_prefixes:
     uuid: 70526e4e-70d5-4411-bdf0-efacfcaf1ff7
     country_id: *kz
     network_id: *kz_zhezdy_region
-# Fixed Prefixes
   - id: 157858
     prefix: '771035'
     number_min_length: 11
@@ -2425,6 +2440,13 @@ network_prefixes:
     uuid: 2f581201-5153-42fa-b480-9fbf22ed1e7b
     country_id: *kz
     network_id: *kz_ekibastuz_region
+  - id: 550754
+    prefix: '772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 412d2c28-d9a1-48be-83f8-0a3eb7a20acb
+    country_id: *kz
+    network_id: *kz__region
   - id: 169520
     prefix: '7721'
     number_min_length: 11
@@ -3489,6 +3511,13 @@ network_prefixes:
     uuid: f2b7f32a-fb69-4902-b574-78423cc2f933
     country_id: *kz
     network_id: *kz_kulan_satellite
+  - id: 550755
+    prefix: '7762'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: bdd306b0-f4d5-47bd-9194-120347512c56
+    country_id: *kz
+    network_id: *kz_overlay_networks_region
   - id: 191132
     prefix: '7763'
     number_min_length: 11
@@ -3496,6 +3525,13 @@ network_prefixes:
     uuid: 3cea2de2-569b-4e04-a41f-06d5eafb4888
     country_id: *kz
     network_id: *kz_arna_mobile
+  - id: 550756
+    prefix: '7764'
+    number_min_length: 11
+    number_max_length: 11
+    uuid: 5d9bbf8b-ffdf-443f-b676-797319bf59e3
+    country_id: *kz
+    network_id: *kz_overlay_networks_region
   - id: 193386
     prefix: '7771'
     number_min_length: 11
