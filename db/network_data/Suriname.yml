@@ -150,6 +150,15 @@ networks:
     name: SR Fixed
     uuid: b027f0c6-9e5c-4061-ad15-6961c072a3fb
     type_id: 2
+# Mobile Networks
+  - id: &sr_digicel_mobile 43625
+    name: SR Digicel Mobile
+    uuid: 8dd9f7b9-c0ba-4fa5-a15f-be54ba7a060e
+    type_id: 3
+  - id: &sr_teleg_mobile 43626
+    name: SR Teleg Mobile
+    uuid: c99441fb-ed71-42aa-b2a7-61b136a21b73
+    type_id: 3
 network_prefixes:
 # Fixed Prefixes
   - id: 242106
@@ -615,6 +624,77 @@ network_prefixes:
     uuid: 383dfeb4-3b8b-4f5e-9b1b-dc8e7a6e82f3
     country_id: *sr
     network_id: *sr_wireless_local_loop_region
+  - id: 535401
+    prefix: '59771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: b6bcd539-6256-4674-a65f-e785375492e0
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535402
+    prefix: '59772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 866bdd51-4d53-4a7e-a6e0-fd9c806b0d61
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+# Mobile Prefixes
+  - id: 535403
+    prefix: '59774'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: f6c58d14-00a0-41dd-a58f-9e6e4da4ea53
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535404
+    prefix: '59775'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 8c8e4205-da95-4360-a11a-28eedc6f2ba3
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535459
+    prefix: '59776'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a3adcf6e-db08-4efd-a9a3-946123f7522a
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535461
+    prefix: '597770'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: a07c2dd5-56a3-4ed1-af15-69212a3b05aa
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535462
+    prefix: '597771'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e40a3d14-00ba-483c-a7c9-6c93969479ae
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535463
+    prefix: '597772'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: ad8f643f-4fb1-4194-a1db-cc92def9d265
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535464
+    prefix: '597773'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5e924a5d-c06a-4054-84ba-858887083da9
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535465
+    prefix: '597774'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 37b2ab16-93c9-40eb-9be1-3eef08cb93c8
+    country_id: *sr
+    network_id: *sr_teleg_mobile
   - id: 253131
     prefix: '59780'
     number_min_length: 10
@@ -622,6 +702,55 @@ network_prefixes:
     uuid: a2ff8f27-4e23-446e-b093-e4cf12ab8500
     country_id: *sr
     network_id: *sr_freephone_services
+  - id: 535478
+    prefix: '59781'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 5ed22023-74c0-4365-93f2-e7e6e4eea621
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535480
+    prefix: '59782'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: dc06b9bb-a7a4-4e2e-a8e4-2ea1aa80f6be
+    country_id: *sr
+    network_id: *sr_digicel_mobile
+  - id: 535482
+    prefix: '59785'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 403ab4ee-2b8b-4510-9d0e-3d20fd6fc204
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535483
+    prefix: '59786'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 7c390c9a-1031-43ab-8d37-5bf3e7f5b8f1
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535406
+    prefix: '59787'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: e54b1653-83d3-4859-8bc8-b460de6f6841
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535407
+    prefix: '59788'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 2052d1e2-3c7e-4090-865b-c3b91a8cf6ae
+    country_id: *sr
+    network_id: *sr_teleg_mobile
+  - id: 535409
+    prefix: '59789'
+    number_min_length: 10
+    number_max_length: 10
+    uuid: 99fd7b29-c4ea-4baf-b6da-e444dd0d190a
+    country_id: *sr
+    network_id: *sr_teleg_mobile
   - id: 257193
     prefix: '597900'
     number_min_length: 10

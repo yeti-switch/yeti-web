@@ -526,6 +526,23 @@ networks:
     name: BY Fixed
     uuid: 8ec0aa9b-7be3-47e0-9f5f-cbb9427e03c7
     type_id: 2
+# Mobile Networks
+  - id: &by_mobile 43637
+    name: BY Mobile
+    uuid: 4f9d3506-5636-4614-a0c0-b34e13d3a566
+    type_id: 3
+  - id: &by_velcom_a1_mobile 43638
+    name: BY Velcom A1 Mobile
+    uuid: eab42485-a24a-43e5-9df7-dfa5d9184c68
+    type_id: 3
+  - id: &by_mts_mobile 43639
+    name: BY Mts Mobile
+    uuid: ea1e6bc7-9048-4663-b3a7-a6ef301b2d9e
+    type_id: 3
+  - id: &by_life_mobile 43640
+    name: BY Life Mobile
+    uuid: 0538b9b0-7245-4a71-8be7-5aa9923b6d34
+    type_id: 3
 network_prefixes:
 # Supplementary services Prefixes
   - id: 241957
@@ -1383,6 +1400,112 @@ network_prefixes:
     uuid: bd976eef-b94c-47f5-a978-925c8e709703
     country_id: *by
     network_id: *by_data_network_access_services_region
+  - id: 535495
+    prefix: '375255'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fd61d795-6551-44dd-a6a5-a1f70b8afb4b
+    country_id: *by
+    network_id: *by_life_mobile
+  - id: 535496
+    prefix: '375256'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: fb7eb0cc-baa7-4fb5-8b5d-c2e67c48b5d9
+    country_id: *by
+    network_id: *by_life_mobile
+  - id: 535497
+    prefix: '375257'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: ba68edbd-1d67-4532-a343-d27be24425b7
+    country_id: *by
+    network_id: *by_life_mobile
+  - id: 535498
+    prefix: '375259'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a119d481-ab47-446f-a936-eba793710f3b
+    country_id: *by
+    network_id: *by_life_mobile
+  - id: 535486
+    prefix: '37529'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 93445cc7-d2d7-47b9-85d7-71c874d9f020
+    country_id: *by
+    network_id: *by_mobile
+  - id: 535487
+    prefix: '375291'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0253d510-028d-4d73-80e6-a06b4a94bae8
+    country_id: *by
+    network_id: *by_velcom_a1_mobile
+  - id: 535488
+    prefix: '375292'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1fe08794-5ca2-4162-aec8-533530a5bd23
+    country_id: *by
+    network_id: *by_mts_mobile
+  - id: 535489
+    prefix: '375293'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a0eb1123-d064-480a-927e-a801a982c40a
+    country_id: *by
+    network_id: *by_velcom_a1_mobile
+  - id: 535490
+    prefix: '375295'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a846806b-1b33-4d01-bb42-a8e2f4de23e7
+    country_id: *by
+    network_id: *by_mts_mobile
+# Mobile Prefixes
+  - id: 535491
+    prefix: '375296'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 208ff889-989f-4a10-804c-9017729fae21
+    country_id: *by
+    network_id: *by_velcom_a1_mobile
+  - id: 535492
+    prefix: '375297'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 91f0771c-087a-45ea-832b-a70290a19c3f
+    country_id: *by
+    network_id: *by_mts_mobile
+  - id: 535493
+    prefix: '375298'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 0fd66754-139b-4a1b-b445-7ba63031fa0a
+    country_id: *by
+    network_id: *by_mts_mobile
+  - id: 535494
+    prefix: '375299'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 1afc24ec-cdcd-45d8-ba6f-1e96ebdbcc9c
+    country_id: *by
+    network_id: *by_velcom_a1_mobile
+  - id: 535499
+    prefix: '37533'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: a982c037-d302-48e6-a039-d1f9cf403086
+    country_id: *by
+    network_id: *by_mts_mobile
+  - id: 535500
+    prefix: '37544'
+    number_min_length: 12
+    number_max_length: 12
+    uuid: 6a55edb8-71a9-4004-b5db-3313fdca42eb
+    country_id: *by
+    network_id: *by_velcom_a1_mobile
   - id: 96135
     prefix: '375602'
     number_min_length: 12

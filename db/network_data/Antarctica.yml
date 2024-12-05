@@ -1,0 +1,95 @@
+country_id: &aq 8
+networks:
+# Fixed Networks
+  - id: &aq_fixed 43610
+    name: AQ Fixed
+    uuid: 9d5d763e-6eed-4bf8-8fe6-ae7e813b8999
+    type_id: 2
+  - id: &aq_australian_antarctic_territory___davis_region 43614
+    name: AQ Australian Antarctic Territory   Davis Region
+    uuid: 4a9151a4-9145-4a36-98ee-8c455560a5ce
+    type_id: 2
+  - id: &aq_australian_antarctic_territory___mawson_region 43615
+    name: AQ Australian Antarctic Territory   Mawson Region
+    uuid: a437c307-9769-45c6-b7aa-d8f5d9732221
+    type_id: 2
+  - id: &aq_australian_antarctic_territory___casey_region 43617
+    name: AQ Australian Antarctic Territory   Casey Region
+    uuid: ce4e2b98-4925-49e6-8c96-ec0d99d0059b
+    type_id: 2
+  - id: &aq_australian_antarctic_territory___macquarie_island_region 43618
+    name: AQ Australian Antarctic Territory   Macquarie Island Region
+    uuid: 80c69a85-e9bc-496e-b190-111fb71fd2ef
+    type_id: 2
+  - id: &aq_australian_antarctic_territory___research_vessels_region 43619
+    name: AQ Australian Antarctic Territory   Research Vessels Region
+    uuid: 0887a379-d24e-46e9-b2e3-76be1f137b66
+    type_id: 2
+  - id: &aq_nt_mobile 43622
+    name: AQ Nt Mobile
+    uuid: 5a16caeb-8815-469f-9e00-a56918a5f2f8
+    type_id: 3
+# Mobile Networks
+  - id: &aq_norfolk_island_region 43631
+    name: AQ Norfolk Island Region
+    uuid: 823bfdca-1875-4d66-ad2e-a5e2022e69a6
+    type_id: 2
+network_prefixes:
+# Fixed Prefixes
+  - id: 535341
+    prefix: '672'
+    number_min_length: 4
+    number_max_length: 100
+    uuid: 8ced96f5-9d3d-48d4-8e15-061833e4713b
+    country_id: *aq
+    network_id: *aq_fixed
+  - id: 535349
+    prefix: '67210'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: ca08952a-e6c8-44e4-a2e5-56aa761ccbf6
+    country_id: *aq
+    network_id: *aq_australian_antarctic_territory___davis_region
+  - id: 535350
+    prefix: '67211'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: c0582317-0fa3-4638-9854-8fcc77a5606e
+    country_id: *aq
+    network_id: *aq_australian_antarctic_territory___mawson_region
+  - id: 535360
+    prefix: '67212'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 276eddf4-e0a3-4d5e-b6db-475a2927e38d
+    country_id: *aq
+    network_id: *aq_australian_antarctic_territory___casey_region
+  - id: 535361
+    prefix: '67213'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: 35b881a5-53fd-4df6-b10c-bee4bed63fb0
+    country_id: *aq
+    network_id: *aq_australian_antarctic_territory___macquarie_island_region
+  - id: 535362
+    prefix: '67214'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: e55b120d-702d-4767-98b5-eb139aac5143
+    country_id: *aq
+    network_id: *aq_australian_antarctic_territory___research_vessels_region
+  - id: 535449
+    prefix: '6723'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: f25748d1-09e7-4f09-9f11-e6e38767d9fc
+    country_id: *aq
+    network_id: *aq_norfolk_island_region
+# Mobile Prefixes
+  - id: 535391
+    prefix: '67235'
+    number_min_length: 9
+    number_max_length: 9
+    uuid: d297c5f3-4f46-47b3-936e-cb05c8e63903
+    country_id: *aq
+    network_id: *aq_nt_mobile
