@@ -16,6 +16,9 @@ class Api::Rest::Customer::V1::OriginationActiveCallsController < Api::RestContr
     begin
       rows = statistic.collection
       render json: rows, status: 200
+    rescue ClickhouseReport::OriginationActiveCalls::FromDateTimeInFutureError => e
+      Rails.logger.error { "<#{e.class}>: #{e.message}" }
+      render json: [], status: 200
     rescue ClickhouseReport::Base::ParamError => e
       Rails.logger.error { "Bad Request <#{e.class}>: #{e.message}" }
       render json: { error: e.message }, status: 400
