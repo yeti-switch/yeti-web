@@ -36,6 +36,14 @@ class Api::Rest::Admin::ServiceResource < ::BaseResource
     _model.type_id = value
   end
 
+  def renew_period=(value)
+    _model.renew_period_id = Billing::Service::RENEW_PERIODS.key(value) || -1
+  end
+
+  def replace_model_error_keys
+    { type: :service_type }
+  end
+
   def self.sortable_fields(_ctx = nil)
     %i[id name initial_price renew_price created_at renew_at renew_period]
   end

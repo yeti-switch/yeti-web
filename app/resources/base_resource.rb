@@ -6,6 +6,15 @@ class BaseResource < JSONAPI::Resource
   class_attribute :create_form_class_name, instance_writer: false
   class_attribute :update_form_class_name, instance_writer: false
 
+  def model_error_messages
+    super.transform_keys { |key| replace_model_error_keys.fetch(key, key) }
+  end
+
+  # @return [Hash] hash with model errors keys to replace: { old_key: new_key }
+  def replace_model_error_keys
+    {}
+  end
+
   def self.save_form(class_name)
     create_form(class_name)
     update_form(class_name)
