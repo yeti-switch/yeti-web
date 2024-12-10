@@ -68,7 +68,7 @@ module Jobs
         if return_value.success?
           logger.info { "Partition remove hook succeed, exit code: #{return_value.exitstatus}" }
         else
-          logger.info { "Partition remove hook failed: #{return_value.exitstatus}. Stopping removing procedure" }
+          logger.error { "Partition remove hook failed: #{return_value.exitstatus}. Stopping removing procedure" }
           collect_prometheus_errors_metric!
           return
         end
