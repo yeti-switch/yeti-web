@@ -77,6 +77,23 @@ jobs:
           PKG_TAG: ${{github.ref}}
         run: v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};ci/deploy.sh bookworm $major_version main ../*.deb
 
+      - name: Setup deb-s3
+        run: gem install deb-s3
+
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+        
+      - name: Upload package
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.DEB_AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.DEB_AWS_SECRET_ACCESS_KEY}}
+          AWS_ENDPOINT_URL: ${{secrets.DEB_AWS_ENDPOINT}}
+          PKG_TAG: ${{github.ref}}
+        run:  v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};deb-s3 upload --bucket=${{secrets.DEB_AWS_BUCKET}} --prefix=$major_version --codename=bookworm --component=main --visibility=nil --force-path-style --sign=B104E10C35895CFAC0F91473C8D3BC80B6F22179 --gpg-options "\-\-pinentry-mode=loopback \-\-no-tty \-\-batch \-\-yes \-\-passphrase ${{ secrets.GPG_PASSPHRASE }}" ../*.deb
+        
 
   deb12_container:
     name: Debian 12 release container
