@@ -36,11 +36,6 @@ jobs:
           name: deb12-package
           path: /__w/yeti-web/*.deb
 
-      - name: Upload package to ${{github.ref}} repo
-        env:
-          PKG_API_BASE: ${{secrets.PKG_API_BASE}}
-        run: ci/deploy.sh bookworm nightly main ../*.deb
-
       - name: Setup deb-s3
         run: gem install deb-s3
 
