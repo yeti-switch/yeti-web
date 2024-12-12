@@ -20,7 +20,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: install gems
         run: make gems-test
       - name: install gems for pgq
@@ -34,7 +34,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
   lint:
     name: Rubocop and bundle audit
@@ -52,7 +52,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Rubocop and bundle audit
         run: make lint
 
@@ -75,7 +75,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Check the consistency of the database constraints with the application validations
         continue-on-error: true
         run: make database_consistency
@@ -111,7 +111,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: brakeman
         continue-on-error: true
         run: make brakeman
@@ -136,7 +136,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Run test-pgq-processors
         run: make test-pgq-processors
         env:
@@ -176,7 +176,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
       - name: Run rspec
         run: make rspec
@@ -218,7 +218,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Download Coverage Outputs
         uses: actions/download-artifact@v4
         with:
