@@ -8,10 +8,10 @@ RUN	apt-get update && \
 	apt-get -y dist-upgrade && \
 	apt-get -y --no-install-recommends install curl gnupg ca-certificates
 
-RUN	curl https://pkg.yeti-switch.org/key.gpg | apt-key add - && \
-	curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| apt-key add - && \
-	echo "deb http://pkg.yeti-switch.org/debian/bookworm 1.12 main" >> /etc/apt/sources.list && \
-	echo "deb http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main" >> /etc/apt/sources.list
+RUN	wget https://deb.yeti-switch.org/debian/yeti.gpg -O /etc/apt/trusted.gpg.d/yeti-key.asc && \
+	wget https://www.postgresql.org/media/keys/ACCC4CF8.asc -O /etc/apt/trusted.gpg.d/pgdg-key.asc && \
+	echo "deb https://deb.yeti-switch.org/debian/1.13 bookworm main" >> /etc/apt/sources.list && \
+	echo "deb https://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main" >> /etc/apt/sources.list
 
 RUN 	apt-get update && \
 	apt-get -y --no-install-recommends install \
