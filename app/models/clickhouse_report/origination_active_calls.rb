@@ -2,8 +2,6 @@
 
 module ClickhouseReport
   class OriginationActiveCalls < Base
-    FromDateTimeInFutureError = Class.new(ParamError)
-
     filter 'account-id',
            column: :customer_acc_id,
            type: 'UInt32',
