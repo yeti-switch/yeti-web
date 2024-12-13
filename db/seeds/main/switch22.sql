@@ -23,18 +23,6 @@ INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUE
 INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (7, 'Account total capacity', 1512, 1);
 
 
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (2, 'Diversion', 'varchar', 2, 'uri_user', false, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (1, 'X-YETI-AUTH', 'varchar', 1, NULL, true, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (3, 'X-ORIG-IP', 'varchar', 3, NULL, true, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (4, 'X-ORIG-PORT', 'integer', 4, NULL, true, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (5, 'X-ORIG-PROTO', 'integer', 5, NULL, true, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (6, 'P-Asserted-Identity', 'varchar', 6, NULL, true, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (9, 'Remote-Party-ID', 'varchar', 9, NULL, true, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (10, 'RPID-Privacy', 'varchar', 10, NULL, true, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (8, 'P-Preferred-Identity', 'varchar', 7, NULL, true, NULL);
-INSERT INTO switch22.switch_interface_in (id, name, type, rank, format, hashkey, param) VALUES (7, 'Privacy', 'varchar', 8, NULL, true, NULL);
-
-
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (890, 'src_number_radius', 'varchar', false, 1050, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (891, 'dst_number_radius', 'varchar', false, 1051, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (892, 'orig_gw_name', 'varchar', false, 1052, true);
@@ -252,8 +240,6 @@ INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_rad
 SELECT pg_catalog.setval('switch22.events_id_seq', 280, true);
 
 SELECT pg_catalog.setval('switch22.resource_type_id_seq', 6, true);
-
-SELECT pg_catalog.setval('switch22.switch_in_interface_id_seq', 10, true);
 
 SELECT pg_catalog.setval('switch22.switch_interface_id_seq', 1034, true);
 

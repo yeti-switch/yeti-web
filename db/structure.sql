@@ -31465,31 +31465,6 @@ $$;
 
 
 --
--- Name: load_codecs(); Type: FUNCTION; Schema: switch22; Owner: -
---
-
-CREATE FUNCTION switch22.load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
-    LANGUAGE plpgsql COST 10
-    AS $$
-BEGIN
-
-  -- TODO: this function replaced by load_codec_groups and should be deleted in future
-  RETURN
-  QUERY SELECT
-          cgc.id,
-          cgc.codec_group_id,
-          c.name ,
-          cgc.priority,
-          cgc.dynamic_payload_type,
-          cgc.format_parameters
-        from class4.codec_group_codecs cgc
-          JOIN class4.codecs c ON c.id=cgc.codec_id
-        order by cgc.codec_group_id,cgc.priority desc ,c.name;
-END;
-$$;
-
-
---
 -- Name: load_disconnect_code_namespace(); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
@@ -44422,18 +44397,6 @@ ALTER SEQUENCE switch22.resource_type_id_seq OWNED BY switch22.resource_type.id;
 
 
 --
--- Name: switch_in_interface_id_seq; Type: SEQUENCE; Schema: switch22; Owner: -
---
-
-CREATE SEQUENCE switch22.switch_in_interface_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
 -- Name: switch_interface_out; Type: TABLE; Schema: switch22; Owner: -
 --
 
@@ -44464,21 +44427,6 @@ CREATE SEQUENCE switch22.switch_interface_id_seq
 --
 
 ALTER SEQUENCE switch22.switch_interface_id_seq OWNED BY switch22.switch_interface_out.id;
-
-
---
--- Name: switch_interface_in; Type: TABLE; Schema: switch22; Owner: -
---
-
-CREATE TABLE switch22.switch_interface_in (
-    id integer DEFAULT nextval('switch22.switch_in_interface_id_seq'::regclass) NOT NULL,
-    name character varying,
-    type character varying,
-    rank integer NOT NULL,
-    format character varying,
-    hashkey boolean DEFAULT false NOT NULL,
-    param character varying
-);
 
 
 --
@@ -47756,22 +47704,6 @@ ALTER TABLE ONLY switch22.resource_type
 
 ALTER TABLE ONLY switch22.resource_type
     ADD CONSTRAINT resource_type_pkey PRIMARY KEY (id);
-
-
---
--- Name: switch_interface_in switch_in_interface_pkey; Type: CONSTRAINT; Schema: switch22; Owner: -
---
-
-ALTER TABLE ONLY switch22.switch_interface_in
-    ADD CONSTRAINT switch_in_interface_pkey PRIMARY KEY (id);
-
-
---
--- Name: switch_interface_in switch_in_interface_rank_key; Type: CONSTRAINT; Schema: switch22; Owner: -
---
-
-ALTER TABLE ONLY switch22.switch_interface_in
-    ADD CONSTRAINT switch_in_interface_rank_key UNIQUE (rank);
 
 
 --

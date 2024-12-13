@@ -472,26 +472,6 @@ END;
 $$;
 
 
-CREATE FUNCTION switch22.load_codecs() RETURNS TABLE(o_id integer, o_codec_group_id integer, o_codec_name character varying, o_priority integer, o_dynamic_payload_id integer, o_format_params character varying)
-    LANGUAGE plpgsql COST 10
-    AS $$
-BEGIN
-
-  -- TODO: this function replaced by load_codec_groups and should be deleted in future
-  RETURN
-  QUERY SELECT
-          cgc.id,
-          cgc.codec_group_id,
-          c.name ,
-          cgc.priority,
-          cgc.dynamic_payload_type,
-          cgc.format_parameters
-        from class4.codec_group_codecs cgc
-          JOIN class4.codecs c ON c.id=cgc.codec_id
-        order by cgc.codec_group_id,cgc.priority desc ,c.name;
-END;
-$$;
-
 CREATE FUNCTION switch22.load_disconnect_code_namespace() RETURNS SETOF class4.disconnect_code_namespace
     LANGUAGE plpgsql COST 10
     AS $$
@@ -8553,16 +8533,6 @@ CREATE SEQUENCE switch22.resource_type_id_seq
 ALTER SEQUENCE switch22.resource_type_id_seq OWNED BY switch22.resource_type.id;
 
 
-
-CREATE SEQUENCE switch22.switch_in_interface_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-
 CREATE TABLE switch22.switch_interface_out (
     id integer NOT NULL,
     name character varying,
@@ -8583,18 +8553,6 @@ CREATE SEQUENCE switch22.switch_interface_id_seq
 
 
 ALTER SEQUENCE switch22.switch_interface_id_seq OWNED BY switch22.switch_interface_out.id;
-
-
-CREATE TABLE switch22.switch_interface_in (
-    id integer DEFAULT nextval('switch22.switch_in_interface_id_seq'::regclass) NOT NULL,
-    name character varying,
-    type character varying,
-    rank integer NOT NULL,
-    format character varying,
-    hashkey boolean DEFAULT false NOT NULL,
-    param character varying
-);
-
 
 
 ALTER TABLE ONLY switch22.resource_type ALTER COLUMN id SET DEFAULT nextval('switch22.resource_type_id_seq'::regclass);
@@ -8839,10 +8797,6 @@ SELECT pg_catalog.setval('switch22.resource_type_id_seq', 6, true);
 
 
 
-SELECT pg_catalog.setval('switch22.switch_in_interface_id_seq', 10, true);
-
-
-
 SELECT pg_catalog.setval('switch22.switch_interface_id_seq', 1034, true);
 
 
@@ -8862,14 +8816,6 @@ ALTER TABLE ONLY switch22.resource_type
 
 ALTER TABLE ONLY switch22.resource_type
     ADD CONSTRAINT resource_type_pkey PRIMARY KEY (id);
-
-
-ALTER TABLE ONLY switch22.switch_interface_in
-    ADD CONSTRAINT switch_in_interface_pkey PRIMARY KEY (id);
-
-
-ALTER TABLE ONLY switch22.switch_interface_in
-    ADD CONSTRAINT switch_in_interface_rank_key UNIQUE (rank);
 
 
 ALTER TABLE ONLY switch22.switch_interface_out
