@@ -1611,8 +1611,6 @@ CREATE TYPE switch22.callprofile_ty AS (
 	src_prefix_out character varying,
 	src_name_in character varying,
 	src_name_out character varying,
-	diversion_in character varying,
-	diversion_out character varying,
 	auth_orig_protocol_id smallint,
 	auth_orig_ip inet,
 	auth_orig_port integer,
@@ -1631,16 +1629,6 @@ CREATE TYPE switch22.callprofile_ty AS (
 	src_area_id integer,
 	dst_area_id integer,
 	routing_tag_ids smallint[],
-	pai_in character varying,
-	ppi_in character varying,
-	privacy_in character varying,
-	rpid_in character varying,
-	rpid_privacy_in character varying,
-	pai_out character varying,
-	ppi_out character varying,
-	privacy_out character varying,
-	rpid_out character varying,
-	rpid_privacy_out character varying,
 	customer_acc_check_balance boolean,
 	destination_reverse_billing boolean,
 	dialpeer_reverse_billing boolean,
@@ -1779,6 +1767,22 @@ CREATE TYPE switch22.lua_call_context AS (
 	diversion_in character varying[],
 	diversion_routing character varying[],
 	diversion_out character varying[]
+);
+
+
+--
+-- Name: uri_ty; Type: TYPE; Schema: switch22; Owner: -
+--
+
+CREATE TYPE switch22.uri_ty AS (
+	s character varying,
+	n character varying,
+	u character varying,
+	h character varying,
+	p integer,
+	np json,
+	uh json,
+	up json
 );
 
 
@@ -31263,6 +31267,23 @@ $$;
 
 
 --
+-- Name: build_uri(boolean, switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
+--
+
+CREATE FUNCTION switch22.build_uri(i_canonical boolean, i_data switch22.uri_ty) RETURNS character varying
+    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10
+    AS $$
+DECLARE
+  v_domainport varchar;
+  v_username varchar;
+  v_uri varchar;
+BEGIN
+  return switch22.build_uri(i_canonical, i_data.s, i_data.n, i_data.u, '{}'::varchar[], i_data.h, i_data.p, '{}'::varchar[]);
+END;
+$$;
+
+
+--
 -- Name: build_uri(boolean, character varying, character varying, character varying, character varying[], character varying, integer, character varying[]); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
@@ -31292,7 +31313,10 @@ BEGIN
   if i_canonical then
     v_uri = i_schema||':'||v_uri;
   else
-    v_uri = COALESCE(i_display_name||' ','')||'<'||i_schema||':'||v_uri||'>';
+    v_uri = '<'||i_schema||':'||v_uri||'>';
+    IF i_display_name is not null and i_display_name!='' THEN
+      v_uri = '"'||i_display_name||'" '||v_uri;
+    END IF;
   end if;
 
   return v_uri;
@@ -32191,10 +32215,10 @@ $$;
 
 
 --
--- Name: process_dp(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_dp(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_dp(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.process_dp(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -32350,10 +32374,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_dp_debug(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_dp_debug(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.process_dp_debug(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -32463,10 +32487,10 @@ $$;
 
 
 --
--- Name: process_dp_release(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_dp_release(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_dp_release(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.process_dp_release(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -32555,10 +32579,10 @@ $$;
 
 
 --
--- Name: process_gw(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_gw(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_gw(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch22.callprofile_ty
+CREATE FUNCTION switch22.process_gw(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -32573,11 +32597,9 @@ DECLARE
   v_termination_numberlist_size integer;
   v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
   v_bleg_append_headers_req varchar[] not null default ARRAY[]::varchar[];
-  v_diversion varchar[] not null default ARRAY[]::varchar[];
-  v_diversion_header varchar;
-  v_diversion_out varchar[] not null default ARRAY[]::varchar[];
-  v_pai_out varchar[] not null default ARRAY[]::varchar[];
-  v_pai varchar;
+  v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+  v_diversion_header switch22.uri_ty;
+  v_pai switch22.uri_ty;
   v_allow_pai boolean:=true;
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
@@ -32953,36 +32975,26 @@ BEGIN
 
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
-    v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
-
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
-      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+      FOREACH v_diversion_header IN ARRAY i_diversion LOOP
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
         v_bleg_append_headers_req = array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
-        );
-        v_diversion_out = array_append(
-          v_diversion_out,
-          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+          format('Diversion: <sip:%s@%s>', v_diversion_header.u, i_vendor_gw.diversion_domain)::varchar
         );
       END LOOP;
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
-      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+      FOREACH v_diversion_header IN ARRAY i_diversion LOOP
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <tel:%s>', v_diversion_header)::varchar
-        );
-        v_diversion_out = array_append(
-          v_diversion_out,
-          format('<tel:%s>', v_diversion_header)::varchar
+          format('Diversion: <tel:%s>', v_diversion_header.u)::varchar
         );
       END LOOP;
     END IF;
 
-    /* Field for CDR */
-    i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
   CASE i_vendor_gw.privacy_mode_id
@@ -33021,7 +33033,6 @@ BEGIN
         /*}dbg*/
         v_allow_pai = false;
       END IF;
-      i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
     WHEN 4 THEN
       /*dbg{*/
@@ -33029,7 +33040,6 @@ BEGIN
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
       IF cardinality(i_privacy)>0 THEN
-        i_profile.privacy_out = array_to_string(i_privacy,';');
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
       END IF;
     WHEN 5 THEN
@@ -33041,7 +33051,6 @@ BEGIN
         i_profile.src_prefix_out='anonymous';
         i_profile.src_name_out='Anonymous';
         v_from_domain = 'anonymous.invalid';
-        i_profile.privacy_out = array_to_string(i_privacy,';');
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
       END IF;
   END CASE;
@@ -33050,27 +33059,21 @@ BEGIN
     -- only if privacy mode allows to send PAI
     IF i_vendor_gw.pai_send_mode_id = 1 THEN
       -- TEL URI
-      v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
       -- SIP URL
-      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 4 THEN
       -- relay
       FOREACH v_pai IN ARRAY i_pai LOOP
-        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
       END LOOP;
-      v_pai_out = i_pai;
-      IF i_ppi is not null and i_ppi!='' THEN
-        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
-        i_profile.ppi_out = i_ppi;
+      IF i_ppi.u is not null THEN
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
       END IF;
     END IF;
-    i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
@@ -33337,10 +33340,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_gw_debug(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_gw_debug(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch22.callprofile_ty
+CREATE FUNCTION switch22.process_gw_debug(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -33355,11 +33358,9 @@ DECLARE
   v_termination_numberlist_size integer;
   v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
   v_bleg_append_headers_req varchar[] not null default ARRAY[]::varchar[];
-  v_diversion varchar[] not null default ARRAY[]::varchar[];
-  v_diversion_header varchar;
-  v_diversion_out varchar[] not null default ARRAY[]::varchar[];
-  v_pai_out varchar[] not null default ARRAY[]::varchar[];
-  v_pai varchar;
+  v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+  v_diversion_header switch22.uri_ty;
+  v_pai switch22.uri_ty;
   v_allow_pai boolean:=true;
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
@@ -33735,36 +33736,26 @@ BEGIN
 
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
-    v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
-
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
-      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+      FOREACH v_diversion_header IN ARRAY i_diversion LOOP
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
         v_bleg_append_headers_req = array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
-        );
-        v_diversion_out = array_append(
-          v_diversion_out,
-          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+          format('Diversion: <sip:%s@%s>', v_diversion_header.u, i_vendor_gw.diversion_domain)::varchar
         );
       END LOOP;
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
-      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+      FOREACH v_diversion_header IN ARRAY i_diversion LOOP
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <tel:%s>', v_diversion_header)::varchar
-        );
-        v_diversion_out = array_append(
-          v_diversion_out,
-          format('<tel:%s>', v_diversion_header)::varchar
+          format('Diversion: <tel:%s>', v_diversion_header.u)::varchar
         );
       END LOOP;
     END IF;
 
-    /* Field for CDR */
-    i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
   CASE i_vendor_gw.privacy_mode_id
@@ -33803,7 +33794,6 @@ BEGIN
         /*}dbg*/
         v_allow_pai = false;
       END IF;
-      i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
     WHEN 4 THEN
       /*dbg{*/
@@ -33811,7 +33801,6 @@ BEGIN
       RAISE NOTICE '% ms -> GW Privacy % requested, privacy_mode_is %. forwarding.',EXTRACT(MILLISECOND from v_end-v_start), i_privacy, i_vendor_gw.privacy_mode_id;
       /*}dbg*/
       IF cardinality(i_privacy)>0 THEN
-        i_profile.privacy_out = array_to_string(i_privacy,';');
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
       END IF;
     WHEN 5 THEN
@@ -33823,7 +33812,6 @@ BEGIN
         i_profile.src_prefix_out='anonymous';
         i_profile.src_name_out='Anonymous';
         v_from_domain = 'anonymous.invalid';
-        i_profile.privacy_out = array_to_string(i_privacy,';');
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
       END IF;
   END CASE;
@@ -33832,27 +33820,21 @@ BEGIN
     -- only if privacy mode allows to send PAI
     IF i_vendor_gw.pai_send_mode_id = 1 THEN
       -- TEL URI
-      v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
       -- SIP URL
-      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 4 THEN
       -- relay
       FOREACH v_pai IN ARRAY i_pai LOOP
-        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
       END LOOP;
-      v_pai_out = i_pai;
-      IF i_ppi is not null and i_ppi!='' THEN
-        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
-        i_profile.ppi_out = i_ppi;
+      IF i_ppi.u is not null THEN
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
       END IF;
     END IF;
-    i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
@@ -34119,10 +34101,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, character varying[], character varying[], character varying[], character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_gw_release(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_gw_release(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion character varying[], i_privacy character varying[], i_pai character varying[], i_ppi character varying) RETURNS switch22.callprofile_ty
+CREATE FUNCTION switch22.process_gw_release(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -34137,11 +34119,9 @@ DECLARE
   v_termination_numberlist_size integer;
   v_aleg_append_headers_reply varchar[] not null default ARRAY[]::varchar[];
   v_bleg_append_headers_req varchar[] not null default ARRAY[]::varchar[];
-  v_diversion varchar[] not null default ARRAY[]::varchar[];
-  v_diversion_header varchar;
-  v_diversion_out varchar[] not null default ARRAY[]::varchar[];
-  v_pai_out varchar[] not null default ARRAY[]::varchar[];
-  v_pai varchar;
+  v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+  v_diversion_header switch22.uri_ty;
+  v_pai switch22.uri_ty;
   v_allow_pai boolean:=true;
   v_to_uri_params varchar[] not null default ARRAY[]::varchar[];
   v_from_uri_params varchar[] not null default ARRAY[]::varchar[];
@@ -34458,36 +34438,26 @@ BEGIN
 
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
-    v_diversion = yeti_ext.regexp_replace_rand(i_diversion, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
-
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
       /* Diversion as SIP URI */
-      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+      FOREACH v_diversion_header IN ARRAY i_diversion LOOP
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
         v_bleg_append_headers_req = array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
-        );
-        v_diversion_out = array_append(
-          v_diversion_out,
-          format('<sip:%s@%s>', v_diversion_header, i_vendor_gw.diversion_domain)::varchar
+          format('Diversion: <sip:%s@%s>', v_diversion_header.u, i_vendor_gw.diversion_domain)::varchar
         );
       END LOOP;
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
-      FOREACH v_diversion_header IN ARRAY v_diversion LOOP
+      FOREACH v_diversion_header IN ARRAY i_diversion LOOP
+        v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <tel:%s>', v_diversion_header)::varchar
-        );
-        v_diversion_out = array_append(
-          v_diversion_out,
-          format('<tel:%s>', v_diversion_header)::varchar
+          format('Diversion: <tel:%s>', v_diversion_header.u)::varchar
         );
       END LOOP;
     END IF;
 
-    /* Field for CDR */
-    i_profile.diversion_out = array_to_string(v_diversion_out, ',');
   END IF;
 
   CASE i_vendor_gw.privacy_mode_id
@@ -34514,12 +34484,10 @@ BEGIN
         
         v_allow_pai = false;
       END IF;
-      i_profile.privacy_out = array_to_string(i_privacy,';');
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
     WHEN 4 THEN
       
       IF cardinality(i_privacy)>0 THEN
-        i_profile.privacy_out = array_to_string(i_privacy,';');
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
       END IF;
     WHEN 5 THEN
@@ -34528,7 +34496,6 @@ BEGIN
         i_profile.src_prefix_out='anonymous';
         i_profile.src_name_out='Anonymous';
         v_from_domain = 'anonymous.invalid';
-        i_profile.privacy_out = array_to_string(i_privacy,';');
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('Privacy: %s', array_to_string(i_privacy,';')::varchar));
       END IF;
   END CASE;
@@ -34537,27 +34504,21 @@ BEGIN
     -- only if privacy mode allows to send PAI
     IF i_vendor_gw.pai_send_mode_id = 1 THEN
       -- TEL URI
-      v_pai_out = array_append(v_pai_out, format('<tel:%s>', i_profile.src_prefix_out)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <tel:%s>', i_profile.src_prefix_out)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 2 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
       -- SIP URL
-      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 3 and i_vendor_gw.pai_domain is not null and i_vendor_gw.pai_domain!='' THEN
-      v_pai_out = array_append(v_pai_out, format('<sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
       v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: <sip:%s@%s;user=phone>', i_profile.src_prefix_out, i_vendor_gw.pai_domain)::varchar);
     ELSIF i_vendor_gw.pai_send_mode_id = 4 THEN
       -- relay
       FOREACH v_pai IN ARRAY i_pai LOOP
-        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', v_pai)::varchar);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
       END LOOP;
-      v_pai_out = i_pai;
-      IF i_ppi is not null and i_ppi!='' THEN
-        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', i_ppi)::varchar);
-        i_profile.ppi_out = i_ppi;
+      IF i_ppi.u is not null THEN
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
       END IF;
     END IF;
-    i_profile.pai_out = NULLIF(array_to_string(v_pai_out, ','),'');
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
@@ -34842,10 +34803,10 @@ $$;
 
 
 --
--- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: route(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, json, inet, integer, smallint, json, json, character varying, json, character varying); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_interface character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_interface character varying, i_x_yeti_auth character varying, i_diversion json, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai json, i_ppi json, i_privacy character varying, i_rpid json, i_rpid_privacy character varying) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $_$
       DECLARE
@@ -34896,10 +34857,12 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_lua_context switch22.lua_call_context;
         v_identity_data switch22.identity_data_ty[];
         v_identity_record switch22.identity_data_ty;
-        v_pai varchar[];
-        v_ppi varchar;
+        v_pai switch22.uri_ty[];
+        v_ppi switch22.uri_ty;
         v_privacy varchar[];
-        v_diversion varchar[] not null default ARRAY[]::varchar[];
+        v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_diversion_tmp switch22.uri_ty[];
+        v_diversion_header switch22.uri_ty;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch22.cnam_lua_resp;
@@ -34936,8 +34899,6 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_now:=now();
         v_ret:=switch22.new_profile();
 
-        v_ret.diversion_in:=i_diversion;
-
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
         v_ret.auth_orig_port = v_remote_port;
@@ -34951,19 +34912,16 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.dst_prefix_in:=i_uri_name;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
-
         v_ret.ruri_domain=i_uri_domain;
         v_ret.from_domain=i_from_domain;
         v_ret.to_domain=i_to_domain;
 
-        v_ret.pai_in=i_pai;
-        v_pai=string_to_array(COALESCE(i_pai,''),',');
-        v_ret.ppi_in=i_ppi;
-        v_ppi=i_ppi;
-        v_ret.privacy_in=i_privacy;
+        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d;
+        v_pai = COALESCE(v_pai, ARRAY[]::switch22.uri_ty[]);
+
+        v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
+
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
-        v_ret.rpid_in=i_rpid;
-        v_ret.rpid_privacy_in=i_rpid_privacy;
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -35126,22 +35084,27 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
+        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d;
+        v_diversion_tmp = COALESCE(v_diversion_tmp, ARRAY[]::switch22.uri_ty[]);
+
         IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
           v_ret.dst_prefix_in:=i_uri_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
           v_ret.dst_prefix_in:=i_to_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
-          v_ret.dst_prefix_in:=COALESCE(i_diversion,'');
+          v_ret.dst_prefix_in:=COALESCE(v_diversion_tmp[1].u,'');
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
         IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
-          v_diversion = string_to_array(COALESCE(i_diversion,''),',');
-          v_diversion = yeti_ext.regexp_replace_rand(
-            v_diversion,
-            v_customer_auth_normalized.diversion_rewrite_rule,
-            v_customer_auth_normalized.diversion_rewrite_result
-          );
+          FOREACH v_diversion_header IN ARRAY v_diversion_tmp LOOP
+            v_diversion_header.u = yeti_ext.regexp_replace_rand(
+              v_diversion_header.u,
+              v_customer_auth_normalized.diversion_rewrite_rule,
+              v_customer_auth_normalized.diversion_rewrite_result
+            );
+            v_diversion = array_append(v_diversion, v_diversion_header);
+          END LOOP;
         END IF;
 
         -- feel customer data ;-)
@@ -35184,7 +35147,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RETURN;
               END IF;
             WHEN 4 THEN
-              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null ) THEN
                 v_ret.disconnect_code_id = 8015;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -35405,8 +35368,6 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
             v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
             v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
-            v_ret.pai_out = coalesce(v_cnam_lua_resp.pai,v_ret.pai_out);
-            v_ret.ppi_out = coalesce(v_cnam_lua_resp.ppi,v_ret.ppi_out);
             v_call_tags = coalesce(v_cnam_lua_resp.routing_tag_ids,v_call_tags);
           end if;
 
@@ -35507,12 +35468,12 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
 
-          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1] is not null then
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1].u is not null then
             /*dbg{*/
             v_end:=clock_timestamp();
             RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, fallback to %', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[1];
             /*}dbg*/
-            v_numberlist_item=switch22.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1]);
+            v_numberlist_item=switch22.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1].u);
           else
             /*dbg{*/
             v_end:=clock_timestamp();
@@ -36482,10 +36443,10 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
 
 --
--- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: route_debug(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, json, inet, integer, smallint, json, json, character varying, json, character varying); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_interface character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_interface character varying, i_x_yeti_auth character varying, i_diversion json, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai json, i_ppi json, i_privacy character varying, i_rpid json, i_rpid_privacy character varying) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $_$
       DECLARE
@@ -36536,10 +36497,12 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_lua_context switch22.lua_call_context;
         v_identity_data switch22.identity_data_ty[];
         v_identity_record switch22.identity_data_ty;
-        v_pai varchar[];
-        v_ppi varchar;
+        v_pai switch22.uri_ty[];
+        v_ppi switch22.uri_ty;
         v_privacy varchar[];
-        v_diversion varchar[] not null default ARRAY[]::varchar[];
+        v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_diversion_tmp switch22.uri_ty[];
+        v_diversion_header switch22.uri_ty;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch22.cnam_lua_resp;
@@ -36576,8 +36539,6 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_now:=now();
         v_ret:=switch22.new_profile();
 
-        v_ret.diversion_in:=i_diversion;
-
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
         v_ret.auth_orig_port = v_remote_port;
@@ -36591,19 +36552,16 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.dst_prefix_in:=i_uri_name;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
-
         v_ret.ruri_domain=i_uri_domain;
         v_ret.from_domain=i_from_domain;
         v_ret.to_domain=i_to_domain;
 
-        v_ret.pai_in=i_pai;
-        v_pai=string_to_array(COALESCE(i_pai,''),',');
-        v_ret.ppi_in=i_ppi;
-        v_ppi=i_ppi;
-        v_ret.privacy_in=i_privacy;
+        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d;
+        v_pai = COALESCE(v_pai, ARRAY[]::switch22.uri_ty[]);
+
+        v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
+
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
-        v_ret.rpid_in=i_rpid;
-        v_ret.rpid_privacy_in=i_rpid_privacy;
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -36766,22 +36724,27 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
+        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d;
+        v_diversion_tmp = COALESCE(v_diversion_tmp, ARRAY[]::switch22.uri_ty[]);
+
         IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
           v_ret.dst_prefix_in:=i_uri_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
           v_ret.dst_prefix_in:=i_to_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
-          v_ret.dst_prefix_in:=COALESCE(i_diversion,'');
+          v_ret.dst_prefix_in:=COALESCE(v_diversion_tmp[1].u,'');
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
         IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
-          v_diversion = string_to_array(COALESCE(i_diversion,''),',');
-          v_diversion = yeti_ext.regexp_replace_rand(
-            v_diversion,
-            v_customer_auth_normalized.diversion_rewrite_rule,
-            v_customer_auth_normalized.diversion_rewrite_result
-          );
+          FOREACH v_diversion_header IN ARRAY v_diversion_tmp LOOP
+            v_diversion_header.u = yeti_ext.regexp_replace_rand(
+              v_diversion_header.u,
+              v_customer_auth_normalized.diversion_rewrite_rule,
+              v_customer_auth_normalized.diversion_rewrite_result
+            );
+            v_diversion = array_append(v_diversion, v_diversion_header);
+          END LOOP;
         END IF;
 
         -- feel customer data ;-)
@@ -36824,7 +36787,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RETURN;
               END IF;
             WHEN 4 THEN
-              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null ) THEN
                 v_ret.disconnect_code_id = 8015;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -37045,8 +37008,6 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
             v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
             v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
-            v_ret.pai_out = coalesce(v_cnam_lua_resp.pai,v_ret.pai_out);
-            v_ret.ppi_out = coalesce(v_cnam_lua_resp.ppi,v_ret.ppi_out);
             v_call_tags = coalesce(v_cnam_lua_resp.routing_tag_ids,v_call_tags);
           end if;
 
@@ -37147,12 +37108,12 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
 
-          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1] is not null then
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1].u is not null then
             /*dbg{*/
             v_end:=clock_timestamp();
             RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, fallback to %', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[1];
             /*}dbg*/
-            v_numberlist_item=switch22.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1]);
+            v_numberlist_item=switch22.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1].u);
           else
             /*dbg{*/
             v_end:=clock_timestamp();
@@ -38122,10 +38083,10 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
 
 --
--- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, character varying, inet, integer, smallint, character varying, character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: route_release(integer, integer, smallint, inet, integer, inet, integer, character varying, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, character varying, character varying, integer, json, character varying, character varying, json, inet, integer, smallint, json, json, character varying, json, character varying); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_interface character varying, i_x_yeti_auth character varying, i_diversion character varying, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai character varying, i_ppi character varying, i_privacy character varying, i_rpid character varying, i_rpid_privacy character varying) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_protocol_id smallint, i_remote_ip inet, i_remote_port integer, i_local_ip inet, i_local_port integer, i_from_dsp character varying, i_from_name character varying, i_from_domain character varying, i_from_port integer, i_to_name character varying, i_to_domain character varying, i_to_port integer, i_contact_name character varying, i_contact_domain character varying, i_contact_port integer, i_uri_name character varying, i_uri_domain character varying, i_auth_id integer, i_identity_data json, i_interface character varying, i_x_yeti_auth character varying, i_diversion json, i_x_orig_ip inet, i_x_orig_port integer, i_x_orig_protocol_id smallint, i_pai json, i_ppi json, i_privacy character varying, i_rpid json, i_rpid_privacy character varying) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql SECURITY DEFINER ROWS 10
     AS $_$
       DECLARE
@@ -38173,10 +38134,12 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_lua_context switch22.lua_call_context;
         v_identity_data switch22.identity_data_ty[];
         v_identity_record switch22.identity_data_ty;
-        v_pai varchar[];
-        v_ppi varchar;
+        v_pai switch22.uri_ty[];
+        v_ppi switch22.uri_ty;
         v_privacy varchar[];
-        v_diversion varchar[] not null default ARRAY[]::varchar[];
+        v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_diversion_tmp switch22.uri_ty[];
+        v_diversion_header switch22.uri_ty;
         v_cnam_req_json json;
         v_cnam_resp_json json;
         v_cnam_lua_resp switch22.cnam_lua_resp;
@@ -38209,8 +38172,6 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_now:=now();
         v_ret:=switch22.new_profile();
 
-        v_ret.diversion_in:=i_diversion;
-
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
         v_ret.auth_orig_port = v_remote_port;
@@ -38224,19 +38185,16 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.dst_prefix_in:=i_uri_name;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
-
         v_ret.ruri_domain=i_uri_domain;
         v_ret.from_domain=i_from_domain;
         v_ret.to_domain=i_to_domain;
 
-        v_ret.pai_in=i_pai;
-        v_pai=string_to_array(COALESCE(i_pai,''),',');
-        v_ret.ppi_in=i_ppi;
-        v_ppi=i_ppi;
-        v_ret.privacy_in=i_privacy;
+        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d;
+        v_pai = COALESCE(v_pai, ARRAY[]::switch22.uri_ty[]);
+
+        v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
+
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
-        v_ret.rpid_in=i_rpid;
-        v_ret.rpid_privacy_in=i_rpid_privacy;
 
         
         v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
@@ -38378,22 +38336,27 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
+        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d;
+        v_diversion_tmp = COALESCE(v_diversion_tmp, ARRAY[]::switch22.uri_ty[]);
+
         IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
           v_ret.dst_prefix_in:=i_uri_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=2 THEN /* TO URI userpart */
           v_ret.dst_prefix_in:=i_to_name;
         ELSIF v_customer_auth_normalized.dst_number_field_id=3 THEN /* Top-Most Diversion header userpart */
-          v_ret.dst_prefix_in:=COALESCE(i_diversion,'');
+          v_ret.dst_prefix_in:=COALESCE(v_diversion_tmp[1].u,'');
         END IF;
         v_ret.dst_prefix_out:=v_ret.dst_prefix_in;
 
         IF v_customer_auth_normalized.diversion_policy_id = 2 THEN /* accept diversion */
-          v_diversion = string_to_array(COALESCE(i_diversion,''),',');
-          v_diversion = yeti_ext.regexp_replace_rand(
-            v_diversion,
-            v_customer_auth_normalized.diversion_rewrite_rule,
-            v_customer_auth_normalized.diversion_rewrite_result
-          );
+          FOREACH v_diversion_header IN ARRAY v_diversion_tmp LOOP
+            v_diversion_header.u = yeti_ext.regexp_replace_rand(
+              v_diversion_header.u,
+              v_customer_auth_normalized.diversion_rewrite_rule,
+              v_customer_auth_normalized.diversion_rewrite_result
+            );
+            v_diversion = array_append(v_diversion, v_diversion_header);
+          END LOOP;
         END IF;
 
         -- feel customer data ;-)
@@ -38436,7 +38399,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 RETURN;
               END IF;
             WHEN 4 THEN
-              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null or v_ppi='') THEN
+              IF lower(v_ret.src_prefix_in)='anonymous' AND COALESCE(cardinality(v_pai),0) = 0 AND ( v_ppi is null ) THEN
                 v_ret.disconnect_code_id = 8015;
                 RETURN NEXT v_ret;
                 RETURN;
@@ -38636,8 +38599,6 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             v_ret.src_name_out = coalesce(v_cnam_lua_resp.src_name,v_ret.src_name_out);
             v_ret.src_prefix_out = coalesce(v_cnam_lua_resp.src_number,v_ret.src_prefix_out);
             v_ret.dst_prefix_out = coalesce(v_cnam_lua_resp.dst_number,v_ret.dst_prefix_out);
-            v_ret.pai_out = coalesce(v_cnam_lua_resp.pai,v_ret.pai_out);
-            v_ret.ppi_out = coalesce(v_cnam_lua_resp.ppi,v_ret.ppi_out);
             v_call_tags = coalesce(v_cnam_lua_resp.routing_tag_ids,v_call_tags);
           end if;
 
@@ -38723,9 +38684,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         if v_customer_auth_normalized.src_numberlist_id is not null then
 
-          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1] is not null then
+          if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1].u is not null then
             
-            v_numberlist_item=switch22.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1]);
+            v_numberlist_item=switch22.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1].u);
           else
             
             v_numberlist_item=switch22.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out);
@@ -50088,6 +50049,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241016075439'),
 ('20241017124729'),
 ('20241107212537'),
-('20241213172819');
+('20241213172819'),
+('20241213175248');
 
 
