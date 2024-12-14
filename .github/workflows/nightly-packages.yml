@@ -36,34 +36,6 @@ jobs:
           name: deb12-package
           path: /__w/yeti-web/*.deb
 
-
-
-      
-on: workflow_dispatch
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    container: debian:bookworm
-    steps:
-      - name: install aux deps
-        run: apt update && apt -y --no-install-recommends install git ca-certificates curl gpg
-      - name: add pgdg pkg repo
-        run: >
-          echo "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt bookworm-pgdg main" >> /etc/apt/sources.list.d/pgdg.list &&
-          curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
-      - run: apt update
-
-      - name: clone repo
-        uses: actions/checkout@v3
-
-      - name: override pgversions
-        run: echo 16 > debian/pgversions
-
-      - name: install build deps
-        run: apt -y --no-install-recommends install debhelper python3 postgresql-server-dev-all build-essential
-      - name: build
-        run: make deb
-
       - uses: yeti-switch/upload-debian-pkg-action@v2
         with:
           pkgs: '../*.deb'
