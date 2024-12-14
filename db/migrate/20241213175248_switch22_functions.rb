@@ -2,16 +2,29 @@ class Switch22Functions < ActiveRecord::Migration[7.0]
   def up
     execute %q{
 
- create type switch22.uri_ty as (
-    s varchar,
-    n varchar,
-    u varchar,
-    h varchar,
-    p integer,
-    np json,
-    uh json,
-    up json
-  );
+    alter table class4.customers_auth drop CONSTRAINT "customers_auth_diversion_policy_id_fkey";
+
+    drop table class4.diversion_policy;
+
+    alter table class4.customers_auth add pai_policy_id smallint not null default 1; -- accept by default
+    alter table class4.customers_auth_normalized add pai_policy_id smallint not null default 1; -- accept by default
+
+    alter table class4.customers_auth alter column diversion_policy_id type smallint;
+    alter table class4.customers_auth_normalized alter column diversion_policy_id type smallint;
+
+    create type switch22.uri_ty as (
+      s varchar,
+      n varchar,
+      u varchar,
+      h varchar,
+      p integer,
+      up_arr varchar[],
+      uh_arr varchar[],
+      np_arr varchar[]
+    );
+
+    -- Diversion: test2 <sip:user2@domain2:5061;uparam1=uval21;uparam2=uval22?uhdr1=uhval1>;nparam1=nval1
+
 
 CREATE OR REPLACE FUNCTION switch22.build_uri(
   i_canonical boolean,
@@ -219,10 +232,13 @@ i_rpid_privacy character varying
         v_ret.from_domain=i_from_domain;
         v_ret.to_domain=i_to_domain;
 
-        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d;
+        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
         v_pai = COALESCE(v_pai, ARRAY[]::switch22.uri_ty[]);
 
         v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
+        if v_ppi.u is null then
+          v_ppi = null;
+        end if;
 
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
 
@@ -387,7 +403,7 @@ i_rpid_privacy character varying
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
-        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d;
+        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d WHERE d.u is not null and d.u!='';
         v_diversion_tmp = COALESCE(v_diversion_tmp, ARRAY[]::switch22.uri_ty[]);
 
         IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
@@ -2239,7 +2255,30 @@ BEGIN
       IF i_ppi.u is not null THEN
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
       END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 5 THEN
+      -- relay with conversion to tel URI
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'tel';
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'tel';
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 6 THEN
+      -- relay with conversion to SIP URI
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'sip';
+        v_pai.h = COALESCE(v_pai.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'sip';
+        i_ppi.s = COALESCE(i_ppi.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
     END IF;
+
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
@@ -2671,7 +2710,25 @@ $$;
   end
 
   def down
-    true
+    execute %q{
+
+      alter table class4.customers_auth drop column pai_policy_id;
+      alter table class4.customers_auth_normalized drop column pai_policy_id;
+
+      create table class4.diversion_policy (
+        id integer primary key,
+        name varchar not null unique
+      );
+
+      insert into class4.diversion_policy(id,name) values (1,'Do not accept');
+      insert into class4.diversion_policy(id,name) values (2,'Accept');
+
+      alter table class4.customers_auth alter column diversion_policy_id type integer;
+      alter table class4.customers_auth_normalized alter column diversion_policy_id type integer;
+
+      alter table class4.customers_auth add CONSTRAINT "customers_auth_diversion_policy_id_fkey" FOREIGN KEY (diversion_policy_id) REFERENCES class4.diversion_policy(id);
+
+    }
   end
 
 end

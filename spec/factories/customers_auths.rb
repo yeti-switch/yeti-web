@@ -49,13 +49,14 @@
 #  account_id                       :integer(4)
 #  cnam_database_id                 :integer(2)
 #  customer_id                      :integer(4)       not null
-#  diversion_policy_id              :integer(4)       default(1), not null
+#  diversion_policy_id              :integer(2)       default(1), not null
 #  dst_number_field_id              :integer(2)       default(1), not null
 #  dst_numberlist_id                :integer(2)
 #  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_id                       :integer(4)       not null
 #  lua_script_id                    :integer(2)
+#  pai_policy_id                    :integer(2)       default(1), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(1), not null
 #  radius_accounting_profile_id     :integer(2)
@@ -87,7 +88,6 @@
 #  customers_auth_account_id_fkey                    (account_id => accounts.id)
 #  customers_auth_cnam_database_id_fkey              (cnam_database_id => cnam_databases.id)
 #  customers_auth_customer_id_fkey                   (customer_id => contractors.id)
-#  customers_auth_diversion_policy_id_fkey           (diversion_policy_id => diversion_policy.id)
 #  customers_auth_dst_blacklist_id_fkey              (dst_numberlist_id => numberlists.id)
 #  customers_auth_dst_number_field_id_fkey           (dst_number_field_id => customers_auth_dst_number_fields.id)
 #  customers_auth_gateway_id_fkey                    (gateway_id => gateways.id)
@@ -106,7 +106,7 @@
 FactoryBot.define do
   factory :customers_auth, class: 'CustomersAuth' do
     sequence(:name) { |n| "customers_auth_#{n}" }
-    diversion_policy_id { 1 }
+    diversion_policy_id { CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT }
     dump_level_id { 1 }
 
     # ip { ['127.0.0.0/8'] } # default

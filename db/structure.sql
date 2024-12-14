@@ -1780,9 +1780,9 @@ CREATE TYPE switch22.uri_ty AS (
 	u character varying,
 	h character varying,
 	p integer,
-	np json,
-	uh json,
-	up json
+	up_arr character varying[],
+	uh_arr character varying[],
+	np_arr character varying[]
 );
 
 
@@ -33073,7 +33073,30 @@ BEGIN
       IF i_ppi.u is not null THEN
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
       END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 5 THEN
+      -- relay with conversion to tel URI
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'tel';
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'tel';
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 6 THEN
+      -- relay with conversion to SIP URI
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'sip';
+        v_pai.h = COALESCE(v_pai.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'sip';
+        i_ppi.s = COALESCE(i_ppi.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
     END IF;
+
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
@@ -33834,7 +33857,30 @@ BEGIN
       IF i_ppi.u is not null THEN
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
       END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 5 THEN
+      -- relay with conversion to tel URI
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'tel';
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'tel';
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 6 THEN
+      -- relay with conversion to SIP URI
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'sip';
+        v_pai.h = COALESCE(v_pai.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'sip';
+        i_ppi.s = COALESCE(i_ppi.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
     END IF;
+
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
@@ -34518,7 +34564,30 @@ BEGIN
       IF i_ppi.u is not null THEN
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
       END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 5 THEN
+      -- relay with conversion to tel URI
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'tel';
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'tel';
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 6 THEN
+      -- relay with conversion to SIP URI
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'sip';
+        v_pai.h = COALESCE(v_pai.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'sip';
+        i_ppi.s = COALESCE(i_ppi.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
     END IF;
+
   END IF;
 
   IF i_vendor_gw.stir_shaken_mode_id IN (1,2) THEN
@@ -34916,10 +34985,13 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.from_domain=i_from_domain;
         v_ret.to_domain=i_to_domain;
 
-        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d;
+        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
         v_pai = COALESCE(v_pai, ARRAY[]::switch22.uri_ty[]);
 
         v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
+        if v_ppi.u is null then
+          v_ppi = null;
+        end if;
 
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
 
@@ -35084,7 +35156,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
-        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d;
+        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d WHERE d.u is not null and d.u!='';
         v_diversion_tmp = COALESCE(v_diversion_tmp, ARRAY[]::switch22.uri_ty[]);
 
         IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
@@ -36556,10 +36628,13 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.from_domain=i_from_domain;
         v_ret.to_domain=i_to_domain;
 
-        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d;
+        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
         v_pai = COALESCE(v_pai, ARRAY[]::switch22.uri_ty[]);
 
         v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
+        if v_ppi.u is null then
+          v_ppi = null;
+        end if;
 
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
 
@@ -36724,7 +36799,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
-        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d;
+        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d WHERE d.u is not null and d.u!='';
         v_diversion_tmp = COALESCE(v_diversion_tmp, ARRAY[]::switch22.uri_ty[]);
 
         IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
@@ -38189,10 +38264,13 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.from_domain=i_from_domain;
         v_ret.to_domain=i_to_domain;
 
-        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d;
+        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
         v_pai = COALESCE(v_pai, ARRAY[]::switch22.uri_ty[]);
 
         v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
+        if v_ppi.u is null then
+          v_ppi = null;
+        end if;
 
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
 
@@ -38336,7 +38414,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
-        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d;
+        select into v_diversion_tmp array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_diversion) d WHERE d.u is not null and d.u!='';
         v_diversion_tmp = COALESCE(v_diversion_tmp, ARRAY[]::switch22.uri_ty[]);
 
         IF v_customer_auth_normalized.dst_number_field_id=1 THEN /* default  - RURI userpart*/
@@ -40567,7 +40645,7 @@ CREATE TABLE class4.customers_auth (
     pop_id integer,
     src_name_rewrite_rule character varying,
     src_name_rewrite_result character varying,
-    diversion_policy_id integer DEFAULT 1 NOT NULL,
+    diversion_policy_id smallint DEFAULT 1 NOT NULL,
     diversion_rewrite_rule character varying,
     diversion_rewrite_result character varying,
     dst_numberlist_id smallint,
@@ -40618,6 +40696,7 @@ CREATE TABLE class4.customers_auth (
     ss_src_rewrite_result character varying,
     ss_dst_rewrite_rule character varying,
     ss_dst_rewrite_result character varying,
+    pai_policy_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -40678,7 +40757,7 @@ CREATE TABLE class4.customers_auth_normalized (
     uri_domain character varying,
     src_name_rewrite_rule character varying,
     src_name_rewrite_result character varying,
-    diversion_policy_id integer DEFAULT 1 NOT NULL,
+    diversion_policy_id smallint DEFAULT 1 NOT NULL,
     diversion_rewrite_rule character varying,
     diversion_rewrite_result character varying,
     dst_numberlist_id smallint,
@@ -40724,6 +40803,7 @@ CREATE TABLE class4.customers_auth_normalized (
     ss_src_rewrite_result character varying,
     ss_dst_rewrite_rule character varying,
     ss_dst_rewrite_result character varying,
+    pai_policy_id smallint DEFAULT 1 NOT NULL,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -40988,16 +41068,6 @@ CREATE SEQUENCE class4.disconnect_code_policy_id_seq
 --
 
 ALTER SEQUENCE class4.disconnect_code_policy_id_seq OWNED BY class4.disconnect_policy.id;
-
-
---
--- Name: diversion_policy; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.diversion_policy (
-    id integer NOT NULL,
-    name character varying NOT NULL
-);
 
 
 --
@@ -46388,22 +46458,6 @@ ALTER TABLE ONLY class4.disconnect_policy
 
 
 --
--- Name: diversion_policy diversion_policy_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.diversion_policy
-    ADD CONSTRAINT diversion_policy_name_key UNIQUE (name);
-
-
---
--- Name: diversion_policy diversion_policy_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.diversion_policy
-    ADD CONSTRAINT diversion_policy_pkey PRIMARY KEY (id);
-
-
---
 -- Name: dtmf_receive_modes dtmf_receive_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -48827,14 +48881,6 @@ ALTER TABLE ONLY class4.customers_auth
 
 ALTER TABLE ONLY class4.customers_auth
     ADD CONSTRAINT customers_auth_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.contractors(id);
-
-
---
--- Name: customers_auth customers_auth_diversion_policy_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_diversion_policy_id_fkey FOREIGN KEY (diversion_policy_id) REFERENCES class4.diversion_policy(id);
 
 
 --

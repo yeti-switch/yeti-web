@@ -410,16 +410,6 @@ SELECT pg_catalog.setval('disconnect_code_policy_id_seq', 2, true);
 
 
 
-
---
--- TOC entry 4337 (class 0 OID 19209)
--- Dependencies: 320
--- Data for Name: diversion_policy; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO diversion_policy (id, name) VALUES (1, 'Do not accept');
-INSERT INTO diversion_policy (id, name) VALUES (2, 'Accept');
-
 insert into class4.gateway_diversion_send_modes(id,name) values(1,'Do not send');
 insert into class4.gateway_diversion_send_modes(id,name) values(2,'Send as SIP URI');
 insert into class4.gateway_diversion_send_modes(id,name) values(3,'Send as TEL URI');

@@ -120,7 +120,7 @@ FactoryBot.define do
     src_name_rewrite_rule { nil }
     src_name_rewrite_result { nil }
     diversion_policy_name { nil }
-    diversion_policy_id { 1 }
+    diversion_policy_id { CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT }
     diversion_rewrite_rule { nil }
     diversion_rewrite_result { nil }
     dst_numberlist_id { nil }

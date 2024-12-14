@@ -49,13 +49,14 @@
 #  account_id                       :integer(4)
 #  cnam_database_id                 :integer(2)
 #  customer_id                      :integer(4)       not null
-#  diversion_policy_id              :integer(4)       default(1), not null
+#  diversion_policy_id              :integer(2)       default(1), not null
 #  dst_number_field_id              :integer(2)       default(1), not null
 #  dst_numberlist_id                :integer(2)
 #  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_id                       :integer(4)       not null
 #  lua_script_id                    :integer(2)
+#  pai_policy_id                    :integer(2)       default(1), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(1), not null
 #  radius_accounting_profile_id     :integer(2)
@@ -87,7 +88,6 @@
 #  customers_auth_account_id_fkey                    (account_id => accounts.id)
 #  customers_auth_cnam_database_id_fkey              (cnam_database_id => cnam_databases.id)
 #  customers_auth_customer_id_fkey                   (customer_id => contractors.id)
-#  customers_auth_diversion_policy_id_fkey           (diversion_policy_id => diversion_policy.id)
 #  customers_auth_dst_blacklist_id_fkey              (dst_numberlist_id => numberlists.id)
 #  customers_auth_dst_number_field_id_fkey           (dst_number_field_id => customers_auth_dst_number_fields.id)
 #  customers_auth_gateway_id_fkey                    (gateway_id => gateways.id)
@@ -165,6 +165,22 @@ class CustomersAuth < ApplicationRecord
     PRIVACY_MODE_REJECT_ANONYMOUS => 'Reject anonymous(no CLI/PAI/PPI)'
   }.freeze
 
+  DIVERSION_POLICY_NOT_ACCEPT = 1
+  DIVERSION_POLICY_ACCEPT = 2
+  DIVERSION_POLICIES = {
+    DIVERSION_POLICY_NOT_ACCEPT => 'Do not accept',
+    DIVERSION_POLICY_ACCEPT => 'Accept'
+  }.freeze
+
+  PAI_POLICY_NOT_ACCEPT = 0
+  PAI_POLICY_ACCEPT = 1
+  PAI_POLICY_REQUIRE = 2
+  PAI_POLICIES = {
+    PAI_POLICY_NOT_ACCEPT => 'Do not accept',
+    PAI_POLICY_ACCEPT => 'Accept',
+    PAI_POLICY_REQUIRE => 'Require'
+  }.freeze
+
   module CONST
     MATCH_CONDITION_ATTRIBUTES = %i[ip
                                     src_prefix
@@ -189,7 +205,6 @@ class CustomersAuth < ApplicationRecord
   belongs_to :gateway
   belongs_to :account, optional: true
   belongs_to :pop, optional: true
-  belongs_to :diversion_policy
   belongs_to :dst_numberlist, class_name: 'Routing::Numberlist', foreign_key: :dst_numberlist_id, optional: true
   belongs_to :src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true
   belongs_to :radius_auth_profile, class_name: 'Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id, optional: true
@@ -236,7 +251,7 @@ class CustomersAuth < ApplicationRecord
             uniqueness: { conditions: -> { where(external_type: nil) } },
             if: proc { external_id && !external_type }
 
-  validates :customer, :rateplan, :routing_plan, :gateway, :account, :diversion_policy, presence: true
+  validates :customer, :rateplan, :routing_plan, :gateway, :account, presence: true
   validate :validate_account
   validate :validate_gateway
 
@@ -254,8 +269,11 @@ class CustomersAuth < ApplicationRecord
   validate :ip_is_valid
   validate :gateway_supports_incoming_auth
 
-  validates :dump_level_id, presence: true
-  validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: true
+  validates :dump_level_id, :diversion_policy_id, :pai_policy_id, presence: true
+  validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: false
+  validates :diversion_policy_id, inclusion: { in: CustomersAuth::DIVERSION_POLICIES.keys }, allow_nil: false
+  validates :pai_policy_id, inclusion: { in: CustomersAuth::PAI_POLICIES.keys }, allow_nil: false
+
   validates :rewrite_ss_status_id, inclusion: { in: CustomersAuth::SS_STATUSES.keys }, allow_nil: true
   validate :validate_rewrite_ss_status
   validates :privacy_mode_id, inclusion: { in: PRIVACY_MODES.keys }, allow_nil: false
@@ -319,6 +337,12 @@ class CustomersAuth < ApplicationRecord
 
   def ss_no_identity_action_name
     ss_no_identity_action_id.nil? ? nil : SS_NO_IDENTITY_ACTIONS[ss_no_identity_action_id]
+  end
+  def pai_policy_name
+    PAI_POLICIES[pai_policy_id]
+  end
+  def diversion_policy_name
+    DIVERSION_POLICIES[diversion_policy_id]
   end
 
   # TODO: move to decorator when ActiveAdmin fix problem

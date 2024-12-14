@@ -67,7 +67,6 @@ RSpec.configure do |config|
     'sys.sensor_levels',
     :disconnect_policy,
     :disconnect_code_namespace,
-    :diversion_policy,
     :filter_types,
     :sdp_c_location,
     :codecs,
