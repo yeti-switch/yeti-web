@@ -36,32 +36,44 @@ jobs:
           name: deb12-package
           path: /__w/yeti-web/*.deb
 
-      - name: Setup deb-s3
-        run: gem install deb-s3
 
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v6
+
+      
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: debian:bookworm
+    steps:
+      - name: install aux deps
+        run: apt update && apt -y --no-install-recommends install git ca-certificates curl gpg
+      - name: add pgdg pkg repo
+        run: >
+          echo "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt bookworm-pgdg main" >> /etc/apt/sources.list.d/pgdg.list &&
+          curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
+      - run: apt update
+
+      - name: clone repo
+        uses: actions/checkout@v3
+
+      - name: override pgversions
+        run: echo 16 > debian/pgversions
+
+      - name: install build deps
+        run: apt -y --no-install-recommends install debhelper python3 postgresql-server-dev-all build-essential
+      - name: build
+        run: make deb
+
+      - uses: yeti-switch/upload-debian-pkg-action@v2
         with:
+          pkgs: '../*.deb'
+          pkgs_to_remove: 'yeti-web'
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-        
-      - name: Remove previous versions package from nightly repo
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.DEB_AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.DEB_AWS_SECRET_ACCESS_KEY}}
-          AWS_ENDPOINT_URL: ${{secrets.DEB_AWS_ENDPOINT}}
-        run: |
-          deb-s3 delete yeti-web --arch=amd64 --bucket=${{secrets.DEB_AWS_BUCKET}} --prefix=nightly --codename=bookworm --component=main --visibility=nil --force-path-style --sign=B104E10C35895CFAC0F91473C8D3BC80B6F22179 --gpg-options "\-\-pinentry-mode=loopback \-\-no-tty \-\-batch \-\-yes \-\-passphrase ${{ secrets.GPG_PASSPHRASE }}"
-          deb-s3 clean --bucket=${{secrets.DEB_AWS_BUCKET}} --prefix=nightly --codename=bookworm --component=main --visibility=nil --force-path-style --sign=B104E10C35895CFAC0F91473C8D3BC80B6F22179 --gpg-options "\-\-pinentry-mode=loopback \-\-no-tty \-\-batch \-\-yes \-\-passphrase ${{ secrets.GPG_PASSPHRASE }}"
-        continue-on-error: true
-
-      - name: Upload package
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.DEB_AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.DEB_AWS_SECRET_ACCESS_KEY}}
-          AWS_ENDPOINT_URL: ${{secrets.DEB_AWS_ENDPOINT}}
-        run: deb-s3 upload --bucket=${{secrets.DEB_AWS_BUCKET}} --prefix=nightly --codename=bookworm --component=main --visibility=nil --force-path-style --sign=B104E10C35895CFAC0F91473C8D3BC80B6F22179 --gpg-options "\-\-pinentry-mode=loopback \-\-no-tty \-\-batch \-\-yes \-\-passphrase ${{ secrets.GPG_PASSPHRASE }}" ../*.deb
-        
+          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          s3_prefix: nightly
+          s3_access_key_id: ${{ secrets.DEB_AWS_ACCESS_KEY_ID }}
+          s3_secret_access_key: ${{ secrets.DEB_AWS_SECRET_ACCESS_KEY }}
+          s3_endpoint_url: ${{ secrets.DEB_AWS_ENDPOINT }}
 
   deb12_container:
     name: Debian 12 container
