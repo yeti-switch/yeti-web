@@ -2263,8 +2263,8 @@ RSpec.describe '#routing logic' do
 
           context 'Accepted with rewrite' do
             let(:customer_auth_pai_policy_id) { CustomersAuth::PAI_POLICY_ACCEPT }
-            let(:customer_auth_pai_rewrite_rule) { '^\+380(.*)$'}
-            let(:customer_auth_pai_rewrite_result) { '123\1'}
+            let(:customer_auth_pai_rewrite_rule) { '^\+380(.*)$' }
+            let(:customer_auth_pai_rewrite_result) { '123\1' }
 
             let!(:expected_headers) {
               [
@@ -4538,6 +4538,7 @@ RSpec.describe '#routing logic' do
 
       context 'SRC Number network validation enabled' do
         let(:validate_src_number_network) { true }
+        let(:customer_auth_privacy_mode_id) { CustomersAuth::PRIVACY_MODE_ALLOW }
 
         context 'Number is valid' do
           let(:from_name) { '380961111111' }

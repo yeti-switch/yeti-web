@@ -140,6 +140,8 @@ class Importing::CustomersAuth < Importing::Base
     diversion_rewrite_rule
     diversion_rewrite_result
     pai_policy_id
+    pai_rewrite_rule
+    pai_rewrite_result
     src_name_rewrite_rule
     src_name_rewrite_result
     src_rewrite_rule
