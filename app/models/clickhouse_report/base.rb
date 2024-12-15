@@ -92,6 +92,8 @@ module ClickhouseReport
     class InvalidResponseError < Error
     end
 
+    FromDateTimeInFutureError = Class.new(ParamError)
+
     class_attribute :operations, instance_accessor: false, default: {}
     class_attribute :filters, instance_accessor: false, default: {}
 

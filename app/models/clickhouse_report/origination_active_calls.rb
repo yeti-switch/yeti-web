@@ -18,12 +18,25 @@ module ClickhouseReport
            column: :snapshot_timestamp,
            type: 'DateTime',
            operation: :gteq,
-           required: true
+           required: true,
+           format_value: lambda { |value, _options|
+             from_time = DateUtilities.safe_datetime_parse(value)
+             raise InvalidParamValue, 'invalid value from-time' if from_time.nil?
+             raise FromDateTimeInFutureError, 'from-time cannot be in the future' if from_time > DateTime.now
+
+             value
+           }
 
     filter :'to-time',
            column: :snapshot_timestamp,
            type: 'DateTime',
-           operation: :lteq
+           operation: :lteq,
+           format_value: lambda { |value, _options|
+             to_time = DateUtilities.safe_datetime_parse(value)
+             raise InvalidParamValue, 'invalid value to-time' if to_time.nil?
+
+             value
+           }
 
     filter :'src-country-id',
            column: :src_country_id,
