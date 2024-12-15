@@ -66,9 +66,11 @@ ActiveAdmin.register Importing::CustomersAuth do
     column :allow_receive_rate_limit
     column :send_billing_information
 
-    column :diversion_policy, sortable: :diversion_policy_name
+    column :diversion_policy, &:diversion_policy_display_name
     column :diversion_rewrite_rule
     column :diversion_rewrite_result
+
+    column :pai_policy, &:pai_policy_display_name
 
     column :src_rewrite_rule
     column :src_rewrite_result

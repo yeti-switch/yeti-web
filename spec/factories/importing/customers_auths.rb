@@ -35,6 +35,9 @@
 #  max_dst_number_length            :integer(2)
 #  min_dst_number_length            :integer(2)
 #  name                             :string
+#  pai_policy_name                  :string
+#  pai_rewrite_result               :string
+#  pai_rewrite_rule                 :string
 #  pop_name                         :string
 #  privacy_mode_name                :string
 #  radius_accounting_profile_name   :string
@@ -66,13 +69,14 @@
 #  x_yeti_auth                      :string
 #  account_id                       :integer(4)
 #  customer_id                      :integer(4)
-#  diversion_policy_id              :integer(4)
+#  diversion_policy_id              :integer(2)
 #  dst_number_field_id              :integer(2)
 #  dst_numberlist_id                :integer(4)
 #  dump_level_id                    :integer(4)
 #  gateway_id                       :integer(4)
 #  lua_script_id                    :integer(2)
 #  o_id                             :bigint(8)
+#  pai_policy_id                    :integer(2)
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)
 #  radius_accounting_profile_id     :integer(2)
@@ -120,7 +124,7 @@ FactoryBot.define do
     src_name_rewrite_rule { nil }
     src_name_rewrite_result { nil }
     diversion_policy_name { nil }
-    diversion_policy_id { 1 }
+    diversion_policy_id { CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT }
     diversion_rewrite_rule { nil }
     diversion_rewrite_result { nil }
     dst_numberlist_id { nil }

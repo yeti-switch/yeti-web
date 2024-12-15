@@ -35,6 +35,9 @@
 #  max_dst_number_length            :integer(2)
 #  min_dst_number_length            :integer(2)
 #  name                             :string
+#  pai_policy_name                  :string
+#  pai_rewrite_result               :string
+#  pai_rewrite_rule                 :string
 #  pop_name                         :string
 #  privacy_mode_name                :string
 #  radius_accounting_profile_name   :string
@@ -66,13 +69,14 @@
 #  x_yeti_auth                      :string
 #  account_id                       :integer(4)
 #  customer_id                      :integer(4)
-#  diversion_policy_id              :integer(4)
+#  diversion_policy_id              :integer(2)
 #  dst_number_field_id              :integer(2)
 #  dst_numberlist_id                :integer(4)
 #  dump_level_id                    :integer(4)
 #  gateway_id                       :integer(4)
 #  lua_script_id                    :integer(2)
 #  o_id                             :bigint(8)
+#  pai_policy_id                    :integer(2)
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)
 #  radius_accounting_profile_id     :integer(2)
@@ -97,7 +101,6 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :rateplan, class_name: 'Routing::Rateplan', optional: true
   belongs_to :pop, class_name: '::Pop', optional: true
   belongs_to :customer, -> { where customer: true }, class_name: '::Contractor', foreign_key: :customer_id, optional: true
-  belongs_to :diversion_policy, class_name: '::DiversionPolicy', optional: true
 
   belongs_to :dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :dst_numberlist_id, optional: true
   belongs_to :src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true
@@ -136,6 +139,9 @@ class Importing::CustomersAuth < Importing::Base
     diversion_policy_id
     diversion_rewrite_rule
     diversion_rewrite_result
+    pai_policy_id
+    pai_rewrite_rule
+    pai_rewrite_result
     src_name_rewrite_rule
     src_name_rewrite_result
     src_rewrite_rule
@@ -161,12 +167,22 @@ class Importing::CustomersAuth < Importing::Base
     dump_level_id.nil? ? 'unknown' : CustomersAuth::DUMP_LEVELS[dump_level_id]
   end
 
+  def diversion_policy_display_name
+    diversion_policy_id.nil? ? 'unknown' : CustomersAuth::DIVERSION_POLICIES[diversion_policy_id]
+  end
+
+  def pai_policy_display_name
+    pai_policy_id.nil? ? 'unknown' : CustomersAuth::PAI_POLICIES[pai_policy_id]
+  end
+
   def self.after_import_hook
     where(src_prefix: nil).update_all(src_prefix: '')
     where(dst_prefix: nil).update_all(dst_prefix: '')
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     resolve_integer_constant('dump_level_id', 'dump_level_name', CustomersAuth::DUMP_LEVELS)
     resolve_integer_constant('privacy_mode_id', 'privacy_mode_name', CustomersAuth::PRIVACY_MODES)
+    resolve_integer_constant('diversion_policy_id', 'diversion_policy_name', CustomersAuth::DIVERSION_POLICIES)
+    resolve_integer_constant('pai_policy_id', 'pai_policy_name', CustomersAuth::PAI_POLICIES)
     super
     CustomersAuth.increment_state_value
   end

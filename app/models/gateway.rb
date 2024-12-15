@@ -180,21 +180,27 @@ class Gateway < ApplicationRecord
   PAI_SEND_MODE_BUILD_SIP = 2
   PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE = 3
   PAI_SEND_MODE_RELAY = 4
+  PAI_SEND_MODE_RELAY_AS_TEL = 5
+  PAI_SEND_MODE_RELAY_AS_SIP = 6
+  PAI_SEND_MODE_RELAY_AS_SIP_FORCE_DOMAIN = 7
   PAI_SEND_MODES = {
     PAI_SEND_MODE_NO_SEND => 'Do not send',
     PAI_SEND_MODE_BUILD_TEL => 'Build TEL URI from Source Number',
     PAI_SEND_MODE_BUILD_SIP => 'Build SIP URI from Source Number',
     PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE => 'Build SIP URI from Source Number with user=phone',
-    PAI_SEND_MODE_RELAY => 'Relay PAI and PPI'
+    PAI_SEND_MODE_RELAY => 'Relay PAI/PPI as is',
+    PAI_SEND_MODE_RELAY_AS_TEL => 'Relay PAI/PPI as TEL uri',
+    PAI_SEND_MODE_RELAY_AS_SIP => 'Relay PAI/PPI as SIP uri',
+    PAI_SEND_MODE_RELAY_AS_SIP_FORCE_DOMAIN => 'Relay PAI/PPI as SIP uri. Replace domain'
   }.freeze
 
   REGISTERED_AOR_MODE_NO_USE = 0
   REGISTERED_AOR_MODE_AS_IS = 1
   REGISTERED_AOR_MODE_REPLACE_USERPART = 2
   REGISTERED_AOR_MODES = {
-    PAI_SEND_MODE_NO_SEND => 'Do not use',
-    PAI_SEND_MODE_BUILD_TEL => 'Use AOR as is',
-    PAI_SEND_MODE_BUILD_SIP => 'Use AOR, replace userpart with dst number'
+    REGISTERED_AOR_MODE_NO_USE => 'Do not use',
+    REGISTERED_AOR_MODE_AS_IS => 'Use AOR as is',
+    REGISTERED_AOR_MODE_REPLACE_USERPART => 'Use AOR, replace userpart with dst number'
   }.freeze
 
   STIR_SHAKEN_MODE_DISABLE = 0
@@ -314,7 +320,14 @@ class Gateway < ApplicationRecord
   validates :registered_aor_mode_id, inclusion: { in: REGISTERED_AOR_MODES.keys }, allow_nil: true
 
   validates :pai_send_mode_id, inclusion: { in: PAI_SEND_MODES.keys }, allow_nil: true
-  validates :pai_domain, presence: true, if: proc { pai_send_mode_id == 2 }
+  validates :pai_domain,
+            presence: true,
+            if: proc {
+              pai_send_mode_id in [
+                PAI_SEND_MODE_BUILD_SIP, PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE,
+                PAI_SEND_MODE_RELAY_AS_SIP, PAI_SEND_MODE_RELAY_AS_SIP_FORCE_DOMAIN
+              ]
+            }
 
   validates :diversion_domain, presence: true, if: proc { diversion_send_mode_id == 2 }
 

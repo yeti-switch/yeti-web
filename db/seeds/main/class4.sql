@@ -350,6 +350,7 @@ INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_orig
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8017, 0, true, true, 403, 'Source number blacklisted by routing plan', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8018, 0, true, true, 403, 'Identity required', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8019, 0, true, true, 403, 'Identity invalid', NULL, NULL, false, false, true, false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8020, 0, true, true, 403, 'PAI header required', NULL, NULL, false, false, true, false);
 
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (1505, 1, false, false, 487, 'Ringing timeout', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (2001, 3, true, false, 503, 'Radius response timeout', NULL, NULL, false, false, true, false);
@@ -409,16 +410,6 @@ SELECT pg_catalog.setval('disconnect_code_policy_codes_id_seq', 3, true);
 SELECT pg_catalog.setval('disconnect_code_policy_id_seq', 2, true);
 
 
-
-
---
--- TOC entry 4337 (class 0 OID 19209)
--- Dependencies: 320
--- Data for Name: diversion_policy; Type: TABLE DATA; Schema: class4; Owner: yeti
---
-
-INSERT INTO diversion_policy (id, name) VALUES (1, 'Do not accept');
-INSERT INTO diversion_policy (id, name) VALUES (2, 'Accept');
 
 insert into class4.gateway_diversion_send_modes(id,name) values(1,'Do not send');
 insert into class4.gateway_diversion_send_modes(id,name) values(2,'Send as SIP URI');

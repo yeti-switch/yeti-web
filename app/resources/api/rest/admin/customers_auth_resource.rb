@@ -5,7 +5,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
              :src_prefix, :src_number_min_length, :src_number_max_length,
              :dst_prefix, :dst_number_min_length, :dst_number_max_length,
              :x_yeti_auth, :capacity, :cps_limit, :uri_domain,
-             :src_name_rewrite_rule, :src_name_rewrite_result, :diversion_rewrite_rule, :diversion_rewrite_result,
+             :src_name_rewrite_rule, :src_name_rewrite_result, :diversion_policy_id, :diversion_rewrite_rule, :diversion_rewrite_result,
              :allow_receive_rate_limit, :send_billing_information, :enable_audio_recording, :src_number_radius_rewrite_rule,
              :src_number_radius_rewrite_result, :dst_number_radius_rewrite_rule, :dst_number_radius_rewrite_result,
              :check_account_balance, :require_incoming_auth,
@@ -18,7 +18,6 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   has_one :routing_plan, class_name: 'RoutingPlan', always_include_linkage_data: true
   has_one :gateway, always_include_linkage_data: true
   has_one :account, always_include_linkage_data: true
-  has_one :diversion_policy, always_include_linkage_data: true
   has_one :pop, always_include_linkage_data: true
   has_one :dst_numberlist, class_name: 'Numberlist', always_include_linkage_data: true
   has_one :src_numberlist, class_name: 'Numberlist', always_include_linkage_data: true
@@ -34,7 +33,6 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   relationship_filter :routing_plan
   relationship_filter :gateway
   relationship_filter :account
-  relationship_filter :diversion_policy
   relationship_filter :pop
   relationship_filter :dst_numberlist
   relationship_filter :src_numberlist
@@ -62,6 +60,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :uri_domain, type: :string
   ransack_filter :src_name_rewrite_rule, type: :string
   ransack_filter :src_name_rewrite_result, type: :string
+  ransack_filter :diversion_policy_id, type: :number
   ransack_filter :diversion_rewrite_rule, type: :string
   ransack_filter :diversion_rewrite_result, type: :string
   ransack_filter :allow_receive_rate_limit, type: :boolean

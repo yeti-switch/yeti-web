@@ -131,16 +131,16 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
 
     context 'with filter by diversion_policy.id' do
-      let!(:diversion_policy) { DiversionPolicy.find(1) }
-      let!(:other_diversion_policy) { DiversionPolicy.find(2) }
-      let!(:customers_auths) { create_list(:customers_auth, 3, diversion_policy: diversion_policy) }
-      before { create(:customers_auth, diversion_policy: other_diversion_policy) }
+      let!(:diversion_policy_id) { CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT }
+      let!(:other_diversion_policy_id) { CustomersAuth::DIVERSION_POLICY_ACCEPT }
+      let!(:customers_auths) { create_list(:customers_auth, 3, diversion_policy_id: diversion_policy_id) }
+      before { create(:customers_auth, diversion_policy_id: other_diversion_policy_id) }
 
       let(:request_params) do
-        { filter: { 'diversion_policy.id': diversion_policy.id } }
+        { filter: { 'diversion_policy_id_eq': diversion_policy_id } }
       end
 
-      it 'returns filtered gateways by diversion_policy.id' do
+      it 'returns filtered gateways by diversion_policy_id' do
         subject
         expect(response.status).to eq(200)
         actual_ids = response_json[:data].map { |r| r[:id] }

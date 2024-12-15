@@ -25,6 +25,8 @@
 #  interface                        :string
 #  ip                               :inet             not null
 #  name                             :string           not null
+#  pai_rewrite_result               :string
+#  pai_rewrite_rule                 :string
 #  reject_calls                     :boolean          default(FALSE), not null
 #  require_incoming_auth            :boolean          default(FALSE), not null
 #  send_billing_information         :boolean          default(FALSE), not null
@@ -50,13 +52,14 @@
 #  cnam_database_id                 :integer(2)
 #  customer_id                      :integer(4)       not null
 #  customers_auth_id                :integer(4)       not null
-#  diversion_policy_id              :integer(4)       default(1), not null
+#  diversion_policy_id              :integer(2)       default(1), not null
 #  dst_number_field_id              :integer(2)       default(1), not null
 #  dst_numberlist_id                :integer(2)
 #  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_id                       :integer(4)       not null
 #  lua_script_id                    :integer(2)
+#  pai_policy_id                    :integer(2)       default(1), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(1), not null
 #  radius_accounting_profile_id     :integer(2)
