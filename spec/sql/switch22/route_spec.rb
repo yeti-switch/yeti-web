@@ -4501,6 +4501,7 @@ RSpec.describe '#routing logic' do
 
       context 'SRC Number format validation enabled' do
         let(:validate_src_number_format) { true }
+        let(:customer_auth_privacy_mode_id) { CustomersAuth::PRIVACY_MODE_ALLOW }
 
         context 'Number is valid' do
           let(:from_name) { '3809611111111' }

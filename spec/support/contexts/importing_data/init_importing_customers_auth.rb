@@ -31,6 +31,10 @@ shared_context :init_importing_customers_auth do |args|
       diversion_policy_id: CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT,
       diversion_rewrite_rule: '',
       diversion_rewrite_result: '',
+      pai_policy_name: CustomersAuth::PAI_POLICIES[CustomersAuth::PAI_POLICY_ACCEPT],
+      pai_policy_id: CustomersAuth::PAI_POLICY_ACCEPT,
+      pai_rewrite_rule: '',
+      pai_rewrite_result: '',
       is_changed: true
     }.merge(args)
 
