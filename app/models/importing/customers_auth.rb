@@ -183,6 +183,9 @@ class Importing::CustomersAuth < Importing::Base
     resolve_integer_constant('privacy_mode_id', 'privacy_mode_name', CustomersAuth::PRIVACY_MODES)
     resolve_integer_constant('diversion_policy_id', 'diversion_policy_name', CustomersAuth::DIVERSION_POLICIES)
     resolve_integer_constant('pai_policy_id', 'pai_policy_name', CustomersAuth::PAI_POLICIES)
+    resolve_integer_constant('src_name_field_id', 'src_name_field_name', CustomersAuth::SRC_NAME_FIELDS)
+    resolve_integer_constant('src_number_field_id', 'src_number_field_name', CustomersAuth::SRC_NUMBER_FIELDS)
+    resolve_integer_constant('dst_number_field_id', 'dst_number_field_name', CustomersAuth::DST_NUMBER_FIELDS)
     super
     CustomersAuth.increment_state_value
   end

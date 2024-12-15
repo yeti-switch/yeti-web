@@ -40825,16 +40825,6 @@ CREATE TABLE class4.customers_auth (
 
 
 --
--- Name: customers_auth_dst_number_fields; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.customers_auth_dst_number_fields (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: customers_auth_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
@@ -40953,26 +40943,6 @@ CREATE SEQUENCE class4.customers_auth_normalized_id_seq
 --
 
 ALTER SEQUENCE class4.customers_auth_normalized_id_seq OWNED BY class4.customers_auth_normalized.id;
-
-
---
--- Name: customers_auth_src_name_fields; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.customers_auth_src_name_fields (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
--- Name: customers_auth_src_number_fields; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.customers_auth_src_number_fields (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
 
 
 --
@@ -46427,22 +46397,6 @@ ALTER TABLE ONLY class4.codecs
 
 
 --
--- Name: customers_auth_dst_number_fields customers_auth_dst_number_fields_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth_dst_number_fields
-    ADD CONSTRAINT customers_auth_dst_number_fields_name_key UNIQUE (name);
-
-
---
--- Name: customers_auth_dst_number_fields customers_auth_dst_number_fields_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth_dst_number_fields
-    ADD CONSTRAINT customers_auth_dst_number_fields_pkey PRIMARY KEY (id);
-
-
---
 -- Name: customers_auth customers_auth_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -46464,38 +46418,6 @@ ALTER TABLE ONLY class4.customers_auth_normalized
 
 ALTER TABLE ONLY class4.customers_auth
     ADD CONSTRAINT customers_auth_pkey PRIMARY KEY (id);
-
-
---
--- Name: customers_auth_src_name_fields customers_auth_src_name_fields_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth_src_name_fields
-    ADD CONSTRAINT customers_auth_src_name_fields_name_key UNIQUE (name);
-
-
---
--- Name: customers_auth_src_name_fields customers_auth_src_name_fields_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth_src_name_fields
-    ADD CONSTRAINT customers_auth_src_name_fields_pkey PRIMARY KEY (id);
-
-
---
--- Name: customers_auth_src_number_fields customers_auth_src_number_fields_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth_src_number_fields
-    ADD CONSTRAINT customers_auth_src_number_fields_name_key UNIQUE (name);
-
-
---
--- Name: customers_auth_src_number_fields customers_auth_src_number_fields_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth_src_number_fields
-    ADD CONSTRAINT customers_auth_src_number_fields_pkey PRIMARY KEY (id);
 
 
 --
@@ -49021,14 +48943,6 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth customers_auth_dst_number_field_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_dst_number_field_id_fkey FOREIGN KEY (dst_number_field_id) REFERENCES class4.customers_auth_dst_number_fields(id);
-
-
---
 -- Name: customers_auth customers_auth_gateway_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -49098,22 +49012,6 @@ ALTER TABLE ONLY class4.customers_auth
 
 ALTER TABLE ONLY class4.customers_auth
     ADD CONSTRAINT customers_auth_src_blacklist_id_fkey FOREIGN KEY (src_numberlist_id) REFERENCES class4.numberlists(id);
-
-
---
--- Name: customers_auth customers_auth_src_name_field_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_src_name_field_id_fkey FOREIGN KEY (src_name_field_id) REFERENCES class4.customers_auth_src_name_fields(id);
-
-
---
--- Name: customers_auth customers_auth_src_number_field_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_src_number_field_id_fkey FOREIGN KEY (src_number_field_id) REFERENCES class4.customers_auth_src_number_fields(id);
 
 
 --
@@ -50225,6 +50123,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241017124729'),
 ('20241107212537'),
 ('20241213172819'),
-('20241213175248');
+('20241213175248'),
+('20241215155451');
 
 

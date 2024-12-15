@@ -44,10 +44,17 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :name, type: :string
   ransack_filter :enabled, type: :boolean
   ransack_filter :reject_calls, type: :boolean
+
+  ransack_filter :src_name_field_id, type: :number
+  ransack_filter :src_name_rewrite_rule, type: :string
+  ransack_filter :src_name_rewrite_result, type: :string
+  ransack_filter :src_number_field_id, type: :number
   ransack_filter :src_rewrite_rule, type: :string
   ransack_filter :src_rewrite_result, type: :string
+  ransack_filter :dst_number_field_id, type: :number
   ransack_filter :dst_rewrite_rule, type: :string
   ransack_filter :dst_rewrite_result, type: :string
+
   ransack_filter :src_prefix, type: :string
   ransack_filter :src_number_min_length, type: :number
   ransack_filter :src_number_max_length, type: :number
@@ -58,8 +65,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :capacity, type: :number
   ransack_filter :cps_limit, type: :number
   ransack_filter :uri_domain, type: :string
-  ransack_filter :src_name_rewrite_rule, type: :string
-  ransack_filter :src_name_rewrite_result, type: :string
+
   ransack_filter :diversion_policy_id, type: :number
   ransack_filter :diversion_rewrite_rule, type: :string
   ransack_filter :diversion_rewrite_result, type: :string
@@ -89,8 +95,10 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
       ip
       account
       gateway
+      src_number_field_id
       src_rewrite_rule
       src_rewrite_result
+      dst_number_field_id
       dst_rewrite_rule
       dst_rewrite_result
       src_prefix
@@ -106,6 +114,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
       cps_limit
       pop
       uri_domain
+      src_name_field_id
       src_name_rewrite_rule
       src_name_rewrite_result
       diversion_policy

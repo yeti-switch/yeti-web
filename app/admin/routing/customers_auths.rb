@@ -46,9 +46,9 @@ ActiveAdmin.register CustomersAuth do
                  :diversion_policy_name,
                  :diversion_rewrite_rule, :diversion_rewrite_result,
                  :pai_policy_name, :pai_rewrite_rule, :pai_rewrite_result,
-                 [:src_number_field_name, proc { |row| row.src_number_field.try(:name) }],
-                 [:src_name_field_name, proc { |row| row.src_name_field.try(:name) }],
-                 [:dst_number_field_name, proc { |row| row.dst_number_field.try(:name) }],
+                 :src_number_field_name,
+                 :src_name_field_name,
+                 :dst_number_field_name,
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
@@ -101,7 +101,7 @@ ActiveAdmin.register CustomersAuth do
 
   includes :tag_action, :rateplan, :routing_plan, :gateway, :src_numberlist, :dst_numberlist,
            :pop, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol,
-           :lua_script, :src_name_field, :src_number_field, :dst_number_field, :cnam_database,
+           :lua_script, :cnam_database,
            account: :contractor
 
   controller do
@@ -177,20 +177,17 @@ ActiveAdmin.register CustomersAuth do
     column :send_billing_information
 
     column :diversion_policy, &:diversion_policy_name
-    column :diversion_rewrite_rule
-    column :diversion_rewrite_result
-
     column :pai_policy, &:pai_policy_name
 
-    column :src_name_field
+    column :src_name_field, &:src_name_field_name
     column :src_name_rewrite_rule
     column :src_name_rewrite_result
 
-    column :src_number_field
+    column :src_number_field, &:src_number_field_name
     column :src_rewrite_rule
     column :src_rewrite_result
 
-    column :dst_number_field
+    column :dst_number_field, &:dst_number_field_name
     column :dst_rewrite_rule
     column :dst_rewrite_result
 
@@ -367,17 +364,30 @@ ActiveAdmin.register CustomersAuth do
           f.input :pai_rewrite_rule
           f.input :pai_rewrite_result
 
-          f.input :src_name_field, as: :select, include_blank: false, input_html: { class: :chosen }
+          f.input :src_name_field,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::SRC_NAME_FIELDS.invert,
+                  input_html: { class: :chosen }
           f.input :src_name_rewrite_rule
           f.input :src_name_rewrite_result
 
-          f.input :src_number_field, as: :select, include_blank: false, input_html: { class: :chosen }
+          f.input :src_number_field,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::SRC_NUMBER_FIELDS.invert,
+                  input_html: { class: :chosen }
           f.input :src_rewrite_rule
           f.input :src_rewrite_result
 
-          f.input :dst_number_field, as: :select, include_blank: false, input_html: { class: :chosen }
+          f.input :dst_number_field,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::DST_NUMBER_FIELDS.invert,
+                  input_html: { class: :chosen }
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
+
           f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
           f.input :cnam_database, input_html: { class: 'chosen' }, include_blank: 'None'
         end
@@ -486,15 +496,15 @@ ActiveAdmin.register CustomersAuth do
           row :pai_rewrite_rule
           row :pai_rewrite_result
 
-          row :src_name_field
+          row :src_name_field, &:src_name_field_name
           row :src_name_rewrite_rule
           row :src_name_rewrite_result
 
-          row :src_number_field
+          row :src_number_field, &:src_number_field_name
           row :src_rewrite_rule
           row :src_rewrite_result
 
-          row :dst_number_field
+          row :dst_number_field, &:dst_number_field_name
           row :dst_rewrite_rule
           row :dst_rewrite_result
 
