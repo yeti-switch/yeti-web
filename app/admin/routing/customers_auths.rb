@@ -364,7 +364,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :pai_rewrite_rule
           f.input :pai_rewrite_result
 
-          f.input :src_name_field,
+          f.input :src_name_field_id,
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::SRC_NAME_FIELDS.invert,
@@ -372,7 +372,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :src_name_rewrite_rule
           f.input :src_name_rewrite_result
 
-          f.input :src_number_field,
+          f.input :src_number_field_id,
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::SRC_NUMBER_FIELDS.invert,
@@ -380,7 +380,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :src_rewrite_rule
           f.input :src_rewrite_result
 
-          f.input :dst_number_field,
+          f.input :dst_number_field_id,
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::DST_NUMBER_FIELDS.invert,

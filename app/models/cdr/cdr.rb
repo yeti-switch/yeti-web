@@ -272,6 +272,7 @@ class Cdr::Cdr < Cdr::Base
   scope :not_authorized, -> { where('customer_auth_id is null') }
   scope :bad_routing, -> { where('customer_auth_id is not null AND disconnect_initiator_id=0') }
   scope :with_trace, -> { where('dump_level_id > 0') }
+  scope :with_recording, -> { where('audio_recorded and duration > 0 and local_tag is not null') }
   scope :package_billing, -> { where('package_counter_id is not null') }
 
   scope :account_id_eq, ->(account_id) { where('vendor_acc_id =? OR customer_acc_id =?', account_id, account_id) }
