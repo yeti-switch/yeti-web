@@ -552,8 +552,8 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_ss_dst_rewrite_rule) { nil }
       let(:customer_auth_ss_dst_rewrite_result) { nil }
       let(:customer_auth_privacy_mode_id) { CustomersAuth::PRIVACY_MODE_REJECT_ANONYMOUS }
-      let(:customer_auth_src_name_field_id) { 1 }
-      let(:customer_auth_src_number_field_id) { 1 }
+      let(:customer_auth_src_name_field_id) { CustomersAuth::SRC_NAME_FIELD_FROM_DSP }
+      let(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_FROM_USERPART }
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
@@ -943,7 +943,7 @@ RSpec.describe '#routing logic' do
         let(:from_name) { 'from_username' }
 
         context 'From Display name' do
-          let!(:customer_auth_src_name_field_id) { 1 }
+          let!(:customer_auth_src_name_field_id) { CustomersAuth::SRC_NAME_FIELD_FROM_DSP }
           it 'routing OK ' do
             expect(subject.size).to eq(2)
             expect(subject.first[:src_name_in]).to eq('from_display_name')
@@ -952,7 +952,7 @@ RSpec.describe '#routing logic' do
         end
 
         context 'From Userpart' do
-          let!(:customer_auth_src_name_field_id) { 2 }
+          let!(:customer_auth_src_name_field_id) { CustomersAuth::SRC_NAME_FIELD_FROM_USERPART }
           it 'routing OK ' do
             expect(subject.size).to eq(2)
             expect(subject.first[:src_name_in]).to eq('from_username')
@@ -965,8 +965,8 @@ RSpec.describe '#routing logic' do
         let(:from_dsp) { 'from_display_name' }
         let(:from_name) { 'from_username' }
 
-        context 'From Display name' do
-          let!(:customer_auth_src_number_field_id) { 1 }
+        context 'From User part' do
+          let!(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_FROM_USERPART }
           it 'routing OK ' do
             expect(subject.size).to eq(2)
             expect(subject.first[:src_prefix_in]).to eq('from_username')
@@ -974,8 +974,8 @@ RSpec.describe '#routing logic' do
           end
         end
 
-        context 'From Userpart' do
-          let!(:customer_auth_src_number_field_id) { 2 }
+        context 'From display name' do
+          let!(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_FROM_DSP }
           it 'routing OK ' do
             expect(subject.size).to eq(2)
             expect(subject.first[:src_prefix_in]).to eq('from_display_name')

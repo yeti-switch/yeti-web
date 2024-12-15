@@ -182,25 +182,25 @@ class CustomersAuth < ApplicationRecord
 
   DST_NUMBER_FIELD_RURI_USERPART = 1
   DST_NUMBER_FIELD_TO_USERPART = 2
+  DST_NUMBER_FIELD_DIVERSION_USERPART = 3
   DST_NUMBER_FIELDS = {
     DST_NUMBER_FIELD_RURI_USERPART => 'R-URI userpart',
-    DST_NUMBER_FIELD_TO_USERPART => 'To URI userpart'
+    DST_NUMBER_FIELD_TO_USERPART => 'To URI userpart',
+    DST_NUMBER_FIELD_DIVERSION_USERPART => 'Top Diversion header userpart'
   }.freeze
 
   SRC_NUMBER_FIELD_FROM_USERPART = 1
-  SRC_NUMBER_FIELD_PPI_USERPART = 2
-  SRC_NUMBER_FIELD_PAI_USERPART = 3
+  SRC_NUMBER_FIELD_FROM_DSP = 2
   SRC_NUMBER_FIELDS = {
     SRC_NUMBER_FIELD_FROM_USERPART => 'From URI userpart',
-    SRC_NUMBER_FIELD_PPI_USERPART => 'P-Preferred-Identity header userpart',
-    SRC_NUMBER_FIELD_PAI_USERPART => 'P-Asserted-Identity header userpart'
+    SRC_NUMBER_FIELD_FROM_DSP => 'From URI display name'
   }.freeze
 
   SRC_NAME_FIELD_FROM_DSP = 1
   SRC_NAME_FIELD_FROM_USERPART = 2
   SRC_NAME_FIELDS = {
-    SRC_NAME_FIELD_FROM_DSP => 'From header display name',
-    SRC_NAME_FIELD_FROM_USERPART => 'From header userpart'
+    SRC_NAME_FIELD_FROM_DSP => 'From URI display name',
+    SRC_NAME_FIELD_FROM_USERPART => 'From URI userpart'
   }.freeze
 
   module CONST
