@@ -25,6 +25,8 @@
 #  interface                        :string
 #  ip                               :inet             not null
 #  name                             :string           not null
+#  pai_rewrite_result               :string
+#  pai_rewrite_rule                 :string
 #  reject_calls                     :boolean          default(FALSE), not null
 #  require_incoming_auth            :boolean          default(FALSE), not null
 #  send_billing_information         :boolean          default(FALSE), not null

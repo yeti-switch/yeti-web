@@ -25,6 +25,8 @@
 #  interface                        :string           default([]), not null, is an Array
 #  ip                               :inet             default(["\"127.0.0.0/8\""]), is an Array
 #  name                             :string           not null
+#  pai_rewrite_result               :string
+#  pai_rewrite_rule                 :string
 #  reject_calls                     :boolean          default(FALSE), not null
 #  require_incoming_auth            :boolean          default(FALSE), not null
 #  send_billing_information         :boolean          default(FALSE), not null
@@ -338,9 +340,11 @@ class CustomersAuth < ApplicationRecord
   def ss_no_identity_action_name
     ss_no_identity_action_id.nil? ? nil : SS_NO_IDENTITY_ACTIONS[ss_no_identity_action_id]
   end
+
   def pai_policy_name
     PAI_POLICIES[pai_policy_id]
   end
+
   def diversion_policy_name
     DIVERSION_POLICIES[diversion_policy_id]
   end

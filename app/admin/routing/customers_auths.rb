@@ -45,7 +45,7 @@ ActiveAdmin.register CustomersAuth do
                  :send_billing_information,
                  :diversion_policy_name,
                  :diversion_rewrite_rule, :diversion_rewrite_result,
-                 :pai_policy_name,
+                 :pai_policy_name, :pai_rewrite_rule, :pai_rewrite_result,
                  [:src_number_field_name, proc { |row| row.src_number_field.try(:name) }],
                  [:src_name_field_name, proc { |row| row.src_name_field.try(:name) }],
                  [:dst_number_field_name, proc { |row| row.dst_number_field.try(:name) }],
@@ -74,7 +74,7 @@ ActiveAdmin.register CustomersAuth do
   permit_params :name, :enabled, :reject_calls, :customer_id, :rateplan_id, :routing_plan_id,
                 :gateway_id, :require_incoming_auth, :account_id, :check_account_balance,
                 :diversion_policy_id, :diversion_rewrite_rule, :diversion_rewrite_result,
-                :pai_policy_id,
+                :pai_policy_id, :pai_rewrite_rule, :pai_rewrite_result,
                 :src_name_rewrite_rule, :src_name_rewrite_result,
                 :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule,
                 :dst_rewrite_result,
@@ -317,11 +317,6 @@ ActiveAdmin.register CustomersAuth do
                                   scope: Routing::Numberlist.order(:name),
                                   path: '/numberlists/search'
           f.input :dump_level_id, as: :select, include_blank: false, collection: CustomersAuth::DUMP_LEVELS.invert
-          f.input :privacy_mode_id,
-                  as: :select,
-                  include_blank: false,
-                  collection: CustomersAuth::PRIVACY_MODES.invert,
-                  input_html: { class: :chosen }
           f.input :enable_audio_recording
           f.input :capacity
           f.input :cps_limit
@@ -349,22 +344,38 @@ ActiveAdmin.register CustomersAuth do
 
       tab :number_translation do
         f.inputs do
-          f.input :diversion_policy_id, as: :select, include_blank: false, collection: CustomersAuth::DIVERSION_POLICIES.invert
+          f.input :privacy_mode_id,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::PRIVACY_MODES.invert,
+                  input_html: { class: :chosen }
+
+          f.input :diversion_policy_id,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::DIVERSION_POLICIES.invert,
+                  input_html: { class: :chosen }
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
           f.input :src_numberlist_use_diversion
 
-          f.input :pai_policy_id, as: :select, include_blank: false, collection: CustomersAuth::PAI_POLICIES.invert
+          f.input :pai_policy_id,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::PAI_POLICIES.invert,
+                  input_html: { class: :chosen }
+          f.input :pai_rewrite_rule
+          f.input :pai_rewrite_result
 
-          f.input :src_name_field, as: :select, include_blank: false
+          f.input :src_name_field, as: :select, include_blank: false, input_html: { class: :chosen }
           f.input :src_name_rewrite_rule
           f.input :src_name_rewrite_result
 
-          f.input :src_number_field, as: :select, include_blank: false
+          f.input :src_number_field, as: :select, include_blank: false, input_html: { class: :chosen }
           f.input :src_rewrite_rule
           f.input :src_rewrite_result
 
-          f.input :dst_number_field, as: :select, include_blank: false
+          f.input :dst_number_field, as: :select, include_blank: false, input_html: { class: :chosen }
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
           f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
@@ -438,7 +449,6 @@ ActiveAdmin.register CustomersAuth do
           row :src_numberlist
 
           row :dump_level, &:dump_level_name
-          row :privacy_mode_id, &:privacy_mode_name
           row :enable_audio_recording
           row :capacity
           row :cps_limit
@@ -466,12 +476,15 @@ ActiveAdmin.register CustomersAuth do
       end
       tab :number_translation do
         attributes_table do
+          row :privacy_mode_id, &:privacy_mode_name
           row :diversion_policy, &:diversion_policy_name
           row :diversion_rewrite_rule
           row :diversion_rewrite_result
           row :src_numberlist_use_diversion
 
           row :pai_policy, &:pai_policy_name
+          row :pai_rewrite_rule
+          row :pai_rewrite_result
 
           row :src_name_field
           row :src_name_rewrite_rule

@@ -35,6 +35,9 @@
 #  max_dst_number_length            :integer(2)
 #  min_dst_number_length            :integer(2)
 #  name                             :string
+#  pai_policy_name                  :string
+#  pai_rewrite_result               :string
+#  pai_rewrite_rule                 :string
 #  pop_name                         :string
 #  privacy_mode_name                :string
 #  radius_accounting_profile_name   :string
@@ -66,13 +69,14 @@
 #  x_yeti_auth                      :string
 #  account_id                       :integer(4)
 #  customer_id                      :integer(4)
-#  diversion_policy_id              :integer(4)
+#  diversion_policy_id              :integer(2)
 #  dst_number_field_id              :integer(2)
 #  dst_numberlist_id                :integer(4)
 #  dump_level_id                    :integer(4)
 #  gateway_id                       :integer(4)
 #  lua_script_id                    :integer(2)
 #  o_id                             :bigint(8)
+#  pai_policy_id                    :integer(2)
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)
 #  radius_accounting_profile_id     :integer(2)
@@ -160,9 +164,11 @@ class Importing::CustomersAuth < Importing::Base
   def dump_level_display_name
     dump_level_id.nil? ? 'unknown' : CustomersAuth::DUMP_LEVELS[dump_level_id]
   end
+
   def diversion_policy_display_name
     diversion_policy_id.nil? ? 'unknown' : CustomersAuth::DIVERSION_POLICIES[diversion_policy_id]
   end
+
   def pai_policy_display_name
     pai_policy_id.nil? ? 'unknown' : CustomersAuth::PAI_POLICIES[pai_policy_id]
   end

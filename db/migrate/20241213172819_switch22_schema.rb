@@ -301,41 +301,6 @@ CREATE TYPE switch22.lua_call_context AS (
 );
 
 
-CREATE FUNCTION switch22.build_uri(i_canonical boolean, i_schema character varying, i_display_name character varying, i_username character varying, i_username_params character varying[], i_domain character varying, i_port integer, i_uri_params character varying[]) RETURNS character varying
-    LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10
-    AS $$
-DECLARE
-  v_domainport varchar;
-  v_username varchar;
-  v_uri varchar;
-BEGIN
-
-  if coalesce(cardinality(i_username_params),0) >0 then
-    v_username = i_username||';'||array_to_string(i_username_params,';');
-  else
-    v_username = i_username;
-  end if;
-
-  -- adding username, domain and port. Username and port are optional
-  v_uri = COALESCE(v_username||'@','')||i_domain||COALESCE(':'||i_port::varchar,'');
-
-  -- adding params after domainport if exists
-  if coalesce(cardinality(i_uri_params),0)>0 then
-    v_uri = v_uri||';'||array_to_string(i_uri_params,';');
-  end if;
-
-  if i_canonical then
-    v_uri = i_schema||':'||v_uri;
-  else
-    v_uri = COALESCE(i_display_name||' ','')||'<'||i_schema||':'||v_uri||'>';
-  end if;
-
-  return v_uri;
-END;
-$$;
-
-
-
 CREATE FUNCTION switch22.check_event(i_event_id integer) RETURNS boolean
     LANGUAGE plpgsql COST 10
     AS $$

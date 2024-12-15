@@ -6,11 +6,28 @@ class Switch22Functions < ActiveRecord::Migration[7.0]
 
     drop table class4.diversion_policy;
 
-    alter table class4.customers_auth add pai_policy_id smallint not null default 1; -- accept by default
-    alter table class4.customers_auth_normalized add pai_policy_id smallint not null default 1; -- accept by default
+    alter table class4.customers_auth
+      add pai_policy_id smallint not null default 1,
+      add pai_rewrite_rule varchar,
+      add pai_rewrite_result varchar;
+
+    alter table class4.customers_auth_normalized
+      add pai_policy_id smallint not null default 1,
+      add pai_rewrite_rule varchar,
+      add pai_rewrite_result varchar;
 
     alter table class4.customers_auth alter column diversion_policy_id type smallint;
     alter table class4.customers_auth_normalized alter column diversion_policy_id type smallint;
+
+    alter table data_import.import_customers_auth
+      add pai_policy_id smallint,
+      add pai_policy_name varchar,
+      add pai_rewrite_rule varchar,
+      add pai_rewrite_result varchar;
+
+    alter table data_import.import_customers_auth alter column diversion_policy_id type smallint;
+
+    INSERT INTO class4.disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8020, 0, true, true, 403, 'PAI header required', NULL, NULL, false, false, true, false);
 
     create type switch22.uri_ty as (
       s varchar,
@@ -25,7 +42,6 @@ class Switch22Functions < ActiveRecord::Migration[7.0]
 
     -- Diversion: test2 <sip:user2@domain2:5061;uparam1=uval21;uparam2=uval22?uhdr1=uhval1>;nparam1=nval1
 
-
 CREATE OR REPLACE FUNCTION switch22.build_uri(
   i_canonical boolean,
   i_schema character varying,
@@ -34,7 +50,9 @@ CREATE OR REPLACE FUNCTION switch22.build_uri(
   i_username_params character varying[],
   i_domain character varying,
   i_port integer,
-  i_uri_params character varying[]
+  i_uri_params character varying[],
+  i_uri_headers character varying[] default '{}'::varchar[],
+  i_header_params character varying[] default '{}'::varchar[]
 ) RETURNS character varying
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10
     AS $$
@@ -43,28 +61,41 @@ DECLARE
   v_username varchar;
   v_uri varchar;
 BEGIN
-
-  if coalesce(cardinality(i_username_params),0) >0 then
-    v_username = i_username||';'||array_to_string(i_username_params,';');
+  if i_schema = 'tel' then
+    v_uri = 'tel:'||i_username;
+    -- adding params after number if exists
+    if coalesce(cardinality(i_uri_params),0)>0 then
+      v_uri = v_uri||';'||array_to_string(i_uri_params,';');
+    end if;
+    v_uri = '<'||v_uri||'>';
   else
-    v_username = i_username;
+    -- sip or sips
+    if coalesce(cardinality(i_username_params),0) >0 then
+      v_username = i_username||';'||array_to_string(i_username_params,';');
+    else
+      v_username = i_username;
+    end if;
+
+    -- adding username, domain and port. Username and port are optional
+    v_uri = COALESCE(v_username||'@','')||i_domain||COALESCE(':'||i_port::varchar,'');
+
+    -- adding params after domainport if exists
+    if coalesce(cardinality(i_uri_params),0)>0 then
+      v_uri = v_uri||';'||array_to_string(i_uri_params,';');
+    end if;
+
+    if i_canonical then
+      v_uri = i_schema||':'||v_uri;
+    else
+      v_uri = '<'||i_schema||':'||v_uri||'>';
+      IF i_display_name is not null and i_display_name!='' THEN
+        v_uri = '"'||i_display_name||'" '||v_uri;
+      END IF;
+    end if;
   end if;
 
-  -- adding username, domain and port. Username and port are optional
-  v_uri = COALESCE(v_username||'@','')||i_domain||COALESCE(':'||i_port::varchar,'');
-
-  -- adding params after domainport if exists
-  if coalesce(cardinality(i_uri_params),0)>0 then
-    v_uri = v_uri||';'||array_to_string(i_uri_params,';');
-  end if;
-
-  if i_canonical then
-    v_uri = i_schema||':'||v_uri;
-  else
-    v_uri = '<'||i_schema||':'||v_uri||'>';
-    IF i_display_name is not null and i_display_name!='' THEN
-      v_uri = '"'||i_display_name||'" '||v_uri;
-    END IF;
+  if cardinality(i_header_params) > 0 then
+    v_uri = v_uri||';'||array_to_string(i_header_params,';');
   end if;
 
   return v_uri;
@@ -80,7 +111,7 @@ DECLARE
   v_username varchar;
   v_uri varchar;
 BEGIN
-  return switch22.build_uri(i_canonical, i_data.s, i_data.n, i_data.u, '{}'::varchar[], i_data.h, i_data.p, '{}'::varchar[]);
+  return switch22.build_uri(i_canonical, i_data.s, i_data.n, i_data.u, '{}'::varchar[], i_data.h, i_data.p, i_data.up_arr, i_data.uh_arr, i_data.np_arr);
 END;
 $$;
 
@@ -173,7 +204,7 @@ i_rpid_privacy character varying
         v_lua_context switch22.lua_call_context;
         v_identity_data switch22.identity_data_ty[];
         v_identity_record switch22.identity_data_ty;
-        v_pai switch22.uri_ty[];
+        v_pai switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
         v_ppi switch22.uri_ty;
         v_privacy varchar[];
         v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
@@ -231,14 +262,6 @@ i_rpid_privacy character varying
         v_ret.ruri_domain=i_uri_domain;
         v_ret.from_domain=i_from_domain;
         v_ret.to_domain=i_to_domain;
-
-        select into v_pai array_agg(d) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
-        v_pai = COALESCE(v_pai, ARRAY[]::switch22.uri_ty[]);
-
-        v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
-        if v_ppi.u is null then
-          v_ppi = null;
-        end if;
 
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
 
@@ -426,6 +449,17 @@ i_rpid_privacy character varying
           END LOOP;
         END IF;
 
+        IF v_customer_auth_normalized.pai_policy_id > 0 THEN /* accept or require */
+          -- PAI without userpart is useless
+          select into v_pai COALESCE(array_agg(d), ARRAY[]::switch22.uri_ty[]) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
+
+          -- PPI without userpart is useless
+          v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
+          if v_ppi.u is null then
+            v_ppi = null;
+          end if;
+        END IF;
+
         -- feel customer data ;-)
         v_ret.dump_level_id:=v_customer_auth_normalized.dump_level_id;
         v_ret.customer_auth_id:=v_customer_auth_normalized.customers_auth_id;
@@ -570,6 +604,12 @@ i_rpid_privacy character varying
 
         v_ret.customer_acc_external_id=v_c_acc.external_id;
         v_ret.customer_acc_vat=v_c_acc.vat;
+
+        IF v_customer_auth_normalized.pai_policy_id = 2 AND cardinality(v_pai) = 0 THEN
+          v_ret.disconnect_code_id = 8020; -- PAI header required;
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         v_ret.lega_res='';
         if v_customer_auth_normalized.capacity is not null then
@@ -790,7 +830,7 @@ i_rpid_privacy character varying
           if v_customer_auth_normalized.src_numberlist_use_diversion AND v_diversion[1].u is not null then
             /*dbg{*/
             v_end:=clock_timestamp();
-            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, fallback to %', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[1];
+            RAISE NOTICE '% ms -> SRC Numberlist processing. Lookup by key %, fallback to %', EXTRACT(MILLISECOND from v_end-v_start), v_ret.src_prefix_out, v_diversion[1].u;
             /*}dbg*/
             v_numberlist_item=switch22.match_numberlist(v_customer_auth_normalized.src_numberlist_id, v_ret.src_prefix_out, v_diversion[1].u);
           else
@@ -2161,22 +2201,24 @@ BEGIN
       /* Diversion as SIP URI */
       FOREACH v_diversion_header IN ARRAY i_diversion LOOP
         v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+        v_diversion_header.s = 'sip';
+        v_diversion_header.h = i_vendor_gw.diversion_domain;
         v_bleg_append_headers_req = array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <sip:%s@%s>', v_diversion_header.u, i_vendor_gw.diversion_domain)::varchar
+          'Diversion: '||switch22.build_uri(false, v_diversion_header)
         );
       END LOOP;
     ELSIF i_vendor_gw.diversion_send_mode_id = 3 THEN
       /* Diversion as TEL URI */
       FOREACH v_diversion_header IN ARRAY i_diversion LOOP
         v_diversion_header.u = yeti_ext.regexp_replace_rand(v_diversion_header.u, i_vendor_gw.diversion_rewrite_rule, i_vendor_gw.diversion_rewrite_result);
+        v_diversion_header.s = 'tel';
         v_bleg_append_headers_req=array_append(
           v_bleg_append_headers_req,
-          format('Diversion: <tel:%s>', v_diversion_header.u)::varchar
+          'Diversion: '||switch22.build_uri(false, v_diversion_header)
         );
       END LOOP;
     END IF;
-
   END IF;
 
   CASE i_vendor_gw.privacy_mode_id
@@ -2274,7 +2316,19 @@ BEGIN
       END LOOP;
       IF i_ppi.u is not null THEN
         i_ppi.s = 'sip';
-        i_ppi.s = COALESCE(i_ppi.h, i_vendor_gw.pai_domain);
+        i_ppi.h = COALESCE(i_ppi.h, i_vendor_gw.pai_domain);
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
+      END IF;
+    ELSIF i_vendor_gw.pai_send_mode_id = 7 THEN
+      -- relay with conversion to SIP URI. Force replace domain
+      FOREACH v_pai IN ARRAY i_pai LOOP
+        v_pai.s = 'sip';
+        v_pai.h = i_vendor_gw.pai_domain;
+        v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Asserted-Identity: %s', switch22.build_uri(false, v_pai))::varchar);
+      END LOOP;
+      IF i_ppi.u is not null THEN
+        i_ppi.s = 'sip';
+        i_ppi.h = i_vendor_gw.pai_domain;
         v_bleg_append_headers_req = array_append(v_bleg_append_headers_req, format('P-Preferred-Identity: %s', switch22.build_uri(false, i_ppi))::varchar);
       END IF;
     END IF;
@@ -2712,8 +2766,21 @@ $$;
   def down
     execute %q{
 
-      alter table class4.customers_auth drop column pai_policy_id;
-      alter table class4.customers_auth_normalized drop column pai_policy_id;
+      alter table class4.customers_auth
+        drop column pai_policy_id,
+        drop column pai_rewrite_rule,
+        drop column pai_rewrite_result;
+
+      alter table class4.customers_auth_normalized
+        drop column pai_policy_id,
+        drop column pai_rewrite_rule,
+        drop column pai_rewrite_result;
+
+      alter table data_import.import_customers_auth
+        drop column pai_policy_id,
+        drop column pai_policy_name,
+        drop column pai_rewrite_rule,
+        drop column pai_rewrite_result;
 
       create table class4.diversion_policy (
         id integer primary key,
@@ -2726,7 +2793,11 @@ $$;
       alter table class4.customers_auth alter column diversion_policy_id type integer;
       alter table class4.customers_auth_normalized alter column diversion_policy_id type integer;
 
+      alter table data_import.import_customers_auth alter column diversion_policy_id type integer;
+
       alter table class4.customers_auth add CONSTRAINT "customers_auth_diversion_policy_id_fkey" FOREIGN KEY (diversion_policy_id) REFERENCES class4.diversion_policy(id);
+
+      delete from class4.disconnect_code WHERE id=8020;
 
     }
   end
