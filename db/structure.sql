@@ -34982,6 +34982,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_identity_data switch22.identity_data_ty[];
         v_identity_record switch22.identity_data_ty;
         v_pai switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_pai_tmp switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_pai_header switch22.uri_ty;
         v_ppi switch22.uri_ty;
         v_privacy varchar[];
         v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
@@ -35228,12 +35230,23 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         IF v_customer_auth_normalized.pai_policy_id > 0 THEN /* accept or require */
           -- PAI without userpart is useless
-          select into v_pai COALESCE(array_agg(d), ARRAY[]::switch22.uri_ty[]) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
+          select into v_pai_tmp COALESCE(array_agg(d), ARRAY[]::switch22.uri_ty[]) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
+
+          FOREACH v_pai_header IN ARRAY v_pai_tmp LOOP
+            v_pai_header.u = yeti_ext.regexp_replace_rand(
+              v_pai_header.u,
+              v_customer_auth_normalized.pai_rewrite_rule,
+              v_customer_auth_normalized.pai_rewrite_result
+            );
+            v_pai = array_append(v_pai, v_pai_header);
+          END LOOP;
 
           -- PPI without userpart is useless
           v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
           if v_ppi.u is null then
             v_ppi = null;
+          else
+            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result);
           end if;
         END IF;
 
@@ -36634,6 +36647,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_identity_data switch22.identity_data_ty[];
         v_identity_record switch22.identity_data_ty;
         v_pai switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_pai_tmp switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_pai_header switch22.uri_ty;
         v_ppi switch22.uri_ty;
         v_privacy varchar[];
         v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
@@ -36880,12 +36895,23 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         IF v_customer_auth_normalized.pai_policy_id > 0 THEN /* accept or require */
           -- PAI without userpart is useless
-          select into v_pai COALESCE(array_agg(d), ARRAY[]::switch22.uri_ty[]) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
+          select into v_pai_tmp COALESCE(array_agg(d), ARRAY[]::switch22.uri_ty[]) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
+
+          FOREACH v_pai_header IN ARRAY v_pai_tmp LOOP
+            v_pai_header.u = yeti_ext.regexp_replace_rand(
+              v_pai_header.u,
+              v_customer_auth_normalized.pai_rewrite_rule,
+              v_customer_auth_normalized.pai_rewrite_result
+            );
+            v_pai = array_append(v_pai, v_pai_header);
+          END LOOP;
 
           -- PPI without userpart is useless
           v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
           if v_ppi.u is null then
             v_ppi = null;
+          else
+            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result);
           end if;
         END IF;
 
@@ -38283,6 +38309,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_identity_data switch22.identity_data_ty[];
         v_identity_record switch22.identity_data_ty;
         v_pai switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_pai_tmp switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
+        v_pai_header switch22.uri_ty;
         v_ppi switch22.uri_ty;
         v_privacy varchar[];
         v_diversion switch22.uri_ty[] not null default ARRAY[]::switch22.uri_ty[];
@@ -38504,12 +38532,23 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         IF v_customer_auth_normalized.pai_policy_id > 0 THEN /* accept or require */
           -- PAI without userpart is useless
-          select into v_pai COALESCE(array_agg(d), ARRAY[]::switch22.uri_ty[]) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
+          select into v_pai_tmp COALESCE(array_agg(d), ARRAY[]::switch22.uri_ty[]) from json_populate_recordset(null::switch22.uri_ty, i_pai) d WHERE d.u is not null and d.u!='';
+
+          FOREACH v_pai_header IN ARRAY v_pai_tmp LOOP
+            v_pai_header.u = yeti_ext.regexp_replace_rand(
+              v_pai_header.u,
+              v_customer_auth_normalized.pai_rewrite_rule,
+              v_customer_auth_normalized.pai_rewrite_result
+            );
+            v_pai = array_append(v_pai, v_pai_header);
+          END LOOP;
 
           -- PPI without userpart is useless
           v_ppi = json_populate_record(null::switch22.uri_ty, i_ppi);
           if v_ppi.u is null then
             v_ppi = null;
+          else
+            v_ppi.u = yeti_ext.regexp_replace_rand( v_ppi.u, v_customer_auth_normalized.pai_rewrite_rule, v_customer_auth_normalized.pai_rewrite_result);
           end if;
         END IF;
 

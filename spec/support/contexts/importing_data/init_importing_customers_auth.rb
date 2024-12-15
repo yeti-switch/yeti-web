@@ -27,8 +27,8 @@ shared_context :init_importing_customers_auth do |args|
       capacity: 1,
       src_name_rewrite_rule: '',
       src_name_rewrite_result: '',
-      diversion_policy_name: DiversionPolicy.find(1).name,
-      diversion_policy_id: DiversionPolicy.find(1).id,
+      diversion_policy_name: CustomersAuth::DIVERSION_POLICIES[CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT],
+      diversion_policy_id: CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT,
       diversion_rewrite_rule: '',
       diversion_rewrite_result: '',
       is_changed: true

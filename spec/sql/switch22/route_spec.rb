@@ -506,6 +506,8 @@ RSpec.describe '#routing logic' do
                           diversion_rewrite_rule: customer_auth_diversion_rewrite_rule,
                           diversion_rewrite_result: customer_auth_diversion_rewrite_result,
                           pai_policy_id: customer_auth_pai_policy_id,
+                          pai_rewrite_rule: customer_auth_pai_rewrite_rule,
+                          pai_rewrite_result: customer_auth_pai_rewrite_result,
                           cps_limit: customer_auth_cps_limit,
                           src_numberlist_id: customer_auth_src_numberlist_id,
                           dst_numberlist_id: customer_auth_dst_numberlist_id,
@@ -533,6 +535,8 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_diversion_rewrite_rule) { nil } # removing +380
       let(:customer_auth_diversion_rewrite_result) { nil }
       let(:customer_auth_pai_policy_id) { CustomersAuth::PAI_POLICY_NOT_ACCEPT }
+      let(:customer_auth_pai_rewrite_rule) { nil }
+      let(:customer_auth_pai_rewrite_result) { nil }
       let(:customer_auth_cps_limit) { nil }
       let(:customer_auth_src_numberlist_id) { nil }
       let(:customer_auth_dst_numberlist_id) { nil }
@@ -2242,6 +2246,30 @@ RSpec.describe '#routing logic' do
               [
                 'P-Asserted-Identity: "name3" <sip:+3800000000@domain2:5062;uparam1=uval11;uparam2=uval12>;nparam1=nval1',
                 'P-Preferred-Identity: "name1" <sip:+38067689798989@domain1:5060;uparam1=uval11;uparam2=uval12>;nparam1=nval1'
+              ]
+            }
+
+            it 'response with PAI headers ' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil) # no routing Error
+              expect(subject.first[:dst_prefix_out]).to eq('uri-name') # Original destination
+              expect(subject.first[:dst_prefix_routing]).to eq('uri-name') # Original destination
+              expect(subject.first[:append_headers_req]).to eq(expected_headers.join('\r\n'))
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+
+          context 'Accepted with rewrite' do
+            let(:customer_auth_pai_policy_id) { CustomersAuth::PAI_POLICY_ACCEPT }
+            let(:customer_auth_pai_rewrite_rule) { '^\+380(.*)$'}
+            let(:customer_auth_pai_rewrite_result) { '123\1'}
+
+            let!(:expected_headers) {
+              [
+                'P-Asserted-Identity: "name3" <sip:1230000000@domain2:5062;uparam1=uval11;uparam2=uval12>;nparam1=nval1',
+                'P-Preferred-Identity: "name1" <sip:12367689798989@domain1:5060;uparam1=uval11;uparam2=uval12>;nparam1=nval1'
               ]
             }
 
