@@ -7,6 +7,11 @@ class RemoveCustomerAuthNumberFields < ActiveRecord::Migration[7.0]
       drop table class4.customers_auth_src_name_fields;
       drop table class4.customers_auth_src_number_fields;
       drop table class4.customers_auth_dst_number_fields;
+
+      delete from data_import.import_customers_auth;
+      alter table data_import.import_customers_auth
+        alter column src_name_field_name type varchar,
+        alter column dst_number_field_name type varchar;
     }
   end
 
@@ -37,6 +42,12 @@ class RemoveCustomerAuthNumberFields < ActiveRecord::Migration[7.0]
       alter table class4.customers_auth add constraint "customers_auth_dst_number_field_id_fkey" FOREIGN KEY (dst_number_field_id) REFERENCES class4.customers_auth_dst_number_fields(id);
       alter table class4.customers_auth add constraint  "customers_auth_src_name_field_id_fkey" FOREIGN KEY (src_name_field_id) REFERENCES class4.customers_auth_src_name_fields(id);
       alter table class4.customers_auth add constraint"customers_auth_src_number_field_id_fkey" FOREIGN KEY (src_number_field_id) REFERENCES class4.customers_auth_src_number_fields(id);
+
+
+      delete from data_import.import_customers_auth;
+      alter table data_import.import_customers_auth
+        alter column src_name_field_name type smallint,
+        alter column dst_number_field_name type smallint;
     }
   end
 end
