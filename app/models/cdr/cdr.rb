@@ -117,6 +117,7 @@
 #  dst_area_id                     :integer(4)
 #  dst_country_id                  :integer(4)
 #  dst_network_id                  :integer(4)
+#  dst_network_type_id             :integer(2)
 #  dump_level_id                   :integer(2)
 #  failed_resource_id              :bigint(8)
 #  failed_resource_type_id         :integer(2)
@@ -138,6 +139,7 @@
 #  src_area_id                     :integer(4)
 #  src_country_id                  :integer(4)
 #  src_network_id                  :integer(4)
+#  src_network_type_id             :integer(2)
 #  term_call_id                    :string
 #  term_gw_external_id             :bigint(8)
 #  term_gw_id                      :integer(4)
@@ -201,8 +203,8 @@ class Cdr::Cdr < Cdr::Base
   ADMIN_PRELOAD_LIST = %i[
     dialpeer routing_group destination
     auth_orig_transport_protocol sign_orig_transport_protocol
-    src_network src_country
-    dst_network dst_country
+    src_network src_country src_network_type
+    dst_network dst_country dst_network_type
     routing_plan vendor
     term_gw orig_gw customer_auth vendor_acc customer_acc
     dst_area customer rateplan pop src_area lnp_database
@@ -234,10 +236,14 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
+
   belongs_to :src_network, class_name: 'System::Network', foreign_key: :src_network_id, optional: true
+  belongs_to :src_network_type, class_name: 'System::NetworkType', foreign_key: :src_network_type_id, optional: true
   belongs_to :src_country, class_name: 'System::Country', foreign_key: :src_country_id, optional: true
   belongs_to :dst_network, class_name: 'System::Network', foreign_key: :dst_network_id, optional: true
+  belongs_to :dst_network_type, class_name: 'System::NetworkType', foreign_key: :dst_network_type_id, optional: true
   belongs_to :dst_country, class_name: 'System::Country', foreign_key: :dst_country_id, optional: true
+
   belongs_to :lnp_database, class_name: 'Lnp::Database', foreign_key: :lnp_database_id, optional: true
   belongs_to :auth_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :auth_orig_transport_protocol_id, optional: true
   belongs_to :sign_orig_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :sign_orig_transport_protocol_id, optional: true

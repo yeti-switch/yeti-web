@@ -117,6 +117,7 @@
 #  dst_area_id                     :integer(4)
 #  dst_country_id                  :integer(4)
 #  dst_network_id                  :integer(4)
+#  dst_network_type_id             :integer(2)
 #  dump_level_id                   :integer(2)
 #  failed_resource_id              :bigint(8)
 #  failed_resource_type_id         :integer(2)
@@ -138,6 +139,7 @@
 #  src_area_id                     :integer(4)
 #  src_country_id                  :integer(4)
 #  src_network_id                  :integer(4)
+#  src_network_type_id             :integer(2)
 #  term_call_id                    :string
 #  term_gw_external_id             :bigint(8)
 #  term_gw_id                      :integer(4)

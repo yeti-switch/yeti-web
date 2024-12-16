@@ -480,8 +480,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           row :src_country
           row :src_network
+          row :src_network_type
           row :dst_country
           row :dst_network
+          row :dst_network_type
 
           row :node
           row :pop
