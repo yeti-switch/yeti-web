@@ -1722,9 +1722,9 @@ BEGIN
   v_version_data:=json_populate_record(null::switch.versions_ty, i_versions);
   v_dynamic:=json_populate_record(null::switch.dynamic_cdr_data_ty, i_dynamic);
 
-  v_lega_request_headers:=json_populate_record(null::switch.lega_request_headers_ty, i_lega_request_headers);
-  v_legb_request_headers:=json_populate_record(null::switch.legb_request_headers_ty, i_legb_request_headers);
-  v_legb_reply_headers:=json_populate_record(null::switch.legb_reply_headers_ty, i_legb_reply_headers);
+  v_lega_request_headers = json_populate_record(null::switch.lega_request_headers_ty, i_lega_request_headers);
+  v_legb_request_headers = json_populate_record(null::switch.legb_request_headers_ty, i_legb_request_headers);
+  v_legb_reply_headers = json_populate_record(null::switch.legb_reply_headers_ty, i_legb_reply_headers);
 
   v_cdr.p_charge_info_in = v_lega_request_headers.p_charge_info;
 
@@ -1737,6 +1737,20 @@ BEGIN
   v_cdr.legb_q850_cause = v_legb_reason.q850_cause;
   v_cdr.legb_q850_text = v_legb_reason.q850_text;
   v_cdr.legb_q850_params = v_legb_reason.q850_params;
+
+  v_cdr.diversion_in = array_to_string(v_lega_request_headers.diversion, ',');
+  v_cdr.pai_in = array_to_string(v_lega_request_headers.p_asserted_identity, ',');
+  v_cdr.ppi_in = v_lega_request_headers.p_preferred_identity;
+  v_cdr.privacy_in = array_to_string(v_lega_request_headers.privacy, ',');
+  v_cdr.rpid_in = array_to_string(v_lega_request_headers.remote_party_id, ',');
+  v_cdr.rpid_privacy_in = array_to_string(v_lega_request_headers.rpid_privacy, ',');
+
+  v_cdr.diversion_out = array_to_string(v_legb_request_headers.diversion, ',');
+  v_cdr.pai_out = array_to_string(v_legb_request_headers.p_asserted_identity, ',');
+  v_cdr.ppi_out = v_legb_request_headers.p_preferred_identity;
+  v_cdr.privacy_out = array_to_string(v_legb_request_headers.privacy, ',');
+  v_cdr.rpid_out = array_to_string(v_legb_request_headers.remote_party_id, ',');
+  v_cdr.rpid_privacy_out = array_to_string(v_legb_request_headers.rpid_privacy, ',');
 
   v_cdr.lega_identity = i_lega_identity;
   v_cdr.lega_ss_status_id = v_dynamic.lega_ss_status_id;
@@ -1893,8 +1907,11 @@ BEGIN
 
   v_cdr.src_country_id = v_dynamic.src_country_id;
   v_cdr.src_network_id = v_dynamic.src_network_id;
+  v_cdr.src_network_type_id = v_dynamic.src_network_type_id;
   v_cdr.dst_country_id = v_dynamic.dst_country_id;
   v_cdr.dst_network_id = v_dynamic.dst_network_id;
+  v_cdr.dst_network_type_id = v_dynamic.dst_network_type_id;
+
   v_cdr.dst_prefix_routing = v_dynamic.dst_prefix_routing;
   v_cdr.src_prefix_routing = v_dynamic.src_prefix_routing;
   v_cdr.routing_plan_id = v_dynamic.routing_plan_id;
@@ -1912,20 +1929,6 @@ BEGIN
 
   v_cdr.id = nextval('cdr.cdr_id_seq'::regclass);
   v_cdr.uuid = public.uuid_generate_v1();
-
-  v_cdr.diversion_in = array_to_string(v_lega_request_headers.diversion, ',');
-  v_cdr.pai_in = string_to_array(v_lega_request_headers.p_asserted_identity, ',');
-  v_cdr.ppi_in = v_lega_request_headers.p_preferred_identity;
-  v_cdr.privacy_in = string_to_array(v_lega_request_headers.privacy, ',');
-  v_cdr.rpid_in = string_to_array(v_lega_request_headers.remote_party_id, ',');
-  v_cdr.rpid_privacy_in = string_to_array(v_lega_request_headers.rpid_privacy, ',');
-
-  v_cdr.diversion_out = array_to_string(v_legb_request_headers.diversion, ',');
-  v_cdr.pai_out = string_to_array(v_lega_request_headers.p_asserted_identity, ',');
-  v_cdr.ppi_out = v_lega_request_headers.p_preferred_identity;
-  v_cdr.privacy_out = string_to_array(v_lega_request_headers.privacy, ',');
-  v_cdr.rpid_out = string_to_array(v_lega_request_headers.remote_party_id, ',');
-  v_cdr.rpid_privacy_out = string_to_array(v_lega_request_headers.rpid_privacy, ',');
 
   v_cdr.failed_resource_type_id = i_failed_resource_type_id;
   v_cdr.failed_resource_id = i_failed_resource_id;
