@@ -18,7 +18,7 @@ ActiveAdmin.register CustomersAuth do
   decorate_with CustomersAuthDecorator
 
   acts_as_export :id, :enabled, :reject_calls, :name,
-                 [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || '' }],
+                 :transport_protocol_name,
                  :ip,
                  [:pop_name, proc { |row| row.pop.try(:name) || '' }],
                  :src_prefix,
@@ -100,7 +100,7 @@ ActiveAdmin.register CustomersAuth do
   # , :enable_redirect, :redirect_method, :redirect_to
 
   includes :tag_action, :rateplan, :routing_plan, :gateway, :src_numberlist, :dst_numberlist,
-           :pop, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol,
+           :pop, :radius_auth_profile, :radius_accounting_profile, :customer,
            :lua_script, :cnam_database,
            account: :contractor
 
@@ -130,7 +130,7 @@ ActiveAdmin.register CustomersAuth do
     column :name
     column :enabled
     column :reject_calls
-    column :transport_protocol
+    column :transport_protocol, &:transport_protocol_name
     column :ip
     column :pop
     column :src_prefix
@@ -232,7 +232,7 @@ ActiveAdmin.register CustomersAuth do
   filter :pai_policy_id_eq, label: 'PAI policy', as: :select, collection: CustomersAuth::PAI_POLICIES.invert
   filter :privacy_mode_id_eq, label: 'Privacy mode', as: :select, collection: CustomersAuth::PRIVACY_MODES.invert, input_html: { class: 'chosen' }
   filter :enable_audio_recording, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :transport_protocol
+  filter :transport_protocol_id_eq, label: 'Transport protocol', as: :select, collection: CustomersAuth::TRANSPORT_PROTOCOLS.invert
   filter :ip_covers,
          as: :string,
          input_html: { class: 'search_filter_string' },
@@ -322,7 +322,12 @@ ActiveAdmin.register CustomersAuth do
         end
 
         f.inputs 'Match conditions' do
-          f.input :transport_protocol, as: :select, include_blank: 'Any'
+          f.input :transport_protocol_id,
+                  as: :select,
+                  include_blank: 'Any',
+                  collection: CustomersAuth::TRANSPORT_PROTOCOLS.invert,
+                  input_html: { class: :chosen }
+
           f.input :ip, as: :array_of_strings
           f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }
           f.input :src_prefix, as: :array_of_strings
@@ -467,7 +472,7 @@ ActiveAdmin.register CustomersAuth do
         end
         panel 'Match conditions' do
           attributes_table_for s do
-            row :transport_protocol
+            row :transport_protocol, &:transport_protocol_name
             row :ip
             row :pop
             row :src_prefix

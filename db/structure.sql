@@ -49023,14 +49023,6 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
--- Name: customers_auth customers_auth_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.customers_auth
-    ADD CONSTRAINT customers_auth_transport_protocol_id_fkey FOREIGN KEY (transport_protocol_id) REFERENCES class4.transport_protocols(id);
-
-
---
 -- Name: destination_next_rates destination_next_rates_destination_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 

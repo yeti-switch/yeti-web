@@ -100,11 +100,20 @@
 #  customers_auth_routing_plan_id_fkey               (routing_plan_id => routing_plans.id)
 #  customers_auth_src_blacklist_id_fkey              (src_numberlist_id => numberlists.id)
 #  customers_auth_tag_action_id_fkey                 (tag_action_id => tag_actions.id)
-#  customers_auth_transport_protocol_id_fkey         (transport_protocol_id => transport_protocols.id)
 #
 
 class CustomersAuth < ApplicationRecord
   self.table_name = 'class4.customers_auth'
+
+
+  TRANSPORT_PROTOCOL_UDP = 1
+  TRANSPORT_PROTOCOL_TCP = 2
+  TRANSPORT_PROTOCOL_TLS = 3
+  TRANSPORT_PROTOCOLS = {
+    TRANSPORT_PROTOCOL_UDP => 'UDP',
+    TRANSPORT_PROTOCOL_TCP => 'TCP',
+    TRANSPORT_PROTOCOL_TLS => 'TLS'
+  }.freeze
 
   DUMP_LEVEL_DISABLED = 0
   DUMP_LEVEL_CAPTURE_SIP = 1
@@ -231,7 +240,6 @@ class CustomersAuth < ApplicationRecord
   belongs_to :src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true
   belongs_to :radius_auth_profile, class_name: 'Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id, optional: true
   belongs_to :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id, optional: true
-  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id, optional: true
 
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
@@ -300,6 +308,8 @@ class CustomersAuth < ApplicationRecord
   validates :src_number_field_id, inclusion: { in: CustomersAuth::SRC_NUMBER_FIELDS.keys }, allow_nil: false
   validates :dst_number_field_id, inclusion: { in: CustomersAuth::DST_NUMBER_FIELDS.keys }, allow_nil: false
 
+  validates :transport_protocol_id, inclusion: { in: CustomersAuth::TRANSPORT_PROTOCOLS.keys }, allow_nil: true
+
   validates_with TagActionValueValidator
 
   include Yeti::StateUpdater
@@ -341,6 +351,9 @@ class CustomersAuth < ApplicationRecord
     "#{name} | #{id}"
   end
 
+  def transport_protocol_name
+    transport_protocol_id.nil? ? 'Any' : TRANSPORT_PROTOCOLS[transport_protocol_id]
+  end
   def dump_level_name
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end

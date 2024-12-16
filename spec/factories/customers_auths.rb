@@ -100,7 +100,6 @@
 #  customers_auth_routing_plan_id_fkey               (routing_plan_id => routing_plans.id)
 #  customers_auth_src_blacklist_id_fkey              (src_numberlist_id => numberlists.id)
 #  customers_auth_tag_action_id_fkey                 (tag_action_id => tag_actions.id)
-#  customers_auth_transport_protocol_id_fkey         (transport_protocol_id => transport_protocols.id)
 #
 FactoryBot.define do
   factory :customers_auth, class: 'CustomersAuth' do

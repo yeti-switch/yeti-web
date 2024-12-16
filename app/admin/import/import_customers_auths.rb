@@ -31,7 +31,7 @@ ActiveAdmin.register Importing::CustomersAuth do
     column :name
     column :enabled
     column :reject_calls
-    column :transport_protocol, sortable: :transport_protocol_name
+    column :transport_protocol, &:transport_protocol_display_name
     column :ip
     column :pop, sortable: :pop_name
     column :src_prefix

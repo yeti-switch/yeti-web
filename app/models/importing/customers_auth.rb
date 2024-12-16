@@ -106,7 +106,6 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true
   belongs_to :radius_auth_profile, class_name: '::Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id, optional: true
   belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id, optional: true
-  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id, optional: true
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
@@ -163,6 +162,9 @@ class Importing::CustomersAuth < Importing::Base
 
   import_for ::CustomersAuth
 
+  def transport_protocol_display_name
+    transport_protocol_id.nil? ? 'Any' : CustomersAuth::TRANSPORT_PROTOCOLS[transport_protocol_id]
+  end
   def dump_level_display_name
     dump_level_id.nil? ? 'unknown' : CustomersAuth::DUMP_LEVELS[dump_level_id]
   end
@@ -179,6 +181,7 @@ class Importing::CustomersAuth < Importing::Base
     where(src_prefix: nil).update_all(src_prefix: '')
     where(dst_prefix: nil).update_all(dst_prefix: '')
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
+    resolve_integer_constant('transport_protocol_id', 'transport_protocol_name', CustomersAuth::TRANSPORT_PROTOCOLS)
     resolve_integer_constant('dump_level_id', 'dump_level_name', CustomersAuth::DUMP_LEVELS)
     resolve_integer_constant('privacy_mode_id', 'privacy_mode_name', CustomersAuth::PRIVACY_MODES)
     resolve_integer_constant('diversion_policy_id', 'diversion_policy_name', CustomersAuth::DIVERSION_POLICIES)

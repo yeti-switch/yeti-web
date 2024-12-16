@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::CustomersAuthResource < BaseResource
-  attributes :name, :ip, :enabled, :reject_calls, :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result,
+  attributes :name, :transport_protocol_id, :ip, :enabled, :reject_calls, :src_rewrite_rule, :src_rewrite_result, :dst_rewrite_rule, :dst_rewrite_result,
              :src_prefix, :src_number_min_length, :src_number_max_length,
              :dst_prefix, :dst_number_min_length, :dst_number_max_length,
              :x_yeti_auth, :capacity, :cps_limit, :uri_domain,
@@ -24,7 +24,6 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   has_one :tag_action, class_name: 'TagAction', always_include_linkage_data: true
   has_one :radius_auth_profile, class_name: 'RadiusAuthProfile', always_include_linkage_data: true
   has_one :radius_accounting_profile, class_name: 'RadiusAccountingProfile', always_include_linkage_data: true
-  has_one :transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
 
   filter :name
 
@@ -39,7 +38,6 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   relationship_filter :tag_action
   relationship_filter :radius_auth_profile
   relationship_filter :radius_accounting_profile
-  relationship_filter :transport_protocol
 
   ransack_filter :name, type: :string
   ransack_filter :enabled, type: :boolean
@@ -83,6 +81,7 @@ class Api::Rest::Admin::CustomersAuthResource < BaseResource
   ransack_filter :tag_action_value, type: :number
   ransack_filter :external_id, type: :number
   ransack_filter :external_type, type: :string
+  ransack_filter :transport_protocol_id, type: :number
   ransack_filter :dump_level_id, type: :number
 
   def self.updatable_fields(_context)
