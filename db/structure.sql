@@ -1652,7 +1652,9 @@ CREATE TYPE switch22.callprofile_ty AS (
 	ss_attest_id smallint,
 	lega_res character varying,
 	legb_res character varying,
-	package_counter_id bigint
+	package_counter_id bigint,
+	src_network_type smallint,
+	dst_network_type smallint
 );
 
 
@@ -1678,6 +1680,17 @@ CREATE TYPE switch22.cnam_lua_resp AS (
 CREATE TYPE switch22.defered_rewrite AS (
 	rule character varying,
 	result character varying
+);
+
+
+--
+-- Name: detect_network_ty; Type: TYPE; Schema: switch22; Owner: -
+--
+
+CREATE TYPE switch22.detect_network_ty AS (
+	network_id integer,
+	network_type_id smallint,
+	country_id integer
 );
 
 
@@ -31406,14 +31419,16 @@ $$;
 -- Name: detect_network(character varying); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.detect_network(i_dst character varying) RETURNS sys.network_prefixes
+CREATE FUNCTION switch22.detect_network(i_dst character varying) RETURNS switch22.detect_network_ty
     LANGUAGE plpgsql COST 10
     AS $$
 declare
-  v_ret sys.network_prefixes%rowtype;
+  v_ret switch22.detect_network_ty;
 BEGIN
 
-  select into v_ret *
+  SELECT INTO v_ret.network_id, v_ret.country_id
+    network_id,
+    country_id
   from sys.network_prefixes np
   where
     prefix_range(np.prefix)@>prefix_range(i_dst) AND
@@ -31421,6 +31436,10 @@ BEGIN
     np.number_max_length >= length(i_dst)
   order by length(prefix_range(np.prefix)) desc
   limit 1;
+
+  IF v_ret.network_id IS NOT NULL THEN
+    SELECT INTO v_ret.network_type_id type_id FROM sys.networks WHERE id = v_ret.network_id;
+  END IF;
 
   return v_ret;
 END;
@@ -34954,8 +34973,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_route_found boolean:=false;
         v_c_acc billing.accounts%rowtype;
         v_v_acc billing.accounts%rowtype;
-        v_network sys.network_prefixes%rowtype;
-        v_src_network sys.network_prefixes%rowtype;
+        v_dst_network switch22.detect_network_ty;
+        v_src_network switch22.detect_network_ty;
         routedata record;
         /*dbg{*/
         v_start timestamp;
@@ -36037,13 +36056,15 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> DST. search start. Routing key: %. Routing tags: %, Rate limit: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_ret.routing_tag_ids, v_destination_rate_limit;
         /*}dbg*/
-        v_src_network:=switch22.detect_network(v_ret.src_prefix_routing);
-        v_ret.src_network_id=v_src_network.network_id;
-        v_ret.src_country_id=v_src_network.country_id;
+        v_src_network = switch22.detect_network(v_ret.src_prefix_routing);
+        v_ret.src_network_id = v_src_network.network_id;
+        v_ret.src_network_type_id = v_src_network.network_type_id;
+        v_ret.src_country_id = v_src_network.country_id;
 
-        v_network:=switch22.detect_network(v_ret.dst_prefix_routing);
-        v_ret.dst_network_id=v_network.network_id;
-        v_ret.dst_country_id=v_network.country_id;
+        v_dst_network = switch22.detect_network(v_ret.dst_prefix_routing);
+        v_ret.dst_network_id = v_dst_network.network_id;
+        v_ret.dst_network_type_id = v_dst_network.network_type_id;
+        v_ret.dst_country_id = v_dst_network.country_id;
 
         IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
           /*dbg{*/
@@ -36619,8 +36640,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_route_found boolean:=false;
         v_c_acc billing.accounts%rowtype;
         v_v_acc billing.accounts%rowtype;
-        v_network sys.network_prefixes%rowtype;
-        v_src_network sys.network_prefixes%rowtype;
+        v_dst_network switch22.detect_network_ty;
+        v_src_network switch22.detect_network_ty;
         routedata record;
         /*dbg{*/
         v_start timestamp;
@@ -37702,13 +37723,15 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> DST. search start. Routing key: %. Routing tags: %, Rate limit: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_ret.routing_tag_ids, v_destination_rate_limit;
         /*}dbg*/
-        v_src_network:=switch22.detect_network(v_ret.src_prefix_routing);
-        v_ret.src_network_id=v_src_network.network_id;
-        v_ret.src_country_id=v_src_network.country_id;
+        v_src_network = switch22.detect_network(v_ret.src_prefix_routing);
+        v_ret.src_network_id = v_src_network.network_id;
+        v_ret.src_network_type_id = v_src_network.network_type_id;
+        v_ret.src_country_id = v_src_network.country_id;
 
-        v_network:=switch22.detect_network(v_ret.dst_prefix_routing);
-        v_ret.dst_network_id=v_network.network_id;
-        v_ret.dst_country_id=v_network.country_id;
+        v_dst_network = switch22.detect_network(v_ret.dst_prefix_routing);
+        v_ret.dst_network_id = v_dst_network.network_id;
+        v_ret.dst_network_type_id = v_dst_network.network_type_id;
+        v_ret.dst_country_id = v_dst_network.country_id;
 
         IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
           /*dbg{*/
@@ -38284,8 +38307,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_route_found boolean:=false;
         v_c_acc billing.accounts%rowtype;
         v_v_acc billing.accounts%rowtype;
-        v_network sys.network_prefixes%rowtype;
-        v_src_network sys.network_prefixes%rowtype;
+        v_dst_network switch22.detect_network_ty;
+        v_src_network switch22.detect_network_ty;
         routedata record;
         
         v_rate NUMERIC;
@@ -39223,13 +39246,15 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
 
 
         
-        v_src_network:=switch22.detect_network(v_ret.src_prefix_routing);
-        v_ret.src_network_id=v_src_network.network_id;
-        v_ret.src_country_id=v_src_network.country_id;
+        v_src_network = switch22.detect_network(v_ret.src_prefix_routing);
+        v_ret.src_network_id = v_src_network.network_id;
+        v_ret.src_network_type_id = v_src_network.network_type_id;
+        v_ret.src_country_id = v_src_network.country_id;
 
-        v_network:=switch22.detect_network(v_ret.dst_prefix_routing);
-        v_ret.dst_network_id=v_network.network_id;
-        v_ret.dst_country_id=v_network.country_id;
+        v_dst_network = switch22.detect_network(v_ret.dst_prefix_routing);
+        v_ret.dst_network_id = v_dst_network.network_id;
+        v_ret.dst_network_type_id = v_dst_network.network_type_id;
+        v_ret.dst_country_id = v_dst_network.country_id;
 
         IF v_rp.validate_dst_number_network AND v_ret.dst_network_id is null THEN
           
@@ -50116,6 +50141,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241107212537'),
 ('20241213172819'),
 ('20241213175248'),
-('20241215155451');
+('20241215155451'),
+('20241216165130');
 
 
