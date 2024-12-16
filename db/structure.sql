@@ -1653,8 +1653,8 @@ CREATE TYPE switch22.callprofile_ty AS (
 	lega_res character varying,
 	legb_res character varying,
 	package_counter_id bigint,
-	src_network_type smallint,
-	dst_network_type smallint
+	src_network_type_id smallint,
+	dst_network_type_id smallint
 );
 
 

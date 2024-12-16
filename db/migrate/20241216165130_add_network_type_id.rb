@@ -12,8 +12,8 @@ INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_rad
     );
 
     alter type switch22.callprofile_ty
-      add attribute src_network_type smallint,
-      add attribute dst_network_type smallint;
+      add attribute src_network_type_id smallint,
+      add attribute dst_network_type_id smallint;
 
 DROP FUNCTION switch22.detect_network(i_dst character varying);
 
@@ -3474,8 +3474,8 @@ DROP TYPE switch22.detect_network_ty;
       set search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
     alter type switch22.callprofile_ty
-      drop attribute src_network_type,
-      drop attribute dst_network_type;
+      drop attribute src_network_type_id,
+      drop attribute dst_network_type_id;
 
     delete from switch22.switch_interface_out where id IN (1048, 1049);
 
