@@ -9,7 +9,7 @@ RSpec.describe 'Export Customers Auth', type: :feature do
 
   let!(:item) do
     create(:customers_auth,
-           transport_protocol: Equipment::TransportProtocol.take,
+           transport_protocol_id: CustomersAuth::TRANSPORT_PROTOCOL_TCP,
            pop: create(:pop),
            dst_numberlist: create(:numberlist),
            src_numberlist: create(:numberlist),
@@ -44,7 +44,7 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Enabled', item.enabled.to_s, anything],
         ['Reject calls', item.reject_calls.to_s, anything],
         ['Name', item.name, anything],
-        ['Transport protocol name', item.transport_protocol.name, anything],
+        ['Transport protocol name', item.transport_protocol_name, anything],
         ['IP', item.ip.join(', '), anything],
         ['Pop name', item.pop.name, anything],
         ['SRC Prefix', item.src_prefix.join(', '), anything],

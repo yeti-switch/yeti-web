@@ -257,13 +257,13 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :request do
     end
 
     context 'with filter by transport_protocol.id' do
-      let!(:transport_protocol) { Equipment::TransportProtocol.first }
-      let!(:other_transport_protocol) { Equipment::TransportProtocol.second }
-      let!(:customers_auths) { create_list(:customers_auth, 3, transport_protocol: transport_protocol) }
-      before { create(:customers_auth, transport_protocol: other_transport_protocol) }
+      let!(:transport_protocol_id) { CustomersAuth::TRANSPORT_PROTOCOL_UDP }
+      let!(:other_transport_protocol_id) { CustomersAuth::TRANSPORT_PROTOCOL_TCP }
+      let!(:customers_auths) { create_list(:customers_auth, 3, transport_protocol_id: transport_protocol_id) }
+      before { create(:customers_auth, transport_protocol_id: other_transport_protocol_id) }
 
       let(:request_params) do
-        { filter: { 'transport_protocol.id': transport_protocol.id } }
+        { filter: { 'transport_protocol_id_eq': transport_protocol_id } }
       end
 
       it 'returns filtered gateways by transport_protocol.id' do

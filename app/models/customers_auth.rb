@@ -105,7 +105,6 @@
 class CustomersAuth < ApplicationRecord
   self.table_name = 'class4.customers_auth'
 
-
   TRANSPORT_PROTOCOL_UDP = 1
   TRANSPORT_PROTOCOL_TCP = 2
   TRANSPORT_PROTOCOL_TLS = 3
@@ -354,6 +353,7 @@ class CustomersAuth < ApplicationRecord
   def transport_protocol_name
     transport_protocol_id.nil? ? 'Any' : TRANSPORT_PROTOCOLS[transport_protocol_id]
   end
+
   def dump_level_name
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end

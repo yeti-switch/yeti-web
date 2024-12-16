@@ -165,6 +165,7 @@ class Importing::CustomersAuth < Importing::Base
   def transport_protocol_display_name
     transport_protocol_id.nil? ? 'Any' : CustomersAuth::TRANSPORT_PROTOCOLS[transport_protocol_id]
   end
+
   def dump_level_display_name
     dump_level_id.nil? ? 'unknown' : CustomersAuth::DUMP_LEVELS[dump_level_id]
   end
