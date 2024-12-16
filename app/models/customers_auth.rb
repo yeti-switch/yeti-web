@@ -91,7 +91,6 @@
 #  customers_auth_cnam_database_id_fkey              (cnam_database_id => cnam_databases.id)
 #  customers_auth_customer_id_fkey                   (customer_id => contractors.id)
 #  customers_auth_dst_blacklist_id_fkey              (dst_numberlist_id => numberlists.id)
-#  customers_auth_dst_number_field_id_fkey           (dst_number_field_id => customers_auth_dst_number_fields.id)
 #  customers_auth_gateway_id_fkey                    (gateway_id => gateways.id)
 #  customers_auth_lua_script_id_fkey                 (lua_script_id => lua_scripts.id)
 #  customers_auth_pop_id_fkey                        (pop_id => pops.id)
@@ -100,14 +99,20 @@
 #  customers_auth_rateplan_id_fkey                   (rateplan_id => rateplans.id)
 #  customers_auth_routing_plan_id_fkey               (routing_plan_id => routing_plans.id)
 #  customers_auth_src_blacklist_id_fkey              (src_numberlist_id => numberlists.id)
-#  customers_auth_src_name_field_id_fkey             (src_name_field_id => customers_auth_src_name_fields.id)
-#  customers_auth_src_number_field_id_fkey           (src_number_field_id => customers_auth_src_number_fields.id)
 #  customers_auth_tag_action_id_fkey                 (tag_action_id => tag_actions.id)
-#  customers_auth_transport_protocol_id_fkey         (transport_protocol_id => transport_protocols.id)
 #
 
 class CustomersAuth < ApplicationRecord
   self.table_name = 'class4.customers_auth'
+
+  TRANSPORT_PROTOCOL_UDP = 1
+  TRANSPORT_PROTOCOL_TCP = 2
+  TRANSPORT_PROTOCOL_TLS = 3
+  TRANSPORT_PROTOCOLS = {
+    TRANSPORT_PROTOCOL_UDP => 'UDP',
+    TRANSPORT_PROTOCOL_TCP => 'TCP',
+    TRANSPORT_PROTOCOL_TLS => 'TLS'
+  }.freeze
 
   DUMP_LEVEL_DISABLED = 0
   DUMP_LEVEL_CAPTURE_SIP = 1
@@ -183,6 +188,29 @@ class CustomersAuth < ApplicationRecord
     PAI_POLICY_REQUIRE => 'Require'
   }.freeze
 
+  DST_NUMBER_FIELD_RURI_USERPART = 1
+  DST_NUMBER_FIELD_TO_USERPART = 2
+  DST_NUMBER_FIELD_DIVERSION_USERPART = 3
+  DST_NUMBER_FIELDS = {
+    DST_NUMBER_FIELD_RURI_USERPART => 'R-URI userpart',
+    DST_NUMBER_FIELD_TO_USERPART => 'To URI userpart',
+    DST_NUMBER_FIELD_DIVERSION_USERPART => 'Top Diversion header userpart'
+  }.freeze
+
+  SRC_NUMBER_FIELD_FROM_USERPART = 1
+  SRC_NUMBER_FIELD_FROM_DSP = 2
+  SRC_NUMBER_FIELDS = {
+    SRC_NUMBER_FIELD_FROM_USERPART => 'From URI userpart',
+    SRC_NUMBER_FIELD_FROM_DSP => 'From URI display name'
+  }.freeze
+
+  SRC_NAME_FIELD_FROM_DSP = 1
+  SRC_NAME_FIELD_FROM_USERPART = 2
+  SRC_NAME_FIELDS = {
+    SRC_NAME_FIELD_FROM_DSP => 'From URI display name',
+    SRC_NAME_FIELD_FROM_USERPART => 'From URI userpart'
+  }.freeze
+
   module CONST
     MATCH_CONDITION_ATTRIBUTES = %i[ip
                                     src_prefix
@@ -211,14 +239,9 @@ class CustomersAuth < ApplicationRecord
   belongs_to :src_numberlist, class_name: 'Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true
   belongs_to :radius_auth_profile, class_name: 'Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id, optional: true
   belongs_to :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id, optional: true
-  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id, optional: true
 
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
-
-  belongs_to :dst_number_field, class_name: 'Routing::CustomerAuthDstNumberField', foreign_key: :dst_number_field_id
-  belongs_to :src_number_field, class_name: 'Routing::CustomerAuthSrcNumberField', foreign_key: :src_number_field_id
-  belongs_to :src_name_field, class_name: 'Routing::CustomerAuthSrcNameField', foreign_key: :src_name_field_id
 
   belongs_to :cnam_database, class_name: 'Cnam::Database', foreign_key: :cnam_database_id, optional: true
 
@@ -257,8 +280,6 @@ class CustomersAuth < ApplicationRecord
   validate :validate_account
   validate :validate_gateway
 
-  validates :src_name_field, :src_number_field, :dst_number_field, presence: true
-
   validates :dst_number_min_length, :dst_number_max_length, :src_number_min_length, :src_number_max_length, presence: true
   validates :src_number_min_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
   validates :src_number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
@@ -279,6 +300,14 @@ class CustomersAuth < ApplicationRecord
   validates :rewrite_ss_status_id, inclusion: { in: CustomersAuth::SS_STATUSES.keys }, allow_nil: true
   validate :validate_rewrite_ss_status
   validates :privacy_mode_id, inclusion: { in: PRIVACY_MODES.keys }, allow_nil: false
+
+  validates :src_name_field_id, :src_number_field_id, :dst_number_field_id, presence: true
+
+  validates :src_name_field_id, inclusion: { in: CustomersAuth::SRC_NAME_FIELDS.keys }, allow_nil: false
+  validates :src_number_field_id, inclusion: { in: CustomersAuth::SRC_NUMBER_FIELDS.keys }, allow_nil: false
+  validates :dst_number_field_id, inclusion: { in: CustomersAuth::DST_NUMBER_FIELDS.keys }, allow_nil: false
+
+  validates :transport_protocol_id, inclusion: { in: CustomersAuth::TRANSPORT_PROTOCOLS.keys }, allow_nil: true
 
   validates_with TagActionValueValidator
 
@@ -321,6 +350,10 @@ class CustomersAuth < ApplicationRecord
     "#{name} | #{id}"
   end
 
+  def transport_protocol_name
+    transport_protocol_id.nil? ? 'Any' : TRANSPORT_PROTOCOLS[transport_protocol_id]
+  end
+
   def dump_level_name
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end
@@ -347,6 +380,18 @@ class CustomersAuth < ApplicationRecord
 
   def diversion_policy_name
     DIVERSION_POLICIES[diversion_policy_id]
+  end
+
+  def dst_number_field_name
+    DST_NUMBER_FIELDS[dst_number_field_id]
+  end
+
+  def src_number_field_name
+    SRC_NUMBER_FIELDS[src_number_field_id]
+  end
+
+  def src_name_field_name
+    SRC_NAME_FIELDS[src_name_field_id]
   end
 
   # TODO: move to decorator when ActiveAdmin fix problem

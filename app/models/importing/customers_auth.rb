@@ -14,7 +14,7 @@
 #  diversion_policy_name            :string
 #  diversion_rewrite_result         :string
 #  diversion_rewrite_rule           :string
-#  dst_number_field_name            :integer(2)
+#  dst_number_field_name            :string
 #  dst_number_max_length            :integer(4)
 #  dst_number_min_length            :integer(4)
 #  dst_number_radius_rewrite_result :string
@@ -48,7 +48,7 @@
 #  routing_group_name               :string
 #  routing_plan_name                :string
 #  send_billing_information         :boolean          default(FALSE), not null
-#  src_name_field_name              :integer(2)
+#  src_name_field_name              :string
 #  src_name_rewrite_result          :string
 #  src_name_rewrite_rule            :string
 #  src_number_field_name            :string
@@ -106,7 +106,6 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :src_numberlist_id, optional: true
   belongs_to :radius_auth_profile, class_name: '::Equipment::Radius::AuthProfile', foreign_key: :radius_auth_profile_id, optional: true
   belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id, optional: true
-  belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id, optional: true
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
@@ -163,6 +162,10 @@ class Importing::CustomersAuth < Importing::Base
 
   import_for ::CustomersAuth
 
+  def transport_protocol_display_name
+    transport_protocol_id.nil? ? 'Any' : CustomersAuth::TRANSPORT_PROTOCOLS[transport_protocol_id]
+  end
+
   def dump_level_display_name
     dump_level_id.nil? ? 'unknown' : CustomersAuth::DUMP_LEVELS[dump_level_id]
   end
@@ -179,10 +182,14 @@ class Importing::CustomersAuth < Importing::Base
     where(src_prefix: nil).update_all(src_prefix: '')
     where(dst_prefix: nil).update_all(dst_prefix: '')
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
+    resolve_integer_constant('transport_protocol_id', 'transport_protocol_name', CustomersAuth::TRANSPORT_PROTOCOLS)
     resolve_integer_constant('dump_level_id', 'dump_level_name', CustomersAuth::DUMP_LEVELS)
     resolve_integer_constant('privacy_mode_id', 'privacy_mode_name', CustomersAuth::PRIVACY_MODES)
     resolve_integer_constant('diversion_policy_id', 'diversion_policy_name', CustomersAuth::DIVERSION_POLICIES)
     resolve_integer_constant('pai_policy_id', 'pai_policy_name', CustomersAuth::PAI_POLICIES)
+    resolve_integer_constant('src_name_field_id', 'src_name_field_name', CustomersAuth::SRC_NAME_FIELDS)
+    resolve_integer_constant('src_number_field_id', 'src_number_field_name', CustomersAuth::SRC_NUMBER_FIELDS)
+    resolve_integer_constant('dst_number_field_id', 'dst_number_field_name', CustomersAuth::DST_NUMBER_FIELDS)
     super
     CustomersAuth.increment_state_value
   end

@@ -18,7 +18,7 @@ ActiveAdmin.register CustomersAuth do
   decorate_with CustomersAuthDecorator
 
   acts_as_export :id, :enabled, :reject_calls, :name,
-                 [:transport_protocol_name, proc { |row| row.transport_protocol.try(:name) || '' }],
+                 :transport_protocol_name,
                  :ip,
                  [:pop_name, proc { |row| row.pop.try(:name) || '' }],
                  :src_prefix,
@@ -46,9 +46,9 @@ ActiveAdmin.register CustomersAuth do
                  :diversion_policy_name,
                  :diversion_rewrite_rule, :diversion_rewrite_result,
                  :pai_policy_name, :pai_rewrite_rule, :pai_rewrite_result,
-                 [:src_number_field_name, proc { |row| row.src_number_field.try(:name) }],
-                 [:src_name_field_name, proc { |row| row.src_name_field.try(:name) }],
-                 [:dst_number_field_name, proc { |row| row.dst_number_field.try(:name) }],
+                 :src_number_field_name,
+                 :src_name_field_name,
+                 :dst_number_field_name,
                  :src_name_rewrite_rule, :src_name_rewrite_result,
                  :src_rewrite_rule, :src_rewrite_result,
                  :dst_rewrite_rule, :dst_rewrite_result,
@@ -100,8 +100,8 @@ ActiveAdmin.register CustomersAuth do
   # , :enable_redirect, :redirect_method, :redirect_to
 
   includes :tag_action, :rateplan, :routing_plan, :gateway, :src_numberlist, :dst_numberlist,
-           :pop, :radius_auth_profile, :radius_accounting_profile, :customer, :transport_protocol,
-           :lua_script, :src_name_field, :src_number_field, :dst_number_field, :cnam_database,
+           :pop, :radius_auth_profile, :radius_accounting_profile, :customer,
+           :lua_script, :cnam_database,
            account: :contractor
 
   controller do
@@ -130,7 +130,7 @@ ActiveAdmin.register CustomersAuth do
     column :name
     column :enabled
     column :reject_calls
-    column :transport_protocol
+    column :transport_protocol, &:transport_protocol_name
     column :ip
     column :pop
     column :src_prefix
@@ -177,20 +177,17 @@ ActiveAdmin.register CustomersAuth do
     column :send_billing_information
 
     column :diversion_policy, &:diversion_policy_name
-    column :diversion_rewrite_rule
-    column :diversion_rewrite_result
-
     column :pai_policy, &:pai_policy_name
 
-    column :src_name_field
+    column :src_name_field, &:src_name_field_name
     column :src_name_rewrite_rule
     column :src_name_rewrite_result
 
-    column :src_number_field
+    column :src_number_field, &:src_number_field_name
     column :src_rewrite_rule
     column :src_rewrite_result
 
-    column :dst_number_field
+    column :dst_number_field, &:dst_number_field_name
     column :dst_rewrite_rule
     column :dst_rewrite_result
 
@@ -235,7 +232,7 @@ ActiveAdmin.register CustomersAuth do
   filter :pai_policy_id_eq, label: 'PAI policy', as: :select, collection: CustomersAuth::PAI_POLICIES.invert
   filter :privacy_mode_id_eq, label: 'Privacy mode', as: :select, collection: CustomersAuth::PRIVACY_MODES.invert, input_html: { class: 'chosen' }
   filter :enable_audio_recording, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :transport_protocol
+  filter :transport_protocol_id_eq, label: 'Transport protocol', as: :select, collection: CustomersAuth::TRANSPORT_PROTOCOLS.invert
   filter :ip_covers,
          as: :string,
          input_html: { class: 'search_filter_string' },
@@ -325,7 +322,12 @@ ActiveAdmin.register CustomersAuth do
         end
 
         f.inputs 'Match conditions' do
-          f.input :transport_protocol, as: :select, include_blank: 'Any'
+          f.input :transport_protocol_id,
+                  as: :select,
+                  include_blank: 'Any',
+                  collection: CustomersAuth::TRANSPORT_PROTOCOLS.invert,
+                  input_html: { class: :chosen }
+
           f.input :ip, as: :array_of_strings
           f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }
           f.input :src_prefix, as: :array_of_strings
@@ -367,17 +369,30 @@ ActiveAdmin.register CustomersAuth do
           f.input :pai_rewrite_rule
           f.input :pai_rewrite_result
 
-          f.input :src_name_field, as: :select, include_blank: false, input_html: { class: :chosen }
+          f.input :src_name_field_id,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::SRC_NAME_FIELDS.invert,
+                  input_html: { class: :chosen }
           f.input :src_name_rewrite_rule
           f.input :src_name_rewrite_result
 
-          f.input :src_number_field, as: :select, include_blank: false, input_html: { class: :chosen }
+          f.input :src_number_field_id,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::SRC_NUMBER_FIELDS.invert,
+                  input_html: { class: :chosen }
           f.input :src_rewrite_rule
           f.input :src_rewrite_result
 
-          f.input :dst_number_field, as: :select, include_blank: false, input_html: { class: :chosen }
+          f.input :dst_number_field_id,
+                  as: :select,
+                  include_blank: false,
+                  collection: CustomersAuth::DST_NUMBER_FIELDS.invert,
+                  input_html: { class: :chosen }
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
+
           f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
           f.input :cnam_database, input_html: { class: 'chosen' }, include_blank: 'None'
         end
@@ -457,7 +472,7 @@ ActiveAdmin.register CustomersAuth do
         end
         panel 'Match conditions' do
           attributes_table_for s do
-            row :transport_protocol
+            row :transport_protocol, &:transport_protocol_name
             row :ip
             row :pop
             row :src_prefix
@@ -486,15 +501,15 @@ ActiveAdmin.register CustomersAuth do
           row :pai_rewrite_rule
           row :pai_rewrite_result
 
-          row :src_name_field
+          row :src_name_field, &:src_name_field_name
           row :src_name_rewrite_rule
           row :src_name_rewrite_result
 
-          row :src_number_field
+          row :src_number_field, &:src_number_field_name
           row :src_rewrite_rule
           row :src_rewrite_result
 
-          row :dst_number_field
+          row :dst_number_field, &:dst_number_field_name
           row :dst_rewrite_rule
           row :dst_rewrite_result
 

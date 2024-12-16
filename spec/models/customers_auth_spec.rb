@@ -91,7 +91,6 @@
 #  customers_auth_cnam_database_id_fkey              (cnam_database_id => cnam_databases.id)
 #  customers_auth_customer_id_fkey                   (customer_id => contractors.id)
 #  customers_auth_dst_blacklist_id_fkey              (dst_numberlist_id => numberlists.id)
-#  customers_auth_dst_number_field_id_fkey           (dst_number_field_id => customers_auth_dst_number_fields.id)
 #  customers_auth_gateway_id_fkey                    (gateway_id => gateways.id)
 #  customers_auth_lua_script_id_fkey                 (lua_script_id => lua_scripts.id)
 #  customers_auth_pop_id_fkey                        (pop_id => pops.id)
@@ -100,10 +99,7 @@
 #  customers_auth_rateplan_id_fkey                   (rateplan_id => rateplans.id)
 #  customers_auth_routing_plan_id_fkey               (routing_plan_id => routing_plans.id)
 #  customers_auth_src_blacklist_id_fkey              (src_numberlist_id => numberlists.id)
-#  customers_auth_src_name_field_id_fkey             (src_name_field_id => customers_auth_src_name_fields.id)
-#  customers_auth_src_number_field_id_fkey           (src_number_field_id => customers_auth_src_number_fields.id)
 #  customers_auth_tag_action_id_fkey                 (tag_action_id => tag_actions.id)
-#  customers_auth_transport_protocol_id_fkey         (transport_protocol_id => transport_protocols.id)
 #
 
 RSpec.describe CustomersAuth, type: :model do

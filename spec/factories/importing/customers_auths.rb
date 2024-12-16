@@ -14,7 +14,7 @@
 #  diversion_policy_name            :string
 #  diversion_rewrite_result         :string
 #  diversion_rewrite_rule           :string
-#  dst_number_field_name            :integer(2)
+#  dst_number_field_name            :string
 #  dst_number_max_length            :integer(4)
 #  dst_number_min_length            :integer(4)
 #  dst_number_radius_rewrite_result :string
@@ -48,7 +48,7 @@
 #  routing_group_name               :string
 #  routing_plan_name                :string
 #  send_billing_information         :boolean          default(FALSE), not null
-#  src_name_field_name              :integer(2)
+#  src_name_field_name              :string
 #  src_name_rewrite_result          :string
 #  src_name_rewrite_rule            :string
 #  src_number_field_name            :string

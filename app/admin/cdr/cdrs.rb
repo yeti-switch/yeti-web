@@ -46,6 +46,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :short_calls, show_count: false
   scope :rerouted_calls, show_count: false
   scope :with_trace, show_count: false
+  scope :with_recording, show_count: false
   scope :not_authorized, show_count: false
   scope :bad_routing, show_count: false
   scope :package_billing, show_count: false

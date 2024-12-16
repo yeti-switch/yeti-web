@@ -861,14 +861,5 @@ insert into class4.gateway_group_balancing_modes(id,name) values(2,'Priority/Wei
 insert into class4.gateway_group_balancing_modes(id,name) values(3,'Priority/Weigth balancing. Exclude gateways from other POPs');
 
 
-insert into class4.customers_auth_src_number_fields(id,name) values(1,'From header userpart');
-insert into class4.customers_auth_src_number_fields(id,name) values(2,'From header display name');
-
-insert into class4.customers_auth_src_name_fields(id,name) values(1,'From header display name');
-
-insert into class4.customers_auth_dst_number_fields(id,name) values(1,'R-URI userpart');
-insert into class4.customers_auth_dst_number_fields(id,name) values(2,'To URI userpart');
-insert into class4.customers_auth_dst_number_fields(id,name) values(3,'Top Diversion header userpart');
-
 insert into class4.lnp_databases_30x_redirect_formats(id, name) values (1,'Contact URI username rn parameter');
 insert into class4.lnp_databases_30x_redirect_formats(id, name) values (2,'Contact URI username');
