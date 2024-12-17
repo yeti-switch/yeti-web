@@ -190,10 +190,19 @@ prepare-test-db: gems-test config/database.yml config/yeti_web.yml config/policy
 	@# https://github.com/pgq/pgq/blob/master/functions/pgq.upgrade_schema.sql
 	psql -h "$(YETI_DB_HOST)" -U postgres -c '$(pgq_drop_roles)'
 	psql -h "$(YETI_DB_HOST)" -U postgres -c '$(pgq_create_roles)'
+ifdef CI
+	$(info:msg=CI detected. Preparing single test database)
+	RAILS_ENV=test $(bundle_bin) exec rake db:create
+	RAILS_ENV=test $(bundle_bin) exec rake db:schema:load
+	RAILS_ENV=test $(bundle_bin) exec rake db:seed
+	RAILS_ENV=test $(bundle_bin) exec rake custom_seeds[network_prefixes]
+else
+	$(info:msg=Preparing multiple test databases)
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:create
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:load_schema
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:rake[db:seed]
 	RAILS_ENV=test $(bundle_bin) exec rake parallel:rake[custom_seeds[network_prefixes]]
+endif
 
 
 .PHONY: test
