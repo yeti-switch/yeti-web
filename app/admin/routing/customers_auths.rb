@@ -130,8 +130,9 @@ ActiveAdmin.register CustomersAuth do
     column :name
     column :enabled
     column :reject_calls
-    column :transport_protocol, &:transport_protocol_name
-    column :ip
+    column :ip do |c|
+      c.transport_protocol_id.nil? ? c.ip : "#{c.transport_protocol_name} #{c.ip}"
+    end
     column :pop
     column :src_prefix
     column :src_number_length do |c|
