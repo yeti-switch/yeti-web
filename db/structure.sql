@@ -23280,7 +23280,7 @@ CREATE FUNCTION switch21.load_interface_in() RETURNS TABLE(varname character var
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
-  RETURN QUERY SELECT "name","type","format","hashkey","param" from switch_interface_in order by rank asc;
+  RETURN QUERY SELECT "name","type","format","hashkey","param" from switch21.switch_interface_in order by rank asc;
 END;
 $$;
 
@@ -50142,6 +50142,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241213172819'),
 ('20241213175248'),
 ('20241215155451'),
-('20241216165130');
+('20241216165130'),
+('20241218154326');
 
 
