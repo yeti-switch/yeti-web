@@ -25,9 +25,9 @@
 #  ruri                  :string
 #  success               :boolean
 #  to_uri                :string
-#  transport_local_ip    :string
+#  transport_local_ip    :inet
 #  transport_local_port  :integer(4)
-#  transport_remote_ip   :string
+#  transport_remote_ip   :inet
 #  transport_remote_port :integer(4)
 #  username              :string
 #  x_yeti_auth           :string
