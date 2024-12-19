@@ -1145,10 +1145,10 @@ $$;
 
 
 --
--- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, character varying, integer, character varying, integer, smallint, character varying, integer, character varying, integer, character varying, character varying, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, smallint, boolean, json, json, character varying, character varying, json, smallint, bigint, json, json, boolean, json, json, json, json); Type: FUNCTION; Schema: switch; Owner: -
+-- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, inet, integer, inet, integer, smallint, inet, integer, inet, integer, character varying, character varying, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, character varying, character varying, character varying, character varying, character varying, smallint, boolean, json, json, character varying, character varying, json, smallint, bigint, json, json, boolean, json, json, json, json); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_legb_ruri character varying, i_legb_outbound_proxy character varying, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_legb_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id smallint, i_audio_recorded boolean, i_rtp_stats_data json, i_rtp_statistics json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_dynamic json, i_lega_headers json, i_legb_headers json, i_lega_identity json) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip inet, i_lega_local_port integer, i_lega_remote_ip inet, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip inet, i_legb_local_port integer, i_legb_remote_ip inet, i_legb_remote_port integer, i_legb_ruri character varying, i_legb_outbound_proxy character varying, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_legb_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id smallint, i_audio_recorded boolean, i_rtp_stats_data json, i_rtp_statistics json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_dynamic json, i_lega_headers json, i_legb_headers json, i_lega_identity json) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1262,17 +1262,17 @@ BEGIN
   v_cdr.dialpeer_reverse_billing=v_dynamic.dialpeer_reverse_billing;
 
   /* sockets addresses */
-  v_cdr.sign_orig_transport_protocol_id=i_lega_transport_protocol_id;
-  v_cdr.sign_orig_ip=i_lega_remote_ip;
-  v_cdr.sign_orig_port=NULLIF(i_lega_remote_port,0);
-  v_cdr.sign_orig_local_ip=i_lega_local_ip;
-  v_cdr.sign_orig_local_port=NULLIF(i_lega_local_port,0);
+  v_cdr.sign_orig_transport_protocol_id = i_lega_transport_protocol_id;
+  v_cdr.sign_orig_ip = i_lega_remote_ip::varchar;
+  v_cdr.sign_orig_port = NULLIF(i_lega_remote_port,0);
+  v_cdr.sign_orig_local_ip = i_lega_local_ip::varchar;
+  v_cdr.sign_orig_local_port = NULLIF(i_lega_local_port,0);
 
-  v_cdr.sign_term_transport_protocol_id=i_legb_transport_protocol_id;
-  v_cdr.sign_term_ip=i_legb_remote_ip;
-  v_cdr.sign_term_port=NULLIF(i_legb_remote_port,0);
-  v_cdr.sign_term_local_ip=i_legb_local_ip;
-  v_cdr.sign_term_local_port=NULLIF(i_legb_local_port,0);
+  v_cdr.sign_term_transport_protocol_id = i_legb_transport_protocol_id;
+  v_cdr.sign_term_ip = i_legb_remote_ip::varchar;
+  v_cdr.sign_term_port = NULLIF(i_legb_remote_port,0);
+  v_cdr.sign_term_local_ip = i_legb_local_ip::varchar;
+  v_cdr.sign_term_local_port = NULLIF(i_legb_local_port,0);
 
   v_cdr.local_tag=i_local_tag;
   v_cdr.legb_local_tag=i_legb_local_tag;
@@ -1402,10 +1402,10 @@ $$;
 
 
 --
--- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, character varying, integer, character varying, integer, smallint, character varying, integer, character varying, integer, character varying, character varying, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, smallint, character varying, character varying, character varying, character varying, character varying, smallint, boolean, json, json, character varying, character varying, json, smallint, bigint, json, json, boolean, json, json, json, json); Type: FUNCTION; Schema: switch; Owner: -
+-- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, inet, integer, inet, integer, smallint, inet, integer, inet, integer, character varying, character varying, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, smallint, character varying, character varying, character varying, character varying, character varying, smallint, boolean, json, json, character varying, character varying, json, smallint, bigint, json, json, boolean, json, json, json, json); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_legb_ruri character varying, i_legb_outbound_proxy character varying, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_internal_disconnect_code_id smallint, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_legb_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id smallint, i_audio_recorded boolean, i_rtp_stats_data json, i_rtp_statistics json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_dynamic json, i_lega_headers json, i_legb_headers json, i_lega_identity json) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip inet, i_lega_local_port integer, i_lega_remote_ip inet, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip inet, i_legb_local_port integer, i_legb_remote_ip inet, i_legb_remote_port integer, i_legb_ruri character varying, i_legb_outbound_proxy character varying, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_internal_disconnect_code_id smallint, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_legb_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id smallint, i_audio_recorded boolean, i_rtp_stats_data json, i_rtp_statistics json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_dynamic json, i_lega_headers json, i_legb_headers json, i_lega_identity json) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1519,17 +1519,17 @@ BEGIN
   v_cdr.dialpeer_reverse_billing=v_dynamic.dialpeer_reverse_billing;
 
   /* sockets addresses */
-  v_cdr.sign_orig_transport_protocol_id=i_lega_transport_protocol_id;
-  v_cdr.sign_orig_ip=i_lega_remote_ip;
-  v_cdr.sign_orig_port=NULLIF(i_lega_remote_port,0);
-  v_cdr.sign_orig_local_ip=i_lega_local_ip;
-  v_cdr.sign_orig_local_port=NULLIF(i_lega_local_port,0);
+  v_cdr.sign_orig_transport_protocol_id = i_lega_transport_protocol_id;
+  v_cdr.sign_orig_ip = i_lega_remote_ip::varchar;
+  v_cdr.sign_orig_port = NULLIF(i_lega_remote_port,0);
+  v_cdr.sign_orig_local_ip = i_lega_local_ip::varchar;
+  v_cdr.sign_orig_local_port = NULLIF(i_lega_local_port,0);
 
-  v_cdr.sign_term_transport_protocol_id=i_legb_transport_protocol_id;
-  v_cdr.sign_term_ip=i_legb_remote_ip;
-  v_cdr.sign_term_port=NULLIF(i_legb_remote_port,0);
-  v_cdr.sign_term_local_ip=i_legb_local_ip;
-  v_cdr.sign_term_local_port=NULLIF(i_legb_local_port,0);
+  v_cdr.sign_term_transport_protocol_id = i_legb_transport_protocol_id;
+  v_cdr.sign_term_ip = i_legb_remote_ip::varchar;
+  v_cdr.sign_term_port = NULLIF(i_legb_remote_port,0);
+  v_cdr.sign_term_local_ip = i_legb_local_ip::varchar;
+  v_cdr.sign_term_local_port = NULLIF(i_legb_local_port,0);
 
   v_cdr.local_tag=i_local_tag;
   v_cdr.legb_local_tag=i_legb_local_tag;
@@ -1660,10 +1660,10 @@ $$;
 
 
 --
--- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, character varying, integer, character varying, integer, smallint, character varying, integer, character varying, integer, character varying, character varying, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, smallint, character varying, character varying, character varying, character varying, character varying, smallint, boolean, json, json, character varying, character varying, json, smallint, bigint, json, json, boolean, json, json, json, json, json); Type: FUNCTION; Schema: switch; Owner: -
+-- Name: writecdr(boolean, integer, integer, integer, boolean, smallint, inet, integer, inet, integer, smallint, inet, integer, inet, integer, character varying, character varying, json, boolean, integer, character varying, integer, integer, character varying, integer, character varying, smallint, character varying, character varying, character varying, character varying, character varying, smallint, boolean, json, json, character varying, character varying, json, smallint, bigint, json, json, boolean, json, json, json, json, json); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip character varying, i_lega_local_port integer, i_lega_remote_ip character varying, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip character varying, i_legb_local_port integer, i_legb_remote_ip character varying, i_legb_remote_port integer, i_legb_ruri character varying, i_legb_outbound_proxy character varying, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_internal_disconnect_code_id smallint, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_legb_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id smallint, i_audio_recorded boolean, i_rtp_stats_data json, i_rtp_statistics json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_dynamic json, i_lega_request_headers json, i_legb_request_headers json, i_legb_reply_headers json, i_lega_identity json) RETURNS integer
+CREATE FUNCTION switch.writecdr(i_is_master boolean, i_node_id integer, i_pop_id integer, i_routing_attempt integer, i_is_last_cdr boolean, i_lega_transport_protocol_id smallint, i_lega_local_ip inet, i_lega_local_port integer, i_lega_remote_ip inet, i_lega_remote_port integer, i_legb_transport_protocol_id smallint, i_legb_local_ip inet, i_legb_local_port integer, i_legb_remote_ip inet, i_legb_remote_port integer, i_legb_ruri character varying, i_legb_outbound_proxy character varying, i_time_data json, i_early_media_present boolean, i_legb_disconnect_code integer, i_legb_disconnect_reason character varying, i_disconnect_initiator integer, i_internal_disconnect_code integer, i_internal_disconnect_reason character varying, i_lega_disconnect_code integer, i_lega_disconnect_reason character varying, i_internal_disconnect_code_id smallint, i_orig_call_id character varying, i_term_call_id character varying, i_local_tag character varying, i_legb_local_tag character varying, i_msg_logger_path character varying, i_dump_level_id smallint, i_audio_recorded boolean, i_rtp_stats_data json, i_rtp_statistics json, i_global_tag character varying, i_resources character varying, i_active_resources json, i_failed_resource_type_id smallint, i_failed_resource_id bigint, i_dtmf_events json, i_versions json, i_is_redirected boolean, i_dynamic json, i_lega_request_headers json, i_legb_request_headers json, i_legb_reply_headers json, i_lega_identity json) RETURNS integer
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1791,15 +1791,15 @@ BEGIN
 
   /* sockets addresses */
   v_cdr.sign_orig_transport_protocol_id = i_lega_transport_protocol_id;
-  v_cdr.sign_orig_ip = i_lega_remote_ip;
+  v_cdr.sign_orig_ip = i_lega_remote_ip::varchar;
   v_cdr.sign_orig_port = NULLIF(i_lega_remote_port,0);
-  v_cdr.sign_orig_local_ip = i_lega_local_ip;
+  v_cdr.sign_orig_local_ip = i_lega_local_ip::varchar;
   v_cdr.sign_orig_local_port = NULLIF(i_lega_local_port,0);
 
   v_cdr.sign_term_transport_protocol_id = i_legb_transport_protocol_id;
-  v_cdr.sign_term_ip = i_legb_remote_ip;
+  v_cdr.sign_term_ip = i_legb_remote_ip::varchar;
   v_cdr.sign_term_port = NULLIF(i_legb_remote_port,0);
-  v_cdr.sign_term_local_ip = i_legb_local_ip;
+  v_cdr.sign_term_local_ip = i_legb_local_ip::varchar;
   v_cdr.sign_term_local_port = NULLIF(i_legb_local_port,0);
 
   v_cdr.local_tag = i_local_tag;
@@ -4711,6 +4711,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241006113650'),
 ('20241006123022'),
 ('20241216143200'),
-('20241217212213');
+('20241217212213'),
+('20241219142219');
 
 
