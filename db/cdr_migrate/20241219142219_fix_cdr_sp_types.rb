@@ -170,15 +170,15 @@ BEGIN
 
   /* sockets addresses */
   v_cdr.sign_orig_transport_protocol_id = i_lega_transport_protocol_id;
-  v_cdr.sign_orig_ip = i_lega_remote_ip::varchar;
+  v_cdr.sign_orig_ip = host(i_lega_remote_ip);
   v_cdr.sign_orig_port = NULLIF(i_lega_remote_port,0);
-  v_cdr.sign_orig_local_ip = i_lega_local_ip::varchar;
+  v_cdr.sign_orig_local_ip = host(i_lega_local_ip);
   v_cdr.sign_orig_local_port = NULLIF(i_lega_local_port,0);
 
   v_cdr.sign_term_transport_protocol_id = i_legb_transport_protocol_id;
-  v_cdr.sign_term_ip = i_legb_remote_ip::varchar;
+  v_cdr.sign_term_ip = host(i_legb_remote_ip);
   v_cdr.sign_term_port = NULLIF(i_legb_remote_port,0);
-  v_cdr.sign_term_local_ip = i_legb_local_ip::varchar;
+  v_cdr.sign_term_local_ip = host(i_legb_local_ip);
   v_cdr.sign_term_local_port = NULLIF(i_legb_local_port,0);
 
   v_cdr.local_tag=i_local_tag;
@@ -472,15 +472,15 @@ BEGIN
 
   /* sockets addresses */
   v_cdr.sign_orig_transport_protocol_id = i_lega_transport_protocol_id;
-  v_cdr.sign_orig_ip = i_lega_remote_ip::varchar;
+  v_cdr.sign_orig_ip = host(i_lega_remote_ip);
   v_cdr.sign_orig_port = NULLIF(i_lega_remote_port,0);
-  v_cdr.sign_orig_local_ip = i_lega_local_ip::varchar;
+  v_cdr.sign_orig_local_ip = host(i_lega_local_ip);
   v_cdr.sign_orig_local_port = NULLIF(i_lega_local_port,0);
 
   v_cdr.sign_term_transport_protocol_id = i_legb_transport_protocol_id;
-  v_cdr.sign_term_ip = i_legb_remote_ip::varchar;
+  v_cdr.sign_term_ip = host(i_legb_remote_ip);
   v_cdr.sign_term_port = NULLIF(i_legb_remote_port,0);
-  v_cdr.sign_term_local_ip = i_legb_local_ip::varchar;
+  v_cdr.sign_term_local_ip = host(i_legb_local_ip);
   v_cdr.sign_term_local_port = NULLIF(i_legb_local_port,0);
 
   v_cdr.local_tag=i_local_tag;
@@ -788,15 +788,15 @@ BEGIN
 
   /* sockets addresses */
   v_cdr.sign_orig_transport_protocol_id = i_lega_transport_protocol_id;
-  v_cdr.sign_orig_ip = i_lega_remote_ip::varchar;
+  v_cdr.sign_orig_ip = host(i_lega_remote_ip);
   v_cdr.sign_orig_port = NULLIF(i_lega_remote_port,0);
-  v_cdr.sign_orig_local_ip = i_lega_local_ip::varchar;
+  v_cdr.sign_orig_local_ip = host(i_lega_local_ip);
   v_cdr.sign_orig_local_port = NULLIF(i_lega_local_port,0);
 
   v_cdr.sign_term_transport_protocol_id = i_legb_transport_protocol_id;
-  v_cdr.sign_term_ip = i_legb_remote_ip::varchar;
+  v_cdr.sign_term_ip = host(i_legb_remote_ip);
   v_cdr.sign_term_port = NULLIF(i_legb_remote_port,0);
-  v_cdr.sign_term_local_ip = i_legb_local_ip::varchar;
+  v_cdr.sign_term_local_ip = host(i_legb_local_ip);
   v_cdr.sign_term_local_port = NULLIF(i_legb_local_port,0);
 
   v_cdr.local_tag = i_local_tag;
