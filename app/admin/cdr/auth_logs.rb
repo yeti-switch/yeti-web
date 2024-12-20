@@ -17,12 +17,12 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
                  [:gateway_name, proc { |row| row.gateway.try(:name) }],
                  [:node_name, proc { |row| row.node.try(:name) }],
                  [:pop_name, proc { |row| row.pop.try(:name) }],
-                 [:transport_protocol, proc { |row| row.transport_protocol.try(:name) }],
+                 :transport_protocol_name,
                  :transport_remote_ip,
                  :transport_remote_port,
                  :transport_local_ip,
                  :transport_local_port,
-                 [:origination_protocol, proc { |row| row.origination_protocol.try(:name) }],
+                 :origination_protocol_name,
                  :origination_ip,
                  :origination_port,
                  :username,
@@ -52,7 +52,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
 
   controller do
     def scoped_collection
-      super.preload(:gateway, :pop, :node, :transport_protocol, :origination_protocol)
+      super.preload(:gateway, :pop, :node)
     end
   end
 
@@ -67,11 +67,11 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
     column :internal_reason
 
     column :originator do |c|
-      "#{c.origination_protocol.try(:display_name)}://#{c.origination_ip}:#{c.origination_port}"
+      "#{c.origination_protocol_name}://#{c.origination_ip}:#{c.origination_port}"
     end
 
     column :remote_socket do |c|
-      "#{c.transport_protocol.try(:display_name)}://#{c.transport_remote_ip}:#{c.transport_remote_port}"
+      "#{c.transport_protocol_name}://#{c.transport_remote_ip}:#{c.transport_remote_port}"
     end
 
     column :local_socket do |c|
@@ -113,9 +113,23 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :pop
   filter :node
   filter :username
-  filter :origination_ip
-  filter :transport_remote_ip
-  filter :transport_local_ip
+  filter :origination_proto_id_eq, label: 'Origination protocol', as: :select, collection: Cdr::AuthLog::TRANSPORT_PROTOCOLS.invert
+  filter :origination_ip_covers,
+         as: :string,
+         input_html: { class: 'search_filter_string' },
+         label: 'Origination IP'
+
+  filter :transport_proto_id_eq, label: 'Transport protocol', as: :select, collection: Cdr::AuthLog::TRANSPORT_PROTOCOLS.invert
+  filter :transport_remote_ip_covers,
+         as: :string,
+         input_html: { class: 'search_filter_string' },
+         label: 'Transport remote IP'
+
+  filter :transport_local_ip_covers,
+         as: :string,
+         input_html: { class: 'search_filter_string' },
+         label: 'Transport local IP'
+
   filter :ruri
   filter :from_uri
   filter :to_uri

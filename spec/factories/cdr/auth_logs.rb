@@ -45,8 +45,8 @@
 #
 FactoryBot.define do
   factory :auth_log, class: 'Cdr::AuthLog' do
-    request_time                { 1.minute.ago }
-    code                        { 200 }
+    request_time { 1.minute.ago }
+    code { 200 }
     reason { 'OK' }
     internal_reason { 'Response matched' }
     origination_ip { '1.1.1.1' }
@@ -61,11 +61,8 @@ FactoryBot.define do
     call_id { '2b8a45f5730c1b3459a00b9c322a79da' }
     success { true }
 
-    transport_protocol { Equipment::TransportProtocol.take }
-    origination_protocol { Equipment::TransportProtocol.take }
-
-    # association :transport_protocol, factory: :transport_protocol
-    # association :origination_protocol, factory: :transport_protocol
+    transport_proto_id { Cdr::AuthLog::TRANSPORT_PROTOCOL_TLS }
+    origination_proto_id { Cdr::AuthLog::TRANSPORT_PROTOCOL_UDP }
 
     association :gateway, factory: :gateway
     association :pop, factory: :pop
