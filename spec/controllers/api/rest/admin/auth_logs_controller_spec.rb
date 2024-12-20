@@ -100,13 +100,13 @@ RSpec.describe Api::Rest::Admin::AuthLogsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :code, type: :number
     it_behaves_like :jsonapi_filters_by_string_field, :reason
     it_behaves_like :jsonapi_filters_by_string_field, :internal_reason
-    it_behaves_like :jsonapi_filters_by_string_field, :origination_ip
+    it_behaves_like :jsonapi_filters_by_string_field, :origination_ip, type: :inet
     it_behaves_like :jsonapi_filters_by_number_field, :origination_port, type: :number
     it_behaves_like :jsonapi_filters_by_number_field, :origination_proto_id, type: :number
     it_behaves_like :jsonapi_filters_by_number_field, :transport_proto_id, type: :number
-    it_behaves_like :jsonapi_filters_by_string_field, :transport_remote_ip
+    it_behaves_like :jsonapi_filters_by_string_field, :transport_remote_ip, type: :inet
     it_behaves_like :jsonapi_filters_by_number_field, :transport_remote_port, type: :number
-    it_behaves_like :jsonapi_filters_by_string_field, :transport_local_ip
+    it_behaves_like :jsonapi_filters_by_string_field, :transport_local_ip, type: :inet
     it_behaves_like :jsonapi_filters_by_number_field, :transport_local_port, type: :number
     it_behaves_like :jsonapi_filters_by_number_field, :pop_id, type: :number
     it_behaves_like :jsonapi_filters_by_number_field, :node_id, type: :number
