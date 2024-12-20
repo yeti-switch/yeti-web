@@ -14,8 +14,8 @@ class Api::Rest::Admin::AuthLogResource < BaseResource
              :code,
              :reason,
              :internal_reason,
-             :origination_ip, :origination_port, :origination_proto_id, :transport_proto_id,
-             :transport_remote_ip, :transport_remote_port,
+             :origination_proto_id, :origination_ip, :origination_port,
+             :transport_proto_id, :transport_remote_ip, :transport_remote_port,
              :transport_local_ip, :transport_local_port,
              :username, :realm,
              :request_method,
@@ -29,8 +29,6 @@ class Api::Rest::Admin::AuthLogResource < BaseResource
   has_one :gateway, class_name: 'Gateway', always_include_linkage_data: true
   has_one :pop, class_name: 'Pop', always_include_linkage_data: true
   has_one :node, class_name: 'Node', always_include_linkage_data: true
-  has_one :origination_protocol, class_name: 'TransportProtocol', foreign_key: :origination_proto_id
-  has_one :transport_protocol, class_name: 'TransportProtocol', foreign_key: :transport_proto_id
 
   filter :request_time_gteq, apply: lambda { |records, values, _options|
     records.where('request_time >= ?', values[0])

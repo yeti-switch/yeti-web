@@ -140,7 +140,7 @@ RSpec.describe Api::Rest::Admin::AuthLogsController, type: :controller do
       }
     end
     let(:includes) do
-      %w[pop gateway node origination-protocol transport-protocol]
+      %w[pop gateway node]
     end
 
     it 'http status should eq 200' do
@@ -204,18 +204,6 @@ RSpec.describe Api::Rest::Admin::AuthLogsController, type: :controller do
               'data' => {
                 'type' => 'nodes',
                 'id' => auth_log.node.id.to_s
-              }
-            ),
-            'origination-protocol' => hash_including(
-              'data' => {
-                'type' => 'transport-protocols',
-                'id' => auth_log.origination_protocol.id.to_s
-              }
-            ),
-            'transport-protocol' => hash_including(
-              'data' => {
-                'type' => 'transport-protocols',
-                'id' => auth_log.transport_protocol.id.to_s
               }
             )
           )
