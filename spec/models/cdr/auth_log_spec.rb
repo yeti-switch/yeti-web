@@ -10,7 +10,7 @@
 #  from_uri              :string
 #  internal_reason       :string
 #  nonce                 :string
-#  origination_ip        :string
+#  origination_ip        :inet
 #  origination_port      :integer(4)
 #  pai                   :string
 #  ppi                   :string

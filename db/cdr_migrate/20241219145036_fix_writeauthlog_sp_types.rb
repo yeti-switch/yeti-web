@@ -4,7 +4,8 @@ class FixWriteauthlogSpTypes < ActiveRecord::Migration[7.0]
     execute %q{
 alter table auth_log.auth_log
   alter column transport_remote_ip type inet USING transport_remote_ip::inet,
-  alter column transport_local_ip type inet USING transport_local_ip::inet;
+  alter column transport_local_ip type inet USING transport_local_ip::inet,
+  alter column origination_ip type inet USING origination_ip::inet;
 
 alter type switch.lega_request_headers_ty
   add attribute x_yeti_auth varchar,
@@ -100,7 +101,8 @@ $$;
 
       alter table auth_log.auth_log
         alter column transport_remote_ip type varchar USING transport_remote_ip::varchar,
-        alter column transport_local_ip type varchar USING transport_local_ip::varchar;
+        alter column transport_local_ip type varchar USING transport_local_ip::varchar,
+        alter column origination_ip type varchar USING origination_ip::varchar;
 
       alter type switch.lega_request_headers_ty
         drop attribute x_yeti_auth,

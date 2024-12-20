@@ -2031,7 +2031,7 @@ CREATE TABLE auth_log.auth_log (
     transport_remote_port integer,
     transport_local_ip inet,
     transport_local_port integer,
-    origination_ip character varying,
+    origination_ip inet,
     origination_port integer,
     origination_proto_id smallint,
     username character varying,
