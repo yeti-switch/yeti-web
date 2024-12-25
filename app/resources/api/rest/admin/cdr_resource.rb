@@ -136,8 +136,10 @@ class Api::Rest::Admin::CdrResource < BaseResource
   has_one :term_gw, class_name: 'Gateway', always_include_linkage_data: true
   has_one :dst_country, class_name: 'Country', always_include_linkage_data: true
   has_one :dst_network, class_name: 'Network', always_include_linkage_data: true
+  has_one :dst_network_type, class_name: 'Network', always_include_linkage_data: true
   has_one :src_country, class_name: 'Country', always_include_linkage_data: true
   has_one :src_network, class_name: 'Network', always_include_linkage_data: true
+  has_one :src_network_type, class_name: 'Network', always_include_linkage_data: true
 
   filter :customer_auth_external_id_eq, apply: lambda { |records, values, _options|
     records.where(customer_auth_external_id: values)

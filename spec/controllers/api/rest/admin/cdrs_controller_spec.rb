@@ -557,7 +557,7 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
       }
     end
     let(:includes) do
-      %w[rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw routing-plan src-country src-network dst-country dst-network]
+      %w[rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw routing-plan src-country src-network src-network-type dst-country dst-network dst-network-type]
     end
 
     it 'http status should eq 200' do
@@ -741,10 +741,16 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
             'src-network' => hash_including(
               'data' => nil
             ),
+            'src-network-type' => hash_including(
+              'data' => nil
+            ),
             'dst-country' => hash_including(
               'data' => nil
             ),
             'dst-network' => hash_including(
+              'data' => nil
+            ),
+            'dst-network-type' => hash_including(
               'data' => nil
             )
           )
