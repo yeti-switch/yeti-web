@@ -117,6 +117,7 @@ class Api::Rest::Admin::CdrResource < BaseResource
              :customer_duration,
              :vendor_duration,
              :destination_rate_policy_id,
+             :p_charge_info_in,
              :metadata
 
   has_one :rateplan, class_name: 'Rateplan', always_include_linkage_data: true
@@ -135,8 +136,10 @@ class Api::Rest::Admin::CdrResource < BaseResource
   has_one :term_gw, class_name: 'Gateway', always_include_linkage_data: true
   has_one :dst_country, class_name: 'Country', always_include_linkage_data: true
   has_one :dst_network, class_name: 'Network', always_include_linkage_data: true
+  has_one :dst_network_type, class_name: 'NetworkType', always_include_linkage_data: true
   has_one :src_country, class_name: 'Country', always_include_linkage_data: true
   has_one :src_network, class_name: 'Network', always_include_linkage_data: true
+  has_one :src_network_type, class_name: 'NetworkType', always_include_linkage_data: true
 
   filter :customer_auth_external_id_eq, apply: lambda { |records, values, _options|
     records.where(customer_auth_external_id: values)
@@ -237,8 +240,10 @@ class Api::Rest::Admin::CdrResource < BaseResource
   ransack_filter :term_gw_id, type: :foreign_key
   ransack_filter :dst_country_id, type: :foreign_key
   ransack_filter :dst_network_id, type: :foreign_key
+  ransack_filter :dst_network_type_id, type: :foreign_key
   ransack_filter :src_country_id, type: :foreign_key
   ransack_filter :src_network_id, type: :foreign_key
+  ransack_filter :src_network_type_id, type: :foreign_key
 
   ransack_filter :id, type: :number
   ransack_filter :time_start, type: :datetime
