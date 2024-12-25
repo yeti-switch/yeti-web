@@ -543,6 +543,7 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :customer_price_no_vat
     it_behaves_like :jsonapi_filters_by_number_field, :customer_duration
     it_behaves_like :jsonapi_filters_by_number_field, :vendor_duration
+    it_behaves_like :jsonapi_filters_by_string_field, :p_charge_info_in
   end
 
   describe 'GET show' do
@@ -676,7 +677,8 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
             'customer-duration' => cdr.customer_duration,
             'vendor-duration' => cdr.vendor_duration,
             'destination-rate-policy-id' => cdr.destination_rate_policy_id,
-            'metadata' => nil
+            'metadata' => nil,
+            'p-charge-info-in' => cdr.p_charge_info_in
           },
           'relationships' => hash_including(
             'rateplan' => hash_including(
