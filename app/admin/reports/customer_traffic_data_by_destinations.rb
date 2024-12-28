@@ -64,7 +64,13 @@ ActiveAdmin.register Report::CustomerTrafficDataByDestination, as: 'CustomerTraf
   end
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
-    column :destination_prefix
+    column :destination_prefix,
+           footer: lambda {
+             strong do
+               'Total:'
+             end
+           }
+
     column :country, sortable: 'dst_country_id'
     column :network, sortable: 'dst_network_id'
 
