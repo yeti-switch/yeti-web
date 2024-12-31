@@ -398,7 +398,7 @@ BEGIN
 
   -- apply capacity limit by destination number
   if i_vendor_gw.termination_subscriber_capacity is not null then
-    i_profile.legb_res:=i_profile.legb_res||'8:'||i_profile.dst_prefix_out::varchar||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,': #@', '____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
   end if;
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN

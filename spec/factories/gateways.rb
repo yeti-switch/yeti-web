@@ -200,11 +200,11 @@ FactoryBot.define do
     term_outbound_proxy { nil }
     term_next_hop_for_replies { false }
     term_use_outbound_proxy { false }
-    termination_capacity { 1 }
+    termination_capacity { nil }
     allow_termination { true }
     allow_origination { true }
     proxy_media { true }
-    origination_capacity { 1 }
+    origination_capacity { nil }
     preserve_anonymous_from_domain { false }
     sst_enabled { false }
     sst_minimum_timer { 50 }
