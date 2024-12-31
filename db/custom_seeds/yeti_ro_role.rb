@@ -38,12 +38,12 @@ SqlCaller::Yeti.transaction do
   SqlCaller::Yeti.execute "DROP ROLE IF EXISTS #{routing_role}"
   SqlCaller::Yeti.execute "CREATE ROLE #{routing_role} NOLOGIN"
 
-  for s in routing_schemas do
+  routing_schemas.each do |s|
     SqlCaller::Yeti.execute "GRANT USAGE ON SCHEMA #{s} TO #{routing_role}"
     SqlCaller::Yeti.execute "GRANT SELECT ON ALL TABLES IN SCHEMA #{s} TO #{routing_role}"
   end
 
-  for s in routing_schemas_with_partitioning do
+  routing_schemas_with_partitioning.each do |s|
     SqlCaller::Yeti.execute "ALTER DEFAULT PRIVILEGES IN SCHEMA #{s} GRANT SELECT ON TABLES TO #{routing_role}"
   end
 end
@@ -53,12 +53,12 @@ Cdr::Cdr.transaction do
   SqlCaller::Cdr.execute "DROP ROLE IF EXISTS #{cdr_role}"
   SqlCaller::Cdr.execute "CREATE ROLE #{cdr_role} NOLOGIN"
 
-  for s in cdr_schemas do
+  cdr_schemas.each do |s|
     SqlCaller::Cdr.execute "GRANT USAGE ON SCHEMA #{s} TO #{cdr_role}"
     SqlCaller::Cdr.execute "GRANT SELECT ON ALL TABLES IN SCHEMA #{s} TO #{cdr_role}"
   end
 
-  for s in cdr_schemas_with_partitioning do
+  cdr_schemas_with_partitioning.each do |s|
     SqlCaller::Cdr.execute "ALTER DEFAULT PRIVILEGES IN SCHEMA #{s} GRANT SELECT ON TABLES TO #{cdr_role}"
   end
 end
