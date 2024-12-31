@@ -4660,11 +4660,10 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Termination gw capacity limit' do
-
         context 'no termination gw capacity limit' do
           it 'response with ok ' do
             expect(subject.size).to eq(2)
-            expect(subject.first[:legb_res]).to eq("")
+            expect(subject.first[:legb_res]).to eq('')
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
         end
@@ -4689,7 +4688,6 @@ RSpec.describe '#routing logic' do
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
         end
-
       end
     end
   end
