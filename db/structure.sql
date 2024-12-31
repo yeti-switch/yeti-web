@@ -3537,7 +3537,8 @@ CREATE TABLE class4.gateways (
     to_rewrite_rule character varying,
     to_rewrite_result character varying,
     privacy_mode_id smallint DEFAULT 0 NOT NULL,
-    incoming_auth_allow_jwt boolean DEFAULT false NOT NULL
+    incoming_auth_allow_jwt boolean DEFAULT false NOT NULL,
+    termination_subscriber_capacity smallint
 );
 
 
@@ -32828,7 +32829,6 @@ BEGIN
     i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
-
   /*
       numberlist processing _After_ routing _IN_ termination GW
   */
@@ -33005,6 +33005,10 @@ BEGIN
   RAISE NOTICE '% ms -> GW. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
   /*}dbg*/
 
+  -- apply capacity limit by destination number
+  if i_vendor_gw.termination_subscriber_capacity is not null then
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,': #@', '____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+  end if;
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
@@ -33626,7 +33630,6 @@ BEGIN
     i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
-
   /*
       numberlist processing _After_ routing _IN_ termination GW
   */
@@ -33803,6 +33806,10 @@ BEGIN
   RAISE NOTICE '% ms -> GW. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
   /*}dbg*/
 
+  -- apply capacity limit by destination number
+  if i_vendor_gw.termination_subscriber_capacity is not null then
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,': #@', '____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+  end if;
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
@@ -34398,7 +34405,6 @@ BEGIN
     i_profile.legb_res:=i_profile.legb_res||'5:'||i_vendor_gw.id::varchar||':'||i_vendor_gw.termination_capacity::varchar||':1;';
   end if;
 
-
   /*
       numberlist processing _After_ routing _IN_ termination GW
   */
@@ -34542,6 +34548,10 @@ BEGIN
 
   
 
+  -- apply capacity limit by destination number
+  if i_vendor_gw.termination_subscriber_capacity is not null then
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,': #@', '____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+  end if;
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
@@ -50143,6 +50153,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241213175248'),
 ('20241215155451'),
 ('20241216165130'),
-('20241218154326');
+('20241218154326'),
+('20241231160003');
 
 

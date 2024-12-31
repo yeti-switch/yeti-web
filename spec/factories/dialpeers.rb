@@ -81,7 +81,7 @@ FactoryBot.define do
     dst_rewrite_result { nil }
     locked { false }
     priority { 100 }
-    capacity { 1 }
+    capacity { nil }
     lcr_rate_multiplier { 1 }
     next_rate { 0.0 }
     initial_rate { 0.0 }

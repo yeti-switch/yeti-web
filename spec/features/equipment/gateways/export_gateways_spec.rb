@@ -45,6 +45,7 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Sst enabled',                        item.sst_enabled.to_s],
         ['Origination capacity',               item.origination_capacity.to_s],
         ['Termination capacity',               item.termination_capacity.to_s],
+        ['Termination subscriber capacity',    item.termination_subscriber_capacity.to_s],
         ['Acd limit',                          item.acd_limit.to_s],
         ['Asr limit',                          item.asr_limit.to_s],
         ['Short calls limit',                  item.short_calls_limit.to_s],

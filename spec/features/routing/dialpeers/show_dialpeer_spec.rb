@@ -20,6 +20,7 @@ RSpec.describe 'Show Dialpeer', type: :feature, js: true do
       prefix: '99912',
       vendor: vendor,
       gateway: gateway,
+      capacity: 100,
       routing_tag_ids: [routing_tags.first.id, routing_tags.third.id, nil]
     }
   end
