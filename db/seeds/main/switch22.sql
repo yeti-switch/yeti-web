@@ -21,6 +21,7 @@ INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUE
 INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (5, 'Vendor gateway', 1510, 2);
 INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (6, 'Dialpeer', 1511, 2);
 INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (7, 'Account total capacity', 1512, 1);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (8, 'Subscriber capacity limit', 1513, 2);
 
 
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (890, 'src_number_radius', 'varchar', false, 1050, true);
