@@ -129,18 +129,18 @@ ActiveAdmin.register CustomersAuth do
     actions
     column :name
     column :enabled do |c|
-      [
-        tag.span(c.enabled? ? 'Yes' : 'No', class: c.enabled? ? 'status_tag ok' : 'status_tag'),
-        *(tag.span('Reject calls', class: 'status_tag red') if c.reject_calls?)
-      ].join(' ').html_safe
+      safe_join([
+                  tag.span(c.enabled? ? 'Yes' : 'No', class: c.enabled? ? 'status_tag ok' : 'status_tag'),
+                  *(tag.span('Reject calls', class: 'status_tag red') if c.reject_calls?)
+                ], ' ')
     end
 
     column :ip do |c|
-      [
-        *(tag.span(c.transport_protocol_name, class: 'status_tag ok') unless c.transport_protocol_id.nil?),
-        c.ip,
-        *(tag.span('Require Auth', class: 'status_tag warn') if c.require_incoming_auth?)
-      ].join(' ').html_safe
+      safe_join([
+                  *(tag.span(c.transport_protocol_name, class: 'status_tag ok') unless c.transport_protocol_id.nil?),
+                  c.ip,
+                  *(tag.span('Require Auth', class: 'status_tag warn') if c.require_incoming_auth?)
+                ], ' ')
     end
     column :pop
     column :src_prefix
