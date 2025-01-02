@@ -9,10 +9,6 @@ class CustomersAuthDecorator < BillingDecorator
   decorates_association :account, with: AccountDecorator
   decorates_association :routing_plan, with: RoutingPlanDecorator
 
-  def privacy_mode_name
-    CustomersAuth::PRIVACY_MODES[privacy_mode_id]
-  end
-
   def display_tag_action_value
     h.tag_action_values_badges(model.tag_action_value)
   end
@@ -23,6 +19,21 @@ class CustomersAuthDecorator < BillingDecorator
     else
       display_name
     end
+  end
+
+  def decorated_ip
+    h.safe_join([
+                  *(h.tag.span(transport_protocol_name, class: 'status_tag ok') unless transport_protocol_id.nil?),
+                  ip,
+                  *(h.tag.span('Require Auth', class: 'status_tag warn') if require_incoming_auth?)
+                ], ' ')
+  end
+
+  def decorated_enabled
+    h.safe_join([
+                  h.tag.span(enabled? ? 'Yes' : 'No', class: enabled? ? 'status_tag ok' : 'status_tag'),
+                  *(h.tag.span('Reject calls', class: 'status_tag red') if reject_calls?)
+                ], ' ')
   end
 
   CustomersAuth::CONST::MATCH_CONDITION_ATTRIBUTES.each do |attribute_name|
