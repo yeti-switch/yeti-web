@@ -394,6 +394,10 @@ class CustomersAuth < ApplicationRecord
     SRC_NAME_FIELDS[src_name_field_id]
   end
 
+  def privacy_mode_name
+    PRIVACY_MODES[privacy_mode_id]
+  end
+
   # TODO: move to decorator when ActiveAdmin fix problem
   # Problem is:
   # on "update" AA uses decorated object

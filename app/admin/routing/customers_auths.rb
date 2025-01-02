@@ -128,11 +128,8 @@ ActiveAdmin.register CustomersAuth do
     id_column
     actions
     column :name
-    column :enabled
-    column :reject_calls
-    column :ip do |c|
-      c.transport_protocol_id.nil? ? c.ip : "#{c.transport_protocol_name} #{c.ip}"
-    end
+    column :enabled, &:decorated_enabled
+    column :ip, &:decorated_ip
     column :pop
     column :src_prefix
     column :src_number_length do |c|
@@ -145,7 +142,6 @@ ActiveAdmin.register CustomersAuth do
     column :uri_domain
     column :from_domain
     column :to_domain
-    column :x_yeti_auth
     column :interface
 
     column :customer, sortable: 'contractors.name' do |row|
@@ -159,7 +155,6 @@ ActiveAdmin.register CustomersAuth do
     column :gateway, sortable: 'gateways.name' do |row|
       auto_link(row.gateway, row.gateway.decorated_origination_display_name)
     end
-    column :require_incoming_auth
 
     column :rateplan, sortable: 'rateplans.name'
     column :routing_plan, sortable: 'routing_plans.name' do |row|
@@ -300,8 +295,6 @@ ActiveAdmin.register CustomersAuth do
                                      'data-required-param': 'q[origination_contractor_id_eq]'
                                    }
 
-          f.input :require_incoming_auth
-
           f.input :rateplan, input_html: { class: 'chosen' }
           f.input :routing_plan, input_html: { class: 'chosen' }
 
@@ -330,6 +323,7 @@ ActiveAdmin.register CustomersAuth do
                   input_html: { class: :chosen }
 
           f.input :ip, as: :array_of_strings
+          f.input :require_incoming_auth
           f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }
           f.input :src_prefix, as: :array_of_strings
           f.input :src_number_min_length
@@ -450,11 +444,6 @@ ActiveAdmin.register CustomersAuth do
           row :account
           row :check_account_balance
           row :gateway
-          row :require_incoming_auth
-
-          # row :enable_redirect
-          # row :redirect_method
-          # row :redirect_to
 
           row :rateplan
           row :routing_plan do
@@ -475,6 +464,7 @@ ActiveAdmin.register CustomersAuth do
           attributes_table_for s do
             row :transport_protocol, &:transport_protocol_name
             row :ip
+            row :require_incoming_auth
             row :pop
             row :src_prefix
             row :src_number_min_length
