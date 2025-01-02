@@ -142,7 +142,6 @@ ActiveAdmin.register CustomersAuth do
     column :uri_domain
     column :from_domain
     column :to_domain
-    column :x_yeti_auth
     column :interface
 
     column :customer, sortable: 'contractors.name' do |row|

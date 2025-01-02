@@ -25,7 +25,8 @@ class CustomersAuthDecorator < BillingDecorator
     h.safe_join([
                   *(h.tag.span(transport_protocol_name, class: 'status_tag ok') unless transport_protocol_id.nil?),
                   ip,
-                  *(h.tag.span('Require Auth', class: 'status_tag warn') if require_incoming_auth?)
+                  *(h.tag.span('Require Auth', class: 'status_tag warn') if require_incoming_auth?),
+                  *(h.tag.span('X-Yeti-Auth', class: 'status_tag blue') unless x_yeti_auth.empty?)
                 ], ' ')
   end
 
