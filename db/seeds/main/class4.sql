@@ -369,6 +369,9 @@ insert into disconnect_code (id,namespace_id,code,reason) values (1510, 1, 480, 
 insert into disconnect_code (id,namespace_id,code,reason) values (1511, 1, 480,  'Dialpeer $id overloaded');
 insert into disconnect_code (id,namespace_id,code,reason) values (1512, 1, 480,  'Account $id total capacity reached');
 insert into disconnect_code (id,namespace_id,code,reason) values (1513, 1, 480,  'Subscriber capacity limit');
+insert into disconnect_code (id,namespace_id,code,reason) values (1514, 1, 480,  'Termination gw cps limit');
+insert into disconnect_code (id,namespace_id,code,reason) values (1515, 1, 480,  'Dest. subscriber cps limit');
+
 insert into disconnect_code (id,namespace_id,code,reason) values (1600, 1, 503,  'Resource cache error');
 insert into disconnect_code (id,namespace_id,code,reason) values (1601, 1, 503,  'Unknown resource overload');
 

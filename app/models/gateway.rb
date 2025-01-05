@@ -90,7 +90,11 @@
 #  term_outbound_proxy              :string
 #  term_use_outbound_proxy          :boolean          default(FALSE), not null
 #  termination_capacity             :integer(2)
+#  termination_cps_limit            :integer(2)
+#  termination_cps_wsize            :integer(2)       default(1), not null
 #  termination_subscriber_capacity  :integer(2)
+#  termination_subscriber_cps_limit :integer(2)
+#  termination_subscriber_cps_wsize :integer(2)       default(1), not null
 #  to_rewrite_result                :string
 #  to_rewrite_rule                  :string
 #  transit_headers_from_origination :string
