@@ -175,12 +175,6 @@ pgq-processors-gems:
 	$(MAKE) -C pgq-processors
 
 
-.PHONY: swagger
-swagger: debian/changelog
-	$(info:msg=call swagger processing)
-	$(MAKE) -C swagger version=${version}
-
-
 .PHONY: prepare-test-db
 prepare-test-db: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml
 	$(info:msg=Preparing test database)
@@ -278,7 +272,6 @@ install: $(app_files)
 .PHONY: clean
 clean:
 	$(info:msg=Cleaning)
-	$(MAKE) -C swagger clean
 	$(MAKE) -C pgq-processors clean
 	rm -rf 	public/assets \
 		.bundle \

@@ -54,7 +54,6 @@ module CoverageHelper
       add_filter '/public/'
       add_filter '/script/'
       add_filter '/spec/'
-      add_filter '/swagger/'
       add_filter '/tmp/'
       add_filter '/vendor/'
       add_filter '/Rakefile'
