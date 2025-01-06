@@ -569,6 +569,10 @@ RSpec.describe '#routing logic' do
                allow_termination: true,
                termination_capacity: vendor_gw_termination_capacity,
                termination_subscriber_capacity: vendor_gw_termination_subscriber_capacity,
+               termination_cps_limit: vendor_gw_termination_cps_limit,
+               termination_cps_wsize: vendor_gw_termination_cps_wsize,
+               termination_subscriber_cps_limit: vendor_gw_termination_subscriber_cps_limit,
+               termination_subscriber_cps_wsize: vendor_gw_termination_subscriber_cps_wsize,
                term_append_headers_req: vendor_gw_term_append_headers_req,
                diversion_send_mode_id: vendor_gw_diversion_send_mode_id,
                diversion_domain: vendor_gw_diversion_domain,
@@ -613,6 +617,10 @@ RSpec.describe '#routing logic' do
 
       let(:vendor_gw_termination_capacity) { nil }
       let(:vendor_gw_termination_subscriber_capacity) { nil }
+      let(:vendor_gw_termination_cps_limit) { nil }
+      let(:vendor_gw_termination_cps_wsize) { 1 }
+      let(:vendor_gw_termination_subscriber_cps_limit) { nil }
+      let(:vendor_gw_termination_subscriber_cps_wsize) { 1 }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
       let!(:customer_account) {
@@ -4659,8 +4667,8 @@ RSpec.describe '#routing logic' do
         end
       end
 
-      context 'Termination gw capacity limit' do
-        context 'no termination gw capacity limit' do
+      context 'Termination gw capacity/cps limit' do
+        context 'no termination gw capacity/cps limit' do
           it 'response with ok ' do
             expect(subject.size).to eq(2)
             expect(subject.first[:legb_res]).to eq('')
@@ -4678,13 +4686,62 @@ RSpec.describe '#routing logic' do
           end
         end
 
-        context 'termination gw capacity limit' do
+        context 'termination gw subscriber capacity limit' do
           let(:vendor_gw_termination_subscriber_capacity) { 20 }
-          let(:uri_name) { '#380_961 234:567@' }
+          let(:uri_name) { '#38;0|_961 234:567@' }
 
           it 'response with ok ' do
             expect(subject.size).to eq(2)
-            expect(subject.first[:legb_res]).to eq("8:#{vendor_gateway.id}__380_961_234_567_:#{vendor_gw_termination_subscriber_capacity}:1;")
+            expect(subject.first[:legb_res]).to eq("8:#{vendor_gateway.id}__38_0__961_234_567_:#{vendor_gw_termination_subscriber_capacity}:1;")
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'termination gw cps limit' do
+          let(:vendor_gw_termination_cps_limit) { 11 }
+          let(:vendor_gw_termination_cps_wsize) { 30 }
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:legb_res]).to eq("9:#{vendor_gateway.id}:#{vendor_gw_termination_cps_limit}:#{vendor_gw_termination_cps_wsize};")
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'termination gw subscriber cps limit' do
+          let(:vendor_gw_termination_subscriber_cps_limit) { 99 }
+          let(:vendor_gw_termination_subscriber_cps_wsize) { 15 }
+          let(:uri_name) { '#38;0|_961 234:567@' }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:legb_res]).to eq("10:#{vendor_gateway.id}__38_0__961_234_567_:#{vendor_gw_termination_subscriber_cps_limit}:#{vendor_gw_termination_subscriber_cps_wsize};")
+            expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+
+        context 'termination gw all limits enabled' do
+          let(:vendor_gw_termination_capacity) { 10 }
+          let(:vendor_gw_termination_subscriber_capacity) { 20 }
+
+          let(:vendor_gw_termination_cps_limit) { 11 }
+          let(:vendor_gw_termination_cps_wsize) { 30 }
+
+          let(:vendor_gw_termination_subscriber_cps_limit) { 99 }
+          let(:vendor_gw_termination_subscriber_cps_wsize) { 15 }
+          let(:uri_name) { '#38;0|_961 234:567@' }
+
+          let(:expected_resources) {
+            [
+              "5:#{vendor_gateway.id}:#{vendor_gw_termination_capacity}:1",
+              "8:#{vendor_gateway.id}__38_0__961_234_567_:#{vendor_gw_termination_subscriber_capacity}:1",
+              "9:#{vendor_gateway.id}:#{vendor_gw_termination_cps_limit}:#{vendor_gw_termination_cps_wsize}",
+              "10:#{vendor_gateway.id}__38_0__961_234_567_:#{vendor_gw_termination_subscriber_cps_limit}:#{vendor_gw_termination_subscriber_cps_wsize}"
+            ]
+          }
+
+          it 'response with ok ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:legb_res].split(';')).to eq(expected_resources)
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
           end
         end

@@ -27,6 +27,8 @@ ActiveAdmin.register Gateway do
                  :is_shared,
                  :allow_origination, :allow_termination, :sst_enabled,
                  :origination_capacity, :termination_capacity, :termination_subscriber_capacity,
+                 :termination_cps_limit, :termination_cps_wsize,
+                 :termination_subscriber_cps_limit, :termination_subscriber_cps_wsize,
                  :preserve_anonymous_from_domain,
                  [:termination_src_numberlist_name, proc { |row| row.termination_src_numberlist.try(:name) }],
                  [:termination_dst_numberlist_name, proc { |row| row.termination_dst_numberlist.try(:name) }],
@@ -358,6 +360,10 @@ ActiveAdmin.register Gateway do
           f.input :origination_capacity
           f.input :termination_capacity
           f.input :termination_subscriber_capacity
+          f.input :termination_cps_limit
+          f.input :termination_cps_wsize
+          f.input :termination_subscriber_cps_limit
+          f.input :termination_subscriber_cps_wsize
           f.input :acd_limit
           f.input :asr_limit
           f.input :short_calls_limit
@@ -553,6 +559,10 @@ ActiveAdmin.register Gateway do
           row :origination_capacity
           row :termination_capacity
           row :termination_subscriber_capacity
+          row :termination_cps_limit
+          row :termination_cps_wsize
+          row :termination_subscriber_cps_limit
+          row :termination_subscriber_cps_wsize
           row :acd_limit
           row :asr_limit
           row :short_calls_limit

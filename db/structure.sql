@@ -3538,7 +3538,11 @@ CREATE TABLE class4.gateways (
     to_rewrite_result character varying,
     privacy_mode_id smallint DEFAULT 0 NOT NULL,
     incoming_auth_allow_jwt boolean DEFAULT false NOT NULL,
-    termination_subscriber_capacity smallint
+    termination_subscriber_capacity smallint,
+    termination_cps_limit smallint,
+    termination_cps_wsize smallint DEFAULT 1 NOT NULL,
+    termination_subscriber_cps_limit smallint,
+    termination_subscriber_cps_wsize smallint DEFAULT 1 NOT NULL
 );
 
 
@@ -31809,7 +31813,8 @@ CREATE TABLE switch22.resource_type (
     id integer NOT NULL,
     name character varying NOT NULL,
     internal_code_id integer NOT NULL,
-    action_id integer DEFAULT 1 NOT NULL
+    action_id integer DEFAULT 1 NOT NULL,
+    rate_limit boolean DEFAULT false NOT NULL
 );
 
 
@@ -33007,8 +33012,17 @@ BEGIN
 
   -- apply capacity limit by destination number
   if i_vendor_gw.termination_subscriber_capacity is not null then
-    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,': #@', '____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
   end if;
+
+  if i_vendor_gw.termination_cps_limit is not null then
+    i_profile.legb_res = i_profile.legb_res||'9:'||i_vendor_gw.id||':'||i_vendor_gw.termination_cps_limit||':'||i_vendor_gw.termination_cps_wsize||';';
+  end if;
+
+  if i_vendor_gw.termination_subscriber_cps_limit is not null then
+    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
+  end if;
+
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
@@ -33808,8 +33822,17 @@ BEGIN
 
   -- apply capacity limit by destination number
   if i_vendor_gw.termination_subscriber_capacity is not null then
-    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,': #@', '____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
   end if;
+
+  if i_vendor_gw.termination_cps_limit is not null then
+    i_profile.legb_res = i_profile.legb_res||'9:'||i_vendor_gw.id||':'||i_vendor_gw.termination_cps_limit||':'||i_vendor_gw.termination_cps_wsize||';';
+  end if;
+
+  if i_vendor_gw.termination_subscriber_cps_limit is not null then
+    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
+  end if;
+
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
@@ -34550,8 +34573,17 @@ BEGIN
 
   -- apply capacity limit by destination number
   if i_vendor_gw.termination_subscriber_capacity is not null then
-    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,': #@', '____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
   end if;
+
+  if i_vendor_gw.termination_cps_limit is not null then
+    i_profile.legb_res = i_profile.legb_res||'9:'||i_vendor_gw.id||':'||i_vendor_gw.termination_cps_limit||':'||i_vendor_gw.termination_cps_wsize||';';
+  end if;
+
+  if i_vendor_gw.termination_subscriber_cps_limit is not null then
+    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
+  end if;
+
 
   IF cardinality(i_diversion) > 0 AND i_vendor_gw.diversion_send_mode_id > 1 THEN
     IF i_vendor_gw.diversion_send_mode_id = 2 AND i_vendor_gw.diversion_domain is not null AND i_vendor_gw.diversion_domain!='' THEN
@@ -50154,6 +50186,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241215155451'),
 ('20241216165130'),
 ('20241218154326'),
-('20241231160003');
+('20241231160003'),
+('20250104221004');
 
 

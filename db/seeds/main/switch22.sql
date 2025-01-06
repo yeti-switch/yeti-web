@@ -14,14 +14,17 @@ INSERT INTO switch22.resource_action (id, name) VALUES (2, 'Try next route');
 INSERT INTO switch22.resource_action (id, name) VALUES (3, 'Accept');
 
 
-INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (1, 'Customer account', 1506, 1);
-INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (3, 'Customer auth', 1507, 1);
-INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (4, 'Customer gateway', 1508, 1);
-INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (2, 'Vendor account', 1509, 2);
-INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (5, 'Vendor gateway', 1510, 2);
-INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (6, 'Dialpeer', 1511, 2);
-INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (7, 'Account total capacity', 1512, 1);
-INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id) VALUES (8, 'Subscriber capacity limit', 1513, 2);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) VALUES (1, 'Customer account', 1506, 1, false);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) VALUES (3, 'Customer auth', 1507, 1, false);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) VALUES (4, 'Customer gateway', 1508, 1, false);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) VALUES (2, 'Vendor account', 1509, 2, false);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) VALUES (5, 'Vendor gateway', 1510, 2, false);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) VALUES (6, 'Dialpeer', 1511, 2, false);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) VALUES (7, 'Account total capacity', 1512, 1, false);
+INSERT INTO switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) VALUES (8, 'Subscriber capacity limit', 1513, 2, false);
+insert into switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) values (9, 'Term gw cps', 1514, 2, true);
+insert into switch22.resource_type (id, name, internal_code_id, action_id, rate_limit) values (10, 'Subscriber cps', 1515, 2, true);
+
 
 
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (890, 'src_number_radius', 'varchar', false, 1050, true);

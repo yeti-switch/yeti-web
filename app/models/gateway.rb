@@ -90,7 +90,11 @@
 #  term_outbound_proxy              :string
 #  term_use_outbound_proxy          :boolean          default(FALSE), not null
 #  termination_capacity             :integer(2)
+#  termination_cps_limit            :integer(2)
+#  termination_cps_wsize            :integer(2)       default(1), not null
 #  termination_subscriber_capacity  :integer(2)
+#  termination_subscriber_cps_limit :integer(2)
+#  termination_subscriber_cps_wsize :integer(2)       default(1), not null
 #  to_rewrite_result                :string
 #  to_rewrite_rule                  :string
 #  transit_headers_from_origination :string
@@ -314,7 +318,13 @@ class Gateway < ApplicationRecord
   validates :origination_capacity,
             :termination_capacity,
             :termination_subscriber_capacity,
+            :termination_cps_limit,
+            :termination_subscriber_cps_limit,
             numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
+
+  validates :termination_cps_wsize,
+            :termination_subscriber_cps_wsize,
+            numericality: { greater_than: 0, less_than_or_equal_to: 120, allow_nil: false, only_integer: true }
 
   validates :port, numericality: { greater_than_or_equal_to: ApplicationRecord::L4_PORT_MIN, less_than_or_equal_to: ApplicationRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
 
