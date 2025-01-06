@@ -33012,7 +33012,7 @@ BEGIN
 
   -- apply capacity limit by destination number
   if i_vendor_gw.termination_subscriber_capacity is not null then
-    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,';: #@', '_____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
   end if;
 
   if i_vendor_gw.termination_cps_limit is not null then
@@ -33020,7 +33020,7 @@ BEGIN
   end if;
 
   if i_vendor_gw.termination_subscriber_cps_limit is not null then
-    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,';: #@', '_____')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
+    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
   end if;
 
 
@@ -33822,7 +33822,7 @@ BEGIN
 
   -- apply capacity limit by destination number
   if i_vendor_gw.termination_subscriber_capacity is not null then
-    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,';: #@', '_____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
   end if;
 
   if i_vendor_gw.termination_cps_limit is not null then
@@ -33830,7 +33830,7 @@ BEGIN
   end if;
 
   if i_vendor_gw.termination_subscriber_cps_limit is not null then
-    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,';: #@', '_____')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
+    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
   end if;
 
 
@@ -34573,7 +34573,7 @@ BEGIN
 
   -- apply capacity limit by destination number
   if i_vendor_gw.termination_subscriber_capacity is not null then
-    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,';: #@', '_____')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
+    i_profile.legb_res = i_profile.legb_res||'8:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_capacity||':1;';
   end if;
 
   if i_vendor_gw.termination_cps_limit is not null then
@@ -34581,7 +34581,7 @@ BEGIN
   end if;
 
   if i_vendor_gw.termination_subscriber_cps_limit is not null then
-    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,';: #@', '_____')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
+    i_profile.legb_res = i_profile.legb_res||'10:'||i_vendor_gw.id||'_'||translate(i_profile.dst_prefix_out,'|;: #@', '______')||':'||i_vendor_gw.termination_subscriber_cps_limit||':'||i_vendor_gw.termination_subscriber_cps_wsize||';';
   end if;
 
 
