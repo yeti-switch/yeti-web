@@ -27,12 +27,12 @@ class Billing::Service::Renew
         provisioning_object.after_failed_renew
         provisioning_object.after_renew
         Rails.logger.info { "Not enough balance to renew billing service ##{service.id}" }
+        nil
       else
         service.update!(state_id: Billing::Service::STATE_ID_ACTIVE, renew_at: next_renew_at)
-        transaction = create_transaction
+        create_transaction unless service.renew_price.zero?
         provisioning_object.after_success_renew
         provisioning_object.after_renew
-        transaction
         Rails.logger.info { "Success renew billing service ##{service.id}" }
       end
     end
@@ -65,6 +65,12 @@ class Billing::Service::Renew
   end
 
   def enough_balance?
-    account.balance - account.min_balance >= service.renew_price
+    if service.renew_price.positive?
+      account.balance - service.renew_price >= account.min_balance
+    elsif service.renew_price.negative?
+      account.balance - service.renew_price <= account.max_balance
+    else # service.renew_price.zero?
+      true
+    end
   end
 end
