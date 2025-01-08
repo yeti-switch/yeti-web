@@ -17,7 +17,9 @@ RSpec.describe Billing::Service::Renew do
       expect { subject }.to change { service.reload.renew_at }.by(1.day)
       expect(service.state_id).to eq(Billing::Service::STATE_ID_ACTIVE)
     end
+  end
 
+  shared_examples :changes_balance do
     it 'charges account' do
       expect { subject }.to change { account.reload.balance }.by(-service.renew_price)
     end
@@ -31,6 +33,14 @@ RSpec.describe Billing::Service::Renew do
                                amount: service.renew_price,
                                description: described_class::DESCRIPTION
                              )
+    end
+  end
+
+  shared_examples :does_not_change_balance do
+    it 'does not charge account and does not create Billing::Transaction' do
+      expect { subject }.not_to change {
+        [account.reload.balance, Billing::Transaction.count]
+      }
     end
   end
 
@@ -51,13 +61,7 @@ RSpec.describe Billing::Service::Renew do
       expect(service.state_id).to eq(Billing::Service::STATE_ID_SUSPENDED)
     end
 
-    it 'does not charge account' do
-      expect { subject }.not_to change { account.reload.balance }
-    end
-
-    it 'does not create Billing::Transaction' do
-      expect { subject }.to change { Billing::Transaction.count }.by(0)
-    end
+    include_examples :does_not_change_balance
   end
 
   describe '.perform' do
@@ -72,11 +76,11 @@ RSpec.describe Billing::Service::Renew do
       {}
     end
     let!(:account) { create(:account, account_attrs) }
-    let!(:account_attrs) do
+    let(:account_attrs) do
       { balance: 100, min_balance: 0, max_balance: 1000 }
     end
     let!(:service) { create(:service, service_attrs) }
-    let!(:service_attrs) do
+    let(:service_attrs) do
       {
         account:,
         type: service_type,
@@ -89,27 +93,94 @@ RSpec.describe Billing::Service::Renew do
 
     context 'when enough money' do
       include_examples :renews_service
+      include_examples :changes_balance
 
       context 'when account balance will be less than min_balance' do
-        let!(:account_attrs) do
-          super().merge min_balance: 90.01
+        let(:account_attrs) do
+          super().merge balance: 100, min_balance: 90.01, max_balance: 1000
         end
 
         include_examples :suspends_service
-      end
-    end
 
-    context 'when not enough money' do
-      let!(:account_attrs) do
-        super().merge balance: 9.99
+        context 'when service_type with force_renew' do
+          let(:service_type_attrs) do
+            super().merge force_renew: true
+          end
+
+          include_examples :renews_service
+          include_examples :changes_balance
+        end
       end
 
-      context 'when service_type with force_renew' do
-        let(:service_type_attrs) do
-          super().merge force_renew: true
+      context 'when account balance is already greater than max_balance' do
+        let(:account_attrs) do
+          super().merge balance: 50, min_balance: 0, max_balance: 40
         end
 
         include_examples :renews_service
+        include_examples :changes_balance
+      end
+    end
+
+    context 'when service_renew_price is zero' do
+      let(:service_attrs) do
+        super().merge renew_price: 0
+      end
+
+      include_examples :renews_service
+      include_examples :does_not_change_balance
+
+      context 'when account balance is already less than min_balance' do
+        let(:account_attrs) do
+          super().merge balance: 50, min_balance: 60, max_balance: 1000
+        end
+
+        include_examples :renews_service
+        include_examples :does_not_change_balance
+      end
+
+      context 'when account balance is already greater than max_balance' do
+        let(:account_attrs) do
+          super().merge balance: 50, min_balance: 0, max_balance: 40
+        end
+
+        include_examples :renews_service
+        include_examples :does_not_change_balance
+      end
+    end
+
+    context 'when service_renew_price is negative' do
+      let(:service_attrs) do
+        super().merge renew_price: -10
+      end
+
+      include_examples :renews_service
+      include_examples :changes_balance
+
+      context 'when account balance is already be less than min_balance' do
+        let(:account_attrs) do
+          super().merge balance: 50, min_balance: 60, max_balance: 1000
+        end
+
+        include_examples :renews_service
+        include_examples :changes_balance
+      end
+
+      context 'when account balance will be greater than max_balance' do
+        let(:account_attrs) do
+          super().merge balance: 50, min_balance: 0, max_balance: 59.99
+        end
+
+        include_examples :suspends_service
+
+        context 'when service_type with force_renew' do
+          let(:service_type_attrs) do
+            super().merge force_renew: true
+          end
+
+          include_examples :renews_service
+          include_examples :changes_balance
+        end
       end
     end
   end
