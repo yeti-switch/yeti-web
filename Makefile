@@ -123,7 +123,7 @@ ruby: $(RBENV_ROOT)/versions/$(rbenv_version)
 .PHONY: bundler
 bundler: ruby
 	$(info:msg=Install bundler)
-	gem install --no-document --install-dir $(gems) bundler
+	gem install --no-document --install-dir $(gems) bundler --version 2.6.2
 	$(bundle_bin) config --local clean 'true'
 	$(bundle_bin) config --local jobs 4
 	$(bundle_bin) config --local deployment 'true'
