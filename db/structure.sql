@@ -45127,7 +45127,8 @@ ALTER SEQUENCE sys.network_prefixes_id_seq OWNED BY sys.network_prefixes.id;
 CREATE TABLE sys.network_types (
     id smallint NOT NULL,
     name character varying NOT NULL,
-    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    sorting_priority smallint DEFAULT 999 NOT NULL
 );
 
 
@@ -50187,6 +50188,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20241216165130'),
 ('20241218154326'),
 ('20241231160003'),
-('20250104221004');
+('20250104221004'),
+('20250115133012');
 
 

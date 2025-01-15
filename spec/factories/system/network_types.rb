@@ -4,9 +4,10 @@
 #
 # Table name: sys.network_types
 #
-#  id   :integer(2)       not null, primary key
-#  name :string           not null
-#  uuid :uuid             not null
+#  id               :integer(2)       not null, primary key
+#  name             :string           not null
+#  sorting_priority :integer(2)       default(999), not null
+#  uuid             :uuid             not null
 #
 # Indexes
 #

@@ -9,7 +9,7 @@ ActiveAdmin.register System::NetworkType do
                  :name,
                  :uuid
 
-  permit_params :name
+  permit_params :name, :sorting_priority
 
   filter :id
   filter :uuid_equals, label: 'UUID'
@@ -18,6 +18,7 @@ ActiveAdmin.register System::NetworkType do
   index do
     id_column
     column :name
+    column :sorting_priority
     column :uuid
   end
 
@@ -25,6 +26,7 @@ ActiveAdmin.register System::NetworkType do
     attributes_table do
       row :id
       row :name
+      row :sorting_priority
       row :uuid
     end
   end
@@ -33,6 +35,7 @@ ActiveAdmin.register System::NetworkType do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
+      f.input :sorting_priority
     end
     f.actions
   end

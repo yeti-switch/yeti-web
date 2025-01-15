@@ -85,13 +85,13 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
   end
 
   def self.sortable_fields(_context = nil)
-    super + %i[country.name network.name]
+    super + %i[country.name network.name network_type.sorting_priority]
   end
 
   # related to issue https://github.com/cerebris/jsonapi-resources/issues/1409
   def self.sort_records(records, order_options, context = {})
     local_records = records
-    custom_sort_fields = %w[country.name network.name]
+    custom_sort_fields = %w[country.name network.name network_type.sorting_priority]
 
     order_options.each_pair do |field, direction|
       case field.to_s
@@ -101,6 +101,10 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
       when 'network.name'
         local_records = local_records.left_joins(:network).order("networks.name #{direction}")
         order_options.delete('network.name')
+      when 'network_type.sorting_priority'
+        type_sorting = System::NetworkType.order(sorting_priority: direction).pluck(:id)
+        local_records = local_records.left_joins(:network).in_order_of(:'networks.type_id', type_sorting)
+        order_options.delete('network_type.sorting_priority')
       else
         local_records = apply_sort(local_records, order_options.except(*custom_sort_fields), context)
       end
