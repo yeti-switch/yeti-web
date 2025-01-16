@@ -22,20 +22,27 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
     describe 'sort' do
       context 'by country, network & prefix' do
         let(:destinations) { nil }
-        let!(:net_type) { FactoryBot.create(:network_type) }
+        let(:net_type_landline) { System::NetworkType.find_by!(name: 'Landline') }
+        let(:net_type_mobile) { System::NetworkType.find_by!(name: 'Mobile') }
+        let(:net_type_sp) { System::NetworkType.find_by!(name: 'Supplementary services') }
+        let(:net_type_unknown) { System::NetworkType.find_by!(name: 'Unknown') }
 
-        let!(:first_destination_afghanistan) do
+        let!(:network_ua_abc) { FactoryBot.create(:network, name: 'ABCUkraineNet', network_type: net_type_mobile) }
+        let!(:network_ua_cba) { FactoryBot.create(:network, name: 'UkraineNetCBA', network_type: net_type_landline) }
+        let!(:network_ua_wxy) { FactoryBot.create(:network, name: 'UkraineNetWXY', network_type: net_type_unknown) }
+
+        let!(:destination_afghanistan_111_mobile) do
           afghanistan = System::Country.find_by!(name: 'Afghanistan')
-          network = FactoryBot.create(:network, name: 'AfghanistanNet', network_type: net_type)
+          network = FactoryBot.create(:network, name: 'AfghanistanNet', network_type: net_type_mobile)
           network_prefix = FactoryBot.create(:network_prefix, country: afghanistan, network:)
           record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '111')
           record.update!(network_prefix_id: network_prefix.id)
           record
         end
 
-        let!(:second_destination_ukraine) do
+        let!(:destination_ukraine_999_mobile) do
           ukraine = System::Country.find_by!(name: 'Ukraine')
-          network = FactoryBot.create(:network, name: 'UkraineNetABC', network_type: net_type)
+          network = FactoryBot.create(:network, name: 'UkraineNetABC', network_type: net_type_mobile)
           network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network:)
           record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '999')
           record.update!(network_prefix_id: network_prefix.id)
@@ -49,7 +56,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
             subject
 
             expect(response_body[:errors]).to be_nil
-            expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, second_destination_ukraine.id.to_s]
+            expect(response_body[:data].pluck(:id)).to eq [destination_afghanistan_111_mobile.id.to_s, destination_ukraine_999_mobile.id.to_s]
           end
         end
 
@@ -60,14 +67,15 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
             subject
 
             expect(response_body[:errors]).to be_nil
-            expect(response_body[:data].pluck(:id)).to eq [second_destination_ukraine.id.to_s, first_destination_afghanistan.id.to_s]
+            expect(response_body[:data].pluck(:id)).to eq [destination_ukraine_999_mobile.id.to_s, destination_afghanistan_111_mobile.id.to_s]
           end
         end
 
         context 'by country and prefix' do
-          let!(:third_destination_ukraine) do
+          let!(:destination_ukraine_555_mobile) do
             ukraine = System::Country.find_by!(name: 'Ukraine')
-            network_prefix = FactoryBot.create(:network_prefix, country: ukraine)
+            network = FactoryBot.create(:network, name: 'UkraineNetBAC', network_type: net_type_mobile)
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network:)
             record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '555')
             record.update!(network_prefix_id: network_prefix.id)
             record
@@ -80,7 +88,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
               subject
 
               expect(response_body[:errors]).to be_nil
-              expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, third_destination_ukraine.id.to_s, second_destination_ukraine.id.to_s]
+              expect(response_body[:data].pluck(:id)).to eq [destination_afghanistan_111_mobile.id.to_s, destination_ukraine_555_mobile.id.to_s, destination_ukraine_999_mobile.id.to_s]
               expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[111 555 999]
             end
           end
@@ -92,7 +100,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
               subject
 
               expect(response_body[:errors]).to be_nil
-              expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, third_destination_ukraine.id.to_s, second_destination_ukraine.id.to_s]
+              expect(response_body[:data].pluck(:id)).to eq [destination_afghanistan_111_mobile.id.to_s, destination_ukraine_555_mobile.id.to_s, destination_ukraine_999_mobile.id.to_s]
               expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[111 555 999]
             end
           end
@@ -104,7 +112,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
               subject
 
               expect(response_body[:errors]).to be_nil
-              expect(response_body[:data].pluck(:id)).to eq [first_destination_afghanistan.id.to_s, second_destination_ukraine.id.to_s, third_destination_ukraine.id.to_s]
+              expect(response_body[:data].pluck(:id)).to eq [destination_afghanistan_111_mobile.id.to_s, destination_ukraine_999_mobile.id.to_s, destination_ukraine_555_mobile.id.to_s]
               expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[111 999 555]
             end
           end
@@ -116,16 +124,14 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
               subject
 
               expect(response_body[:errors]).to be_nil
-              expect(response_body[:data].pluck(:id)).to eq [second_destination_ukraine.id.to_s, third_destination_ukraine.id.to_s, first_destination_afghanistan.id.to_s]
+              expect(response_body[:data].pluck(:id)).to eq [destination_ukraine_999_mobile.id.to_s, destination_ukraine_555_mobile.id.to_s, destination_afghanistan_111_mobile.id.to_s]
               expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq %w[999 555 111]
             end
           end
         end
 
         context 'by country, network and prefix' do
-          let!(:network_ua_cba) { FactoryBot.create(:network, name: 'UkraineNetCBA', network_type: net_type) }
-
-          let!(:third_destination_ukraine) do
+          let!(:destination_ukraine_777_landline) do
             ukraine = System::Country.find_by!(name: 'Ukraine')
             network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_cba)
             record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '777')
@@ -133,7 +139,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
             record
           end
 
-          let!(:fourth_destination_ukraine) do
+          let!(:destination_ukraine_444_landline) do
             ukraine = System::Country.find_by!(name: 'Ukraine')
             network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_cba)
             record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '444')
@@ -141,10 +147,9 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
             record
           end
 
-          let!(:fifth_destination_ukraine) do
+          let!(:destination_ukraine_333_mobile) do
             ukraine = System::Country.find_by!(name: 'Ukraine')
-            network_abc_ua = FactoryBot.create(:network, name: 'ABCUkraineNet', network_type: net_type)
-            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_abc_ua)
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_abc)
             record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '333')
             record.update!(network_prefix_id: network_prefix.id)
             record
@@ -158,11 +163,11 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
 
               expect(response_body[:errors]).to be_nil
               expect(response_body[:data].pluck(:id)).to eq([
-                                                              first_destination_afghanistan.id.to_s,
-                                                              fifth_destination_ukraine.id.to_s,
-                                                              second_destination_ukraine.id.to_s,
-                                                              fourth_destination_ukraine.id.to_s,
-                                                              third_destination_ukraine.id.to_s
+                                                              destination_afghanistan_111_mobile.id.to_s,
+                                                              destination_ukraine_333_mobile.id.to_s,
+                                                              destination_ukraine_999_mobile.id.to_s,
+                                                              destination_ukraine_444_landline.id.to_s,
+                                                              destination_ukraine_777_landline.id.to_s
                                                             ])
               expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq(%w[111 333 999 444 777])
             end
@@ -176,13 +181,105 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
 
               expect(response_body[:errors]).to be_nil
               expect(response_body[:data].pluck(:id)).to eq([
-                                                              first_destination_afghanistan.id.to_s,
-                                                              fifth_destination_ukraine.id.to_s,
-                                                              second_destination_ukraine.id.to_s,
-                                                              third_destination_ukraine.id.to_s,
-                                                              fourth_destination_ukraine.id.to_s
+                                                              destination_afghanistan_111_mobile.id.to_s,
+                                                              destination_ukraine_333_mobile.id.to_s,
+                                                              destination_ukraine_999_mobile.id.to_s,
+                                                              destination_ukraine_777_landline.id.to_s,
+                                                              destination_ukraine_444_landline.id.to_s
                                                             ])
               expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq(%w[111 333 999 777 444])
+            end
+          end
+        end
+
+        context 'by country, network_type and prefix' do
+          let!(:destination_ukraine_777_landline) do
+            ukraine = System::Country.find_by!(name: 'Ukraine')
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_cba)
+            record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '777')
+            record.update!(network_prefix_id: network_prefix.id)
+            record
+          end
+
+          let!(:destination_ukraine_444_landline) do
+            ukraine = System::Country.find_by!(name: 'Ukraine')
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_cba)
+            record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '444')
+            record.update!(network_prefix_id: network_prefix.id)
+            record
+          end
+
+          let!(:destination_ukraine_333_mobile) do
+            ukraine = System::Country.find_by!(name: 'Ukraine')
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_abc)
+            record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '333')
+            record.update!(network_prefix_id: network_prefix.id)
+            record
+          end
+
+          let!(:destination_ukraine_33345_mobile) do
+            ukraine = System::Country.find_by!(name: 'Ukraine')
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_abc)
+            record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '33345')
+            record.update!(network_prefix_id: network_prefix.id)
+            record
+          end
+
+          let!(:destination_ukraine_333625_landline) do
+            ukraine = System::Country.find_by!(name: 'Ukraine')
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_cba)
+            record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '333625')
+            record.update!(network_prefix_id: network_prefix.id)
+            record
+          end
+
+          let!(:destination_ukraine_1112_unknown) do
+            ukraine = System::Country.find_by!(name: 'Ukraine')
+            network_prefix = FactoryBot.create(:network_prefix, country: ukraine, network: network_ua_wxy)
+            record = FactoryBot.create(:destination, rate_group: rate_group, prefix: '1112')
+            record.update!(network_prefix_id: network_prefix.id)
+            record
+          end
+
+          context 'when sort by country name, network type and then by prefix in ASC order' do
+            let(:index_params) { { sort: 'country.name,network_type.sorting_priority,prefix' } }
+
+            it 'returns ordered records' do
+              subject
+
+              expect(response_body[:errors]).to be_nil
+              expect(response_body[:data].pluck(:id)).to eq([
+                                                              destination_afghanistan_111_mobile.id.to_s,
+                                                              destination_ukraine_333625_landline.id.to_s,
+                                                              destination_ukraine_444_landline.id.to_s,
+                                                              destination_ukraine_777_landline.id.to_s,
+                                                              destination_ukraine_333_mobile.id.to_s,
+                                                              destination_ukraine_33345_mobile.id.to_s,
+                                                              destination_ukraine_999_mobile.id.to_s,
+                                                              destination_ukraine_1112_unknown.id.to_s
+                                                            ])
+              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq(%w[111 333625 444 777 333 33345 999 1112])
+            end
+          end
+
+          context 'when sort by country name, network type and then by prefix in DESC order' do
+            let(:index_params) { { sort: 'country.name,network_type.sorting_priority,-prefix' } }
+
+            it 'returns ordered records' do
+              subject
+
+              expect(response_body[:errors]).to be_nil
+              expect(response_body[:data].pluck(:id)).to eq([
+                                                              destination_afghanistan_111_mobile.id.to_s,
+                                                              destination_ukraine_777_landline.id.to_s,
+                                                              destination_ukraine_444_landline.id.to_s,
+                                                              destination_ukraine_333625_landline.id.to_s,
+                                                              destination_ukraine_999_mobile.id.to_s,
+                                                              destination_ukraine_33345_mobile.id.to_s,
+                                                              destination_ukraine_333_mobile.id.to_s,
+                                                              destination_ukraine_1112_unknown.id.to_s
+                                                            ])
+              expect(response_body[:data].pluck(:attributes).pluck(:prefix)).to eq(%w[111 777 444 333625 999 33345 333 1112])
             end
           end
         end
