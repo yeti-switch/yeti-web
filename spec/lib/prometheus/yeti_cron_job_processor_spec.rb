@@ -16,11 +16,13 @@ RSpec.describe YetiCronJobProcessor, '.collect' do
   shared_examples :sends_correct_metric do
     it 'sends metric to prometheus' do
       expect(prometheus_client).to receive(:send_json).with(
-        type: 'yeti_cron_job',
-        metric_labels: { pid: Process.pid },
-        name: data[:name],
-        success: data[:success],
-        duration: data[:duration]
+        {
+          type: 'yeti_cron_job',
+          metric_labels: { pid: Process.pid },
+          name: data[:name],
+          success: data[:success],
+          duration: data[:duration]
+        }
       ).once
       subject
     end

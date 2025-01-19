@@ -54,10 +54,10 @@ RSpec.describe YetiScheduler do
 
     let(:rufus_stub) { instance_double(Rufus::Scheduler) }
     before do
-      expect(ApplicationRecord).to receive(:clear_active_connections!).once
-      expect(ApplicationRecord).to receive(:flush_idle_connections!).once
-      expect(Cdr::Base).to receive(:clear_active_connections!).once
-      expect(Cdr::Base).to receive(:flush_idle_connections!).once
+      expect(ApplicationRecord.connection_handler).to receive(:clear_active_connections!).with(:all).once
+      expect(ApplicationRecord.connection_handler).to receive(:flush_idle_connections!).with(:all).once
+      expect(Cdr::Base.connection_handler).to receive(:clear_active_connections!).with(:all).once
+      expect(Cdr::Base.connection_handler).to receive(:flush_idle_connections!).with(:all).once
 
       expect(Rufus::Scheduler).to receive(:new).and_return(rufus_stub)
       described_class._cron_handlers.each do |handler_class|
@@ -193,9 +193,11 @@ RSpec.describe YetiScheduler do
             expect(Cdr::Base.connection_pool).to receive(:release_connection).once.ordered
 
             expect(job_info_stub).to receive(:update!).with(
-              last_run_at: be_within(1).of(Time.zone.now),
-              last_duration: be > 0,
-              last_exception: nil
+              {
+                last_run_at: be_within(1).of(Time.zone.now),
+                last_duration: be > 0,
+                last_exception: nil
+              }
             ).once
           end
 
@@ -234,9 +236,11 @@ RSpec.describe YetiScheduler do
             expect(Cdr::Base.connection_pool).to receive(:release_connection).once.ordered
 
             expect(job_info_stub).to receive(:update!).with(
-              last_run_at: be_within(1).of(Time.zone.now),
-              last_duration: be > 0,
-              last_exception: be_present
+              {
+                last_run_at: be_within(1).of(Time.zone.now),
+                last_duration: be > 0,
+                last_exception: be_present
+              }
             ).once
           end
 

@@ -26,7 +26,7 @@ RSpec.resource 'Transactions' do
   end
 
   get '/api/rest/admin/transactions/:id' do
-    let(:id) { create(:billing_transaction, account: account).uuid }
+    let(:id) { create(:billing_transaction, account: account).id }
 
     example_request 'get specific entry' do
       expect(status).to eq(200)

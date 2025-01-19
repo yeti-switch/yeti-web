@@ -120,4 +120,9 @@ $(document).ready(function () {
         show_time: true
     });
 
+    $('form.filter_form div.select_and_search > select').chosen({
+        disable_search: true,
+        allow_single_deselect: false
+    })
+
 });

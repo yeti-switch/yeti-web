@@ -4,7 +4,7 @@
 #
 # Table name: cdr.cdr
 #
-#  id                              :bigint(8)        not null
+#  id                              :bigint(8)        not null, primary key
 #  audio_recorded                  :boolean
 #  auth_orig_ip                    :inet
 #  auth_orig_port                  :integer(4)
@@ -96,7 +96,7 @@
 #  success                         :boolean
 #  time_connect                    :timestamptz
 #  time_end                        :timestamptz
-#  time_start                      :timestamptz      not null
+#  time_start                      :timestamptz      not null, primary key
 #  to_domain                       :string
 #  uuid                            :uuid
 #  vendor_duration                 :integer(4)

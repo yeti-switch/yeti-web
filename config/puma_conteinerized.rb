@@ -28,8 +28,8 @@ end
 before_fork do
   # Proper way to clear db connections.
   # Like AR initializer does in active_record/railtie.rb:265
-  ActiveRecord::Base.clear_active_connections!
-  ActiveRecord::Base.flush_idle_connections!
+  ActiveRecord::Base.connection_handler.clear_active_connections!(:all)
+  ActiveRecord::Base.connection_handler.flush_idle_connections!(:all)
 
   require 'puma_worker_killer'
 
