@@ -185,7 +185,11 @@ class Report::Realtime::OriginationPerformance < Report::Realtime::Base
   }
 
   scope :time_interval_eq, lambda { |value|
-    where('time_start >=(now()-\'? seconds\'::interval) and time_start < (now()-\'? seconds\'::interval)', 2 * value.to_i, value.to_i)
+    where(
+      "time_start >= (now()-(?::varchar||' seconds')::interval) AND time_start < (now()-(?::varchar||' seconds')::interval)",
+      2 * value.to_i,
+      value.to_i
+    )
   }
 
   private

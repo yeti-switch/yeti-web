@@ -7,13 +7,20 @@ module CustomRspecHelper
     nil
   end
 
-  # @see ActiveJob::TestHelper
-  def with_real_active_job_adapter
-    queue_adapter_changed_jobs.each(&:disable_test_adapter)
+  def with_dj_queue_adapter(*job_klasses, &)
+    with_queue_adapter(:delayed_job, *job_klasses, &)
+  end
+
+  def with_queue_adapter(adapter_name, *job_klasses)
+    raise ArgumentError if job_klasses.empty?
+
     begin
+      job_klasses.each { |klass| klass.queue_adapter = adapter_name }
       yield
     ensure
-      queue_adapter_changed_jobs.each { |klass| klass.enable_test_adapter(queue_adapter_for_test) }
+      # we need to set the exact same adapter for all job classes, because it will affect matchers
+      test_adapter = ActiveJob::Base.queue_adapter
+      job_klasses.each { |klass| klass.queue_adapter = test_adapter }
     end
   end
 end

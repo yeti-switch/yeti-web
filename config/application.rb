@@ -26,10 +26,10 @@ Bundler.require(*Rails.groups)
 module Yeti
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
 
     # changing defaults
-    Rails.application.config.action_view.default_enforce_utf8 = true
+    config.action_view.default_enforce_utf8 = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -86,11 +86,13 @@ module Yeti
     }
 
     config.active_job.queue_adapter = :delayed_job
+    config.active_job.enqueue_after_transaction_commit = :never
 
     # Use RSpec for testing
     config.generators do |g|
       g.test_framework :rspec
       g.integration_tool :rspec
+      g.system_tests nil
     end
 
     # reimplementing minimal Rails.application.secrets, that was removed in Rails 7.2

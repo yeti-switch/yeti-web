@@ -45,6 +45,8 @@ Capybara::Screenshot.register_driver(:cuprite) do |driver, path|
   driver.render(path, full: true)
 end
 
+Capybara.raise_server_errors = true
+
 # Capybara::Screenshot.screenshot_and_save_page
 Capybara::Screenshot.prune_strategy = :keep_last_run
 

@@ -14,7 +14,16 @@ RSpec.describe 'Index System Background Tasks', type: :feature do
   end
 
   let!(:background_tasks) do
-    active_jobs = with_real_active_job_adapter do
+    klasses = [
+      Worker::CdrExportJob,
+      Worker::FillInvoiceJob,
+      Worker::PingCallbackUrlJob,
+      Worker::RemoveCdrExportFileJob,
+      Worker::SendEmailLogJob,
+      Worker::CustomCdrReportJob,
+      Worker::GenerateReportDataJob
+    ]
+    active_jobs = with_dj_queue_adapter(*klasses) do
       [
         Worker::CdrExportJob.perform_later(123),
         Worker::FillInvoiceJob.perform_later(123),

@@ -37,7 +37,8 @@ class Stats::TerminationQualityStat < Cdr::Base
       min(pdd) as min_pdd,
       #{GuiConfig.termination_stats_window}::integer as w
     ").where(
-      "time_start>= now()-'? hours'::interval", GuiConfig.termination_stats_window
+      "time_start>= now()-(?::varchar||' hours')::interval",
+      GuiConfig.termination_stats_window
     ).reorder('').take
   end
 
@@ -51,7 +52,8 @@ class Stats::TerminationQualityStat < Cdr::Base
       max(pdd) as max_pdd,
       min(pdd) as min_pdd,
       dialpeer_id").where(
-        "time_start>= now()-'? hours'::interval and dialpeer_id is not null", GuiConfig.termination_stats_window
+        "time_start>= now()-(?::varchar||' hours')::interval and dialpeer_id is not null",
+        GuiConfig.termination_stats_window
       ).group('dialpeer_id').having(
         'count(id)>=? AND sum(duration)>=?', min_calls_count, min_calls_duration
       ).reorder('')
@@ -67,7 +69,8 @@ class Stats::TerminationQualityStat < Cdr::Base
       max(pdd) as max_pdd,
       min(pdd) as min_pdd,
       gateway_id").where(
-        "time_start>= now()-'? hours'::interval and gateway_id is not null", GuiConfig.termination_stats_window
+        "time_start>= now()-(?::varchar||' hours')::interval and gateway_id is not null",
+        GuiConfig.termination_stats_window
       ).group('gateway_id').having(
         'count(id)>=? AND sum(duration)>=?', min_calls_count, min_calls_duration
       ).reorder('')
@@ -83,7 +86,8 @@ class Stats::TerminationQualityStat < Cdr::Base
       max(pdd) as max_pdd,
       min(pdd) as min_pdd,
       destination_id").where(
-        "time_start>= now()-'? hours'::interval and destination_id is not null", GuiConfig.termination_stats_window
+        "time_start>= now()-(?::varchar||' hours')::interval and destination_id is not null",
+        GuiConfig.termination_stats_window
       ).group('destination_id').having(
         'count(id)>=? AND sum(duration)>=?', min_calls_count, min_calls_duration
       ).reorder('')
@@ -91,7 +95,8 @@ class Stats::TerminationQualityStat < Cdr::Base
 
   def self.pdd_distribution
     select('pdd::integer, count(id)').where(
-      "time_start>= now()-'? hours'::interval", GuiConfig.termination_stats_window
+      "time_start>= now()-(?::varchar||' hours')::interval",
+      GuiConfig.termination_stats_window
     ).where(success: true).group('pdd::integer').order('pdd::integer ASC')
   end
 

@@ -8,7 +8,7 @@ RSpec.describe 'Show System Background Task', type: :feature do
   include_context :login_as_admin
 
   let!(:background_task) do
-    active_job = with_real_active_job_adapter do
+    active_job = with_dj_queue_adapter(active_job_class) do
       active_job_class.perform_later(*active_job_args)
     end
     delayed_job_id = active_job.provider_job_id

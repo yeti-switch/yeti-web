@@ -10,7 +10,7 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack', ' ~> 2.2.6'
-gem 'rails', '~> 7.1.0'
+gem 'rails', '~> 7.2.0'
 gem 'responders'
 
 # Authentication
@@ -52,7 +52,7 @@ gem 'jsonapi-resources', '~> 0.9.12'
 # Ext
 gem 'validates_timeliness', '~> 7.0.0.beta1'
 
-# Object oriented authorization for Rails applications
+# Object-oriented authorization for Rails applications
 gem 'pundit'
 
 gem 'paper_trail'

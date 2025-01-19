@@ -16,7 +16,15 @@ RSpec.describe Delayed::Job do
     end
 
     let!(:regular_delayed_jobs) do
-      active_jobs = with_real_active_job_adapter do
+      klasses = [
+        Worker::CdrExportJob,
+        Worker::FillInvoiceJob,
+        Worker::PingCallbackUrlJob,
+        Worker::RemoveCdrExportFileJob,
+        Worker::SendEmailLogJob,
+        Worker::GenerateReportDataJob
+      ]
+      active_jobs = with_dj_queue_adapter(*klasses) do
         [
           Worker::CdrExportJob.perform_later(123),
           Worker::CdrExportJob.perform_later(124),
@@ -36,7 +44,7 @@ RSpec.describe Delayed::Job do
       Delayed::Job.find(*delayed_job_ids)
     end
     let!(:custom_cdr_report_job) do
-      active_job = with_real_active_job_adapter do
+      active_job = with_dj_queue_adapter(Worker::CustomCdrReportJob) do
         Worker::CustomCdrReportJob.perform_later(123)
       end
       Delayed::Job.find(active_job.provider_job_id)
@@ -69,7 +77,7 @@ RSpec.describe Delayed::Job do
 
     context 'when 2 Worker::CustomCdrReportJob are enqueued' do
       let!(:old_custom_cdr_report_job) do
-        active_job = with_real_active_job_adapter do
+        active_job = with_dj_queue_adapter(Worker::CustomCdrReportJob) do
           Worker::CustomCdrReportJob.perform_later(122)
         end
         Delayed::Job.find(active_job.provider_job_id)
@@ -103,13 +111,13 @@ RSpec.describe Delayed::Job do
 
     context 'when 3 Worker::CustomCdrReportJob are enqueued' do
       let!(:old_custom_cdr_report_job) do
-        active_job = with_real_active_job_adapter do
+        active_job = with_dj_queue_adapter(Worker::CustomCdrReportJob) do
           Worker::CustomCdrReportJob.perform_later(122)
         end
         Delayed::Job.find(active_job.provider_job_id)
       end
       let!(:very_old_custom_cdr_report_job) do
-        active_job = with_real_active_job_adapter do
+        active_job = with_dj_queue_adapter(Worker::CustomCdrReportJob) do
           Worker::CustomCdrReportJob.perform_later(121)
         end
         Delayed::Job.find(active_job.provider_job_id)
@@ -148,7 +156,7 @@ RSpec.describe Delayed::Job do
 
   describe 'enqueue' do
     subject do
-      active_job = with_real_active_job_adapter do
+      active_job = with_dj_queue_adapter(active_job_class) do
         active_job_class.perform_later(*active_job_args)
       end
       Delayed::Job.find(active_job.provider_job_id)
