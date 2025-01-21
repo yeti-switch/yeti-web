@@ -10,7 +10,7 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack', ' ~> 2.2.6'
-gem 'rails', '~> 7.0'
+gem 'rails', '~> 7.2.0'
 gem 'responders'
 
 # Authentication
@@ -18,7 +18,8 @@ gem 'activeldap'
 gem 'd3-rails', '3.5.2'
 gem 'devise', '>= 4.6.0'
 gem 'devise_ldap_authenticatable', github: 'cschiewek/devise_ldap_authenticatable', branch: 'default'
-gem 'net-ldap', '~> 0.16.0'
+gem 'net-ldap', '~> 0.19.0'
+gem 'ostruct', '~> 0.6.1' # need for net-ldap
 
 # Seamless JWT authentication for Rails API
 gem 'jwt'
@@ -51,7 +52,7 @@ gem 'jsonapi-resources', '~> 0.9.12'
 # Ext
 gem 'validates_timeliness', '~> 7.0.0.beta1'
 
-# Object oriented authorization for Rails applications
+# Object-oriented authorization for Rails applications
 gem 'pundit'
 
 gem 'paper_trail'
@@ -77,6 +78,7 @@ gem 'delayed_job_active_record'
 gem 'odf-report', github: 'yeti-switch/odf-report', branch: 'master-2018'
 gem 'puma', '~> 6.1'
 gem 'puma_worker_killer'
+gem 'syslog', '~> 0.2.0' # need for syslog-logger
 gem 'syslog-logger'
 gem 'zip-zip'
 
@@ -91,6 +93,7 @@ gem 'rufus-scheduler', require: false
 # Easiest way to add multi-environment yaml settings to Rails, Sinatra, Pandrino and other Ruby projects.
 # https://github.com/rubyconfig/config
 gem 'config', require: false
+gem 'dry-validation', '~> 1.0', require: false
 
 group :development do
   gem 'annotate'

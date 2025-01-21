@@ -16,7 +16,7 @@ RSpec.describe 'Copy Destination', type: :feature do
     click_link 'Copy'
   end
 
-  it 'check only not standart attribute **batch_prefix**' do
+  it 'check only not standard attribute **batch_prefix**' do
     within 'form#new_routing_destination' do
       expect(page).to have_field('Prefix', with: attrs[:prefix])
     end

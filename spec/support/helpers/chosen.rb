@@ -12,8 +12,13 @@ module Helpers
       value = options.delete(:with)
       find_field_opts = { visible: false, disabled: disabled }
       find_field_opts[:match] = :prefer_exact if exact_label
-      select_node = find_field(label, **find_field_opts)
-      chosen_selector = "select##{select_node[:id]} + .chosen-container"
+      selector = if options.fetch(:selector, false)
+                   label
+                 else
+                   select_node = find_field(label, **find_field_opts)
+                   "select##{select_node[:id]}"
+                 end
+      chosen_selector = "#{selector} + .chosen-container"
       if no_search
         chosen_pick(chosen_selector, text: value, exact: exact)
       else

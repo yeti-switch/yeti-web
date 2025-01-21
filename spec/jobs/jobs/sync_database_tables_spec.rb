@@ -21,13 +21,21 @@ RSpec.describe Jobs::SyncDatabaseTables, '#call' do
 
   shared_examples 'sync database' do
     it 'should sync tables between databases' do
-      expect { subject }.to change { Cdr::Country.count }.from(0).to(record_count)
-                                                         .and(
-                              change { Cdr::Network.count }.from(0).to(record_count)
-                              .and(
-                                change { Cdr::NetworkPrefix.count }.from(0).to(record_count)
-                              )
-                            )
+      expect { subject }.to change {
+        [
+          Cdr::Country.count,
+          Cdr::Network.count,
+          Cdr::NetworkPrefix.count
+        ]
+      }.from(
+        [0, 0, 0]
+      ).to(
+        [
+          record_count,
+          record_count,
+          record_count
+        ]
+      )
     end
   end
 

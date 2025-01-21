@@ -4,7 +4,7 @@
 #
 # Table name: cdr.cdr
 #
-#  id                              :bigint(8)        not null
+#  id                              :bigint(8)        not null, primary key
 #  audio_recorded                  :boolean
 #  auth_orig_ip                    :inet
 #  auth_orig_port                  :integer(4)
@@ -96,7 +96,7 @@
 #  success                         :boolean
 #  time_connect                    :timestamptz
 #  time_end                        :timestamptz
-#  time_start                      :timestamptz      not null
+#  time_start                      :timestamptz      not null, primary key
 #  to_domain                       :string
 #  uuid                            :uuid
 #  vendor_duration                 :integer(4)
@@ -160,6 +160,8 @@
 #
 
 class Report::Realtime::OriginationPerformance < Report::Realtime::Base
+  self.primary_key = :id
+
   attr_accessor :l
 
   scope :detailed_scope, lambda { |length|
@@ -183,7 +185,11 @@ class Report::Realtime::OriginationPerformance < Report::Realtime::Base
   }
 
   scope :time_interval_eq, lambda { |value|
-    where('time_start >=(now()-\'? seconds\'::interval) and time_start < (now()-\'? seconds\'::interval)', 2 * value.to_i, value.to_i)
+    where(
+      "time_start >= (now()-(?::varchar||' seconds')::interval) AND time_start < (now()-(?::varchar||' seconds')::interval)",
+      2 * value.to_i,
+      value.to_i
+    )
   }
 
   private
