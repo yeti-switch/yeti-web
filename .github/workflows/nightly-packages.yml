@@ -29,6 +29,7 @@ jobs:
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
           PACKAGE_TYPE: nightly
+          SECRET_KEY_BASE: qQX3V5RSCMdQq6GRpE7tMJ1Syognfz4GLPCaSCPR9lAML2FzCiLN79u8ItC4VDOk
 
       - name: Save deb package as artifact
         uses: actions/upload-artifact@v4
