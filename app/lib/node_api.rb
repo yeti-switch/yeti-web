@@ -75,7 +75,7 @@ class NodeApi
 
   def aors(auth_id = nil)
     params = Array.wrap(auth_id)
-    perform_request('yeti.show.aors', params)
+    perform_request('registrar.show.aors', params)
   end
 
   def calls(*params)
