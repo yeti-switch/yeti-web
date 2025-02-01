@@ -7,7 +7,7 @@ RSpec.describe 'Index Incoming Registrations', type: :feature do
   let!(:node) { FactoryBot.create(:node) }
   let(:record_attributes) { FactoryBot.attributes_for(:incoming_registration, :filled) }
   before do
-    stub_jrpc_request(node.rpc_endpoint, 'yeti.show.aors', [])
+    stub_jrpc_request(node.rpc_endpoint, 'registrar.show.aors', [])
       .and_return([record_attributes.stringify_keys])
     visit incoming_registrations_path
   end

@@ -36,7 +36,7 @@ RSpec.describe 'Show Gateway', type: :feature do
   context 'when node is active' do
     before do
       registration_data = FactoryBot.attributes_for(:incoming_registration, :filled).stringify_keys
-      stub_jrpc_request(node.rpc_endpoint, 'yeti.show.aors', [gateway.id]).and_return([registration_data])
+      stub_jrpc_request(node.rpc_endpoint, 'registrar.show.aors', [gateway.id]).and_return([registration_data])
     end
 
     it 'shows gateway details page' do
