@@ -85,6 +85,7 @@ Config.setup do |setup_config|
     optional(:cryptomus).schema do
       optional(:api_key).maybe(:string)
       optional(:merchant_id).maybe(:string)
+      optional(:base_url).maybe(:string)
       optional(:url_callback).maybe(:string)
       optional(:url_return).maybe(:string)
     end
