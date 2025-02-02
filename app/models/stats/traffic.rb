@@ -10,11 +10,11 @@ class Stats::Traffic < Stats::Base
     [
       {
         key: 'Profit',
-        values: points.map { |p| { x: p[0].to_datetime.to_s(:db), y: p[2].to_f } }
+        values: points.map { |p| { x: p[0].to_datetime.to_fs(:db), y: p[2].to_f } }
       },
       {
         key: 'Amount',
-        values: points.map { |p| { x: p[0].to_datetime.to_s(:db), y: p[1].to_f } }
+        values: points.map { |p| { x: p[0].to_datetime.to_fs(:db), y: p[1].to_f } }
       }
 
     ]
@@ -29,7 +29,7 @@ class Stats::Traffic < Stats::Base
     scope = hourly(column, hours_ago)
     res = [
       key: column.to_s.humanize,
-      values: scope.map { |p| { x: p[:timestamp].to_datetime.to_s(:db), y: p[column].to_f } }
+      values: scope.map { |p| { x: p[:timestamp].to_datetime.to_fs(:db), y: p[column].to_f } }
     ]
     res
   end
