@@ -20,7 +20,7 @@ module AggChart
         .order('calls_time')
         .pluck(:calls_time, :"max_#{count_column}", :"min_#{count_column}", :"avg_#{count_column}")
         .map do |d|
-        x = d[0].to_datetime.to_s(:db)
+        x = d[0].to_datetime.to_fs(:db)
         res[:max] << { x: x, y: d[1] }
         res[:min] << { x: x, y: d[2] }
         res[:avg] << { x: x, y: d[3] }

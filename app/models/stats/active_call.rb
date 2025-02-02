@@ -21,16 +21,16 @@ class Stats::ActiveCall < Stats::Base
   # Stats::ActiveCall.where('created_at > ?', 1.day.ago).to_chart
   def self.to_stacked_chart(hours_ago = 24)
     nodes = Node.order(:name).pluck(:id, :name).to_h
-    self.hours_ago(hours_ago).where(node_id: nodes.keys).pluck(:created_at, :count, :node_id)
-        .group_by do |n|
-      nodes[n.last]
-    end
-        .map do |key_value_pair|
+    data = self.hours_ago(hours_ago).where(node_id: nodes.keys)
+               .pluck(:created_at, :count, :node_id)
+               .group_by { |n| nodes[n.last] }
+
+    data.map do |key_value_pair|
       {
         key: key_value_pair[0],
         # change to x,y
         values: key_value_pair[1].map do |el|
-                  [el[0].to_datetime.to_s(:db), el[1]]
+                  [el[0].to_datetime.to_fs(:db), el[1]]
                 end
       }
     end

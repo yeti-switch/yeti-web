@@ -13,6 +13,6 @@
 FactoryBot.define do
   factory :stats_active_call, class: 'Stats::ActiveCall' do
     count { rand(100) }
-    node { Node.take! || FactoryBot.create(:node) }
+    node { Node.take || FactoryBot.create(:node) }
   end
 end
