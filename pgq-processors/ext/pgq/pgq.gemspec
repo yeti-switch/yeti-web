@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
 
   s.require_paths = ['lib']
 
-  s.add_dependency 'activerecord', '>= 4.0.2'
-  s.add_dependency 'activesupport', '>= 4.0.2'
+  s.add_dependency 'activerecord', '~> 7.1.0'
+  s.add_dependency 'activesupport', '~> 7.1.0'
   s.add_dependency 'pg'
 
   s.add_development_dependency 'rake'

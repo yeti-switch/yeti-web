@@ -10,7 +10,7 @@ RSpec.describe CdrStat do
     consumer.perform_batch
   end
 
-  CONFIG = begin
+  cfg = begin
     f = YAML.safe_load(ERB.new(File.read('../config/database.yml')).result, aliases: true)
     {
       'mode' => 'test',
@@ -20,13 +20,13 @@ RSpec.describe CdrStat do
   end
 
   let(:consumer) do
-    described_class.new(TestContext.logger, nil, nil, CONFIG)
+    described_class.new(TestContext.logger, nil, nil, cfg)
   end
   let(:database_config) do
-    CONFIG['databases']['test']['cdr']
+    cfg['databases']['test']['cdr']
   end
   let(:expected_sql) do
-    "SELECT processed_records FROM #{CONFIG['stored_procedure']}()"
+    "SELECT processed_records FROM #{cfg['stored_procedure']}()"
   end
 
   before do

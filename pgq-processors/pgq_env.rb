@@ -34,6 +34,7 @@ class PgqEnv
     @config = ::PgqConfig.new(ENV['config_file'], ENV['processor'])
     ActiveRecord::Base.establish_connection(@config['source_database'])
     @logger = build_logger
+    ActiveRecord::Base.logger = @logger
     HttpLogger.logger = @logger
     Pgq::Worker.logger = @logger
 
