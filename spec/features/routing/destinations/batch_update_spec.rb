@@ -10,12 +10,6 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   let!(:profit_control_mode_id) { Routing::RateProfitControlMode::MODE_PER_CALL }
   let!(:routing_tags) { create_list(:routing_tag, 5) }
 
-  before do
-    visit destinations_path
-    click_button 'Update batch'
-    expect(page).to have_selector('.ui-dialog')
-  end
-
   subject do
     fill_batch_form
     click_button 'OK'
@@ -46,7 +40,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       asr_limit: '0.9',
       acd_limit: '1',
       short_calls_limit: '4',
-      routing_tag_ids: routing_tags.map { |tag| tag.id.to_s }
+      routing_tag_ids: routing_tags.sort_by(&:name).map { |tag| tag.id.to_s }
     }
   end
 
@@ -178,6 +172,12 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   end
 
   context 'should check validates' do
+    before do
+      visit destinations_path
+      click_button 'Update batch'
+      expect(page).to have_selector('.ui-dialog')
+    end
+
     context 'when change :dp_margin_percent' do
       let(:assign_params) { { dp_margin_percent: '0' } }
 
@@ -205,6 +205,54 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
           expect(page).to have_selector '.flash', text: success_message
         end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Routing::Destination', be_present, assign_params, be_present
       end
+    end
+  end
+
+  context 'when user wants to change routing_tag_ids to "NOT TAGGED"' do
+    subject { click_button :OK }
+
+    let(:_destinations) { nil }
+    let(:assign_params) { {} }
+
+    before do
+      visit destinations_path
+      click_button 'Update batch'
+      page.scroll_to find_button('OK')
+      check :Routing_tag_ids
+      # toggle checkbox and then leave it empty to chnage value to empty array
+    end
+
+    it 'should create Job to update routing_tag_ids field of desctination to default value: []' do
+      expect do
+        subject
+        expect(page).to have_selector '.flash', text: success_message
+      end.to enqueue_job(AsyncBatchUpdateJob).with('Routing::Destination', be_present, { routing_tag_ids: '' }, be_present)
+
+      # ensure that destination model converts "" to [] because the system consider [] as Routing::RoutingTag::NOT_TAGGED
+      expect(Routing::Destination.new(routing_tag_ids: '')).to have_attributes(routing_tag_ids: [])
+    end
+  end
+
+  context 'when user wants to change routing_tag_ids to "ANY TAG"' do
+    let(:_destinations) { nil }
+    let(:assign_params) { {} }
+
+    before do
+      visit destinations_path
+      click_button 'Update batch'
+      page.scroll_to find_button('OK')
+      check :Routing_tag_ids
+    end
+
+    it 'should create a Job to update routing_tag_ids to any tag: [nil]' do
+      fill_in_chosen 'routing_tag_ids[]', with: Routing::RoutingTag::ANY_TAG, multiple: true
+      expect do
+        subject
+        expect(page).to have_selector '.flash', text: success_message
+      end.to enqueue_job(AsyncBatchUpdateJob).with('Routing::Destination', be_present, { routing_tag_ids: [''] }, be_present)
+
+      # ensure that destination model converts [""] to [nil] because the system consider [nil] as Routing::RoutingTag::ANY_TAG
+      expect(Routing::Destination.new(routing_tag_ids: [''])).to have_attributes(routing_tag_ids: [nil])
     end
   end
 end

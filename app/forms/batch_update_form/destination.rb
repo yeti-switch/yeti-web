@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BatchUpdateForm::Destination < BatchUpdateForm::Base
+  include BatchUpdateForm::RoutingTagOptions
+
   model_class 'Routing::Destination'
   attribute :enabled, type: :boolean
   attribute :prefix
@@ -25,7 +27,10 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   attribute :asr_limit
   attribute :acd_limit
   attribute :short_calls_limit
-  attribute :routing_tag_ids, type: :foreign_key, class_name: 'Routing::RoutingTag'
+  attribute :routing_tag_ids, type: :foreign_key,
+                              class_name: 'Routing::RoutingTag',
+                              input_html: { additional_options: [{ label: Routing::RoutingTag::ANY_TAG, value: nil }] },
+                              scope: ->(scope) { scope.order(:name) }
 
   # presence validations
   validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?
