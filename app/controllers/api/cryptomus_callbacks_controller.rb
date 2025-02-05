@@ -2,8 +2,12 @@
 
 class Api::CryptomusCallbacksController < ActionController::API
   include CaptureError::ControllerMethods
+  include WithPayloads
+  include Memoizable
 
   rescue_from StandardError, with: :server_error
+
+  define_memoizable :debug_mode, apply: -> { System::ApiLogConfig.exists?(controller: self.class.name) }
 
   # https://doc.cryptomus.com/payments/webhook
   def create
