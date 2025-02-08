@@ -7,10 +7,10 @@
 #  id               :bigint(8)        not null, primary key
 #  action           :string
 #  controller       :string
-#  db_duration      :float
+#  db_duration      :float(24)
 #  meta             :jsonb
 #  method           :string
-#  page_duration    :float
+#  page_duration    :float(24)
 #  params           :text
 #  path             :string
 #  remote_ip        :inet

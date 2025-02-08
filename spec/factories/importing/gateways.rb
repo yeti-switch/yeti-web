@@ -5,11 +5,11 @@
 # Table name: data_import.import_gateways
 #
 #  id                                 :integer(4)       not null, primary key
-#  acd_limit                          :float
+#  acd_limit                          :float(24)
 #  allow_1xx_without_to_tag           :boolean
 #  allow_origination                  :boolean
 #  allow_termination                  :boolean
-#  asr_limit                          :float
+#  asr_limit                          :float(24)
 #  auth_enabled                       :boolean
 #  auth_from_domain                   :string
 #  auth_from_user                     :string
@@ -84,7 +84,7 @@
 #  sensor_level_name                  :string
 #  sensor_name                        :string
 #  session_refresh_method_name        :string
-#  short_calls_limit                  :float
+#  short_calls_limit                  :float(24)
 #  single_codec_in_200ok              :boolean
 #  sip_schema_name                    :string
 #  sip_timer_b                        :integer(4)

@@ -5,8 +5,8 @@
 # Table name: ratemanagement.pricelist_items
 #
 #  id                        :bigint(8)        not null, primary key
-#  acd_limit                 :float
-#  asr_limit                 :float
+#  acd_limit                 :float(24)
+#  asr_limit                 :float(24)
 #  capacity                  :integer(2)
 #  connect_fee               :decimal(, )      not null
 #  detected_dialpeer_ids     :bigint(8)        default([]), is an Array
@@ -26,7 +26,7 @@
 #  priority                  :integer(4)
 #  reverse_billing           :boolean          default(FALSE)
 #  routing_tag_ids           :integer(2)       default([]), not null, is an Array
-#  short_calls_limit         :float            not null
+#  short_calls_limit         :float(24)        not null
 #  src_name_rewrite_result   :string
 #  src_name_rewrite_rule     :string
 #  src_rewrite_result        :string

@@ -5,7 +5,7 @@
 # Table name: stats.active_calls_hourly
 #
 #  id         :bigint(8)        not null, primary key
-#  avg_count  :float            not null
+#  avg_count  :float(24)        not null
 #  calls_time :timestamptz      not null
 #  max_count  :integer(4)       not null
 #  min_count  :integer(4)       not null

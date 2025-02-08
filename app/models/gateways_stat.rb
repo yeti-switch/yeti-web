@@ -5,8 +5,8 @@
 # Table name: gateways_stats
 #
 #  id             :integer(4)       not null, primary key
-#  acd            :float
-#  asr            :float
+#  acd            :float(24)
+#  asr            :float(24)
 #  calls          :bigint(8)        not null
 #  calls_fail     :bigint(8)        not null
 #  calls_success  :bigint(8)        not null

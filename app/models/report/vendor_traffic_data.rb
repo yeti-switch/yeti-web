@@ -5,8 +5,8 @@
 # Table name: reports.vendor_traffic_report_data
 #
 #  id                      :bigint(8)        not null, primary key
-#  acd                     :float
-#  asr                     :float
+#  acd                     :float(24)
+#  asr                     :float(24)
 #  calls_count             :bigint(8)
 #  calls_duration          :bigint(8)
 #  customer_calls_duration :bigint(8)

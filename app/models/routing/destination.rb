@@ -5,9 +5,9 @@
 # Table name: class4.destinations
 #
 #  id                     :bigint(8)        not null, primary key
-#  acd_limit              :float            default(0.0), not null
+#  acd_limit              :float(24)        default(0.0), not null
 #  allow_package_billing  :boolean          default(FALSE), not null
-#  asr_limit              :float            default(0.0), not null
+#  asr_limit              :float(24)        default(0.0), not null
 #  connect_fee            :decimal(, )      default(0.0)
 #  dp_margin_fixed        :decimal(, )      default(0.0), not null
 #  dp_margin_percent      :decimal(, )      default(0.0), not null
@@ -23,7 +23,7 @@
 #  reject_calls           :boolean          default(FALSE), not null
 #  reverse_billing        :boolean          default(FALSE), not null
 #  routing_tag_ids        :integer(2)       default([]), not null, is an Array
-#  short_calls_limit      :float            default(0.0), not null
+#  short_calls_limit      :float(24)        default(0.0), not null
 #  use_dp_intervals       :boolean          default(FALSE), not null
 #  uuid                   :uuid             not null
 #  valid_from             :timestamptz      not null
