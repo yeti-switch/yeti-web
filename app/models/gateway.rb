@@ -5,11 +5,11 @@
 # Table name: class4.gateways
 #
 #  id                               :integer(4)       not null, primary key
-#  acd_limit                        :float            default(0.0), not null
+#  acd_limit                        :float(24)        default(0.0), not null
 #  allow_1xx_without_to_tag         :boolean          default(FALSE), not null
 #  allow_origination                :boolean          default(TRUE), not null
 #  allow_termination                :boolean          default(TRUE), not null
-#  asr_limit                        :float            default(0.0), not null
+#  asr_limit                        :float(24)        default(0.0), not null
 #  auth_enabled                     :boolean          default(FALSE), not null
 #  auth_from_domain                 :string
 #  auth_from_user                   :string
@@ -68,7 +68,7 @@
 #  rtp_timeout                      :integer(4)       default(30), not null
 #  sdp_alines_filter_list           :string
 #  send_lnp_information             :boolean          default(FALSE), not null
-#  short_calls_limit                :float            default(1.0), not null
+#  short_calls_limit                :float(24)        default(1.0), not null
 #  single_codec_in_200ok            :boolean          default(FALSE), not null
 #  sip_interface_name               :string
 #  sip_timer_b                      :integer(4)       default(8000), not null
@@ -338,10 +338,10 @@ class Gateway < ApplicationRecord
   validates :pai_domain,
             presence: true,
             if: proc {
-              pai_send_mode_id in [
+              [
                 PAI_SEND_MODE_BUILD_SIP, PAI_SEND_MODE_BUILD_SIP_WITH_USER_PHONE,
                 PAI_SEND_MODE_RELAY_AS_SIP, PAI_SEND_MODE_RELAY_AS_SIP_FORCE_DOMAIN
-              ]
+              ].include?(pai_send_mode_id)
             }
 
   validates :diversion_domain, presence: true, if: proc { diversion_send_mode_id == 2 }

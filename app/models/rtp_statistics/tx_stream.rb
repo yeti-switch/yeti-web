@@ -8,10 +8,10 @@
 #  local_host              :inet
 #  local_port              :integer(4)
 #  local_tag               :string           not null
-#  rtcp_rtt_max            :float
-#  rtcp_rtt_mean           :float
-#  rtcp_rtt_min            :float
-#  rtcp_rtt_std            :float
+#  rtcp_rtt_max            :float(24)
+#  rtcp_rtt_mean           :float(24)
+#  rtcp_rtt_min            :float(24)
+#  rtcp_rtt_std            :float(24)
 #  rx_dropped_packets      :bigint(8)
 #  rx_out_of_buffer_errors :bigint(8)
 #  rx_rtp_parse_errors     :bigint(8)
@@ -22,10 +22,10 @@
 #  tx_packets              :bigint(8)
 #  tx_payloads_relayed     :string           is an Array
 #  tx_payloads_transcoded  :string           is an Array
-#  tx_rtcp_jitter_max      :float
-#  tx_rtcp_jitter_mean     :float
-#  tx_rtcp_jitter_min      :float
-#  tx_rtcp_jitter_std      :float
+#  tx_rtcp_jitter_max      :float(24)
+#  tx_rtcp_jitter_mean     :float(24)
+#  tx_rtcp_jitter_min      :float(24)
+#  tx_rtcp_jitter_std      :float(24)
 #  tx_ssrc                 :bigint(8)
 #  tx_total_lost           :integer(4)
 #  gateway_external_id     :bigint(8)

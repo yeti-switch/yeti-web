@@ -6,8 +6,8 @@
 #
 #  id                          :bigint(8)        not null, primary key
 #  account_name                :string
-#  acd_limit                   :float
-#  asr_limit                   :float
+#  acd_limit                   :float(24)
+#  asr_limit                   :float(24)
 #  capacity                    :integer(4)
 #  connect_fee                 :decimal(, )
 #  dst_number_max_length       :integer(4)
@@ -35,7 +35,7 @@
 #  routing_tag_ids             :integer(2)       default([]), not null, is an Array
 #  routing_tag_mode_name       :string
 #  routing_tag_names           :string
-#  short_calls_limit           :float            default(1.0), not null
+#  short_calls_limit           :float(24)        default(1.0), not null
 #  src_name_rewrite_result     :string
 #  src_name_rewrite_rule       :string
 #  src_rewrite_result          :string

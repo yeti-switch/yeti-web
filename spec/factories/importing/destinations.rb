@@ -5,8 +5,8 @@
 # Table name: data_import.import_destinations
 #
 #  id                       :bigint(8)        not null, primary key
-#  acd_limit                :float
-#  asr_limit                :float
+#  acd_limit                :float(24)
+#  asr_limit                :float(24)
 #  connect_fee              :decimal(, )
 #  dp_margin_fixed          :decimal(, )
 #  dp_margin_percent        :decimal(, )
@@ -28,7 +28,7 @@
 #  routing_tag_ids          :integer(2)       default([]), not null, is an Array
 #  routing_tag_mode_name    :string
 #  routing_tag_names        :string
-#  short_calls_limit        :float
+#  short_calls_limit        :float(24)
 #  use_dp_intervals         :boolean
 #  valid_from               :timestamptz
 #  valid_till               :timestamptz

@@ -7,7 +7,7 @@
 #  id                  :bigint(8)        not null, primary key
 #  duration            :bigint(8)        not null
 #  early_media_present :boolean
-#  pdd                 :float
+#  pdd                 :float(24)
 #  success             :boolean          not null
 #  time_start          :timestamptz      not null
 #  destination_id      :bigint(8)

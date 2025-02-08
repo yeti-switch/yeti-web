@@ -5,8 +5,8 @@
 # Table name: ratemanagement.projects
 #
 #  id                           :integer(4)       not null, primary key
-#  acd_limit                    :float            default(0.0)
-#  asr_limit                    :float            default(0.0)
+#  acd_limit                    :float(24)        default(0.0)
+#  asr_limit                    :float(24)        default(0.0)
 #  capacity                     :integer(2)
 #  dst_number_max_length        :integer(2)       default(100), not null
 #  dst_number_min_length        :integer(2)       default(0), not null
@@ -23,7 +23,7 @@
 #  priority                     :integer(4)       default(100), not null
 #  reverse_billing              :boolean          default(FALSE)
 #  routing_tag_ids              :integer(2)       default([]), not null, is an Array
-#  short_calls_limit            :float            default(1.0), not null
+#  short_calls_limit            :float(24)        default(1.0), not null
 #  src_name_rewrite_result      :string
 #  src_name_rewrite_rule        :string
 #  src_rewrite_result           :string
