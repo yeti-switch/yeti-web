@@ -31516,7 +31516,7 @@ BEGIN
         'priority', cgc.priority,
         'dynamic_payload_type', cgc.dynamic_payload_type,
         'format_parameters', cgc.format_parameters
-      )) as codecs
+      ) ORDER BY cgc.priority DESC ) as codecs
     FROM class4.codec_groups cg
     LEFT JOIN class4.codec_group_codecs cgc ON cg.id = cgc.codec_group_id
     LEFT JOIN class4.codecs c ON cgc.codec_id=c.id
@@ -49993,6 +49993,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250210140744'),
 ('20250115133012'),
 ('20250104221004'),
 ('20241231160003'),
