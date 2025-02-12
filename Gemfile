@@ -145,7 +145,7 @@ gem 'net-smtp', '~> 0.3.3'
 
 gem 'net-pop', '~> 0.1.2'
 
-gem 'net-imap', '~> 0.3.4'
+gem 'net-imap', '~> 0.3.8'
 
 gem 'webrick', '~> 1.8', require: false
 
