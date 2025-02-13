@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
+  include BatchUpdateForm::RoutingTagOptions
+
   model_class 'Dialpeer'
   attribute :enabled, type: :boolean
   attribute :prefix
@@ -34,7 +36,10 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   attribute :src_rewrite_result
   attribute :dst_rewrite_rule
   attribute :dst_rewrite_result
-  attribute :routing_tag_ids, type: :foreign_key, class_name: 'Routing::RoutingTag'
+  attribute :routing_tag_ids, type: :foreign_key,
+                              class_name: 'Routing::RoutingTag',
+                              input_html: { additional_options: [{ label: Routing::RoutingTag::ANY_TAG, value: nil }] },
+                              scope: ->(scope) { scope.order(:name) }
 
   # presence
   validates :dst_number_min_length, presence: true, if: :dst_number_min_length_changed?

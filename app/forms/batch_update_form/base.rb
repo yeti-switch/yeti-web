@@ -120,17 +120,53 @@ class BatchUpdateForm::Base
     #   :display_name [Symbol] default :name.
     #   :primary_key [Symbol] default :id.
     #   :scope [Proc,Symbol,nil] optional.
+    #   :input_html [Hash] Input options
     # @return [Array<Array(2)>]
-    def form_data_foreign_key(options)
-      klass = options.fetch(:class_name).constantize
-      display_name = options.fetch(:display_name, :name)
-      primary_key = options.fetch(:primary_key, :id)
-      custom_scope = options[:scope]
+    def form_data_foreign_key(options = {})
+      opts = extract_foreign_key_options(options)
+      klass = opts[:class_name].constantize
 
-      scope = klass.all
-      scope = scope.public_send(custom_scope) if custom_scope.is_a?(Symbol)
-      scope = custom_scope.call(scope) if custom_scope.is_a?(Proc)
-      scope.pluck(display_name, primary_key)
+      relation = klass.all
+      relation = apply_foreign_key_sorting(relation, opts)
+      result = apply_select_attributes(relation, opts)
+      add_foreign_key_additional_options(result, opts)
+    end
+
+    def extract_foreign_key_options(options)
+      options.assert_valid_keys(:class_name, :display_name, :primary_key, :scope, :input_html, :type)
+      options[:input_html].assert_valid_keys(:additional_options) if options[:input_html].present?
+
+      {
+        class_name: options.fetch(:class_name),
+        display_name: options.fetch(:display_name, :name),
+        primary_key: options.fetch(:primary_key, :id),
+        scope: options[:scope],
+        additional_options: options.dig(:input_html, :additional_options) || []
+      }
+    end
+
+    def apply_foreign_key_sorting(relation, options)
+      if options[:scope].is_a?(Symbol)
+        relation = relation.public_send(options[:scope])
+      elsif options[:scope].respond_to?(:call)
+        relation = options[:scope].call(relation)
+      else
+        relation
+      end
+    end
+
+    def apply_select_attributes(relation, options)
+      relation.pluck(options[:display_name], options[:primary_key])
+    end
+
+    # Adds additional items for array collection.
+    #
+    # @param result [Array] The array of options to be modified.
+    # @param _options [Hash] The original options hash (unused).
+    #
+    # @return [Array] The modified array of options.
+    def add_foreign_key_additional_options(result, _options)
+      result
     end
 
     def form_data_integer_collection(options)

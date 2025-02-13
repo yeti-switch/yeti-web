@@ -60,7 +60,7 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
       src_rewrite_result: '12',
       dst_rewrite_rule: '12',
       dst_rewrite_result: '12',
-      routing_tag_ids: routing_tags.map { |tag| tag.id.to_s }
+      routing_tag_ids: routing_tags.sort_by(&:name).map { |tag| tag.id.to_s }
     }
   end
   let(:fill_batch_form) do
@@ -264,6 +264,30 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
           expect(page).to have_selector '.flash', text: success_message
         end.to have_enqueued_job(AsyncBatchUpdateJob).on_queue('batch_actions').with 'Dialpeer', be_present, assign_params, be_present
       end
+    end
+  end
+
+  context 'when user wants to change routing_tag_ids to "ANY TAG"' do
+    subject { click_button :OK }
+
+    let(:_dialpeers) { nil }
+    let(:routing_group) { nil }
+    let!(:routeset_discriminator) { nil }
+    let(:assign_params) { {} }
+
+    before do
+      check :Routing_tag_ids
+      fill_in_chosen 'routing_tag_ids[]', with: Routing::RoutingTag::ANY_TAG, multiple: true
+    end
+
+    it 'should create a Job to update routing_tag_ids to any tag: [nil]' do
+      expect do
+        subject
+        expect(page).to have_selector '.flash', text: success_message
+      end.to enqueue_job(AsyncBatchUpdateJob).with('Dialpeer', be_present, { routing_tag_ids: [''] }, be_present)
+
+      # ensure that dialpeer model converts "" to [] because the system considers [""] as Routing::RoutingTag::ANY_TAG
+      expect(Dialpeer.new(routing_tag_ids: [''])).to have_attributes(routing_tag_ids: [nil])
     end
   end
 end

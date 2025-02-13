@@ -5,7 +5,7 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
         'name': 'routing_tag_ids[]', 
         'class': 'chosen', 
         'id': 'batch_update_routing_tag_ids',
-        'value': '', // reset default value
+        'value': null, // reset default value
         'multiple': true
     });
     var tagsCheckbox = $('#mass_update_dialog_routing_tag_ids');
