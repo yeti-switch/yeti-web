@@ -22,6 +22,10 @@ Rails.application.routes.draw do
   get 'api/rest/customer/v1/origination-statistics-quality', to: 'api/rest/customer/v1/origination_statistics_quality#show'
   get 'api/rest/customer/v1/origination-active-calls', to: 'api/rest/customer/v1/origination_active_calls#show'
 
+  get 'api/rest/customer/v1/termination-statistics', to: 'api/rest/customer/v1/termination_statistics#show'
+  get 'api/rest/customer/v1/termination-statistics-quality', to: 'api/rest/customer/v1/termination_statistics_quality#show'
+  get 'api/rest/customer/v1/termination-active-calls', to: 'api/rest/customer/v1/termination_active_calls#show'
+
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   ActiveAdmin.routes(self)
 
