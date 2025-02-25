@@ -7,6 +7,11 @@ class Api::Rest::Admin::RoutingPlanResource < BaseResource
 
   attributes :name, :rate_delta_max, :use_lnp, :max_rerouting_attempts, :sorting_id
 
+  has_many :routing_groups, class_name: 'RoutingGroup',
+                            exclude_links: %i[default self],
+                            relation_name: :routing_groups,
+                            foreign_key_on: :related
+
   filter :name # DEPRECATED in favor of name_eq
 
   ransack_filter :name, type: :string
@@ -28,6 +33,7 @@ class Api::Rest::Admin::RoutingPlanResource < BaseResource
       validate_dst_number_format
       validate_dst_number_network
       external_id
+      routing_groups
     ]
   end
 

@@ -9,6 +9,12 @@ class Api::Rest::Admin::RateplanResource < BaseResource
 
   filter :name # DEPRECATED
 
+  has_many :rate_groups,
+           class_name: 'RateGroup',
+           exclude_links: %i[default self],
+           relation_name: :rate_groups,
+           foreign_key_on: :related
+
   ransack_filter :name, type: :string
   ransack_filter :profit_control_mode_id, type: :number
 
@@ -16,6 +22,7 @@ class Api::Rest::Admin::RateplanResource < BaseResource
     %i[
       name
       profit_control_mode_id
+      rate_groups
     ]
   end
 

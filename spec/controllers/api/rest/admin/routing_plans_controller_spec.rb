@@ -53,6 +53,17 @@ RSpec.describe Api::Rest::Admin::RoutingPlansController, type: :controller do
       it { expect(response.status).to eq(404) }
       it { expect(response_data).to eq(nil) }
     end
+
+    context 'when include=routing_groups' do
+      subject { get :show, params: { id: routing_plan.to_param, include: 'routing-groups' } }
+
+      it 'response body should be valid' do
+        subject
+
+        expect(response_data['id']).to eq(routing_plan.id.to_s)
+        expect(response_data.dig('relationships', 'routing-groups', 'data')).to eq([])
+      end
+    end
   end
 
   describe 'POST create' do

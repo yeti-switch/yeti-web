@@ -6,12 +6,17 @@ class Api::Rest::Admin::RoutingGroupResource < ::BaseResource
 
   paginator :paged
 
+  has_many :routing_plans, class_name: 'RoutingPlan',
+                           exclude_links: %i[default self],
+                           relation_name: :routing_plans,
+                           foreign_key_on: :related
+
   filter :name # DEPRECATED
 
   ransack_filter :name, type: :string
 
   def self.updatable_fields(_context)
-    [:name]
+    %i[name routing_plans]
   end
 
   def self.creatable_fields(context)
