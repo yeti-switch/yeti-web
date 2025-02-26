@@ -4,10 +4,10 @@ RSpec.shared_context :customer_v1_cookie_helpers do
   def build_raw_cookie(token, expiration:)
     cookie_name = Authentication::CustomerV1Auth::COOKIE_NAME
     if expiration.nil?
-      "#{cookie_name}=#{token}; path=/; HttpOnly; SameSite=Lax"
+      "#{cookie_name}=#{token}; path=/; httponly; samesite=lax"
     else
       expires = expiration.utc.strftime('%a, %d %b %Y %H:%M:%S GMT')
-      "#{cookie_name}=#{token}; path=/; expires=#{expires}; HttpOnly; SameSite=Lax"
+      "#{cookie_name}=#{token}; path=/; expires=#{expires}; httponly; samesite=lax"
     end
   end
 

@@ -9,7 +9,7 @@ gem 'activerecord-import'
 gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
-gem 'rack', ' ~> 2.2.6'
+gem 'rack'
 gem 'rails', '~> 7.2.0'
 gem 'responders'
 
@@ -69,7 +69,6 @@ gem 'jquery-tablesorter'
 gem 'jquery-ui-rails', github: 'jquery-ui-rails/jquery-ui-rails', tag: 'v7.0.0'
 gem 'mini_racer'
 gem 'rails-html-sanitizer', '>= 1.6.1'
-gem 'sass-globbing'
 gem 'uglifier', '>= 1.3'
 
 # Server Tools
@@ -110,11 +109,8 @@ group :development, :test do
   gem 'bundler-audit', require: false
   gem 'factory_bot_rails'
   gem 'parallel_tests'
+  gem 'rspec_api_documentation', github: 'stitchfix/rspec_api_documentation'
   gem 'rspec-rails'
-  # https://github.com/zipmark/rspec_api_documentation/pull/458
-  # present only on master
-  # Temporary solution. Waiting for merge https://github.com/zipmark/rspec_api_documentation/pull/507
-  gem 'rspec_api_documentation', github: 'BigG1947/rspec_api_documentation'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
