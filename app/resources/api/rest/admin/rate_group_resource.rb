@@ -5,12 +5,18 @@ class Api::Rest::Admin::RateGroupResource < BaseResource
 
   attributes :name, :external_id
 
+  has_many :rateplans, class_name: 'Rateplan',
+                       exclude_links: %i[default self],
+                       relation_name: :rateplans,
+                       foreign_key_on: :related
+
   ransack_filter :name, type: :string
 
   def self.updatable_fields(_context)
     %i[
       name
       external_id
+      rateplans
     ]
   end
 
