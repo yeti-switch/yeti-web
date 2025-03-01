@@ -128,7 +128,12 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
       let(:pk) { :id }
 
       it_behaves_like :jsonapi_filters_by_number_field, :id
-      it_behaves_like :jsonapi_filters_by_datetime_field, :time_start
+      it_behaves_like :jsonapi_filters_by_datetime_field, :time_start do
+        # overrides default filter to avoid conflicts with tests
+        let(:json_api_request_query) do
+          { filter: { time_start_gteq: 50.days.ago.strftime('%F %T') } }
+        end
+      end
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_connect
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_end
       it_behaves_like :jsonapi_filters_by_number_field, :duration
