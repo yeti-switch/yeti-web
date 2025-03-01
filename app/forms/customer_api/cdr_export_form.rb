@@ -22,10 +22,30 @@ module CustomerApi
       time_end
       success
       duration
+      src_name_in
+      src_prefix_in
+      dst_prefix_in
+      from_domain
+      to_domain
+      ruri_domain
+      lega_disconnect_code
+      lega_disconnect_reason
+      auth_orig_ip
+      auth_orig_port
       src_prefix_routing
       dst_prefix_routing
+      destination_prefix
+      destination_initial_interval
+      destination_next_interval
       destination_initial_rate
       destination_next_rate
+      destination_fee
+      customer_price
+      customer_duration
+      orig_call_id
+      local_tag
+      lega_user_agent
+      diversion_in
     ].freeze
 
     model_class 'CdrExport'
@@ -50,7 +70,8 @@ module CustomerApi
     private
 
     def apply_fields
-      model.fields = FIELDS
+      hidden_fields = YetiConfig.customer_api_outgoing_cdr_hide_fields || []
+      model.fields = FIELDS - hidden_fields
     end
 
     def validate_account

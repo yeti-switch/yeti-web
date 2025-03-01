@@ -128,7 +128,12 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
       let(:pk) { :id }
 
       it_behaves_like :jsonapi_filters_by_number_field, :id
-      it_behaves_like :jsonapi_filters_by_datetime_field, :time_start
+      it_behaves_like :jsonapi_filters_by_datetime_field, :time_start do
+        # overrides default filter to avoid conflicts with tests
+        let(:json_api_request_query) do
+          { filter: { time_start_gteq: 50.days.ago.strftime('%F %T') } }
+        end
+      end
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_connect
       it_behaves_like :jsonapi_filters_by_datetime_field, :time_end
       it_behaves_like :jsonapi_filters_by_number_field, :duration
@@ -249,6 +254,22 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
                                           rec: false
                                         }
                                       )
+    end
+
+    context 'when customer_api_incoming_cdr_hide_fields configured' do
+      before do
+        allow(YetiConfig).to receive(:customer_api_incoming_cdr_hide_fields).and_return(
+          %w[diversion_out legb_user_agent]
+        )
+      end
+
+      it 'returns record with expected attributes' do
+        subject
+        attribute_keys = response_json[:data][:attributes].keys
+        expect(attribute_keys).to include(:'src-name-out')
+        expect(attribute_keys).not_to include(:'diversion-out')
+        expect(attribute_keys).not_to include(:'legb-user-agent')
+      end
     end
 
     context 'with include account' do
