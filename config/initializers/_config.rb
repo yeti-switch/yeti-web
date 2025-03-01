@@ -90,7 +90,8 @@ Config.setup do |setup_config|
       optional(:url_return).maybe(:string)
     end
 
-    optional(:customer_api_cdr_hide_fields).array(:string)
+    optional(:customer_api_outgoing_cdr_hide_fields).array(:string)
+    optional(:customer_api_incoming_cdr_hide_fields).array(:string)
 
     optional(:invoice).schema do
       optional(:auto_approve).value(:bool)

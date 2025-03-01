@@ -83,10 +83,23 @@ class Api::Rest::Customer::V1::IncomingCdrResource < Api::Rest::Customer::V1::Ba
     _model.has_recording?
   end
 
+  def fetchable_fields
+    fields = super
+    hidden_fields = YetiConfig.customer_api_incoming_cdr_hide_fields || []
+    fields - hidden_fields.map(&:to_sym)
+  end
+
   def self.apply_allowed_accounts(records, options)
     context = options[:context]
     scope = records.where_vendor(context[:customer_id])
     scope = scope.where_vendor_account(context[:allowed_account_ids]) if context[:allowed_account_ids].present?
     scope
+  end
+
+  def self.apply_default_filter_time_start_gteq(options)
+    return nil if options.dig(:params, :filter, :time_start_gt).present?
+    return nil if options.dig(:params, :filter, :time_start_eq).present?
+
+    24.hours.ago.strftime('%F %T')
   end
 end

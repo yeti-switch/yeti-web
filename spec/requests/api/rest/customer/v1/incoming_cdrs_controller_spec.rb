@@ -251,6 +251,22 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
                                       )
     end
 
+    context 'when customer_api_incoming_cdr_hide_fields configured' do
+      before do
+        allow(YetiConfig).to receive(:customer_api_incoming_cdr_hide_fields).and_return(
+          %w[diversion_out legb_user_agent]
+        )
+      end
+
+      it 'returns record with expected attributes' do
+        subject
+        attribute_keys = response_json[:data][:attributes].keys
+        expect(attribute_keys).to include(:'src-name-out')
+        expect(attribute_keys).not_to include(:'diversion-out')
+        expect(attribute_keys).not_to include(:'legb-user-agent')
+      end
+    end
+
     context 'with include account' do
       let(:json_api_request_query) { { include: 'account' } }
 
