@@ -17,6 +17,10 @@
 #  destination_id   :bigint(8)        not null
 #  external_id      :bigint(8)
 #
+# Indexes
+#
+#  destination_next_rates_destination_id_idx  (destination_id)
+#
 # Foreign Keys
 #
 #  destination_next_rates_destination_id_fkey  (destination_id => destinations.id)
