@@ -31,6 +31,10 @@ class Api::Rest::Customer::V1::InvoiceResource < Api::Rest::Customer::V1::BaseRe
 
   has_one :account, foreign_key_on: :related
 
+  def self.default_sort
+    [{ field: 'start_date', direction: :desc }]
+  end
+
   ransack_filter :reference, type: :string
   ransack_filter :start_date, type: :datetime
   ransack_filter :end_date, type: :datetime

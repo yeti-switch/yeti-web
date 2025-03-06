@@ -17,6 +17,10 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
 
   has_one :account, relation_name: :customer_account, foreign_key_on: :related
 
+  def self.default_sort
+    [{ field: 'created_at', direction: :desc }]
+  end
+
   ransack_filter :status, type: :enum, collection: CdrExport::STATUSES
   ransack_filter :rows_count, type: :number
   ransack_filter :created_at, type: :datetime

@@ -7,6 +7,10 @@ class Api::Rest::Customer::V1::RateplanResource < Api::Rest::Customer::V1::BaseR
 
   ransack_filter :name, type: :string
 
+  def self.default_sort
+    [{ field: 'name', direction: :asc }]
+  end
+
   def self.apply_allowed_accounts(records, options)
     context = options[:context]
     scope = records.where_customer(context[:customer_id])

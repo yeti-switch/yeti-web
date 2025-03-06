@@ -6,4 +6,7 @@ class Api::Rest::Customer::V1::NetworkTypeResource < Api::Rest::Customer::V1::Ba
   attributes :name
 
   ransack_filter :name, type: :string
+  def self.default_sort
+    [{ field: 'name', direction: :asc }]
+  end
 end

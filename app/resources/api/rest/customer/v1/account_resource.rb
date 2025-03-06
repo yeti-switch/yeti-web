@@ -8,6 +8,10 @@ class Api::Rest::Customer::V1::AccountResource < Api::Rest::Customer::V1::BaseRe
              :destination_rate_limit,
              :origination_capacity, :termination_capacity, :total_capacity
 
+  def self.default_sort
+    [{ field: 'name', direction: :asc }]
+  end
+
   ransack_filter :name, type: :string
   ransack_filter :balance, type: :number
   ransack_filter :min_balance, type: :number

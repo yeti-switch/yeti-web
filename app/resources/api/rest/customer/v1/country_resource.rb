@@ -6,4 +6,8 @@ class Api::Rest::Customer::V1::CountryResource < ::Api::Rest::Customer::V1::Base
   paginator :paged
   filter :name
   filter :iso2
+
+  def self.default_sort
+    [{ field: 'name', direction: :asc }]
+  end
 end
