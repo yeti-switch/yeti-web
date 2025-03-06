@@ -48386,6 +48386,13 @@ CREATE INDEX customers_auth_src_numberlist_id_idx ON class4.customers_auth USING
 
 
 --
+-- Name: destination_next_rates_destination_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX destination_next_rates_destination_id_idx ON class4.destination_next_rates USING btree (destination_id);
+
+
+--
 -- Name: destinations_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -49993,6 +50000,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250305204801'),
 ('20250210140744'),
 ('20250115133012'),
 ('20250104221004'),
