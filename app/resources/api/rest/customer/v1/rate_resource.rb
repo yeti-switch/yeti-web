@@ -14,6 +14,10 @@ class Api::Rest::Customer::V1::RateResource < Api::Rest::Customer::V1::BaseResou
              :valid_till,
              :network_prefix_id
 
+  def self.default_sort
+    [{ field: 'prefix', direction: :asc }]
+  end
+
   # has_one :rateplan
   # has_one :account
 

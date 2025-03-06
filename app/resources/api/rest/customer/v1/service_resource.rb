@@ -17,6 +17,10 @@ class Api::Rest::Customer::V1::ServiceResource < Api::Rest::Customer::V1::BaseRe
   has_one :account, class_name: 'Account', foreign_key_on: :related
   has_many :transactions, class_name: 'Transaction', foreign_key_on: :related
 
+  def self.default_sort
+    [{ field: 'name', direction: :asc }]
+  end
+
   ransack_filter :created_at, type: :datetime
   ransack_filter :name, type: :string
   association_uuid_filter :account_id, class_name: 'Account'

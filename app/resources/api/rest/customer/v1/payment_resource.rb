@@ -11,6 +11,10 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
 
   has_one :account, foreign_key_on: :related
 
+  def self.default_sort
+    [{ field: 'created_at', direction: :desc }]
+  end
+
   ransack_filter :uuid, type: :uuid
   ransack_filter :notes, type: :string
   ransack_filter :amount, type: :number
