@@ -264,7 +264,7 @@ ActiveAdmin.register CustomersAuth do
                           scope: -> { Routing::Numberlist.order(:name) },
                           path: '/numberlists/search'
 
-  filter :stir_shaken_crt
+  filter :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -429,7 +429,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :ss_src_rewrite_result
           f.input :ss_dst_rewrite_rule
           f.input :ss_dst_rewrite_result
-          f.input :stir_shaken_crt
+          f.input :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
         end
       end
     end
