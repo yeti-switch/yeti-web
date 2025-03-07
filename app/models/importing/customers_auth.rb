@@ -60,6 +60,7 @@
 #  src_prefix                       :string
 #  src_rewrite_result               :string
 #  src_rewrite_rule                 :string
+#  stir_shaken_crt_name             :string
 #  tag_action_name                  :string
 #  tag_action_value                 :integer(2)       default([]), not null, is an Array
 #  tag_action_value_names           :string
@@ -87,6 +88,7 @@
 #  src_name_field_id                :integer(2)
 #  src_number_field_id              :integer(2)
 #  src_numberlist_id                :integer(4)
+#  stir_shaken_crt_id               :integer(2)
 #  tag_action_id                    :integer(2)
 #  transport_protocol_id            :integer(2)
 #
@@ -108,6 +110,7 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :radius_accounting_profile, class_name: '::Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id, optional: true
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
+  belongs_to :stir_shaken_crt, class_name: 'Equipment::StirShaken::SigningCertificate', foreign_key: :stir_shaken_crt_id, optional: :true
 
   self.import_attributes = %w[
     enabled
@@ -158,6 +161,7 @@ class Importing::CustomersAuth < Importing::Base
     tag_action_id
     tag_action_value
     lua_script_id
+    stir_shaken_certificate_id
   ]
 
   import_for ::CustomersAuth

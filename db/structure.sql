@@ -33169,9 +33169,10 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALSECE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
       -- insert our signature
-      i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
+      -- use customer auth crt if present, otherwise use vendor gw certificate
+      i_profile.ss_crt_id = COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id);
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
 
       IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
@@ -33979,9 +33980,10 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALSECE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
       -- insert our signature
-      i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
+      -- use customer auth crt if present, otherwise use vendor gw certificate
+      i_profile.ss_crt_id = COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id);
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
 
       IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
@@ -34712,9 +34714,10 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND i_vendor_gw.stir_shaken_crt_id IS NOT NULL THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALSECE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
       -- insert our signature
-      i_profile.ss_crt_id = i_vendor_gw.stir_shaken_crt_id;
+      -- use customer auth crt if present, otherwise use vendor gw certificate
+      i_profile.ss_crt_id = COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id);
       i_profile.legb_ss_status_id = i_profile.ss_attest_id;
 
       IF i_vendor_gw.stir_shaken_mode_id = 1 THEN
@@ -35423,6 +35426,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
           v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
         END IF;
+        v_ret.ss_crt_id = v_customer_auth_normalized.stir_shaken_crt_id;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -37090,6 +37094,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
           v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
         END IF;
+        v_ret.ss_crt_id = v_customer_auth_normalized.stir_shaken_crt_id;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -38729,6 +38734,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
           v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
         END IF;
+        v_ret.ss_crt_id = v_customer_auth_normalized.stir_shaken_crt_id;
 
         v_ret.radius_auth_profile_id=v_customer_auth_normalized.radius_auth_profile_id;
         v_ret.aleg_radius_acc_profile_id=v_customer_auth_normalized.radius_accounting_profile_id;
@@ -40887,6 +40893,7 @@ CREATE TABLE class4.customers_auth (
     pai_policy_id smallint DEFAULT 1 NOT NULL,
     pai_rewrite_rule character varying,
     pai_rewrite_result character varying,
+    stir_shaken_crt_id smallint,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -40986,6 +40993,7 @@ CREATE TABLE class4.customers_auth_normalized (
     pai_policy_id smallint DEFAULT 1 NOT NULL,
     pai_rewrite_rule character varying,
     pai_rewrite_result character varying,
+    stir_shaken_crt_id smallint,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -42653,7 +42661,9 @@ CREATE TABLE data_import.import_customers_auth (
     pai_policy_id smallint,
     pai_policy_name character varying,
     pai_rewrite_rule character varying,
-    pai_rewrite_result character varying
+    pai_rewrite_result character varying,
+    stir_shaken_crt_name character varying,
+    stir_shaken_crt_id smallint
 );
 
 
@@ -50000,6 +50010,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250307215347'),
 ('20250305214816'),
 ('20250210140744'),
 ('20250115133012'),

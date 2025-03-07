@@ -67,7 +67,8 @@ ActiveAdmin.register CustomersAuth do
                  :ss_src_rewrite_rule,
                  :ss_src_rewrite_result,
                  :ss_dst_rewrite_rule,
-                 :ss_dst_rewrite_result
+                 :ss_dst_rewrite_result,
+                 [:stir_shaken_crt_name, proc { |row| row.stir_shaken_crt.try(:name) }]
 
   acts_as_import resource_class: Importing::CustomersAuth, skip_columns: [:tag_action_value]
 
@@ -96,6 +97,7 @@ ActiveAdmin.register CustomersAuth do
                 :cnam_database_id, :src_numberlist_use_diversion, :rewrite_ss_status_id,
                 :ss_mode_id, :ss_invalid_identity_action_id, :ss_no_identity_action_id,
                 :ss_src_rewrite_rule, :ss_src_rewrite_result, :ss_dst_rewrite_rule, :ss_dst_rewrite_result,
+                :stir_shaken_crt_id,
                 tag_action_value: []
   # , :enable_redirect, :redirect_method, :redirect_to
 
@@ -262,6 +264,8 @@ ActiveAdmin.register CustomersAuth do
                           scope: -> { Routing::Numberlist.order(:name) },
                           path: '/numberlists/search'
 
+  filter :stir_shaken_crt
+
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     tabs do
@@ -425,6 +429,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :ss_src_rewrite_result
           f.input :ss_dst_rewrite_rule
           f.input :ss_dst_rewrite_result
+          f.input :stir_shaken_crt
         end
       end
     end
@@ -536,6 +541,7 @@ ActiveAdmin.register CustomersAuth do
           row :ss_src_rewrite_result
           row :ss_dst_rewrite_rule
           row :ss_dst_rewrite_result
+          row :stir_shaken_crt
         end
       end
     end

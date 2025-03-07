@@ -89,5 +89,6 @@ ActiveAdmin.register Importing::CustomersAuth do
 
     column :tag_action
     column :tag_action_value
+    column :stir_shaken_certificate, &:stir_shaken_certificate_name
   end
 end
