@@ -60,6 +60,7 @@
 #  src_prefix                       :string
 #  src_rewrite_result               :string
 #  src_rewrite_rule                 :string
+#  stir_shaken_crt_name             :string
 #  tag_action_name                  :string
 #  tag_action_value                 :integer(2)       default([]), not null, is an Array
 #  tag_action_value_names           :string
@@ -87,6 +88,7 @@
 #  src_name_field_id                :integer(2)
 #  src_number_field_id              :integer(2)
 #  src_numberlist_id                :integer(4)
+#  stir_shaken_crt_id               :integer(2)
 #  tag_action_id                    :integer(2)
 #  transport_protocol_id            :integer(2)
 #

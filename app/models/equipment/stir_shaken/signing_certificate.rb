@@ -14,6 +14,9 @@
 class Equipment::StirShaken::SigningCertificate < ApplicationRecord
   self.table_name = 'class4.stir_shaken_signing_certificates'
 
+  has_many :customers_auths, foreign_key: :stir_shaken_crt_id, dependent: :restrict_with_error
+  has_many :gateways, foreign_key: :stir_shaken_crt_id, dependent: :restrict_with_error
+
   validates :name, :certificate, :key, :x5u, presence: true
 
   include Yeti::StateUpdater

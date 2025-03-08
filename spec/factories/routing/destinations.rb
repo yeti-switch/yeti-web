@@ -48,7 +48,7 @@
 FactoryBot.define do
   factory :destination, aliases: [:rate], class: 'Routing::Destination' do
     sequence(:external_id)
-    prefix { nil }
+    sequence(:prefix)
     connect_fee { 0 }
     enabled { true }
     reverse_billing { false }

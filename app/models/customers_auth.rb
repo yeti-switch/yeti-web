@@ -72,6 +72,7 @@
 #  ss_invalid_identity_action_id    :integer(2)       default(0), not null
 #  ss_mode_id                       :integer(2)       default(0), not null
 #  ss_no_identity_action_id         :integer(2)       default(0), not null
+#  stir_shaken_crt_id               :integer(2)
 #  tag_action_id                    :integer(2)
 #  transport_protocol_id            :integer(2)
 #
@@ -244,6 +245,7 @@ class CustomersAuth < ApplicationRecord
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
 
   belongs_to :cnam_database, class_name: 'Cnam::Database', foreign_key: :cnam_database_id, optional: true
+  belongs_to :stir_shaken_crt, class_name: 'Equipment::StirShaken::SigningCertificate', foreign_key: :stir_shaken_crt_id, optional: :true
 
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
