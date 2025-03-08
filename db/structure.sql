@@ -33169,7 +33169,7 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALSECE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
       -- insert our signature
       -- use customer auth crt if present, otherwise use vendor gw certificate
       i_profile.ss_crt_id = COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id);
@@ -33980,7 +33980,7 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALSECE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
       -- insert our signature
       -- use customer auth crt if present, otherwise use vendor gw certificate
       i_profile.ss_crt_id = COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id);
@@ -34714,7 +34714,7 @@ BEGIN
       i_profile.legb_ss_status_id = i_profile.lega_ss_status_id;
       v_customer_transit_headers_from_origination = array_append(v_customer_transit_headers_from_origination,'Identity');
       v_vendor_transit_headers_from_origination = array_append(v_vendor_transit_headers_from_origination,'Identity');
-    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALSECE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
+    ELSIF COALESCE(i_profile.ss_attest_id,0) > 0 AND COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id) IS NOT NULL THEN
       -- insert our signature
       -- use customer auth crt if present, otherwise use vendor gw certificate
       i_profile.ss_crt_id = COALESCE(i_profile.ss_crt_id, i_vendor_gw.stir_shaken_crt_id);

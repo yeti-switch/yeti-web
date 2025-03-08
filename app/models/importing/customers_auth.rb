@@ -161,7 +161,7 @@ class Importing::CustomersAuth < Importing::Base
     tag_action_id
     tag_action_value
     lua_script_id
-    stir_shaken_certificate_id
+    stir_shaken_crt_id
   ]
 
   import_for ::CustomersAuth

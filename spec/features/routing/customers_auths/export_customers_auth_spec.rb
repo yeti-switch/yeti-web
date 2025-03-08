@@ -106,7 +106,8 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Ss src rewrite rule', item.ss_src_rewrite_rule.to_s, anything],
         ['Ss src rewrite result', item.ss_src_rewrite_result.to_s, anything],
         ['Ss dst rewrite rule', item.ss_dst_rewrite_rule.to_s, anything],
-        ['Ss dst rewrite result', item.ss_dst_rewrite_result.to_s, anything]
+        ['Ss dst rewrite result', item.ss_dst_rewrite_result.to_s, anything],
+        ['Stir shaken crt name', item.stir_shaken_crt.name, anything]
       ]
     )
   end
