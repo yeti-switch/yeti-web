@@ -31,7 +31,7 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
 
       it_behaves_like :json_api_check_pagination do
         # api sorting rates by prefix so we have to sort expected array too.
-        let(:records_ids) { rates.sort_by { |el| el.prefix }.map { |r| r.reload.uuid } }
+        let(:records_ids) { rates.sort_by(&:prefix).map { |r| r.reload.uuid } }
       end
 
       it 'returns records of this customer' do
