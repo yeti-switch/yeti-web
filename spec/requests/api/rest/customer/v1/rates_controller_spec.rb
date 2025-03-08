@@ -30,7 +30,8 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
       let!(:rates) { create_list(:rate, records_qty, rate_group: create(:rate_group, rateplans: [customer.rateplans.first])) }
 
       it_behaves_like :json_api_check_pagination do
-        let(:records_ids) { rates.map { |r| r.reload.uuid } }
+        # api sorting rates by prefix so we have to sort expected array too.
+        let(:records_ids) { rates.sort_by { |el| el.prefix }.map { |r| r.reload.uuid } }
       end
 
       it 'returns records of this customer' do
