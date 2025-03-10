@@ -521,6 +521,7 @@ RSpec.describe '#routing logic' do
                           ss_src_rewrite_result: customer_auth_ss_src_rewrite_result,
                           ss_dst_rewrite_rule: customer_auth_ss_dst_rewrite_rule,
                           ss_dst_rewrite_result: customer_auth_ss_dst_rewrite_result,
+                          stir_shaken_crt_id: customer_auth_stir_shaken_crt_id,
                           privacy_mode_id: customer_auth_privacy_mode_id,
                           src_name_field_id: customer_auth_src_name_field_id,
                           src_number_field_id: customer_auth_src_number_field_id)
@@ -551,6 +552,7 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_ss_src_rewrite_result) { nil }
       let(:customer_auth_ss_dst_rewrite_rule) { nil }
       let(:customer_auth_ss_dst_rewrite_result) { nil }
+      let(:customer_auth_stir_shaken_crt_id) { nil }
       let(:customer_auth_privacy_mode_id) { CustomersAuth::PRIVACY_MODE_REJECT_ANONYMOUS }
       let(:customer_auth_src_name_field_id) { CustomersAuth::SRC_NAME_FIELD_FROM_DSP }
       let(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_FROM_USERPART }
@@ -4451,7 +4453,7 @@ RSpec.describe '#routing logic' do
           let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_REWRITE }
           let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
 
-          context ',try to insert without certificate' do
+          context ',try to insert without certificates' do
             let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
 
             it 'not works' do
@@ -4466,6 +4468,50 @@ RSpec.describe '#routing logic' do
               expect(subject.first[:ss_attest_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.first[:lega_ss_status_id]).to eq(nil)
               expect(subject.first[:legb_ss_status_id]).to eq(nil)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+          context ',try to insert with customer auth certificate only' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+            let(:crt) { create(:stir_shaken_signing_certificate) }
+            let(:customer_auth_stir_shaken_crt_id) { crt.id }
+
+            it 'OK' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+              expect(subject.first[:ss_crt_id]).to eq(crt.id)
+              expect(subject.first[:ss_otn]).to eq('from_username')
+              expect(subject.first[:ss_dtn]).to eq('uri-name')
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+          end
+          context ',try to insert with customer auth and vendor gw certificates' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+
+            let(:ccrt) { create(:stir_shaken_signing_certificate) }
+            let(:vcrt) { create(:stir_shaken_signing_certificate) }
+
+            let(:customer_auth_stir_shaken_crt_id) { ccrt.id }
+            let(:vendor_gw_stir_shaken_crt_id) { vcrt.id }
+
+            it 'Prefer customer auth certificate' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+              expect(subject.first[:ss_crt_id]).to eq(ccrt.id)
+              expect(subject.first[:ss_otn]).to eq('from_username')
+              expect(subject.first[:ss_dtn]).to eq('uri-name')
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_ss_mode_id)
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end

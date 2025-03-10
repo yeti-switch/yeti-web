@@ -331,6 +331,8 @@ ActiveAdmin.register Gateway do
                           scope: -> { Routing::Numberlist.order(:name) },
                           path: '/numberlists/search'
 
+  filter :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
+
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
 
@@ -529,7 +531,7 @@ ActiveAdmin.register Gateway do
         f.inputs 'STIR/SHAKEN' do
           f.input :stir_shaken_mode_id, as: :select, include_blank: false,
                                         collection: Gateway::STIR_SHAKEN_MODES.invert
-          f.input :stir_shaken_crt, as: :select
+          f.input :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
         end
       end
     end

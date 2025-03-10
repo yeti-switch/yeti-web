@@ -12,7 +12,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
     let!(:destinations) do
       [
         FactoryBot.create(:destination, prefix: '370614', rate_group:, routing_tag_ids: []),
-        FactoryBot.create(:destination, rate_group:, routing_tag_ids: [routing_tag.id, nil])
+        FactoryBot.create(:destination, prefix: '', rate_group:, routing_tag_ids: [routing_tag.id, nil])
       ]
     end
     let!(:rate_group) { FactoryBot.create(:rate_group, rateplans:) }
@@ -50,7 +50,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
         # not affected destinations
         another_plan = FactoryBot.create(:rateplan)
         another_group = FactoryBot.create(:rate_group, rateplans: [rateplans[1], another_plan])
-        FactoryBot.create_list(:destination, 2, rate_group: another_group)
+        FactoryBot.create_list(:destination, 2, prefix: '38067', rate_group: another_group)
       end
 
       include_examples :jsonapi_responds_with_pagination_links
@@ -179,7 +179,10 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
       it 'should return correct response' do
         subject
 
+        p response_json
+
         expect(response_json[:meta]).to match('total-count': destinations.size)
+        # 1 countries + 1 networks + 1 destination next rate = 5
         expect(response_json[:included].size).to eq(3)
       end
     end
