@@ -24,6 +24,7 @@ app_files :=	bin \
 
 exclude_files :=	config/database.yml \
 			config/yeti_web.yml \
+			config/policy_roles.yml \
 			config/secrets.yml \
 			*.o \
 			*.a
