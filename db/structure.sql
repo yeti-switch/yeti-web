@@ -44752,7 +44752,8 @@ CREATE TABLE sys.cdr_exports (
     updated_at timestamp without time zone,
     rows_count integer,
     customer_account_id integer,
-    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    time_format character varying DEFAULT 'with_timezone'::character varying NOT NULL
 );
 
 
@@ -50010,6 +50011,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250311141247'),
 ('20250307215347'),
 ('20250305214816'),
 ('20250210140744'),

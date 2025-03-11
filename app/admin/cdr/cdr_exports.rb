@@ -3,6 +3,7 @@
 ActiveAdmin.register CdrExport, as: 'CDR Export' do
   menu parent: 'CDR', priority: 97
   actions :index, :show, :create, :new
+  decorate_with CdrExportDecorator
 
   acts_as_clone
 
@@ -78,6 +79,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
           row :created_at
           row :updated_at
           row :rows_count
+          row 'Time format', &:time_format_with_hint
         end
         active_admin_comments
       end
@@ -110,6 +112,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   end
 
   permit_params :callback_url,
+                :time_format,
                 filters: [
                   :time_start_gteq,
                   :time_start_lteq,
@@ -170,6 +173,9 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
               required: true
 
       f.input :callback_url, required: false
+      f.input :time_format, as: :select,
+                            collection: CdrExport::ALLOWED_TIME_FORMATS.map { |i| [i.humanize, i] },
+                            input_html: { class: :chosen }
     end
     f.inputs 'Filters', for: [:filters, f.object.filters] do |ff|
       # accounts = Account.order(:name)

@@ -49,12 +49,17 @@ module CustomerApi
     ].freeze
 
     model_class 'CdrExport'
-    model_attributes :filters
+    model_attributes :filters, :time_format
     attr_accessor :account_id, :customer_id, :allowed_account_ids
 
     before_validation :apply_fields
     validate :validate_account
     validate :validate_filters
+    validates :time_format, presence: true,
+                            inclusion: {
+                              in: CdrExport::ALLOWED_TIME_FORMATS,
+                              message: "is not included in the list: #{CdrExport::ALLOWED_TIME_FORMATS.join(', ')}"
+                            }
 
     before_save :assign_customer_account
     after_create { model.reload } # need to get uuid from database

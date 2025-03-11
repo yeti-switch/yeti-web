@@ -211,6 +211,9 @@ class Cdr::Cdr < Cdr::Base
     node sign_term_transport_protocol package_counter
   ].freeze
 
+  # Used to adjust their format while create CDR Export.
+  TIME_SPECIFIC_FIELDS = %w[time_start time_end time_connect].freeze
+
   include Partitionable
   self.pg_partition_name = 'PgPartition::Cdr'
   self.pg_partition_interval_type = PgPartition::INTERVAL_DAY

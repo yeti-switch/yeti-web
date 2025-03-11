@@ -10,6 +10,7 @@
 #  filters             :json             not null
 #  rows_count          :integer(4)
 #  status              :string           not null
+#  time_format         :string           default("with_timezone"), not null
 #  type                :string           not null
 #  uuid                :uuid             not null
 #  created_at          :datetime
@@ -210,8 +211,9 @@ RSpec.describe CdrExport do
       end
     end
 
+    let(:cdr_export_attrs) { {} }
     let(:cdr_export) do
-      FactoryBot.create(:cdr_export, fields: fields, filters: filters)
+      FactoryBot.create(:cdr_export, fields: fields, filters: filters, **cdr_export_attrs)
     end
     let(:fields) do
       %w[success id]
@@ -252,6 +254,66 @@ RSpec.describe CdrExport do
           'LEFT JOIN external_data.countries as dst_c ON cdr.cdr.dst_country_id = dst_c.id',
           'LEFT JOIN external_data.networks as src_n ON cdr.cdr.src_network_id = src_n.id',
           'LEFT JOIN external_data.networks as dst_n ON cdr.cdr.dst_network_id = dst_n.id',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00')",
+          'ORDER BY cdr.cdr.time_start DESC'
+        ].join(' ')
+      end
+
+      include_examples :returns_correct_sql
+    end
+
+    context 'when time-format = "round_to_seconds"' do
+      let(:fields) { %w[success id time_end] }
+      let(:cdr_export_attrs) { super().merge time_format: CdrExport::ROUND_TO_SECONDS_TIME_FORMAT }
+      let(:expected_sql) do
+        [
+          'SELECT success AS "Success",',
+          'cdr.cdr.id AS "ID",',
+          "to_char(cdr.cdr.time_end, 'YYYY-MM-DD HH24:MI:SS') AS \"Time End\"",
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00')",
+          'ORDER BY cdr.cdr.time_start DESC'
+        ].join(' ')
+      end
+
+      include_examples :returns_correct_sql
+    end
+
+    context 'when time-format = "without_timezone"' do
+      let(:fields) { %w[success id time_end] }
+      let(:cdr_export_attrs) { super().merge time_format: CdrExport::WITHOUT_TIMEZONE_TIME_FORMAT }
+      let(:expected_sql) do
+        [
+          'SELECT success AS "Success",',
+          'cdr.cdr.id AS "ID",',
+          'cdr.cdr.time_end::timestamp AS "Time End"',
+          'FROM "cdr"."cdr"',
+          'WHERE',
+          "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
+          'AND',
+          "\"cdr\".\"cdr\".\"time_start\" <= '2018-03-01 00:00:00')",
+          'ORDER BY cdr.cdr.time_start DESC'
+        ].join(' ')
+      end
+
+      include_examples :returns_correct_sql
+    end
+
+    context 'when time-format = "with_timezone"' do
+      let(:fields) { %w[success id time_end] }
+      let(:cdr_export_attrs) { super().merge time_format: CdrExport::WITH_TIMEZONE_TIME_FORMAT }
+      let(:expected_sql) do
+        [
+          'SELECT success AS "Success",',
+          'cdr.cdr.id AS "ID",',
+          'cdr.cdr.time_end AS "Time End"',
+          'FROM "cdr"."cdr"',
           'WHERE',
           "(\"cdr\".\"cdr\".\"time_start\" >= '2018-01-01 00:00:00'",
           'AND',

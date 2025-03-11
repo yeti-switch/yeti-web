@@ -10,6 +10,7 @@
 #  filters             :json             not null
 #  rows_count          :integer(4)
 #  status              :string           not null
+#  time_format         :string           default("with_timezone"), not null
 #  type                :string           not null
 #  uuid                :uuid             not null
 #  created_at          :datetime
@@ -108,6 +109,16 @@ class CdrExport < ApplicationRecord
   REGULAR_FILTERS = %i[
     src_country_iso_in
     dst_country_iso_in
+  ].freeze
+
+  WITH_TIMEZONE_TIME_FORMAT = 'with_timezone'
+  WITHOUT_TIMEZONE_TIME_FORMAT = 'without_timezone'
+  ROUND_TO_SECONDS_TIME_FORMAT = 'round_to_seconds'
+
+  ALLOWED_TIME_FORMATS = [
+    WITH_TIMEZONE_TIME_FORMAT,
+    WITHOUT_TIMEZONE_TIME_FORMAT,
+    ROUND_TO_SECONDS_TIME_FORMAT
   ].freeze
 
   alias_attribute :export_type, :type
@@ -228,9 +239,28 @@ class CdrExport < ApplicationRecord
         'src_n.name AS "Src Network Name"'
       when 'dst_network_name'
         'dst_n.name AS "Dst Network Name"'
+      when *Cdr::Cdr::TIME_SPECIFIC_FIELDS
+        format_time_field(f)
       else
         "#{f} AS \"#{f.titleize}\""
       end
+    end
+  end
+
+  def format_time_field(column)
+    case time_format
+    when WITH_TIMEZONE_TIME_FORMAT
+      # With timezone: e.g. 2025-02-03 20:21:32.118457+00
+      "cdr.cdr.#{column} AS \"#{column.titleize}\""
+    when WITHOUT_TIMEZONE_TIME_FORMAT
+      # Without timezone: e.g. 2025-02-03 20:21:32.118457
+      "cdr.cdr.#{column}::timestamp AS \"#{column.titleize}\""
+    when ROUND_TO_SECONDS_TIME_FORMAT
+      # Round to seconds: e.g. 2025-02-03 20:21:32
+      %(to_char(cdr.cdr.#{column}, 'YYYY-MM-DD HH24:MI:SS') AS "#{column.titleize}")
+    else
+      # Fallback to default (with timezone)
+      "#{column} AS \"#{column.titleize}\""
     end
   end
 

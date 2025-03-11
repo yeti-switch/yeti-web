@@ -21,6 +21,8 @@ RSpec.resource 'CDR Exports', document: :customer_v1 do
 
     jsonapi_attributes(required_params, [])
     jsonapi_relationships(required_relations, [])
+    define_parameter 'time-format', scope: %i[data attributes],
+                                    desc: "Start/end and time_connect field format: #{CdrExport::ALLOWED_TIME_FORMATS.join(', ')}"
 
     let(:filters) do
       {
