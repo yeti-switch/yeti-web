@@ -1,19 +1,20 @@
 GIT
-  remote: https://github.com/BigG1947/rspec_api_documentation.git
-  revision: 269213b950082d5a055f9ab020fcdace90605165
-  specs:
-    rspec_api_documentation (6.1.0)
-      activesupport (>= 3.0.0)
-      mustache (~> 1.0, >= 0.99.4)
-      rspec (~> 3.0)
-
-GIT
   remote: https://github.com/activeadmin-plugins/capybara_active_admin.git
   revision: d2cdc2c0a5478d4ee1afb30f3465c7be3b760a86
   specs:
     capybara_active_admin (0.3.3)
       activeadmin
       rspec (~> 3.0)
+
+GIT
+  remote: https://github.com/cerebris/jsonapi-resources.git
+  revision: 17772cefd8a90fc1b54744871de1050a6040a691
+  branch: release-0-9
+  specs:
+    jsonapi-resources (0.9.12)
+      activerecord (>= 4.1)
+      concurrent-ruby
+      railties (>= 4.1)
 
 GIT
   remote: https://github.com/cschiewek/devise_ldap_authenticatable.git
@@ -71,6 +72,15 @@ GIT
   specs:
     excelinator (1.3.1)
       spreadsheet
+
+GIT
+  remote: https://github.com/stitchfix/rspec_api_documentation.git
+  revision: f4e5508473a6aae6aba3ba915365a8c5c72f32ba
+  specs:
+    rspec_api_documentation (6.1.0)
+      activesupport (>= 3.0.0)
+      mustache (~> 1.0, >= 0.99.4)
+      rspec (~> 3.0)
 
 GIT
   remote: https://github.com/workgena/active_admin_date_range_preset.git
@@ -258,7 +268,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.3.4)
+    concurrent-ruby (1.3.5)
     config (5.5.2)
       deep_merge (~> 1.2, >= 1.2.1)
       ostruct
@@ -335,10 +345,9 @@ GEM
       dry-initializer (~> 3.0)
       dry-schema (>= 1.12, < 2)
       zeitwerk (~> 2.6)
-    erubi (1.13.0)
+    erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
-    eventmachine (1.2.5)
     execjs (2.7.0)
     factory_bot (6.5.0)
       activesupport (>= 5.0.0)
@@ -383,7 +392,7 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.6)
+    i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.14.0)
       actionpack (>= 6.0)
@@ -391,7 +400,8 @@ GEM
       railties (>= 6.0)
       responders (>= 2)
     io-console (0.8.0)
-    irb (1.14.3)
+    irb (1.15.1)
+      pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jquery-rails (4.4.0)
@@ -401,10 +411,6 @@ GEM
     jquery-tablesorter (1.27.2)
       railties (>= 3.2)
     json (2.7.3)
-    jsonapi-resources (0.9.12)
-      activerecord (>= 4.1)
-      concurrent-ruby
-      railties (>= 4.1)
     jwt (2.2.2)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
@@ -426,8 +432,8 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     locale (2.1.2)
-    logger (1.6.5)
-    loofah (2.23.1)
+    logger (1.6.6)
+    loofah (2.24.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -669,6 +675,9 @@ GEM
     pg (1.4.6)
     pgq_prometheus (0.2.3)
       prometheus_exporter
+    pp (0.6.2)
+      prettyprint
+    prettyprint (0.2.0)
     psych (5.2.3)
       date
       stringio
@@ -682,14 +691,14 @@ GEM
       activesupport (>= 3.0.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (2.2.12)
-    rack-session (1.0.2)
-      rack (< 3)
-    rack-test (2.1.0)
+    rack (3.1.11)
+    rack-session (2.1.0)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0)
+    rack-test (2.2.0)
       rack (>= 1.3)
-    rackup (1.0.1)
-      rack (< 3)
-      webrick
+    rackup (2.2.1)
+      rack (>= 3)
     rails (7.2.2.1)
       actioncable (= 7.2.2.1)
       actionmailbox (= 7.2.2.1)
@@ -708,7 +717,7 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.6.1)
+    rails-html-sanitizer (1.6.2)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
     railties (7.2.2.1)
@@ -720,7 +729,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
-    rake (13.0.6)
+    rake (13.2.1)
     ransack (4.2.1)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
@@ -729,7 +738,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rchardet (1.8.0)
-    rdoc (6.11.0)
+    rdoc (6.12.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
     reline (0.6.0)
@@ -789,15 +798,16 @@ GEM
     rubyzip (1.3.0)
     rufus-scheduler (3.7.0)
       fugit (~> 1.1, >= 1.1.6)
-    sass (3.4.25)
-    sass-globbing (1.1.5)
-      sass (>= 3.1)
-    sass-rails (5.0.8)
-      railties (>= 5.2.0)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     securerandom (0.4.1)
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
@@ -825,22 +835,18 @@ GEM
     simplecov_json_formatter (0.1.4)
     spreadsheet (1.3.0)
       ruby-ole
-    sprockets (3.7.2)
+    sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
+      rack (>= 2.2.4, < 4)
     sprockets-rails (3.4.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    stringio (3.1.2)
+    stringio (3.1.5)
     syslog (0.2.0)
     syslog-logger (1.6.8)
     text (1.3.1)
-    thin (1.8.2)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (>= 1, < 3)
-    thor (1.2.2)
+    thor (1.3.2)
     tilt (2.0.9)
     timeliness (0.4.5)
     timeout (0.4.3)
@@ -871,7 +877,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.8)
+    zeitwerk (2.7.2)
     zip-zip (0.3)
       rubyzip (>= 1.0.0)
 
@@ -923,7 +929,7 @@ DEPENDENCIES
   jquery-tablesorter
   jquery-ui-rails!
   jrpc!
-  jsonapi-resources (~> 0.9.12)
+  jsonapi-resources!
   jwt
   listen
   matrix (~> 0.4.2)
@@ -947,7 +953,7 @@ DEPENDENCIES
   puma (~> 6.1)
   puma_worker_killer
   pundit
-  rack (~> 2.2.6)
+  rack
   rails (~> 7.2.0)
   rails-html-sanitizer (>= 1.6.1)
   ransack
@@ -959,7 +965,6 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rufus-scheduler
-  sass-globbing
   sass-rails
   selenium-webdriver
   sentry-delayed_job
@@ -971,7 +976,6 @@ DEPENDENCIES
   sprockets
   syslog (~> 0.2.0)
   syslog-logger
-  thin
   uglifier (>= 1.3)
   validates_timeliness (~> 7.0.0.beta1)
   webdrivers (~> 4.0)
