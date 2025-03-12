@@ -13,7 +13,8 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
              :status,
              :rows_count,
              :created_at,
-             :updated_at
+             :updated_at,
+             :time_format
 
   has_one :account, relation_name: :customer_account, foreign_key_on: :related
 
@@ -27,12 +28,16 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
   ransack_filter :updated_at, type: :datetime
   association_uuid_filter :account_id, class_name: 'Account'
 
+  filter :time_format, verify: :time_format_filter_verifier, apply: lambda { |records, values, _opts|
+    records.where(time_format: values)
+  }
+
   def filters
     _model.filters.as_json.slice(*CustomerApi::CdrExportForm::ALLOWED_FILTERS)
   end
 
   def self.creatable_fields(_context)
-    %i[filters account]
+    %i[filters account time_format]
   end
 
   def self.updatable_fields(_context)
@@ -48,4 +53,18 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
     scope = scope.where(customer_account_id: context[:allowed_account_ids]) if context[:allowed_account_ids].present?
     scope
   end
+
+  def self.time_format_filter_verifier(values, _ctx)
+    return if values.blank?
+
+    values.each do |value|
+      if CdrExport::ALLOWED_TIME_FORMATS.exclude?(value)
+        raise JSONAPI::Exceptions::InvalidFilterValue.new(:with_timezone, value)
+      end
+    end
+
+    values
+  end
+
+  private_class_method :time_format_filter_verifier
 end

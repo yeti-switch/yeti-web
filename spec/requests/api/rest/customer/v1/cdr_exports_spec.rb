@@ -10,6 +10,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
         {
           status: cdr_export.status,
           'rows-count': cdr_export.rows_count,
+          'time-format': CdrExport::WITH_TIMEZONE_TIME_FORMAT,
           'created-at': cdr_export.created_at.iso8601(3),
           'updated-at': cdr_export.updated_at.iso8601(3),
           filters: cdr_export.filters.as_json.slice(*CustomerApi::CdrExportForm::ALLOWED_FILTERS).symbolize_keys
@@ -220,12 +221,13 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
     let!(:account1) { FactoryBot.create(:account, contractor: customer).reload }
     let!(:account2) { FactoryBot.create(:account, contractor: customer).reload }
     let!(:account3) { FactoryBot.create(:account, contractor: customer).reload }
+    let(:cdr_exports_attrs) { {} }
     let!(:cdr_exports) do
       [
-        FactoryBot.create(:cdr_export, customer_account: account1).reload,
-        FactoryBot.create(:cdr_export, :failed, customer_account: account1).reload,
-        FactoryBot.create(:cdr_export, :completed, customer_account: account2).reload,
-        FactoryBot.create(:cdr_export, :deleted, customer_account: account3).reload
+        FactoryBot.create(:cdr_export, customer_account: account1, **cdr_exports_attrs).reload,
+        FactoryBot.create(:cdr_export, :failed, customer_account: account1, **cdr_exports_attrs).reload,
+        FactoryBot.create(:cdr_export, :completed, customer_account: account2, **cdr_exports_attrs).reload,
+        FactoryBot.create(:cdr_export, :deleted, customer_account: account3, **cdr_exports_attrs).reload
       ]
     end
 
@@ -281,6 +283,15 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
         include_examples :returns_json_api_collection do
           let(:json_api_collection_ids) { cdr_exports.map(&:uuid) }
         end
+      end
+    end
+
+    context 'with filter[time_format]=round_to_seconds' do
+      let(:query_params) { { filter: { time_format: CdrExport::ROUND_TO_SECONDS_TIME_FORMAT } } }
+      let(:cdr_exports_attrs) { super().merge time_format: CdrExport::ROUND_TO_SECONDS_TIME_FORMAT }
+
+      include_examples :returns_json_api_collection do
+        let(:json_api_collection_ids) { cdr_exports.map(&:uuid) }
       end
     end
 

@@ -10,6 +10,7 @@
 #  filters             :json             not null
 #  rows_count          :integer(4)
 #  status              :string           not null
+#  time_format         :string           default("with_timezone"), not null
 #  type                :string           not null
 #  uuid                :uuid             not null
 #  created_at          :datetime
