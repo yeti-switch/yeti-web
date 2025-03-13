@@ -801,7 +801,7 @@ BEGIN
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
   i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
-  i_profile.dump_level_id = GREATEST(i_profile_dump_level_id, i_vendor_gw.dump_level_id);
+  i_profile.dump_level_id = GREATEST(i_profile.dump_level_id, i_vendor_gw.dump_level_id);
 
   /*dbg{*/
   v_end:=clock_timestamp();
