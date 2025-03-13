@@ -145,7 +145,8 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Force cancel routeset',              item.force_cancel_routeset.to_s],
         ['Stir shaken mode name',              item.stir_shaken_mode_name],
         ['Stir shaken crt name',               item.stir_shaken_crt.name],
-        ['Privacy mode name',                  item.privacy_mode_name]
+        ['Privacy mode name',                  item.privacy_mode_name],
+        ['Dump level name',                    item.dump_level_name]
       ]
     )
   end

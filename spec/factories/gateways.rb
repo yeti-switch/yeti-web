@@ -106,6 +106,7 @@
 #  diversion_send_mode_id           :integer(2)       default(1), not null
 #  dtmf_receive_mode_id             :integer(2)       default(1), not null
 #  dtmf_send_mode_id                :integer(2)       default(1), not null
+#  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_group_id                 :integer(4)
 #  lua_script_id                    :integer(2)

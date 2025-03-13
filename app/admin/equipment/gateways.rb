@@ -98,13 +98,15 @@ ActiveAdmin.register Gateway do
                  :force_one_way_early_media, :max_30x_redirects,
                  :privacy_mode_name,
                  :stir_shaken_mode_name,
-                 [:stir_shaken_crt_name, proc { |row| row.stir_shaken_crt.try(:name) }]
+                 [:stir_shaken_crt_name, proc { |row| row.stir_shaken_crt.try(:name) }],
+                 :dump_level_name
 
   acts_as_import resource_class: Importing::Gateway
 
   scope :locked
   scope :shared
   scope :with_radius_accounting
+  scope :with_dump
 
   includes :contractor, :gateway_group, :pop, :statistic, :diversion_send_mode,
            :session_refresh_method, :codec_group,
@@ -320,6 +322,7 @@ ActiveAdmin.register Gateway do
   filter :diversion_send_mode
   filter :sip_schema_id, as: :select, collection: proc { Gateway::SIP_SCHEMAS.invert }
   filter :privacy_mode_id, as: :select, collection: proc { Gateway::PRIVACY_MODES.invert }
+  filter :dump_level_id, as: :select, collection: proc { Gateway::DUMP_LEVELS.invert }
 
   association_ajax_filter :termination_src_numberlist_id_eq,
                           label: 'Termination SRC Numberlist',
@@ -421,6 +424,7 @@ ActiveAdmin.register Gateway do
           end
           column do
             f.inputs 'Termination' do
+              f.input :dump_level_id, as: :select, include_blank: false, collection: Gateway::DUMP_LEVELS.invert
               f.input :transport_protocol, as: :select, include_blank: false
               f.input :sip_schema_id, as: :select, include_blank: false, collection: Gateway::SIP_SCHEMAS.invert
               f.input :host
@@ -626,6 +630,7 @@ ActiveAdmin.register Gateway do
         end
         panel 'Termination' do
           attributes_table_for s do
+            row :dump_level_id, &:dump_level_name
             row :transport_protocol
             row :sip_schema_id, &:sip_schema_name
             row :host
