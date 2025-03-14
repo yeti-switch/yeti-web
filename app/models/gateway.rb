@@ -106,6 +106,7 @@
 #  diversion_send_mode_id           :integer(2)       default(1), not null
 #  dtmf_receive_mode_id             :integer(2)       default(1), not null
 #  dtmf_send_mode_id                :integer(2)       default(1), not null
+#  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_group_id                 :integer(4)
 #  lua_script_id                    :integer(2)
@@ -239,6 +240,17 @@ class Gateway < ApplicationRecord
     PRIVACY_MODE_APPLY => 'Not trusted gw. Apply',
     PRIVACY_MODE_TRUSTED => 'Trusted gw. Forward',
     PRIVACY_MODE_TRUSTED_REMOVE_FROM => 'Trusted gw. Forward. Anonymize from'
+  }.freeze
+
+  DUMP_LEVEL_DISABLED = 0
+  DUMP_LEVEL_CAPTURE_SIP = 1
+  DUMP_LEVEL_CAPTURE_RTP = 2
+  DUMP_LEVEL_CAPTURE_ALL = 3
+  DUMP_LEVELS = {
+    DUMP_LEVEL_DISABLED => 'Capture nothing',
+    DUMP_LEVEL_CAPTURE_SIP => 'Capture signaling traffic',
+    DUMP_LEVEL_CAPTURE_RTP => 'Capture RTP traffic',
+    DUMP_LEVEL_CAPTURE_ALL => 'Capture all traffic'
   }.freeze
 
   class << self
@@ -375,10 +387,14 @@ class Gateway < ApplicationRecord
   validates :rtp_acl, array_format: { without: /\s/, message: 'spaces are not allowed', allow_nil: true }, array_uniqueness: { allow_nil: true }
   validate :validate_rtp_acl
 
+  validates :dump_level_id, presence: true
+  validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: false
+
   include Yeti::ResourceStatus
 
   scope :locked, -> { where locked: true }
   scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null' }
+  scope :with_dump, -> { where('dump_level_id > 0') }
   scope :shared, -> { where is_shared: true }
   scope :origination_contractor_id_eq, lambda { |contractor_id|
     where("#{table_name}.allow_origination AND (#{table_name}.is_shared OR #{table_name}.contractor_id=?)", contractor_id)
@@ -478,6 +494,10 @@ class Gateway < ApplicationRecord
 
   def privacy_mode_name
     PRIVACY_MODES[privacy_mode_id]
+  end
+
+  def dump_level_name
+    dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end
 
   def use_registered_aor?

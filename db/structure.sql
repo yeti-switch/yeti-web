@@ -3542,7 +3542,8 @@ CREATE TABLE class4.gateways (
     termination_cps_limit smallint,
     termination_cps_wsize smallint DEFAULT 1 NOT NULL,
     termination_subscriber_cps_limit smallint,
-    termination_subscriber_cps_wsize smallint DEFAULT 1 NOT NULL
+    termination_subscriber_cps_wsize smallint DEFAULT 1 NOT NULL,
+    dump_level_id smallint DEFAULT 0 NOT NULL
 );
 
 
@@ -33418,6 +33419,8 @@ BEGIN
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
   i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
+  i_profile.dump_level_id = GREATEST(i_profile.dump_level_id, i_vendor_gw.dump_level_id);
+
   /*dbg{*/
   v_end:=clock_timestamp();
   RAISE NOTICE '% ms -> DP. Finished: % ',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(i_profile,true);
@@ -34229,6 +34232,8 @@ BEGIN
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
   i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
 
+  i_profile.dump_level_id = GREATEST(i_profile.dump_level_id, i_vendor_gw.dump_level_id);
+
   /*dbg{*/
   v_end:=clock_timestamp();
   RAISE NOTICE '% ms -> DP. Finished: % ',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(i_profile,true);
@@ -34962,6 +34967,8 @@ BEGIN
 
   i_profile.bleg_radius_acc_profile_id=i_vendor_gw.radius_accounting_profile_id;
   i_profile.bleg_force_cancel_routeset=i_vendor_gw.force_cancel_routeset;
+
+  i_profile.dump_level_id = GREATEST(i_profile.dump_level_id, i_vendor_gw.dump_level_id);
 
   
   RETURN i_profile;
@@ -50011,6 +50018,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250313160152'),
 ('20250311141247'),
 ('20250307215347'),
 ('20250305214816'),
