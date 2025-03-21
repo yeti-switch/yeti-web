@@ -314,7 +314,9 @@ RSpec.describe 'switch.writecdr()' do
       "p_preferred_identity": 'rspec-ppi-in',
       "privacy": ['rspec-privacy-in'],
       "remote_party_id": ['rspec-rpid-in'],
-      "rpid_privacy": ['rspec-rpid-privacy-in']
+      "rpid_privacy": ['rspec-rpid-privacy-in'],
+      "x_orig_lat": 78.222222222222,
+      "x_orig_lon": 33.333333333333
     }.to_json
   end
 
@@ -491,6 +493,8 @@ RSpec.describe 'switch.writecdr()' do
                      dump_level_id: 0,
                      auth_orig_ip: '127.0.0.1',
                      auth_orig_port: 1947,
+                     auth_orig_lat: 78.22222,
+                     auth_orig_lon: 33.333332,
                      global_tag: '',
                      src_country_id: 111,
                      src_network_id: 333,
