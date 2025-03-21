@@ -526,10 +526,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
 
           row :auth_orig_location do
-            "#{cdr.auth_orig_lat},#{cdr.auth_orig_lon}".chomp(',
-
-
-')
+            "#{cdr.auth_orig_lat},#{cdr.auth_orig_lon}".chomp(',')
           end
 
           row :legb_ruri
