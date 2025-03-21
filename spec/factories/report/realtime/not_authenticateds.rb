@@ -7,6 +7,8 @@
 #  id                              :bigint(8)        not null, primary key
 #  audio_recorded                  :boolean
 #  auth_orig_ip                    :inet
+#  auth_orig_lat                   :float(24)
+#  auth_orig_lon                   :float(24)
 #  auth_orig_port                  :integer(4)
 #  core_version                    :string
 #  customer_acc_vat                :decimal(, )

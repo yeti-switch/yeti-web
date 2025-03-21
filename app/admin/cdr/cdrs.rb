@@ -525,6 +525,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
             "#{cdr.auth_orig_ip}:#{cdr.auth_orig_port}".chomp(':')
           end
 
+          row :auth_orig_location do
+            "#{cdr.auth_orig_lat},#{cdr.auth_orig_lon}".chomp(',
+
+
+')
+          end
+
           row :legb_ruri
           row :legb_outbound_proxy
           row :sign_term_transport_protocol

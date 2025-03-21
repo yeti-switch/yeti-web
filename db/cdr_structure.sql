@@ -329,7 +329,9 @@ CREATE TYPE switch.lega_request_headers_ty AS (
 	x_yeti_auth character varying,
 	x_orig_ip character varying,
 	x_orig_port character varying,
-	x_orig_proto character varying
+	x_orig_proto character varying,
+	x_orig_lat real,
+	x_orig_lon real
 );
 
 
@@ -564,7 +566,9 @@ CREATE TABLE cdr.cdr (
     internal_disconnect_code_id smallint,
     package_counter_id bigint,
     src_network_type_id smallint,
-    dst_network_type_id smallint
+    dst_network_type_id smallint,
+    auth_orig_lat real,
+    auth_orig_lon real
 )
 PARTITION BY RANGE (time_start);
 
@@ -1923,6 +1927,8 @@ BEGIN
   v_cdr.auth_orig_ip = v_dynamic.auth_orig_ip;
   v_cdr.auth_orig_ip = v_dynamic.auth_orig_ip;
   v_cdr.auth_orig_port = v_dynamic.auth_orig_port;
+  v_cdr.auth_orig_lat = v_lega_request_headers.x_orig_lat;
+  v_cdr.auth_orig_lon = v_lega_request_headers.x_orig_lon;
 
   perform switch.write_rtp_statistics(
     i_rtp_statistics,
@@ -4701,6 +4707,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250321212727'),
 ('20241219145036'),
 ('20241219142219'),
 ('20241217212213'),
