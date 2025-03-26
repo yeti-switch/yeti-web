@@ -29,6 +29,11 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   filter :created_at
   filter :updated_at
   filter :uuid_equals, label: 'UUID'
+  filter :time_zone_name, as: :select, input_html: { class: 'chosen-ajax', 'data-path': '/time_zones/search' },
+                          collection: proc {
+                            time_zone_name = params.dig(:q, :time_zone_name_eq)
+                            time_zone_name ? Yeti::TimeZoneHelper.all.filter { |i| i.name == time_zone_name }.map(&:name) : []
+                          }
 
   action_item(:download, only: [:show]) do
     link_to 'Download', action: :download if resource.completed?
@@ -80,6 +85,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
           row :updated_at
           row :rows_count
           row 'Time format', &:time_format_with_hint
+          row 'Time zone name', &:time_zone_name
         end
         active_admin_comments
       end
@@ -113,6 +119,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
 
   permit_params :callback_url,
                 :time_format,
+                :time_zone_name,
                 filters: [
                   :time_start_gteq,
                   :time_start_lteq,
@@ -173,9 +180,15 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
               required: true
 
       f.input :callback_url, required: false
+    end
+
+    inputs 'Time specific configurations' do
       f.input :time_format, as: :select,
                             collection: CdrExport::ALLOWED_TIME_FORMATS.map { |i| [i.humanize, i] },
                             input_html: { class: :chosen }
+      f.input :time_zone_name, as: :select,
+                               input_html: { class: 'chosen-ajax', 'data-path': '/time_zones/search', value: f.object.time_zone_name },
+                               collection: f.object.time_zone_name ? Yeti::TimeZoneHelper.all.filter { |i| i.name == f.object.time_zone_name }.map(&:name) : []
     end
     f.inputs 'Filters', for: [:filters, f.object.filters] do |ff|
       # accounts = Account.order(:name)

@@ -148,10 +148,13 @@ jobs:
   rspec:
     name: Rspec tests
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container:
+      image: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+      options: --volume shared_tmp:/tmp
     services:
       db:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:16
+        options: --volume shared_tmp:/tmp
 
     needs: gems-caching
     strategy:
