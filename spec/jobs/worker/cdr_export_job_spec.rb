@@ -76,6 +76,12 @@ RSpec.describe Worker::CdrExportJob, type: :job do
     include_examples :performs_cdr_export
   end
 
+  context 'when time_zone_name defined' do
+    let(:cdr_export_attrs) { super().merge time_zone_name: 'europe/kiev' }
+
+    include_examples :performs_cdr_export
+  end
+
   context 'when cdr_export has time_start_lt filter' do
     let(:cdr_export_attrs) do
       super().merge filters: {

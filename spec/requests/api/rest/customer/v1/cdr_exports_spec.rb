@@ -11,6 +11,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
           status: cdr_export.status,
           'rows-count': cdr_export.rows_count,
           'time-format': CdrExport::WITH_TIMEZONE_TIME_FORMAT,
+          'time-zone-name': cdr_export.time_zone_name,
           'created-at': cdr_export.created_at.iso8601(3),
           'updated-at': cdr_export.updated_at.iso8601(3),
           filters: cdr_export.filters.as_json.slice(*CustomerApi::CdrExportForm::ALLOWED_FILTERS).symbolize_keys
@@ -97,6 +98,39 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
 
       include_examples :creates_cdr_export
       include_examples :responds_single_cdr_export, status: 201
+    end
+
+    context 'when time_zone_name' do
+      context 'equal to europe/kyiv' do
+        let(:json_api_attributes) { super().merge 'time-zone-name': 'europe/kyiv' }
+        let(:expected_cdr_export_attrs) { super().merge time_zone_name: 'europe/kyiv' }
+
+        it 'should create CDR export' do
+          subject
+          expect(response_json[:errors]).to eq nil
+
+          expect(cdr_export).to have_attributes(expected_cdr_export_attrs)
+          expect(cdr_export.filters_json).to match(expected_cdr_export_filters)
+        end
+      end
+
+      context 'with invalid time_zone_name' do
+        let(:json_api_attributes) { super().merge 'time-zone-name': 'invalid value' }
+
+        include_examples :returns_json_api_errors, errors: {
+          detail: 'time-zone-name - is invalid',
+          source: { pointer: '/data/attributes/time-zone-name' }
+        }
+      end
+
+      context 'when time_zone_name is empty string' do
+        let(:json_api_attributes) { super().merge 'time-zone-name': '' }
+
+        include_examples :returns_json_api_errors, errors: {
+          detail: 'time-zone-name - is invalid',
+          source: { pointer: '/data/attributes/time-zone-name' }
+        }
+      end
     end
 
     context 'with all allowed filters' do
@@ -289,6 +323,15 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
     context 'with filter[time_format]=round_to_seconds' do
       let(:query_params) { { filter: { time_format: CdrExport::ROUND_TO_SECONDS_TIME_FORMAT } } }
       let(:cdr_exports_attrs) { super().merge time_format: CdrExport::ROUND_TO_SECONDS_TIME_FORMAT }
+
+      include_examples :returns_json_api_collection do
+        let(:json_api_collection_ids) { cdr_exports.map(&:uuid) }
+      end
+    end
+
+    context 'with filter[time_zone_name]=europe/kiev' do
+      let(:query_params) { { filter: { time_zone_name: 'europe/kiev' } } }
+      let(:cdr_exports_attrs) { super().merge time_zone_name: 'europe/kiev' }
 
       include_examples :returns_json_api_collection do
         let(:json_api_collection_ids) { cdr_exports.map(&:uuid) }

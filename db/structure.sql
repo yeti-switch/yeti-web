@@ -44760,7 +44760,8 @@ CREATE TABLE sys.cdr_exports (
     rows_count integer,
     customer_account_id integer,
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
-    time_format character varying DEFAULT 'with_timezone'::character varying NOT NULL
+    time_format character varying DEFAULT 'with_timezone'::character varying NOT NULL,
+    time_zone_name character varying
 );
 
 
@@ -50020,6 +50021,7 @@ SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, log
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20250326095443'),
 ('20250313160152'),
+('20250312173606'),
 ('20250311141247'),
 ('20250307215347'),
 ('20250305214816'),
