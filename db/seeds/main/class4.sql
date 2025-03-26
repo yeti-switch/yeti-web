@@ -325,6 +325,15 @@ INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_orig
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (1602, 2, false, true, 607, 'Unwanted', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (1603, 2, false, true, 608, 'Rejected', NULL, NULL, false, false, true, false);
 
+INSERT INTO class4.disconnect_code
+    (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop)
+VALUES
+    (1604, 2, false, true, 411, 'Length Required', NULL, NULL, false, false, true, false),
+    (1605, 2, false, true, 430, 'Flow Failed', NULL, NULL, false, false, true, false),
+    (1606, 2, false, true, 439, 'First Hop Lacks Outbound Support', NULL, NULL, false, false, true, false),
+    (1607, 2, false, true, 470, 'Consent Needed', NULL, NULL, false, false, true, false),
+    (1608, 2, false, true, 699, 'CAC exceeded', NULL, NULL, false, false, true, false);
+
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8000, 0, true, true, 403, 'Not enough customer balance', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8001, 0, true, true, 403, 'Destination number blacklisted', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8002, 0, true, true, 403, 'Source number blacklisted', NULL, NULL, false, false, true, false);
@@ -344,12 +353,12 @@ INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_orig
 
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8013,0,true,true,500,'Privacy calls not allowed',NULL,NULL,false,false,true,false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8014,0,true,true,500,'Critical privacy not allowed',NULL,NULL,false,false,true,false);
-INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8015,0,true,true,500,'Anonymous calls not allowed',NULL,NULL,false,false,true,false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success,  successnozerolen,store_cdr,silently_drop) VALUES (8015,0,true,true,433,'Anonymity Disallowed',NULL,NULL,false,false,true,false);
 
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8016, 0, true, true, 403, 'Destination number blacklisted by routing plan', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8017, 0, true, true, 403, 'Source number blacklisted by routing plan', NULL, NULL, false, false, true, false);
-INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8018, 0, true, true, 403, 'Identity required', NULL, NULL, false, false, true, false);
-INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8019, 0, true, true, 403, 'Identity invalid', NULL, NULL, false, false, true, false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8018, 0, true, true, 428, 'Use Identity Header', NULL, NULL, false, false, true, false);
+INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8019, 0, true, true, 438, 'Invalid Identity Header', NULL, NULL, false, false, true, false);
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (8020, 0, true, true, 403, 'PAI header required', NULL, NULL, false, false, true, false);
 
 INSERT INTO disconnect_code (id, namespace_id, stop_hunting, pass_reason_to_originator, code, reason, rewrited_code, rewrited_reason, success, successnozerolen, store_cdr, silently_drop) VALUES (1505, 1, false, false, 487, 'Ringing timeout', NULL, NULL, false, false, true, false);
