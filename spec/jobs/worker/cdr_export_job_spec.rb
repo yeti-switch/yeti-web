@@ -60,6 +60,42 @@ RSpec.describe Worker::CdrExportJob, type: :job do
     include_examples :performs_cdr_export
   end
 
+  context 'when time_zone_name', freeze_time: Time.parse('2025-01-01 00:00:00 UTC') do
+    let(:cdr_export_attrs) { super().merge time_zone_name: nil, filters: { time_start_gteq: '2025-01-01', time_start_lteq: '2025-01-31' }, fields: %i[time_start] }
+    let(:cdr_dir) { YetiConfig.cdr_export.dir_path.chomp('/') }
+    let!(:cdr) { FactoryBot.create(:cdr, time_start: DateTime.parse('2025-01-02 00:00:00'), time_end: DateTime.parse('2025-01-02 00:01:00')) }
+    let(:csv_full_path) { "#{cdr_dir}/#{cdr_export.id}.csv.gz" }
+    let(:csv_raw_result) { ActiveSupport::Gzip.decompress(File.read(csv_full_path)) }
+
+    after { FileUtils.rm(csv_full_path) if File.exist?(csv_full_path) }
+
+    context 'is "europe/kiev"' do
+      let(:cdr_export_attrs) { super().merge time_zone_name: 'europe/kiev' }
+
+      it 'should perform CSV export within UTC+2' do
+        expect { subject }.to change { cdr_export.reload.status }.from(CdrExport::STATUS_PENDING).to(CdrExport::STATUS_COMPLETED)
+
+        expect(CSV.parse(csv_raw_result).count).to eq 2 # expect two rows: header and one row with cdr
+        CSV.parse(csv_raw_result, headers: true) do |row|
+          expect(row.fetch('Time Start')).to eq '2025-01-02 02:00:00+02'
+        end
+      end
+    end
+
+    context 'is "america/new_york"' do
+      let(:cdr_export_attrs) { super().merge time_zone_name: 'america/new_york' }
+
+      it 'should perform CSV export within UTC-5' do
+        expect { subject }.to change { cdr_export.reload.status }.from(CdrExport::STATUS_PENDING).to(CdrExport::STATUS_COMPLETED)
+
+        expect(CSV.parse(csv_raw_result).count).to eq 2 # expect two rows: header and one row with cdr
+        CSV.parse(csv_raw_result, headers: true) do |row|
+          expect(row.fetch('Time Start')).to eq '2025-01-01 19:00:00-05'
+        end
+      end
+    end
+  end
+
   context 'when callback_url defined' do
     let(:cdr_export_attrs) do
       super().merge callback_url: 'http://example.com/notify'

@@ -14,7 +14,8 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
              :rows_count,
              :created_at,
              :updated_at,
-             :time_format
+             :time_format,
+             :time_zone_name
 
   has_one :account, relation_name: :customer_account, foreign_key_on: :related
 
@@ -32,12 +33,16 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
     records.where(time_format: values)
   }
 
+  filter :time_zone_name, verify: :time_zone_name_filter_verifier, apply: lambda { |records, values, _opts|
+    records.where(time_zone_name: values)
+  }
+
   def filters
     _model.filters.as_json.slice(*CustomerApi::CdrExportForm::ALLOWED_FILTERS)
   end
 
   def self.creatable_fields(_context)
-    %i[filters account time_format]
+    %i[filters account time_format time_zone_name]
   end
 
   def self.updatable_fields(_context)
@@ -66,5 +71,18 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
     values
   end
 
+  def self.time_zone_name_filter_verifier(values, _ctx)
+    return if values.blank?
+
+    values.each do |value|
+      unless Yeti::TimeZoneHelper.all.any? { |i| i.name == value }
+        raise JSONAPI::Exceptions::InvalidFilterValue.new(:time_zone_name, value)
+      end
+    end
+
+    values
+  end
+
   private_class_method :time_format_filter_verifier
+  private_class_method :time_zone_name_filter_verifier
 end
