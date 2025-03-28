@@ -45,9 +45,9 @@ module Helpers
     def chosen_select(chosen_selector, search:, multiple: false, chosen_node: nil, ajax: false, exact: false)
       chosen_node ||= page.find(chosen_selector)
       if multiple
-        chosen_node.find('.search-field').click
+        chosen_node.find('.search-field').trigger('click')
       else
-        chosen_node.click
+        chosen_node.trigger('click')
       end
       expect(page).to have_selector('ul.chosen-results li.active-result') unless ajax
       if multiple
@@ -57,14 +57,14 @@ module Helpers
       end
       within(chosen_node) do
         expect(page).to have_selector('ul.chosen-results li.active-result') if ajax
-        find('.active-result', text: search, exact_text: exact).click
+        find('.active-result', text: search, exact_text: exact).trigger('click')
       end
     end
 
     def chosen_pick(css_selector, text:, chosen_node: nil, exact: false)
       chosen_node ||= page.find(css_selector)
-      chosen_node.click
-      find('ul.chosen-results li.active-result', text: text, exact_text: exact).click
+      chosen_node.trigger('click')
+      find('ul.chosen-results li.active-result', text: text, exact_text: exact).trigger('click')
     end
 
     def chosen_deselect_value(label, exact: false)
