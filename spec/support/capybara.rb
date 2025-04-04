@@ -15,7 +15,7 @@ build_cuprite_driver = lambda do |app, headless:|
     # https://github.com/rubycdp/cuprite#debugging
     # page.driver.debug(binding)
     inspector: ENV['CHROME_INSPECTOR'],
-    window_size: [1920, 1080],
+    window_size: [1920, 1200],
     process_timeout: 10, # fix for macOS chrome
     timeout: 20, # to fix some rare cases on local machine and CI when browser hangs
     url_whitelist: %w[http://127.0.0.1:* http://localhost:* http://lvh.me:*],
