@@ -256,7 +256,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
           column('LegA DC') do |cdr_attempt|
             status_tag(cdr_attempt.lega_disconnect_code.to_s, class: cdr_attempt.success? ? :ok : :red) unless (cdr_attempt.lega_disconnect_code == 0) || cdr_attempt.lega_disconnect_code.nil?
-            status_tag("q850: #{cdr.lega_q850_cause}", class: cdr.success? ? :ok : :red) unless cdr.lega_q850_cause.nil?
+            status_tag("q850: #{cdr_attempt.lega_q850_cause}", class: cdr_attempt.success? ? :ok : :red) unless cdr_attempt.lega_q850_cause.nil?
           end
           column('LegA Reason', &:lega_disconnect_reason)
           column('DC') do |cdr_attempt|
@@ -271,7 +271,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
           column('LegB DC') do |cdr_attempt|
             status_tag(cdr_attempt.legb_disconnect_code.to_s, class: cdr_attempt.success? ? :ok : :red) unless (cdr_attempt.legb_disconnect_code == 0) || cdr_attempt.legb_disconnect_code.nil?
-            status_tag("q850: #{cdr.legb_q850_cause}", class: cdr.success? ? :ok : :red) unless cdr.legb_q850_cause.nil?
+            status_tag("q850: #{cdr_attempt.legb_q850_cause}", class: cdr_attempt.success? ? :ok : :red) unless cdr_attempt.legb_q850_cause.nil?
           end
           column('LegB Reason', &:legb_disconnect_reason)
           column :disconnect_initiator, &:disconnect_initiator_name

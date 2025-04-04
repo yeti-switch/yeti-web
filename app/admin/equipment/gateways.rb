@@ -63,8 +63,7 @@ ActiveAdmin.register Gateway do
                  :dst_rewrite_rule, :dst_rewrite_result,
                  :to_rewrite_rule, :to_rewrite_result,
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
-                 :auth_enabled, :auth_user, :auth_password, :auth_from_user, :auth_from_domain,
-                 :incoming_auth_username, :incoming_auth_password, :incoming_auth_allow_jwt,
+                 :auth_enabled, :auth_from_user, :auth_from_domain,
                  :term_use_outbound_proxy, :term_force_outbound_proxy,
                  [:term_proxy_transport_protocol_name, proc { |row| row.term_proxy_transport_protocol.try(:name) }],
                  :term_outbound_proxy,
@@ -218,15 +217,6 @@ ActiveAdmin.register Gateway do
     column :orig_disconnect_policy
 
     column :resolve_ruri
-
-    column :incoming_auth_username
-    column :incoming_auth_allow_jwt
-
-    column :auth_enabled
-    column :auth_user
-    column :auth_password
-    column :auth_from_user
-    column :auth_from_domain
 
     column :term_use_outbound_proxy
     column :term_force_outbound_proxy
