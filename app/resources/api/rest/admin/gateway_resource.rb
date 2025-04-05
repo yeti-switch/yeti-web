@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::GatewayResource < ::BaseResource
-  attributes :name, :enabled, :priority, :weight, :acd_limit, :asr_limit, :allow_origination, :allow_termination, :sst_enabled,
+  attributes :external_id, :name, :enabled,
+             :priority, :weight, :acd_limit, :asr_limit, :allow_origination, :allow_termination, :sst_enabled,
              :host, :port, :resolve_ruri,
              :diversion_domain, :diversion_rewrite_rule, :diversion_rewrite_result,
              :src_name_rewrite_rule, :src_name_rewrite_result, :src_rewrite_rule, :src_rewrite_result,
@@ -161,6 +162,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
 
   def self.updatable_fields(_context)
     %i[
+      external_id
       name
       enabled
       priority
