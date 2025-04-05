@@ -46,6 +46,7 @@ RSpec.resource 'Gateways' do
     jsonapi_attributes(required_attributes, optional_attributes)
     jsonapi_relationships(required_relationships, optional_relationships)
 
+    let(:'external-id') { 100_500 }
     let(:name) { 'name' }
     let(:enabled) { true }
     let(:allow_origination) { true }
