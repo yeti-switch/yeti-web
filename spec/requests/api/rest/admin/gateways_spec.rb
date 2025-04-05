@@ -469,6 +469,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
 
     let!(:gateway_response_attributes) do
       {
+        'external-id': gateway.external_id,
         name: gateway.name,
         enabled: gateway.enabled,
         priority: gateway.priority,
