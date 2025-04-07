@@ -3,6 +3,8 @@
 ActiveAdmin.register System::Timezone, as: 'time_zone' do
   menu false
 
+  actions :none
+
   collection_action :search, method: :get do
     render json: [] and return if params.dig(:q, :search_for).blank?
 
