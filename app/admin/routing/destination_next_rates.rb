@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' do
+  decorate_with DestinationNextRateDecorator
+
   acts_as_belongs_to :destination,
                      parent_class: Routing::Destination,
                      collection_name: :destination_next_rates,
@@ -8,7 +10,13 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
                      optional: true
   menu false
   actions :index, :new, :create, :edit, :update, :destroy
-  config.batch_actions = false
+  config.batch_actions = true
+
+  batch_action :destroy, confirm: 'Are you sure?', if: proc { authorized?(:destroy) } do |next_rate_ids|
+    DestinationNextRate::BulkDelete.call(next_rate_ids: next_rate_ids)
+    flash[:notice] = 'Selected Destination Next Rates Destroyed!'
+    redirect_to_back
+  end
 
   permit_params :initial_interval,
                 :next_interval,
@@ -31,7 +39,7 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
     end
   end
 
-  includes :destination
+  includes destination: [:rate_group]
 
   action_item :destinations, only: [:index] do
     link_to 'Destinations', destinations_path
@@ -70,6 +78,12 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
                    input_html: { class: :chosen },
                    collection: [['Yes', true], ['No', false]]
 
+  filter :destination_prefix, label: 'Destination', as: :string
+
+  filter :destination_rate_group_id_eq, label: 'Rate Group',
+                                        as: :select,
+                                        input_html: { class: :chosen },
+                                        collection: -> { Routing::RateGroup.all }
   filter :apply_time
   filter :initial_rate
   filter :next_rate
@@ -81,9 +95,11 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
   filter :external_id
 
   index do
+    selectable_column
     column :id
     actions
     column :destination
+    column :rate_group, :link_to_rate_group
     column :applied
     column :apply_time
     column :initial_rate
