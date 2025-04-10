@@ -62,6 +62,12 @@ module FeatureTestHelper
     page.find('.resource_selection_toggle_cell label').click
   end
 
+  def table_select_row(id)
+    within_table_row(id:) do
+      find('.resource_selection_cell .collection_selection').set(true)
+    end
+  end
+
   def within_main_content(&block)
     within('#main_content_wrapper', &block)
   end
