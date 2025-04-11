@@ -38,7 +38,7 @@ class AdminUser < ApplicationRecord
   has_one :billing_contact, class_name: 'Billing::Contact', dependent: :destroy, autosave: true
 
   before_validation do
-    self.roles = roles.reject(&:blank?) unless roles.nil?
+    self.roles = roles&.reject(&:blank?)
   end
 
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, if: :validate_email? }

@@ -95,6 +95,8 @@ jobs:
           path: |
             log/
 
+
+
   brakeman:
     name: Brakeman
     runs-on: ubuntu-latest
@@ -200,6 +202,57 @@ jobs:
             tmp/capybara
             coverage
 
+
+  rspec_ldap:
+    name: Rspec tests for LDAP auth
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    services:
+      db:
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
+
+    needs: gems-caching
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: use cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            vendor
+            pgq-processors/vendor
+            .bundle
+            pgq-processors/.bundle
+            /opt/yeti-web/vendor/rbenv
+          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+
+      - name: Run rspec
+        run: cp -v config/ldap.yml.distr config/ldap.yml && make rspec
+        env:
+          PARALLEL_TEST_PROCESSORS: 1
+          TEST_GROUP: 0
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
+          CI: true
+          CI_RUN_LDAP: true
+
+      - name: Save artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rspec-artifacts-ldap
+          if-no-files-found: ignore
+          include-hidden-files: true
+          path: |
+            tmp/capybara
+            coverage
+
+
+
   coverage:
     name: Coverage
     runs-on: ubuntu-latest
@@ -207,6 +260,7 @@ jobs:
     needs:
       - gems-caching
       - rspec
+      - rspec_ldap
     steps:
       - uses: actions/checkout@v4
       - name: use cache

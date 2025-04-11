@@ -59,7 +59,8 @@ RSpec.describe 'config/yeti_web.yml' do
       routing_simulation_default_interface: a_kind_of(String),
       invoice: {
         auto_approve: boolean
-      }
+      },
+      default_ldap_roles: a_kind_of(Array)
     }
   end
 
