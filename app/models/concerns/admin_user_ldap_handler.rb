@@ -8,22 +8,24 @@ module AdminUserLdapHandler
     before_update :get_ldap_attributes
     before_validation :get_ldap_attributes, on: :create
     include LdapPasswordHelper
-    class_attribute :default_ldap_roles, instance_writer: false
-    self.default_ldap_roles = [RolePolicy.root_role]
+    class_attribute :default_ldap_roles, instance_writer: false, default: YetiConfig.default_ldap_roles
   end
 
   def get_ldap_attributes
     new_email =  Devise::LDAP::Adapter.get_ldap_param(username, 'mail')&.first
     self.email = new_email if new_email
-    new_roles =  Devise::LDAP::Adapter.get_ldap_param(username, 'roles')
-    self.roles = new_roles ? Array.wrap(new_roles) : default_ldap_roles
+
+    ldap_roles = Array.wrap(Devise::LDAP::Adapter.get_ldap_param(username, 'roles'))
+    if ldap_roles.present?
+      self.roles = ldap_roles
+    else
+      self.roles = default_ldap_roles if new_record?
+      # what if admin_user is persisted but both ldap_roles and admin_user.roles are empty?
+      #   suggestion: use default_ldap_roles
+    end
   rescue Net::LDAP::LdapError => e
     Rails.logger.error { e.message }
     # nothing
-  end
-
-  def default_ldap_roles
-    [root_role]
   end
 
   class_methods do
