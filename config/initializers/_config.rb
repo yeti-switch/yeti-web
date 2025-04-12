@@ -96,6 +96,7 @@ Config.setup do |setup_config|
     optional(:invoice).schema do
       optional(:auto_approve).value(:bool)
     end
+    optional(:default_ldap_roles).array(:string)
   end
 end
 

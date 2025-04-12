@@ -34,6 +34,13 @@ Warden.test_mode!
 RSpec::Matchers.define_negated_matcher :not_eq, :eq
 
 RSpec.configure do |config|
+  # allows to run ldap tests on CI separately
+  if ENV['CI_RUN_LDAP'].present?
+    config.filter_run_including :ldap
+  else
+    config.filter_run_excluding :ldap
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [Rails.root.join('spec/fixtures')]
 
