@@ -316,8 +316,8 @@ class CustomersAuth < ApplicationRecord
   include Yeti::StateUpdater
   self.state_name = 'customers_auth'
 
-  scope :with_radius, -> { where('radius_auth_profile_id is not null') }
-  scope :with_dump, -> { where('dump_level_id > 0') }
+  scope :with_radius, -> { where('class4.customers_auth.radius_auth_profile_id is not null') }
+  scope :with_dump, -> { where('class4.customers_auth.dump_level_id > 0') }
   scope :ip_covers, lambda { |ip|
     begin
       IPAddr.new(ip)
