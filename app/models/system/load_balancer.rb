@@ -23,5 +23,5 @@ class System::LoadBalancer < ApplicationRecord
   validates :name, :signalling_ip, uniqueness: true
 
   include Yeti::StateUpdater
-  self.state_name = 'load_balancers'
+  self.state_names = ['load_balancers']
 end
