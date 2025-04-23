@@ -93,6 +93,10 @@ en:
         contact_uri: "From header URI in format sip:userpart@domain"
         interval: "OPTIONS sending interval in seconds"
         append_headers: "Custom headers to send in OPTIONS, separated by \\r\\n"
+      equipment_gateway_throttling_profile:
+        codes: "Responses that will be treated as failures"
+        threshold: "Percent of failures to activate throttling. 1-100."
+        window: "Monitoring window size in seconds. 1-120"
       system_sensor:
         hep_capture_id: "Leave it empty to use YETI Node ID as HEP_CAPTURE_ID"
       customers_auth:

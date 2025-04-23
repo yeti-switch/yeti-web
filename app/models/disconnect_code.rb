@@ -39,7 +39,7 @@ class DisconnectCode < ApplicationRecord
 
   include Yeti::TranslationReloader
   include Yeti::StateUpdater
-  self.state_name = 'translations'
+  self.state_names = ['translations']
 
   NS_TM  = 0
   NS_TS  = 1

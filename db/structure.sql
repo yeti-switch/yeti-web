@@ -3543,7 +3543,9 @@ CREATE TABLE class4.gateways (
     termination_cps_wsize smallint DEFAULT 1 NOT NULL,
     termination_subscriber_cps_limit smallint,
     termination_subscriber_cps_wsize smallint DEFAULT 1 NOT NULL,
-    dump_level_id smallint DEFAULT 0 NOT NULL
+    dump_level_id smallint DEFAULT 0 NOT NULL,
+    throttling_profile_id smallint,
+    allow_multipart_body boolean DEFAULT true NOT NULL
 );
 
 
@@ -31657,6 +31659,28 @@ $$;
 
 
 --
+-- Name: load_gateway_attributes_cache(); Type: FUNCTION; Schema: switch22; Owner: -
+--
+
+CREATE FUNCTION switch22.load_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold real, throttling_window smallint, allow_multipart_body boolean)
+    LANGUAGE plpgsql COST 10
+    AS $$
+BEGIN
+  RETURN QUERY
+    SELECT
+      gw.id::bigint,
+      gtp.codes as throttling_codes,
+      gtp.threshold as throttling_threshold,
+      gtp."window" as throttling_window,
+      gw.allow_multipart_body
+    FROM class4.gateways gw
+    LEFT JOIN class4.gateway_throttling_profiles gtp ON gtp.id = gw.throttling_profile_id
+    ORDER BY gw.id;
+END;
+$$;
+
+
+--
 -- Name: load_incoming_auth(); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
@@ -41370,6 +41394,39 @@ CREATE TABLE class4.gateway_rel100_modes (
 
 
 --
+-- Name: gateway_throttling_profiles; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.gateway_throttling_profiles (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    codes character varying[] NOT NULL,
+    threshold real NOT NULL,
+    "window" smallint NOT NULL
+);
+
+
+--
+-- Name: gateway_throttling_profiles_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.gateway_throttling_profiles_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: gateway_throttling_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.gateway_throttling_profiles_id_seq OWNED BY class4.gateway_throttling_profiles.id;
+
+
+--
 -- Name: gateways_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
@@ -45528,6 +45585,13 @@ ALTER TABLE ONLY class4.gateway_groups ALTER COLUMN id SET DEFAULT nextval('clas
 
 
 --
+-- Name: gateway_throttling_profiles id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_throttling_profiles ALTER COLUMN id SET DEFAULT nextval('class4.gateway_throttling_profiles_id_seq'::regclass);
+
+
+--
 -- Name: gateways id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -46745,6 +46809,22 @@ ALTER TABLE ONLY class4.gateway_rel100_modes
 
 ALTER TABLE ONLY class4.gateway_rel100_modes
     ADD CONSTRAINT gateway_rel100_modes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: gateway_throttling_profiles gateway_throttling_profiles_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_throttling_profiles
+    ADD CONSTRAINT gateway_throttling_profiles_name_key UNIQUE (name);
+
+
+--
+-- Name: gateway_throttling_profiles gateway_throttling_profiles_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateway_throttling_profiles
+    ADD CONSTRAINT gateway_throttling_profiles_pkey PRIMARY KEY (id);
 
 
 --
@@ -48503,6 +48583,13 @@ CREATE INDEX gateways_src_numberlist_id_idx ON class4.gateways USING btree (term
 
 
 --
+-- Name: gateways_throttling_profile_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX gateways_throttling_profile_id_idx ON class4.gateways USING btree (throttling_profile_id);
+
+
+--
 -- Name: index_class4.lnp_databases_on_database_id_and_database_type; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -49445,6 +49532,14 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
+-- Name: gateways gateways_throttling_profile_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_throttling_profile_id_fkey FOREIGN KEY (throttling_profile_id) REFERENCES class4.gateway_throttling_profiles(id);
+
+
+--
 -- Name: gateways gateways_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -50036,6 +50131,7 @@ SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, log
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20250502160207'),
+('20250326161446'),
 ('20250326095443'),
 ('20250313160152'),
 ('20250312173606'),
