@@ -26,7 +26,7 @@ RSpec.describe 'switch22.load_gateway_attributes_cache' do
                          gws.map do |gw|
                            {
                              id: gw.id,
-                             throttling_codes: gtp.codes,
+                             throttling_codes: PG::TextEncoder::Array.new.encode(gtp.codes),
                              throttling_threshold: gtp.threshold,
                              throttling_window: gtp.window,
                              allow_multipart_body: gw.allow_multipart_body
