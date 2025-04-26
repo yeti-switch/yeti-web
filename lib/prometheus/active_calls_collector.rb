@@ -106,6 +106,6 @@ class ActiveCallsCollector < PrometheusExporter::Server::TypeCollector
     labels.merge!(obj['metric_labels']) if obj['metric_labels']
     # custom_labels are passed by PrometheusExporter::Client
     labels.merge!(obj['custom_labels']) if obj['custom_labels']
-    labels
+    labels.stringify_keys.transform_values(&:to_s)
   end
 end

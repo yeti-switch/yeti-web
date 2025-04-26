@@ -22,11 +22,7 @@ class YetiCronJobCollector < PrometheusExporter::Server::TypeCollector
   end
 
   def collect(obj)
-    labels = { name: obj['name'] }
-    # labels are passed by processor
-    labels.merge!(obj['metric_labels']) if obj['metric_labels']
-    # custom_labels are passed by PrometheusExporter::Client
-    labels.merge!(obj['custom_labels']) if obj['custom_labels']
+    labels = gather_labels(obj)
 
     @total_duration_observer.observe(obj['duration'], labels)
     @total_count_observer.observe(1, labels)
@@ -34,6 +30,15 @@ class YetiCronJobCollector < PrometheusExporter::Server::TypeCollector
   end
 
   private
+
+  def gather_labels(obj)
+    labels = { 'name' => obj['name'] }
+    # labels are passed by processor
+    labels.merge!(obj['metric_labels']) if obj['metric_labels']
+    # custom_labels are passed by PrometheusExporter::Client
+    labels.merge!(obj['custom_labels']) if obj['custom_labels']
+    labels.stringify_keys.transform_values(&:to_s)
+  end
 
   def build_count_observer(name, description)
     PrometheusExporter::Metric::Counter.new(

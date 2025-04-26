@@ -28,10 +28,7 @@ class YetiInfoCollector < PrometheusExporter::Server::TypeCollector
     metrics = {}
 
     @data.map do |obj|
-      labels = {}
-      labels.merge!(obj['metric_labels']) if obj['metric_labels']
-      labels.merge!(obj['custom_labels']) if obj['custom_labels']
-
+      labels = gather_labels(obj)
       @observers.each do |name, observer|
         name = name.to_s
         value = obj[name]
@@ -56,5 +53,14 @@ class YetiInfoCollector < PrometheusExporter::Server::TypeCollector
 
   def monotonic_now
     ::Process.clock_gettime(::Process::CLOCK_MONOTONIC)
+  end
+
+  private
+
+  def gather_labels(obj)
+    labels = {}
+    labels.merge!(obj['metric_labels']) if obj['metric_labels']
+    labels.merge!(obj['custom_labels']) if obj['custom_labels']
+    labels.stringify_keys.transform_values(&:to_s)
   end
 end

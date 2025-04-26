@@ -19,8 +19,8 @@ RSpec::Matchers.define :be_a_gauge do |name|
     end
 
     if @with
-      expected = @with.map { |labels, value| [labels, value] }
-      actual = actual_metric.data.map { |labels, value| [labels, value] }
+      expected = @with.map { |labels, value| [labels.stringify_keys.transform_values(&:to_s), value] }
+      actual = actual_metric.data.map { |labels, value| [labels.stringify_keys.transform_values(&:to_s), value] }
       return values_match?(match_array(expected), actual)
     end
 
@@ -29,6 +29,6 @@ RSpec::Matchers.define :be_a_gauge do |name|
 
   chain :with do |value, labels = {}|
     @with ||= {}
-    @with[labels.deep_stringify_keys] = value
+    @with[labels] = value
   end
 end

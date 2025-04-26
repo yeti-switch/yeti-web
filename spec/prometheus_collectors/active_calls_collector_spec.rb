@@ -264,9 +264,40 @@ RSpec.describe ActiveCallsCollector, '#metrics' do
           custom_labels: { b: 'c' }
         }.deep_stringify_keys
       )
+      described_instance.collect(
+        {
+          type: 'yeti_ac',
+          ca: 6,
+          ca_price_originated: 10.26,
+          metric_labels: {
+            id: 1129,
+            external_id: nil,
+            external_type: nil,
+            account_id: 129,
+            account_external_id: nil
+          },
+          custom_labels: { b: 'c' }
+        }.deep_stringify_keys
+      )
+      described_instance.collect(
+        {
+          type: 'yeti_ac',
+          ca: 1,
+          ca_price_originated: 10.26,
+          metric_labels: {
+            id: 1129,
+            external_id: nil,
+            external_type: '',
+            account_id: 129,
+            account_external_id: nil
+          },
+          custom_labels: { b: 'c' }
+        }.deep_stringify_keys
+      )
     end
 
     it 'have all metrics' do
+      puts subject.map(&:to_prometheus_text).join("\n\n")
       expect(subject).to match_array(
                            [
                              be_a_gauge(:yeti_ac_account_originated)
@@ -291,9 +322,11 @@ RSpec.describe ActiveCallsCollector, '#metrics' do
                                .with(7, { a: 'b' }),
                              be_a_gauge(:yeti_ac_ca)
                                .with(5, { b: 'c', id: 1123, external_id: 9123, external_type: 'term', account_id: 123, account_external_id: 456 })
+                               .with(1, { b: 'c', id: 1129, external_id: '', external_type: '', account_id: 129, account_external_id: '' })
                                .with(0, { b: 'c', id: 10_123, external_id: 999_123, external_type: 'term', account_id: 1230, account_external_id: 456 }),
                              be_a_gauge(:yeti_ac_ca_price_originated)
                                .with(10.25, { b: 'c', id: 1123, external_id: 9123, external_type: 'term', account_id: 123, account_external_id: 456 })
+                               .with(10.26, { b: 'c', id: 1129, external_id: '', external_type: '', account_id: 129, account_external_id: '' })
                                .with(0, { b: 'c', id: 10_123, external_id: 999_123, external_type: 'term', account_id: 1230, account_external_id: 456 })
                            ]
                          )
