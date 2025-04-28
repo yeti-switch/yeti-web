@@ -233,9 +233,10 @@ RSpec.describe 'Filter dialpeer records', :js do
       end
     end
 
-    let!(:network_prefix) { FactoryBot.create(:network_prefix, prefix: '892715892') }
+    let!(:network_type) { FactoryBot.create(:network_type) }
+    let!(:network) { FactoryBot.create(:network, network_type:) }
+    let!(:network_prefix) { FactoryBot.create(:network_prefix, prefix: '892715892', network:) }
     let!(:record) { FactoryBot.create(:dialpeer, prefix: '892715892') }
-    let(:network_type) { record.network.network_type }
 
     it 'should be return filtered record' do
       subject
