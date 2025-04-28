@@ -277,4 +277,31 @@ RSpec.describe 'Filter Destination records', :js do
       expect(page).to have_table_cell column: 'Id', exact_text: record.id.to_s
     end
   end
+
+  describe 'filter by network type' do
+    let(:filter_records) do
+      within_filters do
+        fill_in_chosen 'Network Type', with: network_type.name
+      end
+    end
+
+    let!(:network_prefix) { FactoryBot.create(:network_prefix, prefix: '892715892') }
+    let!(:record) { FactoryBot.create(:destination, prefix: '892715892') }
+    let(:network_type) { record.network.network_type }
+
+    before do
+      FactoryBot.create_list(:destination, 3)
+    end
+
+    it 'should be return filtered record' do
+      subject
+
+      expect(page).to have_table_row(count: 1)
+      expect(page).to have_table_row(id: record.id)
+
+      within_filters do
+        expect(page).to have_field_chosen('Network Type', with: network_type.name)
+      end
+    end
+  end
 end

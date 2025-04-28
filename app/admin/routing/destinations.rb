@@ -79,6 +79,12 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                           scope: -> { System::Network.order(:name) },
                           path: '/system_networks/search'
 
+  filter :network_type_id,
+         as: :select,
+         label: 'Network Type',
+         input_html: { class: 'chosen' },
+         collection: -> { System::NetworkType.collection }
+
   filter :external_id_eq, label: 'EXTERNAL_ID'
   filter :valid_from, as: :date_time_range
   filter :valid_till, as: :date_time_range

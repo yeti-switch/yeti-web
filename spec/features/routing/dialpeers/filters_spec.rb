@@ -225,4 +225,27 @@ RSpec.describe 'Filter dialpeer records', :js do
       expect(page).to have_table_cell column: 'Id', text: dialpeer_one.id
     end
   end
+
+  describe 'filter by network type' do
+    let(:filter_records) do
+      within_filters do
+        fill_in_chosen 'Network Type', with: network_type.name
+      end
+    end
+
+    let!(:network_prefix) { FactoryBot.create(:network_prefix, prefix: '892715892') }
+    let!(:record) { FactoryBot.create(:dialpeer, prefix: '892715892') }
+    let(:network_type) { record.network.network_type }
+
+    it 'should be return filtered record' do
+      subject
+
+      expect(page).to have_table_row(count: 1)
+      expect(page).to have_table_row(id: record.id)
+
+      within_filters do
+        expect(page).to have_field_chosen('Network Type', with: network_type.name)
+      end
+    end
+  end
 end
