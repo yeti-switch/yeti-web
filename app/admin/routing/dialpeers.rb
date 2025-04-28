@@ -190,6 +190,12 @@ ActiveAdmin.register Dialpeer do
                           scope: -> { System::Network.order(:name) },
                           path: '/system_networks/search'
 
+  filter :network_type_id,
+         as: :select,
+         label: 'Network Type',
+         input_html: { class: 'chosen' },
+         collection: -> { System::NetworkType.collection }
+
   filter :created_at, as: :date_time_range
   filter :external_id
   filter :exclusive_route, as: :select, collection: [['Yes', true], ['No', false]]
