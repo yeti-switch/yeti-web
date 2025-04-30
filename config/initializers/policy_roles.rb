@@ -2,7 +2,7 @@
 
 policy_roles_path = Rails.root.join 'config/policy_roles.yml'
 if File.file?(policy_roles_path)
-  policy_roles = YAML.load_file(policy_roles_path).deep_symbolize_keys
+  policy_roles = YAML.load_file(policy_roles_path, aliases: true).deep_symbolize_keys
   Rails.configuration.policy_roles = policy_roles
 else
   Rails.configuration.policy_roles = nil
