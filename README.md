@@ -11,11 +11,11 @@
 
 ## Ruby
 
-You have to use Ruby version 3.2 with installed bundler.
+You have to use Ruby version 3.3.5 with installed bundler.
 
 ## Postgresql
 
-It is strongly recommended to use PostgreSQL version 13.
+It is strongly recommended to use PostgreSQL version 16.
 The easiest way to install it - is to use Debian Linux and follow official PostgreSQL instruction
 https://www.postgresql.org/download/linux/debian/
 
@@ -27,10 +27,10 @@ curl https://www.postgresql.org/media/keys/ACCC4CF8.asc	| sudo apt-key add -
 sudo add-apt-repository "deb http://pkg.yeti-switch.org/debian/buster unstable main"
 sudo add-apt-repository "deb http://deb.debian.org/debian buster main buster non-free"
 sudo add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main"
-sudo apt-get install postgresql-13 postgresql-contrib-13 postgresql-13-prefix postgresql-13-pgq3 postgresql-13-pgq-ext postgresql-13-yeti postgresql-13-pllua
+sudo apt-get install postgresql-16 postgresql-contrib-13 postgresql-16-prefix postgresql-16-pgq3 postgresql-16-pgq-ext postgresql-16-yeti postgresql-16-pllua
 sudo apt-get install -t buster-pgdg libpq-dev
 ```
-In addition you need to compile or install from .deb package Yeti PostgreSQL extension `postgresql-13-yeti` https://github.com/yeti-switch/yeti-pg-ext
+In addition you need to compile or install from .deb package Yeti PostgreSQL extension `postgresql-16-yeti` https://github.com/yeti-switch/yeti-pg-ext
 
 ## Preparing yeti-web application
 
