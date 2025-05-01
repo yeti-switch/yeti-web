@@ -3,11 +3,20 @@
 module Cdr
   class CdrPolicy < ::RolePolicy
     section 'Cdr/Cdr'
-
+    self.allowed_actions += %i[allow_full_dst_number recording pcap]
     alias_rule :dump?, :routing_simulation?, to: :perform?
-    alias_rule :download_call_record?, :download_call_record?, to: :perform?
+    Scope = Class.new(RolePolicy::Scope)
 
-    class Scope < ::RolePolicy::Scope
+    def download_call_record?
+      allowed_for_role?(:recording)
+    end
+
+    def dump?
+      allowed_for_role?(:pcap)
+    end
+
+    def allow_full_dst_number?
+      allowed_for_role?(:allow_full_dst_number)
     end
   end
 end
