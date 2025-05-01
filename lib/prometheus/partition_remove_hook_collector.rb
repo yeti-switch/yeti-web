@@ -18,15 +18,22 @@ class PartitionRemoveHookCollector < PrometheusExporter::Server::TypeCollector
   end
 
   def collect(obj)
-    labels = {}
-    # labels are passed by processor
-    labels.merge!(obj['metric_labels']) if obj['metric_labels']
-    # custom_labels are passed by PrometheusExporter::Client
-    labels.merge!(obj['custom_labels']) if obj['custom_labels']
+    labels = gather_labels(obj)
 
     @observers.each do |name, observer|
       value = obj[name]
       observer.observe(value, labels) if value
     end
+  end
+
+  private
+
+  def gather_labels(obj)
+    labels = {}
+    # labels are passed by processor
+    labels.merge!(obj['metric_labels']) if obj['metric_labels']
+    # custom_labels are passed by PrometheusExporter::Client
+    labels.merge!(obj['custom_labels']) if obj['custom_labels']
+    labels.stringify_keys.transform_values(&:to_s)
   end
 end
