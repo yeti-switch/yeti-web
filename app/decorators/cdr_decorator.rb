@@ -34,4 +34,39 @@ class CdrDecorator < Draper::Decorator
 
     model.public_send(attr).round(5)
   end
+
+  def decorated_legb_ruri
+    return nil if model.legb_ruri.nil?
+
+    h.authorized?(:allow_full_dst_number) ? model.legb_ruri : model.legb_ruri.gsub(/([0-9]{3})(?=@)/, '***')
+  end
+
+  def decorated_phone_field(field_name)
+    value = model.public_send(field_name)
+    return nil if value.blank?
+
+    h.authorized?(:allow_full_dst_number) ? value : mask_phone_number(value)
+  end
+
+  def decorated_dst_prefix_in
+    decorated_phone_field(:dst_prefix_in)
+  end
+
+  def decorated_dst_prefix_routing
+    decorated_phone_field(:dst_prefix_routing)
+  end
+
+  def decorated_dst_prefix_out
+    decorated_phone_field(:dst_prefix_out)
+  end
+
+  private
+
+  def mask_phone_number(phone_number)
+    if phone_number.length > 3
+      phone_number[0..-4] + '***'
+    else
+      phone_number
+    end
+  end
 end

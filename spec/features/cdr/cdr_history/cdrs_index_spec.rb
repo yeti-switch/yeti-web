@@ -18,7 +18,8 @@ RSpec.describe 'CDRs index', type: :feature do
     create :cdr,
            :with_id,
            time_start: 1.hour.ago.utc,
-           routing_tag_ids: nil
+           routing_tag_ids: nil,
+           legb_ruri: 'sip:+3809722334455@ims.example.com'
   end
 
   let!(:cdrs) do
@@ -30,13 +31,14 @@ RSpec.describe 'CDRs index', type: :feature do
 
   let(:filter!) { nil }
 
-  it 'shows CDRs with correct routing tags' do
+  it 'shows CDRs with correct routing tags and masked legb_ruri' do
     subject
     expect(page).to have_table_row(count: 3)
 
     within_table_row(id: cdr_no_tags.id) do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
       expect(page).to have_table_cell(column: 'Routing Tags', exact_text: '')
+      expect(page).to have_table_cell(column: 'Legb Ruri', exact_text: 'sip:+3809722334***@ims.example.com')
     end
 
     within_table_row(id: cdrs.first.id) do

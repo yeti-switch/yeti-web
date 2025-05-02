@@ -283,18 +283,18 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :src_name_in
           column :src_prefix_in
           column :from_domain
-          column :dst_prefix_in
+          column :dst_prefix_in, &:decorated_dst_prefix_in
           column :to_domain
           column :ruri_domain
           column :src_prefix_routing
           column :src_area
-          column :dst_prefix_routing
+          column :dst_prefix_routing, &:decorated_dst_prefix_routing
           column :dst_area
           column :lrn
           column :lnp_database
           column :src_name_out
           column :src_prefix_out
-          column :dst_prefix_out
+          column :dst_prefix_out, &:decorated_dst_prefix_out
           column :diversion_in
           column :diversion_out
 
@@ -327,7 +327,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
 
           column :term_gw
-          column :legb_ruri
+          column :legb_ruri, &:decorated_legb_ruri
           column :legb_outbound_proxy
           column :sign_term_transport_protocol
           column(:sign_term_ip) do |cdr_attempt|
@@ -460,12 +460,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :src_name_in
           row :src_prefix_in
           row :from_domain
-          row :dst_prefix_in
+          row :dst_prefix_in, &:decorated_dst_prefix_in
           row :to_domain
           row :ruri_domain
           row :src_prefix_routing
           row :src_area
-          row :dst_prefix_routing
+          row :dst_prefix_routing, &:decorated_dst_prefix_routing
           row :dst_area
 
           row :lrn
@@ -473,7 +473,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           row :src_name_out
           row :src_prefix_out
-          row :dst_prefix_out
+          row :dst_prefix_out, &:decorated_dst_prefix_out
 
           row :diversion_in
           row :diversion_out
@@ -529,7 +529,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
             "#{cdr.auth_orig_lat},#{cdr.auth_orig_lon}".chomp(',')
           end
 
-          row :legb_ruri
+          row :legb_ruri, &:decorated_legb_ruri
           row :legb_outbound_proxy
           row :sign_term_transport_protocol
           row :sign_term_ip do
@@ -668,7 +668,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :src_name_in
     column :src_prefix_in
     column :from_domain
-    column :dst_prefix_in
+    column :dst_prefix_in, &:decorated_dst_prefix_in
     column :to_domain
     column :ruri_domain
 
@@ -679,14 +679,14 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
     column :src_prefix_routing
     column :src_area
-    column :dst_prefix_routing
+    column :dst_prefix_routing, &:decorated_dst_prefix_routing
     column :dst_area
 
     column :lrn
     column :lnp_database
     column :src_name_out
     column :src_prefix_out
-    column :dst_prefix_out
+    column :dst_prefix_out, &:decorated_dst_prefix_out
 
     column :diversion_in
     column :diversion_out
@@ -723,7 +723,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       end
     end
     column :term_gw
-    column :legb_ruri
+    column :legb_ruri, &:decorated_legb_ruri
     column :legb_outbound_proxy
     column('LegB remote socket', sortable: :sign_term_ip) do |cdr|
       if cdr.sign_term_transport_protocol_id.nil?
@@ -829,16 +829,16 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
     column :src_name_in
     column :src_prefix_in
-    column :dst_prefix_in
+    column :dst_prefix_in, &:decorated_dst_prefix_in
     column :src_prefix_routing
     column :src_area
-    column :dst_prefix_routing
+    column :dst_prefix_routing, &:decorated_dst_prefix_routing
     column :dst_area
     column :lrn
     column :lnp_database
     column :src_name_out
     column :src_prefix_out
-    column :dst_prefix_out
+    column :dst_prefix_out, &:decorated_dst_prefix_out
     column :diversion_in
     column :diversion_out
     column :src_country
