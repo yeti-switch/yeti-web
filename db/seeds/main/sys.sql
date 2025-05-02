@@ -162,6 +162,7 @@ INSERT INTO sys.states(key,value) VALUES('auth_credentials',1);
 INSERT INTO sys.states(key,value) VALUES('options_probers',1);
 
 INSERT INTO sys.states(key,value) VALUES('stir_shaken_signing_certificates',1);
+insert into sys.states(key,value) values('gateways_cache', 1);
 
 
 --

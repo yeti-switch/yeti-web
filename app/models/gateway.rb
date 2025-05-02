@@ -7,6 +7,7 @@
 #  id                               :integer(4)       not null, primary key
 #  acd_limit                        :float(24)        default(0.0), not null
 #  allow_1xx_without_to_tag         :boolean          default(FALSE), not null
+#  allow_multipart_body             :boolean          default(TRUE), not null
 #  allow_origination                :boolean          default(TRUE), not null
 #  allow_termination                :boolean          default(TRUE), not null
 #  asr_limit                        :float(24)        default(0.0), not null
@@ -133,16 +134,18 @@
 #  term_proxy_transport_protocol_id :integer(2)       default(1), not null
 #  termination_dst_numberlist_id    :integer(2)
 #  termination_src_numberlist_id    :integer(2)
+#  throttling_profile_id            :integer(2)
 #  transparent_dialog_id            :boolean          default(FALSE), not null
 #  transport_protocol_id            :integer(2)       default(1), not null
 #  tx_inband_dtmf_filtering_mode_id :integer(2)       default(1), not null
 #
 # Indexes
 #
-#  gateways_contractor_id_idx      (contractor_id)
-#  gateways_dst_numberlist_id_idx  (termination_dst_numberlist_id)
-#  gateways_name_unique            (name) UNIQUE
-#  gateways_src_numberlist_id_idx  (termination_src_numberlist_id)
+#  gateways_contractor_id_idx          (contractor_id)
+#  gateways_dst_numberlist_id_idx      (termination_dst_numberlist_id)
+#  gateways_name_unique                (name) UNIQUE
+#  gateways_src_numberlist_id_idx      (termination_src_numberlist_id)
+#  gateways_throttling_profile_id_idx  (throttling_profile_id)
 #
 # Foreign Keys
 #
@@ -169,6 +172,7 @@
 #  gateways_stir_shaken_crt_id_fkey                (stir_shaken_crt_id => stir_shaken_signing_certificates.id)
 #  gateways_term_disconnect_policy_id_fkey         (term_disconnect_policy_id => disconnect_policy.id)
 #  gateways_term_proxy_transport_protocol_id_fkey  (term_proxy_transport_protocol_id => transport_protocols.id)
+#  gateways_throttling_profile_id_fkey             (throttling_profile_id => gateway_throttling_profiles.id)
 #  gateways_transport_protocol_id_fkey             (transport_protocol_id => transport_protocols.id)
 #  gateways_tx_inband_dtmf_filtering_mode_id_fkey  (tx_inband_dtmf_filtering_mode_id => gateway_inband_dtmf_filtering_modes.id)
 #
@@ -293,6 +297,7 @@ class Gateway < ApplicationRecord
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
   belongs_to :diversion_send_mode, class_name: 'Equipment::GatewayDiversionSendMode', foreign_key: :diversion_send_mode_id
   belongs_to :stir_shaken_crt, class_name: 'Equipment::StirShaken::SigningCertificate', foreign_key: :stir_shaken_crt_id, optional: :true
+  belongs_to :throttling_profile, class_name: 'Equipment::GatewayThrottlingProfile', foreign_key: :throttling_profile_id, optional: true
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :api_accesses, class_name: 'System::ApiAccess', foreign_key: :provision_gateway_id, dependent: :nullify
@@ -544,7 +549,7 @@ class Gateway < ApplicationRecord
 
   include Yeti::IncomingAuthReloader
   include Yeti::StateUpdater
-  self.state_name = 'auth_credentials'
+  self.state_names = %w[auth_credentials gateways_cache]
 
   private
 
