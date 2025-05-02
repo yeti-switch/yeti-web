@@ -3520,8 +3520,8 @@ CREATE TABLE class4.gateways (
     network_protocol_priority_id smallint DEFAULT 0 NOT NULL,
     media_encryption_mode_id smallint DEFAULT 0 NOT NULL,
     preserve_anonymous_from_domain boolean DEFAULT false NOT NULL,
-    termination_src_numberlist_id smallint,
-    termination_dst_numberlist_id smallint,
+    termination_src_numberlist_id integer,
+    termination_dst_numberlist_id integer,
     lua_script_id smallint,
     rtp_acl inet[],
     orig_append_headers_reply character varying[] DEFAULT '{}'::character varying[] NOT NULL,
@@ -15993,7 +15993,7 @@ CREATE FUNCTION switch20.lua_exec(function_id integer, arg switch20.lua_call_con
 
 CREATE TABLE class4.numberlist_items (
     id integer NOT NULL,
-    numberlist_id smallint NOT NULL,
+    numberlist_id integer NOT NULL,
     key character varying NOT NULL,
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
@@ -40607,7 +40607,7 @@ ALTER SEQUENCE class4.blacklist_items_id_seq OWNED BY class4.numberlist_items.id
 --
 
 CREATE TABLE class4.numberlists (
-    id smallint NOT NULL,
+    id integer NOT NULL,
     name character varying NOT NULL,
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
@@ -40849,8 +40849,8 @@ CREATE TABLE class4.customers_auth (
     diversion_policy_id smallint DEFAULT 1 NOT NULL,
     diversion_rewrite_rule character varying,
     diversion_rewrite_result character varying,
-    dst_numberlist_id smallint,
-    src_numberlist_id smallint,
+    dst_numberlist_id integer,
+    src_numberlist_id integer,
     routing_plan_id integer NOT NULL,
     allow_receive_rate_limit boolean DEFAULT false NOT NULL,
     send_billing_information boolean DEFAULT false NOT NULL,
@@ -40954,8 +40954,8 @@ CREATE TABLE class4.customers_auth_normalized (
     diversion_policy_id smallint DEFAULT 1 NOT NULL,
     diversion_rewrite_rule character varying,
     diversion_rewrite_result character varying,
-    dst_numberlist_id smallint,
-    src_numberlist_id smallint,
+    dst_numberlist_id integer,
+    src_numberlist_id integer,
     routing_plan_id integer NOT NULL,
     allow_receive_rate_limit boolean DEFAULT false NOT NULL,
     send_billing_information boolean DEFAULT false NOT NULL,
@@ -42155,8 +42155,8 @@ CREATE TABLE class4.routing_plans (
     validate_dst_number_network boolean DEFAULT false NOT NULL,
     validate_src_number_format boolean DEFAULT false NOT NULL,
     validate_src_number_network boolean DEFAULT false NOT NULL,
-    src_numberlist_id smallint,
-    dst_numberlist_id smallint
+    src_numberlist_id integer,
+    dst_numberlist_id integer
 );
 
 
@@ -49429,6 +49429,22 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
+-- Name: gateways gateways_termination_dst_numberlist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_termination_dst_numberlist_id_fkey FOREIGN KEY (termination_dst_numberlist_id) REFERENCES class4.numberlists(id);
+
+
+--
+-- Name: gateways gateways_termination_src_numberlist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_termination_src_numberlist_id_fkey FOREIGN KEY (termination_src_numberlist_id) REFERENCES class4.numberlists(id);
+
+
+--
 -- Name: gateways gateways_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -50019,6 +50035,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250502160207'),
 ('20250326095443'),
 ('20250313160152'),
 ('20250312173606'),

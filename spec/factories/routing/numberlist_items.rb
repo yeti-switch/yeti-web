@@ -19,7 +19,7 @@
 #  updated_at         :timestamptz
 #  action_id          :integer(2)
 #  lua_script_id      :integer(2)
-#  numberlist_id      :integer(2)       not null
+#  numberlist_id      :integer(4)       not null
 #  tag_action_id      :integer(2)
 #
 # Indexes

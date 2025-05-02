@@ -4,7 +4,7 @@
 #
 # Table name: class4.numberlists
 #
-#  id                         :integer(2)       not null, primary key
+#  id                         :integer(4)       not null, primary key
 #  default_dst_rewrite_result :string
 #  default_dst_rewrite_rule   :string
 #  default_src_rewrite_result :string

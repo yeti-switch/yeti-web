@@ -13,10 +13,10 @@
 #  validate_dst_number_network :boolean          default(FALSE), not null
 #  validate_src_number_format  :boolean          default(FALSE), not null
 #  validate_src_number_network :boolean          default(FALSE), not null
-#  dst_numberlist_id           :integer(2)
+#  dst_numberlist_id           :integer(4)
 #  external_id                 :bigint(8)
 #  sorting_id                  :integer(4)       default(1), not null
-#  src_numberlist_id           :integer(2)
+#  src_numberlist_id           :integer(4)
 #
 # Indexes
 #
