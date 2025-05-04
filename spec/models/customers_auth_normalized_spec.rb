@@ -54,7 +54,7 @@
 #  customers_auth_id                :integer(4)       not null
 #  diversion_policy_id              :integer(2)       default(1), not null
 #  dst_number_field_id              :integer(2)       default(1), not null
-#  dst_numberlist_id                :integer(2)
+#  dst_numberlist_id                :integer(4)
 #  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_id                       :integer(4)       not null
@@ -69,7 +69,7 @@
 #  routing_plan_id                  :integer(4)       not null
 #  src_name_field_id                :integer(2)       default(1), not null
 #  src_number_field_id              :integer(2)       default(1), not null
-#  src_numberlist_id                :integer(2)
+#  src_numberlist_id                :integer(4)
 #  ss_invalid_identity_action_id    :integer(2)       default(0), not null
 #  ss_mode_id                       :integer(2)       default(0), not null
 #  ss_no_identity_action_id         :integer(2)       default(0), not null

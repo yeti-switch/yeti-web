@@ -131,8 +131,8 @@
 #  stir_shaken_mode_id              :integer(2)       default(0), not null
 #  term_disconnect_policy_id        :integer(4)
 #  term_proxy_transport_protocol_id :integer(2)       default(1), not null
-#  termination_dst_numberlist_id    :integer(2)
-#  termination_src_numberlist_id    :integer(2)
+#  termination_dst_numberlist_id    :integer(4)
+#  termination_src_numberlist_id    :integer(4)
 #  transparent_dialog_id            :boolean          default(FALSE), not null
 #  transport_protocol_id            :integer(2)       default(1), not null
 #  tx_inband_dtmf_filtering_mode_id :integer(2)       default(1), not null
@@ -169,6 +169,8 @@
 #  gateways_stir_shaken_crt_id_fkey                (stir_shaken_crt_id => stir_shaken_signing_certificates.id)
 #  gateways_term_disconnect_policy_id_fkey         (term_disconnect_policy_id => disconnect_policy.id)
 #  gateways_term_proxy_transport_protocol_id_fkey  (term_proxy_transport_protocol_id => transport_protocols.id)
+#  gateways_termination_dst_numberlist_id_fkey     (termination_dst_numberlist_id => numberlists.id)
+#  gateways_termination_src_numberlist_id_fkey     (termination_src_numberlist_id => numberlists.id)
 #  gateways_transport_protocol_id_fkey             (transport_protocol_id => transport_protocols.id)
 #  gateways_tx_inband_dtmf_filtering_mode_id_fkey  (tx_inband_dtmf_filtering_mode_id => gateway_inband_dtmf_filtering_modes.id)
 #
