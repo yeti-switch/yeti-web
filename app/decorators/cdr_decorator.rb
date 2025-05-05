@@ -38,7 +38,7 @@ class CdrDecorator < Draper::Decorator
   def decorated_legb_ruri
     return nil if model.legb_ruri.nil?
 
-    h.authorized?(:allow_full_dst_number) ? model.legb_ruri : model.legb_ruri.gsub(/([0-9]{3})(?=@)/, '***')
+    h.authorized?(:allow_full_dst_number) ? model.legb_ruri : model.legb_ruri.gsub(Cdr::Cdr::MASK_PHONE_NUMBER_REGEXP, '***')
   end
 
   def decorated_phone_field(field_name)

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Routing::SimulationForm < ApplicationForm
+  with_policy_class 'Routing::SimulationFormPolicy'
+
   def self.model_name
     ActiveModel::Name.new(self, nil, 'Routing::Simulation')
   end

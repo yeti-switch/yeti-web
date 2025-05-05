@@ -213,6 +213,8 @@ class Cdr::Cdr < Cdr::Base
     node sign_term_transport_protocol package_counter
   ].freeze
 
+  MASK_PHONE_NUMBER_REGEXP = /([0-9]{3})(?=@)/
+
   # Used to adjust their format while create CDR Export.
   TIME_SPECIFIC_FIELDS = %w[time_start time_end time_connect].freeze
 
