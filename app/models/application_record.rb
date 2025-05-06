@@ -5,6 +5,14 @@ class ApplicationRecord < ActiveRecord::Base
   connects_to database: { writing: :primary, reading: :primary }
   include WithJsonAttributes
 
+  PG_CONNECTION_ERRORS = [
+    PG::ConnectionBad,
+    PG::Error,
+    ActiveRecord::ConnectionNotEstablished,
+    ActiveRecord::NoDatabaseError,
+    ActiveRecord::SerializationFailure
+  ].freeze
+
   def self.array_belongs_to(name, class_name:, foreign_key:)
     define_method(name) do
       relation = class_name.is_a?(String) ? class_name.constantize : class_name
