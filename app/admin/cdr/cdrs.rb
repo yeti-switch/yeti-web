@@ -24,6 +24,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
   controller do
+    around_action :try_cdr_replica
+
     def columns_visibility?
       true
     end
@@ -38,6 +40,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       else
         super.preload(Cdr::Cdr::ADMIN_PRELOAD_LIST)
       end
+    end
+
+    def try_cdr_replica(&)
+      Cdr::Base.connected_to(role: :reading, &)
     end
   end
 

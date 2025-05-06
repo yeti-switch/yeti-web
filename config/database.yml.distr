@@ -27,3 +27,18 @@ production:
     migrations_paths: db/cdr_migrate
     #min_messages: warning
     schema_cache_path: tmp/cdr_schema_cache.yml
+  cdr_replica:
+    adapter: postgresql
+    encoding: unicode
+    database: cdr
+    pool: 5
+    username: yeti
+    password: somepassword
+    host: 127.0.0.1
+    schema_search_path: 'cdr, reports, billing, public'
+    port: 5432
+    migrations_paths: db/cdr_migrate
+    #min_messages: warning
+    schema_cache_path: tmp/cdr_schema_cache.yml
+    replica: true
+
