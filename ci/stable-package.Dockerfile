@@ -6,6 +6,7 @@ FROM debian:bookworm AS builder
 # Install dependencies
 RUN apt-get update -q && apt-get dist-upgrade -yq \
     && apt-get install --no-install-recommends -yq \
+      apt-utils \
       build-essential \
       ca-certificates \
       curl \
@@ -13,7 +14,10 @@ RUN apt-get update -q && apt-get dist-upgrade -yq \
       libc-dev \
       libpq-dev \
       libssl-dev \
-      pkg-config
+      pkg-config \
+      python3 \
+      python3-venv \
+      python3-pip
 
 # Install Rust via rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -24,6 +28,11 @@ ENV RUSTFLAGS="-C target-cpu=native"
 RUN git clone https://github.com/exyi/pg2parquet.git /src
 WORKDIR /src/cli
 RUN cargo build --release
+
+# Creating virtualenv and install s3cmd
+RUN python3 -m venv /venv && \
+    /venv/bin/pip install --upgrade pip && \
+    /venv/bin/pip install s3cmd
 
 # Use the official Debian minimal image
 FROM debian:bookworm-slim
@@ -37,30 +46,39 @@ ENV \
   BUNDLE_GEMFILE=/opt/yeti-web/Gemfile \
   GEM_PATH=/opt/yeti-web/vendor/bundler
 
+# Copy yeti-web debian package
+WORKDIR /
+COPY *.deb ./
+
 # Install dependencies
 RUN apt-get update -q && apt-get dist-upgrade -yq \
     && apt-get install --no-install-recommends -yq \
+      apt-utils \
       ca-certificates \
-      cron \
       curl \
       gnupg \
-      libpq5 \
-      libpq-dev \
-      procps \
-      python3-pip \
-      sudo \
     && echo "deb http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main" > /etc/apt/sources.list.d/apt_postgresql_org_pub_repos_apt.list \
     && curl -sSl https://www.postgresql.org/media/keys/ACCC4CF8.asc -o /etc/apt/trusted.gpg.d/pgdg-key.asc \
-    # Install s3cmd package for uploading to s3 bucket
-    && pip install --quiet --no-cache-dir --break-system-packages s3cmd \
+    && apt-get update -q \
+    && apt-get install --no-install-recommends -yq \
+      cron \
+      libpq5 \
+      libpq-dev \
+      libyaml-0-2 \
+      procps \
+      python3 \
+      postgresql-client-16 \
+      rbenv \
+      sudo \
+    && dpkg -i /*.deb && rm -f /*.deb \
       && apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Copy binary file from the builder stage
+# Copy binary file and virtualenv from the builder stage
 COPY --from=builder /src/cli/target/release/pg2parquet /usr/local/bin/pg2parquet
+COPY --from=builder /venv /venv
 
-# Install Ruby debian package
-COPY *.deb /
-RUN dpkg -i /*.deb || apt-get install -f --no-install-recommends -yq && rm -f /*.deb
+# Add virtualenv to PATH
+ENV PATH="/venv/bin:$PATH"
 
 EXPOSE 3000/tcp
 
