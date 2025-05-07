@@ -64,13 +64,10 @@ RUN apt-get update -q && apt-get dist-upgrade -yq \
       cron \
       libpq5 \
       libpq-dev \
-      libyaml-0-2 \
       procps \
       python3 \
-      postgresql-client-16 \
-      rbenv \
       sudo \
-    && dpkg -i /*.deb && rm -f /*.deb \
+    && apt-get install -yq /*.deb && rm -f /*.deb \
       && apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Copy binary file and virtualenv from the builder stage
