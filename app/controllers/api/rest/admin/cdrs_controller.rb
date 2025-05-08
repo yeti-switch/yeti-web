@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::CdrsController < Api::Rest::Admin::BaseController
+  include TryCdrReplica
+
+  around_action :try_cdr_replica, only: %i[index show recording]
   before_action :find_cdr, only: :recording
+
+  def index = super
+
+  def show = super
+
   def recording
     if @cdr.has_recording?
       response.headers['X-Accel-Redirect'] = @cdr.call_record_filename

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Api::Rest::Customer::V1::IncomingCdrsController < Api::Rest::Customer::V1::BaseController
+  include TryCdrReplica
+
+  around_action :try_cdr_replica
   before_action :find_cdr, only: :rec
 
   def rec
