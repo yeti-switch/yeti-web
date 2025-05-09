@@ -394,8 +394,12 @@ ActiveAdmin.register Gateway do
               f.input :transit_headers_from_origination
               f.input :transit_headers_from_termination
               f.input :sip_interface_name
-              f.input :incoming_auth_username, hint: "#{link_to('Сlick to fill random username', 'javascript:void(0)', onclick: 'generateCredential(this)')}. #{t('formtastic.hints.gateway.incoming_auth_username')}".html_safe
-              f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
+
+              if f.object.external_id.nil? || authorized?(:allow_incoming_auth_credentials)
+                f.input :incoming_auth_username, hint: "#{link_to('Сlick to fill random username', 'javascript:void(0)', onclick: 'generateCredential(this)')}. #{t('formtastic.hints.gateway.incoming_auth_username')}".html_safe
+                f.input :incoming_auth_password, as: :string, input_html: { autocomplete: 'off' }, hint: link_to('Сlick to fill random password', 'javascript:void(0)', onclick: 'generateCredential(this)')
+              end
+
               f.input :incoming_auth_allow_jwt
             end
 
@@ -613,8 +617,10 @@ ActiveAdmin.register Gateway do
             row :dialog_nat_handling
             row :orig_disconnect_policy
 
-            row :incoming_auth_username
-            row :incoming_auth_password
+            if s.external_id.nil? || authorized?(:allow_incoming_auth_credentials)
+              row :incoming_auth_username
+              row :incoming_auth_password
+            end
             row :incoming_auth_allow_jwt
           end
         end
