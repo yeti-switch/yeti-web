@@ -7,7 +7,8 @@ RSpec.describe 'Update Gateway', type: :feature, js: true do
     visit edit_gateway_path(gateway.id)
   end
 
-  let!(:gateway) { FactoryBot.create(:gateway, **gateway_attrs) }
+  let!(:gateway) { FactoryBot.create(:gateway, *gateway_traits, **gateway_attrs) }
+  let(:gateway_traits) { [] }
   let(:gateway_attrs) { {} }
 
   context 'when gateway has assigned numberlists' do
@@ -116,6 +117,71 @@ RSpec.describe 'Update Gateway', type: :feature, js: true do
         expect(incoming_auth_password).to be_present
         expect(incoming_auth_password.value).to be_present
         expect(incoming_auth_password.value).to eq('TestCredential')
+      end
+    end
+  end
+
+  context 'when gateway is none external with credentials' do
+    let(:gateway_traits) { super() + [:with_incoming_auth] }
+    let(:gateway_attrs) do
+      super().merge(incoming_auth_username: old_incoming_username, incoming_auth_password: old_incoming_password)
+    end
+
+    let(:old_incoming_username) { 'old_incoming_username' }
+    let(:old_incoming_password) { 'old_incoming_password' }
+
+    it 'should display credential fields' do
+      subject
+
+      switch_tab('Signaling')
+      expect(page).to have_field('Incoming auth username', with: old_incoming_username)
+      expect(page).to have_field('Incoming auth password', with: old_incoming_password)
+    end
+  end
+
+  context 'when gateway is external' do
+    let(:gateway_traits) { super() + [:with_incoming_auth] }
+    let(:gateway_attrs) do
+      super().merge(
+        incoming_auth_username: old_incoming_username,
+        incoming_auth_password: old_incoming_password,
+        external_id: 9_999
+      )
+    end
+
+    let(:old_incoming_username) { 'old_incoming_username' }
+    let(:old_incoming_password) { 'old_incoming_password' }
+
+    it 'should not display credential fields but not change value while update' do
+      subject
+
+      switch_tab('Signaling')
+      expect(page).not_to have_field('Incoming auth username', with: old_incoming_username)
+      expect(page).not_to have_field('Incoming auth password', with: old_incoming_password)
+
+      click_on 'Update Gateway'
+      expect(page).to have_flash_message('Gateway was successfully updated.', type: :notice)
+
+      expect(gateway.reload).to have_attributes(
+                                  incoming_auth_username: old_incoming_username,
+                                  incoming_auth_password: old_incoming_password
+                                )
+    end
+
+    context 'when user have policy to allow_incoming_auth_credentials' do
+      before do
+        policy_roles = Rails.configuration.policy_roles.deep_merge!(
+          user: { :Gateway => { allow_incoming_auth_credentials: true } }
+        )
+        allow(Rails.configuration).to receive(:policy_roles).and_return(policy_roles)
+      end
+
+      it 'should display credential fields' do
+        subject
+
+        switch_tab('Signaling')
+        expect(page).to have_field('Incoming auth username', with: old_incoming_username)
+        expect(page).to have_field('Incoming auth password', with: old_incoming_password)
       end
     end
   end
