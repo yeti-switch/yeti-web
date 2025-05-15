@@ -22,7 +22,6 @@ RUN apt-get update -q && apt-get dist-upgrade -yq \
 # Install Rust via rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
-ENV RUSTFLAGS="-C target-cpu=native"
 
 # Cloning and building pg2parquet
 RUN git clone https://github.com/exyi/pg2parquet.git /src
