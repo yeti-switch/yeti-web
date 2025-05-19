@@ -61,6 +61,6 @@ class Equipment::Radius::AuthProfile < ApplicationRecord
   end
 
   def display_name
-    "#{id} | #{name}"
+    "#{name} | #{id}"
   end
 end

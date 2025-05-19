@@ -3544,8 +3544,7 @@ CREATE TABLE class4.gateways (
     termination_subscriber_cps_limit smallint,
     termination_subscriber_cps_wsize smallint DEFAULT 1 NOT NULL,
     dump_level_id smallint DEFAULT 0 NOT NULL,
-    throttling_profile_id smallint,
-    allow_multipart_body boolean DEFAULT true NOT NULL
+    throttling_profile_id smallint
 );
 
 
@@ -31662,7 +31661,7 @@ $$;
 -- Name: load_gateway_attributes_cache(); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.load_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold real, throttling_window smallint, allow_multipart_body boolean)
+CREATE FUNCTION switch22.load_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold real, throttling_window smallint)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -31671,8 +31670,7 @@ BEGIN
       gw.id::bigint,
       gtp.codes as throttling_codes,
       gtp.threshold as throttling_threshold,
-      gtp."window" as throttling_window,
-      gw.allow_multipart_body
+      gtp."window" as throttling_window
     FROM class4.gateways gw
     LEFT JOIN class4.gateway_throttling_profiles gtp ON gtp.id = gw.throttling_profile_id
     ORDER BY gw.id;

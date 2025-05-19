@@ -60,6 +60,6 @@ class Equipment::Radius::AccountingProfile < ApplicationRecord
   end
 
   def display_name
-    "#{id} | #{name}"
+    "#{name} | #{id}"
   end
 end

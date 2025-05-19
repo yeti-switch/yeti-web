@@ -21,4 +21,8 @@ class Equipment::StirShaken::SigningCertificate < ApplicationRecord
 
   include Yeti::StateUpdater
   self.state_names = ['stir_shaken_signing_certificates']
+
+  def display_name
+    "#{name} | #{id}"
+  end
 end

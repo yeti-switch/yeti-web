@@ -496,7 +496,6 @@ ActiveAdmin.register Gateway do
       end
       tab :media do
         f.inputs 'Media settings' do
-          f.input :allow_multipart_body
           f.input :sdp_c_location, as: :select, include_blank: false
           f.input :codec_group, input_html: { class: 'chosen' }
           f.input :try_avoid_transcoding
@@ -701,7 +700,6 @@ ActiveAdmin.register Gateway do
 
       tab :media do
         attributes_table_for s do
-          row :allow_multipart_body
           row :sdp_c_location
           row :codec_group, input_html: { class: 'chosen' }
           row :try_avoid_transcoding
