@@ -11,7 +11,12 @@ module Destination
     attribute :ids_sql, :string
 
     validates :initial_rate, :next_rate, :connect_fee, numericality: true, allow_nil: true
-    validates :initial_interval, :next_interval, numericality: { greater_than: 0, less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT }, allow_nil: true
+    validates :initial_interval, :next_interval, numericality: {
+      greater_than: 0,
+      less_than_or_equal_to: ApplicationRecord::PG_MAX_SMALLINT,
+      only_integer: true,
+      allow_nil: true
+    }
     validates :ids_sql, :apply_time, presence: true
     validate :validate_apply_time
     validate :validate_rate_fields

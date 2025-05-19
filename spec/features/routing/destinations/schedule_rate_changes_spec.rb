@@ -121,6 +121,18 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
         }
       )
     end
+
+    context 'when initial_interval is float' do
+      let(:initial_interval) { '6.0' }
+
+      it 'should show error message' do
+        expect do
+          subject
+
+          expect(page).to have_flash_message('Initial interval must be an integer', type: :error)
+        end.not_to have_enqueued_job(Worker::ScheduleRateChanges)
+      end
+    end
   end
 
   context 'when selected only apply_time and initial_rate field' do
@@ -174,6 +186,18 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
           connect_fee: nil
         }
       )
+    end
+
+    context 'when next_interval is float' do
+      let(:next_interval) { '6.0' }
+
+      it 'should show error message' do
+        expect do
+          subject
+
+          expect(page).to have_flash_message('Next interval must be an integer', type: :error)
+        end.not_to have_enqueued_job(Worker::ScheduleRateChanges)
+      end
     end
   end
 
