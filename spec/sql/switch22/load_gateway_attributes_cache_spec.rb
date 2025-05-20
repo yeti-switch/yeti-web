@@ -15,9 +15,7 @@ RSpec.describe 'switch22.load_gateway_attributes_cache' do
 
   let!(:gws) do
     [
-      create(:gateway,
-             allow_multipart_body: false,
-             throttling_profile: gtp)
+      create(:gateway, throttling_profile: gtp)
     ]
   end
 
@@ -28,8 +26,7 @@ RSpec.describe 'switch22.load_gateway_attributes_cache' do
                              id: gw.id,
                              throttling_codes: PG::TextEncoder::Array.new.encode(gtp.codes),
                              throttling_threshold: gtp.threshold,
-                             throttling_window: gtp.window,
-                             allow_multipart_body: gw.allow_multipart_body
+                             throttling_window: gtp.window
                            }
                          end
                        )
