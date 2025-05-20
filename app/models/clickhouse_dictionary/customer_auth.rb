@@ -6,6 +6,7 @@ module ClickhouseDictionary
 
     attributes :id,
                :name,
+               :external_type,
                :external_id,
                :customer_id,
                :account_id,

@@ -16,6 +16,7 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::CustomerAuthsController do
           {
             id: record.id,
             name: record.name,
+            external_type: record.external_type,
             external_id: record.external_id,
             customer_id: record.customer_id,
             account_id: record.account_id,
