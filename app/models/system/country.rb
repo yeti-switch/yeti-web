@@ -24,7 +24,7 @@ class System::Country < ApplicationRecord
   scope :ordered_by, ->(term) { order(term) }
 
   def display_name
-    "#{id} | #{name}"
+    "#{name} | #{id}"
   end
 
   def self.collection

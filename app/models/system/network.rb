@@ -39,7 +39,7 @@ class System::Network < ApplicationRecord
   include WithPaperTrail
 
   def display_name
-    "#{id} | #{name}"
+    "#{name} | #{id}"
   end
 
   def self.collection

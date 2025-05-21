@@ -4,7 +4,7 @@ module Yeti
   module StateUpdater
     extend ActiveSupport::Concern
     included do
-      class_attribute :state_name
+      class_attribute :state_names
 
       after_save do
         self.class.increment_state_value
@@ -15,7 +15,9 @@ module Yeti
       end
 
       def self.increment_state_value
-        System::State.increment_counter(:value, state_name)
+        state_names.each do |s|
+          System::State.increment_counter(:value, s)
+        end
       end
     end
   end

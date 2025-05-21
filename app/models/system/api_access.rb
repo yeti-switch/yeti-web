@@ -95,7 +95,7 @@ class System::ApiAccess < ApplicationRecord
   end
 
   def name
-    "#{id} | #{login}"
+    "#{login} | #{id}"
   end
 
   private

@@ -20,5 +20,9 @@ class Equipment::StirShaken::SigningCertificate < ApplicationRecord
   validates :name, :certificate, :key, :x5u, presence: true
 
   include Yeti::StateUpdater
-  self.state_name = 'stir_shaken_signing_certificates'
+  self.state_names = ['stir_shaken_signing_certificates']
+
+  def display_name
+    "#{name} | #{id}"
+  end
 end
