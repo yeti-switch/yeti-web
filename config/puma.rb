@@ -69,6 +69,9 @@ before_fork do
 end
 
 on_worker_boot do
+  require 'semantic_logger'
+  SemanticLogger.reopen
+
   if PrometheusConfig.enabled?
     require 'prometheus_exporter/instrumentation'
     PrometheusExporter::Instrumentation::Process.start(type: 'web')

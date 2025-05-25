@@ -152,3 +152,7 @@ gem 'cryptomus', '~> 0.2.2'
 gem 'opentelemetry-exporter-otlp'
 gem 'opentelemetry-instrumentation-all'
 gem 'opentelemetry-sdk'
+
+gem 'semantic_logger', '~> 4.16'
+
+gem 'elasticsearch', '~> 9.0'

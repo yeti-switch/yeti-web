@@ -82,6 +82,7 @@ RSpec.describe 'Index Log Api Logs', type: :feature do
 
       context 'when there is NO any "api_log_tags" configuration' do
         before do
+          allow(YetiConfig.api_logs).to receive(:tags).and_return(nil)
           allow(YetiConfig).to receive(:api_log_tags).and_return(nil)
           visit api_logs_path
         end

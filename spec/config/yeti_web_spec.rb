@@ -60,7 +60,13 @@ RSpec.describe 'config/yeti_web.yml' do
       invoice: {
         auto_approve: boolean
       },
-      default_ldap_roles: a_kind_of(Array)
+      default_ldap_roles: a_kind_of(Array),
+      api_logs: {
+        adapter: a_kind_of(String),
+        index: a_kind_of(String),
+        url: a_kind_of(String),
+        tags: a_kind_of(Array)
+      }
     }
   end
 

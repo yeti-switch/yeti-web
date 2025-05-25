@@ -49,7 +49,7 @@ RSpec.describe Api::Rest::Admin::AreaPrefixesController, type: :request do
 
     context 'when YETI WEB is configured with API Log tag USA' do
       before do
-        allow(YetiConfig).to receive(:api_log_tags).and_return(%w[USA])
+        allow(YetiConfig.api_logs).to receive(:tags).and_return(%w[USA])
       end
 
       it 'creates Log::ApiLog with USA tag' do
@@ -60,7 +60,7 @@ RSpec.describe Api::Rest::Admin::AreaPrefixesController, type: :request do
 
     context 'when there is NO API Log Tags configuration' do
       before do
-        allow(YetiConfig).to receive(:api_log_tags).and_return(nil)
+        allow(YetiConfig.api_logs).to receive(:tags).and_return(nil)
       end
 
       it 'creates Log::ApiLog without tags' do

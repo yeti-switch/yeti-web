@@ -44,9 +44,6 @@ keep_expired_dialpeers_days:
 keep_expired_destinations_days:
 keep_expired_destinations_days:
 
-api_log_tags:
-  - SOME_TAG_FOR_API_LOG
-
 routing_simulation_default_interface: internal
 
 invoice:
@@ -54,3 +51,10 @@ invoice:
 
 default_ldap_roles:
   - root
+
+api_logs:
+  adapter: db
+  index: ''
+  url: ''
+  tags:
+    - SOME_TAG_FOR_API_LOG

@@ -187,11 +187,17 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :request) do
-    allow(ApiLogThread).to receive(:new).and_yield
+    allow(ApiLogger::ApiLogThread).to receive(:new).and_yield
+
+    # Capture api logs in tests
+    allow_any_instance_of(ApiLogger).to receive(:logger).and_return(SemanticLogger::Test::CaptureLogEvents.new)
   end
 
   config.before(:each, type: :controller) do
-    allow(ApiLogThread).to receive(:new).and_yield
+    allow(ApiLogger::ApiLogThread).to receive(:new).and_yield
+
+    # Capture api logs in tests
+    allow_any_instance_of(ApiLogger).to receive(:logger).and_return(SemanticLogger::Test::CaptureLogEvents.new)
   end
 end
 

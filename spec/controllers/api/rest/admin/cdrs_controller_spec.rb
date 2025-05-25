@@ -428,6 +428,15 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
         end
       end
     end
+
+    it_behaves_like :save_api_logs do
+      let(:message) { '200 GET /api/rest/admin/cdrs Api::Rest::Admin::CdrsController 0.0.0.0' }
+      let(:controller) { 'Api::Rest::Admin::CdrsController' }
+      let(:action) { 'index' }
+      let(:path) { '/api/rest/admin/cdrs' }
+      let(:method) { 'GET' }
+      let(:status) { 200 }
+    end
   end
 
   describe 'GET index with ransack filters' do
@@ -551,11 +560,9 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
       create :cdr, :with_id
     end
 
-    subject do
-      get :show, params: {
-        id: cdr.id, include: includes.join(',')
-      }
-    end
+    subject { get :show, params: { id:, include: includes.join(',') } }
+
+    let(:id) { cdr.id }
     let(:includes) do
       %w[rateplan dialpeer pop routing-group destination customer-auth vendor customer vendor-acc customer-acc orig-gw term-gw routing-plan src-country src-network src-network-type dst-country dst-network dst-network-type]
     end
@@ -756,6 +763,34 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
           )
         )
       )
+    end
+
+    it_behaves_like :save_api_logs do
+      let(:message) { "200 GET /api/rest/admin/cdrs/#{id} Api::Rest::Admin::CdrsController 0.0.0.0" }
+      let(:controller) { 'Api::Rest::Admin::CdrsController' }
+      let(:action) { 'show' }
+      let(:path) { "/api/rest/admin/cdrs/#{id}" }
+      let(:method) { 'GET' }
+      let(:status) { 200 }
+    end
+
+    context 'when record does not exist' do
+      let(:id) { 9_999_999 }
+
+      it 'response body should be valid' do
+        subject
+
+        expect(response.status).to eq(404)
+      end
+
+      it_behaves_like :save_api_logs do
+        let(:message) { "404 GET /api/rest/admin/cdrs/#{id} Api::Rest::Admin::CdrsController 0.0.0.0" }
+        let(:controller) { 'Api::Rest::Admin::CdrsController' }
+        let(:action) { 'show' }
+        let(:path) { "/api/rest/admin/cdrs/#{id}" }
+        let(:method) { 'GET' }
+        let(:status) { 404 }
+      end
     end
   end
 
