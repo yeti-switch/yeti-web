@@ -108,6 +108,13 @@ module RateManagement
     }
     scope :applied, -> { joins(:pricelist).where(pricelist: { state_id: RateManagement::PricelistState::CONST::STATE_ID_APPLIED }) }
     scope :not_applied, -> { joins(:pricelist).where.not(pricelist: { state_id: RateManagement::PricelistState::CONST::STATE_ID_APPLIED }) }
+    scope :to_change_rate_fields, lambda {
+      to_change.joins(:dialpeer).where('pricelist_items.initial_interval != dialpeers.initial_interval
+      OR pricelist_items.initial_rate != dialpeers.initial_rate
+      OR pricelist_items.next_interval != dialpeers.next_interval
+      OR pricelist_items.next_rate != dialpeers.next_rate
+      OR pricelist_items.connect_fee != dialpeers.connect_fee')
+    }
 
     def type
       return nil if pricelist.new?

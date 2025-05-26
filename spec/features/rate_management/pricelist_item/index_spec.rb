@@ -296,28 +296,27 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
         FactoryBot.create(:rate_management_pricelist_item, :filed_from_project, pricelist: pricelist, valid_from: nil)
       ]
     end
-    let(:to_change) do
+    let(:to_change_rate_fields) do
       dialpeer_attrs = {
         vendor: project.vendor,
         account: project.account,
         routeset_discriminator: project.routeset_discriminator,
         routing_group: project.routing_group
       }
-      dialpeer = FactoryBot.create(:dialpeer, prefix: '123', gateway_group: nil, **dialpeer_attrs)
+      dialpeer_1 = FactoryBot.create(:dialpeer, prefix: '123', gateway_group: nil, **dialpeer_attrs)
       dialpeer_2 = FactoryBot.create(:dialpeer, prefix: '124', gateway: nil, src_name_rewrite_result: nil, **dialpeer_attrs)
       dialpeer_3 = FactoryBot.create(:dialpeer, prefix: '125', enabled: false, **dialpeer_attrs)
       dialpeer_4 = FactoryBot.create(:dialpeer, prefix: '126', **dialpeer_attrs)
-      dialpeer_5 = FactoryBot.create(:dialpeer, prefix: '127', **dialpeer_attrs)
-      dialpeer_6 = FactoryBot.create(:dialpeer, prefix: '128', **dialpeer_attrs)
+
       [
         FactoryBot.create(
           :rate_management_pricelist_item,
           :filed_from_project,
           pricelist: pricelist,
-          prefix: dialpeer.prefix,
-          routing_tag_ids: dialpeer.routing_tag_ids,
-          dialpeer: dialpeer,
-          detected_dialpeer_ids: [dialpeer.id],
+          prefix: dialpeer_1.prefix,
+          routing_tag_ids: dialpeer_1.routing_tag_ids,
+          dialpeer: dialpeer_1,
+          detected_dialpeer_ids: [dialpeer_1.id],
           enabled: true,
           initial_rate: 1.5,
           next_rate: 1.5,
@@ -391,85 +390,98 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
           dst_number_max_length: dialpeer_4.dst_number_max_length,
           reverse_billing: dialpeer_4.reverse_billing,
           routing_tag_mode_id: dialpeer_4.routing_tag_mode_id
-        ),
-        FactoryBot.create(
-          # all fields are same
-          :rate_management_pricelist_item,
-          :filed_from_project,
-          pricelist: pricelist,
-          dialpeer: dialpeer_5,
-          detected_dialpeer_ids: [dialpeer_5.id],
-          prefix: dialpeer_5.prefix,
-          routing_tag_ids: dialpeer_5.routing_tag_ids,
-          enabled: dialpeer_5.enabled,
-          src_rewrite_rule: dialpeer_5.src_rewrite_rule,
-          dst_rewrite_rule: dialpeer_5.dst_rewrite_rule,
-          acd_limit: dialpeer_5.acd_limit,
-          asr_limit: dialpeer_5.asr_limit,
-          gateway_id: dialpeer_5.gateway_id,
-          next_rate: dialpeer_5.next_rate,
-          connect_fee: dialpeer_5.connect_fee,
-          src_rewrite_result: dialpeer_5.src_rewrite_result,
-          dst_rewrite_result: dialpeer_5.dst_rewrite_result,
-          priority: dialpeer_5.priority,
-          capacity: dialpeer_5.capacity,
-          lcr_rate_multiplier: dialpeer_5.lcr_rate_multiplier,
-          initial_rate: dialpeer_5.initial_rate,
-          initial_interval: dialpeer_5.initial_interval,
-          next_interval: dialpeer_5.next_interval,
-          gateway_group_id: dialpeer_5.gateway_group_id,
-          force_hit_rate: dialpeer_5.force_hit_rate,
-          short_calls_limit: dialpeer_5.short_calls_limit,
-          src_name_rewrite_rule: dialpeer_5.src_name_rewrite_rule,
-          src_name_rewrite_result: dialpeer_5.src_name_rewrite_result,
-          exclusive_route: dialpeer_5.exclusive_route,
-          dst_number_min_length: dialpeer_5.dst_number_min_length,
-          dst_number_max_length: dialpeer_5.dst_number_max_length,
-          reverse_billing: dialpeer_5.reverse_billing,
-          routing_tag_mode_id: dialpeer_5.routing_tag_mode_id,
-          valid_till: dialpeer_5.valid_till,
-          valid_from: dialpeer_5.valid_from + 1.day
-        ),
-        FactoryBot.create(
-          # all fields are same
-          :rate_management_pricelist_item,
-          :filed_from_project,
-          pricelist: pricelist,
-          dialpeer: dialpeer_6,
-          detected_dialpeer_ids: [dialpeer_6.id],
-          prefix: dialpeer_6.prefix,
-          routing_tag_ids: dialpeer_6.routing_tag_ids,
-          enabled: dialpeer_6.enabled,
-          src_rewrite_rule: dialpeer_6.src_rewrite_rule,
-          dst_rewrite_rule: dialpeer_6.dst_rewrite_rule,
-          acd_limit: dialpeer_6.acd_limit,
-          asr_limit: dialpeer_6.asr_limit,
-          gateway_id: dialpeer_6.gateway_id,
-          next_rate: dialpeer_6.next_rate,
-          connect_fee: dialpeer_6.connect_fee,
-          src_rewrite_result: dialpeer_6.src_rewrite_result,
-          dst_rewrite_result: dialpeer_6.dst_rewrite_result,
-          priority: dialpeer_6.priority,
-          capacity: dialpeer_6.capacity,
-          lcr_rate_multiplier: dialpeer_6.lcr_rate_multiplier,
-          initial_rate: dialpeer_6.initial_rate,
-          initial_interval: dialpeer_6.initial_interval,
-          next_interval: dialpeer_6.next_interval,
-          gateway_group_id: dialpeer_6.gateway_group_id,
-          force_hit_rate: dialpeer_6.force_hit_rate,
-          short_calls_limit: dialpeer_6.short_calls_limit,
-          src_name_rewrite_rule: dialpeer_6.src_name_rewrite_rule,
-          src_name_rewrite_result: dialpeer_6.src_name_rewrite_result,
-          exclusive_route: dialpeer_6.exclusive_route,
-          dst_number_min_length: dialpeer_6.dst_number_min_length,
-          dst_number_max_length: dialpeer_6.dst_number_max_length,
-          reverse_billing: dialpeer_6.reverse_billing,
-          routing_tag_mode_id: dialpeer_6.routing_tag_mode_id,
-          valid_till: dialpeer_6.valid_till,
-          valid_from: dialpeer_6.valid_from - 1.day
         )
       ]
     end
+    let(:to_change_no_changes) do
+      dialpeer_attrs = {
+        vendor: project.vendor,
+        account: project.account,
+        routeset_discriminator: project.routeset_discriminator,
+        routing_group: project.routing_group
+      }
+      dialpeer_1 = FactoryBot.create(:dialpeer, prefix: '127', **dialpeer_attrs)
+      dialpeer_2 = FactoryBot.create(:dialpeer, prefix: '128', **dialpeer_attrs)
+      [
+        FactoryBot.create(
+          # all fields are same
+          :rate_management_pricelist_item,
+          :filed_from_project,
+          pricelist: pricelist,
+          dialpeer: dialpeer_1,
+          detected_dialpeer_ids: [dialpeer_1.id],
+          prefix: dialpeer_1.prefix,
+          routing_tag_ids: dialpeer_1.routing_tag_ids,
+          enabled: dialpeer_1.enabled,
+          src_rewrite_rule: dialpeer_1.src_rewrite_rule,
+          dst_rewrite_rule: dialpeer_1.dst_rewrite_rule,
+          acd_limit: dialpeer_1.acd_limit,
+          asr_limit: dialpeer_1.asr_limit,
+          gateway_id: dialpeer_1.gateway_id,
+          next_rate: dialpeer_1.next_rate,
+          connect_fee: dialpeer_1.connect_fee,
+          src_rewrite_result: dialpeer_1.src_rewrite_result,
+          dst_rewrite_result: dialpeer_1.dst_rewrite_result,
+          priority: dialpeer_1.priority,
+          capacity: dialpeer_1.capacity,
+          lcr_rate_multiplier: dialpeer_1.lcr_rate_multiplier,
+          initial_rate: dialpeer_1.initial_rate,
+          initial_interval: dialpeer_1.initial_interval,
+          next_interval: dialpeer_1.next_interval,
+          gateway_group_id: dialpeer_1.gateway_group_id,
+          force_hit_rate: dialpeer_1.force_hit_rate,
+          short_calls_limit: dialpeer_1.short_calls_limit,
+          src_name_rewrite_rule: dialpeer_1.src_name_rewrite_rule,
+          src_name_rewrite_result: dialpeer_1.src_name_rewrite_result,
+          exclusive_route: dialpeer_1.exclusive_route,
+          dst_number_min_length: dialpeer_1.dst_number_min_length,
+          dst_number_max_length: dialpeer_1.dst_number_max_length,
+          reverse_billing: dialpeer_1.reverse_billing,
+          routing_tag_mode_id: dialpeer_1.routing_tag_mode_id,
+          valid_till: dialpeer_1.valid_till,
+          valid_from: dialpeer_1.valid_from + 1.day
+        ),
+        FactoryBot.create(
+          # all fields are same
+          :rate_management_pricelist_item,
+          :filed_from_project,
+          pricelist: pricelist,
+          dialpeer: dialpeer_2,
+          detected_dialpeer_ids: [dialpeer_2.id],
+          prefix: dialpeer_2.prefix,
+          routing_tag_ids: dialpeer_2.routing_tag_ids,
+          enabled: dialpeer_2.enabled,
+          src_rewrite_rule: dialpeer_2.src_rewrite_rule,
+          dst_rewrite_rule: dialpeer_2.dst_rewrite_rule,
+          acd_limit: dialpeer_2.acd_limit,
+          asr_limit: dialpeer_2.asr_limit,
+          gateway_id: dialpeer_2.gateway_id,
+          next_rate: dialpeer_2.next_rate,
+          connect_fee: dialpeer_2.connect_fee,
+          src_rewrite_result: dialpeer_2.src_rewrite_result,
+          dst_rewrite_result: dialpeer_2.dst_rewrite_result,
+          priority: dialpeer_2.priority,
+          capacity: dialpeer_2.capacity,
+          lcr_rate_multiplier: dialpeer_2.lcr_rate_multiplier,
+          initial_rate: dialpeer_2.initial_rate,
+          initial_interval: dialpeer_2.initial_interval,
+          next_interval: dialpeer_2.next_interval,
+          gateway_group_id: dialpeer_2.gateway_group_id,
+          force_hit_rate: dialpeer_2.force_hit_rate,
+          short_calls_limit: dialpeer_2.short_calls_limit,
+          src_name_rewrite_rule: dialpeer_2.src_name_rewrite_rule,
+          src_name_rewrite_result: dialpeer_2.src_name_rewrite_result,
+          exclusive_route: dialpeer_2.exclusive_route,
+          dst_number_min_length: dialpeer_2.dst_number_min_length,
+          dst_number_max_length: dialpeer_2.dst_number_max_length,
+          reverse_billing: dialpeer_2.reverse_billing,
+          routing_tag_mode_id: dialpeer_2.routing_tag_mode_id,
+          valid_till: dialpeer_2.valid_till,
+          valid_from: dialpeer_2.valid_from - 1.day
+        )
+      ]
+    end
+    let(:to_change) { [*to_change_rate_fields, *to_change_no_changes] }
     let(:to_delete) do
       dialpeer = FactoryBot.create(:dialpeer, prefix: '125', vendor: project.vendor, account: project.account, routeset_discriminator: project.routeset_discriminator, routing_group: project.routing_group)
       [FactoryBot.create(:rate_management_pricelist_item, :filed_from_project, pricelist: pricelist, prefix: dialpeer.prefix, routing_tag_ids: dialpeer.routing_tag_ids, dialpeer: dialpeer, detected_dialpeer_ids: [dialpeer.id], to_delete: true)]
@@ -705,6 +717,59 @@ RSpec.describe 'Rate Management Pricelist Items table', bullet: [:n], js: true d
             expect(page).to have_table_cell(column: 'Type', exact_text: 'CHANGE NO CHANGE')
             expect(page).to have_table_cell(column: 'Dialpeer', exact_text: to_change[5].dialpeer.display_name)
             expect(page).to have_table_cell(column: 'Valid From', exact_text: "#{to_change[5].dialpeer.valid_from.strftime('%F %T')} => #{to_change[5].valid_from.strftime('%F %T')}")
+          end
+        end
+      end
+    end
+
+    context 'change rate fields scope' do
+      let(:index_params) { { scope: 'change_rate_fields' } }
+
+      it 'should render correct record' do
+        subject
+
+        within_main_content do
+          expect(page).to have_table_row(count: to_change_rate_fields.size)
+          within_table_row(id: to_change_rate_fields[0].id) do
+            expect(page).to have_table_cell(column: 'ID', exact_text: to_change_rate_fields.first.id.to_s)
+            expect(page).to have_table_cell(column: 'Type', exact_text: 'CHANGE')
+            expect(page).to have_table_cell(column: 'Dialpeer', exact_text: to_change_rate_fields[0].dialpeer.display_name)
+            expect(page).to have_table_cell(column: 'Initial Rate', exact_text: "#{to_change_rate_fields[0].dialpeer.initial_rate} => #{to_change_rate_fields[0].initial_rate}")
+            expect(page).to have_table_cell(column: 'Next Rate', exact_text: "#{to_change_rate_fields[0].dialpeer.next_rate} => #{to_change_rate_fields[0].next_rate}")
+            expect(page).to have_table_cell(column: 'Initial Interval', exact_text: "#{to_change_rate_fields[0].dialpeer.initial_interval} => #{to_change_rate_fields[0].initial_interval}")
+            expect(page).to have_table_cell(column: 'Next Interval', exact_text: "#{to_change_rate_fields[0].dialpeer.next_interval} => #{to_change_rate_fields[0].next_interval}")
+            expect(page).to have_table_cell(column: 'Gateway', exact_text: "EMPTY => #{to_change_rate_fields[0].gateway.display_name}")
+            expect(page).to have_table_cell(column: 'Gateway Group', exact_text: "#{to_change_rate_fields[0].dialpeer.gateway_group.display_name} => EMPTY")
+            expect(page).to have_table_cell(column: 'Connect Fee', exact_text: "#{to_change_rate_fields[0].dialpeer.connect_fee} => #{to_change_rate_fields[0].connect_fee}")
+            expect(page).to have_table_cell(column: 'Enabled', exact_text: 'YES')
+            expect(page).to have_table_cell(column: 'Valid From', exact_text: "#{to_change_rate_fields[0].dialpeer.valid_from.to_fs(:db)} => NOW")
+            expect(page).to have_table_cell(column: 'Src Name Rewrite Result', exact_text: "EMPTY => #{to_change_rate_fields[0].src_name_rewrite_result}")
+          end
+          within_table_row(id: to_change_rate_fields[1].id) do
+            expect(page).to have_table_cell(column: 'ID', exact_text: to_change_rate_fields[1].id.to_s)
+            expect(page).to have_table_cell(column: 'Type', exact_text: 'CHANGE')
+            expect(page).to have_table_cell(column: 'Dialpeer', exact_text: to_change_rate_fields[1].dialpeer.display_name)
+            expect(page).to have_table_cell(column: 'Initial Rate', exact_text: "#{to_change_rate_fields[1].dialpeer.initial_rate} => #{to_change_rate_fields[1].initial_rate}")
+            expect(page).to have_table_cell(column: 'Next Rate', exact_text: "#{to_change_rate_fields[1].dialpeer.next_rate} => #{to_change_rate_fields[1].next_rate}")
+            expect(page).to have_table_cell(column: 'Initial Interval', exact_text: "#{to_change_rate_fields[1].dialpeer.initial_interval} => #{to_change_rate_fields[1].initial_interval}")
+            expect(page).to have_table_cell(column: 'Next Interval', exact_text: "#{to_change_rate_fields[1].dialpeer.next_interval} => #{to_change_rate_fields[1].next_interval}")
+            expect(page).to have_table_cell(column: 'Gateway', exact_text: 'EMPTY')
+            expect(page).to have_table_cell(column: 'Gateway Group', exact_text: to_change_rate_fields[1].dialpeer.gateway_group.display_name.to_s)
+            expect(page).to have_table_cell(column: 'Connect Fee', exact_text: "#{to_change_rate_fields[1].dialpeer.connect_fee} => #{to_change_rate_fields[1].connect_fee}")
+            expect(page).to have_table_cell(column: 'Enabled', exact_text: "#{to_change_rate_fields[1].dialpeer.enabled ? 'YES' : 'NO'} => NO")
+            expect(page).to have_table_cell(column: 'Valid From', exact_text: "#{to_change_rate_fields[1].dialpeer.valid_from.to_fs(:db)} => #{to_change_rate_fields[1].valid_from.to_fs(:db)}")
+            expect(page).to have_table_cell(column: 'Src Name Rewrite Result', exact_text: 'EMPTY')
+          end
+          within_table_row(id: to_change_rate_fields[2].id) do
+            expect(page).to have_table_cell(column: 'ID', exact_text: to_change_rate_fields[2].id.to_s)
+            expect(page).to have_table_cell(column: 'Type', exact_text: 'CHANGE')
+            expect(page).to have_table_cell(column: 'Dialpeer', exact_text: to_change_rate_fields[2].dialpeer.display_name)
+            expect(page).to have_table_cell(column: 'Enabled', exact_text: 'NO')
+          end
+          within_table_row(id: to_change_rate_fields[3].id) do
+            expect(page).to have_table_cell(column: 'ID', exact_text: to_change_rate_fields[3].id.to_s)
+            expect(page).to have_table_cell(column: 'Type', exact_text: 'CHANGE NEXT RATE')
+            expect(page).to have_table_cell(column: 'Dialpeer', exact_text: to_change_rate_fields[3].dialpeer.display_name)
           end
         end
       end

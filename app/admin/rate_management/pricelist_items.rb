@@ -117,6 +117,7 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
   scope :all, default: true, if: -> { !parent.new? }
   scope :create, :to_create, if: -> { !parent.new? }
   scope :change, :to_change, if: -> { !parent.new? }
+  scope :change_rate_fields, :to_change_rate_fields, if: -> { !parent.new? }
   scope :delete, :to_delete, if: -> { !parent.new? }
   scope :error, :with_error, if: -> { parent.dialpeers_detected? }
 
