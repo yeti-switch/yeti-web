@@ -58,3 +58,16 @@ invoice:
 
 default_ldap_roles:
   - root
+
+api_log_enabled: true
+elasticsearch:
+  url: 'http://localhost:9428/insert/elasticsearch'
+  meta:
+    env: 'production'
+    system: 'yeti'
+  transport_options:
+    params:
+      _msg_field: 'message'
+      _stream_fields:
+        - system
+        - hostname

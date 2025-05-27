@@ -236,7 +236,7 @@ brakeman: gems-test config/database.yml config/yeti_web.yml config/secrets.yml
 	RAILS_ENV=test $(bundle_bin) exec brakeman
 
 .PHONY: coverage_report
-coverage_report: gems-test
+coverage_report: gems-test config/database.yml config/yeti_web.yml config/secrets.yml
 	$(info:msg=Generate coverage report)
 	$(bundle_bin) exec rake coverage:report
 
