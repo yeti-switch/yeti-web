@@ -4,11 +4,12 @@
 #
 # Table name: class4.gateway_throttling_profiles
 #
-#  id        :integer(2)       not null, primary key
-#  codes     :string           not null, is an Array
-#  name      :string           not null
-#  threshold :float(24)        not null
-#  window    :integer(2)       not null
+#  id              :integer(2)       not null, primary key
+#  codes           :string           not null, is an Array
+#  name            :string           not null
+#  threshold_end   :float(24)        not null
+#  threshold_start :float(24)        not null
+#  window          :integer(2)       not null
 #
 # Indexes
 #
@@ -23,10 +24,12 @@ class Equipment::GatewayThrottlingProfile < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  validates :threshold, presence: true, allow_blank: false, numericality: {
+  validates :threshold_start, :threshold_end, presence: true, allow_blank: false, numericality: {
     greater_than_or_equal_to: 1,
     less_than_or_equal_to: 100
   }
+
+  validates :threshold_end, numericality: { greater_than: :threshold_start }
 
   validates :window, presence: true, allow_blank: false, numericality: {
     greater_than_or_equal_to: 1,

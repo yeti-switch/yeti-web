@@ -11,7 +11,7 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
   acts_as_export  :id,
                   :name
 
-  permit_params :name, :threshold, :window, codes: []
+  permit_params :name, :threshold_start, :threshold_end, :window, codes: []
 
   index do
     selectable_column
@@ -19,7 +19,8 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
     actions
     column :name
     column :codes
-    column :threshold
+    column :threshold_start
+    column :threshold_end
     column :window
   end
 
@@ -31,7 +32,8 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
       row :id
       row :name
       row :codes
-      row :threshold
+      row :threshold_start
+      row :threshold_end
       row :window
     end
   end
@@ -45,7 +47,8 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
               include_blank: false,
               collection: Equipment::GatewayThrottlingProfile::CODES.invert,
               input_html: { class: 'chosen-sortable', multiple: true }
-      f.input :threshold
+      f.input :threshold_start
+      f.input :threshold_end
       f.input :window
     end
     f.actions
