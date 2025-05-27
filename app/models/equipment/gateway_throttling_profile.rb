@@ -46,9 +46,11 @@ class Equipment::GatewayThrottlingProfile < ApplicationRecord
   CODE_408_LOCAL = 'local408'
   CODE_408_REMOTE = '408'
   CODE_503 = '503'
+  CODE_480 = '480'
   CODES = {
     CODE_408_LOCAL => 'Local 408 ',
     CODE_408_REMOTE => 'SIP 408',
+    CODE_480 => 'SIP 480',
     CODE_503 => 'SIP 503'
   }.freeze
 
