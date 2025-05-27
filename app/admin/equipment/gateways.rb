@@ -117,7 +117,8 @@ ActiveAdmin.register Gateway do
            :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
            :network_protocol_priority, :media_encryption_mode,
-           :termination_src_numberlist, :termination_dst_numberlist, :lua_script, :stir_shaken_crt
+           :termination_src_numberlist, :termination_dst_numberlist, :lua_script, :stir_shaken_crt,
+           :throttling_profile
 
   controller do
     def resource_params
@@ -325,6 +326,7 @@ ActiveAdmin.register Gateway do
                           path: '/numberlists/search'
 
   filter :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
+  filter :throttling_profile, as: :select, input_html: { class: 'chosen' }
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -455,6 +457,7 @@ ActiveAdmin.register Gateway do
               f.input :suppress_early_media
               f.input :fake_180_timer
               f.input :send_lnp_information
+              f.input :throttling_profile, input_html: { class: 'chosen' }, include_blank: true
             end
           end
         end
@@ -666,6 +669,7 @@ ActiveAdmin.register Gateway do
             row :suppress_early_media
             row :fake_180_timer
             row :send_lnp_information
+            row :throttling_profile
           end
         end
       end
