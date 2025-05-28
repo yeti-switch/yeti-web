@@ -11,7 +11,7 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
   acts_as_export  :id,
                   :name
 
-  permit_params :name, :threshold_start, :threshold_end, :window, codes: []
+  permit_params :name, :threshold_start, :threshold_end, :window, :minimum_calls, codes: []
 
   index do
     selectable_column
@@ -22,6 +22,7 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
     column :threshold_start
     column :threshold_end
     column :window
+    column :minimum_calls
   end
 
   filter :id
@@ -35,6 +36,7 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
       row :threshold_start
       row :threshold_end
       row :window
+      row :minimum_calls
     end
   end
 
@@ -50,6 +52,7 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
       f.input :threshold_start
       f.input :threshold_end
       f.input :window
+      f.input :minimum_calls
     end
     f.actions
   end
