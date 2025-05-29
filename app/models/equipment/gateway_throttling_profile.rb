@@ -6,6 +6,7 @@
 #
 #  id              :integer(2)       not null, primary key
 #  codes           :string           not null, is an Array
+#  minimum_calls   :integer(2)       default(20), not null
 #  name            :string           not null
 #  threshold_end   :float(24)        not null
 #  threshold_start :float(24)        not null
@@ -34,6 +35,12 @@ class Equipment::GatewayThrottlingProfile < ApplicationRecord
   validates :window, presence: true, allow_blank: false, numericality: {
     greater_than_or_equal_to: 1,
     less_than_or_equal_to: 120,
+    only_integer: true
+  }
+
+  validates :minimum_calls, presence: true, allow_blank: false, numericality: {
+    greater_than_or_equal_to: 1,
+    less_than_or_equal_to: PG_MAX_SMALLINT,
     only_integer: true
   }
 
