@@ -31375,7 +31375,7 @@ $$;
 -- Name: check_states(); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint, stir_shaken_trusted_certificates bigint, stir_shaken_trusted_repositories bigint, stir_shaken_signing_certificates bigint, sensors bigint, translations bigint, codec_groups bigint, registrations bigint, radius_authorization_profiles bigint, radius_accounting_profiles bigint, auth_credentials bigint, options_probers bigint)
+CREATE FUNCTION switch22.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint, stir_shaken_trusted_certificates bigint, stir_shaken_trusted_repositories bigint, stir_shaken_signing_certificates bigint, sensors bigint, translations bigint, codec_groups bigint, registrations bigint, radius_authorization_profiles bigint, radius_accounting_profiles bigint, auth_credentials bigint, options_probers bigint, gateways_cache bigint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
     BEGIN
@@ -31393,7 +31393,8 @@ CREATE FUNCTION switch22.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth
         (select value from sys.states where key = 'radius_authorization_profiles'),
         (select value from sys.states where key = 'radius_accounting_profiles'),
         (select value from sys.states where key = 'auth_credentials'),
-        (select value from sys.states where key = 'options_probers');
+        (select value from sys.states where key = 'options_probers'),
+        (select value from sys.states where key = 'gateways_cache');
     END;
     $$;
 
@@ -50132,6 +50133,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250529091440'),
 ('20250528212558'),
 ('20250527161446'),
 ('20250502160207'),
