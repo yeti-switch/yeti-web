@@ -212,6 +212,7 @@ ActiveAdmin.before_load do
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsBatchChangeable
   ActiveAdmin::ResourceDSL.include ResourceDSL::ReportScheduler
   ActiveAdmin::ResourceController.include ActiveAdmin::PerPageExtension
+  ActiveAdmin::BaseController.include ActiveAdmin::WithPayloads
   ActiveAdmin::ResourceDSL.include ResourceDSL::BatchActionUpdate
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncDestroy
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncUpdate
