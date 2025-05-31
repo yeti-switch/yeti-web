@@ -48,16 +48,6 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Use a different logger for distributed setups.
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
-    STDOUT.sync = true
-    logger = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
-  else
-    config.logger = ActiveSupport::TaggedLogging.new(Logger::Syslog.new('yeti-web', Syslog::LOG_LOCAL7))
-  end
-
   # Prepend all log lines with the following tags.
   config.log_tags = {
     request_id: :request_id,
@@ -106,6 +96,15 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Semantic Logger configuration
   config.rails_semantic_logger.semantic = true
   config.rails_semantic_logger.format = :json
+
+  $stdout.sync = true
+  config.rails_semantic_logger.add_file_appender = false
+  config.semantic_logger.add_appender(
+    io: $stdout,
+    formatter: :default
+  )
 end
