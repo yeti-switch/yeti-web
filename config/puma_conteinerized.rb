@@ -34,7 +34,7 @@ before_fork do
   require 'puma_worker_killer'
 
   PumaWorkerKiller.config do |config|
-    config.ram           = ENV.fetch('PUMA_RAM') { 2048 } # mb
+    config.ram           = ENV.fetch('PUMA_RAM') { 2048 }.to_f # mb
     config.frequency     = 120 # seconds
     config.percent_usage = 0.98
     config.rolling_restart_frequency = 3 * 3600 # 12 hours in seconds, or 12.hours if using Rails
