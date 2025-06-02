@@ -62,9 +62,11 @@ RSpec.describe 'config/yeti_web.yml' do
       },
       default_ldap_roles: a_kind_of(Array),
       api_log_enabled: boolean,
+      logs: {
+        tags: a_kind_of(Hash)
+      },
       elasticsearch: {
         url: a_kind_of(String),
-        meta: a_kind_of(Hash),
         transport_options: a_kind_of(Hash)
       }
     }

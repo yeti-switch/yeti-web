@@ -83,11 +83,4 @@ Rails.application.configure do
     Bullet.bullet_logger = true
     Bullet.raise = true
   end
-
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
-    STDOUT.sync = true
-    logger = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
-  end
 end

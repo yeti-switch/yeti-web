@@ -114,8 +114,11 @@ module Yeti
     raise ArgumentError, "`secret_key_base` for #{Rails.env} environment must be a type of String`" if config.secret_key_base.blank?
     raise ArgumentError, "Missing `secret_key_base` for '#{Rails.env}' environment" if config.secret_key_base.blank?
 
-    config.rails_semantic_logger.semantic = false
-    config.rails_semantic_logger.format = :default
-    config.log_tags = { request_id: :request_id }
+    $stdout.sync = true
+    config.rails_semantic_logger.semantic = true
+    config.log_tags = {
+      request_id: :request_id,
+      **(YetiConfig.logs&.tags&.to_h || {})
+    }
   end
 end

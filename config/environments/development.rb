@@ -77,10 +77,9 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
 
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
-    STDOUT.sync = true
-    logger = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
-  end
+  config.rails_semantic_logger.add_file_appender = false
+  config.semantic_logger.add_appender(
+    io: $stdout,
+    formatter: :default
+  )
 end
