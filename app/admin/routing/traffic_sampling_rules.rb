@@ -72,5 +72,4 @@ ActiveAdmin.register Routing::TrafficSamplingRule do
     end
     f.actions
   end
-
 end

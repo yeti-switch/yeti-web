@@ -42,18 +42,17 @@ class Routing::TrafficSamplingRule < ApplicationRecord
   belongs_to :customers_auth, class_name: 'CustomersAuth', foreign_key: :customers_auth_id, optional: true
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true
 
-  validates :dump_level_id,  presence: true, inclusion: { in: DUMP_LEVELS.keys }, allow_nil: false
+  validates :dump_level_id, presence: true, inclusion: { in: DUMP_LEVELS.keys }, allow_nil: false
   validates :dump_rate, :recording_rate, presence: true, allow_blank: false, numericality: {
     greater_than_or_equal_to: 0,
     less_than_or_equal_to: 100
   }
 
   def display_name
-    "#{id}"
+    id.to_s
   end
 
   def dump_level_name
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end
-
 end
