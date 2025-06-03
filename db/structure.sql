@@ -35809,13 +35809,12 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         end if;
 
         --- Traffic sampling rules check
-
         SELECT INTO v_traffic_sampling_rule * FROM class4.traffic_sampling_rules sr
         WHERE
-          sr.customer_id is null or sr.customer_id = v_customer_auth_normalized.customer_id AND
-          sr.customers_auth_id is null or sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id AND
-          prefix_range(sr.src_prefix) @> v_ret.src_prefix_out AND
-          prefix_range(sr.dst_prefix) @> v_ret.dst_prefix_out
+          (sr.customer_id is null OR sr.customer_id = v_customer_auth_normalized.customer_id) AND
+          (sr.customers_auth_id is null OR sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id) AND
+          prefix_range(sr.src_prefix) @> prefix_range(v_ret.src_prefix_out) AND
+          prefix_range(sr.dst_prefix) @> prefix_range(v_ret.dst_prefix_out)
         ORDER BY
           sr.customer_id is null,
           sr.customers_auth_id is null,
@@ -37501,13 +37500,12 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         end if;
 
         --- Traffic sampling rules check
-
         SELECT INTO v_traffic_sampling_rule * FROM class4.traffic_sampling_rules sr
         WHERE
-          sr.customer_id is null or sr.customer_id = v_customer_auth_normalized.customer_id AND
-          sr.customers_auth_id is null or sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id AND
-          prefix_range(sr.src_prefix) @> v_ret.src_prefix_out AND
-          prefix_range(sr.dst_prefix) @> v_ret.dst_prefix_out
+          (sr.customer_id is null OR sr.customer_id = v_customer_auth_normalized.customer_id) AND
+          (sr.customers_auth_id is null OR sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id) AND
+          prefix_range(sr.src_prefix) @> prefix_range(v_ret.src_prefix_out) AND
+          prefix_range(sr.dst_prefix) @> prefix_range(v_ret.dst_prefix_out)
         ORDER BY
           sr.customer_id is null,
           sr.customers_auth_id is null,
@@ -39114,13 +39112,12 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         end if;
 
         --- Traffic sampling rules check
-
         SELECT INTO v_traffic_sampling_rule * FROM class4.traffic_sampling_rules sr
         WHERE
-          sr.customer_id is null or sr.customer_id = v_customer_auth_normalized.customer_id AND
-          sr.customers_auth_id is null or sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id AND
-          prefix_range(sr.src_prefix) @> v_ret.src_prefix_out AND
-          prefix_range(sr.dst_prefix) @> v_ret.dst_prefix_out
+          (sr.customer_id is null OR sr.customer_id = v_customer_auth_normalized.customer_id) AND
+          (sr.customers_auth_id is null OR sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id) AND
+          prefix_range(sr.src_prefix) @> prefix_range(v_ret.src_prefix_out) AND
+          prefix_range(sr.dst_prefix) @> prefix_range(v_ret.dst_prefix_out)
         ORDER BY
           sr.customer_id is null,
           sr.customers_auth_id is null,

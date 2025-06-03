@@ -831,11 +831,10 @@ i_rpid_privacy character varying
         end if;
 
         --- Traffic sampling rules check
-
         SELECT INTO v_traffic_sampling_rule * FROM class4.traffic_sampling_rules sr
         WHERE
-          sr.customer_id is null or sr.customer_id = v_customer_auth_normalized.customer_id AND
-          sr.customers_auth_id is null or sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id AND
+          (sr.customer_id is null OR sr.customer_id = v_customer_auth_normalized.customer_id) AND
+          (sr.customers_auth_id is null OR sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id) AND
           prefix_range(sr.src_prefix) @> prefix_range(v_ret.src_prefix_out) AND
           prefix_range(sr.dst_prefix) @> prefix_range(v_ret.dst_prefix_out)
         ORDER BY
