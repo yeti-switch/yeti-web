@@ -35037,6 +35037,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_remote_port INTEGER;
         v_transport_protocol_id smallint;
         v_customer_auth_normalized class4.customers_auth_normalized;
+        v_traffic_sampling_rule class4.traffic_sampling_rules;
         v_destination class4.destinations%rowtype;
         v_dialpeer record;
         v_rateplan class4.rateplans%rowtype;
@@ -35806,6 +35807,29 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             -- pass by default
           end if;
         end if;
+
+        --- Traffic sampling rules check
+
+        SELECT INTO v_traffic_sampling_rule * FROM class4.traffic_sampling_rules sr
+        WHERE
+          sr.customer_id is null or sr.customer_id = v_customer_auth_normalized.customer_id AND
+          sr.customers_auth_id is null or sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id AND
+          prefix_range(sr.src_prefix) @> v_ret.src_prefix_out AND
+          prefix_range(sr.dst_prefix) @> v_ret.dst_prefix_out
+        ORDER BY
+          sr.customer_id is null,
+          sr.customers_auth_id is null,
+          length(prefix_range(sr.src_prefix)) desc,
+          length(prefix_range(sr.dst_prefix)) desc
+        LIMIT 1;
+        IF FOUND THEN
+          if random()*100 < v_traffic_sampling_rule.dump_rate THEN
+            v_ret.dump_level_id = GREATEST(v_ret.dump_level_id, v_traffic_sampling_rule.dump_level_id);
+          end if;
+          if random()*100 < v_traffic_sampling_rule.recording_rate THEN
+            v_ret.record_audio = true;
+          end if;
+        END IF;
 
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
 
@@ -36705,6 +36729,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_remote_port INTEGER;
         v_transport_protocol_id smallint;
         v_customer_auth_normalized class4.customers_auth_normalized;
+        v_traffic_sampling_rule class4.traffic_sampling_rules;
         v_destination class4.destinations%rowtype;
         v_dialpeer record;
         v_rateplan class4.rateplans%rowtype;
@@ -37474,6 +37499,29 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
             -- pass by default
           end if;
         end if;
+
+        --- Traffic sampling rules check
+
+        SELECT INTO v_traffic_sampling_rule * FROM class4.traffic_sampling_rules sr
+        WHERE
+          sr.customer_id is null or sr.customer_id = v_customer_auth_normalized.customer_id AND
+          sr.customers_auth_id is null or sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id AND
+          prefix_range(sr.src_prefix) @> v_ret.src_prefix_out AND
+          prefix_range(sr.dst_prefix) @> v_ret.dst_prefix_out
+        ORDER BY
+          sr.customer_id is null,
+          sr.customers_auth_id is null,
+          length(prefix_range(sr.src_prefix)) desc,
+          length(prefix_range(sr.dst_prefix)) desc
+        LIMIT 1;
+        IF FOUND THEN
+          if random()*100 < v_traffic_sampling_rule.dump_rate THEN
+            v_ret.dump_level_id = GREATEST(v_ret.dump_level_id, v_traffic_sampling_rule.dump_level_id);
+          end if;
+          if random()*100 < v_traffic_sampling_rule.recording_rate THEN
+            v_ret.record_audio = true;
+          end if;
+        END IF;
 
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
 
@@ -38373,6 +38421,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_remote_port INTEGER;
         v_transport_protocol_id smallint;
         v_customer_auth_normalized class4.customers_auth_normalized;
+        v_traffic_sampling_rule class4.traffic_sampling_rules;
         v_destination class4.destinations%rowtype;
         v_dialpeer record;
         v_rateplan class4.rateplans%rowtype;
@@ -39063,6 +39112,29 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             -- pass by default
           end if;
         end if;
+
+        --- Traffic sampling rules check
+
+        SELECT INTO v_traffic_sampling_rule * FROM class4.traffic_sampling_rules sr
+        WHERE
+          sr.customer_id is null or sr.customer_id = v_customer_auth_normalized.customer_id AND
+          sr.customers_auth_id is null or sr.customers_auth_id = v_customer_auth_normalized.customers_auth_id AND
+          prefix_range(sr.src_prefix) @> v_ret.src_prefix_out AND
+          prefix_range(sr.dst_prefix) @> v_ret.dst_prefix_out
+        ORDER BY
+          sr.customer_id is null,
+          sr.customers_auth_id is null,
+          length(prefix_range(sr.src_prefix)) desc,
+          length(prefix_range(sr.dst_prefix)) desc
+        LIMIT 1;
+        IF FOUND THEN
+          if random()*100 < v_traffic_sampling_rule.dump_rate THEN
+            v_ret.dump_level_id = GREATEST(v_ret.dump_level_id, v_traffic_sampling_rule.dump_level_id);
+          end if;
+          if random()*100 < v_traffic_sampling_rule.recording_rate THEN
+            v_ret.record_audio = true;
+          end if;
+        END IF;
 
         SELECT INTO v_rp * from class4.routing_plans WHERE id=v_customer_auth_normalized.routing_plan_id;
 
@@ -42475,6 +42547,42 @@ CREATE TABLE class4.tag_actions (
 
 
 --
+-- Name: traffic_sampling_rules; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.traffic_sampling_rules (
+    id smallint NOT NULL,
+    customer_id integer,
+    customers_auth_id integer,
+    src_prefix character varying DEFAULT ''::character varying NOT NULL,
+    dst_prefix character varying DEFAULT ''::character varying NOT NULL,
+    dump_level_id smallint DEFAULT 0 NOT NULL,
+    dump_rate double precision DEFAULT 0 NOT NULL,
+    recording_rate double precision DEFAULT 0 NOT NULL
+);
+
+
+--
+-- Name: traffic_sampling_rules_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.traffic_sampling_rules_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: traffic_sampling_rules_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.traffic_sampling_rules_id_seq OWNED BY class4.traffic_sampling_rules.id;
+
+
+--
 -- Name: transport_protocols; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -45833,6 +45941,13 @@ ALTER TABLE ONLY class4.stir_shaken_trusted_repositories ALTER COLUMN id SET DEF
 
 
 --
+-- Name: traffic_sampling_rules id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.traffic_sampling_rules ALTER COLUMN id SET DEFAULT nextval('class4.traffic_sampling_rules_id_seq'::regclass);
+
+
+--
 -- Name: import_accounts id; Type: DEFAULT; Schema: data_import; Owner: -
 --
 
@@ -47279,6 +47394,14 @@ ALTER TABLE ONLY class4.tag_actions
 
 
 --
+-- Name: traffic_sampling_rules traffic_sampling_rules_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.traffic_sampling_rules
+    ADD CONSTRAINT traffic_sampling_rules_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: transport_protocols transport_protocols_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -48705,6 +48828,20 @@ CREATE INDEX routing_tag_detection_rules_prefix_range_idx ON class4.routing_tag_
 
 
 --
+-- Name: traffic_sampling_rules_customer_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX traffic_sampling_rules_customer_id_idx ON class4.traffic_sampling_rules USING btree (customer_id);
+
+
+--
+-- Name: traffic_sampling_rules_customers_auth_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX traffic_sampling_rules_customers_auth_id_idx ON class4.traffic_sampling_rules USING btree (customers_auth_id);
+
+
+--
 -- Name: index_import_routing_tag_detection_rules_on_dst_area_id; Type: INDEX; Schema: data_import; Owner: -
 --
 
@@ -49815,6 +49952,22 @@ ALTER TABLE ONLY class4.sip_options_probers
 
 
 --
+-- Name: traffic_sampling_rules traffic_sampling_rules_customer_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.traffic_sampling_rules
+    ADD CONSTRAINT traffic_sampling_rules_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.contractors(id);
+
+
+--
+-- Name: traffic_sampling_rules traffic_sampling_rules_customers_auth_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.traffic_sampling_rules
+    ADD CONSTRAINT traffic_sampling_rules_customers_auth_id_fkey FOREIGN KEY (customers_auth_id) REFERENCES class4.customers_auth(id);
+
+
+--
 -- Name: import_routing_tag_detection_rules fk_rails_c247bd5783; Type: FK CONSTRAINT; Schema: data_import; Owner: -
 --
 
@@ -50133,6 +50286,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250601164825'),
 ('20250529091440'),
 ('20250528212558'),
 ('20250527161446'),

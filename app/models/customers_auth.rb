@@ -249,7 +249,8 @@ class CustomersAuth < ApplicationRecord
 
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
-  #  has_many :destinations, through: :rateplan
+  has_many :traffic_sampling_rules, class_name: 'Routing::TrafficSamplingRule', foreign_key: :customers_auth_id, dependent: :destroy
+
   has_many :normalized_copies, class_name: 'CustomersAuthNormalized', foreign_key: :customers_auth_id, dependent: :delete_all
 
   include WithPaperTrail
