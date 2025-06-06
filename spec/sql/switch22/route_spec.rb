@@ -707,6 +707,21 @@ RSpec.describe '#routing logic' do
                gateway_id: vendor_gateway.id)
       }
 
+      # we are creating sampling rule to match all traffic there
+      # to be sure routing will not crash when sampling rule matched.
+      let!(:traffic_sampling_rule) {
+        create(:traffic_sampling_rule,
+               customer_id: nil,
+               customers_auth_id: nil,
+               dump_rate: traffic_sampling_rule_dump_rate,
+               dump_level_id: traffic_sampling_rule_dump_level_id,
+               recording_rate: traffic_sampling_rule_recording_rate)
+      }
+
+      let!(:traffic_sampling_rule_dump_rate) { 100 }
+      let!(:traffic_sampling_rule_dump_level_id) { Routing::TrafficSamplingRule::DUMP_LEVEL_CAPTURE_ALL }
+      let!(:traffic_sampling_rule_recording_rate) { 100 }
+
       context 'Authorized by IP, checking interface' do
         let!(:i_interface) { 'secondary' }
 
@@ -1098,6 +1113,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, CustomerAuth DST numberlist' do
+        let!(:traffic_sampling_rule_dump_rate) { 0 }
         let!(:nl) {
           create(:numberlist,
                  mode_id: nl_mode,
@@ -1277,6 +1293,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, CustomerAuth SRC numberlist' do
+        let!(:traffic_sampling_rule_dump_rate) { 0 }
         let!(:nl) {
           create(:numberlist,
                  mode_id: nl_mode,
@@ -1458,6 +1475,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, CustomerAuth SRC numberlist, fallback to Diversion' do
+        let!(:traffic_sampling_rule_dump_rate) { 0 }
         let(:customer_auth_src_numberlist_use_diversion) { true }
         let(:customer_auth_diversion_policy_id) { CustomersAuth::DIVERSION_POLICY_ACCEPT }
 
@@ -1539,6 +1557,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, RoutingPlan DST numberlist' do
+        let!(:traffic_sampling_rule_dump_rate) { 0 }
         let!(:nl) {
           create(:numberlist,
                  mode_id: nl_mode,
@@ -1718,6 +1737,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, RoutingPlan SRC numberlist' do
+        let!(:traffic_sampling_rule_dump_rate) { 0 }
         let!(:nl) {
           create(:numberlist,
                  mode_id: nl_mode,

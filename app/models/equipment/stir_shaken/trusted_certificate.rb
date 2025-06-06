@@ -12,6 +12,8 @@
 class Equipment::StirShaken::TrustedCertificate < ApplicationRecord
   self.table_name = 'class4.stir_shaken_trusted_certificates'
 
+  include WithPaperTrail
+
   validates :name, :certificate, presence: true
 
   include Yeti::StateUpdater
