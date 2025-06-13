@@ -67,7 +67,6 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
   account_filter :customer_acc_id_eq, label: 'Customer account'
-  filter :customer_external_id, label: 'Customer external ID', as: :numeric
 
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
   account_filter :vendor_acc_id_eq, label: 'Vendor account'
@@ -170,6 +169,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :legb_ss_status_id_eq, label: 'LegB SS status', as: :select, collection: Cdr::Cdr::SS_STATUSES.invert, input_html: { class: 'chosen' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
+  filter :customer_external_id, label: 'Customer external ID', as: :numeric
 
   # X-Accel-Redirect: /protected/iso.img;
   #  location /protected/ {
