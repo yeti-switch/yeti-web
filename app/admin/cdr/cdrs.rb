@@ -169,6 +169,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :legb_ss_status_id_eq, label: 'LegB SS status', as: :select, collection: Cdr::Cdr::SS_STATUSES.invert, input_html: { class: 'chosen' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
+  filter :customer_external_id, label: 'Customer external ID', as: :numeric
 
   # X-Accel-Redirect: /protected/iso.img;
   #  location /protected/ {
