@@ -76,10 +76,10 @@ ActiveAdmin.register Cnam::Database do
           row :id
           row :name
           row :request_lua do |row|
-            pre code row.request_lua
+            pre code row.request_lua, class: 'lua'
           end
           row :response_lua do |row|
-            pre code row.response_lua
+            pre code row.response_lua, class: 'lua'
           end
           row :created_at
         end

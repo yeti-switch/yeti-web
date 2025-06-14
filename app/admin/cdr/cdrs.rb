@@ -610,12 +610,23 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       end
       tab :identity do
         attributes_table do
-          row :lega_identity
           row :lega_ss_status do
             status_tag(cdr.lega_ss_status.to_s, class: cdr.lega_ss_status_class) unless cdr.lega_ss_status_id.nil?
           end
           row :legb_ss_status do
             status_tag(cdr.legb_ss_status.to_s, class: cdr.legb_ss_status_class) unless cdr.legb_ss_status_id.nil?
+          end
+          row :lega_identity do |r|
+            pre code JSON.pretty_generate(r.lega_identity), class: 'json'
+          end
+        end
+      end
+      if authorized?(:allow_metadata)
+        tab :metadata do
+          attributes_table do
+            row :metadata do |r|
+              pre code JSON.pretty_generate(r.metadata), class: 'json'
+            end
           end
         end
       end

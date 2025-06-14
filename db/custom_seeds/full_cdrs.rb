@@ -106,8 +106,9 @@ end
     routing_delay: 0.1223456,
     pdd: 0.1245678,
     rtt: 0.987654321,
-    lega_identity: '[{"header":{"alg":"ES256","ppt":"shaken","typ":"passport","x5u":"http://127.0.0.1/share/test.pem"},"parsed":true,"payload":{"attest":"C","dest":{"tn":"456","uri":"sip:456"},"iat":1622830203,"orig":{"tn":"123","uri":"sip:123"},"origid":"8-000F7304-60BA6C7B000B6828-A43657C0"},"verified":true},{"error_code":4,"error_reason":"Incorrect Identity Header Value","parsed":false},{"error_code":-1,"error_reason":"certificate is not available","header":{"alg":"ES256","ppt":"shaken","typ":"passport","x5u":"http://127.0.0.1/share/test2.pem"},"parsed":true,"payload":{"attest":"C","dest":{"tn":"13"},"iat":1622831252,"orig":{"tn":"42"},"origid":"8-000F7304-60BA7094000207EC-2B5F27C0"},"verified":false}]',
+    lega_identity: [{ "header": { "alg": 'ES256', "ppt": 'shaken', "typ": 'passport', "x5u": 'http://127.0.0.1/share/test.pem' }, "parsed": true, "payload": { "attest": 'C', "dest": { "tn": '456', "uri": 'sip:456' }, "iat": 1_622_830_203, "orig": { "tn": '123', "uri": 'sip:123' }, "origid": '8-000F7304-60BA6C7B000B6828-A43657C0' }, "verified": true }, { "error_code": 4, "error_reason": 'Incorrect Identity Header Value', "parsed": false }, { "error_code": -1, "error_reason": 'certificate is not available', "header": { "alg": 'ES256', "ppt": 'shaken', "typ": 'passport', "x5u": 'http://127.0.0.1/share/test2.pem' }, "parsed": true, "payload": { "attest": 'C', "dest": { "tn": '13' }, "iat": 1_622_831_252, "orig": { "tn": '42' }, "origid": '8-000F7304-60BA7094000207EC-2B5F27C0' }, "verified": false }],
     lega_ss_status_id: [nil, -1, 0, 1, 2, 3].sample,
-    legb_ss_status_id: [nil, -1, 0, 1, 2, 3].sample
+    legb_ss_status_id: [nil, -1, 0, 1, 2, 3].sample,
+    metadata: [nil, { key: 'value', hash: { key1: 'value1', key2: 1000 } }].sample
   )
 end
