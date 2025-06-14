@@ -91,14 +91,15 @@ RSpec.describe 'Create new CDR export', js: true do
 
         # filters
         fill_in 'Customer external id eq', with: '1231'
-        fill_in_chosen 'Customer id eq', with: "#{customer.name} | #{customer.id}"
+        fill_in_chosen 'Customer id eq', with: "#{customer.name} | #{customer.id}", ajax: true
         fill_in 'Customer acc external id eq', with: '1232'
-        fill_in_chosen 'Customer acc id eq', with: "#{account.name} | #{account.id}"
+        fill_in_chosen 'Customer acc id eq', with: "#{account.name} | #{account.id}", ajax: true
         fill_in 'Vendor external id eq', with: '1233'
-        fill_in_chosen 'Vendor id eq', with: "#{vendor.name} | #{vendor.id}"
+        fill_in_chosen 'Vendor id eq', with: "#{vendor.name} | #{vendor.id}", ajax: true
         fill_in 'Vendor acc external id eq', with: '1234'
-        fill_in_chosen 'Vendor acc id eq', with: "#{vendor_acc.name} | #{vendor_acc.id}"
+        fill_in_chosen 'Vendor acc id eq', with: "#{vendor_acc.name} | #{vendor_acc.id}", ajax: true
         fill_in 'Customer auth external id eq', with: '1235'
+        scroll_to(find('label', text: 'Customer auth id eq'))
         fill_in_chosen 'Customer auth id eq', with: "#{customer_auth.name} | #{customer_auth.id}"
         fill_in 'Src prefix in contains', with: 'src_prefix_in_test'
         fill_in 'Src prefix in eq', with: 'src_prefix_in_test'
@@ -112,8 +113,8 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Dst prefix routing eq', with: 'dst_prefix_routing_test'
         fill_in 'Dst prefix out contains', with: 'dst_prefix_out_test'
         fill_in 'Dst prefix out eq', with: 'dst_prefix_out_test'
-        fill_in_chosen 'Src country id eq', with: countries.first.name
-        fill_in_chosen 'Dst country id eq', with: countries.last.name
+        fill_in_chosen 'Src country id eq', with: countries.first.name, ajax: true
+        fill_in_chosen 'Dst country id eq', with: countries.last.name, ajax: true
         fill_in 'Routing tag ids include', with: 2
         fill_in 'Routing tag ids exclude', with: 25
         fill_in_chosen 'Routing tag ids empty', with: 'No'
@@ -133,8 +134,8 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Customer auth external type eq', with: 'term'
         fill_in 'Customer auth external type not eq', with: 'em'
         fill_in_chosen 'Customer auth external id in', with: customer_auth.name, multiple: true, ajax: true
-        fill_in_chosen 'Src country iso in', with: countries.first.name, multiple: true
-        fill_in_chosen 'Dst country iso in', with: countries.first.name, multiple: true
+        fill_in_chosen 'Src country iso in', with: countries.first.name, multiple: true, ajax: true
+        fill_in_chosen 'Dst country iso in', with: countries.first.name, multiple: true, ajax: true
 
         # all allowed filters must be filled in this test.
         CdrExport::FiltersModel.attribute_types.each_key do |filter_key|
