@@ -3,6 +3,8 @@
 ActiveAdmin.register DisconnectPolicyCode do
   menu parent: 'Equipment', priority: 81
 
+  acts_as_audit
+
   config.batch_actions = false
 
   permit_params :policy_id, :code_id, :stop_hunting, :pass_reason_to_originator,

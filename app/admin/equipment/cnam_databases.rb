@@ -4,7 +4,7 @@ ActiveAdmin.register Cnam::Database do
   menu parent: 'Equipment', priority: 110, label: 'CNAM Databases'
   config.remove_action_item(:new)
 
-  # acts_as_audit
+  acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
 

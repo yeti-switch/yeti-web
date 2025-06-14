@@ -6,6 +6,8 @@ ActiveAdmin.register Equipment::Registration do
 
   includes :pop, :node, :transport_protocol, :proxy_transport_protocol
 
+  acts_as_audit
+
   acts_as_export :id, :name, :enabled,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
                  [:node_name, proc { |row| row.node.try(:name) }],
@@ -16,7 +18,6 @@ ActiveAdmin.register Equipment::Registration do
                  :username,
                  :display_username,
                  :auth_user,
-                 :auth_password,
                  :proxy,
                  [:proxy_transport_protocol_name, proc { |row| row.proxy_transport_protocol.try(:name) }],
                  :contact,
@@ -52,7 +53,6 @@ ActiveAdmin.register Equipment::Registration do
     column :username
     column :display_username
     column :auth_user
-    column :auth_password
     column :proxy
     column :proxy_transport_protocol
     column :contact
@@ -94,7 +94,9 @@ ActiveAdmin.register Equipment::Registration do
       f.input :username
       f.input :display_username
       f.input :auth_user
-      f.input :auth_password, as: :string
+      if authorized?(:allow_auth_credentials)
+        f.input :auth_password, as: :string
+      end
       f.input :proxy
       f.input :proxy_transport_protocol, as: :select, include_blank: false
       f.input :contact
@@ -120,7 +122,9 @@ ActiveAdmin.register Equipment::Registration do
       row :username
       row :display_username
       row :auth_user
-      row :auth_password
+      if authorized?(:allow_auth_credentials)
+        row :auth_password
+      end
       row :proxy
       row :proxy_transport_protocol
       row :contact
