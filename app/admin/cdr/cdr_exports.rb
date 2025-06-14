@@ -15,7 +15,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     def build_new_resource
       record = super
       if params[:action] == 'new'
-        record.fields = CdrExport.last&.fields || []
+        record.fields = CdrExport.where(type: CdrExport::TYPE_BASE).last&.fields || []
       end
       record
     end

@@ -32,7 +32,7 @@ RSpec.describe 'Create new CDR export', js: true do
 
       expect(cdr_export).to have_attributes(
         callback_url: '',
-        fields: %w[id success],
+        fields: %w[success id],
         status: 'Pending',
         filters: a_kind_of(CdrExport::FiltersModel)
       )
@@ -46,7 +46,7 @@ RSpec.describe 'Create new CDR export', js: true do
 
   context 'with inherited fields' do
     before do
-      create :cdr_export, :completed, fields: %w[id success customer_id]
+      create :cdr_export, :completed, fields: %w[id customer_id success]
     end
 
     let(:fill_form!) do
@@ -157,7 +157,7 @@ RSpec.describe 'Create new CDR export', js: true do
 
       expect(cdr_export).to have_attributes(
                               callback_url: '',
-                              fields: %w[id success],
+                              fields: %w[success id],
                               status: 'Pending',
                               filters: a_kind_of(CdrExport::FiltersModel)
                             )
@@ -257,7 +257,7 @@ RSpec.describe 'Create new CDR export', js: true do
 
       expect(cdr_export).to have_attributes(
                               callback_url: '',
-                              fields: %w[id success],
+                              fields: %w[success id],
                               status: 'Pending',
                               filters: a_kind_of(CdrExport::FiltersModel)
                             )
