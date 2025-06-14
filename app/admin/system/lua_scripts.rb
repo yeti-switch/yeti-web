@@ -25,7 +25,7 @@ ActiveAdmin.register System::LuaScript do
       row :id
       row :name
       row :source do |row|
-        pre code row.source
+        pre code row.source, class: 'lua'
       end
       row :created_at
       row :updated_at

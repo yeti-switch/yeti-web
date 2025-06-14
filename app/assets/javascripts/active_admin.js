@@ -34,7 +34,9 @@
 //= require d3_charts
 //= require password-toggle
 
-//= require vendor/highlight.pack
+//= require vendor/highlightjs/highlight.min
+//= require vendor/highlightjs/languages/lua.min
+//= require vendor/highlightjs/languages/json.min
 //= require highlightjs
 //= require modal_link
 //= require import_apply_unique_fields

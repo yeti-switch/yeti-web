@@ -3,7 +3,7 @@
 module Cdr
   class CdrPolicy < ::RolePolicy
     section 'Cdr/Cdr'
-    self.allowed_actions += %i[allow_full_dst_number recording pcap]
+    self.allowed_actions += %i[allow_full_dst_number recording pcap allow_metadata]
     Scope = Class.new(RolePolicy::Scope)
 
     def routing_simulation?
@@ -20,6 +20,10 @@ module Cdr
 
     def allow_full_dst_number?
       allowed_for_role?(:allow_full_dst_number)
+    end
+
+    def allow_metadata?
+      allowed_for_role?(:allow_metadata)
     end
   end
 end
