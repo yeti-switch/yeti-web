@@ -20,6 +20,8 @@ class Equipment::GatewayThrottlingProfile < ApplicationRecord
   self.table_name = 'class4.gateway_throttling_profiles'
 
   include WithPaperTrail
+  include Yeti::StateUpdater
+  self.state_names = %w[gateways_cache]
 
   has_many :gateways, class_name: 'Gateway', dependent: :restrict_with_error, inverse_of: :throttling_profile
 
