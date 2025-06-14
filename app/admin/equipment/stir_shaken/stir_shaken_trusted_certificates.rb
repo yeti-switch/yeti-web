@@ -4,6 +4,7 @@ ActiveAdmin.register Equipment::StirShaken::TrustedCertificate do
   menu parent: %w[Equipment STIR/SHAKEN], label: 'Trusted certificates', priority: 20
   config.batch_actions = false
 
+  acts_as_audit
   acts_as_clone
 
   permit_params :id, :name, :certificate

@@ -31,7 +31,6 @@ RSpec.describe 'Equipment Registrations export' do
         'Username' => registration.username,
         'Display username' => registration.display_username.to_s,
         'Auth user' => registration.auth_user.to_s,
-        'Auth password' => registration.auth_password.to_s,
         'Proxy' => registration.proxy.to_s,
         'Proxy transport protocol name' => registration.proxy_transport_protocol.name,
         'Contact' => registration.contact,

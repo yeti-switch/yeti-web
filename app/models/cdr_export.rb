@@ -122,6 +122,8 @@ class CdrExport < ApplicationRecord
     ROUND_TO_SECONDS_TIME_FORMAT
   ].freeze
 
+  TYPE_BASE = 'Base'
+
   alias_attribute :export_type, :type
 
   # need for activeadmin form
@@ -138,7 +140,7 @@ class CdrExport < ApplicationRecord
 
   before_validation(on: :create) do
     self.status ||= STATUS_PENDING
-    self.type ||= 'Base'
+    self.type ||= TYPE_BASE
   end
 
   after_create :enqueue_export_job

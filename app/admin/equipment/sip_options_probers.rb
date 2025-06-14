@@ -6,6 +6,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
 
   includes :pop, :node, :transport_protocol, :proxy_transport_protocol
 
+  acts_as_audit
   acts_as_export :id, :name, :enabled,
                  [:pop_name, proc { |row| row.pop.try(:name) }],
                  [:node_name, proc { |row| row.node.try(:name) }],
@@ -16,7 +17,6 @@ ActiveAdmin.register Equipment::SipOptionsProber do
                  :from_uri,
                  :to_uri,
                  :auth_username,
-                 :auth_password,
                  :proxy,
                  [:proxy_transport_protocol_name, proc { |row| row.proxy_transport_protocol.try(:name) }],
                  :contact_uri,
@@ -85,7 +85,9 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       f.input :from_uri
       f.input :to_uri
       f.input :auth_username
-      f.input :auth_password, as: :string
+      if authorized?(:allow_auth_credentials)
+        f.input :auth_password, as: :string
+      end
       f.input :proxy
       f.input :proxy_transport_protocol, as: :select, include_blank: false
       f.input :contact_uri
@@ -109,7 +111,9 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       row :from_uri
       row :to_uri
       row :auth_username
-      row :auth_password
+      if authorized?(:allow_auth_credentials)
+        row :auth_password
+      end
       row :proxy
       row :proxy_transport_protocol
       row :contact_uri

@@ -4,6 +4,7 @@ ActiveAdmin.register Equipment::StirShaken::SigningCertificate do
   menu parent: %w[Equipment STIR/SHAKEN], label: 'Signing certificates', priority: 30
   config.batch_actions = false
 
+  acts_as_audit
   acts_as_clone
 
   permit_params :id, :name, :certificate, :key, :x5u

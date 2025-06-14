@@ -4,6 +4,7 @@ ActiveAdmin.register Equipment::StirShaken::TrustedRepository do
   menu parent: %w[Equipment STIR/SHAKEN], label: 'Trusted repositories', priority: 10
   config.batch_actions = false
 
+  acts_as_audit
   acts_as_clone
 
   permit_params :id, :url_pattern, :validate_https_certificate

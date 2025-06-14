@@ -20,6 +20,8 @@
 class Lnp::Database < ApplicationRecord
   self.table_name = 'class4.lnp_databases'
 
+  include WithPaperTrail
+
   module CONST
     TYPE_NAME_THINQ = 'ThinQ'
     TYPE_NAME_SIP_REDIRECT = 'SIP 301/302 redirect'

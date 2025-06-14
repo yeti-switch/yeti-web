@@ -15,7 +15,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     def build_new_resource
       record = super
       if params[:action] == 'new'
-        record.fields = CdrExport.last&.fields || []
+        record.fields = CdrExport.where(type: CdrExport::TYPE_BASE).last&.fields || []
       end
       record
     end
@@ -176,7 +176,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
               as: :select,
               multiple: true,
               collection: CdrExport.allowed_fields,
-              input_html: { class: 'chosen' },
+              input_html: { class: 'chosen-sortable' },
               required: true
 
       f.input :callback_url, required: false

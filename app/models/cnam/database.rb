@@ -20,6 +20,8 @@
 class Cnam::Database < ApplicationRecord
   self.table_name = 'class4.cnam_databases'
 
+  include WithPaperTrail
+
   module CONST
     TYPE_NAME_HTTP = 'Http'
     TYPE_HTTP = 'Cnam::DatabaseHttp'

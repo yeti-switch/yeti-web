@@ -21,10 +21,10 @@
 class DisconnectPolicyCode < ApplicationRecord
   self.table_name = 'disconnect_policy_code'
 
+  include WithPaperTrail
+
   belongs_to :policy, class_name: 'DisconnectPolicy', foreign_key: :policy_id
   belongs_to :code, class_name: 'DisconnectCode', foreign_key: :code_id
-
-  include WithPaperTrail
 
   validates :policy_id, :code_id, presence: true
 
