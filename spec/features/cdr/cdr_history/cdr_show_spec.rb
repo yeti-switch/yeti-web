@@ -128,4 +128,139 @@ RSpec.describe 'CDR show', type: :feature do
       end
     end
   end
+
+  context 'when CDR has dump file', js: true do
+    let(:cdr_attrs) { super().merge(local_tag: 'some_local_tag', dump_level_id: 1, node_id: 25) }
+
+    before do
+      allow_any_instance_of(Cdr::CdrPolicy).to receive(:dump?).and_return(true)
+    end
+
+    it 'should setup X-Accel-Redirect header' do
+      expect(Cdr::DownloadPcap).to receive(:call).with(cdr:, response_object: be_present).and_call_original
+
+      subject
+
+      click_on 'SIP trace'
+      expect(response_headers['X-Accel-Redirect']).to eq('/dump/some_local_tag_25.pcap')
+    end
+
+    context 'when s3 storage is configured' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(
+            endpoint: 'http::some_example_s3_storage_url',
+            pcap: OpenStruct.new(bucket: 'test-pcap-bucket'),
+            call_record: OpenStruct.new(bucket: 'test-call-record-bucket')
+          )
+        )
+
+        allow(S3AttachmentWrapper).to receive(:stream_to!).and_yield('dummy data')
+      end
+
+      it 'should download dump pcap file from S3' do
+        expect(Cdr::DownloadPcap).to receive(:call).with(cdr:, response_object: be_present).and_call_original
+
+        subject
+
+        click_on 'SIP trace'
+        expect(response_headers['Content-Disposition']).to eq('attachment; filename="some_local_tag_25.pcap"')
+        expect(response_headers['Content-Type']).to eq('application/octet-stream')
+        expect(page.current_path).to eq(cdr_path(id: cdr.id))
+      end
+    end
+
+    context 'when Cdr::DownloadPcap::Error raised' do
+      before do
+        allow(Cdr::DownloadPcap).to receive(:call).and_raise(Cdr::DownloadPcap::Error, 'Some error occurred')
+      end
+
+      it 'shows an error message' do
+        subject
+
+        click_on 'SIP trace'
+        expect(page).to have_flash_message('Some error occurred', type: :error)
+      end
+    end
+
+    context 'when any other error raised' do
+      before do
+        allow(Cdr::DownloadPcap).to receive(:call).and_raise(StandardError, 'Some error occurred')
+      end
+
+      it 'shows an error message' do
+        subject
+
+        click_on 'SIP trace'
+        expect(page).to have_flash_message('An unexpected error occurred: Some error occurred', type: :error)
+      end
+    end
+  end
+
+  context 'when CDR has record file file', js: true do
+    let(:cdr_attrs) { super().merge(local_tag: 'some_local_tag', audio_recorded: true, duration: 3) }
+
+    before do
+      allow_any_instance_of(Cdr::CdrPolicy).to receive(:download_call_record?).and_return(true)
+    end
+
+    it 'should setup X-Accel-Redirect header' do
+      subject
+
+      click_on 'Call record'
+      expect(response_headers['X-Accel-Redirect']).to eq('/record/some_local_tag.mp3')
+      expect(response_headers['Content-Type']).to eq('audio/mpeg')
+    end
+
+    context 'when s3 storage is configured' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(
+            endpoint: 'http::some_example_s3_storage_url',
+            pcap: OpenStruct.new(bucket: 'test-pcap-bucket'),
+            call_record: OpenStruct.new(bucket: 'test-call-record-bucket')
+          )
+        )
+
+        allow(S3AttachmentWrapper).to receive(:stream_to!).and_yield('dummy data')
+      end
+
+      it 'should download call record file from S3' do
+        expect(Cdr::DownloadCallRecord).to receive(:call).with(cdr:, response_object: be_present).and_call_original
+
+        subject
+
+        click_on 'Call record'
+        expect(response_headers['Content-Disposition']).to eq('attachment; filename="some_local_tag.mp3"')
+        expect(response_headers['Content-Type']).to eq('application/octet-stream')
+        expect(page.current_path).to eq(cdr_path(id: cdr.id))
+      end
+    end
+
+    context 'when Cdr::DownloadCallRecord::Error raised' do
+      before do
+        allow(Cdr::DownloadCallRecord).to receive(:call).and_raise(Cdr::DownloadCallRecord::Error, 'Some error occurred')
+      end
+
+      it 'shows an error message' do
+        subject
+
+        click_on 'Call record'
+        expect(page).to have_flash_message('Some error occurred', type: :error)
+      end
+    end
+
+    context 'when any other error raised' do
+      before do
+        allow(Cdr::DownloadCallRecord).to receive(:call).and_raise(StandardError, 'Some error occurred')
+      end
+
+      it 'shows an error message' do
+        subject
+
+        click_on 'Call record'
+        expect(page).to have_flash_message('An unexpected error occurred: Some error occurred', type: :error)
+      end
+    end
+  end
 end

@@ -24,6 +24,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   end
 
   controller do
+    include ActionController::Live
+
     around_action :try_cdr_replica
 
     def columns_visibility?
@@ -171,26 +173,28 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
   filter :customer_external_id, label: 'Customer external ID', as: :numeric
 
-  # X-Accel-Redirect: /protected/iso.img;
-  #  location /protected/ {
-  #  internal;
-  #  root   /some/path;
-  # }
   member_action :dump, method: :get do
-    file = resource.dump_filename
-    raise ActiveRecord::RecordNotFound if file.blank?
-
-    response.headers['X-Accel-Redirect'] = file
-    head 200
+    Cdr::DownloadPcap.call(cdr: resource, response_object: response)
+  rescue Cdr::DownloadPcap::NotFoundError => e
+    flash[:error] = e.message
+    redirect_back(fallback_location: root_path)
+  rescue StandardError => e
+    flash[:error] = "An unexpected error occurred: #{e.message}"
+    redirect_back(fallback_location: root_path)
+  ensure
+    response.stream.close
   end
 
   member_action :download_call_record, method: :get do
-    file = resource.call_record_filename
-    raise ActiveRecord::RecordNotFound if file.blank?
-
-    response.headers['X-Accel-Redirect'] = file
-    response.headers['Content-Type'] = resource.call_record_ct
-    head 200
+    Cdr::DownloadCallRecord.call(cdr: resource, response_object: response)
+  rescue Cdr::DownloadCallRecord::NotFoundError => e
+    flash[:error] = e.message
+    redirect_back(fallback_location: root_path)
+  rescue StandardError => e
+    flash[:error] = "An unexpected error occurred: #{e.message}"
+    redirect_back(fallback_location: root_path)
+  ensure
+    response.stream.close
   end
 
   member_action :routing_simulation, method: :get do

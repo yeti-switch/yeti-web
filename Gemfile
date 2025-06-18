@@ -147,6 +147,7 @@ gem 'cronex', '~> 0.12.0'
 
 gem 'click_house'
 
+gem 'aws-sdk-s3', require: false
 gem 'cryptomus', '~> 0.2.2'
 gem 'elasticsearch', require: false
 gem 'opentelemetry-exporter-otlp'
