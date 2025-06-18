@@ -2,6 +2,7 @@
 
 class Api::Rest::Admin::CdrsController < Api::Rest::Admin::BaseController
   include TryCdrReplica
+  include ActionController::Live
 
   # rubocop:disable Rails/LexicallyScopedActionFilter
   around_action :try_cdr_replica, only: %i[index show recording]
@@ -9,15 +10,13 @@ class Api::Rest::Admin::CdrsController < Api::Rest::Admin::BaseController
   before_action :find_cdr, only: :recording
 
   def recording
-    if @cdr.has_recording?
-      response.headers['X-Accel-Redirect'] = @cdr.call_record_filename
-      response.headers['Content-Type'] = @cdr.call_record_ct
-      render body: nil
-    else
-      head 404
-    end
+    Cdr::DownloadCallRecord.call(cdr: @cdr, response_object: response)
+  rescue Cdr::DownloadCallRecord::NotFoundError
+    head 404
   rescue StandardError => e
     handle_exceptions(e)
+  ensure
+    response.stream.close
   end
 
   private
