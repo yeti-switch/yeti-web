@@ -68,6 +68,19 @@ RSpec.describe 'config/yeti_web.yml' do
       elasticsearch: {
         url: a_kind_of(String),
         transport_options: a_kind_of(Hash)
+      },
+      s3_storage: {
+        endpoint: a_kind_of(String),
+        access_key_id: a_kind_of(String),
+        secret_access_key: a_kind_of(String),
+        region: a_kind_of(String),
+        force_path_style: be_one_of(true, false),
+        pcap: {
+          bucket: a_kind_of(String)
+        },
+        call_record: {
+          bucket: a_kind_of(String)
+        }
       }
     }
   end

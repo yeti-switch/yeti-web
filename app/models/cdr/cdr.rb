@@ -365,19 +365,33 @@ class Cdr::Cdr < Cdr::Base
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
   end
 
-  def dump_filename
-    if local_tag.present? && node_id.present?
-      "/dump/#{local_tag}_#{node_id}.pcap"
-    end
+  def dump_file_path
+    return unless (name = dump_file_name)
+
+    "/dump/#{name}"
+  end
+
+  def dump_file_name
+    return if local_tag.blank? || node_id.blank?
+
+    "#{local_tag}_#{node_id}.pcap"
   end
 
   def has_recording?
     audio_recorded? and local_tag.present? and duration > 0
   end
 
-  def call_record_filename
+  def call_record_file_path
+    return unless (name = call_record_file_name)
+
+    "/record/#{name}"
+  end
+
+  def call_record_file_name
+    return unless has_recording?
+
     fmt = YetiConfig.rec_format == 'wav' ? 'wav' : 'mp3'
-    "/record/#{local_tag}.#{fmt}" if has_recording?
+    "#{local_tag}.#{fmt}"
   end
 
   def call_record_ct

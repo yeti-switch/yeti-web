@@ -223,6 +223,24 @@ GEM
       ruby2_keywords (>= 0.0.2)
     ast (2.4.2)
     awesome_print (1.8.0)
+    aws-eventstream (1.4.0)
+    aws-partitions (1.1110.0)
+    aws-sdk-core (3.225.0)
+      aws-eventstream (~> 1, >= 1.3.0)
+      aws-partitions (~> 1, >= 1.992.0)
+      aws-sigv4 (~> 1.9)
+      base64
+      jmespath (~> 1, >= 1.6.1)
+      logger
+    aws-sdk-kms (1.102.0)
+      aws-sdk-core (~> 3, >= 3.225.0)
+      aws-sigv4 (~> 1.5)
+    aws-sdk-s3 (1.189.0)
+      aws-sdk-core (~> 3, >= 3.225.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.5)
+    aws-sigv4 (1.12.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
     bcrypt (3.1.13)
     benchmark (0.4.0)
@@ -412,6 +430,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    jmespath (1.6.2)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -913,6 +932,7 @@ DEPENDENCIES
   activerecord-import
   annotate
   awesome_print
+  aws-sdk-s3
   bootsnap
   brakeman
   bullet
