@@ -97,6 +97,8 @@
 #  termination_subscriber_cps_wsize :integer(2)       default(1), not null
 #  to_rewrite_result                :string
 #  to_rewrite_rule                  :string
+#  transfer_append_headers_req      :string           default([]), not null, is an Array
+#  transfer_tel_uri_host            :string
 #  transit_headers_from_origination :string
 #  transit_headers_from_termination :string
 #  try_avoid_transcoding            :boolean          default(FALSE), not null

@@ -452,6 +452,8 @@ ActiveAdmin.register Gateway do
               f.input :force_cancel_routeset
               f.input :max_30x_redirects
               f.input :max_transfers
+              f.input :transfer_append_headers_req, as: :newline_array_of_headers
+              f.input :transfer_tel_uri_host
               f.input :sip_timer_b
               f.input :dns_srv_failover_timer
               f.input :suppress_early_media
@@ -664,6 +666,10 @@ ActiveAdmin.register Gateway do
             row :force_cancel_routeset
             row :max_30x_redirects
             row :max_transfers
+            row :transfer_append_headers_req do |row|
+              pre row.transfer_append_headers_req.join("\r\n")
+            end
+            row :transfer_tel_uri_host
             row :sip_timer_b
             row :dns_srv_failover_timer
             row :suppress_early_media
