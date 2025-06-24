@@ -32,12 +32,17 @@
 class Billing::Service < ApplicationRecord
   self.table_name = 'billing.services'
 
+  before_update :prevent_modification_if_terminated
+  before_destroy :prevent_modification_if_terminated
+
   STATE_ID_ACTIVE = 10
   STATE_ID_SUSPENDED = 20
+  STATE_ID_TERMINATED = 30
 
   STATES = {
     STATE_ID_ACTIVE => 'Active',
-    STATE_ID_SUSPENDED => 'Suspended'
+    STATE_ID_SUSPENDED => 'Suspended',
+    STATE_ID_TERMINATED => 'Terminated'
   }.freeze
 
   RENEW_PERIOD_ID_DAY = 10
@@ -116,6 +121,13 @@ class Billing::Service < ApplicationRecord
   end
 
   private
+
+  def prevent_modification_if_terminated
+    if state_id == STATE_ID_TERMINATED
+      errors.add(:base, "Modifications are not allowed for terminated records")
+      throw(:abort)
+    end
+  end
 
   def provisioning_object_after_create
     build_provisioning_object.after_create
