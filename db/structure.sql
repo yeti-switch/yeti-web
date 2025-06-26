@@ -3544,7 +3544,9 @@ CREATE TABLE class4.gateways (
     termination_subscriber_cps_limit smallint,
     termination_subscriber_cps_wsize smallint DEFAULT 1 NOT NULL,
     dump_level_id smallint DEFAULT 0 NOT NULL,
-    throttling_profile_id smallint
+    throttling_profile_id smallint,
+    transfer_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
+    transfer_tel_uri_host character varying
 );
 
 
@@ -31662,7 +31664,7 @@ $$;
 -- Name: load_gateway_attributes_cache(); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.load_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold_start real, throttling_threshold_end real, throttling_window smallint, throttling_minimum_calls smallint)
+CREATE FUNCTION switch22.load_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold_start real, throttling_threshold_end real, throttling_window smallint, throttling_minimum_calls smallint, transfer_append_headers_req character varying[], transfer_tel_uri_host character varying)
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -31673,7 +31675,9 @@ BEGIN
       gtp.threshold_start as throttling_threshold_start,
       gtp.threshold_end as throttling_threshold_end,
       gtp."window" as throttling_window,
-      gtp.minimum_calls as throttling_minimum_calls
+      gtp.minimum_calls as throttling_minimum_calls,
+      gw.transfer_append_headers_req,
+      gw.transfer_tel_uri_host
     FROM class4.gateways gw
     LEFT JOIN class4.gateway_throttling_profiles gtp ON gtp.id = gw.throttling_profile_id
     ORDER BY gw.id;
@@ -50283,6 +50287,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250624154107'),
 ('20250601164825'),
 ('20250529091440'),
 ('20250528212558'),
