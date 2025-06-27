@@ -209,7 +209,7 @@ FactoryBot.define do
     auth_enabled { false }
     auth_user { nil }
     auth_password { nil }
-    term_outbound_proxy { nil }
+    term_outbound_proxy { 'term-proxy.example.com' }
     term_next_hop_for_replies { false }
     term_use_outbound_proxy { false }
     termination_capacity { nil }
@@ -237,7 +237,7 @@ FactoryBot.define do
     dialog_nat_handling { true }
     orig_force_outbound_proxy { false }
     orig_use_outbound_proxy { false }
-    orig_outbound_proxy { nil }
+    orig_outbound_proxy { 'orig-outbound-proxy.example.com' }
     prefer_existing_codecs { true }
     force_symmetric_rtp { true }
     transparent_dialog_id { false }

@@ -344,7 +344,7 @@ class Gateway < ApplicationRecord
 
   validates :termination_cps_wsize,
             :termination_subscriber_cps_wsize,
-            numericality: { greater_than: 0, less_than_or_equal_to: 120, allow_nil: false, only_integer: true }
+            numericality: { greater_than: 0, less_than_or_equal_to: 900, allow_nil: false, only_integer: true }
 
   validates :port, numericality: { greater_than_or_equal_to: ApplicationRecord::L4_PORT_MIN, less_than_or_equal_to: ApplicationRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
 
@@ -397,6 +397,9 @@ class Gateway < ApplicationRecord
 
   validates :dump_level_id, presence: true
   validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: false
+
+  validates :orig_outbound_proxy, presence: true, if: proc { orig_use_outbound_proxy? or orig_force_outbound_proxy? }
+  validates :term_outbound_proxy, presence: true, if: proc { term_use_outbound_proxy? or term_force_outbound_proxy? }
 
   include Yeti::ResourceStatus
 
