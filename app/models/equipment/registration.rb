@@ -73,7 +73,6 @@ class Equipment::Registration < ApplicationRecord
   end
 
   include Yeti::ResourceStatus
-  include Yeti::RegistrationReloader
   include Yeti::StateUpdater
   self.state_names = ['registrations']
 end

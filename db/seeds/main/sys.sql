@@ -76,7 +76,6 @@ INSERT INTO sys.guiconfig (rows_per_page, id, cdr_unload_dir, cdr_unload_uri, ma
 --
 
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (1, 'CdrPartitioning', NULL, NULL, NULL);
-INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (2, 'EventProcessor', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (3, 'CdrBatchCleaner', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (4, 'PartitionRemoving', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (5, 'CallsMonitoring', NULL, NULL, NULL);

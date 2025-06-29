@@ -37,7 +37,6 @@ class DisconnectCode < ApplicationRecord
 
   include WithPaperTrail
 
-  include Yeti::TranslationReloader
   include Yeti::StateUpdater
   self.state_names = ['translations']
 
