@@ -1447,13 +1447,6 @@ SELECT pg_catalog.setval('sys.delayed_jobs_id_seq', 1, false);
 
 
 --
--- Name: events_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid
---
-
-SELECT pg_catalog.setval('sys.events_id_seq', 1, false);
-
-
---
 -- Name: guiconfig_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid
 --
 
