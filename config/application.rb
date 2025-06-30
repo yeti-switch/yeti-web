@@ -118,6 +118,7 @@ module Yeti
     config.rails_semantic_logger.semantic = true
     config.log_tags = {
       request_id: :request_id,
+      remote_ip: :remote_ip,
       **(YetiConfig.logs&.tags&.to_h || {})
     }
   end
