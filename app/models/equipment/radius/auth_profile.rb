@@ -42,14 +42,6 @@ class Equipment::Radius::AuthProfile < ApplicationRecord
   validates :attempts, numericality: { greater_than_or_equal_to: ATTEMPTS_MIN, less_than_or_equal_to: ATTEMPTS_MAX, allow_nil: true, only_integer: true }
   validates :port, numericality: { greater_than_or_equal_to: ApplicationRecord::L4_PORT_MIN, less_than_or_equal_to: ApplicationRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
 
-  before_save do
-    Event.reload_radius_auth_profiles
-  end
-
-  after_destroy do
-    Event.reload_radius_auth_profiles
-  end
-
   def set_reject_on_error
     self.reject_on_error = true
     save!

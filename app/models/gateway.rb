@@ -558,7 +558,6 @@ class Gateway < ApplicationRecord
     end
   end
 
-  include Yeti::IncomingAuthReloader
   include Yeti::StateUpdater
   self.state_names = %w[auth_credentials gateways_cache]
 
@@ -576,25 +575,6 @@ class Gateway < ApplicationRecord
 
   def ensure_rtp_acl_format
     self.rtp_acl = nil if rtp_acl.blank?
-  end
-
-  # @see Yeti::IncomingAuthReloader
-  def reload_incoming_auth_on_create?
-    incoming_auth_username.present? || incoming_auth_allow_jwt == true
-  end
-
-  # @see Yeti::IncomingAuthReloader
-  def reload_incoming_auth_on_update?
-    ((incoming_auth_username.present? or incoming_auth_allow_jwt == true) && enabled_changed?) || incoming_auth_changed?
-  end
-
-  # @see Yeti::IncomingAuthReloader
-  def reload_incoming_auth_on_destroy?
-    incoming_auth_username.present? || incoming_auth_allow_jwt == true
-  end
-
-  def incoming_auth_changed?
-    incoming_auth_username_changed? || incoming_auth_password_changed? || incoming_auth_allow_jwt_changed?
   end
 
   def incoming_auth_disabled?

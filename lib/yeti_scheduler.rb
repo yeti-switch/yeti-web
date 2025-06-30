@@ -94,7 +94,6 @@ class YetiScheduler < Scheduler::Base
   cron Jobs::CdrPartitioning
   cron Jobs::CdrBatchCleaner
   cron Jobs::PartitionRemoving
-  cron Jobs::EventProcessor
   cron Jobs::CallsMonitoring
   cron Jobs::StatsClean
   cron Jobs::StatsAggregation

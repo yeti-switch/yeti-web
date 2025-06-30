@@ -27,7 +27,6 @@ class Node < ApplicationRecord
   validates :id, :pop, :rpc_endpoint, :name, presence: true
   validates :id, :name, :rpc_endpoint, uniqueness: true
 
-  has_many :events, dependent: :destroy
   has_many :registrations, class_name: 'Equipment::Registration', dependent: :restrict_with_error
 
   def self.random_node

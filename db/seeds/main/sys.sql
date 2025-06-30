@@ -76,7 +76,6 @@ INSERT INTO sys.guiconfig (rows_per_page, id, cdr_unload_dir, cdr_unload_uri, ma
 --
 
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (1, 'CdrPartitioning', NULL, NULL, NULL);
-INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (2, 'EventProcessor', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (3, 'CdrBatchCleaner', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (4, 'PartitionRemoving', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (5, 'CallsMonitoring', NULL, NULL, NULL);
@@ -1445,13 +1444,6 @@ SELECT pg_catalog.setval('sys.currencies_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('sys.delayed_jobs_id_seq', 1, false);
-
-
---
--- Name: events_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid
---
-
-SELECT pg_catalog.setval('sys.events_id_seq', 1, false);
 
 
 --

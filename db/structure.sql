@@ -45089,33 +45089,6 @@ ALTER SEQUENCE sys.delayed_jobs_id_seq OWNED BY sys.delayed_jobs.id;
 
 
 --
--- Name: events_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.events_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: events; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.events (
-    id integer DEFAULT nextval('sys.events_id_seq'::regclass) NOT NULL,
-    command character varying NOT NULL,
-    retries integer DEFAULT 0 NOT NULL,
-    node_id integer NOT NULL,
-    created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone,
-    last_error character varying
-);
-
-
---
 -- Name: guiconfig; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -48187,14 +48160,6 @@ ALTER TABLE ONLY sys.delayed_jobs
 
 
 --
--- Name: events events_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.events
-    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
-
-
---
 -- Name: guiconfig guiconfig_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -50225,14 +50190,6 @@ ALTER TABLE ONLY sys.currencies
 
 
 --
--- Name: events events_node_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.events
-    ADD CONSTRAINT events_node_id_fkey FOREIGN KEY (node_id) REFERENCES sys.nodes(id);
-
-
---
 -- Name: cdr_exports fk_rails_e796f29195; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -50287,6 +50244,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250629122257'),
 ('20250624154107'),
 ('20250601164825'),
 ('20250529091440'),
