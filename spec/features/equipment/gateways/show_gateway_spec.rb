@@ -78,7 +78,7 @@ RSpec.describe 'Show Gateway', type: :feature, js: true do
 
     context 'when user have policy to allow_incoming_auth_credentials' do
       before do
-        policy_roles = Rails.configuration.policy_roles.deep_merge!(
+        policy_roles = Rails.configuration.policy_roles.deep_merge(
           user: { :Gateway => { allow_incoming_auth_credentials: true } }
         )
         allow(Rails.configuration).to receive(:policy_roles).and_return(policy_roles)

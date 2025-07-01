@@ -44,6 +44,7 @@ ActiveAdmin.register Cnam::Database do
     id_column
     actions
     column :name
+    column :drop_call_on_error
     column :type, :database_type_name, sortable: :database_type
     column :created_at
   end
@@ -55,7 +56,7 @@ ActiveAdmin.register Cnam::Database do
          label: 'Type',
          input_html: { class: :chosen },
          collection: Cnam::Database::CONST::TYPES.invert.to_a
-
+  filter :drop_call_on_error
   filter :created_at
 
   sidebar :test, only: [:show] do
@@ -75,6 +76,7 @@ ActiveAdmin.register Cnam::Database do
         attributes_table do
           row :id
           row :name
+          row :drop_call_on_error
           row :request_lua do |row|
             pre code row.request_lua, class: 'lua'
           end
@@ -100,7 +102,7 @@ ActiveAdmin.register Cnam::Database do
   end
 
   permit_params do
-    attrs = %i[name database_type response_lua request_lua]
+    attrs = %i[name drop_call_on_error database_type response_lua request_lua]
     database_attrs = [:type]
     database_type = params[:cnam_database].try!(:[], :database_type) ||
                     params[:cnam_database].try!(:[], :database_attributes).try!(:[], :type)
@@ -119,6 +121,7 @@ ActiveAdmin.register Cnam::Database do
 
     f.inputs name: 'Main' do
       f.input :name
+      f.input :drop_call_on_error
       f.input :request_lua, as: :text
       f.input :response_lua, as: :text
     end

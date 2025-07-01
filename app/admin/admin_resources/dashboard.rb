@@ -18,20 +18,6 @@ ActiveAdmin.register_page 'Dashboard' do
 
     columns do
       column do
-        if Event.any?
-          panel 'Last 10 pending events' + " (Total: #{Event.count})" do
-            table_for(Event.eager_load(:node).order('created_at desc').limit(10)) do
-              column :created_at
-              column :command
-              column :node
-              column :retries
-              column :last_error do |e|
-                with_tooltip(e.last_error) { e.last_error.to_s[0..20] }
-              end
-            end
-          end
-        end
-
         panel 'Billing provisioning' do
           attributes_table_for Cdr::Cdr.provisioning_info do
             row :new_events

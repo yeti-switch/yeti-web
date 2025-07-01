@@ -24,29 +24,12 @@
 #  sensors_mode_id_fkey  (mode_id => sensor_modes.id)
 #
 
-require 'shared_examples/shared_examples_for_events'
-
 RSpec.describe System::Sensor do
   let(:mode_id) { 1 }
   let(:source_ip) { '192.168.0.1' }
   let(:target_ip) { '192.168.0.2' }
   let(:source_interface) { nil }
   let(:target_mac) { nil }
-
-  it_behaves_like 'Event originator for all Nodes' do
-    let(:request_command) { 'request.sensors.reload' }
-    let(:object_name) { :sensor }
-    let(:object_fields) do
-      {
-        name: 'Experimental sensor',
-        mode_id: mode_id,
-        source_ip: source_ip,
-        target_ip: target_ip,
-        source_interface: source_interface,
-        target_mac: target_mac
-      }
-    end
-  end
 
   describe '#create' do
     subject do

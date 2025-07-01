@@ -6,16 +6,10 @@ RSpec.describe 'Index Dashboard', type: :feature do
   end
 
   include_context :login_as_admin
-  let!(:unique_commands) do
-    create_list(:event, 5, :uniq_command)
-  end
 
   it 'renders dashboard' do
     subject
     expect(page).to have_current_path dashboard_path
-    unique_commands.each do |item|
-      expect(page).to have_css('td.col-command', text: item.command)
-    end
   end
 
   context 'when admin_user.allowed_ips match request.remote_ip' do
@@ -26,9 +20,6 @@ RSpec.describe 'Index Dashboard', type: :feature do
     it 'renders dashboard' do
       subject
       expect(page).to have_current_path dashboard_path
-      unique_commands.each do |item|
-        expect(page).to have_css('td.col-command', text: item.command)
-      end
     end
   end
 

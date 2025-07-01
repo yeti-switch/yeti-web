@@ -279,14 +279,12 @@ RSpec.describe Gateway, type: :model do
       }
     end
 
-    include_examples :does_not_call_event_with, :reload_incoming_auth
     include_examples :creates_record
     include_examples :changes_records_qty_of, described_class, by: 1
 
     context 'with auth credentials' do
       let(:create_params) { super().merge(incoming_auth_username: 'qwe', incoming_auth_password: 'asd') }
 
-      include_examples :calls_event_with, :reload_incoming_auth
       include_examples :creates_record
       include_examples :changes_records_qty_of, described_class, by: 1
     end
@@ -338,7 +336,6 @@ RSpec.describe Gateway, type: :model do
         let(:update_params) { { enabled: true } }
 
         include_examples :updates_record
-        include_examples :does_not_call_event_with, :reload_incoming_auth
       end
 
       context 'when change enable true->false' do
@@ -346,7 +343,6 @@ RSpec.describe Gateway, type: :model do
         let(:update_params) { { enabled: false } }
 
         include_examples :updates_record
-        include_examples :does_not_call_event_with, :reload_incoming_auth
       end
 
       context 'when change incoming_auth_username to something' do
@@ -355,7 +351,6 @@ RSpec.describe Gateway, type: :model do
         include_examples :does_not_update_record, errors: {
           incoming_auth_password: "can't be blank"
         }
-        include_examples :does_not_call_event_with, :reload_incoming_auth
       end
 
       context 'when change incoming_auth_password to something' do
@@ -364,14 +359,12 @@ RSpec.describe Gateway, type: :model do
         include_examples :does_not_update_record, errors: {
           incoming_auth_username: "can't be blank"
         }
-        include_examples :does_not_call_event_with, :reload_incoming_auth
       end
 
       context 'when change incoming_auth_username and incoming_auth_password to something' do
         let(:update_params) { { incoming_auth_username: 'qwe', incoming_auth_password: 'asd' } }
 
         include_examples :updates_record
-        include_examples :calls_event_with, :reload_incoming_auth
       end
     end
 
@@ -383,7 +376,6 @@ RSpec.describe Gateway, type: :model do
         let(:update_params) { { enabled: true } }
 
         include_examples :updates_record
-        include_examples :calls_event_with, :reload_incoming_auth
       end
 
       context 'when change enable true->false' do
@@ -391,7 +383,6 @@ RSpec.describe Gateway, type: :model do
         let(:update_params) { { enabled: false } }
 
         include_examples :updates_record
-        include_examples :calls_event_with, :reload_incoming_auth
       end
 
       context 'when clear incoming_auth_username and incoming_auth_password' do
@@ -399,13 +390,11 @@ RSpec.describe Gateway, type: :model do
         before { record.customers_auths.where(require_incoming_auth: true).delete_all }
 
         include_examples :updates_record
-        include_examples :calls_event_with, :reload_incoming_auth
 
         context 'when was enabled' do
           let(:record_attrs) { super().merge(enabled: true) }
 
           include_examples :updates_record
-          include_examples :calls_event_with, :reload_incoming_auth
         end
       end
     end
@@ -422,7 +411,6 @@ RSpec.describe Gateway, type: :model do
     context 'without incoming_auth' do
       include_examples :changes_records_qty_of, described_class, by: -1
       include_examples :destroys_record
-      include_examples :does_not_call_event_with, :reload_incoming_auth
     end
 
     context 'with incoming_auth' do
@@ -430,7 +418,6 @@ RSpec.describe Gateway, type: :model do
 
       include_examples :changes_records_qty_of, described_class, by: -1
       include_examples :destroys_record
-      include_examples :calls_event_with, :reload_incoming_auth
     end
 
     context 'when Gateway is linked to RateManagement Project' do
