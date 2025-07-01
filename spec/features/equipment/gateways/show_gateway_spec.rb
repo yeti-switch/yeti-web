@@ -67,13 +67,22 @@ RSpec.describe 'Show Gateway', type: :feature, js: true do
       stub_jrpc_connect_error(node.rpc_endpoint)
     end
 
-    it 'shows gateway details page' do
-      subject
+    context 'when user have policy to not allow_incoming_auth_credentials' do
+      before do
+        policy_roles = Rails.configuration.policy_roles.deep_merge!(
+          user: { :Gateway => { allow_incoming_auth_credentials: false } }
+        )
+        allow(Rails.configuration).to receive(:policy_roles).and_return(policy_roles)
+      end
 
-      expect(page).to have_attribute_row('ID', exact_text: gateway.id)
-      switch_tab('Signaling')
-      expect(page).not_to have_attribute_row('Incoming Auth Username')
-      expect(page).not_to have_attribute_row('Incoming Auth Password')
+      it 'shows gateway details page' do
+        subject
+
+        expect(page).to have_attribute_row('ID', exact_text: gateway.id)
+        switch_tab('Signaling')
+        expect(page).not_to have_attribute_row('Incoming Auth Username')
+        expect(page).not_to have_attribute_row('Incoming Auth Password')
+      end
     end
 
     context 'when user have policy to allow_incoming_auth_credentials' do
