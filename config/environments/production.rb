@@ -48,12 +48,6 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Prepend all log lines with the following tags.
-  config.log_tags = {
-    request_id: :request_id,
-    **(YetiConfig.elasticsearch&.meta&.to_h || {})
-  }
-
   # "info" includes generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
   # want to log everything, set the level to "debug".
