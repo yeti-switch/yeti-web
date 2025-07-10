@@ -19,14 +19,19 @@
   };
 
   $.fn.chosenOrder = function() {
-    var $this   = this.filter('.' + this.chosenClassPrefix() + '-sortable[multiple]').first(),
-        $chosen = $this.siblings('.' + this.chosenClassPrefix() + '-container');
+    let $this    = this.filter('.' + this.chosenClassPrefix() + '-sortable[multiple]').first(),
+        $chosen  = $this.siblings('.' + this.chosenClassPrefix() + '-container'),
+        $options = $this.find('option');
 
     return $($chosen.find('.' + this.chosenClassPrefix() + '-choices li[class!="search-field"]').map( function() {
       if (!this) {
         return undefined;
       }
-      return $this.find('option:contains(' + $(this).text() + ')')[0];
+
+      let optionText = $(this).text();
+      return $options.filter(function() {
+        return $(this).text() === optionText;
+      })[0];
     }));
   };
 

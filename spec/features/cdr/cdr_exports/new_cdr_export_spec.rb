@@ -45,9 +45,8 @@ RSpec.describe 'Create new CDR export', js: true do
   end
 
   context 'with inherited fields' do
-    before do
-      create :cdr_export, :completed, fields: %w[id customer_id success]
-    end
+    let!(:cdr_export) { FactoryBot.create(:cdr_export, :completed, fields:) }
+    let(:fields) { %w[id customer_id success] }
 
     let(:fill_form!) do
       fill_in_chosen 'Customer acc id eq', with: account.name, ajax: true
@@ -73,6 +72,21 @@ RSpec.describe 'Create new CDR export', js: true do
         time_start_lteq: '2018-03-01T00:00:00.000Z',
         customer_acc_id_eq: account.id
       )
+    end
+
+    context 'when fields have a certain order' do
+      let(:fields) { %w[customer_id id success] }
+
+      it 'CDR Export should be created with correct fields order' do
+        subject
+        expect(page).to have_text('Cdr export was successfully created.')
+        expect(CdrExport.last!).to have_attributes(
+          callback_url: '',
+          fields: %w[customer_id id success],
+          status: 'Pending',
+          filters: a_kind_of(CdrExport::FiltersModel)
+        )
+      end
     end
   end
 
