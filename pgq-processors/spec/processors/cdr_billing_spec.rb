@@ -54,7 +54,7 @@ RSpec.describe CdrBilling do
 
   let(:vendor_acc) do
     Account.create!(
-      contractor_id: Contractor.create!(vendor: true).id,
+      contractor_id: Contractor.create!(name: 'pgq test vendor', enabled: true, customer: false, vendor: true).id,
       balance: 100,
       min_balance: 0,
       max_balance: 200,
@@ -64,7 +64,7 @@ RSpec.describe CdrBilling do
 
   let(:customer_acc) do
     Account.create!(
-      contractor_id: Contractor.create!(customer: true).id,
+      contractor_id: Contractor.create!(name: 'pgq test customer', enabled: true, customer: true, vendor: false).id,
       balance: 100,
       min_balance: 0,
       max_balance: 200,
