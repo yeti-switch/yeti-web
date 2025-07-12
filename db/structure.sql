@@ -43986,10 +43986,10 @@ CREATE TABLE public.ar_internal_metadata (
 
 CREATE TABLE public.contractors (
     id integer NOT NULL,
-    name character varying,
-    enabled boolean,
-    vendor boolean,
-    customer boolean,
+    name character varying NOT NULL,
+    enabled boolean NOT NULL,
+    vendor boolean NOT NULL,
+    customer boolean NOT NULL,
     description character varying,
     address character varying,
     phones character varying,
@@ -50244,6 +50244,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250712180031'),
 ('20250629122257'),
 ('20250624154107'),
 ('20250601164825'),
