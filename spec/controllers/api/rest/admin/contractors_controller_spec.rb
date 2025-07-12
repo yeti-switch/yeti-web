@@ -121,7 +121,7 @@ RSpec.describe Api::Rest::Admin::ContractorsController, type: :controller do
     end
 
     context 'when attributes are valid' do
-      let(:attributes) { { name: 'name', vendor: true, 'external-id': 100 } }
+      let(:attributes) { { name: 'name', enabled: true, customer: false, vendor: true, 'external-id': 100 } }
 
       let(:relationships) do
         { 'smtp-connection': wrap_relationship(:'smtp-connections', create(:smtp_connection).id) }
