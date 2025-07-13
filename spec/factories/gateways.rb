@@ -182,6 +182,7 @@
 FactoryBot.define do
   factory :gateway, class: 'Gateway' do
     sequence(:name) { |n| "gateway#{n}" }
+    sequence(:external_id) { |n| n }
     enabled { true }
     priority { 122 }
     weight { 220 }

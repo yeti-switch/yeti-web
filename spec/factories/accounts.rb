@@ -41,6 +41,7 @@
 FactoryBot.define do
   factory :account, class: 'Account' do
     sequence(:name) { |n| "account#{n}" }
+    sequence(:external_id) { |n| n }
     association :contractor, vendor: true
     balance { 0 }
     vat { 23.1 }

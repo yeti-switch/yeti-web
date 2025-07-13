@@ -105,6 +105,8 @@
 FactoryBot.define do
   factory :customers_auth, class: 'CustomersAuth' do
     sequence(:name) { |n| "customers_auth_#{n}" }
+    sequence(:external_id) { |n| n }
+    sequence(:external_type) { |n| "type#{n}" }
     diversion_policy_id { CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT }
     dump_level_id { 1 }
 
