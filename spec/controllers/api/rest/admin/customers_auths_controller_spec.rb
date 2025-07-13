@@ -66,8 +66,8 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
       expect(response_data['attributes']).to match(
                                                hash_including(
                                                  'name' => customers_auth.name,
-                                                 'external-id' => nil,
-                                                 'external-type' => nil
+                                                 'external-id' => customers_auth.external_id,
+                                                 'external-type' => customers_auth.external_type
                                                )
                                              )
     end
@@ -79,40 +79,6 @@ RSpec.describe Api::Rest::Admin::CustomersAuthsController, type: :controller do
         subject
         expect(response.status).to eq(404)
         expect(response_data).to eq(nil)
-      end
-    end
-
-    context 'when customers auth have filled external_id' do
-      let(:customers_auth_attrs) { super().merge external_id: 123 }
-
-      it 'responds with correct resource' do
-        subject
-        expect(response.status).to eq(200)
-        expect(response_data['id']).to eq(customers_auth.id.to_s)
-        expect(response_data['attributes']).to match(
-                                                 hash_including(
-                                                   'name' => customers_auth.name,
-                                                   'external-id' => 123,
-                                                   'external-type' => nil
-                                                 )
-                                               )
-      end
-    end
-
-    context 'when customers auth have filled external_id and external_type' do
-      let(:customers_auth_attrs) { super().merge external_id: 123, external_type: 'foo' }
-
-      it 'responds with correct resource' do
-        subject
-        expect(response.status).to eq(200)
-        expect(response_data['id']).to eq(customers_auth.id.to_s)
-        expect(response_data['attributes']).to match(
-                                                 hash_including(
-                                                   'name' => customers_auth.name,
-                                                   'external-id' => 123,
-                                                   'external-type' => 'foo'
-                                                 )
-                                               )
       end
     end
   end

@@ -9,7 +9,9 @@ RSpec.describe 'Update Gateway', type: :feature, js: true do
 
   let!(:gateway) { FactoryBot.create(:gateway, *gateway_traits, **gateway_attrs) }
   let(:gateway_traits) { [] }
-  let(:gateway_attrs) { {} }
+  # we have to set external_id to nil because there is UI logic that prevents
+  # username/password editing for GWs with not null external id
+  let(:gateway_attrs) { { external_id: nil } }
 
   context 'when gateway has assigned numberlists' do
     let!(:termination_src_numberlist) { FactoryBot.create(:numberlist) }

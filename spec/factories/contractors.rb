@@ -27,6 +27,7 @@
 FactoryBot.define do
   factory :contractor, class: 'Contractor' do
     sequence(:name) { |n| "contractor#{n}" }
+    sequence(:external_id) { |n| n }
     enabled { true }
     vendor { false }
     customer { false }
