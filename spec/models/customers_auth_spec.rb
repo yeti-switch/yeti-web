@@ -237,7 +237,7 @@ RSpec.describe CustomersAuth, type: :model do
 
       context 'when customers_auth with external_id=123,external_type=null exists' do
         before do
-          create(:customers_auth, external_id: 123)
+          create(:customers_auth, external_id: 123, external_type: nil)
         end
 
         include_examples :does_not_create_record, errors: {
@@ -261,7 +261,7 @@ RSpec.describe CustomersAuth, type: :model do
 
     context 'with external_type="bar"' do
       let(:create_params) do
-        super().merge external_type: 'bar'
+        super().merge external_id: nil, external_type: 'bar'
       end
 
       include_examples :does_not_create_record, errors: {
