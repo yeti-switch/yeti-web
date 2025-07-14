@@ -37,6 +37,7 @@ RSpec.describe 'Export Numberlist Item', type: :feature do
         ['Lua script name', item.lua_script.name],
         ['Tag action name', item.tag_action.name],
         ['Tag action value names', item.tag_action_values.map(&:name).join(', ')],
+        ['Rewrite ss status name', item.rewrite_ss_status_name.to_s],
         ['Created at', item.created_at.to_s],
         ['Updated at', item.updated_at.to_s]
       ]
