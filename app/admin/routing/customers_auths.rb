@@ -265,6 +265,10 @@ ActiveAdmin.register CustomersAuth do
                           path: '/numberlists/search'
 
   filter :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
+  filter :rewrite_ss_status_id_eq,
+         label: 'Rewrite SS status',
+         as: :select,
+         collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -424,7 +428,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :ss_mode_id, as: :select, include_blank: false, collection: CustomersAuth::SS_MODES.invert
           f.input :ss_invalid_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_INVALID_IDENTITY_ACTIONS.invert
           f.input :ss_no_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_NO_IDENTITY_ACTIONS.invert
-          f.input :rewrite_ss_status_id, as: :select, include_blank: true, collection: CustomersAuth::SS_STATUSES.invert
+          f.input :rewrite_ss_status_id, as: :select, include_blank: true, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
           f.input :ss_src_rewrite_rule
           f.input :ss_src_rewrite_result
           f.input :ss_dst_rewrite_rule
