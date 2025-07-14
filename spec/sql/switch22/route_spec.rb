@@ -4140,7 +4140,7 @@ RSpec.describe '#routing logic' do
             context "none value #{val}, rewrite" do
               let(:identity) { val }
               let(:customer_auth_ss_no_identity_action_id) { CustomersAuth::SS_NO_IDENTITY_ACTION_REWRITE }
-              let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
+              let(:customer_auth_rewrite_ss_status_id) { Equipment::StirShaken::Attestation::ATTESTATION_B }
 
               let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
               let(:crt) { create(:stir_shaken_signing_certificate) }
@@ -4214,7 +4214,7 @@ RSpec.describe '#routing logic' do
             context "invalid value #{val}, rewrite + insert" do
               let(:identity) { val }
               let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REWRITE }
-              let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_C }
+              let(:customer_auth_rewrite_ss_status_id) { Equipment::StirShaken::Attestation::ATTESTATION_C }
 
               let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
               let(:crt) { create(:stir_shaken_signing_certificate) }
@@ -4239,7 +4239,7 @@ RSpec.describe '#routing logic' do
             context "invalid value #{val}, rewrite + can't insert without certificate" do
               let(:identity) { val }
               let(:customer_auth_ss_invalid_identity_action_id) { CustomersAuth::SS_INVALID_IDENTITY_ACTION_REWRITE }
-              let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_C }
+              let(:customer_auth_rewrite_ss_status_id) { Equipment::StirShaken::Attestation::ATTESTATION_C }
 
               let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
 
@@ -4395,7 +4395,7 @@ RSpec.describe '#routing logic' do
 
         context 'Force rewrite mode' do
           let(:customer_auth_ss_mode_id) { CustomersAuth::SS_MODE_REWRITE }
-          let(:customer_auth_rewrite_ss_status_id) { CustomersAuth::SS_STATUS_B }
+          let(:customer_auth_rewrite_ss_status_id) { Equipment::StirShaken::Attestation::ATTESTATION_B }
 
           context ',try to insert without certificates' do
             let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
