@@ -15,6 +15,7 @@
 #  lua_script_name            :string
 #  mode_name                  :string
 #  name                       :string
+#  rewrite_ss_status_name     :string
 #  tag_action_name            :string
 #  tag_action_value           :integer(2)       default([]), not null, is an Array
 #  tag_action_value_names     :string
@@ -22,6 +23,7 @@
 #  lua_script_id              :integer(2)
 #  mode_id                    :integer(4)
 #  o_id                       :integer(2)
+#  rewrite_ss_status_id       :integer(2)
 #  tag_action_id              :integer(4)
 #
 FactoryBot.define do

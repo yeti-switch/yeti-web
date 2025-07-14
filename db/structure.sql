@@ -16012,6 +16012,7 @@ CREATE TABLE class4.numberlist_items (
     lua_script_id smallint,
     defer_src_rewrite boolean DEFAULT false NOT NULL,
     defer_dst_rewrite boolean DEFAULT false NOT NULL,
+    rewrite_ss_status_id smallint,
     CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
     CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
 );
@@ -40598,7 +40599,8 @@ CREATE TABLE class4.numberlists (
     external_id bigint,
     external_type character varying,
     defer_src_rewrite boolean DEFAULT false NOT NULL,
-    defer_dst_rewrite boolean DEFAULT false NOT NULL
+    defer_dst_rewrite boolean DEFAULT false NOT NULL,
+    rewrite_ss_status_id smallint
 );
 
 
@@ -43148,7 +43150,9 @@ CREATE TABLE data_import.import_numberlist_items (
     number_max_length smallint,
     lua_script_id smallint,
     lua_script_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    rewrite_ss_status_id smallint,
+    rewrite_ss_status_name character varying
 );
 
 
@@ -43194,7 +43198,9 @@ CREATE TABLE data_import.import_numberlists (
     tag_action_value_names character varying,
     lua_script_id smallint,
     lua_script_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    rewrite_ss_status_id smallint,
+    rewrite_ss_status_name character varying
 );
 
 
@@ -50121,6 +50127,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250714084517'),
 ('20250713123436'),
 ('20250712180031'),
 ('20250629122257'),

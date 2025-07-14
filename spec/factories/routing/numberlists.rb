@@ -20,6 +20,7 @@
 #  external_id                :bigint(8)
 #  lua_script_id              :integer(2)
 #  mode_id                    :integer(2)       default(1), not null
+#  rewrite_ss_status_id       :integer(2)
 #  tag_action_id              :integer(2)
 #
 # Indexes
