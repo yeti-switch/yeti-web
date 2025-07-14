@@ -44,15 +44,24 @@ class Importing::NumberlistItem < Importing::Base
                               action_id
                               src_rewrite_rule src_rewrite_result
                               dst_rewrite_rule dst_rewrite_result
-                              tag_action_id tag_action_value lua_script_id]
+                              tag_action_id tag_action_value rewrite_ss_status_id lua_script_id]
 
   def action_display_name
     action_id.nil? ? 'unknown' : Routing::Numberlist::ACTIONS[action_id]
   end
 
+  def rewrite_ss_status_name
+    rewrite_ss_status_id.nil? ? nil : Equipment::StirShaken::Attestation::ATTESTATIONS[rewrite_ss_status_id]
+  end
+
   def self.after_import_hook
     resolve_array_of_tags('tag_action_value', 'tag_action_value_names')
     resolve_integer_constant('action_id', 'action_name', Routing::NumberlistItem::ACTIONS)
+    resolve_integer_constant(
+      'rewrite_ss_status_id',
+      'rewrite_ss_status_name',
+      Equipment::StirShaken::Attestation::ATTESTATIONS
+    )
     super
   end
 end
