@@ -80,6 +80,9 @@ RSpec.describe 'config/yeti_web.yml' do
         },
         call_record: {
           bucket: a_kind_of(String)
+        },
+        cdr_export: {
+          bucket: a_kind_of(String)
         }
       }
     }

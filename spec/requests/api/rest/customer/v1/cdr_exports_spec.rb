@@ -445,13 +445,23 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
       { customer_account: account, status: CdrExport::STATUS_COMPLETED }
     end
 
+    shared_examples :responds_404 do
+      it 'responds 404' do
+        subject
+        expect(response.status).to eq(404)
+        expect(response.body).to be_blank
+        expect(response.headers['X-Accel-Redirect']).to be_nil
+        expect(response.headers['Content-Disposition']).to be_nil
+      end
+    end
+
     it 'responds with X-Accel-Redirect' do
       subject
       expect(response.status).to eq 200
       expect(response.body).to be_blank
-      expect(response.headers['X-Accel-Redirect']).to eq "/x-redirect/cdr_export/#{cdr_export.id}.csv.gz"
+      expect(response.headers['X-Accel-Redirect']).to eq "/x-redirect/cdr_export/#{cdr_export.filename}"
       expect(response.headers['Content-Type']).to eq 'text/csv; charset=utf-8'
-      expect(response.headers['Content-Disposition']).to eq "attachment; filename=\"#{cdr_export.uuid}.csv.gz\""
+      expect(response.headers['Content-Disposition']).to eq "attachment; filename=\"#{cdr_export.public_filename}\""
     end
 
     context 'when cdr_export is pending' do
@@ -459,13 +469,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
         super().merge status: CdrExport::STATUS_PENDING
       end
 
-      it 'responds 404' do
-        subject
-        expect(response.status).to eq 404
-        expect(response.body).to be_blank
-        expect(response.headers['X-Accel-Redirect']).to be_nil
-        expect(response.headers['Content-Disposition']).to be_nil
-      end
+      include_examples :responds_404
     end
 
     context 'when cdr_export is failed' do
@@ -473,13 +477,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
         super().merge status: CdrExport::STATUS_FAILED
       end
 
-      it 'responds 404' do
-        subject
-        expect(response.status).to eq 404
-        expect(response.body).to be_blank
-        expect(response.headers['X-Accel-Redirect']).to be_nil
-        expect(response.headers['Content-Disposition']).to be_nil
-      end
+      include_examples :responds_404
     end
 
     context 'when cdr_export is deleted' do
@@ -487,13 +485,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
         super().merge status: CdrExport::STATUS_DELETED
       end
 
-      it 'responds 404' do
-        subject
-        expect(response.status).to eq 404
-        expect(response.body).to be_blank
-        expect(response.headers['X-Accel-Redirect']).to be_nil
-        expect(response.headers['Content-Disposition']).to be_nil
-      end
+      include_examples :responds_404
     end
 
     context 'when customer allowed_account_ids does not include cdr_export account' do
@@ -504,6 +496,54 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
       include_examples :returns_json_api_errors, status: 404, errors: {
         title: 'Record not found'
       }
+    end
+
+    context 'when s3 storage configured' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(
+            endpoint: 'http::some_example_s3_storage_url',
+            cdr_export: OpenStruct.new(bucket: 'test-bucket')
+          )
+        )
+
+        allow(S3AttachmentWrapper).to receive(:stream_to!).and_yield("dummy data\n").and_yield('dummy data2')
+      end
+
+      it 'responds with attachment' do
+        expect(Cdr::DownloadCdrExport).to receive(:call).with(
+          cdr_export:, response_object: be_present, public: true
+        ).and_call_original
+
+        subject
+        expect(response.status).to eq(200)
+        expect(response.body).to eq("dummy data\ndummy data2")
+        expect(response.headers['Content-Disposition']).to eq("attachment; filename=\"#{cdr_export.public_filename}\"")
+      end
+    end
+
+    context 'when Cdr::DownloadCdrExport raise Cdr::DownloadCdrExport::NotFoundError' do
+      before do
+        allow(Cdr::DownloadCdrExport).to receive(:call).and_raise(Cdr::DownloadCdrExport::NotFoundError, 'Test error')
+      end
+
+      include_examples :responds_404
+    end
+
+    context 'when Cdr::DownloadCdrExport raise Cdr::DownloadCdrExport::Error' do
+      before do
+        allow(Cdr::DownloadCdrExport).to receive(:call).and_raise(Cdr::DownloadCdrExport::Error, 'Test error')
+      end
+
+      include_examples :jsonapi_server_error
+    end
+
+    context 'when Cdr::DownloadCdrExport raise any other error' do
+      before do
+        allow(Cdr::DownloadCdrExport).to receive(:call).and_raise(StandardError, 'Test error')
+      end
+
+      include_examples :jsonapi_server_error
     end
   end
 end

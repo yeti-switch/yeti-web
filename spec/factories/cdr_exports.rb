@@ -28,7 +28,7 @@
 #  fk_rails_e796f29195  (customer_account_id => accounts.id)
 #
 FactoryBot.define do
-  factory :cdr_export, class: 'CdrExport' do
+  factory :cdr_export, class: 'CdrExport::Base' do
     type { 'Base' }
     callback_url { nil }
     filters do
