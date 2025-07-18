@@ -4,43 +4,13 @@ require 'net/http'
 
 module Worker
   class RemoveCdrExportFileJob < ::ApplicationJob
-    class FileNotDeletedError < RuntimeError
-      def initialize(http_code)
-        @http_code = http_code
-      end
-
-      def message
-        "File was not deleted! http code: #{@http_code}"
-      end
-    end
-
     queue_as 'cdr_export'
-    ALLOWED_HTTP_CODES = [200, 204, 404].freeze
 
     def perform(cdr_export_id)
-      url = URI.parse(delete_url(cdr_export_id))
-      req = Net::HTTP::Delete.new(url.to_s)
-      res = Net::HTTP.start(
-        url.host,
-        url.port,
-        use_ssl: url.scheme == 'https',
-        verify_mode: OpenSSL::SSL::VERIFY_NONE
-      ) do |http|
-        http.request(req)
-      end
-      http_code = res.code.to_i
-      unless ALLOWED_HTTP_CODES.include?(http_code)
-        raise FileNotDeletedError, http_code
-      end
-    end
-
-    private
-
-    def delete_url(cdr_export_id)
-      [
-        YetiConfig.cdr_export.delete_url.chomp('/'),
-        "#{cdr_export_id}.csv.gz"
-      ].join('/')
+      cdr_export = CdrExport.find(cdr_export_id)
+      Cdr::DeleteCdrExport.call(cdr_export:)
+    rescue Cdr::DeleteCdrExport::NotFoundError => e
+      Rails.logger.warn("Cdr Export ##{cdr_export.id} file not found during deletion: #{e.message}")
     end
   end
 end

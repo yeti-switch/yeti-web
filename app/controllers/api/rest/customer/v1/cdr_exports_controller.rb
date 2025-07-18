@@ -2,18 +2,20 @@
 
 class Api::Rest::Customer::V1::CdrExportsController < Api::Rest::Customer::V1::BaseController
   before_action :find_cdr_export, only: :download
+  include ActionController::Live
 
   def download
     if @cdr_export.completed?
-      response.headers['X-Accel-Redirect'] = "/x-redirect/cdr_export/#{@cdr_export.id}.csv.gz"
-      response.headers['Content-Type'] = 'text/csv; charset=utf-8'
-      response.headers['Content-Disposition'] = "attachment; filename=\"#{@cdr_export.uuid}.csv.gz\""
-      render body: nil
+      Cdr::DownloadCdrExport.call(cdr_export: @cdr_export, response_object: response, public: true)
     else
       head 404
     end
+  rescue Cdr::DownloadCdrExport::NotFoundError
+    head 404
   rescue StandardError => e
     handle_exceptions(e)
+  ensure
+    response.stream.close
   end
 
   private

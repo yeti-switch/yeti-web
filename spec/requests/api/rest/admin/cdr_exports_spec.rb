@@ -53,6 +53,16 @@ RSpec.describe Api::Rest::Admin::CdrExportsController, type: :request do
 
     let!(:cdr_export) { create(:cdr_export, :completed) }
 
+    shared_examples :responds_404 do
+      it 'responds 404' do
+        subject
+        expect(response.status).to eq(404)
+        expect(response.body).to be_blank
+        expect(response.headers['X-Accel-Redirect']).to be_nil
+        expect(response.headers['Content-Disposition']).to be_nil
+      end
+    end
+
     it 'responds with X-Accel-Redirect' do
       subject
       expect(response.status).to eq 200
@@ -84,6 +94,52 @@ RSpec.describe Api::Rest::Admin::CdrExportsController, type: :request do
         expect(response.headers['X-Accel-Redirect']).to be_nil
         expect(response.headers['Content-Disposition']).to be_nil
       end
+    end
+
+    context 'when s3 storage configured' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(
+            endpoint: 'http::some_example_s3_storage_url',
+            cdr_export: OpenStruct.new(bucket: 'test-bucket')
+          )
+        )
+
+        allow(S3AttachmentWrapper).to receive(:stream_to!).and_yield("dummy data\n").and_yield('dummy data2')
+      end
+
+      it 'responds with attachment' do
+        expect(Cdr::DownloadCdrExport).to receive(:call).with(cdr_export:, response_object: be_present).and_call_original
+
+        subject
+        expect(response.status).to eq(200)
+        expect(response.body).to eq("dummy data\ndummy data2")
+        expect(response.headers['Content-Disposition']).to eq("attachment; filename=\"#{cdr_export.filename}\"")
+      end
+    end
+
+    context 'when Cdr::DownloadCdrExport raise Cdr::DownloadCdrExport::NotFoundError' do
+      before do
+        allow(Cdr::DownloadCdrExport).to receive(:call).and_raise(Cdr::DownloadCdrExport::NotFoundError, 'Test error')
+      end
+
+      include_examples :responds_404
+    end
+
+    context 'when Cdr::DownloadCdrExport raise Cdr::DownloadCdrExport::Error' do
+      before do
+        allow(Cdr::DownloadCdrExport).to receive(:call).and_raise(Cdr::DownloadCdrExport::Error, 'Test error')
+      end
+
+      include_examples :jsonapi_server_error
+    end
+
+    context 'when Cdr::DownloadCdrExport raise any other error' do
+      before do
+        allow(Cdr::DownloadCdrExport).to receive(:call).and_raise(StandardError, 'Test error')
+      end
+
+      include_examples :jsonapi_server_error
     end
   end
 
