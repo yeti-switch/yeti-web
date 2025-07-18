@@ -499,6 +499,8 @@ RSpec.describe '#routing logic' do
                termination_cps_wsize: vendor_gw_termination_cps_wsize,
                termination_subscriber_cps_limit: vendor_gw_termination_subscriber_cps_limit,
                termination_subscriber_cps_wsize: vendor_gw_termination_subscriber_cps_wsize,
+               termination_dst_numberlist_id: vendor_gw_dst_numberlist_id,
+               termination_src_numberlist_id: vendor_gw_src_numberlist_id,
                term_append_headers_req: vendor_gw_term_append_headers_req,
                diversion_send_mode_id: vendor_gw_diversion_send_mode_id,
                diversion_domain: vendor_gw_diversion_domain,
@@ -547,6 +549,8 @@ RSpec.describe '#routing logic' do
       let(:vendor_gw_termination_cps_wsize) { 1 }
       let(:vendor_gw_termination_subscriber_cps_limit) { nil }
       let(:vendor_gw_termination_subscriber_cps_wsize) { 1 }
+      let(:vendor_gw_src_numberlist_id) { nil }
+      let(:vendor_gw_dst_numberlist_id) { nil }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
       let!(:customer_account) {
@@ -4429,12 +4433,155 @@ RSpec.describe '#routing logic' do
               expect(subject.first[:ss_crt_id]).to eq(crt.id)
               expect(subject.first[:ss_otn]).to eq('from_username')
               expect(subject.first[:ss_dtn]).to eq('uri-name')
-              expect(subject.first[:ss_attest_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.first[:lega_ss_status_id]).to eq(nil)
-              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end
+
+          context ',try to insert with customer auth certificate only and override ss_status in ca dst numberlist' do
+            let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
+            let(:crt) { create(:stir_shaken_signing_certificate) }
+            let(:customer_auth_stir_shaken_crt_id) { crt.id }
+            let!(:customer_auth_dst_numberlist_id) {
+              create(:numberlist,
+                      mode_id: Routing::Numberlist::MODE_STRICT,
+                      default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                      rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_A).id
+            }
+
+            it 'OK' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:customer_auth_id]).to be
+              expect(subject.first[:customer_id]).to be
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+              expect(subject.first[:ss_crt_id]).to eq(crt.id)
+              expect(subject.first[:ss_otn]).to eq('from_username')
+              expect(subject.first[:ss_dtn]).to eq('uri-name')
+              expect(subject.first[:ss_attest_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_A)
+              expect(subject.first[:lega_ss_status_id]).to eq(nil)
+              expect(subject.first[:legb_ss_status_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_A)
+              expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+            end
+
+            context 'and ca src numberlist' do
+              let!(:customer_auth_src_numberlist_id) {
+                create(:numberlist,
+                        mode_id: Routing::Numberlist::MODE_STRICT,
+                        default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                        rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_C).id
+              }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+                expect(subject.first[:ss_crt_id]).to eq(crt.id)
+                expect(subject.first[:ss_otn]).to eq('from_username')
+                expect(subject.first[:ss_dtn]).to eq('uri-name')
+                expect(subject.first[:ss_attest_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_C)
+                expect(subject.first[:lega_ss_status_id]).to eq(nil)
+                expect(subject.first[:legb_ss_status_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_C)
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+
+            context 'and routing plan dst numberlist' do
+              let!(:routing_plan_dst_numberlist_id) {
+                create(:numberlist,
+                        mode_id: Routing::Numberlist::MODE_STRICT,
+                        default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                        rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_A).id
+              }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+                expect(subject.first[:ss_crt_id]).to eq(crt.id)
+                expect(subject.first[:ss_otn]).to eq('from_username')
+                expect(subject.first[:ss_dtn]).to eq('uri-name')
+                expect(subject.first[:ss_attest_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_A)
+                expect(subject.first[:lega_ss_status_id]).to eq(nil)
+                expect(subject.first[:legb_ss_status_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_A)
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+
+            context 'and routing plan src numberlist' do
+              let!(:routing_plan_src_numberlist_id) {
+                create(:numberlist,
+                        mode_id: Routing::Numberlist::MODE_STRICT,
+                        default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                        rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_B).id
+              }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+                expect(subject.first[:ss_crt_id]).to eq(crt.id)
+                expect(subject.first[:ss_otn]).to eq('from_username')
+                expect(subject.first[:ss_dtn]).to eq('uri-name')
+                expect(subject.first[:ss_attest_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_B)
+                expect(subject.first[:lega_ss_status_id]).to eq(nil)
+                expect(subject.first[:legb_ss_status_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_B)
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+
+            context 'and vendor gw dst numberlist' do
+              let!(:vendor_gw_dst_numberlist_id) {
+                create(:numberlist,
+                        mode_id: Routing::Numberlist::MODE_STRICT,
+                        default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                        rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_C).id
+              }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+                expect(subject.first[:ss_crt_id]).to eq(crt.id)
+                expect(subject.first[:ss_otn]).to eq('from_username')
+                expect(subject.first[:ss_dtn]).to eq('uri-name')
+                expect(subject.first[:ss_attest_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_C)
+                expect(subject.first[:lega_ss_status_id]).to eq(nil)
+                expect(subject.first[:legb_ss_status_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_C)
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+
+            context 'and vendor gw src numberlist' do
+              let!(:vendor_gw_src_numberlist_id) {
+                create(:numberlist,
+                        mode_id: Routing::Numberlist::MODE_STRICT,
+                        default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                        rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_B).id
+              }
+              it 'OK' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:customer_auth_id]).to be
+                expect(subject.first[:customer_id]).to be
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+                expect(subject.first[:ss_crt_id]).to eq(crt.id)
+                expect(subject.first[:ss_otn]).to eq('from_username')
+                expect(subject.first[:ss_dtn]).to eq('uri-name')
+                expect(subject.first[:ss_attest_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_B)
+                expect(subject.first[:lega_ss_status_id]).to eq(nil)
+                expect(subject.first[:legb_ss_status_id]).to eq(Equipment::StirShaken::Attestation::ATTESTATION_B)
+                expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+              end
+            end
+          end
+
           context ',try to insert with customer auth and vendor gw certificates' do
             let(:vendor_gw_stir_shaken_mode_id) { Gateway::STIR_SHAKEN_MODE_RELAY_INSERT }
 
@@ -4453,9 +4600,9 @@ RSpec.describe '#routing logic' do
               expect(subject.first[:ss_crt_id]).to eq(ccrt.id)
               expect(subject.first[:ss_otn]).to eq('from_username')
               expect(subject.first[:ss_dtn]).to eq('uri-name')
-              expect(subject.first[:ss_attest_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.first[:lega_ss_status_id]).to eq(nil)
-              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end
@@ -4473,9 +4620,9 @@ RSpec.describe '#routing logic' do
               expect(subject.first[:ss_crt_id]).to eq(crt.id)
               expect(subject.first[:ss_otn]).to eq('from_username')
               expect(subject.first[:ss_dtn]).to eq('uri-name')
-              expect(subject.first[:ss_attest_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.first[:lega_ss_status_id]).to eq(nil)
-              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end
@@ -4493,9 +4640,9 @@ RSpec.describe '#routing logic' do
               expect(subject.first[:ss_crt_id]).to eq(crt.id)
               expect(subject.first[:ss_otn]).to eq('from_username')
               expect(subject.first[:ss_dtn]).to eq('uri-name')
-              expect(subject.first[:ss_attest_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:ss_attest_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.first[:lega_ss_status_id]).to eq(nil)
-              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_ss_mode_id)
+              expect(subject.first[:legb_ss_status_id]).to eq(customer_auth_rewrite_ss_status_id)
               expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
             end
           end
