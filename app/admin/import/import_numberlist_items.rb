@@ -37,6 +37,7 @@ ActiveAdmin.register Importing::NumberlistItem, as: 'Numberlist Item Imports' do
     column :dst_rewrite_result
     column :tag_action
     column :tag_action_value
+    column :rewrite_ss_status, &:rewrite_ss_status_name
     column :lua_script
   end
 end

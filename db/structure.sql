@@ -1447,6 +1447,18 @@ CREATE TYPE switch21.lua_call_context AS (
 
 
 --
+-- Name: call_ctx_ty; Type: TYPE; Schema: switch22; Owner: -
+--
+
+CREATE TYPE switch22.call_ctx_ty AS (
+	pop_id integer,
+	allow_ss_status_rewrite boolean,
+	send_billing_information boolean,
+	max_call_length integer
+);
+
+
+--
 -- Name: callprofile_ty; Type: TYPE; Schema: switch22; Owner: -
 --
 
@@ -16012,6 +16024,7 @@ CREATE TABLE class4.numberlist_items (
     lua_script_id smallint,
     defer_src_rewrite boolean DEFAULT false NOT NULL,
     defer_dst_rewrite boolean DEFAULT false NOT NULL,
+    rewrite_ss_status_id smallint,
     CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
     CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
 );
@@ -32283,10 +32296,10 @@ $$;
 
 
 --
--- Name: process_dp(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_dp(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, switch22.call_ctx_ty, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_dp(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.process_dp(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_call_ctx switch22.call_ctx_ty, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -32316,11 +32329,11 @@ BEGIN
           cg.contractor_id=i_dp.vendor_id and
           cg.enabled
         ORDER BY
-          cg.pop_id=i_pop_id desc,
+          cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
                                                       i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
@@ -32331,7 +32344,7 @@ BEGIN
           cg.gateway_group_id=i_dp.gateway_group_id AND
           cg.enabled
         ORDER BY
-          cg.pop_id=i_pop_id desc,
+          cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id THEN
@@ -32339,7 +32352,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
                                                     i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
@@ -32355,7 +32368,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
                                                       i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
@@ -32373,7 +32386,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
                                                     i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
@@ -32383,7 +32396,7 @@ BEGIN
       FOR v_gw in
         select * from class4.gateways cg
         where
-	  (cg.pop_id is null OR cg.pop_id=i_pop_id) and
+	  (cg.pop_id is null OR cg.pop_id=i_call_ctx.pop_id) and
           cg.gateway_group_id=i_dp.gateway_group_id and
           cg.contractor_id=i_dp.vendor_id and
           cg.enabled
@@ -32391,7 +32404,8 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
+                                                      i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
       /*dbg{*/
@@ -32401,11 +32415,11 @@ BEGIN
           cg.gateway_group_id=i_dp.gateway_group_id AND
           cg.enabled
         ORDER BY
-          cg.pop_id=i_pop_id desc,
+          cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
 	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
-          RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_pop_id;
+          RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
           continue;
         end if;
         IF v_gw.contractor_id!=i_dp.vendor_id THEN
@@ -32413,7 +32427,8 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
+                                                    i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
     end if;
@@ -32427,11 +32442,11 @@ BEGIN
 
       /*rel{*/
       return query select * from
-          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
+          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_call_ctx, i_diversion, i_privacy, i_pai, i_ppi);
       /*}rel*/
       /*dbg{*/
       return query select * from
-          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
+          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_call_ctx, i_diversion, i_privacy, i_pai, i_ppi);
       /*}dbg*/
     else
       return;
@@ -32442,10 +32457,10 @@ $$;
 
 
 --
--- Name: process_dp_debug(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_dp_debug(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, switch22.call_ctx_ty, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_dp_debug(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.process_dp_debug(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_call_ctx switch22.call_ctx_ty, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -32475,7 +32490,7 @@ BEGIN
           cg.gateway_group_id=i_dp.gateway_group_id AND
           cg.enabled
         ORDER BY
-          cg.pop_id=i_pop_id desc,
+          cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id THEN
@@ -32483,7 +32498,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
                                                     i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
@@ -32503,7 +32518,7 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
                                                     i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
@@ -32517,11 +32532,11 @@ BEGIN
           cg.gateway_group_id=i_dp.gateway_group_id AND
           cg.enabled
         ORDER BY
-          cg.pop_id=i_pop_id desc,
+          cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
 	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
-          RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_pop_id;
+          RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
           continue;
         end if;
         IF v_gw.contractor_id!=i_dp.vendor_id THEN
@@ -32529,7 +32544,8 @@ BEGIN
           continue;
         end if;
         return query select * from process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,
-                                                    i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
+                                                    i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
+                                                    i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}dbg*/
     end if;
@@ -32544,7 +32560,7 @@ BEGIN
       
       /*dbg{*/
       return query select * from
-          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
+          process_gw_debug(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_call_ctx, i_diversion, i_privacy, i_pai, i_ppi);
       /*}dbg*/
     else
       return;
@@ -32555,10 +32571,10 @@ $$;
 
 
 --
--- Name: process_dp_release(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, integer, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_dp_release(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, switch22.call_ctx_ty, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_dp_release(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_pop_id integer, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
+CREATE FUNCTION switch22.process_dp_release(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_call_ctx switch22.call_ctx_ty, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000
     AS $$
 DECLARE
@@ -32580,11 +32596,11 @@ BEGIN
           cg.contractor_id=i_dp.vendor_id and
           cg.enabled
         ORDER BY
-          cg.pop_id=i_pop_id desc,
+          cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
                                                       i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
@@ -32601,7 +32617,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length,
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
                                                       i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
@@ -32612,7 +32628,7 @@ BEGIN
       FOR v_gw in
         select * from class4.gateways cg
         where
-	  (cg.pop_id is null OR cg.pop_id=i_pop_id) and
+	  (cg.pop_id is null OR cg.pop_id=i_call_ctx.pop_id) and
           cg.gateway_group_id=i_dp.gateway_group_id and
           cg.contractor_id=i_dp.vendor_id and
           cg.enabled
@@ -32620,7 +32636,8 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
-                                                      i_customer_gw, i_vendor_acc , v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
+                                                      i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
+                                                      i_diversion, i_privacy, i_pai, i_ppi);
       end loop;
       /*}rel*/
       
@@ -32635,7 +32652,7 @@ BEGIN
 
       /*rel{*/
       return query select * from
-          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_send_billing_information, i_max_call_length, i_diversion, i_privacy, i_pai, i_ppi);
+          process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,i_customer_gw, i_vendor_acc, v_gw, i_call_ctx, i_diversion, i_privacy, i_pai, i_ppi);
       /*}rel*/
       
     else
@@ -32647,10 +32664,10 @@ $$;
 
 
 --
--- Name: process_gw(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_gw(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, switch22.call_ctx_ty, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_gw(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
+CREATE FUNCTION switch22.process_gw(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_call_ctx switch22.call_ctx_ty, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -32738,7 +32755,7 @@ BEGIN
   v_customer_transit_headers_from_origination = string_to_array(COALESCE(i_customer_gw.transit_headers_from_origination,''),',');
   v_vendor_transit_headers_from_origination = string_to_array(COALESCE(i_vendor_gw.transit_headers_from_origination,''),',');
 
-  if i_send_billing_information then
+  if i_call_ctx.send_billing_information then
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-INT:'||i_profile.dialpeer_next_interval)::varchar);
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate)::varchar);
@@ -32807,7 +32824,7 @@ BEGIN
       RAISE NOTICE '% ms -> process_gw: customer time limit: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
       /*}dbg*/
     ELSE /* DST rates is 0, allowing maximum call length */
-      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer;
+      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_call_ctx.max_call_length)::integer;
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> process_gw: DST rate is 0. customer time limit set to max value: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
@@ -32825,12 +32842,12 @@ BEGIN
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
   ELSE /* DP rates is 0, allowing maximum call length */
-    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer,
-    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length)::integer,
+    COALESCE(i_customer_acc.max_call_duration, i_call_ctx.max_call_length)::integer,
+    COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length)::integer,
     v_vendor_allowtime,
     i_profile.time_limit
   )::integer;
@@ -32870,27 +32887,8 @@ BEGIN
     RAISE NOTICE '% ms -> GW DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.dst_prefix_out;
     /*}dbg*/
 
+    v_termination_numberlist_item = switch22.match_numberlist(i_vendor_gw.termination_dst_numberlist_id, i_profile.dst_prefix_out);
     select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_dst_numberlist_id;
-    CASE v_termination_numberlist.mode_id
-      when 1 then -- strict match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
-          ni.key=i_profile.dst_prefix_out
-        limit 1;
-      when 2 then -- prefix match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
-          prefix_range(ni.key)@>prefix_range(i_profile.dst_prefix_out) and
-          length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-        order by length(prefix_range(ni.key)) desc
-        limit 1;
-      when 3 then -- random
-        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
-    END CASE;
 
     /*dbg{*/
     v_end:=clock_timestamp();
@@ -32915,6 +32913,9 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
+          i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
+        END IF;
     ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
       /*dbg{*/
       v_end:=clock_timestamp();
@@ -32933,10 +32934,11 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
+        i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
+      END IF;
     END IF;
   END IF;
-
-
 
   ----- SRC Numberlist processing-------------------------------------------------------------------------------------------------------
   IF i_vendor_gw.termination_src_numberlist_id is not null then
@@ -32945,27 +32947,8 @@ BEGIN
     RAISE NOTICE '% ms -> GW SRC Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.src_prefix_out;
     /*}dbg*/
 
+    v_termination_numberlist_item = switch22.match_numberlist(i_vendor_gw.termination_src_numberlist_id, i_profile.src_prefix_out);
     select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_src_numberlist_id;
-    CASE v_termination_numberlist.mode_id
-      when 1 then -- strict match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
-          ni.key=i_profile.src_prefix_out
-        limit 1;
-      when 2 then -- prefix match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
-          prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
-          length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
-        order by length(prefix_range(ni.key)) desc
-        limit 1;
-      when 3 then -- random
-        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
-    END CASE;
 
     /*dbg{*/
     v_end:=clock_timestamp();
@@ -32990,6 +32973,9 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
+          i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
+        END IF;
     ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
       /*dbg{*/
       v_end:=clock_timestamp();
@@ -33009,10 +32995,11 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
+        i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
+      END IF;
     END IF;
   END IF;
-
-
 
   /*
       number rewriting _After_ routing _IN_ termination GW
@@ -33450,10 +33437,10 @@ $_$;
 
 
 --
--- Name: process_gw_debug(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_gw_debug(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, switch22.call_ctx_ty, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_gw_debug(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
+CREATE FUNCTION switch22.process_gw_debug(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_call_ctx switch22.call_ctx_ty, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -33541,7 +33528,7 @@ BEGIN
   v_customer_transit_headers_from_origination = string_to_array(COALESCE(i_customer_gw.transit_headers_from_origination,''),',');
   v_vendor_transit_headers_from_origination = string_to_array(COALESCE(i_vendor_gw.transit_headers_from_origination,''),',');
 
-  if i_send_billing_information then
+  if i_call_ctx.send_billing_information then
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-INT:'||i_profile.dialpeer_next_interval)::varchar);
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate)::varchar);
@@ -33610,7 +33597,7 @@ BEGIN
       RAISE NOTICE '% ms -> process_gw: customer time limit: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
       /*}dbg*/
     ELSE /* DST rates is 0, allowing maximum call length */
-      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer;
+      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_call_ctx.max_call_length)::integer;
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> process_gw: DST rate is 0. customer time limit set to max value: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
@@ -33628,12 +33615,12 @@ BEGIN
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
   ELSE /* DP rates is 0, allowing maximum call length */
-    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer,
-    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length)::integer,
+    COALESCE(i_customer_acc.max_call_duration, i_call_ctx.max_call_length)::integer,
+    COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length)::integer,
     v_vendor_allowtime,
     i_profile.time_limit
   )::integer;
@@ -33673,27 +33660,8 @@ BEGIN
     RAISE NOTICE '% ms -> GW DST Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.dst_prefix_out;
     /*}dbg*/
 
+    v_termination_numberlist_item = switch22.match_numberlist(i_vendor_gw.termination_dst_numberlist_id, i_profile.dst_prefix_out);
     select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_dst_numberlist_id;
-    CASE v_termination_numberlist.mode_id
-      when 1 then -- strict match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
-          ni.key=i_profile.dst_prefix_out
-        limit 1;
-      when 2 then -- prefix match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
-          prefix_range(ni.key)@>prefix_range(i_profile.dst_prefix_out) and
-          length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-        order by length(prefix_range(ni.key)) desc
-        limit 1;
-      when 3 then -- random
-        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
-    END CASE;
 
     /*dbg{*/
     v_end:=clock_timestamp();
@@ -33718,6 +33686,9 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
+          i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
+        END IF;
     ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
       /*dbg{*/
       v_end:=clock_timestamp();
@@ -33736,10 +33707,11 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
+        i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
+      END IF;
     END IF;
   END IF;
-
-
 
   ----- SRC Numberlist processing-------------------------------------------------------------------------------------------------------
   IF i_vendor_gw.termination_src_numberlist_id is not null then
@@ -33748,27 +33720,8 @@ BEGIN
     RAISE NOTICE '% ms -> GW SRC Numberlist processing. Lookup by key: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.src_prefix_out;
     /*}dbg*/
 
+    v_termination_numberlist_item = switch22.match_numberlist(i_vendor_gw.termination_src_numberlist_id, i_profile.src_prefix_out);
     select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_src_numberlist_id;
-    CASE v_termination_numberlist.mode_id
-      when 1 then -- strict match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
-          ni.key=i_profile.src_prefix_out
-        limit 1;
-      when 2 then -- prefix match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
-          prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
-          length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
-        order by length(prefix_range(ni.key)) desc
-        limit 1;
-      when 3 then -- random
-        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
-    END CASE;
 
     /*dbg{*/
     v_end:=clock_timestamp();
@@ -33793,6 +33746,9 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
+          i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
+        END IF;
     ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
       /*dbg{*/
       v_end:=clock_timestamp();
@@ -33812,10 +33768,11 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
+        i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
+      END IF;
     END IF;
   END IF;
-
-
 
   /*
       number rewriting _After_ routing _IN_ termination GW
@@ -34253,10 +34210,10 @@ $_$;
 
 
 --
--- Name: process_gw_release(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, boolean, integer, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
+-- Name: process_gw_release(switch22.callprofile_ty, class4.destinations, class4.dialpeers, billing.accounts, class4.gateways, billing.accounts, class4.gateways, switch22.call_ctx_ty, switch22.uri_ty[], character varying[], switch22.uri_ty[], switch22.uri_ty); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.process_gw_release(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_send_billing_information boolean, i_max_call_length integer, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
+CREATE FUNCTION switch22.process_gw_release(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_vendor_gw class4.gateways, i_call_ctx switch22.call_ctx_ty, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 100000
     AS $_$
 DECLARE
@@ -34336,7 +34293,7 @@ BEGIN
   v_customer_transit_headers_from_origination = string_to_array(COALESCE(i_customer_gw.transit_headers_from_origination,''),',');
   v_vendor_transit_headers_from_origination = string_to_array(COALESCE(i_vendor_gw.transit_headers_from_origination,''),',');
 
-  if i_send_billing_information then
+  if i_call_ctx.send_billing_information then
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-INT:'||i_profile.dialpeer_initial_interval)::varchar);
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-INT:'||i_profile.dialpeer_next_interval)::varchar);
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-INIT-RATE:'||i_profile.dialpeer_initial_rate)::varchar);
@@ -34396,7 +34353,7 @@ BEGIN
                                       (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
       
     ELSE /* DST rates is 0, allowing maximum call length */
-      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer;
+      i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_call_ctx.max_call_length)::integer;
       
     end IF;
   end if;
@@ -34411,12 +34368,12 @@ BEGIN
                         LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
                                     (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
   ELSE /* DP rates is 0, allowing maximum call length */
-    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_max_call_length);
+    v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length);
   end IF;
 
   i_profile.time_limit=LEAST(
-    COALESCE(i_customer_acc.max_call_duration, i_max_call_length)::integer,
-    COALESCE(i_vendor_acc.max_call_duration, i_max_call_length)::integer,
+    COALESCE(i_customer_acc.max_call_duration, i_call_ctx.max_call_length)::integer,
+    COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length)::integer,
     v_vendor_allowtime,
     i_profile.time_limit
   )::integer;
@@ -34444,27 +34401,8 @@ BEGIN
   IF i_vendor_gw.termination_dst_numberlist_id is not null then
     
 
+    v_termination_numberlist_item = switch22.match_numberlist(i_vendor_gw.termination_dst_numberlist_id, i_profile.dst_prefix_out);
     select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_dst_numberlist_id;
-    CASE v_termination_numberlist.mode_id
-      when 1 then -- strict match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
-          ni.key=i_profile.dst_prefix_out
-        limit 1;
-      when 2 then -- prefix match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id and
-          prefix_range(ni.key)@>prefix_range(i_profile.dst_prefix_out) and
-          length(i_profile.dst_prefix_out) between ni.number_min_length and ni.number_max_length
-        order by length(prefix_range(ni.key)) desc
-        limit 1;
-      when 3 then -- random
-        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_dst_numberlist_id;
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-         where ni.numberlist_id=i_vendor_gw.termination_dst_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
-    END CASE;
 
     
 
@@ -34483,6 +34421,9 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
+          i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
+        END IF;
     ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
       
       RETURN null;
@@ -34498,36 +34439,18 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
+        i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
+      END IF;
     END IF;
   END IF;
-
-
 
   ----- SRC Numberlist processing-------------------------------------------------------------------------------------------------------
   IF i_vendor_gw.termination_src_numberlist_id is not null then
     
 
+    v_termination_numberlist_item = switch22.match_numberlist(i_vendor_gw.termination_src_numberlist_id, i_profile.src_prefix_out);
     select into v_termination_numberlist * from class4.numberlists where id=i_vendor_gw.termination_src_numberlist_id;
-    CASE v_termination_numberlist.mode_id
-      when 1 then -- strict match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
-          ni.key=i_profile.src_prefix_out
-        limit 1;
-      when 2 then -- prefix match
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-        where
-          ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id and
-          prefix_range(ni.key)@>prefix_range(i_profile.src_prefix_out) and
-          length(i_profile.src_prefix_out) between ni.number_min_length and ni.number_max_length
-        order by length(prefix_range(ni.key)) desc
-        limit 1;
-      when 3 then -- random
-        select into v_termination_numberlist_size count(*) from class4.numberlist_items where numberlist_id=i_vendor_gw.termination_src_numberlist_id;
-        select into v_termination_numberlist_item * from class4.numberlist_items ni
-         where ni.numberlist_id=i_vendor_gw.termination_src_numberlist_id order by ni.id OFFSET floor(random()*v_termination_numberlist_size) limit 1;
-    END CASE;
 
     
 
@@ -34546,6 +34469,9 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
+          i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
+        END IF;
     ELSIF v_termination_numberlist_item.action_id is null and v_termination_numberlist.default_action_id=1 then
       
       -- drop by default
@@ -34562,10 +34488,11 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
+        i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
+      END IF;
     END IF;
   END IF;
-
-
 
   /*
       number rewriting _After_ routing _IN_ termination GW
@@ -35040,7 +34967,6 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_destination_rate_limit float:='Infinity'::float;
         v_test_vendor_id integer;
         v_random float;
-        v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
@@ -35073,6 +34999,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ss_src varchar;
         v_ss_dst varchar;
         v_stir_dst_tn varchar;
+        v_call_ctx switch22.call_ctx_ty;
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -35096,6 +35023,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_now:=now();
         v_ret:=switch22.new_profile();
 
+        v_call_ctx.pop_id = i_pop_id;
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
         v_ret.auth_orig_port = v_remote_port;
@@ -35219,6 +35147,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_auth_external_id = v_customer_auth_normalized.external_id;
         v_ret.customer_auth_external_type = v_customer_auth_normalized.external_type;
         v_ret.customer_auth_name = v_customer_auth_normalized."name";
+        v_call_ctx.send_billing_information = v_customer_auth_normalized.send_billing_information;
 
         select into strict v_customer * from public.contractors where id=v_customer_auth_normalized.customer_id;
         v_ret.customer_id = v_customer_auth_normalized.customer_id;
@@ -35343,6 +35272,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         END CASE;
 
         ---- Identity validation ----
+        v_call_ctx.allow_ss_status_rewrite = false;
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch22.identity_data_ty, i_identity_data) d;
         IF v_customer_auth_normalized.ss_mode_id = 1 THEN
           /* validate */
@@ -35393,6 +35323,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RETURN;
               ELSIF v_customer_auth_normalized.ss_invalid_identity_action_id = 2 THEN
                 v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+                v_call_ctx.allow_ss_status_rewrite = true;
               END IF;
           ELSIF v_ret.lega_ss_status_id = 0 THEN
               IF v_customer_auth_normalized.ss_no_identity_action_id = 1 THEN
@@ -35401,11 +35332,13 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 RETURN;
               ELSIF v_customer_auth_normalized.ss_no_identity_action_id = 2 THEN
                 v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+                v_call_ctx.allow_ss_status_rewrite = true;
               END IF;
           END IF;
 
         ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
           v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+          v_call_ctx.allow_ss_status_rewrite = true;
         END IF;
         v_ret.ss_crt_id = v_customer_auth_normalized.stir_shaken_crt_id;
 
@@ -35416,10 +35349,10 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
         v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
 
-        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
+        select into v_call_ctx.max_call_length max_call_duration from sys.guiconfig limit 1;
 
         if NOT v_customer_auth_normalized.check_account_balance then
-          v_ret.time_limit = LEAST(v_max_call_length, v_c_acc.max_call_duration);
+          v_ret.time_limit = LEAST(v_call_ctx.max_call_length, v_c_acc.max_call_duration);
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> AUTH. No customer acc balance checking. customer time limit set to max value: % ',EXTRACT(MILLISECOND from v_end-v_start), v_ret.time_limit;
@@ -35615,6 +35548,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -35651,6 +35587,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -35711,6 +35650,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -35746,6 +35688,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -35822,6 +35767,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -35858,6 +35806,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -35909,6 +35860,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -35944,6 +35898,9 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -36298,8 +36255,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account, v_call_ctx, v_diversion, v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account, v_call_ctx, v_diversion, v_privacy,v_pai,v_ppi);/*}dbg*/
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
           FOR routedata IN (
@@ -36347,8 +36304,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account, v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account, v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
           FOR routedata in(
@@ -36399,8 +36356,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
           FOR routedata IN (
@@ -36450,8 +36407,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           end LOOP;
           WHEN'5' THEN -- Route test
           FOR routedata IN (
@@ -36501,8 +36458,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
           v_random:=random();
@@ -36568,8 +36525,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
           v_random:=random();
@@ -36633,8 +36590,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
 
         ELSE
@@ -36699,7 +36656,6 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_destination_rate_limit float:='Infinity'::float;
         v_test_vendor_id integer;
         v_random float;
-        v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
@@ -36732,6 +36688,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ss_src varchar;
         v_ss_dst varchar;
         v_stir_dst_tn varchar;
+        v_call_ctx switch22.call_ctx_ty;
       BEGIN
         /*dbg{*/
         v_start:=now();
@@ -36755,6 +36712,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_now:=now();
         v_ret:=switch22.new_profile();
 
+        v_call_ctx.pop_id = i_pop_id;
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
         v_ret.auth_orig_port = v_remote_port;
@@ -36878,6 +36836,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.customer_auth_external_id = v_customer_auth_normalized.external_id;
         v_ret.customer_auth_external_type = v_customer_auth_normalized.external_type;
         v_ret.customer_auth_name = v_customer_auth_normalized."name";
+        v_call_ctx.send_billing_information = v_customer_auth_normalized.send_billing_information;
 
         select into strict v_customer * from public.contractors where id=v_customer_auth_normalized.customer_id;
         v_ret.customer_id = v_customer_auth_normalized.customer_id;
@@ -37002,6 +36961,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         END CASE;
 
         ---- Identity validation ----
+        v_call_ctx.allow_ss_status_rewrite = false;
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch22.identity_data_ty, i_identity_data) d;
         IF v_customer_auth_normalized.ss_mode_id = 1 THEN
           /* validate */
@@ -37052,6 +37012,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RETURN;
               ELSIF v_customer_auth_normalized.ss_invalid_identity_action_id = 2 THEN
                 v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+                v_call_ctx.allow_ss_status_rewrite = true;
               END IF;
           ELSIF v_ret.lega_ss_status_id = 0 THEN
               IF v_customer_auth_normalized.ss_no_identity_action_id = 1 THEN
@@ -37060,11 +37021,13 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 RETURN;
               ELSIF v_customer_auth_normalized.ss_no_identity_action_id = 2 THEN
                 v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+                v_call_ctx.allow_ss_status_rewrite = true;
               END IF;
           END IF;
 
         ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
           v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+          v_call_ctx.allow_ss_status_rewrite = true;
         END IF;
         v_ret.ss_crt_id = v_customer_auth_normalized.stir_shaken_crt_id;
 
@@ -37075,10 +37038,10 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
         v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
 
-        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
+        select into v_call_ctx.max_call_length max_call_duration from sys.guiconfig limit 1;
 
         if NOT v_customer_auth_normalized.check_account_balance then
-          v_ret.time_limit = LEAST(v_max_call_length, v_c_acc.max_call_duration);
+          v_ret.time_limit = LEAST(v_call_ctx.max_call_length, v_c_acc.max_call_duration);
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> AUTH. No customer acc balance checking. customer time limit set to max value: % ',EXTRACT(MILLISECOND from v_end-v_start), v_ret.time_limit;
@@ -37274,6 +37237,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -37310,6 +37276,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -37370,6 +37339,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -37405,6 +37377,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -37481,6 +37456,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -37517,6 +37495,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -37568,6 +37549,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             /*dbg{*/
@@ -37603,6 +37587,9 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -37958,7 +37945,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account, v_call_ctx, v_diversion, v_privacy,v_pai,v_ppi);/*}dbg*/
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
           FOR routedata IN (
@@ -38007,7 +37994,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account, v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
           FOR routedata in(
@@ -38059,7 +38046,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
           FOR routedata IN (
@@ -38110,7 +38097,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           ) LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           end LOOP;
           WHEN'5' THEN -- Route test
           FOR routedata IN (
@@ -38161,7 +38148,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
           v_random:=random();
@@ -38228,7 +38215,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
           v_random:=random();
@@ -38293,7 +38280,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           )LOOP
             RETURN QUERY
             
-            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
+            /*dbg{*/SELECT * from process_dp_debug(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}dbg*/
           END LOOP;
 
         ELSE
@@ -38355,7 +38342,6 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_destination_rate_limit float:='Infinity'::float;
         v_test_vendor_id integer;
         v_random float;
-        v_max_call_length integer;
         v_routing_key varchar;
         v_lnp_key varchar;
         v_lnp_rule class4.routing_plan_lnp_rules%rowtype;
@@ -38388,6 +38374,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ss_src varchar;
         v_ss_dst varchar;
         v_stir_dst_tn varchar;
+        v_call_ctx switch22.call_ctx_ty;
       BEGIN
         
 
@@ -38407,6 +38394,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_now:=now();
         v_ret:=switch22.new_profile();
 
+        v_call_ctx.pop_id = i_pop_id;
         v_ret.auth_orig_protocol_id =v_transport_protocol_id;
         v_ret.auth_orig_ip = v_remote_ip;
         v_ret.auth_orig_port = v_remote_port;
@@ -38515,6 +38503,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.customer_auth_external_id = v_customer_auth_normalized.external_id;
         v_ret.customer_auth_external_type = v_customer_auth_normalized.external_type;
         v_ret.customer_auth_name = v_customer_auth_normalized."name";
+        v_call_ctx.send_billing_information = v_customer_auth_normalized.send_billing_information;
 
         select into strict v_customer * from public.contractors where id=v_customer_auth_normalized.customer_id;
         v_ret.customer_id = v_customer_auth_normalized.customer_id;
@@ -38636,6 +38625,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         END CASE;
 
         ---- Identity validation ----
+        v_call_ctx.allow_ss_status_rewrite = false;
         select into v_identity_data array_agg(d) from  json_populate_recordset(null::switch22.identity_data_ty, i_identity_data) d;
         IF v_customer_auth_normalized.ss_mode_id = 1 THEN
           /* validate */
@@ -38686,6 +38676,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 RETURN;
               ELSIF v_customer_auth_normalized.ss_invalid_identity_action_id = 2 THEN
                 v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+                v_call_ctx.allow_ss_status_rewrite = true;
               END IF;
           ELSIF v_ret.lega_ss_status_id = 0 THEN
               IF v_customer_auth_normalized.ss_no_identity_action_id = 1 THEN
@@ -38694,11 +38685,13 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 RETURN;
               ELSIF v_customer_auth_normalized.ss_no_identity_action_id = 2 THEN
                 v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+                v_call_ctx.allow_ss_status_rewrite = true;
               END IF;
           END IF;
 
         ELSIF v_customer_auth_normalized.ss_mode_id=2 THEN
           v_ret.ss_attest_id = v_customer_auth_normalized.rewrite_ss_status_id;
+          v_call_ctx.allow_ss_status_rewrite = true;
         END IF;
         v_ret.ss_crt_id = v_customer_auth_normalized.stir_shaken_crt_id;
 
@@ -38709,10 +38702,10 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.customer_acc_check_balance=v_customer_auth_normalized.check_account_balance;
         v_destination_rate_limit=coalesce(v_c_acc.destination_rate_limit::float,'Infinity'::float);
 
-        select into v_max_call_length max_call_duration from sys.guiconfig limit 1;
+        select into v_call_ctx.max_call_length max_call_duration from sys.guiconfig limit 1;
 
         if NOT v_customer_auth_normalized.check_account_balance then
-          v_ret.time_limit = LEAST(v_max_call_length, v_c_acc.max_call_duration);
+          v_ret.time_limit = LEAST(v_call_ctx.max_call_length, v_c_acc.max_call_duration);
           
         elsif v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
           
@@ -38875,6 +38868,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             
@@ -38908,6 +38904,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -38956,6 +38955,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             
@@ -38988,6 +38990,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -39055,6 +39060,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             
@@ -39088,6 +39096,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -39130,6 +39141,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
+            END IF;
             -- pass call NOP.
           elsif v_numberlist_item.action_id is null and v_numberlist.default_action_id=1 then
             
@@ -39162,6 +39176,9 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
+              v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
+            END IF;
             -- pass by default
           end if;
         end if;
@@ -39454,7 +39471,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account, v_call_ctx, v_diversion, v_privacy,v_pai,v_ppi);/*}rel*/
             
           end LOOP;
           WHEN '2' THEN --LCR, no prio, No ACD&ASR control
@@ -39503,7 +39520,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account, v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
           WHEN '3' THEN --Prio, LCR, ACD&ASR control
@@ -39555,7 +39572,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
           WHEN'4' THEN -- LCRD, Prio, ACD&ACR control
@@ -39606,7 +39623,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           ) LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           end LOOP;
           WHEN'5' THEN -- Route test
@@ -39657,7 +39674,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
           WHEN'6' THEN -- QD.Static,LCR,ACD&ACR control
@@ -39724,7 +39741,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
           WHEN'7' THEN -- QD.Static, No ACD&ACR control
@@ -39789,7 +39806,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
             LIMIT v_rp.max_rerouting_attempts
           )LOOP
             RETURN QUERY
-            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,i_pop_id,v_customer_auth_normalized.send_billing_information,v_max_call_length,v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
+            /*rel{*/SELECT * from process_dp_release(v_ret,v_destination,routedata.s2_dialpeer,v_c_acc,v_orig_gw,routedata.s2_vendor_account,v_call_ctx, v_diversion,v_privacy,v_pai,v_ppi);/*}rel*/
             
           END LOOP;
 
@@ -40598,7 +40615,8 @@ CREATE TABLE class4.numberlists (
     external_id bigint,
     external_type character varying,
     defer_src_rewrite boolean DEFAULT false NOT NULL,
-    defer_dst_rewrite boolean DEFAULT false NOT NULL
+    defer_dst_rewrite boolean DEFAULT false NOT NULL,
+    rewrite_ss_status_id smallint
 );
 
 
@@ -43148,7 +43166,9 @@ CREATE TABLE data_import.import_numberlist_items (
     number_max_length smallint,
     lua_script_id smallint,
     lua_script_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    rewrite_ss_status_id smallint,
+    rewrite_ss_status_name character varying
 );
 
 
@@ -43194,7 +43214,9 @@ CREATE TABLE data_import.import_numberlists (
     tag_action_value_names character varying,
     lua_script_id smallint,
     lua_script_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    rewrite_ss_status_id smallint,
+    rewrite_ss_status_name character varying
 );
 
 
@@ -50121,6 +50143,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250714084517'),
 ('20250713123436'),
 ('20250712180031'),
 ('20250629122257'),

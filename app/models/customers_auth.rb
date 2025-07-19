@@ -153,15 +153,6 @@ class CustomersAuth < ApplicationRecord
     SS_INVALID_IDENTITY_ACTION_REWRITE => 'Rewrite'
   }.freeze
 
-  SS_STATUS_A = 1
-  SS_STATUS_B = 2
-  SS_STATUS_C = 3
-  SS_STATUSES = {
-    SS_STATUS_A => 'Attestation A',
-    SS_STATUS_B => 'Attestation B',
-    SS_STATUS_C => 'Attestation C'
-  }.freeze
-
   PRIVACY_MODE_ALLOW = 1
   PRIVACY_MODE_REJECT = 2
   PRIVACY_MODE_REJECT_CRITICAL = 3
@@ -300,7 +291,7 @@ class CustomersAuth < ApplicationRecord
   validates :diversion_policy_id, inclusion: { in: CustomersAuth::DIVERSION_POLICIES.keys }, allow_nil: false
   validates :pai_policy_id, inclusion: { in: CustomersAuth::PAI_POLICIES.keys }, allow_nil: false
 
-  validates :rewrite_ss_status_id, inclusion: { in: CustomersAuth::SS_STATUSES.keys }, allow_nil: true
+  validates :rewrite_ss_status_id, inclusion: { in: Equipment::StirShaken::Attestation::ATTESTATIONS.keys }, allow_nil: true
   validate :validate_rewrite_ss_status
   validates :privacy_mode_id, inclusion: { in: PRIVACY_MODES.keys }, allow_nil: false
 
@@ -362,7 +353,7 @@ class CustomersAuth < ApplicationRecord
   end
 
   def rewrite_ss_status_name
-    rewrite_ss_status_id.nil? ? nil : SS_STATUSES[rewrite_ss_status_id]
+    rewrite_ss_status_id.nil? ? nil : Equipment::StirShaken::Attestation::ATTESTATIONS[rewrite_ss_status_id]
   end
 
   def ss_mode_name

@@ -15,6 +15,7 @@
 #  number_max_length      :integer(2)
 #  number_min_length      :integer(2)
 #  numberlist_name        :string
+#  rewrite_ss_status_name :string
 #  src_rewrite_result     :string
 #  src_rewrite_rule       :string
 #  tag_action_name        :string
@@ -24,6 +25,7 @@
 #  lua_script_id          :integer(2)
 #  numberlist_id          :integer(2)
 #  o_id                   :integer(4)
+#  rewrite_ss_status_id   :integer(2)
 #  tag_action_id          :integer(4)
 #
 FactoryBot.define do

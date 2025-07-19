@@ -22,6 +22,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
+                 :rewrite_ss_status_name,
                  :created_at, :updated_at
 
   acts_as_import resource_class: Importing::Numberlist,
@@ -32,6 +33,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   permit_params :name, :mode_id, :default_action_id,
                 :default_src_rewrite_rule, :default_src_rewrite_result, :defer_src_rewrite,
                 :default_dst_rewrite_rule, :default_dst_rewrite_result, :defer_dst_rewrite,
+                :rewrite_ss_status_id,
                 :tag_action_id, :lua_script_id, tag_action_value: []
   controller do
     def update
@@ -52,6 +54,10 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
   filter :defer_src_rewrite
   filter :defer_dst_rewrite
+  filter :rewrite_ss_status_id_eq,
+         label: 'Rewrite SS status',
+         as: :select,
+         collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
 
   index do
     selectable_column
@@ -69,6 +75,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :lua_script
     column :tag_action
     column :display_tag_action_value
+    column :rewrite_ss_status, &:rewrite_ss_status_name
     column :created_at
     column :updated_at
     column 'External ID', :external_id, sortable: :external_id
@@ -90,6 +97,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :lua_script
       row :tag_action
       row :display_tag_action_value
+      row :rewrite_ss_status, &:rewrite_ss_status_name
       row :created_at
       row :updated_at
       row 'External ID', &:external_id
@@ -115,6 +123,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                                  multiple: true,
                                  include_hidden: false,
                                  input_html: { class: 'chosen' }
+      f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
     end
     f.actions
   end

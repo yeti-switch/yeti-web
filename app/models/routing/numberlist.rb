@@ -20,6 +20,7 @@
 #  external_id                :bigint(8)
 #  lua_script_id              :integer(2)
 #  mode_id                    :integer(2)       default(1), not null
+#  rewrite_ss_status_id       :integer(2)
 #  tag_action_id              :integer(2)
 #
 # Indexes
@@ -90,6 +91,8 @@ class Routing::Numberlist < ApplicationRecord
             uniqueness: { conditions: -> { where(external_type: nil) } },
             if: proc { external_id && !external_type }
 
+  validates :rewrite_ss_status_id, inclusion: { in: Equipment::StirShaken::Attestation::ATTESTATIONS.keys }, allow_nil: true
+
   validates_with TagActionValueValidator
 
   scope :search_for, ->(term) { where("numberlists.name || ' | ' || numberlists.id::varchar ILIKE ?", "%#{term}%") }
@@ -100,6 +103,10 @@ class Routing::Numberlist < ApplicationRecord
 
   def default_action_name
     DEFAULT_ACTIONS[default_action_id]
+  end
+
+  def rewrite_ss_status_name
+    rewrite_ss_status_id.nil? ? nil : Equipment::StirShaken::Attestation::ATTESTATIONS[rewrite_ss_status_id]
   end
 
   def mode_name
