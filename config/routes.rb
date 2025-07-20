@@ -161,6 +161,7 @@ Rails.application.routes.draw do
           jsonapi_resources :routeset_discriminators
           jsonapi_resources :destinations
           jsonapi_resources :destination_next_rates
+          jsonapi_resources :package_counters, only: %i[index show]
         end
 
         namespace :customer do
