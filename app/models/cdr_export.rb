@@ -185,6 +185,18 @@ class CdrExport < ApplicationRecord
 
   define_memoizable :filters_json, apply: -> { filters.as_json.symbolize_keys }
 
+  def self.s3_storage_configured?
+    YetiConfig.s3_storage&.cdr_export&.bucket.present?
+  end
+
+  def filename
+    "#{id}.csv.gz"
+  end
+
+  def public_filename
+    "#{uuid}.csv.gz"
+  end
+
   private
 
   def validate_filters

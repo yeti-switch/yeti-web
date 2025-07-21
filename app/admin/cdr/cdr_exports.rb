@@ -8,6 +8,8 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   acts_as_clone
 
   controller do
+    include ActionController::Live
+
     def scoped_collection
       super.preload(:customer_account)
     end
@@ -104,11 +106,15 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   end
 
   member_action :download do
-    response.headers['X-Accel-Redirect'] = "/x-redirect/cdr_export/#{resource.id}.csv.gz"
-    response.headers['Content-Type'] = 'text/csv; charset=utf-8'
-    response.headers['Content-Disposition'] = "attachment; filename=\"#{resource.id}.csv.gz\""
-
-    render body: nil
+    Cdr::DownloadCdrExport.call(cdr_export: resource, response_object: response)
+  rescue Cdr::DownloadCallRecord::NotFoundError => e
+    flash[:error] = e.message
+    redirect_back(fallback_location: root_path)
+  rescue StandardError => e
+    flash[:error] = "An unexpected error occurred: #{e.message}"
+    redirect_back(fallback_location: root_path)
+  ensure
+    response.stream.close
   end
 
   member_action :delete_file, method: :delete do
