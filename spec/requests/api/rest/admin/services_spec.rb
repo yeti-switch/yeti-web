@@ -4,7 +4,7 @@ RSpec.describe Api::Rest::Admin::ServicesController, type: :request, bullet: [:n
   include_context :json_api_admin_helpers, type: :services
 
   shared_examples :responds_with_service_data_single do |status: 200|
-    include_examples :returns_json_api_record, status:, relationships: %i[account service-type transactions] do
+    include_examples :returns_json_api_record, status:, relationships: %i[account service-type transactions package-counters] do
       let(:json_api_record_id) { record_id }
       let(:json_api_record_attributes) do
         record.reload
@@ -60,6 +60,7 @@ RSpec.describe Api::Rest::Admin::ServicesController, type: :request, bullet: [:n
     let!(:service_type) { create(:service_type) }
     let!(:record) { create(:service, record_attrs) }
     let(:record_attrs) { { type: service_type, account: } }
+    let!(:package_counter) { FactoryBot.create(:billing_package_counter, account:, service: record) }
 
     include_examples :responds_with_service_data_single
 

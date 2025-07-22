@@ -17,6 +17,7 @@ class Api::Rest::Admin::ServiceResource < ::BaseResource
   has_one :account, class_name: 'Account', always_include_linkage_data: true
   has_one :service_type, class_name: 'ServiceType', foreign_key: :type_id, relation_name: :type
   has_many :transactions, class_name: 'Transaction', foreign_key_on: :related
+  has_many :package_counters, class_name: 'PackageCounter', foreign_key_on: :related
 
   ransack_filter :account_id, type: :foreign_key
   ransack_filter :type_id, type: :foreign_key
