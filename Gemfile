@@ -24,6 +24,8 @@ gem 'ostruct', '~> 0.6.1' # need for net-ldap
 # Seamless JWT authentication for Rails API
 gem 'jwt'
 
+gem 'jquery-ui-rails'
+
 # ActiveAdmin
 gem 'activeadmin'
 gem 'active_admin_date_range_preset', github: 'workgena/active_admin_date_range_preset'
@@ -69,7 +71,7 @@ gem 'chosen-rails', '1.5.2', require: 'chosen-rails/engine'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-tablesorter'
-gem 'jquery-ui-rails', github: 'jquery-ui-rails/jquery-ui-rails', tag: 'v7.0.0'
+
 gem 'mini_racer'
 gem 'rails-html-sanitizer', '>= 1.6.1'
 gem 'uglifier', '>= 1.3'
