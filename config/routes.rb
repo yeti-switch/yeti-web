@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   get 'api/rest/customer/v1/termination-active-calls', to: 'api/rest/customer/v1/termination_active_calls#show'
 
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
-  ActiveAdmin.routes(self)
+  authenticate :admin_user do
+    ActiveAdmin.routes(self)
+  end
 
   post 'api/cryptomus_callbacks', to: 'api/cryptomus_callbacks#create'
 
