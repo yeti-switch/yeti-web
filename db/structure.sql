@@ -43149,7 +43149,7 @@ CREATE TABLE data_import.import_numberlist_items (
     id integer NOT NULL,
     o_id integer,
     error_string character varying,
-    numberlist_id smallint,
+    numberlist_id integer,
     numberlist_name character varying,
     key character varying,
     action_id integer,
@@ -50143,6 +50143,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250729072451'),
 ('20250714084517'),
 ('20250713123436'),
 ('20250712180031'),
