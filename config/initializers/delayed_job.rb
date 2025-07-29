@@ -15,3 +15,7 @@ end
 Delayed::Worker.destroy_failed_jobs = false
 Delayed::Worker.read_ahead = 1
 Delayed::Worker.raise_signal_exceptions = true
+
+Rails.application.config.after_initialize do
+  Delayed::Worker.logger = SemanticLogger[Delayed::Worker]
+end
