@@ -1666,7 +1666,8 @@ CREATE TYPE switch22.callprofile_ty AS (
 	legb_res character varying,
 	package_counter_id bigint,
 	src_network_type_id smallint,
-	dst_network_type_id smallint
+	dst_network_type_id smallint,
+	destination_cdo smallint
 );
 
 
@@ -3360,6 +3361,7 @@ CREATE TABLE class4.destinations (
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
     allow_package_billing boolean DEFAULT false NOT NULL,
+    cdo smallint,
     CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -36143,6 +36145,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.destination_prefix = v_destination.prefix;
         v_ret.destination_initial_interval = v_destination.initial_interval;
         v_ret.destination_next_interval = v_destination.next_interval;
+        v_ret.destination_cdo = v_destination.cdo;
 
         IF v_destination.allow_package_billing THEN
           SELECT INTO v_package * FROM billing.package_counters pc
@@ -37832,6 +37835,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.destination_prefix = v_destination.prefix;
         v_ret.destination_initial_interval = v_destination.initial_interval;
         v_ret.destination_next_interval = v_destination.next_interval;
+        v_ret.destination_cdo = v_destination.cdo;
 
         IF v_destination.allow_package_billing THEN
           SELECT INTO v_package * FROM billing.package_counters pc
@@ -39362,6 +39366,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.destination_prefix = v_destination.prefix;
         v_ret.destination_initial_interval = v_destination.initial_interval;
         v_ret.destination_next_interval = v_destination.next_interval;
+        v_ret.destination_cdo = v_destination.cdo;
 
         IF v_destination.allow_package_billing THEN
           SELECT INTO v_package * FROM billing.package_counters pc
@@ -50144,6 +50149,7 @@ SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, log
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20250729072451'),
+('20250728100532'),
 ('20250714084517'),
 ('20250713123436'),
 ('20250712180031'),

@@ -8,6 +8,7 @@
 #  acd_limit              :float(24)        default(0.0), not null
 #  allow_package_billing  :boolean          default(FALSE), not null
 #  asr_limit              :float(24)        default(0.0), not null
+#  cdo                    :integer(2)
 #  connect_fee            :decimal(, )      default(0.0)
 #  dp_margin_fixed        :decimal(, )      default(0.0), not null
 #  dp_margin_percent      :decimal(, )      default(0.0), not null
