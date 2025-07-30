@@ -95,6 +95,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :asr_limit
   filter :acd_limit
   filter :short_calls_limit
+  filter :cdo, if: proc { authorized?(:allow_cdo) }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
@@ -225,6 +226,9 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :initial_interval
       f.input :next_interval
       f.input :use_dp_intervals
+      if authorized?(:allow_cdo)
+        f.input :cdo
+      end
     end
     f.inputs 'Fixed rating configuration' do
       f.input :initial_rate
@@ -276,6 +280,9 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
           row :initial_interval
           row :next_interval
           row :use_dp_intervals
+          if authorized?(:allow_cdo)
+            row :cdo
+          end
           row 'external id', &:external_id
         end
         panel 'Fixed rating configuration' do

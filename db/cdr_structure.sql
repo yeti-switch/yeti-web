@@ -288,7 +288,8 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	customer_auth_external_type character varying,
 	package_counter_id bigint,
 	src_network_type_id smallint,
-	dst_network_type_id smallint
+	dst_network_type_id smallint,
+	destination_cdo smallint
 );
 
 
@@ -568,7 +569,8 @@ CREATE TABLE cdr.cdr (
     src_network_type_id smallint,
     dst_network_type_id smallint,
     auth_orig_lat real,
-    auth_orig_lon real
+    auth_orig_lon real,
+    cdo smallint
 )
 PARTITION BY RANGE (time_start);
 
@@ -775,6 +777,7 @@ CREATE TABLE sys.config (
     vendor_amount_round_mode_id smallint DEFAULT 1 NOT NULL,
     vendor_amount_round_precision smallint DEFAULT 5 NOT NULL,
     disable_realtime_statistics boolean DEFAULT false NOT NULL,
+    cdo boolean DEFAULT false NOT NULL,
     CONSTRAINT config_customer_amount_round_precision_check CHECK (((customer_amount_round_precision >= 0) AND (customer_amount_round_precision <= 10))),
     CONSTRAINT config_vendor_amount_round_precision_check CHECK (((vendor_amount_round_precision >= 0) AND (vendor_amount_round_precision <= 10)))
 );
@@ -1825,8 +1828,7 @@ BEGIN
   v_cdr.vendor_acc_external_id:=v_dynamic.vendor_acc_external_id;
 
   v_cdr.package_counter_id = v_dynamic.package_counter_id;
-  v_cdr.destination_id:=v_dynamic.destination_id;
-  v_cdr.destination_prefix:=v_dynamic.destination_prefix;
+
   v_cdr.dialpeer_id:=v_dynamic.dialpeer_id;
   v_cdr.dialpeer_prefix:=v_dynamic.dialpeer_prefix;
 
@@ -1841,6 +1843,8 @@ BEGIN
   v_cdr.routing_attempt=i_routing_attempt;
   v_cdr.is_last_cdr=i_is_last_cdr;
 
+  v_cdr.destination_id:=v_dynamic.destination_id;
+  v_cdr.destination_prefix:=v_dynamic.destination_prefix;
   v_cdr.destination_initial_rate:=v_dynamic.destination_initial_rate::numeric;
   v_cdr.destination_next_rate:=v_dynamic.destination_next_rate::numeric;
   v_cdr.destination_initial_interval:=v_dynamic.destination_initial_interval;
@@ -1886,6 +1890,10 @@ BEGIN
     v_cdr.duration = switch.duration_round(v_config, v_time_data.time_end-v_time_data.time_connect); -- rounding
     v_nozerolen = true;
     v_cdr.success = true;
+    if v_config.cdo and v_dynamic.destination_cdo is not null and v_dynamic.destination_cdo !=0 and v_cdr.duration + v_dynamic.destination_cdo > 0 then
+      v_cdr.cdo = v_dynamic.destination_cdo;
+      v_cdr.duration = v_cdr_duration + v_cdr.cdo;
+    end if;
   else
     v_cdr.time_connect = NULL;
     v_cdr.duration = 0;
@@ -1987,38 +1995,6 @@ BEGIN
   perform event.streaming_insert_event(v_cdr);
   INSERT INTO cdr.cdr VALUES( v_cdr.*);
   RETURN 0;
-END;
-$$;
-
-
---
--- Name: cdr_export_data(character varying); Type: FUNCTION; Schema: sys; Owner: -
---
-
-CREATE FUNCTION sys.cdr_export_data(i_tbname character varying) RETURNS void
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    v_file varchar:='/var/spool/yeti-rs/';
-BEGIN
-    v_file:=v_file||i_tbname||'-'||now()::varchar;
-    execute 'COPY '||i_tbname||' TO '''||v_file||''' WITH CSV HEADER QUOTE AS ''"'' FORCE QUOTE *';
-END;
-$$;
-
-
---
--- Name: cdr_export_data(character varying, character varying); Type: FUNCTION; Schema: sys; Owner: -
---
-
-CREATE FUNCTION sys.cdr_export_data(i_tbname character varying, i_dir character varying) RETURNS void
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    v_file varchar;
-BEGIN
-    v_file:=i_dir||'/'||i_tbname||'-'||now()::varchar;
-    execute 'COPY '||i_tbname||' TO '''||v_file||''' WITH CSV HEADER QUOTE AS ''"'' FORCE QUOTE *';
 END;
 $$;
 
@@ -4707,6 +4683,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250730191727'),
 ('20250321212727'),
 ('20241219145036'),
 ('20241219142219'),
