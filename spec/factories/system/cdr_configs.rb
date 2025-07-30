@@ -5,6 +5,7 @@
 # Table name: sys.config
 #
 #  id                              :integer(2)       not null, primary key
+#  cdo                             :boolean          default(FALSE), not null
 #  customer_amount_round_precision :integer(2)       default(5), not null
 #  disable_realtime_statistics     :boolean          default(FALSE), not null
 #  vendor_amount_round_precision   :integer(2)       default(5), not null

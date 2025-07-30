@@ -10,6 +10,7 @@
 #  auth_orig_lat                   :float(24)
 #  auth_orig_lon                   :float(24)
 #  auth_orig_port                  :integer(4)
+#  cdo                             :integer(2)
 #  core_version                    :string
 #  customer_acc_vat                :decimal(, )
 #  customer_account_check_balance  :boolean
