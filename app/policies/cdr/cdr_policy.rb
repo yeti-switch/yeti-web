@@ -25,5 +25,9 @@ module Cdr
     def allow_metadata?
       allowed_for_role?(:allow_metadata)
     end
+
+    def allow_cdo?
+      !allowed_for_role?(:hide_cdo)
+    end
   end
 end
