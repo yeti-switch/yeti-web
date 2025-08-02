@@ -20,7 +20,12 @@ user:
     perform: false
   Gateway:
     allow_incoming_auth_credentials: false
+  Dashboard:
+    read: true # should be true for all users
+    details: true # to control access to content of dashboard details page
 
 reporter:
   Default:
     read: true
+  Dashboard:
+      read: true
