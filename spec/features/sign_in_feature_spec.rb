@@ -68,4 +68,29 @@ RSpec.describe 'the sign in process', js: true do
 
     include_examples :signs_in_successfully
   end
+
+  context 'when current admin user has NOT access to dashboard content', js: false do
+    let(:admin_user_attrs) { super().merge roles: ['user'] }
+
+    before do
+      allow(Rails.configuration).to receive(:policy_roles).and_return(
+        {
+          :user => {
+            :Dashboard => {
+              :read => true,
+              :details => false
+            }
+          }
+        }
+      )
+      visit new_admin_user_session_path
+    end
+
+    it 'should render dashboard page without any content' do
+      fill_form!
+      click_button 'Login'
+      expect(page).to have_selector('small', text: 'You have limited access to dashboard content.')
+      expect(page).to have_current_path root_path
+    end
+  end
 end
