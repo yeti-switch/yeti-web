@@ -262,9 +262,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           column :time_connect
           column :time_end
 
-          column(:duration, class: 'seconds') do |cdr_attempt|
-            "#{cdr_attempt.duration} sec."
-          end
+          column :duration, class: 'seconds', &:decorated_duration
+
           column('LegA DC') do |cdr_attempt|
             status_tag(cdr_attempt.lega_disconnect_code.to_s, class: cdr_attempt.success? ? :ok : :red) unless (cdr_attempt.lega_disconnect_code == 0) || cdr_attempt.lega_disconnect_code.nil?
             status_tag("q850: #{cdr_attempt.lega_q850_cause}", class: cdr_attempt.success? ? :ok : :red) unless cdr_attempt.lega_q850_cause.nil?
@@ -437,7 +436,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :time_start
           row :time_connect
           row :time_end
-          row :duration
+          row :duration, &:decorated_duration
           row :status do
             status_tag(cdr.status_sym.to_s, class: cdr.success? ? :ok : nil)
           end
@@ -656,9 +655,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :time_connect
     column :time_end
 
-    column(:duration, sortable: 'duration', class: 'seconds') do |cdr|
-      "#{cdr.duration} sec."
-    end
+    column :duration, sortable: 'duration', class: 'seconds', &:decorated_duration
+
     column('LegA DC', sortable: 'lega_disconnect_code') do |cdr|
       status_tag(cdr.lega_disconnect_code.to_s, class: cdr.success? ? :ok : :red) unless (cdr.lega_disconnect_code == 0) || cdr.legb_disconnect_code.nil?
       status_tag("q850: #{cdr.lega_q850_cause}", class: cdr.success? ? :ok : :red) unless cdr.lega_q850_cause.nil?

@@ -60,6 +60,14 @@ class CdrDecorator < Draper::Decorator
     decorated_phone_field(:dst_prefix_out)
   end
 
+  def decorated_duration
+    if h.authorized?(:allow_cdo) && !cdo.nil?
+      "#{duration}(#{cdo}) s."
+    else
+      "#{duration} s."
+    end
+  end
+
   private
 
   def mask_phone_number(phone_number)
