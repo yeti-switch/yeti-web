@@ -5,7 +5,7 @@ class RolePolicy < ApplicationPolicy
 
   class_attribute :_section_name, instance_writer: false
   class_attribute :root_role, instance_writer: false
-  class_attribute :allowed_actions, instance_writer: false, default: %i[read change remove perform]
+  class_attribute :allowed_actions, instance_writer: false, default: %i[read change remove perform details]
   self.root_role = :root
 
   class << self
