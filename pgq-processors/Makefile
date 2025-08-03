@@ -17,7 +17,7 @@ all: gems
 .PHONY: bundler
 bundler:
 	$(info:msg=Install bundler)
-	gem install --no-document --install-dir $(gems) bundler --version 2.6.2
+	gem install --no-document --install-dir $(gems) bundler --version 2.7.1
 	$(bundle_bin) config --local clean 'true'
 	$(bundle_bin) config --local jobs 4
 	$(bundle_bin) config --local deployment 'true'
