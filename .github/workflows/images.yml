@@ -5,8 +5,8 @@ on:
     - cron: '6 9 * * SUN'
 
 jobs:
-  deb11-build-image:
-    name: Build deb11 images for CI
+  deb13-build-image:
+    name: Build deb13 images for CI
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -25,9 +25,9 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ci/bullseye-build.Dockerfile
+          file: ci/trixie-build.Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/yeti-web/build-image:bullseye
+          tags: ghcr.io/${{ github.repository_owner }}/yeti-web/build-image:trixie
 
   deb12-build-image:
     name: Build deb12 images for CI
