@@ -22,14 +22,14 @@ RSpec.describe Stats::CustomerAuthStats, type: :model do
   describe '.last24_hour', freeze_time: true do
     subject { described_class.last24_hour }
 
-    let(:account) { FactoryBot.create(:account, external_id: 1) }
+    let(:account) { FactoryBot.create(:account) }
     let(:account_internal) { FactoryBot.create(:account, external_id: nil) }
 
     let(:customer_auth1) { FactoryBot.create(:customers_auth, **customer_auth1_attrs) }
-    let(:customer_auth1_attrs) { { account: account, external_id: 2, external_type: 'test' } }
+    let(:customer_auth1_attrs) { { account: account, external_type: 'test' } }
 
     let(:customer_auth2) { FactoryBot.create(:customers_auth, **customer_auth2_attrs) }
-    let(:customer_auth2_attrs) { { account: account, external_id: 3, external_type: nil } }
+    let(:customer_auth2_attrs) { { account: account, external_type: nil } }
 
     let(:customer_auth3) { FactoryBot.create(:customers_auth, **customer_auth3_attrs) }
     let(:customer_auth3_attrs) { { account: account_internal, external_id: nil, external_type: nil } }

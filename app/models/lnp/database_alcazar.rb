@@ -15,10 +15,10 @@ class Lnp::DatabaseAlcazar < ApplicationRecord
   self.table_name = 'class4.lnp_databases_alcazar'
 
   #
-  # Query:  
-  # http://api.east.alcazarnetworks.com/api/2.2/lrn?tn=14846642959&key=5ddc2fba-0cc4-4c93-9a28-bd28ddf5e6d4    
+  # Query:
+  # http://api.east.alcazarnetworks.com/api/2.2/lrn?tn=14846642959&key=5ddc2fba-0cc4-4c93-9a28-bd28ddf5e6d4
   #
-  # Output:  
+  # Output:
   # 14847880088
 
   has_one :lnp_database, as: :database, class_name: 'Lnp::Database'

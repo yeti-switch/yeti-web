@@ -14,8 +14,8 @@ RSpec.describe BillingInvoice::CalculatePeriod, '.time_zone_for' do
     it { expect(subject.name).to eq(account_timezone.name) }
   end
 
-  context 'with Kiev timezone' do
-    let(:account_timezone) { kiev_timezone }
+  context 'with Kyiv timezone' do
+    let(:account_timezone) { kyiv_timezone }
 
     it { is_expected.to be_a_kind_of(ActiveSupport::TimeZone) }
     it { expect(subject.name).to eq(account_timezone.name) }

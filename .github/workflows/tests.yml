@@ -8,7 +8,7 @@ jobs:
   gems-caching:
     name: GEMs caching
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     steps:
       - uses: actions/checkout@v4
       - name: Fetching gems cache
@@ -20,7 +20,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: install gems
         run: make gems-test
       - name: install gems for pgq
@@ -34,12 +34,12 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
   lint:
     name: Rubocop and bundle audit
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     needs: gems-caching
     steps:
       - uses: actions/checkout@v4
@@ -52,14 +52,14 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Rubocop and bundle audit
         run: make lint
 
   database_consistency:
     name: Check the consistency of the database constraints with the application validations
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
       db:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:16
@@ -75,7 +75,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Check the consistency of the database constraints with the application validations
         continue-on-error: true
         run: make database_consistency
@@ -100,7 +100,7 @@ jobs:
   brakeman:
     name: Brakeman
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     needs: gems-caching
     steps:
       - uses: actions/checkout@v4
@@ -113,7 +113,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: brakeman
         continue-on-error: true
         run: make brakeman
@@ -121,7 +121,7 @@ jobs:
   pgq-processors:
     name: PqQ processors tests
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
       db:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:16
@@ -138,7 +138,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Run test-pgq-processors
         run: make test-pgq-processors
         env:
@@ -150,7 +150,7 @@ jobs:
   rspec:
     name: Rspec tests
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
       db:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:16
@@ -178,7 +178,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
       - name: Run rspec
         run: make rspec
@@ -206,7 +206,7 @@ jobs:
   rspec_ldap:
     name: Rspec tests for LDAP auth
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
       db:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:16
@@ -226,7 +226,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
       - name: Run rspec
         run: cp -v config/ldap.yml.distr config/ldap.yml && make rspec
@@ -256,7 +256,7 @@ jobs:
   coverage:
     name: Coverage
     runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:bookworm
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     needs:
       - gems-caching
       - rspec
@@ -272,7 +272,7 @@ jobs:
             .bundle
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb12-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Download Coverage Outputs
         uses: actions/download-artifact@v4
         with:

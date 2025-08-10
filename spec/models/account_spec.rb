@@ -43,7 +43,7 @@ RSpec.describe Account, type: :model do
   let(:server_time_zone) { ActiveSupport::TimeZone.new Rails.application.config.time_zone }
   let(:utc_timezone) { System::Timezone.find_by!(abbrev: 'UTC') }
   let(:la_timezone) { FactoryBot.create(:timezone, :los_angeles) }
-  let(:kiev_timezone) { FactoryBot.create(:timezone, :kiev) }
+  let(:kyiv_timezone) { FactoryBot.create(:timezone, :kyiv) }
 
   shared_examples :updates_account do
     # let(:expected_account_attrs) {}
