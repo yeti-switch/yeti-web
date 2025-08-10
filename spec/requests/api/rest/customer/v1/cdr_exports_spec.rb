@@ -329,9 +329,9 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
       end
     end
 
-    context 'with filter[time_zone_name]=europe/kiev' do
-      let(:query_params) { { filter: { time_zone_name: 'europe/kiev' } } }
-      let(:cdr_exports_attrs) { super().merge time_zone_name: 'europe/kiev' }
+    context 'with filter[time_zone_name]=Europe/Kyiv' do
+      let(:query_params) { { filter: { time_zone_name: 'Europe/Kyiv' } } }
+      let(:cdr_exports_attrs) { super().merge time_zone_name: 'Europe/Kyiv' }
 
       include_examples :returns_json_api_collection do
         let(:json_api_collection_ids) { cdr_exports.map(&:uuid) }

@@ -232,7 +232,7 @@ module ActiveAdmin
         #
         def sort_key
           # If boolean or nil, use the default sort key.
-          if @options[:sortable] == true || @options[:sortable] == false
+          if [true, false].include?(@options[:sortable])
             @data.to_s
           elsif @options[:sortable].nil?
             sort_column_name

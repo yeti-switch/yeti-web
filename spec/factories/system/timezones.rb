@@ -28,9 +28,9 @@ FactoryBot.define do
       is_dst { true }
     end
 
-    trait :kiev do
-      name { 'Europe/Kiev' }
-      abbrev { 'PDT' }
+    trait :kyiv do
+      name { 'Europe/Kyiv' }
+      abbrev { 'EET' }
       utc_offset { 7200 }
       is_dst { true }
     end

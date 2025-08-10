@@ -72,10 +72,10 @@ RSpec.describe Worker::CdrExportJob, type: :job do
     end
 
     context 'when time_zone_name defined' do
-      let(:cdr_export_attrs) { super().merge time_zone_name: 'europe/kiev' }
+      let(:cdr_export_attrs) { super().merge time_zone_name: 'Europe/Kyiv' }
 
       it 'SQL SET LOCAL timezone TO should be performed' do
-        expect(Cdr::Base.connection).to receive(:execute).with("SET LOCAL timezone TO 'europe/kiev'").and_call_original
+        expect(Cdr::Base.connection).to receive(:execute).with("SET LOCAL timezone TO 'Europe/Kyiv'").and_call_original
         expect(Cdr::Cdr.connection).to receive(:execute).with("COPY (#{export_sql}) TO STDOUT WITH (FORMAT CSV, HEADER, FORCE_QUOTE *);").and_call_original
         subject
       end
