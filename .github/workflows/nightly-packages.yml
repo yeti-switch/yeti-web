@@ -43,6 +43,7 @@ jobs:
           pkgs_to_remove: 'yeti-web'
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          s3_codename: bookworm
           s3_prefix: nightly
           s3_access_key_id: ${{ secrets.DEB_AWS_ACCESS_KEY_ID }}
           s3_secret_access_key: ${{ secrets.DEB_AWS_SECRET_ACCESS_KEY }}
@@ -79,7 +80,86 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ci/nightly-package.Dockerfile
+          file: ci/bookworm-package.Dockerfile
           push: true
-          tags: ghcr.io/yeti-switch/yeti-web:nightly-build
+          tags: ghcr.io/yeti-switch/yeti-web:deb12-nightly-build
+
+   deb13:
+    name: Debian 13 nightly package building
+    runs-on: ubuntu-latest
+    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
+    services:
+      db:
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: set git safe directory
+        run: git config --global --add safe.directory '*'
+          
+      - name: Build package
+        run: make package
+        env:
+          YETI_DB_HOST: db
+          YETI_DB_PORT: 5432
+          CDR_DB_HOST: db
+          CDR_DB_PORT: 5432
+          PACKAGE_TYPE: nightly
+          SECRET_KEY_BASE: qQX3V5RSCMdQq6GRpE7tMJ1Syognfz4GLPCaSCPR9lAML2FzCiLN79u8ItC4VDOk
+
+      - name: Save deb package as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb13-package
+          path: /__w/yeti-web/*.deb
+
+      - uses: yeti-switch/upload-debian-pkg-action@v2
+        with:
+          pkgs: '../*.deb'
+          pkgs_to_remove: 'yeti-web'
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          s3_codename: trixie
+          s3_prefix: nightly
+          s3_access_key_id: ${{ secrets.DEB_AWS_ACCESS_KEY_ID }}
+          s3_secret_access_key: ${{ secrets.DEB_AWS_SECRET_ACCESS_KEY }}
+          s3_endpoint_url: ${{ secrets.DEB_AWS_ENDPOINT }}
+
+  deb13_container:
+    name: Debian 13 container
+    needs: deb13
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download a single artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: deb13-package
+
+      - name: Display structure of downloaded files
+        run: ls -la
+
+      - name: Display path
+        run: pwd
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ci/trixie-package.Dockerfile
+          push: true
+          tags: ghcr.io/yeti-switch/yeti-web:deb13-nightly-build
 
