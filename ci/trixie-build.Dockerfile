@@ -19,5 +19,5 @@ ADD https://dl.google.com/dl/linux/direct/google-chrome-stable_current_amd64.deb
 RUN	apt install -y ./google-chrome-stable_current_amd64.deb && \
 	google-chrome-stable --version && \
 	rm -v google-chrome-stable_current_amd64.deb && \
-	apt clean && rm -rf /var/lib/apt/lists/*
+	apt clean
 	
