@@ -24,7 +24,7 @@ RSpec.resource 'CDR Exports', document: :customer_v1 do
     define_parameter 'time-format', scope: %i[data attributes],
                                     desc: "Start/end and time_connect field format: #{CdrExport::ALLOWED_TIME_FORMATS.join(', ')}"
     define_parameter 'time-zone-name', scope: %i[data attributes],
-                                       desc: 'Specify time zone name. By default UTC. Example: Europe/Kyiv'
+                                       desc: 'Specify time zone name. By default UTC. Example: europe/kyiv'
 
     let(:filters) do
       {
