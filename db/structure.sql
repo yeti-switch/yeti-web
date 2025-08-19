@@ -1,3 +1,8 @@
+\restrict udcsK4DACafWmdEq6BIOmbrqer1BkZkCEWX3gHXl6GakPxMctaco2wk73Be9q7Y
+
+-- Dumped from database version 16.9 (Debian 16.9-1.pgdg120+1)
+-- Dumped by pg_dump version 16.10 (Debian 16.10-1.pgdg14+1)
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -50144,6 +50149,8 @@ ALTER TABLE ONLY sys.sensors
 --
 -- PostgreSQL database dump complete
 --
+
+\unrestrict udcsK4DACafWmdEq6BIOmbrqer1BkZkCEWX3gHXl6GakPxMctaco2wk73Be9q7Y
 
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 

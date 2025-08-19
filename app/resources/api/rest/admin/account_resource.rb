@@ -10,7 +10,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :destination_rate_limit, :max_call_duration,
              :external_id, :uuid,
              :origination_capacity, :termination_capacity, :total_capacity,
-             :send_invoices_to, :invoice_period
+             :send_invoices_to, :invoice_period_id
 
   has_one :contractor, always_include_linkage_data: true
   has_one :timezone, class_name: 'Timezone', always_include_linkage_data: true
@@ -45,10 +45,6 @@ class Api::Rest::Admin::AccountResource < BaseResource
     _model.balance_notification_setting.high_threshold
   end
 
-  def invoice_period
-    _model.invoice_period&.name
-  end
-
   def self.updatable_fields(_context)
     %i[
       name
@@ -69,7 +65,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
 
       contractor
       timezone
-      invoice_period
+      invoice_period_id
       invoice_template
       external_id
     ]

@@ -1,3 +1,8 @@
+\restrict MANQ6x9ZIsgZDEFGzDDqWZZh3knqIWXcjulqDeX9HdIOaeR98CHNnxeLjTkgnom
+
+-- Dumped from database version 16.9 (Debian 16.9-1.pgdg120+1)
+-- Dumped by pg_dump version 16.10 (Debian 16.10-1.pgdg14+1)
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -4679,6 +4684,8 @@ ALTER TABLE ONLY sys.config
 --
 -- PostgreSQL database dump complete
 --
+
+\unrestrict MANQ6x9ZIsgZDEFGzDDqWZZh3knqIWXcjulqDeX9HdIOaeR98CHNnxeLjTkgnom
 
 SET search_path TO cdr, reports, billing, public;
 
