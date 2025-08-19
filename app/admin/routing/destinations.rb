@@ -100,7 +100,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
   permit_params :enabled, :prefix, :dst_number_min_length, :dst_number_max_length, :rate_group_id, :next_rate, :connect_fee,
-                :initial_interval, :next_interval, :dp_margin_fixed,
+                :initial_interval, :next_interval, :dp_margin_fixed, :cdo,
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
                 :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix,
