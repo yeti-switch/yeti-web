@@ -52,8 +52,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :all, show_count: false
   scope :successful_calls, show_count: false
   scope :short_calls, show_count: false
-  scope :rerouted_calls, show_count: false, if: proc { authorized?(:dump) }
-  scope :with_trace, show_count: false
+  scope :rerouted_calls, show_count: false
+  scope :with_trace, show_count: false, if: proc { authorized?(:dump) }
   scope :with_recording, show_count: false, if: proc { authorized?(:download_call_record) }
   scope :not_authorized, show_count: false
   scope :bad_routing, show_count: false
