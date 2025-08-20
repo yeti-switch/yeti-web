@@ -640,7 +640,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
   end
 
-  index download_links: %i[csv] do
+  index download_links: %i[csv json] do
     column :id do |cdr|
       if cdr.has_dump? && authorized?(:dump)
         if cdr.has_recording? && authorized?(:download_call_record)
