@@ -36,9 +36,7 @@ ActiveAdmin.register CustomersAuth do
                  [:routing_plan_name, proc { |row| row.routing_plan.try(:name) || '' }],
                  [:dst_numberlist_name, proc { |row| row.dst_numberlist.try(:name) || '' }],
                  [:src_numberlist_name, proc { |row| row.src_numberlist.try(:name) || '' }],
-                 :dump_level_name,
                  :privacy_mode_name,
-                 :enable_audio_recording,
                  :capacity,
                  :cps_limit,
                  :allow_receive_rate_limit,
@@ -99,7 +97,6 @@ ActiveAdmin.register CustomersAuth do
                 :ss_src_rewrite_rule, :ss_src_rewrite_result, :ss_dst_rewrite_rule, :ss_dst_rewrite_result,
                 :stir_shaken_crt_id,
                 tag_action_value: []
-  # , :enable_redirect, :redirect_method, :redirect_to
 
   includes :tag_action, :rateplan, :routing_plan, :gateway, :src_numberlist, :dst_numberlist,
            :pop, :radius_auth_profile, :radius_accounting_profile, :customer,
@@ -116,7 +113,8 @@ ActiveAdmin.register CustomersAuth do
   end
 
   scope :with_radius
-  scope :with_dump
+  scope :with_dump, if: proc { authorized?(:pcap) }
+  scope :with_recording, if: proc { authorized?(:recording) }
 
   sidebar :normalized_copies, only: :show do
     ul do
@@ -166,9 +164,9 @@ ActiveAdmin.register CustomersAuth do
     column :dst_numberlist
     column :src_numberlist
 
-    column :dump_level, &:dump_level_name
+    column :tracing, &:decorated_tracing
+
     column :privacy_mode_id, &:privacy_mode_name
-    column :enable_audio_recording
     column :capacity
     column :cps_limit
     column :allow_receive_rate_limit
@@ -225,11 +223,20 @@ ActiveAdmin.register CustomersAuth do
 
   filter :rateplan, input_html: { class: 'chosen' }
   filter :routing_plan, input_html: { class: 'chosen' }
-  filter :dump_level_id_eq, label: 'Dump Level', as: :select, collection: CustomersAuth::DUMP_LEVELS.invert
+  filter :dump_level_id_eq,
+         label: 'Dump Level',
+         as: :select,
+         collection: CustomersAuth::DUMP_LEVELS.invert,
+         if: proc { authorized?(:pcap) }
+
   filter :diversion_policy_id_eq, label: 'Diversion policy', as: :select, collection: CustomersAuth::DIVERSION_POLICIES.invert
   filter :pai_policy_id_eq, label: 'PAI policy', as: :select, collection: CustomersAuth::PAI_POLICIES.invert
   filter :privacy_mode_id_eq, label: 'Privacy mode', as: :select, collection: CustomersAuth::PRIVACY_MODES.invert, input_html: { class: 'chosen' }
-  filter :enable_audio_recording, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :enable_audio_recording,
+         as: :select,
+         collection: [['Yes', true], ['No', false]],
+         if: proc { authorized?(:recording) }
+
   filter :transport_protocol_id_eq, label: 'Transport protocol', as: :select, collection: CustomersAuth::TRANSPORT_PROTOCOLS.invert
   filter :ip_covers,
          as: :string,
@@ -315,8 +322,16 @@ ActiveAdmin.register CustomersAuth do
                                   label: 'SRC Numberlist',
                                   scope: Routing::Numberlist.order(:name),
                                   path: '/numberlists/search'
-          f.input :dump_level_id, as: :select, include_blank: false, collection: CustomersAuth::DUMP_LEVELS.invert
-          f.input :enable_audio_recording
+          if authorized?(:pcap)
+            f.input :dump_level_id,
+                    as: :select,
+                    include_blank: false,
+                    collection: CustomersAuth::DUMP_LEVELS.invert
+          end
+          if authorized?(:recording)
+            f.input :enable_audio_recording
+          end
+
           f.input :capacity
           f.input :cps_limit
           f.input :allow_receive_rate_limit
@@ -462,8 +477,12 @@ ActiveAdmin.register CustomersAuth do
           row :dst_numberlist
           row :src_numberlist
 
-          row :dump_level, &:dump_level_name
-          row :enable_audio_recording
+          if authorized?(:pcap)
+            row :dump_level, &:dump_level_name
+          end
+          if authorized?(:recording)
+            row :enable_audio_recording
+          end
           row :capacity
           row :cps_limit
           row :allow_receive_rate_limit

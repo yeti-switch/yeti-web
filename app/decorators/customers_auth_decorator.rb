@@ -37,6 +37,13 @@ class CustomersAuthDecorator < BillingDecorator
                 ], ' ')
   end
 
+  def decorated_tracing
+    h.safe_join([
+                  *(h.tag.span(dump_level_name, class: 'status_tag warn') if dump_level_id > 0 && h.authorized?(:pcap)),
+                  *(h.tag.span('REC', class: 'status_tag red') if enable_audio_recording && h.authorized?(:recording))
+                ], ' ')
+  end
+
   CustomersAuth::CONST::MATCH_CONDITION_ATTRIBUTES.each do |attribute_name|
     define_method attribute_name do
       model.public_send(attribute_name).map(&:strip).join(', ')
