@@ -53,8 +53,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :successful_calls, show_count: false
   scope :short_calls, show_count: false
   scope :rerouted_calls, show_count: false
-  scope :with_trace, show_count: false
-  scope :with_recording, show_count: false
+  scope :with_trace, show_count: false, if: proc { authorized?(:dump) }
+  scope :with_recording, show_count: false, if: proc { authorized?(:download_call_record) }
   scope :not_authorized, show_count: false
   scope :bad_routing, show_count: false
   scope :package_billing, show_count: false
@@ -92,8 +92,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :duration
   filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
 
-  filter :dump_level_id_eq, label: 'Dump level', as: :select,
-                            collection: Cdr::Cdr::DUMP_LEVELS.invert
+  filter :dump_level_id_eq,
+         label: 'Dump level',
+         as: :select,
+         collection: Cdr::Cdr::DUMP_LEVELS.invert,
+         if: proc { authorized?(:dump) }
+
   filter :disconnect_initiator_id_eq, label: 'Disconnect initiator', as: :select,
                                       collection: Cdr::Cdr::DISCONNECT_INITIATORS.invert
 
@@ -241,11 +245,11 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     link_to('Routing simulation', routing_simulation_cdr_path(resource))
   end
 
-  action_item :log_level_trace, only: :show do
+  action_item :log_level_trace, only: :show, if: proc { authorized?(:dump) } do
     link_to("#{resource.dump_level_name} trace", dump_cdr_path(resource)) if resource.has_dump?
   end
 
-  action_item :call_record, only: :show do
+  action_item :call_record, only: :show, if: proc { authorized?(:download_call_record) } do
     link_to('Call record', download_call_record_cdr_path(resource)) if resource.has_recording?
   end
 
@@ -638,13 +642,13 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   index download_links: %i[csv json] do
     column :id do |cdr|
-      if cdr.has_dump?
-        if cdr.has_recording?
+      if cdr.has_dump? && authorized?(:dump)
+        if cdr.has_recording? && authorized?(:download_call_record)
           link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace') + ' ' + link_to(fa_icon('file-audio-o'), download_call_record_cdr_path(cdr), title: 'Download record')
         else
           link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('exchange'), dump_cdr_path(cdr), title: 'Download trace')
         end
-      elsif cdr.has_recording?
+      elsif cdr.has_recording? && authorized?(:download_call_record)
         link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details') + ' ' + link_to(fa_icon('file-audio-o'), download_call_record_cdr_path(cdr), title: 'Download record')
       else
         link_to(cdr.id, resource_path(cdr), class: 'resource_id_link', title: 'Details')

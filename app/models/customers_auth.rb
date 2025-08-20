@@ -120,10 +120,10 @@ class CustomersAuth < ApplicationRecord
   DUMP_LEVEL_CAPTURE_RTP = 2
   DUMP_LEVEL_CAPTURE_ALL = 3
   DUMP_LEVELS = {
-    DUMP_LEVEL_DISABLED => 'Capture nothing',
-    DUMP_LEVEL_CAPTURE_SIP => 'Capture signaling traffic',
-    DUMP_LEVEL_CAPTURE_RTP => 'Capture RTP traffic',
-    DUMP_LEVEL_CAPTURE_ALL => 'Capture all traffic'
+    DUMP_LEVEL_DISABLED => 'Disabled',
+    DUMP_LEVEL_CAPTURE_SIP => 'SIP',
+    DUMP_LEVEL_CAPTURE_RTP => 'RTP',
+    DUMP_LEVEL_CAPTURE_ALL => 'SIP and RTP'
   }.freeze
 
   SS_MODE_DISABLE = 0
@@ -310,6 +310,8 @@ class CustomersAuth < ApplicationRecord
 
   scope :with_radius, -> { where('class4.customers_auth.radius_auth_profile_id is not null') }
   scope :with_dump, -> { where('class4.customers_auth.dump_level_id > 0') }
+  scope :with_recording, -> { where('class4.customers_auth.enable_audio_recording') }
+
   scope :ip_covers, lambda { |ip|
     begin
       IPAddr.new(ip)
