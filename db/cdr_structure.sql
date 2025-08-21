@@ -1,4 +1,4 @@
-\restrict MANQ6x9ZIsgZDEFGzDDqWZZh3knqIWXcjulqDeX9HdIOaeR98CHNnxeLjTkgnom
+\restrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
 
 -- Dumped from database version 16.9 (Debian 16.9-1.pgdg120+1)
 -- Dumped by pg_dump version 16.10 (Debian 16.10-1.pgdg14+1)
@@ -4685,7 +4685,7 @@ ALTER TABLE ONLY sys.config
 -- PostgreSQL database dump complete
 --
 
-\unrestrict MANQ6x9ZIsgZDEFGzDDqWZZh3knqIWXcjulqDeX9HdIOaeR98CHNnxeLjTkgnom
+\unrestrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
 
 SET search_path TO cdr, reports, billing, public;
 
