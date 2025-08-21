@@ -43008,8 +43008,6 @@ CREATE TABLE data_import.import_gateways (
     dst_rewrite_result character varying,
     term_next_hop character varying,
     orig_next_hop character varying,
-    orig_append_headers_req character varying,
-    term_append_headers_req character varying,
     dialog_nat_handling boolean,
     orig_force_outbound_proxy boolean,
     orig_use_outbound_proxy boolean,
@@ -50155,6 +50153,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250821153800'),
 ('20250729072451'),
 ('20250728100532'),
 ('20250714084517'),

@@ -95,8 +95,6 @@ ActiveAdmin.register Importing::Gateway do
     column :term_force_outbound_proxy
     column :term_next_hop
     column :orig_next_hop
-    column :term_append_headers_req
-    column :orig_append_headers_req
     column :sdp_alines_filter_type, sortable: :sdp_alines_filter_type_name
     column :sdp_alines_filter_list
     column :orig_disconnect_policy, sortable: :orig_disconnect_policy_name

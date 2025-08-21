@@ -61,10 +61,14 @@ class CdrDecorator < Draper::Decorator
   end
 
   def decorated_duration
+    "#{duration} s."
+  end
+
+  def decorated_customer_duration
     if h.authorized?(:allow_cdo) && !cdo.nil?
-      "#{duration}(#{cdo}) s."
+      "#{customer_duration}(#{cdo}) s."
     else
-      "#{duration} s."
+      "#{customer_duration} s."
     end
   end
 

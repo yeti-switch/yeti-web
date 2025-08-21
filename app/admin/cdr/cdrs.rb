@@ -374,7 +374,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           column :customer_price
           column :customer_price_no_vat
-          column :customer_duration
+          column :customer_duration, &:decorated_customer_duration
           column :routing_plan
           column :routing_group
           column :routing_tags
@@ -574,7 +574,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         attributes_table do
           row :customer_price
           row :customer_price_no_vat
-          row :customer_duration
+          row :customer_duration, &:decorated_customer_duration
           row :vendor_price
           row :vendor_duration
           row :profit
@@ -783,7 +783,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     column :customer_price
     column :customer_acc_vat
     column :customer_price_no_vat
-    column :customer_duration
+    column :customer_duration, &:decorated_customer_duration
     column :routing_plan
     column :routing_group
     column :routing_tags
