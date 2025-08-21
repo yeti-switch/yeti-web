@@ -589,12 +589,15 @@ CREATE FUNCTION billing.bill_cdr(i_cdr cdr.cdr) RETURNS cdr.cdr
     AS $$
 DECLARE
     _v billing.interval_billing_data%rowtype;
+    _v_customer_duration integer;
 BEGIN
     if i_cdr.duration>0 and i_cdr.success then  -- run billing.
+        _v_customer_duration = i_cdr.duration + COALESCE(i_cdr.cdo, 0);
+
         if i_cdr.package_counter_id is not null then
           -- running billing with fake rates to calculate duration
           _v=billing.interval_billing(
-            i_cdr.duration,
+            _v_customer_duration,
             '1.0'::numeric,
             '1.0'::numeric,
             '1.0'::numeric,
@@ -606,7 +609,7 @@ BEGIN
          i_cdr.customer_duration=_v.duration;
         else
           _v=billing.interval_billing(
-            i_cdr.duration,
+            _v_customer_duration,
             i_cdr.destination_fee,
             i_cdr.destination_initial_rate,
             i_cdr.destination_next_rate,
@@ -1897,7 +1900,6 @@ BEGIN
     v_cdr.success = true;
     if v_config.cdo and v_dynamic.destination_cdo is not null and v_dynamic.destination_cdo !=0 and v_cdr.duration + v_dynamic.destination_cdo > 0 then
       v_cdr.cdo = v_dynamic.destination_cdo;
-      v_cdr.duration = v_cdr_duration + v_cdr.cdo;
     end if;
   else
     v_cdr.time_connect = NULL;
@@ -4690,6 +4692,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250821154607'),
 ('20250730191727'),
 ('20250321212727'),
 ('20241219145036'),

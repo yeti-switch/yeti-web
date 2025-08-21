@@ -49,7 +49,6 @@
 #  media_encryption_mode_name         :string
 #  name                               :string
 #  network_protocol_priority_name     :string
-#  orig_append_headers_req            :string
 #  orig_disconnect_policy_name        :string
 #  orig_force_outbound_proxy          :boolean
 #  orig_next_hop                      :string
@@ -99,7 +98,6 @@
 #  sst_session_expires                :integer(4)
 #  suppress_early_media               :boolean
 #  symmetric_rtp_nonstop              :boolean
-#  term_append_headers_req            :string
 #  term_disconnect_policy_name        :string
 #  term_force_outbound_proxy          :boolean
 #  term_next_hop                      :string
@@ -200,7 +198,6 @@ class Importing::Gateway < Importing::Base
     auth_enabled auth_user auth_password
     term_use_outbound_proxy term_outbound_proxy term_force_outbound_proxy
     term_next_hop orig_next_hop
-    term_append_headers_req orig_append_headers_req
     sdp_alines_filter_type_id
     sdp_alines_filter_list
     term_next_hop_for_replies
