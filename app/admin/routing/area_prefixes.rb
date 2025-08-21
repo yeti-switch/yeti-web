@@ -6,12 +6,8 @@ ActiveAdmin.register Routing::AreaPrefix do
   acts_as_audit
   acts_as_clone
   acts_as_safe_destroy
-  acts_as_async_destroy('Routing::AreaPrefix')
-  acts_as_async_update BatchUpdateForm::AreaPrefix
 
-  acts_as_delayed_job_lock
-
-  permit_params :prefix, :area_id
+  permit_params :prefix, :batch_prefix, :area_id
 
   includes :area
 
@@ -34,8 +30,12 @@ ActiveAdmin.register Routing::AreaPrefix do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
-      f.input :prefix
-      f.input :area
+      if f.object.new_record? # allow multiple prefixes delimited by comma in NEW form.
+        f.input :batch_prefix, label: 'Prefix'
+      else
+        f.input :prefix, label: 'Prefix'
+      end
+      f.input :area, as: :select, input_html: { class: 'chosen' }
     end
     f.actions
   end

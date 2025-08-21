@@ -26,11 +26,30 @@ class Routing::AreaPrefix < ApplicationRecord
 
   validates :prefix, uniqueness: true
   validates :prefix, format: { without: /\s/ }
+  validates :batch_prefix, format: { without: /\s/ }
+
   validates :area, presence: true
+
+  attr_accessor :batch_prefix
 
   scope :prefix_covers, lambda { |prefix|
     where('prefix_range(prefix) @> prefix_range(?)', prefix)
   }
+
+  before_create do
+    if batch_prefix.present?
+      prefixes = batch_prefix.delete(' ').split(',').uniq
+      while prefixes.length > 1
+        new_instance = dup
+        new_instance.batch_prefix = nil
+        new_instance.prefix = prefixes.pop
+        new_instance.save!
+      end
+      self.prefix = prefixes.pop
+    elsif prefix.nil?
+      self.prefix = ''
+    end
+  end
 
   def display_name
     "#{prefix} | #{id}"
