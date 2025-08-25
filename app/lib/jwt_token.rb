@@ -2,6 +2,7 @@
 
 module JwtToken
   ALGO = 'HS256'
+  ES256 = 'ES256'
 
   module_function
 

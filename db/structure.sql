@@ -3565,7 +3565,8 @@ CREATE TABLE class4.gateways (
     dump_level_id smallint DEFAULT 0 NOT NULL,
     throttling_profile_id smallint,
     transfer_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
-    transfer_tel_uri_host character varying
+    transfer_tel_uri_host character varying,
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL
 );
 
 
@@ -50211,6 +50212,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250828041816'),
 ('20250916132329'),
 ('20250915155340'),
 ('20250908204726'),
