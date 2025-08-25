@@ -8,10 +8,25 @@ module CustomerV1Authorizable
     attr_reader :current_customer
   end
 
+  def self.build_auth_context(request)
+    header_token = request.headers['Authorization']&.split&.last
+    if header_token.present?
+      return {
+        token: header_token,
+        from_cookie: false
+      }
+    end
+
+    {
+      token: request.cookies[Authentication::CustomerV1Auth::COOKIE_NAME],
+      from_cookie: true
+    }
+  end
+
   private
 
   def authorize!
-    auth_context = build_auth_context
+    auth_context = build_auth_context(request)
     result = Authorization::CustomerV1Auth.authorize! auth_context[:token]
     @current_customer = result.entity
     @response_cookie_needed = auth_context[:from_cookie]
@@ -26,21 +41,6 @@ module CustomerV1Authorizable
       value: auth_data.token,
       expires: auth_data.expires_at,
       httponly: true
-    }
-  end
-
-  def build_auth_context
-    header_token = request.headers['Authorization']&.split&.last
-    if header_token.present?
-      return {
-        token: header_token,
-        from_cookie: false
-      }
-    end
-
-    {
-      token: request.cookies[Authentication::CustomerV1Auth::COOKIE_NAME],
-      from_cookie: true
     }
   end
 

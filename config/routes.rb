@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#create'
   get 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#show'
   delete 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#destroy'
+  post 'api/rest/customer/v1/call-auth', to: 'api/rest/customer/v1/call_auth#create'
 
   get 'api/rest/customer/v1/origination-statistics', to: 'api/rest/customer/v1/origination_statistics#show'
   get 'api/rest/customer/v1/origination-statistics-quality', to: 'api/rest/customer/v1/origination_statistics_quality#show'
