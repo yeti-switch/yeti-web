@@ -42858,7 +42858,8 @@ CREATE TABLE data_import.import_destinations (
     dst_number_max_length integer,
     routing_tag_mode_id smallint,
     routing_tag_mode_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    cdo smallint
 );
 
 
@@ -50221,6 +50222,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250908204726'),
 ('20250828145201'),
 ('20250821153800'),
 ('20250729072451'),

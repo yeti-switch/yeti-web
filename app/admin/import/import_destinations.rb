@@ -5,6 +5,7 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
   filter :prefix
   filter :rate
   filter :connect_fee
+  filter :cdo, if: proc { authorized?(:allow_cdo) }
   boolean_filter :is_changed
 
   acts_as_import_preview
@@ -47,5 +48,8 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
     column :asr_limit
     column :acd_limit
     column :short_calls_limit
+    if authorized?(:allow_cdo)
+      column :cdo
+    end
   end
 end

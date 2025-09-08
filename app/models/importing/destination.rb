@@ -7,6 +7,7 @@
 #  id                       :bigint(8)        not null, primary key
 #  acd_limit                :float(24)
 #  asr_limit                :float(24)
+#  cdo                      :integer(2)
 #  connect_fee              :decimal(, )
 #  dp_margin_fixed          :decimal(, )
 #  dp_margin_percent        :decimal(, )
@@ -52,7 +53,7 @@ class Importing::Destination < Importing::Base
                               valid_from valid_till profit_control_mode_id
                               asr_limit acd_limit short_calls_limit
                               dst_number_min_length dst_number_max_length
-                              routing_tag_ids routing_tag_mode_id]
+                              routing_tag_ids routing_tag_mode_id cdo]
 
   import_for ::Routing::Destination
 
