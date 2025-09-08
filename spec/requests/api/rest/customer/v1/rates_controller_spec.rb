@@ -87,22 +87,13 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
       it_behaves_like :jsonapi_filters_by_number_field, :connect_fee
       it_behaves_like :jsonapi_filters_by_number_field, :initial_interval
       it_behaves_like :jsonapi_filters_by_number_field, :next_interval
-      it_behaves_like :jsonapi_filters_by_number_field, :dp_margin_fixed
-      it_behaves_like :jsonapi_filters_by_number_field, :dp_margin_percent
       it_behaves_like :jsonapi_filters_by_number_field, :initial_rate
       it_behaves_like :jsonapi_filters_by_boolean_field, :reject_calls
-      it_behaves_like :jsonapi_filters_by_boolean_field, :use_dp_intervals
       it_behaves_like :jsonapi_filters_by_datetime_field, :valid_from
       it_behaves_like :jsonapi_filters_by_datetime_field, :valid_till
-      it_behaves_like :jsonapi_filters_by_number_field, :external_id
-      it_behaves_like :jsonapi_filters_by_number_field, :asr_limit
-      it_behaves_like :jsonapi_filters_by_number_field, :acd_limit
-      it_behaves_like :jsonapi_filters_by_number_field, :short_calls_limit
-      it_behaves_like :jsonapi_filters_by_boolean_field, :quality_alarm
       it_behaves_like :jsonapi_filters_by_uuid_field, :uuid
       it_behaves_like :jsonapi_filters_by_number_field, :dst_number_min_length
       it_behaves_like :jsonapi_filters_by_number_field, :dst_number_max_length
-      it_behaves_like :jsonapi_filters_by_boolean_field, :reverse_billing
     end
   end
 
@@ -132,12 +123,15 @@ RSpec.describe Api::Rest::Customer::V1::RatesController, type: :request do
           'links': anything,
           'attributes': {
             'prefix': rate.prefix,
+            'dst-number-min-length': rate.dst_number_min_length,
+            'dst-number-max-length': rate.dst_number_max_length,
+            'enabled': rate.enabled,
+            'reject-calls': rate.reject_calls,
             'initial-rate': rate.initial_rate.to_s,
             'initial-interval': rate.initial_interval,
             'next-rate': rate.next_rate.to_s,
             'next-interval': rate.next_interval,
             'connect-fee': rate.connect_fee.to_s,
-            'reject-calls': rate.reject_calls,
             'valid-from': rate.valid_from.iso8601(3),
             'valid-till': rate.valid_till.iso8601(3),
             'network-prefix-id': rate.network_prefix_id

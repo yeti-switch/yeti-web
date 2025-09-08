@@ -70,20 +70,34 @@ class Routing::Destination < ApplicationRecord
 
   scope :low_quality, -> { where quality_alarm: true }
   scope :time_valid, -> { where('valid_till >= :time AND valid_from < :time', time: Time.now) }
+
   scope :rateplan_id_filter, lambda { |value|
-    rate_group_ids = Routing::RatePlanGroup.where(rateplan_id: value).pluck(:rate_group_id)
+    rate_group_ids = Routing::RatePlanGroup.where(rateplan_id: value).pluck(:rate_group_id).uniq
     where(rate_group_id: rate_group_ids)
   }
+
+  scope :rateplan_uuid_filter, lambda { |value|
+    rateplan_ids = Routing::RatePlan.where(uuid: value).pluck(:id)
+    rateplan_id_filter(rateplan_ids)
+  }
+
   scope :country_id_filter, lambda { |value|
     network_prefix_ids = System::NetworkPrefix.where(country_id: value).pluck(:id)
     where(network_prefix_id: network_prefix_ids)
   }
   scope :where_customer, lambda { |id|
-    joins(:rate_group).joins(:rateplans).joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })
+    rateplan_ids = CustomersAuth.where(customer_id: id).pluck(:rateplan_id).uniq
+    rateplan_id_filter(rateplan_ids)
   }
 
   scope :where_account, lambda { |id|
-    joins(:rate_group).joins(:rateplans).joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
+    rateplan_ids = CustomersAuth.where(account_id: id).pluck(:rateplan_id).uniq
+    rateplan_id_filter(rateplan_ids)
+  }
+
+  scope :account_uuid_filter, lambda { |id|
+    account_ids = Account.where(uuid: id).pluck(:id).uniq
+    where_account(account_ids)
   }
 
   validates :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
