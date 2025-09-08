@@ -7,6 +7,7 @@
 #  id                       :bigint(8)        not null, primary key
 #  acd_limit                :float(24)
 #  asr_limit                :float(24)
+#  cdo                      :integer(2)
 #  connect_fee              :decimal(, )
 #  dp_margin_fixed          :decimal(, )
 #  dp_margin_percent        :decimal(, )
