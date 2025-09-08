@@ -31397,7 +31397,7 @@ $$;
 -- Name: check_states(); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint, stir_shaken_trusted_certificates bigint, stir_shaken_trusted_repositories bigint, stir_shaken_signing_certificates bigint, sensors bigint, translations bigint, codec_groups bigint, registrations bigint, radius_authorization_profiles bigint, radius_accounting_profiles bigint, auth_credentials bigint, options_probers bigint, gateways_cache bigint)
+CREATE FUNCTION switch22.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth bigint, stir_shaken_trusted_certificates bigint, stir_shaken_trusted_repositories bigint, stir_shaken_signing_certificates bigint, stir_shaken_rcd_profiles bigint, sensors bigint, translations bigint, codec_groups bigint, registrations bigint, radius_authorization_profiles bigint, radius_accounting_profiles bigint, auth_credentials bigint, options_probers bigint, gateways_cache bigint)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
     BEGIN
@@ -31408,6 +31408,7 @@ CREATE FUNCTION switch22.check_states() RETURNS TABLE(trusted_lb bigint, ip_auth
         (select value from sys.states where key = 'stir_shaken_trusted_certificates'),
         (select value from sys.states where key = 'stir_shaken_trusted_repositories'),
         (select value from sys.states where key = 'stir_shaken_signing_certificates'),
+        (select value from sys.states where key = 'stir_shaken_rcd_profiles'),
         (select value from sys.states where key = 'sensors'),
         (select value from sys.states where key = 'translations'),
         (select value from sys.states where key = 'codec_groups'),
@@ -31945,6 +31946,38 @@ BEGIN
     ) AND
     (i_registration_id is null OR o.id=i_registration_id);
 end;
+$$;
+
+
+--
+-- Name: stir_shaken_rcd_profiles; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.stir_shaken_rcd_profiles (
+    id integer NOT NULL,
+    external_id bigint,
+    mode_id smallint DEFAULT 1 NOT NULL,
+    created_at timestamp with time zone,
+    updated_at timestamp with time zone,
+    nam character varying NOT NULL,
+    apn character varying,
+    icn character varying,
+    jcd jsonb,
+    jcl character varying
+);
+
+
+--
+-- Name: load_stir_shaken_rcd_profiles(); Type: FUNCTION; Schema: switch22; Owner: -
+--
+
+CREATE FUNCTION switch22.load_stir_shaken_rcd_profiles() RETURNS SETOF class4.stir_shaken_rcd_profiles
+    LANGUAGE plpgsql COST 10
+    AS $$
+
+BEGIN
+  RETURN QUERY SELECT * from class4.stir_shaken_rcd_profiles order by id;
+END;
 $$;
 
 
@@ -42383,6 +42416,26 @@ ALTER SEQUENCE class4.sip_options_probers_id_seq OWNED BY class4.sip_options_pro
 
 
 --
+-- Name: stir_shaken_rcd_profiles_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
+--
+
+CREATE SEQUENCE class4.stir_shaken_rcd_profiles_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stir_shaken_rcd_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: class4; Owner: -
+--
+
+ALTER SEQUENCE class4.stir_shaken_rcd_profiles_id_seq OWNED BY class4.stir_shaken_rcd_profiles.id;
+
+
+--
 -- Name: stir_shaken_signing_certificates_id_seq; Type: SEQUENCE; Schema: class4; Owner: -
 --
 
@@ -45801,6 +45854,13 @@ ALTER TABLE ONLY class4.sip_options_probers ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: stir_shaken_rcd_profiles id; Type: DEFAULT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_rcd_profiles ALTER COLUMN id SET DEFAULT nextval('class4.stir_shaken_rcd_profiles_id_seq'::regclass);
+
+
+--
 -- Name: stir_shaken_signing_certificates id; Type: DEFAULT; Schema: class4; Owner: -
 --
 
@@ -47232,6 +47292,14 @@ ALTER TABLE ONLY class4.sip_options_probers
 
 ALTER TABLE ONLY class4.sip_options_probers
     ADD CONSTRAINT sip_options_probers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: stir_shaken_rcd_profiles stir_shaken_rcd_profiles_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.stir_shaken_rcd_profiles
+    ADD CONSTRAINT stir_shaken_rcd_profiles_pkey PRIMARY KEY (id);
 
 
 --
@@ -50153,6 +50221,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250828145201'),
 ('20250821153800'),
 ('20250729072451'),
 ('20250728100532'),

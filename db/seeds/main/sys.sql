@@ -149,6 +149,8 @@ INSERT INTO sys.sensor_modes (id, name) VALUES (3, 'HEPv3');
 INSERT INTO sys.states (key, value) VALUES ('customers_auth', 1);
 INSERT INTO sys.states (key, value) VALUES ('stir_shaken_trusted_certificates', 1);
 INSERT INTO sys.states (key, value) VALUES ('stir_shaken_trusted_repositories', 1);
+INSERT INTO sys.states (key, value) VALUES ('stir_shaken_rcd_profiles', 1);
+
 INSERT INTO sys.states (key, value) VALUES ('load_balancers', 1);
 
 INSERT INTO sys.states(key,value) VALUES('sensors',1);

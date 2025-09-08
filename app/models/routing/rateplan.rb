@@ -28,11 +28,13 @@ class Routing::Rateplan < ApplicationRecord
   has_many :destinations, class_name: 'Routing::Destination', through: :rate_groups
 
   scope :where_customer, lambda { |id|
-    joins(:customers_auths).where(CustomersAuth.table_name => { customer_id: id })
+    rateplan_ids = CustomersAuth.where(customer_id: id).pluck(:rateplan_id)
+    where(id: rateplan_ids)
   }
 
   scope :where_account, lambda { |id|
-    joins(:customers_auths).where(CustomersAuth.table_name => { account_id: id })
+    rateplan_ids = CustomersAuth.where(account_id: id).pluck(:rateplan_id)
+    where(id: rateplan_ids)
   }
 
   validates :name, :profit_control_mode_id, presence: true
