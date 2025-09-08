@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# frozen_string_literal: true
 
 class Api::Rest::Customer::V1::RateResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Routing::Destination'
