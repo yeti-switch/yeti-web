@@ -59,10 +59,10 @@ class Equipment::StirShaken::RcdProfile < ApplicationRecord
   end
 
   private
+
   def validate_jcd
     if !jcd.nil? && !jcd.is_a?(Hash)
       errors.add(:jcd, 'must be a JSON object or empty')
     end
   end
-
 end
