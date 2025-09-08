@@ -57,7 +57,7 @@ jobs:
         run: make lint
 
   database_consistency:
-    name: Check the consistency of the database constraints with the application validations
+    name: DB consistency check
     runs-on: ubuntu-latest
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
@@ -76,7 +76,7 @@ jobs:
             pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
           key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
-      - name: Check the consistency of the database constraints with the application validations
+      - name: run make database_consistency
         continue-on-error: true
         run: make database_consistency
         env:
