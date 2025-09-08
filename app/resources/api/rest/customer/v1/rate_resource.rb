@@ -44,7 +44,7 @@ class Api::Rest::Customer::V1::RateResource < Api::Rest::Customer::V1::BaseResou
   }
 
   filter :account_id_eq, apply: lambda { |records, values, _options|
-    records.rateplan_uuid_filter(values[0])
+    records.account_uuid_filter(values[0])
   }
 
   def self.apply_allowed_accounts(_records, options)
