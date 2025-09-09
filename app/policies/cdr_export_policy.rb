@@ -5,6 +5,7 @@ class CdrExportPolicy < ::RolePolicy
 
   alias_rule :download?, to: :perform?
   alias_rule :delete_file?, to: :destroy?
+  alias_rule :retry?, to: :create?
 
   class Scope < ::RolePolicy::Scope
   end

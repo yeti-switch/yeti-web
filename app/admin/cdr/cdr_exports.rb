@@ -45,6 +45,10 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     link_to('Delete File', { action: :delete_file }, method: :delete) if resource.completed?
   end
 
+  action_item(:retry, only: [:show]) do
+    link_to('Retry', action: :retry) if resource.failed?
+  end
+
   index do
     selectable_column
     id_column
@@ -120,6 +124,15 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   member_action :delete_file, method: :delete do
     resource.update!(status: CdrExport::STATUS_DELETED)
     flash[:notice] = 'The file will be deleted in background!'
+    redirect_back fallback_location: root_path
+  end
+
+  member_action :retry do
+    Cdr::Export::Retry.call(cdr_export: resource)
+    flash[:notice] = 'CDR export has been scheduled for retry!'
+    redirect_back fallback_location: root_path
+  rescue Cdr::Export::Retry::Error => e
+    flash[:error] = e.message
     redirect_back fallback_location: root_path
   end
 

@@ -169,6 +169,10 @@ class CdrExport < ApplicationRecord
     status == STATUS_DELETED
   end
 
+  def failed?
+    status == STATUS_FAILED
+  end
+
   def self.allowed_filters
     FiltersModel.attribute_types.keys.map(&:to_s)
   end
