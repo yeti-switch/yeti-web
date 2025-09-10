@@ -77,7 +77,7 @@ class Routing::Destination < ApplicationRecord
   }
 
   scope :rateplan_uuid_filter, lambda { |value|
-    rateplan_ids = Routing::RatePlan.where(uuid: value).pluck(:id)
+    rateplan_ids = Routing::Rateplan.where(uuid: value).pluck(:id)
     rateplan_id_filter(rateplan_ids)
   }
 
