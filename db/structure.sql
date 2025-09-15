@@ -35222,7 +35222,6 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         end if;
 
         -- redefine call SRC/DST numbers
-
         IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
           v_ret.src_name_in=i_from_dsp;
         ELSIF v_customer_auth_normalized.src_name_field_id=2 THEN /* from uri userpart */
@@ -35234,6 +35233,10 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
           v_ret.src_prefix_in:=i_from_name;
         ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
           v_ret.src_prefix_in:=i_from_dsp;
+        ELSIF v_customer_auth_normalized.src_number_field_id=3 THEN /* R-URI userpart */
+          v_ret.src_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=4 THEN /* To URI userpart */
+          v_ret.src_prefix_in:=i_to_name;
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
@@ -36912,7 +36915,6 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         end if;
 
         -- redefine call SRC/DST numbers
-
         IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
           v_ret.src_name_in=i_from_dsp;
         ELSIF v_customer_auth_normalized.src_name_field_id=2 THEN /* from uri userpart */
@@ -36924,6 +36926,10 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           v_ret.src_prefix_in:=i_from_name;
         ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
           v_ret.src_prefix_in:=i_from_dsp;
+        ELSIF v_customer_auth_normalized.src_number_field_id=3 THEN /* R-URI userpart */
+          v_ret.src_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=4 THEN /* To URI userpart */
+          v_ret.src_prefix_in:=i_to_name;
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
@@ -38577,7 +38583,6 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         end if;
 
         -- redefine call SRC/DST numbers
-
         IF v_customer_auth_normalized.src_name_field_id=1 THEN  /* default - from uri display name */
           v_ret.src_name_in=i_from_dsp;
         ELSIF v_customer_auth_normalized.src_name_field_id=2 THEN /* from uri userpart */
@@ -38589,6 +38594,10 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
           v_ret.src_prefix_in:=i_from_name;
         ELSIF v_customer_auth_normalized.src_number_field_id=2 THEN /* From uri Display name */
           v_ret.src_prefix_in:=i_from_dsp;
+        ELSIF v_customer_auth_normalized.src_number_field_id=3 THEN /* R-URI userpart */
+          v_ret.src_prefix_in:=i_uri_name;
+        ELSIF v_customer_auth_normalized.src_number_field_id=4 THEN /* To URI userpart */
+          v_ret.src_prefix_in:=i_to_name;
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
@@ -50222,6 +50231,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250915155340'),
 ('20250908204726'),
 ('20250828145201'),
 ('20250821153800'),
