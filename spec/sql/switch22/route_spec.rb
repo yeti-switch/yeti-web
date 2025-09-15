@@ -922,6 +922,8 @@ RSpec.describe '#routing logic' do
       context 'Authorized, Src number field' do
         let(:from_dsp) { 'from_display_name' }
         let(:from_name) { 'from_username' }
+        let(:uri_name) { 'ruri_username' }
+        let(:to_name) { 'to_username' }
 
         context 'From User part' do
           let!(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_FROM_USERPART }
@@ -937,6 +939,24 @@ RSpec.describe '#routing logic' do
           it 'routing OK ' do
             expect(subject.size).to eq(2)
             expect(subject.first[:src_prefix_in]).to eq('from_display_name')
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+          end
+        end
+
+        context 'R-URI User part' do
+          let!(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_RURI_USERPART }
+          it 'routing OK ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:src_prefix_in]).to eq('ruri_username')
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+          end
+        end
+
+        context 'To User part' do
+          let!(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_TO_USERPART }
+          it 'routing OK ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:src_prefix_in]).to eq('to_username')
             expect(subject.first[:disconnect_code_id]).to eq(nil)
           end
         end
