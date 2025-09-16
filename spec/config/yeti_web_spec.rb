@@ -84,7 +84,8 @@ RSpec.describe 'config/yeti_web.yml' do
         cdr_export: {
           bucket: a_kind_of(String)
         }
-      }
+      },
+      tmpdir: a_kind_of(String)
     }
   end
 

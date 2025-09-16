@@ -74,20 +74,17 @@ module SendReport
       return [] if skip_attachments
 
       data.map do |data_item|
-        file_name = generate_csv_file(data_item)
-        attachment = ::Notification::Attachment.create!(
-          filename: file_name
-        )
-        ::Notification::Attachment.where(id: attachment.id).update_all(data: File.read(file_name))
-        attachment
+        with_tmp_file do |tmp_file|
+          generate_csv_file(data_item, tmp_file)
+          ::Notification::Attachment.create!(filename: File.basename(tmp_file), data: tmp_file.read)
+        end
       end
     end
 
-    def generate_csv_file(data_item)
+    def generate_csv_file(data_item, tmp_file)
       columns = data_item.columns
       data = data_item.collection
-      file_name = csv_file_name
-      CSV.open(file_name, 'w') do |csv|
+      CSV.open(tmp_file, 'w') do |csv|
         csv << columns.map { |column_name, _attribute| column_name.to_s.humanize }
         data.each do |row|
           line = []
@@ -99,11 +96,12 @@ module SendReport
           csv << line
         end
       end
-      file_name
     end
 
-    def csv_file_name
-      '/tmp/' + make_tmpname(["#{report.id}_#{report.class.to_s.parameterize}", '.csv'], nil)
+    def with_tmp_file
+      Tempfile.create(["#{report.id}_#{report.class.to_s.parameterize}", '.csv'], YetiConfig.tmpdir) do |tmp_file|
+        yield(tmp_file)
+      end
     end
 
     def html_template_name
@@ -126,21 +124,6 @@ module SendReport
           service: self
         }
       )
-    end
-
-    # Copy implementation of Dir::Tmpname.make_tmpname from ruby 2.3
-    # Was removed in ruby 2.5
-    def make_tmpname((prefix, suffix), n)
-      prefix = (String.try_convert(prefix) ||
-          raise(ArgumentError, "unexpected prefix: #{prefix.inspect}"))
-      suffix &&= (String.try_convert(suffix) ||
-          raise(ArgumentError, "unexpected suffix: #{suffix.inspect}"))
-      t = Time.now.strftime('%Y%m%d')
-      # $$ - Process ID
-      path = "#{prefix}#{t}-#{$PROCESS_ID}-#{rand(0x100000000).to_s(36)}"
-      path += "-#{n}" if n
-      path += suffix if suffix
-      path
     end
 
     def template_path

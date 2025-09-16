@@ -98,37 +98,23 @@ module BillingInvoice
     def call
       raise TemplateUndefined, invoice.id if template.blank?
 
-      odf_path = "tmp/invoice-#{invoice.id}.odt"
-      pdf_path = "tmp/invoice-#{invoice.id}.pdf"
-      [odf_path, pdf_path].each do |f|
-        if File.exist?(f)
-          File.unlink(f)
-        end
-      end
+      with_tempfiles do |odf_file, pdf_file|
+        odf_file.write(template.data)
 
-      File.open(odf_path, 'wb') do |file|
-        file.write(template.data)
-      end
+        generate_odf_document(odf_file.path)
 
-      generate_odf_document(odf_path)
+        # generate pdf
+        convert_to_pdf(odf_file.path, pdf_file.path)
 
-      # generate pdf
-      convert_to_pdf(odf_path)
+        odf_data = save_read_file(odf_file.path)
+        pdf_data = save_read_file(pdf_file.path)
 
-      odf_data = save_read_file(odf_path)
-      pdf_data = save_read_file(pdf_path)
-
-      Billing::InvoiceDocument.create!(
+        Billing::InvoiceDocument.create!(
           invoice: invoice,
           filename: invoice.file_name.to_s,
           data: odf_data,
           pdf_data: pdf_data
         )
-
-      [odf_path, pdf_path].each do |f|
-        if File.exist?(f)
-          File.unlink(f)
-        end
       end
     end
 
@@ -369,8 +355,8 @@ module BillingInvoice
       end.generate(odf_path) # New ODFReport constructor return data, not a file name
     end
 
-    def convert_to_pdf(odf_path)
-      pdf_command = "HOME=/opt/yeti-web /usr/bin/unoconv -f pdf #{Shellwords.escape(odf_path)}"
+    def convert_to_pdf(odf_path, pdf_path)
+      pdf_command = "HOME=/opt/yeti-web /usr/bin/unoconv -f pdf -o #{Shellwords.escape(pdf_path)} #{Shellwords.escape(odf_path)}"
       Open3.popen3(pdf_command) do |_stdin, _stdout, _stderr, wait_thr|
         wait_thr.value # Process::Status object returned.
       end
@@ -383,6 +369,14 @@ module BillingInvoice
       logger.error { e.backtrace.join("\n") }
       capture_error(e, extra: { service_class: self.class.name, file_path: file_path })
       nil
+    end
+
+    def with_tempfiles
+      Tempfile.create(["invoice-#{invoice.id}", '.odt'], YetiConfig.tmpdir, binmode: true) do |odf_file|
+        Tempfile.create(["invoice-#{invoice.id}", '.pdf'], YetiConfig.tmpdir, binmode: true) do |pdf_file|
+          yield(odf_file, pdf_file)
+        end
+      end
     end
   end
 end
