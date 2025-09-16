@@ -4,11 +4,12 @@
 #
 # Table name: gateway_groups
 #
-#  id                :integer(4)       not null, primary key
-#  name              :string           not null
-#  prefer_same_pop   :boolean          default(TRUE), not null
-#  balancing_mode_id :integer(2)       default(1), not null
-#  vendor_id         :integer(4)       not null
+#  id                     :integer(4)       not null, primary key
+#  max_rerouting_attempts :integer(2)       default(10), not null
+#  name                   :string           not null
+#  prefer_same_pop        :boolean          default(TRUE), not null
+#  balancing_mode_id      :integer(2)       default(1), not null
+#  vendor_id              :integer(4)       not null
 #
 # Indexes
 #
@@ -41,6 +42,7 @@ class GatewayGroup < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: { allow_blank: false }
   validates :vendor, :balancing_mode, presence: true
+  validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 30, allow_nil: false, only_integer: true }
 
   validate :contractor_is_vendor
   validate :vendor_can_be_changed

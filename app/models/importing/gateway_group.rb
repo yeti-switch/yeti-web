@@ -4,16 +4,17 @@
 #
 # Table name: data_import.import_gateway_groups
 #
-#  id                  :bigint(8)        not null, primary key
-#  balancing_mode_name :string
-#  error_string        :string
-#  is_changed          :boolean
-#  name                :string
-#  prefer_same_pop     :boolean
-#  vendor_name         :string
-#  balancing_mode_id   :integer(2)
-#  o_id                :integer(4)
-#  vendor_id           :integer(4)
+#  id                     :bigint(8)        not null, primary key
+#  balancing_mode_name    :string
+#  error_string           :string
+#  is_changed             :boolean
+#  max_rerouting_attempts :integer(2)
+#  name                   :string
+#  prefer_same_pop        :boolean
+#  vendor_name            :string
+#  balancing_mode_id      :integer(2)
+#  o_id                   :integer(4)
+#  vendor_id              :integer(4)
 #
 
 class Importing::GatewayGroup < Importing::Base
@@ -27,6 +28,7 @@ class Importing::GatewayGroup < Importing::Base
     name
     vendor_id
     balancing_mode_id
+    max_rerouting_attempts
   ]
 
   import_for ::GatewayGroup

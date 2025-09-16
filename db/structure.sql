@@ -41351,7 +41351,8 @@ CREATE TABLE class4.gateway_groups (
     vendor_id integer NOT NULL,
     name character varying NOT NULL,
     prefer_same_pop boolean DEFAULT true NOT NULL,
-    balancing_mode_id smallint DEFAULT 1 NOT NULL
+    balancing_mode_id smallint DEFAULT 1 NOT NULL,
+    max_rerouting_attempts smallint DEFAULT 10 NOT NULL
 );
 
 
@@ -43011,7 +43012,8 @@ CREATE TABLE data_import.import_gateway_groups (
     error_string character varying,
     balancing_mode_id smallint,
     balancing_mode_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    max_rerouting_attempts smallint
 );
 
 
@@ -50231,6 +50233,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250916132329'),
 ('20250915155340'),
 ('20250908204726'),
 ('20250828145201'),

@@ -14,13 +14,14 @@ ActiveAdmin.register GatewayGroup do
   acts_as_export  :id,
                   :name,
                   [:vendor_name, proc { |row| row.vendor.try(:name) }],
-                  [:balancing_mode_name, proc { |row| row.balancing_mode.try(:name) }]
+                  [:balancing_mode_name, proc { |row| row.balancing_mode.try(:name) }],
+                  :max_rerouting_attempts
 
   acts_as_import resource_class: Importing::GatewayGroup
 
   decorate_with GatewayGroupDecorator
 
-  permit_params :vendor_id, :name, :balancing_mode_id
+  permit_params :vendor_id, :name, :balancing_mode_id, :max_rerouting_attempts
 
   controller do
     def scoped_collection
@@ -37,6 +38,7 @@ ActiveAdmin.register GatewayGroup do
       auto_link(c.vendor, c.vendor.decorated_display_name)
     end
     column :balancing_mode
+    column :max_rerouting_attempts
     column :gateways
   end
 
@@ -45,6 +47,7 @@ ActiveAdmin.register GatewayGroup do
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
   filter :balancing_mode
+  filter :max_rerouting_attempts
 
   show do |s|
     attributes_table do
@@ -54,6 +57,7 @@ ActiveAdmin.register GatewayGroup do
         auto_link(s.vendor, s.vendor.decorated_display_name)
       end
       row :balancing_mode
+      row :max_rerouting_attempts
       row :gateways
     end
     panel('Gateways in group') do
@@ -77,6 +81,7 @@ ActiveAdmin.register GatewayGroup do
       f.input :name
       f.contractor_input :vendor_id, label: 'Vendor', path_params: { q: { vendor_eq: true } }
       f.input :balancing_mode, as: :select, include_blank: false
+      f.input :max_rerouting_attempts
     end
     f.actions
   end

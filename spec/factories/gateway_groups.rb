@@ -4,11 +4,12 @@
 #
 # Table name: gateway_groups
 #
-#  id                :integer(4)       not null, primary key
-#  name              :string           not null
-#  prefer_same_pop   :boolean          default(TRUE), not null
-#  balancing_mode_id :integer(2)       default(1), not null
-#  vendor_id         :integer(4)       not null
+#  id                     :integer(4)       not null, primary key
+#  max_rerouting_attempts :integer(2)       default(10), not null
+#  name                   :string           not null
+#  prefer_same_pop        :boolean          default(TRUE), not null
+#  balancing_mode_id      :integer(2)       default(1), not null
+#  vendor_id              :integer(4)       not null
 #
 # Indexes
 #
