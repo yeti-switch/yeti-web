@@ -88,6 +88,13 @@ RSpec.describe Worker::CdrExportJob, type: :job do
 
   include_examples :performs_cdr_export_to_file
 
+  context 'with all fields' do
+    let(:cdr_export_attrs) { super().merge(fields: CdrExport.allowed_fields) }
+    let(:export_sql) { cdr_export.export_sql }
+
+    include_examples :performs_cdr_export_to_file
+  end
+
   context 'when failure' do
     before do
       expect(Cdr::Cdr).to receive(:connection).and_raise
