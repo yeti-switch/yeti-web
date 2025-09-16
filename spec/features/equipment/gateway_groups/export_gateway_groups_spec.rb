@@ -21,7 +21,7 @@ RSpec.describe 'Export Gateway Groups', type: :feature do
         ['Id', item.id.to_s],
         ['Name', item.name],
         ['Vendor name', item.vendor.name],
-        ['Balancing mode name', item.balancing_mode.name],
+        ['Balancing mode name', item.balancing_mode_name],
         ['Max rerouting attempts', item.max_rerouting_attempts.to_s]
       ]
     )
