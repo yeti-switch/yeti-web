@@ -18,13 +18,20 @@
 #
 # Foreign Keys
 #
-#  gateway_groups_balancing_mode_id_fkey  (balancing_mode_id => gateway_group_balancing_modes.id)
-#  gateway_groups_contractor_id_fkey      (vendor_id => contractors.id)
+#  gateway_groups_contractor_id_fkey  (vendor_id => contractors.id)
 #
 
 class GatewayGroup < ApplicationRecord
+  BALANCING_MODE_PRIO_WEIGHT = 1
+  BALANCING_MODE_PRIO_WEIGHT_PREFER_SAME_POP = 2
+  BALANCING_MODE_PRIO_WEIGHT_EXCLUDE_OTHER_POP = 3
+  BALANCING_MODES = {
+    BALANCING_MODE_PRIO_WEIGHT => 'Priority/Weigth balancing',
+    BALANCING_MODE_PRIO_WEIGHT_PREFER_SAME_POP => 'Priority/Weigth balancing. Prefer gateways from same POP',
+    BALANCING_MODE_PRIO_WEIGHT_EXCLUDE_OTHER_POP => 'Priority/Weigth balancing. Exclude gateways from other POPs'
+  }.freeze
+
   belongs_to :vendor, class_name: 'Contractor'
-  belongs_to :balancing_mode, class_name: 'Equipment::GatewayGroupBalancingMode', foreign_key: :balancing_mode_id
 
   has_many :gateways, dependent: :restrict_with_error
   has_many :dialpeers, dependent: :restrict_with_error
@@ -41,8 +48,9 @@ class GatewayGroup < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: { allow_blank: false }
-  validates :vendor, :balancing_mode, presence: true
+  validates :vendor, presence: true
   validates :max_rerouting_attempts, numericality: { greater_than: 0, less_than_or_equal_to: 30, allow_nil: false, only_integer: true }
+  validates :balancing_mode_id, inclusion: { in: BALANCING_MODES.keys }, allow_nil: false
 
   validate :contractor_is_vendor
   validate :vendor_can_be_changed
@@ -55,6 +63,10 @@ class GatewayGroup < ApplicationRecord
 
   def display_name
     "#{name} | #{id}"
+  end
+
+  def balancing_mode_name
+    BALANCING_MODES[balancing_mode_id]
   end
 
   def have_valid_gateways?

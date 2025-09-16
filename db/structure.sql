@@ -32464,7 +32464,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
-	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+	IF v_gw.pop_id is not null and v_gw.pop_id!=i_call_ctx.pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
           continue;
         end if;
@@ -32584,7 +32584,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
-	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+	IF v_gw.pop_id is not null and v_gw.pop_id!=i_call_ctx.pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
           continue;
         end if;
@@ -41345,16 +41345,6 @@ CREATE TABLE class4.gateway_diversion_send_modes (
 
 
 --
--- Name: gateway_group_balancing_modes; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.gateway_group_balancing_modes (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: gateway_groups; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -46799,22 +46789,6 @@ ALTER TABLE ONLY class4.gateway_diversion_send_modes
 
 
 --
--- Name: gateway_group_balancing_modes gateway_group_balancing_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateway_group_balancing_modes
-    ADD CONSTRAINT gateway_group_balancing_modes_name_key UNIQUE (name);
-
-
---
--- Name: gateway_group_balancing_modes gateway_group_balancing_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateway_group_balancing_modes
-    ADD CONSTRAINT gateway_group_balancing_modes_pkey PRIMARY KEY (id);
-
-
---
 -- Name: gateway_groups gateway_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -49418,14 +49392,6 @@ ALTER TABLE ONLY class4.disconnect_policy_code
 
 ALTER TABLE ONLY class4.disconnect_policy_code
     ADD CONSTRAINT disconnect_code_policy_codes_policy_id_fkey FOREIGN KEY (policy_id) REFERENCES class4.disconnect_policy(id);
-
-
---
--- Name: gateway_groups gateway_groups_balancing_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateway_groups
-    ADD CONSTRAINT gateway_groups_balancing_mode_id_fkey FOREIGN KEY (balancing_mode_id) REFERENCES class4.gateway_group_balancing_modes(id);
 
 
 --

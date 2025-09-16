@@ -485,9 +485,15 @@ RSpec.describe '#routing logic' do
       let(:x_orig_ip) { '3.3.3.3' }
       let!(:vendor) { create(:contractor, vendor: true, enabled: true) }
       let!(:vendor_account) { create(:account, contractor_id: vendor.id, max_balance: 100_500) }
+      let!(:vendor_gateway_group) {
+        create(:gateway_group, vendor_id: vendor.id, balancing_mode_id: vendor_gateway_group_balancing_mode_id)
+      }
+      let(:vendor_gateway_group_balancing_mode_id) { GatewayGroup::BALANCING_MODE_PRIO_WEIGHT }
+
       let!(:vendor_gateway) {
         create(:gateway,
                contractor_id: vendor.id,
+               gateway_group_id: vendor_gateway_group.id,
                enabled: true,
                sip_schema_id: vendor_gw_sip_schema_id,
                host: vendor_gw_host,
@@ -632,8 +638,12 @@ RSpec.describe '#routing logic' do
                routing_group_id: routing_group.id,
                vendor_id: vendor.id,
                account_id: vendor_account.id,
-               gateway_id: vendor_gateway.id)
+               gateway_id: dialpeer_gateway_id,
+               gateway_group_id: dialpeer_gateway_group_id)
       }
+
+      let(:dialpeer_gateway_id) { vendor_gateway.id }
+      let(:dialpeer_gateway_group_id) { nil }
 
       # we are creating sampling rule to match all traffic there
       # to be sure routing will not crash when sampling rule matched.
@@ -893,6 +903,24 @@ RSpec.describe '#routing logic' do
           expect(subject.first[:customer_auth_id]).to be
           expect(subject.first[:customer_id]).to be
           expect(subject.first[:disconnect_code_id]).to eq(nil)
+        end
+      end
+
+      context 'Authorized, Call terminated to GW group' do
+        let!(:dialpeer_gateway_id) { nil }
+        let!(:dialpeer_gateway_group_id) { vendor_gateway_group.id }
+
+        # we are checking our routing procedure not crashing for all balancing modes.
+        # there is no real check of balancing modes logic there
+        GatewayGroup::BALANCING_MODES.each_key do |bm|
+          context "Balancing mode #{bm}" do
+            let!(:vendor_gateway_group_balancing_mode_id) { bm }
+            it 'routing OK ' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:term_gw_id]).to eq(vendor_gateway.id)
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+            end
+          end
         end
       end
 

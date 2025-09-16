@@ -1,6 +1,10 @@
 class GwGroupLimitRerouting < ActiveRecord::Migration[7.2]
   def up
     execute %q{
+
+      alter table class4.gateway_groups drop constraint "gateway_groups_balancing_mode_id_fkey";
+      drop table class4.gateway_group_balancing_modes;
+
       alter table class4.gateway_groups add max_rerouting_attempts smallint not null default 10;
       alter table data_import.import_gateway_groups add max_rerouting_attempts smallint;
 
@@ -129,7 +133,7 @@ BEGIN
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
         LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
-	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+	IF v_gw.pop_id is not null and v_gw.pop_id!=i_call_ctx.pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
           continue;
         end if;
@@ -177,6 +181,17 @@ $$;
 
   def down
     execute %q{
+
+    create table class4.gateway_group_balancing_modes(
+      id smallint primary key,
+      name varchar not null unique
+    );
+
+    insert into class4.gateway_group_balancing_modes(id,name) values(1,'Priority/Weigth balancing');
+    insert into class4.gateway_group_balancing_modes(id,name) values(2,'Priority/Weigth balancing. Prefer gateways from same POP');
+    insert into class4.gateway_group_balancing_modes(id,name) values(3,'Priority/Weigth balancing. Exclude gateways from other POPs');
+
+    alter table class4.gateway_groups add constraint "gateway_groups_balancing_mode_id_fkey" FOREIGN KEY (balancing_mode_id) REFERENCES class4.gateway_group_balancing_modes(id);
 
     CREATE OR REPLACE FUNCTION switch22.process_dp(i_profile switch22.callprofile_ty, i_destination class4.destinations, i_dp class4.dialpeers, i_customer_acc billing.accounts, i_customer_gw class4.gateways, i_vendor_acc billing.accounts, i_call_ctx switch22.call_ctx_ty, i_diversion switch22.uri_ty[], i_privacy character varying[], i_pai switch22.uri_ty[], i_ppi switch22.uri_ty) RETURNS SETOF switch22.callprofile_ty
     LANGUAGE plpgsql STABLE SECURITY DEFINER COST 10000

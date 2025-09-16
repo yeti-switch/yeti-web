@@ -18,8 +18,7 @@
 #
 # Foreign Keys
 #
-#  gateway_groups_balancing_mode_id_fkey  (balancing_mode_id => gateway_group_balancing_modes.id)
-#  gateway_groups_contractor_id_fkey      (vendor_id => contractors.id)
+#  gateway_groups_contractor_id_fkey  (vendor_id => contractors.id)
 #
 FactoryBot.define do
   factory :gateway_group, class: 'GatewayGroup' do
