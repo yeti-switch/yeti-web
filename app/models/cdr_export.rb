@@ -246,6 +246,8 @@ class CdrExport < ApplicationRecord
       case f
       when 'id'
         'cdr.cdr.id AS "ID"'
+      when 'uuid'
+        'cdr.cdr.uuid AS "UUID"'
       when 'src_country_name'
         'src_c.name AS "Src Country Name"'
       when 'dst_country_name'
