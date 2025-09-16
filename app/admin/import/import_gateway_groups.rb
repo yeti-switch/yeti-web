@@ -13,7 +13,6 @@ ActiveAdmin.register Importing::GatewayGroup do
 
   filter :name
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
-  filter :balancing_mode, as: :select
   filter :max_rerouting_attempts
   boolean_filter :is_changed
 
@@ -26,7 +25,7 @@ ActiveAdmin.register Importing::GatewayGroup do
     column :is_changed
     column :vendor, sortable: :vendor_name
     column :name
-    column :balancing_mode, sortable: :balancing_mode_name
+    column :balancing_mode, &:balancing_mode_display_name
     column :max_rerouting_attempts
   end
 end

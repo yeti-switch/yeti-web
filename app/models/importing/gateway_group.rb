@@ -22,7 +22,6 @@ class Importing::GatewayGroup < Importing::Base
   attr_accessor :file
 
   belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor', foreign_key: :vendor_id, optional: true
-  belongs_to :balancing_mode, class_name: 'Equipment::GatewayGroupBalancingMode', foreign_key: :balancing_mode_id, optional: true
 
   self.import_attributes = %w[
     name
@@ -32,4 +31,13 @@ class Importing::GatewayGroup < Importing::Base
   ]
 
   import_for ::GatewayGroup
+
+  def balancing_mode_display_name
+    balancing_mode_id.nil? ? 'unknown' : GatewayGroup::BALANCING_MODES[balancing_mode_id]
+  end
+
+  def self.after_import_hook
+    resolve_integer_constant('balancing_mode_id', 'balancing_mode_name', GatewayGroup::BALANCING_MODES)
+    super
+  end
 end
