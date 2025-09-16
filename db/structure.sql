@@ -32371,6 +32371,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32386,6 +32387,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
@@ -32406,6 +32408,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32420,6 +32423,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
@@ -32442,6 +32446,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32457,6 +32462,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
 	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
@@ -32532,6 +32538,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
@@ -32552,6 +32559,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
@@ -32574,6 +32582,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
 	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
@@ -32638,6 +32647,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32655,6 +32665,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32674,6 +32685,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
