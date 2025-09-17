@@ -4,11 +4,12 @@
 #
 # Table name: gateway_groups
 #
-#  id                :integer(4)       not null, primary key
-#  name              :string           not null
-#  prefer_same_pop   :boolean          default(TRUE), not null
-#  balancing_mode_id :integer(2)       default(1), not null
-#  vendor_id         :integer(4)       not null
+#  id                     :integer(4)       not null, primary key
+#  max_rerouting_attempts :integer(2)       default(10), not null
+#  name                   :string           not null
+#  prefer_same_pop        :boolean          default(TRUE), not null
+#  balancing_mode_id      :integer(2)       default(1), not null
+#  vendor_id              :integer(4)       not null
 #
 # Indexes
 #
@@ -17,8 +18,7 @@
 #
 # Foreign Keys
 #
-#  gateway_groups_balancing_mode_id_fkey  (balancing_mode_id => gateway_group_balancing_modes.id)
-#  gateway_groups_contractor_id_fkey      (vendor_id => contractors.id)
+#  gateway_groups_contractor_id_fkey  (vendor_id => contractors.id)
 #
 RSpec.describe GatewayGroup do
   describe '#destroy!' do

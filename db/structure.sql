@@ -32371,6 +32371,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32386,6 +32387,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
@@ -32406,6 +32408,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32420,6 +32423,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
@@ -32442,6 +32446,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32457,8 +32462,9 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
-	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+	IF v_gw.pop_id is not null and v_gw.pop_id!=i_call_ctx.pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
           continue;
         end if;
@@ -32532,6 +32538,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
@@ -32552,6 +32559,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         IF v_gw.contractor_id!=i_dp.vendor_id AND NOT v_gw.is_shared THEN
           RAISE WARNING 'process_dp: Gateway owner !=dialpeer owner. Skip gateway';
@@ -32574,8 +32582,9 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
-	IF v_gw.pop_id is not null and v_gw.pop_id!=i_pop_id THEN
+	IF v_gw.pop_id is not null and v_gw.pop_id!=i_call_ctx.pop_id THEN
           RAISE WARNING 'process_dp: Gateway POP is %, call pop %, skipping.',v_gw.pop_id, i_call_ctx.pop_id;
           continue;
         end if;
@@ -32638,6 +32647,7 @@ BEGIN
         ORDER BY
           cg.pop_id=i_call_ctx.pop_id desc,
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32655,6 +32665,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
       LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -32674,6 +32685,7 @@ BEGIN
           cg.enabled
         ORDER BY
           yeti_ext.rank_dns_srv(cg.weight) over ( partition by cg.priority order by cg.weight)
+        LIMIT v_gateway_group.max_rerouting_attempts
         LOOP
         return query select * from process_gw_release(i_profile, i_destination, i_dp, i_customer_acc,
                                                       i_customer_gw, i_vendor_acc , v_gw, i_call_ctx,
@@ -41333,16 +41345,6 @@ CREATE TABLE class4.gateway_diversion_send_modes (
 
 
 --
--- Name: gateway_group_balancing_modes; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.gateway_group_balancing_modes (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: gateway_groups; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -41351,7 +41353,8 @@ CREATE TABLE class4.gateway_groups (
     vendor_id integer NOT NULL,
     name character varying NOT NULL,
     prefer_same_pop boolean DEFAULT true NOT NULL,
-    balancing_mode_id smallint DEFAULT 1 NOT NULL
+    balancing_mode_id smallint DEFAULT 1 NOT NULL,
+    max_rerouting_attempts smallint DEFAULT 10 NOT NULL
 );
 
 
@@ -43011,7 +43014,8 @@ CREATE TABLE data_import.import_gateway_groups (
     error_string character varying,
     balancing_mode_id smallint,
     balancing_mode_name character varying,
-    is_changed boolean
+    is_changed boolean,
+    max_rerouting_attempts smallint
 );
 
 
@@ -46785,22 +46789,6 @@ ALTER TABLE ONLY class4.gateway_diversion_send_modes
 
 
 --
--- Name: gateway_group_balancing_modes gateway_group_balancing_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateway_group_balancing_modes
-    ADD CONSTRAINT gateway_group_balancing_modes_name_key UNIQUE (name);
-
-
---
--- Name: gateway_group_balancing_modes gateway_group_balancing_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateway_group_balancing_modes
-    ADD CONSTRAINT gateway_group_balancing_modes_pkey PRIMARY KEY (id);
-
-
---
 -- Name: gateway_groups gateway_groups_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -49407,14 +49395,6 @@ ALTER TABLE ONLY class4.disconnect_policy_code
 
 
 --
--- Name: gateway_groups gateway_groups_balancing_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateway_groups
-    ADD CONSTRAINT gateway_groups_balancing_mode_id_fkey FOREIGN KEY (balancing_mode_id) REFERENCES class4.gateway_group_balancing_modes(id);
-
-
---
 -- Name: gateway_groups gateway_groups_contractor_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -50231,6 +50211,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250916132329'),
 ('20250915155340'),
 ('20250908204726'),
 ('20250828145201'),
