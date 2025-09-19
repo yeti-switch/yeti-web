@@ -6,7 +6,8 @@ class Api::Rest::Admin::PaymentResource < BaseResource
              :notes,
              :private_notes,
              :status,
-             :type_name
+             :type_name,
+             :balance_before_payment
 
   paginator :paged
 
