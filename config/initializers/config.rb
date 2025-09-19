@@ -35,6 +35,10 @@ Config.setup do |setup_config|
       optional(:customer).schema do
         optional(:call_jwt_lifetime).maybe(:int?)
         optional(:call_jwt_secret).maybe(:string)
+        optional(:outgoing_cdr_hide_fields).array(:string)
+        optional(:outgoing_statistics_use_customer_duration).value(:bool?)
+        optional(:incoming_cdr_hide_fields).array(:string)
+        optional(:incoming_statistics_use_vendor_duration).value(:bool?)
       end
     end
 
@@ -93,9 +97,6 @@ Config.setup do |setup_config|
       optional(:url_callback).maybe(:string)
       optional(:url_return).maybe(:string)
     end
-
-    optional(:customer_api_outgoing_cdr_hide_fields).array(:string)
-    optional(:customer_api_incoming_cdr_hide_fields).array(:string)
 
     optional(:invoice).schema do
       optional(:auto_approve).value(:bool)

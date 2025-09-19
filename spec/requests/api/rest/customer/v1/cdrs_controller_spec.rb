@@ -397,9 +397,9 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       )
     end
 
-    context 'when customer_api_outgoing_cdr_hide_fields configured' do
+    context 'when api.customer.outgoing_cdr_hide_fields configured' do
       before do
-        allow(YetiConfig).to receive(:customer_api_outgoing_cdr_hide_fields).and_return(
+        allow(YetiConfig.api.customer).to receive(:outgoing_cdr_hide_fields).and_return(
           %w[auth_orig_ip lega_user_agent]
         )
       end
