@@ -256,9 +256,9 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
                                       )
     end
 
-    context 'when customer_api_incoming_cdr_hide_fields configured' do
+    context 'when api.customer.incoming_cdr_hide_fields configured' do
       before do
-        allow(YetiConfig).to receive(:customer_api_incoming_cdr_hide_fields).and_return(
+        allow(YetiConfig.api.customer).to receive(:incoming_cdr_hide_fields).and_return(
           %w[diversion_out legb_user_agent]
         )
       end
