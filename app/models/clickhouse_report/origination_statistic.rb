@@ -143,7 +143,7 @@ module ClickhouseReport
         raise InvalidParamValue, 'invalid sampling'
       end
 
-      total_duration_column = YetiConfig.api.customer.outgoing_statistics_use_customer_duration? ? 'customer_duration' : 'duration'
+      total_duration_column = YetiConfig.api.customer.outgoing_statistics_use_customer_duration ? 'customer_duration' : 'duration'
 
       "
       SELECT
