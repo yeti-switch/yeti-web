@@ -17,7 +17,11 @@ RSpec.describe 'config/yeti_web.yml' do
         teardown_on_disabled_orig_gw: be_one_of(true, false)
       },
       api: {
-        token_lifetime: be_kind_of(Integer)
+        token_lifetime: be_kind_of(Integer),
+        customer: {
+          call_jwt_lifetime: be_kind_of(Integer),
+          call_jwt_private_key: be_kind_of(String)
+        }
       },
       cdr_export: {
         dir_path: be_kind_of(String),
