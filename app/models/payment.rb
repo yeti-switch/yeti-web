@@ -4,15 +4,16 @@
 #
 # Table name: payments
 #
-#  id            :bigint(8)        not null, primary key
-#  amount        :decimal(, )      not null
-#  notes         :string
-#  private_notes :string
-#  uuid          :uuid             not null
-#  created_at    :timestamptz      not null
-#  account_id    :integer(4)       not null
-#  status_id     :integer(2)       default(20), not null
-#  type_id       :integer(2)       default(20), not null
+#  id                     :bigint(8)        not null, primary key
+#  amount                 :decimal(, )      not null
+#  balance_before_payment :decimal(, )
+#  notes                  :string
+#  private_notes          :string
+#  uuid                   :uuid             not null
+#  created_at             :timestamptz      not null
+#  account_id             :integer(4)       not null
+#  status_id              :integer(2)       default(20), not null
+#  type_id                :integer(2)       default(20), not null
 #
 # Indexes
 #
@@ -117,6 +118,7 @@ class Payment < ApplicationRecord
   def top_up_balance
     if (new_record? || status_id_changed?) && completed?
       account.lock! # will generate SELECT FOR UPDATE SQL statement
+      self.balance_before_payment = account.balance
       account.balance += amount
       throw(:abort) unless account.save
     end

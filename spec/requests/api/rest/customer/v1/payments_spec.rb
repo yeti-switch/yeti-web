@@ -263,7 +263,8 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
                                             notes: payment.notes,
                                             'created-at': payment.created_at.iso8601(3),
                                             status: payment.status,
-                                            'type-name': payment.type_name
+                                            'type-name': payment.type_name,
+                                            'balance-before-payment': anything
                                           },
                                           relationships: {
                                             account: {

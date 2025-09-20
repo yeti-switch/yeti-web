@@ -40451,7 +40451,8 @@ CREATE TABLE billing.payments (
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
     private_notes character varying,
     status_id smallint DEFAULT 20 NOT NULL,
-    type_id smallint DEFAULT 20 NOT NULL
+    type_id smallint DEFAULT 20 NOT NULL,
+    balance_before_payment numeric
 );
 
 
@@ -50212,6 +50213,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250919092417'),
 ('20250828041816'),
 ('20250916132329'),
 ('20250915155340'),

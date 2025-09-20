@@ -20,7 +20,8 @@ ActiveAdmin.register Payment do
                  :notes,
                  :private_notes,
                  :status,
-                 :type_name
+                 :type_name,
+                 :balance_before_payment
 
   controller do
     def scoped_collection
@@ -57,6 +58,7 @@ ActiveAdmin.register Payment do
     }
     column :private_notes
     column :notes
+    column :balance_before_payment
     column :uuid
   end
 
@@ -76,6 +78,7 @@ ActiveAdmin.register Payment do
          input_html: { class: 'chosen' }
   filter :amount
   filter :private_notes
+  filter :balance_before_payment
   filter :notes
 
   show do |_s|
@@ -90,6 +93,7 @@ ActiveAdmin.register Payment do
           row :status, &:status_formatted
           row :amount
           row :private_notes
+          row :balance_before_payment
           row :notes
         end
       end

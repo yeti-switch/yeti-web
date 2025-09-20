@@ -4,15 +4,16 @@
 #
 # Table name: payments
 #
-#  id            :bigint(8)        not null, primary key
-#  amount        :decimal(, )      not null
-#  notes         :string
-#  private_notes :string
-#  uuid          :uuid             not null
-#  created_at    :timestamptz      not null
-#  account_id    :integer(4)       not null
-#  status_id     :integer(2)       default(20), not null
-#  type_id       :integer(2)       default(20), not null
+#  id                     :bigint(8)        not null, primary key
+#  amount                 :decimal(, )      not null
+#  balance_before_payment :decimal(, )
+#  notes                  :string
+#  private_notes          :string
+#  uuid                   :uuid             not null
+#  created_at             :timestamptz      not null
+#  account_id             :integer(4)       not null
+#  status_id              :integer(2)       default(20), not null
+#  type_id                :integer(2)       default(20), not null
 #
 # Indexes
 #

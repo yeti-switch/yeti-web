@@ -7,7 +7,8 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
              :notes,
              :status,
              :type_name,
-             :created_at
+             :created_at,
+             :balance_before_payment
 
   has_one :account, foreign_key_on: :related
 
