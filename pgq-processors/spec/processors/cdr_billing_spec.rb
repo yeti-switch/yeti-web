@@ -6,23 +6,26 @@ require File.join(File.dirname(__FILE__), '../../processors/cdr_billing')
 require File.join(File.dirname(__FILE__), '../../models/routing_base')
 
 RSpec.describe CdrBilling do
-  CONFIG = begin
-    f = YAML.safe_load(ERB.new(File.read('../config/database.yml')).result, aliases: true)
-    {
-      'mode' => 'test',
-      'databases' => f.to_h
-    }
-  end
 
   # fake models, since we have no access to main project
   class Account < ::RoutingBase
     self.table_name = 'billing.accounts'
+
+    CONFIG = begin
+      f = YAML.safe_load(ERB.new(File.read('../config/database.yml')).result, aliases: true)
+      {
+        'mode' => 'test',
+        'databases' => f.to_h
+      }
+    end
+
     establish_connection(CONFIG['databases']['test']['primary'])
   end
 
   class Contractor < ::RoutingBase
     self.table_name = 'public.contractors'
-    establish_connection(CONFIG['databases']['test']['primary'])
+
+    establish_connection(Account::CONFIG['databases']['test']['primary'])
   end
 
   let(:cdrs) do
@@ -43,10 +46,12 @@ RSpec.describe CdrBilling do
   let(:customer_reverse) { false }
 
   let(:consumer) do
-    described_class.new(TestContext.logger,
-                        'cdr_billing',
-                        'cdr_billin',
-                        CONFIG)
+    described_class.new(
+      TestContext.logger,
+      'cdr_billing',
+      'cdr_billin',
+      Account::CONFIG
+    )
   end
 
   let(:contractor) do

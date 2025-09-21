@@ -2,22 +2,23 @@ PATH
   remote: ext/pgq
   specs:
     pgq (0.1.3)
-      activerecord (>= 4.0.2)
-      activesupport (>= 4.0.2)
+      activerecord (~> 7.1.0)
+      activesupport (~> 7.1.0)
       pg
 
 GEM
   remote: http://rubygems.org/
   specs:
-    activemodel (6.1.7.8)
-      activesupport (= 6.1.7.8)
+    activemodel (7.1.5.1)
+      activesupport (= 7.1.5.1)
     activemodel-serializers-xml (1.0.2)
       activemodel (> 5.x)
       activesupport (> 5.x)
       builder (~> 3.1)
-    activerecord (6.1.7.8)
-      activemodel (= 6.1.7.8)
-      activesupport (= 6.1.7.8)
+    activerecord (7.1.5.1)
+      activemodel (= 7.1.5.1)
+      activesupport (= 7.1.5.1)
+      timeout (>= 0.4.0)
     activeresource (6.0.0)
       activemodel (>= 6.0)
       activemodel-serializers-xml (~> 1.0)
@@ -25,15 +26,25 @@ GEM
     activeresource-persistent (0.2.0)
       activeresource (>= 2.3.0)
       net-http-persistent (>= 2.5)
-    activesupport (6.1.7.8)
+    activesupport (7.1.5.1)
+      base64
+      benchmark (>= 0.3)
+      bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
+      connection_pool (>= 2.2.5)
+      drb
       i18n (>= 1.6, < 2)
+      logger (>= 1.4.2)
       minitest (>= 5.1)
+      mutex_m
+      securerandom (>= 0.3)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     amq-protocol (2.3.2)
+    base64 (0.2.0)
+    benchmark (0.4.0)
+    bigdecimal (3.1.9)
     builder (3.2.4)
     bunny (2.20.3)
       amq-protocol (~> 2.3, >= 2.3.1)
@@ -48,6 +59,7 @@ GEM
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    drb (2.2.1)
     hashdiff (1.0.1)
     http-accept (1.7.0)
     http-cookie (1.0.4)
@@ -55,6 +67,8 @@ GEM
     http_logger (0.7.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    json (2.9.1)
+    logger (1.6.5)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     mime-types (3.4.1)
@@ -62,6 +76,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     minitest (5.15.0)
+    mutex_m (0.3.0)
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
     net-protocol (0.2.1)
@@ -94,12 +109,14 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.3)
-    set (1.0.3)
+    securerandom (0.4.1)
+    set (1.1.1)
     sorted_set (1.0.3)
       rbtree
       set (~> 1.0)
+    syslog (0.2.0)
     syslog-logger (1.6.8)
-    timeout (0.3.2)
+    timeout (0.4.3)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -109,13 +126,12 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    zeitwerk (2.5.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  activemodel (~> 6.1.7.1)
+  activemodel (~> 7.1.0)
   activeresource
   activeresource-persistent
   bundler
@@ -123,6 +139,7 @@ DEPENDENCIES
   bunny-mock
   byebug
   http_logger
+  json (~> 2.9)
   net-smtp
   pg
   pgq!
@@ -130,8 +147,9 @@ DEPENDENCIES
   rake
   rest-client
   rspec
+  syslog (~> 0.2.0)
   syslog-logger
   webmock
 
 BUNDLED WITH
-   2.6.2
+   2.6.3
