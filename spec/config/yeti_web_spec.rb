@@ -89,7 +89,10 @@ RSpec.describe 'config/yeti_web.yml' do
           bucket: a_kind_of(String)
         }
       },
-      tmpdir: a_kind_of(String)
+      tmpdir: a_kind_of(String),
+      cdr_compaction_delay: a_kind_of(Integer),
+      cdr_compaction_hook: a_kind_of(String),
+      cdr_compaction_queries: a_kind_of(Array)
     }
   end
 

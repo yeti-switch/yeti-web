@@ -3677,6 +3677,37 @@ CREATE TABLE sys.call_duration_round_modes (
 
 
 --
+-- Name: cdr_compacted_tables; Type: TABLE; Schema: sys; Owner: -
+--
+
+CREATE TABLE sys.cdr_compacted_tables (
+    id bigint NOT NULL,
+    table_name character varying NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: cdr_compacted_tables_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.cdr_compacted_tables_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cdr_compacted_tables_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE sys.cdr_compacted_tables_id_seq OWNED BY sys.cdr_compacted_tables.id;
+
+
+--
 -- Name: auth_log id; Type: DEFAULT; Schema: auth_log; Owner: -
 --
 
@@ -3933,6 +3964,13 @@ ALTER TABLE ONLY stats.traffic_customer_accounts ALTER COLUMN id SET DEFAULT nex
 --
 
 ALTER TABLE ONLY stats.traffic_vendor_accounts ALTER COLUMN id SET DEFAULT nextval('stats.traffic_vendor_accounts_id_seq'::regclass);
+
+
+--
+-- Name: cdr_compacted_tables id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.cdr_compacted_tables ALTER COLUMN id SET DEFAULT nextval('sys.cdr_compacted_tables_id_seq'::regclass);
 
 
 --
@@ -4336,6 +4374,14 @@ ALTER TABLE ONLY sys.call_duration_round_modes
 
 
 --
+-- Name: cdr_compacted_tables cdr_compacted_tables_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.cdr_compacted_tables
+    ADD CONSTRAINT cdr_compacted_tables_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: config config_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -4540,6 +4586,13 @@ CREATE UNIQUE INDEX traffic_vendor_accounts_account_id_timestamp_idx ON stats.tr
 
 
 --
+-- Name: index_cdr_compacted_tables_on_table_name; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE UNIQUE INDEX index_cdr_compacted_tables_on_table_name ON sys.cdr_compacted_tables USING btree (table_name);
+
+
+--
 -- Name: invoice_documents invoice_documents_invoice_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
@@ -4692,6 +4745,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20250917140033'),
 ('20250821154607'),
 ('20250730191727'),
 ('20250321212727'),
