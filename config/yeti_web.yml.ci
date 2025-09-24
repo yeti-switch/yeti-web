@@ -91,3 +91,8 @@ s3_storage:
     bucket: ''
 
 tmpdir: 'tmp'
+
+cdr_compaction_delay: 14
+cdr_compaction_hook: ''
+cdr_compaction_queries:
+ - SELECT COUNT(id) FROM %<table>s
