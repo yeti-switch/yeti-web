@@ -38,4 +38,72 @@ RSpec.describe 'Index Destinations', type: :feature, js: true do
       expect(page).to have_css('table.index_table tbody tr', count: 1)
     end
   end
+
+  describe 'sorting' do
+    subject { page.find("th.col.col-#{column} > a").click }
+
+    context 'by Network' do
+      let!(:column) { 'network' }
+      let!(:destinations) { nil }
+      let!(:rate_group) { FactoryBot.create(:rate_group) }
+      let!(:network_type_mobile) { System::NetworkType.find_by!(name: 'Mobile') }
+
+      let!(:afghanistan) { System::Country.find_by!(name: 'Afghanistan') }
+      let!(:ukraine) { System::Country.find_by!(name: 'Ukraine') }
+
+      let!(:afghanistan_network) { FactoryBot.create(:network, name: 'AfghanistanNet', network_type: network_type_mobile) }
+      let!(:afghanistan_network_prefix) { FactoryBot.create(:network_prefix, country: afghanistan, network: afghanistan_network) }
+
+      let!(:ukraine_network) { FactoryBot.create(:network, name: 'UkraineNetABC', network_type: network_type_mobile) }
+      let!(:ukraine_network_prefix) { FactoryBot.create(:network_prefix, country: ukraine, network: ukraine_network) }
+
+      let!(:destination_afghanistan_111_mobile) do
+        destination = FactoryBot.create(:destination, rate_group: rate_group, prefix: '111')
+        destination.update!(network_prefix_id: afghanistan_network_prefix.id)
+        destination
+      end
+
+      let!(:destination_ukraine_999_mobile) do
+        destination = FactoryBot.create(:destination, rate_group: rate_group, prefix: '999')
+        destination.update!(network_prefix_id: ukraine_network_prefix.id)
+        destination
+      end
+
+      context 'ASC' do
+        before { visit destinations_path(order: 'networks.name_desc') }
+
+        it 'should sorted by ASC' do
+          subject
+
+          within_table_for do
+            expect(page).to have_table_row(count: 2)
+            within_table_row(index: 0) do
+              expect(page).to have_table_cell(column: 'ID', exact_text: destination_afghanistan_111_mobile.id.to_s)
+            end
+            within_table_row(index: 1) do
+              expect(page).to have_table_cell(column: 'ID', exact_text: destination_ukraine_999_mobile.id.to_s)
+            end
+          end
+        end
+      end
+
+      context 'DESC' do
+        before { visit destinations_path(order: 'networks.name_asc') }
+
+        it 'should sorted by DESC' do
+          subject
+
+          within_table_for do
+            expect(page).to have_table_row(count: 2)
+            within_table_row(index: 0) do
+              expect(page).to have_table_cell(column: 'ID', exact_text: destination_ukraine_999_mobile.id.to_s)
+            end
+            within_table_row(index: 1) do
+              expect(page).to have_table_cell(column: 'ID', exact_text: destination_afghanistan_111_mobile.id.to_s)
+            end
+          end
+        end
+      end
+    end
+  end
 end
