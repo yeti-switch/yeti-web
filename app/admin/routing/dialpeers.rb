@@ -63,8 +63,19 @@ ActiveAdmin.register Dialpeer do
     #
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
-      super.preload(:gateway, :gateway_group, :routing_group, :routing_tag_mode, :vendor, :account, :statistic,
-                    :routeset_discriminator, network_prefix: %i[country network])
+      scope = super.preload(
+        :gateway,
+        :gateway_group,
+        :routing_group,
+        :routing_tag_mode,
+        :vendor,
+        :account,
+        :statistic,
+        :routeset_discriminator,
+        network_prefix: %i[country network]
+      )
+      scope = scope.left_joins(network_prefix: :network) if params.dig(:order)&.match?(/networks\.name_(asc|desc)/)
+      scope
     end
   end
 
@@ -94,7 +105,7 @@ ActiveAdmin.register Dialpeer do
     column :country do |row|
       auto_link row.network_prefix&.country
     end
-    column :network do |row|
+    column :network, sortable: 'networks.name' do |row|
       auto_link row.network_prefix&.network
     end
     column :routing_group

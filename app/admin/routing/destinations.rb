@@ -132,7 +132,9 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     #
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
-      super.preload(:rate_group, :routing_tag_mode, network_prefix: %i[country network])
+      scope = super.preload(:rate_group, :routing_tag_mode, network_prefix: %i[country network])
+      scope = scope.left_joins(network_prefix: :network) if params.dig(:order)&.match?(/networks\.name_(asc|desc)/)
+      scope
     end
   end
 
@@ -160,7 +162,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :country do |row|
       auto_link row.network_prefix&.country
     end
-    column :network do |row|
+    column :network, sortable: 'networks.name' do |row|
       auto_link row.network_prefix&.network
     end
 
