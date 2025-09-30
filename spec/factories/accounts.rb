@@ -49,9 +49,9 @@ FactoryBot.define do
     max_call_duration { 36_000 }
     min_balance { 0 }
     max_balance { 0 }
-    origination_capacity { nil }
-    termination_capacity { nil }
-    total_capacity { nil }
+    origination_capacity { 10 }
+    termination_capacity { 100 }
+    total_capacity { 1000 }
     timezone_id { 1 }
 
     transient do
