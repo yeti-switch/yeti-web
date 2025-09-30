@@ -50214,11 +50214,11 @@ SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, log
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20250919092417'),
-('20250828041816'),
 ('20250916132329'),
 ('20250915155340'),
 ('20250908204726'),
 ('20250828145201'),
+('20250828041816'),
 ('20250821153800'),
 ('20250729072451'),
 ('20250728100532'),

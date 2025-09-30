@@ -58,6 +58,8 @@ ActiveAdmin.register Account do
   scope :vendors_accounts
   scope :customers_accounts
   scope :insufficient_balance
+  scope :low_balance_threshold
+  scope :high_balance_threshold
 
   filter :id
   filter :uuid_equals, label: 'UUID'

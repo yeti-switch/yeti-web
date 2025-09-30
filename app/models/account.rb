@@ -160,6 +160,13 @@ class Account < ApplicationRecord
   }
 
   scope :insufficient_balance, -> { where('balance<=min_balance OR balance>=max_balance') }
+  scope :low_balance_threshold, lambda {
+    joins(:balance_notification_setting).where('low_threshold IS NOT NULL AND balance <= low_threshold')
+  }
+
+  scope :high_balance_threshold, lambda {
+    joins(:balance_notification_setting).where('high_threshold IS NOT NULL AND balance >= high_threshold')
+  }
 
   def send_invoices_to_emails
     contacts_for_invoices.map(&:email).join(',')
