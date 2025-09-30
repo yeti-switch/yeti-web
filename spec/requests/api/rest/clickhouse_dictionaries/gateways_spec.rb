@@ -25,7 +25,8 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::GatewaysController do
             allow_termination: record.allow_termination,
             asr_limit: record.asr_limit,
             acd_limit: record.acd_limit,
-            short_calls_limit: record.short_calls_limit
+            short_calls_limit: record.short_calls_limit,
+            uuid: record.uuid
           }
         end
       end
