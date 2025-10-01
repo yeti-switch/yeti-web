@@ -10,16 +10,16 @@ RSpec.describe 'app/admin/cdr/time_zones.rb' do
         expect(response_json).to include({ id: 'europe/kyiv', value: 'europe/kyiv' })
         get search_time_zones_path(q: { search_for: 'new_york' })
         expect(response_json).to include({ id: 'america/new_york', value: 'america/new_york' })
-        get search_time_zones_path(q: { search_for: 'canada' })
+        get search_time_zones_path(q: { search_for: 'Australia' })
         expect(response_json).to include(
-          { id: 'canada/atlantic', value: 'canada/atlantic' },
-          { id: 'canada/central', value: 'canada/central' },
-          { id: 'canada/eastern', value: 'canada/eastern' },
-          { id: 'canada/mountain', value: 'canada/mountain' },
-          { id: 'canada/newfoundland', value: 'canada/newfoundland' },
-          { id: 'canada/pacific', value: 'canada/pacific' },
-          { id: 'canada/saskatchewan', value: 'canada/saskatchewan' },
-          { id: 'canada/yukon', value: 'canada/yukon' }
+          { id: 'australia/adelaide', value: 'australia/adelaide' },
+          { id: 'australia/brisbane', value: 'australia/brisbane' },
+          { id: 'australia/broken_hill', value: 'australia/broken_hill' },
+          { id: 'australia/canberra', value: 'australia/canberra' },
+          { id: 'australia/currie', value: 'australia/currie' },
+          { id: 'australia/darwin', value: 'australia/darwin' },
+          { id: 'australia/eucla', value: 'australia/eucla' },
+          { id: 'australia/hobart', value: 'australia/hobart' }
         )
       end
     end
