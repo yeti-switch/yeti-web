@@ -62,7 +62,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:18
     needs: gems-caching
     steps:
       - uses: actions/checkout@v4
@@ -124,7 +124,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:18
 
     needs: gems-caching
     steps:
@@ -153,7 +153,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:18
 
     needs: gems-caching
     strategy:
@@ -209,7 +209,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     services:
       db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:16
+        image: ghcr.io/yeti-switch/yeti-web/pgsql:18
 
     needs: gems-caching
     strategy:
