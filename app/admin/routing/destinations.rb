@@ -108,7 +108,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
                 :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix,
-                :reverse_billing, :routing_tag_mode_id, :allow_package_billing, routing_tag_ids: []
+                :reverse_billing, :routing_tag_mode_id, :allow_package_billing, :scheduler_id, routing_tag_ids: []
 
   action_item :show_rates, only: [:show] do
     link_to 'Show Rates', destination_destination_next_rates_path(resource.id)

@@ -120,7 +120,7 @@ ActiveAdmin.register Gateway do
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
            :network_protocol_priority, :media_encryption_mode,
            :termination_src_numberlist, :termination_dst_numberlist, :lua_script, :stir_shaken_crt,
-           :throttling_profile
+           :throttling_profile, :scheduler
 
   controller do
     def resource_params
