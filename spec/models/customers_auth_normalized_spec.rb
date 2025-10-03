@@ -422,7 +422,8 @@ RSpec.describe CustomersAuthNormalized, type: :model do
     end
 
     let(:customers_auth_column_names) do
-      CustomersAuth.column_names
+      # we are not copying scheduler_id to normalized table - routing not using it
+      CustomersAuth.column_names - ['scheduler_id']
     end
 
     it 'columns should match with original CustomersAuth model' do
