@@ -38,6 +38,7 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
 
     column :prefix
     column :enabled
+    column :scheduler
     column :priority
     column :force_hit_rate
     column :initial_interval

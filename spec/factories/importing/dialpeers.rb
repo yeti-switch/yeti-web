@@ -35,6 +35,7 @@
 #  routing_tag_ids             :integer(2)       default([]), not null, is an Array
 #  routing_tag_mode_name       :string
 #  routing_tag_names           :string
+#  scheduler_name              :string
 #  short_calls_limit           :float(24)        default(1.0), not null
 #  src_name_rewrite_result     :string
 #  src_name_rewrite_rule       :string
@@ -50,6 +51,7 @@
 #  routeset_discriminator_id   :integer(2)
 #  routing_group_id            :integer(4)
 #  routing_tag_mode_id         :integer(2)
+#  scheduler_id                :integer(2)
 #  vendor_id                   :integer(4)
 #
 FactoryBot.define do

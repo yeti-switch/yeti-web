@@ -124,6 +124,7 @@
 #  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null
 #  rx_inband_dtmf_filtering_mode_id :integer(2)       default(1), not null
+#  scheduler_id                     :integer(2)
 #  sdp_alines_filter_type_id        :integer(4)       default(0), not null
 #  sdp_c_location_id                :integer(4)       default(2), not null
 #  sensor_id                        :integer(2)
@@ -146,6 +147,7 @@
 #  gateways_contractor_id_idx          (contractor_id)
 #  gateways_dst_numberlist_id_idx      (termination_dst_numberlist_id)
 #  gateways_name_unique                (name) UNIQUE
+#  gateways_scheduler_id_idx           (scheduler_id)
 #  gateways_src_numberlist_id_idx      (termination_src_numberlist_id)
 #  gateways_throttling_profile_id_idx  (throttling_profile_id)
 #
@@ -166,6 +168,7 @@
 #  gateways_radius_accounting_profile_id_fkey      (radius_accounting_profile_id => radius_accounting_profiles.id)
 #  gateways_rel100_mode_id_fkey                    (rel100_mode_id => gateway_rel100_modes.id)
 #  gateways_rx_inband_dtmf_filtering_mode_id_fkey  (rx_inband_dtmf_filtering_mode_id => gateway_inband_dtmf_filtering_modes.id)
+#  gateways_scheduler_id_fkey                      (scheduler_id => schedulers.id)
 #  gateways_sdp_alines_filter_type_id_fkey         (sdp_alines_filter_type_id => filter_types.id)
 #  gateways_sdp_c_location_id_fkey                 (sdp_c_location_id => sdp_c_location.id)
 #  gateways_sensor_id_fkey                         (sensor_id => sensors.id)
@@ -302,6 +305,7 @@ class Gateway < ApplicationRecord
   belongs_to :diversion_send_mode, class_name: 'Equipment::GatewayDiversionSendMode', foreign_key: :diversion_send_mode_id
   belongs_to :stir_shaken_crt, class_name: 'Equipment::StirShaken::SigningCertificate', foreign_key: :stir_shaken_crt_id, optional: :true
   belongs_to :throttling_profile, class_name: 'Equipment::GatewayThrottlingProfile', foreign_key: :throttling_profile_id, optional: true
+  belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
 
   has_many :customers_auths, class_name: 'CustomersAuth', dependent: :restrict_with_error
   has_many :api_accesses, class_name: 'System::ApiAccess', foreign_key: :provision_gateway_id, dependent: :nullify
@@ -403,6 +407,7 @@ class Gateway < ApplicationRecord
   validates :term_outbound_proxy, presence: true, if: proc { term_use_outbound_proxy? or term_force_outbound_proxy? }
 
   include Yeti::ResourceStatus
+  include Yeti::Scheduler
 
   scope :locked, -> { where locked: true }
   scope :with_radius_accounting, -> { where 'radius_accounting_profile_id is not null' }

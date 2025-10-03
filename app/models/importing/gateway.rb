@@ -76,6 +76,7 @@
 #  rtp_relay_timestamp_aligning       :boolean
 #  rtp_timeout                        :integer(4)
 #  rx_inband_dtmf_filtering_mode_name :string
+#  scheduler_name                     :string
 #  sdp_alines_filter_list             :string
 #  sdp_alines_filter_type_name        :string
 #  sdp_c_location_name                :string
@@ -130,6 +131,7 @@
 #  registered_aor_mode_id             :integer(2)
 #  rel100_mode_id                     :integer(2)
 #  rx_inband_dtmf_filtering_mode_id   :integer(2)
+#  scheduler_id                       :integer(2)
 #  sdp_alines_filter_type_id          :integer(4)
 #  sdp_c_location_id                  :integer(4)
 #  sensor_id                          :integer(2)
@@ -172,6 +174,7 @@ class Importing::Gateway < Importing::Base
   belongs_to :termination_dst_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_dst_numberlist_id, optional: true
   belongs_to :termination_src_numberlist, class_name: '::Routing::Numberlist', foreign_key: :termination_src_numberlist_id, optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
+  belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
 
   self.import_attributes = %w[
     name enabled
@@ -234,6 +237,7 @@ class Importing::Gateway < Importing::Base
     lua_script_id
     registered_aor_mode_id
     force_cancel_routeset
+    scheduler_id
   ]
 
   import_for ::Gateway

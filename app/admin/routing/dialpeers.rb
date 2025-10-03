@@ -20,9 +20,12 @@ ActiveAdmin.register Dialpeer do
 
   scope :locked
   scope :expired
+  scope :scheduled, show_count: false
 
   # "Id","Enabled","Prefix","Rateplan","Rate","Connect Fee"
-  acts_as_export :id, :enabled, :locked, :prefix, :priority, :force_hit_rate, :exclusive_route,
+  acts_as_export :id, :enabled, :locked,
+                 [:scheduler_name, proc { |row| row.scheduler.try(:name) }],
+                 :prefix, :priority, :force_hit_rate, :exclusive_route,
                  :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee,
                  :lcr_rate_multiplier,
                  [:gateway_name, proc { |row| row.gateway.try(:name) }],
@@ -203,6 +206,7 @@ ActiveAdmin.register Dialpeer do
   filter :initial_rate
   filter :next_rate
   filter :connect_fee
+  filter :scheduler, as: :select, input_html: { class: 'chosen' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
@@ -219,6 +223,7 @@ ActiveAdmin.register Dialpeer do
       f.input :dst_number_min_length
       f.input :dst_number_max_length
       f.input :enabled
+      f.input :scheduler, as: :select, input_html: { class: 'chosen' }
       f.input :routing_group, input_html: { class: 'chosen' }
 
       f.input :routing_tag_ids,

@@ -29,6 +29,7 @@
 #  routing_tag_ids          :integer(2)       default([]), not null, is an Array
 #  routing_tag_mode_name    :string
 #  routing_tag_names        :string
+#  scheduler_name           :string
 #  short_calls_limit        :float(24)
 #  use_dp_intervals         :boolean
 #  valid_from               :timestamptz
@@ -39,6 +40,7 @@
 #  rate_group_id            :integer(4)
 #  rate_policy_id           :integer(4)
 #  routing_tag_mode_id      :integer(2)
+#  scheduler_id             :integer(2)
 #
 
 class Importing::Destination < Importing::Base
@@ -46,6 +48,7 @@ class Importing::Destination < Importing::Base
 
   belongs_to :rate_group, class_name: 'Routing::RateGroup', optional: true
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id, optional: true
+  belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
 
   self.import_attributes = %w[enabled prefix reject_calls rate_group_id
                               initial_interval next_interval initial_rate next_rate
@@ -53,7 +56,7 @@ class Importing::Destination < Importing::Base
                               valid_from valid_till profit_control_mode_id
                               asr_limit acd_limit short_calls_limit
                               dst_number_min_length dst_number_max_length
-                              routing_tag_ids routing_tag_mode_id cdo]
+                              routing_tag_ids routing_tag_mode_id cdo scheduler_id]
 
   import_for ::Routing::Destination
 

@@ -47,6 +47,7 @@
 #  require_incoming_auth            :boolean
 #  routing_group_name               :string
 #  routing_plan_name                :string
+#  scheduler_name                   :string
 #  send_billing_information         :boolean          default(FALSE), not null
 #  src_name_field_name              :string
 #  src_name_rewrite_result          :string
@@ -85,6 +86,7 @@
 #  rateplan_id                      :integer(4)
 #  routing_group_id                 :integer(4)
 #  routing_plan_id                  :integer(4)
+#  scheduler_id                     :integer(2)
 #  src_name_field_id                :integer(2)
 #  src_number_field_id              :integer(2)
 #  src_numberlist_id                :integer(4)
