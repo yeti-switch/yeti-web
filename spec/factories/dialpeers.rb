@@ -43,6 +43,7 @@
 #  routeset_discriminator_id :integer(2)       default(1), not null
 #  routing_group_id          :integer(4)       not null
 #  routing_tag_mode_id       :integer(2)       default(0), not null
+#  scheduler_id              :integer(2)
 #  vendor_id                 :integer(4)       not null
 #
 # Indexes
@@ -52,6 +53,7 @@
 #  dialpeers_prefix_range_idx                         (((prefix)::prefix_range)) USING gist
 #  dialpeers_prefix_range_valid_from_valid_till_idx   (((prefix)::prefix_range), valid_from, valid_till) WHERE enabled USING gist
 #  dialpeers_prefix_range_valid_from_valid_till_idx1  (((prefix)::prefix_range), valid_from, valid_till) WHERE (enabled AND (NOT locked)) USING gist
+#  dialpeers_scheduler_id_idx                         (scheduler_id)
 #  dialpeers_vendor_id_idx                            (vendor_id)
 #
 # Foreign Keys
@@ -62,6 +64,7 @@
 #  dialpeers_routeset_discriminator_id_fkey  (routeset_discriminator_id => routeset_discriminators.id)
 #  dialpeers_routing_group_id_fkey           (routing_group_id => routing_groups.id)
 #  dialpeers_routing_tag_mode_id_fkey        (routing_tag_mode_id => routing_tag_modes.id)
+#  dialpeers_scheduler_id_fkey               (scheduler_id => schedulers.id)
 #  dialpeers_vendor_id_fkey                  (vendor_id => contractors.id)
 #
 FactoryBot.define do

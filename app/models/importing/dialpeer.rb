@@ -35,6 +35,7 @@
 #  routing_tag_ids             :integer(2)       default([]), not null, is an Array
 #  routing_tag_mode_name       :string
 #  routing_tag_names           :string
+#  scheduler_name              :string
 #  short_calls_limit           :float(24)        default(1.0), not null
 #  src_name_rewrite_result     :string
 #  src_name_rewrite_rule       :string
@@ -50,6 +51,7 @@
 #  routeset_discriminator_id   :integer(2)
 #  routing_group_id            :integer(4)
 #  routing_tag_mode_id         :integer(2)
+#  scheduler_id                :integer(2)
 #  vendor_id                   :integer(4)
 #
 
@@ -63,6 +65,7 @@ class Importing::Dialpeer < Importing::Base
   belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor', optional: true
   belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id, optional: true
   belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id, optional: true
+  belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
   has_many :dialpeer_next_rates, dependent: :destroy
 
   self.import_attributes = %w[prefix enabled lcr_rate_multiplier
@@ -74,7 +77,7 @@ class Importing::Dialpeer < Importing::Base
                               dst_rewrite_rule dst_rewrite_result asr_limit acd_limit short_calls_limit priority capacity
                               valid_from valid_till force_hit_rate
                               dst_number_min_length dst_number_max_length
-                              routing_tag_ids routing_tag_mode_id routeset_discriminator_id]
+                              routing_tag_ids routing_tag_mode_id routeset_discriminator_id scheduler_id]
   import_for ::Dialpeer
 
   def self.after_import_hook

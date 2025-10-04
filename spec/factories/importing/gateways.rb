@@ -76,6 +76,7 @@
 #  rtp_relay_timestamp_aligning       :boolean
 #  rtp_timeout                        :integer(4)
 #  rx_inband_dtmf_filtering_mode_name :string
+#  scheduler_name                     :string
 #  sdp_alines_filter_list             :string
 #  sdp_alines_filter_type_name        :string
 #  sdp_c_location_name                :string
@@ -130,6 +131,7 @@
 #  registered_aor_mode_id             :integer(2)
 #  rel100_mode_id                     :integer(2)
 #  rx_inband_dtmf_filtering_mode_id   :integer(2)
+#  scheduler_id                       :integer(2)
 #  sdp_alines_filter_type_id          :integer(4)
 #  sdp_c_location_id                  :integer(4)
 #  sensor_id                          :integer(2)

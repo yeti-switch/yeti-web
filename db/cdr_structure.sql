@@ -1,11 +1,12 @@
 \restrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
 
--- Dumped from database version 16.9 (Debian 16.9-1.pgdg120+1)
--- Dumped by pg_dump version 16.10 (Debian 16.10-1.pgdg14+1)
+-- Dumped from database version 18.0 (Debian 18.0-1.pgdg13+3)
+-- Dumped by pg_dump version 18.0 (Debian 18.0-1.pgdg14+3)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -2650,7 +2651,7 @@ CREATE TABLE reports.cdr_interval_report (
 --
 
 CREATE TABLE reports.cdr_interval_report_aggregator (
-    id integer NOT NULL,
+    id integer CONSTRAINT cdr_interval_report_aggregator_id_not_null1 NOT NULL,
     name character varying NOT NULL
 );
 
@@ -2838,8 +2839,8 @@ CREATE TABLE reports.customer_traffic_report_data_by_destination (
     destination_prefix character varying,
     dst_country_id integer,
     dst_network_id integer,
-    calls_count bigint NOT NULL,
-    calls_duration bigint NOT NULL,
+    calls_count bigint CONSTRAINT customer_traffic_report_data_by_destinatio_calls_count_not_null NOT NULL,
+    calls_duration bigint CONSTRAINT customer_traffic_report_data_by_destina_calls_duration_not_null NOT NULL,
     acd real,
     asr real,
     origination_cost numeric,
@@ -2848,9 +2849,9 @@ CREATE TABLE reports.customer_traffic_report_data_by_destination (
     success_calls_count bigint,
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
-    short_calls_count bigint NOT NULL,
-    customer_calls_duration bigint NOT NULL,
-    vendor_calls_duration bigint NOT NULL
+    short_calls_count bigint CONSTRAINT customer_traffic_report_data_by_dest_short_calls_count_not_null NOT NULL,
+    customer_calls_duration bigint CONSTRAINT customer_traffic_report_data_b_customer_calls_duration_not_null NOT NULL,
+    vendor_calls_duration bigint CONSTRAINT customer_traffic_report_data_by__vendor_calls_duration_not_null NOT NULL
 );
 
 
@@ -2919,8 +2920,8 @@ CREATE TABLE reports.customer_traffic_report_data_full (
     first_call_at timestamp with time zone,
     last_call_at timestamp with time zone,
     short_calls_count bigint NOT NULL,
-    customer_calls_duration bigint NOT NULL,
-    vendor_calls_duration bigint NOT NULL
+    customer_calls_duration bigint CONSTRAINT customer_traffic_report_data_f_customer_calls_duration_not_null NOT NULL,
+    vendor_calls_duration bigint CONSTRAINT customer_traffic_report_data_ful_vendor_calls_duration_not_null NOT NULL
 );
 
 

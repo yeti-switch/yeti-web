@@ -35,16 +35,19 @@
 #  rate_group_id          :integer(4)       not null
 #  rate_policy_id         :integer(4)       default(1), not null
 #  routing_tag_mode_id    :integer(2)       default(0), not null
+#  scheduler_id           :integer(2)
 #
 # Indexes
 #
 #  destinations_prefix_range_idx  (((prefix)::prefix_range)) USING gist
+#  destinations_scheduler_id_idx  (scheduler_id)
 #  destinations_uuid_key          (uuid) UNIQUE
 #
 # Foreign Keys
 #
 #  destinations_rate_group_id_fkey        (rate_group_id => rate_groups.id)
 #  destinations_routing_tag_mode_id_fkey  (routing_tag_mode_id => routing_tag_modes.id)
+#  destinations_scheduler_id_fkey         (scheduler_id => schedulers.id)
 #
 
 class Routing::Destination < ApplicationRecord
@@ -61,11 +64,9 @@ class Routing::Destination < ApplicationRecord
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
   include WithPaperTrail
-
   include Yeti::ResourceStatus
-
   include Yeti::NetworkDetector
-
+  include Yeti::Scheduler
   include RoutingTagIdsScopeable
 
   scope :low_quality, -> { where quality_alarm: true }

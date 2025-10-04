@@ -29,6 +29,7 @@
 #  routing_tag_ids          :integer(2)       default([]), not null, is an Array
 #  routing_tag_mode_name    :string
 #  routing_tag_names        :string
+#  scheduler_name           :string
 #  short_calls_limit        :float(24)
 #  use_dp_intervals         :boolean
 #  valid_from               :timestamptz
@@ -39,6 +40,7 @@
 #  rate_group_id            :integer(4)
 #  rate_policy_id           :integer(4)
 #  routing_tag_mode_id      :integer(2)
+#  scheduler_id             :integer(2)
 #
 FactoryBot.define do
   factory :importing_destination, class: 'Importing::Destination' do

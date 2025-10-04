@@ -32,6 +32,7 @@ ActiveAdmin.register Importing::Gateway do
 
     column :name
     column :enabled
+    column :scheduler
     column :gateway_group, sortable: :gateway_group_name
     column :contractor, sortable: :contractor_name
 

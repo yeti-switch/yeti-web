@@ -27,7 +27,8 @@ RSpec.describe 'Export Customers Auth', type: :feature do
            tag_action_value: [tag_us.id, tag_emergency.id],
            cnam_database: create(:cnam_database),
            rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_A,
-           stir_shaken_crt: create(:stir_shaken_signing_certificate))
+           stir_shaken_crt: create(:stir_shaken_signing_certificate),
+           scheduler: create(:scheduler))
   end
 
   before do
@@ -106,7 +107,8 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Ss src rewrite result', item.ss_src_rewrite_result.to_s, anything],
         ['Ss dst rewrite rule', item.ss_dst_rewrite_rule.to_s, anything],
         ['Ss dst rewrite result', item.ss_dst_rewrite_result.to_s, anything],
-        ['Stir shaken crt name', item.stir_shaken_crt.name, anything]
+        ['Stir shaken crt name', item.stir_shaken_crt.name, anything],
+        ['Scheduler name', item.scheduler.name, anything]
       ]
     )
   end

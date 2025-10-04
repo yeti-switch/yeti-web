@@ -35,7 +35,9 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
   decorate_with DestinationDecorator
 
-  acts_as_export :id, :enabled, :prefix, :dst_number_min_length, :dst_number_max_length,
+  acts_as_export :id, :enabled,
+                 [:scheduler_name, proc { |row| row.scheduler.try(:name) }],
+                 :prefix, :dst_number_min_length, :dst_number_max_length,
                  [:rate_group_name, proc { |row| row.rate_group.try(:name) }],
                  :reject_calls,
                  :rate_policy_name,
@@ -54,6 +56,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
   scope :low_quality, show_count: false
   scope :time_valid, show_count: false
+  scope :scheduled, show_count: false
 
   filter :id
   filter :uuid_equals, label: 'UUID'
@@ -96,6 +99,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :acd_limit
   filter :short_calls_limit
   filter :cdo, if: proc { authorized?(:allow_cdo) }
+  filter :scheduler, as: :select, input_html: { class: 'chosen' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
@@ -104,7 +108,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
                 :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix,
-                :reverse_billing, :routing_tag_mode_id, :allow_package_billing, routing_tag_ids: []
+                :reverse_billing, :routing_tag_mode_id, :allow_package_billing, :scheduler_id, routing_tag_ids: []
 
   action_item :show_rates, only: [:show] do
     link_to 'Show Rates', destination_destination_next_rates_path(resource.id)
@@ -210,6 +214,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :dst_number_max_length
       f.input :enabled
       f.input :reject_calls
+      f.input :scheduler, as: :select, input_html: { class: 'chosen' }
       f.input :rate_group, input_html: { class: 'chosen' }
 
       f.input :routing_tag_ids, as: :select,

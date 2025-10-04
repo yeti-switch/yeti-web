@@ -47,6 +47,7 @@
 #  require_incoming_auth            :boolean
 #  routing_group_name               :string
 #  routing_plan_name                :string
+#  scheduler_name                   :string
 #  send_billing_information         :boolean          default(FALSE), not null
 #  src_name_field_name              :string
 #  src_name_rewrite_result          :string
@@ -85,6 +86,7 @@
 #  rateplan_id                      :integer(4)
 #  routing_group_id                 :integer(4)
 #  routing_plan_id                  :integer(4)
+#  scheduler_id                     :integer(2)
 #  src_name_field_id                :integer(2)
 #  src_number_field_id              :integer(2)
 #  src_numberlist_id                :integer(4)
@@ -111,6 +113,7 @@ class Importing::CustomersAuth < Importing::Base
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
   belongs_to :lua_script, class_name: 'System::LuaScript', foreign_key: :lua_script_id, optional: true
   belongs_to :stir_shaken_crt, class_name: 'Equipment::StirShaken::SigningCertificate', foreign_key: :stir_shaken_crt_id, optional: :true
+  belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
 
   self.import_attributes = %w[
     enabled
@@ -162,6 +165,7 @@ class Importing::CustomersAuth < Importing::Base
     tag_action_value
     lua_script_id
     stir_shaken_crt_id
+    scheduler_id
   ]
 
   import_for ::CustomersAuth

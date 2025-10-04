@@ -19,6 +19,7 @@ ActiveAdmin.register Gateway do
   decorate_with GatewayDecorator
 
   acts_as_export :id, :name, :enabled,
+                 [:scheduler_name, proc { |row| row.scheduler.try(:name) }],
                  [:gateway_group_name, proc { |row| row.gateway_group.try(:name) }],
                  :priority,
                  :weight,
@@ -106,6 +107,7 @@ ActiveAdmin.register Gateway do
   scope :shared
   scope :with_radius_accounting
   scope :with_dump
+  scope :scheduled
 
   includes :contractor, :gateway_group, :pop, :statistic, :diversion_send_mode,
            :session_refresh_method, :codec_group,
@@ -118,7 +120,7 @@ ActiveAdmin.register Gateway do
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
            :network_protocol_priority, :media_encryption_mode,
            :termination_src_numberlist, :termination_dst_numberlist, :lua_script, :stir_shaken_crt,
-           :throttling_profile
+           :throttling_profile, :scheduler
 
   controller do
     def resource_params
@@ -327,6 +329,7 @@ ActiveAdmin.register Gateway do
 
   filter :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
   filter :throttling_profile, as: :select, input_html: { class: 'chosen' }
+  filter :scheduler, as: :select, input_html: { class: 'chosen' }
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -350,6 +353,8 @@ ActiveAdmin.register Gateway do
           f.input :priority
           f.input :weight
           f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }
+
+          f.input :scheduler, as: :select, input_html: { class: 'chosen' }
 
           f.input :allow_origination
           f.input :allow_termination

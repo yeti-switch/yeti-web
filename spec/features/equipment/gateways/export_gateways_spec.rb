@@ -19,7 +19,8 @@ RSpec.describe 'Export Gateways', type: :feature do
            termination_dst_numberlist: create(:numberlist),
            termination_src_numberlist: create(:numberlist),
            lua_script: create(:lua_script),
-           stir_shaken_crt: create(:stir_shaken_signing_certificate)
+           stir_shaken_crt: create(:stir_shaken_signing_certificate),
+           scheduler: create(:scheduler)
   end
 
   before do
@@ -141,7 +142,8 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Stir shaken mode name',              item.stir_shaken_mode_name],
         ['Stir shaken crt name',               item.stir_shaken_crt.name],
         ['Privacy mode name',                  item.privacy_mode_name],
-        ['Dump level name',                    item.dump_level_name]
+        ['Dump level name',                    item.dump_level_name],
+        ['Scheduler name',                     item.scheduler.name]
       ]
     )
   end

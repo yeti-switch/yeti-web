@@ -1,11 +1,12 @@
 \restrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
 
--- Dumped from database version 16.9 (Debian 16.9-1.pgdg120+1)
--- Dumped by pg_dump version 16.10 (Debian 16.10-1.pgdg14+1)
+-- Dumped from database version 18.0 (Debian 18.0-1.pgdg13+3)
+-- Dumped by pg_dump version 18.0 (Debian 18.0-1.pgdg14+3)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -3367,6 +3368,7 @@ CREATE TABLE class4.destinations (
     routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
     allow_package_billing boolean DEFAULT false NOT NULL,
     cdo smallint,
+    scheduler_id smallint,
     CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -3419,6 +3421,7 @@ CREATE TABLE class4.dialpeers (
     routing_tag_ids smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
     routeset_discriminator_id smallint DEFAULT 1 NOT NULL,
+    scheduler_id smallint,
     CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -3566,7 +3569,8 @@ CREATE TABLE class4.gateways (
     throttling_profile_id smallint,
     transfer_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     transfer_tel_uri_host character varying,
-    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL
+    uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    scheduler_id smallint
 );
 
 
@@ -15911,7 +15915,7 @@ $$;
 CREATE TABLE class4.stir_shaken_trusted_repositories (
     id smallint NOT NULL,
     url_pattern character varying NOT NULL,
-    validate_https_certificate boolean DEFAULT true NOT NULL,
+    validate_https_certificate boolean DEFAULT true CONSTRAINT stir_shaken_trusted_reposit_validate_https_certificate_not_null NOT NULL,
     updated_at timestamp with time zone
 );
 
@@ -40960,6 +40964,7 @@ CREATE TABLE class4.customers_auth (
     pai_rewrite_rule character varying,
     pai_rewrite_result character varying,
     stir_shaken_crt_id smallint,
+    scheduler_id smallint,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -41051,7 +41056,7 @@ CREATE TABLE class4.customers_auth_normalized (
     interface character varying,
     ss_mode_id smallint DEFAULT 0 NOT NULL,
     ss_no_identity_action_id smallint DEFAULT 0 NOT NULL,
-    ss_invalid_identity_action_id smallint DEFAULT 0 NOT NULL,
+    ss_invalid_identity_action_id smallint DEFAULT 0 CONSTRAINT customers_auth_normalized_ss_invalid_identity_action_i_not_null NOT NULL,
     ss_src_rewrite_rule character varying,
     ss_src_rewrite_result character varying,
     ss_dst_rewrite_rule character varying,
@@ -41210,7 +41215,7 @@ ALTER SEQUENCE class4.dialpeers_id_seq OWNED BY class4.dialpeers.id;
 
 CREATE TABLE class4.disconnect_code (
     id integer NOT NULL,
-    namespace_id integer NOT NULL,
+    namespace_id integer CONSTRAINT disconnect_code_namespace_id_not_null1 NOT NULL,
     stop_hunting boolean DEFAULT true NOT NULL,
     pass_reason_to_originator boolean DEFAULT false NOT NULL,
     code integer NOT NULL,
@@ -41711,7 +41716,7 @@ ALTER SEQUENCE class4.lnp_databases_thinq_id_seq OWNED BY class4.lnp_databases_t
 
 CREATE TABLE class4.radius_accounting_profile_interim_attributes (
     id smallint NOT NULL,
-    profile_id smallint NOT NULL,
+    profile_id smallint CONSTRAINT radius_accounting_profile_interim_attribute_profile_id_not_null NOT NULL,
     type_id smallint NOT NULL,
     name character varying NOT NULL,
     value character varying NOT NULL,
@@ -42811,7 +42816,9 @@ CREATE TABLE data_import.import_customers_auth (
     pai_rewrite_rule character varying,
     pai_rewrite_result character varying,
     stir_shaken_crt_name character varying,
-    stir_shaken_crt_id smallint
+    stir_shaken_crt_id smallint,
+    scheduler_id smallint,
+    scheduler_name character varying
 );
 
 
@@ -42873,7 +42880,9 @@ CREATE TABLE data_import.import_destinations (
     routing_tag_mode_id smallint,
     routing_tag_mode_name character varying,
     is_changed boolean,
-    cdo smallint
+    cdo smallint,
+    scheduler_id smallint,
+    scheduler_name character varying
 );
 
 
@@ -42947,7 +42956,9 @@ CREATE TABLE data_import.import_dialpeers (
     routeset_discriminator_name character varying,
     is_changed boolean,
     src_name_rewrite_rule character varying,
-    src_name_rewrite_result character varying
+    src_name_rewrite_result character varying,
+    scheduler_id smallint,
+    scheduler_name character varying
 );
 
 
@@ -43183,7 +43194,9 @@ CREATE TABLE data_import.import_gateways (
     registered_aor_mode_name character varying,
     to_rewrite_rule character varying,
     to_rewrite_result character varying,
-    incoming_auth_allow_jwt boolean DEFAULT false NOT NULL
+    incoming_auth_allow_jwt boolean DEFAULT false NOT NULL,
+    scheduler_id smallint,
+    scheduler_name character varying
 );
 
 
@@ -45343,6 +45356,39 @@ CREATE TABLE sys.pops (
 
 
 --
+-- Name: schedulers; Type: TABLE; Schema: sys; Owner: -
+--
+
+CREATE TABLE sys.schedulers (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    enabled boolean DEFAULT true NOT NULL,
+    current_state boolean,
+    use_reject_calls boolean DEFAULT true NOT NULL
+);
+
+
+--
+-- Name: schedulers_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.schedulers_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: schedulers_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE sys.schedulers_id_seq OWNED BY sys.schedulers.id;
+
+
+--
 -- Name: sensor_levels; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -46343,6 +46389,13 @@ ALTER TABLE ONLY sys.network_types ALTER COLUMN id SET DEFAULT nextval('sys.netw
 --
 
 ALTER TABLE ONLY sys.networks ALTER COLUMN id SET DEFAULT nextval('sys.networks_id_seq'::regclass);
+
+
+--
+-- Name: schedulers id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.schedulers ALTER COLUMN id SET DEFAULT nextval('sys.schedulers_id_seq'::regclass);
 
 
 --
@@ -48311,6 +48364,22 @@ ALTER TABLE ONLY sys.pops
 
 
 --
+-- Name: schedulers schedulers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.schedulers
+    ADD CONSTRAINT schedulers_name_key UNIQUE (name);
+
+
+--
+-- Name: schedulers schedulers_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.schedulers
+    ADD CONSTRAINT schedulers_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: sensor_levels sensor_levels_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -48545,6 +48614,13 @@ CREATE INDEX customers_auth_normalized_prefix_range_prefix_range1_idx ON class4.
 
 
 --
+-- Name: customers_auth_scheduler_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX customers_auth_scheduler_id_idx ON class4.customers_auth USING btree (scheduler_id);
+
+
+--
 -- Name: customers_auth_src_numberlist_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -48563,6 +48639,13 @@ CREATE INDEX destination_next_rates_destination_id_idx ON class4.destination_nex
 --
 
 CREATE INDEX destinations_prefix_range_idx ON class4.destinations USING gist (((prefix)::public.prefix_range));
+
+
+--
+-- Name: destinations_scheduler_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX destinations_scheduler_id_idx ON class4.destinations USING btree (scheduler_id);
 
 
 --
@@ -48608,6 +48691,13 @@ CREATE INDEX dialpeers_prefix_range_valid_from_valid_till_idx1 ON class4.dialpee
 
 
 --
+-- Name: dialpeers_scheduler_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX dialpeers_scheduler_id_idx ON class4.dialpeers USING btree (scheduler_id);
+
+
+--
 -- Name: dialpeers_vendor_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -48640,6 +48730,13 @@ CREATE INDEX gateways_contractor_id_idx ON class4.gateways USING btree (contract
 --
 
 CREATE INDEX gateways_dst_numberlist_id_idx ON class4.gateways USING btree (termination_dst_numberlist_id);
+
+
+--
+-- Name: gateways_scheduler_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX gateways_scheduler_id_idx ON class4.gateways USING btree (scheduler_id);
 
 
 --
@@ -49269,6 +49366,14 @@ ALTER TABLE ONLY class4.customers_auth
 
 
 --
+-- Name: customers_auth customers_auth_scheduler_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.customers_auth
+    ADD CONSTRAINT customers_auth_scheduler_id_fkey FOREIGN KEY (scheduler_id) REFERENCES sys.schedulers(id);
+
+
+--
 -- Name: customers_auth customers_auth_src_blacklist_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -49306,6 +49411,14 @@ ALTER TABLE ONLY class4.destinations
 
 ALTER TABLE ONLY class4.destinations
     ADD CONSTRAINT destinations_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+
+
+--
+-- Name: destinations destinations_scheduler_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.destinations
+    ADD CONSTRAINT destinations_scheduler_id_fkey FOREIGN KEY (scheduler_id) REFERENCES sys.schedulers(id);
 
 
 --
@@ -49362,6 +49475,14 @@ ALTER TABLE ONLY class4.dialpeers
 
 ALTER TABLE ONLY class4.dialpeers
     ADD CONSTRAINT dialpeers_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
+
+
+--
+-- Name: dialpeers dialpeers_scheduler_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.dialpeers
+    ADD CONSTRAINT dialpeers_scheduler_id_fkey FOREIGN KEY (scheduler_id) REFERENCES sys.schedulers(id);
 
 
 --
@@ -49522,6 +49643,14 @@ ALTER TABLE ONLY class4.gateways
 
 ALTER TABLE ONLY class4.gateways
     ADD CONSTRAINT gateways_rx_inband_dtmf_filtering_mode_id_fkey FOREIGN KEY (rx_inband_dtmf_filtering_mode_id) REFERENCES class4.gateway_inband_dtmf_filtering_modes(id);
+
+
+--
+-- Name: gateways gateways_scheduler_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.gateways
+    ADD CONSTRAINT gateways_scheduler_id_fkey FOREIGN KEY (scheduler_id) REFERENCES sys.schedulers(id);
 
 
 --
@@ -50213,6 +50342,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251001135838'),
 ('20250919092417'),
 ('20250919072051'),
 ('20250916132329'),

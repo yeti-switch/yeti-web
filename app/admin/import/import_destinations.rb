@@ -25,10 +25,10 @@ ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
     column :error_string
     column :o_id
     column :is_changed
-
     column :enabled
     column :prefix
     column :reject_calls
+    column :scheduler
     column :rate_group, sortable: :rate_group_name
     column :routing_tag_ids
     column :routing_tag_mode, sortable: :routing_tag_mode_name

@@ -66,6 +66,7 @@
 #  rateplan_id                      :integer(4)       not null
 #  rewrite_ss_status_id             :integer(2)
 #  routing_plan_id                  :integer(4)       not null
+#  scheduler_id                     :integer(2)
 #  src_name_field_id                :integer(2)       default(1), not null
 #  src_number_field_id              :integer(2)       default(1), not null
 #  src_numberlist_id                :integer(4)
@@ -84,6 +85,7 @@
 #  customers_auth_external_id_external_type_key_uniq  (external_id,external_type) UNIQUE
 #  customers_auth_external_id_key_uniq                (external_id) UNIQUE WHERE (external_type IS NULL)
 #  customers_auth_name_key                            (name) UNIQUE
+#  customers_auth_scheduler_id_idx                    (scheduler_id)
 #  customers_auth_src_numberlist_id_idx               (src_numberlist_id)
 #
 # Foreign Keys
@@ -99,6 +101,7 @@
 #  customers_auth_radius_auth_profile_id_fkey        (radius_auth_profile_id => radius_auth_profiles.id)
 #  customers_auth_rateplan_id_fkey                   (rateplan_id => rateplans.id)
 #  customers_auth_routing_plan_id_fkey               (routing_plan_id => routing_plans.id)
+#  customers_auth_scheduler_id_fkey                  (scheduler_id => schedulers.id)
 #  customers_auth_src_blacklist_id_fkey              (src_numberlist_id => numberlists.id)
 #  customers_auth_tag_action_id_fkey                 (tag_action_id => tag_actions.id)
 #

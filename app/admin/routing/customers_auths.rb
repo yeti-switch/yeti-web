@@ -18,6 +18,7 @@ ActiveAdmin.register CustomersAuth do
   decorate_with CustomersAuthDecorator
 
   acts_as_export :id, :enabled, :reject_calls, :name,
+                 [:scheduler_name, proc { |row| row.scheduler.try(:name) }],
                  :transport_protocol_name,
                  :ip,
                  [:pop_name, proc { |row| row.pop.try(:name) || '' }],
@@ -100,7 +101,7 @@ ActiveAdmin.register CustomersAuth do
 
   includes :tag_action, :rateplan, :routing_plan, :gateway, :src_numberlist, :dst_numberlist,
            :pop, :radius_auth_profile, :radius_accounting_profile, :customer,
-           :lua_script, :cnam_database,
+           :lua_script, :cnam_database, :scheduler,
            account: :contractor
 
   controller do
@@ -115,6 +116,7 @@ ActiveAdmin.register CustomersAuth do
   scope :with_radius
   scope :with_dump, if: proc { authorized?(:pcap) }
   scope :with_recording, if: proc { authorized?(:recording) }
+  scope :scheduled
 
   sidebar :normalized_copies, only: :show do
     ul do
@@ -277,6 +279,8 @@ ActiveAdmin.register CustomersAuth do
          as: :select,
          collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
 
+  filter :scheduler, as: :select, input_html: { class: 'chosen' }
+
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     tabs do
@@ -336,6 +340,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :cps_limit
           f.input :allow_receive_rate_limit
           f.input :send_billing_information
+          f.input :scheduler, as: :select, input_html: { class: 'chosen' }
         end
 
         f.inputs 'Match conditions' do
