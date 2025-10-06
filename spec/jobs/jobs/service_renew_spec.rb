@@ -7,8 +7,7 @@ RSpec.describe Jobs::ServiceRenew, '#call' do
 
   let(:job) { described_class.new(double) }
   before do
-    create(:service, renew_period_id: nil, renew_at: 1.day.ago)
-    create(:service, renew_period_id: Billing::Service::RENEW_PERIOD_ID_DAY, renew_at: nil)
+    create(:service, renew_period_id: nil, renew_at: nil)
     create(:service, renew_period_id: Billing::Service::RENEW_PERIOD_ID_DAY, renew_at: 1.minute.from_now)
     create(:service, renew_period_id: Billing::Service::RENEW_PERIOD_ID_MONTH, renew_at: 1.day.from_now)
   end

@@ -50342,6 +50342,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251006091708'),
 ('20251001135838'),
 ('20250919092417'),
 ('20250919072051'),
