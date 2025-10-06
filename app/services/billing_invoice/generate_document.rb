@@ -223,7 +223,7 @@ module BillingInvoice
       )
 
       services = InvoiceServiceDataDecorator.decorate_collection(
-        invoice.services_data.for_invoice.to_a
+        invoice.service_data.for_invoice.to_a
       )
 
       ODFReport::Report.new(odf_path) do |r|
