@@ -66,6 +66,8 @@ class Billing::Service < ApplicationRecord
   validates :initial_price, :renew_price, numericality: true, allow_nil: true
   validates :state_id, inclusion: { in: STATES.keys }
   validates :renew_period_id, inclusion: { in: RENEW_PERIODS.keys }, allow_nil: true
+  validates :renew_at, presence: true, allow_nil: false, if: proc { !renew_period_id.nil? }
+  validates :renew_at, absence: true, allow_nil: true, if: proc { renew_period_id.nil? }
   validate :validate_variables
 
   before_create :verify_provisioning_variables
