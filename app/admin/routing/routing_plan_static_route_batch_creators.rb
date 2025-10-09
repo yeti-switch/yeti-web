@@ -12,14 +12,14 @@ ActiveAdmin.register Routing::RoutingPlanStaticRouteBatchCreatorForm, as: 'Routi
     end
   end
 
-  permit_params :routing_plan, :network, :prefixes, :priority, :weight, vendors: []
+  permit_params :routing_plan, :prefixes, :priority, :weight, vendors: []
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Create batch' do
       f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: { class: 'chosen-wide' }
-      f.input :network, collection: System::Network.collection, input_html: { class: 'chosen-wide' }
-      f.input :prefixes, as: :text, hint: 'Enter prefix OR choose Network. You can enter multiple prefixes separated by comma.'
+
+      f.input :prefixes, as: :text, hint: 'You can enter multiple prefixes separated by comma.'
       f.input :priority, input_html: { value: 100 }
       f.input :weight, input_html: { value: 100 }
 

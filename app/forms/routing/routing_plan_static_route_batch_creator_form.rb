@@ -5,8 +5,6 @@ class Routing::RoutingPlanStaticRouteBatchCreatorForm < ApplicationForm
   attribute :prefixes, :string
   attribute :priority, :integer
   attribute :weight, :integer
-  attribute :country, :string
-  attribute :network, :string
 
   attr_reader :vendors
 
