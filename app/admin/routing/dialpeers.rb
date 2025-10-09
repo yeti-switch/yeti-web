@@ -206,6 +206,7 @@ ActiveAdmin.register Dialpeer do
   filter :initial_rate
   filter :next_rate
   filter :connect_fee
+  boolean_filter :reverse_billing
   filter :scheduler, as: :select, input_html: { class: 'chosen' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
