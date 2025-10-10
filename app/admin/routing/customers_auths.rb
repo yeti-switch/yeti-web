@@ -96,7 +96,7 @@ ActiveAdmin.register CustomersAuth do
                 :cnam_database_id, :src_numberlist_use_diversion, :rewrite_ss_status_id,
                 :ss_mode_id, :ss_invalid_identity_action_id, :ss_no_identity_action_id,
                 :ss_src_rewrite_rule, :ss_src_rewrite_result, :ss_dst_rewrite_rule, :ss_dst_rewrite_result,
-                :stir_shaken_crt_id,
+                :stir_shaken_crt_id, :scheduler_id,
                 tag_action_value: []
 
   includes :tag_action, :rateplan, :routing_plan, :gateway, :src_numberlist, :dst_numberlist,
@@ -492,6 +492,7 @@ ActiveAdmin.register CustomersAuth do
           row :cps_limit
           row :allow_receive_rate_limit
           row :send_billing_information
+          row :scheduler
         end
         panel 'Match conditions' do
           attributes_table_for s do
