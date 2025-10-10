@@ -65,11 +65,19 @@ class CdrDecorator < Draper::Decorator
   end
 
   def decorated_customer_duration
+    return nil if customer_duration.blank?
+
     if h.authorized?(:allow_cdo) && !cdo.nil?
       "#{customer_duration}(#{cdo}) s."
     else
       "#{customer_duration} s."
     end
+  end
+
+  def decorated_vendor_duration
+    return nil if vendor_duration.blank?
+
+    "#{vendor_duration} s."
   end
 
   private

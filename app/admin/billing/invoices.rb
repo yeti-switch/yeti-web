@@ -495,7 +495,7 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
           end
         end
         panel 'By service' do
-          table_for InvoiceServiceDataDecorator.decorate_collection(resource.services_data.preload(:service)) do
+          table_for InvoiceServiceDataDecorator.decorate_collection(resource.service_data.preload(:service)) do
             column :type, :type_badge
             column :service, :service_link
             column :amount do |r|

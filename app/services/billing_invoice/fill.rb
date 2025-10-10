@@ -13,7 +13,7 @@ module BillingInvoice
 
         generate_originated_data
         generate_terminated_data
-        generate_services_data
+        generate_service_data
         update_totals
         create_invoice_docs
       end
@@ -158,7 +158,7 @@ module BillingInvoice
         )
     end
 
-    def generate_services_data
+    def generate_service_data
       rows = Billing::Transaction
              .where(account_id: invoice.account_id)
              .where('created_at >= ? AND created_at < ?', invoice.start_date, invoice.end_date)
@@ -184,7 +184,7 @@ module BillingInvoice
     def update_totals
       originated_data = invoice.originated_destinations.summary
       terminated_data = invoice.terminated_destinations.summary
-      service_data = invoice.services_data.summary
+      service_data = invoice.service_data.summary
       amount_spent = originated_data.amount_spent + terminated_data.amount_spent + service_data.amount_spent
       amount_earned = originated_data.amount_earned + terminated_data.amount_earned + service_data.amount_earned
 

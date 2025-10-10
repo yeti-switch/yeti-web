@@ -100,7 +100,7 @@ RSpec.describe BillingInvoice::Fill do
       expect { subject }.to change {
         Billing::InvoiceServiceData.count
       }.by(expected_srv_data_qty)
-      expect(invoice.services_data.count).to eq(expected_srv_data_qty)
+      expect(invoice.service_data.count).to eq(expected_srv_data_qty)
     end
   end
 
