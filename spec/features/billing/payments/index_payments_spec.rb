@@ -25,6 +25,7 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
         expect(page).to have_table_cell(column: 'Account', exact_text: payment.account.display_name)
         expect(page).to have_table_cell(column: 'Type', exact_text: payment.type_name.upcase)
         expect(page).to have_table_cell(column: 'Status', exact_text: payment.status.upcase)
+        expect(page).to have_table_cell(column: 'Rolledback At', exact_text: payment.rolledback_at)
       end
     end
   end

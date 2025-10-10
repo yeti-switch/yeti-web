@@ -5,7 +5,7 @@ class RolePolicy < ApplicationPolicy
 
   class_attribute :_section_name, instance_writer: false
   class_attribute :root_role, instance_writer: false
-  class_attribute :allowed_actions, instance_writer: false, default: %i[read change remove perform details]
+  class_attribute :allowed_actions, instance_writer: false, default: %i[read change remove perform details rollback]
   self.root_role = :root
 
   class << self
@@ -52,6 +52,15 @@ class RolePolicy < ApplicationPolicy
   def allowed_for_role?(action)
     return true if user_root?
     raise ArgumentError, "#{action} is not one of #{allowed_actions}" if allowed_actions.exclude?(action)
+
+    if ENV['DEBUG_POLICY_ACTION'] === action.to_s && roles_config.nil? && YetiConfig.role_policy.when_no_config.to_sym === :allow
+      logger.debug { "[POLICY] policy class for #{self.class.name}. is allowed '#{action}', based on 'role_policy.when_no_config == allow' config" }
+    end
+
+    if ENV['DEBUG_POLICY_ACTION'] === action.to_s && roles_config.nil? && YetiConfig.role_policy.when_no_config.to_sym === :disallow
+      logger.debug { "[POLICY] policy class for #{self.class.name}. is NOT allowed '#{action}', based on 'role_policy.when_no_config == disallow' config" }
+    end
+
     return allow_when_no_config? if roles_config.nil?
 
     user_roles.any? { |role| allowed?(role, action) }
@@ -62,9 +71,26 @@ class RolePolicy < ApplicationPolicy
 
     role_policy = roles_config[role]
     if role_policy.key?(section_name) && role_policy[section_name].key?(action)
-      role_policy[section_name][action]
+      result = role_policy[section_name][action]
+      if ENV['DEBUG_POLICY_ACTION'] === action.to_s && result
+        logger.debug { "[POLICY] #{role} role, policy class for #{self.class.name}. Allowed '#{action}', based on '#{section_name}' section name" }
+      end
+      if ENV['DEBUG_POLICY_ACTION'] === action.to_s && !result
+        logger.debug { "[POLICY] #{role} role, policy class for #{self.class.name}. NOT allowed '#{action}', based on '#{section_name}' section name" }
+      end
+
+      result
     else
-      role_policy.dig(DEFAULT_SECTION, action) || false
+      result = role_policy.dig(DEFAULT_SECTION, action)
+      if ENV['DEBUG_POLICY_ACTION'] === action.to_s && !result
+        logger.debug { "[POLICY] #{role} role, policy class for #{self.class.name}. NOT allowed '#{action}', base on absence it within 'Default' section name" }
+      end
+
+      if ENV['DEBUG_POLICY_ACTION'] === action.to_s && result
+        logger.debug { "[POLICY] #{role} role, policy class for #{self.class.name}. Allowed '#{action}', base on 'Default' section name" }
+      end
+
+      result || false
     end
   end
 

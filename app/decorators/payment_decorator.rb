@@ -19,7 +19,7 @@ class PaymentDecorator < BillingDecorator
       :ok
     elsif model.pending?
       :warning
-    elsif model.canceled?
+    elsif model.canceled? || model.rolled_back?
       :error
     end
   end

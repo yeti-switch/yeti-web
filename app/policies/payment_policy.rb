@@ -6,5 +6,9 @@ class PaymentPolicy < ::RolePolicy
   class Scope < ::RolePolicy::Scope
   end
 
+  def rollback?
+    allowed_for_role?(:rollback)
+  end
+
   alias_rule :check_cryptomus?, to: :perform?
 end

@@ -7,7 +7,8 @@ class Api::Rest::Admin::PaymentResource < BaseResource
              :private_notes,
              :status,
              :type_name,
-             :balance_before_payment
+             :balance_before_payment,
+             :rolledback_at
 
   paginator :paged
 
@@ -17,6 +18,7 @@ class Api::Rest::Admin::PaymentResource < BaseResource
 
   ransack_filter :id, type: :number
   ransack_filter :created_at, type: :datetime
+  ransack_filter :rolledback_at, type: :datetime
   ransack_filter :amount, type: :number
   ransack_filter :notes, type: :string
   ransack_filter :private_notes, type: :string
@@ -33,6 +35,6 @@ class Api::Rest::Admin::PaymentResource < BaseResource
   end
 
   def self.sortable_fields(_context)
-    %i[amount created_at]
+    %i[amount created_at rollback_at]
   end
 end
