@@ -94,6 +94,9 @@ INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALU
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (18, 'PrometheusCustomerAuthStats', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (19, 'ServiceRenew', NULL, NULL, NULL);
 INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (20, 'CdrCompaction', NULL, NULL, NULL);
+INSERT INTO sys.jobs (id, name, last_duration, last_exception, last_run_at) VALUES (21, 'Scheduler', NULL, NULL, NULL);
+
+
 --
 -- Data for Name: lnp_resolvers; Type: TABLE DATA; Schema: sys; Owner: senid
 --

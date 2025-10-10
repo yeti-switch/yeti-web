@@ -45356,6 +45356,39 @@ CREATE TABLE sys.pops (
 
 
 --
+-- Name: scheduler_ranges; Type: TABLE; Schema: sys; Owner: -
+--
+
+CREATE TABLE sys.scheduler_ranges (
+    id smallint NOT NULL,
+    scheduler_id smallint NOT NULL,
+    weekdays smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    from_time time without time zone,
+    till_time time without time zone
+);
+
+
+--
+-- Name: scheduler_ranges_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.scheduler_ranges_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: scheduler_ranges_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE sys.scheduler_ranges_id_seq OWNED BY sys.scheduler_ranges.id;
+
+
+--
 -- Name: schedulers; Type: TABLE; Schema: sys; Owner: -
 --
 
@@ -46389,6 +46422,13 @@ ALTER TABLE ONLY sys.network_types ALTER COLUMN id SET DEFAULT nextval('sys.netw
 --
 
 ALTER TABLE ONLY sys.networks ALTER COLUMN id SET DEFAULT nextval('sys.networks_id_seq'::regclass);
+
+
+--
+-- Name: scheduler_ranges id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.scheduler_ranges ALTER COLUMN id SET DEFAULT nextval('sys.scheduler_ranges_id_seq'::regclass);
 
 
 --
@@ -48364,6 +48404,14 @@ ALTER TABLE ONLY sys.pops
 
 
 --
+-- Name: scheduler_ranges scheduler_ranges_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.scheduler_ranges
+    ADD CONSTRAINT scheduler_ranges_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schedulers schedulers_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -49171,6 +49219,13 @@ CREATE UNIQUE INDEX network_prefixes_prefix_key ON sys.network_prefixes USING bt
 --
 
 CREATE INDEX network_prefixes_prefix_range_idx ON sys.network_prefixes USING gist (((prefix)::public.prefix_range));
+
+
+--
+-- Name: scheduler_ranges_scheduler_id_idx; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE INDEX scheduler_ranges_scheduler_id_idx ON sys.scheduler_ranges USING btree (scheduler_id);
 
 
 --
@@ -50326,6 +50381,14 @@ ALTER TABLE ONLY sys.nodes
 
 
 --
+-- Name: scheduler_ranges scheduler_ranges_scheduler_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.scheduler_ranges
+    ADD CONSTRAINT scheduler_ranges_scheduler_id_fkey FOREIGN KEY (scheduler_id) REFERENCES sys.schedulers(id);
+
+
+--
 -- Name: sensors sensors_mode_id_fkey; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -50342,6 +50405,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251010082720'),
 ('20251006091708'),
 ('20251001135838'),
 ('20250919092417'),
