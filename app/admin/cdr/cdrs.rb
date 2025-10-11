@@ -362,12 +362,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           end
           column :rateplan
           column :destination
-          column :destination_rate_policy, &:destination_rate_policy_name
-          column :destination_fee
+          column 'Dest. fee and rates', &:decorated_destination_rates
 
-          column('Destination rates', sortable: 'destination_next_rate') do |cdr|
-            "#{cdr.destination_initial_rate}/#{cdr.destination_next_rate}".chomp('/')
-          end
           column('Destination intervals', sortable: 'destination_next_interval') do |cdr|
             "#{cdr.destination_initial_interval}/#{cdr.destination_next_interval}".chomp('/')
           end
@@ -771,11 +767,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
     column :rateplan
     column :destination
-    column :rate_policy, &:destination_rate_policy_name
 
-    column('Dest. fee and rates', sortable: 'destination_next_rate') do |cdr|
-      "#{cdr.destination_fee} #{cdr.destination_initial_rate}/#{cdr.destination_next_rate}".chomp('/')
-    end
+    column 'Dest. fee and rates', &:decorated_destination_rates
     column('Dest. intervals', sortable: 'destination_next_interval') do |cdr|
       "#{cdr.destination_initial_interval}/#{cdr.destination_next_interval}".chomp('/')
     end

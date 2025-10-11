@@ -281,62 +281,6 @@ END;
 $$;
 
 
-CREATE OR REPLACE FUNCTION billing.bill_cdr(i_cdr cdr.cdr) RETURNS cdr.cdr
-    LANGUAGE plpgsql COST 10
-    AS $$
-DECLARE
-    _v billing.interval_billing_data%rowtype;
-    _v_customer_duration integer;
-BEGIN
-    if i_cdr.duration>0 and i_cdr.success then  -- run billing.
-        _v_customer_duration = i_cdr.duration + COALESCE(i_cdr.cdo, 0);
-
-        if i_cdr.package_counter_id is not null then
-          -- running billing with fake rates to calculate duration
-          _v=billing.interval_billing(
-            _v_customer_duration,
-            '1.0'::numeric,
-            '1.0'::numeric,
-            '1.0'::numeric,
-            i_cdr.destination_initial_interval,
-            i_cdr.destination_next_interval,
-            0::integer);
-         i_cdr.customer_price=0;
-         i_cdr.customer_price_no_vat=0;
-         i_cdr.customer_duration=_v.duration;
-        else
-          _v=billing.interval_billing(
-            _v_customer_duration,
-            i_cdr.destination_fee,
-            i_cdr.destination_initial_rate,
-            i_cdr.destination_next_rate,
-            i_cdr.destination_initial_interval,
-            i_cdr.destination_next_interval,
-            i_cdr.customer_acc_vat);
-         i_cdr.customer_price=_v.amount;
-         i_cdr.customer_price_no_vat=_v.amount_no_vat;
-         i_cdr.customer_duration=_v.duration;
-        end if;
-
-         _v=billing.interval_billing(
-            i_cdr.duration,
-            i_cdr.dialpeer_fee,
-            i_cdr.dialpeer_initial_rate,
-            i_cdr.dialpeer_next_rate,
-            i_cdr.dialpeer_initial_interval,
-            i_cdr.dialpeer_next_interval,
-            0);
-         i_cdr.vendor_price=_v.amount;
-         i_cdr.vendor_duration=_v.duration;
-    else
-        i_cdr.customer_price=0;
-        i_cdr.customer_price_no_vat=0;
-        i_cdr.vendor_price=0;
-    end if;
-    RETURN i_cdr;
-END;
-$$;
-
     }
   end
 
@@ -605,65 +549,6 @@ BEGIN
   perform event.streaming_insert_event(v_cdr);
   INSERT INTO cdr.cdr VALUES( v_cdr.*);
   RETURN 0;
-END;
-$$;
-
-
-CREATE OR REPLACE FUNCTION billing.bill_cdr(i_cdr cdr.cdr) RETURNS cdr.cdr
-    LANGUAGE plpgsql COST 10
-    AS $$
-DECLARE
-    _v billing.interval_billing_data%rowtype;
-    _v_customer_duration integer;
-BEGIN
-    if i_cdr.duration>0 and i_cdr.success then  -- run billing.
-        _v_customer_duration = i_cdr.duration + COALESCE(i_cdr.cdo, 0);
-
-        if i_cdr.package_counter_id is not null then
-          -- running billing with fake rates to calculate duration
-          _v=billing.interval_billing(
-            _v_customer_duration,
-            '1.0'::numeric,
-            '1.0'::numeric,
-            '1.0'::numeric,
-            i_cdr.destination_initial_interval,
-            i_cdr.destination_next_interval,
-            0::integer);
-         i_cdr.customer_price=0;
-         i_cdr.customer_price_no_vat=0;
-         i_cdr.customer_duration=_v.duration;
-        else
-          _v=billing.interval_billing(
-            _v_customer_duration,
-            i_cdr.destination_fee,
-            i_cdr.destination_initial_rate,
-            i_cdr.destination_next_rate,
-            i_cdr.destination_initial_interval,
-            i_cdr.destination_next_interval,
-            i_cdr.customer_acc_vat);
-         i_cdr.customer_price=_v.amount;
-         i_cdr.customer_price_no_vat=_v.amount_no_vat;
-         i_cdr.customer_duration=_v.duration;
-        end if;
-
-         _v=billing.interval_billing(
-            i_cdr.duration,
-            i_cdr.dialpeer_fee,
-            i_cdr.dialpeer_initial_rate,
-            i_cdr.dialpeer_next_rate,
-            i_cdr.dialpeer_initial_interval,
-            i_cdr.dialpeer_next_interval,
-            0);
-         i_cdr.vendor_price=_v.amount;
-         i_cdr.vendor_duration=_v.duration;
-         i_cdr.profit=i_cdr.customer_price-i_cdr.vendor_price;
-    else
-        i_cdr.customer_price=0;
-        i_cdr.customer_price_no_vat=0;
-        i_cdr.vendor_price=0;
-        i_cdr.profit=0;
-    end if;
-    RETURN i_cdr;
 END;
 $$;
 

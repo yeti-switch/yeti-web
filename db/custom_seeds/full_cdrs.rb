@@ -59,6 +59,7 @@ end
     destination_initial_rate: rand(0..5),
     destination_next_rate: rand(0..5),
     destination_reverse_billing: [nil, true, false].sample,
+    destination_rate_policy_id: [nil, 1, 2, 3, 4].sample,
     dialpeer_prefix: 380,
     dialpeer_initial_rate: rand(0..5),
     dialpeer_next_rate: rand(0..5),
