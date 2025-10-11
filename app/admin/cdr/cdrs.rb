@@ -372,7 +372,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
             "#{cdr.destination_initial_interval}/#{cdr.destination_next_interval}".chomp('/')
           end
 
-          column :customer_price
+          column :customer_price, &:decorated_customer_price
           column :customer_price_no_vat
           column :customer_duration, &:decorated_customer_duration
           column :routing_plan
@@ -388,7 +388,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
             "#{cdr.dialpeer_initial_interval}/#{cdr.dialpeer_next_interval}".chomp('/')
           end
 
-          column :vendor_price
+          column :vendor_price, &:decorated_vendor_price
           column :vendor_duration, &:decorated_vendor_duration
           column :profit
           column('Orig call', &:orig_call_id)
@@ -572,10 +572,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
       tab 'Routing&Billing information' do
         attributes_table do
-          row :customer_price
+          row :customer_price, &:decorated_customer_price
           row :customer_price_no_vat
           row :customer_duration, &:decorated_customer_duration
-          row :vendor_price
+          row :vendor_price, &:decorated_vendor_price
           row :vendor_duration, &:decorated_vendor_duration
           row :profit
 
@@ -780,7 +780,8 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       "#{cdr.destination_initial_interval}/#{cdr.destination_next_interval}".chomp('/')
     end
 
-    column :customer_price
+    column :customer_price, &:decorated_customer_price
+
     column :customer_acc_vat
     column :customer_price_no_vat
     column :customer_duration, &:decorated_customer_duration
@@ -796,7 +797,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
       "#{cdr.dialpeer_initial_interval}/#{cdr.dialpeer_next_interval}".chomp('/')
     end
 
-    column :vendor_price
+    column :vendor_price, &:decorated_vendor_price
     column :vendor_duration, &:decorated_vendor_duration
     column :profit
     column :orig_call_id

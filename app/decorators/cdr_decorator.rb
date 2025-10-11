@@ -80,6 +80,20 @@ class CdrDecorator < Draper::Decorator
     "#{vendor_duration} s."
   end
 
+  def decorated_customer_price
+    h.safe_join([
+                  customer_price,
+                  *(h.tag.span('R', class: 'status_tag red') if destination_reverse_billing)
+                ], ' ')
+  end
+
+  def decorated_vendor_price
+    h.safe_join([
+                  vendor_price,
+                  *(h.tag.span('R', class: 'status_tag red') if dialpeer_reverse_billing)
+                ], ' ')
+  end
+
   private
 
   def mask_phone_number(phone_number)
