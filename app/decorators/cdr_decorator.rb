@@ -80,6 +80,33 @@ class CdrDecorator < Draper::Decorator
     "#{vendor_duration} s."
   end
 
+  def decorated_customer_price
+    h.safe_join([
+                  customer_price,
+                  *(h.tag.span('R', class: 'status_tag red') if destination_reverse_billing)
+                ], ' ')
+  end
+
+  def decorated_vendor_price
+    h.safe_join([
+                  vendor_price,
+                  *(h.tag.span('R', class: 'status_tag red') if dialpeer_reverse_billing)
+                ], ' ')
+  end
+
+  def decorated_destination_rates
+    h.safe_join([
+                  "#{destination_fee} #{destination_initial_rate}/#{destination_next_rate}".chomp('/'),
+                  *(
+                    unless destination_rate_policy_id.nil?
+                      h.tag.span(
+                        Routing::DestinationRatePolicy::POLICIES_CDR[destination_rate_policy_id],
+                        class: "status_tag #{Routing::DestinationRatePolicy::POLICIES_COLORS[destination_rate_policy_id]}"
+                      )
+                    end)
+                ], ' ')
+  end
+
   private
 
   def mask_phone_number(phone_number)

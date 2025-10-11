@@ -1860,14 +1860,14 @@ BEGIN
   v_cdr.destination_next_interval:=v_dynamic.destination_next_interval;
   v_cdr.destination_fee:=v_dynamic.destination_fee;
   v_cdr.destination_rate_policy_id:=v_dynamic.destination_rate_policy_id;
-  v_cdr.destination_reverse_billing=v_dynamic.destination_reverse_billing;
+  v_cdr.destination_reverse_billing=COALESCE(v_dynamic.destination_reverse_billing, false);
 
   v_cdr.dialpeer_initial_rate:=v_dynamic.dialpeer_initial_rate::numeric;
   v_cdr.dialpeer_next_rate:=v_dynamic.dialpeer_next_rate::numeric;
   v_cdr.dialpeer_initial_interval:=v_dynamic.dialpeer_initial_interval;
   v_cdr.dialpeer_next_interval:=v_dynamic.dialpeer_next_interval;
   v_cdr.dialpeer_fee:=v_dynamic.dialpeer_fee;
-  v_cdr.dialpeer_reverse_billing=v_dynamic.dialpeer_reverse_billing;
+  v_cdr.dialpeer_reverse_billing=COALESCE(v_dynamic.dialpeer_reverse_billing, false);
 
   /* sockets addresses */
   v_cdr.sign_orig_transport_protocol_id = i_lega_transport_protocol_id;
@@ -1997,6 +1997,18 @@ BEGIN
   v_cdr.customer_price = switch.customer_price_round(v_config, v_cdr.customer_price);
   v_cdr.customer_price_no_vat = switch.customer_price_round(v_config, v_cdr.customer_price_no_vat);
   v_cdr.vendor_price = switch.vendor_price_round(v_config, v_cdr.vendor_price);
+
+  if v_cdr.destination_reverse_billing THEN
+    v_cdr.profit = - v_cdr.customer_price;
+  else
+    v_cdr.profit = v_cdr.customer_price;
+  end if;
+
+  if v_cdr.dialpeer_reverse_billing THEN
+    v_cdr.profit = v_cdr.profit + v_cdr.vendor_price;
+  else
+    v_cdr.profit = v_cdr.profit - v_cdr.vendor_price;
+  end if;
 
   -- generate event to billing engine
   perform event.billing_insert_event('cdr_full',v_cdr);
@@ -4746,6 +4758,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251011175010'),
 ('20250917140033'),
 ('20250821154607'),
 ('20250730191727'),

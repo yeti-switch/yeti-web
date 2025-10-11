@@ -109,5 +109,6 @@ class YetiScheduler < Scheduler::Base
   cron Jobs::DeleteAppliedRateManagementPricelists
   cron Jobs::ServiceRenew
   cron Jobs::CdrCompaction
+  cron Jobs::Scheduler
   every Jobs::PrometheusCustomerAuthStats
 end
