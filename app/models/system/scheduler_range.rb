@@ -5,9 +5,9 @@
 # Table name: sys.scheduler_ranges
 #
 #  id           :integer(2)       not null, primary key
-#  days         :integer(2)       is an Array
+#  days         :integer(2)       default([]), not null, is an Array
 #  from_time    :time
-#  months       :integer(2)       is an Array
+#  months       :integer(2)       default([]), not null, is an Array
 #  till_time    :time
 #  weekdays     :integer(2)       default([]), not null, is an Array
 #  scheduler_id :integer(2)       not null
@@ -72,9 +72,9 @@ class System::SchedulerRange < ApplicationRecord
   validates :weekdays, inclusion: { in: WEEKDAYS.keys }, allow_nil: true, presence: false
 
   scope :current_ranges, lambda { |tz|
-    where('(NULLIF(months, \'{}\'::smallint[]) IS NULL OR date_part(\'month\', (now() at time zone ?)) = ANY(months))', tz)
-      .where('(NULLIF(days, \'{}\'::smallint[]) IS NULL OR date_part(\'day\', (now() at time zone ?)) = ANY(days))', tz)
-      .where('(NULLIF(weekdays, \'{}\'::smallint[]) IS NULL OR date_part(\'dow\', (now() at time zone ?)) = ANY(weekdays))', tz)
+    where('(cardinality(months) = 0 OR date_part(\'month\', (now() at time zone ?)) = ANY(months))', tz)
+      .where('(cardinality(days) = 0 OR date_part(\'day\', (now() at time zone ?)) = ANY(days))', tz)
+      .where('(cardinality(weekdays) = 0 OR date_part(\'dow\', (now() at time zone ?)) = ANY(weekdays))', tz)
       .where('(from_time IS NULL OR (now() at time zone ?)::time >= from_time)', tz)
       .where('(till_time IS NULL OR (now() at time zone ?)::time < till_time)', tz)
   }
