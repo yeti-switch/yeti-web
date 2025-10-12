@@ -55,7 +55,7 @@ module CustomerApi
     before_validation :apply_fields
     validate :validate_account
     validate :validate_filters
-    validate :validate_time_zone_name
+
     validates :time_format, presence: true,
                             inclusion: {
                               in: CdrExport::ALLOWED_TIME_FORMATS,
@@ -89,12 +89,6 @@ module CustomerApi
       keys = filters&.as_json&.keys || []
       not_allowed_keys = keys - ALLOWED_FILTERS
       errors.add(:filters, "#{not_allowed_keys.join(', ')} not allowed") unless not_allowed_keys.empty?
-    end
-
-    def validate_time_zone_name
-      return if time_zone_name.nil?
-
-      errors.add(:time_zone_name, :invalid) unless Yeti::TimeZoneHelper.all.any? { |i| i.name == time_zone_name }
     end
 
     def assign_customer_account
