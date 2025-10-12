@@ -15,7 +15,7 @@ ActiveAdmin.register System::Scheduler do
 
   permit_params :id, :name, :enabled, :use_reject_calls, :timezone,
                 ranges_attributes: [
-                  :id, :from_time, :till_time, :_destroy, weekdays: []
+                  :id, :from_time, :till_time, :_destroy, months: [], days: [], weekdays: []
                 ]
 
   filter :id
@@ -49,10 +49,24 @@ ActiveAdmin.register System::Scheduler do
 
     f.inputs 'Time intervals when traffic will be blocked' do
       f.has_many :ranges do |t|
+        t.input :months,
+                as: :select,
+                collection: System::SchedulerRange::MONTHS.invert,
+                include_blank: false,
+                input_html: { class: :chosen, multiple: true },
+                hint: 'Leave empty to allow any month'
+        t.input :days,
+                as: :select,
+                collection: System::SchedulerRange::DAYS,
+                include_blank: false,
+                input_html: { class: :chosen, multiple: true },
+                hint: 'Leave empty to allow any day of month'
         t.input :weekdays,
                 as: :select,
                 collection: System::SchedulerRange::WEEKDAYS.invert,
-                input_html: { class: :chosen, multiple: true }
+                include_blank: false,
+                input_html: { class: :chosen, multiple: true },
+                hint: 'Leave empty to allow any day of week'
 
         t.input :from_time, as: :string, hint: 'Time in format HH24:MM:SS or HH24:MM. Leave empty for start of the day'
         t.input :till_time, as: :string, hint: 'Time in format HH24:MM:SS or HH24:MM. Leave empty for end of the day. Should be greater than from_time.'
@@ -75,6 +89,9 @@ ActiveAdmin.register System::Scheduler do
 
     panel 'Time intervals when traffic will be blocked' do
       table_for s.ranges.order('id') do
+        column :id
+        column :months, &:months_names
+        column :days, &:days_names
         column :weekdays, &:weekdays_names
         column :from_time
         column :till_time

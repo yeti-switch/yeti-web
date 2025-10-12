@@ -137,7 +137,8 @@ class CdrExport < ApplicationRecord
   validate :validate_filters
   validate :validate_fields
   validate :validate_customer_account
-  validates :time_zone_name, inclusion: { in: Yeti::TimeZoneHelper.all }, allow_nil: true, allow_blank: true
+
+  validates :time_zone_name, inclusion: { in: proc { Yeti::TimeZoneHelper.all } }, allow_nil: true, allow_blank: true
 
   before_validation(on: :create) do
     self.status ||= STATUS_PENDING
