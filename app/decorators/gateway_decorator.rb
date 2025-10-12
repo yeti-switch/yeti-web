@@ -5,6 +5,7 @@ class GatewayDecorator < BillingDecorator
   decorates Gateway
 
   decorates_association :contractor, with: ContractorDecorator
+  decorates_association :scheduler, with: SystemSchedulerDecorator
 
   def decorated_display_name
     if !enabled?

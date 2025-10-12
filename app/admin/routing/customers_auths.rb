@@ -492,7 +492,9 @@ ActiveAdmin.register CustomersAuth do
           row :cps_limit
           row :allow_receive_rate_limit
           row :send_billing_information
-          row :scheduler
+          row :scheduler do |row|
+            row.scheduler.try(:decorated_display_name)
+          end
         end
         panel 'Match conditions' do
           attributes_table_for s do

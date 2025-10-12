@@ -45365,8 +45365,8 @@ CREATE TABLE sys.scheduler_ranges (
     weekdays smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     from_time time without time zone,
     till_time time without time zone,
-    months smallint[],
-    days smallint[]
+    months smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    days smallint[] DEFAULT '{}'::smallint[] NOT NULL
 );
 
 
@@ -50408,6 +50408,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251012194108'),
 ('20251012143304'),
 ('20251012130757'),
 ('20251010082720'),

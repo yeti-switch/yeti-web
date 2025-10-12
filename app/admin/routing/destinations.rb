@@ -273,6 +273,9 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
           row :country
           row :network
           row :reject_calls
+          row :scheduler do |row|
+            row.scheduler.try(:decorated_display_name)
+          end
           row :quality_alarm
           row :rate_group
           row :routing_tags

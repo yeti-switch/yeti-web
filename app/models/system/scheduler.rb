@@ -51,12 +51,12 @@ class System::Scheduler < ApplicationRecord
       save!
 
       if use_reject_calls
-        customers_auths.where(reject_calls: false).find_each do |c|
+        customers_auths.where('reject_calls=false OR enabled=false').find_each do |c|
           c.reject_calls = true
           c.enabled = true
           c.save!
         end
-        destinations.where(reject_calls: false).update_all(reject_calls: true, enabled: true)
+        destinations.where('reject_calls=false OR enabled=false').update_all(reject_calls: true, enabled: true)
       else
         customers_auths.where(enabled: true).find_each do |c|
           c.reject_calls = false
@@ -78,13 +78,13 @@ class System::Scheduler < ApplicationRecord
       save!
 
       # we can't use update_all there because we have normalized copies
-      customers_auths.where(reject_calls: true).find_each do |c|
+      customers_auths.where('reject_calls OR enabled=false').find_each do |c|
         c.reject_calls = false
         c.enabled = true
         c.save!
       end
 
-      destinations.where(reject_calls: false).update_all(reject_calls: false, enabled: true)
+      destinations.where('reject_calls OR enabled=false').update_all(reject_calls: false, enabled: true)
       dialpeers.where(enabled: false).update_all(enabled: true)
       gateways.where(enabled: false).update_all(enabled: true)
     end

@@ -15,6 +15,7 @@ class DialpeerDecorator < BillingDecorator
   decorates_association :gateway_group, with: GatewayGroupDecorator
   decorates_association :vendor, with: ContractorDecorator
   decorates_association :account, with: AccountDecorator
+  decorates_association :scheduler, with: SystemSchedulerDecorator
 
   def decorated_display_name
     if !enabled?

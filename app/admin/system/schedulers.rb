@@ -11,7 +11,8 @@ ActiveAdmin.register System::Scheduler do
   acts_as_export :id,
                  :name,
                  :enabled,
-                 :use_reject_calls
+                 :use_reject_calls,
+                 :timezone
 
   permit_params :id, :name, :enabled, :use_reject_calls, :timezone,
                 ranges_attributes: [
