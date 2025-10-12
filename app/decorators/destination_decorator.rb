@@ -4,6 +4,8 @@ class DestinationDecorator < BillingDecorator
   delegate_all
   decorates Routing::Destination
 
+  decorates_association :scheduler, with: SystemSchedulerDecorator
+
   def routing_tags
     h.routing_tags_badges(
       routing_tag_ids: model.routing_tag_ids,

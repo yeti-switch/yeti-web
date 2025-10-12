@@ -8,6 +8,7 @@ class CustomersAuthDecorator < BillingDecorator
   decorates_association :customer, with: ContractorDecorator
   decorates_association :account, with: AccountDecorator
   decorates_association :routing_plan, with: RoutingPlanDecorator
+  decorates_association :scheduler, with: SystemSchedulerDecorator
 
   def display_tag_action_value
     h.tag_action_values_badges(model.tag_action_value)

@@ -564,6 +564,9 @@ ActiveAdmin.register Gateway do
           row :priority
           row :weight
           row :pop
+          row :scheduler do |row|
+            row.scheduler.decorated_display_name
+          end
           row :allow_origination
           row :allow_termination
           row :origination_capacity
