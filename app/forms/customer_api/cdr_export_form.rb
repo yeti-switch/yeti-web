@@ -76,7 +76,7 @@ module CustomerApi
     private
 
     def apply_fields
-      hidden_fields = YetiConfig.api.customer.outgoing_cdr_hide_fields || []
+      hidden_fields = YetiConfig.api&.customer&.outgoing_cdr_hide_fields || []
       model.fields = FIELDS - hidden_fields
     end
 

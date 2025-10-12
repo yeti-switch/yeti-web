@@ -104,7 +104,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
 
   def fetchable_fields
     fields = super
-    hidden_fields = YetiConfig.api.customer.outgoing_cdr_hide_fields || []
+    hidden_fields = YetiConfig.api&.customer&.outgoing_cdr_hide_fields || []
     fields - hidden_fields.map(&:to_sym)
   end
 
