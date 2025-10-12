@@ -493,7 +493,7 @@ ActiveAdmin.register CustomersAuth do
           row :allow_receive_rate_limit
           row :send_billing_information
           row :scheduler do |row|
-            row.scheduler.decorated_display_name
+            row.scheduler.try(:decorated_display_name)
           end
         end
         panel 'Match conditions' do

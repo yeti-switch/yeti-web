@@ -565,7 +565,7 @@ ActiveAdmin.register Gateway do
           row :weight
           row :pop
           row :scheduler do |row|
-            row.scheduler.decorated_display_name
+            row.scheduler.try(:decorated_display_name)
           end
           row :allow_origination
           row :allow_termination

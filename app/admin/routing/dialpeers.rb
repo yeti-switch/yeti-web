@@ -305,7 +305,7 @@ ActiveAdmin.register Dialpeer do
           row :network
           row :enabled
           row :scheduler do |row|
-            row.scheduler.decorated_display_name
+            row.scheduler.try(:decorated_display_name)
           end
           row :locked
           row :routing_group
