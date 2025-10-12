@@ -25,7 +25,6 @@ RSpec.describe 'CDR exports', type: :feature do
     it 'cdr export should be displayed' do
       subject
       expect(page).to have_table_row count: cdr_exports.size
-      # expect(page).to have_select 'Time zone name', selected: 'Europe/Kyiv', visible: false
 
       cdr_exports.each do |cdr_export|
         within_table_row(id: cdr_export.id) do
