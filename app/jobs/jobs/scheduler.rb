@@ -5,7 +5,7 @@ module Jobs
     self.cron_line = '*/2 * * * *'
 
     def execute
-      System::Scheduler.all.find_each(&:check)
+      System::Scheduler.where(enabled: true).find_each(&:check)
     end
   end
 end

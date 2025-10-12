@@ -3,7 +3,7 @@
 module Yeti
   class TimeZone
     def initialize(name)
-      @name = name.downcase
+      @name = name
     end
 
     attr_reader :name

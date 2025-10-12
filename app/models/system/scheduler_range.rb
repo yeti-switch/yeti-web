@@ -39,25 +39,44 @@ class System::SchedulerRange < ApplicationRecord
     WEEKDAY_SATURDAY => 'Saturday'
   }.freeze
 
+  # we are redefining types there to not process time as ruby Time type - it causing a lot of problems with time zones
+  # so we are just passing it to/from DB as is.
+  # drawback - it requires custom validation
+  attribute :from_time, :string
+  attribute :till_time, :string
+
   belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id
 
-  validates :till_time, comparison: { greater_than: :from_time }
-  validates :from_time, comparison: { less_than: :till_time }
+  validates :from_time, format: { with: /\A([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?\z/ }, allow_nil: true, allow_blank: true
+  validates :till_time, format: { with: /\A([0-1]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?\z/ }, allow_nil: true, allow_blank: true
+
+  before_validation :replace_blank_time_with_nil
+
+  # somehow it works even when time is interpreted as text
+  validates :from_time, comparison: { less_than: :till_time }, if: -> { till_time.present? }, allow_nil: true, allow_blank: true
+  validates :till_time, comparison: { greater_than: :from_time }, if: -> { from_time.present? }, allow_nil: true, allow_blank: true
+
   validates :weekdays, inclusion: { in: WEEKDAYS.keys }, allow_nil: false, presence: true
 
-  scope :current_ranges, lambda {
-    t = Time.current
-    where('? = ANY(weekdays)', t.wday)
-      .where('(from_time IS NOT NULL AND ? >= from_time)', t.strftime('%T'))
-      .where('(till_time IS NOT NULL AND ? < till_time)', t.strftime('%T'))
+  scope :current_ranges, lambda { |tz|
+    where('date_part(\'dow\', (now() at time zone ?)) = ANY(weekdays)', tz)
+      .where('(from_time IS NOT NULL AND (now() at time zone ?)::time >= from_time)', tz)
+      .where('(till_time IS NOT NULL AND (now() at time zone ?)::time < till_time)', tz)
   }
 
   def weekdays=(s)
-    # form sending empty array element, we have to remove it
+    # form sends empty array element, we have to remove it
     self[:weekdays] = s.uniq.sort.reject(&:blank?)
   end
 
   def weekdays_names
     weekdays.collect { |w| WEEKDAYS[w] }.join(', ')
+  end
+
+  protected
+
+  def replace_blank_time_with_nil
+    self.from_time = nil if from_time.blank?
+    self.till_time = nil if till_time.blank?
   end
 end
