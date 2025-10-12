@@ -27,14 +27,11 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
   ransack_filter :rows_count, type: :number
   ransack_filter :created_at, type: :datetime
   ransack_filter :updated_at, type: :datetime
+  ransack_filter :time_zone_name, type: :string
   association_uuid_filter :account_id, class_name: 'Account'
 
   filter :time_format, verify: :time_format_filter_verifier, apply: lambda { |records, values, _opts|
     records.where(time_format: values)
-  }
-
-  filter :time_zone_name, verify: :time_zone_name_filter_verifier, apply: lambda { |records, values, _opts|
-    records.where(time_zone_name: values)
   }
 
   def filters
@@ -71,18 +68,5 @@ class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::Base
     values
   end
 
-  def self.time_zone_name_filter_verifier(values, _ctx)
-    return if values.blank?
-
-    values.each do |value|
-      unless Yeti::TimeZoneHelper.all.any? { |i| i.name == value }
-        raise JSONAPI::Exceptions::InvalidFilterValue.new(:time_zone_name, value)
-      end
-    end
-
-    values
-  end
-
   private_class_method :time_format_filter_verifier
-  private_class_method :time_zone_name_filter_verifier
 end

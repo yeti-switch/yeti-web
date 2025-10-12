@@ -7,7 +7,7 @@ module Yeti
       return @cached_entries if @cached_entries
 
       @cached_entries = Cdr::Base.connection.select_values('SELECT name FROM pg_timezone_names ORDER BY name').map do |i|
-        Yeti::TimeZone.new(i)
+        Yeti::TimeZone.new(i).name
       end
     end
 

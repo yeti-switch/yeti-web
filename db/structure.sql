@@ -45364,7 +45364,9 @@ CREATE TABLE sys.scheduler_ranges (
     scheduler_id smallint NOT NULL,
     weekdays smallint[] DEFAULT '{}'::smallint[] NOT NULL,
     from_time time without time zone,
-    till_time time without time zone
+    till_time time without time zone,
+    months smallint[],
+    days smallint[]
 );
 
 
@@ -45397,7 +45399,8 @@ CREATE TABLE sys.schedulers (
     name character varying NOT NULL,
     enabled boolean DEFAULT true NOT NULL,
     current_state boolean,
-    use_reject_calls boolean DEFAULT true NOT NULL
+    use_reject_calls boolean DEFAULT true NOT NULL,
+    timezone character varying DEFAULT 'UTC'::character varying NOT NULL
 );
 
 
@@ -50405,6 +50408,8 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251012143304'),
+('20251012130757'),
 ('20251010082720'),
 ('20251006091708'),
 ('20251001135838'),

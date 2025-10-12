@@ -8,6 +8,7 @@
 #  current_state    :boolean
 #  enabled          :boolean          default(TRUE), not null
 #  name             :string           not null
+#  timezone         :string           default("UTC"), not null
 #  use_reject_calls :boolean          default(TRUE), not null
 #
 # Indexes
@@ -16,9 +17,11 @@
 #
 class System::Scheduler < ApplicationRecord
   self.table_name = 'sys.schedulers'
+
   include WithPaperTrail
 
   validates :name, uniqueness: { allow_blank: true }, presence: true
+  validates :timezone, inclusion: { in: proc { Yeti::TimeZoneHelper.all } }, allow_nil: false, allow_blank: false
 
   has_many :customers_auths, class_name: 'CustomersAuth', foreign_key: 'scheduler_id', dependent: :nullify
   has_many :destinations, class_name: 'Routing::Destination', foreign_key: 'scheduler_id', dependent: :nullify
@@ -34,7 +37,7 @@ class System::Scheduler < ApplicationRecord
   end
 
   def check
-    if !ranges.current_ranges.empty?
+    if !ranges.current_ranges(timezone).empty?
       block
     else
       unblock

@@ -101,9 +101,22 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
     end
 
     context 'when time_zone_name' do
-      context 'equal to europe/kyiv' do
-        let(:json_api_attributes) { super().merge 'time-zone-name': 'europe/kyiv' }
-        let(:expected_cdr_export_attrs) { super().merge time_zone_name: 'europe/kyiv' }
+      context 'equal to Europe/Kyiv' do
+        let(:json_api_attributes) { super().merge 'time-zone-name': 'Europe/Kyiv' }
+        let(:expected_cdr_export_attrs) { super().merge time_zone_name: 'Europe/Kyiv' }
+
+        it 'should create CDR export' do
+          subject
+          expect(response_json[:errors]).to eq nil
+
+          expect(cdr_export).to have_attributes(expected_cdr_export_attrs)
+          expect(cdr_export.filters_json).to match(expected_cdr_export_filters)
+        end
+      end
+
+      context 'is empty' do
+        let(:json_api_attributes) { super().merge 'time-zone-name': '' }
+        let(:expected_cdr_export_attrs) { super().merge time_zone_name: '' }
 
         it 'should create CDR export' do
           subject
@@ -118,16 +131,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
         let(:json_api_attributes) { super().merge 'time-zone-name': 'invalid value' }
 
         include_examples :returns_json_api_errors, errors: {
-          detail: 'time-zone-name - is invalid',
-          source: { pointer: '/data/attributes/time-zone-name' }
-        }
-      end
-
-      context 'when time_zone_name is empty string' do
-        let(:json_api_attributes) { super().merge 'time-zone-name': '' }
-
-        include_examples :returns_json_api_errors, errors: {
-          detail: 'time-zone-name - is invalid',
+          detail: 'time-zone-name - is not included in the list',
           source: { pointer: '/data/attributes/time-zone-name' }
         }
       end
@@ -329,9 +333,9 @@ RSpec.describe Api::Rest::Customer::V1::CdrExportsController, type: :request do
       end
     end
 
-    context 'with filter[time_zone_name]=europe/kyiv' do
-      let(:query_params) { { filter: { time_zone_name: 'europe/kyiv' } } }
-      let(:cdr_exports_attrs) { super().merge time_zone_name: 'europe/kyiv' }
+    context 'with filter[time_zone_name_eq]=Europe/Kyiv' do
+      let(:query_params) { { filter: { time_zone_name_eq: 'Europe/Kyiv' } } }
+      let(:cdr_exports_attrs) { super().merge time_zone_name: 'Europe/Kyiv' }
 
       include_examples :returns_json_api_collection do
         let(:json_api_collection_ids) { cdr_exports.map(&:uuid) }

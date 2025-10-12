@@ -5,27 +5,26 @@ RSpec.describe 'CDR exports', type: :feature do
 
   describe 'index' do
     subject do
-      visit cdr_exports_path(q: { time_zone_name_eq: 'europe/kyiv' })
+      visit cdr_exports_path(q: { time_zone_name_eq: 'Europe/Kyiv' })
     end
 
     let!(:account1) { create(:account, :with_customer) }
     let!(:account2) { create(:account, :with_customer) }
     let!(:cdr_exports) do
       [
-        create(:cdr_export, time_zone_name: 'europe/kyiv'),
-        create(:cdr_export, :completed, time_zone_name: 'europe/kyiv'),
-        create(:cdr_export, :failed, time_zone_name: 'europe/kyiv'),
-        create(:cdr_export, :deleted, time_zone_name: 'europe/kyiv'),
-        create(:cdr_export, customer_account: account1, time_zone_name: 'europe/kyiv'),
-        create(:cdr_export, :completed, customer_account: account1, time_zone_name: 'europe/kyiv'),
-        create(:cdr_export, :deleted, customer_account: account2, time_zone_name: 'europe/kyiv')
+        create(:cdr_export, time_zone_name: 'Europe/Kyiv'),
+        create(:cdr_export, :completed, time_zone_name: 'Europe/Kyiv'),
+        create(:cdr_export, :failed, time_zone_name: 'Europe/Kyiv'),
+        create(:cdr_export, :deleted, time_zone_name: 'Europe/Kyiv'),
+        create(:cdr_export, customer_account: account1, time_zone_name: 'Europe/Kyiv'),
+        create(:cdr_export, :completed, customer_account: account1, time_zone_name: 'Europe/Kyiv'),
+        create(:cdr_export, :deleted, customer_account: account2, time_zone_name: 'Europe/Kyiv')
       ]
     end
 
     it 'cdr export should be displayed' do
       subject
       expect(page).to have_table_row count: cdr_exports.size
-      expect(page).to have_select 'Time zone name', selected: 'europe/kyiv', visible: false
 
       cdr_exports.each do |cdr_export|
         within_table_row(id: cdr_export.id) do
@@ -49,7 +48,7 @@ RSpec.describe 'CDR exports', type: :feature do
       click_on 'Download'
     end
 
-    let(:cdr_export) { FactoryBot.create(:cdr_export, :completed, customer_account: account1, time_zone_name: 'europe/kyiv') }
+    let(:cdr_export) { FactoryBot.create(:cdr_export, :completed, customer_account: account1, time_zone_name: 'Europe/Kyiv') }
     let!(:account1) { create(:account, :with_customer) }
 
     it 'should setup X-Accel-Redirect header' do
