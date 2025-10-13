@@ -107,6 +107,8 @@ INSERT INTO codecs (id, name) VALUES (18, 'G726-16/8000');
 INSERT INTO codecs (id, name) VALUES (19, 'L16/8000');
 INSERT INTO codecs (id, name) VALUES (20, 'G722/8000');
 INSERT INTO codecs (id, name) VALUES (21, 'opus/48000/2');
+INSERT INTO codecs (id, name) VALUES (22, 'AMR/8000');
+INSERT INTO codecs (id, name) VALUES (23, 'AMR-WB/16000');
 
 --
 -- TOC entry 4431 (class 0 OID 0)
@@ -124,19 +126,8 @@ SELECT pg_catalog.setval('blacklists_id_seq', 1, true);
 --
 
 INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (19, 1, 6, 64, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (20, 1, 7, 27, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (21, 1, 8, 66, NULL, NULL);
 INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (22, 1, 9, 99, NULL, NULL);
 INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (23, 1, 10, 40, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (24, 1, 11, 93, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (25, 1, 12, 32, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (26, 1, 13, 8, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (27, 1, 14, 68, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (28, 1, 15, 23, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (29, 1, 16, 33, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (30, 1, 17, 59, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (31, 1, 18, 95, NULL, NULL);
-INSERT INTO codec_group_codecs (id, codec_group_id, codec_id, priority, dynamic_payload_type, format_parameters) VALUES (32, 1, 19, 6, NULL, NULL);
 
 
 --
