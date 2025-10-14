@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'prometheus/cdr_compaction_hook_processor'
+
 module Jobs
   class CdrCompaction < ::BaseJob
     include Memoizable
