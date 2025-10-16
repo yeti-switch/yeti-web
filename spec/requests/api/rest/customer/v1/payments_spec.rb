@@ -156,6 +156,26 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
       include_examples :responds_with_correct_records
     end
 
+    context 'with filter by rolled_back status' do
+      let(:json_api_request_query) do
+        { filter: { status_eq: 'rolled_back' } }
+      end
+      let(:expected_records) { payments.first(3) }
+
+      it 'returns 400 validation error' do
+        subject
+
+        expect(response_json[:errors]).to contain_exactly(
+          {
+            code: '107',
+            detail: 'rolled_back is not a valid value for status_eq.',
+            status: '400',
+            title: 'Invalid filter value'
+          }
+        )
+      end
+    end
+
     context 'with filter status_not_eq' do
       let(:json_api_request_query) do
         { filter: { status_not_eq: 'pending' } }
@@ -244,6 +264,21 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
 
       include_examples :responds_with_correct_records
     end
+
+    context 'when "rolled back" payment should be excluded' do
+      let!(:payments) do
+        [
+          FactoryBot.create(:payment, :completed, account: accounts.first),
+          FactoryBot.create(:payment, :pending, account: accounts.first),
+          FactoryBot.create(:payment, :canceled, account: accounts.first)
+        ]
+      end
+      let(:expected_records) { payments }
+
+      before { FactoryBot.create(:payment, :rolled_back, account: accounts.first) }
+
+      it_behaves_like :responds_with_correct_records
+    end
   end
 
   describe 'GET /api/rest/customer/v1/payments/{id}' do
@@ -264,7 +299,8 @@ RSpec.describe Api::Rest::Customer::V1::PaymentsController, type: :request do
                                             'created-at': payment.created_at.iso8601(3),
                                             status: payment.status,
                                             'type-name': payment.type_name,
-                                            'balance-before-payment': anything
+                                            'balance-before-payment': anything,
+                                            'rolledback-at': nil
                                           },
                                           relationships: {
                                             account: {

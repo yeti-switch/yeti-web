@@ -9,6 +9,7 @@
 #  balance_before_payment :decimal(, )
 #  notes                  :string
 #  private_notes          :string
+#  rolledback_at          :timestamptz
 #  uuid                   :uuid             not null
 #  created_at             :timestamptz      not null
 #  account_id             :integer(4)       not null
@@ -37,6 +38,10 @@ FactoryBot.define do
       record.reload # to populate uuid
     end
 
+    trait :completed do
+      status_id { Payment::CONST::STATUS_ID_COMPLETED }
+    end
+
     trait :pending do
       type_id { Payment::CONST::TYPE_ID_CRYPTOMUS }
       status_id { Payment::CONST::STATUS_ID_PENDING }
@@ -45,6 +50,10 @@ FactoryBot.define do
     trait :canceled do
       type_id { Payment::CONST::TYPE_ID_CRYPTOMUS }
       status_id { Payment::CONST::STATUS_ID_CANCELED }
+    end
+
+    trait :rolled_back do
+      status_id { Payment::CONST::STATUS_ID_ROLLED_BACK }
     end
 
     trait :cryptomus_completed do

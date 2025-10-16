@@ -40456,7 +40456,8 @@ CREATE TABLE billing.payments (
     private_notes character varying,
     status_id smallint DEFAULT 20 NOT NULL,
     type_id smallint DEFAULT 20 NOT NULL,
-    balance_before_payment numeric
+    balance_before_payment numeric,
+    rolledback_at timestamp with time zone
 );
 
 
@@ -50412,6 +50413,7 @@ INSERT INTO "public"."schema_migrations" (version) VALUES
 ('20251012194108'),
 ('20251012143304'),
 ('20251012130757'),
+('20251011072900'),
 ('20251010082720'),
 ('20251006091708'),
 ('20251001135838'),

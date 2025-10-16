@@ -27,7 +27,8 @@ RSpec.describe 'Export Payments', type: :feature do
         ['Status', item.status],
         ['Type name', item.type_name],
         ['Created at', item.created_at.to_s],
-        ['Balance before payment', item.balance_before_payment.to_s]
+        ['Balance before payment', item.balance_before_payment.to_s],
+        ['Rolledback at', item.rolledback_at.to_s]
       ]
     )
   end

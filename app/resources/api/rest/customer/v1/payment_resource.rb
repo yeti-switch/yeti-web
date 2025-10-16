@@ -8,7 +8,8 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
              :status,
              :type_name,
              :created_at,
-             :balance_before_payment
+             :balance_before_payment,
+             :rolledback_at
 
   has_one :account, foreign_key_on: :related
 
@@ -20,8 +21,9 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
   ransack_filter :notes, type: :string
   ransack_filter :amount, type: :number
   ransack_filter :created_at, type: :datetime
+  ransack_filter :rolledback_at, type: :datetime
   association_uuid_filter :account_id, class_name: 'Account'
-  ransack_filter :status, type: :enum, collection: Payment::CONST::STATUS_IDS.values
+  ransack_filter :status, type: :enum, collection: Payment::CONST::STATUS_IDS.except(Payment::CONST::STATUS_ID_ROLLED_BACK).values
   ransack_filter :type_name, type: :enum, collection: Payment::CONST::TYPE_IDS.values
 
   def self.apply_allowed_accounts(records, options)
@@ -33,5 +35,9 @@ class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseRe
 
   def self.sortable_fields(_context)
     %i[amount notes created_at]
+  end
+
+  def self.records(options = {})
+    super(options).where.not(status_id: Payment::CONST::STATUS_ID_ROLLED_BACK)
   end
 end

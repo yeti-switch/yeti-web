@@ -9,7 +9,12 @@ RSpec.describe Api::Rest::Admin::PaymentsController, type: :request do
     end
 
     let!(:payments) do
-      FactoryBot.create_list(:payment, 2)
+      [
+        FactoryBot.create(:payment, :pending),
+        FactoryBot.create(:payment, :canceled),
+        FactoryBot.create(:payment, :completed),
+        FactoryBot.create(:payment, :rolled_back)
+      ]
     end
 
     include_examples :jsonapi_responds_with_pagination_links
