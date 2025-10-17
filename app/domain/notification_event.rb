@@ -136,7 +136,7 @@ class NotificationEvent
     data = account.attributes.merge(
       balance_low_threshold: account.balance_notification_setting.low_threshold,
       balance_high_threshold: account.balance_notification_setting.high_threshold,
-      send_balance_notifications_to: account.balance_notification_setting.send_to
+      send_balance_notifications_to: account_contacts(account).map(&:email).compact
     )
     data.to_json
   end
@@ -145,7 +145,7 @@ class NotificationEvent
     account.attributes.merge(
       balance_low_threshold: account.balance_notification_setting.low_threshold,
       balance_high_threshold: account.balance_notification_setting.high_threshold,
-      send_balance_notifications_to: account.balance_notification_setting.send_to
+      send_balance_notifications_to: account_contacts(account).map(&:email).compact
     )
   end
 

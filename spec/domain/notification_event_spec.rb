@@ -265,7 +265,7 @@ RSpec.describe NotificationEvent do
       data = account.attributes.merge(
         balance_low_threshold: account.balance_notification_setting.low_threshold,
         balance_high_threshold: account.balance_notification_setting.high_threshold,
-        send_balance_notifications_to: account.balance_notification_setting.send_to
+        send_balance_notifications_to: account.balance_notification_setting.contacts.map(&:email).compact
       )
       data.to_json
     end
@@ -273,11 +273,26 @@ RSpec.describe NotificationEvent do
       account.attributes.merge(
         balance_low_threshold: account.balance_notification_setting.low_threshold,
         balance_high_threshold: account.balance_notification_setting.high_threshold,
-        send_balance_notifications_to: account.balance_notification_setting.send_to
+        send_balance_notifications_to: account.balance_notification_setting.contacts.map(&:email).compact
       )
     end
 
     include_examples :sends_account_threshold_event_emails
+
+    context 'when account send_balance_notifications_to contains non-existing id' do
+      let(:account_attrs) { { send_balance_notifications_to: contacts.map(&:id) + [999_999] } }
+
+      it 'skips missing contacts when building event payload' do
+        event_subscription.update! url: 'http://example.com/cb'
+        allow(NotificationEvent).to receive(:event_time).and_return('stub')
+        expect { subject }.to have_enqueued_job(Worker::SendHttpJob)
+
+        job = enqueued_jobs.find { |j| j[:job] == Worker::SendHttpJob }
+        body = job[:args][2]
+        parsed = JSON.parse(body)
+        expect(parsed['event_data']['send_balance_notifications_to']).to match_array(contacts.map(&:email))
+      end
+    end
   end
 
   describe '.high_threshold_reached' do
@@ -320,7 +335,7 @@ RSpec.describe NotificationEvent do
       data = account.attributes.merge(
         balance_low_threshold: account.balance_notification_setting.low_threshold,
         balance_high_threshold: account.balance_notification_setting.high_threshold,
-        send_balance_notifications_to: account.balance_notification_setting.send_to
+        send_balance_notifications_to: account.balance_notification_setting.contacts.map(&:email).compact
       )
       data.to_json
     end
@@ -328,7 +343,7 @@ RSpec.describe NotificationEvent do
       account.attributes.merge(
         balance_low_threshold: account.balance_notification_setting.low_threshold,
         balance_high_threshold: account.balance_notification_setting.high_threshold,
-        send_balance_notifications_to: account.balance_notification_setting.send_to
+        send_balance_notifications_to: account.balance_notification_setting.contacts.map(&:email).compact
       )
     end
 
@@ -375,7 +390,7 @@ RSpec.describe NotificationEvent do
       data = account.attributes.merge(
         balance_low_threshold: account.balance_notification_setting.low_threshold,
         balance_high_threshold: account.balance_notification_setting.high_threshold,
-        send_balance_notifications_to: account.balance_notification_setting.send_to
+        send_balance_notifications_to: account.balance_notification_setting.contacts.map(&:email).compact
       )
       data.to_json
     end
@@ -383,7 +398,7 @@ RSpec.describe NotificationEvent do
       account.attributes.merge(
         balance_low_threshold: account.balance_notification_setting.low_threshold,
         balance_high_threshold: account.balance_notification_setting.high_threshold,
-        send_balance_notifications_to: account.balance_notification_setting.send_to
+        send_balance_notifications_to: account.balance_notification_setting.contacts.map(&:email).compact
       )
     end
 
@@ -430,7 +445,7 @@ RSpec.describe NotificationEvent do
       data = account.attributes.merge(
         balance_low_threshold: account.balance_notification_setting.low_threshold,
         balance_high_threshold: account.balance_notification_setting.high_threshold,
-        send_balance_notifications_to: account.balance_notification_setting.send_to
+        send_balance_notifications_to: account.balance_notification_setting.contacts.map(&:email).compact
       )
       data.to_json
     end
@@ -438,7 +453,7 @@ RSpec.describe NotificationEvent do
       account.attributes.merge(
         balance_low_threshold: account.balance_notification_setting.low_threshold,
         balance_high_threshold: account.balance_notification_setting.high_threshold,
-        send_balance_notifications_to: account.balance_notification_setting.send_to
+        send_balance_notifications_to: account.balance_notification_setting.contacts.map(&:email).compact
       )
     end
 
