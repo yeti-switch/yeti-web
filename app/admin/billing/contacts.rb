@@ -34,11 +34,17 @@ ActiveAdmin.register Billing::Contact do
     column :notes
   end
 
-  filter :id
-  contractor_filter :contractor_id_eq
-  filter :admin_user, input_html: { class: 'chosen' }
-  filter :email
-  filter :notes
+  filters do
+    filter :id
+    filter :contractor_id_eq, label: 'Contractor' do
+      as :tom_select
+      ajax resource: 'Contractor'
+      ajax_params q: { s: :name }
+    end
+    filter :admin_user, as: :tom_select
+    filter :email
+    filter :notes
+  end
 
   show do |_s|
     attributes_table do
@@ -55,8 +61,8 @@ ActiveAdmin.register Billing::Contact do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
-      f.contractor_input :contractor_id
-      f.input :admin_user, input_html: { class: 'chosen' }
+      f.input :contractor_id, as: :tom_select, ajax: { resource: 'Contractor' }
+      f.input :admin_user, as: :tom_select
       f.input :email
       f.input :notes
     end

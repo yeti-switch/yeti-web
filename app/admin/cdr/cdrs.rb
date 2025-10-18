@@ -59,123 +59,127 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   scope :bad_routing, show_count: false
   scope :package_billing, show_count: false
 
-  filter :id
-  filter :routing_tag_ids_include,
-         as: :select,
-         collection: proc { tag_action_value_options },
-         label: 'With routing tag',
-         input_html: { class: 'chosen' }
-  filter :time_start, as: :date_time_range
+  filters do
+    filter :id
+    filter :routing_tag_ids_include, label: 'With routing tag' do
+      as :tom_select
+      collection proc { tag_action_value_options }
+    end
+    filter :time_start, as: :date_time_range
 
-  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
-  account_filter :customer_acc_id_eq, label: 'Customer account'
+    filter :customer_id_eq, label: 'Customer' do
+      as :tom_select
+      ajax resource: 'Contractor'
+      ajax_params q: { customer_eq: true, s: 'name ask' }
+    end
+    filter :customer_acc_id_eq, label: 'Customer account' do
+      as :tom_select
+      ajax resource: 'Account'
+      ajax_params q: { s: 'name asc' }
+    end
 
-  contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
-  account_filter :vendor_acc_id_eq, label: 'Vendor account'
+    filter :vendor_id_eq, label: 'Vendor' do
+      as :tom_select
+      ajax resource: 'Contractor'
+      ajax_params q: { vendor_eq: true }
+    end
+    filter :vendor_acc_id_eq, label: 'Vendor account' do
+      as :tom_select
+      ajax resource: 'Account'
+    end
 
-  association_ajax_filter :customer_auth_id_eq,
-                          label: 'Customer Auth',
-                          scope: -> { CustomersAuth.order(:name) },
-                          path: '/customers_auths/search'
-  filter :src_prefix_routing, filters: %i[equals contains starts_with ends_with]
-  filter :src_area, collection: proc { Routing::Area.select(%i[id name]) }, input_html: { class: 'chosen' }
-  filter :dst_prefix_routing, filters: %i[equals contains starts_with ends_with]
-  filter :dst_area, collection: proc { Routing::Area.select(%i[id name]) }, input_html: { class: 'chosen' }
+    filter :customer_auth_id_eq, label: 'Customer Auth' do
+      as :tom_select
+      ajax resource: 'CustomersAuth'
+      ajax_params q: { s: 'name asc' }
+    end
+    filter :src_prefix_routing, filters: %i[equals contains starts_with ends_with]
+    filter :src_area, collection: proc { Routing::Area.select(%i[id name]) }, as: :tom_select
+    filter :dst_prefix_routing, filters: %i[equals contains starts_with ends_with]
+    filter :dst_area, collection: proc { Routing::Area.select(%i[id name]) }, as: :tom_select
 
-  country_filter :src_country_id_eq, label: 'SRC Country'
-  network_filter :src_network_id_eq, label: 'SRC Network'
+    country_filter :src_country_id_eq, label: 'SRC Country', path_params: { q: { s: 'name asc' } }
+    network_filter :src_network_id_eq, label: 'SRC Network', path_params: { q: { s: 'name asc' } }
 
-  country_filter :dst_country_id_eq, label: 'DST Country'
-  network_filter :dst_network_id_eq, label: 'DST Network'
+    country_filter :dst_country_id_eq, label: 'DST Country', path_params: { q: { s: 'name asc' } }
+    network_filter :dst_network_id_eq, label: 'DST Network', path_params: { q: { s: 'name asc' } }
 
-  filter :status, as: :select, collection: proc { [['FAILURE', false], ['SUCCESS', true]] }
-  filter :duration
-  filter :is_last_cdr, as: :select, collection: proc { [['Yes', true], ['No', false]] }
+    filter :status, as: :tom_select, collection: proc { [['FAILURE', false], ['SUCCESS', true]] }
+    filter :duration
+    boolean_filter :is_last_cdr
 
-  filter :dump_level_id_eq,
-         label: 'Dump level',
-         as: :select,
-         collection: Cdr::Cdr::DUMP_LEVELS.invert,
-         if: proc { authorized?(:dump) }
+    filter :dump_level_id_eq, label: 'Dump level', if: proc { authorized?(:dump) } do
+      as :tom_select
+      collection Cdr::Cdr::DUMP_LEVELS.invert
+    end
 
-  filter :disconnect_initiator_id_eq, label: 'Disconnect initiator', as: :select,
-                                      collection: Cdr::Cdr::DISCONNECT_INITIATORS.invert
+    filter :disconnect_initiator_id_eq, label: 'Disconnect initiator' do
+      as :tom_select
+      collection Cdr::Cdr::DISCONNECT_INITIATORS.invert
+    end
 
-  filter :orig_gw_id_eq,
-         as: :select,
-         label: 'Orig GW',
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:orig_gw_id_eq]
-           resource_id ? Gateway.where(id: resource_id) : []
-         },
-         input_html: {
-           class: 'chosen-ajax',
-           'data-path': '/gateways/search?q[allow_origination_eq]=true&q[ordered_by]=name'
-         }
+    filter :orig_gw_id_eq, label: 'Orig GW' do
+      as :tom_select
+      ajax resource: 'Gateway'
+    end
 
-  filter :term_gw_id_eq,
-         as: :select,
-         label: 'Term GW',
-         collection: proc {
-           resource_id = params.fetch(:q, {})[:term_gw_id_eq]
-           resource_id ? Gateway.where(id: resource_id) : []
-         },
-         input_html: {
-           class: 'chosen-ajax',
-           'data-path': '/gateways/search?q[allow_termination_eq]=true&q[ordered_by]=name'
-         }
+    filter :term_gw_id_eq, label: 'Term GW' do
+      as :tom_select
+      ajax resource: 'Gateway'
+    end
 
-  filter :routing_plan, collection: proc { Routing::RoutingPlan.select(%i[id name]) }, input_html: { class: 'chosen' }
-  filter :routing_group, collection: proc { Routing::RoutingGroup.select(%i[id name]) }, input_html: { class: 'chosen' }
-  filter :rateplan, collection: proc { Routing::Rateplan.select(%i[id name]) }, input_html: { class: 'chosen' }
+    filter :routing_plan, collection: proc { Routing::RoutingPlan.select(%i[id name]) }, as: :tom_select
+    filter :routing_group, collection: proc { Routing::RoutingGroup.select(%i[id name]) }, as: :tom_select
+    filter :rateplan, collection: proc { Routing::Rateplan.select(%i[id name]) }, as: :tom_select
 
-  filter :internal_disconnect_code
-  filter :internal_disconnect_reason, filters: %i[equals contains starts_with ends_with]
-  filter :lega_disconnect_code
-  filter :lega_disconnect_reason, filters: %i[equals contains starts_with ends_with]
-  filter :lega_q850_cause_eq, label: 'LegA Q.850 cause', as: :select, collection: System::Q850::CAUSES.invert, input_html: { class: 'chosen' }
+    filter :internal_disconnect_code
+    filter :internal_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+    filter :lega_disconnect_code
+    filter :lega_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+    filter :lega_q850_cause_eq, label: 'LegA Q.850 cause', collection: System::Q850::CAUSES.invert, as: :tom_select
 
-  filter :legb_disconnect_code
-  filter :legb_disconnect_reason, filters: %i[equals contains starts_with ends_with]
-  filter :legb_q850_cause_eq, label: 'LegB Q.850 cause', as: :select, collection: System::Q850::CAUSES.invert, input_html: { class: 'chosen' }
+    filter :legb_disconnect_code
+    filter :legb_disconnect_reason, filters: %i[equals contains starts_with ends_with]
+    filter :legb_q850_cause_eq, label: 'LegB Q.850 cause', collection: System::Q850::CAUSES.invert, as: :tom_select
 
-  filter :src_prefix_in, as: :string_eq
-  filter :dst_prefix_in, as: :string_eq
-  filter :src_prefix_out, filters: %i[equals contains starts_with ends_with]
-  filter :dst_prefix_out, filters: %i[equals contains starts_with ends_with]
-  filter :lrn, filters: %i[equals contains starts_with ends_with]
-  filter :diversion_in, as: :string_eq
-  filter :diversion_out, as: :string_eq
-  filter :src_name_in, as: :string_eq
-  filter :src_name_out, as: :string_eq
-  filter :node, input_html: { class: 'chosen' }
-  filter :pop, input_html: { class: 'chosen' }
-  filter :local_tag, filters: %i[equals contains starts_with ends_with]
-  filter :legb_local_tag, filters: %i[equals contains starts_with ends_with]
-  filter :orig_call_id, as: :string, filters: %i[equals contains starts_with ends_with]
-  filter :term_call_id, as: :string, filters: %i[equals contains starts_with ends_with]
-  filter :routing_attempt
-  filter :customer_price
-  filter :vendor_price
-  filter :routing_delay
-  filter :pdd
-  filter :rtt
-  filter :p_charge_info_in, as: :string_eq
-  filter :uuid_equals, label: 'UUID'
-  filter :auth_orig_ip_covers,
-         as: :string,
-         input_html: { class: 'search_filter_string' },
-         label: I18n.t('activerecord.attributes.cdr.auth_orig_ip')
-  filter :sign_orig_ip, filters: %i[equals contains starts_with ends_with]
-  filter :sign_orig_local_ip, filters: %i[equals contains starts_with ends_with]
-  filter :sign_term_local_ip, filters: %i[equals contains starts_with ends_with]
-  filter :sign_term_ip, filters: %i[equals contains starts_with ends_with]
-  filter :customer_auth_external_type_eq, as: :string, label: 'CUSTOMER AUTH EXTERNAL TYPE'
-  filter :lega_ss_status_id_eq, label: 'LegA SS status', as: :select, collection: Cdr::Cdr::SS_STATUSES.invert, input_html: { class: 'chosen' }
-  filter :legb_ss_status_id_eq, label: 'LegB SS status', as: :select, collection: Cdr::Cdr::SS_STATUSES.invert, input_html: { class: 'chosen' }
+    filter :src_prefix_in, as: :string_eq
+    filter :dst_prefix_in, as: :string_eq
+    filter :src_prefix_out, filters: %i[equals contains starts_with ends_with]
+    filter :dst_prefix_out, filters: %i[equals contains starts_with ends_with]
+    filter :lrn, filters: %i[equals contains starts_with ends_with]
+    filter :diversion_in, as: :string_eq
+    filter :diversion_out, as: :string_eq
+    filter :src_name_in, as: :string_eq
+    filter :src_name_out, as: :string_eq
+    filter :node, as: :tom_select
+    filter :pop, as: :tom_select
+    filter :local_tag, filters: %i[equals contains starts_with ends_with]
+    filter :legb_local_tag, filters: %i[equals contains starts_with ends_with]
+    filter :orig_call_id, as: :string, filters: %i[equals contains starts_with ends_with]
+    filter :term_call_id, as: :string, filters: %i[equals contains starts_with ends_with]
+    filter :routing_attempt
+    filter :customer_price
+    filter :vendor_price
+    filter :routing_delay
+    filter :pdd
+    filter :rtt
+    filter :p_charge_info_in, as: :string_eq
+    filter :uuid_equals, label: 'UUID'
+    filter :auth_orig_ip_covers,
+           as: :string,
+           input_html: { class: 'search_filter_string' },
+           label: I18n.t('activerecord.attributes.cdr.auth_orig_ip')
+    filter :sign_orig_ip, filters: %i[equals contains starts_with ends_with]
+    filter :sign_orig_local_ip, filters: %i[equals contains starts_with ends_with]
+    filter :sign_term_local_ip, filters: %i[equals contains starts_with ends_with]
+    filter :sign_term_ip, filters: %i[equals contains starts_with ends_with]
+    filter :customer_auth_external_type_eq, as: :string, label: 'CUSTOMER AUTH EXTERNAL TYPE'
+    filter :lega_ss_status_id_eq, label: 'LegA SS status', collection: Cdr::Cdr::SS_STATUSES.invert, as: :tom_select
+    filter :legb_ss_status_id_eq, label: 'LegB SS status', collection: Cdr::Cdr::SS_STATUSES.invert, as: :tom_select
 
-  acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
-  filter :customer_external_id, label: 'Customer external ID', as: :numeric
+    acts_as_filter_by_routing_tag_ids routing_tag_ids_covers: false
+    filter :customer_external_id, label: 'Customer external ID', as: :numeric
+  end
 
   member_action :dump, method: :get do
     Cdr::DownloadPcap.call(cdr: resource, response_object: response)

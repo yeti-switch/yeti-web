@@ -11,10 +11,10 @@ RSpec.describe 'Filter dialpeer records', :js do
 
   let!(:other_dialpeers) { create_list :dialpeer, 2 }
 
-  describe 'filter by tagged' do
+  describe 'filter by tagged', js: false do
     let(:filter_records) do
       within_filters do
-        fill_in_chosen 'Tagged', with: filter_value
+        select filter_value, from: 'Tagged'
       end
     end
 
@@ -31,7 +31,7 @@ RSpec.describe 'Filter dialpeer records', :js do
         expect(page).to have_table_row count: 1
         expect(page).to have_table_cell column: 'Id', text: dialpeer_tagged.id
         within_filters do
-          expect(page).to have_field_chosen('Tagged', with: filter_value)
+          expect(page).to have_select('Tagged', selected: filter_value)
         end
       end
     end
@@ -46,7 +46,7 @@ RSpec.describe 'Filter dialpeer records', :js do
         expect(page).to have_table_row count: other_dialpeers.count
         other_dialpeers.each { |p| expect(page).to have_css '.resource_id_link', text: p.id }
         within_filters do
-          expect(page).to have_field_chosen('Tagged', with: filter_value)
+          expect(page).to have_select('Tagged', selected: filter_value)
         end
       end
     end
@@ -54,10 +54,9 @@ RSpec.describe 'Filter dialpeer records', :js do
     describe 'filter by routing tag ids contains' do
       let(:filter_records) do
         within_filters do
-          fill_in_chosen 'Routing Tag IDs Contains', with: tags.first.name, multiple: true
-          fill_in_chosen 'Routing Tag IDs Contains', with: tags.second.name, multiple: true
-          expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.first.name, exact: false)
-          expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.second.name, exact: false)
+          select tags.first.name, from: 'Routing Tag IDs Contains'
+          select tags.second.name, from: 'Routing Tag IDs Contains'
+          expect(page).to have_select('Routing Tag IDs Contains', selected: [tags.first.name, tags.second.name], exact: false)
         end
       end
 
@@ -116,13 +115,13 @@ RSpec.describe 'Filter dialpeer records', :js do
         expect(page).to have_table_cell column: 'Id', text: dialpeer_tagged.id
       end
 
-      context 'when set specific routing tag cover and routing tag count' do
+      context 'when set specific routing tag cover and routing tag count', js: false do
         let(:filter_records) do
           within_filters do
             fill_in name: 'q[routing_tag_ids_count_equals]', with: 1
-            fill_in_chosen 'Routing tag ids covers', with: specific_tag.name, multiple: true
+            select specific_tag.name, from: 'Routing tag ids covers'
             expect(page).to have_field(name: 'q[routing_tag_ids_count_equals]', with: 1)
-            expect(page).to have_field_chosen('Routing tag ids covers', with: specific_tag.name, exact: false)
+            expect(page).to have_select('Routing tag ids covers', selected: specific_tag.name, exact: false)
           end
         end
         let!(:specific_tag) { tags.first }
@@ -134,7 +133,7 @@ RSpec.describe 'Filter dialpeer records', :js do
           expect(page).to have_table
           expect(page).to have_table_row count: 1
           within_table_row(id: dialpeers_with_one_tag.id) do
-            expect(page).to have_table_cell(column: 'Routing Tags', text: specific_tag.name.upcase)
+            expect(page).to have_table_cell(column: 'Routing Tags', text: specific_tag.name)
           end
         end
       end

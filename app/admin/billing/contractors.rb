@@ -2,6 +2,11 @@
 
 ActiveAdmin.register Contractor do
   menu parent: 'Billing', priority: 2
+  searchable_select_options(
+    scope: ->(params) { Contractor.ransack(params[:q]).result },
+    text_attribute: :name,
+    display_text: ->(record) { record.display_name }
+  )
   search_support!
   acts_as_audit
   acts_as_clone
@@ -98,21 +103,23 @@ ActiveAdmin.register Contractor do
       f.input :description
       f.input :address
       f.input :phones
-      f.input :smtp_connection
+      f.input :smtp_connection, as: :tom_select, label: 'SMTP Connection'
     end
     f.actions
   end
 
-  filter :id
-  filter :name
-  filter :address
-  filter :description
-  filter :phones
-  filter :external_id
-  filter :smtp_connection, input_html: { class: 'chosen' }, collection: proc { System::SmtpConnection.pluck(:name, :id) }
-  boolean_filter :enabled
-  boolean_filter :vendor
-  boolean_filter :customer
+  filters do
+    filter :id
+    filter :name
+    filter :address
+    filter :description
+    filter :phones
+    filter :external_id
+    filter :smtp_connection, as: :tom_select, collection: proc { System::SmtpConnection.pluck(:name, :id) }
+    boolean_filter :enabled
+    boolean_filter :vendor
+    boolean_filter :customer
+  end
 
   sidebar :links, only: %i[show edit] do
     ul do

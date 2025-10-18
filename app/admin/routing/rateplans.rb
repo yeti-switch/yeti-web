@@ -4,6 +4,8 @@ ActiveAdmin.register Routing::Rateplan do
   menu parent: 'Routing', label: 'Rateplans', priority: 40
   decorate_with RateplanDecorator
 
+  searchable_select_options scope: Routing::Rateplan, text_attribute: :name
+
   acts_as_audit
   acts_as_safe_destroy
 

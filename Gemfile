@@ -71,6 +71,8 @@ gem 'chosen-rails', '1.5.2', require: 'chosen-rails/engine'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-tablesorter'
+gem 'tom-select-rails'
+gem 'activeadmin-tom_select', path: 'engines/activeadmin-tom_select'
 
 gem 'mini_racer'
 gem 'rails-html-sanitizer', '>= 1.6.1'

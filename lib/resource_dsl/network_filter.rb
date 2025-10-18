@@ -9,13 +9,12 @@ module ResourceDSL
     #   :input_html [Hash] options will be passed directly to html builder of input node.
     #
     def network_filter(name, label: 'Network', **options)
-      association_ajax_filter(
-        name,
-        label: label,
-        scope: -> { System::Network.order(:name) },
-        path: '/system_networks/search',
-        **options
-      )
+      filter name, label: do
+        ajax resource: 'System::Network'
+        as :tom_select
+        ajax_params options[:path_params] if options[:path_params].present?
+        input_html options[:input_html] if options[:input_html].present?
+      end
     end
   end
 end

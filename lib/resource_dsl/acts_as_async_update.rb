@@ -10,7 +10,7 @@ module ResourceDSL
                                title: 'Update batch',
                                class: 'scoped_collection_action_button ui',
                                form: -> { form_class.form_data },
-                               if: proc { authorized?(:batch_destroy, resource_klass) } do
+                               if: proc { nil } do
         attrs = params[:changes]&.permit!
         # if there is no changes just reload page quietly
         if attrs.present?

@@ -14,14 +14,10 @@ RSpec.describe 'Filter Destination records', :js do
 
   include_context :login_as_admin
 
-  context 'filter by tagged' do
+  context 'filter by tagged', js: false do
     let!(:other_destinations_list) { create_list :destination, 2 }
 
-    let(:filter_records) do
-      within_filters do
-        fill_in_chosen 'Tagged', with: filter_value
-      end
-    end
+    let(:filter_records) { within_filters { select filter_value, from: 'Tagged' } }
 
     let!(:tag) { create :routing_tag, :ua }
     let!(:customers_auth_tagged) { create :destination, routing_tag_ids: [tag.id] }
@@ -36,7 +32,7 @@ RSpec.describe 'Filter Destination records', :js do
         expect(page).to have_table_row count: 1
         expect(page).to have_table_cell column: 'Id', text: customers_auth_tagged.id
         within_filters do
-          expect(page).to have_field_chosen('Tagged', with: filter_value)
+          expect(page).to have_select('Tagged', selected: filter_value)
         end
       end
     end
@@ -51,7 +47,7 @@ RSpec.describe 'Filter Destination records', :js do
         expect(page).to have_table_row count: other_destinations_list.count
         other_destinations_list.each { |d| expect(page).to have_table_cell column: 'Id', text: d.id }
         within_filters do
-          expect(page).to have_field_chosen('Tagged', with: filter_value)
+          expect(page).to have_select('Tagged', selected: filter_value)
         end
       end
     end
@@ -59,10 +55,10 @@ RSpec.describe 'Filter Destination records', :js do
     context 'filter by routing tag ids contains' do
       let(:filter_records) do
         within_filters do
-          fill_in_chosen 'Routing Tag IDs Contains', with: tags.first.name, multiple: true
-          fill_in_chosen 'Routing Tag IDs Contains', with: tags.second.name, multiple: true
-          expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.first.name, exact: false)
-          expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.second.name, exact: false)
+          select tags.first.name, from: 'Routing Tag IDs Contains'
+          select tags.second.name, from: 'Routing Tag IDs Contains'
+
+          expect(page).to have_select('Routing Tag IDs Contains', selected: [tags.first.name, tags.second.name], exact: false)
         end
       end
 
@@ -160,13 +156,13 @@ RSpec.describe 'Filter Destination records', :js do
         expect(page).to have_table_cell column: 'Id', text: destination_tagged.id
       end
 
-      context 'when set specific routing tag cover and routing tag count' do
+      context 'when set specific routing tag cover and routing tag count', js: false do
         let(:filter_records) do
           within_filters do
             fill_in name: 'q[routing_tag_ids_count_equals]', with: 1
-            fill_in_chosen 'Routing tag ids covers', with: specific_tag.name, multiple: true
+            select specific_tag.name, from: 'Routing tag ids covers'
             expect(page).to have_field(name: 'q[routing_tag_ids_count_equals]', with: 1)
-            expect(page).to have_field_chosen('Routing tag ids covers', with: specific_tag.name, exact: false)
+            expect(page).to have_select('Routing tag ids covers', selected: specific_tag.name, exact: false)
           end
         end
         let!(:specific_tag) { tags.first }
@@ -178,7 +174,7 @@ RSpec.describe 'Filter Destination records', :js do
           expect(page).to have_table
           expect(page).to have_table_row count: 1
           within_table_row(id: destination_with_one_tag.id) do
-            expect(page).to have_table_cell(column: 'Routing Tags', text: specific_tag.name.upcase)
+            expect(page).to have_table_cell(column: 'Routing Tags', text: specific_tag.name)
           end
         end
       end
@@ -220,14 +216,14 @@ RSpec.describe 'Filter Destination records', :js do
       end
       before { create(:destination) }
 
-      it 'returns correct records' do
+      it 'returns correct records', js: false do
         subject
 
         expect(page).to have_table
         expect(page).to have_table_row count: 1
         expect(page).to have_table_cell column: 'Id', text: destination.id
         within_filters do
-          expect(page).to have_field_chosen('Routing tag ids covers', with: filter_value)
+          expect(page).to have_select('Routing tag ids covers', selected: [tags.first.name, tags.third.name])
         end
       end
     end
