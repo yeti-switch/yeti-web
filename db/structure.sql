@@ -44850,7 +44850,8 @@ CREATE TABLE sys.api_access (
     allow_listen_recording boolean DEFAULT false NOT NULL,
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
-    provision_gateway_id integer
+    provision_gateway_id integer,
+    allow_outgoing_numberlists_ids integer[] DEFAULT '{}'::integer[] NOT NULL
 );
 
 
@@ -50408,6 +50409,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251013133006'),
 ('20251013103950'),
 ('20251012194108'),
 ('20251012143304'),

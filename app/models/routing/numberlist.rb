@@ -97,6 +97,16 @@ class Routing::Numberlist < ApplicationRecord
 
   scope :search_for, ->(term) { where("numberlists.name || ' | ' || numberlists.id::varchar ILIKE ?", "%#{term}%") }
 
+  scope :where_customer, lambda { |id|
+    numberlist_ids = CustomersAuth.where(customer_id: id).pluck(:dst_numberlist_id)
+    where(id: numberlist_ids)
+  }
+
+  scope :where_account, lambda { |id|
+    numberlist_ids = CustomersAuth.where(account_id: id).pluck(:dst_numberlist_id)
+    where(id: numberlist_ids)
+  }
+
   def display_name
     "#{name} | #{id}"
   end

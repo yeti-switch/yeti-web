@@ -15,7 +15,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
                 :formtastic_allowed_ips,
                 :allow_listen_recording,
                 :provision_gateway_id,
-                account_ids: []
+                account_ids: [],
+                allow_outgoing_numberlists_ids: []
 
   includes :customer, :provision_gateway
 
@@ -95,6 +96,8 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
                                  'data-path-params': { 'q[contractor_id_eq]': '.customer_id-input' }.to_json,
                                  'data-required-param': 'q[contractor_id_eq]'
                                }
+
+      f.input :allow_outgoing_numberlists_ids
     end
     f.actions
   end

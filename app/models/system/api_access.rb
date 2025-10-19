@@ -4,16 +4,17 @@
 #
 # Table name: sys.api_access
 #
-#  id                     :integer(4)       not null, primary key
-#  account_ids            :integer(4)       default([]), not null, is an Array
-#  allow_listen_recording :boolean          default(FALSE), not null
-#  allowed_ips            :inet             default(["\"0.0.0.0/0\"", "\"::/0\""]), not null, is an Array
-#  login                  :string           not null
-#  password_digest        :string           not null
-#  created_at             :timestamptz
-#  updated_at             :timestamptz
-#  customer_id            :integer(4)       not null
-#  provision_gateway_id   :integer(4)
+#  id                             :integer(4)       not null, primary key
+#  account_ids                    :integer(4)       default([]), not null, is an Array
+#  allow_listen_recording         :boolean          default(FALSE), not null
+#  allow_outgoing_numberlists_ids :integer(4)       default([]), not null, is an Array
+#  allowed_ips                    :inet             default(["\"0.0.0.0/0\"", "\"::/0\""]), not null, is an Array
+#  login                          :string           not null
+#  password_digest                :string           not null
+#  created_at                     :timestamptz
+#  updated_at                     :timestamptz
+#  customer_id                    :integer(4)       not null
+#  provision_gateway_id           :integer(4)
 #
 # Indexes
 #
