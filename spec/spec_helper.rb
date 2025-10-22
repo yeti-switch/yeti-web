@@ -90,7 +90,8 @@ RSpec.configure do |config|
     'class4.routing_tag_modes',
     'sys.timezones',
     'sys.jobs',
-    'sys.states'
+    'sys.states',
+    'sys.customer_portal_access_profiles'
   ]
 
   # RSpec Rails can automatically mix in different behaviours to your tests
