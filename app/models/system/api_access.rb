@@ -64,6 +64,15 @@ class System::ApiAccess < ApplicationRecord
     allowed_ips.map(&:strip).join(', ')
   end
 
+  def allow_outgoing_numberlists_ids=(s)
+    # form sends empty array element, we have to remove it
+    self[:allow_outgoing_numberlists_ids] = s.uniq.sort.reject(&:blank?)
+  end
+
+  def allow_outgoing_numberlists
+    Routing::Numberlist.where(id: allow_outgoing_numberlists_ids)
+  end
+
   def accounts
     if account_ids.empty?
       []

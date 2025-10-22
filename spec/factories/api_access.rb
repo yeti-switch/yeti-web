@@ -26,6 +26,8 @@ FactoryBot.define do
     password { ('a'..'z').to_a.shuffle.join }
     allowed_ips { ['0.0.0.0', '127.0.0.1'] }
 
+    allow_outgoing_numberlists_ids { [] }
+
     customer
   end
 end

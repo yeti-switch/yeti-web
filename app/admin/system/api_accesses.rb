@@ -45,6 +45,11 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
     column :allowed_ips
     column :allow_listen_recording
     column :provision_gateway
+    column :allow_outgoing_numberlists do |r|
+      ul class: 'ul-list-comma-separated' do
+        r.allow_outgoing_numberlists.map { |nl| li auto_link(nl) }
+      end
+    end
     column :created_at
     column :updated_at
   end
@@ -62,6 +67,11 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
       row :allowed_ips
       row :allow_listen_recording
       row :provision_gateway
+      row :allow_outgoing_numberlists do
+        ul do
+          r.allow_outgoing_numberlists.map { |nl| li auto_link(nl) }
+        end
+      end
       row :created_at
       row :updated_at
     end
@@ -85,7 +95,6 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'
       f.input :allow_listen_recording
-      # f.input :provision_gateway
 
       f.association_ajax_input :provision_gateway_id,
                                label: 'Provision Gateway',
@@ -97,7 +106,10 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
                                  'data-required-param': 'q[contractor_id_eq]'
                                }
 
-      f.input :allow_outgoing_numberlists_ids
+      f.input :allow_outgoing_numberlists_ids,
+              as: :select,
+              collection: Routing::Numberlist.all,
+              input_html: { class: :chosen, multiple: true }
     end
     f.actions
   end
