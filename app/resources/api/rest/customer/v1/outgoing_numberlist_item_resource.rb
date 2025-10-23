@@ -8,6 +8,9 @@ class Api::Rest::Customer::V1::OutgoingNumberlistItemResource < Api::Rest::Custo
 
   attributes :key, :action_id
 
+  has_one :outgoing_numberlist, relation_name: :numberlist, foreign_key_on: :related
+
+  ransack_filter :numberlist_id, type: :number
   ransack_filter :key, type: :string
   ransack_filter :action_id, type: :number
 

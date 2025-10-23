@@ -110,6 +110,11 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
                                           id: nli.id.to_s,
                                           'type': 'outgoing-numberlist-items',
                                           'links': anything,
+                                          'relationships': {
+                                            'outgoing-numberlist': {
+                                              'links': anything
+                                            }
+                                          },
                                           'attributes': {
                                             'key': nli.key,
                                             'action-id': nli.action_id
