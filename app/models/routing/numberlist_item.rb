@@ -65,6 +65,16 @@ class Routing::NumberlistItem < ApplicationRecord
 
   validates_with TagActionValueValidator
 
+  scope :where_customer, lambda { |id|
+    numberlist_ids = CustomersAuth.where(customer_id: id).pluck(:dst_numberlist_id)
+    where(numberlist_id: numberlist_ids)
+  }
+
+  scope :where_account, lambda { |id|
+    numberlist_ids = CustomersAuth.where(account_id: id).pluck(:dst_numberlist_id)
+    where(numberlist_id: numberlist_ids)
+  }
+
   def display_name
     "#{key} | #{id}"
   end

@@ -15,6 +15,7 @@ class Api::Rest::Customer::V1::BaseController < Api::RestController
       customer_id: current_customer.customer_id,
       allowed_account_ids: current_customer.account_ids,
       current_customer: current_customer,
+      allow_outgoing_numberlists_ids: current_customer.allow_outgoing_numberlists_ids,
       ip_address: '{{auto}}'
     }
   end
