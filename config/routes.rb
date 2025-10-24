@@ -173,7 +173,7 @@ Rails.application.routes.draw do
             jsonapi_resources :rateplans, only: %i[index show]
             jsonapi_resources :rates, only: %i[index show]
             jsonapi_resources :outgoing_numberlists, only: %i[index show]
-            jsonapi_resources :outgoing_numberlist_items, only: %i[index show]
+            jsonapi_resources :outgoing_numberlist_items, only: %i[index show create update destroy]
             jsonapi_resource :check_rate, only: %i[create]
             jsonapi_resources :cdrs, only: %i[index show] do
               jsonapi_relationships
