@@ -33,7 +33,9 @@ class Api::Rest::Customer::V1::OutgoingNumberlistItemResource < Api::Rest::Custo
     allowed_numberlists = ca_scope.pluck(:dst_numberlist_id)
 
     unless allowed_numberlists.include?(@model.numberlist_id)
-      raise JSONAPI::Exceptions::RecordNotFound, nil
+      # raise JSONAPI::Exceptions::RecordNotFound, nil
+      _model.errors.add(:base, 'Invalid numberlist')
+      raise JSONAPI::Exceptions::ValidationErrors, self
     end
   end
 

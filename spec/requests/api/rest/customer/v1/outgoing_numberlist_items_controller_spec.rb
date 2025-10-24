@@ -190,10 +190,10 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
     context 'with not allowed numberlist' do
       it 'returns expection' do
         subject
-        expect(response.status).to eq(404)
+        expect(response.status).to eq(422)
         expect(response_json[:errors]).to match_array(
                                             [
-                                              hash_including(code: '404', status: '404', title: 'Record not found')
+                                              hash_including(code: '100', status: '422', title: 'Invalid numberlist')
                                             ]
                                           )
         expect { subject }.not_to change { Routing::NumberlistItem.count }
