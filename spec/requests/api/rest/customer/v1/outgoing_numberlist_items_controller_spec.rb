@@ -4,7 +4,7 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
   include_context :json_api_customer_v1_helpers, type: :'outgoing-numberlist-items'
 
   let!(:nl) { create(:numberlist) }
-  let!(:nli) { create(:numberlist_item, numberlist_id: nl.id) }
+  let!(:nli) { create(:numberlist_item, numberlist_id: nl.id, key: 'some old key', action_id: 1) }
 
   let(:api_access_attrs) {
     {
@@ -141,15 +141,64 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
       {
         data: {
           type: 'outgoing-numberlist-items',
-          attributes: json_api_attributes
+          attributes: json_api_attributes,
+          relationships: {
+            'outgoing-numberlist': {
+              "data": {
+                "type": 'outgoing-numberlists',
+                "id": nl.id.to_s
+              }
+            }
+          }
         }
       }
     end
     let(:json_api_attributes) do
-      { key: 'some new name' }
+      {
+        key: 'some new name',
+        'action-id': 2
+      }
     end
 
-    include_examples :raises_exception, ActionController::RoutingError
+    context 'with allowed numberlist' do
+      let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(201)
+        expect(response_json[:data]).to match(
+                                          id: anything,
+                                          'type': 'outgoing-numberlist-items',
+                                          'links': anything,
+                                          'relationships': {
+                                            'outgoing-numberlist': {
+                                              'links': anything
+                                            }
+                                          },
+                                          'attributes': {
+                                            'key': 'some new name',
+                                            'action-id': 2
+                                          }
+                                        )
+        new_nli = Routing::NumberlistItem.find(response_json[:data][:id])
+        expect(new_nli.key).to eq('some new name')
+        expect(new_nli.action_id).to eq(2)
+        expect(new_nli.numberlist_id).to eq(nl.id)
+      end
+    end
+
+    context 'with not allowed numberlist' do
+      it 'returns expection' do
+        subject
+        expect(response.status).to eq(422)
+        expect(response_json[:errors]).to match_array(
+                                            [
+                                              hash_including(code: '100', status: '422', title: 'Invalid numberlist')
+                                            ]
+                                          )
+        expect { subject }.not_to change { Routing::NumberlistItem.count }
+      end
+    end
   end
 
   describe 'PATCH /api/rest/customer/v1/outgoing-numberlist-items/{id}' do
@@ -158,8 +207,7 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
     end
 
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
-    let(:record_id) { nl.id.to_s }
-    let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
+    let(:record_id) { nli.id.to_s }
     let(:json_api_request_body) do
       {
         data: {
@@ -170,10 +218,51 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
       }
     end
     let(:json_api_attributes) do
-      { key: 'some key' }
+      {
+        key: 'some new key',
+        'action-id': 2
+      }
     end
 
-    include_examples :raises_exception, ActionController::RoutingError
+    context 'with allowed numberlist' do
+      let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        expect(response_json[:data]).to match(
+                                          id: nli.id.to_s,
+                                          'type': 'outgoing-numberlist-items',
+                                          'links': anything,
+                                          'relationships': {
+                                            'outgoing-numberlist': {
+                                              'links': anything
+                                            }
+                                          },
+                                          'attributes': {
+                                            'key': 'some new key',
+                                            'action-id': 2
+                                          }
+                                        )
+        expect(nli.reload.key).to eq('some new key')
+        expect(nli.reload.action_id).to eq(2)
+      end
+    end
+
+    context 'with not allowed numberlist' do
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(404)
+        expect(response_json[:errors]).to match_array(
+                                            [
+                                              hash_including(code: '404', status: '404', title: 'Record not found')
+                                            ]
+                                          )
+        # item should remain same as before
+        expect(nli.reload.key).to eq('some old key')
+        expect(nli.reload.action_id).to eq(1)
+      end
+    end
   end
 
   describe 'DELETE /api/rest/customer/v1/outgoing-numberlist-items/{id}' do
@@ -182,9 +271,33 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
     end
 
     let(:json_api_request_path) { "#{super()}/#{record_id}" }
-    let(:record_id) { nl.id.to_s }
-    let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
+    let(:record_id) { nli.id.to_s }
 
-    include_examples :raises_exception, ActionController::RoutingError
+    context 'with allowed numberlist' do
+      let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(204)
+        expect(response_json).to be nil
+
+        # object deleted from DB
+        expect(Routing::NumberlistItem.exists?(nli.id)).to be(false)
+      end
+    end
+
+    context 'with not allowed numberlist' do
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(404)
+        expect(response_json[:errors]).to match_array(
+                                          [
+                                            hash_including(code: '404', status: '404', title: 'Record not found')
+                                          ]
+                                        )
+        # object still exists in db
+        expect(Routing::NumberlistItem.exists?(nli.id)).to be(true)
+      end
+    end
   end
 end
