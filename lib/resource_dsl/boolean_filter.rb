@@ -5,12 +5,16 @@ module ResourceDSL
     COLLECTION = [
       ['Yes', true].freeze,
       ['No', false].freeze
-    ].freeze
+    ]
 
     def boolean_filter(name, options = {})
-      options = options.merge(as: :select, collection: COLLECTION)
+      options = options.merge(as: :tom_select, collection: COLLECTION)
       options[:input_html] ||= {}
-      options[:input_html][:class] = ['chosen', options[:input_html][:class]].compact.join(' ')
+      if name.is_a?(Symbol)
+        options[:label] ||= "#{name.to_s.humanize}?"
+      elsif name.is_a?(String)
+        options[:label] ||= "#{name.humanize}?"
+      end
 
       filter name, options
     end

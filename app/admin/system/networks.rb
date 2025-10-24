@@ -2,6 +2,11 @@
 
 ActiveAdmin.register System::Network do
   menu parent: 'System', label: 'Networks', priority: 130
+  searchable_select_options(
+    scope: ->(params) { System::Network.ransack(params[:q]).result },
+    text_attribute: :name,
+    display_text: ->(record) { record.display_name }
+  )
   search_support!
   actions :all
   config.batch_actions = false

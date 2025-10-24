@@ -11,13 +11,12 @@ RSpec.describe 'Filter Routing Tag detection rule records', :js do
 
   let!(:routing_tag_detection_rule_list) { create_list :routing_tag_detection_rule, 2 }
 
-  describe 'Filter by routing tags' do
+  describe 'Filter by routing tags', js: false do
     let(:filter_records) do
       within_filters do
-        fill_in_chosen 'Routing Tag IDs Contains', with: tags.first.name, multiple: true
-        fill_in_chosen 'Routing Tag IDs Contains', with: tags.second.name, multiple: true
-        expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.first.name, exact: false)
-        expect(page).to have_field_chosen('Routing Tag IDs Contains', with: tags.second.name, exact: false)
+        select tags.first.name, from: 'Routing Tag IDs Contains'
+        select tags.second.name, from: 'Routing Tag IDs Contains'
+        expect(page).to have_select('Routing Tag IDs Contains', selected: [tags.first.name, tags.second.name], exact: false)
       end
     end
 

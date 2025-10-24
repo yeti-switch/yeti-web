@@ -5,6 +5,15 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
   decorate_with NumberlistDecorator
 
+  searchable_select_options(
+    text_attribute: :name,
+    display_text: ->(record) { record.display_name },
+    scope: lambda do |params|
+      scope = Routing::Numberlist.ransack(params[:q])
+      scope.sorts = ['name asc']
+      scope.result
+    end
+  )
   search_support!
   acts_as_audit
   acts_as_clone

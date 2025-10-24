@@ -43,9 +43,11 @@ ActiveAdmin.register Billing::InvoiceTemplate, as: 'InvoiceTemplate' do
     column :sha1
   end
 
-  filter :id, as: :numeric
-  filter :name
-  filter :filename
+  filters do
+    filter :id, as: :numeric
+    filter :name
+    filter :filename
+  end
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names

@@ -240,34 +240,36 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
     column 'UUID', :uuid
   end
 
-  filter :id
-  filter :uuid_equals, label: 'UUID'
-  filter :reference
-  contractor_filter :contractor_id_eq
-  account_filter :account_id_eq
-  filter :state
-  filter :type
-  filter :start_date, as: :date_time_range
-  filter :end_date, as: :date_time_range
+  filters do
+    filter :id
+    filter :uuid_equals, label: 'UUID'
+    filter :reference
+    contractor_filter :contractor_id_eq
+    account_filter :account_id_eq
+    filter :state
+    filter :type
+    filter :start_date, as: :date_time_range
+    filter :end_date, as: :date_time_range
 
-  filter :amount_total
-  filter :amount_spent
-  filter :amount_earned
+    filter :amount_total
+    filter :amount_spent
+    filter :amount_earned
 
-  filter :originated_amount_spent
-  filter :originated_amount_earned
-  filter :terminated_amount_spent
-  filter :terminated_amount_earned
+    filter :originated_amount_spent
+    filter :originated_amount_earned
+    filter :terminated_amount_spent
+    filter :terminated_amount_earned
 
-  filter :originated_billing_duration
-  filter :originated_calls_count
-  filter :originated_calls_duration
-  filter :terminated_billing_duration
-  filter :terminated_calls_count
-  filter :terminated_calls_duration
-  filter :services_amount_spent
-  filter :services_amount_earned
-  filter :services_transactions_count
+    filter :originated_billing_duration
+    filter :originated_calls_count
+    filter :originated_calls_duration
+    filter :terminated_billing_duration
+    filter :terminated_calls_count
+    filter :terminated_calls_duration
+    filter :services_amount_spent
+    filter :services_amount_earned
+    filter :services_transactions_count
+  end
 
   show do |s|
     tabs do
@@ -516,14 +518,15 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
-      f.contractor_input :contractor_id
-      f.account_input :account_id,
-                      fill_params: { contractor_id_eq: f.object.contractor_id },
-                      fill_required: :contractor_id_eq,
-                      input_html: {
-                        'data-path-params': { 'q[contractor_id_eq]': '.contractor_id-input' }.to_json,
-                        'data-required-param': 'q[contractor_id_eq]'
-                      }
+      f.input :contractor_id, label: 'Contractor' do
+        as :tom_select
+        ajax resource: 'Contractor', auto_fill_in_related_filters: [:account_id]
+      end
+
+      f.input :account_id do
+        as :tom_select
+        ajax resource: 'Account', parent_filter: :contractor_id
+      end
 
       f.input :start_date,
               as: :date_time_picker,

@@ -2,6 +2,8 @@
 
 ActiveAdmin.register Gateway do
   menu parent: 'Equipment', priority: 75
+  searchable_select_options scope: Gateway.order(:name), text_attribute: :name
+
   search_support!
   acts_as_audit
   acts_as_clone
