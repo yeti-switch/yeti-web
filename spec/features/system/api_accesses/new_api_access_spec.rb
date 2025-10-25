@@ -17,9 +17,12 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
         login: 'Account',
         password: 'Pass',
         customer_id: lambda {
-          fill_in_chosen('Customer', with: @customer.name, ajax: true)
+          fill_in_chosen('Customer*', with: @customer.display_name, ajax: true)
         },
-        formtastic_allowed_ips: '127.0.0.1,1.1.0.0/16'
+        formtastic_allowed_ips: '127.0.0.1,1.1.0.0/16',
+        customer_portal_access_profile_id: lambda {
+          select 'Default | 1', from: 'Customer portal access profile', visible: false
+        }
       }
     end
 

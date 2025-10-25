@@ -44852,7 +44852,8 @@ CREATE TABLE sys.api_access (
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     provision_gateway_id integer,
-    allow_outgoing_numberlists_ids integer[] DEFAULT '{}'::integer[] NOT NULL
+    allow_outgoing_numberlists_ids integer[] DEFAULT '{}'::integer[] NOT NULL,
+    customer_portal_access_profile_id smallint DEFAULT 1 NOT NULL
 );
 
 
@@ -45037,6 +45038,57 @@ CREATE SEQUENCE sys.currencies_id_seq
 --
 
 ALTER SEQUENCE sys.currencies_id_seq OWNED BY sys.currencies.id;
+
+
+--
+-- Name: customer_portal_access_profiles; Type: TABLE; Schema: sys; Owner: -
+--
+
+CREATE TABLE sys.customer_portal_access_profiles (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    account boolean DEFAULT true NOT NULL,
+    outgoing_rateplans boolean DEFAULT true NOT NULL,
+    outgoing_cdrs boolean DEFAULT true NOT NULL,
+    outgoing_cdr_exports boolean DEFAULT true NOT NULL,
+    outgoing_statistics boolean DEFAULT true NOT NULL,
+    outgoing_statistics_active_calls boolean DEFAULT true NOT NULL,
+    outgoing_statistics_acd boolean DEFAULT true NOT NULL,
+    outgoing_statistics_asr boolean DEFAULT true NOT NULL,
+    outgoing_statistics_failed_calls boolean DEFAULT true NOT NULL,
+    outgoing_statistics_successful_calls boolean DEFAULT true NOT NULL,
+    outgoing_statistics_total_calls boolean DEFAULT true NOT NULL,
+    outgoing_statistics_total_duration boolean DEFAULT true NOT NULL,
+    outgoing_statistics_total_price boolean DEFAULT true NOT NULL,
+    incoming_cdrs boolean DEFAULT true NOT NULL,
+    incoming_statistics boolean DEFAULT true NOT NULL,
+    invoices boolean DEFAULT true NOT NULL,
+    payments boolean DEFAULT true NOT NULL,
+    services boolean DEFAULT true NOT NULL,
+    transactions boolean DEFAULT true NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: customer_portal_access_profiles_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
+--
+
+CREATE SEQUENCE sys.customer_portal_access_profiles_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: customer_portal_access_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
+--
+
+ALTER SEQUENCE sys.customer_portal_access_profiles_id_seq OWNED BY sys.customer_portal_access_profiles.id;
 
 
 --
@@ -46364,6 +46416,13 @@ ALTER TABLE ONLY sys.countries ALTER COLUMN id SET DEFAULT nextval('sys.countrie
 --
 
 ALTER TABLE ONLY sys.currencies ALTER COLUMN id SET DEFAULT nextval('sys.currencies_id_seq'::regclass);
+
+
+--
+-- Name: customer_portal_access_profiles id; Type: DEFAULT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.customer_portal_access_profiles ALTER COLUMN id SET DEFAULT nextval('sys.customer_portal_access_profiles_id_seq'::regclass);
 
 
 --
@@ -48225,6 +48284,14 @@ ALTER TABLE ONLY sys.currencies
 
 
 --
+-- Name: customer_portal_access_profiles customer_portal_access_profiles_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.customer_portal_access_profiles
+    ADD CONSTRAINT customer_portal_access_profiles_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: delayed_jobs delayed_jobs_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -49189,6 +49256,20 @@ CREATE UNIQUE INDEX cdr_tables_name_idx ON sys.cdr_tables USING btree (name);
 --
 
 CREATE INDEX delayed_jobs_priority ON sys.delayed_jobs USING btree (priority, run_at);
+
+
+--
+-- Name: idx_customer_portal_access_profiles_name_index; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_customer_portal_access_profiles_name_index ON sys.customer_portal_access_profiles USING btree (name);
+
+
+--
+-- Name: index_api_access_on_customer_portal_access_profile_id; Type: INDEX; Schema: sys; Owner: -
+--
+
+CREATE INDEX index_api_access_on_customer_portal_access_profile_id ON sys.api_access USING btree (customer_portal_access_profile_id);
 
 
 --
@@ -50346,6 +50427,14 @@ ALTER TABLE ONLY sys.currencies
 
 
 --
+-- Name: api_access fk_rails_01e2f85455; Type: FK CONSTRAINT; Schema: sys; Owner: -
+--
+
+ALTER TABLE ONLY sys.api_access
+    ADD CONSTRAINT fk_rails_01e2f85455 FOREIGN KEY (customer_portal_access_profile_id) REFERENCES sys.customer_portal_access_profiles(id);
+
+
+--
 -- Name: cdr_exports fk_rails_e796f29195; Type: FK CONSTRAINT; Schema: sys; Owner: -
 --
 
@@ -50410,6 +50499,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251022165638'),
 ('20251013133006'),
 ('20251013103950'),
 ('20251012194108'),
