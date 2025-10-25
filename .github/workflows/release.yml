@@ -40,14 +40,14 @@ jobs:
         env:
           PKG_TAG: ${{github.ref}}
         shell: bash
-        run: echo "##[set-output name=tag;]$(echo ${PKG_TAG#refs/tags/})"
+        run: echo "tag=$(echo ${PKG_TAG#refs/tags/})" >> $GITHUB_OUTPUT
         id: extract_tag
 
       - name: calculate repo branch
         env:
           PKG_TAG: ${{github.ref}}
         shell: bash
-        run: echo "##[set-output name=tag;]$(v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};echo $major_version)"
+        run: echo "tag=$(v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};echo $major_version)" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - uses: yeti-switch/upload-debian-pkg-action@v2
@@ -59,49 +59,7 @@ jobs:
           s3_prefix: ${{steps.extract_branch.outputs.tag}}
           s3_access_key_id: ${{ secrets.DEB_AWS_ACCESS_KEY_ID }}
           s3_secret_access_key: ${{ secrets.DEB_AWS_SECRET_ACCESS_KEY }}
-          s3_endpoint_url: ${{ secrets.DEB_AWS_ENDPOINT }}        
-
-  deb12_container:
-    name: Debian 12 release container
-    needs: deb12
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Download a single artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: deb12-package
-
-      - name: Display structure of downloaded files
-        run: ls -la
-
-      - name: Display path
-        run: pwd
-
-      - name: Calculate version from ${{github.ref}}
-        env:
-          PKG_TAG: ${{github.ref}}
-        shell: bash
-        run: echo "##[set-output name=tag;]$(echo ${PKG_TAG#refs/tags/})"
-        id: extract_tag
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push to GHCR
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ci/bookworm-package.Dockerfile
-          push: true
-          tags: ghcr.io/yeti-switch/yeti-web:${{steps.extract_tag.outputs.tag}}
+          s3_endpoint_url: ${{ secrets.DEB_AWS_ENDPOINT }}
 
   deb13:
     name: Debian 13 release package building
@@ -138,14 +96,14 @@ jobs:
         env:
           PKG_TAG: ${{github.ref}}
         shell: bash
-        run: echo "##[set-output name=tag;]$(echo ${PKG_TAG#refs/tags/})"
+        run: echo "tag=$(echo ${PKG_TAG#refs/tags/})" >> $GITHUB_OUTPUT
         id: extract_tag
 
       - name: calculate repo branch
         env:
           PKG_TAG: ${{github.ref}}
         shell: bash
-        run: echo "##[set-output name=tag;]$(v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};echo $major_version)"
+        run: echo "tag=$(v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};echo $major_version)" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - uses: yeti-switch/upload-debian-pkg-action@v2
@@ -183,7 +141,7 @@ jobs:
         env:
           PKG_TAG: ${{github.ref}}
         shell: bash
-        run: echo "##[set-output name=tag;]$(echo ${PKG_TAG#refs/tags/})"
+        run: echo "tag=$(echo ${PKG_TAG#refs/tags/})" >> $GITHUB_OUTPUT
         id: extract_tag
 
       - name: Login to GitHub Container Registry
@@ -199,4 +157,4 @@ jobs:
           context: .
           file: ci/trixie-package.Dockerfile
           push: true
-          tags: ghcr.io/yeti-switch/yeti-web:deb13-${{steps.extract_tag.outputs.tag}}
+          tags: ghcr.io/yeti-switch/yeti-web:${{steps.extract_tag.outputs.tag}}
