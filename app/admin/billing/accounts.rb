@@ -2,6 +2,11 @@
 
 ActiveAdmin.register Account do
   menu parent: 'Billing', priority: 10
+  searchable_select_options(
+    scope: proc { Account.order(:name) },
+    text_attribute: :name,
+    display_text: ->(record) { record.display_name }
+  )
   search_support!
   acts_as_safe_destroy
   acts_as_audit
@@ -61,13 +66,19 @@ ActiveAdmin.register Account do
   scope :low_balance_threshold
   scope :high_balance_threshold
 
-  filter :id
-  filter :uuid_equals, label: 'UUID'
-  contractor_filter :contractor_id_eq
-  filter :name
-  filter :balance
-  filter :vat
-  filter :external_id
+  filters do
+    filter :id
+    filter :uuid_equals, label: 'UUID'
+    filter :contractor_id_eq, label: 'Contractor' do
+      as :tom_select
+      ajax resource: 'Contractor'
+      ajax_params q: { s: :name }
+    end
+    filter :name
+    filter :balance
+    filter :vat
+    filter :external_id
+  end
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column
@@ -228,7 +239,10 @@ ActiveAdmin.register Account do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.contractor_input :contractor_id
+      f.input :contractor_id do
+        as :tom_select
+        ajax resource: 'Contractor'
+      end
       f.input :min_balance
       f.input :max_balance
       f.input :vat
@@ -240,16 +254,16 @@ ActiveAdmin.register Account do
       f.input :termination_capacity
       f.input :total_capacity
 
-      f.input :timezone_id, as: :select, input_html: { class: 'chosen' }, collection: System::Timezone.all
+      f.input :timezone_id, as: :tom_select, collection: System::Timezone.pluck(:name, :id)
       f.input :uuid, as: :string
     end
 
     f.inputs 'Invoice Settings' do
-      f.input :invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
+      f.input :invoice_period_id, as: :tom_select, collection: Billing::InvoicePeriod.pluck(:name, :id)
 
-      f.input :invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
+      f.input :invoice_template_id, as: :tom_select, collection: Billing::InvoiceTemplate.all
 
-      f.input :send_invoices_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
+      f.input :send_invoices_to, as: :tom_select, collection: Billing::Contact.collection, multiple: true
 
       f.input :invoice_ref_template
     end
@@ -257,10 +271,10 @@ ActiveAdmin.register Account do
     f.inputs 'Balance Notification Settings' do
       f.input :balance_low_threshold
       f.input :balance_high_threshold
-      f.input :send_balance_notifications_to,
-              as: :select,
-              input_html: { class: 'chosen', multiple: true },
-              collection: Billing::Contact.collection
+      f.input :send_balance_notifications_to, multiple: true do
+        as :tom_select
+        collection Billing::Contact.collection
+      end
     end
 
     f.actions
