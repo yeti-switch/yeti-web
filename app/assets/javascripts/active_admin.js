@@ -45,7 +45,8 @@
 //= require credential_generator
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
-
+//= require tom-select-rails/js/tom-select.complete
+//= require activeadmin_tom_select/init
 
 $(document).ready(function () {
 
