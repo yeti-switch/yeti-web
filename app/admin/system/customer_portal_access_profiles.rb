@@ -24,6 +24,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
                 :incoming_statistics,
                 :invoices,
                 :payments,
+                :payments_cryptomus,
                 :services,
                 :transactions
 

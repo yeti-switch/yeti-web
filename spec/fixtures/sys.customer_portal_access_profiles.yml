@@ -24,6 +24,7 @@
 #  outgoing_statistics_total_duration   :boolean          default(TRUE), not null
 #  outgoing_statistics_total_price      :boolean          default(TRUE), not null
 #  payments                             :boolean          default(TRUE), not null
+#  payments_cryptomus                   :boolean          default(FALSE), not null
 #  services                             :boolean          default(TRUE), not null
 #  transactions                         :boolean          default(TRUE), not null
 #  created_at                           :datetime         not null
