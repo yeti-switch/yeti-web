@@ -19,6 +19,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
                 :outgoing_statistics_total_calls,
                 :outgoing_statistics_total_duration,
                 :outgoing_statistics_total_price,
+                :outgoing_numberlists,
                 :incoming_cdrs,
                 :incoming_statistics,
                 :invoices,
@@ -26,5 +27,14 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
                 :services,
                 :transactions
 
+  filter :id
   filter :name, as: :string
+
+  index do
+    id_column
+    actions
+    column :name
+    column :created_at
+    column :updated_at
+  end
 end

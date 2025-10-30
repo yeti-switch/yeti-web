@@ -12,6 +12,7 @@
 #  name                                 :string           not null
 #  outgoing_cdr_exports                 :boolean          default(TRUE), not null
 #  outgoing_cdrs                        :boolean          default(TRUE), not null
+#  outgoing_numberlists                 :boolean          default(TRUE), not null
 #  outgoing_rateplans                   :boolean          default(TRUE), not null
 #  outgoing_statistics                  :boolean          default(TRUE), not null
 #  outgoing_statistics_acd              :boolean          default(TRUE), not null
