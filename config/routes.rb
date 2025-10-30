@@ -202,7 +202,7 @@ Rails.application.routes.draw do
             jsonapi_resources :services, only: %i[index show]
             jsonapi_resources :transactions, only: %i[index show]
             jsonapi_resources :phone_systems_sessions, only: %i[create]
-            jsonapi_resource :customer_portal_access_profile, only: %i[show]
+            jsonapi_resource :profiles, only: %i[show]
           end
         end
 

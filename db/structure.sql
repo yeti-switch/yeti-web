@@ -45052,14 +45052,14 @@ CREATE TABLE sys.customer_portal_access_profiles (
     outgoing_cdrs boolean DEFAULT true NOT NULL,
     outgoing_cdr_exports boolean DEFAULT true NOT NULL,
     outgoing_statistics boolean DEFAULT true NOT NULL,
-    outgoing_statistics_active_calls boolean DEFAULT true NOT NULL,
-    outgoing_statistics_acd boolean DEFAULT true NOT NULL,
-    outgoing_statistics_asr boolean DEFAULT true NOT NULL,
-    outgoing_statistics_failed_calls boolean DEFAULT true NOT NULL,
-    outgoing_statistics_successful_calls boolean DEFAULT true NOT NULL,
-    outgoing_statistics_total_calls boolean DEFAULT true NOT NULL,
-    outgoing_statistics_total_duration boolean DEFAULT true NOT NULL,
-    outgoing_statistics_total_price boolean DEFAULT true NOT NULL,
+    outgoing_statistics_active_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_active_not_null NOT NULL,
+    outgoing_statistics_acd boolean DEFAULT true CONSTRAINT customer_portal_access_profile_outgoing_statistics_acd_not_null NOT NULL,
+    outgoing_statistics_asr boolean DEFAULT true CONSTRAINT customer_portal_access_profile_outgoing_statistics_asr_not_null NOT NULL,
+    outgoing_statistics_failed_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_failed_not_null NOT NULL,
+    outgoing_statistics_successful_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_succes_not_null NOT NULL,
+    outgoing_statistics_total_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_total__not_null NOT NULL,
+    outgoing_statistics_total_duration boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null1 NOT NULL,
+    outgoing_statistics_total_price boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null2 NOT NULL,
     incoming_cdrs boolean DEFAULT true NOT NULL,
     incoming_statistics boolean DEFAULT true NOT NULL,
     invoices boolean DEFAULT true NOT NULL,
@@ -45067,7 +45067,8 @@ CREATE TABLE sys.customer_portal_access_profiles (
     services boolean DEFAULT true NOT NULL,
     transactions boolean DEFAULT true NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    outgoing_numberlists boolean DEFAULT true NOT NULL
 );
 
 
@@ -50499,6 +50500,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251030195717'),
 ('20251022165638'),
 ('20251013133006'),
 ('20251013103950'),

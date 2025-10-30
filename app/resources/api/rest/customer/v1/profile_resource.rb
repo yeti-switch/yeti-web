@@ -4,13 +4,12 @@ module Api
   module Rest
     module Customer
       module V1
-        class CustomerPortalAccessProfileResource < Api::Rest::Customer::V1::BaseResource
+        class ProfileResource < Api::Rest::Customer::V1::BaseResource
           singleton
           model_name 'System::CustomerPortalAccessProfile'
           primary_key :id
           exclude_links [:self]
 
-          attribute :name
           attribute :account
           attribute :outgoing_rateplans
           attribute :outgoing_cdrs
@@ -24,6 +23,7 @@ module Api
           attribute :outgoing_statistics_total_calls
           attribute :outgoing_statistics_total_duration
           attribute :outgoing_statistics_total_price
+          attribute :outgoing_numberlists
           attribute :incoming_cdrs
           attribute :incoming_statistics
           attribute :invoices
@@ -33,7 +33,6 @@ module Api
 
           def fetchable_fields
             %i[
-              name
               account
               outgoing_rateplans
               outgoing_cdrs
@@ -47,6 +46,7 @@ module Api
               outgoing_statistics_total_calls
               outgoing_statistics_total_duration
               outgoing_statistics_total_price
+              outgoing_numberlists
               incoming_cdrs
               incoming_statistics
               invoices
