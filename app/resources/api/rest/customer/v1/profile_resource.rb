@@ -28,6 +28,7 @@ module Api
           attribute :incoming_statistics
           attribute :invoices
           attribute :payments
+          attribute :payments_cryptomus
           attribute :services
           attribute :transactions
 
@@ -51,6 +52,7 @@ module Api
               incoming_statistics
               invoices
               payments
+              payments_cryptomus
               services
               transactions
             ]

@@ -35,6 +35,7 @@ RSpec.describe Api::Rest::Customer::V1::ProfilesController, type: :request do
             'incoming-statistics': true,
             'invoices': true,
             'payments': true,
+            'payments-cryptomus': false,
             'services': true,
             'transactions': true
           }

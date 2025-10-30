@@ -45068,7 +45068,8 @@ CREATE TABLE sys.customer_portal_access_profiles (
     transactions boolean DEFAULT true NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
-    outgoing_numberlists boolean DEFAULT true NOT NULL
+    outgoing_numberlists boolean DEFAULT true NOT NULL,
+    payments_cryptomus boolean DEFAULT false NOT NULL
 );
 
 
@@ -50500,6 +50501,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251030205037'),
 ('20251030195717'),
 ('20251022165638'),
 ('20251013133006'),
