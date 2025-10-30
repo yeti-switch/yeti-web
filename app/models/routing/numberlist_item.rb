@@ -42,6 +42,7 @@ class Routing::NumberlistItem < ApplicationRecord
 
   ACTION_REJECT = 1
   ACTION_ACCEPT = 2
+  ACTION_DEFAULT = 'Default action'
   ACTIONS = {
     ACTION_REJECT => 'Reject call',
     ACTION_ACCEPT => 'Allow call'

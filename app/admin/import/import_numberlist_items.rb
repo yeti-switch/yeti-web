@@ -3,7 +3,11 @@
 ActiveAdmin.register Importing::NumberlistItem, as: 'Numberlist Item Imports' do
   filter :key
   filter :numberlist, input_html: { class: 'chosen' }
-  filter :action_id_eq, label: 'Action', as: :select, collection: Routing::NumberlistItem::ACTIONS.invert
+  filter :action_id_eq, label: 'Action',
+                        include_blank: false,
+                        as: :select,
+                        collection: ([[Routing::NumberlistItem::ACTION_DEFAULT, '']] + Routing::NumberlistItem::ACTIONS.invert.to_a),
+                        input_html: { class: :chosen }
 
   boolean_filter :is_changed
 
