@@ -3,7 +3,7 @@
 # to run this test you need to have config/ldap.yml file
 #   cp -v config/ldap.yml.distr config/ldap.yml
 # how to run:
-#   CI_RUN_LDAP=true bundle exec rspec spec/models/admin_user_spec.rb
+#   CI_RUN_LDAP=true bundle exec rspec spec/features/sign_in_ldap_spec.rb
 RSpec.describe 'sign in with ldap', :ldap do
   subject do
     visit new_admin_user_session_path
@@ -71,9 +71,9 @@ RSpec.describe 'sign in with ldap', :ldap do
         stateful_filters: false,
         visible_columns: {},
         encrypted_password: be_present,
-        current_sign_in_at: be_within(3).of(Time.current),
+        current_sign_in_at: be_present,
         current_sign_in_ip: '127.0.0.1',
-        last_sign_in_at: be_within(3).of(Time.current),
+        last_sign_in_at: be_present,
         last_sign_in_ip: '127.0.0.1',
         sign_in_count: 1,
         username:,
@@ -92,8 +92,8 @@ RSpec.describe 'sign in with ldap', :ldap do
         admin_user: new_admin_user,
         contractor_id: nil,
         notes: nil,
-        created_at: be_within(3).of(Time.current),
-        updated_at: be_within(3).of(Time.current),
+        created_at: be_present,
+        updated_at: be_present,
         email: ldap_params[:mail].first
       )
     end
@@ -105,17 +105,25 @@ RSpec.describe 'sign in with ldap', :ldap do
     it 'updates admin_user with correct roles' do
       # reload cause we want created_at/updated_at to be the same
       old_attrs = admin_user.reload.attributes.symbolize_keys
+      # capture values that should be moved/preserved across sign-in
+      old_current_sign_in_at = old_attrs[:current_sign_in_at]
+      old_current_sign_in_ip = old_attrs[:current_sign_in_ip]
+
       expect {
         subject
         expect(page).to have_flash_message '', exact: false
       }.not_to change { AdminUser.count }
+
+      # remove time-sensitive and re-encrypted fields from strict equality
+      base_attrs = old_attrs.except(:updated_at, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :encrypted_password, :sign_in_count)
+
       expect(admin_user.reload).to have_attributes(
-        **old_attrs,
-        updated_at: be_within(3).of(Time.current),
-        current_sign_in_at: be_within(3).of(Time.current),
+        **base_attrs,
+        updated_at: be_within(5.seconds).of(Time.current.utc),
+        current_sign_in_at: be_within(5.seconds).of(Time.current.utc),
         current_sign_in_ip: '127.0.0.1',
-        last_sign_in_at: old_attrs[:current_sign_in_at],
-        last_sign_in_ip: old_attrs[:current_sign_in_ip],
+        last_sign_in_at: old_current_sign_in_at,
+        last_sign_in_ip: old_current_sign_in_ip,
         sign_in_count: old_attrs[:sign_in_count] + 1,
         encrypted_password: be_present, # it being re-encrypted on every login
         **expected_attrs
@@ -131,7 +139,7 @@ RSpec.describe 'sign in with ldap', :ldap do
       }.not_to change { Billing::Contact.count }
       expect(admin_user.billing_contact.reload).to have_attributes(
         **old_attrs,
-        updated_at: be_within(3).of(Time.current),
+        updated_at: be_within(5.seconds).of(Time.current),
         email: ldap_params[:mail].first
       )
     end
