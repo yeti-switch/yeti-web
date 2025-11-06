@@ -65,6 +65,8 @@ class Routing::NumberlistItem < ApplicationRecord
 
   validates_with TagActionValueValidator
 
+  attr_accessor :batch_key
+
   scope :where_customer, lambda { |id|
     numberlist_ids = CustomersAuth.where(customer_id: id).pluck(:dst_numberlist_id)
     where(numberlist_id: numberlist_ids)
@@ -74,6 +76,21 @@ class Routing::NumberlistItem < ApplicationRecord
     numberlist_ids = CustomersAuth.where(account_id: id).pluck(:dst_numberlist_id)
     where(numberlist_id: numberlist_ids)
   }
+
+  before_create do
+    if batch_key.present?
+      keys = batch_key.delete(' ').split(',').uniq
+      while keys.length > 1
+        new_instance = dup
+        new_instance.batch_key = nil
+        new_instance.key = keys.pop
+        new_instance.save!
+      end
+      self.key = keys.pop
+    elsif key.nil?
+      self.key = ''
+    end
+  end
 
   def display_name
     "#{key} | #{id}"

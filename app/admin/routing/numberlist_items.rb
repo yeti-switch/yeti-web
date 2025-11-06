@@ -36,7 +36,7 @@ ActiveAdmin.register Routing::NumberlistItem do
   includes :numberlist, :lua_script, :tag_action
 
   permit_params :numberlist_id,
-                :key, :number_min_length, :number_max_length,
+                :key, :batch_key, :number_min_length, :number_max_length,
                 :action_id,
                 :src_rewrite_rule, :src_rewrite_result, :defer_src_rewrite,
                 :dst_rewrite_rule, :dst_rewrite_result, :defer_dst_rewrite,
@@ -130,7 +130,13 @@ ActiveAdmin.register Routing::NumberlistItem do
                                label: 'Numberlist',
                                scope: Routing::Numberlist.order(:name),
                                path: '/numberlists/search'
-      f.input :key
+
+      if f.object.new_record? # allow multiple keys delimited by comma in NEW form.
+        f.input :batch_key, label: 'Key'
+      else
+        f.input :key
+      end
+
       f.input :number_min_length
       f.input :number_max_length
       f.input :action_id, as: :select, include_blank: 'Default action', collection: Routing::NumberlistItem::ACTIONS.invert
