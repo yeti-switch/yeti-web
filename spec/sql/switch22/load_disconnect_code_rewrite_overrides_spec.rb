@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
-RSpec.describe 'switch21.load_disconnect_code_rewrite_overrides' do
+RSpec.describe 'switch22.load_disconnect_code_rewrite_overrides' do
   subject do
     SqlCaller::Yeti.select_all(sql).map(&:deep_symbolize_keys)
   end
 
   let(:sql) do
-    'SELECT * FROM switch21.load_disconnect_code_rewrite_overrides()'
+    'SELECT * FROM switch22.load_disconnect_code_rewrite_overrides()'
   end
 
   let!(:dpp) { create(:disconnect_policy) }
-  let!(:dp_code) { create(:disconnect_policy_code, policy_id: dpp.id, code_id: DisconnectCode.where(namespace_id: DisconnectCode::NS_SIP).first.id) }
+  let(:disconnect_code) { create(:disconnect_code, :sip) }
+  let!(:dp_code) { create(:disconnect_policy_code, policy_id: dpp.id, code: disconnect_code) }
 
   it 'responds with correct rows' do
     expect(subject.first).to have_key(:o_code)

@@ -10,7 +10,8 @@ RSpec.describe 'switch21.load_disconnect_code_rerouting_overrides' do
   end
 
   let!(:dpp) { create(:disconnect_policy) }
-  let!(:dp_code) { create(:disconnect_policy_code, policy_id: dpp.id, code_id: DisconnectCode.where(namespace_id: DisconnectCode::NS_SIP).first.id) }
+  let(:disconnect_code) { create(:disconnect_code, :sip) }
+  let!(:dp_code) { create(:disconnect_policy_code, policy_id: dpp.id, code: disconnect_code) }
 
   it 'responds with correct rows' do
     expect(subject.first).to have_key(:policy_id)
