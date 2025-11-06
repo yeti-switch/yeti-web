@@ -201,6 +201,78 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
     end
   end
 
+  describe 'POST /api/rest/customer/v1/outgoing-numberlist-items with batch' do
+    subject do
+      post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_body) do
+      {
+        data: {
+          type: 'outgoing-numberlist-items',
+          attributes: json_api_attributes,
+          relationships: {
+            'outgoing-numberlist': {
+              "data": {
+                "type": 'outgoing-numberlists',
+                "id": nl.id.to_s
+              }
+            }
+          }
+        }
+      }
+    end
+    let(:json_api_attributes) do
+      {
+        'batch-key': 'key1, key2, key3',
+        'action-id': 2
+      }
+    end
+
+    context 'with allowed numberlist' do
+      let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(201)
+        expect(response_json[:data]).to match(
+                                          id: anything,
+                                          'type': 'outgoing-numberlist-items',
+                                          'links': anything,
+                                          'relationships': {
+                                            'outgoing-numberlist': {
+                                              'links': anything
+                                            }
+                                          },
+                                          'attributes': {
+                                            'key': 'key1',
+                                            'action-id': 2
+                                          }
+                                        )
+        new_nli = Routing::NumberlistItem.find(response_json[:data][:id])
+        expect(new_nli.key).to eq('key1')
+        expect(new_nli.action_id).to eq(2)
+        expect(new_nli.numberlist_id).to eq(nl.id)
+
+        multiple_nli_created = Routing::NumberlistItem.where(numberlist_id: nl.id, key: %w[key1 key2 key3])
+        expect(multiple_nli_created.count).to eq(3)
+      end
+    end
+
+    context 'with not allowed numberlist' do
+      it 'returns expection' do
+        subject
+        expect(response.status).to eq(422)
+        expect(response_json[:errors]).to match_array(
+                                            [
+                                              hash_including(code: '100', status: '422', title: 'Invalid numberlist')
+                                            ]
+                                          )
+        expect { subject }.not_to change { Routing::NumberlistItem.count }
+      end
+    end
+  end
+
   describe 'PATCH /api/rest/customer/v1/outgoing-numberlist-items/{id}' do
     subject do
       patch json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers

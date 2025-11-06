@@ -52,6 +52,21 @@ RSpec.resource 'OutgoingNumberlistItem', document: :customer_v1 do
     end
   end
 
+  post '/api/rest/customer/v1/outgoing-numberlist-items' do
+    parameter :type, 'Resource type (outgoing-numberlist-items)', scope: :data, required: true
+
+    jsonapi_attributes(%i[batch-key action-id], [])
+    jsonapi_relationships([:'outgoing-numberlist'], [])
+
+    let(:'batch-key') { 'key1, key2, key3' }
+    let(:'action-id') { 2 }
+    let(:'outgoing-numberlist') { wrap_relationship(:'outgoing-numberlists', nl.id.to_s) }
+
+    example_request 'create multiple entries' do
+      expect(status).to eq(201)
+    end
+  end
+
   put '/api/rest/customer/v1/outgoing-numberlist-items/:id' do
     parameter :type, 'Resource type (outgoing-numberlist-items)', scope: :data, required: true
     parameter :id, 'Item ID', scope: :data, required: true
