@@ -45,10 +45,8 @@ class ApplicationPolicy
   alias_rule :remove?, to: :destroy?
   alias_rule :history?, to: :perform? # DSL acts_as_audit
   alias_rule :batch_edit?, to: :update? # DSL gem 'active_admin_scoped_collection_actions'
-  alias_rule :batch_destroy?, to: :destroy? # DSL gem 'active_admin_scoped_collection_actions'
   alias_rule :destroy_all?, to: :destroy? # DSL acts_as_import_preview
   alias_rule :batch_insert?, to: :create? # DSL acts_as_import_preview
-  alias_rule :batch_update?, to: :update? # DSL acts_as_import_preview
   alias_rule :batch_perform?, to: :perform? # for batch_action
 
   # DSL acts_as_import_preview
@@ -73,6 +71,14 @@ class ApplicationPolicy
   end
 
   def perform?
+    true
+  end
+
+  def batch_destroy?
+    true
+  end
+
+  def batch_update?
     true
   end
 

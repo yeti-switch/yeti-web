@@ -6,11 +6,13 @@ module ResourceDSL
   # config.scoped_collection_actions_if = -> { true }
   module ActsAsAsyncUpdate
     def acts_as_async_update(form_class)
+      config.batch_actions = true
+      config.scoped_collection_actions_if = -> { authorized?(:batch_update, resource_class) || authorized?(:batch_destroy, resource_class) }
       scoped_collection_action :async_update,
                                title: 'Update batch',
                                class: 'scoped_collection_action_button ui',
                                form: -> { form_class.form_data },
-                               if: proc { authorized?(:batch_destroy, resource_klass) } do
+                               if: proc { authorized?(:batch_update, resource_class) } do
         attrs = params[:changes]&.permit!
         # if there is no changes just reload page quietly
         if attrs.present?
