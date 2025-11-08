@@ -102,6 +102,10 @@ Config.setup do |setup_config|
       optional(:auto_approve).value(:bool)
     end
     optional(:default_ldap_roles).array(:string)
+
+    optional(:admin_ui).schema do
+      optional(:session_lifetime).maybe(:int?)
+    end
   end
 end
 
