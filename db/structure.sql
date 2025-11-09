@@ -45069,7 +45069,29 @@ CREATE TABLE sys.customer_portal_access_profiles (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     outgoing_numberlists boolean DEFAULT true NOT NULL,
-    payments_cryptomus boolean DEFAULT false NOT NULL
+    payments_cryptomus boolean DEFAULT false NOT NULL,
+    outgoing_statistics_acd_value boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_acd_va_not_null NOT NULL,
+    outgoing_statistics_asr_value boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_asr_va_not_null NOT NULL,
+    outgoing_statistics_failed_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_failed_not_null1 NOT NULL,
+    outgoing_statistics_successful_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_succes_not_null1 NOT NULL,
+    outgoing_statistics_total_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null3 NOT NULL,
+    outgoing_statistics_total_duration_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null4 NOT NULL,
+    outgoing_statistics_total_price_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null5 NOT NULL,
+    incoming_statistics_active_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_active_not_null NOT NULL,
+    incoming_statistics_acd boolean DEFAULT true CONSTRAINT customer_portal_access_profile_incoming_statistics_acd_not_null NOT NULL,
+    incoming_statistics_asr boolean DEFAULT true CONSTRAINT customer_portal_access_profile_incoming_statistics_asr_not_null NOT NULL,
+    incoming_statistics_failed_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_failed_not_null NOT NULL,
+    incoming_statistics_successful_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_succes_not_null NOT NULL,
+    incoming_statistics_total_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_total__not_null NOT NULL,
+    incoming_statistics_total_duration boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null1 NOT NULL,
+    incoming_statistics_total_price boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null2 NOT NULL,
+    incoming_statistics_acd_value boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_acd_va_not_null NOT NULL,
+    incoming_statistics_asr_value boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_asr_va_not_null NOT NULL,
+    incoming_statistics_failed_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_failed_not_null1 NOT NULL,
+    incoming_statistics_successful_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_succes_not_null1 NOT NULL,
+    incoming_statistics_total_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null3 NOT NULL,
+    incoming_statistics_total_duration_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null4 NOT NULL,
+    incoming_statistics_total_price_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null5 NOT NULL
 );
 
 
@@ -50501,6 +50523,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251109191129'),
 ('20251030205037'),
 ('20251030195717'),
 ('20251022165638'),
