@@ -89,7 +89,8 @@ RSpec.describe 'config/yeti_web.yml' do
           bucket: a_kind_of(String)
         }
       },
-      tmpdir: a_kind_of(String)
+      tmpdir: a_kind_of(String),
+      admin_ui: be_kind_of(Hash)
     }
   end
 
