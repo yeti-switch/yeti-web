@@ -1,18 +1,24 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-log_path = ARGV[0]
+require 'logger'
+
+log_path   = ARGV[0]
 filter_qty = (ARGV[1] || 10).to_i
 
+logger = Logger.new($stdout)
+logger.level = Logger::INFO
+logger.formatter = proc { |_sev, _time, _prog, msg| "#{msg}\n" }
+
 unless File.exist?(log_path)
-  puts "File #{log_path.inspect} does not exist. skipping"
-  exit
+  logger.info %(File #{log_path.inspect} does not exist. skipping)
+  exit 0
 end
 
 content = File.read(log_path).split("\n").select { |line| line.start_with?('spec/') }
 data = content.map { |line| line.split(':') }.sort_by { |parts| parts[1].to_f }.reverse[0..filter_qty]
 output_content = data.map { |parts| "  #{parts[1].to_f.round(2)}\tseconds for #{parts[0]}" }
 
-puts "Top #{filter_qty} slowest spec files:"
-puts output_content.join("\n")
-puts "\nTotal #{content.size} spec files."
+logger.info "Top #{filter_qty} slowest spec files:"
+logger.info output_content.join("\n")
+logger.info "Total #{content.size} spec files."

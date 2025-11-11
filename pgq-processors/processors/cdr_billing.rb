@@ -6,7 +6,6 @@ class CdrBilling < Pgq::ConsumerGroup
   def initialize(logger, queue, consumer, options)
     super
     Dir['models/*.rb'].each { |file| require_relative File.join('../', file) }
-    p options
     key = options['mode']
     ::RoutingBase.establish_connection options['databases'][key]['primary']
 

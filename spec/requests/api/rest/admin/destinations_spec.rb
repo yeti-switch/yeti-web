@@ -179,8 +179,6 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
       it 'should return correct response' do
         subject
 
-        p response_json
-
         expect(response_json[:meta]).to match('total-count': destinations.size)
         # 1 countries + 1 networks + 1 destination next rate = 5
         expect(response_json[:included].size).to eq(3)
