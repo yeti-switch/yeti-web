@@ -8,6 +8,7 @@ RSpec.describe 'Index Numberlist Item', type: :feature do
     visit routing_numberlist_items_path
     numberlist_items.each do |numberlist_item|
       expect(page).to have_css('.resource_id_link', text: numberlist_item.id)
+      expect(page).to have_table_cell column: :Action, exact_text: Routing::NumberlistItem::ACTIONS.fetch(numberlist_item.action_id)
     end
   end
 end
