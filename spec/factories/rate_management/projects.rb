@@ -52,7 +52,6 @@
 # Foreign Keys
 #
 #  fk_rails_2016c4d0a1  (routing_group_id => routing_groups.id)
-#  fk_rails_8c0fbee7b0  (routing_tag_mode_id => routing_tag_modes.id)
 #  fk_rails_9da44a0caf  (gateway_group_id => gateway_groups.id)
 #  fk_rails_ab15e0e646  (gateway_id => gateways.id)
 #  fk_rails_bba2bcfb14  (account_id => accounts.id)

@@ -13,7 +13,7 @@ RSpec.describe 'Export RoutingTagDetectionRule', type: :feature do
            dst_area: create(:area),
            src_prefix: '111',
            dst_prefix: '222',
-           routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::CONST::AND),
+           routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::MODE_AND),
            tag_action: Routing::TagAction.take,
            tag_action_value: [tag_ua.id, tag_us.id])
   end

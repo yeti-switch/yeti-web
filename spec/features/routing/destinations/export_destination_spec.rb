@@ -10,7 +10,7 @@ RSpec.describe 'Export Destination', type: :feature do
 
   let!(:item) do
     create :destination,
-           routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::CONST::AND),
+           routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::MODE_AND),
            routing_tag_ids: [tag_ua.id, tag_us.id, nil],
            scheduler: create(:scheduler)
   end

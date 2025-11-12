@@ -126,7 +126,7 @@ RSpec.describe RateManagement::VerifyPricelistItems do
           initial_interval: 1,
           next_interval: 2,
           routing_tag_ids: [routing_tags.first.id, routing_tags.second.id, nil],
-          routing_tag_mode_id: Routing::RoutingTagMode::CONST::AND,
+          routing_tag_mode_id: Routing::RoutingTagMode::MODE_AND,
           enabled: true,
           priority: 200,
           valid_from: 2.days.from_now.beginning_of_day,
@@ -142,7 +142,7 @@ RSpec.describe RateManagement::VerifyPricelistItems do
           initial_interval: 1,
           next_interval: 60,
           routing_tag_ids: [nil],
-          routing_tag_mode_id: Routing::RoutingTagMode::CONST::OR,
+          routing_tag_mode_id: Routing::RoutingTagMode::MODE_OR,
           enabled: false,
           priority: 100,
           valid_from: 1.day.from_now.beginning_of_day,
@@ -200,7 +200,7 @@ RSpec.describe RateManagement::VerifyPricelistItems do
         initial_interval: 1,
         next_interval: 2,
         routing_tag_ids: [routing_tags.first.id, routing_tags.second.id, nil],
-        routing_tag_mode_id: Routing::RoutingTagMode::CONST::AND,
+        routing_tag_mode_id: Routing::RoutingTagMode::MODE_AND,
         enabled: true,
         priority: 100,
         valid_from: nil,
@@ -235,7 +235,7 @@ RSpec.describe RateManagement::VerifyPricelistItems do
           initial_interval: 1,
           next_interval: 2,
           routing_tag_ids: [routing_tags.first.id, routing_tags.third.id, nil],
-          routing_tag_mode_id: Routing::RoutingTagMode::CONST::AND,
+          routing_tag_mode_id: Routing::RoutingTagMode::MODE_AND,
           enabled: nil,
           priority: nil,
           valid_from: nil,
@@ -548,7 +548,7 @@ RSpec.describe RateManagement::VerifyPricelistItems do
 
       context 'when project has filled routing_tag_mode_id' do
         let(:project_attrs) do
-          super().merge routing_tag_mode_id: Routing::RoutingTagMode::CONST::AND
+          super().merge routing_tag_mode_id: Routing::RoutingTagMode::MODE_AND
         end
 
         include_examples :returns_item_attrs_list

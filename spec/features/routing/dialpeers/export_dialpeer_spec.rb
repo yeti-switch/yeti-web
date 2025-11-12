@@ -18,7 +18,7 @@ RSpec.describe 'Export Dialpeer', type: :feature do
            vendor: contractor,
            account: account,
            gateway: gateway,
-           routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::CONST::AND),
+           routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::MODE_AND),
            routing_tag_ids: [tag_ua.id, tag_us.id, nil],
            scheduler: create(:scheduler))
   end
@@ -77,7 +77,7 @@ RSpec.describe 'Export Dialpeer', type: :feature do
              vendor: contractor,
              account: account,
              gateway_group: gateway_group,
-             routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::CONST::AND),
+             routing_tag_mode: Routing::RoutingTagMode.find(Routing::RoutingTagMode::MODE_AND),
              routing_tag_ids: [tag_ua.id, tag_us.id, nil],
              scheduler: create(:scheduler))
     end

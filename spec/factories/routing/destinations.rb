@@ -45,9 +45,8 @@
 #
 # Foreign Keys
 #
-#  destinations_rate_group_id_fkey        (rate_group_id => rate_groups.id)
-#  destinations_routing_tag_mode_id_fkey  (routing_tag_mode_id => routing_tag_modes.id)
-#  destinations_scheduler_id_fkey         (scheduler_id => schedulers.id)
+#  destinations_rate_group_id_fkey  (rate_group_id => rate_groups.id)
+#  destinations_scheduler_id_fkey   (scheduler_id => schedulers.id)
 #
 FactoryBot.define do
   factory :destination, aliases: [:rate], class: 'Routing::Destination' do

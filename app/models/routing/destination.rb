@@ -45,9 +45,8 @@
 #
 # Foreign Keys
 #
-#  destinations_rate_group_id_fkey        (rate_group_id => rate_groups.id)
-#  destinations_routing_tag_mode_id_fkey  (routing_tag_mode_id => routing_tag_modes.id)
-#  destinations_scheduler_id_fkey         (scheduler_id => schedulers.id)
+#  destinations_rate_group_id_fkey  (rate_group_id => rate_groups.id)
+#  destinations_scheduler_id_fkey   (scheduler_id => schedulers.id)
 #
 
 class Routing::Destination < ApplicationRecord
@@ -60,7 +59,6 @@ class Routing::Destination < ApplicationRecord
   has_many :quality_stats, class_name: 'Stats::TerminationQualityStat', foreign_key: :destination_id
   has_many :destination_next_rates, class_name: 'Routing::DestinationNextRate', foreign_key: :destination_id, dependent: :delete_all
 
-  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
   include WithPaperTrail
@@ -103,7 +101,7 @@ class Routing::Destination < ApplicationRecord
 
   validates :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
-                        :asr_limit, :acd_limit, :short_calls_limit, :routing_tag_mode, presence: true
+                        :asr_limit, :acd_limit, :short_calls_limit, presence: true
   validates :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee, numericality: true
   validates :prefix, format: { without: /\s/ }
 
@@ -111,6 +109,7 @@ class Routing::Destination < ApplicationRecord
   validates :dst_number_min_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
   validates :dst_number_max_length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: false, only_integer: true }
 
+  validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
   validates :profit_control_mode_id, inclusion: { in: Routing::RateProfitControlMode::MODES.keys }, allow_nil: true
   validates :rate_policy_id, inclusion: { in: Routing::DestinationRatePolicy::POLICIES.keys }, allow_nil: false
 
@@ -154,6 +153,10 @@ class Routing::Destination < ApplicationRecord
 
   def profit_control_mode_name
     Routing::RateProfitControlMode::MODES[profit_control_mode_id]
+  end
+
+  def routing_tag_mode_name
+    Routing::RoutingTagMode::MODES[routing_tag_mode_id]
   end
 
   def rate_policy_name

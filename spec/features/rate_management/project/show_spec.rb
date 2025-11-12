@@ -67,7 +67,7 @@ RSpec.describe 'Rate Management Project Show', js: true, bullet: [:n] do
   context 'when project has many routing tags and mode OR' do
     let(:record_attrs) do
       super().merge routing_tag_ids: routing_tags.map(&:id),
-                    routing_tag_mode_id: Routing::RoutingTagMode::CONST::OR
+                    routing_tag_mode_id: Routing::RoutingTagMode::MODE_OR
     end
     let!(:routing_tags) do
       FactoryBot.create_list(:routing_tag, 20)
@@ -88,7 +88,7 @@ RSpec.describe 'Rate Management Project Show', js: true, bullet: [:n] do
   context 'when project has many routing tags and mode AND' do
     let(:record_attrs) do
       super().merge routing_tag_ids: routing_tags.map(&:id),
-                    routing_tag_mode_id: Routing::RoutingTagMode::CONST::AND
+                    routing_tag_mode_id: Routing::RoutingTagMode::MODE_AND
     end
     let!(:routing_tags) do
       FactoryBot.create_list(:routing_tag, 20)

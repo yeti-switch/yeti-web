@@ -1,30 +1,25 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: class4.routing_tag_modes
-#
-#  id   :integer(2)       not null, primary key
-#  name :string           not null
-#
-# Indexes
-#
-#  routing_tag_modes_name_key  (name) UNIQUE
-#
+class Routing::RoutingTagMode
+  MODE_OR = 0
+  MODE_AND = 1
+  MODE_IN = 2
 
-class Routing::RoutingTagMode < ApplicationRecord
-  self.table_name = 'class4.routing_tag_modes'
+  MODES = {
+    MODE_OR => 'OR',
+    MODE_AND => 'AND',
+    MODE_IN => 'IN'
+  }.freeze
 
-  validates :name, presence: true, uniqueness: true
-
-  module CONST
-    OR = 0
-    AND = 1
-
-    freeze
+  def self.separator(id)
+    if id == MODE_OR
+      ' <b>|</b> '
+    elsif id == MODE_AND
+      ' <b>&</b> '
+    elsif id == MODE_IN
+      '<b>, </b>'
+    end
   end
-
-  after_initialize { readonly! }
 
   def and?
     id == CONST::AND

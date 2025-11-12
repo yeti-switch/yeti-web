@@ -58,7 +58,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_161e735c3a  (routing_tag_mode_id => routing_tag_modes.id)
 #  fk_rails_2bccc045c8  (pricelist_id => ratemanagement.pricelists.id)
 #  fk_rails_2f466a9c79  (routeset_discriminator_id => routeset_discriminators.id)
 #  fk_rails_5952853742  (routing_group_id => routing_groups.id)

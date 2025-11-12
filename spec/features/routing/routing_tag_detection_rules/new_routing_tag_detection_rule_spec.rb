@@ -22,7 +22,7 @@ RSpec.describe 'Create new Routing Tag Detection Rule', type: :feature, js: true
       tag_action_id: nil,
       tag_action_value: [],
       routing_tag_ids: [],
-      routing_tag_mode_id: Routing::RoutingTagMode::CONST::OR,
+      routing_tag_mode_id: Routing::RoutingTagMode::MODE_OR,
       src_prefix: '',
       dst_prefix: ''
     )
@@ -47,7 +47,7 @@ RSpec.describe 'Create new Routing Tag Detection Rule', type: :feature, js: true
         tag_action_id: nil,
         tag_action_value: [],
         routing_tag_ids: [],
-        routing_tag_mode_id: Routing::RoutingTagMode::CONST::OR,
+        routing_tag_mode_id: Routing::RoutingTagMode::MODE_OR,
         src_prefix: '123',
         dst_prefix: '456'
       )

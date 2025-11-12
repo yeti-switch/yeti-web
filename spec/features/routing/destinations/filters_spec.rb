@@ -215,7 +215,7 @@ RSpec.describe 'Filter Destination records', :js do
       let(:destination_attrs) do
         {
           routing_tag_ids: tags.map(&:id),
-          routing_tag_mode_id: Routing::RoutingTagMode::CONST::OR
+          routing_tag_mode_id: Routing::RoutingTagMode::MODE_OR
         }
       end
       before { create(:destination) }

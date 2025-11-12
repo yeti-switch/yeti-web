@@ -42307,16 +42307,6 @@ ALTER SEQUENCE class4.routing_tag_detection_rules_id_seq OWNED BY class4.routing
 
 
 --
--- Name: routing_tag_modes; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.routing_tag_modes (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: routing_tags; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -47404,22 +47394,6 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
--- Name: routing_tag_modes routing_tag_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.routing_tag_modes
-    ADD CONSTRAINT routing_tag_modes_name_key UNIQUE (name);
-
-
---
--- Name: routing_tag_modes routing_tag_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.routing_tag_modes
-    ADD CONSTRAINT routing_tag_modes_pkey PRIMARY KEY (id);
-
-
---
 -- Name: routing_tags routing_tags_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -49571,14 +49545,6 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
--- Name: destinations destinations_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
-
-
---
 -- Name: destinations destinations_scheduler_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -49632,14 +49598,6 @@ ALTER TABLE ONLY class4.dialpeers
 
 ALTER TABLE ONLY class4.dialpeers
     ADD CONSTRAINT dialpeers_routing_group_id_fkey FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
-
-
---
--- Name: dialpeers dialpeers_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.dialpeers
-    ADD CONSTRAINT dialpeers_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
 
 
 --
@@ -50123,14 +50081,6 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
--- Name: routing_tag_detection_rules routing_tag_detection_rules_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.routing_tag_detection_rules
-    ADD CONSTRAINT routing_tag_detection_rules_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
-
-
---
 -- Name: routing_tag_detection_rules routing_tag_detection_rules_src_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -50243,14 +50193,6 @@ ALTER TABLE ONLY public.contractors
 
 
 --
--- Name: pricelist_items fk_rails_161e735c3a; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
---
-
-ALTER TABLE ONLY ratemanagement.pricelist_items
-    ADD CONSTRAINT fk_rails_161e735c3a FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
-
-
---
 -- Name: projects fk_rails_2016c4d0a1; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
 --
 
@@ -50280,14 +50222,6 @@ ALTER TABLE ONLY ratemanagement.pricelist_items
 
 ALTER TABLE ONLY ratemanagement.pricelist_items
     ADD CONSTRAINT fk_rails_5952853742 FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
-
-
---
--- Name: projects fk_rails_8c0fbee7b0; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
---
-
-ALTER TABLE ONLY ratemanagement.projects
-    ADD CONSTRAINT fk_rails_8c0fbee7b0 FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
 
 
 --
@@ -50523,6 +50457,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251112214245'),
 ('20251109191129'),
 ('20251030205037'),
 ('20251030195717'),
