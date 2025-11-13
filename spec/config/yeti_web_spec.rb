@@ -79,6 +79,7 @@ RSpec.describe 'config/yeti_web.yml' do
         secret_access_key: a_kind_of(String),
         region: a_kind_of(String),
         force_path_style: be_one_of(true, false),
+        client_options: a_kind_of(Hash),
         pcap: {
           bucket: a_kind_of(String)
         },
