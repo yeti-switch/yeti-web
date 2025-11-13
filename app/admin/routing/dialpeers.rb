@@ -41,7 +41,7 @@ ActiveAdmin.register Dialpeer do
                  :dst_rewrite_rule, :dst_rewrite_result,
                  :reverse_billing,
                  [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
-                 [:routing_tag_mode_name, proc { |row| row.routing_tag_mode.try(:name) }]
+                 :routing_tag_mode_name
 
   acts_as_import resource_class: Importing::Dialpeer,
                  skip_columns: [:routing_tag_ids]
@@ -66,7 +66,7 @@ ActiveAdmin.register Dialpeer do
     #
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
-      super.preload(:gateway, :gateway_group, :routing_group, :routing_tag_mode, :vendor, :account, :statistic,
+      super.preload(:gateway, :gateway_group, :routing_group, :vendor, :account, :statistic,
                     :routeset_discriminator, network_prefix: %i[country network])
     end
   end
@@ -235,7 +235,8 @@ ActiveAdmin.register Dialpeer do
               include_hidden: false,
               input_html: { class: 'chosen' }
 
-      f.input :routing_tag_mode
+      f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert
+
       f.contractor_input :vendor_id, label: 'Vendor'
 
       f.account_input :account_id,
@@ -310,7 +311,7 @@ ActiveAdmin.register Dialpeer do
           row :locked
           row :routing_group
           row :routing_tags
-          row :routing_tag_mode
+          row :routing_tag_mode, &:routing_tag_mode_name
           row :vendor do
             auto_link(s.vendor, s.vendor.decorated_vendor_display_name)
           end

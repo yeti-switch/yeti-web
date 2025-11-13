@@ -36,11 +36,10 @@ class Routing::RoutingTagDetectionRule < ApplicationRecord
   belongs_to :dst_area, class_name: 'Routing::Area', foreign_key: :dst_area_id, optional: true
   belongs_to :tag_action, class_name: 'Routing::TagAction', optional: true
 
-  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
   array_belongs_to :tag_action_values, class_name: 'Routing::RoutingTag', foreign_key: :tag_action_value
 
-  validates :routing_tag_mode, presence: true
+  validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
 
   include RoutingTagIdsScopeable
 
@@ -49,6 +48,10 @@ class Routing::RoutingTagDetectionRule < ApplicationRecord
   end
 
   scope :routing_tag_ids_array_contains, ->(*tag_id) { where.contains routing_tag_ids: Array(tag_id) }
+
+  def routing_tag_mode_name
+    Routing::RoutingTagMode::MODES[routing_tag_mode_id]
+  end
 
   private
 
