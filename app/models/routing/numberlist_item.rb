@@ -42,6 +42,7 @@ class Routing::NumberlistItem < ApplicationRecord
 
   ACTION_REJECT = 1
   ACTION_ACCEPT = 2
+  ACTION_DEFAULT_LABEL = 'Default action'
   ACTIONS = {
     ACTION_REJECT => 'Reject call',
     ACTION_ACCEPT => 'Allow call'
@@ -97,7 +98,7 @@ class Routing::NumberlistItem < ApplicationRecord
   end
 
   def action_name
-    action_id.nil? ? 'Default action' : ACTIONS[action_id]
+    action_id.nil? ? ACTION_DEFAULT_LABEL : ACTIONS[action_id]
   end
 
   def rewrite_ss_status_name

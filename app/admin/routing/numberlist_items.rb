@@ -50,7 +50,10 @@ ActiveAdmin.register Routing::NumberlistItem do
                           path: '/numberlists/search'
   filter :key
   filter :lua_script, input_html: { class: 'chosen' }
-  filter :action_id_eq, label: 'Action', as: :select, collection: Routing::NumberlistItem::ACTIONS.invert
+  filter :action_id_eq, label: 'Action', as: :select,
+                        collection: Routing::NumberlistItem::ACTIONS.invert,
+                        input_html: { class: :chosen }
+
   filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
   filter :created_at, as: :date_time_range
   filter :updated_at, as: :date_time_range
@@ -139,7 +142,10 @@ ActiveAdmin.register Routing::NumberlistItem do
 
       f.input :number_min_length
       f.input :number_max_length
-      f.input :action_id, as: :select, include_blank: 'Default action', collection: Routing::NumberlistItem::ACTIONS.invert
+      f.input :action_id, as: :select,
+                          include_blank: Routing::NumberlistItem::ACTION_DEFAULT_LABEL,
+                          collection: Routing::NumberlistItem::ACTIONS.invert,
+                          input_html: { class: :chosen }
       f.input :src_rewrite_rule
       f.input :src_rewrite_result
       f.input :defer_src_rewrite
