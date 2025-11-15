@@ -160,7 +160,6 @@ Rails.application.routes.draw do
           jsonapi_resources :rateplans
           jsonapi_resources :routing_groups
           jsonapi_resources :routing_tags
-          jsonapi_resources :routing_tag_modes
           jsonapi_resources :routeset_discriminators
           jsonapi_resources :destinations
           jsonapi_resources :destination_next_rates

@@ -63,7 +63,6 @@
 #  dialpeers_gateway_id_fkey                 (gateway_id => gateways.id)
 #  dialpeers_routeset_discriminator_id_fkey  (routeset_discriminator_id => routeset_discriminators.id)
 #  dialpeers_routing_group_id_fkey           (routing_group_id => routing_groups.id)
-#  dialpeers_routing_tag_mode_id_fkey        (routing_tag_mode_id => routing_tag_modes.id)
 #  dialpeers_scheduler_id_fkey               (scheduler_id => schedulers.id)
 #  dialpeers_vendor_id_fkey                  (vendor_id => contractors.id)
 #
@@ -89,17 +88,17 @@ class Dialpeer < ApplicationRecord
            class_name: 'RateManagement::PricelistItem',
            dependent: :nullify
   belongs_to :current_rate, class_name: 'DialpeerNextRate', foreign_key: :current_rate_id, optional: true
-  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id
   belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id
 
   # has_many :routing_plans, class_name: 'Routing::RoutingPlan', foreign_key: :routing_group_id
   # has_and_belongs_to_many :routing_plans, class_name: 'Routing::RoutingPlan', join_table: "class4.routing_plan_groups", association_foreign_key: :routing_group_id
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
+  validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
   validates :account, :routing_group, :vendor, :valid_from, :valid_till,
             :initial_rate, :next_rate,
             :initial_interval, :next_interval, :connect_fee,
-            :routing_tag_mode, :routeset_discriminator, :lcr_rate_multiplier, presence: true
+            :routeset_discriminator, :lcr_rate_multiplier, presence: true
   validates :initial_rate, :next_rate, :connect_fee, :lcr_rate_multiplier, numericality: true
   validates :initial_interval, :next_interval, numericality: { greater_than: 0 } # we have DB constraints for this
   validates :acd_limit, numericality: { greater_than_or_equal_to: 0.00 }
@@ -176,6 +175,10 @@ class Dialpeer < ApplicationRecord
 
   def display_name
     "#{prefix} | #{id}"
+  end
+
+  def routing_tag_mode_name
+    Routing::RoutingTagMode::MODES[routing_tag_mode_id]
   end
 
   def is_valid_from?

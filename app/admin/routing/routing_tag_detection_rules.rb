@@ -11,7 +11,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
 
   acts_as_export :id,
                  [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
-                 [:routing_tag_mode_name, proc { |row| row.routing_tag_mode.try(:name) }],
+                 :routing_tag_mode_name,
                  [:src_area_name, proc { |row| row.src_area.try(:name) }],
                  [:dst_area_name, proc { |row| row.dst_area.try(:name) }],
                  :src_prefix, :dst_prefix,
@@ -25,7 +25,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
                 :tag_action_id, :routing_tag_mode_id, tag_action_value: [],
                                                       routing_tag_ids: []
 
-  includes :src_area, :dst_area, :tag_action, :routing_tag_mode
+  includes :src_area, :dst_area, :tag_action
 
   controller do
     def update
@@ -56,7 +56,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
     attributes_table do
       row :id
       row :routing_tags
-      row :routing_tag_mode
+      row :routing_tag_mode, &:routing_tag_mode_name
       row :src_area
       row :dst_area
       row :src_prefix
@@ -74,7 +74,7 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
                                 multiple: true,
                                 include_hidden: false,
                                 input_html: { class: 'chosen' }
-      f.input :routing_tag_mode
+      f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert
       f.input :src_area
       f.input :dst_area
       f.input :src_prefix

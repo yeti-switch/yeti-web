@@ -8,7 +8,7 @@ class BatchUpdateForm::Destination < BatchUpdateForm::Base
   attribute :prefix
   attribute :dst_number_min_length
   attribute :dst_number_max_length
-  attribute :routing_tag_mode_id, type: :foreign_key, class_name: 'Routing::RoutingTagMode'
+  attribute :routing_tag_mode_id, type: :integer_collection, collection: Routing::RoutingTagMode::MODES.invert.to_a
   attribute :reject_calls, type: :boolean
   attribute :quality_alarm, type: :boolean
   attribute :rate_group_id, type: :foreign_key, class_name: 'Routing::RateGroup'

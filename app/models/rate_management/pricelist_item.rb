@@ -58,7 +58,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_161e735c3a  (routing_tag_mode_id => routing_tag_modes.id)
 #  fk_rails_2bccc045c8  (pricelist_id => ratemanagement.pricelists.id)
 #  fk_rails_2f466a9c79  (routeset_discriminator_id => routeset_discriminators.id)
 #  fk_rails_5952853742  (routing_group_id => routing_groups.id)
@@ -90,12 +89,12 @@ module RateManagement
     belongs_to :routing_group, class_name: 'Routing::RoutingGroup', optional: true
     belongs_to :account, optional: true
     belongs_to :vendor, class_name: 'Contractor', optional: true
-    belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode'
     belongs_to :pricelist, class_name: 'RateManagement::Pricelist'
     belongs_to :dialpeer, class_name: 'Dialpeer', optional: true
     belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', optional: true
     array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
+    validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
     validates :initial_rate, :next_rate, numericality: true
     validates :initial_interval, :next_interval, numericality: { greater_than: 0 }
 

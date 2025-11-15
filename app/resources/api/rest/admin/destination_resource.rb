@@ -7,12 +7,11 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
              :dp_margin_percent, :initial_rate, :asr_limit, :acd_limit, :short_calls_limit,
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,
              :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing,
-             :profit_control_mode_id, :rate_policy_id
+             :profit_control_mode_id, :rate_policy_id, :routing_tag_mode_id
 
   paginator :paged
 
   has_one :rate_group, class_name: 'RateGroup'
-  has_one :routing_tag_mode, class_name: 'RoutingTagMode'
   has_one :country, class_name: 'Country', foreign_key_on: :related
   has_one :network, class_name: 'Network', foreign_key_on: :related
   has_many :destination_next_rates, class_name: 'DestinationNextRate'
@@ -43,6 +42,8 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
   ransack_filter :reverse_billing, type: :boolean
   ransack_filter :profit_control_mode_id, type: :number
   ransack_filter :rate_policy_id, type: :number
+  ransack_filter :routing_tag_mode_id, type: :number
+
   filter :rateplan_id_eq, apply: lambda { |records, values, _options|
     records.ransack(rateplan_id_filter: values).result
   }
@@ -69,7 +70,7 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
       valid_from
       valid_till
       profit_control_mode_id
-      routing_tag_mode
+      routing_tag_mode_id
       external_id
       asr_limit
       acd_limit

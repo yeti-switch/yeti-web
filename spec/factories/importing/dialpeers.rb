@@ -104,7 +104,7 @@ FactoryBot.define do
         record.gateway_name = record.gateway.name if record.gateway.present?
         record.gateway_group_name = record.gateway_group.name if record.gateway_group.present?
         record.routing_group_name = record.routing_group.name if record.routing_group.present?
-        record.routing_tag_mode_name = record.routing_tag_mode.name if record.routing_tag_mode.present?
+        record.routing_tag_mode_name = Routing::RoutingTagMode::MODES[record.routing_tag_mode_id] if record.routing_tag_mode_id.present?
         record.routeset_discriminator_name = record.routeset_discriminator.name if record.routeset_discriminator.present?
       end
     end

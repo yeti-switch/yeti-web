@@ -35,13 +35,13 @@ module RateManagement
 
     verify_attribute :routing_tag_mode, apply: lambda { |routing_tag_mode, row_number|
       if routing_tag_mode.nil?
-        add_error("Routing tag mode can't be blank", row_number) if project.routing_tag_mode.nil?
+        add_error("Routing tag mode can't be blank", row_number) if project.routing_tag_mode_id.nil?
         return project.routing_tag_mode_id
       end
 
-      routing_tag_id = routing_tag_modes_hash[routing_tag_mode]
-      add_error('Routing tag mode is invalid', row_number) if routing_tag_id.nil?
-      routing_tag_id
+      routing_tag_mode_id = Routing::RoutingTagMode::MODES.invert[routing_tag_mode]
+      add_error('Routing tag mode is invalid', row_number) if routing_tag_mode_id.nil?
+      routing_tag_mode_id
     }
 
     verify_attribute :initial_rate, apply: lambda { |initial_rate, row_number|
@@ -236,10 +236,6 @@ module RateManagement
 
     define_memoizable :routing_tags_hash, apply: lambda {
       Routing::RoutingTag.pluck(:name, :id).to_h.merge(Routing::RoutingTag::ANY_TAG => nil)
-    }
-
-    define_memoizable :routing_tag_modes_hash, apply: lambda {
-      Routing::RoutingTagMode.pluck(:name, :id).to_h
     }
 
     # @return [Array<String>]

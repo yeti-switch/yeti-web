@@ -57,7 +57,6 @@ class DialpeerNextRate < ApplicationRecord
         account
         vendor
         current_rate
-        routing_tag_mode
         routeset_discriminator
       ]
     )

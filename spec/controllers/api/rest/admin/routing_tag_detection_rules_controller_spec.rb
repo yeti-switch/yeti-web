@@ -9,7 +9,6 @@ RSpec.describe Api::Rest::Admin::RoutingTagDetectionRulesController, type: :cont
 
   let(:area_1) { create :area }
   let(:area_2) { create :area }
-  let(:rtm_and) { Routing::RoutingTagMode.last }
 
   let(:record) do
     create :routing_tag_detection_rule
@@ -58,13 +57,13 @@ RSpec.describe Api::Rest::Admin::RoutingTagDetectionRulesController, type: :cont
         'src-prefix': '111',
         'dst-prefix': '222',
         'tag-action-value': Routing::RoutingTag.all.pluck(:id),
-        'routing-tag-ids': Routing::RoutingTag.all.pluck(:id)
+        'routing-tag-ids': Routing::RoutingTag.all.pluck(:id),
+        'routing-tag-mode-id': Routing::RoutingTagMode::MODE_AND
       }
     end
 
     let(:relationships) do
       {
-        'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
         'src-area': wrap_relationship(:areas, area_1.id),
         'dst-area': wrap_relationship(:areas, area_2.id)
       }
@@ -84,7 +83,6 @@ RSpec.describe Api::Rest::Admin::RoutingTagDetectionRulesController, type: :cont
     end
     let(:relationships) do
       {
-        'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
         'src-area': wrap_relationship(:areas, area_1.id),
         'dst-area': wrap_relationship(:areas, area_2.id)
       }

@@ -6,6 +6,8 @@ shared_context :init_importing_dialpeer do |args|
   args ||= {}
 
   before do
+    rtm_id = Routing::RoutingTagMode::MODES.keys.sample
+
     fields = {
       enabled: true,
       prefix: '34918051239',
@@ -33,8 +35,8 @@ shared_context :init_importing_dialpeer do |args|
       initial_interval: 1,
       next_interval: 1,
       routing_tag_ids: [tag_ua.id, tag_us.id],
-      routing_tag_mode_name: Routing::RoutingTagMode.last.name,
-      routing_tag_mode_id: Routing::RoutingTagMode.last.id,
+      routing_tag_mode_name: Routing::RoutingTagMode::MODES[rtm_id],
+      routing_tag_mode_id: rtm_id,
       routeset_discriminator_id: @routeset_discriminator.id,
       routeset_discriminator_name: @routeset_discriminator.name,
       is_changed: true

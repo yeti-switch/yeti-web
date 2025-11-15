@@ -52,7 +52,6 @@
 # Foreign Keys
 #
 #  fk_rails_2016c4d0a1  (routing_group_id => routing_groups.id)
-#  fk_rails_8c0fbee7b0  (routing_tag_mode_id => routing_tag_modes.id)
 #  fk_rails_9da44a0caf  (gateway_group_id => gateway_groups.id)
 #  fk_rails_ab15e0e646  (gateway_id => gateways.id)
 #  fk_rails_bba2bcfb14  (account_id => accounts.id)
@@ -74,7 +73,7 @@ module RateManagement
     belongs_to :routing_group, class_name: 'Routing::RoutingGroup'
     belongs_to :account
     belongs_to :vendor, class_name: 'Contractor'
-    belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', optional: true
+
     belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator'
     array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
     has_many :pricelists, class_name: 'RateManagement::Pricelist', dependent: :restrict_with_error
@@ -83,6 +82,7 @@ module RateManagement
       self.routing_tag_ids = RoutingTagsSort.call(routing_tag_ids)
     end
 
+    validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: true
     validates :name, presence: true
     validates :enabled, :exclusive_route, inclusion: { in: [true, false] }
     validates :name, uniqueness: true, allow_nil: true
@@ -153,6 +153,10 @@ module RateManagement
 
     def display_name
       "#{name} | #{id}"
+    end
+
+    def routing_tag_mode_name
+      Routing::RoutingTagMode::MODES[routing_tag_mode_id]
     end
 
     private
