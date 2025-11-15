@@ -17,8 +17,18 @@ RSpec.shared_context :customer_v1_cookie_helpers do
     CustomerV1Auth::Authenticator.build_token(auth_context, expires_at: expiration)
   end
 
+  def build_customer_token_from_config(config, expiration:)
+    auth_context = CustomerV1Auth::AuthContext.from_config(config)
+    CustomerV1Auth::Authenticator.build_token(auth_context, expires_at: expiration)
+  end
+
   def build_customer_cookie(api_access_id, expiration:)
     token = build_customer_token(api_access_id, expiration: expiration)
+    build_raw_cookie(token, expiration: expiration)
+  end
+
+  def build_customer_cookie_from_config(auth_context, expiration:)
+    token = build_customer_token_from_config(auth_context, expiration: expiration)
     build_raw_cookie(token, expiration: expiration)
   end
 end
