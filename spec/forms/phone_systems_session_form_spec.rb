@@ -14,10 +14,10 @@ RSpec.describe PhoneSystemsSessionForm do
   let(:api_access_attrs) { { account_ids: [account.id], customer: } }
   let(:api_access) { create :api_access, api_access_attrs }
   let(:form_attributes) { { service: service.uuid } }
+  let(:auth_context) { CustomerV1Auth::AuthContext.from_api_access(api_access) }
   let(:form) do
     f = described_class.new(form_attributes)
-    f.customer = service.account.contractor
-    f.api_access = api_access
+    f.auth_context = auth_context
     f
   end
 
@@ -47,22 +47,14 @@ RSpec.describe PhoneSystemsSessionForm do
     let!(:another_customer) { create(:customer) }
     let!(:another_account) { create(:account, contractor: another_customer) }
     let(:api_access_attrs) { { account_ids: [another_account.id], customer: another_customer } }
-    let(:form_attributes) { { service: service.uuid } }
-
-    let(:form) do
-      f = described_class.new(form_attributes)
-      f.customer = another_customer
-      f.api_access = api_access
-      f
-    end
 
     it 'should return validation error message' do
       subject
 
       expect(form.errors.messages).to match_array(
-        base: ['service not found'],
-        service: ['Account of current Service is not related to current API Access']
-      )
+                                        base: ['service not found'],
+                                        service: ['Account of current Service is not related to current API Access']
+                                      )
     end
   end
 

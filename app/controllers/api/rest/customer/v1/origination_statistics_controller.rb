@@ -8,10 +8,7 @@ class Api::Rest::Customer::V1::OriginationStatisticsController < Api::RestContro
   after_action :setup_authorization_cookie
 
   def show
-    statistic = ClickhouseReport::OriginationStatistic.new(
-      params.to_unsafe_h,
-      customer: current_customer
-    )
+    statistic = ClickhouseReport::OriginationStatistic.new(params.to_unsafe_h, auth_context:)
 
     begin
       rows = statistic.collection

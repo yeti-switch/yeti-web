@@ -22,7 +22,7 @@ module Authentication
 
       # @param admin_user [AdminUser]
       # @param expires_at [Time,nil] overrides default expiration
-      # @return [Authentication::CustomerV1Auth::Result]
+      # @return [Authentication::AdminAuth::Result]
       def build_auth_data(admin_user, expires_at: nil)
         expires_at ||= EXPIRATION_INTERVAL&.from_now
         payload = { sub: admin_user.id, aud: AUDIENCE }

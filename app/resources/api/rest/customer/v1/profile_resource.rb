@@ -117,7 +117,7 @@ module Api
           end
 
           def self.find_by_key(_key, options = {})
-            customer_portal_access_profile_id = options[:context][:current_customer].customer_portal_access_profile_id
+            customer_portal_access_profile_id = options[:context][:auth_context].customer_portal_access_profile_id
             model = ::System::CustomerPortalAccessProfile.find_by(id: customer_portal_access_profile_id)
             new(model, options[:context])
           end

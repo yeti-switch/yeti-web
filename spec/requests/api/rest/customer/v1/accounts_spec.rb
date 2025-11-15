@@ -23,6 +23,38 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
       let(:records_ids) { accounts.map { |r| r.reload.uuid } }
     end
 
+    context 'with dynamic auth' do
+      let(:auth_config) { { customer_id: customer.id } }
+      let(:api_access) { nil }
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        expect(response_json[:data]).to match_array(
+          [
+            hash_including(id: accounts.first.reload.uuid),
+            hash_including(id: accounts.second.reload.uuid)
+          ]
+        )
+      end
+
+      context 'with account_ids' do
+        let!(:accounts) { create_list :account, 4, contractor: customer }
+        let(:allowed_accounts) { accounts.slice(0, 2) }
+        let(:auth_config) { super().merge account_ids: allowed_accounts.map(&:id) }
+
+        it 'returns only Accounts listed in account_ids' do
+          subject
+          expect(response_json[:data]).to match_array(
+            [
+              hash_including(id: allowed_accounts.first.reload.uuid),
+              hash_including(id: allowed_accounts.second.reload.uuid)
+            ]
+          )
+        end
+      end
+    end
+
     context 'account_ids is empty' do
       it 'returns records of this customer' do
         subject
@@ -68,7 +100,7 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
             id: api_access.id,
             customer_id: api_access.customer_id,
             login: api_access.login,
-            class: api_access.class.name
+            class: CustomerV1Auth::AuthContext.name
           }
         end
         let(:capture_error_tags) do
