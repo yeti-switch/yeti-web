@@ -89,12 +89,12 @@ module RateManagement
     belongs_to :routing_group, class_name: 'Routing::RoutingGroup', optional: true
     belongs_to :account, optional: true
     belongs_to :vendor, class_name: 'Contractor', optional: true
-    belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode'
     belongs_to :pricelist, class_name: 'RateManagement::Pricelist'
     belongs_to :dialpeer, class_name: 'Dialpeer', optional: true
     belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', optional: true
     array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
+    validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
     validates :initial_rate, :next_rate, numericality: true
     validates :initial_interval, :next_interval, numericality: { greater_than: 0 }
 

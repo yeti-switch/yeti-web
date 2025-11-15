@@ -82,7 +82,7 @@ module RateManagement
       self.routing_tag_ids = RoutingTagsSort.call(routing_tag_ids)
     end
 
-    validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
+    validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: true
     validates :name, presence: true
     validates :enabled, :exclusive_route, inclusion: { in: [true, false] }
     validates :name, uniqueness: true, allow_nil: true

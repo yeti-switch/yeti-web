@@ -472,6 +472,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'external-id': gateway.external_id,
         name: gateway.name,
         enabled: gateway.enabled,
+        'is-shared': gateway.is_shared,
         priority: gateway.priority,
         weight: gateway.weight,
         'acd-limit': gateway.acd_limit,
@@ -585,7 +586,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'acd-limit': 0.0,
         'asr-limit': 0.0,
         host: 'test.example.com',
-        'sip-schema-id': 2
+        'sip-schema-id': 2,
+        'is-shared': false
       }
     end
 
@@ -637,6 +639,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       expect(last_gateway).to have_attributes(
                                   name: json_api_request_attributes[:name],
                                   enabled: json_api_request_attributes[:enabled],
+                                  is_shared: json_api_request_attributes[:'is-shared'],
                                   priority: json_api_request_attributes[:priority],
                                   weight: json_api_request_attributes[:weight],
                                   acd_limit: json_api_request_attributes[:'acd-limit'],
@@ -707,7 +710,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'asr-limit': 0.1,
         host: 'other.test.example.com',
         'incoming-auth-username': 'other_incoming_auth_username',
-        'incoming-auth-password': 'other_incoming_auth_password'
+        'incoming-auth-password': 'other_incoming_auth_password',
+        'is-shared': true
       }
     end
 
