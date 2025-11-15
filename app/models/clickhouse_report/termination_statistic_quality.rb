@@ -20,7 +20,7 @@ module ClickhouseReport
            operation: :eq,
            required: true,
            format_value: lambda { |value, opts|
-             account = opts[:context][:customer].find_allowed_account(value)
+             account = opts[:context][:auth_context].find_allowed_account(value)
              raise InvalidParamValue, 'invalid value account-id' if account.nil?
 
              account.id

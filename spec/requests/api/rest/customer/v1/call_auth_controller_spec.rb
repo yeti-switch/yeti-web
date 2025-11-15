@@ -26,7 +26,7 @@ RSpec.describe Api::Rest::Customer::V1::CallAuthController, type: :request do
     end
 
     let(:token) do
-      result = Authentication::CustomerV1Auth.authenticate!(
+      result = CustomerV1Auth::Authenticator.authenticate!(
         'admin',
         '1234567890',
         remote_ip: '127.0.0.1'
@@ -40,7 +40,7 @@ RSpec.describe Api::Rest::Customer::V1::CallAuthController, type: :request do
         'Accept' => 'application/json',
         'Content-Type' => 'application/json',
         'REMOTE_ADDR' => remote_ip,
-        'Cookie' => "#{Authentication::CustomerV1Auth::COOKIE_NAME}=#{token}"
+        'Cookie' => "#{CustomerV1Auth::Authenticator::COOKIE_NAME}=#{token}"
       }
     end
     let(:remote_ip) { '127.0.0.1' }
@@ -70,7 +70,7 @@ RSpec.describe Api::Rest::Customer::V1::CallAuthController, type: :request do
         expect(actual_token_payload).to eq(
           [
             {
-              'exp' => Authentication::CustomerV1Auth::EXPIRATION_INTERVAL.from_now.to_i,
+              'exp' => CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.from_now.to_i,
               'gid' => provision_gateway.uuid,
               'iat' => Time.now.to_i
             },

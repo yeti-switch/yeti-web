@@ -104,8 +104,10 @@ module Yeti
                     config_for(secrets_yml_path)
                   else
                     secret_key_base = ENV['SECRET_KEY_BASE']
+                    customer_v1_jwt_secret = ENV['CUSTOMER_V1_JWT_SECRET']
                     secret_key_base ||= SecureRandom.hex(64) if Rails.env.local?
-                    { secret_key_base: }
+                    customer_v1_jwt_secret ||= SecureRandom.hex(64) if Rails.env.local?
+                    { secret_key_base:, customer_v1_jwt_secret: }
                   end
     config.secrets = ActiveSupport::OrderedOptions.new
     config.secrets.merge!(secrets_cfg)

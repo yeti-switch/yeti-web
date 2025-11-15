@@ -61,7 +61,7 @@ RSpec.shared_examples :json_api_customer_v1_check_authorization do |success_stat
 
     it 'responds with set-cookie header', freeze_time: true do
       subject
-      expiration = Authentication::CustomerV1Auth::EXPIRATION_INTERVAL.from_now
+      expiration = CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.from_now
       expected_cookie = build_customer_cookie(api_access.id, expiration: expiration)
       expect(response.headers['set-cookie']).to eq(expected_cookie)
     end
@@ -73,7 +73,7 @@ RSpec.shared_examples :json_api_customer_v1_check_authorization do |success_stat
 
       it 'responds with set-cookie header', freeze_time: true do
         subject
-        expiration = Authentication::CustomerV1Auth::EXPIRATION_INTERVAL.from_now
+        expiration = CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.from_now
         expected_cookie = build_customer_cookie(api_access.id, expiration: expiration)
         expect(response.headers['set-cookie']).to eq(expected_cookie)
       end
@@ -81,7 +81,7 @@ RSpec.shared_examples :json_api_customer_v1_check_authorization do |success_stat
 
     context 'when expiration interval is blank' do
       before do
-        stub_const('Authentication::CustomerV1Auth::EXPIRATION_INTERVAL', nil)
+        stub_const('CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL', nil)
       end
 
       include_examples :responds_with_status, success_status

@@ -4,7 +4,7 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   before_action :authenticate!, only: :create
-  rescue_from Authentication::CustomerV1Auth::AuthenticationError, with: :handle_authentication_error
+  rescue_from CustomerV1Auth::Authenticator::AuthenticationError, with: :handle_authentication_error
 
   include CustomerV1Authorizable
   include Memoizable
@@ -16,7 +16,7 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
 
   def create
     if auth_params[:cookie_auth]
-      cookies[Authentication::CustomerV1Auth::COOKIE_NAME] = {
+      cookies[CustomerV1Auth::Authenticator::COOKIE_NAME] = {
         value: @auth_token,
         expires: @expires_at,
         httponly: true
@@ -28,11 +28,11 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
   end
 
   def show
-    render json: { 'allow-rec': current_customer.allow_listen_recording }
+    render json: { 'allow-rec': auth_context.allow_listen_recording }
   end
 
   def destroy
-    cookies[Authentication::CustomerV1Auth::COOKIE_NAME] = {
+    cookies[CustomerV1Auth::Authenticator::COOKIE_NAME] = {
       value: 'logout',
       expires: Time.parse('1970-01-01 00:00:00 UTC'),
       httponly: true
@@ -47,7 +47,7 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
   private
 
   def authenticate!
-    result = Authentication::CustomerV1Auth.authenticate!(
+    result = CustomerV1Auth::Authenticator.authenticate!(
       auth_params[:login],
       auth_params[:password],
       remote_ip: remote_ip

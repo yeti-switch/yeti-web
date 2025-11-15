@@ -46,18 +46,18 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
         actual_token_payload = JwtToken.decode(
           response_json[:jwt],
           verify_expiration: true,
-          aud: [Authentication::CustomerV1Auth::AUDIENCE]
+          aud: [CustomerV1Auth::Authenticator::AUDIENCE]
         )
         expect(actual_token_payload).to match(
                                           sub: api_access.id,
-                                          aud: [Authentication::CustomerV1Auth::AUDIENCE],
-                                          exp: Authentication::CustomerV1Auth::EXPIRATION_INTERVAL.from_now.to_i
+                                          aud: [CustomerV1Auth::Authenticator::AUDIENCE],
+                                          exp: CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.from_now.to_i
                                         )
       end
 
       context 'when expiration interval is blank' do
         before do
-          stub_const('Authentication::CustomerV1Auth::EXPIRATION_INTERVAL', nil)
+          stub_const('CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL', nil)
         end
 
         it 'responds with jwt' do
@@ -67,11 +67,11 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
           actual_token_payload = JwtToken.decode(
             response_json[:jwt],
             verify_expiration: false,
-            aud: [Authentication::CustomerV1Auth::AUDIENCE]
+            aud: [CustomerV1Auth::Authenticator::AUDIENCE]
           )
           expect(actual_token_payload).to match(
                                             sub: api_access.id,
-                                            aud: [Authentication::CustomerV1Auth::AUDIENCE]
+                                            aud: [CustomerV1Auth::Authenticator::AUDIENCE]
                                           )
         end
       end
@@ -85,14 +85,14 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
           subject
           expect(response.status).to eq(201)
           expect(response.body).to be_blank
-          expiration = Authentication::CustomerV1Auth::EXPIRATION_INTERVAL.from_now
+          expiration = CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.from_now
           expected_cookie = build_customer_cookie(api_access.id, expiration: expiration)
           expect(response.headers['set-cookie']).to eq(expected_cookie)
         end
 
         context 'when expiration interval is blank' do
           before do
-            stub_const('Authentication::CustomerV1Auth::EXPIRATION_INTERVAL', nil)
+            stub_const('CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL', nil)
           end
 
           it 'responds with cookie', freeze_time: true do
