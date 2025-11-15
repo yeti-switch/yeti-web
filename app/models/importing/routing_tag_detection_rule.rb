@@ -50,10 +50,6 @@ class Importing::RoutingTagDetectionRule < Importing::Base
     tag_action_value
   ]
 
-  def routing_tag_mode_name
-    routing_tag_mode_id.nil? ? 'nil' : Routing::RoutingTagMode::MODES[routing_tag_mode_id]
-  end
-
   def self.after_import_hook
     resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
     resolve_null_tag('routing_tag_ids', 'routing_tag_names')
