@@ -154,3 +154,5 @@ gem 'opentelemetry-exporter-otlp'
 gem 'opentelemetry-instrumentation-all'
 gem 'opentelemetry-sdk'
 gem 'rails_semantic_logger', require: false
+
+gem 'good_job', '~> 4.12'

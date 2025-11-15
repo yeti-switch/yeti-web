@@ -10,7 +10,7 @@ ActiveAdmin.register Contractor do
   acts_as_async_destroy('Contractor')
   acts_as_async_update BatchUpdateForm::Contractor
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   acts_as_export :id, :name,
                  :enabled, :vendor, :customer,

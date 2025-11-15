@@ -22,7 +22,7 @@ module Jobs
     end
 
     def execute_cmd(cmd)
-      Open3.popen3(cmd) do |_stdin, _stdout, _stderr, wait_thr|
+      Open3.capture3(cmd) do |_stdin, _stdout, _stderr, wait_thr|
         o = _stdout.read
         e = _stderr.read
         return wait_thr.value, o, e
