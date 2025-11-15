@@ -5,7 +5,6 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
   let!(:_destinations) { FactoryBot.create_list :destination, 3 }
   let(:success_message) { I18n.t 'flash.actions.batch_actions.batch_update.job_scheduled' }
   let!(:rate_group) { Routing::RateGroup.take || FactoryBot.create(:rate_group) }
-  let!(:routing_tag_mode) { Routing::RoutingTagMode.take! }
   let!(:rate_policy_id) { Routing::DestinationRatePolicy::POLICY_DP }
   let!(:profit_control_mode_id) { Routing::RateProfitControlMode::MODE_PER_CALL }
   let!(:routing_tags) { create_list(:routing_tag, 5) }
@@ -21,7 +20,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       prefix: '_test',
       dst_number_min_length: '0',
       dst_number_max_length: '15',
-      routing_tag_mode_id: routing_tag_mode.id.to_s,
+      routing_tag_mode_id: Routing::RoutingTagMode::MODES.keys.sample.to_s,
       reject_calls: false,
       quality_alarm: true,
       rate_group_id: rate_group.id.to_s,

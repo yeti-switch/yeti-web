@@ -20,8 +20,4 @@ class Routing::RoutingTagMode
       '<b>, </b>'
     end
   end
-
-  def and?
-    id == CONST::AND
-  end
 end

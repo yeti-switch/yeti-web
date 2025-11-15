@@ -392,7 +392,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
       before { get :show, params: { id: destination.to_param, include: 'country' } }
 
       include_examples :responds_with_status, 200
-      include_examples :returns_json_api_record, type: 'destinations', relationships: %i[country network destination-next-rates rate-group routing-tag-mode] do
+      include_examples :returns_json_api_record, type: 'destinations', relationships: %i[country network destination-next-rates rate-group] do
         let(:json_api_record_id) { destination.id.to_s }
         let(:json_api_record_attributes) do
           hash_including(
@@ -435,12 +435,14 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
           'dp-margin-fixed': 0,
           'dp-margin-percent': 0,
           'profit-control-mode-id': Routing::RateProfitControlMode::MODE_PER_CALL,
-          'rate-policy-id': Routing::DestinationRatePolicy::POLICY_MIN }
+          'rate-policy-id': Routing::DestinationRatePolicy::POLICY_MIN,
+          'routing-tag-mode-id': Routing::RoutingTagMode::MODE_AND }
       end
 
       let(:relationships) do
-        { 'rate-group': wrap_relationship(:'rate-groups', create(:rate_group).id),
-          'routing-tag-mode': wrap_relationship(:'routing-tag-modes', 1) }
+        {
+          'rate-group': wrap_relationship(:'rate-groups', create(:rate_group).id)
+        }
       end
 
       it { expect(response.status).to eq(201) }
