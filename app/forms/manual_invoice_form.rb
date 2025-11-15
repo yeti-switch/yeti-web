@@ -50,7 +50,9 @@ class ManualInvoiceForm < ApplicationForm
   private
 
   def account_time_zone
-    account ? account.timezone.time_zone : Time.zone
+    return if account.nil?
+
+    ActiveSupport::TimeZone.new(account.timezone)
   end
 
   def validate_generated_invoices
