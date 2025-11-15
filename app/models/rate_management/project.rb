@@ -73,7 +73,7 @@ module RateManagement
     belongs_to :routing_group, class_name: 'Routing::RoutingGroup'
     belongs_to :account
     belongs_to :vendor, class_name: 'Contractor'
-    belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', optional: true
+
     belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator'
     array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
     has_many :pricelists, class_name: 'RateManagement::Pricelist', dependent: :restrict_with_error
@@ -82,6 +82,7 @@ module RateManagement
       self.routing_tag_ids = RoutingTagsSort.call(routing_tag_ids)
     end
 
+    validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
     validates :name, presence: true
     validates :enabled, :exclusive_route, inclusion: { in: [true, false] }
     validates :name, uniqueness: true, allow_nil: true
@@ -152,6 +153,10 @@ module RateManagement
 
     def display_name
       "#{name} | #{id}"
+    end
+
+    def routing_tag_mode_name
+      Routing::RoutingTagMode::MODES[routing_tag_mode_id]
     end
 
     private

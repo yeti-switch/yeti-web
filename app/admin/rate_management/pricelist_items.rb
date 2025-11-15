@@ -15,11 +15,9 @@ ActiveAdmin.register RateManagement::PricelistItem, as: 'Pricelist Item' do
         :routeset_discriminator,
         :gateway,
         :gateway_group,
-        :routing_tag_mode,
         dialpeer: %i[
           gateway
           gateway_group
-          routing_tag_mode
         ]
       )
     end
