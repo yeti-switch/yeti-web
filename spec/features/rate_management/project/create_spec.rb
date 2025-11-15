@@ -69,7 +69,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
         fill_in_chosen 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
         fill_in_chosen 'Routing Tags', with: new_attrs[:routing_tags].first.name, multiple: true
         fill_in_chosen 'Routing Tags', with: new_attrs[:routing_tags].second.name, multiple: true
-        fill_in_chosen 'Routing tag mode', with: new_attrs[:routing_tag_mode].name
+        fill_in_chosen 'Routing tag mode', with: Routing::RoutingTagMode::MODES[new_attrs[:routing_tag_mode_id]]
         fill_in 'Capacity', with: new_attrs[:capacity]
         fill_in 'Force hit rate', with: new_attrs[:force_hit_rate]
         fill_in 'Acd limit', with: new_attrs[:acd_limit]
@@ -95,7 +95,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
 
       let!(:gateway_group) { FactoryBot.create(:gateway_group, vendor: vendor) }
       let!(:routing_tags) { FactoryBot.create_list(:routing_tag, 3) }
-      let(:routing_tag_mode) { Routing::RoutingTagMode.find(1) }
+      let(:routing_tag_mode_id) { Routing::RoutingTagMode::MODES.keys.sample }
 
       let(:new_attrs) do
         {
@@ -121,7 +121,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
           reverse_billing: true,
           routeset_discriminator: routeset_discriminator,
           routing_group: routing_group,
-          routing_tag_mode: routing_tag_mode,
+          routing_tag_mode_id: routing_tag_mode_id,
           routing_tags: [routing_tags.first, routing_tags.second],
           short_calls_limit: 0.5,
           src_name_rewrite_result: 'rspec3',
@@ -162,7 +162,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
                              reverse_billing: new_attrs[:reverse_billing],
                              routeset_discriminator: new_attrs[:routeset_discriminator],
                              routing_group: new_attrs[:routing_group],
-                             routing_tag_mode: new_attrs[:routing_tag_mode],
+                             routing_tag_mode_id: new_attrs[:routing_tag_mode_id],
                              routing_tag_ids: [routing_tags.first.id, routing_tags.second.id],
                              short_calls_limit: new_attrs[:short_calls_limit],
                              src_name_rewrite_result: new_attrs[:src_name_rewrite_result],

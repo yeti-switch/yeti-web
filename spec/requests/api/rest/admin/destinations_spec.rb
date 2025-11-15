@@ -57,7 +57,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
       include_examples :responds_with_status, 200
 
       context 'destinations[0]' do
-        include_examples :returns_json_api_record, type: 'destinations', relationships: %i[country network destination-next-rates rate-group routing-tag-mode] do
+        include_examples :returns_json_api_record, type: 'destinations', relationships: %i[country network destination-next-rates rate-group] do
           let(:json_api_record_data) { json_api_data_detect_by_id_type }
           let(:json_api_record_id) { destinations[0].id.to_s }
           let(:json_api_record_attributes) do
@@ -81,6 +81,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
               'reject-calls': destinations[0].reject_calls,
               'reverse-billing': destinations[0].reverse_billing,
               'routing-tag-ids': destinations[0].routing_tag_ids,
+              'routing-tag-mode-id': destinations[0].routing_tag_mode_id,
               'short-calls-limit': destinations[0].short_calls_limit,
               'use-dp-intervals': destinations[0].use_dp_intervals,
               'valid-from': destinations[0].valid_from.iso8601(3),
@@ -103,7 +104,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
       end
 
       context 'destinations[1]' do
-        include_examples :returns_json_api_record, type: 'destinations', relationships: %i[country network destination-next-rates rate-group routing-tag-mode] do
+        include_examples :returns_json_api_record, type: 'destinations', relationships: %i[country network destination-next-rates rate-group] do
           let(:json_api_record_data) { json_api_data_detect_by_id_type }
           let(:json_api_record_id) { destinations[1].id.to_s }
           let(:json_api_record_attributes) do
@@ -127,6 +128,7 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
               'reject-calls': destinations[1].reject_calls,
               'reverse-billing': destinations[1].reverse_billing,
               'routing-tag-ids': destinations[1].routing_tag_ids,
+              'routing-tag-mode-id': destinations[1].routing_tag_mode_id,
               'short-calls-limit': destinations[1].short_calls_limit,
               'use-dp-intervals': destinations[1].use_dp_intervals,
               'valid-from': destinations[1].valid_from.iso8601(3),

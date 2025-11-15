@@ -60,7 +60,7 @@ RSpec.describe 'Rate Management Project Show', js: true, bullet: [:n] do
       expect(page).to have_attribute_row('Src Rewrite Rule', exact_text: record.src_rewrite_rule)
       expect(page).to have_attribute_row('Gateway Group', exact_text: 'EMPTY')
       expect(page).to have_attribute_row('Gateway', exact_text: record.gateway.display_name)
-      expect(page).to have_attribute_row('Routing Tag Mode', exact_text: record.routing_tag_mode.name)
+      expect(page).to have_attribute_row('Routing Tag Mode', exact_text: record.routing_tag_mode_name)
     end
   end
 
