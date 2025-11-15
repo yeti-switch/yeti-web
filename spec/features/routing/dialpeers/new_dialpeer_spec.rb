@@ -202,7 +202,6 @@ RSpec.describe 'Create new Dialpeer', js: true do
     let(:fill_form!) do
       fill_in 'Dst number min length', with: ''
       fill_in 'Dst number max length', with: ''
-      select_by_value('', from: 'Routing tag mode')
       fill_in 'Priority', with: ''
       fill_in 'Initial interval', with: ''
       fill_in 'Next interval', with: ''
@@ -222,7 +221,6 @@ RSpec.describe 'Create new Dialpeer', js: true do
                           "Routing group must exist and can't be blank",
                           "Account must exist and can't be blank",
                           "Vendor must exist, can't be blank, and Is not vendor",
-                          "Routing tag mode must exist and can't be blank",
                           "Valid from can't be blank",
                           "Valid till can't be blank",
                           "Initial rate can't be blank and is not a number",

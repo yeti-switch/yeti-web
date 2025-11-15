@@ -31,7 +31,7 @@ FactoryBot.define do
 
     trait :filled do
       association :src_area, factory: :area
-      routing_tag_mode_id { Routing::RoutingTagMode.take.id }
+      routing_tag_mode_id { Routing::RoutingTagMode::MODES.keys.sample }
     end
   end
 end
