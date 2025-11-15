@@ -10,13 +10,13 @@ class Api::Rest::Customer::V1::CallAuthController < Api::Rest::Customer::V1::Bas
       title: 'Invalid request'
     }
 
-    if current_customer.provision_gateway_id.nil?
+    if auth_context.provision_gateway_id.nil?
       render status: 500, json: {
         errors: [error_options.merge(detail: 'Provisioning Gateway is not found.')]
       } and return
     end
 
-    unless current_customer.provision_gateway.incoming_auth_allow_jwt?
+    unless auth_context.provision_gateway.incoming_auth_allow_jwt?
       render status: 500, json: {
         errors: [error_options.merge(detail: 'Incoming JWT is disabled for Provisioning Gateway.')]
       } and return
@@ -34,7 +34,7 @@ class Api::Rest::Customer::V1::CallAuthController < Api::Rest::Customer::V1::Bas
 
     now = Time.now.to_i
     payload = {
-      gid: current_customer.provision_gateway.uuid,
+      gid: auth_context.provision_gateway.uuid,
       iat: now.to_i,
       exp: now + lifetime.to_i
     }

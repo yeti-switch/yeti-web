@@ -68,7 +68,7 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
             id: api_access.id,
             customer_id: api_access.customer_id,
             login: api_access.login,
-            class: api_access.class.name
+            class: CustomerV1Auth::AuthContext.name
           }
         end
         let(:capture_error_tags) do

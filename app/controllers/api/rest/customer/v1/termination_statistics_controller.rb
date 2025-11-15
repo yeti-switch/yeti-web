@@ -8,10 +8,7 @@ class Api::Rest::Customer::V1::TerminationStatisticsController < Api::RestContro
   after_action :setup_authorization_cookie
 
   def show
-    statistic = ClickhouseReport::TerminationStatistic.new(
-      params.to_unsafe_h,
-      customer: current_customer
-    )
+    statistic = ClickhouseReport::TerminationStatistic.new(params.to_unsafe_h, auth_context:)
 
     begin
       rows = statistic.collection

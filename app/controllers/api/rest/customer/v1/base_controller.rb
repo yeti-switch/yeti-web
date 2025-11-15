@@ -12,22 +12,22 @@ class Api::Rest::Customer::V1::BaseController < Api::RestController
 
   def context
     {
-      customer_id: current_customer.customer_id,
-      allowed_account_ids: current_customer.account_ids,
-      current_customer: current_customer,
-      allow_outgoing_numberlists_ids: current_customer.allow_outgoing_numberlists_ids,
+      customer_id: auth_context.customer_id,
+      allowed_account_ids: auth_context.account_ids,
+      auth_context: auth_context,
+      allow_outgoing_numberlists_ids: auth_context.allow_outgoing_numberlists_ids,
       ip_address: '{{auto}}'
     }
   end
 
   def capture_user
-    return if current_customer.nil?
+    return if auth_context.nil?
 
     {
-      id: current_customer.id,
-      customer_id: current_customer.customer_id,
-      login: current_customer.login,
-      class: current_customer.class.name
+      id: auth_context.api_access_id || 'N/A',
+      customer_id: auth_context.customer_id,
+      login: auth_context.login || 'N/A',
+      class: auth_context.class.name
     }
   end
 
