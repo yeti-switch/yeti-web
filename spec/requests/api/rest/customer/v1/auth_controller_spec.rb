@@ -5,7 +5,8 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
   let(:json_request_path) { '/api/rest/customer/v1/auth' }
 
   let!(:api_access) { create :api_access, api_access_attrs }
-  let(:api_access_attrs) { {} }
+  let(:customer) { create(:customer) }
+  let(:api_access_attrs) { { customer: } }
 
   describe 'POST /api/rest/customer/v1/auth' do
     subject do
@@ -149,7 +150,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
     end
 
     context 'Issue#338: 0.0.0.0/0 allows requests from any IP' do
-      let(:api_access_attrs) { { allowed_ips: ['0.0.0.0/0'] } }
+      let(:api_access_attrs) { super().merge allowed_ips: ['0.0.0.0/0'] }
       let(:remote_ip) { '104.81.225.117' }
 
       include_examples :responds_with_status, 201
@@ -164,7 +165,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
     end
 
     context 'Issue#338: request from IP not matches the mask' do
-      let(:api_access_attrs) { { allowed_ips: ['192.168.0.0/24'] } }
+      let(:api_access_attrs) { super().merge allowed_ips: ['192.168.0.0/24'] }
       let(:remote_ip) { '192.169.1.1' }
 
       include_examples :responds_with_failed_login
@@ -221,6 +222,42 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
         expect { subject }.to change(Log::ApiLog, :count).by(1)
 
         expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+      end
+    end
+
+    context 'with dynamic auth' do
+      let(:api_access) { nil }
+      let(:auth_config) { { customer_id: customer.id } }
+      let(:json_api_auth_token) do
+        build_customer_token_from_config(auth_config, expiration: 1.minute.from_now)
+      end
+
+      it 'responds with 200' do
+        subject
+        expect(response.status).to eq 200
+        expect(response_json).to match('allow-rec': false)
+      end
+
+      it 'should create API Log record' do
+        expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+        expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+      end
+
+      context 'when api_access.allow_listen_recording=true' do
+        let(:auth_config) { super().merge allow_listen_recording: true }
+
+        it 'responds with 200' do
+          subject
+          expect(response.status).to eq 200
+          expect(response_json).to match('allow-rec': true)
+        end
+
+        it 'should create API Log record' do
+          expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+          expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+        end
       end
     end
   end

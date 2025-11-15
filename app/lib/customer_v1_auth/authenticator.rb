@@ -5,6 +5,7 @@ module CustomerV1Auth
     EXPIRATION_INTERVAL = YetiConfig.api.token_lifetime.presence&.seconds&.freeze
     AUDIENCE = 'customer-v1'
     COOKIE_NAME = '_yeti_customer_v1_session'
+    DYNAMIC_SUB = 'D'
     Result = Struct.new(:token, :expires_at)
     AuthenticationError = Class.new(StandardError)
 
@@ -30,7 +31,11 @@ module CustomerV1Auth
     # @param expires_at [Time, nil]
     # @return [String] JWT token
     def self.build_token(auth_context, expires_at:)
-      payload = { sub: auth_context.api_access_id, aud: AUDIENCE }
+      payload = if auth_context.api_access_id.nil?
+                  { aud: AUDIENCE, sub: DYNAMIC_SUB, cfg: auth_context.to_config }
+                else
+                  { aud: AUDIENCE, sub: auth_context.api_access_id }
+                end
       payload[:exp] = expires_at.to_i unless expires_at.nil?
       TokenBuilder.encode(payload)
     end

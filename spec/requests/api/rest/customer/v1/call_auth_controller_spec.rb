@@ -26,13 +26,13 @@ RSpec.describe Api::Rest::Customer::V1::CallAuthController, type: :request do
     end
 
     let(:token) do
-      result = CustomerV1Auth::Authenticator.authenticate!(
-        'admin',
-        '1234567890',
-        remote_ip: '127.0.0.1'
+      CustomerV1Auth::Authenticator.build_token(
+        auth_context,
+        expires_at: 1.minute.from_now
       )
-
-      result.token
+    end
+    let(:auth_context) do
+      CustomerV1Auth::AuthContext.from_api_access(api_access)
     end
 
     let(:json_request_headers) do
@@ -79,6 +79,41 @@ RSpec.describe Api::Rest::Customer::V1::CallAuthController, type: :request do
             }
           ]
         )
+      end
+
+      context 'with dynamic auth' do
+        let(:api_access) { nil }
+        let(:auth_context) { CustomerV1Auth::AuthContext.from_config(auth_config) }
+        let(:auth_config) { { customer_id: customer.id, provision_gateway_id: provision_gateway.id } }
+
+        it 'responds with jwt', freeze_time: true do
+          subject
+
+          expect(response_json[:errors]).to eq nil
+          expect(response_json).to match(jwt: a_kind_of(String))
+          public_key = OpenSSL::PKey::EC.new(File.read(private_key_path))
+          actual_token_payload = JWT.decode(
+            response_json[:jwt],
+            public_key,
+            true,
+            algorithm: JwtToken::ES256,
+            verify_expiration: true,
+            aud: nil,
+            verify_aud: nil
+          )
+          expect(actual_token_payload).to eq(
+                                            [
+                                              {
+                                                'exp' => CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.from_now.to_i,
+                                                'gid' => provision_gateway.uuid,
+                                                'iat' => Time.now.to_i
+                                              },
+                                              {
+                                                'alg' => JwtToken::ES256
+                                              }
+                                            ]
+                                          )
+        end
       end
     end
 

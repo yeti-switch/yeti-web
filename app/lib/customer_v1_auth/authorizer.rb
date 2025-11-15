@@ -25,6 +25,13 @@ module CustomerV1Auth
       payload = TokenBuilder.decode(@token, verify_expiration: verify_expiration, aud: audience)
       raise AuthorizationError if payload.nil?
 
+      if payload[:sub] == Authenticator::DYNAMIC_SUB
+        auth_context = AuthContext.from_config(payload[:cfg])
+        raise AuthorizationError if auth_context.customer.nil?
+
+        return auth_context
+      end
+
       api_access = System::ApiAccess.find_by(id: payload[:sub])
       raise AuthorizationError if api_access.nil?
 

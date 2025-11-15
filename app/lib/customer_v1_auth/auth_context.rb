@@ -12,6 +12,14 @@ module CustomerV1Auth
     :customer_portal_access_profile_id,
     :provision_gateway_id
   )
+    # omit attributes with default nil from DEFAULT_AUTH_CONTEXT_ATTRS
+    DEFAULT_AUTH_CONTEXT_ATTRS = {
+      account_ids: [],
+      allow_listen_recording: false,
+      allow_outgoing_numberlists_ids: [],
+      allowed_ips: ['0.0.0.0/0', '::/0'],
+      customer_portal_access_profile_id: 1
+    }.freeze
 
     def self.from_api_access(api_access)
       new(
@@ -24,6 +32,24 @@ module CustomerV1Auth
         customer_id: api_access.customer_id,
         customer_portal_access_profile_id: api_access.customer_portal_access_profile_id,
         provision_gateway_id: api_access.provision_gateway_id
+      )
+    end
+
+    def self.from_config(config)
+      normalized_payload = DEFAULT_AUTH_CONTEXT_ATTRS.merge(config.deep_symbolize_keys)
+      customer_id = normalized_payload.fetch(:customer_id)
+      raise ArgumentError, 'customer_id is required in payload' if customer_id.nil?
+
+      new(
+        api_access_id: nil,
+        account_ids: normalized_payload[:account_ids],
+        allow_listen_recording: normalized_payload[:allow_listen_recording],
+        allow_outgoing_numberlists_ids: normalized_payload[:allow_outgoing_numberlists_ids],
+        allowed_ips: normalized_payload[:allowed_ips],
+        login: nil,
+        customer_id:,
+        customer_portal_access_profile_id: normalized_payload[:customer_portal_access_profile_id],
+        provision_gateway_id: normalized_payload[:provision_gateway_id]
       )
     end
 
@@ -45,6 +71,10 @@ module CustomerV1Auth
 
     def customer
       Contractor.find_by(id: customer_id)
+    end
+
+    def to_config
+      to_h.except(:api_access_id, :login)
     end
   end
 end
