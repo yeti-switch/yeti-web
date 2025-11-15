@@ -28,7 +28,7 @@ RSpec.describe Importing::Destination do
       subject
 
       expect(preview_item.reload).to have_attributes(
-        routing_tag_mode_id: Routing::RoutingTagMode.find_by(name: preview_item.routing_tag_mode_name).id,
+        routing_tag_mode_id: Routing::RoutingTagMode::MODES.invert[preview_item.routing_tag_mode_name],
         routing_tag_ids: tags.map(&:id)
       )
     end

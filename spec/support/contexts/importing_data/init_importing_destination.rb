@@ -4,6 +4,8 @@ shared_context :init_importing_destination do |args|
   args ||= {}
 
   before do
+    rtm_id = Routing::RoutingTagMode::MODES.keys.sample
+
     fields = {
       prefix: '998713',
       rate_group_name: @rate_group.name,
@@ -14,8 +16,8 @@ shared_context :init_importing_destination do |args|
       next_interval: 1,
       initial_rate: 0.033,
       next_rate: 0.033,
-      routing_tag_mode_name: Routing::RoutingTagMode.last.name,
-      routing_tag_mode_id: Routing::RoutingTagMode.last.id,
+      routing_tag_mode_name: Routing::RoutingTagMode::MODES[rtm_id],
+      routing_tag_mode_id: rtm_id,
       is_changed: true
     }.merge(args)
 
