@@ -297,7 +297,6 @@ RSpec.describe ActiveCallsCollector, '#metrics' do
     end
 
     it 'have all metrics' do
-      puts subject.map(&:to_prometheus_text).join("\n\n")
       expect(subject).to match_array(
                            [
                              be_a_gauge(:yeti_ac_account_originated)

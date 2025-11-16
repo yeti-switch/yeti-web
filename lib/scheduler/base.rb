@@ -111,14 +111,14 @@ class Scheduler::Base
     raise ArgumentError, 'scheduler already running' if running?
 
     @rufus_scheduler = Rufus::Scheduler.new
-    puts 'Scheduler started.' # rubocop:disable Rails/Output
+    Rails.logger.info 'Scheduler started.'
 
     Kernel.trap('TERM') do
-      puts "TERM received.\nShutting down..." # rubocop:disable Rails/Output
+      Rails.logger.info "TERM received.\nShutting down..."
       shutdown
     end
     Kernel.trap('INT') do
-      puts "\nINT received.\nShutting down..." # rubocop:disable Rails/Output
+      Rails.logger.info "\nINT received.\nShutting down..."
       shutdown
     end
 
