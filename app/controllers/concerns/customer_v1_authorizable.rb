@@ -45,7 +45,8 @@ module CustomerV1Authorizable
     }
   end
 
-  def handle_authorization_error
+  def handle_authorization_error(error)
+    logger.info "#{error.class}: #{error.message}"
     head 401
   end
 end

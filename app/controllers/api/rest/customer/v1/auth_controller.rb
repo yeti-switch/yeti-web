@@ -64,13 +64,15 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
     request.env['HTTP_X_REAL_IP'] || request.remote_ip
   end
 
-  def handle_authentication_error
-    error = JSONAPI::Exceptions::AuthenticationFailed.new
-    render status: 401, json: { errors: error.errors.map(&:to_hash) }
+  def handle_authentication_error(error)
+    logger.info "#{error.class}: #{error.message}"
+    jsonapi_error = JSONAPI::Exceptions::AuthenticationFailed.new
+    render status: 401, json: { errors: jsonapi_error.errors.map(&:to_hash) }
   end
 
-  def handle_authorization_error
-    error = JSONAPI::Exceptions::AuthorizationFailed.new
-    render status: 401, json: { errors: error.errors.map(&:to_hash) }
+  def handle_authorization_error(error)
+    logger.info "#{error.class}: #{error.message}"
+    jsonapi_error = JSONAPI::Exceptions::AuthorizationFailed.new
+    render status: 401, json: { errors: jsonapi_error.errors.map(&:to_hash) }
   end
 end

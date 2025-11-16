@@ -38,7 +38,7 @@ module CustomerV1Auth
     def self.from_config(config)
       normalized_payload = DEFAULT_AUTH_CONTEXT_ATTRS.merge(config.deep_symbolize_keys)
       customer_id = normalized_payload.fetch(:customer_id)
-      raise ArgumentError, 'customer_id is required in payload' if customer_id.nil?
+      customer_portal_access_profile_id = normalized_payload.fetch(:customer_portal_access_profile_id)
 
       new(
         api_access_id: nil,
@@ -48,7 +48,7 @@ module CustomerV1Auth
         allowed_ips: normalized_payload[:allowed_ips],
         login: nil,
         customer_id:,
-        customer_portal_access_profile_id: normalized_payload[:customer_portal_access_profile_id],
+        customer_portal_access_profile_id:,
         provision_gateway_id: normalized_payload[:provision_gateway_id]
       )
     end
@@ -65,13 +65,17 @@ module CustomerV1Auth
       end
     end
 
-    def provision_gateway
-      Gateway.find_by(id: provision_gateway_id)
-    end
-
-    def customer
+    define_memoizable :customer, apply: lambda {
       Contractor.find_by(id: customer_id)
-    end
+    }
+
+    define_memoizable :customer_portal_access_profile, apply: lambda {
+      System::CustomerPortalAccessProfile.find_by(id: customer_portal_access_profile_id)
+    }
+
+    define_memoizable :provision_gateway, apply: lambda {
+      Gateway.find_by(id: provision_gateway_id) if provision_gateway_id
+    }
 
     def to_config
       to_h.except(:api_access_id, :login)

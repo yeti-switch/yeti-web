@@ -53,9 +53,9 @@ module CustomerV1Auth
     # @raise [CustomerV1Auth::Authenticator::AuthenticationError] when failed
     def authenticate!
       api_access = System::ApiAccess.find_by(login: @login)
-      raise AuthenticationError if api_access.nil?
-      raise AuthenticationError unless api_access.authenticate(@password)
-      raise AuthenticationError unless api_access.authenticate_ip(@remote_ip)
+      raise AuthenticationError, 'login not exist' if api_access.nil?
+      raise AuthenticationError, 'password not match' unless api_access.authenticate(@password)
+      raise AuthenticationError, 'remote_ip not match' unless api_access.authenticate_ip(@remote_ip)
 
       auth_context = AuthContext.from_api_access(api_access)
       self.class.build_auth_data(auth_context)

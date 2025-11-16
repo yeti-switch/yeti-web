@@ -31,7 +31,8 @@ class Api::Rest::Customer::V1::BaseController < Api::RestController
     }
   end
 
-  def handle_authorization_error
+  def handle_authorization_error(error)
+    logger.info "#{error.class}: #{error.message}"
     handle_exceptions(JSONAPI::Exceptions::AuthorizationFailed.new)
   end
 
