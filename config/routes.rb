@@ -80,6 +80,7 @@ Rails.application.routes.draw do
           jsonapi_resources :contractors
           jsonapi_resources :contacts
           jsonapi_resources :api_accesses
+          jsonapi_resources :customer_tokens, only: %i[create]
           jsonapi_resources :customers_auths
           jsonapi_resources :rate_groups
 
