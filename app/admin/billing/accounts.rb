@@ -48,7 +48,6 @@ ActiveAdmin.register Account do
     def scoped_collection
       super.preload(
         :contractor,
-        :timezone,
         :invoice_template
       )
     end
@@ -221,7 +220,7 @@ ActiveAdmin.register Account do
                 :name, :origination_capacity, :termination_capacity, :total_capacity,
                 :destination_rate_limit, :max_call_duration, :invoice_period_id,
                 :autogenerate_vendor_invoices, :autogenerate_customer_invoices,
-                :invoice_template_id, :timezone_id, :invoice_ref_template,
+                :invoice_template_id, :timezone, :invoice_ref_template,
                 send_invoices_to: [], send_balance_notifications_to: []
 
   form do |f|
@@ -240,7 +239,7 @@ ActiveAdmin.register Account do
       f.input :termination_capacity
       f.input :total_capacity
 
-      f.input :timezone_id, as: :select, input_html: { class: 'chosen' }, collection: System::Timezone.all
+      f.input :timezone, as: :select, input_html: { class: 'chosen' }, collection: Yeti::TimeZoneHelper.all
       f.input :uuid, as: :string
     end
 

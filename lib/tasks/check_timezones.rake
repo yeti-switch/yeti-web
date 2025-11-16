@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
 task check_timezones: :environment do |_t, _args|
+  puts "\e[1m\e[32mChecking Account timezones:\e[0m"
+
+  bad_accounts = 0
+  Account.where('timezone not in (?)', Yeti::TimeZoneHelper.all).find_each do |account|
+    puts "      \e[1m\e[33mWrong timezone #{account.timezone} in account id=#{account.id}\e[0m"
+    bad_accounts = 1
+  end
+
+  if bad_accounts != 0
+    puts "      \e[1m\e[31mACTION REQUIRED: You SHOULD fix timezones in accounts\n\e[0m"
+  else
+    puts "      \e[1m\e[32mOK\n\e[0m"
+  end
+
   puts "\e[1m\e[32mChecking Scheduler timezones:\e[0m"
 
   bad_schedulers = 0
@@ -27,7 +41,7 @@ task check_timezones: :environment do |_t, _args|
     puts "      \e[1m\e[32mOK\n\e[0m"
   end
 
-  if bad_schedulers != 0 || bad_exports != 0
+  if bad_accounts != 0 || bad_schedulers != 0 || bad_exports != 0
     exit 100
   end
 end

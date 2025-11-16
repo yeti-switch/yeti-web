@@ -3,6 +3,7 @@
 module Yeti
   module TimeZoneHelper
     # Lazily loads all timezones into memory. 597 entries
+    # return array of String
     def all
       return @cached_entries if @cached_entries
 

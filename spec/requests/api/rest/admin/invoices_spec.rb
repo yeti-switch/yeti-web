@@ -1028,16 +1028,16 @@ RSpec.describe Api::Rest::Admin::InvoicesController, type: :request, bullet: [:n
     let(:account_attrs) { { contractor: } }
 
     include_examples :creates_invoice do
-      let(:expected_start_time) { utc_timezone.time_zone.parse('2023-11-01') }
-      let(:expected_end_time) { utc_timezone.time_zone.parse('2023-12-01') }
+      let(:expected_start_time) { ActiveSupport::TimeZone.new(utc_timezone).parse('2023-11-01') }
+      let(:expected_end_time) { ActiveSupport::TimeZone.new(utc_timezone).parse('2023-12-01') }
     end
 
     context 'when account in LA timezone' do
       let(:account_attrs) { super().merge timezone: la_timezone }
 
       include_examples :creates_invoice do
-        let(:expected_start_time) { la_timezone.time_zone.parse('2023-11-01') }
-        let(:expected_end_time) { la_timezone.time_zone.parse('2023-12-01') }
+        let(:expected_start_time) { ActiveSupport::TimeZone.new(la_timezone).parse('2023-11-01') }
+        let(:expected_end_time) { ActiveSupport::TimeZone.new(la_timezone).parse('2023-12-01') }
       end
     end
 

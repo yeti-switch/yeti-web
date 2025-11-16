@@ -2,7 +2,7 @@
 
 RSpec.describe BillingInvoice::CalculatePeriod, '.time_zone_for' do
   subject do
-    described_class.time_zone_for(account_timezone.name)
+    described_class.time_zone_for(account_timezone)
   end
 
   include_context :timezone_helpers
@@ -11,54 +11,31 @@ RSpec.describe BillingInvoice::CalculatePeriod, '.time_zone_for' do
     let(:account_timezone) { utc_timezone }
 
     it { is_expected.to be_a_kind_of(ActiveSupport::TimeZone) }
-    it { expect(subject.name).to eq(account_timezone.name) }
+    it { expect(subject.name).to eq(account_timezone) }
   end
 
   context 'with Kyiv timezone' do
     let(:account_timezone) { kyiv_timezone }
 
     it { is_expected.to be_a_kind_of(ActiveSupport::TimeZone) }
-    it { expect(subject.name).to eq(account_timezone.name) }
+    it { expect(subject.name).to eq(account_timezone) }
   end
 
   context 'with LA timezone' do
     let(:account_timezone) { la_timezone }
 
     it { is_expected.to be_a_kind_of(ActiveSupport::TimeZone) }
-    it { expect(subject.name).to eq(account_timezone.name) }
+    it { expect(subject.name).to eq(account_timezone) }
   end
 
-  # enable when remove invalid timezones
-  xcontext 'test all timezones from seeds' do
-    before do
-      System::Timezone.delete_all
-
-      sys_sql = File.read Rails.root.join('db/seeds/main/sys.sql')
-      inserts = sys_sql.split("\n").select { |line| line.start_with?('INSERT INTO sys.timezones') }
-      SqlCaller::Yeti.execute inserts.join(";\n").to_s
-    end
-    after do
-      System::Timezone.delete_all
-
-      # from spec/fixtures/sys.timezones.yml
-      System::Timezone.create!(
-          id: 1,
-          name: 'UTC',
-          abbrev: 'UTC',
-          utc_offset: '00:00:00',
-          is_dst: false
-        )
-    end
-
-    it 'generates correct TimeZone objects', :aggregate_failures do
-      expect(System::Timezone.count).to eq(1_214)
-
-      System::Timezone.all.each do |timezone|
-        subject = described_class.time_zone_for(timezone.name)
-        expected = ActiveSupport::TimeZone.new(timezone.name)
+  context 'test all timezones from Yeti::TimeZoneHelper' do
+    it 'generates correct TimeZone objects for all timezones', :aggregate_failures do
+      Yeti::TimeZoneHelper.all.each do |timezone_name|
+        subject = described_class.time_zone_for(timezone_name)
+        expected = ActiveSupport::TimeZone.new(timezone_name)
         expect(subject).to(
             be_present,
-            -> { "expect time zone for #{timezone.name} to be present, but it doesn't" }
+            -> { "expect time zone for #{timezone_name} to be present, but it doesn't" }
           )
         expect(subject).to(
             eq(expected),
