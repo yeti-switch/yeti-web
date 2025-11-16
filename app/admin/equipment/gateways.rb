@@ -14,7 +14,7 @@ ActiveAdmin.register Gateway do
   acts_as_async_destroy('Gateway')
   acts_as_async_update BatchUpdateForm::Gateway
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   decorate_with GatewayDecorator
 

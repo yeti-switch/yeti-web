@@ -24,8 +24,8 @@ Environment=IS_DELAYED_JOB=true
 RuntimeDirectory=yeti-delayed-job
 ExecStart=/opt/yeti-web/vendor/rbenv/shims/ruby \
 	/opt/yeti-web/vendor/bundler/bin/bundle exec \
-	/opt/yeti-web/bin/delayed_job \
-	start -n 4 --pid-dir=/run/yeti-delayed-job
+	/opt/yeti-web/bin/good_job \
+	start --threads 4 --pid-dir=/run/yeti-delayed-job
 
 Type=forking
 Restart=always
