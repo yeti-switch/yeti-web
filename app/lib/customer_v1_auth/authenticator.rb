@@ -2,7 +2,7 @@
 
 module CustomerV1Auth
   class Authenticator
-    EXPIRATION_INTERVAL = YetiConfig.api.token_lifetime.presence&.seconds&.freeze
+    EXPIRATION_INTERVAL = YetiConfig.api.customer.token_lifetime.presence&.seconds&.freeze
     AUDIENCE = 'customer-v1'
     COOKIE_NAME = '_yeti_customer_v1_session'
     DYNAMIC_SUB = 'D'

@@ -33,6 +33,7 @@ Config.setup do |setup_config|
     required(:api).schema do
       required(:token_lifetime).maybe(:int?)
       optional(:customer).schema do
+        required(:token_lifetime).maybe(:int?)
         optional(:call_jwt_lifetime).maybe(:int?)
         optional(:call_jwt_secret).maybe(:string)
         optional(:outgoing_cdr_hide_fields).array(:string)
