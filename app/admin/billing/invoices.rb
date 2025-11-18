@@ -528,13 +528,13 @@ ActiveAdmin.register Billing::Invoice, as: 'Invoice' do
       f.input :start_date,
               as: :date_time_picker,
               datepicker_options: { defaultTime: '00:00' },
-              hint: 'Customer timezone will be used',
+              hint: 'Account timezone will be used',
               wrapper_html: { class: 'datetime_preset_pair', data: { show_time: 'true' } }
 
       f.input :end_date,
               as: :date_time_picker,
               datepicker_options: { defaultTime: '00:00' },
-              hint: 'Customer timezone will be used'
+              hint: 'Account timezone will be used'
     end
     f.actions { f.submit('Create Invoice') }
   end

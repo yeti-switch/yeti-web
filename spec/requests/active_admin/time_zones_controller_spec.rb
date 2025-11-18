@@ -7,7 +7,7 @@ RSpec.describe 'app/admin/system/time_zones.rb' do
     context 'when search by specific valid time zone' do
       it 'should render proper time zone' do
         get search_time_zones_path(q: { search_for: 'europe/kyiv' })
-        expect(response_json).to include({ id: 'Europe/Kyiv', value: 'Europe/Kyiv' })
+        expect(response_json).to contain_exactly({ id: 'Europe/Kyiv', value: 'Europe/Kyiv' })
         get search_time_zones_path(q: { search_for: 'new_york' })
         expect(response_json).to include({ id: 'America/New_York', value: 'America/New_York' })
         get search_time_zones_path(q: { search_for: 'Australia' })
