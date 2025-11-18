@@ -5,7 +5,7 @@ class RolePolicy < ApplicationPolicy
 
   class_attribute :_section_name, instance_writer: false
   class_attribute :root_role, instance_writer: false
-  class_attribute :allowed_actions, instance_writer: false, default: %i[read change remove perform details rollback]
+  class_attribute :allowed_actions, instance_writer: false, default: %i[read change remove perform details rollback search]
   self.root_role = :root
 
   class << self
@@ -38,6 +38,10 @@ class RolePolicy < ApplicationPolicy
 
   def perform?
     allowed_for_role?(:perform)
+  end
+
+  def search?
+    allowed_for_role?(:search)
   end
 
   alias_rule :import?, to: :perform? # ActiveAdminImport::Auth::IMPORT

@@ -26,7 +26,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     fill_in 'Origination capacity', with: form_params[:origination_capacity]
     fill_in 'Termination capacity', with: form_params[:termination_capacity]
     fill_in 'Total capacity', with: form_params[:total_capacity]
-    fill_in_chosen 'Timezone', with: form_params[:timezone].name
+    fill_in_chosen 'Timezone', with: form_params[:timezone]
   end
   let(:form_params) do
     {
@@ -167,7 +167,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
 
   context 'with invoice period' do
     let(:invoice_period) { Billing::InvoicePeriod.find Billing::InvoicePeriod::WEEKLY }
-    let(:account_time_zone) { ActiveSupport::TimeZone.new(form_params[:timezone].name) }
+    let(:account_time_zone) { ActiveSupport::TimeZone.new(form_params[:timezone]) }
     let(:fill_form!) do
       super()
       fill_in_chosen 'Invoice period', with: invoice_period.name, exact: true

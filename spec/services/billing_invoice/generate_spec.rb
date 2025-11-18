@@ -11,7 +11,7 @@ RSpec.describe BillingInvoice::Generate do
   let!(:contractor) { FactoryBot.create(:vendor) }
   let!(:account) { FactoryBot.create(:account, account_attrs) }
   let(:account_timezone) { la_timezone }
-  let(:account_time_zone) { ActiveSupport::TimeZone.new(account_timezone.name) }
+  let(:account_time_zone) { ActiveSupport::TimeZone.new(account_timezone) }
   let(:account_attrs) do
     {
       contractor: contractor,

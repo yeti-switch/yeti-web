@@ -15,7 +15,7 @@ RSpec.describe BillingInvoice::CalculatePeriod::Current, '.call' do
 
   # stubbing current time during calculation
   include_context :stub_calculate_period_current_time
-  let(:account_time_zone) { ActiveSupport::TimeZone.new(account_timezone.name) }
+  let(:account_time_zone) { ActiveSupport::TimeZone.new(account_timezone) }
   let(:current_account_time) { account_time_zone.parse('2020-03-17 05:15:32') }
   before do
     Billing::Invoice.where(account_id: account.id).delete_all
@@ -294,19 +294,12 @@ RSpec.describe BillingInvoice::CalculatePeriod::Current, '.call' do
                      'account invoice period is required'
   end
 
-  context 'when account timezone has invalid name' do
+  context 'when timezone is invalid' do
     let(:current_account_time) { Time.parse('2020-03-17 05:15:32') }
-    let(:account_timezone) do
-      FactoryBot.create(:timezone, name: 'RSpec', abbrev: 'RSP', utc_offset: '11:00')
-    end
-    let(:account_attrs) do
-      super().merge invoice_period_id: Billing::InvoicePeriod::DAILY,
-                    next_invoice_type_id: Billing::InvoiceType::AUTO_FULL,
-                    next_invoice_at: Time.parse('2020-01-01 00:00:00')
-    end
+    let(:account_attrs) { super().merge invoice_period_id: Billing::InvoicePeriod::DAILY, next_invoice_type_id: Billing::InvoiceType::AUTO_FULL, next_invoice_at: Time.parse('2020-01-01 00:00:00') }
 
-    include_examples :raises_exception,
-                     ApplicationService::Error,
-                     'failed to find time zone RSpec'
+    before { allow_any_instance_of(BillingInvoice::CalculatePeriod::Current).to receive(:time_zone).and_return(nil) }
+
+    include_examples :raises_exception, ApplicationService::Error, 'failed to find time zone UTC'
   end
 end

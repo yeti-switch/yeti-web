@@ -54,6 +54,10 @@ class BatchUpdateForm::Base
     ActiveModel::Type::Boolean.new.cast(raw_value)
   end
 
+  def type_cast_plain_array(raw_value)
+    raw_value
+  end
+
   def method_missing(method, *args)
     if method.to_s.start_with?('type_cast_')
       args[0]
@@ -172,6 +176,18 @@ class BatchUpdateForm::Base
     def form_data_integer_collection(options)
       c = options.fetch(:collection)
       c
+    end
+
+    # @param options [Hash]
+    #   :collection [Array<String>] required. Array of strings where each string is both label and value.
+    # @return [Array<Array(2)>] Array of arrays where each sub-array contains [value, value]
+    # @example
+    #   form_data_plain_array(collection: ['UTC', 'America/New_York'])
+    #   # => [['UTC', 'UTC'], ['America/New_York', 'America/New_York']]
+    def form_data_plain_array(options = {})
+      collection = options.fetch(:collection)
+      collection = collection.call if collection.is_a?(Proc)
+      collection.map { |item| [item, item] }
     end
   end
 
