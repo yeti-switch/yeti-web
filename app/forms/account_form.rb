@@ -25,7 +25,7 @@ class AccountForm < ProxyForm
                    :invoice_period_id,
                    :invoice_template_id,
                    :send_invoices_to,
-                   :timezone_id,
+                   :timezone,
                    :uuid,
                    :invoice_ref_template
 

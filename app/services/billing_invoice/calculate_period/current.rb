@@ -40,7 +40,7 @@ module BillingInvoice
 
       # @!method time_zone [ActiveSupport::TimeZone]
       define_memoizable :time_zone, apply: lambda {
-        BillingInvoice::CalculatePeriod.time_zone_for(account.timezone.name)
+        BillingInvoice::CalculatePeriod.time_zone_for(account.timezone)
       }
 
       # @!method period_class [Class<BillingPeriod::Base>]
@@ -53,7 +53,7 @@ module BillingInvoice
       # @raise [ApplicationService::Error]
       def validate!
         raise Error, 'account is required' if account.nil?
-        raise Error, "failed to find time zone #{account.timezone.name}" if time_zone.nil?
+        raise Error, "failed to find time zone #{account.timezone}" if time_zone.blank?
         raise Error, 'account invoice period is required' if account_invoice_period_id.nil?
       end
     end

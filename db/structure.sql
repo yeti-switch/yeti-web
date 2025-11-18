@@ -3316,7 +3316,6 @@ CREATE TABLE billing.accounts (
     invoice_template_id integer,
     next_invoice_at timestamp with time zone,
     send_invoices_to integer[],
-    timezone_id integer DEFAULT 1 NOT NULL,
     next_invoice_type_id smallint,
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
     external_id bigint,
@@ -3325,6 +3324,7 @@ CREATE TABLE billing.accounts (
     destination_rate_limit numeric,
     max_call_duration integer,
     invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
+    timezone character varying DEFAULT 'UTC'::character varying NOT NULL,
     CONSTRAINT positive_max_call_duration CHECK ((max_call_duration > 0)),
     CONSTRAINT positive_origination_capacity CHECK ((origination_capacity > 0)),
     CONSTRAINT positive_termination_capacity CHECK ((termination_capacity > 0)),
@@ -45596,38 +45596,6 @@ CREATE TABLE sys.states (
 
 
 --
--- Name: timezones; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.timezones (
-    id integer NOT NULL,
-    name character varying NOT NULL,
-    abbrev character varying,
-    utc_offset interval,
-    is_dst boolean
-);
-
-
---
--- Name: timezones_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.timezones_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: timezones_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.timezones_id_seq OWNED BY sys.timezones.id;
-
-
---
 -- Name: account_balance_notification_settings id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -46528,13 +46496,6 @@ ALTER TABLE ONLY sys.sensors ALTER COLUMN id SET DEFAULT nextval('sys.sensors_id
 --
 
 ALTER TABLE ONLY sys.smtp_connections ALTER COLUMN id SET DEFAULT nextval('sys.smtp_connections_id_seq'::regclass);
-
-
---
--- Name: timezones id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.timezones ALTER COLUMN id SET DEFAULT nextval('sys.timezones_id_seq'::regclass);
 
 
 --
@@ -48562,22 +48523,6 @@ ALTER TABLE ONLY sys.states
 
 
 --
--- Name: timezones timezones_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.timezones
-    ADD CONSTRAINT timezones_name_key UNIQUE (name);
-
-
---
--- Name: timezones timezones_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.timezones
-    ADD CONSTRAINT timezones_pkey PRIMARY KEY (id);
-
-
---
 -- Name: account_balance_notification_settings_account_id_uniq_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
@@ -49318,14 +49263,6 @@ CREATE INDEX scheduler_ranges_scheduler_id_idx ON sys.scheduler_ranges USING btr
 
 ALTER TABLE ONLY billing.accounts
     ADD CONSTRAINT accounts_contractor_id_fkey FOREIGN KEY (contractor_id) REFERENCES public.contractors(id);
-
-
---
--- Name: accounts accounts_timezone_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.accounts
-    ADD CONSTRAINT accounts_timezone_id_fkey FOREIGN KEY (timezone_id) REFERENCES sys.timezones(id);
 
 
 --
@@ -50457,6 +50394,10 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251115233349'),
+('20251115233348'),
+('20251115233347'),
+('20251115233346'),
 ('20251112214245'),
 ('20251109191129'),
 ('20251030205037'),

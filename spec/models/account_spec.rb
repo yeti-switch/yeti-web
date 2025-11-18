@@ -16,6 +16,7 @@
 #  origination_capacity   :integer(2)
 #  send_invoices_to       :integer(4)       is an Array
 #  termination_capacity   :integer(2)
+#  timezone               :string           default("UTC"), not null
 #  total_capacity         :integer(2)
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
@@ -24,7 +25,6 @@
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
 #  next_invoice_type_id   :integer(2)
-#  timezone_id            :integer(4)       default(1), not null
 #
 # Indexes
 #
@@ -36,14 +36,13 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
-#  accounts_timezone_id_fkey    (timezone_id => timezones.id)
 #
 
 RSpec.describe Account, type: :model do
   let(:server_time_zone) { ActiveSupport::TimeZone.new Rails.application.config.time_zone }
-  let(:utc_timezone) { System::Timezone.find_by!(abbrev: 'UTC') }
-  let(:la_timezone) { FactoryBot.create(:timezone, :los_angeles) }
-  let(:kyiv_timezone) { FactoryBot.create(:timezone, :kyiv) }
+  let(:utc_timezone) { 'UTC' }
+  let(:la_timezone) { 'America/Los_Angeles' }
+  let(:kyiv_timezone) { 'Europe/Kyiv' }
 
   shared_examples :updates_account do
     # let(:expected_account_attrs) {}
@@ -76,7 +75,7 @@ RSpec.describe Account, type: :model do
         invoice_template_id: nil,
         next_invoice_at: nil,
         send_invoices_to: nil,
-        timezone_id: utc_timezone.id,
+        timezone: utc_timezone,
         next_invoice_type_id: nil,
         external_id: nil,
         vat: 0.0,

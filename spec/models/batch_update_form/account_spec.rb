@@ -2,7 +2,6 @@
 
 RSpec.describe BatchUpdateForm::Account do
   let!(:contractor) { FactoryBot.create(:vendor) }
-  let!(:timezone) { FactoryBot.create(:timezone) }
   let!(:invoice_template) { FactoryBot.create(:invoice_template) }
   let!(:assign_params) do
     {
@@ -16,7 +15,7 @@ RSpec.describe BatchUpdateForm::Account do
       max_call_duration: '10',
       invoice_period_id: Billing::InvoicePeriod::DAILY.to_s,
       invoice_template_id: invoice_template.id.to_s,
-      timezone_id: timezone.id.to_s
+      timezone: 'UTC'
     }
   end
 

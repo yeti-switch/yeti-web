@@ -27,7 +27,7 @@ RSpec.describe BatchUpdateForm::Account, :js do
       max_call_duration: '1',
       invoice_period_id: Billing::InvoicePeriod::DAILY.to_s,
       invoice_template_id: invoice_template.id.to_s,
-      timezone_id: System::Timezone.last!.id.to_s
+      timezone: 'UTC'
     }
   end
 
@@ -87,9 +87,9 @@ RSpec.describe BatchUpdateForm::Account, :js do
       select_by_value assign_params[:invoice_template_id], from: :invoice_template_id
     end
 
-    if assign_params.key? :timezone_id
-      check :Timezone_id
-      select_by_value assign_params[:timezone_id], from: :timezone_id
+    if assign_params.key? :timezone
+      check :Timezone
+      select assign_params[:timezone], from: :timezone
     end
   end
 

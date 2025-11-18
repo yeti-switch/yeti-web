@@ -16,6 +16,7 @@
 #  origination_capacity   :integer(2)
 #  send_invoices_to       :integer(4)       is an Array
 #  termination_capacity   :integer(2)
+#  timezone               :string           default("UTC"), not null
 #  total_capacity         :integer(2)
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
@@ -24,7 +25,6 @@
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
 #  next_invoice_type_id   :integer(2)
-#  timezone_id            :integer(4)       default(1), not null
 #
 # Indexes
 #
@@ -36,7 +36,6 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
-#  accounts_timezone_id_fkey    (timezone_id => timezones.id)
 #
 FactoryBot.define do
   factory :account, class: 'Account' do
@@ -52,7 +51,7 @@ FactoryBot.define do
     origination_capacity { nil }
     termination_capacity { nil }
     total_capacity { nil }
-    timezone_id { 1 }
+    timezone { 'UTC' }
 
     transient do
       balance_low_threshold { nil }
@@ -77,7 +76,7 @@ FactoryBot.define do
       association :invoice_template, factory: :invoice_template
       invoice_period_id { Billing::InvoicePeriod::WEEKLY }
       contractor { create(:contractor, vendor: true) }
-      timezone { System::Timezone.take || create(:timezone) }
+      timezone { 'UTC' }
       balance { 100 }
       max_balance { 1_000 }
       min_balance { 0 }
@@ -86,7 +85,7 @@ FactoryBot.define do
       origination_capacity { 125 }
       termination_capacity { 126 }
       total_capacity { 127 }
-      next_invoice_at { (timezone.time_zone.now + 7.days).beginning_of_week }
+      next_invoice_at { (ActiveSupport::TimeZone.new(timezone).now + 7.days).beginning_of_week }
       next_invoice_type_id { Billing::InvoiceType::AUTO_FULL }
       invoice_ref_template { 'acc_$id' }
       send_invoices_to { [FactoryBot.create(:contact, contractor: contractor).id] }
