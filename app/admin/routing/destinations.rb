@@ -16,7 +16,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                            title: 'Schedule rate changes',
                            class: 'scoped_collection_action_button ui',
                            form: -> { Destination::ScheduleRateChangesForm.form_inputs },
-                           if: -> { authorized?(:batch_update, resource_klass) } do
+                           if: -> { authorized?(:batch_update, resource_class) } do
     attrs = params[:changes]&.permit(:apply_time, :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee)
 
     form = Destination::ScheduleRateChangesForm.new(attrs)

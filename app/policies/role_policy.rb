@@ -5,7 +5,7 @@ class RolePolicy < ApplicationPolicy
 
   class_attribute :_section_name, instance_writer: false
   class_attribute :root_role, instance_writer: false
-  class_attribute :allowed_actions, instance_writer: false, default: %i[read change remove perform details rollback]
+  class_attribute :allowed_actions, instance_writer: false, default: %i[read change remove perform details rollback batch_update batch_destroy]
   self.root_role = :root
 
   class << self
@@ -40,10 +40,18 @@ class RolePolicy < ApplicationPolicy
     allowed_for_role?(:perform)
   end
 
+  def batch_update?
+    allowed_for_role?(:batch_update)
+  end
+
+  def batch_destroy?
+    allowed_for_role?(:batch_destroy)
+  end
+
   alias_rule :import?, to: :perform? # ActiveAdminImport::Auth::IMPORT
   alias_rule :do_import?, to: :import? # active_admin_import
 
-  alias_rule :batch_insert?, :batch_replace?, :batch_update?, :delete_all?,
+  alias_rule :batch_insert?, :batch_replace?, :delete_all?,
              to: :perform?
 
   private

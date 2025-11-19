@@ -4,12 +4,12 @@ module ResourceDSL
   module ActsAsAsyncDestroy
     def acts_as_async_destroy(model_class)
       config.batch_actions = true
-      config.scoped_collection_actions_if = -> { true }
+      config.scoped_collection_actions_if = -> { authorized?(:batch_update, resource_class) || authorized?(:batch_destroy, resource_class) }
       batch_action :destroy, false # disable common batch delete
 
       scoped_collection_action :async_destroy,
                                title: 'Delete batch',
-                               if: proc { authorized?(:batch_destroy, resource_klass) } do
+                               if: proc { authorized?(:batch_destroy, resource_class) } do
         AsyncBatchDestroyJob.perform_later(model_class, scoped_collection_records.except(:eager_load).to_sql, @paper_trail_info)
         flash[:notice] = I18n.t('flash.actions.batch_actions.batch_destroy.job_scheduled')
         head 200
