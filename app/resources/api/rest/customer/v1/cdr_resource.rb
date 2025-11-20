@@ -97,7 +97,7 @@ class Api::Rest::Customer::V1::CdrResource < Api::Rest::Customer::V1::BaseResour
   association_uuid_filter :account_id, column: :customer_acc_id, class_name: 'Account'
 
   def rec
-    return false unless context[:current_customer].allow_listen_recording
+    return false unless context[:auth_context].allow_listen_recording
 
     _model.has_recording?
   end

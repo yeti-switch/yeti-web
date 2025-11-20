@@ -4,32 +4,33 @@ module CustomerV1Authorizable
   extend ActiveSupport::Concern
 
   included do
-    rescue_from Authorization::CustomerV1Auth::AuthorizationError, with: :handle_authorization_error
-    attr_reader :current_customer
+    rescue_from CustomerV1Auth::Authorizer::AuthorizationError, with: :handle_authorization_error
+    # @!method auth_context [CustomerV1Auth::AuthContext,nil]
+    attr_reader :auth_context
   end
 
   private
 
   def authorize!
-    auth_context = build_auth_context
-    result = Authorization::CustomerV1Auth.authorize! auth_context[:token]
-    @current_customer = result.entity
-    @response_cookie_needed = auth_context[:from_cookie]
+    source_context = build_source_context
+    auth_context = CustomerV1Auth::Authorizer.authorize! source_context[:token]
+    @auth_context = auth_context
+    @response_cookie_needed = source_context[:from_cookie]
   end
 
   def setup_authorization_cookie
     return unless @response_cookie_needed
-    return if current_customer.nil?
+    return if auth_context.nil?
 
-    auth_data = Authentication::CustomerV1Auth.build_auth_data(current_customer)
-    cookies[Authentication::CustomerV1Auth::COOKIE_NAME] = {
+    auth_data = CustomerV1Auth::Authenticator.build_auth_data(auth_context)
+    cookies[CustomerV1Auth::Authenticator::COOKIE_NAME] = {
       value: auth_data.token,
       expires: auth_data.expires_at,
       httponly: true
     }
   end
 
-  def build_auth_context
+  def build_source_context
     header_token = request.headers['Authorization']&.split&.last
     if header_token.present?
       return {
@@ -39,12 +40,13 @@ module CustomerV1Authorizable
     end
 
     {
-      token: request.cookies[Authentication::CustomerV1Auth::COOKIE_NAME],
+      token: request.cookies[CustomerV1Auth::Authenticator::COOKIE_NAME],
       from_cookie: true
     }
   end
 
-  def handle_authorization_error
+  def handle_authorization_error(error)
+    logger.info "#{error.class}: #{error.message}"
     head 401
   end
 end

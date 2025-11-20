@@ -19,6 +19,7 @@ RSpec.describe 'config/yeti_web.yml' do
       api: {
         token_lifetime: be_kind_of(Integer),
         customer: {
+          token_lifetime: be_kind_of(Integer),
           call_jwt_lifetime: be_kind_of(Integer),
           call_jwt_private_key: be_kind_of(String)
         }
@@ -97,10 +98,7 @@ RSpec.describe 'config/yeti_web.yml' do
 
   it 'has correct structure' do
     # expect(subject).to match(expected_structure)
-    expect(subject.keys).to(
-      match_array(expected_structure.keys),
-      "expected root keys to be #{expected_structure.keys}, but found #{subject.keys}"
-    )
+    expect(subject.keys).to match_array(expected_structure.keys)
     subject.each do |k, v|
       expect(v).to(
         match(expected_structure[k]),

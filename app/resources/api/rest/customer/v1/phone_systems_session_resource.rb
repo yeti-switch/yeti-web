@@ -12,8 +12,7 @@ module Api
           attribute :phone_systems_url
 
           before_replace_fields do
-            _model.customer = context[:current_customer].customer
-            _model.api_access = context[:current_customer]
+            _model.auth_context = context[:auth_context]
           end
 
           def self.creatable_fields(_context)

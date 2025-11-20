@@ -256,6 +256,113 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
                                       )
     end
 
+    context 'with dynamic auth' do
+      let(:auth_config) { { customer_id: customer.id } }
+      let(:api_access) { nil }
+
+      it 'returns record with expected attributes' do
+        subject
+        expect(response_json[:data]).to match(
+                                          id: cdr.id.to_s,
+                                          'type': 'incoming-cdrs',
+                                          'links': anything,
+                                          'relationships': {
+                                            account: {
+                                              'links': anything
+                                            }
+                                          },
+                                          'attributes': {
+                                            'time-start': cdr.time_start.as_json,
+                                            'time-connect': cdr.time_connect.as_json,
+                                            'time-end': cdr.time_end.as_json,
+                                            'duration': cdr.duration,
+                                            'success': cdr.success,
+                                            'dialpeer-prefix': cdr.dialpeer_prefix,
+                                            'dialpeer-initial-interval': cdr.dialpeer_initial_interval,
+                                            'dialpeer-initial-rate': cdr.dialpeer_initial_rate.as_json,
+                                            'dialpeer-next-interval': cdr.dialpeer_next_interval,
+                                            'dialpeer-next-rate': cdr.dialpeer_next_rate.as_json,
+                                            'dialpeer-fee': cdr.dialpeer_fee.as_json,
+                                            'vendor-price': cdr.vendor_price.as_json,
+                                            'vendor-duration': cdr.vendor_duration,
+                                            'src-name-out': cdr.src_name_out,
+                                            'src-prefix-out': cdr.src_prefix_out,
+                                            'dst-prefix-out': cdr.dst_prefix_out,
+                                            'diversion-out': cdr.diversion_out,
+                                            'local-tag': cdr.local_tag,
+                                            'legb-disconnect-code': cdr.legb_disconnect_code,
+                                            'legb-disconnect-reason': cdr.legb_disconnect_reason,
+                                            'src-prefix-routing': cdr.src_prefix_routing,
+                                            'dst-prefix-routing': cdr.dst_prefix_routing,
+                                            'legb-user-agent': cdr.legb_user_agent,
+                                            'sign-term-ip': cdr.sign_term_ip,
+                                            'sign-term-port': cdr.sign_term_port,
+                                            'sign-term-transport-protocol-id': cdr.sign_term_transport_protocol_id,
+                                            'term-call-id': cdr.term_call_id,
+                                            rec: false
+                                          }
+                                        )
+      end
+
+      context 'when api_access.allow_listen_recording=true' do
+        let(:auth_config) do
+          super().merge(allow_listen_recording: true)
+        end
+
+        context 'when cdr audio recorded successfully' do
+          let(:cdr_attrs) do
+            super().merge audio_recorded: true,
+                          local_tag: SecureRandom.uuid,
+                          duration: 123
+          end
+
+          it 'responds with attribute rec=true' do
+            subject
+            expect(response_json[:data][:attributes][:rec]).to eq true
+          end
+        end
+
+        context 'when cdr audio not recorded' do
+          let(:cdr_attrs) do
+            super().merge audio_recorded: false,
+                          local_tag: SecureRandom.uuid,
+                          duration: 123
+          end
+
+          it 'responds with attribute rec=false' do
+            subject
+            expect(response_json[:data][:attributes][:rec]).to eq false
+          end
+        end
+
+        context 'when cdr has no local_tag' do
+          let(:cdr_attrs) do
+            super().merge audio_recorded: true,
+                          local_tag: nil,
+                          duration: 123
+          end
+
+          it 'responds with attribute rec=false' do
+            subject
+            expect(response_json[:data][:attributes][:rec]).to eq false
+          end
+        end
+
+        context 'when cdr has duration 0' do
+          let(:cdr_attrs) do
+            super().merge audio_recorded: true,
+                          local_tag: SecureRandom.uuid,
+                          duration: 0
+          end
+
+          it 'responds with attribute rec=false' do
+            subject
+            expect(response_json[:data][:attributes][:rec]).to eq false
+          end
+        end
+      end
+    end
+
     context 'when api.customer.incoming_cdr_hide_fields configured' do
       before do
         allow(YetiConfig.api.customer).to receive(:incoming_cdr_hide_fields).and_return(
