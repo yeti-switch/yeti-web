@@ -78,7 +78,6 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   }, if: :priority_changed?
   validates :acd_limit, numericality: {
     greater_than_or_equal_to: 0.00,
-    less_than_or_equal_to: 1.00,
     allow_blank: true
   }, if: :acd_limit_changed?
   validates :asr_limit, numericality: {
