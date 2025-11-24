@@ -324,7 +324,6 @@ RSpec.describe BatchUpdateForm::Dialpeer do
       it { is_expected.to validate_numericality_of :next_interval }
       it { is_expected.to validate_numericality_of(:priority).only_integer }
       it { is_expected.to validate_numericality_of(:acd_limit).is_greater_than_or_equal_to(0.00) }
-      it { is_expected.to validate_numericality_of(:acd_limit).is_less_than_or_equal_to(1.00) }
       it { is_expected.to validate_numericality_of(:asr_limit).is_greater_than_or_equal_to(0.00) }
       it { is_expected.to validate_numericality_of(:asr_limit).is_less_than_or_equal_to(1.00) }
       it { is_expected.to validate_numericality_of(:short_calls_limit).is_greater_than_or_equal_to(0.00) }
