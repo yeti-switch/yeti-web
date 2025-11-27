@@ -2,6 +2,11 @@
 
 ActiveAdmin.register Contractor do
   menu parent: 'Billing', priority: 2
+  searchable_select_options(
+    scope: proc { Contractor },
+    text_attribute: :name,
+    display_text: ->(record) { record.display_name }
+  )
   search_support!
   acts_as_audit
   acts_as_clone
