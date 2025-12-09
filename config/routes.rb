@@ -130,6 +130,7 @@ Rails.application.routes.draw do
           jsonapi_resources :services, only: %i[index show create update]
           jsonapi_resources :transactions, only: %i[index show]
 
+          jsonapi_resources :timezones
           jsonapi_resources :dtmf_receive_modes
           jsonapi_resources :dtmf_send_modes
           jsonapi_resources :sensor_levels
