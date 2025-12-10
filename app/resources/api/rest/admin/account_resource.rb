@@ -10,10 +10,9 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :destination_rate_limit, :max_call_duration,
              :external_id, :uuid,
              :origination_capacity, :termination_capacity, :total_capacity,
-             :send_invoices_to, :invoice_period_id
+             :send_invoices_to, :invoice_period_id, :timezone
 
   has_one :contractor, always_include_linkage_data: true
-  has_one :timezone, class_name: 'Timezone', always_include_linkage_data: true
   has_one :invoice_template, class_name: 'InvoiceTemplate', always_include_linkage_data: true
 
   filter :name

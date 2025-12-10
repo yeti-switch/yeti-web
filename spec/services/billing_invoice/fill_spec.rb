@@ -110,7 +110,7 @@ RSpec.describe BillingInvoice::Fill do
   let!(:account) { FactoryBot.create(:account, account_attrs) }
   let(:account_attrs) { { contractor: contractor, timezone: account_timezone } }
   let(:account_timezone) { la_timezone }
-  let(:account_time_zone) { account_timezone.time_zone }
+  let(:account_time_zone) { ActiveSupport::TimeZone.new(account_timezone) }
   before { Billing::Invoice.where(account_id: account.id).delete_all }
 
   let!(:invoice) { FactoryBot.create(:invoice, invoice_attrs) }

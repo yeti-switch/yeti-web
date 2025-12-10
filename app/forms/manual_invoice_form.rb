@@ -37,20 +37,28 @@ class ManualInvoiceForm < ApplicationForm
   define_memoizable :start_time, apply: lambda {
     return if start_date.blank?
 
-    account_time_zone.parse(start_date)
+    timezone = account_time_zone
+    return if timezone.nil?
+
+    timezone.parse(start_date)
   }
 
   # @!method end_time
   define_memoizable :end_time, apply: lambda {
     return if end_date.blank?
 
-    account_time_zone.parse(end_date)
+    timezone = account_time_zone
+    return if timezone.nil?
+
+    timezone.parse(end_date)
   }
 
   private
 
   def account_time_zone
-    account ? account.timezone.time_zone : Time.zone
+    return if account.nil?
+
+    ActiveSupport::TimeZone.new(account.timezone)
   end
 
   def validate_generated_invoices
@@ -71,9 +79,12 @@ class ManualInvoiceForm < ApplicationForm
 
   def validate_start_end_time
     errors.add(:start_date, :blank) if start_date.blank?
-    errors.add(:start_date, :invalid) if start_date.present? && start_time.nil?
-
     errors.add(:end_date, :blank) if end_date.blank?
+
+    timezone = account_time_zone
+    return if timezone.nil?
+
+    errors.add(:start_date, :invalid) if start_date.present? && start_time.nil?
     errors.add(:end_date, :invalid) if end_date.present? && end_time.nil?
     errors.add(:end_date, 'must be greater than start date') if end_time && start_time && end_time < start_time
   end

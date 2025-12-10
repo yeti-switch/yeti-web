@@ -6,7 +6,7 @@ RSpec.shared_context :stub_calculate_period_current_time do
 
   before do
     allow(BillingInvoice::CalculatePeriod).to receive(:time_zone_for)
-      .with(account.timezone.name)
+      .with(account.timezone)
       .and_return(account_time_zone)
 
     allow(account_time_zone).to receive(:now)

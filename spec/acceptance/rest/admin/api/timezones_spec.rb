@@ -13,12 +13,4 @@ RSpec.resource 'Timezones' do
       expect(status).to eq(200)
     end
   end
-
-  get '/api/rest/admin/timezones/:id' do
-    let(:id) { System::Timezone.first.id }
-
-    example_request 'get specific entry' do
-      expect(status).to eq(200)
-    end
-  end
 end
