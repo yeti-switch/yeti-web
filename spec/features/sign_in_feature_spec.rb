@@ -93,4 +93,49 @@ RSpec.describe 'the sign in process', js: true do
       expect(page).to have_current_path root_path
     end
   end
+
+  context 'when admin_ui.session_lifetime is configured', js: false do
+    let(:admin_user_attrs) { super().merge email: 'test@example.com', password: '111111' }
+    let(:error_message) do
+      error_message = <<~MESSAGE
+        session_lifetime is not configured for this spec
+
+        file: config/yeti_web.yml
+
+        ```yml
+
+        admin_ui:
+          session_lifetime: 60
+        ```
+      MESSAGE
+      error_message
+    end
+
+    it 'create session and then after 61 seconds of inactivity session should be removed' do
+      expect(YetiConfig.admin_ui.session_lifetime).to eq(60), error_message
+      visit new_admin_user_session_path
+      fill_form!
+      click_button 'Login'
+      expect(page).to have_current_path root_path
+      expect(page).to have_flash_message 'Signed in successfully.', type: :notice
+      travel_to((YetiConfig.admin_ui.session_lifetime + 1).seconds.from_now) do
+        visit root_path
+        expect(page).to have_current_path new_admin_user_session_path
+      end
+      expect(Rails.application.config.session_options[:expire_after]).to eq 60.seconds
+    end
+
+    it 'after 55 seconds of inactivity session stilla alive' do
+      expect(YetiConfig.admin_ui.session_lifetime).to eq(60), error_message
+      visit new_admin_user_session_path
+      fill_form!
+      click_button 'Login'
+      expect(page).to have_current_path root_path
+      travel_to(55.seconds.from_now) do
+        visit root_path
+        expect(page).to have_current_path root_path
+      end
+      expect(Rails.application.config.session_options[:expire_after]).to eq 60.seconds
+    end
+  end
 end

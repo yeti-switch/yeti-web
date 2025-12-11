@@ -42,6 +42,7 @@ class Routing::NumberlistItem < ApplicationRecord
 
   ACTION_REJECT = 1
   ACTION_ACCEPT = 2
+  ACTION_DEFAULT_LABEL = 'Default action'
   ACTIONS = {
     ACTION_REJECT => 'Reject call',
     ACTION_ACCEPT => 'Allow call'
@@ -65,6 +66,8 @@ class Routing::NumberlistItem < ApplicationRecord
 
   validates_with TagActionValueValidator
 
+  attr_accessor :batch_key
+
   scope :where_customer, lambda { |id|
     numberlist_ids = CustomersAuth.where(customer_id: id).pluck(:dst_numberlist_id)
     where(numberlist_id: numberlist_ids)
@@ -75,12 +78,27 @@ class Routing::NumberlistItem < ApplicationRecord
     where(numberlist_id: numberlist_ids)
   }
 
+  before_create do
+    if batch_key.present?
+      keys = batch_key.delete(' ').split(',').uniq
+      while keys.length > 1
+        new_instance = dup
+        new_instance.batch_key = nil
+        new_instance.key = keys.pop
+        new_instance.save!
+      end
+      self.key = keys.pop
+    elsif key.nil?
+      self.key = ''
+    end
+  end
+
   def display_name
     "#{key} | #{id}"
   end
 
   def action_name
-    action_id.nil? ? 'Default action' : ACTIONS[action_id]
+    action_id.nil? ? ACTION_DEFAULT_LABEL : ACTIONS[action_id]
   end
 
   def rewrite_ss_status_name

@@ -8,7 +8,7 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   attribute :prefix
   attribute :dst_number_min_length
   attribute :dst_number_max_length
-  attribute :routing_tag_mode_id, type: :foreign_key, class_name: 'Routing::RoutingTagMode'
+  attribute :routing_tag_mode_id, type: :integer_collection, collection: Routing::RoutingTagMode::MODES.invert.to_a
   attribute :routing_group_id, type: :foreign_key, class_name: 'Routing::RoutingGroup'
   attribute :priority
   attribute :force_hit_rate
@@ -78,7 +78,6 @@ class BatchUpdateForm::Dialpeer < BatchUpdateForm::Base
   }, if: :priority_changed?
   validates :acd_limit, numericality: {
     greater_than_or_equal_to: 0.00,
-    less_than_or_equal_to: 1.00,
     allow_blank: true
   }, if: :acd_limit_changed?
   validates :asr_limit, numericality: {

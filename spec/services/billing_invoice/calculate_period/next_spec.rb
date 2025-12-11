@@ -12,7 +12,7 @@ RSpec.describe BillingInvoice::CalculatePeriod::Next, '.call' do
   let!(:account) { FactoryBot.create(:account, account_attrs) }
   let(:account_attrs) { { contractor: contractor, timezone: account_timezone } }
   let(:account_timezone) { utc_timezone }
-  let(:account_time_zone) { ActiveSupport::TimeZone.new(account_timezone.name) }
+  let(:account_time_zone) { ActiveSupport::TimeZone.new(account_timezone) }
   before do
     Billing::Invoice.where(account_id: account.id).delete_all
   end

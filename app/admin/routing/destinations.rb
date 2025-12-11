@@ -16,7 +16,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                            title: 'Schedule rate changes',
                            class: 'scoped_collection_action_button ui',
                            form: -> { Destination::ScheduleRateChangesForm.form_inputs },
-                           if: -> { authorized?(:batch_update, resource_klass) } do
+                           if: -> { authorized?(:batch_update, resource_class) } do
     attrs = params[:changes]&.permit(:apply_time, :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee)
 
     form = Destination::ScheduleRateChangesForm.new(attrs)
@@ -49,7 +49,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                  :valid_from, :valid_till,
                  :asr_limit, :acd_limit, :short_calls_limit, :reverse_billing, :allow_package_billing,
                  [:routing_tag_names, proc { |row| row.model.routing_tags.map(&:name).join(', ') }],
-                 [:routing_tag_mode_name, proc { |row| row.routing_tag_mode.try(:name) }]
+                 :routing_tag_mode_name
 
   acts_as_import resource_class: Importing::Destination,
                  skip_columns: [:routing_tag_ids]
@@ -136,7 +136,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     #
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
-      super.preload(:rate_group, :routing_tag_mode, network_prefix: %i[country network])
+      super.preload(:rate_group, network_prefix: %i[country network])
     end
   end
 
@@ -221,7 +221,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                                 collection: routing_tag_options,
                                 include_hidden: false,
                                 input_html: { class: 'chosen', multiple: true }
-      f.input :routing_tag_mode
+      f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert
 
       f.input :valid_from, as: :date_time_picker
       f.input :valid_till, as: :date_time_picker
@@ -279,7 +279,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
           row :quality_alarm
           row :rate_group
           row :routing_tags
-          row :routing_tag_mode
+          row :routing_tag_mode, &:routing_tag_mode_name
           row :valid_from, &:decorated_valid_from
           row :valid_till, &:decorated_valid_till
           row :rate_policy, &:rate_policy_name

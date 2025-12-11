@@ -3,8 +3,6 @@
 RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
   include_context :jsonapi_admin_headers
 
-  let(:rtm_and) { Routing::RoutingTagMode.last }
-
   describe 'GET index' do
     let!(:dialpeers) { create_list :dialpeer, 2 }
 
@@ -118,17 +116,19 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
           'next-interval': 60,
           'initial-rate': 0.0,
           'next-rate': 0.0,
-          'connect-fee': 0.0
+          'connect-fee': 0.0,
+          'routing-tag-mode-id': Routing::RoutingTagMode::MODE_AND
         }
       end
 
       let(:relationships) do
-        { vendor: wrap_relationship(:contractors, vendor.id),
+        {
+          vendor: wrap_relationship(:contractors, vendor.id),
           account: wrap_relationship(:accounts, account.id),
           'gateway-group': wrap_relationship(:'gateway-groups', gateway_group.id),
           'routing-group': wrap_relationship(:'routing-groups', routing_group.id),
-          'routing-tag-mode': wrap_relationship(:'routing-tag-modes', rtm_and.id),
-          'routeset-discriminator': wrap_relationship(:'routeset-discriminators', routeset_discriminator.id) }
+          'routeset-discriminator': wrap_relationship(:'routeset-discriminators', routeset_discriminator.id)
+        }
       end
 
       it { expect(response.status).to eq(201) }

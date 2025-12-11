@@ -31,9 +31,9 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
     let(:routing_group) { FactoryBot.create(:routing_group) }
     let(:vendor) { FactoryBot.create(:vendor) }
     let(:account) { FactoryBot.create(:account, contractor: vendor) }
-    let(:routing_tag_mode) { Routing::RoutingTagMode.take! }
     let(:routeset_discriminator) { Routing::RoutesetDiscriminator.take || FactoryBot.create(:routeset_discriminator) }
     let(:gateway) { FactoryBot.create(:gateway, vendor: vendor) }
+    let(:routing_tag_mode_id) { Routing::RoutingTagMode::MODES.keys.sample }
 
     let(:json_api_request_body) do
       {
@@ -56,14 +56,14 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
         'connect-fee': '0.01',
         'valid-from': '2020-02-02',
         'valid-till': '2020-02-03',
-        'routing-tag-ids': [tag_ua.id]
+        'routing-tag-ids': [tag_ua.id],
+        'routing-tag-mode-id': routing_tag_mode_id
       }
     end
     let(:json_api_request_relationships) do
       {
         'routing-group': { data: { id: routing_group.id.to_s, type: 'routing_groups' } },
         'account': { data: { id: account.id.to_s, type: 'accounts' } },
-        'routing-tag-mode': { data: { id: routing_tag_mode.id.to_s, type: 'routing_tag_modes' } },
         'routeset-discriminator': { data: { id: routeset_discriminator.id.to_s, type: 'routeset_discriminators' } },
         'vendor': { data: { id: vendor.id.to_s, type: 'contractors' } },
         'gateway': { data: { id: gateway.id.to_s, type: 'gateways' } }
@@ -74,7 +74,6 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
     relationships = %i[
       routing-group
       account
-      routing-tag-mode
       routeset-discriminator
       vendor
       dialpeer-next-rates
@@ -103,6 +102,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'next-interval': 1,
           'next-rate': '0.01',
           'routing-tag-ids': [tag_ua.id],
+          'routing-tag-mode-id': routing_tag_mode_id,
           'short-calls-limit': 1.0,
           'src-rewrite-result': nil,
           'src-rewrite-rule': nil,
@@ -143,15 +143,14 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'initial-rate': '0.01',
           'connect-fee': '0.01',
           'valid-from': '2020-02-02',
-          'valid-till': '2020-02-03'
-
+          'valid-till': '2020-02-03',
+          'routing-tag-mode-id': routing_tag_mode_id
         }
       end
       let(:json_api_request_relationships) do
         {
           'routing-group': { data: { id: routing_group.id.to_s, type: 'routing_groups' } },
           'account': { data: { id: account.id.to_s, type: 'accounts' } },
-          'routing-tag-mode': { data: { id: routing_tag_mode.id.to_s, type: 'routing_tag_modes' } },
           'routeset-discriminator': { data: { id: routeset_discriminator.id.to_s, type: 'routeset_discriminators' } },
           'vendor': { data: { id: vendor.id.to_s, type: 'contractors' } },
           'routing-tag-ids': { data: { id: [tag_ua], type: 'routing_tags' } },
@@ -192,16 +191,14 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'connect-fee': '0.01',
           'valid-from': '2020-02-02',
           'valid-till': '2020-02-03',
-
-          'lcr-rate-multiplier': ''
-
+          'lcr-rate-multiplier': '',
+          'routing-tag-mode-id': routing_tag_mode_id
         }
       end
       let(:json_api_request_relationships) do
         {
           'routing-group': { data: { id: routing_group.id.to_s, type: 'routing_groups' } },
           'account': { data: { id: account.id.to_s, type: 'accounts' } },
-          'routing-tag-mode': { data: { id: routing_tag_mode.id.to_s, type: 'routing_tag_modes' } },
           'routeset-discriminator': { data: { id: routeset_discriminator.id.to_s, type: 'routeset_discriminators' } },
           'vendor': { data: { id: vendor.id.to_s, type: 'contractors' } },
           'routing-tag-ids': { data: { id: [tag_ua], type: 'routing_tags' } },

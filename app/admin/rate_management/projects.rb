@@ -94,7 +94,7 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
               resource.routing_tags
             end
           end
-          row :routing_tag_mode
+          row :routing_tag_mode, &:routing_tag_mode_name
         end
       end
     end
@@ -199,10 +199,11 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
                                 include_hidden: false,
                                 input_html: { class: 'chosen' }
 
-      f.input :routing_tag_mode, as: :select,
-                                 collection: Routing::RoutingTagMode.all,
-                                 include_blank: false,
-                                 input_html: { class: 'chosen' }
+      f.input :routing_tag_mode_id,
+              as: :select,
+              include_blank: false,
+              input_html: { class: 'chosen' },
+              collection: Routing::RoutingTagMode::MODES.invert
     end
     f.actions
   end

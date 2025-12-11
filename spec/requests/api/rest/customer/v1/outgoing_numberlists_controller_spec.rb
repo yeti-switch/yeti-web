@@ -5,11 +5,9 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistsController, type: :re
 
   let!(:nl) { create(:numberlist) }
 
-  let(:api_access_attrs) {
-    {
-      allow_outgoing_numberlists_ids: [nl.id]
-    }
-  }
+  let(:api_access_attrs) do
+    { customer:, allow_outgoing_numberlists_ids: [nl.id] }
+  end
 
   describe 'GET /api/rest/customer/v1/outgoing-numberlists' do
     subject do
@@ -18,7 +16,9 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistsController, type: :re
 
     let(:json_api_request_query) { nil }
 
-    it_behaves_like :json_api_customer_v1_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization do
+      let(:extra_auth_config) { { allow_outgoing_numberlists_ids: [nl.id] } }
+    end
 
     context 'account_ids is empty' do
       before do
@@ -40,9 +40,7 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistsController, type: :re
       let!(:nls) { create_list(:numberlist, 2) }
 
       let(:api_access_attrs) {
-        {
-          allow_outgoing_numberlists_ids: nls.map(&:id)
-        }
+        super().merge allow_outgoing_numberlists_ids: nls.map(&:id)
       }
 
       let(:records_qty) { 2 }
@@ -72,9 +70,7 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistsController, type: :re
 
     context 'with ransack filters' do
       let(:api_access_attrs) {
-        {
-          allow_outgoing_numberlists_ids: [suitable_record.id]
-        }
+        super().merge allow_outgoing_numberlists_ids: [suitable_record.id]
       }
 
       before do
@@ -86,6 +82,25 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistsController, type: :re
       let(:pk) { :id }
 
       it_behaves_like :jsonapi_filters_by_string_field, :name
+    end
+
+    context 'with dynamic auth' do
+      let(:auth_config) { { customer_id: customer.id, allow_outgoing_numberlists_ids: [nl.id] } }
+      let(:api_access) { nil }
+
+      before do
+        create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id)
+      end
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        expect(response_json[:data]).to match_array(
+                                          [
+                                            hash_including(id: nl.id.to_s)
+                                          ]
+                                        )
+      end
     end
   end
 
@@ -99,7 +114,9 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistsController, type: :re
 
     let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
 
-    it_behaves_like :json_api_customer_v1_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization do
+      let(:extra_auth_config) { { allow_outgoing_numberlists_ids: [nl.id] } }
+    end
 
     context 'when record exists' do
       it 'returns record with expected attributes' do

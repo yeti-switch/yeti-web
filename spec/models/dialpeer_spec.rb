@@ -63,7 +63,6 @@
 #  dialpeers_gateway_id_fkey                 (gateway_id => gateways.id)
 #  dialpeers_routeset_discriminator_id_fkey  (routeset_discriminator_id => routeset_discriminators.id)
 #  dialpeers_routing_group_id_fkey           (routing_group_id => routing_groups.id)
-#  dialpeers_routing_tag_mode_id_fkey        (routing_tag_mode_id => routing_tag_modes.id)
 #  dialpeers_scheduler_id_fkey               (scheduler_id => schedulers.id)
 #  dialpeers_vendor_id_fkey                  (vendor_id => contractors.id)
 #

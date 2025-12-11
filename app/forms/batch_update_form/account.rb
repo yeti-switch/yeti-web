@@ -13,7 +13,7 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   attribute :max_call_duration
   attribute :invoice_period_id, type: :integer_collection, collection: Billing::InvoicePeriod.pluck(:name, :id)
   attribute :invoice_template_id, type: :foreign_key, class_name: 'Billing::InvoiceTemplate'
-  attribute :timezone_id, type: :foreign_key, class_name: 'System::Timezone'
+  attribute :timezone, type: :plain_array, collection: proc { Yeti::TimeZoneHelper.all }
 
   validates :min_balance, required_with: :max_balance, if: -> { min_balance.nil? || max_balance.nil? }
 
@@ -21,7 +21,8 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   validates :vat, presence: true, if: :vat_changed?
   validates :min_balance, presence: true, if: :min_balance_changed?
   validates :max_balance, presence: true, if: :max_balance_changed?
-  validates :timezone_id, presence: true, if: :timezone_id_changed?
+  validates :timezone, presence: true, if: :timezone_changed?
+  validates :timezone, inclusion: { in: proc { Yeti::TimeZoneHelper.all } }, allow_nil: false, allow_blank: false, if: :timezone_changed?
 
   # numericality
   validates :min_balance, numericality: { allow_blank: true }, if: :min_balance_changed?

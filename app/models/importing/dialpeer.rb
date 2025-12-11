@@ -63,7 +63,6 @@ class Importing::Dialpeer < Importing::Base
   belongs_to :routing_group, class_name: 'Routing::RoutingGroup', optional: true
   belongs_to :account, class_name: '::Account', optional: true
   belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor', optional: true
-  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id, optional: true
   belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id, optional: true
   belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
   has_many :dialpeer_next_rates, dependent: :destroy
@@ -80,10 +79,15 @@ class Importing::Dialpeer < Importing::Base
                               routing_tag_ids routing_tag_mode_id routeset_discriminator_id scheduler_id]
   import_for ::Dialpeer
 
+  def routing_tag_mode_display_name
+    routing_tag_mode_id.nil? ? 'nil' : Routing::RoutingTagMode::MODES[routing_tag_mode_id]
+  end
+
   def self.after_import_hook
     where(asr_limit: nil).update_all(asr_limit: 0)
     resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
     resolve_null_tag('routing_tag_ids', 'routing_tag_names')
+    resolve_integer_constant('routing_tag_mode_id', 'routing_tag_mode_name', Routing::RoutingTagMode::MODES)
     super
   end
 end

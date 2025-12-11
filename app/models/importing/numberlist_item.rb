@@ -47,7 +47,7 @@ class Importing::NumberlistItem < Importing::Base
                               tag_action_id tag_action_value rewrite_ss_status_id lua_script_id]
 
   def action_display_name
-    action_id.nil? ? 'unknown' : Routing::Numberlist::ACTIONS[action_id]
+    action_id.nil? ? Routing::NumberlistItem::ACTION_DEFAULT_LABEL : Routing::NumberlistItem::ACTIONS[action_id]
   end
 
   def rewrite_ss_status_name

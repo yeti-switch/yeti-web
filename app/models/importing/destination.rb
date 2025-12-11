@@ -47,7 +47,6 @@ class Importing::Destination < Importing::Base
   self.table_name = 'data_import.import_destinations'
 
   belongs_to :rate_group, class_name: 'Routing::RateGroup', optional: true
-  belongs_to :routing_tag_mode, class_name: 'Routing::RoutingTagMode', foreign_key: :routing_tag_mode_id, optional: true
   belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
 
   self.import_attributes = %w[enabled prefix reject_calls rate_group_id
@@ -68,11 +67,16 @@ class Importing::Destination < Importing::Base
     profit_control_mode_id.nil? ? 'nil' : Routing::RateProfitControlMode::MODES[rate_policy_id]
   end
 
+  def routing_tag_mode_display_name
+    routing_tag_mode_id.nil? ? 'nil' : Routing::RoutingTagMode::MODES[routing_tag_mode_id]
+  end
+
   def self.after_import_hook
     resolve_array_of_tags('routing_tag_ids', 'routing_tag_names')
     resolve_null_tag('routing_tag_ids', 'routing_tag_names')
     resolve_integer_constant('rate_policy_id', 'rate_policy_name', Routing::DestinationRatePolicy::POLICIES)
     resolve_integer_constant('profit_control_mode_id', 'profit_control_mode_name', Routing::RateProfitControlMode::MODES)
+    resolve_integer_constant('routing_tag_mode_id', 'routing_tag_mode_name', Routing::RoutingTagMode::MODES)
     super
   end
 end

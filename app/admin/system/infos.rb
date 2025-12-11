@@ -46,7 +46,21 @@ ActiveAdmin.register_page 'Info' do
               end
               row :api do
                 attributes_table_for(YetiConfig.api) do
-                  row :token_lifetime
+                  row :admin do
+                    attributes_table_for(YetiConfig.api.admin) do
+                      row :token_lifetime
+                    end
+                  end
+                  row :customer do
+                    attributes_table_for(YetiConfig.api.customer) do
+                      row :token_lifetime
+                      row :call_jwt_lifetime
+                      row :outgoing_cdr_hide_fields
+                      row :outgoing_statistics_use_customer_duration
+                      row :incoming_cdr_hide_fields
+                      row :incoming_statistics_use_vendor_duration
+                    end
+                  end
                 end
               end
               row :cdr_export do

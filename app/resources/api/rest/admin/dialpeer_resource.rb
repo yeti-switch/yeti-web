@@ -6,7 +6,8 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
              :prefix, :src_rewrite_rule, :dst_rewrite_rule, :acd_limit, :asr_limit, :src_rewrite_result,
              :dst_rewrite_result, :locked, :priority, :exclusive_route, :capacity, :lcr_rate_multiplier,
              :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id,
-             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing
+             :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing,
+             :routing_tag_mode_id
 
   paginator :paged
 
@@ -15,7 +16,6 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   has_one :routing_group, class_name: 'RoutingGroup', always_include_linkage_data: true
   has_one :vendor, class_name: 'Contractor', always_include_linkage_data: true
   has_one :account, always_include_linkage_data: true
-  has_one :routing_tag_mode, class_name: 'RoutingTagMode', always_include_linkage_data: true
   has_one :routeset_discriminator, class_name: 'RoutesetDiscriminator', always_include_linkage_data: true
 
   has_many :dialpeer_next_rates
@@ -46,6 +46,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :force_hit_rate, type: :number
   ransack_filter :short_calls_limit, type: :number
   ransack_filter :external_id, type: :number
+  ransack_filter :routing_tag_mode_id, type: :number
 
   def self.updatable_fields(_context)
     %i[
@@ -62,7 +63,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
       connect_fee
       vendor
       account
-      routing_tag_mode
+      routing_tag_mode_id
       src_rewrite_result
       dst_rewrite_result
       locked

@@ -55,7 +55,7 @@ RSpec.describe 'Dialpeer Imports' do
     expect(page).to have_table_cell column: 'Gateway group', exact_text: 'Empty'
     expect(page).to have_table_cell column: 'Routing group', exact_text: import.routing_group.name
     expect(page).to have_table_cell column: 'Routing tag ids', exact_text: import.routing_tag_ids
-    expect(page).to have_table_cell column: 'Routing tag mode', exact_text: import.routing_tag_mode.name
+    expect(page).to have_table_cell column: 'Routing tag mode', exact_text: import.routing_tag_mode_name
     expect(page).to have_table_cell column: 'Vendor', exact_text: import.vendor.name
     expect(page).to have_table_cell column: 'Account', exact_text: import.account.name
     expect(page).to have_table_cell column: 'Routeset discriminator', exact_text: import.routeset_discriminator.name
@@ -99,7 +99,7 @@ RSpec.describe 'Dialpeer Imports' do
       expect(page).to have_table_cell column: 'Gateway group', exact_text: import.gateway_group.name
       expect(page).to have_table_cell column: 'Routing group', exact_text: import.routing_group.name
       expect(page).to have_table_cell column: 'Routing tag ids', exact_text: import.routing_tag_ids
-      expect(page).to have_table_cell column: 'Routing tag mode', exact_text: import.routing_tag_mode.name
+      expect(page).to have_table_cell column: 'Routing tag mode', exact_text: import.routing_tag_mode_name
       expect(page).to have_table_cell column: 'Vendor', exact_text: import.vendor.name
       expect(page).to have_table_cell column: 'Account', exact_text: import.account.name
       expect(page).to have_table_cell column: 'Routeset discriminator', exact_text: import.routeset_discriminator.name

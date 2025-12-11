@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::Rest::Admin::GatewayResource < ::BaseResource
-  attributes :external_id, :name, :enabled,
+  attributes :external_id, :name, :enabled, :is_shared,
              :priority, :weight, :acd_limit, :asr_limit, :allow_origination, :allow_termination, :sst_enabled,
              :host, :port, :resolve_ruri,
              :diversion_domain, :diversion_rewrite_rule, :diversion_rewrite_result,
@@ -165,6 +165,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       external_id
       name
       enabled
+      is_shared
       priority
       weight
       acd_limit

@@ -3316,7 +3316,6 @@ CREATE TABLE billing.accounts (
     invoice_template_id integer,
     next_invoice_at timestamp with time zone,
     send_invoices_to integer[],
-    timezone_id integer DEFAULT 1 NOT NULL,
     next_invoice_type_id smallint,
     uuid uuid DEFAULT public.uuid_generate_v1() NOT NULL,
     external_id bigint,
@@ -3325,6 +3324,7 @@ CREATE TABLE billing.accounts (
     destination_rate_limit numeric,
     max_call_duration integer,
     invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
+    timezone character varying DEFAULT 'UTC'::character varying NOT NULL,
     CONSTRAINT positive_max_call_duration CHECK ((max_call_duration > 0)),
     CONSTRAINT positive_origination_capacity CHECK ((origination_capacity > 0)),
     CONSTRAINT positive_termination_capacity CHECK ((termination_capacity > 0)),
@@ -42307,16 +42307,6 @@ ALTER SEQUENCE class4.routing_tag_detection_rules_id_seq OWNED BY class4.routing
 
 
 --
--- Name: routing_tag_modes; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.routing_tag_modes (
-    id smallint NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: routing_tags; Type: TABLE; Schema: class4; Owner: -
 --
 
@@ -45052,14 +45042,14 @@ CREATE TABLE sys.customer_portal_access_profiles (
     outgoing_cdrs boolean DEFAULT true NOT NULL,
     outgoing_cdr_exports boolean DEFAULT true NOT NULL,
     outgoing_statistics boolean DEFAULT true NOT NULL,
-    outgoing_statistics_active_calls boolean DEFAULT true NOT NULL,
-    outgoing_statistics_acd boolean DEFAULT true NOT NULL,
-    outgoing_statistics_asr boolean DEFAULT true NOT NULL,
-    outgoing_statistics_failed_calls boolean DEFAULT true NOT NULL,
-    outgoing_statistics_successful_calls boolean DEFAULT true NOT NULL,
-    outgoing_statistics_total_calls boolean DEFAULT true NOT NULL,
-    outgoing_statistics_total_duration boolean DEFAULT true NOT NULL,
-    outgoing_statistics_total_price boolean DEFAULT true NOT NULL,
+    outgoing_statistics_active_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_active_not_null NOT NULL,
+    outgoing_statistics_acd boolean DEFAULT true CONSTRAINT customer_portal_access_profile_outgoing_statistics_acd_not_null NOT NULL,
+    outgoing_statistics_asr boolean DEFAULT true CONSTRAINT customer_portal_access_profile_outgoing_statistics_asr_not_null NOT NULL,
+    outgoing_statistics_failed_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_failed_not_null NOT NULL,
+    outgoing_statistics_successful_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_succes_not_null NOT NULL,
+    outgoing_statistics_total_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_total__not_null NOT NULL,
+    outgoing_statistics_total_duration boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null1 NOT NULL,
+    outgoing_statistics_total_price boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null2 NOT NULL,
     incoming_cdrs boolean DEFAULT true NOT NULL,
     incoming_statistics boolean DEFAULT true NOT NULL,
     invoices boolean DEFAULT true NOT NULL,
@@ -45067,7 +45057,31 @@ CREATE TABLE sys.customer_portal_access_profiles (
     services boolean DEFAULT true NOT NULL,
     transactions boolean DEFAULT true NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    outgoing_numberlists boolean DEFAULT true NOT NULL,
+    payments_cryptomus boolean DEFAULT false NOT NULL,
+    outgoing_statistics_acd_value boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_acd_va_not_null NOT NULL,
+    outgoing_statistics_asr_value boolean DEFAULT true CONSTRAINT customer_portal_access_prof_outgoing_statistics_asr_va_not_null NOT NULL,
+    outgoing_statistics_failed_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_failed_not_null1 NOT NULL,
+    outgoing_statistics_successful_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_succes_not_null1 NOT NULL,
+    outgoing_statistics_total_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null3 NOT NULL,
+    outgoing_statistics_total_duration_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null4 NOT NULL,
+    outgoing_statistics_total_price_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_outgoing_statistics_total__not_null5 NOT NULL,
+    incoming_statistics_active_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_active_not_null NOT NULL,
+    incoming_statistics_acd boolean DEFAULT true CONSTRAINT customer_portal_access_profile_incoming_statistics_acd_not_null NOT NULL,
+    incoming_statistics_asr boolean DEFAULT true CONSTRAINT customer_portal_access_profile_incoming_statistics_asr_not_null NOT NULL,
+    incoming_statistics_failed_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_failed_not_null NOT NULL,
+    incoming_statistics_successful_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_succes_not_null NOT NULL,
+    incoming_statistics_total_calls boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_total__not_null NOT NULL,
+    incoming_statistics_total_duration boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null1 NOT NULL,
+    incoming_statistics_total_price boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null2 NOT NULL,
+    incoming_statistics_acd_value boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_acd_va_not_null NOT NULL,
+    incoming_statistics_asr_value boolean DEFAULT true CONSTRAINT customer_portal_access_prof_incoming_statistics_asr_va_not_null NOT NULL,
+    incoming_statistics_failed_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_failed_not_null1 NOT NULL,
+    incoming_statistics_successful_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_succes_not_null1 NOT NULL,
+    incoming_statistics_total_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null3 NOT NULL,
+    incoming_statistics_total_duration_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null4 NOT NULL,
+    incoming_statistics_total_price_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null5 NOT NULL
 );
 
 
@@ -45579,38 +45593,6 @@ CREATE TABLE sys.states (
     key character varying NOT NULL,
     value bigint DEFAULT 0 NOT NULL
 );
-
-
---
--- Name: timezones; Type: TABLE; Schema: sys; Owner: -
---
-
-CREATE TABLE sys.timezones (
-    id integer NOT NULL,
-    name character varying NOT NULL,
-    abbrev character varying,
-    utc_offset interval,
-    is_dst boolean
-);
-
-
---
--- Name: timezones_id_seq; Type: SEQUENCE; Schema: sys; Owner: -
---
-
-CREATE SEQUENCE sys.timezones_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: timezones_id_seq; Type: SEQUENCE OWNED BY; Schema: sys; Owner: -
---
-
-ALTER SEQUENCE sys.timezones_id_seq OWNED BY sys.timezones.id;
 
 
 --
@@ -46517,13 +46499,6 @@ ALTER TABLE ONLY sys.smtp_connections ALTER COLUMN id SET DEFAULT nextval('sys.s
 
 
 --
--- Name: timezones id; Type: DEFAULT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.timezones ALTER COLUMN id SET DEFAULT nextval('sys.timezones_id_seq'::regclass);
-
-
---
 -- Name: account_balance_notification_settings account_balance_notification_settings_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
 --
 
@@ -47377,22 +47352,6 @@ ALTER TABLE ONLY class4.routing_plans
 
 ALTER TABLE ONLY class4.routing_tag_detection_rules
     ADD CONSTRAINT routing_tag_detection_rules_pkey PRIMARY KEY (id);
-
-
---
--- Name: routing_tag_modes routing_tag_modes_name_key; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.routing_tag_modes
-    ADD CONSTRAINT routing_tag_modes_name_key UNIQUE (name);
-
-
---
--- Name: routing_tag_modes routing_tag_modes_pkey; Type: CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.routing_tag_modes
-    ADD CONSTRAINT routing_tag_modes_pkey PRIMARY KEY (id);
 
 
 --
@@ -48564,22 +48523,6 @@ ALTER TABLE ONLY sys.states
 
 
 --
--- Name: timezones timezones_name_key; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.timezones
-    ADD CONSTRAINT timezones_name_key UNIQUE (name);
-
-
---
--- Name: timezones timezones_pkey; Type: CONSTRAINT; Schema: sys; Owner: -
---
-
-ALTER TABLE ONLY sys.timezones
-    ADD CONSTRAINT timezones_pkey PRIMARY KEY (id);
-
-
---
 -- Name: account_balance_notification_settings_account_id_uniq_idx; Type: INDEX; Schema: billing; Owner: -
 --
 
@@ -49323,14 +49266,6 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
--- Name: accounts accounts_timezone_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
---
-
-ALTER TABLE ONLY billing.accounts
-    ADD CONSTRAINT accounts_timezone_id_fkey FOREIGN KEY (timezone_id) REFERENCES sys.timezones(id);
-
-
---
 -- Name: account_balance_notification_settings fk_rails_f185d22f87; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
@@ -49547,14 +49482,6 @@ ALTER TABLE ONLY class4.destinations
 
 
 --
--- Name: destinations destinations_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.destinations
-    ADD CONSTRAINT destinations_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
-
-
---
 -- Name: destinations destinations_scheduler_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -49608,14 +49535,6 @@ ALTER TABLE ONLY class4.dialpeers
 
 ALTER TABLE ONLY class4.dialpeers
     ADD CONSTRAINT dialpeers_routing_group_id_fkey FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
-
-
---
--- Name: dialpeers dialpeers_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.dialpeers
-    ADD CONSTRAINT dialpeers_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
 
 
 --
@@ -50099,14 +50018,6 @@ ALTER TABLE ONLY class4.routing_tag_detection_rules
 
 
 --
--- Name: routing_tag_detection_rules routing_tag_detection_rules_routing_tag_mode_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.routing_tag_detection_rules
-    ADD CONSTRAINT routing_tag_detection_rules_routing_tag_mode_id_fkey FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
-
-
---
 -- Name: routing_tag_detection_rules routing_tag_detection_rules_src_area_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -50219,14 +50130,6 @@ ALTER TABLE ONLY public.contractors
 
 
 --
--- Name: pricelist_items fk_rails_161e735c3a; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
---
-
-ALTER TABLE ONLY ratemanagement.pricelist_items
-    ADD CONSTRAINT fk_rails_161e735c3a FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
-
-
---
 -- Name: projects fk_rails_2016c4d0a1; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
 --
 
@@ -50256,14 +50159,6 @@ ALTER TABLE ONLY ratemanagement.pricelist_items
 
 ALTER TABLE ONLY ratemanagement.pricelist_items
     ADD CONSTRAINT fk_rails_5952853742 FOREIGN KEY (routing_group_id) REFERENCES class4.routing_groups(id);
-
-
---
--- Name: projects fk_rails_8c0fbee7b0; Type: FK CONSTRAINT; Schema: ratemanagement; Owner: -
---
-
-ALTER TABLE ONLY ratemanagement.projects
-    ADD CONSTRAINT fk_rails_8c0fbee7b0 FOREIGN KEY (routing_tag_mode_id) REFERENCES class4.routing_tag_modes(id);
 
 
 --
@@ -50499,6 +50394,14 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251115233349'),
+('20251115233348'),
+('20251115233347'),
+('20251115233346'),
+('20251112214245'),
+('20251109191129'),
+('20251030205037'),
+('20251030195717'),
 ('20251022165638'),
 ('20251013133006'),
 ('20251013103950'),

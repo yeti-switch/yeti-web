@@ -6,7 +6,7 @@ class Api::Rest::Customer::V1::OutgoingNumberlistItemResource < Api::Rest::Custo
   key_type :integer
   primary_key :id
 
-  attributes :key, :action_id
+  attributes :key, :batch_key, :action_id
 
   has_one :outgoing_numberlist, relation_name: :outgoing_numberlist, foreign_key_on: :related, foreign_key: :numberlist_id
 
@@ -18,8 +18,12 @@ class Api::Rest::Customer::V1::OutgoingNumberlistItemResource < Api::Rest::Custo
     [{ field: 'key', direction: :asc }]
   end
 
-  def self.creatable_fields(_context)
+  def fetchable_fields
     %i[outgoing_numberlist key action_id]
+  end
+
+  def self.creatable_fields(_context)
+    %i[outgoing_numberlist key batch_key action_id]
   end
 
   def self.updatable_fields(_context)

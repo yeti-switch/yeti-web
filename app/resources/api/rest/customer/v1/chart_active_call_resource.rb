@@ -5,7 +5,7 @@ class Api::Rest::Customer::V1::ChartActiveCallResource < Api::Rest::Customer::V1
   primary_key :id
 
   before_replace_fields do
-    _model.customer = context[:current_customer].customer
+    _model.customer = context[:auth_context].customer
   end
 
   attributes :from_time,

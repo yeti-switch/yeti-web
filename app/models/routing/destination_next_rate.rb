@@ -56,7 +56,6 @@ class Routing::DestinationNextRate < ApplicationRecord
     not_applied.where('apply_time < ?', Time.now.utc).preload(
       destination: %i[
         rate_group
-        routing_tag_mode
       ]
     )
   }

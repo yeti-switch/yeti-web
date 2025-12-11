@@ -19,8 +19,8 @@ RSpec.describe BatchUpdateForm::Dialpeer do
       prefix: 'string',
       dst_number_min_length: '10',
       dst_number_max_length: '20',
-      routing_tag_mode_id: Routing::RoutingTagMode.last!.id.to_s,
-      routing_group_id: Routing::RoutingTagMode.last!.id.to_s,
+      routing_tag_mode_id: Routing::RoutingTagMode::MODE_AND.to_s,
+      routing_group_id: Routing::RoutingGroup.last!.id.to_s,
       priority: '3',
       force_hit_rate: '0.5',
       exclusive_route: true,
@@ -324,7 +324,6 @@ RSpec.describe BatchUpdateForm::Dialpeer do
       it { is_expected.to validate_numericality_of :next_interval }
       it { is_expected.to validate_numericality_of(:priority).only_integer }
       it { is_expected.to validate_numericality_of(:acd_limit).is_greater_than_or_equal_to(0.00) }
-      it { is_expected.to validate_numericality_of(:acd_limit).is_less_than_or_equal_to(1.00) }
       it { is_expected.to validate_numericality_of(:asr_limit).is_greater_than_or_equal_to(0.00) }
       it { is_expected.to validate_numericality_of(:asr_limit).is_less_than_or_equal_to(1.00) }
       it { is_expected.to validate_numericality_of(:short_calls_limit).is_greater_than_or_equal_to(0.00) }

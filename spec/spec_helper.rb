@@ -87,8 +87,6 @@ RSpec.configure do |config|
     'class4.gateway_diversion_send_modes',
     'class4.transport_protocols',
     'class4.tag_actions',
-    'class4.routing_tag_modes',
-    'sys.timezones',
     'sys.jobs',
     'sys.states',
     'sys.customer_portal_access_profiles'

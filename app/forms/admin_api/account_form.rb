@@ -19,7 +19,7 @@ module AdminApi
                      :total_capacity,
                      :send_invoices_to,
                      :contractor_id,
-                     :timezone_id,
+                     :timezone,
                      :invoice_template_id
 
     attribute :invoice_period, :string

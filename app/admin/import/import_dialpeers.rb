@@ -52,7 +52,7 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
     column :gateway_group, sortable: :gateway_group_name
     column :routing_group, sortable: :routing_group_name
     column :routing_tag_ids
-    column :routing_tag_mode, sortable: :routing_tag_mode_name
+    column :routing_tag_mode, &:routing_tag_mode_display_name
     column :vendor, sortable: :vendor_name
     column :account, sortable: :account_name
     column :routeset_discriminator, sortable: :routeset_discriminator_name

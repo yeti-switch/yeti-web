@@ -9,6 +9,7 @@ calls_monitoring:
 api:
   token_lifetime: 600 # jwt token lifetime in seconds, empty string means permanent tokens
   customer:
+    token_lifetime: 600 # jwt token lifetime in seconds, empty string means permanent tokens
     call_jwt_lifetime: 600
     call_jwt_private_key: "config/private.key"
 cdr_export:
@@ -83,6 +84,9 @@ s3_storage:
   secret_access_key: ''
   region: ''
   force_path_style: false
+  client_options:
+    http_read_timeout: 60
+    http_wire_trace: false
   pcap:
     bucket: ''
   call_record:
@@ -91,3 +95,9 @@ s3_storage:
     bucket: ''
 
 tmpdir: 'tmp'
+
+# Admin UI session expiration configuration (optional)
+# If not set, sessions will not expire (current behavior)
+# If set, sessions will expire after the specified number of seconds of inactivity
+admin_ui:
+  session_lifetime: 60  # Session expires after 60 seconds of inactivity

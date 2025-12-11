@@ -6,11 +6,9 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
   let!(:nl) { create(:numberlist) }
   let!(:nli) { create(:numberlist_item, numberlist_id: nl.id, key: 'some old key', action_id: 1) }
 
-  let(:api_access_attrs) {
-    {
-      allow_outgoing_numberlists_ids: [nl.id]
-    }
-  }
+  let(:api_access_attrs) do
+    { customer:, allow_outgoing_numberlists_ids: [nl.id] }
+  end
 
   describe 'GET /api/rest/customer/v1/outgoing-numberlist-items' do
     subject do
@@ -19,7 +17,9 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
 
     let(:json_api_request_query) { nil }
 
-    it_behaves_like :json_api_customer_v1_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization do
+      let(:extra_auth_config) { { allow_outgoing_numberlists_ids: [nl.id] } }
+    end
 
     context 'account_ids is empty' do
       before do
@@ -42,9 +42,7 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
       let!(:nlis) { create_list(:numberlist_item, 2, numberlist_id: nls.sample.id) }
 
       let(:api_access_attrs) {
-        {
-          allow_outgoing_numberlists_ids: nls.map(&:id)
-        }
+        super().merge allow_outgoing_numberlists_ids: nls.map(&:id)
       }
 
       let(:records_qty) { 2 }
@@ -74,9 +72,7 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
 
     context 'with ransack filters' do
       let(:api_access_attrs) {
-        {
-          allow_outgoing_numberlists_ids: [suitable_record.numberlist_id]
-        }
+        super().merge allow_outgoing_numberlists_ids: [suitable_record.numberlist_id]
       }
 
       before do
@@ -88,6 +84,25 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
       let(:pk) { :id }
 
       it_behaves_like :jsonapi_filters_by_string_field, :key
+    end
+
+    context 'with dynamic auth' do
+      let(:auth_config) { { customer_id: customer.id, allow_outgoing_numberlists_ids: [nl.id] } }
+      let(:api_access) { nil }
+
+      before do
+        create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id)
+      end
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(200)
+        expect(response_json[:data]).to match_array(
+                                          [
+                                            hash_including(id: nli.id.to_s)
+                                          ]
+                                        )
+      end
     end
   end
 
@@ -101,7 +116,9 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
 
     let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
 
-    it_behaves_like :json_api_customer_v1_check_authorization
+    it_behaves_like :json_api_customer_v1_check_authorization do
+      let(:extra_auth_config) { { allow_outgoing_numberlists_ids: [nl.id] } }
+    end
 
     context 'when record exists' do
       it 'returns record with expected attributes' do
@@ -184,6 +201,78 @@ RSpec.describe Api::Rest::Customer::V1::OutgoingNumberlistItemsController, type:
         expect(new_nli.key).to eq('some new name')
         expect(new_nli.action_id).to eq(2)
         expect(new_nli.numberlist_id).to eq(nl.id)
+      end
+    end
+
+    context 'with not allowed numberlist' do
+      it 'returns expection' do
+        subject
+        expect(response.status).to eq(422)
+        expect(response_json[:errors]).to match_array(
+                                            [
+                                              hash_including(code: '100', status: '422', title: 'Invalid numberlist')
+                                            ]
+                                          )
+        expect { subject }.not_to change { Routing::NumberlistItem.count }
+      end
+    end
+  end
+
+  describe 'POST /api/rest/customer/v1/outgoing-numberlist-items with batch' do
+    subject do
+      post json_api_request_path, params: json_api_request_body.to_json, headers: json_api_request_headers
+    end
+
+    let(:json_api_request_body) do
+      {
+        data: {
+          type: 'outgoing-numberlist-items',
+          attributes: json_api_attributes,
+          relationships: {
+            'outgoing-numberlist': {
+              "data": {
+                "type": 'outgoing-numberlists',
+                "id": nl.id.to_s
+              }
+            }
+          }
+        }
+      }
+    end
+    let(:json_api_attributes) do
+      {
+        'batch-key': 'key1, key2, key3',
+        'action-id': 2
+      }
+    end
+
+    context 'with allowed numberlist' do
+      let!(:customers_auth) { create(:customers_auth, customer_id: customer.id, dst_numberlist_id: nl.id) }
+
+      it 'returns records of this customer' do
+        subject
+        expect(response.status).to eq(201)
+        expect(response_json[:data]).to match(
+                                          id: anything,
+                                          'type': 'outgoing-numberlist-items',
+                                          'links': anything,
+                                          'relationships': {
+                                            'outgoing-numberlist': {
+                                              'links': anything
+                                            }
+                                          },
+                                          'attributes': {
+                                            'key': 'key1',
+                                            'action-id': 2
+                                          }
+                                        )
+        new_nli = Routing::NumberlistItem.find(response_json[:data][:id])
+        expect(new_nli.key).to eq('key1')
+        expect(new_nli.action_id).to eq(2)
+        expect(new_nli.numberlist_id).to eq(nl.id)
+
+        multiple_nli_created = Routing::NumberlistItem.where(numberlist_id: nl.id, key: %w[key1 key2 key3])
+        expect(multiple_nli_created.count).to eq(3)
       end
     end
 

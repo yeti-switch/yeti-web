@@ -80,6 +80,7 @@ Rails.application.routes.draw do
           jsonapi_resources :contractors
           jsonapi_resources :contacts
           jsonapi_resources :api_accesses
+          jsonapi_resources :customer_tokens, only: %i[create]
           jsonapi_resources :customers_auths
           jsonapi_resources :rate_groups
 
@@ -160,7 +161,6 @@ Rails.application.routes.draw do
           jsonapi_resources :rateplans
           jsonapi_resources :routing_groups
           jsonapi_resources :routing_tags
-          jsonapi_resources :routing_tag_modes
           jsonapi_resources :routeset_discriminators
           jsonapi_resources :destinations
           jsonapi_resources :destination_next_rates
@@ -202,7 +202,7 @@ Rails.application.routes.draw do
             jsonapi_resources :services, only: %i[index show]
             jsonapi_resources :transactions, only: %i[index show]
             jsonapi_resources :phone_systems_sessions, only: %i[create]
-            jsonapi_resource :customer_portal_access_profile, only: %i[show]
+            jsonapi_resource :profiles, only: %i[show]
           end
         end
 

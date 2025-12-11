@@ -3,7 +3,6 @@
 RSpec.describe BatchUpdateForm::Destination do
   let(:prefix_err_message) { I18n.t 'activerecord.errors.models.routing\destination.attributes.prefix.with_spaces' }
   let!(:rate_group) { Routing::RateGroup.take || FactoryBot.create(:rate_group) }
-  let!(:routing_tag_mode) { Routing::RoutingTagMode.take! }
   let!(:rate_policy_id) { Routing::DestinationRatePolicy::POLICY_MAX }
   let!(:profit_control_mode_id) { Routing::RateProfitControlMode::MODE_PER_CALL }
   let!(:assign_params) do
@@ -12,7 +11,7 @@ RSpec.describe BatchUpdateForm::Destination do
       prefix: '_test',
       dst_number_min_length: '0',
       dst_number_max_length: '0',
-      routing_tag_mode_id: routing_tag_mode.id.to_s,
+      routing_tag_mode_id: Routing::RoutingTagMode::MODE_OR.to_s,
       reject_calls: 'false',
       quality_alarm: 'true',
       rate_group_id: rate_group.id.to_s,

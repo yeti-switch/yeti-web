@@ -103,8 +103,8 @@ RSpec.describe Api::Rest::Customer::V1::ChartActiveCallsController, type: :reque
         { account: { data: { id: other_account.uuid, type: 'accounts' } } }
       end
 
-      let!(:other_api_access) { create :api_access, api_access_attrs }
-      let(:other_customer) { other_api_access.customer }
+      let!(:other_customer) { create(:customer) }
+      let!(:other_api_access) { create(:api_access, **api_access_attrs, customer: other_customer) }
       let!(:other_account) { create(:account, contractor: other_customer).reload }
 
       include_examples :returns_json_api_errors, errors: {

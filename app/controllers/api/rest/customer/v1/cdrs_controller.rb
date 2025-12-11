@@ -8,7 +8,7 @@ class Api::Rest::Customer::V1::CdrsController < Api::Rest::Customer::V1::BaseCon
   before_action :find_cdr, only: :rec
 
   def rec
-    unless current_customer.allow_listen_recording
+    unless auth_context.allow_listen_recording
       head 404 and return
     end
 

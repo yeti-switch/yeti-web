@@ -16,6 +16,7 @@
 #  origination_capacity   :integer(2)
 #  send_invoices_to       :integer(4)       is an Array
 #  termination_capacity   :integer(2)
+#  timezone               :string           default("UTC"), not null
 #  total_capacity         :integer(2)
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
@@ -24,7 +25,6 @@
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
 #  next_invoice_type_id   :integer(2)
-#  timezone_id            :integer(4)       default(1), not null
 #
 # Indexes
 #
@@ -36,7 +36,6 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
-#  accounts_timezone_id_fkey    (timezone_id => timezones.id)
 #
 
 class Account < ApplicationRecord
@@ -71,7 +70,6 @@ class Account < ApplicationRecord
 
   belongs_to :contractor
   belongs_to :invoice_template, class_name: 'Billing::InvoiceTemplate', optional: true
-  belongs_to :timezone, class_name: 'System::Timezone', foreign_key: :timezone_id
 
   has_many :payments, dependent: :destroy
   has_many :services, class_name: 'Billing::Service', dependent: :destroy
@@ -99,6 +97,10 @@ class Account < ApplicationRecord
   validates :balance, numericality: true
   validates :uuid, :name, uniqueness: true
   validates :name, :timezone, :vat, :max_balance, :min_balance, presence: true
+  validates :timezone, allow_nil: false, allow_blank: false, inclusion: {
+    in: proc { Yeti::TimeZoneHelper.all },
+    message: '%<value>s is not a valid timezone'
+  }
   validates :max_balance, numericality: { greater_than_or_equal_to: :min_balance }, if: -> { min_balance.present? }
 
   validates :termination_capacity, :origination_capacity, :total_capacity,

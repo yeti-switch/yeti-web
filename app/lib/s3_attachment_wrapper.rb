@@ -28,21 +28,27 @@ class S3AttachmentWrapper
     return unless block_given?
     return if @bucket_name.blank? || @object_key.blank?
 
-    object = ::Aws::S3::Object.new(bucket_name: @bucket_name, key: @object_key, http_read_timeout: 5)
+    object = ::Aws::S3::Object.new(bucket_name: @bucket_name, key: @object_key, **client_options)
     object.get { |chunk, _| yield chunk }
   end
 
   def upload(source)
     return if @bucket_name.blank? || @object_key.blank? || source.blank?
 
-    object = ::Aws::S3::Object.new(bucket_name: @bucket_name, key: @object_key, http_read_timeout: 5)
+    object = ::Aws::S3::Object.new(bucket_name: @bucket_name, key: @object_key, **client_options)
     object.put(body: source)
   end
 
   def delete
     return if @bucket_name.blank? || @object_key.blank?
 
-    object = ::Aws::S3::Object.new(bucket_name: @bucket_name, key: @object_key, http_read_timeout: 5)
+    object = ::Aws::S3::Object.new(bucket_name: @bucket_name, key: @object_key, **client_options)
     object.delete
+  end
+
+  private
+
+  def client_options
+    YetiConfig.s3_storage&.client_options || {}
   end
 end
