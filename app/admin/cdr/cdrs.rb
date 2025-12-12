@@ -157,6 +157,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :routing_attempt
   filter :customer_price
   filter :vendor_price
+  filter :profit
   filter :routing_delay
   filter :pdd
   filter :rtt
