@@ -26,9 +26,9 @@ class GatewayGroup < ApplicationRecord
   BALANCING_MODE_PRIO_WEIGHT_PREFER_SAME_POP = 2
   BALANCING_MODE_PRIO_WEIGHT_EXCLUDE_OTHER_POP = 3
   BALANCING_MODES = {
-    BALANCING_MODE_PRIO_WEIGHT => 'Priority/Weigth balancing',
-    BALANCING_MODE_PRIO_WEIGHT_PREFER_SAME_POP => 'Priority/Weigth balancing. Prefer gateways from same POP',
-    BALANCING_MODE_PRIO_WEIGHT_EXCLUDE_OTHER_POP => 'Priority/Weigth balancing. Exclude gateways from other POPs'
+    BALANCING_MODE_PRIO_WEIGHT => 'Priority/Weight balancing',
+    BALANCING_MODE_PRIO_WEIGHT_PREFER_SAME_POP => 'Priority/Weight balancing. Prefer gateways from same POP',
+    BALANCING_MODE_PRIO_WEIGHT_EXCLUDE_OTHER_POP => 'Priority/Weight balancing. Exclude gateways from other POPs'
   }.freeze
 
   belongs_to :vendor, class_name: 'Contractor'
