@@ -63,6 +63,7 @@ RSpec.describe 'config/yeti_web.yml' do
       },
       routing_simulation_default_interface: a_kind_of(String),
       invoice: {
+        pdf_converter: a_kind_of(String),
         auto_approve: boolean
       },
       default_ldap_roles: a_kind_of(Array),
