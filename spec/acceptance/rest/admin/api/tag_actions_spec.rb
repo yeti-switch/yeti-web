@@ -8,5 +8,5 @@ RSpec.resource 'Routing TagAction' do
   let(:collection) { Routing::TagAction.all }
   let(:record) { Routing::TagAction.take  }
 
-  include_context :acceptance_index_show, type: 'tag-actions'
+  include_context :acceptance_index_show, type: 'tag-actions', filters: Api::Rest::Admin::TagActionResource._allowed_filters
 end

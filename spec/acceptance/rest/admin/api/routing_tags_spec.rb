@@ -18,7 +18,7 @@ RSpec.resource 'Routing RoutingTag' do
 
   optional_relationships = %i[]
 
-  include_context :acceptance_index_show, type: 'routing-tags'
+  include_context :acceptance_index_show, type: 'routing-tags', filters: Api::Rest::Admin::RoutingTagResource._allowed_filters
   include_context :acceptance_delete, type: 'routing-tags'
 
   post '/api/rest/admin/routing-tags' do

@@ -14,7 +14,7 @@ RSpec.resource 'Routing AreaPrefix' do
   required_relationships = %i[area]
   optional_relationships = %i[]
 
-  include_context :acceptance_index_show, type: 'area-prefixes'
+  include_context :acceptance_index_show, type: 'area-prefixes', filters: Api::Rest::Admin::AreaPrefixResource._allowed_filters
   include_context :acceptance_delete, type: 'area-prefixes'
 
   post '/api/rest/admin/area-prefixes' do
