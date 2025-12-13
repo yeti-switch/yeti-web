@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
-RSpec.shared_context :acceptance_index_show do |type:|
+RSpec.shared_context :acceptance_index_show do |type:, filters:|
   # let(:collection) { ModelClass.all }
   # let(:record) { ModelClass.take  }
 
   let(:type) { type }
+  let(:filters) { filters }
 
   resource_path = "/api/rest/admin/#{type}"
 
   get resource_path do
     before { collection }
+
+    jsonapi_filters(filters)
 
     example_request 'get listing' do
       expect(status).to eq(200)

@@ -30,7 +30,7 @@ RSpec.resource 'Numberlist' do
     tag-action
   ]
 
-  include_context :acceptance_index_show, type: 'numberlists'
+  include_context :acceptance_index_show, type: 'numberlists', filters: Api::Rest::Admin::NumberlistResource._allowed_filters
   include_context :acceptance_delete, type: 'numberlists'
 
   post '/api/rest/admin/numberlists' do
