@@ -12,9 +12,8 @@ LimitNOFILE=65536
 LimitCORE=infinity
 RuntimeDirectory=yeti-libreoffice-headless
 
-ExecStart=/usr/lib/libreoffice/program/soffice.bin --headless --invisible --nocrashreport --nodefault --nologo --nofirststartwizard --norestore --accept=socket,host=localhost,port=2002;urp;StarOffice.ComponentContext --pidfile=/run/yeti-libreoffice-headless/yeti-libreoffice-headless.pid
+ExecStart=/opt/unoserver/bin/unoserver
 
-PIDFile=/run/yeti-libreoffice-headless/yeti-libreoffice-headless.pid
 Type=simple
 Restart=always
 RestartSec=30s
