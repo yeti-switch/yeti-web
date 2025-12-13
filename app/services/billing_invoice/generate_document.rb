@@ -356,11 +356,12 @@ module BillingInvoice
     end
 
     def convert_to_pdf(odf_path, pdf_path)
-      if YetiConfig.invoice&.pdf_converter&.empty?
+      unless YetiConfig.invoice&.pdf_converter&.present?
         return
       end
 
       pdf_command = "#{YetiConfig.invoice&.pdf_converter} #{Shellwords.escape(odf_path)} #{Shellwords.escape(pdf_path)}"
+
       Open3.popen3(pdf_command) do |_stdin, _stdout, _stderr, wait_thr|
         wait_thr.value # Process::Status object returned.
       end
