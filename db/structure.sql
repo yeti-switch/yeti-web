@@ -31725,7 +31725,7 @@ BEGIN
       gw.incoming_auth_username,
       gw.incoming_auth_password,
       gw.incoming_auth_allow_jwt,
-      gw.id::varchar
+      gw.uuid::varchar
     from class4.gateways gw
     where
       gw.enabled and
@@ -50394,6 +50394,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251214193750'),
 ('20251115233349'),
 ('20251115233348'),
 ('20251115233347'),
