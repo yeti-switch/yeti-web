@@ -14,7 +14,7 @@ ActiveAdmin.register Dialpeer do
   acts_as_async_destroy('Dialpeer')
   acts_as_async_update BatchUpdateForm::Dialpeer
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   decorate_with DialpeerDecorator
 

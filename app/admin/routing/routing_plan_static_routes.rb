@@ -10,7 +10,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   acts_as_async_destroy('Routing::RoutingPlanStaticRoute')
   acts_as_async_update BatchUpdateForm::RoutingPlanStaticRoute
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   includes :vendor, :routing_plan, network_prefix: %i[country network]
 

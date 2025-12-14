@@ -9,7 +9,7 @@ ActiveAdmin.register GatewayGroup do
   acts_as_async_destroy('GatewayGroup')
   acts_as_async_update BatchUpdateForm::GatewayGroup
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   acts_as_export  :id,
                   :name,

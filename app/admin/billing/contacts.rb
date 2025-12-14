@@ -10,7 +10,7 @@ ActiveAdmin.register Billing::Contact do
   acts_as_async_destroy('Billing::Contact')
   acts_as_async_update BatchUpdateForm::Contact
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   acts_as_export :id,
                  [:contractor_name, proc { |row| row.contractor.try(:name) }],

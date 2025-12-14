@@ -9,7 +9,7 @@ ActiveAdmin.register Account do
   acts_as_async_destroy('Account')
   acts_as_async_update BatchUpdateForm::Account
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   decorate_with AccountDecorator
 

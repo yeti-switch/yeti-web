@@ -9,7 +9,7 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
   acts_as_async_destroy('Lnp::RoutingPlanLnpRule')
   acts_as_async_update BatchUpdateForm::RoutingPlanLnpRule
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   acts_as_export :id, :name
 

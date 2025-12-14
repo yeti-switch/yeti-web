@@ -12,7 +12,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   acts_as_async_destroy('Routing::Numberlist')
   acts_as_async_update BatchUpdateForm::NumberList
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   acts_as_export :id, :name,
                  :mode_name,
