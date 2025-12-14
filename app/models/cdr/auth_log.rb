@@ -57,10 +57,14 @@ class Cdr::AuthLog < Cdr::Base
   TRANSPORT_PROTOCOL_UDP = 1
   TRANSPORT_PROTOCOL_TCP = 2
   TRANSPORT_PROTOCOL_TLS = 3
+  TRANSPORT_PROTOCOL_SCTP = 4
+  TRANSPORT_PROTOCOL_WS = 5
   TRANSPORT_PROTOCOLS = {
-    TRANSPORT_PROTOCOL_UDP => 'UDP',
-    TRANSPORT_PROTOCOL_TCP => 'TCP',
-    TRANSPORT_PROTOCOL_TLS => 'TLS'
+    TRANSPORT_PROTOCOL_UDP => 'udp',
+    TRANSPORT_PROTOCOL_TCP => 'tcp',
+    TRANSPORT_PROTOCOL_TLS => 'tls',
+    TRANSPORT_PROTOCOL_SCTP => 'sctp',
+    TRANSPORT_PROTOCOL_WS => 'ws'
   }.freeze
 
   belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id, optional: true
