@@ -33,6 +33,7 @@ RSpec.describe 'Export Gateways', type: :feature do
     expect(subject).to match_array(
       [
         ['Id',                                 item.id.to_s],
+        ['Uuid',                               item.uuid.to_s],
         ['Name',                               item.name],
         ['Enabled',                            item.enabled.to_s],
         ['Gateway group name',                 item.gateway_group.name],

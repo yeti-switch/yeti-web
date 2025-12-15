@@ -835,8 +835,7 @@ SELECT pg_catalog.setval('session_refresh_methods_id_seq', 3, true);
 INSERT INTO class4.transport_protocols (id, name) VALUES (1, 'UDP');
 INSERT INTO class4.transport_protocols (id, name) VALUES (2, 'TCP');
 INSERT INTO class4.transport_protocols (id, name) VALUES (3, 'TLS');
-
-
+INSERT INTO class4.transport_protocols (id, name) VALUES (5,'WS');
 
 INSERT INTO tag_actions VALUES (1, 'Clear tags');
 INSERT INTO tag_actions VALUES (2, 'Remove selected tags');

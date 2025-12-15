@@ -38,7 +38,7 @@ RSpec.describe 'switch22.load_incoming_auth' do
                              username: c.incoming_auth_username,
                              password: c.incoming_auth_password,
                              allow_jwt_auth: c.incoming_auth_allow_jwt,
-                             jwt_gid: c.id.to_s
+                             jwt_gid: c.uuid.to_s
                            }
                          end
                        )

@@ -18,7 +18,7 @@ ActiveAdmin.register Gateway do
 
   decorate_with GatewayDecorator
 
-  acts_as_export :id, :name, :enabled,
+  acts_as_export :id, :uuid, :name, :enabled,
                  [:scheduler_name, proc { |row| row.scheduler.try(:name) }],
                  [:gateway_group_name, proc { |row| row.gateway_group.try(:name) }],
                  :priority,
@@ -282,6 +282,7 @@ ActiveAdmin.register Gateway do
   end
 
   filter :id
+  filter :uuid
   filter :name
   contractor_filter :contractor_id_eq
 
@@ -552,6 +553,7 @@ ActiveAdmin.register Gateway do
       tab :general do
         attributes_table_for s do
           row :id
+          row :uuid
           row :name
           row :external_id
           row :enabled
