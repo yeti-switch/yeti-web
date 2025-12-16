@@ -12,12 +12,11 @@ RSpec.resource 'Accounts' do
     send-invoices-to
     external-id
     balance-low-threshold balance-high-threshold send-balance-notifications-to
+    invoice-period-id timezone
   ]
 
-  required_relationships = %i[contractor timezone]
-  optional_relationships = %i[
-    customer-invoice-period vendor-invoice-period customer-invoice-template vendor-invoice-template
-  ]
+  required_relationships = %i[contractor]
+  optional_relationships = %i[invoice-template]
 
   get '/api/rest/admin/accounts' do
     jsonapi_filters Api::Rest::Admin::AccountResource._allowed_filters
@@ -53,8 +52,8 @@ RSpec.resource 'Accounts' do
     let(:'origination-capacity') { 100 }
     let(:'termination-capacity') { 110 }
     let(:'total-capacity') { 100 }
+    let(:timezone) { 'Europe/Kyiv' }
 
-    let(:timezone) { wrap_relationship(:timezones, 1) }
     let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
     example_request 'create new entry' do
