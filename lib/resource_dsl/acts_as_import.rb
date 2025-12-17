@@ -45,7 +45,7 @@ module ResourceDSL
 
       options[:before_batch_import] = lambda do |importer|
         columns = options[:resource_class].column_names
-        # all foreign_key should be skipped, import uses "[foregin_key]_name" columns
+        # all foreign_key should be skipped, import uses "[foreign_key]_name" columns
         belongs_to_columns = options[:resource_class].reflect_on_all_associations(:belongs_to).map(&:foreign_key)
         columns = columns - belongs_to_columns - skip_columns.map(&:to_s)
         importer.batch_slice_columns(columns)

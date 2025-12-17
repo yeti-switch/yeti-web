@@ -47,13 +47,17 @@ class Importing::Base < ApplicationRecord
     end
   end
 
-  class_attribute :import_attributes, :import_class
+  class_attribute :import_attributes, :import_class, :strict_unique_attributes
 
   ALLOWED_OPTIONS_KEYS = %i[controller_info max_jobs_count job_number action].freeze
 
   # Resolve foreign_keys
   def self.after_import_hook
     resolve_belongs_to
+  end
+
+  def self.not_null_attributes
+    import_class.columns.reject(&:null).map(&:name)
   end
 
   def self.run_in_background(controller_info, action = nil)
@@ -125,8 +129,12 @@ class Importing::Base < ApplicationRecord
   end
 
   def self.calc_changed_conditions(orig_table, import_table)
-    # We use "IS DISTINCT FROM" instead of "<>" because "NULL <> NULL" is "NULL".
-    diffs = import_attributes.map { |col| "#{orig_table}.#{col} IS DISTINCT FROM #{import_table}.#{col}" }
+    diffs = import_attributes.map do |col|
+      not_null_attributes.include?(col) ?
+        "(#{import_table}.#{col} IS NULL OR #{orig_table}.#{col} <> #{import_table}.#{col})" :
+        # We use "IS DISTINCT FROM" instead of "<>" because "NULL <> NULL" is "NULL".
+        "#{orig_table}.#{col} IS DISTINCT FROM #{import_table}.#{col}"
+    end
     diffs.join(' OR ')
   end
 
@@ -139,7 +147,12 @@ class Importing::Base < ApplicationRecord
     if unique_columns.any?
       condition_array = []
       unique_columns.each do |column_name|
-        condition_array << "ta.#{column_name} IS NOT DISTINCT FROM tb.#{column_name}"
+        # We use "IS DISTINCT FROM" instead of "<>" because "NULL <> NULL" is "NULL".
+        if not_null_attributes.include?(column_name)
+          condition_array << "ta.#{column_name} = tb.#{column_name}"
+        else
+          condition_array << "ta.#{column_name} IS NOT DISTINCT FROM tb.#{column_name}"
+        end
       end
       condition = condition_array.join(' AND ')
     else

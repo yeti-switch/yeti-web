@@ -58,16 +58,29 @@ module ResourceDSL
 
       action_item :apply_unique_columns, only: [:index] do
         if authorized?(:batch_update)
-          link_to 'Apply unique columns',
-                  url_for(action: :apply_unique_columns),
-                  class: 'modal-link',
-                  data: {
-                    method: :put,
-                    inputs: {
-                      additional_filter: :text,
-                      unique_columns: [''] + acts_as_import_resource_class.import_attributes
-                    }.to_json
-                  }
+          if acts_as_import_resource_class.strict_unique_attributes.present?
+            link_to 'Apply unique columns',
+                    url_for(action: :apply_unique_columns),
+                    class: 'modal-link',
+                    data: {
+                      method: :put,
+                      hint: "Unique columns: #{acts_as_import_resource_class.strict_unique_attributes.join(', ')}",
+                      inputs: {
+                        additional_filter: :text
+                      }.to_json
+                    }
+          else
+            link_to 'Apply unique columns',
+                    url_for(action: :apply_unique_columns),
+                    class: 'modal-link',
+                    data: {
+                      method: :put,
+                      inputs: {
+                        additional_filter: :text,
+                        unique_columns: [''] + acts_as_import_resource_class.import_attributes
+                      }.to_json
+                    }
+          end
         end
       end
 
@@ -79,9 +92,15 @@ module ResourceDSL
 
       collection_action :apply_unique_columns, method: :put do
         authorize!(:batch_update)
-        permitted_params = params.require(:changes).permit(:additional_filter, unique_columns: [])
-        unique_columns = permitted_params[:unique_columns].reject(&:blank?)
-        extra_condition = permitted_params[:additional_filter]
+        if acts_as_import_resource_class.strict_unique_attributes.present?
+          permitted_params = params.require(:changes).permit(:additional_filter)
+          unique_columns = acts_as_import_resource_class.strict_unique_attributes
+          extra_condition = permitted_params[:additional_filter]
+        else
+          permitted_params = params.require(:changes).permit(:additional_filter, unique_columns: [])
+          unique_columns = permitted_params[:unique_columns].reject(&:blank?)
+          extra_condition = permitted_params[:additional_filter]
+        end
         begin
           acts_as_import_resource_class.resolve_object_id(unique_columns, extra_condition)
           flash[:notice] = 'Unique columns applied!'
