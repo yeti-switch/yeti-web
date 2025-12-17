@@ -240,6 +240,8 @@ class Importing::Gateway < Importing::Base
     scheduler_id
   ]
 
+  self.strict_unique_attributes = %w[name]
+
   import_for ::Gateway
 
   def registered_aor_mode_display_name

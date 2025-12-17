@@ -17,6 +17,7 @@ class Importing::Rateplan < Importing::Base
   self.table_name = 'import_rateplans'
 
   self.import_attributes = %w[name profit_control_mode_id]
+  self.strict_unique_attributes = %w[name]
 
   import_for Routing::Rateplan
 
