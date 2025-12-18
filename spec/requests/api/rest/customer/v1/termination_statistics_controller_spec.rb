@@ -2,6 +2,7 @@
 
 RSpec.describe Api::Rest::Customer::V1::TerminationStatisticsController do
   include_context :json_api_customer_v1_helpers, type: :accounts
+  include_context :customer_termination_statistics_clickhouse_helpers
 
   let(:auth_headers) { { 'Authorization' => json_api_auth_token } }
 
@@ -19,21 +20,19 @@ RSpec.describe Api::Rest::Customer::V1::TerminationStatisticsController do
     end
 
     shared_examples :responds_success do
+      let(:expected_response_data) { clickhouse_response_body.slice(:data, :rows, :totals) }
+
       it 'responds with correct data' do
         expect(CaptureError).not_to receive(:capture)
         subject
 
         expect(response.status).to eq 200
-        expect(response_json).to eq clickhouse_response_body
+        expect(response_json).to eq expected_response_data
       end
     end
 
     let!(:account) { create(:account, contractor: customer) }
-    let(:clickhouse_response_body) { [{ some_key: 'value' }] }
     let(:from_time) { 1.day.ago.iso8601 }
-    let!(:stub_clickhouse_query) do
-      stub_request(:post, /#{ClickHouse.config.url}/).and_return(status: 200, body: clickhouse_response_body)
-    end
     let(:query) do
       {
         'account-id': account.uuid,
@@ -43,7 +42,7 @@ RSpec.describe Api::Rest::Customer::V1::TerminationStatisticsController do
     end
 
     context 'when valid params' do
-      it_behaves_like :responds_success
+      include_examples :responds_success
     end
 
     context 'without params' do

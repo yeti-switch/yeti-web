@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::Rest::Customer::V1::TerminationActiveCallsController do
+  include_context :customer_termination_active_calls_clickhouse_helpers
   include_context :json_api_customer_v1_helpers, type: :accounts
 
   let(:auth_headers) { { 'Authorization' => json_api_auth_token } }
@@ -19,57 +20,18 @@ RSpec.describe Api::Rest::Customer::V1::TerminationActiveCallsController do
     end
 
     shared_examples :responds_success do
+      let(:expected_response_data) { clickhouse_response_body.slice(:data, :rows) }
+
       it 'responds with correct data' do
         expect(CaptureError).not_to receive(:capture)
         subject
 
         expect(response.status).to eq 200
-        expect(response_json).to eq active_calls_response_body
+        expect(response_json).to eq expected_response_data
       end
     end
 
     let!(:account) { create(:account, contractor: customer) }
-    let(:clickhouse_query) do
-      <<-SQL.squish
-        SELECT
-          toUnixTimestamp(snapshot_timestamp) as t,
-          toUInt32(count(*)) AS calls
-        FROM active_calls
-        WHERE
-          vendor_acc_id = {account_id: UInt32} AND
-          snapshot_timestamp >= {from_time: DateTime}
-        GROUP BY t
-        ORDER BY t
-        WITH FILL
-          FROM toUnixTimestamp(toStartOfMinute({from_time: DateTime}))
-          TO toUnixTimestamp(now())
-          STEP 60
-        FORMAT JSONColumnsWithMetadata
-      SQL
-    end
-    let(:clickhouse_params) do
-      {
-        param_account_id: account.id,
-        param_from_time: from_time
-      }
-    end
-    let!(:stub_clickhouse_query) do
-      stub_request(:post, ClickHouse.config.url)
-        .with(
-          basic_auth: [ClickHouse.config.username, ClickHouse.config.password],
-          query: {
-            database: ClickHouse.config.database,
-            **clickhouse_params,
-            query: clickhouse_query,
-            send_progress_in_http_headers: 1
-          }
-        ).to_return(
-        status: active_calls_response_status,
-        body: active_calls_response_body.to_json
-      )
-    end
-    let(:active_calls_response_status) { 200 }
-    let(:active_calls_response_body) { [{ call_id: 'abc123', duration: 123 }] }
     let(:from_time) { 1.day.ago.iso8601 }
     let(:query) do
       {
@@ -78,13 +40,15 @@ RSpec.describe Api::Rest::Customer::V1::TerminationActiveCallsController do
       }
     end
 
-    it_behaves_like :responds_success
+    include_examples :responds_success
+    include_examples :clickhouse_stub_requested
 
     context 'without params' do
       let(:query) { nil }
       let(:stub_clickhouse_query) { nil }
 
       include_examples :responds_400, 'missing required param(s) account-id, from-time'
+      include_examples :clickhouse_stub_not_requested
     end
 
     context 'with from-time in the future', freeze_time: Time.parse('2024-12-01 00:00:00 UTC') do
@@ -92,12 +56,9 @@ RSpec.describe Api::Rest::Customer::V1::TerminationActiveCallsController do
 
       before { Log::ApiLog.add_partitions }
 
-      it 'should NOT perform POST request to ClickHouse server and then return empty collection' do
-        expect(CaptureError).not_to receive(:capture)
-        subject
-
-        expect(stub_clickhouse_query).not_to have_been_requested
-        expect(response_json).to eq([])
+      include_examples :clickhouse_stub_not_requested
+      include_examples :responds_success do
+        let(:expected_response_data) { [] }
       end
     end
 
@@ -105,12 +66,35 @@ RSpec.describe Api::Rest::Customer::V1::TerminationActiveCallsController do
       let(:query) { super().merge 'from-time': 'invalid' }
 
       include_examples :responds_400, 'invalid value from-time'
+      include_examples :clickhouse_stub_not_requested
     end
 
     context 'when the "to-time" is invalid Date' do
       let(:query) { super().merge 'to-time': 'invalid' }
 
       include_examples :responds_400, 'invalid value to-time'
+      include_examples :clickhouse_stub_not_requested
+    end
+
+    context 'when clickhouse query fails' do
+      let(:clickhouse_response_status) { 400 }
+      let(:clickhouse_response_body) do
+        { error: { code: 999, text: 'Some error', version: '1.1.1.11111' } }
+      end
+
+      include_examples :captures_error do
+        let(:capture_error_exception_class) { ClickHouse::DbException }
+        let(:capture_error_tags) { nil }
+      end
+      include_examples :responds_with_status, 500, without_body: true
+      include_examples :clickhouse_stub_requested
+    end
+
+    context 'with invalid Authorization header' do
+      let(:json_api_auth_token) { 'invalid' }
+
+      include_examples :responds_with_status, 401
+      include_examples :clickhouse_stub_not_requested
     end
   end
 end

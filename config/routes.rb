@@ -12,20 +12,14 @@ Rails.application.routes.draw do
     resources(name.to_s.dasherize.to_sym, options, &block)
   end
 
+  def dasherized_resource(name, options = {}, &block)
+    options[:controller] ||= name.to_s.underscore.to_sym
+    options[:as] ||= name.to_s.underscore.to_sym
+    resource(name.to_s.dasherize.to_sym, options, &block)
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   post 'api/rest/admin/auth', to: 'api/rest/admin/auth#create'
-  post 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#create'
-  get 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#show'
-  delete 'api/rest/customer/v1/auth', to: 'api/rest/customer/v1/auth#destroy'
-  post 'api/rest/customer/v1/call-auth', to: 'api/rest/customer/v1/call_auth#create'
-
-  get 'api/rest/customer/v1/origination-statistics', to: 'api/rest/customer/v1/origination_statistics#show'
-  get 'api/rest/customer/v1/origination-statistics-quality', to: 'api/rest/customer/v1/origination_statistics_quality#show'
-  get 'api/rest/customer/v1/origination-active-calls', to: 'api/rest/customer/v1/origination_active_calls#show'
-
-  get 'api/rest/customer/v1/termination-statistics', to: 'api/rest/customer/v1/termination_statistics#show'
-  get 'api/rest/customer/v1/termination-statistics-quality', to: 'api/rest/customer/v1/termination_statistics_quality#show'
-  get 'api/rest/customer/v1/termination-active-calls', to: 'api/rest/customer/v1/termination_active_calls#show'
 
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   authenticate :admin_user do
@@ -203,6 +197,23 @@ Rails.application.routes.draw do
             jsonapi_resources :transactions, only: %i[index show]
             jsonapi_resources :phone_systems_sessions, only: %i[create]
             jsonapi_resource :profiles, only: %i[show]
+
+            post 'auth', to: 'auth#create'
+            get 'auth', to: 'auth#show'
+            delete 'auth', to: 'auth#destroy'
+
+            post 'call-auth', to: 'call_auth#create'
+
+            get 'origination-statistics', to: 'origination_statistics#show'
+            get 'origination-statistics-quality', to: 'origination_statistics_quality#show'
+            get 'origination-active-calls', to: 'origination_active_calls#show'
+
+            get 'termination-statistics', to: 'termination_statistics#show'
+            get 'termination-statistics-quality', to: 'termination_statistics_quality#show'
+            get 'termination-active-calls', to: 'termination_active_calls#show'
+
+            # get 'outgoing-active-calls', to: 'outgoing_active_calls#show'
+            dasherized_resource :outgoing_active_calls, only: [:show]
           end
         end
 
