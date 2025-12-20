@@ -168,6 +168,8 @@ class Importing::CustomersAuth < Importing::Base
     scheduler_id
   ]
 
+  self.strict_unique_attributes = %w[name]
+
   import_for ::CustomersAuth
 
   def transport_protocol_display_name

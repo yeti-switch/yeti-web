@@ -15,7 +15,8 @@ class Importing::CodecGroup < Importing::Base
   self.table_name = 'data_import.import_codec_groups'
   attr_accessor :file
 
-  self.import_attributes = ['name']
+  self.import_attributes = %w[name]
+  self.strict_unique_attributes = %w[name]
 
   import_for ::CodecGroup
 end

@@ -30,6 +30,8 @@ class Importing::GatewayGroup < Importing::Base
     max_rerouting_attempts
   ]
 
+  self.strict_unique_attributes = %w[name]
+
   import_for ::GatewayGroup
 
   def balancing_mode_display_name

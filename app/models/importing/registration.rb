@@ -50,5 +50,7 @@ class Importing::Registration < Importing::Base
                               expire force_expire retry_delay max_attempts
                               transport_protocol_id proxy_transport_protocol_id sip_schema_id]
 
+  self.strict_unique_attributes = %w[name]
+
   import_for ::Equipment::Registration
 end

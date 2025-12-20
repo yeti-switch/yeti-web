@@ -15,5 +15,7 @@ class Importing::RoutingGroup < Importing::Base
   self.table_name = 'import_routing_groups'
 
   self.import_attributes = %w[name]
+  self.strict_unique_attributes = %w[name]
+
   import_for Routing::RoutingGroup
 end

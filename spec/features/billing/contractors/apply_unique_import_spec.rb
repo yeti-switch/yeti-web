@@ -4,7 +4,6 @@ RSpec.describe 'Apply Unique Columns Import Contractors', type: :feature, js: tr
   subject do
     within('#titlebar_right') { click_link 'Apply unique columns' }
     within('.ui-dialog') do
-      chosen_select('.chosen-container', search: 'name', multiple: true)
       click_button 'OK'
     end
     expect(page).to have_current_path(importing_contractors_path)

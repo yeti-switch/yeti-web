@@ -14,6 +14,8 @@
 class Importing::DisconnectPolicy < Importing::Base
   self.table_name = 'import_disconnect_policies'
 
-  self.import_attributes = ['name']
+  self.import_attributes = %w[name]
+  self.strict_unique_attributes = %w[name]
+
   import_for ::DisconnectPolicy
 end

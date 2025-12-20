@@ -41,6 +41,8 @@ class Importing::Numberlist < Importing::Base
                               default_dst_rewrite_rule default_dst_rewrite_result
                               tag_action_id tag_action_value rewrite_ss_status_id lua_script_id]
 
+  self.strict_unique_attributes = %w[name]
+
   def default_action_display_name
     default_action_id.nil? ? 'unknown' : Routing::Numberlist::DEFAULT_ACTIONS[default_action_id]
   end

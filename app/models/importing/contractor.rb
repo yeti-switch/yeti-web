@@ -26,6 +26,7 @@ class Importing::Contractor < Importing::Base
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection', optional: true
 
   self.import_attributes = %w[enabled name vendor customer smtp_connection_id]
+  self.strict_unique_attributes = %w[name]
 
   import_for ::Contractor
 end
