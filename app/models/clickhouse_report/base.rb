@@ -54,7 +54,7 @@ module ClickhouseReport
   #   end
   #
   class Base
-    Operation = Data.define(:name, :sql, :array) do
+    Operation = Data.define(:name, :sql, :array, :format_value) do
       # @!method call(column, query_param, type) Generates SQL condition for a filter.
       #   @param column [Symbol,String] column name.
       #   @param query_param [Symbol,String] query param name.
@@ -63,17 +63,19 @@ module ClickhouseReport
       delegate :call, to: :sql
     end
 
+    NO_QUERY_PARAM = Object.new.freeze
     Filter = Data.define(:param, :sql, :required, :query_param, :array, :format_value) do
       # Returns SQL condition and query params for filter.
-      # @param value [String] value from params
+      # @param value [String,Array<String>] value from params
       # @param options [Hash] options with keys :context and :params
       # @return [Array<String, Hash>] sql and query params
       def call(value, options)
         query_param_name = "param_#{query_param}"
         query_value = format_value.call(value, options)
-        query_params = { query_param_name => query_value }
+        query_params = query_value == NO_QUERY_PARAM ? {} : { query_param_name => query_value }
+        sql_condition = sql.is_a?(Proc) ? sql.call(value, options) : sql
 
-        [sql, query_params]
+        [sql_condition, query_params]
       end
     end
 
@@ -81,6 +83,12 @@ module ClickhouseReport
     end
 
     class ParamError < Error
+      attr_reader :param
+
+      def initialize(message, param: nil)
+        super(message)
+        @param = param
+      end
     end
 
     class MissingRequiredParams < ParamError
@@ -101,11 +109,11 @@ module ClickhouseReport
       # @param name [Symbol,String] operation name
       # @param sql [Proc] proc that will be called to generate sql condition
       # @param array [Boolean] if true, then param value will be converted to array and sql condition will be repeated
-      def define_operation(name, sql:, array: false)
+      def define_operation(name, sql:, array: false, format_value: nil)
         name = name.to_sym
         raise ArgumentError, "operation #{name} already defined" if operations.key?(name)
 
-        operations[name] = Operation.new(name:, sql:, array:)
+        operations[name] = Operation.new(name:, sql:, array:, format_value:)
       end
 
       # Defines column filter for param.
@@ -124,6 +132,7 @@ module ClickhouseReport
         column ||= param.to_s.underscore
         op = operations.fetch(operation.to_sym) { raise ArgumentError, "unknown operation #{operation}" }
         sql = op.call(column, query_param, type)
+        format_value ||= op.format_value
         raw_filter(param, sql:, required:, format_value:, query_param:, array: op.array)
       end
 
@@ -189,6 +198,15 @@ module ClickhouseReport
     define_operation :in, array: true, sql: lambda { |column, query_param, type|
       "#{column} IN {#{query_param}: Array(#{type})}"
     }
+    define_operation :not_in, array: true, sql: lambda { |column, query_param, type|
+      "#{column} NOT IN {#{query_param}: Array(#{type})}"
+    }
+    define_operation :null, format_value: proc { NO_QUERY_PARAM }, sql: lambda { |column, _query_param, _type|
+      lambda { |raw_value, _opts|
+        flag = ActiveModel::Type::Boolean.new.cast(raw_value)
+        flag ? "#{column} IS NULL" : "#{column} IS NOT NULL"
+      }
+    }
 
     attr_reader :params, :context
 
@@ -200,9 +218,14 @@ module ClickhouseReport
     end
 
     def collection
+      c_filters, c_query_params = prepare_context_filters
       filters, query_params = prepare_filters
-      sql = prepare_sql(filters).squish
-      response = ClickHouse.connection.execute(sql, nil, params: query_params)
+      all_filters = c_filters.merge(filters)
+      all_query_params = c_query_params.merge(query_params)
+      sql = prepare_sql(all_filters).squish
+      Rails.logger.debug { "ClickhouseReport request params: #{all_query_params}" }
+      response = ClickHouse.connection.execute(sql, nil, params: all_query_params)
+      Rails.logger.debug { "ClickhouseReport response (status: #{response.status})\n#{response.body}" }
       raise InvalidResponseError, "clickhouse responds with #{response.status}" if response.status != 200
 
       format_result(response.body)
@@ -211,7 +234,7 @@ module ClickhouseReport
     private
 
     def format_result(body)
-      body
+      body.slice('data', 'rows', 'totals')
     end
 
     # @param filters [Hash] hash with filters, where key is param and value is sql condition.
@@ -220,13 +243,23 @@ module ClickhouseReport
       raise NotImplementedError
     end
 
+    # @return [Array<Hash, Hash>] array with two elements:
+    #     #   first is hash with filters where key is param and value is SQL condition,
+    #     #   second is hash with query params where key is query param name and value is query value.
+    def prepare_context_filters
+      [{}, {}]
+    end
+
+    # @return [Array<Hash, Hash>] array with two elements:
+    #   first is hash with filters where key is param and value is SQL condition,
+    #   second is hash with query params where key is query param name and value is query value.
     def prepare_filters
       filters = {}
       query_params = {}
       options = { context:, params: }
 
       missing_params = self.class.required_params - params.keys.map(&:to_sym)
-      raise MissingRequiredParams, "missing required param(s) #{missing_params.join(', ')}" if missing_params.any?
+      raise MissingRequiredParams.new("missing required param(s) #{missing_params.join(', ')}", param: missing_params) if missing_params.any?
 
       params.each do |param, value|
         filter = self.class.filters[param]
