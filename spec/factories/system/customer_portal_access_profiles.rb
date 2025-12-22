@@ -25,6 +25,7 @@
 #  incoming_statistics_total_price_value      :boolean          default(TRUE), not null
 #  invoices                                   :boolean          default(TRUE), not null
 #  name                                       :string           not null
+#  outgoing_active_calls                      :boolean          default(TRUE), not null
 #  outgoing_cdr_exports                       :boolean          default(TRUE), not null
 #  outgoing_cdrs                              :boolean          default(TRUE), not null
 #  outgoing_numberlists                       :boolean          default(TRUE), not null

@@ -34,6 +34,7 @@ module Api
           attribute :outgoing_statistics_total_duration_value
           attribute :outgoing_statistics_total_price_value
 
+          attribute :outgoing_active_calls
           attribute :outgoing_numberlists
           attribute :incoming_cdrs
 
@@ -87,6 +88,7 @@ module Api
               outgoing_statistics_total_duration_value
               outgoing_statistics_total_price_value
 
+              outgoing_active_calls
               outgoing_numberlists
               incoming_cdrs
               incoming_statistics
