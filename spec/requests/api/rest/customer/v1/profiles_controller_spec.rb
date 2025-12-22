@@ -40,6 +40,7 @@ RSpec.describe Api::Rest::Customer::V1::ProfilesController, type: :request do
             'outgoing-statistics-total-duration-value': true,
             'outgoing-statistics-total-price-value': true,
 
+            'outgoing-active-calls': true,
             'outgoing-numberlists': true,
             'incoming-cdrs': true,
 

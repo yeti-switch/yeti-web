@@ -26,6 +26,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
                 :outgoing_statistics_total_calls_value,
                 :outgoing_statistics_total_duration_value,
                 :outgoing_statistics_total_price_value,
+                :outgoing_active_calls,
                 :outgoing_numberlists,
                 :incoming_cdrs,
                 :incoming_statistics,
@@ -87,6 +88,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
       row :outgoing_statistics_total_calls_value
       row :outgoing_statistics_total_duration_value
       row :outgoing_statistics_total_price_value
+      row :outgoing_active_calls
       row :outgoing_numberlists
       row :incoming_cdrs
       row :incoming_statistics
@@ -137,6 +139,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
       f.input :outgoing_statistics_total_calls_value
       f.input :outgoing_statistics_total_duration_value
       f.input :outgoing_statistics_total_price_value
+      f.input :outgoing_active_calls
       f.input :outgoing_numberlists
       f.input :incoming_cdrs
       f.input :incoming_statistics

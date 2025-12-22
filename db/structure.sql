@@ -1,7 +1,7 @@
 \restrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
 
 -- Dumped from database version 18.0 (Debian 18.0-1.pgdg13+3)
--- Dumped by pg_dump version 18.1 (Debian 18.1-1.pgdg14+2)
+-- Dumped by pg_dump version 18.1 (Debian 18.1-2)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -45081,7 +45081,8 @@ CREATE TABLE sys.customer_portal_access_profiles (
     incoming_statistics_successful_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_succes_not_null1 NOT NULL,
     incoming_statistics_total_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null3 NOT NULL,
     incoming_statistics_total_duration_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null4 NOT NULL,
-    incoming_statistics_total_price_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null5 NOT NULL
+    incoming_statistics_total_price_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null5 NOT NULL,
+    outgoing_active_calls boolean DEFAULT true NOT NULL
 );
 
 
@@ -50394,6 +50395,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251222152903'),
 ('20251214193750'),
 ('20251115233349'),
 ('20251115233348'),
