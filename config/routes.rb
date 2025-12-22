@@ -19,14 +19,11 @@ Rails.application.routes.draw do
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-  post 'api/rest/admin/auth', to: 'api/rest/admin/auth#create'
 
   get 'with_contractor_accounts', to: 'accounts#with_contractor'
   authenticate :admin_user do
     ActiveAdmin.routes(self)
   end
-
-  post 'api/cryptomus_callbacks', to: 'api/cryptomus_callbacks#create'
 
   resources :active_calls, constraints: { id: %r{[^/]+} }, only: %i[show index destroy]
 
@@ -58,6 +55,8 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    resources :cryptomus_callbacks, only: [:create]
+
     namespace :rest do
       with_options defaults: { format: :json } do |api|
         namespace :system do
@@ -67,6 +66,7 @@ Rails.application.routes.draw do
         end
 
         namespace :admin do
+          dasherized_resource :auth, only: [:create]
           jsonapi_resources :accounts do
             jsonapi_relationships
             jsonapi_resource :balance, only: [:update]
@@ -198,22 +198,19 @@ Rails.application.routes.draw do
             jsonapi_resources :phone_systems_sessions, only: %i[create]
             jsonapi_resource :profiles, only: %i[show]
 
-            post 'auth', to: 'auth#create'
-            get 'auth', to: 'auth#show'
-            delete 'auth', to: 'auth#destroy'
+            dasherized_resource :auth, only: %i[create show destroy]
 
-            post 'call-auth', to: 'call_auth#create'
+            dasherized_resource :call_auth, only: [:create]
 
-            get 'origination-statistics', to: 'origination_statistics#show'
-            get 'origination-statistics-quality', to: 'origination_statistics_quality#show'
-            get 'origination-active-calls', to: 'origination_active_calls#show'
-
-            get 'termination-statistics', to: 'termination_statistics#show'
-            get 'termination-statistics-quality', to: 'termination_statistics_quality#show'
-            get 'termination-active-calls', to: 'termination_active_calls#show'
-
-            # get 'outgoing-active-calls', to: 'outgoing_active_calls#show'
-            dasherized_resource :outgoing_active_calls, only: [:show]
+            with_options only: [:show] do
+              dasherized_resource :origination_statistics
+              dasherized_resource :origination_statistics_quality
+              dasherized_resource :origination_active_calls
+              dasherized_resource :termination_statistics
+              dasherized_resource :termination_statistics_quality
+              dasherized_resource :termination_active_calls
+              dasherized_resource :outgoing_active_calls
+            end
           end
         end
 
