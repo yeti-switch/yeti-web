@@ -102,7 +102,6 @@ config/yeti_web.yml:
 	sed -E 's/( +when_no_(config|policy_class): *)(.*)/\1raise/' \
 		config/yeti_web.yml.ci > config/yeti_web.yml
 
-
 config/policy_roles.yml:
 	$(info:msg=Creating policy_roles.yml for build/tests)
 	cp config/policy_roles.yml.distr config/policy_roles.yml
@@ -150,7 +149,7 @@ gems-test: bundler
 
 
 .PHONY: docs
-docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml
+docs: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml config/click_house.yml
 	$(info:msg=Preparing test database for docs generation)
 	RAILS_ENV=test $(bundle_bin) exec rake \
 		db:drop \
