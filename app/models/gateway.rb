@@ -112,6 +112,7 @@
 #  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_group_id                 :integer(4)
+#  ice_mode_id                      :integer(2)       default(1), not null
 #  lua_script_id                    :integer(2)
 #  media_encryption_mode_id         :integer(2)       default(0), not null
 #  network_protocol_priority_id     :integer(2)       default(0), not null
@@ -123,6 +124,8 @@
 #  radius_accounting_profile_id     :integer(2)
 #  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null
+#  rtcp_feedback_mode_id            :integer(2)       default(1), not null
+#  rtcp_mux_mode_id                 :integer(2)       default(1), not null
 #  rx_inband_dtmf_filtering_mode_id :integer(2)       default(1), not null
 #  scheduler_id                     :integer(2)
 #  sdp_alines_filter_type_id        :integer(4)       default(0), not null
@@ -262,6 +265,33 @@ class Gateway < ApplicationRecord
     DUMP_LEVEL_CAPTURE_SIP => 'Capture signaling traffic',
     DUMP_LEVEL_CAPTURE_RTP => 'Capture RTP traffic',
     DUMP_LEVEL_CAPTURE_ALL => 'Capture all traffic'
+  }.freeze
+
+  ICE_MODE_DISABLED = 0
+  ICE_MODE_ACCEPT = 1
+  ICE_MODE_INITIATE = 2
+  ICE_MODES = {
+    ICE_MODE_DISABLED => 'Disabled',
+    ICE_MODE_ACCEPT => 'Accept',
+    ICE_MODE_INITIATE => 'Initiate'
+  }.freeze
+
+  RTCP_MUX_MODE_DISABLED = 0
+  RTCP_MUX_MODE_ACCEPT = 1
+  RTCP_MUX_MODE_INITIATE = 2
+  RTCP_MUX_MODES = {
+    RTCP_MUX_MODE_DISABLED => 'Disabled',
+    RTCP_MUX_MODE_ACCEPT => 'Accept',
+    RTCP_MUX_MODE_INITIATE => 'Initiate'
+  }.freeze
+
+  RTCP_FEEDBACK_MODE_DISABLE = 0
+  RTCP_FEEDBACK_MODE_ACCEPT = 1
+  RTCP_FEEDBACK_MODE_INITIATE = 2
+  RTCP_FEEDBACK_MODES = {
+    RTCP_FEEDBACK_MODE_DISABLE => 'Disabled',
+    RTCP_FEEDBACK_MODE_ACCEPT => 'Accept',
+    RTCP_FEEDBACK_MODE_INITIATE => 'Initiate'
   }.freeze
 
   class << self
@@ -519,6 +549,18 @@ class Gateway < ApplicationRecord
 
   def dump_level_name
     dump_level_id.nil? ? DUMP_LEVELS[0] : DUMP_LEVELS[dump_level_id]
+  end
+
+  def ice_mode_name
+    ICE_MODES[ice_mode_id]
+  end
+
+  def rtcp_mux_mode_name
+    RTCP_MUX_MODES[rtcp_mux_mode_id]
+  end
+
+  def rtcp_feedback_mode_name
+    RTCP_FEEDBACK_MODES[rtcp_feedback_mode_id]
   end
 
   def use_registered_aor?

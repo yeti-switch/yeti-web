@@ -112,6 +112,7 @@
 #  dump_level_id                    :integer(2)       default(0), not null
 #  external_id                      :bigint(8)
 #  gateway_group_id                 :integer(4)
+#  ice_mode_id                      :integer(2)       default(1), not null
 #  lua_script_id                    :integer(2)
 #  media_encryption_mode_id         :integer(2)       default(0), not null
 #  network_protocol_priority_id     :integer(2)       default(0), not null
@@ -123,6 +124,8 @@
 #  radius_accounting_profile_id     :integer(2)
 #  registered_aor_mode_id           :integer(2)       default(0), not null
 #  rel100_mode_id                   :integer(2)       default(4), not null
+#  rtcp_feedback_mode_id            :integer(2)       default(1), not null
+#  rtcp_mux_mode_id                 :integer(2)       default(1), not null
 #  rx_inband_dtmf_filtering_mode_id :integer(2)       default(1), not null
 #  scheduler_id                     :integer(2)
 #  sdp_alines_filter_type_id        :integer(4)       default(0), not null
