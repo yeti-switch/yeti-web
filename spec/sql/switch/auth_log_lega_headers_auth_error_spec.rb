@@ -8,9 +8,9 @@ RSpec.describe 'switch.write_auth_log()' do
         #{pop_id}::integer,
         '#{request_time.to_f}'::double precision,
         #{transport_proto_id}::smallint,
-        '#{transport_remote_ip}'::varchar,
+        '#{transport_remote_ip}'::inet,
         #{transport_remote_port}::integer,
-        '#{transport_local_ip}'::varchar,
+        '#{transport_local_ip}'::inet,
         #{transport_local_port}::integer,
         '#{username}'::varchar,
         '#{realm}'::varchar,
@@ -26,16 +26,7 @@ RSpec.describe 'switch.write_auth_log()' do
         '#{nonce}'::varchar,
         '#{response}'::varchar,
         #{gateway_id}::integer,
-        '#{x_yeti_auth}'::varchar,
-        '#{diversion}'::varchar,
-        '#{origination_ip}'::varchar,
-        #{origination_port}::integer,
-        #{origination_proto_id}::smallint,
-        '#{pai}'::varchar,
-        '#{ppi}'::varchar,
-        '#{privacy}'::varchar,
-        '#{rpid}'::varchar,
-        '#{rpid_privacy}'::varchar
+        '#{lega_request_headers}'::json
       );))
   end
 
@@ -63,16 +54,32 @@ RSpec.describe 'switch.write_auth_log()' do
   let(:nonce) { 'VoYxUGHsXYtUTsc5fxFbYbt6adrwaZt45RJGzqLrPJNigemF7JuedrUJ6QwwieP1h' }
   let(:response) { 'yYmjZN2SKy92dAshXSeZWbfHPw9wKqMm5FitX5BmeGEtF7k8hiKfmgjgBohxv44bs' }
   let(:gateway_id) { 100 }
+
+  let(:lega_request_headers) {
+    {
+      x_yeti_auth: x_yeti_auth,
+      diversion: diversion,
+      x_orig_ip: origination_ip,
+      x_orig_port: origination_port,
+      x_orig_proto: origination_proto_id,
+      p_asserted_identity: pai,
+      p_preferred_identity: ppi,
+      privacy: privacy,
+      remote_party_id: rpid,
+      rpid_privacy: rpid_privacy
+    }.to_json
+  }
+
   let(:x_yeti_auth) { '4v96qlIguGsxVQGg' }
-  let(:diversion) { '"Diversion" <sip:diversion@domain>' }
+  let(:diversion) { ['"Diversion1" <sip:diversion1@domain>', '"Diversion2" <sip:diversion2@domain>'] }
   let(:origination_ip) { '8.8.8.8' }
   let(:origination_port) { 5070 }
   let(:origination_proto_id) { 2 }
-  let(:pai) { '"Pai" <sip:pai@domain>' }
+  let(:pai) { ['"Pai1" <sip:pai1@domain>', '"Pai2" <sip:pai2@domain>'] }
   let(:ppi) { '"ppi" <sip:ppi@domain>' }
-  let(:privacy) { 'id,critical' }
-  let(:rpid) { '"rpid" <sip:rpid@domain>' }
-  let(:rpid_privacy) { 'full' }
+  let(:privacy) { %w[id critical] }
+  let(:rpid) { ['"rpid1" <sip:rpid1@domain>', '"rpid2" <sip:rpid2@domain>'] }
+  let(:rpid_privacy) { %w[full not-full] }
 
   context 'Create' do
     it 'creates Auth log' do
@@ -106,15 +113,15 @@ RSpec.describe 'switch.write_auth_log()' do
                        response: response,
                        gateway_id: gateway_id,
                        x_yeti_auth: x_yeti_auth,
-                       diversion: diversion,
+                       diversion: diversion.join(','),
                        origination_ip: origination_ip,
                        origination_port: origination_port,
                        origination_proto_id: origination_proto_id,
-                       pai: pai,
+                       pai: pai.join(','),
                        ppi: ppi,
-                       privacy: privacy,
-                       rpid: rpid,
-                       rpid_privacy: rpid_privacy
+                       privacy: privacy.join(','),
+                       rpid: rpid.join(','),
+                       rpid_privacy: rpid_privacy.join(',')
                      )
     end
   end

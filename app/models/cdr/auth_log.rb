@@ -31,6 +31,7 @@
 #  transport_remote_port :integer(4)
 #  username              :string
 #  x_yeti_auth           :string
+#  auth_error_id         :integer(2)
 #  call_id               :string
 #  gateway_id            :integer(4)
 #  node_id               :integer(2)
@@ -65,6 +66,15 @@ class Cdr::AuthLog < Cdr::Base
     TRANSPORT_PROTOCOL_TLS => 'tls',
     TRANSPORT_PROTOCOL_SCTP => 'sctp',
     TRANSPORT_PROTOCOL_WS => 'ws'
+  }.freeze
+
+  AUTH_ERROR_0 = 0
+  AUTH_ERROR_1 = 1
+  AUTH_ERROR_2 = 2
+  AUTH_ERRORS = {
+    AUTH_ERROR_0 => "Auth Error 0",
+    AUTH_ERROR_1 => "Auth Error 1",
+    AUTH_ERROR_2 => "Auth Error 2",
   }.freeze
 
   belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id, optional: true
@@ -120,4 +130,9 @@ class Cdr::AuthLog < Cdr::Base
   def origination_protocol_name
     TRANSPORT_PROTOCOLS[origination_proto_id]
   end
+
+  def auth_error_name
+    AUTH_ERRORS[auth_error_id]
+  end
+
 end

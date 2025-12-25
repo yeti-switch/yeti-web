@@ -31,6 +31,7 @@
 #  transport_remote_port :integer(4)
 #  username              :string
 #  x_yeti_auth           :string
+#  auth_error_id         :integer(2)
 #  call_id               :string
 #  gateway_id            :integer(4)
 #  node_id               :integer(2)
