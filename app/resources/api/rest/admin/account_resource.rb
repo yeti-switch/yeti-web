@@ -17,6 +17,9 @@ class Api::Rest::Admin::AccountResource < BaseResource
 
   filter :name
 
+  relationship_filter :contractor
+  relationship_filter :invoice_template
+
   ransack_filter :name, type: :string
   ransack_filter :balance, type: :number
   ransack_filter :vat, type: :number

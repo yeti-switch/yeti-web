@@ -18,7 +18,10 @@ RSpec.describe 'switch22.load_gateway_attributes_cache' do
       create(:gateway,
              throttling_profile: gtp,
              transfer_append_headers_req: ['x-yeti-auth: 12.3.4', 'x-key: value'],
-             transfer_tel_uri_host: 'redirect.example.com')
+             transfer_tel_uri_host: 'redirect.example.com',
+             ice_mode_id: 2,
+             rtcp_mux_mode_id: 0,
+             rtcp_feedback_mode_id: 2)
     ]
   end
 
@@ -33,7 +36,10 @@ RSpec.describe 'switch22.load_gateway_attributes_cache' do
                              throttling_minimum_calls: gtp.minimum_calls,
                              throttling_window: gtp.window,
                              transfer_append_headers_req: PG::TextEncoder::Array.new.encode(gw.transfer_append_headers_req),
-                             transfer_tel_uri_host: gw.transfer_tel_uri_host
+                             transfer_tel_uri_host: gw.transfer_tel_uri_host,
+                             ice_mode_id: gw.ice_mode_id,
+                             rtcp_mux_mode_id: gw.rtcp_mux_mode_id,
+                             rtcp_feedback_mode_id: gw.rtcp_feedback_mode_id
                            }
                          end
                        )

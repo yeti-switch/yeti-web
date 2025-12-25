@@ -93,6 +93,7 @@ ActiveAdmin.register Gateway do
                  [:rx_inband_dtmf_filtering_mode, proc { |row| row.rx_inband_dtmf_filtering_mode.try(:name) }],
                  [:tx_inband_dtmf_filtering_mode, proc { |row| row.tx_inband_dtmf_filtering_mode.try(:name) }],
                  [:media_encryption_mode, proc { |row| row.media_encryption_mode.try(:name) }],
+                 :ice_mode_name, :rtcp_mux_mode_name, :rtcp_feedback_mode_name,
                  :suppress_early_media,
                  :send_lnp_information,
                  :force_one_way_early_media, :max_30x_redirects,
@@ -519,6 +520,9 @@ ActiveAdmin.register Gateway do
           f.input :force_one_way_early_media
           f.input :rtp_interface_name
           f.input :media_encryption_mode, as: :select, include_blank: false
+          f.input :ice_mode_id, as: :select, include_blank: false, collection: Gateway::ICE_MODES.invert
+          f.input :rtcp_mux_mode_id, as: :select, include_blank: false, collection: Gateway::RTCP_MUX_MODES.invert
+          f.input :rtcp_feedback_mode_id, as: :select, include_blank: false, collection: Gateway::RTCP_FEEDBACK_MODES.invert
           f.input :rtp_acl, as: :array_of_strings
         end
       end
@@ -731,6 +735,9 @@ ActiveAdmin.register Gateway do
           row :force_one_way_early_media
           row :rtp_interface_name
           row :media_encryption_mode
+          row :ice_mode_name
+          row :rtcp_mux_mode_name
+          row :rtcp_feedback_mode_name
           row :rtp_acl
         end
       end
