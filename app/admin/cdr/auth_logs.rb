@@ -142,7 +142,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :auth_error_id_eq,
          label: 'Auth Error',
          as: :select,
-         collection: Cdr::AuthLog::AUTH_ERRORS.invert,
+         collection: Cdr::AuthLog::AUTH_ERRORS_WITH_CODE.invert,
          input_html: { class: :chosen }
 
   filter :realm

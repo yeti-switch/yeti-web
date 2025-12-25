@@ -68,14 +68,49 @@ class Cdr::AuthLog < Cdr::Base
     TRANSPORT_PROTOCOL_WS => 'ws'
   }.freeze
 
-  AUTH_ERROR_0 = 0
-  AUTH_ERROR_1 = 1
-  AUTH_ERROR_2 = 2
+  AUTH_ERROR_NO_AUTH_HEADER = 0
+  AUTH_ERROR_DIGEST_NO_USERNAME = 2
+  AUTH_ERROR_DIGEST_USER_NOT_FOUND = 3
+  AUTH_ERROR_IP_AUTH = 4
+  AUTH_ERROR_JWT_PARSE_ERROR = 5
+  AUTH_ERROR_JWT_VERIFY_ERROR = 6
+  AUTH_ERROR_JWT_EXPIRED = 7
+  AUTH_ERROR_JWT_DATA_ERROR = 8
+  AUTH_ERROR_JWT_AUTH_ERROR = 9
+  AUTH_ERROR_GENERIC = 10
+  AUTH_ERROR_DIGEST_AUTHORIZATION_PARSE_ERROR = 11
+  AUTH_ERROR_DIGEST_WRONG_RESPONSE_LENGTH = 12
+  AUTH_ERROR_DIGEST_REALM_MISMATCH = 13
+  AUTH_ERROR_DIGEST_USER_MISMATCH = 14
+  AUTH_ERROR_DIGEST_WRONG_NONCE = 15
+  AUTH_ERROR_DIGEST_EXPIRED_NONCE = 16
+  AUTH_ERROR_DIGEST_INVALID_NONCE_COUNT = 17
+  AUTH_ERROR_DIGEST_WRONG_RESPONSE = 18
+  AUTH_ERROR_DIGEST_NO_AUTH_HEADER = 19
+
   AUTH_ERRORS = {
-    AUTH_ERROR_0 => "Auth Error 0",
-    AUTH_ERROR_1 => "Auth Error 1",
-    AUTH_ERROR_2 => "Auth Error 2",
+    AUTH_ERROR_NO_AUTH_HEADER => 'No Authorization header',
+    AUTH_ERROR_DIGEST_NO_USERNAME => 'Missing username attribute',
+    AUTH_ERROR_DIGEST_USER_NOT_FOUND => 'User not found',
+    AUTH_ERROR_IP_AUTH => 'IP not allowed',
+    AUTH_ERROR_JWT_PARSE_ERROR => 'JWT Parse error',
+    AUTH_ERROR_JWT_VERIFY_ERROR => 'JWT Verify error',
+    AUTH_ERROR_JWT_EXPIRED => 'JWT Expired',
+    AUTH_ERROR_JWT_DATA_ERROR => 'JWT Data error',
+    AUTH_ERROR_JWT_AUTH_ERROR => 'JWT Not allowed',
+    AUTH_ERROR_GENERIC => 'Generic error',
+    AUTH_ERROR_DIGEST_AUTHORIZATION_PARSE_ERROR => 'Failed to parse Authorization header',
+    AUTH_ERROR_DIGEST_WRONG_RESPONSE_LENGTH => 'Wrong response length',
+    AUTH_ERROR_DIGEST_REALM_MISMATCH => 'Realm mismatch',
+    AUTH_ERROR_DIGEST_USER_MISMATCH => 'User mismatch',
+    AUTH_ERROR_DIGEST_WRONG_NONCE => 'Incorrect nonce',
+    AUTH_ERROR_DIGEST_EXPIRED_NONCE => 'Expired nonce',
+    AUTH_ERROR_DIGEST_INVALID_NONCE_COUNT => 'Failed to parse nc',
+    AUTH_ERROR_DIGEST_WRONG_RESPONSE => 'Response not matched',
+    AUTH_ERROR_DIGEST_NO_AUTH_HEADER => 'No Authorization header'
   }.freeze
+
+  AUTH_ERRORS_WITH_CODE = AUTH_ERRORS.map { |k, v| [k, "#{k} #{v}"] }.to_h.freeze
 
   belongs_to :gateway, class_name: 'Gateway', foreign_key: :gateway_id, optional: true
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
@@ -132,7 +167,6 @@ class Cdr::AuthLog < Cdr::Base
   end
 
   def auth_error_name
-    AUTH_ERRORS[auth_error_id]
+    "#{auth_error_id} #{AUTH_ERRORS[auth_error_id]}"
   end
-
 end

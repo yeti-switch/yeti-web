@@ -160,6 +160,7 @@ RSpec.describe Api::Rest::Admin::AuthLogsController, type: :controller do
             'code' => auth_log.code,
             'reason' => auth_log.reason,
             'internal-reason' => auth_log.internal_reason,
+            'auth-error-id' => auth_log.auth_error_id,
             'origination-ip' => auth_log.origination_ip,
             'origination-port' => auth_log.origination_port,
             'origination-proto-id' => auth_log.origination_proto_id,
