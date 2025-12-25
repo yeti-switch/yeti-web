@@ -23,6 +23,7 @@ RSpec.describe 'switch.write_auth_log()' do
         #{code}::smallint,
         '#{reason}'::varchar,
         '#{internal_reason}'::varchar,
+        #{auth_error_id}::smallint,
         '#{nonce}'::varchar,
         '#{response}'::varchar,
         #{gateway_id}::integer,
@@ -54,6 +55,7 @@ RSpec.describe 'switch.write_auth_log()' do
   let(:nonce) { 'VoYxUGHsXYtUTsc5fxFbYbt6adrwaZt45RJGzqLrPJNigemF7JuedrUJ6QwwieP1h' }
   let(:response) { 'yYmjZN2SKy92dAshXSeZWbfHPw9wKqMm5FitX5BmeGEtF7k8hiKfmgjgBohxv44bs' }
   let(:gateway_id) { 100 }
+  let(:auth_error_id) { 17 }
 
   let(:lega_request_headers) {
     {
@@ -109,6 +111,7 @@ RSpec.describe 'switch.write_auth_log()' do
                        code: code,
                        reason: reason,
                        internal_reason: internal_reason,
+                       auth_error_id: auth_error_id,
                        nonce: nonce,
                        response: response,
                        gateway_id: gateway_id,

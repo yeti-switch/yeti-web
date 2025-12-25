@@ -13,7 +13,7 @@ class Api::Rest::Admin::AuthLogResource < BaseResource
              :success,
              :code,
              :reason,
-             :internal_reason,
+             :internal_reason, :auth_error_id,
              :origination_proto_id, :origination_ip, :origination_port,
              :transport_proto_id, :transport_remote_ip, :transport_remote_port,
              :transport_local_ip, :transport_local_port,
@@ -42,6 +42,7 @@ class Api::Rest::Admin::AuthLogResource < BaseResource
   ransack_filter :code, type: :number
   ransack_filter :reason, type: :string
   ransack_filter :internal_reason, type: :string
+  ransack_filter :auth_error_id, type: :number
   ransack_filter :origination_ip, type: :inet
   ransack_filter :origination_port, type: :number
   ransack_filter :origination_proto_id, type: :number

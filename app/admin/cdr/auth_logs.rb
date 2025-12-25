@@ -36,6 +36,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
                  :code,
                  :reason,
                  :internal_reason,
+                 :auth_error_name,
                  :nonce,
                  :response,
                  :x_yeti_auth,
@@ -65,6 +66,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
     column :code
     column :reason
     column :internal_reason
+    column :auth_error, &:auth_error_name
 
     column :originator do |c|
       "#{c.origination_protocol_name}://#{c.origination_ip}:#{c.origination_port}"
@@ -137,6 +139,12 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :code
   filter :reason
   filter :internal_reason
+  filter :auth_error_id_eq,
+         label: 'Auth Error',
+         as: :select,
+         collection: Cdr::AuthLog::AUTH_ERRORS_WITH_CODE.invert,
+         input_html: { class: :chosen }
+
   filter :realm
   filter :request_method
   filter :x_yeti_auth

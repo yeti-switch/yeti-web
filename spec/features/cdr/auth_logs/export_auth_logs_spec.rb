@@ -42,6 +42,7 @@ RSpec.describe 'Export Auth Logs', type: :feature do
         ['Code', item.code.to_s],
         ['Reason', item.reason.to_s],
         ['Internal reason', item.internal_reason.to_s],
+        ['Auth error name', item.auth_error_name],
         ['Nonce', item.nonce.to_s],
         ['Response', item.response.to_s],
         ['X yeti auth', item.x_yeti_auth.to_s],
