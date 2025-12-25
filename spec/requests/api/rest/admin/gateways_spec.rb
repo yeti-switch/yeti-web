@@ -537,7 +537,10 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'incoming-auth-username': gateway.incoming_auth_username,
         'incoming-auth-password': gateway.incoming_auth_password,
         'force-cancel-routeset': gateway.force_cancel_routeset,
-        'sip-schema-id': gateway.sip_schema_id
+        'sip-schema-id': gateway.sip_schema_id,
+        'ice-mode-id': gateway.ice_mode_id,
+        'rtcp-mux-mode-id': gateway.rtcp_mux_mode_id,
+        'rtcp-feedback-mode-id': gateway.rtcp_feedback_mode_id
       }
     end
 
@@ -587,7 +590,10 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'asr-limit': 0.0,
         host: 'test.example.com',
         'sip-schema-id': 2,
-        'is-shared': false
+        'is-shared': false,
+        'ice-mode-id': 2,
+        'rtcp-mux-mode-id': 1,
+        'rtcp-feedback-mode-id': 0
       }
     end
 
@@ -661,7 +667,10 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   tx_inband_dtmf_filtering_mode: tx_inband_dtmf_filtering_mode,
                                   network_protocol_priority: network_protocol_priority,
                                   media_encryption_mode: media_encryption_mode,
-                                  sip_schema_id: json_api_request_attributes[:'sip-schema-id']
+                                  sip_schema_id: json_api_request_attributes[:'sip-schema-id'],
+                                  ice_mode_id: json_api_request_attributes[:'ice-mode-id'],
+                                  rtcp_mux_mode_id: json_api_request_attributes[:'rtcp-mux-mode-id'],
+                                  rtcp_feedback_mode_id: json_api_request_attributes[:'rtcp-feedback-mode-id']
                                 )
     end
 
