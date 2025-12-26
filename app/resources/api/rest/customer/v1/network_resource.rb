@@ -2,6 +2,7 @@
 
 class Api::Rest::Customer::V1::NetworkResource < Api::Rest::Customer::V1::BaseResource
   model_name 'System::Network'
+  immutable
 
   attributes :name
 

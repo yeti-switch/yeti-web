@@ -2,6 +2,7 @@
 
 class Api::Rest::Customer::V1::RateplanResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Routing::Rateplan'
+  immutable
 
   attributes :name
 

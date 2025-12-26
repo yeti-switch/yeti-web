@@ -2,6 +2,8 @@
 
 class Api::Rest::Customer::V1::TransportProtocolResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Equipment::TransportProtocol'
+  immutable
+
   primary_key :id
   key_type :integer
   paginator :none

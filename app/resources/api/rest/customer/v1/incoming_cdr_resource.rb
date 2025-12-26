@@ -2,6 +2,7 @@
 
 class Api::Rest::Customer::V1::IncomingCdrResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Cdr::Cdr'
+  immutable
 
   key_type :integer
   primary_key :id
