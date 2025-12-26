@@ -6,7 +6,6 @@ module Api
       module V1
         class ProfileResource < Api::Rest::Customer::V1::BaseResource
           singleton
-          immutable
           model_name 'System::CustomerPortalAccessProfile'
           primary_key :id
           exclude_links [:self]

@@ -2,7 +2,6 @@
 
 class Api::Rest::Customer::V1::InvoiceResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Billing::Invoice'
-  immutable
 
   attributes :reference,
              :start_date,

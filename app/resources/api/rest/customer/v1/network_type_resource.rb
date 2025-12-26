@@ -2,7 +2,6 @@
 
 class Api::Rest::Customer::V1::NetworkTypeResource < Api::Rest::Customer::V1::BaseResource
   model_name 'System::NetworkType'
-  immutable
 
   attributes :name
 

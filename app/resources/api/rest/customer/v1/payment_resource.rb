@@ -2,7 +2,6 @@
 
 class Api::Rest::Customer::V1::PaymentResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Payment'
-  immutable
 
   attributes :amount,
              :notes,

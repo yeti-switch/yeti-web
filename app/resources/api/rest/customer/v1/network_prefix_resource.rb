@@ -2,7 +2,6 @@
 
 class Api::Rest::Customer::V1::NetworkPrefixResource < Api::Rest::Customer::V1::BaseResource
   model_name 'System::NetworkPrefix'
-  immutable
 
   attributes :prefix,
              :number_min_length,

@@ -3,7 +3,6 @@
 
 class Api::Rest::Customer::V1::RateResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Routing::Destination'
-  immutable
 
   attributes :prefix,
              :dst_number_min_length,

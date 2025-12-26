@@ -2,7 +2,6 @@
 
 class Api::Rest::Customer::V1::AccountResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Account'
-  immutable
 
   attributes :name,
              :balance, :min_balance, :max_balance,

@@ -2,7 +2,6 @@
 
 class Api::Rest::Customer::V1::TransactionResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Billing::Transaction'
-  immutable
 
   attribute :description
   attribute :amount
