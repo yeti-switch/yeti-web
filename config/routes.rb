@@ -163,40 +163,36 @@ Rails.application.routes.draw do
 
         namespace :customer do
           namespace :v1 do
-            jsonapi_resources :accounts, only: %i[index show]
-            jsonapi_resources :rateplans, only: %i[index show]
-            jsonapi_resources :rates, only: %i[index show]
-            jsonapi_resources :outgoing_numberlists, only: %i[index show]
-            jsonapi_resources :outgoing_numberlist_items, only: %i[index show create update destroy]
-            jsonapi_resource :check_rate, only: %i[create]
+            jsonapi_resources(:accounts, only: %i[index show]) {}
+            jsonapi_resources(:rateplans, only: %i[index show]) {}
+            jsonapi_resources(:rates, only: %i[index show]) {}
+            jsonapi_resources(:outgoing_numberlists, only: %i[index show]) {}
+            jsonapi_resources(:outgoing_numberlist_items, only: %i[index show create update destroy]) {}
+            jsonapi_resource(:check_rate, only: %i[create]) {}
             jsonapi_resources :cdrs, only: %i[index show] do
-              jsonapi_relationships
               member { get :rec }
             end
             jsonapi_resources :incoming_cdrs, only: %i[index show] do
-              jsonapi_relationships
               member { get :rec }
             end
-            jsonapi_resources :networks, only: %i[index show]
-            jsonapi_resources :network_types, only: %i[index show]
-            jsonapi_resources :network_prefixes, only: %i[index show]
-            jsonapi_resources :chart_active_calls, only: %i[create]
-            jsonapi_resources :chart_originated_cps, only: %i[create]
-            jsonapi_resources :payments, only: %i[index show]
-            jsonapi_resources :cryptomus_payments, only: %i[create show]
+            jsonapi_resources(:networks, only: %i[index show]) {}
+            jsonapi_resources(:network_types, only: %i[index show]) {}
+            jsonapi_resources(:network_prefixes, only: %i[index show]) {}
+            jsonapi_resources(:chart_active_calls, only: %i[create]) {}
+            jsonapi_resources(:chart_originated_cps, only: %i[create]) {}
+            jsonapi_resources(:payments, only: %i[index show]) {}
+            jsonapi_resources(:cryptomus_payments, only: %i[create show]) {}
             jsonapi_resources :invoices, only: %i[index show] do
-              jsonapi_relationships
               member { get :download }
             end
             jsonapi_resources :cdr_exports, only: %i[index show create] do
-              jsonapi_relationships
               member { get :download }
             end
-            jsonapi_resources :countries, only: %i[index show]
-            jsonapi_resources :services, only: %i[index show]
-            jsonapi_resources :transactions, only: %i[index show]
-            jsonapi_resources :phone_systems_sessions, only: %i[create]
-            jsonapi_resource :profiles, only: %i[show]
+            jsonapi_resources(:countries, only: %i[index show]) {}
+            jsonapi_resources(:services, only: %i[index show]) {}
+            jsonapi_resources(:transactions, only: %i[index show]) {}
+            jsonapi_resources(:phone_systems_sessions, only: %i[create]) {}
+            jsonapi_resource(:profiles, only: %i[show]) {}
 
             dasherized_resource :auth, only: %i[create show destroy]
 
