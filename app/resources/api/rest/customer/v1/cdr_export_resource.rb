@@ -2,6 +2,8 @@
 
 class Api::Rest::Customer::V1::CdrExportResource < Api::Rest::Customer::V1::BaseResource
   model_name 'CdrExport'
+  immutable false
+
   create_form 'CustomerApi::CdrExportForm'
   model_hint model: CdrExport::Base, resource: self
   paginator :paged

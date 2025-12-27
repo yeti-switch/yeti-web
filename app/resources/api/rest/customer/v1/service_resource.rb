@@ -2,7 +2,6 @@
 
 class Api::Rest::Customer::V1::ServiceResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Billing::Service'
-  immutable
 
   attribute :name
   attribute :state

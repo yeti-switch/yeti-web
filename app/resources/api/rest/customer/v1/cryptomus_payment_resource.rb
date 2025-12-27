@@ -2,6 +2,7 @@
 
 class Api::Rest::Customer::V1::CryptomusPaymentResource < Api::Rest::Customer::V1::BaseResource
   model_name 'CustomerApi::CryptomusPayment'
+  immutable false
 
   attributes :amount,
              :notes,
