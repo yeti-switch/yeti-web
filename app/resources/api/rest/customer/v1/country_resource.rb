@@ -2,6 +2,7 @@
 
 class Api::Rest::Customer::V1::CountryResource < ::Api::Rest::Customer::V1::BaseResource
   model_name 'System::Country'
+
   primary_key :id
   key_type :string
   attributes :name, :iso2

@@ -31,6 +31,7 @@ class Api::Rest::Customer::V1::BaseResource < ::BaseResource
       subclass.key_type(resource_key_type)
       subclass.primary_key(_primary_key)
       subclass.paginator(_paginator)
+      subclass.immutable(_immutable)
     end
   end
 end

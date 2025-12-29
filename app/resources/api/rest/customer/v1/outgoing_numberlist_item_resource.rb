@@ -2,6 +2,7 @@
 
 class Api::Rest::Customer::V1::OutgoingNumberlistItemResource < Api::Rest::Customer::V1::BaseResource
   model_name 'Routing::NumberlistItem'
+  immutable false
 
   key_type :integer
   primary_key :id

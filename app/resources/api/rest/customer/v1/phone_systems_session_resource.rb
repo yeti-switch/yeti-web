@@ -7,6 +7,7 @@ module Api
         class PhoneSystemsSessionResource < Api::Rest::Customer::V1::BaseResource
           exclude_links [:self]
           model_name 'PhoneSystemsSessionForm'
+          immutable false
 
           attribute :service
           attribute :phone_systems_url
