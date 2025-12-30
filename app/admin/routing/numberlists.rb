@@ -34,7 +34,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                 :default_src_rewrite_rule, :default_src_rewrite_result, :defer_src_rewrite,
                 :default_dst_rewrite_rule, :default_dst_rewrite_result, :defer_dst_rewrite,
                 :rewrite_ss_status_id,
-                :tag_action_id, :lua_script_id, tag_action_value: []
+                :tag_action_id, :lua_script_id, :variables_json, tag_action_value: []
   controller do
     def update
       if params['routing_numberlist']['tag_action_value'].nil?
@@ -73,6 +73,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :default_dst_rewrite_result
     column :defer_dst_rewrite
     column :lua_script
+    column :variables, &variables_json
     column :tag_action
     column :display_tag_action_value
     column :rewrite_ss_status, &:rewrite_ss_status_name
@@ -87,21 +88,28 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       row :id
       row :name
       row :mode, &:mode_name
-      row :default_action, &:default_action_name
-      row :default_src_rewrite_rule
-      row :default_src_rewrite_result
-      row :defer_src_rewrite
-      row :default_dst_rewrite_rule
-      row :default_dst_rewrite_result
-      row :defer_dst_rewrite
-      row :lua_script
-      row :tag_action
-      row :display_tag_action_value
-      row :rewrite_ss_status, &:rewrite_ss_status_name
       row :created_at
       row :updated_at
       row 'External ID', &:external_id
       row :external_type
+    end
+    panel 'Default actions' do
+      attributes_table_for _s do
+        row :default_action, &:default_action_name
+        row :default_src_rewrite_rule
+        row :default_src_rewrite_result
+        row :defer_src_rewrite
+        row :default_dst_rewrite_rule
+        row :default_dst_rewrite_result
+        row :defer_dst_rewrite
+        row :lua_script
+        row :tag_action
+        row :display_tag_action_value
+        row :rewrite_ss_status, &:rewrite_ss_status_name
+        row :variables do |r|
+          pre code JSON.pretty_generate(r.variables)
+        end
+      end
     end
   end
 
@@ -109,6 +117,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     f.inputs do
       f.input :name
       f.input :mode_id, as: :select, include_blank: false, collection: Routing::Numberlist::MODES.invert
+    end
+    f.inputs 'default actions' do
       f.input :default_action_id, as: :select, include_blank: false, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
       f.input :default_src_rewrite_rule
       f.input :default_src_rewrite_result
@@ -124,6 +134,8 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                                  include_hidden: false,
                                  input_html: { class: 'chosen' }
       f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
+      f.input :vars_json
+      f.input :variables_json, label: 'Variables', as: :text
     end
     f.actions
   end

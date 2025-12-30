@@ -41,7 +41,7 @@ ActiveAdmin.register Routing::NumberlistItem do
                 :src_rewrite_rule, :src_rewrite_result, :defer_src_rewrite,
                 :dst_rewrite_rule, :dst_rewrite_result, :defer_dst_rewrite,
                 :rewrite_ss_status_id,
-                :tag_action_id, :lua_script_id, tag_action_value: []
+                :tag_action_id, :lua_script_id, :variables_json, tag_action_value: []
 
   filter :id
   association_ajax_filter :numberlist_id_eq,
@@ -93,6 +93,7 @@ ActiveAdmin.register Routing::NumberlistItem do
     column :display_tag_action_value
     column :rewrite_ss_status, &:rewrite_ss_status_name
     column :lua_script
+    column :variables, &:variables_json
     column :created_at
     column :updated_at
   end
@@ -117,6 +118,9 @@ ActiveAdmin.register Routing::NumberlistItem do
           row :display_tag_action_value
           row :rewrite_ss_status, &:rewrite_ss_status_name
           row :lua_script
+          row :variables do |r|
+            pre code JSON.pretty_generate(r.variables)
+          end
           row :created_at
           row :updated_at
         end
@@ -162,6 +166,7 @@ ActiveAdmin.register Routing::NumberlistItem do
                                  input_html: { class: 'chosen' }
       f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
       f.input :lua_script, as: :select, input_html: { class: 'chosen' }, include_blank: 'None'
+      f.input :variables_json, label: 'Variables', as: :text
     end
     f.actions
   end

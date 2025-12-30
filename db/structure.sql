@@ -1,8 +1,3 @@
-\restrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
-
--- Dumped from database version 18.0 (Debian 18.0-1.pgdg13+3)
--- Dumped by pg_dump version 18.1 (Debian 18.1-2)
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -16040,6 +16035,7 @@ CREATE TABLE class4.numberlist_items (
     defer_src_rewrite boolean DEFAULT false NOT NULL,
     defer_dst_rewrite boolean DEFAULT false NOT NULL,
     rewrite_ss_status_id smallint,
+    variables jsonb,
     CONSTRAINT numberlist_items_max_number_length CHECK ((number_max_length >= 0)),
     CONSTRAINT numberlist_items_min_number_length CHECK ((number_min_length >= 0))
 );
@@ -40693,7 +40689,8 @@ CREATE TABLE class4.numberlists (
     external_type character varying,
     defer_src_rewrite boolean DEFAULT false NOT NULL,
     defer_dst_rewrite boolean DEFAULT false NOT NULL,
-    rewrite_ss_status_id smallint
+    rewrite_ss_status_id smallint,
+    variables jsonb
 );
 
 
@@ -40972,6 +40969,7 @@ CREATE TABLE class4.customers_auth (
     pai_rewrite_result character varying,
     stir_shaken_crt_id smallint,
     scheduler_id smallint,
+    variables jsonb,
     CONSTRAINT ip_not_empty CHECK ((ip <> '{}'::inet[]))
 );
 
@@ -41072,6 +41070,7 @@ CREATE TABLE class4.customers_auth_normalized (
     pai_rewrite_rule character varying,
     pai_rewrite_result character varying,
     stir_shaken_crt_id smallint,
+    variables jsonb,
     CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
     CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
@@ -50396,11 +50395,10 @@ ALTER TABLE ONLY sys.sensors
 -- PostgreSQL database dump complete
 --
 
-\unrestrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
-
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251230174136'),
 ('20251225102356'),
 ('20251222152903'),
 ('20251214193750'),

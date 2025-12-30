@@ -7,7 +7,8 @@ class Api::Rest::Admin::NumberlistResource < ::BaseResource
              :created_at, :updated_at,
              :default_src_rewrite_rule, :default_src_rewrite_result, :defer_src_rewrite,
              :default_dst_rewrite_rule, :default_dst_rewrite_result, :defer_dst_rewrite,
-             :tag_action_value, :external_id, :external_type
+             :tag_action_value, :variables,
+             :external_id, :external_type
 
   paginator :paged
 
@@ -41,6 +42,7 @@ class Api::Rest::Admin::NumberlistResource < ::BaseResource
       default_dst_rewrite_result
       defer_dst_rewrite
       tag_action_value
+      variables
       external_id
       external_type
       tag_action

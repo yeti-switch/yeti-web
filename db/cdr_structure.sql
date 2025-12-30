@@ -1,8 +1,3 @@
-\restrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
-
--- Dumped from database version 18.0 (Debian 18.0-1.pgdg13+3)
--- Dumped by pg_dump version 18.1 (Debian 18.1-2)
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -4759,8 +4754,6 @@ ALTER TABLE ONLY sys.config
 --
 -- PostgreSQL database dump complete
 --
-
-\unrestrict FSgS5iss3QTfiWFDP8i5kqqXcL6NZaiT20iLmTGCOXgUSjKvbNGbLOOPAdnc0zGn
 
 SET search_path TO cdr, reports, billing, public;
 
