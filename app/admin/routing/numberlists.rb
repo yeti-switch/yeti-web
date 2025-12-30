@@ -73,7 +73,7 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
     column :default_dst_rewrite_result
     column :defer_dst_rewrite
     column :lua_script
-    column :variables, &variables_json
+    column :variables, &:variables_json
     column :tag_action
     column :display_tag_action_value
     column :rewrite_ss_status, &:rewrite_ss_status_name
@@ -134,7 +134,6 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
                                  include_hidden: false,
                                  input_html: { class: 'chosen' }
       f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
-      f.input :vars_json
       f.input :variables_json, label: 'Variables', as: :text
     end
     f.actions

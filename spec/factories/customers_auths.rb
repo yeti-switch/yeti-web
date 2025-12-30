@@ -114,6 +114,8 @@ FactoryBot.define do
     diversion_policy_id { CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT }
     dump_level_id { 1 }
 
+    variables { { 'customer_auth_var1' => 'v' } }
+
     # ip { ['127.0.0.0/8'] } # default
     src_number_field_id { 1 }
     src_rewrite_rule { nil }

@@ -43,6 +43,7 @@ FactoryBot.define do
     association :lua_script
 
     action_id { Routing::NumberlistItem::ACTION_REJECT }
+    variables { { 'numberlist_item_var1' => 'value' } }
 
     trait :filled do
       tag_action { Routing::TagAction.take }

@@ -43,6 +43,7 @@ FactoryBot.define do
 
     mode_id { Routing::Numberlist::MODE_STRICT }
     default_action_id { Routing::Numberlist::DEFAULT_ACTION_REJECT }
+    variables { { 'numberlist_var1' => 'value' } }
 
     trait :filled do
       tag_action { Routing::TagAction.take }

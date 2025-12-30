@@ -13,7 +13,7 @@ RSpec.resource 'Routing NumberlistItems' do
   optional_params = %i[
     src_rewrite_rule src_rewrite_result defer_src_rewrite
     dst_rewrite_rule dst_rewrite_result defer_dst_rewrite
-    tag_action_value
+    tag_action_value variables
   ]
 
   required_relationships = %i[numberlist]
@@ -51,6 +51,7 @@ RSpec.resource 'Routing NumberlistItems' do
 
     let(:key) { '123' }
     let(:numberlist) { wrap_relationship(:numberlists, create(:numberlist).id) }
+    let(:variables) { { 'var1' => 'value1', 'var2' => 10 } }
 
     example_request 'create new entry' do
       expect(status).to eq(201)
