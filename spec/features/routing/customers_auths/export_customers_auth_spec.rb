@@ -28,7 +28,8 @@ RSpec.describe 'Export Customers Auth', type: :feature do
            cnam_database: create(:cnam_database),
            rewrite_ss_status_id: Equipment::StirShaken::Attestation::ATTESTATION_A,
            stir_shaken_crt: create(:stir_shaken_signing_certificate),
-           scheduler: create(:scheduler))
+           scheduler: create(:scheduler),
+           variables: { 'k' => 'v' })
   end
 
   before do
@@ -98,6 +99,7 @@ RSpec.describe 'Export Customers Auth', type: :feature do
         ['Radius accounting profile name', item.radius_accounting_profile.name, anything],
         ['Tag action name', item.tag_action.name, anything],
         ['Tag action value names', item.tag_action_values.map(&:name).join(', '), anything],
+        ['Variables', item.variables_json, anything],
         ['Cnam database name', item.cnam_database.name, anything],
         ['Rewrite ss status name', item.rewrite_ss_status_name, anything],
         ['Ss mode name', item.ss_mode_name, anything],

@@ -26,6 +26,7 @@ ActiveAdmin.register Routing::NumberlistItem do
                  [:tag_action_name, proc { |row| row.tag_action.try(:name) }],
                  [:tag_action_value_names, proc { |row| row.model.tag_action_values.map(&:name).join(', ') }],
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
+                 [:variables, proc { |row| row.variables_json }],
                  :rewrite_ss_status_name,
                  :created_at,
                  :updated_at

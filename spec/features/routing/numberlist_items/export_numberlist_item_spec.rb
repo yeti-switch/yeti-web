@@ -10,7 +10,8 @@ RSpec.describe 'Export Numberlist Item', type: :feature do
     create(:numberlist_item,
            action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
            tag_action: Routing::TagAction.take,
-           tag_action_value: [tag_ua.id, tag_us.id])
+           tag_action_value: [tag_ua.id, tag_us.id],
+           variables: { 'k' => 'v' })
   end
 
   before do
@@ -37,6 +38,7 @@ RSpec.describe 'Export Numberlist Item', type: :feature do
         ['Lua script name', item.lua_script.name],
         ['Tag action name', item.tag_action.name],
         ['Tag action value names', item.tag_action_values.map(&:name).join(', ')],
+        ['Variables', item.variables_json.to_s],
         ['Rewrite ss status name', item.rewrite_ss_status_name.to_s],
         ['Created at', item.created_at.to_s],
         ['Updated at', item.updated_at.to_s]
