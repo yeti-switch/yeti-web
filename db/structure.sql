@@ -1455,7 +1455,8 @@ CREATE TYPE switch22.call_ctx_ty AS (
 	pop_id integer,
 	allow_ss_status_rewrite boolean,
 	send_billing_information boolean,
-	max_call_length integer
+	max_call_length integer,
+	vars jsonb
 );
 
 
@@ -32935,7 +32936,7 @@ BEGIN
   */
   /*dbg{*/
   v_end:=clock_timestamp();
-  RAISE NOTICE '% ms -> GW. Before numberlist processing src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  RAISE NOTICE '% ms -> GW. Before numberlist processing src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out, i_call_ctx.vars;
   /*}dbg*/
 
 
@@ -32972,6 +32973,7 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
           i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
         END IF;
@@ -32993,6 +32995,7 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
         i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
       END IF;
@@ -33032,6 +33035,7 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
           i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
         END IF;
@@ -33054,18 +33058,24 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
         i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
       END IF;
     END IF;
   END IF;
 
+  -- append variables to metadata
+  if i_call_ctx.vars is not null and i_call_ctx.vars!='{}'::jsonb THEN
+    i_profile.metadata = (COALESCE(i_profile.metadata,'{}')::jsonb || jsonb_build_object('vars', i_call_ctx.vars))::varchar;
+  end if;
+
   /*
       number rewriting _After_ routing _IN_ termination GW
   */
   /*dbg{*/
   v_end:=clock_timestamp();
-  RAISE NOTICE '% ms -> GW. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  RAISE NOTICE '% ms -> GW. Before rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out, i_call_ctx.vars;
   /*}dbg*/
   i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result);
   i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result);
@@ -33073,7 +33083,7 @@ BEGIN
 
   /*dbg{*/
   v_end:=clock_timestamp();
-  RAISE NOTICE '% ms -> GW. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  RAISE NOTICE '% ms -> GW. After rewrite src_number %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out, i_call_ctx.vars;
   /*}dbg*/
 
   -- apply capacity limit by destination number
@@ -33708,7 +33718,7 @@ BEGIN
   */
   /*dbg{*/
   v_end:=clock_timestamp();
-  RAISE NOTICE '% ms -> GW. Before numberlist processing src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  RAISE NOTICE '% ms -> GW. Before numberlist processing src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out, i_call_ctx.vars;
   /*}dbg*/
 
 
@@ -33745,6 +33755,7 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
           i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
         END IF;
@@ -33766,6 +33777,7 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
         i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
       END IF;
@@ -33805,6 +33817,7 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
           i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
         END IF;
@@ -33827,18 +33840,24 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
         i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
       END IF;
     END IF;
   END IF;
 
+  -- append variables to metadata
+  if i_call_ctx.vars is not null and i_call_ctx.vars!='{}'::jsonb THEN
+    i_profile.metadata = (COALESCE(i_profile.metadata,'{}')::jsonb || jsonb_build_object('vars', i_call_ctx.vars))::varchar;
+  end if;
+
   /*
       number rewriting _After_ routing _IN_ termination GW
   */
   /*dbg{*/
   v_end:=clock_timestamp();
-  RAISE NOTICE '% ms -> GW. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  RAISE NOTICE '% ms -> GW. Before rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out, i_call_ctx.vars;
   /*}dbg*/
   i_profile.dst_prefix_out=yeti_ext.regexp_replace_rand(i_profile.dst_prefix_out,i_vendor_gw.dst_rewrite_rule,i_vendor_gw.dst_rewrite_result);
   i_profile.src_prefix_out=yeti_ext.regexp_replace_rand(i_profile.src_prefix_out,i_vendor_gw.src_rewrite_rule,i_vendor_gw.src_rewrite_result);
@@ -33846,7 +33865,7 @@ BEGIN
 
   /*dbg{*/
   v_end:=clock_timestamp();
-  RAISE NOTICE '% ms -> GW. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out;
+  RAISE NOTICE '% ms -> GW. After rewrite src_number %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),i_profile.src_prefix_out,i_profile.dst_prefix_out, i_call_ctx.vars;
   /*}dbg*/
 
   -- apply capacity limit by destination number
@@ -34480,6 +34499,7 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
           i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
         END IF;
@@ -34498,6 +34518,7 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
         i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
       END IF;
@@ -34528,6 +34549,7 @@ BEGIN
           v_termination_numberlist_item.dst_rewrite_rule,
           v_termination_numberlist_item.dst_rewrite_result
         );
+        i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist_item.variables, '{}'::jsonb);
         IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist_item.rewrite_ss_status_id is not null THEN
           i_profile.ss_attest_id = v_termination_numberlist_item.rewrite_ss_status_id;
         END IF;
@@ -34547,11 +34569,17 @@ BEGIN
         v_termination_numberlist.default_dst_rewrite_rule,
         v_termination_numberlist.default_dst_rewrite_result
       );
+      i_call_ctx.vars = i_call_ctx.vars||COALESCE(v_termination_numberlist.variables, '{}'::jsonb);
       IF i_call_ctx.allow_ss_status_rewrite and v_termination_numberlist.rewrite_ss_status_id is not null THEN
         i_profile.ss_attest_id = v_termination_numberlist.rewrite_ss_status_id;
       END IF;
     END IF;
   END IF;
+
+  -- append variables to metadata
+  if i_call_ctx.vars is not null and i_call_ctx.vars!='{}'::jsonb THEN
+    i_profile.metadata = (COALESCE(i_profile.metadata,'{}')::jsonb || jsonb_build_object('vars', i_call_ctx.vars))::varchar;
+  end if;
 
   /*
       number rewriting _After_ routing _IN_ termination GW
@@ -35207,6 +35235,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_auth_external_type = v_customer_auth_normalized.external_type;
         v_ret.customer_auth_name = v_customer_auth_normalized."name";
         v_call_ctx.send_billing_information = v_customer_auth_normalized.send_billing_information;
+        v_call_ctx.vars = COALESCE(v_customer_auth_normalized.variables, '{}'::jsonb);
 
         select into strict v_customer * from public.contractors where id=v_customer_auth_normalized.customer_id;
         v_ret.customer_id = v_customer_auth_normalized.customer_id;
@@ -35471,7 +35500,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         */
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> AUTH. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out;
+        RAISE NOTICE '% ms -> AUTH. Before rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out, v_call_ctx.vars;
         /*}dbg*/
         v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result);
         v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result);
@@ -35559,7 +35588,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> AUTH. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out;
+        RAISE NOTICE '% ms -> AUTH. After rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out, v_call_ctx.vars;
         /*}dbg*/
 
         ----- Numberlist processing-------------------------------------------------------------------------------------------------------
@@ -35610,6 +35639,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -35649,6 +35679,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -35712,6 +35743,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -35750,6 +35782,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -35829,6 +35862,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -35868,6 +35902,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -35922,6 +35957,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -35960,6 +35996,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -36116,7 +36153,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> DST. search start. Routing key: %. Routing tags: %, Rate limit: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_ret.routing_tag_ids, v_destination_rate_limit;
+        RAISE NOTICE '% ms -> DST. search start. Rateplan: %, Routing key: %, Routing tags: %, Rate limit: %',EXTRACT(MILLISECOND from v_end-v_start), v_customer_auth_normalized.rateplan_id, v_routing_key, v_ret.routing_tag_ids, v_destination_rate_limit;
         /*}dbg*/
         v_src_network = switch22.detect_network(v_ret.src_prefix_routing);
         v_ret.src_network_id = v_src_network.network_id;
@@ -36244,7 +36281,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         */
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
+        RAISE NOTICE '% ms -> DP. search start. Routing plan: %, Routing key: %, Rate limit: %, Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_customer_auth_normalized.routing_plan_id, v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
         /*}dbg*/
 
 
@@ -36900,6 +36937,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.customer_auth_external_type = v_customer_auth_normalized.external_type;
         v_ret.customer_auth_name = v_customer_auth_normalized."name";
         v_call_ctx.send_billing_information = v_customer_auth_normalized.send_billing_information;
+        v_call_ctx.vars = COALESCE(v_customer_auth_normalized.variables, '{}'::jsonb);
 
         select into strict v_customer * from public.contractors where id=v_customer_auth_normalized.customer_id;
         v_ret.customer_id = v_customer_auth_normalized.customer_id;
@@ -37164,7 +37202,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         */
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> AUTH. Before rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out;
+        RAISE NOTICE '% ms -> AUTH. Before rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out, v_call_ctx.vars;
         /*}dbg*/
         v_ret.dst_prefix_out=yeti_ext.regexp_replace_rand(v_ret.dst_prefix_out,v_customer_auth_normalized.dst_rewrite_rule,v_customer_auth_normalized.dst_rewrite_result);
         v_ret.src_prefix_out=yeti_ext.regexp_replace_rand(v_ret.src_prefix_out,v_customer_auth_normalized.src_rewrite_rule,v_customer_auth_normalized.src_rewrite_result);
@@ -37252,7 +37290,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> AUTH. After rewrite src_prefix: % , dst_prefix: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out;
+        RAISE NOTICE '% ms -> AUTH. After rewrite src_number: %, dst_number: %, vars: %',EXTRACT(MILLISECOND from v_end-v_start),v_ret.src_prefix_out,v_ret.dst_prefix_out, v_call_ctx.vars;
         /*}dbg*/
 
         ----- Numberlist processing-------------------------------------------------------------------------------------------------------
@@ -37303,6 +37341,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -37342,6 +37381,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -37405,6 +37445,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -37443,6 +37484,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -37522,6 +37564,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -37561,6 +37604,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -37615,6 +37659,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -37653,6 +37698,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -37809,7 +37855,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> DST. search start. Routing key: %. Routing tags: %, Rate limit: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_ret.routing_tag_ids, v_destination_rate_limit;
+        RAISE NOTICE '% ms -> DST. search start. Rateplan: %, Routing key: %, Routing tags: %, Rate limit: %',EXTRACT(MILLISECOND from v_end-v_start), v_customer_auth_normalized.rateplan_id, v_routing_key, v_ret.routing_tag_ids, v_destination_rate_limit;
         /*}dbg*/
         v_src_network = switch22.detect_network(v_ret.src_prefix_routing);
         v_ret.src_network_id = v_src_network.network_id;
@@ -37937,7 +37983,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         */
         /*dbg{*/
         v_end:=clock_timestamp();
-        RAISE NOTICE '% ms -> DP. search start. Routing key: %. Rate limit: %. Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
+        RAISE NOTICE '% ms -> DP. search start. Routing plan: %, Routing key: %, Rate limit: %, Routing tag: %',EXTRACT(MILLISECOND from v_end-v_start), v_customer_auth_normalized.routing_plan_id, v_routing_key, v_rate_limit, v_ret.routing_tag_ids;
         /*}dbg*/
 
 
@@ -38571,6 +38617,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.customer_auth_external_type = v_customer_auth_normalized.external_type;
         v_ret.customer_auth_name = v_customer_auth_normalized."name";
         v_call_ctx.send_billing_information = v_customer_auth_normalized.send_billing_information;
+        v_call_ctx.vars = COALESCE(v_customer_auth_normalized.variables, '{}'::jsonb);
 
         select into strict v_customer * from public.contractors where id=v_customer_auth_normalized.customer_id;
         v_ret.customer_id = v_customer_auth_normalized.customer_id;
@@ -38938,6 +38985,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -38974,6 +39022,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -39025,6 +39074,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -39060,6 +39110,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -39130,6 +39181,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -39166,6 +39218,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -39211,6 +39264,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist_item.tag_action_id, v_call_tags, v_numberlist_item.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist_item.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist_item.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist_item.rewrite_ss_status_id;
             END IF;
@@ -39246,6 +39300,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                 );
             END IF;
             v_call_tags=yeti_ext.tag_action(v_numberlist.tag_action_id, v_call_tags, v_numberlist.tag_action_value);
+            v_call_ctx.vars = v_call_ctx.vars||COALESCE(v_numberlist.variables, '{}'::jsonb);
             IF v_call_ctx.allow_ss_status_rewrite and v_numberlist.rewrite_ss_status_id is not null THEN
               v_ret.ss_attest_id = v_numberlist.rewrite_ss_status_id;
             END IF;
@@ -50398,6 +50453,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20251230213442'),
 ('20251230174136'),
 ('20251225102356'),
 ('20251222152903'),
