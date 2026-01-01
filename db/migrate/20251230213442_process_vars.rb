@@ -2,6 +2,7 @@ class ProcessVars < ActiveRecord::Migration[7.2]
 
   def up
     execute %q{
+      ALTER EXTENSION yeti UPDATE TO "1.14.0";
 
     alter type switch22.call_ctx_ty add attribute vars jsonb;
 
@@ -1797,8 +1798,6 @@ BEGIN
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-NEXT-RATE:'||i_profile.dialpeer_next_rate)::varchar);
     v_aleg_append_headers_reply=array_append(v_aleg_append_headers_reply, (E'X-VND-CF:'||i_profile.dialpeer_fee)::varchar);
   end if;
-    v_aleg_append_headers_reply = array_cat(v_aleg_append_headers_reply,i_customer_gw.orig_append_headers_reply);
-    i_profile.aleg_append_headers_reply=ARRAY_TO_STRING(v_aleg_append_headers_reply,'\r\n');
 
   if i_destination.use_dp_intervals THEN
     i_profile.destination_initial_interval:=i_dp.initial_interval;
@@ -2236,10 +2235,22 @@ BEGIN
     END IF;
   END IF ;
 
-  v_bleg_append_headers_req = array_cat(v_bleg_append_headers_req, i_vendor_gw.term_append_headers_req);
+  v_bleg_append_headers_req = array_cat(
+    v_bleg_append_headers_req,
+    yeti_ext.process_templates(i_vendor_gw.term_append_headers_req, i_call_ctx.vars)
+  );
   i_profile.append_headers_req = array_to_string(v_bleg_append_headers_req,'\r\n');
 
-  i_profile.aleg_append_headers_req = array_to_string(i_customer_gw.orig_append_headers_req,'\r\n');
+  v_aleg_append_headers_reply = array_cat(
+    v_aleg_append_headers_reply,
+    yeti_ext.process_templates(i_customer_gw.orig_append_headers_reply, i_call_ctx.vars)
+  );
+  i_profile.aleg_append_headers_reply=ARRAY_TO_STRING(v_aleg_append_headers_reply,'\r\n');
+
+  i_profile.aleg_append_headers_req = array_to_string(
+    yeti_ext.process_templates(i_customer_gw.orig_append_headers_req, i_call_ctx.vars),
+    '\r\n'
+  );
 
   i_profile.next_hop_1st_req=i_vendor_gw.auth_enabled; -- use low delay dns srv if auth enabled
   i_profile.next_hop:=i_vendor_gw.term_next_hop;
@@ -2301,7 +2312,7 @@ BEGIN
     i_profile.registered_aor_id=i_vendor_gw.id;
     v_ruri_host = 'unknown.invalid';
   else
-    v_ruri_host = i_vendor_gw.host;
+    v_ruri_host = yeti_ext.process_templates(i_vendor_gw.host, i_call_ctx.vars);
   end if;
 
   i_profile."from" = switch22.build_uri(false, v_schema, i_profile.src_name_out, v_from_user, null, v_from_domain, null, v_from_uri_params);
