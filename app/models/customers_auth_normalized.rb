@@ -47,6 +47,7 @@
 #  tag_action_value                 :integer(2)       default([]), not null, is an Array
 #  to_domain                        :string
 #  uri_domain                       :string
+#  variables                        :jsonb
 #  x_yeti_auth                      :string
 #  account_id                       :integer(4)
 #  cnam_database_id                 :integer(2)

@@ -20,6 +20,7 @@ RSpec.resource 'Numberlist' do
     default-dst-rewrite-result
     defer-dst-rewrite
     tag-action-value
+    variables
     external-id
     external-type
   ]
@@ -40,6 +41,7 @@ RSpec.resource 'Numberlist' do
     jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:name) { 'name' }
+    let(:variables) { { 'var1' => 'value1', 'var2' => 10 } }
 
     example_request 'create new entry' do
       expect(status).to eq(201)

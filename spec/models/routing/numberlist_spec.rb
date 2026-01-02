@@ -14,6 +14,7 @@
 #  external_type              :string
 #  name                       :string           not null
 #  tag_action_value           :integer(2)       default([]), not null, is an Array
+#  variables                  :jsonb
 #  created_at                 :timestamptz
 #  updated_at                 :timestamptz
 #  default_action_id          :integer(2)       default(1), not null

@@ -47,6 +47,7 @@
 #  tag_action_value                 :integer(2)       default([]), not null, is an Array
 #  to_domain                        :string           default([]), is an Array
 #  uri_domain                       :string           default([]), is an Array
+#  variables                        :jsonb
 #  x_yeti_auth                      :string           default([]), is an Array
 #  account_id                       :integer(4)
 #  cnam_database_id                 :integer(2)
@@ -112,6 +113,8 @@ FactoryBot.define do
     sequence(:external_type) { |n| "type#{n}" }
     diversion_policy_id { CustomersAuth::DIVERSION_POLICY_NOT_ACCEPT }
     dump_level_id { 1 }
+
+    variables { { 'customer_auth_var1' => 'v' } }
 
     # ip { ['127.0.0.0/8'] } # default
     src_number_field_id { 1 }

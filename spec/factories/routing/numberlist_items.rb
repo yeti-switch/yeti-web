@@ -15,6 +15,7 @@
 #  src_rewrite_result   :string
 #  src_rewrite_rule     :string
 #  tag_action_value     :integer(2)       default([]), not null, is an Array
+#  variables            :jsonb
 #  created_at           :timestamptz
 #  updated_at           :timestamptz
 #  action_id            :integer(2)
@@ -42,6 +43,7 @@ FactoryBot.define do
     association :lua_script
 
     action_id { Routing::NumberlistItem::ACTION_REJECT }
+    variables { { 'numberlist_item_var1' => 'value' } }
 
     trait :filled do
       tag_action { Routing::TagAction.take }

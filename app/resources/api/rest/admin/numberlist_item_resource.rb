@@ -7,7 +7,8 @@ class Api::Rest::Admin::NumberlistItemResource < ::BaseResource
              :action_id,
              :src_rewrite_rule, :src_rewrite_result, :defer_src_rewrite,
              :dst_rewrite_rule, :dst_rewrite_result, :defer_dst_rewrite,
-             :tag_action_value, :created_at, :updated_at
+             :tag_action_value, :variables,
+             :created_at, :updated_at
 
   paginator :paged
 

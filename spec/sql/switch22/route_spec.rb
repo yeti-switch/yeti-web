@@ -448,7 +448,8 @@ RSpec.describe '#routing logic' do
                           stir_shaken_crt_id: customer_auth_stir_shaken_crt_id,
                           privacy_mode_id: customer_auth_privacy_mode_id,
                           src_name_field_id: customer_auth_src_name_field_id,
-                          src_number_field_id: customer_auth_src_number_field_id)
+                          src_number_field_id: customer_auth_src_number_field_id,
+                          variables: customer_auth_variables)
       end
 
       let!(:customer_auth_check_account_balance) { true }
@@ -480,6 +481,7 @@ RSpec.describe '#routing logic' do
       let(:customer_auth_privacy_mode_id) { CustomersAuth::PRIVACY_MODE_REJECT_ANONYMOUS }
       let(:customer_auth_src_name_field_id) { CustomersAuth::SRC_NAME_FIELD_FROM_DSP }
       let(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_FROM_USERPART }
+      let(:customer_auth_variables) { {} }
 
       let(:remote_ip) { '1.1.1.1' }
       let(:x_orig_ip) { '3.3.3.3' }
@@ -577,6 +579,7 @@ RSpec.describe '#routing logic' do
                enabled: customer_gw_enabled,
                allow_origination: true,
                orig_append_headers_reply: orig_append_headers_reply,
+               orig_append_headers_req: orig_append_headers_req,
                orig_disconnect_policy_id: orig_disconnect_policy.id,
                incoming_auth_username: customer_gw_incoming_auth_username,
                incoming_auth_password: customer_gw_incoming_auth_password)
@@ -591,6 +594,7 @@ RSpec.describe '#routing logic' do
       }
 
       let!(:orig_append_headers_reply) { [] }
+      let!(:orig_append_headers_req) { [] }
 
       let!(:rate_group) { create(:rate_group) }
       let!(:rateplan) { create(:rateplan, rate_groups: [rate_group]) }
@@ -4928,6 +4932,83 @@ RSpec.describe '#routing logic' do
             expect(subject.size).to eq(2)
             expect(subject.first[:legb_res].split(';')).to eq(expected_resources)
             expect(subject.second[:disconnect_code_id]).to eq(113) # last profile with route not found error
+          end
+        end
+      end
+
+      context 'Authorized, Variables processing' do
+        let!(:nl) {
+          create(:numberlist,
+                 mode_id: nl_mode,
+                 default_action_id: Routing::Numberlist::DEFAULT_ACTION_ACCEPT,
+                 variables: { 'dst_numberlist' => '1' })
+        }
+        let!(:nl_item) {
+          create(:numberlist_item,
+                 numberlist_id: nl.id,
+                 key: '12345678',
+                 action_id: Routing::NumberlistItem::ACTION_ACCEPT,
+                 variables: { 'dst_numberlist_item' => '1' })
+        }
+
+        let(:customer_auth_dst_numberlist_id) { nl.id }
+        let(:customer_auth_variables) { { 'host' => 'test', 'customer_auth_var1' => '1' } }
+
+        let(:uri_name) { '12345678' }
+        let(:vendor_gw_host) { 'var-{{vars.host}}-domain.com' }
+        let(:vendor_gw_term_append_headers_req) { ['X-Host: {{vars.host}}', 'X-Item: {{vars.customer_auth_var1}}', 'X-No: 1'] }
+        let!(:expected_term_append_headers_req) {
+          [
+            'X-Host: test',
+            'X-Item: 1',
+            'X-No: 1'
+          ].join('\r\n')
+        }
+
+        let!(:orig_append_headers_reply) { ['X-Orig-Reply: {{vars.host}}', 'X-Item: {{vars.customer_auth_var1}}', 'X-No: 1'] }
+        let!(:expected_orig_append_headers_reply) {
+          [
+            'X-Orig-Reply: test',
+            'X-Item: 1',
+            'X-No: 1'
+          ].join('\r\n')
+        }
+
+        let!(:orig_append_headers_req) { ['X-Orig-Req: {{vars.host}}', 'X-Item: {{vars.customer_auth_var1}}', 'X-No: 1'] }
+        let!(:expected_orig_append_headers_req) {
+          [
+            'X-Orig-Req: test',
+            'X-Item: 1',
+            'X-No: 1'
+          ].join('\r\n')
+        }
+
+        context 'not matched ITEM in strict mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          let(:uri_name) { '122' }
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:ruri]).to eq('sip:122@var-test-domain.com')
+            expect(subject.first[:append_headers_req]).to eq(expected_term_append_headers_req)
+            expect(subject.first[:aleg_append_headers_req]).to eq(expected_orig_append_headers_req)
+            expect(subject.first[:aleg_append_headers_reply]).to eq(expected_orig_append_headers_reply)
+            expect(subject.first[:metadata]).to eq('{"vars": {"host": "test", "dst_numberlist": "1", "customer_auth_var1": "1"}}')
+            expect(subject.first[:disconnect_code_id]).not_to eq(8001)
+          end
+        end
+
+        context 'matched ITEM in strict mode' do
+          let(:nl_mode) { Routing::Numberlist::MODE_STRICT }
+          let(:ni_action_id) { Routing::NumberlistItem::ACTION_ACCEPT }
+
+          it 'reject by dst numberlist' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:ruri]).to eq('sip:12345678@var-test-domain.com')
+            expect(subject.first[:append_headers_req]).to eq(expected_term_append_headers_req)
+            expect(subject.first[:aleg_append_headers_req]).to eq(expected_orig_append_headers_req)
+            expect(subject.first[:aleg_append_headers_reply]).to eq(expected_orig_append_headers_reply)
+            expect(subject.first[:metadata]).to eq('{"vars": {"host": "test", "customer_auth_var1": "1", "dst_numberlist_item": "1"}}')
+            expect(subject.first[:disconnect_code_id]).not_to eq(8001)
           end
         end
       end
