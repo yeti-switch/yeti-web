@@ -32,6 +32,13 @@ CREATE SCHEMA data_import;
 
 
 --
+-- Name: dns; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA dns;
+
+
+--
 -- Name: gui; Type: SCHEMA; Schema: -; Owner: -
 --
 
@@ -43606,6 +43613,77 @@ ALTER SEQUENCE data_import.import_routing_tag_detection_rules_id_seq OWNED BY da
 
 
 --
+-- Name: dns_records; Type: TABLE; Schema: dns; Owner: -
+--
+
+CREATE TABLE dns.dns_records (
+    id integer NOT NULL,
+    zone_id smallint NOT NULL,
+    name character varying NOT NULL,
+    record_type character varying NOT NULL,
+    content character varying NOT NULL,
+    contractor_id integer
+);
+
+
+--
+-- Name: dns_records_id_seq; Type: SEQUENCE; Schema: dns; Owner: -
+--
+
+CREATE SEQUENCE dns.dns_records_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: dns_records_id_seq; Type: SEQUENCE OWNED BY; Schema: dns; Owner: -
+--
+
+ALTER SEQUENCE dns.dns_records_id_seq OWNED BY dns.dns_records.id;
+
+
+--
+-- Name: dns_zones; Type: TABLE; Schema: dns; Owner: -
+--
+
+CREATE TABLE dns.dns_zones (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    soa_mname character varying NOT NULL,
+    soa_rname character varying NOT NULL,
+    serial bigint DEFAULT 0 NOT NULL,
+    refresh smallint DEFAULT 600 NOT NULL,
+    retry smallint DEFAULT 600 NOT NULL,
+    expire smallint DEFAULT 1800 NOT NULL,
+    minimum smallint DEFAULT 3600 NOT NULL
+);
+
+
+--
+-- Name: dns_zones_id_seq; Type: SEQUENCE; Schema: dns; Owner: -
+--
+
+CREATE SEQUENCE dns.dns_zones_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: dns_zones_id_seq; Type: SEQUENCE OWNED BY; Schema: dns; Owner: -
+--
+
+ALTER SEQUENCE dns.dns_zones_id_seq OWNED BY dns.dns_zones.id;
+
+
+--
 -- Name: active_admin_comments; Type: TABLE; Schema: gui; Owner: -
 --
 
@@ -46233,6 +46311,20 @@ ALTER TABLE ONLY data_import.import_routing_tag_detection_rules ALTER COLUMN id 
 
 
 --
+-- Name: dns_records id; Type: DEFAULT; Schema: dns; Owner: -
+--
+
+ALTER TABLE ONLY dns.dns_records ALTER COLUMN id SET DEFAULT nextval('dns.dns_records_id_seq'::regclass);
+
+
+--
+-- Name: dns_zones id; Type: DEFAULT; Schema: dns; Owner: -
+--
+
+ALTER TABLE ONLY dns.dns_zones ALTER COLUMN id SET DEFAULT nextval('dns.dns_zones_id_seq'::regclass);
+
+
+--
 -- Name: active_admin_comments id; Type: DEFAULT; Schema: gui; Owner: -
 --
 
@@ -47710,6 +47802,30 @@ ALTER TABLE ONLY data_import.import_routing_tag_detection_rules
 
 
 --
+-- Name: dns_records dns_records_pkey; Type: CONSTRAINT; Schema: dns; Owner: -
+--
+
+ALTER TABLE ONLY dns.dns_records
+    ADD CONSTRAINT dns_records_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dns_zones dns_zones_name_key; Type: CONSTRAINT; Schema: dns; Owner: -
+--
+
+ALTER TABLE ONLY dns.dns_zones
+    ADD CONSTRAINT dns_zones_name_key UNIQUE (name);
+
+
+--
+-- Name: dns_zones dns_zones_pkey; Type: CONSTRAINT; Schema: dns; Owner: -
+--
+
+ALTER TABLE ONLY dns.dns_zones
+    ADD CONSTRAINT dns_zones_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: active_admin_comments admin_notes_pkey; Type: CONSTRAINT; Schema: gui; Owner: -
 --
 
@@ -49055,6 +49171,20 @@ CREATE INDEX index_import_routing_tag_detection_rules_on_tag_action_id ON data_i
 
 
 --
+-- Name: dns_records_contractor_id_idx; Type: INDEX; Schema: dns; Owner: -
+--
+
+CREATE INDEX dns_records_contractor_id_idx ON dns.dns_records USING btree (contractor_id);
+
+
+--
+-- Name: dns_records_zone_id_idx; Type: INDEX; Schema: dns; Owner: -
+--
+
+CREATE INDEX dns_records_zone_id_idx ON dns.dns_records USING btree (zone_id);
+
+
+--
 -- Name: admin_users_username_idx; Type: INDEX; Schema: gui; Owner: -
 --
 
@@ -50197,6 +50327,22 @@ ALTER TABLE ONLY data_import.import_routing_tag_detection_rules
 
 
 --
+-- Name: dns_records dns_records_contractor_id_fkey; Type: FK CONSTRAINT; Schema: dns; Owner: -
+--
+
+ALTER TABLE ONLY dns.dns_records
+    ADD CONSTRAINT dns_records_contractor_id_fkey FOREIGN KEY (contractor_id) REFERENCES public.contractors(id);
+
+
+--
+-- Name: dns_records dns_records_zone_id_fkey; Type: FK CONSTRAINT; Schema: dns; Owner: -
+--
+
+ALTER TABLE ONLY dns.dns_records
+    ADD CONSTRAINT dns_records_zone_id_fkey FOREIGN KEY (zone_id) REFERENCES dns.dns_zones(id);
+
+
+--
 -- Name: contacts contacts_admin_user_id_fkey; Type: FK CONSTRAINT; Schema: notifications; Owner: -
 --
 
@@ -50483,6 +50629,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260107132155'),
 ('20251230213442'),
 ('20251230174136'),
 ('20251225102356'),

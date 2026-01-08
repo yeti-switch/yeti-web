@@ -10,6 +10,7 @@ ActiveAdmin.setup do |config|
       menu.add label: 'Equipment', priority: 30 do |sub_menu|
         sub_menu.add label: 'RADIUS', priority: 900
         sub_menu.add label: 'STIR/SHAKEN', priority: 1000
+        sub_menu.add label: 'DNS', priority: 2000
       end
       menu.add label: 'Routing', priority: 40
       menu.add label: 'CDR', priority: 50
