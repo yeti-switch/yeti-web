@@ -29,6 +29,5 @@ FactoryBot.define do
 
     association :zone, factory: :dns_zone
     association :contractor, factory: :contractor, customer: true
-
   end
 end

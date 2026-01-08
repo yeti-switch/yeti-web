@@ -25,10 +25,9 @@ RSpec.describe 'Export Dns Zones', type: :feature do
                            ['Serial', item.serial.to_s],
                            ['Expire', item.expire.to_s],
                            ['Refresh', item.refresh.to_s],
-                           ['Retry', item.retry.to_s ],
-                           ['Minimum', item.minimum.to_s ]
+                           ['Retry', item.retry.to_s],
+                           ['Minimum', item.minimum.to_s]
                          ]
                        )
   end
-
 end

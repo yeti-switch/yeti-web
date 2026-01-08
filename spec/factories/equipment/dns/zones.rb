@@ -21,8 +21,7 @@
 FactoryBot.define do
   factory :dns_zone, class: 'Equipment::Dns::Zone' do
     sequence(:name) { |n| "zone#{n}.tld" }
-    soa_rname { 'admin.example.com'}
-    soa_mname { 'ns1.example.com'}
-
+    soa_rname { 'admin.example.com' }
+    soa_mname { 'ns1.example.com' }
   end
 end

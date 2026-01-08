@@ -27,5 +27,4 @@ RSpec.describe 'Export Dns Records', type: :feature do
                          ]
                        )
   end
-
 end
