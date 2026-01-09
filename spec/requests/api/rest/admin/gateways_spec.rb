@@ -536,6 +536,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'rtp-force-relay-cn': gateway.rtp_force_relay_cn,
         'incoming-auth-username': gateway.incoming_auth_username,
         'incoming-auth-password': gateway.incoming_auth_password,
+        'incoming-auth-allow-jwt': gateway.incoming_auth_allow_jwt,
         'force-cancel-routeset': gateway.force_cancel_routeset,
         'sip-schema-id': gateway.sip_schema_id,
         'ice-mode-id': gateway.ice_mode_id,
