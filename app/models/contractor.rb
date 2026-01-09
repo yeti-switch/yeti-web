@@ -44,6 +44,8 @@ class Contractor < ApplicationRecord
            foreign_key: :vendor_id
 
   has_many :traffic_sampling_rules, class_name: 'Routing::TrafficSamplingRule', foreign_key: :customer_id, dependent: :destroy
+  has_many :dns_records, class_name: 'Equipment::Dns::Record', foreign_key: :contractor_id, dependent: :destroy
+  has_many :routing_routing_plan_static_routes, class_name: 'Routing::RoutingPlanStaticRoute', foreign_key: :vendor_id, dependent: :destroy
 
   belongs_to :smtp_connection, class_name: 'System::SmtpConnection', optional: true
 
