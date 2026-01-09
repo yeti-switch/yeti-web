@@ -17,7 +17,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :force_symmetric_rtp, :symmetric_rtp_nonstop,
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
              :rtp_force_relay_cn, :preserve_anonymous_from_domain, :registered_aor_mode_id,
-             :incoming_auth_username, :incoming_auth_password, :origination_capacity, :termination_capacity,
+             :incoming_auth_username, :incoming_auth_password, :incoming_auth_allow_jwt,
+             :origination_capacity, :termination_capacity,
              :force_cancel_routeset, :sip_schema_id, :ice_mode_id, :rtcp_mux_mode_id, :rtcp_feedback_mode_id
 
   paginator :paged
@@ -154,6 +155,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :max_transfers, type: :number
   ransack_filter :incoming_auth_username, type: :string
   ransack_filter :incoming_auth_password, type: :string
+  ransack_filter :incoming_auth_allow_jwt, type: :boolean
   ransack_filter :preserve_anonymous_from_domain, type: :boolean
   ransack_filter :registered_aor_mode_id, type: :number
   ransack_filter :weight, type: :number
@@ -258,6 +260,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       termination_capacity
       incoming_auth_username
       incoming_auth_password
+      incoming_auth_allow_jwt
       force_cancel_routeset
     ]
   end
