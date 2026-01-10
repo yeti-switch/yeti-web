@@ -4,7 +4,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
   menu parent: 'Equipment', priority: 82, label: 'SIP Options probers'
   config.batch_actions = true
 
-  includes :pop, :node, :transport_protocol, :proxy_transport_protocol
+  includes :pop, :node, :transport_protocol
 
   acts_as_audit
   acts_as_export :id, :name, :enabled,
@@ -17,8 +17,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
                  :from_uri,
                  :to_uri,
                  :auth_username,
-                 :proxy,
-                 [:proxy_transport_protocol_name, proc { |row| row.proxy_transport_protocol.try(:name) }],
+                 :route_set,
                  :contact_uri,
                  :interval,
                  :sip_interface_name,
@@ -31,8 +30,8 @@ ActiveAdmin.register Equipment::SipOptionsProber do
 
   permit_params :name, :enabled, :pop_id, :node_id,
                 :ruri_domain, :ruri_username, :from_uri, :to_uri, :contact_uri,
-                :auth_username, :proxy, :auth_password,
-                :transport_protocol_id, :proxy_transport_protocol_id, :sip_schema_id, :append_headers,
+                :auth_username, :route_set, :auth_password,
+                :transport_protocol_id, :sip_schema_id, :append_headers,
                 :interval, :sip_interface_name
 
   index do
@@ -50,8 +49,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
     column :from_uri
     column :to_uri
     column :auth_username
-    column :proxy
-    column :proxy_transport_protocol
+    column :route_set
     column :contact_uri
     column :interval
     column :sip_interface_name
@@ -88,8 +86,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       if authorized?(:allow_auth_credentials)
         f.input :auth_password, as: :string
       end
-      f.input :proxy
-      f.input :proxy_transport_protocol, as: :select, include_blank: false
+      f.input :route_set
       f.input :contact_uri
       f.input :interval
       f.input :sip_interface_name
@@ -114,8 +111,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       if authorized?(:allow_auth_credentials)
         row :auth_password
       end
-      row :proxy
-      row :proxy_transport_protocol
+      row :route_set
       row :contact_uri
       row :interval
       row :sip_interface_name
