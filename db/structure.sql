@@ -31838,7 +31838,7 @@ $$;
 -- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_proxy character varying, o_proxy_transport_protocol_id smallint, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint, o_sip_interface_name character varying)
+CREATE FUNCTION switch22.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_route_set character varying, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint, o_sip_interface_name character varying)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -31851,8 +31851,7 @@ BEGIN
     "display_username",
     auth_user,
     auth_password,
-    proxy,
-    proxy_transport_protocol_id,
+    array_to_string(route_set, ',') as route_set,
     contact,
     expire,
     force_expire,
@@ -31926,7 +31925,7 @@ $$;
 -- Name: load_sip_options_probers(integer, integer); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.load_sip_options_probers(i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(id integer, name character varying, ruri_domain character varying, ruri_username character varying, transport_protocol_id smallint, sip_schema_id smallint, from_uri character varying, to_uri character varying, contact_uri character varying, proxy character varying, proxy_transport_protocol_id smallint, "interval" smallint, append_headers character varying, sip_interface_name character varying, auth_username character varying, auth_password character varying, created_at timestamp with time zone, updated_at timestamp with time zone)
+CREATE FUNCTION switch22.load_sip_options_probers(i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(id integer, name character varying, ruri_domain character varying, ruri_username character varying, transport_protocol_id smallint, sip_schema_id smallint, from_uri character varying, to_uri character varying, contact_uri character varying, route_set character varying, "interval" smallint, append_headers character varying, sip_interface_name character varying, auth_username character varying, auth_password character varying, created_at timestamp with time zone, updated_at timestamp with time zone)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -31941,8 +31940,7 @@ BEGIN
         o.from_uri,
         o.to_uri,
         o.contact_uri,
-        o.proxy,
-        o.proxy_transport_protocol_id,
+        array_to_string(o.route_set, ',') as route_set,
         o.interval,
         o.append_headers,
         o.sip_interface_name,
@@ -42134,7 +42132,6 @@ CREATE TABLE class4.registrations (
     username character varying NOT NULL,
     display_username character varying,
     auth_user character varying,
-    proxy character varying,
     contact character varying,
     auth_password character varying,
     expire integer,
@@ -42142,9 +42139,9 @@ CREATE TABLE class4.registrations (
     retry_delay smallint DEFAULT 5 NOT NULL,
     max_attempts smallint,
     transport_protocol_id smallint DEFAULT 1 NOT NULL,
-    proxy_transport_protocol_id smallint DEFAULT 1 NOT NULL,
     sip_schema_id smallint DEFAULT 1 NOT NULL,
-    sip_interface_name character varying
+    sip_interface_name character varying,
+    route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL
 );
 
 
@@ -42489,8 +42486,6 @@ CREATE TABLE class4.sip_options_probers (
     from_uri character varying,
     to_uri character varying,
     contact_uri character varying,
-    proxy character varying,
-    proxy_transport_protocol_id smallint DEFAULT 1 NOT NULL,
     "interval" smallint DEFAULT 60 NOT NULL,
     append_headers character varying,
     sip_interface_name character varying,
@@ -42498,7 +42493,8 @@ CREATE TABLE class4.sip_options_probers (
     auth_password character varying,
     created_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone NOT NULL,
-    external_id bigint
+    external_id bigint,
+    route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL
 );
 
 
@@ -50151,14 +50147,6 @@ ALTER TABLE ONLY class4.registrations
 
 
 --
--- Name: registrations registrations_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.registrations
-    ADD CONSTRAINT registrations_proxy_transport_protocol_id_fkey FOREIGN KEY (proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
-
-
---
 -- Name: registrations registrations_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -50268,14 +50256,6 @@ ALTER TABLE ONLY class4.sip_options_probers
 
 ALTER TABLE ONLY class4.sip_options_probers
     ADD CONSTRAINT sip_options_probers_pop_id_fkey FOREIGN KEY (pop_id) REFERENCES sys.pops(id);
-
-
---
--- Name: sip_options_probers sip_options_probers_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.sip_options_probers
-    ADD CONSTRAINT sip_options_probers_proxy_transport_protocol_id_fkey FOREIGN KEY (proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
 
 
 --
@@ -50629,6 +50609,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260110104141'),
 ('20260107132155'),
 ('20251230213442'),
 ('20251230174136'),
