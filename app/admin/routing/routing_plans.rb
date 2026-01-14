@@ -10,7 +10,7 @@ ActiveAdmin.register Routing::RoutingPlan do
   acts_as_async_destroy('Routing::RoutingPlan')
   acts_as_async_update BatchUpdateForm::RoutingPlan
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
   acts_as_export :id,
                  :name,
                  :sorting_name,

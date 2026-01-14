@@ -6,7 +6,7 @@ ActiveAdmin.register Lnp::Cache do
 
   acts_as_safe_destroy
   acts_as_async_destroy('Lnp::Cache')
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   acts_as_export :id, :dst, :lrn, :tag, :created_at, :expires_at
 

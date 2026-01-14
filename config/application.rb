@@ -15,6 +15,7 @@ require 'action_mailer/railtie'
 require 'action_view/railtie'
 # require 'action_cable/engine'
 # require 'rails/test_unit/railtie'
+require 'good_job/engine'
 
 # custom
 require_relative '../lib/capture_error'
@@ -87,8 +88,18 @@ module Yeti
       to: 'backtrace@yeti-switch.org'
     }
 
-    config.active_job.queue_adapter = :delayed_job
+    config.active_job.queue_adapter = :good_job
     config.active_job.enqueue_after_transaction_commit = :never
+
+    # GOOD_JOB_EXECUTION_MODE=async to run in puma web server (single mode)
+    config.good_job.execution_mode = ENV.fetch('GOOD_JOB_EXECUTION_MODE', :external).to_sym
+    config.good_job.preserve_job_records = :on_unhandled_error
+    config.good_job.smaller_number_is_higher_priority = true
+    config.good_job.probe_app = ->(_env) { [200, {}, ['OK']] }
+    config.good_job.probe_handler = 'webrick'
+    config.good_job.on_thread_error = lambda { |exception|
+      CaptureError.capture(exception, tags: { component: 'good_job' })
+    }
 
     # Use RSpec for testing
     config.generators do |g|

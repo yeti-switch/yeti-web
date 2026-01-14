@@ -217,7 +217,7 @@ ActiveAdmin.before_load do
   ActiveAdmin::ResourceDSL.include ResourceDSL::BatchActionUpdate
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncDestroy
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsAsyncUpdate
-  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsDelayedJobLock
+  ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsGoodJobLock
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsFilterByRoutingTagIds
   ActiveAdmin::ResourceDSL.include ResourceDSL::ActsAsBelongsTo
   ActiveAdmin::ResourceDSL.include ResourceDSL::WithDefaultParams

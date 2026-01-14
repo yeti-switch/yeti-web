@@ -10,7 +10,7 @@ ActiveAdmin.register CustomersAuth do
   acts_as_async_destroy('CustomersAuth')
   acts_as_async_update BatchUpdateForm::CustomersAuth
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   search_support!(search_name: :search_with_return_external_id, id_column: :external_id)
   search_support!

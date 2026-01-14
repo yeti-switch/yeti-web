@@ -31,7 +31,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     head 200
   end
 
-  acts_as_delayed_job_lock
+  acts_as_good_job_lock
 
   decorate_with DestinationDecorator
 
