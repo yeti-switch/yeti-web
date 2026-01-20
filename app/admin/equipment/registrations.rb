@@ -4,7 +4,7 @@ ActiveAdmin.register Equipment::Registration do
   menu parent: 'Equipment', priority: 81, label: 'Registrations'
   config.batch_actions = true
 
-  includes :pop, :node, :transport_protocol, :proxy_transport_protocol
+  includes :pop, :node, :transport_protocol
 
   acts_as_audit
 
@@ -18,8 +18,7 @@ ActiveAdmin.register Equipment::Registration do
                  :username,
                  :display_username,
                  :auth_user,
-                 :proxy,
-                 [:proxy_transport_protocol_name, proc { |row| row.proxy_transport_protocol.try(:name) }],
+                 :route_set,
                  :contact,
                  :expire,
                  :force_expire,
@@ -32,10 +31,10 @@ ActiveAdmin.register Equipment::Registration do
   acts_as_status
 
   permit_params :name, :enabled, :pop_id, :node_id, :domain, :username, :display_username,
-                :auth_user, :proxy, :contact,
+                :auth_user, :route_set, :contact,
                 :auth_password,
                 :expire, :force_expire,
-                :retry_delay, :max_attempts, :transport_protocol_id, :proxy_transport_protocol_id, :sip_schema_id,
+                :retry_delay, :max_attempts, :transport_protocol_id, :sip_schema_id,
                 :sip_interface_name
 
   index do
@@ -53,8 +52,7 @@ ActiveAdmin.register Equipment::Registration do
     column :username
     column :display_username
     column :auth_user
-    column :proxy
-    column :proxy_transport_protocol
+    column :route_set
     column :contact
     column :expire
     column :force_expire
@@ -97,8 +95,9 @@ ActiveAdmin.register Equipment::Registration do
       if authorized?(:allow_auth_credentials)
         f.input :auth_password, as: :string
       end
-      f.input :proxy
-      f.input :proxy_transport_protocol, as: :select, include_blank: false
+
+      f.input :route_set, as: :newline_array_of_headers
+
       f.input :contact
       f.input :expire
       f.input :force_expire
@@ -125,8 +124,7 @@ ActiveAdmin.register Equipment::Registration do
       if authorized?(:allow_auth_credentials)
         row :auth_password
       end
-      row :proxy
-      row :proxy_transport_protocol
+      row :route_set
       row :contact
       row :expire
       row :force_expire

@@ -42,8 +42,7 @@ RSpec.describe 'switch22.load_registrations_out' do
                              o_display_name: registration.display_username,
                              o_auth_user: registration.auth_user,
                              o_auth_password: registration.auth_password,
-                             o_proxy: registration.proxy,
-                             o_proxy_transport_protocol_id: registration.proxy_transport_protocol_id,
+                             route_set: registration.route_set.join(','),
                              o_contact: registration.contact,
                              o_expire: registration.expire,
                              o_force_expire: registration.force_expire,
@@ -57,7 +56,7 @@ RSpec.describe 'switch22.load_registrations_out' do
   end
 
   context 'when specific i_registration_id is passed' do
-    let(:sql) { 'SELECT * FROM switch20.load_registrations_out(?, ?, ?)' }
+    let(:sql) { 'SELECT * FROM switch22.load_registrations_out(?, ?, ?)' }
     let(:sql_params) do
       [pop.id, node.id, registration.id]
     end
@@ -76,8 +75,7 @@ RSpec.describe 'switch22.load_registrations_out' do
                                  o_display_name: registration.display_username,
                                  o_auth_user: registration.auth_user,
                                  o_auth_password: registration.auth_password,
-                                 o_proxy: registration.proxy,
-                                 o_proxy_transport_protocol_id: registration.proxy_transport_protocol_id,
+                                 route_set: registration.route_set.join(','),
                                  o_contact: registration.contact,
                                  o_expire: registration.expire,
                                  o_force_expire: registration.force_expire,
@@ -131,8 +129,7 @@ RSpec.describe 'switch22.load_registrations_out' do
                                  o_display_name: registration.display_username,
                                  o_auth_user: registration.auth_user,
                                  o_auth_password: registration.auth_password,
-                                 o_proxy: registration.proxy,
-                                 o_proxy_transport_protocol_id: registration.proxy_transport_protocol_id,
+                                 route_set: registration.route_set.join(','),
                                  o_contact: registration.contact,
                                  o_expire: registration.expire,
                                  o_force_expire: registration.force_expire,
