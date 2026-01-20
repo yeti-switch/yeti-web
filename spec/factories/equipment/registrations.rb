@@ -40,6 +40,7 @@ FactoryBot.define do
     domain { 'localhost' }
     username { 'user name' }
     contact { 'sip:user@domain' }
+    route_set { ['sip:user@proxy-domain1', 'sip:user@proxy-domain2'] }
     sip_schema_id { 1 }
 
     trait :filled do

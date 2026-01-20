@@ -16,12 +16,12 @@ shared_context :init_importing_registration do |args|
       display_username: '',
       auth_user: '5675765',
       contact: 'sip:576567576576@10.9.0.82:5060',
+      route_set: ['sip:user@proxy-domain6', 'sip:user@proxy-domain5'],
       auth_password: '6897878968',
       force_expire: false,
       retry_delay: 123,
       max_attempts: 123,
       transport_protocol_id: 1,
-      proxy_transport_protocol_id: 1,
       sip_schema_id: 1,
       is_changed: true
     }.merge(args)

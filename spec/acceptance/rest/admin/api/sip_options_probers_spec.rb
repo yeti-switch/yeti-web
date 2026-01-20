@@ -15,7 +15,7 @@ RSpec.resource 'Sip options prober' do
     enabled
     from-uri
     interval
-    proxy
+    route-set
     sip-interface-name
     sip-schema-id
     to-uri
@@ -24,7 +24,7 @@ RSpec.resource 'Sip options prober' do
     external-id
   ]
 
-  required_relationships = %i[transport-protocol proxy-transport-protocol]
+  required_relationships = %i[transport-protocol]
   optional_relationships = %i[node pop]
 
   get '/api/rest/admin/sip-options-probers' do
@@ -56,7 +56,6 @@ RSpec.resource 'Sip options prober' do
     let(:'ruri-domain') { 'ruri-domain' }
 
     let(:'transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
-    let(:'proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'sip-schema') { 1 }
 
     example_request 'create new entry' do

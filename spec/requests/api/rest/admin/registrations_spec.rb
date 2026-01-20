@@ -24,7 +24,7 @@ RSpec.describe Api::Rest::Admin::RegistrationsController do
                                         'force-expire': registration.force_expire,
                                         'max-attempts': registration.max_attempts,
                                         name: registration.name,
-                                        proxy: registration.proxy,
+                                        'route-set': registration.route_set,
                                         'retry-delay': registration.retry_delay,
                                         'sip-interface-name': registration.sip_interface_name,
                                         'sip-schema-id': registration.sip_schema_id,
@@ -33,8 +33,7 @@ RSpec.describe Api::Rest::Admin::RegistrationsController do
       expect(response_json[:data]).to have_jsonapi_relationships(
                                         :pop,
                                         :node,
-                                        :'transport-protocol',
-                                        :'proxy-transport-protocol'
+                                        :'transport-protocol'
                                       )
     end
   end
@@ -82,15 +81,14 @@ RSpec.describe Api::Rest::Admin::RegistrationsController do
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:pop)
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:node)
         expect(response_json[:data]).to_not have_jsonapi_relationship_data(:'transport-protocol')
-        expect(response_json[:data]).to_not have_jsonapi_relationship_data(:'proxy-transport-protocol')
       end
 
       include_examples :responds_with_status, 200
       include_examples :responds_jsonapi_registration
     end
 
-    context 'with include pop,transport-protocol,proxy-transport-protocol' do
-      let(:request_params) { { include: 'pop,transport-protocol,proxy-transport-protocol,node' } }
+    context 'with include pop,transport-protocol' do
+      let(:request_params) { { include: 'pop,transport-protocol,node' } }
 
       it 'responds correct included relationships' do
         subject
@@ -122,16 +120,6 @@ RSpec.describe Api::Rest::Admin::RegistrationsController do
                                         )
         expect(response_json[:included]).to have_jsonapi_data_item(
                                               registration.transport_protocol_id,
-                                              'transport-protocols'
-                                            )
-
-        expect(response_json[:data]).to have_jsonapi_relationship_data(
-                                          :'proxy-transport-protocol',
-                                          id: registration.proxy_transport_protocol_id,
-                                          type: 'transport-protocols'
-                                        )
-        expect(response_json[:included]).to have_jsonapi_data_item(
-                                              registration.proxy_transport_protocol_id,
                                               'transport-protocols'
                                             )
       end
@@ -180,14 +168,13 @@ RSpec.describe Api::Rest::Admin::RegistrationsController do
                                   force_expire: false,
                                   max_attempts: nil,
                                   name: json_api_request_attributes[:name],
-                                  proxy: nil,
+                                  route_set: [],
                                   retry_delay: 5,
                                   sip_interface_name: nil,
                                   username: json_api_request_attributes[:username],
                                   pop_id: nil,
                                   node_id: nil,
                                   transport_protocol_id: 1,
-                                  proxy_transport_protocol_id: 1,
                                   sip_schema_id: 1
                                 )
       end
@@ -209,7 +196,7 @@ RSpec.describe Api::Rest::Admin::RegistrationsController do
                       expire: 789,
                       'force-expire': true,
                       'max-attempts': 456,
-                      proxy: 'http://proxy.com:8123',
+                      'route-set': ['http://proxy.com:8123'],
                       'retry-delay': 123,
                       'sip-interface-name': 'sip interface name',
                       'sip-schema-id': 1
@@ -218,8 +205,7 @@ RSpec.describe Api::Rest::Admin::RegistrationsController do
         {
           node: jsonapi_relationship(nodes.first.id, 'nodes'),
           pop: jsonapi_relationship(nodes.first.pop_id, 'pops'),
-          'transport-protocol': jsonapi_relationship(transport_protocols.last.id, 'transport-protocols'),
-          'proxy-transport-protocol': jsonapi_relationship(transport_protocols.first.id, 'transport-protocols')
+          'transport-protocol': jsonapi_relationship(transport_protocols.last.id, 'transport-protocols')
         }
       end
 
@@ -236,14 +222,13 @@ RSpec.describe Api::Rest::Admin::RegistrationsController do
                                   force_expire: json_api_request_attributes[:'force-expire'],
                                   max_attempts: json_api_request_attributes[:'max-attempts'],
                                   name: json_api_request_attributes[:name],
-                                  proxy: json_api_request_attributes[:proxy],
+                                  route_set: json_api_request_attributes[:'route-set'],
                                   retry_delay: json_api_request_attributes[:'retry-delay'],
                                   sip_interface_name: json_api_request_attributes[:'sip-interface-name'],
                                   username: json_api_request_attributes[:username],
                                   pop_id: nodes.first.pop_id,
                                   node_id: nodes.first.id,
                                   transport_protocol_id: transport_protocols.last.id,
-                                  proxy_transport_protocol_id: transport_protocols.first.id,
                                   sip_schema_id: json_api_request_attributes[:'sip-schema-id']
                                 )
       end

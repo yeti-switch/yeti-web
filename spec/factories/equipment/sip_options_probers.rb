@@ -45,5 +45,12 @@ FactoryBot.define do
     sequence(:external_id) { |n| n }
     pop_id { nil }
     node_id { nil }
+
+    trait :filled do
+      node
+      pop
+      transport_protocol { Equipment::TransportProtocol.take }
+      sequence(:sip_interface_name) { |n| "interface_#{n}" }
+    end
   end
 end

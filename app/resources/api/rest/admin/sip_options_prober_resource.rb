@@ -12,7 +12,7 @@ class Api::Rest::Admin::SipOptionsProberResource < ::BaseResource
              :from_uri,
              :interval,
              :name,
-             :proxy,
+             :route_set,
              :ruri_domain,
              :ruri_username,
              :sip_interface_name,
@@ -24,6 +24,5 @@ class Api::Rest::Admin::SipOptionsProberResource < ::BaseResource
 
   has_one :node, class_name: 'Node'
   has_one :pop, class_name: 'Pop'
-  has_one :proxy_transport_protocol, class_name: 'TransportProtocol'
   has_one :transport_protocol, class_name: 'TransportProtocol'
 end

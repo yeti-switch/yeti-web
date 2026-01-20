@@ -29,27 +29,27 @@ class Routeset < ActiveRecord::Migration[7.2]
    DROP FUNCTION switch22.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer);
    CREATE FUNCTION switch22.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer)
    RETURNS TABLE(
-   o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_route_set character varying, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint, o_sip_interface_name character varying)
+   o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, route_set character varying, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint, o_sip_interface_name character varying)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
   RETURN QUERY
   SELECT
-    id,
-    transport_protocol_id,
-    "domain",
-    "username",
-    "display_username",
-    auth_user,
-    auth_password,
-    array_to_string(route_set, ',') as route_set,
-    contact,
-    expire,
-    force_expire,
-    retry_delay,
-    max_attempts,
-    sip_schema_id,
-    sip_interface_name
+    r.id,
+    r.transport_protocol_id,
+    r."domain",
+    r."username",
+    r."display_username",
+    r.auth_user,
+    r.auth_password,
+    array_to_string(r.route_set, ',')::varchar as route_set,
+    r.contact,
+    r.expire,
+    r.force_expire,
+    r.retry_delay,
+    r.max_attempts,
+    r.sip_schema_id,
+    r.sip_interface_name
   FROM class4.registrations r
   WHERE
     r.enabled and
@@ -77,7 +77,7 @@ BEGIN
         o.from_uri,
         o.to_uri,
         o.contact_uri,
-        array_to_string(o.route_set, ',') as route_set,
+        array_to_string(o.route_set, ',')::varchar as route_set,
         o.interval,
         o.append_headers,
         o.sip_interface_name,
@@ -98,7 +98,13 @@ BEGIN
 end;
 $$;
 
+      alter table data_import.import_registrations
+        add route_set varchar[] not null default '{}';
 
+     alter table data_import.import_registrations
+        drop column proxy,
+        drop column proxy_transport_protocol_name,
+        drop column proxy_transport_protocol_id;
 
     }
   end
@@ -190,6 +196,13 @@ BEGIN
 end;
 $$;
 
+      alter table data_import.import_registrations
+        drop column route_set;
+
+      alter table data_import.import_registrations
+        add proxy varchar,
+        add proxy_transport_protocol_name varchar,
+        add proxy_transport_protocol_id smallint
     }
   end
 
