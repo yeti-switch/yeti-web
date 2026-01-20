@@ -137,7 +137,7 @@ group :test do
 end
 gem 'bootsnap', require: false
 
-gem 'httparty', '~> 0.21.0'
+gem 'httparty', '>= 0.24.0'
 
 gem 'matrix', '~> 0.4.2'
 
