@@ -185,6 +185,16 @@ ActiveAdmin.register Account do
             column :notes
           end
         end
+
+        panel 'Last Transactions' do
+          table_for s.transactions.last(10).reverse do
+            column :id
+            column :created_at
+            column :amount
+            column :description
+            column :service
+          end
+        end
       end
 
       tab 'Comments' do
