@@ -5,10 +5,10 @@ class Routeset < ActiveRecord::Migration[7.2]
       alter table class4.registrations
         add route_set varchar[] not null default '{}';
 
-      update class4.registrations set route_set='{'||proxy||';transport=udp}'::varchar::varchar[] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=1;
-      update class4.registrations set route_set='{'||proxy||';transport=tcp}'::varchar::varchar[] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=2;
-      update class4.registrations set route_set='{'||proxy||';transport=tls}'::varchar::varchar[] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=3;
-      update class4.registrations set route_set='{'||proxy||';transport=ws}'::varchar::varchar[] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=5;
+      update class4.registrations set route_set=ARRAY[proxy||';transport=udp'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=1;
+      update class4.registrations set route_set=ARRAY[proxy||';transport=tcp'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=2;
+      update class4.registrations set route_set=ARRAY[proxy||';transport=tls'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=3;
+      update class4.registrations set route_set=ARRAY[proxy||';transport=ws'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=5;
 
       alter table class4.registrations
         drop column proxy,
@@ -17,10 +17,10 @@ class Routeset < ActiveRecord::Migration[7.2]
       alter table class4.sip_options_probers
         add route_set varchar[] not null default '{}';
 
-      update class4.sip_options_probers set route_set='{'||proxy||';transport=udp}'::varchar::varchar[] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=1;
-      update class4.sip_options_probers set route_set='{'||proxy||';transport=tcp}'::varchar::varchar[] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=2;
-      update class4.sip_options_probers set route_set='{'||proxy||';transport=tls}'::varchar::varchar[] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=3;
-      update class4.sip_options_probers set route_set='{'||proxy||';transport=ws}'::varchar::varchar[] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=5;
+      update class4.sip_options_probers set route_set=ARRAY[proxy||';transport=udp'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=1;
+      update class4.sip_options_probers set route_set=ARRAY[proxy||';transport=tcp'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=2;
+      update class4.sip_options_probers set route_set=ARRAY[proxy||';transport=tls'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=3;
+      update class4.sip_options_probers set route_set=ARRAY[proxy||';transport=ws'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=5;
 
       alter table class4.sip_options_probers
         drop column proxy,
