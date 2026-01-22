@@ -20,18 +20,16 @@ module AdminApi
                      :send_invoices_to,
                      :contractor_id,
                      :timezone,
-                     :invoice_template_id
+                     :invoice_template_id,
+                     :invoice_period_id
 
-    attribute :invoice_period, :string
     attribute :balance_low_threshold, :decimal
     attribute :balance_high_threshold, :decimal
     attribute :send_balance_notifications_to, :integer, array: true
 
     after_initialize :assign_from_model
     validate :validate_balance_thresholds
-    validates :invoice_period, inclusion: { in: Billing::InvoicePeriod.pluck(:name) }, allow_blank: true
     after_save :save_balance_notification_setting
-    before_save :apply_invoice_period
 
     def send_invoices_to=(value)
       model.send_invoices_to = Array.wrap(value).reject(&:blank?).presence
@@ -48,8 +46,6 @@ module AdminApi
       self.balance_low_threshold = model.balance_notification_setting.low_threshold
       self.balance_high_threshold = model.balance_notification_setting.high_threshold
       self.send_balance_notifications_to = model.balance_notification_setting.send_to
-
-      self.invoice_period = model.invoice_period&.name
     end
 
     def save_balance_notification_setting
@@ -65,20 +61,6 @@ module AdminApi
 
       if balance_low_threshold >= balance_high_threshold
         errors.add(:balance_low_threshold, 'must be less than balance high threshold')
-      end
-    end
-
-    def apply_invoice_period
-      model.invoice_period_id = Billing::InvoicePeriod.find_by_name(invoice_period)&.id
-      return unless model.invoice_period_id_changed?
-
-      if model.invoice_period
-        invoice_params = BillingInvoice::CalculatePeriod::Current.call(account: model)
-        model.next_invoice_at = invoice_params[:end_time]
-        model.next_invoice_type_id = invoice_params[:type_id]
-      else
-        model.next_invoice_at = nil
-        model.next_invoice_type_id = nil
       end
     end
   end

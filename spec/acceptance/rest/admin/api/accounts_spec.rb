@@ -12,7 +12,7 @@ RSpec.resource 'Accounts' do
     send-invoices-to
     external-id
     balance-low-threshold balance-high-threshold send-balance-notifications-to
-    invoice-period-id timezone
+    invoice-period-id timezone invoice-period-id
   ]
 
   required_relationships = %i[contractor]
@@ -53,6 +53,7 @@ RSpec.resource 'Accounts' do
     let(:'termination-capacity') { 110 }
     let(:'total-capacity') { 100 }
     let(:timezone) { 'Europe/Kyiv' }
+    let(:'invoice-period-id') { 2 }
 
     let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
@@ -71,6 +72,7 @@ RSpec.resource 'Accounts' do
     let(:id) { create(:account).id }
     let(:name) { 'name' }
     let(:'max-balance') { 20 }
+    let(:'invoice-period-id') { 3 }
 
     example_request 'update values' do
       expect(status).to eq(200)
