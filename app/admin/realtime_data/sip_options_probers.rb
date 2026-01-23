@@ -5,7 +5,7 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
   config.batch_actions = false
   config.filters = false
 
-  actions :index, :show
+  actions :index
 
   decorate_with SipOptionsProberDecorator
 
@@ -32,7 +32,7 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
   end
 
   index do
-    column :id, :id_link
+    column :id
     column :node, :node_link
     column 'SIP Options prober', :equipment_sip_options_prober_link
     column :append_headers
@@ -44,31 +44,9 @@ ActiveAdmin.register RealtimeData::SipOptionsProber, as: 'Sip Options Probers' d
     column :last_reply_delay_ms
     column :last_reply_reason
     column :local_tag
-    column :name
-    column :proxy
     column :ruri
+    column :route_set
     column :sip_interface_name
     column :to
-  end
-
-  show do
-    attributes_table do
-      row :id
-      row :node, &:node_link
-      row :append_headers
-      row :contact
-      row :from
-      row :interval
-      row :last_reply_code
-      row :last_reply_contact
-      row :last_reply_delay_ms
-      row :last_reply_reason
-      row :local_tag
-      row :name
-      row :proxy
-      row :ruri
-      row :sip_interface_name
-      row :to
-    end
   end
 end

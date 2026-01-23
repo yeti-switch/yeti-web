@@ -35,7 +35,7 @@ class RealtimeData::SipOptionsProber < YetiResource
   attribute :last_reply_reason, :string
   attribute :local_tag, :string
   attribute :name, :string
-  attribute :proxy, :string
+  attribute :route_set, :string
   attribute :ruri, :string
   attribute :sip_interface_name, :string
   attribute :to, :string

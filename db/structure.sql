@@ -31838,7 +31838,7 @@ $$;
 -- Name: load_registrations_out(integer, integer, integer); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, route_set character varying, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint, o_sip_interface_name character varying)
+CREATE FUNCTION switch22.load_registrations_out(i_pop_id integer, i_node_id integer, i_registration_id integer DEFAULT NULL::integer) RETURNS TABLE(o_id integer, o_transport_protocol_id smallint, o_domain character varying, o_user character varying, o_display_name character varying, o_auth_user character varying, o_auth_password character varying, o_route_set character varying, o_contact character varying, o_expire integer, o_force_expire boolean, o_retry_delay smallint, o_max_attempts smallint, o_scheme_id smallint, o_sip_interface_name character varying)
     LANGUAGE plpgsql COST 10 ROWS 100
     AS $$
 BEGIN
@@ -31851,7 +31851,7 @@ BEGIN
     r."display_username",
     r.auth_user,
     r.auth_password,
-    array_to_string(r.route_set, ',')::varchar as route_set,
+    array_to_string(r.route_set, ',')::varchar as o_route_set,
     r.contact,
     r.expire,
     r.force_expire,
@@ -50607,6 +50607,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260123105801'),
 ('20260110104141'),
 ('20260107132155'),
 ('20251230213442'),
