@@ -8,7 +8,7 @@ class RealtimeData::OutgoingRegistration < YetiResource
   attribute :auth_user
   attribute :display_name
   attribute :contact
-  attribute :proxy
+  attribute :route_set
   attribute :expires
   attribute :expires_left
   attribute :node_id, :integer

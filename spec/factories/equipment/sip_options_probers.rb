@@ -45,6 +45,7 @@ FactoryBot.define do
     sequence(:external_id) { |n| n }
     pop_id { nil }
     node_id { nil }
+    route_set { ['sip:proxy1.example.com;transport=tls', 'sip:proxy2.example.com;transport=tls'] }
 
     trait :filled do
       node

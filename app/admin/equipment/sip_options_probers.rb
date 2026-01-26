@@ -86,7 +86,7 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       if authorized?(:allow_auth_credentials)
         f.input :auth_password, as: :string
       end
-      f.input :route_set
+      f.input :route_set, as: :newline_array_of_headers
       f.input :contact_uri
       f.input :interval
       f.input :sip_interface_name
