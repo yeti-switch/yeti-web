@@ -3,6 +3,8 @@
 require 'rspec_api_documentation/dsl'
 
 RSpec.resource 'Balances correction' do
+  explanation 'The balance correction resource allows you to modify account balance by applying **correction**. Correction may be negative or positive'
+
   include_context :acceptance_admin_user
   let(:type) { 'balance-correction' }
 
