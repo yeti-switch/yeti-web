@@ -3,6 +3,7 @@
 class Api::Rest::Admin::TransactionResource < ::BaseResource
   model_name 'Billing::Transaction'
   paginator :paged
+  immutable
 
   attribute :description
   attribute :amount
