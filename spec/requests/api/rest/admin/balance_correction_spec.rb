@@ -33,7 +33,6 @@ RSpec.describe Api::Rest::Admin::BalanceCorrectionController do
       let(:json_api_record_attributes) do
         {
           'balance': (initial_balance + json_api_request_attributes[:correction]).to_s, # decimal rendered as string
-          'correction': nil,
           'name': account.name
         }
       end

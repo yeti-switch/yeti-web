@@ -10,11 +10,7 @@ class Api::Rest::Admin::BalanceCorrectionResource < BaseResource
 
   attributes :correction, :name, :balance
 
-  def correction
-    nil
-  end
-
-  def self.fetchable_fields(_context)
+  def fetchable_fields
     super - %i[correction]
   end
 

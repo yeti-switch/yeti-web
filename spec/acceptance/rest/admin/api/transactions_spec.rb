@@ -32,4 +32,18 @@ RSpec.resource 'Transactions' do
       expect(status).to eq(200)
     end
   end
+
+  post '/api/rest/admin/transactions' do
+    parameter :type, 'Resource type (transaction)', scope: :data, required: true
+
+    jsonapi_attributes(required_params, optional_params)
+    jsonapi_relationships(required_relationships, optional_relationships)
+
+    let(:id) { create(:account, balance: 100).id }
+    let(:correction) { '21' }
+
+    example_request 'update values' do
+      expect(status).to eq(200)
+    end
+  end
 end
