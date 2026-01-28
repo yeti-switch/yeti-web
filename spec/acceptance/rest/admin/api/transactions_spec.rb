@@ -32,5 +32,4 @@ RSpec.resource 'Transactions' do
       expect(status).to eq(200)
     end
   end
-
 end
