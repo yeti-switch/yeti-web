@@ -70,6 +70,7 @@ Rails.application.routes.draw do
           jsonapi_resources :accounts do
             jsonapi_relationships
             jsonapi_resource :balance, only: [:update]
+            jsonapi_resource :balance_correction, only: [:update]
           end
           jsonapi_resources :contractors
           jsonapi_resources :contacts
