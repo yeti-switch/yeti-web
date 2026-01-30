@@ -14,7 +14,7 @@ module Helpers
     #     active_admin_form_for User, 'new'
     #
     #     before do
-    #      aa_form.select_chosen 'Department', 'developer'
+    #      aa_form.select_tom_select 'Department', 'developer'
     #      aa_form.set_text 'First name', 'John'
     #      aa_form.set_text 'Doe name', 'Doe'
     #     end

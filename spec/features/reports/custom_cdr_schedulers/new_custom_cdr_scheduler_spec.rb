@@ -12,8 +12,8 @@ RSpec.describe 'Create new Custom Cdr Scheduler', type: :feature, js: true do
     visit new_custom_cdr_scheduler_path
 
     aa_form.select_value 'Period', 'Hourly'
-    aa_form.select_chosen 'Group by', 'customer_id'
-    aa_form.select_chosen 'Group by', 'rateplan_id'
+    aa_form.select_tom_select 'Group by', 'customer_id'
+    aa_form.select_tom_select 'Group by', 'rateplan_id'
   end
 
   it 'creates record' do

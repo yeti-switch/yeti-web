@@ -106,7 +106,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :id
   filter :request_time, as: :date_time_range
   filter :gateway,
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         input_html: { class: 'tom-select-ajax', 'data-path': '/gateways/search' },
          collection: proc {
            resource_id = params.fetch(:q, {})[:gateway_id_eq]
            resource_id ? Gateway.where(id: resource_id) : []
@@ -143,7 +143,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
          label: 'Auth Error',
          as: :select,
          collection: Cdr::AuthLog::AUTH_ERRORS_WITH_CODE.invert,
-         input_html: { class: :chosen }
+         input_html: { class: 'tom-select' }
 
   filter :realm
   filter :request_method

@@ -17,7 +17,7 @@ RSpec.describe 'Create new Customer Traffic', type: :feature, js: true do
   let!(:customer) { FactoryBot.create(:customer, name: 'John Doe') }
   let(:submit_form!) { click_submit('Create Customer traffic report') }
   let(:fill_form!) do
-    fill_in_chosen 'Customer', with: customer.name, ajax: true
+    fill_in_tom_select 'Customer', with: customer.name, ajax: true
     fill_in_date_time 'Date start', with: '2019-01-01 00:00:00'
     fill_in_date_time 'Date end', with: '2019-02-01 01:00:00'
   end

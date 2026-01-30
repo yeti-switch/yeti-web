@@ -67,10 +67,12 @@ gem 'parallel'
 gem 'sass-rails'
 gem 'sprockets'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'chosen-rails', '1.5.2', require: 'chosen-rails/engine'
+# gem 'chosen-rails', '1.5.2', require: 'chosen-rails/engine'
+gem 'coffee-rails'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
 gem 'jquery-tablesorter'
+gem 'tom-select-rails', '~> 2.4'
 
 gem 'mini_racer'
 gem 'rails-html-sanitizer', '>= 1.6.1'

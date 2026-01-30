@@ -11,7 +11,7 @@ RSpec.describe 'Billing Service Types New', js: true, bullet: [:n] do
 
   let(:fill_form!) do
     fill_in 'Name', with: attributes[:name]
-    fill_in_chosen 'Provisioning class', with: attributes[:provisioning_class]
+    fill_in_tom_select 'Provisioning class', with: attributes[:provisioning_class]
     fill_in 'Variables', with: attributes[:variables_json]
     fill_in 'Ui type', with: 'phone_systems'
     check 'Force renew' if attributes[:force_renew]

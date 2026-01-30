@@ -39,9 +39,9 @@ ActiveAdmin.register Routing::Rateplan do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
       f.input :name
-      f.input :rate_groups, input_html: { class: 'chosen-sortable', multiple: true }
+      f.input :rate_groups, input_html: { class: 'tom-select-sortable', multiple: true }
       f.input :profit_control_mode_id, as: :select, include_blank: false, collection: Routing::RateProfitControlMode::MODES.invert
-      f.input :send_quality_alarms_to, as: :select, input_html: { class: 'chosen-sortable', multiple: true }, collection: Billing::Contact.collection
+      f.input :send_quality_alarms_to, as: :select, input_html: { class: 'tom-select-sortable', multiple: true }, collection: Billing::Contact.collection
     end
     f.actions
   end

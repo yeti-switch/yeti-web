@@ -17,7 +17,7 @@ ActiveAdmin.register Stats::CustomerAuthStats, as: 'Customer Auth Statistic' do
   filter :duration
   filter :timestamp, as: :date_time_range
   filter :vendor_price
-  filter :customer_auth, input_html: { class: 'chosen' }
+  filter :customer_auth, input_html: { class: 'tom-select' }
 
   index do
     id_column

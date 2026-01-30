@@ -161,17 +161,17 @@ ActiveAdmin.register Dialpeer do
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
   account_filter :account_id_eq
 
-  filter :routeset_discriminator, input_html: { class: 'chosen' }
+  filter :routeset_discriminator, input_html: { class: 'tom-select' }
   filter :gateway,
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         input_html: { class: 'tom-select-ajax', 'data-path': '/gateways/search' },
          collection: proc {
            resource_id = params.fetch(:q, {})[:gateway_id_eq]
            resource_id ? Gateway.where(id: resource_id) : []
          }
 
-  filter :gateway_group, input_html: { class: 'chosen' }
-  filter :routing_group, input_html: { class: 'chosen' }
-  filter :routing_group_routing_plans_id_eq, as: :select, input_html: { class: 'chosen' }, label: 'Routing Plan', collection: -> { Routing::RoutingPlan.all }
+  filter :gateway_group, input_html: { class: 'tom-select' }
+  filter :routing_group, input_html: { class: 'tom-select' }
+  filter :routing_group_routing_plans_id_eq, as: :select, input_html: { class: 'tom-select' }, label: 'Routing Plan', collection: -> { Routing::RoutingPlan.all }
 
   filter :locked, as: :select, collection: [['Yes', true], ['No', false]]
   filter :valid_from, as: :date_time_range
@@ -185,7 +185,7 @@ ActiveAdmin.register Dialpeer do
   filter :network_prefix_country_id_eq,
          as: :select,
          label: 'Country',
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: -> { System::Country.order(:name) }
 
   association_ajax_filter :network_prefix_network_id_eq,
@@ -196,7 +196,7 @@ ActiveAdmin.register Dialpeer do
   filter :network_type_id,
          as: :select,
          label: 'Network Type',
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: -> { System::NetworkType.collection }
 
   filter :created_at, as: :date_time_range
@@ -207,7 +207,7 @@ ActiveAdmin.register Dialpeer do
   filter :next_rate
   filter :connect_fee
   boolean_filter :reverse_billing
-  filter :scheduler, as: :select, input_html: { class: 'chosen' }
+  filter :scheduler, as: :select, input_html: { class: 'tom-select' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
@@ -224,8 +224,8 @@ ActiveAdmin.register Dialpeer do
       f.input :dst_number_min_length
       f.input :dst_number_max_length
       f.input :enabled
-      f.input :scheduler, as: :select, input_html: { class: 'chosen' }
-      f.input :routing_group, input_html: { class: 'chosen' }
+      f.input :scheduler, as: :select, input_html: { class: 'tom-select' }
+      f.input :routing_group, input_html: { class: 'tom-select' }
 
       f.input :routing_tag_ids,
               as: :select,
@@ -233,7 +233,7 @@ ActiveAdmin.register Dialpeer do
               collection: routing_tag_options,
               multiple: true,
               include_hidden: false,
-              input_html: { class: 'chosen' }
+              input_html: { class: 'tom-select' }
 
       f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert
 
@@ -247,7 +247,7 @@ ActiveAdmin.register Dialpeer do
                         'data-required-param': 'q[contractor_id_eq]'
                       }
 
-      f.input :routeset_discriminator, include_blank: false, input_html: { class: 'chosen' }
+      f.input :routeset_discriminator, include_blank: false, input_html: { class: 'tom-select' }
       f.input :priority
       f.input :force_hit_rate
       f.input :exclusive_route

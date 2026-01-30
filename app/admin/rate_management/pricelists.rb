@@ -31,8 +31,8 @@ ActiveAdmin.register RateManagement::Pricelist, as: 'Rate Management Pricelist' 
   end
 
   filter :name
-  filter :project_id, as: :select, collection: -> { RateManagement::Project.ordered }, input_html: { class: 'chosen' }
-  filter :state_id, as: :select, collection: -> { RateManagement::Pricelist::CONST::STATE_IDS.invert }, input_html: { class: 'chosen' }
+  filter :project_id, as: :select, collection: -> { RateManagement::Project.ordered }, input_html: { class: 'tom-select' }
+  filter :state_id, as: :select, collection: -> { RateManagement::Pricelist::CONST::STATE_IDS.invert }, input_html: { class: 'tom-select' }
   filter :filename
   boolean_filter :retain_enabled
   boolean_filter :retain_priority
@@ -113,7 +113,7 @@ ActiveAdmin.register RateManagement::Pricelist, as: 'Rate Management Pricelist' 
       else
         f.input :project_id, as: :select,
                              collection: RateManagement::Project.ordered,
-                             input_html: { class: 'chosen' }
+                             input_html: { class: 'tom-select' }
         f.input :valid_from, as: :date_time_picker
         f.input :valid_till, as: :date_time_picker
         f.input :file,
@@ -124,14 +124,14 @@ ActiveAdmin.register RateManagement::Pricelist, as: 'Rate Management Pricelist' 
                 as: :select,
                 collection: [['Yes', true], ['No', false]],
                 include_blank: false,
-                input_html: { class: 'chosen' },
+                input_html: { class: 'tom-select' },
                 hint: 'Retain Enabled from Dialpeer for items with type CHANGE'
 
         f.input :retain_priority,
                 as: :select,
                 collection: [['Yes', true], ['No', false]],
                 include_blank: false,
-                input_html: { class: 'chosen' },
+                input_html: { class: 'tom-select' },
                 hint: 'Retain Priority from Dialpeer for items with type CHANGE'
       end
     end

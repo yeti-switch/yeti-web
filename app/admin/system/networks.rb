@@ -21,7 +21,7 @@ ActiveAdmin.register System::Network do
   filter :type_id_eq,
          label: 'Type',
          as: :select,
-         input_html: { class: :chosen },
+         input_html: { class: 'tom-select' },
          collection: proc { System::NetworkType.collection }
 
   index do
@@ -46,7 +46,7 @@ ActiveAdmin.register System::Network do
       f.input :name
       f.input :type_id,
               as: :select,
-              input_html: { class: :chosen },
+              input_html: { class: 'tom-select' },
               collection: System::NetworkType.collection
     end
     f.actions

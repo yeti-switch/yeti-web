@@ -127,7 +127,7 @@ RSpec.configure do |config|
   config.extend Helpers::ActiveAdminForms::ExampleGroups, type: :feature
   config.include Helpers::ActiveAdminForms::Examples, type: :feature
   config.include FeatureTestHelper, type: :feature
-  config.include Helpers::Chosen, type: :feature
+  config.include Helpers::TomSelect, type: :feature
   config.include JRPCMockHelper
   config.include CustomRspecHelper
   config.include ActiveJob::TestHelper

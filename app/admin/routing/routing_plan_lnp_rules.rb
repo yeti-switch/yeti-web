@@ -38,8 +38,8 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
 
   filter :id
   filter :dst_prefix
-  filter :routing_plan, input_html: { class: 'chosen' }, collection: proc { Routing::RoutingPlan.pluck(:name, :id) }
-  filter :database, input_html: { class: 'chosen' }, collection: proc { Lnp::Database.pluck(:name, :id) }
+  filter :routing_plan, input_html: { class: 'tom-select' }, collection: proc { Routing::RoutingPlan.pluck(:name, :id) }
+  filter :database, input_html: { class: 'tom-select' }, collection: proc { Lnp::Database.pluck(:name, :id) }
   filter :created_at, as: :date_time_range
 
   show do |_s|
@@ -60,11 +60,11 @@ ActiveAdmin.register Lnp::RoutingPlanLnpRule do
 
   form do |f|
     f.inputs do
-      f.input :routing_plan, input_html: { class: 'chosen' }
+      f.input :routing_plan, input_html: { class: 'tom-select' }
       f.input :dst_prefix
       f.input :req_dst_rewrite_rule
       f.input :req_dst_rewrite_result
-      f.input :database, input_html: { class: 'chosen' }
+      f.input :database, input_html: { class: 'tom-select' }
       f.input :lrn_rewrite_rule
       f.input :lrn_rewrite_result
       f.input :drop_call_on_error

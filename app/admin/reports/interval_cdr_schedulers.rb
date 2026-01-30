@@ -41,19 +41,19 @@ ActiveAdmin.register Report::IntervalCdrScheduler, as: 'IntervalCdrScheduler' do
 
       f.input :aggregate_by,
               as: :select,
-              input_html: { class: 'chosen' },
+              input_html: { class: 'tom-select' },
               collection: Report::IntervalCdr::CDR_AGG_COLUMNS
 
       f.input :filter
 
       f.input :group_by,
               as: :select,
-              input_html: { class: 'chosen', multiple: true },
+              input_html: { class: 'tom-select', multiple: true },
               collection: Report::IntervalCdr::CDR_COLUMNS
 
       f.input :send_to,
               as: :select,
-              input_html: { class: 'chosen', multiple: true },
+              input_html: { class: 'tom-select', multiple: true },
               collection: Billing::Contact.collection,
               hint: f.object.send_to_hint
     end

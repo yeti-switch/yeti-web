@@ -12,7 +12,7 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
   filter :time_interval_eq, label: 'Time Interval',
                             as: :select,
                             collection: Report::Realtime::Base::INTERVALS,
-                            input_html: { class: 'chosen' }, include_blank: false
+                            input_html: { class: 'tom-select' }, include_blank: false
 
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true, ordered_by: :name } }
 
