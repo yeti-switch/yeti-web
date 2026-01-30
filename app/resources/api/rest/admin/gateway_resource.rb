@@ -11,8 +11,10 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :term_next_hop_for_replies, :term_next_hop, :term_append_headers_req,
              :orig_append_headers_req, :orig_append_headers_reply,
              :sdp_alines_filter_list, :ringing_timeout, :relay_options, :relay_reinvite, :relay_hold, :relay_prack,
-             :relay_update, :suppress_early_media, :fake_180_timer, :transit_headers_from_origination,
-             :transit_headers_from_termination, :sip_interface_name, :allow_1xx_without_to_tag, :sip_timer_b,
+             :relay_update, :suppress_early_media, :fake_180_timer,
+             :transit_headers_from_origination, :transit_headers_from_termination,
+             :sip_interface_name, :rtp_interface_name, :contact_user,
+             :allow_1xx_without_to_tag, :sip_timer_b,
              :dns_srv_failover_timer, :proxy_media, :single_codec_in_200ok,
              :force_symmetric_rtp, :symmetric_rtp_nonstop,
              :force_dtmf_relay, :rtp_ping, :rtp_timeout, :filter_noaudio_streams, :rtp_relay_timestamp_aligning,
@@ -149,6 +151,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :fake_180_timer, type: :number
   ransack_filter :sip_interface_name, type: :string
   ransack_filter :rtp_interface_name, type: :string
+  ransack_filter :contact_user, type: :string
   ransack_filter :rel100_mode_id, type: :number
   ransack_filter :is_shared, type: :boolean
   ransack_filter :max_30x_redirects, type: :number
@@ -235,6 +238,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       transit_headers_from_origination
       transit_headers_from_termination
       sip_interface_name
+      rtp_interface_name
+      contact_user
       allow_1xx_without_to_tag
       sip_timer_b
       dns_srv_failover_timer

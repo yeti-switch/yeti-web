@@ -3576,7 +3576,8 @@ CREATE TABLE class4.gateways (
     scheduler_id smallint,
     ice_mode_id smallint DEFAULT 1 NOT NULL,
     rtcp_mux_mode_id smallint DEFAULT 1 NOT NULL,
-    rtcp_feedback_mode_id smallint DEFAULT 1 NOT NULL
+    rtcp_feedback_mode_id smallint DEFAULT 1 NOT NULL,
+    contact_user character varying
 );
 
 
@@ -43280,7 +43281,8 @@ CREATE TABLE data_import.import_gateways (
     to_rewrite_result character varying,
     incoming_auth_allow_jwt boolean DEFAULT false NOT NULL,
     scheduler_id smallint,
-    scheduler_name character varying
+    scheduler_name character varying,
+    contact_user character varying
 );
 
 
@@ -50607,6 +50609,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260130163020'),
 ('20260123105801'),
 ('20260110104141'),
 ('20260107132155'),

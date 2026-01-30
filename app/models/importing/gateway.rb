@@ -18,6 +18,7 @@
 #  codec_group_name                   :string
 #  codecs_payload_order               :string
 #  codecs_prefer_transcoding_for      :string
+#  contact_user                       :string
 #  contractor_name                    :string
 #  dialog_nat_handling                :boolean
 #  diversion_domain                   :string
@@ -238,6 +239,7 @@ class Importing::Gateway < Importing::Base
     registered_aor_mode_id
     force_cancel_routeset
     scheduler_id
+    contact_user
   ]
 
   self.strict_unique_attributes = %w[name]

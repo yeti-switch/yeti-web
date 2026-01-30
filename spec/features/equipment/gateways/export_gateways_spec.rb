@@ -109,6 +109,7 @@ RSpec.describe 'Export Gateways', type: :feature do
         ['Relay prack',                        item.relay_prack.to_s],
         ['Rel100 mode name',                   item.rel100_mode.name],
         ['Relay update',                       item.relay_update.to_s],
+        ['Contact user',                       item.contact_user],
         ['Allow 1xx without to tag',           item.allow_1xx_without_to_tag.to_s],
         ['Sip timer b',                        item.sip_timer_b.to_s],
         ['Dns srv failover timer',             item.dns_srv_failover_timer.to_s],
