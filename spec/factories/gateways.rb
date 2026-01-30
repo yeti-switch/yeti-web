@@ -17,6 +17,7 @@
 #  auth_user                        :string
 #  codecs_payload_order             :string           default("")
 #  codecs_prefer_transcoding_for    :string           default("")
+#  contact_user                     :string
 #  dialog_nat_handling              :boolean          default(TRUE), not null
 #  diversion_domain                 :string
 #  diversion_rewrite_result         :string

@@ -64,6 +64,7 @@ ActiveAdmin.register Gateway do
                  :dst_rewrite_rule, :dst_rewrite_result,
                  :to_rewrite_rule, :to_rewrite_result,
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
+                 :contact_user,
                  :auth_enabled, :auth_from_user, :auth_from_domain,
                  :term_use_outbound_proxy, :term_force_outbound_proxy,
                  [:term_proxy_transport_protocol_name, proc { |row| row.term_proxy_transport_protocol.try(:name) }],
@@ -403,6 +404,7 @@ ActiveAdmin.register Gateway do
               f.input :transit_headers_from_origination
               f.input :transit_headers_from_termination
               f.input :sip_interface_name
+              f.input :contact_user
 
               if f.object.external_id.nil? || authorized?(:allow_incoming_auth_credentials)
                 f.input :incoming_auth_username, hint: "#{link_to('Сlick to fill random username', 'javascript:void(0)', onclick: 'generateCredential(this)')}. #{t('formtastic.hints.gateway.incoming_auth_username')}".html_safe
@@ -617,6 +619,7 @@ ActiveAdmin.register Gateway do
             row :transit_headers_from_origination
             row :transit_headers_from_termination
             row :sip_interface_name
+            row :contact_user
           end
         end
         panel 'Origination' do

@@ -524,7 +524,8 @@ RSpec.describe '#routing logic' do
                stir_shaken_mode_id: vendor_gw_stir_shaken_mode_id,
                stir_shaken_crt_id: vendor_gw_stir_shaken_crt_id,
                send_lnp_information: vendor_gw_send_lnp_information,
-               privacy_mode_id: vendor_gw_privacy_mode_id)
+               privacy_mode_id: vendor_gw_privacy_mode_id,
+               contact_user: vendor_gw_contact_user)
       }
       let(:vendor_gw_privacy_mode_id) { Gateway::PRIVACY_MODE_SKIP }
       let(:vendor_gw_sip_schema_id) { Gateway::SIP_SCHEMA_SIP }
@@ -559,6 +560,7 @@ RSpec.describe '#routing logic' do
       let(:vendor_gw_termination_subscriber_cps_wsize) { 1 }
       let(:vendor_gw_src_numberlist_id) { nil }
       let(:vendor_gw_dst_numberlist_id) { nil }
+      let(:vendor_gw_contact_user) { nil }
 
       let!(:customer) { create(:contractor, customer: true, enabled: true) }
       let!(:customer_account) {
@@ -582,12 +584,14 @@ RSpec.describe '#routing logic' do
                orig_append_headers_req: orig_append_headers_req,
                orig_disconnect_policy_id: orig_disconnect_policy.id,
                incoming_auth_username: customer_gw_incoming_auth_username,
-               incoming_auth_password: customer_gw_incoming_auth_password)
+               incoming_auth_password: customer_gw_incoming_auth_password,
+               contact_user: customer_gw_contact_user)
       }
 
       let(:customer_gw_enabled) { true }
       let(:customer_gw_incoming_auth_username) { nil }
       let(:customer_gw_incoming_auth_password) { nil }
+      let(:customer_gw_contact_user) { nil }
 
       let(:orig_disconnect_policy) {
         create(:disconnect_policy)
@@ -4956,6 +4960,8 @@ RSpec.describe '#routing logic' do
 
         let(:uri_name) { '12345678' }
         let(:vendor_gw_host) { 'var-{{vars.host}}-domain.com' }
+        let(:vendor_gw_contact_user) { 'bleg-contact-{{vars.host}}' }
+        let(:customer_gw_contact_user) { 'aleg-contact-{{vars.host}}' }
         let(:vendor_gw_term_append_headers_req) { ['X-Host: {{vars.host}}', 'X-Item: {{vars.customer_auth_var1}}', 'X-No: 1'] }
         let!(:expected_term_append_headers_req) {
           [
@@ -4989,6 +4995,8 @@ RSpec.describe '#routing logic' do
           it 'reject by dst numberlist' do
             expect(subject.size).to eq(2)
             expect(subject.first[:ruri]).to eq('sip:122@var-test-domain.com')
+            expect(subject.first[:aleg_contact_user]).to eq('aleg-contact-test')
+            expect(subject.first[:bleg_contact_user]).to eq('bleg-contact-test')
             expect(subject.first[:append_headers_req]).to eq(expected_term_append_headers_req)
             expect(subject.first[:aleg_append_headers_req]).to eq(expected_orig_append_headers_req)
             expect(subject.first[:aleg_append_headers_reply]).to eq(expected_orig_append_headers_reply)

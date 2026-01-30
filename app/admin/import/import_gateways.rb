@@ -132,6 +132,6 @@ ActiveAdmin.register Importing::Gateway do
     column :relay_update
     column :transit_headers_from_origination
     column :transit_headers_from_termination
-    column :sip_interface_name
+    column :contact_user
   end
 end

@@ -518,6 +518,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'transit-headers-from-origination': gateway.transit_headers_from_origination,
         'transit-headers-from-termination': gateway.transit_headers_from_termination,
         'sip-interface-name': gateway.sip_interface_name,
+        'rtp-interface-name': gateway.rtp_interface_name,
+        'contact-user': gateway.contact_user,
         'allow-1xx-without-to-tag': gateway.allow_1xx_without_to_tag,
         'sip-timer-b': gateway.sip_timer_b,
         'dns-srv-failover-timer': gateway.dns_srv_failover_timer,

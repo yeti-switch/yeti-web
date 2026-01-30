@@ -1676,7 +1676,9 @@ CREATE TYPE switch22.callprofile_ty AS (
 	package_counter_id bigint,
 	src_network_type_id smallint,
 	dst_network_type_id smallint,
-	destination_cdo smallint
+	destination_cdo smallint,
+	aleg_contact_user character varying,
+	bleg_contact_user character varying
 );
 
 
@@ -3576,7 +3578,8 @@ CREATE TABLE class4.gateways (
     scheduler_id smallint,
     ice_mode_id smallint DEFAULT 1 NOT NULL,
     rtcp_mux_mode_id smallint DEFAULT 1 NOT NULL,
-    rtcp_feedback_mode_id smallint DEFAULT 1 NOT NULL
+    rtcp_feedback_mode_id smallint DEFAULT 1 NOT NULL,
+    contact_user character varying
 );
 
 
@@ -33349,6 +33352,9 @@ BEGIN
   i_profile."to" = switch22.build_uri(false, v_schema, null, v_to_username, null, v_ruri_host, i_vendor_gw.port, v_to_uri_params);
   i_profile.ruri = switch22.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, v_ruri_host, i_vendor_gw.port, v_ruri_params);
 
+  i_profile.aleg_contact_user = yeti_ext.process_templates(i_customer_gw.contact_user, i_call_ctx.vars);
+  i_profile.bleg_contact_user = yeti_ext.process_templates(i_vendor_gw.contact_user, i_call_ctx.vars);
+
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
   i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
 
@@ -34141,6 +34147,9 @@ BEGIN
   i_profile."to" = switch22.build_uri(false, v_schema, null, v_to_username, null, v_ruri_host, i_vendor_gw.port, v_to_uri_params);
   i_profile.ruri = switch22.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, v_ruri_host, i_vendor_gw.port, v_ruri_params);
 
+  i_profile.aleg_contact_user = yeti_ext.process_templates(i_customer_gw.contact_user, i_call_ctx.vars);
+  i_profile.bleg_contact_user = yeti_ext.process_templates(i_vendor_gw.contact_user, i_call_ctx.vars);
+
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
   i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
 
@@ -34855,6 +34864,9 @@ BEGIN
 
   i_profile."to" = switch22.build_uri(false, v_schema, null, v_to_username, null, v_ruri_host, i_vendor_gw.port, v_to_uri_params);
   i_profile.ruri = switch22.build_uri(true, v_schema, null, i_profile.dst_prefix_out, v_ruri_user_params, v_ruri_host, i_vendor_gw.port, v_ruri_params);
+
+  i_profile.aleg_contact_user = yeti_ext.process_templates(i_customer_gw.contact_user, i_call_ctx.vars);
+  i_profile.bleg_contact_user = yeti_ext.process_templates(i_vendor_gw.contact_user, i_call_ctx.vars);
 
   i_profile.bleg_transport_protocol_id:=i_vendor_gw.transport_protocol_id;
   i_profile.bleg_protocol_priority_id:=i_vendor_gw.network_protocol_priority_id;
@@ -43280,7 +43292,8 @@ CREATE TABLE data_import.import_gateways (
     to_rewrite_result character varying,
     incoming_auth_allow_jwt boolean DEFAULT false NOT NULL,
     scheduler_id smallint,
-    scheduler_name character varying
+    scheduler_name character varying,
+    contact_user character varying
 );
 
 
@@ -50607,6 +50620,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260130163020'),
 ('20260123105801'),
 ('20260110104141'),
 ('20260107132155'),

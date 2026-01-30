@@ -232,6 +232,9 @@ INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1048, 'src_network_type_id', 'smallint', true, 1987, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1049, 'dst_network_type_id', 'smallint', true, 1988, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1050, 'destination_cdo', 'smallint', true, 1989, false);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1051, 'aleg_contact_user', 'varchar', false, 1990, false);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1052, 'bleg_contact_user', 'varchar', false, 1991, false);
+
 
 
 SELECT pg_catalog.setval('switch22.events_id_seq', 280, true);
