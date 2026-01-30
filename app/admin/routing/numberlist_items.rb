@@ -50,12 +50,12 @@ ActiveAdmin.register Routing::NumberlistItem do
                           scope: -> { Routing::Numberlist.order(:name) },
                           path: '/numberlists/search'
   filter :key
-  filter :lua_script, input_html: { class: 'chosen' }
+  filter :lua_script, input_html: { class: 'tom-select' }
   filter :action_id_eq, label: 'Action', as: :select,
                         collection: Routing::NumberlistItem::ACTIONS.invert,
-                        input_html: { class: :chosen }
+                        input_html: { class: 'tom-select' }
 
-  filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
+  filter :tag_action, input_html: { class: 'tom-select' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
   filter :created_at, as: :date_time_range
   filter :updated_at, as: :date_time_range
   filter :defer_src_rewrite
@@ -63,7 +63,8 @@ ActiveAdmin.register Routing::NumberlistItem do
   filter :rewrite_ss_status_id_eq,
          label: 'Rewrite SS status',
          as: :select,
-         collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
+         collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert,
+         input_html: { class: 'tom-select' }
 
   controller do
     def update
@@ -150,7 +151,7 @@ ActiveAdmin.register Routing::NumberlistItem do
       f.input :action_id, as: :select,
                           include_blank: Routing::NumberlistItem::ACTION_DEFAULT_LABEL,
                           collection: Routing::NumberlistItem::ACTIONS.invert,
-                          input_html: { class: :chosen }
+                          input_html: { class: 'tom-select' }
       f.input :src_rewrite_rule
       f.input :src_rewrite_result
       f.input :defer_src_rewrite
@@ -159,14 +160,14 @@ ActiveAdmin.register Routing::NumberlistItem do
       f.input :dst_rewrite_result
       f.input :defer_dst_rewrite
 
-      f.input :tag_action
+      f.input :tag_action, input_html: { class: 'tom-select' }
       f.input :tag_action_value, as: :select,
                                  collection: tag_action_value_options,
                                  multiple: true,
                                  include_hidden: false,
-                                 input_html: { class: 'chosen' }
-      f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
-      f.input :lua_script, as: :select, input_html: { class: 'chosen' }, include_blank: 'None'
+                                 input_html: { class: 'tom-select' }
+      f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert, input_html: { class: 'tom-select' }
+      f.input :lua_script, as: :select, input_html: { class: 'tom-select' }, include_blank: 'None'
       f.input :variables_json, label: 'Variables', as: :text
     end
     f.actions

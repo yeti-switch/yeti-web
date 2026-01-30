@@ -23,8 +23,8 @@ RSpec.describe 'Edit Customers Auth', type: :feature do
   it 'should load edit page', js: true do
     subject
 
-    expect(page).to have_field_chosen('SRC Numberlist', with: src_numberlist.display_name)
-    expect(page).to have_field_chosen('DST Numberlist', with: dst_numberlist.display_name)
+    expect(page).to have_field_tom_select('SRC Numberlist', with: src_numberlist.display_name)
+    expect(page).to have_field_tom_select('DST Numberlist', with: dst_numberlist.display_name)
   end
 
   context 'unset "Tag action value"' do

@@ -29,7 +29,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
   describe 'filter by tagged' do
     let(:filter_cdr_records) do
       within_filters do
-        fill_in_chosen 'Tagged', with: filter_value
+        fill_in_tom_select 'Tagged', with: filter_value
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
         expect(page).to have_table_row count: cdrs_tagged.size
         cdrs_tagged.each { |cdr| expect(page).to have_table_cell column: 'Id', text: cdr.id }
         within_filters do
-          expect(page).to have_field_chosen('Tagged', with: filter_value)
+          expect(page).to have_field_tom_select('Tagged', with: filter_value, clearable: true)
         end
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
         expect(page).to have_table_row count: cdrs_not_tagged.size
         cdrs_not_tagged.each { |cdr| expect(page).to have_table_cell column: 'Id', text: cdr.id }
         within_filters do
-          expect(page).to have_field_chosen('Tagged', with: filter_value)
+          expect(page).to have_field_tom_select('Tagged', with: filter_value, clearable: true)
         end
       end
     end
@@ -65,7 +65,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
   describe 'filter by routing tag ids contains' do
     let(:filter_cdr_records) do
       within_filters do
-        fill_in_chosen 'Routing Tag IDs Contains', with: filter_value, multiple: true
+        fill_in_tom_select 'Routing Tag IDs Contains', with: filter_value, multiple: true
       end
     end
 
@@ -80,7 +80,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
         expect(page).to have_table_row count: filtered_cdrs.size
         filtered_cdrs.each { |cdr| expect(page).to have_table_cell column: 'Id', text: cdr.id }
         within_filters do
-          expect(page).to have_field_chosen('Routing Tag IDs Contains', with: filter_value)
+          expect(page).to have_field_tom_select('Routing Tag IDs Contains', with: filter_value)
         end
       end
     end
@@ -89,7 +89,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
   describe 'filter by customer auth' do
     let(:filter_cdr_records) do
       within_filters do
-        fill_in_chosen 'Customer Auth', with: customer_auths[0].name, ajax: true
+        fill_in_tom_select 'Customer Auth', with: customer_auths[0].name, ajax: true
       end
     end
 
@@ -109,7 +109,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdrs[0].id.to_s)
       expect(page).to have_table_cell(column: 'Customer Auth', exact_text: cdrs[0].customer_auth.display_name)
       within_filters do
-        expect(page).to have_field_chosen('Customer Auth', with: customer_auths[0].display_name)
+        expect(page).to have_field_tom_select('Customer Auth', with: customer_auths[0].display_name, clearable: true)
       end
     end
   end

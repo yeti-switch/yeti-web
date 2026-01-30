@@ -8,7 +8,7 @@ ActiveAdmin.register System::SmtpConnection do
 
   filter :id
   filter :name
-  filter :auth_type, as: :select, collection: System::SmtpConnection::CONST::AUTH_TYPES
+  filter :auth_type, as: :select, collection: System::SmtpConnection::CONST::AUTH_TYPES, input_html: { class: 'tom-select' }
 
   member_action :send_email, method: :post do
     begin
@@ -70,7 +70,7 @@ ActiveAdmin.register System::SmtpConnection do
       f.input :from_address
       f.input :auth_user
       f.input :auth_password, as: :string, wrapper_html: { class: 'password-mask' }
-      f.input :auth_type, as: :select, collection: System::SmtpConnection::CONST::AUTH_TYPES
+      f.input :auth_type, as: :select, collection: System::SmtpConnection::CONST::AUTH_TYPES, input_html: { class: 'tom-select' }
       f.input :global
     end
     f.actions

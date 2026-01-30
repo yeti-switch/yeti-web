@@ -8,14 +8,14 @@ ActiveAdmin.register Importing::Dialpeer, as: 'Dialpeer Imports' do
   account_filter :account_id_eq
 
   filter :gateway,
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         input_html: { class: 'tom-select-ajax', 'data-path': '/gateways/search' },
          collection: proc {
            resource_id = params.fetch(:q, {})[:gateway_id_eq]
            resource_id ? Gateway.where(id: resource_id) : []
          }
 
-  filter :routing_group, input_html: { class: 'chosen' }
-  filter :routeset_discriminator, input_html: { class: 'chosen' }
+  filter :routing_group, input_html: { class: 'tom-select' }
+  filter :routeset_discriminator, input_html: { class: 'tom-select' }
   boolean_filter :is_changed
 
   acts_as_import_preview

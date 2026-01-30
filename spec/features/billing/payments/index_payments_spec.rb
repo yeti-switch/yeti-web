@@ -35,7 +35,7 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
     let!(:filtered_payments) { create_list(:payment, 2, account:) }
     let(:filter_records!) do
       within_filters do
-        fill_in_chosen 'Account', with: account.display_name, exact: true, ajax: true
+        fill_in_tom_select 'Account', with: account.display_name, exact: true, ajax: true
       end
       click_on 'Filter'
     end
@@ -57,7 +57,7 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
       end
 
       within_filters do
-        expect(page).to have_field_chosen('Account', with: account.display_name)
+        expect(page).to have_field_tom_select('Account', with: account.display_name)
       end
     end
   end
@@ -66,7 +66,7 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
     let(:filtered_payments) { [payments[1]] }
     let(:filter_records!) do
       within_filters do
-        fill_in_chosen 'Status', with: 'pending'
+        fill_in_tom_select 'Status', with: 'pending'
       end
       click_on 'Filter'
     end
@@ -83,7 +83,7 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
       end
 
       within_filters do
-        expect(page).to have_field_chosen('Status', with: 'pending')
+        expect(page).to have_field_tom_select('Status', with: 'pending')
       end
     end
   end
@@ -92,7 +92,7 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
     let(:filtered_payments) { [payments[0]] }
     let(:filter_records!) do
       within_filters do
-        fill_in_chosen 'Type', with: 'manual'
+        fill_in_tom_select 'Type', with: 'manual'
       end
       click_on 'Filter'
     end
@@ -109,7 +109,7 @@ RSpec.describe 'Index Payments', type: :feature, js: true do
       end
 
       within_filters do
-        expect(page).to have_field_chosen('Type', with: 'manual')
+        expect(page).to have_field_tom_select('Type', with: 'manual')
       end
     end
   end

@@ -73,18 +73,18 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
                                 collection: routing_tag_options,
                                 multiple: true,
                                 include_hidden: false,
-                                input_html: { class: 'chosen' }
-      f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert
-      f.input :src_area
-      f.input :dst_area
+                                input_html: { class: 'tom-select' }
+      f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert, input_html: { class: 'tom-select' }
+      f.input :src_area, input_html: { class: 'tom-select' }
+      f.input :dst_area, input_html: { class: 'tom-select' }
       f.input :src_prefix
       f.input :dst_prefix
-      f.input :tag_action
+      f.input :tag_action, input_html: { class: 'tom-select' }
       f.input :tag_action_value, as: :select,
                                  collection: tag_action_value_options,
                                  multiple: true,
                                  include_hidden: false,
-                                 input_html: { class: 'chosen' }
+                                 input_html: { class: 'tom-select' }
     end
     f.actions
   end
@@ -92,8 +92,8 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   filter :id
   filter :src_prefix
   filter :dst_prefix
-  filter :src_area, input_html: { class: 'chosen' }
-  filter :dst_area, input_html: { class: 'chosen' }
+  filter :src_area, input_html: { class: 'tom-select' }
+  filter :dst_area, input_html: { class: 'tom-select' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 end
