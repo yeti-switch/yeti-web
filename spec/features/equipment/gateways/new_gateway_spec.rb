@@ -30,12 +30,12 @@ RSpec.describe 'Create new Gateway', type: :feature, js: true do
 
   let(:fill_form!) do
     fill_in 'Name', with: 'gw123'
-    fill_in_chosen 'Contractor', with: contractor.display_name, ajax: true
+    fill_in_tom_select 'Contractor', with: contractor.display_name, ajax: true
     switch_tab 'Media'
-    fill_in_chosen 'Codec group', with: codec_group.display_name
+    fill_in_tom_select 'Codec group', with: codec_group.display_name
     switch_tab 'Translations'
-    fill_in_chosen 'Termination SRC Numberlist', with: termination_src_numberlist.display_name, ajax: true
-    fill_in_chosen 'Termination DST Numberlist', with: termination_dst_numberlist.display_name, ajax: true
+    fill_in_tom_select 'Termination SRC Numberlist', with: termination_src_numberlist.display_name, ajax: true
+    fill_in_tom_select 'Termination DST Numberlist', with: termination_dst_numberlist.display_name, ajax: true
   end
   let(:submit_form!) do
     click_submit('Create Gateway')

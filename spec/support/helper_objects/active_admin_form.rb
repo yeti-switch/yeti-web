@@ -47,24 +47,13 @@ module HelperObjects
       select.find(:option, text).select_option
     end
 
-    # selects option of chosen select by label or id.
-    # @param field [String] field name or id
-    # @param text [String] value which you want to select
+    # search option of tom-select select (and wait while it appear) by label or id.
+    # @param label [String]
+    # @param with [String] value which you want to search
     # @param exact_field [TrueClass,FalseClass] search by exact field attribute name
-    def select_chosen(field, text, exact_field: false)
-      select = field_input(field, exact: exact_field, visible: :all)
-      chosen_container = select.send(:parent).find('.chosen-container')
-      @ctx.chosen_pick(nil, text: text, chosen_node: chosen_container)
-    end
-
-    # search option of chosen select (and wait while it appear) by label or id.
-    # @param field [String] field name or id
-    # @param text [String] value which you want to search
-    # @param exact_field [TrueClass,FalseClass] search by exact field attribute name
-    def search_chosen(field, text, exact_field: false, multiple: false, ajax: false)
-      select = field_input(field, exact: exact_field, visible: :all)
-      chosen_container = select.send(:parent).find('.chosen-container')
-      @ctx.chosen_select(nil, search: text, multiple: multiple, ajax: ajax, chosen_node: chosen_container)
+    # @param ajax [TrueClass,FalseClass] whether tom-select uses ajax to load options
+    def fill_in_tom_select(label, with:, exact_field: false, ajax: false)
+      @ctx.fill_in_tom_select(label, with:, ajax:, exact_label: exact_field)
     end
 
     # check/uncheck checkbox.

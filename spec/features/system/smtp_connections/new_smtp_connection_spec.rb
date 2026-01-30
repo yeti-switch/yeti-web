@@ -38,7 +38,7 @@ RSpec.describe 'Create new Smtp Connection', type: :feature, js: true do
     before do
       aa_form.set_text 'Auth user', 'qwe'
       aa_form.set_text 'Auth password', 'asd'
-      aa_form.select_value 'Auth type', 'cram_md5'
+      aa_form.fill_in_tom_select 'Auth type', with: 'cram_md5'
     end
 
     it 'creates record' do

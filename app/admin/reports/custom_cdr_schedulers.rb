@@ -39,16 +39,16 @@ ActiveAdmin.register Report::CustomCdrScheduler, as: 'CustomCdrScheduler' do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
-      f.input :period
+      f.input :period, input_html: { class: 'tom-select' }
       f.contractor_input :customer_id, label: 'Customer', path_params: { q: { customer_eq: true } }
       f.input :filter
       f.input :group_by,
               as: :select,
-              input_html: { class: 'chosen-sortable', multiple: true },
+              input_html: { class: 'tom-select-sortable', multiple: true },
               collection: Report::CustomCdr::CDR_COLUMNS.map { |a| [a, a] }
       f.input :send_to,
               as: :select,
-              input_html: { class: 'chosen-sortable', multiple: true },
+              input_html: { class: 'tom-select-sortable', multiple: true },
               collection: Billing::Contact.collection,
               hint: f.object.send_to_hint
     end

@@ -12,7 +12,7 @@ ActiveAdmin.register RealtimeData::OutgoingRegistration, as: 'Outgoing Registrat
          as: :select,
          collection: proc { Node.all.pluck(:name, :id) },
          label: 'Node',
-         input_html: { class: 'chosen' }
+         input_html: { class: 'tom-select' }
 
   controller do
     def show

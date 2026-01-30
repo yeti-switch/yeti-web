@@ -180,6 +180,9 @@ jobs:
             /opt/yeti-web/vendor/rbenv
           key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
+      - name: Clear tmp cache
+        run: rm -rf tmp
+
       - name: Run rspec
         run: make rspec
         env:

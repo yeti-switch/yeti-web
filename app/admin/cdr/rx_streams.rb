@@ -62,7 +62,7 @@ ActiveAdmin.register RtpStatistics::RxStream, as: 'RtpRxStreams' do
   filter :pop
   filter :node
   filter :gateway,
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         input_html: { class: 'tom-select-ajax', 'data-path': '/gateways/search' },
          collection: proc {
            resource_id = params.fetch(:q, {})[:gateway_id_eq]
            resource_id ? Gateway.where(id: resource_id) : []

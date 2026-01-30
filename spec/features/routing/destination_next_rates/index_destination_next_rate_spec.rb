@@ -41,7 +41,7 @@ RSpec.describe 'Index Routing Destination Next Rates', type: :feature, js: true 
 
     context 'by Rate Group' do
       let(:filtering!) do
-        fill_in_chosen 'Rate Group', with: rate_group.name
+        fill_in_tom_select 'Rate Group', with: rate_group.name
       end
 
       let(:record) { next_rates[0] }
@@ -56,14 +56,14 @@ RSpec.describe 'Index Routing Destination Next Rates', type: :feature, js: true 
         end
 
         within_filters do
-          expect(page).to have_field_chosen('Rate Group', with: rate_group.display_name)
+          expect(page).to have_field_tom_select('Rate Group', with: rate_group.display_name)
         end
       end
     end
 
     context 'by Destination' do
       let(:filtering!) do
-        fill_in_chosen('#q_destination_prefix_input > select', with: filter_type, no_search: true, selector: true)
+        fill_in_tom_select('#q_destination_prefix_input > select', with: filter_type, no_search: true, selector: true)
         fill_in 'Destination', with: filter_value
       end
 

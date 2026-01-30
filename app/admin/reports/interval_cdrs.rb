@@ -25,12 +25,12 @@ ActiveAdmin.register Report::IntervalCdr, as: 'ReportIntervalCdr' do
 
   filter :aggregate_by,
          as: :select,
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: Report::IntervalCdr::CDR_AGG_COLUMNS
 
   filter :aggregation_function,
          as: :select,
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: proc { Report::IntervalAggregator.pluck(:name, :id) }
 
   index do
@@ -73,30 +73,30 @@ ActiveAdmin.register Report::IntervalCdr, as: 'ReportIntervalCdr' do
 
       f.input :interval_length,
               as: :select,
-              input_html: { class: 'chosen' },
+              input_html: { class: 'tom-select' },
               collection: Report::IntervalCdr::INTERVALS.map { |num, name| [name, num] }
 
       f.input :aggregator_id,
               label: 'Aggregation function',
               as: :select,
-              input_html: { class: 'chosen' },
+              input_html: { class: 'tom-select' },
               collection: Report::IntervalAggregator.pluck(:name, :id)
 
       f.input :aggregate_by,
               as: :select,
-              input_html: { class: 'chosen' },
+              input_html: { class: 'tom-select' },
               collection: Report::IntervalCdr::CDR_AGG_COLUMNS
 
       f.input :filter
 
       f.input :group_by,
               as: :select,
-              input_html: { class: 'chosen', multiple: true },
+              input_html: { class: 'tom-select', multiple: true },
               collection: Report::IntervalCdr::CDR_COLUMNS
 
       f.input :send_to,
               as: :select,
-              input_html: { class: 'chosen', multiple: true },
+              input_html: { class: 'tom-select', multiple: true },
               collection: Billing::Contact.collection,
               hint: f.object.send_to_hint
     end

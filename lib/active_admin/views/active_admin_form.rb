@@ -6,7 +6,7 @@ module ActiveAdminFormPatch
   # @param scope [Class,ActiveRecord::Relation] model class or scope.
   # @param path [String] url for search query.
   # @param path_params [Hash,nil] static params for search query, default nil.
-  # @param fill_params [Hash,nil] dynamic params for chosen-ajax-filled collection.
+  # @param fill_params [Hash,nil] dynamic params for tom-select-ajax-filled collection.
   # @param fill_required [Symbol,nil] required dynamic param key, if blank collection will be empty.
   # @param options [Hash] other input params
   #   :'data-path-params' [String] json hash: key is dynamic parameter for search query, value is selector of a field.
@@ -25,7 +25,7 @@ module ActiveAdminFormPatch
     end
 
     classes = [
-      fill_params.nil? ? 'chosen-ajax' : 'chosen-ajax-fillable',
+      fill_params.nil? ? 'tom-select-ajax' : 'tom-select-ajax-fillable',
       "#{name}-input",
       options.key?(:input_html) ? options[:input_html].delete(:class) : nil
     ].compact.join(' ')
@@ -46,7 +46,7 @@ module ActiveAdminFormPatch
   # @param name [Symbol] column name for account foreign key.
   # @param label [String] label for input, default 'Account'.
   # path_params [Hash,nil] static params for search query, default nil.
-  # fill_params [Hash,nil] dynamic params for chosen-ajax-filled collection, key - ransack key for search, value.
+  # fill_params [Hash,nil] dynamic params for tom-select-ajax-filled collection, key - ransack key for search, value.
   # fill_required [Symbol,nil] required dynamic param key, if blank collection will be empty.
   # @param options [Hash] other input params
   #   :'data-path-params' [String] json hash: key is parameter for search query, value is selector of a field.

@@ -40,7 +40,7 @@ ActiveAdmin.register Routing::RateGroup do
     f.inputs do
       f.input :name
       f.input :rateplans,
-              input_html: { class: 'chosen-sortable', multiple: true },
+              input_html: { class: 'tom-select-sortable', multiple: true },
               collection: Routing::Rateplan.order(:name)
     end
     f.actions

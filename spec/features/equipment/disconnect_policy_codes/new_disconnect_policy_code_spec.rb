@@ -13,8 +13,8 @@ RSpec.describe 'Create new Disconnect Policy Code', type: :feature, js: true do
   before do
     visit new_disconnect_policy_code_path
 
-    aa_form.select_chosen 'Policy', disconnect_policy.name
-    aa_form.select_chosen 'Code', disconnect_code.display_name
+    aa_form.fill_in_tom_select 'Policy', with: disconnect_policy.name
+    aa_form.fill_in_tom_select 'Code', with: disconnect_code.display_name
   end
 
   it 'creates record' do

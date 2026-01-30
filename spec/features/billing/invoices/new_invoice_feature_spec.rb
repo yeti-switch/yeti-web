@@ -32,8 +32,8 @@ RSpec.describe 'New Invoice', type: :feature, js: true do
 
   let(:fill_form!) do
     within_form_for do
-      fill_in_chosen 'Contractor', with: contractor.display_name, ajax: true
-      fill_in_chosen 'Account', with: account.display_name, ajax: true
+      fill_in_tom_select 'Contractor', with: contractor.display_name, ajax: true
+      fill_in_tom_select 'Account', with: account.display_name, ajax: true
       fill_in 'Start date', with: '2020-01-01'
       fill_in 'End date', with: '2020-02-01'
     end

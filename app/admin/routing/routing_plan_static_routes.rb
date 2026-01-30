@@ -17,12 +17,12 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   permit_params :routing_plan_id, :prefix, :priority, :weight, :vendor_id
 
   filter :id
-  filter :routing_plan, collection: -> { Routing::RoutingPlan.having_static_routes }, input_html: { class: 'chosen' }
+  filter :routing_plan, collection: -> { Routing::RoutingPlan.having_static_routes }, input_html: { class: 'tom-select' }
   filter :prefix
   filter :network_prefix_country_id_eq,
          as: :select,
          label: 'Country',
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: -> { System::Country.order(:name) }
 
   association_ajax_filter :network_prefix_network_id_eq,
@@ -78,7 +78,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRoute, as: 'Static Route' do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
-      f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: { class: 'chosen' }
+      f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: { class: 'tom-select' }
       f.input :prefix, input_html: { class: :prefix_detector }, hint: f.object.network_details_hint
       f.input :priority
       f.input :weight

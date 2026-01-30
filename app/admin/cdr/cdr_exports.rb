@@ -24,7 +24,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   end
 
   filter :id
-  filter :status, as: :select, collection: CdrExport::STATUSES
+  filter :status, as: :select, collection: CdrExport::STATUSES, input_html: { class: 'tom-select' }
   filter :rows_count
   account_filter :customer_account, path_params: { q: { contractor_customer_eq: true } }
   filter :callback_url
@@ -178,7 +178,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
               as: :select,
               multiple: true,
               collection: (f.object.fields | CdrExport.allowed_fields),
-              input_html: { class: 'chosen-sortable' },
+              input_html: { class: 'tom-select-sortable' },
               required: true
 
       f.input :callback_url, required: false
@@ -187,11 +187,11 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
     inputs 'Time specific configurations' do
       f.input :time_format, as: :select,
                             collection: CdrExport::ALLOWED_TIME_FORMATS.map { |i| [i.humanize, i] },
-                            input_html: { class: :chosen }
+                            input_html: { class: 'tom-select' }
 
       f.input :time_zone_name,
              as: :select,
-             input_html: { class: 'chosen' },
+             input_html: { class: 'tom-select' },
              collection: Yeti::TimeZoneHelper.all
     end
     f.inputs 'Filters', for: [:filters, f.object.filters] do |ff|
@@ -218,7 +218,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       ff.input :success_eq,
                as: :select,
                collection: boolean_options,
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
 
       ff.input :duration_eq, as: :number
@@ -240,14 +240,14 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       ff.input :customer_auth_id_eq,
                as: :select,
                collection: CustomersAuth.order(:name),
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
       ff.input :customer_auth_external_id_eq, required: false
 
       ff.input :is_last_cdr_eq,
                as: :select,
                collection: boolean_options,
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
 
       ff.input :src_prefix_in_contains, required: false
@@ -267,12 +267,12 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       ff.input :src_country_id_eq,
                as: :select,
                collection: System::Country.all,
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
       ff.input :dst_country_id_eq,
                as: :select,
                collection: System::Country.all,
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
 
       ff.input :routing_tag_ids_include, required: false
@@ -280,20 +280,20 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       ff.input :routing_tag_ids_empty,
                as: :select,
                collection: boolean_options,
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
 
       ff.input :orig_gw_id_eq,
                as: :select,
                collection: gateways,
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
       ff.input :orig_gw_external_id_eq, required: false
 
       ff.input :term_gw_id_eq,
                as: :select,
                collection: gateways,
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
       ff.input :term_gw_external_id_eq, required: false
       ff.input :customer_auth_external_type_eq, required: false
@@ -303,7 +303,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                multiple: true,
                required: false,
                input_html: {
-                 class: 'chosen-ajax',
+                 class: 'tom-select-ajax',
                  data: {
                    path: '/customers_auths/search_with_return_external_id?q[ordered_by]=name&q[external_id_null]=false'
                  }
@@ -320,13 +320,13 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                as: :select,
                multiple: true,
                collection: System::Country.pluck(:name, :iso2),
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
       ff.input :dst_country_iso_in,
                as: :select,
                multiple: true,
                collection: System::Country.pluck(:name, :iso2),
-               input_html: { class: 'chosen' },
+               input_html: { class: 'tom-select' },
                required: false
     end
     f.actions

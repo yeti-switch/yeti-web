@@ -50,15 +50,15 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
   account_filter :account_id_eq
   filter :type_id,
          as: :select,
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: proc { Billing::ServiceType.all }
   filter :renew_period_id,
          as: :select,
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: proc { Billing::Service::RENEW_PERIODS.invert }
   filter :state_id,
          as: :select,
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: Billing::Service::STATES.invert
   filter :initial_price
   filter :renew_price
@@ -126,7 +126,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
         f.account_input :account_id
         f.input :type_id,
                 as: :select,
-                input_html: { class: 'chosen' },
+                input_html: { class: 'tom-select' },
                 collection: Billing::ServiceType.all
       end
 
@@ -142,7 +142,7 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
         f.input :renew_at, as: :date_time_picker
         f.input :renew_period_id,
                 as: :select,
-                input_html: { class: 'chosen' },
+                input_html: { class: 'tom-select' },
                 include_blank: Billing::Service::RENEW_PERIOD_EMPTY,
                 collection: Billing::Service::RENEW_PERIODS.invert
       end

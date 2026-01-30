@@ -14,7 +14,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
   let!(:vendor) { create(:vendor) }
   let(:fill_form!) do
     fill_in 'Name', with: form_params[:name]
-    fill_in_chosen 'Contractor', with: form_params[:contractor].display_name, ajax: true
+    fill_in_tom_select 'Contractor', with: form_params[:contractor].display_name, ajax: true
     fill_in 'Min balance', with: form_params[:min_balance]
     fill_in 'Max balance', with: form_params[:max_balance]
     fill_in 'Vat', with: form_params[:vat]
@@ -22,11 +22,11 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     fill_in 'Max call duration', with: form_params[:max_call_duration]
     fill_in 'Balance low threshold', with: form_params[:balance_low_threshold]
     fill_in 'Balance high threshold', with: form_params[:balance_high_threshold]
-    fill_in_chosen 'Send balance notifications to', with: form_params[:send_balance_notifications_to].email, multiple: true
+    fill_in_tom_select 'Send balance notifications to', with: form_params[:send_balance_notifications_to].email, multiple: true
     fill_in 'Origination capacity', with: form_params[:origination_capacity]
     fill_in 'Termination capacity', with: form_params[:termination_capacity]
     fill_in 'Total capacity', with: form_params[:total_capacity]
-    fill_in_chosen 'Timezone', with: form_params[:timezone]
+    fill_in_tom_select 'Timezone', with: form_params[:timezone]
   end
   let(:form_params) do
     {
@@ -84,7 +84,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
   context 'with only required fields filled' do
     let(:fill_form!) do
       fill_in 'Name', with: form_params[:name]
-      fill_in_chosen 'Contractor', with: form_params[:contractor].display_name, ajax: true
+      fill_in_tom_select 'Contractor', with: form_params[:contractor].display_name, ajax: true
     end
     let(:form_params) do
       super().slice(:name, :contractor)
@@ -170,7 +170,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     let(:account_time_zone) { ActiveSupport::TimeZone.new(form_params[:timezone]) }
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Invoice period', with: invoice_period.name, exact: true
+      fill_in_tom_select 'Invoice period', with: invoice_period.name, exact: true
     end
 
     before do

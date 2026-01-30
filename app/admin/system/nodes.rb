@@ -9,7 +9,7 @@ ActiveAdmin.register Node do
 
   permit_params :id, :pop_id, :rpc_endpoint, :name
 
-  filter :pop, input_html: { class: 'chosen' }
+  filter :pop, input_html: { class: 'tom-select' }
   filter :name
 
   controller do

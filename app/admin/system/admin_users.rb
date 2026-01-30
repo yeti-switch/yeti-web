@@ -76,7 +76,7 @@ ActiveAdmin.register AdminUser do
         f.input :roles,
                 as: :select,
                 collection: AdminUser.available_roles,
-                input_html: { class: :chosen, multiple: true }
+                input_html: { class: 'tom-select', multiple: true }
       end
       f.input :stateful_filters
       f.input :allowed_ips, as: :array_of_strings

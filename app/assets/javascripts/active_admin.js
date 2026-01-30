@@ -2,8 +2,6 @@
 //= require jquery-ui/widgets/tooltip
 //= require jquery-tablesorter
 //= require jquery.dependent.fields
-//= require chosen-jquery
-//= require jquery-chosen-sortable
 //= require active_admin/base
 //= require gateway_form
 //= require table_highlights
@@ -40,56 +38,13 @@
 //= require highlightjs
 //= require modal_link
 //= require import_apply_unique_fields
-//= require chosen_ajax
-//= require chosen_ajax_fillable
+//= require tom-select
 //= require credential_generator
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
 
 
 $(document).ready(function () {
-
-    function initChosen (parent) {
-        parent.find("select.chosen").chosen({
-                no_results_text: 'No results matched',
-                width: '240px',
-                search_contains: true,
-                allow_single_deselect: true
-        })
-        parent.find("select.chosen-wide").chosen({
-            no_results_text: 'No results matched',
-            width: '80%',
-            search_contains: true,
-            allow_single_deselect: true
-        })
-        parent.find("select.chosen-sortable").chosen({
-            no_results_text: 'No results matched',
-            width: '80%',
-            search_contains: true,
-            allow_single_deselect: true
-        }).chosenSortable()
-
-        parent.find("select.chosen-ajax").chosenAjax(
-            {ajax_method: "GET", ajax_min_chars: 3 },
-            {width: '240px', no_results_text: "No results matched", allow_single_deselect: true}
-        )
-
-        parent.find("select.chosen-ajax-fillable").chosenAjaxFillable(
-            {ajax_method: "GET"},
-            {
-                width: '240px',
-                no_results_text: "No results matched",
-                allow_single_deselect: true,
-                search_contains: true
-            }
-        )
-    }
-
-    initChosen($('body'))
-
-    $(document).on('has_many_add:after', function (e, fieldset) {
-        initChosen(fieldset)
-    })
 
     $('.index_as_table .index_table').stickyTableHeaders();
 
@@ -122,9 +77,5 @@ $(document).ready(function () {
         show_time: true
     });
 
-    $('form.filter_form div.select_and_search > select').chosen({
-        disable_search: true,
-        allow_single_deselect: false
-    })
 
 });

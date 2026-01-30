@@ -44,7 +44,7 @@ ActiveAdmin.register System::Scheduler do
       f.input :use_reject_calls
       f.input :timezone,
              as: :select,
-             input_html: { class: 'chosen' },
+             input_html: { class: 'tom-select' },
              collection: Yeti::TimeZoneHelper.all
     end
 
@@ -54,19 +54,19 @@ ActiveAdmin.register System::Scheduler do
                 as: :select,
                 collection: System::SchedulerRange::MONTHS.invert,
                 include_blank: false,
-                input_html: { class: :chosen, multiple: true },
+                input_html: { class: 'tom-select', multiple: true },
                 hint: 'Leave empty to allow any month'
         t.input :days,
                 as: :select,
                 collection: System::SchedulerRange::DAYS,
                 include_blank: false,
-                input_html: { class: :chosen, multiple: true },
+                input_html: { class: 'tom-select', multiple: true },
                 hint: 'Leave empty to allow any day of month'
         t.input :weekdays,
                 as: :select,
                 collection: System::SchedulerRange::WEEKDAYS.invert,
                 include_blank: false,
-                input_html: { class: :chosen, multiple: true },
+                input_html: { class: 'tom-select', multiple: true },
                 hint: 'Leave empty to allow any day of week'
 
         t.input :from_time, as: :string, hint: 'Time in format HH24:MM:SS or HH24:MM. Leave empty for start of the day'

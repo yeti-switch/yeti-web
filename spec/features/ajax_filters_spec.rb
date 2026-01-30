@@ -2,9 +2,20 @@
 
 RSpec.describe 'Load filter options', type: :feature, js: true do
   include_context :login_as_admin
-  before { visit cdrs_path }
+
   context 'customer filter' do
-    let!(:goal_customer_list) {
+    subject do
+      visit cdrs_path
+
+      # fill_in_tom_select('Customer', ajax: true, search: 'cus', with: match_customers.first.name)
+    end
+
+    let(:customer_filter) do
+      parent = find('.filter_form')
+      root_element = parent.find(:parent_by_label, 'Customer', exact: true)
+      Section::TomSelect.new(parent, root_element)
+    end
+    let!(:match_customers) {
       [
         FactoryBot.create(:customer, name: 'customer_1'),
         FactoryBot.create(:customer, name: 'customer_2')
@@ -12,41 +23,26 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
     }
     let!(:other_customer) { FactoryBot.create(:customer, name: 'other') }
 
-    subject do
-      # open chosen popup to get input
-      chosen_select = page.find(chosen_container_selector('Customer'))
-      chosen_select.click
-      chosen_select.find('.chosen-search input').native.send_keys('cus')
-    end
-
-    it 'should have one option in select' do
-      within '#sidebar #new_q #q_customer_id_eq_input select', visible: false do
-        expect(page).to have_css('option', count: 1, visible: false)
-        expect(page).to have_css('option:first-child', text: 'Any', visible: false)
-      end
-    end
-
-    it 'when type letters load options (2 results and "Any" existed)' do
+    it 'when type letters load options (2 results)' do
       subject
-      goal_customer_list.each do |item|
-        expect(page).to have_css('#q_customer_id_eq_input select option', text: item.name, visible: false)
-      end
-      # 2 results from database and "Any" option by default = total 3
-      expect(page).to have_css('#q_customer_id_eq_input select option', count: 3, visible: false)
-    end
+      customer = match_customers.first
 
-    it 'should select option and execute filter ' do
-      customer = goal_customer_list.first
-      subject
-      # make first element selected
-      find('#q_customer_id_eq_input li', text: customer.name).click
+      customer_filter.control.click # open dropdown
+      customer_filter.dropdown.search('cus')
 
-      # execute filter and reload page
-      page.find('input[type=submit]').click
+      # correct customers loaded
+      expect(customer_filter).to have_options_texts match_customers.map(&:display_name)
+
+      # filtered correctly
+      customer_filter.dropdown.select_option(customer.display_name)
+      page.find('.filter_form input[type=submit]').click
 
       expect(CGI.unescape(page.current_url)).to include("q[customer_id_eq]=#{customer.id}")
-      # check selected element
-      expect(find('#q_customer_id_eq_input select option', visible: false, text: customer.name)).to be_selected
+      # expect(page).to have_field_tom_select('Customer', with: customer.display_name)
+      parent = find('.filter_form')
+      root_element = parent.find(:parent_by_label, 'Customer', exact: true)
+      new_customer_filter = Section::TomSelect.new(parent, root_element)
+      expect(new_customer_filter).to have_selected_text customer.display_name
     end
   end
 end

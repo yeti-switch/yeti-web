@@ -106,22 +106,22 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   filter :id
   filter :request_time, as: :date_time_range
   filter :gateway,
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         input_html: { class: 'tom-select-ajax', 'data-path': '/gateways/search' },
          collection: proc {
            resource_id = params.fetch(:q, {})[:gateway_id_eq]
            resource_id ? Gateway.where(id: resource_id) : []
          }
 
-  filter :pop
-  filter :node
+  filter :pop, input_html: { class: 'tom-select' }
+  filter :node, input_html: { class: 'tom-select' }
   filter :username
-  filter :origination_proto_id_eq, label: 'Origination protocol', as: :select, collection: Cdr::AuthLog::TRANSPORT_PROTOCOLS.invert
+  filter :origination_proto_id_eq, label: 'Origination protocol', as: :select, collection: Cdr::AuthLog::TRANSPORT_PROTOCOLS.invert, input_html: { class: 'tom-select' }
   filter :origination_ip_covers,
          as: :string,
          input_html: { class: 'search_filter_string' },
          label: 'Origination IP'
 
-  filter :transport_proto_id_eq, label: 'Transport protocol', as: :select, collection: Cdr::AuthLog::TRANSPORT_PROTOCOLS.invert
+  filter :transport_proto_id_eq, label: 'Transport protocol', as: :select, collection: Cdr::AuthLog::TRANSPORT_PROTOCOLS.invert, input_html: { class: 'tom-select' }
   filter :transport_remote_ip_covers,
          as: :string,
          input_html: { class: 'search_filter_string' },
@@ -143,7 +143,7 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
          label: 'Auth Error',
          as: :select,
          collection: Cdr::AuthLog::AUTH_ERRORS_WITH_CODE.invert,
-         input_html: { class: :chosen }
+         input_html: { class: 'tom-select' }
 
   filter :realm
   filter :request_method

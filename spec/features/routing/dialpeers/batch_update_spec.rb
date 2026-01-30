@@ -226,7 +226,7 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
     if assign_params.key? :routing_tag_ids
       check :Routing_tag_ids
       routing_tags.select { |tag| assign_params[:routing_tag_ids].include? tag.id.to_s }
-                  .each { |tag| fill_in_chosen 'routing_tag_ids[]', with: tag.name, multiple: true, visible: false }
+                  .each { |tag| fill_in_tom_select 'routing_tag_ids[]', with: tag.name, multiple: true, visible: false }
     end
   end
 
@@ -276,7 +276,7 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
 
     before do
       check :Routing_tag_ids
-      fill_in_chosen 'routing_tag_ids[]', with: Routing::RoutingTag::ANY_TAG, multiple: true
+      fill_in_tom_select 'routing_tag_ids[]', with: Routing::RoutingTag::ANY_TAG, multiple: true
     end
 
     it 'should create a Job to update routing_tag_ids to any tag: [nil]' do

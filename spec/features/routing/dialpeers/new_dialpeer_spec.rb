@@ -65,11 +65,11 @@ RSpec.describe 'Create new Dialpeer', js: true do
   let(:fill_form!) do
     fill_in 'Initial rate', with: '0.1'
     fill_in 'Next rate', with: '0.2'
-    fill_in_chosen 'Vendor', with: vendor.display_name, ajax: true
-    fill_in_chosen 'Account', with: account.display_name, ajax: true
-    fill_in_chosen 'Routing group', with: routing_group.display_name
-    fill_in_chosen 'Routeset discriminator', with: routeset_discriminator.display_name
-    fill_in_chosen 'Gateway', with: gateway.display_name
+    fill_in_tom_select 'Vendor', with: vendor.display_name, ajax: true
+    fill_in_tom_select 'Account', with: account.display_name, ajax: true
+    fill_in_tom_select 'Routing group', with: routing_group.display_name
+    fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
+    fill_in_tom_select 'Gateway', with: gateway.display_name
   end
 
   it 'creates record' do
@@ -94,10 +94,10 @@ RSpec.describe 'Create new Dialpeer', js: true do
   context 'with filled routing tags' do
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Routing tags', with: routing_tags[4].name, multiple: true
-      fill_in_chosen 'Routing tags', with: routing_tags[2].name, multiple: true
-      fill_in_chosen 'Routing tags', with: Routing::RoutingTag::ANY_TAG, multiple: true
-      fill_in_chosen 'Routing tags', with: routing_tags[0].name, multiple: true
+      fill_in_tom_select 'Routing tags', with: routing_tags[4].name, multiple: true
+      fill_in_tom_select 'Routing tags', with: routing_tags[2].name, multiple: true
+      fill_in_tom_select 'Routing tags', with: Routing::RoutingTag::ANY_TAG, multiple: true
+      fill_in_tom_select 'Routing tags', with: routing_tags[0].name, multiple: true
     end
 
     it 'creates record' do
@@ -131,11 +131,11 @@ RSpec.describe 'Create new Dialpeer', js: true do
     let(:fill_form!) do
       fill_in 'Initial rate', with: '0.1'
       fill_in 'Next rate', with: '0.2'
-      fill_in_chosen 'Vendor', with: vendor.display_name, ajax: true
-      fill_in_chosen 'Account', with: account.display_name, ajax: true
-      fill_in_chosen 'Routing group', with: routing_group.display_name
-      fill_in_chosen 'Routeset discriminator', with: routeset_discriminator.display_name
-      fill_in_chosen 'Gateway Group', with: gateway_group.display_name
+      fill_in_tom_select 'Vendor', with: vendor.display_name, ajax: true
+      fill_in_tom_select 'Account', with: account.display_name, ajax: true
+      fill_in_tom_select 'Routing group', with: routing_group.display_name
+      fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
+      fill_in_tom_select 'Gateway Group', with: gateway_group.display_name
     end
 
     it 'creates record' do
@@ -162,12 +162,12 @@ RSpec.describe 'Create new Dialpeer', js: true do
     let(:fill_form!) do
       fill_in 'Initial rate', with: '0.1'
       fill_in 'Next rate', with: '0.2'
-      fill_in_chosen 'Vendor', with: vendor.display_name, ajax: true
-      fill_in_chosen 'Account', with: account.display_name, ajax: true
-      fill_in_chosen 'Routing group', with: routing_group.display_name
-      fill_in_chosen 'Routeset discriminator', with: routeset_discriminator.display_name
-      fill_in_chosen 'Gateway', with: gateway.display_name
-      fill_in_chosen 'Gateway Group', with: gateway_group.display_name
+      fill_in_tom_select 'Vendor', with: vendor.display_name, ajax: true
+      fill_in_tom_select 'Account', with: account.display_name, ajax: true
+      fill_in_tom_select 'Routing group', with: routing_group.display_name
+      fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
+      fill_in_tom_select 'Gateway', with: gateway.display_name
+      fill_in_tom_select 'Gateway Group', with: gateway_group.display_name
     end
 
     it 'does not create record' do

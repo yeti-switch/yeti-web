@@ -20,7 +20,7 @@ ActiveAdmin.register Billing::Transaction, as: 'Transactions' do
   filter :created_at, as: :date_time_range
   account_filter :account_id_eq
   filter :service_id, label: 'Service ID'
-  filter :service, input_html: { class: 'chosen' }
+  filter :service, input_html: { class: 'tom-select' }
   filter :amount
   filter :description
   filter :uuid_equals, label: 'UUID'

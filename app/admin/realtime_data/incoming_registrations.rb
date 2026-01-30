@@ -33,7 +33,7 @@ ActiveAdmin.register RealtimeData::IncomingRegistration, as: 'Incoming Registrat
          as: :select,
          collection: proc { Gateway.all },
          label: 'Gateway',
-         input_html: { class: 'chosen' }
+         input_html: { class: 'tom-select' }
 
   index download_links: false do
     column :node

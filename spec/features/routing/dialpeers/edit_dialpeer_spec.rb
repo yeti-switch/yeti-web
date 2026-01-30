@@ -69,7 +69,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
       FactoryBot.create(:dialpeer, routing_tag_ids: [routing_tags[2].id, nil])
     end
     let(:fill_form!) do
-      chosen_deselect_values 'Routing tags', values: [routing_tags[2].name, Routing::RoutingTag::ANY_TAG]
+      tom_select_deselect_values 'Routing tags', values: [routing_tags[2].name, Routing::RoutingTag::ANY_TAG]
     end
 
     it 'changes routing tags' do
@@ -83,10 +83,12 @@ RSpec.describe 'Edit Dialpeer', js: true do
 
   context 'with filled routing tags' do
     let(:fill_form!) do
-      fill_in_chosen 'Routing tags', with: Routing::RoutingTag::ANY_TAG, multiple: true
-      fill_in_chosen 'Routing tags', with: routing_tags[3].name, multiple: true
-      fill_in_chosen 'Routing tags', with: routing_tags[1].name, multiple: true
-      fill_in_chosen 'Routing tags', with: routing_tags[2].name, multiple: true
+      fill_in_tom_select 'Routing tags', with: [
+        Routing::RoutingTag::ANY_TAG,
+        routing_tags[3].name,
+        routing_tags[1].name,
+        routing_tags[2].name
+      ]
     end
 
     it 'changes routing tags' do
@@ -121,8 +123,8 @@ RSpec.describe 'Edit Dialpeer', js: true do
     let!(:vendor) { FactoryBot.create(:vendor) }
     let!(:account) { FactoryBot.create(:account, contractor: vendor) }
     let(:fill_form!) do
-      fill_in_chosen 'Vendor', with: vendor.name, ajax: true
-      fill_in_chosen 'Account', with: account.name
+      fill_in_tom_select 'Vendor', with: vendor.name, ajax: true
+      fill_in_tom_select 'Account', with: account.name
     end
 
     it 'does not update dialpeer' do
@@ -167,7 +169,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
       context 'with gateway' do
         let(:fill_form!) do
           super()
-          fill_in_chosen 'Gateway', with: gateway.name, exact_label: true
+          fill_in_tom_select 'Gateway', with: gateway.name, exact_label: true
         end
 
         it 'updates correctly' do
@@ -197,7 +199,7 @@ RSpec.describe 'Edit Dialpeer', js: true do
       context 'with gateway_group' do
         let(:fill_form!) do
           super()
-          fill_in_chosen 'Gateway Group', with: gateway_group.name
+          fill_in_tom_select 'Gateway Group', with: gateway_group.name
         end
 
         it 'updates correctly' do

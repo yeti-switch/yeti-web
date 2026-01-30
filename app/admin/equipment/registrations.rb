@@ -62,12 +62,12 @@ ActiveAdmin.register Equipment::Registration do
 
   filter :id, label: 'ID'
   filter :name
-  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :pop, input_html: { class: 'chosen' }
-  filter :node, input_html: { class: 'chosen' }
-  filter :sip_schema_id, as: :select, collection: proc { Equipment::Registration::SIP_SCHEMAS.invert }
+  boolean_filter :enabled
+  filter :pop, input_html: { class: 'tom-select' }
+  filter :node, input_html: { class: 'tom-select' }
+  filter :sip_schema_id, as: :select, collection: proc { Equipment::Registration::SIP_SCHEMAS.invert }, input_html: { class: 'tom-select' }
   filter :sip_interface_name, label: 'SIP Interface Name'
-  filter :transport_protocol, input_html: { class: 'chosen' }, collection: proc { Equipment::TransportProtocol.pluck(:name, :id) }
+  filter :transport_protocol, input_html: { class: 'tom-select' }, collection: proc { Equipment::TransportProtocol.pluck(:name, :id) }
   filter :domain
   filter :username
   filter :auth_user
@@ -81,13 +81,13 @@ ActiveAdmin.register Equipment::Registration do
       f.input :enabled
       f.input :pop, as: :select,
                     include_blank: 'Any',
-                    input_html: { class: 'chosen' }
+                    input_html: { class: 'tom-select' }
       f.input :node, as: :select,
                      include_blank: 'Any',
-                     input_html: { class: 'chosen' }
-      f.input :sip_schema_id, as: :select, include_blank: false, collection: Equipment::Registration::SIP_SCHEMAS.invert
+                     input_html: { class: 'tom-select' }
+      f.input :sip_schema_id, as: :select, include_blank: false, collection: Equipment::Registration::SIP_SCHEMAS.invert, input_html: { class: 'tom-select' }
       f.input :sip_interface_name, label: 'SIP Interface Name'
-      f.input :transport_protocol, as: :select, include_blank: false
+      f.input :transport_protocol, as: :select, include_blank: false, input_html: { class: 'tom-select' }
       f.input :domain
       f.input :username
       f.input :display_username

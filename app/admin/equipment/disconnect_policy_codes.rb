@@ -33,10 +33,10 @@ ActiveAdmin.register DisconnectPolicyCode do
   end
 
   filter :id
-  filter :policy, input_html: { class: 'chosen' }
-  filter :code, input_html: { class: 'chosen' }
-  filter :stop_hunting, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :pass_reason_to_originator, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :policy, input_html: { class: 'tom-select' }
+  filter :code, input_html: { class: 'tom-select' }
+  boolean_filter :stop_hunting
+  boolean_filter :pass_reason_to_originator
 
   show do |_s|
     attributes_table do
@@ -57,10 +57,10 @@ ActiveAdmin.register DisconnectPolicyCode do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
-      f.input :policy, input_html: { class: 'chosen' }
+      f.input :policy, input_html: { class: 'tom-select' }
       f.input :code, as: :select,
                      collection: DisconnectCode.order(:code),
-                     input_html: { class: 'chosen' }
+                     input_html: { class: 'tom-select' }
       f.input :stop_hunting
       f.input :pass_reason_to_originator
       f.input :rewrited_code

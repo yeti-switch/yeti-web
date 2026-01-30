@@ -18,13 +18,13 @@ RSpec.describe 'New Customer Auth', js: true do
 
   let(:fill_form!) do
     fill_in 'Name', with: 'Test'
-    fill_in_chosen 'Customer', with: customer.name, ajax: true
-    fill_in_chosen 'Account', with: account.name, ajax: true
-    fill_in_chosen 'DST Numberlist', with: dst_numberlist.display_name, ajax: true
-    fill_in_chosen 'SRC Numberlist', with: src_numberlist.display_name, ajax: true
-    fill_in_chosen 'Gateway', with: gateway.name, ajax: true
-    fill_in_chosen 'Rateplan', with: rateplan.name
-    fill_in_chosen 'Routing plan', with: routing_plan.name
+    fill_in_tom_select 'Customer', with: customer.name, ajax: true
+    fill_in_tom_select 'Account', with: account.name, ajax: true
+    fill_in_tom_select 'DST Numberlist', with: dst_numberlist.display_name, ajax: true
+    fill_in_tom_select 'SRC Numberlist', with: src_numberlist.display_name, ajax: true
+    fill_in_tom_select 'Gateway', with: gateway.name, ajax: true
+    fill_in_tom_select 'Rateplan', with: rateplan.name
+    fill_in_tom_select 'Routing plan', with: routing_plan.name
   end
   let(:submit_form!) do
     click_submit('Create Customers auth')

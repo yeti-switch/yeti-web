@@ -36,7 +36,7 @@ RSpec.describe 'Index Customer Auths', type: :feature do
   context 'with filter by customer only', js: true do
     let(:apply_filters!) do
       within_filters do
-        fill_in_chosen 'Customer', with: customer.name, exact_label: true, ajax: true
+        fill_in_tom_select 'Customer', with: customer.name, exact_label: true, ajax: true
       end
       click_submit('Filter')
     end
@@ -59,8 +59,8 @@ RSpec.describe 'Index Customer Auths', type: :feature do
   context 'with filter by customer and account', js: true do
     let(:apply_filters!) do
       within_filters do
-        fill_in_chosen 'Customer', with: customer.name, exact_label: true, ajax: true
-        fill_in_chosen 'Account', with: account.name, exact_label: true, ajax: true
+        fill_in_tom_select 'Customer', with: customer.name, exact_label: true, ajax: true
+        fill_in_tom_select 'Account', with: account.name, exact_label: true, ajax: true
       end
       click_submit('Filter')
     end
@@ -89,7 +89,7 @@ RSpec.describe 'Index Customer Auths', type: :feature do
   context 'with filter by account only', js: true do
     let(:apply_filters!) do
       within_filters do
-        fill_in_chosen 'Account', with: account.name, exact_label: true, ajax: true
+        fill_in_tom_select 'Account', with: account.name, exact_label: true, ajax: true
       end
       click_submit('Filter')
     end
@@ -118,8 +118,8 @@ RSpec.describe 'Index Customer Auths', type: :feature do
   context 'with filter by customer and gateway', js: true do
     let(:apply_filters!) do
       within_filters do
-        fill_in_chosen 'Customer', with: customer.name, exact_label: true, ajax: true
-        fill_in_chosen 'Gateway', with: gateway.name, exact_label: true, ajax: true
+        fill_in_tom_select 'Customer', with: customer.name, exact_label: true, ajax: true
+        fill_in_tom_select 'Gateway', with: gateway.name, exact_label: true, ajax: true
       end
       click_submit('Filter')
     end
@@ -148,7 +148,7 @@ RSpec.describe 'Index Customer Auths', type: :feature do
   context 'with filter by contractors gateway', js: true do
     let(:apply_filters!) do
       within_filters do
-        fill_in_chosen 'Gateway', with: gateway.name, exact_label: true, ajax: true
+        fill_in_tom_select 'Gateway', with: gateway.name, exact_label: true, ajax: true
       end
       click_submit('Filter')
     end
@@ -177,7 +177,7 @@ RSpec.describe 'Index Customer Auths', type: :feature do
   context 'with filter by shared gateway', js: true do
     let(:apply_filters!) do
       within_filters do
-        fill_in_chosen 'Gateway', with: gateway.name, exact_label: true, ajax: true
+        fill_in_tom_select 'Gateway', with: gateway.name, exact_label: true, ajax: true
       end
       click_submit('Filter')
     end

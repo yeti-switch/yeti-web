@@ -1,16 +1,16 @@
-// Build chosen field for routing tag ids select on update batch action form
+// Build tom-select field for routing tag ids select on update batch action form
 
 $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
-    var tagsChosen = $(form).find("select[name='routing_tag_ids']").prop({
-        'name': 'routing_tag_ids[]', 
-        'class': 'chosen', 
+    var tagsSelect = $(form).find("select[name='routing_tag_ids']").prop({
+        'name': 'routing_tag_ids[]',
+        'class': 'tom-select',
         'id': 'batch_update_routing_tag_ids',
         'value': null, // reset default value
         'multiple': true
     });
     var tagsCheckbox = $('#mass_update_dialog_routing_tag_ids');
 
-    if (tagsChosen.length === 0) {
+    if (tagsSelect.length === 0) {
         return;
     }
 
@@ -22,14 +22,21 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
         'disabled': true
     }).appendTo(form);
 
-    tagsChosen.chosen({no_results_text: "No results matched", width: '240px', search_contains: true, allow_single_deselect: true});
+    var ts = new TomSelect(tagsSelect[0], {
+        plugins: ['remove_button', 'clear_button'],
+        render: {
+            no_results: function() {
+                return '<div class="no-results">No results matched</div>';
+            }
+        }
+    });
 
-    tagsChosen.change(function() {
-        tagsChosen.val().length === 0 ? hidden.prop('disabled', false) : hidden.prop('disabled', true);
+    tagsSelect.on('change', function() {
+        ts.getValue().length === 0 ? hidden.prop('disabled', false) : hidden.prop('disabled', true);
     });
 
     tagsCheckbox.change(function () {
-        if (tagsCheckbox.is(':checked') && tagsChosen.val().length === 0) {
+        if (tagsCheckbox.is(':checked') && ts.getValue().length === 0) {
             hidden.prop('disabled', false);
         } else {
             hidden.prop('disabled', true);
