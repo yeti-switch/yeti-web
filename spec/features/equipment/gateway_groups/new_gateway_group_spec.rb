@@ -15,7 +15,7 @@ RSpec.describe 'Create new Gateway group', type: :feature, js: true do
         vendor_id: lambda {
                      fill_in_chosen('Vendor', with: @vendor.name, ajax: true)
                    },
-        balancing_mode_id: 'Priority/Weigth balancing'
+        balancing_mode_id: 'Priority/Weight balancing'
       }
     end
 
