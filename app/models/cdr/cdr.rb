@@ -372,6 +372,17 @@ class Cdr::Cdr < Cdr::Base
     "/dump/#{name}"
   end
 
+  def dump_file_s3_key
+    return unless (name = dump_file_name)
+
+    prefix = YetiConfig.s3_storage&.pcap&.prefix
+    return dump_file_path if prefix.blank?
+
+    normalized_prefix = prefix.to_s.sub(%r{\A/+}, '')
+    normalized_prefix = "#{normalized_prefix}/" unless normalized_prefix.blank? || normalized_prefix.end_with?('/')
+    "#{normalized_prefix}#{name}"
+  end
+
   def dump_file_name
     return if local_tag.blank? || node_id.blank?
 

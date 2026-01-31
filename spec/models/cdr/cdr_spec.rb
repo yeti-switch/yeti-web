@@ -163,6 +163,36 @@
 #
 
 RSpec.describe Cdr::Cdr do
+  describe '#dump_file_s3_key' do
+    subject(:s3_key) { cdr.dump_file_s3_key }
+
+    let(:cdr) { described_class.new(local_tag: 'some_local_tag', node_id: 25) }
+
+    context 'when s3 pcap prefix is not configured' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(pcap: OpenStruct.new(prefix: nil))
+        )
+      end
+
+      it 'uses the default dump file path' do
+        expect(s3_key).to eq('/dump/some_local_tag_25.pcap')
+      end
+    end
+
+    context 'when s3 pcap prefix is configured' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(pcap: OpenStruct.new(prefix: '/dump/'))
+        )
+      end
+
+      it 'normalizes the prefix for S3 keys' do
+        expect(s3_key).to eq('dump/some_local_tag_25.pcap')
+      end
+    end
+  end
+
   describe '.add_partitions' do
     subject do
       Cdr::Cdr.add_partitions
