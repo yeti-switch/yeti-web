@@ -163,6 +163,72 @@
 #
 
 RSpec.describe Cdr::Cdr do
+  describe '#dump_file_s3_path' do
+    subject { cdr.dump_file_s3_path }
+
+    let(:cdr) { described_class.new(local_tag: 'some_local_tag', node_id: 25) }
+
+    context 'when there is NO "prefix" key at all in pcap YML config (backward compatibility)' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(pcap: OpenStruct.new(bucket: ''))
+        )
+      end
+
+      it 'generates default prefix "dump"' do
+        expect(subject).to eq('some_local_tag_25.pcap')
+      end
+    end
+
+    context 'when S3 pcap prefix key is present but nil' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(pcap: OpenStruct.new(prefix: nil))
+        )
+      end
+
+      it 'generates path without prefix' do
+        expect(subject).to eq('some_local_tag_25.pcap')
+      end
+    end
+
+    context 'when S3 pcap prefix is configured as blank string' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(pcap: OpenStruct.new(prefix: ''))
+        )
+      end
+
+      it 'generates path without prefix' do
+        expect(subject).to eq('some_local_tag_25.pcap')
+      end
+    end
+
+    context 'when S3 pcap prefix is configured as "/dump/"' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(pcap: OpenStruct.new(prefix: 'dump/'))
+        )
+      end
+
+      it 'normalizes the prefix for S3 keys' do
+        expect(subject).to eq('dump/some_local_tag_25.pcap')
+      end
+    end
+
+    context 'when S3 pcap prefix is configured as "dump2/' do
+      before do
+        allow(YetiConfig).to receive(:s3_storage).and_return(
+          OpenStruct.new(pcap: OpenStruct.new(prefix: 'dump2/'))
+        )
+      end
+
+      it 'normalizes the prefix for S3 keys' do
+        expect(subject).to eq('dump2/some_local_tag_25.pcap')
+      end
+    end
+  end
+
   describe '.add_partitions' do
     subject do
       Cdr::Cdr.add_partitions

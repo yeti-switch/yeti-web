@@ -44,7 +44,7 @@ module Cdr
       response_object.headers['Content-Disposition'] = "attachment; filename=\"#{cdr.dump_file_name}\""
       response_object.headers['Content-Type'] = 'application/octet-stream'
 
-      S3AttachmentWrapper.stream_to!(pcap_bucket, cdr.dump_file_path) do |chunk|
+      S3AttachmentWrapper.stream_to!(pcap_bucket, cdr.dump_file_s3_path) do |chunk|
         response_object.stream.write(chunk)
       end
     end
