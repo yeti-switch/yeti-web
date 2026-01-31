@@ -83,7 +83,8 @@ RSpec.describe 'config/yeti_web.yml' do
         force_path_style: be_one_of(true, false),
         client_options: a_kind_of(Hash),
         pcap: {
-          bucket: a_kind_of(String)
+          bucket: a_kind_of(String),
+          prefix: a_kind_of(String)
         },
         call_record: {
           bucket: a_kind_of(String)
