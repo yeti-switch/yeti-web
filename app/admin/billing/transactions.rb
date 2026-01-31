@@ -16,6 +16,11 @@ ActiveAdmin.register Billing::Transaction, as: 'Transactions' do
 
   includes :account, :service
 
+  with_default_params do
+    params[:q] = { created_at_gteq_datetime_picker: 0.days.ago.beginning_of_day }
+    'Only records from beginning of the day showed by default'
+  end
+
   filter :id
   filter :created_at, as: :date_time_range
   account_filter :account_id_eq

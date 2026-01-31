@@ -24,6 +24,11 @@ ActiveAdmin.register Payment do
                  :balance_before_payment,
                  :rolledback_at
 
+  with_default_params do
+    params[:q] = { created_at_gteq_datetime_picker: 0.days.ago.beginning_of_day }
+    'Only records from beginning of the day showed by default'
+  end
+
   controller do
     def scoped_collection
       Payment.includes(:account)
