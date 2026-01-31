@@ -109,7 +109,7 @@ ActiveAdmin.register Contractor do
   filter :description
   filter :phones
   filter :external_id
-  filter :smtp_connection, input_html: { class: 'chosen' }, collection: proc { System::SmtpConnection.pluck(:name, :id) }
+  filter :smtp_connection, input_html: { class: 'tom-select' }, collection: proc { System::SmtpConnection.pluck(:name, :id) }
   boolean_filter :enabled
   boolean_filter :vendor
   boolean_filter :customer

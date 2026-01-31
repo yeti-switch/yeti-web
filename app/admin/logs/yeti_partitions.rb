@@ -8,7 +8,7 @@ ActiveAdmin.register PartitionModel::Log, as: 'Log Partition' do
   filter :parent_table_eq,
          as: :select,
          label: 'Parent Table',
-         input_html: { class: :chosen },
+         input_html: { class: 'tom-select' },
          collection: PartitionModel::Log.partitioned_tables
 
   controller do

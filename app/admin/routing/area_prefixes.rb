@@ -35,13 +35,13 @@ ActiveAdmin.register Routing::AreaPrefix do
       else
         f.input :prefix, label: 'Prefix'
       end
-      f.input :area, as: :select, input_html: { class: 'chosen' }
+      f.input :area, as: :select, input_html: { class: 'tom-select' }
     end
     f.actions
   end
 
   filter :id
   filter :prefix
-  filter :area, input_html: { class: 'chosen' }
+  filter :area, input_html: { class: 'tom-select' }
   filter :prefix_covers, as: :string
 end

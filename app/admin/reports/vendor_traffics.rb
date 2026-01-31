@@ -61,7 +61,7 @@ ActiveAdmin.register Report::VendorTraffic, as: 'VendorTraffic' do
 
       f.input :send_to,
               as: :select,
-              input_html: { class: 'chosen', multiple: true },
+              input_html: { class: 'tom-select', multiple: true },
               collection: Billing::Contact.collection,
               hint: f.object.send_to_hint
     end

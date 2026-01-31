@@ -49,10 +49,10 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   filter :name
   filter :mode_id_eq, label: 'Mode', as: :select, collection: Routing::Numberlist::MODES.invert
   filter :default_action_id_eq, label: 'Default action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
-  filter :lua_script, input_html: { class: 'chosen' }
+  filter :lua_script, input_html: { class: 'tom-select' }
   filter :external_id, label: 'External ID'
   filter :external_type
-  filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
+  filter :tag_action, input_html: { class: 'tom-select' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
   filter :defer_src_rewrite
   filter :defer_dst_rewrite
   filter :rewrite_ss_status_id_eq,
@@ -127,13 +127,13 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
       f.input :default_dst_rewrite_rule
       f.input :default_dst_rewrite_result
       f.input :defer_dst_rewrite
-      f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
+      f.input :lua_script, input_html: { class: 'tom-select' }, include_blank: 'None'
       f.input :tag_action
       f.input :tag_action_value, as: :select,
                                  collection: tag_action_value_options,
                                  multiple: true,
                                  include_hidden: false,
-                                 input_html: { class: 'chosen' }
+                                 input_html: { class: 'tom-select' }
       f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
       f.input :variables_json, label: 'Variables', as: :text
     end

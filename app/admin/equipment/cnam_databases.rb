@@ -54,7 +54,7 @@ ActiveAdmin.register Cnam::Database do
 
   filter :database_type,
          label: 'Type',
-         input_html: { class: :chosen },
+         input_html: { class: 'tom-select' },
          collection: Cnam::Database::CONST::TYPES.invert.to_a
   filter :drop_call_on_error
   filter :created_at

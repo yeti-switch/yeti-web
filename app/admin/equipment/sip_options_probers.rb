@@ -60,8 +60,8 @@ ActiveAdmin.register Equipment::SipOptionsProber do
   filter :id
   filter :name
   filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :pop, input_html: { class: 'chosen' }
-  filter :node, input_html: { class: 'chosen' }
+  filter :pop, input_html: { class: 'tom-select' }
+  filter :node, input_html: { class: 'tom-select' }
   filter :sip_schema_id, as: :select, collection: proc { Equipment::SipOptionsProber::SIP_SCHEMAS.invert }
   filter :external_id
 
@@ -72,10 +72,10 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       f.input :enabled
       f.input :pop, as: :select,
                     include_blank: 'Any',
-                    input_html: { class: 'chosen' }
+                    input_html: { class: 'tom-select' }
       f.input :node, as: :select,
                      include_blank: 'Any',
-                     input_html: { class: 'chosen' }
+                     input_html: { class: 'tom-select' }
       f.input :sip_schema_id, as: :select, include_blank: false, collection: Equipment::SipOptionsProber::SIP_SCHEMAS.invert
       f.input :transport_protocol, as: :select, include_blank: false
       f.input :ruri_domain

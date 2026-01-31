@@ -28,7 +28,7 @@ RSpec.describe 'Index System Api Log Configs' do
       before do
         visit api_log_configs_path
         click_link 'New Api Log Config'
-        fill_in_chosen 'Controller', with: 'Api::Rest::Admin::AuthController'
+        fill_in_tom_select 'Controller', with: 'Api::Rest::Admin::AuthController'
       end
 
       it 'should create record' do

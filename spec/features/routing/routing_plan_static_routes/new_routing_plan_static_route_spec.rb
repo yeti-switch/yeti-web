@@ -17,8 +17,8 @@ RSpec.describe 'Create new Routing Plan Static Route', type: :feature, js: true 
 
     visit new_static_route_path
 
-    aa_form.search_chosen 'Vendor', vendor.name, ajax: true
-    aa_form.search_chosen 'Routing plan', routing_plan.display_name, ajax: true
+    aa_form.search_tom_select 'Vendor', vendor.name, ajax: true
+    aa_form.search_tom_select 'Routing plan', routing_plan.display_name, ajax: true
   end
 
   it 'creates record' do

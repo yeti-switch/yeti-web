@@ -47,24 +47,22 @@ module HelperObjects
       select.find(:option, text).select_option
     end
 
-    # selects option of chosen select by label or id.
-    # @param field [String] field name or id
+    # selects option of tom-select select by label or id.
+    # @param label [String]
     # @param text [String] value which you want to select
     # @param exact_field [TrueClass,FalseClass] search by exact field attribute name
-    def select_chosen(field, text, exact_field: false)
-      select = field_input(field, exact: exact_field, visible: :all)
-      chosen_container = select.send(:parent).find('.chosen-container')
-      @ctx.chosen_pick(nil, text: text, chosen_node: chosen_container)
+    def select_tom_select(label, text, exact_field: false)
+      tom_select_container = @ctx.tom_select_by_label(label, exact: exact_field)
+      @ctx.tom_select_pick(nil, text: text, tom_select_node: tom_select_container)
     end
 
-    # search option of chosen select (and wait while it appear) by label or id.
-    # @param field [String] field name or id
+    # search option of tom-select select (and wait while it appear) by label or id.
+    # @param label [String]
     # @param text [String] value which you want to search
     # @param exact_field [TrueClass,FalseClass] search by exact field attribute name
-    def search_chosen(field, text, exact_field: false, multiple: false, ajax: false)
-      select = field_input(field, exact: exact_field, visible: :all)
-      chosen_container = select.send(:parent).find('.chosen-container')
-      @ctx.chosen_select(nil, search: text, multiple: multiple, ajax: ajax, chosen_node: chosen_container)
+    def search_tom_select(label, text, exact_field: false, multiple: false, ajax: false)
+      tom_select_container = @ctx.tom_select_by_label(label, exact: exact_field)
+      @ctx.tom_select_select(nil, search: text, multiple: multiple, ajax: ajax, tom_select_node: tom_select_container)
     end
 
     # check/uncheck checkbox.

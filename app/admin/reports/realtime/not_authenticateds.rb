@@ -10,7 +10,7 @@ ActiveAdmin.register Report::Realtime::NotAuthenticated do
   filter :time_interval_eq, label: 'Time Interval',
                             as: :select,
                             collection: Report::Realtime::Base::INTERVALS,
-                            input_html: { class: 'chosen' }, include_blank: false
+                            input_html: { class: 'tom-select' }, include_blank: false
 
   with_default_realtime_interval
 
