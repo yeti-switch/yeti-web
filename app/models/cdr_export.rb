@@ -33,6 +33,7 @@ class CdrExport < ApplicationRecord
   self.store_full_sti_class = false
 
   include Memoizable
+  include WithPaperTrail
 
   class FiltersModel < JsonAttributeModel
     include WithActiveModelArrayAttribute

@@ -6,7 +6,7 @@ panel 'History' do
       link_to v.id, audit_log_item_path(v.id)
     end
     column :item do |v|
-      link_to v.item.display_name, smart_url_for(v.item, version: v.id)
+      link_to v.item.decorate.display_name, smart_url_for(v.item, version: v.id)
     end
     column :event
     column :created_at
