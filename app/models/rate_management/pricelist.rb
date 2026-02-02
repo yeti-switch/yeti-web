@@ -46,6 +46,8 @@ module RateManagement
       freeze
     end
 
+    include WithPaperTrail
+
     belongs_to :project, class_name: 'RateManagement::Project'
 
     has_many :items, class_name: 'RateManagement::PricelistItem', dependent: :delete_all, inverse_of: 'pricelist'
@@ -90,6 +92,10 @@ module RateManagement
 
     def state_name
       CONST::STATE_IDS[state_id]
+    end
+
+    def display_name
+      "#{name} | #{id}"
     end
   end
 end
