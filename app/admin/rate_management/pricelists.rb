@@ -3,8 +3,10 @@
 ActiveAdmin.register RateManagement::Pricelist, as: 'Rate Management Pricelist' do
   menu parent: 'Rate Management', priority: 2, label: 'Pricelists'
   config.batch_actions = true
-  actions :index, :new, :create, :edit, :update, :destroy
+  actions :index, :new, :create, :edit, :update, :destroy, :show
   decorate_with RateManagementPricelistDecorator
+
+  acts_as_audit
 
   controller do
     def build_new_resource
