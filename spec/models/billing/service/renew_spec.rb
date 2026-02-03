@@ -183,5 +183,24 @@ RSpec.describe Billing::Service::Renew do
         end
       end
     end
+
+    context 'when service is terminated' do
+      let(:service_attrs) do
+        super().merge(state_id: Billing::Service::STATE_ID_TERMINATED)
+      end
+
+      it 'does not renew' do
+        expect(service).not_to receive(:build_provisioning_object)
+
+        expect { subject }.not_to change {
+          [
+            service.reload.renew_at,
+            service.reload.state_id,
+            Billing::Transaction.count,
+            account.reload.balance
+          ]
+        }
+      end
+    end
   end
 end

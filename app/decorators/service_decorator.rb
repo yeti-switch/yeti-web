@@ -10,6 +10,15 @@ class ServiceDecorator < BillingDecorator
   private
 
   def state_color
-    object.state_id == Billing::Service::STATE_ID_ACTIVE ? 'ok' : 'red'
+    case object.state_id
+    when Billing::Service::STATE_ID_ACTIVE
+      'ok'
+    when Billing::Service::STATE_ID_SUSPENDED
+      'warning'
+    when Billing::Service::STATE_ID_TERMINATED
+      'error'
+    else
+      'warning'
+    end
   end
 end
