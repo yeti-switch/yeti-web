@@ -6,6 +6,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
   decorate_with CdrExportDecorator
 
   acts_as_clone
+  acts_as_audit
 
   controller do
     include ActionController::Live
