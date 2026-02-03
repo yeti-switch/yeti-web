@@ -34,10 +34,12 @@ class Billing::Service < ApplicationRecord
 
   STATE_ID_ACTIVE = 10
   STATE_ID_SUSPENDED = 20
+  STATE_ID_TERMINATED = 30
 
   STATES = {
     STATE_ID_ACTIVE => 'Active',
-    STATE_ID_SUSPENDED => 'Suspended'
+    STATE_ID_SUSPENDED => 'Suspended',
+    STATE_ID_TERMINATED => 'Terminated'
   }.freeze
 
   RENEW_PERIOD_ID_DAY = 10
@@ -69,6 +71,7 @@ class Billing::Service < ApplicationRecord
   validates :renew_at, presence: true, allow_nil: false, if: proc { !renew_period_id.nil? }
   validates :renew_at, absence: true, allow_nil: true, if: proc { renew_period_id.nil? }
   validate :validate_variables
+  validate :prevent_state_change_from_terminated, on: :update
 
   before_create :verify_provisioning_variables
   before_create :assign_uuid
@@ -80,7 +83,9 @@ class Billing::Service < ApplicationRecord
   after_destroy :provisioning_object_after_destroy
 
   scope :ready_for_renew, lambda {
-    where('renew_period_id is not null AND renew_at <= ? ', Time.current).order(renew_at: :asc)
+    where('renew_period_id is not null AND renew_at <= ? ', Time.current)
+      .where.not(state_id: STATE_ID_TERMINATED)
+      .order(renew_at: :asc)
   }
   scope :one_time_services, lambda {
     where('renew_period_id is null')
@@ -92,6 +97,10 @@ class Billing::Service < ApplicationRecord
 
   def state
     STATES[state_id]
+  end
+
+  def terminated?
+    state_id == STATE_ID_TERMINATED
   end
 
   def renew_period
@@ -135,6 +144,12 @@ class Billing::Service < ApplicationRecord
     if !variables.nil? && !variables.is_a?(Hash)
       errors.add(:variables, 'must be a JSON object or empty')
     end
+  end
+
+  def prevent_state_change_from_terminated
+    return unless state_id_changed? && state_id_was == STATE_ID_TERMINATED
+
+    errors.add(:state_id, 'cannot be changed once terminated')
   end
 
   def verify_provisioning_variables

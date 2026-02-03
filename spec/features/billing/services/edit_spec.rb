@@ -49,4 +49,19 @@ RSpec.describe 'Billing Services Edit', js: true, bullet: [:n] do
       expect(page).to have_field 'Renew price', with: ''
     end
   end
+
+  context 'when service is terminated' do
+    let(:record_attrs) { { state_id: Billing::Service::STATE_ID_TERMINATED } }
+
+    it 'redirects and blocks editing' do
+      visit edit_service_path(record.id)
+
+      expect(page).to have_flash_message(
+        'You are not authorized to perform this action.',
+        type: :error,
+        exact: true
+      )
+      expect(page).to have_current_path root_path
+    end
+  end
 end
