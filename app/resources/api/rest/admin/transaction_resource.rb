@@ -3,7 +3,6 @@
 class Api::Rest::Admin::TransactionResource < ::BaseResource
   model_name 'Billing::Transaction'
   paginator :paged
-  immutable
 
   attribute :description
   attribute :amount
@@ -23,5 +22,9 @@ class Api::Rest::Admin::TransactionResource < ::BaseResource
 
   def self.sortable_fields(_ctx = nil)
     %i[id created_at account_id service_id amount]
+  end
+
+  def self.creatable_fields(_ctx = nil)
+    %i[amount description account service]
   end
 end
