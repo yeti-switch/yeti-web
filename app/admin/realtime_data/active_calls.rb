@@ -110,6 +110,9 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
     rescue NodeApi::Error => e
       flash[:warning] = e.message
       redirect_to_back
+    rescue RealtimeData::ActiveNode::Error, Node::Error => e
+      flash[:warning] = e.message
+      redirect_to_back
     end
 
     def scoped_collection
