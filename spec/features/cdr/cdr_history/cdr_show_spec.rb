@@ -150,7 +150,7 @@ RSpec.describe 'CDR show', type: :feature do
         allow(YetiConfig).to receive(:s3_storage).and_return(
           OpenStruct.new(
             endpoint: 'http::some_example_s3_storage_url',
-            pcap: OpenStruct.new(bucket: 'test-pcap-bucket'),
+            pcap: OpenStruct.new(bucket: 'test-pcap-bucket', prefix: 'dump'),
             call_record: OpenStruct.new(bucket: 'test-call-record-bucket')
           )
         )

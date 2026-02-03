@@ -372,6 +372,12 @@ class Cdr::Cdr < Cdr::Base
     "/dump/#{name}"
   end
 
+  def dump_file_s3_path
+    return unless (name = dump_file_name)
+
+    "#{YetiConfig.s3_storage&.pcap&.prefix}#{name}"
+  end
+
   def dump_file_name
     return if local_tag.blank? || node_id.blank?
 
