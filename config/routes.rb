@@ -123,7 +123,7 @@ Rails.application.routes.draw do
           jsonapi_resources :invoice_service_data, only: %i[index show]
           jsonapi_resources :service_types
           jsonapi_resources :services, only: %i[index show create update]
-          jsonapi_resources :transactions, only: %i[index show]
+          jsonapi_resources :transactions, only: %i[index show create]
 
           jsonapi_resources :timezones
           jsonapi_resources :dtmf_receive_modes
