@@ -9,6 +9,10 @@ module CustomerV1Authorizable
     attr_reader :auth_context
   end
 
+  def meta
+    build_auth_context_meta
+  end
+
   private
 
   def authorize!
@@ -48,5 +52,19 @@ module CustomerV1Authorizable
   def handle_authorization_error(error)
     logger.info "#{error.class}: #{error.message}"
     head 401
+  end
+
+  def build_auth_context_meta
+    return if auth_context.nil?
+
+    {
+      'customer_id' => auth_context.customer_id,
+      'account_ids' => auth_context.account_ids,
+      'api_access_id' => auth_context.api_access_id,
+      'login' => auth_context.login,
+      'customer_portal_access_profile_id' => auth_context.customer_portal_access_profile_id,
+      'allow_listen_recording' => auth_context.allow_listen_recording,
+      'allow_outgoing_numberlists_ids' => auth_context.allow_outgoing_numberlists_ids
+    }
   end
 end

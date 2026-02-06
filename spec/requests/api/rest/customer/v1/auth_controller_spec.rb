@@ -8,6 +8,18 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
   let(:customer) { create(:customer) }
   let(:api_access_attrs) { { customer: } }
 
+  def expected_auth_meta_for(api_access)
+    {
+      'customer_id' => api_access.customer_id,
+      'account_ids' => api_access.account_ids,
+      'api_access_id' => api_access.id,
+      'login' => api_access.login,
+      'customer_portal_access_profile_id' => api_access.customer_portal_access_profile_id,
+      'allow_listen_recording' => api_access.allow_listen_recording,
+      'allow_outgoing_numberlists_ids' => api_access.allow_outgoing_numberlists_ids
+    }
+  end
+
   describe 'POST /api/rest/customer/v1/auth' do
     subject do
       post json_request_path, params: json_request_body.to_json, headers: json_request_headers
@@ -54,6 +66,13 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
                                           aud: [CustomerV1Auth::Authenticator::AUDIENCE],
                                           exp: CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.from_now.to_i
                                         )
+      end
+
+      it 'stores auth context in api log meta' do
+        expect { subject }.to change(Log::ApiLog, :count).by(1)
+
+        api_log = Log::ApiLog.last!
+        expect(api_log.meta).to eq(expected_auth_meta_for(api_access))
       end
 
       context 'when expiration interval is blank' do
@@ -204,7 +223,9 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
     it 'should create API Log record' do
       expect { subject }.to change(Log::ApiLog, :count).by(1)
 
-      expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+      api_log = Log::ApiLog.last!
+      expect(api_log).to have_attributes(remote_ip: '127.0.0.1')
+      expect(api_log.meta).to eq(expected_auth_meta_for(api_access))
     end
 
     it_behaves_like :json_api_customer_v1_check_authorization
@@ -221,7 +242,9 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
       it 'should create API Log record' do
         expect { subject }.to change(Log::ApiLog, :count).by(1)
 
-        expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+        api_log = Log::ApiLog.last!
+        expect(api_log).to have_attributes(remote_ip: '127.0.0.1')
+        expect(api_log.meta).to eq(expected_auth_meta_for(api_access))
       end
     end
 

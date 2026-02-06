@@ -40,10 +40,6 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
     head 204
   end
 
-  def meta
-    nil
-  end
-
   private
 
   def authenticate!
@@ -54,6 +50,7 @@ class Api::Rest::Customer::V1::AuthController < ApplicationController
     )
     @auth_token = result.token
     @expires_at = result.expires_at
+    @auth_context = result.auth_context
   end
 
   def auth_params
