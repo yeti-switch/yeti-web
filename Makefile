@@ -214,6 +214,7 @@ else
 	RAILS_ENV=test $(bundle_bin) exec parallel_test \
 		  spec/ \
 		  --type rspec \
+		  $(if $(PARALLEL_GROUP_BY),--group-by $(PARALLEL_GROUP_BY),) \
 		  $(if $(TEST_GROUP),--only-group $(TEST_GROUP),) \
 		  && script/format_runtime_log log/parallel_runtime_rspec.log \
 		  || { script/format_runtime_log log/parallel_runtime_rspec.log; false; }
