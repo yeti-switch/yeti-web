@@ -92,9 +92,9 @@ RSpec.describe 'Create Dialpeer Imports' do
     end
 
     let(:fill_in_form!) do
-      fill_in_chosen 'changes[unique_columns][]', with: :prefix, multiple: true, ajax: false
-      fill_in_chosen 'changes[unique_columns][]', with: :gateway_id, multiple: true, ajax: false
-      fill_in_chosen 'changes[unique_columns][]', with: :gateway_group_id, multiple: true, ajax: false
+      fill_in_tom_select 'changes[unique_columns][]', with: :prefix, multiple: true, ajax: false
+      fill_in_tom_select 'changes[unique_columns][]', with: :gateway_id, multiple: true, ajax: false
+      fill_in_tom_select 'changes[unique_columns][]', with: :gateway_group_id, multiple: true, ajax: false
     end
 
     it 'should fill correct o_id for imported data' do

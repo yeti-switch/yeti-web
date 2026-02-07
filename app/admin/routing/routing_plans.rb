@@ -34,12 +34,12 @@ ActiveAdmin.register Routing::RoutingPlan do
 
   filter :id
   filter :name
-  filter :sorting_id_eq, label: 'Sorting', as: :select, collection: Routing::RoutingPlan::SORTINGS.invert
-  filter :use_lnp, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :sorting_id_eq, label: 'Sorting', as: :select, collection: Routing::RoutingPlan::SORTINGS.invert, input_html: { class: 'tom-select' }
+  boolean_filter :use_lnp
   account_filter :customers_auths_account_id_eq, label: 'Assigned to account', path_params: { q: { contractor_customer_eq: true } }
   filter :rate_delta_max
   filter :max_rerouting_attempts
-  filter :routing_groups, input_html: { class: 'chosen' }, collection: proc { Routing::RoutingGroup.order(:name).pluck(:name, :id) }
+  filter :routing_groups, input_html: { class: 'tom-select' }, collection: proc { Routing::RoutingGroup.order(:name).pluck(:name, :id) }
 
   index do
     selectable_column
@@ -86,12 +86,16 @@ ActiveAdmin.register Routing::RoutingPlan do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
-      f.input :sorting_id, as: :select, include_blank: false, collection: Routing::RoutingPlan::SORTINGS.invert
+      f.input :sorting_id,
+              as: :select,
+              include_blank: false,
+              collection: Routing::RoutingPlan::SORTINGS.invert,
+              input_html: { class: 'tom-select' }
       f.input :use_lnp
       f.input :rate_delta_max
       f.input :max_rerouting_attempts
       f.input :routing_groups,
-              input_html: { class: 'chosen-sortable', multiple: true },
+              input_html: { class: 'tom-select-sortable', multiple: true },
               collection: Routing::RoutingGroup.order(:name)
       f.input :validate_dst_number_format
       f.input :validate_dst_number_network

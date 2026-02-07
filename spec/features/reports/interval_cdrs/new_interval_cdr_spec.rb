@@ -11,9 +11,9 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
 
   let(:submit_form!) { click_submit('Create Interval cdr report') }
   let(:fill_form!) do
-    fill_in_chosen 'Interval length', with: '10 Min'
-    fill_in_chosen 'Aggregation function', with: 'Count'
-    fill_in_chosen 'Aggregate by', with: 'destination_fee'
+    fill_in_tom_select 'Interval length', with: '10 Min'
+    fill_in_tom_select 'Aggregation function', with: 'Count'
+    fill_in_tom_select 'Aggregate by', with: 'destination_fee'
     fill_in_date_time 'Date start', with: '2019-01-01 00:00:00'
     fill_in_date_time 'Date end', with: '2019-02-01 01:00:00'
   end
@@ -39,7 +39,7 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
   context 'with single group_by' do
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Group by', with: 'customer_id', no_search: true
+      fill_in_tom_select 'Group by', with: 'customer_id', no_search: true
     end
 
     it 'creates record' do
@@ -64,8 +64,8 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
   context 'with single group_by' do
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Group by', with: 'customer_id', no_search: true
-      fill_in_chosen 'Group by', with: 'vendor_id', no_search: true
+      fill_in_tom_select 'Group by', with: 'customer_id', no_search: true
+      fill_in_tom_select 'Group by', with: 'vendor_id', no_search: true
     end
 
     it 'creates record' do
@@ -116,7 +116,7 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
     let!(:contact) { FactoryBot.create(:contact) }
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Send to', with: contact.display_name, multiple: true
+      fill_in_tom_select 'Send to', with: contact.display_name, multiple: true
     end
 
     it 'creates record' do
@@ -142,8 +142,8 @@ RSpec.describe 'Create new Interval Cdr', type: :feature, js: true do
     let!(:contacts) { FactoryBot.create_list(:contact, 3) }
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Send to', with: contacts.first.display_name, multiple: true
-      fill_in_chosen 'Send to', with: contacts.second.display_name, multiple: true
+      fill_in_tom_select 'Send to', with: contacts.first.display_name, multiple: true
+      fill_in_tom_select 'Send to', with: contacts.second.display_name, multiple: true
     end
 
     it 'creates record' do

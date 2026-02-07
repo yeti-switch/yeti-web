@@ -52,7 +52,7 @@ ActiveAdmin.register CodecGroup do
 
     f.inputs 'Codecs' do
       f.has_many :codec_group_codecs do |t|
-        t.input :codec_id, as: :select, collection: Codec.all, input_html: { class: 'chosen' }
+        t.input :codec_id, as: :select, collection: Codec.all, input_html: { class: 'tom-select' }
         t.input :priority
         t.input :dynamic_payload_type, hint: 'Payload type must be between 96 and 127'
         t.input :format_parameters

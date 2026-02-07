@@ -59,10 +59,10 @@ ActiveAdmin.register Equipment::SipOptionsProber do
 
   filter :id
   filter :name
-  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :pop, input_html: { class: 'chosen' }
-  filter :node, input_html: { class: 'chosen' }
-  filter :sip_schema_id, as: :select, collection: proc { Equipment::SipOptionsProber::SIP_SCHEMAS.invert }
+  boolean_filter :enabled
+  filter :pop, input_html: { class: 'tom-select' }
+  filter :node, input_html: { class: 'tom-select' }
+  filter :sip_schema_id, as: :select, collection: proc { Equipment::SipOptionsProber::SIP_SCHEMAS.invert }, input_html: { class: 'tom-select' }
   filter :external_id
 
   form do |f|
@@ -72,12 +72,12 @@ ActiveAdmin.register Equipment::SipOptionsProber do
       f.input :enabled
       f.input :pop, as: :select,
                     include_blank: 'Any',
-                    input_html: { class: 'chosen' }
+                    input_html: { class: 'tom-select' }
       f.input :node, as: :select,
                      include_blank: 'Any',
-                     input_html: { class: 'chosen' }
-      f.input :sip_schema_id, as: :select, include_blank: false, collection: Equipment::SipOptionsProber::SIP_SCHEMAS.invert
-      f.input :transport_protocol, as: :select, include_blank: false
+                     input_html: { class: 'tom-select' }
+      f.input :sip_schema_id, as: :select, include_blank: false, collection: Equipment::SipOptionsProber::SIP_SCHEMAS.invert, input_html: { class: 'tom-select' }
+      f.input :transport_protocol, as: :select, include_blank: false, input_html: { class: 'tom-select' }
       f.input :ruri_domain
       f.input :ruri_username
       f.input :from_uri

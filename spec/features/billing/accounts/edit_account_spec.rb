@@ -79,7 +79,7 @@ RSpec.describe 'Update Account', type: :feature, js: true do
 
   context 'when customer and vendor invoice period enable' do
     let(:fill_form!) do
-      chosen_deselect_value 'Invoice period'
+      clear_tom_select 'Invoice period'
     end
 
     it 'updates account' do
@@ -117,7 +117,7 @@ RSpec.describe 'Update Account', type: :feature, js: true do
   context 'with send_balance_notifications_to' do
     let!(:contact) { FactoryBot.create(:contact, contractor: account.contractor) }
     let(:fill_form!) do
-      fill_in_chosen 'Send balance notifications to', with: contact.email, multiple: true
+      fill_in_tom_select 'Send balance notifications to', with: contact.email, multiple: true
     end
 
     it 'updates account' do

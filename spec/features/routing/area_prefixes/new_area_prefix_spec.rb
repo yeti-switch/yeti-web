@@ -13,7 +13,7 @@ RSpec.describe 'Create new Area Prefix', type: :feature, js: true do
     FactoryBot.create(:area)
     visit new_routing_area_prefix_path
 
-    fill_in_chosen 'Area', with: area.name
+    fill_in_tom_select 'Area', with: area.name
   end
 
   it 'creates record' do

@@ -13,10 +13,10 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
     let!(:other_customer) { FactoryBot.create(:customer, name: 'other') }
 
     subject do
-      # open chosen popup to get input
-      chosen_select = page.find(chosen_container_selector('Customer'))
-      chosen_select.click
-      chosen_select.find('.chosen-search input').native.send_keys('cus')
+      # open tom-select popup to get input
+      tom_select = page.find_tom_select('Customer')
+      tom_select.click
+      tom_select.find('.ts-dropdown input.dropdown-input').native.send_keys('cus')
     end
 
     it 'should have one option in select' do

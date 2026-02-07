@@ -34,7 +34,7 @@ ActiveAdmin.register Report::VendorTrafficScheduler, as: 'VendorTrafficScheduler
     f.inputs do
       f.input :period
       f.contractor_input :vendor_id, label: 'Vendor', path_params: { q: { vendor_eq: true } }
-      f.input :send_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection, hint: f.object.send_to_hint
+      f.input :send_to, as: :select, input_html: { class: 'tom-select', multiple: true }, collection: Billing::Contact.collection, hint: f.object.send_to_hint
     end
     f.actions
   end

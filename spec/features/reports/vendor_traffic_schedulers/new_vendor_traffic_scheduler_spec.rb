@@ -15,7 +15,7 @@ RSpec.describe 'Create new Vendor Traffic Scheduler', type: :feature, js: true d
     visit new_vendor_traffic_scheduler_path
 
     aa_form.select_value 'Period', 'Hourly'
-    aa_form.search_chosen 'Vendor', vendor.name, ajax: true
+    aa_form.fill_in_tom_select 'Vendor', with: vendor.name, ajax: true
   end
 
   it 'creates record' do

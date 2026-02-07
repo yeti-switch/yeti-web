@@ -36,7 +36,7 @@ ActiveAdmin.register Billing::Contact do
 
   filter :id
   contractor_filter :contractor_id_eq
-  filter :admin_user, input_html: { class: 'chosen' }
+  filter :admin_user, input_html: { class: 'tom-select' }
   filter :email
   filter :notes
 
@@ -56,7 +56,7 @@ ActiveAdmin.register Billing::Contact do
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.contractor_input :contractor_id
-      f.input :admin_user, input_html: { class: 'chosen' }
+      f.input :admin_user, input_html: { class: 'tom-select' }
       f.input :email
       f.input :notes
     end

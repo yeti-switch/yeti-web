@@ -6,14 +6,14 @@ module ResourceDSL
       if routing_tag_ids_covers
         filter :routing_tag_ids_covers, as: :select,
                                         collection: -> { Routing::RoutingTag.pluck(:name, :id) },
-                                        input_html: { class: 'chosen', multiple: true }
+                                        input_html: { class: 'tom-select', multiple: true }
       end
 
       filter :routing_tag_ids_array_contains, label: 'Routing Tag IDs Contains', as: :select,
                                               collection: -> { Routing::RoutingTag.pluck(:name, :id) },
-                                              input_html: { class: 'chosen', multiple: true }
+                                              input_html: { class: 'tom-select', multiple: true }
 
-      filter :tagged, as: :select, collection: [['Yes', true], ['No', false]], input_html: { class: 'chosen' }
+      filter :tagged, as: :select, collection: [['Yes', true], ['No', false]], input_html: { class: 'tom-select' }
 
       filter :routing_tag_ids_count, as: :numeric, filters: [:equals] if routing_tag_ids_count
     end

@@ -13,7 +13,7 @@ RSpec.describe 'Create new Network', type: :feature, js: true do
     visit new_system_network_path
 
     aa_form.set_text 'Name', 'test'
-    aa_form.select_chosen 'Type', network_type.display_name
+    aa_form.fill_in_tom_select 'Type', with: network_type.display_name
   end
 
   it 'creates record' do
