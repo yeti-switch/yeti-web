@@ -185,7 +185,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: tmp/parallel_runtime_rspec.log
-          key: rspec-runtime-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
+          key: rspec-runtime-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
           restore-keys: |
             rspec-runtime-${{ github.head_ref || github.ref_name }}-
             rspec-runtime-master-
@@ -333,14 +333,14 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: tmp/parallel_runtime_rspec.log
-          key: rspec-runtime-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
+          key: rspec-runtime-${{ github.head_ref || github.ref_name }}-${{ github.sha }}
 
       - name: Save rspec runtime log cache (master)
         if: steps.rspec-runtime-merge.outputs.save == 'true' && github.ref_name == 'master'
         uses: actions/cache/save@v4
         with:
           path: tmp/parallel_runtime_rspec.log
-          key: rspec-runtime-master-${{ github.run_id }}
+          key: rspec-runtime-master-${{ github.sha }}
 
 
 
