@@ -224,7 +224,7 @@ jobs:
       - name: Extract runtime log artifact
         if: steps.download-runtime-log.outputs.found == 'true'
         run: |
-          python - <<'PY'
+          python3 - <<'PY'
           import zipfile
           from pathlib import Path
 
