@@ -225,12 +225,13 @@ jobs:
             echo "Runtime log missing or empty at $runtime_log; skipping cache save."
           fi
 
-      - name: Save rspec runtime log cache
+      - name: Upload rspec runtime log artifact
         if: always() && steps.rspec-runtime-save.outputs.save == 'true'
-        uses: actions/cache/save@v4
+        uses: actions/upload-artifact@v4
         with:
+          name: rspec-runtime-log-${{ matrix.ci_node_index }}
+          if-no-files-found: ignore
           path: tmp/parallel_runtime_rspec.log
-          key: rspec-runtime-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
 
       - name: Save artifacts
         if: always()
@@ -291,6 +292,55 @@ jobs:
           path: |
             tmp/capybara
             coverage
+
+
+  rspec_runtime_cache:
+    name: Save combined rspec runtime log cache
+    runs-on: ubuntu-latest
+    needs: rspec
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download rspec runtime log artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: rspec-runtime-log-*
+          path: tmp/runtime_logs
+          merge-multiple: true
+
+      - name: Merge rspec runtime logs
+        id: rspec-runtime-merge
+        run: |
+          mkdir -p tmp
+          runtime_log="tmp/parallel_runtime_rspec.log"
+          if ls tmp/runtime_logs/parallel_runtime_rspec.log >/dev/null 2>&1; then
+            awk -F: '{ if ($2 + 0 > max[$1]) max[$1] = $2 } END { for (f in max) print f ":" max[f] }' \
+              tmp/runtime_logs/parallel_runtime_rspec.log \
+              | sort -t: -k2,2nr > "$runtime_log"
+            if [ -s "$runtime_log" ]; then
+              echo "save=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "save=false" >> "$GITHUB_OUTPUT"
+              echo "Merged runtime log is empty; skipping cache save."
+            fi
+          else
+            echo "save=false" >> "$GITHUB_OUTPUT"
+            echo "No runtime log artifacts found; skipping cache save."
+          fi
+
+      - name: Save rspec runtime log cache (branch)
+        if: steps.rspec-runtime-merge.outputs.save == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: tmp/parallel_runtime_rspec.log
+          key: rspec-runtime-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
+
+      - name: Save rspec runtime log cache (master)
+        if: steps.rspec-runtime-merge.outputs.save == 'true' && github.ref_name == 'master'
+        uses: actions/cache/save@v4
+        with:
+          path: tmp/parallel_runtime_rspec.log
+          key: rspec-runtime-master-${{ github.run_id }}
 
 
 
