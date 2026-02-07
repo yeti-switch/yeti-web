@@ -224,8 +224,20 @@ jobs:
       - name: Extract runtime log artifact
         if: steps.download-runtime-log.outputs.found == 'true'
         run: |
-          unzip -o "${{ steps.download-runtime-log.outputs.zip-path }}" -d tmp/runtime_log_import
-          mv tmp/runtime_log_import/parallel_runtime_rspec.log tmp/parallel_runtime_rspec.log
+          python - <<'PY'
+          import zipfile
+          from pathlib import Path
+
+          zip_path = Path("${{ steps.download-runtime-log.outputs.zip-path }}")
+          target_dir = Path("tmp/runtime_log_import")
+          target_dir.mkdir(parents=True, exist_ok=True)
+          with zipfile.ZipFile(zip_path) as zf:
+            zf.extractall(target_dir)
+          log_path = target_dir / "parallel_runtime_rspec.log"
+          if not log_path.exists():
+            raise SystemExit("parallel_runtime_rspec.log not found in artifact")
+          log_path.replace(Path("tmp/parallel_runtime_rspec.log"))
+          PY
 
       - name: Configure runtime grouping
         id: rspec-runtime-config
