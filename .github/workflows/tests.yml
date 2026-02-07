@@ -180,17 +180,57 @@ jobs:
             /opt/yeti-web/vendor/rbenv
           key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
+      - name: Restore rspec runtime log cache
+        id: rspec-runtime-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: tmp/parallel_runtime_rspec.log
+          key: rspec-runtime-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
+          restore-keys: |
+            rspec-runtime-${{ github.head_ref || github.ref_name }}-
+            rspec-runtime-master-
+
+      - name: Configure runtime grouping
+        id: rspec-runtime-config
+        run: |
+          runtime_log="tmp/parallel_runtime_rspec.log"
+          if [ -s "$runtime_log" ]; then
+            echo "Using runtime log at $runtime_log"
+            echo "PARALLEL_GROUP_BY=runtime" >> "$GITHUB_ENV"
+            echo "PARALLEL_RUNTIME_LOG=$runtime_log" >> "$GITHUB_ENV"
+          else
+            echo "Runtime log missing or empty at $runtime_log; running without --group-by."
+          fi
+
       - name: Run rspec
         run: make rspec
         env:
           PARALLEL_TEST_PROCESSORS: ${{ matrix.ci_node_total }}
-          PARALLEL_GROUP_BY: runtime
           TEST_GROUP: ${{ matrix.ci_node_index }}
           YETI_DB_HOST: db
           YETI_DB_PORT: 5432
           CDR_DB_HOST: db
           CDR_DB_PORT: 5432
           CI: true
+
+      - name: Check runtime log for cache
+        if: always()
+        id: rspec-runtime-save
+        run: |
+          runtime_log="tmp/parallel_runtime_rspec.log"
+          if [ -s "$runtime_log" ]; then
+            echo "save=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "save=false" >> "$GITHUB_OUTPUT"
+            echo "Runtime log missing or empty at $runtime_log; skipping cache save."
+          fi
+
+      - name: Save rspec runtime log cache
+        if: always() && steps.rspec-runtime-save.outputs.save == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: tmp/parallel_runtime_rspec.log
+          key: rspec-runtime-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
 
       - name: Save artifacts
         if: always()

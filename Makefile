@@ -48,6 +48,7 @@ export PATH := $(RBENV_ROOT)/shims:$(PATH)
 rbenv_version = $(file < .ruby-version)
 
 export no_proxy ?= 127.0.0.1,localhost
+PARALLEL_RUNTIME_LOG ?= tmp/parallel_runtime_rspec.log
 
 pgq_drop_roles :=	DROP ROLE IF EXISTS pgq_reader; \
 			DROP ROLE IF EXISTS pgq_writer; \
@@ -215,9 +216,10 @@ else
 		  spec/ \
 		  --type rspec \
 		  $(if $(PARALLEL_GROUP_BY),--group-by $(PARALLEL_GROUP_BY),) \
+		  $(if $(PARALLEL_GROUP_BY),$(if $(PARALLEL_RUNTIME_LOG),--runtime-log $(PARALLEL_RUNTIME_LOG),),) \
 		  $(if $(TEST_GROUP),--only-group $(TEST_GROUP),) \
-		  && script/format_runtime_log log/parallel_runtime_rspec.log \
-		  || { script/format_runtime_log log/parallel_runtime_rspec.log; false; }
+		  && script/format_runtime_log $(PARALLEL_RUNTIME_LOG) \
+		  || { script/format_runtime_log $(PARALLEL_RUNTIME_LOG); false; }
 endif
 
 .PHONY: rspec
