@@ -180,9 +180,6 @@ jobs:
             /opt/yeti-web/vendor/rbenv
           key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
-      - name: Prepare runtime log directory
-        run: mkdir -p tmp
-
       - name: Download runtime log artifact
         id: download-runtime-log
         uses: actions/github-script@v7
@@ -236,13 +233,13 @@ jobs:
           log_path = target_dir / "parallel_runtime_rspec.log"
           if not log_path.exists():
             raise SystemExit("parallel_runtime_rspec.log not found in artifact")
-          log_path.replace(Path("tmp/parallel_runtime_rspec.log"))
+          log_path.replace(Path("log/parallel_runtime_rspec.log"))
           PY
 
       - name: Configure runtime grouping
         id: rspec-runtime-config
         run: |
-          runtime_log="tmp/parallel_runtime_rspec.log"
+          runtime_log="log/parallel_runtime_rspec.log"
           if [ -s "$runtime_log" ]; then
             echo "Using runtime log at $runtime_log"
             echo "PARALLEL_GROUP_BY=runtime" >> "$GITHUB_ENV"
@@ -266,7 +263,7 @@ jobs:
         if: always()
         id: rspec-runtime-save
         run: |
-          runtime_log="tmp/parallel_runtime_rspec.log"
+          runtime_log="log/parallel_runtime_rspec.log"
           if [ -s "$runtime_log" ]; then
             echo "save=true" >> "$GITHUB_OUTPUT"
           else
@@ -280,7 +277,7 @@ jobs:
         with:
           name: rspec-runtime-log-${{ matrix.ci_node_index }}
           if-no-files-found: ignore
-          path: tmp/parallel_runtime_rspec.log
+          path: log/parallel_runtime_rspec.log
 
       - name: Save artifacts
         if: always()
@@ -364,7 +361,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p tmp
-          runtime_log="tmp/parallel_runtime_rspec.log"
+          runtime_log="log/parallel_runtime_rspec.log"
           mapfile -t runtime_logs < <(find tmp/runtime_logs -name 'parallel_runtime_rspec.log' -type f)
           if [ ${#runtime_logs[@]} -eq 0 ]; then
             echo "save=false" >> "$GITHUB_OUTPUT"
@@ -386,7 +383,7 @@ jobs:
         with:
           name: runtime-log-${{ github.head_ref || github.ref_name }}
           if-no-files-found: error
-          path: tmp/parallel_runtime_rspec.log
+          path: log/parallel_runtime_rspec.log
 
 
 

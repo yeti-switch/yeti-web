@@ -48,7 +48,7 @@ export PATH := $(RBENV_ROOT)/shims:$(PATH)
 rbenv_version = $(file < .ruby-version)
 
 export no_proxy ?= 127.0.0.1,localhost
-PARALLEL_RUNTIME_LOG ?= tmp/parallel_runtime_rspec.log
+PARALLEL_RUNTIME_LOG ?= log/parallel_runtime_rspec.log
 
 pgq_drop_roles :=	DROP ROLE IF EXISTS pgq_reader; \
 			DROP ROLE IF EXISTS pgq_writer; \
