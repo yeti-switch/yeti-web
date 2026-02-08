@@ -773,7 +773,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, customer auth CPS Limit' do
-        let!(:customer_auth_cps_limit) { 10 }
+        let!(:customer_auth_cps_limit) { 5 }
 
         # calling routing sp 100 times to consume cps limit
         before do
