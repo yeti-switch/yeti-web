@@ -110,7 +110,10 @@ RSpec.describe 'CDRs index', type: :feature do
       before { visit cdrs_path }
 
       it 'should click to "Reset" link', js: true do
-        expect { subject }.to change { admin_user.reload.visible_columns['cdrs'] }.from(%w[id]).to('')
+        expect do
+          subject
+          expect(page).to have_no_link('Reset')
+        end.to change { admin_user.reload.visible_columns['cdrs'] }.from(%w[id]).to('')
       end
     end
 
