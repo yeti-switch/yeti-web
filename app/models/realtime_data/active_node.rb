@@ -20,6 +20,8 @@
 #
 
 class RealtimeData::ActiveNode < Node
+  Error = Class.new(StandardError)
+
   def self.random_node
     ids = pluck(:id)
     find(ids.sample)
@@ -39,8 +41,17 @@ class RealtimeData::ActiveNode < Node
     api.call_disconnect(id)
   end
 
-  def active_call(id)
-    RealtimeData::ActiveCall.new(api.calls(id))
+  def active_call(local_tag)
+    items = Array.wrap(api.calls(local_tag))
+
+    case items.size
+    when 0
+      nil
+    when 1
+      RealtimeData::ActiveCall.new(items.first)
+    else
+      raise Error, "Expected 1 result from Node 'yeti.show.calls' for node_id=#{id} local_tag=#{local_tag}, got #{items.size}"
+    end
   end
 
   def active_calls(options = {})
