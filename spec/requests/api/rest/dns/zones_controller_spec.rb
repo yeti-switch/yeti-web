@@ -129,4 +129,164 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
       end
     end
   end
+
+  describe 'GET /api/rest/dns/zones/:id/zonefile' do
+    subject do
+      get json_api_request_path, params: nil, headers: request_headers
+    end
+
+    let(:json_api_request_path) { "/api/rest/dns/zones/#{zone.id}/zonefile" }
+    let(:request_headers) { { 'Accept' => 'text/dns' } }
+
+    let!(:zone) do
+      create(
+        :dns_zone,
+        name: 'example.com',
+        soa_mname: 'ns.example.com.',
+        soa_rname: 'admin.example.com.',
+        serial: 2_020_091_025,
+        refresh: 7200,
+        retry: 3600,
+        expire: 1800,
+        minimum: 3600
+      )
+    end
+    let!(:record_one) do
+      create(
+        :dns_record,
+        zone: zone,
+        contractor: nil,
+        name: '@',
+        record_type: 'A',
+        content: '192.0.2.1'
+      )
+    end
+    let!(:record_two) do
+      create(
+        :dns_record,
+        zone: zone,
+        contractor: nil,
+        name: 'www',
+        record_type: 'CNAME',
+        content: '@'
+      )
+    end
+    let!(:record_three) do
+      create(
+        :dns_record,
+        zone: zone,
+        contractor: nil,
+        name: 'mail',
+        record_type: 'A',
+        content: '192.0.2.2'
+      )
+    end
+
+    let(:expected_zonefile_payload) do
+      zone.reload
+      ordered_records = [record_one, record_two, record_three].sort_by(&:id)
+      a_records = ordered_records.select { |record| record.record_type == 'A' }
+      cname_records = ordered_records.select { |record| record.record_type == 'CNAME' }
+      <<~ZONEFILE
+        $ORIGIN .
+        $TTL #{zone.minimum}
+        ; SOA Record
+        #{zone.name} IN SOA #{zone.soa_mname} #{zone.soa_rname} (
+          #{zone.serial} ; serial
+          #{zone.refresh} ; refresh (2 hours)
+          #{zone.retry} ; retry (1 hour)
+          #{zone.expire} ; expire (30 minutes)
+          #{zone.minimum} ; minimum (1 hour)
+        )
+
+        $ORIGIN #{zone.name}.
+
+        ; A Record
+        #{a_records.first.name} #{a_records.first.record_type} #{a_records.first.content}
+        #{a_records.second.name} #{a_records.second.record_type} #{a_records.second.content}
+
+        ; CNAME Record
+        #{cname_records.first.name} #{cname_records.first.record_type} #{cname_records.first.content}
+
+      ZONEFILE
+    end
+
+    it 'returns DNS zonefile as text/dns payload' do
+      subject
+      expect(response).to have_http_status(200)
+      expect(response.media_type).to eq('text/dns')
+      expect(response.body).to eq(expected_zonefile_payload)
+    end
+
+    context 'with non-round duration values' do
+      let!(:zone) do
+        create(
+          :dns_zone,
+          name: 'example.com',
+          soa_mname: 'ns.example.com.',
+          soa_rname: 'admin.example.com.',
+          serial: 2_020_091_025,
+          refresh: 3661,
+          retry: 59,
+          expire: 7322,
+          minimum: 61
+        )
+      end
+
+      let(:expected_zonefile_payload) do
+        zone.reload
+        ordered_records = [record_one, record_two, record_three].sort_by(&:id)
+        a_records = ordered_records.select { |record| record.record_type == 'A' }
+        cname_records = ordered_records.select { |record| record.record_type == 'CNAME' }
+        <<~ZONEFILE
+          $ORIGIN .
+          $TTL #{zone.minimum}
+          ; SOA Record
+          #{zone.name} IN SOA #{zone.soa_mname} #{zone.soa_rname} (
+            #{zone.serial} ; serial
+            #{zone.refresh} ; refresh (1 hour 1 minute 1 second)
+            #{zone.retry} ; retry (59 seconds)
+            #{zone.expire} ; expire (2 hours 2 minutes 2 seconds)
+            #{zone.minimum} ; minimum (1 minute 1 second)
+          )
+
+          $ORIGIN #{zone.name}.
+
+          ; A Record
+          #{a_records.first.name} #{a_records.first.record_type} #{a_records.first.content}
+          #{a_records.second.name} #{a_records.second.record_type} #{a_records.second.content}
+
+          ; CNAME Record
+          #{cname_records.first.name} #{cname_records.first.record_type} #{cname_records.first.content}
+
+        ZONEFILE
+      end
+
+      it 'returns DNS zonefile with dynamic duration comments' do
+        subject
+        expect(response).to have_http_status(200)
+        expect(response.media_type).to eq('text/dns')
+        expect(response.body).to eq(expected_zonefile_payload)
+      end
+    end
+
+    context 'with invalid Authorization header' do
+      let(:request_headers) do
+        super().merge('Authorization' => 'invalid')
+      end
+
+      it 'returns DNS zonefile as text/dns payload' do
+        subject
+        expect(response).to have_http_status(200)
+        expect(response.media_type).to eq('text/dns')
+        expect(response.body).to eq(expected_zonefile_payload)
+      end
+    end
+
+    context 'when zone does not exist' do
+      let(:json_api_request_path) { '/api/rest/dns/zones/999999/zonefile' }
+
+      include_examples :responds_with_status, 404, without_body: true
+    end
+  end
 end

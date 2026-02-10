@@ -66,7 +66,9 @@ Rails.application.routes.draw do
         end
 
         namespace :dns do
-          jsonapi_resources :zones, only: [:index]
+          jsonapi_resources :zones, only: [:index] do
+            member { get :zonefile }
+          end
         end
 
         namespace :admin do
