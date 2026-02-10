@@ -3,7 +3,8 @@
 require 'rspec_api_documentation/dsl'
 
 RSpec.resource 'DNS Zones' do
-  include_context :acceptance_admin_user
+  header 'Accept', 'application/vnd.api+json'
+  header 'Content-Type', 'application/vnd.api+json'
 
   get '/api/rest/dns/zones' do
     before { create_list(:dns_zone, 2) }
