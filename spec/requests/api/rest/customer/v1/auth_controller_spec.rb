@@ -8,16 +8,19 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
   let(:customer) { create(:customer) }
   let(:api_access_attrs) { { customer: } }
 
-  def expected_auth_meta_for(api_access)
-    {
-      'customer_id' => api_access.customer_id,
-      'account_ids' => api_access.account_ids,
-      'api_access_id' => api_access.id,
-      'login' => api_access.login,
-      'customer_portal_access_profile_id' => api_access.customer_portal_access_profile_id,
-      'allow_listen_recording' => api_access.allow_listen_recording,
-      'allow_outgoing_numberlists_ids' => api_access.allow_outgoing_numberlists_ids
-    }
+  def expected_auth_meta_for(token)
+    verify_expiration = CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.present?
+    payload = CustomerV1Auth::TokenBuilder.decode(
+      token,
+      verify_expiration: verify_expiration,
+      aud: CustomerV1Auth::Authenticator::AUDIENCE
+    )
+    auth_meta = { 'aud' => payload[:aud], 'sub' => payload[:sub] }
+    if payload[:cfg].is_a?(Hash)
+      auth_meta['cfg'] = payload[:cfg].deep_stringify_keys
+    end
+
+    { 'auth' => auth_meta }
   end
 
   describe 'POST /api/rest/customer/v1/auth' do
@@ -72,7 +75,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
         expect { subject }.to change(Log::ApiLog, :count).by(1)
 
         api_log = Log::ApiLog.last!
-        expect(api_log.meta).to eq(expected_auth_meta_for(api_access))
+        expect(api_log.meta).to eq(expected_auth_meta_for(response_json[:jwt]))
       end
 
       context 'when expiration interval is blank' do
@@ -225,7 +228,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
 
       api_log = Log::ApiLog.last!
       expect(api_log).to have_attributes(remote_ip: '127.0.0.1')
-      expect(api_log.meta).to eq(expected_auth_meta_for(api_access))
+      expect(api_log.meta).to eq(expected_auth_meta_for(json_api_auth_token))
     end
 
     it_behaves_like :json_api_customer_v1_check_authorization
@@ -244,7 +247,7 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
 
         api_log = Log::ApiLog.last!
         expect(api_log).to have_attributes(remote_ip: '127.0.0.1')
-        expect(api_log.meta).to eq(expected_auth_meta_for(api_access))
+        expect(api_log.meta).to eq(expected_auth_meta_for(json_api_auth_token))
       end
     end
 
@@ -264,7 +267,9 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
       it 'should create API Log record' do
         expect { subject }.to change(Log::ApiLog, :count).by(1)
 
-        expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+        api_log = Log::ApiLog.last!
+        expect(api_log).to have_attributes(remote_ip: '127.0.0.1')
+        expect(api_log.meta).to eq(expected_auth_meta_for(json_api_auth_token))
       end
 
       context 'when api_access.allow_listen_recording=true' do
@@ -279,7 +284,9 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
         it 'should create API Log record' do
           expect { subject }.to change(Log::ApiLog, :count).by(1)
 
-          expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
+          api_log = Log::ApiLog.last!
+          expect(api_log).to have_attributes(remote_ip: '127.0.0.1')
+          expect(api_log.meta).to eq(expected_auth_meta_for(json_api_auth_token))
         end
       end
     end
