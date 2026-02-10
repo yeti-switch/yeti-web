@@ -2,17 +2,13 @@
 
 RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
   let(:json_api_resource_type) { 'zones' }
-  let(:json_api_auth_token) { Authentication::AdminAuth.build_auth_data(admin_user).token }
   let(:json_api_request_path) { "/api/rest/dns/#{json_api_resource_type}" }
   let(:json_api_request_headers) do
     {
       'Accept' => JSONAPI::MEDIA_TYPE,
-      'Content-Type' => JSONAPI::MEDIA_TYPE,
-      'Authorization' => json_api_auth_token
+      'Content-Type' => JSONAPI::MEDIA_TYPE
     }
   end
-
-  let!(:admin_user) { create(:admin_user) }
 
   describe 'GET /api/rest/dns/zones' do
     subject do
@@ -122,6 +118,15 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
       end
     end
 
-    it_behaves_like :json_api_admin_check_authorization
+    context 'with invalid Authorization header' do
+      let(:json_api_request_headers) do
+        super().merge('Authorization' => 'invalid')
+      end
+      let!(:zones) { create_list(:dns_zone, 2) }
+
+      include_examples :returns_json_api_collection do
+        let(:json_api_collection_ids) { zones.map { |zone| zone.id.to_s } }
+      end
+    end
   end
 end
