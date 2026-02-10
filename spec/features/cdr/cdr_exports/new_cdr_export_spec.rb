@@ -54,6 +54,16 @@ RSpec.describe 'Create new CDR export', js: true do
       fill_in 'Time start lteq', with: '2018-03-01'
     end
 
+    it 'shows available options properly sorted' do
+      visit new_cdr_export_path
+
+      fields_input = find_field('Fields', visible: :all)
+      unselected_option_values = fields_input.all('option', visible: :all).reject(&:selected?).map(&:value)
+      expect(unselected_option_values).to eq(CdrExport.allowed_fields.sort - fields)
+      selected_option_values = fields_input.all('option', visible: :all).select(&:selected?).map(&:value)
+      expect(selected_option_values).to eq %w[id customer_id success]
+    end
+
     it 'cdr export should be created' do
       subject
       expect(page).to have_text('Cdr export was successfully created.')

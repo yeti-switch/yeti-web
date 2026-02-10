@@ -16,6 +16,7 @@ RSpec.describe 'Copy CDR Export', js: :true do
   let!(:country) { create(:country_uniq) }
   let!(:gateway) { create(:gateway, external_id: 301) }
   let!(:routing_tag) { create(:routing_tag) }
+  let(:fields) { %w[customer_id id success] }
   let(:filters) do
     {
       time_start_gteq: '2018-01-01',
@@ -63,7 +64,8 @@ RSpec.describe 'Copy CDR Export', js: :true do
       dst_country_iso_in: [country.iso2, country.iso2]
     }
   end
-  let!(:cdr_export) { create(:cdr_export, :completed, filters:) }
+  let!(:cdr_export) { create(:cdr_export, :completed, filters:, fields:) }
+  before { create(:cdr_export, :completed, fields: %w[id]) }
   let(:formated_time_filters) do
     {
       time_start_gteq: '2018-01-01T00:00:00.000Z',
@@ -84,7 +86,7 @@ RSpec.describe 'Copy CDR Export', js: :true do
     expect(new_cdr_export).to have_attributes(
                             type: cdr_export.type,
                             callback_url: cdr_export.callback_url.to_s,
-                            fields: match_array(cdr_export.fields),
+                            fields: %w[customer_id id success],
                             status: 'Pending',
                             filters_json: filters.merge(formated_time_filters)
                           )
@@ -120,7 +122,7 @@ RSpec.describe 'Copy CDR Export', js: :true do
       expect(new_cdr_export).to have_attributes(
                               type: cdr_export.type,
                               callback_url: cdr_export.callback_url.to_s,
-                              fields: match_array(cdr_export.fields),
+                              fields: %w[customer_id id success],
                               status: 'Pending',
                               filters_json: {
                                 time_start_gteq: '2018-01-01T00:00:00.000Z',

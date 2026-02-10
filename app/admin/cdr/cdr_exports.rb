@@ -178,7 +178,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
       f.input :fields,
               as: :select,
               multiple: true,
-              collection: (f.object.fields | CdrExport.allowed_fields),
+              collection: (f.object.fields | CdrExport.allowed_fields.sort),
               input_html: { class: 'chosen-sortable' },
               required: true
 
