@@ -48,5 +48,9 @@ FactoryBot.define do
       renew_at { 1.month.from_now.beginning_of_month }
       renew_period_id { Billing::Service::RENEW_PERIOD_ID_MONTH }
     end
+
+    trait :terminated do
+      state_id { Billing::Service::STATE_ID_TERMINATED }
+    end
   end
 end

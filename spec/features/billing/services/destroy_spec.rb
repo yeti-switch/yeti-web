@@ -10,7 +10,7 @@ RSpec.describe 'Billing Services Destroy' do
   let(:record_attrs) { { name: 'test', account:, type: service_type } }
 
   describe 'from show page', :js do
-    subject { click_action_item 'Delete Service' }
+    subject { accept_confirm { click_action_item 'Delete Service' } }
 
     before { visit service_path(record) }
 

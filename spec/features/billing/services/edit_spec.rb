@@ -49,4 +49,46 @@ RSpec.describe 'Billing Services Edit', js: true, bullet: [:n] do
       expect(page).to have_field 'Renew price', with: ''
     end
   end
+
+  context 'when service is terminated' do
+    let(:record_attrs) { { state_id: Billing::Service::STATE_ID_TERMINATED } }
+
+    it 'redirects and blocks editing' do
+      visit edit_service_path(record.id)
+
+      expect(page).to have_flash_message(
+        'You are not authorized to perform this action.',
+        type: :error,
+        exact: true
+      )
+      expect(page).to have_current_path root_path
+    end
+  end
+
+  context 'when service is terminated after edit page is already opened', js: false do
+    before do
+      policy_roles = Rails.configuration.policy_roles.deep_merge(
+        user: {
+          Dashboard: { read: false }
+        }
+      )
+      allow(Rails.configuration).to receive(:policy_roles).and_return(policy_roles)
+    end
+
+    it 'redirects to service page without redirect loop' do
+      visit edit_service_path(record.id)
+      fill_in 'Name', with: attributes[:name]
+      Billing::Service::Terminate.call(record:)
+
+      click_submit('Update Service')
+
+      expect(page).to have_current_path service_path(record.id)
+      expect(page).to have_flash_message(
+        'Service has been terminated and cannot be updated.',
+        type: :error,
+        exact: true
+      )
+      expect(record.reload.name).not_to eq(attributes[:name])
+    end
+  end
 end
