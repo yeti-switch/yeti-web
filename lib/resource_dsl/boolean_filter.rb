@@ -10,7 +10,7 @@ module ResourceDSL
     def boolean_filter(name, options = {})
       options = options.merge(as: :select, collection: COLLECTION)
       options[:input_html] ||= {}
-      options[:input_html][:class] = ['chosen', options[:input_html][:class]].compact.join(' ')
+      options[:input_html][:class] = ['tom-select', options[:input_html][:class]].compact.join(' ')
 
       filter name, options
     end

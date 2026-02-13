@@ -210,8 +210,8 @@ ActiveAdmin.register CustomersAuth do
   filter :external_id, label: 'External ID'
   filter :external_type
   filter :name
-  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
+  boolean_filter :enabled
+  boolean_filter :reject_calls
 
   contractor_filter :customer_id_eq,
                     label: 'Customer',
@@ -224,28 +224,26 @@ ActiveAdmin.register CustomersAuth do
                          scope: -> { Gateway.order(:name) },
                          path: '/gateways/search'
 
-  filter :rateplan, input_html: { class: 'chosen' }
-  filter :routing_plan, input_html: { class: 'chosen' }
+  filter :rateplan, input_html: { class: 'tom-select' }
+  filter :routing_plan, input_html: { class: 'tom-select' }
   filter :dump_level_id_eq,
          label: 'Dump Level',
          as: :select,
          collection: CustomersAuth::DUMP_LEVELS.invert,
+         input_html: { class: 'tom-select' },
          if: proc { authorized?(:pcap) }
 
-  filter :diversion_policy_id_eq, label: 'Diversion policy', as: :select, collection: CustomersAuth::DIVERSION_POLICIES.invert
-  filter :pai_policy_id_eq, label: 'PAI policy', as: :select, collection: CustomersAuth::PAI_POLICIES.invert
-  filter :privacy_mode_id_eq, label: 'Privacy mode', as: :select, collection: CustomersAuth::PRIVACY_MODES.invert, input_html: { class: 'chosen' }
-  filter :enable_audio_recording,
-         as: :select,
-         collection: [['Yes', true], ['No', false]],
-         if: proc { authorized?(:recording) }
+  filter :diversion_policy_id_eq, label: 'Diversion policy', as: :select, collection: CustomersAuth::DIVERSION_POLICIES.invert, input_html: { class: 'tom-select' }
+  filter :pai_policy_id_eq, label: 'PAI policy', as: :select, collection: CustomersAuth::PAI_POLICIES.invert, input_html: { class: 'tom-select' }
+  filter :privacy_mode_id_eq, label: 'Privacy mode', as: :select, collection: CustomersAuth::PRIVACY_MODES.invert, input_html: { class: 'tom-select' }
+  boolean_filter :enable_audio_recording, if: proc { authorized?(:recording) }
 
-  filter :transport_protocol_id_eq, label: 'Transport protocol', as: :select, collection: CustomersAuth::TRANSPORT_PROTOCOLS.invert
+  filter :transport_protocol_id_eq, label: 'Transport protocol', as: :select, collection: CustomersAuth::TRANSPORT_PROTOCOLS.invert, input_html: { class: 'tom-select' }
   filter :ip_covers,
          as: :string,
          input_html: { class: 'search_filter_string' },
          label: I18n.t('activerecord.attributes.customers_auth.ip')
-  filter :pop, input_html: { class: 'chosen' }
+  filter :pop, input_html: { class: 'tom-select' }
   filter :src_prefix_array_contains, label: I18n.t('activerecord.attributes.customers_auth.src_prefix')
   filter :dst_prefix_array_contains, label: I18n.t('activerecord.attributes.customers_auth.dst_prefix')
   filter :uri_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.uri_domain')
@@ -253,7 +251,7 @@ ActiveAdmin.register CustomersAuth do
   filter :to_domain_array_contains, label: I18n.t('activerecord.attributes.customers_auth.to_domain')
   filter :x_yeti_auth_array_contains, label: I18n.t('activerecord.attributes.customers_auth.x_yeti_auth')
   filter :interface_contains, label: I18n.t('activerecord.attributes.customers_auth.interface')
-  filter :lua_script, input_html: { class: 'chosen' }
+  filter :lua_script, input_html: { class: 'tom-select' }
   boolean_filter :require_incoming_auth
   boolean_filter :check_account_balance
   filter :gateway_incoming_auth_username,
@@ -262,7 +260,7 @@ ActiveAdmin.register CustomersAuth do
   filter :gateway_incoming_auth_password,
          label: 'Incoming Auth Password',
          as: :string
-  filter :cnam_database, input_html: { class: 'chosen' }
+  filter :cnam_database, input_html: { class: 'tom-select' }
 
   association_ajax_filter :src_numberlist_id_eq,
                           label: 'SRC Numberlist',
@@ -274,13 +272,14 @@ ActiveAdmin.register CustomersAuth do
                           scope: -> { Routing::Numberlist.order(:name) },
                           path: '/numberlists/search'
 
-  filter :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
+  filter :stir_shaken_crt, as: :select, input_html: { class: 'tom-select' }
   filter :rewrite_ss_status_id_eq,
          label: 'Rewrite SS status',
          as: :select,
-         collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
+         collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert,
+         input_html: { class: 'tom-select' }
 
-  filter :scheduler, as: :select, input_html: { class: 'chosen' }
+  filter :scheduler, as: :select, input_html: { class: 'tom-select' }
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -315,8 +314,8 @@ ActiveAdmin.register CustomersAuth do
                                      'data-required-param': 'q[origination_contractor_id_eq]'
                                    }
 
-          f.input :rateplan, input_html: { class: 'chosen' }
-          f.input :routing_plan, input_html: { class: 'chosen' }
+          f.input :rateplan, input_html: { class: 'tom-select' }
+          f.input :routing_plan, input_html: { class: 'tom-select' }
 
           f.association_ajax_input :dst_numberlist_id,
                                   label: 'DST Numberlist',
@@ -331,7 +330,8 @@ ActiveAdmin.register CustomersAuth do
             f.input :dump_level_id,
                     as: :select,
                     include_blank: false,
-                    collection: CustomersAuth::DUMP_LEVELS.invert
+                    collection: CustomersAuth::DUMP_LEVELS.invert,
+                    input_html: { class: 'tom-select' }
           end
           if authorized?(:recording)
             f.input :enable_audio_recording
@@ -341,7 +341,7 @@ ActiveAdmin.register CustomersAuth do
           f.input :cps_limit
           f.input :allow_receive_rate_limit
           f.input :send_billing_information
-          f.input :scheduler, as: :select, input_html: { class: 'chosen' }
+          f.input :scheduler, as: :select, input_html: { class: 'tom-select' }
         end
 
         f.inputs 'Match conditions' do
@@ -349,11 +349,11 @@ ActiveAdmin.register CustomersAuth do
                   as: :select,
                   include_blank: 'Any',
                   collection: CustomersAuth::TRANSPORT_PROTOCOLS.invert,
-                  input_html: { class: :chosen }
+                  input_html: { class: 'tom-select' }
 
           f.input :ip, as: :array_of_strings
           f.input :require_incoming_auth
-          f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }
+          f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'tom-select' }
           f.input :src_prefix, as: :array_of_strings
           f.input :src_number_min_length
           f.input :src_number_max_length
@@ -374,13 +374,13 @@ ActiveAdmin.register CustomersAuth do
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::PRIVACY_MODES.invert,
-                  input_html: { class: :chosen }
+                  input_html: { class: 'tom-select' }
 
           f.input :diversion_policy_id,
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::DIVERSION_POLICIES.invert,
-                  input_html: { class: :chosen }
+                  input_html: { class: 'tom-select' }
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
           f.input :src_numberlist_use_diversion
@@ -389,7 +389,7 @@ ActiveAdmin.register CustomersAuth do
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::PAI_POLICIES.invert,
-                  input_html: { class: :chosen }
+                  input_html: { class: 'tom-select' }
           f.input :pai_rewrite_rule
           f.input :pai_rewrite_result
 
@@ -397,7 +397,7 @@ ActiveAdmin.register CustomersAuth do
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::SRC_NAME_FIELDS.invert,
-                  input_html: { class: :chosen }
+                  input_html: { class: 'tom-select' }
           f.input :src_name_rewrite_rule
           f.input :src_name_rewrite_result
 
@@ -405,7 +405,7 @@ ActiveAdmin.register CustomersAuth do
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::SRC_NUMBER_FIELDS.invert,
-                  input_html: { class: :chosen }
+                  input_html: { class: 'tom-select' }
           f.input :src_rewrite_rule
           f.input :src_rewrite_result
 
@@ -413,49 +413,49 @@ ActiveAdmin.register CustomersAuth do
                   as: :select,
                   include_blank: false,
                   collection: CustomersAuth::DST_NUMBER_FIELDS.invert,
-                  input_html: { class: :chosen }
+                  input_html: { class: 'tom-select' }
           f.input :dst_rewrite_rule
           f.input :dst_rewrite_result
 
-          f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
-          f.input :cnam_database, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :lua_script, input_html: { class: 'tom-select' }, include_blank: 'None'
+          f.input :cnam_database, input_html: { class: 'tom-select' }, include_blank: 'None'
           f.input :variables_json, label: 'Variables', as: :text
         end
       end
 
       tab :radius do
         f.inputs do
-          f.input :radius_auth_profile, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :radius_auth_profile, input_html: { class: 'tom-select' }, include_blank: 'None'
           f.input :src_number_radius_rewrite_rule
           f.input :src_number_radius_rewrite_result
           f.input :dst_number_radius_rewrite_rule
           f.input :dst_number_radius_rewrite_result
-          f.input :radius_accounting_profile, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :radius_accounting_profile, input_html: { class: 'tom-select' }, include_blank: 'None'
         end
       end
 
       tab :routing_tags do
         f.inputs do
-          f.input :tag_action
+          f.input :tag_action, input_html: { class: 'tom-select' }
           f.input :tag_action_value, as: :select,
                                      collection: tag_action_value_options,
                                      multiple: true,
                                      include_hidden: false,
-                                     input_html: { class: 'chosen' }
+                                     input_html: { class: 'tom-select' }
         end
       end
 
       tab :stir_shaken do
         f.inputs do
-          f.input :ss_mode_id, as: :select, include_blank: false, collection: CustomersAuth::SS_MODES.invert
-          f.input :ss_invalid_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_INVALID_IDENTITY_ACTIONS.invert
-          f.input :ss_no_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_NO_IDENTITY_ACTIONS.invert
-          f.input :rewrite_ss_status_id, as: :select, include_blank: true, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
+          f.input :ss_mode_id, as: :select, include_blank: false, collection: CustomersAuth::SS_MODES.invert, input_html: { class: 'tom-select' }
+          f.input :ss_invalid_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_INVALID_IDENTITY_ACTIONS.invert, input_html: { class: 'tom-select' }
+          f.input :ss_no_identity_action_id, as: :select, include_blank: false, collection: CustomersAuth::SS_NO_IDENTITY_ACTIONS.invert, input_html: { class: 'tom-select' }
+          f.input :rewrite_ss_status_id, as: :select, include_blank: true, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert, input_html: { class: 'tom-select' }
           f.input :ss_src_rewrite_rule
           f.input :ss_src_rewrite_result
           f.input :ss_dst_rewrite_rule
           f.input :ss_dst_rewrite_result
-          f.input :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
+          f.input :stir_shaken_crt, as: :select, input_html: { class: 'tom-select' }
         end
       end
     end

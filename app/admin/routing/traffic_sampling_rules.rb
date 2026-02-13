@@ -66,7 +66,7 @@ ActiveAdmin.register Routing::TrafficSamplingRule do
                                }
       f.input :src_prefix
       f.input :dst_prefix
-      f.input :dump_level_id, as: :select, include_blank: false, collection: Routing::TrafficSamplingRule::DUMP_LEVELS.invert
+      f.input :dump_level_id, as: :select, include_blank: false, collection: Routing::TrafficSamplingRule::DUMP_LEVELS.invert, input_html: { class: 'tom-select' }
       f.input :dump_rate
       f.input :recording_rate
     end

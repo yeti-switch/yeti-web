@@ -7,7 +7,7 @@ ActiveAdmin.register System::ApiLogConfig, as: 'Api Log Config' do
 
   permit_params :controller
 
-  filter :controller, as: :select, collection: proc { ApiControllers.list }, input_html: { class: :chosen }
+  filter :controller, as: :select, collection: proc { ApiControllers.list }, input_html: { class: 'tom-select' }
 
   index do
     actions
@@ -18,7 +18,7 @@ ActiveAdmin.register System::ApiLogConfig, as: 'Api Log Config' do
     f.inputs do
       f.input :controller, as: :select,
                            collection: ApiControllers.list,
-                           input_html: { class: 'chosen chosen-wide' },
+                           input_html: { class: 'tom-select tom-select-wide' },
                            hint: 'Only controllers within "Api" namespace will be displayed.'
     end
     f.actions

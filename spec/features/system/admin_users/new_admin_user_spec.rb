@@ -16,7 +16,7 @@ RSpec.describe 'Create new Admin User', type: :feature, js: true do
     aa_form.set_text 'Email', 'test@example.com'
     aa_form.set_text 'Password', 'thepassword', exact_field: true
     aa_form.set_text 'Password confirmation', 'thepassword'
-    aa_form.select_chosen 'Roles', 'user'
+    aa_form.fill_in_tom_select 'Roles', with: 'user'
   end
 
   it 'creates record' do

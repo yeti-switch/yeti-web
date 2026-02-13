@@ -170,6 +170,7 @@ ActiveAdmin.setup do |config|
   #
   # To load a stylesheet:
   config.register_stylesheet 'yeti/yeti.css'
+  config.register_stylesheet 'tom-select-rails/css/tom-select.css'
   config.footer = proc { render partial: 'active_admin/footer' }
 
   # You can provide an options hash for more control, which is passed along to stylesheet_link_tag():

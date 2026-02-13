@@ -7,9 +7,9 @@ ActiveAdmin.register AuditLogItem do
 
   filter :id
   filter :created_at, as: :date_time_range
-  filter :item_type, input_html: { class: 'chosen' }
+  filter :item_type, input_html: { class: 'tom-select' }
   filter :item_id_eq
-  filter :event, as: :select, collection: [%w[create create], %w[destroy destroy], %w[update update]]
+  filter :event, as: :select, collection: [%w[create create], %w[destroy destroy], %w[update update]], input_html: { class: 'tom-select' }
   filter :whodunnit
   filter :ip
   filter :txid

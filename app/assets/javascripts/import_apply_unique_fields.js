@@ -11,8 +11,7 @@ $(document).ready(function () {
     const uniqueColumnsSelect = form.find('select')
       .attr('name', 'changes[unique_columns][]')
       .attr('id', 'changes_unique_columns')
-      .attr('multiple', 'multiple')
-      .chosen({ width: '100%' });
+      .attr('multiple', 'multiple');
 
     form.find('input[name="additional_filter"]')
         .attr('name', 'changes[additional_filter]')
@@ -25,10 +24,20 @@ $(document).ready(function () {
 
       // add select all button
       if (uniqueColumnsSelect.length > 0) {
+        var ts = new TomSelect(uniqueColumnsSelect[0], {
+          plugins: ['remove_button', 'clear_button']
+        });
+        // Make ts-wrapper take full width
+        $(ts.wrapper).css('width', '100%');
+
         let select_all_column = $('<a></a>').text('Select All').attr('id', 'select-all-unique-columns').attr('href', '#');
         form.append(select_all_column);
         select_all_column.click(function () {
-          form.find('select option').prop('selected', true).trigger('chosen:updated');
+          var allValues = [];
+          uniqueColumnsSelect.find('option').each(function() {
+            if (this.value) allValues.push(this.value);
+          });
+          ts.setValue(allValues);
         });
       }
   });

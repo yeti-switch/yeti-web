@@ -41,7 +41,7 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
 
   filter :id
   filter :name
-  filter :reject_on_error, as: :select, collection: [['Yes', true], ['No', false]]
+  boolean_filter :reject_on_error
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -63,7 +63,7 @@ ActiveAdmin.register Equipment::Radius::AuthProfile do
         t.input :vsa_vendor_id
         t.input :vsa_vendor_type
         t.input :value
-        t.input :format, as: :select, collection: Equipment::Radius::AuthProfileAttribute::FORMATS
+        t.input :format, as: :select, collection: Equipment::Radius::AuthProfileAttribute::FORMATS, input_html: { class: 'tom-select' }
         t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless  t.object.new_record?
       end
     end

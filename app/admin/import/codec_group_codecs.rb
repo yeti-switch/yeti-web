@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Importing::CodecGroupCodec do
-  filter :codec_group, input_html: { class: 'chosen' }
+  filter :codec_group, input_html: { class: 'tom-select' }
   filter :codec
   boolean_filter :is_changed
 

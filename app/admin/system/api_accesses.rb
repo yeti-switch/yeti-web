@@ -26,7 +26,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
   filter :login
   filter :allow_listen_recording
   filter :provision_gateway,
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
+         input_html: { class: 'tom-select-ajax', 'data-path': '/gateways/search' },
          collection: proc {
            resource_id = params.fetch(:q, {})[:gateway_id_eq]
            resource_id ? Gateway.where(id: resource_id) : []
@@ -99,7 +99,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
                                        hint: 'Array of IP separated by comma'
       f.input :allow_listen_recording
       f.input :customer_portal_access_profile, as: :select,
-                                               input_html: { class: :chosen },
+                                               input_html: { class: 'tom-select' },
                                                collection: System::CustomerPortalAccessProfile.all
 
       f.association_ajax_input :provision_gateway_id,
@@ -115,7 +115,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
       f.input :allow_outgoing_numberlists_ids,
               as: :select,
               collection: Routing::Numberlist.all,
-              input_html: { class: :chosen, multiple: true }
+              input_html: { class: 'tom-select', multiple: true }
     end
     f.actions
   end

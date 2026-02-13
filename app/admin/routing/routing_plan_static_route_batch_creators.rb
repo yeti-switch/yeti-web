@@ -17,7 +17,7 @@ ActiveAdmin.register Routing::RoutingPlanStaticRouteBatchCreatorForm, as: 'Routi
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Create batch' do
-      f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: { class: 'chosen-wide' }
+      f.input :routing_plan, collection: Routing::RoutingPlan.having_static_routes, input_html: { class: 'tom-select-wide' }
 
       f.input :prefixes, as: :text, hint: 'You can enter multiple prefixes separated by comma.'
       f.input :priority, input_html: { value: 100 }

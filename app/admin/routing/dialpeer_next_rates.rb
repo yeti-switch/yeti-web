@@ -67,9 +67,7 @@ ActiveAdmin.register DialpeerNextRate do
 
   filter :id_eq, label: 'ID'
 
-  filter :applied, as: :select,
-                   input_html: { class: :chosen },
-                   collection: [['Yes', true], ['No', false]]
+  boolean_filter :applied
 
   filter :apply_time
   filter :initial_rate

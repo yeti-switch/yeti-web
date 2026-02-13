@@ -38,7 +38,7 @@ ActiveAdmin.register Routing::RoutingGroup do
     f.inputs form_title do
       f.input :name
       f.input :routing_plans,
-              input_html: { class: 'chosen-sortable', multiple: true },
+              input_html: { class: 'tom-select-sortable', multiple: true },
               collection: Routing::RoutingPlan.order(:name)
     end
     f.actions
