@@ -49059,6 +49059,13 @@ CREATE INDEX lnp_cache_expires_at_idx ON class4.lnp_cache USING btree (expires_a
 
 
 --
+-- Name: numberlist_items_numberlist_id_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE UNIQUE INDEX numberlist_items_numberlist_id_id_idx ON class4.numberlist_items USING btree (numberlist_id, id);
+
+
+--
 -- Name: numberlist_items_prefix_range_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -50620,6 +50627,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260214093443'),
 ('20260130163020'),
 ('20260123105801'),
 ('20260110104141'),
