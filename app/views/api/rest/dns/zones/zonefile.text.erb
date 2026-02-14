@@ -1,0 +1,24 @@
+<%
+lines = []
+lines << "$ORIGIN ."
+lines << "$TTL #{@zone.minimum}"
+lines << "; SOA Record"
+lines << "#{@zone.name} IN SOA #{@zone.soa_mname} #{@zone.soa_rname} ("
+lines << "  #{@zone.serial} ; serial"
+lines << "  #{@zone.refresh} ; refresh"
+lines << "  #{@zone.retry} ; retry"
+lines << "  #{@zone.expire} ; expire"
+lines << "  #{@zone.minimum} ; minimum"
+lines << ")"
+lines << ""
+lines << "$ORIGIN #{@zone.name}."
+lines << ""
+
+@grouped_records.each do |record_type, records|
+  lines << "; #{record_type} Record"
+  records.each do |record|
+    lines << "#{record.name} #{record.record_type} #{record.content}"
+  end
+  lines << ""
+end
+-%><%= lines.join("\n") %>

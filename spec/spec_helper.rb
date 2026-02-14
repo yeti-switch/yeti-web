@@ -211,6 +211,8 @@ RspecApiDocumentation.configure do |config|
   config.response_body_formatter = proc do |content_type, response_body|
     if %r{application/.*json}.match?(content_type)
       JSON.pretty_generate(JSON.parse(response_body))
+    elsif content_type.to_s.start_with?('text/')
+      response_body.dup.force_encoding(Encoding::UTF_8)
     elsif response_body.encoding == Encoding::ASCII_8BIT
       '[binary data]'
     else
