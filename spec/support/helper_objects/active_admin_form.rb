@@ -52,8 +52,8 @@ module HelperObjects
     # @param with [String] value which you want to search
     # @param exact_field [TrueClass,FalseClass] search by exact field attribute name
     # @param ajax [TrueClass,FalseClass] whether tom-select uses ajax to load options
-    def fill_in_tom_select(label, with:, exact_field: false, ajax: false)
-      @ctx.fill_in_tom_select(label, with:, ajax:, exact_label: exact_field)
+    def fill_in_tom_select(label, with:, exact_field: false, **opts)
+      @ctx.fill_in_tom_select(label, with:, exact_label: exact_field, **opts)
     end
 
     # check/uncheck checkbox.

@@ -23,7 +23,7 @@ RSpec.describe 'Active Calls Index', js: true do
   context 'when filter by Node' do
     let(:filter_records!) do
       within_filters do
-        fill_in_tom_select 'Node', with: node.name
+        fill_in_tom_select 'NODE', with: node.name
         click_submit('Filter')
       end
     end
@@ -49,7 +49,7 @@ RSpec.describe 'Active Calls Index', js: true do
   context 'when filter by Customer' do
     let(:filter_records!) do
       within_filters do
-        fill_in_tom_select 'Customer', with: customer.name, ajax: true
+        fill_in_tom_select 'CUSTOMER', with: customer.name, search: true
         click_submit('Filter')
       end
     end
@@ -75,7 +75,7 @@ RSpec.describe 'Active Calls Index', js: true do
   context 'when filter by Vendor Account' do
     let(:filter_records!) do
       within_filters do
-        fill_in_tom_select 'Vendor Account', with: account.name, ajax: true
+        fill_in_tom_select 'VENDOR ACCOUNT', with: account.name, search: true
         click_submit('Filter')
       end
     end
@@ -101,7 +101,7 @@ RSpec.describe 'Active Calls Index', js: true do
   context 'when filter by Customer Account' do
     let(:filter_records!) do
       within_filters do
-        fill_in_tom_select 'Customer Account', with: account.name, ajax: true
+        fill_in_tom_select 'CUSTOMER ACCOUNT', with: account.name, search: true
         click_submit('Filter')
       end
     end

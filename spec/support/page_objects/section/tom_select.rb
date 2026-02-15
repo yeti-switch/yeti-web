@@ -34,8 +34,7 @@ module Section
       end
 
       def find_item_by_text(text, exact: true)
-        text_meth = exact ? :exact_text : :text
-        item_text_node = items_texts(text_meth => text, minimum: 1, maximum: 1)
+        item_text_node = items_texts(text:, exact_text: exact, minimum: 1, maximum: 1)
         Control::MultiItem.new(root_element, item_text_node.parent)
       end
     end
@@ -51,8 +50,7 @@ module Section
       element :input, '.dropdown-input'
 
       def select_option(text, exact: true)
-        text_meth = exact ? :exact_text : :text
-        options(text_meth => text, minimum: 1, maximum: 1)[0].click
+        options(text:, exact_text: exact, minimum: 1, maximum: 1)[0].click
       end
 
       def search(text)
@@ -82,6 +80,17 @@ module Section
     section :control, Control
     section :dropdown, Dropdown
 
+    class << self
+      def by_label(label, exact: false, parent: nil)
+        parent ||= Capybara.current_session
+        # root_element = parent.find(:parent_by_label, label, exact:)
+        label = parent.find(:label, text: label, exact_text: exact, match: :prefer_exact)
+        ts_control = parent.find("##{label[:for]}")
+        root_element = ts_control.ancestor(default_search_arguments[0])
+        new(parent, root_element)
+      end
+    end
+
     def has_selected_texts?(texts)
       control.has_items_with_text?(texts)
     end
@@ -110,7 +119,7 @@ module Section
 
     def search_and_select(search, select: nil, exact: true)
       with_opened_dropdown do
-        dropdown.search(search)
+        dropdown.search(search) if dropdown.has_input?(wait: 0)
         Array.wrap(select || search).each do |text|
           dropdown.select_option(text, exact:)
         end
@@ -118,6 +127,7 @@ module Section
     end
 
     def clear
+      control.root_element.hover
       control.clear_btn.click
     end
 

@@ -68,7 +68,7 @@ RSpec.describe 'Create new Custom Cdr', type: :feature, js: true do
   context 'with customer' do
     let(:fill_form!) do
       super()
-      fill_in_tom_select 'Customer', with: customer.name, ajax: true
+      fill_in_tom_select 'Customer', with: customer.name, search: true
     end
     let(:expected_service_params) do
       super().merge customer: customer

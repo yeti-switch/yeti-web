@@ -18,7 +18,7 @@ RSpec.describe 'Create new CDR export', js: true do
     let(:fill_form!) do
       fill_in_tom_select 'Fields', with: 'success', multiple: true
       fill_in_tom_select 'Fields', with: 'id', multiple: true, exact: true
-      fill_in_tom_select 'Customer acc id eq', with: account.name, ajax: true
+      fill_in_tom_select 'Customer acc id eq', with: account.name, search: true
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lteq', with: '2018-03-01'
     end
@@ -49,7 +49,7 @@ RSpec.describe 'Create new CDR export', js: true do
     let(:fields) { %w[id customer_id success] }
 
     let(:fill_form!) do
-      fill_in_tom_select 'Customer acc id eq', with: account.name, ajax: true
+      fill_in_tom_select 'Customer acc id eq', with: account.name, search: true
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lteq', with: '2018-03-01'
     end
@@ -146,7 +146,7 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Time start lt', with: '2018-03-01', exact: true
         fill_in 'Customer auth external type eq', with: 'term'
         fill_in 'Customer auth external type not eq', with: 'em'
-        fill_in_tom_select 'Customer auth external id in', with: customer_auth.name, multiple: true, ajax: true
+        fill_in_tom_select 'Customer auth external id in', with: customer_auth.name, multiple: true, search: true
         fill_in_tom_select 'Src country iso in', with: countries.first.name, multiple: true
         fill_in_tom_select 'Dst country iso in', with: countries.first.name, multiple: true
 
@@ -297,7 +297,7 @@ RSpec.describe 'Create new CDR export', js: true do
 
   context 'when "Customer Auth external ID IN" filter is selected and then form submitted' do
     let!(:customer_auth) { create(:customers_auth, external_id: 1235, external_type: 'term') }
-    let(:fill_form!) { fill_in_tom_select 'Customer auth external id in', with: customer_auth.display_name, multiple: true, ajax: true }
+    let(:fill_form!) { fill_in_tom_select 'Customer auth external id in', with: customer_auth.display_name, multiple: true, search: true }
 
     it 'should render form with previously selected Customer Auth' do
       subject

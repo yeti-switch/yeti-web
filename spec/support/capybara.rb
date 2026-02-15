@@ -53,17 +53,14 @@ Capybara.add_selector(:parent_by_label) do
     #   <div id="input_id"></div>
     # </div>
     if exact
-      # XPath.css('label[for]')[XPath.string.n.is(label)]
       XPath.descendant[
         XPath.attr(:id) == XPath.anywhere(:label)[XPath.string.n.is(label)].attr(:for)
       ].parent
     else
-      # XPath.css('label[for]')[XPath.string.n.contains(label)]
       XPath.descendant[
         XPath.attr(:id) == XPath.anywhere(:label)[XPath.string.n.contains(label)].attr(:for)
       ].parent
     end
-    # XPath.descendant[XPath.attr(:id).equals(label.attr('for'))].parent
   end
 end
 

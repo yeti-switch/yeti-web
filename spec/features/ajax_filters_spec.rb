@@ -7,14 +7,9 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
     subject do
       visit cdrs_path
 
-      # fill_in_tom_select('Customer', ajax: true, search: 'cus', with: match_customers.first.name)
+      # fill_in_tom_select('Customer', search: 'cus', with: match_customers.first.name)
     end
 
-    let(:customer_filter) do
-      parent = find('.filter_form')
-      root_element = parent.find(:parent_by_label, 'Customer', exact: true)
-      Section::TomSelect.new(parent, root_element)
-    end
     let!(:match_customers) {
       [
         FactoryBot.create(:customer, name: 'customer_1'),
@@ -27,6 +22,8 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
       subject
       customer = match_customers.first
 
+      parent = find('.filter_form')
+      customer_filter = Section::TomSelect.by_label('CUSTOMER', exact: true, parent:)
       customer_filter.control.click # open dropdown
       customer_filter.dropdown.search('cus')
 
@@ -40,8 +37,7 @@ RSpec.describe 'Load filter options', type: :feature, js: true do
       expect(CGI.unescape(page.current_url)).to include("q[customer_id_eq]=#{customer.id}")
       # expect(page).to have_field_tom_select('Customer', with: customer.display_name)
       parent = find('.filter_form')
-      root_element = parent.find(:parent_by_label, 'Customer', exact: true)
-      new_customer_filter = Section::TomSelect.new(parent, root_element)
+      new_customer_filter = Section::TomSelect.by_label('CUSTOMER', exact: true, parent:)
       expect(new_customer_filter).to have_selected_text customer.display_name
     end
   end

@@ -18,7 +18,7 @@ RSpec.describe 'Billing Services New', js: true, bullet: [:n] do
   let!(:account) { create(:account) }
   let(:fill_form!) do
     fill_in 'Name', with: attributes[:name]
-    fill_in_tom_select 'Account', with: attributes[:account].name, ajax: true
+    fill_in_tom_select 'Account', with: attributes[:account].name, search: true
     fill_in_tom_select 'Type', with: attributes[:service_type].name
     fill_in 'Variables', with: attributes[:variables_json]
     fill_in 'Initial price', with: attributes[:initial_price]

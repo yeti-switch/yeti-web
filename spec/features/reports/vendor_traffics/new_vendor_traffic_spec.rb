@@ -17,7 +17,7 @@ RSpec.describe 'Create new Vendor Traffic', type: :feature, js: true do
   let!(:vendor) { FactoryBot.create(:vendor, name: 'John Doe') }
   let(:submit_form!) { click_submit('Create Vendor traffic report') }
   let(:fill_form!) do
-    fill_in_tom_select 'Vendor', with: vendor.name, ajax: true
+    fill_in_tom_select 'Vendor', with: vendor.name, search: true
     fill_in_date_time 'Date start', with: '2019-01-01 00:00:00'
     fill_in_date_time 'Date end', with: '2019-02-01 01:00:00'
   end

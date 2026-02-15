@@ -36,7 +36,7 @@ RSpec.describe 'Rate Management Project Update', js: true, bullet: [:n] do
 
   context 'when project with same scope attributes exists' do
     let(:fill_form!) do
-      fill_in_tom_select 'Vendor', with: another_project.vendor.name, ajax: true
+      fill_in_tom_select 'Vendor', with: another_project.vendor.name, search: true
       fill_in_tom_select 'Account', with: another_project.account.name
       fill_in_tom_select 'Routing group', with: another_project.routing_group.name
       fill_in_tom_select 'Routeset discriminator', with: another_project.routeset_discriminator.name

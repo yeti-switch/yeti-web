@@ -19,7 +19,7 @@ RSpec.describe 'Filter Destination records', :js do
 
     let(:filter_records) do
       within_filters do
-        fill_in_tom_select 'Tagged', with: filter_value
+        fill_in_tom_select 'TAGGED', with: filter_value
       end
     end
 
@@ -36,7 +36,7 @@ RSpec.describe 'Filter Destination records', :js do
         expect(page).to have_table_row count: 1
         expect(page).to have_table_cell column: 'Id', text: customers_auth_tagged.id
         within_filters do
-          expect(page).to have_field_tom_select('Tagged', with: filter_value)
+          expect(page).to have_field_tom_select('TAGGED', with: filter_value)
         end
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe 'Filter Destination records', :js do
         expect(page).to have_table_row count: other_destinations_list.count
         other_destinations_list.each { |d| expect(page).to have_table_cell column: 'Id', text: d.id }
         within_filters do
-          expect(page).to have_field_tom_select('Tagged', with: filter_value)
+          expect(page).to have_field_tom_select('TAGGED', with: filter_value)
         end
       end
     end
@@ -59,10 +59,10 @@ RSpec.describe 'Filter Destination records', :js do
     context 'filter by routing tag ids contains' do
       let(:filter_records) do
         within_filters do
-          fill_in_tom_select 'Routing Tag IDs Contains', with: tags.first.name, multiple: true
-          fill_in_tom_select 'Routing Tag IDs Contains', with: tags.second.name, multiple: true
-          expect(page).to have_field_tom_select('Routing Tag IDs Contains', with: tags.first.name, exact: false)
-          expect(page).to have_field_tom_select('Routing Tag IDs Contains', with: tags.second.name, exact: false)
+          fill_in_tom_select 'ROUTING TAG IDS CONTAINS', with: tags.first.name, multiple: true
+          fill_in_tom_select 'ROUTING TAG IDS CONTAINS', with: tags.second.name, multiple: true
+          expect(page).to have_field_tom_select('ROUTING TAG IDS CONTAINS', with: tags.first.name, exact: false)
+          expect(page).to have_field_tom_select('ROUTING TAG IDS CONTAINS', with: tags.second.name, exact: false)
         end
       end
 
@@ -164,9 +164,9 @@ RSpec.describe 'Filter Destination records', :js do
         let(:filter_records) do
           within_filters do
             fill_in name: 'q[routing_tag_ids_count_equals]', with: 1
-            fill_in_tom_select 'Routing tag ids covers', with: specific_tag.name, multiple: true
+            fill_in_tom_select 'ROUTING TAG IDS COVERS', with: specific_tag.name, multiple: true
             expect(page).to have_field(name: 'q[routing_tag_ids_count_equals]', with: 1)
-            expect(page).to have_field_tom_select('Routing tag ids covers', with: specific_tag.name, exact: false)
+            expect(page).to have_field_tom_select('ROUTING TAG IDS COVERS', with: specific_tag.name, exact: false)
           end
         end
         let!(:specific_tag) { tags.first }
@@ -281,7 +281,7 @@ RSpec.describe 'Filter Destination records', :js do
   describe 'filter by network type' do
     let(:filter_records) do
       within_filters do
-        fill_in_tom_select 'Network Type', with: network_type.name
+        fill_in_tom_select 'NETWORK TYPE', with: network_type.name
       end
     end
 
@@ -301,7 +301,7 @@ RSpec.describe 'Filter Destination records', :js do
       expect(page).to have_table_row(id: record.id)
 
       within_filters do
-        expect(page).to have_field_tom_select('Network Type', with: network_type.name)
+        expect(page).to have_field_tom_select('NETWORK TYPE', with: network_type.name)
       end
     end
   end

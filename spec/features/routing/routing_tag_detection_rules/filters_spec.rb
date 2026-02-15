@@ -14,10 +14,10 @@ RSpec.describe 'Filter Routing Tag detection rule records', :js do
   describe 'Filter by routing tags' do
     let(:filter_records) do
       within_filters do
-        fill_in_tom_select 'Routing Tag IDs Contains', with: tags.first.name, multiple: true
-        fill_in_tom_select 'Routing Tag IDs Contains', with: tags.second.name, multiple: true
-        expect(page).to have_field_tom_select('Routing Tag IDs Contains', with: tags.first.name, exact: false)
-        expect(page).to have_field_tom_select('Routing Tag IDs Contains', with: tags.second.name, exact: false)
+        fill_in_tom_select 'ROUTING TAG IDS CONTAINS', with: tags.first.name, multiple: true
+        fill_in_tom_select 'ROUTING TAG IDS CONTAINS', with: tags.second.name, multiple: true
+        expect(page).to have_field_tom_select('ROUTING TAG IDS CONTAINS', with: tags.first.name, exact: false)
+        expect(page).to have_field_tom_select('ROUTING TAG IDS CONTAINS', with: tags.second.name, exact: false)
       end
     end
 

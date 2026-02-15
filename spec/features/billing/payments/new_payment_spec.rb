@@ -15,7 +15,7 @@ RSpec.describe 'Create new Payment', type: :feature, js: true do
     click_button 'Create Payment'
   end
   let(:fill_in_form!) do
-    fill_in_tom_select('Account', with: account.display_name, ajax: true)
+    fill_in_tom_select('Account', with: account.display_name, search: true)
     fill_in 'Amount', with: 100_500
     fill_in 'Notes', with: 'Some notes'
     fill_in 'Private notes', with: 'Some private notes'
@@ -42,7 +42,7 @@ RSpec.describe 'Create new Payment', type: :feature, js: true do
 
   context 'without Amount' do
     let(:fill_in_form!) do
-      fill_in_tom_select('Account', with: account.display_name, ajax: true)
+      fill_in_tom_select('Account', with: account.display_name, search: true)
       fill_in 'Notes', with: 'Some notes'
       fill_in 'Private notes', with: 'Some private notes'
     end
@@ -61,7 +61,7 @@ RSpec.describe 'Create new Payment', type: :feature, js: true do
 
   context 'with Amount 0' do
     let(:fill_in_form!) do
-      fill_in_tom_select('Account', with: account.display_name, ajax: true)
+      fill_in_tom_select('Account', with: account.display_name, search: true)
       fill_in 'Amount', with: 0
       fill_in 'Notes', with: 'Some notes'
       fill_in 'Private notes', with: 'Some private notes'
