@@ -77,7 +77,7 @@
                     return '<div class="no-results">Type 3 chars to search...</div>'
                 },
                 item: function (data, escape) {
-                    return '<div><span class=".item-text">' + escape(data.text) + '</span></div>'
+                    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
                 }
             }
         })

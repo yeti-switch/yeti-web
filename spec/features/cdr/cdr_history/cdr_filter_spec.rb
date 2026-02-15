@@ -42,7 +42,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
         expect(page).to have_table_row count: cdrs_tagged.size
         cdrs_tagged.each { |cdr| expect(page).to have_table_cell column: 'Id', text: cdr.id }
         within_filters do
-          expect(page).to have_field_tom_select('TAGGED', with: filter_value, clearable: true)
+          expect(page).to have_field_tom_select('TAGGED', with: filter_value)
         end
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
         expect(page).to have_table_row count: cdrs_not_tagged.size
         cdrs_not_tagged.each { |cdr| expect(page).to have_table_cell column: 'Id', text: cdr.id }
         within_filters do
-          expect(page).to have_field_tom_select('TAGGED', with: filter_value, clearable: true)
+          expect(page).to have_field_tom_select('TAGGED', with: filter_value)
         end
       end
     end
@@ -89,7 +89,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
   describe 'filter by customer auth' do
     let(:filter_cdr_records) do
       within_filters do
-        fill_in_tom_select 'CUSTOMER AUTH', with: customer_auths[0].name, search: true
+        fill_in_tom_select 'CUSTOMER AUTH', with: customer_auths[0].name, search: true, exact_label: true
       end
     end
 
@@ -109,7 +109,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdrs[0].id.to_s)
       expect(page).to have_table_cell(column: 'Customer Auth', exact_text: cdrs[0].customer_auth.display_name)
       within_filters do
-        expect(page).to have_field_tom_select('CUSTOMER AUTH', with: customer_auths[0].display_name, clearable: true)
+        expect(page).to have_field_tom_select('CUSTOMER AUTH', exact_label: true, with: customer_auths[0].display_name)
       end
     end
   end

@@ -164,7 +164,10 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       page.scroll_to find_button('OK')
       if assign_params[:routing_tag_ids].present?
         assign_params[:routing_tag_ids].each do |tag_id|
-          fill_in_tom_select 'routing_tag_ids[]', with: Routing::RoutingTag.find(tag_id).name, multiple: true
+          fill_in_tom_select '#batch_update_routing_tag_ids-ts-control',
+                             with: Routing::RoutingTag.find(tag_id).name,
+                             multiple: true,
+                             selector: true
         end
       end
     end
@@ -244,7 +247,10 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
     end
 
     it 'should create a Job to update routing_tag_ids to any tag: [nil]' do
-      fill_in_tom_select 'routing_tag_ids[]', with: Routing::RoutingTag::ANY_TAG, multiple: true
+      fill_in_tom_select '#batch_update_routing_tag_ids-ts-control',
+                         with: Routing::RoutingTag::ANY_TAG,
+                         multiple: true,
+                         selector: true
       expect do
         subject
         expect(page).to have_selector '.flash', text: success_message

@@ -44,7 +44,7 @@ function initTomSelect(parent) {
             },
             render: {
                 item: function (data, escape) {
-                    return '<div><div class=".item-text">' + escape(data.text) + '</div></div>'
+                    return '<div><div class="item-text">' + escape(data.text) + '</div></div>'
                 }
             }
         })
@@ -72,7 +72,7 @@ function initTomSelect(parent) {
             },
             render: {
                 item: function (data, escape) {
-                    return '<div><span class=".item-text">' + escape(data.text) + '</span></div>'
+                    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
                 }
             }
         })
@@ -99,7 +99,7 @@ function initTomSelect(parent) {
             controlInput: null,
             render: {
                 item: function (data, escape) {
-                    return '<div><span class=".item-text">' + escape(data.text) + '</span></div>'
+                    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
                 }
             }
         })

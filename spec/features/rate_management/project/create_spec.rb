@@ -315,7 +315,9 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
                           'Account must exist',
                           'Vendor must exist',
                           "Name can't be blank",
-                          'specify a gateway_group or a gateway'
+                          'specify a gateway_group or a gateway',
+                          'Routing group must exist',
+                          'Routeset discriminator must exist'
                         )
       end.not_to change { RateManagement::Project.count }
     end
@@ -347,7 +349,9 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
                           "Keep applied pricelists days can't be blank",
                           "Priority can't be blank",
                           "Name can't be blank",
-                          'specify a gateway_group or a gateway'
+                          'specify a gateway_group or a gateway',
+                          'Routing group must exist',
+                          'Routeset discriminator must exist'
                         )
       end.not_to change { RateManagement::Project.count }
     end

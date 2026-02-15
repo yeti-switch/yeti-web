@@ -34,8 +34,8 @@ module Section
       end
 
       def find_item_by_text(text, exact: true)
-        item_text_node = items_texts(text:, exact_text: exact, minimum: 1, maximum: 1)
-        Control::MultiItem.new(root_element, item_text_node.parent)
+        item_text_node = items_texts(text:, exact_text: exact, minimum: 1, maximum: 1)[0]
+        Control::MultiItem.new(root_element, item_text_node.ancestor('.item'))
       end
     end
 

@@ -6,8 +6,8 @@ module Helpers
     def find_tom_select(label, exact: false, selector: nil, parent: nil, **)
       parent ||= Capybara.current_session
       if selector
-        node = within.find(label)
-        root_element = node[:class].include?('ts-wrapper') ? node : node.ancestor('.ts-wrapper')
+        node = parent.find(label)
+        root_element = (node[:class] || '').include?('ts-wrapper') ? node : node.ancestor('.ts-wrapper')
         Section::TomSelect.new(parent, root_element)
       else
         Section::TomSelect.by_label(label, exact:, parent:)

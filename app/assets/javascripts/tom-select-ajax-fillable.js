@@ -23,7 +23,7 @@
                     return '<div class="no-results">No results matched</div>'
                 },
                 item: function (data, escape) {
-                    return '<div><span class=".item-text">' + escape(data.text) + '</span></div>'
+                    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
                 }
             }
         })

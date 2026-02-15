@@ -193,11 +193,16 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
               include_blank: false,
               input_html: { class: 'tom-select' }
 
-      f.input :routing_tag_ids, as: :select, label: 'Routing Tags',
-                                collection: routing_tag_options,
-                                multiple: true,
-                                include_hidden: false,
-                                input_html: { class: 'tom-select' }
+      f.input :routing_tag_ids,
+              as: :select,
+              label: 'Routing Tags',
+              collection: routing_tag_options,
+              multiple: true,
+              include_hidden: false,
+              input_html: {
+                'data-allow-empty-option': true,
+                class: 'tom-select'
+              }
 
       f.input :routing_tag_mode_id,
               as: :select,
