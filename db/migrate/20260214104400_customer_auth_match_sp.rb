@@ -319,7 +319,7 @@ CREATE or replace FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i
           RETURN;
         END IF;
 
-        IF v_customer_auth_normalized.require_incoming_auth THEN
+        IF v_customer_auth_normalized.require_incoming_auth AND i_auth_id IS NULL THEN
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
