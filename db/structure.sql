@@ -32120,6 +32120,237 @@ CREATE FUNCTION switch22.lua_exec(function_id integer, arg switch22.lua_call_con
 
 
 --
+-- Name: customers_auth_normalized; Type: TABLE; Schema: class4; Owner: -
+--
+
+CREATE TABLE class4.customers_auth_normalized (
+    id integer NOT NULL,
+    customers_auth_id integer NOT NULL,
+    customer_id integer NOT NULL,
+    rateplan_id integer NOT NULL,
+    enabled boolean DEFAULT true NOT NULL,
+    ip inet NOT NULL,
+    account_id integer,
+    gateway_id integer NOT NULL,
+    src_rewrite_rule character varying,
+    src_rewrite_result character varying,
+    dst_rewrite_rule character varying,
+    dst_rewrite_result character varying,
+    src_prefix character varying DEFAULT ''::character varying NOT NULL,
+    dst_prefix character varying DEFAULT ''::character varying NOT NULL,
+    x_yeti_auth character varying,
+    name character varying NOT NULL,
+    dump_level_id smallint DEFAULT 0 NOT NULL,
+    capacity smallint,
+    pop_id integer,
+    uri_domain character varying,
+    src_name_rewrite_rule character varying,
+    src_name_rewrite_result character varying,
+    diversion_policy_id smallint DEFAULT 1 NOT NULL,
+    diversion_rewrite_rule character varying,
+    diversion_rewrite_result character varying,
+    dst_numberlist_id integer,
+    src_numberlist_id integer,
+    routing_plan_id integer NOT NULL,
+    allow_receive_rate_limit boolean DEFAULT false NOT NULL,
+    send_billing_information boolean DEFAULT false NOT NULL,
+    radius_auth_profile_id smallint,
+    enable_audio_recording boolean DEFAULT false NOT NULL,
+    src_number_radius_rewrite_rule character varying,
+    src_number_radius_rewrite_result character varying,
+    dst_number_radius_rewrite_rule character varying,
+    dst_number_radius_rewrite_result character varying,
+    radius_accounting_profile_id smallint,
+    from_domain character varying,
+    to_domain character varying,
+    transport_protocol_id smallint,
+    dst_number_min_length smallint DEFAULT 0 NOT NULL,
+    dst_number_max_length smallint DEFAULT 100 NOT NULL,
+    check_account_balance boolean DEFAULT true NOT NULL,
+    require_incoming_auth boolean DEFAULT false NOT NULL,
+    tag_action_id smallint,
+    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
+    external_id bigint,
+    reject_calls boolean DEFAULT false NOT NULL,
+    src_number_max_length smallint DEFAULT 100 NOT NULL,
+    src_number_min_length smallint DEFAULT 0 NOT NULL,
+    lua_script_id smallint,
+    src_number_field_id smallint DEFAULT 1 NOT NULL,
+    src_name_field_id smallint DEFAULT 1 NOT NULL,
+    dst_number_field_id smallint DEFAULT 1 NOT NULL,
+    cnam_database_id smallint,
+    cps_limit double precision,
+    src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
+    external_type character varying,
+    rewrite_ss_status_id smallint,
+    privacy_mode_id smallint DEFAULT 1 NOT NULL,
+    interface character varying,
+    ss_mode_id smallint DEFAULT 0 NOT NULL,
+    ss_no_identity_action_id smallint DEFAULT 0 NOT NULL,
+    ss_invalid_identity_action_id smallint DEFAULT 0 CONSTRAINT customers_auth_normalized_ss_invalid_identity_action_i_not_null NOT NULL,
+    ss_src_rewrite_rule character varying,
+    ss_src_rewrite_result character varying,
+    ss_dst_rewrite_rule character varying,
+    ss_dst_rewrite_result character varying,
+    pai_policy_id smallint DEFAULT 1 NOT NULL,
+    pai_rewrite_rule character varying,
+    pai_rewrite_result character varying,
+    stir_shaken_crt_id smallint,
+    variables jsonb,
+    CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
+    CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
+    CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
+    CONSTRAINT customers_auth_min_src_number_length CHECK ((src_number_min_length >= 0)),
+    CONSTRAINT x_yeti_auth_not_empty CHECK (((x_yeti_auth)::text <> ''::text))
+);
+
+
+--
+-- Name: match_customer_auth(integer, integer, inet, smallint, text, text, text, text, text, text, text); Type: FUNCTION; Schema: switch22; Owner: -
+--
+
+CREATE FUNCTION switch22.match_customer_auth(i_pop_id integer, i_auth_id integer, i_remote_ip inet, i_transport_protocol_id smallint, i_x_yeti_auth text, i_dst_number text, i_src_number text, i_uri_domain text, i_to_domain text, i_from_domain text, i_interface text) RETURNS class4.customers_auth_normalized
+    LANGUAGE plpgsql COST 10
+    AS $$
+DECLARE
+  v_customer_auth_normalized class4.customers_auth_normalized%rowtype;
+  v_src_length smallint;
+  v_dst_length smallint;
+BEGIN
+  v_src_length = length(i_src_number);
+  v_dst_length = length(i_dst_number);
+
+  if i_auth_id is null AND i_x_yeti_auth is null then
+    /* materializing because we expect high cardinality there */
+    WITH preload AS MATERIALIZED (
+      select can.* from class4.customers_auth_normalized can
+      where can.enabled and can.x_yeti_auth is null AND can.require_incoming_auth = false AND can.ip>>=i_remote_ip
+    )
+    SELECT into v_customer_auth_normalized ca.*
+    from preload ca
+    JOIN public.contractors c ON c.id=ca.customer_id
+    WHERE
+      prefix_range(ca.dst_prefix)@>prefix_range(i_dst_number) AND
+      prefix_range(ca.src_prefix)@>prefix_range(i_src_number) AND
+      (ca.pop_id=i_pop_id or ca.pop_id is null) and
+      COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+      COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+      COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+      (ca.interface is null or ca.interface = i_interface ) AND
+      (ca.transport_protocol_id is null or ca.transport_protocol_id = i_transport_protocol_id) AND
+      v_dst_length between ca.dst_number_min_length and ca.dst_number_max_length and
+      v_src_length between ca.src_number_min_length and ca.src_number_max_length and
+      c.enabled and c.customer
+    ORDER BY
+      masklen(ca.ip) DESC,
+      ca.transport_protocol_id is null,
+      length(prefix_range(ca.dst_prefix)) DESC,
+      length(prefix_range(ca.src_prefix)) DESC,
+      ca.pop_id is null,
+      ca.uri_domain is null,
+      ca.to_domain is null,
+      ca.from_domain is null
+    LIMIT 1;
+    IF NOT FOUND THEN
+      /* try to find at least one record with require_incoming_auth  to know should we ask for password(401) or reject(403) */
+      /* we dont want to materialize intermediate results there to read less data - there is no sorting and limit 1 will cause less reads */
+      SELECT into v_customer_auth_normalized ca.*
+      from class4.customers_auth_normalized ca
+      JOIN public.contractors c ON c.id=ca.customer_id
+      WHERE
+        ca.enabled and ca.x_yeti_auth is null AND ca.require_incoming_auth = true AND ca.ip>>=i_remote_ip AND
+        prefix_range(ca.dst_prefix)@>prefix_range(i_dst_number) AND
+        prefix_range(ca.src_prefix)@>prefix_range(i_src_number) AND
+        (ca.pop_id=i_pop_id or ca.pop_id is null) and
+        COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+        COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+        COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+        (ca.interface is null or ca.interface = i_interface ) AND
+        (ca.transport_protocol_id is null or ca.transport_protocol_id = i_transport_protocol_id) AND
+        v_dst_length between ca.dst_number_min_length and ca.dst_number_max_length and
+        v_src_length between ca.src_number_min_length and ca.src_number_max_length and
+        c.enabled and c.customer
+      LIMIT 1;
+      RETURN v_customer_auth_normalized;
+    END IF;
+    RETURN v_customer_auth_normalized;
+
+  elsif i_auth_id is not null then
+
+    WITH preload AS MATERIALIZED (
+      select can.* from class4.customers_auth_normalized can
+      where can.enabled AND can.require_incoming_auth AND can.gateway_id = i_auth_id
+    )
+    SELECT into v_customer_auth_normalized ca.*
+    from preload ca
+    JOIN public.contractors c ON c.id=ca.customer_id
+    WHERE
+      ca.ip>>=i_remote_ip AND
+      prefix_range(ca.dst_prefix)@>prefix_range(i_dst_number) AND
+      prefix_range(ca.src_prefix)@>prefix_range(i_src_number) AND
+      (ca.pop_id=i_pop_id or ca.pop_id is null) and
+      COALESCE(ca.x_yeti_auth,'')=COALESCE(i_x_yeti_auth,'') AND
+      COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+      COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+      COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+      (ca.interface is null or ca.interface = i_interface ) AND
+      (ca.transport_protocol_id is null or ca.transport_protocol_id = i_transport_protocol_id) AND
+      v_dst_length between ca.dst_number_min_length and ca.dst_number_max_length and
+      v_src_length between ca.src_number_min_length and ca.src_number_max_length and
+      c.enabled and c.customer
+    ORDER BY
+      masklen(ca.ip) DESC,
+      ca.transport_protocol_id is null,
+      length(prefix_range(ca.dst_prefix)) DESC,
+      length(prefix_range(ca.src_prefix)) DESC,
+      ca.pop_id is null,
+      ca.uri_domain is null,
+      ca.to_domain is null,
+      ca.from_domain is null
+    LIMIT 1;
+    RETURN v_customer_auth_normalized;
+
+  else
+     -- i_auth_id is null there and i_x_yeti_auth is not null there
+    WITH preload AS MATERIALIZED (
+      select can.* from class4.customers_auth_normalized can
+      where can.enabled AND can.x_yeti_auth = i_x_yeti_auth AND can.ip>>=i_remote_ip
+    )
+    SELECT into v_customer_auth_normalized ca.*
+    from preload ca
+    JOIN public.contractors c ON c.id=ca.customer_id
+    WHERE
+      prefix_range(ca.dst_prefix)@>prefix_range(i_dst_number) AND
+      prefix_range(ca.src_prefix)@>prefix_range(i_src_number) AND
+      (ca.pop_id=i_pop_id or ca.pop_id is null) and
+      COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
+      COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
+      COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
+      (ca.interface is null or ca.interface = i_interface ) AND
+      (ca.transport_protocol_id is null or ca.transport_protocol_id = i_transport_protocol_id) AND
+      v_dst_length between ca.dst_number_min_length and ca.dst_number_max_length and
+      v_src_length between ca.src_number_min_length and ca.src_number_max_length and
+      c.enabled and c.customer
+    ORDER BY
+      masklen(ca.ip) DESC,
+      ca.transport_protocol_id is null,
+      length(prefix_range(ca.dst_prefix)) DESC,
+      length(prefix_range(ca.src_prefix)) DESC,
+      ca.pop_id is null,
+      ca.uri_domain is null,
+      ca.to_domain is null,
+      ca.from_domain is null,
+      ca.require_incoming_auth
+    LIMIT 1;
+    RETURN v_customer_auth_normalized;
+  end if;
+
+  RETURN NULL;
+END;
+$$;
+
+
+--
 -- Name: match_numberlist(integer, character varying, character varying); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
@@ -35181,95 +35412,40 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> AUTH. lookup started',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
-        v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
-        --  v_uri_domain:=COALESCE(i_uri_domain,'');
+        v_x_yeti_auth = NULLIF(i_x_yeti_auth,'');
 
-        if i_auth_id is null then
-            SELECT into v_customer_auth_normalized ca.*
-            from class4.customers_auth_normalized ca
-                JOIN public.contractors c ON c.id=ca.customer_id
-            WHERE ca.enabled AND
-              ca.ip>>=v_remote_ip AND
-              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
-              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
-              (ca.pop_id=i_pop_id or ca.pop_id is null) and
-              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
-              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
-              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
-              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
-              (ca.interface is null or ca.interface = i_interface ) AND
-              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
-              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
-              c.enabled and c.customer
-            ORDER BY
-                masklen(ca.ip) DESC,
-                ca.transport_protocol_id is null,
-                length(prefix_range(ca.dst_prefix)) DESC,
-                length(prefix_range(ca.src_prefix)) DESC,
-                ca.pop_id is null,
-                ca.uri_domain is null,
-                ca.to_domain is null,
-                ca.from_domain is null,
-                ca.require_incoming_auth
-            LIMIT 1;
-            IF NOT FOUND THEN
-            /*dbg{*/
-                v_end:=clock_timestamp();
-                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-                RETURN NEXT v_ret;
-                RETURN;
-            END IF;
-            if v_customer_auth_normalized.require_incoming_auth then
-            /*dbg{*/
-                v_end:=clock_timestamp();
-                RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-                v_ret.aleg_auth_required=true;
-                RETURN NEXT v_ret;
-                RETURN;
-            end IF;
-        else
-            SELECT into v_customer_auth_normalized ca.*
-            from class4.customers_auth_normalized ca
-                JOIN public.contractors c ON c.id=ca.customer_id
-            WHERE ca.enabled AND
-              ca.ip>>=v_remote_ip AND
-              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
-              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
-              (ca.pop_id=i_pop_id or ca.pop_id is null) and
-              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
-              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
-              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
-              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
-              (ca.interface is null or ca.interface = i_interface ) AND
-              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
-              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
-              c.enabled and c.customer and
-              ca.require_incoming_auth and gateway_id = i_auth_id
-            ORDER BY
-                masklen(ca.ip) DESC,
-                ca.transport_protocol_id is null,
-                length(prefix_range(ca.dst_prefix)) DESC,
-                length(prefix_range(ca.src_prefix)) DESC,
-                ca.pop_id is null,
-                ca.uri_domain is null,
-                ca.to_domain is null,
-                ca.from_domain is null
-            LIMIT 1;
-            IF NOT FOUND THEN
-            /*dbg{*/
-                v_end:=clock_timestamp();
-                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-                RETURN NEXT v_ret;
-                RETURN;
-            END IF;
-        end IF;
+        v_customer_auth_normalized = switch22.match_customer_auth(
+          i_pop_id,
+          i_auth_id,
+          v_remote_ip,
+          v_transport_protocol_id,
+          v_x_yeti_auth,
+          v_ret.dst_prefix_in,
+          v_ret.src_prefix_in,
+          i_uri_domain,
+          i_to_domain,
+          i_from_domain,
+          i_interface
+        );
+        IF v_customer_auth_normalized.id IS NULL THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+          v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_customer_auth_normalized.require_incoming_auth THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+          v_ret.aleg_auth_required=true;
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -36883,95 +37059,40 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_end:=clock_timestamp();
         RAISE NOTICE '% ms -> AUTH. lookup started',EXTRACT(MILLISECOND from v_end-v_start);
         /*}dbg*/
-        v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
-        --  v_uri_domain:=COALESCE(i_uri_domain,'');
+        v_x_yeti_auth = NULLIF(i_x_yeti_auth,'');
 
-        if i_auth_id is null then
-            SELECT into v_customer_auth_normalized ca.*
-            from class4.customers_auth_normalized ca
-                JOIN public.contractors c ON c.id=ca.customer_id
-            WHERE ca.enabled AND
-              ca.ip>>=v_remote_ip AND
-              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
-              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
-              (ca.pop_id=i_pop_id or ca.pop_id is null) and
-              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
-              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
-              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
-              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
-              (ca.interface is null or ca.interface = i_interface ) AND
-              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
-              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
-              c.enabled and c.customer
-            ORDER BY
-                masklen(ca.ip) DESC,
-                ca.transport_protocol_id is null,
-                length(prefix_range(ca.dst_prefix)) DESC,
-                length(prefix_range(ca.src_prefix)) DESC,
-                ca.pop_id is null,
-                ca.uri_domain is null,
-                ca.to_domain is null,
-                ca.from_domain is null,
-                ca.require_incoming_auth
-            LIMIT 1;
-            IF NOT FOUND THEN
-            /*dbg{*/
-                v_end:=clock_timestamp();
-                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-                RETURN NEXT v_ret;
-                RETURN;
-            END IF;
-            if v_customer_auth_normalized.require_incoming_auth then
-            /*dbg{*/
-                v_end:=clock_timestamp();
-                RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-                v_ret.aleg_auth_required=true;
-                RETURN NEXT v_ret;
-                RETURN;
-            end IF;
-        else
-            SELECT into v_customer_auth_normalized ca.*
-            from class4.customers_auth_normalized ca
-                JOIN public.contractors c ON c.id=ca.customer_id
-            WHERE ca.enabled AND
-              ca.ip>>=v_remote_ip AND
-              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
-              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
-              (ca.pop_id=i_pop_id or ca.pop_id is null) and
-              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
-              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
-              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
-              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
-              (ca.interface is null or ca.interface = i_interface ) AND
-              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
-              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
-              c.enabled and c.customer and
-              ca.require_incoming_auth and gateway_id = i_auth_id
-            ORDER BY
-                masklen(ca.ip) DESC,
-                ca.transport_protocol_id is null,
-                length(prefix_range(ca.dst_prefix)) DESC,
-                length(prefix_range(ca.src_prefix)) DESC,
-                ca.pop_id is null,
-                ca.uri_domain is null,
-                ca.to_domain is null,
-                ca.from_domain is null
-            LIMIT 1;
-            IF NOT FOUND THEN
-            /*dbg{*/
-                v_end:=clock_timestamp();
-                RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
-            /*}dbg*/
-                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-                RETURN NEXT v_ret;
-                RETURN;
-            END IF;
-        end IF;
+        v_customer_auth_normalized = switch22.match_customer_auth(
+          i_pop_id,
+          i_auth_id,
+          v_remote_ip,
+          v_transport_protocol_id,
+          v_x_yeti_auth,
+          v_ret.dst_prefix_in,
+          v_ret.src_prefix_in,
+          i_uri_domain,
+          i_to_domain,
+          i_from_domain,
+          i_interface
+        );
+        IF v_customer_auth_normalized.id IS NULL THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> AUTH.  disconnection with 110.Cant find customer or customer locked',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+          v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_customer_auth_normalized.require_incoming_auth THEN
+          /*dbg{*/
+          v_end:=clock_timestamp();
+          RAISE NOTICE '% ms -> AUTH. Incoming auth required. Respond 401',EXTRACT(MILLISECOND from v_end-v_start);
+          /*}dbg*/
+          v_ret.aleg_auth_required=true;
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         /*dbg{*/
         v_end:=clock_timestamp();
@@ -38575,86 +38696,34 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_privacy = string_to_array(COALESCE(i_privacy,''),';');
 
         
-        v_x_yeti_auth:=COALESCE(i_x_yeti_auth,'');
-        --  v_uri_domain:=COALESCE(i_uri_domain,'');
+        v_x_yeti_auth = NULLIF(i_x_yeti_auth,'');
 
-        if i_auth_id is null then
-            SELECT into v_customer_auth_normalized ca.*
-            from class4.customers_auth_normalized ca
-                JOIN public.contractors c ON c.id=ca.customer_id
-            WHERE ca.enabled AND
-              ca.ip>>=v_remote_ip AND
-              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
-              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
-              (ca.pop_id=i_pop_id or ca.pop_id is null) and
-              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
-              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
-              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
-              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
-              (ca.interface is null or ca.interface = i_interface ) AND
-              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
-              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
-              c.enabled and c.customer
-            ORDER BY
-                masklen(ca.ip) DESC,
-                ca.transport_protocol_id is null,
-                length(prefix_range(ca.dst_prefix)) DESC,
-                length(prefix_range(ca.src_prefix)) DESC,
-                ca.pop_id is null,
-                ca.uri_domain is null,
-                ca.to_domain is null,
-                ca.from_domain is null,
-                ca.require_incoming_auth
-            LIMIT 1;
-            IF NOT FOUND THEN
-            
-                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-                RETURN NEXT v_ret;
-                RETURN;
-            END IF;
-            if v_customer_auth_normalized.require_incoming_auth then
-            
-                v_ret.aleg_auth_required=true;
-                RETURN NEXT v_ret;
-                RETURN;
-            end IF;
-        else
-            SELECT into v_customer_auth_normalized ca.*
-            from class4.customers_auth_normalized ca
-                JOIN public.contractors c ON c.id=ca.customer_id
-            WHERE ca.enabled AND
-              ca.ip>>=v_remote_ip AND
-              prefix_range(ca.dst_prefix)@>prefix_range(v_ret.dst_prefix_in) AND
-              prefix_range(ca.src_prefix)@>prefix_range(v_ret.src_prefix_in) AND
-              (ca.pop_id=i_pop_id or ca.pop_id is null) and
-              COALESCE(ca.x_yeti_auth,'')=v_x_yeti_auth AND
-              COALESCE(nullif(ca.uri_domain,'')=i_uri_domain,true) AND
-              COALESCE(nullif(ca.to_domain,'')=i_to_domain,true) AND
-              COALESCE(nullif(ca.from_domain,'')=i_from_domain,true) AND
-              (ca.interface is null or ca.interface = i_interface ) AND
-              (ca.transport_protocol_id is null or ca.transport_protocol_id=v_transport_protocol_id) AND
-              length(v_ret.dst_prefix_in) between ca.dst_number_min_length and ca.dst_number_max_length and
-              length(v_ret.src_prefix_in) between ca.src_number_min_length and ca.src_number_max_length and
-              c.enabled and c.customer and
-              ca.require_incoming_auth and gateway_id = i_auth_id
-            ORDER BY
-                masklen(ca.ip) DESC,
-                ca.transport_protocol_id is null,
-                length(prefix_range(ca.dst_prefix)) DESC,
-                length(prefix_range(ca.src_prefix)) DESC,
-                ca.pop_id is null,
-                ca.uri_domain is null,
-                ca.to_domain is null,
-                ca.from_domain is null
-            LIMIT 1;
-            IF NOT FOUND THEN
-            
-                v_ret.disconnect_code_id=110; --Cant find customer or customer locked
-                RETURN NEXT v_ret;
-                RETURN;
-            END IF;
-        end IF;
+        v_customer_auth_normalized = switch22.match_customer_auth(
+          i_pop_id,
+          i_auth_id,
+          v_remote_ip,
+          v_transport_protocol_id,
+          v_x_yeti_auth,
+          v_ret.dst_prefix_in,
+          v_ret.src_prefix_in,
+          i_uri_domain,
+          i_to_domain,
+          i_from_domain,
+          i_interface
+        );
+        IF v_customer_auth_normalized.id IS NULL THEN
+          
+          v_ret.disconnect_code_id=110; --Cant find customer or customer locked
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
+
+        IF v_customer_auth_normalized.require_incoming_auth THEN
+          
+          v_ret.aleg_auth_required=true;
+          RETURN NEXT v_ret;
+          RETURN;
+        END IF;
 
         
 
@@ -41093,91 +41162,6 @@ CREATE SEQUENCE class4.customers_auth_id_seq
 --
 
 ALTER SEQUENCE class4.customers_auth_id_seq OWNED BY class4.customers_auth.id;
-
-
---
--- Name: customers_auth_normalized; Type: TABLE; Schema: class4; Owner: -
---
-
-CREATE TABLE class4.customers_auth_normalized (
-    id integer NOT NULL,
-    customers_auth_id integer NOT NULL,
-    customer_id integer NOT NULL,
-    rateplan_id integer NOT NULL,
-    enabled boolean DEFAULT true NOT NULL,
-    ip inet NOT NULL,
-    account_id integer,
-    gateway_id integer NOT NULL,
-    src_rewrite_rule character varying,
-    src_rewrite_result character varying,
-    dst_rewrite_rule character varying,
-    dst_rewrite_result character varying,
-    src_prefix character varying DEFAULT ''::character varying NOT NULL,
-    dst_prefix character varying DEFAULT ''::character varying NOT NULL,
-    x_yeti_auth character varying,
-    name character varying NOT NULL,
-    dump_level_id smallint DEFAULT 0 NOT NULL,
-    capacity smallint,
-    pop_id integer,
-    uri_domain character varying,
-    src_name_rewrite_rule character varying,
-    src_name_rewrite_result character varying,
-    diversion_policy_id smallint DEFAULT 1 NOT NULL,
-    diversion_rewrite_rule character varying,
-    diversion_rewrite_result character varying,
-    dst_numberlist_id integer,
-    src_numberlist_id integer,
-    routing_plan_id integer NOT NULL,
-    allow_receive_rate_limit boolean DEFAULT false NOT NULL,
-    send_billing_information boolean DEFAULT false NOT NULL,
-    radius_auth_profile_id smallint,
-    enable_audio_recording boolean DEFAULT false NOT NULL,
-    src_number_radius_rewrite_rule character varying,
-    src_number_radius_rewrite_result character varying,
-    dst_number_radius_rewrite_rule character varying,
-    dst_number_radius_rewrite_result character varying,
-    radius_accounting_profile_id smallint,
-    from_domain character varying,
-    to_domain character varying,
-    transport_protocol_id smallint,
-    dst_number_min_length smallint DEFAULT 0 NOT NULL,
-    dst_number_max_length smallint DEFAULT 100 NOT NULL,
-    check_account_balance boolean DEFAULT true NOT NULL,
-    require_incoming_auth boolean DEFAULT false NOT NULL,
-    tag_action_id smallint,
-    tag_action_value smallint[] DEFAULT '{}'::smallint[] NOT NULL,
-    external_id bigint,
-    reject_calls boolean DEFAULT false NOT NULL,
-    src_number_max_length smallint DEFAULT 100 NOT NULL,
-    src_number_min_length smallint DEFAULT 0 NOT NULL,
-    lua_script_id smallint,
-    src_number_field_id smallint DEFAULT 1 NOT NULL,
-    src_name_field_id smallint DEFAULT 1 NOT NULL,
-    dst_number_field_id smallint DEFAULT 1 NOT NULL,
-    cnam_database_id smallint,
-    cps_limit double precision,
-    src_numberlist_use_diversion boolean DEFAULT false NOT NULL,
-    external_type character varying,
-    rewrite_ss_status_id smallint,
-    privacy_mode_id smallint DEFAULT 1 NOT NULL,
-    interface character varying,
-    ss_mode_id smallint DEFAULT 0 NOT NULL,
-    ss_no_identity_action_id smallint DEFAULT 0 NOT NULL,
-    ss_invalid_identity_action_id smallint DEFAULT 0 CONSTRAINT customers_auth_normalized_ss_invalid_identity_action_i_not_null NOT NULL,
-    ss_src_rewrite_rule character varying,
-    ss_src_rewrite_result character varying,
-    ss_dst_rewrite_rule character varying,
-    ss_dst_rewrite_result character varying,
-    pai_policy_id smallint DEFAULT 1 NOT NULL,
-    pai_rewrite_rule character varying,
-    pai_rewrite_result character varying,
-    stir_shaken_crt_id smallint,
-    variables jsonb,
-    CONSTRAINT customers_auth_max_dst_number_length CHECK ((dst_number_min_length >= 0)),
-    CONSTRAINT customers_auth_max_src_number_length CHECK ((src_number_max_length >= 0)),
-    CONSTRAINT customers_auth_min_dst_number_length CHECK ((dst_number_min_length >= 0)),
-    CONSTRAINT customers_auth_min_src_number_length CHECK ((src_number_min_length >= 0))
-);
 
 
 --
@@ -48877,17 +48861,24 @@ CREATE INDEX customers_auth_normalized_customers_auth_id ON class4.customers_aut
 
 
 --
--- Name: customers_auth_normalized_ip_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -
+-- Name: customers_auth_normalized_gateway_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
-CREATE INDEX customers_auth_normalized_ip_prefix_range_prefix_range1_idx ON class4.customers_auth_normalized USING gist (ip, ((dst_prefix)::public.prefix_range), ((src_prefix)::public.prefix_range));
+CREATE INDEX customers_auth_normalized_gateway_id_idx ON class4.customers_auth_normalized USING btree (gateway_id) WHERE (enabled AND require_incoming_auth);
 
 
 --
--- Name: customers_auth_normalized_prefix_range_prefix_range1_idx; Type: INDEX; Schema: class4; Owner: -
+-- Name: customers_auth_normalized_ip_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
-CREATE INDEX customers_auth_normalized_prefix_range_prefix_range1_idx ON class4.customers_auth_normalized USING gist (((dst_prefix)::public.prefix_range), ((src_prefix)::public.prefix_range)) WHERE enabled;
+CREATE INDEX customers_auth_normalized_ip_idx ON class4.customers_auth_normalized USING btree (ip) WHERE (enabled AND (require_incoming_auth = false) AND (x_yeti_auth IS NULL));
+
+
+--
+-- Name: customers_auth_normalized_x_yeti_auth_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX customers_auth_normalized_x_yeti_auth_idx ON class4.customers_auth_normalized USING btree (x_yeti_auth) WHERE enabled;
 
 
 --
@@ -50627,6 +50618,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260214104400'),
 ('20260214093443'),
 ('20260130163020'),
 ('20260123105801'),

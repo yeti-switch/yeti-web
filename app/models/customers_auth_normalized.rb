@@ -80,9 +80,10 @@
 #
 # Indexes
 #
-#  customers_auth_normalized_customers_auth_id                  (customers_auth_id)
-#  customers_auth_normalized_ip_prefix_range_prefix_range1_idx  (ip, ((dst_prefix)::prefix_range), ((src_prefix)::prefix_range)) USING gist
-#  customers_auth_normalized_prefix_range_prefix_range1_idx     (((dst_prefix)::prefix_range), ((src_prefix)::prefix_range)) WHERE enabled USING gist
+#  customers_auth_normalized_customers_auth_id  (customers_auth_id)
+#  customers_auth_normalized_gateway_id_idx     (gateway_id) WHERE (enabled AND require_incoming_auth)
+#  customers_auth_normalized_ip_idx             (ip) WHERE (enabled AND (require_incoming_auth = false) AND (x_yeti_auth IS NULL))
+#  customers_auth_normalized_x_yeti_auth_idx    (x_yeti_auth) WHERE enabled
 #
 # Foreign Keys
 #
