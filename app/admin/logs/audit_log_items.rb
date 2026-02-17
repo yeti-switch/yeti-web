@@ -39,12 +39,12 @@ ActiveAdmin.register AuditLogItem do
       row :ip
     end
 
-    unless version.reify.nil?
+    reified_item = version.reify(dup: true)
+    unless reified_item.nil?
       panel 'Values before event' do
-        obj = version.reify
-        attributes_table_for obj do
+        attributes_table_for reified_item do
           row :id
-          obj.class.content_columns.each do |col|
+          reified_item.class.content_columns.each do |col|
             row col.name.to_sym
           end
         end
