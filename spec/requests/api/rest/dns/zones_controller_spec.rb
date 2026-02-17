@@ -193,10 +193,10 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
         ; SOA Record
         #{zone.name} IN SOA #{zone.soa_mname} #{zone.soa_rname} (
           #{zone.serial} ; serial
-          #{zone.refresh} ; refresh (2 hours)
-          #{zone.retry} ; retry (1 hour)
-          #{zone.expire} ; expire (30 minutes)
-          #{zone.minimum} ; minimum (1 hour)
+          #{zone.refresh} ; refresh
+          #{zone.retry} ; retry
+          #{zone.expire} ; expire
+          #{zone.minimum} ; minimum
         )
 
         $ORIGIN #{zone.name}.
@@ -244,10 +244,10 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
           ; SOA Record
           #{zone.name} IN SOA #{zone.soa_mname} #{zone.soa_rname} (
             #{zone.serial} ; serial
-            #{zone.refresh} ; refresh (1 hour 1 minute 1 second)
-            #{zone.retry} ; retry (59 seconds)
-            #{zone.expire} ; expire (2 hours 2 minutes 2 seconds)
-            #{zone.minimum} ; minimum (1 minute 1 second)
+            #{zone.refresh} ; refresh
+            #{zone.retry} ; retry
+            #{zone.expire} ; expire
+            #{zone.minimum} ; minimum
           )
 
           $ORIGIN #{zone.name}.
@@ -262,7 +262,7 @@ RSpec.describe Api::Rest::Dns::ZonesController, type: :request do
         ZONEFILE
       end
 
-      it 'returns DNS zonefile with dynamic duration comments' do
+      it 'returns DNS zonefile without humanized duration comments' do
         subject
         expect(response).to have_http_status(200)
         expect(response.media_type).to eq('text/dns')

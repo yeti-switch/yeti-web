@@ -1,0 +1,20 @@
+$ORIGIN .
+$TTL <%= @zone.minimum %>
+; SOA Record
+<%= @zone.name %> IN SOA <%= @zone.soa_mname %> <%= @zone.soa_rname %> (
+  <%= @zone.serial %> ; serial
+  <%= @zone.refresh %> ; refresh
+  <%= @zone.retry %> ; retry
+  <%= @zone.expire %> ; expire
+  <%= @zone.minimum %> ; minimum
+)
+
+$ORIGIN <%= @zone.name %>.
+
+<% @grouped_records.each do |record_type, records| %>
+; <%= record_type %> Record
+<% records.each do |record| %>
+<%= record.name %> <%= record.record_type %> <%= record.content %>
+<% end %>
+
+<% end %>
