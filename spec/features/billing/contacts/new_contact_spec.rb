@@ -11,8 +11,8 @@ RSpec.describe 'Create new Billing Contact', type: :feature, js: true do
 
   before do
     visit new_billing_contact_path
-    fill_in_chosen 'Contractor', with: contractor.name, ajax: true
-    fill_in_chosen 'Admin user', with: admin_user.username
+    fill_in_tom_select 'Contractor', with: contractor.name, search: true
+    fill_in_tom_select 'Admin user', with: admin_user.username
     fill_in 'Email',  with: 'john.doe@example.com'
     fill_in 'Notes',  with: 'test'
   end

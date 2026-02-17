@@ -65,7 +65,7 @@ ActiveAdmin.register Equipment::Radius::AccountingProfile do
         t.input :vsa_vendor_id
         t.input :vsa_vendor_type
         t.input :value
-        t.input :format, as: :select, collection: Equipment::Radius::Attribute::FORMATS
+        t.input :format, as: :select, collection: Equipment::Radius::Attribute::FORMATS, input_html: { class: 'tom-select' }
         t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless t.object.new_record?
       end
     end
@@ -78,7 +78,7 @@ ActiveAdmin.register Equipment::Radius::AccountingProfile do
         t.input :vsa_vendor_id
         t.input :vsa_vendor_type
         t.input :value
-        t.input :format, as: :select, collection: Equipment::Radius::Attribute::FORMATS
+        t.input :format, as: :select, collection: Equipment::Radius::Attribute::FORMATS, input_html: { class: 'tom-select' }
         t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless t.object.new_record?
       end
     end
@@ -91,7 +91,7 @@ ActiveAdmin.register Equipment::Radius::AccountingProfile do
         t.input :vsa_vendor_id
         t.input :vsa_vendor_type
         t.input :value
-        t.input :format, as: :select, collection: Equipment::Radius::Attribute::FORMATS
+        t.input :format, as: :select, collection: Equipment::Radius::Attribute::FORMATS, input_html: { class: 'tom-select' }
         t.input :_destroy, as: :boolean, required: false, label: 'Remove' unless t.object.new_record?
       end
     end

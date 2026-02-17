@@ -47,18 +47,19 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
 
   filter :id
   filter :name
-  filter :mode_id_eq, label: 'Mode', as: :select, collection: Routing::Numberlist::MODES.invert
-  filter :default_action_id_eq, label: 'Default action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
-  filter :lua_script, input_html: { class: 'chosen' }
+  filter :mode_id_eq, label: 'Mode', as: :select, collection: Routing::Numberlist::MODES.invert, input_html: { class: 'tom-select' }
+  filter :default_action_id_eq, label: 'Default action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert, input_html: { class: 'tom-select' }
+  filter :lua_script, input_html: { class: 'tom-select' }
   filter :external_id, label: 'External ID'
   filter :external_type
-  filter :tag_action, input_html: { class: 'chosen' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
+  filter :tag_action, input_html: { class: 'tom-select' }, collection: proc { Routing::TagAction.pluck(:name, :id) }
   filter :defer_src_rewrite
   filter :defer_dst_rewrite
   filter :rewrite_ss_status_id_eq,
          label: 'Rewrite SS status',
          as: :select,
-         collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
+         collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert,
+         input_html: { class: 'tom-select' }
 
   index do
     selectable_column
@@ -117,24 +118,24 @@ ActiveAdmin.register Routing::Numberlist, as: 'Numberlist' do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :mode_id, as: :select, include_blank: false, collection: Routing::Numberlist::MODES.invert
+      f.input :mode_id, as: :select, include_blank: false, collection: Routing::Numberlist::MODES.invert, input_html: { class: 'tom-select' }
     end
     f.inputs 'default actions' do
-      f.input :default_action_id, as: :select, include_blank: false, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
+      f.input :default_action_id, as: :select, include_blank: false, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert, input_html: { class: 'tom-select' }
       f.input :default_src_rewrite_rule
       f.input :default_src_rewrite_result
       f.input :defer_src_rewrite
       f.input :default_dst_rewrite_rule
       f.input :default_dst_rewrite_result
       f.input :defer_dst_rewrite
-      f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
-      f.input :tag_action
+      f.input :lua_script, input_html: { class: 'tom-select' }, include_blank: 'None'
+      f.input :tag_action, input_html: { class: 'tom-select' }
       f.input :tag_action_value, as: :select,
                                  collection: tag_action_value_options,
                                  multiple: true,
                                  include_hidden: false,
-                                 input_html: { class: 'chosen' }
-      f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert
+                                 input_html: { class: 'tom-select' }
+      f.input :rewrite_ss_status_id, as: :select, collection: Equipment::StirShaken::Attestation::ATTESTATIONS.invert, input_html: { class: 'tom-select' }
       f.input :variables_json, label: 'Variables', as: :text
     end
     f.actions

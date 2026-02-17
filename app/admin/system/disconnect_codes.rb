@@ -48,10 +48,10 @@ ActiveAdmin.register DisconnectCode do
   filter :id
   filter :code
   filter :namespace
-  filter :success, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :stop_hunting, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :store_cdr, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :silently_drop, as: :select, collection: [['Yes', true], ['No', false]]
+  boolean_filter :success
+  boolean_filter :stop_hunting
+  boolean_filter :store_cdr
+  boolean_filter :silently_drop
   show do |_s|
     attributes_table do
       row :id

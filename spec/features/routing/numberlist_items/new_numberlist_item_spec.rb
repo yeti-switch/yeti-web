@@ -12,7 +12,7 @@ RSpec.describe 'Create new Numberlist Item', type: :feature, js: true do
   before do
     visit new_routing_numberlist_item_path
 
-    fill_in_chosen 'Numberlist', with: numberlist.display_name, ajax: true
+    fill_in_tom_select 'Numberlist', with: numberlist.display_name, search: true
   end
 
   it 'creates record' do

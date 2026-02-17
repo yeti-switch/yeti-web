@@ -67,6 +67,7 @@ ActiveAdmin.register Account do
   filter :balance
   filter :vat
   filter :external_id
+  filter :timezone, as: :select, input_html: { class: 'tom-select' }, collection: proc { Yeti::TimeZoneHelper.all }
 
   index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
     selectable_column
@@ -249,16 +250,16 @@ ActiveAdmin.register Account do
       f.input :termination_capacity
       f.input :total_capacity
 
-      f.input :timezone, as: :select, input_html: { class: 'chosen' }, collection: Yeti::TimeZoneHelper.all
+      f.input :timezone, as: :select, input_html: { class: 'tom-select' }, collection: Yeti::TimeZoneHelper.all
       f.input :uuid, as: :string
     end
 
     f.inputs 'Invoice Settings' do
-      f.input :invoice_period_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoicePeriod.all
+      f.input :invoice_period_id, as: :select, input_html: { class: 'tom-select' }, collection: Billing::InvoicePeriod.all
 
-      f.input :invoice_template_id, as: :select, input_html: { class: 'chosen' }, collection: Billing::InvoiceTemplate.all
+      f.input :invoice_template_id, as: :select, input_html: { class: 'tom-select' }, collection: Billing::InvoiceTemplate.all
 
-      f.input :send_invoices_to, as: :select, input_html: { class: 'chosen', multiple: true }, collection: Billing::Contact.collection
+      f.input :send_invoices_to, as: :select, input_html: { class: 'tom-select', multiple: true }, collection: Billing::Contact.collection
 
       f.input :invoice_ref_template
     end
@@ -268,7 +269,7 @@ ActiveAdmin.register Account do
       f.input :balance_high_threshold
       f.input :send_balance_notifications_to,
               as: :select,
-              input_html: { class: 'chosen', multiple: true },
+              input_html: { class: 'tom-select', multiple: true },
               collection: Billing::Contact.collection
     end
 

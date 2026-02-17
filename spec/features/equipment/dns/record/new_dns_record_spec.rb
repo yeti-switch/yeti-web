@@ -13,7 +13,8 @@ RSpec.describe 'Create new Dns Record', type: :feature, js: true do
     visit new_equipment_dns_record_path
 
     aa_form.set_text 'Name', 'test'
-    aa_form.select_chosen 'Zone', zone.name
+    aa_form.fill_in_tom_select 'Zone', with: zone.name
+    aa_form.fill_in_tom_select 'Record type', with: Equipment::Dns::Record::RECORD_TYPES.values.first
     aa_form.set_text 'Content', 'record content'
   end
 

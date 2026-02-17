@@ -290,7 +290,7 @@ RSpec.describe 'Routing Schedule Rate Changes', js: true do
   context 'when filtered records' do
     let(:filter!) do
       within_filters do
-        fill_in_chosen 'Rate group', with: rate_group.display_name
+        fill_in_tom_select 'RATE GROUP', with: rate_group.display_name
         click_button :Filter
       end
     end

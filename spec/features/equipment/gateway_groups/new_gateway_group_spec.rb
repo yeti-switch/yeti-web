@@ -13,7 +13,7 @@ RSpec.describe 'Create new Gateway group', type: :feature, js: true do
       {
         name: 'GW group',
         vendor_id: lambda {
-                     fill_in_chosen('Vendor', with: @vendor.name, ajax: true)
+                     fill_in_tom_select('Vendor', with: @vendor.name, search: true)
                    },
         balancing_mode_id: 'Priority/Weight balancing'
       }

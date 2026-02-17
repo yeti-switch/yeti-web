@@ -60,12 +60,12 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
 
   filter :id
   filter :uuid_equals, label: 'UUID'
-  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
+  boolean_filter :enabled
   filter :prefix
   filter :routing_for_contains, as: :string, input_html: { class: 'search_filter_string' }
-  filter :rate_group, input_html: { class: 'chosen' }
-  filter :rateplan_id_filter, as: :select, input_html: { class: 'chosen' }, label: 'Rateplan', collection: -> { Routing::Rateplan.all }
-  filter :reject_calls, as: :select, collection: [['Yes', true], ['No', false]]
+  filter :rate_group, input_html: { class: 'tom-select' }
+  filter :rateplan_id_filter, as: :select, input_html: { class: 'tom-select' }, label: 'Rateplan', collection: -> { Routing::Rateplan.all }
+  boolean_filter :reject_calls
   filter :initial_rate
   filter :next_rate
   filter :connect_fee
@@ -74,7 +74,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :network_prefix_country_id_eq,
          as: :select,
          label: 'Country',
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: -> { System::Country.order(:name) }
 
   association_ajax_filter :network_prefix_network_id_eq,
@@ -85,13 +85,13 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :network_type_id,
          as: :select,
          label: 'Network Type',
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: -> { System::NetworkType.collection }
 
   filter :external_id_eq, label: 'EXTERNAL_ID'
   filter :valid_from, as: :date_time_range
   filter :valid_till, as: :date_time_range
-  filter :rate_policy_id_eq, input_html: { class: 'chosen' }, collection: Routing::DestinationRatePolicy::POLICIES.invert
+  filter :rate_policy_id_eq, input_html: { class: 'tom-select' }, collection: Routing::DestinationRatePolicy::POLICIES.invert
   boolean_filter :reverse_billing
   filter :initial_interval
   filter :next_interval
@@ -99,7 +99,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
   filter :acd_limit
   filter :short_calls_limit
   filter :cdo, if: proc { authorized?(:allow_cdo) }
-  filter :scheduler, as: :select, input_html: { class: 'chosen' }
+  filter :scheduler, as: :select, input_html: { class: 'tom-select' }
 
   acts_as_filter_by_routing_tag_ids routing_tag_ids_count: true
 
@@ -214,18 +214,18 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :dst_number_max_length
       f.input :enabled
       f.input :reject_calls
-      f.input :scheduler, as: :select, input_html: { class: 'chosen' }
-      f.input :rate_group, input_html: { class: 'chosen' }
+      f.input :scheduler, as: :select, input_html: { class: 'tom-select' }
+      f.input :rate_group, input_html: { class: 'tom-select' }
 
       f.input :routing_tag_ids, as: :select,
                                 collection: routing_tag_options,
                                 include_hidden: false,
-                                input_html: { class: 'chosen', multiple: true }
-      f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert
+                                input_html: { class: 'tom-select', multiple: true }
+      f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert, input_html: { class: 'tom-select' }
 
       f.input :valid_from, as: :date_time_picker
       f.input :valid_till, as: :date_time_picker
-      f.input :rate_policy_id, as: :select, include_blank: false, collection: Routing::DestinationRatePolicy::POLICIES.invert
+      f.input :rate_policy_id, as: :select, include_blank: false, collection: Routing::DestinationRatePolicy::POLICIES.invert, input_html: { class: 'tom-select' }
       f.input :reverse_billing
       f.input :allow_package_billing
       f.input :initial_interval
@@ -243,7 +243,8 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
               as: :select,
               include_blank: true,
               collection: Routing::RateProfitControlMode::MODES.invert,
-              hint: 'Leave it empty to inherit Profit control mode from Rateplan'
+              hint: 'Leave it empty to inherit Profit control mode from Rateplan',
+              input_html: { class: 'tom-select' }
     end
 
     f.inputs 'Dialpeer based rating configuration' do

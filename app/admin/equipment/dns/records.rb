@@ -19,7 +19,7 @@ ActiveAdmin.register Equipment::Dns::Record do
   filter :id
   filter :name
   filter :content
-  filter :zone, input_html: { class: 'chosen' }
+  filter :zone, input_html: { class: 'tom-select' }
   contractor_filter :contractor_id_eq
 
   index do
@@ -35,12 +35,12 @@ ActiveAdmin.register Equipment::Dns::Record do
   form do |f|
     f.inputs do
       f.input :name
-      f.input :zone, input_html: { class: 'chosen' }
+      f.input :zone, input_html: { class: 'tom-select' }
       f.input :record_type,
               as: :select,
               include_blank: false,
               collection: Equipment::Dns::Record::RECORD_TYPES.invert,
-              input_html: { class: 'chosen' }
+              input_html: { class: 'tom-select' }
       f.input :content
       f.contractor_input :contractor_id
     end

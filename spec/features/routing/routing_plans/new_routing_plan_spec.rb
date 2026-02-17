@@ -18,8 +18,8 @@ RSpec.describe 'Create new Routing Plan', type: :feature, js: true do
     check 'Validate dst number network'
     check 'Validate src number format'
     check 'Validate src number network'
-    fill_in_chosen 'DST Numberlist', with: dst_numberlist.display_name, ajax: true
-    fill_in_chosen 'SRC Numberlist', with: src_numberlist.display_name, ajax: true
+    fill_in_tom_select 'DST Numberlist', with: dst_numberlist.display_name, search: true
+    fill_in_tom_select 'SRC Numberlist', with: src_numberlist.display_name, search: true
   end
 
   let!(:src_numberlist) { FactoryBot.create(:numberlist) }

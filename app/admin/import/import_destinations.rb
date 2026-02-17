@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Importing::Destination, as: 'Destination Imports' do
-  filter :rateplan, input_html: { class: 'chosen' }
+  filter :rateplan, input_html: { class: 'tom-select' }
   filter :prefix
   filter :rate
   filter :connect_fee

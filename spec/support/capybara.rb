@@ -45,6 +45,25 @@ Capybara::Screenshot.register_driver(:cuprite) do |driver, path|
   driver.render(path, full: true)
 end
 
+Capybara.add_selector(:parent_by_label) do
+  xpath do |label, exact: true|
+    # example:
+    # <label for="input_id">Label Text</label>
+    # <div> <!-- parent element -->
+    #   <div id="input_id"></div>
+    # </div>
+    if exact
+      XPath.descendant[
+        XPath.attr(:id) == XPath.anywhere(:label)[XPath.string.n.is(label)].attr(:for)
+      ].parent
+    else
+      XPath.descendant[
+        XPath.attr(:id) == XPath.anywhere(:label)[XPath.string.n.contains(label)].attr(:for)
+      ].parent
+    end
+  end
+end
+
 Capybara.raise_server_errors = true
 
 # Capybara::Screenshot.screenshot_and_save_page

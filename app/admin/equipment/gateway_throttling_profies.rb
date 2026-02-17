@@ -48,7 +48,7 @@ ActiveAdmin.register Equipment::GatewayThrottlingProfile do
               as: :select,
               include_blank: false,
               collection: Equipment::GatewayThrottlingProfile::CODES.invert,
-              input_html: { class: 'chosen-sortable', multiple: true }
+              input_html: { class: 'tom-select-sortable', multiple: true }
       f.input :threshold_start
       f.input :threshold_end
       f.input :window

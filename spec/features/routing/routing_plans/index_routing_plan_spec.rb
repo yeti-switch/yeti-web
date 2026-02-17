@@ -24,7 +24,7 @@ RSpec.describe 'Index Routing Plans', type: :feature do
   describe 'account filter', js: true do
     let(:fill_in_filters!) do
       within_filters do
-        fill_in_chosen 'Assigned to account', with: account_1.display_name, exact: true, ajax: true
+        fill_in_tom_select 'ASSIGNED TO ACCOUNT', with: account_1.display_name, exact: true, search: true
         click_on 'Filter'
       end
     end
@@ -43,7 +43,7 @@ RSpec.describe 'Index Routing Plans', type: :feature do
       subject
 
       within_filters do
-        expect(page).to have_field_chosen('Assigned to account', with: account_1.display_name)
+        expect(page).to have_field_tom_select('ASSIGNED TO ACCOUNT', with: account_1.display_name)
       end
       expect(page).to have_table_row(count: 1)
       expect(page).to have_table_cell(text: routing_plan_1.id.to_s, column: 'ID', exact: true)

@@ -22,7 +22,7 @@ ActiveAdmin.register System::NetworkPrefix do
   filter :id
   filter :uuid_equals, label: 'UUID'
   filter :prefix
-  filter :country, input_html: { class: 'chosen' }
+  filter :country, input_html: { class: 'tom-select' }
   association_ajax_filter :network_id_eq,
                           label: 'Network',
                           scope: -> { System::Network.order(:name) },
@@ -30,7 +30,7 @@ ActiveAdmin.register System::NetworkPrefix do
   filter :network_type_id_eq,
          label: 'Network Type',
          as: :select,
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: -> { System::NetworkType.collection }
   filter :number_contains
   filter :number_min_length
@@ -64,7 +64,7 @@ ActiveAdmin.register System::NetworkPrefix do
       f.input :prefix
       f.input :number_min_length
       f.input :number_max_length
-      f.input :country, input_html: { class: 'chosen' }
+      f.input :country, input_html: { class: 'tom-select' }
       f.association_ajax_input :network_id,
                                label: 'Network',
                                scope: System::Network.order(:name),
