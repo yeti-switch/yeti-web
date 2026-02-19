@@ -19,6 +19,9 @@ ActiveAdmin.register Equipment::StirShaken::TrustedCertificate do
     column :certificate do |c|
       pre code c.certificate
     end
+    column 'Certificate Details' do |c|
+      pre code c.certificate_details
+    end
     column :updated_at
   end
 
@@ -36,6 +39,9 @@ ActiveAdmin.register Equipment::StirShaken::TrustedCertificate do
       row :name
       row :certificate do |row|
         pre code row.certificate
+      end
+      row 'Certificate Details' do |row|
+        pre code row.certificate_details
       end
       row :updated_at
     end

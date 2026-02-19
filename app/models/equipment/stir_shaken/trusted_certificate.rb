@@ -13,6 +13,7 @@ class Equipment::StirShaken::TrustedCertificate < ApplicationRecord
   self.table_name = 'class4.stir_shaken_trusted_certificates'
 
   include WithPaperTrail
+  include Equipment::StirShaken::CertificateDetails
 
   validates :name, :certificate, presence: true
 

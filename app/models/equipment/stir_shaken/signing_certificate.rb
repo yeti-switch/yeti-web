@@ -15,6 +15,7 @@ class Equipment::StirShaken::SigningCertificate < ApplicationRecord
   self.table_name = 'class4.stir_shaken_signing_certificates'
 
   include WithPaperTrail
+  include Equipment::StirShaken::CertificateDetails
 
   has_many :customers_auths, foreign_key: :stir_shaken_crt_id, dependent: :restrict_with_error
   has_many :gateways, foreign_key: :stir_shaken_crt_id, dependent: :restrict_with_error
