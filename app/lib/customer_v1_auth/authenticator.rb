@@ -6,7 +6,7 @@ module CustomerV1Auth
     AUDIENCE = 'customer-v1'
     COOKIE_NAME = '_yeti_customer_v1_session'
     DYNAMIC_SUB = 'D'
-    Result = Struct.new(:token, :expires_at)
+    Result = Struct.new(:token, :expires_at, :auth_context)
     AuthenticationError = Class.new(StandardError)
 
     # @param login [String]
@@ -24,7 +24,7 @@ module CustomerV1Auth
     def self.build_auth_data(auth_context)
       expires_at = EXPIRATION_INTERVAL&.from_now
       token = build_token(auth_context, expires_at:)
-      Result.new(token, expires_at)
+      Result.new(token, expires_at, auth_context)
     end
 
     # @param auth_context [CustomerV1Auth::AuthContext]
