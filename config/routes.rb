@@ -65,6 +65,12 @@ Rails.application.routes.draw do
           api.resources :ip_access, only: [:index]
         end
 
+        namespace :dns do
+          jsonapi_resources :zones, only: [:index] do
+            member { get :zonefile }
+          end
+        end
+
         namespace :admin do
           dasherized_resource :auth, only: [:create]
           jsonapi_resources :accounts do
