@@ -125,7 +125,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   DB_VER = LazyObject.new { db_version }
-  ROUTING_SCHEMA = 'switch21'
+  ROUTING_SCHEMA = 'switch22'
 
   PG_MAX_INT = 2_147_483_647
   PG_MIN_INT = -2_147_483_647
