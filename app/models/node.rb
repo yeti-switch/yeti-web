@@ -20,6 +20,8 @@
 #
 
 class Node < ApplicationRecord
+  Error = Class.new(StandardError)
+
   include WithPaperTrail
 
   belongs_to :pop
@@ -120,8 +122,17 @@ class Node < ApplicationRecord
     super(options.merge(include: :pop))
   end
 
-  def active_call(id)
-    RealtimeData::ActiveCall.new(api.calls(id))
+  def active_call(local_tag)
+    items = Array.wrap(api.calls(local_tag))
+
+    case items.size
+    when 0
+      nil
+    when 1
+      RealtimeData::ActiveCall.new(items.first)
+    else
+      raise Error, "Expected 1 result from Node 'yeti.show.calls' for node_id=#{id} local_tag=#{local_tag}, got #{items.size}"
+    end
   end
 
   def active_calls(only = nil)

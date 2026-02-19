@@ -93,6 +93,8 @@ class Api::Rest::Admin::ActiveCallResource < ::BaseResource
     raise JSONAPI::Exceptions::RecordNotFound, key if model.nil?
 
     new(model, context)
+  rescue RealtimeData::ActiveNode::Error, Node::Error => _e
+    raise JSONAPI::Exceptions::RecordNotFound, key
   end
 
   def self.sort_records(records, _order_options, _context = {})
