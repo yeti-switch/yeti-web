@@ -21,7 +21,7 @@ module ResourceDSL
               @previous_version = @version.previous
 
               @versions_total_count = resource.versions.count
-              resource = @next_version.reify if params[:version] && @next_version
+              resource = @next_version.reify(dup: true) if params[:version] && @next_version
             end
           end
 
