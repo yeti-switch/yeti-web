@@ -177,14 +177,14 @@ class Routing::SimulationForm < ApplicationForm
           '[]',
           interface,
           x_yeti_auth,
-          diversion.to_json,
           nil,
           nil,
           nil,
-          pai.to_json,
-          ppi.to_json,
+          nil,
+          nil,
+          nil,
           privacy,
-          rpid.to_json,
+          nil,
           rpid_privacy
         )
       end
