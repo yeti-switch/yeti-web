@@ -68,6 +68,7 @@ class Routing::SimulationForm < ApplicationForm
   attribute :to_domain, :string
   attribute :x_yeti_auth, :string
   attribute :release_mode, :string
+  attribute :diversion, :string
   attribute :pai, :string
   attribute :ppi, :string
   attribute :privacy, :string
@@ -143,14 +144,14 @@ class Routing::SimulationForm < ApplicationForm
             ?, /* i_identity */
             ?, /* interface */
             ?, /* i_x_yeti_auth character varying, */
-            ?, /* i_diversion character varying */
+            ?::json, /* i_diversion json */
             ?, /* i_x_orig_ip inet */
             ?, /* i_x_orig_port integer */
             ?, /* i_x_orig_protocol_id smallint */
-            ?, /* i_pai character varying */
-            ?, /* i_ppi character varying */
+            ?::json, /* i_pai json */
+            ?::json, /* i_ppi json */
             ?, /* i_privacy character varying */
-            ?, /* i_rpid character varying */
+            ?::json, /* i_rpid json */
             ? /* i_rpid_privacy character varying */
             )",
           1, # node_id
@@ -176,14 +177,14 @@ class Routing::SimulationForm < ApplicationForm
           '[]',
           interface,
           x_yeti_auth,
+          diversion.to_json,
           nil,
           nil,
           nil,
-          nil,
-          pai,
-          ppi,
+          pai.to_json,
+          ppi.to_json,
           privacy,
-          rpid,
+          rpid.to_json,
           rpid_privacy
         )
       end

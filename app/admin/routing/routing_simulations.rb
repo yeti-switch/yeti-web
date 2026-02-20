@@ -19,6 +19,7 @@ ActiveAdmin.register_page 'Routing simulation' do
           :from_domain,
           :to_domain,
           :x_yeti_auth,
+          :diversion,
           :pai,
           :ppi,
           :privacy,
