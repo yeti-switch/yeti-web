@@ -506,7 +506,7 @@ RSpec.describe 'switch.writecdr()' do
                      dst_prefix_routing: '380947100008',
                      routing_plan_id: 1,
                      routing_delay: 10.0,
-                     pdd: 30.0,
+                     pdd: 20.0,
                      rtt: 10.0,
                      early_media_present: false,
                      lnp_database_id: 111,

@@ -1910,7 +1910,7 @@ BEGIN
     v_cdr.success = false;
   end if;
   v_cdr.routing_delay = (v_time_data.leg_b_time-v_time_data.time_start)::real;
-  v_cdr.pdd = (coalesce(v_time_data.time_18x,v_time_data.time_connect)-v_time_data.time_start)::real;
+  v_cdr.pdd = (coalesce(v_time_data.time_18x,v_time_data.time_connect)-v_time_data.leg_b_time)::real;
   v_cdr.rtt = (coalesce(v_time_data.time_1xx,v_time_data.time_18x,v_time_data.time_connect)-v_time_data.leg_b_time)::real;
   v_cdr.early_media_present = i_early_media_present;
 
@@ -4758,6 +4758,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260220161536'),
 ('20251225154315'),
 ('20251011175010'),
 ('20250917140033'),
