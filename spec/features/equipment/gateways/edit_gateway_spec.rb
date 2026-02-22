@@ -23,8 +23,8 @@ RSpec.describe 'Update Gateway', type: :feature, js: true do
       subject
 
       switch_tab('Translations')
-      expect(page).to have_field_tom_select('Termination SRC Numberlist', with: termination_src_numberlist.display_name, clearable: true)
-      expect(page).to have_field_tom_select('Termination DST Numberlist', with: termination_dst_numberlist.display_name, clearable: true)
+      expect(page).to have_field_tom_select('Termination SRC Numberlist', with: termination_src_numberlist.display_name)
+      expect(page).to have_field_tom_select('Termination DST Numberlist', with: termination_dst_numberlist.display_name)
     end
   end
 

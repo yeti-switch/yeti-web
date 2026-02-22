@@ -227,7 +227,8 @@ RSpec.describe 'Filter Destination records', :js do
         expect(page).to have_table_row count: 1
         expect(page).to have_table_cell column: 'Id', text: destination.id
         within_filters do
-          expect(page).to have_field_tom_select('Routing tag ids covers', with: filter_value)
+          expect(page).to have_field_tom_select('ROUTING TAG IDS COVERS', with: tags.first.name)
+          expect(page).to have_field_tom_select('ROUTING TAG IDS COVERS', with: tags.third.name)
         end
       end
     end

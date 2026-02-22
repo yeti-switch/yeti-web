@@ -11,6 +11,14 @@ $(document).ready(function () {
     })
 })
 
+function tomSelectRenderItemFunc(data, escape) {
+    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
+}
+
+function tomSelectRenderNoResultsFunc() {
+    return '<div class="no-results">No results matched</div>'
+}
+
 function initTomSelect(parent) {
     function hasBlankOption(el) {
         return $(el).find('option[value=""]').length > 0
@@ -26,8 +34,8 @@ function initTomSelect(parent) {
 
         var plugins = []
         if ($(this).attr('multiple')) plugins.push('remove_button')
+        if (hasBlankOption(this)) plugins.push('clear_button')
         if (hasBlankOption(this) && !$(this).data('allow-empty-option')) {
-            plugins.push('clear_button')
             // delete empty option from original select to avoid duplication
             $(this).find('option[value=""]').remove()
         }
@@ -43,9 +51,7 @@ function initTomSelect(parent) {
                 if (!hasSelectedOption(this.input)) this.clear()
             },
             render: {
-                item: function (data, escape) {
-                    return '<div><div class="item-text">' + escape(data.text) + '</div></div>'
-                }
+                item: tomSelectRenderItemFunc
             }
         })
     })
@@ -71,9 +77,7 @@ function initTomSelect(parent) {
                 if (!hasSelectedOption(this.input)) this.clear()
             },
             render: {
-                item: function (data, escape) {
-                    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
-                }
+                item: tomSelectRenderItemFunc
             }
         })
     })
@@ -98,9 +102,7 @@ function initTomSelect(parent) {
         new TomSelect(this, {
             controlInput: null,
             render: {
-                item: function (data, escape) {
-                    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
-                }
+                item: tomSelectRenderItemFunc
             }
         })
     })

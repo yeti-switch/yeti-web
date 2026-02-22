@@ -13,7 +13,8 @@ RSpec.describe 'Copy CDR Export', js: :true do
   let!(:vendor) { create(:contractor, vendor: true, external_id: 302) }
   let!(:vendor_acc) { create(:account, external_id: 303, contractor: vendor) }
   let!(:customer_auth) { create(:customers_auth, external_id: 300, external_type: 'term') }
-  let!(:country) { create(:country_uniq) }
+  let!(:country) { create(:country, name: 'Rand 1', iso2: 'R1') }
+  let!(:country_2) { create(:country, name: 'Rand 2', iso2: 'R2') }
   let!(:gateway) { create(:gateway, external_id: 301) }
   let!(:routing_tag) { create(:routing_tag) }
   let(:filters) do
@@ -59,8 +60,8 @@ RSpec.describe 'Copy CDR Export', js: :true do
       term_gw_external_id_eq: gateway.external_id,
       customer_auth_external_type_eq: customer_auth.external_type,
       customer_auth_external_type_not_eq: customer_auth.external_type,
-      src_country_iso_in: [country.iso2, country.iso2],
-      dst_country_iso_in: [country.iso2, country.iso2]
+      src_country_iso_in: [country.iso2, country_2.iso2],
+      dst_country_iso_in: [country.iso2, country_2.iso2]
     }
   end
   let!(:cdr_export) { create(:cdr_export, :completed, filters:) }
@@ -85,9 +86,11 @@ RSpec.describe 'Copy CDR Export', js: :true do
                             type: cdr_export.type,
                             callback_url: cdr_export.callback_url.to_s,
                             fields: match_array(cdr_export.fields),
-                            status: 'Pending',
-                            filters_json: filters.merge(formated_time_filters)
+                            status: 'Pending'
                           )
+    expect(new_cdr_export.filters_json).to match(
+                                             filters.merge(formated_time_filters)
+                                           )
   end
 
   context 'with wrong filters' do

@@ -50,7 +50,9 @@ module Section
       element :input, '.dropdown-input'
 
       def select_option(text, exact: true)
-        options(text:, exact_text: exact, minimum: 1, maximum: 1)[0].click
+        option = options(text:, exact_text: exact, minimum: 1, maximum: 1)[0]
+        root_element.scroll_to(option, :bottom)
+        option.click
       end
 
       def search(text)
@@ -142,7 +144,7 @@ module Section
       was_open = dropdown_open?
       control.click unless was_open
       result = yield
-      control.click if !was_open && dropdown_open?
+      control.native.send_keys(:escape) if !was_open && dropdown_open?
       result
     end
   end

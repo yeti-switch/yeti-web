@@ -55,7 +55,7 @@ RSpec.describe 'Create new Payment', type: :feature, js: true do
                                    .and change { account.reload.balance }.by(0)
 
       expect(page).to have_current_path payments_path
-      expect(page).to have_field_tom_select('Account', with: account.display_name, clearable: true)
+      expect(page).to have_field_tom_select('Account', with: account.display_name)
     end
   end
 
@@ -75,7 +75,7 @@ RSpec.describe 'Create new Payment', type: :feature, js: true do
                                    .and change { account.reload.balance }.by(0)
 
       expect(page).to have_current_path payments_path
-      expect(page).to have_field_tom_select('Account', with: account.display_name, clearable: true)
+      expect(page).to have_field_tom_select('Account', with: account.display_name)
     end
   end
 end

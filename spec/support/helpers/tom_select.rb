@@ -20,7 +20,7 @@ module Helpers
       search = options.fetch(:search, false)
       selector = options[:selector]
       with = options.delete(:with)
-      tom_select = find_tom_select(label, exact_label:, selector:)
+      tom_select = find_tom_select(label, exact: exact_label, selector:)
 
       if search
         search_text = search.is_a?(TrueClass) ? with : search
@@ -28,6 +28,14 @@ module Helpers
       else
         tom_select.select(with, exact:)
       end
+    end
+
+    def fill_in_filter_type_tom_select(label, with:, exact_label: false, parent: nil)
+      parent ||= Capybara.current_session
+      label = parent.find(:label, label, exact: exact_label)
+      root_element = label.ancestor('.select_and_search').find('.ts-wrapper')
+      tom_select = Section::TomSelect.new(parent, root_element)
+      tom_select.select(with, exact: true)
     end
 
     def clear_tom_select(label, **)
@@ -55,7 +63,7 @@ module Helpers
       unless with.nil?
         options[:text] = with
         options[:exact_text] = exact
-        selector += ' .item'
+        selector += ' .item-text'
       end
       have_selector(selector, **options)
     end

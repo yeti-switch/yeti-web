@@ -26,6 +26,7 @@
             labelField: 'text',
             searchField: 'text',
             options: options,
+            maxOptions: null,
             allowEmptyOption: true,
             items: items,
             onInitialize: function () {
@@ -70,15 +71,11 @@
                     })
             },
             render: {
-                no_results: function () {
-                    return '<div class="no-results">No results matched</div>'
-                },
-                not_loading: function (data) {
+                no_results: tomSelectRenderNoResultsFunc,
+                not_loading: function () {
                     return '<div class="no-results">Type 3 chars to search...</div>'
                 },
-                item: function (data, escape) {
-                    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
-                }
+                item: tomSelectRenderItemFunc
             }
         })
 

@@ -122,7 +122,7 @@ RSpec.describe 'Filter dialpeer records', :js do
             fill_in name: 'q[routing_tag_ids_count_equals]', with: 1
             fill_in_tom_select 'ROUTING TAG IDS COVERS', with: specific_tag.name, multiple: true
             expect(page).to have_field(name: 'q[routing_tag_ids_count_equals]', with: 1)
-            expect(page).to have_field_tom_select('Routing tag ids covers', with: specific_tag.name, exact: false)
+            expect(page).to have_field_tom_select('ROUTING TAG IDS COVERS', with: specific_tag.name, exact: false)
           end
         end
         let!(:specific_tag) { tags.first }

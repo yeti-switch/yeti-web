@@ -50,7 +50,7 @@ RSpec.describe 'Index Log Api Logs', type: :feature do
 
       before do
         visit api_logs_path
-        fill_in_tom_select 'Controller', with: 'Api::Rest::Admin::AuthController'
+        fill_in_tom_select 'CONTROLLER', with: 'Api::Rest::Admin::AuthController'
       end
 
       it 'should return filtered records only' do

@@ -63,7 +63,7 @@ RSpec.describe 'Index Routing Destination Next Rates', type: :feature, js: true 
 
     context 'by Destination' do
       let(:filtering!) do
-        fill_in_tom_select('DESTINATION PREFIX', with: filter_type, selector: true)
+        fill_in_filter_type_tom_select 'Destination', with: filter_type
         fill_in 'Destination', with: filter_value
       end
 

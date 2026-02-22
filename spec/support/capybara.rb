@@ -73,4 +73,10 @@ Capybara.server = :webrick
 Capybara.server_host = '127.0.0.1'
 Capybara.server_port = 9887 + ENV['TEST_ENV_NUMBER'].to_i if ENV['TEST_ENV_NUMBER']
 Capybara.default_driver = :rack_test
+# per test override:
+#   RSpec.describe 'Some page', js: true do
+#     it 'something, driver: :cuprite do
+#       ...
+#     end
+#   end
 Capybara.javascript_driver = ENV['JS_DRIVER'].presence&.to_sym || :cuprite_headless

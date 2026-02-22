@@ -31,8 +31,8 @@ RSpec.describe 'Index Destinations', type: :feature, js: true do
 
       page.scroll_to('.filter_form input[type="submit"]')
       page.within('.filter_form') do
-        fill_in_tom_select('Country', with: country.display_name)
-        fill_in_tom_select('Network', with: network.name, search: true)
+        fill_in_tom_select('COUNTRY', with: country.display_name)
+        fill_in_tom_select('NETWORK', with: network.name, search: true)
         page.find('input[type="submit"]').click
       end
 

@@ -18,7 +18,9 @@ require 'action_view/railtie'
 
 # custom
 require_relative '../lib/capture_error'
-require 'rails_semantic_logger'
+if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
+  require 'rails_semantic_logger'
+end
 require 'config'
 
 # Require the gems listed in Gemfile, including any gems
@@ -116,12 +118,14 @@ module Yeti
     raise ArgumentError, "`secret_key_base` for #{Rails.env} environment must be a type of String`" if config.secret_key_base.blank?
     raise ArgumentError, "Missing `secret_key_base` for '#{Rails.env}' environment" if config.secret_key_base.blank?
 
-    $stdout.sync = true
-    config.rails_semantic_logger.semantic = true
-    config.log_tags = {
-      request_id: :request_id,
-      remote_ip: :remote_ip,
-      **(YetiConfig.logs&.tags&.to_h || {})
-    }
+    if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
+      $stdout.sync = true
+      config.rails_semantic_logger.semantic = true
+      config.log_tags = {
+        request_id: :request_id,
+        remote_ip: :remote_ip,
+        **(YetiConfig.logs&.tags&.to_h || {})
+      }
+    end
   end
 end

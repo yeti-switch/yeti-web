@@ -17,14 +17,11 @@
             labelField: 'text',
             searchField: 'text',
             allowEmptyOption: true,
+            maxOptions: null,
             controlInput: null, // add search box only for tom-select-ajax
             render: {
-                no_results: function() {
-                    return '<div class="no-results">No results matched</div>'
-                },
-                item: function (data, escape) {
-                    return '<div><span class="item-text">' + escape(data.text) + '</span></div>'
-                }
+                no_results: tomSelectRenderNoResultsFunc,
+                item: tomSelectRenderItemFunc
             }
         })
 
