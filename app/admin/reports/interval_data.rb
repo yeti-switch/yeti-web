@@ -47,7 +47,7 @@ ActiveAdmin.register Report::IntervalData, as: 'IntervalItem' do
                     path_params: { q: { vendor_eq: true, ordered_by: :name } },
                     if: proc { parent.group_by.include?('vendor_id') }
 
-  with_options as: :select, input_html: { class: :chosen } do |f|
+  with_options as: :select, input_html: { class: 'tom-select' } do |f|
     f.filter :rateplan_id, if: proc { parent.group_by.include?('rateplan_id') }
     f.filter :routing_group_id, if: proc { parent.group_by.include?('routing_group_id') }
     f.filter :orig_gw_id, if: proc { parent.group_by.include?('orig_gw_id') }

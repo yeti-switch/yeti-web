@@ -1,0 +1,132 @@
+// Wrap customizations in #active_admin_content to increase styles priority,
+// because due to bugs in sass compiling tom-select own css loaded after active admin styles,
+// see config/initializers/active_admin.rb
+#active_admin_content {
+
+  // Width variants for Tom Select
+  .ts-wrapper.tom-select {
+    .ts-control {
+      width: 240px;
+    }
+  }
+
+  .ts-wrapper.tom-select-wide {
+    .ts-control {
+      width: 80%;
+    }
+  }
+
+  .ts-wrapper.tom-select-sortable {
+    .ts-control {
+      width: 80%;
+    }
+  }
+
+  .ts-wrapper.tom-select-ajax {
+    .ts-control {
+      width: 240px;
+    }
+  }
+
+  .ts-wrapper.tom-select-ajax-fillable {
+    .ts-control {
+      width: 240px;
+    }
+  }
+
+  // Match ActiveAdmin form styling
+  .ts-wrapper {
+    .ts-control {
+      border: 1px solid #A1A7B2;
+      border-radius: 3px;
+      min-height: 28px;
+    }
+
+    .ts-dropdown {
+      border: 1px solid #A1A7B2;
+
+      .option.active {
+        background: #3875d7;
+        color: #fff;
+      }
+
+      .no-results {
+        padding: 5px 8px;
+        color: #999;
+      }
+    }
+  }
+
+  // caret icon
+  .ts-wrapper.single .ts-control, .ts-wrapper.single.input-active .ts-control {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
+    background-position: right .55rem center;
+    background-repeat: no-repeat;
+    background-size: 9px 9px;
+  }
+
+  // Reserve space for caret icon so clear button doesn't overlap
+  .ts-wrapper.plugin-clear_button {
+    --ts-pr-caret: 2.5em;
+  }
+
+  form.formtastic {
+    // Make dropdown width match control width instead of 100% of parent
+    // and keep inline with label in formtastic forms
+    .ts-wrapper.tom-select,
+    .ts-wrapper.tom-select-ajax,
+    .ts-wrapper.tom-select-ajax-fillable {
+      display: inline-block;
+      width: calc(80% - 22px);
+
+      .ts-control {
+        width: 100%;
+        font-size: 0.95em;
+        border: 1px solid #e6e9ee;
+        line-height: 1.15;
+
+        input {
+          font-size: 0.95em;
+          line-height: 1.15;
+        }
+      }
+    }
+  }
+
+  form.filter_form .filter_form_field.filter_select {
+    .ts-wrapper {
+      display: inline-block;
+      width: fit-content;
+
+      .ts-control {
+        width: 220px;
+        padding: 8px 10px 7px;
+        font-size: 0.95em;
+        line-height: 1.15;
+
+        input {
+          font-size: 0.95em;
+          line-height: 1.15;
+          // below fixes width applied by active admin styles
+          width: unset;
+          min-width: 1px;
+        }
+      }
+    }
+  }
+
+  form.filter_form .filter_form_field.select_and_search {
+    .ts-wrapper {
+      width: 115px;
+      display: inline-block;
+
+      .ts-control {
+        padding: 4.8px 10px 4.8px;
+
+        input {
+          font-size: 0.95em;
+        }
+      }
+    }
+  }
+}

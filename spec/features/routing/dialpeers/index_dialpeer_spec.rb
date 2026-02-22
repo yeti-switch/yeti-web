@@ -25,7 +25,7 @@ RSpec.describe 'Index Dialpeer', type: :feature, js: true do
   context 'with filter by ID in string' do
     let(:fill_filters!) do
       within_filters do
-        fill_in_chosen('#q_id_input > select', with: 'In string', no_search: true, selector: true)
+        fill_in_filter_type_tom_select 'Id', with: 'In string'
         fill_in 'Id', with: dialpeers.map(&:id).join(',')
         click_button 'Filter'
       end

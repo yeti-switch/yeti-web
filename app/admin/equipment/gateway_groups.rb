@@ -46,7 +46,10 @@ ActiveAdmin.register GatewayGroup do
   filter :name
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
 
-  filter :balancing_mode_id, as: :select, collection: proc { GatewayGroup::BALANCING_MODES.invert }
+  filter :balancing_mode_id,
+         as: :select,
+         collection: proc { GatewayGroup::BALANCING_MODES.invert },
+         input_html: { class: 'tom-select' }
   filter :max_rerouting_attempts
 
   show do |s|
@@ -80,7 +83,11 @@ ActiveAdmin.register GatewayGroup do
     f.inputs form_title do
       f.input :name
       f.contractor_input :vendor_id, label: 'Vendor', path_params: { q: { vendor_eq: true } }
-      f.input :balancing_mode_id, as: :select, include_blank: false, collection: GatewayGroup::BALANCING_MODES.invert
+      f.input :balancing_mode_id,
+              as: :select,
+              include_blank: false,
+              collection: GatewayGroup::BALANCING_MODES.invert,
+              input_html: { class: 'tom-select' }
       f.input :max_rerouting_attempts
     end
     f.actions

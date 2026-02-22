@@ -30,7 +30,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   filter :method
   filter :tag_eq, label: 'Tag Equals'
   filter :status
-  filter :controller, as: :select, collection: proc { ApiControllers.list }, input_html: { class: :chosen }
+  filter :controller, as: :select, collection: proc { ApiControllers.list }, input_html: { class: 'tom-select' }
   filter :action
   filter :page_duration
   filter :db_duration

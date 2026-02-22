@@ -16,9 +16,8 @@ RSpec.describe 'Create new CDR export', js: true do
 
   context 'with all filled attributes' do
     let(:fill_form!) do
-      fill_in_chosen 'Fields', with: 'success', multiple: true
-      fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
-      fill_in_chosen 'Customer acc id eq', with: account.name, ajax: true
+      fill_in_tom_select 'Fields', with: %w[success id], exact: true
+      fill_in_tom_select 'Customer acc id eq', with: account.name, search: true
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lteq', with: '2018-03-01'
     end
@@ -49,7 +48,7 @@ RSpec.describe 'Create new CDR export', js: true do
     let(:fields) { %w[id customer_id success] }
 
     let(:fill_form!) do
-      fill_in_chosen 'Customer acc id eq', with: account.name, ajax: true
+      fill_in_tom_select 'Customer acc id eq', with: account.name, search: true
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lteq', with: '2018-03-01'
     end
@@ -91,7 +90,7 @@ RSpec.describe 'Create new CDR export', js: true do
   end
 
   context 'with all filled filters' do
-    let!(:countries) { create_list(:country, 2, :uniq_name) }
+    let(:countries) { System::Country.all }
     let!(:vendor) { create(:vendor) }
     let!(:vendor_acc) { create(:account, name: 'test', contractor: vendor) }
     let!(:customer_auth) { create(:customers_auth, external_id: 1235, external_type: 'term') }
@@ -100,20 +99,20 @@ RSpec.describe 'Create new CDR export', js: true do
 
     let(:fill_form!) do
       within_form_for do
-        fill_in_chosen 'Fields', with: 'success', multiple: true
-        fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
+        fill_in_tom_select 'Fields', with: 'success', multiple: true
+        fill_in_tom_select 'Fields', with: 'id', multiple: true, exact: true
 
         # filters
         fill_in 'Customer external id eq', with: '1231'
-        fill_in_chosen 'Customer id eq', with: "#{customer.name} | #{customer.id}"
+        fill_in_tom_select 'Customer id eq', with: "#{customer.name} | #{customer.id}", search: customer.name
         fill_in 'Customer acc external id eq', with: '1232'
-        fill_in_chosen 'Customer acc id eq', with: "#{account.name} | #{account.id}"
+        fill_in_tom_select 'Customer acc id eq', with: "#{account.name} | #{account.id}", search: account.name
         fill_in 'Vendor external id eq', with: '1233'
-        fill_in_chosen 'Vendor id eq', with: "#{vendor.name} | #{vendor.id}"
+        fill_in_tom_select 'Vendor id eq', with: "#{vendor.name} | #{vendor.id}", search: vendor.name
         fill_in 'Vendor acc external id eq', with: '1234'
-        fill_in_chosen 'Vendor acc id eq', with: "#{vendor_acc.name} | #{vendor_acc.id}"
+        fill_in_tom_select 'Vendor acc id eq', with: "#{vendor_acc.name} | #{vendor_acc.id}", search: vendor_acc.name
         fill_in 'Customer auth external id eq', with: '1235'
-        fill_in_chosen 'Customer auth id eq', with: "#{customer_auth.name} | #{customer_auth.id}"
+        fill_in_tom_select 'Customer auth id eq', with: "#{customer_auth.name} | #{customer_auth.id}"
         fill_in 'Src prefix in contains', with: 'src_prefix_in_test'
         fill_in 'Src prefix in eq', with: 'src_prefix_in_test'
         fill_in 'Src prefix routing contains', with: 'src_prefix_routing_test'
@@ -126,29 +125,29 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Dst prefix routing eq', with: 'dst_prefix_routing_test'
         fill_in 'Dst prefix out contains', with: 'dst_prefix_out_test'
         fill_in 'Dst prefix out eq', with: 'dst_prefix_out_test'
-        fill_in_chosen 'Src country id eq', with: countries.first.name
-        fill_in_chosen 'Dst country id eq', with: countries.last.name
+        fill_in_tom_select 'Src country id eq', with: countries.first.name
+        fill_in_tom_select 'Dst country id eq', with: countries.last.name
         fill_in 'Routing tag ids include', with: 2
         fill_in 'Routing tag ids exclude', with: 25
-        fill_in_chosen 'Routing tag ids empty', with: 'No'
-        fill_in_chosen 'Success eq', with: 'Yes'
+        fill_in_tom_select 'Routing tag ids empty', with: 'No'
+        fill_in_tom_select 'Success eq', with: 'Yes'
         fill_in 'Duration eq', with: '30'
         fill_in 'Duration gteq', with: '0'
         fill_in 'Duration lteq', with: '60'
-        fill_in_chosen 'Is last cdr eq', with: 'Yes'
+        fill_in_tom_select 'Is last cdr eq', with: 'Yes'
         fill_in 'Failed resource type id eq', with: '10'
         fill_in 'Orig gw external id eq', with: '1236'
-        fill_in_chosen 'Orig gw id eq', with: "#{gateway1.name} | #{gateway1.id}"
+        fill_in_tom_select 'Orig gw id eq', with: "#{gateway1.name} | #{gateway1.id}"
         fill_in 'Term gw external id eq', with: '1237'
-        fill_in_chosen 'Term gw id eq', with: "#{gateway2.name} | #{gateway2.id}"
+        fill_in_tom_select 'Term gw id eq', with: "#{gateway2.name} | #{gateway2.id}"
         fill_in 'Time start gteq', with: '2018-01-01'
         fill_in 'Time start lteq', with: '2018-03-01'
         fill_in 'Time start lt', with: '2018-03-01', exact: true
         fill_in 'Customer auth external type eq', with: 'term'
         fill_in 'Customer auth external type not eq', with: 'em'
-        fill_in_chosen 'Customer auth external id in', with: customer_auth.name, multiple: true, ajax: true
-        fill_in_chosen 'Src country iso in', with: countries.first.name, multiple: true
-        fill_in_chosen 'Dst country iso in', with: countries.first.name, multiple: true
+        fill_in_tom_select 'Customer auth external id in', with: customer_auth.name, multiple: true, search: true
+        fill_in_tom_select 'Src country iso in', with: countries.first.name, multiple: true
+        fill_in_tom_select 'Dst country iso in', with: countries.first.name, multiple: true
 
         # all allowed filters must be filled in this test.
         CdrExport::FiltersModel.attribute_types.each_key do |filter_key|
@@ -228,7 +227,7 @@ RSpec.describe 'Create new CDR export', js: true do
   context 'with only required filters' do
     let(:fill_form!) do
       within_form_for do
-        fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
+        fill_in_tom_select 'Fields', with: 'id', multiple: true, exact: true
         fill_in 'Time start gteq', with: '2018-01-01'
         fill_in 'Time start lteq', with: '2018-03-01'
       end
@@ -256,8 +255,8 @@ RSpec.describe 'Create new CDR export', js: true do
 
   context 'with filter time_start_lt' do
     let(:fill_form!) do
-      fill_in_chosen 'Fields', with: 'success', multiple: true
-      fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
+      fill_in_tom_select 'Fields', with: 'success', multiple: true
+      fill_in_tom_select 'Fields', with: 'id', multiple: true, exact: true
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lt', with: '2018-03-01', exact: true
     end
@@ -284,8 +283,8 @@ RSpec.describe 'Create new CDR export', js: true do
 
   context 'with incorrect filters' do
     let(:fill_form!) do
-      fill_in_chosen 'Fields', with: 'success', multiple: true
-      fill_in_chosen 'Fields', with: 'id', multiple: true, exact: true
+      fill_in_tom_select 'Fields', with: 'success', multiple: true
+      fill_in_tom_select 'Fields', with: 'id', multiple: true, exact: true
     end
 
     it 'should rise semantic error' do
@@ -297,13 +296,13 @@ RSpec.describe 'Create new CDR export', js: true do
 
   context 'when "Customer Auth external ID IN" filter is selected and then form submitted' do
     let!(:customer_auth) { create(:customers_auth, external_id: 1235, external_type: 'term') }
-    let(:fill_form!) { fill_in_chosen 'Customer auth external id in', with: customer_auth.display_name, multiple: true, ajax: true }
+    let(:fill_form!) { fill_in_tom_select 'Customer auth external id in', with: customer_auth.display_name, multiple: true, search: true }
 
     it 'should render form with previously selected Customer Auth' do
       subject
 
       expect(page).to have_semantic_errors count: 2
-      expect(page).to have_field_chosen 'Customer auth external id in', with: customer_auth.display_name
+      expect(page).to have_field_tom_select 'Customer auth external id in', with: customer_auth.display_name
     end
   end
 

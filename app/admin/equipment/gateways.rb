@@ -293,32 +293,32 @@ ActiveAdmin.register Gateway do
                           scope: -> { GatewayGroup.order(:name) },
                           path: '/gateway_groups/search'
 
-  filter :pop, input_html: { class: 'chosen' }
-  filter :transport_protocol
+  filter :pop, input_html: { class: 'tom-select' }
+  filter :transport_protocol, input_html: { class: 'tom-select' }
   filter :host
-  filter :enabled, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :allow_origination, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :allow_termination, as: :select, collection: [['Yes', true], ['No', false]]
-  filter :proxy_media, as: :select, collection: [['Yes', true], ['No', false]]
+  boolean_filter :enabled
+  boolean_filter :allow_origination
+  boolean_filter :allow_termination
+  boolean_filter :proxy_media
 
   filter :statistic_calls, as: :numeric
   filter :statistic_total_duration, as: :numeric
   filter :statistic_asr, as: :numeric
   filter :statistic_acd, as: :numeric
   filter :external_id
-  filter :radius_accounting_profile, input_html: { class: 'chosen' }
-  filter :lua_script, input_html: { class: 'chosen' }
+  filter :radius_accounting_profile, input_html: { class: 'tom-select' }
+  filter :lua_script, input_html: { class: 'tom-select' }
   boolean_filter :auth_enabled
   filter :auth_user
   filter :auth_password
   filter :incoming_auth_username
   filter :incoming_auth_password
   filter :incoming_auth_allow_jwt
-  filter :codec_group, input_html: { class: 'chosen' }, collection: proc { CodecGroup.pluck(:name, :id) }
-  filter :diversion_send_mode
-  filter :sip_schema_id, as: :select, collection: proc { Gateway::SIP_SCHEMAS.invert }
-  filter :privacy_mode_id, as: :select, collection: proc { Gateway::PRIVACY_MODES.invert }
-  filter :dump_level_id, as: :select, collection: proc { Gateway::DUMP_LEVELS.invert }
+  filter :codec_group, input_html: { class: 'tom-select' }, collection: proc { CodecGroup.pluck(:name, :id) }
+  filter :diversion_send_mode, input_html: { class: 'tom-select' }
+  filter :sip_schema_id, as: :select, collection: proc { Gateway::SIP_SCHEMAS.invert }, input_html: { class: 'tom-select' }
+  filter :privacy_mode_id, as: :select, collection: proc { Gateway::PRIVACY_MODES.invert }, input_html: { class: 'tom-select' }
+  filter :dump_level_id, as: :select, collection: proc { Gateway::DUMP_LEVELS.invert }, input_html: { class: 'tom-select' }
 
   association_ajax_filter :termination_src_numberlist_id_eq,
                           label: 'Termination SRC Numberlist',
@@ -330,9 +330,9 @@ ActiveAdmin.register Gateway do
                           scope: -> { Routing::Numberlist.order(:name) },
                           path: '/numberlists/search'
 
-  filter :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
-  filter :throttling_profile, as: :select, input_html: { class: 'chosen' }
-  filter :scheduler, as: :select, input_html: { class: 'chosen' }
+  filter :stir_shaken_crt, as: :select, input_html: { class: 'tom-select' }
+  filter :throttling_profile, as: :select, input_html: { class: 'tom-select' }
+  filter :scheduler, as: :select, input_html: { class: 'tom-select' }
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
@@ -355,9 +355,9 @@ ActiveAdmin.register Gateway do
                                    }
           f.input :priority
           f.input :weight
-          f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'chosen' }
+          f.input :pop, as: :select, include_blank: 'Any', input_html: { class: 'tom-select' }
 
-          f.input :scheduler, as: :select, input_html: { class: 'chosen' }
+          f.input :scheduler, as: :select, input_html: { class: 'tom-select' }
 
           f.input :allow_origination
           f.input :allow_termination
@@ -380,15 +380,15 @@ ActiveAdmin.register Gateway do
           f.input :sst_session_expires
           f.input :sst_minimum_timer
           f.input :sst_maximum_timer
-          f.input :session_refresh_method, as: :select, include_blank: false
+          f.input :session_refresh_method, as: :select, include_blank: false, input_html: { class: 'tom-select' }
           f.input :sst_accept501
         end
       end
 
       tab :sensor do
         f.inputs 'Sensor' do
-          f.input :sensor_level
-          f.input :sensor
+          f.input :sensor_level, input_html: { class: 'tom-select' }
+          f.input :sensor, input_html: { class: 'tom-select' }
         end
       end
       tab :signaling do
@@ -399,7 +399,7 @@ ActiveAdmin.register Gateway do
               f.input :relay_reinvite
               f.input :relay_hold
               f.input :relay_prack
-              f.input :rel100_mode, as: :select, include_blank: false
+              f.input :rel100_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
               f.input :relay_update
               f.input :transit_headers_from_origination
               f.input :transit_headers_from_termination
@@ -420,23 +420,24 @@ ActiveAdmin.register Gateway do
               f.input :orig_append_headers_reply, as: :newline_array_of_headers
               f.input :orig_use_outbound_proxy
               f.input :orig_force_outbound_proxy
-              f.input :orig_proxy_transport_protocol, as: :select, include_blank: false
+              f.input :orig_proxy_transport_protocol, as: :select, include_blank: false, input_html: { class: 'tom-select' }
               f.input :orig_outbound_proxy
               f.input :transparent_dialog_id
               f.input :dialog_nat_handling
-              f.input :orig_disconnect_policy, input_html: { class: 'chosen' }, include_blank: true
+              f.input :orig_disconnect_policy, input_html: { class: 'tom-select' }, include_blank: true
             end
           end
           column do
             f.inputs 'Termination' do
-              f.input :dump_level_id, as: :select, include_blank: false, collection: Gateway::DUMP_LEVELS.invert
-              f.input :transport_protocol, as: :select, include_blank: false
-              f.input :sip_schema_id, as: :select, include_blank: false, collection: Gateway::SIP_SCHEMAS.invert
+              f.input :dump_level_id, as: :select, include_blank: false, collection: Gateway::DUMP_LEVELS.invert, input_html: { class: 'tom-select' }
+              f.input :transport_protocol, as: :select, include_blank: false, input_html: { class: 'tom-select' }
+              f.input :sip_schema_id, as: :select, include_blank: false, collection: Gateway::SIP_SCHEMAS.invert, input_html: { class: 'tom-select' }
               f.input :host
               f.input :port
               f.input :registered_aor_mode_id, as: :select, include_blank: false,
-                                               collection: Gateway::REGISTERED_AOR_MODES.invert
-              f.input :network_protocol_priority, as: :select, include_blank: false
+                                               collection: Gateway::REGISTERED_AOR_MODES.invert,
+                                               input_html: { class: 'tom-select' }
+              f.input :network_protocol_priority, as: :select, include_blank: false, input_html: { class: 'tom-select' }
               f.input :resolve_ruri
               f.input :preserve_anonymous_from_domain
 
@@ -448,13 +449,13 @@ ActiveAdmin.register Gateway do
 
               f.input :term_use_outbound_proxy
               f.input :term_force_outbound_proxy
-              f.input :term_proxy_transport_protocol, as: :select, include_blank: false
+              f.input :term_proxy_transport_protocol, as: :select, include_blank: false, input_html: { class: 'tom-select' }
               f.input :term_outbound_proxy
               f.input :term_next_hop_for_replies
               f.input :term_next_hop
-              f.input :term_disconnect_policy, input_html: { class: 'chosen' }, include_blank: true
+              f.input :term_disconnect_policy, input_html: { class: 'tom-select' }, include_blank: true
               f.input :term_append_headers_req, as: :newline_array_of_headers
-              f.input :sdp_alines_filter_type, as: :select, include_blank: false
+              f.input :sdp_alines_filter_type, as: :select, include_blank: false, input_html: { class: 'tom-select' }
               f.input :sdp_alines_filter_list
               f.input :ringing_timeout
               f.input :allow_1xx_without_to_tag
@@ -468,14 +469,14 @@ ActiveAdmin.register Gateway do
               f.input :suppress_early_media
               f.input :fake_180_timer
               f.input :send_lnp_information
-              f.input :throttling_profile, input_html: { class: 'chosen' }, include_blank: true
+              f.input :throttling_profile, input_html: { class: 'tom-select' }, include_blank: true
             end
           end
         end
       end
       tab 'Translations' do
         f.inputs 'Translations' do
-          f.input :privacy_mode_id, as: :select, include_blank: false, collection: Gateway::PRIVACY_MODES.invert
+          f.input :privacy_mode_id, as: :select, include_blank: false, collection: Gateway::PRIVACY_MODES.invert, input_html: { class: 'tom-select' }
           f.association_ajax_input :termination_src_numberlist_id,
                                   label: 'Termination SRC Numberlist',
                                   scope: Routing::Numberlist.order(:name),
@@ -485,13 +486,14 @@ ActiveAdmin.register Gateway do
                                   label: 'Termination DST Numberlist',
                                   scope: Routing::Numberlist.order(:name),
                                   path: '/numberlists/search'
-          f.input :diversion_send_mode, include_blank: false
+          f.input :diversion_send_mode, include_blank: false, input_html: { class: 'tom-select' }
           f.input :diversion_domain
           f.input :diversion_rewrite_rule
           f.input :diversion_rewrite_result
 
           f.input :pai_send_mode_id, as: :select, include_blank: false,
-                                     collection: Gateway::PAI_SEND_MODES.invert
+                                     collection: Gateway::PAI_SEND_MODES.invert,
+                                     input_html: { class: 'tom-select' }
           f.input :pai_domain
 
           f.input :src_name_rewrite_rule
@@ -502,13 +504,13 @@ ActiveAdmin.register Gateway do
           f.input :dst_rewrite_result
           f.input :to_rewrite_rule
           f.input :to_rewrite_result
-          f.input :lua_script, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :lua_script, input_html: { class: 'tom-select' }, include_blank: 'None'
         end
       end
       tab :media do
         f.inputs 'Media settings' do
-          f.input :sdp_c_location, as: :select, include_blank: false
-          f.input :codec_group, input_html: { class: 'chosen' }
+          f.input :sdp_c_location, as: :select, include_blank: false, input_html: { class: 'tom-select' }
+          f.input :codec_group, input_html: { class: 'tom-select' }
           f.input :try_avoid_transcoding
           f.input :proxy_media
           f.input :single_codec_in_200ok
@@ -521,32 +523,33 @@ ActiveAdmin.register Gateway do
           f.input :rtp_force_relay_cn
           f.input :force_one_way_early_media
           f.input :rtp_interface_name
-          f.input :media_encryption_mode, as: :select, include_blank: false
-          f.input :ice_mode_id, as: :select, include_blank: false, collection: Gateway::ICE_MODES.invert
-          f.input :rtcp_mux_mode_id, as: :select, include_blank: false, collection: Gateway::RTCP_MUX_MODES.invert
-          f.input :rtcp_feedback_mode_id, as: :select, include_blank: false, collection: Gateway::RTCP_FEEDBACK_MODES.invert
+          f.input :media_encryption_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
+          f.input :ice_mode_id, as: :select, include_blank: false, collection: Gateway::ICE_MODES.invert, input_html: { class: 'tom-select' }
+          f.input :rtcp_mux_mode_id, as: :select, include_blank: false, collection: Gateway::RTCP_MUX_MODES.invert, input_html: { class: 'tom-select' }
+          f.input :rtcp_feedback_mode_id, as: :select, include_blank: false, collection: Gateway::RTCP_FEEDBACK_MODES.invert, input_html: { class: 'tom-select' }
           f.input :rtp_acl, as: :array_of_strings
         end
       end
       tab :dtmf do
         f.inputs 'DTMF' do
           f.input :force_dtmf_relay
-          f.input :dtmf_send_mode, as: :select, include_blank: false
-          f.input :dtmf_receive_mode, as: :select, include_blank: false
-          f.input :rx_inband_dtmf_filtering_mode, as: :select, include_blank: false
-          f.input :tx_inband_dtmf_filtering_mode, as: :select, include_blank: false
+          f.input :dtmf_send_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
+          f.input :dtmf_receive_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
+          f.input :rx_inband_dtmf_filtering_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
+          f.input :tx_inband_dtmf_filtering_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
         end
       end
       tab :radius do
         f.inputs 'RADIUS' do
-          f.input :radius_accounting_profile, input_html: { class: 'chosen' }, include_blank: 'None'
+          f.input :radius_accounting_profile, input_html: { class: 'tom-select' }, include_blank: 'None'
         end
       end
       tab :stir_shaken do
         f.inputs 'STIR/SHAKEN' do
           f.input :stir_shaken_mode_id, as: :select, include_blank: false,
-                                        collection: Gateway::STIR_SHAKEN_MODES.invert
-          f.input :stir_shaken_crt, as: :select, input_html: { class: 'chosen' }
+                                        collection: Gateway::STIR_SHAKEN_MODES.invert,
+                                        input_html: { class: 'tom-select' }
+          f.input :stir_shaken_crt, as: :select, input_html: { class: 'tom-select' }
         end
       end
     end
@@ -724,7 +727,7 @@ ActiveAdmin.register Gateway do
       tab :media do
         attributes_table_for s do
           row :sdp_c_location
-          row :codec_group, input_html: { class: 'chosen' }
+          row :codec_group, input_html: { class: 'tom-select' }
           row :try_avoid_transcoding
           row :proxy_media
           row :single_codec_in_200ok

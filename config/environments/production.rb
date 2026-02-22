@@ -91,9 +91,11 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  config.rails_semantic_logger.add_file_appender = false
-  config.semantic_logger.add_appender(
-    io: $stdout,
-    formatter: :default
-  )
+  if ENV['SKIP_RAILS_SEMANTIC_LOGGER'] != 'true'
+    config.rails_semantic_logger.add_file_appender = false
+    config.semantic_logger.add_appender(
+      io: $stdout,
+      formatter: :default
+    )
+  end
 end

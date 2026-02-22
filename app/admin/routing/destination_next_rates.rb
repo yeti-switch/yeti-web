@@ -74,15 +74,13 @@ ActiveAdmin.register Routing::DestinationNextRate, as: 'Destination Next Rate' d
 
   filter :id_eq, label: 'ID'
 
-  filter :applied, as: :select,
-                   input_html: { class: :chosen },
-                   collection: [['Yes', true], ['No', false]]
+  boolean_filter :applied
 
   filter :destination_prefix, label: 'Destination', as: :string
 
   filter :destination_rate_group_id_eq, label: 'Rate Group',
                                         as: :select,
-                                        input_html: { class: :chosen },
+                                        input_html: { class: 'tom-select' },
                                         collection: -> { Routing::RateGroup.all }
   filter :apply_time
   filter :initial_rate

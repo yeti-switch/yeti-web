@@ -15,7 +15,7 @@ RSpec.describe 'Create new Customer Traffic Scheduler', type: :feature, js: true
     visit new_customer_traffic_scheduler_path
 
     aa_form.select_value 'Period', 'Hourly'
-    aa_form.search_chosen 'Customer', customer.name, ajax: true
+    aa_form.fill_in_tom_select 'Customer', with: customer.name, search: true
   end
 
   it 'creates record' do

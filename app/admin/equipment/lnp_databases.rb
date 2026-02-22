@@ -66,7 +66,7 @@ ActiveAdmin.register Lnp::Database do
 
   filter :database_type,
          label: 'Type',
-         input_html: { class: :chosen },
+         input_html: { class: 'tom-select' },
          collection: Lnp::Database::CONST::TYPES.invert.to_a
 
   filter :created_at
@@ -174,7 +174,7 @@ ActiveAdmin.register Lnp::Database do
         o.input :token
         o.input :timeout
       when Lnp::Database::CONST::TYPE_SIP_REDIRECT
-        o.input :format, as: :select, include_blank: false
+        o.input :format, as: :select, include_blank: false, input_html: { class: 'tom-select' }
         o.input :host
         o.input :port
         o.input :timeout

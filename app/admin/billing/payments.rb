@@ -78,12 +78,12 @@ ActiveAdmin.register Payment do
          label: 'Type',
          as: :select,
          collection: Payment::CONST::TYPE_IDS.invert.to_a,
-         input_html: { class: 'chosen' }
+         input_html: { class: 'tom-select' }
   filter :status_id,
          label: 'Status',
          as: :select,
          collection: Payment::CONST::STATUS_IDS.invert.to_a,
-         input_html: { class: 'chosen' }
+         input_html: { class: 'tom-select' }
   filter :amount
   filter :private_notes
   filter :balance_before_payment

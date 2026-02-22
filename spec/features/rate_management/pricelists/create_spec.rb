@@ -12,7 +12,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
   let(:name) { 'new_pricelist' }
   let(:fill_form!) do
     fill_in 'Name', with: name
-    fill_in_chosen 'Project', with: project.name
+    fill_in_tom_select 'Project', with: project.name
     attach_file 'File', csv_file.path
   end
   let!(:project) { FactoryBot.create(:rate_management_project, :filled, :with_routing_tags) }
@@ -72,7 +72,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
   context 'with "Retain enabled" No' do
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Retain enabled', with: 'No'
+      fill_in_tom_select 'Retain enabled', with: 'No'
     end
 
     it 'should be create pricelist' do
@@ -102,7 +102,7 @@ RSpec.describe 'Rate Management Pricelist Create', js: true do
   context 'with "Retain priority" No' do
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Retain priority', with: 'No'
+      fill_in_tom_select 'Retain priority', with: 'No'
     end
 
     it 'should be create pricelist' do

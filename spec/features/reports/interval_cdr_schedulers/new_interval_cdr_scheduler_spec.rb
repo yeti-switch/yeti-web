@@ -11,10 +11,10 @@ RSpec.describe 'Create new Interval Cdr Scheduler', type: :feature, js: true do
   before do
     visit new_interval_cdr_scheduler_path
 
-    aa_form.select_value 'Period', 'Hourly'
-    aa_form.select_value 'Interval length', '10 Min'
-    aa_form.select_value 'Aggregation function', 'Count'
-    aa_form.select_chosen 'Aggregate by', 'destination_fee'
+    aa_form.fill_in_tom_select 'Period', with: 'Hourly'
+    aa_form.fill_in_tom_select 'Interval length', with: '10 Min'
+    aa_form.fill_in_tom_select 'Aggregation function', with: 'Count'
+    aa_form.fill_in_tom_select 'Aggregate by', with: 'destination_fee'
   end
 
   it 'creates record' do

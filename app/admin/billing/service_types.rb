@@ -60,7 +60,7 @@ ActiveAdmin.register Billing::ServiceType, as: 'ServiceType' do
     f.inputs do
       f.input :name
       f.input :force_renew
-      f.input :provisioning_class, as: :select, collection: Billing::ServiceType.available_provisioning_classes, input_html: { class: :chosen }
+      f.input :provisioning_class, as: :select, collection: Billing::ServiceType.available_provisioning_classes, input_html: { class: 'tom-select' }
       f.input :ui_type
       f.input :variables_json, label: 'Variables', as: :text
     end

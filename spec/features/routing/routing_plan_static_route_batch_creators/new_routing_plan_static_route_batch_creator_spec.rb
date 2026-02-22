@@ -7,8 +7,8 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
 
   include_context :login_as_admin
 
-  let!(:vendor_1) { FactoryBot.create(:vendor) }
-  let!(:vendor_2) { FactoryBot.create(:vendor) }
+  let!(:vendor_1) { FactoryBot.create(:vendor, name: 'Vendor 1') }
+  let!(:vendor_2) { FactoryBot.create(:vendor, name: 'Vendor 2') }
   let!(:routing_plan) { FactoryBot.create(:routing_plan, :with_static_routes) }
   before do
     FactoryBot.create(:routing_plan)
@@ -17,10 +17,9 @@ RSpec.describe 'Create new Routing Plan Static Route Batch Creator', type: :feat
 
     visit new_routing_plan_static_route_batch_creator_path
 
-    fill_in_chosen 'Routing plan', with: routing_plan.display_name, ajax: true
+    fill_in_tom_select 'Routing plan', with: routing_plan.display_name, search: true
     fill_in 'Prefixes', with: '26327,34205'
-    fill_in_chosen 'Vendors', with: vendor_2.display_name, ajax: true, multiple: true
-    fill_in_chosen 'Vendors', with: vendor_1.display_name, ajax: true, multiple: true
+    fill_in_tom_select 'Vendors', with: [vendor_2.display_name, vendor_1.display_name], search: 'Vendor'
   end
 
   it 'creates record' do

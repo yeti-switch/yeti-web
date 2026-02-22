@@ -11,7 +11,7 @@ ActiveAdmin.register Equipment::StirShaken::RcdProfile do
 
   filter :id
   filter :external_id
-  filter :mode_id_eq, label: 'Mode', as: :select, collection: Equipment::StirShaken::RcdProfile::MODES.invert
+  filter :mode_id_eq, label: 'Mode', as: :select, collection: Equipment::StirShaken::RcdProfile::MODES.invert, input_html: { class: 'tom-select' }
   filter :nam
   filter :icn
   filter :jcl
@@ -35,7 +35,8 @@ ActiveAdmin.register Equipment::StirShaken::RcdProfile do
       f.input :mode_id,
               as: :select,
               include_blank: false,
-              collection: Equipment::StirShaken::RcdProfile::MODES.invert
+              collection: Equipment::StirShaken::RcdProfile::MODES.invert,
+              input_html: { class: 'tom-select' }
       f.input :nam
       f.input :apn
       f.input :icn

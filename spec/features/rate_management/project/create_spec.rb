@@ -20,11 +20,11 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
 
     let(:fill_form!) do
       fill_in 'Name', with: new_attrs[:name]
-      fill_in_chosen 'Vendor', with: new_attrs[:vendor].name, ajax: true
-      fill_in_chosen 'Account', with: new_attrs[:account].name
-      fill_in_chosen 'Routing group', with: new_attrs[:routing_group].name
-      fill_in_chosen 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
-      fill_in_chosen 'Gateway', with: new_attrs[:gateway].name
+      fill_in_tom_select 'Vendor', with: new_attrs[:vendor].name, search: true
+      fill_in_tom_select 'Account', with: new_attrs[:account].name
+      fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
+      fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
+      fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name
     end
 
     let(:new_attrs) do
@@ -62,14 +62,14 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
     context 'when filled all field' do
       let(:fill_form!) do
         fill_in 'Name', with: new_attrs[:name]
-        fill_in_chosen 'Vendor', with: new_attrs[:vendor].name, ajax: true
-        fill_in_chosen 'Account', with: new_attrs[:account].name
-        fill_in_chosen 'Routing group', with: new_attrs[:routing_group].name
-        fill_in_chosen 'Gateway', with: new_attrs[:gateway].name
-        fill_in_chosen 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
-        fill_in_chosen 'Routing Tags', with: new_attrs[:routing_tags].first.name, multiple: true
-        fill_in_chosen 'Routing Tags', with: new_attrs[:routing_tags].second.name, multiple: true
-        fill_in_chosen 'Routing tag mode', with: Routing::RoutingTagMode::MODES[new_attrs[:routing_tag_mode_id]]
+        fill_in_tom_select 'Vendor', with: new_attrs[:vendor].name, search: true
+        fill_in_tom_select 'Account', with: new_attrs[:account].name
+        fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
+        fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name
+        fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
+        fill_in_tom_select 'Routing Tags', with: new_attrs[:routing_tags].first.name, multiple: true
+        fill_in_tom_select 'Routing Tags', with: new_attrs[:routing_tags].second.name, multiple: true
+        fill_in_tom_select 'Routing tag mode', with: Routing::RoutingTagMode::MODES[new_attrs[:routing_tag_mode_id]]
         fill_in 'Capacity', with: new_attrs[:capacity]
         fill_in 'Force hit rate', with: new_attrs[:force_hit_rate]
         fill_in 'Acd limit', with: new_attrs[:acd_limit]
@@ -88,9 +88,9 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
         fill_in 'Src name rewrite rule', with: new_attrs[:src_name_rewrite_rule]
         fill_in 'Src rewrite result', with: new_attrs[:src_rewrite_result]
         fill_in 'Src rewrite rule', with: new_attrs[:src_rewrite_rule]
-        fill_in_chosen 'Enabled', with: new_attrs[:enabled] ? 'Yes' : 'No'
-        fill_in_chosen 'Exclusive route', with: new_attrs[:exclusive_route] ? 'Yes' : 'No'
-        fill_in_chosen 'Reverse billing', with: new_attrs[:reverse_billing] ? 'Yes' : 'No'
+        fill_in_tom_select 'Enabled', with: new_attrs[:enabled] ? 'Yes' : 'No'
+        fill_in_tom_select 'Exclusive route', with: new_attrs[:exclusive_route] ? 'Yes' : 'No'
+        fill_in_tom_select 'Reverse billing', with: new_attrs[:reverse_billing] ? 'Yes' : 'No'
       end
 
       let!(:gateway_group) { FactoryBot.create(:gateway_group, vendor: vendor) }
@@ -178,14 +178,14 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
       let!(:routing_tags) { FactoryBot.create_list(:routing_tag, 3) }
       let(:fill_form!) do
         fill_in 'Name', with: new_attrs[:name]
-        fill_in_chosen 'Vendor', with: new_attrs[:vendor].name, ajax: true
-        fill_in_chosen 'Account', with: new_attrs[:account].name
-        fill_in_chosen 'Routing group', with: new_attrs[:routing_group].name
-        fill_in_chosen 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
-        fill_in_chosen 'Gateway', with: new_attrs[:gateway].name
-        fill_in_chosen 'Routing Tags', with: routing_tags.third.name, multiple: true
-        fill_in_chosen 'Routing Tags', with: Routing::RoutingTag::ANY_TAG, multiple: true
-        fill_in_chosen 'Routing Tags', with: routing_tags.first.name, multiple: true
+        fill_in_tom_select 'Vendor', with: new_attrs[:vendor].name, search: true
+        fill_in_tom_select 'Account', with: new_attrs[:account].name
+        fill_in_tom_select 'Routing group', with: new_attrs[:routing_group].name
+        fill_in_tom_select 'Routeset discriminator', with: new_attrs[:routeset_discriminator].name
+        fill_in_tom_select 'Gateway', with: new_attrs[:gateway].name
+        fill_in_tom_select 'Routing Tags', with: routing_tags.third.name, multiple: true
+        fill_in_tom_select 'Routing Tags', with: Routing::RoutingTag::ANY_TAG, multiple: true
+        fill_in_tom_select 'Routing Tags', with: routing_tags.first.name, multiple: true
       end
 
       let(:new_attrs) do
@@ -315,7 +315,9 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
                           'Account must exist',
                           'Vendor must exist',
                           "Name can't be blank",
-                          'specify a gateway_group or a gateway'
+                          'specify a gateway_group or a gateway',
+                          'Routing group must exist',
+                          'Routeset discriminator must exist'
                         )
       end.not_to change { RateManagement::Project.count }
     end
@@ -347,7 +349,9 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
                           "Keep applied pricelists days can't be blank",
                           "Priority can't be blank",
                           "Name can't be blank",
-                          'specify a gateway_group or a gateway'
+                          'specify a gateway_group or a gateway',
+                          'Routing group must exist',
+                          'Routeset discriminator must exist'
                         )
       end.not_to change { RateManagement::Project.count }
     end

@@ -3,8 +3,8 @@
 ActiveAdmin.register Importing::Numberlist, as: 'Numberlist Imports' do
   filter :name
 
-  filter :mode_id_eq, label: 'Mode', as: :select, collection: Routing::Numberlist::MODES.invert
-  filter :default_action_id_eq, label: 'Default action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert
+  filter :mode_id_eq, label: 'Mode', as: :select, collection: Routing::Numberlist::MODES.invert, input_html: { class: 'tom-select' }
+  filter :default_action_id_eq, label: 'Default action', as: :select, collection: Routing::Numberlist::DEFAULT_ACTIONS.invert, input_html: { class: 'tom-select' }
 
   boolean_filter :is_changed
 

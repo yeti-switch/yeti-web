@@ -47,7 +47,7 @@ ActiveAdmin.register Report::CustomData, as: 'CustomItem' do
   assoc_filter_columns.each do |key|
     filter key.to_s[0..-4].to_sym,
            if: proc { @custom_cdr.group_by_include? key },
-           input_html: { class: 'chosen' }
+           input_html: { class: 'tom-select' }
 
     contractor_filter :customer_id_eq,
                       label: 'Customer',

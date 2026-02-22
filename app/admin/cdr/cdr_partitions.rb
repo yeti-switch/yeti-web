@@ -8,7 +8,7 @@ ActiveAdmin.register PartitionModel::Cdr, as: 'CDR Partition' do
   filter :parent_table_eq,
          as: :select,
          label: 'Parent Table',
-         input_html: { class: :chosen },
+         input_html: { class: 'tom-select' },
          collection: PartitionModel::Cdr.partitioned_tables
 
   controller do

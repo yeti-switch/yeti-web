@@ -21,10 +21,10 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
   end
 
   filter :name
-  filter :routing_group, input_html: { class: 'chosen' }
+  filter :routing_group, input_html: { class: 'tom-select' }
   contractor_filter :vendor_id_eq, label: 'Vendor', path_params: { q: { vendor_eq: true } }
   account_filter :account_id_eq
-  filter :routeset_discriminator, input_html: { class: 'chosen' }
+  filter :routeset_discriminator, input_html: { class: 'tom-select' }
   filter :created_at, as: :date_time_range
   filter :updated_at, as: :date_time_range
 
@@ -129,8 +129,8 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
                         'data-path-params': { 'q[contractor_id_eq]': '.vendor_id-input' }.to_json,
                         'data-required-param': 'q[contractor_id_eq]'
                       }
-      f.input :routeset_discriminator, include_blank: false, input_html: { class: 'chosen' }
-      f.input :routing_group, include_blank: false, input_html: { class: 'chosen' }
+      f.input :routeset_discriminator, include_blank: false, input_html: { class: 'tom-select' }
+      f.input :routing_group, include_blank: false, input_html: { class: 'tom-select' }
     end
 
     f.inputs 'Constant attributes' do
@@ -138,7 +138,7 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
               as: :select,
               collection: [['Yes', true], ['No', false]],
               include_blank: false,
-              input_html: { class: 'chosen' }
+              input_html: { class: 'tom-select' }
 
       f.association_ajax_input :gateway_id,
                                label: 'Gateway',
@@ -183,7 +183,7 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
               as: :select,
               collection: [['Yes', true], ['No', false]],
               include_blank: false,
-              input_html: { class: 'chosen' }
+              input_html: { class: 'tom-select' }
 
       f.input :force_hit_rate
 
@@ -191,18 +191,23 @@ ActiveAdmin.register RateManagement::Project, as: 'Rate Management Project' do
               as: :select,
               collection: [['Yes', true], ['No', false]],
               include_blank: false,
-              input_html: { class: 'chosen' }
+              input_html: { class: 'tom-select' }
 
-      f.input :routing_tag_ids, as: :select, label: 'Routing Tags',
-                                collection: routing_tag_options,
-                                multiple: true,
-                                include_hidden: false,
-                                input_html: { class: 'chosen' }
+      f.input :routing_tag_ids,
+              as: :select,
+              label: 'Routing Tags',
+              collection: routing_tag_options,
+              multiple: true,
+              include_hidden: false,
+              input_html: {
+                'data-allow-empty-option': true,
+                class: 'tom-select'
+              }
 
       f.input :routing_tag_mode_id,
               as: :select,
               include_blank: false,
-              input_html: { class: 'chosen' },
+              input_html: { class: 'tom-select' },
               collection: Routing::RoutingTagMode::MODES.invert
     end
     f.actions

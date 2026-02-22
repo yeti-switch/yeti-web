@@ -16,7 +16,7 @@ ActiveAdmin.register Log::BalanceNotification do
   account_filter :account_id_eq
   filter :event_id_eq,
          as: :select,
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          collection: Log::BalanceNotification::CONST::EVENTS
 
   index do

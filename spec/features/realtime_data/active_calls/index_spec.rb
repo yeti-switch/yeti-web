@@ -23,7 +23,7 @@ RSpec.describe 'Active Calls Index', js: true do
   context 'when filter by Node' do
     let(:filter_records!) do
       within_filters do
-        fill_in_chosen 'Node', with: node.name
+        fill_in_tom_select 'NODE', with: node.name
         click_submit('Filter')
       end
     end
@@ -39,17 +39,17 @@ RSpec.describe 'Active Calls Index', js: true do
     it 'renders table' do
       subject
       expect(page).to have_page_title('Active Calls')
-      expect(page).to have_field_chosen('Node', with: node.id)
+      expect(page).to have_field_tom_select('NODE', with: node.name)
       expect(page).to have_table_row(count: 2)
-      expect(page).to have_table_cell column: 'duration', text: calls_attributes.first[:duration].to_i
-      expect(page).to have_table_cell column: 'duration', text: calls_attributes.second[:duration].to_i
+      expect(page).to have_table_cell column: 'duration', exact_text: calls_attributes.first[:duration].to_i.to_s
+      expect(page).to have_table_cell column: 'duration', exact_text: calls_attributes.second[:duration].to_i.to_s
     end
   end
 
   context 'when filter by Customer' do
     let(:filter_records!) do
       within_filters do
-        fill_in_chosen 'Customer', with: customer.name, ajax: true
+        fill_in_tom_select 'CUSTOMER', with: customer.name, search: true
         click_submit('Filter')
       end
     end
@@ -66,16 +66,16 @@ RSpec.describe 'Active Calls Index', js: true do
     it 'renders table' do
       subject
       expect(page).to have_page_title('Active Calls')
-      expect(page).to have_field_chosen('Customer', with: customer.id)
+      expect(page).to have_field_tom_select('CUSTOMER', with: customer.display_name)
       expect(page).to have_table_row(count: 1)
-      expect(page).to have_table_cell column: 'customer', text: customer.id
+      expect(page).to have_table_cell column: 'customer', exact_text: customer.display_name
     end
   end
 
   context 'when filter by Vendor Account' do
     let(:filter_records!) do
       within_filters do
-        fill_in_chosen 'Vendor Account', with: account.name, ajax: true
+        fill_in_tom_select 'VENDOR ACCOUNT', with: account.name, search: true
         click_submit('Filter')
       end
     end
@@ -92,16 +92,16 @@ RSpec.describe 'Active Calls Index', js: true do
     it 'renders filtered results' do
       subject
       expect(page).to have_page_title('Active Calls')
-      expect(page).to have_field_chosen('Vendor Account', with: account.id)
+      expect(page).to have_field_tom_select('VENDOR ACCOUNT', with: account.display_name)
       expect(page).to have_table_row(count: 1)
-      expect(page).to have_table_cell column: 'duration', text: calls_attributes.first[:duration].to_i
+      expect(page).to have_table_cell column: 'duration', exact_text: calls_attributes.first[:duration].to_i.to_s
     end
   end
 
   context 'when filter by Customer Account' do
     let(:filter_records!) do
       within_filters do
-        fill_in_chosen 'Customer Account', with: account.name, ajax: true
+        fill_in_tom_select 'CUSTOMER ACCOUNT', with: account.name, search: true
         click_submit('Filter')
       end
     end
@@ -118,9 +118,9 @@ RSpec.describe 'Active Calls Index', js: true do
     it 'renders filtered results' do
       subject
       expect(page).to have_page_title('Active Calls')
-      expect(page).to have_field_chosen('Customer Account', with: account.id)
+      expect(page).to have_field_tom_select('CUSTOMER ACCOUNT', with: account.display_name)
       expect(page).to have_table_row(count: 1)
-      expect(page).to have_table_cell column: 'duration', text: calls_attributes.first[:duration].to_i
+      expect(page).to have_table_cell column: 'duration', exact_text: calls_attributes.first[:duration].to_i.to_s
     end
   end
 

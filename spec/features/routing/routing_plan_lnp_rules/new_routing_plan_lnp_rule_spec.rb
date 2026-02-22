@@ -15,8 +15,8 @@ RSpec.describe 'Create new Routing Plan Lnp Rule', type: :feature, js: true do
     FactoryBot.create(:lnp_database, :thinq)
     visit new_lnp_routing_plan_lnp_rule_path
 
-    aa_form.select_chosen 'Routing plan', routing_plan.name
-    aa_form.select_chosen 'Database', lnp_database.name
+    aa_form.fill_in_tom_select 'Routing plan', with: routing_plan.name
+    aa_form.fill_in_tom_select 'Database', with: lnp_database.name
   end
 
   it 'creates record' do

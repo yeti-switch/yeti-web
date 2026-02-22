@@ -7,7 +7,7 @@ module ResourceDSL
     # @param scope [Proc] should return model class or scope.
     # @param path [String] url for search query.
     # @param path_params [Hash,nil] static params for search query, default nil.
-    # @param fill_params [Proc<Hash>,nil] proc that returns dynamic params for chosen-ajax-filled collection.
+    # @param fill_params [Proc<Hash>,nil] proc that returns dynamic params for tom-select-ajax-filled collection.
     # @param fill_required [Symbol,nil] required dynamic param key, if blank collection will be empty.
     # @param options [Hash] other input params
     #   :'data-path-params' [String] json hash: key is dynamic parameter for search query, value is selector of a field.
@@ -33,7 +33,7 @@ module ResourceDSL
       end
 
       classes = [
-        fill_params.nil? ? 'chosen-ajax' : 'chosen-ajax-fillable',
+        fill_params.nil? ? 'tom-select-ajax' : 'tom-select-ajax-fillable',
         "#{name}-input",
         options.key?(:input_html) ? options[:input_html].delete(:class) : nil
       ].compact.join(' ')
@@ -44,7 +44,7 @@ module ResourceDSL
         input_html: {
           class: classes,
           'data-path': "#{path}?#{path_params&.to_param}",
-          'data-empty-option': 'Any'
+          placeholder: 'Any'
         },
         collection: collection
       }

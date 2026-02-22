@@ -32,28 +32,29 @@ ActiveAdmin.register Report::IntervalCdrScheduler, as: 'IntervalCdrScheduler' do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
-      f.input :period
+      f.input :period, input_html: { class: 'tom-select' }
       f.input :interval_length,
               as: :select,
-              collection: Report::IntervalCdr::INTERVALS.map { |num, name| [name, num] }
+              collection: Report::IntervalCdr::INTERVALS.map { |num, name| [name, num] },
+              input_html: { class: 'tom-select' }
 
-      f.input :aggregation_function
+      f.input :aggregation_function, input_html: { class: 'tom-select' }
 
       f.input :aggregate_by,
               as: :select,
-              input_html: { class: 'chosen' },
+              input_html: { class: 'tom-select' },
               collection: Report::IntervalCdr::CDR_AGG_COLUMNS
 
       f.input :filter
 
       f.input :group_by,
               as: :select,
-              input_html: { class: 'chosen', multiple: true },
+              input_html: { class: 'tom-select', multiple: true },
               collection: Report::IntervalCdr::CDR_COLUMNS
 
       f.input :send_to,
               as: :select,
-              input_html: { class: 'chosen', multiple: true },
+              input_html: { class: 'tom-select', multiple: true },
               collection: Billing::Contact.collection,
               hint: f.object.send_to_hint
     end

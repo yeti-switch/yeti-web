@@ -14,7 +14,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
          as: :select,
          collection: proc { Node.all.pluck(:name, :id) },
          label: 'Node',
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          if: proc {
            !request.xhr?
          }
@@ -23,7 +23,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
          as: :select,
          collection: proc { System::Country.all },
          label: 'Destination country',
-         input_html: { class: 'chosen' },
+         input_html: { class: 'tom-select' },
          if: proc {
            !request.xhr?
          }
@@ -45,7 +45,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
            resource_id ? Gateway.where(id: resource_id) : []
          },
          label: 'Orig GW',
-         input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search?q[allow_origination_eq]=true' }
+         input_html: { class: 'tom-select-ajax', 'data-path': '/gateways/search?q[allow_origination_eq]=true' }
 
   filter :term_gw_id_eq,
          as: :select,
@@ -55,7 +55,7 @@ ActiveAdmin.register RealtimeData::ActiveCall, as: 'Active Calls' do
          },
          label: 'Term GW',
          input_html: {
-           class: 'chosen-ajax',
+           class: 'tom-select-ajax',
            'data-path': '/gateways/search?q[allow_termination_eq]=true'
          }
 

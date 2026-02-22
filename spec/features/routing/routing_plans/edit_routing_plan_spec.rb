@@ -29,7 +29,7 @@ RSpec.describe 'Edit Routing Plan', type: :feature, js: true do
   it 'should load edit page succesfully' do
     subject
 
-    expect(page).to have_field_chosen('SRC Numberlist', with: src_numberlist.display_name)
-    expect(page).to have_field_chosen('DST Numberlist', with: dst_numberlist.display_name)
+    expect(page).to have_field_tom_select('SRC Numberlist', with: src_numberlist.display_name)
+    expect(page).to have_field_tom_select('DST Numberlist', with: dst_numberlist.display_name)
   end
 end

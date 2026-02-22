@@ -16,7 +16,7 @@ RSpec.describe 'Create new Codec Group', type: :feature, js: true do
 
     click_link 'Add New Codec group codec'
     within_form_has_many 'codec_group_codecs', index: 0 do
-      fill_in_chosen 'Codec', with: codec.name
+      fill_in_tom_select 'Codec', with: codec.name
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe 'Create new Codec Group', type: :feature, js: true do
 
       click_link 'Add New Codec group codec'
       within_form_has_many 'codec_group_codecs', index: 1 do
-        fill_in_chosen 'Codec', with: gsm_codec.name
+        fill_in_tom_select 'Codec', with: gsm_codec.name
         fill_in 'Priority', with: '50'
       end
     end

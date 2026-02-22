@@ -39,8 +39,8 @@ ActiveAdmin.register Log::EmailLog do
 
   filter :id
   filter :batch_id
-  filter :contact, collection: proc { Billing::Contact.includes(:contractor, :admin_user) }, input_html: { class: 'chosen' }
-  filter :smtp_connection, input_html: { class: 'chosen' }
+  filter :contact, collection: proc { Billing::Contact.includes(:contractor, :admin_user) }, input_html: { class: 'tom-select' }
+  filter :smtp_connection, input_html: { class: 'tom-select' }
   filter :mail_to
 
   show do

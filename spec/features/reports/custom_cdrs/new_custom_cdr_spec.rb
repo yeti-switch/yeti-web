@@ -26,8 +26,9 @@ RSpec.describe 'Create new Custom Cdr', type: :feature, js: true do
 
   let(:submit_form!) { click_submit('Create Custom cdr report') }
   let(:fill_form!) do
-    fill_in_chosen 'Group by', with: 'customer_id', no_search: true
-    fill_in_chosen 'Group by', with: 'rateplan_id', no_search: true
+    fill_in_tom_select 'Group by', with: 'customer_id', no_search: true
+    find_tom_select('Group by').click # closes tom select
+    fill_in_tom_select 'Group by', with: 'rateplan_id', no_search: true
     fill_in_date_time 'Date start', with: '2019-01-01 00:00:00'
     fill_in_date_time 'Date end', with: '2019-02-01 01:00:00'
   end
@@ -46,7 +47,7 @@ RSpec.describe 'Create new Custom Cdr', type: :feature, js: true do
 
   context 'with set range date_start date_end' do
     let(:fill_form!) do
-      fill_in_chosen 'Group by', with: 'customer_id', no_search: true
+      fill_in_tom_select 'Group by', with: 'customer_id', no_search: true
       within_form_for { click_link 'Set range' }
       within('.block_timerange') { click_on_text 'This Month' }
     end
@@ -67,7 +68,7 @@ RSpec.describe 'Create new Custom Cdr', type: :feature, js: true do
   context 'with customer' do
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Customer', with: customer.name, ajax: true
+      fill_in_tom_select 'Customer', with: customer.name, search: true
     end
     let(:expected_service_params) do
       super().merge customer: customer
@@ -79,7 +80,7 @@ RSpec.describe 'Create new Custom Cdr', type: :feature, js: true do
   context 'with send_to' do
     let(:fill_form!) do
       super()
-      fill_in_chosen 'Send to', with: contact.display_name, multiple: true
+      fill_in_tom_select 'Send to', with: contact.display_name, multiple: true
     end
     let(:expected_service_params) do
       super().merge send_to: [contact.id]

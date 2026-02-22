@@ -65,7 +65,7 @@ RSpec.describe 'CDRs index', type: :feature do
   context 'with filter by routing tags', js: true do
     let(:filter!) do
       within_filters do
-        fill_in_chosen 'With routing tag', with: routing_tag.name
+        fill_in_tom_select 'WITH ROUTING TAG', with: routing_tag.name
         click_button('Filter')
       end
     end

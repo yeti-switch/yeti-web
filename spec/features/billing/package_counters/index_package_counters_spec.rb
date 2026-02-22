@@ -35,7 +35,7 @@ RSpec.describe 'Index package counters', type: :feature, js: true do
     let!(:filtered_counters) { create_list(:billing_package_counter, 2, account:) }
     let(:filter_records!) do
       within_filters do
-        fill_in_chosen 'Account', with: account.display_name, exact: true, ajax: true
+        fill_in_tom_select 'ACCOUNT', with: account.display_name, search: account.name
       end
       click_on 'Filter'
     end
@@ -57,7 +57,7 @@ RSpec.describe 'Index package counters', type: :feature, js: true do
       end
 
       within_filters do
-        expect(page).to have_field_chosen('Account', with: account.display_name)
+        expect(page).to have_field_tom_select('ACCOUNT', with: account.display_name)
       end
     end
   end

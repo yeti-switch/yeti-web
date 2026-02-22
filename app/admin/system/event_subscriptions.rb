@@ -36,7 +36,7 @@ ActiveAdmin.register System::EventSubscription, as: 'Event Subscription' do
     f.inputs do
       f.input :send_to,
               as: :select,
-              input_html: { class: 'chosen-sortable', multiple: true },
+              input_html: { class: 'tom-select-sortable', multiple: true },
               collection: Billing::Contact.collection,
               hint: f.object.send_to_hint
 

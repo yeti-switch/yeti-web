@@ -34,10 +34,10 @@ ActiveAdmin.register System::CdrConfig do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
-      f.input :call_duration_round_mode, as: :select, include_blank: false
-      f.input :customer_price_round_mode, as: :select, include_blank: false
+      f.input :call_duration_round_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
+      f.input :customer_price_round_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
       f.input :customer_amount_round_precision
-      f.input :vendor_price_round_mode, as: :select, include_blank: false
+      f.input :vendor_price_round_mode, as: :select, include_blank: false, input_html: { class: 'tom-select' }
       f.input :vendor_amount_round_precision
       f.input :disable_realtime_statistics
     end

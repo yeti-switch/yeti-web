@@ -12,7 +12,7 @@ module ResourceDSL
           end
           text_node select_tag 'attribute',
                                options_for_select(columns_changeable.map { |c| [c.to_s.humanize, c] }),
-                               class: :chosen,
+                               class: 'tom-select',
                                id: :batch_operation_attribute
           label class: 'label', for: 'batch_operation_value' do
             'New value'

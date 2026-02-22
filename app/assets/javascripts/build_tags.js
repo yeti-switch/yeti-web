@@ -1,20 +1,32 @@
-// Build chosen field for routing tag ids select on update batch action form
+// Build tom-select field for routing tag ids select on update batch action form
 
 $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
-    var tagsChosen = $(form).find("select[name='routing_tag_ids']").prop({
-        'name': 'routing_tag_ids[]', 
-        'class': 'chosen', 
+    var tagsSelect = $(form).find("select[name='routing_tag_ids']").prop({
+        'name': 'routing_tag_ids[]',
+        'class': 'tom-select',
         'id': 'batch_update_routing_tag_ids',
         'value': null, // reset default value
         'multiple': true
-    });
+    }).attr('data-allow-empty-option', true);
     var tagsCheckbox = $('#mass_update_dialog_routing_tag_ids');
 
-    if (tagsChosen.length === 0) {
+    if (tagsSelect.length === 0) {
         return;
     }
 
-    var hidden = $('<input>', {
+    // add extra space to display tom select dropdown
+    tagsSelect.parent('li').css({ paddingBottom: '80px' })
+
+    // tom-select consider [''] as nothing selected, but in this case it's [ANY_TAG] so we must add workaround
+    var onlyAnyTagHiddenField = $('<input>', {
+        'type': 'hidden',
+        'id': 'hidden_routing_tag_ids',
+        'name': 'routing_tag_ids[]',
+        'value': '',
+        'disabled': true
+    }).appendTo(form);
+
+    var EmptyHiddenField = $('<input>', {
         'type': 'hidden',
         'id': 'hidden_routing_tag_ids',
         'name': 'routing_tag_ids',
@@ -22,17 +34,46 @@ $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
         'disabled': true
     }).appendTo(form);
 
-    tagsChosen.chosen({no_results_text: "No results matched", width: '240px', search_contains: true, allow_single_deselect: true});
+    initTomSelect(form);
+    var ts = tagsSelect[0].tomselect;
 
-    tagsChosen.change(function() {
-        tagsChosen.val().length === 0 ? hidden.prop('disabled', false) : hidden.prop('disabled', true);
+    // js array comparison is broken
+    // [''] === [''] #=> false
+    // [''] == [''] #=> false
+
+    const handleRoutingTagIdsChange = () => {
+        const onlyAnyTagSelected = ts.getValue().length === 1 && ts.getValue()[0] === '';
+        const isEmpty = ts.getValue().length === 0;
+
+        if (onlyAnyTagSelected) {
+            onlyAnyTagHiddenField.prop('disabled', false)
+            EmptyHiddenField.prop('disabled', true)
+        } else if (isEmpty) {
+            onlyAnyTagHiddenField.prop('disabled', true)
+            EmptyHiddenField.prop('disabled', false)
+        } else {
+            onlyAnyTagHiddenField.prop('disabled', true)
+            EmptyHiddenField.prop('disabled', true)
+        }
+    }
+
+    tagsSelect.on('change', function() {
+        handleRoutingTagIdsChange()
     });
 
     tagsCheckbox.change(function () {
-        if (tagsCheckbox.is(':checked') && tagsChosen.val().length === 0) {
-            hidden.prop('disabled', false);
+        if (tagsCheckbox.is(':checked')) {
+            handleRoutingTagIdsChange();
         } else {
-            hidden.prop('disabled', true);
+            onlyAnyTagHiddenField.prop('disabled', true)
+            EmptyHiddenField.prop('disabled', true)
+        }
+
+        // tom-select does not track changes of disabled attr of original select
+        if (tagsCheckbox.is(':checked')) {
+            tagsSelect[0].tomselect.enable()
+        } else {
+            tagsSelect[0].tomselect.disable()
         }
     });
 });
