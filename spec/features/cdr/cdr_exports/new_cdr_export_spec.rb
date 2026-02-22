@@ -16,8 +16,7 @@ RSpec.describe 'Create new CDR export', js: true do
 
   context 'with all filled attributes' do
     let(:fill_form!) do
-      fill_in_tom_select 'Fields', with: 'success', multiple: true
-      fill_in_tom_select 'Fields', with: 'id', multiple: true, exact: true
+      fill_in_tom_select 'Fields', with: %w[success id], exact: true
       fill_in_tom_select 'Customer acc id eq', with: account.name, search: true
       fill_in 'Time start gteq', with: '2018-01-01'
       fill_in 'Time start lteq', with: '2018-03-01'

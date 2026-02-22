@@ -51,7 +51,7 @@ module Section
 
       def select_option(text, exact: true)
         option = options(text:, exact_text: exact, minimum: 1, maximum: 1)[0]
-        root_element.scroll_to(option, :bottom)
+        # root_element.scroll_to(option, :top)
         option.click
       end
 

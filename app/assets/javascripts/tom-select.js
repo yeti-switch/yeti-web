@@ -33,11 +33,12 @@ function initTomSelect(parent) {
         if (this.tomselect) return
 
         var plugins = []
-        if ($(this).attr('multiple')) plugins.push('remove_button')
+        var $el = $(this)
+        if ($el.attr('multiple')) plugins.push('remove_button')
         if (hasBlankOption(this)) plugins.push('clear_button')
-        if (hasBlankOption(this) && !$(this).data('allow-empty-option')) {
+        if (hasBlankOption(this) && !$el.data('allow-empty-option')) {
             // delete empty option from original select to avoid duplication
-            $(this).find('option[value=""]').remove()
+            $el.find('option[value=""]').remove()
         }
         new TomSelect(this, {
             plugins: plugins,
@@ -60,12 +61,13 @@ function initTomSelect(parent) {
     parent.find('select.tom-select-sortable').each(function () {
         if (this.tomselect) return
 
-        var plugins = ['remove_button', 'drag_drop']
-        if (hasBlankOption(this) && !$(this).data('allow-empty-option')) {
-            plugins.push('clear_button')
+        var plugins = ['remove_button', 'drag_drop', 'clear_button']
+        var $el = $(this)
+        if (hasBlankOption(this) && !$el.data('allow-empty-option')) {
             // delete empty option from original select to avoid duplication
-            $(this).find('option[value=""]').remove()
+            $el.find('option[value=""]').remove()
         }
+        if ($el.data('with-search')) plugins.push('dropdown_input')
         new TomSelect(this, {
             plugins: plugins,
             // add search box only for tom-select-ajax
