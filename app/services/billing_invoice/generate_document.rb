@@ -362,9 +362,8 @@ module BillingInvoice
 
       pdf_command = "#{YetiConfig.invoice&.pdf_converter} #{Shellwords.escape(odf_path)} #{Shellwords.escape(pdf_path)}"
 
-      Open3.popen3(pdf_command) do |_stdin, _stdout, _stderr, wait_thr|
-        wait_thr.value # Process::Status object returned.
-      end
+      _stdout, _stderr, status = Open3.capture3(pdf_command)
+      status
     end
 
     def save_read_file(file_path)

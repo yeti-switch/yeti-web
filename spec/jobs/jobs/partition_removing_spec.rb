@@ -146,6 +146,14 @@ RSpec.describe Jobs::PartitionRemoving, '#call' do
       end
     end
 
+    context 'when hook produces more than 64KB on stderr' do
+      # With the old popen3 code (stdout.read then stderr.read sequentially), the subprocess
+      # fills the stderr pipe buffer (64KB) and blocks, while stdout.read waits forever — deadlock.
+      let(:hook_value) { 'bash -c "yes x | head -c 70000 >&2; echo small_stdout"' }
+
+      include_examples :should_drop_partition
+    end
+
     context 'when there are old Cdr::Cdr partitions' do
       include_examples :should_drop_partition
       include_examples :should_not_collect_prometheus_metrics

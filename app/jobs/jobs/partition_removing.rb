@@ -22,11 +22,8 @@ module Jobs
     end
 
     def execute_cmd(cmd)
-      Open3.popen3(cmd) do |_stdin, _stdout, _stderr, wait_thr|
-        o = _stdout.read
-        e = _stderr.read
-        return wait_thr.value, o, e
-      end
+      stdout, stderr, status = Open3.capture3(cmd)
+      [status, stdout, stderr]
     end
 
     def remove_partition!(partition_class, model_class)

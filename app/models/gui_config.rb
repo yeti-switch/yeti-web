@@ -79,8 +79,8 @@ class GuiConfig < ApplicationRecord
         next unless File.file?(path) && (allowed_file_prefix.blank? || f.start_with?(allowed_file_prefix))
 
         # Retrieve Script Title from stderror output of this script, otherwise use File Name
-        std = Open3.popen3(path)
-        script_name = std[2].gets || f
+        _stdout, stderr, _status = Open3.capture3(path)
+        script_name = stderr.lines.first&.chomp || f
         scripts << [script_name.chomp, f]
       end
     rescue Errno::ENOENT => _e

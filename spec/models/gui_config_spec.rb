@@ -40,5 +40,51 @@ RSpec.describe GuiConfig, type: :model do
         expect(subject).to eq([])
       end
     end
+
+    context 'when there are scripts in the import dir' do
+      let(:import_dir) { '/fake/import/dir' }
+      let(:script_file) { 'my_script.sh' }
+      let(:script_path) { File.join(import_dir, script_file) }
+
+      before do
+        allow(described_class).to receive(:import_helpers_dir).and_return(import_dir)
+        allow(Dir).to receive(:entries).with(import_dir).and_return(['.', '..', script_file])
+        allow(File).to receive(:file?).and_return(false)
+        allow(File).to receive(:file?).with(script_path).and_return(true)
+      end
+
+      context 'when script writes its name to stderr' do
+        before do
+          allow(Open3).to receive(:capture3).with(script_path)
+                                            .and_return(['', "Script Title\n", double('status')])
+        end
+
+        it 'uses first line of stderr as script name' do
+          expect(subject).to eq([['Script Title', script_file]])
+        end
+      end
+
+      context 'when script writes multiple lines to stderr' do
+        before do
+          allow(Open3).to receive(:capture3).with(script_path)
+                                            .and_return(['', "First Line\nSecond Line\n", double('status')])
+        end
+
+        it 'uses only the first line of stderr as script name' do
+          expect(subject).to eq([['First Line', script_file]])
+        end
+      end
+
+      context 'when script writes nothing to stderr' do
+        before do
+          allow(Open3).to receive(:capture3).with(script_path)
+                                            .and_return(['some output', '', double('status')])
+        end
+
+        it 'uses filename as script name when stderr is empty' do
+          expect(subject).to eq([[script_file, script_file]])
+        end
+      end
+    end
   end
 end

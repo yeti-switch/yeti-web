@@ -107,6 +107,14 @@ RSpec.describe Jobs::CdrCompaction, '#call' do
       include_examples :should_compact_successfully
       include_examples :should_not_collect_prometheus_metrics
 
+      context 'when hook produces more than 64KB on stderr' do
+        # With the old popen3 code (stdout.read then stderr.read sequentially), the subprocess
+        # fills the stderr pipe buffer (64KB) and blocks, while stdout.read waits forever — deadlock.
+        let(:cdr_compaction_hook) { 'bash -c "yes x | head -c 70000 >&2; echo small_stdout"' }
+
+        include_examples :should_compact_successfully
+      end
+
       context 'when Prometheus is enabled' do
         let(:prometheus_enabled) { true }
 
