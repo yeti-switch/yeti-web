@@ -7,8 +7,7 @@ class Api::Rest::Admin::ApiAccessResource < ::BaseResource
              :login,
              :password,
              :account_ids,
-             :allowed_ips,
-             :allow_listen_recording
+             :allowed_ips
 
   paginator :paged
 

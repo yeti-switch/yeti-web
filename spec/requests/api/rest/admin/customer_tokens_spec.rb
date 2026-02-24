@@ -11,7 +11,7 @@ RSpec.describe Api::Rest::Admin::CustomerTokensController, type: :request do
     let!(:customer) { create(:customer) }
     let!(:accounts) { create_list(:account, 2, contractor: customer) }
     let!(:numberlists) { create_list(:numberlist, 2) }
-    let!(:customer_portal_access_profile) { create(:customer_portal_access_profile) }
+    let!(:customer_portal_access_profile) { create(:customer_portal_access_profile, allow_listen_recording: true) }
     let!(:provision_gateway) { create(:gateway) }
     let(:allowed_ips) { ['127.0.0.1', '::1'] }
     let(:accounts_payload) do
@@ -32,7 +32,6 @@ RSpec.describe Api::Rest::Admin::CustomerTokensController, type: :request do
     end
     let(:json_api_request_attributes) do
       {
-        'allow-listen-recording': true,
         'allowed-ips': allowed_ips,
         'customer-portal-access-profile-id': customer_portal_access_profile.id
       }
@@ -124,7 +123,6 @@ RSpec.describe Api::Rest::Admin::CustomerTokensController, type: :request do
     context 'with invalid attributes' do
       let(:json_api_request_attributes) do
         {
-          'allow-listen-recording': nil,
           'allowed-ips': ['invalid_ip'],
           'customer-portal-access-profile-id': 2_999_999
         }
@@ -142,10 +140,6 @@ RSpec.describe Api::Rest::Admin::CustomerTokensController, type: :request do
         {
           detail: "customer - can't be blank",
           source: { pointer: '/data/relationships/customer' }
-        },
-        {
-          detail: 'allow-listen-recording - is not included in the list',
-          source: { pointer: '/data/attributes/allow-listen-recording' }
         },
         {
           detail: 'allowed-ips - Allowed IP is not valid',

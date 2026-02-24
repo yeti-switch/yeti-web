@@ -429,8 +429,8 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       end
     end
 
-    context 'when api_access.allow_listen_recording=true' do
-      before { api_access.update!(allow_listen_recording: true) }
+    context 'when customer_portal_access_profile.allow_listen_recording=true' do
+      before { api_access.customer_portal_access_profile.update!(allow_listen_recording: true) }
 
       context 'when cdr audio recorded successfully' do
         let(:cdr_attrs) do
@@ -485,8 +485,8 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       end
     end
 
-    context 'when api_access.allow_listen_recording=false' do
-      before { api_access.update!(allow_listen_recording: false) }
+    context 'when customer_portal_access_profile.allow_listen_recording=false' do
+      before { api_access.customer_portal_access_profile.update!(allow_listen_recording: false) }
 
       context 'when cdr audio recorded successfully' do
         let(:cdr_attrs) do
@@ -557,7 +557,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       end
     end
 
-    before { api_access.update!(allow_listen_recording:) }
+    before { api_access.customer_portal_access_profile.update!(allow_listen_recording:) }
 
     let(:allow_listen_recording) { true }
     let(:json_api_request_path) { "#{super()}/#{record_id}/rec" }
@@ -649,7 +649,7 @@ RSpec.describe Api::Rest::Customer::V1::CdrsController, type: :request do
       include_examples :responds_404
     end
 
-    context 'when api_access.allow_listen_recording=false' do
+    context 'when customer_portal_access_profile.allow_listen_recording=false' do
       let(:allow_listen_recording) { false }
 
       include_examples :responds_404

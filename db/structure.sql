@@ -44997,7 +44997,6 @@ CREATE TABLE sys.api_access (
     password_digest character varying NOT NULL,
     account_ids integer[] DEFAULT '{}'::integer[] NOT NULL,
     allowed_ips inet[] DEFAULT '{0.0.0.0/0,::/0}'::inet[] NOT NULL,
-    allow_listen_recording boolean DEFAULT false NOT NULL,
     created_at timestamp with time zone,
     updated_at timestamp with time zone,
     provision_gateway_id integer,
@@ -45241,7 +45240,8 @@ CREATE TABLE sys.customer_portal_access_profiles (
     incoming_statistics_total_calls_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null3 NOT NULL,
     incoming_statistics_total_duration_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null4 NOT NULL,
     incoming_statistics_total_price_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null5 NOT NULL,
-    outgoing_active_calls boolean DEFAULT true NOT NULL
+    outgoing_active_calls boolean DEFAULT true NOT NULL,
+    allow_listen_recording boolean DEFAULT false NOT NULL
 );
 
 
@@ -50618,6 +50618,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260222000000'),
 ('20260214104400'),
 ('20260214093443'),
 ('20260130163020'),

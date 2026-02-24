@@ -25,8 +25,7 @@ RSpec.describe Api::Rest::Admin::ApiAccessesController, type: :controller do
           'customer-id' => api_access.customer_id,
           'login' => api_access.login,
           'account-ids' => api_access.account_ids,
-          'allowed-ips' => api_access.allowed_ips.map(&:to_s),
-          'allow-listen-recording' => api_access.allow_listen_recording
+          'allowed-ips' => api_access.allowed_ips.map(&:to_s)
         }
       )
     end

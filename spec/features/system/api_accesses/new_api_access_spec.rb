@@ -34,30 +34,8 @@ RSpec.describe 'Create new Api Access', type: :feature, js: true do
       expect(System::ApiAccess.last).to have_attributes(
                                           login: attributes[:login],
                                           customer_id: @account.contractor.id,
-                                          allowed_ips: attributes[:formtastic_allowed_ips].split(','),
-                                          allow_listen_recording: false
+                                          allowed_ips: attributes[:formtastic_allowed_ips].split(',')
                                         )
-    end
-
-    context 'with allow_listen_recording=true' do
-      let(:attributes) do
-        super().merge allow_listen_recording: lambda {
-          check 'Allow listen recording'
-        }
-      end
-
-      it 'creates new api access successfully' do
-        click_on_submit
-
-        expect(page).to have_css('.flash_notice', text: 'Api access was successfully created.')
-
-        expect(System::ApiAccess.last).to have_attributes(
-                                            login: attributes[:login],
-                                            customer_id: @account.contractor.id,
-                                            allowed_ips: attributes[:formtastic_allowed_ips].split(','),
-                                            allow_listen_recording: true
-                                          )
-      end
     end
   end
 

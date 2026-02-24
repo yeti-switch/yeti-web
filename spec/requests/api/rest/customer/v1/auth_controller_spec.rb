@@ -209,8 +209,8 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
 
     it_behaves_like :json_api_customer_v1_check_authorization
 
-    context 'when api_access.allow_listen_recording=true' do
-      before { api_access.update!(allow_listen_recording: true) }
+    context 'when customer_portal_access_profile.allow_listen_recording=true' do
+      before { api_access.customer_portal_access_profile.update!(allow_listen_recording: true) }
 
       it 'responds with 200' do
         subject
@@ -244,8 +244,9 @@ RSpec.describe Api::Rest::Customer::V1::AuthController, type: :request do
         expect(Log::ApiLog.last!).to have_attributes(remote_ip: '127.0.0.1')
       end
 
-      context 'when api_access.allow_listen_recording=true' do
-        let(:auth_config) { super().merge allow_listen_recording: true }
+      context 'when customer_portal_access_profile.allow_listen_recording=true' do
+        let(:profile_with_recording) { create(:customer_portal_access_profile, allow_listen_recording: true) }
+        let(:auth_config) { super().merge customer_portal_access_profile_id: profile_with_recording.id }
 
         it 'responds with 200' do
           subject

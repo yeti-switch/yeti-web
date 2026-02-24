@@ -13,7 +13,7 @@ RSpec.resource 'CallAuth', document: :customer_v1 do
   let!(:customer) { FactoryBot.create(:customer, customer_attrs) }
   let(:gateway_attrs) { { contractor: customer, incoming_auth_allow_jwt: true } }
   let!(:gateway) { FactoryBot.create(:gateway, gateway_attrs) }
-  let(:api_access_attrs) { { allow_listen_recording: true, provision_gateway_id: gateway.id, login: 'admin', password: '1234567890' } }
+  let(:api_access_attrs) { { provision_gateway_id: gateway.id, login: 'admin', password: '1234567890' } }
   let!(:api_access) { create(:api_access, api_access_attrs) }
   let(:auth_token) { build_customer_token(api_access.id, expiration: 1.minute.from_now) }
 

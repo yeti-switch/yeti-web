@@ -13,7 +13,6 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
                 :password,
                 :customer_id,
                 :formtastic_allowed_ips,
-                :allow_listen_recording,
                 :provision_gateway_id,
                 :customer_portal_access_profile_id,
                 account_ids: [],
@@ -24,7 +23,6 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
   filter :id
   contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true, ordered_by: :name } }
   filter :login
-  filter :allow_listen_recording
   filter :provision_gateway,
          input_html: { class: 'chosen-ajax', 'data-path': '/gateways/search' },
          collection: proc {
@@ -44,7 +42,6 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
       end
     end
     column :allowed_ips
-    column :allow_listen_recording
     column :provision_gateway
     column :allow_outgoing_numberlists do |r|
       ul class: 'ul-list-comma-separated' do
@@ -67,7 +64,6 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
         end
       end
       row :allowed_ips
-      row :allow_listen_recording
       row :provision_gateway
       row :allow_outgoing_numberlists do
         ul do
@@ -97,7 +93,6 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
                       }
       f.input :formtastic_allowed_ips, label: 'Allowed IPs',
                                        hint: 'Array of IP separated by comma'
-      f.input :allow_listen_recording
       f.input :customer_portal_access_profile, as: :select,
                                                input_html: { class: :chosen },
                                                collection: System::CustomerPortalAccessProfile.all

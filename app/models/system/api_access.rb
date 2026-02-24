@@ -6,7 +6,6 @@
 #
 #  id                                :integer(4)       not null, primary key
 #  account_ids                       :integer(4)       default([]), not null, is an Array
-#  allow_listen_recording            :boolean          default(FALSE), not null
 #  allow_outgoing_numberlists_ids    :integer(4)       default([]), not null, is an Array
 #  allowed_ips                       :inet             default(["\"0.0.0.0/0\"", "\"::/0\""]), not null, is an Array
 #  login                             :string           not null
@@ -44,8 +43,6 @@ class System::ApiAccess < ApplicationRecord
   validates :login, :customer, presence: true
 
   validate :allowed_ips_is_valid
-  validates :allow_listen_recording, inclusion: { in: [true, false] }
-
   include WithPaperTrail
 
   validate if: :customer_id do |record|
