@@ -46,4 +46,17 @@ RSpec.describe BillingInvoice::GenerateDocument do
                      data: be_present
                    )
   end
+
+  context 'when pdf_converter produces more than 64KB on stderr' do
+    # With the old popen3 code that never reads the pipes, the subprocess fills
+    # the stderr pipe buffer (64KB) and blocks waiting for a reader — deadlock.
+    before do
+      allow(YetiConfig.invoice).to receive(:pdf_converter)
+        .and_return('bash -c "yes x | head -c 70000 >&2; echo small_stdout"')
+    end
+
+    it 'creates invoice document without deadlock' do
+      expect { subject }.to change { Billing::InvoiceDocument.count }.by(1)
+    end
+  end
 end

@@ -25,17 +25,11 @@ class Importing::Model < ActiveAdminImport::Model
       commands = [script_path.to_s]
       commands << file.tempfile.path.to_s if file.present?
       commands << file.original_filename.shellescape.to_s if file.is_a?(ActionDispatch::Http::UploadedFile)
-      Open3.popen3(commands) do |_stdin, stdout, stderr, wait_thr|
-        @contents = stdout.read
-        @script_std_err = stderr.read
-        stdout.close
-        stderr.close
-        wait_thr.value
-        if @contents.present?
-          self.file = Tempfile.new('yeti-import')
-          file << @contents
-          file.rewind
-        end
+      @contents, @script_std_err, _status = Open3.capture3(*commands)
+      if @contents.present?
+        self.file = Tempfile.new('yeti-import')
+        file << @contents
+        file.rewind
       end
 
     end

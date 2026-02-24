@@ -70,21 +70,20 @@ module Jobs
       collect_prometheus_executions_metric!
       start_time = get_time
 
-      Open3.popen3(cmd) do |_stdin, stdout, stderr, wait_thr|
-        logger.info { "Partition remove hook stdout:\n#{stdout.read}" }
-        logger.info { "Partition remove hook stderr:\n#{stderr.read}" }
-        collect_prometheus_duration_metric!(start_time)
+      stdout, stderr, status = Open3.capture3(cmd)
+      logger.info { "Partition remove hook stdout:\n#{stdout}" }
+      logger.info { "Partition remove hook stderr:\n#{stderr}" }
+      collect_prometheus_duration_metric!(start_time)
 
-        if wait_thr.value.success?
-          logger.info { "Partition remove hook succeed, exit code: #{wait_thr.value.exitstatus}" }
-          return true
-        else
-          logger.error { "Partition remove hook failed: #{wait_thr.value.exitstatus}. Stopping removing procedure" }
-          collect_prometheus_errors_metric!
-        end
-
-        return false
+      if status.success?
+        logger.info { "Partition remove hook succeed, exit code: #{status.exitstatus}" }
+        return true
+      else
+        logger.error { "Partition remove hook failed: #{status.exitstatus}. Stopping removing procedure" }
+        collect_prometheus_errors_metric!
       end
+
+      false
     end
 
     def handle_compaction_candidate!(compaction_candidate)
