@@ -6,6 +6,7 @@
 #
 #  id                                         :integer(2)       not null, primary key
 #  account                                    :boolean          default(TRUE), not null
+#  allow_listen_recording                     :boolean          default(FALSE), not null
 #  incoming_cdrs                              :boolean          default(TRUE), not null
 #  incoming_statistics                        :boolean          default(TRUE), not null
 #  incoming_statistics_acd                    :boolean          default(TRUE), not null
@@ -64,6 +65,7 @@ module System
     has_many :api_accesses, dependent: :restrict_with_error
 
     validates :name, presence: true, uniqueness: true
+    validates :allow_listen_recording, inclusion: { in: [true, false] }
 
     def display_name
       "#{name} | #{id}"

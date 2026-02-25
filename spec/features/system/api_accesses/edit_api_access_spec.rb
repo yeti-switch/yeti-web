@@ -8,38 +8,6 @@ RSpec.describe 'Update Api Access', type: :feature, js: true do
     visit edit_customer_portal_login_path(api_access.id)
   end
 
-  context 'with Allow listen recording Yes' do
-    include_context :fill_form, 'edit_system_api_access'
-    let(:attributes) do
-      {
-        allow_listen_recording: -> { check 'Allow listen recording' }
-      }
-    end
-    let(:api_access) { create(:api_access, allow_listen_recording: false) }
-
-    it 'sets api access allow_listen_recording=true' do
-      click_on_submit
-      expect(page).to have_css('.flash_notice', text: 'Api access was successfully updated.')
-      expect(api_access.reload).to have_attributes(allow_listen_recording: true)
-    end
-  end
-
-  context 'with Allow listen recording No' do
-    include_context :fill_form, 'edit_system_api_access'
-    let(:attributes) do
-      {
-        allow_listen_recording: -> { uncheck 'Allow listen recording' }
-      }
-    end
-    let(:api_access) { create(:api_access, allow_listen_recording: true) }
-
-    it 'sets api access allow_listen_recording=false' do
-      click_on_submit
-      expect(page).to have_css('.flash_notice', text: 'Api access was successfully updated.')
-      expect(api_access.reload).to have_attributes(allow_listen_recording: false)
-    end
-  end
-
   context 'validate credentials generator' do
     let!(:attributes) do
       {

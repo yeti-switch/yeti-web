@@ -6,6 +6,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
   actions :index, :show, :edit, :update, :destroy, :create, :new
 
   permit_params :name,
+                :allow_listen_recording,
                 :account,
                 :outgoing_rateplans,
                 :outgoing_cdrs,
@@ -68,6 +69,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
       row :name
       row :created_at
       row :updated_at
+      row :allow_listen_recording
       row :account
       row :outgoing_rateplans
       row :outgoing_cdrs
@@ -119,6 +121,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs form_title do
       f.input :name
+      f.input :allow_listen_recording
       f.input :account
       f.input :outgoing_rateplans
       f.input :outgoing_cdrs

@@ -75,7 +75,6 @@ ActiveAdmin.register Contractor do
             column :login
             column :allowed_ips
             column :accounts
-            column :allow_listen_recording
             column :created_at
             column :updated_at
           end

@@ -3,8 +3,7 @@
 class Api::Rest::Admin::CustomerTokenResource < BaseResource
   model_name 'CustomerTokenForm'
 
-  attributes :allow_listen_recording,
-             :allowed_ips,
+  attributes :allowed_ips,
              :customer_portal_access_profile_id,
              :token,
              :expires_at
@@ -24,7 +23,6 @@ class Api::Rest::Admin::CustomerTokenResource < BaseResource
       accounts
       allow_outgoing_numberlists
       provision_gateway
-      allow_listen_recording
       allowed_ips
       customer_portal_access_profile_id
     ]

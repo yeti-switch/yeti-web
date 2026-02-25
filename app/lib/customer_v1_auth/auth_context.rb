@@ -7,14 +7,13 @@ module CustomerV1Auth
     attribute :api_access_id
     attribute :login
     attribute :account_ids, default: []
-    attribute :allow_listen_recording, default: false
     attribute :allow_outgoing_numberlists_ids, default: []
     attribute :allowed_ips, default: ['0.0.0.0/0', '::/0']
     attribute :provision_gateway_id
 
     class << self
       def from_config(config)
-        config = config.symbolize_keys
+        config = config.symbolize_keys.except(:allow_listen_recording)
         allowed = members - %i[api_access_id login]
         config.assert_valid_keys(*allowed)
         raise ArgumentError, 'customer_id is required' if config[:customer_id].nil?
@@ -26,7 +25,6 @@ module CustomerV1Auth
         new(
           api_access_id: api_access.id,
           account_ids: api_access.account_ids,
-          allow_listen_recording: api_access.allow_listen_recording,
           allow_outgoing_numberlists_ids: api_access.allow_outgoing_numberlists_ids,
           allowed_ips: api_access.allowed_ips,
           login: api_access.login,
@@ -44,6 +42,10 @@ module CustomerV1Auth
     define_memoizable :customer_portal_access_profile, apply: lambda {
       System::CustomerPortalAccessProfile.find_by(id: customer_portal_access_profile_id)
     }
+
+    def allow_listen_recording
+      customer_portal_access_profile&.allow_listen_recording
+    end
 
     define_memoizable :provision_gateway, apply: lambda {
       Gateway.find_by(id: provision_gateway_id) if provision_gateway_id

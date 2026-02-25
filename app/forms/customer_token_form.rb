@@ -7,7 +7,6 @@ class CustomerTokenForm < ApplicationForm
 
   attribute :customer_id, :integer
   attribute :account_ids, :integer, array: true, default: []
-  attribute :allow_listen_recording, :boolean, default: false
   attribute :allow_outgoing_numberlist_ids, :integer, array: true, default: []
   attribute :allowed_ips, :string, array: true, default: %w[0.0.0.0/0 ::/0]
   attribute :customer_portal_access_profile_id, :integer, default: 1
@@ -19,7 +18,6 @@ class CustomerTokenForm < ApplicationForm
   validates :customer, presence: true
   validates :customer_portal_access_profile, presence: true
   validates :provision_gateway, presence: true, if: :provision_gateway_id
-  validates :allow_listen_recording, inclusion: { in: [true, false] }
   validate :validate_allowed_ips
   validate :validate_account_ids
 
@@ -51,7 +49,6 @@ class CustomerTokenForm < ApplicationForm
     auth_context = CustomerV1Auth::AuthContext.from_config(
       customer_id: customer_id,
       account_ids: account_ids,
-      allow_listen_recording: allow_listen_recording,
       allow_outgoing_numberlists_ids: allow_outgoing_numberlist_ids,
       allowed_ips: allowed_ips,
       customer_portal_access_profile_id: customer_portal_access_profile_id,

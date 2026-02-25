@@ -7,7 +7,7 @@ RSpec.resource 'IncomingCdrs', document: :customer_v1 do
   header 'Content-Type', 'application/vnd.api+json'
   header 'Authorization', :auth_token
 
-  let(:api_access) { create(:api_access, allow_listen_recording: true) }
+  let(:api_access) { create(:api_access, customer_portal_access_profile: create(:customer_portal_access_profile, allow_listen_recording: true)) }
   let(:vendor) { api_access.customer }
   include_context :customer_v1_cookie_helpers
   let(:auth_token) { build_customer_token(api_access.id, expiration: 1.minute.from_now) }

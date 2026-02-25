@@ -11,7 +11,7 @@ RSpec.resource 'Customer Token' do
 
     jsonapi_attributes(
       [],
-      %i[allow-listen-recording allowed-ips customer-portal-access-profile-id]
+      %i[allowed-ips customer-portal-access-profile-id]
     )
     jsonapi_relationships(
       %i[customer],
@@ -20,7 +20,6 @@ RSpec.resource 'Customer Token' do
 
     let!(:contractor) { create(:contractor, customer: true) }
 
-    let(:'allow-listen-recording') { true }
     let(:'allowed-ips') { ['10.20.30.40', '11.12.13.14'] }
     let(:'customer-portal-access-profile-id') { create(:customer_portal_access_profile).id }
     let(:customer) { wrap_relationship(:contractors, contractor.id) }
