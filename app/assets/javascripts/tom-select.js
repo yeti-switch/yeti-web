@@ -32,7 +32,7 @@ function initTomSelect(parent) {
     parent.find('select.tom-select, select.tom-select-wide').each(function () {
         if (this.tomselect) return
 
-        var plugins = []
+        var plugins = ['dropdown_input']
         var $el = $(this)
         if ($el.attr('multiple')) plugins.push('remove_button')
         if (hasBlankOption(this)) plugins.push('clear_button')
@@ -43,10 +43,10 @@ function initTomSelect(parent) {
         new TomSelect(this, {
             plugins: plugins,
             allowEmptyOption: hasBlankOption(this),
-            // add search box only for tom-select-ajax
             controlInput: null,
-            // we need to display all if we remove search input
             maxOptions: null,
+            loadThrottle: 0,
+            refreshThrottle: 0,
             onInitialize: function () {
                 // avoid selecting first option by default
                 if (!hasSelectedOption(this.input)) this.clear()
@@ -67,13 +67,13 @@ function initTomSelect(parent) {
             // delete empty option from original select to avoid duplication
             $el.find('option[value=""]').remove()
         }
-        if ($el.data('with-search')) plugins.push('dropdown_input')
+        plugins.push('dropdown_input')
         new TomSelect(this, {
             plugins: plugins,
-            // add search box only for tom-select-ajax
             controlInput: null,
-            // we need to display all if we remove search input
             maxOptions: null,
+            loadThrottle: 0,
+            refreshThrottle: 0,
             onInitialize: function () {
                 // avoid selecting first option by default
                 if (!hasSelectedOption(this.input)) this.clear()
@@ -98,11 +98,15 @@ function initTomSelect(parent) {
         initTomSelectAjaxFillable(this)
     })
 
-    // Filter form selects (disable search)
+    // Filter form selects
     parent.find('form.filter_form div.select_and_search > select').each(function () {
         if (this.tomselect) return
         new TomSelect(this, {
+            plugins: ['dropdown_input'],
             controlInput: null,
+            maxOptions: null,
+            loadThrottle: 0,
+            refreshThrottle: 0,
             render: {
                 item: tomSelectRenderItemFunc
             }

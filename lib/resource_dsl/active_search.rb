@@ -4,7 +4,7 @@ module ResourceDSL
   module ActiveSearch
     def search_support!(search_name: :search, id_column: :id)
       collection_action search_name, method: :get do
-        data = resource_class.ransack(params[:q]).result
+        data = resource_class.ransack(params[:q]).result.order(:name)
         result = data.map do |item|
           { id: item[id_column], value: item.display_name }
         end

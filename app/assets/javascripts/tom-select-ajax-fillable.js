@@ -4,8 +4,7 @@
     window.initTomSelectAjaxFillable = function(el) {
         var $el = $(el)
         var path = $el.attr('data-path')
-        if (path.includes('?') && path.indexOf('?') === -1) path += '&'
-        if (!path.includes('?') && path.indexOf('?') === -1) path += '?'
+        path += path.includes('?') ? '&' : '?'
         var pathParams = $el.data('pathParams')
         var requiredParam = $el.attr('data-required-param')
         var fillOnInit = $el.attr('data-fill-on-init')
@@ -18,7 +17,7 @@
             searchField: 'text',
             allowEmptyOption: true,
             maxOptions: null,
-            controlInput: null, // add search box only for tom-select-ajax
+            controlInput: null,
             render: {
                 no_results: tomSelectRenderNoResultsFunc,
                 item: tomSelectRenderItemFunc

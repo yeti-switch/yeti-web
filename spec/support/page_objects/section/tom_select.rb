@@ -85,7 +85,6 @@ module Section
     class << self
       def by_label(label, exact: false, parent: nil)
         parent ||= Capybara.current_session
-        # root_element = parent.find(:parent_by_label, label, exact:)
         label = parent.find(:label, text: label, exact_text: exact, match: :prefer_exact)
         ts_control = parent.find("##{label[:for]}")
         root_element = ts_control.ancestor(default_search_arguments[0])

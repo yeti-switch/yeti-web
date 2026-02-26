@@ -112,7 +112,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
          },
          input_html: {
            class: 'tom-select-ajax',
-           'data-path': '/gateways/search?q[allow_origination_eq]=true&q[ordered_by]=name'
+           'data-path': '/gateways/search?q[allow_origination_eq]=true'
          }
 
   filter :term_gw_id_eq,
@@ -124,7 +124,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
          },
          input_html: {
            class: 'tom-select-ajax',
-           'data-path': '/gateways/search?q[allow_termination_eq]=true&q[ordered_by]=name'
+           'data-path': '/gateways/search?q[allow_termination_eq]=true'
          }
 
   filter :routing_plan, collection: proc { Routing::RoutingPlan.select(%i[id name]) }, input_html: { class: 'tom-select' }

@@ -14,7 +14,7 @@ ActiveAdmin.register Report::Realtime::OriginationPerformance do
                             collection: Report::Realtime::Base::INTERVALS,
                             input_html: { class: 'tom-select' }, include_blank: false
 
-  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true, ordered_by: :name } }
+  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
 
   with_default_realtime_interval
 

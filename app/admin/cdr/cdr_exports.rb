@@ -306,7 +306,7 @@ ActiveAdmin.register CdrExport, as: 'CDR Export' do
                input_html: {
                  class: 'tom-select-ajax',
                  data: {
-                   path: '/customers_auths/search_with_return_external_id?q[ordered_by]=name&q[external_id_null]=false'
+                   path: '/customers_auths/search_with_return_external_id?q[external_id_null]=false'
                  }
                },
                collection: if ff.object.customer_auth_external_id_in.present?
