@@ -32,9 +32,11 @@ function initTomSelect(parent) {
     parent.find('select.tom-select, select.tom-select-wide').each(function () {
         if (this.tomselect) return
 
-        var plugins = ['dropdown_input']
+        var plugins = []
         var $el = $(this)
-        if ($el.attr('multiple')) plugins.push('remove_button')
+        var isMultiple = !!$el.attr('multiple')
+        if (!isMultiple) plugins.push('dropdown_input')
+        if (isMultiple) plugins.push('remove_button')
         if (hasBlankOption(this)) plugins.push('clear_button')
         if (hasBlankOption(this) && !$el.data('allow-empty-option')) {
             // delete empty option from original select to avoid duplication
@@ -43,7 +45,7 @@ function initTomSelect(parent) {
         new TomSelect(this, {
             plugins: plugins,
             allowEmptyOption: hasBlankOption(this),
-            controlInput: null,
+            controlInput: isMultiple ? undefined : null,
             maxOptions: null,
             loadThrottle: 0,
             refreshThrottle: 0,
@@ -57,7 +59,7 @@ function initTomSelect(parent) {
         })
     })
 
-    // Sortable: .tom-select-sortable
+    // Sortable: .tom-select-sortable (always multiple)
     parent.find('select.tom-select-sortable').each(function () {
         if (this.tomselect) return
 
@@ -67,10 +69,8 @@ function initTomSelect(parent) {
             // delete empty option from original select to avoid duplication
             $el.find('option[value=""]').remove()
         }
-        plugins.push('dropdown_input')
         new TomSelect(this, {
             plugins: plugins,
-            controlInput: null,
             maxOptions: null,
             loadThrottle: 0,
             refreshThrottle: 0,
