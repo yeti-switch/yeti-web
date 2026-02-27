@@ -40,11 +40,11 @@ ActiveAdmin.register Report::IntervalData, as: 'IntervalItem' do
 
   contractor_filter :customer_id,
                     label: 'Customer',
-                    path_params: { q: { customer_eq: true, ordered_by: :name } },
+                    path_params: { q: { customer_eq: true } },
                     if: proc { parent.group_by.include?('customer_id') }
   contractor_filter :vendor_id,
                     label: 'Vendor',
-                    path_params: { q: { vendor_eq: true, ordered_by: :name } },
+                    path_params: { q: { vendor_eq: true } },
                     if: proc { parent.group_by.include?('vendor_id') }
 
   with_options as: :select, input_html: { class: 'tom-select' } do |f|

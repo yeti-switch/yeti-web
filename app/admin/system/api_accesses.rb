@@ -21,7 +21,7 @@ ActiveAdmin.register System::ApiAccess, as: 'Customer Portal Login' do
   includes :customer, :provision_gateway, :customer_portal_access_profile
 
   filter :id
-  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true, ordered_by: :name } }
+  contractor_filter :customer_id_eq, label: 'Customer', path_params: { q: { customer_eq: true } }
   filter :login
   filter :provision_gateway,
          input_html: { class: 'tom-select-ajax', 'data-path': '/gateways/search' },

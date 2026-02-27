@@ -4,8 +4,7 @@
     window.initTomSelectAjax = function (el) {
         var $el = $(el)
         var path = $el.attr('data-path')
-        if (path.includes('?') && path.indexOf('?') === -1) path += '&'
-        if (!path.includes('?') && path.indexOf('?') === -1) path += '?'
+        path += path.includes('?') ? '&' : '?'
         var pathParams = $el.data('pathParams')
         var requiredParam = $el.attr('data-required-param')
         var key = 'k-' + Math.random().toString(36).substr(2, 9)

@@ -104,6 +104,10 @@
         font-size: 0.95em;
         line-height: 1.15;
 
+        > .item {
+          word-break: break-word;
+        }
+
         input {
           font-size: 0.95em;
           line-height: 1.15;
@@ -111,6 +115,11 @@
           width: unset;
           min-width: 1px;
         }
+      }
+
+      .ts-dropdown {
+        width: max-content;
+        min-width: 100%;
       }
     }
   }
@@ -123,9 +132,18 @@
       .ts-control {
         padding: 4.8px 10px 4.8px;
 
+        > .item {
+          word-break: break-word;
+        }
+
         input {
           font-size: 0.95em;
         }
+      }
+
+      .ts-dropdown {
+        width: max-content;
+        min-width: 100%;
       }
     }
   }
