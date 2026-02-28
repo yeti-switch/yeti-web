@@ -14,7 +14,7 @@
         if (!skipDropdownInput) plugins.push('dropdown_input')
 
         var ts = new TomSelect(el, {
-            plugins,
+            plugins: plugins,
             valueField: 'value',
             labelField: 'text',
             searchField: 'text',
