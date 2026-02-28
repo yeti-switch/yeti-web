@@ -45,6 +45,12 @@
     .ts-dropdown {
       border: 1px solid #A1A7B2;
 
+      // below keeps dropdown from being wider than viewport on small screens,
+      // but allows it to be wider than control if needed
+      width: max-content;
+      min-width: 100%;
+      max-width: 90vw;
+
       .option.active {
         background: #3875d7;
         color: #fff;
@@ -116,11 +122,6 @@
           min-width: 1px;
         }
       }
-
-      .ts-dropdown {
-        width: max-content;
-        min-width: 100%;
-      }
     }
   }
 
@@ -139,11 +140,6 @@
         input {
           font-size: 0.95em;
         }
-      }
-
-      .ts-dropdown {
-        width: max-content;
-        min-width: 100%;
       }
     }
   }

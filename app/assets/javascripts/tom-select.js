@@ -35,10 +35,13 @@ function initTomSelect(parent) {
         var plugins = []
         var $el = $(this)
         var isMultiple = !!$el.attr('multiple')
-        if (!isMultiple) plugins.push('dropdown_input')
+        var allowEmptyOption = !!$el.data('allow-empty-option')
+        var skipDropdownInput = !!$el.data('skip-dropdown-input')
+
+        if (!isMultiple && !skipDropdownInput) plugins.push('dropdown_input')
         if (isMultiple) plugins.push('remove_button')
         if (hasBlankOption(this)) plugins.push('clear_button')
-        if (hasBlankOption(this) && !$el.data('allow-empty-option')) {
+        if (hasBlankOption(this) && !allowEmptyOption) {
             // delete empty option from original select to avoid duplication
             $el.find('option[value=""]').remove()
         }
@@ -102,7 +105,7 @@ function initTomSelect(parent) {
     parent.find('form.filter_form div.select_and_search > select').each(function () {
         if (this.tomselect) return
         new TomSelect(this, {
-            plugins: ['dropdown_input'],
+            plugins: [],
             controlInput: null,
             maxOptions: null,
             loadThrottle: 0,
