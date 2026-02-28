@@ -19,10 +19,10 @@ RSpec.describe 'New Customer Auth', js: true do
   let(:fill_form!) do
     fill_in 'Name', with: 'Test'
     fill_in_tom_select 'Customer', with: customer.name, search: true
-    fill_in_tom_select 'Account', with: account.name, search: true
+    fill_in_tom_select 'Account', with: account.name
     fill_in_tom_select 'DST Numberlist', with: dst_numberlist.display_name, search: true
     fill_in_tom_select 'SRC Numberlist', with: src_numberlist.display_name, search: true
-    fill_in_tom_select 'Gateway', with: gateway.name, search: true
+    fill_in_tom_select 'Gateway', with: gateway.name
     fill_in_tom_select 'Rateplan', with: rateplan.name
     fill_in_tom_select 'Routing plan', with: routing_plan.name
   end

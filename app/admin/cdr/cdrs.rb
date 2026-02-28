@@ -96,7 +96,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
          label: 'Dump level',
          as: :select,
          collection: Cdr::Cdr::DUMP_LEVELS.invert,
-         input_html: { class: 'tom-select' },
+         input_html: { class: 'tom-select', 'data-skip-dropdown-input': true },
          if: proc { authorized?(:dump) }
 
   filter :disconnect_initiator_id_eq, label: 'Disconnect initiator', as: :select,
