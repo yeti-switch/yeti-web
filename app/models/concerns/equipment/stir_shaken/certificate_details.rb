@@ -51,11 +51,19 @@ module Equipment
         ext = certificate.extensions.find { |e| e.oid == TN_AUTH_LIST_OID }
         return [] if ext.nil?
 
-        tn_auth_seq = OpenSSL::ASN1.decode(OpenSSL::ASN1.decode(ext.value_der).value)
+        tn_auth_seq = decode_tn_auth_list(ext)
         entries = tn_auth_seq.value.map { |entry| format_tn_auth_entry(entry) }
         ['TNAuthList:'] + entries.map { |e| "  #{e}" }
       rescue OpenSSL::ASN1::ASN1Error
         ['TNAuthList: unable to decode']
+      end
+
+      def decode_tn_auth_list(ext)
+        decoded = OpenSSL::ASN1.decode(ext.value_der)
+        # value_der may or may not include OCTET STRING wrapper depending on
+        # how the extension was encoded. If first decode returns an OctetString,
+        # we need a second decode to get the actual TNAuthList sequence.
+        decoded.tag == OpenSSL::ASN1::OCTET_STRING ? OpenSSL::ASN1.decode(decoded.value) : decoded
       end
 
       def format_tn_auth_entry(entry)

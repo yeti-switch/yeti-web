@@ -94,9 +94,13 @@ module StirShakenCertificateHelper
       end
     end
     tn_auth_list = OpenSSL::ASN1::Sequence.new(tn_entries)
-    OpenSSL::X509::Extension.new(
-      '1.3.6.1.5.5.7.1.26',
-      OpenSSL::ASN1::OctetString.new(tn_auth_list.to_der)
-    )
+    # Build extension from raw DER to match real certificate encoding.
+    # This ensures value_der returns the TNAuthList sequence directly
+    # (without extra OCTET STRING wrapper).
+    ext_der = OpenSSL::ASN1::Sequence.new([
+                                            OpenSSL::ASN1::ObjectId.new('1.3.6.1.5.5.7.1.26'),
+                                            OpenSSL::ASN1::OctetString.new(tn_auth_list.to_der)
+                                          ])
+    OpenSSL::X509::Extension.new(ext_der.to_der)
   end
 end
