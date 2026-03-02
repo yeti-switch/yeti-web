@@ -82,7 +82,7 @@ gem 'uglifier', '>= 1.3'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'odf-report', github: 'yeti-switch/odf-report', branch: 'master-2018'
-gem 'puma', '~> 6.1'
+gem 'puma', '~> 7.2'
 gem 'puma_worker_killer'
 gem 'syslog', '~> 0.2.0' # need for syslog-logger
 gem 'syslog-logger'
