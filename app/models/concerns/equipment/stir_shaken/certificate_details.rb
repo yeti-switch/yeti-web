@@ -61,15 +61,22 @@ module Equipment
       def format_tn_auth_entry(entry)
         case entry.tag
         when 0
-          "SPC: #{entry.value.first.value}"
+          "SPC: #{asn1_entry_value(entry)}"
         when 1
-          seq = entry.value.first
+          seq = entry.value.is_a?(Array) ? entry.value.first : OpenSSL::ASN1.decode(entry.value)
           "TN Range: #{seq.value[0].value}, count: #{seq.value[1].value}"
         when 2
-          "TN: #{entry.value.first.value}"
+          "TN: #{asn1_entry_value(entry)}"
         else
           "Unknown entry tag: #{entry.tag}"
         end
+      end
+
+      # Extracts string value from ASN1 entry handling both implicit and explicit tagging.
+      # Implicit tagging (real certificates per RFC 8226): entry.value is a String.
+      # Explicit tagging: entry.value is an Array containing an ASN1 object.
+      def asn1_entry_value(entry)
+        entry.value.is_a?(String) ? entry.value : entry.value.first.value
       end
 
       def x509_name(name)
