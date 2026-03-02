@@ -45,6 +45,45 @@ RSpec.describe 'STIR/SHAKEN certificate details' do
     certificate
   end
 
+  def build_tn_auth_list_extension(entries)
+    tn_entries = entries.map do |entry|
+      case entry[:type]
+      when :spc
+        inner = OpenSSL::ASN1::IA5String.new(entry[:value])
+        OpenSSL::ASN1::ASN1Data.new([inner], 0, :CONTEXT_SPECIFIC)
+      when :range
+        start_tn = OpenSSL::ASN1::IA5String.new(entry[:start])
+        count = OpenSSL::ASN1::Integer.new(entry[:count])
+        seq = OpenSSL::ASN1::Sequence.new([start_tn, count])
+        OpenSSL::ASN1::ASN1Data.new([seq], 1, :CONTEXT_SPECIFIC)
+      when :tn
+        inner = OpenSSL::ASN1::IA5String.new(entry[:value])
+        OpenSSL::ASN1::ASN1Data.new([inner], 2, :CONTEXT_SPECIFIC)
+      end
+    end
+    tn_auth_list = OpenSSL::ASN1::Sequence.new(tn_entries)
+    OpenSSL::X509::Extension.new(
+      '1.3.6.1.5.5.7.1.26',
+      OpenSSL::ASN1::OctetString.new(tn_auth_list.to_der)
+    )
+  end
+
+  def build_certificate_with_tn_auth_list(tn_auth_entries:, signer_key:, issuer_certificate: nil)
+    key = OpenSSL::PKey::RSA.new(1024)
+    cert = build_certificate(
+      common_name: 'SHAKEN Certificate',
+      public_key: key.public_key,
+      signer_key: signer_key,
+      issuer_certificate: issuer_certificate,
+      serial: 10
+    )
+    # Re-add TNAuthList and re-sign (extensions are added before signing)
+    unsigned = OpenSSL::X509::Certificate.new(cert.to_der)
+    unsigned.add_extension(build_tn_auth_list_extension(tn_auth_entries))
+    unsigned.sign(signer_key, OpenSSL::Digest::SHA256.new)
+    unsigned
+  end
+
   shared_examples 'certificate_details' do
     let(:record) { described_class.new(base_attributes.merge(attributes)) }
     let(:base_attributes) { { name: 'test' } }
@@ -77,6 +116,65 @@ RSpec.describe 'STIR/SHAKEN certificate details' do
       details = record.certificate_details
 
       expect(details).to include('Unable to decode certificate:')
+    end
+
+    it 'displays TNAuthList with SPC entry' do
+      cert = build_certificate_with_tn_auth_list(
+        tn_auth_entries: [{ type: :spc, value: '1234' }],
+        signer_key: issuer_key,
+        issuer_certificate: issuer_certificate
+      )
+      record.certificate = cert.to_pem
+      details = record.certificate_details
+      expect(details).to include('TNAuthList:')
+      expect(details).to include('SPC: 1234')
+    end
+
+    it 'displays TNAuthList with individual TN entry' do
+      cert = build_certificate_with_tn_auth_list(
+        tn_auth_entries: [{ type: :tn, value: '12155551234' }],
+        signer_key: issuer_key,
+        issuer_certificate: issuer_certificate
+      )
+      record.certificate = cert.to_pem
+      details = record.certificate_details
+      expect(details).to include('TNAuthList:')
+      expect(details).to include('TN: 12155551234')
+    end
+
+    it 'displays TNAuthList with range entry' do
+      cert = build_certificate_with_tn_auth_list(
+        tn_auth_entries: [{ type: :range, start: '12155550000', count: 100 }],
+        signer_key: issuer_key,
+        issuer_certificate: issuer_certificate
+      )
+      record.certificate = cert.to_pem
+      details = record.certificate_details
+      expect(details).to include('TNAuthList:')
+      expect(details).to include('TN Range: 12155550000, count: 100')
+    end
+
+    it 'displays TNAuthList with multiple entries' do
+      cert = build_certificate_with_tn_auth_list(
+        tn_auth_entries: [
+          { type: :spc, value: '5678' },
+          { type: :tn, value: '12155551234' },
+          { type: :range, start: '12155550000', count: 50 }
+        ],
+        signer_key: issuer_key,
+        issuer_certificate: issuer_certificate
+      )
+      record.certificate = cert.to_pem
+      details = record.certificate_details
+      expect(details).to include('SPC: 5678')
+      expect(details).to include('TN: 12155551234')
+      expect(details).to include('TN Range: 12155550000, count: 50')
+    end
+
+    it 'does not display TNAuthList when extension is absent' do
+      record.certificate = subject_certificate.to_pem
+      details = record.certificate_details
+      expect(details).not_to include('TNAuthList')
     end
   end
 
