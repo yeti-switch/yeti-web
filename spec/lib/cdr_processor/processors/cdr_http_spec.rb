@@ -83,6 +83,16 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
     end
   end
 
+  context 'with basic auth credentials' do
+    let(:config) { super().merge('auth_user' => 'yeti', 'auth_password' => 'secret') }
+
+    it 'sends requests with basic auth header' do
+      subject
+      expect(WebMock).to have_requested(:post, config['url']).times(2)
+                                                             .with(headers: { 'Authorization' => "Basic #{Base64.strict_encode64('yeti:secret')}" })
+    end
+  end
+
   context 'permit array attribute' do
     let(:cdr_fields) { ['id'] }
 

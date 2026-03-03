@@ -81,7 +81,11 @@ module CdrProcessor
         else
           kwargs[:body] = http_body(payload)
         end
-        response = HTTPX.public_send(http_method, http_url, **kwargs)
+        client = HTTPX
+        if @params['auth_user'].present?
+          client = client.plugin(:basic_auth).basic_auth(@params['auth_user'], @params['auth_password'].to_s)
+        end
+        response = client.public_send(http_method, http_url, **kwargs)
         response.raise_for_status
         response
       end
