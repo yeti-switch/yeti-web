@@ -83,6 +83,25 @@ RSpec.describe CdrProcessor::Processors::CdrClickhouse do
     end
   end
 
+  context 'with basic auth credentials' do
+    let(:config) { super().merge(auth_user: 'yeti', auth_password: 'secret') }
+
+    let!(:stub_clickhouse_request) do
+      WebMock.stub_request(:post, config[:url])
+             .with(
+               query: expected_query,
+               body: expected_body,
+               headers: { 'Authorization' => "Basic #{Base64.strict_encode64('yeti:secret')}" }
+             )
+             .and_return(status: response_status, body: nil)
+    end
+
+    it 'sends request with basic auth header' do
+      subject
+      expect(stub_clickhouse_request).to have_been_requested
+    end
+  end
+
   context 'permit array attribute' do
     let(:config) { super().merge cdr_fields: %w[id local_tag] }
     let(:expected_body) do

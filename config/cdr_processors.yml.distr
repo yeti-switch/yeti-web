@@ -25,6 +25,8 @@ cdr_http:
   mail_subject: "Exception happened in CDR http"
   url: "http://example.com/api/cdrs"
   method: POST
+  # auth_user: user
+  # auth_password: password
   # may be an array:
   #  cdr_fields: [
   #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
@@ -64,6 +66,8 @@ cdr_clickhouse:
   mail_from: "yeti-cdr-billing@example.com"
   mail_subject: "Exception happened in CDR http"
   url: "http://clickhouse.example.com"
+  # auth_user: user
+  # auth_password: password
   clickhouse_db: main
   clickhouse_table: cdrs
   # may be an array:
