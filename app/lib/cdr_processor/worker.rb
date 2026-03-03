@@ -51,7 +51,7 @@ module CdrProcessor
       if interrupted?
         exit_code = graceful_exit ? 0 : 1
         logger.info { "[#{file}: #{line}] {exit_code:#{exit_code}} Worker has been halted with #{interrupted}" }
-        exit(exit_code)
+        exit(exit_code) # rubocop:disable Rails/Exit
       end
     end
   end
