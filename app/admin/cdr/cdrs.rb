@@ -10,8 +10,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
   decorate_with CdrDecorator
 
-  with_default_params do
-    params[:q] = { time_start_gteq_datetime_picker: 0.days.ago.beginning_of_day }
+  with_default_params if: proc { |q: nil, **_| q.blank? || q[:time_start_gteq_datetime_picker].blank? } do
+    params[:q] = params[:q]&.to_unsafe_h&.symbolize_keys || {}
+    params[:q][:time_start_gteq_datetime_picker] = 0.days.ago.beginning_of_day
     'Only CDRs started from beginning of the day showed by default'
   end
 
