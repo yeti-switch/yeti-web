@@ -50,7 +50,7 @@ jobs:
         run: echo "tag=$(v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};echo $major_version)" >> $GITHUB_OUTPUT
         id: extract_branch
 
-      - uses: yeti-switch/upload-debian-pkg-action@v2
+      - uses: yeti-switch/upload-debian-pkg-action@v4
         with:
           pkgs: '../*.deb'
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -106,7 +106,7 @@ jobs:
         run: echo "tag=$(v=${PKG_TAG##*/};major_version=${v%\.[0-9]*};echo $major_version)" >> $GITHUB_OUTPUT
         id: extract_branch
 
-      - uses: yeti-switch/upload-debian-pkg-action@v2
+      - uses: yeti-switch/upload-debian-pkg-action@v4
         with:
           pkgs: '../*.deb'
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}

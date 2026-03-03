@@ -37,7 +37,7 @@ jobs:
           name: deb12-package
           path: /__w/yeti-web/*.deb
 
-      - uses: yeti-switch/upload-debian-pkg-action@v2
+      - uses: yeti-switch/upload-debian-pkg-action@v4
         with:
           pkgs: '../*.deb'
           pkgs_to_remove: 'yeti-web'
@@ -116,7 +116,7 @@ jobs:
           name: deb13-package
           path: /__w/yeti-web/*.deb
 
-      - uses: yeti-switch/upload-debian-pkg-action@v2
+      - uses: yeti-switch/upload-debian-pkg-action@v4
         with:
           pkgs: '../*.deb'
           pkgs_to_remove: 'yeti-web'
