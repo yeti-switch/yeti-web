@@ -7,16 +7,57 @@ vendor_acc = Account.find_or_create_by!(name: 'seed_vendor_acc', contractor: ven
 
 routing_plan = Routing::RoutingPlan.find_or_create_by!(name: 'seed_routing_plan')
 rate_plan = Routing::Rateplan.find_or_create_by!(name: 'seed_routing_plan')
-customer = Contractor.find_or_create_by!(name: 'seed_customer', enabled: true, vendor: false, customer: true)
-customer_acc = Account.find_or_create_by!(name: 'seed_customer_acc', contractor: customer)
-customer_gw = Gateway.find_or_create_by!(name: 'seed_customer_gw2', contractor: customer, allow_origination: true, allow_termination: false, enabled: true, incoming_auth_password: 'pw', incoming_auth_username: 'us')
-customer_auth = CustomersAuth.find_or_create_by!(name: 'seed_customer_acc', customer: customer, account: customer_acc, gateway: customer_gw, routing_plan: routing_plan, rateplan: rate_plan, require_incoming_auth: true)
+customer = Contractor.find_or_create_by!(name: 'seed_customer22', enabled: true, vendor: false, customer: true)
+customer_acc = Account.find_or_create_by!(name: 'seed_customer_acc22', contractor: customer)
+customer_gw = Gateway.find_or_create_by!(name: 'seed_customer_gw22', contractor: customer, allow_origination: true, allow_termination: false, enabled: true, incoming_auth_password: 'pw', incoming_auth_username: 'us')
+customer_auth = CustomersAuth.find_or_create_by!(name: 'seed_customer_auth22', customer: customer, account: customer_acc, gateway: customer_gw, routing_plan: routing_plan, rateplan: rate_plan, require_incoming_auth: true)
 pop = Pop.find_or_create_by!(id: 100_500, name: 'seed-UA')
 package_counter = Billing::PackageCounter.find_or_create_by!(account_id: customer_acc.id, exclude: false, duration: 1200, prefix: 'test')
 
 100.times do
   Routing::Area.find_or_create_by!(name: "Area #{rand(200)}")
 end
+
+sample_diversion_uris = [
+  nil,
+  'sip:+12025551234@gw1.example.com',
+  '"Receptionist" <sip:1000@office.example.com>;reason=unconditional',
+  'sip:380441234567@ukr.example.net;reason=no-answer',
+  '<sip:+442071234567@london.example.com:5060>;reason=user-busy',
+  'tel:+33123456789',
+  '<sip:+12025551234@gw1.example.com>;reason=unconditional, <sip:+12025559999@gw2.example.com>;reason=no-answer',
+  'sip:1000@office.example.com, sip:2000@office.example.com, sip:3000@office.example.com'
+].freeze
+
+sample_pai_uris = [
+  nil,
+  'sip:+12025559876@carrier.example.com',
+  '"John Smith" <sip:jsmith@enterprise.example.com>',
+  '<sip:+380501234567@ukr.example.net:5060;transport=tcp>',
+  'sip:anonymous@anonymous.invalid',
+  'tel:+4915112345678',
+  '"Alice" <sip:alice@atlanta.example.com>, "Bob" <sip:bob@biloxi.example.com>',
+  'sip:+12025551111@carrier1.example.com, sip:+12025552222@carrier2.example.com'
+].freeze
+
+sample_ppi_uris = [
+  nil,
+  'sip:+12025554321@proxy.example.com',
+  '"Alice" <sip:alice@atlanta.example.com>',
+  'sip:+380671234567@mobile.example.net',
+  'tel:+81312345678'
+].freeze
+
+sample_rpid_uris = [
+  nil,
+  'sip:+12025551111@rpid.example.com',
+  '"Bob" <sip:bob@biloxi.example.com>;party=calling;screen=yes',
+  '<sip:+380441111111@kyiv.example.net>;privacy=off;screen=no',
+  'tel:+61212345678'
+].freeze
+
+sample_privacy_values = [nil, 'none', 'id', 'header', 'session', 'id;header', 'critical'].freeze
+sample_rpid_privacy_values = [nil, 'full', 'name', 'uri', 'off'].freeze
 
 200.times do
   dur = rand(-5000..5000)
@@ -97,6 +138,12 @@ end
     dst_prefix_in: '22222222222',
     to_domain: 'to.example.com',
     ruri_domain: 'ruri.example.com',
+    diversion_in: sample_diversion_uris.sample,
+    pai_in: sample_pai_uris.sample,
+    ppi_in: sample_ppi_uris.sample,
+    privacy_in: sample_privacy_values.sample,
+    rpid_in: sample_rpid_uris.sample,
+    rpid_privacy_in: sample_rpid_privacy_values.sample,
     src_prefix_routing: '11111111111',
     dst_prefix_routing: '22222222222',
     src_area: Routing::Area.offset(rand(Routing::Area.count)).first,
