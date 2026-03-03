@@ -111,8 +111,8 @@ module Section
     end
 
     def select(texts, exact: true)
-      with_opened_dropdown do
-        Array.wrap(texts).each do |text|
+      Array.wrap(texts).each do |text|
+        with_opened_dropdown do
           dropdown.select_option(text, exact:)
         end
       end
