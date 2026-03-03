@@ -95,6 +95,8 @@ class Routing::SimulationForm < ApplicationForm
 
   validates :remote_ip, ip_address: true
 
+  validate :validate_sip_uri_fields
+
   attr_reader :notices
 
   def debug
@@ -177,14 +179,14 @@ class Routing::SimulationForm < ApplicationForm
           '[]',
           interface,
           x_yeti_auth,
+          @parsed_diversion_json,
           nil,
           nil,
           nil,
-          nil,
-          nil,
-          nil,
+          @parsed_pai_json,
+          @parsed_ppi_json,
           privacy,
-          nil,
+          @parsed_rpid_json,
           rpid_privacy
         )
       end
@@ -195,5 +197,49 @@ class Routing::SimulationForm < ApplicationForm
       ApplicationRecord.connection.raw_connection.set_notice_processor(&t)
     end
     @notices.map! { |el| el.gsub('NOTICE:', '').gsub(/CONTEXT:.*/, '').gsub(%r{PL/pgSQL function .*}, '') }
+  end
+
+  def validate_sip_uri_fields
+    @parsed_diversion_json = validate_and_parse_sip_uri(:diversion, array: true)
+    @parsed_pai_json = validate_and_parse_sip_uri(:pai, array: true)
+    @parsed_ppi_json = validate_and_parse_sip_uri(:ppi)
+    @parsed_rpid_json = validate_and_parse_sip_uri(:rpid)
+  end
+
+  def validate_and_parse_sip_uri(field, array: false)
+    value = public_send(field)
+    return nil if value.blank?
+
+    if array
+      validate_and_parse_sip_uri_array(field, value)
+    else
+      validate_and_parse_single_sip_uri(field, value)
+    end
+  end
+
+  def validate_and_parse_single_sip_uri(field, value)
+    parsed = SipUriParser.parse(value)
+    if parsed.nil? || parsed['s'].nil?
+      errors.add(field, 'is not a valid SIP URI, must begin with sip:, sips: or tel: scheme')
+      return nil
+    end
+
+    parsed.to_json
+  end
+
+  def validate_and_parse_sip_uri_array(field, value)
+    parsed_list = SipUriParser.parse_multiple(value)
+    if parsed_list.blank?
+      errors.add(field, 'is not a valid SIP URI, must begin with sip:, sips: or tel: scheme')
+      return nil
+    end
+
+    invalid = parsed_list.any? { |p| p['s'].nil? }
+    if invalid
+      errors.add(field, 'contains invalid SIP URI, each entry must begin with sip:, sips: or tel: scheme')
+      return nil
+    end
+
+    parsed_list.to_json
   end
 end

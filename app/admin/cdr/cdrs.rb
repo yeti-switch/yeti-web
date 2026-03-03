@@ -222,6 +222,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
         uri_domain: resource.ruri_domain,
         from_domain: resource.from_domain,
         to_domain: resource.to_domain,
+        diversion: resource.diversion_in,
         pai: resource.pai_in,
         ppi: resource.ppi_in,
         privacy: resource.privacy_in,
