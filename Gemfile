@@ -89,6 +89,10 @@ gem 'syslog-logger'
 gem 'zip-zip'
 
 gem 'pgq_prometheus', require: false
+
+# PGQ processors dependencies
+gem 'bunny', require: false
+gem 'httpx', require: false
 gem 'prometheus_exporter', github: 'didww/prometheus_exporter', branch: 'didww', require: false
 gem 'sentry-delayed_job', require: false
 gem 'sentry-rails', require: false
@@ -124,6 +128,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'bunny-mock'
   gem 'capybara'
   gem 'capybara_active_admin', github: 'activeadmin-plugins/capybara_active_admin', require: false
   gem 'capybara-screenshot'

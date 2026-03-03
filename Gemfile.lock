@@ -210,6 +210,7 @@ GEM
       tzinfo (~> 2.0, >= 2.0.5)
     addressable (2.8.8)
       public_suffix (>= 2.0.2, < 8.0)
+    amq-protocol (2.5.1)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -252,6 +253,11 @@ GEM
     bundler-audit (0.9.1)
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
+    bunny (2.24.0)
+      amq-protocol (~> 2.3)
+      sorted_set (~> 1, >= 1.0.2)
+    bunny-mock (1.7.0)
+      bunny (>= 1.7)
     byebug (11.1.3)
     capybara (3.40.0)
       addressable
@@ -409,10 +415,13 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
     hashdiff (1.0.1)
+    http-2 (1.1.2)
     httparty (0.24.2)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
+    httpx (1.7.2)
+      http-2 (>= 1.0.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.14.0)
@@ -768,6 +777,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rbtree (0.4.6)
     rchardet (1.8.0)
     rdoc (6.12.0)
       psych (>= 4.0.0)
@@ -855,6 +865,7 @@ GEM
       concurrent-ruby (~> 1.0, >= 1.0.2)
     sentry-ruby-core (5.0.0)
       concurrent-ruby
+    set (1.1.2)
     shoulda-matchers (4.5.1)
       activesupport (>= 4.2.0)
     simplecov (0.21.2)
@@ -871,6 +882,9 @@ GEM
       capybara (~> 3.34)
       site_prism-all_there (> 3, < 5)
     site_prism-all_there (3.0.7)
+    sorted_set (1.0.3)
+      rbtree
+      set (~> 1.0)
     spreadsheet (1.3.0)
       ruby-ole
     sprockets (4.2.1)
@@ -943,6 +957,8 @@ DEPENDENCIES
   brakeman
   bullet
   bundler-audit
+  bunny
+  bunny-mock
   byebug
   capybara
   capybara-screenshot
@@ -967,6 +983,7 @@ DEPENDENCIES
   ferrum
   font-awesome-rails
   httparty (>= 0.24.0)
+  httpx
   jquery-rails
   jquery-tablesorter
   jquery-ui-rails
