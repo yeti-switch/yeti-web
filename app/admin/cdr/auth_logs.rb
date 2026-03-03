@@ -7,8 +7,9 @@ ActiveAdmin.register Cdr::AuthLog, as: 'AuthLog' do
   config.batch_actions = false
   config.sort_order = 'request_time_desc'
 
-  with_default_params do
-    params[:q] = { request_time_gteq_datetime_picker: 0.days.ago.beginning_of_day }
+  with_default_params if: proc { |q: nil, **_| q.blank? || q[:request_time_gteq_datetime_picker].blank? } do
+    params[:q] = params[:q]&.to_unsafe_h&.symbolize_keys || {}
+    params[:q][:request_time_gteq_datetime_picker] = 0.days.ago.beginning_of_day
     'Only records from beginning of the day showed by default'
   end
 
