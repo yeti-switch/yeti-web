@@ -50,7 +50,7 @@ gem 'excelinator', github: 'senid231/excelinator', branch: 'ruby3-fix'
 # TODO: switch to the official gem from rubygems.org after the 0.9.13 release
 # https://github.com/cerebris/jsonapi-resources/issues/1456#issuecomment-2710742154
 # https://github.com/cerebris/jsonapi-resources/pull/1463
-gem 'jsonapi-resources', github: 'cerebris/jsonapi-resources', branch: 'release-0-9'
+gem 'jsonapi-resources', github: 'JSONAPI-Resources/jsonapi-resources', branch: 'release-0-9'
 
 # gem 'activeadmin_async_export'
 
