@@ -26,7 +26,7 @@ RSpec.describe 'CDRs index', type: :feature do
     create_list :cdr, 2,
                 :with_id,
                 time_start: 1.hour.ago.utc,
-                routing_tag_ids: [tag_ua.id, 321, tag_us.id]
+                routing_tag_ids: [tag_ua.id, 32_321, tag_us.id]
   end
 
   let(:filter!) { nil }
@@ -43,20 +43,20 @@ RSpec.describe 'CDRs index', type: :feature do
 
     within_table_row(id: cdrs.first.id) do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
-      expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([tag_ua.name, '321', tag_us.name])
+      expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([tag_ua.name, '32321', tag_us.name])
       within_table_cell('Routing Tags') do
         expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
-        expect(page).to have_selector('.status_tag.no', exact_text: '321')
+        expect(page).to have_selector('.status_tag.no', exact_text: '32321')
         expect(page).to have_selector('.status_tag.ok', exact_text: tag_us.name)
       end
     end
 
     within_table_row(id: cdrs.second.id) do
       expect(page).to have_table_cell(column: 'Id', exact_text: cdr_no_tags.id)
-      expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([tag_ua.name, '321', tag_us.name])
+      expect(find(table_cell_selector('Routing Tags')).text.split).to match_array([tag_ua.name, '32321', tag_us.name])
       within_table_cell('Routing Tags') do
         expect(page).to have_selector('.status_tag.ok', exact_text: tag_ua.name)
-        expect(page).to have_selector('.status_tag.no', exact_text: '321')
+        expect(page).to have_selector('.status_tag.no', exact_text: '32321')
         expect(page).to have_selector('.status_tag.ok', exact_text: tag_us.name)
       end
     end

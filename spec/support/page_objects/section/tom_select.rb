@@ -107,7 +107,7 @@ module Section
     end
 
     def dropdown_open?
-      root_element[:class].include?('dropdown-active')
+      root_element.reload[:class].include?('dropdown-active')
     end
 
     def select(texts, exact: true)
@@ -120,7 +120,7 @@ module Section
 
     def search_and_select(search, select: nil, exact: true)
       with_opened_dropdown do
-        dropdown.search(search) if dropdown.has_input?(wait: 0)
+        dropdown.search(search)
         Array.wrap(select || search).each do |text|
           dropdown.select_option(text, exact:)
         end
@@ -142,8 +142,10 @@ module Section
     def with_opened_dropdown
       was_open = dropdown_open?
       control.click unless was_open
+      dropdown # waits until dropdown is visible
       result = yield
       control.native.send_keys(:escape) if !was_open && dropdown_open?
+      dropdown(visible: false) # waits until dropdown is hidden
       result
     end
   end

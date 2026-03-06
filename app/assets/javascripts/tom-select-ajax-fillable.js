@@ -3,15 +3,18 @@
 
     window.initTomSelectAjaxFillable = function(el) {
         var $el = $(el)
+        var skipDropdownInput = !!$el.data('skip-dropdown-input')
         var path = $el.attr('data-path')
         path += path.includes('?') ? '&' : '?'
         var pathParams = $el.data('pathParams')
         var requiredParam = $el.attr('data-required-param')
         var fillOnInit = $el.attr('data-fill-on-init')
         var key = 'k-' + Math.random().toString(36).substr(2, 9)
+        var plugins = ['clear_button']
+        if (!skipDropdownInput) plugins.push('dropdown_input')
 
         var ts = new TomSelect(el, {
-            plugins: ['clear_button'],
+            plugins: plugins,
             valueField: 'value',
             labelField: 'text',
             searchField: 'text',
