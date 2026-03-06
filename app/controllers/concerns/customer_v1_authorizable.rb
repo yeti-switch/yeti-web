@@ -3,10 +3,19 @@
 module CustomerV1Authorizable
   extend ActiveSupport::Concern
 
+  CUSTOMER_AUTH_CLAIMS_AUDIENCE = CustomerV1Auth::Authenticator::AUDIENCE
+
   included do
     rescue_from CustomerV1Auth::Authorizer::AuthorizationError, with: :handle_authorization_error
     # @!method auth_context [CustomerV1Auth::AuthContext,nil]
     attr_reader :auth_context
+  end
+
+  def meta
+    auth_meta = ApiLog::JwtAuthMetaBuilder.new(payload: jwt_payload_for_meta).call
+    return if auth_meta.nil?
+
+    { 'auth' => auth_meta }
   end
 
   private
@@ -48,5 +57,26 @@ module CustomerV1Authorizable
   def handle_authorization_error(error)
     logger.info "#{error.class}: #{error.message}"
     head 401
+  end
+
+  def jwt_payload_for_meta
+    token = token_for_meta
+    return if token.blank?
+
+    verify_expiration = CustomerV1Auth::Authenticator::EXPIRATION_INTERVAL.present?
+    CustomerV1Auth::TokenBuilder.decode(
+      token,
+      verify_expiration: verify_expiration,
+      aud: CUSTOMER_AUTH_CLAIMS_AUDIENCE
+    )
+  end
+
+  def token_for_meta
+    return @auth_token if defined?(@auth_token) && @auth_token.present?
+
+    header_token = request.headers['Authorization']&.split&.last
+    return header_token if header_token.present?
+
+    request.cookies[CustomerV1Auth::Authenticator::COOKIE_NAME]
   end
 end
