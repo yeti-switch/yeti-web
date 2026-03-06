@@ -28,7 +28,7 @@ module CaptureError
         sentry_config.dsn = YetiConfig.sentry.dsn
         sentry_config.release = Rails.configuration.app_build_info.fetch('version', 'unknown')
         sentry_config.environment = YetiConfig.sentry.environment
-        sentry_config.logger = Rails.logger
+        sentry_config.sdk_logger = Rails.logger
         sentry_config.inspect_exception_causes_for_exclusion = false
 
         # use Rails' parameter filter to sanitize the event
@@ -46,7 +46,7 @@ module CaptureError
         # See https://github.com/getsentry/sentry-ruby/issues/1522
         # and https://docs.sentry.io/platforms/ruby/configuration/options/#optional-settings
         sentry_config.send_default_pii = true
-        sentry_config.breadcrumbs_logger = %i[sentry_logger active_support_logger]
+        sentry_config.breadcrumbs_logger = %i[http_logger active_support_logger]
         sentry_config.project_root = Rails.root.to_s
         sentry_config.trusted_proxies += Array(Rails.application.config.action_dispatch.trusted_proxies)
       end

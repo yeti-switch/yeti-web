@@ -1,15 +1,6 @@
 # frozen_string_literal: true
 
-# Temporarily hide Sentry to prevent httpx from auto-loading
-# its incompatible sentry adapter (httpx 1.7 vs sentry-ruby 5.x).
-if defined?(Sentry)
-  _sentry_mod = Sentry
-  Object.send(:remove_const, :Sentry)
-  require 'httpx'
-  Object.const_set(:Sentry, _sentry_mod)
-else
-  require 'httpx'
-end
+require 'httpx'
 
 module CdrProcessor
   module Processors
