@@ -64,8 +64,8 @@ gem 'paper_trail'
 gem 'parallel'
 
 # Assets
-gem 'sass-rails'
 gem 'erb', '< 6' # erb 6.x is incompatible with sprockets ERB processing
+gem 'sass-rails'
 gem 'sprockets'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'chosen-rails', '1.5.2', require: 'chosen-rails/engine'
