@@ -16,16 +16,19 @@ module CdrProcessor
     end
 
     # @param processor_name [String]
-    # @param duration_ms [Numeric] batch processing duration in milliseconds
+    # @param duration_ms [Numeric] total batch processing duration in milliseconds
+    # @param perform_group_duration_ms [Numeric, nil] time spent sending data to target in milliseconds
     # @param events_count [Integer]
-    def send_batch_metric(processor_name:, duration_ms:, events_count:)
-      @client.send_json(
+    def send_batch_metric(processor_name:, duration_ms:, perform_group_duration_ms:, events_count:)
+      metric = {
         type: 'yeti_cdr_processor',
         metric_labels: { processor: processor_name },
         batches: 1,
         events: events_count,
         duration: duration_ms
-      )
+      }
+      metric[:perform_group_duration] = perform_group_duration_ms if perform_group_duration_ms
+      @client.send_json(metric)
     end
   end
 end

@@ -28,7 +28,8 @@ RSpec.describe CdrProcessorCollector, '#metrics' do
           metric_labels: { processor: 'cdr_billing' },
           batches: 1,
           events: 10,
-          duration: 150.5
+          duration: 150.5,
+          perform_group_duration: 120.3
         }.deep_stringify_keys
       )
     end
@@ -37,7 +38,8 @@ RSpec.describe CdrProcessorCollector, '#metrics' do
       is_expected.to match_array [
         'yeti_cdr_processor_batches_total{processor="cdr_billing"} 1',
         'yeti_cdr_processor_events_total{processor="cdr_billing"} 10',
-        'yeti_cdr_processor_duration_ms_total{processor="cdr_billing"} 150.5'
+        'yeti_cdr_processor_duration_ms_total{processor="cdr_billing"} 150.5',
+        'yeti_cdr_processor_perform_group_duration_ms_total{processor="cdr_billing"} 120.3'
       ]
     end
   end
@@ -49,7 +51,8 @@ RSpec.describe CdrProcessorCollector, '#metrics' do
           metric_labels: { processor: 'cdr_billing' },
           batches: 1,
           events: 10,
-          duration: 150.5
+          duration: 150.5,
+          perform_group_duration: 120.3
         }.deep_stringify_keys
       )
       described_instance.collect(
@@ -57,7 +60,8 @@ RSpec.describe CdrProcessorCollector, '#metrics' do
           metric_labels: { processor: 'cdr_billing' },
           batches: 1,
           events: 5,
-          duration: 80.3
+          duration: 80.3,
+          perform_group_duration: 60.1
         }.deep_stringify_keys
       )
       described_instance.collect(
@@ -65,7 +69,8 @@ RSpec.describe CdrProcessorCollector, '#metrics' do
           metric_labels: { processor: 'cdr_stats' },
           batches: 1,
           events: 3,
-          duration: 20.0
+          duration: 20.0,
+          perform_group_duration: 15.0
         }.deep_stringify_keys
       )
     end
@@ -75,9 +80,11 @@ RSpec.describe CdrProcessorCollector, '#metrics' do
         'yeti_cdr_processor_batches_total{processor="cdr_billing"} 2',
         'yeti_cdr_processor_events_total{processor="cdr_billing"} 15',
         'yeti_cdr_processor_duration_ms_total{processor="cdr_billing"} 230.8',
+        'yeti_cdr_processor_perform_group_duration_ms_total{processor="cdr_billing"} 180.4',
         'yeti_cdr_processor_batches_total{processor="cdr_stats"} 1',
         'yeti_cdr_processor_events_total{processor="cdr_stats"} 3',
-        'yeti_cdr_processor_duration_ms_total{processor="cdr_stats"} 20.0'
+        'yeti_cdr_processor_duration_ms_total{processor="cdr_stats"} 20.0',
+        'yeti_cdr_processor_perform_group_duration_ms_total{processor="cdr_stats"} 15.0'
       ]
     end
   end

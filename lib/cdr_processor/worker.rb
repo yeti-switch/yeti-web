@@ -44,6 +44,7 @@ module CdrProcessor
         @prometheus.send_batch_metric(
           processor_name: @processor_name,
           duration_ms: duration_ms,
+          perform_group_duration_ms: @processor.last_perform_group_duration_ms,
           events_count: processed_count
         )
       end

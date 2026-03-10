@@ -18,7 +18,7 @@ module CdrProcessor
       end
 
       def perform_events(events)
-        perform_group events.map(&:data)
+        perform_group_with_timing events.map(&:data)
       end
 
       def perform_group(events)

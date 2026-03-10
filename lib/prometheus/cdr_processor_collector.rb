@@ -11,6 +11,9 @@ class CdrProcessorCollector < PrometheusExporter::Server::TypeCollector
     @duration = PrometheusExporter::Metric::Counter.new(
       'yeti_cdr_processor_duration_ms_total', 'Total time spent processing CDR batches in milliseconds'
     )
+    @perform_group_duration = PrometheusExporter::Metric::Counter.new(
+      'yeti_cdr_processor_perform_group_duration_ms_total', 'Total time spent sending data to target in milliseconds'
+    )
   end
 
   def type
@@ -18,7 +21,7 @@ class CdrProcessorCollector < PrometheusExporter::Server::TypeCollector
   end
 
   def metrics
-    [@batches, @events, @duration]
+    [@batches, @events, @duration, @perform_group_duration]
   end
 
   def collect(obj)
@@ -27,6 +30,7 @@ class CdrProcessorCollector < PrometheusExporter::Server::TypeCollector
     @batches.observe(obj['batches'], labels) if obj['batches']
     @events.observe(obj['events'], labels) if obj['events']
     @duration.observe(obj['duration'], labels) if obj['duration']
+    @perform_group_duration.observe(obj['perform_group_duration'], labels) if obj['perform_group_duration']
   end
 
   private

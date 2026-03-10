@@ -2,7 +2,11 @@
 
 RSpec.describe CdrProcessor::Worker do
   let(:logger) { Logger.new(IO::NULL) }
-  let(:processor) { double('processor', class: double(name: 'CdrProcessor::Processors::CdrBilling')) }
+  let(:processor) do
+    double('processor',
+           class: double(name: 'CdrProcessor::Processors::CdrBilling'),
+           last_perform_group_duration_ms: 50.0)
+  end
   let(:prometheus) { nil }
   let(:worker) do
     described_class.new(
@@ -39,12 +43,13 @@ RSpec.describe CdrProcessor::Worker do
           allow(processor).to receive(:perform_batch).and_return(5)
         end
 
-        it 'sends metrics to prometheus' do
+        it 'sends metrics with perform_group_duration_ms' do
           worker.process_batch
 
           expect(prometheus).to have_received(:send_batch_metric).with(
             processor_name: 'cdr_billing',
             duration_ms: a_value > 0,
+            perform_group_duration_ms: 50.0,
             events_count: 5
           )
         end

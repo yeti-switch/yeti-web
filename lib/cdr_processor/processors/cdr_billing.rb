@@ -10,7 +10,7 @@ module CdrProcessor
         events.each do |event|
           group << event.data
         end
-        perform_group(group)
+        perform_group_with_timing(group)
       end
 
       # {'type' => [events]}

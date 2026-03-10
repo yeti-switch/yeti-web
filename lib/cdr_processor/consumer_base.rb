@@ -6,6 +6,7 @@ module CdrProcessor
     @consumer_name = 'default'
 
     attr_accessor :logger, :queue_name, :consumer_name
+    attr_reader :last_perform_group_duration_ms
 
     def self.cdr_connection
       CdrProcessor::CdrDb.connection
