@@ -16,25 +16,19 @@ jobs:
         with:
           path: |
             vendor
-            pgq-processors/vendor
             .bundle
-            pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: install gems
         run: make gems-test
-      - name: install gems for pgq
-        run: make pgq-processors-gems
       - name: Caching gems
         uses: actions/cache@v4
         with:
           path: |
             vendor
-            pgq-processors/vendor
             .bundle
-            pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
   lint:
     name: Rubocop and bundle audit
@@ -48,11 +42,9 @@ jobs:
         with:
           path: |
             vendor
-            pgq-processors/vendor
             .bundle
-            pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Rubocop and bundle audit
         run: make lint
 
@@ -71,11 +63,9 @@ jobs:
         with:
           path: |
             vendor
-            pgq-processors/vendor
             .bundle
-            pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: run make database_consistency
         continue-on-error: true
         run: make database_consistency
@@ -109,43 +99,12 @@ jobs:
         with:
           path: |
             vendor
-            pgq-processors/vendor
             .bundle
-            pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: brakeman
         continue-on-error: true
         run: make brakeman
-
-  pgq-processors:
-    name: PqQ processors tests
-    runs-on: ubuntu-latest
-    container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
-    services:
-      db:
-        image: ghcr.io/yeti-switch/yeti-web/pgsql:18
-
-    needs: gems-caching
-    steps:
-      - uses: actions/checkout@v4
-      - name: use cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            vendor
-            pgq-processors/vendor
-            .bundle
-            pgq-processors/.bundle
-            /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
-      - name: Run test-pgq-processors
-        run: make test-pgq-processors
-        env:
-          YETI_DB_HOST: db
-          YETI_DB_PORT: 5432
-          CDR_DB_HOST: db
-          CDR_DB_PORT: 5432
 
   rspec:
     name: Rspec tests
@@ -174,11 +133,9 @@ jobs:
         with:
           path: |
             vendor
-            pgq-processors/vendor
             .bundle
-            pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
       - name: Clear tmp cache
         run: rm -rf tmp
@@ -225,11 +182,9 @@ jobs:
         with:
           path: |
             vendor
-            pgq-processors/vendor
             .bundle
-            pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
 
       - name: Run rspec
         run: cp -v config/ldap.yml.distr config/ldap.yml && make rspec
@@ -271,11 +226,9 @@ jobs:
         with:
           path: |
             vendor
-            pgq-processors/vendor
             .bundle
-            pgq-processors/.bundle
             /opt/yeti-web/vendor/rbenv
-          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('pgq-processors/Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
+          key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: Download Coverage Outputs
         uses: actions/download-artifact@v4
         with:

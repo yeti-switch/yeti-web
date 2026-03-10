@@ -50,7 +50,6 @@ module CoverageHelper
       add_filter '/debian/'
       add_filter '/doc/'
       add_filter '/log/'
-      add_filter '/pgq-processors/'
       add_filter '/public/'
       add_filter '/script/'
       add_filter '/spec/'

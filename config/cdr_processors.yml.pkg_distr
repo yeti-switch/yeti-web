@@ -1,0 +1,12 @@
+log_level: info
+
+billing:
+  mode: production
+  class: cdr_billing
+  queue: cdr_billing
+  consumer: cdr_billing
+
+stats:
+  mode: production
+  class: cdr_stat
+  stored_procedure: switch.async_cdr_statistics

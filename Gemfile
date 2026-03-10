@@ -90,7 +90,7 @@ gem 'zip-zip'
 
 gem 'pgq_prometheus', require: false
 
-# PGQ processors dependencies
+# CDR processor dependencies
 gem 'bunny', require: false
 gem 'httpx', require: false
 gem 'prometheus_exporter', github: 'didww/prometheus_exporter', branch: 'didww', require: false
