@@ -1,33 +1,29 @@
+# Possible values: debug, info, warn, error, fatal
+log_level: info
+
 prometheus:
   enabled: false
   host: localhost
   port: 9394
+  default_labels:
+    host: my-host
 
-cdr_billing:
+billing:
   mode: production
   class: cdr_billing
   queue: cdr_billing
   consumer: cdr_billing
-  syslog_program_name: "yeti-cdr-billing"
-  mail_to: "bug-report@yeti-switch.org"
-  mail_from: "yeti-cdr-billing@example.com"
-  mail_subject: "Exception happened in CDR billing"
 
-cdr_stats:
+stats:
   mode: production
   class: cdr_stat
   stored_procedure: switch.async_cdr_statistics
-  syslog_program_name: "yeti-cdr-stats"
 
-cdr_http:
+http:
   mode: production
   class: cdr_http
   queue: cdr_billing
   consumer: cdr_billing
-  syslog_program_name: "yeti-cdr-billing"
-  mail_to: "bug-report@yeti-switch.org"
-  mail_from: "yeti-cdr-billing@example.com"
-  mail_subject: "Exception happened in CDR http"
   url: "http://example.com/api/cdrs"
   method: POST
   # auth_user: user
@@ -41,15 +37,11 @@ cdr_http:
   #              ]
   cdr_fields: all
 
-cdr_amqp:
+amqp:
   mode: production
   class: cdr_amqp
   queue: cdr_streaming
   consumer: cdr_amqp
-  syslog_program_name: "yeti-cdr-billing"
-  mail_to: "bug-report@yeti-switch.org"
-  mail_from: "yeti-cdr-billing@example.com"
-  mail_subject: "Exception happened in CDR AMQP"
   connect:
     host: "127.0.0.1"
     port: 5672
@@ -61,15 +53,11 @@ cdr_amqp:
     frame_max: 131072
     auth_mechanism: "PLAIN"
 
-cdr_clickhouse:
+clickhouse:
   mode: production
   class: cdr_clickhouse
   queue: cdr_billing
   consumer: cdr_clickhouse
-  syslog_program_name: "yeti-cdr-billing"
-  mail_to: "bug-report@yeti-switch.org"
-  mail_from: "yeti-cdr-billing@example.com"
-  mail_subject: "Exception happened in CDR http"
   url: "http://clickhouse.example.com"
   # auth_user: user
   # auth_password: password

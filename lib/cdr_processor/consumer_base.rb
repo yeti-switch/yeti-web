@@ -66,7 +66,7 @@ module CdrProcessor
 
         events = pgq_events.map { |ev| CdrProcessor::Event.new(self, ev) }
         size = events.size
-        log_info "=> batch(#{@batch_id}): events #{size}"
+        log_info "batch(#{@batch_id}): events #{size}"
 
         perform_events(events)
 
@@ -92,7 +92,7 @@ module CdrProcessor
     end
 
     def perform_event(event)
-      logger.info "performing event: Event: #{event.id}, Batch: #{@batch_id}"
+      logger.debug "performing event: Event: #{event.id}, Batch: #{@batch_id}"
 
       CdrProcessor::Worker.check_interrupted(__FILE__, __LINE__)
 
@@ -100,14 +100,14 @@ module CdrProcessor
       data = event.data
 
       if event.done?
-        log_info("An event #{type} has done")
+        log_debug("An event #{type} has done")
         return
       end
 
       perform(type, data)
 
       event.done!
-      log_info("Set an event #{type} to done")
+      log_debug("Set an event #{type} to done")
     rescue Exception => ex
       log_error(event.exception_message(ex))
       raise ex
@@ -127,7 +127,7 @@ module CdrProcessor
     def finish_batch
       return unless @batch_id
 
-      log_info "Finishing batch #{@batch_id}"
+      log_debug "Finishing batch #{@batch_id}"
 
       CdrProcessor::CdrDb.pgq_finish_batch(@batch_id)
       @batch_id = nil
@@ -146,6 +146,10 @@ module CdrProcessor
     end
 
     # == log methods
+
+    def log_debug(mes)
+      @logger&.debug(mes)
+    end
 
     def log_info(mes)
       @logger&.info(mes)

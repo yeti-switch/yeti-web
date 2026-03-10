@@ -25,7 +25,7 @@ module CdrProcessor
             return -1
           end
 
-          log_info "=> batch: events #{events_qty}"
+          log_info "batch: events #{events_qty}"
           events_qty
         end
       end

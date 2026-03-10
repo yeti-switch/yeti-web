@@ -87,11 +87,19 @@ require 'cdr_processor/processors/cdr_clickhouse'
 require 'cdr_processor/worker'
 
 # Setup
-Process.setproctitle("cdr_processor:#{processor_name}")
+prog_name = "cdr_processor:#{processor_name}"
+Process.setproctitle(prog_name)
+$PROGRAM_NAME = prog_name
 
 $stdout.sync = true
-logger = Logger.new($stdout)
-logger.level = Logger::INFO
+logger = Logger.new($stdout, progname: prog_name)
+logger.level = all_config.fetch('log_level', 'info').upcase
+logger.formatter = proc { |severity, time, _progname, msg|
+  "#{time.strftime('%Y-%m-%dT%H:%M:%S.%6N')} #{severity} #{msg}\n"
+}
+
+# Enable ActiveRecord SQL logging at debug level
+ActiveRecord::Base.logger = logger
 
 # Signal handlers
 trap('HUP') { CdrProcessor::Worker.shutdown!('HUP') }
@@ -112,7 +120,8 @@ if prometheus_config&.fetch('enabled', false)
   require 'cdr_processor/prometheus'
   prometheus = CdrProcessor::Prometheus.new(
     host: prometheus_config['host'],
-    port: prometheus_config['port']
+    port: prometheus_config['port'],
+    default_labels: prometheus_config.fetch('default_labels', {})
   )
   logger.info "Prometheus metrics enabled (#{prometheus_config['host']}:#{prometheus_config['port']})"
 end

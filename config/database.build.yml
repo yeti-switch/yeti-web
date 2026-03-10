@@ -2,9 +2,7 @@ production:
   primary: &build
     adapter: postgresql
     encoding: unicode
-    # PGQ_PROCESSORS_TEST is set to true for pgq-processors tests to create separate db
-    # to not interfere with main test suite when running make tasks in parallel e.g. make -j 4
-    database: yeti_build<%= '-pgq-processors' if ENV['PGQ_PROCESSORS_TEST'] %><%= ENV['TEST_ENV_NUMBER'] %>
+    database: yeti_build<%= ENV['TEST_ENV_NUMBER'] %>
     pool: 5
     username: postgres
     password:
@@ -19,9 +17,7 @@ production:
   cdr: &build_cdr
     adapter: postgresql
     encoding: unicode
-    # PGQ_PROCESSORS_TEST is set to true for pgq-processors tests to create separate db
-    # to not interfere with main test suite when running make tasks in parallel e.g. make -j 4
-    database: yeti_cdr_build<%= '-pgq-processors' if ENV['PGQ_PROCESSORS_TEST'] %><%= ENV['TEST_ENV_NUMBER'] %>
+    database: yeti_cdr_build<%= ENV['TEST_ENV_NUMBER'] %>
     pool: 5
     username: postgres
     password:

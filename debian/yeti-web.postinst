@@ -3,14 +3,10 @@
 user=yeti-web
 services="yeti-web.service yeti-scheduler.service yeti-delayed-job.service yeti-prometheus.service"
 
-case "$1" in 
+case "$1" in
 	configure)
 		#apply files permissions for new user
 		chown -R $user:$user /opt/$user
-
-		if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
-			deb-systemd-invoke restart rsyslog.service >/dev/null || true
-		fi
 
 		if [ -x /usr/bin/deb-systemd-helper ]; then
 			deb-systemd-helper unmask ${services} >/dev/null || true
@@ -28,12 +24,12 @@ case "$1" in
 
 		if [ -d /run/systemd/system ]; then
 			systemctl --system daemon-reload >/dev/null || true
-			systemctl enable yeti-cdr-billing@cdr_billing
-			systemctl enable yeti-cdr-billing@cdr_stats
+			systemctl enable yeti-cdr-processor@billing
+			systemctl enable yeti-cdr-processor@stats
 		fi
 
-		if [ ! -f /opt/yeti-web/config/pgq_processors.yml ]; then
-			cp -p /opt/yeti-web/config/pgq_processors.yml.distr /opt/yeti-web/config/pgq_processors.yml
+		if [ ! -f /opt/yeti-web/config/cdr_processors.yml ]; then
+			cp -p /opt/yeti-web/config/cdr_processors.yml.pkg_distr /opt/yeti-web/config/cdr_processors.yml
 		fi
 
 	;;

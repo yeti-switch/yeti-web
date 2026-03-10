@@ -17,7 +17,6 @@ app_files :=	bin \
 		public \
 		Rakefile \
 		vendor \
-		pgq-processors \
 		$(version_file) \
 		vendor/rbenv \
 		.ruby-version
@@ -27,6 +26,7 @@ exclude_files :=	config/database.yml \
 			config/click_house.yml \
 			config/policy_roles.yml \
 			config/secrets.yml \
+			config/cdr_processors.yml.distr \
 			*.o \
 			*.a
 
@@ -66,7 +66,7 @@ endef
 
 ###### Rules ######
 .PHONY: all
-all: docs assets pgq-processors-gems
+all: docs assets
 
 
 debian/changelog:
@@ -170,11 +170,6 @@ assets:	gems config/database.yml config/yeti_web.yml config/policy_roles.yml con
 	RAILS_ENV=production RAILS_COMPILE_ASSETS=true $(bundle_bin) exec rake assets:precompile
 
 
-.PHONY: pgq-processors-gems
-pgq-processors-gems:
-	$(info:msg=call pgq-processors processing)
-	$(MAKE) -C pgq-processors
-
 
 .PHONY: prepare-test-db
 prepare-test-db: gems-test config/database.yml config/yeti_web.yml config/policy_roles.yml
@@ -201,7 +196,7 @@ endif
 
 
 .PHONY: test
-test: test-pgq-processors lint brakeman rspec
+test: lint brakeman rspec
 
 
 .PHONY: rspec
@@ -240,21 +235,6 @@ coverage_report: gems-test config/database.yml config/yeti_web.yml config/secret
 	$(info:msg=Generate coverage report)
 	$(bundle_bin) exec rake coverage:report
 
-.PHONY: test-pgq-processors
-test-pgq-processors: config/database.yml config/yeti_web.yml config/policy_roles.yml config/secrets.yml
-	$(info:msg=Preparing test database for pgq-processors)
-	@# PGQ_PROCESSORS_TEST is used in database_build.yml to setup separate db
-	@# to not interfere with main test suite when running make tasks in parallel
-	RAILS_ENV=test PGQ_PROCESSORS_TEST=true $(bundle_bin) exec rake \
-		db:drop \
-		db:create \
-		db:schema:load \
-		db:migrate \
-		db:seed
-	$(info:msg=Run pgq-processors tests)
-	$(MAKE) -C pgq-processors test
-	RAILS_ENV=test PGQ_PROCESSORS_TEST=true $(bundle_bin) exec rake db:drop
-
 
 vendor/rbenv:
 	cp -r "$(RBENV_ROOT)" vendor/
@@ -266,14 +246,11 @@ install: $(app_files)
 	@mkdir -p $(DESTDIR)$(app_dir)
 	tar -c --no-auto-compress $(addprefix --exclude , $(exclude_files)) $^ | tar -x -C $(DESTDIR)$(app_dir)
 	@mkdir -v -p $(addprefix $(DESTDIR)$(app_dir)/, log tmp )
-	@install -v -m0644 -D debian/$(pkg_name).rsyslog $(DESTDIR)/etc/rsyslog.d/$(pkg_name).conf
-	@install -v -m0644 -d $(DESTDIR)/var/log/yeti
 
 
 .PHONY: clean
 clean:
 	$(info:msg=Cleaning)
-	$(MAKE) -C pgq-processors clean
 	rm -rf 	public/assets \
 		.bundle \
 		doc/api
