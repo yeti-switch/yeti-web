@@ -25,6 +25,7 @@ ExecStart=/opt/yeti-web/vendor/rbenv/shims/ruby \
 	/opt/yeti-web/bin/prometheus_exporter \
 	-a /opt/yeti-web/lib/prometheus_collectors.rb
 
+SyslogIdentifier=yeti-prometheus
 Type=simple
 Restart=always
 RestartSec=30s
