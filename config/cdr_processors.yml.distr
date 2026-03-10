@@ -1,7 +1,12 @@
+# Possible values: debug, info, warn, error, fatal
+log_level: info
+
 prometheus:
   enabled: false
   host: localhost
   port: 9394
+  default_labels:
+    host: my-host
 
 cdr_billing:
   mode: production

@@ -73,6 +73,9 @@ module CdrProcessor
           kwargs[:body] = http_body(payload)
         end
         client = HTTPX
+        if logger.debug?
+          client = client.with(debug: logger, debug_level: 1)
+        end
         if @params['auth_user'].present?
           client = client.plugin(:basic_auth).basic_auth(@params['auth_user'], @params['auth_password'].to_s)
         end
@@ -82,7 +85,7 @@ module CdrProcessor
       end
 
       def log_response(response)
-        logger.info { "Success #{response.status} #{response.body}" }
+        logger.debug { "Success #{response.status} #{response.body}" }
       end
 
       def permit_field_for(event)

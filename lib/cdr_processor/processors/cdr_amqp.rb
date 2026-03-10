@@ -23,7 +23,7 @@ module CdrProcessor
       end
 
       def send_event_by_amqp(event)
-        logger.info "Sending cdr #{event.try :id}"
+        logger.debug "Sending cdr #{event.try :id}"
         unless event_done?(event[:id])
           @exchange.publish(event.to_json)
           event_done!(event[:id])

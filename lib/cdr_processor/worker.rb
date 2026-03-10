@@ -40,12 +40,12 @@ module CdrProcessor
       processed_count = @processor.perform_batch
       duration_ms = (Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time) * 1000
 
-      if @prometheus && processed_count.to_i > 0
+      if @prometheus && processed_count.to_i != 0
         @prometheus.send_batch_metric(
           processor_name: @processor_name,
           duration_ms: duration_ms,
           perform_group_duration_ms: @processor.last_perform_group_duration_ms,
-          events_count: processed_count
+          events_count: [processed_count, 0].max
         )
       end
 
