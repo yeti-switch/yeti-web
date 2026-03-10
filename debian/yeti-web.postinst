@@ -8,10 +8,6 @@ case "$1" in
 		#apply files permissions for new user
 		chown -R $user:$user /opt/$user
 
-		if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
-			deb-systemd-invoke restart rsyslog.service >/dev/null || true
-		fi
-
 		if [ -x /usr/bin/deb-systemd-helper ]; then
 			deb-systemd-helper unmask ${services} >/dev/null || true
 			for s in ${services}; do

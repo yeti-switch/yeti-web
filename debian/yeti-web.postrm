@@ -24,8 +24,4 @@ case "$1" in
 	;;
 esac
 
-if [ -d /run/systemd/system ] && [ -x /usr/bin/deb-systemd-invoke ]; then
-	deb-systemd-invoke restart rsyslog.service >/dev/null || true
-fi
-
 exit 0

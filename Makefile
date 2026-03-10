@@ -246,8 +246,6 @@ install: $(app_files)
 	@mkdir -p $(DESTDIR)$(app_dir)
 	tar -c --no-auto-compress $(addprefix --exclude , $(exclude_files)) $^ | tar -x -C $(DESTDIR)$(app_dir)
 	@mkdir -v -p $(addprefix $(DESTDIR)$(app_dir)/, log tmp )
-	@install -v -m0644 -D debian/$(pkg_name).rsyslog $(DESTDIR)/etc/rsyslog.d/$(pkg_name).conf
-	@install -v -m0644 -d $(DESTDIR)/var/log/yeti
 
 
 .PHONY: clean
