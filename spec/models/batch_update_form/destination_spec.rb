@@ -98,7 +98,7 @@ RSpec.describe BatchUpdateForm::Destination do
     end
 
     context 'when :dst_number_min_length valid and :dst_number_max_length value is string' do
-      let(:assign_params) { { dst_number_min_length: '100', dst_number_max_length: '1.' } }
+      let(:assign_params) { { dst_number_min_length: '100', dst_number_max_length: '1.x' } }
 
       it 'should have error: is not a number' do
         subject

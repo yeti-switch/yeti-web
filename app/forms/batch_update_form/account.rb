@@ -29,7 +29,8 @@ class BatchUpdateForm::Account < BatchUpdateForm::Base
   validates :max_balance, numericality: {
     allow_blank: true,
     greater_than_or_equal_to: :min_balance
-  }, if: -> { :max_balance_changed? && min_balance =~ /^[0-9]+$/ }
+    # NOTE: must call max_balance_changed? as method, not :symbol (symbol is always truthy in a lambda)
+  }, if: -> { max_balance_changed? && min_balance =~ /^[0-9]+$/ }
 
   validates :termination_capacity, numericality: {
     greater_than: 0,
