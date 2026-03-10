@@ -128,8 +128,6 @@ bundler: ruby
 	$(bundle_bin) config --local clean 'true'
 	$(bundle_bin) config --local jobs 4
 	$(bundle_bin) config --local deployment 'true'
-	# compile native extensions from source to match package build behavior
-	$(bundle_bin) config --local force_ruby_platform 'true'
 
 
 .PHONY: gems
