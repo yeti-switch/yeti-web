@@ -52,7 +52,7 @@ RSpec.describe BatchUpdateForm::Account do
     end
 
     context 'when :min_balance filled and :max_balance contains string' do
-      let(:assign_params) { { min_balance: '100', max_balance: '10.' } }
+      let(:assign_params) { { min_balance: '100', max_balance: '10.x' } }
 
       it 'should have failed with invalid message' do
         subject
