@@ -21,6 +21,8 @@ jobs:
           key: gems-deb13-${{runner.os}}-${{hashFiles('Gemfile.lock')}}-${{hashFiles('.ruby-version')}}
       - name: install gems
         run: make gems-test
+      - name: verify production gems install
+        run: make gems
       - name: Caching gems
         uses: actions/cache@v4
         with:
