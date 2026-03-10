@@ -26,15 +26,29 @@ module CdrProcessor
       self.class.interrupted?
     end
 
-    def initialize(logger:, processor:)
+    def initialize(logger:, processor:, processor_name:, prometheus: nil)
       @logger = logger
       @processor = processor
+      @processor_name = processor_name
+      @prometheus = prometheus
       @sleep_time = ENV.fetch('PGQ_SLEEP_INTERVAL', 0.5).to_f
       self.class.logger = logger
     end
 
     def process_batch
-      @processor.perform_batch
+      start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+      processed_count = @processor.perform_batch
+      duration_ms = (Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time) * 1000
+
+      if @prometheus && processed_count.to_i > 0
+        @prometheus.send_batch_metric(
+          processor_name: @processor_name,
+          duration_ms: duration_ms,
+          events_count: processed_count
+        )
+      end
+
+      processed_count
     end
 
     def run

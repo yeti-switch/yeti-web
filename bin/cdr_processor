@@ -104,6 +104,19 @@ raise "Missing 'class' in config section '#{processor_name}'" if class_name.blan
 
 processor_class = "CdrProcessor::Processors::#{class_name.camelize}".constantize
 processor = processor_class.new(logger, processor_config['queue'], processor_config['consumer'], processor_config)
-worker = CdrProcessor::Worker.new(logger: logger, processor: processor)
+
+# Prometheus metrics (optional)
+prometheus = nil
+prometheus_config = all_config['prometheus']
+if prometheus_config&.fetch('enabled', false)
+  require 'cdr_processor/prometheus'
+  prometheus = CdrProcessor::Prometheus.new(
+    host: prometheus_config['host'],
+    port: prometheus_config['port']
+  )
+  logger.info "Prometheus metrics enabled (#{prometheus_config['host']}:#{prometheus_config['port']})"
+end
+
+worker = CdrProcessor::Worker.new(logger: logger, processor: processor, processor_name: processor_name, prometheus: prometheus)
 
 worker.run
