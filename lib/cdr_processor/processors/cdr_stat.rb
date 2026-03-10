@@ -10,7 +10,9 @@ module CdrProcessor
 
       def perform_batch
         safe_batch_perform do
-          events_qty = Cdr::Base.fetch_sp_val("SELECT processed_records FROM #{@sp_name}()")
+          start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+          events_qty = cdr_connection.select_value("SELECT processed_records FROM #{@sp_name}()")
+          @last_perform_group_duration_ms = (Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time) * 1000
 
           if events_qty.nil?
             # no batch

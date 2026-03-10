@@ -1,0 +1,122 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Standalone CDR processor that does NOT load the full Rails environment.
+# This significantly reduces memory usage compared to `rake cdr_processor`.
+#
+# Usage:
+#   bin/cdr_processor <processor_name> [config_file]
+#
+# Examples:
+#   bin/cdr_processor cdr_billing
+#   bin/cdr_processor cdr_billing config/cdr_processors.yml
+
+require 'bundler/setup'
+require 'active_record'
+require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/hash'
+require 'active_support/core_ext/string/inflections'
+require 'active_support/core_ext/class/attribute_accessors'
+require 'singleton'
+require 'yaml'
+require 'erb'
+require 'logger'
+require 'json'
+
+processor_name = ARGV[0] || ENV.fetch('processor', nil)
+config_file = ARGV[1] || ENV.fetch('config_file', nil)
+
+raise 'processor name is required as first argument or processor env var' if processor_name.blank?
+
+ROOT_PATH = File.expand_path('..', __dir__)
+
+config_file ||= File.join(ROOT_PATH, 'config/cdr_processors.yml')
+
+# Load processor config
+raise "Configuration file #{config_file} does not exist." unless File.exist?(config_file)
+
+all_config = YAML.safe_load(File.read(config_file), permitted_classes: [Symbol])
+processor_config = all_config[processor_name]
+
+if processor_config.blank?
+  raise "Invalid configuration file #{config_file} or section #{processor_name} does not exist."
+end
+
+# Establish ActiveRecord connection to CDR database
+db_env = processor_config['mode'] || ENV.fetch('RAILS_ENV', 'development')
+database_yml = File.join(ROOT_PATH, 'config/database.yml')
+raise "Database configuration file #{database_yml} does not exist." unless File.exist?(database_yml)
+
+db_config = YAML.safe_load(ERB.new(File.read(database_yml)).result, aliases: true)
+cdr_db_config = db_config.dig(db_env, 'cdr')
+raise "CDR database configuration not found for environment '#{db_env}'" if cdr_db_config.blank?
+
+primary_db_config = db_config.dig(db_env, 'primary')
+raise "Primary database configuration not found for environment '#{db_env}'" if primary_db_config.blank?
+
+# Load CdrProcessor classes
+$LOAD_PATH.unshift(File.join(ROOT_PATH, 'lib'))
+
+require 'cdr_processor/cdr_db'
+require 'cdr_processor/primary_db'
+require 'cdr_processor/json_coder'
+require 'cdr_processor/json_each_row_coder'
+require 'cdr_processor/event_filter'
+require 'cdr_processor/amqp_factory'
+require 'cdr_processor/api'
+require 'cdr_processor/event'
+require 'cdr_processor/consumer_base'
+require 'cdr_processor/consumer'
+require 'cdr_processor/consumer_group'
+
+# Establish database connections
+CdrProcessor::CdrDb.establish_connection(cdr_db_config)
+CdrProcessor::PrimaryDb.establish_connection(primary_db_config)
+
+# Extend CdrDb with PGQ API
+CdrProcessor::CdrDb.extend(CdrProcessor::Api)
+
+# Load processor implementations
+require 'cdr_processor/processors/cdr_billing'
+require 'cdr_processor/processors/cdr_stat'
+require 'cdr_processor/processors/cdr_http_base'
+require 'cdr_processor/processors/cdr_http'
+require 'cdr_processor/processors/cdr_http_batch'
+require 'cdr_processor/processors/cdr_amqp'
+require 'cdr_processor/processors/cdr_clickhouse'
+require 'cdr_processor/worker'
+
+# Setup
+Process.setproctitle("cdr_processor:#{processor_name}")
+
+$stdout.sync = true
+logger = Logger.new($stdout)
+logger.level = Logger::INFO
+
+# Signal handlers
+trap('HUP') { CdrProcessor::Worker.shutdown!('HUP') }
+trap('TERM') { CdrProcessor::Worker.shutdown!('TERM') }
+trap('INT') { CdrProcessor::Worker.shutdown!('INT') }
+
+# Resolve processor class
+class_name = processor_config['class']
+raise "Missing 'class' in config section '#{processor_name}'" if class_name.blank?
+
+processor_class = "CdrProcessor::Processors::#{class_name.camelize}".constantize
+processor = processor_class.new(logger, processor_config['queue'], processor_config['consumer'], processor_config)
+
+# Prometheus metrics (optional)
+prometheus = nil
+prometheus_config = all_config['prometheus']
+if prometheus_config&.fetch('enabled', false)
+  require 'cdr_processor/prometheus'
+  prometheus = CdrProcessor::Prometheus.new(
+    host: prometheus_config['host'],
+    port: prometheus_config['port']
+  )
+  logger.info "Prometheus metrics enabled (#{prometheus_config['host']}:#{prometheus_config['port']})"
+end
+
+worker = CdrProcessor::Worker.new(logger: logger, processor: processor, processor_name: processor_name, prometheus: prometheus)
+
+worker.run

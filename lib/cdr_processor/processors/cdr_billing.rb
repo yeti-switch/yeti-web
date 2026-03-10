@@ -10,12 +10,13 @@ module CdrProcessor
         events.each do |event|
           group << event.data
         end
-        perform_group(group)
+        perform_group_with_timing(group)
       end
 
       # {'type' => [events]}
       def perform_group(group)
-        ApplicationRecord.execute_sp('SELECT * FROM billing.bill_cdr_batch(?, ?)', @batch_id, coder.dump(group))
+        sql = CdrProcessor::PrimaryDb.sanitize_sql_array(['SELECT * FROM billing.bill_cdr_batch(?, ?)', @batch_id, coder.dump(group)])
+        primary_connection.execute(sql)
       end
     end
   end
