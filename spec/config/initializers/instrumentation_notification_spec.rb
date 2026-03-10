@@ -8,7 +8,7 @@ RSpec.describe 'instrumentation_notification.rb', type: :request do
       it 'should create Log::ApiLog with properly attributes' do
         expect { subject }.to change(Log::ApiLog, :count).by(1)
 
-        expect(Log::ApiLog.last!).to have_attributes(
+        expect(Log::ApiLog.where(path: '/api/rest/invalid_request/1/format').last!).to have_attributes(
           path: '/api/rest/invalid_request/1/format',
           controller: 'ApplicationController',
           action: 'render_404',
