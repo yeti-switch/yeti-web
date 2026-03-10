@@ -16,22 +16,15 @@ LimitCORE=infinity
 Environment=RBENV_ROOT=/opt/yeti-web/vendor/rbenv
 Environment=PATH=/opt/yeti-web/vendor/rbenv/shims:/usr/bin:/opt/yeti-web/vendor/bundler/bin:/bin
 Environment=RAILS_ENV=production
-Environment=RACK_ENV=production
-Environment=RAKE_ENV=production
 Environment=BUNDLE_GEMFILE=/opt/yeti-web/Gemfile
 Environment=GEM_PATH=/opt/yeti-web/vendor/bundler
 
 WorkingDirectory=/opt/yeti-web
-RuntimeDirectory=yeti-cdr-processor
 ExecStart=/opt/yeti-web/vendor/rbenv/shims/ruby \
 	/opt/yeti-web/vendor/bundler/bin/bundle exec \
-	rake \
-	cdr_processor \
-	processor=%i \
-	pid_file=/run/yeti-cdr-processor/%i.pid \
-	config_file=/opt/yeti-web/config/cdr_processors.yml
-
-PIDFile=/run/yeti-cdr-processor/%i.pid
+	bin/cdr_processor \
+	%i \
+	/opt/yeti-web/config/cdr_processors.yml
 
 Type=simple
 Restart=always

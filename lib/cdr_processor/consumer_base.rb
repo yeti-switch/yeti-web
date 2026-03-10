@@ -7,20 +7,20 @@ module CdrProcessor
 
     attr_accessor :logger, :queue_name, :consumer_name
 
-    def self.database
-      Cdr::Base
+    def self.cdr_connection
+      CdrProcessor::CdrDb.connection
     end
 
-    def database
-      self.class.database
+    def cdr_connection
+      self.class.cdr_connection
     end
 
-    def self.connection
-      database.connection
+    def self.primary_connection
+      CdrProcessor::PrimaryDb.connection
     end
 
-    def connection
-      self.class.connection
+    def primary_connection
+      self.class.primary_connection
     end
 
     class << self
@@ -117,10 +117,10 @@ module CdrProcessor
     end
 
     def get_batch_events
-      @batch_id = database.pgq_next_batch(queue_name, consumer_name)
+      @batch_id = CdrProcessor::CdrDb.pgq_next_batch(queue_name, consumer_name)
       return nil unless @batch_id
 
-      database.pgq_get_batch_events(consumer_name, @batch_id)
+      CdrProcessor::CdrDb.pgq_get_batch_events(consumer_name, @batch_id)
     end
 
     def finish_batch
@@ -128,20 +128,20 @@ module CdrProcessor
 
       log_info "Finishing batch #{@batch_id}"
 
-      database.pgq_finish_batch(@batch_id)
+      CdrProcessor::CdrDb.pgq_finish_batch(@batch_id)
       @batch_id = nil
     end
 
     def event_retry(event_id, seconds = 0)
-      database.pgq_event_retry(@batch_id, event_id, seconds)
+      CdrProcessor::CdrDb.pgq_event_retry(@batch_id, event_id, seconds)
     end
 
     def event_done?(event_id)
-      database.pgq_event_done?(@consumer_name, @batch_id, event_id)
+      CdrProcessor::CdrDb.pgq_event_done?(@consumer_name, @batch_id, event_id)
     end
 
     def event_done!(event_id)
-      database.pgq_event_done!(@consumer_name, @batch_id, event_id)
+      CdrProcessor::CdrDb.pgq_event_done!(@consumer_name, @batch_id, event_id)
     end
 
     # == log methods

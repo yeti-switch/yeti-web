@@ -10,7 +10,7 @@ module CdrProcessor
 
       def perform_batch
         safe_batch_perform do
-          events_qty = Cdr::Base.fetch_sp_val("SELECT processed_records FROM #{@sp_name}()")
+          events_qty = cdr_connection.select_value("SELECT processed_records FROM #{@sp_name}()")
 
           if events_qty.nil?
             # no batch

@@ -17,7 +17,7 @@ RSpec.describe CdrProcessor::Processors::CdrStat do
   end
 
   before do
-    allow(Cdr::Base).to receive(:fetch_sp_val).once.with(expected_sql).and_return(return_value)
+    allow(CdrProcessor::CdrDb.connection).to receive(:select_value).once.with(expected_sql).and_return(return_value)
   end
 
   context 'when stored_procedure returns 3' do
