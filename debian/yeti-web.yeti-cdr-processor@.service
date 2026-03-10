@@ -26,6 +26,7 @@ ExecStart=/opt/yeti-web/vendor/rbenv/shims/ruby \
 	%i \
 	/opt/yeti-web/config/cdr_processors.yml
 
+SyslogIdentifier=yeti-cdr-processor@%i
 Type=simple
 Restart=always
 RestartSec=30s

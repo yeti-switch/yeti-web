@@ -24,6 +24,7 @@ ExecStart=/opt/yeti-web/vendor/rbenv/shims/ruby \
 	/opt/yeti-web/vendor/bundler/bin/bundle exec \
 	/opt/yeti-web/bin/scheduler
 
+SyslogIdentifier=yeti-scheduler
 Type=simple
 Restart=always
 RestartSec=30s

@@ -27,6 +27,7 @@ ExecStart=/opt/yeti-web/vendor/rbenv/shims/ruby \
 	/opt/yeti-web/bin/delayed_job \
 	start -n 4 --pid-dir=/run/yeti-delayed-job
 
+SyslogIdentifier=yeti-delayed-job
 Type=forking
 Restart=always
 RestartSec=30s
