@@ -203,7 +203,7 @@ class CustomersAuth < ApplicationRecord
     SRC_NUMBER_FIELD_FROM_DSP => 'From URI display name',
     SRC_NUMBER_FIELD_RURI_USERPART => 'R-URI userpart',
     SRC_NUMBER_FIELD_TO_USERPART => 'To URI userpart',
-    SRC_NUMBER_FIELD_PPI_USERPART => 'PPI URI userpart'
+    SRC_NUMBER_FIELD_PPI_USERPART => 'PPI URI userpart (fallback to From URI userpart)'
   }.freeze
 
   SRC_NAME_FIELD_FROM_DSP = 1

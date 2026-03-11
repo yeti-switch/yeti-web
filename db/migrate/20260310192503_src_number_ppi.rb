@@ -218,8 +218,8 @@ CREATE or replace FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i
           v_ret.src_prefix_in:=i_uri_name;
         ELSIF v_customer_auth_normalized.src_number_field_id=4 THEN /* To URI userpart */
           v_ret.src_prefix_in:=i_to_name;
-        ELSIF v_customer_auth_normalized.src_number_field_id=5 THEN /* PPI URI userpart */
-          v_ret.src_prefix_in:=COALESCE((json_populate_record(null::switch22.uri_ty, i_ppi)).u, '');
+        ELSIF v_customer_auth_normalized.src_number_field_id=5 THEN /* PPI URI userpart, fallback to From URI userpart */
+          v_ret.src_prefix_in:=COALESCE(NULLIF((json_populate_record(null::switch22.uri_ty, i_ppi)).u, ''), i_from_name);
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
