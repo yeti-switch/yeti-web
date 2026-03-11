@@ -3,7 +3,6 @@
 module CdrProcessor
   module Processors
     class CdrClickhouse < CdrProcessor::Processors::CdrHttpBase
-      @consumer_name = 'cdr_clickhouse'
       TIME_FIELDS = %w[
         time_start
         time_connect

@@ -3,8 +3,6 @@
 module CdrProcessor
   module Processors
     class CdrBilling < CdrProcessor::ConsumerGroup
-      @consumer_name = 'cdr_billing'
-
       def perform_events(events)
         group = []
         events.each do |event|

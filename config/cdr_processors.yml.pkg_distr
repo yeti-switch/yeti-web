@@ -9,4 +9,7 @@ billing:
 stats:
   mode: production
   class: cdr_stat
+  queue: cdr_stats
+  consumer: cdr_stats
   stored_procedure: switch.async_cdr_statistics
+

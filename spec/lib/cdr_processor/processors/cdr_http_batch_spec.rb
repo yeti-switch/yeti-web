@@ -21,7 +21,8 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBatch do
     {
       'url' => 'https://external-endpoint/api/cdr',
       'method' => method,
-      'cdr_fields' => cdr_fields
+      'cdr_fields' => cdr_fields,
+      'headers' => { 'content-type' => 'application/json' }
     }
   end
 
@@ -34,7 +35,9 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBatch do
       subject
       expect(WebMock).to have_requested(:post, config['url']).once
       expect(WebMock).to have_requested(:post, config['url']).with(
+        headers: { 'X-Yeti-Cdr-Batch-Id' => '' },
         body: {
+          batch_id: nil,
           data: [
             { id: 1, duration: 2 },
             { id: 2, duration: 2 }
@@ -65,6 +68,7 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBatch do
       expect(WebMock).to have_requested(:post, config['url']).once
       expect(WebMock).to have_requested(:post, config['url']).with(
         body: {
+          batch_id: nil,
           data: [
             { id: 1, duration: 2 },
             { id: 1, duration: 3 }
@@ -113,6 +117,7 @@ RSpec.describe CdrProcessor::Processors::CdrHttpBatch do
       expect(WebMock).to have_requested(:post, config['url']).once
       expect(WebMock).to have_requested(:post, config['url']).with(
         body: {
+          batch_id: nil,
           data: [
             { id: 1 },
             { id: 2 }

@@ -5,7 +5,7 @@ require 'httpx'
 module CdrProcessor
   module Processors
     class CdrHttpBase < CdrProcessor::ConsumerGroup
-      AVAILABLE_HTTP_METHODS = %i[post put get patch].freeze
+      AVAILABLE_HTTP_METHODS = %i[post put patch].freeze
 
       def initialize(...)
         super(...)
@@ -15,6 +15,8 @@ module CdrProcessor
         else
           @data_filters = nil
         end
+        custom_headers = @params['headers'] || {}
+        @custom_headers = custom_headers.reject { |key, _| key.casecmp('user-agent').zero? }
       end
 
       def perform_events(events)
@@ -50,28 +52,25 @@ module CdrProcessor
       end
 
       def http_headers
-        { 'content-type' => 'application/json', 'accept' => 'application/json' }
+        @custom_headers.merge('X-Request-Id' => @request_id)
       end
 
       def perform_http_request(payload)
+        @request_id = SecureRandom.uuid
+
         unless AVAILABLE_HTTP_METHODS.include?(http_method)
-          raise ArgumentError, 'external_crd_endpoint.method should be one of post, put, get, patch'
+          raise ArgumentError, "unsupported HTTP method '#{http_method}', should be one of: post, put, patch"
         end
 
         response = send_http_request(payload)
         log_response(response)
       rescue StandardError => e
-        logger.error { "<#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
+        logger.error { "#{log_prefix} <#{e.class}>: #{e.message}\n#{e.backtrace.join("\n")}" }
         raise e
       end
 
       def send_http_request(payload)
-        kwargs = { headers: http_headers }
-        if http_method == :get
-          kwargs[:params] = payload
-        else
-          kwargs[:body] = http_body(payload)
-        end
+        kwargs = { headers: http_headers, body: http_body(payload) }
         client = HTTPX
         if logger.debug?
           client = client.with(debug: logger, debug_level: 1)
@@ -84,8 +83,12 @@ module CdrProcessor
         response
       end
 
+      def log_prefix
+        "request_id=#{@request_id} batch_id=#{@batch_id} event_id=#{@current_event_id}"
+      end
+
       def log_response(response)
-        logger.debug { "Success #{response.status} #{response.body}" }
+        logger.info { "#{log_prefix} status=#{response.status}" }
       end
 
       def permit_field_for(event)
