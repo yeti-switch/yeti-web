@@ -996,6 +996,24 @@ RSpec.describe '#routing logic' do
             expect(subject.first[:disconnect_code_id]).to eq(nil)
           end
         end
+
+        context 'PPI URI userpart' do
+          let!(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_PPI_USERPART }
+          it 'routing OK ' do
+            expect(subject.size).to eq(2)
+            expect(subject.first[:src_prefix_in]).to eq('user1')
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+          end
+
+          context 'when PPI is absent' do
+            let(:ppi) { nil }
+            it 'falls back to From URI userpart' do
+              expect(subject.size).to eq(2)
+              expect(subject.first[:src_prefix_in]).to eq('from_username')
+              expect(subject.first[:disconnect_code_id]).to eq(nil)
+            end
+          end
+        end
       end
 
       context 'Authorized, no destination by max_destination_rate limit' do
