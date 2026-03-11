@@ -17,6 +17,8 @@ billing:
 stats:
   mode: production
   class: cdr_stat
+  queue: cdr_stats
+  consumer: cdr_stats
   stored_procedure: switch.async_cdr_statistics
 
 http:
@@ -36,6 +38,59 @@ http:
   #                 'destination_next_rate', 'customer_price',  'orig_call_id', 'local_tag', 'term_call_id'
   #              ]
   cdr_fields: all
+  # data_filters - optional list of filters, all must match for event to be sent.
+  # Available operators: eq, not_eq, start_with, end_with, contains,
+  #                      gt, lt, gte, lte, in, not_in, null, not_null, true, false
+  # data_filters:
+  #   - field: duration
+  #     op: gt
+  #     value: 0
+  #   - field: customer_price
+  #     op: not_null
+  #     value:
+  #   - field: dst_prefix_in
+  #     op: start_with
+  #     value: "380"
+  #   - field: vendor_id
+  #     op: in
+  #     value: [1, 2, 3]
+  # Custom static headers. Cannot override built-in headers: X-Request-Id, X-Yeti-Cdr-*.
+  # headers:
+  #   content-type: "application/json"
+  #   accept: "application/json"
+  #   X-Api-Key: "secret-key"
+  # Sends each CDR as a separate HTTP request.
+  # Supported methods: POST, PUT, PATCH
+  # Built-in headers (always set):
+  #   X-Request-Id: <uuid>
+  #   X-Yeti-Cdr-Batch-Id: <batch_id>
+  #   X-Yeti-Cdr-Event-Id: <event_id>
+  # Payload:
+  #   {"id": 1, "duration": 2, "src_prefix_in": "123", ...}
+
+http_batch:
+  mode: production
+  class: cdr_http_batch
+  queue: cdr_billing
+  consumer: cdr_http_batch
+  url: "http://example.com/api/cdrs"
+  method: POST
+  # auth_user: user
+  # auth_password: password
+  # may be an array:
+  #  cdr_fields: [
+  #                 'id', 'src_prefix_in', 'src_prefix_out', 'dst_prefix_in', 'dst_prefix_out', 'time_start',
+  #                 'time_connect', 'time_end',  'duration', 'customer', 'vendor',  'destination_fee',
+  #                 'destination_initial_interval', 'destination_initial_rate', 'destination_next_interval',
+  #                 'destination_next_rate', 'customer_price',  'orig_call_id', 'local_tag', 'term_call_id'
+  #              ]
+  cdr_fields: all
+  # Sends all CDRs from a batch in a single HTTP request.
+  # Built-in headers (always set):
+  #   X-Request-Id: <uuid>
+  #   X-Yeti-Cdr-Batch-Id: <batch_id>
+  # Payload:
+  #   {"batch_id": 12345, "data": [{"id": 1, ...}, {"id": 2, ...}]}
 
 amqp:
   mode: production

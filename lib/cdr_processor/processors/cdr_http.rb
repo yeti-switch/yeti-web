@@ -3,7 +3,18 @@
 module CdrProcessor
   module Processors
     class CdrHttp < CdrProcessor::Processors::CdrHttpBase
-      @consumer_name = 'cdr_http'
+      def perform_events(events)
+        start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        events.each do |event|
+          next unless send_event?(event.data)
+
+          @current_event_id = event.id
+          perform_http_request permit_field_for(event.data)
+        end
+      ensure
+        @current_event_id = nil
+        @last_perform_group_duration_ms = (Process.clock_gettime(Process::CLOCK_MONOTONIC) - start_time) * 1000
+      end
 
       private
 
@@ -12,11 +23,10 @@ module CdrProcessor
       end
 
       def http_headers
-        if http_method == :get
-          {}
-        else
-          { 'content-type' => 'application/json', 'accept' => 'application/json' }
-        end
+        super.merge(
+          'X-Yeti-Cdr-Batch-Id' => @batch_id.to_s,
+          'X-Yeti-Cdr-Event-Id' => @current_event_id.to_s
+        )
       end
     end
   end

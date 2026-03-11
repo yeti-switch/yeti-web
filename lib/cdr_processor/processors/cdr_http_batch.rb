@@ -3,8 +3,6 @@
 module CdrProcessor
   module Processors
     class CdrHttpBatch < CdrProcessor::Processors::CdrHttpBase
-      @consumer_name = 'cdr_http'
-
       def perform_group(events)
         events_to_send = events.select { |event| send_event?(event) }
         return if events_to_send.empty?
@@ -15,8 +13,12 @@ module CdrProcessor
 
       private
 
+      def http_headers
+        super.merge('X-Yeti-Cdr-Batch-Id' => @batch_id.to_s)
+      end
+
       def http_body(events)
-        { data: events }.to_json
+        { batch_id: @batch_id, data: events }.to_json
       end
     end
   end

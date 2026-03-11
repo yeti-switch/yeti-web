@@ -2,9 +2,6 @@
 
 module CdrProcessor
   class ConsumerBase
-    @queue_name = 'default'
-    @consumer_name = 'default'
-
     attr_accessor :logger, :queue_name, :consumer_name
     attr_reader :last_perform_group_duration_ms
 
@@ -24,14 +21,6 @@ module CdrProcessor
       self.class.primary_connection
     end
 
-    class << self
-      attr_reader :consumer_name
-    end
-
-    class << self
-      attr_reader :queue_name
-    end
-
     # == coder
 
     def self.coder
@@ -45,8 +34,11 @@ module CdrProcessor
     # == consumer part
 
     def initialize(logger = nil, custom_queue_name = nil, custom_consumer_name = nil)
-      self.queue_name = custom_queue_name || self.class.queue_name
-      self.consumer_name = custom_consumer_name || self.class.consumer_name
+      self.queue_name = custom_queue_name
+      self.consumer_name = custom_consumer_name
+      raise ArgumentError, "queue_name is required, define 'queue' in config" if queue_name.blank?
+      raise ArgumentError, "consumer_name is required, define 'consumer' in config" if consumer_name.blank?
+
       self.logger = logger
       @batch_id = nil
     end

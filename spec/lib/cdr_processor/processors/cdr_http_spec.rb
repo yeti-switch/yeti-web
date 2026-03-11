@@ -4,7 +4,7 @@ require 'httpx/adapters/webmock'
 
 RSpec.describe CdrProcessor::Processors::CdrHttp do
   subject do
-    consumer.perform_group(cdrs)
+    consumer.perform_events(events)
   end
 
   let(:logger) { Logger.new(IO::NULL) }
@@ -14,6 +14,11 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
       { id: 2, duration: 2 }
     ]
   end
+  let(:events) do
+    cdrs.each_with_index.map do |cdr, idx|
+      double('Event', id: idx + 1, data: cdr)
+    end
+  end
   let(:consumer) { described_class.new(logger, 'cdr_billing', 'cdr_http', config) }
   let(:method) { 'POST' }
   let(:cdr_fields) { 'all' }
@@ -21,7 +26,8 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
     {
       'url' => 'https://external-endpoint/api/cdr',
       'method' => method,
-      'cdr_fields' => cdr_fields
+      'cdr_fields' => cdr_fields,
+      'headers' => { 'content-type' => 'application/json' }
     }
   end
 
@@ -33,8 +39,14 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
     it 'performs 2 requests' do
       subject
       expect(WebMock).to have_requested(:post, config['url']).times(2)
-      expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 1, duration: 2 })
-      expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 2, duration: 2 })
+      expect(WebMock).to have_requested(:post, config['url']).with(
+        headers: { 'X-Yeti-Cdr-Batch-Id' => '', 'X-Yeti-Cdr-Event-Id' => '1' },
+        body: { id: 1, duration: 2 }
+      )
+      expect(WebMock).to have_requested(:post, config['url']).with(
+        headers: { 'X-Yeti-Cdr-Batch-Id' => '', 'X-Yeti-Cdr-Event-Id' => '2' },
+        body: { id: 2, duration: 2 }
+      )
     end
   end
 
@@ -101,17 +113,6 @@ RSpec.describe CdrProcessor::Processors::CdrHttp do
       expect(WebMock).to have_requested(:post, config['url']).times(2)
       expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 1 })
       expect(WebMock).to have_requested(:post, config['url']).with(body: { id: 2 })
-    end
-  end
-
-  context 'GET method' do
-    let(:method) { 'GET' }
-
-    it 'performs 2 requests' do
-      subject
-      expect(WebMock).to have_requested(:get, /\A#{config['url']}?.+/).times(2)
-      expect(WebMock).to have_requested(:get, "#{config['url']}?#{URI.encode_www_form cdrs[0]}")
-      expect(WebMock).to have_requested(:get, "#{config['url']}?#{URI.encode_www_form cdrs[1]}")
     end
   end
 end

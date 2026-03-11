@@ -5,8 +5,6 @@ require 'bunny'
 module CdrProcessor
   module Processors
     class CdrAmqp < CdrProcessor::ConsumerGroup
-      @consumer_name = 'cdr_amqp'
-
       def initialize(logger, queue, consumer, options)
         super
         conn = CdrProcessor::AmqpFactory.instance.get_connection(options['connect'])

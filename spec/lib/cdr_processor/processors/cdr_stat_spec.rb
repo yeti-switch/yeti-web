@@ -10,7 +10,7 @@ RSpec.describe CdrProcessor::Processors::CdrStat do
     { 'stored_procedure' => 'switch.async_cdr_statistics' }
   end
   let(:consumer) do
-    described_class.new(logger, nil, nil, config)
+    described_class.new(logger, 'cdr_stat', 'cdr_stat', config)
   end
   let(:expected_sql) do
     "SELECT processed_records FROM #{config['stored_procedure']}()"
