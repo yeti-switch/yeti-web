@@ -43888,7 +43888,8 @@ CREATE TABLE logs.api_requests (
     response_headers text,
     meta jsonb,
     remote_ip inet,
-    tags character varying[] DEFAULT '{}'::character varying[]
+    tags character varying[] DEFAULT '{}'::character varying[],
+    request_id character varying
 )
 PARTITION BY RANGE (created_at);
 
@@ -50624,6 +50625,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260311000000'),
 ('20260310192503'),
 ('20260222000000'),
 ('20260214104400'),

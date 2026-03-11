@@ -17,7 +17,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
 
   controller do
     def scoped_collection
-      super.select('id, created_at, status, method, path, db_duration, page_duration, remote_ip, tags')
+      super.select('id, created_at, request_id, status, method, path, db_duration, page_duration, remote_ip, tags')
     end
 
     def find_resource
@@ -26,6 +26,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   end
 
   filter :id
+  filter :request_id
   filter :created_at, as: :date_time_range
   filter :path
   filter :method
@@ -45,6 +46,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
   index download_links: false do
     id_column
     column :created_at
+    column :request_id
     column :status
     column :method
     column :tags, &:tags_separated_by_comma
@@ -58,6 +60,7 @@ ActiveAdmin.register Log::ApiLog, as: 'ApiLog' do
     attributes_table do
       row :id
       row :created_at
+      row :request_id
       row :status
       row :method
       row :tags, &:tags_separated_by_comma
