@@ -6,7 +6,8 @@ class Api::Rest::Customer::V1::AccountResource < Api::Rest::Customer::V1::BaseRe
   attributes :name,
              :balance, :min_balance, :max_balance,
              :destination_rate_limit,
-             :origination_capacity, :termination_capacity, :total_capacity
+             :origination_capacity, :termination_capacity, :total_capacity,
+             :currency
 
   ransack_filter :name, type: :string
   ransack_filter :balance, type: :number
@@ -21,6 +22,10 @@ class Api::Rest::Customer::V1::AccountResource < Api::Rest::Customer::V1::BaseRe
   ransack_filter :origination_capacity, type: :number
   ransack_filter :termination_capacity, type: :number
   ransack_filter :total_capacity, type: :number
+
+  def currency
+    _model.currency&.name
+  end
 
   def self.apply_allowed_accounts(records, options)
     context = options[:context]

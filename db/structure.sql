@@ -3330,6 +3330,7 @@ CREATE TABLE billing.accounts (
     max_call_duration integer,
     invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
     timezone character varying DEFAULT 'UTC'::character varying NOT NULL,
+    currency_id smallint DEFAULT 0 NOT NULL,
     CONSTRAINT positive_max_call_duration CHECK ((max_call_duration > 0)),
     CONSTRAINT positive_origination_capacity CHECK ((origination_capacity > 0)),
     CONSTRAINT positive_termination_capacity CHECK ((termination_capacity > 0)),
@@ -40556,6 +40557,37 @@ CREATE TABLE billing.cdr_batches (
 
 
 --
+-- Name: currencies; Type: TABLE; Schema: billing; Owner: -
+--
+
+CREATE TABLE billing.currencies (
+    id smallint NOT NULL,
+    name character varying NOT NULL,
+    rate double precision NOT NULL
+);
+
+
+--
+-- Name: currencies_id_seq; Type: SEQUENCE; Schema: billing; Owner: -
+--
+
+CREATE SEQUENCE billing.currencies_id_seq
+    AS smallint
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: currencies_id_seq; Type: SEQUENCE OWNED BY; Schema: billing; Owner: -
+--
+
+ALTER SEQUENCE billing.currencies_id_seq OWNED BY billing.currencies.id;
+
+
+--
 -- Name: invoice_templates; Type: TABLE; Schema: billing; Owner: -
 --
 
@@ -45777,6 +45809,13 @@ ALTER TABLE ONLY billing.accounts ALTER COLUMN id SET DEFAULT nextval('billing.a
 
 
 --
+-- Name: currencies id; Type: DEFAULT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.currencies ALTER COLUMN id SET DEFAULT nextval('billing.currencies_id_seq'::regclass);
+
+
+--
 -- Name: invoice_templates id; Type: DEFAULT; Schema: billing; Owner: -
 --
 
@@ -46725,6 +46764,22 @@ ALTER TABLE ONLY billing.accounts
 
 ALTER TABLE ONLY billing.cdr_batches
     ADD CONSTRAINT cdr_batches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: currencies currencies_name_key; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.currencies
+    ADD CONSTRAINT currencies_name_key UNIQUE (name);
+
+
+--
+-- Name: currencies currencies_pkey; Type: CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.currencies
+    ADD CONSTRAINT currencies_pkey PRIMARY KEY (id);
 
 
 --
@@ -49499,6 +49554,14 @@ ALTER TABLE ONLY billing.accounts
 
 
 --
+-- Name: accounts accounts_currency_id_fkey; Type: FK CONSTRAINT; Schema: billing; Owner: -
+--
+
+ALTER TABLE ONLY billing.accounts
+    ADD CONSTRAINT accounts_currency_id_fkey FOREIGN KEY (currency_id) REFERENCES billing.currencies(id);
+
+
+--
 -- Name: account_balance_notification_settings fk_rails_f185d22f87; Type: FK CONSTRAINT; Schema: billing; Owner: -
 --
 
@@ -50625,6 +50688,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260311100000'),
 ('20260311000000'),
 ('20260310192503'),
 ('20260222000000'),

@@ -21,7 +21,8 @@ module AdminApi
                      :contractor_id,
                      :timezone,
                      :invoice_template_id,
-                     :invoice_period_id
+                     :invoice_period_id,
+                     :currency_id
 
     attribute :balance_low_threshold, :decimal
     attribute :balance_high_threshold, :decimal

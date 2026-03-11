@@ -21,6 +21,7 @@
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
 #  contractor_id          :integer(4)       not null
+#  currency_id            :integer(2)       default(0), not null
 #  external_id            :bigint(8)
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
@@ -36,6 +37,7 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
+#  accounts_currency_id_fkey    (currency_id => currencies.id)
 #
 
 RSpec.describe Account, type: :model do
@@ -153,6 +155,16 @@ RSpec.describe Account, type: :model do
         record = FactoryBot.build :account, min_balance: nil
         expect(record).to_not be_valid
         expect(record.errors[:min_balance]).to include "can't be blank"
+      end
+    end
+
+    context '#currency_id' do
+      let!(:account) { FactoryBot.create(:account) }
+
+      it 'does not allow changing currency_id on update' do
+        account.currency_id = FactoryBot.create(:currency).id
+        expect(account).not_to be_valid
+        expect(account.errors[:currency_id]).to include('cannot be changed after creation')
       end
     end
 

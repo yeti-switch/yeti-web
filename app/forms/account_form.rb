@@ -27,7 +27,8 @@ class AccountForm < ProxyForm
                    :send_invoices_to,
                    :timezone,
                    :uuid,
-                   :invoice_ref_template
+                   :invoice_ref_template,
+                   :currency_id
 
   validate :validate_balance_thresholds
 

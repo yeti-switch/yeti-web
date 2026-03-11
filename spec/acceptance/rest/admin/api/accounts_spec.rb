@@ -13,6 +13,7 @@ RSpec.resource 'Accounts' do
     external-id
     balance-low-threshold balance-high-threshold send-balance-notifications-to
     invoice-period-id timezone invoice-period-id
+    currency-id
   ]
 
   required_relationships = %i[contractor]

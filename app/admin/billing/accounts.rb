@@ -15,6 +15,7 @@ ActiveAdmin.register Account do
 
   acts_as_export :id,
                  [:contractor_name, proc { |row| row.contractor.name }],
+                 [:currency_name, proc { |row| row.currency.name }],
                  :name,
                  :balance,
                  :min_balance,
@@ -48,6 +49,7 @@ ActiveAdmin.register Account do
     def scoped_collection
       super.preload(
         :contractor,
+        :currency,
         :invoice_template
       )
     end
@@ -67,9 +69,10 @@ ActiveAdmin.register Account do
   filter :balance
   filter :vat
   filter :external_id
+  filter :currency, as: :select, input_html: { class: 'tom-select' }, collection: proc { Billing::Currency.order(:name) }
   filter :timezone, as: :select, input_html: { class: 'tom-select' }, collection: proc { Yeti::TimeZoneHelper.all }
 
-  index footer_data: ->(collection) { BillingDecorator.new(collection.totals) } do
+  index footer_data: ->(collection) { collection.totals_per_currency } do
     selectable_column
     actions
     id_column
@@ -83,11 +86,18 @@ ActiveAdmin.register Account do
                           }
 
     column :balance, footer: lambda {
-                               strong do
-                                 @footer_data.money_format :total_balance
-                                 #  number_to_currency(@footer_data[:total_balance], delimiter:" ", separator: ".", precision: 4, unit: "")
+                               @footer_data.each do |currency_name, total|
+                                 div do
+                                   status_tag(currency_name)
+                                   text_node ' '
+                                   strong do
+                                     number_to_currency(total, delimiter: ' ', separator: '.', precision: 2, unit: '')
+                                   end
+                                 end
                                end
                              } do |c|
+      status_tag(c.currency.name)
+      text_node ' '
       strong do
         c.decorated_balance
       end
@@ -136,6 +146,9 @@ ActiveAdmin.register Account do
           row :uuid
           row :external_id
           row :contractor
+          row :currency do
+            status_tag(s.currency.name)
+          end
           row :balance do
             s.decorated_balance
           end
@@ -225,7 +238,7 @@ ActiveAdmin.register Account do
     end
   end
 
-  permit_params :uuid, :contractor_id, :balance,
+  permit_params :uuid, :contractor_id, :balance, :currency_id,
                 :min_balance, :max_balance, :vat,
                 :balance_low_threshold, :balance_high_threshold,
                 :name, :origination_capacity, :termination_capacity, :total_capacity,
@@ -239,6 +252,8 @@ ActiveAdmin.register Account do
     f.inputs form_title do
       f.input :name
       f.contractor_input :contractor_id
+      f.input :currency_id, as: :select, input_html: { class: 'tom-select', disabled: !f.object.new_record? },
+                            collection: Billing::Currency.order(:name).map { |c| [c.name, c.id] }
       f.input :min_balance
       f.input :max_balance
       f.input :vat

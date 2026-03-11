@@ -21,6 +21,7 @@
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
 #  contractor_id          :integer(4)       not null
+#  currency_id            :integer(2)       default(0), not null
 #  external_id            :bigint(8)
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
@@ -36,12 +37,14 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
+#  accounts_currency_id_fkey    (currency_id => currencies.id)
 #
 FactoryBot.define do
   factory :account, class: 'Account' do
     sequence(:name) { |n| "account#{n}" }
     sequence(:external_id) { |n| n }
     association :contractor, vendor: true
+    association :currency, factory: :currency
     balance { 0 }
     vat { 23.1 }
     destination_rate_limit { 0.3444 }

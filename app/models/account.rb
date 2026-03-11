@@ -21,6 +21,7 @@
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
 #  contractor_id          :integer(4)       not null
+#  currency_id            :integer(2)       default(0), not null
 #  external_id            :bigint(8)
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
@@ -36,6 +37,7 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
+#  accounts_currency_id_fkey    (currency_id => currencies.id)
 #
 
 class Account < ApplicationRecord
@@ -43,12 +45,13 @@ class Account < ApplicationRecord
 
   include WithPaperTrail
 
-  Totals = Struct.new(:total_balance)
-
   class << self
-    def totals
-      row = extending(ActsAsTotalsRelation).totals_row_by('sum(balance) as total_balance')
-      Totals.new(*row)
+    def totals_per_currency
+      except(:preload, :includes, :eager_load, :limit, :offset, :select, :order)
+        .joins(:currency)
+        .group('billing.currencies.name')
+        .pluck(Arel.sql('billing.currencies.name, sum(balance)'))
+        .sort_by(&:first)
     end
 
     def ransackable_scopes(_auth_object = nil)
@@ -69,6 +72,7 @@ class Account < ApplicationRecord
               constructor: ->(next_invoice_type_id) { Billing::InvoiceType.find(next_invoice_type_id) }
 
   belongs_to :contractor
+  belongs_to :currency, class_name: 'Billing::Currency'
   belongs_to :invoice_template, class_name: 'Billing::InvoiceTemplate', optional: true
 
   has_many :payments, dependent: :destroy
@@ -112,6 +116,7 @@ class Account < ApplicationRecord
   validates :destination_rate_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :max_call_duration, numericality: { greater_than: 0, allow_nil: true }
   validates :invoice_ref_template, presence: true
+  validate :currency_id_not_changed, on: :update
   validates :invoice_period_id, inclusion: { in: Billing::InvoicePeriod.ids }, allow_nil: true
   validates :next_invoice_type_id, inclusion: { in: Billing::InvoiceType.ids }, allow_nil: true
 
@@ -179,7 +184,7 @@ class Account < ApplicationRecord
   end
 
   def display_name
-    "#{name} | #{id}"
+    "#{name} [#{currency.name}] | #{id}"
   end
 
   def min_balance_reached?
@@ -199,6 +204,10 @@ class Account < ApplicationRecord
   end
 
   private
+
+  def currency_id_not_changed
+    errors.add(:currency_id, 'cannot be changed after creation') if currency_id_changed?
+  end
 
   def remove_self_from_related_api_access!
     api_access.each do |record|

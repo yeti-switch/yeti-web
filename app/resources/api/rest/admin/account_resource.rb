@@ -10,7 +10,8 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :destination_rate_limit, :max_call_duration,
              :external_id, :uuid,
              :origination_capacity, :termination_capacity, :total_capacity,
-             :send_invoices_to, :invoice_period_id, :timezone
+             :send_invoices_to, :invoice_period_id, :timezone,
+             :currency_id, :currency
 
   has_one :contractor, always_include_linkage_data: true
   has_one :invoice_template, class_name: 'InvoiceTemplate', always_include_linkage_data: true
@@ -34,6 +35,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
   ransack_filter :origination_capacity, type: :number
   ransack_filter :termination_capacity, type: :number
   ransack_filter :total_capacity, type: :number
+  ransack_filter :currency_id, type: :foreign_key
 
   def send_balance_notifications_to
     _model.balance_notification_setting.send_to
@@ -45,6 +47,10 @@ class Api::Rest::Admin::AccountResource < BaseResource
 
   def balance_high_threshold
     _model.balance_notification_setting.high_threshold
+  end
+
+  def currency
+    _model.currency&.name
   end
 
   def self.updatable_fields(_context)
@@ -74,7 +80,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
   end
 
   def self.creatable_fields(context)
-    updatable_fields(context)
+    updatable_fields(context) + %i[currency_id]
   end
 
   def self.sortable_fields(context)
@@ -82,6 +88,6 @@ class Api::Rest::Admin::AccountResource < BaseResource
   end
 
   def self.required_model_includes(_context)
-    [:balance_notification_setting]
+    %i[balance_notification_setting currency]
   end
 end
