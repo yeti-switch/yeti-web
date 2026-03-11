@@ -6,6 +6,7 @@
 #
 #  id                     :integer(4)       not null, primary key
 #  balance                :decimal(, )      not null
+#  currency_name          :string           default("USD"), not null
 #  destination_rate_limit :decimal(, )
 #  invoice_ref_template   :string           default("$id"), not null
 #  max_balance            :decimal(, )      not null
@@ -30,6 +31,7 @@
 # Indexes
 #
 #  accounts_contractor_id_idx  (contractor_id)
+#  accounts_currency_id_idx    (currency_id)
 #  accounts_external_id_key    (external_id) UNIQUE
 #  accounts_name_key           (name) UNIQUE
 #  accounts_uuid_key           (uuid) UNIQUE
@@ -48,9 +50,8 @@ class Account < ApplicationRecord
   class << self
     def totals_per_currency
       except(:preload, :includes, :eager_load, :limit, :offset, :select, :order)
-        .joins(:currency)
-        .group('billing.currencies.name')
-        .pluck(Arel.sql('billing.currencies.name, sum(balance)'))
+        .group(:currency_name)
+        .pluck(Arel.sql('currency_name, sum(balance)'))
         .sort_by(&:first)
     end
 
@@ -120,6 +121,8 @@ class Account < ApplicationRecord
   validates :invoice_period_id, inclusion: { in: Billing::InvoicePeriod.ids }, allow_nil: true
   validates :next_invoice_type_id, inclusion: { in: Billing::InvoiceType.ids }, allow_nil: true
 
+  before_validation :set_currency_name, on: :create
+
   after_initialize do
     if new_record?
       self.balance ||= 0
@@ -184,7 +187,7 @@ class Account < ApplicationRecord
   end
 
   def display_name
-    "#{name} [#{currency.name}] | #{id}"
+    "#{name} [#{currency_name}] | #{id}"
   end
 
   def min_balance_reached?
@@ -204,6 +207,10 @@ class Account < ApplicationRecord
   end
 
   private
+
+  def set_currency_name
+    self.currency_name = currency&.name if currency_id.present?
+  end
 
   def currency_id_not_changed
     errors.add(:currency_id, 'cannot be changed after creation') if currency_id_changed?

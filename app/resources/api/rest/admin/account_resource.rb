@@ -50,7 +50,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
   end
 
   def currency
-    _model.currency&.name
+    _model.currency_name
   end
 
   def self.updatable_fields(_context)
@@ -88,6 +88,6 @@ class Api::Rest::Admin::AccountResource < BaseResource
   end
 
   def self.required_model_includes(_context)
-    %i[balance_notification_setting currency]
+    [:balance_notification_setting]
   end
 end

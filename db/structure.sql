@@ -3331,6 +3331,7 @@ CREATE TABLE billing.accounts (
     invoice_ref_template character varying DEFAULT '$id'::character varying NOT NULL,
     timezone character varying DEFAULT 'UTC'::character varying NOT NULL,
     currency_id smallint DEFAULT 0 NOT NULL,
+    currency_name character varying DEFAULT 'USD'::character varying NOT NULL,
     CONSTRAINT positive_max_call_duration CHECK ((max_call_duration > 0)),
     CONSTRAINT positive_origination_capacity CHECK ((origination_capacity > 0)),
     CONSTRAINT positive_termination_capacity CHECK ((termination_capacity > 0)),
@@ -48794,6 +48795,13 @@ CREATE UNIQUE INDEX account_balance_notification_settings_account_id_uniq_idx ON
 --
 
 CREATE INDEX accounts_contractor_id_idx ON billing.accounts USING btree (contractor_id);
+
+
+--
+-- Name: accounts_currency_id_idx; Type: INDEX; Schema: billing; Owner: -
+--
+
+CREATE INDEX accounts_currency_id_idx ON billing.accounts USING btree (currency_id);
 
 
 --

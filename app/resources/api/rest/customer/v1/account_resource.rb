@@ -24,7 +24,7 @@ class Api::Rest::Customer::V1::AccountResource < Api::Rest::Customer::V1::BaseRe
   ransack_filter :total_capacity, type: :number
 
   def currency
-    _model.currency&.name
+    _model.currency_name
   end
 
   def self.apply_allowed_accounts(records, options)

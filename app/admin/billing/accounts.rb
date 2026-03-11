@@ -15,7 +15,7 @@ ActiveAdmin.register Account do
 
   acts_as_export :id,
                  [:contractor_name, proc { |row| row.contractor.name }],
-                 [:currency_name, proc { |row| row.currency.name }],
+                 :currency_name,
                  :name,
                  :balance,
                  :min_balance,
@@ -96,7 +96,7 @@ ActiveAdmin.register Account do
                                  end
                                end
                              } do |c|
-      status_tag(c.currency.name)
+      status_tag(c.currency_name)
       text_node ' '
       strong do
         c.decorated_balance
@@ -147,7 +147,7 @@ ActiveAdmin.register Account do
           row :external_id
           row :contractor
           row :currency do
-            status_tag(s.currency.name)
+            status_tag(s.currency_name)
           end
           row :balance do
             s.decorated_balance

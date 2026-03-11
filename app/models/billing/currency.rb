@@ -177,6 +177,9 @@ class Billing::Currency < ApplicationRecord
   validates :rate, presence: true, numericality: { greater_than: 0 }
   validate :rate_must_be_one_for_default
 
+  has_many :accounts, class_name: 'Account', foreign_key: :currency_id, dependent: :restrict_with_error
+
+  after_update :update_accounts_currency_name, if: :saved_change_to_name?
   before_destroy :prevent_default_destroy
 
   def default?
@@ -191,6 +194,10 @@ class Billing::Currency < ApplicationRecord
 
   def rate_must_be_one_for_default
     errors.add(:rate, 'must be 1 for default currency') if default? && rate != 1
+  end
+
+  def update_accounts_currency_name
+    accounts.update_all(currency_name: name)
   end
 
   def prevent_default_destroy

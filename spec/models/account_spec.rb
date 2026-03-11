@@ -6,6 +6,7 @@
 #
 #  id                     :integer(4)       not null, primary key
 #  balance                :decimal(, )      not null
+#  currency_name          :string           default("USD"), not null
 #  destination_rate_limit :decimal(, )
 #  invoice_ref_template   :string           default("$id"), not null
 #  max_balance            :decimal(, )      not null
@@ -30,6 +31,7 @@
 # Indexes
 #
 #  accounts_contractor_id_idx  (contractor_id)
+#  accounts_currency_id_idx    (currency_id)
 #  accounts_external_id_key    (external_id) UNIQUE
 #  accounts_name_key           (name) UNIQUE
 #  accounts_uuid_key           (uuid) UNIQUE
