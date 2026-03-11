@@ -13,6 +13,7 @@ ActiveSupport::Notifications.subscribe 'process_action.action_controller' do |_n
       api_log.meta = payload[:meta]
       api_log.tags = YetiConfig.api_log_tags || []
 
+      api_log.request_id = request.request_id
       api_log.remote_ip = request.env['HTTP_X_REAL_IP'] || request.remote_ip
       api_log.path = payload[:path].to_s.split('?').first
       api_log.page_duration = (finish - start) * 1000

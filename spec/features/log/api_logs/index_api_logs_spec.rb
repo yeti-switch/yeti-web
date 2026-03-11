@@ -6,8 +6,8 @@ RSpec.describe 'Index Log Api Logs', type: :feature do
   before { Log::ApiLog.destroy_all }
 
   context 'when visit index page with two API Logs' do
-    let!(:api_log_first) { FactoryBot.create(:api_log) }
-    let!(:api_log_second) { FactoryBot.create(:api_log) }
+    let!(:api_log_first) { FactoryBot.create(:api_log, request_id: SecureRandom.uuid) }
+    let!(:api_log_second) { FactoryBot.create(:api_log, request_id: SecureRandom.uuid) }
 
     before { visit api_logs_path }
 
@@ -15,6 +15,8 @@ RSpec.describe 'Index Log Api Logs', type: :feature do
       expect(page).to have_table_row count: 2
       expect(page).to have_table_cell column: 'Id', exact_text: api_log_first.id
       expect(page).to have_table_cell column: 'Id', exact_text: api_log_second.id
+      expect(page).to have_table_cell column: 'Request Id', exact_text: api_log_first.request_id
+      expect(page).to have_table_cell column: 'Request Id', exact_text: api_log_second.request_id
       expect(page).to have_table_cell column: 'Tags', exact_text: ''
       expect(page).not_to have_link 'CSV'
     end

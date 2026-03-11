@@ -7,7 +7,7 @@ RSpec.describe 'Show Log Api Logs' do
   let!(:record) { FactoryBot.create(:api_log, record_attrs) }
 
   context 'when visit valid API Log' do
-    let(:record_attrs) { super().merge tags: %w[tag1 tag2] }
+    let(:record_attrs) { super().merge tags: %w[tag1 tag2], request_id: SecureRandom.uuid }
 
     before { visit api_log_path(record) }
 
@@ -15,6 +15,7 @@ RSpec.describe 'Show Log Api Logs' do
       expect(page).to have_page_title record.id
       expect(page).to have_attribute_row('Controller', exact_text: record.controller)
       expect(page).to have_attribute_row('Tags', exact_text: 'tag1, tag2')
+      expect(page).to have_attribute_row('Request Id', exact_text: record.request_id)
     end
   end
 end

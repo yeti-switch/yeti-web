@@ -21,6 +21,7 @@
 #  status           :integer(4)
 #  tags             :string           default([]), is an Array
 #  created_at       :timestamptz      not null
+#  request_id       :string
 #
 # Indexes
 #
