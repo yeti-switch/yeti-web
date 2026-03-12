@@ -46,7 +46,7 @@ FactoryBot.define do
     sequence(:name) { |n| "account#{n}" }
     sequence(:external_id) { |n| n }
     association :contractor, vendor: true
-    association :currency, factory: :currency
+    currency { Billing::Currency.take || create(:currency) }
     balance { 0 }
     vat { 23.1 }
     destination_rate_limit { 0.3444 }
