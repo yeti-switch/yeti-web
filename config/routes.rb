@@ -262,6 +262,7 @@ Rails.application.routes.draw do
             dasherized_resources :areas
             dasherized_resources :contractors
             dasherized_resources :countries
+            dasherized_resources :currencies
             dasherized_resources :customer_auths
             dasherized_resources :gateways
             dasherized_resources :network_prefixes
