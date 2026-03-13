@@ -217,10 +217,15 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       f.input :scheduler, as: :select, input_html: { class: 'tom-select' }
       f.input :rate_group, input_html: { class: 'tom-select' }
 
-      f.input :routing_tag_ids, as: :select,
-                                collection: routing_tag_options,
-                                include_hidden: false,
-                                input_html: { class: 'tom-select', multiple: true }
+      f.input :routing_tag_ids,
+              as: :select,
+              collection: routing_tag_options,
+              include_hidden: false,
+              input_html: {
+                class: 'tom-select',
+                'data-allow-empty-option': true,
+                multiple: true
+              }
       f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert, input_html: { class: 'tom-select' }
 
       f.input :valid_from, as: :date_time_picker

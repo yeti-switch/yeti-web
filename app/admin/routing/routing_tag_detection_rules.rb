@@ -69,11 +69,15 @@ ActiveAdmin.register Routing::RoutingTagDetectionRule do
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs do
-      f.input :routing_tag_ids, as: :select,
-                                collection: routing_tag_options,
-                                multiple: true,
-                                include_hidden: false,
-                                input_html: { class: 'tom-select' }
+      f.input :routing_tag_ids,
+              as: :select,
+              collection: routing_tag_options,
+              multiple: true,
+              include_hidden: false,
+              input_html: {
+                class: 'tom-select',
+                'data-allow-empty-option': true
+              }
       f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert, input_html: { class: 'tom-select' }
       f.input :src_area, input_html: { class: 'tom-select' }
       f.input :dst_area, input_html: { class: 'tom-select' }
