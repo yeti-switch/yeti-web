@@ -23,8 +23,10 @@ module Helpers
       tom_select = find_tom_select(label, exact: exact_label, selector:)
 
       if search
-        search_text = search.is_a?(TrueClass) ? with : search
-        tom_select.search_and_select(search_text, select: with, exact:)
+        Array.wrap(with).each do |text|
+          search_text = search.is_a?(TrueClass) ? text : search
+          tom_select.search_and_select(search_text, select: text, exact:)
+        end
       else
         tom_select.select(with, exact:)
       end

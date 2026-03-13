@@ -19,7 +19,7 @@ function tomSelectRenderNoResultsFunc() {
     return '<div class="no-results">No results matched</div>'
 }
 
-function initTomSelect(parent) {
+function initTomSelect(parent, options = {}) {
     function hasBlankOption(el) {
         return $(el).find('option[value=""]').length > 0
     }
@@ -38,7 +38,7 @@ function initTomSelect(parent) {
         var allowEmptyOption = !!$el.data('allow-empty-option')
         var skipDropdownInput = !!$el.data('skip-dropdown-input')
 
-        if (!isMultiple && !skipDropdownInput) plugins.push('dropdown_input')
+        if (!skipDropdownInput) plugins.push('dropdown_input')
         if (isMultiple) plugins.push('remove_button')
         if (hasBlankOption(this)) plugins.push('clear_button')
         if (hasBlankOption(this) && !allowEmptyOption) {
@@ -58,7 +58,8 @@ function initTomSelect(parent) {
             },
             render: {
                 item: tomSelectRenderItemFunc
-            }
+            },
+            ...options
         })
     })
 
@@ -68,6 +69,8 @@ function initTomSelect(parent) {
 
         var plugins = ['remove_button', 'drag_drop', 'clear_button']
         var $el = $(this)
+        var skipDropdownInput = !!$el.data('skip-dropdown-input')
+        if (!skipDropdownInput) plugins.push('dropdown_input')
         if (hasBlankOption(this) && !$el.data('allow-empty-option')) {
             // delete empty option from original select to avoid duplication
             $el.find('option[value=""]').remove()
@@ -83,7 +86,8 @@ function initTomSelect(parent) {
             },
             render: {
                 item: tomSelectRenderItemFunc
-            }
+            },
+            ...options
         })
     })
 
@@ -91,14 +95,14 @@ function initTomSelect(parent) {
     parent.find('select.tom-select-ajax').each(function () {
         if (this.tomselect) return
 
-        initTomSelectAjax(this)
+        initTomSelectAjax(this, options)
     })
 
     // AJAX fillable: .tom-select-ajax-fillable
     parent.find('select.tom-select-ajax-fillable').each(function () {
         if (this.tomselect) return
 
-        initTomSelectAjaxFillable(this)
+        initTomSelectAjaxFillable(this, options)
     })
 
     // Filter form selects
@@ -112,7 +116,8 @@ function initTomSelect(parent) {
             refreshThrottle: 0,
             render: {
                 item: tomSelectRenderItemFunc
-            }
+            },
+            ...options
         })
     })
 }

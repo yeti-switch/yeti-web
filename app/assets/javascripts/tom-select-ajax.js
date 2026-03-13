@@ -1,7 +1,7 @@
 (function () {
     var abortControllers = {}
 
-    window.initTomSelectAjax = function (el) {
+    window.initTomSelectAjax = function (el, options = {}) {
         var $el = $(el)
         var path = $el.attr('data-path')
         path += path.includes('?') ? '&' : '?'
@@ -75,7 +75,8 @@
                     return '<div class="no-results">Type 3 chars to search...</div>'
                 },
                 item: tomSelectRenderItemFunc
-            }
+            },
+            ...options
         })
 
         // Clear when required param field becomes empty

@@ -1,7 +1,7 @@
 (function() {
     var abortControllers = {}
 
-    window.initTomSelectAjaxFillable = function(el) {
+    window.initTomSelectAjaxFillable = function(el, options = {}) {
         var $el = $(el)
         var skipDropdownInput = !!$el.data('skip-dropdown-input')
         var path = $el.attr('data-path')
@@ -24,7 +24,8 @@
             render: {
                 no_results: tomSelectRenderNoResultsFunc,
                 item: tomSelectRenderItemFunc
-            }
+            },
+            ...options
         })
 
         function fillOptions() {

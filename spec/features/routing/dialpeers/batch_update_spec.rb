@@ -230,7 +230,8 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
         fill_in_tom_select '#batch_update_routing_tag_ids-ts-control',
                            with: tag.name,
                            multiple: true,
-                           selector: true
+                           selector: true,
+                           search: true
       end
     end
   end
@@ -290,7 +291,8 @@ RSpec.describe BatchUpdateForm::Dialpeer, :js do
       fill_in_tom_select '#batch_update_routing_tag_ids-ts-control',
                          with: Routing::RoutingTag::ANY_TAG,
                          multiple: true,
-                         selector: true
+                         selector: true,
+                         search: true
     end
 
     it 'should create a Job to update routing_tag_ids to any tag: [nil]' do
