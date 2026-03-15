@@ -1,13 +1,14 @@
 // Build tom-select field for routing tag ids select on update batch action form
 
 $(document).on('mass_update_modal_dialog:after_open', function (event, form) {
-    var tagsSelect = $(form).find("select[name='routing_tag_ids']").prop({
+    var tagsSelect = $(form).find("select[name='routing_tag_ids']").attr({
         'name': 'routing_tag_ids[]',
         'class': 'tom-select',
         'id': 'batch_update_routing_tag_ids',
         'value': null, // reset default value
-        'multiple': true
-    }).attr('data-allow-empty-option', true);
+        'multiple': true,
+        'data-allow-empty-option': true
+    });
     var tagsCheckbox = $('#mass_update_dialog_routing_tag_ids');
 
     if (tagsSelect.length === 0) {

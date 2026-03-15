@@ -8,24 +8,26 @@ $(document).ready(function () {
         }
 
         // fix inputs
-        const uniqueColumnsSelect = form.find('select')
-            .attr('name', 'changes[unique_columns][]')
-            .attr('id', 'changes_unique_columns')
-            .attr('multiple', 'multiple')
-            .attr('class', 'tom-select');
+        const uniqueColumnsSelect = form.find('select').attr({
+            name: 'changes[unique_columns][]',
+            id: 'changes_unique_columns',
+            multiple: 'multiple',
+            class: 'tom-select'
+        });
 
-        form.find('input[name="additional_filter"]')
-            .attr('name', 'changes[additional_filter]')
-            .attr('id', 'changes_additional_filter');
+        form.find('input[name="additional_filter"]').attr({
+            name: 'changes[additional_filter]',
+            id: 'changes_additional_filter'
+        });
 
 
         // fix labels
         form.find('#changes_unique_columns').siblings('label')
             .text('Unique Columns')
-            .attr('for', 'changes_unique_columns');
+            .attr({ for: 'changes_unique_columns' });
         form.find('#changes_additional_filter').siblings('label')
             .text('Additional SQL filter')
-            .attr('for', 'changes_additional_filter');
+            .attr({ for: 'changes_additional_filter' });
 
         // add select all button
         initTomSelect(form)
@@ -34,7 +36,9 @@ $(document).ready(function () {
             // Make ts-wrapper take full width
             $(ts.wrapper).css('width', '100%');
 
-            let select_all_column = $('<a></a>').text('Select All').attr('id', 'select-all-unique-columns').attr('href', '#');
+            let select_all_column = $('<a></a>')
+                .text('Select All')
+                .attr({ id: 'select-all-unique-columns', href: '#' });
             form.append(select_all_column);
             select_all_column.click(function () {
                 var allValues = [];

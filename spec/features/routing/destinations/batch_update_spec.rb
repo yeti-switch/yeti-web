@@ -167,7 +167,8 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
           fill_in_tom_select '#batch_update_routing_tag_ids-ts-control',
                              with: Routing::RoutingTag.find(tag_id).name,
                              multiple: true,
-                             selector: true
+                             selector: true,
+                             search: true
         end
       end
     end
@@ -227,7 +228,7 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       click_button 'Update batch'
       page.scroll_to find_button('OK')
       check :Routing_tag_ids
-      # toggle checkbox and then leave it empty to chnage value to empty array
+      # toggle checkbox and then leave it empty to change value to empty array
     end
 
     it 'should create Job to update routing_tag_ids field of desctination to default value: []' do
@@ -256,7 +257,8 @@ RSpec.describe BatchUpdateForm::Destination, js: true do
       fill_in_tom_select '#batch_update_routing_tag_ids-ts-control',
                          with: Routing::RoutingTag::ANY_TAG,
                          multiple: true,
-                         selector: true
+                         selector: true,
+                         search: true
       expect do
         subject
         expect(page).to have_selector '.flash', text: success_message
