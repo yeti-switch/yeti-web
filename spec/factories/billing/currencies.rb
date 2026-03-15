@@ -14,13 +14,11 @@
 #
 FactoryBot.define do
   factory :currency, class: 'Billing::Currency' do
-    sequence(:name) { |n| Billing::Currency::NAMES.keys[n % Billing::Currency::NAMES.size] }
+    sequence(:name) { |n| (Billing::Currency::NAMES.keys - ['USD'])[n % (Billing::Currency::NAMES.size - 1)] }
     rate { 1.5 }
 
     trait :default do
-      id { 0 }
-      name { 'USD' }
-      rate { 1 }
+      initialize_with { Billing::Currency.find(0) }
     end
   end
 end

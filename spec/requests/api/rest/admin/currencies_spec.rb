@@ -15,7 +15,7 @@ RSpec.describe Api::Rest::Admin::CurrenciesController, type: :request do
     include_examples :jsonapi_responds_with_pagination_links
     include_examples :returns_json_api_collection do
       let(:json_api_collection_ids) do
-        currencies.map { |r| r.id.to_s }
+        Billing::Currency.pluck(:id).map(&:to_s)
       end
     end
 
@@ -88,7 +88,9 @@ RSpec.describe Api::Rest::Admin::CurrenciesController, type: :request do
 
       include_examples :returns_json_api_errors, status: 422, errors: [
         { detail: "name - can't be blank", source: { pointer: '/data/attributes/name' } },
-        { detail: "rate - can't be blank", source: { pointer: '/data/attributes/rate' } }
+        { detail: 'name - is not included in the list', source: { pointer: '/data/attributes/name' } },
+        { detail: "rate - can't be blank", source: { pointer: '/data/attributes/rate' } },
+        { detail: 'rate - is not a number', source: { pointer: '/data/attributes/rate' } }
       ]
     end
   end
@@ -117,7 +119,7 @@ RSpec.describe Api::Rest::Admin::CurrenciesController, type: :request do
     it_behaves_like :json_api_admin_check_authorization
 
     context 'when default currency' do
-      let!(:currency) { FactoryBot.create(:currency, :default) }
+      let!(:currency) { Billing::Currency.find(0) }
 
       context 'changing rate' do
         let(:json_api_request_attributes) { { rate: 2.5 } }
@@ -156,7 +158,7 @@ RSpec.describe Api::Rest::Admin::CurrenciesController, type: :request do
     it_behaves_like :json_api_admin_check_authorization, status: 204
 
     context 'when default currency' do
-      let!(:currency) { FactoryBot.create(:currency, :default) }
+      let!(:currency) { Billing::Currency.find(0) }
 
       include_examples :responds_with_status, 422
     end
