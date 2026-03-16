@@ -11,7 +11,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
              :external_id, :uuid,
              :origination_capacity, :termination_capacity, :total_capacity,
              :send_invoices_to, :invoice_period_id, :timezone,
-             :currency_id, :currency
+             :currency
 
   has_one :contractor, always_include_linkage_data: true
   has_one :invoice_template, class_name: 'InvoiceTemplate', always_include_linkage_data: true
@@ -80,7 +80,7 @@ class Api::Rest::Admin::AccountResource < BaseResource
   end
 
   def self.creatable_fields(context)
-    updatable_fields(context) + %i[currency_id]
+    updatable_fields(context) + %i[currency]
   end
 
   def self.sortable_fields(context)

@@ -66,7 +66,7 @@ RSpec.describe Account, type: :model do
     end
 
     let(:current_time) { Time.now }
-    let(:create_params) { { name: 'test', contractor_id: contractor.id } }
+    let(:create_params) { { name: 'test', contractor_id: contractor.id, currency_id: Billing::Currency.find(0).id } }
     let!(:contractor) { FactoryBot.create(:vendor) }
     let(:default_params) do
       {
@@ -113,7 +113,8 @@ RSpec.describe Account, type: :model do
 
       include_examples :does_not_create_record, errors: {
         name: "can't be blank",
-        contractor: 'must exist'
+        contractor: 'must exist',
+        currency: 'must exist'
       }
     end
 
