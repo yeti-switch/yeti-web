@@ -81,6 +81,20 @@ RSpec.describe 'Edit Dialpeer', js: true do
     end
   end
 
+  context 'with only any tag routing tag' do
+    let(:fill_form!) do
+      fill_in_tom_select 'Routing tags', with: Routing::RoutingTag::ANY_TAG, multiple: true
+    end
+
+    it 'changes routing tags to contain nil' do
+      subject
+      expect(page).to have_flash_message('Dialpeer was successfully updated.', type: :notice)
+      expect(record.reload).to have_attributes(
+                                 routing_tag_ids: [nil]
+                               )
+    end
+  end
+
   context 'with filled routing tags' do
     let(:fill_form!) do
       fill_in_tom_select 'Routing tags', with: [

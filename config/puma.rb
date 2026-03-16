@@ -31,7 +31,7 @@ before_fork do
 
   PumaWorkerKiller.config do |config|
     config.ram           = 2048 # mb
-    config.frequency     = 5    # seconds
+    config.frequency     = ENV.fetch('PWK_FREQUENCY', 5).to_i # seconds
     config.percent_usage = 0.98
     config.rolling_restart_frequency = 3 * 3600 # 12 hours in seconds, or 12.hours if using Rails
     config.reaper_status_logs = true # setting this to false will not log lines like:

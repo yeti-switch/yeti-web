@@ -91,6 +91,33 @@ RSpec.describe 'Create new Dialpeer', js: true do
     )
   end
 
+  context 'with only any tag routing tag' do
+    let(:fill_form!) do
+      super()
+      fill_in_tom_select 'Routing tags', with: Routing::RoutingTag::ANY_TAG, multiple: true
+    end
+
+    it 'creates record with routing_tag_ids containing nil' do
+      expect {
+        subject
+        expect(page).to have_flash_message('Dialpeer was successfully created.', type: :notice)
+      }.to change { Dialpeer.count }.by(1)
+
+      record = Dialpeer.last
+      expect(record).to have_attributes(
+                          **default_dialpeer_attributes,
+                          vendor_id: vendor.id,
+                          account_id: account.id,
+                          routing_group_id: routing_group.id,
+                          routeset_discriminator_id: routeset_discriminator.id,
+                          gateway_id: gateway.id,
+                          initial_rate: 0.1,
+                          next_rate: 0.2,
+                          routing_tag_ids: [nil]
+                        )
+    end
+  end
+
   context 'with filled routing tags' do
     let(:fill_form!) do
       super()
