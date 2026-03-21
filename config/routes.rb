@@ -128,6 +128,7 @@ Rails.application.routes.draw do
           jsonapi_resources :invoice_terminated_networks, only: %i[index show]
           jsonapi_resources :invoice_service_data, only: %i[index show]
           jsonapi_resources :service_types
+          jsonapi_resources :currencies
           jsonapi_resources :services, only: %i[index show create update]
           jsonapi_resources :transactions, only: %i[index show create]
 
@@ -261,6 +262,7 @@ Rails.application.routes.draw do
             dasherized_resources :areas
             dasherized_resources :contractors
             dasherized_resources :countries
+            dasherized_resources :currencies
             dasherized_resources :customer_auths
             dasherized_resources :gateways
             dasherized_resources :network_prefixes

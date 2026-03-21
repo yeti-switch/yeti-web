@@ -274,7 +274,7 @@ RSpec.describe Api::Rest::Admin::SipOptionsProbersController do
 
     context 'when update external id to exist external id' do
       let(:json_api_request_relationships) { {} }
-      let(:exist_external_id) { create(:sip_options_prober, external_id: 1_222_456).external_id }
+      let(:exist_external_id) { create(:sip_options_prober).external_id }
       let(:json_api_request_attributes) do
         { 'external-id': exist_external_id }
       end

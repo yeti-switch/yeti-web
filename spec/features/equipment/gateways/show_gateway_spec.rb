@@ -61,7 +61,7 @@ RSpec.describe 'Show Gateway', type: :feature, js: true do
 
   context 'external gateway incoming auth fields' do
     let(:gateway_traits) { super() + [:with_incoming_auth] }
-    let(:gateway_attrs) { super().merge(external_id: 9_999) }
+    let(:gateway_attrs) { super() }
 
     before do
       stub_jrpc_connect_error(node.rpc_endpoint)

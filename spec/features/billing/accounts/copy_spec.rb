@@ -11,7 +11,7 @@ RSpec.describe 'Copy Account', type: :feature, js: true do
   include_context :login_as_admin
   include_context :timezone_helpers
   let!(:customer) { create(:customer) }
-  let!(:old_account) { create(:account, :filled, contractor: customer, external_id: '123456') }
+  let!(:old_account) { create(:account, :filled, contractor: customer) }
   let(:change_form!) do
     fill_in 'Name', with: 'new name'
   end

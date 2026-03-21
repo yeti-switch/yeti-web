@@ -21,18 +21,26 @@ module AdminApi
                      :contractor_id,
                      :timezone,
                      :invoice_template_id,
-                     :invoice_period_id
+                     :invoice_period_id,
+                     :currency_id
 
+    attribute :currency, :string
     attribute :balance_low_threshold, :decimal
     attribute :balance_high_threshold, :decimal
     attribute :send_balance_notifications_to, :integer, array: true
 
     after_initialize :assign_from_model
+    validate :validate_currency
     validate :validate_balance_thresholds
     after_save :save_balance_notification_setting
 
     def send_invoices_to=(value)
       model.send_invoices_to = Array.wrap(value).reject(&:blank?).presence
+    end
+
+    def currency=(value)
+      super
+      self.currency_id = Billing::Currency.find_by(name: value)&.id
     end
 
     def send_balance_notifications_to=(value)
@@ -54,6 +62,13 @@ module AdminApi
         high_threshold: balance_high_threshold,
         send_to: send_balance_notifications_to.reject(&:nil?).presence
       )
+    end
+
+    def validate_currency
+      return if currency.blank?
+      return if Billing::Currency.exists?(name: currency)
+
+      errors.add(:currency, 'is not found')
     end
 
     def validate_balance_thresholds

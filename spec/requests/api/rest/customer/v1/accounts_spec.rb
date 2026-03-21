@@ -164,7 +164,8 @@ RSpec.describe Api::Rest::Customer::V1::AccountsController, type: :request do
             'destination-rate-limit': account.destination_rate_limit.to_s,
             'origination-capacity': account.origination_capacity,
             'termination-capacity': account.termination_capacity,
-            'total-capacity': account.total_capacity
+            'total-capacity': account.total_capacity,
+            currency: account.currency_name
           }
         )
       end

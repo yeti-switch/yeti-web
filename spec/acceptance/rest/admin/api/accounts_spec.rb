@@ -13,6 +13,7 @@ RSpec.resource 'Accounts' do
     external-id
     balance-low-threshold balance-high-threshold send-balance-notifications-to
     invoice-period-id timezone invoice-period-id
+    currency
   ]
 
   required_relationships = %i[contractor]
@@ -55,6 +56,7 @@ RSpec.resource 'Accounts' do
     let(:timezone) { 'Europe/Kyiv' }
     let(:'invoice-period-id') { 2 }
 
+    let(:currency) { 'USD' }
     let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }
 
     example_request 'create new entry' do

@@ -2,6 +2,7 @@
 
 RSpec.describe 'Auth Logs Index', type: :feature do
   include_context :login_as_admin
+  include_context :clean_cdr_db
 
   it 'n+1 checks' do
     auth_logs = create_list(:auth_log, 2, :with_id)

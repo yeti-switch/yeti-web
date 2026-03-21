@@ -74,6 +74,14 @@ SELECT pg_catalog.setval('invoices_templates_id_seq', 2, true);
 SELECT pg_catalog.setval('payments_id_seq', 30, true);
 
 
+--
+-- Data for Name: currencies; Type: TABLE DATA; Schema: billing; Owner: yeti
+--
+
+INSERT INTO billing.currencies (id, name, rate) VALUES (0, 'USD', 1);
+
+SELECT pg_catalog.setval('billing.currencies_id_seq', 1, true);
+
 -- Completed on 2017-08-20 19:13:57 EEST
 
 --

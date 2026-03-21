@@ -130,7 +130,8 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
         'send-invoices-to': Billing::Contact.collection.first.id,
         'origination-capacity': 10,
         'termination-capacity': 3,
-        'total-capacity': 11
+        'total-capacity': 11,
+        currency: 'USD'
       }
     end
     let(:relationships) do
@@ -156,7 +157,8 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
     context 'when only required attributes and relationships' do
       let(:attributes) do
         {
-          name: 'name'
+          name: 'name',
+          currency: 'USD'
         }
       end
       let(:relationships) do
@@ -167,6 +169,15 @@ RSpec.describe Api::Rest::Admin::AccountsController, type: :controller do
 
       include_examples :responds_with_status, 201
       include_examples :creates_account
+    end
+
+    context 'when currency does not exist' do
+      let(:attributes) do
+        super().merge currency: 'INVALID'
+      end
+
+      include_examples :responds_with_status, 422
+      include_examples :does_not_create_account
     end
 
     context 'with attributes balance-low-threshold = balance-high-threshold' do

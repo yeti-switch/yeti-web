@@ -8,7 +8,7 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::AccountsController do
       get clickhouse_dictionary_request_path
     end
 
-    let!(:accounts) { create_list(:account, 3) + [create(:account, external_id: 123)] }
+    let!(:accounts) { create_list(:account, 3) + [create(:account, external_id: nil)] }
 
     include_examples :responds_with_correct_json_each_row do
       let(:expected_rows) do
@@ -24,7 +24,9 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::AccountsController do
             origination_capacity: record.origination_capacity,
             termination_capacity: record.termination_capacity,
             total_capacity: record.total_capacity,
-            uuid: record.uuid
+            uuid: record.uuid,
+            currency_id: record.currency_id,
+            currency_name: record.currency_name
           }
         end
       end

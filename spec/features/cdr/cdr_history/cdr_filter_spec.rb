@@ -8,6 +8,7 @@ RSpec.describe 'Cdrs index page filtering', js: true do
   end
 
   include_context :login_as_admin
+  include_context :clean_cdr_db
 
   let(:filter_value) { nil }
 

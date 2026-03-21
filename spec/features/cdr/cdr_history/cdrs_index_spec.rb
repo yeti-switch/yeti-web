@@ -7,6 +7,7 @@ RSpec.describe 'CDRs index', type: :feature do
   end
 
   include_context :login_as_admin
+  include_context :clean_cdr_db
   include_context :init_routing_tag_collection
 
   before do

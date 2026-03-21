@@ -93,7 +93,7 @@ RSpec.describe 'Create new CDR export', js: true do
     let(:countries) { System::Country.all }
     let!(:vendor) { create(:vendor) }
     let!(:vendor_acc) { create(:account, name: 'test', contractor: vendor) }
-    let!(:customer_auth) { create(:customers_auth, external_id: 1235, external_type: 'term') }
+    let!(:customer_auth) { create(:customers_auth, external_type: 'term') }
     let!(:gateway1) { create(:gateway) }
     let!(:gateway2) { create(:gateway) }
 
@@ -106,12 +106,12 @@ RSpec.describe 'Create new CDR export', js: true do
         fill_in 'Customer external id eq', with: '1231'
         fill_in_tom_select 'Customer id eq', with: "#{customer.name} | #{customer.id}", search: customer.name
         fill_in 'Customer acc external id eq', with: '1232'
-        fill_in_tom_select 'Customer acc id eq', with: "#{account.name} | #{account.id}", search: account.name
+        fill_in_tom_select 'Customer acc id eq', with: account.display_name, search: account.name
         fill_in 'Vendor external id eq', with: '1233'
         fill_in_tom_select 'Vendor id eq', with: "#{vendor.name} | #{vendor.id}", search: vendor.name
         fill_in 'Vendor acc external id eq', with: '1234'
-        fill_in_tom_select 'Vendor acc id eq', with: "#{vendor_acc.name} | #{vendor_acc.id}", search: vendor_acc.name
-        fill_in 'Customer auth external id eq', with: '1235'
+        fill_in_tom_select 'Vendor acc id eq', with: vendor_acc.display_name, search: vendor_acc.name
+        fill_in 'Customer auth external id eq', with: customer_auth.external_id.to_s
         fill_in_tom_select 'Customer auth id eq', with: "#{customer_auth.name} | #{customer_auth.id}"
         fill_in 'Src prefix in contains', with: 'src_prefix_in_test'
         fill_in 'Src prefix in eq', with: 'src_prefix_in_test'
@@ -186,7 +186,7 @@ RSpec.describe 'Create new CDR export', js: true do
                            vendor_id_eq: vendor.id,
                            vendor_acc_external_id_eq: 1234,
                            vendor_acc_id_eq: vendor_acc.id,
-                           customer_auth_external_id_eq: 1235,
+                           customer_auth_external_id_eq: customer_auth.external_id,
                            customer_auth_id_eq: customer_auth.id,
                            src_prefix_in_contains: 'src_prefix_in_test',
                            src_prefix_in_eq: 'src_prefix_in_test',
@@ -295,7 +295,7 @@ RSpec.describe 'Create new CDR export', js: true do
   end
 
   context 'when "Customer Auth external ID IN" filter is selected and then form submitted' do
-    let!(:customer_auth) { create(:customers_auth, external_id: 1235, external_type: 'term') }
+    let!(:customer_auth) { create(:customers_auth, external_type: 'term') }
     let(:fill_form!) { fill_in_tom_select 'Customer auth external id in', with: customer_auth.display_name, multiple: true, search: true }
 
     it 'should render form with previously selected Customer Auth' do

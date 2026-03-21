@@ -8,7 +8,7 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::GatewaysController do
       get clickhouse_dictionary_request_path
     end
 
-    let!(:gateways) { create_list(:gateway, 3) + [create(:gateway, external_id: 123)] }
+    let!(:gateways) { create_list(:gateway, 3) + [create(:gateway, external_id: nil)] }
 
     include_examples :responds_with_correct_json_each_row do
       let(:expected_rows) do

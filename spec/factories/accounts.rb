@@ -6,6 +6,7 @@
 #
 #  id                     :integer(4)       not null, primary key
 #  balance                :decimal(, )      not null
+#  currency_name          :string           not null
 #  destination_rate_limit :decimal(, )
 #  invoice_ref_template   :string           default("$id"), not null
 #  max_balance            :decimal(, )      not null
@@ -21,6 +22,7 @@
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
 #  contractor_id          :integer(4)       not null
+#  currency_id            :integer(2)       not null
 #  external_id            :bigint(8)
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
@@ -29,6 +31,7 @@
 # Indexes
 #
 #  accounts_contractor_id_idx  (contractor_id)
+#  accounts_currency_id_idx    (currency_id)
 #  accounts_external_id_key    (external_id) UNIQUE
 #  accounts_name_key           (name) UNIQUE
 #  accounts_uuid_key           (uuid) UNIQUE
@@ -36,12 +39,14 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
+#  accounts_currency_id_fkey    (currency_id => currencies.id)
 #
 FactoryBot.define do
   factory :account, class: 'Account' do
     sequence(:name) { |n| "account#{n}" }
     sequence(:external_id) { |n| n }
     association :contractor, vendor: true
+    currency { Billing::Currency.take || create(:currency) }
     balance { 0 }
     vat { 23.1 }
     destination_rate_limit { 0.3444 }

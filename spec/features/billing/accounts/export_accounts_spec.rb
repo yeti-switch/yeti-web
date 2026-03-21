@@ -19,8 +19,9 @@ RSpec.describe 'Export Accounts', type: :feature do
     expect(subject).to match_array(
       [
         ['Id',                      item.id.to_s],
-        ['Name',                    item.name],
         ['Contractor name',         item.contractor.name],
+        ['Currency name',           item.currency.name],
+        ['Name',                    item.name],
         ['Balance',                 item.balance.to_s],
         ['Vat',                     item.vat.to_s],
         ['Min balance',             item.min_balance.to_s],

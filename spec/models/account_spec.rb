@@ -6,6 +6,7 @@
 #
 #  id                     :integer(4)       not null, primary key
 #  balance                :decimal(, )      not null
+#  currency_name          :string           not null
 #  destination_rate_limit :decimal(, )
 #  invoice_ref_template   :string           default("$id"), not null
 #  max_balance            :decimal(, )      not null
@@ -21,6 +22,7 @@
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
 #  contractor_id          :integer(4)       not null
+#  currency_id            :integer(2)       not null
 #  external_id            :bigint(8)
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
@@ -29,6 +31,7 @@
 # Indexes
 #
 #  accounts_contractor_id_idx  (contractor_id)
+#  accounts_currency_id_idx    (currency_id)
 #  accounts_external_id_key    (external_id) UNIQUE
 #  accounts_name_key           (name) UNIQUE
 #  accounts_uuid_key           (uuid) UNIQUE
@@ -36,6 +39,7 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
+#  accounts_currency_id_fkey    (currency_id => currencies.id)
 #
 
 RSpec.describe Account, type: :model do
@@ -62,7 +66,7 @@ RSpec.describe Account, type: :model do
     end
 
     let(:current_time) { Time.now }
-    let(:create_params) { { name: 'test', contractor_id: contractor.id } }
+    let(:create_params) { { name: 'test', contractor_id: contractor.id, currency_id: Billing::Currency.find(0).id } }
     let!(:contractor) { FactoryBot.create(:vendor) }
     let(:default_params) do
       {
@@ -109,7 +113,8 @@ RSpec.describe Account, type: :model do
 
       include_examples :does_not_create_record, errors: {
         name: "can't be blank",
-        contractor: 'must exist'
+        contractor: 'must exist',
+        currency: 'must exist'
       }
     end
 
@@ -153,6 +158,16 @@ RSpec.describe Account, type: :model do
         record = FactoryBot.build :account, min_balance: nil
         expect(record).to_not be_valid
         expect(record.errors[:min_balance]).to include "can't be blank"
+      end
+    end
+
+    context '#currency_id' do
+      let!(:account) { FactoryBot.create(:account) }
+
+      it 'does not allow changing currency_id on update' do
+        account.currency_id = FactoryBot.create(:currency).id
+        expect(account).not_to be_valid
+        expect(account.errors[:currency_id]).to include('cannot be changed after creation')
       end
     end
 

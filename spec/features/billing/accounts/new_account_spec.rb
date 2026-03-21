@@ -15,6 +15,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
   let(:fill_form!) do
     fill_in 'Name', with: form_params[:name]
     fill_in_tom_select 'Contractor', with: form_params[:contractor].display_name, search: true
+    fill_in_tom_select 'Currency', with: form_params[:currency]
     fill_in 'Min balance', with: form_params[:min_balance]
     fill_in 'Max balance', with: form_params[:max_balance]
     fill_in 'Vat', with: form_params[:vat]
@@ -32,6 +33,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     {
       name: 'Account',
       contractor: customer,
+      currency: 'USD',
       min_balance: -100,
       max_balance: 100,
       vat: 44.1,
@@ -85,9 +87,10 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
     let(:fill_form!) do
       fill_in 'Name', with: form_params[:name]
       fill_in_tom_select 'Contractor', with: form_params[:contractor].display_name, search: true
+      fill_in_tom_select 'Currency', with: form_params[:currency]
     end
     let(:form_params) do
-      super().slice(:name, :contractor)
+      super().slice(:name, :contractor, :currency)
     end
 
     it 'creates new account successfully' do
@@ -224,7 +227,8 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
         subject
         expect(page).to have_semantic_error_texts(
                           "Name can't be blank",
-                          'Contractor must exist'
+                          'Contractor must exist',
+                          'Currency must exist'
                         )
       end.not_to change { Account.count }
     end

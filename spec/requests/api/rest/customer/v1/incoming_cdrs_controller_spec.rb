@@ -400,7 +400,8 @@ RSpec.describe Api::Rest::Customer::V1::IncomingCdrsController, type: :request d
             'destination-rate-limit': cdr.vendor_acc.destination_rate_limit.to_s,
             'origination-capacity': cdr.vendor_acc.origination_capacity,
             'termination-capacity': cdr.vendor_acc.termination_capacity,
-            'total-capacity': cdr.vendor_acc.total_capacity
+            'total-capacity': cdr.vendor_acc.total_capacity,
+            'currency': cdr.vendor_acc.currency_name
           }
         }
         let(:json_api_include_relationships_names) { nil }

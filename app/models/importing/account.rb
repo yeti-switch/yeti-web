@@ -9,6 +9,7 @@
 #  autogenerate_vendor_invoices   :boolean          default(FALSE), not null
 #  balance                        :decimal(, )
 #  contractor_name                :string
+#  currency_name                  :string
 #  destination_rate_limit         :decimal(, )
 #  error_string                   :string
 #  invoice_period_name            :string
@@ -22,6 +23,7 @@
 #  total_capacity                 :integer(2)
 #  vat                            :decimal(, )
 #  contractor_id                  :integer(4)
+#  currency_id                    :integer(2)
 #  invoice_period_id              :integer(2)
 #  o_id                           :integer(4)
 #
@@ -30,9 +32,11 @@ class Importing::Account < Importing::Base
   self.table_name = 'data_import.import_accounts'
   attr_accessor :file
   belongs_to :contractor, class_name: '::Contractor', optional: true
+  belongs_to :currency, class_name: '::Billing::Currency', optional: true
 
   self.import_attributes = %w[
     contractor_id
+    currency_id
     name
     balance
     vat

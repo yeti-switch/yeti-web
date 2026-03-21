@@ -9,6 +9,7 @@
 #  autogenerate_vendor_invoices   :boolean          default(FALSE), not null
 #  balance                        :decimal(, )
 #  contractor_name                :string
+#  currency_name                  :string
 #  destination_rate_limit         :decimal(, )
 #  error_string                   :string
 #  invoice_period_name            :string
@@ -22,6 +23,7 @@
 #  total_capacity                 :integer(2)
 #  vat                            :decimal(, )
 #  contractor_id                  :integer(4)
+#  currency_id                    :integer(2)
 #  invoice_period_id              :integer(2)
 #  o_id                           :integer(4)
 #
@@ -31,6 +33,7 @@ FactoryBot.define do
     name { nil }
     contractor_name { nil }
     contractor_id { nil }
+    currency_id { Billing::Currency.find(0).id }
     balance { 0 }
     vat { 18.2 }
     min_balance { 0 }

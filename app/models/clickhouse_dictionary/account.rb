@@ -14,5 +14,7 @@ module ClickhouseDictionary
     attribute :termination_capacity, sql: 'billing.accounts.termination_capacity'
     attribute :total_capacity, sql: 'billing.accounts.total_capacity'
     attribute :uuid, sql: 'billing.accounts.uuid'
+    attribute :currency_id, sql: 'billing.accounts.currency_id'
+    attribute :currency_name, sql: 'billing.accounts.currency_name'
   end
 end

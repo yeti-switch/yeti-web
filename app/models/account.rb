@@ -6,6 +6,7 @@
 #
 #  id                     :integer(4)       not null, primary key
 #  balance                :decimal(, )      not null
+#  currency_name          :string           not null
 #  destination_rate_limit :decimal(, )
 #  invoice_ref_template   :string           default("$id"), not null
 #  max_balance            :decimal(, )      not null
@@ -21,6 +22,7 @@
 #  uuid                   :uuid             not null
 #  vat                    :decimal(, )      default(0.0), not null
 #  contractor_id          :integer(4)       not null
+#  currency_id            :integer(2)       not null
 #  external_id            :bigint(8)
 #  invoice_period_id      :integer(2)
 #  invoice_template_id    :integer(4)
@@ -29,6 +31,7 @@
 # Indexes
 #
 #  accounts_contractor_id_idx  (contractor_id)
+#  accounts_currency_id_idx    (currency_id)
 #  accounts_external_id_key    (external_id) UNIQUE
 #  accounts_name_key           (name) UNIQUE
 #  accounts_uuid_key           (uuid) UNIQUE
@@ -36,6 +39,7 @@
 # Foreign Keys
 #
 #  accounts_contractor_id_fkey  (contractor_id => contractors.id)
+#  accounts_currency_id_fkey    (currency_id => currencies.id)
 #
 
 class Account < ApplicationRecord
@@ -43,12 +47,12 @@ class Account < ApplicationRecord
 
   include WithPaperTrail
 
-  Totals = Struct.new(:total_balance)
-
   class << self
-    def totals
-      row = extending(ActsAsTotalsRelation).totals_row_by('sum(balance) as total_balance')
-      Totals.new(*row)
+    def totals_per_currency
+      except(:preload, :includes, :eager_load, :limit, :offset, :select, :order)
+        .group(:currency_name)
+        .pluck(Arel.sql('currency_name, sum(balance)'))
+        .sort_by(&:first)
     end
 
     def ransackable_scopes(_auth_object = nil)
@@ -69,6 +73,7 @@ class Account < ApplicationRecord
               constructor: ->(next_invoice_type_id) { Billing::InvoiceType.find(next_invoice_type_id) }
 
   belongs_to :contractor
+  belongs_to :currency, class_name: 'Billing::Currency'
   belongs_to :invoice_template, class_name: 'Billing::InvoiceTemplate', optional: true
 
   has_many :payments, dependent: :destroy
@@ -112,8 +117,11 @@ class Account < ApplicationRecord
   validates :destination_rate_limit, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :max_call_duration, numericality: { greater_than: 0, allow_nil: true }
   validates :invoice_ref_template, presence: true
+  validate :currency_id_not_changed, on: :update
   validates :invoice_period_id, inclusion: { in: Billing::InvoicePeriod.ids }, allow_nil: true
   validates :next_invoice_type_id, inclusion: { in: Billing::InvoiceType.ids }, allow_nil: true
+
+  before_validation :set_currency_name, on: :create
 
   after_initialize do
     if new_record?
@@ -134,7 +142,7 @@ class Account < ApplicationRecord
   scope :vendors_accounts, -> { joins(:contractor).where('contractors.vendor' => true) }
   scope :customers_accounts, -> { joins(:contractor).where('contractors.customer' => true) }
   scope :collection, -> { order(:name) }
-  scope :search_for, ->(term) { where("accounts.name || ' | ' || accounts.id::varchar ILIKE ?", "%#{term}%") }
+  scope :search_for, ->(term) { where("accounts.name || ' [' || accounts.currency_name || '] | ' || accounts.id::varchar ILIKE ?", "%#{term}%") }
   scope :ordered_by, ->(term) { order(term) }
 
   scope :ready_for_invoice, lambda {
@@ -179,7 +187,7 @@ class Account < ApplicationRecord
   end
 
   def display_name
-    "#{name} | #{id}"
+    "#{name} [#{currency_name}] | #{id}"
   end
 
   def min_balance_reached?
@@ -199,6 +207,14 @@ class Account < ApplicationRecord
   end
 
   private
+
+  def set_currency_name
+    self.currency_name = currency&.name if currency_id.present?
+  end
+
+  def currency_id_not_changed
+    errors.add(:currency_id, 'cannot be changed after creation') if currency_id_changed?
+  end
 
   def remove_self_from_related_api_access!
     api_access.each do |record|
