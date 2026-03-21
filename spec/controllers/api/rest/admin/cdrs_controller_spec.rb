@@ -50,7 +50,7 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
           { 'customer-auth-external-id-eq' => customer_auth.external_id }
         end
         let(:customer_auth) do
-          create(:customers_auth, external_id: 123)
+          create(:customers_auth)
         end
         let!(:cdr) do
           create :cdr, :with_id, customer_auth_external_id: customer_auth.external_id
@@ -396,7 +396,7 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
 
       context 'by customer_auth_external_type_eq' do
         let(:filters) { { 'customer-auth-external-type-eq' => customer_auth.external_type } }
-        let(:customer_auth) { FactoryBot.create(:customers_auth, external_id: 123, external_type: 'term') }
+        let(:customer_auth) { FactoryBot.create(:customers_auth, external_type: 'term') }
         let!(:cdr) { FactoryBot.create(:cdr, :with_id, customer_auth_external_id: customer_auth.external_id, customer_auth_external_type: customer_auth.external_type) }
 
         it 'only desired cdrs should be present' do
@@ -408,9 +408,9 @@ RSpec.describe Api::Rest::Admin::CdrsController, type: :controller do
 
       context 'by customer_auth_external_type_not_eq' do
         let(:filters) { { 'customer-auth-external-type-not-eq' => customer_auth_1.external_type } }
-        let(:customer_auth_1) { FactoryBot.create(:customers_auth, external_id: 111, external_type: 'em') }
-        let(:customer_auth_2) { FactoryBot.create(:customers_auth, external_id: 222, external_type: 'term') }
-        let(:customer_auth_3) { FactoryBot.create(:customers_auth, external_id: 333, external_type: nil) }
+        let(:customer_auth_1) { FactoryBot.create(:customers_auth, external_type: 'em') }
+        let(:customer_auth_2) { FactoryBot.create(:customers_auth, external_type: 'term') }
+        let(:customer_auth_3) { FactoryBot.create(:customers_auth, external_id: nil, external_type: nil) }
         let(:cdrs) { nil }
         let!(:cdr_1) { FactoryBot.create(:cdr, :with_id, customer_auth_external_id: customer_auth_1.external_id, customer_auth_external_type: customer_auth_1.external_type) }
         let!(:cdr_2) { FactoryBot.create(:cdr, :with_id, customer_auth_external_id: customer_auth_2.external_id, customer_auth_external_type: customer_auth_2.external_type) }

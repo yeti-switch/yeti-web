@@ -4,17 +4,12 @@ RSpec.describe Api::Rest::Admin::BalanceController, type: :controller do
   include_context :jsonapi_admin_headers
 
   describe 'PUT update', versioning: true do
-    let(:external_id) do
-      100
-    end
-    let(:balance) do
-      10
-    end
-    let!(:account) { create(:account, balance: balance, external_id: external_id) }
+    let(:balance) { 10 }
+    let!(:account) { create(:account, balance: balance) }
 
     subject do
       put :update, params: {
-        account_id: external_id, data: { type: 'balances', id: external_id, attributes: attributes }
+        account_id: account.external_id, data: { type: 'balances', id: account.external_id, attributes: attributes }
       }
     end
 

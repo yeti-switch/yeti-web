@@ -8,7 +8,7 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::ContractorsController do
       get clickhouse_dictionary_request_path
     end
 
-    let!(:contractors) { create_list(:vendor, 2) + [create(:customer, external_id: 123)] }
+    let!(:contractors) { create_list(:vendor, 2) + [create(:customer, external_id: nil)] }
 
     include_examples :responds_with_correct_json_each_row do
       let(:expected_rows) do

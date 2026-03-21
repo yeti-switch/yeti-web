@@ -5,6 +5,8 @@ ActiveAdmin.register Billing::Currency, as: 'Currency' do
 
   decorate_with Billing::CurrencyDecorator
 
+  actions :index, :show, :edit, :update
+
   acts_as_audit
   acts_as_safe_destroy
   acts_as_export :id,

@@ -8,7 +8,7 @@ RSpec.describe Api::Rest::ClickhouseDictionaries::CustomerAuthsController do
       get clickhouse_dictionary_request_path
     end
 
-    let!(:customer_auths) { create_list(:customers_auth, 2) + [create(:customers_auth, external_id: 123)] }
+    let!(:customer_auths) { create_list(:customers_auth, 2) + [create(:customers_auth, external_id: nil, external_type: nil)] }
 
     include_examples :responds_with_correct_json_each_row do
       let(:expected_rows) do

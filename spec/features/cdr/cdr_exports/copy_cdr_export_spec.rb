@@ -10,12 +10,12 @@ RSpec.describe 'Copy CDR Export', js: :true do
   include_context :login_as_admin
 
   let!(:account) { create(:account, :with_customer) }
-  let!(:vendor) { create(:contractor, vendor: true, external_id: 302) }
-  let!(:vendor_acc) { create(:account, external_id: 303, contractor: vendor) }
-  let!(:customer_auth) { create(:customers_auth, external_id: 300, external_type: 'term') }
+  let!(:vendor) { create(:contractor, vendor: true) }
+  let!(:vendor_acc) { create(:account, contractor: vendor) }
+  let!(:customer_auth) { create(:customers_auth, external_type: 'term') }
   let!(:country) { create(:country, name: 'Rand 1', iso2: 'R1') }
   let!(:country_2) { create(:country, name: 'Rand 2', iso2: 'R2') }
-  let!(:gateway) { create(:gateway, external_id: 301) }
+  let!(:gateway) { create(:gateway) }
   let!(:routing_tag) { create(:routing_tag) }
   let(:filters) do
     {
