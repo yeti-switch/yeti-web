@@ -84,9 +84,9 @@ RSpec.describe Stats::CustomerAuthStats, type: :model do
 
     before do
       # no cdrs
-      FactoryBot.create(:customers_auth, external_id: 1011, external_type: 'em')
+      FactoryBot.create(:customers_auth, external_type: 'em')
 
-      ca_old_cdrs = FactoryBot.create(:customers_auth, external_id: 1012, external_type: 'term')
+      ca_old_cdrs = FactoryBot.create(:customers_auth, external_type: 'term')
 
       # not in interval
       FactoryBot.create(:customer_auth_stats, customer_auth: customer_auth1, timestamp: timestamp_early_than_24_hours, customer_price: 1)

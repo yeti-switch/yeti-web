@@ -9,12 +9,12 @@ RSpec.describe Jobs::PrometheusCustomerAuthStats do
 
   let(:job) { described_class.new(double) }
 
-  let(:account1) { FactoryBot.create(:account, external_id: 1) }
-  let(:account2) { FactoryBot.create(:account, external_id: 2) }
+  let(:account1) { FactoryBot.create(:account) }
+  let(:account2) { FactoryBot.create(:account) }
   let(:account3) { FactoryBot.create(:account, external_id: nil) }
 
-  let(:customer_auth1) { FactoryBot.create(:customers_auth, account: account1, external_id: 4, external_type: 'test1') }
-  let(:customer_auth2) { FactoryBot.create(:customers_auth, account: account2, external_id: 5, external_type: nil) }
+  let(:customer_auth1) { FactoryBot.create(:customers_auth, account: account1, external_type: 'test1') }
+  let(:customer_auth2) { FactoryBot.create(:customers_auth, account: account2, external_type: nil) }
   let(:customer_auth3) { FactoryBot.create(:customers_auth, account: account3, external_id: nil, external_type: nil) }
 
   let(:stats) do

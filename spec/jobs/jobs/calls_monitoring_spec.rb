@@ -62,7 +62,6 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
            min_balance: 0,
            max_balance: account_balance * 2,
            vat: 0,
-           external_id: 123,
            contractor: create(:customer))
   end
 
@@ -71,7 +70,6 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
            balance: vendor_balance,
            min_balance: 0,
            max_balance: vendor_balance * 2,
-           external_id: 456,
            contractor: create(:vendor))
   end
 
@@ -92,7 +90,6 @@ RSpec.describe Jobs::CallsMonitoring, '#call' do
   let(:customers_auth2) do
     create(
       :customers_auth,
-      external_id: 123,
       external_type: 'term',
       customer: account.contractor,
       account: account,
