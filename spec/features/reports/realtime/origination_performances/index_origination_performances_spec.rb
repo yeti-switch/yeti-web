@@ -2,6 +2,7 @@
 
 RSpec.describe 'Report Realtime Origination Performance', type: :feature do
   include_context :login_as_admin
+  include_context :clean_cdr_db
 
   describe 'index' do
     context 'when valid data' do

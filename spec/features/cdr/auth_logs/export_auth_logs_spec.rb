@@ -2,6 +2,7 @@
 
 RSpec.describe 'Export Auth Logs', type: :feature do
   include_context :login_as_admin
+  include_context :clean_cdr_db
 
   before { create(:gateway) }
 
