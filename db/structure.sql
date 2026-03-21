@@ -42713,7 +42713,9 @@ CREATE TABLE data_import.import_accounts (
     destination_rate_limit numeric,
     vat numeric,
     max_call_duration integer,
-    is_changed boolean
+    is_changed boolean,
+    currency_id smallint,
+    currency_name character varying
 );
 
 
@@ -50696,6 +50698,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260311100001'),
 ('20260311100000'),
 ('20260311000000'),
 ('20260310192503'),
