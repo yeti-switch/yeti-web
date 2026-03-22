@@ -689,7 +689,7 @@ ActiveAdmin.register Gateway do
             row :max_30x_redirects
             row :max_transfers
             row :transfer_append_headers_req do |row|
-              pre row.transfer_append_headers_req.join("\r\n")
+              pre row.transfer_append_headers_req&.join("\r\n")
             end
             row :allowed_methods do |row|
               row.allowed_methods&.join(', ')

@@ -599,8 +599,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'ice-mode-id': 2,
         'rtcp-mux-mode-id': 1,
         'rtcp-feedback-mode-id': 0,
-        'allowed-methods': ['INVITE', 'ACK'],
-        'supported-tags': ['100rel', 'timer']
+        'allowed-methods': %w[INVITE ACK],
+        'supported-tags': %w[100rel timer]
       }
     end
 

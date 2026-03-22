@@ -22,8 +22,8 @@ RSpec.describe 'switch22.load_gateway_attributes_cache' do
              ice_mode_id: 2,
              rtcp_mux_mode_id: 0,
              rtcp_feedback_mode_id: 2,
-             allowed_methods: ['INVITE', 'ACK'],
-             supported_tags: ['100rel', 'timer'])
+             allowed_methods: %w[INVITE ACK],
+             supported_tags: %w[100rel timer])
     ]
   end
 
