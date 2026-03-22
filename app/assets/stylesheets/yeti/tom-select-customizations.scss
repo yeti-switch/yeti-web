@@ -6,7 +6,7 @@
   // Width variants for Tom Select
   .ts-wrapper.tom-select {
     .ts-control {
-      width: 240px;
+      width: 350px;
     }
   }
 
@@ -24,13 +24,13 @@
 
   .ts-wrapper.tom-select-ajax {
     .ts-control {
-      width: 240px;
+      width: 350px;
     }
   }
 
   .ts-wrapper.tom-select-ajax-fillable {
     .ts-control {
-      width: 240px;
+      width: 350px;
     }
   }
 
@@ -40,14 +40,15 @@
       border: 1px solid #A1A7B2;
       border-radius: 3px;
       min-height: 28px;
+      background-color: #f7f7f9;
     }
 
     .ts-dropdown {
       border: 1px solid #A1A7B2;
 
-      // below keeps dropdown from being wider than viewport on small screens,
-      // but allows it to be wider than control if needed
-      width: max-content;
+      // Match control width; long option text wraps within the dropdown.
+      // Avoiding width: max-content prevents the absolutely-positioned dropdown
+      // from extending beyond the viewport and causing page horizontal scroll.
       min-width: 100%;
       max-width: 90vw;
 
@@ -71,29 +72,114 @@
     background-size: 9px 9px;
   }
 
-  // Reserve space for caret icon so clear button doesn't overlap
+  // Reserve space for caret icon and clear button without overlap.
+  // Tom-select sets padding-right = --ts-pr-clear-button + --ts-pr-caret, and positions
+  // the button at right: --ts-pr-caret with width ≈ --ts-pr-clear-button (1em default).
+  // Those are equal, so item text always touches the button. Increasing
+  // --ts-pr-clear-button to 1.5em adds 0.5em gap between content area and button.
   .ts-wrapper.plugin-clear_button {
     --ts-pr-caret: 2.5em;
+    --ts-pr-clear-button: 2em;
+  }
+
+  // Always show clear button when a value is selected
+  .ts-wrapper.plugin-clear_button.has-items .clear-button {
+    opacity: 1;
+    font-size: 1.2em;
+  }
+
+  // When dropdown opens on an empty select, tom-select hides .items-placeholder
+  // (display:none !important), collapsing .ts-control and shifting form rows.
+  // Keep it in the layout but invisible so it still holds the height.
+  .ts-wrapper.plugin-dropdown_input.dropdown-active:not(.has-items) .items-placeholder {
+    display: block !important;
+    visibility: hidden;
   }
 
   form.formtastic {
-    // Make dropdown width match control width instead of 100% of parent
-    // and keep inline with label in formtastic forms
-    .ts-wrapper.tom-select,
-    .ts-wrapper.tom-select-ajax,
-    .ts-wrapper.tom-select-ajax-fillable {
-      display: inline-block;
-      width: calc(80% - 22px);
+    // Sortable multiselect: apply same font/height fixes as single-select variants.
+    // tom-select adjusts control padding for multi has-items so the math works out
+    // to the same 1.15em + 18px overhead as single-select.
+    .ts-wrapper.tom-select-sortable {
+      // flow-root creates a BFC so the wrapper avoids the floated label,
+      // making the dropdown's left:0 align with the control's left edge.
+      // Unlike overflow:hidden, flow-root doesn't clip the absolute dropdown.
+      display: flow-root;
 
       .ts-control {
         width: 100%;
         font-size: 0.95em;
-        border: 1px solid #e6e9ee;
         line-height: 1.15;
+        padding: 10px 8px;
+        // 10px top + 10px bottom + 1px border × 2 = 22px overhead
+        min-height: calc(1.15em + 22px);
 
         input {
           font-size: 0.95em;
           line-height: 1.15;
+        }
+
+        .items-placeholder {
+          font-size: inherit;
+          height: 1.15em;
+        }
+
+        > div {
+          padding: 3px 8px;
+          margin: 0 4px 3px 0;
+          background: #d6e4f7;
+          color: #1a3a5c;
+        }
+      }
+
+      // Override tom-select's has-items padding compensation to match our
+      // control padding (10px) and item padding (3px) / margin-bottom (3px).
+      &.has-items .ts-control {
+        padding-top: 7px;   // 10px - 3px item-pad-top
+        padding-bottom: 4px; // 10px - 3px item-pad-bottom - 3px item-margin-bottom
+      }
+    }
+
+    // Stretch to selected content, min 350px, capped by parent width and viewport.
+    // The vw cap prevents horizontal page scroll when the parent container is wider
+    // than the viewport (e.g. in large ActiveAdmin layouts).
+    .ts-wrapper.tom-select,
+    .ts-wrapper.tom-select-ajax,
+    .ts-wrapper.tom-select-ajax-fillable {
+      display: inline-block;
+      min-width: 350px;
+      max-width: unquote("min(80%, 70vw)");
+
+      .ts-control {
+        width: 100%;
+
+        // Truncate long selected values with ellipsis instead of expanding the wrapper.
+        > .item {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
+        }
+        font-size: 0.95em;
+        border: 1px solid #e6e9ee;
+        line-height: 1.15;
+        // Prevent height change when transitioning empty→filled for the first time.
+        // box-sizing:border-box (tom-select default): 8px top pad + 8px bottom pad
+        // + 1px top border + 1px bottom border = 18px overhead; content = 1.15em.
+        min-height: calc(1.15em + 18px);
+
+        input {
+          font-size: 0.95em;
+          line-height: 1.15;
+        }
+
+        // Fix height inconsistency: .items-placeholder is an <input> that gets
+        // font-size: 0.95em twice (from .ts-control and from the input rule above),
+        // while .item divs only get 0.95em once. Override font-size and set explicit
+        // height so empty and filled states render at the same height.
+        .items-placeholder {
+          font-size: inherit;
+          height: 1.15em;
         }
       }
     }
@@ -109,6 +195,8 @@
         padding: 8px 10px 7px;
         font-size: 0.95em;
         line-height: 1.15;
+        // padding: 8+7px + border: 1+1px = 17px overhead (box-sizing:border-box)
+        min-height: calc(1.15em + 17px);
 
         > .item {
           word-break: break-word;
@@ -120,6 +208,11 @@
           // below fixes width applied by active admin styles
           width: unset;
           min-width: 1px;
+        }
+
+        .items-placeholder {
+          font-size: inherit;
+          height: 1.15em;
         }
       }
     }
