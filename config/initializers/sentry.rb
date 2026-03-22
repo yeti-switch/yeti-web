@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# if CaptureError.enabled? && !defined?(::Rake)
-
-CaptureError.configure!
-# end
+if CaptureError.enabled? && !defined?(::Rake)
+  CaptureError.configure!
+end
