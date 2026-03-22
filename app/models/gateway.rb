@@ -9,6 +9,7 @@
 #  allow_1xx_without_to_tag         :boolean          default(FALSE), not null
 #  allow_origination                :boolean          default(TRUE), not null
 #  allow_termination                :boolean          default(TRUE), not null
+#  allowed_methods                  :string           is an Array
 #  asr_limit                        :float(24)        default(0.0), not null
 #  auth_enabled                     :boolean          default(FALSE), not null
 #  auth_from_domain                 :string
@@ -82,6 +83,7 @@
 #  sst_maximum_timer                :integer(4)       default(50), not null
 #  sst_minimum_timer                :integer(4)       default(50), not null
 #  sst_session_expires              :integer(4)       default(50)
+#  supported_tags                   :string           is an Array
 #  suppress_early_media             :boolean          default(FALSE), not null
 #  symmetric_rtp_nonstop            :boolean          default(FALSE), not null
 #  term_append_headers_req          :string           default([]), not null, is an Array
@@ -98,7 +100,7 @@
 #  termination_subscriber_cps_wsize :integer(2)       default(1), not null
 #  to_rewrite_result                :string
 #  to_rewrite_rule                  :string
-#  transfer_append_headers_req      :string           default([]), not null, is an Array
+#  transfer_append_headers_req      :string           is an Array
 #  transfer_tel_uri_host            :string
 #  transit_headers_from_origination :string
 #  transit_headers_from_termination :string
@@ -294,6 +296,9 @@ class Gateway < ApplicationRecord
     RTCP_FEEDBACK_MODE_ACCEPT => 'Accept',
     RTCP_FEEDBACK_MODE_INITIATE => 'Initiate'
   }.freeze
+
+  SIP_METHODS = %w[INVITE ACK BYE CANCEL OPTIONS REGISTER INFO PRACK UPDATE SUBSCRIBE NOTIFY REFER MESSAGE PUBLISH].freeze
+  SUPPORTED_TAGS = %w[100rel timer replaces path outbound gruu norefersub histinfo tdialog sec-agree precondition join early-session].freeze
 
   class << self
     # Returns a reference if host is IPv6, otherwise returns host
@@ -506,7 +511,18 @@ class Gateway < ApplicationRecord
 
   def transfer_append_headers_req=(value)
     value = value.split("\r\n").map(&:strip).reject(&:blank?) if value.is_a? String
+    value = nil if value.is_a?(Array) && value.empty?
     self[:transfer_append_headers_req] = value
+  end
+
+  def allowed_methods=(value)
+    value = nil if value.blank?
+    self[:allowed_methods] = value
+  end
+
+  def supported_tags=(value)
+    value = nil if value.blank?
+    self[:supported_tags] = value
   end
 
   def host=(value)

@@ -9,6 +9,7 @@
 #  allow_1xx_without_to_tag         :boolean          default(FALSE), not null
 #  allow_origination                :boolean          default(TRUE), not null
 #  allow_termination                :boolean          default(TRUE), not null
+#  allowed_methods                  :string           is an Array
 #  asr_limit                        :float(24)        default(0.0), not null
 #  auth_enabled                     :boolean          default(FALSE), not null
 #  auth_from_domain                 :string
@@ -82,6 +83,7 @@
 #  sst_maximum_timer                :integer(4)       default(50), not null
 #  sst_minimum_timer                :integer(4)       default(50), not null
 #  sst_session_expires              :integer(4)       default(50)
+#  supported_tags                   :string           is an Array
 #  suppress_early_media             :boolean          default(FALSE), not null
 #  symmetric_rtp_nonstop            :boolean          default(FALSE), not null
 #  term_append_headers_req          :string           default([]), not null, is an Array
@@ -98,7 +100,7 @@
 #  termination_subscriber_cps_wsize :integer(2)       default(1), not null
 #  to_rewrite_result                :string
 #  to_rewrite_rule                  :string
-#  transfer_append_headers_req      :string           default([]), not null, is an Array
+#  transfer_append_headers_req      :string           is an Array
 #  transfer_tel_uri_host            :string
 #  transit_headers_from_origination :string
 #  transit_headers_from_termination :string

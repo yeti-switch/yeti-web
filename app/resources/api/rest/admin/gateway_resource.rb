@@ -21,7 +21,9 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :rtp_force_relay_cn, :preserve_anonymous_from_domain, :registered_aor_mode_id,
              :incoming_auth_username, :incoming_auth_password, :incoming_auth_allow_jwt,
              :origination_capacity, :termination_capacity,
-             :force_cancel_routeset, :sip_schema_id, :ice_mode_id, :rtcp_mux_mode_id, :rtcp_feedback_mode_id
+             :force_cancel_routeset, :sip_schema_id, :ice_mode_id, :rtcp_mux_mode_id, :rtcp_feedback_mode_id,
+             :allowed_methods,
+             :supported_tags
 
   paginator :paged
 
@@ -267,6 +269,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       incoming_auth_password
       incoming_auth_allow_jwt
       force_cancel_routeset
+      allowed_methods
+      supported_tags
     ]
   end
 

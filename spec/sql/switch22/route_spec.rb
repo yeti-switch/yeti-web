@@ -568,12 +568,14 @@ RSpec.describe '#routing logic' do
                contractor: customer,
                destination_rate_limit: customer_account_destination_rate_limit,
                min_balance: customer_account_min_balance,
-               balance: customer_account_balance)
+               balance: customer_account_balance,
+               max_call_duration: customer_account_max_call_duration)
       }
 
       let!(:customer_account_min_balance) { -100_500 }
       let!(:customer_account_balance) { 0 }
       let!(:customer_account_destination_rate_limit) { nil }
+      let!(:customer_account_max_call_duration) { nil }
 
       let!(:customer_gateway) {
         create(:gateway,
@@ -914,6 +916,28 @@ RSpec.describe '#routing logic' do
         end
       end
 
+      context 'Account max_call_duration' do
+        let!(:customer_auth_check_account_balance) { false }
+
+        context 'when account max_call_duration is set' do
+          let!(:customer_account_max_call_duration) { 10_800 }
+
+          it 'uses account max_call_duration as time_limit, overriding global' do
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+            expect(subject.first[:time_limit]).to eq(10_800)
+          end
+        end
+
+        context 'when account max_call_duration is not set' do
+          let!(:customer_account_max_call_duration) { nil }
+
+          it 'falls back to global max_call_duration from sys.guiconfig' do
+            expect(subject.first[:disconnect_code_id]).to eq(nil)
+            expect(subject.first[:time_limit]).to eq(7200)
+          end
+        end
+      end
+
       context 'Authorized, Call terminated to GW group' do
         let!(:dialpeer_gateway_id) { nil }
         let!(:dialpeer_gateway_group_id) { vendor_gateway_group.id }
@@ -998,8 +1022,9 @@ RSpec.describe '#routing logic' do
         end
 
         context 'PPI URI userpart' do
-          let!(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_PPI_USERPART }
-          it 'routing OK ' do
+          let!(:customer_auth_src_number_field_id) { CustomersAuth::SRC_NUMBER_FIELD_PPI_PAI_USERPART }
+
+          it 'uses PPI userpart when PPI is present' do
             expect(subject.size).to eq(2)
             expect(subject.first[:src_prefix_in]).to eq('user1')
             expect(subject.first[:disconnect_code_id]).to eq(nil)
@@ -1007,10 +1032,25 @@ RSpec.describe '#routing logic' do
 
           context 'when PPI is absent' do
             let(:ppi) { nil }
-            it 'falls back to From URI userpart' do
+            let(:pai) {
+              '[{"h": "pai-domain", "n": null, "p": 5060, "s": "sip", "u": "pai_user1"},
+                {"h": "pai-domain", "n": null, "p": 5060, "s": "sip", "u": "pai_user2"}]'
+            }
+
+            it 'falls back to top PAI URI userpart' do
               expect(subject.size).to eq(2)
-              expect(subject.first[:src_prefix_in]).to eq('from_username')
+              expect(subject.first[:src_prefix_in]).to eq('pai_user1')
               expect(subject.first[:disconnect_code_id]).to eq(nil)
+            end
+
+            context 'when PAI is also absent' do
+              let(:pai) { '[]' }
+
+              it 'falls back to From URI userpart' do
+                expect(subject.size).to eq(2)
+                expect(subject.first[:src_prefix_in]).to eq('from_username')
+                expect(subject.first[:disconnect_code_id]).to eq(nil)
+              end
             end
           end
         end

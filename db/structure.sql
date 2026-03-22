@@ -3574,14 +3574,16 @@ CREATE TABLE class4.gateways (
     termination_subscriber_cps_wsize smallint DEFAULT 1 NOT NULL,
     dump_level_id smallint DEFAULT 0 NOT NULL,
     throttling_profile_id smallint,
-    transfer_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
+    transfer_append_headers_req character varying[],
     transfer_tel_uri_host character varying,
     uuid uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     scheduler_id smallint,
     ice_mode_id smallint DEFAULT 1 NOT NULL,
     rtcp_mux_mode_id smallint DEFAULT 1 NOT NULL,
     rtcp_feedback_mode_id smallint DEFAULT 1 NOT NULL,
-    contact_user character varying
+    contact_user character varying,
+    allowed_methods character varying[],
+    supported_tags character varying[]
 );
 
 
@@ -31702,7 +31704,7 @@ $$;
 -- Name: load_gateway_attributes_cache(); Type: FUNCTION; Schema: switch22; Owner: -
 --
 
-CREATE FUNCTION switch22.load_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold_start real, throttling_threshold_end real, throttling_window smallint, throttling_minimum_calls smallint, transfer_append_headers_req character varying[], transfer_tel_uri_host character varying, ice_mode_id smallint, rtcp_mux_mode_id smallint, rtcp_feedback_mode_id smallint)
+CREATE FUNCTION switch22.load_gateway_attributes_cache() RETURNS TABLE(id bigint, throttling_codes character varying[], throttling_threshold_start real, throttling_threshold_end real, throttling_window smallint, throttling_minimum_calls smallint, transfer_append_headers_req character varying[], transfer_tel_uri_host character varying, ice_mode_id smallint, rtcp_mux_mode_id smallint, rtcp_feedback_mode_id smallint, allowed_methods character varying[], supported_tags character varying[])
     LANGUAGE plpgsql COST 10
     AS $$
 BEGIN
@@ -31718,7 +31720,9 @@ BEGIN
       gw.transfer_tel_uri_host,
       gw.ice_mode_id,
       gw.rtcp_mux_mode_id,
-      gw.rtcp_feedback_mode_id
+      gw.rtcp_feedback_mode_id,
+      gw.allowed_methods,
+      gw.supported_tags
     FROM class4.gateways gw
     LEFT JOIN class4.gateway_throttling_profiles gtp ON gtp.id = gw.throttling_profile_id
     ORDER BY gw.id;
@@ -31788,6 +31792,29 @@ BEGIN
   GROUP BY
     ca.ip,
     ca.x_yeti_auth;
+END;
+$$;
+
+
+--
+-- Name: load_ip_auth2(integer, integer); Type: FUNCTION; Schema: switch22; Owner: -
+--
+
+CREATE FUNCTION switch22.load_ip_auth2(i_pop_id integer, i_node_id integer) RETURNS TABLE(ip inet, x_yeti_auth character varying, require_incoming_auth boolean, require_identity_parsing boolean)
+    LANGUAGE plpgsql COST 10 ROWS 100
+    AS $$
+BEGIN
+  RETURN QUERY
+  SELECT
+    ca.ip,
+    ca.x_yeti_auth,
+    ca.require_incoming_auth,
+    true as require_identity_parsing
+  FROM class4.customers_auth_normalized ca
+  WHERE
+    ca.enabled
+  ORDER BY
+    ca.ip;
 END;
 $$;
 
@@ -35510,8 +35537,12 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
           v_ret.src_prefix_in:=i_uri_name;
         ELSIF v_customer_auth_normalized.src_number_field_id=4 THEN /* To URI userpart */
           v_ret.src_prefix_in:=i_to_name;
-        ELSIF v_customer_auth_normalized.src_number_field_id=5 THEN /* PPI URI userpart, fallback to From URI userpart */
-          v_ret.src_prefix_in:=COALESCE(NULLIF((json_populate_record(null::switch22.uri_ty, i_ppi)).u, ''), i_from_name);
+        ELSIF v_customer_auth_normalized.src_number_field_id=5 THEN /* PPI URI userpart, fallback to top PAI URI userpart, fallback to From URI userpart */
+          v_ret.src_prefix_in:=COALESCE(
+            NULLIF((json_populate_record(null::switch22.uri_ty, i_ppi)).u, ''),
+            NULLIF((json_populate_record(null::switch22.uri_ty, json_array_element(i_pai, 0))).u, ''),
+            i_from_name
+          );
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
@@ -35670,7 +35701,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         select into v_call_ctx.max_call_length max_call_duration from sys.guiconfig limit 1;
 
         if NOT v_customer_auth_normalized.check_account_balance then
-          v_ret.time_limit = LEAST(v_call_ctx.max_call_length, v_c_acc.max_call_duration);
+          v_ret.time_limit = COALESCE(v_c_acc.max_call_duration, v_call_ctx.max_call_length);
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> AUTH. No customer acc balance checking. customer time limit set to max value: % ',EXTRACT(MILLISECOND from v_end-v_start), v_ret.time_limit;
@@ -37159,8 +37190,12 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
           v_ret.src_prefix_in:=i_uri_name;
         ELSIF v_customer_auth_normalized.src_number_field_id=4 THEN /* To URI userpart */
           v_ret.src_prefix_in:=i_to_name;
-        ELSIF v_customer_auth_normalized.src_number_field_id=5 THEN /* PPI URI userpart, fallback to From URI userpart */
-          v_ret.src_prefix_in:=COALESCE(NULLIF((json_populate_record(null::switch22.uri_ty, i_ppi)).u, ''), i_from_name);
+        ELSIF v_customer_auth_normalized.src_number_field_id=5 THEN /* PPI URI userpart, fallback to top PAI URI userpart, fallback to From URI userpart */
+          v_ret.src_prefix_in:=COALESCE(
+            NULLIF((json_populate_record(null::switch22.uri_ty, i_ppi)).u, ''),
+            NULLIF((json_populate_record(null::switch22.uri_ty, json_array_element(i_pai, 0))).u, ''),
+            i_from_name
+          );
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
@@ -37319,7 +37354,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         select into v_call_ctx.max_call_length max_call_duration from sys.guiconfig limit 1;
 
         if NOT v_customer_auth_normalized.check_account_balance then
-          v_ret.time_limit = LEAST(v_call_ctx.max_call_length, v_c_acc.max_call_duration);
+          v_ret.time_limit = COALESCE(v_c_acc.max_call_duration, v_call_ctx.max_call_length);
           /*dbg{*/
           v_end:=clock_timestamp();
           RAISE NOTICE '% ms -> AUTH. No customer acc balance checking. customer time limit set to max value: % ',EXTRACT(MILLISECOND from v_end-v_start), v_ret.time_limit;
@@ -38786,8 +38821,12 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
           v_ret.src_prefix_in:=i_uri_name;
         ELSIF v_customer_auth_normalized.src_number_field_id=4 THEN /* To URI userpart */
           v_ret.src_prefix_in:=i_to_name;
-        ELSIF v_customer_auth_normalized.src_number_field_id=5 THEN /* PPI URI userpart, fallback to From URI userpart */
-          v_ret.src_prefix_in:=COALESCE(NULLIF((json_populate_record(null::switch22.uri_ty, i_ppi)).u, ''), i_from_name);
+        ELSIF v_customer_auth_normalized.src_number_field_id=5 THEN /* PPI URI userpart, fallback to top PAI URI userpart, fallback to From URI userpart */
+          v_ret.src_prefix_in:=COALESCE(
+            NULLIF((json_populate_record(null::switch22.uri_ty, i_ppi)).u, ''),
+            NULLIF((json_populate_record(null::switch22.uri_ty, json_array_element(i_pai, 0))).u, ''),
+            i_from_name
+          );
         END IF;
         v_ret.src_prefix_out:=v_ret.src_prefix_in;
 
@@ -38946,7 +38985,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         select into v_call_ctx.max_call_length max_call_duration from sys.guiconfig limit 1;
 
         if NOT v_customer_auth_normalized.check_account_balance then
-          v_ret.time_limit = LEAST(v_call_ctx.max_call_length, v_c_acc.max_call_duration);
+          v_ret.time_limit = COALESCE(v_c_acc.max_call_duration, v_call_ctx.max_call_length);
           
         elsif v_customer_auth_normalized.check_account_balance AND v_c_acc.balance<=v_c_acc.min_balance then
           
@@ -50698,6 +50737,11 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260322000002'),
+('20260322000001'),
+('20260322000000'),
+('20260321000001'),
+('20260321000000'),
 ('20260311100001'),
 ('20260311100000'),
 ('20260311000000'),
