@@ -438,6 +438,9 @@ class Gateway < ApplicationRecord
   validates :rtp_acl, array_format: { without: /\s/, message: 'spaces are not allowed', allow_nil: true }, array_uniqueness: { allow_nil: true }
   validate :validate_rtp_acl
 
+  validates :allowed_methods, array_inclusion: { in: SIP_METHODS, allow_nil: true }
+  validates :supported_tags, array_inclusion: { in: SUPPORTED_TAGS, allow_nil: true }
+
   validates :dump_level_id, presence: true
   validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: false
 
@@ -516,11 +519,13 @@ class Gateway < ApplicationRecord
   end
 
   def allowed_methods=(value)
+    value = value.reject(&:blank?) if value.is_a?(Array)
     value = nil if value.blank?
     self[:allowed_methods] = value
   end
 
   def supported_tags=(value)
+    value = value.reject(&:blank?) if value.is_a?(Array)
     value = nil if value.blank?
     self[:supported_tags] = value
   end
