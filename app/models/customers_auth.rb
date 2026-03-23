@@ -197,13 +197,13 @@ class CustomersAuth < ApplicationRecord
   SRC_NUMBER_FIELD_FROM_DSP = 2
   SRC_NUMBER_FIELD_RURI_USERPART = 3
   SRC_NUMBER_FIELD_TO_USERPART = 4
-  SRC_NUMBER_FIELD_PPI_USERPART = 5
+  SRC_NUMBER_FIELD_PPI_PAI_USERPART = 5
   SRC_NUMBER_FIELDS = {
     SRC_NUMBER_FIELD_FROM_USERPART => 'From URI userpart',
     SRC_NUMBER_FIELD_FROM_DSP => 'From URI display name',
     SRC_NUMBER_FIELD_RURI_USERPART => 'R-URI userpart',
     SRC_NUMBER_FIELD_TO_USERPART => 'To URI userpart',
-    SRC_NUMBER_FIELD_PPI_USERPART => 'PPI URI userpart (fallback to From URI userpart)'
+    SRC_NUMBER_FIELD_PPI_PAI_USERPART => 'PPI URI userpart (fallback to top PAI URI userpart, fallback to From URI userpart)'
   }.freeze
 
   SRC_NAME_FIELD_FROM_DSP = 1

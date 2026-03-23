@@ -463,6 +463,8 @@ ActiveAdmin.register Gateway do
               f.input :max_30x_redirects
               f.input :max_transfers
               f.input :transfer_append_headers_req, as: :newline_array_of_headers
+              f.input :allowed_methods, as: :select, collection: Gateway::SIP_METHODS, input_html: { class: 'tom-select-sortable', multiple: true }
+              f.input :supported_tags, as: :select, collection: Gateway::SUPPORTED_TAGS, input_html: { class: 'tom-select-sortable', multiple: true }
               f.input :transfer_tel_uri_host
               f.input :sip_timer_b
               f.input :dns_srv_failover_timer
@@ -687,7 +689,13 @@ ActiveAdmin.register Gateway do
             row :max_30x_redirects
             row :max_transfers
             row :transfer_append_headers_req do |row|
-              pre row.transfer_append_headers_req.join("\r\n")
+              pre row.transfer_append_headers_req&.join("\r\n")
+            end
+            row :allowed_methods do |row|
+              row.allowed_methods&.join(', ')
+            end
+            row :supported_tags do |row|
+              row.supported_tags&.join(', ')
             end
             row :transfer_tel_uri_host
             row :sip_timer_b

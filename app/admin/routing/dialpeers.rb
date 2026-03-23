@@ -235,7 +235,7 @@ ActiveAdmin.register Dialpeer do
               include_hidden: false,
               input_html: {
                 'data-allow-empty-option': true,
-                class: 'tom-select'
+                class: 'tom-select-sortable'
               }
 
       f.input :routing_tag_mode_id, as: :select, include_blank: false, collection: Routing::RoutingTagMode::MODES.invert, input_html: { class: 'tom-select' }

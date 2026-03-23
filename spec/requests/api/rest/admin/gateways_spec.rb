@@ -543,7 +543,9 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'sip-schema-id': gateway.sip_schema_id,
         'ice-mode-id': gateway.ice_mode_id,
         'rtcp-mux-mode-id': gateway.rtcp_mux_mode_id,
-        'rtcp-feedback-mode-id': gateway.rtcp_feedback_mode_id
+        'rtcp-feedback-mode-id': gateway.rtcp_feedback_mode_id,
+        'allowed-methods': gateway.allowed_methods,
+        'supported-tags': gateway.supported_tags
       }
     end
 
@@ -596,7 +598,9 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'is-shared': false,
         'ice-mode-id': 2,
         'rtcp-mux-mode-id': 1,
-        'rtcp-feedback-mode-id': 0
+        'rtcp-feedback-mode-id': 0,
+        'allowed-methods': %w[INVITE ACK],
+        'supported-tags': %w[100rel timer]
       }
     end
 
@@ -673,7 +677,9 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   sip_schema_id: json_api_request_attributes[:'sip-schema-id'],
                                   ice_mode_id: json_api_request_attributes[:'ice-mode-id'],
                                   rtcp_mux_mode_id: json_api_request_attributes[:'rtcp-mux-mode-id'],
-                                  rtcp_feedback_mode_id: json_api_request_attributes[:'rtcp-feedback-mode-id']
+                                  rtcp_feedback_mode_id: json_api_request_attributes[:'rtcp-feedback-mode-id'],
+                                  allowed_methods: json_api_request_attributes[:'allowed-methods'],
+                                  supported_tags: json_api_request_attributes[:'supported-tags']
                                 )
     end
 
