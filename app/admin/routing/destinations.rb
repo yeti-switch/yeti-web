@@ -222,7 +222,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
               collection: routing_tag_options,
               include_hidden: false,
               input_html: {
-                class: 'tom-select',
+                class: 'tom-select-sortable',
                 'data-allow-empty-option': true,
                 multiple: true
               }

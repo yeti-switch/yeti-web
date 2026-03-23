@@ -67,21 +67,32 @@ function initTomSelect(parent, options = {}) {
         if (this.tomselect) return
 
         var plugins = ['remove_button', 'drag_drop', 'clear_button']
-        var $el = $(this)
+        var el = this
+        var $el = $(el)
+        var isMultiple = !!$el.attr('multiple')
+        var allowEmptyOption = !!$el.data('allow-empty-option')
         var skipDropdownInput = !!$el.data('skip-dropdown-input')
         if (!skipDropdownInput) plugins.push('dropdown_input')
-        if (hasBlankOption(this) && !$el.data('allow-empty-option')) {
+        if (hasBlankOption(this) && !allowEmptyOption) {
             // delete empty option from original select to avoid duplication
             $el.find('option[value=""]').remove()
         }
         new TomSelect(this, {
             plugins: plugins,
+            allowEmptyOption: allowEmptyOption,
             maxOptions: null,
             loadThrottle: 0,
             refreshThrottle: 0,
             onInitialize: function () {
                 // avoid selecting first option by default
                 if (!hasSelectedOption(this.input)) this.clear()
+            },
+            onChange: function (value) {
+                // allowEmptyOption does not work properly with multiselect, we fix it here
+                if (allowEmptyOption && isMultiple && value.length === 1 && value[0] === "") {
+                    const emptyOption = Array.from(el.options).find((option) => option.value === "")
+                    emptyOption.selected = true
+                }
             },
             render: {
                 item: tomSelectRenderItemFunc
