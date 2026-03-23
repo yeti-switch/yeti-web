@@ -148,7 +148,7 @@ module ClickhouseReport
       SELECT
         toUnixTimestamp(#{sampling_fn}(time_start)) as t,
         toUInt32(count(*)) AS total_calls,
-        toNullable(round(avgIf(duration, duration>0)/60,2)) AS acd,
+        toNullable(round(avgIf(duration, duration>0),2)) AS acd,
         toNullable(round(countIf(duration>0)/count(*),3)*100) AS asr,
         toNullable(toFloat32(count(*)/#{interval_len})) AS cps
       FROM cdrs
