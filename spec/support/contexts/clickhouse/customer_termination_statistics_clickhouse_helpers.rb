@@ -11,7 +11,7 @@ RSpec.shared_context :customer_termination_statistics_clickhouse_helpers do
         toUInt32(countIf(duration>0)) as successful_calls,
         toUInt32(countIf(duration=0)) as failed_calls,
         round(sum(duration)/60,2) as total_duration,
-        round(avgIf(duration, duration>0)/60,2) AS acd,
+        round(avgIf(duration, duration>0),2) AS acd,
         round(countIf(duration>0)/count(*),3)*100 AS asr,
         round(sum(vendor_price),2) as total_price
       FROM cdrs

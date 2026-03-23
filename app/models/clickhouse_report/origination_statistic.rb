@@ -152,7 +152,7 @@ module ClickhouseReport
         toUInt32(countIf(duration>0)) as successful_calls,
         toUInt32(countIf(duration=0)) as failed_calls,
         round(sum(#{total_duration_column})/60,2) as total_duration,
-        round(avgIf(duration, duration>0)/60,2) AS acd,
+        round(avgIf(duration, duration>0),2) AS acd,
         round(countIf(duration>0)/count(*),3)*100 AS asr,
         round(sum(customer_price),2) as total_price
       FROM cdrs
