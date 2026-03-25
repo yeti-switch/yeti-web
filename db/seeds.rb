@@ -17,10 +17,6 @@ end
   'class4',
   'gui',
   'notifications', # depends on gui.admin_users
-  'switch18',
-  'switch19',
-  'switch20',
-  'switch21',
   'switch22',
   'sys'
 ].each do |filename|
