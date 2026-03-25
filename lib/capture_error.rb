@@ -163,7 +163,7 @@ module CaptureError
 
       Sentry.clone_hub_to_current_thread
       Sentry.with_scope do |scope|
-        scope.clear_breadcrumbs
+        scope&.clear_breadcrumbs
         with_capture_context(context) { yield }
       end
     end
@@ -172,9 +172,11 @@ module CaptureError
 
     def with_capture_context(context, exception: nil)
       Sentry.with_scope do |scope|
-        apply_exception_context(scope, exception) if exception
-        apply_merged_context(scope, context)
-        apply_replace_context(scope, context)
+        if scope
+          apply_exception_context(scope, exception) if exception
+          apply_merged_context(scope, context)
+          apply_replace_context(scope, context)
+        end
         yield
       end
     end
