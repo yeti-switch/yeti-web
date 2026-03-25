@@ -104,27 +104,29 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
                                       collection: Cdr::Cdr::DISCONNECT_INITIATORS.invert,
                                       input_html: { class: 'tom-select' }
 
-  filter :orig_gw_id_eq,
+  filter :orig_gw_id_in,
          as: :select,
-         label: 'Orig GW',
+         label: 'Origination Gateway',
          collection: proc {
-           resource_id = params.fetch(:q, {})[:orig_gw_id_eq]
-           resource_id ? Gateway.where(id: resource_id) : []
+           resource_ids = params.fetch(:q, {})[:orig_gw_id_in]
+           resource_ids.present? ? Gateway.where(id: resource_ids) : []
          },
          input_html: {
            class: 'tom-select-ajax',
+           multiple: true,
            'data-path': '/gateways/search?q[allow_origination_eq]=true'
          }
 
-  filter :term_gw_id_eq,
+  filter :term_gw_id_in,
          as: :select,
-         label: 'Term GW',
+         label: 'Termination Gateway',
          collection: proc {
-           resource_id = params.fetch(:q, {})[:term_gw_id_eq]
-           resource_id ? Gateway.where(id: resource_id) : []
+           resource_ids = params.fetch(:q, {})[:term_gw_id_in]
+           resource_ids.present? ? Gateway.where(id: resource_ids) : []
          },
          input_html: {
            class: 'tom-select-ajax',
+           multiple: true,
            'data-path': '/gateways/search?q[allow_termination_eq]=true'
          }
 

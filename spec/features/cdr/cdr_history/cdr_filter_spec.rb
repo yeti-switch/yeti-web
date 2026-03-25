@@ -87,6 +87,46 @@ RSpec.describe 'Cdrs index page filtering', js: true do
     end
   end
 
+  describe 'filter by orig gw' do
+    let!(:gateways) { create_list(:gateway, 3) }
+    let!(:cdrs) { gateways.map { |gw| create(:cdr, orig_gw_id: gw.id) } }
+
+    let(:filter_cdr_records) do
+      within_filters do
+        fill_in_tom_select 'ORIGINATION GATEWAY', with: gateways[0].name, search: true
+        fill_in_tom_select 'ORIGINATION GATEWAY', with: gateways[1].name, search: true
+      end
+    end
+
+    it 'shows only CDRs matching selected orig gateways' do
+      subject
+      expect(page).to have_table
+      expect(page).to have_table_row(count: 2)
+      expect(page).to have_table_cell(column: 'Id', text: cdrs[0].id.to_s)
+      expect(page).to have_table_cell(column: 'Id', text: cdrs[1].id.to_s)
+    end
+  end
+
+  describe 'filter by term gw' do
+    let!(:gateways) { create_list(:gateway, 3) }
+    let!(:cdrs) { gateways.map { |gw| create(:cdr, term_gw_id: gw.id) } }
+
+    let(:filter_cdr_records) do
+      within_filters do
+        fill_in_tom_select 'TERMINATION GATEWAY', with: gateways[0].name, search: true
+        fill_in_tom_select 'TERMINATION GATEWAY', with: gateways[1].name, search: true
+      end
+    end
+
+    it 'shows only CDRs matching selected term gateways' do
+      subject
+      expect(page).to have_table
+      expect(page).to have_table_row(count: 2)
+      expect(page).to have_table_cell(column: 'Id', text: cdrs[0].id.to_s)
+      expect(page).to have_table_cell(column: 'Id', text: cdrs[1].id.to_s)
+    end
+  end
+
   describe 'filter by customer auth' do
     let(:filter_cdr_records) do
       within_filters do
