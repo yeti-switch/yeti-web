@@ -138,7 +138,7 @@ RSpec.describe 'CDR show', type: :feature do
     end
 
     it 'should setup X-Accel-Redirect header' do
-      expect(Cdr::DownloadPcap).to receive(:call).with(cdr:, response_object: be_present).and_call_original
+      expect(Cdr::DownloadPcap).to receive(:call).with(cdr:, response_object: be_present, stream_writer: be_present).and_call_original
 
       subject
 
@@ -160,7 +160,7 @@ RSpec.describe 'CDR show', type: :feature do
       end
 
       it 'should download dump pcap file from S3' do
-        expect(Cdr::DownloadPcap).to receive(:call).with(cdr:, response_object: be_present).and_call_original
+        expect(Cdr::DownloadPcap).to receive(:call).with(cdr:, response_object: be_present, stream_writer: be_present).and_call_original
 
         subject
 
@@ -227,7 +227,7 @@ RSpec.describe 'CDR show', type: :feature do
       end
 
       it 'should download call record file from S3' do
-        expect(Cdr::DownloadCallRecord).to receive(:call).with(cdr:, response_object: be_present).and_call_original
+        expect(Cdr::DownloadCallRecord).to receive(:call).with(cdr:, response_object: be_present, stream_writer: be_present).and_call_original
 
         subject
 
