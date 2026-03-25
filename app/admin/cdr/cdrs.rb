@@ -182,27 +182,27 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
   filter :customer_external_id, label: 'Customer external ID', as: :numeric
 
   member_action :dump, method: :get do
-    Cdr::DownloadPcap.call(cdr: resource, response_object: response)
+    self.response_body = Enumerator.new do |yielder|
+      Cdr::DownloadPcap.call(cdr: resource, response_object: response, stream_writer: yielder)
+    end
   rescue Cdr::DownloadPcap::NotFoundError => e
     flash[:error] = e.message
     redirect_back(fallback_location: root_path)
   rescue StandardError => e
     flash[:error] = "An unexpected error occurred: #{e.message}"
     redirect_back(fallback_location: root_path)
-  ensure
-    response.stream.close
   end
 
   member_action :download_call_record, method: :get do
-    Cdr::DownloadCallRecord.call(cdr: resource, response_object: response)
+    self.response_body = Enumerator.new do |yielder|
+      Cdr::DownloadCallRecord.call(cdr: resource, response_object: response, stream_writer: yielder)
+    end
   rescue Cdr::DownloadCallRecord::NotFoundError => e
     flash[:error] = e.message
     redirect_back(fallback_location: root_path)
   rescue StandardError => e
     flash[:error] = "An unexpected error occurred: #{e.message}"
     redirect_back(fallback_location: root_path)
-  ensure
-    response.stream.close
   end
 
   member_action :routing_simulation, method: :get do

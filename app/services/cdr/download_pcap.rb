@@ -4,6 +4,7 @@ module Cdr
   class DownloadPcap < ApplicationService
     parameter :cdr, required: true
     parameter :response_object, required: true
+    parameter :stream_writer, required: false
 
     Error = Class.new(StandardError)
     NotFoundError = Class.new(Error)
@@ -45,7 +46,7 @@ module Cdr
       response_object.headers['Content-Type'] = 'application/octet-stream'
 
       S3AttachmentWrapper.stream_to!(pcap_bucket, cdr.dump_file_s3_path) do |chunk|
-        response_object.stream.write(chunk)
+        stream_writer ? stream_writer << chunk : response_object.stream.write(chunk)
       end
     end
   end
