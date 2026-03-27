@@ -461,6 +461,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'auth-from-domain': gateway.auth_from_domain,
         'term-force-route-set': gateway.term_force_route_set,
         'term-route-set': gateway.term_route_set,
+        'orig-force-route-set': gateway.orig_force_route_set,
+        'orig-route-set': gateway.orig_route_set,
         'termination-capacity': gateway.termination_capacity,
         'term-next-hop-for-replies': gateway.term_next_hop_for_replies,
         'term-next-hop': gateway.term_next_hop,
