@@ -44,10 +44,9 @@
 #  name                             :string           not null
 #  orig_append_headers_reply        :string           default([]), not null, is an Array
 #  orig_append_headers_req          :string           default([]), not null, is an Array
-#  orig_force_outbound_proxy        :boolean          default(FALSE), not null
+#  orig_force_route_set             :boolean          default(FALSE), not null
 #  orig_next_hop                    :string
-#  orig_outbound_proxy              :string
-#  orig_use_outbound_proxy          :boolean          default(FALSE), not null
+#  orig_route_set                   :string           default([]), not null, is an Array
 #  origination_capacity             :integer(2)
 #  pai_domain                       :string
 #  port                             :integer(4)
@@ -87,11 +86,10 @@
 #  suppress_early_media             :boolean          default(FALSE), not null
 #  symmetric_rtp_nonstop            :boolean          default(FALSE), not null
 #  term_append_headers_req          :string           default([]), not null, is an Array
-#  term_force_outbound_proxy        :boolean          default(FALSE), not null
+#  term_force_route_set             :boolean          default(FALSE), not null
 #  term_next_hop                    :string
 #  term_next_hop_for_replies        :boolean          default(FALSE), not null
-#  term_outbound_proxy              :string
-#  term_use_outbound_proxy          :boolean          default(FALSE), not null
+#  term_route_set                   :string           default([]), not null, is an Array
 #  termination_capacity             :integer(2)
 #  termination_cps_limit            :integer(2)
 #  termination_cps_wsize            :integer(2)       default(1), not null
@@ -120,7 +118,6 @@
 #  media_encryption_mode_id         :integer(2)       default(0), not null
 #  network_protocol_priority_id     :integer(2)       default(0), not null
 #  orig_disconnect_policy_id        :integer(4)
-#  orig_proxy_transport_protocol_id :integer(2)       default(1), not null
 #  pai_send_mode_id                 :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(0), not null
@@ -140,7 +137,6 @@
 #  stir_shaken_crt_id               :integer(2)
 #  stir_shaken_mode_id              :integer(2)       default(0), not null
 #  term_disconnect_policy_id        :integer(4)
-#  term_proxy_transport_protocol_id :integer(2)       default(1), not null
 #  termination_dst_numberlist_id    :integer(4)
 #  termination_src_numberlist_id    :integer(4)
 #  throttling_profile_id            :integer(2)
@@ -169,7 +165,6 @@
 #  gateways_media_encryption_mode_id_fkey          (media_encryption_mode_id => gateway_media_encryption_modes.id)
 #  gateways_network_protocol_priority_id_fkey      (network_protocol_priority_id => gateway_network_protocol_priorities.id)
 #  gateways_orig_disconnect_policy_id_fkey         (orig_disconnect_policy_id => disconnect_policy.id)
-#  gateways_orig_proxy_transport_protocol_id_fkey  (orig_proxy_transport_protocol_id => transport_protocols.id)
 #  gateways_pop_id_fkey                            (pop_id => pops.id)
 #  gateways_radius_accounting_profile_id_fkey      (radius_accounting_profile_id => radius_accounting_profiles.id)
 #  gateways_rel100_mode_id_fkey                    (rel100_mode_id => gateway_rel100_modes.id)
@@ -182,7 +177,6 @@
 #  gateways_session_refresh_method_id_fkey         (session_refresh_method_id => session_refresh_methods.id)
 #  gateways_stir_shaken_crt_id_fkey                (stir_shaken_crt_id => stir_shaken_signing_certificates.id)
 #  gateways_term_disconnect_policy_id_fkey         (term_disconnect_policy_id => disconnect_policy.id)
-#  gateways_term_proxy_transport_protocol_id_fkey  (term_proxy_transport_protocol_id => transport_protocols.id)
 #  gateways_termination_dst_numberlist_id_fkey     (termination_dst_numberlist_id => numberlists.id)
 #  gateways_termination_src_numberlist_id_fkey     (termination_src_numberlist_id => numberlists.id)
 #  gateways_throttling_profile_id_fkey             (throttling_profile_id => gateway_throttling_profiles.id)
@@ -328,8 +322,6 @@ class Gateway < ApplicationRecord
   belongs_to :dtmf_send_mode, class_name: 'System::DtmfSendMode', foreign_key: :dtmf_send_mode_id
   belongs_to :radius_accounting_profile, class_name: 'Equipment::Radius::AccountingProfile', foreign_key: :radius_accounting_profile_id, optional: true
   belongs_to :transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :transport_protocol_id
-  belongs_to :term_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id
-  belongs_to :orig_proxy_transport_protocol, class_name: 'Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id
   belongs_to :rel100_mode, class_name: 'Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id
   belongs_to :rx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id
   belongs_to :tx_inband_dtmf_filtering_mode, class_name: 'Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id
@@ -389,8 +381,8 @@ class Gateway < ApplicationRecord
   validates :port, numericality: { greater_than_or_equal_to: ApplicationRecord::L4_PORT_MIN, less_than_or_equal_to: ApplicationRecord::L4_PORT_MAX, allow_nil: true, only_integer: true }
 
   validates :fake_180_timer, numericality: { greater_than: 0, less_than_or_equal_to: PG_MAX_SMALLINT, allow_nil: true, only_integer: true }
-  validates :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
-                        :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema_id, presence: true
+  validates :transport_protocol,
+            :network_protocol_priority, :media_encryption_mode, :sdp_c_location, :sip_schema_id, presence: true
 
   validates :registered_aor_mode_id, inclusion: { in: REGISTERED_AOR_MODES.keys }, allow_nil: true
 
@@ -444,8 +436,8 @@ class Gateway < ApplicationRecord
   validates :dump_level_id, presence: true
   validates :dump_level_id, inclusion: { in: CustomersAuth::DUMP_LEVELS.keys }, allow_nil: false
 
-  validates :orig_outbound_proxy, presence: true, if: proc { orig_use_outbound_proxy? or orig_force_outbound_proxy? }
-  validates :term_outbound_proxy, presence: true, if: proc { term_use_outbound_proxy? or term_force_outbound_proxy? }
+  validates :term_route_set, sip_uri_array: true
+  validates :orig_route_set, sip_uri_array: true
 
   include Yeti::ResourceStatus
   include Yeti::Scheduler
@@ -510,6 +502,16 @@ class Gateway < ApplicationRecord
   def term_append_headers_req=(value)
     value = value.split("\r\n").map(&:strip).reject(&:blank?) if value.is_a? String
     self[:term_append_headers_req] = value
+  end
+
+  def term_route_set=(value)
+    value = value.split("\r\n").map(&:strip).reject(&:blank?) if value.is_a?(String)
+    self[:term_route_set] = value
+  end
+
+  def orig_route_set=(value)
+    value = value.split("\r\n").map(&:strip).reject(&:blank?) if value.is_a?(String)
+    self[:orig_route_set] = value
   end
 
   def transfer_append_headers_req=(value)
@@ -670,12 +672,21 @@ class Gateway < ApplicationRecord
     throw(:abort) if errors.any?
   end
 
+  scope :with_term_route_set, ->(value) {
+    ActiveRecord::Type::Boolean.new.cast(value) ? where('cardinality(term_route_set) > 0') : where('cardinality(term_route_set) = 0')
+  }
+  scope :with_orig_route_set, ->(value) {
+    ActiveRecord::Type::Boolean.new.cast(value) ? where('cardinality(orig_route_set) > 0') : where('cardinality(orig_route_set) = 0')
+  }
+
   def self.ransackable_scopes(_auth_object = nil)
     %i[
       search_for
       ordered_by
       origination_contractor_id_eq
       termination_contractor_id_eq
+      with_term_route_set
+      with_orig_route_set
     ]
   end
 end

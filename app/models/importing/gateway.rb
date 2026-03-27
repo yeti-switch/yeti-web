@@ -51,11 +51,9 @@
 #  name                               :string
 #  network_protocol_priority_name     :string
 #  orig_disconnect_policy_name        :string
-#  orig_force_outbound_proxy          :boolean
+#  orig_force_route_set               :boolean
 #  orig_next_hop                      :string
-#  orig_outbound_proxy                :string
-#  orig_proxy_transport_protocol_name :string
-#  orig_use_outbound_proxy            :boolean
+#  orig_route_set                     :string           is an Array
 #  origination_capacity               :integer(2)
 #  pop_name                           :string
 #  port                               :integer(4)
@@ -101,12 +99,10 @@
 #  suppress_early_media               :boolean
 #  symmetric_rtp_nonstop              :boolean
 #  term_disconnect_policy_name        :string
-#  term_force_outbound_proxy          :boolean
+#  term_force_route_set               :boolean
 #  term_next_hop                      :string
 #  term_next_hop_for_replies          :boolean
-#  term_outbound_proxy                :string
-#  term_proxy_transport_protocol_name :string
-#  term_use_outbound_proxy            :boolean
+#  term_route_set                     :string           is an Array
 #  termination_capacity               :integer(2)
 #  termination_dst_numberlist_name    :string
 #  termination_src_numberlist_name    :string
@@ -127,7 +123,6 @@
 #  network_protocol_priority_id       :integer(2)
 #  o_id                               :integer(4)
 #  orig_disconnect_policy_id          :integer(4)
-#  orig_proxy_transport_protocol_id   :integer(2)
 #  pop_id                             :integer(4)
 #  registered_aor_mode_id             :integer(2)
 #  rel100_mode_id                     :integer(2)
@@ -140,7 +135,6 @@
 #  session_refresh_method_id          :integer(4)
 #  sip_schema_id                      :integer(2)
 #  term_disconnect_policy_id          :integer(4)
-#  term_proxy_transport_protocol_id   :integer(2)
 #  termination_dst_numberlist_id      :integer(2)
 #  termination_src_numberlist_id      :integer(2)
 #  transparent_dialog_id              :boolean
@@ -167,8 +161,6 @@ class Importing::Gateway < Importing::Base
   belongs_to :dtmf_receive_mode, class_name: '::System::DtmfReceiveMode', foreign_key: :dtmf_receive_mode_id, optional: true
   belongs_to :dtmf_send_mode, class_name: '::System::DtmfSendMode', foreign_key: :dtmf_send_mode_id, optional: true
   belongs_to :transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :transport_protocol_id, optional: true
-  belongs_to :term_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :term_proxy_transport_protocol_id, optional: true
-  belongs_to :orig_proxy_transport_protocol, class_name: '::Equipment::TransportProtocol', foreign_key: :orig_proxy_transport_protocol_id, optional: true
   belongs_to :rel100_mode, class_name: '::Equipment::GatewayRel100Mode', foreign_key: :rel100_mode_id, optional: true
   belongs_to :rx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :rx_inband_dtmf_filtering_mode_id, optional: true
   belongs_to :tx_inband_dtmf_filtering_mode, class_name: '::Equipment::GatewayInbandDtmfFilteringMode', foreign_key: :tx_inband_dtmf_filtering_mode_id, optional: true
@@ -200,7 +192,7 @@ class Importing::Gateway < Importing::Base
     allow_termination allow_origination
     proxy_media
     auth_enabled auth_user auth_password
-    term_use_outbound_proxy term_outbound_proxy term_force_outbound_proxy
+    term_force_route_set term_route_set
     term_next_hop orig_next_hop
     sdp_alines_filter_type_id
     sdp_alines_filter_list
@@ -211,7 +203,7 @@ class Importing::Gateway < Importing::Base
     orig_disconnect_policy_id
     term_disconnect_policy_id
     sensor_level_id sensor_id
-    orig_use_outbound_proxy orig_force_outbound_proxy orig_outbound_proxy
+    orig_force_route_set orig_route_set
     dialog_nat_handling
     resolve_ruri
     auth_from_user auth_from_domain
@@ -226,8 +218,6 @@ class Importing::Gateway < Importing::Base
     dtmf_receive_mode_id dtmf_send_mode_id
     tx_inband_dtmf_filtering_mode_id rx_inband_dtmf_filtering_mode_id
     transport_protocol_id
-    term_proxy_transport_protocol_id
-    orig_proxy_transport_protocol_id
     rel100_mode_id
     incoming_auth_username
     incoming_auth_password

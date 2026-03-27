@@ -19,8 +19,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     dtmf-receive-mode
     dtmf-send-mode
     transport-protocol
-    term-proxy-transport-protocol
-    orig-proxy-transport-protocol
     rel100-mode
     rx-inband-dtmf-filtering-mode
     tx-inband-dtmf-filtering-mode
@@ -317,42 +315,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
       end
     end
 
-    context 'with filter by term_proxy_transport_protocol.id' do
-      let!(:transport_protocol) { Equipment::TransportProtocol.first }
-      let!(:other_transport_protocol) { Equipment::TransportProtocol.second }
-      let!(:gateways) { create_list(:gateway, 3, term_proxy_transport_protocol: transport_protocol) }
-      before { create(:gateway, term_proxy_transport_protocol: other_transport_protocol) }
-
-      let(:request_params) do
-        { filter: { 'term_proxy_transport_protocol.id': transport_protocol.id } }
-      end
-
-      it 'returns filtered gateways by term_proxy_transport_protocol.id' do
-        subject
-        expect(response.status).to eq(200)
-        actual_ids = response_json[:data].map { |r| r[:id] }
-        expect(actual_ids).to match_array gateways.map(&:id).map(&:to_s)
-      end
-    end
-
-    context 'with filter by orig_proxy_transport_protocol.id' do
-      let!(:transport_protocol) { Equipment::TransportProtocol.first }
-      let!(:other_transport_protocol) { Equipment::TransportProtocol.second }
-      let!(:gateways) { create_list(:gateway, 3, orig_proxy_transport_protocol: transport_protocol) }
-      before { create(:gateway, orig_proxy_transport_protocol: other_transport_protocol) }
-
-      let(:request_params) do
-        { filter: { 'orig_proxy_transport_protocol.id': transport_protocol.id } }
-      end
-
-      it 'returns filtered gateways by orig_proxy_transport_protocol.id' do
-        subject
-        expect(response.status).to eq(200)
-        actual_ids = response_json[:data].map { |r| r[:id] }
-        expect(actual_ids).to match_array gateways.map(&:id).map(&:to_s)
-      end
-    end
-
     context 'with filter by rel100_mode.id' do
       let!(:rel100_mode) { Equipment::GatewayRel100Mode.first }
       let!(:other_rel100_mode) { Equipment::GatewayRel100Mode.second }
@@ -497,10 +459,11 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'auth-password': gateway.auth_password,
         'auth-from-user': gateway.auth_from_user,
         'auth-from-domain': gateway.auth_from_domain,
-        'term-use-outbound-proxy': gateway.term_use_outbound_proxy,
+        'term-force-route-set': gateway.term_force_route_set,
+        'term-route-set': gateway.term_route_set,
+        'orig-force-route-set': gateway.orig_force_route_set,
+        'orig-route-set': gateway.orig_route_set,
         'termination-capacity': gateway.termination_capacity,
-        'term-force-outbound-proxy': gateway.term_force_outbound_proxy,
-        'term-outbound-proxy': gateway.term_outbound_proxy,
         'term-next-hop-for-replies': gateway.term_next_hop_for_replies,
         'term-next-hop': gateway.term_next_hop,
         'term-append-headers-req': gateway.term_append_headers_req,
@@ -577,8 +540,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
     let(:dtmf_receive_mode) { System::DtmfReceiveMode.first }
     let(:dtmf_send_mode) { System::DtmfSendMode.first }
     let(:transport_protocol) { Equipment::TransportProtocol.first }
-    let(:term_proxy_transport_protocol) { Equipment::TransportProtocol.first }
-    let(:orig_proxy_transport_protocol) { Equipment::TransportProtocol.first }
     let(:rel100_mode) { Equipment::GatewayRel100Mode.first }
     let(:rx_inband_dtmf_filtering_mode) { Equipment::GatewayInbandDtmfFilteringMode.first }
     let(:tx_inband_dtmf_filtering_mode) { Equipment::GatewayInbandDtmfFilteringMode.first }
@@ -625,8 +586,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
         'dtmf-receive-mode': { data: { id: dtmf_receive_mode.id.to_s, type: 'dtmf-receive-modes' } },
         'dtmf-send-mode': { data: { id: dtmf_send_mode.id.to_s, type: 'dtmf-send-modes' } },
         'transport-protocol': { data: { id: transport_protocol.id.to_s, type: 'transport-protocols' } },
-        'term-proxy-transport-protocol': { data: { id: term_proxy_transport_protocol.id.to_s, type: 'transport-protocols' } },
-        'orig-proxy-transport-protocol': { data: { id: orig_proxy_transport_protocol.id.to_s, type: 'transport-protocols' } },
         'rel100-mode': { data: { id: rel100_mode.id.to_s, type: 'gateway-rel100-modes' } },
         'rx-inband-dtmf-filtering-mode': { data: { id: rx_inband_dtmf_filtering_mode.id.to_s, type: 'gateway-inband-dtmf-filtering-modes' } },
         'tx-inband-dtmf-filtering-mode': { data: { id: tx_inband_dtmf_filtering_mode.id.to_s, type: 'gateway-inband-dtmf-filtering-modes' } },
@@ -667,8 +626,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :request do
                                   dtmf_receive_mode: dtmf_receive_mode,
                                   dtmf_send_mode: dtmf_send_mode,
                                   transport_protocol: transport_protocol,
-                                  term_proxy_transport_protocol: term_proxy_transport_protocol,
-                                  orig_proxy_transport_protocol: orig_proxy_transport_protocol,
                                   rel100_mode: rel100_mode,
                                   rx_inband_dtmf_filtering_mode: rx_inband_dtmf_filtering_mode,
                                   tx_inband_dtmf_filtering_mode: tx_inband_dtmf_filtering_mode,

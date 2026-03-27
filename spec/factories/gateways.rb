@@ -44,10 +44,9 @@
 #  name                             :string           not null
 #  orig_append_headers_reply        :string           default([]), not null, is an Array
 #  orig_append_headers_req          :string           default([]), not null, is an Array
-#  orig_force_outbound_proxy        :boolean          default(FALSE), not null
+#  orig_force_route_set             :boolean          default(FALSE), not null
 #  orig_next_hop                    :string
-#  orig_outbound_proxy              :string
-#  orig_use_outbound_proxy          :boolean          default(FALSE), not null
+#  orig_route_set                   :string           default([]), not null, is an Array
 #  origination_capacity             :integer(2)
 #  pai_domain                       :string
 #  port                             :integer(4)
@@ -87,11 +86,10 @@
 #  suppress_early_media             :boolean          default(FALSE), not null
 #  symmetric_rtp_nonstop            :boolean          default(FALSE), not null
 #  term_append_headers_req          :string           default([]), not null, is an Array
-#  term_force_outbound_proxy        :boolean          default(FALSE), not null
+#  term_force_route_set             :boolean          default(FALSE), not null
 #  term_next_hop                    :string
 #  term_next_hop_for_replies        :boolean          default(FALSE), not null
-#  term_outbound_proxy              :string
-#  term_use_outbound_proxy          :boolean          default(FALSE), not null
+#  term_route_set                   :string           default([]), not null, is an Array
 #  termination_capacity             :integer(2)
 #  termination_cps_limit            :integer(2)
 #  termination_cps_wsize            :integer(2)       default(1), not null
@@ -120,7 +118,6 @@
 #  media_encryption_mode_id         :integer(2)       default(0), not null
 #  network_protocol_priority_id     :integer(2)       default(0), not null
 #  orig_disconnect_policy_id        :integer(4)
-#  orig_proxy_transport_protocol_id :integer(2)       default(1), not null
 #  pai_send_mode_id                 :integer(2)       default(0), not null
 #  pop_id                           :integer(4)
 #  privacy_mode_id                  :integer(2)       default(0), not null
@@ -140,7 +137,6 @@
 #  stir_shaken_crt_id               :integer(2)
 #  stir_shaken_mode_id              :integer(2)       default(0), not null
 #  term_disconnect_policy_id        :integer(4)
-#  term_proxy_transport_protocol_id :integer(2)       default(1), not null
 #  termination_dst_numberlist_id    :integer(4)
 #  termination_src_numberlist_id    :integer(4)
 #  throttling_profile_id            :integer(2)
@@ -169,7 +165,6 @@
 #  gateways_media_encryption_mode_id_fkey          (media_encryption_mode_id => gateway_media_encryption_modes.id)
 #  gateways_network_protocol_priority_id_fkey      (network_protocol_priority_id => gateway_network_protocol_priorities.id)
 #  gateways_orig_disconnect_policy_id_fkey         (orig_disconnect_policy_id => disconnect_policy.id)
-#  gateways_orig_proxy_transport_protocol_id_fkey  (orig_proxy_transport_protocol_id => transport_protocols.id)
 #  gateways_pop_id_fkey                            (pop_id => pops.id)
 #  gateways_radius_accounting_profile_id_fkey      (radius_accounting_profile_id => radius_accounting_profiles.id)
 #  gateways_rel100_mode_id_fkey                    (rel100_mode_id => gateway_rel100_modes.id)
@@ -182,7 +177,6 @@
 #  gateways_session_refresh_method_id_fkey         (session_refresh_method_id => session_refresh_methods.id)
 #  gateways_stir_shaken_crt_id_fkey                (stir_shaken_crt_id => stir_shaken_signing_certificates.id)
 #  gateways_term_disconnect_policy_id_fkey         (term_disconnect_policy_id => disconnect_policy.id)
-#  gateways_term_proxy_transport_protocol_id_fkey  (term_proxy_transport_protocol_id => transport_protocols.id)
 #  gateways_termination_dst_numberlist_id_fkey     (termination_dst_numberlist_id => numberlists.id)
 #  gateways_termination_src_numberlist_id_fkey     (termination_src_numberlist_id => numberlists.id)
 #  gateways_throttling_profile_id_fkey             (throttling_profile_id => gateway_throttling_profiles.id)
@@ -209,8 +203,6 @@ FactoryBot.define do
     network_protocol_priority_id { 1 }
 
     transport_protocol_id { 1 }
-    term_proxy_transport_protocol_id { 1 }
-    orig_proxy_transport_protocol_id { 1 }
     sip_schema_id { 1 }
     host { 'test.example.com' }
     port { nil }
@@ -220,9 +212,9 @@ FactoryBot.define do
     auth_enabled { false }
     auth_user { nil }
     auth_password { nil }
-    term_outbound_proxy { 'term-proxy.example.com' }
+    term_route_set { [] }
+    term_force_route_set { false }
     term_next_hop_for_replies { false }
-    term_use_outbound_proxy { false }
     termination_capacity { nil }
     allow_termination { true }
     allow_origination { true }
@@ -234,7 +226,6 @@ FactoryBot.define do
     sst_maximum_timer { 50 }
     sst_accept501 { true }
     sst_session_expires { 50 }
-    term_force_outbound_proxy { false }
     locked { false }
     codecs_payload_order { '' }
     codecs_prefer_transcoding_for { nil }
@@ -246,9 +237,8 @@ FactoryBot.define do
     orig_append_headers_reply { [] }
     term_append_headers_req { [] }
     dialog_nat_handling { true }
-    orig_force_outbound_proxy { false }
-    orig_use_outbound_proxy { false }
-    orig_outbound_proxy { 'orig-outbound-proxy.example.com' }
+    orig_force_route_set { false }
+    orig_route_set { [] }
     prefer_existing_codecs { true }
     force_symmetric_rtp { true }
     transparent_dialog_id { false }
@@ -312,7 +302,6 @@ FactoryBot.define do
       dtmf_send_mode { System::DtmfSendMode.take }
       radius_accounting_profile { build :accounting_profile }
       transport_protocol { Equipment::TransportProtocol.take }
-      term_proxy_transport_protocol { Equipment::TransportProtocol.take }
       rel100_mode { Equipment::GatewayRel100Mode.take }
       rx_inband_dtmf_filtering_mode { Equipment::GatewayInbandDtmfFilteringMode.take }
       network_protocol_priority { Equipment::GatewayNetworkProtocolPriority.take }

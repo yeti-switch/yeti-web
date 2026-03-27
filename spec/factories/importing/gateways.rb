@@ -51,11 +51,9 @@
 #  name                               :string
 #  network_protocol_priority_name     :string
 #  orig_disconnect_policy_name        :string
-#  orig_force_outbound_proxy          :boolean
+#  orig_force_route_set               :boolean
 #  orig_next_hop                      :string
-#  orig_outbound_proxy                :string
-#  orig_proxy_transport_protocol_name :string
-#  orig_use_outbound_proxy            :boolean
+#  orig_route_set                     :string           is an Array
 #  origination_capacity               :integer(2)
 #  pop_name                           :string
 #  port                               :integer(4)
@@ -101,12 +99,10 @@
 #  suppress_early_media               :boolean
 #  symmetric_rtp_nonstop              :boolean
 #  term_disconnect_policy_name        :string
-#  term_force_outbound_proxy          :boolean
+#  term_force_route_set               :boolean
 #  term_next_hop                      :string
 #  term_next_hop_for_replies          :boolean
-#  term_outbound_proxy                :string
-#  term_proxy_transport_protocol_name :string
-#  term_use_outbound_proxy            :boolean
+#  term_route_set                     :string           is an Array
 #  termination_capacity               :integer(2)
 #  termination_dst_numberlist_name    :string
 #  termination_src_numberlist_name    :string
@@ -127,7 +123,6 @@
 #  network_protocol_priority_id       :integer(2)
 #  o_id                               :integer(4)
 #  orig_disconnect_policy_id          :integer(4)
-#  orig_proxy_transport_protocol_id   :integer(2)
 #  pop_id                             :integer(4)
 #  registered_aor_mode_id             :integer(2)
 #  rel100_mode_id                     :integer(2)
@@ -140,7 +135,6 @@
 #  session_refresh_method_id          :integer(4)
 #  sip_schema_id                      :integer(2)
 #  term_disconnect_policy_id          :integer(4)
-#  term_proxy_transport_protocol_id   :integer(2)
 #  termination_dst_numberlist_id      :integer(2)
 #  termination_src_numberlist_id      :integer(2)
 #  transparent_dialog_id              :boolean
@@ -161,9 +155,9 @@ FactoryBot.define do
     auth_enabled { false }
     auth_user { nil }
     auth_password { nil }
-    term_outbound_proxy { nil }
+    term_route_set { [] }
+    term_force_route_set { false }
     term_next_hop_for_replies { false }
-    term_use_outbound_proxy { false }
     contractor_id { nil }
     allow_termination { true }
     allow_origination { true }
@@ -174,7 +168,6 @@ FactoryBot.define do
     sst_accept501 { true }
     session_refresh_method_id { 3 }
     sst_session_expires { 50 }
-    term_force_outbound_proxy { false }
     locked { false }
     codecs_payload_order { '' }
     codecs_prefer_transcoding_for { nil }
@@ -186,9 +179,8 @@ FactoryBot.define do
     orig_append_headers_req { nil }
     term_append_headers_req { nil }
     dialog_nat_handling { true }
-    orig_force_outbound_proxy { false }
-    orig_use_outbound_proxy { false }
-    orig_outbound_proxy { nil }
+    orig_force_route_set { false }
+    orig_route_set { [] }
     prefer_existing_codecs { true }
     force_symmetric_rtp { true }
     transparent_dialog_id { false }
