@@ -14,7 +14,7 @@ jobs:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:18
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       
@@ -32,7 +32,7 @@ jobs:
           SECRET_KEY_BASE: qQX3V5RSCMdQq6GRpE7tMJ1Syognfz4GLPCaSCPR9lAML2FzCiLN79u8ItC4VDOk
 
       - name: Save deb package as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: deb12-package
           path: /__w/yeti-web/*.deb
@@ -54,7 +54,7 @@ jobs:
     needs: deb12
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -93,7 +93,7 @@ jobs:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:18
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       
@@ -111,7 +111,7 @@ jobs:
           SECRET_KEY_BASE: qQX3V5RSCMdQq6GRpE7tMJ1Syognfz4GLPCaSCPR9lAML2FzCiLN79u8ItC4VDOk
 
       - name: Save deb package as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: deb13-package
           path: /__w/yeti-web/*.deb
@@ -133,7 +133,7 @@ jobs:
     needs: deb13
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 

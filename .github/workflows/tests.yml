@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Fetching gems cache
         uses: actions/cache@v4
         with:
@@ -38,7 +38,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     needs: gems-caching
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: use cache
         uses: actions/cache@v4
         with:
@@ -59,7 +59,7 @@ jobs:
         image: ghcr.io/yeti-switch/yeti-web/pgsql:18
     needs: gems-caching
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: use cache
         uses: actions/cache@v4
         with:
@@ -79,7 +79,7 @@ jobs:
 
       - name: Save artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: database_consistency-artifacts
           if-no-files-found: ignore
@@ -95,7 +95,7 @@ jobs:
     container: ghcr.io/yeti-switch/yeti-web/build-image:trixie
     needs: gems-caching
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: use cache
         uses: actions/cache@v4
         with:
@@ -129,7 +129,7 @@ jobs:
         ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: use cache
         uses: actions/cache@v4
         with:
@@ -155,7 +155,7 @@ jobs:
 
       - name: Save artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: rspec-artifacts-${{matrix.ci_node_index}}
           if-no-files-found: ignore
@@ -178,7 +178,7 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: use cache
         uses: actions/cache@v4
         with:
@@ -202,7 +202,7 @@ jobs:
 
       - name: Save artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: rspec-artifacts-ldap
           if-no-files-found: ignore
@@ -222,7 +222,7 @@ jobs:
       - rspec
       - rspec_ldap
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: use cache
         uses: actions/cache@v4
         with:
