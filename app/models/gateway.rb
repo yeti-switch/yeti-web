@@ -672,12 +672,21 @@ class Gateway < ApplicationRecord
     throw(:abort) if errors.any?
   end
 
+  scope :with_term_route_set, ->(value) {
+    ActiveRecord::Type::Boolean.new.cast(value) ? where('cardinality(term_route_set) > 0') : where('cardinality(term_route_set) = 0')
+  }
+  scope :with_orig_route_set, ->(value) {
+    ActiveRecord::Type::Boolean.new.cast(value) ? where('cardinality(orig_route_set) > 0') : where('cardinality(orig_route_set) = 0')
+  }
+
   def self.ransackable_scopes(_auth_object = nil)
     %i[
       search_for
       ordered_by
       origination_contractor_id_eq
       termination_contractor_id_eq
+      with_term_route_set
+      with_orig_route_set
     ]
   end
 end

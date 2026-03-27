@@ -211,16 +211,22 @@ ActiveAdmin.register Gateway do
 
     column :orig_next_hop
     column :orig_append_headers_req
-    column :orig_force_route_set
-    column :orig_route_set
+    column :orig_route_set do |gw|
+      items = Array(gw.orig_route_set).map { |uri| content_tag(:span, uri) }
+      items.prepend(content_tag(:span, 'force', class: 'status_tag yes')) if gw.orig_force_route_set
+      safe_join(items, ' ')
+    end
     column :transparent_dialog_id
     column :dialog_nat_handling
     column :orig_disconnect_policy
 
     column :resolve_ruri
 
-    column :term_force_route_set
-    column :term_route_set
+    column :term_route_set do |gw|
+      items = Array(gw.term_route_set).map { |uri| content_tag(:span, uri) }
+      items.prepend(content_tag(:span, 'force', class: 'status_tag yes')) if gw.term_force_route_set
+      safe_join(items, ' ')
+    end
     column :term_next_hop
     column :term_next_hop_for_replies
     column :term_disconnect_policy
@@ -290,6 +296,8 @@ ActiveAdmin.register Gateway do
   filter :pop, input_html: { class: 'tom-select' }
   filter :transport_protocol, input_html: { class: 'tom-select' }
   filter :host
+  boolean_filter :with_term_route_set, label: 'Has Term Route Set'
+  boolean_filter :with_orig_route_set, label: 'Has Orig Route Set'
   boolean_filter :enabled
   boolean_filter :allow_origination
   boolean_filter :allow_termination
