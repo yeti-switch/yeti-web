@@ -90,10 +90,8 @@ ActiveAdmin.register Importing::Gateway do
     column :auth_from_user
     column :auth_from_domain
 
-    column :term_use_outbound_proxy
-    column :term_proxy_transport_protocol
-    column :term_outbound_proxy
-    column :term_force_outbound_proxy
+    column :term_force_route_set
+    column :term_route_set
     column :term_next_hop
     column :orig_next_hop
     column :sdp_alines_filter_type, sortable: :sdp_alines_filter_type_name

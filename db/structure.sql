@@ -278,11 +278,7 @@ CREATE TYPE switch22.callprofile_ty AS (
 	call_id character varying,
 	dlg_nat_handling boolean,
 	force_outbound_proxy boolean,
-	outbound_proxy character varying,
-	bleg_outbound_proxy_transport_protocol_id smallint,
 	aleg_force_outbound_proxy boolean,
-	aleg_outbound_proxy character varying,
-	aleg_outbound_proxy_transport_protocol_id smallint,
 	next_hop character varying,
 	next_hop_1st_req boolean,
 	aleg_next_hop character varying,
@@ -477,7 +473,9 @@ CREATE TYPE switch22.callprofile_ty AS (
 	dst_network_type_id smallint,
 	destination_cdo smallint,
 	aleg_contact_user character varying,
-	bleg_contact_user character varying
+	bleg_contact_user character varying,
+	bleg_route_set character varying,
+	aleg_route_set character varying
 );
 
 
@@ -2565,7 +2563,6 @@ BEGIN
   v_ret."to":='$t';
   v_ret.ruri:='$r';
   v_ret.force_outbound_proxy:=false;
-  v_ret.outbound_proxy:='';
   v_ret.next_hop:='';
   --    v_ret.next_hop_for_replies:='';
   v_ret.next_hop_1st_req:=false;
@@ -2871,9 +2868,7 @@ CREATE TABLE class4.gateways (
     auth_enabled boolean DEFAULT false NOT NULL,
     auth_user character varying,
     auth_password character varying,
-    term_outbound_proxy character varying,
     term_next_hop_for_replies boolean DEFAULT false NOT NULL,
-    term_use_outbound_proxy boolean DEFAULT false NOT NULL,
     contractor_id integer NOT NULL,
     allow_termination boolean DEFAULT true NOT NULL,
     allow_origination boolean DEFAULT true NOT NULL,
@@ -2884,7 +2879,7 @@ CREATE TABLE class4.gateways (
     sst_accept501 boolean DEFAULT true NOT NULL,
     session_refresh_method_id integer DEFAULT 3 NOT NULL,
     sst_session_expires integer DEFAULT 50,
-    term_force_outbound_proxy boolean DEFAULT false NOT NULL,
+    term_force_route_set boolean DEFAULT false CONSTRAINT gateways_term_force_outbound_proxy_not_null NOT NULL,
     locked boolean DEFAULT false NOT NULL,
     codecs_payload_order character varying DEFAULT ''::character varying,
     codecs_prefer_transcoding_for character varying DEFAULT ''::character varying,
@@ -2896,9 +2891,7 @@ CREATE TABLE class4.gateways (
     orig_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     term_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     dialog_nat_handling boolean DEFAULT true NOT NULL,
-    orig_force_outbound_proxy boolean DEFAULT false NOT NULL,
-    orig_use_outbound_proxy boolean DEFAULT false NOT NULL,
-    orig_outbound_proxy character varying,
+    orig_force_route_set boolean DEFAULT false CONSTRAINT gateways_orig_force_outbound_proxy_not_null NOT NULL,
     prefer_existing_codecs boolean DEFAULT true NOT NULL,
     force_symmetric_rtp boolean DEFAULT true NOT NULL,
     transparent_dialog_id boolean DEFAULT false NOT NULL,
@@ -2952,8 +2945,6 @@ CREATE TABLE class4.gateways (
     sip_interface_name character varying,
     rtp_interface_name character varying,
     transport_protocol_id smallint DEFAULT 1 NOT NULL,
-    term_proxy_transport_protocol_id smallint DEFAULT 1 NOT NULL,
-    orig_proxy_transport_protocol_id smallint DEFAULT 1 NOT NULL,
     rel100_mode_id smallint DEFAULT 4 NOT NULL,
     is_shared boolean DEFAULT false NOT NULL,
     max_30x_redirects smallint DEFAULT 0 NOT NULL,
@@ -3001,7 +2992,9 @@ CREATE TABLE class4.gateways (
     rtcp_feedback_mode_id smallint DEFAULT 1 NOT NULL,
     contact_user character varying,
     allowed_methods character varying[],
-    supported_tags character varying[]
+    supported_tags character varying[],
+    term_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL,
+    orig_route_set character varying[] DEFAULT '{}'::character varying[] NOT NULL
 );
 
 
@@ -4015,23 +4008,11 @@ BEGIN
   i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
 
-  IF (i_vendor_gw.term_use_outbound_proxy ) THEN
-    i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
-    i_profile.force_outbound_proxy:=i_vendor_gw.term_force_outbound_proxy;
-    i_profile.bleg_outbound_proxy_transport_protocol_id:=i_vendor_gw.term_proxy_transport_protocol_id;
-  ELSE
-    i_profile.outbound_proxy:=NULL;
-    i_profile.force_outbound_proxy:=false;
-  END IF;
+  i_profile.bleg_route_set := array_to_string(i_vendor_gw.term_route_set, ',');
+  i_profile.force_outbound_proxy := i_vendor_gw.term_force_route_set;
 
-  IF (i_customer_gw.orig_use_outbound_proxy ) THEN
-    i_profile.aleg_force_outbound_proxy:=i_customer_gw.orig_force_outbound_proxy;
-    i_profile.aleg_outbound_proxy=v_schema||':'||i_customer_gw.orig_outbound_proxy;
-    i_profile.aleg_outbound_proxy_transport_protocol_id:=i_customer_gw.orig_proxy_transport_protocol_id;
-  else
-    i_profile.aleg_force_outbound_proxy:=FALSE;
-    i_profile.aleg_outbound_proxy=NULL;
-  end if;
+  i_profile.aleg_route_set := array_to_string(i_customer_gw.orig_route_set, ',');
+  i_profile.aleg_force_outbound_proxy := i_customer_gw.orig_force_route_set;
 
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
@@ -4810,23 +4791,11 @@ BEGIN
   i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
 
-  IF (i_vendor_gw.term_use_outbound_proxy ) THEN
-    i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
-    i_profile.force_outbound_proxy:=i_vendor_gw.term_force_outbound_proxy;
-    i_profile.bleg_outbound_proxy_transport_protocol_id:=i_vendor_gw.term_proxy_transport_protocol_id;
-  ELSE
-    i_profile.outbound_proxy:=NULL;
-    i_profile.force_outbound_proxy:=false;
-  END IF;
+  i_profile.bleg_route_set := array_to_string(i_vendor_gw.term_route_set, ',');
+  i_profile.force_outbound_proxy := i_vendor_gw.term_force_route_set;
 
-  IF (i_customer_gw.orig_use_outbound_proxy ) THEN
-    i_profile.aleg_force_outbound_proxy:=i_customer_gw.orig_force_outbound_proxy;
-    i_profile.aleg_outbound_proxy=v_schema||':'||i_customer_gw.orig_outbound_proxy;
-    i_profile.aleg_outbound_proxy_transport_protocol_id:=i_customer_gw.orig_proxy_transport_protocol_id;
-  else
-    i_profile.aleg_force_outbound_proxy:=FALSE;
-    i_profile.aleg_outbound_proxy=NULL;
-  end if;
+  i_profile.aleg_route_set := array_to_string(i_customer_gw.orig_route_set, ',');
+  i_profile.aleg_force_outbound_proxy := i_customer_gw.orig_force_route_set;
 
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
@@ -5528,23 +5497,11 @@ BEGIN
   i_profile.aleg_media_encryption_mode_id:=i_customer_gw.media_encryption_mode_id;
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
 
-  IF (i_vendor_gw.term_use_outbound_proxy ) THEN
-    i_profile.outbound_proxy:=v_schema||':'||i_vendor_gw.term_outbound_proxy;
-    i_profile.force_outbound_proxy:=i_vendor_gw.term_force_outbound_proxy;
-    i_profile.bleg_outbound_proxy_transport_protocol_id:=i_vendor_gw.term_proxy_transport_protocol_id;
-  ELSE
-    i_profile.outbound_proxy:=NULL;
-    i_profile.force_outbound_proxy:=false;
-  END IF;
+  i_profile.bleg_route_set := array_to_string(i_vendor_gw.term_route_set, ',');
+  i_profile.force_outbound_proxy := i_vendor_gw.term_force_route_set;
 
-  IF (i_customer_gw.orig_use_outbound_proxy ) THEN
-    i_profile.aleg_force_outbound_proxy:=i_customer_gw.orig_force_outbound_proxy;
-    i_profile.aleg_outbound_proxy=v_schema||':'||i_customer_gw.orig_outbound_proxy;
-    i_profile.aleg_outbound_proxy_transport_protocol_id:=i_customer_gw.orig_proxy_transport_protocol_id;
-  else
-    i_profile.aleg_force_outbound_proxy:=FALSE;
-    i_profile.aleg_outbound_proxy=NULL;
-  end if;
+  i_profile.aleg_route_set := array_to_string(i_customer_gw.orig_route_set, ',');
+  i_profile.aleg_force_outbound_proxy := i_customer_gw.orig_force_route_set;
 
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
@@ -13621,9 +13578,7 @@ CREATE TABLE data_import.import_gateways (
     auth_enabled boolean,
     auth_user character varying,
     auth_password character varying,
-    term_outbound_proxy character varying,
     term_next_hop_for_replies boolean,
-    term_use_outbound_proxy boolean,
     contractor_id integer,
     allow_termination boolean,
     allow_origination boolean,
@@ -13634,7 +13589,7 @@ CREATE TABLE data_import.import_gateways (
     sst_accept501 boolean,
     session_refresh_method_id integer,
     sst_session_expires integer,
-    term_force_outbound_proxy boolean,
+    term_force_route_set boolean,
     locked boolean,
     codecs_payload_order character varying,
     codecs_prefer_transcoding_for character varying,
@@ -13643,9 +13598,7 @@ CREATE TABLE data_import.import_gateways (
     term_next_hop character varying,
     orig_next_hop character varying,
     dialog_nat_handling boolean,
-    orig_force_outbound_proxy boolean,
-    orig_use_outbound_proxy boolean,
-    orig_outbound_proxy character varying,
+    orig_force_route_set boolean,
     prefer_existing_codecs boolean,
     force_symmetric_rtp boolean,
     transparent_dialog_id boolean,
@@ -13702,11 +13655,7 @@ CREATE TABLE data_import.import_gateways (
     dtmf_receive_mode_id smallint,
     dtmf_receive_mode_name character varying,
     transport_protocol_id smallint,
-    term_proxy_transport_protocol_id smallint,
-    orig_proxy_transport_protocol_id smallint,
     transport_protocol_name character varying,
-    term_proxy_transport_protocol_name character varying,
-    orig_proxy_transport_protocol_name character varying,
     short_calls_limit real,
     origination_capacity smallint,
     termination_capacity smallint,
@@ -13751,7 +13700,9 @@ CREATE TABLE data_import.import_gateways (
     incoming_auth_allow_jwt boolean DEFAULT false NOT NULL,
     scheduler_id smallint,
     scheduler_name character varying,
-    contact_user character varying
+    contact_user character varying,
+    term_route_set character varying[],
+    orig_route_set character varying[]
 );
 
 
@@ -19614,14 +19565,6 @@ ALTER TABLE ONLY class4.gateways
 
 
 --
--- Name: gateways gateways_orig_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_orig_proxy_transport_protocol_id_fkey FOREIGN KEY (orig_proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
-
-
---
 -- Name: gateways gateways_pop_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -19715,14 +19658,6 @@ ALTER TABLE ONLY class4.gateways
 
 ALTER TABLE ONLY class4.gateways
     ADD CONSTRAINT gateways_term_disconnect_policy_id_fkey FOREIGN KEY (term_disconnect_policy_id) REFERENCES class4.disconnect_policy(id);
-
-
---
--- Name: gateways gateways_term_proxy_transport_protocol_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
---
-
-ALTER TABLE ONLY class4.gateways
-    ADD CONSTRAINT gateways_term_proxy_transport_protocol_id_fkey FOREIGN KEY (term_proxy_transport_protocol_id) REFERENCES class4.transport_protocols(id);
 
 
 --
@@ -20308,6 +20243,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260327000000'),
 ('20260325000000'),
 ('20260322000002'),
 ('20260322000001'),

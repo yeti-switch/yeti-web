@@ -41,9 +41,9 @@ INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (744, 'call_id', 'varchar', false, 60, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (746, 'dlg_nat_handling', 'boolean', false, 80, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (747, 'force_outbound_proxy', 'boolean', false, 90, false);
-INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (748, 'outbound_proxy', 'varchar', false, 100, false);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1053, 'bleg_route_set', 'varchar', false, 100, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (749, 'aleg_force_outbound_proxy', 'boolean', false, 110, false);
-INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (750, 'aleg_outbound_proxy', 'varchar', false, 120, false);
+INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (1054, 'aleg_route_set', 'varchar', false, 120, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (751, 'next_hop', 'varchar', false, 130, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (752, 'next_hop_1st_req', 'boolean', false, 140, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (753, 'aleg_next_hop', 'varchar', false, 150, false);
@@ -185,8 +185,6 @@ INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_rad
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (914, 'src_area_id', 'integer', true, 1941, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (915, 'dst_area_id', 'integer', true, 1942, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (917, 'bleg_transport_protocol_id', 'smallint', false, 21, false);
-INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (918, 'aleg_outbound_proxy_transport_protocol_id', 'smallint', false, 121, false);
-INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (919, 'bleg_outbound_proxy_transport_protocol_id', 'smallint', false, 101, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (920, 'auth_orig_protocol_id', 'smallint', true, 1919, true);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (921, 'aleg_rel100_mode_id', 'smallint', false, 1061, false);
 INSERT INTO switch22.switch_interface_out (id, name, type, custom, rank, for_radius) VALUES (922, 'bleg_rel100_mode_id', 'smallint', false, 1062, false);
