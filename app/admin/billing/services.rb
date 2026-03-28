@@ -4,6 +4,16 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
   menu parent: 'Billing', label: 'Services', priority: 30
 
   controller do
+    def update(*)
+      if resource.terminated?
+        flash[:error] = 'Service has been terminated and cannot be updated.'
+        redirect_to resource_path(resource)
+        return
+      end
+
+      super
+    end
+
     def create_resource(object)
       object.save
     rescue Billing::Provisioning::Errors::Error => e
@@ -113,6 +123,25 @@ ActiveAdmin.register Billing::Service, as: 'Services' do
         end
       end
     end
+  end
+
+  action_item :terminate, only: %i[show edit] do
+    if authorized?(:terminate, resource)
+      link_to 'Terminate',
+              terminate_service_path(resource),
+              method: :post,
+              data: { confirm: 'Are you sure you want to terminate this service?' }
+    end
+  end
+
+  member_action :terminate, method: :post do
+    Billing::Service::Terminate.call(record: resource)
+
+    flash[:notice] = 'Service has been terminated.'
+    redirect_to resource_path(resource)
+  rescue Billing::Service::Terminate::Error => e
+    flash[:error] = e.message
+    redirect_to resource_path(resource)
   end
 
   permit_params :name, :account_id, :type_id, :variables_json, :initial_price, :renew_price, :renew_at, :renew_period_id
