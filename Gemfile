@@ -10,7 +10,7 @@ gem 'pg'
 gem 'pg_advisory_lock', git: 'https://github.com/didww/pg_advisory_lock.git'
 gem 'pg_sql_caller', git: 'https://github.com/didww/pg_sql_caller.git'
 gem 'rack'
-gem 'rails', '~> 7.2.0'
+gem 'rails', '7.2.3.1'
 gem 'responders'
 
 # Authentication
