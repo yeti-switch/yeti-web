@@ -2,10 +2,11 @@
 
 module CustomerV1Auth
   class Authorizer
+    Result = Struct.new(:auth_context, :payload)
     AuthorizationError = Class.new(StandardError)
 
     # @param token [String]
-    # @return [CustomerV1Auth::AuthContext] when success
+    # @return [CustomerV1Auth::Authorizer::Result] when success
     # @raise [CustomerV1Auth::Authorizer::AuthenticationError] when failed
     def self.authorize!(token)
       instance = new(token)
@@ -17,7 +18,7 @@ module CustomerV1Auth
       @token = token
     end
 
-    # @return [CustomerV1Auth::AuthContext] when success
+    # @return [CustomerV1Auth::Authorizer::Result] when success
     # @raise [CustomerV1Auth::Authorizer::AuthenticationError] when failed
     def authorize!
       verify_expiration = Authenticator::EXPIRATION_INTERVAL.present?
@@ -32,13 +33,14 @@ module CustomerV1Auth
           raise AuthorizationError, 'customer_portal_access_profile not exist'
         end
 
-        return auth_context
+        return Result.new(auth_context, payload)
       end
 
       api_access = System::ApiAccess.find_by(id: payload[:sub])
       raise AuthorizationError, 'api_access not exist' if api_access.nil?
 
-      AuthContext.from_api_access(api_access)
+      auth_context = AuthContext.from_api_access(api_access)
+      Result.new(auth_context, payload)
     end
   end
 end
