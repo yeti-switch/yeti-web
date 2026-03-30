@@ -50,7 +50,7 @@ RSpec.describe 'the sign in process', js: true do
       fill_in 'Password', with: admin_user_attrs[:password]
     end
 
-    include_examples :does_not_sign_in, 'Invalid Username or password.'
+    include_examples :does_not_sign_in, 'Invalid username or password.'
   end
 
   context 'when allowed_ips are filled with not match ip' do
@@ -86,7 +86,7 @@ RSpec.describe 'the sign in process', js: true do
       visit new_admin_user_session_path
     end
 
-    it 'should render dashboard page without any content' do
+    it 'should render dashboard page without any content', :js do
       fill_form!
       click_button 'Login'
       expect(page).to have_selector('small', text: 'You have limited access to dashboard content.')
