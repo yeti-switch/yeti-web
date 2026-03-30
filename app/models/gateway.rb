@@ -672,10 +672,10 @@ class Gateway < ApplicationRecord
     throw(:abort) if errors.any?
   end
 
-  scope :with_term_route_set, ->(value) {
+  scope :with_term_route_set, lambda { |value|
     ActiveRecord::Type::Boolean.new.cast(value) ? where('cardinality(term_route_set) > 0') : where('cardinality(term_route_set) = 0')
   }
-  scope :with_orig_route_set, ->(value) {
+  scope :with_orig_route_set, lambda { |value|
     ActiveRecord::Type::Boolean.new.cast(value) ? where('cardinality(orig_route_set) > 0') : where('cardinality(orig_route_set) = 0')
   }
 
