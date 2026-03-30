@@ -41,9 +41,8 @@ ActiveAdmin.register Gateway do
                  [:sensor_name, proc { |row| row.sensor.try(:name) }],
                  :orig_next_hop,
                  :orig_append_headers_req,
-                 :orig_use_outbound_proxy, :orig_force_outbound_proxy,
-                 [:orig_proxy_transport_protocol_name, proc { |row| row.orig_proxy_transport_protocol.try(:name) }],
-                 :orig_outbound_proxy,
+                 :orig_force_route_set,
+                 :orig_route_set,
                  :dialog_nat_handling, # :transparent_dialog_id,
                  :force_cancel_routeset,
                  [:orig_disconnect_policy_name, proc { |row| row.orig_disconnect_policy.try(:name) }],
@@ -66,9 +65,8 @@ ActiveAdmin.register Gateway do
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
                  :contact_user,
                  :auth_enabled, :auth_from_user, :auth_from_domain,
-                 :term_use_outbound_proxy, :term_force_outbound_proxy,
-                 [:term_proxy_transport_protocol_name, proc { |row| row.term_proxy_transport_protocol.try(:name) }],
-                 :term_outbound_proxy,
+                 :term_force_route_set,
+                 :term_route_set,
                  :term_next_hop_for_replies, :term_next_hop,
                  [:term_disconnect_policy_name, proc { |row| row.term_disconnect_policy.try(:name) }],
                  :term_append_headers_req,
@@ -118,7 +116,7 @@ ActiveAdmin.register Gateway do
            :sensor, :sensor_level,
            :dtmf_send_mode, :dtmf_receive_mode,
            :radius_accounting_profile,
-           :transport_protocol, :term_proxy_transport_protocol, :orig_proxy_transport_protocol,
+           :transport_protocol,
            :rel100_mode, :rx_inband_dtmf_filtering_mode, :tx_inband_dtmf_filtering_mode,
            :network_protocol_priority, :media_encryption_mode,
            :termination_src_numberlist, :termination_dst_numberlist, :lua_script, :stir_shaken_crt,
@@ -213,20 +211,22 @@ ActiveAdmin.register Gateway do
 
     column :orig_next_hop
     column :orig_append_headers_req
-    column :orig_use_outbound_proxy
-    column :orig_force_outbound_proxy
-    column :orig_proxy_transport_protocol
-    column :orig_outbound_proxy
+    column :orig_route_set do |gw|
+      items = Array(gw.orig_route_set).map { |uri| content_tag(:span, uri) }
+      items.prepend(content_tag(:span, 'force', class: 'status_tag yes')) if gw.orig_force_route_set
+      safe_join(items, ' ')
+    end
     column :transparent_dialog_id
     column :dialog_nat_handling
     column :orig_disconnect_policy
 
     column :resolve_ruri
 
-    column :term_use_outbound_proxy
-    column :term_force_outbound_proxy
-    column :term_proxy_transport_protocol
-    column :term_outbound_proxy
+    column :term_route_set do |gw|
+      items = Array(gw.term_route_set).map { |uri| content_tag(:span, uri) }
+      items.prepend(content_tag(:span, 'force', class: 'status_tag yes')) if gw.term_force_route_set
+      safe_join(items, ' ')
+    end
     column :term_next_hop
     column :term_next_hop_for_replies
     column :term_disconnect_policy
@@ -296,6 +296,8 @@ ActiveAdmin.register Gateway do
   filter :pop, input_html: { class: 'tom-select' }
   filter :transport_protocol, input_html: { class: 'tom-select' }
   filter :host
+  boolean_filter :with_term_route_set, label: 'Has Term Route Set'
+  boolean_filter :with_orig_route_set, label: 'Has Orig Route Set'
   boolean_filter :enabled
   boolean_filter :allow_origination
   boolean_filter :allow_termination
@@ -418,10 +420,8 @@ ActiveAdmin.register Gateway do
               f.input :orig_next_hop
               f.input :orig_append_headers_req, as: :newline_array_of_headers
               f.input :orig_append_headers_reply, as: :newline_array_of_headers
-              f.input :orig_use_outbound_proxy
-              f.input :orig_force_outbound_proxy
-              f.input :orig_proxy_transport_protocol, as: :select, include_blank: false, input_html: { class: 'tom-select' }
-              f.input :orig_outbound_proxy
+              f.input :orig_force_route_set
+              f.input :orig_route_set, as: :newline_array_of_headers
               f.input :transparent_dialog_id
               f.input :dialog_nat_handling
               f.input :orig_disconnect_policy, input_html: { class: 'tom-select' }, include_blank: true
@@ -447,10 +447,8 @@ ActiveAdmin.register Gateway do
               f.input :auth_from_user
               f.input :auth_from_domain
 
-              f.input :term_use_outbound_proxy
-              f.input :term_force_outbound_proxy
-              f.input :term_proxy_transport_protocol, as: :select, include_blank: false, input_html: { class: 'tom-select' }
-              f.input :term_outbound_proxy
+              f.input :term_force_route_set
+              f.input :term_route_set, as: :newline_array_of_headers
               f.input :term_next_hop_for_replies
               f.input :term_next_hop
               f.input :term_disconnect_policy, input_html: { class: 'tom-select' }, include_blank: true
@@ -636,10 +634,8 @@ ActiveAdmin.register Gateway do
             row :orig_append_headers_reply do |row|
               pre row.orig_append_headers_reply.join("\r\n")
             end
-            row :orig_use_outbound_proxy
-            row :orig_force_outbound_proxy
-            row :orig_proxy_transport_protocol
-            row :orig_outbound_proxy
+            row :orig_force_route_set
+            row :orig_route_set
             row :transparent_dialog_id
             row :dialog_nat_handling
             row :orig_disconnect_policy
@@ -671,10 +667,8 @@ ActiveAdmin.register Gateway do
             row :auth_from_user
             row :auth_from_domain
 
-            row :term_use_outbound_proxy
-            row :term_force_outbound_proxy
-            row :term_proxy_transport_protocol
-            row :term_outbound_proxy
+            row :term_force_route_set
+            row :term_route_set
             row :term_next_hop_for_replies
             row :term_next_hop
             row :term_disconnect_policy

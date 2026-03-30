@@ -22,9 +22,8 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     it_behaves_like :jsonapi_filters_by_boolean_field, :auth_enabled
     it_behaves_like :jsonapi_filters_by_string_field, :auth_user
     it_behaves_like :jsonapi_filters_by_string_field, :auth_password
-    it_behaves_like :jsonapi_filters_by_string_field, :term_outbound_proxy
+    it_behaves_like :jsonapi_filters_by_boolean_field, :term_force_route_set
     it_behaves_like :jsonapi_filters_by_boolean_field, :term_next_hop_for_replies
-    it_behaves_like :jsonapi_filters_by_boolean_field, :term_use_outbound_proxy
     it_behaves_like :jsonapi_filters_by_boolean_field, :allow_termination
     it_behaves_like :jsonapi_filters_by_boolean_field, :allow_origination
     it_behaves_like :jsonapi_filters_by_boolean_field, :proxy_media
@@ -33,7 +32,6 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     it_behaves_like :jsonapi_filters_by_number_field, :sst_maximum_timer
     it_behaves_like :jsonapi_filters_by_boolean_field, :sst_accept501
     it_behaves_like :jsonapi_filters_by_number_field, :sst_session_expires
-    it_behaves_like :jsonapi_filters_by_boolean_field, :term_force_outbound_proxy
     it_behaves_like :jsonapi_filters_by_boolean_field, :locked
     it_behaves_like :jsonapi_filters_by_string_field, :codecs_payload_order
     it_behaves_like :jsonapi_filters_by_string_field, :codecs_prefer_transcoding_for
@@ -43,9 +41,7 @@ RSpec.describe Api::Rest::Admin::GatewaysController, type: :controller do
     it_behaves_like :jsonapi_filters_by_string_field, :term_next_hop
     it_behaves_like :jsonapi_filters_by_string_field, :orig_next_hop
     it_behaves_like :jsonapi_filters_by_boolean_field, :dialog_nat_handling
-    it_behaves_like :jsonapi_filters_by_boolean_field, :orig_force_outbound_proxy
-    it_behaves_like :jsonapi_filters_by_boolean_field, :orig_use_outbound_proxy
-    it_behaves_like :jsonapi_filters_by_string_field, :orig_outbound_proxy
+    it_behaves_like :jsonapi_filters_by_boolean_field, :orig_force_route_set
     it_behaves_like :jsonapi_filters_by_boolean_field, :prefer_existing_codecs
     it_behaves_like :jsonapi_filters_by_boolean_field, :force_symmetric_rtp
     it_behaves_like :jsonapi_filters_by_string_field, :sdp_alines_filter_list

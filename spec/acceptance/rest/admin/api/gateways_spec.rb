@@ -17,7 +17,6 @@ RSpec.resource 'Gateways' do
     rel100-mode
     session-refresh-method
     transport-protocol sdp-alines-filter-type
-    term-proxy-transport-protocol orig-proxy-transport-protocol
     network-protocol-priority media-encryption-mode
   ]
   optional_relationships = resource_data[:creatable_relationships] - required_relationships
@@ -66,8 +65,6 @@ RSpec.resource 'Gateways' do
     let(:'tx-inband-dtmf-filtering-mode') { wrap_relationship(:'gateway-inband-dtmf-filtering-modes', 2) }
     let(:'rx-inband-dtmf-filtering-mode') { wrap_relationship(:'gateway-inband-dtmf-filtering-modes', 3) }
     let(:'transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
-    let(:'term-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
-    let(:'orig-proxy-transport-protocol') { wrap_relationship(:'transport-protocols', 1) }
     let(:'media-encryption-mode') { wrap_relationship(:'gateway-media-encryption-modes', 2) }
     let(:'network-protocol-priority') { wrap_relationship(:'gateway-network-protocol-priorities', 3) }
     let(:contractor) { wrap_relationship(:contractors, create(:contractor, vendor: true).id) }

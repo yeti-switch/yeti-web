@@ -7,9 +7,10 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
              :diversion_domain, :diversion_rewrite_rule, :diversion_rewrite_result,
              :src_name_rewrite_rule, :src_name_rewrite_result, :src_rewrite_rule, :src_rewrite_result,
              :dst_rewrite_rule, :dst_rewrite_result, :auth_enabled, :auth_user, :auth_password, :auth_from_user,
-             :auth_from_domain, :term_use_outbound_proxy, :term_force_outbound_proxy, :term_outbound_proxy,
+             :auth_from_domain, :term_force_route_set, :term_route_set,
              :term_next_hop_for_replies, :term_next_hop, :term_append_headers_req,
              :orig_append_headers_req, :orig_append_headers_reply,
+             :orig_force_route_set, :orig_route_set,
              :sdp_alines_filter_list, :ringing_timeout, :relay_options, :relay_reinvite, :relay_hold, :relay_prack,
              :relay_update, :suppress_early_media, :fake_180_timer,
              :transit_headers_from_origination, :transit_headers_from_termination,
@@ -42,8 +43,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   has_one :dtmf_receive_mode, class_name: 'DtmfReceiveMode', always_include_linkage_data: true
   has_one :dtmf_send_mode, class_name: 'DtmfSendMode', always_include_linkage_data: true
   has_one :transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
-  has_one :term_proxy_transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
-  has_one :orig_proxy_transport_protocol, class_name: 'TransportProtocol', always_include_linkage_data: true
   has_one :rel100_mode, class_name: 'GatewayRel100Mode', always_include_linkage_data: true
   has_one :rx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', always_include_linkage_data: true
   has_one :tx_inband_dtmf_filtering_mode, class_name: 'GatewayInbandDtmfFilteringMode', always_include_linkage_data: true
@@ -67,8 +66,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   relationship_filter :dtmf_receive_mode
   relationship_filter :dtmf_send_mode
   relationship_filter :transport_protocol
-  relationship_filter :term_proxy_transport_protocol
-  relationship_filter :orig_proxy_transport_protocol
   relationship_filter :rel100_mode
   relationship_filter :rx_inband_dtmf_filtering_mode
   relationship_filter :tx_inband_dtmf_filtering_mode
@@ -86,9 +83,8 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :auth_enabled, type: :boolean
   ransack_filter :auth_user, type: :string
   ransack_filter :auth_password, type: :string
-  ransack_filter :term_outbound_proxy, type: :string
+  ransack_filter :term_force_route_set, type: :boolean
   ransack_filter :term_next_hop_for_replies, type: :boolean
-  ransack_filter :term_use_outbound_proxy, type: :boolean
   ransack_filter :allow_termination, type: :boolean
   ransack_filter :allow_origination, type: :boolean
   ransack_filter :proxy_media, type: :boolean
@@ -97,7 +93,7 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   ransack_filter :sst_maximum_timer, type: :number
   ransack_filter :sst_accept501, type: :boolean
   ransack_filter :sst_session_expires, type: :number
-  ransack_filter :term_force_outbound_proxy, type: :boolean
+  ransack_filter :orig_force_route_set, type: :boolean
   ransack_filter :locked, type: :boolean
   ransack_filter :codecs_payload_order, type: :string
   ransack_filter :codecs_prefer_transcoding_for, type: :string
@@ -111,9 +107,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
   # ransack_filter :orig_append_headers_reply, type: :array_of_strings
   # ransack_filter :term_append_headers_req, type: :array_of_strings
   ransack_filter :dialog_nat_handling, type: :boolean
-  ransack_filter :orig_force_outbound_proxy, type: :boolean
-  ransack_filter :orig_use_outbound_proxy, type: :boolean
-  ransack_filter :orig_outbound_proxy, type: :string
   ransack_filter :prefer_existing_codecs, type: :boolean
   ransack_filter :force_symmetric_rtp, type: :boolean
   ransack_filter :sdp_alines_filter_list, type: :string
@@ -192,8 +185,6 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       rel100_mode
       session_refresh_method
       transport_protocol
-      term_proxy_transport_protocol
-      orig_proxy_transport_protocol
       gateway_group
       pop
       allow_origination
@@ -218,15 +209,16 @@ class Api::Rest::Admin::GatewayResource < ::BaseResource
       auth_password
       auth_from_user
       auth_from_domain
-      term_use_outbound_proxy
-      term_force_outbound_proxy
-      term_outbound_proxy
+      term_force_route_set
+      term_route_set
       term_next_hop_for_replies
       term_next_hop
       term_disconnect_policy
       term_append_headers_req
       orig_append_headers_req
       orig_append_headers_reply
+      orig_force_route_set
+      orig_route_set
       orig_disconnect_policy
       sdp_alines_filter_list
       ringing_timeout
