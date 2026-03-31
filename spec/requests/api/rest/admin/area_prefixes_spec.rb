@@ -25,6 +25,31 @@ RSpec.describe Api::Rest::Admin::AreaPrefixesController, type: :request do
   describe 'API Log recording' do
     subject { get json_api_request_path, params: nil, headers: json_api_request_headers }
 
+    it 'creates Log::ApiLog with auth meta and remote IP' do
+      expect { subject }.to change { Log::ApiLog.count }.by(1)
+
+      token_payload = JwtToken.decode(
+        json_api_auth_token,
+        verify_expiration: Authentication::AdminAuth::EXPIRATION_INTERVAL.present?,
+        aud: Authentication::AdminAuth::AUDIENCE
+      )
+      expect(Log::ApiLog.last).to have_attributes(
+        meta: { 'auth' => token_payload.deep_stringify_keys },
+        remote_ip: '127.0.0.1'
+      )
+    end
+
+    context 'when authorization fails' do
+      let(:json_api_auth_token) { 'invalid' }
+
+      it 'does not persist auth meta' do
+        expect { subject }.to change { Log::ApiLog.count }.by(1)
+
+        expect(response.status).to eq(401)
+        expect(Log::ApiLog.last).to have_attributes(meta: nil, remote_ip: '127.0.0.1')
+      end
+    end
+
     context 'when controller contains meta info' do
       before do
         allow_any_instance_of(described_class).to receive(:meta).and_return({ foo: :bar })
