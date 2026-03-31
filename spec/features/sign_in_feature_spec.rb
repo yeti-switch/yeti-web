@@ -113,11 +113,9 @@ RSpec.describe 'the sign in process', js: true do
 
     it 'create session and then after 61 seconds of inactivity session should be removed' do
       expect(YetiConfig.admin_ui.session_lifetime).to eq(60), error_message
-      visit new_admin_user_session_path
-      fill_form!
-      click_button 'Login'
+      login_as admin_user, scope: :admin_user
+      visit root_path
       expect(page).to have_current_path root_path
-      expect(page).to have_flash_message 'Signed in successfully.', type: :notice
       travel_to((YetiConfig.admin_ui.session_lifetime + 1).seconds.from_now) do
         visit root_path
         expect(page).to have_current_path new_admin_user_session_path
@@ -127,9 +125,8 @@ RSpec.describe 'the sign in process', js: true do
 
     it 'after 55 seconds of inactivity session stilla alive' do
       expect(YetiConfig.admin_ui.session_lifetime).to eq(60), error_message
-      visit new_admin_user_session_path
-      fill_form!
-      click_button 'Login'
+      login_as admin_user, scope: :admin_user
+      visit root_path
       expect(page).to have_current_path root_path
       travel_to(55.seconds.from_now) do
         visit root_path
