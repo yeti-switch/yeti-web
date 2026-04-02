@@ -18,8 +18,11 @@ class Billing::Service::Renew
   end
 
   def perform
+    return skip_terminated_service if service.terminated?
+
     service.transaction do
       account.lock! # will generate SELECT FOR UPDATE SQL statement
+      service.lock!
       provisioning_object.before_renew
 
       if !enough_balance? && !service.type.force_renew
@@ -54,6 +57,11 @@ class Billing::Service::Renew
 
   def provisioning_object
     @provisioning_object ||= service.build_provisioning_object
+  end
+
+  def skip_terminated_service
+    Rails.logger.info { "Skip renew billing service ##{service.id} because it is terminated" }
+    nil
   end
 
   def next_renew_at
