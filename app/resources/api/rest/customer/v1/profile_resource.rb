@@ -62,6 +62,7 @@ module Api
           attribute :payments_cryptomus
           attribute :services
           attribute :transactions
+          attribute :webrtc_dialer
 
           def fetchable_fields
             %i[
@@ -115,6 +116,7 @@ module Api
               payments_cryptomus
               services
               transactions
+              webrtc_dialer
             ]
           end
 

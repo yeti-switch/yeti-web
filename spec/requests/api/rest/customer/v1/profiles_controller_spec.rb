@@ -66,7 +66,8 @@ RSpec.describe Api::Rest::Customer::V1::ProfilesController, type: :request do
             'payments': true,
             'payments-cryptomus': false,
             'services': true,
-            'transactions': true
+            'transactions': true,
+            'webrtc-dialer': true
           }
         )
       end
