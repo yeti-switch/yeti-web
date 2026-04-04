@@ -50,7 +50,8 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
                 :payments,
                 :payments_cryptomus,
                 :services,
-                :transactions
+                :transactions,
+                :webrtc_dialer
 
   filter :id
   filter :name, as: :string
@@ -114,6 +115,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
       row :payments_cryptomus
       row :services
       row :transactions
+      row :webrtc_dialer
     end
   end
 
@@ -166,6 +168,7 @@ ActiveAdmin.register System::CustomerPortalAccessProfile, as: 'Customer Portal A
       f.input :payments_cryptomus
       f.input :services
       f.input :transactions
+      f.input :webrtc_dialer
     end
     f.actions
   end

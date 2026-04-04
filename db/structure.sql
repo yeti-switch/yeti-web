@@ -15203,7 +15203,8 @@ CREATE TABLE sys.customer_portal_access_profiles (
     incoming_statistics_total_duration_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null4 NOT NULL,
     incoming_statistics_total_price_value boolean DEFAULT true CONSTRAINT customer_portal_access_pro_incoming_statistics_total__not_null5 NOT NULL,
     outgoing_active_calls boolean DEFAULT true NOT NULL,
-    allow_listen_recording boolean DEFAULT false NOT NULL
+    allow_listen_recording boolean DEFAULT false NOT NULL,
+    webrtc_dialer boolean DEFAULT true NOT NULL
 );
 
 
@@ -20243,6 +20244,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260404183736'),
 ('20260327000000'),
 ('20260325000000'),
 ('20260322000002'),

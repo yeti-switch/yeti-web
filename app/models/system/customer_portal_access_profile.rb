@@ -51,6 +51,7 @@
 #  payments_cryptomus                         :boolean          default(FALSE), not null
 #  services                                   :boolean          default(TRUE), not null
 #  transactions                               :boolean          default(TRUE), not null
+#  webrtc_dialer                              :boolean          default(TRUE), not null
 #  created_at                                 :datetime         not null
 #  updated_at                                 :datetime         not null
 #
