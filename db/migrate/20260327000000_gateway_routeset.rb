@@ -35,6 +35,10 @@ class GatewayRouteset < ActiveRecord::Migration[7.0]
         SET orig_route_set = ARRAY[CASE sip_schema_id WHEN 2 THEN 'sips' ELSE 'sip' END || ':' || orig_outbound_proxy || ';transport=tls']
         WHERE orig_use_outbound_proxy AND COALESCE(orig_outbound_proxy, '') != '' AND orig_proxy_transport_protocol_id = 3;
 
+      UPDATE class4.gateways set term_route_set=string_to_array('<'||term_route_set[1]||';lr>',',') where term_route_set is not null AND cardinality(term_route_set)>0;
+
+      UPDATE class4.gateways set orig_route_set=string_to_array('<'||orig_route_set[1]||';lr>',',') where orig_route_set is not null AND cardinality(orig_route_set)>0;
+
       ALTER TABLE class4.gateways
         DROP COLUMN term_outbound_proxy,
         DROP COLUMN term_use_outbound_proxy,

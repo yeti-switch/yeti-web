@@ -10,6 +10,8 @@ class Routeset < ActiveRecord::Migration[7.2]
       update class4.registrations set route_set=ARRAY[proxy||';transport=tls'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=3;
       update class4.registrations set route_set=ARRAY[proxy||';transport=ws'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=5;
 
+      update class4.registrations set route_set=string_to_array('<'||route_set[1]||';lr>',',') where route_set is not null AND cardinality(route_set)>0;
+
       alter table class4.registrations
         drop column proxy,
         drop column proxy_transport_protocol_id;
@@ -21,6 +23,8 @@ class Routeset < ActiveRecord::Migration[7.2]
       update class4.sip_options_probers set route_set=ARRAY[proxy||';transport=tcp'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=2;
       update class4.sip_options_probers set route_set=ARRAY[proxy||';transport=tls'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=3;
       update class4.sip_options_probers set route_set=ARRAY[proxy||';transport=ws'::varchar] where COALESCE(proxy,'')!='' and proxy_transport_protocol_id=5;
+
+      update class4.sip_options_probers set route_set=string_to_array('<'||route_set[1]||';lr>',',') where route_set is not null AND cardinality(route_set)>0;
 
       alter table class4.sip_options_probers
         drop column proxy,

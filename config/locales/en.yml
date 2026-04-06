@@ -88,6 +88,8 @@ en:
         termination_cps_wsize: 'Big values may cause performance issues on high traffic'
         transfer_append_headers_req: 'When legB transferred/redirected these headers will be appended to new call leg'
         transfer_tel_uri_host: 'When legB transferred/redirected to TEL URI Yeti will use this host to build SIP uri from TEL URI'
+        orig_route_set: "Newline separated array of SIP Proxies URI. Example: <sip:sip-proxy.example.com;lr;transport=udp>"
+        term_route_set: "Newline separated array of SIP Proxies URI. Example: <sip:sip-proxy.example.com;lr;transport=udp>"
       gateway_group:
         max_rerouting_attempts: 'The maximum allowable number of gateways from this group to be utilized for call rerouting'
       equipment_sip_options_prober:
@@ -100,7 +102,7 @@ en:
         contact_uri: "From header URI in format sip:userpart@domain"
         interval: "OPTIONS sending interval in seconds"
         append_headers: "Custom headers to send in OPTIONS, separated by \\r\\n"
-        route_set: "Newline separated array of SIP Proxies URI"
+        route_set: "Newline separated array of SIP Proxies URI. Example: <sip:sip-proxy.example.com;lr;transport=udp>"
       equipment_gateway_throttling_profile:
         codes: "Responses that will be treated as failures"
         threshold: "Percent of failures to activate throttling. 1-100."
@@ -140,7 +142,7 @@ en:
         reverse_billing: "If enabled, vendor account balance is lowered"
       equipment_registration:
         contact: "Must be in URI format (sip:user@domain or sip:domain)"
-        route_set: "Newline separated array of SIP Proxies URI"
+        route_set: "Newline separated array of SIP Proxies URI. Example: <sip:sip-proxy.example.com;lr;transport=udp>"
       routing_numberlist_item:
         batch_key: "Enter multiple values separated by commas to create several objects"
         number_min_length: "Affects only prefix match mode"
