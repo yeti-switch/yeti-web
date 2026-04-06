@@ -277,8 +277,6 @@ CREATE TYPE switch22.callprofile_ty AS (
 	"to" character varying,
 	call_id character varying,
 	dlg_nat_handling boolean,
-	force_outbound_proxy boolean,
-	aleg_force_outbound_proxy boolean,
 	next_hop character varying,
 	next_hop_1st_req boolean,
 	aleg_next_hop character varying,
@@ -2562,7 +2560,6 @@ BEGIN
   v_ret."from":='$f';
   v_ret."to":='$t';
   v_ret.ruri:='$r';
-  v_ret.force_outbound_proxy:=false;
   v_ret.next_hop:='';
   --    v_ret.next_hop_for_replies:='';
   v_ret.next_hop_1st_req:=false;
@@ -2879,7 +2876,6 @@ CREATE TABLE class4.gateways (
     sst_accept501 boolean DEFAULT true NOT NULL,
     session_refresh_method_id integer DEFAULT 3 NOT NULL,
     sst_session_expires integer DEFAULT 50,
-    term_force_route_set boolean DEFAULT false CONSTRAINT gateways_term_force_outbound_proxy_not_null NOT NULL,
     locked boolean DEFAULT false NOT NULL,
     codecs_payload_order character varying DEFAULT ''::character varying,
     codecs_prefer_transcoding_for character varying DEFAULT ''::character varying,
@@ -2891,7 +2887,6 @@ CREATE TABLE class4.gateways (
     orig_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     term_append_headers_req character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     dialog_nat_handling boolean DEFAULT true NOT NULL,
-    orig_force_route_set boolean DEFAULT false CONSTRAINT gateways_orig_force_outbound_proxy_not_null NOT NULL,
     prefer_existing_codecs boolean DEFAULT true NOT NULL,
     force_symmetric_rtp boolean DEFAULT true NOT NULL,
     transparent_dialog_id boolean DEFAULT false NOT NULL,
@@ -4009,10 +4004,8 @@ BEGIN
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
 
   i_profile.bleg_route_set := array_to_string(i_vendor_gw.term_route_set, ',');
-  i_profile.force_outbound_proxy := i_vendor_gw.term_force_route_set;
 
   i_profile.aleg_route_set := array_to_string(i_customer_gw.orig_route_set, ',');
-  i_profile.aleg_force_outbound_proxy := i_customer_gw.orig_force_route_set;
 
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
@@ -4792,10 +4785,8 @@ BEGIN
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
 
   i_profile.bleg_route_set := array_to_string(i_vendor_gw.term_route_set, ',');
-  i_profile.force_outbound_proxy := i_vendor_gw.term_force_route_set;
 
   i_profile.aleg_route_set := array_to_string(i_customer_gw.orig_route_set, ',');
-  i_profile.aleg_force_outbound_proxy := i_customer_gw.orig_force_route_set;
 
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
@@ -5498,10 +5489,8 @@ BEGIN
   i_profile.bleg_media_encryption_mode_id:=i_vendor_gw.media_encryption_mode_id;
 
   i_profile.bleg_route_set := array_to_string(i_vendor_gw.term_route_set, ',');
-  i_profile.force_outbound_proxy := i_vendor_gw.term_force_route_set;
 
   i_profile.aleg_route_set := array_to_string(i_customer_gw.orig_route_set, ',');
-  i_profile.aleg_force_outbound_proxy := i_customer_gw.orig_force_route_set;
 
   i_profile.aleg_policy_id=i_customer_gw.orig_disconnect_policy_id;
   i_profile.bleg_policy_id=i_vendor_gw.term_disconnect_policy_id;
@@ -13589,7 +13578,6 @@ CREATE TABLE data_import.import_gateways (
     sst_accept501 boolean,
     session_refresh_method_id integer,
     sst_session_expires integer,
-    term_force_route_set boolean,
     locked boolean,
     codecs_payload_order character varying,
     codecs_prefer_transcoding_for character varying,
@@ -13598,7 +13586,6 @@ CREATE TABLE data_import.import_gateways (
     term_next_hop character varying,
     orig_next_hop character varying,
     dialog_nat_handling boolean,
-    orig_force_route_set boolean,
     prefer_existing_codecs boolean,
     force_symmetric_rtp boolean,
     transparent_dialog_id boolean,
@@ -20244,6 +20231,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260406000000'),
 ('20260404183736'),
 ('20260327000000'),
 ('20260325000000'),

@@ -51,7 +51,6 @@
 #  name                               :string
 #  network_protocol_priority_name     :string
 #  orig_disconnect_policy_name        :string
-#  orig_force_route_set               :boolean
 #  orig_next_hop                      :string
 #  orig_route_set                     :string           is an Array
 #  origination_capacity               :integer(2)
@@ -99,7 +98,6 @@
 #  suppress_early_media               :boolean
 #  symmetric_rtp_nonstop              :boolean
 #  term_disconnect_policy_name        :string
-#  term_force_route_set               :boolean
 #  term_next_hop                      :string
 #  term_next_hop_for_replies          :boolean
 #  term_route_set                     :string           is an Array
@@ -192,7 +190,7 @@ class Importing::Gateway < Importing::Base
     allow_termination allow_origination
     proxy_media
     auth_enabled auth_user auth_password
-    term_force_route_set term_route_set
+    term_route_set
     term_next_hop orig_next_hop
     sdp_alines_filter_type_id
     sdp_alines_filter_list
@@ -203,7 +201,7 @@ class Importing::Gateway < Importing::Base
     orig_disconnect_policy_id
     term_disconnect_policy_id
     sensor_level_id sensor_id
-    orig_force_route_set orig_route_set
+    orig_route_set
     dialog_nat_handling
     resolve_ruri
     auth_from_user auth_from_domain

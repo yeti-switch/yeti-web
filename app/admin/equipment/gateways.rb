@@ -41,7 +41,6 @@ ActiveAdmin.register Gateway do
                  [:sensor_name, proc { |row| row.sensor.try(:name) }],
                  :orig_next_hop,
                  :orig_append_headers_req,
-                 :orig_force_route_set,
                  :orig_route_set,
                  :dialog_nat_handling, # :transparent_dialog_id,
                  :force_cancel_routeset,
@@ -65,7 +64,6 @@ ActiveAdmin.register Gateway do
                  [:lua_script_name, proc { |row| row.lua_script.try(:name) }],
                  :contact_user,
                  :auth_enabled, :auth_from_user, :auth_from_domain,
-                 :term_force_route_set,
                  :term_route_set,
                  :term_next_hop_for_replies, :term_next_hop,
                  [:term_disconnect_policy_name, proc { |row| row.term_disconnect_policy.try(:name) }],
@@ -212,9 +210,7 @@ ActiveAdmin.register Gateway do
     column :orig_next_hop
     column :orig_append_headers_req
     column :orig_route_set do |gw|
-      items = Array(gw.orig_route_set).map { |uri| content_tag(:span, uri) }
-      items.prepend(content_tag(:span, 'force', class: 'status_tag yes')) if gw.orig_force_route_set
-      safe_join(items, ' ')
+      gw.orig_route_set.join(', ')
     end
     column :transparent_dialog_id
     column :dialog_nat_handling
@@ -223,9 +219,7 @@ ActiveAdmin.register Gateway do
     column :resolve_ruri
 
     column :term_route_set do |gw|
-      items = Array(gw.term_route_set).map { |uri| content_tag(:span, uri) }
-      items.prepend(content_tag(:span, 'force', class: 'status_tag yes')) if gw.term_force_route_set
-      safe_join(items, ' ')
+      gw.term_route_set.join(', ')
     end
     column :term_next_hop
     column :term_next_hop_for_replies
@@ -420,7 +414,6 @@ ActiveAdmin.register Gateway do
               f.input :orig_next_hop
               f.input :orig_append_headers_req, as: :newline_array_of_headers
               f.input :orig_append_headers_reply, as: :newline_array_of_headers
-              f.input :orig_force_route_set
               f.input :orig_route_set, as: :newline_array_of_headers
               f.input :transparent_dialog_id
               f.input :dialog_nat_handling
@@ -447,7 +440,6 @@ ActiveAdmin.register Gateway do
               f.input :auth_from_user
               f.input :auth_from_domain
 
-              f.input :term_force_route_set
               f.input :term_route_set, as: :newline_array_of_headers
               f.input :term_next_hop_for_replies
               f.input :term_next_hop
@@ -634,7 +626,6 @@ ActiveAdmin.register Gateway do
             row :orig_append_headers_reply do |row|
               pre row.orig_append_headers_reply.join("\r\n")
             end
-            row :orig_force_route_set
             row :orig_route_set
             row :transparent_dialog_id
             row :dialog_nat_handling
@@ -667,7 +658,6 @@ ActiveAdmin.register Gateway do
             row :auth_from_user
             row :auth_from_domain
 
-            row :term_force_route_set
             row :term_route_set
             row :term_next_hop_for_replies
             row :term_next_hop
