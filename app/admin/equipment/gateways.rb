@@ -210,7 +210,7 @@ ActiveAdmin.register Gateway do
     column :orig_next_hop
     column :orig_append_headers_req
     column :orig_route_set do |gw|
-      safe_join(Array(gw.orig_route_set).map { |uri| content_tag(:span, uri) }, ' ')
+      gw.orig_route_set.join(', ')
     end
     column :transparent_dialog_id
     column :dialog_nat_handling
@@ -219,7 +219,7 @@ ActiveAdmin.register Gateway do
     column :resolve_ruri
 
     column :term_route_set do |gw|
-      safe_join(Array(gw.term_route_set).map { |uri| content_tag(:span, uri) }, ' ')
+      gw.term_route_set.join(', ')
     end
     column :term_next_hop
     column :term_next_hop_for_replies
