@@ -44,7 +44,6 @@
 #  name                             :string           not null
 #  orig_append_headers_reply        :string           default([]), not null, is an Array
 #  orig_append_headers_req          :string           default([]), not null, is an Array
-#  orig_force_route_set             :boolean          default(FALSE), not null
 #  orig_next_hop                    :string
 #  orig_route_set                   :string           default([]), not null, is an Array
 #  origination_capacity             :integer(2)
@@ -86,7 +85,6 @@
 #  suppress_early_media             :boolean          default(FALSE), not null
 #  symmetric_rtp_nonstop            :boolean          default(FALSE), not null
 #  term_append_headers_req          :string           default([]), not null, is an Array
-#  term_force_route_set             :boolean          default(FALSE), not null
 #  term_next_hop                    :string
 #  term_next_hop_for_replies        :boolean          default(FALSE), not null
 #  term_route_set                   :string           default([]), not null, is an Array
@@ -213,7 +211,6 @@ FactoryBot.define do
     auth_user { nil }
     auth_password { nil }
     term_route_set { [] }
-    term_force_route_set { false }
     term_next_hop_for_replies { false }
     termination_capacity { nil }
     allow_termination { true }
@@ -237,7 +234,6 @@ FactoryBot.define do
     orig_append_headers_reply { [] }
     term_append_headers_req { [] }
     dialog_nat_handling { true }
-    orig_force_route_set { false }
     orig_route_set { [] }
     prefer_existing_codecs { true }
     force_symmetric_rtp { true }

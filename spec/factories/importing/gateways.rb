@@ -51,7 +51,6 @@
 #  name                               :string
 #  network_protocol_priority_name     :string
 #  orig_disconnect_policy_name        :string
-#  orig_force_route_set               :boolean
 #  orig_next_hop                      :string
 #  orig_route_set                     :string           is an Array
 #  origination_capacity               :integer(2)
@@ -99,7 +98,6 @@
 #  suppress_early_media               :boolean
 #  symmetric_rtp_nonstop              :boolean
 #  term_disconnect_policy_name        :string
-#  term_force_route_set               :boolean
 #  term_next_hop                      :string
 #  term_next_hop_for_replies          :boolean
 #  term_route_set                     :string           is an Array
@@ -156,7 +154,6 @@ FactoryBot.define do
     auth_user { nil }
     auth_password { nil }
     term_route_set { [] }
-    term_force_route_set { false }
     term_next_hop_for_replies { false }
     contractor_id { nil }
     allow_termination { true }
@@ -179,7 +176,6 @@ FactoryBot.define do
     orig_append_headers_req { nil }
     term_append_headers_req { nil }
     dialog_nat_handling { true }
-    orig_force_route_set { false }
     orig_route_set { [] }
     prefer_existing_codecs { true }
     force_symmetric_rtp { true }

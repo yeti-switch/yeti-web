@@ -90,7 +90,6 @@ ActiveAdmin.register Importing::Gateway do
     column :auth_from_user
     column :auth_from_domain
 
-    column :term_force_route_set
     column :term_route_set
     column :term_next_hop
     column :orig_next_hop
