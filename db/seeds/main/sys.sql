@@ -168,6 +168,8 @@ INSERT INTO sys.states(key,value) VALUES('options_probers',1);
 
 INSERT INTO sys.states(key,value) VALUES('stir_shaken_signing_certificates',1);
 insert into sys.states(key,value) values('gateways_cache', 1);
+insert into sys.states(key,value) values('aleg_gateways_cache', 1);
+insert into sys.states(key,value) values('bleg_gateways_cache', 1);
 
 --
 -- Name: active_currencies_id_seq; Type: SEQUENCE SET; Schema: sys; Owner: senid

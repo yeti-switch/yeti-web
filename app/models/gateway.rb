@@ -631,7 +631,7 @@ class Gateway < ApplicationRecord
   end
 
   include Yeti::StateUpdater
-  self.state_names = %w[auth_credentials gateways_cache]
+  self.state_names = %w[auth_credentials gateways_cache aleg_gateways_cache bleg_gateways_cache]
 
   private
 
