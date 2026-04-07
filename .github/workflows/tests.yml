@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Fetching gems cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             vendor
@@ -24,7 +24,7 @@ jobs:
       - name: verify production gems install
         run: make gems
       - name: Caching gems
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             vendor
@@ -40,7 +40,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: use cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             vendor
@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: use cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             vendor
@@ -97,7 +97,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: use cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             vendor
@@ -131,7 +131,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: use cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             vendor
@@ -180,7 +180,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: use cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             vendor
@@ -224,7 +224,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: use cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             vendor
