@@ -283,6 +283,9 @@ RSpec.describe Gateway, type: :model do
 
     include_examples :creates_record
     include_examples :changes_records_qty_of, described_class, by: 1
+    include_examples :increments_system_state, 'gateways_cache'
+    include_examples :increments_system_state, 'aleg_gateways_cache'
+    include_examples :increments_system_state, 'bleg_gateways_cache'
 
     context 'with auth credentials' do
       let(:create_params) { super().merge(incoming_auth_username: 'qwe', incoming_auth_password: 'asd') }
@@ -331,6 +334,11 @@ RSpec.describe Gateway, type: :model do
 
     let!(:record) { FactoryBot.create(:gateway, record_attrs) }
     let(:record_attrs) { { enabled: false } }
+    let(:update_params) { { enabled: true } }
+
+    include_examples :increments_system_state, 'gateways_cache'
+    include_examples :increments_system_state, 'aleg_gateways_cache'
+    include_examples :increments_system_state, 'bleg_gateways_cache'
 
     context 'without incoming_auth' do
       context 'when change enable false->true' do
@@ -409,6 +417,10 @@ RSpec.describe Gateway, type: :model do
 
     let!(:record) { FactoryBot.create(:gateway, record_attrs) }
     let(:record_attrs) { { enabled: false } }
+
+    include_examples :increments_system_state, 'gateways_cache'
+    include_examples :increments_system_state, 'aleg_gateways_cache'
+    include_examples :increments_system_state, 'bleg_gateways_cache'
 
     context 'without incoming_auth' do
       include_examples :changes_records_qty_of, described_class, by: -1
