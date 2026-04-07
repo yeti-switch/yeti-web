@@ -12,6 +12,6 @@ class RealtimeData::IncomingRegistration < YetiResource
   has_one :node, class_name: 'Node', foreign_key: :node_id
 
   def id
-    auth_id
+    auth_id.to_s
   end
 end

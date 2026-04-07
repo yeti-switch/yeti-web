@@ -26,7 +26,7 @@ RSpec.describe 'Show Gateway', type: :feature, js: true do
       before do
         stub_jrpc_request(node.rpc_endpoint, 'registrar.show.aors', [gateway.id]).and_return([registration_data])
         subject
-        switch_tab('Incoming registrations')
+        switch_tab('Incoming Registrations')
       end
 
       it 'shows json payload' do
@@ -39,7 +39,7 @@ RSpec.describe 'Show Gateway', type: :feature, js: true do
       before do
         stub_jrpc_connect_error(node.rpc_endpoint)
         subject
-        switch_tab('Incoming registrations')
+        switch_tab('Incoming Registrations')
       end
 
       it 'shows error in json' do
