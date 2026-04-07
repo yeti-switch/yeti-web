@@ -42,6 +42,7 @@
 //= require credential_generator
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
+//= require ajax_tab
 
 
 $(document).ready(function () {
