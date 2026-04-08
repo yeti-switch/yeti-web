@@ -129,7 +129,7 @@ ActiveAdmin.register Gateway do
   end
 
   member_action :incoming_registrations_data, method: :get do
-    result = Yeti::RpcCalls::IncomingRegistrations.call Node.all, auth_id: resource.id
+    result = Yeti::RpcCalls::IncomingRegistrations.call Node.all, auth_id: params[:id].to_i
     render json: { data: result.data, errors: result.errors }
   end
 
