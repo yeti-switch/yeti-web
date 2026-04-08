@@ -128,10 +128,9 @@ ActiveAdmin.register Gateway do
     end
   end
 
-  before_action only: [:show] do
-    @registrations = Yeti::RpcCalls::IncomingRegistrations.call Node.all, auth_id: resource.id
-    @registrations.data.map! { |row| RealtimeData::IncomingRegistration.new(row) }
-    flash.now[:warning] = @registrations.errors if @registrations.errors.any?
+  member_action :incoming_registrations_data, method: :get do
+    result = Yeti::RpcCalls::IncomingRegistrations.call Node.all, auth_id: params[:id].to_i
+    render json: { data: result.data, errors: result.errors }
   end
 
   index do
@@ -787,13 +786,9 @@ ActiveAdmin.register Gateway do
       end
 
       tab :incoming_registrations do
-        if assigns[:registrations].data.any?
-          table_for assigns[:registrations].data, class: 'index_table' do
-            column :contact
-            column :expires
-            column :path
-            column :user_agent
-          end
+        div 'data-ajax-tab-url': incoming_registrations_data_gateway_path(s),
+            class: 'ajax-tab-content' do
+          para 'Loading...'
         end
       end
 
