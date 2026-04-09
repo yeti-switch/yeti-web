@@ -98,7 +98,7 @@ module ResourceDSL
           extra_condition = permitted_params[:additional_filter]
         else
           permitted_params = params.require(:changes).permit(:additional_filter, unique_columns: [])
-          unique_columns = permitted_params[:unique_columns].reject(&:blank?)
+          unique_columns = permitted_params[:unique_columns]&.reject(&:blank?) || []
           extra_condition = permitted_params[:additional_filter]
         end
         begin
