@@ -8,7 +8,7 @@ ActiveAdmin.register AdminUser do
   acts_as_export
   acts_as_safe_destroy
   action_list = %i[index show edit update destroy]
-  action_list += %i[create new] unless AdminUser.ldap?
+  action_list += %i[create new] unless AdminUser.external_auth?
   actions(*action_list)
 
   filter :billing_contact_email, as: :string
@@ -57,18 +57,18 @@ ActiveAdmin.register AdminUser do
   permit_params do
     attrs = %i[stateful_filters allowed_ips]
     attrs_last = { allowed_ips: [] }
-    unless AdminUser.ldap?
+    unless AdminUser.external_auth?
       attrs.concat %i[username email password password_confirmation]
       attrs_last[:roles] = []
     end
     attrs + [attrs_last]
   end
 
-  # unless AdminUser.ldap?
+  # unless AdminUser.external_auth?
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Admin Details' do
-      unless AdminUser.ldap?
+      unless AdminUser.external_auth?
         f.input :email
         f.input :username
         f.input :password, input_html: { autocomplete: 'new-password' }
@@ -85,7 +85,7 @@ ActiveAdmin.register AdminUser do
   end
   #  end
 
-  unless AdminUser.ldap?
+  unless AdminUser.external_auth?
     # link to change own password
     action_item :change_password, only: :show do
       if authorized?(:change_password, resource.model)
