@@ -237,7 +237,7 @@ Devise.setup do |config|
                       identifier: oidc_yaml.fetch('client_id'),
                       secret: oidc_yaml['client_secret'].presence,
                       redirect_uri: oidc_yaml['redirect_uri'].presence ||
-                        ENV.fetch('OIDC_REDIRECT_URL', 'http://localhost:3000/admin/auth/oidc/callback'),
+                                    ENV.fetch('OIDC_REDIRECT_URL', 'http://localhost:3000/admin/auth/oidc/callback'),
                       port: nil,
                       scheme: nil,
                       host: nil

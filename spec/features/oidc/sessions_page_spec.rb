@@ -3,7 +3,7 @@
 RSpec.describe 'OIDC sessions page', type: :feature, oidc_mode: true do
   it 'renders the SSO login button on the Devise sign-in page' do
     visit new_admin_user_session_path
-    expect(page).to have_button(ActiveAdmin::Oidc.configuration.login_button_label)
+    expect(page).to have_button(ActiveAdmin::Oidc.config.login_button_label)
   end
 
   it 'does NOT render the username/password form in OIDC mode' do
@@ -22,12 +22,12 @@ RSpec.describe 'OIDC sessions page', type: :feature, oidc_mode: true do
   it 'redirects an unauthenticated root request to the sign-in page (not a redirect loop)' do
     visit '/'
     expect(page).to have_current_path(new_admin_user_session_path, ignore_query: true)
-    expect(page).to have_button(ActiveAdmin::Oidc.configuration.login_button_label)
+    expect(page).to have_button(ActiveAdmin::Oidc.config.login_button_label)
   end
 
   it 'posts (not GETs) the SSO button — button_to with CSRF token' do
     visit new_admin_user_session_path
-    button = find_button(ActiveAdmin::Oidc.configuration.login_button_label)
+    button = find_button(ActiveAdmin::Oidc.config.login_button_label)
     form = button.ancestor('form')
     expect(form['method']).to match(/post/i)
     expect(form['action']).to eq('/admin/auth/oidc')

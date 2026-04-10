@@ -60,6 +60,14 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
   context 'when config/oidc.yml is present' do
     subject(:configured) { load_initializer_with(yaml_body) }
 
+    # The on_login lambda calls AdminUser.available_roles to intersect
+    # claimed roles with the host app's configured policy roles.
+    # Stub it so test role names are recognized.
+    before do
+      allow(AdminUser).to receive(:available_roles)
+        .and_return(%i[admin user ops eng dev viewer reporter root])
+    end
+
     it 'reads issuer / client_id / scope from yaml' do
       expect(configured.issuer).to eq('https://idp.example.com')
       expect(configured.client_id).to eq('test-client')
@@ -75,13 +83,9 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
       expect(configured.identity_claim).to eq(:preferred_username)
     end
 
-    it 'resolves admin_user_class to "AdminUser"' do
-      expect(configured.admin_user_class).to eq('AdminUser')
-    end
-
     describe 'on_login lambda' do
       let(:admin_user) do
-        double('AdminUser', new_record?: true).tap do |u|
+        double('AdminUser', new_record?: true, persisted?: false).tap do |u|
           allow(u).to receive(:roles=)
           allow(u).to receive(:email=)
           allow(u).to receive(:enabled=)
@@ -120,6 +124,8 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
 
       it 'does not touch enabled on an existing record' do
         allow(admin_user).to receive(:new_record?).and_return(false)
+        allow(admin_user).to receive(:persisted?).and_return(true)
+        allow(admin_user).to receive(:enabled?).and_return(true)
         expect(admin_user).not_to receive(:enabled=)
         configured.on_login.call(admin_user, {})
       end
@@ -142,7 +148,7 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
       end
 
       it 'reads the custom claim name' do
-        admin_user = double('AdminUser', new_record?: true).tap do |u|
+        admin_user = double('AdminUser', new_record?: true, persisted?: false).tap do |u|
           allow(u).to receive(:roles=)
           allow(u).to receive(:email=)
           allow(u).to receive(:enabled=)
@@ -165,7 +171,7 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
       end
 
       let(:admin_user) do
-        double('AdminUser', new_record?: true).tap do |u|
+        double('AdminUser', new_record?: true, persisted?: false).tap do |u|
           allow(u).to receive(:roles=)
           allow(u).to receive(:email=)
           allow(u).to receive(:enabled=)

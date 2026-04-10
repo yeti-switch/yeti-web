@@ -10,7 +10,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
 
   def click_sso_button
     visit new_admin_user_session_path
-    click_button(ActiveAdmin::Oidc.configuration.login_button_label)
+    click_button(ActiveAdmin::Oidc.config.login_button_label)
   end
 
   context 'first-time sign-in (JIT provisioning)' do

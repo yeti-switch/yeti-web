@@ -14,11 +14,11 @@ gem 'rails', '7.2.3.1'
 gem 'responders'
 
 # Authentication
+gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
 gem 'activeldap'
 gem 'd3-rails', '3.5.2'
 gem 'devise', '>= 4.6.0'
 gem 'devise_ldap_authenticatable', github: 'cschiewek/devise_ldap_authenticatable', branch: 'default'
-gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
 gem 'net-ldap', '~> 0.19.0'
 gem 'ostruct', '~> 0.6.1' # need for net-ldap
 

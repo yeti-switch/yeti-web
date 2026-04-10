@@ -2,15 +2,11 @@
 
 RSpec.describe 'OIDC routes', type: :request, oidc_mode: true do
   it 'recognizes the omniauth request path' do
-    expect(post: '/admin/auth/oidc').to route_to(
-      controller: 'active_admin/oidc/sessions',
-      action: 'passthru',
-      provider: 'oidc'
-    )
-  rescue RSpec::Expectations::ExpectationNotMetError
-    # Route is mounted via Devise omniauthable. The exact controller name
-    # depends on the gem internals — fall back to a looser assertion.
-    expect { post '/admin/auth/oidc' }.not_to raise_error
+    # OmniAuth routes are Rack middleware, not standard Rails routes,
+    # so we verify by making an actual request rather than route_to.
+    post '/admin/auth/oidc'
+    # OmniAuth will redirect to the IdP or return a non-404 response
+    expect(response.status).not_to eq(404)
   end
 
   it 'recognizes the omniauth callback path' do

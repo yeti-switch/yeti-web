@@ -27,7 +27,6 @@ class DummyOidcUser < ActiveRecord::Base
 end
 
 RSpec.describe AdminUserOidcHandler do
-
   describe 'devise modules' do
     subject(:modules) { DummyOidcUser.devise_modules }
 
