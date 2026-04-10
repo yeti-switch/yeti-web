@@ -6,7 +6,7 @@ RSpec.describe 'AdminUsers admin UI under OIDC mode', type: :feature, oidc_mode:
            username: 'ops',
            provider: 'oidc',
            uid: 'ops-sub',
-           roles: %w[admin])
+           roles: %w[root])
   end
 
   before do

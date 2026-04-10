@@ -18,7 +18,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
       {
         'preferred_username' => 'alice',
         'email' => 'alice@test',
-        'roles' => ['admin']
+        'roles' => ['root']
       }
     end
 
@@ -33,7 +33,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
       expect(created).to have_attributes(
         provider: 'oidc',
         uid: 'alice-sub',
-        roles: ['admin'],
+        roles: ['root'],
         enabled: true
       )
       expect(created.billing_contact.email).to eq('alice@test')
@@ -49,19 +49,19 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
              username: 'alice',
              provider: 'oidc',
              uid: 'alice-sub',
-             roles: %w[user])
+             roles: %w[root])
     end
 
     before do
       stub_oidc_sign_in(
         sub: 'alice-sub',
-        claims: { 'preferred_username' => 'alice', 'email' => 'alice@test', 'roles' => ['admin'] }
+        claims: { 'preferred_username' => 'alice', 'email' => 'alice@test', 'roles' => ['root'] }
       )
     end
 
     it 'does not create a new AdminUser and refreshes roles' do
       expect { click_sso_button }.not_to change { AdminUser.count }
-      expect(existing.reload.roles).to eq(['admin'])
+      expect(existing.reload.roles).to eq(['root'])
     end
   end
 
@@ -71,13 +71,13 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
              username: 'alice',
              provider: nil,
              uid: nil,
-             roles: %w[user])
+             roles: %w[root])
     end
 
     before do
       stub_oidc_sign_in(
         sub: 'alice-sub',
-        claims: { 'preferred_username' => 'alice', 'email' => 'alice@test', 'roles' => ['admin'] }
+        claims: { 'preferred_username' => 'alice', 'email' => 'alice@test', 'roles' => ['root'] }
       )
     end
 
@@ -97,7 +97,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
     it 'falls back to default_roles from config' do
       click_sso_button
       created = AdminUser.find_by!(username: 'alice')
-      expect(created.roles).to eq(['admin'])
+      expect(created.roles).to eq(['root'])
     end
   end
 
@@ -108,7 +108,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
              provider: 'oidc',
              uid: 'alice-sub',
              enabled: false,
-             roles: %w[admin])
+             roles: %w[root])
     end
 
     before do
@@ -128,7 +128,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
              provider: 'oidc',
              uid: 'alice-sub',
              allowed_ips: ['10.0.0.0/8'],
-             roles: %w[admin])
+             roles: %w[root])
     end
 
     before do
