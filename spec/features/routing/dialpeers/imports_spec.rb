@@ -6,10 +6,10 @@ RSpec.describe 'Dialpeer Imports' do
   end
 
   include_context :login_as_admin
-  let!(:routing_group) { create(:routing_group) }
-  let!(:contractor) { create(:vendor) }
-  let!(:gateway) { create(:gateway, contractor: contractor) }
-  let!(:dialpeer) { create(:dialpeer, dialpeer_attrs) }
+  let!(:routing_group) { FactoryBot.create(:routing_group) }
+  let!(:contractor) { FactoryBot.create(:vendor) }
+  let!(:gateway) { FactoryBot.create(:gateway, contractor: contractor) }
+  let!(:dialpeer) { FactoryBot.create(:dialpeer, dialpeer_attrs) }
   let!(:dialpeer_attrs) do
     {
       prefix: '123456',
@@ -22,7 +22,7 @@ RSpec.describe 'Dialpeer Imports' do
       vendor: contractor
     }
   end
-  let!(:import) { create(:importing_dialpeer, :with_names, import_attrs) }
+  let!(:import) { FactoryBot.create(:importing_dialpeer, :with_names, import_attrs) }
   let!(:import_attrs) do
     attrs = Importing::Dialpeer.import_attributes.map do |attr_name|
       [attr_name.to_sym, dialpeer.public_send(attr_name)]
@@ -72,7 +72,7 @@ RSpec.describe 'Dialpeer Imports' do
   end
 
   context 'with gateway_group' do
-    let!(:gateway_group) { create(:gateway_group, vendor: contractor) }
+    let!(:gateway_group) { FactoryBot.create(:gateway_group, vendor: contractor) }
     let(:dialpeer_attrs) do
       super().merge gateway: nil,
                     gateway_group: gateway_group
@@ -113,6 +113,84 @@ RSpec.describe 'Dialpeer Imports' do
       expect(page).to have_table_cell column: 'Src rewrite result', exact_text: import.src_rewrite_result
       expect(page).to have_table_cell column: 'Dst rewrite rule', exact_text: import.dst_rewrite_rule
       expect(page).to have_table_cell column: 'Dst rewrite result', exact_text: import.dst_rewrite_result
+    end
+  end
+
+  context 'Apply unique columns', js: true do
+    subject do
+      visit dialpeer_imports_path
+      click_on 'Apply unique columns'
+      fill_form!
+      click_on 'OK'
+    end
+
+    let(:unique_columns) { %w[prefix] }
+    let(:fill_form!) { fill_in_tom_select 'Unique Columns', with: unique_columns, search: true }
+    let(:import_attrs) { super().merge(o_id: nil, is_changed: nil) }
+
+    shared_examples :should_successfully_apply do
+      let(:expected_import_attributes) { { o_id: nil, is_changed: true } }
+
+      it 'should successfully apply' do
+        subject
+        expect(page).to have_flash_message('Unique columns applied!', type: :notice)
+        expect(import.reload).to have_attributes(expected_import_attributes)
+      end
+    end
+
+    context 'when form submitted without unique columns and additional filter' do
+      let(:fill_form!) { nil }
+
+      include_examples :should_successfully_apply
+    end
+
+    context 'when form submitted without unique columns but with additional filter' do
+      let(:fill_form!) { fill_in 'Additional SQL filter', with: "tb.id=#{dialpeer.id}" }
+
+      include_examples :should_successfully_apply
+    end
+
+    context 'when unique columns match single record' do
+      include_examples :should_successfully_apply do
+        let(:expected_import_attributes) do
+          {
+            o_id: dialpeer.id,
+            is_changed: false
+          }
+        end
+      end
+    end
+
+    context 'when unique columns match multiple records' do
+      let!(:second_dialpeer) { FactoryBot.create(:dialpeer, dialpeer_attrs) }
+
+      include_examples :should_successfully_apply do
+        let(:expected_import_attributes) do
+          {
+            o_id: be(dialpeer.id).or(be(second_dialpeer.id)),
+            is_changed: false
+          }
+        end
+      end
+    end
+
+    context 'when unique columns do not match any record' do
+      let(:import_attrs) { super().merge(prefix: '999999') }
+
+      include_examples :should_successfully_apply
+    end
+
+    context 'when import has changed attributes' do
+      let(:import_attrs) { super().merge(initial_rate: 0.99) }
+
+      include_examples :should_successfully_apply do
+        let(:expected_import_attributes) do
+          {
+            o_id: dialpeer.id,
+            is_changed: true
+          }
+        end
+      end
     end
   end
 end
