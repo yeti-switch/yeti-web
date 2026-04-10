@@ -29,6 +29,7 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
     stub_const('ActiveAdmin::Oidc', Module.new)
     captured = Class.new do
       attr_accessor :issuer, :client_id, :client_secret, :scope,
+                    :redirect_uri,
                     :identity_attribute, :identity_claim, :admin_user_class,
                     :on_login
     end.new
@@ -85,7 +86,7 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
 
     describe 'on_login lambda' do
       let(:admin_user) do
-        double('AdminUser', new_record?: true, persisted?: false).tap do |u|
+        double('AdminUser', new_record?: true).tap do |u|
           allow(u).to receive(:roles=)
           allow(u).to receive(:email=)
           allow(u).to receive(:enabled=)
@@ -124,8 +125,6 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
 
       it 'does not touch enabled on an existing record' do
         allow(admin_user).to receive(:new_record?).and_return(false)
-        allow(admin_user).to receive(:persisted?).and_return(true)
-        allow(admin_user).to receive(:enabled?).and_return(true)
         expect(admin_user).not_to receive(:enabled=)
         configured.on_login.call(admin_user, {})
       end
@@ -148,7 +147,7 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
       end
 
       it 'reads the custom claim name' do
-        admin_user = double('AdminUser', new_record?: true, persisted?: false).tap do |u|
+        admin_user = double('AdminUser', new_record?: true).tap do |u|
           allow(u).to receive(:roles=)
           allow(u).to receive(:email=)
           allow(u).to receive(:enabled=)
@@ -171,7 +170,7 @@ RSpec.describe 'config/initializers/activeadmin_oidc.rb' do
       end
 
       let(:admin_user) do
-        double('AdminUser', new_record?: true, persisted?: false).tap do |u|
+        double('AdminUser', new_record?: true).tap do |u|
           allow(u).to receive(:roles=)
           allow(u).to receive(:email=)
           allow(u).to receive(:enabled=)

@@ -10,6 +10,8 @@ if File.exist?(oidc_config_path)
     c.client_id     = oidc_yaml.fetch('client_id')
     c.client_secret = oidc_yaml['client_secret'].presence
     c.scope         = oidc_yaml['scope'] if oidc_yaml['scope'].present?
+    c.redirect_uri  = oidc_yaml['redirect_uri'].presence ||
+                      ENV.fetch('OIDC_REDIRECT_URL', nil)
 
     c.identity_attribute = :username
     c.identity_claim     = (oidc_yaml['identity_claim'] || 'preferred_username').to_sym
@@ -45,10 +47,6 @@ if File.exist?(oidc_config_path)
         )
         return false
       end
-
-      # Block disabled users — Devise checks active_for_authentication?
-      # only on session deserialization, not on initial OmniAuth sign-in.
-      return false if admin_user.persisted? && !admin_user.enabled?
 
       admin_user.roles = accepted
       admin_user.email = claims['email'] if claims['email'].present?

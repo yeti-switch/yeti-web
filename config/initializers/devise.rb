@@ -211,38 +211,9 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
-  # ActiveAdmin mounts Devise under /admin, so OmniAuth's path prefix has to
-  # match. This is a no-op in DB/LDAP mode (no omniauth providers registered)
-  # and activates only when AdminUserOidcHandler is loaded.
-  config.omniauth_path_prefix = '/admin/auth'
-
-  # Register the :oidc OmniAuth strategy only when yeti-web is running in
-  # OIDC mode (config/oidc.yml present). Without this `config.omniauth` call
-  # the OmniAuth middleware is not inserted into the Rack stack and clicking
-  # the SSO button falls through to Devise's passthru action, which replies
-  # "Not found. Authentication passthru."
-  oidc_config_path = Rails.root.join('config/oidc.yml')
-  if File.exist?(oidc_config_path)
-    require 'omniauth_openid_connect'
-    oidc_yaml = YAML.load_file(oidc_config_path, aliases: true)[Rails.env] || {}
-
-    config.omniauth :openid_connect,
-                    name: :oidc,
-                    scope: (oidc_yaml['scope'] || 'openid email profile').split,
-                    response_type: :code,
-                    issuer: oidc_yaml.fetch('issuer'),
-                    discovery: true,
-                    pkce: oidc_yaml['client_secret'].blank?,
-                    client_options: {
-                      identifier: oidc_yaml.fetch('client_id'),
-                      secret: oidc_yaml['client_secret'].presence,
-                      redirect_uri: oidc_yaml['redirect_uri'].presence ||
-                                    ENV.fetch('OIDC_REDIRECT_URL', 'http://localhost:3000/admin/auth/oidc/callback'),
-                      port: nil,
-                      scheme: nil,
-                      host: nil
-                    }.compact
-  end
+  # OmniAuth strategy registration and path prefix are handled automatically
+  # by the activeadmin-oidc gem's engine when ActiveAdmin::Oidc is configured.
+  # See config/initializers/activeadmin_oidc.rb.
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
