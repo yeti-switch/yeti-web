@@ -12,7 +12,9 @@
 #  encrypted_password     :string(255)      default(""), not null
 #  last_sign_in_at        :timestamptz
 #  last_sign_in_ip        :string(255)
+#  oidc_raw_info          :jsonb
 #  per_page               :json             not null
+#  provider               :string
 #  remember_created_at    :timestamptz
 #  reset_password_sent_at :timestamptz
 #  reset_password_token   :string(255)
@@ -20,6 +22,7 @@
 #  saved_filters          :json             not null
 #  sign_in_count          :integer(4)       default(0)
 #  stateful_filters       :boolean          default(FALSE), not null
+#  uid                    :string
 #  username               :string           not null
 #  visible_columns        :json             not null
 #  created_at             :timestamptz      not null
@@ -29,6 +32,7 @@
 #
 #  admin_users_username_idx                   (username) UNIQUE
 #  admin_users_username_key                   (username) UNIQUE
+#  index_admin_users_on_provider_and_uid      (provider,uid) UNIQUE WHERE ((provider IS NOT NULL) AND (uid IS NOT NULL))
 #  index_admin_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
@@ -76,13 +80,31 @@ class AdminUser < ApplicationRecord
     File.exist?(ldap_config)
   end
 
+  def self.oidc?
+    respond_to?(:omniauth_providers) && omniauth_providers.include?(:oidc)
+  end
+
+  def self.oidc_config
+    Rails.root.join 'config/oidc.yml'
+  end
+
+  def self.oidc_config_exists?
+    File.exist?(oidc_config)
+  end
+
+  def self.external_auth?
+    ldap? || oidc?
+  end
+
   def self.available_roles
     list = (Rails.configuration.policy_roles&.keys || []).map(&:to_sym)
     list.push(RolePolicy.root_role) if RolePolicy.root_role.present?
     list
   end
 
-  if ldap_config_exists?
+  if oidc_config_exists?
+    include AdminUserOidcHandler
+  elsif ldap_config_exists?
     include AdminUserLdapHandler
   else
     include AdminUserDatabaseHandler

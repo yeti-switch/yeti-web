@@ -14200,7 +14200,10 @@ CREATE TABLE gui.admin_users (
     per_page json DEFAULT '{}'::json NOT NULL,
     saved_filters json DEFAULT '{}'::json NOT NULL,
     roles character varying[] NOT NULL,
-    allowed_ips inet[]
+    allowed_ips inet[],
+    provider character varying,
+    uid character varying,
+    oidc_raw_info jsonb
 );
 
 
@@ -18925,6 +18928,13 @@ CREATE INDEX index_admin_notes_on_resource_type_and_resource_id ON gui.active_ad
 
 
 --
+-- Name: index_admin_users_on_provider_and_uid; Type: INDEX; Schema: gui; Owner: -
+--
+
+CREATE UNIQUE INDEX index_admin_users_on_provider_and_uid ON gui.admin_users USING btree (provider, uid) WHERE ((provider IS NOT NULL) AND (uid IS NOT NULL));
+
+
+--
 -- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: gui; Owner: -
 --
 
@@ -20285,6 +20295,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260409000000'),
 ('20260407000000'),
 ('20260406000000'),
 ('20260404183736'),

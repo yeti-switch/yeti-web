@@ -1,0 +1,38 @@
+# OIDC single sign-on configuration for ActiveAdmin.
+#
+# Copy this file to config/oidc.yml to enable OIDC mode:
+#   cp -v config/oidc.yml.distr config/oidc.yml
+#
+# Drop config/oidc.yml (and restart) to disable OIDC mode and fall back to
+# database auth. Precedence: oidc.yml > ldap.yml > database.
+#
+# Note: the on_login lambda in config/initializers/activeadmin_oidc.rb
+# captures the values below at boot time. When you edit this file in
+# development you must restart the application for changes to take effect.
+
+development: &default
+  issuer: https://zitadel.example.com
+  client_id: yeti-admin
+  # blank ⇒ PKCE public client
+  client_secret:
+  scope: openid profile email
+  identity_claim: preferred_username
+  # Claim to read roles from. Two shapes are supported out of the box:
+  #   * a flat string array, e.g. "roles": ["admin", "ops"]
+  #   * a Zitadel-style nested hash, e.g.
+  #       "urn:zitadel:iam:org:project:roles": {
+  #         "admin":  { "org-id" => "org-name" },
+  #         "viewer": { "org-id" => "org-name" }
+  #       }
+  #     In that case the hash keys are used as the role names.
+  # For Zitadel, set:
+  #   roles_claim: "urn:zitadel:iam:org:project:roles"
+  roles_claim: roles
+  default_roles:
+    - root
+
+test:
+  <<: *default
+
+production:
+  <<: *default

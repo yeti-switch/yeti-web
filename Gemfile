@@ -14,6 +14,7 @@ gem 'rails', '7.2.3.1'
 gem 'responders'
 
 # Authentication
+gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
 gem 'activeldap'
 gem 'd3-rails', '3.5.2'
 gem 'devise', '>= 4.6.0'
