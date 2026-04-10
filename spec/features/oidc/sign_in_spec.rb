@@ -17,7 +17,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
     let(:claims) do
       {
         'preferred_username' => 'alice',
-        'email' => 'alice@test',
+        'email' => 'alice@test.com',
         'roles' => ['root']
       }
     end
@@ -36,8 +36,8 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
         roles: ['root'],
         enabled: true
       )
-      expect(created.billing_contact.email).to eq('alice@test')
-      expect(created.oidc_raw_info).to include('preferred_username' => 'alice', 'email' => 'alice@test')
+      expect(created.billing_contact.email).to eq('alice@test.com')
+      expect(created.oidc_raw_info).to include('preferred_username' => 'alice', 'email' => 'alice@test.com')
       expect(created.oidc_raw_info.keys).not_to include('access_token', 'refresh_token', 'id_token')
       expect(page).to have_current_path('/admin', ignore_query: true)
     end
@@ -55,7 +55,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
     before do
       stub_oidc_sign_in(
         sub: 'alice-sub',
-        claims: { 'preferred_username' => 'alice', 'email' => 'alice@test', 'roles' => ['root'] }
+        claims: { 'preferred_username' => 'alice', 'email' => 'alice@test.com', 'roles' => ['root'] }
       )
     end
 
@@ -77,7 +77,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
     before do
       stub_oidc_sign_in(
         sub: 'alice-sub',
-        claims: { 'preferred_username' => 'alice', 'email' => 'alice@test', 'roles' => ['root'] }
+        claims: { 'preferred_username' => 'alice', 'email' => 'alice@test.com', 'roles' => ['root'] }
       )
     end
 
@@ -91,7 +91,7 @@ RSpec.describe 'OIDC sign-in', type: :feature, oidc_mode: true do
 
   context 'empty roles claim' do
     before do
-      stub_oidc_sign_in(sub: 'alice-sub', claims: { 'roles' => [], 'email' => 'alice@test' })
+      stub_oidc_sign_in(sub: 'alice-sub', claims: { 'roles' => [], 'email' => 'alice@test.com' })
     end
 
     it 'falls back to default_roles from config' do
