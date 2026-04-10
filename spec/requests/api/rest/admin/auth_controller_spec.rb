@@ -82,6 +82,29 @@ RSpec.describe Api::Rest::Admin::AuthController, type: :request do
           expect(response_json).to match(jwt: a_kind_of(String))
         end
       end
+
+      context 'oidc' do
+        let!(:oidc_admin) do
+          create(:admin_user, username: 'oidc-admin', password: 'password')
+        end
+
+        let(:attributes) do
+          {
+            username: oidc_admin.username,
+            password: 'password'
+          }
+        end
+
+        before do
+          allow(AdminUser).to receive(:oidc?).and_return(true)
+        end
+
+        it 'responds successfully' do
+          subject
+          expect(response.status).to eq(201)
+          expect(response_json).to match(jwt: a_kind_of(String))
+        end
+      end
     end
 
     context 'when attributes are invalid' do

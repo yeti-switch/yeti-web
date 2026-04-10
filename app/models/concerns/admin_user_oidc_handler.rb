@@ -15,8 +15,10 @@ module AdminUserOidcHandler
     # which would shadow a method defined earlier in the ancestor chain.
     define_method(:valid_password?) { |_password| false }
 
-    # REST API auth calls admin_user.authenticate(password) — alias it
-    # so it returns false instead of raising NoMethodError.
-    alias_method :authenticate, :valid_password?
+    # Keep web password sign-in disabled while preserving the legacy
+    # password-backed admin JWT API authentication path.
+    define_method(:authenticate) do |password|
+      Devise::Encryptor.compare(self.class, encrypted_password, password)
+    end
   end
 end
