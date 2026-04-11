@@ -82,6 +82,22 @@ RSpec.describe Api::Rest::Admin::AuthController, type: :request do
           expect(response_json).to match(jwt: a_kind_of(String))
         end
       end
+
+      context 'oidc mode', oidc_mode: true do
+        it 'still authenticates via password' do
+          subject
+          expect(response.status).to eq(201)
+          expect(response_json).to match(jwt: a_kind_of(String))
+        end
+      end
+
+      context 'ldap mode', :ldap do
+        it 'still authenticates via password' do
+          subject
+          expect(response.status).to eq(201)
+          expect(response_json).to match(jwt: a_kind_of(String))
+        end
+      end
     end
 
     context 'when attributes are invalid' do
