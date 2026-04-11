@@ -56,6 +56,16 @@ RSpec.describe AdminUserOidcHandler do
     end
   end
 
+  describe '#authenticate' do
+    it 'checks the encrypted password for API auth callers' do
+      user = DummyOidcUser.new(username: 'alice')
+      user.password = 'Password123!'
+
+      expect(user.authenticate('Password123!')).to be(true)
+      expect(user.authenticate('wrong-password')).to be(false)
+    end
+  end
+
   describe 'oidc_raw_info serialization' do
     it 'round-trips a hash through JSON' do
       user = DummyOidcUser.new(username: 'alice')
