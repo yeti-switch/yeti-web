@@ -7006,7 +7006,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
 
         select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
         if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
-          v_rate_limit=v_destination.next_rate::float;
+          v_rate_limit=(v_destination.next_rate * (SELECT rate FROM billing.currencies WHERE id = v_destination.currency_id))::float;
         end if;
 
 
@@ -8661,7 +8661,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
 
         select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
         if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
-          v_rate_limit=v_destination.next_rate::float;
+          v_rate_limit=(v_destination.next_rate * (SELECT rate FROM billing.currencies WHERE id = v_destination.currency_id))::float;
         end if;
 
 
@@ -10160,7 +10160,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
 
         select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
         if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
-          v_rate_limit=v_destination.next_rate::float;
+          v_rate_limit=(v_destination.next_rate * (SELECT rate FROM billing.currencies WHERE id = v_destination.currency_id))::float;
         end if;
 
 
