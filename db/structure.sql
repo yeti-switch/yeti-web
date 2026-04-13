@@ -473,7 +473,11 @@ CREATE TYPE switch22.callprofile_ty AS (
 	aleg_contact_user character varying,
 	bleg_contact_user character varying,
 	bleg_route_set character varying,
-	aleg_route_set character varying
+	aleg_route_set character varying,
+	customer_currency_id smallint,
+	vendor_currency_id smallint,
+	customer_currency_rate double precision,
+	vendor_currency_rate double precision
 );
 
 
@@ -2842,6 +2846,7 @@ CREATE TABLE class4.destinations (
     allow_package_billing boolean DEFAULT false NOT NULL,
     cdo smallint,
     scheduler_id smallint,
+    currency_id smallint NOT NULL,
     CONSTRAINT destinations_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT destinations_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT destinations_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -2895,6 +2900,9 @@ CREATE TABLE class4.dialpeers (
     routing_tag_mode_id smallint DEFAULT 0 NOT NULL,
     routeset_discriminator_id smallint DEFAULT 1 NOT NULL,
     scheduler_id smallint,
+    currency_id smallint NOT NULL,
+    currency_rate double precision DEFAULT 1 NOT NULL,
+    next_rate_system_currency numeric NOT NULL,
     CONSTRAINT dialpeers_dst_number_max_length CHECK ((dst_number_max_length >= 0)),
     CONSTRAINT dialpeers_dst_number_min_length CHECK ((dst_number_min_length >= 0)),
     CONSTRAINT dialpeers_non_zero_initial_interval CHECK ((initial_interval > 0)),
@@ -3438,6 +3446,8 @@ DECLARE
   i integer;
   v_vendor public.contractors%rowtype;
   v_vendor_allowtime real;
+  v_dst_currency_multiplier double precision;
+  v_dp_currency_multiplier double precision;
   v_route_found boolean:=false;
   v_from_user varchar;
   v_from_domain varchar;
@@ -3508,6 +3518,17 @@ BEGIN
 
   i_profile.vendor_acc_id = i_dp.account_id;
   i_profile.vendor_acc_external_id = i_vendor_acc.external_id;
+  i_profile.vendor_currency_id = i_vendor_acc.currency_id;
+  i_profile.vendor_currency_rate = (SELECT rate FROM billing.currencies WHERE id = i_vendor_acc.currency_id);
+
+  -- dialpeer currency conversion to vendor account currency
+  v_dp_currency_multiplier := 1.0;
+  IF i_dp.currency_id != i_vendor_acc.currency_id THEN
+    v_dp_currency_multiplier := i_dp.currency_rate / i_profile.vendor_currency_rate;
+    i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
+  END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
   i_profile.term_gw_name = i_vendor_gw."name";
@@ -3564,13 +3585,24 @@ BEGIN
   end case;
   END IF;
 
+  -- destination currency conversion
+  v_dst_currency_multiplier := 1.0;
+  IF i_destination.currency_id != i_customer_acc.currency_id THEN
+    v_dst_currency_multiplier := (SELECT rate FROM billing.currencies WHERE id = i_destination.currency_id) / i_profile.customer_currency_rate;
+    IF i_profile.package_counter_id IS NULL THEN
+      i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
+    END IF;
+  END IF;
+
   /* time limiting START */
   if i_profile.time_limit is null then
     /*dbg{*/
     v_end:=clock_timestamp();
     RAISE NOTICE '% ms -> process_gw: customer time limit is not set, calculating',EXTRACT(MILLISECOND from v_end-v_start);
     /*}dbg*/
-    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee*v_dst_currency_multiplier-i_destination.initial_rate*v_dst_currency_multiplier/60*i_destination.initial_interval<0 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> process_gw: No enough customer balance even for first billing interval. rejecting',EXTRACT(MILLISECOND from v_end-v_start);
@@ -3579,8 +3611,8 @@ BEGIN
       RETURN i_profile;
     ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
       i_profile.time_limit = (i_destination.initial_interval+
-                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
-                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee*v_dst_currency_multiplier-i_destination.initial_rate*v_dst_currency_multiplier/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate*v_dst_currency_multiplier/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> process_gw: customer time limit: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
@@ -3594,15 +3626,15 @@ BEGIN
     end IF;
   end if;
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier-i_dp.initial_rate*v_dp_currency_multiplier/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
   ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
-                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
-                                    (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
+                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier-i_dp.initial_rate*v_dp_currency_multiplier/60*i_dp.initial_interval)/
+                                    (i_dp.next_rate*v_dp_currency_multiplier/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
   ELSE /* DP rates is 0, allowing maximum call length */
     v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length);
   end IF;
@@ -4219,6 +4251,8 @@ DECLARE
   i integer;
   v_vendor public.contractors%rowtype;
   v_vendor_allowtime real;
+  v_dst_currency_multiplier double precision;
+  v_dp_currency_multiplier double precision;
   v_route_found boolean:=false;
   v_from_user varchar;
   v_from_domain varchar;
@@ -4289,6 +4323,17 @@ BEGIN
 
   i_profile.vendor_acc_id = i_dp.account_id;
   i_profile.vendor_acc_external_id = i_vendor_acc.external_id;
+  i_profile.vendor_currency_id = i_vendor_acc.currency_id;
+  i_profile.vendor_currency_rate = (SELECT rate FROM billing.currencies WHERE id = i_vendor_acc.currency_id);
+
+  -- dialpeer currency conversion to vendor account currency
+  v_dp_currency_multiplier := 1.0;
+  IF i_dp.currency_id != i_vendor_acc.currency_id THEN
+    v_dp_currency_multiplier := i_dp.currency_rate / i_profile.vendor_currency_rate;
+    i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
+  END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
   i_profile.term_gw_name = i_vendor_gw."name";
@@ -4345,13 +4390,24 @@ BEGIN
   end case;
   END IF;
 
+  -- destination currency conversion
+  v_dst_currency_multiplier := 1.0;
+  IF i_destination.currency_id != i_customer_acc.currency_id THEN
+    v_dst_currency_multiplier := (SELECT rate FROM billing.currencies WHERE id = i_destination.currency_id) / i_profile.customer_currency_rate;
+    IF i_profile.package_counter_id IS NULL THEN
+      i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
+    END IF;
+  END IF;
+
   /* time limiting START */
   if i_profile.time_limit is null then
     /*dbg{*/
     v_end:=clock_timestamp();
     RAISE NOTICE '% ms -> process_gw: customer time limit is not set, calculating',EXTRACT(MILLISECOND from v_end-v_start);
     /*}dbg*/
-    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee*v_dst_currency_multiplier-i_destination.initial_rate*v_dst_currency_multiplier/60*i_destination.initial_interval<0 THEN
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> process_gw: No enough customer balance even for first billing interval. rejecting',EXTRACT(MILLISECOND from v_end-v_start);
@@ -4360,8 +4416,8 @@ BEGIN
       RETURN i_profile;
     ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
       i_profile.time_limit = (i_destination.initial_interval+
-                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
-                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee*v_dst_currency_multiplier-i_destination.initial_rate*v_dst_currency_multiplier/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate*v_dst_currency_multiplier/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
       /*dbg{*/
       v_end:=clock_timestamp();
       RAISE NOTICE '% ms -> process_gw: customer time limit: %',EXTRACT(MILLISECOND from v_end-v_start), i_profile.time_limit;
@@ -4375,15 +4431,15 @@ BEGIN
     end IF;
   end if;
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier-i_dp.initial_rate*v_dp_currency_multiplier/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
   ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
-                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
-                                    (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
+                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier-i_dp.initial_rate*v_dp_currency_multiplier/60*i_dp.initial_interval)/
+                                    (i_dp.next_rate*v_dp_currency_multiplier/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
   ELSE /* DP rates is 0, allowing maximum call length */
     v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length);
   end IF;
@@ -5000,6 +5056,8 @@ DECLARE
   i integer;
   v_vendor public.contractors%rowtype;
   v_vendor_allowtime real;
+  v_dst_currency_multiplier double precision;
+  v_dp_currency_multiplier double precision;
   v_route_found boolean:=false;
   v_from_user varchar;
   v_from_domain varchar;
@@ -5062,6 +5120,17 @@ BEGIN
 
   i_profile.vendor_acc_id = i_dp.account_id;
   i_profile.vendor_acc_external_id = i_vendor_acc.external_id;
+  i_profile.vendor_currency_id = i_vendor_acc.currency_id;
+  i_profile.vendor_currency_rate = (SELECT rate FROM billing.currencies WHERE id = i_vendor_acc.currency_id);
+
+  -- dialpeer currency conversion to vendor account currency
+  v_dp_currency_multiplier := 1.0;
+  IF i_dp.currency_id != i_vendor_acc.currency_id THEN
+    v_dp_currency_multiplier := i_dp.currency_rate / i_profile.vendor_currency_rate;
+    i_profile.dialpeer_next_rate := (i_dp.next_rate * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_initial_rate := (i_dp.initial_rate * v_dp_currency_multiplier)::varchar;
+    i_profile.dialpeer_fee := (i_dp.connect_fee * v_dp_currency_multiplier)::varchar;
+  END IF;
 
   i_profile.term_gw_id=i_vendor_gw.id;
   i_profile.term_gw_name = i_vendor_gw."name";
@@ -5118,17 +5187,28 @@ BEGIN
   end case;
   END IF;
 
+  -- destination currency conversion
+  v_dst_currency_multiplier := 1.0;
+  IF i_destination.currency_id != i_customer_acc.currency_id THEN
+    v_dst_currency_multiplier := (SELECT rate FROM billing.currencies WHERE id = i_destination.currency_id) / i_profile.customer_currency_rate;
+    IF i_profile.package_counter_id IS NULL THEN
+      i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
+      i_profile.destination_fee := (i_profile.destination_fee::numeric * v_dst_currency_multiplier)::varchar;
+    END IF;
+  END IF;
+
   /* time limiting START */
   if i_profile.time_limit is null then
     
-    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval<0 THEN
+    IF (i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee*v_dst_currency_multiplier-i_destination.initial_rate*v_dst_currency_multiplier/60*i_destination.initial_interval<0 THEN
       
       i_profile.disconnect_code_id=8000; --Not enough customer balance
       RETURN i_profile;
     ELSIF i_destination.next_rate!=0 AND i_destination.next_interval!=0 THEN
       i_profile.time_limit = (i_destination.initial_interval+
-                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee-i_destination.initial_rate/60*i_destination.initial_interval)/
-                                      (i_destination.next_rate/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
+                          LEAST(FLOOR(((i_customer_acc.balance-i_customer_acc.min_balance)-i_destination.connect_fee*v_dst_currency_multiplier-i_destination.initial_rate*v_dst_currency_multiplier/60*i_destination.initial_interval)/
+                                      (i_destination.next_rate*v_dst_currency_multiplier/60*i_destination.next_interval)),24e6)::integer*i_destination.next_interval)::integer;
       
     ELSE /* DST rates is 0, allowing maximum call length */
       i_profile.time_limit = COALESCE(i_customer_acc.max_call_duration, i_call_ctx.max_call_length)::integer;
@@ -5136,15 +5216,15 @@ BEGIN
     end IF;
   end if;
 
-  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee <0 THEN /* No enough balance, skipping this profile */
+  IF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier <0 THEN /* No enough balance, skipping this profile */
     v_vendor_allowtime:=0;
     return null;
-  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
+  ELSIF (i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier-i_dp.initial_rate*v_dp_currency_multiplier/60*i_dp.initial_interval<0 THEN /* No enough balance even for first billing interval - skipping this profile */
     return null;
   ELSIF i_dp.next_rate!=0 AND i_dp.next_interval!=0 THEN /* DP rates is not zero, calculating limit */
     v_vendor_allowtime:=i_dp.initial_interval+
-                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee-i_dp.initial_rate/60*i_dp.initial_interval)/
-                                    (i_dp.next_rate/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
+                        LEAST(FLOOR(((i_vendor_acc.max_balance-i_vendor_acc.balance)-i_dp.connect_fee*v_dp_currency_multiplier-i_dp.initial_rate*v_dp_currency_multiplier/60*i_dp.initial_interval)/
+                                    (i_dp.next_rate*v_dp_currency_multiplier/60*i_dp.next_interval)),24e6)::integer*i_dp.next_interval;
   ELSE /* DP rates is 0, allowing maximum call length */
     v_vendor_allowtime:=COALESCE(i_vendor_acc.max_call_duration, i_call_ctx.max_call_length);
   end IF;
@@ -5895,6 +5975,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
         v_ret.customer_acc_id = v_customer_auth_normalized.account_id;
         v_ret.customer_acc_external_id = v_c_acc.external_id;
         v_ret.customer_acc_vat = v_c_acc.vat;
+        v_ret.customer_currency_id = v_c_acc.currency_id;
+        v_ret.customer_currency_rate = (SELECT rate FROM billing.currencies WHERE id = v_c_acc.currency_id);
         v_ret.customer_account_name = v_c_acc."name";
 
         SELECT into strict v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
@@ -6965,7 +7047,7 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
                   t_dp.vendor_id as s1_vendor_id,
                   t_dp.account_id as s1_vendor_account_id,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
                   t_dp.priority AS dp_priority,
                   t_dp.locked as dp_locked,
@@ -7027,8 +7109,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
                 WHERE
@@ -7077,8 +7159,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
@@ -7128,8 +7210,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                   ) as exclusive_rank,
-                  ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
-                  t_dp.next_rate as dp_next_rate,
+                  ((t_dp.next_rate_system_currency - first_value(t_dp.next_rate_system_currency) OVER(ORDER BY t_dp.next_rate_system_currency ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate_system_currency + t_dp.priority) - t_dp.priority AS r2,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
@@ -7180,8 +7262,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                   ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
                 WHERE
@@ -7235,8 +7317,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                     ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
                   ) as r2,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
@@ -7302,8 +7384,8 @@ CREATE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i_protocol_i
                     ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
                   ) as r2,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
                   rpsr.priority as rpsr_priority,
@@ -7548,6 +7630,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
         v_ret.customer_acc_id = v_customer_auth_normalized.account_id;
         v_ret.customer_acc_external_id = v_c_acc.external_id;
         v_ret.customer_acc_vat = v_c_acc.vat;
+        v_ret.customer_currency_id = v_c_acc.currency_id;
+        v_ret.customer_currency_rate = (SELECT rate FROM billing.currencies WHERE id = v_c_acc.currency_id);
         v_ret.customer_account_name = v_c_acc."name";
 
         SELECT into strict v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
@@ -8618,7 +8702,7 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
                   t_dp.vendor_id as s1_vendor_id,
                   t_dp.account_id as s1_vendor_account_id,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
                   t_dp.priority AS dp_priority,
                   t_dp.locked as dp_locked,
@@ -8680,8 +8764,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
                 WHERE
@@ -8730,8 +8814,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
@@ -8781,8 +8865,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                   ) as exclusive_rank,
-                  ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
-                  t_dp.next_rate as dp_next_rate,
+                  ((t_dp.next_rate_system_currency - first_value(t_dp.next_rate_system_currency) OVER(ORDER BY t_dp.next_rate_system_currency ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate_system_currency + t_dp.priority) - t_dp.priority AS r2,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
@@ -8833,8 +8917,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                   ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
                 WHERE
@@ -8888,8 +8972,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                     ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
                   ) as r2,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
@@ -8955,8 +9039,8 @@ CREATE FUNCTION switch22.route_debug(i_node_id integer, i_pop_id integer, i_prot
                     ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
                   ) as r2,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
                   rpsr.priority as rpsr_priority,
@@ -9182,6 +9266,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
         v_ret.customer_acc_id = v_customer_auth_normalized.account_id;
         v_ret.customer_acc_external_id = v_c_acc.external_id;
         v_ret.customer_acc_vat = v_c_acc.vat;
+        v_ret.customer_currency_id = v_c_acc.currency_id;
+        v_ret.customer_currency_rate = (SELECT rate FROM billing.currencies WHERE id = v_c_acc.currency_id);
         v_ret.customer_account_name = v_c_acc."name";
 
         SELECT into strict v_orig_gw * from class4.gateways WHERE id=v_customer_auth_normalized.gateway_id;
@@ -10112,7 +10198,7 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                   (t_dp.*)::class4.dialpeers as s1_dialpeer,
                   t_dp.vendor_id as s1_vendor_id,
                   t_dp.account_id as s1_vendor_account_id,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.lcr_rate_multiplier AS dp_lcr_rate_multiplier,
                   t_dp.priority AS dp_priority,
                   t_dp.locked as dp_locked,
@@ -10174,8 +10260,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
                 WHERE
@@ -10224,8 +10310,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                     ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
@@ -10275,8 +10361,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                   rank() OVER (
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                   ) as exclusive_rank,
-                  ((t_dp.next_rate - first_value(t_dp.next_rate) OVER(ORDER BY t_dp.next_rate ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate + t_dp.priority) - t_dp.priority AS r2,
-                  t_dp.next_rate as dp_next_rate,
+                  ((t_dp.next_rate_system_currency - first_value(t_dp.next_rate_system_currency) OVER(ORDER BY t_dp.next_rate_system_currency ASC)) > v_rp.rate_delta_max)::INTEGER *(t_dp.next_rate_system_currency + t_dp.priority) - t_dp.priority AS r2,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
@@ -10327,8 +10413,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                     ORDER BY t_dp.exclusive_route desc -- force top rank for exclusive route
                   ) as exclusive_rank,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled
                 FROM class4.dialpeers t_dp
                 WHERE
@@ -10382,8 +10468,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                     ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
                   ) as r2,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.locked as dp_locked,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
@@ -10449,8 +10535,8 @@ CREATE FUNCTION switch22.route_release(i_node_id integer, i_pop_id integer, i_pr
                     ORDER BY length(prefix_range(coalesce(rpsr.prefix,''))) desc
                   ) as r2,
                   t_dp.priority as dp_metric_priority,
-                  t_dp.next_rate*t_dp.lcr_rate_multiplier as dp_metric,
-                  t_dp.next_rate as dp_next_rate,
+                  t_dp.next_rate_system_currency*t_dp.lcr_rate_multiplier as dp_metric,
+                  t_dp.next_rate_system_currency as dp_next_rate,
                   t_dp.enabled as dp_enabled,
                   t_dp.force_hit_rate as dp_force_hit_rate,
                   rpsr.priority as rpsr_priority,
@@ -13436,7 +13522,8 @@ CREATE TABLE data_import.import_destinations (
     is_changed boolean,
     cdo smallint,
     scheduler_id smallint,
-    scheduler_name character varying
+    scheduler_name character varying,
+    currency_id smallint
 );
 
 
@@ -13512,7 +13599,8 @@ CREATE TABLE data_import.import_dialpeers (
     src_name_rewrite_rule character varying,
     src_name_rewrite_result character varying,
     scheduler_id smallint,
-    scheduler_name character varying
+    scheduler_name character varying,
+    currency_id smallint
 );
 
 
@@ -18641,6 +18729,13 @@ CREATE INDEX dialpeers_account_id_idx ON class4.dialpeers USING btree (account_i
 
 
 --
+-- Name: dialpeers_currency_id_idx; Type: INDEX; Schema: class4; Owner: -
+--
+
+CREATE INDEX dialpeers_currency_id_idx ON class4.dialpeers USING btree (currency_id);
+
+
+--
 -- Name: dialpeers_external_id_idx; Type: INDEX; Schema: class4; Owner: -
 --
 
@@ -19425,6 +19520,14 @@ ALTER TABLE ONLY class4.destination_next_rates
 
 
 --
+-- Name: destinations destinations_currency_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.destinations
+    ADD CONSTRAINT destinations_currency_id_fkey FOREIGN KEY (currency_id) REFERENCES billing.currencies(id);
+
+
+--
 -- Name: destinations destinations_rate_group_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
 --
 
@@ -19454,6 +19557,14 @@ ALTER TABLE ONLY class4.dialpeer_next_rates
 
 ALTER TABLE ONLY class4.dialpeers
     ADD CONSTRAINT dialpeers_account_id_fkey FOREIGN KEY (account_id) REFERENCES billing.accounts(id);
+
+
+--
+-- Name: dialpeers dialpeers_currency_id_fkey; Type: FK CONSTRAINT; Schema: class4; Owner: -
+--
+
+ALTER TABLE ONLY class4.dialpeers
+    ADD CONSTRAINT dialpeers_currency_id_fkey FOREIGN KEY (currency_id) REFERENCES billing.currencies(id);
 
 
 --
@@ -20295,7 +20406,9 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260414000000'),
 ('20260409000000'),
+('20260408000000'),
 ('20260407000000'),
 ('20260406000000'),
 ('20260404183736'),

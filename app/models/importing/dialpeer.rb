@@ -45,6 +45,7 @@
 #  valid_till                  :datetime
 #  vendor_name                 :string
 #  account_id                  :integer(4)
+#  currency_id                 :integer(2)
 #  gateway_group_id            :integer(4)
 #  gateway_id                  :integer(4)
 #  o_id                        :bigint(8)

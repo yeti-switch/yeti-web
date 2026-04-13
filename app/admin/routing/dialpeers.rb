@@ -258,6 +258,7 @@ ActiveAdmin.register Dialpeer do
       f.input :initial_rate
       f.input :next_interval
       f.input :next_rate
+      f.input :currency_id, as: :select, collection: Billing::Currency.order(:name), input_html: { class: 'tom-select' }
       f.input :lcr_rate_multiplier
       f.input :connect_fee
       f.input :reverse_billing

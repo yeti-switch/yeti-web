@@ -290,7 +290,11 @@ CREATE TYPE switch.dynamic_cdr_data_ty AS (
 	package_counter_id bigint,
 	src_network_type_id smallint,
 	dst_network_type_id smallint,
-	destination_cdo smallint
+	destination_cdo smallint,
+	customer_currency_id smallint,
+	vendor_currency_id smallint,
+	customer_currency_rate double precision,
+	vendor_currency_rate double precision
 );
 
 
@@ -571,7 +575,11 @@ CREATE TABLE cdr.cdr (
     dst_network_type_id smallint,
     auth_orig_lat real,
     auth_orig_lon real,
-    cdo smallint
+    cdo smallint,
+    customer_currency_id smallint,
+    vendor_currency_id smallint,
+    customer_currency_rate double precision,
+    vendor_currency_rate double precision
 )
 PARTITION BY RANGE (time_start);
 
@@ -1298,6 +1306,8 @@ BEGIN
   v_cdr.customer_account_check_balance=v_dynamic.customer_acc_check_balance;
   v_cdr.customer_acc_external_id=v_dynamic.customer_acc_external_id;
   v_cdr.customer_acc_vat:=v_dynamic.customer_acc_vat;
+  v_cdr.customer_currency_id:=v_dynamic.customer_currency_id;
+  v_cdr.customer_currency_rate:=v_dynamic.customer_currency_rate;
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
@@ -1308,6 +1318,8 @@ BEGIN
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
   v_cdr.vendor_acc_id:=v_dynamic.vendor_acc_id;
   v_cdr.vendor_acc_external_id:=v_dynamic.vendor_acc_external_id;
+  v_cdr.vendor_currency_id:=v_dynamic.vendor_currency_id;
+  v_cdr.vendor_currency_rate:=v_dynamic.vendor_currency_rate;
 
   v_cdr.destination_id:=v_dynamic.destination_id;
   v_cdr.destination_prefix:=v_dynamic.destination_prefix;
@@ -1555,6 +1567,8 @@ BEGIN
   v_cdr.customer_account_check_balance=v_dynamic.customer_acc_check_balance;
   v_cdr.customer_acc_external_id=v_dynamic.customer_acc_external_id;
   v_cdr.customer_acc_vat:=v_dynamic.customer_acc_vat;
+  v_cdr.customer_currency_id:=v_dynamic.customer_currency_id;
+  v_cdr.customer_currency_rate:=v_dynamic.customer_currency_rate;
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
@@ -1565,6 +1579,8 @@ BEGIN
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
   v_cdr.vendor_acc_id:=v_dynamic.vendor_acc_id;
   v_cdr.vendor_acc_external_id:=v_dynamic.vendor_acc_external_id;
+  v_cdr.vendor_currency_id:=v_dynamic.vendor_currency_id;
+  v_cdr.vendor_currency_rate:=v_dynamic.vendor_currency_rate;
 
   v_cdr.package_counter_id = v_dynamic.package_counter_id;
   v_cdr.destination_id:=v_dynamic.destination_id;
@@ -1826,6 +1842,8 @@ BEGIN
   v_cdr.customer_account_check_balance=v_dynamic.customer_acc_check_balance;
   v_cdr.customer_acc_external_id=v_dynamic.customer_acc_external_id;
   v_cdr.customer_acc_vat:=v_dynamic.customer_acc_vat;
+  v_cdr.customer_currency_id:=v_dynamic.customer_currency_id;
+  v_cdr.customer_currency_rate:=v_dynamic.customer_currency_rate;
 
   v_cdr.customer_auth_id:=v_dynamic.customer_auth_id;
   v_cdr.customer_auth_external_id:=v_dynamic.customer_auth_external_id;
@@ -1836,6 +1854,8 @@ BEGIN
   v_cdr.vendor_external_id:=v_dynamic.vendor_external_id;
   v_cdr.vendor_acc_id:=v_dynamic.vendor_acc_id;
   v_cdr.vendor_acc_external_id:=v_dynamic.vendor_acc_external_id;
+  v_cdr.vendor_currency_id:=v_dynamic.vendor_currency_id;
+  v_cdr.vendor_currency_rate:=v_dynamic.vendor_currency_rate;
 
   v_cdr.package_counter_id = v_dynamic.package_counter_id;
 
@@ -2000,15 +2020,15 @@ BEGIN
   v_cdr.vendor_price = switch.vendor_price_round(v_config, v_cdr.vendor_price);
 
   if v_cdr.destination_reverse_billing THEN
-    v_cdr.profit = - v_cdr.customer_price;
+    v_cdr.profit = - v_cdr.customer_price * COALESCE(v_cdr.customer_currency_rate, 1);
   else
-    v_cdr.profit = v_cdr.customer_price;
+    v_cdr.profit = v_cdr.customer_price * COALESCE(v_cdr.customer_currency_rate, 1);
   end if;
 
   if v_cdr.dialpeer_reverse_billing THEN
-    v_cdr.profit = v_cdr.profit + v_cdr.vendor_price;
+    v_cdr.profit = v_cdr.profit + v_cdr.vendor_price * COALESCE(v_cdr.vendor_currency_rate, 1);
   else
-    v_cdr.profit = v_cdr.profit - v_cdr.vendor_price;
+    v_cdr.profit = v_cdr.profit - v_cdr.vendor_price * COALESCE(v_cdr.vendor_currency_rate, 1);
   end if;
 
   -- generate event to billing engine
@@ -4758,6 +4778,7 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260408000000'),
 ('20260220161536'),
 ('20251225154315'),
 ('20251011175010'),

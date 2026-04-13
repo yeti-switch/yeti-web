@@ -60,6 +60,10 @@ module ApplicationHelper
     @routing_tags_map ||= Routing::RoutingTag.all.pluck(:id, :name).to_h
   end
 
+  def currencies_map
+    @currencies_map ||= Billing::Currency.pluck(:id, :name).to_h
+  end
+
   def tag_action_value_options
     @tag_action_value_options ||= Routing::RoutingTag.all.map { |record| [record.display_name, record.id] }
   end

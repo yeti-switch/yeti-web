@@ -9,6 +9,7 @@
 #  asr_limit                 :float(24)        default(0.0), not null
 #  capacity                  :integer(2)
 #  connect_fee               :decimal(, )      default(0.0), not null
+#  currency_rate             :float            default(1.0), not null
 #  dst_number_max_length     :integer(2)       default(100), not null
 #  dst_number_min_length     :integer(2)       default(0), not null
 #  dst_rewrite_result        :string
@@ -22,6 +23,7 @@
 #  locked                    :boolean          default(FALSE), not null
 #  next_interval             :integer(4)       default(1), not null
 #  next_rate                 :decimal(, )      not null
+#  next_rate_system_currency :decimal(, )      not null
 #  prefix                    :string           not null
 #  priority                  :integer(4)       default(100), not null
 #  reverse_billing           :boolean          default(FALSE), not null
@@ -35,6 +37,7 @@
 #  valid_till                :timestamptz      not null
 #  created_at                :timestamptz      not null
 #  account_id                :integer(4)       not null
+#  currency_id               :integer(2)       not null
 #  current_rate_id           :bigint(8)
 #  external_id               :bigint(8)
 #  gateway_group_id          :integer(4)
@@ -49,6 +52,7 @@
 # Indexes
 #
 #  dialpeers_account_id_idx                           (account_id)
+#  dialpeers_currency_id_idx                          (currency_id)
 #  dialpeers_external_id_idx                          (external_id)
 #  dialpeers_prefix_range_idx                         (((prefix)::prefix_range)) USING gist
 #  dialpeers_prefix_range_valid_from_valid_till_idx   (((prefix)::prefix_range), valid_from, valid_till) WHERE enabled USING gist
@@ -59,6 +63,7 @@
 # Foreign Keys
 #
 #  dialpeers_account_id_fkey                 (account_id => accounts.id)
+#  dialpeers_currency_id_fkey                (currency_id => currencies.id)
 #  dialpeers_gateway_group_id_fkey           (gateway_group_id => gateway_groups.id)
 #  dialpeers_gateway_id_fkey                 (gateway_id => gateways.id)
 #  dialpeers_routeset_discriminator_id_fkey  (routeset_discriminator_id => routeset_discriminators.id)

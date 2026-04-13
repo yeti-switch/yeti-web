@@ -34,6 +34,7 @@
 #  use_dp_intervals         :boolean
 #  valid_from               :timestamptz
 #  valid_till               :timestamptz
+#  currency_id              :integer(2)
 #  network_prefix_id        :integer(4)
 #  o_id                     :bigint(8)
 #  profit_control_mode_id   :integer(2)

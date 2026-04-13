@@ -81,16 +81,28 @@ class CdrDecorator < Draper::Decorator
   end
 
   def decorated_customer_price
+    currency_name = h.currencies_map[customer_currency_id]
     h.safe_join([
                   customer_price,
+                  *(h.tag.span(currency_name, class: 'status_tag') if currency_name),
                   *(h.tag.span('R', class: 'status_tag red') if destination_reverse_billing)
                 ], ' ')
   end
 
   def decorated_vendor_price
+    currency_name = h.currencies_map[vendor_currency_id]
     h.safe_join([
                   vendor_price,
+                  *(h.tag.span(currency_name, class: 'status_tag') if currency_name),
                   *(h.tag.span('R', class: 'status_tag red') if dialpeer_reverse_billing)
+                ], ' ')
+  end
+
+  def decorated_profit
+    system_currency_name = h.currencies_map[0]
+    h.safe_join([
+                  profit,
+                  *(h.tag.span(system_currency_name, class: 'status_tag') if system_currency_name)
                 ], ' ')
   end
 

@@ -29,6 +29,7 @@
 #  uuid                   :uuid             not null
 #  valid_from             :timestamptz      not null
 #  valid_till             :timestamptz      not null
+#  currency_id            :integer(2)       not null
 #  external_id            :bigint(8)
 #  network_prefix_id      :integer(4)
 #  profit_control_mode_id :integer(2)
@@ -45,6 +46,7 @@
 #
 # Foreign Keys
 #
+#  destinations_currency_id_fkey    (currency_id => currencies.id)
 #  destinations_rate_group_id_fkey  (rate_group_id => rate_groups.id)
 #  destinations_scheduler_id_fkey   (scheduler_id => schedulers.id)
 #

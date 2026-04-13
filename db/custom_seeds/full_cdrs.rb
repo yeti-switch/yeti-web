@@ -9,8 +9,37 @@ routing_plan = Routing::RoutingPlan.find_or_create_by!(name: 'seed_routing_plan'
 rate_plan = Routing::Rateplan.find_or_create_by!(name: 'seed_routing_plan')
 customer = Contractor.find_or_create_by!(name: 'seed_customer22', enabled: true, vendor: false, customer: true)
 customer_acc = Account.find_or_create_by!(name: 'seed_customer_acc22', contractor: customer)
-customer_gw = Gateway.find_or_create_by!(name: 'seed_customer_gw22', contractor: customer, allow_origination: true, allow_termination: false, enabled: true, incoming_auth_password: 'pw', incoming_auth_username: 'us')
-customer_auth = CustomersAuth.find_or_create_by!(name: 'seed_customer_auth22', customer: customer, account: customer_acc, gateway: customer_gw, routing_plan: routing_plan, rateplan: rate_plan, require_incoming_auth: true)
+
+# Currencies for CDR display testing: system currency (id=0) always exists with rate=1
+# Create a couple of non-base currencies with sample rates
+seed_currencies = [
+  { name: 'USD', rate: 1.08 },
+  { name: 'UAH', rate: 0.024 }
+]
+seed_currencies.each do |attrs|
+  Billing::Currency.find_or_create_by!(name: attrs[:name]) do |c|
+    c.rate = attrs[:rate]
+  end
+end
+
+# Pool of currencies to assign to CDRs: system currency (id=0) + USD + UAH
+cdr_currencies = Billing::Currency.where(id: 0).or(Billing::Currency.where(name: %w[USD UAH])).to_a
+customer_gw = Gateway.find_or_create_by!(name: 'seed_customer_gw22') do |r|
+  r.contractor = customer
+  r.allow_origination = true
+  r.allow_termination = false
+  r.enabled = true
+  r.incoming_auth_password = 'pw'
+  r.incoming_auth_username = 'us'
+end
+customer_auth = CustomersAuth.find_or_create_by!(name: 'seed_customer_auth22') do |r|
+  r.customer = customer
+  r.account = customer_acc
+  r.gateway = customer_gw
+  r.routing_plan = routing_plan
+  r.rateplan = rate_plan
+  r.require_incoming_auth = true
+end
 pop = Pop.find_or_create_by!(id: 100_500, name: 'seed-UA')
 package_counter = Billing::PackageCounter.find_or_create_by!(account_id: customer_acc.id, exclude: false, duration: 1200, prefix: 'test')
 
@@ -73,9 +102,13 @@ sample_rpid_privacy_values = [nil, 'full', 'name', 'uri', 'off'].freeze
     success = false
   end
 
-  vp = rand(0..0.99)
-  cp = vp + rand(0.01..0.99)
-  prof = cp - vp
+  customer_currency = cdr_currencies.sample
+  vendor_currency = cdr_currencies.sample
+
+  vp = rand(0..0.99).round(6)
+  cp = (vp + rand(0.01..0.99)).round(6)
+  prof = (cp * customer_currency.rate - vp * vendor_currency.rate).round(6)
+
   Cdr::Cdr.create!(
     time_start: initial_time,
     time_connect: connect_time,
@@ -112,8 +145,12 @@ sample_rpid_privacy_values = [nil, 'full', 'name', 'uri', 'off'].freeze
     duration: dur,
     customer_duration: [nil, dur].sample,
     customer_price: cp,
+    customer_currency_id: customer_currency.id,
+    customer_currency_rate: customer_currency.rate,
     vendor_duration: [nil, dur].sample,
     vendor_price: vp,
+    vendor_currency_id: vendor_currency.id,
+    vendor_currency_rate: vendor_currency.rate,
     profit: prof,
     dst_country: System::Country.offset(rand(System::Country.count)).first,
     dst_network: System::Network.offset(rand(System::Network.count)).first,
