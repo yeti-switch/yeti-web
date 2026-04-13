@@ -16,8 +16,8 @@ func_name = ARGV[0]
 sql_file  = ARGV[1] || File.join(__dir__, '..', 'db', 'structure.sql')
 
 if func_name.nil?
-  warn "Usage: #{File.basename($0)} <schema.function_name> [sql_file]"
-  warn "Example: #{File.basename($0)} switch22.route"
+  warn "Usage: #{File.basename($PROGRAM_NAME)} <schema.function_name> [sql_file]"
+  warn "Example: #{File.basename($PROGRAM_NAME)} switch22.route"
   exit 1
 end
 
@@ -26,42 +26,45 @@ unless File.exist?(sql_file)
   exit 1
 end
 
+def detect_delimiter(line)
+  Regexp.escape(Regexp.last_match(1)) if line =~ /\bAS\s+(\$[^$]*\$)\s*$/i
+end
+
+# Collects all lines of one function body starting at lines[start_idx].
+# Returns [buf, next_i] where next_i is the index after the closing delimiter.
+def collect_function(lines, start_idx)
+  buf       = []
+  delimiter = nil
+  i         = start_idx
+
+  while i < lines.length
+    buf << lines[i]
+    delimiter = detect_delimiter(buf.last) if delimiter.nil?
+    if delimiter && lines[i].strip =~ /\A#{delimiter};\z/
+      return [buf, i + 1]
+    end
+
+    i += 1
+  end
+
+  [buf, i]
+end
+
 # Matches the start of any CREATE [OR REPLACE] FUNCTION <name>(
 start_re = /\ACREATE (?:OR REPLACE |or replace )?FUNCTION\s+#{Regexp.escape(func_name)}\s*\(/i
 
 lines     = File.readlines(sql_file)
-results   = []   # array of extracted function strings
+results   = [] # array of extracted function strings
 i         = 0
 
 while i < lines.length
   line = lines[i]
 
   if line.match?(start_re)
-    buf       = []
-    delimiter = nil
-
-    # Collect lines until closing delimiter
-    while i < lines.length
-      buf << lines[i]
-
-      # Detect dollar-quote delimiter from "AS $$" or "AS $_$" etc.
-      if delimiter.nil? && buf.last =~ /\bAS\s+(\$[^$]*\$)\s*$/i
-        delimiter = Regexp.escape($1)
-      end
-
-      # Closing line is the delimiter followed by a semicolon (optional whitespace)
-      if delimiter && lines[i].strip =~ /\A#{delimiter};\z/
-        i += 1
-        break
-      end
-
-      i += 1
-    end
-
-    # Rewrite CREATE FUNCTION -> CREATE OR REPLACE FUNCTION
+    buf, i = collect_function(lines, i)
     buf[0] = buf[0].sub(/\ACREATE FUNCTION/i, 'CREATE OR REPLACE FUNCTION')
     results << buf.join
-    next  # i already advanced inside inner loop
+    next # i already advanced inside collect_function
   end
 
   i += 1

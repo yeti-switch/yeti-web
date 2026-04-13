@@ -100,6 +100,7 @@ FactoryBot.define do
 
     association :routing_group
     association :routeset_discriminator
+    association :currency, factory: :currency
 
     after :build do |dialpeer|
       dialpeer.vendor ||= create(:contractor, vendor: true)

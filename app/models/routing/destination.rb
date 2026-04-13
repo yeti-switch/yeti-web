@@ -55,6 +55,7 @@ class Routing::Destination < ApplicationRecord
   self.table_name = 'class4.destinations'
 
   belongs_to :rate_group, class_name: 'Routing::RateGroup', foreign_key: :rate_group_id
+  belongs_to :currency, class_name: 'Billing::Currency', foreign_key: :currency_id
   has_many :rateplans, class_name: 'Routing::Rateplan', through: :rate_group
   has_many :customers_auths, through: :rateplans
 
