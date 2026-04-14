@@ -7,6 +7,7 @@ shared_context :init_importing_dialpeer do |args|
 
   before do
     rtm_id = Routing::RoutingTagMode::MODES.keys.sample
+    currency = FactoryBot.create(:currency)
 
     fields = {
       enabled: true,
@@ -39,6 +40,7 @@ shared_context :init_importing_dialpeer do |args|
       routing_tag_mode_id: rtm_id,
       routeset_discriminator_id: @routeset_discriminator.id,
       routeset_discriminator_name: @routeset_discriminator.name,
+      currency_id: currency.id,
       is_changed: true
     }.merge(args)
 

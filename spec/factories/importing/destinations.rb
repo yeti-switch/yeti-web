@@ -9,6 +9,7 @@
 #  asr_limit                :float(24)
 #  cdo                      :integer(2)
 #  connect_fee              :decimal(, )
+#  currency_name            :string
 #  dp_margin_fixed          :decimal(, )
 #  dp_margin_percent        :decimal(, )
 #  dst_number_max_length    :integer(4)
@@ -73,6 +74,7 @@ FactoryBot.define do
     acd_limit { 0.0 }
     short_calls_limit { 0.0 }
     reverse_billing { false }
+    currency_id { 0 }
 
     dst_number_min_length { 1 }
     dst_number_max_length { 7 }

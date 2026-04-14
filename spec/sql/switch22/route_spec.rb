@@ -613,7 +613,8 @@ RSpec.describe '#routing logic' do
                                   initial_rate: destination_rate,
                                   next_rate: destination_rate,
                                   rate_group_id: rate_group.id,
-                                  allow_package_billing: destination_allow_package_billing)
+                                  allow_package_billing: destination_allow_package_billing,
+                                  currency: customer_account.currency)
       }
       let!(:destination_allow_package_billing) { false }
       let!(:destination_rate) { 0.11 }
@@ -649,7 +650,8 @@ RSpec.describe '#routing logic' do
                vendor_id: vendor.id,
                account_id: vendor_account.id,
                gateway_id: dialpeer_gateway_id,
-               gateway_group_id: dialpeer_gateway_group_id)
+               gateway_group_id: dialpeer_gateway_group_id,
+               currency: vendor_account.currency)
       }
 
       let(:dialpeer_gateway_id) { vendor_gateway.id }
@@ -899,6 +901,88 @@ RSpec.describe '#routing logic' do
           expect(subject.first[:disconnect_code_id]).to eq(nil)
           expect(subject.first[:destination_initial_rate]).to eq(destination_rate)
           expect(subject.first[:time_limit]).to eq(1200)
+          expect(subject.first[:customer_currency_id]).to eq(customer_account.currency_id)
+          expect(subject.first[:customer_currency_rate]).to eq(customer_account.currency.rate)
+          expect(subject.first[:vendor_currency_id]).to eq(vendor_account.currency_id)
+          expect(subject.first[:vendor_currency_rate]).to eq(vendor_account.currency.rate)
+          expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES)
+        end
+      end
+
+      context 'Authorized, each object has different currency, rates are converted' do
+        let!(:customer_currency) { create(:currency, rate: 2.0) }
+        let!(:destination_currency) { create(:currency, rate: 6.0) }
+        let!(:vendor_currency) { create(:currency, rate: 0.5) }
+        let!(:dialpeer_currency) { create(:currency, rate: 3.0) }
+
+        let!(:customer_account_balance) { 60 }
+        let!(:customer_account_min_balance) { 0 }
+        let!(:customer_auth_check_account_balance) { true }
+
+        # Override accounts with explicit currencies
+        let!(:customer_account) {
+          create(:account,
+                 contractor: customer,
+                 destination_rate_limit: customer_account_destination_rate_limit,
+                 min_balance: customer_account_min_balance,
+                 balance: customer_account_balance,
+                 max_call_duration: customer_account_max_call_duration,
+                 currency: customer_currency)
+        }
+        let!(:vendor_account) {
+          create(:account, contractor: vendor, max_balance: 100_500, currency: vendor_currency)
+        }
+
+        # Override destination and dialpeer with their own currencies
+        let!(:destination_rate) { 1.0 }
+        let!(:destination_initial_interval) { 1 }
+        let!(:destination_next_interval) { 1 }
+        let!(:destination) {
+          create(:destination,
+                 prefix: '',
+                 enabled: true,
+                 initial_interval: destination_initial_interval,
+                 next_interval: destination_next_interval,
+                 initial_rate: destination_rate,
+                 next_rate: destination_rate,
+                 rate_group_id: rate_group.id,
+                 allow_package_billing: destination_allow_package_billing,
+                 currency: destination_currency)
+        }
+        let!(:dialpeer) {
+          create(:dialpeer,
+                 prefix: '',
+                 enabled: true,
+                 routing_group_id: routing_group.id,
+                 vendor_id: vendor.id,
+                 account_id: vendor_account.id,
+                 initial_rate: 1.0,
+                 next_rate: 1.0,
+                 gateway_id: dialpeer_gateway_id,
+                 gateway_group_id: dialpeer_gateway_group_id,
+                 currency: dialpeer_currency)
+        }
+
+        it 'applies currency conversion to destination and dialpeer rates' do
+          # dst multiplier = destination_currency.rate / customer_currency.rate = 6.0 / 2.0 = 3.0
+          # dp  multiplier = dialpeer_currency.rate  / vendor_currency.rate    = 3.0 / 0.5 = 6.0
+          expect(subject.size).to eq(2)
+          expect(subject.first[:disconnect_code_id]).to eq(nil)
+
+          expect(subject.first[:customer_currency_id]).to eq(customer_currency.id)
+          expect(subject.first[:customer_currency_rate]).to eq(customer_currency.rate)
+          expect(subject.first[:vendor_currency_id]).to eq(vendor_currency.id)
+          expect(subject.first[:vendor_currency_rate]).to eq(vendor_currency.rate)
+
+          # destination rate converted: 1.0 * 3.0 = 3.0
+          expect(subject.first[:destination_initial_rate]).to eq(destination_rate * 3.0)
+          # time_limit: same formula, same result because rate*multiplier = 3.0
+          expect(subject.first[:time_limit]).to eq(1200)
+
+          # dialpeer rate converted: 1.0 * 6.0 = 6.0
+          expect(subject.first[:dialpeer_initial_rate]).to eq(1.0 * 6.0)
+          expect(subject.first[:dialpeer_next_rate]).to eq(1.0 * 6.0)
+
           expect(subject.second[:disconnect_code_id]).to eq(DisconnectCode::DC_NO_ROUTES)
         end
       end
