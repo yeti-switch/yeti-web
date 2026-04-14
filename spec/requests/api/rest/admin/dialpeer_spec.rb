@@ -34,6 +34,7 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
     let(:routeset_discriminator) { Routing::RoutesetDiscriminator.take || FactoryBot.create(:routeset_discriminator) }
     let(:gateway) { FactoryBot.create(:gateway, vendor: vendor) }
     let(:routing_tag_mode_id) { Routing::RoutingTagMode::MODES.keys.sample }
+    let(:currency) { FactoryBot.create(:currency) }
 
     let(:json_api_request_body) do
       {
@@ -57,7 +58,8 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
         'valid-from': '2020-02-02',
         'valid-till': '2020-02-03',
         'routing-tag-ids': [tag_ua.id],
-        'routing-tag-mode-id': routing_tag_mode_id
+        'routing-tag-mode-id': routing_tag_mode_id,
+        'currency': currency.name
       }
     end
     let(:json_api_request_relationships) do
@@ -113,7 +115,8 @@ RSpec.describe Api::Rest::Admin::DialpeersController do
           'reverse-billing': true,
           locked: false,
           prefix: '_test_',
-          priority: 100
+          priority: 100,
+          currency: currency.name
         }
       end
     end

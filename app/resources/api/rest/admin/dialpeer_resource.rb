@@ -48,6 +48,10 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :external_id, type: :number
   ransack_filter :routing_tag_mode_id, type: :number
 
+  def self.records(options = {})
+    super(options).includes([:currency])
+  end
+
   def currency
     _model.currency&.name
   end

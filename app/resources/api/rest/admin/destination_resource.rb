@@ -51,6 +51,10 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
     records.ransack(country_id_filter: values).result
   }
 
+  def self.records(options = {})
+    super(options).includes([:currency])
+  end
+
   def currency
     _model.currency&.name
   end

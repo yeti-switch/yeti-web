@@ -12,7 +12,7 @@ RSpec.resource 'Destinations' do
   ]
   optional_params = %i[
     prefix reject-calls use-dp-intervals valid-from valid-till external-id routing-tag-ids
-    dst_number-min-length dst-number-max-length reverse-billing profit-control-mode-id rate-policy-id
+    dst_number-min-length dst-number-max-length reverse-billing profit-control-mode-id rate-policy-id currency
   ]
 
   required_relationships = %i[rate-group]
@@ -43,7 +43,9 @@ RSpec.resource 'Destinations' do
     jsonapi_relationships(required_relationships, optional_relationships)
 
     let(:'rate-group') { wrap_relationship(:'rate-groups', create(:rate_group).id) }
+    let(:new_currency) { create :currency }
     let(:enabled) { true }
+    let(:currency) { new_currency.name }
     let(:'initial-interval') { 60 }
     let(:'next-interval') { 60 }
     let(:'initial-rate') { 0 }
