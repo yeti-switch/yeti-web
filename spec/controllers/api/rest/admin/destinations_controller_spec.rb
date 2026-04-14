@@ -423,6 +423,8 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
     end
 
     context 'when attributes are valid' do
+      let(:currency) { create :currency }
+
       let(:attributes) do
         { prefix: 'test',
           enabled: true,
@@ -436,7 +438,8 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :controller do
           'dp-margin-percent': 0,
           'profit-control-mode-id': Routing::RateProfitControlMode::MODE_PER_CALL,
           'rate-policy-id': Routing::DestinationRatePolicy::POLICY_MIN,
-          'routing-tag-mode-id': Routing::RoutingTagMode::MODE_AND }
+          'routing-tag-mode-id': Routing::RoutingTagMode::MODE_AND,
+          currency: currency.name }
       end
 
       let(:relationships) do
