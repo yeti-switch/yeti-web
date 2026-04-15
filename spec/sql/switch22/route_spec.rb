@@ -648,7 +648,7 @@ RSpec.describe '#routing logic' do
                enabled: true,
                routing_group_id: routing_group.id,
                vendor_id: vendor.id,
-               account_id: vendor_account.id,
+               account: vendor_account,
                gateway_id: dialpeer_gateway_id,
                gateway_group_id: dialpeer_gateway_group_id,
                currency: vendor_account.currency)
@@ -777,7 +777,7 @@ RSpec.describe '#routing logic' do
       end
 
       context 'Authorized, customer auth CPS Limit' do
-        let!(:customer_auth_cps_limit) { 5 }
+        let!(:customer_auth_cps_limit) { 2 }
 
         # calling routing sp 100 times to consume cps limit
         before do
@@ -955,7 +955,7 @@ RSpec.describe '#routing logic' do
                  enabled: true,
                  routing_group_id: routing_group.id,
                  vendor_id: vendor.id,
-                 account_id: vendor_account.id,
+                 account: vendor_account,
                  initial_rate: 1.0,
                  next_rate: 1.0,
                  gateway_id: dialpeer_gateway_id,
