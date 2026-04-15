@@ -966,7 +966,6 @@ RSpec.describe '#routing logic' do
         it 'applies currency conversion to destination and dialpeer rates' do
           # dst multiplier = destination_currency.rate / customer_currency.rate = 6.0 / 2.0 = 3.0
           # dp  multiplier = dialpeer_currency.rate  / vendor_currency.rate    = 3.0 / 0.5 = 6.0
-          puts "DEBUG routing response (#{subject.size} rows): #{subject.map { |r| r.slice(:disconnect_code_id, :dialpeer_id, :destination_id, :customer_currency_id, :vendor_currency_id) }.inspect}"
           expect(subject.size).to eq(2)
           expect(subject.first[:disconnect_code_id]).to eq(nil)
 

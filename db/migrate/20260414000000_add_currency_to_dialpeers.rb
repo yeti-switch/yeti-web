@@ -14,6 +14,8 @@ class AddCurrencyToDialpeers < ActiveRecord::Migration[7.2]
       ALTER TABLE data_import.import_dialpeers ADD COLUMN currency_id smallint;
 
       CREATE INDEX dialpeers_currency_id_idx ON class4.dialpeers (currency_id);
+
+      ALTER TYPE switch22.call_ctx_ty ADD ATTRIBUTE destination_currency_rate double precision;
 }
 
     execute %q{
@@ -166,7 +168,7 @@ BEGIN
   -- destination currency conversion
   v_dst_currency_multiplier := 1.0;
   IF i_destination.currency_id != i_customer_acc.currency_id THEN
-    v_dst_currency_multiplier := (SELECT rate FROM billing.currencies WHERE id = i_destination.currency_id) / i_profile.customer_currency_rate;
+    v_dst_currency_multiplier := i_call_ctx.destination_currency_rate / i_profile.customer_currency_rate;
     IF i_profile.package_counter_id IS NULL THEN
       i_profile.destination_initial_rate := (i_profile.destination_initial_rate::numeric * v_dst_currency_multiplier)::varchar;
       i_profile.destination_next_rate := (i_profile.destination_next_rate::numeric * v_dst_currency_multiplier)::varchar;
@@ -1997,6 +1999,8 @@ CREATE OR REPLACE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i
         RAISE NOTICE '% ms -> DST. found: %',EXTRACT(MILLISECOND from v_end-v_start),row_to_json(v_destination, true);
         /*}dbg*/
 
+        v_call_ctx.destination_currency_rate = (SELECT rate FROM billing.currencies WHERE id = v_destination.currency_id);
+
         v_ret.destination_id = v_destination.id;
         v_ret.destination_prefix = v_destination.prefix;
         v_ret.destination_initial_interval = v_destination.initial_interval;
@@ -2031,7 +2035,7 @@ CREATE OR REPLACE FUNCTION switch22.route(i_node_id integer, i_pop_id integer, i
 
         select into v_rateplan * from class4.rateplans where id=v_customer_auth_normalized.rateplan_id;
         if COALESCE(v_destination.profit_control_mode_id,v_rateplan.profit_control_mode_id)=2 then -- per call
-          v_rate_limit=(v_destination.next_rate * (SELECT rate FROM billing.currencies WHERE id = v_destination.currency_id))::float;
+          v_rate_limit=(v_destination.next_rate * v_call_ctx.destination_currency_rate)::float;
         end if;
 
 
@@ -4932,6 +4936,7 @@ $_$;
       ALTER TABLE class4.dialpeers DROP COLUMN IF EXISTS next_rate_system_currency;
       ALTER TABLE class4.dialpeers DROP COLUMN IF EXISTS currency_rate;
       ALTER TABLE class4.dialpeers DROP COLUMN IF EXISTS currency_id;
+      ALTER TYPE switch22.call_ctx_ty DROP ATTRIBUTE IF EXISTS destination_currency_rate;
 }
   end
 end
