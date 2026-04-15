@@ -101,7 +101,7 @@ class Account < ApplicationRecord
   validates :min_balance, numericality: true, if: -> { min_balance.present? }
   validates :balance, numericality: true
   validates :uuid, :name, uniqueness: true
-  validates :currency, :name, :timezone, :vat, :max_balance, :min_balance, presence: true
+  validates :name, :timezone, :vat, :max_balance, :min_balance, presence: true
   validates :timezone, allow_nil: false, allow_blank: false, inclusion: {
     in: proc { Yeti::TimeZoneHelper.all },
     message: '%<value>s is not a valid timezone'

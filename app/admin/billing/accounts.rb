@@ -252,7 +252,7 @@ ActiveAdmin.register Account do
     f.inputs form_title do
       f.input :name
       f.contractor_input :contractor_id
-      f.input :currency, as: :select, include_blank: false, input_html: { class: 'tom-select', disabled: !f.object.new_record? }
+      f.input :currency_id, as: :select, required: true, include_blank: false, input_html: { class: 'tom-select', disabled: !f.object.new_record? }
       f.input :min_balance
       f.input :max_balance
       f.input :vat
