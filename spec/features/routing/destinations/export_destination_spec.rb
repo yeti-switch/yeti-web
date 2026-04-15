@@ -39,6 +39,7 @@ RSpec.describe 'Export Destination', type: :feature do
         ['Initial rate', item.initial_rate.to_s, anything],
         ['Next rate', item.next_rate.to_s, anything],
         ['Connect fee', item.connect_fee.to_s, anything],
+        ['Currency name', item.currency.name, anything],
         ['Dp margin fixed', item.dp_margin_fixed.to_s, anything],
         ['Dp margin percent', item.dp_margin_percent.to_s, anything],
         ['Profit control mode name', item.profit_control_mode_name, anything],

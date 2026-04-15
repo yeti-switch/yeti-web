@@ -44,6 +44,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                  :initial_interval, :next_interval,
                  :use_dp_intervals,
                  :initial_rate, :next_rate, :connect_fee,
+                 [:currency_name, proc { |row| row.currency.name }],
                  :dp_margin_fixed, :dp_margin_percent,
                  :profit_control_mode_name,
                  :valid_from, :valid_till,
@@ -136,7 +137,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     #
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
-      super.preload(:rate_group, network_prefix: %i[country network])
+      super.preload(:rate_group, :currency, network_prefix: %i[country network])
     end
   end
 
@@ -176,15 +177,11 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :valid_till, &:decorated_valid_till
 
     column :rate_policy, &:rate_policy_name
-    column :reverse_billing
     column :allow_package_billing
 
     ## fixed price
-    column :initial_interval
-    column :initial_rate
-    column :next_interval
-    column :next_rate
-    column :connect_fee
+    column :rates, &:decorated_rates
+    column :intervals, &:decorated_intervals
     column :use_dp_intervals
 
     # cost + X ( $ or % )
@@ -241,7 +238,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       end
     end
     f.inputs 'Fixed rating configuration' do
-      f.input :currency_id, as: :select, collection: Billing::Currency.order(:name), input_html: { class: 'tom-select' }
+      f.input :currency, as: :select, include_blank: false, input_html: { class: 'tom-select' }
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
@@ -302,6 +299,9 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
         end
         panel 'Fixed rating configuration' do
           attributes_table_for s do
+            row :currency do
+              status_tag s.currency.name
+            end
             row :initial_rate
             row :next_rate
             row :connect_fee

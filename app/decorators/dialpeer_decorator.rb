@@ -27,6 +27,25 @@ class DialpeerDecorator < BillingDecorator
     end
   end
 
+  def decorated_priority
+    h.safe_join([
+                  priority.to_s,
+                  *(h.tag.span('exclusive', class: 'status_tag orange') if exclusive_route)
+                ], ' ')
+  end
+
+  def decorated_intervals
+    "#{initial_interval}/#{next_interval}"
+  end
+
+  def decorated_rates
+    h.safe_join([
+                  "#{connect_fee} #{initial_rate}/#{next_rate}".chomp('/'),
+                  h.tag.span(currency.name, class: 'status_tag'),
+                  *(h.tag.span('R', class: 'status_tag red') if reverse_billing)
+                ], ' ')
+  end
+
   def decorated_valid_from
     is_valid_from? ? valid_from : h.content_tag(:font, valid_from, color: :red)
   end

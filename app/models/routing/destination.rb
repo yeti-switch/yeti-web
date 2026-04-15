@@ -102,7 +102,7 @@ class Routing::Destination < ApplicationRecord
     where_account(account_ids)
   }
 
-  validates :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
+  validates :currency, :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
                         :asr_limit, :acd_limit, :short_calls_limit, presence: true
   validates :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee, numericality: true

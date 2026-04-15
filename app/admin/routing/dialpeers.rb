@@ -27,6 +27,7 @@ ActiveAdmin.register Dialpeer do
                  [:scheduler_name, proc { |row| row.scheduler.try(:name) }],
                  :prefix, :priority, :force_hit_rate, :exclusive_route,
                  :initial_interval, :initial_rate, :next_interval, :next_rate, :connect_fee,
+                 [:currency_name, proc { |row| row.currency.name }],
                  :lcr_rate_multiplier,
                  [:gateway_name, proc { |row| row.gateway.try(:name) }],
                  [:gateway_group_name, proc { |row| row.gateway_group.try(:name) }],
@@ -67,7 +68,7 @@ ActiveAdmin.register Dialpeer do
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
       super.preload(:gateway, :gateway_group, :routing_group, :vendor, :account, :statistic,
-                    :routeset_discriminator, network_prefix: %i[country network])
+                    :currency, :routeset_discriminator, network_prefix: %i[country network])
     end
   end
 
@@ -102,15 +103,10 @@ ActiveAdmin.register Dialpeer do
     end
     column :routing_group
     column :routing_tags
-    column :priority
+    column :priority, &:decorated_priority
     column :force_hit_rate
-    column :exclusive_route
-    column :initial_interval
-    column :initial_rate
-    column :next_interval
-    column :next_rate
-    column :connect_fee
-    column :reverse_billing
+    column :rates, &:decorated_rates
+    column :intervals, &:decorated_intervals
     column :lcr_rate_multiplier
     column :gateway do |c|
       auto_link(c.gateway, c.gateway.decorated_termination_display_name) unless c.gateway.nil?
@@ -254,14 +250,14 @@ ActiveAdmin.register Dialpeer do
       f.input :priority
       f.input :force_hit_rate
       f.input :exclusive_route
-      f.input :initial_interval
       f.input :initial_rate
-      f.input :next_interval
       f.input :next_rate
-      f.input :currency_id, as: :select, collection: Billing::Currency.order(:name), input_html: { class: 'tom-select' }
-      f.input :lcr_rate_multiplier
       f.input :connect_fee
+      f.input :currency, as: :select, include_blank: false, input_html: { class: 'tom-select' }
       f.input :reverse_billing
+      f.input :lcr_rate_multiplier
+      f.input :initial_interval
+      f.input :next_interval
 
       f.association_ajax_input :gateway_id,
                                label: 'Gateway',
@@ -330,6 +326,9 @@ ActiveAdmin.register Dialpeer do
           row :initial_rate
           row :next_interval
           row :next_rate
+          row :currency do
+            status_tag s.currency.name
+          end
           row :lcr_rate_multiplier
           row :connect_fee
           row :reverse_billing

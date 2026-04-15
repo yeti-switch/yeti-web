@@ -101,7 +101,7 @@ class Dialpeer < ApplicationRecord
   array_belongs_to :routing_tags, class_name: 'Routing::RoutingTag', foreign_key: :routing_tag_ids
 
   validates :routing_tag_mode_id, inclusion: { in: Routing::RoutingTagMode::MODES.keys }, allow_nil: false
-  validates :account, :routing_group, :vendor, :valid_from, :valid_till,
+  validates :currency, :account, :routing_group, :vendor, :valid_from, :valid_till,
             :initial_rate, :next_rate,
             :initial_interval, :next_interval, :connect_fee,
             :routeset_discriminator, :lcr_rate_multiplier, presence: true
