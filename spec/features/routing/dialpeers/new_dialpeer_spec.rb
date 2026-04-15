@@ -221,7 +221,6 @@ RSpec.describe 'Create new Dialpeer', js: true do
                           "Routing group must exist and can't be blank",
                           "Account must exist and can't be blank",
                           "Vendor must exist, can't be blank, and Is not vendor",
-                          'Currency must exist',
                           "Initial rate can't be blank and is not a number",
                           "Next rate can't be blank and is not a number",
                           'Specify a gateway_group or a gateway'
@@ -253,7 +252,6 @@ RSpec.describe 'Create new Dialpeer', js: true do
                           "Routing group must exist and can't be blank",
                           "Account must exist and can't be blank",
                           "Vendor must exist, can't be blank, and Is not vendor",
-                          'Currency must exist',
                           "Valid from can't be blank",
                           "Valid till can't be blank",
                           "Initial rate can't be blank and is not a number",

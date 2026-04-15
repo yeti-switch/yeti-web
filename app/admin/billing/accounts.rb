@@ -252,7 +252,7 @@ ActiveAdmin.register Account do
     f.inputs form_title do
       f.input :name
       f.contractor_input :contractor_id
-      f.input :currency_id, as: :select, required: true, include_blank: false, input_html: { class: 'tom-select', disabled: !f.object.new_record? }
+      f.input :currency_id, as: :select, required: true, include_blank: false, collection: Billing::Currency.order(:name), input_html: { class: 'tom-select', disabled: !f.object.new_record? }
       f.input :min_balance
       f.input :max_balance
       f.input :vat
@@ -264,7 +264,7 @@ ActiveAdmin.register Account do
       f.input :termination_capacity
       f.input :total_capacity
 
-      f.input :timezone, as: :select, input_html: { class: 'tom-select' }, collection: Yeti::TimeZoneHelper.all
+      f.input :timezone, as: :select, required: true, include_blank: false, input_html: { class: 'tom-select' }, collection: Yeti::TimeZoneHelper.all
       f.input :uuid, as: :string
     end
 
