@@ -62,4 +62,12 @@ RSpec.resource 'CDR Exports', document: :customer_v1 do
       expect(status).to eq(200)
     end
   end
+
+  get '/api/rest/customer/v1/cdr-exports/:id/download' do
+    let(:id) { create(:cdr_export, :completed, customer_account: customer_acc).reload.uuid }
+
+    example_request 'download cdr export file' do
+      expect(status).to eq(200)
+    end
+  end
 end
