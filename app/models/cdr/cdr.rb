@@ -245,8 +245,6 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true # ,  :conditions => {:customer => true}
   belongs_to :vendor_invoice, class_name: 'Billing::Invoice', foreign_key: :vendor_invoice_id, optional: true
   belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id, optional: true
-  belongs_to :customer_currency, class_name: 'Billing::Currency', foreign_key: :customer_currency_id, optional: true
-  belongs_to :vendor_currency, class_name: 'Billing::Currency', foreign_key: :vendor_currency_id, optional: true
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
@@ -420,18 +418,44 @@ class Cdr::Cdr < Cdr::Base
   end
 
   def self.scoped_stat
-    select("
-    count(nullif(is_last_cdr,false)) as originated_calls_count,
-    count(nullif(routing_attempt=2,false)) as rerouted_calls_count,
-    100*count(nullif(routing_attempt=2,false))::real/nullif(count(nullif(is_last_cdr,false)),0)::real as rerouted_calls_percent,
-    count(id) as termination_attempts_count,
-    coalesce(sum(duration),0) as calls_duration,
-    sum(duration)::float/nullif(count(nullif(success,false)),0)::float as ACD,
-    count(nullif(success,false))::float/nullif(count(nullif(is_last_cdr,false)),0)::float as origination_asr,
-    count(nullif(success,false))::float/nullif(count(id),0)::float as termination_asr,
-    sum(profit) as profit,
-    sum(customer_price) as customer_price,
-    sum(vendor_price) as vendor_price").to_a[0]
+    rows = select("
+    customer_currency_id,
+    vendor_currency_id,
+    count(nullif(is_last_cdr,false)) AS originated_calls_count,
+    count(nullif(routing_attempt=2,false)) AS rerouted_calls_count,
+    count(id) AS termination_attempts_count,
+    coalesce(sum(duration),0) AS calls_duration,
+    count(nullif(success,false)) AS success_count,
+    sum(profit) AS profit,
+    sum(customer_price) AS customer_price,
+    sum(customer_price * coalesce(customer_currency_rate,1)) AS customer_price_system,
+    sum(vendor_price) AS vendor_price,
+    sum(vendor_price * coalesce(vendor_currency_rate,1)) AS vendor_price_system
+    ").group(:customer_currency_id, :vendor_currency_id).to_a
+
+    originated         = rows.sum { |r| r.originated_calls_count.to_i }
+    rerouted           = rows.sum { |r| r.rerouted_calls_count.to_i }
+    termination        = rows.sum { |r| r.termination_attempts_count.to_i }
+    calls_duration     = rows.sum { |r| r.calls_duration.to_i }
+    success_count      = rows.sum { |r| r.success_count.to_i }
+
+    OpenStruct.new(
+      originated_calls_count: originated,
+      rerouted_calls_count: rerouted,
+      rerouted_calls_percent: originated > 0 ? 100.0 * rerouted / originated : 0,
+      termination_attempts_count: termination,
+      calls_duration: calls_duration,
+      acd: success_count > 0 ? calls_duration.to_f / success_count : nil,
+      origination_asr: originated > 0 ? success_count.to_f / originated : nil,
+      termination_asr: termination > 0 ? success_count.to_f / termination : nil,
+      profit: rows.sum { |r| r.profit.to_f },
+      customer_price: rows.sum { |r| r.customer_price_system.to_f },
+      customer_price_by_currency: rows.group_by(&:customer_currency_id)
+                                      .transform_values { |rs| rs.sum { |r| r.customer_price.to_f } },
+      vendor_price: rows.sum { |r| r.vendor_price_system.to_f },
+      vendor_price_by_currency: rows.group_by(&:vendor_currency_id)
+                                      .transform_values { |rs| rs.sum { |r| r.vendor_price.to_f } }
+    )
   end
 
   def self.provisioning_info

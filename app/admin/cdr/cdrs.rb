@@ -578,11 +578,9 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :customer_price, &:decorated_customer_price
           row :customer_price_no_vat
           row :customer_duration, &:decorated_customer_duration
-          row :customer_currency
           row :customer_currency_rate
           row :vendor_price, &:decorated_vendor_price
           row :vendor_duration, &:decorated_vendor_duration
-          row :vendor_currency
           row :vendor_currency_rate
           row :profit, &:decorated_profit
 
