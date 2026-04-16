@@ -245,6 +245,8 @@ class Cdr::Cdr < Cdr::Base
   belongs_to :customer, class_name: 'Contractor', foreign_key: :customer_id, optional: true # ,  :conditions => {:customer => true}
   belongs_to :vendor_invoice, class_name: 'Billing::Invoice', foreign_key: :vendor_invoice_id, optional: true
   belongs_to :customer_invoice, class_name: 'Billing::Invoice', foreign_key: :customer_invoice_id, optional: true
+  belongs_to :customer_currency, class_name: 'Billing::Currency', foreign_key: :customer_currency_id, optional: true
+  belongs_to :vendor_currency, class_name: 'Billing::Currency', foreign_key: :vendor_currency_id, optional: true
   belongs_to :node, class_name: 'Node', foreign_key: :node_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
   belongs_to :pop, class_name: 'Pop', foreign_key: :pop_id, optional: true
