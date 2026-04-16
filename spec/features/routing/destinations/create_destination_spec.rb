@@ -7,6 +7,7 @@ RSpec.describe 'Create new Destinations', type: :feature do
     let!(:tag) { create(:routing_tag, :ua) }
     let!(:rate_group) { create(:rate_group) }
     let!(:rateplan) { create(:rateplan) }
+    let!(:currency) { create(:currency) }
 
     before { visit new_destination_path }
 
@@ -18,6 +19,7 @@ RSpec.describe 'Create new Destinations', type: :feature do
         enabled: true,
         reject_calls: true,
         rate_group_id: rate_group.name,
+        currency_id: currency.name,
         reverse_billing: true,
         initial_rate: 60,
         next_rate: 30,

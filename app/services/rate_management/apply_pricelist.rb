@@ -86,15 +86,18 @@ module RateManagement
     def create_new_dialpeers!
       SqlCaller::Yeti.execute <<-SQL.squish
         INSERT INTO class4.dialpeers
-          (#{(DATA_FIELDS + SCOPE_FIELDS).join(', ')}, valid_till, valid_from, network_prefix_id)
+          (#{(DATA_FIELDS + SCOPE_FIELDS).join(', ')}, valid_till, valid_from, network_prefix_id, currency_id, currency_rate, next_rate_system_currency)
         SELECT
-          #{(DATA_FIELDS + SCOPE_FIELDS).join(', ')}, valid_till, valid_from, network_prefix_id
+          #{(DATA_FIELDS + SCOPE_FIELDS).join(', ')}, valid_till, valid_from, network_prefix_id, currency_id, currency_rate, next_rate_system_currency
         FROM (
           SELECT
             #{(DATA_FIELDS + SCOPE_FIELDS).map { |field| "pricelist_items.#{field}" }.join(', ')},
             valid_till,
             valid_from,
             sys.network_prefixes.id AS network_prefix_id,
+            0 AS currency_id,
+            1.0 AS currency_rate,
+            pricelist_items.next_rate AS next_rate_system_currency,
             ROW_NUMBER() OVER (
               PARTITION BY pricelist_items.id
               ORDER BY LENGTH(network_prefixes.prefix) DESC
@@ -147,12 +150,15 @@ module RateManagement
       SQL
 
       SqlCaller::Yeti.execute <<-SQL.squish
-        INSERT INTO class4.dialpeers(#{(DATA_FIELDS + SCOPE_FIELDS).join(', ')}, valid_till, valid_from, network_prefix_id)
+        INSERT INTO class4.dialpeers(#{(DATA_FIELDS + SCOPE_FIELDS).join(', ')}, valid_till, valid_from, network_prefix_id, currency_id, currency_rate, next_rate_system_currency)
         SELECT
           #{(DATA_FIELDS + SCOPE_FIELDS).map { |field| "pricelist_items.#{field}" }.join(', ')},
           pricelist_items.valid_till,
           pricelist_items.valid_from,
-          dialpeers.network_prefix_id
+          dialpeers.network_prefix_id,
+          0,
+          1.0,
+          pricelist_items.next_rate
         FROM ratemanagement.pricelist_items
         INNER JOIN class4.dialpeers ON dialpeers.id = pricelist_items.dialpeer_id
         WHERE

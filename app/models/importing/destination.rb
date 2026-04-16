@@ -9,6 +9,7 @@
 #  asr_limit                :float(24)
 #  cdo                      :integer(2)
 #  connect_fee              :decimal(, )
+#  currency_name            :string
 #  dp_margin_fixed          :decimal(, )
 #  dp_margin_percent        :decimal(, )
 #  dst_number_max_length    :integer(4)
@@ -34,6 +35,7 @@
 #  use_dp_intervals         :boolean
 #  valid_from               :timestamptz
 #  valid_till               :timestamptz
+#  currency_id              :integer(2)
 #  network_prefix_id        :integer(4)
 #  o_id                     :bigint(8)
 #  profit_control_mode_id   :integer(2)
@@ -47,9 +49,10 @@ class Importing::Destination < Importing::Base
   self.table_name = 'data_import.import_destinations'
 
   belongs_to :rate_group, class_name: 'Routing::RateGroup', optional: true
+  belongs_to :currency, class_name: '::Billing::Currency', optional: true
   belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
 
-  self.import_attributes = %w[enabled prefix reject_calls rate_group_id
+  self.import_attributes = %w[enabled prefix reject_calls rate_group_id currency_id
                               initial_interval next_interval initial_rate next_rate
                               connect_fee rate_policy_id reverse_billing dp_margin_fixed dp_margin_percent use_dp_intervals
                               valid_from valid_till profit_control_mode_id

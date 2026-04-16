@@ -180,6 +180,7 @@ class Billing::Currency < ApplicationRecord
   has_many :accounts, class_name: 'Account', foreign_key: :currency_id, dependent: :restrict_with_error
 
   after_update :update_accounts_currency_name, if: :saved_change_to_name?
+  after_update :update_dialpeers_currency_rate, if: :saved_change_to_rate?
   before_destroy :prevent_default_destroy
 
   def default?
@@ -198,6 +199,12 @@ class Billing::Currency < ApplicationRecord
 
   def update_accounts_currency_name
     accounts.update_all(currency_name: name)
+  end
+
+  def update_dialpeers_currency_rate
+    Dialpeer.where(currency_id: id).update_all(
+      "currency_rate = #{rate}, next_rate_system_currency = next_rate * #{rate}"
+    )
   end
 
   def prevent_default_destroy

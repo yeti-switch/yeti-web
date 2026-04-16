@@ -19,6 +19,7 @@ RSpec.describe 'Create new Dialpeer', js: true do
   let!(:routeset_discriminator) { FactoryBot.create(:routeset_discriminator) }
   let!(:gateway) { FactoryBot.create(:gateway, contractor: vendor) }
   let!(:gateway_group) { FactoryBot.create(:gateway_group, vendor: vendor) }
+  let!(:currency) { FactoryBot.create(:currency) }
   let!(:routing_tags) do
     FactoryBot.create_list(:routing_tag, 5)
   end
@@ -70,6 +71,7 @@ RSpec.describe 'Create new Dialpeer', js: true do
     fill_in_tom_select 'Routing group', with: routing_group.display_name
     fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
     fill_in_tom_select 'Gateway', with: gateway.display_name
+    fill_in_tom_select 'Currency', with: currency.name
   end
 
   it 'creates record' do
@@ -163,6 +165,7 @@ RSpec.describe 'Create new Dialpeer', js: true do
       fill_in_tom_select 'Routing group', with: routing_group.display_name
       fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
       fill_in_tom_select 'Gateway Group', with: gateway_group.display_name
+      fill_in_tom_select 'Currency', with: currency.name
     end
 
     it 'creates record' do
@@ -195,6 +198,7 @@ RSpec.describe 'Create new Dialpeer', js: true do
       fill_in_tom_select 'Routeset discriminator', with: routeset_discriminator.display_name
       fill_in_tom_select 'Gateway', with: gateway.display_name
       fill_in_tom_select 'Gateway Group', with: gateway_group.display_name
+      fill_in_tom_select 'Currency', with: currency.name
     end
 
     it 'does not create record' do

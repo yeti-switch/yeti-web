@@ -333,12 +333,6 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
       fill_in 'Next interval', with: ''
       fill_in 'Priority', with: ''
       fill_in 'Lcr rate multiplier', with: ''
-      clear_tom_select 'Enabled'
-      clear_tom_select 'Routing group'
-      clear_tom_select 'Routeset discriminator'
-      clear_tom_select 'Exclusive route'
-      clear_tom_select 'Reverse billing'
-      clear_tom_select 'Routing tag mode'
     end
 
     it 'does not create project' do
@@ -353,11 +347,7 @@ RSpec.describe 'Rate Management Project Create', js: true, bullet: [:n] do
                           "Keep applied pricelists days can't be blank",
                           "Priority can't be blank",
                           "Name can't be blank",
-                          'specify a gateway_group or a gateway',
-                          'Routing group must exist',
-                          'Routeset discriminator must exist',
-                          'Enabled is not included in the list',
-                          'Exclusive route is not included in the list'
+                          'specify a gateway_group or a gateway'
                         )
       end.not_to change { RateManagement::Project.count }
     end

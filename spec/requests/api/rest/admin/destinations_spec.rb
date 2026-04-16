@@ -85,7 +85,8 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
               'short-calls-limit': destinations[0].short_calls_limit,
               'use-dp-intervals': destinations[0].use_dp_intervals,
               'valid-from': destinations[0].valid_from.iso8601(3),
-              'valid-till': destinations[0].valid_till.iso8601(3)
+              'valid-till': destinations[0].valid_till.iso8601(3),
+              currency: destinations[0].currency&.name
             }
           end
         end
@@ -132,7 +133,8 @@ RSpec.describe Api::Rest::Admin::DestinationsController, type: :request do
               'short-calls-limit': destinations[1].short_calls_limit,
               'use-dp-intervals': destinations[1].use_dp_intervals,
               'valid-from': destinations[1].valid_from.iso8601(3),
-              'valid-till': destinations[1].valid_till.iso8601(3)
+              'valid-till': destinations[1].valid_till.iso8601(3),
+              currency: destinations[1].currency&.name
             }
           end
         end

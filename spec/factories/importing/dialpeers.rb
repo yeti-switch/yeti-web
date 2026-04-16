@@ -10,6 +10,7 @@
 #  asr_limit                   :float(24)
 #  capacity                    :integer(4)
 #  connect_fee                 :decimal(, )
+#  currency_name               :string
 #  dst_number_max_length       :integer(4)
 #  dst_number_min_length       :integer(4)
 #  dst_rewrite_result          :string
@@ -45,6 +46,7 @@
 #  valid_till                  :datetime
 #  vendor_name                 :string
 #  account_id                  :integer(4)
+#  currency_id                 :integer(2)
 #  gateway_group_id            :integer(4)
 #  gateway_id                  :integer(4)
 #  o_id                        :bigint(8)
@@ -89,6 +91,7 @@ FactoryBot.define do
     valid_from { '1970-01-01 00:00:00' }
     valid_till { '2020-01-01 00:00:00' }
     gateway_group_id { nil }
+    currency_id { 0 }
     reverse_billing { false }
 
     dst_number_min_length { 1 }

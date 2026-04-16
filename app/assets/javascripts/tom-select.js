@@ -32,11 +32,12 @@ function initTomSelect(parent, options = {}) {
     parent.find('select.tom-select, select.tom-select-wide').each(function () {
         if (this.tomselect) return
 
-        var plugins = ['clear_button', 'dropdown_input']
+        var plugins = ['dropdown_input']
         var el = this
         var $el = $(el)
         var isMultiple = !!$el.attr('multiple')
         var allowEmptyOption = !!$el.data('allow-empty-option')
+        if (hasBlankOption(el)) plugins.push('clear_button')
         if (isMultiple) plugins.push('remove_button')
         new TomSelect(this, {
             plugins: plugins,

@@ -227,8 +227,7 @@ RSpec.describe 'Create new Account', type: :feature, js: true do
         subject
         expect(page).to have_semantic_error_texts(
                           "Name can't be blank",
-                          'Contractor must exist',
-                          'Currency must exist'
+                          'Contractor must exist'
                         )
       end.not_to change { Account.count }
     end

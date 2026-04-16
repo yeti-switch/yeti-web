@@ -16,6 +16,7 @@
 #  customer_account_check_balance  :boolean
 #  customer_auth_external_type     :string
 #  customer_auth_name              :string
+#  customer_currency_rate          :float
 #  customer_duration               :integer(4)
 #  customer_price                  :decimal(, )
 #  customer_price_no_vat           :decimal(, )
@@ -102,6 +103,7 @@
 #  time_start                      :timestamptz      not null
 #  to_domain                       :string
 #  uuid                            :uuid
+#  vendor_currency_rate            :float
 #  vendor_duration                 :integer(4)
 #  vendor_price                    :decimal(, )
 #  yeti_version                    :string
@@ -110,6 +112,7 @@
 #  customer_acc_id                 :integer(4)
 #  customer_auth_external_id       :bigint(8)
 #  customer_auth_id                :integer(4)
+#  customer_currency_id            :integer(2)
 #  customer_external_id            :bigint(8)
 #  customer_id                     :integer(4)
 #  customer_invoice_id             :integer(4)
@@ -148,6 +151,7 @@
 #  term_gw_id                      :integer(4)
 #  vendor_acc_external_id          :bigint(8)
 #  vendor_acc_id                   :integer(4)
+#  vendor_currency_id              :integer(2)
 #  vendor_external_id              :bigint(8)
 #  vendor_id                       :integer(4)
 #  vendor_invoice_id               :integer(4)

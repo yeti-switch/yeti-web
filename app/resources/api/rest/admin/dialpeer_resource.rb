@@ -7,7 +7,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
              :dst_rewrite_result, :locked, :priority, :exclusive_route, :capacity, :lcr_rate_multiplier,
              :force_hit_rate, :network_prefix_id, :created_at, :short_calls_limit, :external_id,
              :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing,
-             :routing_tag_mode_id
+             :routing_tag_mode_id, :currency
 
   paginator :paged
 
@@ -48,6 +48,18 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
   ransack_filter :external_id, type: :number
   ransack_filter :routing_tag_mode_id, type: :number
 
+  def self.records(options = {})
+    super(options).includes([:currency])
+  end
+
+  def currency
+    _model.currency&.name
+  end
+
+  def currency=(value)
+    _model.currency_id = Billing::Currency.find_by(name: value)&.id
+  end
+
   def self.updatable_fields(_context)
     %i[
       enabled
@@ -86,6 +98,7 @@ class Api::Rest::Admin::DialpeerResource < BaseResource
       routing_tag_ids
       dst_number_min_length
       dst_number_max_length
+      currency
     ]
   end
 

@@ -10,6 +10,7 @@
 #  asr_limit                   :float(24)
 #  capacity                    :integer(4)
 #  connect_fee                 :decimal(, )
+#  currency_name               :string
 #  dst_number_max_length       :integer(4)
 #  dst_number_min_length       :integer(4)
 #  dst_rewrite_result          :string
@@ -45,6 +46,7 @@
 #  valid_till                  :datetime
 #  vendor_name                 :string
 #  account_id                  :integer(4)
+#  currency_id                 :integer(2)
 #  gateway_group_id            :integer(4)
 #  gateway_id                  :integer(4)
 #  o_id                        :bigint(8)
@@ -64,13 +66,14 @@ class Importing::Dialpeer < Importing::Base
   belongs_to :account, class_name: '::Account', optional: true
   belongs_to :vendor, -> { where vendor: true }, class_name: '::Contractor', optional: true
   belongs_to :routeset_discriminator, class_name: 'Routing::RoutesetDiscriminator', foreign_key: :routeset_discriminator_id, optional: true
+  belongs_to :currency, class_name: '::Billing::Currency', optional: true
   belongs_to :scheduler, class_name: 'System::Scheduler', foreign_key: :scheduler_id, optional: true
   has_many :dialpeer_next_rates, dependent: :destroy
 
   self.import_attributes = %w[prefix enabled lcr_rate_multiplier
                               initial_interval next_interval initial_rate next_rate connect_fee reverse_billing
                               gateway_id gateway_group_id routing_group_id
-                              vendor_id account_id
+                              vendor_id account_id currency_id
                               src_name_rewrite_rule src_name_rewrite_result
                               src_rewrite_rule src_rewrite_result
                               dst_rewrite_rule dst_rewrite_result asr_limit acd_limit short_calls_limit priority capacity

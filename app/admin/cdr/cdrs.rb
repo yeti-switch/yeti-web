@@ -393,7 +393,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
           column :vendor_price, &:decorated_vendor_price
           column :vendor_duration, &:decorated_vendor_duration
-          column :profit
+          column :profit, &:decorated_profit
           column('Orig call', &:orig_call_id)
           column :local_tag
           column :legb_local_tag
@@ -580,7 +580,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :customer_duration, &:decorated_customer_duration
           row :vendor_price, &:decorated_vendor_price
           row :vendor_duration, &:decorated_vendor_duration
-          row :profit
+          row :profit, &:decorated_profit
 
           row :rateplan
           row :destination
@@ -799,7 +799,7 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
 
     column :vendor_price, &:decorated_vendor_price
     column :vendor_duration, &:decorated_vendor_duration
-    column :profit
+    column :profit, &:decorated_profit
     column :orig_call_id
     column :local_tag
     column :legb_local_tag

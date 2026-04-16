@@ -44,6 +44,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                  :initial_interval, :next_interval,
                  :use_dp_intervals,
                  :initial_rate, :next_rate, :connect_fee,
+                 [:currency_name, proc { |row| row.currency.name }],
                  :dp_margin_fixed, :dp_margin_percent,
                  :profit_control_mode_name,
                  :valid_from, :valid_till,
@@ -108,7 +109,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
                 :dp_margin_percent, :rate_policy_id, :reverse_billing, :initial_rate,
                 :reject_calls, :use_dp_intervals, :test, :profit_control_mode_id,
                 :valid_from, :valid_till, :asr_limit, :acd_limit, :short_calls_limit, :batch_prefix,
-                :reverse_billing, :routing_tag_mode_id, :allow_package_billing, :scheduler_id, routing_tag_ids: []
+                :reverse_billing, :routing_tag_mode_id, :allow_package_billing, :scheduler_id, :currency_id, routing_tag_ids: []
 
   action_item :show_rates, only: [:show] do
     link_to 'Show Rates', destination_destination_next_rates_path(resource.id)
@@ -136,7 +137,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     #
     # preload have more controllable behavior, but sorting by associated tables not possible
     def scoped_collection
-      super.preload(:rate_group, network_prefix: %i[country network])
+      super.preload(:rate_group, :currency, network_prefix: %i[country network])
     end
   end
 
@@ -176,15 +177,11 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
     column :valid_till, &:decorated_valid_till
 
     column :rate_policy, &:rate_policy_name
-    column :reverse_billing
     column :allow_package_billing
 
     ## fixed price
-    column :initial_interval
-    column :initial_rate
-    column :next_interval
-    column :next_rate
-    column :connect_fee
+    column :rates, &:decorated_rates
+    column :intervals, &:decorated_intervals
     column :use_dp_intervals
 
     # cost + X ( $ or % )
@@ -241,6 +238,7 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
       end
     end
     f.inputs 'Fixed rating configuration' do
+      f.input :currency, as: :select, include_blank: false, input_html: { class: 'tom-select' }
       f.input :initial_rate
       f.input :next_rate
       f.input :connect_fee
@@ -301,6 +299,9 @@ ActiveAdmin.register Routing::Destination, as: 'Destination' do
         end
         panel 'Fixed rating configuration' do
           attributes_table_for s do
+            row :currency do
+              status_tag s.currency.name
+            end
             row :initial_rate
             row :next_rate
             row :connect_fee

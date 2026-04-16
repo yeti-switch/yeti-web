@@ -29,6 +29,7 @@
 #  uuid                   :uuid             not null
 #  valid_from             :timestamptz      not null
 #  valid_till             :timestamptz      not null
+#  currency_id            :integer(2)       not null
 #  external_id            :bigint(8)
 #  network_prefix_id      :integer(4)
 #  profit_control_mode_id :integer(2)
@@ -45,6 +46,7 @@
 #
 # Foreign Keys
 #
+#  destinations_currency_id_fkey    (currency_id => currencies.id)
 #  destinations_rate_group_id_fkey  (rate_group_id => rate_groups.id)
 #  destinations_scheduler_id_fkey   (scheduler_id => schedulers.id)
 #
@@ -53,6 +55,7 @@ class Routing::Destination < ApplicationRecord
   self.table_name = 'class4.destinations'
 
   belongs_to :rate_group, class_name: 'Routing::RateGroup', foreign_key: :rate_group_id
+  belongs_to :currency, class_name: 'Billing::Currency', foreign_key: :currency_id
   has_many :rateplans, class_name: 'Routing::Rateplan', through: :rate_group
   has_many :customers_auths, through: :rateplans
 
@@ -99,7 +102,7 @@ class Routing::Destination < ApplicationRecord
     where_account(account_ids)
   }
 
-  validates :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
+  validates :currency, :rate_group, :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee,
                         :dp_margin_fixed, :dp_margin_percent, :rate_policy_id,
                         :asr_limit, :acd_limit, :short_calls_limit, presence: true
   validates :initial_rate, :next_rate, :initial_interval, :next_interval, :connect_fee, numericality: true

@@ -106,6 +106,8 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
       }
     end
     context 'when attributes are valid' do
+      let(:currency) { create :currency }
+
       let(:attributes) do
         {
           enabled: true,
@@ -117,7 +119,8 @@ RSpec.describe Api::Rest::Admin::DialpeersController, type: :controller do
           'initial-rate': 0.0,
           'next-rate': 0.0,
           'connect-fee': 0.0,
-          'routing-tag-mode-id': Routing::RoutingTagMode::MODE_AND
+          'routing-tag-mode-id': Routing::RoutingTagMode::MODE_AND,
+          currency: currency.name
         }
       end
 

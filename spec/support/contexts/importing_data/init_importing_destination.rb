@@ -5,6 +5,7 @@ shared_context :init_importing_destination do |args|
 
   before do
     rtm_id = Routing::RoutingTagMode::MODES.keys.sample
+    currency = FactoryBot.create(:currency)
 
     fields = {
       prefix: '998713',
@@ -18,6 +19,7 @@ shared_context :init_importing_destination do |args|
       next_rate: 0.033,
       routing_tag_mode_name: Routing::RoutingTagMode::MODES[rtm_id],
       routing_tag_mode_id: rtm_id,
+      currency_id: currency.id,
       is_changed: true
     }.merge(args)
 

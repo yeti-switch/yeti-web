@@ -7,7 +7,7 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
              :dp_margin_percent, :initial_rate, :asr_limit, :acd_limit, :short_calls_limit,
              :prefix, :reject_calls, :use_dp_intervals, :valid_from, :valid_till, :external_id,
              :routing_tag_ids, :dst_number_min_length, :dst_number_max_length, :reverse_billing,
-             :profit_control_mode_id, :rate_policy_id, :routing_tag_mode_id
+             :profit_control_mode_id, :rate_policy_id, :routing_tag_mode_id, :currency
 
   paginator :paged
 
@@ -51,11 +51,24 @@ class Api::Rest::Admin::DestinationResource < ::BaseResource
     records.ransack(country_id_filter: values).result
   }
 
+  def self.records(options = {})
+    super(options).includes([:currency])
+  end
+
+  def currency
+    _model.currency&.name
+  end
+
+  def currency=(value)
+    _model.currency_id = Billing::Currency.find_by(name: value)&.id
+  end
+
   def self.updatable_fields(_context)
     %i[
       enabled
       prefix
       rate_group
+      currency
       next_rate
       connect_fee
       initial_interval
