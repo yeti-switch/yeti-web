@@ -60,9 +60,12 @@ class RemoteStatsController < ApplicationController
       acd: @data.decorated_acd,
       origination_asr: @data.decorated_origination_asr,
       termination_asr: @data.decorated_termination_asr,
+      system_currency: Billing::Currency.find_by(id: 0)&.name,
       profit: @data.decorated_profit,
       origination_cost: @data.decorated_customer_price,
-      termination_cost: @data.decorated_vendor_price
+      origination_cost_by_currency: cdr_cost_by_currency(@data.customer_price_by_currency),
+      termination_cost: @data.decorated_vendor_price,
+      termination_cost_by_currency: cdr_cost_by_currency(@data.vendor_price_by_currency)
     )
   end
 
@@ -131,5 +134,16 @@ class RemoteStatsController < ApplicationController
     else
       {}
     end
+  end
+
+  def cdr_cost_by_currency(by_currency)
+    return [] if by_currency.blank?
+
+    currency_names = Billing::Currency.where(id: by_currency.keys.compact).pluck(:id, :name).to_h
+    by_currency.map do |currency_id, amount|
+      name = currency_id.nil? ? 'N/A' : (currency_names[currency_id] || currency_id.to_s)
+      formatted = ActionController::Base.helpers.number_to_currency(amount, delimiter: ' ', separator: '.', precision: 2, unit: '')
+      { currency: name, amount: formatted }
+    end.sort_by { |e| e[:currency] }
   end
 end

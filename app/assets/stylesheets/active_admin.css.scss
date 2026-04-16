@@ -124,7 +124,69 @@ form.filter_form .filter_form_field.select_and_search input[type=text].search_fi
 
 body.active_admin.index #active_admin_content {
   .collapse_btn, .uncollapse_btn {
-    background-color: #3B76A4;
+    display: none;
+  }
+}
+
+.cdr-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 6px;
+  font-size: 1.05em;
+  padding: 2px 0;
+
+  .cdr-stat-cell {
+    display: flex;
+    flex-direction: column;
+
+    .cdr-stat-label {
+      color: #888;
+      font-size: 0.9em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .cdr-stat-value {
+      font-weight: 600;
+      line-height: 1.3;
+    }
+  }
+
+  .cdr-stat-full {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+
+    .cdr-stat-value {
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+
+.cdr-stat-separator {
+    grid-column: 1 / -1;
+    border-top: 1px solid #e8e8e8;
+    margin: 1px 0;
+  }
+
+  .cdr-stat-by-currency {
+    grid-column: 1 / -1;
+    padding: 0 0 1px 8px;
+
+    .cdr-stat-currency-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    .cdr-stat-currency-value {
+      font-weight: 500;
+      white-space: nowrap;
+    }
   }
 }
 
