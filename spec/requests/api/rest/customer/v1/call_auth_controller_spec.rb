@@ -142,7 +142,7 @@ RSpec.describe Api::Rest::Customer::V1::CallAuthController, type: :request do
         expect(response.status).to eq(500)
         expect(response_json).to match(
           errors: [
-            title: 'Invalid request',
+            title: 'Internal Server Error',
             detail: 'Incoming JWT is disabled for Provisioning Gateway.',
             code: '500',
             status: '500'
@@ -161,7 +161,7 @@ RSpec.describe Api::Rest::Customer::V1::CallAuthController, type: :request do
         expect(response.status).to eq(500)
         expect(response_json).to match(
           errors: [
-            title: 'Invalid request',
+            title: 'Internal Server Error',
             detail: 'Provisioning Gateway is not found.',
             code: '500',
             status: '500'

@@ -81,6 +81,14 @@ RSpec.resource 'Cdr Exports' do
     end
   end
 
+  get '/api/rest/admin/cdr-exports/:id/download' do
+    let(:id) { create(:cdr_export, :completed).id }
+
+    example_request 'download cdr export file' do
+      expect(status).to eq(200)
+    end
+  end
+
   delete '/api/rest/admin/cdr-exports/:id' do
     let(:id) { create(:cdr_export).id }
 

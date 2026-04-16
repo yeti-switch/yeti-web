@@ -36,7 +36,7 @@ RSpec.resource 'CallAuth', document: :customer_v1 do
     example_request 'Receive 500 validation error (Gateway is not found)' do
       expect(status).to eq(500)
       response_json = JSON.parse(response_body, symbolize_names: true)
-      expect(response_json[:errors]).to contain_exactly code: '500', detail: 'Provisioning Gateway is not found.', status: '500', title: 'Invalid request'
+      expect(response_json[:errors]).to contain_exactly code: '500', detail: 'Provisioning Gateway is not found.', status: '500', title: 'Internal Server Error'
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.resource 'CallAuth', document: :customer_v1 do
     example_request 'Receive 500 validation error (Incoming JWT is disabled for Gateway)' do
       expect(status).to eq(500)
       response_json = JSON.parse(response_body, symbolize_names: true)
-      expect(response_json[:errors]).to contain_exactly code: '500', detail: 'Incoming JWT is disabled for Provisioning Gateway.', status: '500', title: 'Invalid request'
+      expect(response_json[:errors]).to contain_exactly code: '500', detail: 'Incoming JWT is disabled for Provisioning Gateway.', status: '500', title: 'Internal Server Error'
     end
   end
 end
