@@ -25,12 +25,19 @@ module AdminApiAuthorizable
     }
   end
 
+  def meta
+    return if @jwt_payload.blank?
+
+    { 'auth' => @jwt_payload }
+  end
+
   private
 
   def authorize
-    auth_token = params[:token] || request.headers['Authorization']&.split&.last
-    result = Authorization::AdminAuth.authorize!(auth_token, remote_ip: request.remote_ip)
+    @auth_token = params[:token] || request.headers['Authorization']&.split&.last
+    result = Authorization::AdminAuth.authorize!(@auth_token, remote_ip: request.remote_ip)
     @current_admin_user = result.entity
+    @jwt_payload = result.payload
   end
 
   def handle_authorization_error
