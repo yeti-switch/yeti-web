@@ -3,7 +3,8 @@
 RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :request do
   include_context :json_api_customer_v1_helpers, type: :'cryptomus-payments'
 
-  let!(:account) { create(:account, contractor: customer) }
+  let!(:usdt_currency) { create(:currency, name: 'USDT', rate: 1.0) }
+  let!(:account) { create(:account, contractor: customer, currency: create(:currency, name: 'USD', rate: 1.0)) }
   let!(:prev_payment) { create(:payment, account:) }
 
   shared_examples :responds_with_resource do |status: 200|
@@ -39,7 +40,8 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
                                   amount: json_api_attributes[:amount].to_d,
                                   notes: json_api_attributes[:notes],
                                   status_id: Payment::CONST::STATUS_ID_PENDING,
-                                  private_notes: nil
+                                  private_notes: nil,
+                                  metadata: { 'usdt_rate' => usdt_currency.rate }
                                 )
       end
 
@@ -86,14 +88,31 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
       'https://pay.cryptomus.com/pay/f1386fb5-ecfa-41d4-a85d-b151d98df5e1'
     end
 
+    let(:expected_usdt_amount) do
+      (json_api_attributes[:amount].to_d * account.currency.rate / usdt_currency.rate).round(2)
+    end
+
     before do
       allow(CryptomusPayment::Create).to receive(:call).with(
         order_id: (prev_payment.id + 1),
-        amount: json_api_attributes[:amount].to_d
+        amount: expected_usdt_amount
       ).and_return(cryptomus_url)
     end
 
     include_examples :creates_successfully
+
+    context 'when USDT currency is not configured' do
+      before { usdt_currency.destroy! }
+
+      include_examples :creation_failed, errors: [
+        { detail: 'base - Configuration error', source: { pointer: '/data/attributes/base' } }
+      ]
+
+      it 'logs error' do
+        expect(Rails.logger).to receive(:error)
+        subject
+      end
+    end
 
     context 'with notes attribute' do
       let(:json_api_attributes) do

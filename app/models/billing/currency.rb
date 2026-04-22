@@ -170,7 +170,10 @@ class Billing::Currency < ApplicationRecord
     'YER' => 'Yemen Rial',
     'ZAR' => 'South Africa Rand',
     'ZMW' => 'Zambia Kwacha',
-    'ZWL' => 'Zimbabwe Dollar'
+    'ZWL' => 'Zimbabwe Dollar',
+
+    # Crypto currencies
+    'USDT' => 'Tether USD'
   }.freeze
 
   validates :name, presence: true, uniqueness: true, inclusion: { in: NAMES.keys }

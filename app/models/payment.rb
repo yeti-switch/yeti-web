@@ -7,6 +7,7 @@
 #  id                     :bigint(8)        not null, primary key
 #  amount                 :decimal(, )      not null
 #  balance_before_payment :decimal(, )
+#  metadata               :jsonb
 #  notes                  :string
 #  private_notes          :string
 #  rolledback_at          :timestamptz

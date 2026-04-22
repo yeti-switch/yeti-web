@@ -7,6 +7,7 @@
 #  id                     :bigint(8)        not null, primary key
 #  amount                 :decimal(, )      not null
 #  balance_before_payment :decimal(, )
+#  metadata               :jsonb
 #  notes                  :string
 #  private_notes          :string
 #  rolledback_at          :timestamptz
@@ -45,11 +46,13 @@ FactoryBot.define do
     trait :pending do
       type_id { Payment::CONST::TYPE_ID_CRYPTOMUS }
       status_id { Payment::CONST::STATUS_ID_PENDING }
+      metadata { { 'usdt_rate' => 1.0 } }
     end
 
     trait :canceled do
       type_id { Payment::CONST::TYPE_ID_CRYPTOMUS }
       status_id { Payment::CONST::STATUS_ID_CANCELED }
+      metadata { { 'usdt_rate' => 1.0 } }
     end
 
     trait :rolled_back do
@@ -59,6 +62,7 @@ FactoryBot.define do
     trait :cryptomus_completed do
       type_id { Payment::CONST::TYPE_ID_CRYPTOMUS }
       status_id { Payment::CONST::STATUS_ID_COMPLETED }
+      metadata { { 'usdt_rate' => 1.0, 'merchant_amount' => 10.0 } }
     end
   end
 end

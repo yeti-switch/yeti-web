@@ -107,6 +107,10 @@ ActiveAdmin.register Payment do
         end
       end
 
+      tab :metadata do
+        pre { JSON.pretty_generate(payment.metadata || {}) }
+      end
+
       if payment.type_cryptomus?
         tab :cryptomus_info do
           pre do
