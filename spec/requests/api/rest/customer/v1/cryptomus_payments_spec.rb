@@ -4,7 +4,7 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
   include_context :json_api_customer_v1_helpers, type: :'cryptomus-payments'
 
   let!(:usdt_currency) { create(:currency, name: 'USDT', rate: 1.0) }
-  let!(:account) { create(:account, contractor: customer, currency: create(:currency, name: 'USD', rate: 1.0)) }
+  let!(:account) { create(:account, contractor: customer, currency: create(:currency, rate: 1.0)) }
   let!(:prev_payment) { create(:payment, account:) }
 
   shared_examples :responds_with_resource do |status: 200|

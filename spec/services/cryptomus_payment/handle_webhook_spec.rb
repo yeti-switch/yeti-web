@@ -56,7 +56,7 @@ RSpec.describe CryptomusPayment::HandleWebhook do
         status_id: Payment::CONST::STATUS_ID_PENDING,
         type_id: Payment::CONST::TYPE_ID_CRYPTOMUS,
         metadata: { 'usdt_rate' => usdt_rate },
-        account: create(:account, currency: create(:currency, name: 'USD', rate: account_currency_rate))
+        account: create(:account, currency: create(:currency, rate: account_currency_rate))
       }
     end
 
