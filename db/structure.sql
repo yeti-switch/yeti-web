@@ -11195,7 +11195,8 @@ CREATE TABLE billing.payments (
     status_id smallint DEFAULT 20 NOT NULL,
     type_id smallint DEFAULT 20 NOT NULL,
     balance_before_payment numeric,
-    rolledback_at timestamp with time zone
+    rolledback_at timestamp with time zone,
+    metadata jsonb
 );
 
 
@@ -20415,6 +20416,7 @@ ALTER TABLE ONLY sys.sensors
 SET search_path TO gui, public, switch, billing, class4, runtime_stats, sys, logs, data_import;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260417000000'),
 ('20260415000000'),
 ('20260414000000'),
 ('20260409000000'),

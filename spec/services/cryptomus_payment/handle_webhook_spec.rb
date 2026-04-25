@@ -7,7 +7,7 @@ RSpec.describe CryptomusPayment::HandleWebhook do
     end
 
     shared_examples :completes_payment do
-      # let(:complete_amount) { original_amount }
+      # let(:complete_amount) { ... }
 
       it 'updates payment status to completed' do
         expect { subject }.to change { payment.reload.status_id }.to(Payment::CONST::STATUS_ID_COMPLETED)
@@ -16,6 +16,13 @@ RSpec.describe CryptomusPayment::HandleWebhook do
 
       it 'updates account balance' do
         expect { subject }.to change { payment.account.reload.balance }.by(complete_amount)
+      end
+
+      it 'stores merchant_amount in metadata' do
+        subject
+        expect(payment.reload.metadata).to include(
+          'merchant_amount' => payload[:merchant_amount].to_f
+        )
       end
     end
 
@@ -41,11 +48,15 @@ RSpec.describe CryptomusPayment::HandleWebhook do
 
     let!(:payment) { create(:payment, payment_attrs) }
     let(:original_amount) { 100.55 }
+    let(:usdt_rate) { 1.0 }
+    let(:account_currency_rate) { 1.0 }
     let(:payment_attrs) do
       {
         amount: original_amount,
         status_id: Payment::CONST::STATUS_ID_PENDING,
-        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS
+        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS,
+        metadata: { 'usdt_rate' => usdt_rate },
+        account: create(:account, currency: create(:currency, rate: account_currency_rate))
       }
     end
 
@@ -80,6 +91,24 @@ RSpec.describe CryptomusPayment::HandleWebhook do
         let(:complete_amount) { original_amount }
       end
 
+      context 'when account currency is not USD' do
+        let(:usdt_rate) { 1.0 }
+        let(:account_currency_rate) { 1.08 }
+
+        include_examples :completes_payment do
+          let(:complete_amount) { (original_amount.to_d * usdt_rate / account_currency_rate).round(8) }
+        end
+      end
+
+      context 'when account currency is USDT' do
+        let(:usdt_rate) { 1.0 }
+        let(:account_currency_rate) { 1.0 }
+
+        include_examples :completes_payment do
+          let(:complete_amount) { original_amount }
+        end
+      end
+
       context 'when payment is type=cryptomus status=canceled' do
         let!(:payment_attrs) do
           super().merge status_id: Payment::CONST::STATUS_ID_CANCELED,
@@ -96,21 +125,22 @@ RSpec.describe CryptomusPayment::HandleWebhook do
       context 'when payment is type=cryptomus status=completed' do
         let!(:payment_attrs) do
           super().merge status_id: Payment::CONST::STATUS_ID_COMPLETED,
-                        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS
+                        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS,
+                        metadata: { 'usdt_rate' => usdt_rate, 'merchant_amount' => original_amount }
         end
 
-        context 'when merchant amount is not equal to payment amount' do
+        context 'when merchant amount is not equal to completed merchant_amount' do
           let(:payload) do
             super().merge merchant_amount: '99.90'
           end
 
           it 'raises Error' do
-            msg = "success webhook received with amount 99.9 but payment is completed with amount #{original_amount}"
+            msg = "success webhook received with merchant_amount 99.90 but payment is completed with merchant_amount #{original_amount}"
             expect { subject }.to raise_error(described_class::Error, msg)
           end
         end
 
-        context 'when merchant amount is equal to payment amount' do
+        context 'when merchant amount is equal to completed merchant_amount' do
           it 'does not raise error' do
             expect { subject }.not_to raise_error
           end
@@ -129,7 +159,7 @@ RSpec.describe CryptomusPayment::HandleWebhook do
       end
 
       include_examples :completes_payment do
-        let(:complete_amount) { 105.66 }
+        let(:complete_amount) { (105.66.to_d * usdt_rate / account_currency_rate).round(8) }
       end
 
       context 'when payment is type=cryptomus status=canceled' do
@@ -148,17 +178,18 @@ RSpec.describe CryptomusPayment::HandleWebhook do
       context 'when payment is type=cryptomus status=completed' do
         let!(:payment_attrs) do
           super().merge status_id: Payment::CONST::STATUS_ID_COMPLETED,
-                        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS
+                        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS,
+                        metadata: { 'usdt_rate' => usdt_rate, 'merchant_amount' => original_amount }
         end
 
-        context 'when merchant amount is not equal to payment amount' do
+        context 'when merchant amount is not equal to completed merchant_amount' do
           it 'raises Error' do
-            msg = "success webhook received with amount 105.66 but payment is completed with amount #{original_amount}"
+            msg = "success webhook received with merchant_amount 105.66000000 but payment is completed with merchant_amount #{original_amount}"
             expect { subject }.to raise_error(described_class::Error, msg)
           end
         end
 
-        context 'when merchant amount is equal to payment amount' do
+        context 'when merchant amount is equal to completed merchant_amount' do
           let(:original_amount) { 105.66 }
 
           it 'does not raise error' do
@@ -200,7 +231,8 @@ RSpec.describe CryptomusPayment::HandleWebhook do
       context 'when payment is type=cryptomus status=completed' do
         let!(:payment_attrs) do
           super().merge status_id: Payment::CONST::STATUS_ID_COMPLETED,
-                        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS
+                        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS,
+                        metadata: { 'usdt_rate' => usdt_rate, 'merchant_amount' => original_amount }
         end
 
         it 'does not raise error' do
@@ -223,7 +255,8 @@ RSpec.describe CryptomusPayment::HandleWebhook do
       context 'when payment is type=cryptomus status=completed' do
         let!(:payment_attrs) do
           super().merge status_id: Payment::CONST::STATUS_ID_COMPLETED,
-                        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS
+                        type_id: Payment::CONST::TYPE_ID_CRYPTOMUS,
+                        metadata: { 'usdt_rate' => usdt_rate, 'merchant_amount' => original_amount }
         end
 
         it 'raises Error' do
@@ -262,7 +295,8 @@ RSpec.describe CryptomusPayment::HandleWebhook do
     context 'when payment is type=manual status=completed' do
       let!(:payment_attrs) do
         super().merge status_id: Payment::CONST::STATUS_ID_COMPLETED,
-                      type_id: Payment::CONST::TYPE_ID_MANUAL
+                      type_id: Payment::CONST::TYPE_ID_MANUAL,
+                      metadata: nil
       end
 
       it 'raises Error' do

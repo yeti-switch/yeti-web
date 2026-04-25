@@ -31,13 +31,19 @@ module CryptomusPayment
 
     def handle_success_status
       raise Error, 'success webhook received but payment is canceled' if payment.canceled?
-      if payment.completed? && payment.amount != merchant_amount_usd
-        raise Error, "success webhook received with amount #{merchant_amount_usd} but payment is completed with amount #{payment.amount}"
+
+      if payment.completed?
+        if payload[:merchant_amount].to_d != payment.metadata['merchant_amount'].to_d
+          raise Error, "success webhook received with merchant_amount #{payload[:merchant_amount]} but payment is completed with merchant_amount #{payment.metadata['merchant_amount']}"
+        end
+
+        return
       end
 
       payment.update!(
-        amount: merchant_amount_usd,
-        status_id: Payment::CONST::STATUS_ID_COMPLETED
+        amount: merchant_amount_in_account_currency,
+        status_id: Payment::CONST::STATUS_ID_COMPLETED,
+        metadata: payment.metadata.merge('merchant_amount' => payload[:merchant_amount].to_f)
       )
     end
 
@@ -47,12 +53,9 @@ module CryptomusPayment
       payment.update!(status_id: Payment::CONST::STATUS_ID_CANCELED)
     end
 
-    # in CustomerApi::CryptomusPaymentForm we crete cryptomus payment in USDT
-    # so we can use merchant_amount as payment amount because USDT equal to USD.
-    # webhook payload nor payment info does not contain merchant amount in USD
-    # (values that merchant received to the USD balance).
-    def merchant_amount_usd
-      payload[:merchant_amount].to_d
+    def merchant_amount_in_account_currency
+      usdt_rate = payment.metadata['usdt_rate']
+      (payload[:merchant_amount].to_d * usdt_rate / payment.account.currency.rate).round(8)
     end
 
     define_memoizable :payment, apply: lambda {
