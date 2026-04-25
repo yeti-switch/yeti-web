@@ -105,7 +105,7 @@ RSpec.describe Api::Rest::Customer::V1::CryptomusPaymentsController, type: :requ
       before { usdt_currency.destroy! }
 
       include_examples :creation_failed, errors: [
-        { detail: 'base - Configuration error', source: { pointer: '/data/attributes/base' } }
+        { detail: 'Configuration error', source: { pointer: '/data' } }
       ]
 
       it 'logs error' do
