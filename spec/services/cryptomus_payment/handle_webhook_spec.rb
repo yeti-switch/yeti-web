@@ -21,7 +21,7 @@ RSpec.describe CryptomusPayment::HandleWebhook do
       it 'stores merchant_amount in metadata' do
         subject
         expect(payment.reload.metadata).to include(
-          'merchant_amount' => payload[:merchant_amount].to_d
+          'merchant_amount' => payload[:merchant_amount].to_f
         )
       end
     end
