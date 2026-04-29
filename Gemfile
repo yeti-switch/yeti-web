@@ -116,7 +116,7 @@ group :development, :test do
   gem 'bullet'
   gem 'byebug'
 
-  gem 'brakeman'
+  gem 'brakeman', require: false
   gem 'bundler-audit', require: false
   gem 'factory_bot_rails'
   gem 'parallel_tests'

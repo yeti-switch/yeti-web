@@ -14,6 +14,19 @@ module CaptureError
       YetiConfig.sentry.enabled
     end
 
+    # Checks whether the current process is executing a Rake task.
+    #
+    # `defined?(::Rake)` is unreliable here: `Rake` is an ordinary Ruby constant
+    # and gets loaded into long-running processes (puma, delayed_job, schedulers)
+    # transitively via `Bundler.require`. `Rake.application.top_level_tasks` is
+    # only populated when Rake is actually executing tasks.
+    # @return [TrueClass,FalseClass]
+    def rake_task_invocation?
+      return false unless defined?(::Rake)
+
+      ::Rake.application.top_level_tasks.any?
+    end
+
     # Configures Sentry gem.
     # Use only once in initializer.
     def configure!
@@ -32,14 +45,7 @@ module CaptureError
         sentry_config.inspect_exception_causes_for_exclusion = false
 
         # use Rails' parameter filter to sanitize the event
-        filters = [
-          ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters),
-          ActiveSupport::ParameterFilter.new(['Authorization'])
-        ]
-        sentry_config.before_send = lambda { |event, _hint = nil|
-          filters.each { |filter| event = filter.filter(event.to_hash) }
-          event
-        }
+        sentry_config.before_send = build_before_send
 
         # Usage of an async option is discouraged by sentry-ruby developers.
         # By default sentry will create its own background workers to send sentry events.
@@ -169,6 +175,40 @@ module CaptureError
     end
 
     private
+
+    # Builds the `before_send` lambda that sanitizes events using Rails'
+    # configured `filter_parameters` plus an explicit `Authorization` filter.
+    #
+    # Sentry-ruby 6 requires `before_send` to return a `Sentry::ErrorEvent`
+    # (events that come back as `Hash` are dropped by `Sentry::Client#send_event`
+    # with `Discarded event because before_send didn't return a Sentry::ErrorEvent`).
+    # We therefore mutate the event in place via its public setters and return
+    # the event itself.
+    # @return [Proc]
+    def build_before_send
+      filters = [
+        ActiveSupport::ParameterFilter.new(Rails.application.config.filter_parameters),
+        ActiveSupport::ParameterFilter.new(['Authorization'])
+      ]
+      lambda do |event, _hint = nil|
+        filters.each { |filter| filter_event!(event, filter) }
+        event
+      end
+    end
+
+    def filter_event!(event, filter)
+      event.user     = filter.filter(event.user)     if event.user.is_a?(Hash)
+      event.extra    = filter.filter(event.extra)    if event.extra.is_a?(Hash)
+      event.tags     = filter.filter(event.tags)     if event.tags.is_a?(Hash)
+      event.contexts = filter.filter(event.contexts) if event.contexts.is_a?(Hash)
+
+      return unless event.request
+
+      request = event.request
+      request.data    = filter.filter(request.data)    if request.data.is_a?(Hash)
+      request.headers = filter.filter(request.headers) if request.headers.is_a?(Hash)
+      request.env     = filter.filter(request.env)     if request.env.is_a?(Hash)
+    end
 
     def with_capture_context(context, exception: nil)
       Sentry.with_scope do |scope|
