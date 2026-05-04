@@ -4,6 +4,6 @@
 # but only run the full configuration when sentry is enabled and not in a Rake task.
 require 'sentry-ruby'
 
-if CaptureError.enabled? && !defined?(::Rake)
+if CaptureError.enabled? && !CaptureError.rake_task_invocation?
   CaptureError.configure!
 end
