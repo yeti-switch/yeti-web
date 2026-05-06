@@ -38,6 +38,7 @@ ActiveAdmin.register_page 'Info' do
               row :keep_expired_destinations_days
               row :keep_expired_dialpeers_days
               row :keep_balance_notifications_days
+              row :disable_balance_notification_emails
               row :calls_monitoring do
                 attributes_table_for(YetiConfig.calls_monitoring) do
                   row :write_account_stats

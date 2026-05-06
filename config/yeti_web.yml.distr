@@ -79,6 +79,11 @@ s3_storage:
 
 tmpdir: 'tmp'
 
+# When true, suppresses balance-threshold emails to addresses configured on
+# Account Balance Notification Settings (send_balance_notifications_to).
+# HTTP webhooks and emails to System::EventSubscription contacts are unaffected.
+#disable_balance_notification_emails: false
+
 # Admin UI session expiration configuration (optional)
 # If not set, sessions will not expire (current behavior)
 # If set, sessions will expire after the specified number of seconds of inactivity
