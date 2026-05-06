@@ -15,12 +15,9 @@ gem 'responders'
 
 # Authentication
 gem 'activeadmin-oidc', github: 'activeadmin-plugins/activeadmin-oidc'
-gem 'activeldap'
 gem 'd3-rails', '3.5.2'
 gem 'devise', '>= 4.6.0'
-gem 'devise_ldap_authenticatable', github: 'cschiewek/devise_ldap_authenticatable', branch: 'default'
-gem 'net-ldap', '~> 0.19.0'
-gem 'ostruct', '~> 0.6.1' # need for net-ldap
+gem 'ostruct', '~> 0.6.1'
 
 # Seamless JWT authentication for Rails API
 gem 'jwt'

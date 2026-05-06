@@ -36,7 +36,6 @@ RSpec.describe AdminUserOidcHandler do
     # :database_authenticatable is kept so Devise mounts the sessions
     # controller, giving us a /login landing page for the SSO button.
     it { is_expected.to include(:database_authenticatable) }
-    it { is_expected.not_to include(:ldap_authenticatable) }
   end
 
   it 'registers the :oidc omniauth provider' do

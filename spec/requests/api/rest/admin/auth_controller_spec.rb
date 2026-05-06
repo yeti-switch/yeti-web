@@ -28,70 +28,44 @@ RSpec.describe Api::Rest::Admin::AuthController, type: :request do
         }
       end
 
-      context 'ldap' do
-        before do
-          allow(AdminUser).to receive(:ldap_config_exists?) { true }
+      it 'responds successfully' do
+        subject
+        expect(response.status).to eq(201)
+        expect(response_json).to match(jwt: a_kind_of(String))
+      end
+
+      context 'when admin.allowed_ips matches request.remote_ip' do
+        let(:admin_attrs) do
+          super().merge allowed_ips: ['127.0.0.1']
         end
 
         it 'responds successfully' do
           subject
           expect(response.status).to eq(201)
           expect(response_json).to match(jwt: a_kind_of(String))
-        end
-
-        context 'when admin.allowed_ips does not match request.remote_ip' do
-          let(:admin_attrs) do
-            super().merge allowed_ips: ['127.0.0.1']
-          end
-
-          it 'responds successfully' do
-            subject
-            expect(response.status).to eq(201)
-            expect(response_json).to match(jwt: a_kind_of(String))
-          end
-        end
-
-        context 'when admin.allowed_ips does not match request.remote_ip' do
-          let(:admin_attrs) do
-            super().merge allowed_ips: ['10.1.2.3']
-          end
-
-          it 'responds with failed login', :aggregate_failures do
-            subject
-            expect(response.status).to eq(401)
-            expect(response_json).to match(
-                                       errors: [
-                                         title: 'Authentication failed',
-                                         detail: 'Your IP address is not allowed.',
-                                         code: '401',
-                                         status: '401'
-                                       ]
-                                     )
-          end
         end
       end
 
-      context 'no ldap' do
-        before do
-          allow(AdminUser).to receive(:ldap_config_exists?) { false }
+      context 'when admin.allowed_ips does not match request.remote_ip' do
+        let(:admin_attrs) do
+          super().merge allowed_ips: ['10.1.2.3']
         end
 
-        it 'responds successfully' do
+        it 'responds with failed login', :aggregate_failures do
           subject
-          expect(response.status).to eq(201)
-          expect(response_json).to match(jwt: a_kind_of(String))
+          expect(response.status).to eq(401)
+          expect(response_json).to match(
+                                     errors: [
+                                       title: 'Authentication failed',
+                                       detail: 'Your IP address is not allowed.',
+                                       code: '401',
+                                       status: '401'
+                                     ]
+                                   )
         end
       end
 
       context 'oidc mode', oidc_mode: true do
-        it 'still authenticates via password' do
-          subject
-          expect(response.status).to eq(201)
-          expect(response_json).to match(jwt: a_kind_of(String))
-        end
-      end
-
-      context 'ldap mode', :ldap do
         it 'still authenticates via password' do
           subject
           expect(response.status).to eq(201)

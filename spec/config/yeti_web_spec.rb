@@ -66,7 +66,6 @@ RSpec.describe 'config/yeti_web.yml' do
         pdf_converter: a_kind_of(String),
         auto_approve: boolean
       },
-      default_ldap_roles: a_kind_of(Array),
       api_log_enabled: boolean,
       logs: {
         tags: a_kind_of(Hash)
