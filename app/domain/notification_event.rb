@@ -24,7 +24,7 @@ class NotificationEvent
       System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_REACHED,
       subject: "Account with id #{account.id} low balance",
       message: account_threshold_message(account),
-      additional_contacts: account_contacts(account),
+      additional_contacts: account_email_recipients(account),
       event_data: account_threshold_data(account)
     )
   end
@@ -34,7 +34,7 @@ class NotificationEvent
       System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_REACHED,
       subject: "Account with id #{account.id} high balance",
       message: account_threshold_message(account),
-      additional_contacts: account_contacts(account),
+      additional_contacts: account_email_recipients(account),
       event_data: account_threshold_data(account)
     )
   end
@@ -44,7 +44,7 @@ class NotificationEvent
       System::EventSubscription::CONST::EVENT_ACCOUNT_LOW_THRESHOLD_CLEARED,
       subject: "Account with id #{account.id} low balance cleared",
       message: account_threshold_message(account),
-      additional_contacts: account_contacts(account),
+      additional_contacts: account_email_recipients(account),
       event_data: account_threshold_data(account)
     )
   end
@@ -54,7 +54,7 @@ class NotificationEvent
       System::EventSubscription::CONST::EVENT_ACCOUNT_HIGH_THRESHOLD_CLEARED,
       subject: "Account with id #{account.id} high balance cleared",
       message: account_threshold_message(account),
-      additional_contacts: account_contacts(account),
+      additional_contacts: account_email_recipients(account),
       event_data: account_threshold_data(account)
     )
   end
@@ -151,6 +151,12 @@ class NotificationEvent
 
   def account_contacts(account)
     account.balance_notification_setting.contacts.preload(contractor: :smtp_connection).to_a
+  end
+
+  def account_email_recipients(account)
+    return [] if YetiConfig.disable_balance_notification_emails
+
+    account_contacts(account)
   end
 
   def destination_contacts(destination)

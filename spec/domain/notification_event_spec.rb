@@ -99,6 +99,45 @@ RSpec.describe NotificationEvent do
     end
 
     context 'when event_subscription has url'
+
+    context 'when YetiConfig.disable_balance_notification_emails is true' do
+      before do
+        allow(YetiConfig).to receive(:disable_balance_notification_emails).and_return(true)
+      end
+
+      let(:expected_contacts) { subscription_contacts }
+
+      include_examples :sends_email_to_contacts
+      include_examples :does_not_enqueue_send_http_job
+
+      context 'when event_subscription has url filled' do
+        before do
+          event_subscription.update! url: 'http://example.com/cb'
+        end
+
+        include_examples :sends_email_to_contacts
+        # expected_event_data still carries the account's send_balance_notifications_to emails
+        include_examples :enqueues_send_http_job
+      end
+
+      context 'when event_subscription has no contacts' do
+        before do
+          event_subscription.update! send_to: []
+        end
+
+        include_examples :does_not_send_email
+        include_examples :does_not_enqueue_send_http_job
+
+        context 'when event_subscription has url filled' do
+          before do
+            event_subscription.update! url: 'http://example.com/cb'
+          end
+
+          include_examples :does_not_send_email
+          include_examples :enqueues_send_http_job
+        end
+      end
+    end
   end
 
   shared_examples :send_destination_quality_alarm_emails do
@@ -172,6 +211,17 @@ RSpec.describe NotificationEvent do
 
       include_examples :sends_email_to_contacts
       include_examples :enqueues_send_http_job
+    end
+
+    context 'when YetiConfig.disable_balance_notification_emails is true' do
+      # Regression guard: the flag must only suppress account balance emails,
+      # not destination quality alarm emails to rateplan-configured contacts.
+      before do
+        allow(YetiConfig).to receive(:disable_balance_notification_emails).and_return(true)
+      end
+
+      include_examples :sends_email_to_contacts
+      include_examples :does_not_enqueue_send_http_job
     end
   end
 

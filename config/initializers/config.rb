@@ -67,6 +67,8 @@ Config.setup do |setup_config|
 
     optional(:partition_detach_before_drop).filled(:bool)
 
+    optional(:disable_balance_notification_emails).filled(:bool)
+
     required(:prometheus).schema do
       required(:enabled).value(:bool?)
       required(:host).maybe(:string)
