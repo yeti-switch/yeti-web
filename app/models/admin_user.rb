@@ -68,18 +68,6 @@ class AdminUser < ApplicationRecord
     name.present? ? find_by(username: name) : nil
   end
 
-  def self.ldap?
-    AdminUser.devise_modules.include?(:ldap_authenticatable)
-  end
-
-  def self.ldap_config
-    Rails.root.join 'config/ldap.yml'
-  end
-
-  def self.ldap_config_exists?
-    File.exist?(ldap_config)
-  end
-
   def self.oidc?
     respond_to?(:omniauth_providers) && omniauth_providers.include?(:oidc)
   end
@@ -93,7 +81,7 @@ class AdminUser < ApplicationRecord
   end
 
   def self.external_auth?
-    ldap? || oidc?
+    oidc?
   end
 
   def self.available_roles
@@ -104,8 +92,6 @@ class AdminUser < ApplicationRecord
 
   if oidc_config_exists?
     include AdminUserOidcHandler
-  elsif ldap_config_exists?
-    include AdminUserLdapHandler
   else
     include AdminUserDatabaseHandler
   end
@@ -129,12 +115,7 @@ class AdminUser < ApplicationRecord
     if params[:password].present? || params[:password_confirmation].present?
       update_with_password params
     else
-      attrs = params.except(:password, :password_confirmation)
-      if respond_to?(:update_without_password)
-        update_without_password attrs # db auth
-      else
-        update(attrs) # ldap
-      end
+      update_without_password params.except(:password, :password_confirmation)
     end
   end
 
