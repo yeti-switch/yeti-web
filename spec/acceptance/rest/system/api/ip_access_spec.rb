@@ -9,7 +9,7 @@ RSpec.resource 'System IP access' do
   get '/api/rest/system/ip_access' do
     before do
       create_list(:customers_auth, 2)
-      stub_request(:post, %r{#{Regexp.escape(ClickHouse.config.url)}.*}).to_return(
+      stub_request(:post, /#{Regexp.escape(ClickHouse.config.url)}.*/).to_return(
         status: 200,
         headers: { 'content-type' => 'application/json; charset=utf-8' },
         body: { meta: [], data: [], rows: 0 }.to_json

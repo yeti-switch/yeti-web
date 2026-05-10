@@ -88,7 +88,7 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
               data: [
                 { 'auth_orig_ip' => '203.0.113.10' },
                 { 'auth_orig_ip' => '203.0.113.11' },
-                { 'auth_orig_ip' => '10.0.0.5' }     # inside 10.0.0.0/24 — kept distinct from the CIDR
+                { 'auth_orig_ip' => '10.0.0.5' } # inside 10.0.0.0/24 — kept distinct from the CIDR
               ],
               rows: 3
             }.to_json

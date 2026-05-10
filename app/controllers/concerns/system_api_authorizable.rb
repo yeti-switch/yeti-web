@@ -25,7 +25,7 @@ module SystemApiAuthorizable
     presented = bearer_token_from_header || params[:token].to_s
     return if presented.present? && tokens_equal?(presented, expected)
 
-    head :unauthorized
+    head 401
   end
 
   def bearer_token_from_header
