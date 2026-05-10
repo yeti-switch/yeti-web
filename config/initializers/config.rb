@@ -41,6 +41,9 @@ Config.setup do |setup_config|
         optional(:incoming_cdr_hide_fields).array(:string)
         optional(:incoming_statistics_use_vendor_duration).value(:bool?)
       end
+      optional(:system).schema do
+        optional(:token).maybe(:string)
+      end
     end
 
     optional(:rec_format).value(Dry::Types['string'].enum('wav', 'mp3'))
@@ -107,6 +110,12 @@ Config.setup do |setup_config|
     end
     optional(:admin_ui).schema do
       optional(:session_lifetime).maybe(:int?)
+    end
+
+    optional(:ip_access).schema do
+      optional(:min_ipv4_mask).maybe(:int?)
+      optional(:min_ipv6_mask).maybe(:int?)
+      optional(:cdr_lookback_days).maybe(:int?)
     end
   end
 end

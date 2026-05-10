@@ -7,7 +7,14 @@ RSpec.resource 'System IP access' do
   header 'Content-Type', 'application/vnd.api+json'
 
   get '/api/rest/system/ip_access' do
-    before { create_list(:customers_auth, 2) }
+    before do
+      create_list(:customers_auth, 2)
+      stub_request(:post, /#{Regexp.escape(ClickHouse.config.url)}.*/).to_return(
+        status: 200,
+        headers: { 'content-type' => 'application/json; charset=utf-8' },
+        body: { meta: [], data: [], rows: 0 }.to_json
+      )
+    end
 
     example_request 'get listing' do
       expect(status).to eq(200)
