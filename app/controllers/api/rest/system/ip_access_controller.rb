@@ -8,21 +8,48 @@ class Api::Rest::System::IpAccessController < Api::RestController
   DEFAULT_CDR_LOOKBACK_DAYS = 7
 
   def index
-    render json: addresses
+    render json: {
+      lega_sip_ips: lega_sip_ips,
+      lega_rtp_ips: lega_rtp_ips
+    }
   end
 
   private
 
-  def addresses
+  def lega_sip_ips
     (customer_auth_addresses + recent_cdr_addresses).uniq
+  end
+
+  def lega_rtp_ips
+    gateway_rtp_acl_addresses.uniq
   end
 
   def customer_auth_addresses
     CustomersAuthNormalized
+      .distinct
+      .where(
+        '(family(ip) = 4 AND masklen(ip) >= ?) OR (family(ip) = 6 AND masklen(ip) >= ?)',
+        lega_sip_min_ipv4_mask, lega_sip_min_ipv6_mask
+      )
       .pluck(:ip)
-      .uniq
       .filter_map { |ip| safe_ipaddr(ip) }
-      .select { |ip| customer_auth_mask_acceptable?(ip) }
+      .map { |ip| "#{ip}/#{ip.cidr_mask}" }
+  end
+
+  def gateway_rtp_acl_addresses
+    sql = <<~SQL.squish
+      SELECT DISTINCT ip_elem
+      FROM #{Gateway.quoted_table_name} g
+      CROSS JOIN unnest(g.rtp_acl) AS ip_elem
+      WHERE g.id IN (SELECT gateway_id FROM #{CustomersAuth.quoted_table_name})
+        AND (
+          (family(ip_elem) = 4 AND masklen(ip_elem) >= ?) OR
+          (family(ip_elem) = 6 AND masklen(ip_elem) >= ?)
+        )
+    SQL
+    query = ActiveRecord::Base.sanitize_sql_array([sql, lega_rtp_min_ipv4_mask, lega_rtp_min_ipv6_mask])
+    Gateway.connection.select_values(query)
+      .filter_map { |ip| safe_ipaddr(ip) }
       .map { |ip| "#{ip}/#{ip.cidr_mask}" }
   end
 
@@ -54,20 +81,20 @@ class Api::Rest::System::IpAccessController < Api::RestController
     SQL
   end
 
-  def customer_auth_mask_acceptable?(ip)
-    if ip.ipv4?
-      ip.cidr_mask >= min_ipv4_mask
-    elsif ip.ipv6?
-      ip.cidr_mask >= min_ipv6_mask
-    end
+  def lega_sip_min_ipv4_mask
+    YetiConfig.ip_access&.lega_sip_min_ipv4_mask.to_i
   end
 
-  def min_ipv4_mask
-    YetiConfig.ip_access&.min_ipv4_mask.to_i
+  def lega_sip_min_ipv6_mask
+    YetiConfig.ip_access&.lega_sip_min_ipv6_mask.to_i
   end
 
-  def min_ipv6_mask
-    YetiConfig.ip_access&.min_ipv6_mask.to_i
+  def lega_rtp_min_ipv4_mask
+    YetiConfig.ip_access&.lega_rtp_min_ipv4_mask.to_i
+  end
+
+  def lega_rtp_min_ipv6_mask
+    YetiConfig.ip_access&.lega_rtp_min_ipv6_mask.to_i
   end
 
   def cdr_lookback_days
