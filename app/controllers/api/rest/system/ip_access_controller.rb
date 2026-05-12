@@ -49,8 +49,8 @@ class Api::Rest::System::IpAccessController < Api::RestController
     SQL
     query = ActiveRecord::Base.sanitize_sql_array([sql, lega_rtp_min_ipv4_mask, lega_rtp_min_ipv6_mask])
     Gateway.connection.select_values(query)
-      .filter_map { |ip| safe_ipaddr(ip) }
-      .map { |ip| "#{ip}/#{ip.cidr_mask}" }
+           .filter_map { |ip| safe_ipaddr(ip) }
+           .map { |ip| "#{ip}/#{ip.cidr_mask}" }
   end
 
   def recent_cdr_addresses

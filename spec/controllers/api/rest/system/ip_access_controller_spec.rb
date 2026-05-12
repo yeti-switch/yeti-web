@@ -164,7 +164,7 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
                  cdr_lookback_days: nil)
         )
         gw = create(:gateway, rtp_acl: ['192.168.1.0/24', '203.0.113.5/32'])
-        create(:customers_auth, ip: '192.168.1.0/24', gateway: gw)  # accepted in sip (>= /24)
+        create(:customers_auth, ip: '192.168.1.0/24', gateway: gw) # accepted in sip (>= /24)
         create(:customers_auth, ip: '10.0.0.0/8') # rejected in sip (< /24)
       end
 
@@ -175,7 +175,9 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
       end
     end
 
-    context 'when ClickHouse is enabled', freeze_time: Time.zone.parse('2026-05-08 12:00:00') do
+    context 'when ClickHouse is enabled', freeze_time: true do
+      let(:expected_cdr_since) { 7.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S') }
+
       before do
         # Restore real config so the WebMock URL matches the configured ClickHouse URL.
         allow(ClickHouse).to receive(:config).and_call_original
@@ -187,7 +189,7 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
             basic_auth: [ClickHouse.config.username, ClickHouse.config.password],
             query: hash_including(
               database: ClickHouse.config.database,
-              query: a_string_matching(/SELECT DISTINCT auth_orig_ip.*FROM cdrs.*time_start > '2026-05-01 12:00:00'.*duration > 0/m)
+              query: a_string_matching(/SELECT DISTINCT auth_orig_ip.*FROM cdrs.*time_start > '#{Regexp.escape(expected_cdr_since)}'.*duration > 0/m)
             )
           ).to_return(
             status: 200,
