@@ -113,9 +113,11 @@ Config.setup do |setup_config|
     end
 
     optional(:ip_access).schema do
-      optional(:min_ipv4_mask).maybe(:int?)
-      optional(:min_ipv6_mask).maybe(:int?)
       optional(:cdr_lookback_days).maybe(:int?)
+      optional(:lega_sip_min_ipv4_mask).maybe(:int?)
+      optional(:lega_sip_min_ipv6_mask).maybe(:int?)
+      optional(:lega_rtp_min_ipv4_mask).maybe(:int?)
+      optional(:lega_rtp_min_ipv6_mask).maybe(:int?)
     end
   end
 end
