@@ -13,9 +13,15 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
     end
 
     context 'with no records' do
-      it 'returns empty arrays under both keys' do
+      it 'returns empty arrays under all keys' do
         subject
-        expect(body).to eq('lega_sip_ips' => [], 'lega_rtp_ips' => [])
+        expect(body).to eq(
+          'lega_sip_ips' => [],
+          'lega_rtp_ips' => [],
+          'legb_sip_ips' => [],
+          'legb_sip_fqdns' => [],
+          'legb_rtp_ips' => []
+        )
       end
     end
 
@@ -175,6 +181,104 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
       end
     end
 
+    context 'with termination gateways' do
+      before do
+        create(:gateway,
+               allow_termination: true,
+               host: '198.51.100.10',
+               term_route_set: ['<sip:203.0.113.5:5060>', '<sip:peer.example.com>'],
+               rtp_acl: ['198.51.100.0/24', '2001:db8::/64'])
+        create(:gateway,
+               allow_termination: true,
+               host: 'sbc.example.org:5060',
+               term_route_set: ['<sip:[2001:db8:1::1]:5060>'],
+               rtp_acl: ['203.0.113.0/24'])
+        # Gateway with allow_termination=false must be ignored.
+        create(:gateway,
+               allow_termination: false,
+               host: '10.0.0.1',
+               term_route_set: ['<sip:ignored.example.com>'],
+               rtp_acl: ['10.0.0.0/24'])
+      end
+
+      it 'returns IPs collected from host and term_route_set in legb_sip_ips' do
+        subject
+        expect(body['legb_sip_ips']).to match_array(
+          ['198.51.100.10/32', '203.0.113.5/32', '2001:db8:1::1/128']
+        )
+      end
+
+      it 'returns FQDNs collected from host and term_route_set in legb_sip_fqdns' do
+        subject
+        expect(body['legb_sip_fqdns']).to match_array(
+          ['peer.example.com', 'sbc.example.org']
+        )
+      end
+
+      it 'returns rtp_acl entries from termination gateways in legb_rtp_ips' do
+        subject
+        expect(body['legb_rtp_ips']).to match_array(
+          ['198.51.100.0/24', '2001:db8::/64', '203.0.113.0/24']
+        )
+      end
+    end
+
+    context 'with sip options probers' do
+      before do
+        create(:sip_options_prober,
+               ruri_domain: '198.51.100.30',
+               route_set: ['sip:203.0.113.50:5060', 'sip:prober-proxy.example.com'])
+        create(:sip_options_prober,
+               ruri_domain: 'prober.example.org:5060',
+               route_set: [])
+      end
+
+      it 'includes prober ruri_domain and route_set hosts in legb output' do
+        subject
+        expect(body['legb_sip_ips']).to include('198.51.100.30/32', '203.0.113.50/32')
+        expect(body['legb_sip_fqdns']).to include('prober-proxy.example.com', 'prober.example.org')
+      end
+    end
+
+    context 'with equipment registrations' do
+      before do
+        create(:registration,
+               domain: '198.51.100.40',
+               route_set: ['sip:user@203.0.113.60', 'sip:user@reg-proxy.example.com'])
+        create(:registration,
+               domain: 'reg.example.org:5060',
+               route_set: [])
+      end
+
+      it 'includes registration domain and route_set hosts in legb output' do
+        subject
+        expect(body['legb_sip_ips']).to include('198.51.100.40/32', '203.0.113.60/32')
+        expect(body['legb_sip_fqdns']).to include('reg-proxy.example.com', 'reg.example.org')
+      end
+    end
+
+    context 'with duplicate hosts across termination gateways' do
+      before do
+        create(:gateway,
+               allow_termination: true,
+               host: '198.51.100.10',
+               term_route_set: ['<sip:peer.example.com>'],
+               rtp_acl: ['198.51.100.0/24'])
+        create(:gateway,
+               allow_termination: true,
+               host: 'peer.example.com',
+               term_route_set: ['<sip:198.51.100.10:5070>'],
+               rtp_acl: ['198.51.100.0/24'])
+      end
+
+      it 'deduplicates legb outputs' do
+        subject
+        expect(body['legb_sip_ips']).to match_array(['198.51.100.10/32'])
+        expect(body['legb_sip_fqdns']).to match_array(['peer.example.com'])
+        expect(body['legb_rtp_ips']).to match_array(['198.51.100.0/24'])
+      end
+    end
+
     context 'when ClickHouse is enabled', freeze_time: true do
       let(:expected_cdr_since) { 7.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S') }
 
@@ -189,19 +293,23 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
             basic_auth: [ClickHouse.config.username, ClickHouse.config.password],
             query: hash_including(
               database: ClickHouse.config.database,
-              query: a_string_matching(/SELECT DISTINCT auth_orig_ip.*FROM cdrs.*time_start > '#{Regexp.escape(expected_cdr_since)}'.*duration > 0/m)
+              query: a_string_matching(/groupUniqArrayIf\(auth_orig_ip.*groupUniqArrayIf\(sign_term_ip.*FROM cdrs.*time_start > '#{Regexp.escape(expected_cdr_since)}'.*duration > 0/m)
             )
           ).to_return(
             status: 200,
             headers: { 'content-type' => 'application/json; charset=utf-8' },
             body: {
-              meta: [{ name: 'auth_orig_ip', type: 'String' }],
-              data: [
-                { 'auth_orig_ip' => '203.0.113.10' },
-                { 'auth_orig_ip' => '203.0.113.11' },
-                { 'auth_orig_ip' => '10.0.0.5' } # inside 10.0.0.0/24 — kept distinct from the CIDR
+              meta: [
+                { name: 'lega_ips', type: 'Array(String)' },
+                { name: 'legb_ips', type: 'Array(String)' }
               ],
-              rows: 3
+              data: [
+                {
+                  'lega_ips' => ['203.0.113.10', '203.0.113.11', '10.0.0.5'],
+                  'legb_ips' => ['198.51.100.20', '198.51.100.21']
+                }
+              ],
+              rows: 1
             }.to_json
           )
       end
@@ -214,6 +322,26 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
                                                       '203.0.113.11/32',
                                                       '10.0.0.5/32'
                                                     ])
+      end
+
+      it 'merges termination-gateway host IPs with last-7d CDR sign_term_ip values in legb_sip_ips' do
+        subject
+        expect(body['legb_sip_ips']).to match_array(['198.51.100.20/32', '198.51.100.21/32'])
+      end
+
+      context 'with termination gateway host overlapping CDR data' do
+        before do
+          create(:gateway,
+                 allow_termination: true,
+                 host: '198.51.100.20',
+                 term_route_set: [],
+                 rtp_acl: nil)
+        end
+
+        it 'deduplicates legb_sip_ips across host and CDR sources' do
+          subject
+          expect(body['legb_sip_ips']).to match_array(['198.51.100.20/32', '198.51.100.21/32'])
+        end
       end
 
       context 'when cdr_lookback_days is 0' do
@@ -238,16 +366,17 @@ RSpec.describe Api::Rest::System::IpAccessController, type: :controller do
         end
 
         it 'logs the error and returns only CustomersAuth IPs' do
-          expect(Rails.logger).to receive(:error).with(/ClickHouse fetch failed/)
+          expect(Rails.logger).to receive(:error).with(/ClickHouse fetch failed/).once
           subject
           expect(body['lega_sip_ips']).to match_array(['10.0.0.0/24'])
+          expect(body['legb_sip_ips']).to eq([])
         end
 
         context 'with prometheus enabled' do
           before { allow(PrometheusConfig).to receive(:enabled?).and_return(true) }
 
           it 'increments the clickhouse error counter' do
-            expect(IpAccessProcessor).to receive(:collect_clickhouse_error_metric)
+            expect(IpAccessProcessor).to receive(:collect_clickhouse_error_metric).once
             subject
           end
         end
