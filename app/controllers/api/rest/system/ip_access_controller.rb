@@ -10,18 +10,78 @@ class Api::Rest::System::IpAccessController < Api::RestController
   def index
     render json: {
       lega_sip_ips: lega_sip_ips,
-      lega_rtp_ips: lega_rtp_ips
+      lega_rtp_ips: lega_rtp_ips,
+      legb_sip_ips: legb_sip_ips,
+      legb_sip_fqdns: legb_sip_fqdns,
+      legb_rtp_ips: legb_rtp_ips
     }
   end
 
   private
 
   def lega_sip_ips
-    (customer_auth_addresses + recent_cdr_addresses).uniq
+    (customer_auth_addresses + recent_cdr_ips[:lega]).uniq
   end
 
   def lega_rtp_ips
     gateway_rtp_acl_addresses.uniq
+  end
+
+  def legb_sip_ips
+    ips_from_hosts = legb_sip_hosts.filter_map { |h| safe_ipaddr(h) }
+                                   .map { |ip| "#{ip}/#{ip.cidr_mask}" }
+    (ips_from_hosts + recent_cdr_ips[:legb]).uniq
+  end
+
+  def legb_sip_fqdns
+    legb_sip_hosts.reject { |h| safe_ipaddr(h) }.uniq
+  end
+
+  def legb_rtp_ips
+    legb_termination_gateways
+      .flat_map { |_host, _term_route_set, rtp_acl| Array(rtp_acl) }
+      .filter_map { |ip| safe_ipaddr(ip) }
+      .map { |ip| "#{ip}/#{ip.cidr_mask}" }
+      .uniq
+  end
+
+  def legb_sip_hosts
+    @legb_sip_hosts ||= begin
+      gateway_hosts = legb_termination_gateways.flat_map { |host, route_set, _| collect_hosts(host, route_set) }
+      prober_hosts = legb_probers.flat_map { |host, route_set| collect_hosts(host, route_set) }
+      registration_hosts = legb_registrations.flat_map { |host, route_set| collect_hosts(host, route_set) }
+      (gateway_hosts + prober_hosts + registration_hosts).compact
+    end
+  end
+
+  def collect_hosts(host, route_set)
+    hosts = []
+    hosts << extract_host(host) if host.present?
+    Array(route_set).each do |uri|
+      parsed = SipUriParser.parse(uri)
+      hosts << parsed['h'] if parsed && parsed['h'].present?
+    end
+    hosts
+  end
+
+  def legb_termination_gateways
+    @legb_termination_gateways ||= Gateway
+                                   .where(allow_termination: true)
+                                   .pluck(:host, :term_route_set, :rtp_acl)
+  end
+
+  def legb_probers
+    @legb_probers ||= Equipment::SipOptionsProber.pluck(:ruri_domain, :route_set)
+  end
+
+  def legb_registrations
+    @legb_registrations ||= Equipment::Registration.pluck(:domain, :route_set)
+  end
+
+  # Strips port (and IPv6 brackets) from a Gateway#host value.
+  def extract_host(value)
+    parsed = SipUriParser.parse("sip:#{value}")
+    parsed && parsed['h']
   end
 
   def customer_auth_addresses
@@ -53,30 +113,42 @@ class Api::Rest::System::IpAccessController < Api::RestController
            .map { |ip| "#{ip}/#{ip.cidr_mask}" }
   end
 
-  def recent_cdr_addresses
-    return [] unless clickhouse_enabled?
-    return [] unless cdr_lookback_days.positive?
+  def recent_cdr_ips
+    @recent_cdr_ips ||= fetch_recent_cdr_ips
+  end
+
+  def fetch_recent_cdr_ips
+    return { lega: [], legb: [] } unless clickhouse_enabled?
+    return { lega: [], legb: [] } unless cdr_lookback_days.positive?
 
     response = ClickHouse.connection.execute(recent_cdr_sql)
     body = response.body
-    rows = body.is_a?(Hash) ? Array(body['data']) : []
-    rows
-      .filter_map { |row| safe_ipaddr(row['auth_orig_ip']) }
-      .map { |ip| "#{ip}/#{ip.cidr_mask}" }
+    row = body.is_a?(Hash) ? Array(body['data']).first : nil
+    {
+      lega: normalize_cdr_ips(row && row['lega_ips']),
+      legb: normalize_cdr_ips(row && row['legb_ips'])
+    }
   rescue StandardError => e
     Rails.logger.error("Api::Rest::System::IpAccessController: ClickHouse fetch failed: #{e.class}: #{e.message}")
     IpAccessProcessor.collect_clickhouse_error_metric if PrometheusConfig.enabled?
-    []
+    { lega: [], legb: [] }
+  end
+
+  def normalize_cdr_ips(values)
+    Array(values)
+      .filter_map { |ip| safe_ipaddr(ip) }
+      .map { |ip| "#{ip}/#{ip.cidr_mask}" }
   end
 
   def recent_cdr_sql
     since = cdr_lookback_days.days.ago.utc.strftime('%Y-%m-%d %H:%M:%S')
     <<~SQL.squish
-      SELECT DISTINCT auth_orig_ip
+      SELECT
+        groupUniqArrayIf(auth_orig_ip, auth_orig_ip != '') AS lega_ips,
+        groupUniqArrayIf(sign_term_ip, sign_term_ip != '') AS legb_ips
       FROM cdrs
       WHERE time_start > '#{since}'
         AND duration > 0
-        AND auth_orig_ip != ''
       FORMAT JSON
     SQL
   end
