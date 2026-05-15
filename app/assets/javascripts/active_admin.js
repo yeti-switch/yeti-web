@@ -43,6 +43,7 @@
 //= require vendor/jquery.serialize-object.min.js
 //= require build_tags
 //= require ajax_tab
+//= require rtp_diagram
 
 
 $(document).ready(function () {

@@ -10,6 +10,8 @@ module Cdr
       Routing::SimulationFormPolicy.new(user, nil).read?
     end
 
+    alias_rule :rtp_diagram?, to: :read?
+
     def download_call_record?
       allowed_for_role?(:recording)
     end
