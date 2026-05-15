@@ -207,6 +207,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     redirect_back(fallback_location: root_path)
   end
 
+  member_action :rtp_diagram, method: :get do
+    render json: Cdr::BuildRtpDiagram.call(cdr: resource)
+  end
+
   member_action :routing_simulation, method: :get do
     # proto = UDP if no info in DB
     proto = resource.auth_orig_transport_protocol_id.nil? ? 1 : resource.auth_orig_transport_protocol_id
@@ -631,6 +635,12 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
           row :lega_identity do |r|
             pre code JSON.pretty_generate(r.lega_identity), class: 'json'
           end
+        end
+      end
+      tab 'RTP statistics' do
+        div 'data-rtp-diagram-url': rtp_diagram_cdr_path(cdr),
+            class: 'rtp-diagram-container' do
+          para 'Loading...'
         end
       end
       if authorized?(:allow_metadata)
