@@ -1117,10 +1117,10 @@ $$;
 
 
 --
--- Name: write_rtp_statistics(json, integer, integer, bigint, bigint, bigint, bigint, character varying, character varying); Type: FUNCTION; Schema: switch; Owner: -
+-- Name: write_rtp_statistics(json, integer, integer, bigint, bigint, bigint, bigint, character varying, character varying, timestamp with time zone); Type: FUNCTION; Schema: switch; Owner: -
 --
 
-CREATE FUNCTION switch.write_rtp_statistics(i_data json, i_pop_id integer, i_node_id integer, i_lega_gateway_id bigint, i_lega_gateway_external_id bigint, i_legb_gateway_id bigint, i_legb_gateway_external_id bigint, i_lega_local_tag character varying, i_legb_local_tag character varying) RETURNS void
+CREATE FUNCTION switch.write_rtp_statistics(i_data json, i_pop_id integer, i_node_id integer, i_lega_gateway_id bigint, i_lega_gateway_external_id bigint, i_legb_gateway_id bigint, i_legb_gateway_external_id bigint, i_lega_local_tag character varying, i_legb_local_tag character varying, i_time_start timestamp with time zone DEFAULT NULL::timestamp with time zone) RETURNS void
     LANGUAGE plpgsql SECURITY DEFINER COST 10
     AS $$
 DECLARE
@@ -1153,8 +1153,9 @@ BEGIN
         v_rtp_tx_stream_data.node_id=i_node_id;
         v_rtp_tx_stream_data.local_tag=v_tx_stream.local_tag;
 
-        v_rtp_tx_stream_data.time_start=to_timestamp(v_tx_stream.time_start);
-        v_rtp_tx_stream_data.time_end=to_timestamp(v_tx_stream.time_end);
+        v_rtp_tx_stream_data.stream_time_start=to_timestamp(v_tx_stream.time_start);
+        v_rtp_tx_stream_data.stream_time_end=to_timestamp(v_tx_stream.time_end);
+        v_rtp_tx_stream_data.time_start=i_time_start;
 
         v_rtp_tx_stream_data.rtcp_rtt_min=v_tx_stream.rtcp_rtt_min;
         v_rtp_tx_stream_data.rtcp_rtt_max=v_tx_stream.rtcp_rtt_max;
@@ -1187,7 +1188,8 @@ BEGIN
           v_rtp_rx_stream_data.id=nextval('rtp_statistics.rx_streams_id_seq'::regclass);
           v_rtp_rx_stream_data.tx_stream_id = v_rtp_tx_stream_data.id;
           v_rtp_rx_stream_data.time_start = v_rtp_tx_stream_data.time_start;
-          v_rtp_rx_stream_data.time_end = v_rtp_tx_stream_data.time_end;
+          v_rtp_rx_stream_data.stream_time_start = v_rtp_tx_stream_data.stream_time_start;
+          v_rtp_rx_stream_data.stream_time_end = v_rtp_tx_stream_data.stream_time_end;
 
           v_rtp_rx_stream_data.pop_id=v_rtp_tx_stream_data.pop_id;
           v_rtp_rx_stream_data.node_id=v_rtp_tx_stream_data.node_id;
@@ -1199,7 +1201,7 @@ BEGIN
 
           -- local socket info from TX stream
           v_rtp_rx_stream_data.local_host = v_tx_stream.local_host;
-          v_rtp_rx_stream_data.remote_port = v_tx_stream.local_port;
+          v_rtp_rx_stream_data.local_port = v_tx_stream.local_port;
 
           v_rtp_rx_stream_data.remote_host=v_rx.remote_host;
           v_rtp_rx_stream_data.remote_port=v_rx.remote_port;
@@ -1433,7 +1435,8 @@ BEGIN
     v_dynamic.term_gw_id,
     v_dynamic.term_gw_external_id,
     i_local_tag,
-    i_legb_local_tag
+    i_legb_local_tag,
+    v_cdr.time_start
   );
 
   v_cdr.global_tag=i_global_tag;
@@ -1695,7 +1698,8 @@ BEGIN
     v_dynamic.term_gw_id,
     v_dynamic.term_gw_external_id,
     i_local_tag,
-    i_legb_local_tag
+    i_legb_local_tag,
+    v_cdr.time_start
   );
 
   v_cdr.global_tag=i_global_tag;
@@ -1976,7 +1980,8 @@ BEGIN
     v_dynamic.term_gw_id,
     v_dynamic.term_gw_external_id,
     i_local_tag,
-    i_legb_local_tag
+    i_legb_local_tag,
+    v_cdr.time_start
   );
 
   v_cdr.global_tag = i_global_tag;
@@ -3179,7 +3184,7 @@ CREATE TABLE rtp_statistics.rx_streams (
     id bigint NOT NULL,
     tx_stream_id bigint,
     time_start timestamp with time zone NOT NULL,
-    time_end timestamp with time zone,
+    stream_time_end timestamp with time zone,
     pop_id integer,
     node_id integer,
     gateway_id bigint,
@@ -3207,7 +3212,8 @@ CREATE TABLE rtp_statistics.rx_streams (
     rx_rtcp_jitter_min real,
     rx_rtcp_jitter_max real,
     rx_rtcp_jitter_mean real,
-    rx_rtcp_jitter_std real
+    rx_rtcp_jitter_std real,
+    stream_time_start timestamp with time zone
 )
 PARTITION BY RANGE (time_start);
 
@@ -3238,7 +3244,7 @@ ALTER SEQUENCE rtp_statistics.rx_streams_id_seq OWNED BY rtp_statistics.rx_strea
 CREATE TABLE rtp_statistics.tx_streams (
     id bigint NOT NULL,
     time_start timestamp with time zone NOT NULL,
-    time_end timestamp with time zone,
+    stream_time_end timestamp with time zone,
     pop_id integer,
     node_id integer,
     gateway_id bigint,
@@ -3263,7 +3269,8 @@ CREATE TABLE rtp_statistics.tx_streams (
     tx_rtcp_jitter_max real,
     tx_rtcp_jitter_mean real,
     tx_rtcp_jitter_std real,
-    rx_srtp_decrypt_errors bigint
+    rx_srtp_decrypt_errors bigint,
+    stream_time_start timestamp with time zone
 )
 PARTITION BY RANGE (time_start);
 
@@ -4579,6 +4586,27 @@ CREATE INDEX vendor_traffic_report_data_report_id_idx ON reports.vendor_traffic_
 
 
 --
+-- Name: rx_streams_local_tag_idx; Type: INDEX; Schema: rtp_statistics; Owner: -
+--
+
+CREATE INDEX rx_streams_local_tag_idx ON ONLY rtp_statistics.rx_streams USING btree (local_tag);
+
+
+--
+-- Name: rx_streams_tx_stream_id_idx; Type: INDEX; Schema: rtp_statistics; Owner: -
+--
+
+CREATE INDEX rx_streams_tx_stream_id_idx ON ONLY rtp_statistics.rx_streams USING btree (tx_stream_id);
+
+
+--
+-- Name: tx_streams_local_tag_idx; Type: INDEX; Schema: rtp_statistics; Owner: -
+--
+
+CREATE INDEX tx_streams_local_tag_idx ON ONLY rtp_statistics.tx_streams USING btree (local_tag);
+
+
+--
 -- Name: active_call_accounts_account_id_created_at_idx; Type: INDEX; Schema: stats; Owner: -
 --
 
@@ -4778,6 +4806,8 @@ ALTER TABLE ONLY sys.config
 SET search_path TO cdr, reports, billing, public;
 
 INSERT INTO "public"."schema_migrations" (version) VALUES
+('20260516131500'),
+('20260516120000'),
 ('20260408000000'),
 ('20260220161536'),
 ('20251225154315'),

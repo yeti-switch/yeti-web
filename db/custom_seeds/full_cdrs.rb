@@ -121,29 +121,46 @@ create_rtp_streams = lambda do |tag, gateway, time_start, time_end, rx_packets: 
   rx_pkts = rx_packets || rand(500..5000)
   tx_pkts = tx_packets || rand(500..5000)
 
-  RtpStatistics::RxStream.create!(common.merge(
-                                    remote_host: '10.0.0.2',
-                                    remote_port: rand(10_000..30_000),
-                                    rx_ssrc: rand(1..2**31),
-                                    rx_packets: rx_pkts,
-                                    rx_bytes: rx_pkts * 160,
-                                    rx_total_lost: rand(0..rx_pkts / 20),
-                                    rx_payloads_relayed: %w[PCMU],
-                                    rx_payloads_transcoded: [],
-                                    rx_decode_errors: 0,
-                                    rx_packet_jitter_mean: rand(0.0001..0.05).round(6),
-                                    rx_packet_jitter_max: rand(0.001..0.1).round(6)
-                                  ))
+  # Create the TX stream first so RX stream(s) can link to it via
+  # tx_stream_id, matching production (switch.write_rtp_statistics).
+  tx = RtpStatistics::TxStream.create!(common.merge(
+                                         tx_ssrc: rand(1..2**31),
+                                         tx_packets: tx_pkts,
+                                         tx_bytes: tx_pkts * 160,
+                                         tx_total_lost: rand(0..tx_pkts / 20),
+                                         tx_payloads_relayed: %w[PCMU],
+                                         tx_payloads_transcoded: [],
+                                         rtcp_rtt_mean: rand(0.01..0.3).round(6),
+                                         # receive-side error counters (mostly clean, occasional errors)
+                                         rx_out_of_buffer_errors: rand < 0.15 ? rand(1..20) : 0,
+                                         rx_rtp_parse_errors: rand < 0.1 ? rand(1..10) : 0,
+                                         rx_dropped_packets: rand < 0.2 ? rand(1..rx_pkts / 50) : 0,
+                                         rx_srtp_decrypt_errors: rand < 0.05 ? rand(1..5) : 0
+                                       ))
 
-  RtpStatistics::TxStream.create!(common.merge(
-                                    tx_ssrc: rand(1..2**31),
-                                    tx_packets: tx_pkts,
-                                    tx_bytes: tx_pkts * 160,
-                                    tx_total_lost: rand(0..tx_pkts / 20),
-                                    tx_payloads_relayed: %w[PCMU],
-                                    tx_payloads_transcoded: [],
-                                    rtcp_rtt_mean: rand(0.01..0.3).round(6)
-                                  ))
+  # 50% of legs get several RX streams tied to the same TX stream
+  # (re-INVITE / multi-SSRC). Remote sockets are a mix of shared and
+  # distinct values so the diagram's dedup rendering is exercised.
+  rx_count = rand < 0.5 ? rand(2..3) : 1
+  base_remote_port = rand(10_000..30_000)
+
+  rx_count.times do |i|
+    remote_port = i.zero? || rand < 0.5 ? base_remote_port : rand(10_000..30_000)
+    RtpStatistics::RxStream.create!(common.merge(
+                                      tx_stream_id: tx.id,
+                                      remote_host: '10.0.0.2',
+                                      remote_port: remote_port,
+                                      rx_ssrc: rand(1..2**31),
+                                      rx_packets: rx_pkts,
+                                      rx_bytes: rx_pkts * 160,
+                                      rx_total_lost: rand(0..rx_pkts / 20),
+                                      rx_payloads_relayed: %w[PCMU],
+                                      rx_payloads_transcoded: [],
+                                      rx_decode_errors: 0,
+                                      rx_packet_jitter_mean: rand(0.0001..0.05).round(6),
+                                      rx_packet_jitter_max: rand(0.001..0.1).round(6)
+                                    ))
+  end
 end
 
 200.times do |call_idx|

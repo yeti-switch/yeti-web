@@ -34,6 +34,10 @@ ActiveAdmin.register Cdr::Cdr, as: 'CDR' do
     end
 
     def scoped_collection
+      # The RTP diagram endpoint only needs a bare CDR (BuildRtpDiagram does
+      # its own minimal preloads); skip the heavy index/show preload list.
+      return super if action_name == 'rtp_diagram'
+
       if params[:as] == 'table'
         super.preload(
           :node,
